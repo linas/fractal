@@ -181,7 +181,7 @@ ContinuedFraction::GetTerm (int n)
 	n--;
 	if (0 == n) return intpart;
 	if (0 > n) return 0;
-	if (n <= nterms) return 0;
+	if (n >= nterms) return 0;
 	return tinued_frac[n];
 }
 
