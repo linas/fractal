@@ -4,8 +4,10 @@
 # set out 'read.gif'
 
 # set term png small color
-set term png small
-set out 'zeta.png'
+#set term png small
+#set out 'zeta.png'
+set term emtex
+set out 'zeta.emtex'
 
 # set data style linespoints
 set data style lines
@@ -13,9 +15,9 @@ set key right
 
 set title "Zeta Eigenfunctions"
 set xlabel "x"
-set ylabel "(beta(x; + "
+set ylabel "eta(x;s) for s = -3.3"
 
-plot "zeta.dat" using 2:3 title "ev", \
+plot "zeta.dat" using 2:3 title "even", \
      "zeta.dat" using 2:4 title "odd"
 
 # set yrange [0:]

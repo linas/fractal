@@ -81,8 +81,8 @@ long double takagi (long double w, long double x)
 	long double tp = 1.0L;
 	for (k=0; k<50; k++)
 	{
-		// long double term = tw* triangle (tp*x);
-		long double term = tw* parabola_down (tp*x);
+		long double term = tw* triangle (tp*x);
+		// long double term = tw* parabola_down (tp*x);
 		// long double term = tw* parabola_up (tp*x);
 		acc += term;
 		tp *= 2.0L;
@@ -419,7 +419,7 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 2048;
-	int nmax = 523;
+	int nmax = 23;
 
 	if (argc <2)
 	{
@@ -533,8 +533,10 @@ main (int argc, char *argv[])
 		double ts = 1.0 + x*(w+2.0*w*w) - x*x*(w*w+0.25*w+0.0625) + w*w*w*takagi (w, x);
 
 #endif
-		double tw = takagi (w, x);
-		double ts = 1.0;
+		double tw = triangle (128.0*(0.5*x));
+		tw += triangle (128.0*(0.5+0.5*x));
+		tw *= 0.5;
+		double ts = triangle (64.0*x);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 		fflush (stdout);

@@ -144,7 +144,7 @@ main (int argc, char * argv[])
 	printf ("#\n# ess=%g +i %g  eigenvalue lambda=%g +i %g \n#\n", sre, sim, re_lambda, im_lambda);
 	printf ("#\n#   |lambda|=%g  arg(lambda)=%g \n#\n", lambda, sim*log(2.0));
 	
-	int imax = 223;
+	int imax = 623;
 	for (i=1; i<imax; i++) 
 	{
 		double x = i/((double) imax);
@@ -209,6 +209,7 @@ main (int argc, char * argv[])
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 #endif
 
+#if SING_FREE_TYPE_ONE
 		double e = beta_even_grow (x,sre);
 		double o = beta_odd_grow (x,sre);
 
@@ -223,6 +224,22 @@ main (int argc, char * argv[])
 
 		e -= 1.0;
 		o -= 1.0;
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, e, o);
+#endif
+
+		double e = beta_even_grow (x,sre);
+		double o = beta_odd_grow (x,sre);
+
+		e *= cos (0.5*M_PI*sre);
+		o *= sin (0.5*M_PI*sre);
+		e /= sre;
+		o /= sre;
+
+		double poz = pow (x, sre-1.0);
+		double poo = pow (1.0-x, sre-1.0);
+		e -= poz + poo;
+		o -= poz - poo;
+
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, e, o);
 
 		fflush (stdout);
