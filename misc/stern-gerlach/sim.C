@@ -47,7 +47,7 @@ main ()
    printf ("# initial theta = %g\n", theta);
    printf ("# delta_t = %g\n", delta_t);
    printf ("# \n");
-   printf ("# nprec	i	delta_i	theta	x	z\n");
+   printf ("# nprec	i	delta_i	theta	acc_theta	x	z\n");
 
    for (int i=0; i<imax; i++)
    {
@@ -91,7 +91,7 @@ main ()
         sin_phi = sin(phi);
         cos_phi = cos(phi);
         nprec --;
-        if (0 == nprec%100) 
+        if (0 == nprec%1000) 
         {
            printf ("%d	%d	%d	%20.16g	%g	%g	%g\n",
               nprec, i, i-last_i, theta, acc_theta, pos_x, pos_z);
