@@ -1,6 +1,7 @@
+o
+
 ############### Symbol Definitions ###################### 
 
-TOP = /src/tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
@@ -109,3 +110,18 @@ covar.ps:
 	cat covar.5 |xgraph -t "H=0.5 AutoCovariance" -x "(t1-t2)" -y "CoV (X(t1), X(t2))"
 	cat covar.7 |xgraph -t "H=0.7 AutoCovariance" -x "(t1-t2)" -y "CoV (X(t1), X(t2))"
 	cat covar.9 |xgraph -t "H=0.9 AutoCovariance" -x "(t1-t2)" -y "CoV (X(t1), X(t2))"
+
+
+grspec:
+	spectrum fbm.1 i f | xgraph -x "log10 freq" -y "log10 Power" -t "H=0.1 Fractal Motion Power Spectrum" &
+	spectrum fbm.5 i f | xgraph -x "log10 freq" -y "log10 Power" -t "H=0.5 Fractal Motion Power Spectrum" &
+	spectrum fbm.9 i f | xgraph -x "log10 freq" -y "log10 Power" -t "H=0.9 Fractal Motion Power Spectrum" &
+
+
+grstn:
+	station fbm.1 i f |xgraph -x "log10 (t2-t1)" -y "log10 (Var [X(t2) - X(t1)])" -t "H=0.1 Fractal Motion Stationarity" &
+	station fbm.3 i f |xgraph -x "log10 (t2-t1)" -y "log10 (Var [X(t2) - X(t1)])" -t "H=0.3 Fractal Motion Stationarity" &
+	station fbm.5 i f |xgraph -x "log10 (t2-t1)" -y "log10 (Var [X(t2) - X(t1)])" -t "H=0.5 Fractal Motion Stationarity" &
+	station fbm.7 i f |xgraph -x "log10 (t2-t1)" -y "log10 (Var [X(t2) - X(t1)])" -t "H=0.7 Fractal Motion Stationarity" &
+	station fbm.9 i f |xgraph -x "log10 (t2-t1)" -y "log10 (Var [X(t2) - X(t1)])" -t "H=0.9 Fractal Motion Stationarity" &
+

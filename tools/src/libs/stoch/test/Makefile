@@ -8,6 +8,15 @@ CC = /bin/fcc -f2 -O -I $(INC)
 
 all: testrand teststoch testgauss
 
+# ------------------------------------------------------------
+
+clean:
+	rm -f core a.out *.o tmp junk glop
+
+realclean:	clean
+	rm -f testrand teststoch testgauss *.b *.g *.ps
+
+
 ################## Dependencies and compile/link #########
 #
 # testrand
