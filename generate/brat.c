@@ -38,7 +38,6 @@ void mandelbrot_out (
    double modulus=0.0, frac;
    double escape_radius = 3.1;
    double ren, tl;
-   double u,v;
    double r, phi;
 
    ren = log( log (escape_radius)) / log(2.0);
@@ -66,35 +65,51 @@ void mandelbrot_out (
          // im_c = im_position - 2.0 * re_position * im_position;
 
          /* map to cardiod lam(1-lam) */
-         // r = im_position;
-         // phi = M_PI*re_position;
-         // re_c = 0.5 * r * cos (phi);
-         // re_c -= 0.25 * r * r * cos (2.0*phi);
-         // im_c = 0.5 * r * sin (phi);
-         // im_c -= 0.25 * r* r * sin (2.0*phi);
-         // 
-         // re_c = 0.5 * r * (cos (phi) - 0.5 * r * cos (2.0*phi));
-         // im_c = 0.5 * r * (sin (phi) - 0.5 * r * sin (2.0*phi));
+         r = im_position;
+         phi = M_PI*re_position;
+
+         phi = 2.0*M_PI / re_position;
+          
+         /*
+         work pretty well
+         r *= r;
+         r = 1.0 + (r-1.0)*sin(0.5*phi)*sin(0.5*phi);
+         */
+         // r = 1.0 + (r-1.0)*(1.0/re_position)*sin(0.5*phi);
+         r = 1.0 + (r-1.0)*(1.0/re_position)*(1.0/re_position);
+        
+         re_c = 0.5 * r * (cos (phi) - 0.5 * r * cos (2.0*phi));
+         im_c = 0.5 * r * (sin (phi) - 0.5 * r * sin (2.0*phi));
 
          /* remaps */
+// #define REMAP_CARDIOD
+#ifdef REMAP_CARDIOD
+         {
+         double u,v;
+
          re = 0.25 - re_position;
          im = -im_position;
          u = sqrt (0.5*(re + sqrt (re*re + im*im)));
          v = 0.5 * im / u;
-         u = 0.5 + u;
+         u = 0.5 - u;
          r = sqrt (u*u + v*v);
          phi = atan2 (v,u);
          if (0.0 > phi) phi += 2.0*M_PI;
          phi /= 2.0*M_PI;
-         /* phi runs from 1 to 1 */
+         /* phi runs from 0 to 1 */
 
-         if (0.5 < phi) phi = 1.0 - phi;
-         phi = phi / (1.0-phi);
+         phi = phi / (1.0+phi);
 
+         r = 0.5 *sqrt(2.0*r);
+         // r = 0.5*(r+0.5);
          
          phi *= 2.0*M_PI;
          re_c = r * (cos (phi) - r * cos (2.0*phi));
          im_c = r * (sin (phi) - r * sin (2.0*phi));
+
+         // printf ("start (%f %f) map to (%f %f)\n", re_position, im_position, re_c, im_c);
+         }
+#endif  /* REMAP_CARDIOD */
 
          re = re_c;
          im = im_c;
@@ -111,12 +126,14 @@ void mandelbrot_out (
          frac = log (log (modulus)) *tl;
 
          /* frac =  Re (c/z*z) */
+/*
          tmp = (re*re-im*im);
          im = 2.0*re*im;
          re = tmp;
          frac = re*re_c + im*im_c;
          frac /= re*re+im*im;
          if (0.0 > frac) frac = -frac;
+*/
          
 #ifdef JUNK
          /* second order correction */
@@ -133,7 +150,7 @@ void mandelbrot_out (
 #endif 
 
          glob [i*sizex +j] = frac; 
-         glob [i*sizex +j] = ((double) loop) / ((double) itermax); 
+         glob [i*sizex +j] = sqrt(sqrt ((((double) loop) -frac)/ ((double) itermax))); 
 /*
          glob [i*sizex +j] = ((float) (loop%10)) / 10.0; 
 if (loop == itermax) {
