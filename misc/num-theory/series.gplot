@@ -6,19 +6,25 @@
 # set term png small color
 set term png small
 set out 'series.png'
+# set term epslatex 
+# set out 'series.eps'
 
 # set data style linespoints
 set data style lines
 # set data style points
 set key right
 
-set title "totient series"
+# set title "Totient Series"
+# set xlabel "x"
+# set ylabel "(1-x)^2 sum_n phi(n) x^n"
+
+set title ""
 set xlabel "x"
-set ylabel "sum"
+set ylabel "(n"
 
 # set yrange [0:]
 
-plot "series.dat" using 2:($3*(1-$2)**2) title ""
+plot "series.dat" using 1:2 title ""
 
 
 # pause 100
