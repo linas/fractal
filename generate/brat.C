@@ -21,24 +21,24 @@
 
 void mandelbrot_out (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
    double	height,
    int		itermax)
 {
-   unsigned int	i,j, globlen, itermax_orig;
-   double		re_start, im_start, deltax, deltay;
-   double		re_position, im_position;
-   double		re_c, im_c;
-   double		re, im, tmp;
+   int		i,j, globlen, itermax_orig;
+   double	re_start, im_start, deltax, deltay;
+   double	re_position, im_position;
+   double	re_c, im_c;
+   double	re, im, tmp;
    int		loop;
    double modulus=0.0, frac, mu;
    double escape_radius = 3.1;
    double ren, tl;
-   double r, phi;
+   // double r, phi;
 
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0/ log(2.0);
@@ -207,15 +207,15 @@ void iterate (double re_c,
 
 void mandelbrot_wind (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
    double	height,
    int		itermax)
 {
-   unsigned int	i,j,k,  globlen, itermax_orig;
+   int		i,j,k,  globlen, itermax_orig;
    double	re_start, im_start, deltax, deltay;
    double	re_position, im_position;
    double	re_c, im_c;
@@ -342,14 +342,14 @@ void mandelbrot_wind (
 
 void mandelbrot_cutoff (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
    int		itermax)
 {
-   int	i,j, globlen;
+   int		i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
    double	re, im, tmp, mod, modulus=0.0;
@@ -666,14 +666,14 @@ void mandelbrot_cutoff (
 
 void dmandelbrot_out (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
    int		itermax)
 {
-   unsigned int	i,j, globlen;
+   int		i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
    double	re, im, tmp;
@@ -851,14 +851,14 @@ if (loop>=itermax) phi = 0.0;
 
 void mandelbrot_decide (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
    int		itermax)
 {
-   unsigned int	i,j, globlen;
+   int		i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
    double	re, im, tmp;
@@ -1011,17 +1011,17 @@ break;
 
 void mandelbrot_inverse (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
    int		itermax)
 {
-   int	i,j, globlen;
-   double		re_start, im_start, delta;
-   double		re_position, im_position;
-   double		re, im, tmp;
+   int		i,j, globlen;
+   double	re_start, im_start, delta;
+   double	re_position, im_position;
+   double	re, im, tmp;
    int		loop;
    int ire, jim;
    double modulus=0.0, phase, tp, frac;
@@ -1081,7 +1081,7 @@ delta *= 0.25;
          if (sizex <= ire) ire = sizex-1;
 
          im *= ((double) sizey)/ ((double) sizex);
-         jim = sizey * (im + 0.5);
+         jim = (int) (sizey * (im + 0.5));
 
          if (0 > jim) jim = 0;
          if (sizey <= jim) jim = sizey-1;
@@ -1100,17 +1100,17 @@ delta *= 0.25;
 
 void mandelbrot_stop (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
    int		itermax)
 {
-   unsigned int	i,j, globlen;
-   double		re_start, im_start, delta;
-   double		re_position, im_position;
-   double		re, im, tmp;
+   int		i,j, globlen;
+   double	re_start, im_start, delta;
+   double	re_position, im_position;
+   double	re, im, tmp;
    int		loop;
    
    delta = width / (double) sizex;
@@ -1149,8 +1149,8 @@ void mandelbrot_stop (
 
 void mandelbrot_stalk (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
@@ -1158,11 +1158,11 @@ void mandelbrot_stalk (
    double	stalkx,
    double	stalky)
 {
-   unsigned int	i,j, globlen;
-   double		re_start, im_start, delta;
-   double		re_position, im_position;
-   double		re, im, tmp, tmpx, tmpy;
-   // double		visited_x, visited_y;
+   int		i,j, globlen;
+   double	re_start, im_start, delta;
+   double	re_position, im_position;
+   double	re, im, tmp, tmpx, tmpy;
+   // double	visited_x, visited_y;
    int		loop;
    
    delta = width / (double) sizex;
@@ -1297,15 +1297,15 @@ void mandelbrot_stalk (
 
 void circle_out (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
    int		itermax,
    double 	time)
 {
-   unsigned int	i,j, globlen;
+   int		i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
    double	re_omega, im_omega;
@@ -1393,15 +1393,15 @@ extern double drand48 ();
 
 void circle_in (
    float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
+   int 		sizex,
+   int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
    int		itermax,
    double 	time)
 {
-   unsigned int	i, globlen;
+   int	i, globlen;
    double	re_start, im_start;
    double	re_position, im_position;
    double	re_omega, im_omega;
@@ -1435,7 +1435,7 @@ void circle_in (
    im_K = time;
    im_omega = 0.0;
 */
-   isamp = CBOX_IM_SLOPE*CBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (int) (CBOX_IM_SLOPE*CBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -1495,23 +1495,26 @@ void circle_in (
 }
 
 /*-------------------------------------------------------------------*/
+/* this routine fills in the interior of the mandelbrot set using */
+/* the classic algorithm */
 
 #define BBOX_IM_SLOPE 3.0
 #define BBOX_IM_CEPT -1.5
 #define BBOX_RE_SLOPE 3.0
 #define BBOX_RE_CEPT -2.1
 
-void mandelbrot_measure (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
-/* this routine fills in the interior of the mandelbrot set using */
-/* the classic algorithm */
+void 
+mandelbrot_measure (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i;
    long		isamp, irow;
    double	re_start, im_start;
@@ -1554,7 +1557,7 @@ double		renorm;
     * hypothesis)
     */
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -1596,18 +1599,21 @@ double		renorm;
 }
 
 /*-------------------------------------------------------------------*/
-
-void mandelbrot_offset (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
 /* this routine fills in the interior of the mandelbrot set using */
 /* the classic algorithm */
+
+void 
+mandelbrot_offset (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i;
    long		isamp, irow;
    double	re_start, im_start;
@@ -1650,7 +1656,7 @@ double		renorm;
     * hypothesis)
     */
    
-   isamp = ((double) BBOX_IM_SLOPE*BBOX_RE_SLOPE) / (x_width * y_width);
+   isamp = (int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -1696,15 +1702,18 @@ double		renorm;
 /* the classic algorithm. It keeps track of two things: the average age, 
  * and the mean square age deviation. */
 
-void mandelbrot_age (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
+void 
+mandelbrot_age (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i;
    long		isamp, irow;
    double	re_start, im_start;
@@ -1745,7 +1754,7 @@ double		renorm;
       quint [i] = 1.0e-10;
    }
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -1850,15 +1859,18 @@ double		renorm;
 /* this routine fills in the interior of the mandelbrot set using */
 /* the classic algorithm. It keeps track of a rough lyapunov exponenet */
 
-void mandelbrot_lyapunov (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
+void 
+mandelbrot_lyapunov (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i, j;
    long		isamp, irow;
    double	re_start, im_start, delta;
@@ -1893,7 +1905,7 @@ double		renorm;
       count [i] = 1e-20;
    }
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -1974,15 +1986,18 @@ double		renorm;
 /* this routine fills in the interior of the mandelbrot set using */
 /* the classic algorithm. It keeps track of a migration direction */
 
-void mandelbrot_migrate (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
+void 
+mandelbrot_migrate (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i, j;
    long		isamp, irow;
    double	re_start, im_start, delta;
@@ -2022,7 +2037,7 @@ double		renorm;
       vecy [i] = 1e-20;
    }
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -2097,15 +2112,18 @@ double		renorm;
 /* the classic algorithm. It keeps track of two things: the average age, 
  * and the mean square age deviation. */
 
-void mandelbrot_squige (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
+void 
+mandelbrot_squige (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i;
    long		isamp, irow;
    double	re_start, im_start;
@@ -2137,7 +2155,7 @@ double		renorm;
       count [i] = 0.00001;
    }
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -2162,7 +2180,8 @@ double		renorm;
          if ( (horiz_pix >= 0) && (horiz_pix < sizex) && 
             (vert_pix >= 0) && (vert_pix < sizey)) {
             glob [vert_pix*sizex + horiz_pix] += last;
-            last = ++ count [vert_pix*sizex + horiz_pix];
+            count [vert_pix*sizex + horiz_pix] += 1.0;
+            last = (int) count [vert_pix*sizex + horiz_pix];
          }
       }    
    }
@@ -2179,18 +2198,21 @@ double		renorm;
 }
 
 /*-------------------------------------------------------------------*/
-
-void mandelbrot_phase (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
 /* this routine fills in the interior of the mandelbrot set using */
 /* the classic algorithm */
+
+void 
+mandelbrot_phase (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i;
    long		isamp, irow;
    double	re_start, im_start;
@@ -2222,7 +2244,7 @@ double		renorm;
       count [i] = 0.00001;
    }
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -2287,15 +2309,18 @@ double		renorm;
 /* the classic algorithm. The colorations are assigned from the constant
  * term. (the "origin") */
 
-void mandelbrot_orig (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
+void 
+mandelbrot_orig (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i;
    long		isamp, irow;
    double	re_start, im_start;
@@ -2325,7 +2350,7 @@ double		renorm;
       count [i] = 0.00001;
    }
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -2374,15 +2399,18 @@ double		renorm;
 /* the classic algorithm. The colorations are assigned from the 
  * the most recent location of the pixel */
 
-void mandelbrot_next (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
+void 
+mandelbrot_next (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i;
    long		isamp, irow;
    double	re_start, im_start;
@@ -2412,7 +2440,7 @@ double		renorm;
       count [i] = 0.00001;
    }
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (long int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -2460,15 +2488,18 @@ double		renorm;
 
 /*-------------------------------------------------------------------*/
 
-void whack (glob, sizex, sizey,
-               re_center, im_center, width, itermax, renorm)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
-double		renorm;
+void 
+whack (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i;
    long		isamp, irow;
    double	re_start, im_start;
@@ -2501,7 +2532,7 @@ double		renorm;
       count [i] = 0.00001;
    }
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = (long int) (BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width));
    if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
@@ -2551,13 +2582,6 @@ double		renorm;
 }
 
 /*-------------------------------------------------------------------*/
-
-void random_out (glob, sizex, sizey,
-               re_center, im_center, width, itermax)
-float  		glob [];
-unsigned int	sizex, sizey;
-double		re_center, im_center, width;
-int		itermax;
 /* This routine fills in the exterior of the mandelbrot set using 
  * an algorithm which is, well, a bit differnet. 
  * I suspect a problem with the original algorithm is that the seed
@@ -2566,8 +2590,18 @@ int		itermax;
  * Like the traditional exterior coloring algorithms, the number of
  * iterations a pixel goes through before it escapes is counted.
  */
+
+void 
+random_out (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax)
 {
-   unsigned int	globlen;
+   int		globlen;
    long		i;
    long		irow;
    double	re_start, im_start;
@@ -2615,7 +2649,9 @@ int		itermax;
 
 /*-------------------------------------------------------------------*/
 
-extern FILE *Fopen();
+extern "C" {
+   extern FILE *Fopen(char *name, char *ext);
+};
 
 int 
 main (int argc, char *argv[]) 
