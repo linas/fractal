@@ -56,6 +56,10 @@ extern double ContinuedFractionToSincReal (struct Farey *, double omega);
 extern double ContinuedFractionToTFarey (struct Farey *, double t);
 extern double ContinuedFractionToXFarey (struct Farey *, double t);
 extern double ContinuedFractionToZReal (struct Farey *, double z);
+
+extern double ContinuedFractionToCnReal (struct Farey *, double omega);
+extern double ContinuedFractionToSnReal (struct Farey *, double omega);
+
 extern void PrintContinuedFraction (struct Farey *);
 extern void RatioToContinuedFraction (struct Farey *, int num, int deno);
 extern void RealToContinuedFraction (struct Farey *, double);
@@ -87,6 +91,8 @@ extern double ContinuedFractionToSincReal ();
 extern double ContinuedFractionToTFarey ();
 extern double ContinuedFractionToXFarey ();
 extern double ContinuedFractionToZReal ();
+extern double ContinuedFractionToCnReal ();
+extern double ContinuedFractionToSnReal ();
 extern void PrintContinuedFraction ();
 extern void RatioToContinuedFraction ();
 extern void RealToContinuedFraction ();

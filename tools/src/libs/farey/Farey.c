@@ -613,6 +613,68 @@ double omega;
 }
 
 /* ------------------------------------------------------------ */
+/* I've defined an cos-real to be the result of the continued fraction
+ * where each term is damped by a cosine. Read the code. */
+
+#ifdef ANSI_C
+double ContinuedFractionToCnReal (struct Farey *self, double omega)
+#else
+double ContinuedFractionToCnReal (self, omega)
+struct Farey *self;
+double omega;
+#endif
+{
+   int i, n;
+   double tmp;
+   double retval;
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   /* now, work backwards and reconstruct the fraction. */
+   n = NTERMS;
+   tmp = 0.0;
+   for (i=n-1; i>=0; i--) {
+      tmp += (double) TINUED_FRAC[i];
+      tmp = (1.0 + cos (((double) i) * omega)) / tmp;
+   }
+
+   retval += tmp;
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
+/* I've defined an cos-real to be the result of the continued fraction
+ * where each term is damped by a cosine. Read the code. */
+
+#ifdef ANSI_C
+double ContinuedFractionToSnReal (struct Farey *self, double omega)
+#else
+double ContinuedFractionToSnReal (self, omega)
+struct Farey *self;
+double omega;
+#endif
+{
+   int i, n;
+   double tmp;
+   double retval;
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   /* now, work backwards and reconstruct the fraction. */
+   n = NTERMS;
+   tmp = 0.0;
+   for (i=n-1; i>=0; i--) {
+      tmp += (double) TINUED_FRAC[i];
+      tmp = (1.0 + sin (((double) i) * omega)) / tmp;
+   }
+
+   retval += tmp;
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
 /* I've defined an x-fraction to be the result of the continued fraction
  * where each term is whaever. Read the code. */
 
