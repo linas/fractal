@@ -21,6 +21,24 @@
 
 static int max_terms;
 
+/*
+ * Compute the divisor arithmetic function
+ */
+
+int divisor (int n)
+{
+	int acc = 0;
+	int d;
+
+	for (d=1; d<=n; d++)
+	{
+		if (n%d) continue;
+		acc ++;
+	}
+
+	return acc;
+}
+
 /* and erdos-borwein-like series sum_n x^n/(1-x^n) */
 static void erdos_series_c (double re_q, double im_q, double *prep, double *pimp)
 {
@@ -35,25 +53,34 @@ static void erdos_series_c (double re_q, double im_q, double *prep, double *pimp
 	double qpr = 1.0;
 	double qpi = 0.0;
 
+	qpr = re_q;
+	qpi = im_q;
+
 	double qpmod = re_q*re_q+im_q*im_q;
 	if (1.0 <= qpmod) return;
 
 	for (i=0; i<max_terms; i++)
 	{
+		double dr, di;
 
+#if 1
 		/* compute 1/(1-q^n) */
 		tmp = (1.0-qpr)*(1.0-qpr) + qpi*qpi;
 		tmp = 1.0/tmp;
-		double dr = qpr * tmp;
-		double di = -qpi * tmp;
+		dr = (1.0-qpr) * tmp;
+		di = qpi * tmp;
 
 		/* compute q^n/(1-q^n) */
 		tmp = dr*qpr - di*qpi;
 		di = dr*qpi + di*qpr;
 		dr = tmp;
+#endif
 
-dr= qpr;
-di= qpi;
+#ifdef DIVISOR_SUM
+		tmp = divisor (i+1);
+		dr = qpr*tmp;
+		di = qpi*tmp;
+#endif
 
 		rep += dr;
 		imp += di;

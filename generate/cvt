@@ -156,6 +156,12 @@ PATH=$PATH:.
 # takelog k g
 # renorm g j2 0.08 14.0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+#
+# renorm for moebius
+# renorm j j2 0.3 0
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
-renorm j j2 0.3 0
+# renorm for the divisor series
+takelog j g
+renorm g j2 0.1 4
 cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
