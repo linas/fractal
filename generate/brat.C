@@ -189,14 +189,43 @@ if (0.25*width*width > ((re_position-re_center)* (re_position-re_center) +
 }
 
 /*-------------------------------------------------------------------*/
-/* utility helper for the winding */
+/* utility function performs iteration, returns results of iteration */
 
 void iterate (double re_c,
               double im_c,
+              double escape_radius,
               double &re,
-              double &im
+              double &im,
+              double &dre,
+              double &dim,
+              int &itermax
               ) 
 {
+   int loop;
+   double esq, tmp, modulus;
+
+   esq = escape_radius*escape_radius;
+
+   re = 0.0;
+   im = 0.0;
+   dre = 0.0;
+   dim = 0.0;
+   for (loop=1; loop <=itermax; loop++) {
+      /* compute infinitessimal flow */
+      tmp = 2.0 * (re*dre - im*dim) +1.0;
+      dim = 2.0 * (re*dim + im*dre);
+      dre = tmp;
+
+      /* compute actual */
+      tmp = re*re - im*im + re_c;
+      im = 2.0*re*im + im_c;
+      re = tmp;
+
+      modulus = (re*re + im*im);
+      if (modulus > esq) break;
+   }    
+
+   itermax = loop;  /* actual count */
 }
 
 /*-------------------------------------------------------------------*/
@@ -221,7 +250,9 @@ void mandelbrot_wind (
    double	re_c, im_c;
    double	re, im, tmp;
    double 	dre, dim;
+   double 	dmu_re, dmu_im;
    int		loop;
+   int		*bits;
    double modulus=0.0, frac, mu;
    double escape_radius = 1131.1;
    double ren, otl;
@@ -233,6 +264,9 @@ void mandelbrot_wind (
 
    itermax --;
    itermax_orig = itermax;
+
+   /* allocate storage for binary tree */
+   bits = (int *) malloc ((itermax+50) * sizeof (int));
    
 
    deltax = width / (double) sizex;
@@ -301,6 +335,41 @@ void mandelbrot_wind (
          frac = log (log (modulus)) *otl;
          mu = ((double) (loop+1)) - frac;
 
+
+         for (k=loop; k>0; k--) 
+         {
+            int lp = k;
+            /* ok, now try it */
+            iterate (re_c, im_c, 1.0e10*escape_radius,
+                 re, im, dre, dim, lp);
+   
+            /* compute the derivative */
+            dmu_re = re*dre + im*dim;
+            dmu_im = re*dim - im*dre;
+            modulus = (re*re + im*im);
+            dmu_re *= -0.5 / modulus;
+            dmu_im *= -0.5 / modulus;
+            modulus = 1.0 / log(sqrt (modulus));
+            dmu_re *= modulus;
+            dmu_im *= modulus;
+            modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
+
+            phi = atan2(im, re);
+printf ("its %d c=(%g %g) p=%g z=(%g %g) d=(%g %g) dm=(%g %g)\n", k,
+re_c, im_c, phi, re, im,
+dre, dim,
+dmu_re*modulus , dmu_im*modulus);
+
+            /* extract the binary bit */
+            if (0.0<phi) { bits[k] = 0; } else { bits[k] =1; }
+
+            re_c -= dmu_re*modulus;
+            im_c -= dmu_im*modulus;
+k=0;
+break;
+         }
+printf ("\n");
+
          phi /= 2.0*M_PI;
 
          if (loop < itermax) {
@@ -313,6 +382,7 @@ void mandelbrot_wind (
 
          glob [i*sizex +j] = phi;
 
+#if 0
          // colorize the landing rays
          phi *= 512.0;
 
@@ -324,15 +394,26 @@ void mandelbrot_wind (
          }
          phi *= phi;
          phi *= phi;
+#endif
 
+
+         phi = 0.0;
+         tmp = 1.0;
+         for (k=1; k<48; k++) {
+            tmp *= 0.5;
+            if (bits[k]) phi += tmp;
+         }
+phi = bits[2];
+phi = 0.5*atan2(dmu_im, dmu_re)/M_PI;
+if (phi<0.0) phi+=0.5;
          glob [i*sizex +j] = phi;
 
-           
-  
          re_position += deltax;
       }
       im_position -= deltay;  /*top to bottom, not bottom to top */
    }
+
+   free (bits);
 }
 
 /*-------------------------------------------------------------------*/
@@ -676,6 +757,7 @@ void dmandelbrot_out (
    int		i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
+   double	re_c, im_c;
    double	re, im, tmp;
    double	dre, dim;
    double	ddre, ddim;
@@ -708,8 +790,10 @@ void dmandelbrot_out (
       if (i%10==0) printf(" start row %d\n", i);
       re_position = re_start;
       for (j=0; j<sizex; j++) {
-         re = re_position;
-         im = im_position;
+         re_c = re_position;
+         im_c = im_position;
+         re = re_c;
+         im = im_c;
          dre = 1.0;
          dim = 0.0;
          ddre = 0.0;
@@ -744,8 +828,8 @@ void dmandelbrot_out (
             dre = tmp;
 
             /* compute iterate */
-            tmp = re*re - im*im + re_position;
-            im = 2.0*re*im + im_position;
+            tmp = re*re - im*im + re_c;
+            im = 2.0*re*im + im_c;
             re = tmp;
             modulus = (re*re + im*im);
             if (modulus > escape_radius*escape_radius) break;
@@ -803,6 +887,7 @@ void dmandelbrot_out (
 
 
          /* phase */
+         /* ??? why is x the wrong sign ??? */
          phi = atan2 (dim, dre);
          if (0.0 > phi) phi += 2.0*M_PI;
          phi /= 2.0*M_PI;
