@@ -56,7 +56,96 @@ THIS IS A DRAFT WORK IN PROGRESS.
 The Riemann zeta can be expressed as an integral in the following form:
 \layout Standard
 
+
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}h(x)x^{s-1}dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula \begin{equation}
+h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
+
+\end_inset 
+
+ is sometimes called the Gauss map: it lops of a digit in the continued
+ fraction expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ That is, if we write the continued fraction expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+ as 
+\begin_inset Formula $x=[a_{1},a_{2},a_{3},...]$
+\end_inset 
+
+ then 
+\begin_inset Formula $h(x)=[a_{2},a_{3},...]$
+\end_inset 
+
+.
+ It is a reverse shift operator on the continued fraction expansion.
+ The study of continued fractions is interesting because of the close proximity
+ of a number of problems of fractals and dynamical systems, including Farey
+ fractions and modular group symmetries.
+ More immediately, the transfer operator of the Gauss map is known as the
+ Gauss-Kuzmin-Wirsing operator, which has a number of intereswting properties
+ of its own.
 \layout Standard
+
+In this paper, we note that the Gauss map can also be thought of as one
+ particular element of the permuation group acting on a Hilbert space representa
+tion of the real numbers.
+ Thus, we are lead to contemplate other elements of the permutation group.
+ Specifically, considerthe permuation operator 
+\begin_inset Formula $S_{p,q}:[a_{1},...,a_{p},...,a_{q},...]\mapsto[a_{1},...,a_{q},...a_{p},...]$
+\end_inset 
+
+ which exchanges the 
+\begin_inset Formula $p$
+\end_inset 
+
+'th and 
+\begin_inset Formula $q$
+\end_inset 
+
+'th digits of the continued fraction expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ Note that 
+\begin_inset Formula $S_{p,q}$
+\end_inset 
+
+ maps the unit interval onto the unit interval, and is discontinuous at
+ a countably infintite number of points.
+ We present graphs below visualizing 
+\begin_inset Formula $S_{p,q}(x)$
+\end_inset 
+
+.
+ The generalized Riemann hypothesis that we choose to explore concerns the
+ zeros of the integral 
+\begin_inset Formula \begin{equation}
+\zeta_{p,q}(s)=\frac{s}{s-1}-s\int_{0}^{1}S_{p,q}(x)x^{s-1}dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ Although this integral can in principle be evaluated analytically, the
+ result is a messy set of nested sums that don't seem to be easily summable,
+ nor provide any particular insight.
+ Thus, we instead choose to explore this integral numerically.
+ More precisly, we consider the sum which arises from treating the integral
+ as a very simple Newtonian sum with equally spaced abscissas:
+\begin_inset Formula \begin{equation}
+\zeta_{N;p,q}(s)=\frac{s}{s-1}-\frac{s}{N}\;\sum_{n=0}^{N-1}S_{p,q}\left(\frac{2n+1}{2N}\right)\;\left(\frac{2n+1}{2N}\right)^{s-1}\label{eq:}\end{equation}
+
+\end_inset 
+
 
 \layout Standard
 
