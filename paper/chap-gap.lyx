@@ -1,0 +1,5173 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Rationals, Fractals and Continued Fractions
+\layout Author
+
+Linas Vepstas <linas@linas.org>
+\layout Date
+
+12 October 2004
+\layout Abstract
+
+Fractals and Continued Fractions seem to be deeply related in many ways.
+ Farey numbers appear naturally in both.
+ The shape of the Devil's Staircase, which occurs in phase-locking dynamic
+ maps, is reminiscent of the Minkowski Question Mark Function.
+ This article attempts to establish that the natural symmetry group of both
+ period-doubling maps and of phase-locking maps is the modular group 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+, which expains these curious relationships.
+ We classify certain fractals as beloning to different representations of
+ this group; opening the door to a group-theoretical attack on fractals.
+ As a byproduct, I think we expose a fantastic fractal symmetry on the rationals
+ 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ themselves, and thus presumably also on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+.
+ This symmetry is never made use of in classical analysis, and probably
+ not in non-Archimedean analysis either.
+ It opens a whole set of new doors.
+ An assortment of other curious observations is presented as well.
+ Its a candy-store of surprises!
+\layout Section
+
+Intro
+\layout Standard
+
+THIS IS A DRAFT WORK IN PROGRESS.
+ The intro hasn't been written yet, but if it was, it would work like this:
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+I've been running a math-art website for over a decade and it's time some
+ of the math behind it got an explanation.
+\begin_inset Quotes erd
+\end_inset 
+
+ For my own benefit, if no one else's.
+ So here it is.
+\layout Standard
+
+Farey Numbers show up naturally in the analysis of the Mandelbrot set.
+ Farey numbers are used to label the treads of the 
+\begin_inset LatexCommand \htmlurl[devil's staircase]{http://mathworld.wolfram.com/DevilsStaircase.html}
+
+\end_inset 
+
+, which is the set of mode-locked regions of the circle map.
+ The devils staircase bears a general resemblance to the Minkowski Question
+ Mark function.
+ Maybe have small pictures of minkowski and devil's staircase here.
+\layout Standard
+
+We should mention Sinai's tongue's here, which are the mode-locking regions,
+ and note that they can be approximated with continued fractions, which
+ is something we will show below.
+\layout Standard
+
+It is the resemblance of these pictures that leads one naturally to the
+ study of continued fractions.
+ several remarkable things pop up: first, that Farey Numbers and continued
+ fractions are deeply related, secondly, that Minkowski Question Mark provides
+ a natural mapping to and from the Farey-number space, and finally, that
+ the symmetry group of the Minkowski Question Mark is the Modular Group,
+ as first pointed out by Georges de Rham in 1957
+\begin_inset LatexCommand \cite{key-4}
+
+\end_inset 
+
+, who made this observation while studying a class of self-similar Takagi-like
+ curves.
+ It doesn't take long to realize that the modular group is 
+\series bold 
+*the*
+\series default 
+ symmetry group of a huge class of iterated maps, and can be applied to
+ just about anything that exhibits period doubling or mode locking.
+ In particular, this connection implies that one should explore interesting
+ things in fractals, e.g.
+ Misiurewicz points, and ask what they correspond to in the modular group.
+ and etc.
+ One then is lead to explore a veritable candy-store of possible connections
+ between Modular Forms and Elliptic Curves and Fractals, and ask what each
+ implies in the language of the other.
+\layout Standard
+
+To get from here to there, we'll try to take a mostly pedagogical approach,
+ keeping things simple and accesible to an amateur mathematician or an attentive
+ undergraduate math-major, using only basic group theory, algebra and analysis.
+ 
+\layout Section
+
+Continued Fractions and Gaps
+\layout Standard
+
+Let us start by directing the reader to the page
+\begin_inset LatexCommand \htmlurl[Gap Theory]{http://www.linas.org/art-gallery/farey/continue/continue.html}
+
+\end_inset 
+
+, the contents of which need to be copied here.
+ It provides some basic definitions that we need.
+\layout Standard
+
+Given a real number 
+\begin_inset Formula $0<x<1$
+\end_inset 
+
+, a sequence of integers 
+\begin_inset Formula $[a_{1},a_{2},...]$
+\end_inset 
+
+ can be found that define its continued-fraction expansion: 
+\layout Standard
+
+
+\begin_inset Formula \[
+x=1/(a_{1}+1/(a_{2}+1/(a_{3}+...)))\]
+
+\end_inset 
+
+Given any x, this sequence is straightforward to compute.
+ Rational numbers x always have a finite number of terms in the sequence.
+ For a rational number x, there are two distinct expansions that yield the
+ same value: 
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{+}=[a_{1},a_{2},...,a_{N}]\]
+
+\end_inset 
+
+and 
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{-}=[a_{1},a_{2},...,a_{N}-1,1]\]
+
+\end_inset 
+
+In the following text, we make a simplifying notational confusion: we use
+ the same symbols to denote a sequence and its value when expressed as a
+ continued fraction.
+ Thus, for the above sequences, we may write 
+\begin_inset Formula $x=x_{-}=x_{+}$
+\end_inset 
+
+.
+ It will hopefully be obvious which is which.
+ 
+\layout Standard
+
+Given a rational 
+\begin_inset Formula $x$
+\end_inset 
+
+ and an arbitrary complex number w, define new sequences: 
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{+}(w)=[a_{1},a_{2},...,a_{N},1/w]\]
+
+\end_inset 
+
+and
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{-}(w)=[a_{1},a_{2},...,a_{N}-1,1,1/w]\]
+
+\end_inset 
+
+These two functions are analytic in 
+\begin_inset Formula $w$
+\end_inset 
+
+, almost trivally so, and in fact can be written as 
+\begin_inset Formula $(a+bw)/(c+dw)$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+ (we will present a construction for obtaining these integers in a later
+ section xxx todo).
+ Thus, general analytic manipulations are perfectly well-defined on these
+ functions.
+ Clearly, 
+\layout Standard
+
+
+\begin_inset Formula \[
+\lim_{w\rightarrow0}x_{-}(w)=\lim_{w\rightarrow0}x_{+}(w)=x\]
+
+\end_inset 
+
+Differentiation w.r.t.
+ 
+\begin_inset Formula $w$
+\end_inset 
+
+ provides a handy tool for constructing various interesting things and proving
+ various limits.
+ We give an exact expression for these derivatives below.
+ Although we've introduced w by appending it to the last term of a rational
+ expansion, we could, if we wanted, introduce w into the N'th term of an
+ irrational expansion.
+ Most of the statements we make below are for rationals.
+ This is in part because treating the irrationals is a bit harder and confusing,
+ both in these formulas, and in their implementation as algorithms.
+ 
+\layout Standard
+
+There is also an even-odd symmetry for 
+\begin_inset Formula $x(w)$
+\end_inset 
+
+ that we should be aware of, as it plays another important role in the theory.
+ As we point out above, for any given sequence, there is a + and a - generalizat
+ion.
+ But what if the sequence is already 
+\begin_inset Formula $x_{-}$
+\end_inset 
+
+ and we choose the - expansion? Then we get 
+\begin_inset Formula \[
+x_{--}=[a_{1},a_{2},...,a_{N}-1,0,1]\]
+
+\end_inset 
+
+This expansion invokes a symmetry on 
+\begin_inset Formula $x_{-}(w)$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+x_{--}(w)=[a_{1},a_{2},...,a_{N}-1,0,1,1/w]=x_{+}(w)\]
+
+\end_inset 
+
+Thus, we see that a double-expansion is either idempotent or alternating.
+ To be pedantic, we can complete this with the other three expressions:
+ 
+\begin_inset Formula $x_{++}(w)=x_{+}(w)$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{-+}(w)=x_{+-}(w)=x_{-}(w)$
+\end_inset 
+
+.
+ In other words, a double-expansion reflects back, and, in this sense, 
+\begin_inset Formula $x_{+}$
+\end_inset 
+
+and 
+\begin_inset Formula $x_{-}$
+\end_inset 
+
+ are unique.
+ 
+\layout Standard
+
+If one needs to take differences, e.g.
+ for derivatives, the even-odd expansion is more useful: Define 
+\begin_inset Formula $x_{e}(w)$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{o}(w)$
+\end_inset 
+
+ as follows: 
+\begin_inset Formula \[
+x_{e}(w)=\left\{ \begin{array}{cc}
+x_{+}(w) & if\; N\; even\\
+x_{-}(w) & if\; N\; odd\end{array}\right.\]
+
+\end_inset 
+
+and
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{o}(w)=\left\{ \begin{array}{cc}
+x_{-}(w) & if\; N\; even\\
+x_{+}(w) & if\; N\; odd\end{array}\right.\]
+
+\end_inset 
+
+These two have nice order-preserving properties: if 
+\begin_inset Formula $w$
+\end_inset 
+
+ is a positive real, then 
+\begin_inset Formula \[
+x_{o}(w)<x_{e}(w)\]
+
+\end_inset 
+
+and, for negative real 
+\begin_inset Formula $w$
+\end_inset 
+
+, 
+\begin_inset Formula \[
+x_{o}(w)>x_{e}(w)\]
+
+\end_inset 
+
+These two functions also have idempotent or parity-swapping identities:
+ 
+\begin_inset Formula \[
+x_{e+}(w)=x_{e}(w)\;\;\; and\;\;\; x_{e-}(w)=x_{o}(w)\;\;\; and\;\;\; x_{o+}(w)=x_{o}(w)\;\;\; and\; x_{o-}(w)=x_{e}(w)\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+x_{ee}(w)=x_{e}(w)\;\;\; and\;\;\; x_{eo}(w)=x_{o}(w)\;\;\; and\;\;\; x_{oe}(w)=x_{e}(w)\;\;\; and\;\;\; x_{oo}(w)=x_{o}(w)\]
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{+e}(w)=x_{e}(w)\;\;\; and\;\;\; x_{+o}(w)=x_{o}(w)\;\;\; and\;\;\; x_{-e}(w)=x_{e}(w)\;\;\; and\;\;\; x_{-o}(w)=x_{o}(w)\]
+
+\end_inset 
+
+
+\layout Subsection
+
+The Gap
+\layout Standard
+
+Let use define the 
+\shape italic 
+gap
+\shape default 
+ as
+\begin_inset Formula \[
+\Gamma_{x}(w)=x_{e}(w)-x_{o}(w)\]
+
+\end_inset 
+
+This gap function is, of course, highly discontinuous in 
+\begin_inset Formula $x$
+\end_inset 
+
+ and analytic in 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ It is not hard to discover that for a rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ reduced so that 
+\begin_inset Formula $p$
+\end_inset 
+
+ and 
+\begin_inset Formula $q$
+\end_inset 
+
+ are coprime (have no common factors), and 
+\begin_inset Formula $w\leq1$
+\end_inset 
+
+, the gaps take the form 
+\layout Standard
+
+
+\begin_inset Formula \[
+\Gamma_{p/q}(w)=\frac{w}{q^{2}}\left[2-w+\frac{w^{2}}{2}+\frac{w^{2}}{2}T_{p/q}(w)\right]\]
+
+\end_inset 
+
+ where the teeth 
+\begin_inset Formula $T$
+\end_inset 
+
+ are bounded: 
+\begin_inset Formula $\left|T_{p/q}(w)\right|<1$
+\end_inset 
+
+ (when 
+\begin_inset Formula $w\leq1$
+\end_inset 
+
+).
+ For 
+\begin_inset Formula $w=0,$
+\end_inset 
+
+we have 
+\begin_inset Formula $0\leq T_{p/q}(0)\leq1$
+\end_inset 
+
+.
+ A derivation of these results are given in a later section.
+ 
+\layout Standard
+
+The teeth at first appear to be random: below follows a scatterplot showing
+ 
+\begin_inset Formula $T$
+\end_inset 
+
+ for a thousand randomly generated small-ish rationals.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-psmallrand.png
+
+\end_inset 
+
+
+\layout Standard
+
+However, closer examination reveals some surprising details.
+ Here's the same picture, but this time showing only the rationals 
+\begin_inset Formula $p/q=[1..719]/720$
+\end_inset 
+
+ (all rationals with numerator between 1 and 719 and denominator of 720:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p720.png
+
+\end_inset 
+
+
+\layout Standard
+
+Note that 720 = 6! (six factorial) and that similar but denser images appear
+ for higher factorials: Here's one for 
+\begin_inset Formula $7!$
+\end_inset 
+
+ that is, 
+\begin_inset Formula $p/q=[1..5039]/5040$
+\end_inset 
+
+:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p5040.png
+
+\end_inset 
+
+
+\layout Standard
+
+Notice that a Moire pattern of fringes seems to be forming at 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+.
+ (Homework: describe the rationals that make up the parabolas.
+ The solution is presented in a later section below.).
+ The factorial in the denominator seems important: the picture for the denominat
+or 
+\begin_inset Formula $2\cdot3\cdot5\cdot7\cdot11=2310$
+\end_inset 
+
+ blurs out the features, and mostly looks much more random, as shown below:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p2310.png
+
+\end_inset 
+
+
+\layout Standard
+
+Now tht we know what sort of pattern to look for, we can find the cross-bars
+ in this picture, for a denominator of 1024:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p1024.png
+
+\end_inset 
+
+
+\layout Standard
+
+The analogous picture for a denominator consisting of powers of 3 is less
+ distinct.
+ Pictures for prime denominators appear considerably more random, although
+ containing hints of a different kind of structure.
+ For example, here is a picture with denominator 1023:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p1023.png
+
+\end_inset 
+
+
+\layout Standard
+
+The next picture below is a scatterplot showing all rationals with denominators
+ less than 200.
+ This now clearly exhibits a fantastic self-similar fractal latticework:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-lattice.png
+
+\end_inset 
+
+ 
+\layout Standard
+
+We will recognize later that these curves correspond to hyperbolic maps
+ of the unit interval back onto itself.
+ It would be interesting to specify the shapes of all the various bifurcating
+ curves that seem to appear in this latticework, and to give the algebraic
+ equations whose solutions are plotted above.
+ Note that because a curve can seemingly bifurcate into another curve in
+ many places, enumerating all of them would be a trick.
+\layout Standard
+
+There are more interesting things to be seen, but first we should provide
+ a simpler expression for 
+\begin_inset Formula $T_{p/q}(w)$
+\end_inset 
+
+ at 
+\begin_inset Formula $w=0$
+\end_inset 
+
+.
+ Recall that for any fixed rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+, that 
+\begin_inset Formula $T_{p/q}(w)$
+\end_inset 
+
+ is of the form 
+\begin_inset Formula $(aw+b)/(cw+d)$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+.
+ For any given, fixed 
+\begin_inset Formula $p/q$
+\end_inset 
+
+, there exists an 
+\begin_inset Formula $\epsilon>0$
+\end_inset 
+
+ such that there are no poles in 
+\begin_inset Formula $T_{p/q}(w)$
+\end_inset 
+
+ in the disk of radius 
+\begin_inset Formula $\epsilon$
+\end_inset 
+
+ around 
+\begin_inset Formula $w=0$
+\end_inset 
+
+ (Homework: prove this), and thus its analytic on this disk.
+ This justifies an expansion in 
+\begin_inset Formula $w$
+\end_inset 
+
+; we'll give an exact expression in a later section, showing that these
+ manipulations are safe.
+ For the continued fraction 
+\begin_inset Formula $x_{+}(w)=[a_{1},a_{2},...a_{N},1/w]$
+\end_inset 
+
+ we write the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th partial convergent as 
+\begin_inset Formula $r_{k}(w)=s_{k}+wt_{k}+w^{2}u_{k}+w^{3}v_{k}+...$
+\end_inset 
+
+ which obeys the recurrance relation 
+\begin_inset Formula $r_{k-1}(w)=a_{k-1}+1/r_{k}(w)$
+\end_inset 
+
+ .
+ Substituting, we get the explicit recurrance relations for each term:
+\begin_inset Formula \[
+s_{k-1}=a_{k-1}+1/s_{k}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+t_{k-1}=\frac{-t_{k}}{s_{k}^{2}}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+u_{k-1}=\frac{-u_{k}}{s_{k}^{2}}+\frac{t_{k}^{2}}{s_{k}^{3}}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+v_{k-1}=\frac{-v_{k}}{s_{k}^{2}}+2\frac{t_{k}u_{k}}{s_{k}^{3}}+\frac{-t_{k}^{3}}{s_{k}^{4}}\]
+
+\end_inset 
+
+ which are numerically quite tractable.
+ The boundary conditions are given by 
+\begin_inset Formula $r_{+,N}(w)=a_{N}+w$
+\end_inset 
+
+ for the 
+\begin_inset Formula $x_{+}$
+\end_inset 
+
+expansion, and 
+\begin_inset Formula $r_{-,N}(w)=a_{N}-w+w^{2}-w^{3}$
+\end_inset 
+
+ for the 
+\begin_inset Formula $x_{-}$
+\end_inset 
+
+expansion.
+ We add 
+\begin_inset Formula $a_{0}\equiv0$
+\end_inset 
+
+ to terminate at the other end.
+ Defining even and odd variants as before, we equate the gap
+\begin_inset Formula \[
+\Gamma_{p/q}(w)=w\left(t_{0}^{e}-t_{0}^{o}\right)+w^{2}\left(u_{0}^{e}-u_{0}^{o}\right)+w^{3}\left(v_{0}^{e}-v_{0}^{o}\right)\]
+
+\end_inset 
+
+ Its becomes straightforward to numerically verify that 
+\begin_inset Formula $t_{0}^{e}-t_{0}^{o}=2/q^{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $u_{0}^{e}-u_{0}^{o}=-1/q^{2}$
+\end_inset 
+
+ as we've noted before (Homework: provide a general proof).
+ Far, far more curious is 
+\begin_inset Formula $T_{p/q}(0)=2q^{2}\left(v_{0}^{e}-v_{0}^{o}\right)-1$
+\end_inset 
+
+, of which we drew some pictures above.
+ The pictures below will provide some more surprises.
+ The first is a scatterplot color-coded as a measure: it shows the distribution
+ of 
+\begin_inset Formula $T_{p/q}\equiv T_{p/q}(0)$
+\end_inset 
+
+ for all rationals with denominator 
+\begin_inset Formula $q\leq1800$
+\end_inset 
+
+.
+ Black indicates that there were few or no hits to that pixel, then blue,
+ greeen, yellow and red to denote lots of points hit that pixel.
+ Just as the earlier graphs, shown is a perfect unit square.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-dist-1800-bola.png
+
+\end_inset 
+
+
+\layout Standard
+
+For reference, overdrawn over the image is the parabola.
+ The vertical black stripes occur at the Farey numbers, and appear to be
+ ordered in size according to the Farey tree (
+\shape italic 
+i.e.
+
+\shape default 
+ the largest stripe is at 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+, the next largest at 
+\begin_inset Formula $x=1/3$
+\end_inset 
+
+, 
+\begin_inset Formula $x=2/3$
+\end_inset 
+
+ and the next smaller ones at 
+\begin_inset Formula $x=1/4$
+\end_inset 
+
+ and 
+\begin_inset Formula $x=2/5$
+\end_inset 
+
+ 
+\shape italic 
+etc.
+\shape default 
+).
+ The progression of the horizontal bands are clearly related to the Farey
+ tree through the parabola.
+ Since the parabola gives a rational out when fed one in, we see that we've
+ discovered a different tree of rationals that's related to the Farey tree.
+ One can see that any ratio of polynomials will this give a tree of rationals.
+ The Farey Tree (or Stern-Brocot Tree) is discussed in greater detail later.
+\layout Standard
+
+The filigree pattern exists only for small rationals.
+ If we start sampling larger rationals, the distribution becomes smooth.
+ The picture below shows a random sampling of rationals with denominators
+ less than 2 million.
+ The image is a bit grainy because the sample size is not large enough;
+ the graininess goes away with larger sample sizes.
+ 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-dist-rand.png
+
+\end_inset 
+
+
+\layout Standard
+
+This picture tells us something that is surprising: this function is space-filli
+ng and dense; it has no holes or islands; it has a fractal measure of 2.0.
+ Even in the land of fractals, this is fairly unusual, as this function
+ is, after all, not some self-similar curve, but rather a 'plain-old' map
+ from the unit interval to the unit interval.
+ By 'dense', I mean the traditional Cauchy-sequence notion of density: for
+ any real values 
+\begin_inset Formula $x,y\in[0,1]$
+\end_inset 
+
+ and positive 
+\begin_inset Formula $\varepsilon>0$
+\end_inset 
+
+, we can find a rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\left|x-p/q\right|<\varepsilon$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left|y-T_{p/q}\right|<\varepsilon$
+\end_inset 
+
+ .
+ Of course, a computer generated picture is not a proof, but a proof is
+ straight-forward, and is discussed below.
+ I am not aware of any other map that has this property.
+ 
+\layout Standard
+
+The distribution of the gaps 
+\begin_inset Formula $y=T_{p/q}$
+\end_inset 
+
+ can be easily found to be 
+\begin_inset Formula $1/2\sqrt{y}$
+\end_inset 
+
+ which is sharply peaked at 
+\begin_inset Formula $y=0$
+\end_inset 
+
+: this is the thin red stripe at the bottom of the above picture.
+ 
+\layout Subsection
+
+The Gap for Finite w
+\layout Standard
+
+One can get a better idea of the behaviour of 
+\begin_inset Formula $x_{e}(w)$
+\end_inset 
+
+ by graphing it, as a function of 
+\begin_inset Formula $w$
+\end_inset 
+
+, for a number of representative values of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ From the above analysis, we should suspect that for 
+\begin_inset Formula $x=p/q$
+\end_inset 
+
+, the leading 
+\begin_inset Formula $w$
+\end_inset 
+
+ terms are of magnitude 
+\begin_inset Formula $1/q^{2}$
+\end_inset 
+
+ which would make it hard to directly compare different values of 
+\begin_inset Formula $x.$
+\end_inset 
+
+ So instead, we introduce a 'normalized' variant: 
+\begin_inset Formula $\nu_{e}(x=p/q,w)=x+q^{2}[x_{e}(w)-x]$
+\end_inset 
+
+ and similarly 
+\begin_inset Formula $\nu_{o}(x,w)$
+\end_inset 
+
+.
+ This is done below, for 200 evenly spaced values ov 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ On the horizontal axis is 
+\begin_inset Formula $x$
+\end_inset 
+
+ running from 0 to 1, and along the vertical axis, 
+\begin_inset Formula $w$
+\end_inset 
+
+, from 0 at bottom to 1 at top:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-x-even-thin.png
+
+\end_inset 
+
+
+\layout Standard
+
+Clearly, it can be seen that 
+\begin_inset Formula $\nu_{e}(x,w)$
+\end_inset 
+
+ is a monotonically increasing function of 
+\begin_inset Formula $w$
+\end_inset 
+
+, which follows easily by examining the partial sums: if 
+\begin_inset Formula $w<z$
+\end_inset 
+
+ then 
+\begin_inset Formula $r_{N}(w)=a_{N}+w<r_{N}(z)=a_{N}+z$
+\end_inset 
+
+ and 
+\begin_inset Formula $r_{N-1}(w)=a_{N-1}+1/r_{N}(w)>r_{N-1}(z)=a_{N-1}+1/r_{N}(z)$
+\end_inset 
+
+.
+ Each iteration will reverse the inequality; but 
+\begin_inset Formula $\nu_{e}$
+\end_inset 
+
+ by definition has an even number of terms, and thus 
+\begin_inset Formula $\nu_{e}(w)<\nu_{e}(z)$
+\end_inset 
+
+.
+ QED.
+ Note this would be extremely non-obvious if one just considered that 
+\begin_inset Formula $\nu$
+\end_inset 
+
+ is a rational polynomial.
+\layout Standard
+
+One finds a mirror symmetry between the even and odd forms: 
+\begin_inset Formula $\nu_{o}(x,w)=-\nu_{e}(1-x,w)$
+\end_inset 
+
+, which is also not quite obvious, given the construction.
+ Its is clear from this picture that the leading 
+\begin_inset Formula $w$
+\end_inset 
+
+ and 
+\begin_inset Formula $w^{2}$
+\end_inset 
+
+ terms dominate.
+ We can guess at the form of these terms: we define 
+\begin_inset Formula $\mu_{e}(x,w)=\nu_{e}(x,w)-w+w^{2}-w^{3}/2$
+\end_inset 
+
+ and graph it below, exposing the randomness of the cubic and higher terms
+ directly.
+ 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-x-even-thin-nolead.png
+
+\end_inset 
+
+
+\layout Standard
+
+The seeming parallel-ness of some trajectories is an optical illusion, due
+ to the pixelization of the picture.
+ There are more pictures, with a greater numnber of strands, at the 
+\begin_inset LatexCommand \htmlurl[Gap Room]{http://www.linas.org/art-gallery/farey/gap-room/gap-room.html}
+
+\end_inset 
+
+.
+\layout Subsection
+
+Exact Expressions for the Gap Size
+\layout Standard
+
+The size of the gap can be given an exact expression in terms of the convergents
+ of the continued fraction.
+ Performing this excercise will help explain some of the fractal behaviour
+ seen in the pervious sections.
+ 
+\layout Standard
+
+One gets the convergent of a continued fraction by evaluating the fraction
+ only up to the n'th term, and expressing it as a ratio 
+\begin_inset Formula $p_{n}/q_{n}$
+\end_inset 
+
+.
+ The convergents can be expressed recursively:
+\begin_inset Formula \[
+p_{n}=a_{n}p_{n-1}+p_{n-2}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+q_{n}=a_{n}q_{n-1}+q_{n-2}\]
+
+\end_inset 
+
+ where we anchor the iteration by defining 
+\begin_inset Formula $p_{-2}=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{-1}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{-2}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{-1}=0$
+\end_inset 
+
+.
+ Iterating, the next few terms are 
+\begin_inset Formula $p_{0}=a_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{1}=a_{0}a_{1}+1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{0}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{1}=a_{1}$
+\end_inset 
+
+.
+ Here we adopted a slightly extended notation from before, defining 
+\begin_inset Formula $a_{0}$
+\end_inset 
+
+ as the integer part of the fraction; 
+\shape italic 
+i.e.
+
+\shape default 
+ 
+\begin_inset Formula $x=a_{0}+1/(a_{1}+1/(a_{2}+...))\equiv[a_{0};a_{1},a_{2},...]$
+\end_inset 
+
+.
+ We then have the convergent:
+\begin_inset Formula \[
+[a_{0};a_{1},a_{2},...,a_{N}]=\frac{p_{N}}{q_{N}}\]
+
+\end_inset 
+
+ Note also that for any 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset 
+
+, we have 
+\begin_inset Formula \[
+[a_{0};a_{1},a_{2},...,a_{N},y]=\frac{p_{N}y+p_{N-1}}{q_{N}y+q_{N-1}}\]
+
+\end_inset 
+
+ Note that the convergents have the property 
+\begin_inset Formula $q_{n}p_{n-1}-p_{n}q_{n-1}=\left(-1\right)^{n}$
+\end_inset 
+
+.
+ We can use the above to provide exact expressions for 
+\begin_inset Formula $x_{+}(w)$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{-}(w)$
+\end_inset 
+
+.
+ These are:
+\begin_inset Formula \[
+x_{+}(w)=\frac{p_{N}}{q_{N}}+\left(-1\right)^{N}\frac{w}{q_{N}^{2}\left(1+wq_{N-1}/q_{N}\right)}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+x_{-}(w)=\frac{p_{N}}{q_{N}}-\left(-1\right)^{N}\frac{w}{q_{N}^{2}\left(1+w\left(1-q_{N-1}/q_{N}\right)\right)}\]
+
+\end_inset 
+
+ We can then compute the gap explicitly as 
+\begin_inset Formula \[
+\Gamma_{x}(w)=x_{e}(w)-x_{o}(w)=\frac{w}{q_{N}^{2}}\left[\frac{2+w}{1+w+w^{2}\frac{q_{N-1}}{q_{N}}\left(1-\frac{q_{N-1}}{q_{N}}\right)}\right]\]
+
+\end_inset 
+
+ where no approximation has been made.
+ Expanding the denominator, we get 
+\begin_inset Formula \[
+T_{p/q}(0)=1-4\frac{q_{N-1}}{q_{N}}\left(1-\frac{q_{N-1}}{q_{N}}\right)\]
+
+\end_inset 
+
+ From this expression, the boundedness of 
+\begin_inset Formula $T$
+\end_inset 
+
+ follows immediately; this comes from the fact that 
+\begin_inset Formula $2q_{N-1}\leq q_{N}$
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+Proof that Gaps are Cauchy-dense on the Unit Square
+\layout Standard
+
+The incredible 'randomness' of the distribution, as well as its Cauchy-sequence-
+density on the unit square can now be easily understood.
+ To do this, consider the iteration of the map 
+\begin_inset Formula \[
+h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
+
+\end_inset 
+
+ This map has the property that lops off the leading term of the continued
+ fraction: 
+\begin_inset Formula $h([a_{1},a_{2},...])=[a_{2},a_{3},...]$
+\end_inset 
+
+ .
+ Iterating this map clearly gets one further and further into the continued
+ fraction, and it is clear that two points that start arbitrarily close
+ together will have orbits under this map that eventually become uncorrelated.
+ That is, this map clearly has a positive Lyapunov exponent for all irrationals.
+ (Homework: compute the Lyapunov exponent for this map).
+ 
+\layout Standard
+
+We can gain some intuition by comparing this map to the Bernoulli map 
+\begin_inset Formula \[
+b(x)=2x-\left\lfloor 2x\right\rfloor \]
+
+\end_inset 
+
+ which has the property of lopping off the leading digit of a binary expansion
+ of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ Again, two irrationals that start out arbitrarily close together will eventuall
+y have binary expansions that are uncorrelated and completly 'random'.
+ Even though one may know the first 
+\begin_inset Formula $N$
+\end_inset 
+
+ digits of the expansion, one cannot 'predict' the next digit of the expansion;
+ and this is what we mean when we say 'random' or 'uncorrelated'.
+ 
+\layout Standard
+
+As a side-note, I can't help noticing an interesting paradox concerning
+ the idea of 'randomness' in deterministic-chaos problems.
+ We would like to be able to say, that, when considering the entire set
+ of reals on the unit interval, that, when examining the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th binary digit in the expansion, that 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit is completely random, and is uniformly distributed (equipartition
+ of probability), with the probability of the digit being 0 being 1/2 and
+ the probability of it being 1 is also 1/2.
+ But of course, this statement is patently false, and therein lies the paradox.
+ We can, of course, trivially and exactly predict the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit, as the Bernoulli process is completely deterministic.
+ The 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit is trivially 
+\begin_inset Formula $e_{N}(x)=\left\lfloor 2^{N}x\right\rfloor -2\left\lfloor 2^{N-1}x\right\rfloor $
+\end_inset 
+
+ and 
+\begin_inset Formula $e_{N}(x)$
+\end_inset 
+
+ is a square-toothed comb.
+ One has this problem even for 
+\begin_inset Formula $N$
+\end_inset 
+
+ getting very large, and approaching infinity.
+ 
+\layout Standard
+
+I suppose there are two ways out of this paradox.
+ One way out is to say something like 
+\begin_inset Quotes eld
+\end_inset 
+
+Yea, Verily, Chooseth two Irrationals whose Binary Expansions are Completely
+ Uncorrelated
+\begin_inset Quotes erd
+\end_inset 
+
+, which sounds like an invocation of the Axiom of Choice.
+ Indeed, the set of computable numbers is countable, and is of measure zero
+ on the real number line.
+ In order to compute the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit of 
+\begin_inset Formula $x$
+\end_inset 
+
+, one must somehow already 'know' 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ Since the set of of unknowable numbers has measure one on the unit interval
+ of reals, one arguably must 'choose' if one is to get a truly 'random'
+ number.
+ 
+\layout Standard
+
+The other way out of the paradox is far more mundane, and seems constructive,
+ and that is to apply shop-worn statistical methods.
+ After all, chaos occurs in numerical simulations, and not in set theory.
+ Chaos is a computational phenomenon.
+ What we can say is that for any given real 
+\begin_inset Formula $y$
+\end_inset 
+
+ and 
+\begin_inset Formula $\delta>0$
+\end_inset 
+
+ and 
+\begin_inset Formula $\varepsilon>0$
+\end_inset 
+
+, one can always find an integer 
+\begin_inset Formula $N$
+\end_inset 
+
+ such that the average value of 
+\begin_inset Formula $e_{N}$
+\end_inset 
+
+ approaches 1/2 on the interval: that is, 
+\begin_inset Formula \[
+\left|\frac{1}{2}-\int_{y}^{y+\delta}e_{N}(x)dx\right|<\varepsilon\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Now, to move the conversation back to the iterated continued fraction map,
+ and that proof.
+ Blah Blah Blah.
+ To-Do: Provide the proof we promised.
+\layout Subsection
+
+The Gauss Kuz'min Wirsing Operator
+\layout Standard
+
+Note that a standard way of analysing the dynamics of deterministic chaotic
+ maps is to compute the Frobenius-Perron operator of the map, and solve
+ for its eigenvalues and eigenfunctions.
+ For the continued-fraction map, the Frobenius-Perron operator is known
+ as the Gauss-Kuz'min-Wirsing operator.
+ We'll return to this in a later section, were we present some exactly-solvable
+ analogs of the GKW operator.
+ Blah blah blah.
+ Write some more here.
+\layout Standard
+
+Note that I have another paper ready to go on the GKW and how it and the
+ Riemann Zeta are intertwined.
+ Its interesting that this is another connection between the Riemann Zeta
+ and chaotic dynamics.
+ I suspect that the relationship is very deep indeed.
+\layout Subsection
+
+The Parabolas in the Distribution
+\layout Standard
+
+The cause of the principal parabola seen in the pictures is now also clear.
+ Blah Blah Blah write this section too.
+ All work and no play makes Jack a dull boy...
+\layout Standard
+
+The main parabola that is visible is at 
+\begin_inset Formula $T_{p/q}(0)=4(x-1/2)^{2}$
+\end_inset 
+
+, which we can solve for directly to obtain 
+\begin_inset Formula $x=q_{N-1}/q_{N}$
+\end_inset 
+
+ and 
+\begin_inset Formula $x=1-q_{N-1}/q_{N}$
+\end_inset 
+
+ .
+ Recalling that by definition, 
+\begin_inset Formula $x\equiv p/q\equiv p_{N}/q_{N}$
+\end_inset 
+
+, we find that the rationals on the main parabola are given by 
+\begin_inset Formula $p_{N}=q_{N-1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{N}=q_{N}-q_{N-1}$
+\end_inset 
+
+.
+ Blah blah blah solve these equations.
+\layout Standard
+
+There are other parabolas visible as well, offset on other fractions.
+ Describe these as well.
+ Why are these rationals interesting? 
+\layout Subsection
+
+Iteration
+\layout Standard
+
+Note that 
+\begin_inset Formula $x_{+}(w)$
+\end_inset 
+
+ is the concatenation operator for continued fractions.
+ If 
+\begin_inset Formula $x=[a_{1},a_{2},...,a_{N}]$
+\end_inset 
+
+ and 
+\begin_inset Formula $w=[b_{1},b_{2},...]$
+\end_inset 
+
+ then 
+\begin_inset Formula $x_{+}(w)=[a_{1},a_{2},...,a_{N},b_{1},b_{2},...]$
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $x_{+}$
+\end_inset 
+
+ can be used to construct code-words.
+ Iterating 
+\begin_inset Formula $x_{+}(w)$
+\end_inset 
+
+ obviously does not yeild any periodic orbits, and instead converges to
+ a quadratic irrational that is the solution to 
+\begin_inset Formula $y=x_{+}(y)$
+\end_inset 
+
+.
+ From the theory of Pellian equations, if 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+ is even, then 
+\begin_inset Formula $y=-a_{N}/2+\sqrt{D}$
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $D$
+\end_inset 
+
+ where 
+\begin_inset Formula $a_{N}^{2}/4+a_{N}+1>D>a_{N}^{2}/4$
+\end_inset 
+
+.
+ 
+\layout Section
+
+Distributions Of Rationals on the Unit Interval
+\layout Standard
+
+The distribution of rationals on the unit interval is filled with surprises.
+ In High-School or College, one is told that the rationals are distributed
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+uniformly
+\begin_inset Quotes erd
+\end_inset 
+
+ on the unit interval.
+ If one considers the entire set 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+, then yes, this is true.
+ But if one considers just subsets, such as the subset of rationals with
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+small
+\begin_inset Quotes erd
+\end_inset 
+
+ denominators, then the distribution is far from uniform and full of counter-int
+uitive surprises, some of which we explore below.
+ These surprises imply that extrapolating from finite results to the set
+ of all rationals is a dangerous process (and here you thought the Axiom
+ of Choice was Scary).
+ 
+\layout Subsection
+
+Simple Counting
+\layout Standard
+
+Lets begin by listing all of the fractions with denomintors from 1 to N,
+ and numerators between 0 and the denomintor.
+ Clearly, there many of these fractions will be reducible, i.e.
+ the numerator and denominator have common factors, and thus, in this simple-min
+ded enumeration, some rationals are counted multiple times.
+ In particular, we'll count 0 over and over again: it will be in the list
+ as 0/1, 0/2, 0/3 and so on.
+ Likewise, 1 will appear in this list over and over: as 1/1, 2/2, 3/3, etc.
+ We'll have 1/2 also appearing as 2/4, 3/6 and so on.
+ So lets take a look at this in detail.
+ The graph below shows this enumeration, up to a denominator of N=4000,
+ carved up into 720 bins, and normalized to unit density.
+ That is, if 
+\begin_inset Formula $n/720<p/q<(n+1)/720$
+\end_inset 
+
+, then we assign the fraction 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ to the 
+\begin_inset Formula $n$
+\end_inset 
+
+'th bin.
+ We might expect this graph to have a huge peak at the bin n=360: after
+ all, this bin will hold 1/2 and 2/4 and 3/6 and in general should have
+ a big surfiet coming from the degeneracy at 1/2.
+ One mght expect peaks at 1/3, and 1/4 and etc, but smaller.
+ Here's the graph.
+\layout Standard
+
+Here's the density graph of the rationals that occur in this enumeration,
+ binned into 720 bins, up to a denominator of N=4000:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-720-4K.png
+
+\end_inset 
+
+
+\layout Standard
+
+Indeed, there is a big upwards spike at 1/2.
+ But there seems to be a big downwards spike just below, at bin 359, seemingly
+ of equal and opposite size.
+ This is the first surprise.
+ Why is there a deficit at bin 359? We can try to get a better picture of
+ things by dividing up the enumaration into 719 bins (note that 719 is prime).
+ This is results in the next surprise: the graph is flat.
+ See below:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-719-4K.png
+
+\end_inset 
+
+
+\layout Standard
+
+How can this graph possibly be flat? We should be massively overcounting
+ at 1/2, there should be a big peak there.
+ Maybe its drowned out by the blips at 0 and 1, so lets graph the same data,
+ but rescale more appropriately.
+ This is shown below:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-719-4K-rescale.png
+
+\end_inset 
+
+
+\layout Standard
+
+Hmm.
+ Curious.
+ There is indeed a peak at 1/2.
+ But there are also deficits symmetrically arranged at either side.
+ This is still confusing.
+ Well, at any rate, lets compare this to the distribution we 
+\begin_inset Quotes eld
+\end_inset 
+
+should have been using all along
+\begin_inset Quotes erd
+\end_inset 
+
+, where we eliminate all fractions that are reducible.
+ That is, we should count each rational only once.
+ This is graphed below, again, binned into 719 bins, for all irreducible
+ rationals with denominator less than or equal to 4000:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-719-4K-irred.png
+
+\end_inset 
+
+
+\layout Standard
+
+Wow! We no longer have a peak at 1/2.
+ In fact, it sure gives the impression that we are undercounting at 1/2!
+ Holy Banach-Tarski, Batman! What does it mean? Note also the graph is considera
+bly noiser.
+ Compare the scales on the left for a relative measure of the noise.
+ Part, but not all, of the noise is due to the smaller sample size: we are
+ counting fewer fractions: 4863602 are irreducible out of the simple list
+ of 8002000.
+ However, matching the sample sizes does not seem to significantly reduce
+ the small-amplitude noise: qualitatively speaking, the binning of irreducible
+ fractions seems much noisier.
+\layout Standard
+
+Curiously, binning into a non-prime number of bins does seem to reduce the
+ (small-amplitude) noise.
+ Below is the binning into 720 bins.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-720-4K-irred.png
+
+\end_inset 
+
+
+\layout Standard
+
+Following the usual laws of statistics, one expects that increasing the
+ sample size reduces the noise.
+ This is true in an absolute sense, but not a relative sense.
+ The graph below shows 720 bins holding all irreducible rationals with denominat
+ors less than 16000.
+ The absolute amplitude has been reduced by over a factor of ten compared
+ to the previous graphs; however, there is relatively far more power in
+ the higher frequencies.
+ There are also still-visible noise peaks near 1/2, 1/3, and 2/3'rds, as
+ well as at 0 and 1.
+ 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-720-16K-irred.png
+
+\end_inset 
+
+
+\layout Standard
+
+It sure would be nice to develop a generalized theory that can work with
+ these peculiar results, and in particular, giving insight into what's happening
+ near 1/2 and giving a quantitative description of the spectra near 1/3
+ and 2/3, etc.
+ In particular, the very first graph of this section has very clear self-similar
+ity properties; its very much a fractal, more obviously so than the later
+ graphs.
+ What is the fractal dimension? What is the symmetry group involved? Is
+ it indeed a subgroup of the Modular Group, as the following chapter would
+ seem to suggest? (this should be an easy qustion to answer, I just haven't
+ done the calculation yet).
+ More importantly, why does the modular group show up when one is counting
+ rationals? What is it about rational numbers that makes them so hyperbolic?
+\layout Standard
+
+As a side-effect, 
+\layout Section
+
+The Minkowski Question Mark Function
+\layout Standard
+
+This section explores a peculiar mapping involving Farey Numbers.
+ Refered to as the Minkowski Question Mark, it is well-defined for all real
+ numbers and maps the unit interval into, and onto, the unit interval.
+ It is continuous and monotonic.
+ The map, pictured below, is highly self-similar.
+ It is also highly singular: all of its derivatives vanish on the rationals.
+ Its self-similarity group can be clearly defined, and essentially that
+ of period-doubling iterated maps, such as the Mandelbrot Set.
+ The fact that it involves the Farey numbers is essentially the 
+\begin_inset Quotes eld
+\end_inset 
+
+explanation
+\begin_inset Quotes erd
+\end_inset 
+
+ for why Farey Numbers occur in period-doubling maps.
+ 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename fgraph.png
+
+\end_inset 
+
+
+\layout Subsection
+
+Definition of the Question Mark Function
+\layout Standard
+
+The Minkowski Question Mark map can be constructed in several ways.
+ In all of these constructions, it can be understood to be the mapping between
+ the Stern-Brocot Tree (sometimes called the Farey Tree) and the tree of
+ real numbers expressed as binary, base-2, dyadic fractions.
+ The Stern-Brocot Tree is the tree on which the Farey mediants are naturally
+ organized, and is most easily explained with a picture:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename fareytr.jpg
+
+\end_inset 
+
+
+\layout Standard
+
+(See also the presenatation on 
+\begin_inset LatexCommand \url[Stern Brocot Trees]{http://www.cut-the-knot.org/blue/Stern.shtml}
+
+\end_inset 
+
+ at Cut-the-Knot.) The dyadic tree has the same shape, except that the second
+ row holds the values 1/4 and 3/4, and the next row the values 1/8, 3/8,
+ 5/8 and 7/8, and so on.
+ The dyadic tree holds values that are the arithmetic average, rather than
+ the mediant, of the parent values.
+ Both trees are 'binary' in the sense that each branch splits into two;
+ we use the term 'dyadic tree' for the one that holds the 'dyadic' numbers
+ 
+\begin_inset Formula $p/2^{k}$
+\end_inset 
+
+.
+\layout Standard
+
+We denote the values of the Minkowski Question Mark function as as 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+.
+ Equating the Stern-Brocot Tree and the Dyadic Tree literally, one gets
+ a recursive definition.
+ Start by defining 
+\begin_inset Formula $?(0)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $?(1)=1$
+\end_inset 
+
+.
+ Then, for a pair of Farey fraction parents 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ and 
+\begin_inset Formula $p'/q'$
+\end_inset 
+
+, it equates the Farey mediant to the arithmetic average:
+\begin_inset Formula \[
+?\left(\frac{p+p'}{q+q'}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{p'}{q'}\right)\right]\]
+
+\end_inset 
+
+Thus, starting with 
+\begin_inset Formula $\frac{0}{1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\frac{1}{1}$
+\end_inset 
+
+ at the root of the Farey Tree, we have 
+\begin_inset Formula $?\left(\frac{0+1}{1+1}\right)=?\left(\frac{1}{2}\right)=\frac{1}{2}\left[?\left(\frac{0}{1}\right)+?\left(\frac{1}{1}\right)\right]=\frac{1}{2}$
+\end_inset 
+
+.
+ Next, we see the Farey number 1/3 is mapped to the binary 1/4, and so on:
+ one quickly sees 
+\begin_inset Formula $?\left(1/n\right)=2^{-n+1}$
+\end_inset 
+
+.
+ Similarly, 2/3 maps to 3/4, and 
+\begin_inset Formula $?(n/(2n-1))=2^{-1}+2^{-n}$
+\end_inset 
+
+.
+ In general, a rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ maps to 
+\begin_inset Formula $?(p/q)=m\cdot2^{-n}$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $m,n$
+\end_inset 
+
+ (every rational occurs exactly once on the Stern-Brocot Tree).
+ 
+\layout Standard
+
+Put another way, given any value 
+\begin_inset Formula $x$
+\end_inset 
+
+ on the Stern-Brocot Tree, 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ is the value at the corresponding position on the Dyadic Tree.
+ It is convenient in the following to think of 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ as a map from 'Farey Space' to 'Dyadic Space', and useful to keep in mind
+ which of these two spaces one is currently working in.
+ 
+\layout Standard
+
+An alternate, non-recursive definition for the Question Mark is based on
+ continued fractions.
+ Starting with the expansion 
+\begin_inset Formula $x=[a_{1},a_{2},...]$
+\end_inset 
+
+, one writes 
+\begin_inset Formula \[
+?(x)=2\sum_{k=1}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\]
+
+\end_inset 
+
+ This sum can be visualized as a count of an alternating sequence of 0's
+ and 1's in the binary expansion of 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+?(x)=\begin{array}{ccccc}
+0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
+a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\]
+
+\end_inset 
+
+In this expnasion, it is useful to remember that 
+\begin_inset Formula $0.111111...=1.0000...$
+\end_inset 
+
+, in case one has an odd number of terms in the continued fraction expansion.
+\layout Standard
+
+This sequence of 1's and 0's can be understood to be the set of directions
+ for navigating a tree: on encountering a 0, take the left branch, else
+ take the right branch.
+ Thus, we can write 
+\begin_inset Formula $0.011=LRR$
+\end_inset 
+
+.
+ Navigating to this spot on the Stern-Brocot Tree, we find 2/5'ths.
+ Navigating to this same position on the Dyadic Tree wee get 3/8'ths.
+ Thus, 
+\begin_inset Formula $?(2/5)=3/8$
+\end_inset 
+
+.
+\layout Standard
+
+There is also a well-known representation of the Stern-Brocot Tree on the
+ lattice 
+\begin_inset Formula $\mathbb{Z\mathbb{\times Z}}$
+\end_inset 
+
+, where a fraction 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ is denoted as the ordered pair 
+\begin_inset Formula $(p,q)$
+\end_inset 
+
+.
+ In this representation, the left-right navigation operators 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ have the values 
+\begin_inset Formula $L=\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)$
+\end_inset 
+
+ and 
+\begin_inset Formula $R=\left(\begin{array}{cc}
+1 & 1\\
+0 & 1\end{array}\right)$
+\end_inset 
+
+ and thus positions are given as elements of 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+.
+ Maybe we'll elaborate on this later xxxx.
+ To do...
+ elaborate.
+\layout Standard
+
+To summarize, it is this expansion in binary digits that provides the underlying
+ connection between period-doubling maps, such as the Mandelbrot Set, and
+ Farey Numbers.
+ Binary expansions, or code-words, occur naturally in the analysis of Duoady-Hub
+bard landing rays.
+ We'll demonstrate an explicit mapping in a later section.
+\layout Subsection
+
+Some Curious Properties of the Question Mark 
+\layout Standard
+
+The Question Mark has the curious property that it maps quadratic irrationals
+ to rational numbers.
+ A quadratic irrational is a number of the form m 
+\begin_inset Formula $p/q+m\sqrt{D}/n$
+\end_inset 
+
+ for integers 
+\begin_inset Formula $p,q,m,D,n$
+\end_inset 
+
+.
+ Continued fractions whose expansions become eventually periodic are mapped
+ to binary strings that become eventualy periodic.
+ The later are clearly just the binary expansions of rationals whose denominator
+ is not a power of 2.
+ The former are quadratic irrationals, which is known from the theory of
+ Pellian equations: It turns out that every quadratic irrational has a continued
+ fraction expansion that becomes eventually periodic.
+ Note that, as a side effect, this proves that quadratic irrationals are
+ countable in the same way that rationals are.
+\layout Standard
+
+The Minkowski Question Mark has some very curious analytic properties: the
+ mapping is continuous everywhere.
+ It is also infinitely differentiable on every rational, and all derivatives
+ vanish at every rational; yet the mapping is strictly montonically increasing.
+ Clearly, the function is singular on irrationals.
+ Its hard to define just how.
+ (xxxx Blah blah need to define how).
+\layout Standard
+
+If there is a 3-adic or p-adic generalization of the Minkowski Question
+ Mark, it is not obvious; one 'obvious' generalization is 
+\layout Standard
+
+
+\begin_inset Formula \[
+\sum_{k=1}\left(-1\right)^{k}\;3^{-(a_{1}+a_{2}+...+a_{k})}\]
+
+\end_inset 
+
+but its highly discontinuous.
+ Other generalizations based on roots of unity in the complex plane also
+ don't seem to work.
+ One might be able to get traction by looking at groups that have 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ as a subroup but also have some 
+\begin_inset Formula $p$
+\end_inset 
+
+-fold symmetry.
+\layout Subsection
+
+Symmetries of the Question Mark
+\layout Standard
+
+XXX write the intro again:...
+ the symmetry is the group that maps trees to subtrees so the symmetry group
+ of maping a binary tree onto itself in the modular group.
+ XXX rewrite me.
+ XXX also notice that the tree spans an inf-sup interval which is why this
+ is an interval map and notice that trees don't span any arbitrary interval,
+ but very specific intervals.
+ 
+\layout Standard
+
+It should be immediately appearent from the picture of the Question Mark
+ that it is highly self-similar, and thus should have a group of symmetries.
+ Below, we give an explicit presentation of this group, which turns out
+ to be the Modular Group Gamma.
+ After breifly presenting the modular group a bit, we point out that the
+ 'interesting' subset of the group, that is, 'interesting' as far as fractals
+ are concerned, can be best enumerated as 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes\mathbb{Z}_{2}$
+\end_inset 
+
+.
+ This enumeration will help cement that the modular group is the symmetry
+ group of the Mandelbrot Set.
+ I'm enamored of this development, because the popular literature on fractals
+ always talks about self-similarity without ever actually giving the group
+ structure that's involved.
+ The goal here is to rectify this omission.
+ 
+\layout Standard
+
+We start by noticing that for any real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ having the continued fraction expansion 
+\begin_inset Formula $x=[a_{1},a_{2},...]$
+\end_inset 
+
+, that 
+\begin_inset Formula $g(x)=x/(1+x)=[a_{1}+1,a_{2},...]$
+\end_inset 
+
+ .
+ By the definition of 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ one sees immediately that 
+\begin_inset Formula $g$
+\end_inset 
+
+ is a homomorphism of the Question Mark: 
+\begin_inset Formula $(?\circ g)(x)=?(g(x))=?(x)/2$
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $g$
+\end_inset 
+
+ represents one of the generators of the symmetry group.
+ Denoting repeated iterations of 
+\begin_inset Formula $g$
+\end_inset 
+
+ by 
+\begin_inset Formula $g^{n}$
+\end_inset 
+
+ we have 
+\begin_inset Formula $g^{n}(x)=x/(1+nx)$
+\end_inset 
+
+.
+ Equivalently, for a continued fraction, we have 
+\begin_inset Formula \[
+g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]\]
+
+\end_inset 
+
+ Iterating under the questino mark gives 
+\begin_inset Formula $?(x/(1+nx))=?(x)/2^{n}$
+\end_inset 
+
+.
+ The generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ maps intervals to intervals, specifically 
+\begin_inset Formula $g^{n}:[[0,1]]\rightarrow[[0,\frac{1}{n+1}]]$
+\end_inset 
+
+ where we use the non-standard notation 
+\begin_inset Formula $[[]]$
+\end_inset 
+
+ to denote an interval, to avoid confusion with 
+\begin_inset Formula $[]$
+\end_inset 
+
+ for continued fraction expansions.
+ On the dyadic side, we have 
+\begin_inset Formula $(?g^{n}):[[0,1]]\rightarrow[[0,1/2^{n}]]$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+One gets the general symmetry group 
+\begin_inset Formula $\Gamma$
+\end_inset 
+
+ by combining with the reflection operator embodied in the left-right symmetry:
+ 
+\begin_inset Formula $?(1-x)=1-?(x)$
+\end_inset 
+
+ which we denote with 
+\begin_inset Formula $r(x)=1-x$
+\end_inset 
+
+.
+ Note that 
+\begin_inset Formula $r$
+\end_inset 
+
+ commutes with 
+\begin_inset Formula $?$
+\end_inset 
+
+ as we have 
+\begin_inset Formula $(?\circ r)(x)=(r\circ?)(x)$
+\end_inset 
+
+.
+ Thus, for example, 
+\begin_inset Formula \[
+(?rg^{n})(x)=(r?g^{n})(x)=r\left(\frac{1}{2^{n}}?\right)(x)=1-?(x)/2^{n}=?\left(r\left(\frac{x}{1+nx}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)\]
+
+\end_inset 
+
+ shows that 
+\begin_inset Formula $rg^{n}$
+\end_inset 
+
+ is the group element that, under 
+\begin_inset Formula $?$
+\end_inset 
+
+, maps 
+\begin_inset Formula $[[0,1]]\rightarrow[[1,1-1/2^{n}]]$
+\end_inset 
+
+.
+ We can now write a general group element as 
+\begin_inset Formula $\gamma\equiv g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+.
+ Applying the above process, it is relatively straightforward to see that
+ 
+\begin_inset Formula \[
+(?\gamma)(x)=(?g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+
+\end_inset 
+
+ To see the other leg of the homomorphism commuative diagram, we start by
+ observing that we can write 
+\begin_inset Formula $g^{n}(x)$
+\end_inset 
+
+ itself as a continued fraction: 
+\begin_inset Formula \[
+g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]\]
+
+\end_inset 
+
+ In the same vein, we have 
+\begin_inset Formula $(rg^{n})(x)=[1,n-1,x]$
+\end_inset 
+
+ and, with a slight abuse:
+\begin_inset Formula \[
+r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\]
+
+\end_inset 
+
+ Continuing this excercise, one finds that
+\begin_inset Formula \[
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+
+\end_inset 
+
+ which is recognizable as an element of the group 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+.
+ We present this group next.
+\layout Subsection
+
+The Modular Group Gamma or 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+
+\layout Standard
+
+The modular group gamma is normally defined by its canonical representation
+ 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+.
+ In this standard representation, a general group element is representated
+ by 
+\begin_inset Formula \[
+\gamma=\left(\begin{array}{cc}
+a & b\\
+c & d\end{array}\right)\]
+
+\end_inset 
+
+ with 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+ being integers, and 
+\begin_inset Formula $\det\gamma=ad-bc=1$
+\end_inset 
+
+.
+ Elements of this group are isomorphic to a certain set of Mobius transforms
+ on the upper-half complex plane; the isomorphism is given by 
+\begin_inset Formula $\gamma(x)=(ax+b)/(cx+d)$
+\end_inset 
+
+.
+ The group elements are generated by a pair of generators.
+ One generator generates the cyclic group of two elements 
+\begin_inset Formula $C_{2}\equiv\mathbb{Z}/\left(2\mathbb{Z}\right)$
+\end_inset 
+
+ and the other generates the subgroup 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset 
+
+.
+ One can choose several different representations for the generators; the
+ choice that is consistent with the previous section is 
+\begin_inset Formula \[
+g=\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)\;\textrm{ and }\; r=\left(\begin{array}{cc}
+-1 & 1\\
+0 & 1\end{array}\right)\]
+
+\end_inset 
+
+ This matrix representation of the generators can be used to manipulate
+ and evaluate continued fractions; indeeed, the modular group is known as
+ being one way to conveniently work with continued fractions.
+ So, for example, we've already noted above that
+\begin_inset Formula \[
+g([a_{1},a_{2},...])=[a_{1}+1,a_{2},...]\]
+
+\end_inset 
+
+ Similarly, the action of 
+\begin_inset Formula $r$
+\end_inset 
+
+ is can be written as 
+\begin_inset Formula \[
+r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
+\;[1,a_{1}-1,a_{2},..] & \;\textrm{\; for \;} & a_{1}\neq1\\
+\;[a_{2}+1,a_{3},...] & \textrm{\;\; for \;} & a_{1}=1\end{array}\right.\]
+
+\end_inset 
+
+The operator to insert a digit 
+\begin_inset Formula $n\geq1$
+\end_inset 
+
+ at the front of the continued fraction expansion is thus 
+\begin_inset Formula \[
+(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]\]
+
+\end_inset 
+
+which we can immediately verify as
+\begin_inset Formula \[
+(g^{n-1}rg)(x)=\left(\left(\begin{array}{cc}
+1 & 0\\
+n-1 & 1\end{array}\right)\left(\begin{array}{cc}
+-1 & 1\\
+0 & 1\end{array}\right)\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)\right):(x)=\left(\begin{array}{cc}
+0 & 1\\
+1 & n\end{array}\right):(x)=\frac{1}{n+x}\]
+
+\end_inset 
+
+ Here we introduced 
+\begin_inset Formula $:$
+\end_inset 
+
+ to denote the apply operator for the matrices; that is, 
+\begin_inset Formula \[
+\left(\begin{array}{cc}
+a & b\\
+c & d\end{array}\right):(x)=\frac{ax+b}{cx+d}\]
+
+\end_inset 
+
+ It should be clear that we can now build up the continued fraction as desired
+ with this insertion operator acting on zero: 
+\begin_inset Formula \[
+(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j-1,k,m,...,x]\]
+
+\end_inset 
+
+
+\layout Standard
+
+One can also find the append operator, which we find by examining
+\begin_inset Formula \[
+[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]\]
+
+\end_inset 
+
+ We use these to construct the appending operator 
+\begin_inset Formula $(g^{-1}rg^{k+1})(x)=(kx+1)/x$
+\end_inset 
+
+ which, for 
+\begin_inset Formula $k\geq1$
+\end_inset 
+
+, acts as 
+\begin_inset Formula \[
+[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]\]
+
+\end_inset 
+
+ We can thus build up continued fractions by appending at the back, starting
+ from 
+\begin_inset Formula $(g^{-1}rg)(x)=1/x=[x]$
+\end_inset 
+
+ as follows: 
+\begin_inset Formula \[
+(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
+
+\end_inset 
+
+ arriving at the same answer as before.
+\layout Subsection
+
+A Theorm about an Isomorphism
+\layout Standard
+
+Lets restate the above results using modern mathematical notation and language.
+ Let us denote with 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ the set of real numbers 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ that are represented by dyadic expansions; that is, 
+\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{D}\in\mathbb{R}_{D}$
+\end_inset 
+
+ which represents the real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ as the dyadic expansion 
+\begin_inset Formula $x_{D}$
+\end_inset 
+
+ with 
+\begin_inset Formula \[
+x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} \;\forall k\in\mathbb{Z}$
+\end_inset 
+
+.
+ Let us use the notation 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ to denote the representation of the real numbers as continued fractions,
+ that is, 
+\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{C}\in\mathbb{R}_{C}$
+\end_inset 
+
+ such that 
+\begin_inset Formula \[
+x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $a_{k}\in\mathbb{N}\;\forall k\in\mathbb{N}$
+\end_inset 
+
+.
+ Both of these sets are commonly treated as being isomorphic to the real
+ numbers; they are just different representations of the real numbers.
+ However, we can see that these two are not completely the same, because
+ the group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ has a different action on each.
+ In particular, the group generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ has the representation 
+\begin_inset Formula \[
+\begin{array}{c}
+g_{D}:\mathbb{R}_{D}\longrightarrow\mathbb{R}_{D}\\
+g_{D}:x\longmapsto x/2\end{array}\]
+
+\end_inset 
+
+ when acting on the set of dyadic numbers, whereas as this same group element
+ has the representation 
+\begin_inset Formula \[
+\begin{array}{c}
+g_{C}:\mathbb{R}_{C}\longrightarrow\mathbb{R}_{C}\\
+g_{C}:x\longmapsto x/(x+1)\end{array}\]
+
+\end_inset 
+
+ when acting on the set of continued fractions.
+ The other generator 
+\begin_inset Formula $r$
+\end_inset 
+
+ has the same representation on both sets: 
+\begin_inset Formula $r(x)=1-x$
+\end_inset 
+
+.
+\layout Description
+
+Theorm: The Minkowski Question Mark provides an isomorphism between these
+ two sets.
+ That is, we have the commuting diagram
+\layout Standard
+
+
+\begin_inset Formula \[
+\begin{array}{ccccc}
+ &  & \;\;\gamma_{C}\;\;\\
+ & \mathbb{R}_{C} & \longrightarrow & \mathbb{R}_{C}\\
+? & \downarrow & \bigcirc & \downarrow & ?\\
+ & \mathbb{R}_{D} & \longrightarrow & \mathbb{R}_{D}\\
+ &  & \gamma_{D}\end{array}\]
+
+\end_inset 
+
+ such that 
+\begin_inset Formula $?\circ\gamma_{C}=\gamma_{D}\circ?$
+\end_inset 
+
+ holds 
+\begin_inset Formula $\forall\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ To be more precise, we really should say that 
+\begin_inset Formula $(?\circ\gamma_{C})(x_{C})=(\gamma_{D}\circ?)(x_{D})\;\;\forall\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+ and 
+\begin_inset Formula $\forall x\in\mathbb{R}$
+\end_inset 
+
+ where 
+\begin_inset Formula $x_{D}\in\mathbb{R}_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{C}\in\mathbb{R}_{C}$
+\end_inset 
+
+ are both representations of the same 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Proof: We've already given the standard representations of 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ in these two spaces in previous sections, but we repeat these here just
+ so that this is all crystal-clear.
+ We first decompose an abstract group element 
+\begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+ in terms of the generators 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+, as usual: 
+\begin_inset Formula \[
+\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\]
+
+\end_inset 
+
+ Then, this 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ has the representation 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+ which is 
+\begin_inset Formula \[
+\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+
+\end_inset 
+
+ and it also has the representation 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+ which is 
+\begin_inset Formula \[
+\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+
+\end_inset 
+
+ and thus we are able to write 
+\begin_inset Formula $?(\gamma_{C}(x))=\gamma_{D}(?(x))$
+\end_inset 
+
+ as the isomorphism.
+ To properly complete this proof, we would need to apply induction, that
+ is, to show that if this equivalence holds for any one given 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ and 
+\begin_inset Formula $x$
+\end_inset 
+
+, then it also holds for 
+\begin_inset Formula $\gamma\gamma'$
+\end_inset 
+
+ for another 
+\begin_inset Formula $\gamma'\in SL(2,\mathbb{Z})$
+\end_inset 
+
+ and that it also holds for 
+\begin_inset Formula $x+y$
+\end_inset 
+
+ where 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset 
+
+.
+ We then would need to exhibit one group element for which this holds, and
+ thus, by induction, conclude that it holds for all group elements and reals.
+ One could try to give a very precise proof along these lines, but this
+ is outside the scope of this text.
+ It requires, among other things, talking about the completion of the rationals
+ by the reals, and, if we are not careful, might also invoke the Axiom of
+ Choice.
+ See also the remarks below.
+ QED.
+ 
+\layout Standard
+
+To summarize, we have exhibited an isomorphism of the real numbers onto
+ themselves that demonstrates that there are really two distinct and inequivalen
+t representations of the real numbers.
+ When we say distinct and inequivalent, we really mean it: these two representat
+ions transform radically differently under the Modular Group, although they
+ are both isomorphic to that abstract set we call the reals, and are, through
+ the Question Mark, isomorphic to each other.
+\layout Standard
+
+If we were better mathematicians, we would insist on a more watertight proof
+ of this isomorphism, rather than the assertion that this is so.
+ Unfortunately, we do not have the tools handy to provide this stronger
+ proof.
+ It is widely beleived that both the dyadics and the continued fractions
+ are isomorphic to the reals, but this shouldn't entirely be taken for granted.
+ In fact, we have already commited several grave errors.
+ For one, the set 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ is larger than the set 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+: as every student is told, the set 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ contains the elements 0.11111...
+ and 1.0000...
+ which are clearly distinct in 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ but represent the same number in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ We have something similar happening in 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ in that a rational has the multiple representations 
+\begin_inset Formula $[a_{0};a_{1},a_{2},...,a_{n},\infty,a_{n+2},a_{n+3},...]$
+\end_inset 
+
+ where it does not matter what we pick for 
+\begin_inset Formula $a_{n+2}$
+\end_inset 
+
+, etc.
+ Thus, one of our mistakes was to say 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ is isomorphic to 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ Instead, it is only homomorphic, and there exists a homomorphism 
+\begin_inset Formula $e:\mathbb{R}_{D}\rightarrow\mathbb{R}$
+\end_inset 
+
+ such that 
+\begin_inset Formula $e(0.1111...)=e(1.000...)$
+\end_inset 
+
+, thus implying that 
+\begin_inset Formula $Ker\; e$
+\end_inset 
+
+ is non-trivial.
+ We can then use 
+\begin_inset Formula $Ker\; e$
+\end_inset 
+
+ to induce the desired isomorphism between 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ The existance of this homomorphism is widely accepted, but I don't know
+ how to get there from first principles.
+ Similar remarks apply to the set 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+.
+ Thus, having to work with quotient spaces introduces complexity into the
+ correct proof.
+ To this volatile mix, we have to add considerations of about the completion
+ of the rationals by the reals.
+ Clearly, the dyadic tree and the Stern-Brocot tree are order-preserving
+ enumerations of the rationals.
+ The correct completion of the dyadic tree appears to be 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ whereas the correct completion of the Stern-Brocot Tree appears to be 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+, and these two completions are not 
+\emph on 
+prima facae
+\emph default 
+ equivalent.
+ If we can prove that there is only one, unique completion of the rationals
+ by the reals, then we have proved the existance of the Minkowski Question
+ Mark, and we thus arrive at the proof of the homomorphism of 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+.
+ But this is far from obvious from this vantage point.
+ One problem is that proofs of completion might surreptiously invoke the
+ Axiom of Choice; what one really wants are proofs of completion that start
+ from a clean base, such as Zermelo-Fraenkel, and arrive at the homomorphism
+ of 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+, without invoking the Axiom of Choice.
+ We start laying some of the groundwork for a proof of this type in a later
+ section.
+\layout Subsection
+
+Fractal Symmetry and the Subset 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes C_{2}$
+\end_inset 
+
+ of the Modular Group
+\layout Standard
+
+Every group element of 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ can be decomposed into a combination of the 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ generators, of the form 
+\begin_inset Formula $g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+ for integers 
+\begin_inset Formula $a_{k}\in\mathbb{Z}$
+\end_inset 
+
+.
+ We've already discovered the relationship between the modular group and
+ continued fractions, which we gave above as 
+\begin_inset Formula \[
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+
+\end_inset 
+
+ We saw that this relation gives us the isomorphisms of the Minkowski Question
+ Mark; let us now look at this a little more crefully and precisely, since,
+ among other things, we need to define the domain and range over which the
+ isomorphism is valid.
+\layout Standard
+
+First, let us consider the group elements with 
+\begin_inset Formula $a_{1}\geq0$
+\end_inset 
+
+, 
+\begin_inset Formula $a_{2}\geq1$
+\end_inset 
+
+, ...
+ 
+\begin_inset Formula $a_{N-1}\geq1$
+\end_inset 
+
+, 
+\begin_inset Formula $a_{N}\geq0$
+\end_inset 
+
+.
+ When the coefficients are zero or positive like this, we find that 
+\begin_inset Formula $\gamma(x)$
+\end_inset 
+
+ maps the unit interval into strictly small intervals; 
+\shape italic 
+i.e.
+
+\shape default 
+ that 
+\begin_inset Formula $0<\gamma(0),\gamma(1)<1$
+\end_inset 
+
+.
+ One endpoint of the interval are given by the rational 
+\begin_inset Formula $\gamma(0)=[a_{1}+1,a_{2},a_{3},...,a_{N-1}]$
+\end_inset 
+
+ (note the missing 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+).
+ The other endpoint is 
+\begin_inset Formula $\gamma(1)=[a_{1}+1,a_{2},a_{3},...,a_{N}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}\geq1$
+\end_inset 
+
+, although it must be written as 
+\begin_inset Formula $\gamma(1)=[a_{1}+1,a_{2},a_{3},...,a_{N-2}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}=0$
+\end_inset 
+
+.
+ This last special case is really just a reversal of the two endpoints.
+ For such a 'shrinking' 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+, we can now write the isomorphism of the question mark as 
+\begin_inset Formula \[
+?(\gamma(x))=?(\gamma(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
+
+\end_inset 
+
+
+\layout Standard
+
+The best way of understanding this isomorphism is to think of it as an isomorphi
+sm of intervals, where we can pick one end of the interval, but are a bit
+ more constrained in picking the other end.
+ That is, we can pick an arbitrary 
+\begin_inset Formula $\gamma(0)=p/q\in\mathbb{Q}$
+\end_inset 
+
+.
+ We get the other end of the interval by picking 
+\begin_inset Formula $a_{N}\in\mathbb{N}$
+\end_inset 
+
+ a positive integer.
+ Having thus specified the interval, we can, for good measure, choose to
+ exchange the endpoints, that is, pick one of 
+\begin_inset Formula $\left\{ 1,r\right\} \in C_{2}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+XXXX explain this: there are two ways to enumerate the tree remaps: tree-root
+ to -tree-root.
+ But the intervals are inf and sup of all the elements in the tree.
+ The alternate map is to specify the inf of the tree (which is actually
+ a real not a rational!!!) in which case one has a choice of tree roots,
+ which are Z.
+ The mirror reflection of the tree is of couse 
+\begin_inset Formula $C_{2}$
+\end_inset 
+
+.
+ XXXX reword the above XXXX 
+\layout Standard
+
+To summarize, this set of isomorphisms of the question mark can be enumerated
+ by 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes C_{2}$
+\end_inset 
+
+, which we'd like to call the fundamental set of symmetries.
+ Note that this property of being able to freely pick one endpoint, but
+ being a bit more contstrained with the other is a very important property
+ of this symmetry.
+ 
+\series bold 
+\emph on 
+This property is the fundamental property of self-similar objects and fractals
+ in general: one can freely pick which copy one is to be self-similar with,
+ but then after that, one has little further freedom.
+
+\series default 
+\emph default 
+ This is what makes fractals be what they are.
+ 
+\layout Standard
+
+So far, we've only enumerated some, but not all of the modular group.
+ The inverse of our generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ is 
+\begin_inset Formula $g^{-1}=\left(\begin{array}{cc}
+1 & 0\\
+-1 & 1\end{array}\right)$
+\end_inset 
+
+.
+ For the group element 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+ we can quickly see that the inverse is 
+\begin_inset Formula $\gamma^{-1}=g^{-a_{N}}rg^{-a_{N-1}}r...rg^{-a_{1}}$
+\end_inset 
+
+.
+ Its easy to see that these define the inverse mappings of smaller intervals
+ onto the unit interval.
+ Note that one needs to be careful when working with 
+\begin_inset Formula $\gamma^{-1}(x)$
+\end_inset 
+
+ because this has poles that are just outside of the interval of the mapping.
+ That is, the domain of the isomorphism is defined only on the interval
+ of the mapping, and not the whole unit interval (its the range, not the
+ domain, that is the whole unit interval).
+ These inverse mappings can also be enumerated by 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes C_{2}$
+\end_inset 
+
+, of course.
+ 
+\layout Standard
+
+All of the remaining group elements that we haven't yet discussed are those
+ with a mixture of positive and negative values for the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+.
+ These group elements can be obtained by alternately concatenating interval-shri
+nking and interval-expanding group elements.
+ One has to be considerably more careful in keeping track of the domains
+ and ranges of each mapping.
+ We claim (without proof at this time) that these types of mappings do not
+ introduce any new types of intervals, and so enumeration originally provided,
+ 
+\emph on 
+viz.
+ 
+\emph default 
+
+\begin_inset Formula $(\mathbb{Q}\otimes\mathbb{N}\otimes C_{2})\oplus(\mathbb{Q}\otimes\mathbb{N}\otimes C_{2})$
+\end_inset 
+
+ is essentially unchanged.
+
+\emph on 
+ 
+\layout Standard
+
+ToDo: give for example 
+\begin_inset Formula $(rg^{-2}rg^{2})(x)=x+2$
+\end_inset 
+
+ and discuss what this means for the question mark, and how we should treat
+ this (to modulo or not to modulo?)
+\layout Standard
+
+Note also that if we limit ourselves to alternately shrinking and growing
+ interval maps that are stricly contained one inside the other, then we
+ find a proper subroup of the modular group, whose group elements are now
+ enumerated by pairs of intervals or .xxx.
+ be careful here .
+ Again, the domain and range of these sub-symmetries are now limited.
+ 
+\layout Standard
+
+Thus I think we can now conclude that 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ is an isomorphism of 
+\begin_inset Formula $?$
+\end_inset 
+
+, mapping the unit interval into a subinterval, completing the proof.
+ xxxx finish writing these conclusions.
+\layout Subsection
+
+Hyperbolic Rotations of Binary Trees
+\layout Standard
+
+Note that by imposing the modular group symmetry on the real number line,
+ we've essentially introduced a hyperbolic manifold that is homomorphic
+ to the real-number line.
+ The existance of this hyperbolic manifold and its negative curvature esentially
+ 'explains' why trajectories of iterated functions have positve Lyapunov
+ exponents.
+ Of course they do, since thier 'true' trajectories should be consideed
+ to live on the hyperbolic manifold rather than on the real-number line.
+ We try to make this clear below.
+ 
+\layout Standard
+
+One can get a much better sense of the hyperbolic nature induced by this
+ symmetry group by looking at the discrete 'rotations' of the binary tree.
+ Rotations are frequently used in computer science algorithms to rebalance
+ finite binary trees while at the same time preserving the order of the
+ elements in the tree.
+ We can think of a rotation as kind of like draping the flexible, droopy
+ tree over a peg, letting gravity do its job, and declaring the node on
+ the peg as the new root of the tree.
+ In fact, we have to do a bit of minor surgery to get this right; we ave
+ to cut a branch and re-attach it at the free spot where the old root used
+ to be.
+ 
+\layout Standard
+
+Thus for example, lets rotate the dyadic tree so that the node at 1/4 becomes
+ the new root.
+ We do this by chopping off the tree rooted at 3/8'ths and re-attaching
+ at as the left subtree of the old root at 1/2.
+ (xxx we desperately need a diagram here) Denoting this rotation with the
+ symbol 
+\begin_inset Formula $\theta$
+\end_inset 
+
+, we have an isomorphism of trees: that is, 
+\begin_inset Formula \[
+\theta\left(\frac{1}{2}\right)=\frac{1}{4}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\theta\left(\frac{1}{4}\right)=\frac{1}{8}\;\;\;\;\;\;\;\;\;\;\;\;\;\;\theta\left(\frac{3}{4}\right)=\frac{1}{2}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\theta\left(\frac{1}{8}\right)=\frac{1}{16}\;\;\;\;\;\theta\left(\frac{3}{8}\right)=\frac{3}{16}\;\;\;\;\;\theta\left(\frac{5}{8}\right)=\frac{3}{8}\;\;\;\;\;\theta\left(\frac{7}{8}\right)=\frac{3}{4}\]
+
+\end_inset 
+
+ and the rest of the tree hanging as normal under these nodes.
+ Its not hard to see that this rotation is order-preserving, that is, 
+\begin_inset Formula $\theta(x)<\theta(y)$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $x<y$
+\end_inset 
+
+ and ths monotonic, one-to-one and onto.
+ This is the strecth-and-shrink map
+\begin_inset Formula \[
+\theta(x)=\left\{ \begin{array}{ccc}
+x/2 & \;\textrm{ for \;} & 0\leq x\leq1/2\\
+x-1/4 & \;\textrm{ for \;} & 1/2\leq x\leq3/4\\
+2x-1 & \;\textrm{ for \;} & 3/4\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ which is stretching in one interval and shrinking in another.
+ Since we've seen that the Modular Group maps intervals to intervals, some
+ stretching and some shrinking, we immediately recognize that three group
+ elements were used to construct this map.
+ Since we've already enumerated the modular group in terms of maps of intervals,
+ we see that the three different group elements making up this map are the
+ one that re-parented the 1/8 tree at 1/4, the 3/8 tree at 5/8 and the 3/4
+ tree at 7/8.
+ In terms of tree surgery, it is enough to specify these three remapings,
+ as the rest of the binary trees hanging below are structurally unaltered.
+ Note that the 3/8'ths to 5/8'ths mapping does not change the denominator:
+ this map neither stretches nor shrinks, its a lateral translation.
+ 
+\layout Standard
+
+Note that the map is clearly invertible, with its inverse being 
+\begin_inset Formula \[
+\theta^{-1}(x)=xxx\]
+
+\end_inset 
+
+ Notice that the shrinking portion of the map is just the inverse of the
+ stretching portion of the map.
+ Iterating these maps just makes them even more hyperbolic.
+ The figure
+\begin_inset LatexCommand \ref{Theta Maps}
+
+\end_inset 
+
+ shows some of these, with crosses denoting the endpoints of the straight-line
+ segments.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{Theta Maps}
+
+\end_inset 
+
+
+\begin_inset Graphics
+	filename theta.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows 
+\begin_inset Formula $\theta^{n}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $n=-1$
+\end_inset 
+
+ and positive 
+\begin_inset Formula $n$
+\end_inset 
+
+ up to 7.
+ Note that these maps are symmetric around the 
+\begin_inset Formula $y=1-x$
+\end_inset 
+
+ line, and that the endpoints of each segment lie on the hyperbola 
+\begin_inset Formula $xy=2^{-n-2}$
+\end_inset 
+
+, with the exception of the enpoints at 0 and 1.
+ Since each map contains more segments, each map becomes a better approximation
+ to the hyperbola.
+ 
+\end_inset 
+
+
+\layout Standard
+
+The reflection map 
+\begin_inset Formula $r(x)=1-x$
+\end_inset 
+
+ conjugates 
+\begin_inset Formula $\theta$
+\end_inset 
+
+ to its inverse, that is, 
+\begin_inset Formula $r\theta^{n}r=\theta^{-n}$
+\end_inset 
+
+ .
+ 
+\layout Standard
+
+We demonstate a more complex mapping by rebalancing the binary tree so that
+ the 3/8 node becomes root.
+ This requires two tree movements: switching the 7/16 node so that it lives
+ under 1/2, and switching the 5/16 node so that it lives under the now empty
+ slot at 1/4.
+ This is showin in figure (XXX need that figure.
+ ) This rotation is given by the mapping 
+\begin_inset Formula \[
+\eta(x)=\left\{ \begin{array}{ccc}
+x & \;\textrm{ for \;} & 0\leq x\leq1/4\\
+x/2+1/8 & \;\textrm{ for \;} & 1/4\leq x\leq3/4\\
+2x-1 & \;\textrm{ for \;} & 3/4\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ xxx stuff
+\layout Standard
+
+xxx
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+eta map 
+\begin_inset Graphics
+	filename eta.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows two different hyperbolic sequences, one for the iterated
+ eta, and also 
+\begin_inset Formula $r\eta r\eta$
+\end_inset 
+
+ and that sequence/
+\end_inset 
+
+
+\layout Standard
+
+Looking at these, it becomes clear that one can insert hyperbolas wherever
+ one wishes, as long as the resulting map is monotonically increasing.
+ 
+\layout Standard
+
+And so we can see the negative curvature.
+ we also have an explicit metric on this space.
+ Note that this in turn induces a metric on the Stern-Brocot Tree.
+ We can consider the path of 'geodesics' under this map, say of iterating
+ 
+\begin_inset Formula $\theta$
+\end_inset 
+
+over and over.
+ clearly these 'geodesics' separate.
+\layout Standard
+
+Note that this is essentially a model of two-dimensional space-time, where
+ the Lorentz transformations are given by elements of the modular group.
+\layout Standard
+
+We of course are now begging to ask about 3+1 
+\begin_inset Quotes eld
+\end_inset 
+
+spacetime
+\begin_inset Quotes erd
+\end_inset 
+
+ generated by the complex numbers, (xxx this is actually called the Picard
+ group see Fricke and Klien, circa 1897.) which is generated by 
+\begin_inset Formula $SL(2,ZxZ)$
+\end_inset 
+
+ which is a subgroup of 
+\begin_inset Formula $GL(2,C)$
+\end_inset 
+
+.
+ Studying how rotations work on this manifold would be interesting, as well
+ as defining precisely its relation to minkowski spacetime.xxx move this
+ to the todo-list.
+ Higher dimensional manfolds seem to be generated by quaternions and the
+ octonians.
+ We also can't help but take a general pot-shot and exclaim 'of course quantum
+ mechanics is chaotic: Hamiltonian evolution takes place on a fundamentally
+ hyperbolic manifold, viz.
+ the Minkowski spacetime'.
+ The wave functions will of course be fractal.
+ In some freaky way, this is also why we get quantization: we don't truly
+ have the general symmetries, we have instead interval-mapping symmetries
+ that are limited to a discrete (but infinite) set of intervals.
+ 
+\layout Subsection
+
+Symmetries Induced on 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ (and 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+?)
+\layout Standard
+
+Note that the correspondances presented here induce fractal isomorphisms
+ of 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ onto itself.
+ This was already hinted at in the previous section, where we were trying
+ to just plain-old count the rationals, and not getting what every middle
+ and high-school teacher teaches students to expect.
+ This symmetry would also imply a symmetry on the closure in reals 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ Exactly what it implies for the non-Archimedean closures 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+ is not yet clear to me.
+ This symmetry is never made use of in classical analysis.
+ 
+\layout Standard
+
+The field structure of the rationals in turn induces a field structure on
+ a certain subroup of the modular group, specfically, the interval-mapping
+ subgroup.
+ Albeit this would be a highly fractal structure ...
+ I have no clue of what this field structure implies for modular forms or
+ goodies like the Wierstrass elliptic integrals, etc.
+ This would be a great TBD with a whole-lotta partyin goin on.
+\layout Subsection
+
+Fundamental Domain
+\layout Standard
+
+Blah Blah.
+ The hyperbolic plane, the tesselation of the hyperbolic plane by hyperbolic
+ triangles.
+ 
+\layout Section
+
+Symmetry of the Mandelbrot Set and the Circle Map
+\layout Standard
+
+To be written.
+ First we need to explain how to count with Farey numbers on the M-Set.
+ Here is a picture stolen from Robert L.
+ Devaney's website 
+\begin_inset LatexCommand \url[The Fractal Geometry of the Mandelbrot Set ]{}
+
+\end_inset 
+
+ :
+\layout Standard
+
+
+\begin_inset Graphics
+	filename farey-bud-numbers.gif
+
+\end_inset 
+
+
+\layout Standard
+
+This mapping and method of counting on the buds is well-known in the literature
+ and is explored in many ways.
+\layout Standard
+
+Next we note that enumerating the group elements of the modular group as
+ 
+\begin_inset Formula $\mathbb{Q\times\mathbb{N}}$
+\end_inset 
+
+ plays directly into the celebrated self-similarity of the Mandelbrot set.
+\layout Standard
+
+What does this mean for the symmetries of the Mandelbrot set? it means that
+ the modular group maps buds to buds.
+ Note, however, that the 
+\begin_inset Formula $\mathbb{Q\times\mathbb{N}}$
+\end_inset 
+
+ parameterization of the modular group means that one can map one bud onto
+ any another, but that the mapping has to be onto the whole bud, and not
+ just a portion of it.
+ Put another way, it is a mapping of intervals to intervals.
+ However, we can't just map any-old-interval anywhere we want.
+ We can map an interval to any starting point that we wish (this is the
+ 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ part of the symmetry, but after specifying the starting point, we have
+ only a discrete set of intrvals we can map to: this is the 
+\begin_inset Formula $\mathbb{N}$
+\end_inset 
+
+ part of the enumeration.
+ The buds appear discretely on the boundaries of the main cardiod.
+\layout Subsection
+
+Douady-Hubbard Rays
+\layout Standard
+
+Douady Hubbard rays are a mapping of the unit circle to the boundary of
+ the Mandelbrot Set.
+ One of the properties is that a pair of rays pinches off each bud of the
+ M-Set.
+ Note that both of the rays occur at external angles that are also rationals.
+ This now induces some additional symmetries on the rational numbers, since
+ each bud can be labelled with a rational, and thus, for each rational,
+ we associate the upper and lower rays.
+ These two map are highly discontinuous.
+ But that is OK, because the discontinuities pinch off the bud in the middle.
+ We use the code-word substituion techniques of Doaudy-Hubbard to paste
+ into the discontinuities.
+ Since we are free to paste in any code-word desired, we have, in a certain
+ sense, total and complete randomness, which is then propagated everywhere
+ through the self-similarity.
+ 
+\layout Standard
+
+Here is a bizarro philosophical thought: we have complete freedom to choose
+ the codewords to be pasted into the period-doubling symmetry, in the sense
+ of philosophical free-will: we can choose as we wish.
+ The result of the application of our free will is multiplied through the
+ modular group so that choice now appears everywhere among the rationals.
+ But we know that the closure of rationals is the reals, and we know that
+ the reals are 
+\begin_inset Quotes eld
+\end_inset 
+
+unknowable
+\begin_inset Quotes erd
+\end_inset 
+
+ in the Turing-computable sense.
+ Thus, we conclde that the application of free-choice results in something
+ unknowable.
+ How strange.
+ 
+\layout Standard
+
+Here's how code-word substitution works: start with the dyadic (base-2)
+ expansion for 
+\begin_inset Formula $0\leq x\leq1$
+\end_inset 
+
+
+\begin_inset Formula \[
+x=\sum_{n=1}^{\infty}\frac{a_{n}}{2^{n}}=0.a_{1}a_{2}a_{3}...\]
+
+\end_inset 
+
+ where the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ can only take on the values 0 and 1.
+ Then pick any two integers 
+\begin_inset Formula $h,l\in\mathbb{N}$
+\end_inset 
+
+ and a third integer 
+\begin_inset Formula $m$
+\end_inset 
+
+ such that 
+\begin_inset Formula $h,l<2^{m}$
+\end_inset 
+
+ is satisfied (alternately, we start by picking 
+\begin_inset Formula $m$
+\end_inset 
+
+ first, then picking 
+\begin_inset Formula $h,l$
+\end_inset 
+
+ to satisfy this).
+ We then substitute the value of 
+\begin_inset Formula $0$
+\end_inset 
+
+ in the dyadic expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+ with 
+\begin_inset Formula $l$
+\end_inset 
+
+ and the binary value of 
+\begin_inset Formula $1$
+\end_inset 
+
+ in the expansion with 
+\begin_inset Formula $h$
+\end_inset 
+
+, padding each appropriately:
+\begin_inset Formula \[
+B_{h,l,m}(x)=\sum_{n=1}^{\infty}\frac{ha_{n}+l(1-a_{n})}{2^{n}2^{nm}}\]
+
+\end_inset 
+
+ which we now see as a highly discontinuous function of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ To get a better idea of why its called 
+\begin_inset Quotes eld
+\end_inset 
+
+codeword substitution
+\begin_inset Quotes erd
+\end_inset 
+
+, lets work an example.
+ Let 
+\begin_inset Formula $x=0.10101010101..._{2}$
+\end_inset 
+
+ and pick 
+\begin_inset Formula $m=4$
+\end_inset 
+
+ and 
+\begin_inset Formula $h=7$
+\end_inset 
+
+ and 
+\begin_inset Formula $l=4$
+\end_inset 
+
+.
+ Note that, in binary, 
+\begin_inset Formula $h=0111_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $l=0100_{2}$
+\end_inset 
+
+ and so we have
+\begin_inset Formula \[
+B_{7,3;4}(0.1010101..._{2})=0.0111\;0100\;0111\;0100\;0111\;..._{2}\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Lets now work backwards and get the question mark: thus
+\begin_inset Formula \[
+?([2,1,1,1,...])=0.1010101..._{2}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+?([2,3,1,1,3,3,1,1,3,3,1,1,...])=B_{7,3;4}(0.1010101..._{2})\]
+
+\end_inset 
+
+ blah blah why are we doing this again?
+\layout Subsection
+
+Islands, Sinai's Tongues
+\layout Standard
+
+blah blah write this section.
+\layout Standard
+
+See the pictures of phase-locking in the Circle map at the URL 
+\begin_inset LatexCommand \htmlurl[Circle Map]{http://www.linas.org/art-gallery/basic/basic.html}
+
+\end_inset 
+
+ and notice the similarities to the gaps pictured at 
+\begin_inset LatexCommand \htmlurl[Farey Room Pictures]{http://www.linas.org/art-gallery/farey/fthumb.html}
+
+\end_inset 
+
+ Yada Yada.
+ The mode-locked regions are called Sinai's toungues.
+ This implies that the Modular Group is the symmetry group of the phase
+ locked-loop (the circle map) as well as the Mandelbrot Set.
+ 
+\layout Standard
+
+Notice that the mode-locked regions of the circle map are exactly those
+ regions that are *not* chaotic: in other words, these are the so-called
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+islands of order
+\begin_inset Quotes erd
+\end_inset 
+
+ that can be found in the 
+\begin_inset Quotes eld
+\end_inset 
+
+sea of chaos
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ One of course sees such islands in other iterated equations, such as the
+ iterated Feigenbaum map, and one is naturally lead to ask, is the modular
+ group the symmetry group that maps islands into islands, for any period
+ doubling map? What about the converse? Are there any maps, with islands,
+ that do not have the Modular Form symmetry? 
+\layout Standard
+
+What about Misiurewicz points? Misiurewicz points on the M-set are the pre-perio
+dic points.
+ As such we expect to be able to label them in some way with xxx ???
+\layout Subsection
+
+3-period Mode Locking
+\layout Standard
+
+Note that some chaotic maps are seen to have period-doubling paths to chaos
+ that include a factor of three: viz.
+ 3,6,12,24,...
+ I'm not sure I think this is a manifestation of the fact that the modular
+ group can be written as the free product of the two and three cycles 
+\begin_inset Formula $C_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $C_{3}$
+\end_inset 
+
+.
+\layout Subsection
+
+Iterating on the Hyperbolic Plane
+\layout Standard
+
+Of course, now that we know about the modular group and the hyperbolic plane,
+ we state that we really want to study the iteration of one-dimensional
+ maps like the logistic equation or the tent map by studying how it bounces
+ around on the fundamental domain.
+ That is, each time we iterate a 1-D map, we are bounced to somewhere else
+ on the unit interval.
+ This point on the unit interval is included in an enumerable set of line
+ segments, which can be maped back to the whole unit interval via the modular
+ group.
+ Thus, a single point is a representative element of the equivalence class
+ of all the points that the modular group maps it to.
+ We want to study how the logistic equation acts on these equivalence classes,
+ instead of asking how it acts on single points.
+\layout Standard
+
+Blah Blah Blah.
+ Define what equivalence class means when a group acts on a set.
+ viz define the quotient space.
+ 
+\layout Standard
+
+This is essentially how we get related to Julia sets.
+ After we iterate a map like the logistic map once, we then ask what other
+ points are in the same equivalence class, under the action of the modular
+ group.
+ That is, we now studay iteration in the quotient space, where the modular
+ group provides the quotient.
+ This quotient map is just the map of all hyperbolic triangles back to the
+ fundamental domain.
+ And so we really study iteration in this quotient space.
+ Blah blah.
+ Provide pretty pictures.
+ We now ask what do the points on the boundary of the fundamental domain
+ correspond to, blah blah, these are the Misiurewicz points, which is why
+ they relate to Julia sets; they essentially paste together the pieces.
+ 
+\layout Section
+
+Distributions 
+\layout Standard
+
+Blah blah blah.
+ Its all interconnected, isn't it?
+\layout Subsection
+
+Distribution of Rationals in the Farey Tree
+\layout Standard
+
+One way to enumerate all of the rationals is by placing them on the Farey
+ Tree (or the Stern-Brocot Tree).
+ One can prove that the Farey Tree enumerates all of the rationals in the
+ unit interval exactly once (Proof at 
+\begin_inset LatexCommand \htmlurl[Cut-the-Knot]{http://www.cut-the-knot.org/blue/Stern.shtml}
+
+\end_inset 
+
+).
+ However, the distribution of the rationals on the Farey Tree is highly
+ non-uniform, if we walk that tree breadth-first.
+ The graph below shows that distribution.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename fdist-65K.png
+
+\end_inset 
+
+
+\layout Standard
+
+Superficially, the shape of this curve seems independent of the bining;
+ although, upon very close inspection, one can see that is not quite true.
+ In particular, one can deduce that in the limit of an 'infinite' number
+ of bins, that this 'curve' is equal to exactly zero at every rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+, and infinite at every irrational.
+ But no matter; for a finite number of bins, we can proceed.
+\layout Standard
+
+This shape is remarkably suggestive.
+ It appears to be the derivative 
+\begin_inset Formula $?'(x)=d?(x)/dx$
+\end_inset 
+
+ of the continued fraction mapping, although using classical analytic techniques
+, this derivative is not definable.
+ Indeed, performing a simple numeric integral of the above, and comparing
+ it to the exact expression shows a perfect match, as witnessed in the graph
+ below.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename farey-integral.png
+
+\end_inset 
+
+
+\layout Standard
+
+The continued fraction mapping is infinitely differentiable on every rational,
+ and all derivatives vanish at every rational; yet the mapping is strictly
+ montonically increasing.
+ Just examing the graph visually suggests that the derivatives must be non-zero
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+somewhere
+\begin_inset Quotes erd
+\end_inset 
+
+, although its hard to define how to value these derivatives.
+ Yet, visually comparing the Farey mapping to the distribution of the Farey
+ Fractions, it seems that the distribution of Farey's might be a good estimate
+ of that first derivative.
+ Clearly, classical analytic techniques are sorely lacking and inapplicable;
+ we need to find a set of tools where we can talk about and manipulate the
+ so-called 'first derivative' in a meaningful way.
+\layout Standard
+
+Below is another curious picture, where we've relabelled the x axis by passing
+ it through 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+; one could say that it is a picture of the Jacobian 
+\begin_inset Formula $(?'\circ?^{-1})(x)$
+\end_inset 
+
+ 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename fdist-jaco.png
+
+\end_inset 
+
+
+\layout Standard
+
+This function appears to vanish only at the dyadics.
+ Note the superficial resemblance of the profile to the Takagi curve.
+ By visually comparing this function and the Takagi curve (also called the
+ 
+\emph on 
+blancmange curve
+\emph default 
+), one can intuitively sense that there must be some tangent-space-to-Exp-space
+ type relation between the two.
+ The trick is to write down this relation.
+ 
+\layout Standard
+
+This is really a very curious circumstance.
+ The above graphs show only the distribution of a finite number of points
+ (they were, after all, computer generated).
+ A finite set of points on the real number line is zero; yet we are using
+ it to induce a measure that can be used for integration.
+ How is this? The statistical properties of a finite sampling provide us
+ with information about the limit.
+ Its as if we were working with an anti-Cantor-set construction: we start
+ with a dust, and average over intervals to discover analytic properties.
+\layout Subsection
+
+The Takagi-Landsberg Curve
+\layout Standard
+
+The Takagi-Landsberg curve was first explored by Teiji Tagaki, circa 1903
+ as an example of a continuous-everywhere, differentiable-nowhere curve
+ 
+\begin_inset LatexCommand \cite{key-3}
+
+\end_inset 
+
+.
+ It is constructed by positive mid-point displacements of straight line
+ segments, that is, by 'fractally' bumping a line segment upwards by an
+ increasingly smaller displacement (xxxx we should diagram the standard
+ contruction here).
+ Equivalently, one assigns geometrically smaller displacements to each level
+ of the dyadic tree; that is, one picks some 
+\begin_inset Formula $w<1$
+\end_inset 
+
+, and assigns to each dyadic number 
+\begin_inset Formula $x=p/2^{n}$
+\end_inset 
+
+ the value 
+\begin_inset Formula \[
+t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
+
+\end_inset 
+
+ One extends this curve to all reals by 'linear interpolation' between the
+ dyadic values, as 
+\begin_inset Formula \[
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+ is the triangle function:
+\begin_inset Formula \[
+\tau(x)=\left\{ \begin{array}{ccc}
+2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
+2(\left\lfloor x+1\right\rfloor -x) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\]
+
+\end_inset 
+
+ Note that insofar as the triangle curve is differentiable, we could say
+ that the Takagi-Landsberg curve is differentiable (along 
+\begin_inset Formula $x$
+\end_inset 
+
+) as well, in that it has both leftward-going and rightward-going derivatives,
+ although these derivatives differ at each dyadic point.
+ We can choose to define the derivative 
+\begin_inset Formula $dt_{w}/dx$
+\end_inset 
+
+ by passing the 
+\begin_inset Formula $d/dx$
+\end_inset 
+
+ past the usmmation above, to act on the triangle-wave, to give a square
+ wave.
+ Note that 
+\begin_inset Formula $t_{1/4}(x)=4x(1-x)$
+\end_inset 
+
+ is a parabola (the mid-point subdivision construction of a parabola is
+ attributed to Archimedes
+\begin_inset LatexCommand \cite{key-3}
+
+\end_inset 
+
+).
+ A prototypical Takagi-Landsberg curve is pictured below:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename takagi.png
+	subcaption
+	subcaptionText "this figure if takagi has a caption, right?"
+
+\end_inset 
+
+
+\layout Standard
+
+One can generalize this curve in a variety of ways, for example, by replacing
+ the tent 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+ with any 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ on the unit interval.
+ To get a continuous Takagi curve, one must have 
+\begin_inset Formula $f$
+\end_inset 
+
+ continuous and 
+\begin_inset Formula $f(0)=f(1)$
+\end_inset 
+
+.
+ Discontinuous functions 
+\begin_inset Formula $f$
+\end_inset 
+
+ yeild curves that are discontinuous everywhere: for example, the square
+ wave 
+\begin_inset Formula $\sigma(x)=d\tau/dx=1-2\left\lfloor 2x\right\rfloor $
+\end_inset 
+
+ gives the self-similar shape shown below.
+\layout Standard
+
+Of the many possible different choices for 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+, the traingle wave is special in that it stays self-similar through iteration;
+ that is, 
+\begin_inset Formula $(\tau\diamond\tau)(x)\equiv\tau^{2}(x)=\tau(2x)$
+\end_inset 
+
+ and generally, iterating on in 
+\begin_inset Formula $k$
+\end_inset 
+
+ times gives 
+\begin_inset Formula $\tau^{k}(x)=\tau(2^{k}x)$
+\end_inset 
+
+.
+ Thus, we may write 
+\begin_inset Formula \[
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau^{k}(x)\]
+
+\end_inset 
+
+ In passing, we should also note another curious sum 
+\begin_inset Formula \[
+e_{w}(x)=\sum_{k=0}^{\infty}\frac{w^{k}\tau^{k}(x)}{k!}\]
+
+\end_inset 
+
+ Also in passing, we note that the iterated tent map is a shift-state of
+ the Bernoulli Operator.
+\layout Subsection
+
+Symmetries of the Takagi-Landsberg Curve
+\layout Standard
+
+In this section, we will show that the Takagi-Landsberg curve transforms
+ as a three-dimensional representation of the modular group.
+ This provides an example where the action of the group can be precisely
+ and completely specified.
+ Consider first the generator that is the interval contraction 
+\begin_inset Formula $g:[0,1]\rightarrow[0,1/2]$
+\end_inset 
+
+.
+ It acts on the Takagi map as
+\begin_inset Formula \[
+\left[gt_{w}\right](x)=t_{w}\left(\frac{x}{2}\right)=x+wt_{w}(x)\]
+
+\end_inset 
+
+ Iterating on this generator gives 
+\begin_inset Formula \[
+\left[g^{n}t_{w}\right](x)=t_{w}\left(\frac{x}{2^{n}}\right)=\frac{x}{2^{n-1}}\left(\frac{1-2^{n}w^{n}}{1-2w}\right)+w^{n}t_{w}(x)\]
+
+\end_inset 
+
+ Next, we notice that the action of 
+\begin_inset Formula $g$
+\end_inset 
+
+ on the expression 
+\begin_inset Formula $a+bx+ct_{w}(x)$
+\end_inset 
+
+ is linear and is also closed, thus forming a vector space.
+ That is, we have discovered that the Takagi Curve transforms under the
+ three-dimensional represention of the modular group.
+ To be explicit, we write a general element as the dot-product of a column
+ of real numbers times a row of basis vectors 
+\begin_inset Formula \[
+a+bx+ct_{w}(x)=\left(\begin{array}{ccc}
+1 & \;\; x & \;\; t_{w}(x)\end{array}\right)\left(\begin{array}{c}
+a\\
+b\\
+c\end{array}\right)\]
+
+\end_inset 
+
+ Then, we find that 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ have the representations 
+\begin_inset Formula \[
+g=\left(\begin{array}{ccc}
+\frac{1}{2}\; & 0\; & 0\\
+0 & \frac{1}{2} & 1\\
+0 & 0 & w\end{array}\right)\;\textrm{ and \;}r=\left(\begin{array}{ccc}
+1\; & 1\; & 1\\
+0 & -1\; & 0\\
+0 & 0 & -1\end{array}\right)\]
+
+\end_inset 
+
+ by which we mean, for example, 
+\begin_inset Formula \[
+\left[gt_{w}\right](x)=\left(\begin{array}{ccc}
+1 & \;\; x & \;\; t_{w}(x)\end{array}\right)\left(\begin{array}{ccc}
+\frac{1}{2}\; & 0\; & 0\\
+0 & \frac{1}{2} & 1\\
+0 & 0 & w\end{array}\right)\left(\begin{array}{c}
+0\\
+0\\
+1\end{array}\right)\]
+
+\end_inset 
+
+ and also that 
+\begin_inset Formula \[
+\frac{x}{2}=\left(\begin{array}{ccc}
+1 & \;\; x & \;\; t_{w}(x)\end{array}\right)\left(\begin{array}{ccc}
+\frac{1}{2}\; & 0\; & 0\\
+0 & \frac{1}{2} & 1\\
+0 & 0 & w\end{array}\right)\left(\begin{array}{c}
+0\\
+1\\
+0\end{array}\right)\]
+
+\end_inset 
+
+ which we recognize as the dyadic representation 
+\begin_inset Formula $g_{D}$
+\end_inset 
+
+ from previous sections.
+ The Takagi Curve is then seen to commute with the generator 
+\begin_inset Formula $(gt_{w})(x)=(t_{w}g)(x)$
+\end_inset 
+
+ in this representation.
+ By contrast, the curve has mirror symmetry, and thus kills the reflection
+ operator: 
+\begin_inset Formula $(t_{w}r)(x)=t_{w}(x)\neq(rt_{w})(x)=1-t_{w}(x)$
+\end_inset 
+
+.
+\layout Standard
+
+Thus, in the above, we have demonstrated the explict symmetry relationship
+ of the Takagi Curve, and furthermore, have indicated that it, together
+ with 1 and 
+\begin_inset Formula $x$
+\end_inset 
+
+, are the basis vectors of a three-dimensional representation of the modular
+ group.
+ The matrix representations of 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ make it very easy to compute how the curve transforms under any given element
+ of the modular group.
+ 
+\layout Description
+
+Theorm: Every real value of 
+\begin_inset Formula $w$
+\end_inset 
+
+ generates a unique, inequivalent representation of the modular group.
+ 
+\layout Description
+
+Proof: If two representations were equivalent, then we could find a matrix
+ 
+\begin_inset Formula $U$
+\end_inset 
+
+ such that 
+\begin_inset Formula $g_{v}=U^{-1}g_{w}U$
+\end_inset 
+
+ for 
+\begin_inset Formula $v\neq w$
+\end_inset 
+
+ and 
+\begin_inset Formula $r=U^{-1}rU$
+\end_inset 
+
+.
+ We try to do this by brute force.
+ Let 
+\begin_inset Formula \[
+U=\left(\begin{array}{ccc}
+a & b & c\\
+d & e & f\\
+k & l & m\end{array}\right)\]
+
+\end_inset 
+
+ Equating 
+\begin_inset Formula $rU=Ur$
+\end_inset 
+
+ we find immediately that 
+\begin_inset Formula $d=k=0$
+\end_inset 
+
+.
+ Next, equating 
+\begin_inset Formula $Ug_{v}=g_{w}U$
+\end_inset 
+
+ one finds that 
+\begin_inset Formula $l=m=0$
+\end_inset 
+
+.
+ This means that 
+\begin_inset Formula $detU=0$
+\end_inset 
+
+ and thus 
+\begin_inset Formula $U$
+\end_inset 
+
+ is not invertible: there is no equivalency transformation between two different
+ representations.
+ 
+\emph on 
+QED
+\emph default 
+.
+ 
+\layout Standard
+
+xxxxx more junk below, needs fixing.
+ 
+\layout Standard
+
+We can now take an explicit hyperbolic symmetry, and apply it directly to
+ the Takagi curve.
+ Start with the 
+\begin_inset Formula $\theta(x)$
+\end_inset 
+
+ previously given in the hyperbolic section up above.
+ Evaluate 
+\begin_inset Formula $t_{w}(\theta(x))$
+\end_inset 
+
+ to get ...
+ 
+\layout Standard
+
+We really need a proof that *any* hyperbolic curve generated by 
+\begin_inset Formula $SL(2,Z)$
+\end_inset 
+
+ does the right thing here.
+ we can do this recursively by noting that each hyperbolic is a list of
+ straight line segments, so that at each point, we are performing a linear
+ rescaling.
+ 
+\layout Subsection
+
+Analytic Continuation of the Takagi Curve
+\layout Standard
+
+For any fixed x, the Takagi Curve is analytic in w, having a simple pole
+ at 
+\begin_inset Formula $w=\exp(i\theta)$
+\end_inset 
+
+.
+ We want to do two things here: first, give 
+\begin_inset Formula $\theta$
+\end_inset 
+
+ as a function of x, second, analytically continue to regions 
+\begin_inset Formula $|w|>1$
+\end_inset 
+
+.
+\layout Subsection
+
+The Frobenius-Perron Operator
+\layout Standard
+
+This section provides a basic review of the Frobenius-Perron operator and
+ its use in the description of fractals and chaotic iterated maps.
+ No results are presented here; rather the goal is to provide the background
+ for later sections.
+ 
+\layout Standard
+
+The Frobenius-Perron operator of a function provides a tool for studying
+ the dynamics of the iteration of that function.
+ If one only studies how a point value jumps around during iteration, one
+ gets a very good sense of the point dynamics but no sense of how iteration
+ acts on non-point sets.
+ If the iterated function is applied on a continuous, possibly even smooth
+ density, then one wants to know how that smooth density evolves over repeated
+ iteration.
+ 
+\layout Standard
+
+If we consider a smooth density 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ as a set of values on a collection of points, we can take each point and
+ iterate it to find its new location, and then assign the old value to the
+ new location.
+ Of course, after iteration, several points may end up at the same location,
+ at which point we need to add thier values together.
+ Lets write the new density as 
+\begin_inset Formula $\rho_{1}(x)$
+\end_inset 
+
+, with the subscript 1 denoting we've iterated once.
+ We can express this idea of iterating the underlying points, and then assigning
+ thier old values to new locations as 
+\begin_inset Formula \[
+\rho_{1}(x)=\int dy\;\delta\left(x-g(y)\right)\;\rho(y)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+ is the iterated function.
+ To get 
+\begin_inset Formula $\rho_{n}(x)$
+\end_inset 
+
+, one simply repeats the proceedure 
+\begin_inset Formula $n$
+\end_inset 
+
+ times.
+ In more abstract notation, one writes 
+\begin_inset Formula \[
+\left[U_{g}\rho\right](x)=\rho_{1}(x)\]
+
+\end_inset 
+
+ to denote this time evolution.
+ The notation here emphasizes that 
+\begin_inset Formula $U_{g}:\; f\mapsto U_{g}f$
+\end_inset 
+
+ is an operator that maps functions to functions: written formally, we have
+ 
+\begin_inset Formula $U_{g}:\mathcal{F\mathcal{\rightarrow F}}$
+\end_inset 
+
+ where 
+\begin_inset Formula $\mathcal{F}=\left\{ f\;|\; f:\mathbb{\mathbb{R\rightarrow}R}\right\} $
+\end_inset 
+
+ is the set of all functions.
+ In analyzing 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+, we will often be interested in how it acts on the subset of square-integrable
+ functions, or possibly just 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ functions or polynomials or the like.
+ Repeated iteration just gives the time-evolution of the the density; that
+ is, 
+\begin_inset Formula \[
+U_{g}^{n}\rho\equiv\begin{array}{c}
+\underbrace{U_{g}\circ U_{g}\circ...\circ U_{g}}\\
+n\textrm{ times}\end{array}\;\circ\rho=\rho_{n}\]
+
+\end_inset 
+
+ where iteration is just ordinary operator multiplication.
+ 
+\layout Standard
+
+To understand 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+, one typically tries to understand its spectrum, that is, its eigenvalues
+ and eigenfunctions.
+ In most cases, one finds that 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ is contractive in that it has one eigenvalue equal to one and all the other
+ eigenvalues are real and smaller than one.
+ However, one must be terribly careful here, as there are land-mines strewn
+ about: the actual spectrum, and the nature of the eigenvalues, depends
+ very much on the function space choosen.
+ Typically, when acting on polynomials, one gets discrete, real eigenvalues
+ for 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+.
+ When acting on square-integrable functions, one seems to usually get a
+ continuous set of complex-valued eigenvalues.
+ This is because one can often find shift-states 
+\begin_inset Formula $\psi_{n}$
+\end_inset 
+
+ such that 
+\begin_inset Formula $U_{g}\psi_{n}=\psi_{n-1}$
+\end_inset 
+
+, in which case one can construct eigenfunctions 
+\begin_inset Formula $\phi(z)=\sum_{n}z^{n}\psi_{n}$
+\end_inset 
+
+ whose complex eigenvalues 
+\begin_inset Formula $z$
+\end_inset 
+
+ form the unit disk.
+ It is often considered to be a mistake to try to analyse 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ acting on a finite grid of discrete points, such as one might try on a
+ computer: it is all to easy to turn this into an excercise of analysing
+ the permutation group on a set of 
+\begin_inset Formula $k$
+\end_inset 
+
+ elements, of which any student knows that the eigenvalues are the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th roots of unity.
+ 
+\layout Standard
+
+Since 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ is a linear operator, it induces a homomorphism in its mapping, and so
+ one should study its kernel 
+\begin_inset Formula $Ker\; U_{g}=\left\{ f\;|\; U_{g}f=0\right\} $
+\end_inset 
+
+ to gain insights into its symmetry as well as to express more correctly
+ the quotient space.
+ Insofar as the iterated map might represent a dynamical system, one knows
+ that symmetries lead to conserved currents, via Noether's theorm, and sometimes
+ to topologically-conserved (quantum) numbers, winding numbers or other
+ invarients.
+ 
+\layout Standard
+
+Finally, we note that since 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ looks like a time-evolution operator, we are tempted to write
+\begin_inset Formula \[
+U_{g}^{t}=\exp\; tH_{g}\]
+
+\end_inset 
+
+ for some other operator 
+\begin_inset Formula $H_{g}$
+\end_inset 
+
+.
+ Since 
+\begin_inset Formula $U$
+\end_inset 
+
+ is in general not unitary, 
+\begin_inset Formula $H$
+\end_inset 
+
+ is not (anti-)Hermitian.
+ As before, describing the eigenvalues and eigenfunctions of 
+\begin_inset Formula $H$
+\end_inset 
+
+ is a useful excercise.
+ Also, any group of symmetries on 
+\begin_inset Formula $U$
+\end_inset 
+
+ should express themselves as an algebra on 
+\begin_inset Formula $H$
+\end_inset 
+
+ and these might provide an alternate path for exploring and describing
+ the fractal in question.
+\layout Standard
+
+In practice, when one is given an iterated map 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+, one computes the Frobenius-Perron operator as 
+\begin_inset Formula \[
+\left[U_{g}\rho\right](x)=\sum_{x':x=g(x')}\frac{\rho(x')}{\left|dg(x')/dx'\right|}\]
+
+\end_inset 
+
+ which provides an expression for 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ acting on a general function 
+\begin_inset Formula $\rho$
+\end_inset 
+
+.
+ If one is interested in 
+\begin_inset Formula $U$
+\end_inset 
+
+ acting on polynomial or 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ functions, then one immediately writes the Taylor (or McLauren) series
+ 
+\begin_inset Formula \[
+\rho(x)=\sum_{n=0}^{\infty}\frac{\rho^{(n)}(0)}{n!}x^{n}=\sum_{n=0}^{\infty}a_{n}x^{n}\]
+
+\end_inset 
+
+ and substitutes this in to get the matrix form of 
+\begin_inset Formula $U$
+\end_inset 
+
+:
+\begin_inset Formula \[
+\left[U\rho\right](x)=\sum_{m=0}^{\infty}b_{m}x^{m}=\sum_{m=0}^{\infty}x^{m}\sum_{n=0}^{\infty}U_{mn}a_{n}\]
+
+\end_inset 
+
+ Equating each power of 
+\begin_inset Formula $x^{m}$
+\end_inset 
+
+ we get 
+\begin_inset Formula \[
+\left.\frac{1}{m!}\;\frac{d^{m}\left[U\rho\right](x)}{dx^{m}}\right|_{x=0}=\sum_{n=0}^{\infty}U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}\rho(x)}{dx^{n}}\right|_{x=0}\]
+
+\end_inset 
+
+ as the matrix equation for the transformation of polynomials, expressed
+ in classical notation.
+ Completely equivalently, we can use the Dirac bra-ket notation, writing
+ down the operator in space coordinates:
+\begin_inset Formula \[
+\delta\left(g(x)-y\right)=U_{g}(x,y)=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left\langle x|m\right\rangle \left\langle m|U_{g}|n\right\rangle \left\langle n|y\right\rangle \]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $U_{mn}=\left\langle m|U|n\right\rangle $
+\end_inset 
+
+ and 
+\begin_inset Formula $\left\langle x|m\right\rangle =x^{m}/m!$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left\langle n|y\right\rangle =\delta^{(n)}(y)/n!$
+\end_inset 
+
+, the latter being the 
+\begin_inset Formula $n$
+\end_inset 
+
+'th derivative of the Dirac delta function.
+ Then, integrating over 
+\begin_inset Formula $y$
+\end_inset 
+
+, we regain the previous expressions for the operator in Hilbert space:
+ 
+\begin_inset Formula \begin{multline*}
+\left[U_{g}\rho\right](x)=\int dy\; U_{g}(x,y)\rho(y)\end{multline*}
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+=\int dy\;\delta\left(g(x)-y\right)\rho(y)\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+=\sum_{m,n=0}^{\infty}\;\frac{x^{m}}{m!}\; U_{mn}\int dy\;\frac{\delta^{(n)}(y)}{n!}\rho(y)\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+=\sum_{m,n=0}^{\infty}\;\frac{x^{m}}{m!}\; U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}\rho(y)}{dy^{n}}\right|_{y=0}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+=\sum_{m,n=0}^{\infty}\;\frac{x^{m}}{m!}\; U_{mn}\;\frac{\rho^{(n)}(0)}{n!}\]
+
+\end_inset 
+
+ The above sets of expressions, although in a certain sense are 'equivalent',
+ as we did use the equals sign, do in fact do a great deal of violence because
+ they hide or incorrectly equate the function spaces on which the operator
+ 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ acts.
+ That is, whenever 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ is not differentiable or is otherwise singular, the expansion in derivatives
+ is not justified; by contrast, 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ acting in the space of square-integrable functions may have non-differentiable
+ eigenfunctions (which turn out to be, of course, fractals, which is the
+ whole point of this excercise!) 
+\layout Standard
+
+If one is very lucky, one finds that 
+\begin_inset Formula $U_{mn}$
+\end_inset 
+
+ is upper-triangular, in which case it can be solved immediately for its
+ eigenfunctions, and its eigenvalues already lie on the diagonal.
+ We will find that we get lucky in this way for the Bernoulli operator,
+ and for the 
+\begin_inset Quotes eld
+\end_inset 
+
+singular sawtooth
+\begin_inset Quotes erd
+\end_inset 
+
+ operator, but not for the Gauss-Kuzmin-Wirsing operator.
+ Of course, it is known that a complete solution of the GKW should lead
+ directly to a proof of the Riemann Hypothesis, so getting lucky would be
+ truly lucky indeed.
+ 
+\layout Subsection
+
+The Frobenius-Perron Operator of the Bernoulli Map
+\layout Standard
+
+The Bernoulli map is an exactly solvable example of deterministic chaos.
+ Its theory has been widely explored
+\begin_inset LatexCommand \cite{key-2}
+
+\end_inset 
+
+, and we recap here only insofar as it gives a simple example of some of
+ the more subtle upcoming issues.
+\layout Standard
+
+The Bernoulli map is given by 
+\begin_inset Formula \[
+b(x)=2x-\left\lfloor 2x\right\rfloor \]
+
+\end_inset 
+
+ and can be thought of as poping the leading digit off of the binary expansion
+ of 
+\begin_inset Formula $x.$
+\end_inset 
+
+ This map has a positive Lyapunov exponent and is highly chaotic, as, in
+ a certain sense, one can say that the digits of the binary expansion of
+ some 'arbitrary' number are 'unpredicatable', and that the orbits of two
+ close-by numbers will eventually become 'uncorellated' (after suitably
+ defining what we mean by 'arbitrary' and 'unpredictable').
+ 
+\layout Standard
+
+The Frobenius-Perron operator of the Bernoulli map is given by
+\begin_inset Formula \[
+\left[U_{B}f\right](x)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]\]
+
+\end_inset 
+
+ Note that the the iterated tent map behaves sort-of like a shift state,
+ in that 
+\begin_inset Formula \[
+\left[U_{B}\tau^{k}\right](x)=\tau^{k-1}(x)\]
+
+\end_inset 
+
+ although it does not terminate properly for a shift state: 
+\begin_inset Formula \[
+\left[U_{B}\tau\right](x)=\frac{1}{2}\]
+
+\end_inset 
+
+ (a true shift state would vanish on the final iteration).
+ We see that the Takagi curve transforms as 
+\begin_inset Formula \[
+\left[U_{B}t_{w}\right](x)=1-\frac{w}{2}+wt_{w}(x)\]
+
+\end_inset 
+
+ under the Bernoullli operator.
+\layout Standard
+
+Blah blah blah.
+ How much more here do we want to say? Well, Provide the matrix elements.
+ Provide the discrete eigenfunctions, which are amazingly also named after
+ Bernoulli: the Bernoulli polynomials.
+ What is the kernel of 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+? It is the set of functions that have odd symmetry.
+ This implies that 'half' of all square-integrable functions are in the
+ kernel.
+ This is a huge space.
+ The quotient space of the implied isomorphism thus has the Bernoulli polynomial
+s as the representative elements.
+ This is I think the correct way to relate coordinate space to the Hilbert
+ space, is by means of the quotient space generated by the kernel of the
+ time-evolution operator.
+ This provides the isomorphisms, and any other square-integrable function
+ is thus expandable as a linear combination of the polynomial eigenfunctions
+ plus the kernel.
+ Talk about 
+\begin_inset Formula $H$
+\end_inset 
+
+ and its spectrum.
+ Symmetry symmetry talk about the symmetry group of the kernel.
+ 
+\layout Standard
+
+The continuous-spectrum eigenfunctions of the Bernoulli map are of course
+ a generalizastion of the Takagi-Landsberg curve to complex values, and
+ are of course the famous and beautiful Levy Dragons (reference the Paul
+ Levy 1938 paper here) (actually Levy was trying to generalize the Koch
+ curves).
+ These eigenfunctions are 
+\begin_inset Formula \[
+\phi_{z,l}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2l+1\right)x\right)\]
+
+\end_inset 
+
+ which have eigenvalue 
+\begin_inset Formula $z$
+\end_inset 
+
+: that is 
+\begin_inset Formula $[U_{B}\phi_{z,l}](x)=z\phi_{z,l}(x)$
+\end_inset 
+
+.
+ These are quite beautiful fractals provide a picture here.
+ Symmetry is the name of the game here.
+ 
+\layout Standard
+
+Note that when we go to look at the tesselatation of the hyperbolic plane
+ by the hyperbolic triangle under the symmetry of the modular group, I think
+ we get the tesselation of the plane with Levy's Dragons, which I think
+ is the point that Paul Levy was trying to make.
+\layout Standard
+
+This also means that Bournoulli map also makes for a good toy example of
+ quantum chaos.
+ In quantum chaos, the eigenfunctions must form a complete set in the sense
+ that for any given point in space, there must exist at least one eigenfunction
+ that is non-vanishing on that point.
+ In other words, the eigenfunctions of a quantum-chaotic system must tesselate
+ the space in which they live.
+ The toy example of this kind of tesselation is the Levy Dragon.
+ 
+\layout Subsection
+
+The Singular Sawtooth
+\layout Standard
+
+The singular sawtooth is given by the dyadic-space version of the frac operator,
+ and is thus a model of the Gauss-Kuzmin-Wirsing operator.
+ It can be solved exactly; unfortunately, while one might think that there
+ is a similarity transform to take it back to GKW, it turns out this similarity
+ transform is dastardly singular, being just the Jacobian of the Minkowski
+ question mark 
+\begin_inset Formula $(?'\circ?^{-1})(x)$
+\end_inset 
+
+ Of course, we knew there was trouble because the eigenvalues
+\begin_inset Formula \[
+\lambda_{k}=\sum_{n=1}^{\infty}\frac{1}{n^{k}(n+1)^{k}}\]
+
+\end_inset 
+
+ are not the eigenvalues of GKW.
+ We can see (trivially) that the ratio of eigenvalues settles down to 
+\begin_inset Formula $\lambda_{k}/\lambda_{k+1}=2$
+\end_inset 
+
+ whereas for the GKW the ratio is 2.65 (which is what, I'm not sure, is close
+ to Khinchin's constant 2.685 xxxx ) confusing....
+ Feigenbaum's constant as the ratio of period doubling is 
+\begin_inset Formula $\delta=4.6692...$
+\end_inset 
+
+ which is 2+2.6692...
+ so which is it, exactly? 
+\layout Standard
+
+We'd like, among other things, to present the shift operator, so that can
+ write down the analogue of the Levy-Dragon solutions for this operator,
+ and possibly take a guess at those of the GKW.
+ 
+\layout Standard
+
+blah blah blah provide the details of the solution here.
+ 
+\layout Subsection
+
+Other Trees of Rationals
+\layout Standard
+
+Recall that we were able to construct other trees that are isomorphic to
+ the Stern-Brocot tree by passing the values in the Stern-Brocot Tree through
+ a ratio of polynomials, thus mapping rationals to rationals.
+ Monotonically-increasing functions will always perserve monotonicity of
+ the question mark.
+ Other mappings, such as the cubic 
+\begin_inset Formula $x^{3}-x$
+\end_inset 
+
+, are in general not globally monotonic, but they are always locally monotonic.
+ In other words, 
+\begin_inset Formula $?((2x-1)^{3}-x+1)$
+\end_inset 
+
+ is montonic between the same regions that 
+\begin_inset Formula $(2x-1)^{3}-x+1$
+\end_inset 
+
+ is, and thus it does not yeild a fundamentally new function.
+ Thus, these ploynomial-based mappings of rationals into rationals do not
+ generate another self-similar map, they are distorted versions of the Minkowski
+ question mark.
+\layout Standard
+
+Here's a mapping that is continuous and is also fractally non-monotonic
+ (and is thus self-similar): its 
+\begin_inset Formula $x-?(x)$
+\end_inset 
+
+ which looks sine-like and we want to exhibit the cosine-like so that we
+ can build up fractally-periodic basis functions.
+ 
+\layout Subsection
+
+Cantor Dusts
+\layout Standard
+
+Speaking of Cantor sets, this begs a question.
+ Can we find functions that are continuous and monotinically increasing,
+ yet all of whose derivatives are identically zero on a Cantor dust? I think
+ we can.
+ This section is also to be written.
+ Sigh.
+\layout Section
+
+Permutations
+\layout Standard
+
+Stuff about permutation groups.
+\layout Subsection
+
+Hilbert Lattice and Permuation Groups
+\layout Standard
+
+Note that continued fractions have a representation as a lattice in the
+ infinitie-dimensional Hilbert space 
+\begin_inset Formula $\mathbb{N}^{\infty}=\mathbb{N\times N\times}...$
+\end_inset 
+
+ where 
+\begin_inset Formula $\mathbb{N}=\mathbb{Z}^{+}$
+\end_inset 
+
+ the set of positive integers.
+ Note that this implies that each point on this lattice can be given a unique
+ value using the continued fraction mapping, and that each value appears
+ only once on the lattice.
+ In other words, the continued fraction brackets are an operator that maps
+ this Hilbert space to the real numbers, i.e.
+ 
+\begin_inset Formula $[]:\mathbb{N}^{\infty}\mathbb{\rightarrow R}$
+\end_inset 
+
+.
+ What makes the 
+\begin_inset Formula $[]$
+\end_inset 
+
+ operator so interesting is that it is 1-1 and onto, and is thus invertible,
+ at least on the irrationals, if we brush aside a little problem with the
+ rationals.
+ Note that in this mapping, the number 0 is a kind-of 
+\begin_inset Quotes eld
+\end_inset 
+
+essential singularity
+\begin_inset Quotes erd
+\end_inset 
+
+ at 
+\begin_inset Formula $\infty$
+\end_inset 
+
+, since the continued fraction expansion for 0 is 
+\begin_inset Formula $0=[\infty,a_{2},a_{3},...]$
+\end_inset 
+
+ for arbitrary integers 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+.
+ Indeed, all rationals suffer in this way: a finite contined fraction is
+ just one where 
+\begin_inset Formula $\infty$
+\end_inset 
+
+ appears somewhere in the expansion, i.e.
+ 
+\begin_inset Formula $[a_{1},a_{2},...,a_{N}]=[a_{1},a_{2},...,a_{N},\infty,a_{N+2},...]$
+\end_inset 
+
+.
+ We can work around this difficulty by taking the kernel of [] and defining
+ a quotient space 
+\begin_inset Formula $\mathbb{N}^{\infty}/\ker[]$
+\end_inset 
+
+, and insisting that the operator 
+\begin_inset Formula $[]$
+\end_inset 
+
+ is 1-1 and onto in this quotient space.
+ Homework: prove that this quotient space is validly defined and has the
+ needed vector-space properties.
+ In the subsequent discussion, we'll intentionally confuse 
+\begin_inset Formula $\mathbb{N}^{\infty}$
+\end_inset 
+
+ with this quotient space, wherever its convenient.
+ In the following, we also make a convenient little confusion between the
+ continued fraction map defined on the unit interval, and the map defined
+ for non-negative reals: viz.
+ 
+\begin_inset Formula $[a_{0};a_{1},a_{2},...]\equiv a_{0}+[a_{1},a_{2},...]$
+\end_inset 
+
+ where we use the semicolon to distinguish this zero'th element.
+\layout Standard
+
+Note that this lattice is a subspace of the Hilbert space of 
+\begin_inset Quotes eld
+\end_inset 
+
+generalized functions
+\begin_inset Quotes erd
+\end_inset 
+
+, in that any map 
+\begin_inset Formula $\mu:\mathbb{N}^{\infty}\rightarrow\mathbb{R}$
+\end_inset 
+
+ induces a map 
+\begin_inset Formula $\tilde{\mu}:\mathbb{R}\rightarrow\mathbb{R}$
+\end_inset 
+
+, through the isomorphic operator 
+\begin_inset Formula $[]$
+\end_inset 
+
+.
+ The normal definition of a generalized function is that its a map 
+\begin_inset Formula $\tilde{f}:\mathcal{F}\mathbb{\rightarrow R}$
+\end_inset 
+
+ where 
+\begin_inset Formula $\mathcal{F}$
+\end_inset 
+
+ is the space of ordinary functions 
+\begin_inset Formula $\left\{ f\,|\, f:\mathbb{\mathbb{R}\rightarrow R}\right\} $
+\end_inset 
+
+.
+ The canonical example is  the Dirac delta oprator 
+\begin_inset Formula $\delta(x)$
+\end_inset 
+
+ which is zero everywhere, except at 
+\begin_inset Formula $x=0$
+\end_inset 
+
+ where it is infinite.
+ 
+\layout Standard
+
+It seems intuitive that all other mappings from 
+\begin_inset Formula $\mathbb{N}$
+\end_inset 
+
+ to 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset 
+
+ that satisfy this invertability property are obtainable through the action
+ of the permutation group, although one should always be careful with such
+ statements..
+ The permutation group elements are the shift operator 
+\begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
+\end_inset 
+
+ which acts as 
+\begin_inset Formula $h:[a_{1},a_{2},a_{3},...]\mapsto[a_{2},a_{3},...]$
+\end_inset 
+
+ and the permuation operator 
+\begin_inset Formula $S_{p,q}:[a_{1},...,a_{p},...,a_{q},...]\mapsto[a_{1},...,a_{q},...a_{p},...]$
+\end_inset 
+
+.
+ Homework: give the analytic form for 
+\begin_inset Formula $S$
+\end_inset 
+
+.
+ Note that 
+\begin_inset Formula $S_{p,q}(x)$
+\end_inset 
+
+ is discontinuous, but I think only on a countable set of points, and thus
+ can be used to form well-defined integrals using classic techniques.
+ 
+\layout Standard
+
+Note that more generally, we can now define 
+\begin_inset Formula $h:SL\left(2,\mathbb{Z}\right)\rightarrow SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ as the operator that lops off the first term of teh expansion.
+ This has a kernel that contains the group element 
+\begin_inset Formula $g^{n}rg$
+\end_inset 
+
+ and so we ask about the group structure that results from this.
+ 
+\layout Standard
+
+In particular, let us look at the family of analytic functions blah blah
+ blah that is produced by invoking the permutation group on blah blah.
+ What are the symmetries.
+\layout Section
+
+Conclusions
+\layout Standard
+
+Apologies for the format of this paper; its like the Picard Theorm suggests:
+ this paper will touch on all possible topics an infinite number of times
+ as it approaches the essential singularity of being completed.
+\layout Standard
+
+Blah Blah Blah, The modular group is the symmetry group of the hyperbolic
+ plane, and trajectories on hyperbolic surfaces are known the have positive
+ Lyapunov exponents, so once again, we have another curious tie into chaotic
+ behvaiour.
+\layout Standard
+
+Note that this also means that all of the results from modular forms now
+ have some sort of interpretation in the fractal world.
+ The program is now how to map those results into statements about classical
+ chaotic dynamics and more importantly, for quantum chaos.
+ Do statements about Hamiltonian dynamics have corresponding statements
+ in terms of modular forms? If so, what are they? What about the converse?
+ 
+\layout Section
+
+Open Questions
+\layout Standard
+
+Some unanswered questions of varing depth and complexity.
+\layout Subsubsection
+
+Multiplicity (Degeneracy) of Rationals
+\layout Standard
+
+If we enumerate the rationals 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ for all values of 
+\begin_inset Formula $p,q\in[1..N]$
+\end_inset 
+
+, there will be many duplicates after reducing by eliminating common factors.
+ In the limit of 
+\begin_inset Formula $N\rightarrow\infty$
+\end_inset 
+
+, what is the multiplicity (degeneracy) of any given rational? What is the
+ group of symmetries of the resulting fractal?
+\layout Subsubsection
+
+Sagher Enumeration
+\layout Standard
+
+Sagher enumerates rationals m/n with the integer 
+\begin_inset Formula $m^{2}n^{2}/q_{1}..q_{k}$
+\end_inset 
+
+ where 
+\begin_inset Formula $q_{i}$
+\end_inset 
+
+ are the prime factors of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ Make a graph of this distribution.
+ 
+\layout Subsubsection
+
+Simplicity
+\layout Standard
+
+The simplicity 
+\begin_inset Formula $w(p/q)$
+\end_inset 
+
+of a farey number is given by 
+\begin_inset Formula $w(p/q)=1/pq$
+\end_inset 
+
+.
+ The weighted simplicity is 
+\begin_inset Formula $W(p/q)=w(p/q)2^{-N(p/q)-1}$
+\end_inset 
+
+ where 
+\begin_inset Formula $N(p/q)$
+\end_inset 
+
+ is the row number on the Farey Tree.
+ Make a graph of this function.
+ Relate it to the rest.
+ Note that the sum of 
+\begin_inset Formula $w(p/q)$
+\end_inset 
+
+ on one row of the farey sums to 1, and that thus, the sum of 
+\begin_inset Formula $W(p/q)$
+\end_inset 
+
+over all rationals equals 1.
+ See Cut the Know for the correct attribution for this concept.
+ 
+\layout Subsubsection
+
+The Gauss-Kuz'min Wirsing Distribution
+\layout Standard
+
+The Gauss-Kuzmin-Wirsing (GKW) distribution gives likelyhood of the occurance
+ of any given partial sum in a continued fraction expansion.
+ If we were instead to flatten that distribution, and work backwards, this
+ would imply the existance of a measure/distribution on the rationals.
+ What is that distribution? If we were to replace the GKW distribution by
+ some arbitrary (monotonically-creasing, continuous) mapping, what would
+ eb corresponding measure be that is induced? Can we analyse the these measures
+ in terms of the eigenfunctions of the GKW? 
+\layout Subsubsection
+
+Relation to Cryptography
+\layout Standard
+
+Cryptographic hashes are also known to distribute points randomly on the
+ unit square; but they do so only on a fixed (albeit very large) lattice.
+ What are the relationships between the randomness of the gap and crypto-type
+ systems? For example, we could study the behaviour of the gap on all rationals
+ which have the same large prime as the denominator.
+ Is there a relationship to elliptic curves (which are known to be related
+ to continued fractions in other ways, e.g through modular forms)? Can we
+ say that the uniform distribution of gaps is somehow the 'fundamental theorm
+ of cryptography', implying that there are always unbreakable codes because
+ the gaps are dense on the unit square?
+\layout Subsubsection
+
+Algebraic Pellian-like Equations
+\layout Standard
+
+Given arbitrary real 
+\begin_inset Formula $x,y$
+\end_inset 
+
+, one can find a sequence of rationals that converge on 
+\begin_inset Formula $x$
+\end_inset 
+
+ and whose gaps converge on 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ Can this sequence be expressed as approximants to some algebraic equation,
+ somewhat in analogy to the Pellian equations? What would that series of
+ equations be?
+\layout Bibliography
+\bibitem [asdf]{key-1}
+
+Here is a very similarly titled paper with a very different subject matter:
+ 
+\begin_inset LatexCommand \htmlurl[Continued Fractions and Chaos]{http://www.cecm.sfu.ca/organics/papers/corless/confrac/html/confrac.html}
+
+\end_inset 
+
+ by Robert M.
+ Corless
+\layout Bibliography
+\bibitem [Dri99]{key-2}
+
+Dean Driebe Fully Chaotic Maps and Broken Time Symmetry Kluwer Academic
+\layout Bibliography
+\bibitem [Man88]{key-3}
+
+Benoit Mandelbrot, in 
+\emph on 
+The Science of Fractal Images, ed.
+ Heinz-Otto Peitgen, Dietmar Saupe,
+\emph default 
+ (Springer-Verlag, 1988) p.
+ 246
+\layout Bibliography
+\bibitem [deR57]{key-4}
+
+Georges de Rham, On Some Curves Defined by Functional Equations (1957),
+ reprinted in Classics on Fractals, ed.
+ Gerald A.
+ Edgar, (Addison-Wesley, 1993) pp.
+ 285-298
+\the_end
