@@ -51,17 +51,22 @@ class PathIntegral
       double oversample;   // samples per pixel
 
       double shooter[3]; // direction of source
+      double phi;        // direction angle
 
       complex<double> *side_amplitude;
       complex<double> *front_amplitude;
       complex<double> *back_amplitude;
-      int *side_norm;
-      int *front_norm;
-      int *back_norm;
+      int *side_count;
+      int *front_count;
+      int *back_count;
 
       double *side_intensity;
       double *front_intensity;
       double *back_intensity;
+
+      double **side_raylens;
+      double **front_raylens;
+      double **back_raylens;
 
       int nintense;
 };
@@ -86,9 +91,14 @@ PathIntegral::PathIntegral (int px, int py)
    side_amplitude = new complex<double> [nx*ny];
    front_amplitude = new complex<double> [nx*ny];
    back_amplitude = new complex<double> [nx*ny];
-   side_norm = new int [nx*ny];
-   front_norm = new int [nx*ny];
-   back_norm = new int [nx*ny];
+
+   side_count = new int [nx*ny];
+   front_count = new int [nx*ny];
+   back_count = new int [nx*ny];
+
+   side_intensity = new double [nx*ny];
+   front_intensity = new double [nx*ny];
+   back_intensity = new double [nx*ny];
 
    Init ();
    for (i=0; i<nx*ny; i++)
@@ -96,6 +106,10 @@ PathIntegral::PathIntegral (int px, int py)
       side_intensity[i] = 0.0;
       front_intensity[i] = 0.0;
       back_intensity[i] = 0.0;
+
+      side_raylens[i] = (double *) malloc (8*sizeof (double));
+      front_raylens[i] = (double *) malloc (8*sizeof (double));
+      back_raylens[i] = (double *) malloc (8*sizeof (double));
    }
 
    nintense = 0;
@@ -117,9 +131,9 @@ PathIntegral::Init (void)
       side_amplitude[i] = 0.0;
       front_amplitude[i] = 0.0;
       back_amplitude[i] = 0.0;
-      side_norm[i] = 0;
-      front_norm[i] = 0;
-      back_norm[i] = 0;
+      side_count[i] = 0;
+      front_count[i] = 0;
+      back_count[i] = 0;
    }
 }
 
@@ -224,10 +238,15 @@ PathIntegral::TraceToroid(void)
                 printf ("duude out of bounds !! %d %d \n", px, py);
              }
 
+#if DOPHASE
              // next perform phase summation
              double phase = omega * sr.distance;
              side_amplitude [nx*py+px] += myexp (phase);
-             side_norm [nx*py+px] ++;
+             side_count [nx*py+px] ++;
+#endif
+             int n = side_count [nx*py+px];
+             side_raylens[nx*py+px][n] = sr.distance;
+             side_count [nx*py+px] ++;
           
 #if 0
 printf ("duude ph= %f ", phase);
@@ -256,18 +275,18 @@ PathIntegral::AccumIntensity (void)
 
    for (int i=0; i<nx*ny; i++)
    {
-      if (0 < side_norm[i])
+      if (0 < side_count[i])
       {
-         double re = real (side_amplitude[i]) / ((double) side_norm[i]);
-         double im = imag (side_amplitude[i]) / ((double) side_norm[i]);
+         double re = real (side_amplitude[i]) / ((double) side_count[i]);
+         double im = imag (side_amplitude[i]) / ((double) side_count[i]);
          side_intensity[i] += re*re+im*im;
 
-         re = real (front_amplitude[i]) / ((double) front_norm[i]);
-         im = imag (front_amplitude[i]) / ((double) front_norm[i]);
+         re = real (front_amplitude[i]) / ((double) front_count[i]);
+         im = imag (front_amplitude[i]) / ((double) front_count[i]);
          front_intensity[i] += re*re+im*im;
 
-         re = real (back_amplitude[i]) / ((double) back_norm[i]);
-         im = imag (back_amplitude[i]) / ((double) back_norm[i]);
+         re = real (back_amplitude[i]) / ((double) back_count[i]);
+         im = imag (back_amplitude[i]) / ((double) back_count[i]);
          front_intensity[i] += re*re+im*im;
       }
 
@@ -291,9 +310,9 @@ PathIntegral::ToPixels (void)
       double green = 0.0;
       double blue = 0.0;
 
-      if (0 < side_norm[i])
+      if (0 < side_count[i])
       {
-         // red = 255.0 * abs<double> (side_amplitude[i]) / ((double) side_norm[i]);
+         // red = 255.0 * abs<double> (side_amplitude[i]) / ((double) side_count[i]);
          red = 255.0 * side_intensity[i] / ((double) nintense);
       }
 
