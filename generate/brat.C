@@ -2971,11 +2971,15 @@ gapper (
 		{
 			int nn = n;
 
+#define DO_RAND
+#ifdef DO_RAND
 			nn = rand() >> 10;
 			dd = rand() >> 10;
+#endif
 			nn %= dd;
 			if (0 == nn) continue;
 			if (0 == dd) continue;
+
 			double t = (double) nn/ (double) dd;
 
 			i = (int) ((double) sizex * t);
@@ -2983,20 +2987,23 @@ gapper (
 if (i>=sizex) printf ("xxxxxxxxxxxxxxxxx\n");
 			
 			int gcf = gcf32 (nn,dd);
-			// if (1 != gcf) continue;
+
+#ifndef DO_RAND
+			if (1 != gcf) continue;
+#endif
 			nn /= gcf;
 			dd /= gcf;
 			bin_cnt [i] ++;
 			
 			f.SetRatio (nn,dd);
-			double gap = f.ToGapEven() - f.ToGapOdd();
+			double gap = f.ToGapEven() - f.ToGapOdd() - 1.0;
 			gap = 1.0-gap;
 
 			j = (int) (gap * (double) sizey);
+if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,dd);
 			if (0>j) j=0;
 			if (j>=sizey) j=sizey-1;
 
-if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,dd);
 			glob [j*sizex +i] ++;
 		}
 	}
