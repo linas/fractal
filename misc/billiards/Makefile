@@ -1,7 +1,7 @@
 
 
 
-all: classic wave
+all: stats classic wave
 
 
 classic:	classic.o ray.o
@@ -10,6 +10,10 @@ classic:	classic.o ray.o
 
 wave:	wave.o ray.o
 	cc -o wave wave.o ray.o -lm
+
+stats:	stats.o ray.o
+	cc -o stats stats.o ray.o -lm
+
 
 
 .C.o:
