@@ -25,6 +25,9 @@ int liouville_omega (int n);
 /* The Liouville lambda function */
 int liouville_lambda (int n);
 
+/* The Mangoldt lambda function */
+long double mangoldt_lambda (int n);
+
 #ifdef   __cplusplus
 };
 #endif

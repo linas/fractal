@@ -119,6 +119,33 @@ int moebius_mu (int n)
 
 /* ====================================================== */
 
+long double mangoldt_lambda (int n)
+{
+	if (1 >= n) return 0;
+	
+	INIT_PRIME_SIEVE(n);
+
+	/* Implement the dumb/simple factorization algo */
+	int i;
+	for (i=0; ; i++)
+	{
+		int k = sieve[i];
+		if (0 == n%k)
+		{
+			n /= k;
+			while (0 == n%k) n /= k;
+
+			if (1 == n) return logl ((long double)k);
+			return 0.0L;
+		}
+		if (k*k > n) return logl ((long double) n);
+	}
+
+	return 0;
+}
+
+/* ====================================================== */
+
 int mertens_m (int n)
 {
 	int i;
