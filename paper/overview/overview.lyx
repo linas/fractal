@@ -1820,10 +1820,10 @@ Blah Blah.
  
 \layout Section
 
-Symmetry of the Mandelbrot Set and the Circle Map
+Symmetries of Period-Doubling Maps
 \layout Standard
 
-To be written.
+Intro To be written.
  First we need to explain how to count with Farey numbers on the M-Set.
  Here is a picture stolen from Robert L.
  Devaney's website 
@@ -1878,287 +1878,10 @@ What does this mean for the symmetries of the Mandelbrot set? it means that
 
  part of the enumeration.
  The buds appear discretely on the boundaries of the main cardiod.
-\layout Subsection
-
-Douady-Hubbard Rays
 \layout Standard
 
-Douady Hubbard rays are a mapping of the unit circle to the boundary of
- the Mandelbrot Set.
- One of the properties is that a pair of rays pinches off each bud of the
- M-Set.
- Note that both of the rays occur at external angles that are also rationals.
- This now induces some additional symmetries on the rational numbers, since
- each bud can be labelled with a rational, and thus, for each rational,
- we associate the upper and lower rays.
- These two map are highly discontinuous.
- But that is OK, because the discontinuities pinch off the bud in the middle.
- We use the code-word substituion techniques of Doaudy-Hubbard to paste
- into the discontinuities.
- Since we are free to paste in any code-word desired, we have, in a certain
- sense, total and complete randomness, which is then propagated everywhere
- through the self-similarity.
- 
-\layout Standard
-
-Here is a bizarro philosophical thought: we have complete freedom to choose
- the codewords to be pasted into the period-doubling symmetry, in the sense
- of philosophical free-will: we can choose as we wish.
- The result of the application of our free will is multiplied through the
- modular group so that choice now appears everywhere among the rationals.
- But we know that the closure of rationals is the reals, and we know that
- the reals are 
-\begin_inset Quotes eld
-\end_inset 
-
-unknowable
-\begin_inset Quotes erd
-\end_inset 
-
- in the Turing-computable sense.
- Thus, we conclde that the application of free-choice results in something
- unknowable.
- How strange.
- 
-\layout Standard
-
-Here's how code-word substitution works: start with the dyadic (base-2)
- expansion for 
-\begin_inset Formula $0\leq x\leq1$
-\end_inset 
-
-
-\begin_inset Formula \[
-x=\sum_{n=1}^{\infty}\frac{a_{n}}{2^{n}}=0.a_{1}a_{2}a_{3}...\]
-
-\end_inset 
-
- where the 
-\begin_inset Formula $a_{k}$
-\end_inset 
-
- can only take on the values 0 and 1.
- Then pick any two integers 
-\begin_inset Formula $h,l\in\mathbb{N}$
-\end_inset 
-
- and a third integer 
-\begin_inset Formula $m$
-\end_inset 
-
- such that 
-\begin_inset Formula $h,l<2^{m}$
-\end_inset 
-
- is satisfied (alternately, we start by picking 
-\begin_inset Formula $m$
-\end_inset 
-
- first, then picking 
-\begin_inset Formula $h,l$
-\end_inset 
-
- to satisfy this).
- We then substitute the value of 
-\begin_inset Formula $0$
-\end_inset 
-
- in the dyadic expansion of 
-\begin_inset Formula $x$
-\end_inset 
-
- with 
-\begin_inset Formula $l$
-\end_inset 
-
- and the binary value of 
-\begin_inset Formula $1$
-\end_inset 
-
- in the expansion with 
-\begin_inset Formula $h$
-\end_inset 
-
-, padding each appropriately:
-\begin_inset Formula \[
-B_{h,l,m}(x)=\sum_{n=1}^{\infty}\frac{ha_{n}+l(1-a_{n})}{2^{n}2^{nm}}\]
-
-\end_inset 
-
- which we now see as a highly discontinuous function of 
-\begin_inset Formula $x$
-\end_inset 
-
-.
- To get a better idea of why its called 
-\begin_inset Quotes eld
-\end_inset 
-
-codeword substitution
-\begin_inset Quotes erd
-\end_inset 
-
-, lets work an example.
- Let 
-\begin_inset Formula $x=0.10101010101..._{2}$
-\end_inset 
-
- and pick 
-\begin_inset Formula $m=4$
-\end_inset 
-
- and 
-\begin_inset Formula $h=7$
-\end_inset 
-
- and 
-\begin_inset Formula $l=4$
-\end_inset 
-
-.
- Note that, in binary, 
-\begin_inset Formula $h=0111_{2}$
-\end_inset 
-
- and 
-\begin_inset Formula $l=0100_{2}$
-\end_inset 
-
- and so we have
-\begin_inset Formula \[
-B_{7,3;4}(0.1010101..._{2})=0.0111\;0100\;0111\;0100\;0111\;..._{2}\]
-
-\end_inset 
-
- 
-\layout Standard
-
-Lets now work backwards and get the question mark: thus
-\begin_inset Formula \[
-?([2,1,1,1,...])=0.1010101..._{2}\]
-
-\end_inset 
-
- and 
-\begin_inset Formula \[
-?([2,3,1,1,3,3,1,1,3,3,1,1,...])=B_{7,3;4}(0.1010101..._{2})\]
-
-\end_inset 
-
- blah blah why are we doing this again?
-\layout Subsection
-
-Islands, Sinai's Tongues
-\layout Standard
-
-blah blah write this section.
-\layout Standard
-
-See the pictures of phase-locking in the Circle map at the URL 
-\begin_inset LatexCommand \htmlurl[Circle Map]{http://www.linas.org/art-gallery/basic/basic.html}
-
-\end_inset 
-
- and notice the similarities to the gaps pictured at 
-\begin_inset LatexCommand \htmlurl[Farey Room Pictures]{http://www.linas.org/art-gallery/farey/fthumb.html}
-
-\end_inset 
-
- Yada Yada.
- The mode-locked regions are called Sinai's toungues.
- This implies that the Modular Group is the symmetry group of the phase
- locked-loop (the circle map) as well as the Mandelbrot Set.
- 
-\layout Standard
-
-Notice that the mode-locked regions of the circle map are exactly those
- regions that are *not* chaotic: in other words, these are the so-called
- 
-\begin_inset Quotes eld
-\end_inset 
-
-islands of order
-\begin_inset Quotes erd
-\end_inset 
-
- that can be found in the 
-\begin_inset Quotes eld
-\end_inset 
-
-sea of chaos
-\begin_inset Quotes erd
-\end_inset 
-
-.
- One of course sees such islands in other iterated equations, such as the
- iterated Feigenbaum map, and one is naturally lead to ask, is the modular
- group the symmetry group that maps islands into islands, for any period
- doubling map? What about the converse? Are there any maps, with islands,
- that do not have the Modular Form symmetry? 
-\layout Standard
-
-What about Misiurewicz points? Misiurewicz points on the M-set are the pre-perio
-dic points.
- As such we expect to be able to label them in some way with xxx ???
-\layout Subsection
-
-3-period Mode Locking
-\layout Standard
-
-Note that some chaotic maps are seen to have period-doubling paths to chaos
- that include a factor of three: viz.
- 3,6,12,24,...
- I'm not sure I think this is a manifestation of the fact that the modular
- group can be written as the free product of the two and three cycles 
-\begin_inset Formula $C_{2}$
-\end_inset 
-
- and 
-\begin_inset Formula $C_{3}$
-\end_inset 
-
-.
-\layout Subsection
-
-Iterating on the Hyperbolic Plane
-\layout Standard
-
-Of course, now that we know about the modular group and the hyperbolic plane,
- we state that we really want to study the iteration of one-dimensional
- maps like the logistic equation or the tent map by studying how it bounces
- around on the fundamental domain.
- That is, each time we iterate a 1-D map, we are bounced to somewhere else
- on the unit interval.
- This point on the unit interval is included in an enumerable set of line
- segments, which can be maped back to the whole unit interval via the modular
- group.
- Thus, a single point is a representative element of the equivalence class
- of all the points that the modular group maps it to.
- We want to study how the logistic equation acts on these equivalence classes,
- instead of asking how it acts on single points.
-\layout Standard
-
-Blah Blah Blah.
- Define what equivalence class means when a group acts on a set.
- viz define the quotient space.
- 
-\layout Standard
-
-This is essentially how we get related to Julia sets.
- After we iterate a map like the logistic map once, we then ask what other
- points are in the same equivalence class, under the action of the modular
- group.
- That is, we now studay iteration in the quotient space, where the modular
- group provides the quotient.
- This quotient map is just the map of all hyperbolic triangles back to the
- fundamental domain.
- And so we really study iteration in this quotient space.
- Blah blah.
- Provide pretty pictures.
- We now ask what do the points on the boundary of the fundamental domain
- correspond to, blah blah, these are the Misiurewicz points, which is why
- they relate to Julia sets; they essentially paste together the pieces.
- 
+Let us start with something simpler, with an example of an exactly-solvable
+ fractal mapping.
 \layout Subsection
 
 The Takagi-Landsberg Curve
@@ -2811,12 +2534,335 @@ Homework: Describe the analytic properties of
 
  held fixed.
  
-\layout Description
+\layout Subsection
 
-xxxxxxxx
-\layout Description
+Mandelbrot Set; Douady-Hubbard Rays
+\layout Standard
 
-isn't it?
+Douady Hubbard rays are a mapping of the unit circle to the boundary of
+ the Mandelbrot Set.
+ One of the properties is that a pair of rays pinches off each bud of the
+ M-Set.
+ Note that both of the rays occur at external angles that are also rationals.
+ This now induces some additional symmetries on the rational numbers, since
+ each bud can be labelled with a rational, and thus, for each rational,
+ we associate the upper and lower rays.
+ These two map are highly discontinuous.
+ But that is OK, because the discontinuities pinch off the bud in the middle.
+ We use the code-word substituion techniques of Doaudy-Hubbard to paste
+ into the discontinuities.
+ Since we are free to paste in any code-word desired, we have, in a certain
+ sense, total and complete randomness, which is then propagated everywhere
+ through the self-similarity.
+ 
+\layout Standard
+
+Here is a bizarro philosophical thought: we have complete freedom to choose
+ the codewords to be pasted into the period-doubling symmetry, in the sense
+ of philosophical free-will: we can choose as we wish.
+ The result of the application of our free will is multiplied through the
+ modular group so that choice now appears everywhere among the rationals.
+ But we know that the closure of rationals is the reals, and we know that
+ the reals are 
+\begin_inset Quotes eld
+\end_inset 
+
+unknowable
+\begin_inset Quotes erd
+\end_inset 
+
+ in the Turing-computable sense.
+ Thus, we conclde that the application of free-choice results in something
+ unknowable.
+ How strange.
+ 
+\layout Standard
+
+Here's how code-word substitution works: start with the dyadic (base-2)
+ expansion for 
+\begin_inset Formula $0\leq x\leq1$
+\end_inset 
+
+
+\begin_inset Formula \[
+x=\sum_{n=1}^{\infty}\frac{a_{n}}{2^{n}}=0.a_{1}a_{2}a_{3}...\]
+
+\end_inset 
+
+ where the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ can only take on the values 0 and 1.
+ Then pick any two integers 
+\begin_inset Formula $h,l\in\mathbb{N}$
+\end_inset 
+
+ and a third integer 
+\begin_inset Formula $m$
+\end_inset 
+
+ such that 
+\begin_inset Formula $h,l<2^{m}$
+\end_inset 
+
+ is satisfied (alternately, we start by picking 
+\begin_inset Formula $m$
+\end_inset 
+
+ first, then picking 
+\begin_inset Formula $h,l$
+\end_inset 
+
+ to satisfy this).
+ We then substitute the value of 
+\begin_inset Formula $0$
+\end_inset 
+
+ in the dyadic expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+ with 
+\begin_inset Formula $l$
+\end_inset 
+
+ and the binary value of 
+\begin_inset Formula $1$
+\end_inset 
+
+ in the expansion with 
+\begin_inset Formula $h$
+\end_inset 
+
+, padding each appropriately:
+\begin_inset Formula \[
+B_{h,l,m}(x)=\sum_{n=1}^{\infty}\frac{ha_{n}+l(1-a_{n})}{2^{n}2^{nm}}\]
+
+\end_inset 
+
+ which we now see as a highly discontinuous function of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ To get a better idea of why its called 
+\begin_inset Quotes eld
+\end_inset 
+
+codeword substitution
+\begin_inset Quotes erd
+\end_inset 
+
+, lets work an example.
+ Let 
+\begin_inset Formula $x=0.10101010101..._{2}$
+\end_inset 
+
+ and pick 
+\begin_inset Formula $m=4$
+\end_inset 
+
+ and 
+\begin_inset Formula $h=7$
+\end_inset 
+
+ and 
+\begin_inset Formula $l=4$
+\end_inset 
+
+.
+ Note that, in binary, 
+\begin_inset Formula $h=0111_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $l=0100_{2}$
+\end_inset 
+
+ and so we have
+\begin_inset Formula \[
+B_{7,3;4}(0.1010101..._{2})=0.0111\;0100\;0111\;0100\;0111\;..._{2}\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Lets now work backwards and get the question mark: thus
+\begin_inset Formula \[
+?([2,1,1,1,...])=0.1010101..._{2}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+?([2,3,1,1,3,3,1,1,3,3,1,1,...])=B_{7,3;4}(0.1010101..._{2})\]
+
+\end_inset 
+
+ blah blah why are we doing this again?
+\layout Subsection
+
+Islands, Sinai's Tongues
+\layout Standard
+
+blah blah write this section.
+\layout Standard
+
+See the pictures of phase-locking in the Circle map at the URL 
+\begin_inset LatexCommand \htmlurl[Circle Map]{http://www.linas.org/art-gallery/basic/basic.html}
+
+\end_inset 
+
+ and notice the similarities to the gaps pictured at 
+\begin_inset LatexCommand \htmlurl[Farey Room Pictures]{http://www.linas.org/art-gallery/farey/fthumb.html}
+
+\end_inset 
+
+ Yada Yada.
+ The mode-locked regions are called Sinai's toungues.
+ This implies that the Modular Group is the symmetry group of the phase
+ locked-loop (the circle map) as well as the Mandelbrot Set.
+ 
+\layout Standard
+
+Notice that the mode-locked regions of the circle map are exactly those
+ regions that are *not* chaotic: in other words, these are the so-called
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+islands of order
+\begin_inset Quotes erd
+\end_inset 
+
+ that can be found in the 
+\begin_inset Quotes eld
+\end_inset 
+
+sea of chaos
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ One of course sees such islands in other iterated equations, such as the
+ iterated Feigenbaum map, and one is naturally lead to ask, is the modular
+ group the symmetry group that maps islands into islands, for any period
+ doubling map? What about the converse? Are there any maps, with islands,
+ that do not have the Modular Form symmetry? 
+\layout Standard
+
+What about Misiurewicz points? Misiurewicz points on the M-set are the pre-perio
+dic points.
+ As such we expect to be able to label them in some way with xxx ???
+\layout Subsection
+
+3-period Mode Locking
+\layout Standard
+
+Note that some chaotic maps are seen to have period-doubling paths to chaos
+ that include a factor of three: viz.
+ 3,6,12,24,...
+ I'm not sure I think this is a manifestation of the fact that the modular
+ group can be written as the free product of the two and three cycles 
+\begin_inset Formula $C_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $C_{3}$
+\end_inset 
+
+.
+\layout Subsection
+
+Iterating on the Hyperbolic Plane
+\layout Standard
+
+Of course, now that we know about the modular group and the hyperbolic plane,
+ we state that we really want to study the iteration of one-dimensional
+ maps like the logistic equation or the tent map by studying how it bounces
+ around on the fundamental domain.
+ That is, each time we iterate a 1-D map, we are bounced to somewhere else
+ on the unit interval.
+ This point on the unit interval is included in an enumerable set of line
+ segments, which can be maped back to the whole unit interval via the modular
+ group.
+ Thus, a single point is a representative element of the equivalence class
+ of all the points that the modular group maps it to.
+ We want to study how the logistic equation acts on these equivalence classes,
+ instead of asking how it acts on single points.
+\layout Standard
+
+Blah Blah Blah.
+ Define what equivalence class means when a group acts on a set.
+ viz define the quotient space.
+ 
+\layout Standard
+
+This is essentially how we get related to Julia sets.
+ After we iterate a map like the logistic map once, we then ask what other
+ points are in the same equivalence class, under the action of the modular
+ group.
+ That is, we now studay iteration in the quotient space, where the modular
+ group provides the quotient.
+ This quotient map is just the map of all hyperbolic triangles back to the
+ fundamental domain.
+ And so we really study iteration in this quotient space.
+ Blah blah.
+ Provide pretty pictures.
+ We now ask what do the points on the boundary of the fundamental domain
+ correspond to, blah blah, these are the Misiurewicz points, which is why
+ they relate to Julia sets; they essentially paste together the pieces.
+ 
+\layout Section
+
+Distributions of Rational Numbers
+\layout Standard
+
+Blah Blah, we go back to do some fundamentals.
+ The idea is to start exploring the tools we can use to relate the real
+ numbers 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ to both 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+.
+ We've already seen that the measure of the distribution of dyadic numbers
+ on the real-number line has something funny going on.
+ Here, we'll look at the distribution of the Farey numbers on the (dyadic-measur
+e) real-number line.
+ We'll promptly see that this distribution is the first derivative of the
+ Minkowski Question Mark, which is perhaps not surprising if we think of
+ 
+\begin_inset Formula $?$
+\end_inset 
+
+ as the map 
+\begin_inset Formula $?:\mathbb{R}_{C}\rightarrow\mathbb{R}_{D}$
+\end_inset 
+
+ and thus the distribution is the Jacobean of this map.
+\layout Standard
+
+Next we introduce the Frobenius-Perrron operator of an iterated function
+ map, hoping to use this as a mechanism to gain insight into the structure
+ of the Bernoulli map 
+\begin_inset Formula $b(x)=2x-\left\lfloor 2x\right\rfloor $
+\end_inset 
+
+ which is used to generate the dyadic numbers, and the truncation map 
+\begin_inset Formula $h(x)=1/x-\left\lfloor 1/x\right\rfloor $
+\end_inset 
+
+ which is used to generate continued fractions.
 \layout Subsection
 
 Distribution of Rationals in the Farey Tree
