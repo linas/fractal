@@ -2,7 +2,10 @@
  * radius.c
  *
  * FUNCTION:
- * Find bud radius
+ * Find bud radius.  Itdoes this by doing iterations along a set of radial
+ * lines coming out from a center.  When iterated sufficiently, the iterator
+ * either settles down to a cycle (in which case the pont is inside) or it
+ * escapes (i.e. we have an over-estimate for the radius).
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989
@@ -48,6 +51,8 @@ void measure_radius (
    double 	modulus=0.0;
    double	escape_radius = 3.1;
    double	esq;
+   double	dist=0.0;
+   double	closest=0.0;
 
    esq = epsilon*epsilon;
 
@@ -78,6 +83,7 @@ void measure_radius (
          re_c = re_center + rad * co;
          im_c = im_center + rad * si;
    
+         closest = 1.0e30;
          re = re_c;
          im = im_c;
          for (loop=1; loop <itermax; loop++) {
@@ -103,12 +109,15 @@ void measure_radius (
                break;
             }
 
-            if ((re-re_last)*(re-re_last) + (im-im_last)*(im-im_last) < esq) {
+            dist = (re-re_last)*(re-re_last) + (im-im_last)*(im-im_last);
+            if (dist < closest) closest = dist;
+            if (dist < esq) {
                radius_cand = rad;
                loop_cand = loop;
                break;
             }
          }    
+         printf ("%14.10g	%14.10g	%d\n", rad, closest, loop);
    
          rad += deltar;
       }
@@ -194,7 +203,7 @@ main (int argc, char *argv[])
    printf ("# nphi=%d nr=%d iter=%d eps=%g cent=(%14.10f %14.10f) rmin=%f rmax=%f\n", 
         nphi, nr, itermax, epsilon, re_center, im_center, rmin, rmax);
    printf ("# \n");
-   printf ("#i	theta		radius		loop count\n"); 
+   printf ("#i	theta		radius		radius outer	outer-inner	loop count\n"); 
    printf ("# \n");
 
    measure_radius (data, nphi, nr, re_center, im_center,
