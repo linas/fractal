@@ -7,10 +7,10 @@ LIB = $(TOP)/lib
 # fcc for IBM RT
 # CC = /bin/fcc -f2 -O -I $(INC)
 
-CC = /usr/bin/cc -O2 -I $(INC) -DANSI_C
+CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= zgap zgap-check fairy xlist elist flist gap ginv glist sym imap \
-	terms x zscale zinv zlist zmap
+EXES= zgap zgap-check zlist fairy xlist elist flist gap ginv glist sym imap \
+	terms x zscale zinv zmap
 
 LISTS= fnums enums
 
@@ -26,7 +26,7 @@ realclean:	clean
 	$(CC) -c $<
 
 .o:
-	$(CC) -o $* $< $(LIB)/Farey.o -lm
+	$(CC) -o $* $< $(LIB)/Farey.o -lm -lstdc++
 
 ################## Dependencies and compile/link #########
 # fairy
@@ -72,12 +72,6 @@ tlist: tlist.c $(LIB)/Farey.o $(INC)/Farey.h
 #
 terms: terms.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o terms terms.c $(LIB)/Farey.o -lm
-
-# zlist
-# 	(Jan 1994) excercise Farey Number converter
-#
-zlist: zlist.c $(LIB)/Farey.o $(INC)/Farey.h
-	$(CC) -o zlist zlist.c $(LIB)/Farey.o -lm
 
 # zinv
 # 	(Jan 1994) excercise Farey Number converter

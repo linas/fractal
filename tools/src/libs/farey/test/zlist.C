@@ -7,51 +7,54 @@
  * Linas Vepstas Januery 16 1994
  */
 
-#include "Farey.h"
-#include <stdio.h>
+#include <complex.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Farey.h"
 
 /* ------------------------------------------------------------ */
 
-main (argc, argv)
-int argc;
-char *argv[];
+main (int argc, char *argv[])
 {
-   struct Farey *f;
+   ContinuedFraction f;
    double x, y, z, t;
    int i, n;
    int nume, deno;
+   Complex ct, cy;
 
    if (argc <3) {
       printf ("Usage: %s <number of terms> <base> \n", argv[0]);
       exit (1);
    }
 
-   f = CreateFarey();
-
    n = atoi (argv[1]);
    t = atof (argv[2]);
 
-   /* deno = 6899 * n +1; */
-   deno = 65536 *n;
+   deno = 6899 * n +1;
+   // deno = 65536 *n;
    for (i=0; i<n; i++){
-      /* nume = 6889*i; */
-      nume = 65536*i + rand();
+      nume = 6889*i;
+      // nume = 65536*i + rand();
 
       x = ((double) (nume))/ ((double) deno);
-      /* SetReal (f, x); */
+      /* f.SetReal (x); */
 
-      RatioToContinuedFraction (f, nume, deno);
-      y = ContinuedFractionToZReal (f, t);
+      f.SetRatio (nume, deno);
+      y = f.ToZReal (t);
+      ct = t;
+      cy = f.cToZReal (ct);
+      z = cy.real();
 
 /*
-      RatioToContinuedFraction (f, i, n);
-      z = ContinuedFractionToZReal (f, t);
+      f.SetRatio (i, n);
+      z = f.ToZReal (t);
 
       y -= z;
 */
 
-      printf ("i %g f %g \n", x, y);
+      printf ("i %g f %g %g %g \n", x, y, z, y-z);
       fflush (stdout);
    }
 
