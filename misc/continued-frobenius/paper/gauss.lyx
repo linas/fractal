@@ -1,0 +1,413 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme times
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+An exploration of the Gauss-Kuz'min-Wirsing Operator and its relation to
+ the Riemann Zeta
+\layout Author
+
+Linas Vepstas <linas@linas.org>
+\layout Date
+
+January 2004
+\layout Abstract
+
+The Riemann Zeta function can be expressed as an integral over the continued
+ fraction operator, and thus over the Gauss-Kuz'min-Wirsing transfer operator.
+ This paper takes an introductory tour over some simpler constructions,
+ providing results on sums over the Riemann Zeta, and expressing the Zeta
+ in terms of the Pochhammer symbol.
+ Some results presented might be new.
+\layout Section
+
+The Frobenius-Perron Operator of the Continued Fraction Map
+\layout Standard
+
+Fractals arise naturally whenever a function is iterated.
+ The study of fractals reveals a deep but unclear relationship to Farey
+ Numbers.
+ Farey Numbers are in turn connected to Continued Fractions (CF).
+ Thus, one is lead naturally to ask what happens when the CF map is iterated.
+ One tool for understanding an iterated function is to explore the eigenvalues
+ of its associated Frobenius-Perron operator.
+ The Frobenius-Perron operator of the continued fraction map has been well-explo
+red, and is thus known as the Gauss-Kuz'min-Wirsing operator.
+ We derive this operator here, starting from basic principles.
+\layout Standard
+
+Any real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ can be written as a continued fraction:
+\begin_inset Formula \[
+x=n+\frac{1}{a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+...}}}}\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $n$
+\end_inset 
+
+ and each of the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ are integers.
+ Because the above is unweildy to write, we adopt the notation 
+\begin_inset Formula $x=\left\langle n;\, a_{0},\, a_{1},\, a_{2},\, a_{3},\,...\right\rangle $
+\end_inset 
+
+ for the above fraction.
+ The various 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+can be gotten by iterating the CF or Gauss map 
+\begin_inset Formula $T:\left[0,1\right]\rightarrow\left[0,1\right]$
+\end_inset 
+
+, which is defined as: 
+\layout Standard
+
+
+\begin_inset Formula \[
+T(z)\equiv\frac{1}{z}-\left\lfloor \frac{1}{z}\right\rfloor \]
+
+\end_inset 
+
+ Lets remove the integer part of 
+\begin_inset Formula $x$
+\end_inset 
+
+ by defining 
+\begin_inset Formula $y=x-\left\lfloor x\right\rfloor =$
+\end_inset 
+
+
+\begin_inset Formula $\left\langle 0;\, a_{0},\, a_{1},\, a_{2},\,\ldots\right\rangle $
+\end_inset 
+
+.
+ We then have 
+\begin_inset Formula $T(y)=\left\langle 0;\, a_{1},\, a_{2},\, a_{3},\,\ldots\right\rangle $
+\end_inset 
+
+ and iterating, 
+\begin_inset Formula $T^{k}(y)\equiv T\circ T\circ\ldots\circ T(y)=\left\langle 0;\, a_{k},\, a_{k+1},\, a_{k+2},\,\ldots\right\rangle $
+\end_inset 
+
+ so that each 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ is just the integer part of the iterated Gauss map:
+\begin_inset Formula \[
+a_{k}=\left\lfloor \frac{1}{T^{k}(y)}\right\rfloor \]
+
+\end_inset 
+
+The point sequence 
+\begin_inset Formula $\left\{ y_{k}\equiv T^{k}(y)\right\} $ 
+
+\end_inset 
+
+is just the trajectory of the iterated Gauss map and is powerfully chaotic
+ for 
+\begin_inset Quotes eld
+\end_inset 
+
+most
+\begin_inset Quotes erd
+\end_inset 
+
+ values of 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+Frobenius-Perron Operators
+\layout Standard
+
+Instead of studying point trajectories of an iterated function, a standard
+ technique is to study the effect of iteration on a density 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ defined on 
+\begin_inset Formula $x\in M$
+\end_inset 
+
+ for manifold 
+\begin_inset Formula $M$
+\end_inset 
+
+.
+ For any map 
+\begin_inset Formula $S:M\rightarrow M$
+\end_inset 
+
+, we define the Frobenius-Perron operator 
+\begin_inset Formula $U$
+\end_inset 
+
+ acting on a density as 
+\begin_inset Formula \[
+U\rho(x)\equiv\int_{M}dx'\,\delta\left(x-S(x')\right)\,\rho(x')\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\delta(x)$
+\end_inset 
+
+ is the Dirac delta function; the operator maps the density after one iteration
+ of the underlying manifold.
+ Equivalently, we can write 
+\begin_inset Formula \[
+U\rho(x)=\sum_{x':S(x')=x}\frac{\rho(x')}{\left|dS(x')/dx'\right|}\]
+
+\end_inset 
+
+ where sum is taken over inverse branches over the possibly many-to-one
+ map 
+\begin_inset Formula $S$
+\end_inset 
+
+; the denominator is the Jacobian.
+ The most elegant definition starts with the set 
+\begin_inset Formula $\mathcal{S}$
+\end_inset 
+
+ of inverse branches of 
+\begin_inset Formula $S$
+\end_inset 
+
+:
+\begin_inset Formula \[
+\mathcal{S}\equiv\left\{ h\mid h(S(x))=x\, x\in M\right\} \]
+
+\end_inset 
+
+ then 
+\begin_inset Formula \[
+U[\rho](x)\equiv U\rho(x)=\sum_{h\in\mathcal{S}}\left|h'(x)\right|\rho\circ h(x)\]
+
+\end_inset 
+
+ where we've introduced the alternate notation 
+\begin_inset Formula $U[f]$
+\end_inset 
+
+ to emphasize that the operator 
+\begin_inset Formula $U$
+\end_inset 
+
+ maps functions into functions.
+ That is, the above definition holds for any function 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ defined on the manifold 
+\begin_inset Formula $M$
+\end_inset 
+
+, and depends only on the set of inverse branches.
+\layout Standard
+
+Whereas an iterated function map generates highly discontinuous point trajectori
+es, iterating the Frobenius-Perron operator provides a very different perspectiv
+e, especially when acting on smooth, continuous densities.
+ The iterated Frobenius-Perron operator can be used to study the approach
+ to equilibrium of ergodic/chaotic systems.
+ Note, however, that, in general, 
+\begin_inset Formula $U$
+\end_inset 
+
+ is neither unitary nor invertible.
+ The properties of 
+\begin_inset Formula $U$
+\end_inset 
+
+ depend very much on the function space on which it acts; for example, if
+ 
+\begin_inset Formula $\rho\in L^{1}=\left\{ \rho\,\mathrm{such\, that}\int_{M}\left|\rho(x)\right|dx<\infty\right\} $
+\end_inset 
+
+ then 
+\begin_inset Formula $U$
+\end_inset 
+
+ is contractive, i.e.
+ 
+\begin_inset Formula $\left\Vert U\rho\right\Vert \leq\left\Vert \rho\right\Vert $
+\end_inset 
+
+.
+ This last implies that if the basis of the function space is polynomial
+ or analytic, then the eigenvalues 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ of 
+\begin_inset Formula $U$
+\end_inset 
+
+ obey 
+\begin_inset Formula $\left|\lambda\right|\leq1$
+\end_inset 
+
+.
+ Note that 
+\begin_inset Formula $U$
+\end_inset 
+
+ can be defined to act on the space of generalized functions (e.g.
+ functions that are discontinuous everywhere); in this case, an eigenvalue
+ analysis can yeild completely different results than the one where the
+ basis consists of analytic functions.
+ Among other things, the number of zero eigenvalues (the size of the Kernel
+ of 
+\begin_inset Formula $G$
+\end_inset 
+
+) depends on the choice of basis.
+ Thus, questions of differentiability and convergence should be kept in
+ mind when working with Frobenius-Perron operators.
+ In the remainder, we will work primarily with analytic functions.
+\layout Subsection
+
+The Gauss-Kuz'min-Wirsing Operator
+\layout Standard
+
+For the Gauss map 
+\begin_inset Formula $T(z)$
+\end_inset 
+
+, the Fabrenious-Perron operator 
+\begin_inset Formula $U$
+\end_inset 
+
+ is instead refered to as 
+\begin_inset Formula $G$
+\end_inset 
+
+ and acts on densities as follows:
+\begin_inset Formula \[
+G\rho(x)=\sum_{n=1}^{\infty}\frac{1}{\left(n+x\right)^{2}}\rho\left(\frac{1}{n+x}\right)\]
+
+\end_inset 
+
+ and is called the Gauss-Kuz'min-Wirsing (GKW) operator.
+ 
+\layout Subsection
+
+Relationship to the Reimann Zeta
+\layout Standard
+
+The Riemann zeta function can be written as an integral over the GKW operator;
+ thus, a study of GKW can offer another route to the study of the Riemann
+ zeta.
+ The Riemann zeta can be written as
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-s\int_{1}^{\infty}\frac{x-\left\lfloor x\right\rfloor }{x^{s+1}}\, dx=\frac{s}{s-1}-s\int_{0}^{1}\left(\frac{1}{y}-\left\lfloor \frac{1}{y}\right\rfloor \right)y^{s-1}\, dy\]
+
+\end_inset 
+
+ We make use of the Dirac delta function identity 
+\begin_inset Formula $\int z\delta\left(z-f(a)\right)dz=f(a)$
+\end_inset 
+
+ to write 
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}y^{s-1}\int z\delta\left(z-T(y)\right)\, dzdy\]
+
+\end_inset 
+
+Then, performing the 
+\begin_inset Formula $y$
+\end_inset 
+
+ integral first, and recalling the definition of the Fabrenious-Perron operator,
+ we can write
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dz\, z\, Gz^{s-1}\]
+
+\end_inset 
+
+That is, the Riemann zeta is kind-a sort-of-ish like the Laplace Transform
+ of the GKW operator, which we can see if we substitute 
+\begin_inset Formula $z=e^{-t}$
+\end_inset 
+
+:
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{\infty}dt\, e^{-2t}Ge^{-t(s-1)}\]
+
+\end_inset 
+
+One is thus lead to ask what form the Riemann Hypothesis takes, when transferred
+ to 
+\begin_inset Formula $G$
+\end_inset 
+
+.
+ On can also ask about the form of other objects involving 
+\begin_inset Formula $G$
+\end_inset 
+
+, such as the 
+\begin_inset Quotes eld
+\end_inset 
+
+Fourrier transform
+\begin_inset Quotes erd
+\end_inset 
+
+, performed, for example, on the critical strip.
+\layout Subsection
+
+Simple Relationships
+\layout Standard
+
+There is no particularly simple expression for 
+\begin_inset Formula $G$
+\end_inset 
+
+, although it can be written as a matrix acting on the coefficients of a
+ Taylor's expansion.
+ We will do this in the next section.
+ Here, we will present some simple relationships involving 
+\begin_inset Formula $G$
+\end_inset 
+
+.
+ 
+\the_end
