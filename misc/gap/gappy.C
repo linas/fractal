@@ -49,7 +49,7 @@ main (int argc, char *argv[])
 	d = atoi (argv[1]);
 	printf ("#\n# denom=%d\n#\n", d);
   
-	for (n=0; n<=d; n++)
+	for (n=1; n<d; n++)
 	{
 		int gcf, rn, rd;
 
@@ -64,10 +64,30 @@ main (int argc, char *argv[])
 		{
 			w = (double) (iw+1);
 			w /= (double) NV;
+			// w *= 0.01;
+			// w *= 100.0;
 			double xm = f.ToXOdd(w);
 			double xp = f.ToXEven(w);
 			gap[iw] = xp - xm;
 			gap[iw] *= (double) rd*rd;
+			gap[iw] /= w;
+			if (1.1 > w) {
+				gap[iw] -= 2.0;
+				gap[iw] += w;
+				gap[iw] -= 0.5*w*w;
+				// biggest remaining variation is 0<~ gap < 0.5 *w*w
+				// although for larger w, it should be -0.5*w*w <= gap < 0.5 *w*w
+/*
+ * In other words,  
+ * gap(p/q) = (w/q^2) [2 - w + w^2/2 + T(p/q)]
+ * where abs T(p/q) < w^2/2
+ * for w<=1
+ */
+			}
+			else
+			{
+				// gap[iw] += 
+			}
 		}
 		printf ("%g	%g	%g	%g	%g	%g	%g\n", 
 			t, gap[0], gap[1], gap[2], gap[3], gap[4], gap[5]);
