@@ -19,9 +19,11 @@
 
 /* Return euler-product form of the q-series (dedekind eta) */
 
-static double euler_prod (double re_q, double im_q)
+static void euler_prod_c (double re_q, double im_q, double *prep, double *pimp)
 {
 	int i;
+	*prep = 0.0;
+	*pimp = 0.0;
 
 	double rep = 1.0;
 	double imp = 1.0;
@@ -30,7 +32,7 @@ static double euler_prod (double re_q, double im_q)
 	double qpi = im_q;
 
 	double qpmod = qpr*qpr+qpi*qpi;
-	if (1.0 <= qpmod) return 0.0;
+	if (1.0 <= qpmod) return;
 
 	for (i=0; i<100100; i++)
 	{
@@ -53,6 +55,34 @@ static double euler_prod (double re_q, double im_q)
 	{
 		printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
 	}
+
+	*prep = rep;
+	*pimp = imp;
+}
+
+static double euler_prod (double re_q, double im_q)
+{
+	double rep, imp;
+	euler_prod_c (re_q, im_q, &rep, &imp);
+	return sqrt (rep*rep+imp*imp);
+}
+
+static double dedekind_eta (double re_q, double im_q)
+{
+	double rep, imp;
+	euler_prod_c (re_q, im_q, &rep, &imp);
+
+	double phase = atan2 (im_q, re_q);
+	phase /= 24.0;
+	double mod = sqrt (re_q*re_q + im_q*im_q);
+	mod = pow (mod, 1.0/24.0);
+
+	double reqt = mod * cos (phase);
+	double imqt = mod * sin (phase);
+
+	double tmp = reqt*rep - imqt*imp;
+	imp = reqt*imp + imqt*rep;
+	rep = tmp;
 
 	return sqrt (rep*rep+imp*imp);
 }
@@ -94,7 +124,8 @@ MakeHisto (
       for (j=0; j<sizex; j++) 
 		{
 
-			double phi = euler_prod (re_position, im_position);
+			// double phi = euler_prod (re_position, im_position);
+			double phi = dedekind_eta (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;
