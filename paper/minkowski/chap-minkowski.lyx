@@ -38,7 +38,7 @@ and the Modular Group
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004
+12 October 2004 (minor corrections 6 December 2004)
 \layout Abstract
 
 Fractals and Continued Fractions seem to be deeply related in many ways.
@@ -712,7 +712,7 @@ c & d\end{array}\right):(x)=\frac{ax+b}{cx+d}\]
  It should be clear that we can now build up the continued fraction as desired
  with this insertion operator acting on zero: 
 \begin_inset Formula \[
-(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j-1,k,m,...,x]\]
+(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
 
 \end_inset 
 
@@ -752,7 +752,7 @@ One can also find the append operator, which we find by examining
 
  as follows: 
 \begin_inset Formula \[
-(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
+(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
 
 \end_inset 
 
@@ -1134,6 +1134,74 @@ prima facae
 , without invoking the Axiom of Choice.
  We start laying some of the groundwork for a proof of this type in a later
  section.
+\layout Subsection
+
+The Dyadic Representation as Affine Transformations
+\layout Standard
+
+Note that the dyadic representation can be written as affine transformations,
+ which also use two-by-two matrices.
+ These should not be confused with the canonical representation.
+ In the affine representation, we write 
+\begin_inset Formula \[
+\gamma_{D}(x)\;:=\left(\begin{array}{cc}
+1 & 0\\
+a & b\end{array}\right)\left(\begin{array}{c}
+1\\
+x\end{array}\right)=\left(\begin{array}{c}
+1\\
+a+bx\end{array}\right)\]
+
+\end_inset 
+
+ for some values 
+\begin_inset Formula $a,b$
+\end_inset 
+
+.
+ In this representation, we have 
+\begin_inset Formula \[
+g_{D}=\left(\begin{array}{cc}
+1 & 0\\
+0 & \frac{1}{2}\end{array}\right)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+r_{D}=\left(\begin{array}{cc}
+1 & 0\\
+1 & -1\end{array}\right)\]
+
+\end_inset 
+
+ and so once again, we can use matrix multiplication to quickly compute
+ 
+\begin_inset Formula \[
+\gamma_{D}(x)\;:=\gamma_{D}\left(\begin{array}{c}
+1\\
+x\end{array}\right)=g_{D}^{a_{1}}r_{D}g_{D}^{a_{2}}r_{D}...r_{D}g_{D}^{a_{N}}\left(\begin{array}{c}
+1\\
+x\end{array}\right)\]
+
+\end_inset 
+
+ which is eactly equal to the 
+\begin_inset Formula $\gamma_{D}(x)$
+\end_inset 
+
+ presented before.
+ Although 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+ is thus also representable as a two-by-two matrix, don't confuse it with
+ the matrix 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+.
+ 
 \layout Subsection
 
 Fractal Symmetry and the Subset 
