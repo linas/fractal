@@ -168,6 +168,8 @@ printf ("duude amp= %f\n", abs<double>(amplitude [nx*py+px]));
 #endif
          }
       }
+
+      if (0 == ox%oversample) { printf ("."); fflush (stdout); }
    }
 
 }
