@@ -16,6 +16,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Farey.h"
+
+ContinuedFraction far;
+
 long double triangle (long double x)
 {
 	long double t = x - floorl(x);
@@ -46,6 +50,14 @@ double saw (double x)
 	return 2.0-x;
 }
 
+double mink(double x)
+{
+	x = triangle (x);
+	far.SetReal (x);
+	x = far.ToFarey();
+	return x;
+}
+
 long double takagi (long double w, long double x)
 {
 	int k;
@@ -55,6 +67,24 @@ long double takagi (long double w, long double x)
 	for (k=0; k<100; k++)
 	{
 		long double term = tw* triangle (tp*x);
+		acc += term;
+		tp *= 2.0L;
+		tw *= w;
+		if (1.0e-16 > tw) break;
+	}
+
+	return acc;
+}
+
+long double takagi_l (long double w, int l, long double x)
+{
+	int k;
+	long double acc = 0.0L;
+	long double tw = 1.0L;
+	long double tp = 1.0L;
+	for (k=0; k<100; k++)
+	{
+		long double term = tw* triangle ((2*l+1)*tp*x);
 		acc += term;
 		tp *= 2.0L;
 		tw *= w;
@@ -191,6 +221,26 @@ double takagi_exp (double w, double x)
 		tw *= w;
 		fact *= k+1;
 		if (1.0e-14 > term) break;
+	}
+
+	return acc;
+}
+
+double takagi_mink (double w, double x)
+{
+	int k;
+	double acc = 0.0;
+	double tw = 1.0;
+	double tp = 1.0;
+	for (k=0; k<32; k++)
+	{
+		double term = tw* mink (tp*x);
+		acc += term;
+// printf ("# k=%d term=%g acc=%g\n", k, term, acc);
+// fflush (stdout);
+		tp *= 2.0;
+		tw *= w;
+		if (1.0e-16 > tw) break;
 	}
 
 	return acc;
@@ -343,8 +393,8 @@ main (int argc, char *argv[])
 {
 	int i;
 
-	int nmax = 512;
-	// int nmax = 5431;
+	// int nmax = 512;
+	int nmax = 441;
 	// int nmax = 23;
 
 	if (argc <2)
@@ -370,13 +420,37 @@ main (int argc, char *argv[])
 
 		// double tw = lytic (w, x);
 
-#ifdef HALH_SYM
+		// grg^3
+		double tw = takagi (w, 0.5-0.0625*x);
+		double ts = 1.0 + x*(-0.125+0.25*w +0.5*w*w + w*w*w) +w*w*w*w*takagi (w,x);
+
+#ifdef HALF_SYM
+		// g
 		double tw = takagi (w, 0.5*x);
 		double ts = x + w*takagi (w, x);
+
+		// g*g
 		double tw = takagi (w, 0.25*x);
 		double ts = 0.5*x + w*x + w*w*takagi (w, x);
+
+		// g*g*g
+		double tw = takagi (w, 0.125*x);
+		double ts =  x*(0.25+0.5*w +w*w) +w*w*w*takagi (w,x);
+
+		// r*g*g*g
+		double tw = takagi (w, 1.0-0.125*x);
+		double ts = x*(0.25+0.5*w +w*w) +w*w*w*takagi (w,x);
+
+		// g^4
 		double tw = takagi (w, 0.0625*x);
 		double ts = 0.125*x*(1.0-16.0*w*w*w*w)/(1.0-2.0*w) + w*w*w*w*takagi (w, x);
+		// gr
+		double tw = takagi (w, 0.5-0.5*x);
+		double ts = 1.0 - x + w*takagi (w,x);
+
+		// grg
+		double tw = takagi (w, 0.5-0.25*x);
+		double ts = 1.0 +x*(-0.5+w) +w*w*takagi (w, x);
 		double tw = takagi (w, 0.5*(1.0+x));
 		double ts = 1.0-x + w*takagi (w, x);
 		double tw = takagi (w, 1.0+0.0625*(x-1.0));
@@ -385,10 +459,34 @@ main (int argc, char *argv[])
 		double ts = 0.5 -2.0*w*w + x*(0.5-2.0*w +2.0*w*w);
 		ts /= 1.0-2.0*w;
 		ts += w*w*takagi (w, x);
-#endif
-		double tw = takagi (w, x);
-		double ts = takagi_prime (0.5*w, x);
 
+		double tw = takagi_l (w, 1, 0.5*x);
+		double ts = takagi_l (w, 0, 3.0*x/2.0);
+		double tw = takagi_l (w, 2, 0.5*x);
+		double ts = takagi_l (w, 1, 5.0*x/6.0);
+		double tw = takagi_l (w, 3, 0.5*x);
+		double ts = takagi_l (w, 2, 7.0*x/10.0);
+		int k=5;
+		double tw = takagi_l (w, k, 0.5*x);
+		double ts = takagi_l (w, k-1, (2*k+1)*x/(2*(2*k-1)));
+
+		int k=4;
+		double tw = takagi_l (w, k, 0.5*x);
+		double ts = (2*k+1)*x + w*takagi_l (w, k, x);
+#endif
+		// double tw = takagi_mink (w, x);
+		// double ts = 1.0;
+
+		// double tw = takagi (w, x);
+		// double ts = takagi_prime (0.5*w, x);
+
+		// double tw = takagi (w, 0.5-0.0625*x);
+		// double ts = 0.125 + 0.25*w + 0.5*w*w - x*(0.125+0.25*w* +0.5*w*w - w*w*w);
+		// ts += w*w*w*w*takagi (w, x);
+
+		// double tw = takagi (w, 0.125*x);
+		// double ts =  x*(0.25+0.5*w +w*w) +w*w*w*takagi (w,x);
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
+		fflush (stdout);
 	}
 }
