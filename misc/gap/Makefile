@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= gappy sway
+EXES= fdist gappy sway
 
 all: 	$(EXES)
 
@@ -20,8 +20,9 @@ realclean:	clean
 	$(CC) -c -O2 $<
 
 .o:
-	$(CC) -o $* $< $(LIB)/Farey.o -lm -lstdc++
+	$(CC) -o $* $< $(LIB)/Farey.o $(LIB)/FareyTree.o -lm -lstdc++
 
 
 gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
 sway.o:  sway.C $(LIB)/Farey.o $(INC)/Farey.h
+fdist.o:  fdist.C $(LIB)/FareyTree.o $(INC)/FareyTree.h
