@@ -57,6 +57,7 @@ inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age
 	ln -f brat inf
 	ln -f brat cutoff
 	ln -f brat wind
+	ln -f brat winds
 
 card: card.c  util.o
 	$(CC) -o card card.c util.o -lm

@@ -2952,6 +2952,10 @@ main (int argc, char *argv[])
    mandelbrot_wind (data, data_width, data_height,
                   re_center, im_center, width, height, itermax); 
    
+   if (!strcmp(argv[0], "winds"))
+   mandelbrot_windsimple (data, data_width, data_height,
+                  re_center, im_center, width, height, itermax); 
+   
    if (!strcmp(argv[0], "cutoff"))
    mandelbrot_cutoff (data, data_width, data_height,
                   re_center, im_center, width, itermax); 
