@@ -1,0 +1,145 @@
+
+11 jan 97 
+---------
+
+I've been aching to try some simple AI experiments.  The Internet is a
+huge resource of written statements and dialogues that could be used as
+input for an AI program.  I feel there must be some way to leverage this
+resource to train a program that could learn.
+
+I don't know what I'm doing, but I have to start somewhere.  An obvious
+beginning is to better understand how English phrases are constructed.
+The idea is that a grammar (in the traditional linguistic sense) might be
+deduced given a sufficiently large sampling of actual writing.  I don't 
+know how to do this, but as a first step,  I will try to count the
+occurrences of multi-word phrases.
+
+The first program is simple: every word of a text is assigned a unique
+integer. A simple hashing scheme can rapidly look up or add to this
+table.  The table counts how often a given word occurs in a text. No 
+special provisions are made for misspelled words.  This is implemented
+in "wordhash.C".
+
+Next, sequences of two or three or four words are assigned a unique 
+number. Again, a simple hashing scheme provides fast lookup. Again, no
+special treatment for misspelled words or bad grammar.  Again, the 
+frequency of occurrence is tracked.  From now on, I will refer to a 
+sequence of words as a "phrase".  This code is implemented in 
+"pairhash.C" with "multihash.C" to handle triplets, quadruplets, etc.
+
+Next, ordered pairs of phrases are assigned a unique id, using the same
+technology.  From now on, I will call an ordered pair of phrases a "link".
+The lookup tables are enhanced with a "concordance": given any phrase, all 
+links containing that phrase as the first elements can be quickly found.
+This can be found in "concord.C"
+
+Now, we are prepared for the first sequence of experiments. "analyze.C" 
+contains code that will read in a text file and analyze it.  The Dump()
+method will find the most commonly occurring phrases, and print them. 
+The Chain() method will chain together a sequence of the most commonly
+occuring links, using the first phrase of a link to find the second
+phrase, which in turn is used as the first phrase of the next most 
+commonly occuring link.
+
+Used a 4.5 megabyte sample of old e-mail, with e-mail control characters
+(and assorted html) stripped out.  I expect that simple chaining will
+produce a word-salad.  Surprisingly, it does not: it appears to
+reproduce fairly long sequences of pieces of mail.  I can recognize  
+mail notes that I have written or received, although these do get
+spliced together in odd ways.  Apparently, since e-mail often quotes
+previous messages, an oft-quoted message builds up a strong sequence of links,
+and so tends to get reproduced verbatim.  Of course, a larger sample
+could smear out, defocus this.   The 4.5 megs of raw data seems to
+require about 35 megabytes to of memory, given the tables and all.
+
+15th? jan 1997
+--------------
+Clearly, chaining "popular" phrases together will lead nowhere. Besides,
+I want to have a conversational ability, the ability to type in text,
+and get a reply.
+
+The first thought along this avenue is to try to use the information
+about phrase sequences to derive a grammar. By matching phrases that
+occur in the input dialogue to know phrase sequences, we should be able
+to somehow ... somehow what?  Knowing a grammar is not enough to generate 
+a reply.  We need more: an ability to find related sentences or thoughts.
+Also, a strict deterministic grammar is a bit of a straghtjacket,
+especially considering the mis-spellings, bad grammar, etc. 
+
+I hit upon the realization that the strict pattern matching of a grammar
+could be replaced by a fuzzy matching. In fact, what I code up blends
+these fuzzy logic ideas with a neural-net like construct. So I code up
+the following: each "phrase" becomes a "neuron" or "node". the links
+between phrases are the connections/axons.  There is a natural "weight"
+for each link: how often one link connects one phrase to another. The
+weights are computed and normalized to unity by counting all of the
+links that lead from a phrase, and counting how often that link occurs
+(how "strong" that link is between two phrases.)
+
+Now that we have a neural net, with weights derived by real-text
+training, we can excite that net.  Input text can be used to find nodes,
+and give them an activation of unity. Neighboring nodes are then excited
+using the weights of the connecting links.  The activations are summed,
+and passed through a squashing function.  This cycle of activation,
+summation and squashing can be used to excite a part of the net.
+
+Now, to get output fro this net.  I tried two methods: hill-climbing,
+and global maximization. In the hill-climbing algorithm, the most
+excited neuron is found.  This is then followed to its neighbors via the
+phrase links, and the next most exited node is found. This is followed
+in turn until the trail runs cold, or an (infinite) loop is hit.
+
+The global maximization algorithm starts the same way, by finding the 
+most excited node.  From here, a large number of paths are explored,
+and the path with the highest grand-total excitement is the output.  The
+global optimization scheme is better than the hill-climbing algorithm in
+that it allows valleys of low-excitation phrases to be crossed en-route
+to other high-excitement peaks.
+
+Both algorithms generate a phrase salad of interesting stream-of- 
+consciousness style remarks about the input text.
+
+In a sense, I feel I've built a text "perceptron". Whatever this is, it
+just might work as the first layer of a more complex machine.  It can 
+produce more-or-less grammatically correct text.  Now what?
+
+21 Jan 1997
+-----------
+Serious, fundamental problems exist. First, the system has no way
+of recognizing "concepts", although I have idea on how to add this; e.g.
+by treating the set of all neurons and their excitations as a Hilbert
+space.  It might be possible that different regions of this space could
+correspond to "concepts".  I second, but very important problem is that
+this neuronal, phrase-based system seems to have no way discovering,
+learning and remembering relationships: e.g  "a four legged stool is a
+type of a chair".  Nor does it know that when I say this, "this" might
+be refereeing to something I said many paragraphs ago.  Not sure how 
+to proceed from here. I am worried that a Hilbert-space approach could 
+chew up a whole lotta RAM.
+
+The idea behind the Hilbert space approach is that different phrase
+sequence might be used to express the same concept.  The goal is to
+group together different expressions and tag them as a single Hilbert-
+space vector.  Another way to look at the problem that this is trying to
+solve is the question of establishing long-range relationships between
+different parts of a text.
+
+
+22 jan 1997
+-----------
+The next big question is how to get the system to recognize relationships, 
+form hypothesis, and test hypothesis.  By "relationship", I mean
+relations like "is a part of", "is a kind of", "is similar to". 
+I don not wish to list all possible relationships; I would rather have
+the system divine them as they come up.  Thus a "hypothesis" is a
+construct that joins to items in some sort of relationship.  Finally,
+I would like the system to test hypothesis simply by "listening", not by
+"talking".   (I can't have the system post to news-groups, making claims
+like "a rock is a kind of paper", and then have it get shouted down with
+sentences which it cannot understand.)
+
+
+------------------- that's all folk's ---------------------
+
+
+
