@@ -3103,9 +3103,12 @@ gap_tongue (
 			gap -= x;
 			gap *= (double) dd;
 			gap *= (double) dd;
+#define REMOVE_LEADING_TERMS
+#ifdef REMOVE_LEADING_TERMS
 			gap -= w;
 			gap += w*w;
 			gap -= 0.5*w*w*w;
+#endif
 			gap += x;
 	// printf ("duude x=%d/%d = %g w=%g gap=%g\n", nn, dd, x, w, gap);
 
