@@ -22,12 +22,12 @@ main ()
    long long last_i = 0;
    double acc_theta = 0.0;
 
-   double gb0 = 1.0e-3;  // gyromagnetic * magnetic field 
+   double gb0 = 1.0e-4;  // gyromagnetic * magnetic field 
 
    long long imax = 48023;  // max iterations
    imax *= 1024*1024;
 
-   theta = 0.6;
+   theta = 3.0;
    nprec = 0;
    phi = 0.0;
    sin_theta = sin(theta);
@@ -56,6 +56,7 @@ main ()
      double mag_cos_phi = cos (magnet_phi);
 
 #if 0
+     // we don't really need to calculate these
      double impulse_x;
      double impulse_y;
      double impulse_z;
@@ -99,11 +100,6 @@ main ()
         phi = 0.0;
      }
 
-     // compute new sine and cosine of theta
-     tmp = cos_theta;
-     cos_theta -= sin_theta * d_theta;
-     sin_theta += tmp * d_theta;
-
 
      // compute new sine and cosine of phi
      if (2.0*M_PI < phi)
@@ -118,8 +114,8 @@ main ()
            int idi = di;
            long long ni = i/(1024*1024);
            long ini = ni;
-           printf ("%d	%d	%d	%g	%g\n",
-              nprec, ini, idi, theta, phi);
+           printf ("%d	%d	%d	%g\n",
+              nprec, ini, idi, theta);
            last_i = i;
         }
      }
@@ -136,8 +132,8 @@ main ()
            int idi = di;
            long long ni = i/(1024*1024);
            long ini = ni;
-           printf ("%d	%d	%d	%g	%g\n",
-              nprec, ini, idi, theta, phi);
+           printf ("%d	%d	%d	%g\n",
+              nprec, ini, idi, theta);
            last_i = i;
         }
      }
@@ -146,6 +142,33 @@ main ()
        tmp = cos_phi;
        cos_phi -= sin_phi * d_phi;
        sin_phi += tmp * d_phi;
+     }
+
+     // compute new sine and cosine of theta
+     if (0.0 > theta)
+     {
+        theta = - theta;
+        phi -= M_PI;
+        cos_theta = cos(theta);
+        sin_theta = sin(theta);
+        sin_phi = sin(phi);
+        cos_phi = cos(phi);
+     }
+     else 
+     if (M_PI < theta)
+     {
+        theta = 2.0 * M_PI - theta;
+        phi -= M_PI;
+        cos_theta = cos(theta);
+        sin_theta = sin(theta);
+        sin_phi = sin(phi);
+        cos_phi = cos(phi);
+     }
+     else 
+     {
+        tmp = cos_theta;
+        cos_theta -= sin_theta * d_theta;
+        sin_theta += tmp * d_theta;
      }
 
    }
