@@ -2935,27 +2935,6 @@ whack (
  */
 
 
-/* return the greatest common factor */
-int
-gcf32 (int nume, int denom)
-{
-	int t;
-	t = nume % denom;
-	nume = denom;
-	denom = t;
-
-	/* Euclids algorithm for obtaining the gcf */
-	while (0 != denom)
-	{
-		t = nume % denom;
-		nume = denom;
-		denom = t;
-	}
-
-	/* num now holds the GCD (Greatest Common Divisor) */
-	return nume;
-}
-
 void 
 gapper (
    float  	*glob,
@@ -2984,7 +2963,6 @@ gapper (
    
 	int d,n;  // denom, numerator
 	ContinuedFraction f;
-	double w = 0.016; // some value of w
 
 	for (d=2; d<itermax; d++)
 	{
@@ -3011,24 +2989,14 @@ if (i>=sizex) printf ("xxxxxxxxxxxxxxxxx\n");
 			bin_cnt [i] ++;
 			
 			f.SetRatio (nn,dd);
-			double gap = f.ToXEven(w) - f.ToXOdd(w);
-			gap *= dd*dd;
-			gap /= w;
-			gap -= 2.0;
-			gap += w;
-			gap -= 0.5*w*w;
-			gap /= 0.5*w*w;  // the range is -1 to +1
-			gap *= 0.5;      // the range is -0.5 to 0.5
-			// gap += 0.5;
-			gap += 0.04;
-			gap *= 1.8;
+			double gap = f.ToGapEven() - f.ToGapOdd();
 			gap = 1.0-gap;
 
 			j = (int) (gap * (double) sizey);
 			if (0>j) j=0;
 			if (j>=sizey) j=sizey-1;
 
-// if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,dd);
+if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,dd);
 			glob [j*sizex +i] ++;
 		}
 	}

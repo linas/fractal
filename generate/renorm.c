@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 #include "opers.h"
 
@@ -16,15 +17,14 @@ extern FILE *Fopenr();
 void main (int argc, char *argv[]) 
 {
    float	*data_in ;	/* my data array */
-   float	*data_out;	/* my data array */
-   float		*tmp; 		/* pointer into data array */
+   // float	*data_out;	/* my data array */
+   // float		*tmp; 		/* pointer into data array */
    unsigned int	data_width, data_height;/* data array dimensions */
    int		i,j;
    char 		str[80];
    FILE		*fp_in, *fp_out;
    float 		scale_fact;
    float 		offset;
-   double 		aver, msq;
    
    if (argc < 3) {
       fprintf (stderr, "usage: %s <input file> <output file> [<scale factor>] [<offset>] \n", argv[0]);
