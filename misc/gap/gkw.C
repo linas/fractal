@@ -57,7 +57,7 @@ main (int argc, char *argv[])
 	int nmax = 23;
 	for (i=0; i<nmax; i++)
 	{
-		double x = ((double) p)/ ((double) q);
+		double x = ((double) i)/ ((double) nmax);
 
 		double qp = qpsi (x);
 		double sq = sumq (x);
