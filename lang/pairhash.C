@@ -237,6 +237,18 @@ void lagGenericWordTable :: FlipAllWeights (void) {
 
 // =====================================================
 
+void lagGenericWordTable :: AbsAllWeights (void) {
+
+   // mark all active neurons as hot neurons
+   for (int i=1; i< num_entries; i++) {
+      if (0.0 > idx[i] -> activation) {
+         idx[i] -> activation = - idx[i] -> activation;
+      }
+   }
+}
+
+// =====================================================
+
 float lagGenericWordTable :: GetWeight (int id) {
    if (!idx[id]) return 0.0;
    float retval = idx[id] -> activation;
