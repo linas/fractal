@@ -1,0 +1,26 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'zeta.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "zeta-eigenfunctions"
+set xlabel "x"
+set ylabel "zeta"
+
+# set yrange [0:]
+
+plot "zeta.dat" using 2:3 title "zeta", \
+     "zeta.dat" using 2:(0.25*($2*$2*$2-1.5*$2*$2+0.5*$2)) title "bernoulli"
+
+#     "zeta.dat" using 2:(0.25*($2*$2-$2+0.1666666)) title "bernoulli"
+
+# pause 100
+
