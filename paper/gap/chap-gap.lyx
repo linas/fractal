@@ -820,14 +820,8 @@ The distribution of the gaps
 \end_inset 
 
 : this is the thin red stripe at the bottom of the above picture.
- 
-\layout Description
-
-Homework: Explain this 
-\begin_inset Formula $1/2\sqrt{y}$
-\end_inset 
-
- distribution.
+ This distribution is due to the Jacobean of a parabola, which we derive
+ below.
 \layout Subsection
 
 The Gap for Finite w
@@ -1124,6 +1118,35 @@ T_{p/q}(0)=1-4\frac{q_{N-1}}{q_{N}}\left(1-\frac{q_{N-1}}{q_{N}}\right)\]
 
 .
  
+\layout Standard
+
+The distribution denisty 
+\begin_inset Formula $1/2\sqrt{T}$
+\end_inset 
+
+ of the gaps on the unit square can now be understood in terms of the above
+ pabaloic formula, as a change-of-variable from the underlying distribution
+ of 
+\begin_inset Formula $q_{N-1}/q_{N}$
+\end_inset 
+
+.
+ Numerically, we find that this distribution is perfectly uniform on the
+ half-unit square.
+ Thus we are lead to the following theorm/conjecture:
+\layout Description
+
+Conjecture: The distribution of the ratio of the partial convergents 
+\begin_inset Formula $q_{N-1}/q_{N}$
+\end_inset 
+
+ is perfectly uniform on the half-unit square, using conventional notions
+ of measure, density and distribution.
+ 
+\layout Description
+
+Proof: None (currently) supplied.
+ We'll work on this shortly.
 \layout Subsection
 
 Proof that Gaps are Cauchy-dense on the Unit Square
@@ -1288,7 +1311,206 @@ Now, to move the conversation back to the iterated continued fraction map,
  
 \layout Description
 
-To-Do: Provide the proof we promised.
+Theorem: For any real values 
+\begin_inset Formula $x\in[0,1]$
+\end_inset 
+
+ and 
+\begin_inset Formula $y\in[0,1/2]$
+\end_inset 
+
+ and positive 
+\begin_inset Formula $\delta,\varepsilon>0$
+\end_inset 
+
+, we can find a rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\left|x-p/q\right|<\delta$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left|y-q_{N-1}/q_{N}\right|<\varepsilon$
+\end_inset 
+
+ .
+\layout Description
+
+Proof: (partial sketch) Start by picking 
+\begin_inset Formula $\delta'<\delta$
+\end_inset 
+
+ and some rational 
+\begin_inset Formula $p'/q'$
+\end_inset 
+
+ such that 
+\begin_inset Formula $|x-p'/q'|<\delta'$
+\end_inset 
+
+.
+ Develop the continued fraction expansion of this rational as 
+\begin_inset Formula $p'/q'=[a_{1},a_{2},...,a_{N-2}]$
+\end_inset 
+
+.
+ Then we need to show that we can always pick a positive integer k such
+ that the rational 
+\begin_inset Formula $p''/q''=[a_{1},a_{2},...,a_{N-2},a_{N-1}]$
+\end_inset 
+
+ satisfies 
+\begin_inset Formula $|p''/q''-p'/q'|<\delta-\delta'$
+\end_inset 
+
+ or, equivalently, 
+\begin_inset Formula $|p''/q''-x|<\delta$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $a_{N-1}\geq k$
+\end_inset 
+
+.
+ Next, we note that if we pick 
+\begin_inset Formula $a_{N-1}>k$
+\end_inset 
+
+ (strictly greater than this time) and any 
+\begin_inset Formula $a_{N}\in\mathbb{N}$
+\end_inset 
+
+, then 
+\begin_inset Formula $p/q=[a_{1},a_{2},...,a_{N-2},a_{N-1},a_{N}]$
+\end_inset 
+
+ satisfies 
+\begin_inset Formula $|p/q-x|<\delta$
+\end_inset 
+
+.
+ Next, we notice that this freedom to pick 
+\begin_inset Formula $a_{N-1}$
+\end_inset 
+
+and 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+ allows us to jigger around the value of 
+\begin_inset Formula $q_{N-1}/q_{N}$
+\end_inset 
+
+ to satisfy the desired result for many values of 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ That is, we use the recurrence relation 
+\begin_inset Formula $q_{N}=a_{N}q_{N-1}+q_{N-2}$
+\end_inset 
+
+ to deduce that 
+\begin_inset Formula \begin{multline*}
+\frac{q_{N-1}}{q_{N}}=\frac{1}{a_{N}}\left(1-\frac{q_{N-2}}{q_{N}}\right)\end{multline*}
+
+\end_inset 
+
+ and thus 
+\begin_inset Formula \[
+\frac{q_{N-1}}{q_{N}}=\frac{1}{a_{N}}\left(1-\frac{1}{a_{N}a_{N-1}+1+a_{N}q_{N-3}/q_{N-2}}\right)\]
+
+\end_inset 
+
+ and rearranging,
+\begin_inset Formula \[
+\frac{q_{N-1}}{q_{N}}=\frac{1}{a_{N}+1/\left(a_{N-1}+r\right)}\]
+
+\end_inset 
+
+ In this expression, the value of 
+\begin_inset Formula $q_{N-3}/q_{N-2}\equiv r$
+\end_inset 
+
+ was fixed by our initial choice of 
+\begin_inset Formula $p'/q'$
+\end_inset 
+
+.
+ However, we are free to pick any 
+\begin_inset Formula $a_{N-1}>k$
+\end_inset 
+
+ and any 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+.
+ Note that by picking 
+\begin_inset Formula $a_{N}=2$
+\end_inset 
+
+ and 
+\begin_inset Formula $a_{N-1}$
+\end_inset 
+
+ very large, we can approach the upper limit of the interval, and by picking
+ 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+ very large, we can approach the lower limit of the interval.
+ We see that for values of 
+\begin_inset Formula $y$
+\end_inset 
+
+ close to 
+\begin_inset Formula $1/m$
+\end_inset 
+
+ for some positive integer 
+\begin_inset Formula $m$
+\end_inset 
+
+, we can also approach arbitrarily close, thus completing the proof for
+ these values.
+ However, there are still 'holes' that cannot be approached without jiggering
+ the value of 
+\begin_inset Formula $r.$
+\end_inset 
+
+ For that, we need to adjust our initial pick of 
+\begin_inset Formula $p'/q'$
+\end_inset 
+
+ to get the 
+\begin_inset Formula $r$
+\end_inset 
+
+ that we want.
+ We then find that we have to apply induction, in reverse, to get to there.
+ I beleive this completes the proof.
+\layout Description
+
+To-Do: The above proof still involves some hand-waving, and thus needs to
+ be tightened up.
+ In particular, there are some values of 
+\begin_inset Formula $y$
+\end_inset 
+
+ that are 
+\begin_inset Quotes eld
+\end_inset 
+
+hard
+\begin_inset Quotes erd
+\end_inset 
+
+, requireing the inductive step to be invoked.
+ These seem to correspond to the holes in the holes in the lattice for small
+ denominators.
  
 \layout Standard
 
@@ -1337,9 +1559,9 @@ The main parabola that is visible is at
 
 .
  Blah blah blah solve these equations.
-\layout Standard
+\layout Description
 
-There are other parabolas visible as well, offset on other fractions.
+Homework: There are other parabolas visible as well, offset on other fractions.
  Describe these as well.
  Why are these rationals interesting? 
 \layout Subsection
