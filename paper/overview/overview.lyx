@@ -36,11 +36,15 @@ Linas Vepstas <linas@linas.org>
 
 Fractals and Continued Fractions seem to be deeply related in many ways.
  Farey numbers appear naturally in both.
- The shape of the Devil's Staircase is reminiscent of the Minkowski Question
- Mark Function.
- This paper attempts to illustrate some these relationships and possibly
- advance some tools that may make the study and classification of fractals
- easier.
+ The shape of the Devil's Staircase, which occurs in phase-locking dynamic
+ maps, is reminiscent of the Minkowski Question Mark Function.
+ This article attempts to establish that the natural symmetry group of both
+ period-doubling maps and of phase-locking maps is the modular group 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+, which expains these curious relationships.
+ An assortment of curious observations is presented as well.
  
 \layout Section
 
@@ -367,8 +371,7 @@ This gap function is, of course, highly discontinuous in
 \end_inset 
 
 .
- It is not hard to discover from numeric experiments that for a rational
- 
+ It is not hard to discover that for a rational 
 \begin_inset Formula $p/q$
 \end_inset 
 
@@ -415,8 +418,8 @@ we have
 \end_inset 
 
 .
- Although these results are obvious numerically, its not clear to me if
- there is a simple proof for this (Homework: find this proof).
+ A derivation of these results are given in a later section.
+ 
 \layout Standard
 
 The teeth at first appear to be random: below follows a scatterplot showing
@@ -544,14 +547,12 @@ There are more interesting things to be seen, but first we should provide
 \begin_inset Formula $T_{p/q}(w)$
 \end_inset 
 
- is just a ratio of two polynomials in 
-\begin_inset Formula $w$
+ is of the form 
+\begin_inset Formula $(aw+b)/(cw+d)$
 \end_inset 
 
- with integer coefficients.
- The degree of the polynomials is 'reasonably low', essentially equal to
- the number of terms in the continued fraction for 
-\begin_inset Formula $p/q$
+ for some integers 
+\begin_inset Formula $a,b,c,d$
 \end_inset 
 
 .
@@ -580,7 +581,8 @@ There are more interesting things to be seen, but first we should provide
 \begin_inset Formula $w$
 \end_inset 
 
-.
+; we'll give an exact expression in a later section, showing that these
+ manipulations are safe.
  For the continued fraction 
 \begin_inset Formula $x_{+}(w)=[a_{1},a_{2},...a_{N},1/w]$
 \end_inset 
@@ -792,12 +794,11 @@ The pattern exists only for small rationals.
 
 \layout Standard
 
-This picture tells us something that is very surprising: this function is
- space-filling and dense; it has no holes or islands; it has a fractal measure
- of 2.0.
- Even in the land of fractals, this is quite unusual, as this function is,
- after all, not some self-similar curve, but rather a 'plain-old' map from
- the unit interval to the unit interval.
+This picture tells us something that is surprising: this function is space-filli
+ng and dense; it has no holes or islands; it has a fractal measure of 2.0.
+ Even in the land of fractals, this is fairly unusual, as this function
+ is, after all, not some self-similar curve, but rather a 'plain-old' map
+ from the unit interval to the unit interval.
  By 'dense', I mean the traditional Cauchy-sequence notion of density: for
  any real values 
 \begin_inset Formula $x,y\in[0,1]$
@@ -820,8 +821,8 @@ This picture tells us something that is very surprising: this function is
 \end_inset 
 
  .
- Of course, a computer generated picture is not a proof, but the statement
- seems true.
+ Of course, a computer generated picture is not a proof, but a proof is
+ straight-forward, and is discussed below.
  I am not aware of any other map that has this property.
  
 \layout Standard
@@ -986,6 +987,270 @@ The seeming parallel-ness of some trajectories is an optical illusion, due
 \end_inset 
 
 .
+\layout Subsection
+
+Exact Expressions for the Gap Size
+\layout Standard
+
+The size of the gap can be given an exact expression in terms of the convergents
+ of the continued fraction.
+ Performing this excercise will help explain some of the fractal behaviour
+ seen in the pervious sections.
+ 
+\layout Standard
+
+One gets the convergent of a continued fraction by evaluating the fraction
+ only up to the n'th term, and expressing it as a ratio 
+\begin_inset Formula $p_{n}/q_{n}$
+\end_inset 
+
+.
+ The convergents can be expressed recursively:
+\begin_inset Formula \[
+p_{n}=a_{n}p_{n-1}+p_{n-2}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+q_{n}=a_{n}q_{n-1}+q_{n-2}\]
+
+\end_inset 
+
+ where we anchor the iteration by defining 
+\begin_inset Formula $p_{-2}=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{-1}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{-2}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{-1}=0$
+\end_inset 
+
+.
+ Iterating, the next few terms are 
+\begin_inset Formula $p_{0}=a_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{1}=a_{0}a_{1}+1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{0}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{1}=a_{1}$
+\end_inset 
+
+.
+ Here we adopted a slightly extended notation from before, defining 
+\begin_inset Formula $a_{0}$
+\end_inset 
+
+ as the integer part of the fraction; 
+\shape italic 
+i.e.
+
+\shape default 
+ 
+\begin_inset Formula $x=a_{0}+1/(a_{1}+1/(a_{2}+...))\equiv[a_{0};a_{1},a_{2},...]$
+\end_inset 
+
+.
+ We then have the convergent:
+\begin_inset Formula \[
+[a_{0};a_{1},a_{2},...,a_{N}]=\frac{p_{N}}{q_{N}}\]
+
+\end_inset 
+
+ Note also that for any 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset 
+
+, we have 
+\begin_inset Formula \[
+[a_{0};a_{1},a_{2},...,a_{N},y]=\frac{p_{N}y+p_{N-1}}{q_{N}y+q_{N-1}}\]
+
+\end_inset 
+
+ Note that the convergents have the property 
+\begin_inset Formula $q_{n}p_{n-1}-p_{n}q_{n-1}=\left(-1\right)^{n}$
+\end_inset 
+
+.
+ We can use the above to provide exact expressions for 
+\begin_inset Formula $x_{+}(w)$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{-}(w)$
+\end_inset 
+
+.
+ These are:
+\begin_inset Formula \[
+x_{+}(w)=\frac{p_{N}}{q_{N}}+\left(-1\right)^{N}\frac{w}{q_{N}^{2}\left(1+wq_{N-1}/q_{N}\right)}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+x_{-}(w)=\frac{p_{N}}{q_{N}}-\left(-1\right)^{N}\frac{w}{q_{N}^{2}\left(1+w\left(1-q_{N-1}/q_{N}\right)\right)}\]
+
+\end_inset 
+
+ We can then compute the gap explicitly as 
+\begin_inset Formula \[
+\Gamma_{x}(w)=x_{e}(w)-x_{o}(w)=\frac{w}{q_{N}^{2}}\left[\frac{2+w}{1+w+w^{2}\frac{q_{N-1}}{q_{N}}\left(1-\frac{q_{N-1}}{q_{N}}\right)}\right]\]
+
+\end_inset 
+
+ where no approximation has been made.
+ Expanding the denominator, we get 
+\begin_inset Formula \[
+T_{p/q}(0)=1-4\frac{q_{N-1}}{q_{N}}\left(1-\frac{q_{N-1}}{q_{N}}\right)\]
+
+\end_inset 
+
+ From this expression, the boundedness of 
+\begin_inset Formula $T$
+\end_inset 
+
+ follows immediately; this comes from the fact that 
+\begin_inset Formula $2q_{N-1}\leq q_{N}$
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+Proof that Gaps are Cauchy-dense on the Unit Square
+\layout Standard
+
+The incredible 'randomness' of the distribution, as well as its Cauchy-sequence-
+density on the unit square can now be easily understood.
+ To do this, consider the iteration of the map 
+\begin_inset Formula \[
+h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
+
+\end_inset 
+
+ This map has the property that lops off the leading term of the continued
+ fraction: 
+\begin_inset Formula $h([a_{1},a_{2},...])=[a_{2},a_{3},...]$
+\end_inset 
+
+ .
+ Iterating this map clearly gets one further and further into the continued
+ fraction, and it is clear that two points that start arbitrarily close
+ together will have orbits under this map that eventually become uncorrelated.
+ That is, this map clearly has a positive Lyapunov exponent for all irrationals.
+ 
+\layout Standard
+
+We can gain some intuition by comparing this map to the Bernoulli map 
+\begin_inset Formula \[
+b(x)=2x-\left\lfloor 2x\right\rfloor \]
+
+\end_inset 
+
+ which has the property of lopping off the leading digit of a binary expansion
+ of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ Again, two irrationals that start out arbitrarily close together will eventuall
+y have binary expansions that are uncorrelated and completly 'random'.
+ Even though one may know the first 
+\begin_inset Formula $N$
+\end_inset 
+
+ digits of the expansion, one cannot 'predict' the next digit of the expansion;
+ and this is what we mean when we say 'radnom' or 'uncorrelated'.
+ Now, stemming out of this same context comes an interesting paradox.
+ We would like to be able to say, that, when considering the entire set
+ of reals on the unit interval, that, when examining the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th binary digit in the expansion, that 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit is completely random, and is uniformly distributed (equipartition
+ of probability), with the probability of the digit being 0 being 1/2 and
+ the probability of it being 1 is also 1/2.
+ But of course, this statement is patently false, and therein lies the paradox.
+ We can, of course, trivially and exactly predict the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit, as the Bernoulli process is completely deterministic.
+ The 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit is trivially 
+\begin_inset Formula $e_{N}(x)=\left\lfloor 2^{N}x\right\rfloor -2\left\lfloor 2^{N-1}x\right\rfloor $
+\end_inset 
+
+ and 
+\begin_inset Formula $e_{N}(x)$
+\end_inset 
+
+ is a square-toothed comb.
+ One has this problem even for 
+\begin_inset Formula $N$
+\end_inset 
+
+ getting very large, and approaching infinity.
+ 
+\layout Standard
+
+I humbly suggest that there is a way of escaping this paradox, but it requires
+ invoking the Axiom of Choice.
+ It is well-known from complexity theory (the theory of Turing Machines)
+ that the set of computable numbers is a countable.
+ In other words, we can give the value of a specific number, such as 
+\begin_inset Formula $\pi$
+\end_inset 
+
+ or 
+\begin_inset Formula $e$
+\end_inset 
+
+ or 
+\begin_inset Formula $\sqrt{2}$
+\end_inset 
+
+, only when we have an algorithm that can generate that number.
+ As a famous counter-example, we have 
+\begin_inset Formula $\Omega$
+\end_inset 
+
+, the fraction of Turing machines that halt.
+ It is well defined, but all we can say about it is that it is greater than
+ 0 and less than 1; in all other respects, it is unknowable.
+  
+\layout Standard
+
+Here comes the interesting part: if we compare the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th binary digit of the expansion of every possible 
+\layout Standard
+
+The shape of the principal parabola seen in the diagrams also 
 \layout Subsection
 
 Iteration
