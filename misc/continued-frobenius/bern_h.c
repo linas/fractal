@@ -20,10 +20,18 @@ double elt (int j, int k)
 		double term = binomial (n,j) * bernoulli (n-j);
 		if (n != 0) term *= binomial (k,n-1);
 		// term /= n;
+		// term *= pow (0.5, n);
 		acc += term;
 	}
 
 	return acc;
+}
+
+double basic_elt (int j, int k)
+{
+	if (j>k) return 0.0;
+	if (j==k) return pow (0.5, k);
+	return binomial(k,j)* pow (0.5, k+1);
 }
 
 int
@@ -31,12 +39,15 @@ main ()
 {
 	int j, k;
 
-	for (j=0; j<7; j++) 
+	int nmax = 23;
+	for (j=1; j<nmax; j++) 
 	{
-		for (k=j; k<7; k++)
+		for (k=j; k<nmax; k++)
 		{
 			double e = elt (j,k);
-			printf ("j=%d k=%d e=%g\n", j, k, e);
+			double b = basic_elt (j,k);
+			// printf ("j=%d k=%d e=%g   \tb=%g\n", j, k, e, b);
+			printf ("j=%d k=%d e=%15.10g  \n", j, k, e);
 		}
 		printf ("\n");
 	}
