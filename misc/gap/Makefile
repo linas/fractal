@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= entropy exacto fdist feigen gappy padic rdist swap sway sym \
+EXES= entropy exacto fdist feigen gappy padic rdist summy swap sway sym \
       sym-fun tree
 
 all: 	$(EXES)
@@ -33,6 +33,7 @@ sway.o:  sway.C $(LIB)/Farey.o $(INC)/Farey.h
 swap.o:  swap.C $(LIB)/Farey.o $(INC)/Farey.h
 rdist.o:  rdist.C $(LIB)/Farey.o $(INC)/Farey.h
 feigen.o: feigen.C $(LIB)/Farey.o $(INC)/Farey.h
+summy.o: summy.C $(LIB)/Farey.o $(INC)/Farey.h
 sym.o: sym.C $(LIB)/Farey.o $(INC)/Farey.h
 sym-fun.o: sym-fun.C $(LIB)/Farey.o $(INC)/Farey.h
 tree.o: tree.C $(LIB)/Farey.o $(INC)/Farey.h

@@ -19,7 +19,7 @@ main (int argc, char *argv[])
 	f.SetEvenize();
 
 	int m = 1;
-	int n = 1;
+	int n = 3;
 	f.SetRatio (m,n);
 	double fact=f.ToFarey();
 	printf ("# norm=%g\n", fact);
@@ -55,9 +55,14 @@ main (int argc, char *argv[])
 		// z = f.ToFarey();
 		// z /= (double) (1<<n);
 
-		f.SetRatio (q-(m+1)*p, (n+1)*q - (n*m+m+n)*p);
+		// f.SetRatio (q-(m+1)*p, (n+1)*q - (n*m+m+n)*p);
+		// z = f.ToFarey();
+		// z = 0.5-z;
+
+		f.SetRatio (q,p+n*q);
 		z = f.ToFarey();
-		z = 0.5-z;
+		z *= (1<<(n));
+		z = 2.0-z;
 
 		
 		printf("%5d	%8.6g	%8.6g	%8.6g	%8.6g\n", i,x,y,z,y-z);
