@@ -2330,6 +2330,260 @@ One can also find the append operator, which we find by examining
  arriving at the same answer as before.
 \layout Subsection
 
+A Theorm about an Isomorphism
+\layout Standard
+
+Lets restate the above results using the more modern mathematical notation
+ and language.
+ Let us denote with 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ the set of real numbers 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ that are represented by dyadic expansions; that is, 
+\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{D}\in\mathbb{R}_{D}$
+\end_inset 
+
+ which represents the real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ as the dyadic expansion 
+\begin_inset Formula $x_{D}$
+\end_inset 
+
+ with 
+\begin_inset Formula \[
+x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} \;\forall k\in\mathbb{Z}$
+\end_inset 
+
+.
+ Let us use the notation 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ to denote the representation of the real numbers as continued fractions,
+ that is, 
+\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{C}\in\mathbb{R}_{C}$
+\end_inset 
+
+ such that 
+\begin_inset Formula \[
+x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $a_{k}\in\mathbb{N}\;\forall k\in\mathbb{N}$
+\end_inset 
+
+.
+ Both of these sets are commonly treated as being isomorphic to the real
+ numbers; they are just different representations of the real numbers.
+ However, we can see that these two are not completely the same, because
+ the group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ has a different action on each.
+ In particular, the group generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ has the representation 
+\begin_inset Formula \[
+\begin{array}{c}
+g_{D}:\mathbb{R}_{D}\longrightarrow\mathbb{R}_{D}\\
+g_{D}:x\longmapsto x/2\end{array}\]
+
+\end_inset 
+
+ when acting on the set of dyadic numbers, whereas as this same group element
+ has the representation 
+\begin_inset Formula \[
+\begin{array}{c}
+g_{C}:\mathbb{R}_{C}\longrightarrow\mathbb{R}_{C}\\
+g_{C}:x\longmapsto x/(x+1)\end{array}\]
+
+\end_inset 
+
+ when acting on the set of continued fractions.
+ 
+\layout Description
+
+Theorm: The Minkowski Question Mark provides an isomorphism between these
+ two spaces.
+ That is, we have the commuting diagram
+\layout Standard
+
+
+\begin_inset Formula \[
+\begin{array}{ccccc}
+ &  & \;\;\gamma_{C}\;\;\\
+ & \mathbb{R}_{C} & \longrightarrow & \mathbb{R}_{C}\\
+? & \downarrow & \bigcirc & \downarrow & ?\\
+ & \mathbb{R}_{D} & \longrightarrow & \mathbb{R}_{D}\\
+ &  & \gamma_{D}\end{array}\]
+
+\end_inset 
+
+ such that 
+\begin_inset Formula $?\circ\gamma_{C}=\gamma_{D}\circ?$
+\end_inset 
+
+ holds 
+\begin_inset Formula $\forall\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ To be more precise, we really should say that 
+\begin_inset Formula $(?\circ\gamma_{C})(x_{C})=(\gamma_{D}\circ?)(x_{D})\;\;\forall\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+ and 
+\begin_inset Formula $\forall x\in\mathbb{R}$
+\end_inset 
+
+ such that 
+\begin_inset Formula $x_{D}\in\mathbb{R}_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{C}\in\mathbb{R}_{C}$
+\end_inset 
+
+ are both representations of the same 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Proof: We've already given the standard representations of 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ in these two spaces in previous sections, but we repeat these here just
+ so that this is all crystal-clear.
+ We first decompose an abstract group element 
+\begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+ in terms of the generators 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+, as usual: 
+\begin_inset Formula \[
+\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\]
+
+\end_inset 
+
+ Then, this 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ has the representation 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+ which is 
+\begin_inset Formula \[
+\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+
+\end_inset 
+
+ and it also has the representation 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+ which is 
+\begin_inset Formula \[
+\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+
+\end_inset 
+
+ and thus we are able to write 
+\begin_inset Formula $?(\gamma_{C}(x))=\gamma_{D}(?(x))$
+\end_inset 
+
+ as the isomorphism.
+ To properly complete this proof, we would need to apply induction, that
+ is, to show that if this equivalence holds for any one given 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ and 
+\begin_inset Formula $x$
+\end_inset 
+
+, then it also holds for 
+\begin_inset Formula $\gamma\gamma'$
+\end_inset 
+
+ for another 
+\begin_inset Formula $\gamma'\in SL(2,\mathbb{Z})$
+\end_inset 
+
+ and that it also holds for 
+\begin_inset Formula $x+y$
+\end_inset 
+
+ where 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset 
+
+.
+ We then would need to exhibit one group element for which this holds, and
+ thus, by induction, conclude that it holds for all group elements and reals.
+ One could try to give a very precise proof along these lines, but this
+ is outside the scope of this text.
+ It requires, among other things, talking about the completion of the rationals
+ by the reals, and, if we are not careful, might also invoke the Axiom of
+ Choice.
+ See also the remarks below.
+ QED.
+ 
+\layout Standard
+
+To summarize, we have exhibited an isomorphism of the real numbers onto
+ themselves that demonstrates that there are really two distinct and inequivalen
+t representations of the real numbers.
+ When we say distinct and inequivalent, we really mean it: these two representat
+ions transform radically differently under the Modular Group, although they
+ are both isomorphic to that abstract set we call the reals, and are, through
+ the Question Mark, isomorphic to each other.
+\layout Standard
+
+If we were better mathematicians, we would insist on a more watertight proof
+ of this isomorphism, rather than the assertion that this is so.
+ Unfortunately, we do not have the tools handy to provide this stronger
+ proof.
+ It is widely beleived that both the dyadics and the continued fractions
+ are isomorphic to the reals, but this shouldn't entirely be taken for granted.
+ In fact, we have already commited a grave error.
+ 
+\layout Standard
+
+For example, such proofs might invoke the Axiom of Choice; it would be nice
+ to have proofs that start from Zermelo-Fraenkel and arrive at the isomorphism,
+ without invoking the Axiom of Choice.
+ 
+\layout Subsection
+
 Fractal Symmetry and the Subset 
 \begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes C_{2}$
 \end_inset 
