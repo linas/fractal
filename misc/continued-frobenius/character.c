@@ -10,7 +10,7 @@
 
 
 long double 
-trace (long double lam)
+ftrace (long double lam)
 {
 	lam *= 0.5L;
 
@@ -34,6 +34,33 @@ trace (long double lam)
 	return acc;
 }
  
+long double 
+det (long double lam)
+{
+	int k;
+	long double prod = 1.0;
+	long double eigen = 1.0;
+	for (k=0; k<50; k++)
+	{
+		prod *= eigen - lam;
+		eigen *= 0.5L;
+	}
+	return prod;
+}
+
+long double 
+trace (long double lam)
+{
+	int k;
+	long double tr = 0.0L;
+	long double eigen = 1.0;
+	for (k=0; k<50; k++)
+	{
+		tr += logl (fabsl(eigen - lam));
+		eigen *= 0.5L;
+	}
+	return tr;
+}
 
 int
 main ()
@@ -47,8 +74,9 @@ main ()
 		long double x = i / ((long double) imax);
 
 		long double tr = trace (x);
-		tr = expl (tr);
+		// tr = expl (tr);
 
+		// tr = det (x);
 		printf ("%d	%Lg 	%Lg\n", i,x, tr);
 	}
 
