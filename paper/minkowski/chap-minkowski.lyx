@@ -1677,8 +1677,34 @@ Another way of understanding this isomorphism is as a mapping of binary
  to the root node of the dyadic tree.
  Since infinite binary trees are inherenetly isomorphic, we are done: this
  is the isomorphism desired.
- Thus, it would seem, we can enumerate all such tree isomorphisms with a
- single number: the value, in 
+ That is, the elements of 
+\begin_inset Formula $M$
+\end_inset 
+
+ are tree-walk operators: any element 
+\begin_inset Formula $\gamma\in M$
+\end_inset 
+
+ specifies a unique path from the root node to some subnode (and thus some
+ subtree).
+ The element 
+\begin_inset Formula $g\in M$
+\end_inset 
+
+ takes the left branch, moving down exactly one node.
+ The element 
+\begin_inset Formula $rgr\in M$
+\end_inset 
+
+ takes the right branch, moving down exactly one node.
+ Concatenating a series of left and right moves eventually brings one uniquely
+ to a specific subtree.
+ But the subtrees of both the dyadic and Farey trees are always ordered:
+ that is, they always represent sub-intervals of the unit interval.
+\layout Standard
+
+It would seem that we can enumerate all such tree isomorphisms with a single
+ number: the value, in 
 \begin_inset Formula $\mathbb{Q}$
 \end_inset 
 
@@ -2254,7 +2280,7 @@ as long as we restrict the mapping to the domain
 ).
 \layout Standard
 
-Next, we note that we can build chains in this way.
+The reverse ordering is not unique in this way.
  If 
 \begin_inset Formula $\upsilon_{2}\supset\upsilon_{3}$
 \end_inset 
@@ -2265,73 +2291,80 @@ Next, we note that we can build chains in this way.
 
  has a domain of the entire unit interval, although its range is less than
  the whole interval.
- Note that again, 
-\begin_inset Formula $\gamma_{2}^{-1}\gamma_{3}\notin M$
+ But in fact, one can show that 
+\begin_inset Formula $\gamma_{2}^{-1}\gamma_{3}\in M$
 \end_inset 
 
 .
- In fact, we had the property that 
-\begin_inset Formula $|\upsilon_{\gamma}|=|\gamma(0)-\gamma(1)|\le1/2$
-\end_inset 
-
- for all 
-\begin_inset Formula $\gamma\in M,\gamma\ne e$
-\end_inset 
-
-, with the equality holding only for 
-\begin_inset Formula $g$
-\end_inset 
-
-, 
-\begin_inset Formula $gr$
-\end_inset 
-
-, and 
-\begin_inset Formula $rg$
-\end_inset 
-
-.
- By contrast, there are maps 
-\begin_inset Formula $\gamma_{2}^{-1}\gamma_{3}$
-\end_inset 
-
- whose codomain has lengths 2/3'rds, 3/4'ths, etc.
-\layout Standard
-
-Now, since we had 
-\layout Standard
-
-xxxxxx
-\layout Standard
-
-Still, the range is within the domain of 
-\begin_inset Formula $\gamma_{1}$
-\end_inset 
-
- and we have a natural extension to all group elements of the form 
-\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}\gamma_{3}$
-\end_inset 
-
- as long as 
+ The simplest proof for this can be realized by appealing to the tree structure.
+ The statement that 
 \begin_inset Formula $\upsilon_{2}\supset\upsilon_{3}$
 \end_inset 
 
- holds.
- Thus, a set-theoretic homomorphism extends naturally to elements of the
- form 
+ implies that 
+\begin_inset Formula $\upsilon_{3}$
+\end_inset 
+
+ is represented by a sub-tree of 
+\begin_inset Formula $\upsilon_{2}$
+\end_inset 
+
+.
+ But the only way of getting from one node to a subnode is by navigating
+ left and right branches till one reaches the desired subtree.
+ But the left and right descent operators are 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $rgr$
+\end_inset 
+
+, and so any descent path in the tree is given by some element 
+\begin_inset Formula $\delta\in M$
+\end_inset 
+
+.
+ Thus we have 
+\begin_inset Formula $\gamma_{3}=\gamma_{2}\delta$
+\end_inset 
+
+ or 
+\begin_inset Formula $\gamma_{2}^{-1}\gamma_{3}=\delta\in M$
+\end_inset 
+
+ which completes the proof.
+\layout Standard
+
+The net result of these considerations is that one goes not gain anything
+ new in considering a chain of elements of the form 
 \begin_inset Formula $\gamma=\gamma_{1}\gamma_{2}^{-1}\gamma_{3}\gamma_{4}^{-1}...$
 \end_inset 
 
- where each 
+ with each 
 \begin_inset Formula $\gamma_{k}\in M$
 \end_inset 
 
- and the set of relationships 
-\begin_inset Formula $\{\upsilon_{2j}\supset\upsilon_{2j+1}\}$
+ when the interval containment condition 
+\begin_inset Formula $\upsilon_{2j}\supset\upsilon_{2j+1}$
 \end_inset 
 
- hold between pairs of adjacent elements.
- There now remains the problem of what to do for cases of 
+ is imposed.
+ Each adjacent pair 
+\begin_inset Formula $\gamma_{2j}^{-1}\gamma_{2j+1}$
+\end_inset 
+
+ can be contracted leaving the final result 
+\begin_inset Formula $\gamma=\alpha\beta^{-1}$
+\end_inset 
+
+ with 
+\begin_inset Formula $\alpha,\beta\in M$
+\end_inset 
+
+.
+ Thus, the only non-trivial new elements that can be formed are those with
+ 
 \begin_inset Formula $\upsilon_{3}\supset\upsilon_{2}$
 \end_inset 
 
@@ -2339,8 +2372,21 @@ Still, the range is within the domain of
 \begin_inset Formula $\upsilon_{2}\cap\upsilon_{3}=\emptyset$
 \end_inset 
 
+, or, more generally, with 
+\begin_inset Formula $\upsilon_{2j+1}\supset\upsilon_{2j}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\upsilon_{2j}\cap\upsilon_{2j+1}=\emptyset$
+\end_inset 
+
 .
- One can proceed somewhat delicately with the former, by understanding that
+\layout Standard
+
+xxxxxxx
+\layout Standard
+
+One can proceed somewhat delicately with the former, by understanding that
  the domain of 
 \begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}\gamma_{3}$
 \end_inset 
@@ -2353,43 +2399,7 @@ Still, the range is within the domain of
 XXX Now what ? Do we need a sheaf? What's the topology?
 \layout Standard
 
-modular group.
- Not only is it commutative, but it is also holds for all elements of the
- modular group.
- The set 
-\begin_inset Formula $X$
-\end_inset 
-
- can be taken to be the field of rationals 
-\begin_inset Formula $\mathbb{Q}$
-\end_inset 
-
- or as any of its closures 
-\begin_inset Formula $\mathbb{Q}_{p}$
-\end_inset 
-
- or 
-\begin_inset Formula $\mathbb{R}$
-\end_inset 
-
-, although when studying modular forms, it is usually taken as the .
-\layout Standard
-
-The wide-spread ocurrance of the rationals fairly screams for an adelic
- treatment
-\layout Standard
-
-The Minkowski Question Mark suggests that there is another such representation,
- given by 
-\begin_inset Formula $?\circ\rho$
-\end_inset 
-
-.
- Unfortunately, due to the nature of the construction, its not obvious if
- the representation can be made to hold for all group elements, although
- it clearly works on the subset of contracting group elements.
- lets see how far we can push this.
- In a similar vein, we will find other representations in 
+In a similar vein, we will find other representations in 
 \begin_inset Formula $GL(N)$
 \end_inset 
 
@@ -2405,6 +2415,33 @@ Conclusions
 \layout Standard
 
 To be written.
+\layout Standard
+
+The wide-spread ocurrance of the rationals fairly screams for an adelic
+ (or 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic) treatment of the subject matter.
+ That is, in teh above, we made no appeals to the closure of the rationals
+ 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ by 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+; we only appealed to the ordering of the rationals .
+ XXXX any of its closures 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, al
 \layout Bibliography
 \bibitem [Man88]{key-3}
 
