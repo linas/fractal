@@ -205,6 +205,17 @@ The spectral analysis consists of exploring the behavior of the sum in the
 \end_inset 
 
 by understanding the analytic structure of the related series.
+ In other words, instead of studying 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+ directly, we study the expansion 
+\begin_inset Formula \begin{equation}
+S(t)=\sum_{n=-N}^{\infty}s_{n}t^{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ instead.
  
 \layout Standard
 
@@ -226,5 +237,93 @@ ly intractable, because of its painfully slow convergence.
 The Mandelbrot Set
 \layout Standard
 
-Now consider
+Now consider the standard Mandelbrot set iteration 
+\begin_inset Formula \begin{equation}
+z_{n+1}=z_{n}^{2}+c\label{eq:}\end{equation}
+
+\end_inset 
+
+ ant the regulated series for this sequence of points 
+\begin_inset Formula \begin{equation}
+S_{c}(t)=\sum_{n=0}^{\infty}z_{n}e^{-t^{2}n^{2}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where we've added the subscript 
+\begin_inset Formula $c$
+\end_inset 
+
+ to remind us that this series takes on distinct values for every point
+ 
+\begin_inset Formula $c\in\mathbb{C}$
+\end_inset 
+
+.
+ For most of the interior of the Mandelbrot set, this sum diverges as 
+\begin_inset Formula $1/t$
+\end_inset 
+
+.
+ To normalize this sum, let us define 
+\begin_inset Formula \[
+N(t)=\sum_{n=0}^{\infty}e^{-t^{2}n^{2}}\]
+
+\end_inset 
+
+ which also diverges as 
+\begin_inset Formula $1/t$
+\end_inset 
+
+.
+ The next image shows the nature of the divergence by normalizing against
+ this value.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Divergent term
+\layout Standard
+
+
+\begin_inset Graphics
+	filename z.gif
+
+\end_inset 
+
+
+\layout Standard
+
+Plot of the divergent term of 
+\begin_inset Formula $S_{c}(t)$
+\end_inset 
+
+.
+ The figure shows 
+\begin_inset Formula $\lim_{t->0^{+}}|S_{c}(t)|/N(t)$
+\end_inset 
+
+, where 
+\begin_inset Formula $|x|$
+\end_inset 
+
+ is the ordinary complex modulus.
+ Black represents a value of zero, and green a value of 1/2.
+ Points outside of the M-set are explicitly excluded from this picture.
+ An explicit expression for this divergent term is given in the text.
+\end_inset 
+
+
+\layout Standard
+
+To render an image of this, let N(t) = Sumn=0inf exp (-t2n2) which also
+ diverges as 1/t.
+ We use this to show the divergence: the image below shows limt->0 |S(t)|/N(t)
+ where |S(t)| is just the modulus of S(t); that is, |S(t)| = sqrt ((Re S(t))2
+ + (Im S(t))2) 
 \the_end
