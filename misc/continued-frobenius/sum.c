@@ -17,12 +17,12 @@
 
 int
 main (int argc, char *argv[])
-
 {
-	int k,m,n,p;
+	int m,n,p;
 
 	n=0;
-	if (argc==2) {
+	if (argc==2) 
+	{
 		n = atoi(argv[1]);
 	}
 
@@ -848,7 +848,7 @@ for (n=0; n<20; n++) {
 	term = 32.0/(9.0*81.0*81.0*27.0);
 	acc += term;
 	printf ("its %Lg    %Lg\n", term, acc);
-#endif GUESS_EIGENVALUE
+#endif // GUESS_EIGENVALUE
 	
 #if 0
 	acc = 0.0;
@@ -927,6 +927,7 @@ for (n=0; n<20; n++) {
 	}
 #endif
 
+#if EULER_GAMMA_SUB_N
 	n=1;
 	
 	for (m=10; m<300000; m+=10000)
@@ -943,7 +944,468 @@ for (n=0; n<20; n++) {
 
 		printf ("its %d  acc=%Lg ball/acc=%Lg term=%Lg\n", m, acc, bal/acc, term);
 	}
+#endif
+
+#ifdef Q_FUNC
 	
+	long double acc = 0.0L;
+	long double term = 0.0L;
+	long double z = 2.0;
+	for (z=2.0; z<= 6.1; z+= 0.1)
+	{
+		// compute the q function
+		acc = 0.0L;
+		for (m=0; m<50; m++)
+		{
+			term = zbinomial (m+1, z-1.0) * zetam1(m+2);
+			acc += term;
+		}
+
+		// compute finite differences
+		long double af =0.0L;
+		int nstart = floor(z);
+		long double w = z-nstart;
+		af = zetam1(nstart) + 1.0L;
+		long double sn = -1.0L;
+		for (m=1; m<70; m++)
+		{
+			long double sign = 1.0L;
+			long double diff = 0.0L;
+			for (k=0; k<=m; k++)
+			{
+				diff += sign * binomial (m,k) * zetam1(k+nstart);
+				sign = -sign;
+			}
+			term = sn*diff * fbinomial (w,m);
+			af += term;
+			sn = -sn;
+		}
+
+		long double zeta = gsl_sf_zeta (z);
+		long double diff = zeta - acc;
+		printf ("z=%Lg, q=%Lg  az=%Lg zeta=%Lg diff=%Lg term=%Lg\n", z, acc, af, zeta, diff, term);
+		// printf ("%Lg\t%Lg\t%Lg\t%Lg\n", z, acc, zeta, af);
+	}
+#endif
+
+#ifdef VERIFY_BERNOULLI_MATRIX
+
+	long double g_bern (int k, int m)
+	{
+		if (k==m) return powl (0.5L, k);
+		if (k>m) return 0.0L;
+		return binomial (m,k) * powl(0.5,m+1);
+	}
 	
+	long double eig(int m, int p)
+	{
+		if (m>p) return 0.0;
+		return binomial (p,m) * bernoulli (p-m);
+	}
+
+	for (p=0; p<20; p++)
+	{
+	for (k=0; k<=p; k++)
+	{
+		long double acc = 0.0;
+		for (m=0; m<50; m++)
+		{
+			acc += g_bern (k,m)* eig(m,p);
+		}
+		if (fabs(eig (k,p)) >1.0e-16) {
+			acc /= eig (k,p);
+			printf ("p=%d k=%d eig = %Lg\n", p, k, acc);
+		}
+	}
+	printf ("\n");
+	}
+#endif
+
+#ifdef POCHHAMMER_CHECK
+	long double s = 1.0;
+	for (s=0.2; s<4.0; s+= 0.37) {
+		long double z;
+		for (z=0.0; z<1.0; z+= 0.1) {
+		long double acc = 0.0;
+		long double term;
+		long double zp = 1.0;
+		for (k=0; k<50; k++)
+		{
+			term = fbinomial (s-1, k) *zp;
+			acc += term;
+			zp *= z;
+		}
+		printf ("duude s=%Lg, z=%Lg pow=%Lg, sum=%Lg\n", s, z, powl(1.0+z, s-1), acc);
+		}
+	}
+#endif
+
+#ifdef MAJOR_BERNOULII_BOGOSITY
+	long double h_bern (int m, int p)
+	{
+		if (p<m) return 0.0;
+		if (p==m) return pow (0.5, p);
+		double sign = 1.0L;
+		if ((m+p)%2==1) sign = -1.0L;
+		return pow(0.5, p+1)* fbinomial (p,m);
+	}
+
+	long double s = 1.0;
+#if 0
+	for (s=1.2; s<4.0; s+= 0.17) 
+	{
+		long double bb = 0.0L;
+		long double sign = 1.0L;
+		long double term;
+		for (m=0; m<20; m++)
+		{
+			bb = 0.0;
+			for (n=m+1; n<650; n++)
+			{
+				term= binomial (n,m) * fbinomial (s-1.0,n);
+				sign = 1.0;
+				if (n%2==1) sign = -1.0;
+				bb += sign * term;
+				printf ("s=%Lg n=%d term=%Lg summo=%Lg\n", s, n, sign*term, bb);
+			}
+			printf ("duude s=%Lg m=%d expect=%Lg bb=%Lg\n", s, m, fbinomial (s-1,m), bb);
+		}
+	}
+#endif
+
+	for (n=0; n<20; n++)
+	{
+		long double acc = 0.0L;
+		for (m=0; m<=n; m++)
+		{
+			acc += binomial (n,m)/((m+1)*(m+2));
+		}
+		long double pred = pow(2,n+2) - 1 - (n+2);
+		pred /= (n+1)*(n+2);
+		printf ("its %d pred=%Lg acc=%Lg\n", n, pred, acc);
+	}
+
+	for (s=0.2; s<4.0; s+= 0.17) 
+	{
+		long double cb = 0.0L;
+		long double sign = 1.0L;
+		long double term;
+		for (m=0; m<50; m++)
+		{
+			sign = 1.0L;
+			for (n=0; n<50; n++)
+			{
+				term = fbinomial (s-1, n);
+				term *= sign;
+				term *= h_bern (m,n);
+				term /= (m+1)*(m+2);
+				cb += term;
+				sign = -sign;
+			}
+		}
+		
+		long double qc = 0.0L;
+		for (m=0; m<50; m++)
+		{
+			sign = 1.0L;
+			if (m%2==1) sign = -1.0;
+
+			term = fbinomial (s-1, m);
+			term *= sign;
+			term *= pow (0.5, m);
+			term /= (m+1)*(m+2);
+			qc += term;
+			
+			sign = -sign;
+			long double part = 0.0;
+			for (n=m+1; n<50; n++)
+			{
+				term = fbinomial (s-1, n);
+				term *= sign;
+				// term *= h_bern (m,n);
+				term *= pow(0.5, n+1)* fbinomial (n,m);
+				part += term;
+				sign = -sign;
+			}
+			part /= (m+1)*(m+2);
+			qc += part;
+		}
+		
+		qc = 0.0;
+		for (m=0; m<50; m++)
+		{
+			sign = 1.0L;
+			if (m%2==1) sign = -1.0;
+
+			term = fbinomial (s-1, m);
+			term *= sign;
+			term *= pow (0.5, m);
+			term /= (m+1)*(m+2);
+			qc += term;
+			// printf ("duude m=%d term=%Lg sum=%Lg\n", m, term, qc);
+		}
+		printf (" ------------------------------------------------------------first=%Lg\n", qc);
+			
+		for (m=0; m<50; m++)
+		{
+			long double part = 0.0;
+			for (n=m; n<50; n++)
+			{
+				term = fbinomial (s-1, n);
+				sign = 1.0L;
+				if (n%2==1) sign = -1.0;
+
+				term *= sign;
+				// term *= h_bern (m,n);
+				term *= pow(0.5, n)* fbinomial (n,m);
+				part += term;
+			}
+			part /= (m+1)*(m+2);
+			qc += part;
+		}
+		qc *= 0.5;
+		
+		long double acc = 0.0;
+		sign = 1.0L;
+		for (m=0; m<50; m++)
+		{
+			term = fbinomial (s-1, m);
+			term *= sign;
+			term *= pow (0.5, m);
+			term /=  (m+1)*(m+2);
+			term *= (pow(2.0,m+2) - (m+2));
+			acc += term;
+			// printf ("anti-duude m=%d term=%Lg sum=%Lg\n", m, term, acc);
+			sign = -sign;
+		}
+		acc *= 0.5;
+		long double ch = (s-1)/(s+1) + pow(0.5,s);
+		ch /= s;
+
+		
+		printf ("its %Lg char=%Lg pre-sum=%Lg %Lg  sum=%Lg \n", s, ch, cb, qc, acc);
+	}
+#endif
+
+#ifdef MORE_ZETA
+#define LEN 650
+	long double lam[LEN];
+
+	for (m=0; m<LEN; m++)
+	{
+		lam[m] = pow(0.5,m);
+	}
+
+	long double complex s = 0.0;
+	for (p=0; p<50; p++)
+	{
+		s += 0.2I;
+		long double complex acc = 0.0;
+		long double complex term;
+		long double sign = 1.0L;
+		for (m=0; m<LEN; m++)
+		{
+			term = cbinomial (s-1, m);
+			term *= sign;
+			term *= lam[m];
+			term /=  (m+1)*(m+2);
+			term *= (pow(2.0,m+2) - (m+2));
+			acc += term;
+			// printf ("anti-duude m=%d term=%Lg sum=%Lg\n", m, term, acc);
+			sign = -sign;
+		}
+		acc *= 0.5;
+
+		acc -= 2.0/(s+1.0);
+		acc *= -s;
+		
+		long double complex ch = (s-1)/(s+1) + cpow(0.5,s);
+		ch /= s;
+		
+		ch -= 2.0/(s+1.0);
+		ch *= -s;
+		
+		
+		printf ("s=%Lg +I %Lg    acc=%Lg +I %Lg   alt=%Lg +I %Lg \n", creall(s), cimagl(s), creall(acc), cimagl(acc),
+							 creall(ch), cimagl(ch));
+	}
+#endif
+
+#if ONE_WAY
+	int j;
+	// for (k=0; k<10; k++)
+	// {
+	for (j=0; j<10; j++)
+	{
+		long double duh=0.0;
+		// for (n=k; n<40; n++)
+		for (n=0; n<10; n++)
+		{
+			long double acc = 0.0;
+			for (m=0; m<=j; m++)
+			{
+				acc += ache_mp(n,m) * stirling_first (j,m);
+			}
+			long double stir = stirling_second (n,k);
+			long double term = acc * stir;
+			duh += term;
+			// printf ("duude j=%d k=%d n=%d acc=%Lg stir=%Lg term=%Lg duhh=%Lg\n", j, k, n, acc, stir, term, duh);
+			printf ("duude j=%d n=%d acc=%Lg\n", j, n, acc);
+		}
+		printf ("---\n");
+	// }	
+	}
+#endif
+
+#if REV
+	int j;
+	for (j=0; j<8; j++)
+	{
+	for (k=0; k<8; k++)
+	{
+		long double duh=0.0;
+
+		for (m=0; m<=j; m++)
+		{
+			long double acc = 0.0;
+			for (n=k; n<40; n++)
+			{
+				acc += ache_mp(n,m) * stirling_second (n,k);
+			}
+			long double stir = stirling_first (j,m);
+			long double term = acc * stir;
+			duh += term;
+			printf ("duude j=%d k=%d m=%d acc=%Lg stir=%Lg term=%Lg duhh=%Lg\n", j,k, m, acc, stir, term, duh);
+		}
+		printf ("---\n");
+	}	
+	}
+#endif 
+
+#ifdef STIR 
+	for (n=0; n<30; n++)
+	{
+		int j;
+		for (j=0; j<=n; j++)
+		{
+			long double ha = 1.0L;
+			long double acc = 0.0;
+			for (k=0; k<=n-j; k++)
+			{
+				long double term = stirling_first (n,j+k);
+				term *= binomial (j+k,j);
+				acc += ha*term;
+				// printf ("its n=%d j=%d k=%d term=%Lg acc=%Lg\n", n,j,k,term,acc);
+				ha *= -0.5;
+			}
+			acc /= factorial (n);
+			printf ("---------- its n=%d j=%d acc=%Lg\n", n,j, acc);
+		}
+	}
+#endif
+
+#ifdef ZXOOOO
+long double zoot (int s)
+{
+	int n;
+	long double sign = 1.0L;
+	long double acc=0.0L;
+	for (n=0; n<s; n++)
+	{
+		acc += sign *binomial (s-1,n)*a_sub_n(n);
+		sign = -sign;
+	}
+	acc *= -s;
+	acc -= 0.5;
+	acc += s / ((long double)(s-1));
+	return acc;
+}
+
+	for (k=2; k<30; k++)
+	{
+		long double ch = zoot(k) - 1.0L - zetam1(k);
+		printf ("its %d %Lg\n", k, ch);
+	}
+#endif
+
+#if 0
+	int i,j,k;
+	i = 1;
+	k = 2;
+	for (j=0; j<10; j++)
+	{
+		double dij = ache_mp(i,j) / ache_mp(j,i);
+		double djk = ache_mp(j,k) / ache_mp(k,j);
+		printf ("Its %d %g \n", j, dij*djk);
+	}
+#endif
+
+   double a=zetam1(2);
+	double b=zetam1(2)-zetam1(3);
+	double c=2.0*zetam1(3);
+	double d=c-3.0*zetam1(4);
+	printf ("a=%g  b=%g  c=%g  d=%g\n", a,b,c,d);
+
+	double apd = zetam1(2)+2.0*zetam1(3)-3.0*zetam1(4);
+	double amd = zetam1(2)-2.0*zetam1(3)+3.0*zetam1(4);
+	double bc = 2.0*(zetam1(2) - zetam1(3))*zetam1(3);
+
+	double lp=0.5*apd + 0.5*sqrt(amd*amd+4.0*bc);
+	double lm=0.5*apd - 0.5*sqrt(amd*amd+4.0*bc);
+  printf ("duude a+d=%g\n",apd);	
+  printf ("duude a-d=%g\n",amd);	
+  printf ("duude bc=%g\n",bc);	
+  printf ("lp=%g    lm=%g\n", lp, lm);
+
+  double cp = -(zetam1(2)-lp)/(zetam1(2)-zetam1(3));
+  double cm = -(zetam1(2)-lm)/(zetam1(2)-zetam1(3));
+
+  printf ("cp=%g   cm=%g\n", cp, cm);
+  
+  double csp = -0.5*(zetam1(2)-lp)/zetam1(3);
+  double csm = -0.5*(zetam1(2)-lm)/zetam1(3);
+
+  printf ("csp=%g   csm=%g\n", csp, csm);
+  
+  double np = 1.0/(1.0-0.5*(a-lp)*(1.0/b+1.0/c)+(a-lp)*(a-lp)/(3.0*b*c));
+  double nm = 1.0/(1.0-0.5*(a-lm)*(1.0/b+1.0/c)+(a-lm)*(a-lm)/(3.0*b*c));
+
+  printf ("np=%g   nm=%g\n", np, nm);
+
+  double Lp = np -0.5*(np+np*cp) +np*cp/3.0;
+  double Lm = nm -0.5*(nm+nm*cm) +nm*cm/3.0;
+
+  printf ("Lp=%g   Lm=%g\n", Lp, Lm);
+  printf ("Llp=%g   Llm=%g\n", Lp*lp, Lm*lm);
+
+  double P = Lp*lp*np + Lm*lm*nm;
+  double Q = Lp*lp*np*cp + Lm*lm*nm*cm;
+
+  printf ("P=%g  Q=%g\n", P,Q);
+
+  double re=0.5* (Q-1.0)/(1.0-P);
+  printf ("re=%g\n", re);
+  double disc = (1.0-Q)*(1.0-Q) - 4.0*(P+Q)*(1.0-P);
+
+  printf ("disc=%g\n", disc);
+  double im=0.5*sqrt(disc)/(1.0-P);
+  printf ("im=%g\n", im);
+
+  printf ("1-p=%g   1-q=%g  p+q=%g\n", 1.0-P, 1.0-Q, P+Q);
+  printf(" re+im=%g\n", re-im);
+
+#if 0
+	int i,j;
+	for (i=0; i<10; i++)
+	{
+		for (j=0; j<7; j++) 
+		{
+			printf ("%8.6Lf\t", ache_mp(i,j));
+		}
+		printf ("\n");
+	}
+#endif
+	
+
 	return 0;
 }
