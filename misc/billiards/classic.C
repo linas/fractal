@@ -4,7 +4,9 @@
 //
 // FUNCTION:
 // Sinai's Billards ray tracer.  Sinai's Billiards is a well-known
-// example of a chaotic system.
+// example of a chaotic system.  This tracer performs a 'classical
+// mechanics' newtonian trace of rays, and colors resulting pixels
+// appropriately.
 //
 // HISTORY:
 // Linas Vepstas
