@@ -1,4 +1,4 @@
-
+//
 // ray.C
 //
 // Billards ray tracer
@@ -6,6 +6,9 @@
 // put sphere in center of cube.
 // cube is 2 units on a side.
 // sphere has radius < 1.0
+//
+// Linas Vepstas
+// November 2001
 
 
 #include <math.h>
@@ -14,6 +17,10 @@
 #include "vvector.h"
 #include "intersect.h"
 
+// Intersect determines the intersection between the ray and teh plane.
+// It returns the distance to the intersection if the intersection
+// is forward along the ray.  Otherwise it returns minus the distance.
+//
 // Bounce determines if a forward trace of the ray will intersedct the
 // plane.  If it does, then the ray will be traced forward and reflected
 // off the plane.  The distance moved forward will be returned.  If the
@@ -25,6 +32,7 @@ class Ray
    public:
       void Set (double x[3], double t[3]);  // assign value
       void Set (double, double, double, double, double, double);
+      double Intersect (Ray& plane);
       double Bounce (Ray& plane);
    public:
       double position[3];   
@@ -53,7 +61,7 @@ Ray::Set (double x0, double x1, double x2,
 }
 
 double 
-Ray::Bounce (Ray& plane)
+Ray::Intersect (Ray& plane)
 {
 
    double p2[3];
@@ -65,7 +73,7 @@ Ray::Bounce (Ray& plane)
              plane.position, plane.direction,
              position, p2);
 
-   if (FALSE == result) return -1.0;
+   if (FALSE == result) return -1.0/DEGENERATE_TOLERANCE;
    
    // The 'direction' should be parallel to the result, and thus,
    // the dot product should be the length.
@@ -77,10 +85,16 @@ Ray::Bounce (Ray& plane)
    return dot;
 }
 
+double 
+Ray::Bounce (Ray& plane)
+{
+}
+
 class SinaiRay
   : public Ray
 {
    public:
+      int last_wall;   // last wall of intersection
       int bounce;
 };
 
@@ -100,7 +114,7 @@ class SinaiView
       double eye[3]; // position of eye
 
    private:
-      Ray left, right, top, bottom, front, back;
+      Ray walls[6]; // left, right, top, bottom, front, back;
       
       SinaiRay *sr;
       unsigned int *abgr;
@@ -121,12 +135,12 @@ SinaiView::SinaiView (int px, int py)
    eye[1] = 0.0;
    eye[2] = 5.0;
 
-   left.Set(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
-   right.Set(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
-   top.Set(0.0, 1.0, 0.0, 0.0, -1.0, 0.0);
-   bottom.Set(0.0, -1.0, 0.0, 0.0, 1.0, 0.0);
-   front.Set(0.0, 0.0, 1.0, 0.0, 0.0, -1.0);
-   back.Set(0.0, 0.0, -1.0, 0.0, 0.0, 1.0);
+   walls[0].Set(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+   walls[1].Set(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
+   walls[2].Set(0.0, 1.0, 0.0, 0.0, -1.0, 0.0);
+   walls[3].Set(0.0, -1.0, 0.0, 0.0, 1.0, 0.0);
+   walls[4].Set(0.0, 0.0, 1.0, 0.0, 0.0, -1.0);
+   walls[5].Set(0.0, 0.0, -1.0, 0.0, 0.0, 1.0);
 
    sr = new SinaiRay [nx*ny];
 
@@ -140,6 +154,7 @@ SinaiView::SinaiView (int px, int py)
          pixel[2] = 1.0;
          VEC_DIFF (dir, pixel, eye);
          sr[nx*j+i].Set (pixel, dir);
+         sr[nx*j+i].last_wall = 4;
       }
    }
 
@@ -157,11 +172,17 @@ SinaiView::Trace(void)
    int i;
    for (i=0; i<nx*ny; i++) 
    {
-      double x = sr[i].Bounce (left);
-      x+=1.0;
-      x /= 2.0;
-      x *= 255.0;
-      abgr[i] = (unsigned int) x;
+      int next_wall = -1;
+      double nearest = 1000000.0;
+      for (int iwall=0; iwall<6; iwall ++)
+      {
+         if (iwall == sr[i].last_wall) continue;
+
+         double dist = sr[i].Intersect (walls[iwall]);
+         if (0.0 > dist) continue;
+         if (nearest > dist) { nearest = dist; next_wall = iwall; }
+      }
+      abgr[i] = 900 *(next_wall+1);
      
    }
 }
