@@ -31,33 +31,34 @@ Annotations to Abramowitz & Stegun
 By Linas Vepstas <linas@linas.org>
 \layout Date
 
-23 January 2004
+24 January 2004
 \layout Standard
 
-The following is a compendium of minor additions to the Handbook of Mathematical
- Functions by Abramowitz & Stegun (Dover 1972 edition), culled from personal
- annotations I have made to that reference over the years.
+The following is a compendium of minor additions and margin notes to the
+ Handbook of Mathematical Functions by Abramowitz & Stegun (Dover 1972 edition),
+ culled from personal annotations I have made to that reference over the
+ years.
  I have found these formulas useful and handy to have around.
- Some are trivial restatements of what can already be found the book, and
- a very few are deeper, non-trivial realtionships.
+ Some are trivial restatements of what can already be found in the book,
+ and a very few are deeper, non-trivial (possibly new) relationships.
  Most of these are not 'mathematically significant', but are useful if one
- is just searching for an integral or some relationship: indeed, this is
- the very definition of a reference.
- They are put down here to be of some utility to the internet community
- and hopefully to be incorporated in some future edition/revision of that
- reference.
+ is just searching for an integral or some such: indeed, this is what it
+ means to be a reference.
+ They are put down here to be of some utility to the Internet community
+ and hopefully to be incorporated in some future edition/revision of the
+ A&S reference.
 \layout Standard
 
 Sources & attribution: Yes, I derived all of these.
  I did not copy any of these from some other book/reference.
- (There may be errors lurking).
+ (Except as noted).
  I've tripped over these while solving a large variety of other completely
  unrelated, but quite interesting problems.
 \layout Standard
 
 These additional formulas are ordered according to the relevent chapter/paragrap
 h of that book.
- Paranthetical comments justify the need for the inclusion of the formula,
+ Parenthetical comments justify the need for the inclusion of the formula,
  but are not meant to be added to the reference.
  
 \layout Standard
@@ -138,7 +139,12 @@ k\end{array}\right)x^{\alpha}$
 \end_inset 
 
 .
- (Non-intuitive statement about the limit).
+ 
+\newline 
+
+\layout Standard
+
+(Non-intuitive statement about the limit on the imaginary axis).
 \layout Subsubsection*
 
 4.7 Numerical Methods
@@ -388,7 +394,7 @@ for n integer.
 \layout Standard
 
 
-\begin_inset Formula $S_{n}\left(u\right)=\int_{0}^{\infty}e^{-x}\left(1+\frac{xu}{n}\right)^{n}dx=\sum_{k=0}^{n}\left(\frac{u}{n}\right)^{k}\frac{n!}{\left(n-k\right)!}=e^{n/u}\left(\frac{u}{n}\right)^{n}\Gamma\left(n+1,\frac{n}{u}\right)$
+\begin_inset Formula $S_{n}\left(u\right)\equiv\int_{0}^{\infty}e^{-x}\left(1+\frac{xu}{n}\right)^{n}dx=\sum_{k=0}^{n}\left(\frac{u}{n}\right)^{k}\frac{n!}{\left(n-k\right)!}=e^{n/u}\left(\frac{u}{n}\right)^{n}\Gamma\left(n+1,\frac{n}{u}\right)$
 \end_inset 
 
  
@@ -405,6 +411,252 @@ for n integer.
 \layout Standard
 
 See also 5.1.51
+\layout Subsection*
+
+6.8 Summation of Rational Series
+\layout Standard
+
+(Section 6.8 should really be broken out into its own, and fortified with
+ various utilitarian sums, e.g.
+ the below.
+ Sums occur in many problems, and should get a handy reference chapter,
+ analogous to chapter 3, on thier own.).
+\layout Subsubsection*
+
+6.8.1
+\layout Standard
+
+
+\begin_inset Formula $\sum_{n=-\infty}^{\infty}\frac{1}{(n+z)^{2}}=\frac{\pi^{2}}{\sin^{2}(\pi z)}$
+\end_inset 
+
+ See 4.3.92
+\layout Subsubsection*
+
+6.8.2
+\layout Standard
+
+
+\begin_inset Formula $\sum_{n=0}^{\infty}\frac{1}{(n+z)^{m}}=\frac{(-)^{m}}{(m-1)!}\psi^{(m-1)}(z)$
+\end_inset 
+
+ See 6.4.10
+\layout Subsubsection*
+
+6.8.3
+\layout Standard
+
+
+\begin_inset Formula $\sum_{n=1}^{\infty}\frac{1}{(n+z)(n+z+1)}=\frac{1}{1+z}$
+\end_inset 
+
+
+\layout Subsection*
+
+6.9 Formal Sums, Spectral Asymmetries
+\layout Standard
+
+Some formally divergent sums can be given meaningful values through regularizati
+on.
+ For example, 
+\begin_inset Formula $\lim_{t\rightarrow0}\sum_{k=0}^{\infty}(-)^{k}(k+1)e^{-tk}=\frac{-1}{4}$
+\end_inset 
+
+ and thus we write, formally, 
+\begin_inset Formula $\sum_{k=0}^{\infty}(-)^{k}(k+1)=\frac{-1}{4}$
+\end_inset 
+
+ with the understanding that regulation took place.
+ This is because other regulators, besides 
+\begin_inset Formula $e^{-tk}$
+\end_inset 
+
+can be used: for example, 
+\begin_inset Formula $e^{-t^{2}k^{2}}$
+\end_inset 
+
+provides excellent numerical stability, while 
+\begin_inset Formula $\frac{1}{k^{s}}$
+\end_inset 
+
+in the limit 
+\begin_inset Formula $s\rightarrow0$
+\end_inset 
+
+ is better suited to analytical treatments.
+ General theories of series acceleration can be applied on formally divergent
+ sums to get meaningful results.
+\layout Subsubsection*
+
+6.9.1
+\layout Standard
+
+
+\begin_inset Formula $\sum_{m=0}^{\infty}\left(-\right)^{m}\left(\begin{array}{c}
+s-1\\
+m\end{array}\right)=0$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.9.2
+\layout Standard
+
+
+\begin_inset Formula $\sum_{m=0}^{\infty}\frac{\left(-\right)^{m}}{(m+1)}\left(\begin{array}{c}
+s-1\\
+m\end{array}\right)=\frac{1}{s}$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.9.3
+\layout Standard
+
+
+\begin_inset Formula $\sum_{m=0}^{\infty}\frac{\left(-\right)^{m}}{(m+1)(m+2)}\left(\begin{array}{c}
+s-1\\
+m\end{array}\right)=\frac{1}{s+1}$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.9.4
+\layout Standard
+
+
+\begin_inset Formula $\sum_{m=0}^{\infty}\frac{\left(-\right)^{m}}{(m+1)(m+2)(m+3)}\left(\begin{array}{c}
+s-1\\
+m\end{array}\right)=\frac{1}{2(s+2)}$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.9.5
+\layout Standard
+
+
+\begin_inset Formula $\sum_{m=0}^{\infty}\frac{\left(-\right)^{m}}{(m+1)...(m+p+1)}\left(\begin{array}{c}
+s-1\\
+m\end{array}\right)=\frac{1}{p!(s+p)}$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.9.6
+\layout Standard
+
+
+\begin_inset Formula $\sum_{m=0}^{\infty}\left(-\right)^{m}m(m-1)...(m-p)\left(\begin{array}{c}
+s-1\\
+m\end{array}\right)=0$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.9.7
+\layout Standard
+
+
+\begin_inset Formula $\sum_{m=0}^{\infty}\frac{\left(-\right)^{m}}{(m+2)}\left(\begin{array}{c}
+s-1\\
+m\end{array}\right)=\frac{1}{s(s+1)}$
+\end_inset 
+
+ Follows from above, & etc.
+ 
+\layout Subsection*
+
+6.10 Finite Sums
+\layout Standard
+
+(I copied these sums from some other book.)
+\layout Subsubsection*
+
+6.10.1
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=1}^{n}k^{4}=[n(n+1)(2n+1)(3n^{2}+3n+1)]/30$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.10.2
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=1}^{n}k^{5}=[n^{2}(n+1)^{2}(2n^{2}+2n-1)]/12$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.10.3
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=1}^{n}k^{6}=[n(n+1)(2n+1)(3n^{4}+6n^{3}-3n+1)]/42$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.10.4
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=1}^{n}k^{7}=[n^{2}(n+1)^{2}(3n^{4}+6n^{3}-n^{2}-4n+2)]/24$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.10.5
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=1}^{n}(2k-1)=n^{2}$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.10.6
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=1}^{n}(2k-1)^{2}=n(4n^{2}-1)/3$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.10.7
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=1}^{n}(2k-1)^{3}=n^{2}(2n^{2}-1)$
+\end_inset 
+
+
+\layout Subsubsection*
+
+6.10.8
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=1}^{n}k(k+1)^{2}=[n(n+1)(n+2)(3n+5)]/12$
+\end_inset 
+
+
 \layout Subsection*
 
 7.
@@ -870,6 +1122,202 @@ and
 
 23.
  Bernoulli and Euler Polynomials - Riemann Zeta Function
+\layout Subsubsection*
+
+23.1.3-a
 \layout Standard
 
+
+\begin_inset Formula $B_{n}=\frac{-1}{(n+1)}\Sigma_{k=0}^{n-1}\left(\begin{array}{c}
+n+1\\
+k\end{array}\right)B_{k}$
+\end_inset 
+
+ 
+\newline 
+
+\layout Standard
+
+(Handy for generating large 
+\begin_inset Formula $B_{n}$
+\end_inset 
+
+numerically.)
+\layout Subsubsection*
+
+23.2.5-a
+\layout Standard
+
+
+\begin_inset Formula $\gamma_{0}$
+\end_inset 
+
+is Euler's constant, see 6.1.3.
+\layout Subsection*
+
+23.3 Sums of Riemann Zeta Functions
+\layout Standard
+
+(This is a new section, not in the current A&S.
+ These may be new results.)
+\layout Subsubsection*
+
+23.3.1
+\layout Standard
+
+
+\begin_inset Formula $\zeta(\nu+2)=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+k+\nu+1\\
+k\end{array}\right)\left[\zeta(k+\nu+2)-1\right]$
+\end_inset 
+
+
+\layout Subsubsection*
+
+23.3.2
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=0}^{\infty}\left(\begin{array}{c}
+k+\nu+1\\
+k+1\end{array}\right)\left[\zeta(k+\nu+2)-1\right]=1$
+\end_inset 
+
+ See also 6.1.33 for integer 
+\begin_inset Formula $\nu$
+\end_inset 
+
+.
+\layout Subsubsection*
+
+23.3.3
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=0}^{\infty}(-)^{k}\left(\begin{array}{c}
+k+\nu+1\\
+k+1\end{array}\right)\left[\zeta(k+\nu+2)-1\right]=\frac{1}{2^{\nu+1}}$
+\end_inset 
+
+
+\layout Subsubsection*
+
+23.3.4
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=0}^{\infty}(-)^{k}\left(\begin{array}{c}
+k+\nu+1\\
+k+2\end{array}\right)\left[\zeta(k+\nu+2)-1\right]=\nu[\zeta(\nu+1)-1]-\frac{1}{2^{\nu}}$
+\end_inset 
+
+
+\layout Subsubsection*
+
+23.3.5
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=0}^{\infty}(-)^{k}\left(\begin{array}{c}
+k+\nu+1\\
+k\end{array}\right)\left[\zeta(k+\nu+2)-1\right]=\zeta(\nu+2)-1-\frac{1}{2^{\nu+2}}$
+\end_inset 
+
+
+\layout Subsubsection*
+
+23.3.6
+\layout Standard
+
+
+\begin_inset Formula $S_{n}\equiv\sum_{p=0}^{\infty}\left(\begin{array}{c}
+p+n\\
+p\end{array}\right)\left[\zeta(p+n+2)-1\right]=(-)^{n}\left[1+\sum_{k=1}^{n}\zeta(k+1)\right]$
+\end_inset 
+
+ For integer 
+\begin_inset Formula $n\geq0$
+\end_inset 
+
+.
+\layout Standard
+
+Note that 
+\begin_inset Formula $S_{0}=1$
+\end_inset 
+
+and 
+\begin_inset Formula $S_{1}=\zeta(2)-1$
+\end_inset 
+
+and 
+\begin_inset Formula $S_{2}=1-\zeta(2)+\zeta(3)$
+\end_inset 
+
+and in general 
+\begin_inset Formula $S_{n}+S_{n+1}=\zeta(n+2)$
+\end_inset 
+
+, which is to be used in 23.3.2.
+ Note 
+\begin_inset Formula $\lim_{n\rightarrow\infty}S_{n}=\frac{1}{2}$
+\end_inset 
+
+ which is numerically satisfied for n>20.
+\layout Subsubsection*
+
+23.3.7
+\layout Standard
+
+
+\begin_inset Formula $T_{n}\equiv\sum_{p=0}^{\infty}\left(\begin{array}{c}
+p+n-1\\
+p\end{array}\right)\left[\zeta(p+n+2)-1\right]=(-)^{n+1}\left[n+1-\zeta(2)+\sum_{k=1}^{n-1}(-)^{k}(n-k)\zeta(k+1)\right]$
+\end_inset 
+
+ For integer 
+\begin_inset Formula $n\geq1$
+\end_inset 
+
+.
+ This follows from the observation 
+\begin_inset Formula $T_{n}+T_{n+1}=S_{n}$
+\end_inset 
+
+ when used in 23.3.6.
+\layout Subsubsection*
+
+23.3.8
+\layout Standard
+
+The above trick can be repeated to express
+\begin_inset Formula $\sum_{p=0}^{\infty}\left(\begin{array}{c}
+p+n-k\\
+p\end{array}\right)\left[\zeta(p+n+2)-1\right]$
+\end_inset 
+
+ as a finite sum, for any integer k.
+\layout Subsubsection*
+
+23.3.9
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=0}^{\infty}(-)^{k}(k+1)\zeta^{2}(k+2)=\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{(nk+1)^{2}}=\sum_{n=1}^{\infty}\frac{1}{n^{2}}\psi'(1+\frac{1}{n})$
+\end_inset 
+
+
+\layout Subsubsection*
+
+23.3.10
+\layout Standard
+
+
+\begin_inset Formula $\sum_{k=0}^{\infty}(k+1)\zeta^{2}(k+2)=\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\frac{1}{(nk-1)^{2}}=\sum_{n=1}^{\infty}\frac{1}{n^{2}}\psi'(1-\frac{1}{n})$
+\end_inset 
+
+ Note this is a formal (divergent) sum that can be made meaningful through
+ regularization.
+ (XXX Need to do this).
+ 
 \the_end
