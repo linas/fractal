@@ -31,6 +31,7 @@ init_density (int cnt)
 	return den;
 }
 
+
 double
 perron (double x, double *den, int cnt)
 {
@@ -40,20 +41,61 @@ perron (double x, double *den, int cnt)
 	int n;
 	for (n=1; n<100; n++)
 	{
-		double y = 1.0 / (double) n;
-		y -= x / ((double) n*(n+1));
+		double y = 1.0 /(((double) n) + x);
 		double dj = y* ((double)cnt);
-		dj +=0.5;
+		// dj +=0.5;
 		int j = dj;
 
-		y = ((double) n+1) - x;
-		y *= y;
-		val += den[j] / y; 
+		val += den[j] * y * y;
+		// printf ("n=%d x=%f y=%f val=%f\n", n,x,y,val);
 		if (0 == j) break;
 	}
 
 	return val;
 }
+
+double
+perron_almost (double x, double *den, int cnt)
+{
+	/* perform one iteration of frobenius-perron operator. */
+
+	double val = 0.0;
+	int n;
+	for (n=1; n<100; n++)
+	{
+		double y = 1.0 /(((double) n) + x);
+		double dj = y* ((double)cnt);
+		// dj +=0.5;
+		int j = dj;
+
+		val += den[j] * y * y;
+		if (0 == j) break;
+	}
+
+	return val;
+}
+
+double
+perron_wrong (double x, double *den, int cnt)
+{
+	/* perform one iteration of frobenius-perron operator. */
+
+	double val = 0.0;
+	int n;
+	for (n=1; n<100; n++)
+	{
+		double y = 1.0 /(((double) n+1) - x);
+		double dj = y* ((double)cnt);
+		dj +=0.5;
+		int j = dj;
+
+		val += den[j] * y * y;
+		if (0 == j) break;
+	}
+
+	return val;
+}
+
 
 void
 iterate_perron (double *tgt, double *src, int cnt)
@@ -81,7 +123,7 @@ iterate_density (double *tgt, double *src, int cnt)
 		r[i] = 0;
 		tgt[i] = 0.0;
 	}
-#define NSAMP 351
+#define NSAMP 7351
 	int ns = NSAMP * cnt;
 	for (i=1; i<ns; i++) 
 	{
@@ -96,10 +138,10 @@ iterate_density (double *tgt, double *src, int cnt)
 			printf ("oops too small! i=%d x=%f y=%f j=%d\n", i,x,y,j);
 			j = 0;
 		}
-		int k = i/NSAMP;
-		// tgt[k] += src[j];   // bunches up, repeats (wrong one)
-		// tgt[j] += src[k];   // spreads out & smooths
-		tgt[j] += src[k];   
+		int ii = i/NSAMP;
+		// tgt[ii] += src[j];   // bunches up, repeats (wrong one)
+		// tgt[j] += src[ii];   // spreads out & smooths
+		tgt[j] += src[ii];   
 		r[j] ++;
 	}
 	for (i=0; i<cnt; i++) 
@@ -226,10 +268,11 @@ main (int argc, char * argv[])
 	{
    	den[i] = init_density (cnt);
 	}
+
 	for (i=1; i<NITER; i++) 
 	{
 		 // blur_density (den[i], cnt, 5);
-		 // iterate_density (den[i], den[i-1], cnt);
+		// iterate_density (den[i], den[i-1], cnt);
 		iterate_perron (den[i], den[i-1], cnt);
 	}
 
