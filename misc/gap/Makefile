@@ -19,6 +19,9 @@ clean:
 realclean:	clean
 	rm -f $(EXES) 
 
+dist:
+	tar -zcvf gap.tgz *.c *.C *.h *.gplot Makefile .cvsignore
+
 .C.o:
 	$(CC) -c -O2 $<
 

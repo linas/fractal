@@ -123,7 +123,7 @@ main (int argc, char * argv[])
 	int order = 10;
 	int nmax = 1<<order;
 
-	double z = 2.0/3.0;
+	double z = 1.0/3.0;
 	int p;
 	for (p=1; p<nmax; p+=2)
 	{

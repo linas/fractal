@@ -3,23 +3,29 @@
 # set term gif size 640,480
 # set out 'read.gif'
 
-# set term png small color
-set term png small
-set out 'takagi.png'
+# set term png small
+# set out 'takagi.png'
+set term postscript
+set out 'takagi.ps'
 
 # set data style linespoints
 set data style lines
 set key right
 
-set title "Derivative of the Takagi-Landsberg Curve"
+set title "Takagi-Landsberg Curve"
 set xlabel "x"
-set ylabel "t_0.4(x)"
+set ylabel "t_0.618(x)"
+plot "takagi.dat" using 2:3 title ""
+
+# set title "Derivative of the Takagi-Landsberg Curve"
+# set xlabel "x"
+# set ylabel "t_0.4(x)"
+# plot "takagi.dat" using 2:3 title ""
 
 # set yrange [0:]
 
-plot "takagi.dat" using 2:3 title "tak", \
-     "takagi.dat" using 2:(4*$2*(1-$2)) title "par"
 
+#     "takagi.dat" using 2:(4*$2*(1-$2)) title "par"
 #     "takagi.dat" using 2:4 title "sin"
 #     "fdist.dat" using 5:($3/5) title ""
 #      "takagi.dat" using 2:(0.5*$2*(1-$2)) title "parabola"

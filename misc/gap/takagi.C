@@ -419,7 +419,7 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 2048;
-	int nmax = 23;
+	int nmax = 523;
 
 	if (argc <2)
 	{
@@ -431,8 +431,8 @@ main (int argc, char *argv[])
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
-		// double ts = 1.0;
-		// double tw = takagi (w, x);
+		double ts = 1.0;
+		double tw = takagi (w, x);
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
 		// double tw = log (takagi(w,x));
@@ -533,10 +533,10 @@ main (int argc, char *argv[])
 		double ts = 1.0 + x*(w+2.0*w*w) - x*x*(w*w+0.25*w+0.0625) + w*w*w*takagi (w, x);
 
 #endif
-		double tw = triangle (128.0*(0.5*x));
-		tw += triangle (128.0*(0.5+0.5*x));
-		tw *= 0.5;
-		double ts = triangle (64.0*x);
+		// double tw = triangle (128.0*(0.5*x));
+		// tw += triangle (128.0*(0.5+0.5*x));
+		// tw *= 0.5;
+		// double ts = triangle (64.0*x);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 		fflush (stdout);

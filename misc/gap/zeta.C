@@ -64,8 +64,9 @@ void betas (double x, double re_s, double im_s, double *rea, double *ima)
 		if (1.0e-16>term) break;
 	}
 
+#ifdef DO_GAMMA_NORM
 	// Urgh. Now normalize properly
-	// acc *= 2.0 * tgamma (s+1.0);
+	// effectively, do this: acc *= 2.0 * tgamma (s+1.0);
 
 	gsl_sf_result lnr, garg;
 	int err = gsl_sf_lngamma_complex_e (re_s+1.0, im_s, &lnr, &garg);
@@ -74,8 +75,8 @@ void betas (double x, double re_s, double im_s, double *rea, double *ima)
 		printf ("# uhh ohhhh ! s = %g + i %g\n", re_s, im_s); 
 	}
 
-#define DO_RENORM
-#ifdef DO_RENORM
+#define DO_MAG_RENORM
+#ifdef DO_MAG_RENORM
 	double r = exp (lnr.val);
 	reacc *= 2.0 *r;
 	imacc *= 2.0 *r;
@@ -87,6 +88,7 @@ void betas (double x, double re_s, double im_s, double *rea, double *ima)
 	double tmp = reacc *gc - imacc * gs;
 	imacc = reacc *gs + imacc * gc;
 	reacc = tmp;
+#endif
 
 	*rea = reacc;
 	*ima = imacc;
@@ -170,6 +172,7 @@ void fractal_beta (double sre, double sim, double x, double *bre, double *bim)
 	for (ell=0; ell<300; ell ++)
 	{
 		double tell = 2.0*ell +1.0;
+		tell *= 2.0 *M_PI;
 
 		double lmag = pow (tell, -sre);
 		double ltell = log (tell);
@@ -184,6 +187,8 @@ void fractal_beta (double sre, double sim, double x, double *bre, double *bim)
 
 		reb += tre;
 		imb += tim;
+
+		if (lmag < 1.0e-20) break;
 	}
 
 	*bre = reb;
@@ -324,7 +329,7 @@ main (int argc, char * argv[])
 		double fre, fim;
 		fractal_beta (sre, sim, x, &fre, &fim);
 
-		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bre, bim, fre, fim);
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bre, bim, bre-fre, bim-fim);
 
 		fflush (stdout);
 	}
