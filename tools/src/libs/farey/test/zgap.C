@@ -20,31 +20,39 @@ main (int argc, char *argv[])
    ContinuedFraction f;
    double r, x, y, z, t;
    double v, vprev, gap;
-   int i, n;
+   int i, n, m, d;
    int nume, deno;
 
-   if (argc <2) {
-      printf ("Usage: %s <denom> \n", argv[0]);
+   if (argc <4) {
+      printf ("Usage: %s <n> <nume> <m> <a>\n", argv[0]);
       exit (1);
    }
 
    n = atoi (argv[1]);
-   deno = n;
 
-   for (i = 0; i <= n; i ++) 
+   nume = atoi (argv[2]);
+   m = atoi (argv[3]);
+   d = atoi (argv[4]);
+
+   for (i = 1; i <= n; i ++) 
    {
-      nume = 2;
-      deno = 2*i+3;
+      deno = m*i+d;
       x = ((double) nume) / ((double) deno);
       f.SetRatio (nume, deno);
       v = f.ToZRealGap ();
       // z = (f.ToZReal(1.001) - f.ToZReal(1.0)) / 0.001;
       // f.Print ();
+      t = v - 1.0 / ((double) deno*deno);
 
-      printf ("%d	%g	%g	%g\n", deno, x, v, 1.0 /((double) deno*deno));
+      if ((1.0e-16 < t) || (-1.0e-16 > t)) {
+         printf ("problem: i=%d deno=%d x=%g gap=%g diff=%g\n", i, deno, x, v, t);
+      }
+      // printf ("%d	%g	%g	%g\n", deno, x, v, t);
       fflush (stdout);
    }
 
+   printf ("excellent!\n");
 }
 
 /* ---------------------- END OF FILE ------------------------- */
+
