@@ -38,16 +38,18 @@ void mandelbrot_cutoff (
    double 	ren, tl;
    double	tau;
    double	*regulator;
-   double	sum_re, sum_im, sum_mod;
+   double	sum_n, sum_re, sum_im, sum_mod;
 
    /* first, compute the regulator, so that the itermax'th iteration makes 
     * a negligable contribution (about 1e-30) */
    tau = 8.0 / ((double) itermax);
 
    /* set up smooth ramp */
+   sum_n = 0.0;
    regulator = (double *) malloc ((itermax+1)*sizeof (double));
    for (i=0; i<itermax; i++) {
       regulator[i] = exp (- ((double)(i*i))*tau*tau);
+      sum_n += regulator[i];
    }
 
    ren = log( log (escape_radius)) / log(2.0);
@@ -84,9 +86,16 @@ void mandelbrot_cutoff (
          }    
 
          modulus = sqrt (modulus);
+         modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
          frac = log (log (modulus)) * tl;
 
-         glob [i*sizex +j] = sqrt (sum_re*sum_re + sum_im*sum_im);
+         glob [i*sizex +j] = modulus / sum_n;
+         glob [i*sizex +j] = sum_mod / sum_n;
+         glob [i*sizex +j] = sum_mod - modulus;
+         glob [i*sizex +j] = modulus / sum_n;
+         glob [i*sizex +j] /= (sqrt (re_position*re_position+im_position*im_position));
+         glob [i*sizex +j] -= 1.0/ sqrt (sqrt ((re_position-0.5)*(re_position-0.5)+im_position*im_position));
+
 
          re_position += delta;
       }
@@ -182,7 +191,7 @@ glob[i*sizex+j] = 0.0; } else {glob[i*sizex+j]=0.9999;}
 }
 
 /*-------------------------------------------------------------------*/
-/* this routine fills in the exterior of the mandelbrot set using 
+/* this routine fills in the interior and exterior of the mandelbrot set using 
  * the classic algorithm. The derivative (infinitessimal flow) 
  * is used to play games.
  */
@@ -323,6 +332,7 @@ void dmandelbrot_out (
          modulus *= log((double) loop);
          modulus *= log((double) loop);
 
+         modulus = sqrt (dre*dre+dim*dim);
         
          glob [i*sizex +j] = modulus;
 
