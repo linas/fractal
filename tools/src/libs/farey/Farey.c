@@ -435,6 +435,49 @@ double t;
  * this gives same result as bit-shifting algorithm above.
  *
  * The algorithm multiplies each term by g sub k (n) where
+ * g sub k (n) = (1 + sin ((k+1)*t) / sin (k*t)) ** (-n)
+ * If I computed this correctly, this function is continous at all rationals.
+ */
+
+#ifdef ANSI_C
+double ContinuedFractionToSinFarey (struct Farey *self, double t)
+#else
+double ContinuedFractionToSinFarey (self, t)
+struct Farey *self;
+double t;
+#endif
+{
+   int i;
+   double sgn, sum, tmp;
+   double retval;
+   double broke;
+   double ct, cti;
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   tmp = 0.0;
+   sum = -1.0;    /* initally, shift by one bit */
+   sgn = 1.0;
+   for (i=0; i<NTERMS; i++) {
+      sum += (double) TINUED_FRAC[i];
+      ct = 0.5 * (1.0 + cos (((double) i)*t));
+      cti = 0.5 * (1.0 + cos (((double)(i+1))*t));
+      broke = 1.0 + cti/ct;
+      tmp += sgn * ct * pow (broke, -sum);
+      sgn = - sgn;
+   }
+
+   retval += tmp;
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
+/* the routine below computes the generalized farey number from the
+ * continued fraction. To get the usual farey number, simply use t=1;
+ * this gives same result as bit-shifting algorithm above.
+ *
+ * The algorithm multiplies each term by g sub k (n) where
  * g sub k (n) = t**k / (1+t)**n
  * If I computed this correctly, this function is continous at all rationals.
  */
@@ -450,6 +493,7 @@ double t;
    int i;
    double sgn, sum, tmp;
    double retval;
+   double broke;
 
    retval = (double) INTPART;
    if (NTERMS == 0) return (retval);
@@ -459,7 +503,9 @@ double t;
    sgn = 1.0;
    for (i=0; i<NTERMS; i++) {
       sum += (double) TINUED_FRAC[i];
-      tmp += sgn * pow (t, (double) i) / pow ((1.0+t), sum);
+      broke = sum * log (1.0 + t);          /* linux pow() is broken */
+      if (600.0 < broke ) broke = 600.0;
+      tmp += sgn * pow (t, ((double) i)) * exp (-broke);
       sgn = - sgn;
    }
 
