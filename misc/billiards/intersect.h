@@ -11,6 +11,15 @@
 #include <math.h>
 #include "vvector.h"
 
+
+#ifndef TRUE
+#define TRUE 1
+#endif
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
 #define BACKWARDS_INTERSECT (2)
 
 /* ========================================================== */
@@ -47,7 +56,7 @@
  * single-precsion numbers have 24 bit mantissas.
  */
 
-#define DEGENERATE_TOLERANCE   (0.000002)
+#define DEGENERATE_TOLERANCE   (0.0000000002)
 
 /* ========================================================== */
 /* 
@@ -84,7 +93,7 @@
 
 #define INTERSECT(valid,sect,p,n,v1,v2)			\
 {							\
-   gleDouble deno, numer, t, omt;			\
+   double deno, numer, t, omt;				\
 							\
    deno = (v1[0] - v2[0]) * n[0];			\
    deno += (v1[1] - v2[1]) * n[1];			\
@@ -207,13 +216,6 @@
       } 							\
    } 								\
 }
-
-
-/* prototype for those who don't use the #define directly */
-int bisecting_plane (gleDouble n[3],    /* returned */
-                     gleDouble v1[3],   /* input */
-                     gleDouble v2[3],   /* input */
-                     gleDouble v3[3]);  /* input */
 
 /* ========================================================== */
 /*
@@ -429,8 +431,8 @@ int bisecting_plane (gleDouble n[3],    /* returned */
 
 #define FIND_NON_DEGENERATE_POINT(inext,npoints,len,diff,point_array)   \
 {                                                                       \
-   gleDouble slen;							\
-   gleDouble summa[3];							\
+   double slen;								\
+   double summa[3];							\
    									\
    do {                                                                 \
       /* get distance to next point */                                  \
