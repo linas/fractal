@@ -10,6 +10,10 @@
  * Use LAPACK xGEEV routine
  * specifically, real double precision:
  * DGEEV
+ *
+ * Apply to find eigenvalues of the Gauss-Kuz'min-Wirsing operator
+ *
+ * Linas Vepstas September 2004
  */
 
 #include <math.h>
