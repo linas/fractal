@@ -1068,10 +1068,23 @@ g_{C}:x\longmapsto x/(x+1)\end{array}\label{eq:}\end{equation}
 
 Define 
 \begin_inset Formula \begin{equation}
-G=\{\gamma\in SL(2,\mathbb{Z})\;|\;\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ or }\gamma=rg^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\}\label{eq:}\end{equation}
+G=\{\gamma\in SL(2,\mathbb{Z})\;|\;\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\;\mbox{ and }a_{1},a_{N}\ge0\}\label{eq:}\end{equation}
 
 \end_inset 
 
+ That is, we require each 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ to be a positive integer, with the exception of 
+\begin_inset Formula $a_{1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+ which may be zero.
  Note that 
 \begin_inset Formula $G\subset S^{*}L(2,\mathbb{Z})$
 \end_inset 
@@ -1461,6 +1474,583 @@ x\end{array}\right)\label{eq:}\end{equation}
 
 is not 1.
  
+\layout Subsection
+
+Enumerating Fractal Self-Similarities as 
+\begin_inset Formula $\mathbb{Q}\times\mathbb{N}\times C_{2}$
+\end_inset 
+
+ 
+\layout Standard
+
+Every group element of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ can be decomposed into a combination of the 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ generators, of the form 
+\begin_inset Formula $g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+ for integers 
+\begin_inset Formula $a_{k}\in\mathbb{Z}$
+\end_inset 
+
+.
+ We've already discovered the relationship between the modular group and
+ continued fractions, which we gave above as 
+\begin_inset Formula \[
+\gamma_{C}(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+
+\end_inset 
+
+ We saw that this relation gives us the isomorphisms of the Minkowski Question
+ Mark; at least when the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ are positive integers.
+ Let us now look at this a little more carefully and precisely, since, among
+ other things, we need to define the domain and codomain of 
+\begin_inset Formula $x$
+\end_inset 
+
+ over which the isomorphism is valid.
+\layout Standard
+
+First, let us consider the group elements with 
+\begin_inset Formula $a_{1}\geq0$
+\end_inset 
+
+, 
+\begin_inset Formula $a_{2}\geq1$
+\end_inset 
+
+, ...
+ 
+\begin_inset Formula $a_{N-1}\geq1$
+\end_inset 
+
+, 
+\begin_inset Formula $a_{N}\geq0$
+\end_inset 
+
+, that is, the elements of the semigroup 
+\begin_inset Formula $G$
+\end_inset 
+
+.
+ When the coefficients are zero or positive like this, we find that 
+\begin_inset Formula $\gamma_{C}(x)$
+\end_inset 
+
+ maps the unit interval into strictly smaller intervals; 
+\shape italic 
+i.e.
+
+\shape default 
+ that 
+\begin_inset Formula $0\le\gamma_{C}(0),\gamma_{C}(1)<1$
+\end_inset 
+
+ or 
+\begin_inset Formula $0<\gamma_{C}(0),\gamma_{C}(1)\le1$
+\end_inset 
+
+ .
+ One endpoint of the interval is given by the rational number 
+\begin_inset Formula $\gamma_{C}(0)=[a_{1}+1,a_{2},a_{3},...,a_{N-1}]$
+\end_inset 
+
+ (note the missing 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+).
+ The other endpoint is 
+\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}\geq1$
+\end_inset 
+
+, although it must be written as 
+\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N-2}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}=0$
+\end_inset 
+
+.
+ This last special case is really just a reversal of the two endpoints.
+ For such a 'shrinking' 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+, we can now write the isomorphism of the Question Mark as 
+\begin_inset Formula \[
+?(\gamma_{C}(x))=?(\gamma_{C}(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
+
+\end_inset 
+
+
+\layout Standard
+
+One way of understanding this isomorphism is to think of it as an isomorphism
+ of intervals, where we can freely pick one end of the interval to be an
+ arbitrary rational number, but are a bit more constrained in picking the
+ other end.
+ That is, we can pick an arbitrary 
+\begin_inset Formula $\gamma_{C}(0)=p/q\in\mathbb{Q}$
+\end_inset 
+
+.
+ We get the other end of the interval by picking 
+\begin_inset Formula $a_{N}\in\mathbb{N}$
+\end_inset 
+
+ a positive integer.
+ Having thus specified the interval, we can, for good measure, choose to
+ exchange the endpoints, that is, pick one of 
+\begin_inset Formula $\left\{ 1,r\right\} =C_{2}\equiv\mathbb{Z}/2\mathbb{Z}$
+\end_inset 
+
+.
+ Thus we can (exhaustively) enumerate all isomorphisms of the Question Mark
+ by 
+\begin_inset Formula $\mathbb{Q}\times\mathbb{N}\times C_{2}$
+\end_inset 
+
+.
+ The enumeration is that of intervals.
+\layout Standard
+
+Another way of understanding this isomorphism is as a mapping of binary
+ trees.
+ That is, we can pick a node, any node, in the Farey tree, and equate it
+ to the root node of the dyadic tree.
+ Since infinite binary trees are inherenetly isomorphic, we are done: this
+ is the isomorphism desired.
+ Thus, it would seem, we can enumerate all such tree isomorphisms with a
+ single number: the value, in 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+, of the node in the Farey tree that will be equated to the root node (and
+ we can still pick 
+\begin_inset Formula $r\in C_{2}$
+\end_inset 
+
+ if we wish to reflect the tree).
+ Thus, we can also enumerate the isomorphisms (exhaustively) as 
+\begin_inset Formula $\mathbb{Q}\times C_{2}$
+\end_inset 
+
+.
+ This is a different enumeration, based on the interval center-points rather
+ than endpoints, but the enumeration is equivalent, due to the 
+\begin_inset Quotes eld
+\end_inset 
+
+infinite hotel
+\begin_inset Quotes erd
+\end_inset 
+
+ property of the countable infinity.
+\layout Standard
+
+We can gain just a tad more insight by visualizing the binary tree by thinking
+ about the interval on the real number line that it specifies.
+ Given any node in the Farey tree, the subtree will have an infinum which
+ will be a rational number, and a suprenum which will also be a rational
+ number.
+ This is a somewhat subtle point: the inf and sup of a subtree of the Farey
+ tree will never be irrational.
+ This can perhaps be more easily understood by contemplating the dyadic
+ tree, and then realizing that the inf and sup of a dyadic subtree must
+ always be dyadics, and can never be, for example, 1/3.
+ We assert this here without proof, but a proof is not hard.
+ Realizing this, we can now more easily comprehend the 
+\begin_inset Formula $\mathbb{Q}\times\mathbb{N}\times C_{2}$
+\end_inset 
+
+ enumeration.
+ We can freely pick the infinum of the binary subtree.
+ However, once picked, there are only 
+\begin_inset Formula $\mathbb{N}$
+\end_inset 
+
+ nodes in the binary tree that share this infinum.
+ Picking one of these 
+\begin_inset Quotes eld
+\end_inset 
+
+allowed
+\begin_inset Quotes erd
+\end_inset 
+
+ nodes then uniquely determines the suprenum, and thus one has specified
+ the interval.
+ Again we leave the proof to the reader; it is not hard given basic properties
+ of binary trees.
+ 
+\layout Standard
+
+To summarize, this set of isomorphisms of the Question Mark can be enumerated
+ by 
+\begin_inset Formula $\mathbb{Q}\times\mathbb{N}\times C_{2}$
+\end_inset 
+
+, which we'd like to call the fundamental set of symmetries.
+ Note that this property of being able to freely pick one endpoint, but
+ being a bit more constrained with the other is a very important property
+ of this symmetry.
+ 
+\series bold 
+\emph on 
+This property is the fundamental property of self-similar objects and fractals
+ in general: one can freely pick which copy one is to be self-similar with,
+ but then after that, one has little further freedom.
+
+\series default 
+\emph default 
+ This is what makes fractals be what they are.
+ In the next chapter, we will demonstrate how many classical fractals, including
+ the Koch snowflake curve and the Peano curves all have exactly this same
+ set of symmetries, as each is a special case of the de Rham curve, a curve
+ having this set of symmetries.
+\layout Subsection
+
+The Set-Theoretic Representation of the Modular Group
+\layout Standard
+
+The canonical representation of the modular group elements by Mobius transforms
+ is in fact a set-theoretic representation of the modular group.
+ That is, let 
+\begin_inset Formula $X$
+\end_inset 
+
+ be a set, and let 
+\begin_inset Formula $\mathcal{F}_{X}=\left\{ f[x]:X\rightarrow X\right\} $
+\end_inset 
+
+ be the set of all maps from the set to itself.
+ Then we say that 
+\begin_inset Formula $X$
+\end_inset 
+
+ is a set-theoretic representation of a group 
+\begin_inset Formula $G$
+\end_inset 
+
+ if 
+\begin_inset Formula $\exists\rho:G\rightarrow\mathcal{F}_{X}$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\forall g\in G$
+\end_inset 
+
+ and 
+\begin_inset Formula $\forall x\in X$
+\end_inset 
+
+ that the map 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is a group homomorphism of the group into 
+\begin_inset Formula $\mathcal{F}_{X}$
+\end_inset 
+
+.
+ That is, the following two properties must hold: the identity element correspon
+ds to the self-map: 
+\begin_inset Formula $\rho(e)[x]=x$
+\end_inset 
+
+ and that group multiplication corresponds to function composition: 
+\begin_inset Formula $\rho(g_{1}g_{2})[x]=(\rho(g_{1})\circ\rho(g_{2}))[x]=\rho(g_{1})[\rho(g_{2})[x]]$
+\end_inset 
+
+.
+ If every map 
+\begin_inset Formula $\rho(g):X\rightarrow X$
+\end_inset 
+
+ is one-to-one and onto, then 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is a group homomorphism from 
+\begin_inset Formula $G$
+\end_inset 
+
+ to 
+\begin_inset Formula $S_{X}$
+\end_inset 
+
+ where 
+\begin_inset Formula $S_{X}$
+\end_inset 
+
+ is the symmetric group of 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Clearly, the canonical map 
+\begin_inset Formula \[
+\rho:\left(\begin{array}{cc}
+a & b\\
+c & d\end{array}\right)\mapsto\frac{ax+b}{cx+d}\]
+
+\end_inset 
+
+ is such a group homomorphism for the modular group.
+ Not only is it commutative, but it is also holds for all elements of the
+ modular group.
+ The set 
+\begin_inset Formula $X$
+\end_inset 
+
+ can be taken to be the field of rationals 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ or as any of its closures 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, although when studying modular forms, it is usually taken as the complex
+ upper-half plane 
+\begin_inset Formula $H^{+}=\{ z\in\mathbb{C}\, s.t.\,\textrm{Im}z\geq0\}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The Minkowski Question Mark suggests that there is another such representation,
+ given by 
+\begin_inset Formula $?\circ\rho$
+\end_inset 
+
+.
+ Unfortunately, due to the nature of the construction, its not obvious if
+ the representation can be made to hold for all group elements, although
+ it clearly works on the subset of contracting group elements.
+ lets see how far we can push this.
+ In a similar vein, we will find other representations in 
+\begin_inset Formula $GL(N)$
+\end_inset 
+
+ given by the self-similarity properties of the Takagi Curve [ref other
+ chapter/paper].
+ These representations will also be built from the subset of contracting
+ group elements, and so we need a general discussion of how to extend the
+ homomorphisms to all group elements.
+ 
+\layout Standard
+
+Let 
+\begin_inset Formula $M=\{\gamma\in SL(2,\mathbb{Z})\textrm{ s.t. }\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\textrm{ has }a_{k}>0\;\forall k\in\{1,..,N\}\}$
+\end_inset 
+
+ be the set of contracting group elements.
+ We begin by noting that every 
+\begin_inset Formula $\gamma\in M$
+\end_inset 
+
+ defines an open interval 
+\begin_inset Formula $\upsilon_{\gamma}$
+\end_inset 
+
+ whose endpoints are given by 
+\begin_inset Formula $\gamma_{D}(0)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\gamma_{D}(1)$
+\end_inset 
+
+.
+ We'll be using this to generate the dyadic topology.
+ Equivalently, we could have used the Farey numbers 
+\begin_inset Formula $\gamma_{C}(0)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\gamma_{C}(1)$
+\end_inset 
+
+, which would generate a Farey topology; either way, these two can be made
+ homeomorphic through the Minkowski Question Mark.
+ This is most easily understood by realizing that both intervals are defined
+ by subtrees; in one case, a subtree of the dyadic tree, and in the other
+ case, by a subtree of the Stern-Brocot tree.
+ Every contracting element uniquely defines a subtree; the mapping between
+ contracting elements and subtrees is 1-1 and onto.
+ The Minkowski Question Mark is an equivalence of trees, and so these intervals
+ are really 
+\begin_inset Quotes eld
+\end_inset 
+
+the same thing
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ In the following, we will let 
+\begin_inset Formula $\gamma(x)$
+\end_inset 
+
+ stand for either the one or the other set-theoretic representation, unless
+ otherwise stated.
+\layout Standard
+
+Subtrees of trees are totally ordered, and so we have equivalently a total
+ order of intervals (XXX should we define total order here?) That is, we
+ have a simple theorem about interval intersection: given any two 
+\begin_inset Formula $\gamma_{1},\gamma_{2}\in M$
+\end_inset 
+
+, then one of the following three statements holds: 
+\begin_inset Formula $\upsilon_{1}\cap\upsilon_{2}=\upsilon_{1}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\upsilon_{1}\cap\upsilon_{2}=\upsilon_{2}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\upsilon_{1}\cap\upsilon_{2}=\emptyset$
+\end_inset 
+
+.
+ This total ordering of intervals follows from considering the tree representati
+on: given two subtrees, one is either a subtree of the other, or they are
+ non-intersecting.
+ 
+\layout Standard
+
+Note that 
+\begin_inset Formula $\forall\gamma\in M$
+\end_inset 
+
+, the function 
+\begin_inset Formula $\gamma^{-1}(x)$
+\end_inset 
+
+ is well-defined on the domain 
+\begin_inset Formula $x\in\upsilon$
+\end_inset 
+
+ and has a range (co-domain) over the entire unit interval.
+ This implies that 
+\begin_inset Formula $\forall\gamma_{1},\gamma_{2}\in M$
+\end_inset 
+
+ we have that 
+\begin_inset Formula $(\gamma_{1}\circ\gamma_{2}^{-1})(x)$
+\end_inset 
+
+ is well-defined on the domain 
+\begin_inset Formula $x\in\upsilon_{2}$
+\end_inset 
+
+ and has a range (co-domain) over 
+\begin_inset Formula $\upsilon_{1}$
+\end_inset 
+
+.
+ Thus, homomorphisms on 
+\begin_inset Formula $M$
+\end_inset 
+
+ extend naturally to all elements of the form 
+\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}$
+\end_inset 
+
+as long as we restrict the mapping to the domain 
+\begin_inset Formula $\upsilon_{2}$
+\end_inset 
+
+.
+ Next, we note that we can build chains in this way.
+ If 
+\begin_inset Formula $\upsilon_{2}\supset\upsilon_{3}$
+\end_inset 
+
+, then 
+\begin_inset Formula $(\gamma_{2}^{-1}\gamma_{3})(x)$
+\end_inset 
+
+ has a domain of the entire unit interval, although its range is less than
+ the whole interval.
+ Still, the range is within the domain of 
+\begin_inset Formula $\gamma_{1}$
+\end_inset 
+
+ and we have a natural extension to all group elements of the form 
+\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}\gamma_{3}$
+\end_inset 
+
+ as long as 
+\begin_inset Formula $\upsilon_{2}\supset\upsilon_{3}$
+\end_inset 
+
+ holds.
+ Thus, a set-theoretic homomorphism extends naturally to elements of the
+ form 
+\begin_inset Formula $\gamma=\gamma_{1}\gamma_{2}^{-1}\gamma_{3}\gamma_{4}^{-1}...$
+\end_inset 
+
+ where each 
+\begin_inset Formula $\gamma_{k}\in M$
+\end_inset 
+
+ and the set of relationships 
+\begin_inset Formula $\{\upsilon_{2j}\supset\upsilon_{2j+1}\}$
+\end_inset 
+
+ hold between pairs of adjacent elements.
+ There now remains the problem of what to do for cases of 
+\begin_inset Formula $\upsilon_{3}\supset\upsilon_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\upsilon_{2}\cap\upsilon_{3}=\emptyset$
+\end_inset 
+
+.
+ One can proceed somewhat delicately with the former, by understanding that
+ the domain of 
+\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}\gamma_{3}$
+\end_inset 
+
+ is smaller than the whole unit interval.
+ For the latter, we do not have an intersection of intervals on which the
+ homomorphism is naively valid.
+\layout Standard
+
+XXX Now what ? Do we need a fiber bundle? What's the topology?
 \layout Section
 
 Conclusions
