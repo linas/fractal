@@ -32,7 +32,7 @@ Symmetries of Period-Doubling Maps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 8 November 2004)
+12 October 2004 (revised 9 November 2004)
 \layout Abstract
 
 The concept of self-similarity is central to the notion of a fractal, but
@@ -881,35 +881,28 @@ f(x)=\int_{0}^{\infty}c(w)t_{w}(x)\; dw\]
  (Are there other interesting examples?)
 \layout Subsection
 
-The Dyadic Polynomial
+The Polynomials 
 \layout Standard
 
-We can also compute the transformation of the Takagi curve under the modular
- group directly from the 
-\begin_inset Quotes eld
-\end_inset 
-
-dyadic polynomial
-\begin_inset Quotes erd
-\end_inset 
-
- representation.
- That is, because the 3D rep was a vector space representation, we can write
- the action of group element 
+The action of a group element 
 \begin_inset Formula $\gamma$
 \end_inset 
 
- as 
+ on the Takagi curve can be written as 
 \layout Standard
 
 
 \begin_inset Formula \[
-t_{w}(\gamma_{D}(x))=p_{\gamma}(2w)+x\, q_{\gamma}(2w)+w^{M_{\gamma}}t_{w}(x)\]
+t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\]
 
 \end_inset 
 
  for some polynomials 
-\begin_inset Formula $p_{\gamma},q_{\gamma}$
+\begin_inset Formula $p_{\gamma}$
+\end_inset 
+
+, 
+\begin_inset Formula $q_{\gamma}$
 \end_inset 
 
  and positive integer 
@@ -925,8 +918,15 @@ t_{w}(\gamma_{D}(x))=p_{\gamma}(2w)+x\, q_{\gamma}(2w)+w^{M_{\gamma}}t_{w}(x)\]
 \end_inset 
 
  chosen.
- .
- A brief bit of scratching shows what these polynomials are.
+ A brief bit of scratching shows what the 
+\begin_inset Formula $q_{\gamma}$
+\end_inset 
+
+ polynomial is; but 
+\begin_inset Formula $p_{\gamma}$
+\end_inset 
+
+ is harder.
  For 
 \begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}$
 \end_inset 
@@ -966,65 +966,44 @@ b_{k}=\left\{ \begin{array}{ccc}
 
 \end_inset 
 
- 
-\layout Standard
-
-The polynomials 
-\begin_inset Formula $p_{\gamma}$
-\end_inset 
-
- and 
+ The polynomial 
 \begin_inset Formula $q_{\gamma}$
 \end_inset 
 
  can then be expressed directly in terms of this binary expansion.
- Writing 
-\begin_inset Formula $z\equiv2w$
-\end_inset 
-
- we have 
+ 
 \begin_inset Formula \[
-q_{\gamma}(z)=\frac{(-)^{N}}{2^{M}}\sum_{k=1}^{M}(2b_{k}-1)z^{k-1}\]
+q_{\gamma}(w)=\frac{(-)^{N}}{2^{M-1}}\sum_{k=1}^{M}(2b_{k}-1)\;(2w)^{k-1}\]
 
 \end_inset 
 
- and 
-\layout Standard
-
-
-\begin_inset Formula \[
-p_{\gamma}(z)=\frac{1}{2^{M}}\sum_{k=1}^{M}a_{k}z^{k-1}\]
-
+ The 
+\begin_inset Formula $p_{\gamma}$
 \end_inset 
 
-where 
-\begin_inset Formula \[
-a_{k}=(-)^{N+1}b_{k}+\frac{1}{2}\left[1+(-)^{N}\right]=\left\{ \begin{array}{cc}
-b_{k} & \;\textrm{ for N odd}\\
-1-b_{k} & \;\textrm{ for N even}\end{array}\right.\]
-
+ polynomial seems to result from some more complex folding that is hard
+ to discern by studying the matrix elements under matrix multiplication.
+ However, determining its value for any given 
+\begin_inset Formula $w$
 \end_inset 
 
- Except for the leading factor, these are essentially polynomials over the
- field 
-\begin_inset Formula $\mathbb{Z}_{2}=\mathbb{Z}/2\mathbb{Z}$
+ is straightforward enough: we merely need to set 
+\begin_inset Formula $x=0$
 \end_inset 
 
-.
- As a side effect of this exploration, we've discovered that we can enumerate
- all polynomials over the ring 
-\begin_inset Formula $\mathbb{Z}_{2}$
-\end_inset 
-
- according to the dyadic number 
-\begin_inset Formula $\gamma_{D}(1)$
+ to find 
+\begin_inset Formula $p_{\gamma}(w)=t_{w}(\gamma_{D}(0))$
 \end_inset 
 
 .
 \layout Description
 
-Homework: Are there any interesting structures that result from this enumeration
-? What might they be?
+Homework: Describe 
+\begin_inset Formula $p_{\gamma}(w)$
+\end_inset 
+
+.
+ Is it possible to give a direct expression for the polynomial? 
 \layout Subsection
 
 Bernoulli Map Symmetry
