@@ -1127,11 +1127,6 @@ In general, if we replace
 \end_inset 
 
 .
- (The case for a function odd about 
-\begin_inset Formula $x=1/2$
-\end_inset 
-
- is trickier).
  For example, if we were to construct the curve from 
 \begin_inset Formula \[
 \beta(x)=4x(1-x)\]
@@ -1176,9 +1171,152 @@ U=\left(\begin{array}{cccc}
 
 \end_inset 
 
- It should now be appearent how to build arbitrary higher-dimensional representa
-tions.
- One starts with 
+ 
+\layout Standard
+
+We can also construct a function that is odd about 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+\beta_{o}(x)=\left\{ \begin{array}{ccc}
+16x(1/2-x) & \;\textrm{ when }\; & 0\leq x\leq1/2\\
+16(1-x)(x-1/2) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ which is a pair of oppositely oriented parabolas.
+ We use the subscript 
+\begin_inset Quotes eld
+\end_inset 
+
+o
+\begin_inset Quotes erd
+\end_inset 
+
+ to denote odd parity.
+ A graph looks like a rude, crude version of the sine function.
+ We then have 
+\begin_inset Formula $\beta_{o}(1-x)=-\beta_{o}(x)$
+\end_inset 
+
+ and so 
+\begin_inset Formula $b_{w}(1-x)=-b_{w}(x)$
+\end_inset 
+
+.
+ The representation for 
+\begin_inset Formula $r$
+\end_inset 
+
+ for this function has an extra minus sign: 
+\begin_inset Formula \[
+r_{4o}=\left(\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+1 & -1 & 0 & 0\\
+1 & -2 & 1 & 0\\
+0 & 0 & 0 & -1\end{array}\right)\]
+
+\end_inset 
+
+ and cannot be made conjugate to 
+\begin_inset Formula $r_{4}$
+\end_inset 
+
+; that is, there does not exist a 
+\begin_inset Formula $U$
+\end_inset 
+
+ with 
+\begin_inset Formula $\det\, U\neq0$
+\end_inset 
+
+ such that 
+\begin_inset Formula $Ur_{4o}U^{-1}=r_{4}$
+\end_inset 
+
+.
+ So in fact, for a fixed 
+\begin_inset Formula $w$
+\end_inset 
+
+, we have two 4D representations, of even and odd parity, that aren't conjugate.
+ Working backwards, we realize that there is actually another 3D representation,
+ of odd parity, that is not conjugate to the even-parity representation.
+ It is the one that is built out of the shifted sawtooth 
+\begin_inset Formula \[
+\sigma(x)=\left\{ \begin{array}{ccc}
+4x & \;\textrm{ for }\; & 0\leq x\leq1/4\\
+2-4x & \;\textrm{ for }\; & 1/4\leq x\leq3/4\\
+4x-4 & \;\textrm{ for }\; & 3/4\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ and give an odd-parity representation because 
+\begin_inset Formula $\sigma(1-x)=-\sigma(x)$
+\end_inset 
+
+.
+ However, if we try to work out the matrix representation 
+\begin_inset Formula $g_{3o}$
+\end_inset 
+
+ for this function, we find that the bottom row of the matrix has elements
+ that aren't constants, but are rather piece-wise assemblies that depend
+ on whether 
+\begin_inset Formula $x$
+\end_inset 
+
+ is greater or less than 1/2.
+ Strictly speaking, then, this isn't a representation.
+ We can try to save the day by building a different odd-parity sawtooth;
+ but then we find that such a sawtooth will be discontinuous at x=0 and/or
+ at x=1/2.
+ 
+\layout Standard
+
+For the most part, we've tried to be careful to choose functions that yeild
+ a continuous Takagi curve.
+ One can build discontinuous curves by working with the square-wave.
+ The square-wave, in a certain sense, transforms as the 2D rep.
+ Curiously, the odd-parity quadratic above has a continuous first derivative.
+ We can in fact build an even-parity quadratic with a continuous first derivativ
+e, by following the same recipie:
+\begin_inset Formula \[
+\beta_{e}(x)=\left\{ \begin{array}{ccc}
+1-16x^{2} & \;\textrm{ for }\; & 0\leq x\leq1/4\\
+16(x-1/2)^{2}-1 & \;\textrm{ for }\; & 1/4\leq x\leq3/4\\
+1-16(1-x)^{2} & \;\textrm{ for }\; & 3/4\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ This is explictly even: 
+\begin_inset Formula $\beta_{e}(1-x)=\beta_{e}(x)$
+\end_inset 
+
+.
+ A graph of this looks like a rude, crude version of the cosine.
+ If we try to work out the matrix representation 
+\begin_inset Formula $g_{4e}$
+\end_inset 
+
+ for this function, we run into difficulty again: the bottom row of the
+ matrix has elements that aren't constants, but are rather piece-wise assemblies
+ that depend on whether 
+\begin_inset Formula $x$
+\end_inset 
+
+ is greater or less than 1/2.
+ It seems that there isn't any even-parity quadratic function with continuous
+ first derivatives that has a matrix representation.
+ This seems to mirror the odd-parity problem for the 3D rep.
+ 
+\layout Standard
+
+It should now be appearent how to build arbitrary higher-dimensional representat
+ions.
+ One can, for instance, start with 
 \begin_inset Formula \[
 \alpha_{n}(x)=\left\{ \begin{array}{ccc}
 2^{n}x^{n} & \;\textrm{ when }\; & 0\leq x\leq1/2\\
@@ -1186,7 +1324,7 @@ tions.
 
 \end_inset 
 
- and discovers that 
+ and discover that 
 \begin_inset Formula \[
 \left[g_{n+2}a_{n,w}\right](x)\equiv\left[a_{n,w}g_{D}\right](x)=a_{n,w}\left(\frac{x}{2}\right)=x^{n}+wa_{n,w}(x)\]
 
@@ -1199,17 +1337,38 @@ tions.
  has inverse powers of 2 along the diagonal, except for the last row, and
  the reflection matrix is lower-triangular, with binomial coefficients making
  up the triangle (exculding the last row).
+ If one attempts different constructions by replacing the monomial 
+\begin_inset Formula $2^{n}x^{n}$
+\end_inset 
+
+ with a polynomial, one finds that these representations are all conjugate
+ to each other.
 \layout Standard
 
-...
- 
-\layout Description
+The above 
+\begin_inset Formula $\alpha_{n}(x)$
+\end_inset 
 
-Homework: Develop the case for functions that are odd about 
+ is explicitly even-parity, but its first derivative is discontinuous at
+ 
 \begin_inset Formula $x=1/2$
 \end_inset 
 
 .
+ One can then try to build even and odd-parity functions of a given degree,
+ with continuous 
+\begin_inset Formula $(n-1)$
+\end_inset 
+
+'th derivatives.
+ The corresponding representations then suceed or founder as in the 3D/4D
+ cases above, with even and odd order functions alternately causing the
+ piecewise-trouble for even and odd representations.
+ 
+\layout Standard
+
+...
+ 
 \layout Description
 
 Homework: Curiously, the representations of 
@@ -1218,7 +1377,49 @@ Homework: Curiously, the representations of
 
  resemble the form that a translation would take in a linear projective
  space.
- Can something be made out of this? 
+ That is, one has non-zero elements only along the diagonal, with the exception
+ of the last row, whose non-zero elements can be interpreted as a translation
+ in the given direction by a given amount.
+ In other words, the matrices 
+\begin_inset Formula $g$
+\end_inset 
+
+ look like affine transformations.
+ The group elements generated by 
+\begin_inset Formula $g$
+\end_inset 
+
+ then look like an iterated affine transformation, reminiscent of the Barnsely
+ IFS constructions.
+ One can then take a set of arbitrary (contractive) group elements 
+\begin_inset Formula $\gamma_{1},\gamma_{2},...\gamma_{k}\in SL(2,\mathbb{Z})$
+\end_inset 
+
+ and iterate on these, noting that they generate a subset of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ that consists of contractive affine transformations.
+ The homework problem is then to repeat the Barnsely analysis on affine
+ transformations, and to restate his 
+\begin_inset Quotes eld
+\end_inset 
+
+Collage Theorm
+\begin_inset Quotes erd
+\end_inset 
+
+ for these affine maps.
+ It would also be interesting to describe the measure of the generated fractal
+ sets, as a function of the generators 
+\begin_inset Formula $\gamma_{1},\gamma_{2},...\gamma_{k}$
+\end_inset 
+
+.
+\layout Description
+
+Homework: Affine transformations imply a projective space.
+ Can something be made out of this projective nature? 
 \layout Subsection
 
 Bernoulli Map Symmetry
