@@ -29,7 +29,7 @@ void mandelbrot_out (
    double	height,
    int		itermax)
 {
-   unsigned int	i,j, k, globlen, itermax_orig;
+   unsigned int	i,j, globlen, itermax_orig;
    double		re_start, im_start, deltax, deltay;
    double		re_position, im_position;
    double		re_c, im_c;
@@ -167,17 +167,6 @@ void mandelbrot_out (
             glob [i*sizex +j] = 0.0;
          }
 
-         phi = atan2 (im, re);
-         phi += M_PI;
-         // phi *= exp (frac);
-         phi /= 2.0*M_PI;
-         k = phi;
-         phi -= (double)k;
-         
-
-
-         glob [i*sizex +j] = phi;
-  
 /*
          glob [i*sizex +j] = ((float) (loop%10)) / 10.0; 
 if (loop == itermax) {
@@ -193,6 +182,103 @@ if (0.25*width*width > ((re_position-re_center)* (re_position-re_center) +
 } 
 */
 
+         re_position += deltax;
+      }
+      im_position -= deltay;  /*top to bottom, not bottom to top */
+   }
+}
+
+/*-------------------------------------------------------------------*/
+/* this routine fills in the exterior of the mandelbrot set using 
+ * the classic algorithm. used for exploring winding number and
+ * angle-things 
+ */
+
+void mandelbrot_wind (
+   float  	*glob,
+   unsigned int sizex,
+   unsigned int sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   double	height,
+   int		itermax)
+{
+   unsigned int	i,j, k, globlen, itermax_orig;
+   double		re_start, im_start, deltax, deltay;
+   double		re_position, im_position;
+   double		re_c, im_c;
+   double		re, im, tmp;
+   int		loop;
+   double modulus=0.0, frac, mu;
+   double escape_radius = 3.1;
+   double ren, tl;
+   double phi, phi_last, phi_c;
+   int wind =0;
+
+   ren = log( log (escape_radius)) / log(2.0);
+   tl = 1.0/ log(2.0);
+   itermax_orig = itermax;
+   
+
+   deltax = width / (double) sizex;
+   deltay = height / (double) sizey;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + height / 2.0;
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   
+   im_position = im_start;
+   for (i=0; i<sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) {
+         re_c = re_position;
+         im_c = im_position;
+
+         phi_c = atan2 (im_c, re_c);
+         if (0.0 > phi_c) phi_c += 2.0*M_PI;
+
+         re = 0.0;
+         im = 0.0;
+         phi_last = -0.01;
+         wind = 0;
+         for (loop=1; loop <itermax; loop++) {
+            tmp = re*re - im*im + re_c;
+            im = 2.0*re*im + im_c;
+            re = tmp;
+
+            phi = atan2 (im, re);
+            if (0.0>phi) phi += 2.0*M_PI;
+
+// printf ("its %d %g %g      %g %g \n", loop, phi, phi_last, re_c, im_c);
+
+            // if (phi < 2.0*phi_last) wind ++;
+            // if (phi < phi_last) wind ++;
+            if (phi < phi_last) wind += (loop-1);
+            phi_last = phi;
+
+            modulus = (re*re + im*im);
+            if (modulus > escape_radius*escape_radius) break;
+         }    
+
+         modulus = sqrt (modulus);
+         frac = log (log (modulus)) *tl;
+         mu = ((double) (loop+1)) - frac;
+
+         phi /= 2.0*M_PI;
+         phi += (double) wind;
+
+         // the phase winds around 2pi *2^(loop-1) times
+         phi /= pow (2.0, (double) (loop-1));
+
+         // k = phi;
+         // phi -= (double)k;
+
+
+         glob [i*sizex +j] = phi;
+  
          re_position += deltax;
       }
       im_position -= deltay;  /*top to bottom, not bottom to top */
@@ -2527,6 +2613,10 @@ main (int argc, char *argv[])
 
    if (!strcmp(argv[0], "brat"))
    mandelbrot_out (data, data_width, data_height,
+                  re_center, im_center, width, height, itermax); 
+   
+   if (!strcmp(argv[0], "wind"))
+   mandelbrot_wind (data, data_width, data_height,
                   re_center, im_center, width, height, itermax); 
    
    if (!strcmp(argv[0], "cutoff"))
