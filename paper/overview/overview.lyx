@@ -35,9 +35,8 @@ Linas Vepstas <linas@linas.org>
 \layout Abstract
 
 Fractals and Continued Fractions seem to be deeply related in many ways.
- Farey numbers appear naturally in both; the distribution of the zero's
- of the Riemann Zeta seem random, reminscent of the spectra of chaotic systems.
- The shape of the Devil's Staircase is reminiscent of the Minkowski Qustion
+ Farey numbers appear naturally in both.
+ The shape of the Devil's Staircase is reminiscent of the Minkowski Question
  Mark Function.
  This paper attempts to illustrate some these relationships and possibly
  advance some tools that may make the study and classification of fractals
@@ -85,9 +84,7 @@ We should mention Sinai's toungue's here, which are the mode-locking regions,
 
 It is the resemblance of these pictures that leads one naturally to the
  study of continued fractions.
- Thier connection to the Riemann Hypothesis through the Gauss-Kuzmin-Wirsing
- operator is also interesting.
- See my other paper on this.
+ 
 \layout Section
 
 Continued Fractions and Gaps
@@ -812,10 +809,6 @@ This picture tells us something that is very surprising: this function is
  Of course, a computer generated picture is not a proof, but the statement
  seems true.
  I am not aware of any other map that has this property.
- This observation is reminiscent of the discovery that the critical strip
- of the Riemann Zeta contains disks that approximate any analytic function
- arbitrarily well (need citation for this).
- I suspect these are related.
  
 \layout Standard
 
@@ -1229,19 +1222,75 @@ ors less than 16000.
 The Minkowski Question Mark Function
 \layout Standard
 
-This section is a review of the Minkowski Question Mark Function 
+This section explores a peculiar mapping involving Farey Numbers.
+ Refered to as the Minkowski Question Mark, it is well-defined for all real
+ numbers and maps the unit interval into, and onto, the unit interval.
+ It is continuous and monotonic.
+ The map, pictured below, is highly self-similar.
+ It is also highly singular: all of its derivatives vanish on the rationals.
+ Its self-similarity group can be clearly defined, and essentially that
+ of period-doubling iterated maps, such as the Mandelbrot Set.
+ The fact that it involves the Farey numbers is essentially the 
+\begin_inset Quotes eld
+\end_inset 
+
+explanation
+\begin_inset Quotes erd
+\end_inset 
+
+ for why Farey Numbers occur in period-doubling maps.
+ 
+\layout Subsection
+
+Definition of the Question Mark Function
+\layout Standard
+
+The Minkowski Question Mark map can be constructed in several ways.
+ In all of these constructions, it can be understood to be the mapping between
+ the Stern-Brocot Tree (sometimes called the Farey Tree) and the tree of
+ real numbers expressed as binary, base-2 fractions.
+ The Stern-Brocot Tree is the tree on which the Farey mediants are naturally
+ organized, and is most easily explained with a picture:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename fareytr.jpg
+
+\end_inset 
+
+
+\layout Standard
+
+(See also the presenatation on 
+\begin_inset LatexCommand \url[Stern Brocot Trees]{http://www.cut-the-knot.org/blue/Stern.shtml}
+
+\end_inset 
+
+ at Cut-the-Knot.) The binary tree has the same shape, except that the second
+ row holds the values 1/4 and 3/4, and the next row the values 1/8, 3/8,
+ 5/8 and 7/8, and so on.
+ The binary tree holds values that are the arithmetic average, rather than
+ the mediant, of the parent values.
+\layout Standard
+
+We denote the values of the Minkowski Question Mark function as as 
 \begin_inset Formula $?(x)$
 \end_inset 
 
 .
- To Do: Write Me.
-\layout Standard
+ Equating the Stern-Brocot Tree and the Binary Tree literally, one gets
+ a recursive definition.
+ Start by defining 
+\begin_inset Formula $?(0)=0$
+\end_inset 
 
-The Minkowski Question Mark, pictured below, can be constructed in several
- ways.
- It maps the Farey Tree to the tree of binary numbers: 0 is mapped to 0,
- 1 is mapped to 1, and 1/2 is mapped to 1/2.
- Then, for a pair of Farey fractions 
+ and 
+\begin_inset Formula $?(1)=1$
+\end_inset 
+
+.
+ Then, for a pair of Farey fraction parents 
 \begin_inset Formula $p/q$
 \end_inset 
 
@@ -1249,14 +1298,27 @@ The Minkowski Question Mark, pictured below, can be constructed in several
 \begin_inset Formula $p'/q'$
 \end_inset 
 
- on the tree, it replaces the 'Farey Addition' with an average:
+, it equates the Farey mediant to the arithmetic average:
 \begin_inset Formula \[
 ?\left(\frac{p+p'}{q+q'}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{p'}{q'}\right)\right]\]
 
 \end_inset 
 
-Thus, the Farey number 1/3 is mapped to the binary 1/4, and so on: one quickly
- sees 
+Thus, starting with 
+\begin_inset Formula $\frac{0}{1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\frac{1}{1}$
+\end_inset 
+
+ at the root of the Farey Tree, we have 
+\begin_inset Formula $?\left(\frac{0+1}{1+1}\right)=?\left(\frac{1}{2}\right)=\frac{1}{2}\left[?\left(\frac{0}{1}\right)+?\left(\frac{1}{1}\right)\right]=\frac{1}{2}$
+\end_inset 
+
+.
+ Next, we see the Farey number 1/3 is mapped to the binary 1/4, and so on:
+ one quickly sees 
 \begin_inset Formula $?\left(1/n\right)=2^{-n+1}$
 \end_inset 
 
@@ -1278,20 +1340,28 @@ Thus, the Farey number 1/3 is mapped to the binary 1/4, and so on: one quickly
 \begin_inset Formula $m,n$
 \end_inset 
 
-.
- One can write a non-recursive definition by expanding a number as a continued
- fraction, and then using each of the elements in the continued fraction
- to count the number of binary 1's and 0's: that is, for 
+ (every rational occurs exactly once on the Stern-Brocot Tree).
+ 
+\layout Standard
+
+An alternate, non-recursive definition for the Question Mark is based on
+ continued fractions.
+ Starting with the expansion 
 \begin_inset Formula $x=[a_{1},a_{2},...]$
 \end_inset 
 
-, we have 
+, one writes 
 \begin_inset Formula \[
 ?(x)=2\sum_{k=1}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\]
 
 \end_inset 
 
- which can be visualized as 
+ This sum can be visualized as a count of an alternating sequence of 0's
+ and 1's in the binary expansion of 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+: 
 \begin_inset Formula \[
 ?(x)=\begin{array}{ccccc}
 0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
@@ -1299,24 +1369,88 @@ a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\]
 
 \end_inset 
 
- It is this expansion in binary digits that provides the underlying connection
- between period-doubling maps, such as the Mandelbrot Set, and Farey Numbers.
- 
-\layout Standard
-
-Note that continued fractions with a finite number of terms are rationals,
- and thus map to a binary number with a finite number of digits.
- We use the nifty identity 
+In this expnasion, it is useful to remember that 
 \begin_inset Formula $0.111111...=1.0000...$
 \end_inset 
 
-, if needed, to terminate the sequence.
- Note that continued fractions whose expansions become eventually periodic
- are mapped to binary strings that become eventualy periodic.
- The later are rationals whose denominator is not a power of 2, whereas
- the former are quadratic irrationals, which is known from the theory of
- Pellian equations.
- A quadratic irrational is a number of the form 
+, in case one has an odd number of terms in the continued fraction expansion.
+\layout Standard
+
+This sequence of 1's and 0's can be understood to be the set of directions
+ for navigating a tree: on encountering a 0, take the left branch, else
+ take the right branch.
+ Thus, we can write 
+\begin_inset Formula $0.011=LRR$
+\end_inset 
+
+.
+ Navigating to this spot on the Stern-Brocot Tree, we find 2/5'ths.
+ Navigating to this same position on the Binary Tree wee get 3/8'ths.
+ Thus, 
+\begin_inset Formula $?(2/5)=3/8$
+\end_inset 
+
+.
+\layout Standard
+
+There is also a well-known representation of the Stern-Brocot Tree on the
+ lattice 
+\begin_inset Formula $\mathbb{Z\mathbb{\times Z}}$
+\end_inset 
+
+, where a fraction 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ is denoted as the ordered pair 
+\begin_inset Formula $(p,q)$
+\end_inset 
+
+.
+ In this representation, the left-right navigation operators 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ have the values 
+\begin_inset Formula $L=\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)$
+\end_inset 
+
+ and 
+\begin_inset Formula $R=\left(\begin{array}{cc}
+1 & 1\\
+0 & 1\end{array}\right)$
+\end_inset 
+
+ and thus positions are given as elements of 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+.
+ Maybe we'll elaborate on this later xxxx.
+ To do...
+ elaborate.
+\layout Standard
+
+To summarize, it is this expansion in binary digits that provides the underlying
+ connection between period-doubling maps, such as the Mandelbrot Set, and
+ Farey Numbers.
+ Binary expansions, or code-words, occur naturally in the analysis of Duoady-Hub
+bard landing rays.
+ We'll demonstrate an explicit mapping in a later section.
+\layout Subsection
+
+Some Curious Properties of the Question Mark 
+\layout Standard
+
+The Question Mark has the curious property that it maps quadratic irrationals
+ to rational numbers.
+ A quadratic irrational is a number of the form m 
 \begin_inset Formula $p/q+m\sqrt{D}/n$
 \end_inset 
 
@@ -1324,47 +1458,51 @@ Note that continued fractions with a finite number of terms are rationals,
 \begin_inset Formula $p,q,m,D,n$
 \end_inset 
 
-; every quadratic irrational has a continued fraction expansion that becomes
- eventually periodic.
+.
+ Continued fractions whose expansions become eventually periodic are mapped
+ to binary strings that become eventualy periodic.
+ The later are clearly just the binary expansions of rationals whose denominator
+ is not a power of 2.
+ The former are quadratic irrationals, which is known from the theory of
+ Pellian equations: It turns out that every quadratic irrational has a continued
+ fraction expansion that becomes eventually periodic.
  Note that, as a side effect, this proves that quadratic irrationals are
  countable in the same way that rationals are.
 \layout Standard
 
-The Minkowski Question Mark has some very curious analytic properties: mapping
- is continuous everywhere.
+The Minkowski Question Mark has some very curious analytic properties: the
+ mapping is continuous everywhere.
  It is also infinitely differentiable on every rational, and all derivatives
  vanish at every rational; yet the mapping is strictly montonically increasing.
  Clearly, the function is singular on irrationals.
- Its hard to define how.
- 
+ Its hard to define just how.
+ (xxxx Blah blah need to define how).
 \layout Standard
 
-Blah Blah.
-\layout Standard
-
-Note that the games played with code-words during the analysis of Duady-Hubbard
- Rays in the Mandelbrot set translate naturally to a game of codewords on
- continued fractions.
- In particular, the mapping of landing rays to the farey fractions that
- count the buds on the Mandelbrot set is a highly discontinuous mapping,
- but hah hah look at what we've got here ...
- 
-\layout Standard
-
-If there is a 3-adic or p-adic generalization of the Minkowski question
- mark, it is not obvious; one 'obvious' generalization is 
+If there is a 3-adic or p-adic generalization of the Minkowski Question
+ Mark, it is not obvious; one 'obvious' generalization is 
 \layout Standard
 
 
 \begin_inset Formula \[
-\sum_{k}\;\frac{(-1)^{k}}{3^{(a_{1}+a_{2}+...a_{N}-1)}}\]
+\sum_{k=1}\left(-1\right)^{k}\;3^{-(a_{1}+a_{2}+...+a_{k})}\]
 
 \end_inset 
 
 but its highly discontinuous.
  Other generalizations based on roots of unity in the complex plane also
- don't work.
- 
+ don't seem to work.
+ One might be able to get traction by looking at groups that have 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ as a subroup but also have some 
+\begin_inset Formula $p$
+\end_inset 
+
+-fold symmetry.
+\layout Standard
+
 \layout Standard
 
 The symmetries of the thing are blah blah, which hold for blah blah.
