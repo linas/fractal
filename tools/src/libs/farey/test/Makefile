@@ -9,7 +9,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) -DANSI_C
 
-EXES= xlist elist fairy flist gap ginv glist sym imap \
+EXES= zgap xlist elist fairy flist gap ginv glist sym imap \
 	terms x zscale zinv zlist zmap
 
 LISTS= fnums enums
@@ -21,6 +21,12 @@ clean:
 
 realclean:	clean
 	rm -f $(EXES) $(ENUMS)
+
+.C.o:
+	$(CC) -c $<
+
+.o:
+	$(CC) -o $* $< $(LIB)/Farey.o -lm
 
 ################## Dependencies and compile/link #########
 # fairy
