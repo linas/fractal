@@ -1,5 +1,5 @@
 /*
- * radius.c
+ * radius.C
  *
  * FUNCTION:
  * Find bud radius.  Itdoes this by doing iterations along a set of radial
@@ -26,17 +26,21 @@ void measure_radius (
    double  	*glob,
    unsigned int sizea,
    unsigned int sizer,
-   double	re_center,
-   double	im_center,
-   double	rmin,
-   double	rmax,
+   double	&re_center,
+   double	&im_center,
+   double	&rmin,
+   double	&rmax,
    double	epsilon,
    unsigned int	itermax,
    unsigned int nrecur,
-   int		do_report)
+   int		do_report,
+   double	&ravg,
+   double	&err,
+   int 		&maxpeg
+   )
 {
    unsigned int	i,j;
-   int		n;
+   unsigned int	n;
    double	deltar, rad, theta=0.0;
    double	radius_cand;   /* minimum possible radius */
    double	radius_outer;  /* escape at this radius */
@@ -50,12 +54,13 @@ void measure_radius (
    double	re_last, im_last;
    double	re_c, im_c;
    double	re, im, tmp;
-   int		loop=0, loop_cand=0;
+   unsigned int	loop=0, loop_cand=0;
    double 	modulus=0.0;
    double	escape_radius = 3.1;
    double	esq, esqon;
    double	dist=0.0, diston=0.0;
    double	closest=0.0;
+   int          peg;
 
    esq = epsilon*epsilon;
 
@@ -76,6 +81,7 @@ void measure_radius (
    radius_outer_avg = 0.0;
    radius_outer_min = 1e30;
    radius_outer_max = -1e30;
+   maxpeg = -1;
 
    for (i=0; i<sizea; i++) {
       theta = ((double) i) / ((double) sizea);
@@ -86,6 +92,7 @@ void measure_radius (
       rad = rmin;
       radius_cand = rad;
       radius_outer = 10.0;
+      peg = -1;
       for (j=0; j<sizer; j++) {
          re_c = re_center + rad * co;
          im_c = im_center + rad * si;
@@ -131,10 +138,16 @@ void measure_radius (
             if (dist < esq) {
                radius_cand = rad;
                loop_cand = loop;
+               peg = -1;
                break;
             }
          }    
+         peg ++;
+         if (peg > maxpeg) maxpeg = peg;
+
          // printf ("%14.10g	%14.10g	%d\n", rad, closest, loop);
+         // printf ("%d	%14.10f	%14.10f	%14.10f %d	%d\n", 
+         //    i, theta, radius_cand, radius_outer, peg, loop_cand); 
    
          rad += deltar;
       }
@@ -178,6 +191,15 @@ void measure_radius (
       printf ("# outer  min, max= %14.10f %14.10f outer-half=%14.10f \n", 
            radius_outer_min, radius_outer_max, 0.5*(radius_outer_max-radius_outer_min));
    }
+
+   rmin = radius_min;
+   rmax = radius_max;
+
+   re_center += re_cg;
+   im_center += im_cg;
+
+   ravg = radius_avg;
+   err = sqrt (re_cg*re_cg + im_cg*im_cg);
 }
 
 /*-------------------------------------------------------------------*/
@@ -190,10 +212,10 @@ void flow_radius (
    unsigned int sizer,
    double	re_center,
    double	im_center,
-   double	&rmin,
-   double	&rmax,
+   double	rmin,
+   double	rmax,
    double	epsilon,
-   int		itermax)
+   unsigned int	itermax)
 {
    unsigned int	i,j;
    double	deltar, rad, theta=0.0;
@@ -211,7 +233,7 @@ void flow_radius (
    double	re, im, tmp;
    double	dre, dim, ddre, ddim;
    double	zppre, zppim;
-   int		loop=0, loop_cand=0;
+   unsigned int	loop=0, loop_cand=0;
    double 	modulus=0.0;
    double	escape_radius = 3.1;
    double      *limits, limit=0.0;
@@ -356,7 +378,9 @@ automatic (int p, int q)
    unsigned int nrecur;
    unsigned int ang_steps, r_steps;
    double *data = 0x0;
-   int i;
+   int i, peg;
+   double ecc;
+   double ravg, err;
 
    /* angular location of the bud */
    theta = 2.0 *M_PI * ((double) p / (double) q);
@@ -393,11 +417,24 @@ automatic (int p, int q)
    ang_steps = 10;
    r_steps = 100;
 
-   data = realloc (data, (ang_steps+1)*sizeof(double));
+   printf ("# centerx	centery		ravgi		ecc		err		peg	itermax\n");
+   for (i=0; i<30; i++) {
+      data = (double *) realloc (data, (ang_steps+1)*sizeof(double));
 
-   for (i=0; i<10; i++) {
       measure_radius (data, ang_steps, r_steps, cx, cy, 
-         rmin, rmax, epsilon, itermax, nrecur, 1);
+         rmin, rmax, epsilon, itermax, nrecur, 0, ravg, err, peg);
+
+      /* resize rmin, rmax so that we don't miss out */
+      ecc = 0.5*(rmax - rmin);
+      rmin -= 0.6*ecc;
+      rmax += 0.6*ecc;
+
+      ang_steps = (unsigned int) (1.2 * ang_steps);
+      r_steps = (unsigned int) (1.2 * r_steps);
+      if (6 < peg) itermax = (unsigned int) (1.5 * itermax);
+
+      printf ("%14.10f	%14.10f	%8.6g	%8.6g	%6.4g	%d	%d\n", 
+          cx, cy, ravg, ecc, err, peg, itermax);
    }
 }
 
@@ -408,9 +445,10 @@ do_radius (int argc, char *argv[])
 {
    double	*data;		/* my data array */
    unsigned int	nrecur, nphi, nr;
-   double	re_center, im_center, rmin, rmax;
+   double	re_center, im_center, rmin, rmax, ravg;
    int		itermax;
-   double	epsilon;
+   double	epsilon, err;
+   int 		peg;
    
 
    if (6 > argc) {
@@ -457,7 +495,7 @@ do_radius (int argc, char *argv[])
    printf ("# \n");
 
    measure_radius (data, nphi, nr, re_center, im_center,
-           rmin, rmax, epsilon, itermax, nrecur, 1);
+           rmin, rmax, epsilon, itermax, nrecur, 1, ravg, err, peg);
    // flow_radius (data, nphi, nr, re_center, im_center,
    //          rmin, rmax, epsilon, itermax);
    
