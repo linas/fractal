@@ -36,8 +36,9 @@ void mandelbrot_cutoff (
    double	ddre, ddim, ddmod;
    double	zpre, zpim, zppre, zppim;
    double	mp, mpp;
+   double	phi, phip, phipp;
    int		loop;
-   double 	omod=0.0, frac;
+   double 	omod=0.0, frac, theta;
    double 	escape_radius = 1.0e30;
    double 	ren, tl;
    double	tau;
@@ -93,6 +94,8 @@ void mandelbrot_cutoff (
    for (i=0; i<globlen; i++) glob [i] = 0.0;
    
 
+// sizey=1;
+// im_start=0.0;
    im_position = im_start;
    for (i=0; i<sizey; i++) {
       if (i%10==0) printf(" start row %d\n", i);
@@ -180,6 +183,7 @@ void mandelbrot_cutoff (
             if (modulus > escape_radius*escape_radius) break;
          }    
 
+#if 0
          modulus = sqrt (modulus);
          modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
          frac = log (log (modulus)) * tl;
@@ -200,7 +204,7 @@ void mandelbrot_cutoff (
          /* --------------------------------------------------------- */
          /* the interesting one is the z-prime-prime */
          /* here we use a taylor expansion to extrapolate to tau=0 */
-         /* first, we need the drerivatives of modulus w.r.t tau */
+         /* first, we need the derivatives of modulus w.r.t tau */
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
          mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
@@ -232,8 +236,102 @@ void mandelbrot_cutoff (
 
          /* finally the taylor expansion */
          glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
+// printf ("%9.6g	%9.6g	%9.6g\n", re_position, glob[i*sizex+j], mod);
 
+         /* ok, this part should be the divergent part ... */
+         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
+         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         mod = pow (mod, 0.25);
+         re = - mod * cos(theta);
+         im = - mod * sin(theta);
 
+         re += 0.5;
+         tmp = sqrt(re*re+im*im);
+         if (0.5 < tmp) tmp = 0.5;
+
+         glob [i*sizex +j] -= tmp;
+
+         /* --------------------------------------------------------- */
+         /* the interesting one is the z-prime-prime */
+         /* here we use a taylor expansion to extrapolate to tau=0 */
+         /* first, we need the drerivatives of modulus w.r.t tau */
+         modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
+         mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
+         mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
+         mpp += sum_ddimp * sum_ddimp + sum_ddim * sum_ddimpp - mp*mp;
+         mpp /= modulus;
+         
+         /* finally the taylor expansion */
+         /* subtract the main-body divergence */
+         tmp = 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
+         
+         glob [i*sizex +j] = (modulus-tmp*sum_n);
+         glob [i*sizex +j] -= tau* ((mp-tmp*sum_np) - 0.5 * tau * (mpp-tmp*sum_npp));
+#endif
+
+         /* --------------------------------------------------------- */
+         /* OK, lets do the taylor expansion for just-plain Z */
+         /* here, we subtract the leading divergence 
+          */
+         modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
+         mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
+         mpp  = sum_rep * sum_rep + sum_re * sum_repp;
+         mpp += sum_imp * sum_imp + sum_im * sum_impp - mp*mp;
+         mpp /= modulus;
+         
+         /* finally the taylor expansion */
+         glob [i*sizex +j] = modulus - tau* (mp - 0.5 * tau * mpp);
+
+         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
+         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         mod = pow (mod, 0.25);
+         re = - mod * cos(theta);
+         im = - mod * sin(theta);
+
+         re += 0.5;
+         tmp = sqrt(re*re+im*im);
+         if (0.5 < tmp) tmp = 0.5;
+
+         glob [i*sizex +j] -= tmp * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+
+#if 0
+         /* --------------------------------------------------------- */
+         /* the interesting one is the z-prime-prime */
+         /* here we use a taylor expansion to extrapolate to tau=0 */
+         /* first, we need the derivatives of modulus w.r.t tau */
+         /* we compute the phase */
+         phi = atan2 (sum_ddim, sum_ddre);
+         modulus = 1.0 / sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
+         phip = (sum_ddre * sum_ddimp - sum_ddrep * sum_ddim) * modulus;
+         phipp = (sum_ddre * sum_ddimp - sum_ddrep * sum_ddim) * modulus;
+         phipp *=  -2.0* (sum_ddre * sum_ddrep + sum_ddim * sum_ddimp) * modulus;
+         phipp += (sum_ddre * sum_ddimpp - sum_ddrepp * sum_ddim) * modulus;
+
+         glob [i*sizex +j] = (phi + M_PI)/(2.0*M_PI);
+         // glob [i*sizex +j] = (phi - tau* (phip - 0.5 * tau * phipp) +M_PI)/(2.0*M_PI);
+
+         theta = -1.5 * atan2 (-im_position, 0.25-re_position);
+         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         mod = pow (mod, -0.75);
+         re = 0.25 * mod * cos(theta);
+         im = 0.25 * mod * sin(theta);
+
+         glob [i*sizex +j] =  (sum_ddre/sum_n-re)*(sum_ddre/sum_n-re);
+         glob [i*sizex +j] += (sum_ddim/sum_n-im)*(sum_ddim/sum_n-im);
+         glob [i*sizex +j] = sqrt (glob[i*sizex+j]);
+
+         /* --------------------------------------------------------- */
+         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
+         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         mod = pow (mod, 0.25);
+         re = - mod * cos(theta);
+         im = - mod * sin(theta);
+
+         re += re_position;
+         im += im_position;
+
+         glob [i*sizex +j] =  sqrt (re*re +im*im);
+#endif
          /* --------------------------------------------------------- */
          re_position += delta;
       }
