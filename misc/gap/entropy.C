@@ -9,6 +9,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "Farey.h"
 
@@ -19,18 +20,31 @@ main (int argc, char *argv[])
 	ContinuedFraction f;
 	// f.SetEvenize();
 
-	int qmax = 531;
-	for (i=0; i<qmax; i++)
+	int qmax = 3531;
+
+	qmax = atoi (argv[1]);
+
+	for (i=1; i<qmax; i++)
 	{
 
 		int p = i;
 		int q = qmax;
+
+#if 0
+		p = rand();
+		q = rand();
+		p %= q;
+#endif
+
+		int gcf = gcf32 (p,q);
+		p /= gcf;
+		q /= gcf;
+
 		double x = ((double) p)/ ((double) q);
 		f.SetRatio (p,q);
 		int n = f.GetNumTerms();
 		
-		// double y= log (q) / ((double) n);;
-		double y= 1.0 / ((double) n);;
+		double y= log (q) / ((double) n);;
 		
 		printf("%5d	%8.6g	%8.6g\n", i,x,y);
 	}
