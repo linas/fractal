@@ -33,7 +33,7 @@ The Bernoulli Operator, the Gauss-Kuzmin-Wirsing Operator, and the Riemann
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 12 October 2004)
+2 January 2004 (revised 7 December 2004)
 \layout Abstract
 
 The study of the Gauss-Kuzmin-Wirsing (GKW) operator can provide insight
@@ -126,7 +126,10 @@ The general layout is:
 -- review its connection to the Riemann Zeta
 \layout Standard
 
--- Solve the two sawtooh functions
+-- Solve the two sawtooh function
+\layout Standard
+
+-- Review Farey/Isola Map
 \layout Section
 
 Introduction: The Frobenius-Perron Operator for Iterated Maps
@@ -2341,8 +2344,24 @@ This figure illustrates a family of eigenvectors
 \begin_inset Formula $nx$
 \end_inset 
 
-, which can best be seen in the n=1 curve, which seems to hold a complete
- cycle between 1, 1/2, 1/4, 1/8, ...
+ in the interval 
+\begin_inset Formula $x\in\left[1/2,1\right]$
+\end_inset 
+
+, and then repeating again between 1, 1/2, 1/4, 1/8, ...
+ We'll gain some insight into these ripples in a later section, where we
+ will analyze a sawtooth map having the same oscillatory behaviour, for
+ which the Hurwitz Zeta also plays a role as an eigenvector.
+ That is, there is a certain sense in which the above curves are self-similar,
+ with the curve in the interval 
+\begin_inset Formula $x\in\left[2^{-k-1},2^{-k}\right]$
+\end_inset 
+
+ reprises the curve in the interval 
+\begin_inset Formula $x\in\left[1/2,1\right]$
+\end_inset 
+
+
 \end_inset 
 
 
@@ -2685,18 +2704,6 @@ s as the representative elements.
  
 \layout Subsection
 
-The Symmetry Group
-\layout Standard
-
-Note that 
-\begin_inset Formula $\left[U_{B}f\right](x)=\frac{1}{2}\left(f(g_{D}(x))+f(r_{D}g_{D}r_{D}(x)\right)$
-\end_inset 
-
- and so on.
- Thus, we expect the Modular Group to play a role in the description of
- the symmetries.
-\layout Subsection
-
 The Continuous Fractal Spectrum
 \layout Standard
 
@@ -2923,10 +2930,38 @@ g\beta(x;s)=\beta(\frac{x}{2};s)=\frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\inf
  and so one gets a trivial relationship and no insight in particular.
 \layout Subsection
 
-The Takagi Representation 
+Modular Group Symmetry and the Takagi Representation 
 \layout Standard
 
-One can also construct eigenstates out of the Takagi Curve.
+Yet another way to understand the solution of the Bernoulli Map is to note
+ that it can be written as 
+\begin_inset Formula \begin{equation}
+\left[U_{B}f\right](x)=\frac{1}{2}\left(f(g_{D}(x))+f(r_{D}g_{D}r_{D}(x)\right)\label{eq: bern modular}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $g_{D}(x)=x/2$
+\end_inset 
+
+ and 
+\begin_inset Formula $r_{D}(x)=1-x$
+\end_inset 
+
+ are the generators of the dyadic representation of the Modular Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ Thus, we expect that we should be able to build eigenfunctions out of any
+ functions 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ that posses a Modular Group symmetry.
+\layout Standard
+
+As we saw in a previous chapter, the Takagi Curve fits this bill.
  Start with the triangle wave/tent map: 
 \begin_inset Formula \begin{equation}
 \tau(x)=\left\{ \begin{array}{ccc}
@@ -3028,7 +3063,15 @@ b_{w,j}(x)=\frac{-1}{2(1-w)}+t_{w}((2j+1)x)\label{eq:}\end{equation}
 .
 \layout Standard
 
-XXX finish me; give the explicit expressions.
+XXX finish me; give the explicit expressions between 
+\begin_inset Formula $b_{w,j}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\beta_{n}$
+\end_inset 
+
+.
 \layout Standard
 
 We can also obtain other eigenvectors by starting with the Takagi curves
@@ -3037,18 +3080,21 @@ We can also obtain other eigenvectors by starting with the Takagi curves
 \end_inset 
 
 .
- We do this by noting that we can write the Bernoulli transfer operator
- as 
-\begin_inset Formula \begin{equation}
-\left[U_{B}f\right](x)=\frac{1}{2}\left(f(g_{D}(x))+f(r_{D}g_{D}r_{D}(x)\right)\label{eq:}\end{equation}
+ The equation 
+\begin_inset LatexCommand \ref{eq: bern modular}
 
 \end_inset 
 
- so that if 
+ implies that any curve that transforms under a linear representation of
+ the Modular Group can be used to build an eigenfunction of the Bernoulli
+ Map.
+ We exclude the non-linear representations, since we don't know how to build
+ a vector space out of a non-linear operator.
+ Thus, if 
 \begin_inset Formula $t_{w}^{(n)}((2j+1)x)$
 \end_inset 
 
- is a Takagi curve that transforms under the 
+ is a Takagi curve that transforms under an 
 \begin_inset Formula $n$
 \end_inset 
 
@@ -3064,7 +3110,7 @@ We can also obtain other eigenvectors by starting with the Takagi curves
 \begin_inset Formula $r_{n},g_{n}\in GL(n,\mathbb{R})$
 \end_inset 
 
- are the generators of the 
+ are the generators of that 
 \begin_inset Formula $n$
 \end_inset 
 
@@ -3073,16 +3119,19 @@ We can also obtain other eigenvectors by starting with the Takagi curves
 \end_inset 
 
 .
- As developed in earlier chapters, we have, up to conjugacy, only two representa
-tions, the even and odd-parity representations.
- 
+ Solving the eigenvalue equation then amounts to diagonalizing the (finite-dimen
+sional) matrix 
+\begin_inset Formula $(g_{n}+r_{n}g_{n}r_{n})/2$
+\end_inset 
+
+.
 \layout Standard
 
 For a fixed eigenvalue 
 \begin_inset Formula $w$
 \end_inset 
 
-, we expect a countably infinite degeneracy built out of the 
+, we expect a countably infinite degeneracy built out of the curves 
 \begin_inset Formula $t_{w}^{(n)}((2j+1)x)$
 \end_inset 
 
@@ -3096,16 +3145,26 @@ For a fixed eigenvalue
 \layout Standard
 
 XXX finish me ..
- Give explicit expression for the alternate basis states, and develop the
- higher-dim reps in explicit detail.
+ Give explicit expression for the higher-dim reps and in particular,the
+ matrix from 
+\begin_inset Formula $b_{w,j}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\beta_{n}$
+\end_inset 
+
+ in explicit detail.
  Also develop the lower-dim reps (move in opposite direction).
  This material should probably go into the chapter on the Takagi Curves,
- instead of here ???
+ instead of here,right ...
+ ???
 \layout Standard
 
-Note this is a ladder of isomorphisms.
+Note this is a ladder of isomorphisms between the different dimensional
+ reps.
  Note also the ability to choose different set of basis funcs for the higher-dim
- Takagi Curves, viz, and polynomial of degree 
+ Takagi Curves, viz, any polynomial of degree 
 \begin_inset Formula $n-2$
 \end_inset 
 
@@ -4827,15 +4886,24 @@ We recognize from the studying of the dyadic representation of the Modular
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
- that the second sawtooth is expressed in terms of the the group element
- 
+ that the second sawtooth is expressed in terms of the group element 
 \begin_inset Formula \begin{equation}
 \left[g_{D}^{k-1}r_{D}g_{D}\right](x)=\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\label{eq:}\end{equation}
 
 \end_inset 
 
- and thus functions possessing the modular group symmetry are candidates
- for solving the operator 
+ that is, 
+\begin_inset Formula \begin{equation}
+\left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\left[g_{D}^{n-1}r_{D}g_{D}\right](x)\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+and thus functions 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ possessing the modular group symmetry are candidates for solving the operator
+ 
 \begin_inset Formula $U_{C}$
 \end_inset 
 
@@ -4955,6 +5023,14 @@ n\\
 \end_inset 
 
 
+\layout Standard
+
+Previously, we saw that the Takagi Curves served as basis vectors for a
+ space of degenerate eigenfunctions of the Bernoulli Map, associated with
+ arbitrary eigenvalue.
+ We saw that this space could also be spanned by the Hurwitz Zeta, through
+ a change of basis.
+ Thus, we expect that we can extend these results to this map as well.
 \layout Section
 
 The Isola Map 
