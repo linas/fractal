@@ -1,0 +1,31 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'eta.png'
+
+set data style linespoints
+# set data style lines
+set key left
+
+set title "Eta Hyperbolic Maps"
+set xlabel "x"
+set ylabel "y"
+set size square
+
+# set yrange [0:]
+
+plot "eta.dat" using 1:2 title "eta(x)", \
+     "eta2.dat" using 1:2 title "eta^2(x)", \
+     "eta3.dat" using 1:2 title "eta^3(x)", \
+     "eta4.dat" using 1:2 title "eta^4(x)", \
+     "eta5.dat" using 1:2 title "eta^5(x)", \
+     "eta-r.dat" using 1:2 title "(eta-r)^2", \
+     "eta-r2.dat" using 1:2 title "etc"
+
+
+# pause 100
+

@@ -22,7 +22,7 @@ recurse (int cnt, double (*fn)(double), double pos, double val)
 	double y = fn (val);
 	if (1 == cnt)
 	{
-		printf ("%8.6g	%8.6g\n", pos, y);
+		printf ("%8.6g	%8.6g	%8.6g\n", pos, y, (1.0-pos)*y);
 		return;
 	}
 	recurse (cnt-1, fn, pos, y);
