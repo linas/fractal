@@ -37,8 +37,10 @@ class PathIntegral
 {
    public:
       PathIntegral (int, int);
+      void Init (void);
       void Trace (void);
       void TraceToroid (void);
+      void AccumIntensity (void);
       void ToPixels (void);
 
    public:
@@ -46,12 +48,22 @@ class PathIntegral
       int ny;
 
       double omega;  // energy
-      int oversample;   // samples per pixel
+      double oversample;   // samples per pixel
 
-      double shooter[3]; // position of source
+      double shooter[3]; // direction of source
 
-      complex<double> *amplitude;
-      int *norm;
+      complex<double> *side_amplitude;
+      complex<double> *front_amplitude;
+      complex<double> *back_amplitude;
+      int *side_norm;
+      int *front_norm;
+      int *back_norm;
+
+      double *side_intensity;
+      double *front_intensity;
+      double *back_intensity;
+
+      int nintense;
 };
 
 /* ==================================== */
@@ -61,7 +73,7 @@ PathIntegral::PathIntegral (int px, int py)
 {
    int i;
 
-   oversample = 6;
+   oversample = 1.0;
    omega = 1.0;
 
    nx = px;
@@ -69,17 +81,46 @@ PathIntegral::PathIntegral (int px, int py)
 
    shooter[0] = 0.0;
    shooter[1] = 0.0;
-   shooter[2] = 5.0;
+   shooter[2] = -1.0;
 
-   amplitude = new complex<double> [nx*ny];
-   norm = new int [nx*ny];
+   side_amplitude = new complex<double> [nx*ny];
+   front_amplitude = new complex<double> [nx*ny];
+   back_amplitude = new complex<double> [nx*ny];
+   side_norm = new int [nx*ny];
+   front_norm = new int [nx*ny];
+   back_norm = new int [nx*ny];
+
+   Init ();
+   for (i=0; i<nx*ny; i++)
+   {
+      side_intensity[i] = 0.0;
+      front_intensity[i] = 0.0;
+      back_intensity[i] = 0.0;
+   }
+
+   nintense = 0;
+}
+
+/* ==================================== */
+
+void
+PathIntegral::Init (void)
+{
+   int i;
+
+   shooter[0] = 0.0;
+   shooter[1] = 0.0;
+   shooter[2] = -1.0;
 
    for (i=0; i<nx*ny; i++)
    {
-      amplitude[i] = 0.0;
-      norm[i] = 0;
+      side_amplitude[i] = 0.0;
+      front_amplitude[i] = 0.0;
+      back_amplitude[i] = 0.0;
+      side_norm[i] = 0;
+      front_norm[i] = 0;
+      back_norm[i] = 0;
    }
-
 }
 
 /* ==================================== */
@@ -97,8 +138,8 @@ PathIntegral::TraceToroid(void)
    SinaiRay sr;
    int i,j;
 
-   int ox = oversample *nx;
-   int oy = oversample *ny;
+   int ox = (int) (oversample * ((double) nx));
+   int oy = (int) (oversample * ((double) ny));
 
    // project rays from source
    for (i=0; i<ox; i++) 
@@ -106,15 +147,19 @@ PathIntegral::TraceToroid(void)
       for (j=0; j<oy; j++) 
       {
 
-         // define initial ray direction
+         // define initial ray direction and position.
+         // we will use an orthonormal projection: the
+         // shooter is at infinity, and all rays are 
+         // parallel and in phase.  'In phase' means the rays
+         // start on a plane that is perpendicular to the
+         // ray direction.   This means that the ray trace will
+         // be that of a coherent wavefront.
          double pixel[3];
-         double dir[3];
          pixel[0] = 2.0 * (((double) i) + 0.51333)/ ((double) ox) - 1.0;
          pixel[1] = 2.0 * (((double) j) + 0.51666)/ ((double) oy) - 1.0;
-         pixel[2] = 1.0;
-         VEC_DIFF (dir, pixel, shooter);
+         pixel[2] = 3.0;
          sr.Init();
-         sr.Set (pixel, dir);
+         sr.Set (pixel, shooter);
          sr.last_wall = 4;
 
          // ray trace
@@ -181,8 +226,8 @@ PathIntegral::TraceToroid(void)
 
              // next perform phase summation
              double phase = omega * sr.distance;
-             amplitude [nx*py+px] += myexp (phase);
-             norm [nx*py+px] ++;
+             side_amplitude [nx*py+px] += myexp (phase);
+             side_norm [nx*py+px] ++;
           
 #if 0
 printf ("duude ph= %f ", phase);
@@ -192,9 +237,46 @@ printf ("duude amp= %f\n", abs<double>(amplitude [nx*py+px]));
          }
       }
 
-      if (0 == i % oversample) { printf ("."); fflush (stdout); }
+      if (1.0 < oversample)
+      {
+         if (0 == i % (int)oversample) { printf ("."); fflush (stdout); }
+      } else
+      {
+         if (0 == i) { printf ("."); fflush (stdout); }
+      }
    }
 
+}
+
+/* ==================================== */
+
+void 
+PathIntegral::AccumIntensity (void)
+{
+
+   for (int i=0; i<nx*ny; i++)
+   {
+      if (0 < side_norm[i])
+      {
+         double re = real (side_amplitude[i]) / ((double) side_norm[i]);
+         double im = imag (side_amplitude[i]) / ((double) side_norm[i]);
+         side_intensity[i] += re*re+im*im;
+
+         re = real (front_amplitude[i]) / ((double) front_norm[i]);
+         im = imag (front_amplitude[i]) / ((double) front_norm[i]);
+         front_intensity[i] += re*re+im*im;
+
+         re = real (back_amplitude[i]) / ((double) back_norm[i]);
+         im = imag (back_amplitude[i]) / ((double) back_norm[i]);
+         front_intensity[i] += re*re+im*im;
+      }
+
+   }
+
+   nintense ++;
+
+   // zero out amplitudes
+   Init ();
 }
 
 /* ==================================== */
@@ -209,9 +291,10 @@ PathIntegral::ToPixels (void)
       double green = 0.0;
       double blue = 0.0;
 
-      if (0 < norm[i])
+      if (0 < side_norm[i])
       {
-         red = 255.0 * abs<double> (amplitude[i]) / ((double) norm[i]);
+         // red = 255.0 * abs<double> (side_amplitude[i]) / ((double) side_norm[i]);
+         red = 255.0 * side_intensity[i] / ((double) nintense);
       }
 
       abgr[i] = 0xff & ((unsigned int) red);
@@ -234,7 +317,7 @@ main (int argc, char * argv[])
    char * outfile = argv[1];
    double radius = atof (argv[2]);
    double omega = atof (argv[3]);
-   int samples = atoi (argv[4]);
+   double samples = atof (argv[4]);
    double maxdist= atof (argv[5]);
 
    int niter = 1000000;
