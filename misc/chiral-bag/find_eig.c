@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 
+#include "bessel.h"
 #include "bag_ener.h"
 
 int main ()
@@ -16,19 +17,48 @@ int main ()
 	double emax;
 	int nfound;
 
-	#define NLVLS 100
-	double energy_levels[NLVLS];
+	#define NLVLS 1000
+	double pos_even_levels[NLVLS];
+	double pos_odd_levels[NLVLS];
+	double neg_even_levels[NLVLS];
+	double neg_odd_levels[NLVLS];
 
 	emax = NLVLS * 3;
 
-	theta = 0.1;
+	theta = 1.0;
 	ispect = +1;
-	k = 0;
-	nfound = quark_energy (energy_levels, theta, ispect, k, emax, kpty);
+	kpty = 1;
 
-	printf ("found %d levels: \n", nfound);
-	for (i=0; i<nfound; i++)
+   emax = 100;
+
+	printf ("#\n");
+	printf ("# FILE: \n");
+	printf ("#\n");
+	printf ("# even levels K=L      kpty = +1 \n");
+	printf ("# odd  levels K=L+/-1  kpty = -1 \n");
+	printf ("theta %21.15g\n", theta);
+	printf ("emax %21.15g\n", emax);
+
+	for (k=0; k<100; k++)
 	{
-		printf ("%d %g\n", i, energy_levels[i]);
+		int nfoundp, nfoundn, np, nn;
+
+		np = quark_energy (pos_even_levels, theta, 1, k, emax, 1);
+		nn = quark_energy (pos_odd_levels, theta, 1, k, emax, -1);
+		nfoundp = fmin (np, nn);
+		np = quark_energy (neg_even_levels, theta, -1, k, emax, 1);
+		nn = quark_energy (neg_odd_levels, theta, -1, k, emax, -1);
+		nfoundn = fmin (np, nn);
+		nfound = fmin (nfoundp, nfoundn);
+
+		printf ("k %d nlevels %d\n", k, nfound);
+		for (i=0; i<nfound; i++)
+		{
+			printf ("%d\t%21.15g\t%21.15g\t%21.15g\t%21.15g\n", 
+				i, 
+				pos_even_levels[i], pos_odd_levels[i],
+				neg_even_levels[i], neg_odd_levels[i]);
+		}
 	}
+	return 0;
 }
