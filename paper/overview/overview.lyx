@@ -3165,7 +3165,8 @@ The Frobenius-Perron Operator
 
 This section provides a basic review of the Frobenius-Perron operator and
  its use in the description of fractals and chaotic iterated maps.
- It is presented only to provide the background for later sections.
+ No results are presented here; rather the goal is to provide the background
+ for later sections.
  
 \layout Standard
 
@@ -3280,15 +3281,32 @@ To understand
 \end_inset 
 
 .
- When acting on square-integrable functions, one seems to usually get continuous
- set of complex-valued eigenvalues.
+ When acting on square-integrable functions, one seems to usually get a
+ continuous set of complex-valued eigenvalues.
+ This is because one can often find shift-states 
+\begin_inset Formula $\psi_{n}$
+\end_inset 
+
+ such that 
+\begin_inset Formula $U_{g}\psi_{n}=\psi_{n-1}$
+\end_inset 
+
+, in which case one can construct eigenfunctions 
+\begin_inset Formula $\phi(z)=\sum_{n}z^{n}\psi_{n}$
+\end_inset 
+
+ whose complex eigenvalues 
+\begin_inset Formula $z$
+\end_inset 
+
+ form the unit disk.
  It is often considered to be a mistake to try to analyse 
 \begin_inset Formula $U_{g}$
 \end_inset 
 
- on a finite grid of discrete points, such as one might try on a computer:
- it is all to easy to turn this into an excercise of analysing the permutation
- group on a set of 
+ acting on a finite grid of discrete points, such as one might try on a
+ computer: it is all to easy to turn this into an excercise of analysing
+ the permutation group on a set of 
 \begin_inset Formula $k$
 \end_inset 
 
@@ -3300,27 +3318,29 @@ To understand
  
 \layout Standard
 
-Insofar as 
+Since 
 \begin_inset Formula $U_{g}$
 \end_inset 
 
- is a linear operator, and thus induces a homomorphism in its mapping, one
- should study its kernel 
-\begin_inset Formula $Ker\; U_{g}$
+ is a linear operator, it induces a homomorphism in its mapping, and so
+ one should study its kernel 
+\begin_inset Formula $Ker\; U_{g}=\left\{ f\;|\; U_{g}f=0\right\} $
 \end_inset 
 
- to gain insights into its symmetry.
+ to gain insights into its symmetry as well as to express more correctly
+ the quotient space.
  Insofar as the iterated map might represent a dynamical system, one knows
  that symmetries lead to conserved currents, via Noether's theorm, and sometimes
- to toplogically-conserved (quantum) numbers or other invarients.
+ to topologically-conserved (quantum) numbers, winding numbers or other
+ invarients.
  
 \layout Standard
 
-Finally, we note that 
+Finally, we note that since 
 \begin_inset Formula $U_{g}$
 \end_inset 
 
- looks like a time-evolution operator, and thus we are tempted to write
+ looks like a time-evolution operator, we are tempted to write
 \begin_inset Formula \[
 U_{g}^{t}=\exp\; tH_{g}\]
 
@@ -3340,7 +3360,12 @@ U_{g}^{t}=\exp\; tH_{g}\]
 \end_inset 
 
  is not (anti-)Hermitian.
- However, any group of symmetries on 
+ As before, describing the eigenvalues and eigenfunctions of 
+\begin_inset Formula $H$
+\end_inset 
+
+ is a useful excercise.
+ Also, any group of symmetries on 
 \begin_inset Formula $U$
 \end_inset 
 
@@ -3371,7 +3396,69 @@ In practice, when one is given an iterated map
 \end_inset 
 
 .
- If on is interested in only polynomial xxx 
+ If one is interested in 
+\begin_inset Formula $U$
+\end_inset 
+
+ acting on polynomial or 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ functions, then one immediately writes the Taylor (or McLauren) series
+ 
+\begin_inset Formula \[
+\rho(x)=\sum_{n=0}^{\infty}\frac{\rho^{(n)}(0)}{n!}x^{n}=\sum_{n=0}^{\infty}a_{n}x^{n}\]
+
+\end_inset 
+
+ and subsitutes this in to get the matrix form of 
+\begin_inset Formula $U$
+\end_inset 
+
+:
+\begin_inset Formula \[
+\left[U\rho\right](x)=\sum_{m=0}^{\infty}b_{m}x^{m}=\sum_{m=0}^{\infty}x^{m}\sum_{n=0}^{\infty}U_{mn}a_{n}\]
+
+\end_inset 
+
+ Equating each power of 
+\begin_inset Formula $x^{m}$
+\end_inset 
+
+ we get 
+\begin_inset Formula \[
+\left.\frac{1}{m!}\;\frac{d^{m}U\rho(x)}{dx^{m}}\right|_{x=0}=\sum_{n=0}^{\infty}U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}\rho(x)}{dx^{n}}\right|_{x=0}\]
+
+\end_inset 
+
+ as the matrix equation for the transformation of polynomials, expressed
+ in classical notation, or, equivalently, 
+\begin_inset Formula \[
+xxx\]
+
+\end_inset 
+
+ expressed in Dirac bra-ket notation.
+ If one is very lucky, one finds that 
+\begin_inset Formula $U_{mn}$
+\end_inset 
+
+ is upper-triangular, in which case it can be solved immediately for its
+ eigenfunctions, and its eigenvalues already lie on the diagonal.
+ We will find that we get lucky in this way for the Bernoulli operator,
+ and for the 
+\begin_inset Quotes eld
+\end_inset 
+
+singular sawtooth
+\begin_inset Quotes erd
+\end_inset 
+
+ operator, but not for the Gauss-Kuzmin-Wirsing operator.
+ Of course, it is known that a complete solution of the GKW should lead
+ directly to a proof of the Riemann Hypothesis, so getting lucky would be
+ truly lucky indeed.
+ 
 \layout Subsection
 
 The Frobenius-Perron Operator of the Bernoulli Map
@@ -3433,6 +3520,70 @@ The Frobenius-Perron operator of the Bernoulli map is given by
 \end_inset 
 
  under the Bernoullli operator.
+\layout Standard
+
+Blah blah blah.
+ How much more here do we want to say? Provide the matrix elements.
+ Provide the discrete eigenfunctions, which are amazingly also named after
+ Bernoulli: the Bernoulli polynomials.
+ What is the kernel of 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+? It is the set of sine functions.
+ This implies that 'half' of all square-integrable functions are in the
+ kernel.
+ Talk about 
+\begin_inset Formula $H$
+\end_inset 
+
+ and its spectrum.
+ 
+\layout Standard
+
+The continuous-spectrum eigenfunctions of the Bernoulli map are of course
+ a generalizastion of the Takagi-Landsberg map to complex values, and are
+ of course the famous and beautiful Levy Dragons (reference the Paul Levy
+ 1938 paper here) .
+ These eigenfunctions are 
+\begin_inset Formula \[
+\phi_{z,l}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2l+1\right)x\right)\]
+
+\end_inset 
+
+ which have eigenvalue 
+\begin_inset Formula $z$
+\end_inset 
+
+: that is 
+\begin_inset Formula $[U_{B}\phi_{z,l}](x)=z\phi_{z,l}(x)$
+\end_inset 
+
+.
+ These are quite beautiful fractals provide a picture here.
+ 
+\layout Subsection
+
+The Singular Sawtooth
+\layout Standard
+
+The singular sawtooth is given by the dyadic-space version of the frac operator,
+ and is thus a model of the Gauss-Kuzmin-Wirsing.
+ It can be solved exactly; unfortunately, there is no similarity transform
+ to take it back to GKW; the eigenvalues are not those of GKW, of course,
+ the similarity transform between it and GKW is just the Jacobian of the
+ Minkowski question mark 
+\begin_inset Formula $(?'\circ?^{-1})(x)$
+\end_inset 
+
+ which is why we want to solve it so badly.
+ We'd like, among other things, to find the shift operator, so that can
+ write down the variant of the Levy-Dragon solutions of the GKW.
+ 
+\layout Standard
+
+blah blah blah provide the details of the solution here.
+ 
 \layout Subsection
 
 Other Trees of Rationals
@@ -3470,30 +3621,6 @@ Here's a mapping that is continuous and is also fractally non-monotonic
  which looks sine-like and we want to exhibit the cosine-like so that we
  can build up fractally-periodic basis functions.
  
-\layout Standard
-
-We can do this with the eigenfunctions of the Frobenius-Perron operator
- of the Bernoulli map.
- These eigenfunctions are 
-\begin_inset Formula \[
-\phi_{z,l}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2l+1\right)x\right)\]
-
-\end_inset 
-
- which have eignevalue 
-\begin_inset Formula $z$
-\end_inset 
-
-: that is 
-\begin_inset Formula $[U_{B}\phi_{z,l}](x)=z\phi_{z,l}(x)$
-\end_inset 
-
-.
- This is old hat...
- except that now ...
- note that these are a generalization of the takagi-landsberg curve where
- we replace the triangle function with sines and cosines.
- Is there a name for these functions? 
 \layout Subsection
 
 Cantor Dusts
