@@ -102,6 +102,7 @@ void lagGenericConcordTable :: Dump (void) {
    printf ("num concord is %d \n", num_concords);
    printf ("memusage is %d kbytes \n", num_concords * sizeof (Concord) / 1024);
    printf ("sizeof concord is %d bytes \n", sizeof (Concord));
+   printf ("\n");
 
    lagGenericWordTable :: Dump();
 }
