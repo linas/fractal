@@ -89,8 +89,8 @@ bessel (int n, double x, double *bess)
 {
 #define ARRSZ 3650
 	double tmp [ARRSZ];
-	int i, m, nstart, mon[ARRSZ];
-	double c, z, oneoz, scale;
+	int i, j, m, nstart, mon[ARRSZ];
+	double s, c, r, z, oneoz, scale;
 
 /*
 C       WE USE BACKWARD RECURENCE TO FIND THE BESSEL FUNCTIONS
@@ -107,35 +107,63 @@ C       SEE COMMENT CARDS IN THE SUBROUTINE "BesselRecurrenceStartRegion"
 		return;
 	} 
 	tmp[nstart] = 0.0;
-	tmp[nstart-1] = 1.0E-30;
+	tmp[nstart-1] = 1.0E-300;
 	mon[nstart-1] = 0;
 	oneoz = 1.0/z;
 	for (i=nstart-1; i>0; i--)
 	{
 		tmp [i-1] = oneoz * ((double) (2*i+1)) * tmp[i] - tmp [i+1];
 		mon [i-1] = mon [i];
-		if (fabs (tmp [i-1]) > 1.0E+20)
+		if (fabs (tmp [i-1]) > 1.0E+250)
 		{
-			tmp [i] = tmp [i] * 1.0E-30;
-			tmp [i-1] = tmp [i-1] * 1.0E-30;
-			mon [i] = mon [i+1] + 30;
+			tmp [i] = tmp [i] * 1.0E-500;
+			tmp [i-1] = tmp [i-1] * 1.0E-500;
+			mon [i] = mon [i+1] + 500;
 			mon [i-1] = mon [i];
 		}
 	}
-	c = sin (z) * oneoz;
-	c = c/ tmp[0];
-   m = mon [0];
+
+	/* Compute r = sin (z) * oneoz / tmp[0]; from first principles */
+	s = z * tmp[0];
+	c = tmp[0] - z * tmp[1];
+
+	i = 0;
+	while (c > 1.0e100) 
+	{
+		i++;
+		c *= 1.0e-100;
+		s *= 1.0e-100;
+	}
+	r = 1.0 / sqrt (c*c + s*s);
+	while (0 < i)
+	{
+		r *= 1.0e-100;
+		i--;
+	}
+	/* compute sign */
+	r = copysign (r, s);
+	s = z / M_PI;
+	i = (int) floor(s);
+	if (i%2 != 0) { r = -r; }
+
 /*
 C       RENORMALIZE THE VALUES.  SINCE EXPONENTIATION TAKES ABOUT A FACTOR
 C       OF 20 MORE CPU TIME THAN IF STATEMENTS, OR MULTIPLICATION,
 C       I'VE RIGGED A LITTLE SCHEME HERE WHEN ALL I REALLY WANT TO DO IS
 C       BESS (I) = C * TMP(I) * (10.0D0 ** (MON(I)-M))
 */
-	scale = c;
+   m = mon [0];
+	scale = r;
 	bess [0] = scale * tmp[0];
 	for (i=1; i<=n; i++)
 	{
-		if (mon[i] != mon[i-1]) { scale = c * pow (10.0, (double) (mon[i]-m)); }
+		if (mon[i] != mon[i-1]) 
+		{ 
+			double p = 1.0;
+			/* scale = r * pow (10.0, (double) (mon[i]-m)); */
+			for (j=0; j<mon[i]-m; j+=500) p *=1.0e500;
+			scale = r * p;
+		}
 		bess[i] = scale * tmp[i];
 	}
 }
