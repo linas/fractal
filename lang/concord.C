@@ -20,8 +20,9 @@
 lagGenericConcordTable :: lagGenericConcordTable (void) {
    num_concords = 0;
 
+   concordance = new Concord* [LAG_PAIR_TABLE_SIZE];
    int i = 0;
-   for (i=0; i<LAG_WORD_TABLE_SIZE; i++) {
+   for (i=0; i<LAG_PAIR_TABLE_SIZE; i++) {
       concordance[i] = 0x0;
    }
 
@@ -33,7 +34,7 @@ lagGenericConcordTable :: ~lagGenericConcordTable () {
    num_concords = 0;
 
    int i = 0;
-   for (i=0; i<LAG_WORD_TABLE_SIZE; i++) {
+   for (i=0; i<LAG_PAIR_TABLE_SIZE; i++) {
       if (concordance[i]) {
          Concord * root = concordance[i];
          while (root) {
@@ -53,8 +54,8 @@ void lagGenericConcordTable :: AddID (Helper *where) {
 
    // first, see if the pair is already listed in the concordance
    // If it is, don't add it again.
-   // actually, this check is not needed, since the way this method is
-   // invoked guarentees that it will ot already bee there.
+   // Actually, this check is not needed, since the way this method is
+   // invoked guarentees that it will already be there.
    unsigned int first = where -> tuple[0];
 
    Concord *root = concordance [first];
@@ -75,7 +76,7 @@ void lagGenericConcordTable :: AddID (Helper *where) {
 
 int lagGenericConcordTable :: GetTopTupleContainingWord (int word) {
    if (0 > word) return 0;
-   if (LAG_WORD_TABLE_SIZE <= word) return 0;
+   if (LAG_PAIR_TABLE_SIZE <= word) return 0;
 
    Concord * root = concordance[word];
    if (!root) return 0;

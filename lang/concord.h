@@ -36,7 +36,7 @@ class lagGenericConcordTable :
             Concord * next;
             lagGenericWordTable::Helper * where;
       };
-      Concord * concordance [LAG_WORD_TABLE_SIZE];
+      Concord ** concordance;
 
       virtual void AddID (Helper *);
 
