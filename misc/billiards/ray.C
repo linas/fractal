@@ -21,15 +21,18 @@
 #include "vvector.h"
 #include "intersect.h"
 
-// Intersect determines the intersection between the ray and the plane.
+// Intersect() determines the intersection between the ray and the plane.
 // It returns the distance to the intersection if the intersection
 // is forward along the ray.  Otherwise it returns minus the distance.
 //
-// Bounce determines if a forward trace of the ray will intersect the
+// Bounce() determines if a forward trace of the ray will intersect the
 // plane.  If it does, then the ray will be traced forward and reflected
 // off the plane.  
 //
-// Sphere returns a positive number if the ray intersects with a sphere
+// Forward() determines if a forward trace of the ray will intersect the
+// plane.  If it does, then the ray will be traced forward to the plane.
+//
+// Sphere() returns a positive number if the ray intersects with a sphere
 // of radius R centered at the origin; otherwise negative.  The returned
 // value is the distance the ray travelled to hit the sphere.
 
@@ -40,6 +43,7 @@ class Ray
       void Set (double, double, double, double, double, double);
       double Intersect (Ray& plane);
       void Bounce (Ray& plane);
+      void Forward (Ray& plane);
       double Sphere (double r);
    public:
       double position[3];   
@@ -116,6 +120,24 @@ Ray::Bounce (Ray& plane)
 
 /* ==================================== */
 
+void
+Ray::Forward (Ray& plane)
+{
+   double p2[3];
+   VEC_SUM (p2, position, direction);
+
+   int valid;
+   double result[3];
+   INTERSECT (valid, result, 
+             plane.position, plane.direction,
+             position, p2);
+
+   if (FALSE == result) return;
+   VEC_COPY (position, result);
+}
+
+/* ==================================== */
+
 double
 Ray::Sphere (double radius)
 {
@@ -164,12 +186,19 @@ SinaiRay::SinaiRay (void)
 }
 
 /* ==================================== */
+//
+// The Trace() method performs ray-tracing using the classic Sinai
+// reflective boundary conditions.
+//
+// The TraceToroid() method performs ray-tracing using periodic
+// toroidial boundary conditions.
 
 class SinaiView
 {
    public:
       SinaiView (int, int);
       void Trace (void);
+      void TraceToroid (void);
       void TestPattern (void);
       void ColoredMirrors (void);
       void ToPixels (void);
@@ -307,6 +336,56 @@ SinaiView::Trace(void)
             sr[i].direction[2] = -  sr[i].direction[2];
          }
 #endif
+
+         if (sr[i].distance > distance) break;
+      }
+
+   }
+}
+
+/* ==================================== */
+
+void
+SinaiView::TraceToroid(void)
+{
+   int i;
+   for (i=0; i<nx*ny; i++) 
+   {
+
+      for (int n=0; n<nbounces; n++)
+      {
+         double dist = 0.0;
+
+         // first, see if ray bounces off sphere
+         dist = sr[i].Sphere (radius);
+         if (0.0 < dist) 
+         {
+            sr[i].sphere_hits ++;
+            sr[i].distance += dist;
+            sr[i].last_wall = -1;
+         }
+
+         // next, trace ray to wall.
+         int next_wall = -1;
+         double nearest = 1000000.0;
+         for (int iwall=0; iwall<6; iwall ++)
+         {
+            if (iwall == sr[i].last_wall) continue;
+   
+            double dist = sr[i].Intersect (walls[iwall]);
+            if (0.0 > dist) continue;
+            if (nearest > dist) { nearest = dist; next_wall = iwall; }
+         }
+         sr[i].bounces[next_wall] ++;
+         sr[i].last_wall = next_wall;
+         sr[i].distance += nearest;
+   
+         sr[i].Forward (walls[next_wall]);
+
+         // enforce periodic boundary conditions
+         sr[i].position[0] += 2.0 * walls[next_wall].direction[0];
+         sr[i].position[1] += 2.0 * walls[next_wall].direction[1];
+         sr[i].position[2] += 2.0 * walls[next_wall].direction[2];
 
          if (sr[i].distance > distance) break;
       }
