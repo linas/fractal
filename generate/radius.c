@@ -35,6 +35,7 @@ void measure_radius (
    double	radius_cand;
    double	re_cg, im_cg;
    double	radius_avg=0.0;
+   double	radius_min, radius_max;
    double	si, co;
    double	re_last, im_last;
    double	re_c, im_c;
@@ -52,6 +53,8 @@ void measure_radius (
    
    re_cg = im_cg = 0.0;
    radius_avg = 0.0;
+   radius_min = 1e30;
+   radius_max = -1e30;
 
    for (i=0; i<sizea; i++) {
       theta = ((double) i) / ((double) sizea);
@@ -101,6 +104,8 @@ void measure_radius (
       re_cg += radius_cand * co;
       im_cg += radius_cand * si;
       radius_avg += radius_cand;
+      if (radius_min > radius_cand) { radius_min = radius_cand; }
+      if (radius_max < radius_cand) { radius_max = radius_cand; }
       glob [i] = radius_cand; 
       printf ("%d	%14.10f	%14.10f	%d\n", i, theta, radius_cand, loop_cand); 
    }
@@ -110,6 +115,8 @@ void measure_radius (
    
    printf ("# ravg = %14.10f center o gravity = ( %14.10f %14.10f )\n", radius_avg, re_cg, im_cg);
    printf ("# center= %14.10f %14.10f diam = %14.10f \n", re_center+re_cg, im_center+im_cg, 2.0*radius_avg);
+   printf ("# radius min, max= %14.10f %14.10f half-diff=%14.10f \n", radius_min,
+radius_max, 0.5*(radius_max-radius_min));
 }
 
 
