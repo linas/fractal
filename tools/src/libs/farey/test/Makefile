@@ -10,7 +10,7 @@ LIB = $(TOP)/lib
 CC = /usr/bin/cc -O2 -I $(INC) 
 
 EXES= zgap zgap-check zlist fairy xlist elist flist gap ginv glist sym imap \
-	terms x zscale zinv 
+	terms x zscale zinv newgap
 
 LISTS= fnums enums
 
@@ -28,6 +28,8 @@ realclean:	clean
 .o:
 	$(CC) -o $* $< $(LIB)/Farey.o -lm -lstdc++
 
+fairy.o:  fairy.C $(LIB)/Farey.o $(INC)/Farey.h
+newgap.o:  newgap.C $(LIB)/Farey.o $(INC)/Farey.h
 ################## Dependencies and compile/link #########
 # elist
 # 	(Jan 1994) excercise Farey Number converter

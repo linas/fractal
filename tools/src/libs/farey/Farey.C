@@ -389,6 +389,93 @@ ContinuedFraction::ToXOdd (double w)
 }
 
 /* ------------------------------------------------------------ */
+/* Converts continued fraction into a polynomial in w in last term 
+ * x+(w) = [a1, a2, ... , aN, 1/w]  and then returns the coefficient
+ * of the w^3 term, multiplied by 2q^2 where q is teh denominator
+ * of the original ratio x=p/q
+ */
+
+double 
+ContinuedFraction::GapSum (int sn, int tn, int un, int vn)
+{
+   int i;
+	double sa,ta,ua,va, sb,tb,ub,vb;
+
+	sa=sn;
+	ta=tn;
+	ua=un;
+	va=vn;
+   for (i=nterms-2; i>=0; i--) 
+	{
+		sb = (double) tinued_frac[i] + 1.0/sa;
+		tb = -ta/(sa*sa);
+		ub = (-ua+ta*ta/sa)/(sa*sa);
+		vb = (-va + ta*(2.0*ua-ta*ta/sa)/sa)/(sa*sa);
+		sa=sb;
+		ta=tb;
+		ua=ub;
+		va=vb;
+   }
+	sb = 1.0/sa;
+	tb = -ta/(sa*sa);
+	ub = (-ua+ta*ta/sa)/(sa*sa);
+	vb = (-va + ta*(2.0*ua-ta*ta/sa)/sa)/(sa*sa);
+
+	// tb equals 2/q^2 where q is the denominator of the rational
+	// so we get a 'free normalization' here
+	vb *= 4.0/tb;
+   return (vb);
+}
+
+double 
+ContinuedFraction::ToGapPlus (void)
+{
+   real = (double) intpart;
+   if (nterms == 0) return (real);
+
+	real += GapSum (tinued_frac[nterms-1], 1, 0, 0);
+
+   return (real);
+}
+
+double 
+ContinuedFraction::ToGapMinus (void)
+{
+   real = (double) intpart;
+   if (nterms == 0) return (real);
+
+	real += GapSum (tinued_frac[nterms-1], -1, 1, -1);
+
+   return (real);
+}
+
+double 
+ContinuedFraction::ToGapEven (void)
+{
+	if (nterms%2)
+	{
+		return ToGapMinus();
+	}
+	else
+	{
+		return ToGapPlus();
+	}
+}
+
+double 
+ContinuedFraction::ToGapOdd (void)
+{
+	if (nterms%2)
+	{
+		return ToGapPlus();
+	}
+	else
+	{
+		return ToGapMinus();
+	}
+}
+
+/* ------------------------------------------------------------ */
 /* Converts continued fraction into real number, 
  * but with a numerator of z instead of 1.
  */

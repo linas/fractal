@@ -31,6 +31,10 @@ class ContinuedFraction
       double ToXMinus (double w);
       double ToXEven (double w);
       double ToXOdd (double w);
+      double ToGapPlus (void);
+      double ToGapMinus (void);
+		double ToGapEven (void);
+		double ToGapOdd (void);
 
       double ToZReal (double z);
       double ToInvZReal (double z);
@@ -69,6 +73,7 @@ class ContinuedFraction
    protected:
       void RealToContinuedFraction (double);
       void RatioToContinuedFraction (int num, int deno);
+		double GapSum (int sn, int tn, int un, int vn);
 
    private:
       double real;          /* the number, in float pt rep. */ 
