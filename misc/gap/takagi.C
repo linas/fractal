@@ -25,7 +25,15 @@ double bumps (double x)
 {
 	if (1.0 > x*3.0) return 0.0;
 	if (2.0 < x*3.0) return 0.0;
-	return triangle (6.0*x);
+	return triangle (3.0*x);
+}
+
+double saw (double x)
+{
+	x *= 3.0;
+	if (1.0 > x) return 0.0;
+	if (2.0 < x) return 0.0;
+	return 2.0-x;
 }
 
 double takagi (double w, double x)
@@ -130,7 +138,8 @@ double takagi_bumps (double w, double x)
 	double tp = 1.0;
 	for (k=0; k<1000; k++)
 	{
-		acc += tw* bumps (tp*x);
+		// acc += tw* bumps (tp*x);
+		acc += tw* saw (tp*x);
 		tp *= 2.0;
 		tw *= w;
 		if (1.0e-14 > tw) break;
@@ -163,8 +172,7 @@ main (int argc, char *argv[])
 		// double tw = log (takagi(w,x));
 		// double tw = ttakagi(w,x);
 		// double tw = div_takagi (w, x);
-		// double tw = takagi_bumps (w, x);
-		double tw = takagi (w, x);
+		double tw = takagi_bumps (w, 0.666*x);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts);
 	}
