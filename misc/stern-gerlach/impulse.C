@@ -14,14 +14,6 @@
 
 main () 
 {
-   double theta, d_theta;  // dipole angle to z axis
-   double phi, d_phi;    // dipole angle to x axis
-   double sin_theta, cos_theta;
-   double sin_phi, cos_phi;
-   int nprec = 0;        // number of precessions
-   long long last_i = 0;
-   double acc_theta = 0.0;
-
    double gb0 = 1.0e-4;  // gyromagnetic * magnetic field 
 
    long long imax = 48023;  // max iterations
@@ -39,6 +31,12 @@ main ()
    double initial_theta;
    for (initial_theta=0.05; initial_theta <M_PI; initial_theta +=0.1)
    {
+      long long last_i = 0;
+      double theta, d_theta;  // dipole angle to z axis
+      double phi, d_phi;    // dipole angle to x axis
+      double sin_theta, cos_theta;
+      double sin_phi, cos_phi;
+      int nprec = 0;        // number of precessions
 
       theta = initial_theta;
       phi = 0.0;
