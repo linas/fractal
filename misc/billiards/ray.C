@@ -13,20 +13,55 @@
 
 #include "vvector.h"
 
+// Bounce determines if a forward trace of the ray will intersedct the
+// plane.  If it does, then the ray will be traced forward and reflected
+// off the plane.  The distance moved forward will be returned.  If the
+// forward trace does not intersect, then a negative value will be
+// returned.
+
 class Ray
 {
    public:
-      void Set (double x[3], double t[3]);
+      void Set (double x[3], double t[3]);  // assign value
+      void Set (double, double, double, double, double, double);
+      double Bounce (Ray& plane);
    public:
       double position[3];   
       double direction[3];
 };
 
-void Ray::Set (double x[3], double t[3])
+void 
+Ray::Set (double x[3], double t[3])
 {
    VEC_COPY(position, x);
    VEC_COPY(direction,  t);
    VEC_NORMALIZE(direction);
+}
+
+void
+Ray::Set (double x0, double x1, double x2, 
+          double t0, double t1, double t2)
+{
+   position[0] = x0;
+   position[1] = x1;
+   position[2] = x2;
+   direction[0] = t0;
+   direction[1] = t1;
+   direction[2] = t2;
+   VEC_NORMALIZE(direction);
+}
+
+double 
+Ray::Bounce (Ray& plane)
+{
+
+   // the forward ray and the plane interect only if the 
+   // dot product of directions is negative
+   double dot;
+   VEC_DOT_PRODUCT (dot, direction, plane.direction);
+   
+
+   return dot;
 }
 
 class SinaiRay
@@ -41,6 +76,7 @@ class SinaiView
 {
    public:
       SinaiView (int, int);
+      void Trace (void);
       void ToPixels (void);
       void WriteMTV (const char *filename);
    public:
@@ -50,11 +86,15 @@ class SinaiView
       double eye[3]; // position of eye
 
    private:
+      Ray left, right, top, bottom, front, back;
+      
       SinaiRay **sr;
       unsigned int *abgr;
       unsigned int *pack;
 
 };
+
+/* ==================================== */
 
 SinaiView::SinaiView (int px, int py)
 {
@@ -65,7 +105,14 @@ SinaiView::SinaiView (int px, int py)
 
    eye[0] = 0.0;
    eye[1] = 0.0;
-   eye[2] = -5.0;
+   eye[2] = 5.0;
+
+   left.Set(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+   right.Set(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
+   top.Set(0.0, 1.0, 0.0, 0.0, -1.0, 0.0);
+   bottom.Set(0.0, -1.0, 0.0, 0.0, 1.0, 0.0);
+   front.Set(0.0, 0.0, 1.0, 0.0, 0.0, -1.0);
+   back.Set(0.0, 0.0, -1.0, 0.0, 0.0, 1.0);
 
    sr = new (SinaiRay *) [nx];
    for (i = 0; i<nx; i++) sr[i] = new SinaiRay[ny];
@@ -91,6 +138,13 @@ SinaiView::SinaiView (int px, int py)
 
 /* ==================================== */
 
+void
+SinaiView::Trace(void)
+{
+}
+
+/* ==================================== */
+
 void 
 SinaiView::ToPixels (void)
 {
@@ -109,6 +163,8 @@ SinaiView::ToPixels (void)
    }
 }
 
+/* ==================================== */
+
 void 
 SinaiView::WriteMTV (const char * filename)
 {
@@ -117,6 +173,8 @@ SinaiView::WriteMTV (const char * filename)
    fwrite (pack, 4, 3*nx*ny/4+1, fh);
    fclose (fh);
 }
+
+/* ==================================== */
 
 main ()
 {
@@ -129,4 +187,4 @@ main ()
 
 }
 
-
+/* ===================== end of file ====================== */
