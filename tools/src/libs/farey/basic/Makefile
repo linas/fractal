@@ -4,15 +4,9 @@ TOP = ../../../..
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-# fcc for IBM RT
-# CC = /bin/fcc -f2 -O -I $(INC)
-
 CC = /usr/bin/cc -O2 -I $(INC) 
 
 EXES= fgraph
-
-
-LISTS= fnums enums
 
 all: 	$(EXES)
 

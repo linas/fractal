@@ -5,6 +5,7 @@
  *
  * HISTORY:
  * Linas Vepstas January 16 1994
+ * Updates October 2004
  */
 
 #include "Farey.h"
