@@ -10,6 +10,10 @@
  * Added xplus/minus Oct 2004 -- linas
  */
 
+
+/* Return the greatest common factor, 32-bit accurate */
+int gcf32 (int nume, int denom);
+
 #include <complex.h>
 // #define Complex double __complex__
 // template<typename _Tp> class complex;
@@ -82,6 +86,7 @@ class ContinuedFraction
       double fracpart;      /* the fractional part of the real number  */
       unsigned int num;     /* the numerator of the fractional part */
       unsigned int denom;   /* the denominator of the fractional part */
+      unsigned int rdenom;  /* the denominator, reduced so its prime to numerator */
 
       int tinued_frac[32];  /* values of continued fraction */
       int nterms;           /* number of terms in the continued fraction expansion */

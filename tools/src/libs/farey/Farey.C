@@ -22,6 +22,28 @@
 #define MIN(a,b) ((a)<(b)?(a):(b))
 
 /* ------------------------------------------------------------ */
+/* Return the greatest common factor, 32-bit in accurate */
+int
+gcf32 (int nume, int denom)
+{
+	int t;
+	t = nume % denom;
+	nume = denom;
+	denom = t;
+
+	/* Euclids algorithm for obtaining the gcf */
+	while (0 != denom)
+	{
+		t = nume % denom;
+		nume = denom;
+		denom = t;
+	}
+
+	/* num now holds the GCD (Greatest Common Divisor) */
+	return nume;
+}
+
+/* ------------------------------------------------------------ */
 ContinuedFraction::ContinuedFraction (void)
 {
    real = 0.0;
@@ -391,7 +413,7 @@ ContinuedFraction::ToXOdd (double w)
 /* ------------------------------------------------------------ */
 /* Converts continued fraction into a polynomial in w in last term 
  * x+(w) = [a1, a2, ... , aN, 1/w]  and then returns the coefficient
- * of the w^3 term, multiplied by 2q^2 where q is teh denominator
+ * of the w^3 term, multiplied by q^2 where q is the denominator
  * of the original ratio x=p/q
  */
 
@@ -410,7 +432,7 @@ ContinuedFraction::GapSum (int sn, int tn, int un, int vn)
 		sb = (double) tinued_frac[i] + 1.0/sa;
 		tb = -ta/(sa*sa);
 		ub = (-ua+ta*ta/sa)/(sa*sa);
-		vb = (-va + ta*(2.0*ua-ta*ta/sa)/sa)/(sa*sa);
+		vb = (-va + ta*(2.0*ua - ta*ta/sa)/sa)/(sa*sa);
 		sa=sb;
 		ta=tb;
 		ua=ub;
@@ -419,11 +441,11 @@ ContinuedFraction::GapSum (int sn, int tn, int un, int vn)
 	sb = 1.0/sa;
 	tb = -ta/(sa*sa);
 	ub = (-ua+ta*ta/sa)/(sa*sa);
-	vb = (-va + ta*(2.0*ua-ta*ta/sa)/sa)/(sa*sa);
+	vb = (-va + ta*(2.0*ua - ta*ta/sa)/sa)/(sa*sa);
 
-	// tb equals 2/q^2 where q is the denominator of the rational
-	// so we get a 'free normalization' here
-	vb *= 4.0/tb;
+	rdenom = denom / gcf32 (num, denom);
+	
+	vb *= 2.0*((double)rdenom)*((double)rdenom);
    return (vb);
 }
 

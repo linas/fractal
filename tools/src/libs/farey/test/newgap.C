@@ -39,11 +39,18 @@ main (int argc, char *argv[])
 	double w = 0.01;
 	double xgap = f.ToXEven(w) - f.ToXOdd(w);
 
-	double guess = (2*w - w*w + 0.5*g*w*w*w)/((double)(d*d));
-
 	g -= 1.0;
-   printf ("\n------ gap(%d/%d) = %10.8g= %f - %f  nt=%d xg = %20.15g gus=%20.15g\n", 
-						 n,d,g, xe, xo, f.GetNumTerms(), xgap, (xgap-guess)/xgap);
+	double guess = (2*w - w*w + 0.5*w*w*w + 0.5*g*w*w*w)/((double)(d*d));
+
+	double gg = xgap *d*d;
+   gg /= w;
+   gg -= 2.0;
+	gg += w;
+	gg -= 0.5* w*w;
+	gg /= 0.5*w*w;
+
+   printf ("\n------ gap(%d/%d) = %10.8g= %f - %f  gg=%g nterm=%d xg = %20.15g gus=%20.15g\n", 
+						 n,d,g, xe, xo, gg, f.GetNumTerms(), xgap, guess);
 
 }
 
