@@ -4,7 +4,7 @@
  *
  * Simulate classical magnetic dipole absorbing soft photon impulses.
  * The photons are crudely distributed so that thier average creates
- * a magnetric field along z direction.  As a result, the dipole 
+ * a magnetic field along z direction.  As a result, the dipole 
  * precesses on average, but otherwise takes a random walk in theta.
  *
  * Linas Vepstas July 2001
