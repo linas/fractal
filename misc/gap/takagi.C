@@ -46,18 +46,19 @@ double saw (double x)
 	return 2.0-x;
 }
 
-double takagi (double w, double x)
+long double takagi (long double w, long double x)
 {
 	int k;
-	double acc = 0.0;
-	double tw = 1.0;
-	double tp = 1.0;
-	for (k=0; k<1000000; k++)
+	long double acc = 0.0L;
+	long double tw = 1.0L;
+	long double tp = 1.0L;
+	for (k=0; k<100; k++)
 	{
-		acc += tw* triangle (tp*x);
-		tp *= 2.0;
+		long double term = tw* triangle (tp*x);
+		acc += term;
+		tp *= 2.0L;
 		tw *= w;
-		if (1.0e-14 > tw) break;
+		if (1.0e-16 > tw) break;
 	}
 
 	return acc;
@@ -344,7 +345,7 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 431;
-	int nmax = 3;
+	int nmax = 23;
 
 	if (argc <2)
 	{
@@ -353,9 +354,8 @@ main (int argc, char *argv[])
 	}
 	double w = atof(argv[1]);
 
-	for (i=1; i<nmax; i++)
+	for (i=0; i<nmax; i++)
 	{
-		double ts = 1.0;
 		double x = i/((double)nmax);
 		// double tw = takagi (w, x);
 		// double ts = sin_takagi (w, x);
@@ -367,8 +367,24 @@ main (int argc, char *argv[])
 		// double tw = takagi_prime (w, x);
 		// double tw = takagi_exp (w, x);
 
-		double tw = lytic (w, x);
+		// double tw = lytic (w, x);
 
+#ifdef HALH_SYM
+		double tw = takagi (w, 0.5*x);
+		double ts = x + w*takagi (w, x);
+		double tw = takagi (w, 0.25*x);
+		double ts = 0.5*x + w*x + w*w*takagi (w, x);
+		double tw = takagi (w, 0.0625*x);
+		double ts = 0.125*x*(1.0-16.0*w*w*w*w)/(1.0-2.0*w) + w*w*w*w*takagi (w, x);
+		double tw = takagi (w, 0.5*(1.0+x));
+		double ts = 1.0-x + w*takagi (w, x);
+		double tw = takagi (w, 1.0+0.0625*(x-1.0));
+		double ts = 0.125*(1.0-x)*(1.0-16.0*w*w*w*w)/(1.0-2.0*w) + w*w*w*w*takagi (w, x);
+#endif
+		double tw = takagi (w, 0.75-0.25*x);
+		double ts = 0.5 -2.0*w*w + x*(0.5-2.0*w +2.0*w*w);
+		ts /= 1.0-2.0*w;
+		ts += w*w*takagi (w, x);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 	}
