@@ -9,8 +9,13 @@
  * -- Klein j-invariant
  *
  * HISTORY:
- * more stuff -- October 2004
+ * Linas Vepstas -- October 2004
  */
+
+
+#ifdef   __cplusplus
+extern "C" {
+#endif
 
 extern int modular_max_terms;
 
@@ -61,4 +66,8 @@ void dedekind_eta_c (double re_q, double im_q, double *pre, double *pim);
 /* The Klein j-invariant g_2^3 / discriminant */
 void klein_j_invariant_c (double re_q, double im_q, double *pre, double *pim);
 
+
+#ifdef   __cplusplus
+};
+#endif
 /* --------------------------- END OF FILE ------------------------- */

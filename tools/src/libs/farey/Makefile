@@ -1,4 +1,3 @@
-
 #
 #
 # HISTORY:
@@ -16,7 +15,7 @@ CC = cc -O2 -I $(INC) -DANSI_C -DLINUX
 
 RM= rm -f
 
-all: inc Farey.o FareyTree.o gcf.o moebius.o Prime.o totient.o
+all: inc Farey.o FareyTree.o gcf.o modular.o moebius.o Prime.o totient.o
 
 inc:	Farey.h FareyTree.h gcf.h moebius.h Prime.h totient.h
 	touch inc
@@ -44,6 +43,12 @@ gcf.o:	gcf.c gcf.h
 	cp gcf.o $(LIB)/gcf.o
 	rm gcf.o
 	touch gcf.o
+
+modular.o:	modular.c modular.h
+	$(CC) -c modular.c
+	cp modular.o $(LIB)/modular.o
+	rm modular.o
+	touch modular.o
 
 moebius.o:	moebius.c moebius.h
 	$(CC) -c moebius.c
