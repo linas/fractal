@@ -117,9 +117,6 @@ x=1/(a_{1}+1/(a_{2}+1/(a_{3}+...)))\]
 
 \end_inset 
 
-
-\layout Standard
-
 Given any x, this sequence is straightforward to compute.
  Rational numbers x always have a finite number of terms in the sequence.
  For a rational number x, there are two distinct expansions that yield the
@@ -132,9 +129,6 @@ x_{+}=[a_{1},a_{2},...,a_{N}]\]
 
 \end_inset 
 
-
-\layout Standard
-
 and 
 \layout Standard
 
@@ -143,9 +137,6 @@ and
 x_{-}=[a_{1},a_{2},...,a_{N}-1,1]\]
 
 \end_inset 
-
-
-\layout Standard
 
 In the following text, we make a simplifying notational confusion: we use
  the same symbols to denote a sequence and its value when expressed as a
@@ -172,9 +163,6 @@ x_{+}(w)=[a_{1},a_{2},...,a_{N},1/w]\]
 
 \end_inset 
 
-
-\layout Standard
-
 and
 \layout Standard
 
@@ -183,9 +171,6 @@ and
 x_{-}(w)=[a_{1},a_{2},...,a_{N}-1,1,1/w]\]
 
 \end_inset 
-
-
-\layout Standard
 
 These two functions are analytic in
 \begin_inset Formula $w$
@@ -206,9 +191,6 @@ These two functions are analytic in
 \lim_{w\rightarrow0}x_{-}(w)=\lim_{w\rightarrow0}x_{+}(w)=x\]
 
 \end_inset 
-
-
-\layout Standard
 
 Differentiation w.r.t.
  
@@ -244,9 +226,6 @@ x_{--}=[a_{1},a_{2},...,a_{N}-1,0,1]\]
 
 \end_inset 
 
-
-\layout Standard
-
 This expansion invokes a symmetry on 
 \begin_inset Formula $x_{-}(w)$
 \end_inset 
@@ -256,9 +235,6 @@ This expansion invokes a symmetry on
 x_{--}(w)=[a_{1},a_{2},...,a_{N}-1,0,1,1/w]=x_{+}(w)\]
 
 \end_inset 
-
-
-\layout Standard
 
 Thus, we see that a double-expansion is either idempotent or alternating.
  To be pedantic, we can complete this with the other three expressions:
@@ -300,9 +276,6 @@ x_{-}(w) & \text{if N odd}\end{array}\right.\]
 
 \end_inset 
 
-
-\layout Standard
-
 and
 \layout Standard
 
@@ -314,9 +287,6 @@ x_{+}(w) & \text{if N odd}\end{array}\right.\]
 
 \end_inset 
 
-
-\layout Standard
-
 These two have nice order-preserving properties: if 
 \begin_inset Formula $w$
 \end_inset 
@@ -327,9 +297,6 @@ x_{o}(w)<x_{e}(w)\]
 
 \end_inset 
 
-
-\layout Standard
-
 and, for negative real 
 \begin_inset Formula $w$
 \end_inset 
@@ -339,9 +306,6 @@ and, for negative real
 x_{o}(w)>x_{e}(w)\]
 
 \end_inset 
-
-
-\layout Standard
 
 These two functions also have idempotent or parity-swapping identities:
  
@@ -365,9 +329,6 @@ gap
 \Gamma_{x}(w)=x_{e}(w)-x_{o}(w)\]
 
 \end_inset 
-
-
-\layout Standard
 
 This gap function is, of course, highly discontinuous.
  It is not hard to discover from numeric experiments that for a rational
@@ -526,6 +487,148 @@ The analogous picture for a denominator consisting of powers of 3 is less
 \end_inset 
 
 
+\layout Standard
+
+There are more interesting things to be seen, but first we should provide
+ a simpler expression for 
+\begin_inset Formula $T_{p/q}(w)$
+\end_inset 
+
+ at 
+\begin_inset Formula $w=0$
+\end_inset 
+
+.
+ Recall that for any fixed rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+, that 
+\begin_inset Formula $T_{p/q}(w)$
+\end_inset 
+
+ is just a ratio of two polynomials in 
+\begin_inset Formula $w$
+\end_inset 
+
+ with integer coefficients.
+ The degree of the polynomials is 'reasonably low', essentially equal to
+ the number of terms in the continued fraction for 
+\begin_inset Formula $p/q$
+\end_inset 
+
+.
+ For any given, fixed 
+\begin_inset Formula $p/q$
+\end_inset 
+
+, there exists an 
+\begin_inset Formula $\epsilon>0$
+\end_inset 
+
+ such that there are no poles in 
+\begin_inset Formula $T_{p/q}(w)$
+\end_inset 
+
+ in the disk of radius 
+\begin_inset Formula $\epsilon$
+\end_inset 
+
+ around 
+\begin_inset Formula $w=0$
+\end_inset 
+
+ (Homework: prove this), and thus its analytic on this disk.
+ This justifies an expansion in 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ For the continued fraction 
+\begin_inset Formula $x_{+}(w)=[a_{1},a_{2},...a_{N},1/w]$
+\end_inset 
+
+ we write the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th partial convergent as 
+\begin_inset Formula $r_{k}(w)=s_{k}+wt_{k}+w^{2}u_{k}+w^{3}v_{k}+...$
+\end_inset 
+
+ which obeys the recurrance relation 
+\begin_inset Formula $r_{k-1}(w)=a_{k-1}+1/r_{k}(w)$
+\end_inset 
+
+ .
+ Substituting, we get the explicit recurrance relations for each term:
+\begin_inset Formula \[
+s_{k-1}=a_{k-1}+1/s_{k}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+t_{k-1}=\frac{-t_{k}}{s_{k}^{2}}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+u_{k-1}=\frac{-u_{k}}{s_{k}^{2}}+\frac{t_{k}^{2}}{s_{k}^{3}}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+v_{k-1}=\frac{-v_{k}}{s_{k}^{2}}+2\frac{t_{k}u_{k}}{s_{k}^{3}}+\frac{-t_{k}^{3}}{s_{k}^{4}}\]
+
+\end_inset 
+
+ which are numerically quite tractable.
+ The boundary conditions are given by 
+\begin_inset Formula $r_{+,N}(w)=a_{N}+w$
+\end_inset 
+
+ for the 
+\begin_inset Formula $x_{+}$
+\end_inset 
+
+expansion, and 
+\begin_inset Formula $r_{-,N}(w)=a_{N}-w+w^{2}-w^{3}$
+\end_inset 
+
+ for the 
+\begin_inset Formula $x_{-}$
+\end_inset 
+
+expansion.
+ We add 
+\begin_inset Formula $a_{0}\equiv0$
+\end_inset 
+
+ to terminate at the other end.
+ Defining even and odd variants as before, we equate
+\begin_inset Formula \[
+\Gamma_{p/q}(w)=w\left(t_{0}^{e}-t_{0}^{o}\right)+w^{2}\left(u_{0}^{e}-u_{0}^{o}\right)+w^{3}\left(v_{0}^{e}-v_{0}^{o}\right)\]
+
+\end_inset 
+
+ Its becomes straightforward to numerically verify that 
+\begin_inset Formula $t_{0}^{e}-t_{0}^{o}=2/q^{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $u_{0}^{e}-u_{0}^{o}=-1/q^{2}$
+\end_inset 
+
+ as we've noted before (Homework: provide a general proof).
+ Far, far more curious is 
+\begin_inset Formula $T_{p/q}(0)=2q^{2}\left(v_{0}^{e}-v_{0}^{o}\right)-1$
+\end_inset 
+
+, of which we drew some pictures above.
+ The pictures blow will provide some more surprises.
 \layout Bibliography
 \bibitem [asdf]{key-1}
 
