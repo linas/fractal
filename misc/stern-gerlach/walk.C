@@ -2,7 +2,7 @@
 /*
  * walk.C
  *
- * random walk in theta
+ * Random walk in theta with 'spherical' boundary conditions.
  */
 
 
@@ -17,7 +17,7 @@ main ()
    int i, j;
    int bin[NBIN];
 
-   double gb0 = 1.0e-4;
+   double gb0 = 1.0e-3;
 
    for (i=0; i<NBIN; i++)
    {
