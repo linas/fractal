@@ -258,24 +258,65 @@ double
 ContinuedFraction::ToZReal (double z)
 {
    int i;
-   double tmp;
+   double splus, sminus;
    double znum;
 
    znum = (double) intpart;
    if (nterms == 0) return (znum);
 
    /* now, work backwards and reconstruct the fraction. */
-   tmp = z / ((double) tinued_frac[nterms-1]);
+   splus  = z / ((double) tinued_frac[nterms-1]);
+   sminus = z / ((double) (tinued_frac[nterms-1] -1) + z);
    for (i=nterms-2; i>=0; i--) {
-      tmp += (double) tinued_frac[i];
+      splus  += (double) tinued_frac[i];
+      sminus += (double) tinued_frac[i];
       /* not normally needed, will this help mystery crash? */
-      if (tmp == 0.0) { tmp = 1.0e30; } else { tmp = z / tmp; }
+      if (0.0 == splus)  { splus  = 1.0e30; } else { splus = z / splus; }
+      if (0.0 == sminus) { sminus = 1.0e30; } else { sminus  = z / sminus; }
    }
 
    /* get rid of last z, to normalize */
-   tmp /= z;
+   splus /= z;
+   sminus /= z;
 
-   znum += tmp;
+   // znum += 0.5 *(splus + sminus);
+   znum += splus;
+   return (znum);
+
+}
+
+/* ------------------------------------------------------------ */
+/* Converts continued fraction into real number, 
+ * but with a numerator of z instead of 1.
+ */
+
+Complex
+ContinuedFraction::cToZReal (Complex z)
+{
+   int i;
+   Complex splus, sminus;
+   Complex znum;
+
+   znum = (double) intpart;
+   if (nterms == 0) return (znum);
+
+   /* now, work backwards and reconstruct the fraction. */
+   splus  = z / ((double) tinued_frac[nterms-1]);
+   sminus = z / ((double) (tinued_frac[nterms-1] -1) + z);
+   for (i=nterms-2; i>=0; i--) {
+      splus  += (double) tinued_frac[i];
+      sminus += (double) tinued_frac[i];
+      /* not normally needed, will this help mystery crash? */
+      if (0.0 == splus)  { splus  = 1.0e30; } else { splus = z / splus; }
+      if (0.0 == sminus) { sminus = 1.0e30; } else { sminus  = z / sminus; }
+   }
+
+   /* get rid of last z, to normalize */
+   splus /= z;
+   sminus /= z;
+
+   // znum += 0.5 *(splus + sminus);
+   znum += splus;
    return (znum);
 
 }

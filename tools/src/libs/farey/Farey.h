@@ -9,6 +9,9 @@
  * Added Farey July 1995 -- linas
  */
 
+#include <complex.h>
+#define Complex double __complex__
+
 class ContinuedFraction
 {
    public:
@@ -24,6 +27,8 @@ class ContinuedFraction
       double ToInvZReal (double z);
       double ToEReal (double t);
       double ToEFraction (double t);
+
+      Complex cToZReal (Complex z);
 
       double ToCosReal (double omega);
       double ToSincReal (double omega);
