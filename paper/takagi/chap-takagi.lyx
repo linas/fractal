@@ -26,7 +26,7 @@
 
 \layout Title
 
-Rationals, Fractals and Continued Fractions
+Symmetries of Period-Doubling Maps
 \layout Author
 
 Linas Vepstas <linas@linas.org>
@@ -35,17 +35,39 @@ Linas Vepstas <linas@linas.org>
 12 October 2004
 \layout Abstract
 
-Fractals and Continued Fractions seem to be deeply related in many ways.
- Farey numbers appear naturally in both.
- The shape of the Devil's Staircas
+The concept of self-similarity is central to the notion of a fractal, but
+ the actual symmetry group that generates that self-similarity is oddly
+ never named, and fractals are never studied according to thier symmetries.
+ Yet, in other branches of mathematics, it is well understood that symmetry
+ groups provide a powerful mechanism for studying systems.
+ 
+\layout Abstract
+
+In this paper, we identify the symmetry group of period-doubling maps as
+ being the Modular Group 
+\begin_inset Formula $\Gamma$
+\end_inset 
+
+.
+ To anchor this assertion, we work out an explicit, exactly-solvable fractal
+ curve, the Takagi or Blanncmange Curve, as transforming under the three-dimensi
+onal representation of the Modular Group.
+\layout Abstract
+
+This paper is part of a set of chapters that explore the relationship between
+ the real numbers, the modular group, and fractals.
 \layout Section
 
 Symmetries of Period-Doubling Maps
 \layout Standard
 
 Intro To be written.
- First we need to explain how to count with Farey numbers on the M-Set.
- Here is a picture stolen from Robert L.
+ 
+\layout Standard
+
+It has been widely noticed that Farey Numbers appear naturally in the Mandelbrot
+ Set.
+ For example, here is a picture stolen from Robert L.
  Devaney's website 
 \begin_inset LatexCommand \url[The Fractal Geometry of the Mandelbrot Set ]{}
 
@@ -63,53 +85,64 @@ Intro To be written.
 
 \layout Standard
 
-This mapping and method of counting on the buds is well-known in the literature
- and is explored in many ways.
+This figure shows how to count the buds on the Mandelbrot set by assigning
+ Farey Fractions to them.
+ It is also widely known that Farey Numbers are deeply related to Continued
+ Fractions: for example, Alexander Bogomolny's 
+\begin_inset LatexCommand \url[Stern Brocot Trees]{http://www.cut-the-knot.org/blue/Stern.shtml}
+
+\end_inset 
+
+ web page at Cut-the-Knot details this relationship.
+ It is well known that the natural way to compute with Continued Fractions
+ are to use the matrices 
+\begin_inset Formula \[
+L=\left(\begin{array}{cc}
+1 & 1\\
+0 & 1\end{array}\right)\;\;\textrm{ and }\;\; R=\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)\]
+
+\end_inset 
+
+ and it is known that these matrices generate the Modular Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ Yet I am personally not aware of any studies that make this connection,
+ and seriously explore fractal symmetries as an expression of the Modular
+ Group.
+ It is a deep mystery to me to try to understand why books on modular forms
+ never mention fractals, and books on fractals never mention modular forms.
+ 
 \layout Standard
 
-Next we note that enumerating the group elements of the modular group as
+In a seperate chapter, we show that an interesting subset of the Modular
+ Group acts as a map of intervals to intervals, and can be enumerated as
  
 \begin_inset Formula $\mathbb{Q\times\mathbb{N}}$
 \end_inset 
 
- plays directly into the celebrated self-similarity of the Mandelbrot set.
-\layout Standard
+ (that is, a subset of the Modular Group has a set-theoretic representation).
+ In this chapter, we apply these ideas to a fractal curve studied by Weierstrass
+ in 1872
+\begin_inset LatexCommand \cite{key-5}
 
-What does this mean for the symmetries of the Mandelbrot set? it means that
- the modular group maps buds to buds.
- Note, however, that the 
-\begin_inset Formula $\mathbb{Q\times\mathbb{N}}$
 \end_inset 
 
- parameterization of the modular group means that one can map one bud onto
- any another, but that the mapping has to be onto the whole bud, and not
- just a portion of it.
- Put another way, it is a mapping of intervals to intervals.
- However, we can't just map any-old-interval anywhere we want.
- We can map an interval to any starting point that we wish (this is the
- 
-\begin_inset Formula $\mathbb{Q}$
-\end_inset 
-
- part of the symmetry, but after specifying the starting point, we have
- only a discrete set of intrvals we can map to: this is the 
-\begin_inset Formula $\mathbb{N}$
-\end_inset 
-
- part of the enumeration.
- The buds appear discretely on the boundaries of the main cardiod.
-\layout Standard
-
-Let us start with something simpler, with an example of an exactly-solvable
- fractal mapping.
+, and further developed by Tagaki in 1903, and by G.H.
+ Hardy in 1916 and by others, now bearing the name Takagi Curve or Blancmange
+ Curve.
+ We show that this curve, and its assorted and related generalizations,
+ transform under a three-dimensional representation of the Modular Group.
 \layout Subsection
 
 The Takagi-Landsberg Curve
 \layout Standard
 
-The Takagi-Landsberg curve was first explored by Teiji Tagaki, circa 1903
- as an example of a continuous-everywhere, differentiable-nowhere curve
- 
+The Takagi-Landsberg curve was explored by Teiji Tagaki, circa 1903 as an
+ example of a continuous-everywhere, differentiable-nowhere curve 
 \begin_inset LatexCommand \cite{key-3}
 
 \end_inset 
@@ -118,10 +151,10 @@ The Takagi-Landsberg curve was first explored by Teiji Tagaki, circa 1903
  It is constructed by positive mid-point displacements of straight line
  segments, that is, by 'fractally' bumping a line segment upwards by an
  increasingly smaller displacement (xxxx we should diagram the standard
- contruction here).
+ Koch-Curve-like contruction here).
  Equivalently, one assigns geometrically smaller displacements to each level
  of the dyadic tree; that is, one picks some 
-\begin_inset Formula $w<1$
+\begin_inset Formula $0\leq w<1$
 \end_inset 
 
 , and assigns to each dyadic number 
@@ -1331,4 +1364,13 @@ Georges de Rham, On Some Curves Defined by Functional Equations (1957),
  Gerald A.
  Edgar, (Addison-Wesley, 1993) pp.
  285-298
+\layout Bibliography
+\bibitem [We72]{key-5}
+
+Karl Weierstrass, On Continuous Functions of a Real Argument that do not
+ have a Well-defined Differential Quotient (1872), reprinted in Classics
+ on Fractals, ed.
+ Gerald A.
+ Edgar, (Addison-Wesley, 1993) pp.
+ 2-9.
 \the_end
