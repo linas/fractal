@@ -8,7 +8,7 @@ LIBS =		/usr/lib
 
 XLIB =		$(LIBS)/libX11.a 
 
-CC = cc -O -I$(INCLUDES)
+CC = cc -Wall -O2 -I$(INCLUDES)
 
 EXES = stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
@@ -26,7 +26,7 @@ clean:
 
 ################## Dependencies and compile/link #########
 #
-manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.c  util.o
+inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.c  util.o
 	$(CC) -o brat brat.c util.o -lm -lc
 	ln -f brat manvert
 	ln -f brat stalk
@@ -45,6 +45,7 @@ manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age pha
 	ln -f brat circin
 	ln -f brat circmov
 	ln -f brat stalkmov
+	ln -f brat inf
 
 card: card.c  util.o
 	$(CC) -o card card.c util.o -lm
