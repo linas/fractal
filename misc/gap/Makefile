@@ -22,7 +22,7 @@ realclean:	clean
 	$(CC) -c -O2 $<
 
 .o:
-	$(CC) -o $* $< $(LIB)/Farey.o $(LIB)/FareyTree.o -lm -lstdc++
+	$(CC) -o $* $< $(LIB)/Farey.o $(LIB)/FareyTree.o -lgmpxx -lgmp -lm -lstdc++ 
 
 
 entropy.o:  entropy.C $(LIB)/Farey.o $(INC)/Farey.h
