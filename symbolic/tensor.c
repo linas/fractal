@@ -57,7 +57,20 @@ PrintPart (Part *p)
 void
 PrintTerm (Term *t)
 {
-	printf ("+ %d ", t->coeff);
+	if (0 == t->coeff) return;
+
+	if (1 == t->coeff && NULL != t->parts)
+	{
+		printf ("+ ");
+	}
+	else if (0 > t->coeff)
+	{
+		printf ("- %d ", - t->coeff);
+	}
+	else 
+	{
+		printf ("+ %d ", t->coeff);
+	}
 	
 	GList *pn;
 	for (pn = t->parts; pn; pn=pn->next)
@@ -90,14 +103,78 @@ Term *Mult_T_T (Term *t1, Term *t2)
 	Term * t3 = g_new0(Term,1);
 	
 	t3->coeff = t1->coeff * t2->coeff;
-	t3->parts = g_list_copy (t1->parts);
-	GList *p = g_list_copy (t2->parts);
-	t3->parts = g_list_append (t3->parts, p);
+	t3->parts = NULL;
+
+	GList *pn;
+	for (pn = t1->parts; pn; pn=pn->next)
+	{
+		Part *p = pn->data;
+		t3->parts = g_list_append (t3->parts, p);
+	}
+	for (pn = t2->parts; pn; pn=pn->next)
+	{
+		Part *p = pn->data;
+		t3->parts = g_list_append (t3->parts, p);
+	}
 
 	return t3;
 }
 
+void Mult_T_I (Term *t, int c)
+{
+	t->coeff *= c;
+}
+
 /* ======================================================== */
+
+Part * 
+Copy_Part (Part *p)
+{
+	Part *p3 = g_new0(Part,1);
+	p3->dx = p->dx;
+	p3->dy = p->dy;
+	return p3;
+}
+
+Term * Copy_Term (Term *t)
+{
+	Term *t3 = g_new0(Term, 1);
+	GList *pn;
+	for (pn = t->parts; pn; pn=pn->next)
+	{
+		Part *p = pn->data;
+		t3->parts = g_list_append (t3->parts, Copy_Part(p));
+	}
+
+	t3->coeff = t->coeff;
+	return t3;
+}
+
+/* ======================================================== */
+
+Expr *Add_E_T (Expr *e, Term *t)
+{
+	Expr *e3 = g_new0(Expr, 1);
+
+	GList *en;
+	for (en = e->terms; en; en=en->next)
+	{
+		Term *tr = en->data;
+		e3->terms = g_list_append (e3->terms, Copy_Term(tr));
+	}
+	
+	e3->terms = g_list_append (e3->terms, Copy_Term(t));
+	return e3;
+}
+
+/* ======================================================== */
+
+Term *tger (int x)
+{
+	Term *t = g_new (Term,1);
+	t->coeff = x;
+	return t;
+}
 
 Term *dxf (void)
 {
@@ -129,10 +206,20 @@ Term *dyf (void)
 
 Expr * setup (void)
 {
+	Term *t;
 	Expr *e = g_new0 (Expr,1);
 
-	Term * t = dxf();
-	e->terms = g_list_append (e->terms, t);
+	t = tger(1);
+
+	e = Add_E_T (e, t);
+	
+	t = dxf();
+	t = Mult_T_T (t, dxf());
+	e = Add_E_T (e, t);
+
+	t = dyf();
+	t = Mult_T_T (t, dyf());
+	e = Add_E_T (e, t);
 
 	return e;
 }
