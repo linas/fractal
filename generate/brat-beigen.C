@@ -2,16 +2,14 @@
  * brat-gap-hair.C
  *
  * FUNCTION:
- * The bernoulli-map eigenfunctions
+ * Graph the bernoulli-map continuous-spectrum fractal eigenfunctions
  *
  * Linas Vepstas October 2004
  */
 
-#include <malloc.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "brat.h"
 

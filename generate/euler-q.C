@@ -11,7 +11,6 @@
  * more stuff -- October 2004
  */
 
-#include <malloc.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,7 +29,10 @@ static double euler_prod (double re_q, double im_q)
 	double qpr = re_q;
 	double qpi = im_q;
 
-	for (i=0; i<1000; i++)
+	double qpmod = qpr*qpr+qpi*qpi;
+	if (1.0 <= qpmod) return 0.0;
+
+	for (i=0; i<100100; i++)
 	{
 		double tmp;
 
@@ -44,11 +46,12 @@ static double euler_prod (double re_q, double im_q)
 		qpi = qpr*im_q + qpi * re_q;
 		qpr = tmp;
 
-		if ((qpr*qpr +qpi*qpi) < 1.0e-40) break;
+		qpmod = qpr*qpr + qpi*qpi;
+		if (qpmod < 1.0e-30) break;
 	}
-	if (900 > i)
+	if (90100 < i)
 	{
-		printf ("bad news duude overflow\n");
+		printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
 	}
 
 	return sqrt (rep*rep+imp*imp);
@@ -59,14 +62,18 @@ static double euler_prod (double re_q, double im_q)
  * Euler q-series (dedekind eta function) in a simple way 
  */
 
-void euler_q_series (
+
+void 
+MakeHisto (
    float  	*glob,
    int 		sizex,
    int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
-   int		itermax)
+   double	height,
+   int		itermax,
+   double 	renorm)
 {
    int		i,j, globlen;
    double	re_start, im_start, delta;
@@ -88,7 +95,7 @@ void euler_q_series (
 		{
 
 			double phi = euler_prod (re_position, im_position);
-         glob [i*sizex +j] = im;
+         glob [i*sizex +j] = phi;
 
          re_position += delta;
       }

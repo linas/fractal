@@ -136,7 +136,12 @@ PATH=$PATH:.
 # clamp junk ja 1.0e-20 1.0e20
 # takelog ja jb
 # renorm jb j 0.03 34 
-takelog g g2
-renorm g2 j 0.18 8.1
-cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
+# this one is for the eigenvalues of the bernoulli map
+# takelog g g2
+# renorm g2 j 0.18 8.1
+
+renorm j j2 0.26 0.0
+cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpg
 
