@@ -32,6 +32,7 @@ class SinaiStats
 {
    public:
       SinaiStats (int, int);
+      void Init (void);
       void Trace (void);
       void TraceToroid (void);
 		double MeanFreePath (void);
@@ -75,6 +76,18 @@ SinaiStats::SinaiStats (int px, int py)
          sr[nx*j+i].last_wall = 4;
 
       }
+   }
+}
+
+/* ==================================== */
+
+void
+SinaiStats::Init(void)
+{
+   int i;
+   for (i=0; i<nx*ny; i++) 
+   {
+      sr[i].Init();
    }
 }
 
@@ -126,7 +139,7 @@ SinaiStats::MeanFreePath(void)
 
 main (int argc, char * argv[])
 {
-   SinaiStats v (400,400);
+   SinaiStats v (100,100);
 
 
    v.radius = 0.6;
@@ -145,12 +158,20 @@ main (int argc, char * argv[])
    v.max_manhattan = 123456789;
    v.max_sphere_hits = maxhits;
 
-   // v.Trace();
-   v.TraceToroid();
+  	printf ("#\n# mean free path vs. sphere radius\n");
+  	printf ("#\n# radius  pathlen\n");
+  	printf ("# --------------\n");
+   // for (radius=0.05; radius <0.91; radius +=0.05)
+   for (radius=0.9; radius > 0.04; radius -=0.05)
+	{
+		v.Init();
+   	v.radius = radius;
+   	// v.Trace();
+   	v.TraceToroid();
 
-   double fp = v.MeanFreePath ();
-
-   printf ("free path=%f\n", fp);
+   	double fp = v.MeanFreePath ();
+   	printf ("%f\t%f\n", radius, fp);
+	}
 }
 
 /* ===================== end of file ====================== */
