@@ -160,8 +160,9 @@ main ()
         // compute new sine and cosine of theta
         if (0.0 > theta)
         {
-           theta = - theta;
-           phi -= M_PI;
+           theta = -theta;
+           if (0.0 < d_phi) { phi -= M_PI; }
+           else { phi += M_PI; }
            cos_theta = cos(theta);
            sin_theta = sin(theta);
            sin_phi = sin(phi);
@@ -171,7 +172,8 @@ main ()
         if (M_PI < theta)
         {
            theta = 2.0 * M_PI - theta;
-           phi -= M_PI;
+           if (0.0 < d_phi) { phi -= M_PI; }
+           else { phi += M_PI; }
            cos_theta = cos(theta);
            sin_theta = sin(theta);
            sin_phi = sin(phi);
