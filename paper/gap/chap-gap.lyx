@@ -177,10 +177,21 @@ These two functions are analytic in
 \begin_inset Formula $a,b,c,d$
 \end_inset 
 
- (we will present a construction for obtaining these integers in a later
- section xxx todo).
- Thus, general analytic manipulations are perfectly well-defined on these
- functions.
+.
+ These integers can be readily computed due to an interesting relationship
+ between the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ and continued fractions.
+ We give explicit formulas in a different chapter; see also 
+\begin_inset LatexCommand \cite{CTN}
+
+\end_inset 
+
+.
+ Because of this very simple form, general analytic manipulations are perfectly
+ well-defined on these functions.
  Clearly, 
 \layout Standard
 
@@ -198,9 +209,20 @@ Differentiation w.r.t.
  provides a handy tool for constructing various interesting things and proving
  various limits.
  We give an exact expression for these derivatives below.
- Although we've introduced w by appending it to the last term of a rational
- expansion, we could, if we wanted, introduce w into the N'th term of an
- irrational expansion.
+ Although we've introduced 
+\begin_inset Formula $w$
+\end_inset 
+
+ by appending it to the last term of a rational expansion, we could, if
+ we wanted, introduce 
+\begin_inset Formula $w$
+\end_inset 
+
+ into the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th term of an irrational expansion.
  Most of the statements we make below are for rationals.
  This is in part because treating the irrationals is a bit harder and confusing,
  both in these formulas, and in their implementation as algorithms.
@@ -269,8 +291,8 @@ If one needs to take differences, e.g.
  as follows: 
 \begin_inset Formula \[
 x_{e}(w)=\left\{ \begin{array}{cc}
-x_{+}(w) & if\; N\; even\\
-x_{-}(w) & if\; N\; odd\end{array}\right.\]
+x_{+}(w) & \textrm{\;\; if N even }\\
+x_{-}(w) & \textrm{\;\; if N odd}\end{array}\right.\]
 
 \end_inset 
 
@@ -280,8 +302,8 @@ and
 
 \begin_inset Formula \[
 x_{o}(w)=\left\{ \begin{array}{cc}
-x_{-}(w) & if\; N\; even\\
-x_{+}(w) & if\; N\; odd\end{array}\right.\]
+x_{-}(w) & \;\;\textrm{ if N even}\\
+x_{+}(w) & \;\;\textrm{ if N odd }\end{array}\right.\]
 
 \end_inset 
 
@@ -308,22 +330,13 @@ x_{o}(w)>x_{e}(w)\]
 These two functions also have idempotent or parity-swapping identities:
  
 \begin_inset Formula \[
-x_{e+}(w)=x_{e}(w)\;\;\; and\;\;\; x_{e-}(w)=x_{o}(w)\;\;\; and\;\;\; x_{o+}(w)=x_{o}(w)\;\;\; and\; x_{o-}(w)=x_{e}(w)\]
-
-\end_inset 
-
- 
-\begin_inset Formula \[
-x_{ee}(w)=x_{e}(w)\;\;\; and\;\;\; x_{eo}(w)=x_{o}(w)\;\;\; and\;\;\; x_{oe}(w)=x_{e}(w)\;\;\; and\;\;\; x_{oo}(w)=x_{o}(w)\]
-
-\end_inset 
-
-
-\layout Standard
-
-
-\begin_inset Formula \[
-x_{+e}(w)=x_{e}(w)\;\;\; and\;\;\; x_{+o}(w)=x_{o}(w)\;\;\; and\;\;\; x_{-e}(w)=x_{e}(w)\;\;\; and\;\;\; x_{-o}(w)=x_{o}(w)\]
+\begin{array}{ccc}
+x_{e+}(w)=x_{e}(w) & \;\;\;\;\;\; & x_{e-}(w)=x_{o}(w)\\
+x_{o+}(w)=x_{o}(w) & \;\;\;\;\;\; & x_{o-}(w)=x_{e}(w)\\
+x_{ee}(w)=x_{e}(w) &  & x_{eo}(w)=x_{o}(w)\\
+x_{oe}(w)=x_{e}(w) &  & x_{oo}(w)=x_{o}(w)\\
+x_{+e}(w)=x_{e}(w) &  & x_{+o}(w)=x_{o}(w)\\
+x_{-e}(w)=x_{e}(w) &  & x_{-o}(w)=x_{o}(w)\end{array}\]
 
 \end_inset 
 
@@ -399,7 +412,7 @@ we have
 \end_inset 
 
 .
- A derivation of these results are given in a later section.
+ A derivation of these results are given in the next  section.
  
 \layout Standard
 
@@ -1369,5 +1382,15 @@ Note that
 \end_inset 
 
 .
+ 
+\layout Bibliography
+\bibitem [Cut-the-Knot-UL ]{CTN}
+
+Alexander Bogomolny's 
+\begin_inset LatexCommand \htmlurl[Cut-the-Knot: Continued Fractinos on the Stern-Brocot Tree]{http://www.cut-the-knot.org/blue/ContinuedFractions.shtml}
+
+\end_inset 
+
+ Cut-the-Knot provides a good elementary introduction to continued fractions.
  
 \the_end
