@@ -53,6 +53,8 @@ class lagWordTable {
       int num_entries;
       int num_processed;
       int num_collisions;
+
+      int total_string_bytes;
 };
    
 #endif // __LAG_WORD_TABLE_H__
