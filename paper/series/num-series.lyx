@@ -43,15 +43,50 @@ Number-Theortic Series
 \layout Standard
 
 Number-theortic series can arise in during the study of fractals.
- This is a collection of miscellaneous things.
+ This paper reviews Maclaurin series of the form 
+\begin_inset Formula $\sum_{n=1}^{\infty}a_{n}x^{n}$
+\end_inset 
+
+ where the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ are given by various well-known number number-theortic functions, such
+ as Euler's Totient 
+\begin_inset Formula $\phi(n)$
+\end_inset 
+
+, the Moebius funtion 
+\begin_inset Formula $\mu(n)$
+\end_inset 
+
+, divisor functions and the like.
+ No earth-shattering results are presented; rather, this is a survey intented
+ to unveil the general shape of such sums.
+ The results are for the most part numeric and consist primarily of graphs.
+ 
+\layout Standard
+
+Note that a general series of the form 
+\begin_inset Formula $M(x)=\sum_{n=1}^{\infty}a_{n}x^{n}$
+\end_inset 
+
+ with a radius of convergence of one can in general be converted to a Dirichlet
+ series through integration: 
+\begin_inset Formula \begin{equation}
+\sum_{n=1}^{\infty}a_{n}n^{-s}=\frac{1}{\Gamma(s)}\int_{0}^{\infty}t^{s-1}M(e^{-t})dt\label{eq:}\end{equation}
+
+\end_inset 
+
+ and conversly ...
 \layout Subsection
 
 Euler's Totient Series
 \layout Standard
 
 Consider the Maclaurin series
-\begin_inset Formula \[
-M_{\Phi}(x)=(1-x)^{2}\sum_{n=1}^{\infty}x^{n}\phi(n)\]
+\begin_inset Formula \begin{equation}
+M_{\Phi}(x)=(1-x)^{2}\sum_{n=1}^{\infty}x^{n-1}\phi(n)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -72,12 +107,47 @@ M_{\phi}(1)=0.60792710185(1)\]
 \end_inset 
 
 where the value in parenthesis is the uncertainty in the last digit.
- Other special values include 
+ Other special values (all of which are easy to calculate) include 
 \begin_inset Formula \[
-4M_{\phi}(1/2)=\sum_{n=1}^{\infty}\phi(n)/2^{n}=\]
+2M_{\phi}(1/2)=2\sum_{n=1}^{\infty}\phi(n)/2^{n}=1.7352616039700447\]
 
 \end_inset 
 
+ 
+\begin_inset Formula \[
+3\sum_{n=1}^{\infty}\phi(n)/3^{n}=0.698640937680928825\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+4\sum_{n=1}^{\infty}\phi(n)/4^{n}=0.425655257611738727\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+5\sum_{n=1}^{\infty}\phi(n)/5^{n}=0.303493769678081032\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+M_{\phi}(2/3)=0.527545959546096966\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+M_{\phi}(2/5)=0.363055654428664446\]
+
+\end_inset 
+
+ It would be interesting to know what the analytic structure of 
+\begin_inset Formula $M_{phi}$
+\end_inset 
+
+ is.
  
 \begin_inset Float figure
 wide false
@@ -101,8 +171,102 @@ This figure shows a graph of
 \begin_inset Formula $M_{\phi}(x)$
 \end_inset 
 
+ and, for comparison purposes, a graph of 
+\begin_inset Formula $M_{\phi}(1)\sin\pi x/2$
+\end_inset 
+
+.
+ The two are clearly quite close to one-another.
+\end_inset 
+
+ 
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Totient Series Ratio
+\layout Standard
+
+
+\begin_inset Graphics
+	filename totient-ratio.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a graph of 
+\begin_inset Formula $M_{\phi}(x)/\sin(\pi x/2)-1$
+\end_inset 
+
+.
+ 
+\end_inset 
+
+
+\layout Subsection
+
+Divisor Series
+\layout Standard
+
+Consider the series 
+\begin_inset Formula \begin{equation}
+M_{d}(x)=(1-x)^{2}\sum_{n=1}^{\infty}x^{n}d(n)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $d(n)=\sigma_{0}(n)$
+\end_inset 
+
+ is the number of divisors of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ A graph of this function appears below.
+ Special values include 
+\begin_inset Formula \begin{eqnarray*}
+4M_{d}(1/2) & = & \sum_{n=1}^{\infty}d(n)/2^{n}\\
+ & = & \sum_{n=1}^{\infty}\frac{1}{2^{n}-1}\\
+ & =\end{eqnarray*}
+
+\end_inset 
+
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Divisor Series
+\layout Standard
+
+
+\begin_inset Graphics
+	filename divisor-series.png
+
+\end_inset 
+
+
+\layout Standard
+
+A graph of the divisor series 
+\begin_inset Formula $M_{d}(x)$
+\end_inset 
+
 .
 \end_inset 
 
 
+\layout Standard
+
+x
 \the_end
