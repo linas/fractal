@@ -256,7 +256,7 @@ void mandelbrot_wind (
 
             // if (phi < 2.0*phi_last) wind ++;
             // if (phi < phi_last) wind ++;
-            if (phi < phi_last) wind += (loop-1);
+            if (phi < phi_last) wind += 1+wind;
             phi_last = phi;
 
             modulus = (re*re + im*im);
