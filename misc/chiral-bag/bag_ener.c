@@ -2,6 +2,7 @@
  * FILE: bag_ener.c
  * FUNCTION: compute energy levels of firee quarks in chiral bag
  * HISTORY: Created by Linas Vepstas <linas@linas.org> 1983
+ *   July 2003 ported from FORTRAN to C
  */
 
 #include <math.h>
@@ -9,6 +10,83 @@
 #include "bessel.h"
 #include "find_zero.h"
 
+/* ============================================================= */
+/* Implicit equations defining the quark energy levels 
+ * energy levels occur at the zero's of these eqn's.
+ * So we need to search for zero's.
+ */
+
+static double efn1_ptyk;
+static double efn1_co;
+static double efn1_si;
+static int efn1_kay;
+
+static void efninit (double theta, int ispect, int kay, double emax, int kpty)
+{
+	efn1_ptyk = kpty;
+	efn_kay = kay;
+	efn1_co = cos (theta);
+	efn1_si = sin (theta);
+}
+
+/* ============================================================= */
+
+static double efn (double omega)
+{
+	double bkm1, bk, bkp1;
+	double val, bks;
+
+	if (0 < efn1_kay)
+	{
+		quickbessel (kay, omega, &bkm1, &bk, &bkp1);
+		bks = bk*bk;
+		val = efn1_co * (bkp1 * bkm1 - bks) 
+			+ efn1_ptyk * bk * (bkp1 - bkm1)
+			+ efn1_si * bks / efn1_omega;
+	}
+	else
+	{
+		double sn, cs, b0, b1;
+		sn = sin (efn1_omega);
+		cs = cos (efn1_omega);
+		b0 = sn/efn1_omega
+		b1 = (b0 - cs) / efn1_omega
+		val = efn1_co*b1-(efn1_ptyk-efn1_si)*b0;
+	}
+	return val;
+}
+
+/* ============================================================= */
+
+static double yefn (double omega)
+{
+	double bkm1, bk, bkp1;
+	double ykm1, yk, ykp1;
+	double val, bks;
+
+	if (0 < efn1_kay)
+	{
+		quickbessneu (kay, omega, &bkm1, &bk, &bkp1, &ykm1, &yk, &ykp1);
+
+		yks = yk*yk;
+		val = efn1_co * (ykp1 * ykm1-yks) 
+		     + efn1_ptyk * yk * (ykp1-ykm1)
+		     + efn1_si * yks / efn1_omega;
+	}
+	else
+	{
+		double sn, cs, y0, y1;
+		sn = sin (efn1_omega);
+		cs = cos (efn1_omega);
+
+		y0 = -cs/efn1_omega;
+		y1 = (y0 - sn)/efn1_omega;
+		val = enf_co*y1-(efn1_ptyk-efn1_si)*y0;
+	}
+	return val;
+}
+
+/* ============================================================= */
 /*
         SUBROUTINE ENERGY (theta, ispect, kay, emax, kpty)
 
@@ -147,75 +225,4 @@ c	       take a big step and save some cpu time.
 	return numfound;
 }
 
-/* ============================================================= */
-
-static double efn1_ptyk;
-static double efn1_co;
-static double efn1_si;
-static int efn1_kay;
-
-void efninit (double theta, int ispect, int kay, double emax, int kpty)
-{
-	efn1_ptyk = kpty;
-	efn_kay = kay;
-	efn1_co = cos (theta);
-	efn1_si = sin (theta);
-}
-
-/* ============================================================= */
-
-double efn (double omega)
-{
-	double bkm1, bk, bkp1;
-	double val, bks;
-
-	if (0 < efn1_kay)
-	{
-		quickbessel (kay, omega, &bkm1, &bk, &bkp1);
-		bks = bk*bk;
-		val = efn1_co * (bkp1 * bkm1 - bks) 
-			+ efn1_ptyk * bk * (bkp1 - bkm1)
-			+ efn1_si * bks / efn1_omega;
-	}
-	else
-	{
-		double sn, cs, b0, b1;
-		sn = sin (efn1_omega);
-		cs = cos (efn1_omega);
-		b0 = sn/efn1_omega
-		b1 = (b0 - cs) / efn1_omega
-		val = efn1_co*b1-(efn1_ptyk-efn1_si)*b0;
-	}
-	return val;
-}
-
-/* ============================================================= */
-
-double yefn (double omega)
-{
-	double bkm1, bk, bkp1;
-	double ykm1, yk, ykp1;
-	double val, bks;
-
-	if (0 < efn1_kay)
-	{
-		quickbessneu (kay, omega, &bkm1, &bk, &bkp1, &ykm1, &yk, &ykp1);
-
-		yks = yk*yk;
-		val = efn1_co * (ykp1 * ykm1-yks) 
-		     + efn1_ptyk * yk * (ykp1-ykm1)
-		     + efn1_si * yks / efn1_omega;
-	}
-	else
-	{
-		double sn, cs, y0, y1;
-		sn = sin (efn1_omega);
-		cs = cos (efn1_omega);
-
-		y0 = -cs/efn1_omega;
-		y1 = (y0 - sn)/efn1_omega;
-		val = enf_co*y1-(efn1_ptyk-efn1_si)*y0;
-	}
-	return val;
-}
 /* ============================================================= */

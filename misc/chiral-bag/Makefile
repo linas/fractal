@@ -1,6 +1,6 @@
 
 
-all: bessel-test find_zero-test
+all: bessel-test find_zero-test find_eig
 
 bessel-test:	bessel-test.o bessel.o
 	cc -o $@ $^ -lm
@@ -8,6 +8,10 @@ bessel-test:	bessel-test.o bessel.o
 
 find_zero-test:	find_zero-test.o find_zero.o
 	cc -o $@ $^ -lm
+
+find_eig:	find_eig.o find_zero.o bessel.o
+	cc -o $@ $^ -lm
+
 
 
 .c.o:
