@@ -12,15 +12,18 @@
 
 double j_limit (double x, double r)
 {
-	double jre, jim;
+	long double jre, jim;
 
 	double qre, qim;
 	qre = r*cos (2.0*M_PI*x);
 	qim = r*sin (2.0*M_PI*x);
-	klein_j_invariant_c (qre, qim, &jre, &jim);
+	// klein_j_invariant_c (qre, qim, &jre, &jim);
+	// euler_prod_c (qre, qim, &jre, &jim);
+	// dedekind_eta_c (qre, qim, &jre, &jim);
+	gee_2_c (qre, qim, &jre, &jim);
 
 	double jabs = sqrt (jre*jre +jim*jim);
-	jabs = 1.0/jabs;
+	// jabs = 1.0/jabs;
 	return jabs;
 }
 
