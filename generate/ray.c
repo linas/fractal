@@ -23,8 +23,8 @@ ray (double *bin, int nbin)
    int ibin;
    double u,v, r;
 
-   nx = ny = 800;
-   itermax = 100000;
+   nx = ny = 1200;
+   itermax = 400000;
    escape_radius = 1e10;
 
    delta_re = 3.0/((double) nx);
@@ -119,7 +119,7 @@ main (int argc, char *argv[])
    int i, nbin;
    double phi;
 
-   nbin = 400;
+   nbin = 1200;
 
    map = (double *) malloc (nbin * sizeof(double));
 
