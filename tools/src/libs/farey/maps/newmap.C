@@ -19,12 +19,29 @@ double straight_zmap (ContinuedFraction &f, int nume, int deno, double t)
 {
    int n;
    double x,y;
+   Complex z;
 
    f.SetRatio (nume, deno);
    /* y = f.ToExpReal (t);  -- emap */
    /* y = f.ToEFarey (t);  -- fmap */
    /* y = f.ToInvZReal (t);  -- invfrac */
-   y = f.ToZReal (t); 
+
+   // palms is just plain zreal
+   // y = f.ToZReal (t); 
+
+   // explore the unit circle. set up coords so that bottom 
+   // of image is 0, top is +pi
+   t = 0.5 * (1.0-t);
+   z = polar (1.0, M_PI*t);
+   z = f.cToZReal (z); 
+   // y = z.real();
+   // y = z.imag();
+   // y = abs(z);
+   y = arg (z) / M_PI;
+   if (0.0 != t) y /= -t;
+   y = y +1.0;
+
+
    // y *= ((double) nume) / ((double) deno);
    // y *= ((double) deno) / ((double) nume);
    // y *= t + (1.0-t)*(((double) nume) / ((double) deno));
@@ -52,7 +69,7 @@ void bin_sort (ContinuedFraction &f, float *arr, int narr, double t)
 
    for (bin=0; bin<narr; bin++) arr[bin] = 0.0;
 
-#define NUM_SAMPLES (46)
+#define NUM_SAMPLES (76)
    width = NUM_SAMPLES * narr;
 
    deno = 61 * width +1;
@@ -113,7 +130,7 @@ main (int argc, char *argv[])
 
    for (i=0; i<height; i++) {
       t += delta_t;
-      printf ("horking %d of %d \n", i, height);
+      if (0 == i%10) printf ("horking %d of %d \n", i, height);
    
       bin_sort (f, pixel_row, width, t);
 

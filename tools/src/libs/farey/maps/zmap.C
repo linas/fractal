@@ -14,6 +14,27 @@
 #include "Farey.h"
 /* ------------------------------------------------------------ */
 
+float unit_zmap (ContinuedFraction &f, int nume, int deno, double t) 
+{
+   int n;
+   float y;
+   Complex u;
+
+   f.SetRatio (nume, deno);
+   t = (1.0-t);
+   u = polar (1.0, M_PI*t);
+   u = f.cToZReal (u);
+   y = (float) u.real();
+   y = (float) 0.5 *(arg(u)/M_PI +1.0);
+   y = (float) abs(u);
+   n = (int) y;
+   if (y<0.0) n--;
+   y -= (double) n;
+   return y;
+}
+
+/* ------------------------------------------------------------ */
+
 float straight_zmap (ContinuedFraction &f, int nume, int deno, double t) 
 {
    int n;
@@ -87,8 +108,9 @@ main (int argc, char *argv[])
       deno = 6899 * width +1;
       for (j=0; j<width; j++){
          nume = 6899*j; 
-         pixel_row[j] = straight_zmap (f, nume, deno, t); 
+         // pixel_row[j] = straight_zmap (f, nume, deno, t); 
          // pixel_row[j] = symmetric_zmap (f, nume, deno, t);
+         pixel_row[j] = unit_zmap (f, nume, deno, t); 
       }
       fwrite (pixel_row, sizeof(float), width, fil);
       fflush (fil);
