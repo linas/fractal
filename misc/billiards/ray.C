@@ -224,7 +224,6 @@ SinaiView::Trace(int nbounces)
          sr[i].Bounce (walls[next_wall]);
       }
 
-      abgr[i] = 100 * sr[i].distance;
    }
 }
 
@@ -245,10 +244,24 @@ SinaiView::TestPattern (void)
 void 
 SinaiView::ToPixels (void)
 {
-   unsigned int *p = pack;
-   for (int i=0; i<nx*ny; i++) {
-      *p = abgr[i] & 0xffffff;
-      ((char *) p) += 3;
+   for (int i=0; i<nx*ny; i++)
+   {
+      double red = 255.0;
+      double green = 255.0;
+      double blue = 255.0;
+
+      red *= exp (0.95 * sr[i].bounces[0]);
+      red *= exp (0.95 * sr[i].bounces[1]);
+
+      green *= exp (0.95 * sr[i].bounces[2]);
+      green *= exp (0.95 * sr[i].bounces[3]);
+
+      blue *= exp (0.95 * sr[i].bounces[4]);
+      blue *= exp (0.95 * sr[i].bounces[5]);
+      
+      abgr[i] = 0xff & ((unsigned int) red);
+      abgr[i] |= (0xff & ((unsigned int) green)) << 8;
+      abgr[i] |= (0xff & ((unsigned int) blue)) << 16;
    }
 }
 
@@ -257,6 +270,14 @@ SinaiView::ToPixels (void)
 void 
 SinaiView::WriteMTV (const char * filename)
 {
+   // first, pack the pixels byte by byte
+   unsigned int *p = pack;
+   for (int i=0; i<nx*ny; i++) {
+      *p = abgr[i] & 0xffffff;
+      ((char *) p) += 3;
+   }
+
+   // write out MTV format pixmap.
    FILE *fh = fopen (filename, "w");
    fprintf (fh, "%d %d\n", nx, ny);
    fwrite (pack, 4, 3*nx*ny/4+1, fh);
@@ -270,7 +291,7 @@ main ()
    SinaiView v (400,400);
 
 
-   v.Trace(8);
+   v.Trace(32);
    v.ToPixels();
    v.WriteMTV ("junk.mtv");
     
