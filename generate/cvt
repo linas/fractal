@@ -208,6 +208,13 @@ PATH=$PATH:.
 # renorm g j2 0.016 5
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
-cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
-cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+#renorm for the j-invarient
+# takelog j g
+# renorm g j2 0.016 14
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
+renorm j j2 0.1 0
+cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+# cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
+# cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
