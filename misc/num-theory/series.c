@@ -74,31 +74,87 @@ long double divisor_series (long double x)
 	return acc;
 }
 
+long double erdos_series (long double x)
+{
+	long double acc = 0.0;
+
+	long double xp = x;
+	while (1)
+	{
+		// long double term = xp / (1.0L-xp);
+		long double term = 1.0L/(xp * (xp-1.0L));
+		acc += term;
+
+		if (term < 1.0e-20*acc) break;
+		xp *= x;
+	}
+
+	return acc;
+}
+
+long double z_erdos_series (long double x)
+{
+	long double acc = 0.0;
+
+	long double tk = 0.5L;
+	long double xp = x;
+	while (1)
+	{
+		long double term = xp / (1-tk);
+		acc += term;
+
+		if (term < 1.0e-20*acc) break;
+		xp *= x;
+		tk *= 0.5L;
+	}
+
+	return acc;
+}
+
 int main ()
 {
 	int i;
 
-	int nmax = 432;
+	int nmax = 641;
 
+long double d= erdos_series (2.0L);
+printf ("its %26.18Lg\n", d);
+exit(1);
+
+	long double tp = 0.5;
 	for (i=1; i<nmax; i++)
 	{
 		long double x = ((double) i)/((double) nmax);
 
-#define TOTIENT_SERIES
+// #define TOTIENT_SERIES
 #ifdef TOTIENT_SERIES
 		long double y = totient_series (x);
 		y *= (1.0L-x)*(1.0L-x);
-
 		long double z = 0.607927101 * sin (0.5*M_PI*x);
-		printf ("%d	%Lg	%26.18Lg	%26.18Lg\n", i, x, y, z);
+
+		long double r = 2.0L*(y/z - 1.0L);
+		printf ("%d	%Lg	%26.18Lg	%26.18Lg	%26.18Lg\n", i, x, y, z,r);
 #endif
 
 
-#if 0
+// #define DIVISOR_SERIES
+#ifdef DIVISOR_SERIES
+		x = 1.0L-tp;
 		long double y = divisor_series (x);
 		// y *= (1.0L-x)*(1.0L-x);
+		y *= tp;
+
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 #endif
 
+#define ERDOS_SERIES
+#ifdef ERDOS_SERIES
+		long double y = z_erdos_series (x);
+		y *= (1.0L-x);
+
+		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
+#endif
+
+		tp *= 0.5L;
 	}
 }

@@ -13,25 +13,28 @@ set out 'series.png'
 set data style lines
 # set data style points
 
-set title "Totient Series"
-set xlabel "x"
-set ylabel "(1-x)^2 sum_n phi(n) x^n"
-set key left
-plot "series.dat" using 2:3 title "Totient Series",\
-     "series.dat" using 2:4 title "0.6079*sin(pi x/2)"
+# set title "Totient Series"
+# set xlabel "x"
+# set ylabel "(1-x)^2 sum_n phi(n) x^n"
+# set key left
+# plot "series.dat" using 2:3 title "Totient Series",\
+#      "series.dat" using 2:4 title "0.6079*sin(pi x/2)"
+
+# set title "Totient Series Ratio"
+# set xlabel "x"
+# set ylabel "M_phi/sin -1"
+# plot "series.dat" using 2:($3/$4-1) title ""
 
 # set title "Divisor Series"
 # set xlabel "x"
 # set ylabel "(1-x)^2 sum_n d(n) x^n"
 
-# set title "Dives"
-# set xlabel "x"
-# set ylabel "(1-x)^2 sum_n xxx(n) x^n"
+set title "z-series"
+set xlabel "x"
+set ylabel "(1-x) sum_n x^n/(1-2^-n)"
+plot "series.dat" using 2:3 title ""
 
 # set yrange [0:]
-
-# plot "series.dat" using 2:3 title "tot",\
-#     "series.dat" using 2:(0.6079*sin(0.5*3.1416*$2)) title "sin"
 
 
 # pause 100

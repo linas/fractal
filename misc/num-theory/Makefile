@@ -27,5 +27,3 @@ series:	series.o divisor.o gcf.o totient.o
 ndist.o:	ndist.c gcf.h totient.h 
 
 divisor.o:	divisor.c divisor.h
-gcf.o:	gcf.c gcf.h
-totient.o:	totient.c totient.h
