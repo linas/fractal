@@ -139,7 +139,7 @@ void dmandelbrot_out (
    im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
    
    globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   for (i=0; i<globlen; i++) glob [i] = -1.0;
    
    im_position = im_start;
    for (i=0; i<sizey; i++) {
@@ -220,20 +220,151 @@ void dmandelbrot_out (
          phi3 /= 2.0*M_PI;
 
          modulus = sqrt (dre*dre+dim*dim);
+         modulus = sqrt (ddre*ddre+ddim*ddim);
+         // modulus /= (double) loop;
 
         
-/*
-         phi *= exp (((double) loop-5) / log(2.0));
-         phi -= ((double) ((int) phi));
-*/
-        
-         glob [i*sizex +j] = phi3;
-
+         // glob [i*sizex +j] = phi3;
 
 /*
          glob [i*sizex +j] = sqrt ((dre*dre+dim*dim)/(re*re+im*im));
          glob [i*sizex +j] /= (double) loop;
 */
+
+         re_position += delta;
+      }
+      im_position -= delta;  /*top to bottom, not bottom to top */
+   }
+}
+
+/*-------------------------------------------------------------------*/
+/* this routine attempts to determine if 
+ * a given point is inside or outside the mandelbrot set.
+ */
+
+void mandelbrot_decide (
+   float  	*glob,
+   unsigned int sizex,
+   unsigned int sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax)
+{
+   unsigned int	i,j, globlen;
+   double	re_start, im_start, delta;
+   double	re_position, im_position;
+   double	re, im, tmp;
+   double	dre, dim;
+   double	ddre, ddim;
+   double	zppre, zppim;
+   int		loop;
+   double 	modulus, limit;
+   double escape_radius = 50.0;
+   int		state;
+   double	*limits;
+
+#define OUTSIDE    1
+#define UNDECIDED  6
+#define INSIDE     4
+#define ERROR      8
+
+   delta = width / (double) sizex;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = (double) UNDECIDED;
+for (i=0; i<globlen; i++) glob [i] = -1.0;
+
+   limits = (double *)malloc ((itermax+1) * sizeof (double));
+   for (i=1; i<itermax; i++) {
+      double li = log ((double)i );
+      limits[i] = 1.0;                            // too conservative
+      limits[i] = (double)i;                      // too liberal
+      limits[i] = sqrt ((double)i);               // too conservative
+      limits[i] = ((double)i) / log ((double)i ); // too liberal
+      limits[i] = ((double)i) / (li*li);
+   }
+
+   im_position = im_start;
+   for (i=0; i<sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) {
+         re = re_position;
+         im = im_position;
+         dre = 1.0;
+         dim = 0.0;
+         ddre = 0.0;
+         ddim = 0.0;
+         state = UNDECIDED;
+         for (loop=1; loop <itermax; loop++) {
+
+            /* compute second derivative */
+            tmp = 2.0 * (re*ddre - im*ddim + dre*dre - dim*dim);
+            ddim = 2.0 * (re*ddim + im*ddre + 2.0 * dre*dim);
+            ddre = tmp;
+
+            /* compute infinitessimal flow */
+            tmp = 2.0 * (re*dre - im*dim) +1.0;
+            dim = 2.0 * (re*dim + im*dre);
+            dre = tmp;
+
+            /* compute iterate */
+            tmp = re*re - im*im + re_position;
+            im = 2.0*re*im + im_position;
+            re = tmp;
+            modulus = (re*re + im*im);
+
+            /* if point is outside the escape radius, then we've
+             * determined that this is an exterior point.  If it
+             * was ever marked as an interior point, that would be an
+             * error.
+             */
+            if (modulus > escape_radius*escape_radius) {
+glob [i*sizex +j] = ((double)loop) / ((double)itermax);
+               if ((UNDECIDED == state) || (OUTSIDE == state)) {
+                  state = OUTSIDE;
+               } else {
+                  state = ERROR;
+                  if (ERROR < loop) state = loop;
+               }
+               break; 
+            }
+
+            /* compute zprimeprime/z */
+            zppre = re*ddre + im*ddim;   /* divergence */
+            zppim = re*ddim - im*ddre;   /* curl */
+            zppre /= (re*re + im*im);
+            zppim /= (re*re + im*im);
+   
+            modulus = sqrt (zppre*zppre+zppim*zppim);
+            // modulus /= (double) loop;
+            limit = limits[loop];
+
+            /* check to see if we can identify this as an interior point */
+            if ((10 < loop) && (limit > modulus) && (UNDECIDED == state)) {
+               state = INSIDE;
+// record time saved ...
+// state = loop;
+// break;
+            }
+
+// colorize weird
+if ((0.0>glob [i*sizex +j]) ||  (1.0<glob [i*sizex +j])) {
+glob [i*sizex +j] =  modulus;
+}
+
+         }    
+        
+#ifdef SHOW_REGIONS
+         if (ERROR > state) {
+            glob [i*sizex +j] = ((double) state) / 8.1;
+         } else {
+            glob [i*sizex +j] = ((double) state) / ((double)itermax);
+         }
+#endif
 
          re_position += delta;
       }
@@ -433,7 +564,9 @@ void mandelbrot_stalk (
             im = 2.0*re*im + im_position;
             re = tmp;
             if ((re*re + im*im) > 154.0) break;
-/*
+
+#ifdef HAND_BUILT_COLORMAP
+            Hand-built colormap -- visually bad idea
             if (((-0.5 < re) && (re < 0.5)) ||((-0.5 < im) && (im < 0.5))) 
                        if (0.1 > glob [i*sizex +j]) glob [i*sizex +j] = 0.1;
             if (((-0.2 < re) && (re < 0.2)) ||((-0.2 < im) && (im < 0.2))) 
@@ -452,7 +585,7 @@ void mandelbrot_stalk (
                        if (0.9 > glob [i*sizex +j]) glob [i*sizex +j] = 0.9;
             if (((-0.001 < re) && (re < 0.001)) ||((-0.001 < im) && (im < 0.001))) 
                        if (1.0 > glob [i*sizex +j]) glob [i*sizex +j] = 1.0;
-*/
+#endif /* HAND_BUILT_COLORMAP */
 
 #ifdef STALK
             tmpx = re-stalkx;
@@ -484,10 +617,12 @@ void mandelbrot_stalk (
             }
 #endif /* CROSS */
 
+#define CIRCSTALK
 #ifdef CIRCSTALK
             tmpx = re - stalkx;
             tmpy = im - stalky;
             tmp = tmpx*tmpx + tmpy*tmpy -0.04;
+            tmp = tmpx*tmpx + tmpy*tmpy;
             if (0.0 > tmp) tmp = -tmp;
 
             tmp = -log (tmp); 
@@ -495,7 +630,6 @@ void mandelbrot_stalk (
 #endif CIRCSTALK
 
            
-#define MAXDIST
 #ifdef MAXDIST
             tmpx = re-stalkx - visited_x;
             tmpy = im-stalky - visited_y;
@@ -1863,7 +1997,7 @@ main (int argc, char *argv[])
    char buff [80];
    
    if (5 > argc) {
-      fprintf (stderr, "Usage: %s <filename> <width> <height> <niter>\n", argv[0]);
+      fprintf (stderr, "Usage: %s <filename> <width> <height> <niter> [<centerx> <centery> <size>]\n", argv[0]);
       exit (1);
    }
 
@@ -1874,9 +2008,6 @@ main (int argc, char *argv[])
    data_width = atoi (argv[2]);
    data_height = atoi (argv[3]);
    itermax = atoi (argv[4]);
-/*
-   extra = atoi (argv[5]);
-*/
 
    data = (float *) malloc (data_width*data_height*sizeof (float));
 
@@ -1884,11 +2015,11 @@ main (int argc, char *argv[])
    im_center = 0.0;
    width = 2.8;
 
-/*
-   re_center = 0.15;
-   im_center = 0.5;
-   width = 0.5;
-*/
+   if (8 == argc) {
+      re_center = atof (argv[5]);
+      im_center = atof (argv[6]);
+      width = atof (argv[7]);
+   }
 
    /* Do the interior now */
    renorm = 1.0;
@@ -1899,6 +2030,10 @@ main (int argc, char *argv[])
    
    if (!strcmp(argv[0], "inf"))
    dmandelbrot_out (data, data_width, data_height,
+                  re_center, im_center, width, itermax); 
+   
+   if (!strcmp(argv[0], "decide"))
+   mandelbrot_decide (data, data_width, data_height,
                   re_center, im_center, width, itermax); 
    
    if (!strcmp(argv[0], "manvert"))

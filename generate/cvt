@@ -123,5 +123,10 @@
 # takelog junka junkb
 # takelog junka junkb
 # takelog junkb junkc
-# renorm j junk 0.03 0.0
+# renorm j junk 0.3 0.0
 cat j.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+
+# clamp j junka 0.0001 1.0e30
+# takelog junka junkb
+# renorm junkb junk 0.04 4
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif

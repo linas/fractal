@@ -28,6 +28,7 @@ clean:
 #
 inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.c  util.o
 	$(CC) -o brat brat.c util.o -lm
+	ln -f brat decide
 	ln -f brat manvert
 	ln -f brat stalk
 	ln -f brat mstop
