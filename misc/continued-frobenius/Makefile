@@ -1,5 +1,5 @@
 
-EXES = bern bern_h diagon diverge eicheck frobenius gsl-diag \
+EXES = alpha asubn bern bern_h diagon diverge eicheck frobenius gsl-diag \
 	riemann sum tryall valuate zeta-sum zeta-zero zero
 
 all: $(EXES)
@@ -9,6 +9,8 @@ ache.o: ache.h zetafn.h
 zetafn.o: zetafn.h
 
 # executables
+alpha.o:	ache.h zetafn.h
+asubn.o:	ache.h zetafn.h
 bern.o: zetafn.h
 bern_h.o: zetafn.h
 beta.o: ache.h zetafn.h
@@ -22,6 +24,8 @@ tryall.o:	zetafn.h
 zeta-sum.o: zetafn.h
 zeta-zero.o: zetafn.h
 
+alpha: alpha.o ache.o zetafn.o
+asubn: asubn.o ache.o zetafn.o
 bern: bern.o zetafn.o
 bern_h: bern_h.o zetafn.o
 beta: beta.o ache.o zetafn.o
