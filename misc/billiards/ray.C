@@ -1,12 +1,15 @@
 //
+// FILE:
 // ray.C
 //
-// Billards ray tracer
+// FUNCTION:
+// Sinai's Billards ray tracer
 //
 // put sphere in center of cube.
 // cube is 2 units on a side.
 // sphere has radius < 1.0
 //
+// HISTORY:
 // Linas Vepstas
 // November 2001
 
@@ -17,15 +20,13 @@
 #include "vvector.h"
 #include "intersect.h"
 
-// Intersect determines the intersection between the ray and teh plane.
+// Intersect determines the intersection between the ray and the plane.
 // It returns the distance to the intersection if the intersection
 // is forward along the ray.  Otherwise it returns minus the distance.
 //
-// Bounce determines if a forward trace of the ray will intersedct the
+// Bounce determines if a forward trace of the ray will intersect the
 // plane.  If it does, then the ray will be traced forward and reflected
-// off the plane.  The distance moved forward will be returned.  If the
-// forward trace does not intersect, then a negative value will be
-// returned.
+// off the plane.  
 
 class Ray
 {
@@ -33,11 +34,13 @@ class Ray
       void Set (double x[3], double t[3]);  // assign value
       void Set (double, double, double, double, double, double);
       double Intersect (Ray& plane);
-      double Bounce (Ray& plane);
+      void Bounce (Ray& plane);
    public:
       double position[3];   
       double direction[3];
 };
+
+/* ==================================== */
 
 void 
 Ray::Set (double x[3], double t[3])
@@ -60,10 +63,11 @@ Ray::Set (double x0, double x1, double x2,
    VEC_NORMALIZE(direction);
 }
 
+/* ==================================== */
+
 double 
 Ray::Intersect (Ray& plane)
 {
-
    double p2[3];
    VEC_SUM (p2, position, direction);
 
@@ -85,25 +89,52 @@ Ray::Intersect (Ray& plane)
    return dot;
 }
 
-double 
+/* ==================================== */
+
+void
 Ray::Bounce (Ray& plane)
 {
+   double p2[3];
+   VEC_SUM (p2, position, direction);
+
+   int valid;
+   double result[3];
+   INTERSECT (valid, result, 
+             plane.position, plane.direction,
+             position, p2);
+
+   if (FALSE == result) return;
+   VEC_COPY (position, result);
+   VEC_REFLECT (direction, direction, plane.direction);  
 }
+
+/* ==================================== */
 
 class SinaiRay
   : public Ray
 {
    public:
+      SinaiRay (void);
+      double distance; // distance travelled by ray   
       int last_wall;   // last wall of intersection
-      int bounce;
+      int bounces[6];  // how many bounces have occured off each wall
 };
 
+
+SinaiRay::SinaiRay (void)
+{
+   last_wall = -1;
+   distance = 0.0;
+   for (int i=0; i<6; i++) bounces[i] = 0;
+}
+
+/* ==================================== */
 
 class SinaiView
 {
    public:
       SinaiView (int, int);
-      void Trace (void);
+      void Trace (int nbounces);
       void TestPattern (void);
       void ToPixels (void);
       void WriteMTV (const char *filename);
@@ -167,23 +198,33 @@ SinaiView::SinaiView (int px, int py)
 /* ==================================== */
 
 void
-SinaiView::Trace(void)
+SinaiView::Trace(int nbounces)
 {
    int i;
    for (i=0; i<nx*ny; i++) 
    {
-      int next_wall = -1;
-      double nearest = 1000000.0;
-      for (int iwall=0; iwall<6; iwall ++)
-      {
-         if (iwall == sr[i].last_wall) continue;
 
-         double dist = sr[i].Intersect (walls[iwall]);
-         if (0.0 > dist) continue;
-         if (nearest > dist) { nearest = dist; next_wall = iwall; }
+      for (int n=0; n<nbounces; n++)
+      {
+         // first we trace the ray to the nearest wall.
+         int next_wall = -1;
+         double nearest = 1000000.0;
+         for (int iwall=0; iwall<6; iwall ++)
+         {
+            if (iwall == sr[i].last_wall) continue;
+   
+            double dist = sr[i].Intersect (walls[iwall]);
+            if (0.0 > dist) continue;
+            if (nearest > dist) { nearest = dist; next_wall = iwall; }
+         }
+         sr[i].bounces[next_wall] ++;
+         sr[i].last_wall = next_wall;
+         sr[i].distance += nearest;
+   
+         sr[i].Bounce (walls[next_wall]);
       }
-      abgr[i] = 900 *(next_wall+1);
-     
+
+      abgr[i] = 100 * sr[i].distance;
    }
 }
 
@@ -229,7 +270,7 @@ main ()
    SinaiView v (400,400);
 
 
-   v.Trace();
+   v.Trace(8);
    v.ToPixels();
    v.WriteMTV ("junk.mtv");
     
