@@ -62,9 +62,30 @@ e_zl_re (double z_re, double z_im, int l, double x)
 	return acc;
 }
 
+double 
+e_zl_im (double z_re, double z_im, int l, double x)
+{
+	int i;
+	double znre = 1.0;
+	double znim = 0.0;
+	double acc = 0.0;
+	i = 0;
+	while (1)
+	{
+		acc += znim*enl_re(i,l,x) + znre * enl_im (i,l,x);
+		double tmp = znre * z_re - znim * z_im;
+		znim = z_re *znim + z_im * znre;
+		znre = tmp;
+		i++;
+		double zabs = znre*znre+znim*znim;
+		if (1.0e-16 > zabs) break;
+	}
+	return acc;
+}
+
 main (int argc, char *argv[])
 {
-	double z;
+	double zre, zim;
 	int i;
 	ContinuedFraction f;
 	f.SetEvenize();
@@ -75,11 +96,11 @@ main (int argc, char *argv[])
 		exit (1);
 	}
 
-	z = 0.0;
-	z = atof (argv[1]);
+	zre = atof (argv[1]);
+   zim = 0.2;
 	int ell = 0;
 	
-	int nmax = 531;
+	int nmax = 5531;
 	for (i=0; i<nmax; i++)
 	{
 
@@ -87,16 +108,17 @@ main (int argc, char *argv[])
 		int q = nmax;
 		double x = ((double) p)/ ((double) q);
 		
-		double e = e_zl_re (z,0.0,ell, x);
+		double er = e_zl_re (zre,zim,ell, x);
+		double ei = e_zl_im (zre,zim,ell, x);
 
-		e *= sqrt(1.0-z);
+		// e *= sqrt(1.0-z);
 
 		// f.SetReal (x);
 		// double y = x-f.ToFarey();
 		// double y = e_zl_re (x,0.0, ell, 0.33);
 		// double e = y;
 		
-		printf("%5d	%8.6g	%8.6g\n", i,x,e);
+		printf("%5d	%8.6g	%8.6g	%8.6g\n", i,x,er, ei);
 
 	}
 }

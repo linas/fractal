@@ -26,8 +26,8 @@ long double triangle (long double x)
 double square (double x)
 {
 	x -= floor (x);
-	if (1.0 > x*2.0) return 0.0;
-	return 1.0;
+	if (1.0 > x*2.0) return -2.0;
+	return 2.0;
 }
 
 double bumps (double x)
@@ -167,10 +167,10 @@ double takagi_prime (double w, double x)
 	double tp = 1.0;
 	for (k=0; k<1000; k++)
 	{
-		acc += tw* square (tp*x);
+		acc += tw* tp* square (tp*x);
 		tp *= 2.0;
 		tw *= w;
-		if (1.0e-14 > tw) break;
+		if (1.0e-16 > tw) break;
 	}
 
 	return acc;
@@ -344,8 +344,8 @@ main (int argc, char *argv[])
 	int i;
 
 	// int nmax = 512;
-	// int nmax = 431;
-	int nmax = 23;
+	int nmax = 431;
+	// int nmax = 23;
 
 	if (argc <2)
 	{
@@ -357,6 +357,7 @@ main (int argc, char *argv[])
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
+		double ts = 1.0;
 		// double tw = takagi (w, x);
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
@@ -364,7 +365,7 @@ main (int argc, char *argv[])
 		// double tw = ttakagi(w,x);
 		// double tw = div_takagi (w, x);
 		// double tw = takagi_bumps (w, x);
-		// double tw = takagi_prime (w, x);
+		double tw = takagi_prime (w, x);
 		// double tw = takagi_exp (w, x);
 
 		// double tw = lytic (w, x);
@@ -380,11 +381,11 @@ main (int argc, char *argv[])
 		double ts = 1.0-x + w*takagi (w, x);
 		double tw = takagi (w, 1.0+0.0625*(x-1.0));
 		double ts = 0.125*(1.0-x)*(1.0-16.0*w*w*w*w)/(1.0-2.0*w) + w*w*w*w*takagi (w, x);
-#endif
 		double tw = takagi (w, 0.75-0.25*x);
 		double ts = 0.5 -2.0*w*w + x*(0.5-2.0*w +2.0*w*w);
 		ts /= 1.0-2.0*w;
 		ts += w*w*takagi (w, x);
+#endif
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 	}
