@@ -184,6 +184,40 @@ long double sym_fourths (int m, int n, long double ess)
 	return acc;
 }
 
+/* Basic sum for Hurwitz */
+long double basic_hurwitz (int m, int n, long double ess)
+{
+	int i;
+
+	long double en = -1.0L/((double) n);
+	long double pnk = 1.0L;
+	long double acc = 0.0L;
+
+	double q = ((double) m)/((double) n);
+
+	for (i=0; i<50; i++)
+	{
+		long double eye = i;
+		long double term = gsl_sf_hzeta (eye+ess, q);
+		term -= powl (q, -(eye+ess));
+		term *= pnk;
+		term *= fbinomial (ess+eye-1.0L, i);
+// printf ("duude k=%d term=%Lg acc=%Lg \n", i, term, acc);
+		acc += term;
+		pnk *= en;
+	}
+	
+	q = ((double) n)/((double) (m+1));
+	acc += powl (q, ess);
+
+	q = ((double) (m+1))/((double) n);
+	double expect = gsl_sf_hzeta (ess, q);
+	acc -=  expect;
+	
+	return acc;
+}
+
+
 
 double check (int n, double ess)
 {
@@ -213,15 +247,16 @@ main (int argc, char * argv[])
 	for (i=0; i<nmax; i++)
 	{
 		double x = ((double) i)/((double) nmax);
-		x *= 6.0;
+		x *= 2.0;
 		x += 1.3;
 
 		double acc, a2=0.0;
 		// acc = summy (x);
 		// acc = sym_integer (6, 7, x);
 		// acc = sym_half (m, n, x);
-		acc = sym_fourths (m, n, x);
+		// acc = sym_fourths (m, n, x);
 		// acc = reflect_fourths (x);
+		acc = basic_hurwitz (m, n, x);
 		printf ("%d	%g	%g\n", i, x, acc);
 	}
 

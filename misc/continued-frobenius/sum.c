@@ -1340,6 +1340,40 @@ long double zoot (int s)
 	}
 #endif
 
+
+#ifdef ETA_SUM
+/* simple eta function sum */
+double eta (double tee)
+{
+	double et = exp (-tee);
+
+	double ca = 0.5; /* cos (M_PI/3.0); */
+	double cb = -0.5; /* cos (2.0*M_PI/3.0); */
+	double sum = 0;
+	double cut = et;
+	int n;
+	for (n=1; ; n++)
+	{
+		sum += 0.5*cut; cut *= et;
+		sum += -0.5*cut; cut *= et;
+		sum += -cut; cut *= et;
+		sum += -0.5*cut; cut *= et;
+		sum += 0.5*cut; cut *= et;
+		sum += cut; cut *= et;
+
+		if (1.0e-16 > cut) break;
+	}
+	return sum;
+}
+
+	double tee =0.5;
+	for (tee=0.5; ; tee*= 0.5)
+	{
+		double s = eta (tee);
+		printf ("its %g %g \n", tee, s);
+	}
+#endif
+
    double a=zetam1(2);
 	double b=zetam1(2)-zetam1(3);
 	double c=2.0*zetam1(3);
