@@ -7,30 +7,32 @@
  * Linas Vepstas January 16 1994
  */
 
-#include "Farey.h"
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Farey.h"
 
 /* ------------------------------------------------------------ */
 
-double straight_zmap (struct Farey *f, int nume, int deno, double t) 
+double straight_zmap (ContinuedFraction &f, int nume, int deno, double t) 
 {
    int n;
    double x,y;
 
-   RatioToContinuedFraction (f, nume, deno);
-   /* y = ContinuedFractionToExpReal (f, t);  -- emap */
-   /* y = ContinuedFractionToEFarey (f, t);  -- fmap */
-   /* y = ContinuedFractionToInvZReal (f, t);  -- invfrac */
-   y = ContinuedFractionToZReal (f, t); 
+   f.SetRatio (nume, deno);
+   /* y = f.ToExpReal (t);  -- emap */
+   /* y = f.ToEFarey (t);  -- fmap */
+   /* y = f.ToInvZReal (t);  -- invfrac */
+   y = f.ToZReal (t); 
    // y *= ((double) nume) / ((double) deno);
    // y *= ((double) deno) / ((double) nume);
    // y *= t + (1.0-t)*(((double) nume) / ((double) deno));
    // y *= t + (1.0-t)*(((double) deno) / ((double) nume));
-   x = ((double) nume) / ((double) deno);
-   y = t*y + (1.0-t)*(x*(1.0+y) -y)/(y*y);
-   /* y = ContinuedFractionToEReal (f, t);  -- ereal */
-   /* y = ContinuedFractionToEFraction (f, t); -- efrac */
+   // x = ((double) nume) / ((double) deno);
+   // y = t*y + (1.0-t)*(x*(1.0+y) -y)/(y*y);
+   /* y = f.ToEReal (t);  -- ereal */
+   /* y = f.ToEFraction (t); -- efrac */
 
    n = (int) y;
    if (y<0.0) n--;
@@ -41,7 +43,7 @@ double straight_zmap (struct Farey *f, int nume, int deno, double t)
 /* ------------------------------------------------------------ */
 /* compute measure density in the range */
 
-void bin_sort (struct Farey *f, float *arr, int narr, double t)
+void bin_sort (ContinuedFraction &f, float *arr, int narr, double t)
 {
    int j, n, width;
    int nume, deno;
@@ -76,11 +78,9 @@ void bin_sort (struct Farey *f, float *arr, int narr, double t)
 
 /* ------------------------------------------------------------ */
 
-main (argc, argv)
-int argc;
-char *argv[];
+main (int argc, char *argv[])
 {
-   struct Farey *f;
+   ContinuedFraction f;
    double x, y, z, t;
    double delta_t;
    int i, j, n;
@@ -94,13 +94,11 @@ char *argv[];
       exit (1);
    }
 
-   f = CreateFarey();
-
    fil = fopen (argv[1], "w");
    fprintf (fil, "%s %s\n", argv[2], argv[3]);
 
    /* null terminated string */
-   /*  { char zip=0; fwrite (zip, sizeof(char), 1, fil); } */
+   /*  { char zip=0; fwrite (&zip, sizeof(char), 1, fil); } */
    fflush (fil);
    
    width = atoi (argv[2]);

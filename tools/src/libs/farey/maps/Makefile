@@ -11,7 +11,7 @@ CC = /usr/bin/cc -O2 -I $(INC) -DLINUX
 
 RM=	/bin/rm -f
 
-EXES= cmap dmap imap zmap
+EXES= newmap cmap dmap imap zmap
 all: 	$(EXES)
 
 
@@ -35,10 +35,6 @@ reiter:	reiter.o
 prodmap: prodmap.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o prodmap prodmap.c $(LIB)/Farey.o -lm
 	$(RM) prodmap.o
-
-newmap: newmap.c $(LIB)/Farey.o $(INC)/Farey.h
-	$(CC) -o newmap newmap.c $(LIB)/Farey.o -lm
-	$(RM) newmap.o
 
 # cmap
 # 	(Jan 1994) excercise Farey Number converter
