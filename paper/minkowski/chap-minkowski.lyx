@@ -1402,7 +1402,7 @@ Thus I think we can now conclude that
  xxxx finish writing these conclusions.
 \layout Subsection
 
-The Set-Theoretic Representation of the Modular Group
+Blah Blah Blah
 \layout Standard
 
 Note that 
@@ -1458,16 +1458,24 @@ Note that
  
 \layout Standard
 
-XXXX
-\layout Standard
-
-XXXX
-\layout Standard
-
 ToDo
+\layout Subsection
+
+The Set-Theoretic Representation of the Modular Group
 \layout Standard
 
-We say that 
+The canonical representation of the modular group elements by Mobius transforms
+ is in fact a set-theoretic representation of the modular group.
+ That is, let 
+\begin_inset Formula $X$
+\end_inset 
+
+ be a set, and let 
+\begin_inset Formula $\mathcal{F}_{X}=\left\{ f[x]:X\rightarrow X\right\} $
+\end_inset 
+
+ be the set of all maps from the set to itself.
+ Then we say that 
 \begin_inset Formula $X$
 \end_inset 
 
@@ -1479,23 +1487,38 @@ We say that
 \begin_inset Formula $\exists\rho:G\rightarrow\mathcal{F}_{X}$
 \end_inset 
 
- where 
-\begin_inset Formula $\mathcal{F}_{X}=\left\{ f(x):X\rightarrow X\right\} $
+ such that 
+\begin_inset Formula $\forall g\in G$
 \end_inset 
 
- we have the following 
-\begin_inset Formula $\forall g\in G,\; x\in X$
+ and 
+\begin_inset Formula $\forall x\in X$
 \end_inset 
 
- that first, 
-\begin_inset Formula $\rho(1)[x]=x$
+ that the map 
+\begin_inset Formula $\rho$
 \end_inset 
 
- and also 
-\begin_inset Formula $\rho(g_{1}g_{2})[x]=\rho(g_{1})[\rho(g_{2})[x]]$
+ is a group homomorphism of the group into 
+\begin_inset Formula $\mathcal{F}_{X}$
 \end_inset 
 
- Then we say X is a set theoretic representation of G and that 
+.
+ That is, the following two properties must hold: the identity element correspon
+ds to the self-map: 
+\begin_inset Formula $\rho(e)[x]=x$
+\end_inset 
+
+ and that group multipliction corresponds to function composition: 
+\begin_inset Formula $\rho(g_{1}g_{2})[x]=(\rho(g_{1})\circ\rho(g_{2}))[x]=\rho(g_{1})[\rho(g_{2})[x]]$
+\end_inset 
+
+.
+ If every map 
+\begin_inset Formula $\rho(g):X\rightarrow X$
+\end_inset 
+
+ is one-to-one and onto, then 
 \begin_inset Formula $\rho$
 \end_inset 
 
@@ -1511,15 +1534,119 @@ We say that
 \begin_inset Formula $S_{X}$
 \end_inset 
 
- is the symmetric group of X.
+ is the symmetric group of 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ Clearly, the map 
+\begin_inset Formula \[
+\rho:\left(\begin{array}{cc}
+a & b\\
+c & d\end{array}\right)\mapsto\frac{ax+b}{cx+d}\]
+
+\end_inset 
+
+ is the group homomorphism.
+ The set 
+\begin_inset Formula $X$
+\end_inset 
+
+ can be taken to be the field of rationals 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ or as any of its closures 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, although it is usually taken as the complex upper-half plane 
+\begin_inset Formula $H^{+}=\{ z\in\mathbb{C}\, s.t.\,\textrm{Im}z\geq0\}$
+\end_inset 
+
+.
+\layout Subsection
+
+The Topology of the Modular Group
+\layout Standard
+
+The relationship between continued fractions and elements of the modular
+ group hint at an interesting topology of the modular group.
+ A subset of the modular group can be mapped to the rationals, and thus
+ any metric on the rationals, whether the normal one or a p-adic one, can
+ be 'lifted' back up to the modular group.
+ We then ask if this metric can be extended onto the whole group.
+ This mapping also means that we can draw a continous curve in the modular
+ group: that a subset of the modular group is diffeomorphic to the rationals.
+ Thus, we are lead to ask, where else can we draw continuous curves in the
+ modular group? What is the connectedness of those curves? Is the manifold
+ simply connected, or in fact punctured an infinite number of times? But
+ we also saw that the more natural mapping is between the contractive group
+ elements and intervals, so that the set of contractive group elements is
+ essentially an open covering of the unit interval.
+ Thus, we have a number of confusing, inter-related ideas, and ask how they
+ can be sorted out.
+ The goal is to define and explore the topology of the modular group, by
+ extending what we've learned for the contractive elements onto the whole
+ group.
+\layout Standard
+
+So....
+\layout Standard
+
+We begin by noting that the usual toplogy on the rationals is finer than
+ the topology of intervals ...
+ 
+\layout Subsection
+
+Misc junk
+\layout Standard
+
+In the above sections, we have found the first steps of a set-theoretic
+ representation of the modular group.
+ If we consider the function 
+\begin_inset Formula $\tilde{\gamma}(x)=\gamma(1/x)$
+\end_inset 
+
+ then we see that it is the desired group homomorphism: for 
+\begin_inset Formula $r=[a_{1},a_{2},...,a_{N}]\in\mathbb{Q}$
+\end_inset 
+
+ and 
+\begin_inset Formula $s=[b_{1},b_{2},...,b_{M}]\in\mathbb{Q}$
+\end_inset 
+
+ we have 
+\begin_inset Formula $(\tilde{\gamma}_{r}\circ\tilde{\gamma}_{s})(x)=\tilde{\gamma}_{r}(\tilde{\gamma}_{s}(x))=[a_{1},a_{2},...,a_{N},b_{1},b_{2},..,b_{M},1/x]$
+\end_inset 
+
+.
+ And so we have demonstrated a mapping 
+\begin_inset Formula $\rho:SL(2,\mathbb{Z})\rightarrow\mathcal{F}_{\mathbb{R}}$
+\end_inset 
+
+ that maps 
+\begin_inset Formula $\gamma\mapsto\tilde{\gamma}(x)=[a_{1},a_{2},...,a_{N},x]$
+\end_inset 
+
+.
+ However, we are far from done: this map is not defined for all of the group
+ elements, but only for the subset of elements that are contractive: that
+ is for those elements that have all of the 
+\begin_inset Formula $a_{k}>0$
+\end_inset 
+
+.
  
 \layout Standard
 
-Note that we have incompletely demonstrated that 
-\begin_inset Formula $\rho:\gamma\rightarrow\gamma(x)=[a_{1},a_{2},...,a_{N},x]$
-\end_inset 
+\layout Standard
 
- has this property on some but not all of the group elements of SL(2,Z).
+this property on some but not all of the group elements of SL(2,Z).
  (We've only done it for the cnatracting group elements, So we really need
  to extend this, possibly through topological arguments about the coverings,
  where we cover each ocurrance of a negative 
