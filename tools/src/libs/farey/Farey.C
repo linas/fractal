@@ -309,7 +309,8 @@ ContinuedFraction::ToZRealGap (void)
 
    // return deltalo;
    // return deltahi;
-   return 0.5* (deltahi-deltalo);
+   // return the symmetrized result
+   return (deltahi-deltalo);
 
 }
 
