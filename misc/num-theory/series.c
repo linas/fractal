@@ -2,11 +2,14 @@
 /*
  * series.c
  *
- * graph of maclaurin series of totient
+ * Graphs of maclaurin series of totient and other number-theoretic
+ * arithmetic series.  These are ordinary x-y plots; output is 
+ * ascii list of x-y values
  *
  * Linas Vepstas December 2004
  */
 
+#include <complex.h>
 #include <math.h>
 #include <stdio.h>
 
@@ -75,6 +78,44 @@ long double divisor_series (long double x)
 	return acc;
 }
 
+long double c_divisor_series (long double x)
+{
+	long double complex acc = 0.0;
+
+	long double complex xi = x*I;
+	long double complex xp = x*I;
+	int n=1;
+	while (1)
+	{
+		long double complex term = xp * divisor (n);
+		acc += term;
+
+		if (cabsl(term) < 1.0e-20*cabsl(acc)) break;
+		xp *= xi;
+		n++;
+	}
+
+	return cabsl (acc);
+}
+
+long double c_erdos_series (long double x)
+{
+	long double complex acc = 0.0;
+
+	long double complex xi = x*I;
+	long double complex xp = x*I;
+	while (1)
+	{
+		long double complex term = xp / (1.0L-xp);
+		acc += term;
+
+		if (cabsl(term) < 1.0e-20*cabsl(acc)) break;
+		xp *= xi;
+	}
+
+	return cabsl(acc);
+}
+
 long double erdos_series (long double x)
 {
 	long double acc = 0.0;
@@ -135,7 +176,7 @@ int main ()
 {
 	int i;
 
-	int nmax = 641;
+	int nmax = 41;
 
 	long double tp = 0.5;
 	for (i=1; i<nmax; i++)
@@ -163,6 +204,14 @@ int main ()
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 #endif
 
+#define C_DIVISOR_SERIES
+#ifdef C_DIVISOR_SERIES
+		long double y = c_divisor_series (x);
+		long double z = c_erdos_series (x);
+
+		printf ("%d	%Lg	%26.18Lg	%26.18Lg	%26.18Lg\n", i, x, y, z, y-z);
+#endif
+
 // #define ERDOS_SERIES
 #ifdef ERDOS_SERIES
 		long double y = z_erdos_series (x);
@@ -171,7 +220,7 @@ int main ()
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 #endif
 
-#define MOEBIUS_SERIES
+// #define MOEBIUS_SERIES
 #ifdef MOEBIUS_SERIES
 		long double y = moebius_series (x);
 
