@@ -2,4 +2,4 @@
 all: tarball
 
 tarball:
-	tar -zcvf x *.lyx */*.lyx */*.png */*.jpg */*.gif
+	tar -zcvf paper.tgz Makefile *.lyx */*.lyx */*.png */*.jpg */*.gif */README */.cvsignore
