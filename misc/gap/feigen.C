@@ -3,6 +3,7 @@
  *
  * eigen-functions:
  * bernoulli-map eigenfunctions concated with Minkowski map.
+ * Basically borken right now.
  *
  * Linas Vepstas October 2004
  */

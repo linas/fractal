@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= fdist feigen gappy rdist sway sym
+EXES= exacto fdist feigen gappy padic rdist swap sway sym sym-fun 
 
 all: 	$(EXES)
 
@@ -23,9 +23,13 @@ realclean:	clean
 	$(CC) -o $* $< $(LIB)/Farey.o $(LIB)/FareyTree.o -lm -lstdc++
 
 
-gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
-sway.o:  sway.C $(LIB)/Farey.o $(INC)/Farey.h
+exacto.o:  exacto.C $(LIB)/Farey.o $(INC)/Farey.h
 fdist.o:  fdist.C $(LIB)/FareyTree.o $(INC)/FareyTree.h
+gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
+padic.o:	padic.C
+sway.o:  sway.C $(LIB)/Farey.o $(INC)/Farey.h
+swap.o:  swap.C $(LIB)/Farey.o $(INC)/Farey.h
 rdist.o:  rdist.C $(LIB)/Farey.o $(INC)/Farey.h
 feigen.o: feigen.C $(LIB)/Farey.o $(INC)/Farey.h
 sym.o: sym.C $(LIB)/Farey.o $(INC)/Farey.h
+sym-fun.o: sym-fun.C $(LIB)/Farey.o $(INC)/Farey.h

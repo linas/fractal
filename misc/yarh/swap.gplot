@@ -1,0 +1,24 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'swap.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Eigenfunctions"
+set xlabel "x"
+set ylabel "probability"
+
+# set yrange [0:]
+
+plot "swap.dat" using 2:3 title "s 12", \
+     "swap.dat" using 2:2 title ""
+
+# pause 100
+

@@ -18,8 +18,8 @@ main (int argc, char *argv[])
 	ContinuedFraction f;
 	f.SetEvenize();
 
-	int m = -2;
-	int n = 5;
+	int m = 1;
+	int n = 1;
 	f.SetRatio (m,n);
 	double fact=f.ToFarey();
 	printf ("# norm=%g\n", fact);
@@ -50,21 +50,15 @@ main (int argc, char *argv[])
 		// z = f.ToFarey();
 		// z *= (double) (1<<n);
 		// z -= 1.0;
-
-#if SURPRISE
-		f.SetRatio ((m+1)*p+q, (2*m+1)*p+2*q);
-		z = f.ToFarey();
-		// y /= (1<<(2+m));
-		// y +=0.5;
-		z -= 0.5;
-		z *= (1<<(2+m));
-#endif
 		
-		f.SetRatio (m*p+q, (2*m+1)*p+2*q);
+		// f.SetRatio (p,q-n*p);
+		// z = f.ToFarey();
+		// z /= (double) (1<<n);
+
+		f.SetRatio (q-(m+1)*p, (n+1)*q - (n*m+m+n)*p);
 		z = f.ToFarey();
-		z -= 0.5;
-		z *= (1<<(2+m));
-		z = -z;
+		z = 0.5-z;
+
 		
 		printf("%5d	%8.6g	%8.6g	%8.6g	%8.6g\n", i,x,y,z,y-z);
 
