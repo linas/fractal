@@ -95,8 +95,12 @@ main ()
         nprec --;
         if (0 == nprec%1000) 
         {
+           long long di = i - last_i;
+           int idi = di;
+           long long ni = i/(1024*1024);
+           long ini = ni;
            printf ("%d	%d	%d	%20.16g	%g	%g	%g\n",
-              nprec, i/(1024*1024), i-last_i, theta, acc_theta, pos_x, pos_z);
+              nprec, ini, idi, theta, acc_theta, pos_x, pos_z);
            last_i = i;
         }
         theta += acc_theta;
