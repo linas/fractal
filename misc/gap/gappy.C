@@ -12,6 +12,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* return the greatest common factor */
+int
+gcf32 (int nume, int denom)
+{
+	int t;
+	t = nume % denom;
+	nume = denom;
+	denom = t;
+
+	/* Euclids algorithm for obtaining the gcf */
+	while (0 != denom)
+	{
+		t = nume % denom;
+		nume = denom;
+		denom = t;
+	}
+
+	/* num now holds the GCD (Greatest Common Divisor) */
+	return nume;
+}
+
 #define NV 6
 
 main (int argc, char *argv[])
@@ -30,6 +51,12 @@ main (int argc, char *argv[])
   
 	for (n=0; n<=d; n++)
 	{
+		int gcf, rn, rd;
+
+		gcf = gcf32 (n,d);
+		rn = n/gcf;
+		rd = d/gcf;
+
 		t = ((double) n) / ((double) d);
    	f.SetRatio (n,d);
 
@@ -40,6 +67,7 @@ main (int argc, char *argv[])
 			double xm = f.ToXOdd(w);
 			double xp = f.ToXEven(w);
 			gap[iw] = xp - xm;
+			gap[iw] *= (double) rd*rd;
 		}
 		printf ("%g	%g	%g	%g	%g	%g	%g\n", 
 			t, gap[0], gap[1], gap[2], gap[3], gap[4], gap[5]);
