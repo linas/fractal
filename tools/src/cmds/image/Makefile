@@ -43,3 +43,6 @@ globals.o: globals.c
 
 flo2mtv:	flo2mtv.c
 	$(CC) flo2mtv.c -o flo2mtv
+
+install:
+	cp -p flo2mtv ../../../bin
