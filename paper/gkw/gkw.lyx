@@ -1519,7 +1519,7 @@ B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n|B_{k}\right\rangle \l
 
 XXX I'm still troubled by this.
  Its not completely clear that the space spaned by the monimial basis is
- really identitcal to the space spaned by the Bernoulli polynomial basis.
+ really identical to the space spaned by the Bernoulli polynomial basis.
  Either set of basis functions seems to be in a certain sense 
 \begin_inset Quotes eld
 \end_inset 
@@ -4098,14 +4098,36 @@ c(x)=?\left(\frac{1}{?^{-1}(x)}-\left\lfloor \frac{1}{?^{-1}(x)}\right\rfloor \r
 
 \end_inset 
 
-.
+, and can be written as 
+\begin_inset Formula \[
+c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\]
+
+\end_inset 
+
+ The Frobenius-Perron operator of this function provides a second model
+ of the Gauss-Kuzmin-Wirsing operator.
+ It can be solved exactly; unfortunately, while one might think that there
+ is a similarity transform to take it back to GKW, it turns out this similarity
+ transform is dastardly singular, being just the Jacobian of the Minkowski
+ question mark 
+\begin_inset Formula $(?'\circ?^{-1})(x)$
+\end_inset 
+
+, which we'll examine shortly.
+ The FP operator is 
+\begin_inset Formula \[
+\left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-x}{2^{n}}\right)\]
+
+\end_inset 
+
+ The following sections develop this operator in different function spaces.
  
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -4130,29 +4152,6 @@ Picture of the second kind of sawtooth.
  
 \end_inset 
 
-and can be written as 
-\begin_inset Formula \[
-c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\]
-
-\end_inset 
-
- The Frobenius-Perron operator of this function provides a second model
- of the Gauss-Kuzmin-Wirsing operator.
- It can be solved exactly; unfortunately, while one might think that there
- is a similarity transform to take it back to GKW, it turns out this similarity
- transform is dastardly singular, being just the Jacobian of the Minkowski
- question mark 
-\begin_inset Formula $(?'\circ?^{-1})(x)$
-\end_inset 
-
-, which we'll examine shortly.
- The FP operator is 
-\begin_inset Formula \[
-\left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-x}{2^{n}}\right)\]
-
-\end_inset 
-
- The following sections develop this operator in different function spaces.
  
 \layout Subsection
 
@@ -4225,15 +4224,19 @@ e_{3}=1-\frac{66}{13}y+\frac{84}{13}y^{2}-\frac{32}{13}y^{3}=\frac{-1}{13}\left(
 \end_inset 
 
 
-\layout Standard
+\begin_inset Formula \begin{eqnarray*}
+e_{4} & = & 1-\frac{36450}{5597}y+\frac{67620}{5597}y^{2}-\frac{50400}{5597}y^{3}+\frac{13440}{5597}y^{4}\\
+ & = & \frac{-1}{29\cdot193}\left(193+1350x+2940x^{2}+3360x^{3}-13440x^{4}\right)\end{eqnarray*}
 
-XXX present 
-\begin_inset Formula $e_{4}$
 \end_inset 
 
- as well.
- Show graphs of these.
- 
+ As we can see, the complexity of individual eigenvectors spirals out of
+ control; there's no obvious simple closed form expression for higher eigenvecto
+rs.
+ Indeed, it seems that the simplest algorithm is to directly invert the
+ matrix.
+ This is curious, because the matrix itself is so curiously simple, and
+ superficially similar to that for the Bernoulli map.
 \layout Standard
 
 
