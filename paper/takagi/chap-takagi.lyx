@@ -26,7 +26,7 @@
 
 \layout Title
 
-Symmetries of Period-Doubling Maps and a Generalization to Stochastic Processes
+Symmetries of Period-Doubling Maps 
 \layout Author
 
 Linas Vepstas <linas@linas.org>
@@ -35,7 +35,7 @@ Linas Vepstas <linas@linas.org>
 12 October 2004
 \layout Date
 
-(revised 4 November 2004)
+(revised 6 November 2004)
 \layout Abstract
 
 The concept of self-similarity is central to the notion of a fractal, but
@@ -51,22 +51,13 @@ The concept of self-similarity is central to the notion of a fractal, but
 
 In this paper, we identify the symmetry group of period-doubling maps as
  being the Modular Group 
-\begin_inset Formula $\Gamma$
+\begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
 .
  To anchor this assertion, we work out an explicit, exactly-solvable fractal
- curve, the Takagi or Blanncmange Curve, as transforming under the three-dimensi
-onal representation of the Modular Group.
-\layout Abstract
-
-By using a related result on the randomness of Cauchy sequences on continued
- fractions, we can deduce that even the random walk, and thus most other
- fractals generated through sequences of purely random numbers, have the
- modular group as its underlying symmetry.
- That is, gaps on the continued fraction form a perfectly distributed stochastic
- process, and thus equations embedding a stochastic process in them have
- a hidden, underlying modular map symmetry.
+ curve, the Takagi or Blancmange Curve, as transforming under the three-dimensio
+nal representation of the Modular Group.
 \layout Abstract
 
 This paper is part of a set of chapters that explore the relationship between
@@ -453,8 +444,13 @@ g_{C}=\left(\begin{array}{cc}
 \begin_inset Formula $C$
 \end_inset 
 
- to keep clear which representation we are working with.
- In terms of Mobius transforms, we have 
+ make it clear that these belong to the canonical representation of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ In terms of Mobius transforms, we have the entirely equivalent representation
+ as 
 \begin_inset Formula $g_{M}(x)=x/(1+x)$
 \end_inset 
 
@@ -1025,26 +1021,26 @@ It can be readily worked out that the factor of
 
  we have 
 \begin_inset Formula \[
-\left[g\phi_{z,l}\right](x)=\phi_{z,l}(\frac{x}{2})=\exp\left((2l+1)\pi ix\right)+z\phi_{z,l}(x)\]
+\left[g\phi_{z,l}\right](x)=\left[\phi_{z,l}g\right](x)=\phi_{z,l}(\frac{x}{2})=\exp\left((2l+1)\pi ix\right)+z\phi_{z,l}(x)\]
 
 \end_inset 
 
  and for reflection,
 \begin_inset Formula \[
-\left[r\phi_{z,l}\right](x)=\phi_{z,l}(1-x)=\phi_{z,l}(-x)\]
+\left[r\phi_{z,l}\right](x)=\left[\phi_{z,l}r\right](x)=\phi_{z,l}(1-x)=\phi_{z,l}(-x)\]
 
 \end_inset 
 
  Concatenating group elements proceeds in a fashion similar to before.
  For example, 
 \begin_inset Formula \[
-g_{D}^{3}r_{D}g_{D}(x)=\frac{1}{8}-\frac{x}{16}\]
+g_{D}^{3}r_{D}g_{D}^{2}(x)=\frac{1}{8}-\frac{x}{32}\]
 
 \end_inset 
 
  and so 
 \begin_inset Formula \[
-\left[g^{3}rg\phi_{z}\right](x)=\phi_{z}\left(\frac{1}{8}-\frac{x}{16}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{8}\right)\right)+z\phi_{z}\left(\frac{1}{4}-\frac{x}{8}\right)\]
+\left[g^{3}rg^{2}\phi_{z}\right](x)=\phi_{z}\left(\frac{1}{8}-\frac{x}{32}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{16}\right)\right)+z\phi_{z}\left(\frac{1}{4}-\frac{x}{16}\right)\]
 
 \end_inset 
 
@@ -1055,40 +1051,78 @@ g_{D}^{3}r_{D}g_{D}(x)=\frac{1}{8}-\frac{x}{16}\]
 .
  Peeling off one group element at a time, we finally get 
 \begin_inset Formula \[
-\phi_{z}\left(\frac{1}{8}-\frac{x}{16}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{8}\right)\right)+z\,\exp\left(i\pi\left(\frac{1}{2}-\frac{x}{4}\right)\right)\]
+\phi_{z}\left(\frac{1}{8}-\frac{x}{32}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{16}\right)\right)+z\,\exp\left(i\pi\left(\frac{1}{2}-\frac{x}{8}\right)\right)+\]
 
 \end_inset 
 
 
 \begin_inset Formula \[
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+z^{2}\exp\left(i\pi\left(1-\frac{x}{2}\right)\right)+z^{3}\exp\left(-i\pi x\right)+z^{4}\phi_{z}\left(-x\right)\]
+\;\;\;\;\;\;\;\;\;\;\;\;+z^{2}\exp\left(i\pi\left(1-\frac{x}{4}\right)\right)+z^{3}\exp\left(-i\pi\frac{x}{2}\right)+z^{4}\exp\left(-i\pi x\right)+z^{5}\phi_{z}\left(-x\right)\]
 
 \end_inset 
 
- which we can also write as 
+ However, this obscures the true form of the transformation, which is exhibited
+ more clearly if we write the above as 
 \begin_inset Formula \[
-\left[g^{3}rg\phi_{z}\right](x)=\exp\left(2i\pi g^{3}rg(x)\right)+z\,\exp\left(2i\pi g^{2}rg(x)\right)\]
+g^{3}rg^{2}\phi_{z}=\phi_{z}g^{3}rg^{2}=Eg^{3}rg^{2}+z\, Eg^{2}rg^{2}+z^{2}Egrg^{2}+z^{3}Erg^{2}+z^{4}Erg+z^{5}\phi_{z}r\]
 
 \end_inset 
 
-
-\begin_inset Formula \[
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+z^{2}\exp\left(2i\pi grg(x)\right)+z^{3}\exp\left(-2i\pi g(x)\right)+z^{4}\phi_{z}\left(-x\right)\]
-
-\end_inset 
-
- XXXX The act of peeling off one group element creates this funny polynomial.
- We need to develop a notational mechanism for writing this kind of thing
- nicely.
- Part of the diffuculty is that there is no easy way to define 
-\begin_inset Quotes eld
-\end_inset 
-
-the operator that pels off one group element
-\begin_inset Quotes erd
+ where we defined 
+\begin_inset Formula $E(x)\equiv\exp(2\pi ix)$
 \end_inset 
 
 .
+ Just to be perfectly clear, in the above expression, we mean functional
+ composition whenever two elements are next to each other, with the exception
+ of 
+\begin_inset Formula $z$
+\end_inset 
+
+, which is just plain multiplication.
+ The operator 
+\begin_inset Formula $E$
+\end_inset 
+
+ has the effect of peeling off one group element at a time, and converting
+ it to a 
+\begin_inset Formula $z.$
+\end_inset 
+
+ The result is a funny polynomial which captures the action of the group
+ element.
+ The funny polynomial is the orbit of 
+\begin_inset Formula $\phi_{z}$
+\end_inset 
+
+ under the action of a general group element.
+ We abstain from trying to write the corresponding polynomial for the general
+ element 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}$
+\end_inset 
+
+ mostly because it would be quite ungainly.
+ We note only that the highest power of 
+\begin_inset Formula $z$
+\end_inset 
+
+ will be 
+\begin_inset Formula $a_{1}+a_{2}+...+a_{N}$
+\end_inset 
+
+ and also that 
+\begin_inset Formula $r$
+\end_inset 
+
+ can take the place of a minus sign, in that 
+\begin_inset Formula $(Er)(x)=E(r(x))=E(1-x)=E(-x)$
+\end_inset 
+
+, which remains in place, until the next 
+\begin_inset Formula $r$
+\end_inset 
+
+ cancels it out.
  
 \layout Standard
 
@@ -1099,6 +1133,15 @@ Miscellany
 \layout Standard
 
 A compendium of miscellaneous related topics that come to mind.
+\layout Subsubsection
+
+Levy Dragons; Weierstrass-Hardy Function
+\layout Standard
+
+I beleive that it would make for a good & interesting excercise to perform
+ the same analysis on the Levy Dragons.
+ Also, the Weierstrass-Hardy function has an obvious fractal self-similarity;
+ can we analyze it in the same way, using the same mechanisms?
 \layout Subsubsection
 
 Batrachions and Ladders of Symmetry
@@ -1332,52 +1375,85 @@ Homework: Describe the analytic properties of
 Conclusions
 \layout Standard
 
-We can apply essentially the same analysis to the Cantor Map and the Koch
- Curve.
- The Levy Dragon follows too.
- The highly irregular curves studied by Weierstrass-Hardy fall as well.
- This begs the question, are there any self-similar curves that do NOT have
- the modular group symmetry? One can promptly shoot back: oh, we of course,
- curves generated by **random** subdivision clearly cannot have this symmetry,
- but in fact, this assumption would be false.
- The evidence is that the continued fraction gaps are *randomly* distributed
- on the unit square, and thus one has a Cauchy sequence that converges arbitrari
-ly close to any given random value.
- We already know that the gaps obey the modular group symmetry, and thus
- we conclude that **even radnom walks** have the modular group symmetry.
- This is the killer result, I think.
+The seeming general applicability of this mode of analysis seems to beg
+ the question, are there any self-similar curves that do NOT have the modular
+ group symmetry?
 \layout Standard
 
-Are there features which are *not* adequately described by the modular group?
+At first, one is tempted to state that curves generated by 
+\emph on 
+random
+\emph default 
+ subdivision clearly cannot have this symmetry, but in fact, it is far from
+ clear that this is true.
+ As we've considered in an earlier chapter, the 
+\begin_inset Quotes eld
+\end_inset 
+
+gaps
+\begin_inset Quotes erd
+\end_inset 
+
+ of the continued fraction are 
+\emph on 
+randomly
+\emph default 
+ distributed on the unit square, and thus one has a Cauchy sequence that
+ converges arbitrarily close to any given random value.
+ The limit point is represnetable by a rational.
+ This implies that 
+\emph on 
+any
+\emph default 
+ stochastic process on the unit interval can be represented by a strictly
+ monotonically increasing sequence of rationals.
+ This sequence of monotonically increasing rationals encodes the 'information'
+ contained in the stochastic process, and through a standard 
+\begin_inset Formula $\delta,\epsilon$
+\end_inset 
+
+ type proof, can be shown to be made arbitrarily accurate.
+ But because this sequence of rationals was constructed explictly through
+ the use of continued fractions, it has inherently built into it the symmetry
+ of the Modular Group.
+ That is, 
+\emph on 
+even random walks
+\emph default 
+ have the modular group symmetry.
+ This symmetry is clearly hidden (perfectly hidden, one might say) when
+ looking at the stochastic process itself, but should manifest itself whenever
+ the stochastic process is used for some purpose.
+ For example, in a differential equation, the symmetry will show up as a
+ scaling property or a power-law noise spectrum.
+ For a fractal constructed from random numbers, a similar set of scaling
+ relationships will become manifest.
+ But its already known that stochastic differential equations have such
+ properties, so this is not new news; what's different is that these properties
+ can potentially be rederived and analyzed through the application of the
+ modular group.
+ This is surprising.
 \layout Standard
 
-The Mandelbrot Set.
- Mode locking.
- Levy Dragons are probably exactly solvable..
-\layout Standard
-
-blah blah write this section.
-\layout Standard
-
-See the pictures of phase-locking in the Circle map at the URL 
+Returning a bit closer to earth, we note the phase-locked regions of the
+ Circle Map (see, for example, the pictures at the URL 
 \begin_inset LatexCommand \htmlurl[Circle Map]{http://www.linas.org/art-gallery/basic/basic.html}
 
 \end_inset 
 
- and notice the similarities to the gaps pictured at 
+) can be numbered with the Farey Numbers and are also qualitativly similar
+ and suggestive of the gaps in continued fractions (see for example, the
+ pictures at 
 \begin_inset LatexCommand \htmlurl[Farey Room Pictures]{http://www.linas.org/art-gallery/farey/fthumb.html}
 
 \end_inset 
 
- Yada Yada.
- The mode-locked regions are called Sinai's toungues.
- This implies that the Modular Group is the symmetry group of the phase
- locked-loop (the circle map) as well as the Mandelbrot Set.
- 
-\layout Standard
-
-Notice that the mode-locked regions of the circle map are exactly those
- regions that are *not* chaotic: in other words, these are the so-called
+).
+ Reaching, but not too far, this implies that the Modular Group is the symmetry
+ group of the Circle Map (the phase locked-loop of electronics) as well
+ as the Mandelbrot Set.
+ We then note that  the mode-locked regions of the circle map are exactly
+ those regions that are *not* chaotic: in other words, these are the so-called
  
 \begin_inset Quotes eld
 \end_inset 
@@ -1399,7 +1475,7 @@ sea of chaos
  iterated Feigenbaum map, and one is naturally lead to ask, is the modular
  group the symmetry group that maps islands into islands, for any period
  doubling map? What about the converse? Are there any maps, with islands,
- that do not have the Modular Form symmetry? 
+ that do not have the Modular Group as its underlying symmetry? 
 \layout Subsubsection
 
 3-period Mode Locking
