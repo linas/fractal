@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 #include "Farey.h"
+#include "gcf.h"
 
 main (int argc, char *argv[])
 {

@@ -2,12 +2,13 @@
 /*
  * sway.C
  *
- * simple graph of swaying
+ * simple graph of swaying of the continued fraction expansion
  *
  * Linas Vepstas October 2004
  */
 
 #include "Farey.h"
+#include "gcf.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
