@@ -99,6 +99,7 @@ FindZero (double (*func)(double), double bound, int nsig,
 	if (0.0 < fa*fb)
 	{
       printf ("FINDZERO: no zero bracketed by the specified interval\n");
+      printf ("\t a=%g b=%g fa = %g fb=%g\n", a,b, fa, fb);
 		return b;
 	}
 

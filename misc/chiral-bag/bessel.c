@@ -154,7 +154,7 @@ C       BESS (I) = C * TMP(I) * (10.0D0 ** (MON(I)-M))
    m = mon [0];
 	scale = r;
 	bess [0] = scale * tmp[0];
-	for (i=1; i<=n; i++)
+	for (i=1; i<n+3; i++)
 	{
 		if (mon[i] != mon[i-1]) 
 		{ 
@@ -183,7 +183,7 @@ quickbessel (int n, double x,
              double *bessm1, double *bess, double *bessp1)
 {
 	double val [ARRSZ];
-	bessel (n,x,val);
+	bessel (n+1,x,val);
 
 	*bessm1 = val[n-1];
 	*bess = val[n];

@@ -172,7 +172,7 @@ C       THE PAIR.
 	sygnus = ispect;
 	b = fmax ((double)(kay-2), 3.2e-4);
 	step = 0.1;
-	funb = copysign (1.0, efn(sygnus * b));
+	funb = efn(sygnus * b);
 	numfound = 0;
 	justfound = -99;
 
@@ -190,11 +190,11 @@ c	       take a big step and save some cpu time.
 			a = b;
 			b = b + step;
 			funa = funb;
-			funb = copysign (1.0, efn (sygnus * b));
+			funb = efn (sygnus * b);
 		}
 		else
 		{
-			a = fabs (ener [numfound]) + step;
+			a = fabs (ener [numfound-1]) + step;
 			if (20 > numfound)
 			{
 				b = a + 2.2;
@@ -203,8 +203,8 @@ c	       take a big step and save some cpu time.
 			{
 				b = a + 2.95;
 			}
-			funa = copysign (1.0, efn (sygnus * a));
-			funb = copysign (1.0, efn (sygnus * b));
+			funa = efn (sygnus * a);
+			funb = efn (sygnus * b);
 			justfound = -99;
 		}
 
@@ -214,8 +214,8 @@ c	       take a big step and save some cpu time.
 			bb = FindZero (efn, 0.0, nsig, sygnus*a, sygnus*b, maxit);
 
 			/* STORE AND PRINT THE ENERGIES FOUND */
-			numfound = numfound  + 1;
 			ener [numfound] = bb;
+			numfound++;
 
 			/*  ***** DECREASE step SIZE PER COMMENTS ABOVE */
 			justfound = 99;
@@ -228,7 +228,7 @@ c	       take a big step and save some cpu time.
 			}
 		}
 	}
-	return numfound;
+	return numfound+1;
 }
 
 /* ============================================================= */
