@@ -15,19 +15,23 @@ int main ()
 {
 	int i;
 
-	int nmax = 720;
+	// int nmax = 720;
+	// int nmax = 719;
+	int nmax = 512;
 
-	int sum = 0;
+	double sum = 0.0;
 	for (i=1; i<nmax; i++)
 	{
 		double x = ((double) i)/((double) nmax);
 
 		int g = gcf32 (i, nmax);
-		int n = i / g;
-		int y = totient_phi (n);
+		int nume = i / g;
+		int deno = nmax / g;
+		double y = totient_phi (nume);
+		y /= (double) nume;
 
-		sum += y;
+		sum += y/((double) nmax);
 
-		printf ("%d	%d	%g	%d	%d\n", i, n, x, y, sum);
+		printf ("%d	%d	%g	%g	%g\n", i, nume, x, y, sum);
 	}
 }
