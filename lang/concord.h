@@ -35,6 +35,12 @@ class lagGenericConcordTable :
          public:
             Concord * next;
             lagGenericWordTable::Helper * where;
+#ifdef LAG_USE_OVERLOADED_NEW
+            void * operator new (size_t s);
+            static int memblocks;
+            static int memleft;
+            static char * mempool;
+#endif // LAG_USE_OVERLOADED_NEW
       };
       Concord ** concordance;
 

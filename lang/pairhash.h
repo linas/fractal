@@ -24,6 +24,7 @@
 #ifndef __LAG_PAIR_TABLE_H__
 #define __LAG_PAIR_TABLE_H__
 
+#include <typedefs.h>
 #include "config.h"
 
 #ifndef LAG_WORD_TUPLE
@@ -68,6 +69,12 @@ class lagGenericWordTable {
             unsigned int tuple[LAG_WORD_TUPLE];
             int id;
             int cnt;
+#ifdef LAG_USE_OVERLOADED_NEW
+            void * operator new (size_t s);
+            static int memblocks;
+            static int memleft;
+            static char * mempool;
+#endif // LAG_USE_OVERLOADED_NEW
       };
       Helper * table [LAG_PAIR_HASH_TABLE_SIZE];
       Helper ** idx;

@@ -105,8 +105,35 @@ void lagGenericConcordTable :: Dump (void) {
    printf ("sizeof concord is %d bytes \n", sizeof (Concord));
    printf ("\n");
 
+#ifdef LAG_USE_OVERLOADED_NEW
+   printf (" num blocks alloced= %d \n", Concord ::memblocks);
+   printf (" block mem left = %d \n", Concord ::memleft);
+#endif // LAG_USE_OVERLOADED_NEW
+
    lagGenericWordTable :: Dump();
 }
+
+// =====================================================
+#ifdef LAG_USE_OVERLOADED_NEW
+
+int lagGenericConcordTable :: Concord ::  memleft = 0;
+int lagGenericConcordTable :: Concord ::  memblocks = 0;
+char * lagGenericConcordTable :: Concord ::  mempool = 0x0;
+
+void * lagGenericConcordTable :: Concord ::  operator new (size_t s) {
+
+   if (!mempool || memleft < s) {
+      mempool = new char [LAG_CHUNK_SIZE];
+      memleft = LAG_CHUNK_SIZE;
+      memblocks ++;
+   }
+
+   memleft -= s;
+   void * obj = mempool;
+   mempool += s;
+   return obj;
+}
+#endif // LAG_USE_OVERLOADED_NEW
 
 // ===================== END OF FILE ===================
 
