@@ -4,6 +4,8 @@
  * 
  * Explore Hurwitz zeta eigenfunctions of Bernoulli map
  *
+ * Explore equivalence of zeta to fractals
+ *
  * Linas November 2004
  */
 #include <math.h>
@@ -116,6 +118,78 @@ double beta_odd_grow (double x, double sre)
 	return odd;
 }
 
+/* 
+ * fractal eigenfunctions of bernoulli map 
+ */
+void fractal_phi (double zre, double zim, int ell, double x, double *rephi, double *imphi)
+{
+	double tmp;
+   double phire=0.0, phiim=0.0;
+	int k;
+
+	double tell = 2.0*ell+1.0;
+	tell *= 2.0*M_PI *x;
+	double twok = 1.0;
+	double zkr = 1.0;
+	double zki = 0.0;
+	for (k=0; k<50; k++)
+	{
+		double arg = tell*twok;
+
+		double co = cos (arg);
+		double si = sin (arg);
+
+		double reterm = zkr *co - zki *si;
+		double imterm = zki *co + zkr *si;
+
+		phire += reterm;
+		phiim += imterm;
+
+		tmp = zkr *zre - zki*zim;
+		zki = zkr *zim + zki*zre;
+		zkr = tmp;
+
+		twok *= 2.0;
+	}
+
+	*rephi = phire;
+	*imphi = phiim;
+} 
+
+/* should be equal to other beta */
+void fractal_beta (double sre, double sim, double x, double *bre, double *bim)
+{
+	int ell;
+	double logtwo = log(2.0);
+
+	double reb = 0.0;
+	double imb = 0.0;
+	double zmag = pow (2.0, -sre);
+	double zre = zmag * cos (sim*logtwo);
+	double zim = - zmag * sin (sim*logtwo);
+	for (ell=0; ell<300; ell ++)
+	{
+		double tell = 2.0*ell +1.0;
+
+		double lmag = pow (tell, -sre);
+		double ltell = log (tell);
+		double lre = lmag * cos (sim*ltell);
+		double lim = -lmag * sin (sim*ltell);
+
+		double rephi, imphi;
+		fractal_phi (zre, zim, ell, x, &rephi, &imphi);
+
+		double tre = rephi * lre - imphi *lim;
+		double tim = rephi * lim + imphi *lre;
+
+		reb += tre;
+		imb += tim;
+	}
+
+	*bre = reb;
+	*bim = imb;
+}
+
 main (int argc, char * argv[])
 {
 	int i;
@@ -132,8 +206,8 @@ main (int argc, char * argv[])
 	double sre=2.345;
 	double sim = s;
 
-	sre = -s;
-	sim = 0.0;
+	// sre = -s;
+	// sim = 0.0;
 
 	// double lambda = pow (0.5, s);
 	double lambda = pow (0.5, sre);
@@ -144,7 +218,7 @@ main (int argc, char * argv[])
 	printf ("#\n# ess=%g +i %g  eigenvalue lambda=%g +i %g \n#\n", sre, sim, re_lambda, im_lambda);
 	printf ("#\n#   |lambda|=%g  arg(lambda)=%g \n#\n", lambda, sim*log(2.0));
 	
-	int imax = 623;
+	int imax = 23;
 	for (i=1; i<imax; i++) 
 	{
 		double x = i/((double) imax);
@@ -227,6 +301,7 @@ main (int argc, char * argv[])
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, e, o);
 #endif
 
+#if SING_FREE_TYPE_TWO
 		double e = beta_even_grow (x,sre);
 		double o = beta_odd_grow (x,sre);
 
@@ -241,6 +316,15 @@ main (int argc, char * argv[])
 		o -= poz - poo;
 
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, e, o);
+#endif
+
+		double bre, bim;
+		betas (x, sre, sim, &bre, &bim);
+
+		double fre, fim;
+		fractal_beta (sre, sim, x, &fre, &fim);
+
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bre, bim, fre, fim);
 
 		fflush (stdout);
 	}
