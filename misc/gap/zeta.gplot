@@ -11,13 +11,30 @@ set out 'zeta.png'
 set data style lines
 set key right
 
-set title "zeta-eigenfunctions"
+set title "Zeta Eigenfunctions"
 set xlabel "x"
-set ylabel "zeta"
+set ylabel "|beta(x; 2.345+it) + beta(-x; 2.345+it)|/|Gamma(1+s)|"
 
 # set yrange [0:]
 
-plot "zeta.dat" using 2:3 title "zeta"
+#set ylabel "Re (beta(x; 2.345+it) + beta(-x; 2.345+it))/|Gamma(1+s)|"
+#plot "zeta.dat" using 2:3 title "t=0", \
+#     "zeta.dat" using 2:5 title "t=2pi/ln2", \
+#     "zeta.dat" using 2:7 title "t=4pi/ln2", \
+#     "zeta.dat" using 2:9 title "t=6pi/ln2", \
+#     "zeta.dat" using 2:11 title "t=8pi/ln2"
+
+# plot "zeta.dat" using 2:4 title "t=0", \
+#     "zeta.dat" using 2:6 title "t=2pi/ln2", \
+#     "zeta.dat" using 2:8 title "t=4pi/ln2", \
+#     "zeta.dat" using 2:10 title "t=6pi/ln2", \
+#     "zeta.dat" using 2:12 title "t=8pi/ln2"
+
+plot "zeta.dat" using 2:(sqrt($3*$3+$4*$4)) title "t=0", \
+     "zeta.dat" using 2:(sqrt($5*$5+$6*$6)) title "t=2pi/ln2", \
+     "zeta.dat" using 2:(sqrt($7*$7+$8*$8)) title "t=4pi/ln2", \
+     "zeta.dat" using 2:(sqrt($9*$9+$10*$10)) title "t=6pi/ln2", \
+     "zeta.dat" using 2:(sqrt($11*$11+$12*$12)) title "t=8pi/ln2"
 
 #     "zeta.dat" using 2:($2*$2-$2+0.1666666) title "bernoulli"
 #     "zeta.dat" using 2:($2*$2*$2-1.5*$2*$2+0.5*$2) title "bernoulli"

@@ -23,7 +23,7 @@ realclean:	clean
 	$(CC) -c -O2 $<
 
 .o:
-	$(CC) -o $* $< $(LIB)/Farey.o $(LIB)/FareyTree.o -lgmpxx -lgmp -lm -lstdc++ 
+	$(CC) -o $* $< $(LIB)/Farey.o $(LIB)/FareyTree.o -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++ 
 
 
 dyadic.o:	dyadic.C
