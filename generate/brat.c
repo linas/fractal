@@ -31,14 +31,21 @@ void mandelbrot_cutoff (
    unsigned int	i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
-   double	re, im, tmp;
+   double	re, im, tmp, modulus=0.0;
+   double	dre, dim, dmod;
+   double	ddre, ddim, ddmod;
+   double	zpre, zpim, zppre, zppim;
    int		loop;
-   double 	modulus=0.0, frac;
+   double 	omod=0.0, frac;
    double 	escape_radius = 1.0e30;
    double 	ren, tl;
    double	tau;
    double	*regulator;
    double	sum_n, sum_re, sum_im, sum_mod;
+   double	sum_dre, sum_dim, sum_dmod;
+   double	sum_ddre, sum_ddim, sum_ddmod;
+   double	sum_zpre, sum_zpim, sum_zpmod;
+   double	sum_zppre, sum_zppim, sum_zppmod;
 
    /* first, compute the regulator, so that the itermax'th iteration makes 
     * a negligable contribution (about 1e-30) */
@@ -51,6 +58,7 @@ void mandelbrot_cutoff (
       regulator[i] = exp (- ((double)(i*i))*tau*tau);
       sum_n += regulator[i];
    }
+   printf ("itermax=%d tau=%g sum_n=%g\n", itermax, tau, sum_n);
 
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0 / log(2.0);
@@ -70,14 +78,68 @@ void mandelbrot_cutoff (
       re_position = re_start;
       for (j=0; j<sizex; j++) {
          sum_re = sum_im = sum_mod = 0.0;
+         sum_dre = sum_dim = sum_dmod = 0.0;
+         sum_ddre = sum_ddim = sum_ddmod = 0.0;
+         sum_zpre = sum_zpim = sum_zpmod = 0.0;
+         sum_zppre = sum_zppim = sum_zppmod = 0.0;
          re = re_position;
          im = im_position;
+         dre = 1.0;
+         dim = 0.0;
+         dmod = 0.0;
+         ddre = 0.0;
+         ddim = 0.0;
+         ddmod = 0.0;
          modulus = (re*re + im*im);
-         for (loop=1; loop <itermax; loop++) {
+         for (loop=1; loop <itermax; loop++) 
+         {
             sum_re += re * regulator [loop];
             sum_im += im * regulator [loop];
-            sum_mod += sqrt(modulus) * regulator [loop];
+            // sum_mod += sqrt(modulus) * regulator [loop];
 
+            /* sum over first derivative z-prime */
+            sum_dre += dre * regulator [loop];
+            sum_dim += dim * regulator [loop];
+            // sum_dmod += sqrt(dmod) * regulator [loop];
+
+            /* sum over second derivative z-prime-prime*/
+            sum_ddre += ddre * regulator [loop];
+            sum_ddim += ddim * regulator [loop];
+            // sum_ddmod += sqrt(ddmod) * regulator [loop];
+
+            omod = 1.0 / modulus;
+
+            /* compute zprimeprime/z */
+            zppre = re*ddre + im*ddim;   /* divergence */
+            zppim = re*ddim - im*ddre;   /* curl */
+            zppre *= omod;
+            zppim *= omod;
+
+            /* compute zprime/z */
+            zpre = re*dre + im*dim;   /* divergence */
+            zpim = re*dim - im*dre;   /* curl */
+            zpre *= omod;
+            zpim *= omod;
+
+            /* sum over first and second derivative z-prime-prime / z*/
+            sum_zpre += zpre * regulator [loop];
+            sum_zpim += zpim * regulator [loop];
+            sum_zppre += zppre * regulator [loop];
+            sum_zppim += zppim * regulator [loop];
+
+            /* compute second derivative */
+            tmp = 2.0 * (re*ddre - im*ddim + dre*dre - dim*dim);
+            ddim = 2.0 * (re*ddim + im*ddre + 2.0 * dre*dim);
+            ddre = tmp;
+            ddmod = ddre*ddre+ddim*ddim;
+
+            /* compute infinitessimal flow */
+            tmp = 2.0 * (re*dre - im*dim) +1.0;
+            dim = 2.0 * (re*dim + im*dre);
+            dre = tmp;
+            dmod = dre*dre+dim*dim;
+
+            /* compute iterate */
             tmp = re*re - im*im + re_position;
             im = 2.0*re*im + im_position;
             re = tmp;
@@ -92,10 +154,15 @@ void mandelbrot_cutoff (
          glob [i*sizex +j] = modulus / sum_n;
          glob [i*sizex +j] = sum_mod / sum_n;
          glob [i*sizex +j] = sum_mod - modulus;
+
+          /* the following computes an almost-flat, divergence free thing */
          glob [i*sizex +j] = modulus / sum_n;
          glob [i*sizex +j] /= (sqrt (re_position*re_position+im_position*im_position));
          glob [i*sizex +j] -= 1.0/ sqrt (sqrt ((re_position-0.5)*(re_position-0.5)+im_position*im_position));
 
+         modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
+         glob [i*sizex +j] = modulus / sum_n;
+         // glob [i*sizex +j] -= 0.5/ ( sqrt ((re_position-0.25)*(re_position-0.25)+im_position*im_position));
 
          re_position += delta;
       }
@@ -304,7 +371,7 @@ void dmandelbrot_out (
          d3re /= (re*re + im*im);
          d3im /= (re*re + im*im);
 
-         /* compute z(4)/z */
+         /* compute z'(4)/z */
          tmp = re*d4re + im*d4im;   /* divergence */
          d4im = re*d4im - im*d4re;   /* curl */
          d4re = tmp;
