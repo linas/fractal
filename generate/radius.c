@@ -160,7 +160,7 @@ main (int argc, char *argv[])
    printf ("# \n");
    printf ("# measurement of loop=3 radius \n");
    printf ("# \n");
-   printf ("# nphi=%d nr=%d iter=%d eps=%g cent=(%f %f) rmin=%f rmax=%f\n", 
+   printf ("# nphi=%d nr=%d iter=%d eps=%g cent=(%14.10f %14.10f) rmin=%f rmax=%f\n", 
         nphi, nr, itermax, epsilon, re_center, im_center, rmin, rmax);
    printf ("# \n");
    printf ("#i	theta		radius		loop count\n"); 
