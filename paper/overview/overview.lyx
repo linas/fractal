@@ -2163,9 +2163,22 @@ g=\left(\begin{array}{cc}
 
 \end_inset 
 
- We can use these to evaluate the continued fraction above; indeeed, the
- modular group is known as being one way to conveniently work with continued
- fractions.
+ Every group element of 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ can be decomposed into a combination of these generators, of the form 
+\begin_inset Formula $g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+ for integers 
+\begin_inset Formula $a_{k}\in\mathbb{Z}$
+\end_inset 
+
+.
+ The matrix representation of the generators can be used to evaluate continued
+ fractions; indeeed, the modular group is known as being one way to conveniently
+ work with continued fractions.
  
 \layout Standard
 
@@ -2198,14 +2211,147 @@ First, let us consider the group elements with
 \end_inset 
 
 .
+ When the coefficients are zero or positive like this, we find that 
+\begin_inset Formula $\gamma(x)$
+\end_inset 
+
+ maps the unit interval into strictly small intervals; 
+\shape italic 
+i.e.
+
+\shape default 
+ that 
+\begin_inset Formula $0<\gamma(0),\gamma(1)<1$
+\end_inset 
+
+.
+ One endpoint of the interval are given by the rational 
+\begin_inset Formula $\gamma(0)=[a_{1}+1,a_{2},a_{3},...,a_{N-1}]$
+\end_inset 
+
+ (note the missing 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+).
+ The other endpoint is 
+\begin_inset Formula $\gamma(1)=[a_{1}+1,a_{2},a_{3},...,a_{N}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}\geq1$
+\end_inset 
+
+, although it must be written as 
+\begin_inset Formula $\gamma(1)=[a_{1}+1,a_{2},a_{3},...,a_{N-2}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}=0$
+\end_inset 
+
+.
+ This last special case is really just a reversal of the two endpoints.
+ For such a 'shrinking' 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+, we can now write the isomorphism of the question mark as 
+\begin_inset Formula \[
+?(\gamma(x))=?(\gamma(0))+\frac{\left(-1\right)^{N}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
+
+\end_inset 
+
+
+\layout Standard
+
+The best way of understanding this isomorphism is to think of it as an isomorphi
+sm of intervals, where we can pick one end of the interval, but are a bit
+ more constrained in picking the other end.
+ That is, we can pick an arbitrary 
+\begin_inset Formula $\gamma(0)=p/q\in\mathbb{Q}$
+\end_inset 
+
+.
+ We get the other end of the interval by picking 
+\begin_inset Formula $a_{N}\in\mathbb{N}$
+\end_inset 
+
+ a positive integer.
+ Having thus specified the interval, we can, for good measure, choose to
+ exchange the endpoints, that is, pick one of 
+\begin_inset Formula $\left\{ 1,r\right\} \in\mathbb{Z}_{2}$
+\end_inset 
+
+.
+ To summarize, this set of isomorphisms of the question mark can be enumerated
+ by 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes\mathbb{Z}_{2}$
+\end_inset 
+
+, which we'd like to call the fundamental set of symmetries.
+ Note that this property of being able to freely pick one endpoint, but
+ being a bit more contstrained with the other is a very important property
+ of this symmetry.
+ 
+\series bold 
+\emph on 
+This property is the fundamental property of self-similar objects and fractals
+ in general: one can freely pick which copy one is to be self-similar with,
+ but then after that, one has little further freedom.
+
+\series default 
+\emph default 
+ This is what makes fractals be what they are.
  
 \layout Standard
 
-The above relation holds when 
-\begin_inset Formula $a_{N}\neq1$
+So far, we've only enumerated some, but not all of the modular group.
+ The inverse of our generator 
+\begin_inset Formula $g$
 \end_inset 
 
-; and for 
+ is 
+\begin_inset Formula $g^{-1}=\left(\begin{array}{cc}
+1 & 0\\
+-1 & 1\end{array}\right)$
+\end_inset 
+
+.
+ For the group element 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+ we can quickly see that the inverse is 
+\begin_inset Formula $\gamma^{-1}=g^{-a_{N}}rg^{-a_{N-1}}r...rg^{-a_{1}}$
+\end_inset 
+
+.
+ Its easy to see that these define the inverse mappings of smaller intervals
+ onto the unit interval.
+ Note that one needs to be careful when working with 
+\begin_inset Formula $\gamma^{-1}(x)$
+\end_inset 
+
+ because this has poles that are just outside of the interval of the mapping.
+ That is, the domain of the isomorphism is defined only on the interval
+ of the mapping, and not the whole unit interval (its the range, not the
+ domain, that is the whole unit interval).
+ These inverse mappings can also be enumerated by 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes\mathbb{Z}_{2}$
+\end_inset 
+
+, of course.
+ 
+\layout Standard
+
+All of the remaining group elements that we haven't yet discussed are those
+ with a mixture of positive and negative values for the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+.
+ These group elements can be obtained by concatenating 
 \layout Standard
 
 Thus we see that 
@@ -2278,24 +2424,6 @@ Note that the group product in
  corresponds to the concatenation of continued fractions.
  What about the inverse group elemennt? What is the projective symmetry,
  and what is it hiding? 
-\layout Standard
-
-Give the explicit matrix elements.
- Note that the matrix elements specify intervals on the real-number line.
- The lower endpoint is given by the rational 
-\begin_inset Formula $\gamma(0)=[a_{1}+1,a_{2},a_{3},...,a_{N-1}]$
-\end_inset 
-
- (note the missing 
-\begin_inset Formula $a_{N}$
-\end_inset 
-
-).
- The upper endpoint of the interval is given by 
-\begin_inset Formula $\gamma(1)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}]$
-\end_inset 
-
- .
 \layout Standard
 
 Note that these correspondances induce a symmetry on the rationals, something
