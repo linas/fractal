@@ -17,6 +17,7 @@
 
 #include "brat.h"
 #include "moebius.h"
+#include "totient.h"
 
 int thue_morse(int n)
 {
@@ -113,8 +114,12 @@ static void curvature_c (double re_q, double im_q, double *prep, double *pimp)
 	*prep = 0.0;
 	*pimp = 0.0;
 
-	double rep = 0.0;
-	double imp = 0.0;
+	double reh = 0.0;
+	double imh = 0.0;
+	double rehp = 0.0;
+	double imhp = 0.0;
+	double rehpp = 0.0;
+	double imhpp = 0.0;
 
 	double qpr = 1.0;
 	double qpi = 0.0;
@@ -142,7 +147,8 @@ static void curvature_c (double re_q, double im_q, double *prep, double *pimp)
 		// if (1 == tm) t = -1.0;
 
 		// double t = moebius_mu (i+1);
-		double t = randoid (i+1);
+		double t = totient_phi (i+1);
+		// double t = randoid (i+1);
 #if 0
 		t *= (i+1);
 		t *= (i+1);
@@ -150,20 +156,14 @@ static void curvature_c (double re_q, double im_q, double *prep, double *pimp)
 #endif
 
 		double eye = i;
-		double rehp = eye*qprm1*t;
-		double imhp = eye*qpim1*t;
-		double rehpp = eye*(eye-1.0)*qprm2*t;
-		double imhpp = eye*(eye-1.0)*qpim2*t;
 
-		double norm = pow (rehp*rehp+imhp*imhp,  1.5);
-		double  equipot_term = - rehpp*(rehp*rehp - imhp*imhp) - 2.0*rehp*imhp*imhpp;
-		equipot_term /= norm;
+		reh += t*qpr;
+		imh += t*qpi;
 
-		double ray_term = imhpp*(rehp*rehp - imhp*imhp) - 2.0*rehp*imhp*rehpp;
-		ray_term /= norm;
-
-		rep += equipot_term;
-		imp += ray_term;
+		rehp += eye*qprm1*t;
+		imhp += eye*qpim1*t;
+		rehpp += eye*(eye-1.0)*qprm2*t;
+		imhpp += eye*(eye-1.0)*qpim2*t;
 
 		/* save lower derives */
 		qprm2 = qprm1;
@@ -185,8 +185,15 @@ static void curvature_c (double re_q, double im_q, double *prep, double *pimp)
 		// printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
 	}
 
-	*prep = rep;
-	*pimp = imp;
+	double norm = pow (rehp*rehp+imhp*imhp,  1.5);
+	double  equipot = - rehpp*(rehp*rehp - imhp*imhp) - 2.0*rehp*imhp*imhpp;
+	equipot /= norm;
+
+	double ray = imhpp*(rehp*rehp - imhp*imhp) - 2.0*rehp*imhp*rehpp;
+	ray /= norm;
+
+	*prep = equipot;
+	*pimp = ray;
 }
 
 
@@ -197,7 +204,8 @@ static double mobius_series (double re_q, double im_q)
 	// mobius_series_c (re_q, im_q, &rep, &imp);
 	curvature_c (re_q, im_q, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
-	return rep;
+	// return rep;
+	return rep*imp;
 	// return imp;
 	// return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
 }

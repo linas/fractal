@@ -64,7 +64,7 @@ euler-q: brat.o euler-q.o util.o
 	$(CC) -o $@ $^ -lm -lstdc++
 
 mobius: brat.o mobius.o util.o
-	$(CC) -o $@ $^ ../tools/lib/moebius.o ../tools/lib/gcf.o -lm -lstdc++
+	$(CC) -o $@ $^ ../tools/lib/moebius.o ../tools/lib/totient.o ../tools/lib/gcf.o -lm -lstdc++
 
 totient: brat.o totient.o util.o
 	$(CC) -o $@ $^ ../tools/lib/totient.o ../tools/lib/gcf.o -lm -lstdc++
