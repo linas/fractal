@@ -1,0 +1,33 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'frob.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "One iteration"
+set xlabel "x"
+set ylabel "Density"
+
+# set yrange [0:]
+
+plot "frob.dat" using 2:3 title "iter 0", \
+     "frob.dat" using 2:4 title "iter 1", \
+     "frob.dat" using 2:5 title "iter 2", \
+     "frob.dat" using 2:6 title "iter 3", \
+     "frob.dat" using 2:7 title "iter 4", \
+     "frob.dat" using 2:8 title "iter 5", \
+     "frob.dat" using 2:9 title "iter 6", \
+     "frob.dat" using 2:10 title "iter 7"
+
+# plot "frob.dat" using 2:3 title "orig", \
+#      "frob.dat" using 2:4 title "numeric", \
+#      "frob.dat" using 2:5 title "frob-p"
+
+# pause 100
+
