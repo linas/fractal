@@ -2926,8 +2926,21 @@ g\beta(x;s)=\beta(\frac{x}{2};s)=\frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\inf
 The Takagi Representation 
 \layout Standard
 
-Note that the the iterated tent map behaves sort-of like a shift state,
- in that 
+One can also construct eigenstates out of the Takagi Curve.
+ Start with the triangle wave/tent map: 
+\begin_inset Formula \begin{equation}
+\tau(x)=\left\{ \begin{array}{ccc}
+2(x-\left\lfloor x\right\rfloor ) & \;\textrm{ when }\; & 0\leq x-\left\lfloor x\right\rfloor \leq1/2\\
+2(1-x+\left\lfloor x\right\rfloor ) & \;\textrm{ when }\; & 1/2\leq x-\left\lfloor x\right\rfloor \leq1\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ which has the property that it doubles under iteration: 
+\begin_inset Formula $\tau^{k}(x)=\tau(2^{k-1}x)$
+\end_inset 
+
+.
+ The iterated tent map behaves sort-of like a shift state, in that 
 \begin_inset Formula \begin{equation}
 \left[U_{B}\tau^{k}\right](x)=\tau^{k-1}(x)\label{eq:}\end{equation}
 
@@ -2960,23 +2973,31 @@ b_{w}(x)=\frac{-1}{2(1-w)}+t_{w}(x)\label{eq:}\end{equation}
 .
  On closer examination, we can see that this eigenvalue has the same countable
  degeneracy we've seen previously.
- That is, we actually have the set of eigenfunctions
+ That is, we can replace 
+\begin_inset Formula $x$
+\end_inset 
+
+ on the right-hand-side of the equations above by 
+\begin_inset Formula $(2j+1)x$
+\end_inset 
+
+ for 
+\begin_inset Formula $j\in\mathbb{N}$
+\end_inset 
+
+ to obtain the set of eigenfunctions
 \begin_inset Formula \begin{equation}
 b_{w,j}(x)=\frac{-1}{2(1-w)}+t_{w}((2j+1)x)\label{eq:}\end{equation}
 
-\end_inset 
-
- with 
-\begin_inset Formula $j\in\mathbb{N}$
 \end_inset 
 
  all sharing the eigenvalue 
 \begin_inset Formula $w.$
 \end_inset 
 
- It follows immediately that we should be able to express the Hurwitz Zeta
- eigenfunctions 
-\begin_inset Formula $\zeta(s,x)$
+ It follows immediately that, just as above, we should be able to express
+ the Hurwitz Zeta eigenfunctions 
+\begin_inset Formula $\beta_{n}(x;s)$
 \end_inset 
 
  for fixed 
@@ -2996,8 +3017,7 @@ b_{w,j}(x)=\frac{-1}{2(1-w)}+t_{w}((2j+1)x)\label{eq:}\end{equation}
 \end_inset 
 
 .
- We explore this idea further in the following section; but we can note
- here that one special case is immediatly appearent: the Takagi Curve 
+ One special case is immediatly appearent: the Takagi Curve 
 \begin_inset Formula $t_{1/4}(x)$
 \end_inset 
 
@@ -3006,6 +3026,9 @@ b_{w,j}(x)=\frac{-1}{2(1-w)}+t_{w}((2j+1)x)\label{eq:}\end{equation}
 \end_inset 
 
 .
+\layout Standard
+
+XXX finish me; give the explicit expressions.
 \layout Standard
 
 We can also obtain other eigenvectors by starting with the Takagi curves
@@ -3022,7 +3045,7 @@ We can also obtain other eigenvectors by starting with the Takagi curves
 \end_inset 
 
  so that if 
-\begin_inset Formula $t_{n,w}(x)$
+\begin_inset Formula $t_{w}^{(n)}((2j+1)x)$
 \end_inset 
 
  is a Takagi curve that transforms under the 
@@ -3060,13 +3083,13 @@ For a fixed eigenvalue
 \end_inset 
 
 , we expect a countably infinite degeneracy built out of the 
-\begin_inset Formula $t_{n,w}((2j+1)x)$
+\begin_inset Formula $t_{w}^{(n)}((2j+1)x)$
 \end_inset 
 
 .
  Again, if these form a complete set of eigenstates, then we expect to be
  able to write out 
-\begin_inset Formula $\zeta(s,x)$
+\begin_inset Formula $\beta_{n}(x;s)$
 \end_inset 
 
  as a linear combination of these, and v.v.
@@ -3574,7 +3597,7 @@ divided differences
 
 \end_inset 
 
-xx below.
+ below.
  
 \layout Standard
 
@@ -3780,8 +3803,9 @@ Some values of
  
 \layout Standard
 
-xxx html table layout borken.
- xxx
+xxx Lyx w/latex2html html table layout borken.
+ See http://www.tug.org/pipermail/latex2html/2004-August/002758.html for details.
+ Meanhwile, work around with following: xxx
 \layout Standard
 
 a_0=-0.0772156...
@@ -4961,8 +4985,11 @@ x/(1-x)\;\textrm{ if }\;0\leq x\leq1/2\\
 , and has a very simple tent-like shape, and this is the source of the deception.
  One wants to hastily conclude that it is topologically equivalent to the
  standard tent map 
+\layout Standard
+
+
 \begin_inset Formula \begin{equation}
-T(x)=\left\{ \begin{array}{c}
+\tau(x)=\left\{ \begin{array}{c}
 2x\;\textrm{ if }\;0\leq x\leq1/2\\
 2-2x\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
@@ -4975,7 +5002,7 @@ T(x)=\left\{ \begin{array}{c}
  In fact, it is conjugate, but the conjugating function is the Minkowski
  Question Mark: 
 \begin_inset Formula \begin{equation}
-F(x)=(?^{-1}\circ T\circ?)(x)\label{eq:}\end{equation}
+F(x)=(?^{-1}\circ\tau\circ?)(x)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4985,7 +5012,7 @@ F(x)=(?^{-1}\circ T\circ?)(x)\label{eq:}\end{equation}
 \end_inset 
 
  and 
-\begin_inset Formula $T$
+\begin_inset Formula $\tau$
 \end_inset 
 
  are combinations of the modular group element 
@@ -5002,7 +5029,7 @@ g_{C}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
 
  following the notation of earlier chapters, and
 \begin_inset Formula \begin{equation}
-F(x)=\left\{ \begin{array}{c}
+\tau(x)=\left\{ \begin{array}{c}
 g_{D}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
 (g_{D}^{-1}\circ r)(x)\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
