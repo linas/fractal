@@ -68,7 +68,7 @@ MakeHisto (
 		{
 			int nn = n;
 
-// #define DO_RAND
+// #define DO_RAND 1
 #ifdef DO_RAND
 			nn = rand() >> 10;
 			dd = rand() >> 10;
@@ -100,7 +100,7 @@ if (i>=sizex) printf ("xxxxxxxxxxxxxxxxx\n");
 			double gap = f.ToGapEven() - f.ToGapOdd() - 1.0;
 #endif
 
-#define DO_CONVERGENTS 1
+// #define DO_CONVERGENTS 1
 #ifdef DO_CONVERGENTS
 			int nt = f.GetNumTerms ();
 			double qn = f.GetConvDenom (nt);
@@ -108,12 +108,36 @@ if (i>=sizex) printf ("xxxxxxxxxxxxxxxxx\n");
 
 			double gap = qnm1 / qn;
 			gap *= 2.0;
-printf ("duude gap=%g\n", gap);
+#endif
+
+// #define DO_PRE_CONVERGENTS 1
+#ifdef DO_PRE_CONVERGENTS
+			int nt = f.GetNumTerms ();
+			nt --;
+			double qnm1 = f.GetConvDenom (nt-1);
+			if (0>= qnm1) continue;
+			double qn = f.GetConvDenom (nt);
+
+			double gap = qnm1 / qn;
+#endif
+
+#define DO_FIXED_CONVERGENTS 1
+#ifdef DO_FIXED_CONVERGENTS
+			int fnt = 2;
+			int nt = f.GetNumTerms ();
+			if (fnt > nt) continue;
+			double qn = f.GetConvDenom (fnt);
+			double qnm1 = f.GetConvDenom (fnt-1);
+
+			double gap = qnm1 / qn;
 #endif
 
 			gap = 1.0-gap;
 			j = (int) (gap * (double) sizey);
-if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,dd);
+if ((j>=sizey) || (0>j)) { printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,dd);
+f.Print();
+printf ("\n");
+}
 			if (0>j) j=0;
 			if (j>=sizey) j=sizey-1;
 
@@ -127,12 +151,14 @@ if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,
 	{
 		bin_tot += bin_cnt[i];
 	}
+#if 0
    for (i=0; i<sizex; i++) 
 	{
 		double r = ((double) bin_cnt[i]) / ((double) bin_tot);
 		double x = ((double) i +0.5)/((double) sizex);
-		// printf ("%g	%g\n", x, r);
+		printf ("%g	%g\n", x, r);
 	}
+#endif
    for (i=0; i<sizex; i++) 
 	{
 		if (bin_cnt[i])
