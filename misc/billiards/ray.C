@@ -3,8 +3,10 @@
 // ray.C
 //
 // FUNCTION:
-// Sinai's Billards ray tracer
+// Sinai's Billards ray tracer.  Sinai's Billiards is a well-known
+// example of a chaotic system.
 //
+// Design:
 // put sphere in center of cube.
 // cube is 2 units on a side.
 // sphere has radius < 1.0
@@ -171,9 +173,9 @@ class SinaiRay
 {
    public:
       SinaiRay (void);
-      double distance; // distance travelled by ray   
-      int last_wall;   // last wall of intersection
-      int bounces[6];  // how many bounces have occured off each wall
+      double distance;  // distance travelled by ray   
+      int last_wall;    // last wall of intersection
+      int bounces[6];   // how many bounces have occured off each wall
       int sphere_hits;  // how many times ray bounced off sphere
 };
 
@@ -194,7 +196,171 @@ SinaiRay::SinaiRay (void)
 // The TraceToroid() method performs ray-tracing using periodic
 // toroidial boundary conditions.
 
+class SinaiBox
+{
+   public:
+      SinaiBox (void);
+      void Trace (SinaiRay &);
+      void TraceToroid (SinaiRay &);
+   public:
+
+      int niterations;
+      double max_distance;
+      int max_manhattan;
+      double radius;
+
+   private:
+      Ray walls[6]; // left, right, top, bottom, front, back;
+};
+
+SinaiBox::SinaiBox (void)
+{
+   radius = 0.5;
+   niterations = 10000;
+   max_manhattan = 10000;
+   max_distance = 10000.0;
+
+   walls[0].Set(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+   walls[1].Set(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
+   walls[2].Set(0.0, 1.0, 0.0, 0.0, -1.0, 0.0);
+   walls[3].Set(0.0, -1.0, 0.0, 0.0, 1.0, 0.0);
+   walls[4].Set(0.0, 0.0, 1.0, 0.0, 0.0, -1.0);
+   walls[5].Set(0.0, 0.0, -1.0, 0.0, 0.0, 1.0);
+}
+
+/* ==================================== */
+
+void 
+SinaiBox::Trace (SinaiRay &sr)
+{
+   for (int n=0; n<niterations; n++)
+   {
+      double dist = 0.0;
+
+      // first, see if ray bounces off sphere
+      dist = sr.Sphere (radius);
+      if (0.0 < dist) 
+      {
+         sr.sphere_hits ++;
+         sr.distance += dist;
+         sr.last_wall = -1;
+      }
+
+      // next, trace ray to wall.
+      int next_wall = -1;
+      double nearest = 1000000.0;
+      for (int iwall=0; iwall<6; iwall ++)
+      {
+         if (iwall == sr.last_wall) continue;
+
+         double dist = sr.Intersect (walls[iwall]);
+         if (0.0 > dist) continue;
+         if (nearest > dist) { nearest = dist; next_wall = iwall; }
+      }
+      sr.bounces[next_wall] ++;
+      sr.last_wall = next_wall;
+      sr.distance += nearest;
+
+      sr.Bounce (walls[next_wall]);
+
+#if BROKEN
+      // check for corner conditions
+      if (((NNN >= sr.position[0]) ||
+           (PPP <= sr.position[0])) &&
+           (0 != sr.last_wall) &&
+           (1 != sr.last_wall))
+      {
+         sr.direction[0] = -  sr[i].direction[0];
+      }
+
+      if (((NNN >= sr.position[1]) ||
+           (PPP <= sr.position[1])) &&
+           (2 != sr.last_wall) &&
+           (3 != sr.last_wall))
+      {
+         sr.direction[1] = -  sr[i].direction[1];
+      }
+
+      if (((NNN >= sr.position[2]) ||
+           (PPP <= sr.position[2])) &&
+           (4 != sr.last_wall) &&
+           (5 != sr.last_wall))
+      {
+         sr.direction[2] = -  sr[i].direction[2];
+      }
+#endif
+
+      if (sr.distance > max_distance) break;
+      if (sr.bounces[next_wall] >= max_manhattan) break;
+   }
+}
+
+/* ==================================== */
+
+void 
+SinaiBox::TraceToroid (SinaiRay &sr)
+{
+   for (int n=0; n<niterations; n++)
+   {
+      double dist = 0.0;
+
+      // first, see if ray bounces off sphere
+      dist = sr.Sphere (radius);
+      if (0.0 < dist) 
+      {
+         sr.sphere_hits ++;
+         sr.distance += dist;
+         sr.last_wall = -1;
+      }
+
+      // next, trace ray to wall.
+      int next_wall = -1;
+      double nearest = 1000000.0;
+      for (int iwall=0; iwall<6; iwall ++)
+      {
+         if (iwall == sr.last_wall) continue;
+
+         double dist = sr.Intersect (walls[iwall]);
+         if (0.0 > dist) continue;
+         if (nearest > dist) { nearest = dist; next_wall = iwall; }
+      }
+      sr.bounces[next_wall] ++;
+      sr.last_wall = next_wall;
+      sr.distance += nearest;
+
+      sr.Forward (walls[next_wall]);
+
+      // enforce periodic boundary conditions
+      sr.position[0] += 2.0 * walls[next_wall].direction[0];
+      sr.position[1] += 2.0 * walls[next_wall].direction[1];
+      sr.position[2] += 2.0 * walls[next_wall].direction[2];
+
+      // make sure we set the flags correctly
+      switch (sr.last_wall) {
+         case 0: sr.last_wall = 1; break;
+         case 1: sr.last_wall = 0; break;
+         case 2: sr.last_wall = 3; break;
+         case 3: sr.last_wall = 2; break;
+         case 4: sr.last_wall = 5; break;
+         case 5: sr.last_wall = 4; break;
+         default: break;
+      }
+         
+      if (sr.distance > max_distance) break;
+      if (sr.bounces[next_wall] >= max_manhattan) break;
+   }
+}
+
+/* ==================================== */
+//
+// The Trace() method performs ray-tracing using the classic Sinai
+// reflective boundary conditions.
+//
+// The TraceToroid() method performs ray-tracing using periodic
+// toroidial boundary conditions.
+
 class SinaiView
+   : public SinaiBox
 {
    public:
       SinaiView (int, int);
@@ -204,23 +370,19 @@ class SinaiView
       void ColoredMirrors (void);
       void ToPixels (void);
       void WriteMTV (const char *filename);
+
    public:
       int nx;  // dimension of pixel grid
       int ny;
 
       double eye[3]; // position of eye
 
-      int niterations;
-      double max_distance;
-      int max_manhattan;
       double reflectivity;
       double density;
-      double radius;
 
    private:
-      Ray walls[6]; // left, right, top, bottom, front, back;
-      
       SinaiRay *sr;
+      
       unsigned int *abgr;
       unsigned int *pack;
 
@@ -232,9 +394,6 @@ SinaiView::SinaiView (int px, int py)
 {
    int i, j;
 
-   niterations = 10000;
-   max_manhattan = 10000;
-   max_distance = 10000.0;
    density = 0.0;
    reflectivity = 1.0;
 
@@ -245,16 +404,9 @@ SinaiView::SinaiView (int px, int py)
    eye[1] = 0.0;
    eye[2] = 5.0;
 
-   walls[0].Set(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
-   walls[1].Set(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
-   walls[2].Set(0.0, 1.0, 0.0, 0.0, -1.0, 0.0);
-   walls[3].Set(0.0, -1.0, 0.0, 0.0, 1.0, 0.0);
-   walls[4].Set(0.0, 0.0, 1.0, 0.0, 0.0, -1.0);
-   walls[5].Set(0.0, 0.0, -1.0, 0.0, 0.0, 1.0);
-
    sr = new SinaiRay [nx*ny];
 
-   // initialize ray field
+   // project rays from eyepoint 
    for (i=0; i<nx; i++) {
       for (j=0; j<ny; j++) {
          double pixel[3];
@@ -263,8 +415,9 @@ SinaiView::SinaiView (int px, int py)
          pixel[1] = 2.0 * (((double) j) + 0.51666)/ ((double) ny) - 1.0;
          pixel[2] = 1.0;
          VEC_DIFF (dir, pixel, eye);
-         sr[nx*j+i].Set (pixel, dir);
-         sr[nx*j+i].last_wall = 4;
+         sr[i].Set (pixel, dir);
+         sr[i].last_wall = 4;
+
       }
    }
 
@@ -285,68 +438,7 @@ SinaiView::Trace(void)
    int i;
    for (i=0; i<nx*ny; i++) 
    {
-
-      for (int n=0; n<niterations; n++)
-      {
-         double dist = 0.0;
-
-         // first, see if ray bounces off sphere
-         dist = sr[i].Sphere (radius);
-         if (0.0 < dist) 
-         {
-            sr[i].sphere_hits ++;
-            sr[i].distance += dist;
-            sr[i].last_wall = -1;
-         }
-
-         // next, trace ray to wall.
-         int next_wall = -1;
-         double nearest = 1000000.0;
-         for (int iwall=0; iwall<6; iwall ++)
-         {
-            if (iwall == sr[i].last_wall) continue;
-   
-            double dist = sr[i].Intersect (walls[iwall]);
-            if (0.0 > dist) continue;
-            if (nearest > dist) { nearest = dist; next_wall = iwall; }
-         }
-         sr[i].bounces[next_wall] ++;
-         sr[i].last_wall = next_wall;
-         sr[i].distance += nearest;
-   
-         sr[i].Bounce (walls[next_wall]);
-
-#if BROKEN
-         // check for corner conditions
-         if (((NNN >= sr[i].position[0]) ||
-              (PPP <= sr[i].position[0])) &&
-              (0 != sr[i].last_wall) &&
-              (1 != sr[i].last_wall))
-         {
-            sr[i].direction[0] = -  sr[i].direction[0];
-         }
-
-         if (((NNN >= sr[i].position[1]) ||
-              (PPP <= sr[i].position[1])) &&
-              (2 != sr[i].last_wall) &&
-              (3 != sr[i].last_wall))
-         {
-            sr[i].direction[1] = -  sr[i].direction[1];
-         }
-
-         if (((NNN >= sr[i].position[2]) ||
-              (PPP <= sr[i].position[2])) &&
-              (4 != sr[i].last_wall) &&
-              (5 != sr[i].last_wall))
-         {
-            sr[i].direction[2] = -  sr[i].direction[2];
-         }
-#endif
-
-         if (sr[i].distance > max_distance) break;
-         if (sr[i].bounces[next_wall] >= max_manhattan) break;
-      }
-
+      SinaiBox::Trace (sr[i]);
    }
 }
 
@@ -358,57 +450,7 @@ SinaiView::TraceToroid(void)
    int i;
    for (i=0; i<nx*ny; i++) 
    {
-
-      for (int n=0; n<niterations; n++)
-      {
-         double dist = 0.0;
-
-         // first, see if ray bounces off sphere
-         dist = sr[i].Sphere (radius);
-         if (0.0 < dist) 
-         {
-            sr[i].sphere_hits ++;
-            sr[i].distance += dist;
-            sr[i].last_wall = -1;
-         }
-
-         // next, trace ray to wall.
-         int next_wall = -1;
-         double nearest = 1000000.0;
-         for (int iwall=0; iwall<6; iwall ++)
-         {
-            if (iwall == sr[i].last_wall) continue;
-   
-            double dist = sr[i].Intersect (walls[iwall]);
-            if (0.0 > dist) continue;
-            if (nearest > dist) { nearest = dist; next_wall = iwall; }
-         }
-         sr[i].bounces[next_wall] ++;
-         sr[i].last_wall = next_wall;
-         sr[i].distance += nearest;
-   
-         sr[i].Forward (walls[next_wall]);
-
-         // enforce periodic boundary conditions
-         sr[i].position[0] += 2.0 * walls[next_wall].direction[0];
-         sr[i].position[1] += 2.0 * walls[next_wall].direction[1];
-         sr[i].position[2] += 2.0 * walls[next_wall].direction[2];
-
-         // make sure we set the flags correctly
-         switch (sr[i].last_wall) {
-            case 0: sr[i].last_wall = 1; break;
-            case 1: sr[i].last_wall = 0; break;
-            case 2: sr[i].last_wall = 3; break;
-            case 3: sr[i].last_wall = 2; break;
-            case 4: sr[i].last_wall = 5; break;
-            case 5: sr[i].last_wall = 4; break;
-            default: break;
-         }
-            
-         if (sr[i].distance > max_distance) break;
-         if (sr[i].bounces[next_wall] >= max_manhattan) break;
-      }
-
+      SinaiBox::TraceToroid (sr[i]);
    }
 }
 
