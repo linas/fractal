@@ -7,7 +7,9 @@
  * Linas Vepstas December 2004
  */
 
+#include <math.h>
 #include <stdio.h>
+
 #include "divisor.h"
 #include "gcf.h"
 #include "totient.h"
@@ -31,7 +33,7 @@ long double totient_series (long double x)
 	return acc;
 }
 
-// return the limit as the sum goes to x-> 1
+// return the limit as the totient sum goes to x-> 1
 void limit (void)
 {
 	long double p = 0.5L;
@@ -53,25 +55,50 @@ void limit (void)
 	}
 }
 
+long double divisor_series (long double x)
+{
+	long double acc = 0.0;
+
+	long double xp = 1.0;
+	int n=1;
+	while (1)
+	{
+		long double term = xp * divisor (n);
+		acc += term;
+
+		if (term < 1.0e-20*acc) break;
+		xp *= x;
+		n++;
+	}
+
+	return acc;
+}
+
 int main ()
 {
 	int i;
 
-	int nmax = 500;
+	int nmax = 432;
 
 	for (i=1; i<nmax; i++)
 	{
 		long double x = ((double) i)/((double) nmax);
 
-#ifdef TOTIEN_SERIES
+#define TOTIENT_SERIES
+#ifdef TOTIENT_SERIES
 		long double y = totient_series (x);
 		y *= (1.0L-x)*(1.0L-x);
-		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
+
+		long double z = 0.607927101 * sin (0.5*M_PI*x);
+		printf ("%d	%Lg	%26.18Lg	%26.18Lg\n", i, x, y, z);
 #endif
 
-		int d = divisor (i);
-		printf ("%d	%d\n", i, d);
 
+#if 0
+		long double y = divisor_series (x);
+		// y *= (1.0L-x)*(1.0L-x);
+		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
+#endif
 
 	}
 }
