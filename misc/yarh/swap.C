@@ -1,7 +1,7 @@
 
 /* swap.C
  *
- * Swap terms in contineud fraction
+ * Swap terms in continued fraction
  *
  * Linas Vepstas October 2004
  */

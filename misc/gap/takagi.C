@@ -58,6 +58,8 @@ double mink(double x)
 	return x;
 }
 
+
+/* The main, core basic takagi curve */
 long double takagi (long double w, long double x)
 {
 	int k;
@@ -76,6 +78,7 @@ long double takagi (long double w, long double x)
 	return acc;
 }
 
+/* a stupid, uninteresting 2*l+1 variation *.
 long double takagi_l (long double w, int l, long double x)
 {
 	int k;
@@ -94,6 +97,7 @@ long double takagi_l (long double w, int l, long double x)
 	return acc;
 }
 
+/* crude conjagte attempt */
 double sin_takagi (double w, double x)
 {
 	int k;
@@ -111,15 +115,16 @@ double sin_takagi (double w, double x)
 	return acc;
 }
 
+/* derivative of takagi with respect to w */
 double dtakagi (double w, double x)
 {
 	int k;
 	double acc = 0.0;
 	double tw = 1.0;
-	double tp = 4.0;
-	for (k=2; k<10000000; k++)
+	double tp = 2.0;
+	for (k=1; k<1000; k++)
 	{
-		double term = k* (k-1)*tw;
+		double term = k*tw;
 		acc += term* triangle (tp*x);
 		tp *= 2.0;
 		tw *= w;
@@ -129,6 +134,7 @@ double dtakagi (double w, double x)
 	return acc;
 }
 
+/* stupid, dorky change-of-variable on derivative of takagi */
 double ttakagi (double s, double x)
 {
 	int k;
@@ -149,6 +155,7 @@ printf ("# duude w=%g\n", w);
 	return acc*exps;
 }
 
+/* gauusian regulated takagi */
 double div_takagi (double cut, double x)
 {
 	int k;
@@ -189,6 +196,7 @@ double takagi_bumps (double w, double x)
 	return acc;
 }
 
+/* derivative of takagi with respect to x */
 double takagi_prime (double w, double x)
 {
 	int k;
@@ -206,6 +214,7 @@ double takagi_prime (double w, double x)
 	return acc;
 }
 
+/* entire-function variant of takagi, done by stiking in factorial */
 double takagi_exp (double w, double x)
 {
 	int k;
@@ -394,7 +403,7 @@ main (int argc, char *argv[])
 	int i;
 
 	// int nmax = 512;
-	int nmax = 441;
+	int nmax = 2048;
 	// int nmax = 23;
 
 	if (argc <2)
@@ -407,7 +416,7 @@ main (int argc, char *argv[])
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
-		// double ts = 1.0;
+		double ts = 1.0;
 		// double tw = takagi (w, x);
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
@@ -416,13 +425,9 @@ main (int argc, char *argv[])
 		// double tw = div_takagi (w, x);
 		// double tw = takagi_bumps (w, x);
 		// double tw = takagi_prime (w, x);
-		// double tw = takagi_exp (w, x);
+		double tw = takagi_exp (w, x);
 
 		// double tw = lytic (w, x);
-
-		// grg^3
-		double tw = takagi (w, 0.5-0.0625*x);
-		double ts = 1.0 + x*(-0.125+0.25*w +0.5*w*w + w*w*w) +w*w*w*w*takagi (w,x);
 
 #ifdef HALF_SYM
 		// g
@@ -451,6 +456,11 @@ main (int argc, char *argv[])
 		// grg
 		double tw = takagi (w, 0.5-0.25*x);
 		double ts = 1.0 +x*(-0.5+w) +w*w*takagi (w, x);
+
+		// grg^3
+		double tw = takagi (w, 0.5-0.0625*x);
+		double ts = 1.0 + x*(-0.125+0.25*w +0.5*w*w + w*w*w) +w*w*w*w*takagi (w,x);
+
 		double tw = takagi (w, 0.5*(1.0+x));
 		double ts = 1.0-x + w*takagi (w, x);
 		double tw = takagi (w, 1.0+0.0625*(x-1.0));
