@@ -120,6 +120,7 @@ t_{A}(x)=\sum_{k=0}^{\infty}a_{k}\tau\left(2^{k}x\right)\]
 
 \end_inset 
 
+ defined on the unit interval.
  Although this generalization is no longer overtly self-similar, it is multi-fra
 ctal in that each magnification by a power of two pops off one term from
  the sequence, and gives a hint about how the remaining terms terms behave.
@@ -161,7 +162,7 @@ We can try to approach this question by thinking of the space for which
 
  which has the coordinate-space components 
 \begin_inset Formula \[
-\left\langle x|\tau k\right\rangle =\tau\left(2^{k}x\right)\]
+\left\langle x|\tau k\right\rangle =\tau\left(2^{k-1}x\right)\]
 
 \end_inset 
 
@@ -184,6 +185,63 @@ We can try to approach this question by thinking of the space for which
  The goal here is to describe the kernel (pre-image) and the image of this
  operator.
  
+\layout Standard
+
+Start by expressing the Fourier components of 
+\begin_inset Formula $\left\langle x|\tau k\right\rangle $
+\end_inset 
+
+; let 
+\begin_inset Formula \[
+\left\langle en|x\right\rangle =\exp\left(-2\pi inx\right)\]
+
+\end_inset 
+
+ so that 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle en|\tau k\right\rangle  & = & \int_{0}^{1}dx\left\langle en|x\right\rangle \left\langle x|\tau k\right\rangle \\
+ & = & \int_{0}^{1}\tau\left(2^{k}x\right)\exp\left(-2\pi inx\right)\, dx\end{eqnarray*}
+
+\end_inset 
+
+ Evaluating this integral explicitly, one finds, for 
+\begin_inset Formula $n\neq0$
+\end_inset 
+
+, that 
+\begin_inset Formula \[
+\left\langle en|\tau k\right\rangle =\frac{-2^{k-1}}{\left(\pi n\right)^{2}}\;\sum_{m=0}^{2^{k}-1}\left(-\right)^{m}\exp\left(\frac{-\pi imn}{2^{k-1}}\right)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula $\left\langle e0|\tau k\right\rangle =1/2$
+\end_inset 
+
+.
+ The sum ranges over roots of unity, and thus vanishes for most values of
+ 
+\begin_inset Formula $n$
+\end_inset 
+
+, with the exception of 
+\begin_inset Formula $n$
+\end_inset 
+
+ being an odd multiple of 
+\begin_inset Formula $2^{k-1}$
+\end_inset 
+
+.
+ Thus, evaluating the sum explicitly, we get
+\begin_inset Formula \[
+\left\langle en|\tau k\right\rangle =\left\{ \begin{array}{ccc}
+0 & \textrm{\; for \;} & n\neq2^{k-1}\left(2m+1\right)\textrm{ for some }m\in\mathbb{Z}\\
+-2\pi^{-2}\left(2m+1\right)^{-2} & \textrm{\; for \;} & n=2^{k-1}\left(2m+1\right)\textrm{ for some }m\in\mathbb{Z}\end{array}\right.\]
+
+\end_inset 
+
+
 \layout Subsection
 
 Other scales
