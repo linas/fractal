@@ -9,6 +9,7 @@
  * C	1987- IBM PC -- MSDOS (Saclay, France; Krakow, Poland)
  * c	1988 vax/vmx 11/780 (visitng StonyBrook)
  * C	1989- IBM RT/ AIX 2.2.1   -- F77 doesn't like underscores
+ * July 2003 -- port from FORTRAN to C language
 ******************************************************************/
 
 #include <math.h>
