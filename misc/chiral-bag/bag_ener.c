@@ -1,3 +1,15 @@
+/*
+ * FILE: bag_ener.c
+ * FUNCTION: compute energy levels of firee quarks in chiral bag
+ * HISTORY: Created by Linas Vepstas <linas@linas.org> 1983
+ */
+
+#include <math.h>
+#include <stdio.h>
+#include "bessel.h"
+#include "find_zero.h"
+
+/*
         SUBROUTINE ENERGY (theta, ispect, kay, emax, kpty)
 
 C       THIS SUBROUTINE RETURNS zeros of an ENERGY EIGENVALUE equation,
@@ -6,7 +18,7 @@ c       with parameters theta, ispect, kay, emax
 C       ******* INPUT *******
 
 C       THETA- CHIRAL ANGLE
-C       IPTY-   PARAMETER INDICATING PARITY
+C       KPTY-   PARAMETER INDICATING PARITY
 C       KAY-    =L+S+T    K MUST BE INTEGER.
 C       ISPECT- INTEGER, +1 OR -1, IS THE SIGN OF THE SPECTRUM
 C               I.E. WE LOOK FOR POS. OR NEG. ENERGY SEA SOLUTIONS
@@ -22,12 +34,13 @@ C               2-- EQUATION FOR K=L+/-1        KPTY = PTYK = -1
 C               WHEN WORKING WITH J = L+S, WE TAKE
 C               1-- EQUATION FOR J = L+1/2      KPTY = PTYK = +1
 C               2-- EQUATION FOR J = L-1/2      KPTY = PTYK = -1
+*/
 
-
-        IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-        EXTERNAL EFN, YEFN
-        COMMON /ENER/ numFound, ENER (2)
-
+int
+quark_energy (double *ener, double theta, int ispect, int k, 
+               double emax,  int kpty)
+{
+/*
 C       MAXIT-  MAXIMUM NUMBER OF ITERATIONS THE CONVERGENCE ALGORITHM
 C       IS TO PERFORM WHEN SEARCHING FOR THE EIGENVALUES.  IN PRACTICE,
 C       IT SEEMS TO TAKE LESS THAN TEN ITERATIONS-- SUGGEST MAXIT =15
@@ -62,120 +75,147 @@ C       DELTA ENERGY = 1/( (PI/2) * N ) + O(1/N**2)
 C       WHERE N DENOTES THE NTH ENERGY LEVEL.  THEREFORE, WE NEED THE STEP
 C       SIZE TO BE .LT. DELTA ENERGY IF WE ARE TO CATCH BOTH MEMEBERS OF
 C       THE PAIR.
+*/
 
+	double a,b, bb,sygnus, step;
+	double funa, funb;
+	int numfound, justfound;
 
-C       initialize the equation whos parameters are to be found
-        call efnInit (theta, ispect, kay, emax, kpty)
+	/* initialize the equation whos parameters are to be found */
+	efninit (theta, ispect, kay, emax, kpty);
 
-        A = 0.0D0
-        sygnus = DBLE (ISPECT)
-        B = dmax1 (DBLE (KAY-2), 3.2d-4)
-        STEP = 0.1D0
-        FUNB = DSIGN (1.0D0, EFN(sygnus * b))
-        numfound = 0
-        justfound = -99
-c       CHECK TO SEE IF WE WANT TO FIND MORE ENERGIES
-        DO 1001 IIIIII= 1,10000000
-                IF (A .GT. EMAX) GOTO 1002
-C               DEFINE THE NEXT INTERVAL
-c               if we have not recently found a zero, step along with
-c               step size step. but if we have found a zero recently,
-c               take a big step and save some cpu time.
-                if (justfound .lt. 0) then
-                        a = b
-                        b = b + step
-                        funa = funb
-                        funb = dsign (1.0d0, efn (sygnus * b))
-                else
-                        a = dabs (ener (numFound)) + step
-                        if (numfound .le. 20) then
-                                b = a + 2.2d0
-                        else
-                                b = a + 2.95d0
-                        end if
-                        funa = dsign (1.0d0, efn (sygnus * a))
-                        funb = dsign (1.0d0, efn (sygnus * b))
-                        justfound = -99
-                end if
+	a = 0.0;
+	sygnus = ispect;
+	b = fmax ((double)(kay-2), 3.2e-4);
+	step = 0.1;
+	funb = copysign (1.0, efn(sygnus * b));
+	numfound = 0;
+	justfound = -99;
 
-                IF (FUNA*FUNB .LE. 0.0D0) THEN
-C               FOUND A ZERO IN INTERVAL.  CALL CONVERGENCE ALGORITHM.
-C               ** NOTE ** AA, BB, AND M ARE MODIFIED BY find_zero.
-C               THESE VARIABLES MUST BE RESET BEFORE EACH CALL.
-                        AA = sygnus * A
-                        BB = sygnus * B
-                        M = MAXIT
-                        CALL findzero (EFN, 0.0D0,NSIG,AA,BB,M)
-c                       STORE AND PRINT THE ENERGIES FOUND
-                        numfound = numfound  + 1
-                        ENER (numfound) = BB
-c	print *,' its ', bb
-C                       ***** DECREASE STEP SIZE PER COMMENTS ABOVE
-                        justfound = 99
-                        if (numfound .gt. 1) then
-                                nnn = numfound
-                                dil = ener(nnn) - ener (nnn-1)
-                                dil = dabs (dil) * 0.4d0
-                                step = dmin1 (step, dil)
-                        end if
-                END IF
-1001    CONTINUE
-1002    CONTINUE
+	/* CHECK TO SEE IF WE WANT TO FIND MORE ENERGIES */
+	while (a < emax)
+	{
+/*
+C	       DEFINE THE NEXT INTERVAL
+c	       if we have not recently found a zero, step along with
+c	       step size step. but if we have found a zero recently,
+c	       take a big step and save some cpu time.
+*/
+		if (0 > justfound)
+		{
+			a = b;
+			b = b + step;
+			funa = funb;
+			funb = copysign (1.0, efn (sygnus * b));
+		}
+		else
+		{
+			a = fabs (ener (numfound)) + step;
+			if (20 > numfound)
+			{
+				b = a + 2.2;
+			}
+			else
+			{
+				b = a + 2.95;
+			}
+			funa = copysign (1.0, efn (sygnus * a));
+			funb = copysign (1.0, efn (sygnus * b));
+			justfound = -99;
+		}
 
-        RETURN
-        END
+		if (0.0 > funa*funb)
+		{
+			/* FOUND A ZERO IN INTERVAL.  CALL CONVERGENCE ALGORITHM. */
+			bb = FindZero (efn, 0.0, nsig, sygnus*a, sygnus*b, maxit);
 
-c       *********************************************************
+			/* STORE AND PRINT THE ENERGIES FOUND */
+			numfound = numfound  + 1;
+			ener [numfound] = bb;
 
-        subroutine efninit (theta, ispect, kay, emax, kpty)
-        IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-        COMMON /EFN1/ PTYK, CO, SI, K
+			/*  ***** DECREASE step SIZE PER COMMENTS ABOVE */
+			justfound = 99;
+			if (1 < numfound)
+			{
+				int nnn = numfound;
+				double dil = ener[nnn] - ener [nnn-1];
+				dil = fdabs (dil) * 0.4;
+				step = fmin (step, dil);
+			}
+		}
+	}
+	return numfound;
+}
 
-        PTYK = DBLE (KPTY)
-        K = KAY
-        CO = DCOS (THETA)
-        SI = DSIN (THETA)
+/* ============================================================= */
 
-        return
-        end
+static double efn1_ptyk;
+static double efn1_co;
+static double efn1_si;
+static int efn1_kay;
 
-c       *********************************************************
+void efninit (double theta, int ispect, int kay, double emax, int kpty)
+{
+	efn1_ptyk = kpty;
+	efn_kay = kay;
+	efn1_co = cos (theta);
+	efn1_si = sin (theta);
+}
 
-        DOUBLE PRECISION FUNCTION EFN (OMEGA)
-        IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-        COMMON /EFN1/ PTYK, CO, SI, KAY
-        IF (KAY.GT.0) THEN
-                CALL QUICKbessel (kay, omega, bkm1, bk, bkp1)
-                BKS = BK*BK
-                EFN = CO * (BKP1 * BKM1 - BKS)
-     +               + PTYK * BK * (BKP1 - BKM1)
-     +               + SI * BKS / OMEGA
-        ELSE
-                SN = DSIN (OMEGA)
-                CS = DCOS (OMEGA)
-                B0 = SN/OMEGA
-                B1 = (B0 - CS) / OMEGA
-                EFN = CO*B1-(PTYK-SI)*B0
-        END IF
-        RETURN
-        END
+/* ============================================================= */
 
-c       *********************************************************
+double efn (double omega)
+{
+	double bkm1, bk, bkp1;
+	double val, bks;
 
-        DOUBLE PRECISION FUNCTION YEFN (OMEGA)
-        IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-        COMMON /EFN1/ PTYK, CO, SI, KAY
-        IF (KAY.GT.0) THEN
-                CALL QUICKbessneu
-     +          (kay, omega, bkm1, bk, bkp1, ykm1, yk, ykp1)
-                yks = yk*yk
-                YEFN = CO*(YKP1*YKM1-YKS)+PTYK*YK*(YKP1-YKM1)+SI*YKS/OMEGA
-        ELSE
-                SN = DSIN (OMEGA)
-                CS = DCOS (OMEGA)
-                B0 = -CS/OMEGA
-                B1 = (B0 - SN)/OMEGA
-                YEFN = CO*B1-(PTYK-SI)*B0
-        END IF
-        RETURN
-        END
+	if (0 < efn1_kay)
+	{
+		quickbessel (kay, omega, &bkm1, &bk, &bkp1);
+		bks = bk*bk;
+		val = efn1_co * (bkp1 * bkm1 - bks) 
+			+ efn1_ptyk * bk * (bkp1 - bkm1)
+			+ efn1_si * bks / efn1_omega;
+	}
+	else
+	{
+		double sn, cs, b0, b1;
+		sn = sin (efn1_omega);
+		cs = cos (efn1_omega);
+		b0 = sn/efn1_omega
+		b1 = (b0 - cs) / efn1_omega
+		val = efn1_co*b1-(efn1_ptyk-efn1_si)*b0;
+	}
+	return val;
+}
+
+/* ============================================================= */
+
+double yefn (double omega)
+{
+	double bkm1, bk, bkp1;
+	double ykm1, yk, ykp1;
+	double val, bks;
+
+	if (0 < efn1_kay)
+	{
+		quickbessneu (kay, omega, &bkm1, &bk, &bkp1, &ykm1, &yk, &ykp1);
+
+		yks = yk*yk;
+		val = efn1_co * (ykp1 * ykm1-yks) 
+		     + efn1_ptyk * yk * (ykp1-ykm1)
+		     + efn1_si * yks / efn1_omega;
+	}
+	else
+	{
+		double sn, cs, y0, y1;
+		sn = sin (efn1_omega);
+		cs = cos (efn1_omega);
+
+		y0 = -cs/efn1_omega;
+		y1 = (y0 - sn)/efn1_omega;
+		val = enf_co*y1-(efn1_ptyk-efn1_si)*y0;
+	}
+	return val;
+}
+/* ============================================================= */

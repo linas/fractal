@@ -47,8 +47,6 @@ C               BY THIS ROUTINE HAS BEEN BOUNDED BELOW BY THIS "SMALL"
 C               BOUNDING ARGUMENT (WHICH MAY BE QUITE LARGE, FOR LARGE ORDERS)
 */
 
-#define fmax(x,y) (((x)>(y))?(x):(y))
-
 static int 
 BesselRecurrenceStartRegion (double z, int norder)
 {

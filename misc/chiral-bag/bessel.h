@@ -25,4 +25,7 @@ void
 quickbessel (int n, double x,
              double *bessm1, double *bess, double *bessp1);
 
+#define fmax(x,y) (((x)>(y))?(x):(y))
+#define fmin(x,y) (((x)<(y))?(x):(y))
+
 #endif
