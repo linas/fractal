@@ -161,7 +161,15 @@ PATH=$PATH:.
 # renorm j j2 0.3 0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
-# renorm for the divisor series
-takelog j g
-renorm g j2 0.1 4
+# renorm for the divisor series, 1, 2 and 3
+# takelog j g
+# renorm g j2 0.1 4
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
+# renorm for the divisor series, 4, 5  and use 0.033 for 6
+# takelog j g
+# renorm g j2 0.06 4
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
+renorm j j2 1 0
 cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png

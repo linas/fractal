@@ -2,7 +2,7 @@
  * erdos.C
  *
  * FUNCTION:
- * display erdos mu function
+ * display lambert series involviing divisors
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989
@@ -59,11 +59,13 @@ static void erdos_series_c (double re_q, double im_q, double *prep, double *pimp
 	double qpmod = re_q*re_q+im_q*im_q;
 	if (1.0 <= qpmod) return;
 
+	long double tn = 0.5;
 	for (i=0; i<max_terms; i++)
 	{
 		double dr, di;
 
-#if 1
+#define LAMBERT_SUM
+#ifdef LAMBERT_SUM
 		/* compute 1/(1-q^n) */
 		tmp = (1.0-qpr)*(1.0-qpr) + qpi*qpi;
 		tmp = 1.0/tmp;
@@ -74,10 +76,30 @@ static void erdos_series_c (double re_q, double im_q, double *prep, double *pimp
 		tmp = dr*qpr - di*qpi;
 		di = dr*qpi + di*qpr;
 		dr = tmp;
+
+#if 0
+		dr *= i+1;
+		dr *= i+1;
+		dr *= i+1;
+
+		dr *= i+1;
+		dr *= i+1;
+		dr *= i+1;
+#endif
+
+		// dr *= (i+1)*(i+1)*(i+1);
+		// dr *= (i+1)*(i+1)*(i+1);
 #endif
 
 #ifdef DIVISOR_SUM
 		tmp = divisor (i+1);
+		dr = qpr*tmp;
+		di = qpi*tmp;
+#endif
+
+#if 0
+		tmp = 1.0L/(1.0L-tn);
+		tmp /= i+1;
 		dr = qpr*tmp;
 		di = qpi*tmp;
 #endif
@@ -92,6 +114,8 @@ static void erdos_series_c (double re_q, double im_q, double *prep, double *pimp
 
 		qpmod = qpr*qpr + qpi*qpi;
 		if (qpmod < 1.0e-30) break;
+
+		tn *= 0.5L;
 	}
 	if (max_terms-1 < i)
 	{
@@ -106,7 +130,12 @@ static double erdos_series (double re_q, double im_q)
 {
 	double rep, imp;
 	erdos_series_c (re_q, im_q, &rep, &imp);
-	return sqrt (rep*rep+imp*imp);
+	// return sqrt (rep*rep+imp*imp);
+	// return imp;
+	double phase = atan2 (imp, rep);
+	phase += M_PI;
+	phase /= 2.0*M_PI;
+	return phase;
 }
 
 /*-------------------------------------------------------------------*/
