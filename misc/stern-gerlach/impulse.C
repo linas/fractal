@@ -34,6 +34,7 @@ main ()
    printf ("# gb0 = %g\n", gb0);
    printf ("# \n");
    printf ("# nprec	i	delta_i	initial_theta	theta\n");
+   fflush (stdout);
 
    double initial_theta;
    for (initial_theta=0.05; initial_theta <M_PI; initial_theta +=0.1)
