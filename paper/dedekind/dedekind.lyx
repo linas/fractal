@@ -3,9 +3,10 @@
 \textclass article
 \language english
 \inputencoding auto
-\fontscheme default
+\fontscheme pslatex
 \graphics default
 \paperfontsize default
+\spacing single 
 \papersize Default
 \paperpackage a4
 \use_geometry 0
@@ -31,7 +32,7 @@ The Dedekind Eta and the Mandelbrot Set
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2005
+2 January 2005 (revised 3 January 2005)
 \layout Abstract
 
 An exploration of the interior or the Mandelbrot Set and its relationship
@@ -61,6 +62,7 @@ XXX This paper is under construction.
 \end_inset 
 
 .
+ 
 \layout Standard
 
 Consider the Euler function 
@@ -99,7 +101,7 @@ Euler Function
 
 
 \begin_inset Graphics
-	filename q-euler.jpeg
+	filename q-euler.png
 
 \end_inset 
 
@@ -240,19 +242,20 @@ S(t)=\sum_{n=-N}^{\infty}s_{n}t^{n}\label{eq:term expansion}\end{equation}
  
 \layout Standard
 
-When engaging in numerical calculations,the Dirichlet series is nearly numerical
-ly intractable, because of its painfully slow convergence.
+When engaging in numerical calculations, the Dirichlet series is nearly
+ numerically intractable, because of its painfully slow convergence.
  Thus,one is instantly motivated to use the exponential series instead.
  However, one gets an even more stable and numerically well-behaved series
  by considering the Gaussian regulator, namely 
 \begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}a_{n}\exp(-t^{2}n^{2})\label{eq:}\end{equation}
+\sum_{n=0}^{\infty}a_{n}\exp(-t^{2}n^{2})\label{eq:Gaussian reg}\end{equation}
 
 \end_inset 
 
  There is no harm in using this series for numerical work; it can be related
- back to the Dierichlet series through analytic integral transforms, albeit
+ back to the Dirichlet series through analytic integral transforms, albeit
  somehwat more complex ones than the plain exponential series.
+ This, and some numerical subtlties, are discussed in a later section.
 \layout Subsection
 
 The Spectral Analysis of the Mandelbrot Set
@@ -286,8 +289,8 @@ S_{c}(t)=\sum_{n=0}^{\infty}z_{n}e^{-t^{2}n^{2}}\label{eq:}\end{equation}
 
 .
  To normalize this sum, let us define 
-\begin_inset Formula \[
-N(t)=\sum_{n=0}^{\infty}e^{-t^{2}n^{2}}\]
+\begin_inset Formula \begin{equation}
+N(t)=\sum_{n=0}^{\infty}e^{-t^{2}n^{2}}\label{eq:Gaussian N}\end{equation}
 
 \end_inset 
 
@@ -302,30 +305,25 @@ N(t)=\sum_{n=0}^{\infty}e^{-t^{2}n^{2}}\]
 \end_inset 
 
  shows the nature of the divergence by normalizing against this value.
- The point of using 
+ As a practical matter when performing numerical computations, it is more
+ appropriate to let 
 \begin_inset Formula $N(t)$
 \end_inset 
 
- instead of 
+ stand in the place of divergences, rather than to try to use 
 \begin_inset Formula $1/t$
 \end_inset 
 
- directly is that the higher-order terms are more 'compatible' numerically,
- making the extrapolation to 
-\begin_inset Formula $t\rightarrow0$
-\end_inset 
-
- slightly easier.
- In this particular case, there is not much of a difference; we note only
- that in general a good choice of normalization can make difficult problems
- more tractable numerically.
+ directly.
+ The utility of this proceedure is discussed in detail in a later section
+ on numerical methods.
  
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -352,11 +350,11 @@ Plot of the divergent term of
 
 .
  The figure shows 
-\begin_inset Formula $\lim_{t->0^{+}}|S_{c}(t)|/N(t)$
+\begin_inset Formula $\lim_{t->0^{+}}\left|S_{c}(t)\right|/N(t)$
 \end_inset 
 
 , where 
-\begin_inset Formula $|x+iy|=\sqrt{x^{2}+y^{2}}$
+\begin_inset Formula $\left|x+iy\right|=\sqrt{x^{2}+y^{2}}$
 \end_inset 
 
  is the ordinary complex modulus.
@@ -396,7 +394,7 @@ z'_{n+1}=\frac{d}{dc}z_{n+1}=2z'_{n}z_{n}+1\label{eq:}\end{equation}
 
 and 
 \begin_inset Formula \begin{equation}
-z''_{n+1}=\frac{d^{2}}{dc^{2}}z_{n+1}=2\left(z''_{n}z_{n}+z'_{n}^{2}\right)\label{eq:}\end{equation}
+z''_{n+1}=\frac{d^{2}}{dc^{2}}z_{n+1}=2\left(z''_{n}z_{n}+\left(z'_{n}\right)^{2}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -484,7 +482,7 @@ P_{c}(t)=\frac{d^{2}}{dc^{2}}S_{c}(t)\label{eq:}\end{equation}
 
  is given by 
 \begin_inset Formula \begin{equation}
-P_{c}(t)=\frac{1}{t}\;\frac{1}{4\,(\frac{1}{4}-c)^{3/2}}+\mathcal{O}(1)\label{eq:}\end{equation}
+P_{c}(t)=N(t)\;\frac{1}{4\,(\frac{1}{4}-c)^{3/2}}+\mathcal{O}(1)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -520,7 +518,7 @@ This picture shows the divergent term of
 \end_inset 
 
 , that is, 
-\begin_inset Formula $\lim_{t->0^{+}}|P_{c}(t)|/N(t)$
+\begin_inset Formula $\lim_{t->0^{+}}\left|P_{c}(t)\right|/N(t)$
 \end_inset 
 
 .
@@ -608,7 +606,7 @@ The divergent term term of
 
  inside the cardiod: 
 \begin_inset Formula \begin{equation}
-S_{c}(t)=\frac{1}{t}\;\left[\frac{1}{2}-\sqrt{\frac{1}{4}-c}\;\right]+\mathcal{O}(1)\label{eq:}\end{equation}
+S_{c}(t)=N(t)\;\left[\frac{1}{2}-\sqrt{\frac{1}{4}-c}\;\right]+\mathcal{O}(1)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -617,11 +615,11 @@ S_{c}(t)=\frac{1}{t}\;\left[\frac{1}{2}-\sqrt{\frac{1}{4}-c}\;\right]+\mathcal{O
 \end_inset 
 
  then it is trivial to verify that 
-\begin_inset Formula $|A(c)|=1/2$
+\begin_inset Formula $\left|A(c)\right|=1/2$
 \end_inset 
 
  on the boundary of the cardiod; that is, 
-\begin_inset Formula $|A(e^{i\phi/2}-e^{2i\phi}/4)|=1/2$
+\begin_inset Formula $\left|A(e^{i\phi/2}-e^{2i\phi}/4)\right|=1/2$
 \end_inset 
 
  for all angles 
@@ -666,7 +664,7 @@ S_{c}(t)=\frac{1}{t}\;\left[\frac{1}{2}-\sqrt{\frac{1}{4}-c}\;\right]+\mathcal{O
 \end_inset 
 
  converges to a two-cycle, with 
-\begin_inset Formula $z_{n}\rightarrow1/2+i\sqrt{c+3/4}$
+\begin_inset Formula $z_{n}\rightarrow-1/2+i\sqrt{c+3/4}$
 \end_inset 
 
  and 
@@ -679,14 +677,14 @@ S_{c}(t)=\frac{1}{t}\;\left[\frac{1}{2}-\sqrt{\frac{1}{4}-c}\;\right]+\mathcal{O
 \end_inset 
 
 , and so we can trivially deduce that 
-\begin_inset Formula $\lim_{t\rightarrow0^{+}}tS_{c}(t)=-1/2$
+\begin_inset Formula $\lim_{t\rightarrow0^{+}}S_{c}(t)/N(t)=-1/2$
 \end_inset 
 
  and thus that 
-\begin_inset Formula $\lim_{t\rightarrow0^{+}}t|S_{c}(t)|=1/2$
+\begin_inset Formula $\lim_{t\rightarrow0^{+}}\left|S_{c}(t)\right|/N(t)=1/2$
 \end_inset 
 
- which exactly mathes our numerical results.
+ which exactly macthes our numerical results.
  In other buds, the sequence converges to m-cycles.
  Thus, in other buds, the divergent term will be the average over these
  m values of the limit cycle.
@@ -728,7 +726,27 @@ Let us now turn to the finite remainders.
 \end_inset 
 
  shows this rate of convergence.
- 
+ Curiously, we find that 
+\begin_inset Formula \begin{equation}
+\lim_{t\rightarrow0^{+}}\left|S_{c}(t)\right|-N(t)\left|A(c)\right|+\left|S_{c}(t)-N(t)A(c)\right|\lesssim0.01\label{eq:}\end{equation}
+
+\end_inset 
+
+ that is, the divergence of the modulus has the opposite sign from the divergenc
+e of the sum.
+ This can only happen if the phase (the argument) of the finite part is
+ opposite to the phase of 
+\begin_inset Formula $A(c)$
+\end_inset 
+
+.
+ In other words, 
+\begin_inset Formula \begin{equation}
+\arg\left(S_{c}(t)-N(t)A(c)\right)\approx-\arg A(c)\label{eq:}\end{equation}
+
+\end_inset 
+
+
 \layout Standard
 
 
@@ -756,7 +774,7 @@ Rate of Convergence
 \layout Standard
 
 This figure shows the rate of convergence, that is, 
-\begin_inset Formula $\lim_{t\rightarrow0^{+}}|S_{c}(t)-A(c)/t|$
+\begin_inset Formula $\lim_{t\rightarrow0^{+}}\left|S_{c}(t)\right|-N(t)\left|A(c)\right|$
 \end_inset 
 
 .
@@ -793,7 +811,7 @@ This figure shows the rate of convergence, that is,
  
 \layout Standard
 
-The overall structure at first doesn't look all that exciting.
+The overall structure at first doesn't look all that inspiring.
  As before, we can discern considerably more structure if we examine 
 \begin_inset Formula $P_{c}(t)$
 \end_inset 
@@ -816,7 +834,7 @@ The overall structure at first doesn't look all that exciting.
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -852,11 +870,25 @@ The sum
 
 .
  As can be seen, there is a considerable amount of structure here.
- There seem to be poles located where-ever another bud is tangent to this
- one, and sequences of zeros inside the bud.
+ There seem to be poles located on the boundary, where-ever another bud
+ is tangent to this one.
+ This is of course everywhere, since a bud is tangent for every possible
+ rational angle.
+ The strength of the pole is somehow proportionate to the size of the bud.
+ Note there seems to be a sequences of zeros inside the bud.
  The poles all seem to have positive residues.
  The color ramp has been scaled by ten: i.e.
  black = 0, green ~= 5, red >= 10.
+ 
+\layout Standard
+
+A very similar figure results if one graphs the finite part on the main
+ cardiod, after removing the divergence.
+ That is, the graph for 
+\begin_inset Formula $\lim_{t\rightarrow0}\left|P_{c}(t)-N(t)(1/4-c)^{-3/2}/4\right|$
+\end_inset 
+
+ in the main cardiod is essentially the same.
  
 \end_inset 
 
@@ -880,7 +912,7 @@ The finite term in the main cardiod is shown in figure
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -904,7 +936,7 @@ Mandelbrot Interior
 The image below shows the finite piece in the main bulb, after the divergent
  piece has been subtracted.
  That is, it shows 
-\begin_inset Formula $\lim_{t\rightarrow0}\left|tP_{c}(t)-(1/4-c)^{-3/2}/4\right|$
+\begin_inset Formula $\lim_{t\rightarrow0}\left|P_{c}(t)\right|-N(t)\left|(1/4-c)^{-3/2}/4\right|$
 \end_inset 
 
 .
@@ -917,10 +949,26 @@ The image below shows the finite piece in the main bulb, after the divergent
  
 \end_inset 
 
+ It is important at this point to note that this last figure shows the modulus
+ taken first, and then the divergence subtracted afterwards.
+ This is not the same assubtracting the divergence first, and then taking
+ the modulus.
+ If we subtract the divergent complex term first, then we see in the main
+ cardiod a figure that close resembles that in figure 
+\begin_inset LatexCommand \ref{cap:Bud-Convergence}
 
+\end_inset 
+
+, with a complex structure of poles located on the boundary, and zeros located
+ inside.
+\layout Subsection
+
+Compare
 \layout Standard
 
-xxx
+next we apply conformal map to convert cardiod into circle so that we can
+ directly compare.
+ blah
 \layout Subsection
 
 Numeric Techniques
@@ -928,31 +976,206 @@ Numeric Techniques
 
 Note that the series explored on these pages can be slow to converge, especially
  near the 'horns' of the Mandelbrot set.
- We can improve things numerically a bit with a trick to extrapolate to
- t=0.
- We do this by working with a Taylor expansion of the regulator about finite
- t, and performing sums with that.
- The sums can then be recombined in the Taylor expansion, evaluated at t=0.
- This technique helps hasten convergence.
- Working to the second derivative seems sufficient.
+ There are several well-known and established techniques of series acceleration
+ that can improve the convergence.
+ This section quickly reviews the technique used in this paper.
+\layout Standard
+
+Consider the sum
+\begin_inset Formula \begin{equation}
+A(t)=\sum_{n=0}^{\infty}a_{n}\exp(-t^{2}n^{2})\label{eq:}\end{equation}
+
+\end_inset 
+
+ Assume that this sum converges in the limit of 
+\begin_inset Formula $t\rightarrow0^{+}$
+\end_inset 
+
+, but possibly slowly.
+ One can get a much more quickly-converging series by computing, in addition
+ to 
+\begin_inset Formula $A(t)$
+\end_inset 
+
+, the derivatives 
+\begin_inset Formula $dA(t)/dt$
+\end_inset 
+
+ and 
+\begin_inset Formula $d^{2}A(t)/dt^{2}$
+\end_inset 
+
+.
+ One then recombines these derivatives to form the quantity 
+\begin_inset Formula \begin{equation}
+B(t)=A(t)-t\,\frac{d}{dt}A(t)-\frac{t^{2}}{2}\,\frac{d^{2}}{dt^{2}}A(t)\label{eq:quadratic-acccel}\end{equation}
+
+\end_inset 
+
+ It is clear that if the limit 
+\begin_inset Formula $A(0)$
+\end_inset 
+
+ exists and is finite, then one has 
+\begin_inset Formula \begin{equation}
+\lim_{t\rightarrow0+}B(t)=\lim_{t\rightarrow0+}A(t)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and furthermore, for small 
+\begin_inset Formula $t,$
+\end_inset 
+
+ one has 
+\begin_inset Formula \begin{equation}
+B(t)=A(0)+\mathcal{O}(t^{3})\label{eq:series-accel}\end{equation}
+
+\end_inset 
+
+ The correctness of equation 
+\begin_inset LatexCommand \ref{eq:series-accel}
+
+\end_inset 
+
+ at first seems naively 'obvious' but is in fact quite subtle, and depends
+ on having a series 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+ that is 'well-behaved' in certain ways.
+\layout Standard
+
+The study of such series and the numerical techniques to sum them falls
+ under the name of 'series acceleration' and is a well-developed branch
+ of mathematics in its own right.
+ It is outside of the scope of this section to review any deeper results.
+ Suffice it to say that this entire paper is predicated on the assumption
+ that the equation 
+\begin_inset LatexCommand \ref{eq:series-accel}
+
+\end_inset 
+
+ does hold for the sums encountered.
+ This does seem to be the case, but is hardly obvious from first principles,
+ espcially for points in troublesome sections of the M-set.
+ By contrast, in the well-behaved areas of the M-set, it is straightforward
+ to verify that equation 
+\begin_inset LatexCommand \ref{eq:series-accel}
+
+\end_inset 
+
+ holds, and that the resulting sums are accurate for five to ten decimal
+ places, corresponding to 
+\begin_inset Formula $t$
+\end_inset 
+
+ values in the range of 0.01 to 0.001 for sums with 2 to 50 thousand terms.
  
 \layout Standard
 
-Note that it is wise to double-check one's work against the simplest sums.
- This is because working with the Taylors series requires one to keep a
- half-dozen or more sums, and to properly combine first and second derivatives
- of square-roots, products, and ratios.
- Easy enough on paper, but still prone to algebraic errors or typing errors
- when writing the code.
+Some of the sums in encountered in this paper are divergent.
+ The simplest such sums have a limit point, namely 
+\begin_inset Formula \begin{equation}
+\lim_{n\rightarrow\infty}a_{n}=\textrm{const.}\neq0\label{eq:}\end{equation}
+
+\end_inset 
+
+ in which case one has
+\begin_inset Formula \begin{equation}
+A(t)=\frac{\textrm{const.}}{t}\,\sqrt{\frac{\pi}{4}}+\mathcal{O}(1)\label{eq: dive-sum}\end{equation}
+
+\end_inset 
+
+ The extra factor of 
+\begin_inset Formula $\sqrt{\pi}/2$
+\end_inset 
+
+ comes from the behaviour of the Gaussian regulator; that is, 
+\begin_inset Formula \begin{equation}
+N(t)=\sum_{n=0}^{\infty}\exp(-t^{2}n^{2})=\frac{1}{t}\sqrt{\frac{\pi}{4}}+\mathcal{O}(1)\label{eq:gaussian-norm}\end{equation}
+
+\end_inset 
+
+ In order to correctly subtract this linear divergence from a divergent
+ sum, one is advised to subtract 
+\begin_inset Formula $N(t)$
+\end_inset 
+
+ rather than 
+\begin_inset Formula $1/t$
+\end_inset 
+
+ directly.
+ This advice comes from the need to subtract the divergence so that the
+ equation 
+\begin_inset LatexCommand \ref{eq:series-accel}
+
+\end_inset 
+
+ is not voilated.
+ In general, 
+\begin_inset Formula $N(t)$
+\end_inset 
+
+ will have 
+\begin_inset Formula $\mathcal{O}(1)$
+\end_inset 
+
+, 
+\begin_inset Formula $\mathcal{O}(t)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathcal{O}(t^{2})$
+\end_inset 
+
+ terms as well, any one of which will mess up equation 
+\begin_inset LatexCommand \ref{eq:series-accel}
+
+\end_inset 
+
+ if not properly accounted for.
+ Thus, in general, the correct way to subtract a divergent term is to form
+ 
+\begin_inset Formula \begin{equation}
+A'(t)=A(t)-\textrm{const. }N(t)\label{eq: subtract-dive}\end{equation}
+
+\end_inset 
+
+ and then form 
+\begin_inset Formula $B'(t)$
+\end_inset 
+
+ from 
+\begin_inset Formula $A'(t)$
+\end_inset 
+
+ to obtain the finite part.
+ One can perform the subtraction 
+\begin_inset LatexCommand \ref{eq: subtract-dive}
+
+\end_inset 
+
+ under the summation, or outside of it.
+ Performing it under the sumation potentially minimizes round-off errors.
+ Note that these considerations apply to series with limit cycles as well
+ as limit points.
+ That is, the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ need not converge to a point; as long as they do converge to a limit cycle,
+ this mechanism of subtracting the divergent piece will work.
  
 \layout Standard
 
-Once one has working expressions, it is fairly straightforward to confirm
- numerical behavior.
- For example, when we give lim t->0 results in the text above, one can see
- numerically that these results really are quite accurate, from between
- five and ten decimal places, typically.
- 
+One final remark: note that, in general, after removing a linear divergence
+ in a summation, the next leading order need not be finite, but may be a
+ weaker divergence, such as a logarithmic divergence.
+ This is resumably the nature of the divergences seen at the horns of the
+ M-set, for example.
+ On the complex plane, finite sums grow until they hit a pole.
+ At the pole, the sums are logarithmically divergent.
 \layout Subsection
 
 Summary
@@ -965,4 +1188,7 @@ This paper reprises and revises an earlier draft from November 2000, located
 \end_inset 
 
 .
+\layout Standard
+
+What more can we say?
 \the_end
