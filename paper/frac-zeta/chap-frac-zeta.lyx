@@ -324,7 +324,7 @@ new
 \begin_inset Formula \begin{equation}
 \zeta(s)=H_{m+n}(s)+\sum_{k=0}^{\infty}\left(\begin{array}{c}
 s+k-1\\
-s-1\end{array}\right)\left(-n\right)^{k}\left[\zeta(s+k)-H_{m}(s+k)\right]\end{equation}
+s-1\end{array}\right)\left(-n\right)^{k}\left[\zeta(s+k)-H_{m}(s+k)\right]\label{eq: general n,m}\end{equation}
 
 \end_inset 
 
@@ -468,7 +468,7 @@ This result remains abstract until we plug in specific values of
 \begin_inset Formula \begin{equation}
 \zeta(s)\left(1-\frac{1}{2^{s}}\right)=1+\frac{1}{2^{s}}\sum_{k=0}^{\infty}\left(\begin{array}{c}
 s+k-1\\
-s-1\end{array}\right)\left(\frac{-1}{2}\right)^{k}\zeta(s+k)\label{eq:}\end{equation}
+s-1\end{array}\right)\left(\frac{-1}{2}\right)^{k}\zeta(s+k)\label{eq:one-half}\end{equation}
 
 \end_inset 
 
@@ -499,7 +499,68 @@ s-1\end{array}\right)\left(\frac{-1}{2}\right)^{k}\zeta(s+k)\label{eq:}\end{equa
 Relations for Half-Integer Values
 \layout Standard
 
-Now...
+We can consider equations 
+\begin_inset LatexCommand \ref{eq: general n,m}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq:one-half}
+
+\end_inset 
+
+ to be the generators of a free semigroup of symmetries on the Riemann Zeta.
+ It thus becomes interesting to ask what some of the generated expressions
+ look like.
+ Unfortunately, this is easier said than done.
+ Putting the one in the other and turning the crank, one finds a relation
+ for general half-integer values:
+\begin_inset Formula \begin{eqnarray}
+\zeta(s)\left(1-\frac{1}{2^{s}}\right) & = & H_{2m+2n+1}(s)-\frac{H_{n+m}(s)}{2^{s}}\nonumber \\
+ &  & +\frac{1}{2^{s}}\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(-\left(n+\frac{1}{2}\right)\right)^{k}\left[\zeta(s+k)-H_{m}(s+k)\right]\label{eq: n and half}\end{eqnarray}
+
+\end_inset 
+
+ This can be better understood by noting that 
+\begin_inset Formula \begin{equation}
+H_{2m+2n+1}(s)-\frac{H_{n+m}(s)}{2^{s}}=\sum_{k=0}^{m+n}\frac{1}{\left(2k+1\right)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and of course that 
+\begin_inset Formula \begin{equation}
+\zeta(s)\left(1-\frac{1}{2^{s}}\right)=\sum_{k=0}^{\infty}\frac{1}{\left(2k+1\right)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so we see that we have a general resemblance between equation 
+\begin_inset LatexCommand \ref{eq: general n,m}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq: n and half}
+
+\end_inset 
+
+.
+ As before, we pick a value for 
+\begin_inset Formula $m$
+\end_inset 
+
+ large enough to make sure that the right hand side of equation 
+\begin_inset LatexCommand \ref{eq: n and half}
+
+\end_inset 
+
+ remains convergent (
+\begin_inset Formula $m>n$
+\end_inset 
+
+ is enough), and it reappears on the left-hand side in a corresponding fashion.
+ 
 \layout Subsection
 
 Conclusions
