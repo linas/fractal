@@ -15,33 +15,12 @@
 #endif /* LINUX */
 
 #include "Farey.h"
+#include "gcf.h"
 #include <stdio.h>
 #include <math.h>
 
 #define MAX(a,b) ((a)>(b)?(a):(b))
 #define MIN(a,b) ((a)<(b)?(a):(b))
-
-/* ------------------------------------------------------------ */
-/* Return the greatest common factor, 32-bit in accurate */
-int
-gcf32 (int nume, int denom)
-{
-	int t;
-	t = nume % denom;
-	nume = denom;
-	denom = t;
-
-	/* Euclids algorithm for obtaining the gcf */
-	while (0 != denom)
-	{
-		t = nume % denom;
-		nume = denom;
-		denom = t;
-	}
-
-	/* num now holds the GCD (Greatest Common Divisor) */
-	return nume;
-}
 
 /* ------------------------------------------------------------ */
 ContinuedFraction::ContinuedFraction (void)

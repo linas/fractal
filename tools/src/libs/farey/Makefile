@@ -16,13 +16,15 @@ CC = cc -O2 -I $(INC) -DANSI_C -DLINUX
 
 RM= rm -f
 
-all: inc Farey.o FareyTree.o Prime.o
+all: inc Farey.o FareyTree.o gcf.o Prime.o totient.o
 
-inc:	Farey.h FareyTree.h Prime.h
+inc:	Farey.h FareyTree.h gcf.h Prime.h totient.h
 	touch inc
 	cp Farey.h $(INC)/Farey.h
 	cp FareyTree.h $(INC)/FareyTree.h
+	cp gcf.h $(INC)/gcf.h
 	cp Prime.h $(INC)/Prime.h
+	cp totient.h $(INC)/totient.h
 
 Farey.o:	Farey.C Farey.h
 	$(CC) -c Farey.C
@@ -36,11 +38,23 @@ FareyTree.o:	FareyTree.C FareyTree.h
 	rm FareyTree.o
 	touch FareyTree.o
 
+gcf.o:	gcf.c gcf.h
+	$(CC) -c gcf.c
+	cp gcf.o $(LIB)/gcf.o
+	rm gcf.o
+	touch gcf.o
+
 Prime.o:	Prime.c Prime.h
 	$(CC) -c Prime.c
 	cp Prime.o $(LIB)/Prime.o
 	rm Prime.o
 	touch Prime.o
+
+totient.o:	totient.c totient.h
+	$(CC) -c totient.c
+	cp totient.o $(LIB)/totient.o
+	rm totient.o
+	touch totient.o
 
 clean:
 	cd test; make clean

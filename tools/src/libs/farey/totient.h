@@ -35,4 +35,12 @@
  *
 */
 
+#ifdef   __cplusplus
+#extern "C" {
+#endif
+
 int totient_phi(int n);
+
+#ifdef   __cplusplus
+};
+#endif
