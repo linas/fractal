@@ -120,8 +120,8 @@ double bound (double re_tau, double im_tau)
 	double m = sqrt (re_tau*re_tau+im_tau*im_tau);
 	
 	if (fabs(1.0-m) < BND) return 1.0;
-	// if (m>1.0 && fabs(re_tau-0.5) < BND) return 1.0;
-	// if (m>1.0 && fabs(re_tau+0.5) < BND) return 1.0;
+	if (m>1.0 && fabs(re_tau-0.5) < BND) return 1.0;
+	if (m>1.0 && fabs(re_tau+0.5) < BND) return 1.0;
 	return 0.0;
 
 #if 0
