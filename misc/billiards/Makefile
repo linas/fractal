@@ -13,4 +13,4 @@ wave:	wave.o ray.o
 
 
 .C.o:
-	g++ -O2 -c $<
+	g++ -g -O2 -c $<

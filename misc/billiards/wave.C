@@ -40,6 +40,7 @@ class PathIntegral
       void Init (void);
       void Trace (void);
       void TraceToroid (void);
+      void SumRays (double);
       void AccumIntensity (void);
       void ToPixels (void);
 
@@ -99,6 +100,10 @@ PathIntegral::PathIntegral (int px, int py)
    side_intensity = new double [nx*ny];
    front_intensity = new double [nx*ny];
    back_intensity = new double [nx*ny];
+
+   side_raylens = new double* [nx*ny];
+   front_raylens = new double* [nx*ny];
+   back_raylens = new double* [nx*ny];
 
    Init ();
    for (i=0; i<nx*ny; i++)
@@ -301,6 +306,23 @@ PathIntegral::AccumIntensity (void)
 /* ==================================== */
 
 void 
+PathIntegral::SumRays (double k)
+{
+   nintense = 0;
+
+   for (int i=0; i<nx*ny; i++)
+   {
+      for (int nr= side_count[i]; nr>0; nr++)
+      {
+         double phase = k * side_raylens[i][nr];
+         side_amplitude [i] += myexp (phase);
+      }
+   }
+}
+
+/* ==================================== */
+
+void 
 PathIntegral::ToPixels (void)
 {
 
@@ -354,8 +376,14 @@ main (int argc, char * argv[])
 
    // v.Trace();
    v.TraceToroid();
-   v.ToPixels ();
-   v.WriteMTV (outfile);
+
+   for (int i=0; i<2; i++)
+   {
+      v.SumRays (2.0);
+      v.AccumIntensity ();
+      v.ToPixels ();
+      v.WriteMTV (outfile);
+   }
 }
 
 /* ===================== end of file ====================== */
