@@ -25,7 +25,7 @@ main ()
    int nprec_max = 20000;
 
    printf ("# \n");
-   printf ("# random start \n");
+   printf ("# classical mag dipole absorbing soft photons \n");
    printf ("# nprec_max = %d\n", nprec_max);
    printf ("# gb0 = %g\n", gb0);
    printf ("# \n");
