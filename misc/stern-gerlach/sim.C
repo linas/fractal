@@ -19,7 +19,7 @@ main ()
    double sin_theta, cos_theta;
    double sin_phi, cos_phi;
    int nprec = 0;        // number of precessions
-   int last_i = 0;
+   long long last_i = 0;
    double acc_theta = 0.0;
 
    double gb0 = 1.0e10;  // gyromagnetic * magnetic field 
@@ -29,10 +29,11 @@ main ()
 
    double delta_t = 1.0e-13;  // time step
 
-   unsigned int imax = 2023;  // max iterations
+   long long imax = 48023;  // max iterations
    imax *= 1024*1024;
 
    theta = 0.6;
+   theta = 1.5;
    nprec = 0;
    phi = 0.0;
    pos_x = 0.0;
@@ -50,7 +51,7 @@ main ()
    printf ("# \n");
    printf ("# nprec	i	delta_i	theta	acc_theta	x	z\n");
 
-   for (int i=0; i<imax; i++)
+   for (long long i=0; i<imax; i++)
    {
      double tmp;
 
