@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Farey.h"
+
 void
 bincount (int nbins, int max)
 {
@@ -80,6 +82,13 @@ gmp_bincount (int nbins, int max)
 	printf ("#\n# bincount of rationals using gnu multi-precison\n#\n");
 	printf ("#\n# nbins=%d   maxiter=%d\n#\n",nbins,max);
 
+// #define DO_GCF_ELIM
+#ifdef DO_GCF_ELIM
+	printf ("# common factors were eliminated\n");
+#else
+	printf ("# NOOOOO common factors eliminatation\n");
+#endif 
+
 #define BINSZ 45720
 	int bin[BINSZ];
 	for (i=0; i<BINSZ; i++)
@@ -117,6 +126,9 @@ gmp_bincount (int nbins, int max)
 	
 			unsigned int ib = mpz_get_ui (gib);
 
+			/* Note the following discard of the p/q= 1 bin affects 
+			 * the normalization!  */
+			if (ib >= nbins) continue;
 			bin [ib] ++;
 			cnt ++;
 		}

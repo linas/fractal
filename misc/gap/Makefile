@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= entropy exacto fdist feigen fiddle fliptree gappy mute padic \
+EXES= entropy exacto fdist feigen fiddle fliptree gappy mute orbit padic \
       rdist summy swap sway sym \
       sym-fun takagi theta tree vanish
 
@@ -33,6 +33,7 @@ fiddle.o:  fiddle.C $(LIB)/Farey.o $(INC)/Farey.h
 fliptree.o:  fliptree.C $(LIB)/Farey.o $(INC)/Farey.h
 gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
 mute.o:  mute.C $(LIB)/Farey.o $(INC)/Farey.h
+orbit.o:	orbit.C
 padic.o:	padic.C
 sway.o:  sway.C $(LIB)/Farey.o $(INC)/Farey.h
 swap.o:  swap.C $(LIB)/Farey.o $(INC)/Farey.h

@@ -5,19 +5,20 @@
 
 # set term png small color
 set term png small
-set out 'rdist.png'
+set out 'orbit.png'
 
 # set data style linespoints
 set data style lines
+# set data style points
 set key right
 
-set title "Distribution of Irreducible Fractions into 2880 Bins"
-set xlabel "p/q"
-set ylabel "Probability (Normalized Bin Count)"
+set title "Orbit of Vector under Dyadic Rep of SL(2,Z)"
+set xlabel "x"
+set ylabel "y"
 
 # set yrange [0:]
 
-plot "rdist.dat" using 2:3 title ""
+plot "orbit.dat" using 3:2 title ""
 
 # pause 100
 

@@ -70,7 +70,7 @@ long double takagi (long double w, long double x)
 	{
 		long double term = tw* triangle (tp*x);
 		acc += term;
-		tp *= 2.0L;
+		tp *= 6.28L;
 		tw *= w;
 		if (1.0e-16 > tw) break;
 	}
@@ -425,7 +425,6 @@ main (int argc, char *argv[])
 		// double tw = div_takagi (w, x);
 		// double tw = takagi_bumps (w, x);
 		// double tw = takagi_prime (w, x);
-		double tw = takagi_exp (w, x);
 
 		// double tw = lytic (w, x);
 
@@ -496,6 +495,9 @@ main (int argc, char *argv[])
 
 		// double tw = takagi (w, 0.125*x);
 		// double ts =  x*(0.25+0.5*w +w*w) +w*w*w*takagi (w,x);
+
+		double tw = takagi (w, x);
+
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 		fflush (stdout);
 	}
