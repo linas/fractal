@@ -35,8 +35,9 @@ Linas Vepstas <linas@linas.org>
 \layout Abstract
 
 Fractals and Continued Fractions seem to be deeply related in many ways.
- Farey numbers appear naturally in both; chaotic systems behave in a fashion
- reminiscent of the Riemann Zeta.
+ Farey numbers appear naturally in both; the distribution of the zero's
+ of the Riemann Zeta seem random, reminscent of the spectra of cahotic systems.
+ .
  This paper attempts to illustrate some these relationships and possibly
  advance some tools that may make the study and classification of fractals
  easier.
@@ -755,8 +756,9 @@ etc.
  denominators is 1, 2, 4, 6, 9, 12, 15, 20, 24, 28, 35, 40, 45, 54, 60,
  66, 77, ...
  its not in SLOANE's at this time.
- Clearly, it would be very interesting to be able to specify the entire
- tree.
+ Clearly, one can see that there is a number tree here, and it appears that
+ this number tree should enumerate all of the rationals.
+ This tree seems unknown , and would be interesting to specify.
  
 \layout Standard
 
@@ -1189,7 +1191,7 @@ Wow! We no longer have a peak at 1/2.
 \layout Standard
 
 Curiously, binning into a non-prime number of bins does seem to reduce the
- noise.
+ (small-amplitude) noise.
  Below is the binning into 720 bins.
 \layout Standard
 
@@ -1202,32 +1204,43 @@ Curiously, binning into a non-prime number of bins does seem to reduce the
 
 \layout Standard
 
-to comparable values does not make the small-amplitude noise (
+Following the usual laws of statistics, one expects that increasing the
+ sample size reduces the noise.
+ This is true in an absolute sense, but not a relative sense.
+ The graph below shows 720 bins holding all irreducible rationals with denominat
+ors less than 16000.
+ The absolute amplitude has been reduced by over a factor of ten compared
+ to the previous graphs; however, there is relatively far more power in
+ the higher frequencies.
+ There are also still-visible noise peaks near 1/2, 1/3, and 2/3'rds, as
+ well as at 0 and 1.
+ 
 \layout Standard
 
-does not seem to 
+
+\begin_inset Graphics
+	filename rdist-720-16K-irred.png
+
+\end_inset 
+
+
 \layout Subsection
 
 Distribution of Rationals in the Farey Tree
 \layout Standard
 
-The distribution of rationals on the Farey Tree is highly non-uniform, if
- we walk that tree breadth-first.
- Although the Farey Tree provably enumerates all of the rationals in the
+One way to enumerate all of the rationals is by placing them on the Farey
+ Tree (or the Stern-Broct Tree).
+ One can prove that the Farey Tree enumerates all of the rationals in the
  unit interval exactly once (Proof at 
 \begin_inset LatexCommand \htmlurl[Cut-the-Knot]{http://www.cut-the-knot.org/blue/Stern.shtml}
 
 \end_inset 
 
-), it does not enumerate rationals in a 
-\begin_inset Quotes eld
-\end_inset 
-
-smooth
-\begin_inset Quotes erd
-\end_inset 
-
- way: below is a graph of that distribution.
+).
+ However, the distribution of the rationals on the Farey Tree is highly
+ non-uniform, if we walk that tree breadth-first.
+ The graph below shows that distribution.
 \layout Standard
 
 
@@ -1239,8 +1252,37 @@ smooth
 
 \layout Standard
 
-The shape of this is remarkably suggestive.
- The continued fraction mapping is infinitely differentiable on every rational,
+Superficially, the shape of this curve seems independent of the bining;
+ although, upon very close inspection, one can see that is not quite true.
+ Presumably, there is 
+\begin_inset Quotes eld
+\end_inset 
+
+noise
+\begin_inset Quotes erd
+\end_inset 
+
+ as examined in the previous section.
+ 
+\layout Standard
+
+The shape, however, is remarkably suggestive.
+ It appears to be the derivative of the continued fraction mapping.
+ Indeed, performing a simple numeric integral of the above, and comparing
+ it to the exact expression shows a perfect match, as witnessed in the graph
+ below.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename farey-integral.png
+
+\end_inset 
+
+
+\layout Standard
+
+The continued fraction mapping is infinitely differentiable on every rational,
  and all derivatives vanish at every rational; yet the mapping is strictly
  montonically increasing.
  Just examing the graph visually suggests that the derivatives must be non-zero
@@ -1287,7 +1329,27 @@ If we enumerate the rationals
 \begin_inset Formula $N\rightarrow\infty$
 \end_inset 
 
-, what is the multiplicity (degeneracy) of any given rational?
+, what is the multiplicity (degeneracy) of any given rational? 
+\layout Subsubsection
+
+Sagher Enumeration
+\layout Standard
+
+Sagher enumerates rationals m/n with the integer 
+\begin_inset Formula $m^{2}n^{2}/q_{1}..q_{k}$
+\end_inset 
+
+ where 
+\begin_inset Formula $q_{i}$
+\end_inset 
+
+ are the prime factors of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ Make a graph of this distribution.
+ 
 \layout Subsubsection
 
 The Gauss-Kuz'min Wirsing Distribution
