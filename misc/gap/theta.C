@@ -6,45 +6,47 @@
  */
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-double theta (double x, double *next)
+double theta (double x)
 {
-	if (0.5 > x) { *next = 0.5; return (0.5*x); }
-	if (0.75 > x) { *next = 0.75; return (x-0.25); }
-	*next = 1.0;
+	if (0.5 > x) { return (0.5*x); }
+	if (0.75 > x) { return (x-0.25); }
 	return (2.0*x -1.0);
 }
 
 void
-recurse (int cnt, double (*fn)(double, double*), double pos, double x)
+recurse (int cnt, double (*fn)(double), double pos, double val)
 {
 	double next;
-	double y = fn (x, &next);
+	double y = fn (val);
 	if (1 == cnt)
 	{
 		printf ("%8.6g	%8.6g\n", pos, y);
-		if (1.0 == y) return;
 		return;
 	}
+	recurse (cnt-1, fn, pos, y);
+}
 
-printf ("duude cnt=%d pos=%g x=%g y=%g next=%g\n", cnt, pos, x, y, next);
-
-	if (y < next)
-	{
-		recurse (cnt-1, fn, pos, y);
+void draw (int nrec)
+{
+	int i;
+	recurse (nrec, theta, 0.0, 0.0);
+	recurse (nrec, theta, 0.5, 0.5);
+	recurse (nrec, theta, 0.75, 0.75);
+	double delt = 0.125;
+	double x = 0.75;
+	for (i=1; i<nrec; i++) {
+		x += delt;
+		recurse (nrec, theta, x,x);
+		delt *= 0.5;
 	}
-
-	recurse (cnt, fn, pos, next);
-	return;
+	recurse (nrec, theta, 1.0, 1.0);
 }
 
-void draw (void)
+main (int argc, char*argv[])
 {
-	recurse (3, theta, 0.0, 0.0);
-}
+	int nrec=atoi(argv[1]);
 
-main ()
-{
-
-	draw();
+	draw(nrec);
 }
