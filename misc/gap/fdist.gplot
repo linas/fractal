@@ -1,0 +1,23 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'fdist.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Distribution of Farey Numbers"
+set xlabel "p/q"
+set ylabel "Bin Count"
+
+# set yrange [0:]
+
+plot "fdist.dat" using 1:2 title ""
+
+# pause 100
+
