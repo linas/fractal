@@ -8,9 +8,14 @@
  * Linas Vepstas January 16 1994
  */
 
+#ifdef LINUX
+#include <signal.h>
+#endif /* LINUX */
+
 #include "Farey.h"
 #include <stdio.h>
 #include <math.h>
+
 
 #define REAL (self->real)
 #define INTPART (self->intpart)
@@ -27,6 +32,11 @@ struct Farey * CreateFarey ()
    struct Farey * self;
    self = (struct Farey *) malloc (sizeof (struct Farey));
    CUTOFF = 0x7fffffff;
+
+#ifdef LINUX
+   /* block floating point exceptions */
+   sigsetmask (0xffff);
+#endif /* LINUX */
    return (self);
 }
 
@@ -71,7 +81,7 @@ struct Farey *self;
 /* ------------------------------------------------------------ */
 
 #ifdef ANSI_C
-void RatioToConinuedFraction (struct Farey *self, int numer, int deno)
+void RatioToContinuedFraction (struct Farey *self, int numer, int deno)
 #else
 void RatioToContinuedFraction (self, numer, deno)
 struct Farey *self;
@@ -137,7 +147,7 @@ int numer, deno;
 /* ------------------------------------------------------------ */
 
 #ifdef ANSI_C
-void RealToConinuedFraction (struct Farey *self, double val)
+void RealToContinuedFraction (struct Farey *self, double val)
 #else
 void RealToContinuedFraction (self, val)
 struct Farey *self;
