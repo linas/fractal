@@ -105,37 +105,6 @@ PrintExpr (Expr *e)
 
 /* ======================================================== */
 
-/* multipliy terms */
-
-Term *Mult_T_T (Term *t1, Term *t2)
-{
-	Term * t3 = g_new0(Term,1);
-	
-	t3->coeff = t1->coeff * t2->coeff;
-	t3->parts = NULL;
-
-	GList *pn;
-	for (pn = t1->parts; pn; pn=pn->next)
-	{
-		Part *p = pn->data;
-		t3->parts = g_list_append (t3->parts, p);
-	}
-	for (pn = t2->parts; pn; pn=pn->next)
-	{
-		Part *p = pn->data;
-		t3->parts = g_list_append (t3->parts, p);
-	}
-
-	return t3;
-}
-
-void Mult_T_I (Term *t, int c)
-{
-	t->coeff *= c;
-}
-
-/* ======================================================== */
-
 Part * 
 Copy_Part (Part *p)
 {
@@ -173,12 +142,104 @@ Expr *Copy_Expr (Expr *e)
 }
 
 /* ======================================================== */
+/* multipliy terms */
+
+Term *Mult_T_T (Term *t1, Term *t2)
+{
+	Term * t3 = g_new0(Term,1);
+	
+	t3->coeff = t1->coeff * t2->coeff;
+	t3->parts = NULL;
+
+	GList *pn;
+	for (pn = t1->parts; pn; pn=pn->next)
+	{
+		Part *p = pn->data;
+		t3->parts = g_list_append (t3->parts, Copy_Part(p));
+	}
+	for (pn = t2->parts; pn; pn=pn->next)
+	{
+		Part *p = pn->data;
+		t3->parts = g_list_append (t3->parts, Copy_Part(p));
+	}
+
+	return t3;
+}
+
+void Mult_T_I (Term *t, int c)
+{
+	t->coeff *= c;
+}
+
+Expr *Mult_E_T (Expr *e, Term *t)
+{
+	Expr *e3 = g_new0 (Expr,1);
+
+	GList *en;
+	for (en = e->terms; en; en=en->next)
+	{
+		Term *tr = en->data;
+		e3->terms = g_list_append (e3->terms, Mult_T_T(tr, t));
+	}
+	return e3;
+}
+
+Expr *Mult_E_E (Expr *e1, Expr *e2)
+{
+	Expr *e3 = g_new0 (Expr,1);
+
+	GList *en;
+	for (en = e1->terms; en; en=en->next)
+	{
+		Term *tr = en->data;
+		Expr *ep = Mult_E_T(e2, tr);
+		e3->terms = g_list_concat (e3->terms, ep->terms);
+		g_free (ep);
+	}
+	return e3;
+}
+
+
+/* ======================================================== */
 
 Expr *Add_E_T (Expr *e, Term *t)
 {
 	Expr *e3 = Copy_Expr(e);
 
 	e3->terms = g_list_append (e3->terms, Copy_Term(t));
+	return e3;
+}
+
+Expr *Add_E_E (Expr *e1, Exper *e2)
+{
+	if (!e1) return Copy_Expr(e2);
+
+	Expr *e3 = Copy_Expr(e1);
+	Expr *e4 = Copy_Expr(e2);
+
+	e3->terms = g_list_concat (e3->terms, e4->terms);
+	Simplify (e3);
+
+	g_free (e4); // xxx mem leak
+	return e3;
+}
+
+Expr *Sub_E_E (Expr *e1, Exper *e2)
+{
+	Expr *e3 = Copy_Expr(e1);
+	Expr *e4 = Copy_Expr(e2);
+
+	GList tn;
+	for (tn=e4->terms; tn; tn=tn->next)
+	{
+		Term *t = tn->data;
+		t->coeff *= -1;
+	}
+
+	e3->terms = g_list_concat (e3->terms, e4->terms);
+	Simplify (e3);
+
+	g_free (e4); // xxx mem leak
 	return e3;
 }
 
@@ -206,8 +267,8 @@ Expr *DD_Term (Term *t, int which)
 			
 			if (pm == pn)
 			{
-				if (1 == which) p3->dx ++;
-				if (2 == which) p3->dy ++;
+				if (0 == which) p3->dx ++;
+				if (1 == which) p3->dy ++;
 			}
 			t3->parts = g_list_append (t3->parts, p3);
 		}
@@ -215,16 +276,6 @@ Expr *DD_Term (Term *t, int which)
 	}
 
 	return e3;
-}
-
-Expr *DDX_Term (Term *t)
-{
-	return DD_Term (t,1);
-}
-
-Expr *DDY_Term (Term *t)
-{
-	return DD_Term (t,2);
 }
 
 Expr *DD (Expr *e, int which)
@@ -245,16 +296,16 @@ Expr *DD (Expr *e, int which)
 
 Expr *DDX (Expr *e)
 {
-	return DD (e,1);
+	return DD (e,0);
 }
 
 Expr *DDY (Expr *e)
 {
-	return DD (e,2);
+	return DD (e,1);
 }
 
 /* ======================================================== */
-/* sort thigs out */
+/* sort things out */
 
 static gint part_compare (gconstpointer a, gconstpointer b)
 {
@@ -383,8 +434,7 @@ Term *dyf (void)
 }
 
 /* ======================================================== */
-
-/* return metrix xx */
+/* return metric xx */
 Expr * gxx (void)
 {
 	Expr *e = g_new0 (Expr,1);
@@ -410,6 +460,80 @@ Expr * gxy (void)
 	return e;
 }
 
+Expr * gmn (int m, int n)
+{
+	if (0==m && 0==n) return gxx();
+	if (0==m && 1==n) return gxy();
+	if (1==m && 0==n) return gxy();
+	if (1==m && 1==n) return gyy();
+}
+
+/* ----------------- */
+
+/* return inverse metric xx */
+Expr * ginv_xx (void)
+{
+	Expr *e = g_new0 (Expr,1);
+	e = Add_E_T (e, tger(1));
+	e = Add_E_T (e, Mult_T_T (dyf(), dyf()));
+	return e;
+}
+
+/* return inverse metric yy */
+Expr * ginv_yy (void)
+{
+	Expr *e = g_new0 (Expr,1);
+	e = Add_E_T (e, tger(1));
+	e = Add_E_T (e, Mult_T_T (dxf(), dxf()));
+	return e;
+}
+
+/* return inverse metric xy */
+Expr * ginv_xy (void)
+{
+	Expr *e = g_new0 (Expr,1);
+	Term *t = Mult_T_T (dxf(), dyf());
+	t->coeff *= -1;
+	e = Add_E_T (e, t);
+	return e;
+}
+
+Expr * ginv_mn (int m, int n)
+{
+	if (0==m && 0==n) return ginv_xx();
+	if (0==m && 1==n) return ginv_xy();
+	if (1==m && 0==n) return ginv_xy();
+	if (1==m && 1==n) return ginv_yy();
+}
+
+/* ======================================================== */
+
+Expr * Christoffel (int i, int k, int l)
+{
+	int m;
+
+	Expr *cr = NULL;
+	for (m=0; m<2; m++)
+	{
+		Expr *sum = NULL;
+		Expr *e1 = DD (gmn (m,k)) , l);
+		Expr *e2 = DD (gmn (m,l)) , k);
+		Expr *e3 = DD (gmn (k,l)) , m);
+
+		sum = Add_E_E (sum,e1);
+		sum = Add_E_E (sum,e2);
+		sum = Sub_E_E (sum,e3);
+
+		Expr *gi = ginv_mn (i, m);
+		Expr *mt = Mult_E_E (gi, sum);
+		cr = Add_E_E (cr, mt);
+	}
+
+	return cr;
+}
+
+/* ======================================================== */
+
 void setup (void)
 {
 	Expr *e = gxx();
@@ -427,6 +551,13 @@ void setup (void)
 
 	printf ("dx gxx is:\n");
 	PrintExpr (DDX(gxx()));
+
+	printf ("dx gyy is:\n");
+	PrintExpr (DDX(gyy()));
+
+	printf ("gamma xxx is:\n");
+	PrintExpr (Christoffel(0,0,0));
+	
 }
 
 main ()
