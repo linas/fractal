@@ -16,11 +16,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double triangle (double x)
+long double triangle (long double x)
 {
-	double t = x - floor(x);
-	if (0.5 > t) return 2.0*t;
-	return 2.0*(1.0-t);
+	long double t = x - floorl(x);
+	if (0.5L > t) return 2.0L*t;
+	return 2.0L*(1.0L-t);
 }
 
 double square (double x)
@@ -233,78 +233,105 @@ inline long double binomial (int n, int m)
 
 /* These complex functions do analytic continuation of takagi to
  * w greater than one (actually between 1 and 3) */
-#define Complex complex<double>
+#define Complex complex<long double>
 
-Complex trin (int n, double x)
+#define EPS 1.0e-8
+
+Complex trin (int n, long double x)
 {
 	int k;
-	double twon = 1.0;
+	long double twon = 1.0L;
+	if (48 < n) return 0.0L;
+
 	for (k=0; k<n; k++)
 	{
-		twon *= 2.0;
+		twon *= 2.0L;
 	}
 	Complex term = triangle (twon * x);
+	// printf ("duude trianlge (%d, %g) = %g\n", n, x, real(term));
 	return term;
 }
 
-Complex do_coeff(Complex a, int k, Complex (*fn)(int, double), double x)
+Complex do_coeff(Complex a, int k, Complex (*fn)(int, long double), long double x)
 {
 	int n;
-
-	Complex acc = 0.0;
-	Complex an = 1.0;
-	for (n=k; n<10000; n++)
+	Complex acc = 0.0L;
+	Complex an = 1.0L;
+	long double cut = 1.0/20.0;  // XXX need to extrapolate to zero 
+	for (n=0; n<10000; n++)
 	{
-		Complex term = an * binomial(n,k) * fn(n,x);
+		Complex term = binomial(n+k,k);
+		long double reg = expl (-cut*cut*n*n);
+		term *= reg;
+		term *= an * fn(n+k,x);
 		acc += term;
 		an *= a;
 
-		if (1.0e-14>abs(term)) break;
+// printf ("n=%d term=%Lg + i %Lg   acc = %Lg + i %Lg\n", n, real(term), imag(term), real (acc), imag (acc));
+		if (EPS > abs(term)) break;
 	}
+// printf ("------\n\n");
 	return acc;
 }
 
-Complex a_coeff(int k, double x)
+Complex a_coeff(int k, long double x)
 {
 	Complex a;
-	a = Complex(0.5, 0.5*sqrt(3));
+	a = Complex(0.5L, 0.5L);
 
+// printf ("start acoeff k=%d x=%Lg\n", k, x);
 	Complex term = do_coeff (a, k, trin, x);
+printf ("end acoeff k=%d x=%Lg coeff=%Lg + i %Lg\n", k, x, real(term), imag (term));
 	return term;
 }
 
-Complex b_coeff(int k, double x)
+Complex b_coeff(int k, long double x)
 {
 	Complex a;
-	a = Complex(1.5, 0.5*sqrt(3));
+	a = 0.5L;
 
+printf ("start bcoeff k=%d x=%Lg\n", k, x);
 	Complex term = do_coeff (a, k, a_coeff, x);
+printf ("end bcoeff k=%d x=%Lg coeff=%Lg + i %Lg\n", k, x, real(term), imag (term));
 	return term;
 }
 
-Complex c_coeff(int k, double x)
+Complex c_coeff(int k, long double x)
 {
 	Complex a;
-	a = Complex(2.0, 0.0);
+	a = 0.5L;
 
+printf ("start ccoeff k=%d x=%Lg\n", k, x);
 	Complex term = do_coeff (a, k, b_coeff, x);
+printf ("end ccoeff k=%d x=%Lg coeff=%Lg + i %Lg\n", k, x, real(term), imag (term));
 	return term;
 }
 
-double lytic (double w, double x)
+Complex d_coeff(int k, long double x)
+{
+	Complex a;
+	a = Complex(0.5L, -0.5L);
+
+printf ("start dcoeff k=%d x=%Lg\n", k, x);
+	Complex term = do_coeff (a, k, c_coeff, x);
+printf ("end dcoeff k=%d x=%Lg coeff=%Lg + i %Lg\n", k, x, real(term), imag (term));
+	return term;
+}
+
+long double lytic (long double w, long double x)
 {
 	int k;
-	w -= 2.0;
+	w -= 2.0L;
 
-	wouble acc = 0.0;
-	double wk = 1.0;
+	long double acc = 0.0;
+	long double wk = 1.0;
 	for (k=0; k<10000; k++)
 	{
-		Complex cterm = c_coeff (k, x);
+		Complex cterm = d_coeff (k, x);
 		double term = real (cterm);
 		term *= wk;
 		acc += term;
-		if (1.0e-14 > dabs(term)) break;
+		if (EPS > fabs(term)) break;
 		wk *= w;
 	}
 
@@ -317,7 +344,7 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 431;
-	int nmax = 1;
+	int nmax = 3;
 
 	if (argc <2)
 	{
@@ -326,7 +353,7 @@ main (int argc, char *argv[])
 	}
 	double w = atof(argv[1]);
 
-	for (i=0; i<nmax; i++)
+	for (i=1; i<nmax; i++)
 	{
 		double ts = 1.0;
 		double x = i/((double)nmax);
