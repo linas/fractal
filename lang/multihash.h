@@ -50,7 +50,6 @@
 #undef LAG_FOUR_WORD
 #undef LAG_WORD_TUPLE
 
-
 // ------------------------
 #ifdef __LAG_PAIR_TABLE_H__
 #undef __LAG_PAIR_TABLE_H__
@@ -64,7 +63,6 @@
 #undef LAG_FIVE_WORD
 #undef LAG_WORD_TUPLE
 
-
 // ------------------------
 #ifdef __LAG_PAIR_TABLE_H__
 #undef __LAG_PAIR_TABLE_H__
@@ -77,6 +75,62 @@
 #undef lagGenericWordTable 
 #undef LAG_SIX_WORD
 #undef LAG_WORD_TUPLE
+
+// ========================================================
+// ------------------------
+#ifdef __LAG_CONCORD_H__
+#undef __LAG_CONCORD_H__
+#endif // __LAG_CONCORD_H__
+
+#define lagGenericWordTable lagWordPairTable
+#define lagGenericConcordTable lagConcordPairTable
+#include "concord.h"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
+
+// ------------------------
+#ifdef __LAG_CONCORD_H__
+#undef __LAG_CONCORD_H__
+#endif // __LAG_CONCORD_H__
+
+#define lagGenericWordTable lagWordTripleTable
+#define lagGenericConcordTable lagConcordTripleTable
+#include "concord.h"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
+
+// ------------------------
+#ifdef __LAG_CONCORD_H__
+#undef __LAG_CONCORD_H__
+#endif // __LAG_CONCORD_H__
+
+#define lagGenericWordTable lagWordQuadTable
+#define lagGenericConcordTable lagConcordQuadTable
+#include "concord.h"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
+
+// ------------------------
+#ifdef __LAG_CONCORD_H__
+#undef __LAG_CONCORD_H__
+#endif // __LAG_CONCORD_H__
+
+#define lagGenericWordTable lagWordQuintTable
+#define lagGenericConcordTable lagConcordQuintTable
+#include "concord.h"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
+
+// ------------------------
+#ifdef __LAG_CONCORD_H__
+#undef __LAG_CONCORD_H__
+#endif // __LAG_CONCORD_H__
+
+#define lagGenericWordTable lagWordHexTable
+#define lagGenericConcordTable lagConcordHexTable
+#include "concord.h"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
 
 
 #endif // __LAG_MULTI_TABLE_H__
