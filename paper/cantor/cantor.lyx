@@ -26,7 +26,7 @@
 
 \layout Title
 
-Modular Measures
+Modular Fractal Measures
 \layout Author
 
 Linas Vepstas <linas@linas.org>
@@ -35,7 +35,18 @@ Linas Vepstas <linas@linas.org>
 12 October 2004
 \layout Abstract
 
-Journal of unfinished ideas.
+In this breif note, we review the connection between the distribution of
+ the Farey fractions on the real number line, and the derivative of the
+ Minkowski Question Mark function.
+ We point out that the derivivative of the question mark can also be obtained
+ as the limiting behaviour of a modular form.
+ Modular forms are analytic functions that are closely related to elliptic
+ functions, and have a particular kind of modular group symmetry.
+ 
+\layout Abstract
+
+This paper is part of a set of chapters that explore the relationship between
+ the real numbers, the modular group, and fractals.
 \layout Section
 
 Intro
@@ -43,14 +54,39 @@ Intro
 
 THIS IS A DRAFT WORK IN PROGRESS.
  The intro hasn't been written yet, but if it was, it would work like this:
- 
+ Modular forms are analytic functions that are closely related to elliptic
+ functions, and have a particular kind of modular group symmetry.
+ Modular forms are defined on the upper-half plane 
+\begin_inset Formula $\mathbb{H}$
+\end_inset 
+
+ of the complex plane 
+\begin_inset Formula $\mathbb{C}$
+\end_inset 
+
+, that is, for complex numbers 
+\begin_inset Formula $\tau=x+iy$
+\end_inset 
+
+ with 
+\begin_inset Formula $y>0$
+\end_inset 
+
+.
+ Here, we are concerned with the limiting behaviour of 
+\begin_inset Formula $y\rightarrow0$
+\end_inset 
+
+, which yeilds highly singular functions defined on the real number line,
+ yet inheriting a modular group symmetry of teh form of which they are the
+ limit.
 \layout Section
 
 Distributions of Rational Numbers
 \layout Standard
 
-In a different paper we looked at the distribution of rationals.Here we look
- at the distribution of the Farey fractions.
+In a different paper we looked at the distribution of rationals.
+ Here we look at the distribution of the Farey fractions.
  These are sometimes called 
 \begin_inset Quotes erd
 \end_inset 
@@ -210,6 +246,25 @@ This shape is remarkably suggestive.
 \end_inset 
 
 .
+ The Minkowski question mark is infinitely differentiable on every rational,
+ and all derivatives vanish at every rational; yet the mapping is strictly
+ montonically increasing.
+ Just examing the graph visually suggests that the derivatives must be non-zero
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+somewhere
+\begin_inset Quotes erd
+\end_inset 
+
+, although its hard to define how to value these derivatives.
+ Yet, visually comparing the Farey mapping to the distribution of the Farey
+ Fractions, it seems that the distribution of Farey's provides an excellent
+ estimate of that first derivative.
+ Clearly, classical analytic techniques are sorely lacking and inapplicable;
+ we need to find a set of tools where we can talk about and manipulate the
+ so-called 'first derivative' in a meaningful way.
 \layout Standard
 
 
@@ -236,52 +291,56 @@ Sum of Farey Histogram
 
 \layout Standard
 
-This 
-\end_inset 
-
-
-\layout Standard
-
-
-\begin_inset Graphics
-	filename farey-integral.png
-
-\end_inset 
-
-
-\layout Standard
-
-The continued fraction mapping is infinitely differentiable on every rational,
- and all derivatives vanish at every rational; yet the mapping is strictly
- montonically increasing.
- Just examing the graph visually suggests that the derivatives must be non-zero
+This figure shows the sum of the bin counts of the Farey fractions, together
+ with a graph of the Mikowski question mark function.
+ The two graphs can hardly be told apart.
  
-\begin_inset Quotes eld
 \end_inset 
 
-somewhere
-\begin_inset Quotes erd
-\end_inset 
 
-, although its hard to define how to value these derivatives.
- Yet, visually comparing the Farey mapping to the distribution of the Farey
- Fractions, it seems that the distribution of Farey's might be a good estimate
- of that first derivative.
- Clearly, classical analytic techniques are sorely lacking and inapplicable;
- we need to find a set of tools where we can talk about and manipulate the
- so-called 'first derivative' in a meaningful way.
 \layout Standard
 
-Below is another curious picture, where we've relabelled the x axis by passing
- it through 
-\begin_inset Formula $?(x)$
+The figure 
+\begin_inset LatexCommand \ref{cap:Jacobian}
+
 \end_inset 
 
-; one could say that it is a picture of the Jacobian 
+ shows what could be called the Jacobian 
 \begin_inset Formula $(?'\circ?^{-1})(x)$
 \end_inset 
 
+ of teh question mark function.
+ This figure simple relabels the x-axis by passing it through 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+.
+ This function appears to vanish only at the dyadics.
+ Note the superficial resemblance of the profile to the Takagi curve.
+ By visually comparing this function and the Takagi curve (also called the
  
+\emph on 
+blancmange curve
+\emph default 
+), one can intuitively sense that there must be some tangent-space-to-Exp-space
+ type relation between the two.
+ The trick is to write down this relation.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Jacobian}
+
+\end_inset 
+
+Jacobian
 \layout Standard
 
 
@@ -293,17 +352,17 @@ Below is another curious picture, where we've relabelled the x axis by passing
 
 \layout Standard
 
-This function appears to vanish only at the dyadics.
- Note the superficial resemblance of the profile to the Takagi curve.
- By visually comparing this function and the Takagi curve (also called the
- 
-\emph on 
-blancmange curve
-\emph default 
-), one can intuitively sense that there must be some tangent-space-to-Exp-space
- type relation between the two.
- The trick is to write down this relation.
- 
+This figure shows the same Farey fraction distribution as in a previous
+ figure, except that the x-axis is relabelled by passing it through the
+ Minkowski question mark.
+ In a certain sense, this can be taken to be the Jacobian 
+\begin_inset Formula $(?'\circ?^{-1})(x)$
+\end_inset 
+
+ of the question mark.
+\end_inset 
+
+
 \layout Standard
 
 This is really a very curious circumstance.
@@ -405,7 +464,7 @@ f\left(\frac{a\tau+b}{c\tau+d}\right)=\left(c\tau+d\right)^{k}f\left(\tau\right)
 \begin_inset Formula $\tau$
 \end_inset 
 
- is a complex number, ristricted to the upper-half plane: 
+ is a complex number, restricted to the upper-half plane: 
 \begin_inset Formula $\Im\tau>0$
 \end_inset 
 
@@ -430,9 +489,14 @@ ant, known as the Dedekind eta.
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Dedekind-Eta}
+
+\end_inset 
 
 Dedekind Eta
 \layout Standard
@@ -540,8 +604,51 @@ This figure shows a particular slice through the Dedekind eta function
 \end_inset 
 
 
-\layout Bibliography
-\bibitem [asdf]{key-1}
+\layout Standard
 
-Hasdf
+The figure 
+\begin_inset LatexCommand \ref{cap:Dedekind-Eta}
+
+\end_inset 
+
+ shows a particular cross-section through the Dedekind eta.
+ Note the suggestive shape of this curve, and how it crudely resembles the
+ distribution of the Farey fractions.
+ Although it is clear that this curve will not converge to the derivative
+ of the question mark in the limit 
+\begin_inset Formula $|q|\rightarrow1$
+\end_inset 
+
+, it none-the-less is suggestive.
+ Notably, modular forms already have the modular group symmetry, and so
+ already have the symmetry properties of the final curve that we are searching
+ for.
+ This is unlike the histograming approach, where the symmetry is obtained
+ only in the limit.
+ The other remarkable property is that modular forms are infinitely differentiab
+le, and thus posees well-behaved analytic properties, again allowing a kind
+ of studdy that is ill-afforded by the histograms.
+\layout Standard
+
+The presumption that we are making here is that the derivative of the Minkowski
+ question mark function will be found to be the limit of some modular form,
+ although which modular form that might be is not clear at this time.
+ The theory of modular forms is deep andbroad, and will not be reviewed
+ here; the following assumes a basic understanding.
+ A very synoptic overview can be found in the article on elliptic functions
+ in Wikipedia.
+ An in-depth exposition can be found in the book by Apostol.
+\layout Standard
+
+asdf asdf...
+\layout Bibliography
+\bibitem [Apostol]{key-1}
+
+Tom M.
+ Apostol, Modular Functions and Dirichlet Series in Number Theory, (1990)
+ Springer-Verlag, New York.
+\layout Bibliography
+\bibitem [Wikipedia]{key-14}
+
+Wikipedia
 \the_end
