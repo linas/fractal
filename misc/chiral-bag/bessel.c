@@ -89,7 +89,7 @@ bessel (int n, double x, double *bess)
 #define ARRSZ 3650
 	double tmp [ARRSZ];
 	int i, j, m, nstart, mon[ARRSZ];
-	double s, c, r, z, oneoz, scale;
+	double r, z, oneoz, scale;
 
 /*
 C       WE USE BACKWARD RECURENCE TO FIND THE BESSEL FUNCTIONS
@@ -123,6 +123,8 @@ C       SEE COMMENT CARDS IN THE SUBROUTINE "BesselRecurrenceStartRegion"
 	}
 
 	/* Compute r = sin (z) * oneoz / tmp[0]; from first principles */
+#if CORE_RELATION
+	double c,s;
 	s = z * tmp[0];
 	c = tmp[0] - z * tmp[1];
 
@@ -144,6 +146,9 @@ C       SEE COMMENT CARDS IN THE SUBROUTINE "BesselRecurrenceStartRegion"
 	s = z / M_PI;
 	i = (int) floor(s);
 	if (i%2 != 0) { r = -r; }
+#else
+	r = sin (z) * oneoz / tmp[0];
+#endif
 
 /*
 C       RENORMALIZE THE VALUES.  SINCE EXPONENTIATION TAKES ABOUT A FACTOR

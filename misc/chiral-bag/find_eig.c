@@ -3,17 +3,16 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "bessel.h"
 #include "bag_ener.h"
 
-int main ()
+int main (int argc, char * argv[])
 {
 	int i;
 	double theta;
-	int ispect;
 	int k;
-	int kpty;
 	double emax;
 	int nfound;
 
@@ -25,11 +24,14 @@ int main ()
 
 	emax = NLVLS * 3;
 
-	theta = 1.0;
-	ispect = +1;
-	kpty = 1;
+	if (3 > argc)
+	{
+		printf ("Usage: %s theta emax\n", argv[0]);
+		exit (1);
+	}
+	theta = atof (argv[1]);
+	emax = atof (argv[2]);
 
-   emax = 300;
 
 	printf ("#\n");
 	printf ("# FILE: \n");

@@ -39,7 +39,7 @@ int main (int argc, char * argv[])
 	theta = atof (argv[1]);
 
 	theo = (theta - sin(theta)*cos(theta)) / M_PI;
-	printf ("theta=%g k=0%g theo=%g\n", theta, theta/M_PI, theo);
+	printf ("theta=%g k0b=%g theo=%g\n", theta, theta/M_PI, theo);
 
 	for (t=0.5; t; t *= sqrt(0.5))
 	{
@@ -63,10 +63,12 @@ int main (int argc, char * argv[])
 			for (i=0; i<nfound; i++)
 			{
 				double en;
+
 				en = pos_even_levels[i];
 				barn += exp (- t*t*en*en);
 				en = pos_odd_levels[i];
 				barn += exp (- t*t*en*en);
+
 				en = neg_even_levels[i];
 				barn -= exp (- t*t*en*en);
 				en = neg_odd_levels[i];
@@ -77,7 +79,7 @@ int main (int argc, char * argv[])
 				    pos_odd_levels[i], neg_even_levels[i], neg_odd_levels[i]);
 */
 			}
-			if (k==0) k0_barn = barn;
+			if (0 == k) k0_barn = barn;
 		}
 		barn *= -0.5;
 		k0_barn *= -0.5;

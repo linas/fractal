@@ -51,7 +51,7 @@ static double efn (double omega)
 		cs = cos (omega);
 		b0 = sn/omega;
 		b1 = (b0 - cs) / omega;
-		val = efn1_co*b1-(efn1_ptyk-efn1_si)*b0;
+		val = efn1_co * b1 - (efn1_ptyk - efn1_si) * b0;
 	}
 	return val;
 }
@@ -170,7 +170,7 @@ C       THE PAIR.
 
 	a = 0.0;
 	sygnus = ispect;
-	b = fmax ((double)(kay-2), 3.2e-4);
+	b = fmax ((double)(kay-2), 3.2e-6);
 	step = 0.1;
 	funb = efn(sygnus * b);
 	numfound = 0;
@@ -223,7 +223,7 @@ c	       take a big step and save some cpu time.
 			{
 				int nnn = numfound-1;
 				double dil = ener[nnn] - ener [nnn-1];
-				dil = fabs (dil) * 0.4;
+				dil = 0.4 * fabs (dil);
 				step = fmin (step, dil);
 			}
 		}
