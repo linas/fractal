@@ -1,0 +1,2533 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme pslatex
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+The Minkowski Question Mark 
+\newline 
+and the Modular Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+
+\layout Author
+
+Linas Vepstas <linas@linas.org>
+\layout Date
+
+12 October 2004 (updated 15 March 2005)
+\layout Abstract
+
+Fractals and Continued Fractions seem to be deeply related in many ways.
+ Farey Fractions appear naturally in both.
+ Much of this relationship can be explained through the fact that the Modular
+ Group 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ is the natural symmetry group of many fractals, including those associated
+ with period-doubling maps and with phase-locking maps.
+ Thus, we are motivated to study the Modular Group in greater detail.
+ This paper provides a basic introduction to the group, and demonstrates
+ several different representations, focusing primarily on the set-theoretic
+ representations on the rationals.
+ In particular, we find that the mapping between two of these representations
+ is given by the Minkowski Question Mark Function, and thus, we can understand
+ this strange, singular fractal function in terms of the Modular Group.
+ 
+\layout Abstract
+
+This paper is part of a set of chapters that explore the relationship between
+ the real numbers, the modular group, and fractals.
+\layout Abstract
+
+XXXX This paper is under construction; it is a rough, unfinished draft.
+ Some of the more speculative remarks need to be, ahem, edited.
+ I definitely dislike some of the things I say below.
+ There are probably various mundane errors as well.
+ Caution!! XXXX
+\layout Section
+
+The Minkowski Question Mark Function
+\layout Standard
+
+This section explores a peculiar mapping involving Farey Numbers.
+ Referred to as the Minkowski Question Mark, it is well-defined for all
+ real numbers and maps the unit interval into, and onto, the unit interval.
+ It is continuous and monotonic.
+ The map, pictured below, is highly self-similar.
+ It is also highly singular: all of its derivatives vanish on the rationals.
+ Its self-similarity group can be clearly defined, and essentially that
+ of period-doubling iterated maps, such as the Mandelbrot Set.
+ The fact that it involves the Farey numbers is essentially the 
+\begin_inset Quotes eld
+\end_inset 
+
+explanation
+\begin_inset Quotes erd
+\end_inset 
+
+ for why Farey Numbers occur in period-doubling maps.
+ 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename fgraph.png
+
+\end_inset 
+
+
+\layout Subsection
+
+Definition of the Question Mark Function
+\layout Standard
+
+The Minkowski Question Mark map can be constructed in several ways.
+ In all of these constructions, it can be understood to be the mapping between
+ the Stern-Brocot Tree (sometimes called the Farey Tree) and the tree of
+ real numbers expressed as binary, base-2, dyadic fractions.
+ The Stern-Brocot Tree is the tree on which the Farey mediants are naturally
+ organized, and is most easily explained with a picture:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename fareytr.jpg
+
+\end_inset 
+
+
+\layout Standard
+
+(See also the presentation on 
+\begin_inset LatexCommand \url[Stern Brocot Trees]{http://www.cut-the-knot.org/blue/Stern.shtml}
+
+\end_inset 
+
+ at Cut-the-Knot.) The dyadic tree has the same shape, except that the second
+ row holds the values 1/4 and 3/4, and the next row the values 1/8, 3/8,
+ 5/8 and 7/8, and so on.
+ The dyadic tree holds values that are the arithmetic average, rather than
+ the mediant, of the parent values.
+ Both trees are 'binary' in the sense that each branch splits into two;
+ we use the term 'dyadic tree' for the one that holds the 'dyadic' numbers
+ 
+\begin_inset Formula $p/2^{k}$
+\end_inset 
+
+.
+\layout Standard
+
+We denote the values of the Minkowski Question Mark function as as 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+.
+ Equating the Stern-Brocot Tree and the Dyadic Tree literally, one gets
+ a recursive definition.
+ Start by defining 
+\begin_inset Formula $?(0)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $?(1)=1$
+\end_inset 
+
+.
+ Then, for a pair of Farey fraction parents 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ and 
+\begin_inset Formula $p'/q'$
+\end_inset 
+
+, it equates the Farey mediant to the arithmetic average:
+\begin_inset Formula \begin{equation}
+?\left(\frac{p+p'}{q+q'}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{p'}{q'}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+Thus, starting with 
+\begin_inset Formula $\frac{0}{1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\frac{1}{1}$
+\end_inset 
+
+ at the root of the Farey Tree, we have 
+\begin_inset Formula $?\left(\frac{0+1}{1+1}\right)=?\left(\frac{1}{2}\right)=\frac{1}{2}\left[?\left(\frac{0}{1}\right)+?\left(\frac{1}{1}\right)\right]=\frac{1}{2}$
+\end_inset 
+
+.
+ Next, we see the Farey number 1/3 is mapped to the binary 1/4, and so on:
+ one quickly sees 
+\begin_inset Formula $?\left(1/n\right)=2^{-n+1}$
+\end_inset 
+
+.
+ Similarly, 2/3 maps to 3/4, and 
+\begin_inset Formula $?(n/(2n-1))=2^{-1}+2^{-n}$
+\end_inset 
+
+.
+ In general, a rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ maps to 
+\begin_inset Formula $?(p/q)=m\cdot2^{-n}$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $m,n$
+\end_inset 
+
+ (every rational occurs exactly once on the Stern-Brocot Tree).
+ 
+\layout Standard
+
+Put another way, given any value 
+\begin_inset Formula $x$
+\end_inset 
+
+ on the Stern-Brocot Tree, 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ is the value at the corresponding position on the Dyadic Tree.
+ It is convenient in the following to think of 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ as a map from 'Farey Space' to 'Dyadic Space', and useful to keep in mind
+ which of these two spaces one is currently working in.
+ 
+\layout Standard
+
+An alternate, non-recursive definition for the Question Mark is based on
+ continued fractions.
+ Starting with the expansion 
+\begin_inset Formula $x=[a_{1},a_{2},...]$
+\end_inset 
+
+, one writes 
+\begin_inset Formula \begin{equation}
+?(x)=2\sum_{k=1}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:}\end{equation}
+
+\end_inset 
+
+ This sum can be visualized as a count of an alternating sequence of 0's
+ and 1's in the binary expansion of 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+?(x)=\begin{array}{ccccc}
+0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
+a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\label{eq:}\end{equation}
+
+\end_inset 
+
+In this expansion, it is useful to remember that 
+\begin_inset Formula $0.111111...=1.0000...$
+\end_inset 
+
+, in case one has an odd number of terms in the continued fraction expansion.
+\layout Standard
+
+This sequence of 1's and 0's can be understood to be the set of directions
+ for navigating a tree: on encountering a 0, take the left branch, else
+ take the right branch.
+ Thus, we can write 
+\begin_inset Formula $0.011=LRR$
+\end_inset 
+
+.
+ Navigating to this spot on the Stern-Brocot Tree, we find 2/5'ths.
+ Navigating to this same position on the Dyadic Tree wee get 3/8'ths.
+ Thus, 
+\begin_inset Formula $?(2/5)=3/8$
+\end_inset 
+
+.
+\layout Standard
+
+There is also a well-known representation of the Stern-Brocot Tree on the
+ lattice 
+\begin_inset Formula $\mathbb{Z\mathbb{\times Z}}$
+\end_inset 
+
+, where a fraction 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ is denoted as the ordered pair 
+\begin_inset Formula $(p,q)$
+\end_inset 
+
+.
+ In this representation, the left-right navigation operators 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ have the values 
+\begin_inset Formula $L=\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)$
+\end_inset 
+
+ and 
+\begin_inset Formula $R=\left(\begin{array}{cc}
+1 & 1\\
+0 & 1\end{array}\right)$
+\end_inset 
+
+ and thus positions are given as elements of 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+.
+ Maybe we'll elaborate on this later xxxx.
+ To do...
+ elaborate.
+\layout Standard
+
+To summarize, it is this expansion in binary digits that provides the underlying
+ connection between period-doubling maps, such as the Mandelbrot Set, and
+ Farey Numbers.
+ Binary expansions, or code-words, occur naturally in the analysis of Duoady-Hub
+bard landing rays.
+ We'll demonstrate an explicit mapping in a later section.
+\layout Subsection
+
+Some Curious Properties of the Question Mark 
+\layout Standard
+
+The Question Mark has the curious property that it maps quadratic irrationals
+ to rational numbers.
+ A quadratic irrational is a number of the form m 
+\begin_inset Formula $p/q+m\sqrt{D}/n$
+\end_inset 
+
+ for integers 
+\begin_inset Formula $p,q,m,D,n$
+\end_inset 
+
+.
+ Continued fractions whose expansions become eventually periodic are mapped
+ to binary strings that become eventually periodic.
+ The later are clearly just the binary expansions of rationals whose denominator
+ is not a power of 2.
+ The former are quadratic irrationals, which is known from the theory of
+ Pellian equations: It turns out that every quadratic irrational has a continued
+ fraction expansion that becomes eventually periodic.
+ Note that, as a side effect, this proves that quadratic irrationals are
+ countable in the same way that rationals are.
+\layout Standard
+
+The Minkowski Question Mark has some very curious analytic properties: the
+ mapping is continuous everywhere.
+ It is also infinitely differentiable on every rational, and all derivatives
+ vanish at every rational; yet the mapping is strictly monotonically increasing.
+ Clearly, the function is singular on irrationals.
+ Its hard to define just how.
+ (xxxx Blah blah need to define how).
+\layout Standard
+
+If there is a 3-adic or p-adic generalization of the Minkowski Question
+ Mark, it is not obvious; one 'obvious' generalization is 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\sum_{k=1}\left(-1\right)^{k}\;3^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:}\end{equation}
+
+\end_inset 
+
+but its highly discontinuous.
+ Other generalizations based on roots of unity in the complex plane also
+ don't seem to work.
+ One might be able to get traction by looking at groups that have 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ as a subgroup but also have some 
+\begin_inset Formula $p$
+\end_inset 
+
+-fold symmetry.
+\layout Subsection
+
+Symmetries of the Question Mark
+\layout Standard
+
+XXX write the intro again:...
+ the symmetry is the group that maps trees to subtrees so the symmetry group
+ of mapping a binary tree onto itself in the modular group.
+ XXX rewrite me.
+ XXX also notice that the tree spans an inf-sup interval which is why this
+ is an interval map and notice that trees don't span any arbitrary interval,
+ but very specific intervals.
+ 
+\layout Standard
+
+It should be immediately apparent from the picture of the Question Mark
+ that it is highly self-similar, and thus should have a group of symmetries.
+ Below, we give an explicit presentation of this group, which turns out
+ to be the Modular Group Gamma.
+ Strictly speaking, the set of self-similarities is really a subset of the
+ modular group, a semi-group of sorts.
+ This is due to the nature of the construction; the correct extension tothe
+ full group is a bit confusing.
+\layout Standard
+
+After briefly presenting the modular group a bit, we point out that the
+ 'interesting' subset of the group, that is, 'interesting' as far as fractals
+ are concerned, can be best enumerated as 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes\mathbb{Z}_{2}$
+\end_inset 
+
+.
+ This enumeration will help cement that the modular group is the symmetry
+ group of a broad range of fractal curves (the de Rham curve and its various
+ expressions).
+ I'm enamored of this development, because the popular literature on fractals
+ always talks about self-similarity without ever actually giving the group
+ structure that's involved.
+ The goal here is to rectify this omission.
+ The development for general fractal curves occurs in the next chapter;
+ here we limit ourselves to the Question Mark (which is a de Rham curve).
+\layout Standard
+
+We start by noticing that for any real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ having the continued fraction expansion 
+\begin_inset Formula $x=[a_{1},a_{2},...]$
+\end_inset 
+
+, that 
+\begin_inset Formula $g(x)=x/(1+x)=[a_{1}+1,a_{2},...]$
+\end_inset 
+
+ .
+ By the definition of 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ one sees immediately that 
+\begin_inset Formula $g$
+\end_inset 
+
+ is a homomorphism of the Question Mark: 
+\begin_inset Formula $(?\circ g)(x)=?(g(x))=?(x)/2$
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $g$
+\end_inset 
+
+ represents one of the generators of the symmetry group.
+ Denoting repeated iterations of 
+\begin_inset Formula $g$
+\end_inset 
+
+ by 
+\begin_inset Formula $g^{n}$
+\end_inset 
+
+ we have 
+\begin_inset Formula $g^{n}(x)=x/(1+nx)$
+\end_inset 
+
+.
+ Equivalently, for a continued fraction, we have 
+\begin_inset Formula \begin{equation}
+g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Iterating under the question mark gives 
+\begin_inset Formula $?(x/(1+nx))=?(x)/2^{n}$
+\end_inset 
+
+.
+ The generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ maps intervals to intervals, specifically 
+\begin_inset Formula $g^{n}:[[0,1]]\rightarrow[[0,\frac{1}{n+1}]]$
+\end_inset 
+
+ where we use the non-standard notation 
+\begin_inset Formula $[[]]$
+\end_inset 
+
+ to denote an interval, to avoid confusion with 
+\begin_inset Formula $[]$
+\end_inset 
+
+ for continued fraction expansions.
+ On the dyadic side, we have 
+\begin_inset Formula $(?g^{n}):[[0,1]]\rightarrow[[0,1/2^{n}]]$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+One gets the general symmetry group 
+\begin_inset Formula $\Gamma$
+\end_inset 
+
+ by combining with the reflection operator embodied in the left-right symmetry:
+ 
+\begin_inset Formula $?(1-x)=1-?(x)$
+\end_inset 
+
+ which we denote with 
+\begin_inset Formula $r(x)=1-x$
+\end_inset 
+
+.
+ Note that 
+\begin_inset Formula $r$
+\end_inset 
+
+ commutes with 
+\begin_inset Formula $?$
+\end_inset 
+
+ as we have 
+\begin_inset Formula $(?\circ r)(x)=(r\circ?)(x)$
+\end_inset 
+
+.
+ Thus, for example, 
+\begin_inset Formula \begin{equation}
+(?rg^{n})(x)=(r?g^{n})(x)=r\left(\frac{1}{2^{n}}?\right)(x)=1-?(x)/2^{n}=?\left(r\left(\frac{x}{1+nx}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ shows that 
+\begin_inset Formula $rg^{n}$
+\end_inset 
+
+ is the group element that, under 
+\begin_inset Formula $?$
+\end_inset 
+
+, maps 
+\begin_inset Formula $[[0,1]]\rightarrow[[1,1-1/2^{n}]]$
+\end_inset 
+
+.
+ We can now write a general similarity transform as 
+\begin_inset Formula $\gamma\equiv g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+.
+ Applying the above process, it is relatively straightforward to see that
+ 
+\begin_inset Formula \begin{equation}
+(?\gamma)(x)=(?g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ To see the other leg of the homomorphism commutative diagram, we start
+ by observing that we can write 
+\begin_inset Formula $g^{n}(x)$
+\end_inset 
+
+ itself as a continued fraction: 
+\begin_inset Formula \begin{equation}
+g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+ In the same vein, we have 
+\begin_inset Formula $(rg^{n})(x)=[1,n-1,x]$
+\end_inset 
+
+ and, with a slight abuse:
+\begin_inset Formula \begin{equation}
+r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Continuing this exercise, one finds that
+\begin_inset Formula \begin{equation}
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+ which should be recognizable as an element of the group 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+.
+ We present this group next.
+\layout Section
+
+The Modular Group Gamma or 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+
+\layout Standard
+
+The modular group gamma is normally defined by its canonical representation
+ 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+.
+ In this standard representation, a general group element is represented
+ by 
+\begin_inset Formula \begin{equation}
+\gamma=\left(\begin{array}{cc}
+a & b\\
+c & d\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ with 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+ being integers, and 
+\begin_inset Formula $\det\gamma=ad-bc=1$
+\end_inset 
+
+.
+ Elements of this group are isomorphic to a certain set of Mobius transforms
+ on the upper-half complex plane; the isomorphism is given by 
+\begin_inset Formula $\gamma(x)=(ax+b)/(cx+d)$
+\end_inset 
+
+.
+ This group can be presented as a free group of a pair of generators, and
+ there are many different possible choices of generators.
+ The equivalence of choices isn't always obvious.
+ Here we will pick a pair of generators that is consistent with the previous
+ section.
+ This choice, however, does 
+\emph on 
+not
+\emph default 
+ correspond to one of the canonical choices commonly seen in the literature;
+ we focus instead on the utility of the generators to the task at hand.
+ Thus, we pick 
+\begin_inset Formula \begin{equation}
+g=\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)\;\textrm{ and }\; r=\left(\begin{array}{cc}
+-1 & 1\\
+0 & 1\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Note that 
+\begin_inset Formula $\det r=-1$
+\end_inset 
+
+ and so the group that will be generated is more precisely the unimodular
+ group 
+\begin_inset Formula $S^{*}L(2,\mathbb{Z})$
+\end_inset 
+
+, the group of matricies with determinant +1 or -1.
+ Note also that the modular group is almost universally defined as the projectiv
+e group 
+\begin_inset Formula $PSL(2,\mathbb{Z})=SL(2,\mathbb{Z})/\{\pm\mathbb{I}\}$
+\end_inset 
+
+ of matrices with determinant 1, divided by plus or minus the identity.
+ In the following we will for the most part ignore these distinctions, emphasizi
+ng them only where necessary.
+\layout Standard
+
+This matrix representation of the generators can be used to manipulate and
+ evaluate continued fractions; indeed, the modular group is known as being
+ one way to conveniently work with continued fractions.
+ So, for example, we've already noted above that
+\begin_inset Formula \begin{equation}
+g([a_{1},a_{2},...])=[a_{1}+1,a_{2},...]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Similarly, the action of 
+\begin_inset Formula $r$
+\end_inset 
+
+ is can be written as 
+\begin_inset Formula \begin{equation}
+r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
+\;[1,a_{1}-1,a_{2},..] & \;\textrm{\; for \;} & a_{1}\neq1\\
+\;[a_{2}+1,a_{3},...] & \textrm{\;\; for \;} & a_{1}=1\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+The operator to insert a digit 
+\begin_inset Formula $n\geq1$
+\end_inset 
+
+ at the front of the continued fraction expansion is thus 
+\begin_inset Formula \begin{equation}
+(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]\label{eq:}\end{equation}
+
+\end_inset 
+
+which we can immediately verify as
+\begin_inset Formula \begin{equation}
+(g^{n-1}rg)(x)=\left(\left(\begin{array}{cc}
+1 & 0\\
+n-1 & 1\end{array}\right)\left(\begin{array}{cc}
+-1 & 1\\
+0 & 1\end{array}\right)\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)\right):(x)=\left(\begin{array}{cc}
+0 & 1\\
+1 & n\end{array}\right):(x)=\frac{1}{n+x}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Here we introduced 
+\begin_inset Formula $:$
+\end_inset 
+
+ to denote the apply operator for the matrices; that is, 
+\begin_inset Formula \begin{equation}
+\left(\begin{array}{cc}
+a & b\\
+c & d\end{array}\right):(x)=\frac{ax+b}{cx+d}\label{eq:}\end{equation}
+
+\end_inset 
+
+ It should be clear that we can now build up the continued fraction as desired
+ with this insertion operator acting on zero: 
+\begin_inset Formula \begin{equation}
+(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+One can also find the append operator, which we find by examining
+\begin_inset Formula \begin{equation}
+[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+ We use these to construct the appending operator 
+\begin_inset Formula $(g^{-1}rg^{k+1})(x)=(kx+1)/x$
+\end_inset 
+
+ which, for 
+\begin_inset Formula $k\geq1$
+\end_inset 
+
+, acts as 
+\begin_inset Formula \begin{equation}
+[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+ We can thus build up continued fractions by appending at the back, starting
+ from 
+\begin_inset Formula $(g^{-1}rg)(x)=1/x=[x]$
+\end_inset 
+
+ as follows: 
+\begin_inset Formula \begin{equation}
+(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+ arriving at the same answer as before.
+\layout Standard
+
+Note that in the above, in order to work with a consistent definition of
+ the continued fraction, we are more-or-less force to limit ourselves to
+ considering only those group elements with positive 
+\begin_inset Formula $j,k,m,...$
+\end_inset 
+
+ By contrast, the true general group element can have positive or negative
+ values for these exponents.
+ Thus, it should be clear that the rational numbers, expressed as continued
+ fractions, can represent a subset of the modular group, but cannot represent
+ the full group.
+ In fact, as well see later, the rational numbers correspond to the cusps.
+ We'll return to this set-theoretic represnetation shortly.
+\layout Subsection
+
+A Theorem about an Isomorphism
+\layout Standard
+
+Lets restate the above results using modern mathematical notation and language.
+ Let us denote with 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ the set of real numbers 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ that are represented by dyadic expansions; that is, 
+\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{D}\in\mathbb{R}_{D}$
+\end_inset 
+
+ which represents the real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ as the dyadic expansion 
+\begin_inset Formula $x_{D}$
+\end_inset 
+
+ with 
+\begin_inset Formula \begin{equation}
+x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} \;\forall k\in\mathbb{Z}$
+\end_inset 
+
+.
+ Let us use the notation 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ to denote the representation of the real numbers as continued fractions,
+ that is, 
+\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{C}\in\mathbb{R}_{C}$
+\end_inset 
+
+ such that 
+\begin_inset Formula \begin{equation}
+x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\label{eq:}\end{equation}
+
+\end_inset 
+
+where 
+\begin_inset Formula $a_{k}\in\mathbb{N}\;\forall k\in\mathbb{N}$
+\end_inset 
+
+, with the exception that 
+\begin_inset Formula $a_{0}\in\mathbb{Z}$
+\end_inset 
+
+.
+ Both of these sets are commonly treated as being isomorphic to the real
+ numbers; they are just different representations of the real numbers.
+ However, we can see that these two are not completely the same, because
+ the group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ has a different action on each.
+ In particular, the group generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ has the representation 
+\begin_inset Formula \begin{equation}
+\begin{array}{c}
+g_{D}:\mathbb{R}_{D}\longrightarrow\mathbb{R}_{D}\\
+g_{D}:x\longmapsto x/2\end{array}\label{eq:}\end{equation}
+
+\end_inset 
+
+ when acting on the set of dyadic numbers, whereas as this same group element
+ has the representation 
+\begin_inset Formula \begin{equation}
+\begin{array}{c}
+g_{C}:\mathbb{R}_{C}\longrightarrow\mathbb{R}_{C}\\
+g_{C}:x\longmapsto x/(x+1)\end{array}\label{eq:}\end{equation}
+
+\end_inset 
+
+ when acting on the set of continued fractions.
+ The other generator 
+\begin_inset Formula $r$
+\end_inset 
+
+ has the same representation on both sets: 
+\begin_inset Formula $r(x)=1-x$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Define 
+\begin_inset Formula \begin{equation}
+G=\{\gamma\in SL(2,\mathbb{Z})\;|\;\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ or }\gamma=rg^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Note that 
+\begin_inset Formula $G\subset S^{*}L(2,\mathbb{Z})$
+\end_inset 
+
+ is a proper subset: it is a semigroup, in that it contains the identity
+ element, and is closed in the sense that if 
+\begin_inset Formula $\gamma_{1}\in G$
+\end_inset 
+
+ and 
+\begin_inset Formula $\gamma_{2}\in G$
+\end_inset 
+
+ then 
+\begin_inset Formula $\gamma_{1}\gamma_{2}\in G$
+\end_inset 
+
+.
+ However, 
+\begin_inset Formula $G$
+\end_inset 
+
+ is not a proper group because it does not contain inverses (which would
+ require elements with the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ being negative).
+\layout Description
+
+Theorem: The Minkowski Question Mark provides an isomorphism between 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+.
+ That is, we have the commuting diagram
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\begin{array}{ccccc}
+ &  & \;\;\gamma_{C}\;\;\\
+ & \mathbb{R}_{C} & \longrightarrow & \mathbb{R}_{C}\\
+? & \downarrow & \bigcirc & \downarrow & ?\\
+ & \mathbb{R}_{D} & \longrightarrow & \mathbb{R}_{D}\\
+ &  & \gamma_{D}\end{array}\label{eq:}\end{equation}
+
+\end_inset 
+
+ such that 
+\begin_inset Formula $?\circ\gamma_{C}=\gamma_{D}\circ?$
+\end_inset 
+
+ holds 
+\begin_inset Formula $\forall\gamma\in G$
+\end_inset 
+
+.
+ To be more precise, we really should say that 
+\begin_inset Formula $(?\circ\gamma_{C})(x_{C})=(\gamma_{D}\circ?)(x_{D})\;\;\forall\gamma\in G$
+\end_inset 
+
+ and 
+\begin_inset Formula $\forall x\in\mathbb{R}$
+\end_inset 
+
+ where 
+\begin_inset Formula $x_{D}\in\mathbb{R}_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{C}\in\mathbb{R}_{C}$
+\end_inset 
+
+ are both representations of the same 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Proof: We've already given the standard representations of 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ in these two spaces in previous sections, but we repeat these here just
+ so that this is all crystal-clear.
+ We first decompose an abstract group element 
+\begin_inset Formula $\gamma\in G$
+\end_inset 
+
+ in terms of the generators 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+, as usual: 
+\begin_inset Formula \begin{equation}
+\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Then, this 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ has the representation 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+ which is 
+\begin_inset Formula \begin{equation}
+\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and it also has the representation 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+ which is 
+\begin_inset Formula \begin{equation}
+\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+ and thus we are able to write 
+\begin_inset Formula $?(\gamma_{C}(x))=\gamma_{D}(?(x))$
+\end_inset 
+
+ as the isomorphism.
+ To properly complete this proof, we would need to apply induction, that
+ is, to show that if this equivalence holds for any one given 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ and 
+\begin_inset Formula $x$
+\end_inset 
+
+, then it also holds for 
+\begin_inset Formula $\gamma\gamma'$
+\end_inset 
+
+ for another 
+\begin_inset Formula $\gamma'\in G$
+\end_inset 
+
+ and that it also holds for 
+\begin_inset Formula $x+y$
+\end_inset 
+
+ where 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset 
+
+.
+ We then would need to exhibit one group element for which this holds, and
+ thus, by induction, conclude that it holds for all group elements and reals.
+ One could try to give a very precise proof along these lines, but this
+ is outside the scope of this text.
+ It requires, among other things, talking about the completion of the rationals
+ by the reals, and, if we are not careful, might also invoke the Axiom of
+ Choice.
+ See also the remarks below.
+ QED.
+ 
+\layout Standard
+
+To summarize, we have exhibited an isomorphism of the real numbers onto
+ themselves that demonstrates that there are really two distinct and inequivalen
+t representations of the real numbers.
+ When we say distinct and inequivalent, we really mean it: these two representat
+ions transform radically differently under the Modular Group, although they
+ are both isomorphic to that abstract set we call the reals, and are, through
+ the Question Mark, isomorphic to each other.
+\layout Standard
+
+If we were better mathematicians, we would insist on a more watertight proof
+ of this isomorphism, rather than the assertion that this is so.
+ Unfortunately, we do not have the tools handy to provide this stronger
+ proof.
+ It is widely believed that both the dyadics and the continued fractions
+ are isomorphic to the reals, but this shouldn't entirely be taken for granted.
+ In fact, we have already committed several grave errors.
+ For one, the set 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ is larger than the set 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+: as every student is told, the set 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ contains the elements 0.11111...
+ and 1.0000...
+ which are clearly distinct in 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ but represent the same number in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ We have something similar happening in 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ in that a rational has the multiple representations 
+\begin_inset Formula $[a_{0};a_{1},a_{2},...,a_{n},\infty,a_{n+2},a_{n+3},...]$
+\end_inset 
+
+ where it does not matter what we pick for 
+\begin_inset Formula $a_{n+2}$
+\end_inset 
+
+, etc.
+ Thus, one of our mistakes was to say 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ is isomorphic to 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ Instead, it is only homomorphic, and there exists a homomorphism 
+\begin_inset Formula $e:\mathbb{R}_{D}\rightarrow\mathbb{R}$
+\end_inset 
+
+ such that 
+\begin_inset Formula $e(0.1111...)=e(1.000...)$
+\end_inset 
+
+, thus implying that 
+\begin_inset Formula $Ker\; e$
+\end_inset 
+
+ is non-trivial.
+ We can then use 
+\begin_inset Formula $Ker\; e$
+\end_inset 
+
+ to induce the desired isomorphism between 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ The existence of this homomorphism is widely accepted, but I don't know
+ how to get there from first principles.
+ Similar remarks apply to the set 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+.
+ Thus, having to work with quotient spaces introduces complexity into the
+ correct proof.
+ To this volatile mix, we have to add considerations of about the completion
+ of the rationals by the reals.
+ Clearly, the dyadic tree and the Stern-Brocot tree are order-preserving
+ enumerations of the rationals.
+ The correct completion of the dyadic tree appears to be 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ whereas the correct completion of the Stern-Brocot Tree appears to be 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+, and these two completions are not 
+\emph on 
+prima facae
+\emph default 
+ equivalent.
+ If we can prove that there is only one, unique completion of the rationals
+ by the reals, then we have proved the existence of the Minkowski Question
+ Mark, and we thus arrive at the proof of the homomorphism of 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+.
+ But this is far from obvious from this vantage point.
+ One problem is that proofs of completion might surreptitiously invoke the
+ Axiom of Choice; what one really wants are proofs of completion that start
+ from a clean base, such as Zermelo-Fraenkel, and arrive at the homomorphism
+ of 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+, without invoking the Axiom of Choice.
+ We start laying some of the groundwork for a proof of this type in a later
+ section.
+\layout Subsection
+
+The Dyadic Representation as Affine Transformations
+\layout Standard
+
+Note that the dyadic representation can be written in terms of affine transforma
+tions, which also use two-by-two matrices.
+ These should not be confused with the canonical representation.
+ In the affine representation, we write 
+\begin_inset Formula \begin{equation}
+\gamma_{D}(x)\;:=\left(\begin{array}{cc}
+1 & 0\\
+a & b\end{array}\right)\left(\begin{array}{c}
+1\\
+x\end{array}\right)=\left(\begin{array}{c}
+1\\
+a+bx\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ for some values 
+\begin_inset Formula $a,b$
+\end_inset 
+
+.
+ In this representation, we have 
+\begin_inset Formula \begin{equation}
+g_{D}=\left(\begin{array}{cc}
+1 & 0\\
+0 & \frac{1}{2}\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+r_{D}=\left(\begin{array}{cc}
+1 & 0\\
+1 & -1\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so once again, we can use matrix multiplication to quickly compute
+ 
+\begin_inset Formula \begin{equation}
+\gamma_{D}(x)\;:=\gamma_{D}\left(\begin{array}{c}
+1\\
+x\end{array}\right)=g_{D}^{a_{1}}r_{D}g_{D}^{a_{2}}r_{D}...r_{D}g_{D}^{a_{N}}\left(\begin{array}{c}
+1\\
+x\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which is exactly equal to the 
+\begin_inset Formula $\gamma_{D}(x)$
+\end_inset 
+
+ presented before.
+ Although 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+ is thus also representable as a two-by-two matrix, don't confuse it with
+ the matrix 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+.
+ In particular, the determinant of 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+is not 1.
+ 
+\layout Subsection
+
+de Rham Curves
+\layout Standard
+
+At this point, we should introduct de Rham curves.
+\layout Subsection
+
+Fractal Symmetry and the Subset 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes C_{2}$
+\end_inset 
+
+ of the Modular Group
+\layout Standard
+
+Every group element of 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ can be decomposed into a combination of the 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ generators, of the form 
+\begin_inset Formula $g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+ for integers 
+\begin_inset Formula $a_{k}\in\mathbb{Z}$
+\end_inset 
+
+.
+ We've already discovered the relationship between the modular group and
+ continued fractions, which we gave above as 
+\begin_inset Formula \[
+\gamma_{C}(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+
+\end_inset 
+
+ We saw that this relation gives us the isomorphisms of the Minkowski Question
+ Mark; let us now look at this a little more carefully and precisely, since,
+ among other things, we need to define the domain and range over which the
+ isomorphism is valid.
+\layout Standard
+
+First, let us consider the group elements with 
+\begin_inset Formula $a_{1}\geq0$
+\end_inset 
+
+, 
+\begin_inset Formula $a_{2}\geq1$
+\end_inset 
+
+, ...
+ 
+\begin_inset Formula $a_{N-1}\geq1$
+\end_inset 
+
+, 
+\begin_inset Formula $a_{N}\geq0$
+\end_inset 
+
+.
+ When the coefficients are zero or positive like this, we find that 
+\begin_inset Formula $\gamma_{C}(x)$
+\end_inset 
+
+ maps the unit interval into strictly small intervals; 
+\shape italic 
+i.e.
+
+\shape default 
+ that 
+\begin_inset Formula $0<\gamma_{C}(0),\gamma_{C}(1)<1$
+\end_inset 
+
+.
+ One endpoint of the interval are given by the rational 
+\begin_inset Formula $\gamma_{C}(0)=[a_{1}+1,a_{2},a_{3},...,a_{N-1}]$
+\end_inset 
+
+ (note the missing 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+).
+ The other endpoint is 
+\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}\geq1$
+\end_inset 
+
+, although it must be written as 
+\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N-2}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}=0$
+\end_inset 
+
+.
+ This last special case is really just a reversal of the two endpoints.
+ For such a 'shrinking' 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+, we can now write the isomorphism of the question mark as 
+\begin_inset Formula \[
+?(\gamma_{C}(x))=?(\gamma_{C}(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
+
+\end_inset 
+
+
+\layout Standard
+
+The best way of understanding this isomorphism is to think of it as an isomorphi
+sm of intervals, where we can pick one end of the interval, but are a bit
+ more constrained in picking the other end.
+ That is, we can pick an arbitrary 
+\begin_inset Formula $\gamma_{C}(0)=p/q\in\mathbb{Q}$
+\end_inset 
+
+.
+ We get the other end of the interval by picking 
+\begin_inset Formula $a_{N}\in\mathbb{N}$
+\end_inset 
+
+ a positive integer.
+ Having thus specified the interval, we can, for good measure, choose to
+ exchange the endpoints, that is, pick one of 
+\begin_inset Formula $\left\{ 1,r\right\} \in C_{2}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+XXXX explain this: there are two ways to enumerate the tree remaps: tree-root
+ to -tree-root.
+ But the intervals are inf and sup of all the elements in the tree.
+ The alternate map is to specify the inf of the tree (which is actually
+ a real not a rational!!!) in which case one has a choice of tree roots,
+ which are Z.
+ The mirror reflection of the tree is of course 
+\begin_inset Formula $C_{2}$
+\end_inset 
+
+.
+ XXXX reword the above XXXX 
+\layout Standard
+
+To summarize, this set of isomorphisms of the question mark can be enumerated
+ by 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes C_{2}$
+\end_inset 
+
+, which we'd like to call the fundamental set of symmetries.
+ Note that this property of being able to freely pick one endpoint, but
+ being a bit more constrained with the other is a very important property
+ of this symmetry.
+ 
+\series bold 
+\emph on 
+This property is the fundamental property of self-similar objects and fractals
+ in general: one can freely pick which copy one is to be self-similar with,
+ but then after that, one has little further freedom.
+
+\series default 
+\emph default 
+ This is what makes fractals be what they are.
+ 
+\layout Standard
+
+So far, we've only enumerated some, but not all of the modular group.
+ The inverse of our generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ is 
+\begin_inset Formula $g^{-1}=\left(\begin{array}{cc}
+1 & 0\\
+-1 & 1\end{array}\right)$
+\end_inset 
+
+.
+ For the group element 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+ we can quickly see that the inverse is 
+\begin_inset Formula $\gamma^{-1}=g^{-a_{N}}rg^{-a_{N-1}}r...rg^{-a_{1}}$
+\end_inset 
+
+.
+ Its easy to see that these define the inverse mappings of smaller intervals
+ onto the unit interval.
+ Note that one needs to be careful when working with 
+\begin_inset Formula $\gamma^{-1}(x)$
+\end_inset 
+
+ because this has poles that are just outside of the interval of the mapping.
+ That is, the domain of the isomorphism is defined only on the interval
+ of the mapping, and not the whole unit interval (its the range, not the
+ domain, that is the whole unit interval).
+ These inverse mappings can also be enumerated by 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes C_{2}$
+\end_inset 
+
+, of course.
+ 
+\layout Standard
+
+All of the remaining group elements that we haven't yet discussed are those
+ with a mixture of positive and negative values for the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+.
+ These group elements can be obtained by alternately concatenating interval-shri
+nking and interval-expanding group elements.
+ One has to be considerably more careful in keeping track of the domains
+ and ranges of each mapping.
+ We claim (without proof at this time) that these types of mappings do not
+ introduce any new types of intervals, and so enumeration originally provided,
+ 
+\emph on 
+viz.
+ 
+\emph default 
+
+\begin_inset Formula $(\mathbb{Q}\otimes\mathbb{N}\otimes C_{2})\oplus(\mathbb{Q}\otimes\mathbb{N}\otimes C_{2})$
+\end_inset 
+
+ is essentially unchanged.
+
+\emph on 
+ 
+\layout Standard
+
+ToDo: give for example 
+\begin_inset Formula $(rg^{-2}rg^{2})(x)=x+2$
+\end_inset 
+
+ and discuss what this means for the question mark, and how we should treat
+ this (to modulo or not to modulo?)
+\layout Standard
+
+Note also that if we limit ourselves to alternately shrinking and growing
+ interval maps that are strictly contained one inside the other, then we
+ find a proper subgroup of the modular group, whose group elements are now
+ enumerated by pairs of intervals or .xxx.
+ be careful here .
+ Again, the domain and range of these sub-symmetries are now limited.
+ 
+\layout Standard
+
+Thus I think we can now conclude that 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ is an isomorphism of 
+\begin_inset Formula $?$
+\end_inset 
+
+, mapping the unit interval into a subinterval, completing the proof.
+ xxxx finish writing these conclusions.
+\layout Subsection
+
+Blah Blah Blah
+\layout Standard
+
+Note that 
+\begin_inset Formula $x_{+}(w)$
+\end_inset 
+
+ is the concatenation operator for continued fractions.
+ If 
+\begin_inset Formula $x=[a_{1},a_{2},...,a_{N}]$
+\end_inset 
+
+ and 
+\begin_inset Formula $w=[b_{1},b_{2},...]$
+\end_inset 
+
+ then 
+\begin_inset Formula $x_{+}(w)=[a_{1},a_{2},...,a_{N},b_{1},b_{2},...]$
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $x_{+}$
+\end_inset 
+
+ can be used to construct code-words.
+ Iterating 
+\begin_inset Formula $x_{+}(w)$
+\end_inset 
+
+ obviously does not yield any periodic orbits, and instead converges to
+ a quadratic irrational that is the solution to 
+\begin_inset Formula $y=x_{+}(y)$
+\end_inset 
+
+.
+ From the theory of Pellian equations, if 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+ is even, then 
+\begin_inset Formula $y=-a_{N}/2+\sqrt{D}$
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $D$
+\end_inset 
+
+ where 
+\begin_inset Formula $a_{N}^{2}/4+a_{N}+1>D>a_{N}^{2}/4$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Pre-periodic stuff ..
+ Misiurewitz points.
+ 
+\layout Standard
+
+ToDo
+\layout Subsection
+
+The Set-Theoretic Representation of the Modular Group
+\layout Standard
+
+The canonical representation of the modular group elements by Mobius transforms
+ is in fact a set-theoretic representation of the modular group.
+ That is, let 
+\begin_inset Formula $X$
+\end_inset 
+
+ be a set, and let 
+\begin_inset Formula $\mathcal{F}_{X}=\left\{ f[x]:X\rightarrow X\right\} $
+\end_inset 
+
+ be the set of all maps from the set to itself.
+ Then we say that 
+\begin_inset Formula $X$
+\end_inset 
+
+ is a set-theoretic representation of a group 
+\begin_inset Formula $G$
+\end_inset 
+
+ if 
+\begin_inset Formula $\exists\rho:G\rightarrow\mathcal{F}_{X}$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\forall g\in G$
+\end_inset 
+
+ and 
+\begin_inset Formula $\forall x\in X$
+\end_inset 
+
+ that the map 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is a group homomorphism of the group into 
+\begin_inset Formula $\mathcal{F}_{X}$
+\end_inset 
+
+.
+ That is, the following two properties must hold: the identity element correspon
+ds to the self-map: 
+\begin_inset Formula $\rho(e)[x]=x$
+\end_inset 
+
+ and that group multiplication corresponds to function composition: 
+\begin_inset Formula $\rho(g_{1}g_{2})[x]=(\rho(g_{1})\circ\rho(g_{2}))[x]=\rho(g_{1})[\rho(g_{2})[x]]$
+\end_inset 
+
+.
+ If every map 
+\begin_inset Formula $\rho(g):X\rightarrow X$
+\end_inset 
+
+ is one-to-one and onto, then 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is a group homomorphism from 
+\begin_inset Formula $G$
+\end_inset 
+
+ to 
+\begin_inset Formula $S_{X}$
+\end_inset 
+
+ where 
+\begin_inset Formula $S_{X}$
+\end_inset 
+
+ is the symmetric group of 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Clearly, the canonical map 
+\begin_inset Formula \[
+\rho:\left(\begin{array}{cc}
+a & b\\
+c & d\end{array}\right)\mapsto\frac{ax+b}{cx+d}\]
+
+\end_inset 
+
+ is such a group homomorphism for the modular group.
+ Not only is is commutative, but it is also holds for all elements of the
+ modular group.
+ The set 
+\begin_inset Formula $X$
+\end_inset 
+
+ can be taken to be the field of rationals 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ or as any of its closures 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, although when studying modular forms, it is usually taken as the complex
+ upper-half plane 
+\begin_inset Formula $H^{+}=\{ z\in\mathbb{C}\, s.t.\,\textrm{Im}z\geq0\}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The Minkowski Question Mark suggests that there is another such representation,
+ given by 
+\begin_inset Formula $?\circ\rho$
+\end_inset 
+
+.
+ Unfortunately, due to the nature of the construction, its not obvious if
+ the representation can be made to hold for all group elements, although
+ it clearly works on the subset of contracting group elements.
+ lets see how far we can push this.
+ In a similar vein, we will find other representations in 
+\begin_inset Formula $GL(N)$
+\end_inset 
+
+ given by the self-similarity properties of the Takagi Curve [ref other
+ chapter/paper].
+ These representations will also be built from the subset of contracting
+ group elements, and so we need a general discussion of how to extend the
+ homomorphisms to all group elements.
+ 
+\layout Standard
+
+Let 
+\begin_inset Formula $M=\{\gamma\in SL(2,\mathbb{Z})\textrm{ s.t. }\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\textrm{ has }a_{k}>0\;\forall k\in\{1,..,N\}\}$
+\end_inset 
+
+ be the set of contracting group elements.
+ We begin by noting that every 
+\begin_inset Formula $\gamma\in M$
+\end_inset 
+
+ defines an open interval 
+\begin_inset Formula $\upsilon_{\gamma}$
+\end_inset 
+
+ whose endpoints are given by 
+\begin_inset Formula $\gamma_{D}(0)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\gamma_{D}(1)$
+\end_inset 
+
+.
+ We'll be using this to generate the dyadic topology.
+ Equivalently, we could have used the Farey numbers 
+\begin_inset Formula $\gamma_{C}(0)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\gamma_{C}(1)$
+\end_inset 
+
+, which would generate a Farey topology; either way, these two can be made
+ homeomorphic through the Minkowski Question Mark.
+ This is most easily understood by realizing that both intervals are defined
+ by subtrees; in one case, a subtree of the dyadic tree, and in the other
+ case, by a subtree of the Stern-Brocot tree.
+ Every contracting element uniquely defines a subtree; the mapping between
+ contracting elements and subtrees is 1-1 and onto.
+ The Minkowski Question Mark is an equivalence of trees, and so these intervals
+ are really 
+\begin_inset Quotes eld
+\end_inset 
+
+the same thing
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ In the following, we will let 
+\begin_inset Formula $\gamma(x)$
+\end_inset 
+
+ stand for either the one or the other set-theoretic representation, unless
+ otherwise stated.
+\layout Standard
+
+Subtrees of trees are totally ordered, and so we have equivalently a total
+ order of intervals (XXX should we define total order here?) That is, we
+ have a simple theorem about interval intersection: given any two 
+\begin_inset Formula $\gamma_{1},\gamma_{2}\in M$
+\end_inset 
+
+, then one of the following three statements holds: 
+\begin_inset Formula $\upsilon_{1}\cap\upsilon_{2}=\upsilon_{1}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\upsilon_{1}\cap\upsilon_{2}=\upsilon_{2}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\upsilon_{1}\cap\upsilon_{2}=\emptyset$
+\end_inset 
+
+.
+ This total ordering of intervals follows from considering the tree representati
+on: given two subtrees, one is either a subtree of the other, or they are
+ non-intersecting.
+ 
+\layout Standard
+
+Note that 
+\begin_inset Formula $\forall\gamma\in M$
+\end_inset 
+
+, the function 
+\begin_inset Formula $\gamma^{-1}(x)$
+\end_inset 
+
+ is well-defined on the domain 
+\begin_inset Formula $x\in\upsilon$
+\end_inset 
+
+ and has a range (co-domain) over the entire unit interval.
+ This implies that 
+\begin_inset Formula $\forall\gamma_{1},\gamma_{2}\in M$
+\end_inset 
+
+ we have that 
+\begin_inset Formula $(\gamma_{1}\circ\gamma_{2}^{-1})(x)$
+\end_inset 
+
+ is well-defined on the domain 
+\begin_inset Formula $x\in\upsilon_{2}$
+\end_inset 
+
+ and has a range (co-domain) over 
+\begin_inset Formula $\upsilon_{1}$
+\end_inset 
+
+.
+ Thus, homomorphisms on 
+\begin_inset Formula $M$
+\end_inset 
+
+ extend naturally to all elements of the form 
+\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}$
+\end_inset 
+
+as long as we restrict the mapping to the domain 
+\begin_inset Formula $\upsilon_{2}$
+\end_inset 
+
+.
+ Next, we note that we can build chains in this way.
+ If 
+\begin_inset Formula $\upsilon_{2}\supset\upsilon_{3}$
+\end_inset 
+
+, then 
+\begin_inset Formula $(\gamma_{2}^{-1}\gamma_{3})(x)$
+\end_inset 
+
+ has a domain of the entire unit interval, although its range is less than
+ the whole interval.
+ Still, the range is within the domain of 
+\begin_inset Formula $\gamma_{1}$
+\end_inset 
+
+ and we have a natural extension to all group elements of the form 
+\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}\gamma_{3}$
+\end_inset 
+
+ as long as 
+\begin_inset Formula $\upsilon_{2}\supset\upsilon_{3}$
+\end_inset 
+
+ holds.
+ Thus, a set-theoretic homomorphism extends naturally to elements of the
+ form 
+\begin_inset Formula $\gamma=\gamma_{1}\gamma_{2}^{-1}\gamma_{3}\gamma_{4}^{-1}...$
+\end_inset 
+
+ where each 
+\begin_inset Formula $\gamma_{k}\in M$
+\end_inset 
+
+ and the set of relationships 
+\begin_inset Formula $\{\upsilon_{2j}\supset\upsilon_{2j+1}\}$
+\end_inset 
+
+ hold between pairs of adjacent elements.
+ There now remains the problem of what to do for cases of 
+\begin_inset Formula $\upsilon_{3}\supset\upsilon_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\upsilon_{2}\cap\upsilon_{3}=\emptyset$
+\end_inset 
+
+.
+ One can proceed somewhat delicately with the former, by understanding that
+ the domain of 
+\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}\gamma_{3}$
+\end_inset 
+
+ is smaller than the whole unit interval.
+ For the latter, we do not have an intersection of intervals on which the
+ homomorphism is naively valid.
+\layout Standard
+
+XXX Now what ? Do we need a fiber bundle? What's the topology?
+\layout Subsection
+
+The Topology of the Modular Group
+\layout Standard
+
+The relationship between continued fractions and elements of the modular
+ group hint at an interesting topology of the modular group.
+ A subset of the modular group can be mapped to the rationals, and thus
+ any metric on the rationals, whether the normal one or a p-adic one, can
+ be 'lifted' back up to the modular group.
+ We then ask if this metric can be extended onto the whole group.
+ This mapping also means that we can draw a continuous curve in the modular
+ group: that a subset of the modular group is diffeomorphic to the rationals.
+ Thus, we are lead to ask, where else can we draw continuous curves in the
+ modular group? What is the connectedness of those curves? Is the manifold
+ simply connected, or in fact punctured an infinite number of times? But
+ we also saw that the more natural mapping is between the contractive group
+ elements and intervals, so that the set of contractive group elements is
+ essentially an open covering of the unit interval.
+ Thus, we have a number of confusing, inter-related ideas, and ask how they
+ can be sorted out.
+ The goal is to define and explore the topology of the modular group, by
+ extending what we've learned for the contractive elements onto the whole
+ group.
+\layout Standard
+
+Sooo ....
+\layout Standard
+
+Step 1 extend the metric.
+ 
+\layout Subsection
+
+Sierpinski Gasket
+\layout Standard
+
+Free group of 
+\begin_inset Formula $Z_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $Z_{3}$
+\end_inset 
+
+ 
+\layout Subsection
+
+Misc junk
+\layout Standard
+
+In the above sections, we have found the first steps of a set-theoretic
+ representation of the modular group.
+ If we consider the function 
+\begin_inset Formula $\tilde{\gamma}(x)=\gamma(1/x)$
+\end_inset 
+
+ then we see that it is the desired group homomorphism: for 
+\begin_inset Formula $r=[a_{1},a_{2},...,a_{N}]\in\mathbb{Q}$
+\end_inset 
+
+ and 
+\begin_inset Formula $s=[b_{1},b_{2},...,b_{M}]\in\mathbb{Q}$
+\end_inset 
+
+ we have 
+\begin_inset Formula $(\tilde{\gamma}_{r}\circ\tilde{\gamma}_{s})(x)=\tilde{\gamma}_{r}(\tilde{\gamma}_{s}(x))=[a_{1},a_{2},...,a_{N},b_{1},b_{2},..,b_{M},1/x]$
+\end_inset 
+
+.
+ And so we have demonstrated a mapping 
+\begin_inset Formula $\rho:SL(2,\mathbb{Z})\rightarrow\mathcal{F}_{\mathbb{R}}$
+\end_inset 
+
+ that maps 
+\begin_inset Formula $\gamma\mapsto\tilde{\gamma}(x)=[a_{1},a_{2},...,a_{N},x]$
+\end_inset 
+
+.
+ However, we are far from done: this map is not defined for all of the group
+ elements, but only for the subset of elements that are contractive: that
+ is for those elements that have all of the 
+\begin_inset Formula $a_{k}>0$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+this property on some but not all of the group elements of SL(2,Z).
+ (We've only done it for the contracting group elements, So we really need
+ to extend this, possibly through topological arguments about the coverings,
+ where we cover each occurrence of a negative 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ in the continued fraction with an open subset, and do the standard topological
+ arguments about open coverings.
+ We really need to get the full topological structure working here.
+\layout Standard
+
+Note also that in the above, the set 
+\begin_inset Formula $X$
+\end_inset 
+
+ is the rationals 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+and so the symmetric group 
+\begin_inset Formula $S_{X}$
+\end_inset 
+
+ is really kind-of like the power-set 
+\begin_inset Formula $2^{X}$
+\end_inset 
+
+ which is of course kind-of like the reals 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ and so this is gobbledy-gook about extending the rationals to the reals.
+ (Never mind the p-adic closures).
+ So we are forced to contemplate a seemingly rather deep relationship between
+ the real numbers and the Modular Group, and are prompted to assert that
+ the real numbers (and not just the rationals) have a marvelous fractal
+ symmetry.
+ Furthermore, the natural conclusion of this argument is that the fractals
+ are really the expression of what would otherwise be this deeper underlying
+ but hidden symmetry.
+ 
+\layout Standard
+
+Put in a plug for that educator who is promoting the idea that Farey arithmetic
+ is the 
+\begin_inset Quotes eld
+\end_inset 
+
+fifth operation
+\begin_inset Quotes erd
+\end_inset 
+
+, after addition, subtraction, etc.
+ and should be taught in grade-school curricula as such.
+ Just as the reals are closed under addition and multiplication, they are
+ also closed under this weird, freaky modular group aka Farey number operation.
+ 
+\layout Section
+
+Hyperbolic Rotations of Binary Trees
+\layout Standard
+
+Note that by imposing the modular group symmetry on the real number line,
+ we've essentially introduced a hyperbolic manifold that is homomorphic
+ to the real-number line.
+ The existence of this hyperbolic manifold and its negative curvature essentiall
+y 'explains' why trajectories of iterated functions have positive Lyapunov
+ exponents.
+ Of course they do, since their 'true' trajectories should be considered
+ to live on the hyperbolic manifold rather than on the real-number line.
+ We try to make this clear below.
+ 
+\layout Standard
+
+One can get a much better sense of the hyperbolic nature induced by this
+ symmetry group by looking at the discrete 'rotations' of the binary tree.
+ Rotations are frequently used in computer science algorithms to rebalance
+ finite binary trees while at the same time preserving the order of the
+ elements in the tree.
+ We can think of a rotation as kind of like draping the flexible, droopy
+ tree over a peg, letting gravity do its job, and declaring the node on
+ the peg as the new root of the tree.
+ In fact, we have to do a bit of minor surgery to get this right; we have
+ to cut a branch and re-attach it at the free spot where the old root used
+ to be.
+ 
+\layout Standard
+
+Thus for example, lets rotate the dyadic tree so that the node at 1/4 becomes
+ the new root.
+ We do this by chopping off the tree rooted at 3/8'ths and re-attaching
+ at as the left subtree of the old root at 1/2.
+ (xxx we desperately need a diagram here) Denoting this rotation with the
+ symbol 
+\begin_inset Formula $\theta$
+\end_inset 
+
+, we have an isomorphism of trees: that is, 
+\begin_inset Formula \[
+\theta\left(\frac{1}{2}\right)=\frac{1}{4}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\theta\left(\frac{1}{4}\right)=\frac{1}{8}\;\;\;\;\;\;\;\;\;\;\;\;\;\;\theta\left(\frac{3}{4}\right)=\frac{1}{2}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\theta\left(\frac{1}{8}\right)=\frac{1}{16}\;\;\;\;\;\theta\left(\frac{3}{8}\right)=\frac{3}{16}\;\;\;\;\;\theta\left(\frac{5}{8}\right)=\frac{3}{8}\;\;\;\;\;\theta\left(\frac{7}{8}\right)=\frac{3}{4}\]
+
+\end_inset 
+
+ and the rest of the tree hanging as normal under these nodes.
+ Its not hard to see that this rotation is order-preserving, that is, 
+\begin_inset Formula $\theta(x)<\theta(y)$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $x<y$
+\end_inset 
+
+ and thus monotonic, one-to-one and onto.
+ This is the stretch-and-shrink map
+\begin_inset Formula \[
+\theta(x)=\left\{ \begin{array}{ccc}
+x/2 & \;\textrm{ for \;} & 0\leq x\leq1/2\\
+x-1/4 & \;\textrm{ for \;} & 1/2\leq x\leq3/4\\
+2x-1 & \;\textrm{ for \;} & 3/4\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ which is stretching in one interval and shrinking in another.
+ Since we've seen that the Modular Group maps intervals to intervals, some
+ stretching and some shrinking, we immediately recognize that three group
+ elements were used to construct this map.
+ Since we've already enumerated the modular group in terms of maps of intervals,
+ we see that the three different group elements making up this map are the
+ one that re-parented the 1/8 tree at 1/4, the 3/8 tree at 5/8 and the 3/4
+ tree at 7/8.
+ In terms of tree surgery, it is enough to specify these three remapings,
+ as the rest of the binary trees hanging below are structurally unaltered.
+ Note that the 3/8'ths to 5/8'ths mapping does not change the denominator:
+ this map neither stretches nor shrinks, its a lateral translation.
+ 
+\layout Standard
+
+Note that the map is clearly invertible, with its inverse being 
+\begin_inset Formula \[
+\theta^{-1}(x)=xxx\]
+
+\end_inset 
+
+ Notice that the shrinking portion of the map is just the inverse of the
+ stretching portion of the map.
+ Iterating these maps just makes them even more hyperbolic.
+ Figure 
+\begin_inset LatexCommand \ref{Theta Maps}
+
+\end_inset 
+
+ shows some of these.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{Theta Maps}
+
+\end_inset 
+
+ Theta Maps
+\layout Standard
+
+
+\begin_inset Graphics
+	filename theta.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows 
+\begin_inset Formula $\theta^{n}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $n=-1$
+\end_inset 
+
+ and positive 
+\begin_inset Formula $n$
+\end_inset 
+
+ up to 7.
+ Marker-points highlight the endpoints of the straight line segments that
+ make up each of these maps.
+ Note that these maps are symmetric around the 
+\begin_inset Formula $y=1-x$
+\end_inset 
+
+ line, and that the endpoints of each segment lie on the hyperbola 
+\begin_inset Formula $xy=2^{-n-2}$
+\end_inset 
+
+, with the exception of the endpoints at 0 and 1.
+ Since each map contains more segments, each map becomes a better approximation
+ to the hyperbola.
+ 
+\end_inset 
+
+
+\layout Standard
+
+The reflection map 
+\begin_inset Formula $r(x)=1-x$
+\end_inset 
+
+ conjugates 
+\begin_inset Formula $\theta$
+\end_inset 
+
+ to its inverse, that is, 
+\begin_inset Formula $r\theta^{n}r=\theta^{-n}$
+\end_inset 
+
+ .
+ 
+\layout Standard
+
+We demonstrate a more complex mapping by rebalancing the binary tree so
+ that the 3/8 node becomes root.
+ This requires two tree movements: switching the 7/16 node so that it lives
+ under 1/2, and switching the 5/16 node so that it lives under the now empty
+ slot at 1/4.
+ This is shown in the diagram (xxx need to create the pretty-picture of
+ the rotated tree xxx).
+ This rotation is given by the mapping 
+\begin_inset Formula \[
+\eta(x)=\left\{ \begin{array}{ccc}
+x & \;\textrm{ for \;} & 0\leq x\leq1/4\\
+x/2+1/8 & \;\textrm{ for \;} & 1/4\leq x\leq3/4\\
+2x-1 & \;\textrm{ for \;} & 3/4\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ A graph of this this map and its first few iterates are shown in figure
+ 
+\begin_inset LatexCommand \ref{cap:The-Eta-Map}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:The-Eta-Map}
+
+\end_inset 
+
+The Eta Map 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename eta.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows two different hyperbolic sequences, one for the iterated
+ eta, and also 
+\begin_inset Formula $r\eta r\eta$
+\end_inset 
+
+ and that sequence/
+\end_inset 
+
+
+\layout Standard
+
+Looking at these, it becomes clear that one can insert hyperbolas wherever
+ one wishes, as long as the resulting map is monotonically increasing.
+ 
+\layout Standard
+
+And so we can see the negative curvature.
+ we also have an explicit metric on this space.
+ Note that this in turn induces a metric on the Stern-Brocot Tree.
+ We can consider the path of 'geodesics' under this map, say of iterating
+ 
+\begin_inset Formula $\theta$
+\end_inset 
+
+over and over.
+ clearly these 'geodesics' separate.
+\layout Standard
+
+Note that this is essentially a model of two-dimensional space-time, where
+ the Lorentz transformations are given by elements of the modular group.
+\layout Standard
+
+We of course are now begging to ask about 3+1 
+\begin_inset Quotes eld
+\end_inset 
+
+spacetime
+\begin_inset Quotes erd
+\end_inset 
+
+ generated by the complex numbers, (xxx this is actually called the Picard
+ group see Fricke and Klien, circa 1897.) which is generated by 
+\begin_inset Formula $SL(2,ZxZ)$
+\end_inset 
+
+ which is a subgroup of 
+\begin_inset Formula $GL(2,C)$
+\end_inset 
+
+.
+ Studying how rotations work on this manifold would be interesting, as well
+ as defining precisely its relation to Minkowski spacetime.xxx move this
+ to the todo-list.
+ Higher dimensional manifolds seem to be generated by quaternions and the
+ octonians.
+ We also can't help but take a general pot-shot and exclaim 'of course quantum
+ mechanics is chaotic: Hamiltonian evolution takes place on a fundamentally
+ hyperbolic manifold, viz.
+ the Minkowski spacetime'.
+ The wave functions will of course be fractal.
+ In some freaky way, this is also why we get quantization: we don't truly
+ have the general symmetries, we have instead interval-mapping symmetries
+ that are limited to a discrete (but infinite) set of intervals.
+ 
+\layout Section
+
+Symmetries Induced on 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ (and 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+?)
+\layout Standard
+
+Note that the correspondences presented here induce fractal isomorphisms
+ of 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ onto itself.
+ This was already hinted at in the previous section, where we were trying
+ to just plain-old count the rationals, and not getting what every middle
+ and high-school teacher teaches students to expect.
+ This symmetry would also imply a symmetry on the closure in reals 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ Exactly what it implies for the non-Archimedean closures 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+ is not yet clear to me.
+ This symmetry is never made use of in classical analysis.
+ 
+\layout Standard
+
+The field structure of the rationals in turn induces a field structure on
+ a certain subgroup of the modular group, specifically, the interval-mapping
+ subgroup.
+ Albeit this would be a highly fractal structure ...
+ I have no clue of what this field structure implies for modular forms or
+ goodies like the Weierstrass elliptic integrals, etc.
+ This would be a great TBD with a whole-lotta partyin goin on.
+\layout Subsection
+
+Takagi Miscellany
+\layout Standard
+
+The Takagi function recurrence relation 
+\layout Standard
+
+
+\begin_inset Formula \[
+t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
+
+\end_inset 
+
+ will generate other interesting sequences if we pick a different set of
+ starting conditions.
+ For example, taking 
+\begin_inset Formula $w=0$
+\end_inset 
+
+, and writing 
+\begin_inset Formula $t_{0}\equiv d$
+\end_inset 
+
+, using the initial conditions 
+\begin_inset Formula $d(0)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $d(1)=1$
+\end_inset 
+
+, we generate the tree of dyadic numbers between 0 and 1; that is, we can
+ promptly deduce that 
+\begin_inset Formula $d(x)=x$
+\end_inset 
+
+ for all 
+\begin_inset Formula $x=p/2^{n}$
+\end_inset 
+
+.
+ If instead, we write 
+\begin_inset Formula $t_{0}\equiv J$
+\end_inset 
+
+ with the boundary conditions 
+\begin_inset Formula $J(1)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $J(1/2^{n})=2^{n}$
+\end_inset 
+
+, then we find that 
+\begin_inset Formula $J$
+\end_inset 
+
+ generates the tree of dyadic numbers greater than one.
+ Show the greater-than-one map explicitly.
+\layout Section
+
+Conclusions
+\layout Standard
+
+To be written.
+\layout Bibliography
+\bibitem [Man88]{key-3}
+
+Benoit Mandelbrot, in 
+\emph on 
+The Science of Fractal Images, ed.
+ Heinz-Otto Peitgen, Dietmar Saupe,
+\emph default 
+ (Springer-Verlag, 1988) p.
+ 246
+\layout Bibliography
+\bibitem [deR57]{key-4}
+
+Georges de Rham, On Some Curves Defined by Functional Equations (1957),
+ reprinted in Classics on Fractals, ed.
+ Gerald A.
+ Edgar, (Addison-Wesley, 1993) pp.
+ 285-298
+\the_end
