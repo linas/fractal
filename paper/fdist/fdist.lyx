@@ -36,8 +36,6 @@ Linas Vepstas <linas@linas.org>
 \layout Abstract
 
 Journal of unfinished ideas.
-\layout Abstract
-
 \layout Section
 
 Intro
@@ -49,6 +47,19 @@ THIS IS A DRAFT WORK IN PROGRESS.
 \layout Section
 
 Distributions of Rational Numbers
+\layout Standard
+
+In a different paper we looked at the distribution of rationals.Here we look
+ at the distribution of the Farey fractions.
+ These are sometimes called 
+\begin_inset Quotes erd
+\end_inset 
+
+multifractal measures
+\begin_inset Quotes erd
+\end_inset 
+
+.
 \layout Subsection
 
 Distribution of Rationals in the Farey Tree
@@ -65,7 +76,35 @@ One way to enumerate all of the rationals is by placing them on the Farey
 ).
  However, the distribution of the rationals on the Farey Tree is highly
  non-uniform, if we walk that tree breadth-first.
- The graph below shows that distribution.
+ The figure 
+\begin_inset LatexCommand \ref{cap:Distribution-of-Farey}
+
+\end_inset 
+
+ shows that distribution.
+ This distribution is highly non-uniform, and by fooling with the number
+ of bins in the histogram, it becomes clear that the figure is highly discontinu
+ous.
+ Remarkably, though, in a certain sense, the figure also stays uniform in
+ a certain sense as the number of bins is increased: it always has this
+ humped form, even though the individual spikes vary strongly according
+ to the number of bins.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Distribution-of-Farey}
+
+\end_inset 
+
+Distribution of Farey Fractions
 \layout Standard
 
 
@@ -77,15 +116,83 @@ One way to enumerate all of the rationals is by placing them on the Farey
 
 \layout Standard
 
-Superficially, the shape of this curve seems independent of the bining;
- although, upon very close inspection, one can see that is not quite true.
- In particular, one can deduce that in the limit of an 'infinite' number
- of bins, that this 'curve' is equal to exactly zero at every rational 
+This figure shows a histogram of the first M=65536 Farey fractions according
+ to thier location on the unit interval.
+ To create this figure, the unit interval is divided up into N=600 bins,
+ and the bin count 
+\begin_inset Formula $c_{n}$
+\end_inset 
+
+ for each bin 
+\begin_inset Formula $n$
+\end_inset 
+
+ is incremented whenever a fraction 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ falls within the bin: 
+\begin_inset Formula $(n-1)/N\leq p/q<n/N$
+\end_inset 
+
+.
+ At the end of binning, the count is normalized by multiplying each bin
+ count 
+\begin_inset Formula $c_{n}$
+\end_inset 
+
+ by 
+\begin_inset Formula $N/M$
+\end_inset 
+
+.
+ The normalization ensures that the histogram is of measure one on the unit
+ interval: that 
+\begin_inset Formula $\sum_{n=0}^{N}c_{n}=1$
+\end_inset 
+
+.
+ In a certain sense, the 
+\begin_inset Quotes eld
+\end_inset 
+
+shape
+\begin_inset Quotes erd
+\end_inset 
+
+ of this historgram is independent of the number of bins and number of fractions
+ counted, although on a highly detailed level, the graph clearly varies
+ with the number of bins 
+\begin_inset Formula $N$
+\end_inset 
+
+.
+ In a proper formal treatment, we would need to show that the limit 
+\begin_inset Formula $\lim_{M\rightarrow\infty}c_{n}$
+\end_inset 
+
+ exists and is finite, for all 
+\begin_inset Formula $n$
+\end_inset 
+
+ and 
+\begin_inset Formula $N$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+The other remarkable property of this curve is that in the limit of an 'infinite
+' number of bins, this 'curve' is equal to exactly zero at every rational
+ 
 \begin_inset Formula $p/q$
 \end_inset 
 
 , and infinite at every irrational.
- But no matter; for a finite number of bins, we can proceed.
+ 
 \layout Standard
 
 This shape is remarkably suggestive.
@@ -94,10 +201,45 @@ This shape is remarkably suggestive.
 \end_inset 
 
  of the continued fraction mapping, although using classical analytic techniques
-, this derivative is not definable.
- Indeed, performing a simple numeric integral of the above, and comparing
- it to the exact expression shows a perfect match, as witnessed in the graph
- below.
+, this derivative is not definable, as the question mark is highly singular.
+ Performing a simple numeric integral of the above, and comparing it to
+ the exact expression shows a perfect match, as witnessed in the figure
+ 
+\begin_inset LatexCommand \ref{cap:Sum-of-Farey}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Sum-of-Farey}
+
+\end_inset 
+
+Sum of Farey Histogram
+\layout Standard
+
+
+\begin_inset Graphics
+	filename farey-integral.png
+
+\end_inset 
+
+
+\layout Standard
+
+This 
+\end_inset 
+
+
 \layout Standard
 
 
@@ -175,6 +317,52 @@ This is really a very curious circumstance.
  with a dust, and average over intervals to discover analytic properties.
 \layout Subsection
 
+Formal Treatment
+\layout Standard
+
+The previous section provided only a hand-waving intro.
+ We need a formal treatment.
+ To prove that the measure vanishes on rationals, we need to show two things:
+ first, that the measure vanishes near 0 (or 1), in that the the bin count
+ for bin 
+\begin_inset Formula $c_{0}$
+\end_inset 
+
+ (and 
+\begin_inset Formula $c_{1}$
+\end_inset 
+
+ and a few neighbors) is always bounded above by 
+\begin_inset Formula $N^{-\alpha}$
+\end_inset 
+
+ for some 
+\begin_inset Formula $\alpha>1$
+\end_inset 
+
+.
+ In fact, 
+\begin_inset Formula $\alpha$
+\end_inset 
+
+ is probably quite large, and the bound can be made very strong.
+ Next, one needs to show a modular group symmetry for the histogram: thus
+ for example, that 
+\begin_inset Formula $c_{pN/q}$
+\end_inset 
+
+ obeys a similar bound, but derated by a factor given by the modular group
+ element that carries 
+\begin_inset Formula $0/1$
+\end_inset 
+
+ to 
+\begin_inset Formula $p/q$
+\end_inset 
+
+.
+\layout Subsection
+
 Modular Forms
 \layout Standard
 
@@ -242,7 +430,7 @@ ant, known as the Dedekind eta.
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
