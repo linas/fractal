@@ -53,6 +53,14 @@ This paper is part of a set of chapters that explore the relationship between
 Dedekind Eta and the Mandelbrot Set
 \layout Standard
 
+This paper reprises an earlier draft from 2000, located at 
+\begin_inset LatexCommand \htmlurl{http://www.linas.org/art-gallery/spectral/spectral.html}
+
+\end_inset 
+
+
+\layout Standard
+
 Consider the Euler function 
 \begin_inset Formula \[
 \phi(q)=\prod_{k=1}^{\infty}(1-q^{k})\]
@@ -684,13 +692,16 @@ S_{c}(t)=\frac{1}{t}\;\left[\frac{1}{2}-\sqrt{\frac{1}{4}-c}\;\right]+\mathcal{O
  Of course, there are considerable additional difficulties once one gets
  into the more contorted parts of the M-set, since the convergence to a
  limit cycle can be extremely slow, thus creating considerable topological
- difficulties when reasoning about the expansion of terms in the formula
- 
+ difficulties when reasoning about the topology of the M-set and in particular,
+ the validity of the expansion of terms in the formula 
 \begin_inset LatexCommand \ref{eq:term expansion}
 
 \end_inset 
 
 .
+ The remainder of this monograph concerns itself with the issue of the rate
+ of convergence to the limit cycles, which we will find is given by the
+ Dedekind eta.
 \layout Subsection
 
 Finite Terms
@@ -699,10 +710,68 @@ Finite Terms
 Let us now turn to the finite remainders.
  By subtracting away the divergent pieces, we are essentially subtracting
  away the contribution of the asymptotic limit cycle.
- The remaining finite parts indicate how the asymptotic behaviour is approched.
+ The remaining finite parts indicate how the asymptotic behaviour is approached.
  If the finite part is large, this indicates that the iteration took a long
  time to approach the asymptotic limit.
  If the finite part is small, then the series converged to its limit cycle
  quickly.
+ The next figure shows this rate of convergence.
  
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Rate of Convergence
+\layout Standard
+
+
+\begin_inset Graphics
+	filename finite.gif
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the rate of convergence, that is, 
+\begin_inset Formula $\lim_{t\rightarrow0^{+}}|S_{c}(t)-A(c)/t|$
+\end_inset 
+
+.
+ We take 
+\begin_inset Formula $A(c)$
+\end_inset 
+
+ to be as given in the text for the main cardiod, and equal to precisely
+ 1/2 in the largest bud.
+ For this numerical calculation, we take it to be zero everywhere else,
+ thus leading to articfacts outside the main cardiod and bulb, where in
+ fact 
+\begin_inset Formula $A(c)$
+\end_inset 
+
+ shouldn't be zero.
+ The color ramp has been scaled by -1: i.e.
+ black = 0, green ~= -0.5, red <= -1.0.
+ There appear to be a number of poles arrayed along the perimeter of the
+ cardiod, located at the tangent points of the bulbs.
+ The pole at the unicorn horn and at the largest bulb is clearly visible.
+ These poles indicate areas where the iterated series has a very difficult
+ time converging to a limit cycle.
+ There is considereably more structure inside of this image than is immediately
+ eveident.
+ The structure is exhibited when one examines the non-divergent parts of
+ 
+\begin_inset Formula $P_{c}(t)$
+\end_inset 
+
+ instead.
+\end_inset 
+
+
 \the_end
