@@ -38,9 +38,10 @@ main (int argc, char *argv[])
       x = ((double) nume) / ((double) deno);
       f.SetRatio (nume, deno);
       v = f.ToZRealGap ();
+      z = (f.ToZReal(1.001) - f.ToZReal(1.0)) / 0.001;
       // f.Print ();
 
-      printf ("%g	%g \n", x, v);
+      printf ("%g	%g	%g \n", x, v, z);
       fflush (stdout);
    }
 
