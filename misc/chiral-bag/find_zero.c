@@ -76,7 +76,7 @@ C		  D = P*10.0**(-NSIG)
 C
 */
 
-#define fmax(x,y) ((x)>(y))?(x):(y)
+#define fmax(x,y) (((x)>(y))?(x):(y))
 
 double 
 FindZero (double (*func)(double), double bound, int nsig, 
@@ -186,7 +186,6 @@ c	       note that the testing is done so as to avoid division by zero
 		x = b;
 		fb = func (x);
 		NumOfIter ++;
-
 /*
 c	       arrange the endpoints so that the zero is bracketed
 c	       by the interval (b,c) and is closer to endpoint b

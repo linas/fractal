@@ -10,7 +10,7 @@ int main ()
 {
 	double p;
 
-	p = FindZero (sin, 0.0, 15, 0.1, 6.1, 100);
+	p = FindZero (sin, 0.0, 15, 0.001, 6.283, 100);
 
 	printf ("found root w/ error=%g\n", p-M_PI);
 
