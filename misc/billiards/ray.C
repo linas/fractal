@@ -167,6 +167,9 @@ Ray::Sphere (double radius)
 }
 
 /* ==================================== */
+// class inherits from ray; collects statistics about
+// the path of the ray as its traced, including distance 
+// traveled, number of bounces, etc.
 
 class SinaiRay
   : public Ray
@@ -189,6 +192,8 @@ SinaiRay::SinaiRay (void)
 }
 
 /* ==================================== */
+// The class SinaiBox defines the boundry conditions, the max
+// iterations, the shape of the actual box.
 //
 // The Trace() method performs ray-tracing using the classic Sinai
 // reflective boundary conditions.
@@ -229,6 +234,9 @@ SinaiBox::SinaiBox (void)
 }
 
 /* ==================================== */
+
+#define NNN (-1.0 + 100.0*DEGENERATE_TOLERANCE)
+#define PPP (1.0 - 100.0*DEGENERATE_TOLERANCE)
 
 void 
 SinaiBox::Trace (SinaiRay &sr)
@@ -352,6 +360,74 @@ SinaiBox::TraceToroid (SinaiRay &sr)
 }
 
 /* ==================================== */
+// The Pixels class handles colors
+//
+
+class Pixels
+{
+   public:
+      Pixels (int, int);
+      void TestPattern (void);
+      void WriteMTV (const char *filename);
+
+   public:
+      int nx;  // dimension of pixel grid
+      int ny;
+
+      unsigned int *abgr;
+   private:
+      unsigned int *pack;
+};
+
+/* ==================================== */
+
+Pixels::Pixels (int px, int py)
+{
+   int i;
+
+   nx = px;
+   ny = py;
+
+   abgr = new unsigned int [nx*ny];
+   pack = new unsigned int [3*nx*ny/4+1];
+   for (i=0; i<nx*ny; i++) abgr[i] = 0;
+   for (i=0; i<3*nx*ny/4; i++) pack[i] = 0;
+}
+
+void 
+Pixels::TestPattern (void)
+{
+   int i,j;
+
+   for (j=0; j<ny; j++) {
+      for (i=0; i<nx; i++) {
+         abgr[nx*j+i] = i%255 | (j%255 << 8);
+      }
+   }
+}
+
+/* ==================================== */
+
+void 
+Pixels::WriteMTV (const char * filename)
+{
+   // first, pack the pixels byte by byte
+   unsigned int *p = pack;
+   for (int i=0; i<nx*ny; i++) {
+      *p = abgr[i] & 0xffffff;
+      ((char *) p) += 3;
+   }
+
+   // write out MTV format pixmap.
+   FILE *fh = fopen (filename, "w");
+   fprintf (fh, "%d %d\n", nx, ny);
+   fwrite (pack, 4, 3*nx*ny/4+1, fh);
+   fclose (fh);
+}
+
+/* ==================================== */
+// The SinaiView class generates the pretty pictures, converts 
+// colors, etc.
 //
 // The Trace() method performs ray-tracing using the classic Sinai
 // reflective boundary conditions.
@@ -360,16 +436,15 @@ SinaiBox::TraceToroid (SinaiRay &sr)
 // toroidial boundary conditions.
 
 class SinaiView
-   : public SinaiBox
+   : public SinaiBox, 
+     public Pixels
 {
    public:
       SinaiView (int, int);
       void Trace (void);
       void TraceToroid (void);
-      void TestPattern (void);
       void ColoredMirrors (void);
       void ToPixels (void);
-      void WriteMTV (const char *filename);
 
    public:
       int nx;  // dimension of pixel grid
@@ -383,14 +458,12 @@ class SinaiView
    private:
       SinaiRay *sr;
       
-      unsigned int *abgr;
-      unsigned int *pack;
-
 };
 
 /* ==================================== */
 
 SinaiView::SinaiView (int px, int py)
+   : Pixels (px, py)
 {
    int i, j;
 
@@ -420,17 +493,9 @@ SinaiView::SinaiView (int px, int py)
 
       }
    }
-
-   abgr = new unsigned int [nx*ny];
-   pack = new unsigned int [3*nx*ny/4+1];
-   for (i=0; i<nx*ny; i++) abgr[i] = 0;
-   for (i=0; i<3*nx*ny/4; i++) pack[i] = 0;
 }
 
 /* ==================================== */
-
-#define NNN (-1.0 + 100.0*DEGENERATE_TOLERANCE)
-#define PPP (1.0 - 100.0*DEGENERATE_TOLERANCE)
 
 void
 SinaiView::Trace(void)
@@ -455,18 +520,6 @@ SinaiView::TraceToroid(void)
 }
 
 /* ==================================== */
-
-void 
-SinaiView::TestPattern (void)
-{
-   int i,j;
-
-   for (j=0; j<ny; j++) {
-      for (i=0; i<nx; i++) {
-         abgr[nx*j+i] = i%255 | (j%255 << 8);
-      }
-   }
-}
 
 void 
 SinaiView::ToPixels (void)
@@ -535,25 +588,6 @@ SinaiView::ColoredMirrors (void)
       abgr[i] |= (0xff & ((unsigned int) green)) << 8;
       abgr[i] |= (0xff & ((unsigned int) blue)) << 16;
    }
-}
-
-/* ==================================== */
-
-void 
-SinaiView::WriteMTV (const char * filename)
-{
-   // first, pack the pixels byte by byte
-   unsigned int *p = pack;
-   for (int i=0; i<nx*ny; i++) {
-      *p = abgr[i] & 0xffffff;
-      ((char *) p) += 3;
-   }
-
-   // write out MTV format pixmap.
-   FILE *fh = fopen (filename, "w");
-   fprintf (fh, "%d %d\n", nx, ny);
-   fwrite (pack, 4, 3*nx*ny/4+1, fh);
-   fclose (fh);
 }
 
 /* ==================================== */
