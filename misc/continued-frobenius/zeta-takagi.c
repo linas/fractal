@@ -156,6 +156,39 @@ long double sym_half (int m, int n, long double ess)
 	return acc;
 }
 
+/* half-integer sum */
+long double sym_half_gen (int m, int n, long double ess)
+{
+	int i;
+
+	long double en = n;
+	long double pnk = 1.0L;
+	long double acc = 0.0L;
+	long double ts = powl (0.5L, ess);
+
+	for (i=0; i<70; i++)
+	{
+		long double eye = i;
+		// long double term = gsl_sf_zeta (eye+ess);
+		// term -= harmonic (m, eye+ess);
+		long double term = zeta_minus_harmonic (m, eye+ess);
+		term *= pnk;
+		term *= fbinomial (ess+eye-1.0L, i);
+		acc += term;
+printf ("duude acc=%Lg  term=%Lg  nk*bin=%Lg\n", acc, term, pnk*fbinomial (ess+eye-1.0L, i));
+		pnk *= -(en+0.5);
+	}
+	acc *= ts;
+
+	double expect = gsl_sf_zeta (ess);
+	expect *= 1.0-ts;
+	expect -= harmonic (2*n+2*m+1, ess);
+	expect += ts*harmonic (n+m, ess);
+	acc -=  expect;
+	
+	return acc;
+}
+
 int
 main (int argc, char * argv[])
 {
@@ -179,7 +212,8 @@ main (int argc, char * argv[])
 		double acc;
 		// acc = summy (x);
 		// acc = symy (6, 7, x);
-		acc = sym_half (m, n, x);
+		// acc = sym_half (m, n, x);
+		acc = sym_half_gen (m, n, x);
 		printf ("%d	%g	%g\n", i, x, acc);
 	}
 
