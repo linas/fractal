@@ -25,7 +25,9 @@
 
 \layout Title
 
-Distributions of Rationals on the Unit Interval
+Distributions of Rationals on the Unit Interval 
+\newline 
+(or, How to (mis)-Count Rationals)
 \layout Author
 
 Linas Vepstas <linas@linas.org>
@@ -64,7 +66,11 @@ uitive surprises, some of which we explore below.
  These surprises imply that extrapolating from finite results to the set
  of all rationals is a dangerous process.
  Once again, we see the footprints of the set-theoretic representation of
- the modular group at work.
+ the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ at work.
  
 \layout Abstract
 
@@ -75,6 +81,59 @@ This paper is part of a set of chapters that explore the relationship between
 \layout Section
 
 Distributions Of Rationals on the Unit Interval
+\layout Standard
+
+The entire field of classical calculus and analysis is based on the notion
+ that the real numbers are smoothly and uniformly distributed on the real
+ number line.
+ When one works with a particular representation of the rational numbers,
+ say the dyadic representation, where each rational is represented by a
+ sequence of binary digits, one gets, 'for free', a measure that goes with
+ that representation.
+ In the case of the dyadics, that measure is the idea that all strings of
+ binary digits are uniformly distributed on the unit interval.
+ This statement is so blatently obvious and taken for granted that it in
+ fact impedes the understanding of measure.
+ But this will be the topic of this chapter.
+ 
+\layout Standard
+
+There are several different ways of representing the rationals (and thier
+ closures), and these are (as we will see shortly) inequivalent.
+ One way is to represent them with p-adic, or base-p expansions of digits.
+ Another way is to represent them as rationals, that is, as ratios of integers.
+ Each of these representations will result in a uniform distribution of
+ reals on the real number line, when one takes the apropriate limit of allowing
+ p-adic strings with an infinite number of digits, or allowing fractions
+ with arbitrarily large denominators.
+ However, if we work with just finite subsets of p-adic expansions, or finite
+ sets of rationals, one finds that the distributions are far from uniform,
+ and are inequivalent to each other.
+ In particular, this implies that the notion of measure on the real number
+ line has a certain kind of ambiguity associated with it.
+ 
+\layout Standard
+
+The next thing that one finds is that the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ becomes manifest, being the symmetry group that connects together the different
+ representations of the rationals.
+ However, insofar as there is no such thing as a 'real number' except as
+ defined by the closure of the rationals, using a specific representation
+ of the rationals, one has that the real numbers themselves have a modular
+ group symmetry, if only because the underlying representations in terms
+ of p-adic expansions and ratios have this symmetry.
+ 
+\layout Standard
+
+We develop the above wild-sounding claim a bit further in later chapters;
+ here, we show one very simple way in which the modular group, and thus
+ Farey Fractions, manifest themselves on the real number line.
+ We do this by (incorrectly) counting rationals, and then wildly scrambling
+ to find the correct way of counting.
+ 
 \layout Subsection
 
 Simple Counting
@@ -82,7 +141,7 @@ Simple Counting
 
 Lets begin by listing all of the fractions with denomintors from 1 to N,
  and numerators between 0 and the denomintor.
- Clearly, there many of these fractions will be reducible, i.e.
+ Clearly, many of these fractions will be reducible, i.e.
  the numerator and denominator have common factors, and thus, in this simple-min
 ded enumeration, some rationals are counted multiple times.
  In particular, we'll count 0 over and over again: it will be in the list
