@@ -84,8 +84,6 @@ PrintTerm (Term *t)
 void 
 PrintExpr (Expr *e)
 {
-	printf ("Print expr: \n");
-
 	GList *tn;
 	for (tn = e->terms; tn; tn=tn->next)
 	{
@@ -93,10 +91,12 @@ PrintExpr (Expr *e)
 		PrintTerm (t);
 	}
 
-	printf ("The End\n");
+	printf ("The End\n\n");
 }
 
 /* ======================================================== */
+
+/* multipliy terms */
 
 Term *Mult_T_T (Term *t1, Term *t2)
 {
@@ -168,6 +168,7 @@ Expr *Add_E_T (Expr *e, Term *t)
 }
 
 /* ======================================================== */
+/* userland */
 
 Term *tger (int x)
 {
@@ -204,29 +205,52 @@ Term *dyf (void)
 	return t;
 }
 
-Expr * setup (void)
+/* ======================================================== */
+
+/* return metrix xx */
+Expr * gxx (void)
 {
-	Term *t;
 	Expr *e = g_new0 (Expr,1);
-
-	t = tger(1);
-
-	e = Add_E_T (e, t);
-	
-	t = dxf();
-	t = Mult_T_T (t, dxf());
-	e = Add_E_T (e, t);
-
-	t = dyf();
-	t = Mult_T_T (t, dyf());
-	e = Add_E_T (e, t);
-
+	e = Add_E_T (e, tger(1));
+	e = Add_E_T (e, Mult_T_T (dxf(), dxf()));
 	return e;
+}
+
+/* return metric yy */
+Expr * gyy (void)
+{
+	Expr *e = g_new0 (Expr,1);
+	e = Add_E_T (e, tger(1));
+	e = Add_E_T (e, Mult_T_T (dyf(), dyf()));
+	return e;
+}
+
+/* return metric xy */
+Expr * gxy (void)
+{
+	Expr *e = g_new0 (Expr,1);
+	e = Add_E_T (e, Mult_T_T (dxf(), dyf()));
+	return e;
+}
+
+void setup (void)
+{
+	Expr *e = gxx();
+
+	printf ("gxx is:\n");
+	PrintExpr (e);
+
+	e = gxy();
+	printf ("gxy is:\n");
+	PrintExpr (e);
+
+	e = gyy();
+	printf ("gyy is:\n");
+	PrintExpr (e);
 }
 
 main ()
 {
 
-	Expr *e = setup();
-	PrintExpr (e);
+	setup();
 }
