@@ -1,0 +1,23 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'entropy.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "entropy (inverse number of terms in fraction)"
+set xlabel "p/q"
+set ylabel "1/number of terms"
+
+# set yrange [0:]
+
+plot "entropy.dat" using 2:3 title "1/n_terms"
+
+# pause 100
+

@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= exacto fdist feigen gappy padic rdist swap sway sym sym-fun 
+EXES= entropy exacto fdist feigen gappy padic rdist swap sway sym sym-fun 
 
 all: 	$(EXES)
 
@@ -23,6 +23,7 @@ realclean:	clean
 	$(CC) -o $* $< $(LIB)/Farey.o $(LIB)/FareyTree.o -lm -lstdc++
 
 
+entropy.o:  entropy.C $(LIB)/Farey.o $(INC)/Farey.h
 exacto.o:  exacto.C $(LIB)/Farey.o $(INC)/Farey.h
 fdist.o:  fdist.C $(LIB)/FareyTree.o $(INC)/FareyTree.h
 gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
