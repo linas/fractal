@@ -2067,7 +2067,7 @@ One gets the general symmetry group
  Applying the above process, it is relatively straightforward to see that
  
 \begin_inset Formula \[
-(?\gamma)(x)=(?g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+(?\gamma)(x)=(?g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
 
 \end_inset 
 
@@ -2377,7 +2377,7 @@ i.e.
 
 , we can now write the isomorphism of the question mark as 
 \begin_inset Formula \[
-?(\gamma(x))=?(\gamma(0))+\frac{\left(-1\right)^{N}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
+?(\gamma(x))=?(\gamma(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
 
 \end_inset 
 
@@ -2970,13 +2970,36 @@ Recall that we were able to construct other trees that are isomorphic to
  question mark.
 \layout Standard
 
-Need to exhibit a mapping that is continuous and is also fractally non-monotonic
- (and is thus self-similar).
+Here's a mapping that is continuous and is also fractally non-monotonic
+ (and is thus self-similar): its 
+\begin_inset Formula $x-?(x)$
+\end_inset 
+
+ which looks sine-like and we want to exhibit the cosine-like so that we
+ can build up fractally-periodic basis functions.
+ 
 \layout Standard
 
 We can do this with the eigenfunctions of the Frobenius-Perron operator
  of the Bernoulli map.
- These eigenfunctions are
+ These eigenfunctions are 
+\begin_inset Formula \[
+\phi_{z,l}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2l+1\right)x\right)\]
+
+\end_inset 
+
+ which have eignevalue 
+\begin_inset Formula $z$
+\end_inset 
+
+: that is 
+\begin_inset Formula $[U_{B}\phi_{z,l}](x)=z\phi_{z,l}(x)$
+\end_inset 
+
+.
+ This is old hat...
+ except that now ...
+ 
 \layout Subsection
 
 Cantor Dusts
