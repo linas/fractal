@@ -234,6 +234,10 @@ void lagGenericWordTable :: Dump (void) {
 
    printf ("mem usage %d kbytes \n", num_entries * sizeof (Helper) / 1024);
    printf ("helper size %d \n", sizeof (Helper));
+#ifdef LAG_USE_OVERLOADED_NEW
+   printf (" num blocks alloced= %d \n", Helper ::memblocks);
+   printf (" block mem left = %d \n", Helper ::memleft);
+#endif // LAG_USE_OVERLOADED_NEW
    printf ("\n");
 
    // for (int i=0; i<LAG_PAIR_HASH_TABLE_SIZE; i++) {
@@ -242,6 +246,28 @@ void lagGenericWordTable :: Dump (void) {
    // }
 
 }
+
+// =====================================================
+#ifdef LAG_USE_OVERLOADED_NEW
+
+int lagGenericWordTable :: Helper ::  memleft = 0;
+int lagGenericWordTable :: Helper ::  memblocks = 0;
+char * lagGenericWordTable :: Helper ::  mempool = 0x0;
+
+void * lagGenericWordTable :: Helper ::  operator new (size_t s) {
+
+   if (!mempool || memleft < s) {
+      mempool = new char [LAG_CHUNK_SIZE];
+      memleft = LAG_CHUNK_SIZE;
+      memblocks ++;
+   }
+
+   memleft -= s;
+   void * obj = mempool;
+   mempool += s;
+   return obj;
+}
+#endif // LAG_USE_OVERLOADED_NEW
 
 // ===================== END OF FILE ===================
 
