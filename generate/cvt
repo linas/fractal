@@ -157,6 +157,11 @@ PATH=$PATH:.
 # renorm g j2 0.08 14.0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 #
+# The renorm for the liouville functions also mangoldt
+# takelog j g
+# renorm g j2 0.13 4.0
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
 # renorm for moebius
 # renorm j j2 0.3 0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
@@ -167,9 +172,11 @@ PATH=$PATH:.
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
 # renorm for the divisor series, 4, 5  and use 0.033 for 6
+# renorm for the real part of any of the random series
 # takelog j g
 # renorm g j2 0.06 4
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
-renorm j j2 1 0
+takelog j g
+renorm g j2 0.06 4.0
 cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png

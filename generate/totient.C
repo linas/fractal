@@ -39,8 +39,12 @@ static void totient_series_c (double re_q, double im_q, double *prep, double *pi
 
 	for (i=0; i<max_terms; i++)
 	{
-
 		double t = totient_phi (i+1);
+
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
+
 		rep += qpr *t;
 		imp += qpi *t;
 
@@ -84,7 +88,8 @@ static double totient_series (double re_q, double im_q)
 {
 	double rep, imp;
 	totient_series_c (re_q, im_q, &rep, &imp);
-	return sqrt (rep*rep+imp*imp);
+	// return sqrt (rep*rep+imp*imp);
+	return rep;
 }
 
 /*-------------------------------------------------------------------*/

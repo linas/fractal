@@ -18,6 +18,34 @@
 #include "brat.h"
 #include "moebius.h"
 
+int thue_morse(int n)
+{
+	if (0 == n) return 0;
+	if (1 == n) return 1;
+	if (0 == n%2) return thue_morse (n/2);
+	return (1-thue_morse ((n-1)/2));
+}
+
+double randoid(int n)
+{
+#define NVAL 65186
+	static double array[NVAL];
+	static int inited=0;
+	if (!inited)
+	{
+		int i;
+		inited = 1;
+		srand (99);
+		for (i=0; i<NVAL; i++)
+		{
+			// array[i] = rand() & 0x1;
+			array[i] = ((double) rand()) / ((double)RAND_MAX);
+		}
+	}
+
+	if (NVAL<= n) return 0;
+	return array[n];
+}
 
 static int max_terms;
 
@@ -40,7 +68,22 @@ static void mobius_series_c (double re_q, double im_q, double *prep, double *pim
 	for (i=0; i<max_terms; i++)
 	{
 
-		double t = moebius_mu (i+1);
+		// double t = moebius_mu (i+1);
+		// double t = mertens_m (i+1);
+		// double t = liouville_omega (i+1);
+		// double t = liouville_lambda (i+1);
+		// double t = mangoldt_lambda (i+1);
+		// double t = thue_morse (i+1);
+		// int tm = thue_morse (i+1);
+		// double t = 1.0;
+		// if (1 == tm) t = -1.0;
+
+		// double t = moebius_mu (i+1);
+		double t = randoid (i+1);
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
+
 		rep += qpr *t;
 		imp += qpi *t;
 
@@ -61,11 +104,15 @@ static void mobius_series_c (double re_q, double im_q, double *prep, double *pim
 	*pimp = imp;
 }
 
+
 static double mobius_series (double re_q, double im_q)
 {
 	double rep, imp;
 	mobius_series_c (re_q, im_q, &rep, &imp);
-	return sqrt (rep*rep+imp*imp);
+	// return sqrt (rep*rep+imp*imp);
+	return rep;
+	// return imp;
+	// return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
 }
 
 /*-------------------------------------------------------------------*/
