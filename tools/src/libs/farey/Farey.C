@@ -174,6 +174,16 @@ ContinuedFraction::SetEvenize (void)
 	evenize=1;
 }
 
+int
+ContinuedFraction::GetTerm (int n)
+{
+	n--;
+	if (0 == n) return intpart;
+	if (0 > n) return 0;
+	if (nterms <= n) return 0;
+	return tinued_frac[n];
+}
+
 /* ------------------------------------------------------------ */
 
 void 
@@ -217,7 +227,6 @@ ContinuedFraction::GetConvNum (int n)
 		
 	}
 	return a;
-
 }
 
 /* ------------------------------------------------------------ */
