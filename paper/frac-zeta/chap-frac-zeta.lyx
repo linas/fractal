@@ -511,15 +511,68 @@ We can consider equations
 
  to be the generators of a free semigroup of symmetries on the Riemann Zeta.
  It thus becomes interesting to ask what some of the generated expressions
- look like.
- Unfortunately, this is easier said than done.
- Putting the one in the other and turning the crank, one finds a relation
- for general half-integer values:
-\begin_inset Formula \begin{eqnarray}
-\zeta(s)\left(1-\frac{1}{2^{s}}\right) & = & H_{2m+2n+1}(s)-\frac{H_{n+m}(s)}{2^{s}}\nonumber \\
- &  & +\frac{1}{2^{s}}\sum_{k=0}^{\infty}\left(\begin{array}{c}
+ look like; this section presents some of these.
+ 
+\layout Standard
+
+We can simplify the presentation by developing a shorthand for the recurring
+ elements in the sums.
+ Define 
+\begin_inset Formula \begin{equation}
+Z_{m}(s,x)=\sum_{k=0}^{\infty}\left(-\right)^{k}\left(\begin{array}{c}
 s+k-1\\
-s-1\end{array}\right)\left(-\left(n+\frac{1}{2}\right)\right)^{k}\left[\zeta(s+k)-H_{m}(s+k)\right]\label{eq: n and half}\end{eqnarray}
+s-1\end{array}\right)\left[\zeta(s+k)-H_{m}(s+k)\right]x^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ For fixed, real 
+\begin_inset Formula $s$
+\end_inset 
+
+ this is a monotonically decreasing function of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ In this notation, we can re-write equation 
+\begin_inset LatexCommand \ref{eq:one-half}
+
+\end_inset 
+
+ as 
+\begin_inset Formula \begin{equation}
+\zeta(s)\left(1-\frac{1}{2^{s}}\right)=1+\frac{1}{2^{s}}Z_{0}\left(s,\frac{1}{2}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Iteration on this then gives the series 
+\begin_inset Formula \begin{eqnarray}
+\zeta(s)\left(1-\frac{1}{2^{s}}\right) & = & 1+\frac{1}{3^{s}}+\frac{1}{4^{s}}\left[Z_{0}\left(s,\frac{1}{4}\right)+Z_{0}\left(s,\frac{3}{4}\right)\right]\nonumber \\
+ & = & 1+\frac{1}{3^{s}}+\frac{1}{5^{s}}+\frac{1}{7^{s}}+\nonumber \\
+ &  & \;\;\;+\frac{1}{8^{s}}\left[Z_{0}\left(s,\frac{1}{8}\right)+Z_{0}\left(s,\frac{3}{8}\right)+Z_{0}\left(s,\frac{5}{8}\right)+Z_{0}\left(s,\frac{7}{8}\right)\right]\nonumber \\
+ & = & \sum_{k=0}^{2^{m-1}-1}\frac{1}{\left(2k+1\right)^{s}}+\frac{1}{2^{m}}Z_{0}\left(s,\frac{2k+1}{2^{m}}\right)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ There does not seem to be any simple way to further simplify the above
+ expression, and, in particular, to obtain an expression involving only
+ (for example) 
+\begin_inset Formula $Z_{0}(s,1/4)$
+\end_inset 
+
+.
+\layout Standard
+
+Iterating on equation 
+\begin_inset LatexCommand \ref{eq: general n,m}
+
+\end_inset 
+
+ gives correspondign equations for general half-integer and dyadic values.
+ Turning the crank once gives a relation for general half-integer values:
+ 
+\begin_inset Formula \begin{equation}
+\zeta(s)\left(1-\frac{1}{2^{s}}\right)=H_{2m+2n+1}(s)-\frac{H_{n+m}(s)}{2^{s}}+\frac{1}{2^{s}}Z_{m}\left(s,n+\frac{1}{2}\right)\label{eq: n and half}\end{equation}
 
 \end_inset 
 
@@ -560,6 +613,13 @@ H_{2m+2n+1}(s)-\frac{H_{n+m}(s)}{2^{s}}=\sum_{k=0}^{m+n}\frac{1}{\left(2k+1\righ
 \end_inset 
 
  is enough), and it reappears on the left-hand side in a corresponding fashion.
+ Turning the crank a second time produces 
+\begin_inset Formula \[
+\zeta(s)\left(1-\frac{1}{2^{s}}\right)=H_{4m+2n+3}(s)-\frac{H_{2m+n+1}(s)}{2^{s}}+\frac{1}{4^{s}}\left[Z_{m}\left(s,\frac{2n+1}{4}\right)+Z_{m}\left(s,\frac{2n+3}{4}\right)\right]\]
+
+\end_inset 
+
+ with additional turns generating more relations in this series.
  
 \layout Subsection
 
