@@ -6,8 +6,10 @@
  * Created Linas Vepstas October 1989
  * Updates March 1996
  */
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "opers.h"
 
 /*-------------------------------------------------------------------*/
@@ -62,7 +64,7 @@ void curl (float a[], float b[], int nx, int ny) {
 
 /*-------------------------------------------------------------------*/
 
-void div (float a[], float b[], int nx, int ny) {
+void divergence (float a[], float b[], int nx, int ny) {
    int i, j;
    for (j=0; j<ny-1; j++) {
       for (i=0; i<nx-1; i++) {
@@ -78,31 +80,32 @@ void div (float a[], float b[], int nx, int ny) {
 extern FILE *Fopen();
 extern FILE *Fopenr();
 
-void main (int argc, char *argv[]) 
+int 
+main (int argc, char *argv[]) 
 
 {
    float	*data_a;		/* my data array */
    float	*data_b;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
-   int		globlen, i, j;
+   int		globlen;
    char 	str[80];
    FILE		*fp_a, *fp_b, *fp_out;
    
    if (argc < 4) {
       printf ("Usage: %s <input file> <input file> <output file>\n", argv[0]);
-      return;
+      return 1;
    }
 
    /*----------------------------------------------------*/
    /* open input file */
    if ( (fp_a = Fopenr (argv[1], ".flo")) == NULL) {
       printf (" Can't open input file %s \n", argv[1]);
-      return;
+      return 1;
    }
    if ( NULL == fgets (str, 80, fp_a)) {
       printf (" Can't read input file %s \n", argv[1]);
       fclose (fp_a);
-      return;
+      return 1;
    }
 
    sscanf (str, "%d %d", &data_width, &data_height);
@@ -112,12 +115,12 @@ void main (int argc, char *argv[])
    /* open input file */
    if ( (fp_b = Fopenr (argv[2], ".flo")) == NULL) {
       printf (" Can't open input file %s \n", argv[2]);
-      return;
+      return 1;
    }
    if ( NULL == fgets (str, 80, fp_b)) {
       printf (" Can't read input file %s \n", argv[2]);
       fclose (fp_b);
-      return;
+      return 1;
    }
 
    sscanf (str, "%d %d", &data_width, &data_height);
@@ -141,13 +144,13 @@ void main (int argc, char *argv[])
    if (!strcmp (argv[0], "paste")) paste (data_a, data_b, globlen);
    if (!strcmp (argv[0], "angle")) angle (data_a, data_b, globlen);
    if (!strcmp (argv[0], "curl")) curl (data_a, data_b, data_width, data_height);
-   if (!strcmp (argv[0], "div")) div (data_a, data_b, data_width, data_height);
+   if (!strcmp (argv[0], "div")) divergence (data_a, data_b, data_width, data_height);
 
    /*----------------------------------------------------*/
    /* open output file */
    if ( (fp_out = Fopen (argv[3], ".flo")) == NULL) {
       printf (" Can't open output file \n");
-      return;
+      return 1;
    }
 
    /* dump the size to output */
@@ -158,6 +161,7 @@ void main (int argc, char *argv[])
    free (data_a);
    free (data_b);
    
+   return 0;
 }
 
 /* --------------------------- END OF FILE ------------------------- */
