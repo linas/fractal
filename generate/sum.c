@@ -9,6 +9,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "opers.h"
 
@@ -88,6 +89,7 @@ main (int argc, char *argv[])
    float	*data_b;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
    int		globlen;
+   char		*cmd = NULL;
    char 	str[80];
    FILE		*fp_a, *fp_b, *fp_out;
    
@@ -139,12 +141,20 @@ main (int argc, char *argv[])
    fclose (fp_b);
 
    /*----------------------------------------------------*/
-   if (!strcmp (argv[0], "sum")) sum (data_a, data_b, globlen);
-   if (!strcmp (argv[0], "diff")) diff (data_a, data_b, globlen);
-   if (!strcmp (argv[0], "paste")) paste (data_a, data_b, globlen);
-   if (!strcmp (argv[0], "angle")) angle (data_a, data_b, globlen);
-   if (!strcmp (argv[0], "curl")) curl (data_a, data_b, data_width, data_height);
-   if (!strcmp (argv[0], "div")) divergence (data_a, data_b, data_width, data_height);
+   /* srip ou leading pathame */
+   cmd = rindex (argv[0], '/');
+   if (!cmd) { 
+      cmd = argv[0];
+   } else {
+      cmd++;
+   }
+
+   if (!strcmp (cmd, "sum")) sum (data_a, data_b, globlen);
+   if (!strcmp (cmd, "diff")) diff (data_a, data_b, globlen);
+   if (!strcmp (cmd, "paste")) paste (data_a, data_b, globlen);
+   if (!strcmp (cmd, "angle")) angle (data_a, data_b, globlen);
+   if (!strcmp (cmd, "curl")) curl (data_a, data_b, data_width, data_height);
+   if (!strcmp (cmd, "div")) divergence (data_a, data_b, data_width, data_height);
 
    /*----------------------------------------------------*/
    /* open output file */

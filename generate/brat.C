@@ -467,7 +467,7 @@ void mandelbrot_windsimple (
    double	re, im, tmp;
    int		loop;
    double modulus=0.0;
-   double escape_radius = 1131.1;
+   double escape_radius = 65131.1;
    double ren, otl;
    double phi=0.0, phi_last, phi_c, h_phi_c;
    int wind =0;
@@ -550,6 +550,7 @@ void mandelbrot_windsimple (
 
          glob [i*sizex +j] = phi;
 
+#if 0
          // colorize the landing rays
          phi *= 512.0;
 
@@ -563,6 +564,7 @@ void mandelbrot_windsimple (
          phi *= phi;
 
          glob [i*sizex +j] = phi;
+#endif
 
          re_position += deltax;
       }
