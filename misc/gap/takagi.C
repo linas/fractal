@@ -34,6 +34,12 @@ double square (double x)
 	return 2.0;
 }
 
+long double parabola_down (long double x)
+{
+	long double t = x - floorl(x);
+	return 4.0L*t*(1.0L-t);
+}
+
 double bumps (double x)
 {
 	x -= floor (x);
@@ -66,11 +72,12 @@ long double takagi (long double w, long double x)
 	long double acc = 0.0L;
 	long double tw = 1.0L;
 	long double tp = 1.0L;
-	for (k=0; k<100; k++)
+	for (k=0; k<50; k++)
 	{
-		long double term = tw* triangle (tp*x);
+		// long double term = tw* triangle (tp*x);
+		long double term = tw* parabola_down (tp*x);
 		acc += term;
-		tp *= 6.28L;
+		tp *= 2.0L;
 		tw *= w;
 		if (1.0e-16 > tw) break;
 	}
@@ -403,8 +410,8 @@ main (int argc, char *argv[])
 	int i;
 
 	// int nmax = 512;
-	int nmax = 2048;
-	// int nmax = 23;
+	// int nmax = 2048;
+	int nmax = 23;
 
 	if (argc <2)
 	{
@@ -416,7 +423,7 @@ main (int argc, char *argv[])
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
-		double ts = 1.0;
+		// double ts = 1.0;
 		// double tw = takagi (w, x);
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
@@ -496,7 +503,29 @@ main (int argc, char *argv[])
 		// double tw = takagi (w, 0.125*x);
 		// double ts =  x*(0.25+0.5*w +w*w) +w*w*w*takagi (w,x);
 
-		double tw = takagi (w, x);
+#ifdef FOUR_DIM_REP
+		// g
+		double tw = takagi (w, 0.5*x);
+		double ts = 2.0*x - x*x + w*takagi (w, x);
+
+		// g*g
+		double tw = takagi (w, 0.25*x);
+		double ts = x*(1.0+2.0*w) - x*x*(w+0.25) + w*w*takagi (w, x);
+
+		// g*r
+		double tw = takagi (w, 0.5*(1.0-x));
+		double ts = 1.0 -x*x + w*takagi (w, x);
+
+		// r * g
+		double tw = takagi (w, (1.0-0.5*x));
+		double ts = 2.0*x -x*x + w*takagi (w, x);
+
+		// grg^2
+		double tw = takagi (w, (0.5-0.125*x));
+		double ts = 1.0 + x*(w+2.0*w*w) - x*x*(w*w+0.25*w+0.0625) + w*w*w*takagi (w, x);
+#endif
+		double tw = takagi (w, (0.5-0.125*x));
+		double ts = 1.0 + x*(w+2.0*w*w) - x*x*(w*w+0.25*w+0.0625) + w*w*w*takagi (w, x);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 		fflush (stdout);
