@@ -1,4 +1,4 @@
 
 sim:  sim.C
-	cc -o sim sim.C -lm
+	cc -O2 -o sim sim.C -lm
 
