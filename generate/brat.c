@@ -30,6 +30,159 @@ void mandelbrot_out (
    double		re_position, im_position;
    double		re, im, tmp;
    int		loop;
+   double modulus, frac;
+   double escape_radius = 33.5;
+   double ren, tl;
+   ren = log( log (escape_radius)) / log(2.0);
+   tl = 1.0/ log(2.0);
+   
+
+   delta = width / (double) sizex;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   
+   im_position = im_start;
+   for (i=0; i<sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) {
+         re = re_position;
+         im = im_position;
+         for (loop=1; loop <itermax; loop++) {
+            tmp = re*re - im*im + re_position;
+            im = 2.0*re*im + im_position;
+            re = tmp;
+re = sin (re);
+            modulus = (re*re + im*im);
+            if (modulus > escape_radius*escape_radius) break;
+         }    
+
+         modulus = sqrt (modulus);
+         frac = - log (log (modulus)) *tl;
+
+         glob [i*sizex +j] = ((double) loop) + frac; 
+/*
+         glob [i*sizex +j] = ((float) (loop%10)) / 10.0; 
+if (loop == itermax) {
+glob[i*sizex+j] = 0.0; } else {glob[i*sizex+j]=0.9999;}
+*/
+
+         re_position += delta;
+      }
+      im_position -= delta;  /*top to bottom, not bottom to top */
+   }
+}
+
+/*-------------------------------------------------------------------*/
+/* this routine fills in the exterior of the mandelbrot set using */
+/* the classic algorithm */
+
+void mandelbrot_inverse (
+   float  	*glob,
+   unsigned int sizex,
+   unsigned int sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax)
+{
+   unsigned int	i,j, globlen;
+   double		re_start, im_start, delta;
+   double		re_position, im_position;
+   double		re, im, tmp;
+   int		loop;
+   int ire, jim;
+   double modulus, phase, tp, frac;
+   double escape_radius = 2000.1;
+   double ren, tl;
+   ren = log( log (escape_radius)) / log(2.0);
+   tl = 1.0/ log(2.0);
+   
+
+   delta = width / (double) sizex;
+delta *= 0.25;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   
+   im_position = im_start;
+   for (i=0; i<4*sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<4*sizex; j++) {
+         re = re_position;
+         im = im_position;
+         for (loop=1; loop <itermax; loop++) {
+            tmp = re*re - im*im + re_position;
+            im = 2.0*re*im + im_position;
+            re = tmp;
+            modulus = (re*re + im*im);
+            if (modulus > escape_radius*escape_radius) break;
+         }    
+
+         if (loop == itermax) continue;
+
+         modulus = sqrt (modulus);
+         frac = ren - log (log (modulus)) *tl;
+         frac = ((double) loop) - ren + frac; 
+
+         modulus = log (modulus);
+         phase = atan2 (im, re);
+         tp = 1.0 / pow (2.0, loop);
+         modulus *= tp;
+         phase *= tp;
+         modulus = exp (modulus);
+         re = cos (phase) * modulus;
+         im = sin (phase) * modulus;
+         
+         re -= 1.0;
+
+         im /= re;
+
+         re *= 24.0;
+         im *= 1.0;
+
+         ire = sizex * (re + 0.5);
+         if (0 > ire) ire = 0;
+         if (sizex <= ire) ire = sizex-1;
+
+         im *= ((double) sizey)/ ((double) sizex);
+         jim = sizey * (im + 0.5);
+
+         if (0 > jim) jim = 0;
+         if (sizey <= jim) jim = sizey-1;
+
+         glob [jim*sizex +ire] ++;
+
+         re_position += delta;
+      }
+      im_position -= delta;  /*top to bottom, not bottom to top */
+   }
+}
+
+/*-------------------------------------------------------------------*/
+/* this routine fills in the interior of the mandelbrot set using */
+/* the classic algorithm */
+
+void mandelbrot_stop (
+   float  	*glob,
+   unsigned int sizex,
+   unsigned int sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax)
+{
+   unsigned int	i,j, globlen;
+   double		re_start, im_start, delta;
+   double		re_position, im_position;
+   double		re, im, tmp;
+   int		loop;
    
    delta = width / (double) sizex;
    re_start = re_center - width / 2.0;
@@ -49,11 +202,156 @@ void mandelbrot_out (
             tmp = re*re - im*im + re_position;
             im = 2.0*re*im + im_position;
             re = tmp;
-            if ((re*re + im*im) > 4.0) break;
+            if ((re*re + im*im) > 154.0) break;
          }    
-         glob [i*sizex +j] = ((float) (loop%10)) / 10.0; 
-if (loop == itermax) {
-glob[i*sizex+j] = 0.0; } else {glob[i*sizex+j]=0.9999;}
+         /* glob [i*sizex +j] = (2.0+ re)/2.5;  */
+         /* glob [i*sizex +j] = re; */
+         glob [i*sizex +j] = im;
+
+         re_position += delta;
+      }
+      im_position -= delta;  /*top to bottom, not bottom to top */
+   }
+}
+
+/*-------------------------------------------------------------------*/
+/* this routine fills in the interior of the mandelbrot set using */
+/* the Cliff Pickover's stalks algorithm */
+
+void mandelbrot_stalk (
+   float  	*glob,
+   unsigned int sizex,
+   unsigned int sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double	stalkx,
+   double	stalky)
+{
+   unsigned int	i,j, globlen;
+   double		re_start, im_start, delta;
+   double		re_position, im_position;
+   double		re, im, tmp, tmpx, tmpy, ltmpx, ltmpy;
+   double		visited_x, visited_y;
+   int		loop;
+   
+   delta = width / (double) sizex;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   
+   im_position = im_start;
+   for (i=0; i<sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) {
+         re = re_position;
+         im = im_position;
+#ifdef MAXDIST
+         for (loop=1; loop <itermax; loop++) {
+            tmp = re*re - im*im + re_position;
+            im = 2.0*re*im + im_position;
+            re = tmp;
+            if ((re*re + im*im) > 154.0) break;
+         }
+         visited_x = re;
+         visited_y = im;
+         tmp = re*re - im*im + re_position;
+         im = 2.0*re*im + im_position;
+         re = tmp;
+#endif MAXDIST
+         for (loop=1; loop <itermax; loop++) {
+            tmp = re*re - im*im + re_position;
+            im = 2.0*re*im + im_position;
+            re = tmp;
+            if ((re*re + im*im) > 154.0) break;
+/*
+            if (((-0.5 < re) && (re < 0.5)) ||((-0.5 < im) && (im < 0.5))) 
+                       if (0.1 > glob [i*sizex +j]) glob [i*sizex +j] = 0.1;
+            if (((-0.2 < re) && (re < 0.2)) ||((-0.2 < im) && (im < 0.2))) 
+                       if (0.2 > glob [i*sizex +j]) glob [i*sizex +j] = 0.2;
+            if (((-0.1 < re) && (re < 0.1)) ||((-0.1 < im) && (im < 0.1))) 
+                       if (0.3 > glob [i*sizex +j]) glob [i*sizex +j] = 0.3;
+            if (((-0.05 < re) && (re < 0.05)) ||((-0.05 < im) && (im < 0.05))) 
+                       if (0.5 > glob [i*sizex +j]) glob [i*sizex +j] = 0.5;
+            if (((-0.02 < re) && (re < 0.02)) ||((-0.02 < im) && (im < 0.02))) 
+                       if (0.6 > glob [i*sizex +j]) glob [i*sizex +j] = 0.6;
+            if (((-0.01 < re) && (re < 0.01)) ||((-0.01 < im) && (im < 0.01))) 
+                       if (0.7 > glob [i*sizex +j]) glob [i*sizex +j] = 0.7;
+            if (((-0.005 < re) && (re < 0.005)) ||((-0.005 < im) && (im < 0.005))) 
+                       if (0.8 > glob [i*sizex +j]) glob [i*sizex +j] = 0.8;
+            if (((-0.002 < re) && (re < 0.002)) ||((-0.002 < im) && (im < 0.002))) 
+                       if (0.9 > glob [i*sizex +j]) glob [i*sizex +j] = 0.9;
+            if (((-0.001 < re) && (re < 0.001)) ||((-0.001 < im) && (im < 0.001))) 
+                       if (1.0 > glob [i*sizex +j]) glob [i*sizex +j] = 1.0;
+*/
+
+#ifdef STALK
+            tmpx = re-stalkx;
+            if (0.0 > tmpx) tmpx = -tmpx;
+            tmpy = im-stalky;
+            if (0.0 > tmpy) tmpy = -tmpy;
+
+            ltmpx = -log (tmpx); 
+            if (ltmpx > glob [i*sizex +j]) glob [i*sizex +j] = ltmpx;
+
+            ltmpy = -log (tmpy); 
+            if (ltmpy > glob [i*sizex +j]) glob [i*sizex +j] = ltmpy;
+#endif /* STALK */
+
+#ifdef CROSS
+            tmpx = re-stalkx;
+            if (0.0 > tmpx) tmpx = -tmpx;
+            tmpy = im-stalky;
+            if (0.0 > tmpy) tmpy = -tmpy;
+
+            ltmpx = -log (tmpx); 
+            if (0.2 > tmpy) {
+               if (ltmpx > glob [i*sizex +j]) glob [i*sizex +j] = ltmpx;
+            }
+
+            ltmpy = -log (tmpy); 
+            if (0.2 > tmpx) {
+               if (ltmpy > glob [i*sizex +j]) glob [i*sizex +j] = ltmpy;
+            }
+#endif /* CROSS */
+
+#ifdef CIRCSTALK
+            tmpx = re - stalkx;
+            tmpy = im - stalky;
+            tmp = tmpx*tmpx + tmpy*tmpy -0.04;
+            if (0.0 > tmp) tmp = -tmp;
+
+            tmp = -log (tmp); 
+            if (tmp > glob [i*sizex +j]) glob [i*sizex +j] = tmp;
+#endif CIRCSTALK
+
+           
+#define MAXDIST
+#ifdef MAXDIST
+            tmpx = re-stalkx - visited_x;
+            tmpy = im-stalky - visited_y;
+
+            tmpx = re - stalkx;
+            tmpy = im - stalky;
+            tmp = tmpx*tmpx + tmpy*tmpy;
+
+            tmp = -log (tmp); 
+            tmpx = re - stalkx-0.001;
+            tmpy = im - stalky-0.001;
+
+            tmp += log (tmpx*tmpx + tmpy*tmpy);
+
+            if (tmp > glob [i*sizex +j]) glob [i*sizex +j] = tmp;
+#endif MAXDIST
+
+           
+
+
+         }    
 
          re_position += delta;
       }
@@ -158,7 +456,7 @@ extern double drand48 ();
 #define CBOX_RE_SLOPE 3.0
 #define CBOX_RE_CEPT -1.5
 
-/* this routine fills in the interior of the mandelbrot set using */
+/* this routine fills in the interior of the circle map using */
 /* the classic algorithm */
 
 void circle_in (
@@ -577,7 +875,6 @@ double		renorm;
       glob[i] *= ollie*ollie*ollie;
 #endif
 
-#define FOURTH_MOM
 #ifdef FOURTH_MOM
       /* compute third moment */
       tmp = 1.0 / count[i];
@@ -592,7 +889,7 @@ double		renorm;
       glob[i] = tmp *ollie*ollie*ollie*ollie;
 #endif
 
-/* #define FIFTH_MOM */
+#define FIFTH_MOM 
 #ifdef FIFTH_MOM
       /* compute third moment */
       tmp = 1.0 / count[i];
@@ -707,8 +1004,8 @@ double		renorm;
          horiz_pix = (int) (x_slope * re[0] - x_off);
          vert_pix = (int) (y_slope * im[0] - y_off);
 #else
-         horiz_pix = (int) (x_slope * (re-re_position) - x_off);
-         vert_pix = (int) (y_slope * (im-im_position) - y_off);
+         horiz_pix = (int) (x_slope * (re[0]-re_position[0]) - x_off);
+         vert_pix = (int) (y_slope * (im[0]-im_position[0]) - y_off);
 #endif
          if ( (horiz_pix >= 0) && (horiz_pix < sizex) && 
             (vert_pix >= 0) && (vert_pix < sizey)) {
@@ -1120,7 +1417,10 @@ double		renorm;
          vert_pix = (int) (y_slope * im - y_off);
          if ( (horiz_pix >= 0) && (horiz_pix < sizex) && 
             (vert_pix >= 0) && (vert_pix < sizey)) {
+/*
             glob [vert_pix*sizex + horiz_pix] += ys;
+*/
+            glob [vert_pix*sizex + horiz_pix] = xs;
             count [vert_pix*sizex + horiz_pix] ++;
          }
 
@@ -1130,10 +1430,12 @@ double		renorm;
    }
 
    /* renormalize */
+/*
    for (i=0; i<globlen; i++) {
       glob [i] = glob[i] / count[i];
    }
 
+*/
    free (count);
 }
 
@@ -1209,6 +1511,7 @@ double		renorm;
 
              glob [vert_pix*sizex + horiz_pix] += xs*xs*ys*ys;
              count [vert_pix*sizex + horiz_pix] ++;
+             
          }    
 
          re = renew;
@@ -1414,9 +1717,23 @@ void main (int argc, char *argv[])
    im_center = 0.0;
    width = 2.8;
 
+/*
+   re_center = 0.15;
+   im_center = 0.5;
+   width = 0.5;
+*/
+
    /* Do the interior now */
    renorm = 1.0;
 
+   if (!strcmp(argv[0], "brat"))
+   mandelbrot_out (data, data_width, data_height,
+                  re_center, im_center, width, itermax); 
+   
+   if (!strcmp(argv[0], "manvert"))
+   mandelbrot_inverse (data, data_width, data_height,
+                  re_center, im_center, width, itermax); 
+   
    if (!strcmp(argv[0], "measure"))
    mandelbrot_measure (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
@@ -1424,6 +1741,14 @@ void main (int argc, char *argv[])
    if (!strcmp(argv[0], "offset"))
    mandelbrot_offset (data, data_width, data_height,
                   0.5, 0.0, 3.0, itermax, renorm); 
+   
+   if (!strcmp(argv[0], "mstop"))
+   mandelbrot_stop (data, data_width, data_height,
+                  re_center, im_center, width, itermax); 
+   
+   if (!strcmp(argv[0], "stalk"))
+   mandelbrot_stalk (data, data_width, data_height,
+                  re_center, im_center, width, itermax, 0.0, 0.0); 
    
    if (!strcmp(argv[0], "orig"))
    mandelbrot_orig (data, data_width, data_height,
@@ -1479,6 +1804,36 @@ void main (int argc, char *argv[])
       
       circle_in (data, data_width, data_height,
                   re_center, im_center, width, itermax, 0.05); 
+   }
+   
+   /* ---------------------------------------------------- */
+   /* make a movie */
+   if (!strcmp(argv[0], "stalkmov")) {
+      
+#define NFRAMES 60
+      for (i=0; i<NFRAMES; i++) {
+         printf (" doing frame %d of %d \n", i, NFRAMES);
+         tmp = ((double) i) / ((double) NFRAMES);
+         re_center = -0.6;
+         im_center = 0.0;
+         width = 2.8;
+
+
+         mandelbrot_stalk (data, data_width, data_height,
+                  re_center, im_center, width, itermax, 0.3-1.5*tmp, 0.6*tmp); 
+   
+
+         /* dump the floating point data */
+         sprintf (buff, "%s%d", argv[1], i);
+         if ( (fp = Fopen (buff, ".flo")) == NULL) {
+            printf (" File open failure for %s \n", buff);
+            return;
+         }
+         fprintf (fp, "%d %d\n", data_width, data_height);
+         fwrite (data, sizeof(float), data_width*data_height, fp);
+         fclose (fp);
+      }
+      return;
    }
    
    /* ---------------------------------------------------- */
