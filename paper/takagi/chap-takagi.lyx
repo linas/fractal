@@ -32,7 +32,7 @@ Symmetries of Period-Doubling Maps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 12 December 2004)
+12 October 2004 (revised 16 December 2004)
 \layout Abstract
 
 The concept of self-similarity is central to the notion of a fractal, but
@@ -300,8 +300,7 @@ The Takagi-Landsberg Curve
 
 
 \begin_inset Graphics
-	filename takagi.ps
-	rotateAngle 270
+	filename takagi.png
 
 \end_inset 
 
@@ -1219,12 +1218,12 @@ c_{z}(x)=\sum_{k=1}^{\infty}b_{k}z^{k}\label{eq:}\end{equation}
 \end_inset 
 
 , we have essentially the inverse of the classic Cantor function, as show
- in figure 
+ in the figure 
 \begin_inset LatexCommand \ref{cap:Cantor-Polynomial}
 
 \end_inset 
 
- here.
+.
 \layout Standard
 
 
@@ -1244,8 +1243,7 @@ Cantor Polynomial
 
 
 \begin_inset Graphics
-	filename dyadic-1-3.ps
-	rotateAngle 270
+	filename dyadic-1-3.png
 
 \end_inset 
 
@@ -1261,6 +1259,126 @@ This figure shows a graph of the function
 \end_inset 
 
 .
+ This graph provides possibly the easiest visual proof that the cardinality
+ of the Cantor Set is equal to the cardinality of the unit interval
+\begin_inset LatexCommand \cite{key-14}
+
+\end_inset 
+
+, a result which can sometimes be difficult to visualize.
+ The function 
+\begin_inset Formula $f(x)=2c_{1/3}(x)/3$
+\end_inset 
+
+ maps the unit interval into the unit interval.
+ It is strictly monotonically increasing, and if 
+\begin_inset Formula $x\neq y$
+\end_inset 
+
+ then 
+\begin_inset Formula $f(x)\neq f(y)$
+\end_inset 
+
+.
+ Thus, this function is one-to-one, and thus the cardinality of the image
+ is equal to the cardinality of the unit interval.
+ But the image of this function is just the canonical Cantor set, constructed
+ by recursively removing the open middle-third interval.
+ The largest 
+\begin_inset Quotes eld
+\end_inset 
+
+middle-third
+\begin_inset Quotes erd
+\end_inset 
+
+ corresponds to 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+; the next two largest correspond to 
+\begin_inset Formula $x=1/4$
+\end_inset 
+
+ and 
+\begin_inset Formula $x=3/4$
+\end_inset 
+
+, and so on: each removed interval corresponds to a rational number, expressed
+ as its binary expansion.
+ It is not hard to see that that the sum of the lengths of the 
+\begin_inset Quotes eld
+\end_inset 
+
+middle thirds
+\begin_inset Quotes erd
+\end_inset 
+
+ adds up to one, and thus, the measure of the image of this function is
+ zero.
+ Thus, we have quickly sketched that the cardinality of the Cantor set is
+ that of the real numbers, but the measure of the Cantor Set is zero.
+ It is not hard to see that one gets a similar result using 
+\begin_inset Formula $f(x)=(1-z)c_{z}(x)$
+\end_inset 
+
+ for any value of 
+\begin_inset Formula $0<z<1/2$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+There were only two 
+\begin_inset Quotes eld
+\end_inset 
+
+tricky
+\begin_inset Quotes erd
+\end_inset 
+
+ parts to this demonstration.
+ One is the assertion that 
+\begin_inset Formula $f(x)\neq f(y)$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $x\neq y$
+\end_inset 
+
+, but this can be deduced easily enough by contemplating the definition
+ of 
+\begin_inset Formula $c_{z}(x)$
+\end_inset 
+
+.
+ The other trick we slid by here was that 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ is somewhat vaguely defined for the rationals: every rational number 
+\begin_inset Formula $x=p/q$
+\end_inset 
+
+ has two inequivalent binary expansions.
+ For example, x=1/2=0.1000...=0.0111...
+ and the first binary expansion yeilds 
+\begin_inset Formula $f(1/2)=1/3$
+\end_inset 
+
+ while the second yeilds 
+\begin_inset Formula $f(1/2)=2/3$
+\end_inset 
+
+.
+ But this doesn't affect the proof: however we choose to tighten up the
+ definition of 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+, it is still one-to-one and monotonic, and its image still has the cardinality
+ of the unit interval.
  
 \end_inset 
 
@@ -2449,6 +2567,7 @@ Miscellany
 
 A compendium of miscellaneous related topics and to-do items that come to
  mind.
+ 
 \layout Description
 
 Homework: Curiously, the representations of 
@@ -2564,6 +2683,21 @@ Homework: Describe the set-theoretic implications of having a ladder of
  Develop a general theory of ladders of subsets of the modular group, if
  possible.
  
+\layout Standard
+
+XXX This finite-to-infinite-limit inter-relation is essentially the same
+ phenomenon as the relationship between binomial coefficients (Pascal's
+ Triangle) and the Sierpinski Gasket, shown by Pietgen etal.
+ The 10,000-Dollar Sequence is essentially the a sum over the modulo function
+ on rows of binomial coefficients.
+ In the limit, the projection of the Sierpinski Gasket onto the unit interval
+ yeilds a multi-fractal measure whose integral is essentially the Takagi
+ Curve.
+\layout Standard
+
+All of this discussion needs to be moved over to the chapter that covers
+ the Sierpinski Gasket vs.
+ Modular Group discusion.
 \layout Subsubsection
 
 Derivatives of the Takagi Curve
@@ -3139,4 +3273,19 @@ Chaos and Fractals, New Frontiers of Science
 \bibitem [Iso03]{Iso03}
 
 this is a bibtex reference 
+\layout Bibliography
+\bibitem [Can1884]{key-14}
+
+Georg Cantor, 
+\emph on 
+On the Power of Perfect Sets of Points
+\emph default 
+ (1884), reprinted in 
+\emph on 
+Classics on Fractals
+\emph default 
+, ed.
+ Gerald A.
+ Edgar, (Addison-Wesley, 1993) pp.
+ 11-23.
 \the_end
