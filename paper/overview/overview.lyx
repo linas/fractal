@@ -2980,7 +2980,7 @@ This function appears to vanish only at the dyadics.
 
  the value 
 \begin_inset Formula \[
-t_{w}\left(p/2^{n}\right)=\sum_{k=1}^{n}w^{k}=w+w^{2}+...+w^{n}\]
+t_{w}\left(p/2^{n}\right)=\sum_{k=0}^{n-1}w^{k}=1+w+w^{2}+...+w^{n-1}\]
 
 \end_inset 
 
@@ -2998,8 +2998,8 @@ where
  is the triangle function:
 \begin_inset Formula \[
 \tau(x)=\left\{ \begin{array}{ccc}
-x-\left\lfloor x\right\rfloor  & \textrm{\; for \;} & x-\left\lfloor x\right\rfloor \leq1/2\\
-\left\lfloor x+1\right\rfloor -x & \textrm{\; for \;} & x-\left\lfloor x\right\rfloor >1/2\end{array}\right.\]
+2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & x-\left\lfloor x\right\rfloor \leq1/2\\
+2(\left\lfloor x+1\right\rfloor -x) & \textrm{\; for \;} & x-\left\lfloor x\right\rfloor >1/2\end{array}\right.\]
 
 \end_inset 
 
@@ -3011,11 +3011,11 @@ x-\left\lfloor x\right\rfloor  & \textrm{\; for \;} & x-\left\lfloor x\right\rfl
 ) as well, in that it has both leftward-going and rightward-going derivatives,
  although these derivatives differ at each dyadic point.
  Note that 
-\begin_inset Formula $t_{1/4}(x)=x(1-x)/2$
+\begin_inset Formula $t_{1/4}(x)=4x(1-x)$
 \end_inset 
 
-is a parabola (the mid-point subdivision construction of a parabola is attribute
-d to Archimedes
+ is a parabola (the mid-point subdivision construction of a parabola is
+ attributed to Archimedes
 \begin_inset LatexCommand \cite{key-3}
 
 \end_inset 
@@ -3031,6 +3031,19 @@ d to Archimedes
 \end_inset 
 
 
+\layout Standard
+
+Lets now imagine the Takagi-Landsberg as if it were living on the Lie group
+ 
+\begin_inset Formula $U(1)$
+\end_inset 
+
+, that is, it lives in the 
+\begin_inset Formula $Exp$
+\end_inset 
+
+ of a tangent space.
+ What is the generator function for that space?  
 \layout Standard
 
 Lets try to undertand why blah blah blah.
@@ -3100,7 +3113,9 @@ We can do this with the eigenfunctions of the Frobenius-Perron operator
 .
  This is old hat...
  except that now ...
- 
+ note that these are a generalization of the takagi-landsberg curve where
+ we replace the triangle function with sines and cosines.
+ Is there a name for these functions? 
 \layout Subsection
 
 Cantor Dusts
