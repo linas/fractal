@@ -19,6 +19,7 @@ lagWordTable :: lagWordTable (void) {
    num_collisions = 0;
    num_processed = 0;
    num_entries = 0;
+   total_string_bytes = 0;
 
    int i = 0;
    for (i=0; i<LAG_HASH_TABLE_SIZE; i++) {
@@ -41,6 +42,7 @@ lagWordTable :: ~lagWordTable () {
    num_collisions = 0;
    num_processed = 0;
    num_entries = 0;
+   total_string_bytes = 0;
 
    int i = 0;
    for (i=0; i<LAG_HASH_TABLE_SIZE; i++) {
@@ -113,7 +115,10 @@ int lagWordTable :: GetWordID (char * word) {
    root -> next = table[hash];
    table[hash] = root;
 
-   root -> theword = new char[strlen(word) +1];
+   int len = strlen(word) + 1;
+   total_string_bytes += len;
+
+   root -> theword = new char[len];
    strcpy (root -> theword, word);
 
    unused_id ++;
@@ -151,9 +156,14 @@ void lagWordTable :: Dump (void) {
    //   if (table[i]) printf ("its %d %d %d %s \n", i, 
    //        table[i] -> cnt, table[i]->id, table[i] -> theword);
    // }
+   printf ("Info: lagWordTable::Dump(): \n");
    printf ("num entries is %d \n", num_entries);
    printf ("num processed is %d \n", num_processed);
    printf ("num collisions is %d \n", num_collisions);
+
+   printf ("total string mem usage is %d kbytes \n", total_string_bytes / 1024);
+   printf ("helper mem usage is %d kbytes \n", num_entries * sizeof (Helper) / 1024);
+   printf ("\n");
 }
 
 // ===================== END OF FILE ===================
