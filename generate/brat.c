@@ -122,7 +122,8 @@ if (0.25*width*width > ((re_position-re_center)* (re_position-re_center) +
 }
 
 /*-------------------------------------------------------------------*/
-/* This routine computes a convergent for the Mandelbrot set iterator.
+/* This routine does a spectral analysis for the Mandelbrot set iterator.
+ * That is, it computes a reimann-zeta-like sum of things like the modulus
  */
 
 void mandelbrot_cutoff (
@@ -142,9 +143,8 @@ void mandelbrot_cutoff (
    double	ddre, ddim, ddmod;
    double	zpre, zpim, zppre, zppim;
    double	mp, mpp;
-   double	phi, phip, phipp;
    int		loop;
-   double 	omod=0.0, frac, theta;
+   double 	omod=0.0,  theta;
    double 	escape_radius = 1.0e30;
    double 	ren, tl;
    double	tau;
@@ -446,9 +446,8 @@ void mandelbrot_cutoff (
 }
 
 /*-------------------------------------------------------------------*/
-/* this routine fills in the interior and exterior of the mandelbrot set using 
- * the classic algorithm. The derivative (infinitessimal flow) 
- * is used to play games.
+/* This routine fills in the interior and exterior of the mandelbrot set 
+ * using derivitivee w.r.t c (the infintessimal flow) to obtain values.
  */
 
 void dmandelbrot_out (
@@ -468,6 +467,8 @@ void dmandelbrot_out (
    double	ddre, ddim;
    double	d3re, d3im;
    double	d4re, d4im;
+   double	dfre, dfim;
+   double	dofre, dofim;
    int		loop;
    double modulus, phi, phip, phi3, frac;
    double escape_radius = 3450.0;
@@ -538,6 +539,14 @@ void dmandelbrot_out (
 
          frac = ((double) loop) - frac + 1.0; 
 
+         /* compute dfrac/dc = d|z|/dc / |z| log|z| */
+         dfre = re*dre / ((re*re+im*im) *log (modulus));
+         dfim = im*dim / ((re*re+im*im) *log (modulus));
+
+         /* compute 1/ (dfrac/dc)  */
+         dofre = dfre / (dfre*dfre + dfim*dfim);
+         dofim = -dfim / (dfre*dfre + dfim*dfim);
+
          /* compute zprime/z */
          tmp = re*dre + im*dim;   /* divergence */
          dim = re*dim - im*dre;   /* curl */
@@ -588,6 +597,7 @@ void dmandelbrot_out (
          modulus *= log((double) loop);
 
          modulus = sqrt (dre*dre+dim*dim);
+         modulus = sqrt (dofre*dofre+dofim*dofim);
         
          glob [i*sizex +j] = modulus;
 
@@ -915,7 +925,7 @@ void mandelbrot_stalk (
    double		re_start, im_start, delta;
    double		re_position, im_position;
    double		re, im, tmp, tmpx, tmpy;
-   double		visited_x, visited_y;
+   // double		visited_x, visited_y;
    int		loop;
    
    delta = width / (double) sizex;
