@@ -1,6 +1,13 @@
 ############### Symbol Definitions ###################### 
 
 
+TOP = ../../tools
+INC = $(TOP)/inc
+LIB = $(TOP)/lib
+
+CC = /usr/bin/cc -O2 -I $(INC)
+
+
 EXES= ndist series
 
 all: 	$(EXES)
@@ -21,9 +28,9 @@ dist:
 	$(CC) -o $* $^ -lm
 
 
-ndist:	ndist.o gcf.o totient.o
-series:	series.o divisor.o gcf.o totient.o
+ndist:	ndist.o $(LIB)/gcf.o $(LIB)/totient.o
+series:	series.o divisor.o $(LIB)/gcf.o $(LIB)/totient.o
 
-ndist.o:	ndist.c gcf.h totient.h 
+ndist.o:	ndist.c $(INC)/gcf.h $(INC)/totient.h 
 
 divisor.o:	divisor.c divisor.h
