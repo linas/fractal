@@ -33,7 +33,7 @@ The Bernoulli Operator, the Gauss-Kuzmin-Wirsing Operator, and the Riemann
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 7 December 2004)
+2 January 2004 (revised 2 January 2005)
 \layout Abstract
 
 The study of the Gauss-Kuzmin-Wirsing (GKW) operator can provide insight
@@ -3352,20 +3352,34 @@ g to know what the generating function for this series is.
 \end_inset 
 
 .
- In general, one has 
+ This arises from the Lambert series
 \begin_inset Formula \begin{equation}
 \sum_{n=1}^{\infty}d(n)x^{n}=\sum_{n=1}^{\infty}\frac{x^{n}}{1-x^{n}}\label{eq:}\end{equation}
 
 \end_inset 
 
-Thus one is immediately lead to consider whether the sum 
+The sum 
 \begin_inset Formula \begin{equation}
 E(t)=\sum_{k=1}^{\infty}\frac{t^{k}}{1-2^{-k}}\label{eq:}\end{equation}
 
 \end_inset 
 
- can be given a similar number-theoretic expression, and whether it represents
- some deeper number-theoretic relationship.
+ can be resummed as a Lambert series, namely, 
+\begin_inset Formula \begin{equation}
+E(t)=\sum_{k=1}^{\infty}b_{k}2^{-k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula \begin{equation}
+b_{k}=\sum_{n|k}(2t)^{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ The analytic/meromorphic structure of this zeta is not clear; its dull
+ within the unit disk, and its not quite obvious what the continuation is
+ outside of the disk.
+ XXX ToDo: get the full analytic structure.
 \layout Section
 
 The Gauss-Kuzmin-Wirsing Operator
@@ -3763,7 +3777,31 @@ n\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
- We evaluate this expression in the next section..
+ We evaluate this expression in the next section.
+\layout Standard
+
+It might be instructive to study the polynomials 
+\begin_inset Formula \begin{equation}
+\Gamma_{mn}(x)\equiv\sum_{k=0}^{n}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)(-x)^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ based on thier superficial resemblance to the shifted Legendre polynomial
+ 
+\begin_inset Formula \begin{equation}
+\widetilde{P}_{n}(x)\equiv\sum_{k=0}^{n}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+n\\
+n\end{array}\right)(-x)^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+
 \layout Subsection
 
 The Riemann Zeta and Stieltjes Constants
@@ -5466,7 +5504,7 @@ p\end{array}\right)\right]\label{eq:}\end{eqnarray}
 \begin_inset Formula $x$
 \end_inset 
 
- will give a tractable result, the trick of using the Taylor's expansion
+ will give a tractable result; the trick of using the Taylor's expansion
  to obtain polynomial eigenstates fails in this case.
  Indeed, it seems likely that the eigenstates will not be analytic, although
  it is not clear to me what theorem would establish or disprove this conjecture.
