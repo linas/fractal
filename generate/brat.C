@@ -191,7 +191,9 @@ if (0.25*width*width > ((re_position-re_center)* (re_position-re_center) +
 /*-------------------------------------------------------------------*/
 /* utility function performs iteration, returns results of iteration */
 
-#define OFL  (1e30)
+#define OFL  (1e180)
+#define DOFL  (1e20)
+#define DMAX  (1e50)
 
 void 
 iterate (double re_c,
@@ -225,10 +227,10 @@ iterate (double re_c,
       re = tmp;
 
       while ((OFL < re) || (OFL < im)) {
-         re /= OFL;
-         im /= OFL;
-         dre /= OFL;
-         dim /= OFL;
+         re /= DOFL;
+         im /= DOFL;
+         dre /= DOFL;
+         dim /= DOFL;
       }
 
 
@@ -267,7 +269,7 @@ void mandelbrot_wind (
    int		loop;
    int		*bits;
    double modulus=0.0, frac, mu;
-   double escape_radius = 1.131e3;
+   double escape_radius = 1.131e46;
    double ren, otl;
    double phi=0.0, tphi;
 
@@ -303,107 +305,113 @@ void mandelbrot_wind (
          iterate (re_c, im_c, escape_radius,
                  re, im, dre, dim, loop);
    
-         /* compute fractional iteration */
-         modulus = (re*re + im*im);
-         modulus = sqrt (modulus);
-         frac = log (log (modulus)) *otl;
-         mu = ((double) (loop+1)) - frac;
-
-         /* compute the derivative */
-         dmu_re = re*dre + im*dim;
-         dmu_im = re*dim - im*dre;
-         modulus = (re*re + im*im);
-         dmu_re *= -1.0 / modulus;
-         dmu_im *= -1.0 / modulus;
-         modulus = 1.0 / log(sqrt (modulus));
-         dmu_re *= modulus;
-         dmu_im *= modulus;
-         modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
-
-         for (k=loop; k>0; k--) 
-         {
-            /* save up angle */
-            /* extract the binary bit */
-            phi = atan2(im, re);
-            if (0.0<phi) { bits[k] = 0; } else { bits[k] =1; }
-            if (0.0>phi) phi+= 2.0*M_PI;
+         phi = 0.0;
+         if (loop < itermax) {
+            /* compute fractional iteration */
+            modulus = (re*re + im*im);
+            modulus = sqrt (modulus);
+            frac = log (log (modulus)) *otl;
+            mu = ((double) (loop+1)) - frac;
    
-            /* redirection for the next step */
-            /* uhh, remember its contra not covarient */
+            /* compute the derivative */
+            dmu_re = re*dre + im*dim;
+            dmu_im = re*dim - im*dre;
+            modulus = (re*re + im*im);
+            dmu_re *= -1.0 / modulus;
+            dmu_im *= -1.0 / modulus;
+            modulus = 1.0 / log(sqrt (modulus));
+            dmu_re *= modulus;
+            dmu_im *= modulus;
+            modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
+   
+            for (k=loop; k>0; k--) 
+            {
+               /* save up angle */
+               /* extract the binary bit */
+               phi = atan2(im, re);
+               if (0.0<phi) { bits[k] = 0; } else { bits[k] =1; }
+               if (0.0>phi) phi+= 2.0*M_PI;
+      
+               /* redirection for the next step */
+               /* uhh, remember its contra not covarient */
 // printf ("start %d c=(%g %g) p=%g	z=(%g %g) d=(%g %g)	dm=(%g %g)\n\n", loop,
 //  re_c, im_c, phi, re, im, dre, dim, -dmu_re*modulus , dmu_im*modulus);
-            re_c -= dmu_re*modulus;
-            im_c += dmu_im*modulus;
-
-
-            /* lets try fitting */
-            tphi = -1000.0;
-            for (ii=0; ii<1; ii++)
-            { 
-               double gmu, gphi;
-               double dt_re, dt_im;
-               int lp;
+               re_c -= dmu_re*modulus;
+               im_c += dmu_im*modulus;
    
-               /* ok, now try it */
-               lp = k-1;
-               iterate (re_c, im_c, 1.0e50*escape_radius,
-                    re, im, dre, dim, lp);
    
-               /* compute fractional iteration */
-               modulus = (re*re + im*im);
-               modulus = sqrt (modulus);
-               frac = log (log (modulus)) *otl;
-               gmu = ((double) (lp+1)) +1.0 - frac;
-   
-               /* guesstimate angle */
-               gphi = atan2(im, re);
-               if (0.0>gphi) gphi+= 2.0*M_PI;
-   
-               if (-100.0>tphi) {
-                  tphi = 0.5*phi;
-                  if (M_PI<gphi) tphi += M_PI;
-               }
-   
-               /* compute the derivative */
-               dmu_re = re*dre + im*dim;
-               dmu_im = re*dim - im*dre;
-               modulus = (re*re + im*im);
-               dmu_re *= 1.0 / modulus;
-               dmu_im *= 1.0 / modulus;
-               dt_re = -dmu_im;
-               dt_im = dmu_re;
-               modulus = - 1.0 / log(sqrt (modulus));
-               dmu_re *= modulus;
-               dmu_im *= modulus;
+               /* lets try fitting */
+               tphi = -1000.0;
+               for (ii=0; ii<1; ii++)
+               { 
+                  double gmu, gphi;
+                  double dt_re, dt_im;
+                  int lp;
+      
+                  /* ok, now try it */
+                  lp = k-1;
+                  iterate (re_c, im_c, DMAX*escape_radius,
+                       re, im, dre, dim, lp);
+      
+                  /* compute fractional iteration */
+                  modulus = (re*re + im*im);
+                  modulus = sqrt (modulus);
+                  frac = log (log (modulus)) *otl;
+                  gmu = ((double) (lp+1)) +1.0 - frac;
+      
+                  /* guesstimate angle */
+                  gphi = atan2(im, re);
+                  if (0.0>gphi) gphi+= 2.0*M_PI;
+      
+                  if (-100.0>tphi) {
+                     tphi = 0.5*phi;
+                     if (M_PI<gphi) tphi += M_PI;
+                  }
+      
+                  /* compute the derivative */
+                  dmu_re = re*dre + im*dim;
+                  dmu_im = re*dim - im*dre;
+                  modulus = (re*re + im*im);
+                  dmu_re *= 1.0 / modulus;
+                  dmu_im *= 1.0 / modulus;
+                  dt_re = -dmu_im;
+                  dt_im = dmu_re;
+                  modulus = - 1.0 / log(sqrt (modulus));
+                  dmu_re *= modulus;
+                  dmu_im *= modulus;
 
 // printf ("its %d %d c=(%g %g)	gp=%g p=%g  gm=%g m=%g	dm=(%g %g)\n", ii, lp,
 //   re_c, im_c, gphi, tphi, gmu, mu, dt_re , dt_im);
 
-               /* refine the guess */
-               modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
+                  /* refine the guess */
+                  modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
 #if 0
-               re_c -= (gmu-mu)*dmu_re*modulus;
-               im_c += (gmu-mu)*dmu_im*modulus;
-   
-               re_c += (gphi-tphi)*dt_re;
-               im_c += (gphi-tphi)*dt_im;
+                  re_c -= (gmu-mu)*dmu_re*modulus;
+                  im_c += (gmu-mu)*dmu_im*modulus;
+      
+                  re_c += (gphi-tphi)*dt_re;
+                  im_c += (gphi-tphi)*dt_im;
 #endif
-            }
+               }
 // printf ("\n");
 
+   
+            }
 
+   
+            // binary construction of angle
+            tphi = 0.0;
+            tmp = 1.0;
+            // go no more an 2**48 in the number of bits 
+            il = (loop>48) ? 48:loop;
+            for (k=1; k<il; k++) {
+               tmp *= 0.5;
+               if (bits[k]) tphi += tmp;
+            }
+            // phi = tphi + 0.5*tmp*phi/M_PI;
+   
          }
 
-
-         tphi = 0.0;
-         tmp = 1.0;
-         // go no more an 2**48 in the number of bits 
-         il = (loop>48) ? 48:loop;
-         for (k=1; k<il; k++) {
-            tmp *= 0.5;
-            if (bits[k]) tphi += tmp;
-         }
-         // phi = tphi + 0.5*tmp*phi/M_PI;
          phi = 0.5*phi/M_PI;
 #if 0
          // colorize the landing rays
