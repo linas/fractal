@@ -47,6 +47,14 @@ ContinuedFraction::SetReal (double val)
 /* ------------------------------------------------------------ */
 
 void 
+ContinuedFraction::SetRatio (int n, int d)
+{
+   RatioToContinuedFraction (n,d);
+}
+
+/* ------------------------------------------------------------ */
+
+void 
 ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
 {
    double tmp;
@@ -91,7 +99,7 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
    
          /* Check for termination of the expansion, and 
           * make sure that the continued fraction always has 
-          * an even number of terms */
+          * an even number of terms.  Huh?? Why do we do this?? */
          if (n == 0) {
             if (i%2 == 0) {
                tinued_frac [i] -= 1;
@@ -143,7 +151,7 @@ ContinuedFraction::Print (void)
    int i;
    printf (" ratio %d over %d is continued fraction of %d terms\n", num, denom, nterms);
    for (i=0; i<nterms; i++) { 
-      printf (" term %d is %d \n", i, tinued_frac[i]);
+      printf (" term %d is %d partial=%g\n", i, tinued_frac[i], partial[i]);
    }
 }
 
@@ -281,20 +289,27 @@ double
 ContinuedFraction::ToZRealGap (void)
 {
    int i;
-   double tmp, delta;
+   double tmp, deltahi, deltalo;
 
    if (nterms == 0) return (0);
 
    /* now, work backwards and reconstruct the fraction. */
-   delta = 0.0;
+   deltalo = 0.0;
+   deltahi = 1.0;
    partial[nterms-1] = ((double) tinued_frac[nterms-1]);
    for (i=nterms-2; i>=0; i--) {
-      partial[i] = ((double) tinued_frac[i]) + 1.0 / partial[i+1];
-      tmp = 1.0 / partial[i];
-      delta = (1.0 - delta*tmp)*tmp;
+      tmp = 1.0 / partial[i+1];
+      partial[i] = ((double) tinued_frac[i]) + tmp;
+      deltahi = (1.0 - deltahi*tmp)*tmp;
+      deltalo = (1.0 - deltalo*tmp)*tmp;
    }
+   tmp = 1.0 / partial[0];
+   deltahi = (1.0 - deltahi*tmp)*tmp;
+   deltalo = (1.0 - deltalo*tmp)*tmp;
 
-   return (delta);
+   // return deltalo;
+   // return deltahi;
+   return 0.5* (deltahi-deltalo);
 
 }
 
@@ -981,7 +996,8 @@ double InvZReal_f (void * stru, double val)
    sp = (struct InvZReal_s *) stru;
     
    sp->fp.SetReal (val);
-   retval = sp->fp.ToZReal (sp->zee);
+   // retval = sp->fp.ToZReal (sp->zee);
+   retval = sp->fp.ToFarey ();
 
    return retval;
 }

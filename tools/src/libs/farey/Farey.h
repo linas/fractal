@@ -14,6 +14,7 @@ class ContinuedFraction
    public:
       ContinuedFraction (void);
       void SetReal (double);
+      void SetRatio (int num, int deno);
 
       void Print (void);
       int GetNumTerms (void);
