@@ -13,6 +13,22 @@
 #include "Farey.h"
 #include "FareyTree.h"
 
+void GetNextDyadic (int *n, int *d)
+{
+	static int last_d = 1;
+	static int last_n = 1;
+
+	last_n += 2;
+	if (last_n > last_d)
+	{
+		last_d *= 2;
+		last_n = 1;
+	}
+
+	*n = last_n;
+	*d = last_d;
+}
+
 
 main(int argc, char *argv[])
 {
@@ -45,6 +61,7 @@ main(int argc, char *argv[])
 	{
 		int n,d;
 		fi.GetNextFarey (&n, &d);
+		// GetNextDyadic (&n, &d);
 
 		double x = ((double) n)/ ((double) d);
 		x *= nbins;
@@ -53,7 +70,7 @@ main(int argc, char *argv[])
 		cnt ++;
 	}
 
-	/* Compute the integral of teh distribution */
+	/* Compute the integral of the distribution */
    ContinuedFraction f;
 	double gral = 0.0;
 	for (i=0; i<nbins; i++)

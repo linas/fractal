@@ -21,8 +21,16 @@ double triangle (double x)
 	return 2.0*(1.0-t);
 }
 
+double square (double x)
+{
+	x -= floor (x);
+	if (1.0 > x*2.0) return 0.0;
+	return 1.0;
+}
+
 double bumps (double x)
 {
+	x -= floor (x);
 	if (1.0 > x*3.0) return 0.0;
 	if (2.0 < x*3.0) return 0.0;
 	return triangle (3.0*x);
@@ -138,8 +146,8 @@ double takagi_bumps (double w, double x)
 	double tp = 1.0;
 	for (k=0; k<1000; k++)
 	{
-		// acc += tw* bumps (tp*x);
-		acc += tw* saw (tp*x);
+		acc += tw* bumps (tp*x);
+		// acc += tw* saw (tp*x);
 		tp *= 2.0;
 		tw *= w;
 		if (1.0e-14 > tw) break;
@@ -147,13 +155,51 @@ double takagi_bumps (double w, double x)
 
 	return acc;
 }
+
+double takagi_prime (double w, double x)
+{
+	int k;
+	double acc = 0.0;
+	double tw = 1.0;
+	double tp = 1.0;
+	for (k=0; k<1000; k++)
+	{
+		acc += tw* square (tp*x);
+		tp *= 2.0;
+		tw *= w;
+		if (1.0e-14 > tw) break;
+	}
+
+	return acc;
+}
+
+double takagi_exp (double w, double x)
+{
+	int k;
+	double acc = 0.0;
+	double tw = 1.0;
+	double tp = 1.0;
+	double fact = 1.0;
+	for (k=0; k<1000; k++)
+	{
+		double term = tw / fact;
+		acc += term* triangle (tp*x);
+		tp *= 2.0;
+		tw *= w;
+		fact *= k+1;
+		if (1.0e-14 > term) break;
+	}
+
+	return acc;
+}
+
 main (int argc, char *argv[])
 {
 	int i;
 
 	// int nmax = 512;
 	// int nmax = 431;
-	int nmax = 719;
+	int nmax = 19;
 
 	if (argc <2)
 	{
@@ -172,8 +218,11 @@ main (int argc, char *argv[])
 		// double tw = log (takagi(w,x));
 		// double tw = ttakagi(w,x);
 		// double tw = div_takagi (w, x);
-		double tw = takagi_bumps (w, 0.666*x);
+		// double tw = takagi_bumps (w, x);
+		// double tw = takagi_prime (w, x);
+		double tw = takagi_exp (w, x);
 
-		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts);
+
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 	}
 }
