@@ -35,11 +35,15 @@ man.o: image.h util.h
 util.o:	util.h
 
 brat-gapper.o: brat-gapper.C
+brat-gap-hair.o: brat-gap-hair.C
 
 ################## Dependencies and compile/link #########
 #
+brat-gap-hair: brat.o brat-gap-hair.o util.o
+	$(CC) -o $@ $^ ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
+
 brat-gapper: brat.o brat-gapper.o util.o
-	$(CC) -o brat-gapper $^ ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
+	$(CC) -o $@ $^ ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
 
 inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o
 	$(CC) -o brat brat.o util.o ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++

@@ -2934,104 +2934,6 @@ whack (
 }
 
 
-/*-------------------------------------------------------------------*/
-/* The gap-tongue tries to draw the basic gaps
- * of the continued fraction. Te resulting plots look like wavey hair
- * or wavey seaweed. 
- */
-
-
-void 
-gap_tongue (
-   float  	*glob,
-   int 		sizex,
-   int 		sizey,
-   double	re_center,
-   double	im_center,
-   double	width,
-   int		itermax,
-   double 	renorm)
-{
-   int		i,j;
-
-   int globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) {
-      glob [i] = 0.0;
-   }
-
-	int d,n;  // denom, numerator
-	ContinuedFraction f;
-
-	d = itermax;
-	
-	for (n=1; n<d; n++)
-	{
-		int nn = n;
-		int dd = d;
-
-// #define DO_TONG_RAND
-#ifdef DO_TONG_RAND
-		nn = rand() >> 10;
-		dd = rand() >> 10;
-#endif
-		nn %= dd;
-		if (0 == nn) continue;
-		if (0 == dd) continue;
-
-		int gcf = gcf32 (nn,dd);
-
-		nn /= gcf;
-		dd /= gcf;
-			
-		f.SetRatio (nn,dd);
-
-		double x = (double)nn/(double) dd;
-
-		for (j=0; j<sizey; j++)
-		{
-			double w = (((double) (sizey-j))-0.5)/((double) sizey);
-
-			// double gap = f.ToXEven(w);
-			// double gap = f.ToXPlus(w);
-#define REMOVE_LEADING_TERMS
-#ifdef REMOVE_LEADING_TERMS
-			double gap = f.ToXEven(w);
-			gap -= x;
-			gap *= (double) dd;
-			gap *= (double) dd;
-			gap -= w;
-			gap += w*w;
-			gap -= 0.5*w*w*w;
-			gap += x;
-#endif
-#ifdef WHATEVER
-			double gap = f.ToXOdd(w);
-			gap -= (1.0-x);
-			gap *= (double) dd;
-			gap *= (double) dd;
-			gap += w;
-			gap += w*w;
-			gap -= 0.5*w*w*w;
-			gap += (1.0-x);
-#endif
-
-	// printf ("duude x=%d/%d = %g w=%g gap=%g\n", nn, dd, x, w, gap);
-
-			i = (int) (gap * (double) sizex);
-			if (0>i) continue;
-			if (i>=sizex) continue;
-
-			glob [j*sizex +i] ++;
-		}
-	}
-
-   /* renormalize */
-	double r = ((double) sizex) / ((double) itermax);
-   for (i=0; i<sizex*sizey; i++) 
-	{
-		glob [i] *= r;
-   }
-}
 
 /*-------------------------------------------------------------------*/
 /* The beigen does the Bernoulli-map eigenfunctions,
@@ -3307,10 +3209,6 @@ main (int argc, char *argv[])
    whack (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
    
-   
-   if (!strcmp(progname, "tong"))
-   gap_tongue (data, data_width, data_height,
-                  re_center, im_center, width, itermax, renorm); 
    
    if (!strcmp(progname, "circout")) {
       re_center = 0.0;
