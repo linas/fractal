@@ -113,7 +113,7 @@ void measure_radius (
                break;
             }
          }    
-         printf ("%14.10g	%14.10g	%d\n", rad, closest, loop);
+         // printf ("%14.10g	%14.10g	%d\n", rad, closest, loop);
    
          rad += deltar;
       }
@@ -320,22 +320,23 @@ int
 main (int argc, char *argv[]) 
 {
    double	*data;		/* my data array */
-   unsigned int	nphi, nr;
+   unsigned int	nrecur, nphi, nr;
    double	re_center, im_center, rmin, rmax;
    int		itermax;
    double	epsilon;
    
-   if (5 > argc) {
-      fprintf (stderr, "Usage: %s <n_phi> <n_r> <niter> <epsilon> [<centerx> <centery> <rmin> <rmax>]\n", argv[0]);
+   if (6 > argc) {
+      fprintf (stderr, "Usage: %s <nrecur> <n_phi> <n_r> <niter> <epsilon> [<centerx> <centery> <rmin> <rmax>]\n", argv[0]);
       exit (1);
    }
 
    itermax = 1;
 
-   nphi = atoi (argv[1]);
-   nr = atoi (argv[2]);
-   itermax = atoi (argv[3]);
-   epsilon = atof (argv[4]);
+   nrecur = atoi (argv[1]);
+   nphi = atoi (argv[2]);
+   nr = atoi (argv[3]);
+   itermax = atoi (argv[4]);
+   epsilon = atof (argv[5]);
 
    data = (double *) malloc (nphi*sizeof (double));
 
@@ -351,15 +352,15 @@ main (int argc, char *argv[])
    rmin = 0.043;
    rmax = 0.045;
 
-   if (argc >= 8) {
-      re_center = atof (argv[5]);
-      im_center = atof (argv[6]);
-      rmin = atof (argv[7]);
-      rmax = atof (argv[8]);
+   if (argc >= 9) {
+      re_center = atof (argv[6]);
+      im_center = atof (argv[7]);
+      rmin = atof (argv[8]);
+      rmax = atof (argv[9]);
    }
 
    printf ("# \n");
-   printf ("# measurement of loop=3 radius \n");
+   printf ("# measurement of recurrance=%d bud radius \n", nrecur);
    printf ("# \n");
    printf ("# nphi=%d nr=%d iter=%d eps=%g cent=(%14.10f %14.10f) rmin=%f rmax=%f\n", 
         nphi, nr, itermax, epsilon, re_center, im_center, rmin, rmax);
@@ -368,7 +369,7 @@ main (int argc, char *argv[])
    printf ("# \n");
 
    measure_radius (data, nphi, nr, re_center, im_center,
-           rmin, rmax, epsilon, itermax, 4);
+           rmin, rmax, epsilon, itermax, nrecur);
    // flow_radius (data, nphi, nr, re_center, im_center,
    //          rmin, rmax, epsilon, itermax);
    
