@@ -18,18 +18,11 @@ class ContinuedFraction
       void Print (void);
       int GetNumTerms (void);
 
-      double ToFarey (void);
       double ToReal (void);
-      double ToEReal (double t);
       double ToZReal (double z);
       double ToInvZReal (double z);
-
+      double ToEReal (double t);
       double ToEFraction (double t);
-      double ToEFarey (double t);
-      double ToEFareyGap (double t);
-      double ToSinFarey (double t);
-      double ToTFarey (double t);
-      double ToXFarey (double t);
 
       double ToCosReal (double omega);
       double ToSincReal (double omega);
@@ -41,6 +34,15 @@ class ContinuedFraction
 
       double ToZCnReal (double omega, double z);
       double ToZSnReal (double omega, double z);
+
+      double ToZRealGap (void);
+
+      double ToFarey (void);
+      double ToEFarey (double t);
+      double ToEFareyGap (double t);
+      double ToSinFarey (double t);
+      double ToTFarey (double t);
+      double ToXFarey (double t);
 
       double CFSum (ContinuedFraction *other,
                      double alpha, double beta, double gamma);
@@ -65,6 +67,7 @@ class ContinuedFraction
       int cutoff;           /* used to avoid instability when converting
                              * floating point numbers */
 
+      double partial[32];   /* scratch area of partial values */
       ContinuedFraction *scratch;
 };
 

@@ -217,7 +217,7 @@ ContinuedFraction::ToFarey (void)
 }
 
 /* ------------------------------------------------------------ */
-/* converts continued fraction back to a real number */
+/* Converts continued fraction back to a real number */
 
 double 
 ContinuedFraction::ToReal (void)
@@ -242,7 +242,8 @@ ContinuedFraction::ToReal (void)
 }
 
 /* ------------------------------------------------------------ */
-/* converts continued fraction into real number, with a numerator of z.
+/* Converts continued fraction into real number, 
+ * but with a numerator of z instead of 1.
  */
 
 double 
@@ -268,6 +269,32 @@ ContinuedFraction::ToZReal (double z)
 
    znum += tmp;
    return (znum);
+
+}
+
+/* ------------------------------------------------------------ */
+/* Explicitly computes the size of the gaps in the z-expansion
+ * basically, this is d/dz of ToZReal taken at z=1.0 
+ */
+
+double 
+ContinuedFraction::ToZRealGap (void)
+{
+   int i;
+   double tmp, delta;
+
+   if (nterms == 0) return (0);
+
+   /* now, work backwards and reconstruct the fraction. */
+   delta = 0.0;
+   partial[nterms-1] = ((double) tinued_frac[nterms-1]);
+   for (i=nterms-2; i>=0; i--) {
+      partial[i] = ((double) tinued_frac[i]) + 1.0 / partial[i+1];
+      tmp = 1.0 / partial[i];
+      delta = (1.0 - delta*tmp)*tmp;
+   }
+
+   return (delta);
 
 }
 
@@ -330,7 +357,8 @@ ContinuedFraction::ToEReal (double t)
 
 /* ------------------------------------------------------------ */
 /* I've defined an e-fraction to be the result of the continued fraction
- * where each term is damped by an exponential. Read the code. */
+ * where each term is damped by an exponential. 
+ * Similar but slightly different than the above. Read the code. */
 
 double 
 ContinuedFraction::ToEFraction (double t)
