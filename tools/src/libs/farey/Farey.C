@@ -7,6 +7,7 @@
  * HISTORY:
  * Linas Vepstas January 16 1994
  * Linas Added stuff April 1996
+ * Added xplus/minus in Oct 2004 -- linas
  */
 
 #ifdef LINUX
@@ -247,6 +248,64 @@ ContinuedFraction::ToReal (void)
    real += tmp;
    return (real);
 
+}
+
+/* ------------------------------------------------------------ */
+/* Converts continued fraction into a polynomial in w in last term 
+ * x+(w) = [a1, a2, ... , aN, 1/w]
+ */
+
+double 
+ContinuedFraction::ToXPlus (double w)
+{
+   int i;
+   double tmp;
+
+   tmp = (double) intpart;
+   real = tmp;
+   if (nterms == 0) return (tmp);
+
+	tmp = 1.0 / w;
+
+   /* Now, work backwards and reconstruct the fraction. */
+   for (i=nterms-1; i>=0; i--) {
+      tmp += (double) tinued_frac[i];
+      tmp = 1.0 / tmp;
+   }
+
+   real += tmp;
+   return (real);
+}
+
+/* ------------------------------------------------------------ */
+/* Converts continued fraction into a polynomial in w in last term 
+ * x-(w) = [a1, a2, ... , aN-1, 1, 1/w] 
+ */
+
+double 
+ContinuedFraction::ToXMinus (double w)
+{
+   int i;
+   double tmp;
+
+   tmp = (double) intpart;
+   real = tmp;
+   if (nterms == 0) return (tmp);
+
+	tmp = 1.0 / w;
+	tmp += 1.0;
+	tmp = 1.0 / tmp;
+	tmp += (double) (tinued_frac[nterms-1] -1);
+   tmp = 1.0 / tmp;
+
+   /* Now, work backwards and reconstruct the fraction. */
+   for (i=nterms-2; i>=0; i--) {
+      tmp += (double) tinued_frac[i];
+      tmp = 1.0 / tmp;
+   }
+
+   real += tmp;
+   return (real);
 }
 
 /* ------------------------------------------------------------ */
@@ -888,7 +947,7 @@ printf ("\n\n yooo \n");
             tmp = 1.0;
          }
       } else { tmp = 1.0;}
-#endif BAD_STRAT
+#endif // BAD_STRAT
       if (0 < i) {
          tmp = ((double) tinued_frac[i-1]);
          if (tmp < 1.1) {

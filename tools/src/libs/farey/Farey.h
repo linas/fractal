@@ -7,10 +7,13 @@
  * HISTORY:
  * created Linas Vepstas January 16 1994
  * Added Farey July 1995 -- linas
+ * Added xplus/minus Oct 2004 -- linas
  */
 
 #include <complex.h>
 // #define Complex double __complex__
+// template<typename _Tp> class complex;
+// template<> class complex<double>;
 #define Complex complex<double>
 
 class ContinuedFraction
@@ -24,6 +27,9 @@ class ContinuedFraction
       int GetNumTerms (void);
 
       double ToReal (void);
+		double ToXPlus (double w);
+		double ToXMinus (double w);
+
       double ToZReal (double z);
       double ToInvZReal (double z);
       double ToEReal (double t);
