@@ -69,11 +69,6 @@ onal representation, and the set of conjugate maps is very large.
  representation of the Modular Group.
 \layout Abstract
 
-We conclude by noting that the Riemann Zeta occurs naturally in the analysis,
- and thus we can demonstrate the action of the Modular Group on the Riemann
- Zeta.
-\layout Abstract
-
 This paper is part of a set of chapters that explore the relationship between
  the real numbers, the modular group, and fractals.
 \layout Section
@@ -2449,169 +2444,6 @@ obvious
  that are conjugate to the Tent Map.
 \layout Subsection
 
-A Fractal Symmetry of the Riemann Zeta
-\layout Standard
-
-We can consider other series, such as Dirichlet series, built out of the
- Tent Map.
- These are related to the Takagi Curve through analytic transformations.
- Thus, we define 
-\begin_inset Formula \begin{equation}
-\zeta_{s}(x)\equiv\sum_{n=1}^{\infty}\tau^{n}(x)\; n^{-s}\label{eq:zeta-s}\end{equation}
-
-\end_inset 
-
- By substituting 
-\begin_inset Formula \begin{equation}
-n^{-s}=\frac{1}{\Gamma(s)}\int_{0}^{\infty}y^{s-1}e^{-ny}dy\label{eq:}\end{equation}
-
-\end_inset 
-
- and performing the sum, and making the change-of-variable 
-\begin_inset Formula $w=e^{-y}$
-\end_inset 
-
- one finds that 
-\begin_inset Formula \begin{equation}
-\zeta_{s}(x)=\frac{1}{\Gamma(s)}\int_{0}^{1}\left(-\ln w\right)^{s-1}t_{w}(x)dw\label{eq:}\end{equation}
-
-\end_inset 
-
- Note that a pole in 
-\begin_inset Formula $t_{w}(x)$
-\end_inset 
-
- at 
-\begin_inset Formula $w=1$
-\end_inset 
-
- translates into a pole (with the same residue) at 
-\begin_inset Formula $s=1$
-\end_inset 
-
-.
- Graphically, a picture of this Dirichlet series looks very similar to the
- Takagi curve itself, possibly looking a tad 
-\begin_inset Quotes eld
-\end_inset 
-
-noisier
-\begin_inset Quotes erd
-\end_inset 
-
-; thus, figure 
-\begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
-
-\end_inset 
-
- suffices to visualize this curve.
- Although visually similar, and thus 
-\begin_inset Quotes eld
-\end_inset 
-
-obviously
-\begin_inset Quotes erd
-\end_inset 
-
- self-similar, the transformation properties of this curve are far, far
- messier.
- We get 
-\begin_inset Formula \begin{equation}
-(\zeta_{s}\circ g_{D})(x)=\zeta_{s}(\frac{x}{2})=x+\sum_{k=0}^{\infty}\left(\begin{array}{c}
-s+k-1\\
-s-1\end{array}\right)\left(-\right)^{k}\zeta_{s+k}(x)\label{eq:zeta-g}\end{equation}
-
-\end_inset 
-
- for the simplest relation.
- This can be derived by using the identity 
-\begin_inset Formula \begin{equation}
-\left(\frac{n}{n+1}\right)^{s}=\sum_{k=0}^{\infty}\left(\begin{array}{c}
-s+k-1\\
-s-1\end{array}\right)\left(\frac{-1}{n}\right)^{k}\label{eq:}\end{equation}
-
-\end_inset 
-
- in the expansion for 
-\begin_inset Formula $\zeta_{s}(x/2)$
-\end_inset 
-
-.
- 
-\layout Standard
-
-Certain special values of 
-\begin_inset Formula $x$
-\end_inset 
-
- are interesting.
- For example, 
-\begin_inset Formula $t_{w}(1/3)=2/3(1-w)$
-\end_inset 
-
- and so we get 
-\begin_inset Formula \begin{equation}
-\zeta_{s}\left(\frac{1}{3}\right)=\frac{2}{3}\zeta(s)\label{eq:}\end{equation}
-
-\end_inset 
-
- where 
-\begin_inset Formula $\zeta(s)$
-\end_inset 
-
- is the Riemann Zeta.
- Similarly, we have 
-\begin_inset Formula $\zeta_{s}(1/6)=(2\zeta(s)-1)/3$
-\end_inset 
-
-.
- Using this with equation 
-\begin_inset LatexCommand \ref{eq:zeta-g}
-
-\end_inset 
-
- we find the following relation: 
-\begin_inset Formula \begin{equation}
-\zeta(s)=1+\sum_{k=0}^{\infty}\left(\begin{array}{c}
-s+k-1\\
-s-1\end{array}\right)\left(-\right)^{k}\zeta(s+k)\label{eq:}\end{equation}
-
-\end_inset 
-
- This sum is conditionally convergent, thus we prefer to write 
-\begin_inset Formula $\zeta(s+k)=\zeta(s+k)-1+1$
-\end_inset 
-
- and perform the sum explicitly to get 
-\begin_inset Formula \begin{equation}
-\zeta(s)=1+2^{-s}+\sum_{k=0}^{\infty}\left(\begin{array}{c}
-s+k-1\\
-s-1\end{array}\right)\left(-\right)^{k}\left[\zeta(s+k)-1\right]\label{eq:}\end{equation}
-
-\end_inset 
-
- This equation is interesting because it encapsulates the action of the
- generator 
-\begin_inset Formula $g_{D}$
-\end_inset 
-
- of the Modular Group on the Riemann Zeta.
- However, the equation itself is not 
-\begin_inset Quotes eld
-\end_inset 
-
-new
-\begin_inset Quotes erd
-\end_inset 
-
-, it can also be obtained using entirely classical methods: for example,
- starting with Abramowitz & Stegun equation 6.4.9, the classical series expansion
- for the polygamma function.
- What is novel is that it seems to show a certain funny type of fractal
- self-similarity in the Riemann Zeta.
- 
-\layout Subsection
-
 Miscellany
 \layout Standard
 
@@ -2875,8 +2707,12 @@ t_{w}\left(\frac{1}{2^{n}}\right)=\frac{2}{2^{n}}\;\frac{1-2^{n}w^{n}}{1-2w}\lab
 
 \end_inset 
 
- which is a polynomial of finite degree, without any poles, and thus entire;
- indeed, 
+ which is a polynomial of finite degree, without any poles (there is no
+ pole at 
+\begin_inset Formula $w=1/2$
+\end_inset 
+
+), and thus entire; indeed, 
 \begin_inset Formula $t_{1/2}(2^{-n})=2^{1-n}n$
 \end_inset 
 
@@ -2905,8 +2741,7 @@ t_{w}\left(\frac{1}{3}\right)=\frac{2}{3(1-w)}\label{eq:}\end{equation}
 \begin_inset Formula $|w|>1$
 \end_inset 
 
-.
- 
+, or at least give explicit, finite-form expressions.
 \layout Description
 
 Homework: Show the explicit analytic continuation of the Takagi curve to
@@ -3162,7 +2997,10 @@ sea of chaos
  group the symmetry group that maps islands into islands, for any period
  doubling map? What about the converse? Are there any maps, with islands,
  that do not have the Modular Group as its underlying symmetry? 
-\begin_inset LatexCommand \cite{bar88}
+\layout Standard
+
+This is a sample bibtex reference: 
+\begin_inset LatexCommand \cite{bar88,Iso03}
 
 \end_inset 
 
@@ -3186,6 +3024,7 @@ Note that some chaotic maps are seen to have period-doubling paths to chaos
 \end_inset 
 
 .
+ 
 \layout Standard
 
 
@@ -3197,7 +3036,7 @@ Note that some chaotic maps are seen to have period-doubling paths to chaos
 \layout Standard
 
 I can't figure out how to make bibtex work !!!! and worse, they don't show
- in html! See the DVI/PDF version for refs.
+ in html! See the DVI/PDF version for bibtex references.
 \layout Bibliography
 \bibitem [Man88]{key-3}
 
@@ -3299,5 +3138,5 @@ Chaos and Fractals, New Frontiers of Science
 \layout Bibliography
 \bibitem [Iso03]{Iso03}
 
-this is a bibtex reference
+this is a bibtex reference 
 \the_end
