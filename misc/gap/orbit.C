@@ -115,17 +115,20 @@ int main (int argc, char * argv[])
 	xv = (double *) malloc (nsz*sizeof (double));
 	yv = (double *) malloc (nsz*sizeof (double));
 
-	recur (mat, 6, 6);
+	recur (mat, 3, 3);
 
-	sortme ();
+	// sortme ();
 
 	int i;
 	for (i=0; i<ic; i++)
 	{
+#if 0
 		double xf = InvFarey (xv[i]);
 		double yf = InvFarey (yv[i]);
 		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", xv[i], 0.0, xf, 0.0);
 		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", xv[i], yv[i], xf, yf);
 		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", xv[i], 0.0, xf, 0.0);
+#endif
+		printf ("%8.6g	%8.6g\n", xv[i], yv[i]);
 	}
 }
