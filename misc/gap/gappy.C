@@ -12,28 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* return the greatest common factor */
-int
-gcf32 (int nume, int denom)
-{
-	int t;
-	t = nume % denom;
-	nume = denom;
-	denom = t;
-
-	/* Euclids algorithm for obtaining the gcf */
-	while (0 != denom)
-	{
-		t = nume % denom;
-		nume = denom;
-		denom = t;
-	}
-
-	/* num now holds the GCD (Greatest Common Divisor) */
-	return nume;
-}
-
-#define NV 6
+#define NV 1
 
 main (int argc, char *argv[])
 {
@@ -55,21 +34,28 @@ main (int argc, char *argv[])
 
 		int nn = n;
 		int dd = d;
-		nn = rand();
-		dd = rand();
+#if SHOW_RAND
+		nn = rand() >> 18;
+		dd = rand() >> 18;
 		nn = nn%dd;
+		if (0 == nn) nn=1;
+#endif
+
+		// nn = 3;
+		// dd = 3*n+1;
+
 		gcf = gcf32 (nn,dd);
 		rn = nn/gcf;
 		rd = dd/gcf;
 
 		t = ((double) nn) / ((double) dd);
-   	f.SetRatio (nn,dd);
+   	f.SetRatio (rn,rd);
 
 		for (iw=0; iw<NV; iw++)
 		{
 			w = (double) (iw+1);
 			w /= (double) NV;
-			// w *= 0.01;
+			w *= 0.1;
 			// w *= 100.0;
 			double xm = f.ToXOdd(w);
 			double xp = f.ToXEven(w);
@@ -82,18 +68,22 @@ main (int argc, char *argv[])
 				gap[iw] -= 0.5*w*w;
 				// biggest remaining variation is 0<~ gap < 0.5 *w*w
 				// although for larger w, it should be -0.5*w*w <= gap < 0.5 *w*w
+				gap[iw] /= 0.5*w*w;
 /*
  * In other words,  
- * gap(p/q) = (w/q^2) [2 - w + w^2/2 + T(p/q)]
- * where abs T(p/q) < w^2/2
+ * gap(p/q) = (w/q^2) [2 - w + w^2/2 + (w^2/2) T(p/q)]
+ * where abs T(p/q) < 1
  * for w<=1
  */
 			}
-if (gap[0] > 1.0) {
+if ((gap[0] > 1.0) || (gap[0] < -1.0)) {
 printf ("found one: p/q = %d/%d\n", rn, rd);
 }
 		}
-		printf ("%g	%g	%g	%g	%g	%g	%g\n", 
-			t, gap[0], gap[1], gap[2], gap[3], gap[4], gap[5]);
+		double egap = f.ToGapEven() - f.ToGapOdd() - 1.0;
+		double err = 100.0 * (gap[NV-1] - egap)/gap[NV-1];
+
+		printf ("%g	%g	%g %g	%d	%d\n", 
+			t, gap[NV-1], egap, err, rn , rd);
 	}
 }
