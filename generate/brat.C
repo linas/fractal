@@ -244,9 +244,8 @@ iterate (double re_c,
 
 
 /*-------------------------------------------------------------------*/
-/* this routine fills in the exterior of the mandelbrot set using 
- * the classic algorithm. used for exploring winding number and
- * angle-things 
+/* This routine fills in the exterior of the mandelbrot set with
+ * a shoddy aproximation to the phase.  No good for rays.
  */
 
 void mandelbrot_wind (
@@ -310,6 +309,7 @@ void mandelbrot_wind (
                  re, im, dre, dim, loop);
    
          phi = 0.0;
+         tphi = 0.0;
          if (loop < itermax) {
             /* compute fractional iteration */
             modulus = (re*re + im*im);
@@ -417,23 +417,7 @@ void mandelbrot_wind (
          }
 
          phi = 0.5*phi/M_PI;
-#if 0
-         // colorize the landing rays
-         phi *= 512.0;
 
-         k = (int) phi;
-         if (k%2) { 
-            phi -= (double)k;
-         } else {
-            phi = (double)(k+1) -phi;
-         }
-         phi *= phi;
-         phi *= phi;
-#endif
-
-
-// phi = bits[5];
-// phi = phi_last/(2.0*M_PI);
          glob [i*sizex +j] = phi;
 
          re_position += deltax;
@@ -445,9 +429,10 @@ void mandelbrot_wind (
 }
 
 /*-------------------------------------------------------------------*/
-/* this routine fills in the exterior of the mandelbrot set using 
- * the classic algorithm. used for exploring winding number and
- * angle-things 
+/* This routine fills in the exterior of the mandelbrot set with
+ * the phase/ winding number.  Has a few discontinuities/imperfections,
+ * but is othrewise excellent at drawing rays.  i.e. phase is exactly 
+ * correct.
  */
 
 void mandelbrot_windsimple (
@@ -467,7 +452,7 @@ void mandelbrot_windsimple (
    double	re, im, tmp;
    int		loop;
    double modulus=0.0;
-   double escape_radius = 65131.1;
+   double escape_radius = 1131.1;
    double ren, otl;
    double phi=0.0, phi_last, phi_c, h_phi_c;
    int wind =0;
@@ -548,9 +533,8 @@ void mandelbrot_windsimple (
 
          }
 
-         glob [i*sizex +j] = phi;
-
-#if 0
+#define COLORIZE_RAYS
+#ifdef COLORIZE_RAYS 
          // colorize the landing rays
          phi *= 512.0;
 
@@ -562,9 +546,9 @@ void mandelbrot_windsimple (
          }
          phi *= phi;
          phi *= phi;
+#endif /* COLORIZE_RAYS */
 
          glob [i*sizex +j] = phi;
-#endif
 
          re_position += deltax;
       }
