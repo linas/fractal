@@ -3,11 +3,12 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "bessel.h"
 #include "bag_ener.h"
 
-int main ()
+int main (int argc, char * argv[])
 {
 	int i;
 	double theta;
@@ -16,7 +17,7 @@ int main ()
 	int nfound;
 
 	double t;
-	double baryon_number;
+	double barn, k0_barn;
 	double theo;
 
 	#define NLVLS 1000
@@ -27,15 +28,26 @@ int main ()
 
 	emax = NLVLS * 3;
 
-	theta = 1.0;
+	theta = 0.3;
    emax = 600;
 
-	for (t=0.5; t; t *= 0.5)
+	if (2 > argc)
 	{
-		emax = sqrt (- log (1.0e-15)) / t;
+		printf ("Usage: %s theta\n", argv[0]);
+		exit (1);
+	}
+	theta = atof (argv[1]);
+
+	theo = (theta - sin(theta)*cos(theta)) / M_PI;
+	printf ("theta=%g theo=%g\n", theta, theo);
+
+	for (t=0.5; t; t *= sqrt(0.5))
+	{
+		emax = sqrt (- log (1.0e-17)) / t;
 		if (emax > 3*NLVLS) break;
 	
-		baryon_number = 0.0;
+		barn = 0.0;
+		k0_barn = 0.0;
 		for (k=0; k<emax; k++)
 		{
 			int nfoundp, nfoundn, np, nn;
@@ -52,20 +64,21 @@ int main ()
 			{
 				double en;
 				en = pos_even_levels[i];
-				baryon_number += exp (- t*t*en*en);
+				barn += exp (- t*t*en*en);
 				en = pos_odd_levels[i];
-				baryon_number += exp (- t*t*en*en);
+				barn += exp (- t*t*en*en);
 				en = neg_even_levels[i];
-				baryon_number -= exp (- t*t*en*en);
+				barn -= exp (- t*t*en*en);
 				en = neg_odd_levels[i];
-				baryon_number -= exp (- t*t*en*en);
+				barn -= exp (- t*t*en*en);
 			}
+			if (k==0) k0_barn = barn;
 		}
-		baryon_number *= -0.5;
-	
-		theo = (theta - sin(theta)*cos(theta)) / M_PI;
-		printf ("theta=%g    t=%g    bar=%g  theo=%g\n", 
-			theta, t, baryon_number, theo);
+		barn *= -0.5;
+		k0_barn *= -0.5;
+
+		printf ("t=%8.5g	emax=%g	bar=%g	k0=%g diff=%g\n", 
+			t, emax, barn, k0_barn, barn-k0_barn);
 	}
 	return 0;
 }
