@@ -22,24 +22,13 @@ main () {
    lagWordTable *wt = new lagWordTable;
    lagWordPairTable *pt = new lagWordPairTable;
 
-   char buff[500];
+   char buff[5000];
 
    int this_word_id = 0;
    int last_word_id = 0;
    while (!feof(fh)) {
-      fgets (buff, 500, fh);
-      buff[499] = 0x0;
-
-      // reject the mail headers
-      if (!strncmp (buff, "From", 4)) continue;
-      if (strstr (buff, "From:")) continue;
-      if (strstr (buff, "Date:")) continue;
-      if (strstr (buff, "Subject:")) continue;
-      if (strstr (buff, "To:")) continue;
-      if (strstr (buff, "Re:")) continue;
-      if (strstr (buff, "Status:")) continue;
-      if (strstr (buff, "MIME-Version:")) continue;
-      if (strstr (buff, "Content-Type:")) continue;
+      fgets (buff, 5000, fh);
+      buff[4999] = 0x0;
 
       int i = 0;
       char * word = buff;
