@@ -1,0 +1,24 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'sym.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Di"
+set xlabel "p/q"
+set ylabel "P"
+
+# set yrange [0:]
+
+plot "sym.dat" using 2:3 title "first",\
+     "sym.dat" using 2:4 title "second"
+
+# pause 100
+

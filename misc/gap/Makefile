@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= fdist gappy rdist sway
+EXES= fdist feigen gappy rdist sway sym
 
 all: 	$(EXES)
 
@@ -27,3 +27,5 @@ gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
 sway.o:  sway.C $(LIB)/Farey.o $(INC)/Farey.h
 fdist.o:  fdist.C $(LIB)/FareyTree.o $(INC)/FareyTree.h
 rdist.o:  rdist.C $(LIB)/Farey.o $(INC)/Farey.h
+feigen.o: feigen.C $(LIB)/Farey.o $(INC)/Farey.h
+sym.o: sym.C $(LIB)/Farey.o $(INC)/Farey.h

@@ -1,0 +1,29 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'gap-dist.png'
+
+# set data style linespoints
+set data style lines
+# set data style points
+set key right
+
+set title "Distribution of Teeth Sizes"
+# set xlabel "Log (1- Tooth size)"
+# set ylabel "Log Distribution"
+set xlabel "Tooth size"
+set ylabel "Distribution"
+
+# set yrange [0:]
+
+# plot "gap-dist.dat" using (log(1.0-$1)):(log($2)) title ""
+
+plot "gap-dist.dat" using 1:(600*$2) title "numeric data", \
+     "gap-dist.dat" using 1:(0.5*(1.0/sqrt(1.0-$1))) title "1/sqrt(1-s)"
+
+# pause 100
+

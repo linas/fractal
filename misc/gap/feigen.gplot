@@ -1,0 +1,29 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'feigen.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Eigenfunctions"
+set xlabel "x"
+set ylabel "probability"
+
+# set yrange [0:]
+
+plot "feigen.dat" using 2:3 title "n=1", \
+     "feigen.dat" using 2:4 title "n=2", \
+     "feigen.dat" using 2:5 title "n=3", \
+     "feigen.dat" using 2:6 title "n=4", \
+     "feigen.dat" using 2:7 title "n=5", \
+     "feigen.dat" using 2:($2/(1+3*$2)) title "guess",\
+     "feigen.dat" using 2:($2/(1+4*$2)) title "goose"
+
+# pause 100
+
