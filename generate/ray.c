@@ -21,9 +21,10 @@ ray (double *bin, int nbin)
    double tmp, modulus;
    int *cnt;
    int ibin;
+   double u,v, r;
 
-   nx = ny = 400;
-   itermax = 10000;
+   nx = ny = 800;
+   itermax = 100000;
    escape_radius = 1e10;
 
    delta_re = 3.0/((double) nx);
@@ -42,13 +43,30 @@ ray (double *bin, int nbin)
 
    // walk over pixel grid
    re_c = -2.1;
-   for (i=0; i<nx; i++) {
+   for (i=0; i<nx; i++) 
+      {
 
       if (0 == i%10) printf ("# doing row %d\n", i);
 
       im_c = -1.5;
-      for (j=0; j<ny; j++) {
+      for (j=0; j<ny; j++) 
+         {
 
+         // if we are inside the cardiod, then don't even bother
+         // this saves a significant amount of cpu
+         re = 0.25 - re_c;
+         im = -im_c;
+         u = sqrt (0.5*(re + sqrt (re*re + im*im)));
+         v = 0.5 * im / u;
+         u = 0.5 - u;
+         r = sqrt (u*u + v*v);
+         if (0.5 > r) {
+            im_c += delta_im;
+            continue;
+         }
+
+
+         // initialize the iterators
          re = 0.0;
          im = 0.0;
          dre = 0.0;
@@ -101,7 +119,7 @@ main (int argc, char *argv[])
    int i, nbin;
    double phi;
 
-   nbin = 200;
+   nbin = 400;
 
    map = (double *) malloc (nbin * sizeof(double));
 
