@@ -7,17 +7,17 @@
  * Linas Vepstas Januery 16 1994
  */
 
-#include "Farey.h"
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Farey.h"
 
 /* ------------------------------------------------------------ */
 
-main (argc, argv)
-int argc;
-char *argv[];
+main (int argc, char *argv[])
 {
-   struct Farey *f;
+   ContinuedFraction f;
    double x, y, z, t;
    double delta_t;
    int i, j, n;
@@ -31,13 +31,11 @@ char *argv[];
       exit (1);
    }
 
-   f = CreateFarey();
-
    fil = fopen (argv[1], "w");
    fprintf (fil, "%s %s", argv[2], argv[3]);
 
    /* null terminated string */
-   { char zip=0; fwrite (zip, sizeof(char), 1, fil); }
+   { char zip=0; fwrite (&zip, sizeof(char), 1, fil); }
    fflush (fil);
    
    width = atoi (argv[2]);
@@ -56,8 +54,8 @@ char *argv[];
       for (j=0; j<width; j++){
          nume = 6889*i; 
    
-         RatioToContinuedFraction (f, nume, deno);
-         y = ContinuedFractionToZReal (f, t);
+         f.SetRatio (nume, deno);
+         y = f.ToZReal (t);
          n = (int) y;
          y -= (double) n;
          pixel_row[i] = y;

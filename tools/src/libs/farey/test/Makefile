@@ -9,8 +9,8 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= zgap zgap-check zlist fairy xlist elist flist gap ginv glist sym imap \
-	terms x zscale zinv zmap
+EXES= zgap zgap-check zlist zmap fairy xlist elist flist gap ginv glist sym imap \
+	terms x zscale zinv 
 
 LISTS= fnums enums
 
@@ -91,12 +91,6 @@ zscale: zscale.c $(LIB)/Farey.o $(INC)/Farey.h
 #
 ginv: ginv.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o ginv ginv.c $(LIB)/Farey.o -lm
-
-# zmap
-# 	(Jan 1994) excercise Farey Number converter
-#
-zmap: zmap.c $(LIB)/Farey.o $(INC)/Farey.h
-	$(CC) -o zmap zmap.c $(LIB)/Farey.o -lm
 
 
 # sym
