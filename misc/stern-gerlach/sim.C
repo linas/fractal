@@ -2,7 +2,17 @@
 /*
  * sim.C
  *
- * simulate classical magnetic dipole in stern gerlach magnet
+ * Simulate classical magnetic dipole in stern gerlach magnet.
+ * Input parameters approximate typical experimental setup:
+ * magnetic field = 1000 gauss
+ * magnetic field gradient = 100 gauss/cm
+ * dipole moment = Bohr magneton
+ * mass = Silver Ag
+ * timestep == 6283 timesteps per precession of 2pi.
+ *
+ * Result: It behaves very very classically.
+ *
+ * Linas Vepstas July 2001
  *
  */
 
@@ -11,11 +21,11 @@
 
 main () 
 {
-   double pos_x, pos_z;  // position
-   double vel_x, vel_z;  // veolcity
-   double acc_x, acc_z;  // acceleration
-   double theta, d_theta;  // angle to z axis
-   double phi, d_phi;    // angle to x axis
+   double pos_x, pos_z;  // dipole position
+   double vel_x, vel_z;  // dipole veolcity
+   double acc_x, acc_z;  // dipole acceleration
+   double theta, d_theta;  // dipole angle to z axis
+   double phi, d_phi;    // dipole angle to x axis
    double sin_theta, cos_theta;
    double sin_phi, cos_phi;
    int nprec = 0;        // number of precessions
