@@ -2,8 +2,9 @@
 ;; (load-module  'legendre.scm)
 ;;
 ;; compute driebes eqn (A.33) integral of rescaled legendre's
-;;
-;; 
+;; it defines (I m n)
+;; this works for about n, m < 18 and after that,
+;; start loosing accuracy 
 
 
 ;; define factorial function
