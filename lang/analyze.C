@@ -7,8 +7,15 @@
 //
 // METHODS:
 // The Analyze() method breaks a text up into a series of words,
-// and adds "phrases" of four words to a collection. It also establishes
-// links between phrases.
+//    and adds "phrases" of four words to a collection. It also establishes
+//    links between phrases.
+//
+// The Chain() method chains together phrases based on last word of last
+//    phrase, and first word of next phrase. Only strongest links are
+//    used in the chain.
+//
+// The Dialogue() method uses a short snippet of dialogue to light
+//    up a neural net of nodes.
 //
 // HISTORY:
 // January 1997 Linas Vepstas
@@ -28,9 +35,10 @@ class lagTextAnalysis {
       void Analyze (FILE *fh);
       void Dialogue (FILE *fh);
       void Dump (void);
+      void HillClimb (void);
       void Chain (int);
    protected:
-      void PrintPhrase (int);
+      void PrintPhrase (unsigned int);
 
    private:
       lagWordTable *word_table;
@@ -124,6 +132,8 @@ void lagTextAnalysis :: Analyze (FILE *fh) {
 
 // =====================================================
 
+#define LAG_NUM_CYCLES 7
+
 void lagTextAnalysis :: Dialogue (FILE *fh) {
 
    xref_table -> ComputeWeights ();
@@ -134,46 +144,129 @@ void lagTextAnalysis :: Dialogue (FILE *fh) {
 
    int num_phrases = phrase_table -> GetTableSize();
 
-   phrase_table -> FlipAllWeights ();
-   for (int i=1; i<= num_phrases; i++) {
-      
-      float phrase_activation = phrase_table -> GetWeight (i);
-
-      // a negative activation implies that the current neuron is "hot"
-      // and should be only a source, not a sink.
-      if (0.0 > phrase_activation) {
-
-         phrase_activation = -phrase_activation;
-         // activate first layer of neurons
-         xref_table -> ResetToStart (i);
+   for (int repeat=0; repeat < LAG_NUM_CYCLES; repeat ++) {
+      phrase_table -> FlipAllWeights ();
+      for (int i=1; i<= num_phrases; i++) {
+         
+         float phrase_activation = phrase_table -> GetWeight (i);
    
-         float link_strength = xref_table -> GetNextLinkWeight ();
-         unsigned int ph = xref_table -> GetNextPhrase();
-         while (ph) {
-            float not_hot = phrase_table -> GetWeight (ph);
-
-            // light up the neuron only if its not a hot neuron
-            if (-1.0e-8 <= not_hot) {
-               phrase_table -> AccumStrength (ph, link_strength*phrase_activation);
+         // a negative activation implies that the current neuron is "hot"
+         // and should be only a source, not a sink.
+         if (0.0 > phrase_activation) {
+   
+            phrase_activation = -phrase_activation;
+            // activate first layer of neurons
+            xref_table -> ResetToStart (i);
+      
+            float link_strength = xref_table -> GetNextLinkWeight ();
+            unsigned int ph = xref_table -> GetNextPhrase();
+            while (ph) {
+               float not_hot = phrase_table -> GetWeight (ph);
+   
+               // light up the neuron only if its not a hot neuron
+               if (-1.0e-8 <= not_hot) {
+                  phrase_table -> AccumStrength (ph, link_strength*phrase_activation);
+               }
+               link_strength = xref_table -> GetNextLinkWeight ();
+               ph = xref_table -> GetNextPhrase();
             }
-            link_strength = xref_table -> GetNextLinkWeight ();
-            ph = xref_table -> GetNextPhrase();
          }
       }
+
+      // put all non-hot neurons through the activation (squashing)
+      // function
+      phrase_table -> ActivateAll ();
    }
 
-   // put all non-hot neurons through the activation (squashing)
-   // function
-   phrase_table -> ActivateAll ();
+   HillClimb ();
 }
 
 // =====================================================
 
-void lagTextAnalysis :: PrintPhrase (int phrase_id) {
+void lagTextAnalysis :: HillClimb (void) {
+
+   unsigned int hottest_phrase = 0;
+   float heat = 0.0;
+
+   // find the hottest phrase
+   int num_phrases = phrase_table -> GetTableSize();
+   int i = 0;
+   for (i=1; i<= num_phrases; i++) {
+      float activity = phrase_table -> GetWeight (i);
+      if (activity > heat) {
+         heat = activity;
+         hottest_phrase = i;
+      }
+   }
+
+   // printf ("\n Hill climb hottest is %d %f \n", hottest_phrase, heat);
+   PrintPhrase (hottest_phrase);
+   printf ("\n");
+
+   phrase_table -> AbsAllWeights();
+
+   // setup to avoid infinite loops
+   for (i=0; i<LAG_USED_SIZE; i++) {
+      was_used [i] = 0;
+   }
+
+   // now follow the highest ridge
+   while (0.05 < heat) {
+      heat = 0.0;
+      int found_one = 0;
+      xref_table -> ResetToStart (hottest_phrase);
+   
+      unsigned int phrase = xref_table -> GetNextPhrase();
+      while (phrase) {
+         float activity = phrase_table -> GetWeight (phrase);
+
+/*
+printf ("next ph is %d %f \n", phrase, activity);
+PrintPhrase (phrase);
+printf ("\n");
+*/
+
+         if (activity > heat) {
+            heat = activity;
+            hottest_phrase = phrase;
+            found_one = 1;
+         }
+         phrase = xref_table -> GetNextPhrase();
+      }
+
+      // avoid infinite loops
+      for (i=0; i<LAG_USED_SIZE; i++) {
+         if (hottest_phrase == was_used [i]) {
+            printf ("\n\n");
+            return;
+         }
+         if (!was_used[i]) {
+            was_used[i] = hottest_phrase;
+            // i = LAG_USED_SIZE + 50;  // break out of for loop
+            break;
+         }
+         if (LAG_USED_SIZE-1 == i) return;
+      }
+
+      if (found_one) {
+         // printf ("\n Hill climb next is %d %f \n", hottest_phrase, heat);
+         PrintPhrase (hottest_phrase);
+         printf ("\n");
+      } else {
+         break;
+      }
+   }
+
+   printf ("\n\n");
+}
+
+// =====================================================
+
+void lagTextAnalysis :: PrintPhrase (unsigned int phrase_id) {
    if (!phrase_id) return;
 
    for (int j=0; j<4; j++) {
-      int word_id = phrase_table -> GetElt (phrase_id, j);
+      unsigned int word_id = phrase_table -> GetElt (phrase_id, j);
       char * word = word_table -> GetWordFromID (word_id);
       printf (" %s", word);
    }
@@ -289,10 +382,13 @@ main (int argc, char * argv[]) {
 
    texan -> Dump();
 
+/*
    for (int i=0; i<LAG_TOP_TEN; i++) {
       printf ("\n\n =========== sentance %d =========== \n", i);
       texan -> Chain (i);
    }
+*/
+
 }
 
 // ========================== END OF FILE ==================
