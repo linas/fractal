@@ -1,11 +1,12 @@
 
 /* 
  * FUNCTION:
- * Convert real numbers to Farey numbers, and back
+ * Convert real numbers to Farey numbers, and back.
  * Coded in psuedo-OO style for easy conversion to C++
  *
  * HISTORY:
  * Linas Vepstas January 16 1994
+ * Linas Added stuff April 1996
  */
 
 #ifdef LINUX
@@ -176,6 +177,9 @@ double val;
    CUTOFF = 54321;
    RatioToContinuedFraction (self, n, d);
    CUTOFF = 0x7fffffff;
+
+   INTPART = (int) val;
+   if (0.0 > val) INTPART--;
 }
 
 /* ------------------------------------------------------------ */
@@ -630,6 +634,7 @@ double omega;
 {
    int i, n;
    double tmp;
+   double fomega;
    double retval;
 
    retval = (double) INTPART;
@@ -640,7 +645,13 @@ double omega;
    tmp = 0.0;
    for (i=n-1; i>=0; i--) {
       tmp += (double) TINUED_FRAC[i];
-      tmp = (1.0 + cos (((double) i) * omega)) / tmp;
+/*
+      fomega = ((double) i) * omega;
+      fomega *= 2.0 * M_PI;
+      fomega = 2.0 * M_PI * omega / tmp; 
+*/
+      fomega = 2.0 * M_PI * omega;
+      tmp = (1.0 + cos (fomega)) / tmp;
    }
 
    retval += tmp;
@@ -662,6 +673,7 @@ double omega;
    int i, n;
    double tmp;
    double retval;
+   double fomega;
 
    retval = (double) INTPART;
    if (NTERMS == 0) return (retval);
@@ -671,7 +683,13 @@ double omega;
    tmp = 0.0;
    for (i=n-1; i>=0; i--) {
       tmp += (double) TINUED_FRAC[i];
-      tmp = (1.0 + sin (((double) i) * omega)) / tmp;
+/*
+      fomega = ((double) i) * omega;
+      fomega *= 2.0 * M_PI;
+      fomega = 2.0 * M_PI * omega / tmp; 
+*/
+      fomega = 2.0 * M_PI * omega;
+      tmp = (1.0 + sin (fomega)) / tmp;
    }
 
    retval += tmp;
@@ -692,7 +710,7 @@ struct Farey *self;
 double omega;
 #endif
 {
-   int i, n;
+   int i, j, k, n;
    double tmp;
    double retval;
    double fomega;
@@ -702,13 +720,23 @@ double omega;
 
    if (!scratch) scratch = CreateFarey ();
 
+omega *= 2.0 * M_PI;
    /* now, work backwards and reconstruct the fraction. */
    n = NTERMS;
    tmp = 0.0;
    for (i=n-1; i>=0; i--) {
 
-      SetReal (scratch, ((double) i) * omega);
+/*
+      k = i;
+*/
+      k = 1;
+      for (j=0; j<i; j++) k *= 3;
+
+      SetReal (scratch, ((double) k) * omega);
       fomega = GetFarey (scratch);
+/*
+      fomega *= 2.0 * M_PI;
+*/
 
       tmp += (double) TINUED_FRAC[i];
       tmp = (1.0 + cos (fomega)) / tmp;
@@ -730,7 +758,7 @@ struct Farey *self;
 double omega;
 #endif
 {
-   int i, n;
+   int i, j, k, n;
    double tmp;
    double retval;
    double fomega;
@@ -740,16 +768,106 @@ double omega;
 
    if (!scratch) scratch = CreateFarey ();
 
+omega *= 2.0 * M_PI;
    /* now, work backwards and reconstruct the fraction. */
    n = NTERMS;
    tmp = 0.0;
    for (i=n-1; i>=0; i--) {
 
-      SetReal (scratch, ((double) i) * omega);
+/*
+      k = i;
+*/
+      k = 1;
+      for (j=0; j<i; j++) k *= 3;
+
+      SetReal (scratch, ((double) k) * omega);
       fomega = GetFarey (scratch);
+/*
+      fomega *= 2.0 * M_PI;
+*/
 
       tmp += (double) TINUED_FRAC[i];
       tmp = (1.0 + sin (fomega)) / tmp;
+   }
+
+   retval += tmp;
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
+
+#ifdef ANSI_C
+double ContinuedFractionToZCnReal (struct Farey *self, double omega, double zzz)
+#else
+double ContinuedFractionToZCnReal (self, omega, zzz)
+struct Farey *self;
+double omega, zzz;
+#endif
+{
+   int i, j, k, n;
+   double tmp;
+   double retval;
+   double fomega;
+   double zees[101];
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   n = NTERMS;
+   if (100 < n) n = 100;
+   for (i=0; i<n; i++) {
+      fomega = InvZReal (((double) i) * omega, zzz);
+      fomega *= 2.0 * M_PI;
+      zees[i] = fomega;
+   }
+
+   /* now, work backwards and reconstruct the fraction. */
+   n = NTERMS;
+   tmp = 0.0;
+   for (i=n-1; i>=0; i--) {
+
+      tmp += (double) TINUED_FRAC[i];
+      tmp = (1.0 + cos (zees[i])) / tmp;
+   }
+
+   retval += tmp;
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
+
+#ifdef ANSI_C
+double ContinuedFractionToZSnReal (struct Farey *self, double omega, double zzz)
+#else
+double ContinuedFractionToZSnReal (self, omega, zzz)
+struct Farey *self;
+double omega, zzz;
+#endif
+{
+   int i, j, k, n;
+   double tmp;
+   double retval;
+   double fomega;
+   double zees[101];
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   n = NTERMS;
+   if (100 < n) n = 100;
+   for (i=0; i<n; i++) {
+      fomega = InvZReal (((double) i) * omega, zzz);
+      fomega *= 2.0 * M_PI;
+      zees[i] = fomega;
+   }
+
+   /* now, work backwards and reconstruct the fraction. */
+   n = NTERMS;
+   tmp = 0.0;
+   for (i=n-1; i>=0; i--) {
+
+      tmp += (double) TINUED_FRAC[i];
+      tmp = (1.0 + sin (zees[i])) / tmp;
    }
 
    retval += tmp;
@@ -917,6 +1035,82 @@ double alpha, beta;
    znum += eval;
    return (znum);
 
+}
+
+/* ------------------------------------------------------------ */
+/* computes inverses by binary subdivision.
+ */
+
+#ifdef ANSI_C
+double Inverse (void *cxt, double (*func)(void *, double), double val)
+#else
+double Inverse (cxt, func, val)
+void *cxt;
+double (*func)(void *, double);
+double val;
+#endif
+{
+   double mid, guess;
+   int ires;
+   double delta;
+
+   delta = 0.5;
+   guess = 0.5;
+
+   mid = (*func)(cxt, guess);
+
+   for (ires=0; ires <55; ires ++) {
+      delta *= 0.5;
+
+      if (val > mid) {
+         guess += delta;
+      } else {
+         guess -= delta;
+      }
+      mid = (*func) (cxt, guess);
+   }
+   
+   return guess;
+}
+
+/* ------------------------------------------------------------ */
+/* computes inverse of Zreal mapping */
+
+struct InvZReal_s {
+   struct Farey *fp;
+   double zee;
+};
+
+double InvZReal_f (void * stru, double val) {
+   struct InvZReal_s *sp;
+   double retval;
+
+   sp = (struct InvZReal_s *) stru;
+    
+   SetReal (sp->fp, val);
+   retval = ContinuedFractionToZReal (sp->fp, sp->zee);
+
+   return retval;
+}
+
+double InvZReal (double val, double zzz) {
+   struct InvZReal_s s;
+   double retval;
+   int intpart;
+
+   s.fp = CreateFarey ();
+   s.zee = zzz;
+
+   intpart = (int) val;
+   if (0.0 > val) intpart --;
+   val -= (double) intpart;
+
+   retval = Inverse (((void *) &s), InvZReal_f, val);
+
+   retval += (double) intpart;
+
+   free (s.fp);
+   return retval;
 }
 
 /* ---------------------- END OF FILE ------------------------- */
