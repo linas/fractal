@@ -168,8 +168,9 @@ class SinaiView
 {
    public:
       SinaiView (int, int);
-      void Trace (int nbounces);
+      void Trace (void);
       void TestPattern (void);
+      void ColoredMirrors (void);
       void ToPixels (void);
       void WriteMTV (const char *filename);
    public:
@@ -178,7 +179,10 @@ class SinaiView
 
       double eye[3]; // position of eye
 
-      double absorbtivity;
+      int nbounces;
+      double distance;
+      double reflectivity;
+      double density;
       double radius;
 
    private:
@@ -195,6 +199,8 @@ class SinaiView
 SinaiView::SinaiView (int px, int py)
 {
    int i, j;
+
+   nbounces = 1000;
 
    nx = px;
    ny = py;
@@ -235,7 +241,7 @@ SinaiView::SinaiView (int px, int py)
 /* ==================================== */
 
 void
-SinaiView::Trace(int nbounces)
+SinaiView::Trace(void)
 {
    int i;
    for (i=0; i<nx*ny; i++) 
@@ -270,6 +276,14 @@ SinaiView::Trace(int nbounces)
          sr[i].distance += nearest;
    
          sr[i].Bounce (walls[next_wall]);
+
+         // check for corner conditions
+         if (-1.0 >= sr[i].position[0])
+         {
+//xxx
+         }
+
+         if (sr[i].distance > distance) break;
       }
 
    }
@@ -292,6 +306,40 @@ SinaiView::TestPattern (void)
 void 
 SinaiView::ToPixels (void)
 {
+   double absorbtivity = 1.0 - reflectivity;
+
+   for (int i=0; i<nx*ny; i++)
+   {
+      double red = 0.0;
+      double green = 0.0;
+      double blue = 0.0;
+
+      if ((0 == sr[i].last_wall) || (1 == sr[i].last_wall)) red = 255.0;
+      if ((2 == sr[i].last_wall) || (3 == sr[i].last_wall)) green = 255.0;
+      if ((4 == sr[i].last_wall) || (5 == sr[i].last_wall)) blue = 255.0;
+
+      int ib = 0;
+      for (int iw=0; iw<6; iw++) ib += sr[i].bounces[iw];
+
+      red *= exp (-absorbtivity * ib);
+      green *= exp (-absorbtivity * ib);
+      blue *= exp (-absorbtivity * ib);
+
+      red *= exp (-density * sr[i].distance);
+      green *= exp (-density * sr[i].distance);
+      blue *= exp (-density * sr[i].distance);
+      
+      abgr[i] = 0xff & ((unsigned int) red);
+      abgr[i] |= (0xff & ((unsigned int) green)) << 8;
+      abgr[i] |= (0xff & ((unsigned int) blue)) << 16;
+   }
+}
+
+void 
+SinaiView::ColoredMirrors (void)
+{
+   double absorbtivity = 1.0 - reflectivity;
+
    for (int i=0; i<nx*ny; i++)
    {
       double red = 255.0;
@@ -300,12 +348,15 @@ SinaiView::ToPixels (void)
 
       red *= exp (-absorbtivity * sr[i].bounces[0]);
       red *= exp (-absorbtivity * sr[i].bounces[1]);
+      red *= exp (-density * sr[i].distance);
 
       green *= exp (-absorbtivity * sr[i].bounces[2]);
       green *= exp (-absorbtivity * sr[i].bounces[3]);
+      green *= exp (-density * sr[i].distance);
 
       blue *= exp (-absorbtivity * sr[i].bounces[4]);
       blue *= exp (-absorbtivity * sr[i].bounces[5]);
+      blue *= exp (-density * sr[i].distance);
       
       abgr[i] = 0xff & ((unsigned int) red);
       abgr[i] |= (0xff & ((unsigned int) green)) << 8;
@@ -338,14 +389,14 @@ main ()
 {
    SinaiView v (400,400);
 
-   v.absorbtivity = 0.3;
-   v.radius = 0.6;
+   v.reflectivity = 0.95;
+   v.density = 0.01;
+   v.radius = 0.4;
+   v.distance = 160.0;
 
-   v.Trace(32);
-   v.ToPixels();
+   v.Trace();
+   v.ColoredMirrors();
    v.WriteMTV ("junk.mtv");
-    
-
 }
 
 /* ===================== end of file ====================== */
