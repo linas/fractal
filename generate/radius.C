@@ -381,6 +381,9 @@ automatic (int p, int q)
    int i, peg;
    double ecc;
    double ravg, err;
+   clock_t strt, stp;
+   time_t now;
+   struct tm *ptm;
 
    /* angular location of the bud */
    theta = 2.0 *M_PI * ((double) p / (double) q);
@@ -417,12 +420,22 @@ automatic (int p, int q)
    ang_steps = 10;
    r_steps = 100;
 
-   printf ("# centerx	centery		ravgi		ecc		err		peg	itermax\n");
+   now = time(0);
+   printf ("# \n");
+   printf ("# automatic fit for t=%d/%d\n", p,q);
+   printf ("# %s", ctime(&now));
+   printf ("# \n");
+   printf ("# rsimple=%14.10f\n", br);
+   printf ("# \n");
+   printf ("# \n");
+   printf ("# centerx	centery		ravgi		ecc		err		ra/rb		peg	itermax	secs	time\n");
    for (i=0; i<30; i++) {
       data = (double *) realloc (data, (ang_steps+1)*sizeof(double));
 
+      strt = clock();
       measure_radius (data, ang_steps, r_steps, cx, cy, 
          rmin, rmax, epsilon, itermax, nrecur, 0, ravg, err, peg);
+      stp = clock();
 
       /* resize rmin, rmax so that we don't miss out */
       ecc = 0.5*(rmax - rmin);
@@ -433,8 +446,12 @@ automatic (int p, int q)
       r_steps = (unsigned int) (1.2 * r_steps);
       if (6 < peg) itermax = (unsigned int) (1.5 * itermax);
 
-      printf ("%14.10f	%14.10f	%8.6g	%8.6g	%6.4g	%d	%d\n", 
-          cx, cy, ravg, ecc, err, peg, itermax);
+      now = time(0);
+      ptm = localtime (&now);
+      printf ("%14.10f	%14.10f	%12.10g	%10.8g	%6.4g	%12.10g	%d	%d	%ld	%02d:%02d:%02d\n", 
+          cx, cy, ravg, ecc, err, ravg/br, peg, itermax,
+          (stp-strt)/CLOCKS_PER_SEC, 
+          ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
    }
 }
 
