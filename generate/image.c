@@ -101,14 +101,14 @@ void do_moire (char * filename, int width, int height)
  */
 
 void walk_rect (float *glob, 
-                 unsigned int sizex,  /* width, in pixels */
-                 unsigned int sizey,  /* height, in pixels */
-		 double x_min,        /* left side of pixmap */
-                 double x_max,        /* right side of pixmap */
-                 double y_min,        /* bottom of pixmap */
-                 double y_max,        /* top of pixmap */
-                 float (*callback)(),  /* callback */
-                 void * calldata)     /* static data */
+                unsigned int sizex,  /* width, in pixels */
+                unsigned int sizey,  /* height, in pixels */
+                double x_min,        /* left side of pixmap */
+                double x_max,        /* right side of pixmap */
+                double y_min,        /* bottom of pixmap */
+                double y_max,        /* top of pixmap */
+                float (*callback)(),  /* callback */
+                void * calldata)     /* static data */
 {
    unsigned int	i,j, globlen;
    double	delta_x, delta_y;
@@ -148,14 +148,14 @@ void walk_rect (float *glob,
  */
 
 void walk_tri (float *glob, 
-                 unsigned int sizex,  /* width, in pixels */
-                 unsigned int sizey,  /* height, in pixels */
-		 double x_min,        /* left side of pixmap */
-                 double x_max,        /* right side of pixmap */
-                 double y_min,        /* bottom of pixmap */
-                 double y_max,        /* top of pixmap */
-                 float (*callback)(),  /* callback */
-                 void * calldata)     /* static data */
+               unsigned int sizex,  /* width, in pixels */
+               unsigned int sizey,  /* height, in pixels */
+               double x_min,        /* left side of pixmap */
+               double x_max,        /* right side of pixmap */
+               double y_min,        /* bottom of pixmap */
+               double y_max,        /* top of pixmap */
+               float (*callback)(),  /* callback */
+               void * calldata)     /* static data */
 {
    unsigned int	i,j, globlen;
    double	delta_x, delta_y;
@@ -200,14 +200,14 @@ void walk_tri (float *glob,
  */
 
 void walk_utri (float *glob, 
-                 unsigned int sizex,  /* width, in pixels */
-                 unsigned int sizey,  /* height, in pixels */
-		 double x_min,        /* left side of pixmap */
-                 double x_max,        /* right side of pixmap */
-                 double y_min,        /* bottom of pixmap */
-                 double y_max,        /* top of pixmap */
-                 float (*callback)(),  /* callback */
-                 void * calldata)     /* static data */
+                unsigned int sizex,  /* width, in pixels */
+                unsigned int sizey,  /* height, in pixels */
+                double x_min,        /* left side of pixmap */
+                double x_max,        /* right side of pixmap */
+                double y_min,        /* bottom of pixmap */
+                double y_max,        /* top of pixmap */
+                float (*callback)(),  /* callback */
+                void * calldata)     /* static data */
 {
    unsigned int	i,j, globlen;
    double	delta_x, delta_y;
