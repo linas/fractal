@@ -5,6 +5,9 @@
 
 #include <fcntl.h>
 #include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 
 /*
@@ -12,10 +15,10 @@
  * name==0 => stdin
  */
 
-Open(name, ext)
-char *name, *ext;
+int
+Open(char *name, char *ext)
 {
-    int fd, i, dot, slash;
+    int fd;
 
     if (ext) {
         /* substitute extension */
@@ -46,10 +49,8 @@ char *name, *ext;
  * name==0 => stdin
  */
 
-FILE *Fopen(name, ext)
-char *name, *ext;
+FILE *Fopen(char *name, char *ext)
 {
-    int i, dot, slash;
     FILE *fyle;
 
     if (ext) {
@@ -80,10 +81,8 @@ char *name, *ext;
  * name==0 => stdin
  */
 
-FILE *Fopenr(name, ext)
-char *name, *ext;
+FILE *Fopenr(char *name, char *ext)
 {
-    int i, dot, slash;
     FILE *fyle;
 
     if (ext) {
@@ -114,19 +113,16 @@ char *name, *ext;
  * or try to guess from the file size
  */
 
-static orient = 'l';
+static char orient = 'l';
 
-SetOrient(c)
-char c;
+void
+SetOrient(char c)
 {
     orient = c;
 }
 
-Size(width, height, name, fd, bpp)
-char *name;
-int fd;
-int *width, *height;
-int bpp;
+void
+Size(int *width, int * height, char * name, int fd, int bpp)
 {
     if (*width==0 || *height==0) {
         char buf[100];
@@ -154,7 +150,8 @@ int bpp;
         }
     }
     if (*width==0)
-        Exit("please specify size");
+        fprintf(stderr, "please specify size");
+        exit (1);
     if (*height==0)
         *height = *width;
 }
@@ -165,48 +162,21 @@ int bpp;
  * needed for input from pipes
  */
 
-Read(fd, buf, n)
-int fd, n;
-char *buf;
+int
+Read(int fd, char *buf, int n)
 {
     int i, count;
     for (count=0; count<n; count+=i) {
         i = read(fd, buf+count, n-count);
-        if (i < 0)
-            Error("read");
-        else if (i==0)
+        if (i < 0) {
+            perror( "read");
+            exit(1);
+        }
+        else if (i==0) {
             break;
+        }
     }
     return count;
 }
 
-
-/*
- * Utilities
- */
-
-Malloc(n)
-{
-    int m = malloc(n);
-    if (!m)
-        Exit("can't malloc");
-    return m;
-}
-
-Exit(s)
-char *s;
-{
-    fprintf(stderr, "%s\n", s);
-    exit(1);
-}
-
-Error(s)
-char *s;
-{
-    perror(s);
-    exit(1);
-}
-
-
-
-
+/* ----------------------- END OF FILE ---------------------- */

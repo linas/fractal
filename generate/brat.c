@@ -9,8 +9,10 @@
  * modernize -- Linas Vepstas March 1996
  */
 
-#include <stdio.h>
+#include <malloc.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int extra = 0;
 
@@ -32,11 +34,9 @@ void mandelbrot_out (
    double		re_position, im_position;
    double		re, im, tmp;
    int		loop;
-   double modulus, frac;
+   double modulus=0.0, frac;
    double escape_radius = 3.1;
    double ren, tl;
-   double prev = 0.0;
-   int nprev = 0;
 
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0/ log(2.0);
@@ -120,12 +120,10 @@ void mandelbrot_infinitessimal_out (
    unsigned int	i,j, globlen;
    double		re_start, im_start, delta;
    double		re_position, im_position;
-   int		loop;
-   double modulus, frac;
+   int		loop=0;
+   double modulus=0.0, frac;
    double escape_radius = 300.1;
    double ren, tl;
-   double prev = 0.0;
-   int nprev = 0;
    int inf_count;
 
    ren = log( log (escape_radius)) / log(2.0);
@@ -221,8 +219,6 @@ void dmandelbrot_out (
    double modulus, phi, frac;
    double escape_radius = 3453.5;
    double ren, tl;
-   double prev = 0.0;
-   int nprev = 0;
 
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0/ log(2.0);
@@ -318,7 +314,7 @@ void mandelbrot_inverse (
    double		re, im, tmp;
    int		loop;
    int ire, jim;
-   double modulus, phase, tp, frac;
+   double modulus=0.0, phase, tp, frac;
    double escape_radius = 2000.1;
    double ren, tl;
    ren = log( log (escape_radius)) / log(2.0);
@@ -455,7 +451,7 @@ void mandelbrot_stalk (
    unsigned int	i,j, globlen;
    double		re_start, im_start, delta;
    double		re_position, im_position;
-   double		re, im, tmp, tmpx, tmpy, ltmpx, ltmpy;
+   double		re, im, tmp, tmpx, tmpy;
    double		visited_x, visited_y;
    int		loop;
    
@@ -692,8 +688,8 @@ void circle_in (
    int		itermax,
    double 	time)
 {
-   unsigned int	i,j, globlen;
-   double	re_start, im_start, delta;
+   unsigned int	i, globlen;
+   double	re_start, im_start;
    double	re_position, im_position;
    double	re_omega, im_omega;
    double 	re_K, im_K;
@@ -803,9 +799,9 @@ double		renorm;
 /* the classic algorithm */
 {
    unsigned int	globlen;
-   long		i, j;
+   long		i;
    long		isamp, irow;
-   double	re_start, im_start, delta;
+   double	re_start, im_start;
    double	re_position, im_position;
    double	re, im, tmp;
    int		loop;
@@ -856,7 +852,7 @@ double		renorm;
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       re = im = 0.0;
       for (loop=0; loop < SETTLE_COUNT; loop++) {
@@ -899,9 +895,9 @@ double		renorm;
 /* the classic algorithm */
 {
    unsigned int	globlen;
-   long		i, j;
+   long		i;
    long		isamp, irow;
-   double	re_start, im_start, delta;
+   double	re_start, im_start;
    double	re_position, im_position;
    double	re, im, tmp;
    int		loop;
@@ -952,7 +948,7 @@ double		renorm;
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       re = im = 0.0;
       for (loop=0; loop < SETTLE_COUNT; loop++) {
@@ -996,9 +992,9 @@ int		itermax;
 double		renorm;
 {
    unsigned int	globlen;
-   long		i, j;
+   long		i;
    long		isamp, irow;
-   double	re_start, im_start, delta;
+   double	re_start, im_start;
    double	re_position, im_position;
    double	re, im, tmp;
    int		loop;
@@ -1047,7 +1043,7 @@ double		renorm;
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       re = im = 0.0;
       for (loop=0; loop < LOOP_COUNT; loop++) {
@@ -1207,7 +1203,7 @@ double		renorm;
       im_position[4] = im_position[0];
       re_position[4] = re_position[0] - delta;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       for (j=0; j<5; j++) {
          re[j] = im[j] = 0.0;
@@ -1285,7 +1281,7 @@ double		renorm;
    int		horiz_pix, vert_pix;
    double	xs, ys;
    float	*count;
-   double 	dist, logdelta;
+   double 	logdelta;
    float 	*vecx, *vecy;
    
    
@@ -1336,7 +1332,7 @@ double		renorm;
       im_position[4] = im_position[0];
       re_position[4] = re_position[0] - delta;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       for (j=0; j<5; j++) {
          re[j] = im[j] = 0.0;
@@ -1397,9 +1393,9 @@ int		itermax;
 double		renorm;
 {
    unsigned int	globlen;
-   long		i, j;
+   long		i;
    long		isamp, irow;
-   double	re_start, im_start, delta;
+   double	re_start, im_start;
    double	re_position, im_position;
    double	re, im, tmp;
    int		loop;
@@ -1408,7 +1404,6 @@ double		renorm;
    int		horiz_pix, vert_pix;
    double	xs, ys;
    float	*count;
-   float	*square;
    int last;
    
    
@@ -1440,7 +1435,7 @@ double		renorm;
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       last = 0;
       re = im = 0.0;
@@ -1461,7 +1456,6 @@ double		renorm;
 
    /* renormalize */
    for (i=0; i<globlen; i++) {
-      float tmp;
 
       /* compute average age */
       glob [i] = glob[i] / (double) (LOOP_COUNT*count[i]) ;
@@ -1484,9 +1478,9 @@ double		renorm;
 /* the classic algorithm */
 {
    unsigned int	globlen;
-   long		i, j;
+   long		i;
    long		isamp, irow;
-   double	re_start, im_start, delta;
+   double	re_start, im_start;
    double	re_position, im_position;
    double	re, im, renew, imnew, dist;
    double	reold, imold;
@@ -1526,7 +1520,7 @@ double		renorm;
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       re = re_position;
       im = im_position;
@@ -1589,11 +1583,11 @@ int		itermax;
 double		renorm;
 {
    unsigned int	globlen;
-   long		i, j;
+   long		i;
    long		isamp, irow;
-   double	re_start, im_start, delta;
+   double	re_start, im_start;
    double	re_position, im_position;
-   double	re, im, renew, imnew, dist;
+   double	re, im, renew, imnew;
    int		loop;
    double	x_width, y_width;
    double	x_slope, y_slope, x_off, y_off;
@@ -1629,7 +1623,7 @@ double		renorm;
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       re = im = 0.0;
       for (loop=0; loop < LOOP_COUNT; loop++) {
@@ -1676,11 +1670,11 @@ int		itermax;
 double		renorm;
 {
    unsigned int	globlen;
-   long		i, j;
+   long		i;
    long		isamp, irow;
-   double	re_start, im_start, delta;
+   double	re_start, im_start;
    double	re_position, im_position;
-   double	re, im, renew, imnew, dist;
+   double	re, im, renew, imnew;
    int		loop;
    double	x_width, y_width;
    double	x_slope, y_slope, x_off, y_off;
@@ -1716,7 +1710,7 @@ double		renorm;
       im_position = BBOX_IM_SLOPE * xs + BBOX_IM_CEPT;
       re_position = BBOX_RE_SLOPE * ys + BBOX_RE_CEPT;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       re = im = 0.0;
       for (loop=0; loop < LOOP_COUNT; loop++) {
@@ -1762,9 +1756,9 @@ int		itermax;
 double		renorm;
 {
    unsigned int	globlen;
-   long		i, j;
+   long		i;
    long		isamp, irow;
-   double	re_start, im_start, delta;
+   double	re_start, im_start;
    double	re_position, im_position;
    double	re, im, tmp;
    int		loop;
@@ -1813,7 +1807,7 @@ double		renorm;
       if (vopix >= sizey) vopix = sizey-1;
       loco = vopix*sizex + hopix;
 
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       re = re_position;
       im = im_position;
@@ -1861,9 +1855,9 @@ int		itermax;
  */
 {
    unsigned int	globlen;
-   long		i, j;
-   long		isamp, irow;
-   double	re_start, im_start, delta;
+   long		i;
+   long		irow;
+   double	re_start, im_start;
    double	re_position, im_position;
    double	re, im, tmp;
    int		loop;
@@ -1890,7 +1884,7 @@ int		itermax;
       im_position = y_width * drand48() + im_start;
       re_position = x_width * drand48() + re_start;
    
-      if (i%(irow)==0) printf(" start row %d\n", i/irow);
+      if (i%(irow)==0) printf(" start row %ld\n", i/irow);
    
       re = im = 0.0;
       for (loop=0; loop < itermax; loop++) {
@@ -2058,20 +2052,19 @@ main (int argc, char *argv[])
          sprintf (buff, "%s%d", argv[1], i);
          if ( (fp = Fopen (buff, ".flo")) == NULL) {
             printf (" File open failure for %s \n", buff);
-            return;
+            return 1;
          }
          fprintf (fp, "%d %d\n", data_width, data_height);
          fwrite (data, sizeof(float), data_width*data_height, fp);
          fclose (fp);
       }
-      return;
+      return 0;
    }
    
    /* ---------------------------------------------------- */
    /* make a movie */
    if (!strcmp(argv[0], "circmov")) {
       
-#define NFRAMES 240
       for (i=0; i<NFRAMES; i++) {
          printf (" doing frame %d of %d \n", i, NFRAMES);
          tmp = (((double) i) +0.25) / ((double) NFRAMES);
@@ -2094,32 +2087,32 @@ main (int argc, char *argv[])
          sprintf (buff, "%s%d", argv[1], i);
          if ( (fp = Fopen (buff, ".flo")) == NULL) {
             printf (" File open failure for %s \n", buff);
-            return;
+            return 1;
          }
          fprintf (fp, "%d %d\n", data_width, data_height);
          fwrite (data, sizeof(float), data_width*data_height, fp);
          fclose (fp);
       }
-      return;
+      return 0;
    }
    
    /* dump the floating point data */
    if ( (fp = Fopen (argv[1], ".flo")) == NULL) {
-      printf (" File open failure for %s\n", argv[1]);
-      return;
+      printf (" File open failure for %s.flo\n", argv[1]);
+      return 1;
    }
    fprintf (fp, "%d %d\n", data_width, data_height);
    fwrite (data, sizeof(float), data_width*data_height, fp);
    fclose (fp);
    
    if ( (fp = Fopen (argv[1], ".txt")) == NULL) {
-      printf (" File open failure \n");
-      return;
+      printf (" File open failure for %s.txt\n", argv[1]);
+      return 1;
    }
    fprintf (fp, "# Mandelbrot interior\n");
    fprintf (fp, "# floating point values, one per pixel, (0<x<1); \n");
    fprintf (fp, "# width: %d height: %d \n", data_width, data_height);
-   fprintf (fp, "width %d height: %d \n", data_width);
+   fprintf (fp, "width %d height: %d \n", data_width, data_height);
    fprintf (fp, "height %d \n", data_height);
    fprintf (fp, "# Center, Real Part = %f \n", re_center);
    fprintf (fp, "# Center, Imaginary Part = %f \n", im_center);
