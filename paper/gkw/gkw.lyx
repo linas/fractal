@@ -2500,18 +2500,20 @@ This also means that Bournoulli map also makes for a good toy example of
 The Gauss-Kuzmin-Wirsing Operator
 \layout Standard
 
-The iterated map is 
+The map that truncates continued fractions is 
 \begin_inset Formula \[
 h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
 
 \end_inset 
 
- The FP operator for this map is the GKW.
- Blah Blah.
- Give the usual expression of matrix elements.
- Give the connection to Riemann Zeta.
- Give the collection of interesting summations.
- Give the Riemann Hypothesis as a vector equation.
+ It is connected to the Riemann Zeta by a Mellin Transform:
+\begin_inset Formula \[
+\zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\]
+
+\end_inset 
+
+The Frobenius-Perron operator for this map is known as the Gauss-Kuzmin-Wirsing
+ (GKW) Operator, and is represented by.
  
 \layout Standard
 
@@ -2521,6 +2523,14 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
 
 \end_inset 
 
+ Thus, the Riemann zeta can be written under a change of variable as
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[U_{h}x^{s-1}\right]\]
+
+\end_inset 
+
+ and thus it seems that a better understanding of GKW may shed light on
+ the Riemann Hypothesis.
  There is one known eigenvector, 
 \begin_inset Formula $f(x)=1/(1+x)$
 \end_inset 
@@ -2529,13 +2539,656 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
  The others do not seem to be (by combinatorial search) any simple combination
  or summation of simple functions, including the digamma, and etc.
  Provide the details.
- We do have the identities 
+ 
+\layout Standard
+
+Todo:Blah Blah.
+ Give the usual expression of matrix elements.
+ Give the connection to Riemann Zeta.
+ Give the collection of interesting summations.
+ Give the Riemann Hypothesis as a vector equation.
+ 
+\layout Subsection
+
+Assorted Algebraic Identities
+\layout Standard
+
+This section lists an assortement of random algebraic results, none paricularly
+ deep or interesting.
+ These are listed here mostly for the sake of completeness.
+ First, we notice that adjacent terms in the series can be made to cancel
+ by shifting the series by one:
+\layout Standard
+
+
 \begin_inset Formula \[
-\left[U_{h}x^{n}\right](x)=\]
+\left[U_{h}f\right](x)-\left[U_{h}f\right](x+1)=\frac{1}{(1+x)^{2}}f\left(\frac{1}{1+x}\right)\]
 
 \end_inset 
 
+ which holds for any function 
+\begin_inset Formula $f(x).$
+\end_inset 
 
+ Thus, if 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ is an eigenvector, so that 
+\begin_inset Formula $U_{h}\rho=\lambda\rho$
+\end_inset 
+
+, then it would also solve 
+\begin_inset Formula \[
+\frac{1}{(1+x)^{2}}\rho\left(\frac{1}{1+x}\right)=\lambda\left(\rho(x)-\rho(+1)\right)\]
+
+\end_inset 
+
+This can be solved easily to get the zeroth eigenvector 
+\begin_inset Formula \[
+\rho_{0}(x)=\frac{1}{\ln2}\;\frac{1}{1+x}\]
+
+\end_inset 
+
+ which satisfies 
+\begin_inset Formula $[U_{h}\rho_{0}](x)=\rho_{0}(x)$
+\end_inset 
+
+ and the normalization is given by requiring 
+\begin_inset Formula \[
+\int_{0}^{1}\rho_{0}(x)\, dx=1\]
+
+\end_inset 
+
+ A reflection identity: 
+\begin_inset Formula $f(x)=1-(1+x)^{-2}$
+\end_inset 
+
+ satisfies 
+\begin_inset Formula $U_{h}f=1-f$
+\end_inset 
+
+.
+\layout Standard
+
+Acting on the monmial, one gets 
+\begin_inset Formula \[
+\left[U_{h}x^{k}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{k+2}}=\frac{(-)^{k+2}}{(k+1)!}\psi^{(k+1)}(1+x)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\psi^{(k)}(x)$
+\end_inset 
+
+ is the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th derivative of the Gamma function.
+ The true difficulty of finding the solution to GKW becomes clear when the
+ search leads one to start discovering complicated identities, such as 
+\begin_inset Formula \[
+\sum_{m=1}^{\infty}\,\frac{1}{m^{2}}\psi^{(1)}\left(1+\frac{1}{m}+x\right)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{2}}\psi^{(1)}\left(\frac{1}{n+x}+1\right)\]
+
+\end_inset 
+
+ or curiosities such as 
+\begin_inset Formula $f(x)=(1+ax)^{2}$
+\end_inset 
+
+ gives 
+\begin_inset Formula $U_{h}f=\psi^{(1)}(1+x+a)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+For 
+\begin_inset Formula $f(x)=(1+nx)^{-2}-1$
+\end_inset 
+
+ one gets 
+\begin_inset Formula $U_{h}f=-\sum_{k=1}^{n}(x+k)^{-2}$
+\end_inset 
+
+
+\layout Standard
+
+We have some conditionally convergent series: 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}\,(-)^{k}\,\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\zeta(k+m+2)=1\]
+
+\end_inset 
+
+ which holds for any integer 
+\begin_inset Formula $m$
+\end_inset 
+
+.
+ We also have series such as 
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}e^{-tk}=\frac{1}{2}\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)e^{-tk}=\frac{3}{4}\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)(k+3)e^{-tk}=\frac{7}{4}\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)(k+3)(k+4)e^{-tk}=\frac{45}{8}\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)(k+3)(k+4)(k+5)e^{-tk}=\frac{93}{4}\]
+
+\end_inset 
+
+ Its not clear what the general expression for forms of the above type is.
+ Similarly, if we let 
+\begin_inset Formula \[
+S_{m}\equiv\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}\frac{(k+m+1)!}{(k+1)!}\left[\zeta(k+m+2)-1\right]e^{-tk}\]
+
+\end_inset 
+
+ then we find 
+\begin_inset Formula $S_{0}=1/2$
+\end_inset 
+
+, 
+\begin_inset Formula $S_{1}=1/4$
+\end_inset 
+
+, 
+\begin_inset Formula $S_{2}=1/4$
+\end_inset 
+
+, 
+\begin_inset Formula $S_{3}=3/8$
+\end_inset 
+
+ and 
+\begin_inset Formula $S_{4}=3/4$
+\end_inset 
+
+ but its again not clear what the general expression might be.
+ The above sums are generated by considering 
+\begin_inset Formula \[
+\psi(1+z)=\frac{-1}{1+z}+1-\gamma+\sum_{m=0}^{\infty}(-)^{m}\left[\zeta(m+2)-1\right]z^{m+1}\]
+
+\end_inset 
+
+ and then writing 
+\begin_inset Formula $z^{m+1}=(z+1-1)^{m+1}=\sum_{k=0}^{m}(-)^{m-k}\left(\begin{array}{c}
+m\\
+k\end{array}\right)(z+1)^{k}$
+\end_inset 
+
+
+\layout Subsection
+
+Numeric Attacks
+\layout Standard
+
+One can mount numeric attacks on GKW.
+ One can find, for instance, that 
+\begin_inset Formula \[
+\rho_{1}(x)\approx\frac{-3}{4}+\frac{7}{4}\frac{1}{(1+x)^{5/2}}\]
+
+\end_inset 
+
+ is accurate to about one or two percent over the domain 
+\begin_inset Formula $x\in[0,1]$
+\end_inset 
+
+.
+ It is associated with an eigenvalue 
+\begin_inset Formula $\lambda_{1}\approx0.3025$
+\end_inset 
+
+
+\layout Subsection
+
+Polynomial Representation
+\layout Standard
+
+One can attempt to solve GKW by working in the polynomial represntation.
+ One possible choise is to make one's Taylor expansion about 
+\begin_inset Formula $x=0$
+\end_inset 
+
+, but this turns out to be a very poor choice, as we shall soon see.
+ Thus, if we write 
+\begin_inset Formula $U_{h}f=g$
+\end_inset 
+
+ and substitute a Taylor's expansion for 
+\begin_inset Formula $f$
+\end_inset 
+
+ and 
+\begin_inset Formula $g$
+\end_inset 
+
+, we get 
+\begin_inset Formula \[
+\frac{g^{(m)}(0)}{m!}=\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}\,(-)^{m}\;\frac{(k+m+1)!}{m!\,(k+1)!}\,\zeta(k+m+2)\]
+
+\end_inset 
+
+ or, adopting the bra-ket notation introduced earlier, we have 
+\begin_inset Formula \[
+\left\langle m\left|U_{h}\right|k\right\rangle =(-)^{m}\;\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\,\zeta(k+m+2)\]
+
+\end_inset 
+
+ where we've replaced the factorials by the binomial coefficient that they
+ form.
+ Unfortuantely, this is clearly a very poorly conditioned matrix.
+ One can make some progress, if one wishes, by applying a regulator and
+ using Levin-type sequence accelaration techniques.
+ One can thus find a number of curious identities, some of which we've listed
+ previously.
+ However, the difficulty of working with divergent sums seems to outweigh
+ any advantages given by the relatively simple form of the matrix elements.
+ Thus, we are lead to consider the matrix elements for a polynomial expansion
+ about 
+\begin_inset Formula $x=1$
+\end_inset 
+
+.
+ These are far more complex, but give a very well-conditioned matrix.
+ These are: 
+\begin_inset Formula \[
+G_{mn}=\sum_{k=0}^{n}(-)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\,\left[\zeta(k+m+2)-1\right]\]
+
+\end_inset 
+
+ satisfying 
+\begin_inset Formula \[
+(-)^{m}\frac{g^{(m)}(1)}{m!}=\sum_{n=0}^{\infty}G_{mn}(-)^{n}\frac{f^{(n)}(1)}{n!}\]
+
+\end_inset 
+
+ Inserting this into the integral expression for the Riemann Zeta gives
+ 
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-s\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\frac{G_{mn}(-)^{n}}{(m+1)(m+2)}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)\]
+
+\end_inset 
+
+ Let us then do each sum bit by bit.
+ Using 
+\begin_inset Formula $t_{n}$
+\end_inset 
+
+to denote the intermediate sum, 
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)t_{n}\]
+
+\end_inset 
+
+ one gets 
+\begin_inset Formula \begin{eqnarray*}
+t_{n} & = & \sum_{m=0}^{\infty}\frac{G_{mn}}{(m+1)(m+2)}\\
+ & = & 1-\gamma+\sum_{k=1}^{n}(-)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left[\frac{1}{k}+\frac{\zeta(k+1)}{k+1}\right]\end{eqnarray*}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\gamma=0.577...$
+\end_inset 
+
+ is the Euler-Mascheroni Constant.
+ We note that for large 
+\begin_inset Formula $n$
+\end_inset 
+
+, 
+\begin_inset Formula $t_{n}\rightarrow1/2(n+1)$
+\end_inset 
+
+ motivating us to define 
+\begin_inset Formula $a_{n}=t_{n}-1/2(n+1)$
+\end_inset 
+
+ so that 
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)a_{n}\]
+
+\end_inset 
+
+ The 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ are small and seem to be bounded and osicillatory.
+ The first few are approximately equal to 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="9" columns="2">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $n$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-0.07722...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-0.004749...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.0003661...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.0003760...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.0001430...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3.394...e-5
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+6
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-4.8...e-7
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+7
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-6.77..e-6
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+ 
+\layout Standard
+
+Numerically, it appears that 
+\begin_inset Formula $\left|a_{n}\right|\sim<\exp\left(-4\sqrt{n+1}\right)$
+\end_inset 
+
+ at least for 
+\begin_inset Formula $n\leq40$
+\end_inset 
+
+.
+ The 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+appear naturally in the Taylor's expansion for the Gamma function, and so
+ one finds 
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}a_{n}z^{n}=\frac{1}{1-z}+\frac{\ln(1-z)}{z}\left(\frac{1}{1-z}-\frac{1}{2}\right)+\frac{1}{2}\ln\Gamma\left(\frac{1}{1-z}\right)\]
+
+\end_inset 
+
+ Some curious values for this sum are 
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}a_{n}=\ln\sqrt{2\pi}-1=-0.081061467...\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}a_{n}2^{-n}=2-3\ln2=-0.079441542...\]
+
+\end_inset 
+
+ Its equally curious that the other variation on the expression is even
+ more trival, namely 
+\begin_inset Formula \[
+\left(1-x\right)^{s-1}=\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)x^{n}\]
+
+\end_inset 
+
+ And so one is left to wonder what the function 
+\begin_inset Formula \[
+\mu(s;x)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)a_{n}x^{n}\]
+
+\end_inset 
+
+ might be like, and whether there are additional Umbral-Calculus-like expression
+s that can be found.
+ One can try to recast the expression by replacing the binomial coefficient
+ with a power series, making use of Sterling Numbers.
+ That is, we write 
+\begin_inset Formula \[
+\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)=\frac{(s-1)_{n}}{n!}=\frac{1}{n!}\sum_{k=0}^{n}\left\{ \begin{array}{c}
+n\\
+k\end{array}\right\} (s-1)^{k}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $(x)_{n}$
+\end_inset 
+
+ is the falling Pochammer symbol, and 
+\begin_inset Formula $\left\{ \begin{array}{c}
+n\\
+k\end{array}\right\} $
+\end_inset 
+
+ is the Sterling Number of the First Kind.
+ However, pursuing this line does not seem to lead to any particularly tractable
+ expressions.
+ 
+\layout Standard
+
+While on the topic of Umbral relations, one also has the curious function
+ 
+\begin_inset Formula \[
+Q(z)=\sum_{n=0}^{\infty}\left(\begin{array}{c}
+n+1\\
+z-1\end{array}\right)\left[\zeta(n+2)-1\right]\]
+
+\end_inset 
+
+ which has the curious properties that 
+\begin_inset Formula $Q(n)=\zeta(n)$
+\end_inset 
+
+ for all integers 
+\begin_inset Formula $n\geq2$
+\end_inset 
+
+.
+ The pole is absent: 
+\begin_inset Formula $Q(1)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $Q(n)=0\;\forall\textrm{integers }n\leq0$
+\end_inset 
+
+.
+ The analytic structure of 
+\begin_inset Formula $Q(z)$
+\end_inset 
+
+ is unclear.
 \layout Section
 
 The Singular Sawtooth of the First Kind
