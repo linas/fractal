@@ -561,7 +561,7 @@ XXX write the intro again:...
  XXX also notice that the tree spans an inf-sup interval which is why this
  is an interval map and notice that trees don't span any arbitrary interval,
  but very specific intervals.
- 
+ XXX
 \layout Standard
 
 It should be immediately apparent from the picture of the Question Mark
@@ -1730,12 +1730,26 @@ This property is the fundamental property of self-similar objects and fractals
  having this set of symmetries.
 \layout Subsection
 
-The Set-Theoretic Representation of the Modular Group
+Set-Theoretic Representations of the Modular Group
 \layout Standard
 
-The canonical representation of the modular group elements by Mobius transforms
- is in fact a set-theoretic representation of the modular group.
- That is, let 
+Groups are normally represented in terms of thier action on a vector space
+ 
+\begin_inset Formula $V$
+\end_inset 
+
+, that is, in terms of a subgroups of 
+\begin_inset Formula $GL(V)$
+\end_inset 
+
+.
+ However, one can more broadly define a 
+\emph on 
+set theoretic representation
+\emph default 
+ of a group, the reresentation of a group according to the actions of a
+ function on a set.
+ To be precise, let 
 \begin_inset Formula $X$
 \end_inset 
 
@@ -1808,10 +1822,36 @@ ds to the self-map:
 \end_inset 
 
 .
- 
+ Clearly, the action of the semigroup of shrinking interval maps discussed
+ above is such a set theoretic representation, where the set 
+\begin_inset Formula $X$
+\end_inset 
+
+ is the unit interval, and 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is given by the function 
+\begin_inset Formula $\gamma_{C}(x)$
+\end_inset 
+
+.
 \layout Standard
 
-Clearly, the canonical map 
+What about the whole group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ instead of just the shrinking maps? Unfortunately, we are at a point in
+ the development which seems simple but can in fact lead to considerable
+ confusion.
+ There are in fact a number of related representations which superficially
+ seem to be similar but are not the same.
+ Some of these representations work very well in the problem of describing
+ the self-similarities of fractals, and some do not.
+\layout Standard
+
+First, let us consider the canonical map 
 \begin_inset Formula \[
 \rho:\left(\begin{array}{cc}
 a & b\\
@@ -1819,7 +1859,178 @@ c & d\end{array}\right)\mapsto\frac{ax+b}{cx+d}\]
 
 \end_inset 
 
- is such a group homomorphism for the modular group.
+ As developed in all classical texts on modular forms, it is clearly a group
+ isomorphism for the projective group of matrices with unit determinant
+ 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ The canonical map is a set-theoretic representation, where the set 
+\begin_inset Formula $X$
+\end_inset 
+
+ is taken to be the complex upper-half plane 
+\begin_inset Formula $\mathbb{H}^{+}=\{ z\in\mathbb{C}\;\mbox{ s.t. }\;\textrm{Im }z>0\}$
+\end_inset 
+
+.
+ However, our attention here has so far been not on what lies above the
+ real axis, but what lies on the real axis.
+ In the traditional development, one starts by defining the 
+\emph on 
+fundamental domain
+\emph default 
+ on the complex plane, a hyperbolic triangle (more precisely, the fundamental
+ domain is the 
+\emph on 
+free regular set 
+\emph default 
+of the group action of 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset 
+
+ on 
+\begin_inset Formula $\mathbb{H}^{+}$
+\end_inset 
+
+; we will use the the terminology of the traditional development in the
+ remainder of this paragraph without first defining the meaning.
+ We refer the reader to a good book; however, the traditional development
+ makes little impact on the topic at hand, and so we will be curt.) The hyperboli
+c triangle that is the fundamental domain always has one of its vertices
+ located at infinity or on the real number line 
+\begin_inset Formula $\mbox{Im }z=0$
+\end_inset 
+
+.
+ This vertex is called the 
+\emph on 
+cusp
+\emph default 
+.
+ In fact, it can be shown that the cusp always lies on a rational number
+ (when not at infinity).
+ For any given rational, there are in fact a 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset 
+
+'s worth of fundamental domains that share that cusp.
+ These are in fact easy to find: if 
+\begin_inset Formula $\gamma\in PSL(2,\mathbb{Z})$
+\end_inset 
+
+ represents the group element that maps the fundamental domain to the triangle
+ with a cusp at 
+\begin_inset Formula $p/q=a/c$
+\end_inset 
+
+, then 
+\begin_inset Formula $\gamma T^{n}$
+\end_inset 
+
+ for 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset 
+
+, and 
+\begin_inset Formula $T(z)=z+1$
+\end_inset 
+
+ is the comple set of group elements of 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset 
+
+ that map the fundamental domain to the same cusp.
+ That is, since 
+\begin_inset Formula $\left(\begin{array}{cc}
+a & b\\
+c & d\end{array}\right)$
+\end_inset 
+
+ maps the fundamental domain to a cusp at 
+\begin_inset Formula $a/c$
+\end_inset 
+
+, then so does 
+\begin_inset Formula $\left(\begin{array}{cc}
+a & b+na\\
+c & d+nc\end{array}\right)$
+\end_inset 
+
+ for any 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset 
+
+.
+ Thus, if we want to, we can completely and exhaustively enumerate the group
+ elements of 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset 
+
+ based on thier action on the cusp: There is a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+'s worth of cusps (to which we add the cusp at infinity, 
+\emph on 
+i.e.
+
+\emph default 
+ 
+\begin_inset Formula $c=0$
+\end_inset 
+
+), and a 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset 
+
+'s worth maps that share that cusp; and thus we've enumerated 
+\emph on 
+all
+\emph default 
+ of 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset 
+
+ with 
+\begin_inset Formula $\mathbb{Q}\times\mathbb{Z}$
+\end_inset 
+
+.
+ 
+\series bold 
+\emph on 
+Although this enumeration seems superficially similar to the enumeration
+ of shrinking intervals given above, it is not at all the same thing
+\series default 
+\emph default 
+.
+ In particular, when considered as a map of te unit interval to some other
+ interval, the Mobius transform 
+\begin_inset Formula $(ax+b)/(cx+d)$
+\end_inset 
+
+ breaks down when it has a pole in the unit interval, that is, when 
+\begin_inset Formula $-1\le c/d\le0$
+\end_inset 
+
+, because points near that pole on the unit interval get mapped to points
+ far, far away.
+ The set of self-similarities of the Minkowski Question Mark do not include
+ such a map.
+ The Question Mark is defined only on the unit interval, or, at best, as
+ a (quasi-)periodic function.
+ Thus we have shown that the naive conflation of the concepts from the tradition
+al development of the action modular group with the self-similarity of fractals
+ can lead one into trouble.
+ Thus, some attention to detail is required.
+\layout Standard
+
+xxxx
+\layout Standard
+
+modular group.
  Not only is it commutative, but it is also holds for all elements of the
  modular group.
  The set 
@@ -1838,13 +2049,8 @@ c & d\end{array}\right)\mapsto\frac{ax+b}{cx+d}\]
 \begin_inset Formula $\mathbb{R}$
 \end_inset 
 
-, although when studying modular forms, it is usually taken as the complex
- upper-half plane 
-\begin_inset Formula $H^{+}=\{ z\in\mathbb{C}\, s.t.\,\textrm{Im}z\geq0\}$
-\end_inset 
-
-.
- 
+, although when studying modular forms, it is usually taken as the .
+ Adelic 
 \layout Standard
 
 The Minkowski Question Mark suggests that there is another such representation,
