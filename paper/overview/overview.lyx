@@ -2851,10 +2851,12 @@ sea of chaos
  that do not have the Modular Form symmetry? 
 \layout Standard
 
-What about Misiurewicz points?
+What about Misiurewicz points? Misiurewicz points on the M-set are the pre-perio
+dic points.
+ As such we expect to be able to label them in some way with xxx ???
 \layout Section
 
-Distributions, Permutations
+Distributions 
 \layout Standard
 
 Blah blah blah.
@@ -2962,15 +2964,46 @@ Below is another curious picture, where we've relabelled the x axis by passing
 \layout Standard
 
 This function appears to vanish only at the dyadics.
- Note the superficial resemblance to the Takagi-Landsberg curve (Teiji Tagaki,
- circa 1900) 
+ Note the superficial resemblance of the profile to the Takagi curve.
+ By visually comparing this function and the Takagi curve (also called the
+ 
+\emph on 
+blancmange curve
+\emph default 
+), one can intuitively sense that there must be some tangent-space-to-Exp-space
+ type relation between the two.
+ The trick is to write down this relation.
+ 
+\layout Standard
+
+This is really a very curious circumstance.
+ The above graphs show only the distribution of a finite number of points
+ (they were, after all, computer generated).
+ A finite set of points on the real number line is zero; yet we are using
+ it to induce a measure that can be used for integration.
+ How is this? The statistical properties of a finite sampling provide us
+ with information about the limit.
+ Its as if we were working with an anti-Cantor-set construction: we start
+ with a dust, and average over intervals to discover analytic properties.
+\layout Subsection
+
+The Takagi-Landsberg Curve
+\layout Standard
+
+The Takagi-Landsberg curve was first explored by Teiji Tagaki, circa 1903
+ as an example of a continuous-everywhere, differentiable-nowhere curve
+ 
 \begin_inset LatexCommand \cite{key-3}
 
 \end_inset 
 
-, which is constructed by positive mid-point displacements.
- One assigns geometrically smaller displacements to each level of the dyadic
- tree; that is, one picks some 
+.
+ It is constructed by positive mid-point displacements of straight line
+ segments, that is, by 'fractally' bumping a line segment upwards by an
+ increasingly smaller displacement (xxxx we should diagram the standard
+ contruction here).
+ Equivalently, one assigns geometrically smaller displacements to each level
+ of the dyadic tree; that is, one picks some 
 \begin_inset Formula $w<1$
 \end_inset 
 
@@ -2980,7 +3013,7 @@ This function appears to vanish only at the dyadics.
 
  the value 
 \begin_inset Formula \[
-t_{w}\left(p/2^{n}\right)=\sum_{k=0}^{n-1}w^{k}=1+w+w^{2}+...+w^{n-1}\]
+t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
 
 \end_inset 
 
@@ -2998,8 +3031,8 @@ where
  is the triangle function:
 \begin_inset Formula \[
 \tau(x)=\left\{ \begin{array}{ccc}
-2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & x-\left\lfloor x\right\rfloor \leq1/2\\
-2(\left\lfloor x+1\right\rfloor -x) & \textrm{\; for \;} & x-\left\lfloor x\right\rfloor >1/2\end{array}\right.\]
+2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
+2(\left\lfloor x+1\right\rfloor -x) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\]
 
 \end_inset 
 
@@ -3010,6 +3043,16 @@ where
 
 ) as well, in that it has both leftward-going and rightward-going derivatives,
  although these derivatives differ at each dyadic point.
+ We can choose to define the derivative 
+\begin_inset Formula $dt_{w}/dx$
+\end_inset 
+
+ by passing the 
+\begin_inset Formula $d/dx$
+\end_inset 
+
+ past the usmmation above, to act on the triangle-wave, to give a square
+ wave.
  Note that 
 \begin_inset Formula $t_{1/4}(x)=4x(1-x)$
 \end_inset 
@@ -3033,59 +3076,138 @@ where
 
 \layout Standard
 
-Blah blah blah...
- can replace triangle with any f(x) on the unit interval with f(0)=f(1)
- such as 
-\begin_inset Formula $f(x)=(1-\cos(2\pi x))/2$
+One can generalize this curve in a variety of ways, for example, by replacing
+ the tent 
+\begin_inset Formula $\tau(x)$
 \end_inset 
 
- .
- however, get unusual results if f is zero on 
-\begin_inset Formula $0\leq x\leq1/3$
+ with any 
+\begin_inset Formula $f(x)$
 \end_inset 
 
- and 
-\begin_inset Formula $2/3\leq x\leq1$
+ on the unit interval.
+ To get a continuous Takagi curve, one must have 
+\begin_inset Formula $f$
 \end_inset 
 
-, at which point the takagi curve works like a cut-n-paste operator with
- a dyadic/geometric progression of sizes.
- In particular, we can mae a sawtooth by using f(x)= blah.
+ continuous and 
+\begin_inset Formula $f(0)=f(1)$
+\end_inset 
+
+.
+ Discontinuous functions 
+\begin_inset Formula $f$
+\end_inset 
+
+ yeild curves that are discontinuous everywhere: for example, the square
+ wave 
+\begin_inset Formula $\sigma(x)=d\tau/dx=1-2\left\lfloor 2x\right\rfloor $
+\end_inset 
+
+ gives the self-similar shape shown below.
+\layout Standard
+
+Of the many possible different choices for 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+, the traingle wave is special in that it stays self-similar through iteration;
+ that is, 
+\begin_inset Formula $(\tau\diamond\tau)(x)\equiv\tau^{2}(x)=\tau(2x)$
+\end_inset 
+
+ and generally, iterating on in 
+\begin_inset Formula $k$
+\end_inset 
+
+ times gives 
+\begin_inset Formula $\tau^{k}(x)=\tau(2^{k}x)$
+\end_inset 
+
+.
+ Thus, we may write 
+\begin_inset Formula \[
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau^{k}(x)\]
+
+\end_inset 
+
+ In passing, we should also note another curious sum 
+\begin_inset Formula \[
+e_{w}(x)=\sum_{k=0}^{\infty}\frac{w^{k}\tau^{k}(x)}{k!}\]
+
+\end_inset 
+
+ Also in passing, we note that the iterated tent map is a shift-state of
+ the Bernoulli Operator.
+\layout Subsection
+
+The Frobenius-Perron Operator of the Bernoulli Map
+\layout Standard
+
+The Bernoulli map is an exactly solvable example of deterministic chaos.
+ Its theory has been widely explored
+\begin_inset LatexCommand \cite{key-2}
+
+\end_inset 
+
+, and we recap here only insofar as it gives a simple example of some of
+ the more subtle upcoming issues.
+\layout Standard
+
+The Bernoulli map is given by 
+\begin_inset Formula \[
+b(x)=2x-\left\lfloor 2x\right\rfloor \]
+
+\end_inset 
+
+ and can be thought of as poping the leading digit off of the binary expansion
+ of 
+\begin_inset Formula $x.$
+\end_inset 
+
+ This map has a positive Lyapunov exponent and is highly chaotic, as, in
+ a certain sense, one can say that the digits of the binary expansion of
+ some 'arbitrary' number are 'unpredicatable', and that the orbits of two
+ close-by numbers will eventually become 'uncorellated' (after suitably
+ defining what we mean by 'arbitrary' and 'unpredictable').
  
 \layout Standard
 
-Note that the eigenfunctions of the Bernoulli Frob-Perron are of this form.
- viz.
- Driebe.
-\layout Standard
+The Frobenius-Perron operator of an iterated map is given by 
+\begin_inset Formula \[
+\left[Uf\right](x)=\sum_{x':x=f(x')}\frac{f(x')}{\left|df(x')/dx'\right|}\]
 
-We sense intuitively that ...
- Lets now imagine the Takagi-Landsberg as if it were living on the Lie group
- 
-\begin_inset Formula $U(1)$
 \end_inset 
 
-, that is, it lives in the 
-\begin_inset Formula $Exp$
+ and one is typically interested in the eigenvalues and eigenfunctions of
+ this operator.
+ For the Bernoulli map, it is 
+\begin_inset Formula \[
+\left[U_{B}f\right](x)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]\]
+
 \end_inset 
 
- of a tangent space.
- What is the generator function for that space? we suspect its 
-\begin_inset Formula $(?'\circ?^{-1})(x)$
+ Note that the the iterated tent map behaves sort-of like a shift state,
+ in that 
+\begin_inset Formula \[
+\left[U_{B}\tau^{k}\right](x)=\tau^{k-1}(x)\]
+
 \end_inset 
 
- if we could only write it down.
-\layout Standard
+ although it does not terminate properly for a shift state: 
+\begin_inset Formula \[
+\left[U_{B}\tau\right](x)=\frac{1}{2}\]
 
-Lets try to undertand why blah blah blah.
-\layout Standard
+\end_inset 
 
-This is really a very curious circumstance.
- The above graphs show only the distribution of a finite number of points
- (they were, after all, computer generated).
- A finite set of points on the real number line is zero; yet we are using
- it to induce a measure that can be used for integration.
- How is this? Its as if it were an anti-Cantor set.
+ (a true shift state would vanish on the final iteration).
+ We see that the Takagi curve transforms as 
+\begin_inset Formula \[
+\left[U_{B}t_{w}\right](x)=1-\frac{w}{2}+wt_{w}(x)\]
+
+\end_inset 
+
+ under the Bernoullli operator.
 \layout Subsection
 
 Other Trees of Rationals
@@ -3158,6 +3280,12 @@ Speaking of Cantor sets, this begs a question.
  we can.
  This section is also to be written.
  Sigh.
+\layout Section
+
+Permutations
+\layout Standard
+
+Stuff about permutation groups.
 \layout Subsection
 
 Hilbert Lattice and Permuation Groups
@@ -3515,7 +3643,7 @@ Here is a very similarly titled paper with a very different subject matter:
  by Robert M.
  Corless
 \layout Bibliography
-\bibitem {key-2}
+\bibitem [Dri99]{key-2}
 
 Dean Driebe Fully Chaotic Maps and Broken Time Symmetry Kluwer Academic
 \layout Bibliography
