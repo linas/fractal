@@ -196,6 +196,74 @@ ContinuedFraction::SetEvenize (void)
 }
 
 /* ------------------------------------------------------------ */
+
+void 
+ContinuedFraction::SwapTerms (int p, int q)
+{
+	if ((1>p) || (1>q) || (32<=p) || (32<=q))return;
+	p--;
+	q--;
+	if (p>= nterms) 
+	{
+		tinued_frac[q] = 1123123123;
+		return;
+	}
+	if (q>= nterms) 
+	{
+		tinued_frac[p] = 1123123123;
+		return;
+	}
+	int tmp = tinued_frac[p];
+	tinued_frac[p] = tinued_frac[q];
+	tinued_frac[q] = tmp;
+}
+
+/* ------------------------------------------------------------ */
+/* Get the nth convergent numerator */
+
+int
+ContinuedFraction::GetConvNum (int n)
+{
+	if (0 == n) return intpart;
+
+	int a,am,amm;
+	amm = 1;
+	am = intpart;
+	int i;
+	for (i=0; i<n; i++)
+	{
+		a = tinued_frac[i]*am + amm;
+		amm = am;
+		am = a;
+		
+	}
+	return a;
+
+}
+
+/* ------------------------------------------------------------ */
+/* Get the nth convergent denominator */
+
+int
+ContinuedFraction::GetConvDenom (int n)
+{
+	if (0 == n) return 1;
+
+	int a,am,amm;
+	amm = 0;
+	am = 1;
+	int i;
+	for (i=0; i<n; i++)
+	{
+		a = tinued_frac[i]*am + amm;
+		amm = am;
+		am = a;
+		
+	}
+	return a;
+}
+
+/* ------------------------------------------------------------ */
 /* compute Farey Number from continued fraction.
  * Algorithm used here does base2 arithmetic by bit-shifting. 
  * For generalized algorithm, see below.  (?? below where ??)

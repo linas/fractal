@@ -30,7 +30,11 @@ class ContinuedFraction
 
       void Print (void);
       int GetNumTerms (void);
+		void SwapTerms (int p, int q);
 
+		int GetConvNum (int n);
+		int GetConvDenom (int n);
+		
       double ToReal (void);
       double ToXPlus (double w);
       double ToXMinus (double w);
