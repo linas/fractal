@@ -101,7 +101,7 @@ MakeHisto (
    int		itermax,
    double 	renorm)
 {
-   int		i,j;
+   int		i,j, k;
 
    int globlen = sizex*sizey;
    for (i=0; i<globlen; i++) {
@@ -110,13 +110,19 @@ MakeHisto (
 
 	double zre, zim;
 
-	zre = 0.7;
-   zim = 0.2;
+	zre = -0.5;
+   zim = 0.0;
 	int ell = 0;
+
+	double rescale = 0.25;
+	double imscale = 0.25;
+
+	double recent = re_center;
+	double imcent = im_center;
 	
-	for (i=0; i<itermax; i++)
+	for (k=0; k<itermax; k++)
 	{
-		int p = i;
+		int p = k;
 		int q = itermax;
 		double x = ((double) p)/ ((double) q);
 		
@@ -125,11 +131,14 @@ MakeHisto (
 
 		// printf("%5d	%8.6g	%8.6g	%8.6g\n", i,x,er, ei);
 
-		i = (int) (er * (double) sizex);
+		er += recent;
+		ei += imcent;
+
+		i = (int) (rescale * er * (double) sizex);
 		if (0>i) continue;
 		if (i>=sizex) continue;
 
-		j = (int) (ei * (double) sizey);
+		j = (int) (imscale * ei * (double) sizey);
 		if (0>j) continue;
 		if (j>=sizey) continue;
 
