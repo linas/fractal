@@ -204,7 +204,7 @@ void mandelbrot_wind (
    double	height,
    int		itermax)
 {
-   unsigned int	i,j, k, globlen, itermax_orig;
+   unsigned int	i,j, globlen, itermax_orig;
    double		re_start, im_start, deltax, deltay;
    double		re_position, im_position;
    double		re_c, im_c;
@@ -213,7 +213,7 @@ void mandelbrot_wind (
    double modulus=0.0, frac, mu;
    double escape_radius = 3.1;
    double ren, tl;
-   double phi, phi_last, phi_c;
+   double phi=0.0, phi_last, phi_c;
    int wind =0;
 
    ren = log( log (escape_radius)) / log(2.0);
@@ -256,7 +256,9 @@ void mandelbrot_wind (
 
             // if (phi < 2.0*phi_last) wind ++;
             // if (phi < phi_last) wind ++;
-            if (phi < phi_last) wind += 1+wind;
+            // if (phi < phi_last) wind += 1+wind;
+            wind += wind;
+            if (phi < phi_last) wind ++;
             phi_last = phi;
 
             modulus = (re*re + im*im);
@@ -268,11 +270,14 @@ void mandelbrot_wind (
          mu = ((double) (loop+1)) - frac;
 
          phi /= 2.0*M_PI;
-         phi += (double) wind;
 
-         // the phase winds around 2pi *2^(loop-1) times
-         phi /= pow (2.0, (double) (loop-1));
+         if (loop < itermax) {
+            phi += (double) wind;
 
+            // the phase winds around 2pi *2^(loop-1) times
+            phi /= pow (2.0, (double) (loop-1));
+
+         }
          // k = phi;
          // phi -= (double)k;
 
@@ -637,10 +642,11 @@ void dmandelbrot_out (
    int		loop;
    double modulus, phi, phip, phi3, frac;
    double escape_radius = 1000.0;
-   double ren, tl;
+   double pot, ren, tl, otl;
 
    ren = log( log (escape_radius)) / log(2.0);
-   tl = 1.0/ log(2.0);
+   tl = log(2.0);
+   otl = 1.0/ log(2.0);
    
    /* adjust the iteration count to show the correct values */
    // itermax +=1;
@@ -702,9 +708,13 @@ void dmandelbrot_out (
 
          modulus = (re*re + im*im);
          modulus = sqrt (modulus);
-         frac = log (log (modulus)) *tl;
+         frac = log (log (modulus)) *otl;
 
+         /* frac is the renormalized iteration count */
          frac = ((double) loop) - frac + 1.0; 
+
+         /* pot is the duoady-hubbard potential */
+         pot = exp (-tl*frac);
 
          /* compute d|z|/dc / |z| */
          dare = re*dre / (re*re+im*im);
@@ -749,7 +759,7 @@ void dmandelbrot_out (
 
          /* phase */
          phi = atan2 (dim, dre);
-         phi += M_PI;
+         if (0.0 > phi) phi += 2.0*M_PI;
          phi /= 2.0*M_PI;
 
          phip = atan2 (ddim, ddre);
@@ -775,12 +785,13 @@ void dmandelbrot_out (
          modulus /= log (sqrt(re*re+im*im));
          modulus /= log (sqrt(re*re+im*im));
 
-         modulus = 0.25*(dre*dre+dim*dim)/(re*re+im*im);
+         /* modulus of gradient of duoady-hubbard potential */
+         modulus = pot;
          modulus /= log (sqrt(re*re+im*im));
-         modulus /= log (sqrt(re*re+im*im));
+         modulus *= sqrt(dre*dre+dim*dim);
 
-if (loop>=itermax) modulus = 0.0;
-         glob [i*sizex +j] = modulus;
+if (loop>=itermax) phi = 0.0;
+         glob [i*sizex +j] = phi;
 
          re_position += delta;
       }
