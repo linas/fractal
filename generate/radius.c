@@ -33,11 +33,13 @@ void measure_radius (
    unsigned int	i,j;
    double	deltar, rad, theta=0.0;
    double	radius_cand;
+   double	re_cg, im_cg;
+   double	radius_avg=0.0;
    double	si, co;
    double	re_last, im_last;
    double	re_c, im_c;
    double	re, im, tmp;
-   int		loop=0;
+   int		loop=0, loop_cand=0;
    double 	modulus=0.0;
    double	escape_radius = 3.1;
    double	esq;
@@ -48,6 +50,9 @@ void measure_radius (
    
    for (i=0; i<sizea; i++) glob [i] = 0.0;
    
+   re_cg = im_cg = 0.0;
+   radius_avg = 0.0;
+
    for (i=0; i<sizea; i++) {
       theta = ((double) i) / ((double) sizea);
       theta *= 2.0 * M_PI;
@@ -57,8 +62,8 @@ void measure_radius (
       rad = rmin;
       radius_cand = rad;
       for (j=0; j<sizer; j++) {
-         re_c = rad * co;
-         im_c = rad * si;
+         re_c = re_center + rad * co;
+         im_c = im_center + rad * si;
    
          re = re_c;
          im = im_c;
@@ -86,15 +91,25 @@ void measure_radius (
 
             if ((re-re_last)*(re-re_last) + (im-im_last)*(im-im_last) < esq) {
                radius_cand = rad;
+               loop_cand = loop;
                break;
             }
          }    
    
          rad += deltar;
       }
+      re_cg += radius_cand * co;
+      im_cg += radius_cand * si;
+      radius_avg += radius_cand;
       glob [i] = radius_cand; 
-      printf ("%d	%f	%f	%d\n", j, theta, radius_cand, loop); 
+      printf ("%d	%14.10f	%14.10f	%d\n", i, theta, radius_cand, loop_cand); 
    }
+   radius_avg /= (double) sizea;
+   re_cg /= (double) sizea;
+   im_cg /= (double) sizea;
+   
+   printf ("# ravg = %14.10f center o gravity = ( %14.10f %14.10f )\n", radius_avg, re_cg, im_cg);
+   printf ("# center= %14.10f %14.10f diam = %14.10f \n", re_center+re_cg, im_center+im_cg, 2.0*radius_avg);
 }
 
 
@@ -126,8 +141,8 @@ main (int argc, char *argv[])
    /* do bud at top, the 3-loop */
    re_center = -0.125;
    im_center = 0.7445;
-   rmin = 0.18;
-   rmax = 0.20;
+   rmin = 0.09;
+   rmax = 0.1;
    if (argc >= 8) {
       re_center = atof (argv[5]);
       im_center = atof (argv[6]);
@@ -141,7 +156,7 @@ main (int argc, char *argv[])
    printf ("# nphi=%d nr=%d iter=%d eps=%g cent=(%f %f) rmin=%f rmax=%f\n", 
         nphi, nr, itermax, epsilon, re_center, im_center, rmin, rmax);
    printf ("# \n");
-   printf ("#j	theta	radius	loop count\n"); 
+   printf ("#i	theta		radius		loop count\n"); 
    printf ("# \n");
 
    measure_radius (data, nphi, nr, re_center, im_center,
