@@ -23,8 +23,8 @@ inc:	Farey.h Prime.h
 	cp Farey.h $(INC)/Farey.h
 	cp Prime.h $(INC)/Prime.h
 
-Farey.o:	Farey.c Farey.h
-	$(CC) -c Farey.c
+Farey.o:	Farey.C Farey.h
+	$(CC) -c Farey.C
 	cp Farey.o $(LIB)/Farey.o
 	rm Farey.o
 	touch Farey.o
