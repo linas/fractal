@@ -11,13 +11,15 @@ CC = /usr/bin/cc -O2 -I $(INC) -DANSI_C
 EXES= xlist elist fairy flist gap ginv glist sym imap \
 	terms x zscale zinv zlist zmap
 
+LISTS= fnums enums
+
 all: 	$(EXES)
 
 clean:
 	rm -f core tmp junk glop a.out *.o
 
 realclean:	clean
-	rm -f $(EXES) 
+	rm -f $(EXES) $(ENUMS)
 
 ################## Dependencies and compile/link #########
 # fairy
