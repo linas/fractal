@@ -63,6 +63,12 @@ void mandelbrot_out (
          // re_c = re_position - (re_position*re_position-im_position*im_position);
          // im_c = im_position - 2.0 * re_position * im_position;
 
+         /* map to cardiod lam(1-lam) */
+         re_c = 0.5 * im_position * cos (M_PI*re_position);
+         re_c -= 0.25 * im_position * im_position * cos (2.0*M_PI*re_position);
+         im_c = 0.5 * im_position * sin (M_PI*re_position);
+         im_c -= 0.25 * im_position* im_position * sin (2.0*M_PI*re_position);
+
          re = re_c;
          im = im_c;
          for (loop=1; loop <itermax; loop++) {
