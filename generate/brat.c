@@ -55,7 +55,7 @@ void mandelbrot_cutoff (
 
    /* first, compute the regulator, so that the itermax'th iteration makes 
     * a negligable contribution (about 1e-30) */
-   tau = 8.0 / ((double) itermax);
+   tau = 16.0 / ((double) itermax);
 
    /* set up smooth ramp 
     * regulator is exponential, and rp is derivative w.r.t. tau,
@@ -69,7 +69,7 @@ void mandelbrot_cutoff (
 
    for (i=0; i<itermax; i++) 
    {
-      tmp = - i*i;
+      tmp = - (double) (i*i);
       regulator[i] = exp (tmp * tau*tau);
       rp[i] = 2.0 * tau * tmp * regulator[i];
       rpp[i] = 2.0 * tmp * (regulator[i] + tau * rp[i]);
@@ -77,7 +77,9 @@ void mandelbrot_cutoff (
       sum_np += rp[i];
       sum_npp += rpp[i];
    }
-   printf ("itermax=%d tau=%g sum_n=%g\n", itermax, tau, sum_n);
+   printf ("itermax=%d tau=%g 1/tau=%g sum_n=%g sum_np=%g sum_npp=%g\n", 
+            itermax, tau, 1.0/tau, sum_n, sum_np, sum_npp);
+   printf (" n^2=%g 2n^3=%g\n", sum_n*sum_n, 2.0*sum_n*sum_n*sum_n);
 
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0 / log(2.0);
