@@ -23,7 +23,6 @@ main (int argc, char *argv[])
 	{
 		double x = ((double) 2*i+1)/ ((double) (2*nmax));
 
-#define SAWTOOTH
 #ifdef SAWTOOTH
 		// this is what continued-fraction truncation looks like 
 		// in binary-digit space
@@ -44,7 +43,24 @@ main (int argc, char *argv[])
 		double y = InvFarey (yb);
 #endif
 
-		printf ("%5d	%8.6g	%8.6g\n", i, x, y);
+#if EIGENVALUE_ZERO
+		// This is the zeroth eigenvalue, in binary-space
+		double xc = InvFarey(x);
+		double yc = 1.0/(1.0+xc);
+		f.SetReal (yc);
+		double y = f.ToFarey();
+		double gy = 1.0 - 0.5*x;
+#endif
+
+		// This is the 1st approx eigenvalue, in binary-space
+		double xc = InvFarey(x);
+		// double yc = 1.0 / ((1.0+xc)*(1.0+xc)*sqrt(1.0+xc));
+		double yc = (2.0*xc-1.0)/(2.0*xc+1.0);
+		f.SetReal (yc);
+		double y = f.ToFarey();
+
+		double gy = 1.0 - 0.5*x;
+		printf ("%5d	%8.6g	%8.6g	%8.6g\n", i, x, y, y-gy);
 
 	}
 }

@@ -105,8 +105,33 @@ double gkw ( double (*fn)(double), double x)
 	return acc;
 }
 
+#if 0
+double sawtooth (double x)
+{
+	int n;
+	double acc = 0.0;
+	
+	for (n=1; n<5000; n++)
+	{
+		double y = 
+	}
+}
+#endif
+
+double eigen (ContinuedFraction *f, double x)
+{
+	
+	f->SetReal (x);
+	double xb = f->ToFarey();
+	// double yb = 1.0 - 0.5 *xb;
+	double yb = 1.0 - xb/3.0;
+	double y = InvFarey (yb);
+	return y;
+}
+
 main () 
 {
+	ContinuedFraction f;
 	int i;
 
 	int nmax = 523;
@@ -118,11 +143,12 @@ main ()
 		double x = ((double) i ) / ((double) nmax);
 		// double y = summy (x);
 
-		double y = sum1(x);
-		double z = 1.0;
+		// double y = sum1(x);
+		double y = eigen (&f, x);
+		double z = 1.0/(1.0+x);
 		// double z = gkw (sum2, x);
 
-		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x,y,z);
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x,y,z,y-z);
 	}
 
 }

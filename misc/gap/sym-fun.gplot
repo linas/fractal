@@ -17,7 +17,8 @@ set ylabel "probability"
 
 # set yrange [0:]
 
-plot "sym-fun.dat" using 2:3 title "h1"
+plot "sym-fun.dat" using 2:3 title "h1", \
+     "sym-fun.dat" using 2:((1-$2)*(1-$2)) title "para"
 
 # pause 100
 
