@@ -63,36 +63,38 @@ int sigma (int n, int a)
 
 /* An erdos-borwein-like series sum_n x^n/(1-x^n) 
  */
-static void erdos_series_c (double re_q, double im_q, int sa, double *prep, double *pimp)
+static void erdos_series_c (long double re_q, 
+                            long double im_q, 
+                            int sa, long double *prep, long double *pimp)
 {
-	double tmp;
+	long double tmp;
 	int i;
-	*prep = 0.0;
-	*pimp = 0.0;
+	*prep = 0.0L;
+	*pimp = 0.0L;
 
-	double rep = 0.0;
-	double imp = 0.0;
+	long double rep = 0.0L;
+	long double imp = 0.0L;
 
-	double qpr = 1.0;
-	double qpi = 0.0;
+	long double qpr = 1.0L;
+	long double qpi = 0.0L;
 
 	qpr = re_q;
 	qpi = im_q;
 
-	double qpmod = re_q*re_q+im_q*im_q;
-	if (1.0 <= qpmod) return;
+	long double qpmod = re_q*re_q+im_q*im_q;
+	if (1.0L <= qpmod) return;
 
-	long double tn = 0.5;
+	long double tn = 0.5L;
 	for (i=0; i<max_terms; i++)
 	{
-		double dr, di;
+		long double dr, di;
 
-// #define LAMBERT_SUM
+#define LAMBERT_SUM
 #ifdef LAMBERT_SUM
 		/* compute 1/(1-q^n) OK */
-		tmp = (1.0-qpr)*(1.0-qpr) + qpi*qpi;
-		tmp = 1.0/tmp;
-		dr = (1.0-qpr) * tmp;
+		tmp = (1.0L-qpr)*(1.0L-qpr) + qpi*qpi;
+		tmp = 1.0L/tmp;
+		dr = (1.0L-qpr) * tmp;
 		di = qpi * tmp;
 
 		/* compute q^n/(1-q^n) */
@@ -105,13 +107,13 @@ static void erdos_series_c (double re_q, double im_q, int sa, double *prep, doub
 		 */
 		int j;
 		for (j=0; j<sa; j++) {
-			dr *= i+1;
-			di *= i+1;
+			dr *= (long double) i+1;
+			di *= (long double) i+1;
 		}
 
 #endif
 
-#define DIVISOR_SUM
+// #define DIVISOR_SUM
 #ifdef DIVISOR_SUM
 		// tmp = divisor (i+1);
 		tmp = sigma (i+1, sa);
@@ -135,7 +137,7 @@ static void erdos_series_c (double re_q, double im_q, int sa, double *prep, doub
 		qpr = tmp;
 
 		qpmod = qpr*qpr + qpi*qpi;
-		if (qpmod < 1.0e-30) break;
+		if (qpmod < 1.0e-50) break;
 
 		tn *= 0.5L;
 	}
@@ -148,23 +150,23 @@ static void erdos_series_c (double re_q, double im_q, int sa, double *prep, doub
 	*pimp = imp;
 }
 
-static double erdos_series (double re_q, double im_q)
+static long double erdos_series (long double re_q, long double im_q)
 {
-	double rep, imp;
+	long double rep, imp;
 	erdos_series_c (re_q, im_q, 0, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
 	// return imp;
-	double phase = atan2 (imp, rep);
+	long double phase = atan2 (imp, rep);
 	phase += M_PI;
 	phase /= 2.0*M_PI;
 	return phase;
 }
 
 /* Weierstrass elliptic invarient g_2, where q is the nome */
-static void gee_2_c (double re_q, double im_q, double *pre, double *pim)
+static void gee_2_c (long double re_q, long double im_q, long double *pre, long double *pim)
 {
-	double rep, imp;
-	double sqre, sqim;
+	long double rep, imp;
+	long double sqre, sqim;
 
 	// sqre = re_q*re_q - im_q *im_q;
 	// sqim = 2.0*re_q * im_q;
@@ -182,10 +184,10 @@ static void gee_2_c (double re_q, double im_q, double *pre, double *pim)
 	*pim = imp;
 }
 
-static void gee_3_c (double re_q, double im_q, double *pre, double *pim)
+static void gee_3_c (long double re_q, long double im_q, long double *pre, long double *pim)
 {
-	double rep, imp;
-	double sqre, sqim;
+	long double rep, imp;
+	long double sqre, sqim;
 
 	// sqre = re_q*re_q - im_q *im_q;
 	// sqim = 2.0*re_q * im_q;
@@ -193,83 +195,86 @@ static void gee_3_c (double re_q, double im_q, double *pre, double *pim)
 	sqim = im_q;
 	
 	erdos_series_c (sqre, sqim, 5, &rep, &imp);
-	rep *= -504.0;
-	imp *= -504.0;
-	rep +=1.0;
-	rep *= 8.0 *M_PI*M_PI*M_PI*M_PI *M_PI*M_PI/ 27.0;
-	imp *= 8.0 *M_PI*M_PI*M_PI*M_PI *M_PI*M_PI/ 27.0;
+	rep *= -504.0L;
+	imp *= -504.0L;
+	rep +=1.0L;
+	rep *= 8.0L *M_PI*M_PI*M_PI*M_PI *M_PI*M_PI/ 27.0L;
+	imp *= 8.0L *M_PI*M_PI*M_PI*M_PI *M_PI*M_PI/ 27.0L;
 
 	*pre = rep;
 	*pim = imp;
 }
 
 /* the modular discriminant */
-static void disc_c (double re_q, double im_q, double *pre, double *pim)
+static void disc_c (long double re_q, long double im_q, long double *pre, long double *pim)
 {
-	double g2re, g2im;
-	double g3re, g3im;
-	double tmp;
+	long double g2re, g2im;
+	long double g3re, g3im;
+	long double tmp;
 
 	gee_2_c (re_q, im_q, &g2re, &g2im);
 	gee_3_c (re_q, im_q, &g3re, &g3im);
 	
-	double g3sqre, g3sqim;
+	long double g3sqre, g3sqim;
 	g3sqre = g3re*g3re - g3im*g3im;
-	g3sqim = 2.0 * g3re*g3im;
+	g3sqim = 2.0L * g3re*g3im;
 	
-	double g2cure, g2cuim;
+	long double g2cure, g2cuim;
 	g2cure = g2re*g2re - g2im*g2im;
-	g2cuim = 2.0 * g2re*g2im;
+	g2cuim = 2.0L * g2re*g2im;
 	tmp = g2cure*g2re - g2cuim*g2im;
 	g2cuim = g2cure*g2im + g2cuim* g2re;
 	g2cure = tmp;
 
-	double dre, dim;
-	dre = g2cure - 27.0*g3sqre;
-	dim = g2cuim - 27.0*g3sqim;
+	long double dre, dim;
+	dre = g2cure - 27.0L*g3sqre;
+	dim = g2cuim - 27.0L*g3sqim;
+
+// if(dre < 1.0e-10 *g2cure) printf ("duude bad converge for %g %g == %g\n", re_q, im_q, dre);
+// if(fabsl(dre) < 1.0e-10 *fabsl(g2cure)) dre = dim = 1.0;
 
 	*pre = dre;
 	*pim = dim;
 }
 
-static double discriminant (double re_q, double im_q)
+static long double discriminant (long double re_q, long double im_q)
 {
-	double rep, imp;
+	long double rep, imp;
 	disc_c (re_q, im_q, &rep, &imp);
 
 	// return sqrt (rep*rep+imp*imp);
 	return rep;
 	// return imp;
-	// double phase = atan2 (imp, rep);
+	// long double phase = atan2 (imp, rep);
 	// phase += M_PI;
 	// phase /= 2.0*M_PI;
 	// return phase;
 }
 
 /* Weierstrass elliptic invarient g_2, where q is the nome */
-static double gee_2 (double re_q, double im_q)
+static long double gee_2 (long double re_q, long double im_q)
 {
-	double rep, imp;
+	long double rep, imp;
 	gee_2_c (re_q, im_q, &rep, &imp);
 
 	// return sqrt (rep*rep+imp*imp);
 	// return rep;
 	// return imp;
-	double phase = atan2 (imp, rep);
+	long double phase = atan2 (imp, rep);
 	phase += M_PI;
 	phase /= 2.0*M_PI;
 	return phase;
 }
 
-static double gee_3 (double re_q, double im_q)
+static long double gee_3 (long double re_q, long double im_q)
 {
-	double rep, imp;
+	long double rep, imp;
 	gee_3_c (re_q, im_q, &rep, &imp);
 
 	// return sqrt (rep*rep+imp*imp);
-	// return rep;
-	return imp;
-	// double phase = atan2 (imp, rep);
+	return rep;
+	// return imp;
+	// long double phase = atan2 (imp, rep);
 	// phase += M_PI;
 	// phase /= 2.0*M_PI;
 	// return phase;
@@ -315,9 +320,9 @@ MakeHisto (
 		{
 
 			// double phi = erdos_series (re_position, im_position);
-			// double phi = gee_2 (re_position, im_position);
+			double phi = gee_2 (re_position, im_position);
 			// double phi = gee_3 (re_position, im_position);
-			double phi = discriminant (re_position, im_position);
+			// double phi = discriminant (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;

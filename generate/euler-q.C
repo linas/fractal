@@ -97,7 +97,7 @@ static double dedekind_eta (double re_q, double im_q)
 }
 
 /* modular discriminat = eta to 24 */
-static double discriminant (double re_q, double im_q)
+static void discriminant_c (double re_q, double im_q, double *pre,double *pim)
 {
 	double rep, imp;
 	euler_prod_c (re_q, im_q, &rep, &imp);
@@ -121,10 +121,18 @@ static double discriminant (double re_q, double im_q)
 	red *= mod;
 	imd *= mod;
 
+	*pre = red;
+	*pim = imd;
+}
 
-	// return sqrt (red*red+imd*imd);
-	return red;
-	// return imd;
+static double discriminant (double re_q, double im_q)
+{
+	double rep, imp;
+	discriminant_c (re_q, im_q, &rep, &imp);
+
+	// return sqrt (rep*rep+imp*imp);
+	return rep;
+	// return imp;
 }
 
 /*-------------------------------------------------------------------*/
@@ -164,9 +172,9 @@ MakeHisto (
       for (j=0; j<sizex; j++) 
 		{
 
-			// double phi = euler_prod (re_position, im_position);
+			double phi = euler_prod (re_position, im_position);
 			// double phi = dedekind_eta (re_position, im_position);
-			double phi = discriminant (re_position, im_position);
+			// double phi = discriminant (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;

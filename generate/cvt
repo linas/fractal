@@ -142,7 +142,7 @@ PATH=$PATH:.
 # renorm g2 j 0.18 8.1
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpg
 
-# renorm for dedekind eta
+# renorm for dedekind eta (euler phi)
 # renorm j j2 0.333 0.0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpg
@@ -191,17 +191,23 @@ PATH=$PATH:.
 # renorm jj j2 164.0 0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
-# renorm for the weierstrass g_2, g_3 modulus, realpart,impart
+# renorm for the weierstrass g_2 modulus, realpart,impart
 # takelog j g
 # renorm g j2 0.040 3
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
 
-#renorm for the modular discriminant
-takelog j g
-renorm g j2 0.016 5
-cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+# renorm for the weierstrass g_3 modulus, realpart,impart
+# takelog j g
+# renorm g j2 0.04 0
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
 
-cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
-# cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+#renorm for the modular discriminant
+# takelog j g
+# renorm g j2 0.016 5
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
+cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
+cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
