@@ -5,9 +5,13 @@
  * Coded in psuedo-OO style for easy conversion to C++
  *
  * HISTORY:
- * Linas Vepstas Januery 16 1994
+ * created Linas Vepstas January 16 1994
  * Added TFarey July 1995 -- linas
  */
+
+#if defined (AIXV3) || defined (AIXV315) || defined (AIXV32)
+#define ANSI_C 
+#endif
 
 /* class Farey { */
 struct Farey {
@@ -39,19 +43,27 @@ extern double GetFarey (struct Farey *);
 
 /* protected methods */
 extern double ContinuedFractionTerms (struct Farey *);
+extern double ContinuedFractionToCosReal (struct Farey *, double omega);
 extern double ContinuedFractionToEFarey (struct Farey *, double t);
 extern double ContinuedFractionToEFareyGap (struct Farey *, double t);
 extern double ContinuedFractionToEFraction (struct Farey *, double t);
 extern double ContinuedFractionToEReal (struct Farey *, double t);
+extern double ContinuedFractionToExpReal (struct Farey *, double t);
 extern double ContinuedFractionToFarey (struct Farey *);
 extern double ContinuedFractionToReal (struct Farey *);
 extern double ContinuedFractionToSinFarey (struct Farey *, double t);
+extern double ContinuedFractionToSincReal (struct Farey *, double omega);
 extern double ContinuedFractionToTFarey (struct Farey *, double t);
+extern double ContinuedFractionToXFarey (struct Farey *, double t);
 extern double ContinuedFractionToZReal (struct Farey *, double z);
 extern void PrintContinuedFraction (struct Farey *);
 extern void RatioToContinuedFraction (struct Farey *, int num, int deno);
 extern void RealToContinuedFraction (struct Farey *, double);
 
+extern double CFSum (struct Farey *self, struct Farey *other,
+                     double alpha, double beta, double gamma);
+extern double CFProd (struct Farey *self, struct Farey *other,
+                     double alpha, double beta);
 #else 
 
 /* public methods */
@@ -62,19 +74,25 @@ extern double GetFarey ();
 
 /* protected methods */
 extern double ContinuedFractionTerms ();
+extern double ContinuedFractionToCosReal ();
 extern double ContinuedFractionToEFarey ();
 extern double ContinuedFractionToEFareyGap ();
 extern double ContinuedFractionToEFraction ();
 extern double ContinuedFractionToEReal ();
+extern double ContinuedFractionToExpReal ();
 extern double ContinuedFractionToFarey ();
 extern double ContinuedFractionToReal ();
 extern double ContinuedFractionToSinFarey ();
+extern double ContinuedFractionToSincReal ();
 extern double ContinuedFractionToTFarey ();
+extern double ContinuedFractionToXFarey ();
 extern double ContinuedFractionToZReal ();
 extern void PrintContinuedFraction ();
 extern void RatioToContinuedFraction ();
 extern void RealToContinuedFraction ();
 
+extern double CFSum ();
+extern double CFProd ();
 #endif 
 
 
