@@ -16,6 +16,11 @@ c	The RT F77 compiler doesn't like underscores in variable names
  * July 2003 -- port from FORTRAN to C
  */
 
+#include <math.h>
+#include <stdio.h>
+
+#include "find_zero.h"
+
 /*
 C
 C   LATEST REVISION     - 18 May 1986
@@ -74,15 +79,14 @@ C
 #define fmax(x,y) ((x)>(y))?(x):(y)
 
 double 
-FindZero ((double (*func)(double)), bound, int nsig, 
+FindZero (double (*func)(double), double bound, int nsig, 
           double a, 
-          double b, maxit)
+          double b, int maxit)
 {
-	int case1, case2, case3;
 	int NumOfIter;
 	double sigfigs;
-	double x,a,b,fb;
-	double delta, bisector, tolernace;
+	double x,c, fa,fb, fc;
+	double delta, bisector, tolerance;
 	double p,q,r,s,tmp;
 
 	sigfigs = pow (10.0, (-nsig));
