@@ -423,7 +423,10 @@ Following the usual laws of statistics and averages, one expects that increasing
  The graph below shows 720 bins holding all irreducible rationals with denominat
 ors less than 16000.
  The absolute amplitude has been reduced by over a factor of ten compared
- to the previous graphs; however, there is relatively far more power in
+ to the previous graphs; this is not a surprise.
+ We are counting 77809948 irreducible rationals, as opposed to 4863602 before:
+ our sample size is nearly 16 times larger.
+ What is perhaps surprising is that there is relatively far more power in
  the higher frequencies.
  There are also still-visible noise peaks near 1/2, 1/3, and 2/3'rds, as
  well as at 0 and 1.
@@ -437,6 +440,51 @@ ors less than 16000.
 \end_inset 
 
 
+\layout Standard
+
+Let reiterate that the noise in this figue is not due to floating-point
+ errors or numerical imprecision.
+ Its really there, deeply embedded in the rationals.
+ As we count more and more rationals, and bin them into a fixed number of
+ bins, then we will expect that the mean deviation about the norm of 1.0
+ to shrink and shrink, as some power law.
+ It is in this sense that we can say that the rationals are uniformly distribute
+d on the real-number line: greater sample sizes seemingly leads to more
+ uniform distributions, albeit with strangely behaved variances.
+ But even this statement is less than conclusive, because it hides a terrible
+ scale invarience.
+ We have one more nasty histogram to demonstrate.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-2880-16K-irred.png
+
+\end_inset 
+
+
+\layout Standard
+
+This one shows irreducible fractions with denominators less than 16000,
+ which, as we've mentioned, represents a sample size almost 16 times larger
+ than the first sets of graphs.
+ We bin these into four times as manny bins: 2880=4x720.
+ Compare the normalized scale on the vertical axis to the corresponding
+ picture for the smaller sample size and smaller number of bins.
+ The vertical scales are identical, and the sizes of the peaks are identical.
+ Each bin, on average, holds four times as many rationals (16 times as many
+ rationals, 4 times as many bins).
+ We've increased our sample size, but the features are not 'washing out':
+ they are staying constant in size, and are becoming more distinct and well-defi
+ned.
+ 
+\layout Standard
+
+more rationals than before.
+ 
+\layout Standard
+
+xxx 77809948
 \layout Standard
 
 It sure would be nice to develop a generalized theory that can work with
