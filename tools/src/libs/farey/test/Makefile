@@ -1,15 +1,15 @@
 ############### Symbol Definitions ###################### 
 
-TOP = /usr/home/src/tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
 # fcc for IBM RT
 # CC = /bin/fcc -f2 -O -I $(INC)
 
-CC = /usr/bin/cc -O2 -I $(INC)
+CC = /usr/bin/cc -O2 -I $(INC) -DANSI_C
 
-EXES= elist fairy flist gap ginv glist sym terms x zscale zinv zlist zmap
+EXES= xlist elist fairy flist gap ginv glist sym imap \
+	terms x zscale zinv zlist zmap
 
 all: 	$(EXES)
 
@@ -25,54 +25,56 @@ realclean:	clean
 #
 fairy: fairy.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o fairy fairy.c $(LIB)/Farey.o -lm
-	rm fairy.o
 
 # elist
 # 	(Jan 1994) excercise Farey Number converter
 #
 elist: elist.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o elist elist.c $(LIB)/Farey.o -lm
-	rm elist.o
 
+# xlist
+# 	(Jan 1994) excercise Farey Number converter
+#
+xlist: xlist.c $(LIB)/Farey.o $(INC)/Farey.h
+	$(CC) -o xlist xlist.c $(LIB)/Farey.o -lm
+	$(RM) xlist.o
+
+integ: integ.c $(LIB)/Farey.o $(INC)/Farey.h
+	$(CC) -o integ integ.c $(LIB)/Farey.o -lm
+	$(RM) integ.o
 
 # flist
 # 	(Jan 1994) excercise Farey Number converter
 #
 flist: flist.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o flist flist.c $(LIB)/Farey.o -lm
-	rm flist.o
 
 # glist
 # 	(Jan 1994) excercise Farey Number converter
 #
 glist: glist.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o glist glist.c $(LIB)/Farey.o -lm
-	rm glist.o
 
 tlist: tlist.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o tlist tlist.c $(LIB)/Farey.o -lm
-	rm tlist.o
 
 # terms
 # 	(Jan 1994) excercise Farey Number converter
 #
 terms: terms.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o terms terms.c $(LIB)/Farey.o -lm
-	rm terms.o
 
 # zlist
 # 	(Jan 1994) excercise Farey Number converter
 #
 zlist: zlist.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o zlist zlist.c $(LIB)/Farey.o -lm
-	rm zlist.o
 
 # zinv
 # 	(Jan 1994) excercise Farey Number converter
 #
 zinv: zinv.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o zinv zinv.c $(LIB)/Farey.o -lm
-	rm zinv.o
 
 # zscale
 # 	(Jan 1994) excercise Farey Number converter
@@ -86,14 +88,12 @@ zscale: zscale.c $(LIB)/Farey.o $(INC)/Farey.h
 #
 ginv: ginv.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o ginv ginv.c $(LIB)/Farey.o -lm
-	rm ginv.o
 
 # zmap
 # 	(Jan 1994) excercise Farey Number converter
 #
 zmap: zmap.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o zmap zmap.c $(LIB)/Farey.o -lm
-	rm zmap.o
 
 
 # sym
@@ -101,7 +101,6 @@ zmap: zmap.c $(LIB)/Farey.o $(INC)/Farey.h
 #
 sym: sym.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o sym sym.c $(LIB)/Farey.o -lm
-	rm sym.o
 
 
 # gap
@@ -109,7 +108,6 @@ sym: sym.c $(LIB)/Farey.o $(INC)/Farey.h
 #
 gap: gap.c $(LIB)/Farey.o $(LIB)/Prime.o $(INC)/Farey.h $(INC)/Prime.h
 	$(CC) -o gap gap.c $(LIB)/Farey.o $(LIB)/Prime.o -lm
-	rm gap.o
 
 
 # x
@@ -117,10 +115,26 @@ gap: gap.c $(LIB)/Farey.o $(LIB)/Prime.o $(INC)/Farey.h $(INC)/Prime.h
 #
 x: x.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o x x.c $(LIB)/Farey.o -lm -lX11
-	rm x.o
 
 
 ############################################################
+
+# ------------------------------------------------------------
+gral:	integ
+	integ 5000 > gral
+
+# xnums.ps:
+ps: gral
+	filter gral x In | xgraph -t "Integral of Farey Map" 
+	filter gral x IIn | xgraph -t "Double Integral of Farey Map" 
+
+# ------------------------------------------------------------
+xnums:	xlist
+	xlist 2000 > xnums
+
+# xnums.ps:
+xnums.ps: xnums
+	filter xnums i f | xgraph -t "Exp'd Continued Fractions"
 
 # ------------------------------------------------------------
 enums:
@@ -135,6 +149,24 @@ fnums:
 
 fnums.ps:
 	filter fnums i f | xgraph -t "Farey Numbers"
+
+# ------------------------------------------------------------
+
+tnums:
+#	tlist 3000 0.01 > tnum0.01 
+	tlist 1000 0.1 > tnum0.1 
+#	tlist 1000 0.4 > tnum0.4 
+#	tlist 1000 0.6 > tnum0.6 
+#	tlist 1000 0.8 > tnum0.8
+	tlist 1000 1.0 > tnum1.0
+
+tnums.ps:
+#	filter tnum0.01 i f | xgraph -t "Farey Number with t=0.01" &
+	filter tnum0.1 i f | xgraph -t "Farey Number with t=0.1" &
+#	filter tnum0.4 i f | xgraph -t "Farey Number with t=0.4" &
+#	filter tnum0.6 i f | xgraph -t "Farey Number with t=0.6" & 
+#	filter tnum0.8 i f | xgraph -t "Farey Number with t=0.8" &
+	filter tnum1.0 i f | xgraph -t "Farey Number with t=1.0" &
 
 # ------------------------------------------------------------
 
