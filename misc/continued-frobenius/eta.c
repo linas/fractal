@@ -4,34 +4,35 @@
 
 #include <math.h>
 
-double eta (double ex)
+long double eta (long double ex)
 {
-	double prod = 1.0;
-	double xn = ex;
+	long double prod = 1.0L;
+	long double xn = ex;
 	int n;
 	for (n=1; ; n++)
 	{
-		double term = 1.0 - xn;
+		long double term = 1.0L - xn;
 		prod *= term;
 		xn *= ex;
-		if (1.0e-16 > xn) break;
+		if (1.0e-20 > xn) break;
 	}
 	prod = prod*prod;
 	prod = prod*prod;
 
-	prod *= pow (ex, 1.0/6.0);
+	prod *= powl (ex, 1.0L/6.0L);
 	return prod;
 }
 
-double sum (double ex)
+long double sum (long double ex)
 {
 	int n;
-	double sum = 0.0;
+	long double sum = 0.0;
 	for (n=1; ; n++)
 	{
-		double term = ex + (double) n;
-		term = 1.0/ term;
+		long double term = ex + (long double) n;
+		term = 1.0L/ term;
 		term = term*term* eta(term);
+		if (n>50 && 1.0e-12 > term) break;
 		sum += term;
 	}
 	return sum;

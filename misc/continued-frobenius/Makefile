@@ -56,3 +56,6 @@ zyx: zyx.o zetafn.o
 
 clean:
 	rm -f *.o $(EXES) a.out x y j.c x.c x.dat *.png x.gplot
+
+dist:
+	tar -zcvf x *.c *.h *.gplot README Makefile .cvsignore */*.c */*.h */*.gplot */Makefile */.cvsignore
