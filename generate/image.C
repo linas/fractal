@@ -14,12 +14,18 @@
  * added classic mandelbrot -- June 1995
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <string.h>
 
-extern FILE *Fopen();
+#include "image.h"
+#include "util.h"
+
 extern void do_mandel (char * filename, int width, int height);
+extern void do_cf_gap (char * filename, int width, int height);
+
+typedef float (*DensityCB) (void*, double, double);
 
 int param;
 
@@ -35,8 +41,8 @@ void moire_parabola (float *glob, unsigned int sizex, unsigned int sizey)
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = 0.0;
    
-   icen = 0.65* sizex;
-   jcen =  0.8 * sizey;
+   icen = (int) (0.65* sizex);
+   jcen =  (int) (0.8 * sizey);
    for (i=0; i<sizey; i++)
       {
       for (j=0; j<sizex; j++) 
@@ -89,12 +95,6 @@ void do_moire (char * filename, int width, int height)
 }
 
 /*-------------------------------------------------------------------*/
-
-#ifndef PI
-#define PI 3.14159265358979
-#endif
-
-/*-------------------------------------------------------------------*/
 /* 
  * This routine visits all the pixels of a pixmap, filling them in with
  * values returned by the supplied callback.
@@ -107,7 +107,7 @@ void walk_rect (float *glob,
                 double x_max,        /* right side of pixmap */
                 double y_min,        /* bottom of pixmap */
                 double y_max,        /* top of pixmap */
-                float (*callback)(),  /* callback */
+                float (*callback)(void *, double, double),  /* callback */
                 void * calldata)     /* static data */
 {
    unsigned int	i,j, globlen;
@@ -154,7 +154,7 @@ void walk_tri (float *glob,
                double x_max,        /* right side of pixmap */
                double y_min,        /* bottom of pixmap */
                double y_max,        /* top of pixmap */
-               float (*callback)(),  /* callback */
+               float (*callback)(void *, double, double),  /* callback */
                void * calldata)     /* static data */
 {
    unsigned int	i,j, globlen;
@@ -206,7 +206,7 @@ void walk_utri (float *glob,
                 double x_max,        /* right side of pixmap */
                 double y_min,        /* bottom of pixmap */
                 double y_max,        /* top of pixmap */
-                float (*callback)(),  /* callback */
+                float (*callback)(void *, double, double),  /* callback */
                 void * calldata)     /* static data */
 {
    unsigned int	i,j, globlen;
@@ -270,7 +270,7 @@ float circle_winding_number (CircleData *dat,
   
    /* OK, now start iterating the circle map */
    for (iter=0; iter < dat->itermax; iter++) {
-      x += omega - K * sin (2.0 * PI * x);
+      x += omega - K * sin (2.0 * M_PI * x);
    }
 
    /* x is the normalized winding number */
@@ -316,7 +316,7 @@ float circle_poincare_recurrance_time (CircleData *dat,
     * parts a chance to phase-lock */
    x = 0.0;
    for (iter=0; iter<SETTLE_TIME; iter++) {
-      x += omega - K * sin (2.0 * PI * x);
+      x += omega - K * sin (2.0 * M_PI * x);
    }
 
    /* OK, now, we begin to measure the average amount of time to recur */
@@ -324,7 +324,7 @@ float circle_poincare_recurrance_time (CircleData *dat,
    xpoint = x;
    num_recurs = 0;
    for (iter=0; iter < dat->itermax; iter++) {
-      x += omega - K * sin (2.0 * PI * x);
+      x += omega - K * sin (2.0 * M_PI * x);
       y = fabs (x-xpoint);
       y -= floor (y);
       if (y < EPSILON) {
@@ -360,8 +360,8 @@ float im_circle_poincare_recurrance_time (CircleData *dat,
    int		iter;
    long		num_recurs, time_recur=0;
 
-   cw = cos (2 * PI * omega);
-   sw = sin (2 * PI * omega);
+   cw = cos (2 * M_PI * omega);
+   sw = sin (2 * M_PI * omega);
    
    /* First, we give a spin for 500 cycles, giving the non-chaotic 
     * parts a chance to phase-lock */
@@ -427,8 +427,8 @@ float co_circle_poincare_recurrance_time (CircleData *dat,
    int		iter;
    long		num_recurs, time_recur=0;
 
-   cw = cos (2 * PI * omega);
-   sw = sin (2 * PI * omega);
+   cw = cos (2 * M_PI * omega);
+   sw = sin (2 * M_PI * omega);
 
    ka = K * cos (PHI);
    kb = K * sin (PHI);
@@ -755,7 +755,7 @@ void do_circle (char * filename, int width, int height)
    /* fill it in */
    walk_rect (data, data_width, data_height,
               omega_min, omega_max, K_min, K_max, 
-              circle_poincare_recurrance_time, &dat);
+              (DensityCB) circle_poincare_recurrance_time, &dat);
 
 #ifdef TONGUES_TRI
    /* closeup of Sinai's Toungues */
@@ -834,7 +834,7 @@ void do_im_circle (char * filename, int width, int height)
    /* fill it in */
    walk_rect (data, data_width, data_height,
               omega_min, omega_max, K_min, K_max, 
-              im_circle_poincare_recurrance_time, &dat);
+              (DensityCB) im_circle_poincare_recurrance_time, &dat);
 
    
    /* dump the floating point data */
@@ -912,7 +912,7 @@ complex_phase = 0.0004;
    /* fill it in */
    walk_rect (data, data_width, data_height,
               omega_min, omega_max, K_min, K_max, 
-              co_circle_poincare_recurrance_time, &dat);
+              (DensityCB) co_circle_poincare_recurrance_time, &dat);
 
 #ifdef TONGUES_TRI
    /* closeup of Sinai's Toungues */
@@ -994,7 +994,7 @@ void do_logistic (char * filename, int width, int height)
    walk_rect (data, data_width, data_height,
               omega_min, omega_max, K_min, K_max, 
               /* clamp_logistic_poincare_recurrance_time, &dat); */
-              squash_logistic_poincare_recurrance_time, &dat);
+              (DensityCB) squash_logistic_poincare_recurrance_time, &dat);
 
    
    /* dump the floating point data */
@@ -1072,7 +1072,7 @@ void do_folded (char * filename, int width, int height)
    /* fill it in */
    walk_rect (data, data_width, data_height,
               omega_min, omega_max, K_min, K_max, 
-              folded_poincare_recurrance_time, &dat);
+              (DensityCB) folded_poincare_recurrance_time, &dat);
 
    
    /* dump the floating point data */
@@ -1122,8 +1122,7 @@ main (int argc, char *argv[])
    }
 
    signal (SIGFPE, SIG_IGN);
-
-   param = atoi (argv[4]);
+   if (argc >4) param = atoi (argv[4]);
 
    if (!strcmp ("moire", argv[0])) do_moire (argv[1], atoi (argv[2]), atoi (argv[3]));
 
@@ -1134,6 +1133,7 @@ main (int argc, char *argv[])
    /* do_folded (argv[1], atoi (argv[2]), atoi (argv[3])); */
 
    if (!strcmp ("mandel", argv[0])) do_mandel (argv[1], atoi (argv[2]), atoi (argv[3])); 
+   if (strstr (argv[0], "tong")) do_cf_gap (argv[1], atoi (argv[2]), atoi (argv[3])); 
 
    return 0;
 }

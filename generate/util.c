@@ -1,14 +1,18 @@
 /*
  * Copyright (c) 1987,1989 IBM Corporation
+ * Copyright (c) 1989 Linas Vepstas
  * Author: Bruce Lucas
+ * Author: Linas Vepstas
  */
 
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "util.h"
 
 /*
  * Open with possible substitution of extension
@@ -64,13 +68,13 @@ FILE *Fopen(char *name, char *ext)
         if (dot)
             *dot = '\0';
         strcat(full, ext);
-	fyle = fopen (full, "wb");
+        fyle = fopen (full, "wb");
     } else if (!name) {
         /* stdin */
         return NULL;
     } else {
         /* simple name */
-	fyle = fopen (name, "wb");
+        fyle = fopen (name, "wb");
     }
     return fyle;
 }
@@ -96,13 +100,13 @@ FILE *Fopenr(char *name, char *ext)
         if (dot)
             *dot = '\0';
         strcat(full, ext);
-	fyle = fopen (full, "rb");
+        fyle = fopen (full, "rb");
     } else if (!name) {
         /* stdin */
         return NULL;
     } else {
         /* simple name */
-	fyle = fopen (name, "rb");
+        fyle = fopen (name, "rb");
     }
     return fyle;
 }
@@ -112,14 +116,6 @@ FILE *Fopenr(char *name, char *ext)
  * Look up size in name.size,
  * or try to guess from the file size
  */
-
-static char orient = 'l';
-
-void
-SetOrient(char c)
-{
-    orient = c;
-}
 
 void
 Size(int *width, int * height, char * name, int fd, int bpp)
@@ -141,11 +137,6 @@ Size(int *width, int * height, char * name, int fd, int bpp)
                 *height = i;
         if (*height) {
             *width = size / *height;
-            if (orient=='p') {
-                /* use portrait mode */
-                int temp;
-                temp = *width; *width = *height; *height = temp;
-            }
             fprintf(stderr, "guessing size is %dx%d\n", *width, *height);
         }
     }

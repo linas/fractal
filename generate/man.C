@@ -1,9 +1,9 @@
 /* 
  * NAME:
- * conf.c
+ * man.c
  *
  * FUNCTION:
- * generate pixmaps showing Poincare recurrence time for circle map.
+ * generate pixmaps showing Poincare recurrence time for mandelbrot set
  *
  * HISTORY:
  * created Linas Vepstas Jan 1991
@@ -17,16 +17,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-extern void walk_rect (float *glob,
-                 unsigned int sizex,  /* width, in pixels */
-                 unsigned int sizey,  /* height, in pixels */
-                 double x_min,        /* left side of pixmap */
-                 double x_max,        /* right side of pixmap */
-                 double y_min,        /* bottom of pixmap */
-                 double y_max,        /* top of pixmap */
-                 float (*callback)(),  /* callback */
-                 void * calldata);     /* static data */
-
+#include "image.h"
+#include "util.h"
 
 /*-------------------------------------------------------------------*/
 
@@ -117,8 +109,6 @@ float mandelbrot_poincare_recurrance_time (CircleData *dat,
 
 /*-------------------------------------------------------------------*/
    
-extern FILE *Fopen();
-   
 void do_mandel (char * filename, int width, int height)
 
 {
@@ -165,7 +155,7 @@ mandel_cross = 1.0; iii=3;
    /* fill it in */
    walk_rect (data, data_width, data_height,
               omega_min, omega_max, K_min, K_max, 
-              mandelbrot_poincare_recurrance_time, &dat);
+              (DensityCB) mandelbrot_poincare_recurrance_time, &dat);
 
    
    /* dump the floating point data */

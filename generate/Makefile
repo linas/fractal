@@ -1,12 +1,7 @@
 ############### Symbol Definitions ###################### 
 
-INCLUDES =	-I/usr/include/X11 -I../tools/inc
+INCLUDES =	-I../tools/inc
 LIBS =		/usr/lib
-# XLIB =		$(LIBS)/libX11.a \
-#		$(LIBS)/libbsd.a \
-#		$(LIBS)/libsock.a
-
-XLIB =		$(LIBS)/libX11.a 
 
 CC = cc -Wall -g -O2 $(INCLUDES)
 
@@ -15,7 +10,9 @@ EXES =  stalk stalkmov mstop migrate measure offset \
         circout circin circmov brat gapper \
         abs clamp takelog reclamp dump renorm \
         draw dx image movie paste stats sum \
-        angle curl diff div card mandel
+        angle curl diff div card mandel morph \
+        moire tong automatic wind winds ray \
+        manvert inf decide cutoff
 
 all:    ray automatic radius brat draw dx image
 
@@ -31,6 +28,11 @@ clean:
 
 .o:
 	$(CC) -o $* $< -lm
+
+image.o: image.h util.h
+gap-tongue.o: image.h util.h
+man.o: image.h util.h
+util.o:	util.h
 
 ################## Dependencies and compile/link #########
 #
@@ -60,6 +62,7 @@ gapper inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squ
 	ln -f brat winds
 	ln -f brat morph
 	ln -f brat gapper
+	ln -f brat tong
 
 card: card.c  util.o
 	$(CC) -o card card.c util.o -lm
@@ -91,8 +94,8 @@ abs clamp takelog reclamp dump renorm:	renorm.c  util.o opers.o
 stats:	stats.c  util.o opers.o
 	$(CC)  -o stats stats.c opers.o util.o -lm
 
-image: image.o  man.o util.o
-	$(CC) -o image image.o man.o util.o -lm
+image: image.o  gap-tongue.o man.o util.o ../tools/lib/Farey.o
+	$(CC) -o image $^ -lm -lstdc++
 	ln -f image mandel
 	ln -f image moire
 

@@ -1,4 +1,5 @@
 #! /bin/sh
+PATH=$PATH:.
 
 # cat recenter.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > recenter.gif
 # cat bigrecenter.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > bigrecenter.gif
@@ -135,6 +136,7 @@
 # clamp junk ja 1.0e-20 1.0e20
 # takelog ja jb
 # renorm jb j 0.03 34 
-renorm g j 100
+# takelog g g2
+renorm g j 0.6
 cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
