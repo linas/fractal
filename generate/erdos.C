@@ -70,7 +70,7 @@ static void erdos_series_c (double re_q, double im_q, int sigma, double *prep, d
 
 #define LAMBERT_SUM
 #ifdef LAMBERT_SUM
-		/* compute 1/(1-q^n) */
+		/* compute 1/(1-q^n) OK */
 		tmp = (1.0-qpr)*(1.0-qpr) + qpi*qpi;
 		tmp = 1.0/tmp;
 		dr = (1.0-qpr) * tmp;
@@ -87,6 +87,7 @@ static void erdos_series_c (double re_q, double im_q, int sigma, double *prep, d
 		int j;
 		for (j=0; j<sigma; j++) {
 			dr *= i+1;
+			di *= i+1;
 		}
 
 #endif
@@ -211,8 +212,8 @@ static double discriminant (double re_q, double im_q)
 	double rep, imp;
 	disc_c (re_q, im_q, &rep, &imp);
 
-	return sqrt (rep*rep+imp*imp);
-	// return rep;
+	// return sqrt (rep*rep+imp*imp);
+	return rep;
 	// return imp;
 	// double phase = atan2 (imp, rep);
 	// phase += M_PI;

@@ -68,7 +68,7 @@ static double euler_prod (double re_q, double im_q)
 }
 
 /* The dedekind eta multiplies by an additonal factor of q^1/24 */
-static double dedekind_eta (double re_q, double im_q)
+static void dedekind_eta_c (double re_q, double im_q, double *pre, double *pim)
 {
 	double rep, imp;
 	euler_prod_c (re_q, im_q, &rep, &imp);
@@ -85,7 +85,38 @@ static double dedekind_eta (double re_q, double im_q)
 	imp = reqt*imp + imqt*rep;
 	rep = tmp;
 
+	*pre = rep;
+	*pim = imp;
+}
+
+static double dedekind_eta (double re_q, double im_q)
+{
+	double rep, imp;
+	dedekind_eta_c (re_q, im_q, &rep, &imp);
 	return sqrt (rep*rep+imp*imp);
+}
+
+/* modular discriminat = eta to 24 */
+static double discriminant (double re_q, double im_q)
+{
+	double rep, imp;
+	dedekind_eta_c (re_q, im_q, &rep, &imp);
+
+	double phase = atan2 (imp, rep);
+	phase *= 24.0;
+	double mod = sqrt (rep*rep + imp*imp);
+	mod = pow (mod, 24.0);
+
+	double red = mod * cos (phase);
+	double imd = mod * sin (phase);
+
+	mod = pow (2.0*M_PI, 12.0);
+	red *= mod;
+	imd *= mod;
+
+	// return sqrt (red*red+imd*imd);
+	// return red;
+	return imd;
 }
 
 /*-------------------------------------------------------------------*/
@@ -126,7 +157,8 @@ MakeHisto (
 		{
 
 			// double phi = euler_prod (re_position, im_position);
-			double phi = dedekind_eta (re_position, im_position);
+			// double phi = dedekind_eta (re_position, im_position);
+			double phi = discriminant (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;
