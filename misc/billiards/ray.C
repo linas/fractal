@@ -140,12 +140,19 @@ Ray::Sphere (double radius)
 
 /* ==================================== */
 
-SinaiRay::SinaiRay (void)
+void
+SinaiRay::Init (void)
 {
    sphere_hits = 0;
    last_wall = -1;
    distance = 0.0;
    for (int i=0; i<6; i++) bounces[i] = 0;
+}
+
+
+SinaiRay::SinaiRay (void)
+{
+   Init();
 }
 
 /* ==================================== */

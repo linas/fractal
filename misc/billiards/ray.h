@@ -60,6 +60,7 @@ class SinaiRay
 {
    public:
       SinaiRay (void);
+      void Init (void);
       double distance;  // distance travelled by ray   
       int last_wall;    // last wall of intersection
       int bounces[6];   // how many bounces have occured off each wall

@@ -45,11 +45,13 @@ class PathIntegral
       int nx;  // dimension of pixel grid
       int ny;
 
+      double omega;  // energy
+      int oversample;   // samples per pixel
+
       double shooter[3]; // position of source
 
       complex<double> *amplitude;
-      double omega;  // energy
-      int oversample;   // samples per pixel
+      int *norm;
 };
 
 /* ==================================== */
@@ -59,6 +61,9 @@ PathIntegral::PathIntegral (int px, int py)
 {
    int i;
 
+   oversample = 6;
+   omega = 1.0;
+
    nx = px;
    ny = py;
 
@@ -67,21 +72,30 @@ PathIntegral::PathIntegral (int px, int py)
    shooter[2] = 5.0;
 
    amplitude = new complex<double> [nx*ny];
+   norm = new int [nx*ny];
 
-   for (i=0; i<nx*ny; i++) amplitude[i] = 0;
+   for (i=0; i<nx*ny; i++)
+   {
+      amplitude[i] = 0.0;
+      norm[i] = 0;
+   }
 
-   oversample = 2;
 }
 
 /* ==================================== */
 
+complex<double> myexp (double const &ph)
+{
+    complex<double> retval (cos(ph), sin (ph));
+    return retval;
+}
+
+/* ==================================== */
 void
 PathIntegral::TraceToroid(void)
 {
    SinaiRay sr;
    int i,j;
-
-   complex<double>  I(0.0, 1.0);
 
    int ox = oversample *nx;
    int oy = oversample *ny;
@@ -99,6 +113,7 @@ PathIntegral::TraceToroid(void)
          pixel[1] = 2.0 * (((double) j) + 0.51666)/ ((double) oy) - 1.0;
          pixel[2] = 1.0;
          VEC_DIFF (dir, pixel, shooter);
+         sr.Init();
          sr.Set (pixel, dir);
          sr.last_wall = 4;
 
@@ -133,10 +148,15 @@ PathIntegral::TraceToroid(void)
              }
 
              // next perform phase summation
-             complex<double> phase = I * omega * sr.distance;
-             amplitude [nx*py+px] += exp (phase);
-
-printf ("duude xy= %f %f \n", x, y);
+             double phase = omega * sr.distance;
+             amplitude [nx*py+px] += myexp (phase);
+             norm [nx*py+px] ++;
+          
+#if 0
+printf ("duude ph= %f ", phase);
+printf ("ampd= %f %f ", real(amplitude [nx*py+px]), imag(amplitude [nx*py+px]));
+printf ("duude amp= %f\n", abs<double>(amplitude [nx*py+px]));
+#endif
          }
       }
    }
@@ -154,6 +174,11 @@ PathIntegral::ToPixels (void)
       double red = 0.0;
       double green = 0.0;
       double blue = 0.0;
+
+      if (0 < norm[i])
+      {
+         red = 255.0 * abs<double> (amplitude[i]) / ((double) norm[i]);
+      }
 
       abgr[i] = 0xff & ((unsigned int) red);
       abgr[i] |= (0xff & ((unsigned int) green)) << 8;
