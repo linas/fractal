@@ -3,11 +3,15 @@
  * conj.c
  *
  * Conjugate map explorer
+ * Goal: try to find conjugate maps of the tent map of a specific shape
  *
  * December 2004
  */
 
-double a = 1.0;
+#include <math.h>
+#include <stdlib.h>
+
+double a = 0.5;
 
 double 
 phi (double x)
@@ -33,21 +37,67 @@ phiinv (double y)
 	if (y<0.5) return b-rad;
 	return b+rad;
 }
+
+double 
+phit (double x)
+{
+	double y;
+	double b;
+
+	y = tan (a*M_PI*(x-0.5));
+	b = 0.5/ tan (a*M_PI*0.5);
+	y *= b;
+	y +=0.5;
+
+	return y;
+}
+
+double 
+phitinv (double y)
+{
+	double b,x;
+
+	b = 0.5/ tan (a*M_PI*0.5);
+	x = atan ((y-0.5)/b);
+	x /= a*M_PI;
+	x +=0.5;
+
+	return x;
+}
+
+double 
+tent (double x)
+{
+	if (0.5 > x) return 2.0*x;
+	return 2.0-2.0*x;
+	// return 2.0*x-2.0;
+}
+
+double 
+eff (double x)
+{
+	if (0.5 > x) return x/(1-x);
+	return ((1-x)/x);
+}
 	
 int
-main()
+main(int argc, char ** argv)
 {
 	int i;
 
-	int imax=23;
+	a = atof (argv[1]);
+	printf ("#  a=%g\n", a);
+
+	int imax=233;
 	for (i=0; i<imax; i++) 
 	{
 		double x = ((double) i)/((double) imax);
 
-		double y = phiinv (x);
-		double xx = phi (y);
+		double y = phitinv (x);
+		y = tent (y);
+		double xx = phit (y);
 
-		printf ("%d %g  %g  %g\n", i, x, y, xx);
+		printf ("%d %g  %g  %g	%g\n", i, x, y, xx, eff(x));
 	}
 	return 0;
 }
