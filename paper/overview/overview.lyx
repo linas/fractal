@@ -44,9 +44,24 @@ Fractals and Continued Fractions seem to be deeply related in many ways.
 \end_inset 
 
 , which expains these curious relationships.
- An assortment of other curious observations is presented as well, such
- as a tie between non-Archimedean analysis and Cantor Sets.
+ As a byproduct, I think we expose a fantastic fractal symmetry on the rationals
  
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ themselves, and thus presumably also on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+.
+ This symmetry is never made use of in classical analysis, and probably
+ not in non-Archimedean analysis either.
+ It opens a whole set of new doors.
+ An assortment of other curious observations is presented as well.
 \layout Section
 
 Intro
@@ -2351,89 +2366,101 @@ All of the remaining group elements that we haven't yet discussed are those
 \end_inset 
 
 .
- These group elements can be obtained by concatenating 
+ These group elements can be obtained by alternately concatenating interval-shri
+nking and interval-expanding group elements.
+ One has to be considerably more careful in keeping track of the domains
+ and ranges of each mapping.
+ We claim (without proof at this time) that these types of mappings do not
+ introduce any new types of intervals, and so enumeration originally provided,
+ 
+\emph on 
+viz.
+ 
+\emph default 
+
+\begin_inset Formula $(\mathbb{Q}\otimes\mathbb{N}\otimes\mathbb{Z}_{2})\oplus(\mathbb{Q}\otimes\mathbb{N}\otimes\mathbb{Z}_{2})$
+\end_inset 
+
+ is essentially unchanged.
+
+\emph on 
+ 
 \layout Standard
 
-Thus we see that 
+ToDo: give for example 
+\begin_inset Formula $(rg^{-2}rg^{2})(x)=x+2$
+\end_inset 
+
+ and discuss what this means for the questin mark, and how we should treat
+ this (to modulo or not to modulo?)
+\layout Standard
+
+Note also that if we limit ourselves to alternately shrinking and growing
+ interval maps that are stricly contained one inside the other, then we
+ find a proper subroup of the modular group, whose group elements are now
+ enumerated by pairs of intervals or .xxx.
+ be careful here .
+ Again, the domain and range of these sub-symmetries are now limited.
+ 
+\layout Standard
+
+Thus I think we can now conclude that 
 \begin_inset Formula $\gamma$
 \end_inset 
 
- is a homomorphism of 
+ is an isomorphism of 
 \begin_inset Formula $?$
 \end_inset 
 
 , mapping the unit interval into a subinterval, completing the proof.
+ xxxx finish writing these conclusions.
+\layout Subsection
+
+Symmetries Induced on 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ (and 
+\begin_inset Formula $\mathbb{Q}_{p}$
+\end_inset 
+
+?)
 \layout Standard
 
-Actually, we should be a bit more 
-\layout Standard
+Note that the correspondances presented here induce fractal isomorphisms
+ of 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
 
-We conclude this section by noting that we have specified some, but not
- yet all of the symmetries of the Question Mark.
- The symmetry exhibited above is that of the Modular Group Gamma whose group
- elements are 
-\begin_inset Formula $\gamma\in\Gamma$
+ onto itself.
+ This was already hinted at in the previous section, where we were trying
+ to just plain-old count the rationals, and not getting what every middle
+ and high-school teacher teaches students to expect.
+ This symmetry would also imply a symmetry on the closure in reals 
+\begin_inset Formula $\mathbb{R}$
 \end_inset 
 
 .
- There are some additional, 'partial' symmetries that hold for only part
- of the interval, and we'll explore these in a later section.
- In breif, though, we can say these are the symmetries where the last coefficien
-t in the continued fraction, 
-\begin_inset Formula $a_{N}$
+ Exactly what it implies for the non-Archimedean closures 
+\begin_inset Formula $\mathbb{Q}_{p}$
 \end_inset 
 
-, is made negative.
- I call this a 'partial' symmetry because it places a pole within the interval.
- Quite amazingly, the pole does not wreck the whole interval: One still
- has perfect equality over a part of the interval.
- I'm not yet sure, but I think these poles map to Misiurewicz points.
- Just a wild guess.
- 
-\layout Subsection
-
-The Modular Group Gamma or 
-\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
-\end_inset 
-
-
-\layout Standard
-
-This section to be written.
- Note that 
-\begin_inset Formula $\gamma\in\Gamma$
-\end_inset 
-
-, the modular group Gamma.
- The modular group is also called 
-\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
-\end_inset 
-
- or 
-\begin_inset Formula $PSL\left(2,\mathbb{Z}\right)$
-\end_inset 
-
-, which is it and why.
+ is not yet clear to me.
+ This symmetry is never made use of in classical analysis.
  
 \layout Standard
 
-Note that the group product in 
-\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
-\end_inset 
-
- corresponds to the concatenation of continued fractions.
- What about the inverse group elemennt? What is the projective symmetry,
- and what is it hiding? 
-\layout Standard
-
-Note that these correspondances induce a symmetry on the rationals, something
- that is already hinted at in the previous section, where we just-plain-old
- counted the rationals.
- The field structure of the rationals in turn induces a field-like structure
- on the modular group.
- I have no clue of what this implies for modular forms or goodies like the
- Wierstrass elliptic integrals.
- This would be a great TBD.
+The field structure of the rationals in turn induces a field structure on
+ a certain subroup of the modular group, specfically, the interval-mapping
+ subgroup.
+ Albeit this would be a highly fractal structure ...
+ I have no clue of what this field structure implies for modular forms or
+ goodies like the Wierstrass elliptic integrals, etc.
+ This would be a great TBD with a whole-lotta partyin goin on.
 \layout Section
 
 Symmetry of the Mandelbrot Set and the Circle Map
@@ -2565,6 +2592,9 @@ sea of chaos
  group the symmetry group that maps islands into islands, for any period
  doubling map? What about the converse? Are there any maps, with islands,
  that do not have the Modular Form symmetry? 
+\layout Standard
+
+What about Misiurewicz points?
 \layout Section
 
 Distributions, Permutations
