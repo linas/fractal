@@ -1,0 +1,127 @@
+#! /bin/sh
+
+# cat recenter.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > recenter.gif
+# cat bigrecenter.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > bigrecenter.gif
+# cat ufo.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > ufo.gif
+# cat bigufo.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > bigufo.gif
+# cat bigtallcircle.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > bigtallcircle.gif
+# cat moire.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > moire.gif
+# cat inir.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > in.gif
+
+# takelog iteri inil 1
+# renorm inil inir 0.2 5
+# sum mino inir inic
+# cat inic.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > finer.gif
+# cat inir.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > finer.gif
+# renorm sweepi or 3
+# sum mino or ors
+# cat disti.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > age.gif
+#
+# when iter completes, use this
+# takelog iteri iterl 1
+# renorm iterl iter 0.14 7.0
+# cat iter.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > iter.gif
+# renorm agei age 1.8
+# cat age.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > age.gif
+# sum mino phasei phase
+# cat phase.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > phase.gif
+# cat avorxi.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > avorx.gif
+# cat avoryi.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > avory.gif
+# curl avorxi avoryi avora
+# div avorxi avoryi avora
+# abs avora avora 
+# renorm avora avor 24.0 0.0
+# takelog avora avorl
+# renorm avorl avor 0.2 8.0
+# cat avor.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > avora.gif
+# renorm doti dot 0.15 0.0
+# cat dotprodi.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > dot.gif
+# renorm wall waller 0.2 5
+# cat walli.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > wall.gif
+# takelog settlei setl 
+# renorm setl settle 1 0
+# cat settle.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > settle.gif
+# reclamp cout coutc 3.01
+# cat coutc.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+# cat cin.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+
+# takelog movcir24 cil 
+# renorm cil cilr 0.25 4
+# renorm cil cilr 0.14 7
+# reclamp cil cilr 0.4
+# cat cilr.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+
+# cat junk3.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+# cat aa.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+# paste oo aa pp
+# cat pp.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+
+# renorm msqage junk 0.028 0.0
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > msqage.gif
+
+# renorm cube junk 0.00003 0.0
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cube.gif
+
+#renorm quart junka -1.0e7 0.0
+# clamp junka junkb 1e-8 1e8
+# takelog junkb junkc
+# renorm junkc junk 0.11 -6
+
+# renorm quart junk -5 0.0
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > quart.gif
+
+# renorm quint junk 0.7 0.0
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > quint.gif
+
+# renorm olya junk 2000 0
+# clamp olya junka 0.00001 10000
+# takelog junka junkb
+# renorm junkb junk 0.22 11.5
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > olya.gif
+
+# renorm olya junk -100000 0
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > olyap.gif
+
+# this will show up positive (divergent lyapunov eponenets
+# renorm lya junk 2500 0
+# renorm lya junka 1 2e-3
+# takelog junka junkb
+# renorm junkb junk 3.5 6.28
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > lya.gif
+
+# this will show up the attractor (negative exponenets)
+# renorm lya junka -1 0
+# clamp junka junkb 1e-20 1e10
+# takelog junkb junkc
+# renorm junkc lyap 0.25 13.5
+# cat lyap.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > lyap.gif
+
+# takelog off junka
+# renorm junka junk 0.08 9
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > off.gif
+
+#renorm glop junka 1 0.01
+#cp glop.flo junk.flo
+# renorm glop junk 8000000.0 0.0
+# renorm glop junk 2 0
+# takelog glop junka
+# renorm junka junk 0.08 9
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+
+# cat ms.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+
+# these are good for stalks
+# renorm ms junk 0.13 0.0
+# renorm ms junk 0.14 0.0
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+
+# diff ms331 ms335 msd
+# renorm msd junk 10000.08 0.0
+# cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
+
+# clamp ms junka 0.0001 1.0e30
+# takelog junka junkb
+# takelog junka junkb
+# takelog junkb junkc
+renorm j junk 0.003 0.0
+cat junk.flo | ../image/flo2mtv |mtvtoppm | ppmtogif > cout.gif
