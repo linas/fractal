@@ -65,6 +65,7 @@ class lagGenericWordTable {
 
       void ResetAllWeights (void);
       void FlipAllWeights (void);
+      void AbsAllWeights (void);
       void AccumStrength (int pairid, float);
       void Activate (int pairid);
       void ActivateAll (void);
