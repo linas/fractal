@@ -8,54 +8,39 @@
  */
 
 #include "Farey.h"
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /* ------------------------------------------------------------ */
 
-main (argc, argv)
-int argc;
-char *argv[];
+main (int argc, char *argv[])
 {
-   struct Farey *f;
-   double x, t;
+   ContinuedFraction f;
+   double x, y, t;
    int n, d;
-   int i;
-   double delta_t;
 
    if (argc <3) {
       printf ("Usage: %s <num> <denom> \n", argv[0]);
       exit (1);
    }
 
-   f = CreateFarey ();
-
    n = atoi (argv[1]);
    d = atoi (argv[2]);
-   /* SetReal (f, x); */
-   /* x = GetFarey (f); */
-d=61*3200+1;
-t = -0.28812499999997809;
-t = 1.0 - 2.0 * (4060.0 / 5100.0);
 
-t = 1.0;
-delta_t = -2.0 / 5100.0;
-t -= delta_t;
+   t = ((double) n) / ((double) d);
+   /* f.SetReal (t); */
+   f.SetRatio (n, d);
 
-for(i=0; i<2061; i++) { t += delta_t;}
+   x = f.ToFarey (); 
 
-for (i=0; i<3200; i++) {
-n = 61*i;
-   RatioToContinuedFraction (f, n, d);
-   /* PrintContinuedFraction (f); */
-   /* x = GetReal (f); */
-   /* x = ContinuedFractionToEFraction (f, 1.0); */
-   /* x = ContinuedFractionToEFarey (f, log (2.0)); */
-   x = ContinuedFractionToZReal (f, t);
-}
+   f.SetRatio (n, n+d);
 
-   /* printf ("---------- its %f \n", x); */
+   y = 2.0 * f.ToFarey (); 
+
+   printf ("---------- f(%d/%d) = %f %f\n", n,d,x, y); 
 
 }
 
 /* ---------------------- END OF FILE ------------------------- */
+
