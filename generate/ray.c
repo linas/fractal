@@ -4,13 +4,15 @@
  */
 
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void
 ray (double *bin, int nbin)
 {
    double re, im;
    double dre, dim;
-   double phi, dphi;
+   double phi;
    double escape_radius, esq;
    int i, j, loop, itermax;
    int nx, ny;
@@ -91,6 +93,7 @@ ray (double *bin, int nbin)
 }
 
 
+int
 main (int argc, char *argv[])
 {
 
@@ -109,4 +112,5 @@ main (int argc, char *argv[])
       printf ("%d	%f	%f\n", i, phi, map[i]);
    }
 
+   return 0;
 }
