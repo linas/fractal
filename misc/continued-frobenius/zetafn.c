@@ -573,7 +573,7 @@ long double zeta_minus_harmonic (int n, long double ess)
 		long double kay = k;
 		long double term = powl (kay, -ess);
 		acc += term;
-		if (term < 1.0e-16*acc) break;
+		if (term < 1.0e-20*acc) break;
 	}
 	return acc;
 }
