@@ -9,7 +9,7 @@ CC = /usr/bin/cc -O2 -I $(INC)
 EXES= conj dyadic entropy exacto fdist feigen \
       fiddle fliptree gappy gkw mod moebius \
       mute orbit orbit-s padic \
-      pair rand-measure rdist summy swap sway sym \
+      pair pegs rand-measure rdist summy swap sway sym \
       sym-fun takagi theta tree vanish zeta
 
 all: 	$(EXES)
@@ -46,6 +46,7 @@ mute.o:  mute.C $(LIB)/Farey.o $(INC)/Farey.h
 orbit.o:	orbit.C
 orbit-s.o:	orbit-s.C
 padic.o:	padic.C
+pegs.o:  pegs.C $(LIB)/gcf.o $(INC)/gcf.h
 pair.o:  pair.C $(LIB)/Farey.o $(INC)/Farey.h
 rand-measure.o:	rand-measure.C $(LIB)/gcf.o $(INC)/gcf.h
 rdist.o:  rdist.C $(LIB)/Farey.o $(INC)/Farey.h
