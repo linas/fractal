@@ -32,7 +32,7 @@ Symmetries of Period-Doubling Maps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 13 November 2004)
+12 October 2004 (revised 14 November 2004)
 \layout Abstract
 
 The concept of self-similarity is central to the notion of a fractal, but
@@ -886,7 +886,7 @@ f(x)=\int_{0}^{\infty}c(w)t_{w}(x)\; dw\]
  (Are there other interesting examples?)
 \layout Subsection
 
-The Polynomials 
+The Cantor Polynomials 
 \layout Standard
 
 The action of a group element 
@@ -1041,6 +1041,220 @@ Homework: Describe
 
 .
  Is it possible to give a direct expression for the polynomial? 
+\layout Standard
+
+In either case, the polynomials that we are dealing with are closely related
+ to the inverse of the Cantor function.
+ This is perhaps best presented visually: Let us write the binary expansion
+ of a real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ as 
+\begin_inset Formula \[
+x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\]
+
+\end_inset 
+
+ and then define its Cantorization as 
+\begin_inset Formula \[
+c_{z}(x)=\sum_{k=1}^{\infty}b_{k}z^{k}\]
+
+\end_inset 
+
+ Clearly, for 
+\begin_inset Formula $z=1/2$
+\end_inset 
+
+, we have 
+\begin_inset Formula $c_{1/2}(x)=x$
+\end_inset 
+
+.
+ For 
+\begin_inset Formula $z=1/3$
+\end_inset 
+
+, we have essentially the inverse of the classic Cantor function, as show
+ in figure xxx here.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Cantor Polynomial
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dyadic-1-3.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a graph of the function 
+\begin_inset Formula $c_{z}(x)$
+\end_inset 
+
+ for a value of 
+\begin_inset Formula $z=1/3$
+\end_inset 
+
+.
+ 
+\end_inset 
+
+ For larger values of 
+\begin_inset Formula $z$
+\end_inset 
+
+, one can more clearly see the visual resemblance of the Cantor polynomial
+ to the derivative of the Takagi function.
+ The resemblance is not accidental, they really are the same thing, as long
+ as one takes care to properly define which binary expansion one is working
+ with.
+ We don't give the details here, although they are not hard to work out
+ (see homework problem below).
+ The essential point is that every rational number has two possible binary
+ expansions: for example, it is well known that 
+\begin_inset Formula $1.000..=0.111...$
+\end_inset 
+
+ .
+ But each such expansion yeilds two inequivalent Cantor polynomials.
+ Cantor's essential insight was that these two inequivalent representations
+ of the real numbers by binary sequences can be re-interpreted as the endpoints
+ of a set of non-overlapping line segments.
+ Converting the binary sequence into a polynomial series in 
+\begin_inset Formula $z$
+\end_inset 
+
+ make these two endpoints explicit by assigning a different polynomial to
+ each.
+ 
+\layout Standard
+
+Another language one can use to describe this is to say that there is a
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+gap
+\begin_inset Quotes erd
+\end_inset 
+
+ at every dyadic fraction i.e.
+ at every rational of the form 
+\begin_inset Formula $p/2^{n}$
+\end_inset 
+
+ for 
+\begin_inset Formula $p$
+\end_inset 
+
+ odd and integer 
+\begin_inset Formula $n>0$
+\end_inset 
+
+.
+ This gap is inherent in the representation of the reals by binary sequences.
+ The gap orders all of the reals above and below it.
+ Note that there is another construction by which one can place gaps at
+ every rational number.
+ This construction is arrived at through the isomorphism between dyadic
+ fractions and Farey Numbers by means of the Minkowski Question Mark function.
+ Essentially, we can represent every rational as a continued fraction, and
+ define gaps analogously.
+ This idea is developed further in another chapter (chapter XXX).
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Cantor Polynomial
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dyadic-2-3.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a graph of the function 
+\begin_inset Formula $c_{z}(x)$
+\end_inset 
+
+ for a value of 
+\begin_inset Formula $z=2/3$
+\end_inset 
+
+.
+ 
+\end_inset 
+
+
+\layout Standard
+
+The insight that we wish to provide here is that the two endpoints of Cantor's
+ interval construction can also be mapped to the left and right derivatives
+ of the Takagi function.
+ That is, for any dyadic rational 
+\begin_inset Formula $p/2^{n}$
+\end_inset 
+
+ for odd integer 
+\begin_inset Formula $p$
+\end_inset 
+
+, we have two inequivalent binary sequences that represent this rational.
+ One sequence maps to the derivative of the Takagi function on one side
+ of this rational, and the other to the other side of this rational.
+ 
+\layout Description
+
+Homwork: Make the above statements firm by providing all the correct factors
+ needed to relate the Cantor polynomial 
+\begin_inset Formula $c_{z}(x)$
+\end_inset 
+
+ to 
+\begin_inset Formula $q_{\gamma}(w)$
+\end_inset 
+
+ and to the suitably firmed-up derivative 
+\begin_inset Formula $dt_{w}(x)/dx$
+\end_inset 
+
+.
+ Start by noticing that the traditional derivative is ill-defined only at
+ dyadic fractions; for all other rationals and irrationals, there is no
+ problem.
+ At the dyadic fractions, use the gap to assign left and right derivatives,
+ and give an exact expression for each.
+\layout Description
+
+Homework: The classic example of a Cantor Set is built by means of a dyadic
+ subdivision of the unit interval.
+ Because of this, we can apply the Modular Group symmetry here as well.
+ How do the limit points of the Cantor set (the points that are not the
+ endpoints of intervals) behave under the Modular Group? Can we use this
+ to gain insight into the structure of the Modular Group? Given that the
+ cardinality of the Cantor Set is the cardinality of the Continuum, can
+ we work backwards to deduce the action of the Modular Group on the Real
+ Numbers?
 \layout Subsection
 
 Higher-Dimensional Representations
