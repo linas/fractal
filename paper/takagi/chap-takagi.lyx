@@ -32,7 +32,7 @@ Symmetries of Period-Doubling Maps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 6 November 2004)
+12 October 2004 (revised 8 November 2004)
 \layout Abstract
 
 The concept of self-similarity is central to the notion of a fractal, but
@@ -669,18 +669,6 @@ Homework: Compute the matrix elements for
 Homework: Provide a general, explicit proof of the commuting diagram by
  pulling out one generator at a time out from under the expressions.
  
-\layout Description
-
-Research-Topic: Explore the curious polynomial in 
-\begin_inset Formula $w$
-\end_inset 
-
- that arises as the coefficient of 
-\begin_inset Formula $x$
-\end_inset 
-
-.
- (This is potentially a deeper and more interesting exercise).
 \layout Standard
 
 What have we done here? We have accomplished two things.
@@ -722,6 +710,10 @@ Corollary: The modular group is a symmetry group of the parabola, where
 \end_inset 
 
 .
+\layout Standard
+
+The next theorm shows that these representations, while isomorphic, are
+ not equivalent in the traditional sense.
 \layout Description
 
 Theorem: Every real (or complex!) value of 
@@ -841,6 +833,122 @@ s of the modular group.
  Below, we will show a representation on the complex plane.
  Are there other 3D representations, or is this it? Do we know anything
  about higher-dimensional representations?
+\layout Standard
+
+We can also compute the transformation fo the Takagi curve under the modular
+ group directly from the 
+\begin_inset Quotes eld
+\end_inset 
+
+dyadic polynomial
+\begin_inset Quotes erd
+\end_inset 
+
+ representation.
+ That is, because the 3D rep was a vector space representation, we can write
+ the tranformation rule as 
+\layout Standard
+
+
+\begin_inset Formula \[
+t_{w}(\gamma_{D}(x))=p(2w)+x\, q(2w)+w^{M}t_{w}(x)\]
+
+\end_inset 
+
+ for some polynomials 
+\begin_inset Formula $p,q$
+\end_inset 
+
+ and positive integer 
+\begin_inset Formula $M$
+\end_inset 
+
+.
+ A brief bit of scratching shows what these polynomials are.
+ For 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}$
+\end_inset 
+
+ as before, we have 
+\begin_inset Formula $M=a_{1}+...+a_{N}$
+\end_inset 
+
+.
+ Next, we write out the binary expansion for 
+\begin_inset Formula $\gamma_{D}(1)$
+\end_inset 
+
+ in terms of binary digits 
+\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} $
+\end_inset 
+
+ to get 
+\begin_inset Formula \begin{eqnarray*}
+\gamma_{D}(1) & = & \sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\\
+ & = & \begin{array}{ccccc}
+0. & \underbrace{000...000} & \underbrace{111...111} & \underbrace{000...000} & ...\\
+ & a_{1} & a_{2} & a_{3}\end{array}\end{eqnarray*}
+
+\end_inset 
+
+ where, as usual, we take the expansion such that the final binary digits
+ repeat forever, without upsetting the count 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+ of the previous digits; that is, 
+\begin_inset Formula \[
+b_{k}=\left\{ \begin{array}{ccc}
+1 & \;\textrm{ for N odd, }\; & \forall k>M\\
+0 & \;\textrm{ for N even, }\; & \forall k>M\end{array}\right.\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+The polynomials 
+\begin_inset Formula $p$
+\end_inset 
+
+ and 
+\begin_inset Formula $q$
+\end_inset 
+
+ can then be expressed directly in terms of this binary expansion.
+ Writing 
+\begin_inset Formula $z\equiv2w$
+\end_inset 
+
+ we have 
+\begin_inset Formula \[
+q(z)=\frac{(-)^{N}}{2^{M}}\sum_{k=1}^{M}(2b_{k}-1)z^{k-1}\]
+
+\end_inset 
+
+ and 
+\layout Standard
+
+
+\begin_inset Formula \[
+p(z)=\frac{1}{2^{M}}\sum_{k=1}^{M}a_{k}z^{k-1}\]
+
+\end_inset 
+
+where 
+\begin_inset Formula \[
+a_{k}=(-)^{N+1}b_{k}+\frac{1}{2}\left[1+(-)^{N}\right]=\left\{ \begin{array}{cc}
+b_{k} & \;\textrm{ for N odd}\\
+1-b_{k} & \;\textrm{ for N even}\end{array}\right.\]
+
+\end_inset 
+
+ Except for the leading factor, these are essentially polynomials over the
+ field 
+\begin_inset Formula $\mathbb{Z}_{2}=\mathbb{Z}/2\mathbb{Z}$
+\end_inset 
+
+.
 \layout Description
 
 Homework: In the previous section, we considered functions on the real number
@@ -882,6 +990,7 @@ f(x)=\int_{0}^{\infty}c(w)t_{w}(x)\; dw\]
 
  is the Dirac delta function.
  Provide other interesting examples.
+ (Are there other interesting examples?)
 \layout Subsection
 
 Other Maps
@@ -1120,6 +1229,7 @@ g^{3}rg^{2}\phi_{z}=\phi_{z}g^{3}rg^{2}=Eg^{3}rg^{2}+z\, Eg^{2}rg^{2}+z^{2}Egrg^
 \end_inset 
 
  cancels it out.
+ None-the-less, this polynomial is curious, and calls for further development.
  
 \layout Standard
 
