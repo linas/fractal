@@ -8,6 +8,9 @@
 // sphere has radius < 1.0
 
 
+#include <math.h>
+#include <stdio.h>
+
 #include "vvector.h"
 
 class Ray
@@ -38,6 +41,8 @@ class SinaiView
 {
    public:
       SinaiView (int, int);
+      void ToPixels (void);
+      void WriteMTV (const char *filename);
    public:
       int nx;  // dimension of pixel grid
       int ny;
@@ -46,6 +51,8 @@ class SinaiView
 
    private:
       SinaiRay **sr;
+      unsigned int *abgr;
+      unsigned int *pack;
 
 };
 
@@ -76,15 +83,48 @@ SinaiView::SinaiView (int px, int py)
       }
    }
 
+   abgr = new unsigned int [nx*ny];
+   pack = new unsigned int [3*nx*ny/4+1];
+   for (i=0; i<nx*ny; i++) abgr[i] = 0;
+   for (i=0; i<3*nx*ny/4; i++) pack[i] = 0;
+}
 
+/* ==================================== */
 
+void 
+SinaiView::ToPixels (void)
+{
+   int i,j;
+
+   for (j=0; j<ny; j++) {
+      for (i=0; i<nx; i++) {
+         abgr[nx*j+i] = i%255;
+      }
+   }
+
+   unsigned int *p = pack;
+   for (i=0; i<nx*ny; i++) {
+      *p = abgr[i] & 0xffffff;
+      ((char *) p) += 3;
+   }
+}
+
+void 
+SinaiView::WriteMTV (const char * filename)
+{
+   FILE *fh = fopen (filename, "w");
+   fprintf (fh, "%d %d\n", nx, ny);
+   fwrite (pack, 4, 3*nx*ny/4+1, fh);
+   fclose (fh);
 }
 
 main ()
 {
-    SinaiView v (400,400);
+   SinaiView v (400,400);
 
 
+   v.ToPixels();
+   v.WriteMTV ("junk.mtv");
     
 
 }
