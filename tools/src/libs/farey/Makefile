@@ -83,3 +83,5 @@ realclean: clean
 	cd loops; make realclean
 	$(RM) Prime inc
 
+dist:
+	tar -zcvf x *.C *.h *.c Makefile .cvsignore
