@@ -26,7 +26,7 @@ static void euler_prod_c (double re_q, double im_q, double *prep, double *pimp)
 	*pimp = 0.0;
 
 	double rep = 1.0;
-	double imp = 1.0;
+	double imp = 0.0;
 
 	double qpr = re_q;
 	double qpi = im_q;
