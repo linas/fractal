@@ -17,35 +17,57 @@ main(int argc, char *argv[])
 
 	if (argc <2)
 	{
-		fprintf (stderr, "Usage: %s <num>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <nbins> <maxiter>\n", argv[0]);
 		exit (1);
 	}
-	int max = atoi (argv[1]);
+	int nbins = atoi (argv[1]);
+	int max = atoi (argv[2]);
 
-#define BINSZ 400
-	double bin[BINSZ];
+#define BINSZ 45720
+	int bin[BINSZ];
 	for (i=0; i<BINSZ; i++)
 	{
-		bin[i] = 0.0;
+		bin[i] = 0;
 	}
 
 	int n, d;
+	int cnt = 0;
 	for (d=1; d<max; d++)
 	{
-		for (n=1; n<d; n++)
+		for (n=0; n<=d; n++)
 		{
+			int gcf = gcf32 (n,d);
+			int nn = n/gcf;
+			int dd = d/gcf;
+#define DO_GCF_ELIM
+#ifdef DO_GCF_ELIM
+			if (gcf != 1) continue;
+#endif
 
-			double x = ((double) n)/ ((double) d);
-			x *= BINSZ;
+			double x = ((double) (nn*nbins))/ ((double) dd);
 			int ib = (int) x;
-			bin [ib] += 1.0;
+			if (ib >= nbins) continue;
+			bin [ib] ++;
+			cnt ++;
+// if (ib == nbins/2) { printf ("bin %d f=%d/%d\n", ib, n, d); }
+// if (ib == nbins/2-1) { printf ("bin %d f=%d/%d\n", ib, n, d); }
 		}
 	}
+#if 0
+	cnt -= bin[0];
+	cnt -= bin[nbins-1];
+	cnt += 2*cnt/(nbins-2);
+	bin[0] = cnt/(nbins-2);
+	bin[nbins-1]= cnt/(nbins-2);
+#endif
 
-	for (i=0; i<BINSZ; i++)
+	printf ("# total count=%d\n", cnt);
+	for (i=0; i<nbins; i++)
 	{
-		bin[i] /= (double) max;
-		double x = ((double) i) / ((double) BINSZ);
-		printf ("%8.6g	%g\n", x, bin[i]);
+		double bcnt = bin[i];
+		bcnt /= (double) cnt;
+		bcnt *= (double) nbins;
+		double x = ((double) i) / ((double) nbins);
+		printf ("%5d	%8.6g	%g\n", i, x, bcnt);
 	}
 }

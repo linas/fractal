@@ -24,13 +24,18 @@ main(int argc, char *argv[])
 
 	FareyIterator fi;
 
+	int numbins;
+
 #define BINSZ 400
 	double bin[BINSZ];
 	for (i=0; i<BINSZ; i++)
 	{
 		bin[i] = 0.0;
 	}
+	bin[0] = 1.0;
+	bin[BINSZ-1] = 1.0;
 
+	int cnt =2;
 	for (i=0; i<max; i++)
 	{
 		int n,d;
@@ -40,11 +45,13 @@ main(int argc, char *argv[])
 		x *= BINSZ;
 		int ib = (int) x;
 		bin [ib] += 1.0;
+		cnt ++;
 	}
 
 	for (i=0; i<BINSZ; i++)
 	{
-		bin[i] /= (double) max;
+		bin[i] /= (double) cnt;
+		bin[i] *= BINSZ;
 		double x = ((double) i) / ((double) BINSZ);
 		printf ("%8.6g	%g\n", x, bin[i]);
 	}
