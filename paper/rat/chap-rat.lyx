@@ -33,7 +33,7 @@ Distributions of Rationals on the Unit Interval
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004
+12 October 2004 (revised 7 November 2004)
 \layout Abstract
 
 The distribution of rationals on the unit interval is filled with surprises.
@@ -139,8 +139,10 @@ We develop the above wild-sounding claim a bit further in later chapters;
 Simple Counting
 \layout Standard
 
-Lets begin by listing all of the fractions with denomintors from 1 to N,
- and numerators between 0 and the denomintor.
+Lets begin by trying to enumerate the rationals, and seeing how they fall
+ on the real number line.
+ Start by listing all of the fractions with denomintors from 1 to N, and
+ numerators between 0 and the denomintor.
  Clearly, many of these fractions will be reducible, i.e.
  the numerator and denominator have common factors, and thus, in this simple-min
 ded enumeration, some rationals are counted multiple times.
@@ -148,11 +150,35 @@ ded enumeration, some rationals are counted multiple times.
  as 0/1, 0/2, 0/3 and so on.
  Likewise, 1 will appear in this list over and over: as 1/1, 2/2, 3/3, etc.
  We'll have 1/2 also appearing as 2/4, 3/6 and so on.
- So lets take a look at this in detail.
- The graph below shows this enumeration, up to a denominator of N=4000,
- carved up into 720 bins, and normalized to unit density.
+ Although this enumeration of the rationals clearly over-counts, it has
+ the advantage of being extremely simple: it is a subset of the rectangular
+ lattice 
+\begin_inset Formula $\mathbb{Z}\times\mathbb{Z}$
+\end_inset 
+
+.
+ Its the canonical grade-school example of how the rationals are enumerable.
+ 
+\layout Standard
+
+Lets ask a fancy-sounding question: What is the distribution of this lattice
+ on the real number line? That is, what is the measure induced by the projection
+ of the lattice 
+\begin_inset Formula $\mathbb{Z}\times\mathbb{Z}$
+\end_inset 
+
+ onto the real number line? In not-so-fancy terms, how are the rationals
+ 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ distributed on the real number line? Lets draw some graphs.
+\layout Standard
+
+The graph below shows this enumeration, up to a denominator of K=4000, carved
+ up into N=720 bins, and normalized to unit density.
  That is, if 
-\begin_inset Formula $n/720<p/q<(n+1)/720$
+\begin_inset Formula $n/720\leq p/q<(n+1)/720$
 \end_inset 
 
 , then we assign the fraction 
@@ -163,7 +189,7 @@ ded enumeration, some rationals are counted multiple times.
 \begin_inset Formula $n$
 \end_inset 
 
-'th bin.
+'th bin, and so the graph is a histogram.
  We might expect this graph to have a huge peak at the bin n=360: after
  all, this bin will hold 1/2 and 2/4 and 3/6 and in general should have
  a big surfiet coming from the degeneracy at 1/2.
@@ -312,6 +338,78 @@ We will also need to explain why the modular group show up when one is counting
  rationals; we will do this in the next chapter, where we discuss the alternate
  representations of the reals.
  Its almost impossible to avoid.
+\layout Subsubsection
+
+Some Notes about Histogramming
+\layout Standard
+
+In light of the fact that the above graphs have some surprising features,
+ we take a moment to try to be precise about what we mean when we say 
+\begin_inset Quotes eld
+\end_inset 
+
+histogram
+\begin_inset Quotes erd
+\end_inset 
+
+ and 
+\begin_inset Quotes eld
+\end_inset 
+
+normalize
+\begin_inset Quotes erd
+\end_inset 
+
+.
+\layout Standard
+
+Lets go back to the first figure.
+ The total number of rationals in the histogram is 
+\begin_inset Formula $K(K+1)/2=4000\times4001/2=8002000$
+\end_inset 
+
+, a little over eight million: a decent sample size.
+ Each bin will have some count 
+\begin_inset Formula $C_{n}$
+\end_inset 
+
+ of these rationals.
+ We want to talk in statistical terms, so we normalize the bin count as
+ 
+\begin_inset Formula $D_{n}=NC_{n}/(K(K+1)/2)$
+\end_inset 
+
+, so that the average value or expected value of 
+\begin_inset Formula $D_{n}$
+\end_inset 
+
+ is 1.0.
+ That is, we have, by definition, 
+\begin_inset Formula \[
+\sum_{n=0}^{N}D_{n}=N\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+The act of bining a rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ requires a division; that is, in order to determine if 
+\begin_inset Formula $n/N\leq p/q<(n+1)/N$
+\end_inset 
+
+, a division is unavoidable.
+ When doing numerical simulations, it is very easy to perform the division
+ using floating point; however, this has the questionable act of introducing
+ floating-point rounding errors into the proceedings.
+ In this paper, we avoid this problem by sticking to integer math.
+ To get a sense of what happens for larger denominators (that is, to avoid
+ 32-bit overflows during divides and remainder calculations), we use the
+ Gnu Bignum Library, GMP, when we need to deal with larger values.
+ 
 \layout Subsection
 
 The Intro to the Theory
