@@ -26,7 +26,8 @@
 
 \layout Title
 
-The GKW and Related Operators
+The Bernoulli Operator, the Gauss-Kuzmin-Wirsing Operator, and the Riemann
+ Zeta
 \layout Author
 
 Linas Vepstas <linas@linas.org>
@@ -71,7 +72,8 @@ The general presentation attempts to assume very little prior acquaintance
  the real numbers, the modular group, and fractals.
 \layout Section
 
-The Gauss-Kuzmin-Wirsing Operator
+The Bernoulli Operator, the Gauss-Kuzmin-Wirsing Operator and the Riemann
+ Zeta
 \layout Standard
 
 THIS IS A DRAFT WORK IN PROGRESS.
@@ -90,6 +92,18 @@ which flies in the face of common assumptions that the spectrum is either
 
  eigenfunctions, or is continuous, with non-differentiable (fractal) eigenfuncti
 ons.
+ Of course, there is a catch: the eigenfunctions are differentiable everywhere
+ except at the endpoints, which does render them 
+\begin_inset Quotes eld
+\end_inset 
+
+non-physical
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ Explicit transformations between these and the fractal eigenfunctions are
+ presented.
  
 \layout Section
 
@@ -2026,7 +2040,7 @@ collapsed false
 
 \layout Caption
 
-Beta Real Part
+Real Part of Symmetric Beta
 \layout Standard
 
 
@@ -2080,6 +2094,13 @@ gets very small as n gets large, and so the normalization brings them to
 .
  In short, they'll all look more or less like this.
  
+\layout Standard
+
+XXX redo this graph to show 
+\begin_inset Formula $\Re\left[\beta(x;s)+\beta(1-x;s)\right]/2\left|\Gamma(1+s)\right|$
+\end_inset 
+
+ instead XXX
 \end_inset 
 
 
@@ -2092,7 +2113,7 @@ collapsed false
 
 \layout Caption
 
-Beta Magnitude
+Magnitude of Symmetric Beta
 \layout Standard
 
 
@@ -2131,6 +2152,13 @@ This figure illustrates a family of eigenvectors
 gets very small as n gets large, and so the normalization brings them to
  visually comparable values.
  
+\layout Standard
+
+XXX redo this graph to show 
+\begin_inset Formula $\left|\beta(x;s)+\beta(1-x;s)\right|/2\left|\Gamma(1+s)\right|$
+\end_inset 
+
+ instead XXX
 \end_inset 
 
 
@@ -2143,7 +2171,7 @@ collapsed false
 
 \layout Caption
 
-Exp figure
+Real part of Beta
 \layout Standard
 
 
@@ -2209,6 +2237,38 @@ This figure illustrates a family of eigenvectors
 
 .
  
+\layout Standard
+
+Although these curves appear to be sine-wave-like, it is perhaps more correct
+ to think of them as being Bernoulli-polynomial-like.
+ That is, to better understand what eigenvectors near some arbitrary value
+ of 
+\begin_inset Formula $s$
+\end_inset 
+
+ look like, its useful to think of what the polynomial 
+\begin_inset Formula $B_{\left\lfloor \Re s\right\rfloor }(x)$
+\end_inset 
+
+ looks like.
+ Recall, however, that, of course, 
+\begin_inset Formula $B_{k}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $k\geq3$
+\end_inset 
+
+ is very sine-wave like! Note also that the first curve shown above, for
+ 
+\begin_inset Formula $n=0$
+\end_inset 
+
+, generally resembles 
+\begin_inset Formula $B_{2}(x)$
+\end_inset 
+
+ which is a parabola.
 \end_inset 
 
 
@@ -2221,7 +2281,7 @@ collapsed false
 
 \layout Caption
 
-another magnit
+Magnitude of Beta 
 \layout Standard
 
 
@@ -2274,7 +2334,7 @@ collapsed false
 
 \layout Caption
 
-the arg
+Argument of Beta
 \layout Standard
 
 
@@ -2363,8 +2423,12 @@ There are eigenfunctions with eigenvalues greater than one, essentially
 \end_inset 
 
 .
- The remaining term is well-behaved and is shown in one of the accompanying
- figures.
+ The remaining term is well-behaved and is shown in figure xx
+\begin_inset LatexCommand \ref{cap:The-non-singular-part}
+
+\end_inset 
+
+xx.
  
 \layout Standard
 
@@ -2375,13 +2439,17 @@ collapsed false
 
 \layout Caption
 
-non-singular part
+
+\begin_inset LatexCommand \label{cap:The-non-singular-part}
+
+\end_inset 
+
+The Non-Singular Part of the Divergent Eigenfunctions
 \layout Standard
 
 
 \begin_inset Graphics
-	filename zeta-diverge.ps
-	rotateAngle 270
+	filename zeta-diverge.png
 
 \end_inset 
 
@@ -2390,17 +2458,27 @@ non-singular part
 
 This figure shows 
 \begin_inset Formula \[
-\eta_{even}(x;\sigma)=\frac{\cos\pi\sigma/2}{\sigma}\left[\beta(x;\sigma)+\beta(1-x;\sigma)\right]\]
+\eta_{even}(x;\sigma)=\frac{\cos\pi\sigma/2}{\sigma}\left[\beta(x;\sigma)+\beta(1-x;\sigma)\right]-x^{\sigma-1}-(1-x)^{\sigma-1}\]
 
 \end_inset 
 
- for 
-\begin_inset Formula $\sigma$
+ and 
+\begin_inset Formula \[
+\eta_{odd}(x;\sigma)=\frac{\sin\pi\sigma/2}{\sigma}\left[\beta(x;\sigma)-\beta(1-x;\sigma)\right]-x^{\sigma-1}+(1-x)^{\sigma-1}\]
+
 \end_inset 
 
-real.
- xxxxx wrong formula, finish me, subtract the divergent part ...
- odd part is sin.
+ for a value of 
+\begin_inset Formula $\sigma=-3.3$
+\end_inset 
+
+, corresponding to an eigenvalue of 
+\begin_inset Formula $9.85=2^{3.3}$
+\end_inset 
+
+.
+ Except for the singularity, we see that the finite part of these eigenfunctions
+ is very well behaved.
  
 \end_inset 
 
@@ -2471,8 +2549,44 @@ collapsed false
 Ringing
 \layout Standard
 
-This figure shows ringing/Gibbs phenomenon.
- 
+
+\begin_inset Graphics
+	filename zeta-gibbs.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows ringing/Gibbs phenomenon as 
+\begin_inset Formula $s$
+\end_inset 
+
+ approaches zero.
+ In the limit of 
+\begin_inset Formula $s=0$
+\end_inset 
+
+, we expect the real part of 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ to approach the trivial eigenfunction 
+\begin_inset Formula $\lim_{s\rightarrow0^{+}}\Re\beta(x;s)=-B_{0}(x)=-1$
+\end_inset 
+
+.
+ As this graph shows, the function is indeed trying very desperately to
+ get flat, with not much success.
+ The ringing occurs only at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+; there is no problem with convergence near larger integers, where 
+\begin_inset Formula $\lim_{s\rightarrow n}\Re(-i)^{s}\beta(x;s)=-B_{n}(x)$
+\end_inset 
+
+ converges very smoothly and cleanly.
 \end_inset 
 
 
@@ -2547,15 +2661,6 @@ s as the representative elements.
  This is I think the correct way to relate coordinate space to the Hilbert
  space, is by means of the quotient space generated by the kernel of the
  time-evolution operator.
- This provides the isomorphisms, and any other square-integrable function
- is thus expandable as a linear combination of the polynomial eigenfunctions
- plus the kernel.
- Talk about 
-\begin_inset Formula $H$
-\end_inset 
-
- and its spectrum.
- Symmetry symmetry talk about the symmetry group of the kernel.
  
 \layout Subsection
 
@@ -3615,7 +3720,7 @@ n\end{array}\right)x^{n}=\sum_{n=0}^{\infty}(-)^{n}(s-1)_{n}\,\frac{x^{n}}{n!}=\
 \end_inset 
 
  is the falling factorial.
- And so one is left to wonder what the function 
+ One is left to wonder what the function 
 \begin_inset Formula \[
 \mu(s;x)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
 s-1\\
@@ -3623,8 +3728,10 @@ n\end{array}\right)a_{n}x^{n}\]
 
 \end_inset 
 
- might be like, and what relationship it may have to the Polylogarithm.
- XXX this is the polylog, isn't it ??? XXXX.
+ might be like; it is presumably related to the Polylogarithm (Jonquiere's
+ function) XXXX Do the scratching needed to get the relationship nailed
+ down.
+ Ugh.
  The general idea of replacing power series by series in rising or falling
  Pochammer symbols and then exploring the curious relationships that result
  is referred to as Umbral Calculus; it seems that a number of interesting
@@ -3746,7 +3853,7 @@ w(n,k)=\sum_{m=0}^{k-1}\frac{\Gamma(1-k+m)}{\Gamma(1-k)}H_{n-1}^{(m+1)}w(n,k-1-m
 
  are given by 
 \begin_inset Formula \[
-H_{n}^{(rm}=\sum_{k=1}^{n}\frac{1}{k^{m}}\]
+H_{n}^{(m)}=\sum_{k=1}^{n}\frac{1}{k^{m}}\]
 
 \end_inset 
 
@@ -4608,16 +4715,15 @@ Here's a mapping that is continuous and is also fractally non-monotonic
 
  which looks sine-like and we want to exhibit the cosine-like so that we
  can build up fractally-periodic basis functions.
- 
+ Its also remarkable because its exactly ...XXX wow!
 \layout Section
 
 Conclusions
 \layout Standard
 
 Apologies for the format of this paper.
- Its not yet finished.
- Might never be, at this rate ...
- 
+ It's a veritable candy store of goodies; there are all these yummy toys
+ to play with, which one first?
 \layout Bibliography
 \bibitem [asdf]{key-1}
 
