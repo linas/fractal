@@ -9,10 +9,12 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include <gsl/gsl_sf_zeta.h>
 #include "zetafn.h"
 
+/* Return the n'th harmnic number */
 long double harmonic (int n, long double ess)
 {
 	long double acc = 0.0L;
@@ -26,6 +28,22 @@ long double harmonic (int n, long double ess)
 	return acc;
 }
 
+/* Return Hurwitz zeta equiv of harmonic */
+long double harmonic_hurwitz (int n, long double x, long double ess)
+{
+	long double acc = 0.0L;
+	int k;
+
+	for (k = 1; k<= n; k++)
+	{
+		long double kay = k;
+		kay += x;
+		acc += powl (kay, -ess);
+	}
+	return acc;
+}
+
+/* Return zeta function minus n'th harmonic */
 long double zeta_minus_harmonic (int n, long double ess)
 {
 	long double acc = 0.0L;
@@ -49,33 +67,7 @@ long double sanity (long double ess)
 	return zeta-expect;
 }
 
-long double symy (int m, int n, long double ess)
-{
-	int i;
-
-	long double en = -n;
-	long double pnk = 1.0L;
-	long double acc = 0.0L;
-
-	for (i=0; i<30; i++)
-	{
-		long double eye = i;
-		long double term = gsl_sf_zeta (eye+ess);
-		term -= harmonic (m, eye+ess);
-		term = zeta_minus_harmonic (m, eye+ess);
-		term *= pnk;
-		term *= fbinomial (ess+eye-1.0L, i);
-		acc += term;
-		pnk *= en;
-	}
-	double expect = gsl_sf_zeta (ess);
-	expect -= harmonic (m+n, ess);
-	expect = zeta_minus_harmonic (m+n, ess);
-	acc -=  expect;
-	
-	return acc;
-}
-
+/* Most basic sum, with unity in the sum */
 long double summy (long double ess)
 {
 	int i;
@@ -104,10 +96,77 @@ long double summy (long double ess)
 	return acc;
 }
 
+/* Basic sum for integers in the middle of the sum */
+long double symy (int m, int n, long double ess)
+{
+	int i;
+
+	long double en = -n;
+	long double pnk = 1.0L;
+	long double acc = 0.0L;
+
+	for (i=0; i<50; i++)
+	{
+		long double eye = i;
+		// long double term = gsl_sf_zeta (eye+ess);
+		// term -= harmonic (m, eye+ess);
+		long double term = zeta_minus_harmonic (m, eye+ess);
+		term *= pnk;
+		term *= fbinomial (ess+eye-1.0L, i);
+		acc += term;
+		pnk *= en;
+	}
+	// double expect = gsl_sf_zeta (ess);
+	// expect -= harmonic (m+n, ess);
+	double expect = zeta_minus_harmonic (m+n, ess);
+	acc -=  expect;
+	
+	return acc;
+}
+
+/* Basic half-integer sum */
+long double sym_half (int m, int n, long double ess)
+{
+	int i;
+
+	long double en = n;
+	long double pnk = 1.0L;
+	long double acc = 0.0L;
+	long double ts = powl (0.5L, ess);
+
+	for (i=0; i<60; i++)
+	{
+		long double eye = i;
+		// long double term = gsl_sf_zeta (eye+ess);
+		// term -= harmonic (m, eye+ess);
+		long double term = zeta_minus_harmonic (m, eye+ess);
+		term *= pnk;
+		term *= fbinomial (ess+eye-1.0L, i);
+		acc += term;
+		pnk *= -en*(1.0 + 0.5*en);
+	}
+	acc *= ts;
+
+	double expect = gsl_sf_zeta (ess);
+	expect *= 1.0 - ts;
+	expect -= 1.0;
+	expect -= ts * harmonic_hurwitz (m+n, 0.5L, ess);
+	acc -=  expect;
+	
+	return acc;
+}
+
 int
 main (int argc, char * argv[])
 {
 	int i;
+
+	if (3>argc) {
+		fprintf (stderr, "Usage: %s <m> <n>\n", argv[0]);
+		exit (1);
+	}
+	int m = atoi (argv[1]);
+	int n = atoi (argv[2]);
 
 	int nmax = 25;
 
@@ -117,8 +176,10 @@ main (int argc, char * argv[])
 		x *= 6.0;
 		x += 1.3;
 
-		double acc = summy (x);
-		acc = symy (6, 7, x);
+		double acc;
+		// acc = summy (x);
+		// acc = symy (6, 7, x);
+		acc = sym_half (m, n, x);
 		printf ("%d	%g	%g\n", i, x, acc);
 	}
 
