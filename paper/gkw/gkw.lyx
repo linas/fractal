@@ -351,8 +351,24 @@ In practice, when one is given an iterated map
 
  as the matrix equation for the transformation of polynomials, expressed
  in classical notation.
- Completely equivalently, we can use the Dirac bra-ket notation, writing
- down the operator in space coordinates:
+ 
+\layout Standard
+
+There are a variety of different notations that one can use when working
+ with matrix operators, all of which are, at a certain level, completely
+ equivalent.
+ However, certain notations are handier than others depending on what representa
+tion one is working with, and what point one is trying to emphasize.
+ Note in particular that the Dirac bra-ket notation is both very useful,
+ and is also sometimes a source for confusion, especially when mixed with
+ other notations.
+ Thus, in the following, we take some pains to clarify this notation, giving
+ a prolonged remedial presentation.
+ (XXX this should be moved to an apendix).
+\layout Standard
+
+The operator, written in the polynomial representation, in space coordinates,
+ is:
 \begin_inset Formula \[
 \delta\left(g(x)-y\right)=U_{g}(x,y)=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left\langle x|m\right\rangle \left\langle m|U_{g}|n\right\rangle \left\langle n|y\right\rangle \]
 
@@ -363,11 +379,11 @@ In practice, when one is given an iterated map
 \end_inset 
 
  and 
-\begin_inset Formula $\left\langle x|m\right\rangle =x^{m}/m!$
+\begin_inset Formula $\left\langle x|m\right\rangle =x^{m}$
 \end_inset 
 
  and 
-\begin_inset Formula $\left\langle n|y\right\rangle =\delta^{(n)}(y)/n!$
+\begin_inset Formula $\left\langle n|y\right\rangle =(-)^{n}\delta^{(n)}(y)/n!$
 \end_inset 
 
 , the latter being the 
@@ -375,7 +391,75 @@ In practice, when one is given an iterated map
 \end_inset 
 
 'th derivative of the Dirac delta function.
- Then, integrating over 
+ In this basis, 
+\begin_inset Formula $U$
+\end_inset 
+
+ is not diagonal, and the kets 
+\begin_inset Formula $\left|n\right\rangle $
+\end_inset 
+
+ are not eigenvectors, and the vector element 
+\begin_inset Formula $\left\langle x|m\right\rangle $
+\end_inset 
+
+ is neither the complex conjugate nor the transpose of 
+\begin_inset Formula $\left\langle n|y\right\rangle $
+\end_inset 
+
+.
+ These are rather monomials and thier inverses, and obey traditional orthogonali
+ty and completeness relationships.
+ The inner products demonstrate orthogonality: 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle n|m\right\rangle  & = & \int dx\left\langle n|x\right\rangle \left\langle x|m\right\rangle \\
+ & = & \int dx\,(-)^{n}\frac{\delta^{(n)}(x)}{n!}x^{m}\\
+ & = & \delta_{nm}\end{eqnarray*}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle x|y\right\rangle  & = & \sum_{n=0}^{\infty}\left\langle x|n\right\rangle \left\langle n|y\right\rangle \\
+ & = & \sum_{n=0}^{\infty}(-x)^{n}\frac{\delta^{(n)}(y)}{n!}\\
+ & = & \delta(y-x)\end{eqnarray*}
+
+\end_inset 
+
+ are the orthogonality relationships in polynomial space and coordinate
+ space, respectively.
+ The completeness relationships define the identity operator 
+\begin_inset Formula \[
+\mathbb{I}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|=\int dx\left|x\right\rangle \left\langle x\right|\]
+
+\end_inset 
+
+ whose matrix elements in coordinate space are 
+\begin_inset Formula $\left\langle x\right|\mathbb{I}\left|y\right\rangle =\delta(y-x)$
+\end_inset 
+
+ and, in polynomial space, 
+\begin_inset Formula $\left\langle m\right|\mathbb{I}\left|n\right\rangle =\delta_{mn}$
+\end_inset 
+
+.
+ In this notation, a function is represented by it's Taylor series: 
+\begin_inset Formula \begin{eqnarray*}
+f(x) & = & \left\langle x|f\right\rangle \\
+ & = & \sum_{n=0}^{\infty}\left\langle x|n\right\rangle \left\langle n|f\right\rangle \\
+ & = & \sum_{n=0}^{\infty}x^{n}\left\langle n|f\right\rangle \\
+ & = & \sum_{n=0}^{\infty}x^{n}\int dy\left\langle n|y\right\rangle \left\langle y|f\right\rangle \\
+ & = & \sum_{n=0}^{\infty}x^{n}\int dy(-)^{n}\frac{\delta^{(n)}(y)}{n!}f(y)\\
+ & = & \sum_{n=0}^{\infty}x^{n}\frac{f^{(n)}(0)}{n!}\end{eqnarray*}
+
+\end_inset 
+
+
+\layout Standard
+
+Lets complete the review by taking the coordinate-sapce representation of
+ the Frobenius-Perron operator back to its matrix representation.
+ Integrating the coordinate-space operator representation over 
 \begin_inset Formula $y$
 \end_inset 
 
@@ -394,26 +478,37 @@ In practice, when one is given an iterated map
 
 
 \begin_inset Formula \[
-=\sum_{m,n=0}^{\infty}\;\frac{x^{m}}{m!}\; U_{mn}\int dy\;\frac{\delta^{(n)}(y)}{n!}\rho(y)\]
+=\sum_{m,n=0}^{\infty}\; x^{m}\; U_{mn}\int dy\;\frac{\delta^{(n)}(y)}{n!}\rho(y)\]
 
 \end_inset 
 
  
 \begin_inset Formula \[
-=\sum_{m,n=0}^{\infty}\;\frac{x^{m}}{m!}\; U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}\rho(y)}{dy^{n}}\right|_{y=0}\]
+=\sum_{m,n=0}^{\infty}\; x^{m}\; U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}\rho(y)}{dy^{n}}\right|_{y=0}\]
 
 \end_inset 
 
 
 \begin_inset Formula \[
-=\sum_{m,n=0}^{\infty}\;\frac{x^{m}}{m!}\; U_{mn}\;\frac{\rho^{(n)}(0)}{n!}\]
+=\sum_{m,n=0}^{\infty}\; x^{m}\; U_{mn}\;\frac{\rho^{(n)}(0)}{n!}\]
 
 \end_inset 
 
- The above sets of expressions, although in a certain sense are 'equivalent',
- as we did use the equals sign, do in fact do a great deal of violence because
- they hide or incorrectly equate the function spaces on which the operator
  
+\layout Standard
+
+It is critical to understand that the above notation and conventions are
+ applicable only to the polynomial representation, and by construction,
+ yeilds discrete spectra and polynomial (analytic, 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+) eigenfunctions.
+ This representation is more-or-less incapable of doing otherwise.
+ The above expressions, although constructed using an equals sign, in fact
+ do a great deal of violence and are in a certain way violently incorrect,
+ because they hide or incorrectly equate the function spaces on which the
+ operator 
 \begin_inset Formula $U_{g}$
 \end_inset 
 
@@ -423,13 +518,16 @@ In practice, when one is given an iterated map
 \end_inset 
 
  is not differentiable or is otherwise singular, the expansion in derivatives
- is not justified; by contrast, 
+ is not justified.
+ As we will see shortly, when considered as acting in the space of square-integr
+able functions, 
 \begin_inset Formula $U_{g}$
 \end_inset 
 
- acting in the space of square-integrable functions may have non-differentiable
- eigenfunctions (which turn out to be, of course, fractals, which is the
- whole point of this excercise!) 
+ can and will have fractal eigenfunctions, which will typically be non-different
+iable and even possibly continuous-nowhere, and thus not representable by
+ polynomials.
+ This is, of course, the whole point of this excercise!
 \layout Standard
 
 If one is very lucky, one finds that 
@@ -516,8 +614,45 @@ The Frobenius-Perron operator of the Bernoulli map is given by
 \layout Standard
 
 Blah blah blah.
- How much more here do we want to say? Well, Provide the matrix elements.
- Provide the discrete eigenfunctions, which are amazingly also named after
+ How much more here do we want to say? 
+\layout Standard
+
+Well, Provide the matrix elements.
+\layout Standard
+
+
+\begin_inset Formula \[
+\left[U_{B}\right]_{mk}\equiv U_{mk}=\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
+k\\
+m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\left(\begin{array}{c}
+m\\
+k\end{array}\right)$
+\end_inset 
+
+ is the binomial coefficient, and 
+\begin_inset Formula \[
+\Theta_{mk}=\left\{ \begin{array}{c}
+0\;\textrm{ if }\; k\leq m\\
+1\;\textrm{ if }\; k>m\end{array}\right.\]
+
+\end_inset 
+
+ is a traceless, pure upper-triangular matrix.
+ Thus, for the polynomial eigenstates, we can promptly read teh eigenvalues
+ off the diagonal.
+ Because its upper-triangular, its very quickly solvable for both the left
+ and right eigenvectors, which agree perfectly w/ Driebe.
+ 
+\layout Standard
+
+\layout Standard
+
+Provide the discrete eigenfunctions, which are amazingly also named after
  Bernoulli: the Bernoulli polynomials.
  What is the kernel of 
 \begin_inset Formula $U_{B}$
@@ -1194,45 +1329,31 @@ However, there are suggestive elements.
 \end_inset 
 
  which is the function argument to the GKW operator.
- This suggests that the tantalizing (but false) isomorphism' 
+ This suggests the tantalizing re-write of the terms of GKW as 
 \begin_inset Formula \[
-?\left(\sum_{n=1}^{\infty}\frac{1}{(n+x)^{2}}f\left(\frac{1}{n+x}\right)\right)\approx\sum_{n=1}^{\infty}\frac{1}{2^{n}}?\circ f\circ?^{-1}\left(\frac{2-?(x)}{2^{n}}\right)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}?\circ f\left(\frac{1}{n+x}\right)\]
+f\left(\frac{1}{n+x}\right)=f\circ?^{-1}\left(\frac{2-?(x)}{2^{n}}\right)\]
 
 \end_inset 
 
- Oddly, though, we can varify that the above does hold for at least the
- zeroth eigenfunction of the GKW, which is 
-\begin_inset Formula $f(x)=1/(1+x)$
-\end_inset 
+ Also, one can do strange things such as xxx but why do we want to do that?
+\layout Standard
 
-.
- Substituting in the above, one quickly finds ahah ????????????????? XXXXXXXXXXX
-XX this is just plain wrong bzzzzzzzzzzzzztt.
-\begin_inset Formula \[
-?\left(\frac{1}{1+x}\right)=1-\frac{?(x)}{2}=\sum_{n=1}^{\infty}\frac{1}{2^{n}}?\left(\frac{1}{1+x}\right)\]
-
-\end_inset 
-
- However, substituting a polynomial for 
-\begin_inset Formula $f$
-\end_inset 
-
- in the above reveals that the 
-\begin_inset Formula $\approx$
-\end_inset 
-
- is in fact a 
-\begin_inset Formula $\neq$
-\end_inset 
-
-
+The point is to not give up hope on the operator relationships, even though
+ the polynomial basis breaks the relationship.
+ Thus, we are motivated to explore other bases, and not just the polynomial
+ basis.
+ Fortunately, we can find some of these.
+ 
 \layout Subsection
 
 Fractal Eigenfunctions of the Second Sawtooth
 \layout Standard
 
 The Takagi curve can be used to build an alternate set of eigenfunctions
- for the second sawtooth, posessing continuous-spectrum eigenvalues.
+ for the seco
+\layout Standard
+
+nd sawtooth, posessing continuous-spectrum eigenvalues.
  These eigenfunctions are not differentiable, and thus cannot be obtained
  through polynomials, and thus are not visible when working with the operator
  in a polynomial-basis Hilbert Space.
