@@ -14,14 +14,15 @@
 
 main () 
 {
-   double gb0 = 1.0e-4;  // gyromagnetic * magnetic field 
+   double gb0 = 2.0e-5;  // gyromagnetic * magnetic field 
 
    long long imax = 48023;  // max iterations
    imax *= 1024*1024;
 
-   int nprec_max = 10000;
+   int nprec_max = 20000;
 
    printf ("# \n");
+   printf ("# random start \n");
    printf ("# nprec_max = %d\n", nprec_max);
    printf ("# gb0 = %g\n", gb0);
    printf ("# \n");
@@ -29,7 +30,7 @@ main ()
    fflush (stdout);
 
    double initial_theta;
-   for (initial_theta=0.05; initial_theta <M_PI; initial_theta +=0.1)
+   for (int loop=1; loop<100; loop++)
    {
       long long last_i = 0;
       double theta, d_theta;  // dipole angle to z axis
@@ -38,6 +39,8 @@ main ()
       double sin_phi, cos_phi;
       int nprec = 0;        // number of precessions
 
+      initial_theta = loop;
+      initial_theta -= M_PI * ((int) (((double)loop)/M_PI));
       theta = initial_theta;
       phi = 0.0;
       sin_theta = sin(theta);
