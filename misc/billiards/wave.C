@@ -131,6 +131,15 @@ PathIntegral::TraceToroid(void)
          {
             use_ray = 1;
          }
+#if 0
+         else
+         if ((sr.direction[0] < 0.0)  && 
+             (fabs (sr.direction[1]) < -sr.direction[0]) &&
+             (fabs (sr.direction[2]) < -sr.direction[0]))
+         {
+            use_ray = 1;
+         }
+#endif
 
          if (use_ray)
          {
