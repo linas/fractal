@@ -86,9 +86,9 @@ main (int argc, char *argv[])
    
       deno = 6899 * width +1;
       for (j=0; j<width; j++){
-         nume = 6889*j; 
-         /* pixel_row[j] = straight_zmap (f, nume, deno, t); */
-         pixel_row[j] = symmetric_zmap (f, nume, deno, t);
+         nume = 6899*j; 
+         pixel_row[j] = straight_zmap (f, nume, deno, t); 
+         // pixel_row[j] = symmetric_zmap (f, nume, deno, t);
       }
       fwrite (pixel_row, sizeof(float), width, fil);
       fflush (fil);
