@@ -153,8 +153,9 @@ This section provides a basic review of the Frobenius-Perron operator and
  
 \layout Standard
 
-The Frobenius-Perron operator of a function provides a tool for studying
- the dynamics of the iteration of that function.
+The Frobenius-Perron operator of a function, sometimes called the Transfer
+ Operator of that function, provides a tool for studying the dynamics of
+ the iteration of that function.
  If one only studies how a point value jumps around during iteration, one
  gets a very good sense of the point dynamics but no sense of how iteration
  acts on non-point sets.
@@ -3116,7 +3117,7 @@ This section lists an assortment of random algebraic results, none particularly
 
 , then it would also solve 
 \begin_inset Formula \[
-\frac{1}{(1+x)^{2}}\rho\left(\frac{1}{1+x}\right)=\lambda\left(\rho(x)-\rho(+1)\right)\]
+\frac{1}{(1+x)^{2}}\rho\left(\frac{1}{1+x}\right)=\lambda\left(\rho(x)-\rho(x+1)\right)\]
 
 \end_inset 
 
@@ -3780,18 +3781,49 @@ Numerically, it appears that
 
 appear naturally in the Taylor's expansion for the Gamma function, and so
  one finds 
-\begin_inset Formula \[
-\sum_{n=0}^{\infty}a_{n}z^{n}=\frac{1}{1-z}+\frac{\ln(1-z)}{z}\left(\frac{1}{1-z}-\frac{1}{2}\right)+\frac{1}{2}\ln\Gamma\left(\frac{1}{1-z}\right)\]
+\begin_inset Formula \begin{eqnarray*}
+\alpha(z) & = & \sum_{n=0}^{\infty}a_{n}z^{n}\\
+ & = & \frac{1}{1-z}+\frac{\ln(1-z)}{z}\left(\frac{1}{1-z}-\frac{1}{2}\right)+\frac{1}{z}\ln\Gamma\left(\frac{1}{1-z}\right)\end{eqnarray*}
 
 \end_inset 
 
+ This is an interesting function in its own right.
+ At first glance, one might think that its divergent at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, with a cut extending to the right for 
+\begin_inset Formula $1<z$
+\end_inset 
+
+.
+ In the cut one expects to find poles at 
+\begin_inset Formula $-n=1/(1-z)$
+\end_inset 
+
+, that is, at 
+\begin_inset Formula $z=1+1/n$
+\end_inset 
+
+, accumulating to an essential singularity at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ But this doesn't seem to be the case at all; some preliminary analysis
+ seems to show that 
+\begin_inset Formula $\alpha(z)$
+\end_inset 
+
+ is an entire function, and doesn't have any poles or singularities anywhere.
+ This function deserves a more thorough investigation.
  Some curious values for this sum are 
 \begin_inset Formula \[
 \sum_{n=0}^{\infty}a_{n}=\ln\sqrt{2\pi}-1=-0.081061467...\]
 
 \end_inset 
 
- and 
+ which can be obtained from Sterling's formula, and 
 \begin_inset Formula \[
 \sum_{n=0}^{\infty}a_{n}2^{-n}=2-3\ln2=-0.079441542...\]
 
