@@ -223,8 +223,8 @@ SinaiView::SinaiView (int px, int py)
       for (j=0; j<ny; j++) {
          double pixel[3];
          double dir[3];
-         pixel[0] = 2.0 * (((double) i) + 0.5)/ ((double) nx) - 1.0;
-         pixel[1] = 2.0 * (((double) j) + 0.5)/ ((double) ny) - 1.0;
+         pixel[0] = 2.0 * (((double) i) + 0.51333)/ ((double) nx) - 1.0;
+         pixel[1] = 2.0 * (((double) j) + 0.51666)/ ((double) ny) - 1.0;
          pixel[2] = 1.0;
          VEC_DIFF (dir, pixel, eye);
          sr[nx*j+i].Set (pixel, dir);
@@ -239,6 +239,9 @@ SinaiView::SinaiView (int px, int py)
 }
 
 /* ==================================== */
+
+#define NNN (-1.0 + 100.0*DEGENERATE_TOLERANCE)
+#define PPP (1.0 - 100.0*DEGENERATE_TOLERANCE)
 
 void
 SinaiView::Trace(void)
@@ -277,11 +280,32 @@ SinaiView::Trace(void)
    
          sr[i].Bounce (walls[next_wall]);
 
+#if BROKEN
          // check for corner conditions
-         if (-1.0 >= sr[i].position[0])
+         if (((NNN >= sr[i].position[0]) ||
+              (PPP <= sr[i].position[0])) &&
+              (0 != sr[i].last_wall) &&
+              (1 != sr[i].last_wall))
          {
-//xxx
+            sr[i].direction[0] = -  sr[i].direction[0];
          }
+
+         if (((NNN >= sr[i].position[1]) ||
+              (PPP <= sr[i].position[1])) &&
+              (2 != sr[i].last_wall) &&
+              (3 != sr[i].last_wall))
+         {
+            sr[i].direction[1] = -  sr[i].direction[1];
+         }
+
+         if (((NNN >= sr[i].position[2]) ||
+              (PPP <= sr[i].position[2])) &&
+              (4 != sr[i].last_wall) &&
+              (5 != sr[i].last_wall))
+         {
+            sr[i].direction[2] = -  sr[i].direction[2];
+         }
+#endif
 
          if (sr[i].distance > distance) break;
       }
@@ -348,14 +372,17 @@ SinaiView::ColoredMirrors (void)
 
       red *= exp (-absorbtivity * sr[i].bounces[0]);
       red *= exp (-absorbtivity * sr[i].bounces[1]);
+      red *= exp (-absorbtivity * sr[i].sphere_hits);
       red *= exp (-density * sr[i].distance);
 
       green *= exp (-absorbtivity * sr[i].bounces[2]);
       green *= exp (-absorbtivity * sr[i].bounces[3]);
+      green *= exp (-absorbtivity * sr[i].sphere_hits);
       green *= exp (-density * sr[i].distance);
 
       blue *= exp (-absorbtivity * sr[i].bounces[4]);
       blue *= exp (-absorbtivity * sr[i].bounces[5]);
+      blue *= exp (-absorbtivity * sr[i].sphere_hits);
       blue *= exp (-density * sr[i].distance);
       
       abgr[i] = 0xff & ((unsigned int) red);
@@ -389,9 +416,10 @@ main ()
 {
    SinaiView v (400,400);
 
-   v.reflectivity = 0.95;
-   v.density = 0.01;
-   v.radius = 0.4;
+   v.reflectivity = 0.98;
+   v.density = 0.005;
+   v.density = 0.0;
+   v.radius = 0.6;
    v.distance = 160.0;
 
    v.Trace();
