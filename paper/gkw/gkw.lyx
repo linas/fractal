@@ -57,120 +57,26 @@ Specifically, the Minkowski Question Mark Function is an isomorphism connecting
  
 \layout Abstract
 
-This chapter develops 
-\layout Abstract
-
-s cannot be (has not yet beeis fiendishly difficult to solve
-\layout Abstract
-
-is a naturaFractals and Continued Fractions seem to be deeply related in
- many ways.
- Farey numbers appear naturally in both.
- Both have a natural The Minkowski Question Mark Function is an isomorphism
- between dyadic (binary) fractions and Farey Fractions.
-\layout Abstract
-
-provides a natural .
- This article attempts to establish that the natural symmetry group of both
- period-doubling maps and of phase-locking maps is the modular group 
-\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
-\end_inset 
-
-, which expains these curious relationships.
- We classify certain fractals as beloning to different representations of
- this group; opening the door to a group-theoretical attack on fractals.
- As a byproduct, I think we expose a fantastic fractal symmetry on the rationals
+This chapter develops some of the tools for studying chaotic maps, spcifically
+ the idea of studying the Frobenius-Perron (FP) operator of a chaotic map.
+ The FP operator of the map that generates continued fractions is the GKW.
+ We thus apply the modular group symmetries of the continued fractions to
+ study the GKW.
  
-\begin_inset Formula $\mathbb{Q}$
-\end_inset 
+\layout Abstract
 
- themselves, and thus presumably also on 
-\begin_inset Formula $\mathbb{R}$
-\end_inset 
-
- and 
-\begin_inset Formula $\mathbb{Q}_{p}$
-\end_inset 
-
-.
- This symmetry is never made use of in classical analysis, and probably
- not in non-Archimedean analysis either.
- It opens a whole set of new doors.
- An assortment of other curious observations is presented as well.
- Its a candy-store of surprises!
+The general presentation attempts to assume very little prior acquaintance
+ with the concepts, and attempts a pedagogical aproach.
+ This paper is part of a set of chapters that explore the relationship between
+ the real numbers, the modular group, and fractals.
 \layout Section
 
-Intro
+The Gauss-Kuzmin-Wirsing Operator
 \layout Standard
 
 THIS IS A DRAFT WORK IN PROGRESS.
- The intro hasn't been written yet, but if it was, it would work like this:
- 
-\begin_inset Quotes eld
-\end_inset 
-
-I've been running a math-art website for over a decade and it's time some
- of the math behind it got an explanation.
-\begin_inset Quotes erd
-\end_inset 
-
- For my own benefit, if no one else's.
- So here it is.
-\layout Standard
-
-Farey Numbers show up naturally in the analysis of the Mandelbrot set.
- Farey numbers are used to label the treads of the 
-\begin_inset LatexCommand \htmlurl[devil's staircase]{http://mathworld.wolfram.com/DevilsStaircase.html}
-
-\end_inset 
-
-, which is the set of mode-locked regions of the circle map.
- The devils staircase bears a general resemblance to the Minkowski Question
- Mark function.
- Maybe have small pictures of minkowski and devil's staircase here.
-\layout Standard
-
-We should mention Sinai's tongue's here, which are the mode-locking regions,
- and note that they can be approximated with continued fractions, which
- is something we will show below.
-\layout Standard
-
-It is the resemblance of these pictures that leads one naturally to the
- study of continued fractions.
- several remarkable things pop up: first, that Farey Numbers and continued
- fractions are deeply related, secondly, that Minkowski Question Mark provides
- a natural mapping to and from the Farey-number space, and finally, that
- the symmetry group of the Minkowski Question Mark is the Modular Group,
- as first pointed out by Georges de Rham in 1957
-\begin_inset LatexCommand \cite{key-4}
-
-\end_inset 
-
-, who made this observation while studying a class of self-similar Takagi-like
- curves.
- It doesn't take long to realize that the modular group is 
-\series bold 
-*the*
-\series default 
- symmetry group of a huge class of iterated maps, and can be applied to
- just about anything that exhibits period doubling or mode locking.
- In particular, this connection implies that one should explore interesting
- things in fractals, e.g.
- Misiurewicz points, and ask what they correspond to in the modular group.
- and etc.
- One then is lead to explore a veritable candy-store of possible connections
- between Modular Forms and Elliptic Curves and Fractals, and ask what each
- implies in the language of the other.
-\layout Standard
-
-To get from here to there, we'll try to take a mostly pedagogical approach,
- keeping things simple and accesible to an amateur mathematician or an attentive
- undergraduate math-major, using only basic group theory, algebra and analysis.
  
 \layout Section
-
-Distributions of Rational Numbers
-\layout Subsection
 
 The Frobenius-Perron Operator
 \layout Standard
@@ -546,13 +452,13 @@ singular sawtooth
  directly to a proof of the Riemann Hypothesis, so getting lucky would be
  truly lucky indeed.
  
-\layout Subsection
+\layout Section
 
 The Frobenius-Perron Operator of the Bernoulli Map
 \layout Standard
 
 The Bernoulli map is an exactly solvable example of deterministic chaos.
- Its theory has been widely explored
+ A thorough exposition of this map is provided in 
 \begin_inset LatexCommand \cite{key-2}
 
 \end_inset 
@@ -685,7 +591,23 @@ This also means that Bournoulli map also makes for a good toy example of
  the space in which they live.
  The toy example of this kind of tesselation is the Levy Dragon.
  
-\layout Subsection
+\layout Section
+
+The Gauss-Kuzmin-Wirsing Operator
+\layout Standard
+
+The iterated map is 
+\begin_inset Formula \[
+h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
+
+\end_inset 
+
+ The FP operator for this map is the GKW.
+ Blah Blah.
+ Give the usual expression of matrix elements.
+ Give the connection to Riemann Zeta.
+ 
+\layout Section
 
 The Singular Sawtooth of the First Kind
 \layout Standard
@@ -971,7 +893,7 @@ XXX To Do: Double-check
  (square-integrable) eigenfunctions? Graph these eigenfunctions, see what
  kind of fratals they look like.
  
-\layout Subsection
+\layout Section
 
 Singular Sawtooth of the Second Kind
 \layout Standard
@@ -1200,6 +1122,14 @@ Under normal circumstances, whenever one has a pair of maps
  which is 2+2.6692...).
  So which value is it, exactly?) 
 \layout Subsection
+
+Fractal Eigenfunctions of the Second Sawtooth
+\layout Standard
+
+The Takagi curve can be used to build an alternate set of eigenfunctions
+ for the second sawtooth, posessing a continuous-spectrum eigenvalues.
+ 
+\layout Section
 
 Other Trees of Rationals
 \layout Standard
