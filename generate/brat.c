@@ -211,13 +211,15 @@ void mandelbrot_wind (
    double		re, im, tmp;
    int		loop;
    double modulus=0.0, frac, mu;
-   double escape_radius = 3.1;
-   double ren, tl;
-   double phi=0.0, phi_last, phi_c;
+   double escape_radius = 1131.1;
+   double ren, otl;
+   double phi=0.0, phi_last, phi_c, h_phi_c;
    int wind =0;
 
    ren = log( log (escape_radius)) / log(2.0);
-   tl = 1.0/ log(2.0);
+   otl = 1.0/ log(2.0);
+
+   itermax --;
    itermax_orig = itermax;
    
 
@@ -239,11 +241,13 @@ void mandelbrot_wind (
 
          phi_c = atan2 (im_c, re_c);
          if (0.0 > phi_c) phi_c += 2.0*M_PI;
+         h_phi_c = 0.5*phi_c;
 
          re = 0.0;
          im = 0.0;
          phi_last = -0.01;
          wind = 0;
+// printf ("\n phi_c= %12.8g   c=(%g %g)\n", phi_c, re_c, im_c);
          for (loop=1; loop <itermax; loop++) {
             tmp = re*re - im*im + re_c;
             im = 2.0*re*im + im_c;
@@ -252,13 +256,27 @@ void mandelbrot_wind (
             phi = atan2 (im, re);
             if (0.0>phi) phi += 2.0*M_PI;
 
-// printf ("its %d %g %g      %g %g \n", loop, phi, phi_last, re_c, im_c);
-
-            // if (phi < 2.0*phi_last) wind ++;
-            // if (phi < phi_last) wind ++;
-            // if (phi < phi_last) wind += 1+wind;
             wind += wind;
-            if (phi < phi_last) wind ++;
+
+            if (phi < phi_last) wind +=2;
+
+// printf ("n=%d %12.8g %12.8g %12.8g %12.8g %10.6g %d\n", 
+// loop, phi, phi_last, 2.0*phi_last-phi, frac,
+// phi+((double)wind)*M_PI, wind);
+
+            /* if northern half else southern half */
+            if (M_PI > phi_c) { 
+               if (M_PI < phi) {
+                  phi -= M_PI;
+                  wind ++;
+               }
+            } else {
+               if (M_PI > phi) {
+                  phi += M_PI;
+                  wind --;
+               }
+            }
+
             phi_last = phi;
 
             modulus = (re*re + im*im);
@@ -266,13 +284,13 @@ void mandelbrot_wind (
          }    
 
          modulus = sqrt (modulus);
-         frac = log (log (modulus)) *tl;
+         frac = log (log (modulus)) *otl;
          mu = ((double) (loop+1)) - frac;
 
          phi /= 2.0*M_PI;
 
          if (loop < itermax) {
-            phi += (double) wind;
+            phi += 0.5 * ((double) wind);
 
             // the phase winds around 2pi *2^(loop-1) times
             phi /= pow (2.0, (double) (loop-1));
