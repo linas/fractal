@@ -17,12 +17,13 @@ RM= rm -f
 
 all: inc Farey.o FareyTree.o gcf.o modular.o moebius.o Prime.o totient.o
 
-inc:	Farey.h FareyTree.h gcf.h moebius.h Prime.h totient.h
+inc:	Farey.h FareyTree.h gcf.h modular.h moebius.h Prime.h totient.h
 	touch inc
 	cp Farey.h $(INC)/Farey.h
 	cp FareyTree.h $(INC)/FareyTree.h
 	cp gcf.h $(INC)/gcf.h
 	cp moebius.h $(INC)/moebius.h
+	cp modular.h $(INC)/modular.h
 	cp Prime.h $(INC)/Prime.h
 	cp totient.h $(INC)/totient.h
 
