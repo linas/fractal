@@ -378,12 +378,23 @@ break;
          }
 
          re_position += delta;
+
+         /* Measure cpu time spent.  On Linux, there are a million
+          * clocks per sec, which will overflow in about an hour.
+          * so we have to measure time frequently!
+          */
+         if (j%100==0) {
+            stop = clock();
+            hunds += (stop-start) / (CLOCKS_PER_SEC/100);
+            start = stop;
+         }
       }
       im_position -= delta;  /*top to bottom, not bottom to top */
-      stop = clock();
-      hunds += (stop-start) / 10000;
-      start = stop;
    }
+   stop = clock();
+   hunds += (stop-start) / (CLOCKS_PER_SEC/100);
+   start = stop;
+
    free (limits);
 
    /* do some counting. */
