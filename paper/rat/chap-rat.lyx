@@ -253,6 +253,9 @@ Indeed, there is a big upwards spike at 1/2.
  Why is there a deficit at bin 359? We also have blips at 1/3, 1/4, 1/5,
  1/6, but not at 1/7: something we can hand-wave away by noting that 720
  is 6 factorial.
+ (When one attempts 7!=5040 bins, one finds the peak at 1/7 is there, but
+ the one at 1/11 seems to be missing; clearly having the number of bins
+ being divisible by 7 is important.).
  The other surprising aspect of this picture is the obvious fractal self-similar
 ity of this histogram.
  The interval between 1/3 and 1/2 seems to reprise the whole.
@@ -387,15 +390,15 @@ Let us pause for a moment to notice that this noise is not due to some numerical
 \end_inset 
 
  and the integer remainder 
-\begin_inset Formula $0\leq r<K$
+\begin_inset Formula $0\leq r<N$
 \end_inset 
 
  such that 
-\begin_inset Formula $nq=pK+r$
+\begin_inset Formula $nq=pN+r$
 \end_inset 
 
  holds as in integer equation, where 
-\begin_inset Formula $K$
+\begin_inset Formula $N$
 \end_inset 
 
  was the number of bins.
@@ -480,13 +483,6 @@ ned.
  
 \layout Standard
 
-more rationals than before.
- 
-\layout Standard
-
-xxx 77809948
-\layout Standard
-
 It sure would be nice to develop a generalized theory that can work with
  these peculiar results, and in particular, giving insight into what's happening
  near 1/2 and giving a quantitative description of the spectra near 1/3
@@ -567,227 +563,36 @@ The act of bining a rational
 \end_inset 
 
 , a division is unavoidable.
- When doing numerical simulations, it is very easy to perform the division
- using floating point; however, this has the questionable act of introducing
- floating-point rounding errors into the proceedings.
- In this paper, we avoid this problem by sticking to integer math.
- To get a sense of what happens for larger denominators (that is, to avoid
- 32-bit overflows during divides and remainder calculations), we use the
- Gnu Bignum Library, GMP, when we need to deal with larger values.
- 
+ However, we can avoid numerical imprecision by sticking to integer division;
+ using floating point here potentially casts a cloud over any results.
+ With integer division, we are looking for 
+\begin_inset Formula $n$
+\end_inset 
+
+ such that 
+\begin_inset Formula $nq\leq Np<(n+1)q$
+\end_inset 
+
+; performing this computation requires no rounding or truncation.
+ The largest such integers we are likely in the previous sections were 
+\begin_inset Formula $2880\times16000\approx50M$
+\end_inset 
+
+, for which ordinary 32-bit math is perfectly adequate; there is no danger
+ of overflow.
+ If one wanted to go deeper, one could use arbitrary precision libraries;
+ for example,  the Gnu Bignum Library, GMP, is freely available.
+ But the point here is that to see these effects, one does not need to work
+ with numbers so large that arbitrary precision math libraries would be
+ required.
 \layout Subsection
 
-The Intro to the Theory
+Orbits of the Modular Group
 \layout Standard
 
-Write Me.
- Draw a big picture of 
-\begin_inset Formula $\mathbb{N}\times\mathbb{N}$
-\end_inset 
-
- as a lattice, showing that 'all possible fractions' are just points on
- the lattice.
- Show the bins as pie slices.
+asdf
 \layout Standard
 
-ToDo: Provide explicit algebraic formulas for bin counting.
- Provide explicit degeneracy counts for the representation of rationals
- by pairs of reals.
- Note that the rationals are just the 
-\begin_inset Quotes eld
-\end_inset 
-
-pegs which are visible from the origin
-\begin_inset Quotes erd
-\end_inset 
-
-, which induces a powerful crystallographic degeneracy on the lattice.
- Do some quickie crystollagraphy, in particular, the wave-vectors, hinting
- that x-ray diffraction functions resemble modular forms (!) That is, assign
- a 
-\begin_inset Quotes eld
-\end_inset 
-
-reflectivity
-\begin_inset Quotes erd
-\end_inset 
-
- 
-\begin_inset Formula $c(p,q)$
-\end_inset 
-
- for every 
-\begin_inset Quotes eld
-\end_inset 
-
-atom
-\begin_inset Quotes erd
-\end_inset 
-
-, then for every wave-vector 
-\begin_inset Formula $\overrightarrow{k}=(k_{x},k_{y})$
-\end_inset 
-
- compute the diffraction pattern 
-\begin_inset Formula \[
-F(k_{x},k_{y})=\sum_{p,q}c(p,q)\exp\left(2\pi i(pk_{x}+qk_{y})\right)\]
-
-\end_inset 
-
- so that if we set 
-\begin_inset Formula $k_{y}=1$
-\end_inset 
-
-, set 
-\begin_inset Formula $k_{x}=\tau$
-\end_inset 
-
-, renormalize the 
-\begin_inset Formula $c(p,q)$
-\end_inset 
-
- then get 
-\begin_inset Formula \[
-f(\tau)=\sum_{n}c(n)\exp(2\pi in\tau)\]
-
-\end_inset 
-
- and then discuss the fractal patterns arising therefrom.
- Disucss the symmetries of the lattice.
- 
-\layout Standard
-
-Introduce the idea that the field structure of the rationals induces a weird
- field structure on 
-\begin_inset Formula $\mathbb{\mathbb{N}}\times\mathbb{\mathbb{N}}$
-\end_inset 
-
- which has a kernel in which the degenerate pairs 
-\begin_inset Formula $(p,q)$
-\end_inset 
-
- lie.
- Construct the quotient group 
-\begin_inset Formula $\mathbb{N}\times\mathbb{N}/d(p,q)$
-\end_inset 
-
- and show it has in the shape of a binary tree.
- Provide diagram of the binary tree superimposed on the lattice.
- The natural lattice symmetries become restricted to the modular group 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
-.
- Discuss the nature of basic arithmetic (addition, multiplication) on this
- lattice.
-\layout Standard
-
-Note that 
-\begin_inset Quotes eld
-\end_inset 
-
-dumb
-\begin_inset Quotes erd
-\end_inset 
-
- rational counting is really just the counting of the total number of pegs
- in a square lattice, which gives a hint why 
-\begin_inset Quotes eld
-\end_inset 
-
-dumb
-\begin_inset Quotes erd
-\end_inset 
-
- counting is 
-\begin_inset Quotes eld
-\end_inset 
-
-flatter
-\begin_inset Quotes erd
-\end_inset 
-
- than 
-\begin_inset Quotes eld
-\end_inset 
-
-correct
-\begin_inset Quotes erd
-\end_inset 
-
- counting, which we get a feel for, because we intuit the uniformity of
- th lattice.
- Note that 
-\begin_inset Quotes eld
-\end_inset 
-
-correct
-\begin_inset Quotes erd
-\end_inset 
-
- counting (the counting of co-prime rationals) is the counting of the 'visible'
- pegs, the pegs that can be seen from the origin, which is why counting
- like this is so insanely noisy and weird.
- This also gives a hint why the bin-counts posess the 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
- fractal symmetry.
- (Provide that actual vector-space representation of the modular group acting
- on the bin counts in a later chapter, after developing the representation
- theory).
-\layout Standard
-
-Provide classic signal theory results, including power of the noise spectrum,
- the noise spectrum 
-\begin_inset Formula $E_{b}/N_{0}$
-\end_inset 
-
- 
-\begin_inset Quotes eld
-\end_inset 
-
-energy per bit of encoding
-\begin_inset Quotes erd
-\end_inset 
-
-, where we use the large degeneracies at 1/2, 1/3 to indicate these are
- well-encoded and hold more 
-\begin_inset Quotes eld
-\end_inset 
-
-energy
-\begin_inset Quotes erd
-\end_inset 
-
-, but that nearby fractions are not.
- 
-\layout Standard
-
-Introduce the dyadic encoding as a left-right walk on the tree, generated
- by
-\begin_inset Formula \[
-L=\left(\begin{array}{cc}
-1 & 0\\
-1 & 1\end{array}\right)\;\textrm{ and }\; R=\left(\begin{array}{cc}
-1 & 1\\
-0 & 1\end{array}\right)\]
-
-\end_inset 
-
-Mention that the dyadic encoding, when used as a mechanism to extend to
- reals, has degeneracies of the type 1.0000...=0.1111 which occur 
-\begin_inset Quotes eld
-\end_inset 
-
-in between
-\begin_inset Quotes erd
-\end_inset 
-
- the distinct tree branches that walk to any given real.
- viz.
- every irrational is double-counted, has a double-encoding in the dyadics,
- because there are two tree-walks that take us there.
 \layout Subsection
 
 Conclusion
