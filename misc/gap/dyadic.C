@@ -12,6 +12,7 @@
 class Dyadic
 {
 	public:
+		Dyadic (void);
 
 		// assumes x = p/2^n 
 		void SetFrac (unsigned int p, unsigned int order);
@@ -69,5 +70,43 @@ Dyadic :: SetFrac (unsigned int p, unsigned int order)
 	}
 }
 
-void 
-Dyadic :: SetFrac (unsigned int p, unsigned int order)
+double
+Dyadic :: ToAlternatingPoly (double z)
+{
+	int i;
+	double acc = 0.0;
+	double zn = 1.0;
+
+	for (i=0; i<ndigits; i++)
+	{
+		short alt = 2*bdigits[i] - 1;
+		double term = alt;
+		term *= zn;
+		acc += term;
+
+		zn *= z;
+	}
+
+	return acc;
+}
+
+
+main (int argc, char * argv[])
+{
+	Dyadic dy;
+	int order = 9;
+	int nmax = 1<<order;
+
+	double z = 0.3;
+	int p;
+	for (p=1; p<nmax; p+=2)
+	{
+		if (0 == p%2) continue;
+		double x = ((double) p) / ((double) nmax);
+
+		dy.SetFrac (p, order);
+		double y = dy.ToAlternatingPoly (z);
+
+		printf ("%d	%8.6g	%8.6g\n", p, x, y);
+	}
+}
