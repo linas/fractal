@@ -32,7 +32,8 @@ void measure_radius (
    double	rmax,
    double	epsilon,
    unsigned int	itermax,
-   unsigned int nrecur)
+   unsigned int nrecur,
+   int		do_report)
 {
    unsigned int	i,j;
    int		n;
@@ -52,11 +53,14 @@ void measure_radius (
    int		loop=0, loop_cand=0;
    double 	modulus=0.0;
    double	escape_radius = 3.1;
-   double	esq;
-   double	dist=0.0;
+   double	esq, esqon;
+   double	dist=0.0, diston=0.0;
    double	closest=0.0;
 
    esq = epsilon*epsilon;
+
+   /* if a single iteration ever gets closer than this, its the main bud */
+   esqon = 1.0e-6;
 
    deltar = (rmax-rmin) / (double) sizer;
    
@@ -81,6 +85,7 @@ void measure_radius (
 
       rad = rmin;
       radius_cand = rad;
+      radius_outer = 10.0;
       for (j=0; j<sizer; j++) {
          re_c = re_center + rad * co;
          im_c = im_center + rad * si;
@@ -98,8 +103,10 @@ void measure_radius (
             re = tmp;
 
             /* not the convergent we want; escape from loop */
-            dist = (re-re_last)*(re-re_last) + (im-im_last)*(im-im_last);
-            if (dist < esq) {
+            /* practically, diston must be > than about (0.05) squared */
+            /* for just about any bud */
+            diston = (re-re_last)*(re-re_last) + (im-im_last)*(im-im_last);
+            if (diston < esqon) {
                radius_outer = rad; /* radius must be smaller than this */
                j+= sizer; /* break middle loop */
                break;
@@ -144,8 +151,10 @@ void measure_radius (
       if (radius_outer_min > radius_outer) { radius_outer_min = radius_outer; }
       if (radius_outer_max < radius_outer) { radius_outer_max = radius_outer; }
 
-      printf ("%d	%14.10f	%14.10f	%14.10f %g	%d\n", 
+      if (do_report) {
+         printf ("%d	%14.10f	%14.10f	%14.10f %g	%d\n", 
             i, theta, radius_cand, radius_outer, radius_outer-radius_cand, loop_cand); 
+      }
    }
    radius_avg /= (double) sizea;
    re_cg /= (double) sizea;
@@ -155,18 +164,20 @@ void measure_radius (
    re_outer_cg /= (double) sizea;
    im_outer_cg /= (double) sizea;
    
-   printf ("# ravg = %14.10f center o gravity = ( %14.10f %14.10f )\n", 
-        radius_avg, re_cg, im_cg);
-   printf ("# rout = %14.10f outer center o g = ( %14.10f %14.10f )\n", 
-        radius_outer_avg, re_outer_cg, im_outer_cg);
-   printf ("# center= %14.10f %14.10f diam = %14.10f \n", 
-        re_center+re_cg, im_center+im_cg, 2.0*radius_avg);
-   printf ("# outcen= %14.10f %14.10f out diam = %14.10f \n", 
-        re_center+re_outer_cg, im_center+im_outer_cg, 2.0*radius_outer_avg);
-   printf ("# radius min, max= %14.10f %14.10f half-diff=%14.10f \n", 
-        radius_min, radius_max, 0.5*(radius_max-radius_min));
-   printf ("# outer  min, max= %14.10f %14.10f outer-half=%14.10f \n", 
-        radius_outer_min, radius_outer_max, 0.5*(radius_outer_max-radius_outer_min));
+   if (do_report) {
+      printf ("# ravg = %14.10f center o gravity = ( %14.10f %14.10f )\n", 
+           radius_avg, re_cg, im_cg);
+      printf ("# rout = %14.10f outer center o g = ( %14.10f %14.10f )\n", 
+           radius_outer_avg, re_outer_cg, im_outer_cg);
+      printf ("# center= %14.10f %14.10f diam = %14.10f \n", 
+           re_center+re_cg, im_center+im_cg, 2.0*radius_avg);
+      printf ("# outcen= %14.10f %14.10f out diam = %14.10f \n", 
+           re_center+re_outer_cg, im_center+im_outer_cg, 2.0*radius_outer_avg);
+      printf ("# radius min, max= %14.10f %14.10f half-diff=%14.10f \n", 
+           radius_min, radius_max, 0.5*(radius_max-radius_min));
+      printf ("# outer  min, max= %14.10f %14.10f outer-half=%14.10f \n", 
+           radius_outer_min, radius_outer_max, 0.5*(radius_outer_max-radius_outer_min));
+   }
 }
 
 /*-------------------------------------------------------------------*/
@@ -179,8 +190,8 @@ void flow_radius (
    unsigned int sizer,
    double	re_center,
    double	im_center,
-   double	rmin,
-   double	rmax,
+   double	&rmin,
+   double	&rmax,
    double	epsilon,
    int		itermax)
 {
@@ -345,6 +356,7 @@ automatic (int p, int q)
    unsigned int nrecur;
    unsigned int ang_steps, r_steps;
    double *data = 0x0;
+   int i;
 
    /* angular location of the bud */
    theta = 2.0 *M_PI * ((double) p / (double) q);
@@ -368,8 +380,6 @@ automatic (int p, int q)
    cx = horn_x + br*nx;
    cy = horn_y + br*ny;
 
-printf ("duude (%f %f) %f (%f %f)\n", cx, cy, br, nx, ny);
-
    /* we know the true bud edge must be bounded by rmin and rmax */
    rmin = 0.5*br;
    rmax = 2.0*br;
@@ -385,7 +395,10 @@ printf ("duude (%f %f) %f (%f %f)\n", cx, cy, br, nx, ny);
 
    data = realloc (data, (ang_steps+1)*sizeof(double));
 
-   measure_radius ( data, ang_steps, r_steps, cx, cy, rmin, rmax, epsilon, itermax, nrecur);
+   for (i=0; i<10; i++) {
+      measure_radius (data, ang_steps, r_steps, cx, cy, 
+         rmin, rmax, epsilon, itermax, nrecur, 1);
+   }
 }
 
 /*-------------------------------------------------------------------*/
@@ -444,7 +457,7 @@ do_radius (int argc, char *argv[])
    printf ("# \n");
 
    measure_radius (data, nphi, nr, re_center, im_center,
-           rmin, rmax, epsilon, itermax, nrecur);
+           rmin, rmax, epsilon, itermax, nrecur, 1);
    // flow_radius (data, nphi, nr, re_center, im_center,
    //          rmin, rmax, epsilon, itermax);
    
