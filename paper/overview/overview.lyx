@@ -1964,12 +1964,25 @@ The Takagi-Landsberg curve was first explored by Teiji Tagaki, circa 1903
 \begin_inset Formula $x=p/2^{n}$
 \end_inset 
 
- the value 
+, for 
+\begin_inset Formula $n>1$
+\end_inset 
+
+, the value 
 \begin_inset Formula \[
 t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
 
 \end_inset 
 
+ where we anchor the recurrance with 
+\begin_inset Formula $t_{w}(0)=t_{w}(1)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $t_{w}(1/2)=1$
+\end_inset 
+
+.
  One extends this curve to all reals by 'linear interpolation' between the
  dyadic values, as 
 \begin_inset Formula \[
@@ -2196,14 +2209,14 @@ Consider first the generator that is the interval contraction
  is both linear and is also closed, thus forming a vector space.
  That is, we have discovered that the Takagi Curve transforms under the
  three-dimensional represention of the modular group.
- To be explicit, we write a general element as the dot-product of a column
- of real numbers times a row of basis vectors 
+ To be explicit, we write a general element as the dot-product of a row
+ of real numbers times a column of basis vectors 
 \begin_inset Formula \[
 a+bx+ct_{w}(x)=\left(\begin{array}{ccc}
-1 & \;\; x & \;\; t_{w}(x)\end{array}\right)\left(\begin{array}{c}
-a\\
-b\\
-c\end{array}\right)\]
+a & \; b & \; c\end{array}\right)\left(\begin{array}{c}
+1\\
+x\\
+t_{w}(x)\end{array}\right)\]
 
 \end_inset 
 
@@ -2215,22 +2228,18 @@ c\end{array}\right)\]
 \begin_inset Formula $r$
 \end_inset 
 
- have the representations xxxxxxxx
-\layout Standard
-
-we need to transpose to get correct order.
- 
+ have the representations 
 \layout Standard
 
 
 \begin_inset Formula \[
 g_{3}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
-0 & \frac{1}{2} & 1\\
-0 & 0 & w\end{array}\right)\;\textrm{ and \;}r_{3}=\left(\begin{array}{ccc}
-1\; & 1\; & 0\\
-0 & -1\; & 0\\
-0 & 0 & -1\end{array}\right)\]
+0 & \frac{1}{2} & 0\\
+0 & 1 & w\end{array}\right)\;\textrm{ and \;}r_{3}=\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+1 & -1\; & 0\\
+0 & 0 & 1\end{array}\right)\]
 
 \end_inset 
 
@@ -2239,57 +2248,53 @@ g_{3}=\left(\begin{array}{ccc}
  
 \begin_inset Formula \[
 \left[gt_{w}\right](x)=\left(\begin{array}{ccc}
-1 & \;\; x & \;\; t_{w}(x)\end{array}\right)\left(\begin{array}{ccc}
+0 & \;0 & \;1\end{array}\right)\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
-0 & \frac{1}{2} & 1\\
-0 & 0 & w\end{array}\right)\left(\begin{array}{c}
-0\\
-0\\
-1\end{array}\right)\]
-
-\end_inset 
-
- and also that 
-\begin_inset Formula \[
-\frac{x}{2}=\left(\begin{array}{ccc}
-1 & \;\; x & \;\; t_{w}(x)\end{array}\right)\left(\begin{array}{ccc}
-1\; & 0\; & 0\\
-0 & \frac{1}{2} & 1\\
-0 & 0 & w\end{array}\right)\left(\begin{array}{c}
-0\\
+0 & \frac{1}{2} & 0\\
+0 & 1 & w\end{array}\right)\left(\begin{array}{c}
 1\\
-0\end{array}\right)\]
+x\\
+t_{w}(x)\end{array}\right)\]
 
 \end_inset 
 
- which we recognize as the dyadic representation 
-\begin_inset Formula $g_{D}$
+ Previously, we had found the dyadic representation that acted on dyadic
+ numbers as 
+\begin_inset Formula \[
+g_{D}=\left(\begin{array}{cc}
+1 & 0\\
+0 & \frac{1}{2}\end{array}\right)\;\textrm{ and }\; r_{D}=\left(\begin{array}{cc}
+1 & 0\\
+1 & -1\end{array}\right)\]
+
 \end_inset 
 
- from previous sections.
- The Takagi Curve is then seen to commute with the generator 
-\begin_inset Formula $(gt_{w})(x)=(t_{w}g)(x)$
+ and so the 3D representation seems to be an extension of that vector space.
+  The Takagi Curve is then seen to commute with the generators 
+\begin_inset Formula $(g_{3}t_{w})(x)=(t_{w}g_{D})(x)$
+\end_inset 
+
+ and
+\begin_inset Formula $(r_{3}t_{w})(x)=(t_{w}r_{D})(x)$
 \end_inset 
 
  in this representation.
- By contrast, the curve has mirror symmetry, and thus kills the reflection
- operator: 
-\begin_inset Formula $(t_{w}r)(x)=t_{w}(x)\neq(rt_{w})(x)=1-t_{w}(x)$
-\end_inset 
-
-.xxxxxxxfixme
+ 
 \layout Standard
 
-For the sake of clarity, lets now examine the formulas for a general group
- element 
-\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}$
-\end_inset 
-
- for 
-\begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
+For the sake of clarity, lets now examine the formulas for a contracting
+ group element 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}\in SL(2,\mathbb{Z})$
 \end_inset 
 
 .
+ By 'contracting' we mean that we want to take all 
+\begin_inset Formula $a_{k}\geq0$
+\end_inset 
+
+; as before, expanding and general group elements require us to compute
+ intersections of the dyadic tree intervals, which proceeds as before but
+ complicates the language.
  We have that 
 \begin_inset Formula $\gamma$
 \end_inset 
@@ -2304,8 +2309,17 @@ For the sake of clarity, lets now examine the formulas for a general group
 
 \end_inset 
 
- which we saw from the previous section.
- But on the Takagi curve, 
+ which can be quickly computed by multiplying together the representation
+ matrices 
+\begin_inset Formula $g_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $r_{D}$
+\end_inset 
+
+.
+ By contrast, on the Takagi curve, 
 \begin_inset Formula $\gamma$
 \end_inset 
 
@@ -2313,21 +2327,21 @@ For the sake of clarity, lets now examine the formulas for a general group
 \begin_inset Formula $\gamma_{3}$
 \end_inset 
 
-, thus: xxxxxxxxthis is wrong transpose
+, thus: 
 \layout Standard
 
 
 \begin_inset Formula \[
 t_{w}(\gamma_{D}(x))=\left[\gamma_{3}t_{w}\right](x)=\left(\begin{array}{ccc}
-1 & \;\; x & \;\; t_{w}(x)\end{array}\right)g_{3}^{a_{1}}r_{3}g_{3}^{a_{2}}r_{3}g_{3}^{a_{3}}r_{3}...r_{3}g_{3}^{a_{N}}\left(\begin{array}{c}
-0\\
-0\\
-1\end{array}\right)\]
+0 & \;0 & \;1\end{array}\right)g_{3}^{a_{1}}r_{3}g_{3}^{a_{2}}r_{3}g_{3}^{a_{3}}r_{3}...r_{3}g_{3}^{a_{N}}\left(\begin{array}{c}
+1\\
+x\\
+t_{w}(x)\end{array}\right)\]
 
 \end_inset 
 
- which demonstrates the self-symmetry of the curve for arbitrary element
- 
+ which demonstrates the self-symmetry of the curve for arbitrary (expanding)
+ element 
 \begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
 \end_inset 
 
@@ -2335,20 +2349,56 @@ t_{w}(\gamma_{D}(x))=\left[\gamma_{3}t_{w}\right](x)=\left(\begin{array}{ccc}
  
 \layout Description
 
-Proof: XXX Provide an explicit proof by pulling out one generator at a time
- out from under the expressions.
- Maybe this is a good homework problem.
- QED.
-\layout Standard
+Homework: Compute the matrix elements for 
+\begin_inset Formula $grg^{3}$
+\end_inset 
 
-What have we done here? Thus, in the above, we have demonstrated the explict
- symmetry relationship of the Takagi Curve, and furthermore, have indicated
- that it, together with 1 and 
+ for both the dyadic and 3D rep.
+ Show that this implies the symmetry 
+\begin_inset Formula $t_{w}(1/2-x/16)=1+x(-1/8+w/4+w^{2}/2+w^{3})+w^{4}t_{w}(x)$
+\end_inset 
+
+.
+ Repeat the process for 
+\begin_inset Formula $g^{3}rg$
+\end_inset 
+
+ and for 
+\begin_inset Formula $g^{2}rg^{7}rg^{3}$
+\end_inset 
+
+.
+\layout Description
+
+Homework: Provide a general, explicit proof of the commuting diagram by
+ pulling out one generator at a time out from under the expressions.
+ 
+\layout Description
+
+Homework: Explore the curious polynomial in 
+\begin_inset Formula $w$
+\end_inset 
+
+ that arises as the coefficient of 
 \begin_inset Formula $x$
 \end_inset 
 
-, are the basis vectors of a three-dimensional representation of the modular
- group.
+.
+ 
+\layout Standard
+
+What have we done here? We have accomplished two things.
+ First, we've demonstrated the explict symmetry relationship of the Takagi
+ Curve.
+ Next, we've found that the curve, together with 1 and 
+\begin_inset Formula $x$
+\end_inset 
+
+, belong to the set of basis vectors 
+\begin_inset Formula $\{1,x,t_{w}\}$
+\end_inset 
+
+ of a three-dimensional representation of the modular group.
  The matrix representations of 
 \begin_inset Formula $g$
 \end_inset 
@@ -2360,28 +2410,6 @@ What have we done here? Thus, in the above, we have demonstrated the explict
  make it very easy to compute how the curve transforms under any given element
  of the modular group.
  
-\layout Standard
-
-What have we done here? Two or three things.
- First, that the set 
-\begin_inset Formula $\{1,x,t_{w}\}$
-\end_inset 
-
-is a basis of the 3D rep.
- Second, 
-\begin_inset Formula $t_{w}$
-\end_inset 
-
- commutes with 
-\begin_inset Formula $g$
-\end_inset 
-
- and thus we have a kernel and a quotient group, of which 
-\begin_inset Formula $t_{w}$
-\end_inset 
-
- is representative of the class.
- Describe the quotient.
 \layout Description
 
 Corollary: The modular group is a symmetry group of the parabola, where
@@ -2400,7 +2428,7 @@ Corollary: The modular group is a symmetry group of the parabola, where
 .
 \layout Description
 
-Theorm: Every real value of 
+Theorm: Every real (or complex!) value of 
 \begin_inset Formula $w$
 \end_inset 
 
@@ -2441,7 +2469,7 @@ k & l & m\end{array}\right)\]
 \end_inset 
 
  we find immediately that 
-\begin_inset Formula $d=k=0$
+\begin_inset Formula $l=b=0$
 \end_inset 
 
 .
@@ -2450,33 +2478,38 @@ k & l & m\end{array}\right)\]
 \end_inset 
 
  one finds that 
-\begin_inset Formula $l=m=0$
+\begin_inset Formula $d=k=c=f=0$
+\end_inset 
+
+, leaving 
+\begin_inset Formula $a=e=m$
 \end_inset 
 
 .
- This means that 
-\begin_inset Formula $detU=0$
+ But when 
+\begin_inset Formula $v\neq w$
 \end_inset 
 
- and thus 
+ we find also that 
+\begin_inset Formula $m=0$
+\end_inset 
+
+, and so all elements of 
 \begin_inset Formula $U$
 \end_inset 
 
- is not invertible: there is no equivalency transformation between two different
- representations.
+ vanish.
+ There is no equivalency transformation between two different representations.
  
 \emph on 
 QED
 \emph default 
 .
  
-\layout Subsection
+\layout Description
 
-The Takagi Basis for Function Spaces
-\layout Standard
-
-In the previous section, we considered functions on the real number line
- as set-theoretic expressions of functions on the binary tree.
+Homework: In the previous section, we considered functions on the real number
+ line as set-theoretic expressions of functions on the binary tree.
  The uniqueness of the Takagi curve for each distinct value of 
 \begin_inset Formula $w$
 \end_inset 
@@ -2498,7 +2531,8 @@ f(x)=\int_{0}^{\infty}c(w)t_{w}(x)\; dw\]
 \end_inset 
 
 .
- Describe the completeness, or lack-threof, of this function basis.
+ Describe the completeness, or rather, the lack-threof, of this function
+ basis.
  Notice that already have one trivial example: for the parabola 
 \begin_inset Formula $f(x)=4x(1-x)$
 \end_inset 
@@ -2512,10 +2546,86 @@ f(x)=\int_{0}^{\infty}c(w)t_{w}(x)\; dw\]
 \end_inset 
 
  is the Dirac delta function.
- Consider now
+ Provide other interesting examples.
+\layout Subsection
+
+Other constructions
 \layout Standard
 
-xxxxxto do all of this.....
+The recurrance relation 
+\layout Standard
+
+
+\begin_inset Formula \[
+t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
+
+\end_inset 
+
+ will generate other interesting sequences if we pick a different set of
+ starting conditions.
+ For example, taking 
+\begin_inset Formula $w=0$
+\end_inset 
+
+, and writing 
+\begin_inset Formula $t_{0}\equiv d$
+\end_inset 
+
+, using the initial conditions 
+\begin_inset Formula $d(0)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $d(1)=1$
+\end_inset 
+
+, we generate the tree of dyadic numbers between 0 and 1; that is, we can
+ promptly deduce that 
+\begin_inset Formula $d(x)=x$
+\end_inset 
+
+ for all 
+\begin_inset Formula $x=p/2^{n}$
+\end_inset 
+
+.
+ If instead, we write 
+\begin_inset Formula $t_{0}\equiv J$
+\end_inset 
+
+ with the boundary conditions 
+\begin_inset Formula $J(1)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $J(1/2^{n})=2^{n}$
+\end_inset 
+
+, then we find that 
+\begin_inset Formula $J$
+\end_inset 
+
+ generates the tree of dyadic numbers greater than one.
+ 
+\layout Standard
+
+A Batrachion is an integer sequence that hops from one integer to another
+ using a a simple recurrence relation.
+ The Hofstadter-Conway 10,000-Dollar Sequence on particular 
+\layout Standard
+
+Many batrachions generate fractal curves, and these are often remarkably
+ similar to the Takagi curve.
+ Examples include the Hofstadter-Conway 10,000-Dollar Sequence, the Hofstadter's
+ Q-Sequence and Mallows' Sequence.
+ 
+\layout Description
+
+Homework: Apply the tools for working with the modular group to Batrachion
+ sequences.
+ Develop a general theory of Batrachion sequences in terms of representations
+ of the modular group, if possible.
+ 
 \layout Subsection
 
 Miscellany
@@ -2551,22 +2661,6 @@ Homework: Exhibit
  Give a general form for how the Takagi curve transforms under a general
  hyperbolic curve.
  What is the dimension of the representation? 
-\layout Standard
-
-A Batrachion is an integer sequence that hops from one integer to another
- using a a simple recurrence relation.
- Many batrachions generate fractal curves, and these are often remarkably
- similar to the Takagi curve.
- Examples include the Hofstadter-Conway 10,000-Dollar Sequence, the Hofstadter's
- Q-Sequence and Mallows' Sequence.
- 
-\layout Description
-
-Homework: Apply the tools for working with the modular group to Batrachion
- sequences.
- Develop a general theory of Batrachion sequences in terms of representations
- of the modular group, if possible.
- 
 \layout Description
 
 Homework: Give the Hausdorff dimension of the Takagi curve, as defined by
