@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "modular.h"
 #include "moebius.h"
 
 int modular_max_terms;
