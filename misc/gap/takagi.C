@@ -71,6 +71,13 @@ double mink(double x)
 	return x;
 }
 
+long double sq (long double x)
+{
+	long double t = x - floorl(x);
+	if (1.0L > 3.0L*t) return 2.0*t/(1.0-t);
+	return 0.5*(1.0-t)/t;;
+}
+
 // the farey/isola map
 long double pointy (long double x)
 {
@@ -128,13 +135,38 @@ long double iter_tak (long double w, long double x)
 	long double xit = x;
 	for (k=0; k<50; k++)
 	{
-		xit = triangle (xit);
+		// xit = triangle (xit);
 		// xit = parabola_up (xit);
+		xit = sq (xit);
 		// xit = parabola_down (xit);
 		long double term = tw * xit;
 		acc += term;
 		tw *= w;
 		if (1.0e-16 > tw) break;
+	}
+
+	return acc;
+}
+
+/* The main, core basic takagi curve */
+// XXX thre triangle is accureate only to 50 bits or so,
+// so any further and we need arbit-precision.
+// which means that this func is not accurate below s=1.5 or so.
+long double dirichlet_takagi (long double s, long double x)
+{
+	int k;
+	long double acc = 0.0L;
+	long double tp = 1.0L;
+	for (k=1; k<50; k++)
+	{
+		long double tw = k;
+		tw = powl (tw, -s);
+		long double term = tw* triangle (tp*x);
+		// long double term = tw* parabola_down (tp*x);
+		// long double term = tw* parabola_up (tp*x);
+		acc += term;
+		tp *= 2.0L;
+		if (1.0e-6 > tw) break;
 	}
 
 	return acc;
@@ -317,8 +349,10 @@ double takagi_mink (double w, double x)
 	return acc;
 }
 
+#if FAILED_ANALYTIC_CONTINUATION
 // ------------------------------------------------------------------
 // ------------------------------------------------------------------
+// failed attempt at brute-force analytic continuation
 
 // ======================================================
 // brute-force factorial function
@@ -459,6 +493,9 @@ long double lytic (long double w, long double x)
 
 	return acc;
 }
+#endif
+// ===============================================
+// ===============================================
 
 main (int argc, char *argv[])
 {
@@ -478,9 +515,11 @@ main (int argc, char *argv[])
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
-		// double ts = isola (w, x);
-		double tw = takagi (w, x);
-		double ts = iter_tak (w, x);
+		double ts = isola (w, x);
+		// double tw = takagi (w, x);
+		double tw = dirichlet_takagi (w, x);
+		// double tw = iter_tak (w, x);
+
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
 		// double tw = log (takagi(w,x));

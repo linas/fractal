@@ -3,19 +3,31 @@
 # set term gif size 640,480
 # set out 'read.gif'
 
-# set term png small
-# set out 'takagi.png'
-set term postscript
-set out 'takagi.ps'
+set term png small
+set out 'takagi.png'
+# set term postscript
+# set out 'takagi.ps'
+# set term epslatex
+# set out 'takagi.eps'
 
 # set data style linespoints
 set data style lines
 set key right
 
-set title "Takagi-Landsberg Curve"
+set title "Itera Curve"
 set xlabel "x"
-set ylabel "t_0.618(x)"
+set ylabel "F(x)"
 plot "takagi.dat" using 2:3 title ""
+
+# set title "Iterated Isola Curve"
+# set xlabel "x"
+# set ylabel "F_0.6(x)"
+# plot "takagi.dat" using 2:3 title ""
+
+# set title "Takagi-Landsberg Curve"
+# set xlabel "x"
+# set ylabel "t_0.618(x)"
+# plot "takagi.dat" using 2:3 title ""
 
 # set title "Derivative of the Takagi-Landsberg Curve"
 # set xlabel "x"
