@@ -1,0 +1,25 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'series.png'
+
+# set data style linespoints
+set data style lines
+# set data style points
+set key right
+
+set title "totient series"
+set xlabel "x"
+set ylabel "sum"
+
+# set yrange [0:]
+
+plot "series.dat" using 2:($3*(1-$2)**2) title ""
+
+
+# pause 100
+

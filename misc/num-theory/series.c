@@ -16,13 +16,14 @@ long double totient_series (long double x)
 	long double acc = 0.0;
 
 	long double xp = 1.0;
-	int n;
-	for (n=1; n<1000000; n++)
+	int n=1;
+	while (1)
 	{
 		acc += xp * totient_phi (n);
 
-		if (xp < 1.0e-16) break;
+		if (xp < 1.0e-19) break;
 		xp *= x;
+		n++;
 	}
 
 	return acc;
@@ -34,12 +35,13 @@ int main ()
 
 	int nmax = 212;
 
-	for (i=1; i<nmax-10; i++)
+	for (i=1; i<nmax; i++)
 	{
-		double x = ((double) i)/((double) nmax);
+		long double x = ((double) i)/((double) nmax);
 
-		double y = totient_phi (nume);
+		long double y = totient_series (x);
+		y *= (1.0L-x)*(1.0L-x);
 
-		printf ("%d	%g	%g\n", i, x, y);
+		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 	}
 }

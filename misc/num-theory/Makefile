@@ -1,7 +1,7 @@
 ############### Symbol Definitions ###################### 
 
 
-EXES= ndist 
+EXES= ndist series
 
 all: 	$(EXES)
 
@@ -22,6 +22,7 @@ dist:
 
 
 ndist:	ndist.o gcf.o totient.o
+series:	series.o gcf.o totient.o
 
 ndist.o:	ndist.c gcf.h totient.h 
 
