@@ -16,7 +16,13 @@ all: 	$(EXES)
 
 
 .c.o:
-	cc -O -c $< -I..
+	cc -O2 -c $< -I..
+
+.C.o:
+	cc -O2 -c $< -I..
+
+.o:
+	cc -o $* $< $(LIB)/Farey.o -lm -lstdc++
 
 reiter:	reiter.o
 	cc -o reiter reiter.o  ../../../../lib/Farey.o -lm
@@ -54,13 +60,6 @@ dmap: dmap.c $(LIB)/Farey.o $(INC)/Farey.h
 imap: imap.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o imap imap.c $(LIB)/Farey.o -lm
 	$(RM) imap.o
-
-# zmap
-# 	(Jan 1994) excercise Farey Number converter
-#
-zmap: zmap.c $(LIB)/Farey.o $(INC)/Farey.h
-	$(CC) -o zmap zmap.c $(LIB)/Farey.o -lm
-	$(RM) zmap.o
 
 # flipmap
 # 	(Jan 1994) excercise Farey Number converter

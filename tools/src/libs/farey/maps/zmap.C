@@ -7,18 +7,19 @@
  * Linas Vepstas Januery 16 1994
  */
 
-#include "Farey.h"
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+#include "Farey.h"
 /* ------------------------------------------------------------ */
 
-float straight_zmap (struct Farey *f, int nume, int deno, double t) 
+float straight_zmap (ContinuedFraction &f, int nume, int deno, double t) 
 {
    int n;
    float y;
-   RatioToContinuedFraction (f, nume, deno);
-   y = ContinuedFractionToZReal (f, t);
+   f.SetRatio (nume, deno);
+   y = f.ToZReal (t);
    n = (int) y;
    if (y<0.0) n--;
    y -= (double) n;
@@ -27,15 +28,15 @@ float straight_zmap (struct Farey *f, int nume, int deno, double t)
 
 /* ------------------------------------------------------------ */
 
-float symmetric_zmap (struct Farey *f, int nume, int deno, double t) 
+float symmetric_zmap (ContinuedFraction &f, int nume, int deno, double t) 
 {
    int n;
    float y, z;
-   RatioToContinuedFraction (f, nume, deno);
-   y = ContinuedFractionToZReal (f, t);
+   f.SetRatio (nume, deno);
+   y = f.ToZReal (t);
 
-   RatioToContinuedFraction (f, deno-nume, deno);
-   z = ContinuedFractionToZReal (f, t);
+   f.SetRatio (deno-nume, deno);
+   z = f.ToZReal (t);
 
    /* y = 0.5 * (y+z-1.0); */
    y = 0.5 * (y-z);
@@ -48,11 +49,9 @@ float symmetric_zmap (struct Farey *f, int nume, int deno, double t)
 
 /* ------------------------------------------------------------ */
 
-main (argc, argv)
-int argc;
-char *argv[];
+main (int argc, char *argv[])
 {
-   struct Farey *f;
+   ContinuedFraction f;
    double x, y, z, t;
    double delta_t;
    int i, j, n;
@@ -66,13 +65,11 @@ char *argv[];
       exit (1);
    }
 
-   f = CreateFarey();
-
    fil = fopen (argv[1], "w");
    fprintf (fil, "%s %s", argv[2], argv[3]);
 
    /* null terminated string */
-   { char zip=0; fwrite (zip, sizeof(char), 1, fil); }
+   { char zip=0; fwrite (&zip, sizeof(char), 1, fil); }
    fflush (fil);
    
    width = atoi (argv[2]);
