@@ -221,7 +221,7 @@ c	       take a big step and save some cpu time.
 			justfound = 99;
 			if (1 < numfound)
 			{
-				int nnn = numfound;
+				int nnn = numfound-1;
 				double dil = ener[nnn] - ener [nnn-1];
 				dil = fabs (dil) * 0.4;
 				step = fmin (step, dil);
