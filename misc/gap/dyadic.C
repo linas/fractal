@@ -25,11 +25,16 @@ class Dyadic
 
 		// return alternating polynomial sum_n w^n (2b_n -1)
 		double ToAlternatingPoly (double w);
+
+		// return polynomial sum_n b_n w^n 
 		double ToCantorPoly (double w);
 
 		// return sum_n (2b_n -1) n^-s
 		double ToZetaPoly (double s);
 		double ToZetaPolyC (double re_s, double im_s);
+
+		// return product pi_n (b_n+1) 
+		double ToProd (void);
 
 	private:
 		unsigned int ndigits;
@@ -170,12 +175,46 @@ Dyadic :: ToCantorPoly (double z)
 	return acc;
 }
 
+double
+Dyadic :: ToProd (void)
+{
+	int i;
+	double acc = 1.0;
+
+	for (i=0; i<ndigits; i++)
+	{
+		short alt = bdigits[i] + 1;
+		double term = alt;
+		acc *= 0.5*term;
+	}
+
+	return acc;
+}
+
+
+double prod_acc (int nmax, int order)
+{
+	Dyadic dy;
+
+	double acc =0.0;
+	int k;
+	for (k=1; k<nmax; k+=2)
+	{
+		int p = k;
+		if (0 == p%2) continue;
+
+		dy.SetFrac (p, order);
+		double y = dy.ToProd();
+		acc += y;
+	}
+	return acc;
+}
 
 int
 main (int argc, char * argv[])
 {
 	Dyadic dy;
-	int order = 12;
+	int order = 10;
 	int nmax = 1<<order;
 
 	double zre = 1.0/3.0;
@@ -184,20 +223,39 @@ main (int argc, char * argv[])
 		printf ("Usage: %s <z value>\n", argv[0]); 
 		exit(1);
 	}
-   zre = 1.3;
-	zim = atof (argv[1]);
+   zim = 0.0;
+	zre = atof (argv[1]);
 	printf ("# z=%g + i %g\n", zre, zim);
 
-	int p;
-	for (p=1; p<nmax; p+=2)
+	double acc = 0.0;
+	int k;
+	for (k=1; k<nmax; k++)
 	{
+		int p = k;
 		if (0 == p%2) continue;
 		double x = ((double) p) / ((double) nmax);
 
+#if 0
+		int norder = order;
+		while (0 == p%2)
+		{
+			p >>= 1;
+			norder --;
+		}
+#endif
+
 		dy.SetFrac (p, order);
-		// double y = dy.ToAlternatingPoly (z);
-		// double y = dy.ToCantorPoly (z);
-		double y = dy.ToZetaPolyC (zre, zim);
+		double y = dy.ToAlternatingPoly (zre);
+		// double y = dy.ToCantorPoly (zre);
+		// double y = dy.ToZetaPolyC (zre, zim);
+
+		acc += y;
+
+#ifdef PASCAL_TAKAGI
+		double y = dy.ToProd();
+		double acc = prod_acc (p, order);
+		double inv = prod_acc (nmax-p, order);
+#endif
 
 #ifdef COMB_STRUCTURE
 		dy.SetFrac (p+1, order);
@@ -206,7 +264,7 @@ main (int argc, char * argv[])
 		y -= dy.ToZetaPoly (z);
 #endif
 
-		printf ("%d	%8.6g	%8.6g\n", p, x, y);
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", p, x, y, acc);
 	}
 	return 0;
 }
