@@ -3,7 +3,7 @@
 \textclass article
 \language english
 \inputencoding auto
-\fontscheme default
+\fontscheme pslatex
 \graphics default
 \paperfontsize default
 \spacing single 
@@ -4804,6 +4804,134 @@ and both parities for
  Show graphs as well.
 \layout Section
 
+The Isola Map 
+\layout Standard
+
+Stefano Isola proposes studying a map of deceptive simplicity
+\begin_inset LatexCommand \cite{key-12}
+
+\end_inset 
+
+.
+ Given by 
+\begin_inset Formula \[
+F(x)=\left\{ \begin{array}{c}
+x/(1-x)\;\textrm{ if }\;0\leq x\leq1/2\\
+(1-x)/x\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ it is symmetric about 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+: that is, 
+\begin_inset Formula $F(x)=F(1-x)$
+\end_inset 
+
+, and has a very simple tent-like shape, and this is the source of the deception.
+ One wants to hastily conclude that it is topologically equivalent to the
+ standard tent map 
+\begin_inset Formula \[
+T(x)=\left\{ \begin{array}{c}
+2x\;\textrm{ if }\;0\leq x\leq1/2\\
+2-2x\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ and thus that the spectrum of its Frobenius-Perron Operator is identical
+ to that of the Bernoulli Map, and that this map can be trivially brushed
+ aside as belonging to that conjugacy class.
+ Nothing could be farther from the truth.
+ In fact, it is conjugate, but the conjugating function is the Minkowski
+ Question Mark: 
+\begin_inset Formula \[
+F(x)=(?^{-1}\circ T\circ?)(x)\]
+
+\end_inset 
+
+ and so the relationship is anything but trivial.
+ The easiest way to see this is to note that we can write 
+\begin_inset Formula $F$
+\end_inset 
+
+ and 
+\begin_inset Formula $T$
+\end_inset 
+
+ are combinations of the modular group element 
+\begin_inset Formula $g^{-1}$
+\end_inset 
+
+:
+\begin_inset Formula \[
+F(x)=\left\{ \begin{array}{c}
+g_{C}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
+(g_{C}^{-1}\circ r)(x)\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ following the notation of earlier chapters, and
+\begin_inset Formula \[
+F(x)=\left\{ \begin{array}{c}
+g_{D}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
+(g_{D}^{-1}\circ r)(x)\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+The Frobenius-Perron (Transfer) Operator for the Isola Map is 
+\begin_inset Formula \[
+\left[\mathcal{P}f\right](x)=\frac{1}{\left(1+x\right)^{2}}\left[f\left(\frac{x}{x+1}\right)+f\left(\frac{1}{x+1}\right)\right]\]
+
+\end_inset 
+
+ XXX Define isola's M_n and copy equations 2.39 and 2.41 and 2.42 here.
+ Restate for their equivalents on the sawtooth.
+\layout Subsection
+
+The Polynomial Basis
+\layout Standard
+
+Based on our previous luck, we attempt to define the operator 
+\begin_inset Formula $\mathcal{P}$
+\end_inset 
+
+ in the polynomial basis.
+ First, we attempt an expansion at 
+\begin_inset Formula $x=0$
+\end_inset 
+
+.
+ This leads to 
+\begin_inset Formula \begin{eqnarray*}
+\mathcal{P}_{nk} & \equiv & \left\langle n\left|\mathcal{P}\right|k\right\rangle \\
+ & = & (-)^{n}\left[\left(\begin{array}{c}
+k+n+1\\
+k+1\end{array}\right)+\Theta_{k\leq n}(-)^{k}\left(\begin{array}{c}
+n+1\\
+k+1\end{array}\right)\right]\end{eqnarray*}
+
+\end_inset 
+
+ Its clear that this matrix is very ill-conditioned.
+ As 
+\begin_inset Formula $n$
+\end_inset 
+
+ gets large, the matrix elements explode.
+ The matrix is not tractable numerically, and would be painful to work with
+ analytically, without defining some sort of regulator.
+ Thus, we are motivated to look at the expansion at 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+.
+ 
+\layout Section
+
 Other Trees of Rationals
 \layout Standard
 
@@ -4913,4 +5041,12 @@ Riemann's Zeta Function,
 \emph default 
  1972, (Dover Publications, New York) pp.
  13ff 
+\layout Bibliography
+\bibitem [Iso03]{key-12}
+
+Stefano Isola, 
+\emph on 
+On the Spectrum of Farey and Gauss Maps
+\emph default 
+, preprint, undated (2004 or earlier)
 \the_end
