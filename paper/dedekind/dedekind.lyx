@@ -42,6 +42,12 @@ An exploration of the interior or the Mandelbrot Set and its relationship
 
 This paper is part of a set of chapters that explore the relationship between
  the real numbers, the modular group, and fractals.
+ Updated and revised versions of this monograph can be found at 
+\begin_inset LatexCommand \htmlurl{http://www.linas.org/math/sl2z.html}
+
+\end_inset 
+
+
 \layout Section
 
 Dedekind Eta and the Mandelbrot Set
@@ -211,7 +217,7 @@ by understanding the analytic structure of the related series.
 
  directly, we study the expansion 
 \begin_inset Formula \begin{equation}
-S(t)=\sum_{n=-N}^{\infty}s_{n}t^{n}\label{eq:}\end{equation}
+S(t)=\sum_{n=-N}^{\infty}s_{n}t^{n}\label{eq:term expansion}\end{equation}
 
 \end_inset 
 
@@ -473,7 +479,7 @@ P_{c}(t)=\frac{1}{t}\;\frac{1}{4\,(\frac{1}{4}-c)^{3/2}}+\mathcal{O}(1)\label{eq
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -524,7 +530,7 @@ This picture shows the divergent term of
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -574,5 +580,129 @@ The phase of
  
 \end_inset 
 
-limt->0 |P(t)| / N(t) 
+ 
+\layout Standard
+
+The divergent term term of 
+\begin_inset Formula $P_{c}(t)$
+\end_inset 
+
+ can be immediately integrated to obtain the divergent term in 
+\begin_inset Formula $S_{c}(t)$
+\end_inset 
+
+ inside the cardiod: 
+\begin_inset Formula \begin{equation}
+S_{c}(t)=\frac{1}{t}\;\left[\frac{1}{2}-\sqrt{\frac{1}{4}-c}\;\right]+\mathcal{O}(1)\label{eq:}\end{equation}
+
+\end_inset 
+
+ If we write this divergent piece as 
+\begin_inset Formula $A(c)=\frac{1}{2}-\sqrt{\frac{1}{4}-c}$
+\end_inset 
+
+ then it is trivial to verify that 
+\begin_inset Formula $|A(c)|=1/2$
+\end_inset 
+
+ on the boundary of the cardiod; that is, 
+\begin_inset Formula $|A(e^{i\phi/2}-e^{2i\phi}/4)|=1/2$
+\end_inset 
+
+ for all angles 
+\begin_inset Formula $\phi$
+\end_inset 
+
+.
+ The boundary of the cardiod is given by 
+\begin_inset Formula $x+iy=e^{i\phi/2}-e^{2i\phi}/4$
+\end_inset 
+
+, of course.
+ Next, we note that 
+\begin_inset Formula $A(c)$
+\end_inset 
+
+ represents a fixed-point of the Mandelbrot iterator: 
+\begin_inset Formula $A(c)=A^{2}(c)+c$
+\end_inset 
+
+.
+ Indeed, this should not be a surprise: the divergent term of the sum 
+\begin_inset Formula $S_{c}(t)$
+\end_inset 
+
+ is in effect the average over over all values of 
+\begin_inset Formula $z_{n}$
+\end_inset 
+
+.
+ Inside the main bulb, we have 
+\begin_inset Formula $\lim_{n\rightarrow\infty}z_{n}=A(c)$
+\end_inset 
+
+, and so of necessity, the leading divergence of the sum must be 
+\begin_inset Formula $A(c)$
+\end_inset 
+
+.
+ Similarly, in the large bud on the left, 
+\begin_inset Formula $z_{n}$
+\end_inset 
+
+ converges to a two-cycle, with 
+\begin_inset Formula $z_{n}\rightarrow1/2+i\sqrt{c+3/4}$
+\end_inset 
+
+ and 
+\begin_inset Formula $z_{n+1}\rightarrow-1/2-i\sqrt{c+3/4}$
+\end_inset 
+
+.
+ The average of these two values is 
+\begin_inset Formula $-1/2$
+\end_inset 
+
+, and so we can trivially deduce that 
+\begin_inset Formula $\lim_{t\rightarrow0^{+}}tS_{c}(t)=-1/2$
+\end_inset 
+
+ and thus that 
+\begin_inset Formula $\lim_{t\rightarrow0^{+}}t|S_{c}(t)|=1/2$
+\end_inset 
+
+ which exactly mathes our numerical results.
+ In other buds, the sequence converges to m-cycles.
+ Thus, in other buds, the divergent term will be the average over these
+ m values of the limit cycle.
+ Provided one can calculate this average, then one has an exact expression
+ for the divergences of 
+\begin_inset Formula $S_{c}(t)$
+\end_inset 
+
+.
+ Of course, there are considerable additional difficulties once one gets
+ into the more contorted parts of the M-set, since the convergence to a
+ limit cycle can be extremely slow, thus creating considerable topological
+ difficulties when reasoning about the expansion of terms in the formula
+ 
+\begin_inset LatexCommand \ref{eq:term expansion}
+
+\end_inset 
+
+.
+\layout Subsection
+
+Finite Terms
+\layout Standard
+
+Let us now turn to the finite remainders.
+ By subtracting away the divergent pieces, we are essentially subtracting
+ away the contribution of the asymptotic limit cycle.
+ The remaining finite parts indicate how the asymptotic behaviour is approched.
+ If the finite part is large, this indicates that the iteration took a long
+ time to approach the asymptotic limit.
+ If the finite part is small, then the series converged to its limit cycle
+ quickly.
+ 
 \the_end
