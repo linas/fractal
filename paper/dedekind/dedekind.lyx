@@ -54,6 +54,7 @@ Consider the Euler function
 \end_inset 
 
  on the complex plane.
+ It is closely related to the Dedekind eta function.
  The accompanying figure shows 
 \begin_inset Formula $\phi(q)$
 \end_inset 
@@ -90,5 +91,140 @@ Note the modular group symmetry.
 
 \layout Standard
 
-Now condisder the Mandelbrot set.
+Now condsider the Mandelbrot set.
+\layout Subsection
+
+Regulated Series 
+\layout Standard
+
+Consider the sequence 
+\begin_inset Formula $\{ a_{0},a_{1},a_{2},...\}$
+\end_inset 
+
+.
+ Then for small positive 
+\begin_inset Formula $t$
+\end_inset 
+
+, construct the sum 
+\begin_inset Formula \begin{equation}
+S(t)=\sum_{n=0}^{\infty}a_{n}e^{-tn}\label{eq:}\end{equation}
+
+\end_inset 
+
+ In the following,we'll refer to this as the 
+\emph on 
+regulated series for the sequence 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+
+\emph default 
+.
+ For large class of reasonably behaved series 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+, this sum is finite for all positive values of 
+\begin_inset Formula $t$
+\end_inset 
+
+.
+ By 'reasonably behaved' we mean a sequence where 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ doesn't get exponentially large with increasing 
+\begin_inset Formula $n$
+\end_inset 
+
+; that is, one where the sum converges.
+ 
+\layout Standard
+
+This sum participates in some interesting number-theoretic relationships
+ when the 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+ are considered to be the spectrum of an operator.
+ In the following, we will be considering the 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+ not as a spectrum, but instead as the iterates of the Mandelbrot Set.
+ Before doing so, lets quickly review some basic properties.
+\layout Standard
+
+One can define a Dirichlet series 
+\begin_inset Formula \begin{equation}
+C(s)=\sum_{n=0}^{\infty}\frac{a_{n}}{n^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ which can be easily converted into the first sum with an integral transform.
+ 
+\layout Standard
+
+The spectral analysis consists of exploring the behavior of the sum in the
+ limit of 
+\begin_inset Formula $t\rightarrow0$
+\end_inset 
+
+.
+ Depending on the series, it may diverge.
+ For example, if we take all 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ to be one, the sum 
+\begin_inset Formula $N(t)=\sum_{n=0}^{\infty}\exp(-tn)$
+\end_inset 
+
+ diverges as 1/t, while 
+\begin_inset Formula $\sum_{n=0}^{\infty}n\,\exp(-tn)$
+\end_inset 
+
+ diverges as 
+\begin_inset Formula $1/t^{2}$
+\end_inset 
+
+.
+ The corresponding Dirichlet series exhibt poles at 
+\begin_inset Formula $s=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $s=2$
+\end_inset 
+
+, respectively, for these sums.
+ The core idea behind spectral analysis is that in general, one can gain
+ insight into the structure of the series 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+by understanding the analytic structure of the related series.
+ 
+\layout Standard
+
+When engaging in numerical calculations,the Dirichlet series is nearly numerical
+ly intractable, because of its painfully slow convergence.
+ Thus,one is instantly motivated to use the exponential series instead.
+ However, one gets an even more stable and numerically well-behaved series
+ by considering the Gaussian regulator, namely 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}a_{n}\exp(-t^{2}n^{2})\label{eq:}\end{equation}
+
+\end_inset 
+
+ There is no harm in using this series for numerical work; it can be related
+ back to the Dierichlet series through analytic integral transforms, albeit
+ somehwat more complex ones than the plain exponential series.
+\layout Subsection
+
+The Mandelbrot Set
+\layout Standard
+
+Now consider
 \the_end
