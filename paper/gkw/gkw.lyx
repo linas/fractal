@@ -75,10 +75,10 @@ The Gauss-Kuzmin-Wirsing Operator
 \layout Standard
 
 THIS IS A DRAFT WORK IN PROGRESS.
- 
+ The intro hasn't been written yet.
 \layout Section
 
-The Frobenius-Perron Operator
+Introduction: The Frobenius-Perron Operator for Iterated Maps
 \layout Standard
 
 This section provides a basic review of the Frobenius-Perron operator and
@@ -697,8 +697,14 @@ This sawtooth function joins values of
 
 \end_inset 
 
- We will want to consider the action of this operator on polynomials of
- 
+We develop a representation of this operator in the polynomial-basis Hilbert
+ space below.
+\layout Subsection
+
+The Polynomial Eigenfunctions
+\layout Standard
+
+We will want to consider the action of this operator on polynomials of 
 \begin_inset Formula $y=1-x$
 \end_inset 
 
@@ -951,7 +957,7 @@ Singular Sawtooth, Second Kind
 
 \layout Standard
 
-Second kind of sawtooth.
+Picture of the second kind of sawtooth.
  
 \end_inset 
 
@@ -977,7 +983,14 @@ c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\]
 
 \end_inset 
 
- As before, we change variables to 
+ The following sections develop this operator in different function spaces.
+ 
+\layout Subsection
+
+The Polynomial Basis Eigenfunctions
+\layout Standard
+
+As before, we change variables to 
 \begin_inset Formula $y=1-x$
 \end_inset 
 
@@ -985,7 +998,7 @@ c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\]
 \begin_inset Formula $y$
 \end_inset 
 
-, and match terms to find teh matrix elements 
+, and match terms to find the matrix elements 
 \begin_inset Formula \[
 C_{mk}=\left(\begin{array}{c}
 k\\
@@ -1012,7 +1025,11 @@ m\end{array}\right)\frac{1}{2^{k+1}-1}\]
 \begin_inset Formula $\lambda_{2}=1/7$
 \end_inset 
 
-, etc.
+, 
+\emph on 
+etc
+\emph default 
+.
  with the ratio of successive eigenvalues tending to 2.
  The first few eigenvectors are 
 \begin_inset Formula \[
@@ -1039,6 +1056,16 @@ e_{3}=1-\frac{66}{13}y+\frac{84}{13}y^{2}-\frac{32}{13}y^{3}=\frac{-1}{13}\left(
 \end_inset 
 
 
+\layout Standard
+
+XXX present 
+\begin_inset Formula $e_{4}$
+\end_inset 
+
+ as well.
+\layout Subsection
+
+The Failure of the Similarity Transform for the Polynomial Basis
 \layout Standard
 
 Under normal circumstances, whenever one has a pair of maps 
@@ -1089,13 +1116,15 @@ Under normal circumstances, whenever one has a pair of maps
 \end_inset 
 
 .
- Unfortunately, the similarity transform is highly singular, and would be
- very troublsome to work with.
- We deduce this because the similarity transform 
+ Unfortunately, the Minkowski Question Mark is highly singular and is not
+ traditionally differentiable, and so we cannot build such a similarity
+ transform using the polynomial function basis.
+ Another way to deduce this is to note that the similarity transform 
 \begin_inset Formula $S_{\phi}$
 \end_inset 
 
- normally preserves the eigenvalues; that is, the eigenvalues of 
+, working as a traditional, ordinary operator, normally preserves the eigenvalue
+s; that is, the eigenvalues of 
 \begin_inset Formula $U_{\alpha}$
 \end_inset 
 
@@ -1113,22 +1142,152 @@ Under normal circumstances, whenever one has a pair of maps
 \begin_inset Formula $\lambda_{k}/\lambda_{k+1}=2$
 \end_inset 
 
- whereas for the GKW the ratio is 2.65 (I'm not sure what this value is supposed
- to be; maybe its Khinchin's constant 2.685 or maybe Feigenbaum's constant
- (the ratio of period doubling 
+ whereas for the GKW the ratio is 2.65...
+ I am not aware of what this value is supposed to be.
+ Its plausible that it may be Khinchin's constant 2.685.
+ But given the intricate connection between the Riemann Zeta, the Modular
+ Group, and period-doubling fractals, its equally plausible is that it may
+ be Feigenbaum's constant, the ratio of period doubling 
 \begin_inset Formula $\delta=4.6692...$
 \end_inset 
 
- which is 2+2.6692...).
- So which value is it, exactly?) 
+ which is 2+2.6692...
 \layout Subsection
 
 Fractal Eigenfunctions of the Second Sawtooth
 \layout Standard
 
 The Takagi curve can be used to build an alternate set of eigenfunctions
- for the second sawtooth, posessing a continuous-spectrum eigenvalues.
+ for the second sawtooth, posessing continuous-spectrum eigenvalues.
+ These eigenfunctions are not differentiable, and thus cannot be obtained
+ through polynomials, and thus are not visible when working with the operator
+ in a polynomial-basis Hilbert Space.
+ They can be used to build an alternate function space, in which the Second
+ Sawtooth remains exactly solvable.
  
+\layout Standard
+
+We recognize from the studying of the dyadic representation of the Modular
+ Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ that the second sawtooth is expressed in terms of the the group element
+ 
+\begin_inset Formula \[
+\left[g_{D}^{k-1}r_{D}g_{D}\right](x)=\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\]
+
+\end_inset 
+
+ adn thus functions posessing the modular group symmetry are candidates
+ for solving the operator 
+\begin_inset Formula $U_{C}$
+\end_inset 
+
+.
+ The candidates we have in mind are of course the family of Takagi Curves.
+ 
+\layout Standard
+
+We begin by defining the Takagi Curve as 
+\begin_inset Formula \[
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+ is the triangle wave: 
+\begin_inset Formula \[
+\tau(x)=\left\{ \begin{array}{ccc}
+2x & \;\textrm{ when }\; & 0\leq x\leq1/2\\
+2(1-x) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ This form of the Takagi curve transforms under the three-dimensional representa
+tion of the Modular Group.
+ Specifically, we write 
+\begin_inset Formula \[
+g_{3}^{n}=\left(\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 1/2^{n} & 0\\
+0 & q_{n}(w) & w\end{array}\right)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $q_{n}(w)$
+\end_inset 
+
+ is the polynomial 
+\begin_inset Formula \[
+q_{n}(w)=\frac{1}{2^{n-1}}\sum_{k-0}^{n-1}(2w)^{k}=\frac{1}{2^{n-1}}\left(\frac{1-(2w)^{n}}{1-2w}\right)\]
+
+\end_inset 
+
+ We write out the full matrix form for 
+\begin_inset Formula $g_{3}^{k-1}r_{3}g_{3}$
+\end_inset 
+
+ and apply the group action isomorphism 
+\begin_inset Formula $t_{w}g_{D}^{k-1}r_{D}g_{D}=g_{3}^{k-1}r_{3}g_{3}t_{w}$
+\end_inset 
+
+ to obtain 
+\begin_inset Formula \[
+t_{w}\left(\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\right)=q_{k-1}(w)+x\left(w^{k-1}-q_{k-1}(w)/2\right)+w^{k}t_{w}(x)\]
+
+\end_inset 
+
+ Inserting the above back into the definition for the sawtooth operator,
+ and performing the sum, we get
+\begin_inset Formula \[
+\left[U_{C}t_{w}\right](x)=\frac{4}{3(2-w)}+\frac{x}{3(2-w)}+\frac{wt_{w}(x)}{2-w}\]
+
+\end_inset 
+
+ From this, we can immediately read off the eigenvalue as 
+\begin_inset Formula $w/(2-w)$
+\end_inset 
+
+.
+ To get the eigenfunction, we need to complete the diagonalization by using
+ 
+\begin_inset Formula $\left[U_{C}1\right](x)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left[U_{C}x\right](x)=(2-x)/3$
+\end_inset 
+
+ to get the eigenfunction 
+\begin_inset Formula \[
+E_{2}(x)=\frac{2-w}{2(w+1)(w-1)}+\frac{x}{2(w+1)}+t_{w}(x)\]
+
+\end_inset 
+
+ It should be clear from this presentation that the higher and lower dimensional
+ Takagi curves, of both even and odd parity, give eigenvectors and eigenvalues
+ as well.
+ We present a few more here:
+\layout Standard
+
+XXX to do, present 
+\begin_inset Formula $E_{1}$
+\end_inset 
+
+and the odd-parity 
+\begin_inset Formula $E_{2}$
+\end_inset 
+
+and both parities for 
+\begin_inset Formula $E_{3}$
+\end_inset 
+
+ as well.
 \layout Section
 
 Other Trees of Rationals
