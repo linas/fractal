@@ -83,8 +83,22 @@ Introduction: The Frobenius-Perron Operator for Iterated Maps
 
 This section provides a basic review of the Frobenius-Perron operator and
  its use in the description of fractals and chaotic iterated maps.
- No results are presented here; rather the goal is to provide the background
- for later sections.
+ No results are presented here; rather the goal is to provide the notation
+ and general concepts that will be used in later sections.
+ This review assumes no prior encounter with these concepts, and keeps the
+ development simple, avoiding the language of higher mathematics.
+ More sophisticated developments build on concepts such as Borel Sigma Algebras
+ and define the Frobenius-Perron operator on Banach Spaces.
+ In the following, we avoid this sophisticated language in order to keep
+ the presentation accesible.
+ However, we do so at some peril: many of the quantites we'll work with
+ are potentially ill-defined or divergent, and so the validity of some of
+ the transformations and equations in such foggy surrounds can be questionable.
+ A more rigorous treatment with appeals to higher math would help clarify
+ where the rocky shoals are.
+ As a substitute, we try to maintain a physicist's attitude, and keep our
+ heads about us when faced with something dangerous.
+ Be aware that not all exrapolations from teh following may be warrented.
  
 \layout Standard
 
@@ -323,8 +337,8 @@ If one is interested in
 \begin_inset Formula $U$
 \end_inset 
 
- acting on polynomial  functions, then one immediately writes the Taylor
- (or McLauren) series 
+ acting on polynomial functions, then one immediately writes the Taylor
+ (or Maclaurin) series 
 \begin_inset Formula \[
 \rho(x)=\sum_{n=0}^{\infty}\frac{\rho^{(n)}(0)}{n!}x^{n}=\sum_{n=0}^{\infty}a_{n}x^{n}\]
 
@@ -576,6 +590,105 @@ singular sawtooth
  Of course, it is known that a complete solution of the GKW should lead
  directly to a proof of the Riemann Hypothesis, so getting lucky would be
  truly lucky indeed.
+ XXXX edit the above sentances.
+\layout Subsection
+
+Fourier Basis
+\layout Standard
+
+blah
+\layout Subsection
+
+Koopman Operator
+\layout Standard
+
+The Koopman operator is in a certain sense conjugate to the Frobenius-Perron
+ operator, and defines how observables evolve.
+ Given a density 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ we say that the observation of a function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ by 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is 
+\begin_inset Formula \[
+\left\langle f\,\right\rangle _{\rho}=\int_{0}^{1}f(x)\rho(x)\, dx\]
+
+\end_inset 
+
+ The term 
+\begin_inset Quotes eld
+\end_inset 
+
+observable
+\begin_inset Quotes erd
+\end_inset 
+
+ comes from usage in Quantum Mechanics, where 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ is associated with the eigenvalues of an operator.
+ We do not need to appeal to these operator equations for the following
+ development.
+ The Koopman operator 
+\begin_inset Formula $K$
+\end_inset 
+
+ gives the change in 
+\begin_inset Formula $f$
+\end_inset 
+
+ when 
+\begin_inset Formula $U$
+\end_inset 
+
+ acts on 
+\begin_inset Formula $\rho$
+\end_inset 
+
+, thus: 
+\begin_inset Formula \[
+K_{g}:\left\langle f\,\right\rangle _{\rho}\rightarrow\left\langle K_{g}f\,\right\rangle _{\rho}=\int_{0}^{1}[K_{g}f](x)\rho(x)\, dx=\int_{0}^{1}f(x)[U_{g}\rho](x)\, dx\]
+
+\end_inset 
+
+ In Dirac bra-ket notation, we have 
+\begin_inset Formula \begin{eqnarray*}
+\int_{0}^{1}f(x)[U_{g}\rho](x)\, dx & = & \int_{0}^{1}\left\langle x|U_{g}|\rho\right\rangle \left\langle x|f\right\rangle \, dx\\
+ & = & \int_{0}^{1}dx\int_{0}^{1}dy\left\langle x|U_{g}|y\right\rangle \left\langle y|\rho\right\rangle \left\langle x|f\right\rangle \, dx\end{eqnarray*}
+
+\end_inset 
+
+ and so we have 
+\begin_inset Formula \[
+\left[K_{g}f\right](y)=\int_{0}^{1}\left\langle x|U_{g}|y\right\rangle \left\langle x|f\right\rangle \, dx=\int_{0}^{1}U_{g}(x,y)f(x)\, dx=\int_{0}^{1}\delta\left(x-g(y)\right)f(x)\, dx\]
+
+\end_inset 
+
+ This gives the action of the Koopman operator in a coordinate-space representat
+ion.
+ As is the recurring theme, different representations can lead to different
+ results.
+ In the coordinate-space representation, the Koopman operator appears to
+ be the transpose of the Frobenius-Perron operator, in that 
+\begin_inset Formula $K(x,y)=U(y,x)$
+\end_inset 
+
+.
+ However, in a general representation, whether the Koopman operator is the
+ transpose or the complex conjugate or something else needs to be determined
+ on a case-by-case basis, with an appeal to the particular operator 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+ and the representations on which it works.
  
 \layout Section
 
@@ -588,14 +701,24 @@ The Bernoulli map is an exactly solvable example of deterministic chaos.
 
 \end_inset 
 
- an a thorough exposition of t is provided in 
+ and a more thorough exposition of it is provided in 
 \begin_inset LatexCommand \cite{key-2}
 
 \end_inset 
 
 .
- We recap here only insofar as it gives a simple example of some of the
- more subtle upcoming issues.
+ However, these authors seem to have missed or ignored certain key aspects
+ of the operator, including the relationship of its eigenvalues to the Hurwitz
+ Zeta function, as well as the action of the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ as a symmetry group.
+ Thus, we recap the results here, using simpler techniques, and then (making
+ use of these simpler tools) extend the results in several directions.
+ The motivation for the detailed development is, of course, that we will
+ want to extend these tools to the GKW operator.
+ 
 \layout Standard
 
 The Bernoulli map is given by 
