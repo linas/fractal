@@ -10,19 +10,24 @@ XLIB =		$(LIBS)/libX11.a
 
 CC = cc -Wall -O2 $(INCLUDES)
 
-EXES = stalk stalkmov mstop migrate measure offset \
+EXES =  stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
         circout circin circmov brat \
         abs clamp takelog reclamp dump renorm \
         draw dx image movie paste stats sum \
         angle curl diff div card mandel
 
-all:    brat draw dx image
+all:    radius brat draw dx image
 
 
 clean:
 	rm -f a.out  *.o glop* junk* *.flo  *.txt *.gif  $(EXES)
 
+.c.o:
+	$(CC) -c $<
+
+.o:
+	$(CC) -o $* $< -lm
 
 ################## Dependencies and compile/link #########
 #
@@ -86,4 +91,6 @@ image: image.o  man.o util.o
 
 movie: movie.o  man.o util.o
 	$(CC) -o movie movie.o man.o util.o -lm
+
+radius: radius.o 
 
