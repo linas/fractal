@@ -11,6 +11,7 @@
 
 #include <complex.h>
 #include <math.h>
+#include <stdio.h>
 
 #include "zetafn.h"
 
@@ -62,6 +63,7 @@ long double complex geta (long double complex s, long double complex z)
 	return gacc;
 }
 
+int
 main ()
 {
 	long double complex ess = 0.5L + 14.1347IL;
@@ -72,4 +74,6 @@ main ()
 	long double complex g = geta (ess, zee);
 
 	printf ("its %Lg %Lg\n", creall (g), cimagl(g));
+
+	return 0;
 }

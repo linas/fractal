@@ -14,51 +14,6 @@
 #include <gsl/gsl_sf_zeta.h>
 #include "zetafn.h"
 
-/* Return the n'th harmnic number */
-long double harmonic (int n, long double ess)
-{
-	long double acc = 0.0L;
-	int k;
-
-	for (k = 1; k<= n; k++)
-	{
-		long double kay = k;
-		acc += powl (kay, -ess);
-	}
-	return acc;
-}
-
-/* Return Hurwitz zeta equiv of harmonic */
-long double harmonic_hurwitz (int n, long double x, long double ess)
-{
-	long double acc = 0.0L;
-	int k;
-
-	for (k = 1; k<= n; k++)
-	{
-		long double kay = k;
-		kay += x;
-		acc += powl (kay, -ess);
-	}
-	return acc;
-}
-
-/* Return zeta function minus n'th harmonic */
-long double zeta_minus_harmonic (int n, long double ess)
-{
-	long double acc = 0.0L;
-	int k;
-
-	for (k = n+1; k<10000; k++)
-	{
-		long double kay = k;
-		long double term = powl (kay, -ess);
-		acc += term;
-		if (term < 1.0e-16*acc) break;
-	}
-	return acc;
-}
-
 long double sanity (long double ess)
 {
 	double zeta = gsl_sf_zeta (ess);
