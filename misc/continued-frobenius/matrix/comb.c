@@ -6,6 +6,53 @@
  */
 
 #include <math.h>
+#include <stdio.h>
+#include "lapack.h"
+
+// LAPACK API wrappers -----------------------------------------
+int 
+getworkdim (int dim, double *matrix,
+        double *eigenvalues_re, double *eigenvalues_im, 
+		  double *left_eigen, double *right_eigen,
+		  double *workspace)
+{
+
+	char jobvl = 'N';
+	char jobvr = 'V';
+	int workdim;
+	int info;
+
+	workdim = -1;
+
+	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
+	       eigenvalues_re, eigenvalues_im, 
+			 left_eigen, &dim, right_eigen, &dim, 
+			 workspace, &workdim, &info);
+
+	return (int) (workspace[0]+0.5);
+}
+
+int 
+geteigen (int dim, double *matrix, 
+        double *eigenvalues_re, double *eigenvalues_im, 
+		  double *left_eigen, double *right_eigen,
+		  int workdim, double *workspace)
+{
+
+	char jobvl = 'N';
+	char jobvr = 'V';
+	int info;
+
+	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
+	       eigenvalues_re, eigenvalues_im, 
+			 left_eigen, &dim, right_eigen, &dim, 
+			 workspace, &workdim, &info);
+
+	if (info) printf ("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx info=%d\n", info);
+	return info;
+}
+
+// ---------------------------------------------------------
 
 /*
  * Build a matrix corresponding to the differential equation
@@ -23,7 +70,9 @@ get_matrix_elt (int p, int n, double a, double b)
 
 	// multiply by sin (2piy)
 	k = p-n;
-	if ((k>=0) && (0 == k%2))
+	// whoops, this if statment is for cos (2pi y)
+	// if ((k>=0) && (0 == k%2))
+	if ((k>0) && (1 == k%2))
 	{
 		int i;
 		double term = 1.0;
@@ -64,21 +113,126 @@ get_matrix_elt (int p, int n, double a, double b)
 	return elt;
 }
 
-main ()
+void
+fill_matrix (double a, double b, int dim, double *mat)
 {
-	int i, j;
-	int dim = 13;
+	int i,j;
 
-	double a = 0.16;
-	double b = 6.0;
+	double regulate;
+	regulate = (double) dim;
+	regulate = log(1.0e-20) / (regulate*regulate);
 
+	// build the matrix
 	for (i=0; i<dim; i++)
 	{
+		double cutoff = exp (regulate *((double) i)*((double) i));
 		for (j=0; j<dim; j++)
 		{
 			double v = get_matrix_elt (i,j, a, b);
+			v *= cutoff;
+			// use the fortran-style matrix conventions
+			mat [i+dim*j] = v;
 			printf ("%g\t", v);
 		}
 		printf ("\n");
 	}
+}
+
+main ()
+{
+	int i, j;
+	int dim;
+
+	double *taylor;   // the matrix
+	double *revec;    // right eigenvector
+	double *levec;    // left eigenvector
+	double *reev, *imev;  // real, imaginary eigenvalues
+
+	int workdim;
+	double *work;
+
+	dim = 13;
+
+	taylor = (double *) malloc (dim*dim*sizeof(double));
+	revec = (double *) malloc (dim*dim*sizeof(double));
+	levec = (double *) malloc (dim*dim*sizeof(double));
+	reev = (double *) malloc (dim*sizeof(double));
+	imev = (double *) malloc (dim*sizeof(double));
+	
+	workdim = 4*dim*dim;
+	work = (double *) malloc (workdim*sizeof(double));
+	
+	// wild values are a=0.16 b=6.0
+	double a = 0.16;
+	double b = 6.0;
+
+// for (b=6.0; b<16.0; b+=1.0) {
+for (a=0.1; a<6.0; a *= 1.1) {
+	// build the matrix
+	fill_matrix (a,b,dim,taylor);
+
+	// workdim = getworkdim (dim, taylor, reev, imev, levec, revec, work);
+	geteigen (dim, taylor, reev, imev, levec, revec, workdim, work);
+
+#if 1
+	// print the eigenvalues and the eigenvectors
+	int prtdim=dim;
+	for (i=0; i<prtdim; i++)
+	{
+		printf ("ev %g  %g  \n", reev[i], imev[i]);
+#if 0
+		for (j=0; j<prtdim; j++)
+		{
+			printf ("%g\n", revec[j+dim*i]);
+		}
+		printf ("\n");
+#endif
+	}
+
+	// validate the eigenvalues and vectors
+	fill_matrix (a,b,dim,taylor);
+
+	// the i'th eigenvector
+	for (i=dim-1; i> dim-prtdim; i--)
+	{
+		printf ("eigenvalue = %g %g\n", reev[i], imev[i]);
+		// check the j'th element of the i'th eigenvector
+		for (j=0; j<prtdim; j++)
+		{
+			double sum=0.0;
+			int k;
+			for (k=0; k<dim; k++)
+			{
+				sum += taylor[j+dim*k] * revec[k+dim*i];
+			}
+			sum /= reev[i] * revec[j+dim*i];
+			printf ("vec %d comp%d evec=%g  \t m*evec=%g\n", i, j, revec[j+dim*i], sum);
+		}
+		printf ("\n");
+	}
+#endif
+
+	// find the largest eigenvalue
+	int ibig = 0;
+	double ebig = -1.0e100;
+	for (i=0; i<dim; i++) 
+	{
+		if (reev[i] > ebig) { ebig = reev[i]; ibig = i; }
+	}
+	printf ("biggest eigenvalue is at %d val=%g\n", ibig, ebig);
+
+	// now evaluate the first eigenvector for 'large'  values of x:
+	double y = 50.0;
+	double yn = 1.0;
+	double sum = 0.0;
+	for (j=0; j<dim; j++)
+	{
+		sum += revec[j+ibig*dim] * yn;
+		yn *= y;
+	}
+	sum *= exp (-a*(y-b)*(y-b));
+
+	printf ("duude a=%g b=%g sum=%g\n", a,b,sum);
+}
+	
 }
