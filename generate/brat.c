@@ -69,6 +69,7 @@ void mandelbrot_out (
             tmp = re*re - im*im + re_c;
             im = 2.0*re*im + im_c;
             re = tmp;
+// printf ("its %g %g \n", re, im);
             modulus = (re*re + im*im);
             if (modulus > escape_radius*escape_radius) break;
          }    

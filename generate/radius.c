@@ -31,9 +31,11 @@ void measure_radius (
    double	rmin,
    double	rmax,
    double	epsilon,
-   int		itermax)
+   int		itermax,
+   int 		nrecur)
 {
    unsigned int	i,j;
+   int		n;
    double	deltar, rad, theta=0.0;
    double	radius_cand;   /* minimum possible radius */
    double	radius_outer;  /* escape at this radius */
@@ -90,17 +92,11 @@ void measure_radius (
             re_last = re;
             im_last = im;
 
-            tmp = re*re - im*im + re_c;
-            im = 2.0*re*im + im_c;
-            re = tmp;
-
-            tmp = re*re - im*im + re_c;
-            im = 2.0*re*im + im_c;
-            re = tmp;
-
-            tmp = re*re - im*im + re_c;
-            im = 2.0*re*im + im_c;
-            re = tmp;
+            for (n=0; n<nrecur; n++) {
+               tmp = re*re - im*im + re_c;
+               im = 2.0*re*im + im_c;
+               re = tmp;
+            }
 
             modulus = (re*re + im*im);
             if (modulus > escape_radius*escape_radius) {
@@ -210,7 +206,7 @@ void flow_radius (
    radius_outer_min = 1e30;
    radius_outer_max = -1e30;
 
-   limits = (double *)malloc ((sizea+1) * sizeof (double));
+   limits = (double *)malloc ((itermax+1) * sizeof (double));
    for (i=1; i<itermax; i++) {
       double li = log ((double)i );
       limits[i] = ((double)i) / (li*li);          // just right !!
@@ -348,6 +344,13 @@ main (int argc, char *argv[])
    im_center = 0.7445;
    rmin = 0.09;
    rmax = 0.1;
+
+   /* do the 4-loop bud */
+   re_center = 0.281000;
+   im_center = 0.531000;
+   rmin = 0.043;
+   rmax = 0.045;
+
    if (argc >= 8) {
       re_center = atof (argv[5]);
       im_center = atof (argv[6]);
@@ -364,10 +367,10 @@ main (int argc, char *argv[])
    printf ("#i	theta		radius		radius outer	outer-inner	loop count\n"); 
    printf ("# \n");
 
-   flow_radius (data, nphi, nr, re_center, im_center,
-            rmin, rmax, epsilon, itermax);
-   // measure_radius (data, nphi, nr, re_center, im_center,
-   //         rmin, rmax, epsilon, itermax);
+   measure_radius (data, nphi, nr, re_center, im_center,
+           rmin, rmax, epsilon, itermax, 4);
+   // flow_radius (data, nphi, nr, re_center, im_center,
+   //          rmin, rmax, epsilon, itermax);
    
 
    free (data);

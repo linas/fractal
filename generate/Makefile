@@ -8,7 +8,7 @@ LIBS =		/usr/lib
 
 XLIB =		$(LIBS)/libX11.a 
 
-CC = cc -Wall -O2 $(INCLUDES)
+CC = cc -Wall -g -O2 $(INCLUDES)
 
 EXES =  stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
