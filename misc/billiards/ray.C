@@ -87,7 +87,7 @@ Ray::Intersect (Ray& plane)
              plane.position, plane.direction,
              position, p2);
 
-   if (FALSE == result) return -1.0/DEGENERATE_TOLERANCE;
+   if (FALSE == valid) return -1.0/DEGENERATE_TOLERANCE;
    
    // The 'direction' should be parallel to the result, and thus,
    // the dot product should be the length.
@@ -113,7 +113,7 @@ Ray::Bounce (Ray& plane)
              plane.position, plane.direction,
              position, p2);
 
-   if (FALSE == result) return;
+   if (FALSE == valid) return;
    VEC_COPY (position, result);
    VEC_REFLECT (direction, direction, plane.direction);  
 }
@@ -132,7 +132,8 @@ Ray::Forward (Ray& plane)
              plane.position, plane.direction,
              position, p2);
 
-   if (FALSE == result) return;
+   if (FALSE == valid) return;
+
    VEC_COPY (position, result);
 }
 
@@ -387,6 +388,17 @@ SinaiView::TraceToroid(void)
          sr[i].position[1] += 2.0 * walls[next_wall].direction[1];
          sr[i].position[2] += 2.0 * walls[next_wall].direction[2];
 
+         // make sure we set the flags correctly
+         switch (sr[i].last_wall) {
+            case 0: sr[i].last_wall = 1; break;
+            case 1: sr[i].last_wall = 0; break;
+            case 2: sr[i].last_wall = 3; break;
+            case 3: sr[i].last_wall = 2; break;
+            case 4: sr[i].last_wall = 5; break;
+            case 5: sr[i].last_wall = 4; break;
+            default: break;
+         }
+            
          if (sr[i].distance > distance) break;
       }
 
@@ -530,7 +542,8 @@ main (int argc, char * argv[])
    v.reflectivity = 1.0 - 0.01 * 320.0 / maxdist;  // ad hoc lighting
    v.nbounces = nbounce;
 
-   v.Trace();
+   // v.Trace();
+   v.TraceToroid();
    // v.ColoredMirrors();
    v.ToPixels ();
    v.WriteMTV ("junk.mtv");
