@@ -2,7 +2,7 @@
 #
 # Linas Vepstas January 1994
 
-TOP = /usr/home/src/tools
+TOP = ../../..
 
 BIN = $(TOP)/bin
 LIB = $(TOP)/lib
