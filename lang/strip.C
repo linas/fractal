@@ -25,6 +25,7 @@ main () {
 
       // reject the mail headers
       if (!strncmp (buff, "From", 4)) continue;
+      if ('M' == buff[0]) continue;
       if (strstr (buff, "From:")) continue;
       if (strstr (buff, "Date:")) continue;
       if (strstr (buff, "Subject:")) continue;
