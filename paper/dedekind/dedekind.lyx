@@ -234,7 +234,7 @@ ly intractable, because of its painfully slow convergence.
  somehwat more complex ones than the plain exponential series.
 \layout Subsection
 
-The Mandelbrot Set
+The Spectral Analysis of the Mandelbrot Set
 \layout Standard
 
 Now consider the standard Mandelbrot set iteration 
@@ -304,7 +304,7 @@ N(t)=\sum_{n=0}^{\infty}e^{-t^{2}n^{2}}\]
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -421,13 +421,13 @@ z''_{n+1}=\frac{d^{2}}{dc^{2}}z_{n+1}=2\left(z''_{n}z_{n}+z'_{n}^{2}\right)\labe
 
 Let us then define the sum 
 \begin_inset Formula \begin{equation}
-P(t)=\sum_{n=0}^{\infty}z''_{n}\exp(-t^{2}n^{2})\label{eq:}\end{equation}
+P_{c}(t)=\sum_{n=0}^{\infty}z''_{n}\exp(-t^{2}n^{2})\label{eq:}\end{equation}
 
 \end_inset 
 
 Note that
 \begin_inset Formula \begin{equation}
-P(t)=\frac{d^{2}}{dc^{2}}S_{c}(t)\label{eq:}\end{equation}
+P_{c}(t)=\frac{d^{2}}{dc^{2}}S_{c}(t)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -437,7 +437,7 @@ P(t)=\frac{d^{2}}{dc^{2}}S_{c}(t)\label{eq:}\end{equation}
 
 .
  
-\begin_inset Formula $P(t)$
+\begin_inset Formula $P_{c}(t)$
 \end_inset 
 
  also diverges as 
@@ -445,7 +445,28 @@ P(t)=\frac{d^{2}}{dc^{2}}S_{c}(t)\label{eq:}\end{equation}
 \end_inset 
 
 .
- The next figure shows the shape of that divergence.
+ The figures 
+\begin_inset LatexCommand \ref{cap:Divergent-Derivative}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{cap:Divergent-Phase}
+
+\end_inset 
+
+ shows the magnitude and phase of that divergence.
+ By comparing the figures, it is relatively straighforward to deetermine
+ that inside of the main cardiod, the divergent term of 
+\begin_inset Formula $P_{c}(t)$
+\end_inset 
+
+ is given by 
+\begin_inset Formula \begin{equation}
+P_{c}(t)=\frac{1}{t}\;\frac{1}{4\,(\frac{1}{4}-c)^{3/2}}+\mathcal{O}(1)\label{eq:}\end{equation}
+
+\end_inset 
+
  
 \layout Standard
 
@@ -456,7 +477,101 @@ collapsed false
 
 \layout Caption
 
+
+\begin_inset LatexCommand \label{cap:Divergent-Derivative}
+
+\end_inset 
+
 Divergent Derivative
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zpp-640-480.png
+
+\end_inset 
+
+
+\layout Standard
+
+This picture shows the divergent term of 
+\begin_inset Formula $P_{c}(t)$
+\end_inset 
+
+, that is, 
+\begin_inset Formula $\lim_{t->0^{+}}|P_{c}(t)|/N(t)$
+\end_inset 
+
+.
+ Red denotes any value equal or greater than 1, black corresponds to a value
+ of zero.
+ The value of this limit in the largest bud to the left is precisely zero
+ over the entire bud.
+ For the next smallest buds (at the top, bottom, and the second to the left),
+ the value seems to be uniformly 1/30 across the whole bud, although there
+ does seem to be a slight gradation which is hard to distinguish from numerical
+ errors.
+ By looking at this image, we can see that this limit seems to take on other,
+ constant, values in the progressively smaller buds.
+ The color scheme here has black <= 0.0, blue ~= 0.2, green ~= 0.5, yellow
+ ~= 0.75, red >= 1.0.
+ If the values were indeed constant over the smaller buds, this would have
+ some interesting implications on the limit-cycles for these buds, as discussed
+ in the text.
+ 
+\end_inset 
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Divergent-Phase}
+
+\end_inset 
+
+Divergent Phase
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zpp-phase.gif
+
+\end_inset 
+
+
+\layout Standard
+
+The phase of 
+\begin_inset Formula $P_{c}(t)$
+\end_inset 
+
+ in the limit of 
+\begin_inset Formula $t\rightarrow0$
+\end_inset 
+
+.
+ That is, it shows 
+\begin_inset Formula $\lim_{t\rightarrow0^{+}}\arctan\left(\Im P_{c}(t)/\Re P_{c}(t)\right)$
+\end_inset 
+
+.
+ The color scheme is such that black=
+\begin_inset Formula $-\pi$
+\end_inset 
+
+, green=0, red=
+\begin_inset Formula $+\pi$
+\end_inset 
+
+.
+ The rays on the outside of the set correspond to Duady-Hubbard rays.
+ Note the first hint of the involvement of the Dedekind eta function if
+ the largest bulb immediately to the left of the main cardiod.
+ 
 \end_inset 
 
 limt->0 |P(t)| / N(t) 
