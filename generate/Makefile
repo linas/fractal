@@ -14,7 +14,7 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert inf decide cutoff
 
-all:    euler-q ray automatic radius brat draw dx image
+all:    cutoff euler-q ray automatic radius brat draw dx image
 
 
 clean:
@@ -37,6 +37,7 @@ util.o:	util.h
 brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
+cutoff.o: cutoff.C
 euler-q.o: euler-q.C
 
 ################## Dependencies and compile/link #########
@@ -49,6 +50,9 @@ brat-gap-hair: brat.o brat-gap-hair.o util.o
 
 brat-gapper: brat.o brat-gapper.o util.o
 	$(CC) -o $@ $^ ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
+
+cutoff: brat.o cutoff.o util.o
+	$(CC) -o $@ $^ -lm -lstdc++
 
 euler-q: brat.o euler-q.o util.o
 	$(CC) -o $@ $^ -lm -lstdc++
@@ -74,7 +78,6 @@ inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age
 	ln -f brat circmov
 	ln -f brat stalkmov
 	ln -f brat inf
-	ln -f brat cutoff
 	ln -f brat wind
 	ln -f brat winds
 	ln -f brat morph

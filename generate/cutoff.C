@@ -1,8 +1,8 @@
 /*
- * interior.C
+ * cutoff.C
  *
  * FUNCTION:
- * Explore interior of the Mandelbrot set
+ * Explore spectral analysis of the interior of the Mandelbrot set
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989
@@ -11,30 +11,29 @@
  * more stuff -- October 2004
  */
 
-#include <malloc.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <time.h>
 
 #include "brat.h"
-#include "Farey.h"
-#include "FareyTree.h"
 
 /*-------------------------------------------------------------------*/
 /* This routine does a spectral analysis for the Mandelbrot set iterator.
  * That is, it computes a reimann-zeta-like sum of things like the modulus
+ * (dirichlet series, to be precise)
  */
 
-void mandelbrot_cutoff (
+void 
+MakeHisto (
    float  	*glob,
    int 		sizex,
    int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
-   int		itermax)
+   double	height,
+   int		itermax,
+   double 	renorm)
 {
    int		i,j, globlen;
    double	re_start, im_start, delta;
