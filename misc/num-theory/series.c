@@ -12,6 +12,7 @@
 
 #include "divisor.h"
 #include "gcf.h"
+#include "moebius.h"
 #include "totient.h"
 
 long double totient_series (long double x)
@@ -111,15 +112,30 @@ long double z_erdos_series (long double x)
 	return acc;
 }
 
+long double moebius_series (long double x)
+{
+	long double acc = 0.0;
+
+	long double xp = 1.0;
+	int n=1;
+	while (1)
+	{
+		long double term = xp * moebius_mu (n);
+		acc += term;
+
+		if (xp < 1.0e-18) break;
+		xp *= x;
+		n++;
+	}
+
+	return acc;
+}
+
 int main ()
 {
 	int i;
 
 	int nmax = 641;
-
-long double d= erdos_series (2.0L);
-printf ("its %26.18Lg\n", d);
-exit(1);
 
 	long double tp = 0.5;
 	for (i=1; i<nmax; i++)
@@ -147,13 +163,22 @@ exit(1);
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 #endif
 
-#define ERDOS_SERIES
+// #define ERDOS_SERIES
 #ifdef ERDOS_SERIES
 		long double y = z_erdos_series (x);
 		y *= (1.0L-x);
 
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 #endif
+
+#define MOEBIUS_SERIES
+#ifdef MOEBIUS_SERIES
+		long double y = moebius_series (x);
+
+		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
+		fflush (stdout);
+#endif
+
 
 		tp *= 0.5L;
 	}

@@ -29,7 +29,7 @@ dist:
 
 
 ndist:	ndist.o $(LIB)/gcf.o $(LIB)/totient.o
-series:	series.o divisor.o $(LIB)/gcf.o $(LIB)/totient.o
+series:	series.o divisor.o $(LIB)/gcf.o $(LIB)/moebius.o $(LIB)/totient.o
 
 ndist.o:	ndist.c $(INC)/gcf.h $(INC)/totient.h 
 
