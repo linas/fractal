@@ -1,0 +1,269 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Yet Another Riemann Hypothesis
+\layout Author
+
+Linas Vepstas <linas@linas.org>
+\layout Date
+
+12 October 2004
+\layout Abstract
+
+This paper presents a certain peculiar generalization of the Riemann hypothesis,
+ as the action of the permutation group on the elements of continued fractions.
+ The problem is difficult to attack through traditional analytic techniques,
+ and thus this paper focuses on providing a numerical survey.
+ 
+\layout Abstract
+
+This paper is part of a set of chapters that explore the relationship between
+ the real numbers, the modular group, and fractals.
+\layout Section
+
+Intro
+\layout Standard
+
+THIS IS A DRAFT WORK IN PROGRESS.
+ The intro hasn't been written yet, but if it was, it might say this:
+\layout Standard
+
+The Riemann zeta can be expressed as an integral in the following form:
+\layout Standard
+
+\layout Standard
+
+\layout Standard
+
+.
+\layout Subsection
+
+Hilbert Lattice and Permuation Groups
+\layout Standard
+
+Note that continued fractions have a representation as a lattice in the
+ infinitie-dimensional Hilbert space 
+\begin_inset Formula $\mathbb{N}^{\infty}=\mathbb{N\times N\times}...$
+\end_inset 
+
+ where 
+\begin_inset Formula $\mathbb{N}=\mathbb{Z}^{+}$
+\end_inset 
+
+ the set of positive integers.
+ Note that this implies that each point on this lattice can be given a unique
+ value using the continued fraction mapping, and that each value appears
+ only once on the lattice.
+ In other words, the continued fraction brackets are an operator that maps
+ this Hilbert space to the real numbers, i.e.
+ 
+\begin_inset Formula $[]:\mathbb{N}^{\infty}\mathbb{\rightarrow R}$
+\end_inset 
+
+.
+ What makes the 
+\begin_inset Formula $[]$
+\end_inset 
+
+ operator so interesting is that it is 1-1 and onto, and is thus invertible,
+ at least on the irrationals, if we brush aside a little problem with the
+ rationals.
+ Note that in this mapping, the number 0 is a kind-of 
+\begin_inset Quotes eld
+\end_inset 
+
+essential singularity
+\begin_inset Quotes erd
+\end_inset 
+
+ at 
+\begin_inset Formula $\infty$
+\end_inset 
+
+, since the continued fraction expansion for 0 is 
+\begin_inset Formula $0=[\infty,a_{2},a_{3},...]$
+\end_inset 
+
+ for arbitrary integers 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+.
+ Indeed, all rationals suffer in this way: a finite contined fraction is
+ just one where 
+\begin_inset Formula $\infty$
+\end_inset 
+
+ appears somewhere in the expansion, i.e.
+ 
+\begin_inset Formula $[a_{1},a_{2},...,a_{N}]=[a_{1},a_{2},...,a_{N},\infty,a_{N+2},...]$
+\end_inset 
+
+.
+ We can work around this difficulty by taking the kernel of [] and defining
+ a quotient space 
+\begin_inset Formula $\mathbb{N}^{\infty}/\ker[]$
+\end_inset 
+
+, and insisting that the operator 
+\begin_inset Formula $[]$
+\end_inset 
+
+ is 1-1 and onto in this quotient space.
+ Homework: prove that this quotient space is validly defined and has the
+ needed vector-space properties.
+ In the subsequent discussion, we'll intentionally confuse 
+\begin_inset Formula $\mathbb{N}^{\infty}$
+\end_inset 
+
+ with this quotient space, wherever its convenient.
+ In the following, we also make a convenient little confusion between the
+ continued fraction map defined on the unit interval, and the map defined
+ for non-negative reals: viz.
+ 
+\begin_inset Formula $[a_{0};a_{1},a_{2},...]\equiv a_{0}+[a_{1},a_{2},...]$
+\end_inset 
+
+ where we use the semicolon to distinguish this zero'th element.
+\layout Standard
+
+Note that this lattice is a subspace of the Hilbert space of 
+\begin_inset Quotes eld
+\end_inset 
+
+generalized functions
+\begin_inset Quotes erd
+\end_inset 
+
+, in that any map 
+\begin_inset Formula $\mu:\mathbb{N}^{\infty}\rightarrow\mathbb{R}$
+\end_inset 
+
+ induces a map 
+\begin_inset Formula $\tilde{\mu}:\mathbb{R}\rightarrow\mathbb{R}$
+\end_inset 
+
+, through the isomorphic operator 
+\begin_inset Formula $[]$
+\end_inset 
+
+.
+ The normal definition of a generalized function is that its a map 
+\begin_inset Formula $\tilde{f}:\mathcal{F}\mathbb{\rightarrow R}$
+\end_inset 
+
+ where 
+\begin_inset Formula $\mathcal{F}$
+\end_inset 
+
+ is the space of ordinary functions 
+\begin_inset Formula $\left\{ f\,|\, f:\mathbb{\mathbb{R}\rightarrow R}\right\} $
+\end_inset 
+
+.
+ The canonical example is  the Dirac delta oprator 
+\begin_inset Formula $\delta(x)$
+\end_inset 
+
+ which is zero everywhere, except at 
+\begin_inset Formula $x=0$
+\end_inset 
+
+ where it is infinite.
+ 
+\layout Standard
+
+It seems intuitive that all other mappings from 
+\begin_inset Formula $\mathbb{N}$
+\end_inset 
+
+ to 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset 
+
+ that satisfy this invertability property are obtainable through the action
+ of the permutation group, although one should always be careful with such
+ statements..
+ The permutation group elements are the shift operator 
+\begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
+\end_inset 
+
+ which acts as 
+\begin_inset Formula $h:[a_{1},a_{2},a_{3},...]\mapsto[a_{2},a_{3},...]$
+\end_inset 
+
+ and the permuation operator 
+\begin_inset Formula $S_{p,q}:[a_{1},...,a_{p},...,a_{q},...]\mapsto[a_{1},...,a_{q},...a_{p},...]$
+\end_inset 
+
+.
+ Homework: give the analytic form for 
+\begin_inset Formula $S$
+\end_inset 
+
+.
+ Note that 
+\begin_inset Formula $S_{p,q}(x)$
+\end_inset 
+
+ is discontinuous, but I think only on a countable set of points, and thus
+ can be used to form well-defined integrals using classic techniques.
+ 
+\layout Standard
+
+Note that more generally, we can now define 
+\begin_inset Formula $h:SL\left(2,\mathbb{Z}\right)\rightarrow SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ as the operator that lops off the first term of the expansion.
+ This has a kernel that contains the group element 
+\begin_inset Formula $g^{n}rg$
+\end_inset 
+
+ and so we ask about the group structure that results from this.
+ 
+\layout Standard
+
+In particular, let us look at the family of analytic functions blah blah
+ blah that is produced by invoking the permutation group on blah blah.
+ What are the symmetries.
+\layout Section
+
+Conclusions
+\layout Standard
+
+Apologies for the format of this paper; 
+\layout Bibliography
+\bibitem [deR57]{key-4}
+
+Georges de Rham, On Some Curves Defined by Functional Equations (1957),
+ reprinted in Classics on Fractals, ed.
+ Gerald A.
+ Edgar, (Addison-Wesley, 1993) pp.
+ 285-298
+\the_end
