@@ -13,10 +13,10 @@ realclean:	clean
 	rm -f $(EXES) 
 
 .c.o:
-	$(CC) -c -O2 $<
+	$(CC) -c -O2 $<  `pkg-config --cflags glib`
 
 .o:
-	$(CC) -o $* $^ -lm
+	$(CC) -o $* $^ -lm `pkg-config --libs glib`
 
 
 tensor:	tensor.o
