@@ -2,7 +2,9 @@
  * erdos.C
  *
  * FUNCTION:
- * display lambert series involviing divisors
+ * Display lambert series involving divisors
+ * More generally, 
+ * show Weierstrass elliptic function g_2 and g_3 invariants
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989
@@ -39,8 +41,9 @@ int divisor (int n)
 	return acc;
 }
 
-/* and erdos-borwein-like series sum_n x^n/(1-x^n) */
-static void erdos_series_c (double re_q, double im_q, double *prep, double *pimp)
+/* An erdos-borwein-like series sum_n x^n/(1-x^n) 
+ */
+static void erdos_series_c (double re_q, double im_q, int sigma, double *prep, double *pimp)
 {
 	double tmp;
 	int i;
@@ -77,18 +80,14 @@ static void erdos_series_c (double re_q, double im_q, double *prep, double *pimp
 		di = dr*qpi + di*qpr;
 		dr = tmp;
 
-#if 0
-		dr *= i+1;
-		dr *= i+1;
-		dr *= i+1;
+		/* Multiply by power representing sigma_k 
+		 * sigma = 3 for g_2 and 5 for g_3 
+		 */
+		int j;
+		for (j=0; j<sigma; j++) {
+			dr *= i+1;
+		}
 
-		dr *= i+1;
-		dr *= i+1;
-		dr *= i+1;
-#endif
-
-		// dr *= (i+1)*(i+1)*(i+1);
-		// dr *= (i+1)*(i+1)*(i+1);
 #endif
 
 #ifdef DIVISOR_SUM
@@ -129,7 +128,54 @@ static void erdos_series_c (double re_q, double im_q, double *prep, double *pimp
 static double erdos_series (double re_q, double im_q)
 {
 	double rep, imp;
-	erdos_series_c (re_q, im_q, &rep, &imp);
+	erdos_series_c (re_q, im_q, 0, &rep, &imp);
+	// return sqrt (rep*rep+imp*imp);
+	// return imp;
+	double phase = atan2 (imp, rep);
+	phase += M_PI;
+	phase /= 2.0*M_PI;
+	return phase;
+}
+
+/* Weierstrass elliptic invarient g_2, where q is the nome */
+static double gee_2 (double re_q, double im_q)
+{
+	double rep, imp;
+	double sqre, sqim;
+
+	sqre = re_q*re_q - im_q *im_q;
+	sqim = 2.0*re_q * im_q;
+	
+	erdos_series_c (sqre, sqim, 3, &rep, &imp);
+	rep *= 240.0;
+	imp *= 240.0;
+	rep +=1.0;
+	rep *= 4.0 *M_PI*M_PI*M_PI*M_PI / 3.0;
+	imp *= 4.0 *M_PI*M_PI*M_PI*M_PI / 3.0;
+
+	return sqrt (rep*rep+imp*imp);
+	// return imp;
+	// double phase = atan2 (imp, rep);
+	// phase += M_PI;
+	// phase /= 2.0*M_PI;
+	// return phase;
+}
+
+static double gee_3 (double re_q, double im_q)
+{
+	double rep, imp;
+	double sqre, sqim;
+
+	sqre = re_q*re_q - im_q *im_q;
+	sqim = 2.0*re_q * im_q;
+	
+	erdos_series_c (sqre, sqim, 5, &rep, &imp);
+	rep *= -504.0;
+	imp *= -504.0;
+	rep +=1.0;
+	rep *= 8.0 *M_PI*M_PI*M_PI*M_PI *M_PI*M_PI/ 27.0;
+	imp *= 8.0 *M_PI*M_PI*M_PI*M_PI *M_PI*M_PI/ 27.0;
+
 	// return sqrt (rep*rep+imp*imp);
 	// return imp;
 	double phase = atan2 (imp, rep);
@@ -177,7 +223,8 @@ MakeHisto (
       for (j=0; j<sizex; j++) 
 		{
 
-			double phi = erdos_series (re_position, im_position);
+			// double phi = erdos_series (re_position, im_position);
+			double phi = gee_2 (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;

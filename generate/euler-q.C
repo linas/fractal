@@ -2,7 +2,7 @@
  * euler-q.C
  *
  * FUNCTION:
- * display euler q-series
+ * Display euler q-series aka dedekind eta, 
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989

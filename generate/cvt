@@ -188,5 +188,11 @@ PATH=$PATH:.
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
 # renorm for the gap distributions
-renorm jj j2 164.0 0
+# renorm jj j2 164.0 0
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
+# renorm for the weierstrass g_2 modulus
+takelog j g
+renorm g j2 0.040 3
 cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
