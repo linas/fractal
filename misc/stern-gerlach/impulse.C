@@ -27,7 +27,7 @@ main ()
    long long imax = 48023;  // max iterations
    imax *= 1024*1024;
 
-   int nprec_max = 100;
+   int nprec_max = 10000;
 
    printf ("# \n");
    printf ("# nprec	i	delta_i	initial_theta	theta\n");
@@ -113,7 +113,7 @@ main ()
            sin_phi = sin(phi);
            cos_phi = cos(phi);
            nprec ++;
-           if (0 == nprec%10) 
+           if (0 == nprec%1000) 
            {
               long long di = i - last_i;
               int idi = di;
@@ -132,7 +132,7 @@ main ()
            sin_phi = sin(phi);
            cos_phi = cos(phi);
            nprec --;
-           if (0 == nprec%10) 
+           if (0 == nprec%1000) 
            {
               long long di = i - last_i;
               int idi = di;
