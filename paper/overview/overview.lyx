@@ -48,7 +48,16 @@ Intro
 \layout Standard
 
 THIS IS A DRAFT WORK IN PROGRESS The intro hasn't been written yet, but
- if it was, it would drop topics like this:
+ if it was, it would work like this: 
+\begin_inset Quotes eld
+\end_inset 
+
+I've been running a math-art website for over a decade and it's time some
+ of teh math behind it got an explanation.
+\begin_inset Quotes erd
+\end_inset 
+
+ So here it is.
 \layout Standard
 
 Farey Numbers show up naturally in the analysis of the Mandelbrot set.
@@ -171,15 +180,20 @@ x_{-}(w)=[a_{1},a_{2},...,a_{N}-1,1,1/w]\]
 
 \end_inset 
 
-These two functions are analytic in
+These two functions are analytic in 
 \begin_inset Formula $w$
 \end_inset 
 
-, and can be expressed as the ratio of two polynomials in 
-\begin_inset Formula $w$
+, almost trivally so, and in fact can be written as 
+\begin_inset Formula $(a+bw)/(c+dw)$
 \end_inset 
 
-.
+ for some integers 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+ (we will present a construction for obtaining these integers in a later
+ section xxx todo).
  Thus, general analytic manipulations are perfectly well-defined on these
  functions.
  Clearly, 
@@ -366,7 +380,7 @@ This gap function is, of course, highly discontinuous in
 \begin_inset Formula $q$
 \end_inset 
 
- have no common factors, and 
+ are coprime (have no common factors), and 
 \begin_inset Formula $w\leq1$
 \end_inset 
 
@@ -1061,7 +1075,8 @@ small
  denominators, then the distribution is far from uniform and full of counter-int
 uitive surprises, some of which we explore below.
  These surprises imply that extrapolating from finite results to the set
- of all rationals is a dangerous process.
+ of all rationals is a dangerous process (and here you thought the Axiom
+ of Choice was Scary).
  
 \layout Subsection
 
@@ -1073,7 +1088,11 @@ Lets begin by listing all of the fractions with denomintors from 1 to N,
  Clearly, there many of these fractions will be reducible, i.e.
  the numerator and denominator have common factors, and thus, in this simple-min
 ded enumeration, some rationals are counted multiple times.
- Lets take a look at what this means.
+ In particular, we'll count 0 over and over again: it will be in the list
+ as 0/1, 0/2, 0/3 and so on.
+ Likewise, 1 will appear in this list over and over: as 1/1, 2/2, 3/3, etc.
+ We'll have 1/2 also appearing as 2/4, 3/6 and so on.
+ So lets take a look at this in detail.
  The graph below shows this enumeration, up to a denominator of N=4000,
  carved up into 720 bins, and normalized to unit density.
  That is, if 
@@ -1173,8 +1192,10 @@ should have been using all along
 \layout Standard
 
 Wow! We no longer have a peak at 1/2.
- In fact, it looks like we are undercounting at 1/2.
- In fact, the graph is considerably noiser.
+ In fact, it sure gives the impression that we are undercounting at 1/2!
+ Holy Banach-Tarski, Batman! What does it mean? Note also the graph is considera
+bly noiser.
+ Compare the scales on the left for a relative measure of the noise.
  Part, but not all, of the noise is due to the smaller sample size: we are
  counting fewer fractions: 4863602 are irreducible out of the simple list
  of 8002000.
@@ -1217,6 +1238,16 @@ ors less than 16000.
 \end_inset 
 
 
+\layout Standard
+
+It sure would be nice to develop a generalized theory that can work with
+ these peculiar results, and in particular, giving insight into what's happening
+ near 1/2 and giving a quantitative description of the spectra near 1/3
+ and 2/3, etc.
+ In particular, the very first graph of this section has very clear self-similar
+ity properties; its very much a fractal, more obviously so than the later
+ graphs.
+ What is the symmetry group involved? What is the fractal dimension? 
 \layout Section
 
 The Minkowski Question Mark Function
@@ -1545,6 +1576,10 @@ We start by noticing that for any real number
 \end_inset 
 
  one sees immediately that 
+\begin_inset Formula $g$
+\end_inset 
+
+ is a homomorphism of the Question Mark: 
 \begin_inset Formula $(?\circ g)(x)=?(g(x))=?(x)/2$
 \end_inset 
 
@@ -1596,8 +1631,12 @@ We start by noticing that for any real number
  
 \layout Standard
 
-One gets the general symmetry group by combining with the reflection operator
- embodied in the left-right symmetry: 
+One gets the general symmetry group 
+\begin_inset Formula $\mathcal{G}$
+\end_inset 
+
+ by combining with the reflection operator embodied in the left-right symmetry:
+ 
 \begin_inset Formula $?(1-x)=1-?(x)$
 \end_inset 
 
@@ -1639,17 +1678,102 @@ One gets the general symmetry group by combining with the reflection operator
 
 .
  We can now write a general group element as 
-\begin_inset Formula $g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\begin_inset Formula $\gamma\equiv g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
 \end_inset 
 
 .
+ Applying the above process, it is relatively straightforward to see that
+ 
+\begin_inset Formula \[
+(?\gamma)(x)=(?g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+
+\end_inset 
+
+ To see the other leg of the homomorphism commuative diagram, we start by
+ observing that we can write 
+\begin_inset Formula $g^{n}(x)$
+\end_inset 
+
+ itself as a continued fraction: 
+\begin_inset Formula \[
+g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]\]
+
+\end_inset 
+
+ In the same vein, we have 
+\begin_inset Formula $(rg^{n})(x)=[1,n-1,x]$
+\end_inset 
+
+ and, with a slight abuse:
+\begin_inset Formula \[
+r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\]
+
+\end_inset 
+
+ Continuing this excercise, one finds that
+\begin_inset Formula \[
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+
+\end_inset 
+
+ Note that 
+\begin_inset Formula $\gamma(x)$
+\end_inset 
+
+ is always of the form 
+\begin_inset Formula $(a+bx)/(c+dx)$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+, which can be computed using the 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ representation.
+ Thus we see that 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ is a homomorphism of 
+\begin_inset Formula $?$
+\end_inset 
+
+, mapping the unit interval into a subinterval, completeing the proof.
+\layout Standard
+
+Blah Blah Blah.
+ Theres some additional stuff here about the partial-symmetries, which are
+ quite curious, and also about enumerating the group elements as 
+\begin_inset Formula $\mathbb{Q\times Z}$
+\end_inset 
+
+ rather than as 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ alone, as the former is more intuitive for the M-set.
+ This part to be written.
+\layout Subsection
+
+The 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ Representation
+\layout Standard
+
+Elaborate this, as its the handy-man toolkit.
+ It gives us the explicit values we need.
 \layout Subsection
 
 Distribution of Rationals in the Farey Tree
 \layout Standard
 
 One way to enumerate all of the rationals is by placing them on the Farey
- Tree (or the Stern-Broct Tree).
+ Tree (or the Stern-Brocot Tree).
  One can prove that the Farey Tree enumerates all of the rationals in the
  unit interval exactly once (Proof at 
 \begin_inset LatexCommand \htmlurl[Cut-the-Knot]{http://www.cut-the-knot.org/blue/Stern.shtml}
@@ -1718,6 +1842,9 @@ somewhere
  Numbers, it seems that the distribution of Farey's might be a good estimate
  of that first derivative.
  
+\layout Standard
+
+Lets try to undertand why blah blah blah.
 \layout Section
 
 Islands, Sinai's Tongues
@@ -1743,8 +1870,9 @@ Conclusions
 \layout Standard
 
 Make sure to include some tantalizing closing remarks between all this and
- the Riemann Hypothesis, which seems to be just, well, we're working on
- it ...
+ the Riemann Hypothesis, which seems to be just, well, ever-so-slightly
+ just below the surface of what we've presented.
+ We're working on it ...
  
 \layout Section
 
