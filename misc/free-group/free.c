@@ -20,10 +20,13 @@ main (int argc, char * argv[])
 
 	long double r = 0.9L;
 
-	if (1 >argc)  {
+	if (2 > argc)  {
 		fprintf (stderr, "Usage: %s <r>\n", argv[0]);
 		exit (1);
 	} 
+
+	r = atof (argv[1]);
+	printf ("#\n#  r = %Lg\n", r);
 
 	long double theta = acosl (1.0L/3.0L);
 
