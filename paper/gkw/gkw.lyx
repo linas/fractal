@@ -942,6 +942,59 @@ ion.
 
  and the representations on which it works.
  
+\layout Subsection
+
+Conjugate Maps
+\layout Standard
+
+Conjugation of the function that generates the map will provide, in general,
+ another map that behaves exactly the same as the first, as long as the
+ conjugating function is a diffeomorphism.
+ That is, if 
+\begin_inset Formula $\phi$
+\end_inset 
+
+is out conjugating function, then 
+\begin_inset Formula \[
+\gamma=\phi\circ g\circ\phi^{-1}\]
+
+\end_inset 
+
+ will iterate the same way that 
+\begin_inset Formula $g$
+\end_inset 
+
+ does: 
+\begin_inset Formula $\gamma^{n}=\phi\circ g^{n}\circ\phi^{-1}$
+\end_inset 
+
+, and we thus would expect that the Koopman and Frobenius-Perron operators
+ for 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ are conjugate to those for 
+\begin_inset Formula $g$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+U_{\gamma}=U_{\phi}^{-1}U_{g}U_{\phi}\]
+
+\end_inset 
+
+
+\layout Standard
+
+XXX derive the above.
+ Show that eigenvalues are preserved.
+ 
+\layout Standard
+
+In order to preserve the polynomial-rep eigenvalues, a diffeomorphism is
+ required.
+ Will show an example below of a homeomorphic but not diffeomorphic map
+ that alters the polynomial-representation eigenvalues.
 \layout Section
 
 The Frobenius-Perron Operator of the Bernoulli Map
@@ -2146,10 +2199,11 @@ What is the kernel of
 \begin_inset Formula $U_{B}$
 \end_inset 
 
-? It is the set of functions that have odd symmetry.
- blahh xxxx wrongo-boyo ...
- This implies that 'half' of all square-integrable functions are in the
- kernel.
+? It is the set of functions that have only odd Fourier terms.
+ 
+\layout Standard
+
+This implies that 'half' of all square-integrable functions are in the kernel.
  This is a huge space.
  The quotient space of the implied isomorphism thus has the Bernoulli polynomial
 s as the representative elements.
@@ -2543,8 +2597,6 @@ The Frobenius-Perron operator for this map is known as the Gauss-Kuzmin-Wirsing
 \layout Standard
 
 Todo:Blah Blah.
- Give the usual expression of matrix elements.
- Give the connection to Riemann Zeta.
  Give the collection of interesting summations.
  Give the Riemann Hypothesis as a vector equation.
  
@@ -2654,6 +2706,16 @@ For
 \end_inset 
 
 
+\layout Standard
+
+Acting on a general power, the map gives the Hurwitz Zeta: 
+\begin_inset Formula \[
+\left[U_{h}x^{s}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{s+2}}=\zeta(s+2,x+1)\]
+
+\end_inset 
+
+ and this transformation gives us another hint of a deep relationship to
+ the Bernoulli Map.
 \layout Standard
 
 We have some conditionally convergent series: 
@@ -2831,6 +2893,12 @@ m\end{array}\right)\,\left[\zeta(k+m+2)-1\right]\]
 
 \end_inset 
 
+ Other authors have choosen to expand about 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+ [need ref here] but as can be seen the above is a more tractable expression.
+ (copy the x=1/2 expansion here).
  Inserting this into the integral expression for the Riemann Zeta gives
  
 \begin_inset Formula \[
@@ -2891,7 +2959,7 @@ n\end{array}\right)a_{n}\]
 \begin_inset Formula $a_{n}$
 \end_inset 
 
- are small and seem to be bounded and osicillatory.
+ are small and seem to be bounded and oscillatory.
  The first few are approximately equal to 
 \layout Standard
 
@@ -2941,7 +3009,7 @@ n\end{array}\right)a_{n}\]
 
 \layout Standard
 
--0.07722...
+-0.0772156...
 \end_inset 
 </cell>
 </row>
@@ -2959,7 +3027,7 @@ n\end{array}\right)a_{n}\]
 
 \layout Standard
 
--0.004749...
+-0.00474863...
 \end_inset 
 </cell>
 </row>
@@ -2977,7 +3045,7 @@ n\end{array}\right)a_{n}\]
 
 \layout Standard
 
-0.0003661...
+0.00036610...
 \end_inset 
 </cell>
 </row>
@@ -2995,7 +3063,7 @@ n\end{array}\right)a_{n}\]
 
 \layout Standard
 
-0.0003760...
+0.00037601...
 \end_inset 
 </cell>
 </row>
@@ -3013,7 +3081,7 @@ n\end{array}\right)a_{n}\]
 
 \layout Standard
 
-0.0001430...
+0.00014301...
 \end_inset 
 </cell>
 </row>
@@ -3031,7 +3099,7 @@ n\end{array}\right)a_{n}\]
 
 \layout Standard
 
-3.394...e-5
+3.399...e-5
 \end_inset 
 </cell>
 </row>
@@ -3049,7 +3117,7 @@ n\end{array}\right)a_{n}\]
 
 \layout Standard
 
--4.8...e-7
+-4.832...e-7
 \end_inset 
 </cell>
 </row>
@@ -3067,7 +3135,7 @@ n\end{array}\right)a_{n}\]
 
 \layout Standard
 
--6.77..e-6
+-6.778..e-6
 \end_inset 
 </cell>
 </row>
@@ -3079,7 +3147,7 @@ n\end{array}\right)a_{n}\]
 \layout Standard
 
 Numerically, it appears that 
-\begin_inset Formula $\left|a_{n}\right|\sim<\exp\left(-4\sqrt{n+1}\right)$
+\begin_inset Formula $\left|a_{n}\right|\lesssim\exp\left(-4\sqrt{n+1}\right)$
 \end_inset 
 
  at least for 
