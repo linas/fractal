@@ -39,7 +39,7 @@ int main (int argc, char * argv[])
 	theta = atof (argv[1]);
 
 	theo = (theta - sin(theta)*cos(theta)) / M_PI;
-	printf ("theta=%g k0b=%g theo=%g\n", theta, theta/M_PI, theo);
+	printf ("theta=%g k0b=%g kn=%g theo=%g\n", theta, theta/M_PI, theo-theta/M_PI, theo);
 
 	for (t=0.5; t; t *= sqrt(0.5))
 	{
@@ -50,6 +50,7 @@ int main (int argc, char * argv[])
 		k0_barn = 0.0;
 		for (k=0; k<emax; k++)
 		{
+			double tk; 
 			int nfoundp, nfoundn, np, nn;
 	
 			np = quark_energy (pos_even_levels, theta, 1, k, emax, 1);
@@ -60,19 +61,21 @@ int main (int argc, char * argv[])
 			nfoundn = fmin (np, nn);
 			nfound = fmin (nfoundp, nfoundn);
 	
+
+			tk = (double) (2*k+1);
 			for (i=0; i<nfound; i++)
 			{
 				double en;
 
 				en = pos_even_levels[i];
-				barn += exp (- t*t*en*en);
+				barn += tk*exp (- t*t*en*en);
 				en = pos_odd_levels[i];
-				barn += exp (- t*t*en*en);
+				barn += tk*exp (- t*t*en*en);
 
 				en = neg_even_levels[i];
-				barn -= exp (- t*t*en*en);
+				barn -= tk*exp (- t*t*en*en);
 				en = neg_odd_levels[i];
-				barn -= exp (- t*t*en*en);
+				barn -= tk*exp (- t*t*en*en);
 
 /*
 				if (1 == k) printf ("i=%d b=%g sp=%f %f %f %f\n", i, barn, pos_even_levels[i],
