@@ -7,7 +7,12 @@ LIBSRCS=			\
 	pairhash.C		\
 	wordhash.C
 
+EXESRCS=			\
+	analyze.C
+
 LIBOBJS=$(LIBSRCS:.C=.o)
+EXEOBJS=$(EXESRCS:.C=.o)
+EXES=$(EXESRCS:.C=)
 
 .C.o:
 	cc -c -g -O2 $< 
@@ -19,7 +24,7 @@ clean:
 	rm -f junk glop tmp a.out core
 	
 realclean: clean
-	rm -f $(LIBOBJS)
+	rm -f $(LIBOBJS) $(EXEOBJS) $(EXES)
 	makedepend
 	rm -f Makefile.bak
 
