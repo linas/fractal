@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <math.h>
 
-
 #define REAL (self->real)
 #define INTPART (self->intpart)
 #define FRACPART (self->fracpart)
@@ -25,6 +24,9 @@
 #define TINUED_FRAC (self->tinued_frac)
 #define NTERMS (self->nterms)
 #define CUTOFF (self->cutoff)
+
+#define MAX(a,b) ((a)>(b)?(a):(b))
+#define MIN(a,b) ((a)<(b)?(a):(b))
 
 /* ------------------------------------------------------------ */
 struct Farey * CreateFarey ()
@@ -92,6 +94,7 @@ int numer, deno;
    int i;
    unsigned int n, d, m;
 
+   REAL = ((double) numer) / ((double) deno);
    INTPART = numer / deno;
    numer -= deno * INTPART;
    NUM = numer;
@@ -183,12 +186,10 @@ struct Farey *self;
 #endif
 {
    int i;
-   printf ("\n\n"); 
-   printf (" continued fraction has n = %d terms \n", NTERMS);
+   printf (" ratio %d over %d is continued fraction of %d terms\n", NUM, DENOM, NTERMS);
    for (i=0; i<NTERMS; i++) { 
       printf (" term %d is %d \n", i, TINUED_FRAC[i]);
    }
-   printf ("\n\n");
 }
 
 /* ------------------------------------------------------------ */
@@ -320,7 +321,8 @@ double z;
    tmp = z / ((double) TINUED_FRAC[NTERMS-1]);
    for (i=NTERMS-2; i>=0; i--) {
       tmp += (double) TINUED_FRAC[i];
-      tmp = z / tmp;
+      /* not normally needed, will this help mystery crash? */
+      if (tmp == 0.0) { tmp = 1.0e30; } else { tmp = z / tmp; }
    }
 
    /* get rid of last z, to normalize */
@@ -545,6 +547,232 @@ double t;
    tmp *= 1.0 - 2.0 * exp (-t);
    retval += tmp;
    return (retval);
+}
+
+
+/* ------------------------------------------------------------ */
+/* I've defined an cos-real to be the result of the continued fraction
+ * where each term is damped by a cosine. Read the code. */
+
+#ifdef ANSI_C
+double ContinuedFractionToCosReal (struct Farey *self, double omega)
+#else
+double ContinuedFractionToCosReal (self, omega)
+struct Farey *self;
+double omega;
+#endif
+{
+   int i, n;
+   double tmp;
+   double retval;
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   /* now, work backwards and reconstruct the fraction. */
+   n = NTERMS;
+   tmp = 0.0;
+   for (i=n-1; i>=0; i--) {
+      tmp += (double) TINUED_FRAC[i];
+      tmp = cos (((double) i) * omega) / tmp;
+   }
+
+   retval += tmp;
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
+/* I've defined an bessel-real to be the result of the continued fraction
+ * where each term is damped by a cosine. Read the code. */
+
+#ifdef ANSI_C
+double ContinuedFractionToSincReal (struct Farey *self, double omega)
+#else
+double ContinuedFractionToSincReal (self, omega)
+struct Farey *self;
+double omega;
+#endif
+{
+   int i, n;
+   double tmp;
+   double retval;
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   /* now, work backwards and reconstruct the fraction. */
+   n = NTERMS;
+   tmp = 0.0;
+   for (i=n-1; i>=0; i--) {
+      tmp += (double) TINUED_FRAC[i];
+      tmp = j0 (((double) i) * omega) / tmp;
+   }
+
+   retval += tmp;
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
+/* I've defined an x-fraction to be the result of the continued fraction
+ * where each term is whaever. Read the code. */
+
+#ifdef ANSI_C
+double ContinuedFractionToXFarey (struct Farey *self, double t)
+#else
+double ContinuedFractionToXFarey (self, t)
+struct Farey *self;
+double t;
+#endif
+{
+   int i, n;
+   double tmp;
+   double retval;
+   double logotoo;
+   double cygnus;
+   double sum;
+/*
+printf ("\n\n yooo \n");
+*/
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   logotoo = - log (2.0);
+   sum = -1.0;
+   cygnus = 1.0;
+
+   /* now, work forwards */
+   n = NTERMS;
+   for (i=0; i< n; i++) {
+      sum += ((double) TINUED_FRAC[i]);
+#ifdef BAD_STRAT
+      if (i+1<n) {
+         tmp = ((double) TINUED_FRAC[i+1]);
+         if (tmp > 1.1) {
+            tmp *= t * exp (tmp * logotoo);
+            tmp = 1.0 - tmp;
+         } else{
+            tmp = 1.0;
+         }
+      } else { tmp = 1.0;}
+#endif BAD_STRAT
+      if (0 < i) {
+         tmp = ((double) TINUED_FRAC[i-1]);
+         if (tmp < 1.1) {
+            tmp *= t * exp (((double) TINUED_FRAC[i]) * logotoo);
+            tmp = 1.0 - tmp;
+         } else{
+            tmp = 1.0;
+         }
+      } else { tmp = 1.0;}
+      retval += cygnus * tmp * exp (sum * logotoo);
+      cygnus *= -1.0;
+/*
+printf (" its %i %i %f  %f %f \n", i, TINUED_FRAC[i], sum, tmp, retval);
+*/
+   }
+
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
+/* computes crazy sum of continued fractions
+ */
+
+
+#ifdef ANSI_C
+double CFSum (struct Farey *self, struct Farey *other,
+              double alpha, double beta, double gamma)
+#else
+double CFSum (self, other, alpha, beta, gamma)
+struct Farey *self, *other;
+double alpha, beta, gamma;
+#endif
+{
+   int i;
+   double eval;
+   double znum;
+   int minterms, maxterms;
+   struct Farey *tmp;
+
+   znum = alpha * (double) INTPART;
+   znum += beta * ((double) (other->intpart));
+   znum += gamma;
+
+   minterms = MIN ((NTERMS), (other->nterms));
+   maxterms = MAX ((NTERMS), (other->nterms));
+
+   if (maxterms == 0) return (znum);
+
+   /* let self point at the one with more terms */
+   /* this s NOT an object-oriented move. HACK_LAERT */
+   if (maxterms != NTERMS) {
+      tmp = other;
+      other = self;
+      self = tmp;
+
+      eval = alpha;
+      alpha = beta;
+      beta = eval;
+   }
+
+   /* now, work backwards and reconstruct the fraction. */
+   eval = 0.0;
+   for (i=NTERMS-1; i>=minterms; i--) {
+      eval += alpha * ((double) TINUED_FRAC[i]) + gamma;
+      /* not normally needed, will this help mystery crash? */
+      if (eval == 0.0) { eval = 1.0e30; } else { eval = 1.0 / eval; }
+   }
+
+   for (i=minterms-1; i>=0; i--) {
+      eval += alpha * ((double) TINUED_FRAC[i]) + beta * ((double) other->tinued_frac[i]) + gamma;
+      /* not normally needed, will this help mystery crash? */
+      if (eval == 0.0) { eval = 1.0e30; } else { eval = 1.0 / eval; }
+   }
+
+   znum += eval;
+   return (znum);
+
+}
+
+/* ------------------------------------------------------------ */
+/* computes crazy product of continued fractions
+ */
+
+
+#ifdef ANSI_C
+double CFProd (struct Farey *self, struct Farey *other,
+              double alpha, double beta)
+#else
+double CFProd (self, other, alpha, beta)
+struct Farey *self, *other;
+double alpha, beta;
+#endif
+{
+   int i;
+   double eval;
+   double znum;
+   int minterms, maxterms;
+   struct Farey *tmp;
+
+   znum = alpha * (double) INTPART;
+   znum += beta * ((double) (other->intpart));
+
+   minterms = MIN ((NTERMS), (other->nterms));
+
+   if (minterms == 0) return (znum);
+
+   /* now, work backwards and reconstruct the fraction. */
+   eval = 0.0;
+   for (i=minterms-1; i>=0; i--) {
+      eval += alpha * ((double) TINUED_FRAC[i]) * ((double) other->tinued_frac[i]) + beta;
+      /* not normally needed, will this help mystery crash? */
+      if (eval == 0.0) { eval = 1.0e30; } else { eval = 1.0 / eval; }
+   }
+
+   znum += eval;
+   return (znum);
+
 }
 
 /* ---------------------- END OF FILE ------------------------- */
