@@ -6,10 +6,11 @@
 \fontscheme default
 \graphics default
 \paperfontsize default
+\spacing single 
 \papersize Default
 \paperpackage a4
 \use_geometry 0
-\use_amsmath 0
+\use_amsmath 1
 \use_natbib 0
 \use_numerical_citations 0
 \paperorientation portrait
@@ -1567,13 +1568,12 @@ Note that the map is clearly invertible, with its inverse being
  Notice that the shrinking portion of the map is just the inverse of the
  stretching portion of the map.
  Iterating these maps just makes them even more hyperbolic.
- The figure
+ Figure 
 \begin_inset LatexCommand \ref{Theta Maps}
 
 \end_inset 
 
- shows some of these, with crosses denoting the endpoints of the straight-line
- segments.
+ shows some of these.
  
 \layout Standard
 
@@ -1589,7 +1589,7 @@ collapsed false
 
 \end_inset 
 
-
+ Theta Maps
 \layout Standard
 
 
@@ -1614,6 +1614,8 @@ This figure shows
 \end_inset 
 
  up to 7.
+ Marker-points highlight the endpoints of the straight line segments that
+ make up each of these maps.
  Note that these maps are symmetric around the 
 \begin_inset Formula $y=1-x$
 \end_inset 
@@ -1622,7 +1624,7 @@ This figure shows
 \begin_inset Formula $xy=2^{-n-2}$
 \end_inset 
 
-, with the exception of the enpoints at 0 and 1.
+, with the exception of the endpoints at 0 and 1.
  Since each map contains more segments, each map becomes a better approximation
  to the hyperbola.
  
@@ -1652,8 +1654,9 @@ We demonstate a more complex mapping by rebalancing the binary tree so that
  This requires two tree movements: switching the 7/16 node so that it lives
  under 1/2, and switching the 5/16 node so that it lives under the now empty
  slot at 1/4.
- This is showin in figure (XXX need that figure.
- ) This rotation is given by the mapping 
+ This is shown in the diagram (xxx need to create the pretty-picture of
+ the rotated tree xxx).
+ This rotation is given by the mapping 
 \begin_inset Formula \[
 \eta(x)=\left\{ \begin{array}{ccc}
 x & \;\textrm{ for \;} & 0\leq x\leq1/4\\
@@ -1662,10 +1665,13 @@ x/2+1/8 & \;\textrm{ for \;} & 1/4\leq x\leq3/4\\
 
 \end_inset 
 
- xxx stuff
-\layout Standard
+ A graph of this this map and its first few iterates are shown in figure
+ 
+\begin_inset LatexCommand \ref{cap:The-Eta-Map}
 
-xxx
+\end_inset 
+
+.
 \layout Standard
 
 
@@ -1675,7 +1681,12 @@ collapsed false
 
 \layout Caption
 
-eta map 
+
+\begin_inset LatexCommand \label{cap:The-Eta-Map}
+
+\end_inset 
+
+The Eta Map 
 \layout Standard
 
 
@@ -2358,7 +2369,7 @@ where
 \end_inset 
 
 ).
- A prototypical Takagi-Landsberg curve is shown in 
+ A prototypical Takagi-Landsberg curve is shown in figure 
 \begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
 
 \end_inset 
@@ -2378,7 +2389,7 @@ collapsed false
 
 \end_inset 
 
-
+The Takagi-Landsberg Curve
 \layout Standard
 
 
@@ -2390,7 +2401,21 @@ collapsed false
 
 \layout Standard
 
-Shown for a value of w=0.618 
+This graph shows the Takagi-Landsberg curve 
+\begin_inset Formula $t_{w}(x)$
+\end_inset 
+
+ as a function of 
+\begin_inset Formula $x$
+\end_inset 
+
+ for a fixed value of 
+\begin_inset Formula $w=0.618$
+\end_inset 
+
+.
+ The fractal self-similarity of this curve is readily appearent.
+ 
 \end_inset 
 
 
@@ -2664,7 +2689,85 @@ QED
  
 \layout Standard
 
-Lets now take a look at the derivative, pictured here:
+In a previous section, we exhibited the hyperbolic maps 
+\begin_inset Formula $\theta(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\eta(x)$
+\end_inset 
+
+ of the unit interval onto itself.
+ These maps consited of straight line segments, with each segments corresponding
+ to an element of the modular group.
+ Thus, for each individual line segment, the Takagi Curve is mapped back
+ into itself under three dimensional representation, as shown above.
+ Working out the general form of transformation of the curve under the hyperboli
+c maps is a bit harder.
+ 
+\layout Description
+
+Homework: Exhibit 
+\begin_inset Formula $t_{w}(\theta(x))$
+\end_inset 
+
+ and 
+\begin_inset Formula $t_{w}(\eta(x))$
+\end_inset 
+
+ explicitly.
+ Give a general form for how the Takagi curve transforms under a general
+ hyperbolic curve.
+ What is the dimension of the representation? 
+\layout Standard
+
+A Batrachion is an integer sequence that hops from one integer to another
+ using a a simple recurrence relation.
+ Many batrachions generate fractal curves, and these are often remarkably
+ similar to the Takagi curve.
+ Examples include the Hofstadter-Conway 10,000-Dollar Sequence, the Hofstadter's
+ Q-Sequence and Mallows' Sequence.
+ 
+\layout Description
+
+Homework: Apply the tools for working with the modular group to Batrachion
+ sequences.
+ Develop a general theory of Batrachion sequences in terms of representations
+ of the modular group, if possible.
+ 
+\layout Description
+
+Homework: Give the Hausdorff dimension of the Takagi curve, as defined by
+ Besicovitch.
+\layout Standard
+
+One can also explore the derivative of te Takagi Curve, which is reasonably
+ well defined for 
+\begin_inset Formula $w<1/2$
+\end_inset 
+
+; one takes the derivative under the summation, and notes the derivative
+ of a triangle wave is a square wave.
+ This is shown in figure 
+\begin_inset LatexCommand \ref{cap:Derivative-of-Takagi}
+
+\end_inset 
+
+.
+ Derivatives for higher 
+\begin_inset Formula $w$
+\end_inset 
+
+ require analytic continuation past 
+\begin_inset Formula $w=1/2$
+\end_inset 
+
+, which is always possible if 
+\begin_inset Formula $x$
+\end_inset 
+
+ is held fixed.
+ 
 \layout Standard
 
 
@@ -2674,7 +2777,12 @@ collapsed false
 
 \layout Caption
 
-the derivative
+
+\begin_inset LatexCommand \label{cap:Derivative-of-Takagi}
+
+\end_inset 
+
+Derivative of the Takagi Curve
 \layout Standard
 
 
@@ -2686,61 +2794,133 @@ the derivative
 
 \layout Standard
 
-This is a picture of the derivative yes.
- xxx this is wrong-o value is 0.4 not 0.8 since not convergent.
+This graph shows 
+\begin_inset Formula $dt_{w}(x)/dx$
 \end_inset 
 
-
-\layout Standard
-
-xxxxx more junk below, needs fixing.
- 
-\layout Standard
-
-We can now take an explicit hyperbolic symmetry, and apply it directly to
- the Takagi curve.
- Start with the 
-\begin_inset Formula $\theta(x)$
-\end_inset 
-
- previously given in the hyperbolic section up above.
- Evaluate 
-\begin_inset Formula $t_{w}(\theta(x))$
-\end_inset 
-
- to get ...
- 
-\layout Standard
-
-We really need a proof that *any* hyperbolic curve generated by 
-\begin_inset Formula $SL(2,Z)$
-\end_inset 
-
- does the right thing here.
- we can do this recursively by noting that each hyperbolic is a list of
- straight line segments, so that at each point, we are performing a linear
- rescaling.
- 
-\layout Subsection
-
-Analytic Continuation of the Takagi Curve
-\layout Standard
-
-For any fixed x, the Takagi Curve is analytic in w, having a simple pole
- at 
-\begin_inset Formula $w=\exp(i\theta)$
+ for a value of 
+\begin_inset Formula $w=0.4$
 \end_inset 
 
 .
- We want to do two things here: first, give 
+\end_inset 
+
+ 
+\layout Description
+
+Homework: Work out the transformation of the derivative curve under the
+ modular group.
+ This can be bit bit confusing, because there are two potential candidates
+ to distinguish.
+ Given a general element 
+\begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+ one can define 
+\begin_inset Formula $\gamma_{1}d\overrightarrow{v}/dx\equiv d\gamma\overrightarrow{v}/dx$
+\end_inset 
+
+ for the vector 
+\begin_inset Formula $\overrightarrow{v}=a+bx+ct_{w}(x)$
+\end_inset 
+
+ as the rule for how the 3-rep elements transform, and one can also define
+ 
+\begin_inset Formula $\gamma't'_{w}(x)\equiv t'_{w}(\gamma x)$
+\end_inset 
+
+ as the rule for how the derivative transforms.
+ Note that 
+\begin_inset Formula $\gamma'\neq\gamma_{1}$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Homework: Perform an analysis of the Kiesswetter curve.
+ 
+\layout Description
+
+Homework: Perform an analysis of Bolzano's self-affine curve.
+\layout Standard
+
+So far, we have been looking at the Takagi curve as a function of 
+\begin_inset Formula $x,$
+\end_inset 
+
+ holding 
+\begin_inset Formula $w$
+\end_inset 
+
+ fixed.
+ We can also explore teh converse.
+ For any fixed 
+\begin_inset Formula $x$
+\end_inset 
+
+, the Takagi Curve is analytic in 
+\begin_inset Formula $w$
+\end_inset 
+
+, having a simple pole at 
+\begin_inset Formula $w=\exp(i\theta)$
+\end_inset 
+
+ for some 
+\begin_inset Formula $\theta(x)$
+\end_inset 
+
+.
+ It would seem that 
+\begin_inset Formula $t_{w}$
+\end_inset 
+
+ is an entire function of 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Homework: Give 
 \begin_inset Formula $\theta$
 \end_inset 
 
- as a function of x, second, analytically continue to regions 
+ as a function of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ Show the explicit analytic continuation of the Takagi curve to regions
+ 
 \begin_inset Formula $|w|>1$
 \end_inset 
 
 .
+ Discuss the analytic properties of 
+\begin_inset Formula $t_{w}$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Homework: Describe the analytic properties of 
+\begin_inset Formula $dt_{w}(x)/dx$
+\end_inset 
+
+ considered as a function of 
+\begin_inset Formula $w$
+\end_inset 
+
+, with 
+\begin_inset Formula $x$
+\end_inset 
+
+ held fixed.
+ 
 \layout Subsection
 
 The Frobenius-Perron Operator
@@ -3210,10 +3390,7 @@ s as the representative elements.
 \layout Standard
 
 The continuous-spectrum eigenfunctions of the Bernoulli map are of course
- a generalizastion of the Takagi-Landsberg curve to complex values, and
- are of course the famous and beautiful Levy Dragons (reference the Paul
- Levy 1938 paper here) (actually Levy was trying to generalize the Koch
- curves).
+ a generalizastion of the Takagi-Landsberg curve to complex values.
  These eigenfunctions are 
 \begin_inset Formula \[
 \phi_{z,l}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2l+1\right)x\right)\]
@@ -3229,8 +3406,14 @@ The continuous-spectrum eigenfunctions of the Bernoulli map are of course
 \end_inset 
 
 .
- These are quite beautiful fractals provide a picture here.
+ These are quite beautiful fractals (xxx provide a picture here).
  Symmetry is the name of the game here.
+ 
+\layout Standard
+
+These are protype forms for and the famous and beautiful Levy Dragons (reference
+ the Paul Levy 1938 paper here) (actually Levy was trying to generalize
+ the Koch curves).
  
 \layout Standard
 
@@ -3238,6 +3421,10 @@ Note that when we go to look at the tesselatation of the hyperbolic plane
  by the hyperbolic triangle under the symmetry of the modular group, I think
  we get the tesselation of the plane with Levy's Dragons, which I think
  is the point that Paul Levy was trying to make.
+ So this fits all ver nicely: we have a direct 1-1 correspondance between
+ tesselations on the hyperplane with tessalations of real space by fractal
+ curves.
+ It is sufficient to talk about one to talk about the other.
 \layout Standard
 
 This also means that Bournoulli map also makes for a good toy example of
