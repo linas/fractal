@@ -27,6 +27,25 @@ int thue_morse(int n)
 	return (1-thue_morse ((n-1)/2));
 }
 
+
+/*
+ * Compute the divisor arithmetic function
+ */
+
+int divisor (int n)
+{
+	int acc = 0;
+	int d;
+
+	for (d=1; d<=n; d++)
+	{
+		if (n%d) continue;
+		acc ++;
+	}
+
+	return acc;
+}
+
 double randoid(int n)
 {
 #define NVAL 65186
@@ -39,8 +58,8 @@ double randoid(int n)
 		srand (99);
 		for (i=0; i<NVAL; i++)
 		{
-			// array[i] = rand() & 0x1;
-			array[i] = ((double) rand()) / ((double)RAND_MAX);
+			array[i] = (rand()>>6) & 0x1;
+			// array[i] = ((double) rand()) / ((double)RAND_MAX);
 		}
 	}
 
@@ -50,7 +69,8 @@ double randoid(int n)
 
 static int max_terms;
 
-static void mobius_series_c (double re_q, double im_q, double *prep, double *pimp)
+/* Perform ordinary series sum over one of the funcs */
+void plain_series_c (double re_q, double im_q, double *prep, double *pimp)
 {
 	double tmp;
 	int i;
@@ -81,11 +101,20 @@ static void mobius_series_c (double re_q, double im_q, double *prep, double *pim
 
 		// double t = moebius_mu (i+1);
 		double t = randoid (i+1);
-		t *= (i+1);
-		t *= (i+1);
 #if 0
 		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
 #endif
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
 
 		rep += qpr *t;
 		imp += qpi *t;
@@ -107,12 +136,21 @@ static void mobius_series_c (double re_q, double im_q, double *prep, double *pim
 	*pimp = imp;
 }
 
-static void curvature_c (double re_q, double im_q, double *prep, double *pimp)
+/* derivatives */
+struct deriv_s 
+{
+	double reh;
+	double imh;
+	double rehp;
+	double imhp;
+	double rehpp;
+	double imhpp;
+};
+
+static void derivatives (double re_q, double im_q, struct deriv_s *dd)
 {
 	double tmp;
 	int i;
-	*prep = 0.0;
-	*pimp = 0.0;
 
 	double reh = 0.0;
 	double imh = 0.0;
@@ -185,15 +223,69 @@ static void curvature_c (double re_q, double im_q, double *prep, double *pimp)
 		// printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
 	}
 
-	double norm = pow (rehp*rehp+imhp*imhp,  1.5);
-	double  equipot = - rehpp*(rehp*rehp - imhp*imhp) - 2.0*rehp*imhp*imhpp;
+	dd->rehpp = rehpp;
+	dd->imhpp = imhpp;
+	dd->rehp = rehp;
+	dd->imhp = imhp;
+	dd->reh = reh;
+	dd->imh = imh;
+}
+
+
+/* Computes curvature of geodesics, i.e. curvature of field lines (rays)
+ * and of equipotentials.  Curvature of field line returned in second,
+ * cuvature of equipotential in first. */
+void line_curvature_c (double re_q, double im_q, double *pequi, double *pfie)
+{
+	*pequi = 0.0;
+	*pfie = 0.0;
+
+	struct deriv_s dd;
+	derivatives (re_q, im_q, &dd);
+
+	double norm = pow (dd.rehp*dd.rehp+dd.imhp*dd.imhp,  1.5);
+	double  equipot = - dd.rehpp*(dd.rehp*dd.rehp - dd.imhp*dd.imhp) - 2.0*dd.rehp*dd.imhp*dd.imhpp;
 	equipot /= norm;
 
-	double ray = imhpp*(rehp*rehp - imhp*imhp) - 2.0*rehp*imhp*rehpp;
+	double ray = dd.imhpp*(dd.rehp*dd.rehp - dd.imhp*dd.imhp) - 2.0*dd.rehp*dd.imhp*dd.rehpp;
 	ray /= norm;
 
-	*prep = equipot;
-	*pimp = ray;
+	*pequi = equipot;
+	*pfie = ray;
+}
+
+
+/* Computes scalar curvature of surface (contraction of ricci curvature) 
+ */
+void scalar_c (double re_q, double im_q, double *pcurv, double *pxxx)
+{
+	struct deriv_s dd;
+	derivatives (re_q, im_q, &dd);
+
+	double deno = 1.0+dd.rehp*dd.rehp+dd.imhp*dd.imhp;
+	deno *= deno;
+
+	double  numer = - dd.rehpp*dd.rehpp - dd.imhpp*dd.imhpp;
+	double curvature = -2.0*numer / deno;
+
+	*pcurv = curvature;
+	*pxxx = 0.0;
+}
+
+/* Someday,this is going to Compute components of energy-momentum tensor 
+   (actually, just the mass)  right now its a test function.
+ */
+void energy_c (double re_q, double im_q, double *energy, double *moment)
+{
+	struct deriv_s dd;
+	derivatives (re_q, im_q, &dd);
+
+	double deno = 1.0+dd.rehp*dd.rehp+dd.imhp*dd.imhp;
+	deno *= deno;
+
+	double  numer = - dd.rehpp*dd.rehpp - dd.imhpp*dd.imhpp;
+	double curvature = -2.0*numer / deno;
+
 }
 
 
@@ -201,11 +293,12 @@ static double mobius_series (double re_q, double im_q)
 {
 	double rep, imp;
 
-	// mobius_series_c (re_q, im_q, &rep, &imp);
-	curvature_c (re_q, im_q, &rep, &imp);
+	// plain_series_c (re_q, im_q, &rep, &imp);
+	// line_curvature_c (re_q, im_q, &rep, &imp);
+	scalar_c (re_q, im_q, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
-	// return rep;
-	return rep*imp;
+	return rep;
+	// return rep*imp;
 	// return imp;
 	// return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
 }
