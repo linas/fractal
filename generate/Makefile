@@ -14,7 +14,7 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert inf decide cutoff
 
-all:    cutoff euler-q totient  \
+all:    cutoff euler-q mobius totient  \
         ray automatic radius brat draw dx image
 
 
@@ -40,6 +40,7 @@ brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
 cutoff.o: cutoff.C
 euler-q.o: euler-q.C
+mobius.o: mobius.C
 totient.o: totient.C
 
 ################## Dependencies and compile/link #########
@@ -58,6 +59,9 @@ cutoff: brat.o cutoff.o util.o
 
 euler-q: brat.o euler-q.o util.o
 	$(CC) -o $@ $^ -lm -lstdc++
+
+mobius: brat.o mobius.o util.o
+	$(CC) -o $@ $^ ../tools/lib/moebius.o ../tools/lib/gcf.o -lm -lstdc++
 
 totient: brat.o totient.o util.o
 	$(CC) -o $@ $^ ../tools/lib/totient.o ../tools/lib/gcf.o -lm -lstdc++

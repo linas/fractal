@@ -1,8 +1,8 @@
 /*
- * totient.C
+ * mobius.C
  *
  * FUNCTION:
- * display euler totient
+ * display mobius mu function
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989
@@ -16,12 +16,12 @@
 #include <stdlib.h>
 
 #include "brat.h"
-#include "totient.h"
+#include "moebius.h"
 
 
 static int max_terms;
 
-static void totient_series_c (double re_q, double im_q, double *prep, double *pimp)
+static void mobius_series_c (double re_q, double im_q, double *prep, double *pimp)
 {
 	double tmp;
 	int i;
@@ -40,7 +40,7 @@ static void totient_series_c (double re_q, double im_q, double *prep, double *pi
 	for (i=0; i<max_terms; i++)
 	{
 
-		double t = totient_phi (i+1);
+		double t = moebius_mu (i+1);
 		rep += qpr *t;
 		imp += qpi *t;
 
@@ -57,39 +57,20 @@ static void totient_series_c (double re_q, double im_q, double *prep, double *pi
 		// printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
 	}
 
-#if NO_NOT_THIS
-	/* multiply by (1-q)^2 */
-	qpr = 1.0 - re_q;
-	qpi = - im_q;
-	tmp = qpr*qpr - qpi * qpi;
-	qpi = 2.0*qpr*qpi;
-	qpr = tmp;
-
-	tmp = qpr*rep - qpi * imp;
-	imp = qpr*imp + qpi * rep;
-	rep = tmp;
-#endif
-	/* multiply by (1-|q|)^2 */
-	tmp = 1.0 - sqrt (re_q*re_q + im_q*im_q);
-	tmp *= tmp;
-
-	rep *= tmp;
-	imp *= tmp;
-
 	*prep = rep;
 	*pimp = imp;
 }
 
-static double totient_series (double re_q, double im_q)
+static double mobius_series (double re_q, double im_q)
 {
 	double rep, imp;
-	totient_series_c (re_q, im_q, &rep, &imp);
+	mobius_series_c (re_q, im_q, &rep, &imp);
 	return sqrt (rep*rep+imp*imp);
 }
 
 /*-------------------------------------------------------------------*/
 /* This routine fills in the interior of the the convergent area of the 
- * Euler totient in a simple way 
+ * Euler mobius in a simple way 
  */
 
 
@@ -126,7 +107,7 @@ MakeHisto (
       for (j=0; j<sizex; j++) 
 		{
 
-			double phi = totient_series (re_position, im_position);
+			double phi = mobius_series (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;
