@@ -16,6 +16,9 @@ all: 	$(EXES)
 .c.o:
 	cc -O -c $< -I..
 
+.C.o:
+	cc -O -c $< -I..
+
 cprod:	cprod.o
 	cc -o cprod cprod.o  ../../../../lib/Farey.o -lm
 	ln -f cprod cden
@@ -28,6 +31,9 @@ interval:	interval.o
 
 drip:	drip.o
 	cc -o drip drip.o  ../../../../lib/Farey.o -lm
+
+square:	square.o
+	cc -o square square.o  ../../../../lib/Farey.o -lm
 
 ################## Dependencies and compile/link #########
 # cmap
