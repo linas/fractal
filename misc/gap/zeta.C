@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #include <gsl/gsl_sf_gamma.h>
+#include <gsl/gsl_sf_zeta.h>
 
 /* Log[Gamma(z)] for z complex, z not a negative integer
  * Uses complex Lanczos method. Note that the phase part (arg)
@@ -58,7 +59,6 @@ void betas (double x, double re_s, double im_s, double *rea, double *ima)
 		double imarg = sin (2.0*M_PI*((double) n)*x);
 		reacc += term * (rearg * ct - imarg*st);
 		imacc += term * (rearg * st + imarg*ct);
-		// acc += term * sin (2.0*M_PI*((double) n)*x);
 		if (1.0e-16>term) break;
 	}
 
@@ -71,9 +71,13 @@ void betas (double x, double re_s, double im_s, double *rea, double *ima)
 	{
 		printf ("# uhh ohhhh ! s = %g + i %g\n", re_s, im_s); 
 	}
-	// double r = exp (lnr.val);
-	// reacc *= 2.0 *r;
-	// imacc *= 2.0 *r;
+
+#define DO_RENORM
+#ifdef DO_RENORM
+	double r = exp (lnr.val);
+	reacc *= 2.0 *r;
+	imacc *= 2.0 *r;
+#endif
 
 	double gc = cos (garg.val);
 	double gs = sin (garg.val);
@@ -84,6 +88,32 @@ void betas (double x, double re_s, double im_s, double *rea, double *ima)
 
 	*rea = reacc;
 	*ima = imacc;
+}
+
+
+/* with huge eignvalues, must take s less than zero only, though */
+
+double beta_even_grow (double x, double sre)
+{
+	/* Hurwitz Zeta Function
+	 * zeta(s,q) = Sum[ (k+q)^(-s), {k,0,Infinity} ]
+	 *
+	 * s > 1.0, q > 0.0
+	 * exceptions: GSL_EDOM, GSL_EUNDRFLW, GSL_EOVRFLW
+	 */
+
+	double even = gsl_sf_hzeta (1.0-sre, x) + gsl_sf_hzeta (1.0-sre, 1.0-x);
+	even *= sre;
+	even /= cos (0.5*M_PI*sre);
+	return even;
+}
+
+double beta_odd_grow (double x, double sre)
+{
+	double odd = gsl_sf_hzeta (1.0-sre, x) - gsl_sf_hzeta (1.0-sre, 1.0-x);
+	odd *= sre;
+	odd /= sin (0.5*M_PI*sre);
+	return odd;
 }
 
 main (int argc, char * argv[])
@@ -102,6 +132,9 @@ main (int argc, char * argv[])
 	double sre=2.345;
 	double sim = s;
 
+	sre = -s;
+	sim = 0.0;
+
 	// double lambda = pow (0.5, s);
 	double lambda = pow (0.5, sre);
 	double re_lambda = lambda * cos (sim*log(2.0));
@@ -111,8 +144,8 @@ main (int argc, char * argv[])
 	printf ("#\n# ess=%g +i %g  eigenvalue lambda=%g +i %g \n#\n", sre, sim, re_lambda, im_lambda);
 	printf ("#\n#   |lambda|=%g  arg(lambda)=%g \n#\n", lambda, sim*log(2.0));
 	
-	int imax = 153;
-	for (i=0; i<=imax; i++) 
+	int imax = 223;
+	for (i=1; i<imax; i++) 
 	{
 		double x = i/((double) imax);
 		// double y = beta (x,s);
@@ -146,6 +179,7 @@ main (int argc, char * argv[])
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, rey, zre-reyl, zim-imyl);
 #endif
 
+#ifdef GRAPH_EIGENSTATES
 #define NPTS 5
 		double rey, imy;
 		int k;
@@ -160,6 +194,37 @@ main (int argc, char * argv[])
 			esim += 2.0*M_PI / log(2.0);
 		}
 		printf ("\n");
+#endif
+
+// #define CHECK_THAT_ZETA_GROW_IS_EIGENSTATE 1
+#if CHECK_THAT_ZETA_GROW_IS_EIGENSTATE 
+		// verify its an eigenstate
+		// double y = beta_even_grow (x,sre);
+		// double z = 0.5*(beta_even_grow (0.5*x, sre) + beta_even_grow (0.5+0.5*x, sre));
+		double y = beta_odd_grow (x,sre);
+		double z = 0.5*(beta_odd_grow (0.5*x, sre) + beta_odd_grow (0.5+0.5*x, sre));
+		z /= y;
+		z /= lambda;
+		z -= 1.0;
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
+#endif
+
+		double e = beta_even_grow (x,sre);
+		double o = beta_odd_grow (x,sre);
+
+		e *= cos (0.5*M_PI*sre);
+		o *= sin (0.5*M_PI*sre);
+		double poz = pow (x, sre-1.0);
+		double poo = pow (1.0-x, sre-1.0);
+		e /= poz + poo;
+		o /= poz - poo;
+		e /= sre;
+		o /= sre;
+
+		e -= 1.0;
+		o -= 1.0;
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, e, o);
+
 		fflush (stdout);
 	}
 }

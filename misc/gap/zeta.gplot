@@ -13,7 +13,10 @@ set key right
 
 set title "Zeta Eigenfunctions"
 set xlabel "x"
-set ylabel "Arg(beta(x; 2.345+it))/|Gamma(1+s)|"
+set ylabel "(beta(x; + "
+
+plot "zeta.dat" using 2:3 title "ev", \
+     "zeta.dat" using 2:4 title "odd"
 
 # set yrange [0:]
 
@@ -39,15 +42,15 @@ set ylabel "Arg(beta(x; 2.345+it))/|Gamma(1+s)|"
 #     "zeta.dat" using 2:(sqrt($9*$9+$10*$10)) title "t=6pi/ln2", \
 #     "zeta.dat" using 2:(sqrt($11*$11+$12*$12)) title "t=8pi/ln2"
 
-# plot "zeta.dat" using 2:(atan2($3,$4)) title "t=0", \
 
 
-plot "zeta.dat" using 2:(atan2($4,$3)) title "t=0", \
-     "zeta.dat" using 2:(atan2($6,$5)) title "t=2pi/ln2", \
-     "zeta.dat" using 2:(atan2($8,$7)) title "t=4pi/ln2", \
-     "zeta.dat" using 2:(atan2($10,$9)) title "t=6pi/ln2", \
-     "zeta.dat" using 2:(atan2($12,$11)) title "t=8pi/ln2"
-
+# set ylabel "Arg(beta(x; 2.345+it))/|Gamma(1+s)|"
+#plot "zeta.dat" using 2:(atan2($4,$3)) title "t=0", \
+#     "zeta.dat" using 2:(atan2($6,$5)) title "t=2pi/ln2", \
+#     "zeta.dat" using 2:(atan2($8,$7)) title "t=4pi/ln2", \
+#     "zeta.dat" using 2:(atan2($10,$9)) title "t=6pi/ln2", \
+#     "zeta.dat" using 2:(atan2($12,$11)) title "t=8pi/ln2"
+#
 
 
 #     "zeta.dat" using 2:($2*$2-$2+0.1666666) title "bernoulli"
