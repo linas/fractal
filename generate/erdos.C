@@ -153,12 +153,13 @@ static double gee_2 (double re_q, double im_q)
 	rep *= 4.0 *M_PI*M_PI*M_PI*M_PI / 3.0;
 	imp *= 4.0 *M_PI*M_PI*M_PI*M_PI / 3.0;
 
-	return sqrt (rep*rep+imp*imp);
+	// return sqrt (rep*rep+imp*imp);
+	// return rep;
 	// return imp;
-	// double phase = atan2 (imp, rep);
-	// phase += M_PI;
-	// phase /= 2.0*M_PI;
-	// return phase;
+	double phase = atan2 (imp, rep);
+	phase += M_PI;
+	phase /= 2.0*M_PI;
+	return phase;
 }
 
 static double gee_3 (double re_q, double im_q)
@@ -177,11 +178,12 @@ static double gee_3 (double re_q, double im_q)
 	imp *= 8.0 *M_PI*M_PI*M_PI*M_PI *M_PI*M_PI/ 27.0;
 
 	// return sqrt (rep*rep+imp*imp);
+	return rep;
 	// return imp;
-	double phase = atan2 (imp, rep);
-	phase += M_PI;
-	phase /= 2.0*M_PI;
-	return phase;
+	// double phase = atan2 (imp, rep);
+	// phase += M_PI;
+	// phase /= 2.0*M_PI;
+	// return phase;
 }
 
 /*-------------------------------------------------------------------*/
@@ -224,7 +226,8 @@ MakeHisto (
 		{
 
 			// double phi = erdos_series (re_position, im_position);
-			double phi = gee_2 (re_position, im_position);
+			// double phi = gee_2 (re_position, im_position);
+			double phi = gee_3 (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;

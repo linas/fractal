@@ -191,8 +191,11 @@ PATH=$PATH:.
 # renorm jj j2 164.0 0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
-# renorm for the weierstrass g_2 modulus
+# renorm for the weierstrass g_2 modulus, realpart,impart
 takelog j g
 renorm g j2 0.040 3
 cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
+
+# cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 
