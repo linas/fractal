@@ -13,10 +13,6 @@
 //
 // The GetSecondOfPair() method returns the second elt. of the pair.
 //
-// The GetTopPairContainingWord() returns a pair id that contains the
-//    word as the first word.  The returned pairid is the pair 
-//    id with the highest count.  
-//
 // The GetCount() method returns how often the particular word
 //    occurs in the text.
 //
@@ -37,7 +33,7 @@
 class lagGenericWordTable {
    public:
       lagGenericWordTable (void);
-      ~lagGenericWordTable ();
+      virtual ~lagGenericWordTable ();
 
 #ifdef LAG_TWO_WORD
       int GetID (int wordfirst, int wordsecond);
@@ -62,12 +58,10 @@ class lagGenericWordTable {
       int GetElt (int pairid, int elt);
       int GetCount (int pairid);
 
-      int GetTopPairContainingWord (int word);
-
       int GetTopTen (int n);
       void Dump (void);
 
-   private:
+   protected:
       class Helper {
          public:
             Helper * next;
@@ -81,14 +75,7 @@ class lagGenericWordTable {
       Helper * topten [LAG_TOP_TEN];
       int top_ten_count [LAG_TOP_TEN];
 
-      class Concord {
-         public:
-            Concord * next;
-            Helper * where;
-      };
-      Concord * concordance [LAG_WORD_TABLE_SIZE];
-
-      void AddConcord (int, Helper *);
+      virtual void AddID (Helper *);
 
       int unused_id;
       int num_entries;

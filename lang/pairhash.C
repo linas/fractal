@@ -38,10 +38,6 @@ lagGenericWordTable :: lagGenericWordTable (void) {
       top_ten_count[i] = 0;
    }
 
-   for (i=0; i<LAG_WORD_TABLE_SIZE; i++) {
-      concordance[i] = 0x0;
-   }
-
 }
 
 // =====================================================
@@ -73,41 +69,9 @@ lagGenericWordTable :: ~lagGenericWordTable () {
       topten[i] = 0x0;
       top_ten_count[i] = 0;
    }
-
-   for (i=0; i<LAG_WORD_TABLE_SIZE; i++) {
-      if (concordance[i]) {
-         Concord * root = concordance[i];
-         while (root) {
-            Concord * nxt = root -> next;
-            delete root;
-            root = nxt;
-         }
-      }
-      concordance[i] = 0x0;
-   }
 }
 
 // =====================================================
-
-void lagGenericWordTable :: AddConcord (int first, Helper *where) {
-   if (!first) return;
-   if (!where) return;
-
-   // first, see if the pair is already listed in the concordance
-   // If it is, don't add it again.
-   // actually, this check is not needed, since the way this method is
-   // invoked guarentees that it will ot already bee there.
-   Concord *root = concordance [first];
-   while (root) {
-      if (where == root->where) return;
-      root = root -> next;
-   }
-      
-   root = new Concord;
-   root -> where = where;
-   root -> next = concordance[first];
-   concordance[first] = root; 
-}
 
 #if (defined LAG_TWO_WORD) | (defined LAG_THREE_WORD) | \
     (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
@@ -221,7 +185,7 @@ int lagGenericWordTable :: GetID (int first, int second, int third,
    root -> cnt = 1;
    num_entries ++;
 
-   AddConcord (first, root);
+   AddID (root);
 
    return (root->id);
 }
@@ -255,34 +219,21 @@ int lagGenericWordTable :: GetTopTen (int n) {
 }
 
 // =====================================================
+// the is a null routine. Derived classes overload it
 
-int lagGenericWordTable :: GetTopPairContainingWord (int word) {
-   if (0 > word) return 0;
-   if (LAG_WORD_TABLE_SIZE <= word) return 0;
-
-   Concord * root = concordance[word];
-   if (!root) return 0;
-
-   // search for the pair with the highest count
-   Helper * top = 0x0;
-   int topcnt = 0;
-   while (root) {
-      if (topcnt < root -> where -> cnt) {
-         topcnt = root->where->cnt;
-         top = root -> where;
-      }
-      root = root -> next;
-   }
-
-   return (top -> id);
+void lagGenericWordTable :: AddID (Helper *) {
 }
 
 // =====================================================
 
 void lagGenericWordTable :: Dump (void) {
+   printf ("Info: lagGenericWordTable :: Dump(): \n");
    printf ("num entries is %d \n", num_entries);
    printf ("num processed is %d \n", num_processed);
    printf ("num collisions is %d \n", num_collisions);
+
+   printf ("mem usage %d kbytes \n", num_entries * sizeof (Helper) / 1024);
+   printf ("helper size %d \n", sizeof (Helper));
 
    // for (int i=0; i<LAG_PAIR_HASH_TABLE_SIZE; i++) {
    //   if (table[i]) printf ("its %d %d %d %d \n", i, 
