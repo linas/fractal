@@ -5,9 +5,9 @@ LIBS =		/usr/lib
 
 CC = cc -Wall -g -O2 $(INCLUDES)
 
-EXES =  stalk stalkmov mstop migrate measure offset \
+EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
-        circout circin circmov brat gapper \
+        circout circin circmov brat \
         abs clamp takelog reclamp dump renorm \
         draw dx image movie paste stats sum \
         angle curl diff div card mandel morph \
@@ -34,9 +34,14 @@ gap-tongue.o: image.h util.h
 man.o: image.h util.h
 util.o:	util.h
 
+brat-gapper.o: brat-gapper.C
+
 ################## Dependencies and compile/link #########
 #
-gapper inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o
+brat-gapper: brat.o brat-gapper.o util.o
+	$(CC) -o brat-gapper $^ ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
+
+inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o
 	$(CC) -o brat brat.o util.o ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
 	ln -f brat decide
 	ln -f brat manvert
@@ -61,7 +66,6 @@ gapper inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squ
 	ln -f brat wind
 	ln -f brat winds
 	ln -f brat morph
-	ln -f brat gapper
 	ln -f brat tong
 
 card: card.c  util.o
