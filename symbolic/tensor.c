@@ -33,6 +33,8 @@ struct expr_s
 
 typedef struct expr_s Expr;
 
+void SimplifyExpr (Expr *e);
+
 /* =============================================== */
 
 void 
@@ -89,6 +91,7 @@ PrintExpr (Expr *e)
 		printf ("NULL expresion!\n");
 		return;
 	}
+	SimplifyExpr (e);
 
 	GList *tn;
 	for (tn = e->terms; tn; tn=tn->next)
@@ -250,6 +253,96 @@ Expr *DDY (Expr *e)
 	return DD (e,2);
 }
 
+/* ======================================================== */
+/* sort thigs out */
+
+static gint part_compare (gconstpointer a, gconstpointer b)
+{
+	const Part *pa = a;
+	const Part *pb = b;
+	if (pa->dx < pb->dx) return -1;
+	if (pa->dx > pb->dx) return 1;
+
+	if (pa->dy < pb->dy) return -1;
+	if (pa->dy > pb->dy) return 1;
+	return 0;
+}
+
+void OrderTerm (Term *t)
+{
+	t->parts = g_list_sort (t->parts, part_compare);
+}
+
+void OrderTerm_E (Expr *e)
+{
+	GList *en;
+	for (en = e->terms; en; en=en->next)
+	{
+		Term *tr = en->data;
+		OrderTerm (tr);
+	}
+}
+
+/* ======================================================== */
+/* predicates */
+
+static gint IsSame_Part (const Part *pa, const Part *pb)
+{
+	if (pa->dx != pb->dx) return 0;
+	if (pa->dy != pb->dy) return 0;
+	return 1;
+}
+
+static gint IsSame_Term (const Term *ta, const Term *tb)
+{
+	// Assume we are already ordered .... 
+	// OrderTerm (ta);
+	// OrderTerm (tb);
+	GList *pna, *pnb;
+
+	for (pna = ta->parts, pnb=tb->parts; pna && pnb; 
+	                        pna=pna->next, pnb=pnb->next)
+	{
+		Part *pa = pna->data;
+		Part *pb = pnb->data;
+
+		if (0 == IsSame_Part (pa,pb)) return 0;
+	}
+	if (pna) return 0;
+	if (pnb) return 0;
+	return 1;
+}
+
+/* ======================================================== */
+
+void MergeTerms (Expr *e)
+{
+	OrderTerm_E (e);
+	GList *en;
+
+restart:
+	for (en = e->terms; en; en=en->next)
+	{
+		Term *ta = en->data;
+		GList *em;
+		for (em = en->next; em; em=em->next)
+		{
+			Term *tb = em->data;
+			if (IsSame_Term (ta, tb))
+			{
+				ta->coeff += tb->coeff;
+				g_free (tb); // xx memleak,delete parts too
+				g_list_remove_link (e->terms, em);
+				goto restart;
+			}
+		}
+	}
+}
+
+void SimplifyExpr (Expr *e)
+{
+	MergeTerms(e);
+}
 
 /* ======================================================== */
 /* userland */
