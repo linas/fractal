@@ -1,0 +1,1531 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Section
+
+Continued Fractions and Gaps
+\layout Standard
+
+Let us start by directing the reader to the page
+\begin_inset LatexCommand \htmlurl[Gap Theory]{http://www.linas.org/art-gallery/farey/continue/continue.html}
+
+\end_inset 
+
+, the contents of which need to be copied here.
+ It provides some basic definitions that we need.
+\layout Standard
+
+Given a real number 
+\begin_inset Formula $0<x<1$
+\end_inset 
+
+, a sequence of integers 
+\begin_inset Formula $[a_{1},a_{2},...]$
+\end_inset 
+
+ can be found that define its continued-fraction expansion: 
+\layout Standard
+
+
+\begin_inset Formula \[
+x=1/(a_{1}+1/(a_{2}+1/(a_{3}+...)))\]
+
+\end_inset 
+
+Given any x, this sequence is straightforward to compute.
+ Rational numbers x always have a finite number of terms in the sequence.
+ For a rational number x, there are two distinct expansions that yield the
+ same value: 
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{+}=[a_{1},a_{2},...,a_{N}]\]
+
+\end_inset 
+
+and 
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{-}=[a_{1},a_{2},...,a_{N}-1,1]\]
+
+\end_inset 
+
+In the following text, we make a simplifying notational confusion: we use
+ the same symbols to denote a sequence and its value when expressed as a
+ continued fraction.
+ Thus, for the above sequences, we may write 
+\begin_inset Formula $x=x_{-}=x_{+}$
+\end_inset 
+
+.
+ It will hopefully be obvious which is which.
+ 
+\layout Standard
+
+Given a rational 
+\begin_inset Formula $x$
+\end_inset 
+
+ and an arbitrary complex number w, define new sequences: 
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{+}(w)=[a_{1},a_{2},...,a_{N},1/w]\]
+
+\end_inset 
+
+and
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{-}(w)=[a_{1},a_{2},...,a_{N}-1,1,1/w]\]
+
+\end_inset 
+
+These two functions are analytic in 
+\begin_inset Formula $w$
+\end_inset 
+
+, almost trivally so, and in fact can be written as 
+\begin_inset Formula $(a+bw)/(c+dw)$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+ (we will present a construction for obtaining these integers in a later
+ section xxx todo).
+ Thus, general analytic manipulations are perfectly well-defined on these
+ functions.
+ Clearly, 
+\layout Standard
+
+
+\begin_inset Formula \[
+\lim_{w\rightarrow0}x_{-}(w)=\lim_{w\rightarrow0}x_{+}(w)=x\]
+
+\end_inset 
+
+Differentiation w.r.t.
+ 
+\begin_inset Formula $w$
+\end_inset 
+
+ provides a handy tool for constructing various interesting things and proving
+ various limits.
+ We give an exact expression for these derivatives below.
+ Although we've introduced w by appending it to the last term of a rational
+ expansion, we could, if we wanted, introduce w into the N'th term of an
+ irrational expansion.
+ Most of the statements we make below are for rationals.
+ This is in part because treating the irrationals is a bit harder and confusing,
+ both in these formulas, and in their implementation as algorithms.
+ 
+\layout Standard
+
+There is also an even-odd symmetry for 
+\begin_inset Formula $x(w)$
+\end_inset 
+
+ that we should be aware of, as it plays another important role in the theory.
+ As we point out above, for any given sequence, there is a + and a - generalizat
+ion.
+ But what if the sequence is already 
+\begin_inset Formula $x_{-}$
+\end_inset 
+
+ and we choose the - expansion? Then we get 
+\begin_inset Formula \[
+x_{--}=[a_{1},a_{2},...,a_{N}-1,0,1]\]
+
+\end_inset 
+
+This expansion invokes a symmetry on 
+\begin_inset Formula $x_{-}(w)$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+x_{--}(w)=[a_{1},a_{2},...,a_{N}-1,0,1,1/w]=x_{+}(w)\]
+
+\end_inset 
+
+Thus, we see that a double-expansion is either idempotent or alternating.
+ To be pedantic, we can complete this with the other three expressions:
+ 
+\begin_inset Formula $x_{++}(w)=x_{+}(w)$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{-+}(w)=x_{+-}(w)=x_{-}(w)$
+\end_inset 
+
+.
+ In other words, a double-expansion reflects back, and, in this sense, 
+\begin_inset Formula $x_{+}$
+\end_inset 
+
+and 
+\begin_inset Formula $x_{-}$
+\end_inset 
+
+ are unique.
+ 
+\layout Standard
+
+If one needs to take differences, e.g.
+ for derivatives, the even-odd expansion is more useful: Define 
+\begin_inset Formula $x_{e}(w)$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{o}(w)$
+\end_inset 
+
+ as follows: 
+\begin_inset Formula \[
+x_{e}(w)=\left\{ \begin{array}{cc}
+x_{+}(w) & if\; N\; even\\
+x_{-}(w) & if\; N\; odd\end{array}\right.\]
+
+\end_inset 
+
+and
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{o}(w)=\left\{ \begin{array}{cc}
+x_{-}(w) & if\; N\; even\\
+x_{+}(w) & if\; N\; odd\end{array}\right.\]
+
+\end_inset 
+
+These two have nice order-preserving properties: if 
+\begin_inset Formula $w$
+\end_inset 
+
+ is a positive real, then 
+\begin_inset Formula \[
+x_{o}(w)<x_{e}(w)\]
+
+\end_inset 
+
+and, for negative real 
+\begin_inset Formula $w$
+\end_inset 
+
+, 
+\begin_inset Formula \[
+x_{o}(w)>x_{e}(w)\]
+
+\end_inset 
+
+These two functions also have idempotent or parity-swapping identities:
+ 
+\begin_inset Formula \[
+x_{e+}(w)=x_{e}(w)\;\;\; and\;\;\; x_{e-}(w)=x_{o}(w)\;\;\; and\;\;\; x_{o+}(w)=x_{o}(w)\;\;\; and\; x_{o-}(w)=x_{e}(w)\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+x_{ee}(w)=x_{e}(w)\;\;\; and\;\;\; x_{eo}(w)=x_{o}(w)\;\;\; and\;\;\; x_{oe}(w)=x_{e}(w)\;\;\; and\;\;\; x_{oo}(w)=x_{o}(w)\]
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{+e}(w)=x_{e}(w)\;\;\; and\;\;\; x_{+o}(w)=x_{o}(w)\;\;\; and\;\;\; x_{-e}(w)=x_{e}(w)\;\;\; and\;\;\; x_{-o}(w)=x_{o}(w)\]
+
+\end_inset 
+
+
+\layout Subsection
+
+The Gap
+\layout Standard
+
+Let use define the 
+\shape italic 
+gap
+\shape default 
+ as
+\begin_inset Formula \[
+\Gamma_{x}(w)=x_{e}(w)-x_{o}(w)\]
+
+\end_inset 
+
+This gap function is, of course, highly discontinuous in 
+\begin_inset Formula $x$
+\end_inset 
+
+ and analytic in 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ It is not hard to discover that for a rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ reduced so that 
+\begin_inset Formula $p$
+\end_inset 
+
+ and 
+\begin_inset Formula $q$
+\end_inset 
+
+ are coprime (have no common factors), and 
+\begin_inset Formula $w\leq1$
+\end_inset 
+
+, the gaps take the form 
+\layout Standard
+
+
+\begin_inset Formula \[
+\Gamma_{p/q}(w)=\frac{w}{q^{2}}\left[2-w+\frac{w^{2}}{2}+\frac{w^{2}}{2}T_{p/q}(w)\right]\]
+
+\end_inset 
+
+ where the teeth 
+\begin_inset Formula $T$
+\end_inset 
+
+ are bounded: 
+\begin_inset Formula $\left|T_{p/q}(w)\right|<1$
+\end_inset 
+
+ (when 
+\begin_inset Formula $w\leq1$
+\end_inset 
+
+).
+ For 
+\begin_inset Formula $w=0,$
+\end_inset 
+
+we have 
+\begin_inset Formula $0\leq T_{p/q}(0)\leq1$
+\end_inset 
+
+.
+ A derivation of these results are given in a later section.
+ 
+\layout Standard
+
+The teeth at first appear to be random: below follows a scatterplot showing
+ 
+\begin_inset Formula $T$
+\end_inset 
+
+ for a thousand randomly generated small-ish rationals.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-psmallrand.png
+
+\end_inset 
+
+
+\layout Standard
+
+However, closer examination reveals some surprising details.
+ Here's the same picture, but this time showing only the rationals 
+\begin_inset Formula $p/q=[1..719]/720$
+\end_inset 
+
+ (all rationals with numerator between 1 and 719 and denominator of 720:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p720.png
+
+\end_inset 
+
+
+\layout Standard
+
+Note that 720 = 6! (six factorial) and that similar but denser images appear
+ for higher factorials: Here's one for 
+\begin_inset Formula $7!$
+\end_inset 
+
+ that is, 
+\begin_inset Formula $p/q=[1..5039]/5040$
+\end_inset 
+
+:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p5040.png
+
+\end_inset 
+
+
+\layout Standard
+
+Notice that a Moire pattern of fringes seems to be forming at 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+.
+ (Homework: describe the rationals that make up the parabolas.
+ The solution is presented in a later section below.).
+ The factorial in the denominator seems important: the picture for the denominat
+or 
+\begin_inset Formula $2\cdot3\cdot5\cdot7\cdot11=2310$
+\end_inset 
+
+ blurs out the features, and mostly looks much more random, as shown below:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p2310.png
+
+\end_inset 
+
+
+\layout Standard
+
+Now tht we know what sort of pattern to look for, we can find the cross-bars
+ in this picture, for a denominator of 1024:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p1024.png
+
+\end_inset 
+
+
+\layout Standard
+
+The analogous picture for a denominator consisting of powers of 3 is less
+ distinct.
+ Pictures for prime denominators appear considerably more random, although
+ containing hints of a different kind of structure.
+ For example, here is a picture with denominator 1023:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gappy-p1023.png
+
+\end_inset 
+
+
+\layout Standard
+
+The next picture below is a scatterplot showing all rationals with denominators
+ less than 200.
+ This now clearly exhibits a fantastic self-similar fractal latticework:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-lattice.png
+
+\end_inset 
+
+ 
+\layout Standard
+
+We will recognize later that these curves correspond to hyperbolic maps
+ of the unit interval back onto itself.
+ It would be interesting to specify the shapes of all the various bifurcating
+ curves that seem to appear in this latticework, and to give the algebraic
+ equations whose solutions are plotted above.
+ Note that because a curve can seemingly bifurcate into another curve in
+ many places, enumerating all of them would be a trick.
+\layout Standard
+
+There are more interesting things to be seen, but first we should provide
+ a simpler expression for 
+\begin_inset Formula $T_{p/q}(w)$
+\end_inset 
+
+ at 
+\begin_inset Formula $w=0$
+\end_inset 
+
+.
+ Recall that for any fixed rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+, that 
+\begin_inset Formula $T_{p/q}(w)$
+\end_inset 
+
+ is of the form 
+\begin_inset Formula $(aw+b)/(cw+d)$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+.
+ For any given, fixed 
+\begin_inset Formula $p/q$
+\end_inset 
+
+, there exists an 
+\begin_inset Formula $\epsilon>0$
+\end_inset 
+
+ such that there are no poles in 
+\begin_inset Formula $T_{p/q}(w)$
+\end_inset 
+
+ in the disk of radius 
+\begin_inset Formula $\epsilon$
+\end_inset 
+
+ around 
+\begin_inset Formula $w=0$
+\end_inset 
+
+ (Homework: prove this), and thus its analytic on this disk.
+ This justifies an expansion in 
+\begin_inset Formula $w$
+\end_inset 
+
+; we'll give an exact expression in a later section, showing that these
+ manipulations are safe.
+ For the continued fraction 
+\begin_inset Formula $x_{+}(w)=[a_{1},a_{2},...a_{N},1/w]$
+\end_inset 
+
+ we write the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th partial convergent as 
+\begin_inset Formula $r_{k}(w)=s_{k}+wt_{k}+w^{2}u_{k}+w^{3}v_{k}+...$
+\end_inset 
+
+ which obeys the recurrance relation 
+\begin_inset Formula $r_{k-1}(w)=a_{k-1}+1/r_{k}(w)$
+\end_inset 
+
+ .
+ Substituting, we get the explicit recurrance relations for each term:
+\begin_inset Formula \[
+s_{k-1}=a_{k-1}+1/s_{k}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+t_{k-1}=\frac{-t_{k}}{s_{k}^{2}}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+u_{k-1}=\frac{-u_{k}}{s_{k}^{2}}+\frac{t_{k}^{2}}{s_{k}^{3}}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+v_{k-1}=\frac{-v_{k}}{s_{k}^{2}}+2\frac{t_{k}u_{k}}{s_{k}^{3}}+\frac{-t_{k}^{3}}{s_{k}^{4}}\]
+
+\end_inset 
+
+ which are numerically quite tractable.
+ The boundary conditions are given by 
+\begin_inset Formula $r_{+,N}(w)=a_{N}+w$
+\end_inset 
+
+ for the 
+\begin_inset Formula $x_{+}$
+\end_inset 
+
+expansion, and 
+\begin_inset Formula $r_{-,N}(w)=a_{N}-w+w^{2}-w^{3}$
+\end_inset 
+
+ for the 
+\begin_inset Formula $x_{-}$
+\end_inset 
+
+expansion.
+ We add 
+\begin_inset Formula $a_{0}\equiv0$
+\end_inset 
+
+ to terminate at the other end.
+ Defining even and odd variants as before, we equate the gap
+\begin_inset Formula \[
+\Gamma_{p/q}(w)=w\left(t_{0}^{e}-t_{0}^{o}\right)+w^{2}\left(u_{0}^{e}-u_{0}^{o}\right)+w^{3}\left(v_{0}^{e}-v_{0}^{o}\right)\]
+
+\end_inset 
+
+ Its becomes straightforward to numerically verify that 
+\begin_inset Formula $t_{0}^{e}-t_{0}^{o}=2/q^{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $u_{0}^{e}-u_{0}^{o}=-1/q^{2}$
+\end_inset 
+
+ as we've noted before (Homework: provide a general proof).
+ Far, far more curious is 
+\begin_inset Formula $T_{p/q}(0)=2q^{2}\left(v_{0}^{e}-v_{0}^{o}\right)-1$
+\end_inset 
+
+, of which we drew some pictures above.
+ The pictures below will provide some more surprises.
+ The first is a scatterplot color-coded as a measure: it shows the distribution
+ of 
+\begin_inset Formula $T_{p/q}\equiv T_{p/q}(0)$
+\end_inset 
+
+ for all rationals with denominator 
+\begin_inset Formula $q\leq1800$
+\end_inset 
+
+.
+ Black indicates that there were few or no hits to that pixel, then blue,
+ greeen, yellow and red to denote lots of points hit that pixel.
+ Just as the earlier graphs, shown is a perfect unit square.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-dist-1800-bola.png
+
+\end_inset 
+
+
+\layout Standard
+
+For reference, overdrawn over the image is the parabola.
+ The vertical black stripes occur at the Farey numbers, and appear to be
+ ordered in size according to the Farey tree (
+\shape italic 
+i.e.
+
+\shape default 
+ the largest stripe is at 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+, the next largest at 
+\begin_inset Formula $x=1/3$
+\end_inset 
+
+, 
+\begin_inset Formula $x=2/3$
+\end_inset 
+
+ and the next smaller ones at 
+\begin_inset Formula $x=1/4$
+\end_inset 
+
+ and 
+\begin_inset Formula $x=2/5$
+\end_inset 
+
+ 
+\shape italic 
+etc.
+\shape default 
+).
+ The progression of the horizontal bands are clearly related to the Farey
+ tree through the parabola.
+ Since the parabola gives a rational out when fed one in, we see that we've
+ discovered a different tree of rationals that's related to the Farey tree.
+ One can see that any ratio of polynomials will this give a tree of rationals.
+ The Farey Tree (or Stern-Brocot Tree) is discussed in greater detail later.
+\layout Standard
+
+The filigree pattern exists only for small rationals.
+ If we start sampling larger rationals, the distribution becomes smooth.
+ The picture below shows a random sampling of rationals with denominators
+ less than 2 million.
+ The image is a bit grainy because the sample size is not large enough;
+ the graininess goes away with larger sample sizes.
+ 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-dist-rand.png
+
+\end_inset 
+
+
+\layout Standard
+
+This picture tells us something that is surprising: this function is space-filli
+ng and dense; it has no holes or islands; it has a fractal measure of 2.0.
+ Even in the land of fractals, this is fairly unusual, as this function
+ is, after all, not some self-similar curve, but rather a 'plain-old' map
+ from the unit interval to the unit interval.
+ By 'dense', I mean the traditional Cauchy-sequence notion of density: for
+ any real values 
+\begin_inset Formula $x,y\in[0,1]$
+\end_inset 
+
+ and positive 
+\begin_inset Formula $\varepsilon>0$
+\end_inset 
+
+, we can find a rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\left|x-p/q\right|<\varepsilon$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left|y-T_{p/q}\right|<\varepsilon$
+\end_inset 
+
+ .
+ Of course, a computer generated picture is not a proof, but a proof is
+ straight-forward, and is discussed below.
+ I am not aware of any other map that has this property.
+ 
+\layout Standard
+
+The distribution of the gaps 
+\begin_inset Formula $y=T_{p/q}$
+\end_inset 
+
+ can be easily found to be 
+\begin_inset Formula $1/2\sqrt{y}$
+\end_inset 
+
+ which is sharply peaked at 
+\begin_inset Formula $y=0$
+\end_inset 
+
+: this is the thin red stripe at the bottom of the above picture.
+ 
+\layout Subsection
+
+The Gap for Finite w
+\layout Standard
+
+One can get a better idea of the behaviour of 
+\begin_inset Formula $x_{e}(w)$
+\end_inset 
+
+ by graphing it, as a function of 
+\begin_inset Formula $w$
+\end_inset 
+
+, for a number of representative values of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ From the above analysis, we should suspect that for 
+\begin_inset Formula $x=p/q$
+\end_inset 
+
+, the leading 
+\begin_inset Formula $w$
+\end_inset 
+
+ terms are of magnitude 
+\begin_inset Formula $1/q^{2}$
+\end_inset 
+
+ which would make it hard to directly compare different values of 
+\begin_inset Formula $x.$
+\end_inset 
+
+ So instead, we introduce a 'normalized' variant: 
+\begin_inset Formula $\nu_{e}(x=p/q,w)=x+q^{2}[x_{e}(w)-x]$
+\end_inset 
+
+ and similarly 
+\begin_inset Formula $\nu_{o}(x,w)$
+\end_inset 
+
+.
+ This is done below, for 200 evenly spaced values ov 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ On the horizontal axis is 
+\begin_inset Formula $x$
+\end_inset 
+
+ running from 0 to 1, and along the vertical axis, 
+\begin_inset Formula $w$
+\end_inset 
+
+, from 0 at bottom to 1 at top:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-x-even-thin.png
+
+\end_inset 
+
+
+\layout Standard
+
+Clearly, it can be seen that 
+\begin_inset Formula $\nu_{e}(x,w)$
+\end_inset 
+
+ is a monotonically increasing function of 
+\begin_inset Formula $w$
+\end_inset 
+
+, which follows easily by examining the partial sums: if 
+\begin_inset Formula $w<z$
+\end_inset 
+
+ then 
+\begin_inset Formula $r_{N}(w)=a_{N}+w<r_{N}(z)=a_{N}+z$
+\end_inset 
+
+ and 
+\begin_inset Formula $r_{N-1}(w)=a_{N-1}+1/r_{N}(w)>r_{N-1}(z)=a_{N-1}+1/r_{N}(z)$
+\end_inset 
+
+.
+ Each iteration will reverse the inequality; but 
+\begin_inset Formula $\nu_{e}$
+\end_inset 
+
+ by definition has an even number of terms, and thus 
+\begin_inset Formula $\nu_{e}(w)<\nu_{e}(z)$
+\end_inset 
+
+.
+ QED.
+ Note this would be extremely non-obvious if one just considered that 
+\begin_inset Formula $\nu$
+\end_inset 
+
+ is a rational polynomial.
+\layout Standard
+
+One finds a mirror symmetry between the even and odd forms: 
+\begin_inset Formula $\nu_{o}(x,w)=-\nu_{e}(1-x,w)$
+\end_inset 
+
+, which is also not quite obvious, given the construction.
+ Its is clear from this picture that the leading 
+\begin_inset Formula $w$
+\end_inset 
+
+ and 
+\begin_inset Formula $w^{2}$
+\end_inset 
+
+ terms dominate.
+ We can guess at the form of these terms: we define 
+\begin_inset Formula $\mu_{e}(x,w)=\nu_{e}(x,w)-w+w^{2}-w^{3}/2$
+\end_inset 
+
+ and graph it below, exposing the randomness of the cubic and higher terms
+ directly.
+ 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gap-x-even-thin-nolead.png
+
+\end_inset 
+
+
+\layout Standard
+
+The seeming parallel-ness of some trajectories is an optical illusion, due
+ to the pixelization of the picture.
+ There are more pictures, with a greater numnber of strands, at the 
+\begin_inset LatexCommand \htmlurl[Gap Room]{http://www.linas.org/art-gallery/farey/gap-room/gap-room.html}
+
+\end_inset 
+
+.
+\layout Subsection
+
+Exact Expressions for the Gap Size
+\layout Standard
+
+The size of the gap can be given an exact expression in terms of the convergents
+ of the continued fraction.
+ Performing this excercise will help explain some of the fractal behaviour
+ seen in the pervious sections.
+ 
+\layout Standard
+
+One gets the convergent of a continued fraction by evaluating the fraction
+ only up to the n'th term, and expressing it as a ratio 
+\begin_inset Formula $p_{n}/q_{n}$
+\end_inset 
+
+.
+ The convergents can be expressed recursively:
+\begin_inset Formula \[
+p_{n}=a_{n}p_{n-1}+p_{n-2}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+q_{n}=a_{n}q_{n-1}+q_{n-2}\]
+
+\end_inset 
+
+ where we anchor the iteration by defining 
+\begin_inset Formula $p_{-2}=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{-1}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{-2}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{-1}=0$
+\end_inset 
+
+.
+ Iterating, the next few terms are 
+\begin_inset Formula $p_{0}=a_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{1}=a_{0}a_{1}+1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{0}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{1}=a_{1}$
+\end_inset 
+
+.
+ Here we adopted a slightly extended notation from before, defining 
+\begin_inset Formula $a_{0}$
+\end_inset 
+
+ as the integer part of the fraction; 
+\shape italic 
+i.e.
+
+\shape default 
+ 
+\begin_inset Formula $x=a_{0}+1/(a_{1}+1/(a_{2}+...))\equiv[a_{0};a_{1},a_{2},...]$
+\end_inset 
+
+.
+ We then have the convergent:
+\begin_inset Formula \[
+[a_{0};a_{1},a_{2},...,a_{N}]=\frac{p_{N}}{q_{N}}\]
+
+\end_inset 
+
+ Note also that for any 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset 
+
+, we have 
+\begin_inset Formula \[
+[a_{0};a_{1},a_{2},...,a_{N},y]=\frac{p_{N}y+p_{N-1}}{q_{N}y+q_{N-1}}\]
+
+\end_inset 
+
+ Note that the convergents have the property 
+\begin_inset Formula $q_{n}p_{n-1}-p_{n}q_{n-1}=\left(-1\right)^{n}$
+\end_inset 
+
+.
+ We can use the above to provide exact expressions for 
+\begin_inset Formula $x_{+}(w)$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{-}(w)$
+\end_inset 
+
+.
+ These are:
+\begin_inset Formula \[
+x_{+}(w)=\frac{p_{N}}{q_{N}}+\left(-1\right)^{N}\frac{w}{q_{N}^{2}\left(1+wq_{N-1}/q_{N}\right)}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+x_{-}(w)=\frac{p_{N}}{q_{N}}-\left(-1\right)^{N}\frac{w}{q_{N}^{2}\left(1+w\left(1-q_{N-1}/q_{N}\right)\right)}\]
+
+\end_inset 
+
+ We can then compute the gap explicitly as 
+\begin_inset Formula \[
+\Gamma_{x}(w)=x_{e}(w)-x_{o}(w)=\frac{w}{q_{N}^{2}}\left[\frac{2+w}{1+w+w^{2}\frac{q_{N-1}}{q_{N}}\left(1-\frac{q_{N-1}}{q_{N}}\right)}\right]\]
+
+\end_inset 
+
+ where no approximation has been made.
+ Expanding the denominator, we get 
+\begin_inset Formula \[
+T_{p/q}(0)=1-4\frac{q_{N-1}}{q_{N}}\left(1-\frac{q_{N-1}}{q_{N}}\right)\]
+
+\end_inset 
+
+ From this expression, the boundedness of 
+\begin_inset Formula $T$
+\end_inset 
+
+ follows immediately; this comes from the fact that 
+\begin_inset Formula $2q_{N-1}\leq q_{N}$
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+Proof that Gaps are Cauchy-dense on the Unit Square
+\layout Standard
+
+The incredible 'randomness' of the distribution, as well as its Cauchy-sequence-
+density on the unit square can now be easily understood.
+ To do this, consider the iteration of the map 
+\begin_inset Formula \[
+h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
+
+\end_inset 
+
+ This map has the property that lops off the leading term of the continued
+ fraction: 
+\begin_inset Formula $h([a_{1},a_{2},...])=[a_{2},a_{3},...]$
+\end_inset 
+
+ .
+ Iterating this map clearly gets one further and further into the continued
+ fraction, and it is clear that two points that start arbitrarily close
+ together will have orbits under this map that eventually become uncorrelated.
+ That is, this map clearly has a positive Lyapunov exponent for all irrationals.
+ (Homework: compute the Lyapunov exponent for this map).
+ 
+\layout Standard
+
+We can gain some intuition by comparing this map to the Bernoulli map 
+\begin_inset Formula \[
+b(x)=2x-\left\lfloor 2x\right\rfloor \]
+
+\end_inset 
+
+ which has the property of lopping off the leading digit of a binary expansion
+ of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ Again, two irrationals that start out arbitrarily close together will eventuall
+y have binary expansions that are uncorrelated and completly 'random'.
+ Even though one may know the first 
+\begin_inset Formula $N$
+\end_inset 
+
+ digits of the expansion, one cannot 'predict' the next digit of the expansion;
+ and this is what we mean when we say 'random' or 'uncorrelated'.
+ 
+\layout Standard
+
+As a side-note, I can't help noticing an interesting paradox concerning
+ the idea of 'randomness' in deterministic-chaos problems.
+ We would like to be able to say, that, when considering the entire set
+ of reals on the unit interval, that, when examining the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th binary digit in the expansion, that 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit is completely random, and is uniformly distributed (equipartition
+ of probability), with the probability of the digit being 0 being 1/2 and
+ the probability of it being 1 is also 1/2.
+ But of course, this statement is patently false, and therein lies the paradox.
+ We can, of course, trivially and exactly predict the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit, as the Bernoulli process is completely deterministic.
+ The 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit is trivially 
+\begin_inset Formula $e_{N}(x)=\left\lfloor 2^{N}x\right\rfloor -2\left\lfloor 2^{N-1}x\right\rfloor $
+\end_inset 
+
+ and 
+\begin_inset Formula $e_{N}(x)$
+\end_inset 
+
+ is a square-toothed comb.
+ One has this problem even for 
+\begin_inset Formula $N$
+\end_inset 
+
+ getting very large, and approaching infinity.
+ 
+\layout Standard
+
+I suppose there are two ways out of this paradox.
+ One way out is to say something like 
+\begin_inset Quotes eld
+\end_inset 
+
+Yea, Verily, Chooseth two Irrationals whose Binary Expansions are Completely
+ Uncorrelated
+\begin_inset Quotes erd
+\end_inset 
+
+, which sounds like an invocation of the Axiom of Choice.
+ Indeed, the set of computable numbers is countable, and is of measure zero
+ on the real number line.
+ In order to compute the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit of 
+\begin_inset Formula $x$
+\end_inset 
+
+, one must somehow already 'know' 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ Since the set of of unknowable numbers has measure one on the unit interval
+ of reals, one arguably must 'choose' if one is to get a truly 'random'
+ number.
+ 
+\layout Standard
+
+The other way out of the paradox is far more mundane, and seems constructive,
+ and that is to apply shop-worn statistical methods.
+ After all, chaos occurs in numerical simulations, and not in set theory.
+ Chaos is a computational phenomenon.
+ What we can say is that for any given real 
+\begin_inset Formula $y$
+\end_inset 
+
+ and 
+\begin_inset Formula $\delta>0$
+\end_inset 
+
+ and 
+\begin_inset Formula $\varepsilon>0$
+\end_inset 
+
+, one can always find an integer 
+\begin_inset Formula $N$
+\end_inset 
+
+ such that the average value of 
+\begin_inset Formula $e_{N}$
+\end_inset 
+
+ approaches 1/2 on the interval: that is, 
+\begin_inset Formula \[
+\left|\frac{1}{2}-\int_{y}^{y+\delta}e_{N}(x)dx\right|<\varepsilon\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Now, to move the conversation back to the iterated continued fraction map,
+ and that proof.
+ Blah Blah Blah.
+ To-Do: Provide the proof we promised.
+\layout Subsection
+
+The Gauss Kuz'min Wirsing Operator
+\layout Standard
+
+Note that a standard way of analysing the dynamics of deterministic chaotic
+ maps is to compute the Frobenius-Perron operator of the map, and solve
+ for its eigenvalues and eigenfunctions.
+ For the continued-fraction map, the Frobenius-Perron operator is known
+ as the Gauss-Kuz'min-Wirsing operator.
+ We'll return to this in a later section, were we present some exactly-solvable
+ analogs of the GKW operator.
+ Blah blah blah.
+ Write some more here.
+\layout Standard
+
+Note that I have another paper ready to go on the GKW and how it and the
+ Riemann Zeta are intertwined.
+ Its interesting that this is another connection between the Riemann Zeta
+ and chaotic dynamics.
+ I suspect that the relationship is very deep indeed.
+\layout Subsection
+
+The Parabolas in the Distribution
+\layout Standard
+
+The cause of the principal parabola seen in the pictures is now also clear.
+ Blah Blah Blah write this section too.
+ All work and no play makes Jack a dull boy...
+\layout Standard
+
+The main parabola that is visible is at 
+\begin_inset Formula $T_{p/q}(0)=4(x-1/2)^{2}$
+\end_inset 
+
+, which we can solve for directly to obtain 
+\begin_inset Formula $x=q_{N-1}/q_{N}$
+\end_inset 
+
+ and 
+\begin_inset Formula $x=1-q_{N-1}/q_{N}$
+\end_inset 
+
+ .
+ Recalling that by definition, 
+\begin_inset Formula $x\equiv p/q\equiv p_{N}/q_{N}$
+\end_inset 
+
+, we find that the rationals on the main parabola are given by 
+\begin_inset Formula $p_{N}=q_{N-1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{N}=q_{N}-q_{N-1}$
+\end_inset 
+
+.
+ Blah blah blah solve these equations.
+\layout Standard
+
+There are other parabolas visible as well, offset on other fractions.
+ Describe these as well.
+ Why are these rationals interesting? 
+\layout Subsection
+
+Iteration
+\layout Standard
+
+Note that 
+\begin_inset Formula $x_{+}(w)$
+\end_inset 
+
+ is the concatenation operator for continued fractions.
+ If 
+\begin_inset Formula $x=[a_{1},a_{2},...,a_{N}]$
+\end_inset 
+
+ and 
+\begin_inset Formula $w=[b_{1},b_{2},...]$
+\end_inset 
+
+ then 
+\begin_inset Formula $x_{+}(w)=[a_{1},a_{2},...,a_{N},b_{1},b_{2},...]$
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $x_{+}$
+\end_inset 
+
+ can be used to construct code-words.
+ Iterating 
+\begin_inset Formula $x_{+}(w)$
+\end_inset 
+
+ obviously does not yeild any periodic orbits, and instead converges to
+ a quadratic irrational that is the solution to 
+\begin_inset Formula $y=x_{+}(y)$
+\end_inset 
+
+.
+ From the theory of Pellian equations, if 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+ is even, then 
+\begin_inset Formula $y=-a_{N}/2+\sqrt{D}$
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $D$
+\end_inset 
+
+ where 
+\begin_inset Formula $a_{N}^{2}/4+a_{N}+1>D>a_{N}^{2}/4$
+\end_inset 
+
+.
+ 
+\layout Section
+
+Distributions Of Rationals on the Unit Interval
+\layout Standard
+
+The distribution of rationals on the unit interval is filled with surprises.
+ In High-School or College, one is told that the rationals are distributed
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+uniformly
+\begin_inset Quotes erd
+\end_inset 
+
+ on the unit interval.
+ If one considers the entire set 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+, then yes, this is true.
+ But if one considers just subsets, such as the subset of rationals with
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+small
+\begin_inset Quotes erd
+\end_inset 
+
+ denominators, then the distribution is far from uniform and full of counter-int
+uitive surprises, some of which we explore below.
+ These surprises imply that extrapolating from finite results to the set
+ of all rationals is a dangerous process (and here you thought the Axiom
+ of Choice was Scary).
+ 
+\layout Subsection
+
+Simple Counting
+\layout Standard
+
+Lets begin by listing all of the fractions with denomintors from 1 to N,
+ and numerators between 0 and the denomintor.
+ Clearly, there many of these fractions will be reducible, i.e.
+ the numerator and denominator have common factors, and thus, in this simple-min
+ded enumeration, some rationals are counted multiple times.
+ In particular, we'll count 0 over and over again: it will be in the list
+ as 0/1, 0/2, 0/3 and so on.
+ Likewise, 1 will appear in this list over and over: as 1/1, 2/2, 3/3, etc.
+ We'll have 1/2 also appearing as 2/4, 3/6 and so on.
+ So lets take a look at this in detail.
+ The graph below shows this enumeration, up to a denominator of N=4000,
+ carved up into 720 bins, and normalized to unit density.
+ That is, if 
+\begin_inset Formula $n/720<p/q<(n+1)/720$
+\end_inset 
+
+, then we assign the fraction 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ to the 
+\begin_inset Formula $n$
+\end_inset 
+
+'th bin.
+ We might expect this graph to have a huge peak at the bin n=360: after
+ all, this bin will hold 1/2 and 2/4 and 3/6 and in general should have
+ a big surfiet coming from the degeneracy at 1/2.
+ One mght expect peaks at 1/3, and 1/4 and etc, but smaller.
+ Here's the graph.
+\layout Standard
+
+Here's the density graph of the rationals that occur in this enumeration,
+ binned into 720 bins, up to a denominator of N=4000:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-720-4K.png
+
+\end_inset 
+
+
+\layout Standard
+
+Indeed, there is a big upwards spike at 1/2.
+ But there seems to be a big downwards spike just below, at bin 359, seemingly
+ of equal and opposite size.
+ This is the first surprise.
+ Why is there a deficit at bin 359? We can try to get a better picture of
+ things by dividing up the enumaration into 719 bins (note that 719 is prime).
+ This is results in the next surprise: the graph is flat.
+ See below:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-719-4K.png
+
+\end_inset 
+
+
+\layout Standard
+
+How can this graph possibly be flat? We should be massively overcounting
+ at 1/2, there should be a big peak there.
+ Maybe its drowned out by the blips at 0 and 1, so lets graph the same data,
+ but rescale more appropriately.
+ This is shown below:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-719-4K-rescale.png
+
+\end_inset 
+
+
+\layout Standard
+
+Hmm.
+ Curious.
+ There is indeed a peak at 1/2.
+ But there are also deficits symmetrically arranged at either side.
+ This is still confusing.
+ Well, at any rate, lets compare this to the distribution we 
+\begin_inset Quotes eld
+\end_inset 
+
+should have been using all along
+\begin_inset Quotes erd
+\end_inset 
+
+, where we eliminate all fractions that are reducible.
+ That is, we should count each rational only once.
+ This is graphed below, again, binned into 719 bins, for all irreducible
+ rationals with denominator less than or equal to 4000:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-719-4K-irred.png
+
+\end_inset 
+
+
+\layout Standard
+
+Wow! We no longer have a peak at 1/2.
+ In fact, it sure gives the impression that we are undercounting at 1/2!
+ Holy Banach-Tarski, Batman! What does it mean? Note also the graph is considera
+bly noiser.
+ Compare the scales on the left for a relative measure of the noise.
+ Part, but not all, of the noise is due to the smaller sample size: we are
+ counting fewer fractions: 4863602 are irreducible out of the simple list
+ of 8002000.
+ However, matching the sample sizes does not seem to significantly reduce
+ the small-amplitude noise: qualitatively speaking, the binning of irreducible
+ fractions seems much noisier.
+\layout Standard
+
+Curiously, binning into a non-prime number of bins does seem to reduce the
+ (small-amplitude) noise.
+ Below is the binning into 720 bins.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-720-4K-irred.png
+
+\end_inset 
+
+
+\layout Standard
+
+Following the usual laws of statistics, one expects that increasing the
+ sample size reduces the noise.
+ This is true in an absolute sense, but not a relative sense.
+ The graph below shows 720 bins holding all irreducible rationals with denominat
+ors less than 16000.
+ The absolute amplitude has been reduced by over a factor of ten compared
+ to the previous graphs; however, there is relatively far more power in
+ the higher frequencies.
+ There are also still-visible noise peaks near 1/2, 1/3, and 2/3'rds, as
+ well as at 0 and 1.
+ 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-720-16K-irred.png
+
+\end_inset 
+
+
+\layout Standard
+
+It sure would be nice to develop a generalized theory that can work with
+ these peculiar results, and in particular, giving insight into what's happening
+ near 1/2 and giving a quantitative description of the spectra near 1/3
+ and 2/3, etc.
+ In particular, the very first graph of this section has very clear self-similar
+ity properties; its very much a fractal, more obviously so than the later
+ graphs.
+ What is the fractal dimension? What is the symmetry group involved? Is
+ it indeed a subgroup of the Modular Group, as the following chapter would
+ seem to suggest? (this should be an easy qustion to answer, I just haven't
+ done the calculation yet).
+ More importantly, why does the modular group show up when one is counting
+ rationals? What is it about rational numbers that makes them so hyperbolic?
+\layout Standard
+
+As a side-effect, 
+\the_end
