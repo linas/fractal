@@ -53,6 +53,7 @@ class PathIntegral
 
       double shooter[3]; // direction of source
       double phi;        // direction angle
+      double theta;      // direction angle
 
       complex<double> *side_amplitude;
       complex<double> *front_amplitude;
@@ -82,6 +83,9 @@ PathIntegral::PathIntegral (int px, int py)
    oversample = 1.0;
    omega = 1.0;
 
+   phi = 0.0;
+   theta = 0.0;
+
    nx = px;
    ny = py;
 
@@ -108,6 +112,10 @@ PathIntegral::PathIntegral (int px, int py)
    Init ();
    for (i=0; i<nx*ny; i++)
    {
+      side_count[i] = 0;
+      front_count[i] = 0;
+      back_count[i] = 0;
+
       side_intensity[i] = 0.0;
       front_intensity[i] = 0.0;
       back_intensity[i] = 0.0;
@@ -132,9 +140,6 @@ PathIntegral::Init (void)
       side_amplitude[i] = 0.0;
       front_amplitude[i] = 0.0;
       back_amplitude[i] = 0.0;
-      side_count[i] = 0;
-      front_count[i] = 0;
-      back_count[i] = 0;
    }
 }
 
@@ -156,12 +161,19 @@ PathIntegral::TraceToroid(void)
    int ox = (int) (oversample * ((double) nx));
    int oy = (int) (oversample * ((double) ny));
 
-   double co = cos (phi);
-   double si = sin (phi);
+   double cop = cos (phi);
+   double sip = sin (phi);
+
+   double cot = cos (theta);
+   double sit = sin (theta);
 
    // rotate by phi radians around y axis
-   double tmp =  co*shooter[0] + si*shooter[2];
-   shooter[2] = -si*shooter[0] + co*shooter[2];
+   double tmp =  cop*shooter[0] + sip*shooter[2];
+   shooter[2] = -sip*shooter[0] + cop*shooter[2];
+   shooter[0] = tmp;
+
+   tmp        =  cot*shooter[0] + sit*shooter[1];
+   shooter[1] = -sit*shooter[0] + cot*shooter[1];
    shooter[0] = tmp;
 
    // project rays from source
@@ -183,8 +195,12 @@ PathIntegral::TraceToroid(void)
          pixel[2] = 13.0;
 
          // rotate by phi radians around y axis
-         tmp      =  co*pixel[0] + si*pixel[2];
-         pixel[2] = -si*pixel[0] + co*pixel[2];
+         tmp      =  cop*pixel[0] + sip*pixel[2];
+         pixel[2] = -sip*pixel[0] + cop*pixel[2];
+         pixel[0] = tmp;
+
+         tmp      =  cot*pixel[0] + sit*pixel[1];
+         pixel[1] = -sit*pixel[0] + cot*pixel[1];
          pixel[0] = tmp;
 
          sr.Init();
@@ -276,6 +292,7 @@ PathIntegral::TraceToroid(void)
              n = side_count [nx*py+px];
              side_raylens[nx*py+px][n] = sr.distance;
              side_count [nx*py+px] ++;
+printf ("shoter %d %d shot  %d %d len=%f\n", i,j, px, py, sr.distance);
           
 #if 0
 printf ("duude ph= %f ", phase);
@@ -290,7 +307,7 @@ printf ("duude amp= %f\n", abs<double>(amplitude [nx*py+px]));
          if (0 == i % (int)oversample) { printf ("."); fflush (stdout); }
       } else
       {
-         if (0 == i) { printf ("."); fflush (stdout); }
+         { printf ("."); fflush (stdout); }
       }
    }
 
@@ -309,13 +326,19 @@ PathIntegral::AccumIntensity (void)
          double re = real (side_amplitude[i]) / ((double) side_count[i]);
          double im = imag (side_amplitude[i]) / ((double) side_count[i]);
          side_intensity[i] += re*re+im*im;
+      }
 
-         re = real (front_amplitude[i]) / ((double) front_count[i]);
-         im = imag (front_amplitude[i]) / ((double) front_count[i]);
+      if (0 < front_count[i])
+      {
+         double re = real (front_amplitude[i]) / ((double) front_count[i]);
+         double im = imag (front_amplitude[i]) / ((double) front_count[i]);
          front_intensity[i] += re*re+im*im;
+      }
 
-         re = real (back_amplitude[i]) / ((double) back_count[i]);
-         im = imag (back_amplitude[i]) / ((double) back_count[i]);
+      if (0 < back_count[i])
+      {
+         double re = real (back_amplitude[i]) / ((double) back_count[i]);
+         double im = imag (back_amplitude[i]) / ((double) back_count[i]);
          front_intensity[i] += re*re+im*im;
       }
 
@@ -336,9 +359,11 @@ PathIntegral::SumRays (double k)
 
    for (int i=0; i<nx*ny; i++)
    {
+printf ("i=%d\n", i);
       for (int nr=0; nr<side_count[i]; nr++)
       {
          double phase = k * side_raylens[i][nr];
+printf ("i=%d nr=%d ph=%f\n", i, nr, phase);
          side_amplitude [i] += myexp (phase);
       }
    }
@@ -397,6 +422,9 @@ main (int argc, char * argv[])
    v.max_distance = maxdist;
    v.niterations = niter;
    v.max_manhattan = manhat;
+
+   v.phi = 0.5 * M_PI * (sqrt(5.0)-1.0) * 0.5;
+   v.theta = 0.1;
 
    // v.Trace();
    v.TraceToroid();
