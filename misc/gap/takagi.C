@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <gsl/gsl_sf_zeta.h>
 #include "Farey.h"
 
 ContinuedFraction far;
@@ -149,7 +150,7 @@ long double iter_tak (long double w, long double x)
 }
 
 /* The main, core basic takagi curve */
-// XXX thre triangle is accureate only to 50 bits or so,
+// XXX the triangle is accureate only to 50 bits or so,
 // so any further and we need arbit-precision.
 // which means that this func is not accurate below s=1.5 or so.
 long double dirichlet_takagi (long double s, long double x)
@@ -166,8 +167,9 @@ long double dirichlet_takagi (long double s, long double x)
 		// long double term = tw* parabola_up (tp*x);
 		acc += term;
 		tp *= 2.0L;
-		if (1.0e-6 > tw) break;
+		if (1.0e-16 > tw) break;
 	}
+printf ("duude last term=%d  %g\n", k, pow (k, -s));
 
 	return acc;
 }
@@ -503,7 +505,7 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 2048;
-	int nmax = 1523;
+	int nmax = 12;
 
 	if (argc <2)
 	{
@@ -515,10 +517,12 @@ main (int argc, char *argv[])
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
-		double ts = isola (w, x);
+		// double ts = isola (w, x);
 		// double tw = takagi (w, x);
-		double tw = dirichlet_takagi (w, x);
 		// double tw = iter_tak (w, x);
+
+		double tw = dirichlet_takagi (w, x);
+		double ts = 2.0*gsl_sf_zeta (w) / 3.0 -0.5 - pow(2.0, -w)/3.0;
 
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
