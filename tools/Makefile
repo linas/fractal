@@ -1,30 +1,24 @@
 
-#
-# Linas Vepstas dec 1994
-
-TOP = /usr/home/src/tools
+REALTOP = /clone/tools
 
 all: 
-	cd $(TOP)/src/libs/file; make
-	cd $(TOP)/src/libs/stoch; make
-	cd $(TOP)/src/libs/spectra; make
-	cd $(TOP)/src/cmds; make 
-
+	cd $(REALTOP)/src/libs/file; make TOP=$(REALTOP)
+	cd $(REALTOP)/src/libs/stoch; make TOP=$(REALTOP)
+	cd $(REALTOP)/src/libs/spectra; make TOP=$(REALTOP)
+	cd $(REALTOP)/src/cmds; make  TOP=$(REALTOP)
 
 clean: 
-	cd $(TOP)/src/libs/file; make clean
-	cd $(TOP)/src/libs/stoch; make clean
-	cd $(TOP)/src/libs/spectra; make clean
-	cd $(TOP)/src/cmds; make clean 
-
+	cd $(REALTOP)/src/libs/file; make clean TOP=$(REALTOP)
+	cd $(REALTOP)/src/libs/stoch; make clean TOP=$(REALTOP)
+	cd $(REALTOP)/src/libs/spectra; make clean TOP=$(REALTOP)
+	cd $(REALTOP)/src/cmds; make clean  TOP=$(REALTOP)
+	cd $(REALTOP)/lib; make clean  TOP=$(REALTOP)
+	cd $(REALTOP)/bin; make clean  TOP=$(REALTOP)
 
 realclean: 
-	cd $(TOP)/src/libs/file; make realclean
-	cd $(TOP)/src/libs/stoch; make realclean
-	cd $(TOP)/src/libs/spectra; make realclean
-	cd $(TOP)/src/cmds; make realclean 
-	cd $(TOP)/lib; rm -f *
-	cd $(TOP)/bin; rm -f *
-	cd $(TOP)/inc; rm -f *
-
-
+	cd $(REALTOP)/src/libs/file; make realclean TOP=$(REALTOP)
+	cd $(REALTOP)/src/libs/stoch; make realclean TOP=$(REALTOP)
+	cd $(REALTOP)/src/libs/spectra; make realclean TOP=$(REALTOP)
+	cd $(REALTOP)/src/cmds; make realclean  TOP=$(REALTOP)
+	cd $(REALTOP)/lib; make realclean  TOP=$(REALTOP)
+	cd $(REALTOP)/bin; make realclean  TOP=$(REALTOP)
