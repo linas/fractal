@@ -52,8 +52,6 @@ class SinaiStats
 
 SinaiStats::SinaiStats (int px, int py)
 {
-   int i, j;
-
    nx = px;
    ny = py;
 
@@ -63,11 +61,26 @@ SinaiStats::SinaiStats (int px, int py)
 
    sr = new SinaiRay [nx*ny];
 
+   Init ();
+}
+
+/* ==================================== */
+
+void
+SinaiStats::Init(void)
+{
+   int i, j;
+
    // project rays from eyepoint 
    for (i=0; i<nx; i++) {
       for (j=0; j<ny; j++) {
+
+      	sr[nx*j+i].Init();
+
          double pixel[3];
          double dir[3];
+
+
          pixel[0] = 2.0 * (((double) i) + 0.51333)/ ((double) nx) - 1.0;
          pixel[1] = 2.0 * (((double) j) + 0.51666)/ ((double) ny) - 1.0;
          pixel[2] = 1.0;
@@ -76,18 +89,6 @@ SinaiStats::SinaiStats (int px, int py)
          sr[nx*j+i].last_wall = 4;
 
       }
-   }
-}
-
-/* ==================================== */
-
-void
-SinaiStats::Init(void)
-{
-   int i;
-   for (i=0; i<nx*ny; i++) 
-   {
-      sr[i].Init();
    }
 }
 
@@ -112,6 +113,8 @@ SinaiStats::TraceToroid(void)
    for (i=0; i<nx*ny; i++) 
    {
       SinaiBox::TraceToroid (sr[i]);
+// if (0 == i%nx) { printf ("."); fflush (stdout); }
+{ printf (".\n"); fflush (stdout); }
    }
 }
 
