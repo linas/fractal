@@ -1,6 +1,6 @@
 ############### Symbol Definitions ###################### 
 
-INCLUDES =	/usr/include/X11
+INCLUDES =	-I/usr/include/X11 
 LIBS =		/usr/lib
 # XLIB =		$(LIBS)/libX11.a \
 #		$(LIBS)/libbsd.a \
@@ -8,7 +8,7 @@ LIBS =		/usr/lib
 
 XLIB =		$(LIBS)/libX11.a 
 
-CC = cc -Wall -O2 -I$(INCLUDES)
+CC = cc -Wall -O2 $(INCLUDES)
 
 EXES = stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
@@ -52,7 +52,8 @@ card: card.c  util.o
 	$(CC) -o card card.c util.o -lm
 
 draw: draw.c  util.o
-	$(CC) -o draw -I /src/tools/inc draw.c util.o -lm
+	$(CC) -o draw -I /home/linas/linas/fractal-tools/inc draw.c util.o /home/linas/linas/fractal-tools/lib/Farey.o -lm
+#	$(CC) -o draw -I /src/tools/inc draw.c util.o -lm
 #	$(CC) -o draw -I /src/tools/inc draw.c util.o /src/tools/lib/Farey.o -lm
 
 sum: sum.c  util.o opers.o
