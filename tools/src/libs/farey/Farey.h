@@ -26,6 +26,7 @@ class ContinuedFraction
       ContinuedFraction (void);
       void SetReal (double);
       void SetRatio (int num, int deno);
+		void SetEvenize (void);
 
       void Print (void);
       int GetNumTerms (void);
@@ -94,6 +95,8 @@ class ContinuedFraction
       int cutoff;           /* used to avoid instability when converting
                              * floating point numbers */
 
+		int evenize;          /* If set, work with continued fractions 
+                             * that have even number of terms */
       double partial[32];   /* scratch area of partial values */
       ContinuedFraction *scratch;
 };
@@ -101,6 +104,7 @@ class ContinuedFraction
 
 extern double Inverse (void *, double (*)(void *, double), double);
 
+extern double InvFarey (double);
 extern double InvZReal (double, double);
 
 

@@ -57,6 +57,7 @@ ContinuedFraction::ContinuedFraction (void)
 #endif /* LINUX */
 
    SetReal (0.0);
+	evenize = 0;
 }
 
 /* ------------------------------------------------------------ */
@@ -125,12 +126,10 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
           * an even number of terms.  Huh?? Why do we do this?? 
           */
          if (n == 0) {
-#if 0
-            if (i%2 == 0) {
+            if (evenize && (i%2 == 0)) {
                tinued_frac [i] -= 1;
                tinued_frac [i+1] = 1;
             }
-#endif
             break;
          }
       }
@@ -190,6 +189,12 @@ ContinuedFraction::GetNumTerms (void)
    return nterms;
 }
 
+void
+ContinuedFraction::SetEvenize (void)
+{
+	evenize=1;
+}
+
 /* ------------------------------------------------------------ */
 /* compute Farey Number from continued fraction.
  * Algorithm used here does base2 arithmetic by bit-shifting. 
@@ -203,6 +208,13 @@ ContinuedFraction::ToFarey (void)
    int first_term;
    int i, j, k;
    unsigned int f, o;
+
+	/* Reconvert, must have even fracs */
+	if (0 == evenize)
+	{
+		evenize = 1;
+		SetRatio (num, denom);
+	}
 
    /* twidle the first bit */
    if (num != 0) {
@@ -1271,6 +1283,40 @@ double Inverse (void *cxt, double (*func)(void *, double), double val)
 }
 
 /* ------------------------------------------------------------ */
+/* computes inverse of Farey (Minkowski) mapping */
+
+double InvFarey_f (void * stru, double val) 
+{
+	ContinuedFraction *fp;
+
+   fp = (ContinuedFraction *) stru;
+    
+   fp->SetReal (val);
+   double retval = fp->ToFarey ();
+
+   return retval;
+}
+
+double InvFarey (double val) 
+{
+	ContinuedFraction f;
+   double retval;
+   int intpart;
+
+	f.SetEvenize();
+
+   intpart = (int) val;
+   if (0.0 > val) intpart --;
+   val -= (double) intpart;
+
+   retval = Inverse (((void *) &f), InvFarey_f, val);
+
+   retval += (double) intpart;
+
+   return retval;
+}
+
+/* ------------------------------------------------------------ */
 /* computes inverse of Zreal mapping */
 
 struct InvZReal_s {
@@ -1286,8 +1332,7 @@ double InvZReal_f (void * stru, double val)
    sp = (struct InvZReal_s *) stru;
     
    sp->fp.SetReal (val);
-   // retval = sp->fp.ToZReal (sp->zee);
-   retval = sp->fp.ToFarey ();
+   retval = sp->fp.ToZReal (sp->zee);
 
    return retval;
 }
