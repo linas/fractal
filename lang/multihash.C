@@ -1,4 +1,4 @@
-
+//
 // FILE:
 // multihash.C
 //
@@ -10,6 +10,7 @@
 
 #include "multihash.h"
 
+// ------------------------
 #define lagGenericWordTable lagWordPairTable
 #define LAG_TWO_WORD
 #define LAG_WORD_TUPLE 2
@@ -54,3 +55,40 @@
 #undef LAG_SIX_WORD
 #undef LAG_WORD_TUPLE
 
+// ========================================================
+// ------------------------
+#define lagGenericWordTable lagWordPairTable
+#define lagGenericConcordTable lagConcordPairTable
+#include "concord.C"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
+
+// ------------------------
+#define lagGenericWordTable lagWordTripleTable
+#define lagGenericConcordTable lagConcordTripleTable
+#include "concord.C"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
+
+// ------------------------
+#define lagGenericWordTable lagWordQuadTable
+#define lagGenericConcordTable lagConcordQuadTable
+#include "concord.C"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
+
+// ------------------------
+#define lagGenericWordTable lagWordQuintTable
+#define lagGenericConcordTable lagConcordQuintTable
+#include "concord.C"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
+
+// ------------------------
+#define lagGenericWordTable lagWordHexTable
+#define lagGenericConcordTable lagConcordHexTable
+#include "concord.C"
+#undef lagGenericConcordTable 
+#undef lagGenericWordTable 
+
+// ================== END OF FILE ==================
