@@ -47,13 +47,6 @@ This paper is part of a set of chapters that explore the relationship between
 Sketchbook on Differentiability
 \layout Standard
 
-The set of square-integrable functions is a strange beast.
- 
-\layout Subsection
-
-The Generalized Takagi Curve
-\layout Standard
-
 In previous chapters, we looked at the Takagi curve 
 \begin_inset Formula \begin{equation}
 t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\label{eq:}\end{equation}
@@ -64,7 +57,7 @@ where
 \begin_inset Formula $\tau(x)$
 \end_inset 
 
- is the triangle function:
+ is the triangle-wave function:
 \begin_inset Formula \begin{equation}
 \tau(x)=\left\{ \begin{array}{ccc}
 2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
@@ -72,7 +65,48 @@ where
 
 \end_inset 
 
+ We saw that this curve has several interesting properties.
+ First, as a curve, it is self-similar, that is, it is a fractal, and that
+ the (semi-)group of its self-similarities is a subset of the Modular Group
  
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ During the analysis of the self-similarity properties of this curve, functions
+ that are non-flat only on Cantor sets occur naturally.
+ These occure because of a deep connection between the representation of
+ the rational numbers as dyadics and the Modular Group.
+ The triangle wave is also special in that it stays self-similar through
+ iteration; that is, 
+\begin_inset Formula $(\tau\diamond\tau)(x)\equiv\tau^{2}(x)=\tau(2x)$
+\end_inset 
+
+ and generally, iterating on it 
+\begin_inset Formula $k$
+\end_inset 
+
+ times gives 
+\begin_inset Formula $\tau^{k}(x)=\tau(2^{k-1}x)$
+\end_inset 
+
+.
+ Thus, it provides an opening through which iteration can be studied.
+ Trajectories of this iterated map are chaotic.
+ The tent map is isomorphic to the Bernoulli map, which is an exactly solvable
+ model of deterministic chaos.
+ The eigenfunctions of the transfer operator of the Bernoulli Map are given
+ by the Bernoulli Polynomials, and, more generally, by the Hurwitz Zeta.
+ Thus, the triangle function is central to many interesting inter-related
+ phenomena and is thus it is worthwhile of deeper study.
+\layout Standard
+
+In this chapter, we attempt to study classes of functions that generalize
+ the Takagi Curve.
+ 
+\layout Subsection
+
+The Generalized Takagi Curve
 \layout Standard
 
 Let us now consider the broader class of functions.
@@ -112,6 +146,9 @@ As we saw previously, the sequence
  is a parabola.
  Thus, we are lead to ask: what other series lead to continuous and/or different
 iable functions? 
+\layout Subsection
+
+The Projection Operator
 \layout Standard
 
 We can try to approach this question by thinking of the space for which
@@ -119,40 +156,34 @@ We can try to approach this question by thinking of the space for which
  on this space, and then thinking of the identity operator as a projection
  operator from a larger space.
  That is, consider the basis vector 
-\begin_inset Formula $|\tau>xxxx$
+\begin_inset Formula $\left|\tau k\right\rangle $
 \end_inset 
 
-
-\layout Subsection
-
-Iteration
-\layout Standard
-
-Of the many possible different choices for 
-\begin_inset Formula $f(x)$
-\end_inset 
-
-, the triangle wave is special in that it stays self-similar through iteration;
- that is, 
-\begin_inset Formula $(\tau\diamond\tau)(x)\equiv\tau^{2}(x)=\tau(2x)$
-\end_inset 
-
- and generally, iterating on it 
-\begin_inset Formula $k$
-\end_inset 
-
- times gives 
-\begin_inset Formula $\tau^{k}(x)=\tau(2^{k-1}x)$
-\end_inset 
-
-.
- Thus, we may write 
-\begin_inset Formula \begin{equation}
-t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau^{k+1}(x)\label{eq:tee-w}\end{equation}
+ which has the coordinate-space components 
+\begin_inset Formula \[
+\left\langle x|\tau k\right\rangle =\tau\left(2^{k}x\right)\]
 
 \end_inset 
 
+ We then want to define the operator 
+\begin_inset Formula \[
+\mathbb{I}_{T}=\sum_{k=0}^{\infty}\left|\tau k\right\rangle \left\langle \tau k\right|\]
 
+\end_inset 
+
+ that acts as the identity on 
+\begin_inset Formula $t_{A}$
+\end_inset 
+
+, that is, 
+\begin_inset Formula $\mathbb{I}_{T}t_{A}=t_{A}$
+\end_inset 
+
+ and acts as a projection function when applied to functions from larger
+ spaces.
+ The goal here is to describe the kernel (pre-image) and the image of this
+ operator.
+ 
 \layout Subsection
 
 Other scales
