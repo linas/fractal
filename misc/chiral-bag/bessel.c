@@ -12,6 +12,7 @@
 ******************************************************************/
 
 #include <math.h>
+#include "bessel.h"
 
 /* ================================================================== */
 /*
@@ -46,11 +47,11 @@ C               BOUNDING ARGUMENT (WHICH MAY BE QUITE LARGE, FOR LARGE ORDERS)
 
 #define fmax(x,y) ((x)>(y))?(x):(y)
 
-int 
+static int 
 BesselRecurrenceStartRegion (double z, int norder)
 {
-	int nstart;
-	double az, an, zmin;
+	int nstart, iaz;
+	double az, an, zmin, peritr;
 
 	az = fabs(z);
 	an = (double)(norder + 1);
@@ -87,7 +88,7 @@ bessel (int n, double x, double *bess)
 {
 #define ARRSZ 650
 	double tmp [ARRSZ];
-	int i, m, mon[ARRSZ];
+	int i, m, nstart, mon[ARRSZ];
 	double c, z, oneoz, scale;
 
 /*
@@ -110,12 +111,12 @@ C       SEE COMMENT CARDS IN THE SUBROUTINE "BesselRecurrenceStartRegion"
 	oneoz = 1.0/z;
 	for (i=nstart-1; i>0; i--)
 	{
-		tmp [i-1] = oneoz * ((double) (2*i+1) * tmp[i] - tmp [i+1];
+		tmp [i-1] = oneoz * ((double) (2*i+1)) * tmp[i] - tmp [i+1];
 		mon [i-1] = mon [i];
 		if (fabs (tmp [i-1]) > 1.0E+20)
 		{
-			tmp [i] = tmp [i] * 1.0D-30;
-			tmp [i-1] = tmp [i-1] * 1.0D-30;
+			tmp [i] = tmp [i] * 1.0E-30;
+			tmp [i-1] = tmp [i-1] * 1.0E-30;
 			mon [i] = mon [i+1] + 30;
 			mon [i-1] = mon [i];
 		}
@@ -139,6 +140,7 @@ C       BESS (I) = C * TMP(I) * (10.0D0 ** (MON(I)-M))
 }
 
 #if 0
+/***
 C       ******************************************************************
 
         SUBROUTINE BESSNEU (N, X, BREGULAR, BIRREG)
@@ -375,4 +377,5 @@ C       FOR N=0, THEN NEU (-1) IS SET TO ZERO
         END
 
 C       ************************************************************
+**/
 #endif
