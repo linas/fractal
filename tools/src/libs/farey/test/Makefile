@@ -29,12 +29,6 @@ realclean:	clean
 	$(CC) -o $* $< $(LIB)/Farey.o -lm -lstdc++
 
 ################## Dependencies and compile/link #########
-# fairy
-# 	(Jan 1994) excercise Farey Number converter
-#
-fairy: fairy.C $(LIB)/Farey.o $(INC)/Farey.h
-	$(CC) -o fairy fairy.C $(LIB)/Farey.o -lm
-
 # elist
 # 	(Jan 1994) excercise Farey Number converter
 #

@@ -23,20 +23,22 @@ main (int argc, char *argv[])
    int i, n, m, d;
    int nume, deno;
 
-   if (argc <4) {
+   if (argc <2) {
       printf ("Usage: %s <n> <nume> <m> <a>\n", argv[0]);
       exit (1);
    }
 
    n = atoi (argv[1]);
+   deno = n;
 
-   nume = atoi (argv[2]);
-   m = atoi (argv[3]);
-   d = atoi (argv[4]);
+   // nume = atoi (argv[2]);
+   // m = atoi (argv[3]);
+   // d = atoi (argv[4]);
 
-   for (i = 1; i <= n; i ++) 
+   for (i = 1; i < n; i ++) 
    {
-      deno = m*i+d;
+      // deno = m*i+d;
+      nume = i;
       x = ((double) nume) / ((double) deno);
       f.SetRatio (nume, deno);
       v = f.ToZRealGap ();
@@ -49,6 +51,8 @@ main (int argc, char *argv[])
       }
       // printf ("%d	%g	%g	%g\n", deno, x, v, t);
       fflush (stdout);
+
+
    }
 
    printf ("excellent!\n");
