@@ -59,7 +59,7 @@ PrintPart (Part *p)
 void
 PrintTerm (Term *t)
 {
-	if (0 == t->coeff) return;
+	// if (0 == t->coeff) return;
 
 	if (1 == t->coeff && NULL != t->parts)
 	{
@@ -372,7 +372,7 @@ static gint IsSame_Term (const Term *ta, const Term *tb)
 
 /* ======================================================== */
 
-void MergeTerms (Expr *e)
+static void MergeTerms (Expr *e)
 {
 	OrderTerm_E (e);
 	GList *en;
@@ -396,9 +396,27 @@ restart:
 	}
 }
 
+static void KillZeroTerms (Expr *e)
+{
+	GList *en;
+
+restart:
+	for (en = e->terms; en; en=en->next)
+	{
+		Term *ta = en->data;
+		if (0 == ta->coeff)
+		{
+			e->terms = g_list_remove_link (e->terms, en);
+			g_free (ta); // xx memleak,delete parts too
+			goto restart;
+		}
+	}
+}
+
 void SimplifyExpr (Expr *e)
 {
 	MergeTerms(e);
+	KillZeroTerms (e);
 }
 
 /* ======================================================== */
@@ -535,7 +553,25 @@ Expr * Christoffel (int i, int k, int l)
 		cr = Add_E_E (cr, mt);
 	}
 
+	SimplifyExpr (cr);
+	/* hack divide by 2 */
+	Term *t = cr->terms->data;
+	t->coeff /= 2;
 	return cr;
+}
+
+/* ======================================================== */
+
+Expr * Ricci (int i, int k)
+{
+	int l,m;
+
+	Expr *ri = NULL;
+	for (l=0; l<2; l++)
+	{
+		Expr *c1 = Christoffel (l,i,k);
+	}
+	return ri;
 }
 
 /* ======================================================== */
