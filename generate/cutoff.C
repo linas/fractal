@@ -84,9 +84,13 @@ MakeHisto (
       sum_np += rp[i];
       sum_npp += rpp[i];
    }
-   printf ("itermax=%d tau=%g 1/tau=%g sum_n=%g sum_np=%g sum_npp=%g\n", 
-            itermax, tau, 1.0/tau, sum_n, sum_np, sum_npp);
+   printf ("itermax=%d tau=%g 1/tau=%g sum_n=%g tau*sum_n=%g\n", 
+            itermax, tau, 1.0/tau, sum_n, tau*sum_n);
+   printf ("sum_np=%g sum_npp=%g\n", sum_np, sum_npp);
    printf (" n^2=%g 2n^3=%g\n", sum_n*sum_n, 2.0*sum_n*sum_n*sum_n);
+	printf (" n - tau* (np - 0.5 * tau * npp) = %g\n",  sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+	printf (" tau*(n - tau* (np - 0.5 * tau * npp)) = %g\n",  tau*(sum_n - tau* (sum_np - 0.5 *
+tau * sum_npp)));
 
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0 / log(2.0);
@@ -211,9 +215,10 @@ MakeHisto (
          // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
 #endif
 
-#ifdef ZPRIME_PRIME_EXTRAPOLATION_NORMALIZED
+#ifdef ZPRIME_PRIME_DIVERGENT_PART
          /* --------------------------------------------------------- */
          /* the interesting one is the z-prime-prime */
+			/* This one does zpp/N i.e. the normalized divergent part */
          /* here we use a taylor expansion to extrapolate to tau=0 */
 			/* This one extrapolates zpp/norm and thus can show only divergent term */
 
@@ -275,13 +280,14 @@ MakeHisto (
 
 #endif
 
-#ifdef PLAIN_ZPP_DIVERGENCE_FREE
+// #define ZPP_MODULUS_DIVERGENCE_FREE
+#ifdef ZPP_MODULUS_DIVERGENCE_FREE
          /* --------------------------------------------------------- */
          /* the interesting one is the z-prime-prime */
-			/* This one subtracts divergence from zpp and goes to tau=0 */
-
+			/* This one subtracts divergence from modulus of zpp and goes to tau=0 */
          /* here, we subtract the leading divergence 
 			 * after computing teh modulus, not before. */
+
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
          mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
@@ -296,10 +302,35 @@ MakeHisto (
          glob [i*sizex +j] -= tau* ((mp-tmp*sum_np) - 0.5 * tau * (mpp-tmp*sum_npp));
 #endif
 
-#define PLAIN_OLD_Z_MINUS_DIVERGENCE
-#ifdef PLAIN_OLD_Z_MINUS_DIVERGENCE
+#define COMPLEX_ZPP_MINUS_DIVERGENCE
+#ifdef COMPLEX_ZPP_MINUS_DIVERGENCE
          /* --------------------------------------------------------- */
-         /* OK, lets do the taylor expansion for just-plain Z */
+         /* the interesting one is the z-prime-prime */
+			/* This one subtracts divergence from zpp before taking modulus */
+
+         /* The taylor expansion */
+			double zre = sum_ddre - tau *(sum_ddrep - 0.5 * tau *sum_ddrepp);
+			double zim = sum_ddim - tau *(sum_ddimp - 0.5 * tau *sum_ddimpp);
+
+			/* Divergence term == 0.25/ (0.25-c)^3/2  */
+         theta = -1.5 * atan2 (-im_position, 0.25-re_position);
+         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         mod = 0.25 * pow (mod, -0.75);
+         re = mod * cos(theta);
+         im = mod * sin(theta);
+
+         zre -= re * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+         zim -= im * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+
+         modulus = sqrt (zre*zre + zim*zim);
+
+         glob [i*sizex +j] = modulus;
+#endif
+
+// #define PLAIN_OLD_MODULUS_Z_MINUS_DIVERGENCE
+#ifdef PLAIN_OLD_MODULUS_Z_MINUS_DIVERGENCE
+         /* --------------------------------------------------------- */
+         /* OK, lets do the taylor expansion for just-plain modulus of Z */
 			/* Perform the tau expanstion to extrapolate */
          /* here, we subtract the leading divergence */
          modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
@@ -320,9 +351,43 @@ MakeHisto (
 
          re += 0.5;
          tmp = sqrt(re*re+im*im);
+
+			/* Fix to make it at 1/2 on the large left bulb */
          if (0.5 < tmp) tmp = 0.5;
 
          glob [i*sizex +j] -= tmp * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+#endif
+
+// #define COMPLEX_Z_MINUS_DIVERGENCE
+#ifdef COMPLEX_Z_MINUS_DIVERGENCE
+         /* --------------------------------------------------------- */
+         /* OK, lets do the taylor expansion for just-plain Z in full complex glory */
+			/* That is do it for z and not for the modulus */
+			/* Perform the tau expanstion to extrapolate */
+         /* here, we subtract the leading divergence */
+         
+         /* Now the taylor expansion */
+			double zre = sum_re - tau *(sum_rep - 0.5 * tau *sum_repp);
+			double zim = sum_im - tau *(sum_imp - 0.5 * tau *sum_impp);
+
+			/* Divergence term == 1/2 - sqrt (1/4-c)  */
+         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
+         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         mod = pow (mod, 0.25);
+         re = - mod * cos(theta);
+         im = - mod * sin(theta);
+         re += 0.5;
+
+			/* Fix to make it at 1/2 on the large left bulb */
+         tmp = sqrt(re*re+im*im);
+         if (0.5 < tmp) { re = -0.5; im = 0.0; }
+
+         zre -= re * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+         zim -= im * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+
+         modulus = sqrt (zre*zre + zim*zim);
+
+         glob [i*sizex +j] = modulus;
 #endif
 
 #if WHATEVER
