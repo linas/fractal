@@ -45,7 +45,8 @@ main(int argc, char *argv[])
 	for (i=0; i<BINSZ; i++)
 	{
 		bin[i] /= (double) max;
-		printf ("%d	%g\n", i, bin[i]);
+		double x = ((double) i) / ((double) BINSZ);
+		printf ("%8.6g	%g\n", x, bin[i]);
 	}
 
 }
