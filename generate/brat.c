@@ -105,100 +105,8 @@ glob[i*sizex+j] = 0.0; } else {glob[i*sizex+j]=0.9999;}
 
 /*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using 
- * the classic algorithm.  The actual formula is for the infinitessimal 
- * portion (i.e. the derivative is used as the test for escape) */
-
-void mandelbrot_infinitessimal_out (
-   float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
-   double	re_center,
-   double	im_center,
-   double	width,
-   int		itermax)
-{
-   unsigned int	i,j, globlen;
-   double		re_start, im_start, delta;
-   double		re_position, im_position;
-   int		loop=0;
-   double modulus=0.0, frac;
-   double escape_radius = 300.1;
-   double ren, tl;
-   int inf_count;
-
-   ren = log( log (escape_radius)) / log(2.0);
-   tl = 1.0/ log(2.0);
-   
-
-   delta = width / (double) sizex;
-   re_start = re_center - width / 2.0;
-   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
-   
-   globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.0;
-   
-   im_position = im_start;
-   for (i=0; i<sizey; i++) {
-      if (i%10==0) printf(" start row %d\n", i);
-      re_position = re_start;
-      for (j=0; j<sizex; j++) {
-         double re, im;
-         double inf_re, inf_im;
-         double tmp;
-
-/*
-printf ("\n\n");
-*/
-         re = re_position;
-         im = im_position;
-         inf_re = 1.0;
-         inf_im = 0.0;
-         inf_count = loop;
-         for (loop=1; loop <itermax; loop++) {
-            /* compute next infinitessimal */
-            tmp = 2.0 * (re*inf_re - im*inf_im) + 1.0;
-            inf_im = 2.0 * (re*inf_im + im*inf_re);
-            inf_re = tmp;
-
-            /* compute next mandelbrot iterate */
-            tmp = re*re - im*im + re_position;
-            im = 2.0*re*im + im_position;
-            re = tmp;
-
-            /* does the infinitessimal escape ? */
-            modulus = (inf_re*inf_re + inf_im*inf_im);
-/*
-printf ("dude %d (%f %f)=%f for (%f %f)=%f\n", loop, inf_re, inf_im, modulus, re, im, re*re+im*im);
-*/
-            if (modulus > escape_radius*escape_radius) inf_count = loop;
-            modulus = (re*re + im*im);
-            if (modulus > escape_radius*escape_radius) break;
-         }    
-
-         modulus = sqrt (modulus);
-         frac = log (log (modulus)) *tl;
-
-         /* frac =  Re (c/z*z) */
-         tmp = (re*re-im*im);
-         im = 2.0*re*im;
-         re = tmp;
-         frac = re*re_position + im*im_position;
-         frac /= re*re+im*im;
-         if (0.0 > frac) frac = -frac;
-         
-         glob [i*sizex +j] = frac; 
-         glob [i*sizex +j] = ((double) loop); 
-         glob [i*sizex +j] = (double) (loop-inf_count); 
-
-         re_position += delta;
-      }
-      im_position -= delta;  /*top to bottom, not bottom to top */
-   }
-}
-
-/*-------------------------------------------------------------------*/
-/* this routine fills in the exterior of the mandelbrot set using 
- * the classic algorithm. The derivative is used to play games.
+ * the classic algorithm. The derivative (infinitessimal flow) 
+ * is used to play games.
  */
 
 void dmandelbrot_out (
@@ -217,7 +125,7 @@ void dmandelbrot_out (
    double		dre, dim;
    int		loop;
    double modulus, phi, frac;
-   double escape_radius = 3453.5;
+   double escape_radius = 1.5e20;
    double ren, tl;
 
    ren = log( log (escape_radius)) / log(2.0);
@@ -241,10 +149,12 @@ void dmandelbrot_out (
          dre = 1.0;
          dim = 0.0;
          for (loop=1; loop <itermax; loop++) {
+            /* compute infinitessimal flow */
             tmp = 2.0 * (re*dre - im*dim) +1.0;
             dim = 2.0 * (re*dim + im*dre);
             dre = tmp;
 
+            /* compute iterate */
             tmp = re*re - im*im + re_position;
             im = 2.0*re*im + im_position;
             re = tmp;
@@ -259,8 +169,8 @@ void dmandelbrot_out (
          frac = ((double) loop) - frac + 1.0; 
 
          /* compute zprime/z */
-         tmp = re*dre + im*dim;
-         dim = re*dim - im*dre;
+         tmp = re*dre + im*dim;   /* divergence */
+         dim = re*dim - im*dre;   /* curl */
          dre = tmp;
          dre /= (re*re + im*im);
          dim /= (re*re + im*im);
@@ -276,8 +186,10 @@ void dmandelbrot_out (
          phi += M_PI;
          phi /= 2.0*M_PI;
         
+/*
          phi *= exp (((double) loop-5) / log(2.0));
          phi -= ((double) ((int) phi));
+*/
         
          glob [i*sizex +j] = phi;
 
@@ -1952,7 +1864,7 @@ main (int argc, char *argv[])
                   re_center, im_center, width, itermax); 
    
    if (!strcmp(argv[0], "inf"))
-   mandelbrot_infinitessimal_out (data, data_width, data_height,
+   dmandelbrot_out (data, data_width, data_height,
                   re_center, im_center, width, itermax); 
    
    if (!strcmp(argv[0], "manvert"))
