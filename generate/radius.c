@@ -32,12 +32,12 @@ void measure_radius (
 {
    unsigned int	i,j;
    double	deltar, rad, theta=0.0;
-   double	radius_cand;
-   double	radius_outer;
+   double	radius_cand;   /* minimum possible radius */
+   double	radius_outer;  /* escape at this radius */
    double	re_cg, im_cg;
    double	re_outer_cg, im_outer_cg;
-   double	radius_avg=0.0;
-   double	radius_min, radius_max;
+   double	radius_avg=0.0;     /* average over all samples */
+   double	radius_min, radius_max;  /* min and max radius over entire bud */
    double	radius_outer_avg=0.0;
    double	radius_outer_min, radius_outer_max;
    double	si, co;
@@ -60,6 +60,7 @@ void measure_radius (
    radius_min = 1e30;
    radius_max = -1e30;
 
+   re_outer_cg = im_outer_cg = 0.0;
    radius_outer = 0.0;
    radius_outer_avg = 0.0;
    radius_outer_min = 1e30;
@@ -124,7 +125,8 @@ void measure_radius (
       if (radius_outer_min > radius_outer) { radius_outer_min = radius_outer; }
       if (radius_outer_max < radius_outer) { radius_outer_max = radius_outer; }
 
-      printf ("%d	%14.10f	%14.10f	%14.10f %d\n", i, theta, radius_cand, radius_outer, loop_cand); 
+      printf ("%d	%14.10f	%14.10f	%14.10f %g	%d\n", 
+            i, theta, radius_cand, radius_outer, radius_outer-radius_cand, loop_cand); 
    }
    radius_avg /= (double) sizea;
    re_cg /= (double) sizea;
