@@ -2,7 +2,8 @@
  * mobius.C
  *
  * FUNCTION:
- * display mobius mu function
+ * display mobius mu, Euler's totient, and other number-theoretic
+ * functions on the complex disk (poincare disk).
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989
@@ -280,12 +281,17 @@ void energy_c (double re_q, double im_q, double *energy, double *moment)
 	struct deriv_s dd;
 	derivatives (re_q, im_q, &dd);
 
+	double gxx = 1.0+dd.rehp*dd.rehp;
+	double gxy = -dd.rehp*dd.imhp;
+	double gyy = 1.0+dd.imhp*dd.imhp;
+
 	double deno = 1.0+dd.rehp*dd.rehp+dd.imhp*dd.imhp;
-	deno *= deno;
 
-	double  numer = - dd.rehpp*dd.rehpp - dd.imhpp*dd.imhpp;
-	double curvature = -2.0*numer / deno;
+	double flub = dd.imhp*dd.imhp * dd.rehp*dd.rehp;
+	flub /= deno;:q
 
+
+	*energy = flub;
 }
 
 
