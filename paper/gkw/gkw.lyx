@@ -945,12 +945,12 @@ The Bernoulli map is an exactly solvable example of deterministic chaos.
 
 .
  However, these authors seem to have missed or ignored certain key aspects
- of the operator, including the relationship of its eigenvalues to the Hurwitz
- Zeta function, as well as the action of the modular group 
+ of the operator, including the fact that the Hurwitz Zeta function is an
+ eigenvector, as well as the action of the modular group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
- as a symmetry group.
+ as a symmetry group playing an important part in the analysis.
  Thus, we recap the results here, using simpler techniques, and then (making
  use of these simpler tools) extend the results in several directions.
  The motivation for the detailed development is, of course, that we will
@@ -1482,12 +1482,298 @@ These eigenfunctions are essentially a form of the Hurwitz Zeta function
  
 \layout Standard
 
-We recognize the function 
+Although we have a continuous spectrum, the eigenvalues are degenerate,
+ with a multiplicity of countable infinity.
+ We can see this by writing 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset 
+
+ in terms of its real and imaginary components.
+ Then the eigenvalue is 
+\begin_inset Formula $\lambda=2^{-s}=2^{-\sigma}\exp(-i\tau\ln2)$
+\end_inset 
+
+ belongs to a family of eigenvectors with 
+\begin_inset Formula $\tau'=\tau+2\pi n/\ln2$
+\end_inset 
+
+ .
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Beta Real Part
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-2.2345-04.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\Re\left[\beta(x;s)+\beta(-x;s)\right]/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ Note that 
+\begin_inset Formula $\left|\Gamma(1+s)\right|$
+\end_inset 
+
+gets very small as n gets large, and so the normalization brings them to
+ visually comparable values.
+ Other real values of 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ can be understood by recalling that 
 \begin_inset Formula $\beta$
 \end_inset 
 
- as forming a part of teh Hurwitz Zeta function.
+ essentially interpolatees between Bernoulli polynomials at integer values
+ of 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+.
+ In short, they'll all look more or less like this.
  
+\end_inset 
+
+
+\layout Standard
+
+Another figure:
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Beta Magnitude
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-abs-2.2345-04.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\left|\beta(x;s)+\beta(-x;s)\right|/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ Note that 
+\begin_inset Formula $\left|\Gamma(1+s)\right|$
+\end_inset 
+
+gets very small as n gets large, and so the normalization brings them to
+ visually comparable values.
+ 
+\end_inset 
+
+
+\layout Standard
+
+Another
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Exp figure
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-exp-2.2345-04.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\Re\beta(x;s)/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ 
+\end_inset 
+
+
+\layout Standard
+
+and
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+another magnit
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-emag-2.2345-04.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\left|\beta(x;s)\right|/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ Note that curiously, these functions seem to be smoother for larger x and
+ seem to have vanishing ripples as x approaches zero.
+ Curiously, the ripples seem to have a period of oscillation of approximately
+ 
+\begin_inset Formula $nx$
+\end_inset 
+
+, which can best be seen in the n=1 curve, which seems to hold a complete
+ cycle between 1, 1/2, 1/4, 1/8, ...
+\end_inset 
+
+
+\layout Standard
+
+anotehr
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+the arg
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-arg-2.2345-04.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\arg\beta(x;s)/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ 
+\end_inset 
+
+
+\layout Standard
+
+another
 \layout Subsection
 
 The Kernel
@@ -1498,6 +1784,7 @@ What is the kernel of
 \end_inset 
 
 ? It is the set of functions that have odd symmetry.
+ blahh xxxx wrongo-boyo ...
  This implies that 'half' of all square-integrable functions are in the
  kernel.
  This is a huge space.
@@ -1518,7 +1805,7 @@ s as the representative elements.
  
 \layout Subsection
 
-The Continuous Spectrum
+The Continuous Fractal Spectrum
 \layout Standard
 
 The continuous-spectrum eigenfunctions of the Bernoulli map are of course
