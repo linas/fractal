@@ -29,7 +29,8 @@ main ()
 
    double delta_t = 1.0e-13;  // time step
 
-   int imax = 2123000111;  // max iterations
+   unsigned int imax = 2023;  // max iterations
+   imax *= 1024*1024;
 
    theta = 0.6;
    nprec = 0;
@@ -94,7 +95,7 @@ main ()
         if (0 == nprec%1000) 
         {
            printf ("%d	%d	%d	%20.16g	%g	%g	%g\n",
-              nprec, i, i-last_i, theta, acc_theta, pos_x, pos_z);
+              nprec, i/(1024*1024), i-last_i, theta, acc_theta, pos_x, pos_z);
            last_i = i;
         }
         theta += acc_theta;
