@@ -478,7 +478,7 @@ Lets complete the review by taking the coordinate-sapce representation of
 
 
 \begin_inset Formula \[
-=\sum_{m,n=0}^{\infty}\; x^{m}\; U_{mn}\int dy\;\frac{\delta^{(n)}(y)}{n!}\rho(y)\]
+=\sum_{m,n=0}^{\infty}\; x^{m}\; U_{mn}\int dy\;(-)^{n}\frac{\delta^{(n)}(y)}{n!}\rho(y)\]
 
 \end_inset 
 
@@ -494,7 +494,33 @@ Lets complete the review by taking the coordinate-sapce representation of
 
 \end_inset 
 
- 
+ Note that when one goes to diagonalize the operator, one will find 
+\begin_inset Quotes eld
+\end_inset 
+
+right eigenvectors
+\begin_inset Quotes erd
+\end_inset 
+
+ that will consist solely of a linear combinatation of 
+\begin_inset Formula $\left\langle x|m\right\rangle =x^{m}$
+\end_inset 
+
+ , that is, will be plynomials.
+ The 
+\begin_inset Quotes eld
+\end_inset 
+
+left eigenstates
+\begin_inset Quotes erd
+\end_inset 
+
+ will, by definition, be a linear combination solely of 
+\begin_inset Formula $\left\langle n|y\right\rangle =(-)^{n}\delta^{(n)}(y)/n!$
+\end_inset 
+
+ since, in a polynomial Hilbert space, these are the basis functions that
+ are adjoint to polynomials.
 \layout Standard
 
 It is critical to understand that the above notation and conventions are
@@ -649,6 +675,90 @@ k\end{array}\right)$
  and right eigenvectors, which agree perfectly w/ Driebe.
  
 \layout Standard
+
+The right eigenvectors are the Bernoulli polynomials ...
+ xxxx
+\layout Standard
+
+The left eigenvectors are denoted by 
+\begin_inset Formula $\left\langle \tilde{B}_{n}\right|$
+\end_inset 
+
+and, for 
+\begin_inset Formula $n>0$
+\end_inset 
+
+, have the components 
+\begin_inset Formula \[
+\left\langle \tilde{B}_{n}|k\right\rangle =\left(\begin{array}{c}
+k\\
+n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\]
+
+\end_inset 
+
+ The zero'th left eigenvector is a special-case; it has components 
+\begin_inset Formula $\left\langle \tilde{B}_{0}|k\right\rangle =1/(k+1)$
+\end_inset 
+
+.
+ The left eigenvectors can also be written out in coordinate space: 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle \tilde{B}_{n}|x\right\rangle  & = & \sum_{k=0}^{\infty}\left\langle \tilde{B}_{n}|k\right\rangle \left\langle k|x\right\rangle \\
+ & = & \sum_{k=0}^{\infty}\left\langle \tilde{B}_{n}|k\right\rangle (-)^{k}\frac{\delta^{(k)}(x)}{k!}\\
+ & = & \frac{1}{n}\sum_{k=n}^{\infty}\left(\begin{array}{c}
+k\\
+n-1\end{array}\right)(-)^{k}\frac{\delta^{(k)}(x)}{k!}\\
+ & = & \frac{(-)^{n+1}}{n!}\left[\delta^{(n-1)}(1-x)-\delta^{(n-1)}(x)\right]\end{eqnarray*}
+
+\end_inset 
+
+ for the 
+\begin_inset Formula $n>0$
+\end_inset 
+
+case.
+ The 
+\begin_inset Formula $n=0$
+\end_inset 
+
+ left eigenvector is best understood by integrating it over some arbitrary
+ function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{eqnarray*}
+\int_{0}^{1}dx\,\left\langle \tilde{B}_{0}|x\right\rangle f(x) & = & \int_{0}^{1}dx\, f(x)\sum_{k=0}^{\infty}(-)^{k}\frac{\delta^{(k)}(x)}{(k+1)!}\\
+ & = & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{(k+1)!}\\
+ & = & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}\int_{0}^{1}x^{k}dx\\
+ & = & \int_{0}^{1}f(x)dx\\
+ & = & \left\langle \tilde{B}_{0}|f\right\rangle \end{eqnarray*}
+
+\end_inset 
+
+ Similarly, the left eigenvectors acting on some function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ can be written as 
+\begin_inset Formula \[
+\left\langle \tilde{B}_{n}|f\right\rangle =\frac{1}{n!}\left[f^{(n)}(1)-f^{(n)}(0)\right]\]
+
+\end_inset 
+
+Note that the left eigenvectors are adjoint ot the Bernoulli polynomials.
+ Thus, the identity operator 
+\begin_inset Formula $\mathbb{I}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
+\end_inset 
+
+turns out to be the Euler-Maclaurin summation formula in disguise, which
+ we can see more easily by writing 
+\begin_inset Formula \begin{eqnarray*}
+f(x) & = & \left\langle x|f\right\rangle \\
+ & = & \sum_{m=0}^{M}B_{m}(x)\left\langle \tilde{B}_{m}|f\right\rangle -\frac{1}{M!}\int_{0}^{1}dy\, B_{M}(x-y)\; f^{(M)}(y)\end{eqnarray*}
+
+\end_inset 
+
 
 \layout Standard
 
