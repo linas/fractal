@@ -29,13 +29,13 @@ void mandelbrot_out (
    double	height,
    int		itermax)
 {
-   unsigned int	i,j, globlen, itermax_orig;
+   unsigned int	i,j, k, globlen, itermax_orig;
    double		re_start, im_start, deltax, deltay;
    double		re_position, im_position;
    double		re_c, im_c;
    double		re, im, tmp;
    int		loop;
-   double modulus=0.0, frac;
+   double modulus=0.0, frac, mu;
    double escape_radius = 3.1;
    double ren, tl;
    double r, phi;
@@ -65,6 +65,8 @@ void mandelbrot_out (
          // re_c = re_position - (re_position*re_position-im_position*im_position);
          // im_c = im_position - 2.0 * re_position * im_position;
 
+#ifdef FLATTEN_CARDIOD_MAP
+
          /* map to cardiod lam(1-lam) */
          r = im_position;
          phi = M_PI*re_position;
@@ -87,6 +89,7 @@ void mandelbrot_out (
 
 // hack
 // itermax = itermax_orig + 5*re_position*re_position;
+#endif /* FLATTEN_CARDIOD_MAP */
 
          /* remaps */
 // #define REMAP_CARDIOD
@@ -131,6 +134,7 @@ void mandelbrot_out (
 
          modulus = sqrt (modulus);
          frac = log (log (modulus)) *tl;
+         mu = ((double) (loop+1)) - frac;
 
          /* frac =  Re (c/z*z) */
 /*
@@ -162,6 +166,17 @@ void mandelbrot_out (
          } else {
             glob [i*sizex +j] = 0.0;
          }
+
+         phi = atan2 (im, re);
+         phi += M_PI;
+         // phi *= exp (frac);
+         phi /= 2.0*M_PI;
+         k = phi;
+         phi -= (double)k;
+         
+
+
+         glob [i*sizex +j] = phi;
   
 /*
          glob [i*sizex +j] = ((float) (loop%10)) / 10.0; 
@@ -535,7 +550,7 @@ void dmandelbrot_out (
    double	dofre, dofim;
    int		loop;
    double modulus, phi, phip, phi3, frac;
-   double escape_radius = 3450.0;
+   double escape_radius = 1000.0;
    double ren, tl;
 
    ren = log( log (escape_radius)) / log(2.0);
@@ -670,6 +685,15 @@ void dmandelbrot_out (
          modulus = 1.0/sqrt (dre*dre+dim*dim);
          modulus = 1.0/sqrt (dare*dare+daim*daim);
         
+         modulus = 0.25*(dre*dre+dim*dim)/(re*re+im*im);
+         modulus /= log (sqrt(re*re+im*im));
+         modulus /= log (sqrt(re*re+im*im));
+
+         modulus = 0.25*(dre*dre+dim*dim)/(re*re+im*im);
+         modulus /= log (sqrt(re*re+im*im));
+         modulus /= log (sqrt(re*re+im*im));
+
+if (loop>=itermax) modulus = 0.0;
          glob [i*sizex +j] = modulus;
 
          re_position += delta;
