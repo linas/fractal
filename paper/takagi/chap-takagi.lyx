@@ -1390,7 +1390,12 @@ Homework: Curiously, the representations of
 \end_inset 
 
  then look like an iterated affine transformation, reminiscent of the Barnsely
- IFS constructions.
+ IFS constructions
+\begin_inset LatexCommand \cite{key-8}
+
+\end_inset 
+
+.
  One can then take a set of arbitrary (contractive) group elements 
 \begin_inset Formula $\gamma_{1},\gamma_{2},...\gamma_{k}\in SL(2,\mathbb{Z})$
 \end_inset 
@@ -1409,9 +1414,12 @@ Collage Theorm
 \begin_inset Quotes erd
 \end_inset 
 
- for these affine maps.
- It would also be interesting to describe the measure of the generated fractal
- sets, as a function of the generators 
+ for these affine maps, this time, not for 2D images, but rather for an
+ arbitrary N-dimensional representation.
+\layout Description
+
+Homework: Describe the measure of the generated Barnsely IFS fractal set,
+ as a function of the generators 
 \begin_inset Formula $\gamma_{1},\gamma_{2},...\gamma_{k}$
 \end_inset 
 
@@ -2004,11 +2012,110 @@ gotcha
  is that the symmetry difficult to manifest in practice, since it requires
  identifying the rational associated with a particular dendritic shape,
  which is a computationally difficult proposition.
- Equally, its already known that stochastic differential equations have
- such properties, so this is not new news; what's different is that these
- properties can potentially be re-derived and analyzed through the application
- of the modular group.
- This is surprising.
+ 
+\layout Standard
+
+A different example of this manifestation of symmetry in randomness is through
+ the Barnsely IFS ideas.
+ There, a suitably choosen set of 
+\begin_inset Quotes eld
+\end_inset 
+
+random
+\begin_inset Quotes erd
+\end_inset 
+
+ affine matrices can be used to generate a remarkably varied set of self-similar
+ images, such as fern-leaf shapes, maple-leaf shapes, and cloud-shapes.
+ A more general theorem due to Barnsley states that any two-dimensional
+ image (photographic snapshot) can be encoded (represented) with a set of
+ affine transformations.
+ For a while, there was great excitement with the idea of fractal IFS image
+ compression as file-format for encoding images for the internet or for
+ general use as a compression algorithm.
+ There appearently do exist some reasonably efficient algorithms that can
+ take a photograph, and given a desired degree of accuracy 
+\begin_inset Formula $\epsilon>0$
+\end_inset 
+
+, extract the affine transformations that represent that photograph.
+ By contruction, the iterated affine transformations will be self-similar.
+ But we saw above that any given set of 
+\begin_inset Quotes eld
+\end_inset 
+
+general, random
+\begin_inset Quotes erd
+\end_inset 
+
+ affine matrices correspond one-to-one to a set of of 
+\begin_inset Quotes eld
+\end_inset 
+
+general, random
+\begin_inset Quotes erd
+\end_inset 
+
+ (contractive) elements of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ Through this excercise, we conclude that the self-symmetry of the Barnsely
+ IFS fractals are in fact a manifestation of modular group symmetry, expressed
+ through a choice of 
+\begin_inset Quotes eld
+\end_inset 
+
+random
+\begin_inset Quotes erd
+\end_inset 
+
+ generators.
+ 
+\layout Standard
+
+From this excercise, one can now imagine that a suitably modified form of
+ the Barnsely IFS image compression algorithm can be used to find the modular-gr
+oup generators of the DLA fractals.
+ To be precise, my intent is not merely to run snapshots of DLA through
+ IFS, its rather to ask, what is the set of generators that will reproduce
+ a given DLA tree, to a given accuracy? These generators then, by construction,
+ correspond to elements of the modular group.
+ One can then (potentially) create new theorems about DLA by picking 
+\begin_inset Quotes eld
+\end_inset 
+
+randomly
+\begin_inset Quotes erd
+\end_inset 
+
+ from the modular group, and exploring the consequences.
+ This wouldn't be easy, but it would be interesting.
+\layout Standard
+
+Pursuing the idea of symmetry in randomness in a different direction, its
+ already known that stochastic differential equations have various scaling
+ properties.
+ We can now suspect that these scaling properties are the result of a 
+\begin_inset Quotes eld
+\end_inset 
+
+hidden
+\begin_inset Quotes erd
+\end_inset 
+
+ self-similarity.
+ Let us now chose some arbitrary but small set of generators from the modular
+ group, and use these to generate a self-similar, but superficially stochastic,
+ seemingly random process.
+ How does the stochastic differential equation behave upon input of any
+ such given stochatic-but-self-similar process? Can we decompose the equation
+ into a summation of eigen-equations, each reacting in a specific way to
+ a specific generator of the stochastic noise? Realistically, this would
+ be a rather difficult research program.
+ However, I find that the potential for doing this sort of analysis surprising
+ and intriguing.
 \layout Standard
 
 Returning a bit closer to earth, we note the phase-locked regions of the
@@ -2063,24 +2170,28 @@ Note that some chaotic maps are seen to have period-doubling paths to chaos
  I believe that this should be considered a manifestation of the fact that
  the modular group can be written as the free product of the two and three
  cycles 
-\begin_inset Formula $C_{2}$
+\begin_inset Formula $\mathbb{Z}_{2}$
 \end_inset 
 
  and 
-\begin_inset Formula $C_{3}$
+\begin_inset Formula $\mathbb{Z}_{3}$
 \end_inset 
 
 .
 \layout Bibliography
 \bibitem [Man88]{key-3}
 
-Benoit Mandelbrot, in 
+Benoit Mandelbrot, 
+\emph on 
+Fractal landscapes without creases and with rivers
+\emph default 
+, appearing in 
 \emph on 
 The Science of Fractal Images, ed.
  Heinz-Otto Peitgen, Dietmar Saupe,
 \emph default 
- (Springer-Verlag, 1988) p.
- 246
+ (Springer-Verlag, 1988) pp.
+ 243-260.
 \layout Bibliography
 \bibitem [deR57]{key-4}
 
@@ -2129,4 +2240,20 @@ Benoit Mandelbrot,
 Fractals and Chaos, the Mandelbrot Set and Beyond
 \emph default 
  (Springer-Verlag, 2004)
+\layout Bibliography
+\bibitem [Bar88]{key-8}
+
+Michael F.
+ Barnsley, 
+\emph on 
+Fractal Modelling of real world images
+\emph default 
+, appearing in 
+\emph on 
+The Science of Fractal Images, ed.
+ Heinz-Otto Peitgen, Dietmar Saupe,
+\emph default 
+ (Springer-Verlag, 1988) pp.
+ 219-242.
+ 
 \the_end
