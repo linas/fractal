@@ -40,6 +40,28 @@ long double symy (long double x, int m, long double ess)
 }
 
 
-int main (int argc, char * argv)
+int main (int argc, char *argv[])
 {
+	int i;
+
+	if (3>argc) {
+		fprintf (stderr, "Usage: %s <ess> <m>\n", argv[0]);
+		exit (1);
+	}
+	double ess = atof (argv[1]);
+	int m = atoi (argv[2]);
+
+	int nmax = 25;
+
+	for (i=1; i<nmax; i++)
+	{
+		double x = ((double) i)/((double) nmax);
+		x *= 7.0;
+
+		double acc;
+		acc = symy (x, m, ess);
+		printf ("%d	%g	%g\n", i, x, acc);
+	}
+
+	return 0;
 }
