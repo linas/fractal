@@ -2587,6 +2587,23 @@ Thus I think we can now conclude that
  xxxx finish writing these conclusions.
 \layout Subsection
 
+Hyperbolic Rotations of Binary Trees
+\layout Standard
+
+Note that by imposing the modular group symmetry on the real number line,
+ we've essentially introduced a hyperbolic manifold that is homomorphic
+ to the real-number line.
+ The existance of this hyperbolic manifold and its negative curvature esentially
+ 'explains' why trajectories of iterated functions have positve Lyapunov
+ exponents.
+ 
+\layout Standard
+
+One can get a much better sense of the hyperbolic nature induced by this
+ symmetry group by looking at the discrete 'rotations' of the binary tree.
+ 
+\layout Subsection
+
 Symmetries Induced on 
 \begin_inset Formula $\mathbb{Q}$
 \end_inset 
@@ -3452,7 +3469,7 @@ In practice, when one is given an iterated map
 
 \end_inset 
 
- and subsitutes this in to get the matrix form of 
+ and substitutes this in to get the matrix form of 
 \begin_inset Formula $U$
 \end_inset 
 
@@ -3468,19 +3485,94 @@ In practice, when one is given an iterated map
 
  we get 
 \begin_inset Formula \[
-\left.\frac{1}{m!}\;\frac{d^{m}U\rho(x)}{dx^{m}}\right|_{x=0}=\sum_{n=0}^{\infty}U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}\rho(x)}{dx^{n}}\right|_{x=0}\]
+\left.\frac{1}{m!}\;\frac{d^{m}\left[U\rho\right](x)}{dx^{m}}\right|_{x=0}=\sum_{n=0}^{\infty}U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}\rho(x)}{dx^{n}}\right|_{x=0}\]
 
 \end_inset 
 
  as the matrix equation for the transformation of polynomials, expressed
- in classical notation, or, equivalently, 
+ in classical notation.
+ Completely equivalently, we can use the Dirac bra-ket notation, writing
+ down the operator in space coordinates:
 \begin_inset Formula \[
-xxx\]
+\delta\left(g(x)-y\right)=U_{g}(x,y)=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left\langle x|m\right\rangle \left\langle m|U_{g}|n\right\rangle \left\langle n|y\right\rangle \]
 
 \end_inset 
 
- expressed in Dirac bra-ket notation.
- If one is very lucky, one finds that 
+ where 
+\begin_inset Formula $U_{mn}=\left\langle m|U|n\right\rangle $
+\end_inset 
+
+ and 
+\begin_inset Formula $\left\langle x|m\right\rangle =x^{m}/m!$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left\langle n|y\right\rangle =\delta^{(n)}(y)/n!$
+\end_inset 
+
+, the latter being the 
+\begin_inset Formula $n$
+\end_inset 
+
+'th derivative of the Dirac delta function.
+ Then, integrating over 
+\begin_inset Formula $y$
+\end_inset 
+
+, we regain the previous expressions for the operator in Hilbert space:
+ 
+\begin_inset Formula \begin{multline*}
+\left[U_{g}\rho\right](x)=\int dy\; U_{g}(x,y)\rho(y)\end{multline*}
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+=\int dy\;\delta\left(g(x)-y\right)\rho(y)\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+=\sum_{m,n=0}^{\infty}\;\frac{x^{m}}{m!}\; U_{mn}\int dy\;\frac{\delta^{(n)}(y)}{n!}\rho(y)\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+=\sum_{m,n=0}^{\infty}\;\frac{x^{m}}{m!}\; U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}\rho(y)}{dy^{n}}\right|_{y=0}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+=\sum_{m,n=0}^{\infty}\;\frac{x^{m}}{m!}\; U_{mn}\;\frac{\rho^{(n)}(0)}{n!}\]
+
+\end_inset 
+
+ The above sets of expressions, although in a certain sense are 'equivalent',
+ as we did use the equals sign, do in fact do a great deal of violence because
+ they hide or incorrectly equate the function spaces on which the operator
+ 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ acts.
+ That is, whenever 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ is not differentiable or is otherwise singular, the expansion in derivatives
+ is not justified; by contrast, 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ acting in the space of square-integrable functions may have non-differentiable
+ eigenfunctions (which turn out to be, of course, fractals, which is the
+ whole point of this excercise!) 
+\layout Standard
+
+If one is very lucky, one finds that 
 \begin_inset Formula $U_{mn}$
 \end_inset 
 
@@ -3604,7 +3696,11 @@ The continuous-spectrum eigenfunctions of the Bernoulli map are of course
 
 .
  These are quite beautiful fractals provide a picture here.
+ Symmetry is the name of the game here.
  
+\layout Standard
+
+XXX Connection to modular forms and Wierstrass elliptic integrals etal.
 \layout Subsection
 
 The Singular Sawtooth
