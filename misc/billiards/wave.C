@@ -292,7 +292,7 @@ PathIntegral::TraceToroid(void)
              n = side_count [nx*py+px];
              side_raylens[nx*py+px][n] = sr.distance;
              side_count [nx*py+px] ++;
-printf ("shoter %d %d shot  %d %d len=%f\n", i,j, px, py, sr.distance);
+// printf ("shooter %d %d shot  %d %d len=%f\n", i,j, px, py, sr.distance);
           
 #if 0
 printf ("duude ph= %f ", phase);
@@ -359,11 +359,11 @@ PathIntegral::SumRays (double k)
 
    for (int i=0; i<nx*ny; i++)
    {
-printf ("i=%d\n", i);
+// printf ("i=%d\n", i);
       for (int nr=0; nr<side_count[i]; nr++)
       {
          double phase = k * side_raylens[i][nr];
-printf ("i=%d nr=%d ph=%f\n", i, nr, phase);
+// printf ("i=%d nr=%d ph=%f\n", i, nr, phase);
          side_amplitude [i] += myexp (phase);
       }
    }
