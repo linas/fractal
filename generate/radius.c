@@ -31,8 +31,8 @@ void measure_radius (
    double	rmin,
    double	rmax,
    double	epsilon,
-   int		itermax,
-   int 		nrecur)
+   unsigned int	itermax,
+   unsigned int nrecur)
 {
    unsigned int	i,j;
    int		n;
@@ -330,8 +330,68 @@ void flow_radius (
 
 /*-------------------------------------------------------------------*/
 
+void 
+automatic (int p, int q)
+{
+   double theta;
+   double horn_x, horn_y;
+   double tx, ty;
+   double nx, ny;
+   double br;
+   double cx, cy;
+   double rmin, rmax;
+   double epsilon;
+   unsigned int itermax;
+   unsigned int nrecur;
+   unsigned int ang_steps, r_steps;
+   double *data = 0x0;
+
+   /* angular location of the bud */
+   theta = 2.0 *M_PI * ((double) p / (double) q);
+
+   /* x,y location of the horn */
+   horn_x = 0.5 * cos(theta) - 0.25 * cos(2.0*theta);
+   horn_y = 0.5 * sin(theta) - 0.25 * sin(2.0*theta);
+
+   /* the tangent vector */
+   tx = -0.5 * (sin(theta) - sin (2.0*theta));
+   ty = 0.5 * (cos(theta) - cos (2.0*theta));
+   
+   /* the normal vector */
+   nx = ty / sqrt (tx*tx+ty*ty);
+   ny = -tx / sqrt (tx*tx+ty*ty);
+
+   /* our first guess for the bud radius */
+   br = sin (0.5*theta) / ((double) q * (double) q);
+
+   /* our first guess for the bud center */
+   cx = horn_x + br*nx;
+   cy = horn_y + br*ny;
+
+printf ("duude (%f %f) %f (%f %f)\n", cx, cy, br, nx, ny);
+
+   /* we know the true bud edge must be bounded by rmin and rmax */
+   rmin = 0.5*br;
+   rmax = 2.0*br;
+
+   epsilon = 1.0e-6;
+
+   itermax = 10000;
+
+   nrecur = q;
+
+   ang_steps = 10;
+   r_steps = 100;
+
+   data = realloc (data, (ang_steps+1)*sizeof(double));
+
+   measure_radius ( data, ang_steps, r_steps, cx, cy, rmin, rmax, epsilon, itermax, nrecur);
+}
+
+/*-------------------------------------------------------------------*/
+
 int 
-main (int argc, char *argv[]) 
+do_radius (int argc, char *argv[]) 
 {
    double	*data;		/* my data array */
    unsigned int	nrecur, nphi, nr;
@@ -339,6 +399,7 @@ main (int argc, char *argv[])
    int		itermax;
    double	epsilon;
    
+
    if (6 > argc) {
       fprintf (stderr, "Usage: %s <nrecur> <n_phi> <n_r> <niter> <epsilon> [<centerx> <centery> <rmin> <rmax>]\n", argv[0]);
       exit (1);
@@ -393,4 +454,35 @@ main (int argc, char *argv[])
    return 0;
 }
 
-/* --------------------------- END OF LIFE ------------------------- */
+/*-------------------------------------------------------------------*/
+
+int 
+do_automatic (int argc, char *argv[]) 
+{
+   int p, q;
+
+   if (3 > argc) {
+      fprintf (stderr, "Usage: %s <p> <q>\n", argv[0]);
+      exit (1);
+   }
+
+   p = atoi (argv[1]);
+   q = atoi (argv[2]);
+
+   automatic (p,q);
+   return 0;
+}
+
+/*-------------------------------------------------------------------*/
+
+int 
+main (int argc, char *argv[]) 
+{
+
+   if (!strcmp(argv[0], "radius")) do_radius (argc, argv);
+   if (!strcmp(argv[0], "automatic")) do_automatic (argc, argv);
+
+   return 0;
+}
+
+/* --------------------------- END OF FILE ------------------------- */

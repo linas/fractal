@@ -17,7 +17,7 @@ EXES =  stalk stalkmov mstop migrate measure offset \
         draw dx image movie paste stats sum \
         angle curl diff div card mandel
 
-all:    radius brat draw dx image
+all:    automatic radius brat draw dx image
 
 
 clean:
@@ -93,4 +93,7 @@ movie: movie.o  man.o util.o
 	$(CC) -o movie movie.o man.o util.o -lm
 
 radius: radius.o 
+
+automatic: radius
+	ln -f radius automatic
 
