@@ -96,23 +96,23 @@ Let us start by directing the reader to te page
 \layout Standard
 
 Given a real number 
-\begin_inset Formula 0<x<1
-
+\begin_inset Formula $0<x<1$
 \end_inset 
 
 , a sequence of integers 
-\begin_inset Formula [a_{1}, a_{2}, ...]
-
+\begin_inset Formula $[a_{1},a_{2},...]$
 \end_inset 
 
  can be found that define its continued-fraction expansion: 
 \layout Standard
 
 
-\begin_inset Formula $x=1/(a_{1} + 1/(a_{2} + 1/(a_{3} + ... ))) $
+\begin_inset Formula \[
+x=1/(a_{1}+1/(a_{2}+1/(a_{3}+...)))\]
+
 \end_inset 
 
- 
+
 \layout Standard
 
 Given any x, this sequence is straightforward to compute.
@@ -122,7 +122,9 @@ Given any x, this sequence is straightforward to compute.
 \layout Standard
 
 
-\begin_inset Formula $x_{+} = [a_{1}, a_{2}, ... , a_{N}] $
+\begin_inset Formula \[
+x_{+}=[a_{1},a_{2},...,a_{N}]\]
+
 \end_inset 
 
 
@@ -132,7 +134,9 @@ and
 \layout Standard
 
 
-\begin_inset Formula $x_{-} = [a_{1}, a_{2}, ... , a_{N}-1, 1] $
+\begin_inset Formula \[
+x_{-}=[a_{1},a_{2},...,a_{N}-1,1]\]
+
 \end_inset 
 
 
@@ -142,8 +146,7 @@ In the following text, we make a simplifying notational confusion: we use
  the same symbols to denote a sequence and its value when expressed as a
  continued fraction.
  Thus, for the above sequences, we may write 
-\begin_inset Formula x=x_{-}=x_{+}
-
+\begin_inset Formula $x=x_{-}=x_{+}$
 \end_inset 
 
 .
@@ -151,12 +154,17 @@ In the following text, we make a simplifying notational confusion: we use
  
 \layout Standard
 
-Given a rational x and an arbitrary complex number w, define new sequences:
- 
+Given a rational 
+\begin_inset Formula $x$
+\end_inset 
+
+ and an arbitrary complex number w, define new sequences: 
 \layout Standard
 
 
-\begin_inset Formula $x_{+}(w) = [a_{1}, a_{2}, ... , a_{N}, 1/w]$
+\begin_inset Formula \[
+x_{+}(w)=[a_{1},a_{2},...,a_{N},1/w]\]
+
 \end_inset 
 
 
@@ -166,14 +174,23 @@ and
 \layout Standard
 
 
-\begin_inset Formula $x_{-}(w) = [a_{1}, a_{2}, ... , a_{N}-1, 1, 1/w] $
+\begin_inset Formula \[
+x_{-}(w)=[a_{1},a_{2},...,a_{N}-1,1,1/w]\]
+
 \end_inset 
 
 
 \layout Standard
 
-These two functions are analytic in w, and can be expressed as the ratio
- of two polynomials in w.
+These two functions are analytic in
+\begin_inset Formula $w$
+\end_inset 
+
+, and can be expressed as the ratio of two polynomials in 
+\begin_inset Formula $w$
+\end_inset 
+
+.
  Thus, general analytic manipulations are perfectly well-defined on these
  functions.
  Clearly, 
@@ -188,7 +205,206 @@ These two functions are analytic in w, and can be expressed as the ratio
 
 \layout Standard
 
-Its time for 
+Differentiation w.r.t.
+ 
+\begin_inset Formula $w$
+\end_inset 
+
+ provides a handy tool for constructing various interesting things and proving
+ various limits.
+ We give an exact expression for these derivatives below.
+ Although we've introduced w by appending it to the last term of a rational
+ expansion, we could, if we wanted, introduce w into the N'th term of an
+ irrational expansion.
+ Most of the statements we make below are for rationals.
+ This is in part because treating the irrationals is a bit harder and confusing,
+ both in these formulas, and in their implementation as algorithms.
+ 
+\layout Standard
+
+There is also an even-odd symmetry for 
+\begin_inset Formula $x(w)$
+\end_inset 
+
+ that we should be aware of, as it plays another important role in the theory.
+ As we point out above, for any given sequence, there is a + and a - generalizat
+ion.
+ But what if the sequence is already 
+\begin_inset Formula $x_{-}$
+\end_inset 
+
+ and we choose the - expansion? Then we get 
+\begin_inset Formula \[
+x_{--}=[a_{1},a_{2},...,a_{N}-1,0,1]\]
+
+\end_inset 
+
+
+\layout Standard
+
+This expansion invokes a symmetry on 
+\begin_inset Formula $x_{-}(w)$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+x_{--}(w)=[a_{1},a_{2},...,a_{N}-1,0,1,1/w]=x_{+}(w)\]
+
+\end_inset 
+
+
+\layout Standard
+
+Thus, we see that a double-expansion is either idempotent or alternating.
+ To be pedantic, we can complete this with the other three expressions:
+ 
+\begin_inset Formula $x_{++}(w)=x_{+}(w)$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{-+}(w)=x_{+-}(w)=x_{-}(w)$
+\end_inset 
+
+.
+ In other words, a double-expansion reflects back, and, in this sense, 
+\begin_inset Formula $x_{+}$
+\end_inset 
+
+and 
+\begin_inset Formula $x_{-}$
+\end_inset 
+
+ are unique.
+ 
+\layout Standard
+
+If one needs to take differences, e.g.
+ for derivatives, the even-odd expansion is more useful: Define 
+\begin_inset Formula $x_{e}(w)$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{o}(w)$
+\end_inset 
+
+ as follows: 
+\begin_inset Formula \[
+x_{e}(w)=\left\{ \begin{array}{cc}
+x_{+}(w) & \text{if N even}\\
+x_{-}(w) & \text{if N odd}\end{array}\right.\]
+
+\end_inset 
+
+
+\layout Standard
+
+and
+\layout Standard
+
+
+\begin_inset Formula \[
+x_{o}(w)=\left\{ \begin{array}{cc}
+x_{-}(w) & \text{if N even}\\
+x_{+}(w) & \text{if N odd}\end{array}\right.\]
+
+\end_inset 
+
+
+\layout Standard
+
+These two have nice order-preserving properties: if 
+\begin_inset Formula $w$
+\end_inset 
+
+ is a positive real, then 
+\begin_inset Formula \[
+x_{o}(w)<x_{e}(w)\]
+
+\end_inset 
+
+
+\layout Standard
+
+and, for negative real 
+\begin_inset Formula $w$
+\end_inset 
+
+, 
+\begin_inset Formula \[
+x_{o}(w)>x_{e}(w)\]
+
+\end_inset 
+
+
+\layout Standard
+
+These two functions also have idempotent or parity-swapping identities:
+ 
+\layout Standard
+
+xe+ = xe , xe- = xo , xo+ = xo , xo- = xe 
+\layout Standard
+
+xee = xe , xeo = xo , xoe = xe , xoo = xo 
+\layout Standard
+
+x+e = xe , x+o = xo , x-e = xe , x-o = xo 
+\layout Standard
+
+Let use define the 
+\shape italic 
+gap
+\shape default 
+ as
+\begin_inset Formula \[
+\Gamma_{x}(w)=x_{e}(w)-x_{o}(w)\]
+
+\end_inset 
+
+
+\layout Standard
+
+This gap function is, of course, highly discontinuous.
+ It is not hard to discover from numeric experiments that for a rational
+ 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ reduced so that 
+\begin_inset Formula $p$
+\end_inset 
+
+ and 
+\begin_inset Formula $q$
+\end_inset 
+
+ have no common factors, and 
+\begin_inset Formula $w<=1$
+\end_inset 
+
+, the gaps take the form 
+\layout Standard
+
+
+\begin_inset Formula \[
+\Gamma_{p/q}(w)=\frac{w}{q^{2}}\left[2-w+\frac{w^{2}}{2}+T_{p/q}(w)\right]\]
+
+\end_inset 
+
+ where the teeth 
+\begin_inset Formula $T$
+\end_inset 
+
+ are bounded: 
+\begin_inset Formula $\left|T_{p/q}(w)\right|<\frac{w^{2}}{2}$
+\end_inset 
+
+ .
+ Although these results are obvious numerically, its not clear to me if
+ there is a simple proof for this (Homework: find this proof).
+\layout Standard
+
+The teeth appear to be random:
 \layout Bibliography
 \bibitem [asdf]{key-1}
 
