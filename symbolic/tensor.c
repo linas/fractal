@@ -84,6 +84,12 @@ PrintTerm (Term *t)
 void 
 PrintExpr (Expr *e)
 {
+	if (NULL == e) 
+	{
+		printf ("NULL expresion!\n");
+		return;
+	}
+
 	GList *tn;
 	for (tn = e->terms; tn; tn=tn->next)
 	{
@@ -178,6 +184,7 @@ Expr *Add_E_T (Expr *e, Term *t)
 
 Expr *DD_Term (Term *t, int which)
 {
+	if (0 == t->coeff) return NULL;
 	if (NULL == t->parts) return NULL;
 
 	Expr *e3 = g_new0(Expr, 1);
@@ -227,7 +234,7 @@ Expr *DD (Expr *e, int which)
 		Term *tr = en->data;
 		Expr *em = DD_Term (tr, which);
 		if (!em) continue;
-		e3->terms = g_list_append (e3->terms, em);
+		e3->terms = g_list_concat (e3->terms, em->terms);
 		g_free (em);
 	}
 	return e3;
