@@ -5,7 +5,7 @@ frobenius:	frobenius.o
 
 
 .c.o:
-	cc -g -c $^
+	cc -g -c -O3 $^
 
 
 clean:

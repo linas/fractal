@@ -32,7 +32,7 @@ init_density (int cnt)
 }
 
 
-double
+inline double
 perron (double x, double *den, int cnt)
 {
 	/* perform one iteration of frobenius-perron operator. */
@@ -53,49 +53,6 @@ perron (double x, double *den, int cnt)
 
 	return val;
 }
-
-double
-perron_almost (double x, double *den, int cnt)
-{
-	/* perform one iteration of frobenius-perron operator. */
-
-	double val = 0.0;
-	int n;
-	for (n=1; n<100; n++)
-	{
-		double y = 1.0 /(((double) n) + x);
-		double dj = y* ((double)cnt);
-		// dj +=0.5;
-		int j = dj;
-
-		val += den[j] * y * y;
-		if (0 == j) break;
-	}
-
-	return val;
-}
-
-double
-perron_wrong (double x, double *den, int cnt)
-{
-	/* perform one iteration of frobenius-perron operator. */
-
-	double val = 0.0;
-	int n;
-	for (n=1; n<100; n++)
-	{
-		double y = 1.0 /(((double) n+1) - x);
-		double dj = y* ((double)cnt);
-		dj +=0.5;
-		int j = dj;
-
-		val += den[j] * y * y;
-		if (0 == j) break;
-	}
-
-	return val;
-}
-
 
 void
 iterate_perron (double *tgt, double *src, int cnt)
@@ -123,9 +80,9 @@ iterate_density (double *tgt, double *src, int cnt)
 		r[i] = 0;
 		tgt[i] = 0.0;
 	}
-#define NSAMP 7351
+#define NSAMP 7357
 	int ns = NSAMP * cnt;
-	for (i=1; i<ns; i++) 
+	for (i=0; i<ns; i++) 
 	{
 		double x = ((double) i) / ((double) ns);
 		double y = continued_fraction_map (x);
@@ -143,10 +100,13 @@ iterate_density (double *tgt, double *src, int cnt)
 		// tgt[j] += src[ii];   // spreads out & smooths
 		tgt[j] += src[ii];   
 		r[j] ++;
+// printf ("duuude x=%f y=%f j=%d ii=%d tgt=%f r=%d\n",x,y,j,ii,tgt[j],r[j]);
 	}
 	for (i=0; i<cnt; i++) 
 	{
-		tgt[i] /= (double) r[i];
+		// tgt[i] /= (double) r[i];
+		tgt[i] /= (double) NSAMP;
+// printf ("final i=%d tgt=%f r=%d\n",i,tgt[i],r[i]);
 	}
 }
 
@@ -270,10 +230,11 @@ main (int argc, char * argv[])
 	}
 
 	for (i=1; i<NITER; i++) 
+	// for (i=1; i<2; i++) 
 	{
 		 // blur_density (den[i], cnt, 5);
-		// iterate_density (den[i], den[i-1], cnt);
-		iterate_perron (den[i], den[i-1], cnt);
+		iterate_density (den[i], den[i-1], cnt);
+		// iterate_perron (den[i], den[i-1], cnt);
 	}
 
 	// iterate_perron (den[2], den[0], cnt);
