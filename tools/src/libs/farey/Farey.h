@@ -10,7 +10,8 @@
  */
 
 #include <complex.h>
-#define Complex double __complex__
+// #define Complex double __complex__
+#define Complex complex<double>
 
 class ContinuedFraction
 {
