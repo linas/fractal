@@ -44,12 +44,12 @@ void mandelbrot_cutoff (
    double	*regulator, *rp, *rpp, *rppp, *rpppp;
    double	sum_n, sum_np, sum_npp, sum_nppp, sum_npppp;
    double	sum_re, sum_im, sum_mod;
+   double	sum_rep, sum_imp, sum_modp;
+   double	sum_repp, sum_impp, sum_modpp;
    double	sum_dre, sum_dim, sum_dmod;
    double	sum_ddre, sum_ddim, sum_ddmod;
    double	sum_ddrep, sum_ddimp, sum_ddmodp;
    double	sum_ddrepp, sum_ddimpp, sum_ddmodpp;
-   double	sum_ddreppp, sum_ddimppp, sum_ddmodppp;
-   double	sum_ddrepppp, sum_ddimpppp, sum_ddmodpppp;
    double	sum_zpre, sum_zpim, sum_zpmod;
    double	sum_zppre, sum_zppim, sum_zppmod;
 
@@ -99,6 +99,8 @@ void mandelbrot_cutoff (
       re_position = re_start;
       for (j=0; j<sizex; j++) {
          sum_re = sum_im = sum_mod = 0.0;
+         sum_rep = sum_imp = sum_modp = 0.0;
+         sum_repp = sum_impp = sum_modpp = 0.0;
          sum_dre = sum_dim = sum_dmod = 0.0;
          sum_ddre = sum_ddim = sum_ddmod = 0.0;
          sum_ddrep = sum_ddimp = sum_ddmodp = 0.0;
@@ -118,6 +120,10 @@ void mandelbrot_cutoff (
          {
             sum_re += re * regulator [loop];
             sum_im += im * regulator [loop];
+            sum_rep += re * rp [loop];
+            sum_imp += im * rp [loop];
+            sum_repp += re * rpp [loop];
+            sum_impp += im * rpp [loop];
             // sum_mod += sqrt(modulus) * regulator [loop];
 
             /* sum over first derivative z-prime */
@@ -191,6 +197,7 @@ void mandelbrot_cutoff (
          glob [i*sizex +j] = modulus / sum_n;
          // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
 
+         /* --------------------------------------------------------- */
          /* the interesting one is the z-prime-prime */
          /* here we use a taylor expansion to extrapolate to tau=0 */
          /* first, we need the drerivatives of modulus w.r.t tau */
@@ -209,6 +216,25 @@ void mandelbrot_cutoff (
          glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
 
          // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
+
+         /* --------------------------------------------------------- */
+         /* OK, lets do the taylor expansion for just-plain Z */
+         modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
+         mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
+         mpp  = sum_rep * sum_rep + sum_re * sum_repp;
+         mpp += sum_imp * sum_imp + sum_im * sum_impp - mp*mp;
+         mpp /= modulus;
+         
+         /* next, we need derivatives of m/n w.r.t tau */
+         mod = modulus / sum_n;
+         dmod = (mp - mod * sum_np) / sum_n;
+         ddmod = (mpp - 2.0 * dmod * sum_np - mod * sum_npp) / sum_n;
+
+         /* finally the taylor expansion */
+         glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
+
+
+         /* --------------------------------------------------------- */
          re_position += delta;
       }
       im_position -= delta;  /*top to bottom, not bottom to top */
