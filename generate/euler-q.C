@@ -15,16 +15,51 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <time.h>
 
 #include "brat.h"
 
-/*-------------------------------------------------------------------*/
-/* this routine fills in the interior of the mandelbrot set using */
-/* the classic algorithm */
+/* Return euler-product form of the q-series (dedekind eta) */
 
-void mandelbrot_stop (
+static double euler_prod (double re_q, double im_q)
+{
+	int i;
+
+	double rep = 1.0;
+	double imp = 1.0;
+
+	double qpr = re_q;
+	double qpi = im_q;
+
+	for (i=0; i<1000; i++)
+	{
+		double tmp;
+
+		/* compute prod (1-q^k) */
+		tmp = (1.0-qpr)*rep - qpi*imp;
+		imp = (1.0-qpr)*imp + qpi*rep;
+		rep = tmp;
+
+		/* compute q^k */
+		tmp = qpr*re_q - qpi * im_q;
+		qpi = qpr*im_q + qpi * re_q;
+		qpr = tmp;
+
+		if ((qpr*qpr +qpi*qpi) < 1.0e-40) break;
+	}
+	if (900 > i)
+	{
+		printf ("bad news duude overflow\n");
+	}
+
+	return sqrt (rep*rep+imp*imp);
+}
+
+/*-------------------------------------------------------------------*/
+/* This routine fills in the interior of the the convergent area of the 
+ * Euler q-series (dedekind eta function) in a simple way 
+ */
+
+void euler_q_series (
    float  	*glob,
    int 		sizex,
    int 		sizey,
@@ -36,8 +71,6 @@ void mandelbrot_stop (
    int		i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
-   double	re, im, tmp;
-   int		loop;
    
    delta = width / (double) sizex;
    re_start = re_center - width / 2.0;
@@ -47,20 +80,14 @@ void mandelbrot_stop (
    for (i=0; i<globlen; i++) glob [i] = 0.0;
    
    im_position = im_start;
-   for (i=0; i<sizey; i++) {
+   for (i=0; i<sizey; i++) 
+	{
       if (i%10==0) printf(" start row %d\n", i);
       re_position = re_start;
-      for (j=0; j<sizex; j++) {
-         re = re_position;
-         im = im_position;
-         for (loop=1; loop <itermax; loop++) {
-            tmp = re*re - im*im + re_position;
-            im = 2.0*re*im + im_position;
-            re = tmp;
-            if ((re*re + im*im) > 154.0) break;
-         }    
-         /* glob [i*sizex +j] = (2.0+ re)/2.5;  */
-         /* glob [i*sizex +j] = re; */
+      for (j=0; j<sizex; j++) 
+		{
+
+			double phi = euler_prod (re_position, im_position);
          glob [i*sizex +j] = im;
 
          re_position += delta;
