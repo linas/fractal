@@ -37,7 +37,7 @@ util.o:	util.h
 ################## Dependencies and compile/link #########
 #
 gapper inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o
-	$(CC) -o brat brat.o util.o ../tools/lib/Farey.o -lm -lstdc++
+	$(CC) -o brat brat.o util.o ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
 	ln -f brat decide
 	ln -f brat manvert
 	ln -f brat stalk

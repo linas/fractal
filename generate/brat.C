@@ -2983,7 +2983,7 @@ gapper (
 			if (0 == nn) continue;
 			if (0 == dd) continue;
 #endif
-			fi.GetNextFarey (&nn, &dd);
+			// fi.GetNextFarey (&nn, &dd);
 
 			double t = (double) nn/ (double) dd;
 
@@ -3002,9 +3002,22 @@ if (i>=sizex) printf ("xxxxxxxxxxxxxxxxx\n");
 			bin_cnt [i] ++;
 			
 			f.SetRatio (nn,dd);
-			double gap = f.ToGapEven() - f.ToGapOdd() - 1.0;
-			gap = 1.0-gap;
 
+#ifdef DO_THE_GAPS
+			double gap = f.ToGapEven() - f.ToGapOdd() - 1.0;
+#endif
+
+#define DO_CONVERGENTS 1
+#ifdef DO_CONVERGENTS
+			int nt = f.GetNumTerms ();
+			double qn = f.GetConvDenom (nt);
+			double qnm1 = f.GetConvDenom (nt-1);
+
+			double gap = qnm1 / qn;
+			gap *= 2.0;
+#endif
+
+			gap = 1.0-gap;
 			j = (int) (gap * (double) sizey);
 if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,dd);
 			if (0>j) j=0;
@@ -3039,6 +3052,33 @@ if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,
 		// printf ("duude i=%d b=%d t=%d\n", i, bin_cnt[i], tot_cnt[i]);
    }
 
+#if 0
+   /* draw parabola */
+   for (i=0; i<sizex; i++) 
+	{
+		double x = (double) i;
+		x /= sizex;
+		double y = x-0.5;
+		y = 4.0*y*y;
+		y *= sizey;
+		j = y;
+		j = sizey - j;
+		glob [j*sizex+i] =15400;
+	}
+   for (i=0; i<sizex; i++) 
+	{
+		double x = (double) i;
+		x += 0.5;
+		x /= sizex;
+		double y = x-0.5;
+		y = 4.0*y*y;
+		y *= sizey;
+		j = y;
+		j = sizey - j;
+		glob [j*sizex+i] =15400;
+	}
+#endif
+
 	/* Profile */
 	double norm = 0.0;
 	for (j=0; j<sizey; j++)
@@ -3061,7 +3101,8 @@ if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,
 
 /*-------------------------------------------------------------------*/
 /* The gap-tongue tries to draw the basic gaps
- * of the continued fraction
+ * of the continued fraction. Te resulting plots look like wavey hair
+ * or wavey seaweed. 
  */
 
 
@@ -3156,6 +3197,51 @@ gap_tongue (
 		glob [i] *= r;
    }
 }
+
+/*-------------------------------------------------------------------*/
+/* The beigen does the Bernoulli-map eigenfunctions,
+ * as per Dean Driebe
+ */
+
+#if 0
+
+void 
+beigen (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
+{
+   int		i,j;
+
+   int globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) {
+      glob [i] = 0.0;
+   }
+
+	for (n=1; n<d; n++)
+	{
+
+			i = (int) (gap * (double) sizex);
+			if (0>i) continue;
+			if (i>=sizex) continue;
+
+			glob [j*sizex +i] ++;
+		}
+	}
+
+   /* renormalize */
+	double r = ((double) sizex) / ((double) itermax);
+   for (i=0; i<sizex*sizey; i++) 
+	{
+		glob [i] *= r;
+   }
+}
+#endif
 
 /*-------------------------------------------------------------------*/
 /* This routine fills in the exterior of the mandelbrot set using 
