@@ -82,10 +82,95 @@ static void mobius_series_c (double re_q, double im_q, double *prep, double *pim
 		double t = randoid (i+1);
 		t *= (i+1);
 		t *= (i+1);
+#if 0
 		t *= (i+1);
+#endif
 
 		rep += qpr *t;
 		imp += qpi *t;
+
+		/* compute q^k */
+		tmp = qpr*re_q - qpi * im_q;
+		qpi = qpr*im_q + qpi * re_q;
+		qpr = tmp;
+
+		qpmod = qpr*qpr + qpi*qpi;
+		if (qpmod < 1.0e-30) break;
+	}
+	if (max_terms-1 < i)
+	{
+		// printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
+	}
+
+	*prep = rep;
+	*pimp = imp;
+}
+
+static void curvature_c (double re_q, double im_q, double *prep, double *pimp)
+{
+	double tmp;
+	int i;
+	*prep = 0.0;
+	*pimp = 0.0;
+
+	double rep = 0.0;
+	double imp = 0.0;
+
+	double qpr = 1.0;
+	double qpi = 0.0;
+
+	double qprm1 = 0.0;
+	double qpim1 = 0.0;
+
+	double qprm2 = 0.0;
+	double qpim2 = 0.0;
+
+	double qpmod = re_q*re_q+im_q*im_q;
+	if (1.0 <= qpmod) return;
+
+	for (i=0; i<max_terms; i++)
+	{
+
+		// double t = moebius_mu (i+1);
+		// double t = mertens_m (i+1);
+		// double t = liouville_omega (i+1);
+		// double t = liouville_lambda (i+1);
+		// double t = mangoldt_lambda (i+1);
+		// double t = thue_morse (i+1);
+		// int tm = thue_morse (i+1);
+		// double t = 1.0;
+		// if (1 == tm) t = -1.0;
+
+		// double t = moebius_mu (i+1);
+		double t = randoid (i+1);
+#if 0
+		t *= (i+1);
+		t *= (i+1);
+		t *= (i+1);
+#endif
+
+		double eye = i;
+		double rehp = eye*qprm1*t;
+		double imhp = eye*qpim1*t;
+		double rehpp = eye*(eye-1.0)*qprm2*t;
+		double imhpp = eye*(eye-1.0)*qpim2*t;
+
+		double norm = pow (rehp*rehp+imhp*imhp,  1.5);
+		double  equipot_term = - rehpp*(rehp*rehp - imhp*imhp) - 2.0*rehp*imhp*imhpp;
+		equipot_term /= norm;
+
+		double ray_term = imhpp*(rehp*rehp - imhp*imhp) - 2.0*rehp*imhp*rehpp;
+		ray_term /= norm;
+
+		rep += equipot_term;
+		imp += ray_term;
+
+		/* save lower derives */
+		qprm2 = qprm1;
+		qpim2 = qpim1;
+
+		qprm1 = qpr;
+		qpim1 = qpi;
 
 		/* compute q^k */
 		tmp = qpr*re_q - qpi * im_q;
@@ -108,7 +193,9 @@ static void mobius_series_c (double re_q, double im_q, double *prep, double *pim
 static double mobius_series (double re_q, double im_q)
 {
 	double rep, imp;
-	mobius_series_c (re_q, im_q, &rep, &imp);
+
+	// mobius_series_c (re_q, im_q, &rep, &imp);
+	curvature_c (re_q, im_q, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
 	return rep;
 	// return imp;
