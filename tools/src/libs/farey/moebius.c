@@ -172,7 +172,7 @@ int liouville_lambda (int n)
 
 /* ====================================================== */
 
-#define TEST 1
+// #define TEST 1
 #ifdef TEST
 
 int test_moebius(void)

@@ -16,13 +16,14 @@ CC = cc -O2 -I $(INC) -DANSI_C -DLINUX
 
 RM= rm -f
 
-all: inc Farey.o FareyTree.o gcf.o Prime.o totient.o
+all: inc Farey.o FareyTree.o gcf.o moebius.o Prime.o totient.o
 
-inc:	Farey.h FareyTree.h gcf.h Prime.h totient.h
+inc:	Farey.h FareyTree.h gcf.h moebius.h Prime.h totient.h
 	touch inc
 	cp Farey.h $(INC)/Farey.h
 	cp FareyTree.h $(INC)/FareyTree.h
 	cp gcf.h $(INC)/gcf.h
+	cp moebius.h $(INC)/moebius.h
 	cp Prime.h $(INC)/Prime.h
 	cp totient.h $(INC)/totient.h
 
@@ -43,6 +44,12 @@ gcf.o:	gcf.c gcf.h
 	cp gcf.o $(LIB)/gcf.o
 	rm gcf.o
 	touch gcf.o
+
+moebius.o:	moebius.c moebius.h
+	$(CC) -c moebius.c
+	cp moebius.o $(LIB)/moebius.o
+	rm moebius.o
+	touch moebius.o
 
 Prime.o:	Prime.c Prime.h
 	$(CC) -c Prime.c
