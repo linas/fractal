@@ -204,7 +204,7 @@ void mandelbrot_wind (
    double	height,
    int		itermax)
 {
-   unsigned int	i,j, globlen, itermax_orig;
+   unsigned int	i,j,k,  globlen, itermax_orig;
    double		re_start, im_start, deltax, deltay;
    double		re_position, im_position;
    double		re_c, im_c;
@@ -296,11 +296,24 @@ void mandelbrot_wind (
             phi /= pow (2.0, (double) (loop-1));
 
          }
-         // k = phi;
-         // phi -= (double)k;
-
 
          glob [i*sizex +j] = phi;
+
+         // colorize the landing rays
+         phi *= 512.0;
+
+         k = (int) phi;
+         if (k%2) { 
+            phi -= (double)k;
+         } else {
+            phi = (double)(k+1) -phi;
+         }
+         phi *= phi;
+         phi *= phi;
+
+         glob [i*sizex +j] = phi;
+
+           
   
          re_position += deltax;
       }
