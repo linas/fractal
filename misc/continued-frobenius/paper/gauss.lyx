@@ -1,6 +1,10 @@
 #LyX 1.3 created this file. For more info see http://www.lyx.org/
 \lyxformat 221
 \textclass article
+\begin_preamble
+\@addtoreset{equation}{section} 
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\end_preamble
 \language english
 \inputencoding auto
 \fontscheme times
@@ -95,8 +99,8 @@ can be gotten by iterating the CF or Gauss map
 \layout Standard
 
 
-\begin_inset Formula \[
-T(z)\equiv\frac{1}{z}-\left\lfloor \frac{1}{z}\right\rfloor \]
+\begin_inset Formula \begin{equation}
+T(z)\equiv\frac{1}{z}-\left\lfloor \frac{1}{z}\right\rfloor \label{eq:gauss-map}\end{equation}
 
 \end_inset 
 
@@ -311,8 +315,13 @@ For the Gauss map
 \begin_inset Formula $T(z)$
 \end_inset 
 
-, the Fabrenious-Perron operator 
-\begin_inset Formula $U$
+ of eqn 
+\begin_inset LatexCommand \ref{eq:gauss-map}
+
+\end_inset 
+
+, the Frobenious-Perron operator 
+\begin_inset Formula $U_{T}$
 \end_inset 
 
  is instead refered to as 
@@ -320,8 +329,8 @@ For the Gauss map
 \end_inset 
 
  and acts on densities as follows:
-\begin_inset Formula \[
-G\rho(x)=\sum_{n=1}^{\infty}\frac{1}{\left(n+x\right)^{2}}\rho\left(\frac{1}{n+x}\right)\]
+\begin_inset Formula \begin{equation}
+G\rho(x)=\sum_{n=1}^{\infty}\frac{1}{\left(n+x\right)^{2}}\rho\left(\frac{1}{n+x}\right)\label{eq:gkw}\end{equation}
 
 \end_inset 
 
@@ -355,14 +364,27 @@ Then, performing the
 \begin_inset Formula $y$
 \end_inset 
 
- integral first, and recalling the definition of the Fabrenious-Perron operator,
+ integral first, and recalling the definition of the Frobenious-Perron operator,
  we can write
 \begin_inset Formula \[
 \zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dz\, z\, Gz^{s-1}\]
 
 \end_inset 
 
-That is, the Riemann zeta is kind-a sort-of-ish like the Laplace Transform
+The correctness of this expression can be checked by directly substituting
+ for 
+\begin_inset Formula $f(z)=z^{s-1}$
+\end_inset 
+
+in eqn 
+\begin_inset LatexCommand \ref{eq:gkw}
+
+\end_inset 
+
+ and then performing simple resulting integral.
+\layout Standard
+
+So we see that the Riemann zeta is kind-a sort-of-ish like the Laplace Transform
  of the GKW operator, which we can see if we substitute 
 \begin_inset Formula $z=e^{-t}$
 \end_inset 
@@ -374,7 +396,7 @@ That is, the Riemann zeta is kind-a sort-of-ish like the Laplace Transform
 \end_inset 
 
 One is thus lead to ask what form the Riemann Hypothesis takes, when transferred
- to 
+ onto 
 \begin_inset Formula $G$
 \end_inset 
 
@@ -391,23 +413,273 @@ Fourrier transform
 \begin_inset Quotes erd
 \end_inset 
 
-, performed, for example, on the critical strip.
+, performed, for example, on the critical strip; one can also ask what other
+ operators might show up in expressions for the zeta, such as Berry's hypothesis
+ relating the zero's to a Hamiltonian.
+ The relationship of continued fractions to Pell's equation offers another
+ direction of study: a different relation between Pell's equation and the
+ Riemann hypothesis is already known.
+ 
 \layout Subsection
 
-Simple Relationships
+List of Simple Relations
 \layout Standard
 
 There is no particularly simple expression for 
 \begin_inset Formula $G$
 \end_inset 
 
-, although it can be written as a matrix acting on the coefficients of a
- Taylor's expansion.
- We will do this in the next section.
- Here, we will present some simple relationships involving 
+; its eigenvectors are not known.
+ If one chooses polynomials as basis for function space, then it can be
+ written as a matrix acting on the coefficients of a Taylor's expansion.
+ We will present this in the next section.
+  As a prelude, one can try to search for some alternate basis that might
+ somehow make it easier to solve 
 \begin_inset Formula $G$
 \end_inset 
 
 .
+ Unfortunately, this doesn't seem possible; below we present a dictionary
+ of some simple expressions and how 
+\begin_inset Formula $G$
+\end_inset 
+
+ acts on them.
+\layout Standard
+
+If we write 
+\begin_inset Formula \[
+g\left(x\right)\equiv G\left[f\right]\left(x\right)=\sum_{n=1}^{\infty}\frac{1}{\left(x+n\right)^{2}}\, f\left(\frac{1}{x+n}\right)\]
+
+\end_inset 
+
+then 
+\begin_inset Formula \[
+g\left(x\right)-g\left(x+1\right)=\frac{1}{\left(1+x\right)^{2}}f\left(\frac{1}{1+x}\right)\]
+
+\end_inset 
+
+holds true generically for any 
+\begin_inset Formula $f$
+\end_inset 
+
+.
+ We can tehn express the eignevalue equation 
+\begin_inset Formula $G\left[e\right]=\lambda e$
+\end_inset 
+
+ as 
+\begin_inset Formula \[
+\frac{1}{\left(1+x\right)^{2}}e\left(\frac{1}{1+x}\right)=\lambda\left(e\left(x\right)-e\left(x+1\right)\right)\]
+
+\end_inset 
+
+or equivalently after the trivial substitution 
+\begin_inset Formula $z=1/\left(1+x\right)$
+\end_inset 
+
+
+\begin_inset Formula \[
+e\left(z\right)=\frac{\lambda}{z^{2}}\left[e\left(\frac{1}{z}-1\right)-e\left(\frac{1}{z}\right)\right]\]
+
+\end_inset 
+
+ The only obvious solution to these equations is the well-known first eigenvecto
+r to the GKW, 
+\begin_inset Formula $e\left(x\right)=1/\left(1+x\right)$
+\end_inset 
+
+, which has eigenvalue 1.
+ After this, one is reduced to curious observations; for example:
+\begin_inset Formula \begin{equation}
+G\left[f\right]=1-f\textrm{ for }f\left(x\right)=1-\frac{1}{\left(1+x\right)^{2}}\label{eq:rat-simple}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+Unfortunately, the expressions for monomials are complicated:
+\layout Standard
+
+
+\begin_inset Formula \[
+G\left[1\right]\left(x\right)=\sum_{n=1}^{\infty}\frac{1}{\left(x+n\right)^{2}}=\psi'\left(x+1\right)\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\psi'\left(x\right)$
+\end_inset 
+
+ is the trigamma function.
+ In general, for monmial 
+\begin_inset Formula $x^{m}$
+\end_inset 
+
+,
+\begin_inset Formula \[
+Gx^{m}=\sum_{k=1}^{\infty}\frac{1}{\left(x+k\right)^{m+2}}=\frac{\left(-\right)^{m}}{\left(m+1\right)!}\psi^{\left(m+1\right)}\left(1+x\right)\]
+
+\end_inset 
+
+where we follow the convention of Abramowitz&Stegun eqn 6.4.1 for the definition
+ of the polygamma.
+ We also have:
+\begin_inset Formula \[
+G\left[\frac{1}{\left(1+ax\right)^{2}}\right]=\psi'\left(1+x+a\right)\]
+
+\end_inset 
+
+and
+\begin_inset Formula \[
+G\left[\frac{1}{\left(1+a+x/b\right)^{2}}\right]=\frac{1}{\left(1+a\right)^{2}}\psi'\left(1+x+\frac{1}{b\left(1+a\right)}\right)\]
+
+\end_inset 
+
+so that
+\begin_inset Formula \[
+G\left[\psi'\left(1+\frac{x}{b}+a\right)\right]=\sum_{n=1}^{\infty}\frac{1}{\left(n+a\right)^{2}}\psi'\left(1+x+\frac{1}{b\left(n+a\right)}\right)\]
+
+\end_inset 
+
+from which we derive 
+\begin_inset Formula \[
+G\left[\psi'\left(1+x+a\right)-\psi'\left(2+x+a\right)\right]=\frac{1}{\left(1+a\right)^{2}}\psi'\left(1+x+\frac{1}{1+a}\right)\]
+
+\end_inset 
+
+ which is somewhat curious if one sets 
+\begin_inset Formula $a=0$
+\end_inset 
+
+ or 
+\begin_inset Formula $a=\left(-1\pm\sqrt{5}\right)/2$
+\end_inset 
+
+ the golden mean.
  
+\layout Standard
+
+We can try to use the above relations to form a basis for function space
+ for solving the eigenvector equation.
+ To do this, we guess that the eigenvector has the form 
+\begin_inset Formula \[
+e\left(x\right)=\sum_{n=1}^{\infty}b_{n}\psi'\left(1+x+a_{n}\right)\]
+
+\end_inset 
+
+ so that
+\begin_inset Formula \begin{equation}
+G\left[e\right]\left(x\right)=\sum_{n=1}^{\infty}b_{n}\sum_{m=1}^{\infty}\frac{1}{\left(m+a_{n}\right)^{2}}\psi'\left(1+x+\frac{1}{m+a_{n}}\right)\label{eq:g-adic}\end{equation}
+
+\end_inset 
+
+ In order to have closure under this operation, we need to pick a sequence
+ 
+\begin_inset Formula $\left\{ a_{n}\right\} $
+\end_inset 
+
+ such that 
+\begin_inset Formula $\forall m,n\,\exists k\,\textrm{s.t.}\, a_{k}=1/\left(m+a_{n}\right)$
+\end_inset 
+
+.
+ The smallest such sequence seems to be the set of all rationals.
+ Although this makes the 
+\begin_inset Formula $\psi'$
+\end_inset 
+
+ basis impractical for a simple solution, it is interesting in that it shows
+ that the GKW operator is closed under the set of rationals, and does not
+ require an extension to reals to be solved.
+ This begs the question of p-adic solutions.
+\layout Standard
+
+Let's continue cataloguing more simple results.
+ For arbitrary real 
+\begin_inset Formula $\nu$
+\end_inset 
+
+, define the function 
+\begin_inset Formula \[
+\alpha_{\nu}\left(x\right)\equiv\frac{1}{2}\left[\left(1-x\right)^{\nu}-\frac{1}{\left(1+x\right)^{\nu+2}}\right]\]
+
+\end_inset 
+
+ which becomes a simple rational polynomial for integer 
+\begin_inset Formula $\nu$
+\end_inset 
+
+.
+ Then we have 
+\begin_inset Formula \[
+G\alpha_{\nu}\left(x\right)=x^{\nu}/2\left(1+x\right)^{\nu+2}\]
+
+\end_inset 
+
+ is the generalization of eqn 
+\begin_inset LatexCommand \ref{eq:rat-simple}
+
+\end_inset 
+
+.
+ For integer 
+\begin_inset Formula $\nu$
+\end_inset 
+
+, this is again a rational polynomial, and so we can try to search for the
+ closure of this basis.
+ We find 
+\begin_inset Formula \[
+G\alpha_{n}\left(x\right)=\frac{x^{n}}{2}-\sum_{k=0}^{n}\left(-\right)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\alpha_{k}\left(x\right)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\left(\begin{array}{c}
+n\\
+k\end{array}\right)$
+\end_inset 
+
+ is the binomial coefficient.
+ Note we've normalized 
+\begin_inset Formula $\alpha_{n}\left(x\right)$
+\end_inset 
+
+ so that, for small 
+\begin_inset Formula $x$
+\end_inset 
+
+, 
+\begin_inset Formula $\alpha_{n}\left(x\right)=x+\mathcal{O}\left(x^{2}\right)\;\forall n\geq0$
+\end_inset 
+
+ .
+ It is tempting to try to express 
+\begin_inset Formula $x^{n}$
+\end_inset 
+
+ in terms of 
+\begin_inset Formula $\alpha_{n}$
+\end_inset 
+
+, but this seems hard.
+\layout Section
+
+ToDo: Research Directions
+\layout Standard
+
+This section points out some curious directions in which explorations can
+ be made.
+\layout Enumerate
+
+Work out the p-adic solutions suggested by eqn 
+\begin_inset LatexCommand \ref{eq:g-adic}
+
+\end_inset 
+
+
 \the_end
