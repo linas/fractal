@@ -34,7 +34,7 @@ class lagGenericConcordTable :
 {
    public:
       lagGenericConcordTable (void);
-      ~lagGenericConcordTable ();
+      virtual ~lagGenericConcordTable ();
 
       int GetTopTupleContainingWord (int word);
 
@@ -49,7 +49,7 @@ class lagGenericConcordTable :
       };
       Concord * concordance [LAG_WORD_TABLE_SIZE];
 
-      void AddID (Helper *);
+      virtual void AddID (Helper *);
 
       int num_concords;
 };
