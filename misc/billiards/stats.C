@@ -113,8 +113,6 @@ SinaiStats::TraceToroid(void)
    for (i=0; i<nx*ny; i++) 
    {
       SinaiBox::TraceToroid (sr[i]);
-// if (0 == i%nx) { printf ("."); fflush (stdout); }
-{ printf (".\n"); fflush (stdout); }
    }
 }
 
@@ -162,8 +160,11 @@ main (int argc, char * argv[])
    v.max_sphere_hits = maxhits;
 
   	printf ("#\n# mean free path vs. sphere radius\n");
+  	printf ("#\n# average over %d bounces on a %d x %d grid\n", 
+	         maxhits, 100, 100);
   	printf ("#\n# radius  pathlen\n");
   	printf ("# --------------\n");
+   fflush (stdout);
    // for (radius=0.05; radius <0.91; radius +=0.05)
    for (radius=0.9; radius > 0.04; radius -=0.05)
 	{
@@ -174,6 +175,7 @@ main (int argc, char * argv[])
 
    	double fp = v.MeanFreePath ();
    	printf ("%f\t%f\n", radius, fp);
+   	fflush (stdout);
 	}
 }
 
