@@ -1814,7 +1814,8 @@ int		itermax;
 
 extern FILE *Fopen();
 
-void main (int argc, char *argv[]) 
+int 
+main (int argc, char *argv[]) 
 {
    float	*data;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
@@ -2031,6 +2032,8 @@ void main (int argc, char *argv[])
    fclose (fp);
 
    free (data);
+
+   return 0;
 }
 
 /* --------------------------- END OF LIFE ------------------------- */

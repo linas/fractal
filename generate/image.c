@@ -1111,7 +1111,8 @@ void do_folded (char * filename, int width, int height)
 #include <signal.h>
 #include <unistd.h>
 
-void main (int argc, char *argv[]) 
+int 
+main (int argc, char *argv[]) 
 
 {
 
@@ -1134,7 +1135,7 @@ void main (int argc, char *argv[])
 
    if (!strcmp ("mandel", argv[0])) do_mandel (argv[1], atoi (argv[2]), atoi (argv[3])); 
 
-   exit (EXIT_SUCCESS);
+   return 0;
 }
 
 /*-------------------- END OF FILE -----------------------------------*/
