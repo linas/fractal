@@ -161,6 +161,7 @@ main ()
         if (0.0 > theta)
         {
            theta = -theta;
+           // I think this is the right way to handle phi ... ??
            if (0.0 < d_phi) { phi -= M_PI; }
            else { phi += M_PI; }
            cos_theta = cos(theta);
@@ -172,6 +173,7 @@ main ()
         if (M_PI < theta)
         {
            theta = 2.0 * M_PI - theta;
+           // I think this is the right way to handle phi ... ??
            if (0.0 < d_phi) { phi -= M_PI; }
            else { phi += M_PI; }
            cos_theta = cos(theta);
