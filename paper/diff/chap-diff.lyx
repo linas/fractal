@@ -1,0 +1,341 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme pslatex
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Sketchbook on Differentiability 
+\layout Author
+
+Linas Vepstas <linas@linas.org>
+\layout Date
+
+12 December 2004 
+\layout Abstract
+
+A set of questions about the nature of fractal curves.
+ We saw in earlier chapters that the Takagi Curve has the symmetry of the
+ modular group, and thus are lead to explore generalizations of this curve.
+\layout Abstract
+
+This paper is part of a set of chapters that explore the relationship between
+ the real numbers, the modular group, and fractals.
+\layout Section
+
+Sketchbook on Differentiability
+\layout Standard
+
+The set of square-integrable functions is a strange beast.
+ 
+\layout Subsection
+
+The Generalized Takagi Curve
+\layout Standard
+
+In previous chapters, we looked at the Takagi curve 
+\begin_inset Formula \begin{equation}
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+where 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+ is the triangle function:
+\begin_inset Formula \begin{equation}
+\tau(x)=\left\{ \begin{array}{ccc}
+2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
+2-2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\layout Standard
+
+Let us now consider the broader class of functions.
+ Given the sequence 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+ consider the series 
+\begin_inset Formula \[
+t_{A}(x)=\sum_{k=0}^{\infty}a_{k}\tau\left(2^{k}x\right)\]
+
+\end_inset 
+
+ Although this generalization is no longer overtly self-similar, it is multi-fra
+ctal in that each magnification by a power of two pops off one term from
+ the sequence, and gives a hint about how the remaining terms terms behave.
+ By working with a power of two, the function implictly brings with it ideas
+ about period doubling, and ideas about (multiplicative) scaling.
+ In exchange, it modifies the idea of translation invariance.
+ In Fourier analysis, the idea of translation invarience is central; whereas
+ here; the triangle function, like the sine function, is periodic, but the
+ periodicity is expanded through the powers-of-two relationship.
+\layout Standard
+
+As we saw previously, the sequence 
+\begin_inset Formula $a_{k}=4^{-k}$
+\end_inset 
+
+ (corresponding to the value 
+\begin_inset Formula $w=1/4$
+\end_inset 
+
+) is special, in that that 
+\begin_inset Formula $t_{1/4}(x)=4x(1-x)$
+\end_inset 
+
+ is a parabola.
+ Thus, we are lead to ask: what other series lead to continuous and/or different
+iable functions? 
+\layout Standard
+
+We can try to approach this question by thinking of the space for which
+ the triangle waves for a basis, and then thinking of the identity operator
+ on this space, and then thinking of the identity operator as a projection
+ operator from a larger space.
+ That is, consider the basis vector 
+\begin_inset Formula $|\tau>xxxx$
+\end_inset 
+
+
+\layout Subsection
+
+Iteration
+\layout Standard
+
+Of the many possible different choices for 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+, the triangle wave is special in that it stays self-similar through iteration;
+ that is, 
+\begin_inset Formula $(\tau\diamond\tau)(x)\equiv\tau^{2}(x)=\tau(2x)$
+\end_inset 
+
+ and generally, iterating on it 
+\begin_inset Formula $k$
+\end_inset 
+
+ times gives 
+\begin_inset Formula $\tau^{k}(x)=\tau(2^{k-1}x)$
+\end_inset 
+
+.
+ Thus, we may write 
+\begin_inset Formula \begin{equation}
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau^{k+1}(x)\label{eq:tee-w}\end{equation}
+
+\end_inset 
+
+
+\layout Subsection
+
+Other scales
+\layout Standard
+
+One also does not have to limit oneself to a power of two; Weierstrass 
+\begin_inset LatexCommand \cite{key-5}
+
+\end_inset 
+
+ considered 
+\begin_inset Formula \begin{equation}
+\sum_{k=0}^{\infty}b^{k}\cos(a^{k}x\pi)\label{eq:asdf}\end{equation}
+
+\end_inset 
+
+ and Hardy showed that this function is differentiable nowhere provided
+ that 
+\begin_inset Formula $0<b<1$
+\end_inset 
+
+, 
+\begin_inset Formula $a>1$
+\end_inset 
+
+ and 
+\begin_inset Formula $ab\geq1$
+\end_inset 
+
+.
+ Despite 
+\begin_inset Formula $a$
+\end_inset 
+
+ not having the value of two, this function still appears to have basic
+ fractal self-similarity, although it is not even about 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $a$
+\end_inset 
+
+ is not an integer.
+ 
+\layout Subsection
+
+Conclusions
+\layout Standard
+
+Some stream-of-consciousness:
+\layout Standard
+
+The set of square-integrable functions is a strange beast Loosely speaking,
+ this is the set of functions that are Fourier-analyzable, and thus plays
+ an important role in the solution of differential equations, in particular,
+ those of quantum mechanics.
+ The set of square-integrable functions excludes many well behaved analytic
+ functions because they have poles or cuts and are thus not integrable.
+ On the other hand, it includes functions which are not differentiable and
+ even not continuous, or worse, 
+\begin_inset Quotes eld
+\end_inset 
+
+generalized functions
+\begin_inset Quotes erd
+\end_inset 
+
+ such as the Dirac Delta function.
+ This set plays an even greater role in second quantization (quantum field
+ theory).
+ The classical limit is often expressed as the idea of 
+\begin_inset Quotes eld
+\end_inset 
+
+least action
+\begin_inset Quotes erd
+\end_inset 
+
+: the idea that one wants to minimize some function (the 
+\begin_inset Quotes eld
+\end_inset 
+
+action
+\begin_inset Quotes erd
+\end_inset 
+
+) over the set of all possible paths from point A to point B.
+ In order to make the mechanics work, this is not the set of all differentiable
+ patchs from point A to point B, or even the set of all continuous paths;
+ rather, it is a much, much larger space, which includes paths that are
+ continous nowhere.
+ As long as one sticks strictly to Fourier analysis (working in momentum
+ space), one can go far: perturbation theory for the electroweak forces
+ is the most accurately measurable theory known to man.
+ However, the theory is beset by divergences, and, if one strays off the
+ beaten track, one runs into anomolous constructions, where values depend
+ on how they are calculated.
+ Thus, it is of some importance to understand the structure of the space
+ of square-integrable functions more closely, and, in particular, the implicatio
+ns of this structure on the calculations done in quantum mechanics and quantum
+ field theory.
+ For example, is it possible that the infinities seen in quantum field theory
+ are due to the fact that we should be dealing with a subspace of the space
+ of (square-integrable, fourier-analyzable) functions? The existing tools
+ of quantum field theory are implicitly built on assumptions about fourier
+ analysis; there are no other obvious candidate toolsets.
+ In particular, there seems to be no middle ground between polynomial (analytic)
+ functions, and square-integrable functions.
+ (Other than possibly wavelets).
+ Thus, the goal here is to grope around for a possible middle ground, some
+ other, smaller function space, on which existing quantum theory might be
+ rebased.
+\layout Standard
+
+It is these ambiguities and difficulties that have drawn me personally to
+ try to understand the nature of a 
+\begin_inset Quotes eld
+\end_inset 
+
+function
+\begin_inset Quotes erd
+\end_inset 
+
+ more closely, for which in turn, one must define more carefully the idea
+ of what a 
+\begin_inset Quotes eld
+\end_inset 
+
+number
+\begin_inset Quotes erd
+\end_inset 
+
+ is.
+ 
+\layout Bibliography
+\bibitem [Man88]{key-3}
+
+Benoit Mandelbrot, 
+\emph on 
+Fractal landscapes without creases and with rivers
+\emph default 
+, appearing in 
+\emph on 
+The Science of Fractal Images, ed.
+ Heinz-Otto Peitgen, Dietmar Saupe,
+\emph default 
+ (Springer-Verlag, 1988) pp.
+ 243-260.
+\layout Bibliography
+\bibitem [We1872]{key-5}
+
+Karl Weierstrass, 
+\emph on 
+On Continuous Functions of a Real Argument that do not have a Well-defined
+ Differential Quotient
+\emph default 
+ (1872), reprinted in 
+\emph on 
+Classics on Fractals
+\emph default 
+, ed.
+ Gerald A.
+ Edgar, (Addison-Wesley, 1993) pp.
+ 2-9.
+\layout Bibliography
+\bibitem [Man04]{key-7}
+
+Benoit Mandelbrot, 
+\emph on 
+Fractals and Chaos, the Mandelbrot Set and Beyond
+\emph default 
+ (Springer-Verlag, 2004)
+\layout Bibliography
+\bibitem [Tak1903]{key-9}
+
+T.
+ Takagi, 
+\emph on 
+A Simple Example of a Continuous Function without Derivative
+\emph default 
+, Proc.
+ Phys.
+ Math.
+ Japan, 1903, Volume 1, pp.176-177 
+\the_end
