@@ -11,11 +11,11 @@
 // November 2001
 
 
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "ray.h"
+#include "vvector.h"
 
 /* ==================================== */
 // The SinaiView class generates the pretty pictures, converts 

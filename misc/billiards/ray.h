@@ -15,6 +15,8 @@
 // Linas Vepstas
 // November 2001
 
+#ifndef SINAI_RAY_H
+#define SINAI_RAY_H
 
 /* ==================================== */
 // Class Ray is just a plain ray
@@ -111,4 +113,5 @@ class Pixels
       unsigned int *pack;
 };
 
+#endif /* SINAI_RAY_H */
 /* ===================== end of file ====================== */
