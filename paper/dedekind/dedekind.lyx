@@ -275,17 +275,43 @@ N(t)=\sum_{n=0}^{\infty}e^{-t^{2}n^{2}}\]
 \end_inset 
 
 .
- The next image shows the nature of the divergence by normalizing against
- this value.
+ The figure 
+\begin_inset LatexCommand \ref{cap:Divergent-term}
+
+\end_inset 
+
+ shows the nature of the divergence by normalizing against this value.
+ The point of using 
+\begin_inset Formula $N(t)$
+\end_inset 
+
+ instead of 
+\begin_inset Formula $1/t$
+\end_inset 
+
+ directly is that the higher-order terms are more 'compatible' numerically,
+ making the extrapolation to 
+\begin_inset Formula $t\rightarrow0$
+\end_inset 
+
+ slightly easier.
+ In this particular case, there is not much of a difference; we note only
+ that in general a good choice of normalization can make difficult problems
+ more tractable numerically.
  
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Divergent-term}
+
+\end_inset 
 
 Divergent term
 \layout Standard
@@ -309,7 +335,7 @@ Plot of the divergent term of
 \end_inset 
 
 , where 
-\begin_inset Formula $|x|$
+\begin_inset Formula $|x+iy|=\sqrt{x^{2}+y^{2}}$
 \end_inset 
 
  is the ordinary complex modulus.
@@ -318,12 +344,120 @@ Plot of the divergent term of
  An explicit expression for this divergent term is given in the text.
 \end_inset 
 
-
+ 
 \layout Standard
 
-To render an image of this, let N(t) = Sumn=0inf exp (-t2n2) which also
- diverges as 1/t.
- We use this to show the divergence: the image below shows limt->0 |S(t)|/N(t)
- where |S(t)| is just the modulus of S(t); that is, |S(t)| = sqrt ((Re S(t))2
- + (Im S(t))2) 
+The first order of business is to provide an explicit expression for the
+ divergent term.
+ We can do this by considering a related and somewhat more interesing sum,
+ the sum over second derivatives of 
+\begin_inset Formula $z_{n}$
+\end_inset 
+
+ with respect to 
+\begin_inset Formula $c$
+\end_inset 
+
+.
+ Realizing that each 
+\begin_inset Formula $z_{n}$
+\end_inset 
+
+ is parameterized by 
+\begin_inset Formula $c$
+\end_inset 
+
+, we can take its derivative: 
+\begin_inset Formula \begin{equation}
+z'_{n+1}=\frac{d}{dc}z_{n+1}=2z'_{n}z_{n}+1\label{eq:}\end{equation}
+
+\end_inset 
+
+and 
+\begin_inset Formula \begin{equation}
+z''_{n+1}=\frac{d^{2}}{dc^{2}}z_{n+1}=2\left(z''_{n}z_{n}+z'_{n}^{2}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Note that 
+\begin_inset Formula $z_{n}$
+\end_inset 
+
+, 
+\begin_inset Formula $z'_{n}$
+\end_inset 
+
+ and 
+\begin_inset Formula $z''_{n}$
+\end_inset 
+
+ are well defined for all values of 
+\begin_inset Formula $c$
+\end_inset 
+
+ and finite 
+\begin_inset Formula $n$
+\end_inset 
+
+: they are entire functions, 'merely' polynomials in 
+\begin_inset Formula $c$
+\end_inset 
+
+.
+ Note that these polynomials never involve 
+\begin_inset Formula $\bar{c}$
+\end_inset 
+
+, the complex conjugate of 
+\begin_inset Formula $c$
+\end_inset 
+
+, and thus all derivatives with respect to 
+\begin_inset Formula $\bar{c}$
+\end_inset 
+
+ are vanishing.
+\layout Standard
+
+Let us then define the sum 
+\begin_inset Formula \begin{equation}
+P(t)=\sum_{n=0}^{\infty}z''_{n}\exp(-t^{2}n^{2})\label{eq:}\end{equation}
+
+\end_inset 
+
+Note that
+\begin_inset Formula \begin{equation}
+P(t)=\frac{d^{2}}{dc^{2}}S_{c}(t)\label{eq:}\end{equation}
+
+\end_inset 
+
+ holds for all positive 
+\begin_inset Formula $t$
+\end_inset 
+
+.
+ 
+\begin_inset Formula $P(t)$
+\end_inset 
+
+ also diverges as 
+\begin_inset Formula $1/t$
+\end_inset 
+
+.
+ The next figure shows the shape of that divergence.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Divergent Derivative
+\end_inset 
+
+limt->0 |P(t)| / N(t) 
 \the_end
