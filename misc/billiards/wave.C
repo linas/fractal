@@ -131,12 +131,35 @@ PathIntegral::TraceToroid(void)
          {
             use_ray = 1;
          }
-#if 0
-         else
+#define ROTATED_FACES
+#ifdef ROTATED_FACES
+         else // 90 degrees
+         if ((sr.direction[1] > 0.0)  && 
+             (fabs (sr.direction[0]) < sr.direction[1]) &&
+             (fabs (sr.direction[2]) < sr.direction[1]))
+         {
+            double tmp = sr.direction[0];
+            sr.direction[0] = sr.direction[1];
+            sr.direction[1] = -tmp;
+            use_ray = 1;
+         }
+         else   // 180 degrees
          if ((sr.direction[0] < 0.0)  && 
              (fabs (sr.direction[1]) < -sr.direction[0]) &&
              (fabs (sr.direction[2]) < -sr.direction[0]))
          {
+            sr.direction[0] = - sr.direction[0];
+            sr.direction[1] = - sr.direction[1];
+            use_ray = 1;
+         }
+         else // 270 degrees
+         if ((sr.direction[1] < 0.0)  && 
+             (fabs (sr.direction[0]) < -sr.direction[1]) &&
+             (fabs (sr.direction[2]) < -sr.direction[1]))
+         {
+            double tmp = sr.direction[1];
+            sr.direction[1] = sr.direction[0];
+            sr.direction[0] = -tmp;
             use_ray = 1;
          }
 #endif
@@ -169,7 +192,7 @@ printf ("duude amp= %f\n", abs<double>(amplitude [nx*py+px]));
          }
       }
 
-      if (0 == ox%oversample) { printf ("."); fflush (stdout); }
+      if (0 == i % oversample) { printf ("."); fflush (stdout); }
    }
 
 }
@@ -203,24 +226,26 @@ main (int argc, char * argv[])
 {
    PathIntegral v (400,400);
 
-   v.radius = 0.6;
-   v.max_distance = 640.0;
-
-   if (3 > argc) {
-      printf ("Usage: %s <radius> <maxdist> [<niterations> [<max manhattan>]]\n", argv[0]);
+   if (6 > argc) {
+      printf ("Usage: %s <fileout> <radius> <omega> <samples> <maxdist> [<niterations> [<max manhattan>]]\n", argv[0]);
       exit (1);
    }
 
-   double radius = atof (argv[1]);
-   double maxdist= atof (argv[2]);
+   char * outfile = argv[1];
+   double radius = atof (argv[2]);
+   double omega = atof (argv[3]);
+   int samples = atoi (argv[4]);
+   double maxdist= atof (argv[5]);
 
    int niter = 1000000;
-   if (4 == argc) niter = atoi (argv[3]);
+   if (7 == argc) niter = atoi (argv[6]);
 
    int manhat = 1000000;
-   if (5 == argc) manhat = atoi (argv[4]);
+   if (8 == argc) manhat = atoi (argv[7]);
 
    v.radius = radius;
+   v.omega = omega;
+   v.oversample = samples;
    v.max_distance = maxdist;
    v.niterations = niter;
    v.max_manhattan = manhat;
@@ -228,7 +253,7 @@ main (int argc, char * argv[])
    // v.Trace();
    v.TraceToroid();
    v.ToPixels ();
-   v.WriteMTV ("junk.mtv");
+   v.WriteMTV (outfile);
 }
 
 /* ===================== end of file ====================== */
