@@ -67,6 +67,7 @@ static double euler_prod (double re_q, double im_q)
 	return sqrt (rep*rep+imp*imp);
 }
 
+/* The dedekind eta multiplies by an additonal factor of q^1/24 */
 static double dedekind_eta (double re_q, double im_q)
 {
 	double rep, imp;
