@@ -10,7 +10,7 @@ LIB = $(TOP)/lib
 CC = /usr/bin/cc -O2 -I $(INC) 
 
 EXES= zgap zgap-check zlist fairy xlist elist flist gap ginv glist sym imap \
-	terms x zscale zinv newgap
+	terms x zscale zinv newgap ftree
 
 LISTS= fnums enums
 
@@ -26,9 +26,10 @@ realclean:	clean
 	$(CC) -c $<
 
 .o:
-	$(CC) -o $* $< $(LIB)/Farey.o -lm -lstdc++
+	$(CC) -o $* $< $(LIB)/Farey.o $(LIB)/FareyTree.o -lm -lstdc++
 
 fairy.o:  fairy.C $(LIB)/Farey.o $(INC)/Farey.h
+ftree.o:  ftree.C $(LIB)/FareyTree.o $(INC)/FareyTree.h
 newgap.o:  newgap.C $(LIB)/Farey.o $(INC)/Farey.h
 ################## Dependencies and compile/link #########
 # elist
