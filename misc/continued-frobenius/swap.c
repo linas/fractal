@@ -7,6 +7,14 @@
  * and that is what we seem to get ... need high integration 
  * order though to get anything on the r=1/2 axis ... 
  *
+ * expecting zeros at 
+ * 14.13
+ * 21.02
+ * 25.01
+ * 30.42
+ * 32.93
+ * 37.58
+ *
  * Linas Feb 2005
  */ 
 
@@ -36,11 +44,11 @@ inline long double swap13 (long double x)
 	long double ox = 1.0L/x;
 	long double a1 = floorl(ox);
 	long double r1 = ox - a1;
-	if (1.0e-10 > r1) return r1;
+	if (1.0e-10 > r1) return 0.69314718;  // "average" value
 	ox = 1.0L/r1;
 	long double a2 = floorl(ox);
 	long double r2 = ox - a2;
-	if (1.0e-10 > r2) return 0.0L;
+	if (1.0e-10 > r2) return r2;
 	ox = 1.0L/r2;
 	long double a3 = floorl(ox);
 	long double r3 = ox - a3;
@@ -125,6 +133,7 @@ void grand (long double x, long double sre, long double sim,
 	long double sw = ox - floorl(ox);
 #else
 	long double sw = swap12 (x);
+	// long double sw = swap13 (x);
 #endif
 
 	long double lnx = logl (x);
@@ -317,7 +326,7 @@ main (int argc, char * argv[])
 	int npts = atoi (argv[1]);
 
 	sre = 0.5L;
-	sim = 25.6L;
+	sim = 30.0L;
 
 	printf ("#\n# col 1-2: re s,im s \n");
 	printf ("#\n# col 3-4: re & im  swap \n");
@@ -332,7 +341,7 @@ main (int argc, char * argv[])
 		long double vv = zre*zre+zim*zim;
 		printf ("%Lg\t%Lg\t%13.9Lg\t%13.9Lg\t%13.9Lg\n", sre, sim, zre, zim, vv);
 		fflush (stdout);
-		sim += 0.01;
+		sim += 0.1;
 	}
 	return 0;
 }
