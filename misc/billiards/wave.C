@@ -336,7 +336,7 @@ PathIntegral::SumRays (double k)
 
    for (int i=0; i<nx*ny; i++)
    {
-      for (int nr= side_count[i]; nr>0; nr++)
+      for (int nr=0; nr<side_count[i]; nr++)
       {
          double phase = k * side_raylens[i][nr];
          side_amplitude [i] += myexp (phase);
