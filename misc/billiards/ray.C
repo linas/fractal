@@ -16,6 +16,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "vvector.h"
 #include "intersect.h"
@@ -200,7 +201,7 @@ SinaiView::SinaiView (int px, int py)
 {
    int i, j;
 
-   nbounces = 1000;
+   nbounces = 10000;
 
    nx = px;
    ny = py;
@@ -338,9 +339,12 @@ SinaiView::ToPixels (void)
       double green = 0.0;
       double blue = 0.0;
 
-      if ((0 == sr[i].last_wall) || (1 == sr[i].last_wall)) red = 255.0;
-      if ((2 == sr[i].last_wall) || (3 == sr[i].last_wall)) green = 255.0;
-      if ((4 == sr[i].last_wall) || (5 == sr[i].last_wall)) blue = 255.0;
+      if (0 == sr[i].last_wall) red = 255.0;
+      if (1 == sr[i].last_wall) { red = 255.0; green = 255.0; }
+      if (2 == sr[i].last_wall) green = 255.0;
+      if (3 == sr[i].last_wall) { green = 255.0; blue = 255.0; }
+      if (4 == sr[i].last_wall) blue = 255.0;
+      if (5 == sr[i].last_wall) { blue = 255.0; red = 255.0; }
 
       int ib = 0;
       for (int iw=0; iw<6; iw++) ib += sr[i].bounces[iw];
@@ -349,9 +353,11 @@ SinaiView::ToPixels (void)
       green *= exp (-absorbtivity * ib);
       blue *= exp (-absorbtivity * ib);
 
+#if 0
       red *= exp (-density * sr[i].distance);
       green *= exp (-density * sr[i].distance);
       blue *= exp (-density * sr[i].distance);
+#endif
       
       abgr[i] = 0xff & ((unsigned int) red);
       abgr[i] |= (0xff & ((unsigned int) green)) << 8;
@@ -373,17 +379,17 @@ SinaiView::ColoredMirrors (void)
       red *= exp (-absorbtivity * sr[i].bounces[0]);
       red *= exp (-absorbtivity * sr[i].bounces[1]);
       red *= exp (-absorbtivity * sr[i].sphere_hits);
-      red *= exp (-density * sr[i].distance);
+      // red *= exp (-density * sr[i].distance);
 
       green *= exp (-absorbtivity * sr[i].bounces[2]);
       green *= exp (-absorbtivity * sr[i].bounces[3]);
       green *= exp (-absorbtivity * sr[i].sphere_hits);
-      green *= exp (-density * sr[i].distance);
+      // green *= exp (-density * sr[i].distance);
 
       blue *= exp (-absorbtivity * sr[i].bounces[4]);
       blue *= exp (-absorbtivity * sr[i].bounces[5]);
       blue *= exp (-absorbtivity * sr[i].sphere_hits);
-      blue *= exp (-density * sr[i].distance);
+      // blue *= exp (-density * sr[i].distance);
       
       abgr[i] = 0xff & ((unsigned int) red);
       abgr[i] |= (0xff & ((unsigned int) green)) << 8;
@@ -412,19 +418,43 @@ SinaiView::WriteMTV (const char * filename)
 
 /* ==================================== */
 
-main ()
+main (int argc, char * argv[])
 {
    SinaiView v (400,400);
 
-   v.reflectivity = 0.98;
    v.density = 0.005;
    v.density = 0.0;
+
    v.radius = 0.6;
-   v.distance = 160.0;
+   v.reflectivity = 0.9975;
+   v.distance = 1280.0;
+
+   v.reflectivity = 0.92;
+   v.distance = 40.0;
+
+   v.reflectivity = 0.995;
+   v.distance = 640.0;
+
+   if (3 > argc) {
+      printf ("Usage: %s <radius> <maxdist> <nbounces>\n", argv[0]);
+      exit (1);
+   }
+
+   double radius = atof (argv[1]);
+   double maxdist= atof (argv[2]);
+
+   int nbounce = 1000000;
+   if (4 == argc) nbounce = atoi (argv[3]);
+
+   v.radius = radius;
+   v.distance = maxdist;
+   v.reflectivity = 1.0 - 0.01 * 320.0 / maxdist;  // ad hoc lighting
+   v.nbounces = nbounce;
 
    v.Trace();
    v.ColoredMirrors();
-   v.WriteMTV ("junk.mtv");
+   // v.ToPixels ();
+   v.WriteMTV ("j.mtv");
 }
 
 /* ===================== end of file ====================== */
