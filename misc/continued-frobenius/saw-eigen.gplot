@@ -1,0 +1,33 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'saw-eigen.png'
+# set term postscript
+# set out 'saw-eigen.ps'
+# set term epslatex
+# set out 'saw-eigen.eps'
+
+# set data style linespoints
+set data style lines
+# set data style points
+set key left
+
+set title "Second Sawtooth EigenPolynomials"
+set xlabel "x"
+set ylabel "e"
+
+# set yrange [0:1.5]
+
+set samples 200
+
+plot [0:1] (2*x-1) title "e_1" , \
+           -(1+6*x-12*x*x)/5  title "e_2", \
+           -(1+6*x+12*x*x-32*x*x*x)/13 title "e_3"
+          
+
+
+# pause 100
+
