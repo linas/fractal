@@ -1,0 +1,352 @@
+C       ******************************************************************
+c	1983 VAX/VMS 11/780 at SUNYSBNP
+C	1987- Prime os 19.1  Sacaly, France.  The Goddamn Compiler
+C		doesn't like for-- end for structures.  Revert to 
+c		using line numbers.
+C	1987- IBM PC -- MSDOS (Saclay, France; Krakow, Poland)
+c	1988 vax/vmx 11/780 (visitng StonyBrook)
+C	1989- IBM RT/ AIX 2.2.1   -- F77 doesn't like underscores
+
+        SUBROUTINE BESSEL (N, X, BESS)
+
+C       THIS SUBROUTINE CALCULATES THE SPHERICAL BESSEL FUNCTION FOR
+C       ALL ORDERS .LE. N FOR (POSITIVE) ARGUMENT Z
+C       THE RESULTS ARE RETURNED IN THE ARRAY BESS (0:N)
+
+        IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+        DOUBLE PRECISION BESS (0:N)
+        DOUBLE PRECISION TMP (0:650)
+        INTEGER * 4 MON (0:650)
+
+C       WE USE BACKWARD RECURENCE TO FIND THE BESSEL FUNCTIONS
+C       J(N+1)(Z) + J(N-1)(Z) = ((2N+1)/Z) * JN(Z)
+C       (ABROMOWIZ + STEGUN, PAGE 452FF)
+C       THE RECURRENCE RELATION MUST BE STARTED AT A HIGH ORDER.
+C       SEE COMMENT CARDS IN THE SUBROUTINE "BesselRecurrenceStartRegion"
+
+        Z = X
+        CALL BesselRecurrenceStartRegion (Z, N, NSTART)
+        IF (NSTART .GT. 650) STOP 'BESSEL TEMPORARY ARRAY OUT OF BOUNDS'
+        TMP (NSTART) = 0.0
+        TMP (NSTART-1) = 1.0D-30
+        MON (NSTART-1) = 0
+        ONEOZ = 1.0D0 / Z
+        DO 1001 I = NSTART-1, 1, -1
+                TMP (I-1) = ONEOZ * DBLE (2*I+1) * TMP(I) - TMP (I+1)
+                MON (I-1) = MON (I)
+                IF (DABS (TMP (I-1)) .GT. 1.0D+20) THEN
+                        TMP (I) = TMP (I) * 1.0D-30
+                        TMP (I-1) = TMP (I-1) * 1.0D-30
+                        MON (I) = MON (I+1) + 30
+                        MON (I-1) = MON (I)
+                END IF
+1001    CONTINUE
+        C = DSIN (Z) * ONEOZ
+        C = C/ TMP(0)
+        M = MON (0)
+C       RENORMALIZE THE VALUES.  SINCE EXPONENTIATION TAKES ABOUT A FACTOR
+C       OF 20 MORE CPU TIME THAN IF STATEMENTS, OR MULTIPLICATION,
+C       I'VE RIGGED A LITTLE SCHEME HERE WHEN ALL I REALLY WANT TO DO IS
+C       BESS (I) = C * TMP(I) * (10.0D0 ** (MON(I)-M))
+        SCALE = C
+        BESS (0) = SCALE * TMP(0)
+        DO 1002 I = 1, N
+                IF (MON (I) .NE. MON (I-1))
+     +           SCALE = C * (10.0D0 ** (MON(I)-M))
+                BESS (I) = SCALE * TMP(I)
+1002    CONTINUE
+        RETURN
+        END
+
+C       ******************************************************************
+
+        SUBROUTINE BESSNEU (N, X, BREGULAR, BIRREG)
+
+C       THIS SUBROUTINE CALCULATES THE SPHERICAL BESSEL FUNCTIONS,
+C       BOTH THE ONES REGULAR AT THE ORIGEN, AND THE IRREGULARS (NEUMANN)
+C       FOR ALL ORDERS .LE. N FOR (POSITIVE) ARGUMENT Z
+C       THE RESULTS ARE RETURNED IN THE ARRAYS BREGULAR (0:N), BIRREG (0:N)
+c	Bugs fixed:
+c	May 4 1988
+c	renomalization statement was  IF (MON (I) .NE. MON (I-1))
+c	changed to IF (MON (I) .NE. MON (I+1))
+
+        IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+        DOUBLE PRECISION BREGULAR (0:N), BIRREG (0:N)
+        DOUBLE PRECISION TMP (-200:400)
+        INTEGER * 4 MON (-200:400)
+
+C       WE USE BACKWARD RECURENCE TO FIND THE BESSEL FUNCTIONS
+C       J(N+1)(Z) + J(N-1)(Z) = ((2N+1)/Z) * JN(Z)
+C       (ABROMOWIZ + STEGUN, PAGE 452FF)
+C       THE RECURRENCE RELATION MUST BE STARTED AT A HIGH ORDER.
+C       SEE COMMENT CARDS IN THE SUBROUTINE 'BesselRecurrenceStartRegion'
+
+        Z = X
+        CALL BesselRecurrenceStartRegion (Z, N, NSTART)
+        IF (NSTART .GT. 400) STOP 'BESSEL TEMPORARY ARRAY OUT OF BOUNDS'
+        TMP (NSTART) = 0.0
+        TMP (NSTART-1) = 1.0D-30
+        MON (NSTART-1) = 0
+        ONEOZ = 1.0D0 / Z
+C       WE'VE GOT TO GO TO NEGATIVE ORDERS TO GET THE IRREGULAR SOLUTIONS
+        DO 1001 I = NSTART-1, -(N+2), -1
+                TMP (I-1) = ONEOZ * DBLE (2*I+1) * TMP(I) - TMP (I+1)
+                MON (I-1) = MON (I)
+C       PREVENT OVERFLOW BY KEEPING TRACK OF EXPONENT MANUALLY
+                IF (DABS (TMP (I-1)) .GT. 1.0D+20) THEN
+                        TMP (I) = TMP (I) * 1.0D-30
+                        TMP (I-1) = TMP (I-1) * 1.0D-30
+                        MON (I) = MON (I+1) + 30
+                        MON (I-1) = MON (I)
+                END IF
+1001    CONTINUE
+        C = DSIN (Z) * ONEOZ
+        C = C / TMP(0)
+        M = MON (0)
+C       RENORMALIZE THE VALUES.  SINCE EXPONENTIATION TAKES ABOUT A FACTOR
+C       OF 20 MORE CPU TIME THAN IF STATEMENTS, OR MULTIPLICATION,
+C       I'VE RIGGED A LITTLE SCHEME HERE WHEN ALL I REALLY WANT TO DO IS
+C       BESS (I) = C * TMP(I) * (10.0D0 ** (MON(I)-M))
+        SCALE = C
+        BREGULAR (0) = SCALE * TMP(0)
+        DO 1002 I = 1, N
+                IF (MON (I) .NE. MON (I-1))
+     +           SCALE = C * (10.0D0 ** (MON(I)-M))
+                BREGULAR (I) = SCALE * TMP(I)
+1002    CONTINUE
+
+C       RESCALE BESSEL FUNCTTIONS IRREGULAR AT THE ORIGEN
+        SCALE = C
+        DO 1003 I = -1, -(N+1), -1
+c	bug May 4, 1988
+                IF (MON (I) .NE. MON (I+1))
+     +           SCALE = C * (10.0D0 ** (MON(I)-M))
+                BIRREG (-(I+1)) = SCALE * TMP(I)
+1003    CONTINUE
+C       AND THIER SIGN
+        DO 1004 I = 0,N,2
+                BIRREG (I) = - BIRREG (I)
+1004    CONTINUE
+        RETURN
+        END
+
+C       **************************************************************
+
+        SUBROUTINE QUICKBESSEL (N, X, BESSM1, BESS, BESSP1)
+
+C       THIS SUBROUTINE CALCULATES THE
+C       REGULAR SPHERICAL BESSEL FUNCTIONS BESS AND THE
+C       IRREGULAR SPHERICAL BESSEL FUNCTIONS NEU
+C       FOR THE ORDERS N-1, N AND N+1, FOR (POSITIVE) ARGUMENT Z.
+
+C       NOTE:****
+C               FOR N=0, THE BESSEL FUNS FOR N=-1 ARE CONSIDERED TO BE
+C               UNDEFINED, AND THE VALUE OF 0.0 IS RETURNED FOR THE FUNCTIONS.
+C               THIS IS A PROGRAMING CONSIDERATION **ONLY**, AS BESSEL FUNS.
+C               FOR NEGATIVE ARGUMENTS REALLY ARE DEFINED AND ARE
+C               RELATED TO THE IRREGULAR SOLUTIONS
+
+C       THE RESULTS ARE RETURNED AS SHOWN ABOVE
+
+        IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+        DOUBLE PRECISION TMP (-2:2000)
+        INTEGER * 4 MON (-2:2000)
+
+C       WE USE BACKWARD RECURENCE TO FIND THE BESSEL FUNCTIONS
+C       J(N+1)(Z) + J(N-1)(Z) = ((2N+1)/Z) * JN(Z)
+C       (ABROMOWIZ + STEGUN, PAGE 452FF)
+C       THE RECURRENCE RELATION MUST BE STARTED AT A HIGH ORDER.
+C       SEE COMMENT CARDS IN THE SUBROUTINE 'BesselRecurrenceStartRegion'
+
+        Z = X
+        CALL BesselRecurrenceStartRegion (Z, N, NSTART)
+        IF (NSTART .GT. 2000) STOP 'BESSEL WORK ARRAY OUT OF BOUNDS'
+        TMP (NSTART) = 0.0
+        TMP (NSTART-1) = 1.0D-28
+        MON (NSTART-1) = 0
+        ONEOZ = 1.0D0 / Z
+        DO 1001 I = NSTART-1, 1, -1
+                TMP (I-1) = ONEOZ * DBLE (2*I+1) * TMP(I) - TMP (I+1)
+                MON (I-1) = MON (I)
+                IF (DABS (TMP (I-1)) .GT. 1.0D+15) THEN
+                        TMP (I) = TMP (I) * 1.0D-30
+                        TMP (I-1) = TMP (I-1) * 1.0D-30
+                        MON (I) = MON (I+1) + 30
+                        MON (I-1) = MON (I)
+                END IF
+1001    CONTINUE
+        C = DSIN (Z) * ONEOZ
+        C = C/ TMP(0)
+        M = MON (0)
+C       N=0 SPECIAL CASE CONSTANTS
+        MON (-1) = M
+        MON (-2) = M
+        TMP (-1) = 0.0D0
+C       RENORMALIZE THE VALUES.  SINCE EXPONENTIATION TAKES ABOUT A FACTOR
+C       OF 20 MORE CPU TIME THAN IF STATEMENTS, OR MULTIPLICATION,
+C       I'VE RIGGED A LITTLE SCHEME HERE WHEN ALL I REALLY WANT TO DO IS
+C       BESS (I) = C * TMP(I) * (10.0D0 ** (MON(I)-M))
+        SCALE = C * (10.0D0 ** (MON (N-2) - M))
+        DO 1002 I = N-1, N+1
+                IF (MON (I) .NE. MON (I-1))
+     +           SCALE = C * (10.0D0 ** (MON(I)-M))
+                TMP(I) = SCALE * TMP(I)
+1002    CONTINUE
+        BESSM1 = TMP (N-1)
+        BESS = TMP (N)
+        BESSP1 = TMP (N+1)
+        RETURN
+        END
+
+C       **************************************************************
+
+
+        SUBROUTINE QUICKBESSNEU
+     +          (N,X, BESSM1, BESS, BESSP1, NEUM1, NEU, NEUP1)
+
+C       THIS SUBROUTINE CALCULATES THE
+C       REGULAR SPHERICAL BESSEL FUNCTIONS BESS AND THE
+C       IRREGULAR SPHERICAL BESSEL FUNCTIONS NEU
+C       FOR THE ORDERS N-1, N AND N+1, FOR (POSITIVE) ARGUMENT Z.
+
+C       NOTE:****
+C               FOR N=0, THE BESSEL FUNS FOR N=-1 ARE CONSIDERED TO BE
+C               UNDEFINED, AND THE VALUE OF 0.0 IS RETURNED FOR THE FUNCTIONS.
+C               THIS IS A PROGRAMING CONSIDERATION **ONLY**, AS BESSEL FUNS.
+C               FOR NEGATIVE ARGUMENTS REALLY ARE DEFINED AND ARE
+C               RELATED TO THE IRREGULAR SOLUTIONS
+
+C       THE RESULTS ARE RETURNED AS SHOWN ABOVE
+
+        IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+        DOUBLE PRECISION TMP (-200:400)
+        DOUBLE PRECISION NEUM1, NEU, NEUP1
+        INTEGER * 4 MON (-200:400)
+
+C       WE USE BACKWARD RECURENCE TO FIND THE BESSEL FUNCTIONS
+C       J(N+1)(Z) + J(N-1)(Z) = ((2N+1)/Z) * JN(Z)
+C       (ABROMOWIZ + STEGUN, PAGE 452FF)
+C       THE RECURRENCE RELATION MUST BE STARTED AT A HIGH ORDER.
+C       SEE COMMENT CARDS IN THE SUBROUTINE 'BesselRecurrenceStartRegion'
+
+        Z = X
+        CALL BesselRecurrenceStartRegion (Z, N, NSTART)
+        IF (NSTART .GT. 400) STOP 'BESSEL TEMPORARY ARRAY OUT OF BOUNDS'
+
+        TMP (NSTART) = 0.0
+        TMP (NSTART-1) = 1.0D-30
+        MON (NSTART-1) = 0
+        ONEOZ = 1.0D0 / Z
+C       WE'VE GOT TO GO TO NEGATIVE ORDERS TO GET THE IRREGULAR SOLUTIONS
+        DO 1001 I = NSTART-1, -(N+2), -1
+                TMP (I-1) = ONEOZ * DBLE (2*I+1) * TMP(I) - TMP (I+1)
+                MON (I-1) = MON (I)
+C       PREVENT OVERFLOW BY KEEPING TRACK OF EXPONENT MANUALLY
+                IF (DABS (TMP (I-1)) .GT. 1.0D+20) THEN
+                        TMP (I) = TMP (I) * 1.0D-30
+                        TMP (I-1) = TMP (I-1) * 1.0D-30
+                        MON (I) = MON (I+1) + 30
+                        MON (I-1) = MON (I)
+                END IF
+1001    CONTINUE
+        C = DSIN (Z) * ONEOZ
+        C = C / TMP(0)
+        M = MON (0)
+C       RENORMALIZE THE VALUES.  SINCE EXPONENTIATION TAKES ABOUT A FACTOR
+C       OF 20 MORE CPU TIME THAN IF STATEMENTS, OR MULTIPLICATION,
+C       I'VE RIGGED A LITTLE SCHEME HERE WHEN ALL I REALLY WANT TO DO IS
+C       BESS (I) = C * TMP(I) * (10.0D0 ** (MON(I)-M))
+
+C       RENORMALIZE THE POSITIVE ORDERS
+C       FOR N=0, THEN BESS (-1) IS SET TO ZERO
+C       BUT WE WANT TO KEEP THIS VALUE FOR THE NEGATIVE ORDERS, SO STORE IT
+        TEMP = TMP (-1)
+        TMP (-1) = 0.0D0
+        SCALE = C * (10.0D0 ** (MON (N-2) - M))
+        IF (MON (N-1) .NE. MON (N-2))
+     +   SCALE = C * (10.0D0 ** (MON(N-1)-M))
+        BESSM1 = SCALE * TMP (N-1)
+        IF (MON (N) .NE. MON (N-1))
+     +   SCALE = C * (10.0D0 ** (MON(N)-M))
+        BESS = SCALE * TMP (N)
+        IF (MON (N+1) .NE. MON (N))
+     +   SCALE = C * (10.0D0 ** (MON(N+1)-M))
+        BESSP1 = SCALE * TMP (N+1)
+        TMP (-1) = TEMP
+C       RENORMALIZE THE NEGATIVE ORDERS
+C       THESE HAVE AN EXTRA FACTOR OF (-)**N IN THEM:: THIS IS SING
+C       SING IS NEGATIVE FOR N EVEN
+        SING = DBLE (2*MOD(N,2)-1)
+C       FOR N=0, THEN NEU (-1) IS SET TO ZERO
+        TMP (0) = 0.0D0
+        SCALE = C * (10.0D0 ** (MON (-N+1) - M))
+        IF (MON (-N) .NE. MON (-N+1))
+     +   SCALE = C * (10.0D0 ** (MON(-N)-M))
+        NEUM1 = - SING * SCALE * TMP(-N)
+        IF (MON (-N-1) .NE. MON (-N))
+     +   SCALE = C * (10.0D0 ** (MON(-N-1)-M))
+        NEU = SING * SCALE * TMP(-N-1)
+        IF (MON (-N-2) .NE. MON (-N-1))
+     +   SCALE = C * (10.0D0 ** (MON(-N-2)-M))
+        NEUP1 = - SING * SCALE * TMP(-N-2)
+        RETURN
+        END
+
+C       ************************************************************
+
+        SUBROUTINE BesselRecurrenceStartRegion (Z, NORDER, NSTART)
+        IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+
+C       GIVEN AN ARGUMENT X AND ORDER NORDER, THE PARENT ROUTINE USES A
+C       BACKWARDS RECURRENCE RELATION TO COMPUTE BESSEL FUNCTIONS.
+C       IN ORDER TO OBTAIN AND ACCURATE ANSWER, THE RECURRENCE MUST BE
+C       STARTED AT A HIGH ENOUGH ORDER SUCH THAT SUCESSIVE TERMS BECOME
+C       BETTER AND BETTER APPROXIMATIONS TO THE TRUE RECURRENCE RELATION
+C       J(N+1)(Z) + J(N-1)(Z) = ((2N+1)/Z) * JN(Z)
+C       I.E. ONE NEEDS TO START IN THE "ASYMPTOTIC REGION" OF SMALL X
+C       AND LARGE ORDER, WHERE THE LARGE ORDER BESSEL FUN. HAS NOT YET
+C       ENCOUNTERED ITS FIRST ZERO. OUR VERY CRUDE ESTIMATE FOR THIS
+C       REGION IS NSTART = MAX (2*X, N+10)
+C       (ABROMOWIZ + STEGUN, PAGE 452FF)
+
+C       THIS ROUTINE ACCEPTS THE VALUES X AND NORDER, AND RETURNS THE
+C       DESIRED STARTING POINT NSTART.
+
+C       NOTES:
+C       1) THE BESSEL ROUTINE WILL NOT WORK RELIABLY FOR ARGUMENTS
+C               LESS THAN 2.0E-6 OR SO
+C       2) THE IRREGULAR BESSEL FUNCTIONS WILL OVERFLOW (1.0E-30 OR SO)
+C               FOR EXCESSIVELY SMALL ARGUMENTS (LIKEWISE, THE REGULAR
+C               FUNCTIONS WILL UNDERFLOW FOR THE SAME VALUES).  THEREFORE,
+C               A LOWER BOUND ON THE ARGUMENT HAS BEEN FIXED, DETERMINED
+C               IN PART BY THE SMALL ARGUMENT EXPANSIONS FOR THE BESSEL
+C               FUNCTIONS (REF: ABROMOWITZ + STEGUN). THE ARGUMENT RETURNED
+C               BY THIS ROUTINE HAS BEEN BOUNDED BELOW BY THIS "SMALL"
+C               BOUNDING ARGUMENT (WHICH MAY BE QUITE LARGE, FOR LARGE ORDERS)
+
+        AZ = DABS (Z)
+        AN = DBLE (NORDER + 1)
+        ZMIN = (-60.0D0 + AN * (DLOG(AN)-1.0D0)) / AN
+        ZMIN = 2.0D0 * DEXP (ZMIN + 12.5D0 / (AN*AN)) + 1.0D-6
+        AZ = DMAX1 (ZMIN, AZ)
+        Z = DSIGN (AZ, Z)
+
+        PERITR = 2.0D0 * AN / AZ
+        IF (PERITR .GT. 3.0D0) THEN
+                EXTRA = 20.0D0 / DLOG (PERITR)
+                NSTART = NORDER + 8 + IDNINT (EXTRA)
+        ELSE
+                IAZ = INT (AZ)
+                IF (IAZ .GE. 33) THEN
+                        NSTART = 2 * IAZ
+                ELSE IF (IAZ .GE. 13) THEN
+                        NSTART = 3 * IAZ
+                ELSE IF (IAZ .GE. 7) THEN
+                        NSTART = 4 * IAZ
+                ELSE
+                        NSTART = 6 * IAZ + 20
+                END IF
+        END IF
+        RETURN
+        END
