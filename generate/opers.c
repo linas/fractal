@@ -135,14 +135,14 @@ void fakelog (float glob[],
 
 void clamp (float glob[], 
               unsigned int sizex, unsigned int sizey, 
-              float cmin, float cmax)
+              float clmin, float clmax)
 {
    long		i;
-   
+
    /* clamp */
    for (i=0; i<sizex*sizey; i++) {
-      if (glob[i] < cmin) glob[i] = cmin;
-      if (glob[i] > cmax) glob[i] = cmax;
+      if (glob[i] < clmin) glob[i] = clmin;
+      if (glob[i] > clmax) glob[i] = clmax;
    }
 }
 

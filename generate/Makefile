@@ -21,7 +21,7 @@ all:    brat draw dx image
 
 
 clean:
-        rm -f a.out  *.o glop* junk* *.flo  *.txt *.gif  $(EXES)
+	rm -f a.out  *.o glop* junk* *.flo  *.txt *.gif  $(EXES)
 
 
 ################## Dependencies and compile/link #########

@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <math.h>
 
+int extra = 0;
+
 /*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using */
 /* the classic algorithm */
@@ -31,8 +33,11 @@ void mandelbrot_out (
    double		re, im, tmp;
    int		loop;
    double modulus, frac;
-   double escape_radius = 33.5;
+   double escape_radius = 3.1;
    double ren, tl;
+   double prev = 0.0;
+   int nprev = 0;
+
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0/ log(2.0);
    
@@ -55,19 +60,141 @@ void mandelbrot_out (
             tmp = re*re - im*im + re_position;
             im = 2.0*re*im + im_position;
             re = tmp;
-re = sin (re);
             modulus = (re*re + im*im);
             if (modulus > escape_radius*escape_radius) break;
          }    
 
          modulus = sqrt (modulus);
-         frac = - log (log (modulus)) *tl;
+         frac = log (log (modulus)) *tl;
 
-         glob [i*sizex +j] = ((double) loop) + frac; 
+         /* frac =  Re (c/z*z) */
+         tmp = (re*re-im*im);
+         im = 2.0*re*im;
+         re = tmp;
+         frac = re*re_position + im*im_position;
+         frac /= re*re+im*im;
+         if (0.0 > frac) frac = -frac;
+         
+#ifdef JUNK
+         /* second order correction */
+         frac = frac * ( 2.0 - frac + 2.0*ren);
+       
+         nprev = loop - nprev;
+         prev = frac - prev - (double)nprev;
+/*
+         printf ("ij %d %d deltan %d delta frac %f \n", i, j, nprev, prev);
+*/
+         nprev = loop;
+         prev = frac;
+         glob [i*sizex +j] = ((double) loop) - frac; 
+#endif 
+
+         glob [i*sizex +j] = frac; 
+         glob [i*sizex +j] = ((double) loop); 
 /*
          glob [i*sizex +j] = ((float) (loop%10)) / 10.0; 
 if (loop == itermax) {
 glob[i*sizex+j] = 0.0; } else {glob[i*sizex+j]=0.9999;}
+*/
+
+         re_position += delta;
+      }
+      im_position -= delta;  /*top to bottom, not bottom to top */
+   }
+}
+
+/*-------------------------------------------------------------------*/
+/* this routine fills in the exterior of the mandelbrot set using */
+/* the classic algorithm */
+
+void dmandelbrot_out (
+   float  	*glob,
+   unsigned int sizex,
+   unsigned int sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax)
+{
+   unsigned int	i,j, globlen;
+   double		re_start, im_start, delta;
+   double		re_position, im_position;
+   double		re, im, tmp;
+   double		dre, dim;
+   int		loop;
+   double modulus, phi, frac;
+   double escape_radius = 3453.5;
+   double ren, tl;
+   double prev = 0.0;
+   int nprev = 0;
+
+   ren = log( log (escape_radius)) / log(2.0);
+   tl = 1.0/ log(2.0);
+   
+
+   delta = width / (double) sizex;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   
+   im_position = im_start;
+   for (i=0; i<sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) {
+         re = re_position;
+         im = im_position;
+         dre = 1.0;
+         dim = 0.0;
+         for (loop=1; loop <itermax; loop++) {
+            tmp = 2.0 * (re*dre - im*dim) +1.0;
+            dim = 2.0 * (re*dim + im*dre);
+            dre = tmp;
+
+            tmp = re*re - im*im + re_position;
+            im = 2.0*re*im + im_position;
+            re = tmp;
+            modulus = (re*re + im*im);
+            if (modulus > escape_radius*escape_radius) break;
+         }    
+
+         modulus = (re*re + im*im);
+         modulus = sqrt (modulus);
+         frac = log (log (modulus)) *tl;
+
+         frac = ((double) loop) - frac + 1.0; 
+
+         /* compute zprime/z */
+         tmp = re*dre + im*dim;
+         dim = re*dim - im*dre;
+         dre = tmp;
+         dre /= (re*re + im*im);
+         dim /= (re*re + im*im);
+
+         modulus = sqrt (dre*dre + dim*dim);
+
+         modulus = log (modulus);
+
+         tmp = modulus - log(2.0) * frac;
+
+         /* phase */
+         phi = atan2 (dim, dre);
+         phi += M_PI;
+         phi /= 2.0*M_PI;
+        
+         phi *= exp (((double) loop-5) / log(2.0));
+         phi -= ((double) ((int) phi));
+        
+         glob [i*sizex +j] = phi;
+
+
+/*
+         glob [i*sizex +j] = sqrt ((dre*dre+dim*dim)/(re*re+im*im));
+         glob [i*sizex +j] /= (double) loop;
+         glob [i*sizex +j] /= (double) loop;
+         glob [i*sizex +j] /= (double) loop;
 */
 
          re_position += delta;
@@ -1710,6 +1837,9 @@ void main (int argc, char *argv[])
    data_width = atoi (argv[2]);
    data_height = atoi (argv[3]);
    itermax = atoi (argv[4]);
+/*
+   extra = atoi (argv[5]);
+*/
 
    data = (float *) malloc (data_width*data_height*sizeof (float));
 

@@ -30,20 +30,24 @@ void main (int argc, char *argv[])
       fprintf (stderr, "usage: %s <input file> <output file> [<scale factor>] [<offset>] \n", argv[0]);
       return;
    }
+
+   fprintf (stderr, "%s %s %s ", argv[0], argv[1], argv[2]);
    
    if (4 <= argc) {
       scale_fact = (float) atof (argv[3]);
+      fprintf (stderr, "%g ", scale_fact);
    } else {
       scale_fact = 1.0;
    }
 
    if (5 <= argc) {
       offset = (float) atof (argv[4]);
+      fprintf (stderr, "%g ", offset);
    } else {
       offset = 0.0;
    }
+   fprintf (stderr, "\n");
 
-   fprintf (stderr, "%s :", argv[0]);
    
    /*-----------------------------------------------*/
    /* open input file */
@@ -93,6 +97,7 @@ void main (int argc, char *argv[])
    if (!strcmp ("abs", argv[0])) absolval (data_in, data_width, data_height);
    if (!strcmp ("renorm", argv[0])) expand (data_in, data_width, data_height, scale_fact, offset);
    if (!strcmp ("reclamp", argv[0])) rescale (data_in, data_width, data_height, scale_fact);
+   if (!strcmp ("clamp", argv[0])) clamp (data_in, data_width, data_height, scale_fact, offset);
    if (!strcmp ("dump", argv[0])) dump (data_in, data_width, data_height, scale_fact);
 
 /*
