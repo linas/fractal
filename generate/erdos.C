@@ -42,9 +42,28 @@ int divisor (int n)
 	return acc;
 }
 
+/* sigma arithmetic series, equals divisor for a=0 */
+int sigma (int n, int a)
+{
+	int acc = 0;
+	int d;
+
+	for (d=1; d<=n; d++)
+	{
+		if (n%d) continue;
+
+		int dp = 1;
+		int ia;
+		for (ia=0; ia<a; ia++) dp *= d;
+		acc += dp;
+	}
+
+	return acc;
+}
+
 /* An erdos-borwein-like series sum_n x^n/(1-x^n) 
  */
-static void erdos_series_c (double re_q, double im_q, int sigma, double *prep, double *pimp)
+static void erdos_series_c (double re_q, double im_q, int sa, double *prep, double *pimp)
 {
 	double tmp;
 	int i;
@@ -68,7 +87,7 @@ static void erdos_series_c (double re_q, double im_q, int sigma, double *prep, d
 	{
 		double dr, di;
 
-#define LAMBERT_SUM
+// #define LAMBERT_SUM
 #ifdef LAMBERT_SUM
 		/* compute 1/(1-q^n) OK */
 		tmp = (1.0-qpr)*(1.0-qpr) + qpi*qpi;
@@ -85,15 +104,17 @@ static void erdos_series_c (double re_q, double im_q, int sigma, double *prep, d
 		 * sigma = 3 for g_2 and 5 for g_3 
 		 */
 		int j;
-		for (j=0; j<sigma; j++) {
+		for (j=0; j<sa; j++) {
 			dr *= i+1;
 			di *= i+1;
 		}
 
 #endif
 
+#define DIVISOR_SUM
 #ifdef DIVISOR_SUM
-		tmp = divisor (i+1);
+		// tmp = divisor (i+1);
+		tmp = sigma (i+1, sa);
 		dr = qpr*tmp;
 		di = qpi*tmp;
 #endif
@@ -145,8 +166,10 @@ static void gee_2_c (double re_q, double im_q, double *pre, double *pim)
 	double rep, imp;
 	double sqre, sqim;
 
-	sqre = re_q*re_q - im_q *im_q;
-	sqim = 2.0*re_q * im_q;
+	// sqre = re_q*re_q - im_q *im_q;
+	// sqim = 2.0*re_q * im_q;
+	sqre = re_q;
+	sqim = im_q;
 	
 	erdos_series_c (sqre, sqim, 3, &rep, &imp);
 	rep *= 240.0;
@@ -164,8 +187,10 @@ static void gee_3_c (double re_q, double im_q, double *pre, double *pim)
 	double rep, imp;
 	double sqre, sqim;
 
-	sqre = re_q*re_q - im_q *im_q;
-	sqim = 2.0*re_q * im_q;
+	// sqre = re_q*re_q - im_q *im_q;
+	// sqim = 2.0*re_q * im_q;
+	sqre = re_q;
+	sqim = im_q;
 	
 	erdos_series_c (sqre, sqim, 5, &rep, &imp);
 	rep *= -504.0;
@@ -243,11 +268,11 @@ static double gee_3 (double re_q, double im_q)
 
 	// return sqrt (rep*rep+imp*imp);
 	// return rep;
-	// return imp;
-	double phase = atan2 (imp, rep);
-	phase += M_PI;
-	phase /= 2.0*M_PI;
-	return phase;
+	return imp;
+	// double phase = atan2 (imp, rep);
+	// phase += M_PI;
+	// phase /= 2.0*M_PI;
+	// return phase;
 }
 
 /*-------------------------------------------------------------------*/

@@ -38,9 +38,9 @@ static void euler_prod_c (double re_q, double im_q, double *prep, double *pimp)
 	{
 		double tmp;
 
-		/* compute prod (1-q^k) */
-		tmp = (1.0-qpr)*rep - qpi*imp;
-		imp = (1.0-qpr)*imp + qpi*rep;
+		/* compute prod (1-q^k) rember to use 1-real and -imag .. */
+		tmp = (1.0-qpr)*rep + qpi*imp;
+		imp = (1.0-qpr)*imp - qpi*rep;
 		rep = tmp;
 
 		/* compute q^k */
@@ -100,8 +100,9 @@ static double dedekind_eta (double re_q, double im_q)
 static double discriminant (double re_q, double im_q)
 {
 	double rep, imp;
-	dedekind_eta_c (re_q, im_q, &rep, &imp);
+	euler_prod_c (re_q, im_q, &rep, &imp);
 
+	/* take euler product to 24'th power */
 	double phase = atan2 (imp, rep);
 	phase *= 24.0;
 	double mod = sqrt (rep*rep + imp*imp);
@@ -110,13 +111,20 @@ static double discriminant (double re_q, double im_q)
 	double red = mod * cos (phase);
 	double imd = mod * sin (phase);
 
+	/* multply by q one more time .. */
+	double tmp = red * re_q - imd * im_q;
+	imd = red * im_q + imd * re_q;
+	red = tmp;
+
+	/* multiply by 2pi to the 12'th */
 	mod = pow (2.0*M_PI, 12.0);
 	red *= mod;
 	imd *= mod;
 
+
 	// return sqrt (red*red+imd*imd);
-	// return red;
-	return imd;
+	return red;
+	// return imd;
 }
 
 /*-------------------------------------------------------------------*/
