@@ -233,8 +233,8 @@ main (int argc, char * argv[])
 	// for (i=1; i<2; i++) 
 	{
 		 // blur_density (den[i], cnt, 5);
-		iterate_density (den[i], den[i-1], cnt);
-		// iterate_perron (den[i], den[i-1], cnt);
+		// iterate_density (den[i], den[i-1], cnt);
+		iterate_perron (den[i], den[i-1], cnt);
 	}
 
 	// iterate_perron (den[2], den[0], cnt);

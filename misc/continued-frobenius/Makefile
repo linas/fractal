@@ -1,8 +1,11 @@
 
+all: integ frobenius
 
+integ:  integ.o
 frobenius:	frobenius.o
-	cc -o $@ $< -lm
 
+.o:
+	cc -o $@ $< -lm
 
 .c.o:
 	cc -g -c -O3 $^
