@@ -13,6 +13,8 @@
 // November 2001
 
 
+#include <complex.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -45,7 +47,7 @@ class PathIntegral
 
       double shooter[3]; // position of source
 
-      double *phase;
+      complex<double> *amplitude;
       double omega;  // energy
       int oversample;   // samples per pixel
 };
@@ -64,9 +66,9 @@ PathIntegral::PathIntegral (int px, int py)
    shooter[1] = 0.0;
    shooter[2] = 5.0;
 
-   phase = new double [nx*ny];
+   amplitude = new complex<double> [nx*ny];
 
-   for (i=0; i<nx*ny; i++) phase[i] = 0;
+   for (i=0; i<nx*ny; i++) amplitude[i] = 0;
 
    oversample = 2;
 }
@@ -79,20 +81,22 @@ PathIntegral::TraceToroid(void)
    SinaiRay sr;
    int i,j;
 
-   int px = oversample *nx;
-   int py = oversample *ny;
+   complex<double>  I(0.0, 1.0);
+
+   int ox = oversample *nx;
+   int oy = oversample *ny;
 
    // project rays from source
-   for (i=0; i<px; i++) 
+   for (i=0; i<ox; i++) 
    {
-      for (j=0; j<py; j++) 
+      for (j=0; j<oy; j++) 
       {
 
          // define initial ray direction
          double pixel[3];
          double dir[3];
-         pixel[0] = 2.0 * (((double) i) + 0.51333)/ ((double) px) - 1.0;
-         pixel[1] = 2.0 * (((double) j) + 0.51666)/ ((double) py) - 1.0;
+         pixel[0] = 2.0 * (((double) i) + 0.51333)/ ((double) ox) - 1.0;
+         pixel[1] = 2.0 * (((double) j) + 0.51666)/ ((double) oy) - 1.0;
          pixel[2] = 1.0;
          VEC_DIFF (dir, pixel, shooter);
          sr.Set (pixel, dir);
@@ -105,8 +109,7 @@ PathIntegral::TraceToroid(void)
          // do this by projection
          // treat the four side walls as identical,
          // ignore the front and back walls for now
-         xxxxxxxxxxxx
-         use_ray = 0;
+         int use_ray = 0;
          if ((sr.direction[0] > 0.0)  && 
              (fabs (sr.direction[1]) < sr.direction[0]) &&
              (fabs (sr.direction[2]) < sr.direction[0]))
@@ -116,8 +119,23 @@ PathIntegral::TraceToroid(void)
 
          if (use_ray)
          {
+
+             // first convert ray direction to grid coords
              double x = sr.direction[1] / sr.direction[0];
              double y = sr.direction[2] / sr.direction[0];
+
+             int px = (int) (((double) nx) * 0.5 * (x+1.0));
+             int py = (int) (((double) ny) * 0.5 * (y+1.0));
+
+             if ((0 > px) || (px >=nx) || (0 > py) || (py >=ny))
+             {
+                printf ("duude out of bounds !! %d %d \n", px, py);
+             }
+
+             // next perform phase summation
+             complex<double> phase = I * omega * sr.distance;
+             amplitude [nx*py+px] += exp (phase);
+
 printf ("duude xy= %f %f \n", x, y);
          }
       }
