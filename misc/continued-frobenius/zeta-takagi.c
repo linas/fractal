@@ -151,7 +151,7 @@ long double reflect_fourths (long double ess)
 }
 
 /* The general 3/4ths sum */
-long double sym_fourths (int n, long double ess)
+long double sym_fourths (int m, int n, long double ess)
 {
 	int i;
 
@@ -164,7 +164,7 @@ long double sym_fourths (int n, long double ess)
 	for (i=0; i<70; i++)
 	{
 		long double eye = i;
-		long double term = gsl_sf_zeta (eye+ess);
+		long double term = zeta_minus_harmonic (m, eye+ess);
 		term *= fk+tk;
 		term *= fbinomial (ess+eye-1.0L, i);
 		acc += term;
@@ -172,8 +172,8 @@ long double sym_fourths (int n, long double ess)
 		tk *= -(en+0.75);
 	}
 	acc *= powl (4.0, -ess);
-	long double alt = harmonic (2*n+3, ess);
-	alt -= ts*harmonic (n+1, ess);
+	long double alt = harmonic (2*n+4*m+3, ess);
+	alt -= ts*harmonic (n+2*m+1, ess);
 
 	acc += alt;
 
@@ -220,8 +220,8 @@ main (int argc, char * argv[])
 		// acc = summy (x);
 		// acc = sym_integer (6, 7, x);
 		// acc = sym_half (m, n, x);
-		acc = sym_fourths (n, x);
-		acc = reflect_fourths (x);
+		acc = sym_fourths (m, n, x);
+		// acc = reflect_fourths (x);
 		printf ("%d	%g	%g\n", i, x, acc);
 	}
 
