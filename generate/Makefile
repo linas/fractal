@@ -14,7 +14,7 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert inf decide cutoff
 
-all:    cutoff euler-q mobius totient  \
+all:    cutoff erdos euler-q mobius totient  \
         ray automatic radius brat draw dx image
 
 
@@ -55,6 +55,9 @@ brat-gapper: brat.o brat-gapper.o util.o
 	$(CC) -o $@ $^ ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
 
 cutoff: brat.o cutoff.o util.o
+	$(CC) -o $@ $^ -lm -lstdc++
+
+erdos: brat.o erdos.o util.o
 	$(CC) -o $@ $^ -lm -lstdc++
 
 euler-q: brat.o euler-q.o util.o
