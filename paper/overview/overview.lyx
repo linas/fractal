@@ -89,30 +89,30 @@ Farey Numbers show up naturally in the analysis of the Mandelbrot set.
 , which is the set of mode-locked regions of the circle map.
  The devils staircase bears surprising resemblance to the Minkowski Question
  Mark function.
+ Maybe have small pictures of minkowski and devil's staircase here.
 \layout Standard
 
-Here's a picture of the Minkowski Question Mark:
-\layout Standard
-
-
-\begin_inset Graphics
-	filename fgraph.png
-
-\end_inset 
-
-
-\layout Standard
-
-We need a picture of mode-locking too.
-\layout Standard
-
-We should mention Sinai's toungue's here, which are the mode-locking regions,
+We should mention Sinai's tongue's here, which are the mode-locking regions,
  and note that they can be approximated with continued fractions, which
  is something we will show below.
 \layout Standard
 
 It is the resemblance of these pictures that leads one naturally to the
  study of continued fractions.
+ Once one studies tese, one realizes that the modular group is *the* symmetry
+ group of a huge class of iterated maps, and can be applied to just about
+ anything that exhibits period doubling or mode locking.
+ In particular, this connection implies that one should explore interesting
+ things in fractals, e.g.
+ Misiurewicz points, and ask what they correspond to in the modular group.
+ and etc.
+ 
+\layout Standard
+
+To get from here to there, we'll try to take a mostly pedagogical approach,
+ keeping things simple and accesible to an amateur matthematician or an
+ attentive undergraduate math-major, using only basic group theory, algebra
+ and analysis.
  
 \layout Section
 
@@ -2024,15 +2024,7 @@ One gets the general symmetry group
 \end_inset 
 
 .
- Its action on a continued fraction can be written as 
-\begin_inset Formula \[
-r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
-\;[1,a_{1}-1,a_{2},..] & \;\textrm{\; for \;} & a_{1}\neq1\\
-\;[a_{2}+1,a_{3},...] & \textrm{\;\; for \;} & a_{1}=1\end{array}\right.\]
-
-\end_inset 
-
-Note that 
+ Note that 
 \begin_inset Formula $r$
 \end_inset 
 
@@ -2169,7 +2161,65 @@ g=\left(\begin{array}{cc}
 
 \end_inset 
 
- Every group element of 
+ This matrix representation of the generators can be used to manipulate
+ and evaluate continued fractions; indeeed, the modular group is known as
+ being one way to conveniently work with continued fractions.
+ So, for example, we've already noted above that
+\begin_inset Formula \[
+g([a_{1},a_{2},...])=[a_{1}+1,a_{2},...]\]
+
+\end_inset 
+
+ Similarly, the action of 
+\begin_inset Formula $r$
+\end_inset 
+
+ is can be written as 
+\begin_inset Formula \[
+r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
+\;[1,a_{1}-1,a_{2},..] & \;\textrm{\; for \;} & a_{1}\neq1\\
+\;[a_{2}+1,a_{3},...] & \textrm{\;\; for \;} & a_{1}=1\end{array}\right.\]
+
+\end_inset 
+
+The operator to insert a digit at the front of the continued fraction expansion
+ is thus 
+\begin_inset Formula \[
+(g^{n}rg)([a_{1},a_{2},...])=[n+1,a_{1},a_{2},...]\]
+
+\end_inset 
+
+which we can immediately verify as
+\begin_inset Formula \[
+(g^{n}rg)(x)=\left(\left(\begin{array}{cc}
+1 & 0\\
+n & 1\end{array}\right)\left(\begin{array}{cc}
+-1 & 1\\
+0 & 1\end{array}\right)\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)\right):(x)=\left(\begin{array}{cc}
+0 & 1\\
+1 & n+1\end{array}\right):(x)=\frac{1}{n+1+x}\]
+
+\end_inset 
+
+ Here we introduced 
+\begin_inset Formula $:$
+\end_inset 
+
+ to denote the apply operator for the matrices; that is, 
+\begin_inset Formula \[
+\left(\begin{array}{cc}
+a & b\\
+c & d\end{array}\right):(x)=\frac{ax+b}{cx+d}\]
+
+\end_inset 
+
+ There are a number of other handy identities that one can use for computation
+ that should be listed in an appendix.
+\layout Standard
+
+Every group element of 
 \begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
 \end_inset 
 
@@ -2182,21 +2232,17 @@ g=\left(\begin{array}{cc}
 \end_inset 
 
 .
- The matrix representation of the generators can be used to evaluate continued
- fractions; indeeed, the modular group is known as being one way to conveniently
- work with continued fractions.
- 
-\layout Standard
-
-We've already given the relevant isomorphism above, as 
+ We've already discovered the relationship between the modular group and
+ continued fractions, which we gave above as 
 \begin_inset Formula \[
 \gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
 
 \end_inset 
 
- Let us now take some more care in presenting this as an isomorphism of
- the Minkowski Question Mark, since we need to define the domain over which
- the isomorphism is valid.
+ We saw that this relation gives us the isomorphisms of the Minkowski Question
+ Mark; let us now look at this a little more crefully and precisely, since,
+ among other things, we need to define the domain and range over which the
+ isomorphism is valid.
 \layout Standard
 
 First, let us consider the group elements with 
