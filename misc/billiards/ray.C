@@ -244,20 +244,22 @@ SinaiView::TestPattern (void)
 void 
 SinaiView::ToPixels (void)
 {
+   double absorbtivity = 0.13;
+
    for (int i=0; i<nx*ny; i++)
    {
       double red = 255.0;
       double green = 255.0;
       double blue = 255.0;
 
-      red *= exp (0.95 * sr[i].bounces[0]);
-      red *= exp (0.95 * sr[i].bounces[1]);
+      red *= exp (-absorbtivity * sr[i].bounces[0]);
+      red *= exp (-absorbtivity * sr[i].bounces[1]);
 
-      green *= exp (0.95 * sr[i].bounces[2]);
-      green *= exp (0.95 * sr[i].bounces[3]);
+      green *= exp (-absorbtivity * sr[i].bounces[2]);
+      green *= exp (-absorbtivity * sr[i].bounces[3]);
 
-      blue *= exp (0.95 * sr[i].bounces[4]);
-      blue *= exp (0.95 * sr[i].bounces[5]);
+      blue *= exp (-absorbtivity * sr[i].bounces[4]);
+      blue *= exp (-absorbtivity * sr[i].bounces[5]);
       
       abgr[i] = 0xff & ((unsigned int) red);
       abgr[i] |= (0xff & ((unsigned int) green)) << 8;
