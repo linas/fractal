@@ -281,7 +281,7 @@ extern "C" {
 }
 
 /* ========================================================== */
-/* Vector length */
+/* Conjugate Length */
 
 #define VEC_CONJUGATE_LENGTH(len,a)		\
 {						\
@@ -290,7 +290,7 @@ extern "C" {
 }
 
 /* ========================================================== */
-/* Vector length */
+/* Normalize vector length (so that vector is unit length) */
 
 #define VEC_NORMALIZE(a)			\
 {						\
@@ -305,7 +305,7 @@ extern "C" {
 }
 
 /* ========================================================== */
-/* Vector length */
+/* Change vector length to be newlen */
 
 #define VEC_RENORMALIZE(a,newlen)		\
 {						\
@@ -345,7 +345,9 @@ extern "C" {
 
 /* ========================================================== */
 /* Vector parallel -- assumes that n is of unit length 
- * accepts vector v, subtracts out any component perpendicular to n */
+ * Accepts vector v, subtracts out any component perpendicular to n.
+ * That is, it projects vector v to plane defined by n.
+ */
 
 #define VEC_PARALLEL(vp,v,n)			\
 {						\
@@ -359,7 +361,9 @@ extern "C" {
 
 /* ========================================================== */
 /* Vector reflection -- assumes n is of unit length */
-/* Takes vector v, reflects it against reflector n, and returns vr */
+/* Takes vector v, reflects it against reflector n, and returns vr.
+ * That is, assumes n defines a plane, and performs a mirror reflection
+ */
 
 #define VEC_REFLECT(vr,v,n)			\
 {						\

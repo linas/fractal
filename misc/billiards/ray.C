@@ -27,6 +27,9 @@
 // Bounce determines if a forward trace of the ray will intersect the
 // plane.  If it does, then the ray will be traced forward and reflected
 // off the plane.  
+//
+// Sphere returns TRUE if the ray intersects with a sphere of radius R
+// centered at the origin. If so, the ray is bounced off the sphere.
 
 class Ray
 {
@@ -35,6 +38,7 @@ class Ray
       void Set (double, double, double, double, double, double);
       double Intersect (Ray& plane);
       void Bounce (Ray& plane);
+      short Sphere (double r);
    public:
       double position[3];   
       double direction[3];
@@ -110,6 +114,18 @@ Ray::Bounce (Ray& plane)
 
 /* ==================================== */
 
+short 
+Ray::Sphere (double radius)
+{
+   double pact;
+   VEC_IMPACT_SQ (pact, direction, position);
+   if (radius*radius < pact) return FALSE;
+
+   return TRUE;
+}
+
+/* ==================================== */
+
 class SinaiRay
   : public Ray
 {
@@ -143,6 +159,9 @@ class SinaiView
       int ny;
 
       double eye[3]; // position of eye
+
+      double absorbtivity;
+      double radius;
 
    private:
       Ray walls[6]; // left, right, top, bottom, front, back;
@@ -222,6 +241,7 @@ SinaiView::Trace(int nbounces)
          sr[i].distance += nearest;
    
          sr[i].Bounce (walls[next_wall]);
+if(sr[i].Sphere (radius)) sr[i].bounces[next_wall]=0;
       }
 
    }
@@ -244,8 +264,6 @@ SinaiView::TestPattern (void)
 void 
 SinaiView::ToPixels (void)
 {
-   double absorbtivity = 0.13;
-
    for (int i=0; i<nx*ny; i++)
    {
       double red = 255.0;
@@ -292,8 +310,10 @@ main ()
 {
    SinaiView v (400,400);
 
+   v.absorbtivity = 0.3;
+   v.radius = 0.6;
 
-   v.Trace(32);
+   v.Trace(3);
    v.ToPixels();
    v.WriteMTV ("junk.mtv");
     
