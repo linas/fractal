@@ -143,9 +143,16 @@ PATH=$PATH:.
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpg
 
 # renorm for dedekind eta
-renorm j j2 0.333 0.0
-cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
-
-# renorm j j2 0.1 0.0
+# renorm j j2 0.333 0.0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpg
+
+# renorm for moebius with 'incorect' un-diverge
+# takelog j g
+# renorm g j2 0.16 3.0
+# cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
+
+takelog k g
+renorm g j2 0.08 10.0
+cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 

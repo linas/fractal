@@ -18,10 +18,13 @@
 #include "brat.h"
 #include "totient.h"
 
+
+static int max_terms;
 /* Return euler-product form of the q-series (dedekind eta) */
 
 static void totient_series_c (double re_q, double im_q, double *prep, double *pimp)
 {
+	double tmp;
 	int i;
 	*prep = 0.0;
 	*pimp = 0.0;
@@ -35,9 +38,8 @@ static void totient_series_c (double re_q, double im_q, double *prep, double *pi
 	double qpmod = re_q*re_q+im_q*im_q;
 	if (1.0 <= qpmod) return;
 
-	for (i=0; i<100100; i++)
+	for (i=0; i<max_terms; i++)
 	{
-		double tmp;
 
 		double t = totient_phi (i+1);
 		rep += qpr *t;
@@ -51,10 +53,29 @@ static void totient_series_c (double re_q, double im_q, double *prep, double *pi
 		qpmod = qpr*qpr + qpi*qpi;
 		if (qpmod < 1.0e-30) break;
 	}
-	if (90100 < i)
+	if (max_terms-1 < i)
 	{
-		printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
+		// printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
 	}
+
+#if NO_NOT_THIS
+	/* multiply by (1-q)^2 */
+	qpr = 1.0 - re_q;
+	qpi = - im_q;
+	tmp = qpr*qpr - qpi * qpi;
+	qpi = 2.0*qpr*qpi;
+	qpr = tmp;
+
+	tmp = qpr*rep - qpi * imp;
+	imp = qpr*imp + qpi * rep;
+	rep = tmp;
+#endif
+	/* multiply by (1-|q|)^2 */
+	tmp = 1.0 - sqrt (re_q*re_q + im_q*im_q);
+	tmp *= tmp;
+
+	rep *= tmp;
+	imp *= tmp;
 
 	*prep = rep;
 	*pimp = imp;
@@ -95,6 +116,8 @@ MakeHisto (
    
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = 0.0;
+
+	max_terms = itermax;
    
    im_position = im_start;
    for (i=0; i<sizey; i++) 
