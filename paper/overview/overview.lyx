@@ -2193,7 +2193,7 @@ Consider first the generator that is the interval contraction
 \begin_inset Formula $a+bx+ct_{w}(x)$
 \end_inset 
 
- is linear and is also closed, thus forming a vector space.
+ is both linear and is also closed, thus forming a vector space.
  That is, we have discovered that the Takagi Curve transforms under the
  three-dimensional represention of the modular group.
  To be explicit, we write a general element as the dot-product of a column
@@ -2217,17 +2217,19 @@ c\end{array}\right)\]
 
  have the representations 
 \begin_inset Formula \[
-g=\left(\begin{array}{ccc}
+g_{3}=\left(\begin{array}{ccc}
 \frac{1}{2}\; & 0\; & 0\\
 0 & \frac{1}{2} & 1\\
-0 & 0 & w\end{array}\right)\;\textrm{ and \;}r=\left(\begin{array}{ccc}
+0 & 0 & w\end{array}\right)\;\textrm{ and \;}r_{3}=\left(\begin{array}{ccc}
 1\; & 1\; & 1\\
 0 & -1\; & 0\\
 0 & 0 & -1\end{array}\right)\]
 
 \end_inset 
 
- by which we mean, for example, 
+ where we use teh subscript 3 to denote this is the 3-D representation.
+ Under tha action of this representation, 3-vectors transform as, for example,
+ 
 \begin_inset Formula \[
 \left[gt_{w}\right](x)=\left(\begin{array}{ccc}
 1 & \;\; x & \;\; t_{w}(x)\end{array}\right)\left(\begin{array}{ccc}
@@ -2271,9 +2273,67 @@ g=\left(\begin{array}{ccc}
 .
 \layout Standard
 
-Thus, in the above, we have demonstrated the explict symmetry relationship
- of the Takagi Curve, and furthermore, have indicated that it, together
- with 1 and 
+For the sake of clarity, lets now examine the formulas for a general group
+ element 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}$
+\end_inset 
+
+ for 
+\begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ We have that 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ acts on the real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ with the dyadic representation: that is, 
+\begin_inset Formula \[
+\gamma:x=\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+
+\end_inset 
+
+ which we saw from the previous section.
+ But on the Takagi curve, 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ acts as 
+\begin_inset Formula $\gamma_{3}$
+\end_inset 
+
+, thus:
+\begin_inset Formula \[
+t_{w}(\gamma_{D}(x))=\left[\gamma_{3}t_{w}\right](x)=\left(\begin{array}{ccc}
+1 & \;\; x & \;\; t_{w}(x)\end{array}\right)g_{3}^{a_{1}}r_{3}g_{3}^{a_{2}}r_{3}g_{3}^{a_{3}}r_{3}...r_{3}g_{3}^{a_{N}}\left(\begin{array}{c}
+0\\
+0\\
+1\end{array}\right)\]
+
+\end_inset 
+
+ which demonstrates the self-symmetry of the curve for arbitrary element
+ 
+\begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Proof: XXX Provide an explicit proof by pulling out one generator at a time
+ out from under the expressions.
+ Maybe this is a good homework problem.
+ QED.
+\layout Standard
+
+What have we done here? Thus, in the above, we have demonstrated the explict
+ symmetry relationship of the Takagi Curve, and furthermore, have indicated
+ that it, together with 1 and 
 \begin_inset Formula $x$
 \end_inset 
 
@@ -2290,6 +2350,28 @@ Thus, in the above, we have demonstrated the explict symmetry relationship
  make it very easy to compute how the curve transforms under any given element
  of the modular group.
  
+\layout Standard
+
+What have we done here? Two or three things.
+ First, that the set 
+\begin_inset Formula $\{1,x,t_{w}\}$
+\end_inset 
+
+is a basis of the 3D rep.
+ Second, 
+\begin_inset Formula $t_{w}$
+\end_inset 
+
+ commutes with 
+\begin_inset Formula $g$
+\end_inset 
+
+ and thus we have a kernel and a quotient group, of which 
+\begin_inset Formula $t_{w}$
+\end_inset 
+
+ is representative of the class.
+ Describe the quotient.
 \layout Description
 
 Corollary: The modular group is a symmetry group of the parabola, where
