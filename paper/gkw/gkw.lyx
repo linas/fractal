@@ -2033,6 +2033,8 @@ This figure shows
 \end_inset 
 
 real.
+ xxxxx wrong forumula, finish me, subrtract teh divergent part ...
+ odd part is sin.
  
 \end_inset 
 
@@ -2263,26 +2265,209 @@ We can quickly obtain the other eigenvectors by starting with the Takagi
 The Continuous Fractal Spectrum
 \layout Standard
 
-The continuous-spectrum eigenfunctions of the Bernoulli map are of course
- a generalizastion of the Takagi-Landsberg curve to complex values.
- These eigenfunctions are 
+An alternate set of eigeenvectors with a continuous spectrum are given by
+ 
 \begin_inset Formula \[
-\phi_{z,l}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2l+1\right)x\right)\]
+\phi_{z,k}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2k+1\right)x\right)\]
 
 \end_inset 
 
- which have eigenvalue 
+ and have eigenvalue 
 \begin_inset Formula $z$
 \end_inset 
 
 : that is 
-\begin_inset Formula $[U_{B}\phi_{z,l}](x)=z\phi_{z,l}(x)$
+\begin_inset Formula $[U_{B}\phi_{z,k}](x)=z\phi_{z,k}(x)$
 \end_inset 
 
 .
- These are quite beautiful fractals (xxx provide a picture here).
- Symmetry is the name of the game here.
+ Again, for a given fixed eigenvalue, they have a countably infinite degeneracy,
+ labelled by the parameter 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset 
+
+.
+ These eigenfunctions are fractal, as can be readily seen from the graph[xxx
+ need figure].
+ Since they are a generalization of the Takagi-Landsberg Curve, they have
+ an 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ symmetry, as discussed in an earlier chaper.
+ As is typical for fractals, these eigenfunctions are differentiable a finite
+ number of times before they become differentiable nowhere.
+ For example, for 
+\begin_inset Formula $1/2<\left|z\right|<1$
+\end_inset 
+
+, these are continuous with respect to 
+\begin_inset Formula $x$
+\end_inset 
+
+ but nowhere differentiable.
+ For 
+\begin_inset Formula $1/2^{m+1}<\left|z\right|<1/2^{m}$
+\end_inset 
+
+, these are everywhere 
+\begin_inset Formula $m$
+\end_inset 
+
+ times differentiable with resepct to 
+\begin_inset Formula $x$
+\end_inset 
+
+, but nowhere 
+\begin_inset Formula $m+1$
+\end_inset 
+
+ times differentiable.
  
+\layout Standard
+
+We can express these in terms of the Hurwitz Zeta eigenfuncations by considering
+ the sum 
+\begin_inset Formula \begin{eqnarray*}
+\sum_{k=0}^{\infty}z^{\ln_{2}(2k+1)}\phi_{z,k}(x) & = & \sum_{n=1}^{\infty}z^{\ln_{2}n}\exp\left(2\pi inx\right)\\
+ & = & \sum_{n=1}^{\infty}n^{\ln_{2}z}\exp\left(2\pi inx\right)\end{eqnarray*}
+
+\end_inset 
+
+ Thus, we see that we should equate 
+\begin_inset Formula $s=-\ln_{2}z$
+\end_inset 
+
+ so that the eigenvalues are 
+\begin_inset Formula $z=2^{-s}$
+\end_inset 
+
+.
+ Multiplying by the appropriate factors, we get the desired relationship
+ 
+\begin_inset Formula \[
+\beta(x;s)=2\Gamma(s+1)\left(2\pi\right)^{-s}\sum_{k=0}^{\infty}\left(2k+1\right)^{-s}\phi_{z,k}(x)\]
+
+\end_inset 
+
+ That is, the Hurwitz zeta eigenfunctions are expressible as a linear combinatat
+ion of the fractal eigenfunctions.
+ Essentially, either set of eigenfunctions can be used to form a set of
+ basis states for the Bernoulli Map transfer operator.
+ The Hurwitz Zeta eigenfunctions span a larger space than the fractal eigenfunct
+ions, as the Hurwitz Zeta is well-defined for eigenvalues with 
+\begin_inset Formula $\left|z\right|>1$
+\end_inset 
+
+, whereas the fractal eigenfunctions are not.
+ Of course, as we saw above, the Hurwitz Zeta eigenfunctions are not square-inte
+grable when 
+\begin_inset Formula $\left|z\right|>1$
+\end_inset 
+
+, which invalidates thier consideration for most 
+\begin_inset Quotes eld
+\end_inset 
+
+physical
+\begin_inset Quotes erd
+\end_inset 
+
+ uses.
+ Note also that through careful work, the fractal eigenfunctions can probably
+ be exteneded to 
+\begin_inset Formula $\left|z\right|>1$
+\end_inset 
+
+ continuous-nowhere functions by considering thier transformation properties
+ under 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ This would be in analogy to the exploration of the derivative of the Takagi
+ Curve, which, as we saw in an earlier chapter, can be defined as the Cantor
+ polynomial, built out of the digits of the binary expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+We can explicitly demonstrate the change of basis by defining 
+\begin_inset Formula \[
+\beta_{n}(x;s)\equiv\beta(x;s+2\pi ni/\ln2)\]
+
+\end_inset 
+
+ which all share the same eigenvalue: 
+\begin_inset Formula $U_{B}\beta_{n}=2^{-s}\beta_{n}$
+\end_inset 
+
+.
+ We can then restrict 
+\begin_inset Formula $s$
+\end_inset 
+
+ to a principle domain 
+\begin_inset Formula $-\pi<\Im s\,\ln2=\arg\, z<\pi$
+\end_inset 
+
+ .
+ The change of basis can now be written explicitly as 
+\begin_inset Formula \[
+\beta_{n}(x;s)=\sum_{k=0}^{\infty}F_{nk}\phi_{z,k}(x)\]
+
+\end_inset 
+
+ where the matrix elements are 
+\begin_inset Formula \[
+F_{nk}=2\Gamma\left(s+1+\frac{2\pi ni}{\ln2}\right)\left(2\pi(2k+1)\right)^{-s}\exp\left[-2n\pi i\frac{\ln\pi(2k+1)}{\ln2}\right]\]
+
+\end_inset 
+
+
+\layout Standard
+
+The modular group symmetries of the fractal eigenfunctions do not seem to
+ provide any interesting insight into the zeta, since they do not mix or
+ permute eigenstates.
+ For example, applying the generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ on the fractal eigenstates gives
+\begin_inset Formula \[
+g\phi_{zk}(x)=\phi_{zk}\left(\frac{x}{2}\right)=\exp((2k+1)\pi ix)+z\phi_{zk}(x)\]
+
+\end_inset 
+
+ and so one might hope that since the zetas are a linear combination of
+ the fractal eigenfunctions, one might get some new insight.
+ However, doing this gives the sum 
+\layout Standard
+
+
+\begin_inset Formula \[
+g\beta(x;s)=\beta(\frac{x}{2};s)=\frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\infty}\frac{\exp2\pi ix(2k+1)}{(2k+1)^{s}}+2^{-s}\beta(x;s)\]
+
+\end_inset 
+
+ as a symmetry, but the evaluation of the sum in the middle yeilds 
+\begin_inset Formula $\beta(x/2;s)-2^{-s}\beta(x;s)$
+\end_inset 
+
+ and so one gets a trivial relationship and no insight in particular.
+\layout Standard
+
+By contrast ....
+ mix up k's, n's, ...
+ xxx finish me.
+ 
+\layout Subsection
+
+Misc Junk
 \layout Standard
 
 These are protype forms for and the famous and beautiful Levy Dragons (reference
