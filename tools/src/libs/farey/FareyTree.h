@@ -9,6 +9,9 @@
  *
  * It uses memory in very intensive way.
  *
+ * GetNextFarey() returns the position of the number in the tree
+ * GetLevel() returns the level at which the fraction is
+ *
  * Created by Linas Vepstas October 2004
  */
 class FareyIterator
@@ -16,11 +19,13 @@ class FareyIterator
 	public:
 		FareyIterator (void);
 		~FareyIterator ();
-		void GetNextFarey (int *num, int *denom);
+		int GetNextFarey (int *num, int *denom);
+		int GetLevel (void);
 	protected:
 		int Recur (int np1, int dp1, int np2, int dp2, int *n, int *d, int depth);
 	private:
-		char *state;
+		unsigned char *state;
 		int state_sz;
+		int level;
 };
 
