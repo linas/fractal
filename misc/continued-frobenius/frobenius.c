@@ -17,6 +17,19 @@ continued_fraction_map (double x)
 	return y;
 }
 
+double 
+polygamma_2(double x)
+{
+	double accum = 0.0;
+	int i;
+	for (i=1; i<300; i++)
+	{
+		double y = 1.0 / ((double) i + x);
+		accum += y*y*y;
+	}
+	return accum;
+}
+
 double * 
 init_density (int cnt) 
 {
@@ -27,12 +40,12 @@ init_density (int cnt)
 	{
 		double x = ((double) (2*i+1)) / ((double) (2*cnt));
 		double y = 1.0 / (1.0+x);
-		den[i] = 1.0;
+		// den[i] = 1.0;
 		// den[i] = x;  // some arbitary setup 
 		// den[i] = y;  // some arbitary setup 
 		// den[i] = 1.0 - y*y;
 		// den[i] = y*y;
-		// den[i] = -0.75 +1.75*y*y*sqrt(y);
+		den[i] = -0.75 +1.75*y*y*sqrt(y);
 		// den[i] = 1.0-y*y*y*y;
 	}
 	return den;
@@ -150,7 +163,6 @@ better_renorm_perron (double *tgt, double *src, int cnt)
 		tgt[i] *= norm;
 	}
 
-#if 0
 	double zero = 0.5 * (3.0*tgt[0] - tgt[1]);
 	zero = 1.0 / zero;
 
@@ -158,7 +170,6 @@ better_renorm_perron (double *tgt, double *src, int cnt)
 	{
 		tgt[i] *= zero;
 	}
-#endif
 
 	printf ("# duude better lambda = %f\n", lambda); 
 }
@@ -386,7 +397,6 @@ main (int argc, char * argv[])
    	den[i] = init_density (cnt);
 	}
 
-#if LAMBDA_ONE
 	/* remove common mode */
 	iterate_perron (den[1], den[0], cnt);
 	for (i=0; i<cnt; i++) 
@@ -396,7 +406,6 @@ main (int argc, char * argv[])
 	}
 	iterate_perron (den[1], den[0], cnt);
 	better_renorm_perron (den[1], den[0], cnt);
-#endif
 
 	int istart = 0;
 	for (i=1; i<istart+9; i++) 
@@ -405,10 +414,18 @@ main (int argc, char * argv[])
 		// iterate_density (den[i], den[i-1], cnt);
 		iterate_perron (den[i], den[i-1], cnt);
 		// renorm_perron (den[i], den[i-1], cnt);
+		better_renorm_perron (den[i], den[i-1], cnt);
 		// second_eigen_perron (den[i], den[i-1], den[i-2], cnt);
 	}
 
 	// iterate_perron (den[2], den[0], cnt);
+
+	for (i=0; i<cnt; i++) 
+	{
+		/* plug in a reference */
+		double x = ((double) (2*i+1)) / ((double) (2*cnt));
+		den[0][i] = polygamma_2 (x);
+	}
 	
 #if WHATTHE
 	printf ("#\n");
