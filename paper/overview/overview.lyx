@@ -1120,9 +1120,8 @@ Indeed, there is a big upwards spike at 1/2.
  But there seems to be a big downwards spike just below, at bin 359, seemingly
  of equal and opposite size.
  This is the first surprise.
- Why is there a deficit at bing 359? We can try to get a better picture
- of things by dividing up the enumaration into 719 bins (note that 719 is
- prime).
+ Why is there a deficit at bin 359? We can try to get a better picture of
+ things by dividing up the enumaration into 719 bins (note that 719 is prime).
  This is results in the next surprise: the graph is flat.
  See below:
 \layout Standard
@@ -1230,32 +1229,104 @@ ors less than 16000.
 The Minkowski Question Mark Function
 \layout Standard
 
-This section is a review of the Minkowski Question Mark Function.
+This section is a review of the Minkowski Question Mark Function 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+.
  To Do: Write Me.
 \layout Standard
 
 The Minkowski Question Mark, pictured below, can be constructed in several
  ways.
- 
-\layout Standard
-
-Blah Blah Blah, standard stuff 
-\layout Standard
-
-For 
-\begin_inset Formula $x=[a_{1},a_{2},...a_{N}]$
+ It maps the Farey Tree to the tree of binary numbers: 0 is mapped to 0,
+ 1 is mapped to 1, and 1/2 is mapped to 1/2.
+ Then, for a pair of Farey fractions 
+\begin_inset Formula $p/q$
 \end_inset 
 
- its defined as 
+ and 
+\begin_inset Formula $p'/q'$
+\end_inset 
+
+ on the tree, it replaces the 'Farey Addition' with an average:
 \begin_inset Formula \[
-?(x)=2\sum_{k=1}\;\frac{(-1)^{k}}{2^{(a_{1}+a_{2}+...+a_{k})}}\]
+?\left(\frac{p+p'}{q+q'}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{p'}{q'}\right)\right]\]
 
 \end_inset 
 
+Thus, the Farey number 1/3 is mapped to the binary 1/4, and so on: one quickly
+ sees 
+\begin_inset Formula $?\left(1/n\right)=2^{-n+1}$
+\end_inset 
 
+.
+ Similarly, 2/3 maps to 3/4, and 
+\begin_inset Formula $?(n/(2n-1))=2^{-1}+2^{-n}$
+\end_inset 
+
+.
+ In general, a rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ maps to 
+\begin_inset Formula $?(p/q)=m\cdot2^{-n}$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $m,n$
+\end_inset 
+
+.
+ One can write a non-recursive definition by expanding a number as a continued
+ fraction, and then using each of the elements in the continued fraction
+ to count the number of binary 1's and 0's: that is, for 
+\begin_inset Formula $x=[a_{1},a_{2},...]$
+\end_inset 
+
+, we have 
+\begin_inset Formula \[
+?(x)=2\sum_{k=1}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\]
+
+\end_inset 
+
+ which can be visualized as 
+\begin_inset Formula \[
+?(x)=\begin{array}{ccccc}
+0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
+a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\]
+
+\end_inset 
+
+ Note that continued fractions with a finite number of terms are rationals,
+ and thus map to a binary number with a finite number of digits.
+ We use the nifty identity 
+\begin_inset Formula $0.111111...=1.0000...$
+\end_inset 
+
+, if needed, to terminate the sequence.
+ Note that continued fractions whose expansions become eventually periodic
+ are mapped to binary strings that become eventualy periodic.
+ The later are rationals whose denominator is not a power of 2, whereas
+ the former are quadratic irrationals, which is known from the theory of
+ Pellian equations.
+ A quadratic irrational is a number of the form 
+\begin_inset Formula $p/q+m\sqrt{D}/n$
+\end_inset 
+
+ for integers 
+\begin_inset Formula $p,q,m,D,n$
+\end_inset 
+
+; every quadratic irrational has a continued fraction expansion that becomes
+ eventually periodic.
+ Note that, as a side effect, this proves that quadratic irrationals are
+ countable in the same way that rationals are.
 \layout Standard
 
-The Minkowski Question Mark mapping is continuous everywhere.
+The Minkowski Question Mark has some very curious analytic properties: mapping
+ is continuous everywhere.
  It is also infinitely differentiable on every rational, and all derivatives
  vanish at every rational; yet the mapping is strictly montonically increasing.
  Clearly, the function is singular on irrationals.
@@ -1264,18 +1335,6 @@ The Minkowski Question Mark mapping is continuous everywhere.
 \layout Standard
 
 Blah Blah.
-\layout Standard
-
-It maps the binary tree to the Farey Tree, obvious from the construction.
- It maps rationals to power-of-2 fractions 
-\begin_inset Formula $n/2^{m}$
-\end_inset 
-
-, and quadratic irrationals (as per theory of Pellian Equations) to non-power-of
--2 rationals (a periodic continued fraction is a quadratic irrartional)
- (a periodic binary number is a rational) (thus providing an alternate proof
- that the quadratic irrationals are countable) and etc.
- 
 \layout Standard
 
 Note that the games played with code-words during the analysis of Duady-Hubbard
