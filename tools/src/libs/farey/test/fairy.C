@@ -4,7 +4,7 @@
  * Test operation of farey number converter
  *
  * HISTORY:
- * Linas Vepstas Januery 16 1994
+ * Linas Vepstas January 16 1994
  */
 
 #include "Farey.h"
