@@ -3,7 +3,7 @@
 \textclass article
 \language english
 \inputencoding auto
-\fontscheme default
+\fontscheme pslatex
 \graphics default
 \paperfontsize default
 \spacing single 
@@ -38,7 +38,7 @@ and the Modular Group
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (minor corrections 6 December 2004)
+12 October 2004 (updated 15 March 2005)
 \layout Abstract
 
 Fractals and Continued Fractions seem to be deeply related in many ways.
@@ -167,8 +167,8 @@ We denote the values of the Minkowski Question Mark function as as
 \end_inset 
 
 , it equates the Farey mediant to the arithmetic average:
-\begin_inset Formula \[
-?\left(\frac{p+p'}{q+q'}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{p'}{q'}\right)\right]\]
+\begin_inset Formula \begin{equation}
+?\left(\frac{p+p'}{q+q'}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{p'}{q'}\right)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -237,8 +237,8 @@ An alternate, non-recursive definition for the Question Mark is based on
 \end_inset 
 
 , one writes 
-\begin_inset Formula \[
-?(x)=2\sum_{k=1}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\]
+\begin_inset Formula \begin{equation}
+?(x)=2\sum_{k=1}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -248,10 +248,10 @@ An alternate, non-recursive definition for the Question Mark is based on
 \end_inset 
 
 : 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 ?(x)=\begin{array}{ccccc}
 0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
-a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\]
+a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -370,8 +370,8 @@ If there is a 3-adic or p-adic generalization of the Minkowski Question
 \layout Standard
 
 
-\begin_inset Formula \[
-\sum_{k=1}\left(-1\right)^{k}\;3^{-(a_{1}+a_{2}+...+a_{k})}\]
+\begin_inset Formula \begin{equation}
+\sum_{k=1}\left(-1\right)^{k}\;3^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -406,7 +406,13 @@ It should be immediately apparent from the picture of the Question Mark
  that it is highly self-similar, and thus should have a group of symmetries.
  Below, we give an explicit presentation of this group, which turns out
  to be the Modular Group Gamma.
- After briefly presenting the modular group a bit, we point out that the
+ Strictly speaking, the set of self-similarities is really a subset of the
+ modular group, a semi-group of sorts.
+ This is due to the nature of the construction; the correct extension tothe
+ full group is a bit confusing.
+\layout Standard
+
+After briefly presenting the modular group a bit, we point out that the
  'interesting' subset of the group, that is, 'interesting' as far as fractals
  are concerned, can be best enumerated as 
 \begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes\mathbb{Z}_{2}$
@@ -414,12 +420,14 @@ It should be immediately apparent from the picture of the Question Mark
 
 .
  This enumeration will help cement that the modular group is the symmetry
- group of the Mandelbrot Set.
+ group of a broad range of fractal curves (the de Rham curve and its various
+ expressions).
  I'm enamored of this development, because the popular literature on fractals
  always talks about self-similarity without ever actually giving the group
  structure that's involved.
  The goal here is to rectify this omission.
- 
+ The development for general fractal curves occurs in the next chapter;
+ here we limit ourselves to the Question Mark (which is a de Rham curve).
 \layout Standard
 
 We start by noticing that for any real number 
@@ -467,8 +475,8 @@ We start by noticing that for any real number
 
 .
  Equivalently, for a continued fraction, we have 
-\begin_inset Formula \[
-g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]\]
+\begin_inset Formula \begin{equation}
+g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -530,8 +538,8 @@ One gets the general symmetry group
 
 .
  Thus, for example, 
-\begin_inset Formula \[
-(?rg^{n})(x)=(r?g^{n})(x)=r\left(\frac{1}{2^{n}}?\right)(x)=1-?(x)/2^{n}=?\left(r\left(\frac{x}{1+nx}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)\]
+\begin_inset Formula \begin{equation}
+(?rg^{n})(x)=(r?g^{n})(x)=r\left(\frac{1}{2^{n}}?\right)(x)=1-?(x)/2^{n}=?\left(r\left(\frac{x}{1+nx}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -548,15 +556,15 @@ One gets the general symmetry group
 \end_inset 
 
 .
- We can now write a general group element as 
+ We can now write a general similarity transform as 
 \begin_inset Formula $\gamma\equiv g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
 \end_inset 
 
 .
  Applying the above process, it is relatively straightforward to see that
  
-\begin_inset Formula \[
-(?\gamma)(x)=(?g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+\begin_inset Formula \begin{equation}
+(?\gamma)(x)=(?g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -566,8 +574,8 @@ One gets the general symmetry group
 \end_inset 
 
  itself as a continued fraction: 
-\begin_inset Formula \[
-g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]\]
+\begin_inset Formula \begin{equation}
+g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -576,18 +584,18 @@ g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]\]
 \end_inset 
 
  and, with a slight abuse:
-\begin_inset Formula \[
-r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\]
+\begin_inset Formula \begin{equation}
+r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\label{eq:}\end{equation}
 
 \end_inset 
 
  Continuing this exercise, one finds that
-\begin_inset Formula \[
-\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+\begin_inset Formula \begin{equation}
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:}\end{equation}
 
 \end_inset 
 
- which is recognizable as an element of the group 
+ which should be recognizable as an element of the group 
 \begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
 \end_inset 
 
@@ -610,10 +618,10 @@ The modular group gamma is normally defined by its canonical representation
 .
  In this standard representation, a general group element is represented
  by 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \gamma=\left(\begin{array}{cc}
 a & b\\
-c & d\end{array}\right)\]
+c & d\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -632,33 +640,53 @@ c & d\end{array}\right)\]
 \end_inset 
 
 .
- The group elements are generated by a pair of generators.
- One generator generates the cyclic group of two elements 
-\begin_inset Formula $C_{2}\equiv\mathbb{Z}/\left(2\mathbb{Z}\right)$
-\end_inset 
-
- and the other generates the subgroup 
-\begin_inset Formula $\mathbb{Z}$
-\end_inset 
-
-.
- One can choose several different representations for the generators; the
- choice that is consistent with the previous section is 
-\begin_inset Formula \[
+ This group can be presented as a free group of a pair of generators, and
+ there are many different possible choices of generators.
+ The equivalence of choices isn't always obvious.
+ Here we will pick a pair of generators that is consistent with the previous
+ section.
+ This choice, however, does 
+\emph on 
+not
+\emph default 
+ correspond to one of the canonical choices commonly seen in the literature;
+ we focus instead on the utility of the generators to the task at hand.
+ Thus, we pick 
+\begin_inset Formula \begin{equation}
 g=\left(\begin{array}{cc}
 1 & 0\\
 1 & 1\end{array}\right)\;\textrm{ and }\; r=\left(\begin{array}{cc}
 -1 & 1\\
-0 & 1\end{array}\right)\]
+0 & 1\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
- This matrix representation of the generators can be used to manipulate
- and evaluate continued fractions; indeed, the modular group is known as
- being one way to conveniently work with continued fractions.
+ Note that 
+\begin_inset Formula $\det r=-1$
+\end_inset 
+
+ and so the group that will be generated is more precisely the unimodular
+ group 
+\begin_inset Formula $S^{*}L(2,\mathbb{Z})$
+\end_inset 
+
+, the group of matricies with determinant +1 or -1.
+ Note also that the modular group is almost universally defined as the projectiv
+e group 
+\begin_inset Formula $PSL(2,\mathbb{Z})=SL(2,\mathbb{Z})/\{\pm\mathbb{I}\}$
+\end_inset 
+
+ of matrices with determinant 1, divided by plus or minus the identity.
+ In the following we will for the most part ignore these distinctions, emphasizi
+ng them only where necessary.
+\layout Standard
+
+This matrix representation of the generators can be used to manipulate and
+ evaluate continued fractions; indeed, the modular group is known as being
+ one way to conveniently work with continued fractions.
  So, for example, we've already noted above that
-\begin_inset Formula \[
-g([a_{1},a_{2},...])=[a_{1}+1,a_{2},...]\]
+\begin_inset Formula \begin{equation}
+g([a_{1},a_{2},...])=[a_{1}+1,a_{2},...]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -667,10 +695,10 @@ g([a_{1},a_{2},...])=[a_{1}+1,a_{2},...]\]
 \end_inset 
 
  is can be written as 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
 \;[1,a_{1}-1,a_{2},..] & \;\textrm{\; for \;} & a_{1}\neq1\\
-\;[a_{2}+1,a_{3},...] & \textrm{\;\; for \;} & a_{1}=1\end{array}\right.\]
+\;[a_{2}+1,a_{3},...] & \textrm{\;\; for \;} & a_{1}=1\end{array}\right.\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -679,13 +707,13 @@ The operator to insert a digit
 \end_inset 
 
  at the front of the continued fraction expansion is thus 
-\begin_inset Formula \[
-(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]\]
+\begin_inset Formula \begin{equation}
+(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]\label{eq:}\end{equation}
 
 \end_inset 
 
 which we can immediately verify as
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 (g^{n-1}rg)(x)=\left(\left(\begin{array}{cc}
 1 & 0\\
 n-1 & 1\end{array}\right)\left(\begin{array}{cc}
@@ -694,7 +722,7 @@ n-1 & 1\end{array}\right)\left(\begin{array}{cc}
 1 & 0\\
 1 & 1\end{array}\right)\right):(x)=\left(\begin{array}{cc}
 0 & 1\\
-1 & n\end{array}\right):(x)=\frac{1}{n+x}\]
+1 & n\end{array}\right):(x)=\frac{1}{n+x}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -703,17 +731,17 @@ n-1 & 1\end{array}\right)\left(\begin{array}{cc}
 \end_inset 
 
  to denote the apply operator for the matrices; that is, 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \left(\begin{array}{cc}
 a & b\\
-c & d\end{array}\right):(x)=\frac{ax+b}{cx+d}\]
+c & d\end{array}\right):(x)=\frac{ax+b}{cx+d}\label{eq:}\end{equation}
 
 \end_inset 
 
  It should be clear that we can now build up the continued fraction as desired
  with this insertion operator acting on zero: 
-\begin_inset Formula \[
-(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
+\begin_inset Formula \begin{equation}
+(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -721,14 +749,14 @@ c & d\end{array}\right):(x)=\frac{ax+b}{cx+d}\]
 \layout Standard
 
 One can also find the append operator, which we find by examining
-\begin_inset Formula \[
-[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]\]
+\begin_inset Formula \begin{equation}
+[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]\label{eq:}\end{equation}
 
 \end_inset 
 
  and 
-\begin_inset Formula \[
-[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]\]
+\begin_inset Formula \begin{equation}
+[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -741,8 +769,8 @@ One can also find the append operator, which we find by examining
 \end_inset 
 
 , acts as 
-\begin_inset Formula \[
-[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]\]
+\begin_inset Formula \begin{equation}
+[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -752,12 +780,27 @@ One can also find the append operator, which we find by examining
 \end_inset 
 
  as follows: 
-\begin_inset Formula \[
-(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
+\begin_inset Formula \begin{equation}
+(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\label{eq:}\end{equation}
 
 \end_inset 
 
  arriving at the same answer as before.
+\layout Standard
+
+Note that in the above, in order to work with a consistent definition of
+ the continued fraction, we are more-or-less force to limit ourselves to
+ considering only those group elements with positive 
+\begin_inset Formula $j,k,m,...$
+\end_inset 
+
+ By contrast, the true general group element can have positive or negative
+ values for these exponents.
+ Thus, it should be clear that the rational numbers, expressed as continued
+ fractions, can represent a subset of the modular group, but cannot represent
+ the full group.
+ In fact, as well see later, the rational numbers correspond to the cusps.
+ We'll return to this set-theoretic represnetation shortly.
 \layout Subsection
 
 A Theorem about an Isomorphism
@@ -785,8 +828,8 @@ Lets restate the above results using modern mathematical notation and language.
 \end_inset 
 
  with 
-\begin_inset Formula \[
-x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\]
+\begin_inset Formula \begin{equation}
+x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -805,13 +848,17 @@ x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\]
 \end_inset 
 
  such that 
-\begin_inset Formula \[
-x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\]
+\begin_inset Formula \begin{equation}
+x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\label{eq:}\end{equation}
 
 \end_inset 
 
 where 
 \begin_inset Formula $a_{k}\in\mathbb{N}\;\forall k\in\mathbb{N}$
+\end_inset 
+
+, with the exception that 
+\begin_inset Formula $a_{0}\in\mathbb{Z}$
 \end_inset 
 
 .
@@ -828,19 +875,19 @@ where
 \end_inset 
 
  has the representation 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \begin{array}{c}
 g_{D}:\mathbb{R}_{D}\longrightarrow\mathbb{R}_{D}\\
-g_{D}:x\longmapsto x/2\end{array}\]
+g_{D}:x\longmapsto x/2\end{array}\label{eq:}\end{equation}
 
 \end_inset 
 
  when acting on the set of dyadic numbers, whereas as this same group element
  has the representation 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \begin{array}{c}
 g_{C}:\mathbb{R}_{C}\longrightarrow\mathbb{R}_{C}\\
-g_{C}:x\longmapsto x/(x+1)\end{array}\]
+g_{C}:x\longmapsto x/(x+1)\end{array}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -854,21 +901,65 @@ g_{C}:x\longmapsto x/(x+1)\end{array}\]
 \end_inset 
 
 .
+ 
+\layout Standard
+
+Define 
+\begin_inset Formula \begin{equation}
+G=\{\gamma\in SL(2,\mathbb{Z})\;|\;\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ or }\gamma=rg^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Note that 
+\begin_inset Formula $G\subset S^{*}L(2,\mathbb{Z})$
+\end_inset 
+
+ is a proper subset: it is a semigroup, in that it contains the identity
+ element, and is closed in the sense that if 
+\begin_inset Formula $\gamma_{1}\in G$
+\end_inset 
+
+ and 
+\begin_inset Formula $\gamma_{2}\in G$
+\end_inset 
+
+ then 
+\begin_inset Formula $\gamma_{1}\gamma_{2}\in G$
+\end_inset 
+
+.
+ However, 
+\begin_inset Formula $G$
+\end_inset 
+
+ is not a proper group because it does not contain inverses (which would
+ require elements with the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ being negative).
 \layout Description
 
-Theorem: The Minkowski Question Mark provides an isomorphism between these
- two sets.
+Theorem: The Minkowski Question Mark provides an isomorphism between 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+.
  That is, we have the commuting diagram
 \layout Standard
 
 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \begin{array}{ccccc}
  &  & \;\;\gamma_{C}\;\;\\
  & \mathbb{R}_{C} & \longrightarrow & \mathbb{R}_{C}\\
 ? & \downarrow & \bigcirc & \downarrow & ?\\
  & \mathbb{R}_{D} & \longrightarrow & \mathbb{R}_{D}\\
- &  & \gamma_{D}\end{array}\]
+ &  & \gamma_{D}\end{array}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -877,12 +968,12 @@ Theorem: The Minkowski Question Mark provides an isomorphism between these
 \end_inset 
 
  holds 
-\begin_inset Formula $\forall\gamma\in SL(2,\mathbb{Z})$
+\begin_inset Formula $\forall\gamma\in G$
 \end_inset 
 
 .
  To be more precise, we really should say that 
-\begin_inset Formula $(?\circ\gamma_{C})(x_{C})=(\gamma_{D}\circ?)(x_{D})\;\;\forall\gamma\in SL(2,\mathbb{Z})$
+\begin_inset Formula $(?\circ\gamma_{C})(x_{C})=(\gamma_{D}\circ?)(x_{D})\;\;\forall\gamma\in G$
 \end_inset 
 
  and 
@@ -912,7 +1003,7 @@ Proof: We've already given the standard representations of
  in these two spaces in previous sections, but we repeat these here just
  so that this is all crystal-clear.
  We first decompose an abstract group element 
-\begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
+\begin_inset Formula $\gamma\in G$
 \end_inset 
 
  in terms of the generators 
@@ -924,8 +1015,8 @@ Proof: We've already given the standard representations of
 \end_inset 
 
 , as usual: 
-\begin_inset Formula \[
-\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\]
+\begin_inset Formula \begin{equation}
+\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -938,8 +1029,8 @@ Proof: We've already given the standard representations of
 \end_inset 
 
  which is 
-\begin_inset Formula \[
-\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+\begin_inset Formula \begin{equation}
+\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -948,8 +1039,8 @@ Proof: We've already given the standard representations of
 \end_inset 
 
  which is 
-\begin_inset Formula \[
-\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+\begin_inset Formula \begin{equation}
+\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -972,7 +1063,7 @@ Proof: We've already given the standard representations of
 \end_inset 
 
  for another 
-\begin_inset Formula $\gamma'\in SL(2,\mathbb{Z})$
+\begin_inset Formula $\gamma'\in G$
 \end_inset 
 
  and that it also holds for 
@@ -1140,18 +1231,18 @@ prima facae
 The Dyadic Representation as Affine Transformations
 \layout Standard
 
-Note that the dyadic representation can be written as affine transformations,
- which also use two-by-two matrices.
+Note that the dyadic representation can be written in terms of affine transforma
+tions, which also use two-by-two matrices.
  These should not be confused with the canonical representation.
  In the affine representation, we write 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \gamma_{D}(x)\;:=\left(\begin{array}{cc}
 1 & 0\\
 a & b\end{array}\right)\left(\begin{array}{c}
 1\\
 x\end{array}\right)=\left(\begin{array}{c}
 1\\
-a+bx\end{array}\right)\]
+a+bx\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1161,33 +1252,33 @@ a+bx\end{array}\right)\]
 
 .
  In this representation, we have 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 g_{D}=\left(\begin{array}{cc}
 1 & 0\\
-0 & \frac{1}{2}\end{array}\right)\]
+0 & \frac{1}{2}\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  and 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 r_{D}=\left(\begin{array}{cc}
 1 & 0\\
-1 & -1\end{array}\right)\]
+1 & -1\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  and so once again, we can use matrix multiplication to quickly compute
  
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \gamma_{D}(x)\;:=\gamma_{D}\left(\begin{array}{c}
 1\\
 x\end{array}\right)=g_{D}^{a_{1}}r_{D}g_{D}^{a_{2}}r_{D}...r_{D}g_{D}^{a_{N}}\left(\begin{array}{c}
 1\\
-x\end{array}\right)\]
+x\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
- which is eactly equal to the 
+ which is exactly equal to the 
 \begin_inset Formula $\gamma_{D}(x)$
 \end_inset 
 
@@ -1202,6 +1293,11 @@ x\end{array}\right)\]
 \end_inset 
 
 .
+ In particular, the determinant of 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+is not 1.
  
 \layout Subsection
 
