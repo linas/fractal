@@ -155,7 +155,7 @@ void dump (float glob[],
    
    /* renormalize */
    for (i=0; i<sizex*sizey; i++) {
-      printf ("(%d, %d) = %g \n", i%sizex, i/sizex,  glob[i]);
+      printf ("(%ld, %ld) = %g \n", i%sizex, i/sizex,  glob[i]);
    }
 }
 

@@ -19,6 +19,7 @@
 #include <math.h>
 
 extern FILE *Fopen();
+extern void do_mandel (char * filename, int width, int height);
 
 int param;
 
@@ -54,7 +55,6 @@ void do_moire (char * filename, int width, int height)
 {
    float	*data ;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
-   int		itermax;
    FILE		*fp;
 
    data = (float *) malloc (sizeof (float) * width * height);
@@ -310,7 +310,7 @@ float circle_poincare_recurrance_time (CircleData *dat,
    double	x, y;
    double	xpoint;
    int		iter;
-   long		num_recurs, time_recur;
+   long		num_recurs, time_recur=0;
    
    /* First, we give a spin for 500 cycles, giving the non-chaotic 
     * parts a chance to phase-lock */
@@ -358,7 +358,7 @@ float im_circle_poincare_recurrance_time (CircleData *dat,
    double	xpoint, ypoint;
    double	dx, dy, d;
    int		iter;
-   long		num_recurs, time_recur;
+   long		num_recurs, time_recur=0;
 
    cw = cos (2 * PI * omega);
    sw = sin (2 * PI * omega);
@@ -425,7 +425,7 @@ float co_circle_poincare_recurrance_time (CircleData *dat,
    double	xpoint, ypoint;
    double	dx, dy, d;
    int		iter;
-   long		num_recurs, time_recur;
+   long		num_recurs, time_recur=0;
 
    cw = cos (2 * PI * omega);
    sw = sin (2 * PI * omega);
@@ -537,7 +537,7 @@ float clamp_logistic_poincare_recurrance_time (CircleData *dat,
    double	x, y;
    double	xpoint;
    int		iter;
-   long		num_recurs, time_recur;
+   long		num_recurs, time_recur=0;
    
    /* First, we give a spin for 500 cycles, giving the non-chaotic 
     * parts a chance to phase-lock */
@@ -588,10 +588,10 @@ float squash_logistic_poincare_recurrance_time (CircleData *dat,
                        double K)
 
 {
-   double	x, y, tmp;
+   double	x, y;
    double	xpoint;
    int		iter;
-   long		num_recurs, time_recur;
+   long		num_recurs, time_recur=0;
    
    /* do this only  ... */
 /*
@@ -652,7 +652,7 @@ float folded_poincare_recurrance_time (CircleData *dat,
    double	x, y;
    double	xpoint;
    int		iter;
-   long		num_recurs, time_recur;
+   long		num_recurs, time_recur=0;
    
    /* First, we give a spin for 500 cycles, giving the non-chaotic 
     * parts a chance to phase-lock */
@@ -702,7 +702,7 @@ void do_circle (char * filename, int width, int height)
 {
    float	*data ;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
-   int		itermax;
+   int		itermax=0;
    float	omega_min, omega_max, K_min, K_max;
    FILE		*fp;
    CircleData dat;
@@ -807,7 +807,7 @@ void do_im_circle (char * filename, int width, int height)
 {
    float	*data ;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
-   int		itermax;
+   int		itermax=0;
    float	omega_min, omega_max, K_min, K_max;
    FILE		*fp;
    CircleData dat;
@@ -875,7 +875,7 @@ void do_co_circle (char * filename, int width, int height)
 {
    float	*data ;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
-   int		iii, itermax;
+   int		iii, itermax=0;
    float	omega_min, omega_max, K_min, K_max;
    FILE		*fp;
    CircleData dat;
@@ -968,8 +968,8 @@ void do_logistic (char * filename, int width, int height)
 {
    float	*data ;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
-   int		itermax;
-   float		omega_min, omega_max, K_min, K_max;
+   int		itermax=0;
+   float	omega_min, omega_max, K_min, K_max;
    FILE		*fp;
    CircleData dat;
 
@@ -1015,9 +1015,9 @@ void do_logistic (char * filename, int width, int height)
    fprintf (fp, "standard logistic map\n");
    fprintf (fp, "y = x(n) - (sqrt(omega/K)+0.5) \n");
    fprintf (fp, "z = x(n) + (sqrt(omega/K)+0.5) \n");
-   /* fprintf (fp, "y = x(n) - (omega-0.5)/sqrt(K) - 0.5\n");
+   /* fprintf (fp, "y = x(n) - (omega-0.5)/sqrt(K) - 0.5\n");  */
    fprintf (fp, "z = x(n) + (omega-0.5)/sqrt(K) + 0.5\n"); 
-   /* fprintf (fp, "y = x(n) - Omega \n");
+   /* fprintf (fp, "y = x(n) - Omega \n");  */
    fprintf (fp, "z = x(n) + Omega \n"); 
    /* fprintf (fp, "x(n+1) = lambda * y * (1-z) mod 1 \n"); */
    /* fprintf (fp, "x(n+1) = (1/lambda) * y * (1-z) mod 1 \n"); */
@@ -1046,8 +1046,8 @@ void do_folded (char * filename, int width, int height)
 {
    float	*data ;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
-   int		itermax;
-   float		omega_min, omega_max, K_min, K_max;
+   int		itermax=0;
+   float	omega_min, omega_max, K_min, K_max;
    FILE		*fp;
    CircleData dat;
 

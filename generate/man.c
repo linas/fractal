@@ -17,6 +17,16 @@
 #include <stdlib.h>
 #include <math.h>
 
+extern void walk_rect (float *glob,
+                 unsigned int sizex,  /* width, in pixels */
+                 unsigned int sizey,  /* height, in pixels */
+                 double x_min,        /* left side of pixmap */
+                 double x_max,        /* right side of pixmap */
+                 double y_min,        /* bottom of pixmap */
+                 double y_max,        /* top of pixmap */
+                 float (*callback)(),  /* callback */
+                 void * calldata);     /* static data */
+
 
 /*-------------------------------------------------------------------*/
 
@@ -41,7 +51,7 @@ typedef struct _circ_data {
  * mandelbrot map
  */
 
-#define MNORM 5
+#define MNORM 5.0
 double mandel_cross = 1.0;
 
 float mandelbrot_poincare_recurrance_time (CircleData *dat,
@@ -54,8 +64,7 @@ float mandelbrot_poincare_recurrance_time (CircleData *dat,
    double	dist, dx, dy;
    double	xpoint, ypoint;
    int		iter;
-   long		num_recurs, time_recur;
-   double 	r, phi, theta;
+   long		num_recurs, time_recur=0;
    
    /* First, we give a spin for 500 cycles, giving the non-chaotic 
     * parts a chance to phase-lock */
@@ -115,7 +124,7 @@ void do_mandel (char * filename, int width, int height)
 {
    float	*data ;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
-   int		itermax;
+   int		itermax=0;
    float	omega_min, omega_max, K_min, K_max;
    FILE		*fp;
    CircleData dat;
