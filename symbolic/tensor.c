@@ -561,6 +561,30 @@ Expr * Christoffel (int i, int k, int l)
 }
 
 /* ======================================================== */
+Expr * denom (void)
+{
+	Expr *e = g_new0 (Expr,1);
+	e = Add_E_T (e, tger(1));
+	e = Add_E_T (e, Mult_T_T (dxf(), dxf()));
+	e = Add_E_T (e, Mult_T_T (dyf(), dyf()));
+	return e;
+}
+
+Expr *DDChris (int i, int k, int l, int dn)
+{
+	Expr *deno = denom ();
+	Expr *c = Christoffel (i,k,l);
+	Expr *dc = DD(c, dn);
+	Expr *p1 = Mult_E_E (dc,deno);
+
+	Expr *dd = DD(deno, dn);
+	Expr *p2 = Mult_E_E (dd,c);
+
+	Expr *s = Sub_E_E(p1, p2);
+	return s;
+}
+
+/* ======================================================== */
 
 Expr * Ricci (int i, int k)
 {
@@ -569,9 +593,51 @@ Expr * Ricci (int i, int k)
 	Expr *ri = NULL;
 	for (l=0; l<2; l++)
 	{
-		Expr *c1 = Christoffel (l,i,k);
+		Expr *c1 = DDChris (l,i,k, l);
+		Expr *c2 = DDChris (l,i,l, k);
+		ri = Add_E_E (ri,c1);
+		ri = Sub_E_E (ri,c2);
+
+		Expr *gs = NULL;
+		for (m=0; m<2; m++)
+		{
+			Expr *sgs = Christoffel (m,l,m);
+			gs = Add_E_E (gs, sgs);
+		}
+		Expr *g2 = Christoffel (l,i,k);
+		Expr *p1 = Mult_E_E (gs,g2);
+
+		ri = Add_E_E (ri,p1);
+
+		for (m=0; m<2; m++)
+		{
+			Expr *ga = Christoffel (m,i,l);
+			Expr *gb = Christoffel (l,k,m);
+			Expr *p2 = Mult_E_E (ga,gb);
+			ri = Sub_E_E (ri,p2);
+		}
 	}
 	return ri;
+}
+
+Expr * Scalar_Curve (void)
+{
+	int i,k;
+
+	Expr *sc = NULL;
+	for (i=0; i<2; i++)
+	{
+		for (k=0; k<2; k++)
+		{
+			Expr *r = Ricci (i,k);
+			Expr *g = ginv_mn (i,k);
+			Expr *p = Mult_E_E (r,g);
+			sc = Add_E_E (sc, p);
+		}
+	}
+
+	SimplifyExpr (sc);
+	return sc;
 }
 
 /* ======================================================== */
@@ -601,6 +667,7 @@ void setup (void)
 	PrintExpr (DDY(gxx()));
 #endif
 
+#if 0
 	printf ("gamma xxx is:\n");
 	PrintExpr (Christoffel(0,0,0));
 	
@@ -618,7 +685,19 @@ void setup (void)
 	
 	printf ("gamma yyy is:\n");
 	PrintExpr (Christoffel(1,1,1));
+#endif
 	
+	printf ("ricci xx is:\n");
+	PrintExpr (Ricci(0,0));
+
+	printf ("ricci xy is:\n");
+	PrintExpr (Ricci(0,1));
+
+	printf ("ricci yy is:\n");
+	PrintExpr (Ricci(1,1));
+
+	printf ("scalar curve is:\n");
+	PrintExpr (Scalar_Curve());
 }
 
 main ()
