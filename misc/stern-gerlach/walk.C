@@ -12,12 +12,12 @@
 
 main () 
 {
-#define NBIN 100
+#define NBIN 50
 
    int i, j;
    int bin[NBIN];
 
-   double gb0 = 1.0e-3;
+   double gb0 = 1.0e-4;
 
    for (i=0; i<NBIN; i++)
    {
@@ -30,7 +30,7 @@ main ()
       printf ("# %d\n", j);
       fflush (stdout);
    
-      for (i=0; i<123000; i++)
+      for (i=0; i<24230100; i++)
       {
          double x = rand() / ((double) RAND_MAX);
          double y = rand() / ((double) RAND_MAX);
