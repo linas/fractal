@@ -34,15 +34,13 @@ class SinaiStats
       SinaiStats (int, int);
       void Trace (void);
       void TraceToroid (void);
+		double MeanFreePath (void);
 
    public:
       int nx;  // dimension of pixel grid
       int ny;
 
       double eye[3]; // position of eye
-
-      double reflectivity;
-      double density;
 
    private:
       SinaiRay *sr;
@@ -54,9 +52,6 @@ class SinaiStats
 SinaiStats::SinaiStats (int px, int py)
 {
    int i, j;
-
-   density = 0.0;
-   reflectivity = 1.0;
 
    nx = px;
    ny = py;
@@ -110,41 +105,52 @@ SinaiStats::TraceToroid(void)
 
 /* ==================================== */
 
+double
+SinaiStats::MeanFreePath(void)
+{
+   int i;
+	double mean_path = 0.0;
+	
+   for (i=0; i<nx*ny; i++) 
+   {
+		mean_path += sr[i].distance / ((double) sr[i].sphere_hits);
+   }
+
+   mean_path /= (double) nx*ny;
+
+   return mean_path;
+}
+
+
+/* ==================================== */
+
 main (int argc, char * argv[])
 {
    SinaiStats v (400,400);
 
 
    v.radius = 0.6;
-   v.reflectivity = 0.9975;
-   v.max_distance = 1280.0;
-
-   v.max_distance = 40.0;
-
-   v.max_distance = 640.0;
 
    if (3 > argc) {
-      printf ("Usage: %s <radius> <maxdist> [<niterations> [<max manhattan>]]\n", argv[0]);
+      printf ("Usage: %s <radius> <maxhits>\n", argv[0]);
       exit (1);
    }
 
    double radius = atof (argv[1]);
-   double maxdist= atof (argv[2]);
-
-   int niter = 1000000;
-   if (4 == argc) niter = atoi (argv[3]);
-
-   int manhat = 1000000;
-   if (5 == argc) manhat = atoi (argv[4]);
+   int maxhits = atoi (argv[2]);
 
    v.radius = radius;
-   v.max_distance = maxdist;
-   v.niterations = niter;
-   v.max_manhattan = manhat;
+   v.max_distance = 1.0e100;
+   v.niterations = 1123123123;
+   v.max_manhattan = 123456789;
+   v.max_sphere_hits = maxhits;
 
    // v.Trace();
    v.TraceToroid();
-   // v.ColoredMirrors();
+
+   double fp = v.MeanFreePath ();
+
+   printf ("free path=%f\n", fp);
 }
 
 /* ===================== end of file ====================== */
