@@ -119,13 +119,15 @@ void dmandelbrot_out (
    int		itermax)
 {
    unsigned int	i,j, globlen;
-   double		re_start, im_start, delta;
-   double		re_position, im_position;
-   double		re, im, tmp;
-   double		dre, dim;
+   double	re_start, im_start, delta;
+   double	re_position, im_position;
+   double	re, im, tmp;
+   double	dre, dim;
+   double	ddre, ddim;
+   double	d3re, d3im;
    int		loop;
-   double modulus, phi, frac;
-   double escape_radius = 1.5e20;
+   double modulus, phi, phip, phi3, frac;
+   double escape_radius = 3450.0;
    double ren, tl;
 
    ren = log( log (escape_radius)) / log(2.0);
@@ -148,7 +150,21 @@ void dmandelbrot_out (
          im = im_position;
          dre = 1.0;
          dim = 0.0;
+         ddre = 0.0;
+         ddim = 0.0;
+         d3re = 0.0;
+         d3im = 0.0;
          for (loop=1; loop <itermax; loop++) {
+            /* compute third derivative */
+            tmp = 2.0 * (re*d3re - im*d3im + 3.0*(dre*ddre - dim*ddim));
+            d3im = 2.0 * (re*d3im + im*d3re + 3.0*(dre*ddim + dim*ddre)); 
+            d3re = tmp;
+
+            /* compute second derivative */
+            tmp = 2.0 * (re*ddre - im*ddim + dre*dre - dim*dim);
+            ddim = 2.0 * (re*ddim + im*ddre + 2.0 * dre*dim);
+            ddre = tmp;
+
             /* compute infinitessimal flow */
             tmp = 2.0 * (re*dre - im*dim) +1.0;
             dim = 2.0 * (re*dim + im*dre);
@@ -175,29 +191,47 @@ void dmandelbrot_out (
          dre /= (re*re + im*im);
          dim /= (re*re + im*im);
 
-         modulus = sqrt (dre*dre + dim*dim);
+         /* compute zprimeprime/z */
+         tmp = re*ddre + im*ddim;   /* divergence */
+         ddim = re*ddim - im*ddre;   /* curl */
+         ddre = tmp;
+         ddre /= (re*re + im*im);
+         ddim /= (re*re + im*im);
 
-         modulus = log (modulus);
+         /* compute z'''/z */
+         tmp = re*d3re + im*d3im;   /* divergence */
+         d3im = re*d3im - im*d3re;   /* curl */
+         d3re = tmp;
+         d3re /= (re*re + im*im);
+         d3im /= (re*re + im*im);
 
-         tmp = modulus - log(2.0) * frac;
 
          /* phase */
          phi = atan2 (dim, dre);
          phi += M_PI;
          phi /= 2.0*M_PI;
+
+         phip = atan2 (ddim, ddre);
+         phip += M_PI;
+         phip /= 2.0*M_PI;
+
+         phi3 = atan2 (d3im, d3re);
+         phi3 += M_PI;
+         phi3 /= 2.0*M_PI;
+
+         modulus = sqrt (dre*dre+dim*dim);
+
         
 /*
          phi *= exp (((double) loop-5) / log(2.0));
          phi -= ((double) ((int) phi));
 */
         
-         glob [i*sizex +j] = phi;
+         glob [i*sizex +j] = phi3;
 
 
 /*
          glob [i*sizex +j] = sqrt ((dre*dre+dim*dim)/(re*re+im*im));
-         glob [i*sizex +j] /= (double) loop;
-         glob [i*sizex +j] /= (double) loop;
          glob [i*sizex +j] /= (double) loop;
 */
 
