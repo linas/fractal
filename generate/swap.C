@@ -101,13 +101,13 @@ void gral(int nsteps, long double sre, long double sim,
 }
 
 double
-rswap (long double sre, long double sim)
+rswap (long double sre, long double sim, int itermax)
 {
 	long double zre, zim;
 
-	gral (1000, sre, sim, &zre, &zim);
+	gral (itermax, sre, sim, &zre, &zim);
 	long double vv = zre*zre+zim*zim;
-	return vv;
+	return zre;
 }
 
 
@@ -148,7 +148,7 @@ MakeHisto (
       for (j=0; j<sizex; j++) 
 		{
 
-			double phi = rswap (re_position, im_position);
+			double phi = rswap (re_position, im_position, itermax);
          glob [i*sizex +j] = phi;
 
          re_position += delta;

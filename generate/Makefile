@@ -14,7 +14,7 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert inf decide cutoff
 
-all:    cutoff elliptic erdos euler-q mobius totient  \
+all:    cutoff elliptic erdos euler-q mobius swap totient  \
         ray automatic radius brat draw dx image
 
 
@@ -41,11 +41,13 @@ brat-gapper.o: brat-gapper.C
 cutoff.o: cutoff.C
 euler-q.o: euler-q.C
 mobius.o: mobius.C
+swap.o: swap.C
 totient.o: totient.C
 
 FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
 GCF=../tools/lib/gcf.o
 MODULAR=../tools/lib/modular.o
+TOTIENT=../tools/lib/totient.o
 
 ################## Dependencies and compile/link #########
 #
@@ -56,12 +58,9 @@ cutoff: brat.o cutoff.o util.o
 elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o util.o $(MODULAR)
 euler-q: brat.o euler-q.o util.o $(MODULAR)
-
-mobius: brat.o mobius.o util.o $(GCF)
-	$(CC) -o $@ $^ ../tools/lib/moebius.o ../tools/lib/totient.o -lm -lstdc++
-
-totient: brat.o totient.o util.o $(GCF)
-	$(CC) -o $@ $^ ../tools/lib/totient.o -lm -lstdc++
+mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
+swap: brat.o swap.o util.o
+totient: brat.o totient.o util.o $(GCF) $(TOTIENT)
 
 inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o $(FAREY)
 	$(CC) -o brat brat.o util.o -lm -lstdc++
