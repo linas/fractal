@@ -1,0 +1,31 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small 
+set out 'levec.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Left-Eigenvectors of the GKW Operator"
+set xlabel "x"
+set ylabel "Density"
+
+# set yrange [0:]
+
+plot "levec.dat" using 1:2 title "zeroth",\
+     "levec.dat" using 1:3 title "first",\
+     "levec.dat" using 1:4 title "second",\
+     "levec.dat" using 1:5 title "third",\
+     "levec.dat" using 1:6 title "fourth"
+
+# the following is a good validation of the numerical find.
+#     "revec.dat" using 1:(1.30825*(-0.75+1.75/((1+$1)*(1+$1)*sqrt(1+$1)))) title "2.5 pow",
+
+
+# pause 100
+
