@@ -2819,8 +2819,8 @@ An alternate set of eigenvectors with a continuous spectrum are given by
 \end_inset 
 
  symmetry, as discussed in an earlier chapter.
- As is typical for fractals, these eigenfunctions are differentiable a finite
- number of times before they become differentiable nowhere.
+ As is typical for Takagi-type curves, these eigenfunctions are differentiable
+ a finite number of times before they become differentiable nowhere.
  For example, for 
 \begin_inset Formula $1/2<\left|z\right|<1$
 \end_inset 
@@ -2956,6 +2956,28 @@ F_{nk}=2\Gamma\left(s+1+\frac{2\pi ni}{\ln2}\right)\left(2\pi(2k+1)\right)^{-s}\
 \end_inset 
 
  is invertible; either set of eigenstates span the space.
+ Given that one set of basis functions are clearly fractal, while the other
+ is clearly analytic, it would be interesting to describe the space of functions
+ spanned by these basis states.
+ That is, given an arbitrary sequence 
+\begin_inset Formula $\{ b_{n}|b_{n}\in\mathbb{C}\}$
+\end_inset 
+
+, describe the nature of the functions 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}b_{n}\beta_{n}(x;s)\label{eq:}\end{equation}
+
+\end_inset 
+
+ considered as functions of 
+\begin_inset Formula $x$
+\end_inset 
+
+ or alternately of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
  
 \layout Standard
 
@@ -2988,45 +3010,6 @@ g\beta(x;s)=\beta(\frac{x}{2};s)=\frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\inf
 \end_inset 
 
  and so one gets a trivial relationship and no insight in particular.
-\layout Standard
-
-By contrast ....
- mix up k's, n's, ...
- xxx finish me.
- 
-\layout Subsection
-
-Misc Junk
-\layout Standard
-
-Delete these paragraphs.
-\layout Standard
-
-These are prototype forms for and the famous and beautiful Levy Dragons
- (reference the Paul Levy 1938 paper here) (actually Levy was trying to
- generalize the Koch curves).
- 
-\layout Standard
-
-Note that when we go to look at the tessellation of the hyperbolic plane
- by the hyperbolic triangle under the symmetry of the modular group, I think
- we get the tessellation of the plane with Levy's Dragons, which I think
- is the point that Paul Levy was trying to make.
- So this fits all very nicely: we have a direct 1-1 correspondence between
- tessellations on the hyperplane with tessellations of real space by fractal
- curves.
- It is sufficient to talk about one to talk about the other.
-\layout Standard
-
-This also means that Bernoulli map also makes for a good toy example of
- quantum chaos.
- In quantum chaos, the eigenfunctions must form a complete set in the sense
- that for any given point in space, there must exist at least one eigenfunction
- that is non-vanishing on that point.
- In other words, the eigenfunctions of a quantum-chaotic system must tessellate
- the space in which they live.
- The toy example of this kind of tessellation is the Levy Dragon.
- 
 \layout Section
 
 The Gauss-Kuzmin-Wirsing Operator
@@ -4019,6 +4002,34 @@ z-1\end{array}\right)\left[\zeta(n+2)-1\right]\label{eq:}\end{equation}
 \end_inset 
 
  is unclear.
+\layout Standard
+
+It could also be interesting to explore the zeta constructed out of Sheffer
+ sequences, that is, to find the 
+\begin_inset Formula $w_{n}$
+\end_inset 
+
+ in an expansion
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{s}{s-1}-s\sum_{n=0}^{\infty}(-)^{n}w_{n}p_{n}(s-1)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the polynomials 
+\begin_inset Formula $p_{n}(x)$
+\end_inset 
+
+ form a Sheffer sequence.
+ This is interesting because there may be one particular Sheffer sequence
+ for which the 
+\begin_inset Formula $w_{n}$
+\end_inset 
+
+ take on a particulary simple form.
+ This seems reasonable, since Sheffer sequences embody the general types
+ of algebraic properties that makes this kind of series expansion arithmetically
+ interesting.
+ 
 \layout Subsection
 
 The Kernel
@@ -4364,7 +4375,7 @@ c(x)=?\left(\frac{1}{?^{-1}(x)}-\left\lfloor \frac{1}{?^{-1}(x)}\right\rfloor \r
 \begin_inset Formula $?(x)$
 \end_inset 
 
- is the Minkowski Question Mark, presented in earlier sections.
+ is the Minkowski Question Mark, presented in earlier chapters.
  This map consists of straight-line segments between values of 
 \begin_inset Formula $1/2^{k}$
 \end_inset 
@@ -4385,7 +4396,7 @@ c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\label{eq:
  It can be solved exactly; unfortunately, while one might think that there
  is a similarity transform to take it back to GKW, it turns out this similarity
  transform is dastardly singular, being just the Jacobian of the Minkowski
- question mark 
+ Question Mark 
 \begin_inset Formula $(?'\circ?^{-1})(x)$
 \end_inset 
 
@@ -4796,6 +4807,17 @@ and both parities for
 
  as well.
  Show graphs as well.
+\layout Standard
+
+XXX Note a shallow relationship to the Gaussian Binomial: viz.
+\begin_inset Formula \[
+\left(\begin{array}{c}
+n\\
+1\end{array}\right)_{x}\equiv\frac{1-x^{n}}{1-x}\]
+
+\end_inset 
+
+
 \layout Section
 
 The Isola Map 
@@ -4924,43 +4946,6 @@ k+1\end{array}\right)\right]\label{eq:}\end{eqnarray}
 
 .
  
-\layout Section
-
-Other Trees of Rationals
-\layout Standard
-
-Recall that we were able to construct other trees that are isomorphic to
- the Stern-Brocot tree by passing the values in the Stern-Brocot Tree through
- a ratio of polynomials, thus mapping rationals to rationals.
- Monotonically-increasing functions will always preserve monotonicity of
- the question mark.
- Other mappings, such as the cubic 
-\begin_inset Formula $x^{3}-x$
-\end_inset 
-
-, are in general not globally monotonic, but they are always locally monotonic.
- In other words, 
-\begin_inset Formula $?((2x-1)^{3}-x+1)$
-\end_inset 
-
- is monotonic between the same regions that 
-\begin_inset Formula $(2x-1)^{3}-x+1$
-\end_inset 
-
- is, and thus it does not yield a fundamentally new function.
- Thus, these polynomial-based mappings of rationals into rationals do not
- generate another self-similar map, they are distorted versions of the Minkowski
- question mark.
-\layout Standard
-
-Here's a mapping that is continuous and is also fractally non-monotonic
- (and is thus self-similar): its 
-\begin_inset Formula $x-?(x)$
-\end_inset 
-
- which looks sine-like and we want to exhibit the cosine-like so that we
- can build up fractally-periodic basis functions.
- Its also remarkable because its exactly ...XXX wow!
 \layout Section
 
 Conclusions
