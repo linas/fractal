@@ -413,8 +413,9 @@ tion one is working with, and what point one is trying to emphasize.
 
 The operator, written in the polynomial representation, in space coordinates,
  is:
-\begin_inset Formula \[
-\delta\left(x-g(y)\right)=U_{g}(x,y)=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left\langle x|m\right\rangle \left\langle m|U_{g}|n\right\rangle \left\langle n|y\right\rangle \]
+\begin_inset Formula \begin{eqnarray*}
+\delta\left(x-g(y)\right)=U_{g}(x,y) & = & \left\langle x\left|U_{g}\right|y\right\rangle \\
+ & = & \sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left\langle x|m\right\rangle \left\langle m\left|U_{g}\right|n\right\rangle \left\langle n|y\right\rangle \end{eqnarray*}
 
 \end_inset 
 
@@ -2225,6 +2226,26 @@ What is the kernel of
  
 \layout Standard
 
+That is, for any integer 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset 
+
+ we have 
+\begin_inset Formula $U_{B}\cos2\pi(2k+1)x=0$
+\end_inset 
+
+ and so we write 
+\begin_inset Formula $\cos2\pi(2k+1)x\in K\left[U_{B}\right]$
+\end_inset 
+
+ and likewise 
+\begin_inset Formula $\sin2\pi(2k+1)x\in K\left[U_{B}\right]$
+\end_inset 
+
+.
+ 
+\layout Standard
+
 This implies that 'half' of all square-integrable functions are in the kernel.
  This is a huge space.
  The quotient space of the implied isomorphism thus has the Bernoulli polynomial
@@ -3281,12 +3302,17 @@ appear naturally in the Taylor's expansion for the Gamma function, and so
  Its equally curious that the other variation on the expression is even
  more trival, namely 
 \begin_inset Formula \[
-\left(1-x\right)^{s-1}=\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
 s-1\\
-n\end{array}\right)x^{n}\]
+n\end{array}\right)x^{n}=\sum_{n=0}^{\infty}(-)^{n}(s-1)_{n}\,\frac{x^{n}}{n!}=\left(1-x\right)^{s-1}\]
 
 \end_inset 
 
+ where 
+\begin_inset Formula $(s)_{n}=s(s-1)(s-2)...(s-n+1)$
+\end_inset 
+
+ is the falling factorial.
  And so one is left to wonder what the function 
 \begin_inset Formula \[
 \mu(s;x)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
@@ -3314,20 +3340,16 @@ ing the binomial coefficient with a power series, making use of Stirling
 \begin_inset Formula \[
 \left(\begin{array}{c}
 s-1\\
-n\end{array}\right)=\frac{(s-1)_{n}}{n!}=\frac{1}{n!}\sum_{k=0}^{n}\left\{ \begin{array}{c}
+n\end{array}\right)=\frac{(s-1)_{n}}{n!}=\frac{1}{n!}\sum_{k=0}^{n}\left[\begin{array}{c}
 n\\
-k\end{array}\right\} (s-1)^{k}\]
+k\end{array}\right](s-1)^{k}\]
 
 \end_inset 
 
  where 
-\begin_inset Formula $(x)_{n}$
-\end_inset 
-
- is the falling Pochammer symbol, and 
-\begin_inset Formula $\left\{ \begin{array}{c}
+\begin_inset Formula $\left[\begin{array}{c}
 n\\
-k\end{array}\right\} $
+k\end{array}\right]$
 \end_inset 
 
  is the Stirling Number of the First Kind.
@@ -3344,24 +3366,55 @@ k\end{array}\right\} $
 
  and 
 \begin_inset Formula \[
-\gamma_{k}=-ka_{k-1}+(-)^{k}k!\,\sum_{n=k}^{\infty}(-)^{n}\frac{a_{n}}{n!}\left(\left\{ \begin{array}{c}
+\gamma_{k}=-ka_{k-1}+(-)^{k}k!\,\sum_{n=k}^{\infty}(-)^{n}\frac{a_{n}}{n!}\left(\left[\begin{array}{c}
 n\\
-k\end{array}\right\} +\left\{ \begin{array}{c}
+k\end{array}\right]+\left[\begin{array}{c}
 n\\
-k-1\end{array}\right\} \right)\]
+k-1\end{array}\right]\right)\]
 
 \end_inset 
 
- Note that the Stirling numbers can be written as 
+ Note that the Stirling Numbers can be written as a sum over a product of
+ harmonic numbers.
+ That is,
 \begin_inset Formula \[
-\left\{ \begin{array}{c}
+\left[\begin{array}{c}
 n\\
-k\end{array}\right\} =(-)^{n-1}\frac{(n-1)!}{(k-1)!}\sum\textrm{product of harmonic numbers }H_{m}\]
+k\end{array}\right]=(-)^{k-n}\frac{(n-1)!}{(k-1)!}w(n,k-1)\]
 
 \end_inset 
 
- and so the factorial factors cancel, leaving only the sum over a prodcuct
- of harmonics.
+ where 
+\begin_inset Formula $w(n,0)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+w(n,k)=\sum_{m=0}^{k-1}\frac{\Gamma(1-k+m)}{\Gamma(1-k)}H_{n-1}^{(m+1)}w(n,k-1-m)\]
+
+\end_inset 
+
+ and the Harmonic numbers 
+\begin_inset Formula $H_{n}^{(m)}$
+\end_inset 
+
+ are given by 
+\begin_inset Formula \[
+H_{n}^{(rm}=\sum_{k=1}^{n}\frac{1}{k^{m}}\]
+
+\end_inset 
+
+ This finally allows us to write 
+\begin_inset Formula \[
+\gamma_{k}=-ka_{k}+k\sum_{n=k}^{\infty}\frac{a_{n}}{n}\left(w(n,k-1)-(k-1)w(n,k-2)\right)\]
+
+\end_inset 
+
+and so the factorial factors cancel, leaving only the sum over the crazy
+ product of harmonics.
+ XXX todo show some of the values of w, esp.
+ along the diagonal.
+ XXX
 \layout Standard
 
 While on the topic of Umbral relations, one also has the curious function
@@ -3396,6 +3449,38 @@ z-1\end{array}\right)\left[\zeta(n+2)-1\right]\]
 \end_inset 
 
  is unclear.
+\layout Subsection
+
+The Kernel
+\layout Standard
+
+We would like to know what the kernel of the GKW operator is.
+ Consider 
+\begin_inset Formula \[
+k(x)=\frac{1}{x^{2}}\exp(2k+1)\frac{\pi}{x}\]
+
+\end_inset 
+
+ Then 
+\begin_inset Formula \begin{eqnarray*}
+\left[U_{h}k\right](x) & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}\cos(2k+1)n\pi\\
+ & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}(-)^{n}\end{eqnarray*}
+
+\end_inset 
+
+ The avlue of the sum is ambiguous.
+ One is tempted to cancel terms pairwise, and thus declare 
+\begin_inset Formula $k(x)$
+\end_inset 
+
+ to belong to the kernel.
+ On the other hand, we've seen that the regularized sum is not zero: 
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}e^{-tk}=\frac{1}{2}\]
+
+\end_inset 
+
+ and so one is left in a bit of a quandry.
 \layout Section
 
 The Singular Sawtooth of the First Kind
