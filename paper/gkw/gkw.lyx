@@ -289,7 +289,7 @@ Finally, we note that since
 
  looks like a time-evolution operator, we are tempted to write
 \begin_inset Formula \[
-U_{g}^{t}=\exp\; tH_{g}\]
+U_{g}^{t}=\exp\;-tH_{g}\]
 
 \end_inset 
 
@@ -2560,6 +2560,7 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
 
 \end_inset 
 
+ and is sometimes called the Gauss Map.
  It is connected to the Riemann Zeta by a Mellin Transform:
 \begin_inset Formula \[
 \zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\]
@@ -2652,7 +2653,17 @@ This can be solved easily to get the zeroth eigenvector
 
 \end_inset 
 
- A reflection identity: 
+ We can see one hint of the relationship between period-doubling and the
+ GKW in the identity 
+\begin_inset Formula \[
+\frac{1}{1+x}=\sum_{n=1}^{\infty}\,\frac{1}{2^{n}}\left[\frac{2}{x+n}-\frac{1}{x+n+1}\right]\]
+
+\end_inset 
+
+
+\layout Standard
+
+A reflection identity: 
 \begin_inset Formula $f(x)=1-(1+x)^{-2}$
 \end_inset 
 
@@ -2661,6 +2672,33 @@ This can be solved easily to get the zeroth eigenvector
 \end_inset 
 
 .
+\layout Standard
+
+Another: 
+\begin_inset Formula $U_{h}[(1+?(x))/(1+x)^{2}]=1-?(x)$
+\end_inset 
+
+ where 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ is the Minkowski Question Mark function.
+\layout Standard
+
+Another: 
+\begin_inset Formula $U_{h}[?(x)\, x^{-2}]=2-?(x)$
+\end_inset 
+
+ .
+ One can construct a variety of identities of this sort, for example: 
+\begin_inset Formula \[
+U_{h}\left[?(x)\left(\frac{1}{(1+x)^{2}}-2\right)\right]=\frac{?(x)-2}{(1+x)^{2}}\]
+
+\end_inset 
+
+ but these types of excercises do not seem to lead to any sort of worthwhile
+ recurrance relations.
+ 
 \layout Standard
 
 Acting on the monmial, one gets 
@@ -2908,7 +2946,13 @@ n\end{array}\right)\]
 
 \end_inset 
 
- Let us then do each sum bit by bit.
+ We evaluate this expression in the next section..
+\layout Subsection
+
+The Riemann Zeta and Stieltjes Constants
+\layout Standard
+
+Let us then do each sum bit by bit.
  Using 
 \begin_inset Formula $t_{n}$
 \end_inset 
@@ -2955,12 +2999,39 @@ n\end{array}\right)a_{n}\]
 
 \end_inset 
 
+ If we write the binomial coefficient as 
+\begin_inset Formula $\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)=(s-1)_{n}/n!$
+\end_inset 
+
+ where 
+\begin_inset Formula $(x)_{n}$
+\end_inset 
+
+ is the falling Pochammer symbol, we see that the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ play the analogue of the Stieltjes constants for this kind of Umbral, 
+\begin_inset Quotes eld
+\end_inset 
+
+divided differences
+\begin_inset Quotes erd
+\end_inset 
+
+ type equation.
  The 
 \begin_inset Formula $a_{n}$
 \end_inset 
 
  are small and seem to be bounded and oscillatory.
- The first few are approximately equal to 
+ We have 
+\begin_inset Formula $a_{0}=0.5-\gamma$
+\end_inset 
+
+ and the next few are approximately equal to 
 \layout Standard
 
 
@@ -3197,8 +3268,16 @@ n\end{array}\right)a_{n}x^{n}\]
 
  might be like, and whether there are additional Umbral-Calculus-like expression
 s that can be found.
- One can try to recast the expression by replacing the binomial coefficient
- with a power series, making use of Sterling Numbers.
+ 
+\layout Standard
+
+The 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ are can be used to express the Stieltjes constants and vice-versa by re-express
+ing the binomial coefficient with a power series, making use of Stirling
+ Numbers.
  That is, we write 
 \begin_inset Formula \[
 \left(\begin{array}{c}
@@ -3219,10 +3298,38 @@ n\\
 k\end{array}\right\} $
 \end_inset 
 
- is the Sterling Number of the First Kind.
- However, pursuing this line does not seem to lead to any particularly tractable
- expressions.
- 
+ is the Stirling Number of the First Kind.
+ Substituting in the above, and comparing to the standard definition of
+ the Stieltjes constants 
+\begin_inset Formula \[
+\zeta(s)=\frac{1}{s-1}+\sum_{n=0}^{\infty}\frac{(-)^{n}}{n!}\gamma_{n}(s-1)^{n}\]
+
+\end_inset 
+
+ shows that 
+\begin_inset Formula $\gamma_{0}=1/2-a_{0}=\gamma$
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\gamma_{k}=-ka_{k-1}+(-)^{k}k!\,\sum_{n=k}^{\infty}(-)^{n}\frac{a_{n}}{n!}\left(\left\{ \begin{array}{c}
+n\\
+k\end{array}\right\} +\left\{ \begin{array}{c}
+n\\
+k-1\end{array}\right\} \right)\]
+
+\end_inset 
+
+ Note that the Stirling numbers can be written as 
+\begin_inset Formula \[
+\left\{ \begin{array}{c}
+n\\
+k\end{array}\right\} =(-)^{n-1}\frac{(n-1)!}{(k-1)!}\sum\textrm{product of harmonic numbers }H_{m}\]
+
+\end_inset 
+
+ and so the factorial factors cancel, leaving only the sum over a prodcuct
+ of harmonics.
 \layout Standard
 
 While on the topic of Umbral relations, one also has the curious function
