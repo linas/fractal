@@ -1101,18 +1101,30 @@ The Topological Zeta
 Another interesting quantity is the topological zeta function associated
  with the transfer operator.
  It is formally defined by 
-\begin_inset Formula \[
-\zeta_{U_{g}}(t)=\frac{1}{\det\left[\mathbb{I}-tU_{g}\right]}\]
+\begin_inset Formula \begin{equation}
+\zeta_{U_{g}}(t)=\frac{1}{\det\left[\mathbb{I}-tU_{g}\right]}\label{eq:}\end{equation}
 
 \end_inset 
 
  and embeds number-theoretic information about the map.
- Of associated interest is the MacLaurin Series 
-\begin_inset Formula \[
-t\frac{d}{dt}\log\zeta_{U_{g}}(t)=\sum_{k=1}^{\infty}n_{k}t^{k}\]
+ Using standard formal manipulations on operators, one can re-write the
+ above as the operator equation 
+\begin_inset Formula \begin{equation}
+\zeta_{U_{g}}(t)=\exp\sum_{k=1}^{\infty}\frac{t^{k}}{k}\;\textrm{Tr}U_{g}^{k}\label{eq:}\end{equation}
 
 \end_inset 
 
+ Of associated interest is the MacLaurin Series 
+\begin_inset Formula \begin{equation}
+t\frac{d}{dt}\log\zeta_{U_{g}}(t)=\sum_{k=1}^{\infty}n_{k}t^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where we can read off 
+\begin_inset Formula $n_{k}=\textrm{Tr}U_{g}^{k}$
+\end_inset 
+
+.
  From graph theory and the theory of dynamical systems, it is known that
  the 
 \begin_inset Formula $n_{k}$
@@ -3279,6 +3291,72 @@ Note this is a ladder of isomorphisms between the different dimensional
 \end_inset 
 
 .
+\layout Subsection
+
+The Topological Zeta
+\layout Standard
+
+The topological zeta of the Bernoulli operator can be computed very easily
+ in the polynomial basis because we know the eigenvalues and these form
+ a simple series.
+ We'll define the Bernoulli topological zeta as
+\begin_inset Formula \begin{equation}
+\zeta_{B}(t)\equiv\frac{1}{\det\left[\mathbb{I}-tU_{B}\right]}\label{eq:}\end{equation}
+
+\end_inset 
+
+ We start by noting its inverse: 
+\begin_inset Formula \begin{eqnarray}
+\det\left[\mathbb{I}-tU_{B}\right] & = & \prod_{n=0}^{\infty}\left(1-t\;2^{-n}\right)\nonumber \\
+ & = & 1-t\sum_{j=0}^{\infty}2^{-j}+t^{2}\sum_{j=0}^{\infty}2^{-j}\sum_{\begin{array}{c}
+k=0\\
+k\neq j\end{array}}^{\infty}2^{-k}-t^{3}...\nonumber \\
+ & = & 1-2t+\frac{8}{3}t^{2}-\frac{16}{7}t^{3}+\frac{128}{105}t^{4}-...\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Successive terms of this series are hard to compute, and it would be interestin
+g to know what the generating function for this series is.
+ The series appears to have a circle of convergence of radius one.
+ The zeta can be computed directly by working with its logarithm: 
+\begin_inset Formula \begin{eqnarray}
+\log\zeta_{B}(t) & = & \log\prod_{n=0}^{\infty}\left(1-t\;2^{-n}\right)^{-1}\nonumber \\
+ & = & -\sum_{n=0}^{\infty}\log\left(1-t\;2^{-n}\right)\nonumber \\
+ & = & \sum_{k=1}^{\infty}\frac{t^{k}}{k}\;\frac{2^{k}}{2^{k}-1}\nonumber \\
+ & = & -\log(1-t)+\sum_{k=1}^{\infty}\frac{t^{k}}{k}\;\frac{1}{2^{k}-1}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Thus we have 
+\begin_inset Formula $\textrm{Tr}U_{B}^{k}=2^{k}/(2^{k}-1)$
+\end_inset 
+
+.
+ Of some curiosity is the proximity of the Erdos-Borwein constant: 
+\begin_inset Formula \begin{eqnarray}
+1.6066... & = & \sum_{n=1}^{\infty}\frac{1}{2^{n}-1}\nonumber \\
+ & = & \sum_{n=1}^{\infty}\frac{d(n)}{2^{n}}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ which marks the first appearance of a classical number-theoretic function
+ in the proceedings so far: 
+\begin_inset Formula $d(n)$
+\end_inset 
+
+ is the number of divisors of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ Thus one is immediately lead to consider whether the sum 
+\begin_inset Formula \begin{equation}
+E(t)=\sum_{k=1}^{\infty}\frac{t^{k}}{2^{k}-1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ can be given a similar number-theoretic expression.
+ 
 \layout Section
 
 The Gauss-Kuzmin-Wirsing Operator
@@ -4368,6 +4446,11 @@ k(x)=\frac{1}{x^{2}}\exp(2k+1)\frac{\pi}{x}\label{eq:}\end{equation}
 \end_inset 
 
  and so one is left in a bit of a quandary.
+ 
+\layout Standard
+
+Some progress might be made by applying the theory of the Henstock-Kurzweil
+ integral.
 \layout Section
 
 The Singular Sawtooth of the First Kind
