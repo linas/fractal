@@ -1,5 +1,6 @@
 ############### Symbol Definitions ###################### 
 
+TOP = ../../../..
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
