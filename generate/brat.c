@@ -206,6 +206,7 @@ void circle_in (
    im_omega = 0.0;
 */
    isamp = CBOX_IM_SLOPE*CBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -324,6 +325,7 @@ double		renorm;
     */
    
    isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -398,7 +400,7 @@ double		renorm;
    y_off = y_slope * im_start;
    
    globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.00001;
+   for (i=0; i<globlen; i++) glob [i] = 1.0e-10;
    
    /* random seeds start (ideally) with uniform density inside the 
     * mandelbrot set.  With a slight loss of efficiency, and no loss of
@@ -418,7 +420,8 @@ double		renorm;
     * hypothesis)
     */
    
-   isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   isamp = ((double) BBOX_IM_SLOPE*BBOX_RE_SLOPE) / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -483,7 +486,7 @@ double		renorm;
    int		horiz_pix, vert_pix;
    double	xs, ys;
    float	*count;
-   float	*square, *cube, *quart;
+   float	*square, *cube, *quart, *quint;
    double ollie;
    
    
@@ -502,15 +505,18 @@ double		renorm;
    square = (float *)  malloc (globlen * sizeof (float));
    cube = (float *)  malloc (globlen * sizeof (float));
    quart = (float *)  malloc (globlen * sizeof (float));
+   quint = (float *)  malloc (globlen * sizeof (float));
    for (i=0; i<globlen; i++) {
       glob [i] = 1.0e-10;
       count [i] = 1.0e-10;
       square [i] = 1.0e-10;
       cube [i] = 1.0e-10;
       quart [i] = 1.0e-10;
+      quint [i] = 1.0e-10;
    }
    
    isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -536,6 +542,7 @@ double		renorm;
             square [vert_pix*sizex + horiz_pix] += loop*loop;
             cube [vert_pix*sizex + horiz_pix] += loop*loop*loop;
             quart [vert_pix*sizex + horiz_pix] += loop*loop*loop*loop;
+            quint [vert_pix*sizex + horiz_pix] += loop*loop*loop*loop*loop;
             count [vert_pix*sizex + horiz_pix] ++;
          }
       }    
@@ -570,19 +577,36 @@ double		renorm;
       glob[i] *= ollie*ollie*ollie;
 #endif
 
-#define FORUTH_MOM
+#define FOURTH_MOM
 #ifdef FOURTH_MOM
       /* compute third moment */
       tmp = 1.0 / count[i];
       glob[i] *= tmp;
       square[i] *= tmp*tmp;
       cube[i] *= tmp*tmp*tmp;
-      quart[i] *= tmp*tmp*tmp;
+      quart[i] *= tmp*tmp*tmp*tmp;
 
       tmp = 6.0 * square[i] - 3.0 * glob[i]*glob[i];
       tmp = -4.0 * cube[i] + tmp*glob[i];
       tmp = quart[i] + tmp*glob[i];
       glob[i] = tmp *ollie*ollie*ollie*ollie;
+#endif
+
+/* #define FIFTH_MOM */
+#ifdef FIFTH_MOM
+      /* compute third moment */
+      tmp = 1.0 / count[i];
+      glob[i] *= tmp;
+      square[i] *= tmp*tmp;
+      cube[i] *= tmp*tmp*tmp;
+      quart[i] *= tmp*tmp*tmp*tmp;
+      quart[i] *= tmp*tmp*tmp*tmp*tmp;
+
+      tmp = -10.0 * square[i] + 4.0 * glob[i]*glob[i];
+      tmp = 10.0 * cube[i] + tmp*glob[i];
+      tmp = -5.0 * quart[i] + tmp*glob[i];
+      tmp = quint[i] + tmp*glob[i];
+      glob[i] = tmp *ollie*ollie*ollie*ollie*ollie;
 #endif
 
    }
@@ -641,6 +665,7 @@ double		renorm;
    }
    
    isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -678,8 +703,13 @@ double		renorm;
          if ((re[2]*re[2] + im[2]*im[2]) > 7.0) break;
          if ((re[3]*re[3] + im[3]*im[3]) > 7.0) break;
          if ((re[4]*re[4] + im[4]*im[4]) > 7.0) break;
+#ifdef STRAIGHT
          horiz_pix = (int) (x_slope * re[0] - x_off);
          vert_pix = (int) (y_slope * im[0] - y_off);
+#else
+         horiz_pix = (int) (x_slope * (re-re_position) - x_off);
+         vert_pix = (int) (y_slope * (im-im_position) - y_off);
+#endif
          if ( (horiz_pix >= 0) && (horiz_pix < sizex) && 
             (vert_pix >= 0) && (vert_pix < sizey)) {
 
@@ -764,6 +794,7 @@ double		renorm;
    }
    
    isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -879,6 +910,7 @@ double		renorm;
    }
    
    isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -964,6 +996,7 @@ double		renorm;
    }
    
    isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -1066,6 +1099,7 @@ double		renorm;
    }
    
    isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -1147,6 +1181,7 @@ double		renorm;
    }
    
    isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -1234,6 +1269,7 @@ double		renorm;
    }
    
    isamp = BBOX_IM_SLOPE*BBOX_RE_SLOPE / (x_width * y_width);
+   if (0>= isamp) isamp = 1;
    isamp *=  globlen*itermax;
    irow = isamp / sizey;
    
@@ -1387,10 +1423,10 @@ void main (int argc, char *argv[])
    
    if (!strcmp(argv[0], "offset"))
    mandelbrot_offset (data, data_width, data_height,
-                  re_center, im_center, width, itermax, renorm); 
+                  0.5, 0.0, 3.0, itermax, renorm); 
    
    if (!strcmp(argv[0], "orig"))
-      mandelbrot_orig (data, data_width, data_height,
+   mandelbrot_orig (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
    
    if (!strcmp(argv[0], "phase"))
@@ -1400,10 +1436,16 @@ void main (int argc, char *argv[])
    if (!strcmp(argv[0], "age"))
    mandelbrot_age (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
-
+#ifdef STRAIGHT
    if (!strcmp(argv[0], "lyapunov"))
    mandelbrot_lyapunov (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
+#else
+   if (!strcmp(argv[0], "lyapunov"))
+   mandelbrot_lyapunov (data, data_width, data_height,
+                  0.5, 0.0, 3.0, itermax, renorm); 
+#endif
+   
 
    if (!strcmp(argv[0], "migrate"))
    mandelbrot_migrate (data, data_width, data_height,
