@@ -1,0 +1,25 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'theta.png'
+
+set data style linespoints
+# set data style lines
+set key left
+
+set title "Theta Hyperbolic Maps"
+set xlabel "x"
+set ylabel "y=\theta^n(x)"
+
+# set yrange [0:]
+
+plot "theta_inv.dat" using 1:2 title "\theta^-1", \
+     "theta.dat" using 1:2 title "\theta(x)"
+
+
+# pause 100
+
