@@ -29,7 +29,7 @@ void mandelbrot_out (
    double	height,
    int		itermax)
 {
-   unsigned int	i,j, globlen;
+   unsigned int	i,j, globlen, itermax_orig;
    double		re_start, im_start, deltax, deltay;
    double		re_position, im_position;
    double		re_c, im_c;
@@ -42,6 +42,7 @@ void mandelbrot_out (
 
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0/ log(2.0);
+   itermax_orig = itermax;
    
 
    deltax = width / (double) sizex;
@@ -75,11 +76,17 @@ void mandelbrot_out (
          r *= r;
          r = 1.0 + (r-1.0)*sin(0.5*phi)*sin(0.5*phi);
          */
-         // r = 1.0 + (r-1.0)*(1.0/re_position)*sin(0.5*phi);
-         r = 1.0 + (r-1.0)*(1.0/re_position)*(1.0/re_position);
+         r -= 1.0;
+         r *= sin(0.5*phi)*sin(0.5*phi);
+         // r *= (0.5*phi)*sin(0.5*phi);
+         // r *= (0.5*phi)* (0.5*phi);
         
+         r += 1.0;
          re_c = 0.5 * r * (cos (phi) - 0.5 * r * cos (2.0*phi));
          im_c = 0.5 * r * (sin (phi) - 0.5 * r * sin (2.0*phi));
+
+// hack
+// itermax = itermax_orig + 5*re_position*re_position;
 
          /* remaps */
 // #define REMAP_CARDIOD
@@ -150,7 +157,12 @@ void mandelbrot_out (
 #endif 
 
          glob [i*sizex +j] = frac; 
-         glob [i*sizex +j] = sqrt(sqrt ((((double) loop) -frac)/ ((double) itermax))); 
+         if (loop<itermax) {
+            glob [i*sizex +j] = sqrt(sqrt ((((double) loop) -frac)/ ((double) itermax))); 
+         } else {
+            glob [i*sizex +j] = 0.0;
+         }
+  
 /*
          glob [i*sizex +j] = ((float) (loop%10)) / 10.0; 
 if (loop == itermax) {
