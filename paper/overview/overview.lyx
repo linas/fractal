@@ -566,7 +566,7 @@ The analogous picture for a denominator consisting of powers of 3 is less
 
 The next picture below is a scatterplot showing all rationals with denominators
  less than 200.
- This now clearly exhibits a fantastic self-similar fractal filigree:
+ This now clearly exhibits a fantastic self-similar fractal latticework:
 \layout Standard
 
 
@@ -578,10 +578,13 @@ The next picture below is a scatterplot showing all rationals with denominators
  
 \layout Standard
 
-It would be interesting to specify the shapes of all the various bifurcating
- curves that seem to appear in this latticework.
+We will recognize later that these curves correspond to hyperbolic maps
+ of the unit interval back onto itself.
+ It would be interesting to specify the shapes of all the various bifurcating
+ curves that seem to appear in this latticework, and to give the algebraic
+ equations whose solutions are plotted above.
  Note that because a curve can seemingly bifurcate into another curve in
- many places, listing all of them would be a trick.
+ many places, enumerating all of them would be a trick.
 \layout Standard
 
 There are more interesting things to be seen, but first we should provide
@@ -2637,37 +2640,13 @@ Thus for example, lets rotate the dyadic tree so that the node at 1/4 becomes
 
 
 \begin_inset Formula \[
-\theta\left(\frac{1}{4}\right)=\frac{1}{8}\]
+\theta\left(\frac{1}{4}\right)=\frac{1}{8}\;\;\;\;\;\;\;\;\;\;\;\;\;\;\theta\left(\frac{3}{4}\right)=\frac{1}{2}\]
 
 \end_inset 
 
 
 \begin_inset Formula \[
-\theta\left(\frac{3}{4}\right)=\frac{1}{2}\]
-
-\end_inset 
-
-
-\begin_inset Formula \[
-\theta\left(\frac{1}{8}\right)=\frac{1}{16}\]
-
-\end_inset 
-
-
-\begin_inset Formula \[
-\theta\left(\frac{3}{8}\right)=\frac{3}{16}\]
-
-\end_inset 
-
- 
-\begin_inset Formula \[
-\theta\left(\frac{5}{8}\right)=\frac{3}{8}\]
-
-\end_inset 
-
-
-\begin_inset Formula \[
-\theta\left(\frac{7}{8}\right)=\frac{3}{4}\]
+\theta\left(\frac{1}{8}\right)=\frac{1}{16}\;\;\;\;\;\theta\left(\frac{3}{8}\right)=\frac{3}{16}\;\;\;\;\;\theta\left(\frac{5}{8}\right)=\frac{3}{8}\;\;\;\;\;\theta\left(\frac{7}{8}\right)=\frac{3}{4}\]
 
 \end_inset 
 
@@ -2680,7 +2659,7 @@ Thus for example, lets rotate the dyadic tree so that the node at 1/4 becomes
 \begin_inset Formula $x<y$
 \end_inset 
 
- and ths montonic, one-to-one and onto.
+ and ths monotonic, one-to-one and onto.
  This is the strecth-and-shrink map
 \begin_inset Formula \[
 \theta(x)=\left\{ \begin{array}{ccc}
@@ -2691,17 +2670,13 @@ x-1/4 & \;\textrm{ for \;} & 1/2\leq x\leq3/4\\
 \end_inset 
 
  which is stretching in one interval and shrinking in another.
- What this map has done is to take three different intervals associated
- with our partial enumeration of the group elements of the Modular Group,
- and string them together into a piece-wise 
-\begin_inset Formula $C^{\infty}$
-\end_inset 
-
- map of the unit-interval onto itself.
- Equivalently, since the modular group can be thought of as a group of symmetrie
-s of binary trees onto themselves, the three different group elements that
- we used were the one that re-parented the 1/8 tree at 1/4, the 3/8 tree
- at 5/8 and the 3/4 tree at 7/8.
+ Since we've seen that the Modular Group maps intervals to intervals, some
+ stretching and some shrinking, we immediately recognize that three group
+ elements were used to construct this map.
+ Since we've already enumerated the modular group in terms of maps of intervals,
+ we see that the three different group elements making up this map are the
+ one that re-parented the 1/8 tree at 1/4, the 3/8 tree at 5/8 and the 3/4
+ tree at 7/8.
  In terms of tree surgery, it is enough to specify these three remapings,
  as the rest of the binary trees hanging below are structurally unaltered.
  Note that the 3/8'ths to 5/8'ths mapping does not change the denominator:
@@ -2716,45 +2691,177 @@ Note that the map is clearly invertible, with its inverse being
 \end_inset 
 
  Notice that the shrinking portion of the map is just the inverse of the
- stretching portion of the map, and thus each corresponds to just one element
- of the Modular Group.
- In other words, there is a 1-1 correspondance bwtween elements of the modular
- group and rotations of binary trees.
- The 
-\begin_inset Formula $\theta$
+ stretching portion of the map.
+ Iterating these maps just makes them even more hyperbolic.
+ The figure
+\begin_inset LatexCommand \ref{Theta Maps}
+
 \end_inset 
 
- that we just exhibited is again a generator of that group.
- We get a general group element by combing it with 
+ shows some of these, with crosses denoting the endpoints of the straight-line
+ segments.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{Theta Maps}
+
+\end_inset 
+
+
+\begin_inset Graphics
+	filename theta.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows 
+\begin_inset Formula $\theta^{n}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $n=-1$
+\end_inset 
+
+ and positive 
+\begin_inset Formula $n$
+\end_inset 
+
+ up to 7.
+ Note that these maps are symmetric around the 
+\begin_inset Formula $y=1-x$
+\end_inset 
+
+ line, and that the endpoints of each segment lie on the hyperbola 
+\begin_inset Formula $xy=2^{-n-2}$
+\end_inset 
+
+, with the exception of the enpoints at 0 and 1.
+ Since each map contains more segments, each map becomes a better approximation
+ to the hyperbola.
+ 
+\end_inset 
+
+
+\layout Standard
+
+The reflection map 
 \begin_inset Formula $r(x)=1-x$
 \end_inset 
 
- and thus can write a general rotation as 
-\begin_inset Formula \[
-(\theta^{n_{1}}r\theta^{n_{2}}r...r\theta^{n_{k}})(x)\]
-
+ conjugates 
+\begin_inset Formula $\theta$
 \end_inset 
 
- XXX need pcitures of some sample group elements to show what we mean.xxx
+ to its inverse, that is, 
+\begin_inset Formula $r\theta^{n}r=\theta^{-n}$
+\end_inset 
+
+ .
+ 
 \layout Standard
 
-We construct the hyperbolic manifold as follows: xxxx todo where 
-\begin_inset Formula $t^{2}-x^{2}=1$
+We demonstate a more complex mapping by rebalancing the binary tree so that
+ the 3/8 node becomes root.
+ This requires two tree movements: switching the 7/16 node so that it lives
+ under 1/2, and switching the 5/16 node so that it lives under the now empty
+ slot at 1/4.
+ This is showin in figure (XXX need that figure.
+ ) This rotation is given by the mapping 
+\begin_inset Formula \[
+\eta(x)=\left\{ \begin{array}{ccc}
+x & \;\textrm{ for \;} & 0\leq x\leq1/4\\
+x/2+1/8 & \;\textrm{ for \;} & 1/4\leq x\leq3/4\\
+2x-1 & \;\textrm{ for \;} & 3/4\leq x\leq1\end{array}\right.\]
+
 \end_inset 
 
-.
- And so we can see the negative curvature.
+ xxx stuff
+\layout Standard
+
+xxx
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+eta map 
+\begin_inset Graphics
+	filename eta.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows two different hyperbolic sequences, one for the iterated
+ eta, and also 
+\begin_inset Formula $r\eta r\eta$
+\end_inset 
+
+ and that sequence/
+\end_inset 
+
+
+\layout Standard
+
+Looking at these, it becomes clear that one can insert hyperbolas wherever
+ one wishes, as long as the resulting map is monotonically increasing.
+ 
+\layout Standard
+
+And so we can see the negative curvature.
  we also have an explicit metric on this space.
  Note that this in turn induces a metric on the Stern-Brocot Tree.
+ We can consider the path of 'geodesics' under this map, say of iterating
+ 
+\begin_inset Formula $\theta$
+\end_inset 
+
+over and over.
+ clearly these 'geodesics' separate.
 \layout Standard
 
 Note that this is essentially a model of two-dimensional space-time, where
  the Lorentz transformations are given by elements of the modular group.
 \layout Standard
 
-We of course are now begging to ask about 3+1 spacetime generated by the
- quaternions, and whether one can generate, in the same fashion, a higher-dimens
-ional spacetime with the octonians.
+We of course are now begging to ask about 3+1 
+\begin_inset Quotes eld
+\end_inset 
+
+spacetime
+\begin_inset Quotes erd
+\end_inset 
+
+ generated by the complex numbers, (xxx this is actually called the Picard
+ group see Fricke and Klien, circa 1897.) which is generated by 
+\begin_inset Formula $SL(2,ZxZ)$
+\end_inset 
+
+ which is a subgroup of 
+\begin_inset Formula $GL(2,C)$
+\end_inset 
+
+.
+ Studying how rotations work on this manifold would be interesting, as well
+ as defining precisely its relation to minkowski spacetime.xxx move this
+ to the todo-list.
+ Higher dimensional manfolds seem to be generated by quaternions and the
+ octonians.
  We also can't help but take a general pot-shot and exclaim 'of course quantum
  mechanics is chaotic: Hamiltonian evolution takes place on a fundamentally
  hyperbolic manifold, viz.
@@ -3377,6 +3484,8 @@ where
 
 \begin_inset Graphics
 	filename takagi.png
+	subcaption
+	subcaptionText "this figure if takagi has a caption, right?"
 
 \end_inset 
 
@@ -3446,6 +3555,35 @@ e_{w}(x)=\sum_{k=0}^{\infty}\frac{w^{k}\tau^{k}(x)}{k!}\]
 
  Also in passing, we note that the iterated tent map is a shift-state of
  the Bernoulli Operator.
+\layout Subsection
+
+Symmetries of the Takagi Curve
+\layout Standard
+
+We can no take an explicit hyperbolic symmetry, and apply it directly to
+ the Takagi curve.
+ Start with the 
+\begin_inset Formula $\theta(x)$
+\end_inset 
+
+ previously given in the hyperbolic section up above.
+ Evaluate 
+\begin_inset Formula $t_{w}(\theta(x))$
+\end_inset 
+
+ to get ...
+ 
+\layout Standard
+
+We really need a proof that *any* hyperbolic curve generated by 
+\begin_inset Formula $SL(2,Z)$
+\end_inset 
+
+ does the right thing here.
+ we can do this recursively by noting that each hyperbolic is a list of
+ straight line segments, so that at each point, we are performing a linear
+ rescaling.
+ 
 \layout Subsection
 
 The Frobenius-Perron Operator
