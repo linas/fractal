@@ -31,7 +31,7 @@ Continued Fractions and Gaps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 6 November 2004)
+12 October 2004 (revised 10 November 2004)
 \layout Abstract
 
 Given a continued fraction, we construct a certain function that is discontinuou
@@ -179,7 +179,7 @@ These two functions are analytic in
 
 .
  These integers can be readily computed due to an interesting relationship
- between the modular group 
+ between the Modular Group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
@@ -1131,26 +1131,9 @@ The distribution density
 \end_inset 
 
 .
- Numerically, we find that this distribution is perfectly uniform on the
- half-unit square.
- Thus we are lead to the following theorem/conjecture:
-\layout Description
-
-Conjecture: The distribution of the ratio of the partial convergents 
-\begin_inset Formula $R_{p/q}\equiv q_{N-1}/q_{N}$
-\end_inset 
-
- is perfectly uniform on the half-unit square, using conventional notions
- of measure, density and distribution, when we consider all possible rationals,
- rather than rationals with small denominators.
-\layout Description
-
-Proof: None (currently) supplied.
- We'll work on this shortly.
- 
-\layout Standard
-
-Now that we understand that the more fundamental quantity with regard to
+ Numerically, we can confirm that this distribution is, in a certain sense,
+ perfectly uniform on the half-unit square.
+ Now that we understand that the more fundamental quantity with regard to
  distributions is 
 \begin_inset Formula $R_{p/q}$
 \end_inset 
@@ -1254,6 +1237,82 @@ s
 \end_inset 
 
  
+\layout Subsection
+
+Structure and Randomness
+\layout Standard
+
+The computer efforts at first seem to paint two contradicting interpretations
+ about the distribution of the gaps.
+ For small denominators, there seems to be a detailed and fine structure;
+ yet, for large denominators, this structure seems to blur away, and one
+ gets the impression of a perfectly uniform distribution.
+ In fact, both conclusions are correct.
+ Each of the pictures above and below were created with a uniform pixel
+ size: 600 pixels dividing up the interval 0 to 1.
+ For small denominators, each pixel may contain only one gap, and maybe
+ none; for large denominators, each pixel may represent the average of dozens
+ or hundreds of gaps.
+ It seems reasonable to conclude that the structure of horizontal and vertical
+ bars is in fact scale-invariant, and persists down to infinitesimal scales.
+ Looking at large-denominator distributions with only 600x600 pixels effectively
+ blurs all the structure away.
+ Thus, on a coarse-grain, the distribution of the gaps appears to be perfectly
+ random; a finer choice of binning, while holding denominators fixed, would
+ lead to pictures of detailed structures at finer levels, and so on.
+ 
+\layout Standard
+
+Thus, in order to talk about the gaps for 
+\begin_inset Quotes eld
+\end_inset 
+
+all rationals
+\begin_inset Quotes erd
+\end_inset 
+
+, one has two competing limits that give different answers.
+ In one case, we take the size of the pixels smaller and smaller, and find,
+ for any fixed scale of denominators, that there is a highly fractal filigree.
+ In the other case, we hold the size of the pixels fixed, and take the limit
+ of larger and larger denominators, and find a perfectly uniform distribution.
+ It seems impossible to define the distribution 
+\begin_inset Quotes eld
+\end_inset 
+
+in and of itself
+\begin_inset Quotes erd
+\end_inset 
+
+ without resorting to talking about pixels at some point.
+ 
+\layout Description
+
+Conjecture: The distribution of the ratio of the partial convergents 
+\begin_inset Formula $R_{p/q}\equiv q_{N-1}/q_{N}$
+\end_inset 
+
+ is perfectly uniform on the half-unit square, using conventional notions
+ of measure, density and distribution, when we consider all possible rationals,
+ rather than rationals with small denominators.
+\layout Description
+
+Proof: None (currently) supplied.
+ 
+\layout Standard
+
+Its not clear how to start on this proof without first developing tools
+ that deal with the scaling relationship of the structures.
+ Blurriness presumably sets in when there are two or three gaps per pixel;
+ thus one will see structure whenever the denominators are at about the
+ same scale as the pixel widths.
+ Thus, the two scale parameters are the pixel size, and the ratio of pixel
+ size to 'typical' denominator magnitude.
+ A proof of uniformity then becomes (presumably) an argument about the mean-squa
+re variations of the distribution as a function of the pixel/denom ratio.
+ We expect the mean-square variations to be independent of the pixel size;
+ i.e.
+ scale-independent, and to depend only on this ratio.
 \layout Subsection
 
 Proof that Gaps are Cauchy-dense on the Unit Square
@@ -1618,7 +1677,8 @@ hard
 , requiring the inductive step to be invoked.
  These seem to correspond to the holes in the holes in the lattice for small
  denominators.
- 
+ It's not obvious that the inductive step is watertight; although the computer
+ work shows it should be doable.
 \layout Standard
 
 We will study the iterated map 
@@ -1670,7 +1730,20 @@ The main parabola that is visible is at
 
 Homework: There are other parabolas visible as well, offset on other fractions.
  Describe these as well.
- Why are these rationals interesting? 
+ Why are these rationals interesting?
+\layout Standard
+
+The correct avenue for describing the multitude of the parabolas is to pin
+ down the self-symmetry relationships of the gaps.
+ We already know from the study of continued fractions and Farey Fractions
+ that the relevant symmetry group is the Modular Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ (See the other papers in this series, duhh).
+ Thus, we should start by reporting on how the gaps transform under the
+ action of the Modular Group elements.
 \layout Subsection
 
 The Hyperbolic Maps in the Distribution 
@@ -1678,7 +1751,7 @@ The Hyperbolic Maps in the Distribution
 
 Exploring the shapes of the hyperbolic maps seen in the pictures requires
  the development of the theory of these maps as the hyperbolic rotations
- of a binary tree, through the action of the modular group.
+ of a binary tree, through the action of the Modular Group.
  The development of this theory is done in a later section.
  We only quote the results xxx here.
  Blah Blah Blah.
@@ -1785,14 +1858,14 @@ As a final bit of madness, let us note that the gap contains all possible
  of the continued fractions.
  Thus, in a certain sense, one might say that stochastic processes have
  a (perfectly) hidden modular group symmetry.
- The symmetry is reavealed only when one tries to construct things out of
- the the stochastic sequence; taking, for example, Diffusion Limted Aggregation
+ The symmetry is revealed only when one tries to construct things out of
+ the the stochastic sequence; taking, for example, Diffusion Limited Aggregation
  (DLA).
  The self-similarity and scaling properties become manifest.
- In the case of DLA, te dendrites are inherently self-similar.
- By 'decoding' a pair of dendrites to thier representative rationals, one
- then has a map between the two dendrites, given by the modular group, explictly
- exhibiting thier self-similarity (to within the 
+ In the case of DLA, the dendrites are inherently self-similar.
+ By 'decoding' a pair of dendrites to their representative rationals, one
+ then has a map between the two dendrites, given by the modular group, explicitl
+y exhibiting their self-similarity (to within the 
 \begin_inset Formula $\delta,$
 \end_inset 
 
