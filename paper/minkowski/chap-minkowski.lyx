@@ -217,7 +217,27 @@ The Farey Tree is constructed by taking an interval and placing the Farey
 \end_inset 
 
 ; one then continues onwards from there.
- See the presentation at on 
+ 
+\layout Standard
+
+Note that every rational occurs precisely once in the Stern-Brocot Tree,
+ and that the arrangement of the rationals is strictly order preserving:
+ if 
+\begin_inset Formula $p/q<r/s$
+\end_inset 
+
+ then 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ will appear to the left of 
+\begin_inset Formula $r/s$
+\end_inset 
+
+ in the tree.
+\layout Standard
+
+See the presentation at on 
 \begin_inset LatexCommand \htmlurl[Stern Brocot Trees]{http://www.cut-the-knot.org/blue/Stern.shtml}
 
 \end_inset 
@@ -287,7 +307,7 @@ Thus, starting with
 \end_inset 
 
 .
- Next, we see the Farey number 1/3 is mapped to the binary 1/4, and so on:
+ Next, we see the Farey number 1/3 is mapped to the dyadic 1/4, and so on:
  one quickly sees 
 \begin_inset Formula $?\left(1/n\right)=2^{-n+1}$
 \end_inset 
@@ -310,7 +330,7 @@ Thus, starting with
 \begin_inset Formula $m,n$
 \end_inset 
 
- (every rational occurs exactly once on the Stern-Brocot Tree).
+.
  
 \layout Standard
 
@@ -328,13 +348,52 @@ Put another way, given any value
 \end_inset 
 
  as a map from 'Farey Space' to 'Dyadic Space', and useful to keep in mind
- which of these two spaces one is currently working in.
- 
+ which of these two spaces one is currently working in (as it is otherwise
+ confusing, since both spaces consist of rational numbers).
+ Note that every rational occurs exactly once on the Stern-Brocot Tree,
+ and thus the Stern-Brocot Tree is in a certain sense a 'faithful' representatio
+n of the rational numbers.
+ Note that every dyadic occurs precisely one in the dyadic tree; however,
+ many important rationals do not: for example, the fraction 1/3 does not
+ appear in the dyadic tree; it can only be represented by an infinite repeating
+ string of 1's and 0's.
+ The dyadic tree does not afford a faithful representation of the rational
+ numbers; however, in the limiting case, it can represent both the rest
+ of the rationals and all of the reals.
+ Note that both trees are strictly ordered: that is, if 
+\begin_inset Formula $p/q<r/s$
+\end_inset 
+
+ then 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ will appear to the left of 
+\begin_inset Formula $r/s$
+\end_inset 
+
+ in the tree.
+ From this we can deduce that the Minkowski Question Mark function is continuous
+ and monotonically increasing, and that furthermore, it is defined on the
+ reals.
+ A rigorous proof of these properties will be presented in the next chapter,
+ where it will be shown that they hold for all de Rham curves, of which
+ the Minkowski Question mark is but a special case.
+ Also of some interest is that the completion of the dyadic tree can also
+ be taken to be 
+\begin_inset Formula $\mathbb{Q}_{2}$
+\end_inset 
+
+ instead of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+; this will also be explored in later chapters.
 \layout Standard
 
 An alternate, non-recursive definition for the Question Mark is based on
  continued fractions.
- Starting with the expansion 
+ Starting with the continued fraction representation for a number 
 \begin_inset Formula $x=[a_{1},a_{2},...]$
 \end_inset 
 
@@ -431,6 +490,7 @@ To summarize, it is this expansion in binary digits that provides the underlying
  Binary expansions, or code-words, occur naturally in the analysis of Duoady-Hub
 bard landing rays.
  We'll demonstrate an explicit mapping in a later section.
+ XXX cut/reword this last paragraph.
 \layout Subsection
 
 Some Curious Properties of the Question Mark 
