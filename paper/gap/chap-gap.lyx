@@ -23,18 +23,21 @@
 \papersides 1
 \paperpagestyle default
 
+\layout Title
+
+Continued Fractions and Gaps
+\layout Author
+
+Linas Vepstas <linas@linas.org>
+\layout Date
+
+12 October 2004
+\layout Abstract
+
+Fractals and Continued Fractions se
 \layout Section
 
 Continued Fractions and Gaps
-\layout Standard
-
-Let us start by directing the reader to the page
-\begin_inset LatexCommand \htmlurl[Gap Theory]{http://www.linas.org/art-gallery/farey/continue/continue.html}
-
-\end_inset 
-
-, the contents of which need to be copied here.
- It provides some basic definitions that we need.
 \layout Standard
 
 Given a real number 
@@ -1314,218 +1317,4 @@ Note that
 
 .
  
-\layout Section
-
-Distributions Of Rationals on the Unit Interval
-\layout Standard
-
-The distribution of rationals on the unit interval is filled with surprises.
- In High-School or College, one is told that the rationals are distributed
- 
-\begin_inset Quotes eld
-\end_inset 
-
-uniformly
-\begin_inset Quotes erd
-\end_inset 
-
- on the unit interval.
- If one considers the entire set 
-\begin_inset Formula $\mathbb{Q}$
-\end_inset 
-
-, then yes, this is true.
- But if one considers just subsets, such as the subset of rationals with
- 
-\begin_inset Quotes eld
-\end_inset 
-
-small
-\begin_inset Quotes erd
-\end_inset 
-
- denominators, then the distribution is far from uniform and full of counter-int
-uitive surprises, some of which we explore below.
- These surprises imply that extrapolating from finite results to the set
- of all rationals is a dangerous process (and here you thought the Axiom
- of Choice was Scary).
- 
-\layout Subsection
-
-Simple Counting
-\layout Standard
-
-Lets begin by listing all of the fractions with denomintors from 1 to N,
- and numerators between 0 and the denomintor.
- Clearly, there many of these fractions will be reducible, i.e.
- the numerator and denominator have common factors, and thus, in this simple-min
-ded enumeration, some rationals are counted multiple times.
- In particular, we'll count 0 over and over again: it will be in the list
- as 0/1, 0/2, 0/3 and so on.
- Likewise, 1 will appear in this list over and over: as 1/1, 2/2, 3/3, etc.
- We'll have 1/2 also appearing as 2/4, 3/6 and so on.
- So lets take a look at this in detail.
- The graph below shows this enumeration, up to a denominator of N=4000,
- carved up into 720 bins, and normalized to unit density.
- That is, if 
-\begin_inset Formula $n/720<p/q<(n+1)/720$
-\end_inset 
-
-, then we assign the fraction 
-\begin_inset Formula $p/q$
-\end_inset 
-
- to the 
-\begin_inset Formula $n$
-\end_inset 
-
-'th bin.
- We might expect this graph to have a huge peak at the bin n=360: after
- all, this bin will hold 1/2 and 2/4 and 3/6 and in general should have
- a big surfiet coming from the degeneracy at 1/2.
- One mght expect peaks at 1/3, and 1/4 and etc, but smaller.
- Here's the graph.
-\layout Standard
-
-Here's the density graph of the rationals that occur in this enumeration,
- binned into 720 bins, up to a denominator of N=4000:
-\layout Standard
-
-
-\begin_inset Graphics
-	filename rdist-720-4K.png
-
-\end_inset 
-
-
-\layout Standard
-
-Indeed, there is a big upwards spike at 1/2.
- But there seems to be a big downwards spike just below, at bin 359, seemingly
- of equal and opposite size.
- This is the first surprise.
- Why is there a deficit at bin 359? We can try to get a better picture of
- things by dividing up the enumaration into 719 bins (note that 719 is prime).
- This is results in the next surprise: the graph is flat.
- See below:
-\layout Standard
-
-
-\begin_inset Graphics
-	filename rdist-719-4K.png
-
-\end_inset 
-
-
-\layout Standard
-
-How can this graph possibly be flat? We should be massively overcounting
- at 1/2, there should be a big peak there.
- Maybe its drowned out by the blips at 0 and 1, so lets graph the same data,
- but rescale more appropriately.
- This is shown below:
-\layout Standard
-
-
-\begin_inset Graphics
-	filename rdist-719-4K-rescale.png
-
-\end_inset 
-
-
-\layout Standard
-
-Hmm.
- Curious.
- There is indeed a peak at 1/2.
- But there are also deficits symmetrically arranged at either side.
- This is still confusing.
- Well, at any rate, lets compare this to the distribution we 
-\begin_inset Quotes eld
-\end_inset 
-
-should have been using all along
-\begin_inset Quotes erd
-\end_inset 
-
-, where we eliminate all fractions that are reducible.
- That is, we should count each rational only once.
- This is graphed below, again, binned into 719 bins, for all irreducible
- rationals with denominator less than or equal to 4000:
-\layout Standard
-
-
-\begin_inset Graphics
-	filename rdist-719-4K-irred.png
-
-\end_inset 
-
-
-\layout Standard
-
-Wow! We no longer have a peak at 1/2.
- In fact, it sure gives the impression that we are undercounting at 1/2!
- Holy Banach-Tarski, Batman! What does it mean? Note also the graph is considera
-bly noiser.
- Compare the scales on the left for a relative measure of the noise.
- Part, but not all, of the noise is due to the smaller sample size: we are
- counting fewer fractions: 4863602 are irreducible out of the simple list
- of 8002000.
- However, matching the sample sizes does not seem to significantly reduce
- the small-amplitude noise: qualitatively speaking, the binning of irreducible
- fractions seems much noisier.
-\layout Standard
-
-Curiously, binning into a non-prime number of bins does seem to reduce the
- (small-amplitude) noise.
- Below is the binning into 720 bins.
-\layout Standard
-
-
-\begin_inset Graphics
-	filename rdist-720-4K-irred.png
-
-\end_inset 
-
-
-\layout Standard
-
-Following the usual laws of statistics, one expects that increasing the
- sample size reduces the noise.
- This is true in an absolute sense, but not a relative sense.
- The graph below shows 720 bins holding all irreducible rationals with denominat
-ors less than 16000.
- The absolute amplitude has been reduced by over a factor of ten compared
- to the previous graphs; however, there is relatively far more power in
- the higher frequencies.
- There are also still-visible noise peaks near 1/2, 1/3, and 2/3'rds, as
- well as at 0 and 1.
- 
-\layout Standard
-
-
-\begin_inset Graphics
-	filename rdist-720-16K-irred.png
-
-\end_inset 
-
-
-\layout Standard
-
-It sure would be nice to develop a generalized theory that can work with
- these peculiar results, and in particular, giving insight into what's happening
- near 1/2 and giving a quantitative description of the spectra near 1/3
- and 2/3, etc.
- In particular, the very first graph of this section has very clear self-similar
-ity properties; its very much a fractal, more obviously so than the later
- graphs.
- What is the fractal dimension? What is the symmetry group involved? Is
- it indeed a subgroup of the Modular Group, as the following chapter would
- seem to suggest? (this should be an easy qustion to answer, I just haven't
- done the calculation yet).
- More importantly, why does the modular group show up when one is counting
- rationals? What is it about rational numbers that makes them so hyperbolic?
-\layout Standard
-
-As a side-effect, 
 \the_end
