@@ -15,13 +15,36 @@
 #include "multihash.h"
 #include "wordhash.h"
 
-main () {
+#define LAG_USED_SIZE 130
 
-   FILE * fh = stdin;
-   
-   lagWordTable *wt = new lagWordTable;
-   // lagWordTripleTable *pt = new lagWordTripleTable;
-   lagWordQuadTable *pt = new lagWordQuadTable;
+class lagTextAnalysis {
+   public:
+      lagTextAnalysis (void);
+      void Analyze (FILE *fh);
+      void Dump (void);
+      void Construct (int);
+   private:
+      lagWordTable *wt;
+      lagWordQuadTable *pt;
+      int was_used [LAG_USED_SIZE];
+};
+
+// =====================================================
+
+lagTextAnalysis :: lagTextAnalysis (void) {
+   wt = new lagWordTable;
+   // pt = new lagWordTripleTable;
+   pt = new lagWordQuadTable;
+
+   int i=0;
+   for (i=0; i<LAG_USED_SIZE; i++) {
+      was_used [i] = 0;
+   }
+}
+
+// =====================================================
+
+void lagTextAnalysis :: Analyze (FILE *fh) {
 
    char buff[5000];
 
@@ -60,6 +83,11 @@ main () {
       }
    }
 
+}
+
+// =====================================================
+
+void lagTextAnalysis :: Dump (void) {
    pt -> Dump();
 
    int i = 0;
@@ -77,20 +105,27 @@ main () {
       char * wfo = wt -> GetWordFromID (fo);
       printf (" its id=%d cnt=%d %s %s %s %s \n", top, cnt, wfi, wse, wth, wfo);
    }
+}
 
-#define LAG_USED_SIZE 30
-   int was_used [LAG_USED_SIZE];
+// =====================================================
+
+void lagTextAnalysis :: Construct (int top) {
+
+   int i = 0;
    for (i=0; i<LAG_USED_SIZE; i++) {
       was_used [i] = 0;
    }
 
    // construct string
-   i = 0;
-   int pair = pt -> GetTopTen (0);
+   int pair = pt -> GetTopTen (top);
    int fi = pt -> GetElt (pair, 0);
    char * wfi = wt -> GetWordFromID (fi);
    printf ("%s ", wfi);
+
+   int j=0;
    while (pair) {
+
+      // avoid infinite loops
       for (i=0; i<LAG_USED_SIZE; i++) {
          if (pair == was_used [i]) {
             return;
@@ -110,14 +145,30 @@ main () {
       char * wse = wt -> GetWordFromID (se);
       char * wth = wt -> GetWordFromID (th);
       char * wfo = wt -> GetWordFromID (fo);
-      printf ("%s %s %s %s ", wse, wth, wfo);
-      i++;
-      if (3 == i) {
-         i = 0;
+      printf ("%s %s %s ", wse, wth, wfo);
+      j++;
+      if (3 == j) {
+         j = 0;
          printf ("\n");
       }
       pair = pt -> GetTopPairContainingWord (fo);
    }
+}
+
+// =====================================================
+
+main () {
+
+   FILE * fh = stdin;
+   lagTextAnalysis * texan = new lagTextAnalysis;
+   texan -> Analyze (fh);
+   texan -> Dump();
+
+   for (int i=0; i<LAG_TOP_TEN; i++) {
+      printf ("\n\n =========== sentance %d =========== \n", i);
+      texan -> Construct (i);
+   }
+
 
 }
 
