@@ -36,7 +36,7 @@
 */
 
 #ifdef   __cplusplus
-#extern "C" {
+extern "C" {
 #endif
 
 int totient_phi(int n);
