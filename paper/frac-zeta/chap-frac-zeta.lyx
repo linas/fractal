@@ -56,6 +56,9 @@ This paper assumes familiarity with the development of the symmetries of
  appeals to abstract mathematical concepts as much as possible.
 \layout Abstract
 
+This is a draft; this paper is still in the process of being written.
+\layout Abstract
+
 This paper is part of a set of chapters that explore the relationship between
  the real numbers, the modular group, and fractals.
 \layout Section
@@ -74,6 +77,100 @@ if you fool with Dirichlet series, don't be surprised to find the Riemann
 \end_inset 
 
 , which is what we'll do and find.
+\layout Standard
+
+The general course of investigation revolves around the realization that
+ when one considers an iterated function, the iterates form an arithmetic
+ series.
+ This arithmetic series can then be studied using any one of dozens of tools
+ evolved over the centuries for studying series, from number theory to analytic
+ functions.
+ In earlier chapters, we considered the iterated tent map 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+.
+ For a fixed 
+\begin_inset Formula $x$
+\end_inset 
+
+, iterating on this function generates a series of values 
+\begin_inset Formula $\tau^{n}(x)$
+\end_inset 
+
+.
+ The iterates can then be used to define a Maclaurin series 
+\begin_inset Formula \begin{equation}
+\sum_{n=1}^{\infty}\tau^{n}(x)\; w^{n-1}\label{eq:mac}\end{equation}
+
+\end_inset 
+
+and this series can be studied as an analytic function of 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ Conversely, we can also fix a value for 
+\begin_inset Formula $w$
+\end_inset 
+
+, and consider the series as a function of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ In the later case, we saw that the the resulting curve, as a function of
+ 
+\begin_inset Formula $x$
+\end_inset 
+
+, is called the Takagi curve.
+ This curve is fractal, and it exhibits self similarity, with the self-similarit
+y given by the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+In the following, we will consider instead the Dirichlet series 
+\begin_inset Formula \begin{equation}
+\sum_{n=1}^{\infty}\tau^{n}(x)\; n^{-s}\label{eq:dir}\end{equation}
+
+\end_inset 
+
+ This series is not trivially self-similar the way that the Takagi curve
+ was (although, visually, it is nearly indistinguishable).
+ However, it does offer up many interesting symmetries none-the-less, due
+ in part to the relatively simple structure of the iterated tent map.
+ For example, any rational number 
+\begin_inset Formula $x=n/(3\cdot2^{m})$
+\end_inset 
+
+ will eventually iterate to the fixed point 
+\begin_inset Formula $\tau(2/3)=2/3$
+\end_inset 
+
+ and thus the series differs from the Riemann zeta only by finite number
+ of terms.
+ Attempting to find modular group group elements to this sum then give relations
+hips on the Riemann zeta.
+ Other rational numbers, when iterated under the tent map, eventually settle
+ down to periodic orbits with period two or with longer recurrence times.
+ The pre-periodic terms again give rise to harmonic-number-like terms, while
+ the periodic parts give rise to relations on the Hurwitz zeta.
+ Some of these relationships; and possibly all of them, are known classically.
+ The point of interest here is perhaps the novel derivation of these symmetry
+ relationships.
+\layout Standard
+
+The periodic orbits of the iterated tent map are a set of measure zero on
+ the real number line.
+ Of some curiosity is what sort of statements one might be able to make
+ for almost-periodic orbits, or whether one might be able to make meaningful
+ statements for larger sets of points.
+ These last questions are (currently) outside the scope of this paper.
 \layout Subsection
 
 The Analog of the Takagi Curve as a Dirichlet Series
@@ -482,19 +579,19 @@ s-1\end{array}\right)\left(\frac{-1}{2}\right)^{k}\zeta(s+k)\label{eq:one-half}\
 \end_inset 
 
  has an orbit (2/7, 4/7, 6/7).
- Unfortunately, this gives rise to a sum that is not directly solvable,
- as one prominently must wrestle with the series 
+ Unfortunately, this gives rise to a sum that is not directly solvable in
+ terms of the Riemann zeta, as one prominently must wrestle with the series
+ 
 \begin_inset Formula \begin{equation}
 1+\frac{1}{4^{s}}+\frac{1}{7^{s}}+\frac{1}{10^{s}}+...\label{eq:}\end{equation}
 
 \end_inset 
 
- which doesn't seem to be quickly or easily expressibe in terms of the Riemann
- Zeta.
- It can however, be expressed as the Hurwitz Zeta, as can sums involving
+ This series can be expressed as the Hurwitz Zeta, as can sums involving
  orbits with higher periods.
- We come back to these in a later section; for now we will pursue a more
- direct route.
+ We come back to these in a later section; for now we will pursue the period-2
+ case.
+ 
 \layout Subsection
 
 Relations for Half-Integer Values
@@ -627,9 +724,52 @@ H_{2m+2n+1}(s)-\frac{H_{n+m}(s)}{2^{s}}=\sum_{k=0}^{m+n}\frac{1}{\left(2k+1\righ
 Hurwitz Zeta Relations
 \layout Standard
 
-Orbits with period 3, period 5, etc.
- give relations on the Hurwitz Zeta.
+Orbits with longer periods give relations on the Hurwitz Zeta.
+ First,we start by describing the equivalence classes of all values of 
+\begin_inset Formula $x$
+\end_inset 
+
+ with longer periods (XXX finish this section).
+ For example, 
+\begin_inset Formula $x=1/5$
+\end_inset 
+
+ iterates to the orbit (2/5, 4/5) of period two.
+ Iterates of 
+\begin_inset Formula $x=1/7$
+\end_inset 
+
+ converge to the orbit (2/7, 4/7, 6/7) of period three.
+ Iterates of 
+\begin_inset Formula $x=1/9$
+\end_inset 
+
+ converge to (2/9, 4/9, 8/9) of period 3.
+ Next, we have (2/11, 4/11, 8/11, 6/11, 10/11) of period 5, and, in general,
+ for 
+\begin_inset Formula $p$
+\end_inset 
+
+ prime, 
+\begin_inset Formula $x=1/p$
+\end_inset 
+
+ will iterate to an orbit of length 
+\begin_inset Formula $(p-1)/2$
+\end_inset 
+
+.
+ By contrast, 
+\begin_inset Formula $x=1/15$
+\end_inset 
+
+ will iterate to the orbit (2/15, 4/15, 8/15, 14/15) of period four.
  
+\layout Standard
+
+The pre-periodic part gives rise to a harmonic-number-like term, a finite
+ sum.
+ The periodic part gives the Hurwitz zeta.
 \layout Subsection
 
 Conclusions
