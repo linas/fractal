@@ -17,6 +17,8 @@
 // The Dialogue() method uses a short snippet of dialogue to light
 //    up a neural net of nodes.
 //
+// The PathWalk() method walks hill tops.
+//
 // HISTORY:
 // January 1997 Linas Vepstas
 
@@ -26,6 +28,8 @@
 
 #include "multihash.h"
 #include "wordhash.h"
+
+#define LAG_THREE_WORD_PHRASE
 
 #define LAG_USED_SIZE 50
 
@@ -37,22 +41,35 @@ class lagTextAnalysis {
       void Dump (void);
       void HillClimb (void);
       void Chain (int);
+
+      void PathWalk (void);
+      float TreeWalk (unsigned int lead_off_phrase,
+                      unsigned int was_visited_arrray []);
    protected:
       void PrintPhrase (unsigned int);
 
    private:
       lagWordTable *word_table;
+#ifdef LAG_THREE_WORD_PHRASE
+      lagWordTripleTable *phrase_table;
+#endif // LAG_THREE_WORD_PHRASE
+#ifdef LAG_FOUR_WORD_PHRASE
       lagWordQuadTable *phrase_table;
+#endif // LAG_FOUR_WORD_PHRASE
       lagConcordPairTable *xref_table;
-      int was_used [LAG_USED_SIZE];
+      unsigned int was_used [LAG_USED_SIZE];
 };
 
 // =====================================================
 
 lagTextAnalysis :: lagTextAnalysis (void) {
    word_table = new lagWordTable;
-   // phrase_table = new lagWordTripleTable;
+#ifdef LAG_THREE_WORD_PHRASE
+   phrase_table = new lagWordTripleTable;
+#endif // LAG_THREE_WORD_PHRASE
+#ifdef LAG_FOUR_WORD_PHRASE
    phrase_table = new lagWordQuadTable;
+#endif // LAG_FOUR_WORD_PHRASE
    xref_table = new lagConcordPairTable;
 
    int i=0;
@@ -113,12 +130,22 @@ void lagTextAnalysis :: Analyze (FILE *fh) {
                last_phrase_id = this_phrase_id;
             }
 
+#ifdef LAG_THREE_WORD_PHRASE
+            this_phrase_id = phrase_table -> GetID (blast_word_id, last_word_id, this_word_id);
+#endif // LAG_THREE_WORD_PHRASE
+#ifdef LAG_FOUR_WORD_PHRASE
             this_phrase_id = phrase_table -> GetID (clast_word_id, blast_word_id, last_word_id, this_word_id);
+#endif // LAG_FOUR_WORD_PHRASE
 
             // light up the phrase neuron
             phrase_table -> AccumStrength (this_phrase_id, 1.0);
 
+#ifdef LAG_THREE_WORD_PHRASE
+            xref_table -> GetID (clast_phrase_id, this_phrase_id);
+#endif // LAG_THREE_WORD_PHRASE
+#ifdef LAG_FOUR_WORD_PHRASE
             xref_table -> GetID (dlast_phrase_id, this_phrase_id);
+#endif // LAG_FOUR_WORD_PHRASE
             word = &buff[i+1];
          } else {
             buff[i] = tolower (buff[i]);
@@ -132,7 +159,7 @@ void lagTextAnalysis :: Analyze (FILE *fh) {
 
 // =====================================================
 
-#define LAG_NUM_CYCLES 7
+#define LAG_NUM_CYCLES 5
 
 void lagTextAnalysis :: Dialogue (FILE *fh) {
 
@@ -177,8 +204,6 @@ void lagTextAnalysis :: Dialogue (FILE *fh) {
       // function
       phrase_table -> ActivateAll ();
    }
-
-   HillClimb ();
 }
 
 // =====================================================
@@ -199,9 +224,13 @@ void lagTextAnalysis :: HillClimb (void) {
       }
    }
 
-   // printf ("\n Hill climb hottest is %d %f \n", hottest_phrase, heat);
+   printf ("\nInfo: lagTextAnalysis :: HillClimb(): \n");
+   printf ("Hotest phrase id = %d weight = %f \n", hottest_phrase, heat);
    PrintPhrase (hottest_phrase);
    printf ("\n");
+   printf ("\nInfo: lagTextAnalysis :: HillClimb(): response text is \n");
+   PrintPhrase (hottest_phrase);
+   printf ("			id = %d weight = %f \n", hottest_phrase, heat);
 
    phrase_table -> AbsAllWeights();
 
@@ -249,9 +278,8 @@ printf ("\n");
       }
 
       if (found_one) {
-         // printf ("\n Hill climb next is %d %f \n", hottest_phrase, heat);
          PrintPhrase (hottest_phrase);
-         printf ("\n");
+         printf ("			id = %d weight = %f \n", hottest_phrase, heat);
       } else {
          break;
       }
@@ -262,10 +290,142 @@ printf ("\n");
 
 // =====================================================
 
+float lagTextAnalysis :: TreeWalk 
+   (unsigned int lead_off_phrase,
+   unsigned int was_visited_array []) 
+{
+
+   float heat = 0.0;
+   unsigned int hottest_phrase = 0;
+
+   heat = phrase_table -> GetWeight (lead_off_phrase);
+   if (0.0005 > heat) return 0.0;
+
+   heat = 0.00001;
+
+   unsigned int best_path [LAG_USED_SIZE];
+   int i = 0;
+   for (i=0; i<LAG_USED_SIZE; i++) {
+      best_path[i] = was_visited_array[i];
+   }
+
+   // now follow the highest ridge
+   void * cursor = xref_table -> GetStart (lead_off_phrase);
+
+   // walk precisely one level down the tree
+   unsigned int phrase = xref_table -> GetPhrase(cursor);
+   while (phrase) {
+
+      // avoid infinite loops -- check to see if we've been here already
+      short dont_do_it = 0;
+      for (i=0; i<LAG_USED_SIZE; i++) {
+         if (phrase == was_visited_array [i]) {
+            dont_do_it = 1;
+            break;
+         }
+      }
+
+      if (dont_do_it) {
+         if (LAG_USED_SIZE-1 == i) break;
+         cursor = xref_table -> GetNext (cursor);
+         phrase = xref_table -> GetPhrase(cursor);
+         continue;
+      }
+
+      // recursive inifinite loop trimmer.
+      unsigned int stopper [LAG_USED_SIZE];
+      for (i=0; i<LAG_USED_SIZE; i++) {
+         stopper [i] = was_visited_array[i];
+         if (!stopper[i]) {
+            stopper[i] = phrase;
+            break;
+         }
+      }
+
+      // OK, now recurse down a level
+      float path_sum = TreeWalk (phrase, stopper);
+
+      // locate hottest tree branch
+      if (path_sum > heat) {
+         heat = path_sum;
+         hottest_phrase = phrase;
+         for (i=0; i<LAG_USED_SIZE; i++) {
+            best_path [i] = stopper[i];
+         }
+      }
+
+      cursor = xref_table -> GetNext (cursor);
+      phrase = xref_table -> GetPhrase(cursor);
+   }
+
+   // record the actual path taken
+   for (i=0; i<LAG_USED_SIZE; i++) {
+      was_visited_array[i] = best_path[i];
+   }
+
+   // add activation of this node to the hottest path.
+   heat += phrase_table -> GetWeight (lead_off_phrase);
+   return (heat);
+} 
+
+// =====================================================
+
+void lagTextAnalysis :: PathWalk (void) 
+{
+   unsigned int hottest_phrase = 0;
+   float heat = 0.0;
+
+   // find the hottest phrase
+   int num_phrases = phrase_table -> GetTableSize();
+   int i = 0;
+   for (i=1; i<= num_phrases; i++) {
+      float activity = phrase_table -> GetWeight (i);
+      if (activity > heat) {
+         heat = activity;
+         hottest_phrase = i;
+      }
+   }
+
+   printf ("\nInfo: lagTextAnalysis :: PathWalk(): \n");
+   printf ("Hotest phrase id = %d heat=%f \n", hottest_phrase, heat);
+   PrintPhrase (hottest_phrase);
+   printf ("\n");
+
+   phrase_table -> AbsAllWeights();
+
+   // setup to avoid infinite loops
+   for (i=0; i<LAG_USED_SIZE; i++) {
+      was_used [i] = 0;
+   }
+
+   was_used[0] = hottest_phrase;
+   TreeWalk (hottest_phrase, was_used);
+
+   printf ("\nInfo: lagTextAnalysis :: PathWalk(): response text is: \n");
+   for (i=0; i<LAG_USED_SIZE; i++) {
+      if (was_used[i]) {
+         PrintPhrase (was_used [i]);
+         float heat = phrase_table -> GetWeight (was_used[i]);
+         printf ("			id = %d weight = %f \n", was_used[i], heat);
+      } else {
+         break;
+      }
+   }
+   printf ("\n\n");
+}
+
+
+// =====================================================
+
 void lagTextAnalysis :: PrintPhrase (unsigned int phrase_id) {
    if (!phrase_id) return;
 
+#ifdef LAG_THREE_WORD_PHRASE
+   for (int j=0; j<3; j++) {
+#endif // LAG_THREE_WORD_PHRASE
+#ifdef LAG_FOUR_WORD_PHRASE
    for (int j=0; j<4; j++) {
+#endif // LAG_FOUR_WORD_PHRASE
       unsigned int word_id = phrase_table -> GetElt (phrase_id, j);
       char * word = word_table -> GetWordFromID (word_id);
       printf (" %s", word);
@@ -379,6 +539,12 @@ main (int argc, char * argv[]) {
    texan -> Analyze (text_fh);
 
    texan -> Dialogue (dialogue_fh);
+
+   // follow least steepest descent
+   texan -> HillClimb ();
+
+   // follow highest ridge.
+   texan -> PathWalk();
 
    texan -> Dump();
 
