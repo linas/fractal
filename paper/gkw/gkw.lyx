@@ -651,7 +651,7 @@ Well, Provide the matrix elements.
 
 
 \begin_inset Formula \[
-\left[U_{B}\right]_{mk}\equiv U_{mk}=\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
+\left[U_{B}\right]_{mk}\equiv U_{mk}\equiv\left\langle m\right|U\left|k\right\rangle =\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
 k\\
 m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\]
 
@@ -672,27 +672,80 @@ k\end{array}\right)$
 \end_inset 
 
  is a traceless, pure upper-triangular matrix.
- Thus, for the polynomial eigenstates, we can promptly read teh eigenvalues
- off the diagonal.
- Because its upper-triangular, its very quickly solvable for both the left
- and right eigenvectors, which agree perfectly w/ Driebe.
+ Thus, for the polynomial eigenstates, we can promptly read the eigenvalues
+ off the diagonal; these eigenvalues are 
+\begin_inset Formula $\lambda_{n}=2^{-n}$
+\end_inset 
+
+.
+ Because the matrix is upper-triangular, it is easily solvable for both
+ the left and right eigenvectors, which agree perfectly w/ Driebe.
  
 \layout Standard
 
-The right eigenvectors are the Bernoulli polynomials ...
- xxxx Provide the discrete eigenfunctions, which are amazingly also named
- after Bernoulli: the Bernoulli polynomials.
+The right eigenvectors are denoted by 
+\begin_inset Formula $\left|B_{n}\right\rangle $
+\end_inset 
+
+ and have the vector components 
+\begin_inset Formula \[
+\left\langle k|B_{n}\right\rangle =\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(1-\Theta_{n,k}\right)B_{n-k}=\left\{ \begin{array}{ccc}
+\left(\begin{array}{c}
+n\\
+k\end{array}\right)B_{n-k} & \;\textrm{ for }\; & k\leq n\\
+0 & \;\textrm{ for }\; & k>n\end{array}\right.\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $B_{k}$
+\end_inset 
+
+ are the Bernoulli numbers.
+ We can verify this by multiplying the eigenvector into the matrix: 
+\begin_inset Formula \begin{eqnarray*}
+\sum_{k=0}^{\infty}\left\langle m\right|U\left|k\right\rangle \left\langle k|B_{n}\right\rangle  & = & \sum_{k=m}^{n}\left[\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
+k\\
+m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\right]\left(\begin{array}{c}
+n\\
+k\end{array}\right)B_{n-k}\\
+ & = & \frac{1}{2^{m}}\left(\begin{array}{c}
+n\\
+m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\\
+ & = & \lambda_{n}\left\langle m|B_{n}\right\rangle \end{eqnarray*}
+
+\end_inset 
+
+ In coordinate space, the right eigenvectors are the Bernoulli polynomials.
 \layout Standard
 
 
 \begin_inset Formula \[
-B_{n}(x)=\sum_{k=0}^{n}\left(\begin{array}{c}
+\sum_{k=0}^{\infty}\left\langle x|k\right\rangle \left\langle k|B_{n}\right\rangle =\sum_{k=0}^{n}\left(\begin{array}{c}
 n\\
-k\end{array}\right)B_{n-k}x^{k}\]
+k\end{array}\right)B_{n-k}x^{k}=B_{n}(x)\]
 
 \end_inset 
 
+ which we can verify explicitly by substituting into the function-operator
+ form of the map:
+\begin_inset Formula \begin{eqnarray*}
+\left[U_{B}B_{n}\right](x) & = & \frac{1}{2}\left[B_{n}\left(\frac{x}{2}\right)+B_{n}\left(\frac{x+1}{2}\right)\right]\\
+ & = & \lambda_{n}B_{n}(x)\end{eqnarray*}
 
+\end_inset 
+
+ The last identity follows from the 
+\begin_inset Quotes eld
+\end_inset 
+
+multiplication formula
+\begin_inset Quotes erd
+\end_inset 
+
+ for Bernoulli polynomials.
 \layout Standard
 
 The left eigenvectors are denoted by 
@@ -751,13 +804,14 @@ case.
 
 \end_inset 
 
- Similarly, the left eigenvectors acting on some function 
+ Its instructive to look at the other left eignvectors acting on some function
+ 
 \begin_inset Formula $f(x)$
 \end_inset 
 
- can be written as 
+; these can be written as 
 \begin_inset Formula \[
-\left\langle \tilde{B}_{n}|f\right\rangle =\frac{1}{n!}\left[f^{(n)}(1)-f^{(n)}(0)\right]\]
+\left\langle \tilde{B}_{n}|f\right\rangle =\frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\]
 
 \end_inset 
 
@@ -790,7 +844,7 @@ U_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \lambda_{n}\left\langle \tilde
  is operator on observables is explicitly xxxxxxx fix this formula xxx finsish
  this 
 \begin_inset Formula \[
-K_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \lambda_{n}\left\langle \tilde{B}_{n}\right|\]
+K_{B}=\sum_{n=0}^{\infty}B_{n}(2x)+B_{n}(2x+1)\left\langle \tilde{B}_{n}\right|y\]
 
 \end_inset 
 
