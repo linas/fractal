@@ -296,10 +296,12 @@ middle
 
 \layout Standard
 
-How can this graph possibly be flat? We should be massively overcounting
- at 1/2, there should be a big peak there.
- Maybe its drowned out by the blips at 0 and 1, so lets graph the same data,
- but rescale more appropriately.
+Wow, thats flat! How can this graph possibly be so flat? We should be massively
+ overcounting at 1/2, there should be a big peak there.
+ Maybe its drowned out by the blips at 0 and 1: we are, after all histograming
+ over 8 million fractions, and we expect statistical variations to go as
+ one over the sqaure-root of the sample size.
+ So lets graph the same data, but rescale more appropriately.
  This is shown below:
 \layout Standard
 
@@ -317,7 +319,20 @@ Hmm.
  There is indeed a peak at 1/2.
  But there are also deficits symmetrically arranged at either side.
  This is still confusing.
- Well, at any rate, lets compare this to the distribution we 
+ We might have expected peaks, but no deficits, with the baseline pushed
+ down, to say, 0.999, with all peaks going above, so that the total bin count
+ would still average out to 1.0.
+ But the baseline is at 1.0, and not at 0.999, and so this defies simple intuition.
+ Notice also that the fractal nature is still evident.
+ There are also peaks at 1/3, 1/4, 1/5 and 1/6.
+ But not at 1/7'th.
+ Previously, we explained away the lack of a peak at 1/7'th by arguing about
+ the prime factors of 720; this time, 719 has no prime factors other than
+ itself; thus, this naive argument fails.
+ What do we replace this argument with?
+\layout Standard
+
+Well, at any rate, lets compare this to the distribution we 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -327,6 +342,8 @@ should have been using all along
 
 , where we eliminate all fractions that are reducible.
  That is, we should count each rational only once.
+ This mkes a lot more sense, if we are to talk of teh distribution of rationals
+ on the real number line.
  This is graphed below, again, binned into 719 bins, for all irreducible
  rationals with denominator less than or equal to 4000:
 \layout Standard
@@ -341,9 +358,9 @@ should have been using all along
 \layout Standard
 
 Wow! We no longer have a peak at 1/2.
- In fact, it sure gives the impression that we are undercounting at 1/2!
- Holy Banach-Tarski, Batman! What does it mean? Note also the graph is considera
-bly noiser.
+ In fact, it sure gives the distinct impression that we are undercounting
+ at 1/2! Holy Banach-Tarski, Batman! What does it mean? Note also the graph
+ is considerably noiser.
  Compare the scales on the left for a relative measure of the noise.
  Part, but not all, of the noise is due to the smaller sample size: we are
  counting fewer fractions: 4863602 are irreducible out of the simple list
@@ -351,6 +368,39 @@ bly noiser.
  However, matching the sample sizes does not seem to significantly reduce
  the small-amplitude noise: qualitatively speaking, the binning of irreducible
  fractions seems much noisier.
+ 
+\layout Standard
+
+Let us pause for a moment to notice that this noise is not due to some numerical
+ aberation due to the use of floating-point numbers, IEEE or otherwise.
+ The above bincounts are performed using entirely integer math.
+ That is, for every pair of integers 
+\begin_inset Formula $p,$
+\end_inset 
+
+ 
+\begin_inset Formula $q$
+\end_inset 
+
+, we computed the integer bin number 
+\begin_inset Formula $n$
+\end_inset 
+
+ and the integer remainder 
+\begin_inset Formula $0\leq r<K$
+\end_inset 
+
+ such that 
+\begin_inset Formula $nq=pK+r$
+\end_inset 
+
+ holds as in integer equation, where 
+\begin_inset Formula $K$
+\end_inset 
+
+ was the number of bins.
+ This equation does not have 'rounding error' or 'numerical imprecision'.
+ 
 \layout Standard
 
 Curiously, binning into a non-prime number of bins does seem to reduce the
@@ -367,8 +417,8 @@ Curiously, binning into a non-prime number of bins does seem to reduce the
 
 \layout Standard
 
-Following the usual laws of statistics, one expects that increasing the
- sample size reduces the noise.
+Following the usual laws of statistics and averages, one expects that increasing
+ the sample size reduces the noise.
  This is true in an absolute sense, but not a relative sense.
  The graph below shows 720 bins holding all irreducible rationals with denominat
 ors less than 16000.
