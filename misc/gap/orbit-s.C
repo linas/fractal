@@ -9,8 +9,7 @@
  */
 #include <stdio.h>
 #include <malloc.h>
-
-#include "Farey.h"
+#include <math.h>
 
 double gee[3][3];
 double are[3][3];
@@ -19,6 +18,34 @@ int ic=0;
 int nsz=0;
 double *xv;
 double *yv;
+
+void 
+plain_dyadic_rep_init (void)
+{
+	gee[0][0] = 0.5;
+	gee[0][1] = 0.0;
+	gee[0][2] = 0.0;
+	
+	gee[1][0] = 0.0;
+	gee[1][1] = 0.5;
+	gee[1][2] = 0.0;
+	
+	gee[2][0] = 0.0;
+	gee[2][1] = 0.0;
+	gee[2][2] = 1.0;
+
+	are[0][0] = -1.0;
+	are[0][1] = 0.0;
+	are[0][2] = 1.0;
+	
+	are[1][0] = 0.0;
+	are[1][1] = 1.0;
+	are[1][2] = 0.0;
+	
+	are[2][0] = 0.0;
+	are[2][1] = 0.0;
+	are[2][2] = 1.0;
+}
 
 void 
 init (void)
@@ -35,18 +62,23 @@ init (void)
 	gee[2][1] = 0.0;
 	gee[2][2] = 1.0;
 
-	are[0][0] = -1.0;
-	are[0][1] = 0.0;
+	// for vector v, its reflection is
+	// v_ref = v - (v.n) n 
+	// where n is normal to the reflection plane
+	// for triangle, n = (-1/2, -sqrt(3)/2)
+	// matrix is outer product -2n x n
+	//
+	are[0][0] = -0.5;
+	are[0][1] = 0.5*sqrt(3);
 	are[0][2] = 0.0;
 	
-	are[1][0] = 0.0;
-	are[1][1] = 1.0;
+	are[1][0] = 0.5*sqrt(3);
+	are[1][1] = -1.5;
 	are[1][2] = 0.0;
 	
-	are[2][0] = 1.0;
+	are[2][0] = 0.0;
 	are[2][1] = 0.0;
 	are[2][2] = 1.0;
-	
 }
 
 void
@@ -139,7 +171,7 @@ int main (int argc, char * argv[])
 	
 	mat[0][0] = 1.0;
 	mat[0][1] = 0.0;
-	mat[0][2] = 0.0;
+	mat[0][2] = 1.0;
 	mat[1][0] = 0.0;
 	mat[1][1] = 1.0;
 	mat[1][2] = 0.0;
@@ -154,20 +186,13 @@ int main (int argc, char * argv[])
 	xv = (double *) malloc (nsz*sizeof (double));
 	yv = (double *) malloc (nsz*sizeof (double));
 
-	recur (mat, 1, 9);
+	recur (mat, 2, 9);
 
 	// sortme ();
 
 	int i;
 	for (i=0; i<ic; i++)
 	{
-#if 0
-		double xf = InvFarey (xv[i]);
-		double yf = InvFarey (yv[i]);
-		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", xv[i], 0.0, xf, 0.0);
-		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", xv[i], yv[i], xf, yf);
-		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", xv[i], 0.0, xf, 0.0);
-#endif
 		printf ("%8.6g	%8.6g\n", xv[i], yv[i]);
 	}
 }

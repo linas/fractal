@@ -7,7 +7,7 @@ LIB = $(TOP)/lib
 CC = /usr/bin/cc -O2 -I $(INC) 
 
 EXES= dyadic entropy exacto fdist feigen \
-      fiddle fliptree gappy gkw mute orbit padic \
+      fiddle fliptree gappy gkw mute orbit orbit-s padic \
       pair rdist summy swap sway sym \
       sym-fun takagi theta tree vanish zeta
 
@@ -40,6 +40,7 @@ gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
 gkw.o:  gkw.C $(LIB)/Farey.o $(INC)/Farey.h
 mute.o:  mute.C $(LIB)/Farey.o $(INC)/Farey.h
 orbit.o:	orbit.C
+orbit-s.o:	orbit-s.C
 padic.o:	padic.C
 pair.o:  pair.C $(LIB)/Farey.o $(INC)/Farey.h
 rdist.o:  rdist.C $(LIB)/Farey.o $(INC)/Farey.h
