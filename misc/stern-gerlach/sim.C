@@ -29,7 +29,7 @@ main ()
 
    double delta_t = 1.0e-13;  // time step
 
-   int imax = 123000111;  // max iterations
+   int imax = 2123000111;  // max iterations
 
    theta = 0.6;
    nprec = 0;
@@ -91,9 +91,12 @@ main ()
         sin_phi = sin(phi);
         cos_phi = cos(phi);
         nprec --;
-        printf ("%d	%d	%d	%g	%g	%g	%g\n",
-           nprec, i, i-last_i, theta, acc_theta, pos_x, pos_z);
-        last_i = i;
+        if (0 == nprec%100) 
+        {
+           printf ("%d	%d	%d	%20.16g	%g	%g	%g\n",
+              nprec, i, i-last_i, theta, acc_theta, pos_x, pos_z);
+           last_i = i;
+        }
         theta += acc_theta;
 
         tmp = cos_theta;
