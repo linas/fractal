@@ -20,6 +20,7 @@
 #include <time.h>
 
 #include "Farey.h"
+#include "FareyTree.h"
 
 /*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using */
@@ -2936,7 +2937,6 @@ whack (
  * continued fraction
  */
 
-
 void 
 gapper (
    float  	*glob,
@@ -2966,6 +2966,8 @@ gapper (
 	int d,n;  // denom, numerator
 	ContinuedFraction f;
 
+	FareyIterator fi;
+
 	for (d=2; d<itermax; d++)
 	{
 		int dd = d;
@@ -2973,23 +2975,25 @@ gapper (
 		{
 			int nn = n;
 
-#define DO_RAND
+// #define DO_RAND
 #ifdef DO_RAND
 			nn = rand() >> 10;
 			dd = rand() >> 10;
-#endif
 			nn %= dd;
 			if (0 == nn) continue;
 			if (0 == dd) continue;
+#endif
+			fi.GetNextFarey (&nn, &dd);
 
 			double t = (double) nn/ (double) dd;
 
 			i = (int) ((double) sizex * t);
 			tot_cnt[i] ++;
 if (i>=sizex) printf ("xxxxxxxxxxxxxxxxx\n");
+			if (i>=sizex) continue;
 			
-			int gcf = gcf32 (nn,dd);
 
+			int gcf = gcf32 (nn,dd);
 #ifndef DO_RAND
 			if (1 != gcf) continue;
 #endif
@@ -3011,12 +3015,26 @@ if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,
 	}
 
    /* renormalize */
+	int bin_tot = 0;
    for (i=0; i<sizex; i++) 
 	{
-		double r = 1.0 / ((double) bin_cnt[i]);
-		for (j=0; j<sizey; j++)
+		bin_tot += bin_cnt[i];
+	}
+   for (i=0; i<sizex; i++) 
+	{
+		double r = ((double) bin_cnt[i]) / ((double) bin_tot);
+		double x = ((double) i +0.5)/((double) sizex);
+		printf ("%g	%g\n", x, r);
+	}
+   for (i=0; i<sizex; i++) 
+	{
+		if (bin_cnt[i])
 		{
-			glob [j*sizex+i] *= r;
+			double r = 1.0 / ((double) bin_cnt[i]);
+			for (j=0; j<sizey; j++)
+			{
+				glob [j*sizex+i] *= r;
+			}
 		}
 		// printf ("duude i=%d b=%d t=%d\n", i, bin_cnt[i], tot_cnt[i]);
    }
@@ -3032,7 +3050,7 @@ if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,
 		}
 		tmp /= sizex;
 		double y = ((double) j +0.5)/((double) sizey);
-		printf ("%g	%g\n", y, tmp);
+		// printf ("%g	%g\n", y, tmp);
 		norm += tmp;
 	}
 	printf ("# duude norm=%g\n", norm);
@@ -3097,19 +3115,30 @@ gap_tongue (
 		{
 			double w = (((double) (sizey-j))-0.5)/((double) sizey);
 
-			double gap = f.ToXEven(w);
-			// double gap = f.ToXOdd(w);
+			// double gap = f.ToXEven(w);
 			// double gap = f.ToXPlus(w);
+#define REMOVE_LEADING_TERMS
+#ifdef REMOVE_LEADING_TERMS
+			double gap = f.ToXEven(w);
 			gap -= x;
 			gap *= (double) dd;
 			gap *= (double) dd;
-#define REMOVE_LEADING_TERMS
-#ifdef REMOVE_LEADING_TERMS
 			gap -= w;
 			gap += w*w;
 			gap -= 0.5*w*w*w;
-#endif
 			gap += x;
+#endif
+#ifdef WHATEVER
+			double gap = f.ToXOdd(w);
+			gap -= (1.0-x);
+			gap *= (double) dd;
+			gap *= (double) dd;
+			gap += w;
+			gap += w*w;
+			gap -= 0.5*w*w*w;
+			gap += (1.0-x);
+#endif
+
 	// printf ("duude x=%d/%d = %g w=%g gap=%g\n", nn, dd, x, w, gap);
 
 			i = (int) (gap * (double) sizex);
