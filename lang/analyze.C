@@ -43,9 +43,10 @@ class lagTextAnalysis {
       void Chain (int);
 
       void PathWalk (void);
-      float TreeWalk (unsigned int lead_off_phrase,
-                      unsigned int was_visited_arrray []);
    protected:
+      float TreeWalk (unsigned int lead_off_phrase,
+                      unsigned int was_visited_arrray [],
+                      short depth);
       void PrintPhrase (unsigned int);
 
    private:
@@ -289,16 +290,19 @@ printf ("\n");
 }
 
 // =====================================================
+#define LAG_TREE_DEPTH 7
 
 float lagTextAnalysis :: TreeWalk 
    (unsigned int lead_off_phrase,
-   unsigned int was_visited_array []) 
+   unsigned int was_visited_array [],
+   short depth) 
 {
 
    float heat = 0.0;
    unsigned int hottest_phrase = 0;
 
    heat = phrase_table -> GetWeight (lead_off_phrase);
+   if (LAG_TREE_DEPTH < depth) return heat;
    if (0.0005 > heat) return 0.0;
 
    heat = 0.00001;
@@ -319,6 +323,7 @@ float lagTextAnalysis :: TreeWalk
       // avoid infinite loops -- check to see if we've been here already
       short dont_do_it = 0;
       for (i=0; i<LAG_USED_SIZE; i++) {
+         if (!was_visited_array [i]) break;
          if (phrase == was_visited_array [i]) {
             dont_do_it = 1;
             break;
@@ -334,16 +339,17 @@ float lagTextAnalysis :: TreeWalk
 
       // recursive inifinite loop trimmer.
       unsigned int stopper [LAG_USED_SIZE];
-      for (i=0; i<LAG_USED_SIZE; i++) {
+      for (i=0; i<LAG_USED_SIZE-1; i++) {
          stopper [i] = was_visited_array[i];
          if (!stopper[i]) {
             stopper[i] = phrase;
+            stopper[i+1] = 0;
             break;
          }
       }
 
       // OK, now recurse down a level
-      float path_sum = TreeWalk (phrase, stopper);
+      float path_sum = TreeWalk (phrase, stopper, depth+1);
 
       // locate hottest tree branch
       if (path_sum > heat) {
@@ -351,6 +357,7 @@ float lagTextAnalysis :: TreeWalk
          hottest_phrase = phrase;
          for (i=0; i<LAG_USED_SIZE; i++) {
             best_path [i] = stopper[i];
+            if (!stopper[i]) break;
          }
       }
 
@@ -361,6 +368,8 @@ float lagTextAnalysis :: TreeWalk
    // record the actual path taken
    for (i=0; i<LAG_USED_SIZE; i++) {
       was_visited_array[i] = best_path[i];
+      if (!best_path[i]) break;
+
    }
 
    // add activation of this node to the hottest path.
@@ -399,7 +408,7 @@ void lagTextAnalysis :: PathWalk (void)
    }
 
    was_used[0] = hottest_phrase;
-   TreeWalk (hottest_phrase, was_used);
+   TreeWalk (hottest_phrase, was_used, 0);
 
    printf ("\nInfo: lagTextAnalysis :: PathWalk(): response text is: \n");
    for (i=0; i<LAG_USED_SIZE; i++) {
