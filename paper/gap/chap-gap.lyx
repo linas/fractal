@@ -31,7 +31,7 @@ Continued Fractions and Gaps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 14 November 2004)
+12 October 2004 (revised 15 November 2004)
 \layout Abstract
 
 Given a continued fraction, we construct a certain function that is discontinuou
@@ -1163,12 +1163,13 @@ The distribution density
 \end_inset 
 
 .
- In fact, they don't change much, except for an effective rescaling of 
+ Visually, they don't differ much from thier earlier analoguous, except
+ for an effective rescaling of 
 \begin_inset Formula $1/2\sqrt{T}$
 \end_inset 
 
 .
- Nonetheless, these are useful for reference.
+ Nonetheless, they are presented here for reference.
  
 \layout Standard
 
@@ -1204,6 +1205,38 @@ s
  for all rationals with denominators less than 200.
  Note that the scale along the x-axis runs from 0 to 1 but along the y axis,
  from 0 to 1/2.
+ To create this distribution, we create an empty grid that is MxM=600x600
+ pixels in size.
+ We then consider a fraction 
+\begin_inset Formula $x=p/q$
+\end_inset 
+
+ and its convergent 
+\begin_inset Formula $y=q_{N-1}/q_{N}$
+\end_inset 
+
+.
+ If we have that 
+\begin_inset Formula $i\leq Mx<i+1$
+\end_inset 
+
+ and 
+\begin_inset Formula $j\leq My<j+1$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $i,j$
+\end_inset 
+
+, then we increment the value at pixel 
+\begin_inset Formula $(i,j)$
+\end_inset 
+
+ by one.
+ When we are done, we visualize the grid by assigning black to empty pixels,
+ blue to pixels with a very small count, green to pixels with a medium-small
+ count, yellow to pixels with a medium count, and red to pixels with a 
+ large count.
  
 \end_inset 
 
