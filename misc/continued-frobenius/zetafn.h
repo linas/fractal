@@ -48,4 +48,13 @@ long double bernoulli (int n);
 // trigamma = psi-prime derivative of psi
 long double trigamma (long double x);
 
+/* Return the n'th harmnic number */
+long double harmonic (int n, long double ess);
+
+/* Return Hurwitz zeta equiv of harmonic */
+long double harmonic_hurwitz (int n, long double x, long double ess);
+
+/* Return zeta function minus n'th harmonic */
+long double zeta_minus_harmonic (int n, long double ess);
+
 #endif /* ZETAFN_H__ */

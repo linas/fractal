@@ -124,7 +124,7 @@ long double symy (int m, int n, long double ess)
 	return acc;
 }
 
-/* Basic half-integer sum */
+/* Basic wacky-square half-integer sum */
 long double sym_half (int m, int n, long double ess)
 {
 	int i;
@@ -156,8 +156,8 @@ long double sym_half (int m, int n, long double ess)
 	return acc;
 }
 
-/* half-integer sum */
-long double sym_half_gen (int m, int n, long double ess)
+/* Generic half-integer sum i.e. for n+1/2  */
+long double sym_half_generic (int m, int n, long double ess)
 {
 	int i;
 
@@ -175,7 +175,6 @@ long double sym_half_gen (int m, int n, long double ess)
 		term *= pnk;
 		term *= fbinomial (ess+eye-1.0L, i);
 		acc += term;
-printf ("duude acc=%Lg  term=%Lg  nk*bin=%Lg\n", acc, term, pnk*fbinomial (ess+eye-1.0L, i));
 		pnk *= -(en+0.5);
 	}
 	acc *= ts;
@@ -184,6 +183,36 @@ printf ("duude acc=%Lg  term=%Lg  nk*bin=%Lg\n", acc, term, pnk*fbinomial (ess+e
 	expect *= 1.0-ts;
 	expect -= harmonic (2*n+2*m+1, ess);
 	expect += ts*harmonic (n+m, ess);
+	acc -=  expect;
+	
+	return acc;
+}
+
+/* The 3/4ths sum */
+long double sym_fourths (long double ess)
+{
+	int i;
+
+	long double fk = 1.0L;
+	long double tk = 1.0L;
+	long double acc = 0.0L;
+
+	for (i=0; i<70; i++)
+	{
+		long double eye = i;
+		long double term = gsl_sf_zeta (eye+ess);
+		term *= fk +tk;
+		term *= fbinomial (ess+eye-1.0L, i);
+		acc += term;
+		fk *= -0.25;
+		tk *= -0.75;
+	}
+	acc *= powl (4.0, -ess);
+	acc += powl (3.0, -ess);
+	acc += 1.0;
+
+	double expect = gsl_sf_zeta (ess);
+	expect *= 1.0 - pow (2.0, -ess);
 	acc -=  expect;
 	
 	return acc;
@@ -213,7 +242,8 @@ main (int argc, char * argv[])
 		// acc = summy (x);
 		// acc = symy (6, 7, x);
 		// acc = sym_half (m, n, x);
-		acc = sym_half_gen (m, n, x);
+		// acc = sym_half_generic (m, n, x);
+		acc = sym_fourths (x);
 		printf ("%d	%g	%g\n", i, x, acc);
 	}
 
