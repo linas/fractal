@@ -23,14 +23,16 @@ cprod:	cprod.o
 inv:	inv.o
 	cc -o inv inv.o  ../../../../lib/Farey.o -lm
 
+interval:	interval.o
+	cc -o interval interval.o  ../../../../lib/Farey.o -lm
+
+drip:	drip.o
+	cc -o drip drip.o  ../../../../lib/Farey.o -lm
+
 ################## Dependencies and compile/link #########
 # cmap
 # 	(Jan 1994) excercise Farey Number converter
 #
-cmap: cmap.c $(LIB)/Farey.o $(INC)/Farey.h
-	$(CC) -o cmap cmap.c $(LIB)/Farey.o -lm
-	$(RM) cmap.o
-
 
 clean:
 	$(RM) a.out core *.o tmp junk glop
@@ -42,3 +44,13 @@ realclean:	clean
 
 ###########################################################
 
+stuff:
+	cden xy-2.5.flo 500 500 -2.5
+	cden xy-1.5.flo 500 500 -1.5
+	cden xy-1.0.flo 500 500 -1.0
+	cden xy-0.4.flo 500 500 -0.4
+	cden xy+0.0.flo 500 500 +0.0
+	cden xy+0.6.flo 500 500 0.6
+	cden xy+1.1.flo 500 500 1.1
+	cden xy+2.0.flo 500 500 2.0
+	cden xy+2.8.flo 500 500 2.8

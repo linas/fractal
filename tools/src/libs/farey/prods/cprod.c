@@ -226,6 +226,8 @@ char *argv[];
    fclose (fil);
 
    free (pixel_map);
+
+   exit (0);
 }
 
 /* ---------------------- END OF FILE ------------------------- */
