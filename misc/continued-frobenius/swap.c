@@ -128,7 +128,7 @@ inline long double swap14 (long double x)
 void grand (long double x, long double sre, long double sim, 
 					 long double *pre, long double *pim)
 {
-#if 0
+#if 1
 	long double ox = 1.0L/x;
 	long double sw = ox - floorl(ox);
 #else
@@ -209,7 +209,7 @@ void gral(int nsteps, long double sre, long double sim,
 	int nh = 0;
 	for (i=0; i<nsteps; i++)
 	{
-#define DO_RAND
+// #define DO_RAND
 #ifdef DO_RAND
 		int nr = rand();
 		if (0 == nr) continue;
@@ -218,7 +218,7 @@ void gral(int nsteps, long double sre, long double sim,
 #endif
 		long double val_re, val_im;
 		grand (x, sre-1.0, sim, &val_re, &val_im);
-		// x -= step;
+		x -= step;
 		sum_re += val_re;
 		sum_im += val_im;
 		nh ++;
@@ -326,7 +326,7 @@ main (int argc, char * argv[])
 	int npts = atoi (argv[1]);
 
 	sre = 0.5L;
-	sim = 30.0L;
+	sim = 13.0L;
 
 	printf ("#\n# col 1-2: re s,im s \n");
 	printf ("#\n# col 3-4: re & im  swap \n");
@@ -336,12 +336,12 @@ main (int argc, char * argv[])
 	printf ("#\n#\n");
 	fflush (stdout);
 	int i;
-	for (i=0; i<10; i++) {
+	for (i=0; i<3300; i++) {
 		gral (npts, sre, sim, &zre, &zim);
 		long double vv = zre*zre+zim*zim;
 		printf ("%Lg\t%Lg\t%13.9Lg\t%13.9Lg\t%13.9Lg\n", sre, sim, zre, zim, vv);
 		fflush (stdout);
-		sim += 0.1;
+		sim += 0.01;
 	}
 	return 0;
 }
