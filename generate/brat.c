@@ -31,19 +31,25 @@ void mandelbrot_cutoff (
    unsigned int	i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
-   double	re, im, tmp, modulus=0.0;
+   double	re, im, tmp, mod, modulus=0.0;
    double	dre, dim, dmod;
    double	ddre, ddim, ddmod;
    double	zpre, zpim, zppre, zppim;
+   double	mp, mpp;
    int		loop;
    double 	omod=0.0, frac;
    double 	escape_radius = 1.0e30;
    double 	ren, tl;
    double	tau;
-   double	*regulator;
-   double	sum_n, sum_re, sum_im, sum_mod;
+   double	*regulator, *rp, *rpp, *rppp, *rpppp;
+   double	sum_n, sum_np, sum_npp, sum_nppp, sum_npppp;
+   double	sum_re, sum_im, sum_mod;
    double	sum_dre, sum_dim, sum_dmod;
    double	sum_ddre, sum_ddim, sum_ddmod;
+   double	sum_ddrep, sum_ddimp, sum_ddmodp;
+   double	sum_ddrepp, sum_ddimpp, sum_ddmodpp;
+   double	sum_ddreppp, sum_ddimppp, sum_ddmodppp;
+   double	sum_ddrepppp, sum_ddimpppp, sum_ddmodpppp;
    double	sum_zpre, sum_zpim, sum_zpmod;
    double	sum_zppre, sum_zppim, sum_zppmod;
 
@@ -51,12 +57,25 @@ void mandelbrot_cutoff (
     * a negligable contribution (about 1e-30) */
    tau = 8.0 / ((double) itermax);
 
-   /* set up smooth ramp */
-   sum_n = 0.0;
+   /* set up smooth ramp 
+    * regulator is exponential, and rp is derivative w.r.t. tau,
+    * rpp is second deriv. w.r.t. tau */
+   sum_n = sum_np = sum_npp = sum_nppp = sum_npppp = 0.0;
    regulator = (double *) malloc ((itermax+1)*sizeof (double));
-   for (i=0; i<itermax; i++) {
-      regulator[i] = exp (- ((double)(i*i))*tau*tau);
+   rp        = (double *) malloc ((itermax+1)*sizeof (double));
+   rpp       = (double *) malloc ((itermax+1)*sizeof (double));
+   rppp      = (double *) malloc ((itermax+1)*sizeof (double));
+   rpppp     = (double *) malloc ((itermax+1)*sizeof (double));
+
+   for (i=0; i<itermax; i++) 
+   {
+      tmp = - i*i;
+      regulator[i] = exp (tmp * tau*tau);
+      rp[i] = 2.0 * tau * tmp * regulator[i];
+      rpp[i] = 2.0 * tmp * (regulator[i] + tau * rp[i]);
       sum_n += regulator[i];
+      sum_np += rp[i];
+      sum_npp += rpp[i];
    }
    printf ("itermax=%d tau=%g sum_n=%g\n", itermax, tau, sum_n);
 
@@ -80,6 +99,8 @@ void mandelbrot_cutoff (
          sum_re = sum_im = sum_mod = 0.0;
          sum_dre = sum_dim = sum_dmod = 0.0;
          sum_ddre = sum_ddim = sum_ddmod = 0.0;
+         sum_ddrep = sum_ddimp = sum_ddmodp = 0.0;
+         sum_ddrepp = sum_ddimpp = sum_ddmodpp = 0.0;
          sum_zpre = sum_zpim = sum_zpmod = 0.0;
          sum_zppre = sum_zppim = sum_zppmod = 0.0;
          re = re_position;
@@ -105,6 +126,10 @@ void mandelbrot_cutoff (
             /* sum over second derivative z-prime-prime*/
             sum_ddre += ddre * regulator [loop];
             sum_ddim += ddim * regulator [loop];
+            sum_ddrep += ddre * rp [loop];
+            sum_ddimp += ddim * rp [loop];
+            sum_ddrepp += ddre * rpp [loop];
+            sum_ddimpp += ddim * rpp [loop];
             // sum_ddmod += sqrt(ddmod) * regulator [loop];
 
             omod = 1.0 / modulus;
@@ -160,9 +185,27 @@ void mandelbrot_cutoff (
          glob [i*sizex +j] /= (sqrt (re_position*re_position+im_position*im_position));
          glob [i*sizex +j] -= 1.0/ sqrt (sqrt ((re_position-0.5)*(re_position-0.5)+im_position*im_position));
 
+         /* the interesting one is the z-prime-prime */
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          glob [i*sizex +j] = modulus / sum_n;
          // glob [i*sizex +j] -= 0.5/ ( sqrt ((re_position-0.25)*(re_position-0.25)+im_position*im_position));
+
+         /* the interesting one is the z-prime-prime */
+         /* here we use a taylor expansion to extrapolate to tau=0 */
+         /* first, we need the drerivatives of modulus w.r.t tau */
+         modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
+         mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
+         mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
+         mpp += sum_ddimp * sum_ddimp + sum_ddim * sum_ddimpp - mp*mp;
+         mpp /= modulus;
+         
+         /* next, we need derivatives of m/n w.r.t tau */
+         mod = modulus / sum_n;
+         dmod = (mp - mod * sum_np) / sum_n;
+         ddmod = (mpp - 2.0 * dmod * sum_np - mod * sum_npp) / sum_n;
+
+         /* finally the taylor expansion */
+         glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
 
          re_position += delta;
       }
