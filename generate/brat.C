@@ -193,15 +193,16 @@ if (0.25*width*width > ((re_position-re_center)* (re_position-re_center) +
 
 #define OFL  (1e30)
 
-void iterate (double re_c,
-              double im_c,
-              double escape_radius,
-              double &re,
-              double &im,
-              double &dre,
-              double &dim,
-              int &itermax
-              ) 
+void 
+iterate (double re_c,
+         double im_c,
+         double escape_radius,
+         double &re,
+         double &im,
+         double &dre,
+         double &dim,
+         int &itermax
+         ) 
 {
    int loop;
    double esq, tmp, modulus;
@@ -232,11 +233,62 @@ void iterate (double re_c,
 
 
       modulus = (re*re + im*im);
-      if (modulus > esq) break;
+      if (modulus > esq) {loop++; break; }
    }    
 
-   itermax = loop;  /* actual count */
+   /* in case we itermaxed, subtract 1 */
+   itermax = loop-1;  /* actual count */
 }
+
+/*-------------------------------------------------------------------*/
+#if 0
+void 
+fit_to_ray (double &re_c,
+            double &im_c,
+            double escape_radius,
+            int k,
+            double &re,
+            double &im,
+            ) 
+{
+   double 	dmu_re, dmu_im;
+   double	fre, fim;
+   int 		i, lp;
+
+   /* copy the params we want to fit to */
+   fre = re;
+   fim = im;
+
+   /* ok, now try it */
+   for (i=0; i<4; i++) {
+      lp = k;
+      iterate (re_c, im_c, 1.0e50*escape_radius,
+           re, im, dre, dim, lp);
+   
+      /* compute the derivative */
+      dmu_re = re*dre + im*dim;
+      dmu_im = re*dim - im*dre;
+      modulus = (re*re + im*im);
+      dmu_re *= -1.0 / modulus;
+      dmu_im *= -1.0 / modulus;
+      modulus = 1.0 / log(sqrt (modulus));
+      dmu_re *= modulus;
+      dmu_im *= modulus;
+      modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
+      dmu_re *= modulus;
+      dmu_im *= modulus;
+   
+      phi = atan2(im, re);
+   // printf ("its %d c=(%g %g) p=%g	z=(%g %g) d=(%g %g)	dm=(%g %g)\n", k,
+//   re_c, im_c, phi, re, im, dre, dim, -dmu_re*modulus , dmu_im*modulus);
+
+   }
+
+   /* uhh, remember its contra not covarient */
+   re_c -= dmu_re;
+   im_c += dmu_im;
+}
+#endif
 
 /*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using 
@@ -254,7 +306,7 @@ void mandelbrot_wind (
    double	height,
    int		itermax)
 {
-   int		i,j,k,  globlen, itermax_orig;
+   int		i,j,k,ii,  globlen, itermax_orig;
    double	re_start, im_start, deltax, deltay;
    double	re_position, im_position;
    double	re_c, im_c;
@@ -295,14 +347,218 @@ void mandelbrot_wind (
          re_c = re_position;
          im_c = im_position;
 
+
+         /* iterate */
+         loop = itermax;
+         iterate (re_c, im_c, escape_radius,
+                 re, im, dre, dim, loop);
+   
+         /* compute fractional iteration */
+         modulus = (re*re + im*im);
+         modulus = sqrt (modulus);
+         frac = log (log (modulus)) *otl;
+         mu = ((double) (loop+1)) - frac;
+
+         /* compute the derivative */
+         dmu_re = re*dre + im*dim;
+         dmu_im = re*dim - im*dre;
+         modulus = (re*re + im*im);
+         dmu_re *= -1.0 / modulus;
+         dmu_im *= -1.0 / modulus;
+         modulus = 1.0 / log(sqrt (modulus));
+         dmu_re *= modulus;
+         dmu_im *= modulus;
+
+         /* save up angle */
+         /* extract the binary bit */
+         phi = atan2(im, re);
+         if (0.0<phi) { bits[loop] = 0; } else { bits[loop] =1; }
+
+         /* redirection for the next step */
+         /* uhh, remember its contra not covarient */
+         modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
+printf ("start %d c=(%g %g) p=%g	z=(%g %g) d=(%g %g)	dm=(%g %g)\n\n", loop,
+  re_c, im_c, phi, re, im, dre, dim, -dmu_re*modulus , dmu_im*modulus);
+         re_c -= dmu_re*modulus;
+         im_c += dmu_im*modulus;
+
+
+         /* lets try fitting */
+         for (ii=0; ii<7; ii++)
+         { 
+            double gmu, gphi;
+            int lp;
+
+            /* ok, now try it */
+            lp = loop-1;
+            iterate (re_c, im_c, 1.0e50*escape_radius,
+                 re, im, dre, dim, lp);
+
+            /* compute fractional iteration */
+            modulus = (re*re + im*im);
+            modulus = sqrt (modulus);
+            frac = log (log (modulus)) *otl;
+            gmu = ((double) (lp+1)) +1.0 - frac;
+
+            /* guesstimate angle */
+            gphi = atan2(im, re);
+
+            /* compute the derivative */
+            dmu_re = re*dre + im*dim;
+            dmu_im = re*dim - im*dre;
+            modulus = (re*re + im*im);
+            dmu_re *= -1.0 / modulus;
+            dmu_im *= -1.0 / modulus;
+            modulus = 1.0 / log(sqrt (modulus));
+            dmu_re *= modulus;
+            dmu_im *= modulus;
+
+            /* refine the guess */
+            modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
+
+printf ("its %d %d c=(%g %g)	z=(%g %g)  gm=%g m=%g	dm=(%g %g)\n", ii, lp,
+   re_c, im_c, re, im, gmu, mu, -dmu_re*modulus , dmu_im*modulus);
+            re_c -= (gmu-mu)*dmu_re*modulus;
+            im_c += (gmu-mu)*dmu_im*modulus;
+         }
+printf ("\n");
+
+         for (k=loop; k>0; k--) 
+         {
+            int lp = k;
+            /* ok, now try it */
+            iterate (re_c, im_c, 1.0e50*escape_radius,
+                 re, im, dre, dim, lp);
+   
+            /* compute the derivative */
+            dmu_re = re*dre + im*dim;
+            dmu_im = re*dim - im*dre;
+            modulus = (re*re + im*im);
+            dmu_re *= -1.0 / modulus;
+            dmu_im *= -1.0 / modulus;
+            modulus = 1.0 / log(sqrt (modulus));
+            dmu_re *= modulus;
+            dmu_im *= modulus;
+            modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
+
+            phi = atan2(im, re);
+// printf ("its %d c=(%g %g) p=%g	z=(%g %g) d=(%g %g)	dm=(%g %g)\n", k,
+//   re_c, im_c, phi, re, im, dre, dim, -dmu_re*modulus , dmu_im*modulus);
+
+            /* extract the binary bit */
+            if (0.0<phi) { bits[k] = 0; } else { bits[k] =1; }
+
+            /* uhh, remember its contra not covarient */
+            re_c -= dmu_re*modulus;
+            im_c += dmu_im*modulus;
+         }
+// printf ("\n");
+
+#if 0
+         phi /= 2.0*M_PI;
+
+         if (loop < itermax) {
+            phi += 0.5 * ((double) wind);
+
+            // the phase winds around 2pi *2^(loop-1) times
+            phi /= pow (2.0, (double) (loop-1));
+
+         }
+
+         glob [i*sizex +j] = phi;
+#endif
+
+         phi = 0.0;
+         tmp = 1.0;
+         // go no more an 2**48 in the number of bits 
+         loop = (loop>48) ? 48:loop;
+         for (k=1; k<loop; k++) {
+            tmp *= 0.5;
+            if (bits[k]) phi += tmp;
+         }
+#if 0
+         // colorize the landing rays
+         phi *= 512.0;
+
+         k = (int) phi;
+         if (k%2) { 
+            phi -= (double)k;
+         } else {
+            phi = (double)(k+1) -phi;
+         }
+         phi *= phi;
+         phi *= phi;
+#endif
+
+
+phi = bits[5];
+// phi = phi_last/(2.0*M_PI);
+         glob [i*sizex +j] = phi;
+
+         re_position += deltax;
+      }
+      im_position -= deltay;  /*top to bottom, not bottom to top */
+   }
+
+   free (bits);
+}
+
+/*-------------------------------------------------------------------*/
+/* this routine fills in the exterior of the mandelbrot set using 
+ * the classic algorithm. used for exploring winding number and
+ * angle-things 
+ */
+
+void mandelbrot_windsimple (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   double	height,
+   int		itermax)
+{
+   int		i,j,k, globlen, itermax_orig;
+   double	re_start, im_start, deltax, deltay;
+   double	re_position, im_position;
+   double	re_c, im_c;
+   double	re, im, tmp;
+   int		loop;
+   double modulus=0.0;
+   double escape_radius = 1131.1;
+   double ren, otl;
+   double phi=0.0, phi_last, phi_c, h_phi_c;
+   int wind =0;
+
+   ren = log( log (escape_radius)) / log(2.0);
+   otl = 1.0/ log(2.0);
+
+   itermax --;
+   itermax_orig = itermax;
+
+   deltax = width / (double) sizex;
+   deltay = height / (double) sizey;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + height / 2.0;
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   
+   im_position = im_start;
+   for (i=0; i<sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) {
+         re_c = re_position;
+         im_c = im_position;
+
          phi_c = atan2 (im_c, re_c);
          if (0.0 > phi_c) phi_c += 2.0*M_PI;
          h_phi_c = 0.5*phi_c;
 
          re = 0.0;
          im = 0.0;
-         dre = 0.0;
-         dim = 0.0;
          phi_last = -0.01;
          wind = 0;
 // printf ("\n phi_c= %12.8g   c=(%g %g)\n", phi_c, re_c, im_c);
@@ -341,45 +597,6 @@ void mandelbrot_wind (
             if (modulus > escape_radius*escape_radius) break;
          }    
 
-         modulus = sqrt (modulus);
-         frac = log (log (modulus)) *otl;
-         mu = ((double) (loop+1)) - frac;
-
-
-         for (k=loop; k>0; k--) 
-         {
-            int lp = k;
-            /* ok, now try it */
-            iterate (re_c, im_c, 1.0e50*escape_radius,
-                 re, im, dre, dim, lp);
-   
-            /* compute the derivative */
-            dmu_re = re*dre + im*dim;
-            dmu_im = re*dim - im*dre;
-            modulus = (re*re + im*im);
-            dmu_re *= -1.0 / modulus;
-            dmu_im *= -1.0 / modulus;
-            modulus = 1.0 / log(sqrt (modulus));
-            dmu_re *= modulus;
-            dmu_im *= modulus;
-            modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
-
-            phi = atan2(im, re);
-// printf ("its %d c=(%g %g) p=%g	z=(%g %g) d=(%g %g)	dm=(%g %g)\n", k,
-// re_c, im_c, phi, re, im, dre, dim, -dmu_re*modulus , dmu_im*modulus);
-
-            /* extract the binary bit */
-            if (0.0<phi) { bits[k] = 0; } else { bits[k] =1; }
-
-            /* uhh, remember its contra not covarient */
-            // re_c -= 2.0*dmu_re*modulus;
-            // im_c += 2.0*dmu_im*modulus;
-            re_c -= dmu_re*modulus;
-            im_c += dmu_im*modulus;
-         }
-// printf ("\n");
-
-#if 0
          phi /= 2.0*M_PI;
 
          if (loop < itermax) {
@@ -391,15 +608,7 @@ void mandelbrot_wind (
          }
 
          glob [i*sizex +j] = phi;
-#endif
 
-         phi = 0.0;
-         tmp = 1.0;
-         for (k=1; k<48; k++) {
-            tmp *= 0.5;
-            if (bits[k]) phi += tmp;
-         }
-#if 0
          // colorize the landing rays
          phi *= 512.0;
 
@@ -411,18 +620,13 @@ void mandelbrot_wind (
          }
          phi *= phi;
          phi *= phi;
-#endif
 
-
-phi = bits[4];
          glob [i*sizex +j] = phi;
 
          re_position += deltax;
       }
       im_position -= deltay;  /*top to bottom, not bottom to top */
    }
-
-   free (bits);
 }
 
 /*-------------------------------------------------------------------*/
