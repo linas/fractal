@@ -56,8 +56,11 @@ main ()
         double magnet_theta;  // photon mag field orientation
         double magnet_phi;    // photon mag field orientation
    
-        // theta in upper hemisphere only
-        magnet_theta = (M_PI * rand()) / (2.0 * RAND_MAX);
+        // theta uniform in upper hemisphere only
+        // magnet_theta = (M_PI * rand()) / (2.0 * RAND_MAX);
+
+        // theta in upper hemisphere only, trailing off at equator
+        magnet_theta = asin ((double) rand() / (double) RAND_MAX);
         magnet_phi = (2.0 * M_PI * rand()) / (1.0 * RAND_MAX);
    
         double mag_sin_theta = sin (magnet_theta);
