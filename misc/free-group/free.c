@@ -28,6 +28,9 @@ recur (long double complex rstart, long double complex r,
 		rn *= r;
 
 		printf ("%d	%Lg	%Lg\n", i, creall (e), cimagl (e));
+
+		e -= 2.0L * creall (e);
+		recur (e , r, theta, depth/2);
 	}
 }
 
@@ -46,9 +49,9 @@ main (int argc, char * argv[])
 	r = atof (argv[1]);
 	printf ("#\n#  r = %Lg\n", r);
 
-	long double theta = acosl (1.0L/6.0L);
+	long double theta = acosl (1.0L/3.0L);
 
-	int imax = 500;
+	int imax = 125;
 	long double rn = 1.0L;
 
 	recur (rn, r, theta, imax);
