@@ -1037,54 +1037,175 @@ Note that
 Distributions Of Rationals on the Unit Interval
 \layout Standard
 
-The distribution of rationals on the unit interval is an interesting topic
- in and of itself.
- Simple approaches to enumerating the rationals are surprisingly noisy.
- For example, let us list all of the fractions with denomintors from 1 to
- N, and numerators between 0 and the denomintor.
- Clearly, there many of these fractions will be reducible, i.e.
- the numerator and denominator have common factors, thus some rationals
- are counted multiple times.
- Here's a density graph of the rationals that occur in this enumeration,
- for N=4000:
-\layout Standard
-
-
-\begin_inset Graphics
-	filename rdist-nonreduced-4K.png
-
-\end_inset 
-
-
-\layout Standard
-
-One might hope to get a smoother distribution by using the above enumeration,
- but eliminating all fractions with common factors from the list.
- The distribution is smoother, but still very noisy:
-\layout Standard
-
-
-\begin_inset Graphics
-	filename rdist-reduced-4K.png
-
-\end_inset 
-
-
-\layout Standard
-
-Below is the same distribution, but for N=16000.
- Its different in shape, but still has visible artifacts near 0, 1, 1/2,
- 1/3, 2/3'rds, etc.
+The distribution of rationals on the unit interval is filled with surprises.
+ In High-School or College, one is told that the rationals are distributed
  
+\begin_inset Quotes eld
+\end_inset 
+
+uniformly
+\begin_inset Quotes erd
+\end_inset 
+
+ on the unit interval.
+ If one considers the entire set 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+, then yes, this is true.
+ But if one considers just subsets, such as the subset of rationals with
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+small
+\begin_inset Quotes erd
+\end_inset 
+
+ denominators, then the distribution is far from uniform and full of counter-int
+uitive surprises, some of which we explore below.
+ These surprises imply that extrapolating from finite results to the set
+ of all rationals is a dangerous process.
+ 
+\layout Subsection
+
+Simple Counting
+\layout Standard
+
+Lets begin by listing all of the fractions with denomintors from 1 to N,
+ and numerators between 0 and the denomintor.
+ Clearly, there many of these fractions will be reducible, i.e.
+ the numerator and denominator have common factors, and thus, in this simple-min
+ded enumeration, some rationals are counted multiple times.
+ Lets take a look at what this means.
+ The graph below shows this enumeration, up to a denominator of N=4000,
+ carved up into 720 bins, and normalized to unit density.
+ That is, if 
+\begin_inset Formula $n/720<p/q<(n+1)/720$
+\end_inset 
+
+, then we assign the fraction 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ to the 
+\begin_inset Formula $n$
+\end_inset 
+
+'th bin.
+ We might expect this graph to have a huge peak at the bin n=360: after
+ all, this bin will hold 1/2 and 2/4 and 3/6 and in general should have
+ a big surfiet coming from the degeneracy at 1/2.
+ One mght expect peaks at 1/3, and 1/4 and etc, but smaller.
+ Here's the graph.
+\layout Standard
+
+Here's the density graph of the rationals that occur in this enumeration,
+ binned into 720 bins, up to a denominator of N=4000:
 \layout Standard
 
 
 \begin_inset Graphics
-	filename rdist-reduced-16K.png
+	filename rdist-720-4K.png
 
 \end_inset 
 
 
+\layout Standard
+
+Indeed, there is a big upwards spike at 1/2.
+ But there seems to be a big downwards spike just below, at bin 359, seemingly
+ of equal and opposite size.
+ This is the first surprise.
+ Why is there a deficit at bing 359? We can try to get a better picture
+ of things by dividing up the enumaration into 719 bins (note that 719 is
+ prime).
+ This is results in the next surprise: the graph is flat.
+ See below:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-719-4K.png
+
+\end_inset 
+
+
+\layout Standard
+
+How can this graph possibly be flat? We should be massively overcounting
+ at 1/2, there should be a big peak there.
+ Maybe its drowned out by the blips at 0 and 1, so lets graph the same data,
+ but rescale more appropriately.
+ This is shown below:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-719-4K-rescale.png
+
+\end_inset 
+
+
+\layout Standard
+
+Hmm.
+ Curious.
+ There is indeed a peak at 1/2.
+ But there are also deficits symmetrically arranged at either side.
+ This is still confusing.
+ Well, at any rate, lets compare this to the distribution we 
+\begin_inset Quotes eld
+\end_inset 
+
+should have been using all along
+\begin_inset Quotes erd
+\end_inset 
+
+, where we eliminate all fractions that are reducible.
+ That is, we should count each rational only once.
+ This is graphed below, again, binned into 719 bins, for all irreducible
+ rationals with denominator less than or equal to 4000:
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-719-4K-irred.png
+
+\end_inset 
+
+
+\layout Standard
+
+Wow! We no longer have a peak at 1/2.
+ In fact, it looks like we are undercounting at 1/2.
+ In fact, the graph is considerably noiser.
+ Part, but not all, of the noise is due to the smaller sample size: we are
+ counting fewer fractions: 4863602 are irreducible out of the simple list
+ of 8002000.
+ However, matching the sample sizes does not seem to significantly reduce
+ the small-amplitude noise: qualitatively speaking, the binning of irreducible
+ fractions seems much noisier.
+\layout Standard
+
+Curiously, binning into a non-prime number of bins does seem to reduce the
+ noise.
+ Below is the binning into 720 bins.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename rdist-720-4K-irred.png
+
+\end_inset 
+
+
+\layout Standard
+
+to comparable values does not make the small-amplitude noise (
+\layout Standard
+
+does not seem to 
 \layout Subsection
 
 Distribution of Rationals in the Farey Tree
