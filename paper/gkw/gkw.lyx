@@ -76,6 +76,21 @@ The Gauss-Kuzmin-Wirsing Operator
 
 THIS IS A DRAFT WORK IN PROGRESS.
  The intro hasn't been written yet.
+\layout Standard
+
+One of the new results is a demonstration that the Frobenius-Perron operator
+ can have a continuous spectrum that is 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+which flies in the face of common assumptions that the spectrum is eitehr
+ discrete with 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ eigenfunctions, or is continous, with non-differentiable (fractal) eigenfunctio
+ns.
+ 
 \layout Section
 
 Introduction: The Frobenius-Perron Operator for Iterated Maps
@@ -1454,32 +1469,218 @@ The Fourier representation also makes it clear that any vector with vector
  
 \layout Standard
 
-These eigenfunctions are essentially a form of the Hurwitz Zeta function
- 
+It turns out that these eigenfunctions are essentially a form of the Hurwitz
+ Zeta function 
 \begin_inset Formula \[
-\zeta(s,x)=\sum_{n=1}^{\infty}\frac{1}{\left(n+x\right)^{s}}\]
+\zeta(s,x)=\sum_{n=0}^{\infty}\frac{1}{\left(n+x\right)^{s}}\]
 
 \end_inset 
 
- which can be recognized by writing it as 
-\begin_inset Formula \begin{eqnarray*}
-\zeta(z,x) & = & \frac{2\Gamma(1-z)}{\left(2\pi\right)^{1-z}}\left[\sin\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\cos(2\pi nx)}{n^{1-z}}+\cos\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\sin(2\pi nx)}{n^{1-z}}\right]\\
- & = & \frac{-i}{2(1-z)}\left[e^{1\pi z/2}\beta(x;1-z)-e^{-1\pi z/2}\beta(-x;1-z)\right]\end{eqnarray*}
-
-\end_inset 
-
- where the first identity holds form 
-\begin_inset Formula $\Re z<0$
+ and that, in fact, the Hurwitz Zeta itself is an eigenfunction, with eigenvalue
+ 
+\begin_inset Formula $2^{s-1}$
 \end_inset 
 
 .
- That is, the Hurwitz Zeta is itself an eigenvector of the Bernoulli Operator,
- with eigenvalue 
+ We can confirm this by following a very old-fashioned recipie for obtaining
+ the functional relation for a zeta-like sum.
+ We start by expressing the gamma function as 
+\begin_inset Formula \[
+\int_{0}^{\infty}dy\, e^{-2\pi ny}y^{s-1}=\frac{\Gamma(s)}{(2\pi n)^{s}}\]
+
+\end_inset 
+
+ Substituting into the expression for 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ and performing the sum, we find we can write 
+\begin_inset Formula \[
+\beta(x;s)=2s\int_{0}^{\infty}dy\,\frac{y^{s-1}}{\exp\left(-2\pi i(x+iy)\right)-1}\]
+
+\end_inset 
+
+ Then, following a traditional trick [ref Edwards] we can re-write this
+ as a contour integral 
+\begin_inset Formula \[
+\beta(x;s)=\frac{-is}{\sin\pi s}\oint\frac{(-y)^{s}}{\exp\left(-2\pi i(x+iy)\right)-1}\;\frac{dy}{y}\]
+
+\end_inset 
+
+ where the contour is taken to extend from 
+\begin_inset Formula $+\infty+i\epsilon$
+\end_inset 
+
+, running just above the positive real axis, to the origin, circling the
+ origin in a clockwise fashion, and returning to 
+\begin_inset Formula $+\infty-i\epsilon$
+\end_inset 
+
+ just under the real axis.
+ The contour essentially encloses the cut of the logarithm in the expression
+ 
+\begin_inset Formula $(-y)^{s}=\exp s\,\log(-y)$
+\end_inset 
+
+.
+ The old fashioned recipie calls for closing the contour at infinity (in
+ a counter-clockwise direction) and then taking the dubious step of asserting
+ Cauchy's Theorem to equate the integral around the cut to the sum of the
+ poles, where we note that we have a pole whenever 
+\begin_inset Formula $x+iy=n$
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ By doing this we get the formal summation 
+\begin_inset Formula \[
+\frac{i\sin\pi s}{s}\beta(x;s)=\exp\left(\frac{i\pi s}{2}\right)\sum_{n=-\infty}^{\infty}(n-x)^{s-1}\]
+
+\end_inset 
+
+ We call this a formal sum, since the preceeding steps required taking 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+ whereas now we need to take 
+\begin_inset Formula $\Re s<0$
+\end_inset 
+
+.
+ This is a bit of jiggery-pokery that is common for this type of presentation;
+ and a very different set of tools is required to do better.
+ So we proceed.
+ We re-write this sum as 
+\begin_inset Formula \[
+\frac{i\sin\pi s}{s}\beta(x;s)=\exp\left(\frac{i\pi s}{2}\right)\left[\sum_{n=0}^{\infty}(n+(1-x))^{s-1}+e^{-i\pi(s-1)}\sum_{n=0}^{\infty}(n+x)^{s-1}\right]\]
+
+\end_inset 
+
+ where we were minful to rotatee counter-clockwise for 
+\begin_inset Formula $n<0$
+\end_inset 
+
+ when replacing 
+\begin_inset Formula $(-)^{n}$
+\end_inset 
+
+ by 
+\begin_inset Formula $e^{-i\pi n}$
+\end_inset 
+
+ instead of the sloppy and incorrect 
+\begin_inset Formula $e^{i\pi n}$
+\end_inset 
+
+.
+ Recognizing the sums as the Hurwitz Zeta, this then gives us the desired
+ result: 
+\begin_inset Formula \[
+\beta(x;s)=\frac{is}{\sin\pi s}\left[e^{-i\pi s/2}\zeta(1-s,x)-e^{i\pi s/2}\zeta(1-s,1-x)\right]\]
+
+\end_inset 
+
+ It is straightforward to invert this and solve for 
+\begin_inset Formula $\zeta$
+\end_inset 
+
+; one gets 
+\begin_inset Formula \[
+\zeta(1-s,x)=\frac{1}{2s}\left[e^{-i\pi s/2}\beta(x;s)+e^{i\pi s/2}\beta(1-x;s)\right]\]
+
+\end_inset 
+
+ thus proving the assertion that the Hurwitz Zeta is an eigenfunction of
+ the Bernoulli Operator, with eigenvalue 
 \begin_inset Formula $2^{z-1}$
 \end_inset 
 
 .
+ To verify the correctness of the above steps, we can expand the exponentials
+ in terms of thier real and imaginary parts, to find that 
+\layout Standard
+
+
+\begin_inset Formula \[
+\zeta(z,x)=\frac{2\Gamma(1-z)}{\left(2\pi\right)^{1-z}}\left[\sin\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\cos(2\pi nx)}{n^{1-z}}+\cos\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\sin(2\pi nx)}{n^{1-z}}\right]\]
+
+\end_inset 
+
+ which agrees with standard textbook presentations of the Hurwitz Zeta.
  
+\layout Standard
+
+What is perhaps surprising with this result is that the literature [need
+ citations] indicates a belief that a necessary and sufficient condition
+ for a Frobenius-Perron Operator to have a disicrete, enumerable spectrum
+ is to demand that the the eigenfunctions be infinitely differentiable.
+ This is usually done by demonstrating a set of eigenfunctions with continuous
+ spectrum which are non-differentiable, and then presenting the polynomial
+ representation, which has a discrete spectrum by construction, and noting
+ that polynomials are 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+(conveniently ignoring that the conjugates of polynomials are generalized
+ functions).
+ So we have to stop and ask: is it possible that 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ is somehow not an eigenvector after all? It is hard to see how, since a
+ quick numerical check shows that 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ works just fine, that is, that 
+\begin_inset Formula $\beta(x/2;s)+\beta((1+x)/2;s)=2^{s}\beta(x;s)=2^{s}[U_{B}\beta](x;s)$
+\end_inset 
+
+.
+ Of course, all that numerics prove is that 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ is an eigenvector only on the rationals 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ and not 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, and this is in fact a reasonable suspicion, as we are on a journy into
+ the land of fractals and number theory.
+ But then we also would have to discount the proof based on the Fourier
+ representation of the Bernoulli operator.
+ 
+\layout Standard
+
+The other possiblity of getting out of this is that 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ is not 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ in 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+.
+ Thus, we have a conundrum.
+ 
+\layout Subsection
+
+Visualizing the Hurwitz Zeta Eigenfunctions
 \layout Standard
 
 Although we have a continuous spectrum, the eigenvalues are degenerate,
@@ -1498,13 +1699,13 @@ Although we have a continuous spectrum, the eigenvalues are degenerate,
 \end_inset 
 
  .
- 
+ The next five figures show these.
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1567,13 +1768,10 @@ gets very small as n gets large, and so the normalization brings them to
 
 \layout Standard
 
-Another figure:
-\layout Standard
-
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1621,13 +1819,10 @@ gets very small as n gets large, and so the normalization brings them to
 
 \layout Standard
 
-Another
-\layout Standard
-
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1669,13 +1864,10 @@ This figure illustrates a family of eigenvectors
 
 \layout Standard
 
-and
-\layout Standard
-
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1725,13 +1917,10 @@ This figure illustrates a family of eigenvectors
 
 \layout Standard
 
-anotehr
-\layout Standard
-
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1773,7 +1962,7 @@ This figure illustrates a family of eigenvectors
 
 \layout Standard
 
-another
+What 
 \layout Subsection
 
 The Kernel
