@@ -26,6 +26,8 @@ main(int argc, char *argv[])
 	int nbins = atoi (argv[1]);
 	int max = atoi (argv[2]);
 
+	printf ("#\n# nbins=%d   maxiter=%d\n#\n",nbins,max);
+
 	FareyIterator fi;
 
 #define BINSZ 45400
@@ -37,6 +39,7 @@ main(int argc, char *argv[])
 	bin[0] = 1;
 	bin[nbins-1] = 1;
 
+	/* Compute the distribution by bining */
 	int cnt =2;
 	for (i=0; i<max; i++)
 	{
@@ -50,6 +53,7 @@ main(int argc, char *argv[])
 		cnt ++;
 	}
 
+	/* Compute the integral of teh distribution */
    ContinuedFraction f;
 	double gral = 0.0;
 	for (i=0; i<nbins; i++)

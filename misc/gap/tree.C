@@ -1,13 +1,14 @@
-
-/* tree.C
+/* 
+ * tree.C
  *
- * Explore other tree structures
+ * Explore the eigenfunctions of bournoulli operator
  *
  * Linas Vepstas October 2004
  */
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "Farey.h"
 
@@ -64,9 +65,17 @@ main (int argc, char *argv[])
 	ContinuedFraction f;
 	f.SetEvenize();
 
-	int ell = 1;
+	if (2>argc)
+	{
+		printf ("Usage: %s <z-value>\n", argv[0]);
+		exit (1);
+	}
+
+	z = 0.0;
+	z = atof (argv[1]);
+	int ell = 0;
 	
-	int nmax = 523;
+	int nmax = 432;
 	for (i=0; i<nmax; i++)
 	{
 
@@ -74,14 +83,16 @@ main (int argc, char *argv[])
 		int q = nmax;
 		double x = ((double) p)/ ((double) q);
 		
-		double e = e_zl_re (0.5,0.0, ell, x/6.0);
+		double e = e_zl_re (z,0.0, ell, x);
 
-		f.SetReal (x);
-		double y = x-f.ToFarey();
+		e *= (1.0-z);
+
+		// f.SetReal (x);
+		// double y = x-f.ToFarey();
 		// double y = e_zl_re (x,0.0, ell, 0.33);
 		// double e = y;
 		
-		printf("%5d	%8.6g	%8.6g	%8.6g\n", i,x,y,e);
+		printf("%5d	%8.6g	%8.6g\n", i,x,e);
 
 	}
 }
