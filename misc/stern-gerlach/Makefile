@@ -1,7 +1,10 @@
 
 
-all: sim impulse walk
+all: pauli sim impulse walk
 
+
+pauli:  pauli.C
+	cc -O2 -o pauli pauli.C -lm
 
 sim:  sim.C
 	cc -O2 -o sim sim.C -lm
