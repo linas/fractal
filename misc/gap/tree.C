@@ -48,12 +48,16 @@ e_zl_re (double z_re, double z_im, int l, double x)
 	double znre = 1.0;
 	double znim = 0.0;
 	double acc = 0.0;
-	for (i=0; i<20; i++)
+	i = 0;
+	while (1)
 	{
 		acc += znre*enl_re(i,l,x) - znim * enl_im (i,l,x);
 		double tmp = znre * z_re - znim * z_im;
 		znim = z_re *znim + z_im * znre;
 		znre = tmp;
+		i++;
+		double zabs = znre*znre+znim*znim;
+		if (1.0e-16 > zabs) break;
 	}
 	return acc;
 }
@@ -75,7 +79,7 @@ main (int argc, char *argv[])
 	z = atof (argv[1]);
 	int ell = 0;
 	
-	int nmax = 432;
+	int nmax = 531;
 	for (i=0; i<nmax; i++)
 	{
 
@@ -83,9 +87,9 @@ main (int argc, char *argv[])
 		int q = nmax;
 		double x = ((double) p)/ ((double) q);
 		
-		double e = e_zl_re (z,0.0, ell, x);
+		double e = e_zl_re (z,0.0,ell, x);
 
-		e *= (1.0-z);
+		e *= sqrt(1.0-z);
 
 		// f.SetReal (x);
 		// double y = x-f.ToFarey();
