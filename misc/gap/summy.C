@@ -64,6 +64,7 @@ sum1 (double x)
 	for (n=1; n<20; n++)
 	{
 		double term = 1.0/(x+n);
+		term -= 1.0/(x+n+1);
 		term /=  tn;
 		acc += term;
 		tn *= 2.0;
@@ -117,9 +118,9 @@ main ()
 		double x = ((double) i ) / ((double) nmax);
 		// double y = summy (x);
 
-		double y = sum2(x);
-		// double z = 1.0;
-		double z = gkw (sum2, x);
+		double y = sum1(x);
+		double z = 1.0;
+		// double z = gkw (sum2, x);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x,y,z);
 	}

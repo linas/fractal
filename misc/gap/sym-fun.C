@@ -23,6 +23,7 @@ main (int argc, char *argv[])
 	{
 		double x = ((double) 2*i+1)/ ((double) (2*nmax));
 
+#define SAWTOOTH
 #ifdef SAWTOOTH
 		// this is what continued-fraction truncation looks like 
 		// in binary-digit space
