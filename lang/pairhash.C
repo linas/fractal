@@ -10,6 +10,7 @@
 // HISTORY:
 // January 1997 Linas Vepstas
 
+#include <math.h>
 #include <stdio.h>
 
 #include "top.h"
@@ -185,12 +186,20 @@ int lagGenericWordTable :: GetID (int first, int second, int third,
    root -> cnt = 1;
    num_entries ++;
 
+   root -> activation = 0.0;
+
    AddID (root);
 
    return (root->id);
 }
 
 #endif 
+
+// =====================================================
+
+unsigned int lagGenericWordTable :: GetTableSize (void) {
+   return (num_entries);
+}
 
 // =====================================================
 
@@ -206,6 +215,70 @@ int lagGenericWordTable :: GetCount (int id) {
    if (!idx[id]) return 0;
    unsigned int retval = idx[id] -> cnt;
    return retval;   
+}
+
+// =====================================================
+
+void lagGenericWordTable :: ResetAllWeights (void) {
+   for (int i=1; i<= num_entries; i++) {
+      idx[i] -> activation = 0.0;
+   }
+}
+
+// =====================================================
+
+void lagGenericWordTable :: FlipAllWeights (void) {
+
+   // mark all active neurons as hot neurons
+   for (int i=1; i< num_entries; i++) {
+      idx[i] -> activation = - idx[i] -> activation;
+   }
+}
+
+// =====================================================
+
+float lagGenericWordTable :: GetWeight (int id) {
+   if (!idx[id]) return 0.0;
+   float retval = idx[id] -> activation;
+   return retval;   
+}
+
+// =====================================================
+
+void lagGenericWordTable :: AccumStrength (int id, float val) {
+   if (!idx[id]) return;
+   idx[id] -> activation += val;
+}
+
+// =====================================================
+
+void lagGenericWordTable :: Activate (int id) {
+   if (!idx[id]) return;
+
+   // use a sigmoid activation function
+   double input = idx[id] -> activation;
+
+   // activate only non-hot neurons
+   if (0.0 < input) {
+      input -= LAG_BIAS;
+      double output = 1.0 / (1.0 + exp (-input));
+      idx[id] -> activation = output;
+   }
+}
+
+// =====================================================
+
+void lagGenericWordTable :: ActivateAll (void) {
+   for (int i=1; i<= num_entries; i++) {
+      double input = idx[i] -> activation;
+
+      // activate only non-hot neurons
+      if (0.0 < input) {
+         input -= LAG_BIAS;
+         double output = 1.0 / (1.0 + exp (-input));
+         idx[i] -> activation = output;
+      }
+   }
 }
 
 // =====================================================

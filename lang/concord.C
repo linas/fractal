@@ -49,6 +49,14 @@ lagGenericConcordTable :: ~lagGenericConcordTable () {
 
 // =====================================================
 
+// Say we have the structure    ph1 ------- link ------- ph2
+// then (link -> tuple[0] == ph1) is true
+// then (link -> tuple[1] == ph2) is true
+// then (concordance [ph1] == link) is true
+// 
+// in fact, cooncordance[ph1] has the property that it points at all
+// links that have the exact same ph1 in them.
+
 void lagGenericConcordTable :: AddID (Helper *where) {
    if (!where) return;
 
@@ -70,6 +78,55 @@ void lagGenericConcordTable :: AddID (Helper *where) {
    concordance[first] = root; 
 
    num_concords ++;
+}
+
+// =====================================================
+
+void lagGenericConcordTable :: ComputeWeights (void) 
+{
+
+   // every node chained to the same slot in the concordance table
+   // shares the trait that all of its first words are alike.
+
+   for (int i=0; i<LAG_PAIR_TABLE_SIZE; i++) {
+      int total_count = 0;
+      Concord * root = concordance [i];
+      while (root) {
+         total_count += root -> where -> cnt;
+         root = root -> next;
+      }
+      if (total_count) {
+         float inv = 1.0 / ((float) total_count);
+         Concord * root = concordance [i];
+         while (root) {
+            root -> where -> activation = inv * (float) root -> where -> cnt;
+            root = root -> next;
+         }
+      }
+   }
+}
+
+// =====================================================
+
+void lagGenericConcordTable :: ResetToStart (unsigned int phrase) {
+   if (!phrase) return;
+   cursor = concordance [phrase];
+}
+
+// =====================================================
+
+float lagGenericConcordTable :: GetNextLinkWeight (void) {
+   if (!cursor) return 0.0;
+   return (cursor -> where -> activation);
+}
+
+// =====================================================
+
+unsigned int lagGenericConcordTable :: GetNextPhrase (void) {
+   if (!cursor) return 0;
+   unsigned int ph = cursor -> where -> tuple[1];
+   cursor = cursor -> next;
+   return ph;
 }
 
 // =====================================================

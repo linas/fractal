@@ -10,6 +10,14 @@
 //    word as the first word.  The returned tupleid is the tuple 
 //    id with the highest count.  
 //
+// The ComputeWeights() method computes the strength of each link in the
+//    concordance, normalized in the range 0.0 to 1.0
+//
+// The ResetToStart() method sets to the top of phrase list.
+//
+// The memebr concordance contains a reverse index.  It is index by the
+// first cord of each tuple
+//
 // HISTORY:
 // January 1997 Linas Vepstas
 
@@ -26,6 +34,11 @@ class lagGenericConcordTable :
       virtual ~lagGenericConcordTable ();
 
       int GetTopTupleContainingWord (int word);
+      void ComputeWeights (void);
+
+      void ResetToStart (unsigned int phrase);
+      float GetNextLinkWeight (void);
+      unsigned int GetNextPhrase (void);
 
       void Dump (void);
 
@@ -47,6 +60,9 @@ class lagGenericConcordTable :
       virtual void AddID (Helper *);
 
       int num_concords;
+
+      Concord * cursor;
+      
 };
    
 #endif // __LAG_CONCORD_H__

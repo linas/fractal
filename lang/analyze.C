@@ -5,6 +5,11 @@
 // FUNCTION:
 // analyze texts
 //
+// METHODS:
+// The Analyze() method breaks a text up into a series of words,
+// and adds "phrases" of four words to a collection. It also establishes
+// links between phrases.
+//
 // HISTORY:
 // January 1997 Linas Vepstas
 
@@ -21,8 +26,9 @@ class lagTextAnalysis {
    public:
       lagTextAnalysis (void);
       void Analyze (FILE *fh);
+      void Dialogue (FILE *fh);
       void Dump (void);
-      void Construct (int);
+      void Chain (int);
    protected:
       void PrintPhrase (int);
 
@@ -100,6 +106,10 @@ void lagTextAnalysis :: Analyze (FILE *fh) {
             }
 
             this_phrase_id = phrase_table -> GetID (clast_word_id, blast_word_id, last_word_id, this_word_id);
+
+            // light up the phrase neuron
+            phrase_table -> AccumStrength (this_phrase_id, 1.0);
+
             xref_table -> GetID (dlast_phrase_id, this_phrase_id);
             word = &buff[i+1];
          } else {
@@ -110,6 +120,51 @@ void lagTextAnalysis :: Analyze (FILE *fh) {
    }
 
    printf ("\n");
+}
+
+// =====================================================
+
+void lagTextAnalysis :: Dialogue (FILE *fh) {
+
+   xref_table -> ComputeWeights ();
+   phrase_table -> ResetAllWeights ();
+
+   // light up only this dialogue
+   Analyze (fh);
+
+   int num_phrases = phrase_table -> GetTableSize();
+
+   phrase_table -> FlipAllWeights ();
+   for (int i=1; i<= num_phrases; i++) {
+      
+      float phrase_activation = phrase_table -> GetWeight (i);
+
+      // a negative activation implies that the current neuron is "hot"
+      // and should be only a source, not a sink.
+      if (0.0 > phrase_activation) {
+
+         phrase_activation = -phrase_activation;
+         // activate first layer of neurons
+         xref_table -> ResetToStart (i);
+   
+         float link_strength = xref_table -> GetNextLinkWeight ();
+         unsigned int ph = xref_table -> GetNextPhrase();
+         while (ph) {
+            float not_hot = phrase_table -> GetWeight (ph);
+
+            // light up the neuron only if its not a hot neuron
+            if (-1.0e-8 <= not_hot) {
+               phrase_table -> AccumStrength (ph, link_strength*phrase_activation);
+            }
+            link_strength = xref_table -> GetNextLinkWeight ();
+            ph = xref_table -> GetNextPhrase();
+         }
+      }
+   }
+
+   // put all non-hot neurons through the activation (squashing)
+   // function
+   phrase_table -> ActivateAll ();
 }
 
 // =====================================================
@@ -166,7 +221,7 @@ void lagTextAnalysis :: Dump (void) {
 
 // =====================================================
 
-void lagTextAnalysis :: Construct (int top) {
+void lagTextAnalysis :: Chain (int top) {
 
    int i = 0;
    for (i=0; i<LAG_USED_SIZE; i++) {
@@ -206,16 +261,37 @@ void lagTextAnalysis :: Construct (int top) {
 
 // =====================================================
 
-main () {
+main (int argc, char * argv[]) {
 
-   FILE * fh = stdin;
+   if (3 > argc) {
+      printf ("Usage: %s <textfile> <dialogue> \n", argv[0]);
+      exit (1);
+   }
+
+   printf ("Info: %s: Opening %s for text analysis\n", argv[0], argv[1]); 
+   FILE * text_fh = fopen (argv[1], "r");
+   if (!text_fh) {
+      printf ("Error: %s: no such text file %s \n", argv[0], argv[1]);
+      exit (1);
+   }
+
+   printf ("Info: %s: Opening %s for dialogue\n", argv[0], argv[2]); 
+   FILE * dialogue_fh = fopen (argv[2], "r");
+   if (!dialogue_fh) {
+      printf ("Error: %s: no such dialogue file %s \n", argv[0], argv[2]);
+      exit (1);
+   }
+
    lagTextAnalysis * texan = new lagTextAnalysis;
-   texan -> Analyze (fh);
+   texan -> Analyze (text_fh);
+
+   texan -> Dialogue (dialogue_fh);
+
    texan -> Dump();
 
    for (int i=0; i<LAG_TOP_TEN; i++) {
       printf ("\n\n =========== sentance %d =========== \n", i);
-      texan -> Construct (i);
+      texan -> Chain (i);
    }
 }
 

@@ -9,14 +9,17 @@
 // METHODS:
 // The GetGenericWordID() method returns the ID number of the pair.
 //
-// The GetFirstOfPair() method returns the first elt of the pair.
-//
-// The GetSecondOfPair() method returns the second elt. of the pair.
+// The GetElt() method returns the n'th element of the tuple.
 //
 // The GetCount() method returns how often the particular word
 //    occurs in the text.
 //
 // The GetTopTen() method returns the n'th most popular pair id.
+//
+// the member "activation" can be thought of as either the
+//    link-strength between a pair of neurons, when this class 
+//     is used to store links, or the excitment of the neurons, 
+//     when this class is used to store phrases.
 //
 // HISTORY:
 // January 1997 Linas Vepstas
@@ -58,6 +61,15 @@ class lagGenericWordTable {
 
       int GetElt (int pairid, int elt);
       int GetCount (int pairid);
+      float GetWeight (int pairid);
+
+      void ResetAllWeights (void);
+      void FlipAllWeights (void);
+      void AccumStrength (int pairid, float);
+      void Activate (int pairid);
+      void ActivateAll (void);
+
+      unsigned int GetTableSize (void);
 
       int GetTopTen (int n);
       void Dump (void);
@@ -69,6 +81,7 @@ class lagGenericWordTable {
             unsigned int tuple[LAG_WORD_TUPLE];
             int id;
             int cnt;
+            float activation;
 #ifdef LAG_USE_OVERLOADED_NEW
             void * operator new (size_t s);
             static int memblocks;

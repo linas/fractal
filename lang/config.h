@@ -21,6 +21,8 @@
 
 #define LAG_USE_OVERLOADED_NEW
 #define LAG_CHUNK_SIZE 512000
+
+#define LAG_BIAS (2.0)
    
 #endif // __LAG_CONFIG_H__
 
