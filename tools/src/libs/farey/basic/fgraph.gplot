@@ -1,0 +1,28 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'fgraph.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "blah blah"
+set xlabel "x"
+set ylabel "Density"
+
+# set yrange [0:]
+
+plot "fgraph.dat" using 1:2 title "2-adic", \
+     "fgraph.dat" using 1:3 title "3-adic"
+
+# plot "frob.dat" using 2:3 title "orig", \
+#      "frob.dat" using 2:4 title "numeric", \
+#      "frob.dat" using 2:5 title "frob-p"
+
+# pause 100
+
