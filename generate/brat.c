@@ -185,12 +185,11 @@ void mandelbrot_cutoff (
           /* the following computes an almost-flat, divergence free thing */
          glob [i*sizex +j] = modulus / sum_n;
          glob [i*sizex +j] /= (sqrt (re_position*re_position+im_position*im_position));
-         glob [i*sizex +j] -= 1.0/ sqrt (sqrt ((re_position-0.5)*(re_position-0.5)+im_position*im_position));
 
          /* the interesting one is the z-prime-prime */
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          glob [i*sizex +j] = modulus / sum_n;
-         // glob [i*sizex +j] -= 0.5/ ( sqrt ((re_position-0.25)*(re_position-0.25)+im_position*im_position));
+         // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
 
          /* the interesting one is the z-prime-prime */
          /* here we use a taylor expansion to extrapolate to tau=0 */
@@ -209,6 +208,7 @@ void mandelbrot_cutoff (
          /* finally the taylor expansion */
          glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
 
+         // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
          re_position += delta;
       }
       im_position -= delta;  /*top to bottom, not bottom to top */
