@@ -3,6 +3,7 @@
  *
  * FUNCTION:
  * Explore Hausdorf measure of mandelbrot set.
+ * And other stuff.
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989
@@ -13,7 +14,10 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
+
+#include "Farey.h"
 
 /*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using */
@@ -127,7 +131,7 @@ void mandelbrot_out (
             tmp = re*re - im*im + re_c;
             im = 2.0*re*im + im_c;
             re = tmp;
-// printf ("its %g %g \n", re, im);
+// printf ("its %d %g %g \n", loop, re, im);
             modulus = (re*re + im*im);
             if (modulus > escape_radius*escape_radius) break;
          }    
@@ -242,6 +246,86 @@ iterate (double re_c,
    itermax = loop-1;  /* actual count */
 }
 
+
+/*-------------------------------------------------------------------*/
+/* regulated mandelbrot exterior, terminates
+ * after a finite number of iterations.
+ */
+
+void mandelbrot_out_regulated (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   double	height,
+   int		itermax,
+	double regulator)
+{
+   int		i,j, globlen, itermax_orig;
+   double	re_start, im_start, deltax, deltay;
+   double	re_position, im_position;
+   double	re_c, im_c;
+   double	re, im, tmp;
+   int		loop;
+   double modulus=0.0, frac, mu;
+   double escape_radius = 3.1, esq;
+   double ren, tl;
+
+   ren = log( log (escape_radius)) / log(2.0);
+   tl = 1.0/ log(2.0);
+   itermax_orig = itermax;
+   
+	regulator = exp (- regulator);
+
+   deltax = width / (double) sizex;
+   deltay = height / (double) sizey;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + height / 2.0;
+	esq = escape_radius * escape_radius;
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   
+   im_position = im_start;
+   for (i=0; i<sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) {
+         re_c = re_position;
+         im_c = im_position;
+
+         re = re_c;
+         im = im_c;
+         for (loop=1; loop <itermax; loop++) {
+            tmp = re*re - im*im + re_c;
+            im = 2.0*re*im + im_c;
+            re = tmp;
+            modulus = (re*re + im*im);
+            if (modulus > esq) break;
+
+            im_c *= regulator;
+            re_c *= regulator;
+         }    
+
+         modulus = sqrt (modulus);
+         frac = log (log (modulus)) *tl;
+         mu = ((double) (loop+1)) - frac;
+
+         glob [i*sizex +j] = frac; 
+         if (loop<itermax) {
+            glob [i*sizex +j] = sqrt(sqrt ((((double) loop) -frac)/ ((double) itermax))); 
+         } else {
+            glob [i*sizex +j] = 0.0;
+         }
+
+
+         re_position += deltax;
+      }
+      im_position -= deltay;  /*top to bottom, not bottom to top */
+   }
+}
 
 /*-------------------------------------------------------------------*/
 /* This routine fills in the exterior of the mandelbrot set with
@@ -453,12 +537,14 @@ void mandelbrot_windsimple (
    double	re_position, im_position;
    double	re_c, im_c;
    double	re, im, tmp;
+	double   re_prev, im_prev;
+	double   re_preprev, im_preprev;
    int		loop;
    double modulus=0.0;
    double escape_radius = 1131.1;
    double ren, otl;
    double phi=0.0, phi_last, phi_c, h_phi_c;
-   long long wind =0;
+   int wind =0;
 
    ren = log( log (escape_radius)) / log(2.0);
    otl = 1.0/ log(2.0);
@@ -473,7 +559,6 @@ void mandelbrot_windsimple (
    
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = 0.0;
-   
    im_position = im_start;
    for (i=0; i<sizey; i++) {
       if (i%10==0) printf(" start row %d\n", i);
@@ -488,37 +573,65 @@ void mandelbrot_windsimple (
 
          re = 0.0;
          im = 0.0;
+         re_prev = 0.0;
+			im_prev = 0.0;
          phi_last = -0.01;
          wind = 0;
 // printf ("\n phi_c= %12.8g   c=(%g %g)\n", phi_c, re_c, im_c);
          for (loop=1; loop <itermax; loop++) {
+				re_preprev = re_prev;
+				im_preprev = im_prev;
+				re_prev = re;
+				im_prev = im;
             tmp = re*re - im*im + re_c;
             im = 2.0*re*im + im_c;
             re = tmp;
 
             phi = atan2 (im, re);
+            // phi = atan2 (im, re+0.5);
+            // phi = atan2 (im, re-0.5);
+            // phi = atan2 (im-im_prev, re-re_prev);
+            // phi = atan2 (im-im_preprev, re-re_preprev);
+            // phi = atan2 (2.0*im-im_prev, 2.0*re-re_prev);
             if (0.0>phi) phi += 2.0*M_PI;
-
             wind += wind;
+				
+#if WORKS_WITH_SMALL_DEFECTS
 
+				// The below cancels out horns 
             if (phi < phi_last) wind +=2;
 
 // printf ("n=%d %12.8g %12.8g %12.8g %12.8g %10.6g %d\n", 
 // loop, phi, phi_last, 2.0*phi_last-phi, frac,
 // phi+((double)wind)*M_PI, wind);
 
+				/* The following is critical for going from discontinuous
+				 * power-two bars to smooth func. */
             /* if northern half else southern half */
             if (M_PI > phi_c) { 
-               if (M_PI < phi) {
+               while (M_PI < phi) {
                   phi -= M_PI;
                   wind ++;
                }
             } else {
-               if (M_PI > phi) {
+               while (M_PI > phi) {
                   phi += M_PI;
                   wind --;
                }
             }
+#endif /* WORKS_WITH_SMALL_DEFECTS */
+
+#define THEORY
+#ifdef THEORY
+				phi_last *= 2.0;
+				if (2.0 * M_PI < phi_last) wind ++;
+
+				if ((M_PI < phi_last) && (2.0 * M_PI > phi_last))
+				{
+					if ((0 < phi) && (M_PI > phi)) wind ++;
+				}
+#endif /* THEORY */
+				
 
             phi_last = phi;
 
@@ -1426,7 +1539,7 @@ void mandelbrot_stalk (
          tmp = re*re - im*im + re_position;
          im = 2.0*re*im + im_position;
          re = tmp;
-#endif MAXDIST
+#endif // MAXDIST
          for (loop=1; loop <itermax; loop++) {
             tmp = re*re - im*im + re_position;
             im = 2.0*re*im + im_position;
@@ -1495,7 +1608,7 @@ void mandelbrot_stalk (
 
             tmp = -log (tmp); 
             if (tmp > glob [i*sizex +j]) glob [i*sizex +j] = tmp;
-#endif CIRCSTALK
+#endif // CIRCSTALK
 
            
 #ifdef MAXDIST
@@ -1513,7 +1626,7 @@ void mandelbrot_stalk (
             tmp += log (tmpx*tmpx + tmpy*tmpy);
 
             if (tmp > glob [i*sizex +j]) glob [i*sizex +j] = tmp;
-#endif MAXDIST
+#endif // MAXDIST
 
            
 
@@ -2817,6 +2930,125 @@ whack (
 }
 
 /*-------------------------------------------------------------------*/
+/* The gapper tries to do the distribution of the gaps in the 
+ * continued fraction
+ */
+
+
+/* return the greatest common factor */
+int
+gcf32 (int nume, int denom)
+{
+	int t;
+	t = nume % denom;
+	nume = denom;
+	denom = t;
+
+	/* Euclids algorithm for obtaining the gcf */
+	while (0 != denom)
+	{
+		t = nume % denom;
+		nume = denom;
+		denom = t;
+	}
+
+	/* num now holds the GCD (Greatest Common Divisor) */
+	return nume;
+}
+
+void 
+gapper (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax,
+   double 	renorm)
+{
+   int		i,j;
+
+   int globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) {
+      glob [i] = 0.0;
+   }
+
+	int *tot_cnt = (int *) malloc (sizex*sizeof (int));
+	int *bin_cnt = (int *) malloc (sizex*sizeof (int));
+	for (i=0; i<sizex; i++)
+	{
+		tot_cnt[i] = 0;
+		bin_cnt[i] = 0;
+	}
+   
+	int d,n;  // denom, numerator
+	ContinuedFraction f;
+	double w = 0.016; // some value of w
+
+	for (d=2; d<itermax; d++)
+	{
+		int dd = d;
+		for (n=1; n<d; n++)
+		{
+			int nn = n;
+
+			nn = rand() >> 10;
+			dd = rand() >> 10;
+			nn %= dd;
+			if (0 == nn) continue;
+			if (0 == dd) continue;
+			double t = (double) nn/ (double) dd;
+
+			i = (int) ((double) sizex * t);
+			tot_cnt[i] ++;
+if (i>=sizex) printf ("xxxxxxxxxxxxxxxxx\n");
+			
+			int gcf = gcf32 (nn,dd);
+			// if (1 != gcf) continue;
+			nn /= gcf;
+			dd /= gcf;
+			bin_cnt [i] ++;
+			
+			f.SetRatio (nn,dd);
+			double gap = f.ToXEven(w) - f.ToXOdd(w);
+			gap *= dd*dd;
+			gap /= w;
+			gap -= 2.0;
+			gap += w;
+			gap -= 0.5*w*w;
+			gap /= 0.5*w*w;  // the range is -1 to +1
+			gap *= 0.5;      // the range is -0.5 to 0.5
+			// gap += 0.5;
+			gap += 0.04;
+			gap *= 1.8;
+			gap = 1.0-gap;
+
+			j = (int) (gap * (double) sizey);
+			if (0>j) j=0;
+			if (j>=sizey) j=sizey-1;
+
+// if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,dd);
+			glob [j*sizex +i] ++;
+		}
+	}
+
+   /* renormalize */
+   for (i=0; i<sizex; i++) 
+	{
+		double r = 1.0 / ((double) bin_cnt[i]);
+		for (j=0; j<sizey; j++)
+		{
+			glob [j*sizex+i] *= r;
+		}
+		// printf ("duude i=%d b=%d t=%d\n", i, bin_cnt[i], tot_cnt[i]);
+   }
+
+   free (bin_cnt);
+   free (tot_cnt);
+}
+
+/*-------------------------------------------------------------------*/
 /* This routine fills in the exterior of the mandelbrot set using 
  * an algorithm which is, well, a bit differnet. 
  * I suspect a problem with the original algorithm is that the seed
@@ -2899,7 +3131,9 @@ main (int argc, char *argv[])
    FILE		*fp;
    int		i, nray=-1;
    double	p=0.0, q=1.0;
+	double   funky = 0.0;
    char buff [80];
+	char * progname;
    
    if (5 > argc) {
       fprintf (stderr, "Usage: %s <filename> <width> <height> <niter> [<centerx> <centery> <width> [<height>]]\n", argv[0]);
@@ -2920,6 +3154,10 @@ main (int argc, char *argv[])
    im_center = 0.0;
    width = 2.8;
 
+   if (6 == argc) {
+      funky = atof (argv[5]);
+	}
+	
    if (8 <= argc) {
       re_center = atof (argv[5]);
       im_center = atof (argv[6]);
@@ -2945,89 +3183,102 @@ main (int argc, char *argv[])
    /* Do the interior now */
    renorm = 1.0;
 
-   if (!strcmp(argv[0], "brat"))
+	progname = argv[0];
+	progname = strrchr (progname, '/');
+	if (!progname) progname = argv[0];
+	else progname ++;
+
+   if (!strcmp(progname, "brat"))
    mandelbrot_out (data, data_width, data_height,
                   re_center, im_center, width, height, itermax); 
    
-   if (!strcmp(argv[0], "wind"))
+   if (!strcmp(progname, "morph"))
+   mandelbrot_out_regulated (data, data_width, data_height,
+                  re_center, im_center, width, height, itermax, funky); 
+   
+   if (!strcmp(progname, "wind"))
    mandelbrot_wind (data, data_width, data_height,
                   re_center, im_center, width, height, itermax); 
    
-   if (!strcmp(argv[0], "winds"))
+   if (!strcmp(progname, "winds"))
    mandelbrot_windsimple (data, data_width, data_height,
                   re_center, im_center, width, height, itermax, nray, p, q); 
    
-   if (!strcmp(argv[0], "cutoff"))
+   if (!strcmp(progname, "cutoff"))
    mandelbrot_cutoff (data, data_width, data_height,
                   re_center, im_center, width, itermax); 
    
-   if (!strcmp(argv[0], "inf"))
+   if (!strcmp(progname, "inf"))
    dmandelbrot_out (data, data_width, data_height,
                   re_center, im_center, width, itermax); 
    
-   if (!strcmp(argv[0], "decide"))
+   if (!strcmp(progname, "decide"))
    mandelbrot_decide (data, data_width, data_height,
                   re_center, im_center, width, itermax); 
    
-   if (!strcmp(argv[0], "manvert"))
+   if (!strcmp(progname, "manvert"))
    mandelbrot_inverse (data, data_width, data_height,
                   re_center, im_center, width, itermax); 
    
-   if (!strcmp(argv[0], "measure"))
+   if (!strcmp(progname, "measure"))
    mandelbrot_measure (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
    
-   if (!strcmp(argv[0], "offset"))
+   if (!strcmp(progname, "offset"))
    mandelbrot_offset (data, data_width, data_height,
                   0.5, 0.0, 3.0, itermax, renorm); 
    
-   if (!strcmp(argv[0], "mstop"))
+   if (!strcmp(progname, "mstop"))
    mandelbrot_stop (data, data_width, data_height,
                   re_center, im_center, width, itermax); 
    
-   if (!strcmp(argv[0], "stalk"))
+   if (!strcmp(progname, "stalk"))
    mandelbrot_stalk (data, data_width, data_height,
                   re_center, im_center, width, itermax, 0.0, 0.0); 
    
-   if (!strcmp(argv[0], "orig"))
+   if (!strcmp(progname, "orig"))
    mandelbrot_orig (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
    
-   if (!strcmp(argv[0], "phase"))
+   if (!strcmp(progname, "phase"))
    mandelbrot_phase (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
 
-   if (!strcmp(argv[0], "age"))
+   if (!strcmp(progname, "age"))
    mandelbrot_age (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
 #ifdef STRAIGHT
-   if (!strcmp(argv[0], "lyapunov"))
+   if (!strcmp(progname, "lyapunov"))
    mandelbrot_lyapunov (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
 #else
-   if (!strcmp(argv[0], "lyapunov"))
+   if (!strcmp(progname, "lyapunov"))
    mandelbrot_lyapunov (data, data_width, data_height,
                   0.5, 0.0, 3.0, itermax, renorm); 
 #endif
    
 
-   if (!strcmp(argv[0], "migrate"))
+   if (!strcmp(progname, "migrate"))
    mandelbrot_migrate (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
 
-   if (!strcmp(argv[0], "squige"))
+   if (!strcmp(progname, "squige"))
    mandelbrot_squige (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
 
-   if (!strcmp(argv[0], "next"))
+   if (!strcmp(progname, "next"))
    mandelbrot_next (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
    
-   if (!strcmp(argv[0], "whack"))
+   if (!strcmp(progname, "whack"))
    whack (data, data_width, data_height,
                   re_center, im_center, width, itermax, renorm); 
    
-   if (!strcmp(argv[0], "circout")) {
+   if (!strcmp(progname, "gapper"))
+   gapper (data, data_width, data_height,
+                  re_center, im_center, width, itermax, renorm); 
+   
+   if (!strcmp(progname, "circout")) {
       re_center = 0.0;
       im_center = 0.0;
       width = 1.0;
@@ -3036,7 +3287,7 @@ main (int argc, char *argv[])
                   re_center, im_center, width, itermax, 0.33); 
    }
    
-   if (!strcmp(argv[0], "circin")) {
+   if (!strcmp(progname, "circin")) {
       re_center = 0.5;
       im_center = 0.0;
       width = 1.0;
@@ -3047,7 +3298,7 @@ main (int argc, char *argv[])
    
    /* ---------------------------------------------------- */
    /* make a movie */
-   if (!strcmp(argv[0], "stalkmov")) {
+   if (!strcmp(progname, "stalkmov")) {
       
 #define NFRAMES 60
       for (i=0; i<NFRAMES; i++) {
@@ -3077,7 +3328,7 @@ main (int argc, char *argv[])
    
    /* ---------------------------------------------------- */
    /* make a movie */
-   if (!strcmp(argv[0], "circmov")) {
+   if (!strcmp(progname, "circmov")) {
       
       for (i=0; i<NFRAMES; i++) {
          printf (" doing frame %d of %d \n", i, NFRAMES);

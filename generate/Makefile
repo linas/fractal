@@ -1,6 +1,6 @@
 ############### Symbol Definitions ###################### 
 
-INCLUDES =	-I/usr/include/X11 
+INCLUDES =	-I/usr/include/X11 -I../tools/inc
 LIBS =		/usr/lib
 # XLIB =		$(LIBS)/libX11.a \
 #		$(LIBS)/libbsd.a \
@@ -12,7 +12,7 @@ CC = cc -Wall -g -O2 $(INCLUDES)
 
 EXES =  stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
-        circout circin circmov brat \
+        circout circin circmov brat gapper \
         abs clamp takelog reclamp dump renorm \
         draw dx image movie paste stats sum \
         angle curl diff div card mandel
@@ -34,8 +34,8 @@ clean:
 
 ################## Dependencies and compile/link #########
 #
-inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o
-	$(CC) -o brat brat.o util.o -lm
+gapper inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o
+	$(CC) -o brat brat.o util.o ../tools/lib/Farey.o -lm -lstdc++
 	ln -f brat decide
 	ln -f brat manvert
 	ln -f brat stalk
@@ -58,6 +58,8 @@ inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age
 	ln -f brat cutoff
 	ln -f brat wind
 	ln -f brat winds
+	ln -f brat morph
+	ln -f brat gapper
 
 card: card.c  util.o
 	$(CC) -o card card.c util.o -lm
