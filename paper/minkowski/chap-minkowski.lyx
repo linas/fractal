@@ -1167,7 +1167,7 @@ Every group element of
  We've already discovered the relationship between the modular group and
  continued fractions, which we gave above as 
 \begin_inset Formula \[
-\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+\gamma_{C}(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
 
 \end_inset 
 
@@ -1196,7 +1196,7 @@ First, let us consider the group elements with
 
 .
  When the coefficients are zero or positive like this, we find that 
-\begin_inset Formula $\gamma(x)$
+\begin_inset Formula $\gamma_{C}(x)$
 \end_inset 
 
  maps the unit interval into strictly small intervals; 
@@ -1205,12 +1205,12 @@ i.e.
 
 \shape default 
  that 
-\begin_inset Formula $0<\gamma(0),\gamma(1)<1$
+\begin_inset Formula $0<\gamma_{C}(0),\gamma_{C}(1)<1$
 \end_inset 
 
 .
  One endpoint of the interval are given by the rational 
-\begin_inset Formula $\gamma(0)=[a_{1}+1,a_{2},a_{3},...,a_{N-1}]$
+\begin_inset Formula $\gamma_{C}(0)=[a_{1}+1,a_{2},a_{3},...,a_{N-1}]$
 \end_inset 
 
  (note the missing 
@@ -1219,7 +1219,7 @@ i.e.
 
 ).
  The other endpoint is 
-\begin_inset Formula $\gamma(1)=[a_{1}+1,a_{2},a_{3},...,a_{N}]$
+\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N}]$
 \end_inset 
 
  when 
@@ -1227,7 +1227,7 @@ i.e.
 \end_inset 
 
 , although it must be written as 
-\begin_inset Formula $\gamma(1)=[a_{1}+1,a_{2},a_{3},...,a_{N-2}]$
+\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N-2}]$
 \end_inset 
 
  when 
@@ -1242,7 +1242,7 @@ i.e.
 
 , we can now write the isomorphism of the question mark as 
 \begin_inset Formula \[
-?(\gamma(x))=?(\gamma(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
+?(\gamma_{C}(x))=?(\gamma_{C}(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
 
 \end_inset 
 
@@ -1253,7 +1253,7 @@ The best way of understanding this isomorphism is to think of it as an isomorphi
 sm of intervals, where we can pick one end of the interval, but are a bit
  more constrained in picking the other end.
  That is, we can pick an arbitrary 
-\begin_inset Formula $\gamma(0)=p/q\in\mathbb{Q}$
+\begin_inset Formula $\gamma_{C}(0)=p/q\in\mathbb{Q}$
 \end_inset 
 
 .
@@ -1539,7 +1539,10 @@ ds to the self-map:
 \end_inset 
 
 .
- Clearly, the map 
+ 
+\layout Standard
+
+Clearly, the canonical map 
 \begin_inset Formula \[
 \rho:\left(\begin{array}{cc}
 a & b\\
@@ -1547,7 +1550,9 @@ c & d\end{array}\right)\mapsto\frac{ax+b}{cx+d}\]
 
 \end_inset 
 
- is the group homomorphism.
+ is such a group homomorphism for the modular group.
+ Not only is is commutative, but it is also holds for all elements of the
+ modular group.
  The set 
 \begin_inset Formula $X$
 \end_inset 
@@ -1564,42 +1569,42 @@ c & d\end{array}\right)\mapsto\frac{ax+b}{cx+d}\]
 \begin_inset Formula $\mathbb{R}$
 \end_inset 
 
-, although it is usually taken as the complex upper-half plane 
+, although when studying modular forms, it is usually taken as the complex
+ upper-half plane 
 \begin_inset Formula $H^{+}=\{ z\in\mathbb{C}\, s.t.\,\textrm{Im}z\geq0\}$
 \end_inset 
 
 .
-\layout Subsection
-
-The Topology of the Modular Group
+ 
 \layout Standard
 
-The relationship between continued fractions and elements of the modular
- group hint at an interesting topology of the modular group.
- A subset of the modular group can be mapped to the rationals, and thus
- any metric on the rationals, whether the normal one or a p-adic one, can
- be 'lifted' back up to the modular group.
- We then ask if this metric can be extended onto the whole group.
- This mapping also means that we can draw a continous curve in the modular
- group: that a subset of the modular group is diffeomorphic to the rationals.
- Thus, we are lead to ask, where else can we draw continuous curves in the
- modular group? What is the connectedness of those curves? Is the manifold
- simply connected, or in fact punctured an infinite number of times? But
- we also saw that the more natural mapping is between the contractive group
- elements and intervals, so that the set of contractive group elements is
- essentially an open covering of the unit interval.
- Thus, we have a number of confusing, inter-related ideas, and ask how they
- can be sorted out.
- The goal is to define and explore the topology of the modular group, by
- extending what we've learned for the contractive elements onto the whole
- group.
+The Minkowski Question Mark suggests that there is another such representation,
+ given by 
+\begin_inset Formula $?\circ\rho$
+\end_inset 
+
+.
+ Unfortunately, due to the nature of the construction, its not obvious if
+ the representation can be made to hold for all group elements, although
+ it clearly works on the subset of contracting group elements.
+ lets see how far we can push this.
+ In a similar vein, we will find other representations in 
+\begin_inset Formula $GL(N)$
+\end_inset 
+
+ given by the self-similarity properties of the Takagi Curve [ref other
+ chapter/paper].
+ These representations will also be built from the subset of contracting
+ group elements, and so we need a general discussion of how to extend the
+ homomorphisms to all group elements.
+ 
 \layout Standard
 
 Let 
-\begin_inset Formula $M=\{\gamma\in SL(2,\mathbb{Z})\textrm{ s.t. }\gamma\textrm{ is contracting }\}$
+\begin_inset Formula $M=\{\gamma\in SL(2,\mathbb{Z})\textrm{ s.t. }\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\textrm{ has }a_{k}>0\;\forall k\in\{1,..,N\}\}$
 \end_inset 
 
-be the set of contracting group elements.
+ be the set of contracting group elements.
  We begin by noting that every 
 \begin_inset Formula $\gamma\in M$
 \end_inset 
@@ -1643,13 +1648,18 @@ the same thing
 \end_inset 
 
 .
- From this, we also have a simple theorm about interval intersection: given
- any two 
-\begin_inset Formula $\gamma_{1}\in M$
+ In the following, we will let 
+\begin_inset Formula $\gamma(x)$
 \end_inset 
 
- and 
-\begin_inset Formula $\gamma_{2}\in M$
+ stand for either the one or the other set-theoretic representation, unless
+ otherwise stated.
+\layout Standard
+
+Subtrees of trees are totally ordered, and so we have equivalently a total
+ order of intervals (XXX should we define total order here?) That is, we
+ have a simple theorm about interval intersection: given any two 
+\begin_inset Formula $\gamma_{1},\gamma_{2}\in M$
 \end_inset 
 
 , then one of the following three statements holds: 
@@ -1665,23 +1675,30 @@ the same thing
 \end_inset 
 
 .
- This complete ordering of subsets follows from considering the tree representat
-ion: given two subtrees, one is either a subtree of the other, or they are
+ This total ordering of intervals follows from considering the tree representati
+on: given two subtrees, one is either a subtree of the other, or they are
  non-interscting.
  
 \layout Standard
 
-This ordering property allows us to extend group homomorphisms defined on
- 
-\begin_inset Formula $M$
+Note that 
+\begin_inset Formula $\forall\gamma\in M$
 \end_inset 
 
- to a larger subset of elements of the modular group.
- For example, if 
-\begin_inset Formula $\upsilon_{1}\supset\upsilon_{2}$
+, the function 
+\begin_inset Formula $\gamma^{-1}(x)$
 \end_inset 
 
-, then 
+ is well-defined on the domain 
+\begin_inset Formula $x\in\upsilon$
+\end_inset 
+
+ and has a range (co-domain) over the entire unit interval.
+ This implies that 
+\begin_inset Formula $\forall\gamma_{1},\gamma_{2}\in M$
+\end_inset 
+
+ we have that 
 \begin_inset Formula $(\gamma_{1}\circ\gamma_{2}^{-1})(x)$
 \end_inset 
 
@@ -1694,8 +1711,45 @@ This ordering property allows us to extend group homomorphisms defined on
 \end_inset 
 
 .
- This allows us to extend a group homomorphism, such as the Minkowski Question
- Mark, to all group elements of the form 
+ Thus, homomorphisms on 
+\begin_inset Formula $M$
+\end_inset 
+
+ extend naturally to all elements of the form 
+\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}$
+\end_inset 
+
+as long as we restrict the mapping to the domain 
+\begin_inset Formula $\upsilon_{2}$
+\end_inset 
+
+.
+ Next, we note that we can build chains in this way.
+ If 
+\begin_inset Formula $\upsilon_{2}\supset\upsilon_{3}$
+\end_inset 
+
+, then 
+\begin_inset Formula $(\gamma_{2}^{-1}\gamma_{3})(x)$
+\end_inset 
+
+ has a domain of the entire unit interval, although its range is less than
+ the whole interval.
+ Still, the range is within the domain of 
+\begin_inset Formula $\gamma_{1}$
+\end_inset 
+
+ and we have a natural extension to all group elements of the form 
+\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}\gamma_{3}$
+\end_inset 
+
+ as long as 
+\begin_inset Formula $\upsilon_{2}\supset\upsilon_{3}$
+\end_inset 
+
+ holds.
+ Thus, a set-theoretic homomorphism extends naturally to elements of the
+ form 
 \begin_inset Formula $\gamma=\gamma_{1}\gamma_{2}^{-1}\gamma_{3}\gamma_{4}^{-1}...$
 \end_inset 
 
@@ -1703,20 +1757,52 @@ This ordering property allows us to extend group homomorphisms defined on
 \begin_inset Formula $\gamma_{k}\in M$
 \end_inset 
 
+ and the set of relationships 
+\begin_inset Formula $\{\upsilon_{2j}\supset\upsilon_{2j+1}\}$
+\end_inset 
+
+ hold between pairs of adjacent elements.
+ There now remains the problem of what to do for cases of 
+\begin_inset Formula $\upsilon_{3}\supset\upsilon_{2}$
+\end_inset 
+
  and 
-\begin_inset Formula $\upsilon_{1}\supset\upsilon_{2}\supset\upsilon_{3}\supset\upsilon_{4}\supset...$
+\begin_inset Formula $\upsilon_{2}\cap\upsilon_{3}=\emptyset$
 \end_inset 
 
-, that is, to those elements 
-\begin_inset Formula $\gamma$
+.
+ One can proceed somwhat delcately with the former, by understnading that
+ the domain of 
+\begin_inset Formula $\gamma_{1}\gamma_{2}^{-1}\gamma_{3}$
 \end_inset 
 
- where 
-\begin_inset Formula $\upsilon_{1}\cap\upsilon_{2}\cap\upsilon_{3}\cap\upsilon_{4}\cap...\neq\emptyset$
-\end_inset 
+ is smaller than the whole unit interval.
+ For the latter, we do not have an intersection of intervals on which the
+ homomorphism is naively valid.
+\layout Subsection
 
- xxxx carfule here ..
- 
+The Topology of the Modular Group
+\layout Standard
+
+The relationship between continued fractions and elements of the modular
+ group hint at an interesting topology of the modular group.
+ A subset of the modular group can be mapped to the rationals, and thus
+ any metric on the rationals, whether the normal one or a p-adic one, can
+ be 'lifted' back up to the modular group.
+ We then ask if this metric can be extended onto the whole group.
+ This mapping also means that we can draw a continous curve in the modular
+ group: that a subset of the modular group is diffeomorphic to the rationals.
+ Thus, we are lead to ask, where else can we draw continuous curves in the
+ modular group? What is the connectedness of those curves? Is the manifold
+ simply connected, or in fact punctured an infinite number of times? But
+ we also saw that the more natural mapping is between the contractive group
+ elements and intervals, so that the set of contractive group elements is
+ essentially an open covering of the unit interval.
+ Thus, we have a number of confusing, inter-related ideas, and ask how they
+ can be sorted out.
+ The goal is to define and explore the topology of the modular group, by
+ extending what we've learned for the contractive elements onto the whole
+ group.
 \layout Standard
 
 Sooo ....
