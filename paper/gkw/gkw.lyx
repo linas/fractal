@@ -1112,7 +1112,7 @@ k\end{array}\right)$
  the left and right eigenvectors, which agree perfectly w/ Driebe.
  Visually, the upper-left of this matrix looks like 
 \begin_inset Formula \[
-\Theta_{mk}=\left[\begin{array}{cccccc}
+U_{mk}=\left[\begin{array}{cccccc}
 1 & \frac{1}{4} & \frac{1}{8} & \frac{1}{16} & \frac{1}{32} & ...\\
 0 & \frac{1}{2} & \frac{1}{4} & \frac{3}{16} & \frac{1}{8}\\
 0 & 0 & \frac{1}{4} & \frac{3}{16} & \frac{3}{16}\\
@@ -1272,7 +1272,7 @@ f(x) & = & \left\langle x|f\right\rangle \\
 
  Its not to hard to explicitly validate completeness: one finds that 
 \begin_inset Formula \[
-\left\langle j\right|\mathbb{I}_{B}\left|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\]
+\left\langle j\left|\mathbb{I}_{B}\right|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\]
 
 \end_inset 
 
@@ -1283,9 +1283,6 @@ f(x) & = & \left\langle x|f\right\rangle \\
 
 \end_inset 
 
-
-\layout Standard
-
 Thus, in the polynomial representation, the Frobenius-Perrron operator of
  the Bernoulli map is 
 \begin_inset Formula \[
@@ -1293,6 +1290,181 @@ U_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \lambda_{n}\left\langle \tilde
 
 \end_inset 
 
+ 
+\layout Subsection
+
+Orthogonality
+\layout Standard
+
+The nature and meaning of 
+\begin_inset Quotes eld
+\end_inset 
+
+vector space basis
+\begin_inset Quotes erd
+\end_inset 
+
+ is perhaps a bit confusing in Hilbert Space.
+ It is hard to discuss the notion of what an operator 
+\begin_inset Quotes eld
+\end_inset 
+
+is
+\begin_inset Quotes erd
+\end_inset 
+
+ without also discussing the basis at the same time.
+ Removing this confusion takes mathematical techniques beyond the scope
+ of this paper.
+ In this section, we'll merely review some of the sources of confusion,
+ and some of the notational devices that help minimize it.
+ We begin by asking, 
+\begin_inset Quotes eld
+\end_inset 
+
+what is the operator 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+, really
+\begin_inset Quotes erd
+\end_inset 
+
+? We saw above that the monomials form a complete set of basis states, and
+ that we can call 
+\begin_inset Formula $\mathbb{I}_{M}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
+\end_inset 
+
+ the identity operator, where we use the subscript 
+\begin_inset Formula $M$
+\end_inset 
+
+ to remind us that the identity operator is built from the monomial states.
+ Thus, we can write 
+\begin_inset Formula $U_{B}=\mathbb{I}_{M}U_{B}\mathbb{I}_{M}$
+\end_inset 
+
+ which expands to 
+\begin_inset Formula \[
+U_{B}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|m\right\rangle \left\langle m\left|U_{B}\right|n\right\rangle \left\langle n\right|\]
+
+\end_inset 
+
+ As we saw above, the matrix elements 
+\begin_inset Formula $U_{mn}\equiv\left\langle m\left|U\right|n\right\rangle $
+\end_inset 
+
+ are upper-triangular, and so one wants to say that the operator 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ is clearly not Hermitian.
+ And yet, we can use the same trick to write 
+\begin_inset Formula $U_{B}=\mathbb{I}_{B}U_{B}\mathbb{I}_{B}$
+\end_inset 
+
+ to get matrix elements that are clearly non-zero only on the diagonal:
+ 
+\begin_inset Formula $\left\langle B_{m}\left|U_{B}\right|\tilde{B}_{n}\right\rangle =\delta_{mn}\lambda_{n}$
+\end_inset 
+
+.
+ Matrixes that are diagonal and have only real entries on teh diagonal are
+ clearly Hermition, so this implies that 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ is Hermitian.
+ So which is it? Is it Hermitian or not? Some of the confusion is due to
+ the fact that the use of the operator notation carries hidden with it an
+ implied choice of basis, and, so in the above, we have made an inadvertent
+ change of basis, which is 
+\begin_inset Quotes eld
+\end_inset 
+
+invisible
+\begin_inset Quotes erd
+\end_inset 
+
+ when we write things like 
+\begin_inset Formula $U_{B}=\mathbb{I}_{M}U_{B}\mathbb{I}_{M}$
+\end_inset 
+
+.
+ Much of the confusion is due to the fact that in a Hilbert space, the concept
+ of orthonormality violates the notions one gets from working with finite-dimens
+ional basis.
+ Lets show this change of basis explicitly.
+ We write 
+\begin_inset Formula \begin{eqnarray*}
+U_{diagonal} & = & \sum_{j,k=0}^{\infty}\left|B_{j}\right\rangle \delta_{jk}\lambda_{k}\left\langle \tilde{B}_{k}\right|\\
+ & = & \sum_{j,k,m,n=0}^{\infty}\left|B_{j}\right\rangle \left\langle \tilde{B}_{j}|m\right\rangle \left\langle m\left|U_{monomial}\right|n\right\rangle \left\langle n|B_{k}\right\rangle \left\langle \tilde{B}_{k}\right|\\
+ & = & \tilde{B}\, U_{monomial}\, B\end{eqnarray*}
+
+\end_inset 
+
+ where the operators 
+\begin_inset Formula $\tilde{B}$
+\end_inset 
+
+ and 
+\begin_inset Formula $B$
+\end_inset 
+
+ show the change of basis: 
+\begin_inset Formula \[
+\tilde{B}=\sum_{j,m=0}^{\infty}\left|B_{j}\right\rangle \left\langle \tilde{B}_{j}|m\right\rangle \left\langle m\right|\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n|B_{k}\right\rangle \left\langle \tilde{B}_{k}\right|\]
+
+\end_inset 
+
+ It is not hard to work out that 
+\begin_inset Formula $\tilde{B}B=\mathbb{I}_{B}$
+\end_inset 
+
+ and that 
+\begin_inset Formula $B\tilde{B}=\mathbb{I}_{M}$
+\end_inset 
+
+ so that, in a certain sense 
+\begin_inset Formula $\tilde{B}$
+\end_inset 
+
+ is both a left- and right-inverse of 
+\begin_inset Formula $B$
+\end_inset 
+
+.
+ However, 
+\begin_inset Formula $B$
+\end_inset 
+
+ is not orthogonal in the traditional sense: we had demonstrated the matrix
+ elements up above, and we clearly have 
+\begin_inset Formula $\left\langle n|B_{k}\right\rangle \neq\left\langle \tilde{B}_{n}|k\right\rangle $
+\end_inset 
+
+.
+ What makes this this seem so strange is that both the monomial basis states
+ 
+\begin_inset Formula $\left|n\right\rangle $
+\end_inset 
+
+ and the Bernoulli polynomial basis states 
+\begin_inset Formula $\left|B_{j}\right\rangle $
+\end_inset 
+
+ are both complete and orthogonal.
+ From experience working with finite-dimensional matrices, we are accustomed
+ to beleive that any change of basis between a set of ortho-normal basis
+ states is given by a similarity matrix with is orthogonal.
+ We see here that for infinite-dimensional spaces, that this is not the
+ case.
  
 \layout Subsection
 
@@ -1763,7 +1935,7 @@ There is a countably infinite degeneracy of eigenfunctions for a give eigenvalue
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
