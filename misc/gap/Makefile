@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= dyadic entropy exacto fdist feigen \
+EXES= conj dyadic entropy exacto fdist feigen \
       fiddle fliptree gappy gkw mute orbit orbit-s padic \
       pair rdist summy swap sway sym \
       sym-fun takagi theta tree vanish zeta
@@ -29,6 +29,7 @@ dist:
 	$(CC) -o $* $< $(LIB)/Farey.o $(LIB)/FareyTree.o -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++ 
 
 
+conj.o:	conj.c
 dyadic.o:	dyadic.C
 entropy.o:  entropy.C $(LIB)/Farey.o $(INC)/Farey.h
 exacto.o:  exacto.C $(LIB)/Farey.o $(INC)/Farey.h
