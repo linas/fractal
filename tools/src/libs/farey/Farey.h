@@ -2,7 +2,7 @@
 /* 
  * FUNCTION:
  * Convert real numbers to Farey numbers, and back
- * Coded in psuedo-OO style for easy conversion to C++
+ * Coded in pseudo-OO style for easy conversion to C++
  *
  * HISTORY:
  * created Linas Vepstas January 16 1994
@@ -10,6 +10,7 @@
  * Added xplus/minus Oct 2004 -- linas
  */
 
+// #include <gmp.h>
 
 /* Return the greatest common factor, 32-bit accurate */
 int gcf32 (int nume, int denom);
@@ -19,6 +20,8 @@ int gcf32 (int nume, int denom);
 // template<typename _Tp> class complex;
 // template<> class complex<double>;
 #define Complex complex<double>
+
+#define CONTINUED_FRAC_MAX_TERMS 32
 
 class ContinuedFraction
 {
@@ -44,6 +47,7 @@ class ContinuedFraction
       double ToGapMinus (void);
 		double ToGapEven (void);
 		double ToGapOdd (void);
+		double ToLastPair (void);
 
       double ToZReal (double z);
       double ToInvZReal (double z);
@@ -93,7 +97,7 @@ class ContinuedFraction
       unsigned int denom;   /* the denominator of the fractional part */
       unsigned int rdenom;  /* the denominator, reduced so its prime to numerator */
 
-      int tinued_frac[32];  /* values of continued fraction */
+      int tinued_frac[CONTINUED_FRAC_MAX_TERMS];  /* values of continued fraction */
       int nterms;           /* number of terms in the continued fraction expansion */
 
       int cutoff;           /* used to avoid instability when converting
@@ -101,6 +105,10 @@ class ContinuedFraction
 
 		int evenize;          /* If set, work with continued fractions 
                              * that have even number of terms */
+
+		/* Numerator and denominator of partial convergents */
+		// mpz_t p_convergent[CONTINUED_FRAC_MAX_TEMRS];
+		// mpz_t q_convergent[CONTINUED_FRAC_MAX_TEMRS];
       double partial[32];   /* scratch area of partial values */
       ContinuedFraction *scratch;
 };

@@ -577,6 +577,16 @@ ContinuedFraction::ToGapOdd (void)
 	}
 }
 
+double 
+ContinuedFraction::ToLastPair (void)
+{
+	if (0 == nterms) return 0.0;
+	if (1 == nterms) return tinued_frac[nterms-1];
+	double x = tinued_frac[nterms-1];
+	x /= (double) tinued_frac[nterms-2];
+	return x;
+}
+
 /* ------------------------------------------------------------ */
 /* Converts continued fraction into real number, 
  * but with a numerator of z instead of 1.
