@@ -2,8 +2,8 @@
  * brat-gapper.C
  *
  * FUNCTION:
- * Explore Hausdorf measure of mandelbrot set.
- * And other stuff.
+ * Explore dstricution of gaps in the continued fraction.
+ * Specifically, plot q_(n-1)/q_n ratio of denominators.
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989
@@ -20,6 +20,7 @@
 #include <time.h>
 
 #include "brat.h"
+#include "gcf.h"
 #include "Farey.h"
 #include "FareyTree.h"
 
@@ -67,7 +68,7 @@ MakeHisto (
 		{
 			int nn = n;
 
-#define DO_RAND
+// #define DO_RAND
 #ifdef DO_RAND
 			nn = rand() >> 10;
 			dd = rand() >> 10;
@@ -107,6 +108,7 @@ if (i>=sizex) printf ("xxxxxxxxxxxxxxxxx\n");
 
 			double gap = qnm1 / qn;
 			gap *= 2.0;
+printf ("duude gap=%g\n", gap);
 #endif
 
 			gap = 1.0-gap;

@@ -19,6 +19,7 @@
 #include "brat.h"
 
 static int max_terms;
+static double vee = 3.0;
 
 static void elliptic_sn_c (double re_q, double im_q, double *prep, double *pimp)
 {
@@ -30,18 +31,43 @@ static void elliptic_sn_c (double re_q, double im_q, double *prep, double *pimp)
 	double rep = 0.0;
 	double imp = 0.0;
 
+
 	double qpr = 1.0;
 	double qpi = 0.0;
 
 	double qpmod = re_q*re_q+im_q*im_q;
 	if (1.0 <= qpmod) return;
 
+   // compute square root of q
+	qpmod = sqrt (qpmod);
+	double ph = 0.5 * atan2 (im_q, re_q);
+   qpr = qpmod * cos (ph);
+   qpi = qpmod * sin (ph);
+
 	for (i=0; i<max_terms; i++)
 	{
-		double t = totient_phi (i+1);
+		double term = 2*i+1;
+		term = sin (term *vee);
 
-		rep += qpr *t;
-		imp += qpi *t;
+		/* compute (q^(n+1/2))^2 */
+		double resq = qpr*qpr - qpi*qpi;
+		double imsq = 2.0*qpr*qpi; 
+		
+		/* compute 1-q^(2n+1) */
+		resq = 1.0-resq;
+
+		/* compute 1/(1-q^(2n+1)) */
+		qpmod = resq*resq + imsq*imsq;
+		resq = resq / qpmod;
+		imsq = - imsq / qpmod;
+
+		/* compute full fraction */
+		double fre = resq*qpr - imsq * qpi;
+		double fim = resq*qpi + imsq * qpr;
+
+		/* accumulate */
+		rep += fre *term;
+		imp += fim *term;
 
 		/* compute q^k */
 		tmp = qpr*re_q - qpi * im_q;
@@ -57,11 +83,11 @@ static void elliptic_sn_c (double re_q, double im_q, double *prep, double *pimp)
 	}
 
 	/* multiply by (1-|q|)^2 */
-	tmp = 1.0 - sqrt (re_q*re_q + im_q*im_q);
-	tmp *= tmp;
+	// tmp = 1.0 - sqrt (re_q*re_q + im_q*im_q);
+	// tmp *= tmp;
 
-	rep *= tmp;
-	imp *= tmp;
+	// rep *= tmp;
+	// imp *= tmp;
 
 	*prep = rep;
 	*pimp = imp;

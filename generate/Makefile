@@ -14,7 +14,7 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert inf decide cutoff
 
-all:    cutoff erdos euler-q mobius totient  \
+all:    cutoff elliptic erdos euler-q mobius totient  \
         ray automatic radius brat draw dx image
 
 
@@ -28,7 +28,7 @@ clean:
 	$(CC) -c $<
 
 .o:
-	$(CC) -o $* $< -lm
+	$(CC) -o $@ $^ -lm -lstdc++
 
 image.o: image.h util.h
 gap-tongue.o: image.h util.h
@@ -43,34 +43,27 @@ euler-q.o: euler-q.C
 mobius.o: mobius.C
 totient.o: totient.C
 
+FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
+GCF=../tools/lib/gcf.o
+
 ################## Dependencies and compile/link #########
 #
 brat-beigen: brat.o brat-beigen.o util.o
-	$(CC) -o $@ $^ -lm -lstdc++
-
-brat-gap-hair: brat.o brat-gap-hair.o util.o
-	$(CC) -o $@ $^ ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
-
-brat-gapper: brat.o brat-gapper.o util.o
-	$(CC) -o $@ $^ ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
-
+brat-gap-hair: brat.o brat-gap-hair.o util.o $(FAREY)
+brat-gapper: brat.o brat-gapper.o util.o $(FAREY) $(GCF)
 cutoff: brat.o cutoff.o util.o
-	$(CC) -o $@ $^ -lm -lstdc++
-
+elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o util.o
-	$(CC) -o $@ $^ -lm -lstdc++
-
 euler-q: brat.o euler-q.o util.o
-	$(CC) -o $@ $^ -lm -lstdc++
 
-mobius: brat.o mobius.o util.o
-	$(CC) -o $@ $^ ../tools/lib/moebius.o ../tools/lib/totient.o ../tools/lib/gcf.o -lm -lstdc++
+mobius: brat.o mobius.o util.o $(GCF)
+	$(CC) -o $@ $^ ../tools/lib/moebius.o ../tools/lib/totient.o -lm -lstdc++
 
-totient: brat.o totient.o util.o
-	$(CC) -o $@ $^ ../tools/lib/totient.o ../tools/lib/gcf.o -lm -lstdc++
+totient: brat.o totient.o util.o $(GCF)
+	$(CC) -o $@ $^ ../tools/lib/totient.o -lm -lstdc++
 
-inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o
-	$(CC) -o brat brat.o util.o ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
+inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o $(FAREY)
+	$(CC) -o brat brat.o util.o -lm -lstdc++
 	ln -f brat decide
 	ln -f brat manvert
 	ln -f brat stalk

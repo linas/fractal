@@ -288,7 +288,7 @@ void energy_c (double re_q, double im_q, double *energy, double *moment)
 	double deno = 1.0+dd.rehp*dd.rehp+dd.imhp*dd.imhp;
 
 	double flub = dd.imhp*dd.imhp * dd.rehp*dd.rehp;
-	flub /= deno;:q
+	flub /= deno;
 
 
 	*energy = flub;
