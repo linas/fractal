@@ -1331,7 +1331,7 @@ U_{B}=\left[\begin{array}{cccccc}
 \end_inset 
 
 , just as in the coordinate-space representation.
- It is very instructive to verify that the bernoulli polynomials are still
+ It is very instructive to verify that the Bernoulli polynomials are still
  eigenfunctions in this representation.
  For 
 \begin_inset Formula $n\neq0$
@@ -1374,7 +1374,7 @@ U_{B}=\left[\begin{array}{cccccc}
 
 \end_inset 
 
- Applying 
+ Applying the Fourier-representation 
 \begin_inset Formula $U_{B}$
 \end_inset 
 
@@ -1591,59 +1591,20 @@ It turns out that these eigenfunctions are essentially a form of the Hurwitz
 
  which agrees with standard textbook presentations of the Hurwitz Zeta.
  
+\layout Subsection
+
+Visualizing the Hurwitz Zeta Eigenfunctions
 \layout Standard
 
-What is perhaps surprising with this result is that the literature [need
- citations] indicates a belief that a necessary and sufficient condition
- for a Frobenius-Perron Operator to have a disicrete, enumerable spectrum
- is to demand that the the eigenfunctions be infinitely differentiable.
- This is usually done by demonstrating a set of eigenfunctions with continuous
- spectrum which are non-differentiable, and then presenting the polynomial
- representation, which has a discrete spectrum by construction, and noting
- that polynomials are 
-\begin_inset Formula $C^{\infty}$
-\end_inset 
-
-(conveniently ignoring that the conjugates of polynomials are generalized
- functions).
- So we have to stop and ask: is it possible that 
-\begin_inset Formula $\beta(x;s)$
-\end_inset 
-
- is somehow not an eigenvector after all? It is hard to see how, since a
- quick numerical check shows that 
-\begin_inset Formula $\beta$
-\end_inset 
-
- works just fine, that is, that 
-\begin_inset Formula $\beta(x/2;s)+\beta((1+x)/2;s)=2^{s}\beta(x;s)=2^{s}[U_{B}\beta](x;s)$
-\end_inset 
-
-.
- Of course, all that numerics prove is that 
-\begin_inset Formula $\beta$
-\end_inset 
-
- is an eigenvector only on the rationals 
-\begin_inset Formula $\mathbb{Q}$
-\end_inset 
-
- and not 
-\begin_inset Formula $\mathbb{R}$
-\end_inset 
-
-, and this is in fact a reasonable suspicion, as we are on a journy into
- the land of fractals and number theory.
- But then we also would have to discount the proof based on the Fourier
- representation of the Bernoulli operator.
- 
-\layout Standard
-
-The other possiblity of getting out of this is that 
-\begin_inset Formula $\beta$
-\end_inset 
-
- is not 
+Perhaps one surprising aspect of this result is that the Hurwitz Zeta eigenfunct
+ions appear to be smooth, since one is conditioned to expect that the only
+ continuous-spectrum eigenfunctions of a Frobenius-Perron style operator
+ are fractal.
+ Its worthwhile to take a few minutes to get aquainted with the shape of
+ the zeta.
+ This section shows a number of graphs, and discusses the analytic structure
+ of the eigenvalues.
+ We'll see that the eigenfunctions are 
 \begin_inset Formula $C^{\infty}$
 \end_inset 
 
@@ -1651,22 +1612,58 @@ The other possiblity of getting out of this is that
 \begin_inset Formula $x$
 \end_inset 
 
-.
- XXX finish writing this.
-\layout Standard
+ for almost all 
+\begin_inset Formula $x$
+\end_inset 
+
+: everywhere except at the endpoints 
+\begin_inset Formula $x=0,1$
+\end_inset 
 
 .
- Thus, we have a conundrum.
-\layout Description
+ Thus, these are not 
+\begin_inset Quotes eld
+\end_inset 
 
-Homework: get show fractal eigenstates, give transformation between zeta
- and the fractals.
-\layout Description
+physical
+\begin_inset Quotes erd
+\end_inset 
 
-Homwork: eigenvalues greater than one.
-\layout Subsection
+ eigenstates, if 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
 
-Visualizing the Hurwitz Zeta Eigenfunctions
+ in 
+\begin_inset Formula $x$
+\end_inset 
+
+ is placed as a demand for being 
+\begin_inset Quotes eld
+\end_inset 
+
+physical
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ We also find that there are eigenfunctions that have eigenvalues greater
+ than one; however, these are not square-integrable: they are divergent
+ at 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+.
+ However, in all other respects, the eigenfunctions are analytically quite
+ well-behaved, even if a bit 
+\begin_inset Quotes eld
+\end_inset 
+
+lumpy
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ 
 \layout Standard
 
 Although we have a continuous spectrum, the eigenvalues are degenerate,
@@ -1680,7 +1677,7 @@ Although we have a continuous spectrum, the eigenvalues are degenerate,
 \begin_inset Formula $\lambda=2^{-s}=2^{-\sigma}\exp(-i\tau\ln2)$
 \end_inset 
 
- belongs to a family of eigenvectors with 
+ and it belongs to a family of eigenvectors with 
 \begin_inset Formula $\tau'=\tau+2\pi n/\ln2$
 \end_inset 
 
@@ -1945,10 +1942,174 @@ This figure illustrates a family of eigenvectors
  
 \end_inset 
 
+ 
+\layout Standard
+
+Note that there are eigenfunctions with eigenvalues greater than one, essentiall
+y because the Hurwitz Zeta can be analytically continued to everywhere except
+ for a pole at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Examining these eigenfunctions, one quickly discovers that these are not
+ square-integrable: they have singularities located at 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+.
+ That is, for for 
+\begin_inset Formula $\Re z>0$
+\end_inset 
+
+, that the Hurwitz Zeta 
+\begin_inset Formula $\zeta(z,x)$
+\end_inset 
+
+ has a clear singularity 
+\begin_inset Formula $x^{-z}$
+\end_inset 
+
+ at 
+\begin_inset Formula $x=0$
+\end_inset 
+
+.
+ We remove this explicitly, and write 
+\begin_inset Formula \begin{eqnarray*}
+\frac{\sin\pi s}{is}\beta(x;s) & = & \frac{e^{-i\pi s/2}}{x^{1-s}}-\frac{e^{i\pi s/2}}{(1-x)^{1-s}}+\\
+ &  & e^{-i\pi s/2}\left(\zeta(1-s,x)-x^{s-1}\right)-e^{i\pi s/2}\left(\zeta(1-s,1-x)-(1-x)^{s-1}\right)\end{eqnarray*}
+
+\end_inset 
+
+ The first part of the equation above encapsulates the singularities at
+ 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+ when working with eigenvalues 
+\begin_inset Formula $\left|\lambda\right|=\left|2^{-s}\right|>1$
+\end_inset 
+
+, that is, with 
+\begin_inset Formula $\Re s<0$
+\end_inset 
+
+.
+ The remaining term is well-behaved and is shown in one of the accompanying
+ figures.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+non-singular part
+\end_inset 
+
+ 
+\layout Standard
+
+Note that when 
+\begin_inset Formula $\left|\lambda\right|=\left|2^{-s}\right|<1/2$
+\end_inset 
+
+, that is, when 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+, there is no singularity, and 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ is finite on the entier interval 
+\begin_inset Formula $x\in[0,1]$
+\end_inset 
+
+ including the endpoints.
+ For 
+\begin_inset Formula $1/2<\Re s\leq1$
+\end_inset 
+
+ there is a bit of funny-business at the endpoints, that is, there is a
+ weak divergence there, but the function overall remains square-integrable.
+ Things break loose after that, with the exception of 
+\begin_inset Formula $s=0$
+\end_inset 
+
+, where we have 
+\begin_inset Formula $\beta(x;0)=-1$
+\end_inset 
+
+, a constant independent of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ This essentially follows from the nature of differentiation on the Bernoulli
+ polynomials, which we'll see below.
+ Note, however, that for 
+\begin_inset Formula $s$
+\end_inset 
+
+ near zero, the function 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ has severe ringing artifacts in 
+\begin_inset Formula $x$
+\end_inset 
+
+, suffering from a variation of Gibbs Phenomenon.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Ringing
+\end_inset 
+
 
 \layout Standard
 
-What 
+We conclude by noting that 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ for 
+\begin_inset Formula $x\in(0,1)$
+\end_inset 
+
+ bot not at the endpoints 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+.
+ This can be easily seen by writing the derivative 
+\begin_inset Formula \[
+\frac{d}{dx}\beta(x;s)=2\pi i\beta(x;s-1)\]
+
+\end_inset 
+
+ and so even if we start with 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+, each derivative carries us one step closer into the danger zone.
+ 
 \layout Subsection
 
 The Kernel
