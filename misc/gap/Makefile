@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= gappy
+EXES= gappy sway
 
 all: 	$(EXES)
 
@@ -24,3 +24,4 @@ realclean:	clean
 
 
 gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
+sway.o:  sway.C $(LIB)/Farey.o $(INC)/Farey.h

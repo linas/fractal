@@ -53,12 +53,17 @@ main (int argc, char *argv[])
 	{
 		int gcf, rn, rd;
 
-		gcf = gcf32 (n,d);
-		rn = n/gcf;
-		rd = d/gcf;
+		int nn = n;
+		int dd = d;
+		nn = rand();
+		dd = rand();
+		nn = nn%dd;
+		gcf = gcf32 (nn,dd);
+		rn = nn/gcf;
+		rd = dd/gcf;
 
-		t = ((double) n) / ((double) d);
-   	f.SetRatio (n,d);
+		t = ((double) nn) / ((double) dd);
+   	f.SetRatio (nn,dd);
 
 		for (iw=0; iw<NV; iw++)
 		{
@@ -84,10 +89,9 @@ main (int argc, char *argv[])
  * for w<=1
  */
 			}
-			else
-			{
-				// gap[iw] += 
-			}
+if (gap[0] > 1.0) {
+printf ("found one: p/q = %d/%d\n", rn, rd);
+}
 		}
 		printf ("%g	%g	%g	%g	%g	%g	%g\n", 
 			t, gap[0], gap[1], gap[2], gap[3], gap[4], gap[5]);

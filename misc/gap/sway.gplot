@@ -1,0 +1,24 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'sway.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Odd/Even values"
+set xlabel "x"
+set ylabel "Gaps"
+
+# set yrange [0:]
+
+plot "sway.dat" using 1:2 title "odd", \
+     "sway.dat" using 1:3 title "even"
+
+# pause 100
+
