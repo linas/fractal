@@ -1,0 +1,25 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'gkw.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Di"
+set xlabel "p/q"
+set ylabel "P"
+
+set yrange [0:1]
+
+plot "gkw.dat" using 2:3 title "?(psi(x))",\
+     "gkw.dat" using 2:4 title "sum ?()" ,\
+     "gkw.dat" using 2:5 title "?"
+
+# pause 100
+

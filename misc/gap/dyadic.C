@@ -14,11 +14,16 @@ class Dyadic
 	public:
 		Dyadic (void);
 
-		// assumes x = p/2^n 
+		// assumes x = p/2^n where n==order 
+		// if p isn't odd, then this removes the common factors,
+		// decrmenting the order as needed.
+		// this function computes the binary expansion of p 
+		// that is, gets the binary digits of p
 		void SetFrac (unsigned int p, unsigned int order);
 
 		// return alternating polynomial sum_n w^n (2b_n -1)
 		double ToAlternatingPoly (double w);
+		double ToCantorPoly (double w);
 	private:
 		unsigned int ndigits;
 		short bdigits[32];
@@ -91,13 +96,34 @@ Dyadic :: ToAlternatingPoly (double z)
 }
 
 
+double
+Dyadic :: ToCantorPoly (double z)
+{
+	int i;
+	double acc = 0.0;
+	double zn = 1.0;
+
+	for (i=0; i<ndigits; i++)
+	{
+		short alt = bdigits[i];
+		double term = alt;
+		term *= zn;
+		acc += term;
+
+		zn *= z;
+	}
+
+	return acc;
+}
+
+
 main (int argc, char * argv[])
 {
 	Dyadic dy;
-	int order = 9;
+	int order = 10;
 	int nmax = 1<<order;
 
-	double z = 0.8;
+	double z = 2.0/3.0;
 	int p;
 	for (p=1; p<nmax; p+=2)
 	{
@@ -105,7 +131,8 @@ main (int argc, char * argv[])
 		double x = ((double) p) / ((double) nmax);
 
 		dy.SetFrac (p, order);
-		double y = dy.ToAlternatingPoly (z);
+		// double y = dy.ToAlternatingPoly (z);
+		double y = dy.ToCantorPoly (z);
 
 		printf ("%d	%8.6g	%8.6g\n", p, x, y);
 	}
