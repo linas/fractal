@@ -45,25 +45,14 @@ struct Farey * CreateFarey ()
 
 /* ------------------------------------------------------------ */
 
-#ifdef ANSI_C
 void SetReal (struct Farey *self, double val) 
-#else
-void SetReal (self, val) 
-struct Farey *self;
-double val;
-#endif
 {
    RealToContinuedFraction (self, val);
 }
 
 /* ------------------------------------------------------------ */
 
-#ifdef ANSI_C
 double GetReal (struct Farey *self)
-#else
-double GetReal (self) 
-struct Farey *self;
-#endif
 {
    ContinuedFractionToReal (self);
    return (REAL);
@@ -71,25 +60,14 @@ struct Farey *self;
 
 /* ------------------------------------------------------------ */
 
-#ifdef ANSI_C
 double GetFarey (struct Farey *self)
-#else
-double GetFarey (self) 
-struct Farey *self;
-#endif
 {
    return ContinuedFractionToFarey (self);
 }
 
 /* ------------------------------------------------------------ */
 
-#ifdef ANSI_C
 void RatioToContinuedFraction (struct Farey *self, int numer, int deno)
-#else
-void RatioToContinuedFraction (self, numer, deno)
-struct Farey *self;
-int numer, deno;
-#endif
 {
    double tmp;
    int i;
@@ -151,13 +129,7 @@ int numer, deno;
 
 /* ------------------------------------------------------------ */
 
-#ifdef ANSI_C
 void RealToContinuedFraction (struct Farey *self, double val)
-#else
-void RealToContinuedFraction (self, val)
-struct Farey *self;
-double val;
-#endif
 {
    double tmp;
    unsigned int n, d, m;
@@ -276,13 +248,9 @@ struct Farey *self;
 }
 
 /* ------------------------------------------------------------ */
+/* converts continued fraction back to a real number */
 
-#ifdef ANSI_C
 double ContinuedFractionToReal (struct Farey *self)
-#else
-double ContinuedFractionToReal (self)
-struct Farey *self;
-#endif
 {
    int i;
    double tmp;
@@ -307,14 +275,7 @@ struct Farey *self;
 /* converts continued fraction into real number, with a numerator of z.
  */
 
-
-#ifdef ANSI_C
 double ContinuedFractionToZReal (struct Farey *self, double z)
-#else
-double ContinuedFractionToZReal (self, z)
-struct Farey *self;
-double z;
-#endif
 {
    int i;
    double tmp;
@@ -340,16 +301,40 @@ double z;
 }
 
 /* ------------------------------------------------------------ */
+/* converts continued fraction into real number, with a numerator of z.
+ * inverts the whatever.
+ */
+
+double ContinuedFractionToInvZReal (struct Farey *self, double z)
+{
+   int i;
+   double tmp;
+   double znum;
+
+   znum = (double) INTPART;
+   if (NTERMS == 0) return (znum);
+
+   /* now, work backwards and reconstruct the fraction. */
+   tmp = z * ((double) (TINUED_FRAC[NTERMS-1]));
+   for (i=NTERMS-2; i>=0; i--) {
+      tmp += 1.0 / ((double) (TINUED_FRAC[i]));
+      /* not normally needed, will this help mystery crash? */
+      if (tmp == 0.0) { tmp = 1.0e30; } else { tmp = z / tmp; }
+   }
+
+   /* get rid of last z, to normalize */
+   tmp /= z;
+
+   znum += tmp;
+   return (znum);
+
+}
+
+/* ------------------------------------------------------------ */
 /* I've defined an e-real to be the result of the continued fraction
  * where each term is damped by an exponential. Read the code. */
 
-#ifdef ANSI_C
 double ContinuedFractionToEReal (struct Farey *self, double t)
-#else
-double ContinuedFractionToEReal (self, t)
-struct Farey *self;
-double t;
-#endif
 {
    int i, n;
    double tmp;
@@ -942,14 +927,8 @@ printf (" its %i %i %f  %f %f \n", i, TINUED_FRAC[i], sum, tmp, retval);
  */
 
 
-#ifdef ANSI_C
 double CFSum (struct Farey *self, struct Farey *other,
               double alpha, double beta, double gamma)
-#else
-double CFSum (self, other, alpha, beta, gamma)
-struct Farey *self, *other;
-double alpha, beta, gamma;
-#endif
 {
    int i;
    double eval;
@@ -967,7 +946,7 @@ double alpha, beta, gamma;
    if (maxterms == 0) return (znum);
 
    /* let self point at the one with more terms */
-   /* this s NOT an object-oriented move. HACK_LAERT */
+   /* this is NOT an object-oriented move. HACK_ALERT */
    if (maxterms != NTERMS) {
       tmp = other;
       other = self;
@@ -1001,15 +980,8 @@ double alpha, beta, gamma;
 /* computes crazy product of continued fractions
  */
 
-
-#ifdef ANSI_C
 double CFProd (struct Farey *self, struct Farey *other,
               double alpha, double beta)
-#else
-double CFProd (self, other, alpha, beta)
-struct Farey *self, *other;
-double alpha, beta;
-#endif
 {
    int i;
    double eval;
@@ -1041,14 +1013,7 @@ double alpha, beta;
 /* computes inverses by binary subdivision.
  */
 
-#ifdef ANSI_C
 double Inverse (void *cxt, double (*func)(void *, double), double val)
-#else
-double Inverse (cxt, func, val)
-void *cxt;
-double (*func)(void *, double);
-double val;
-#endif
 {
    double mid, guess;
    int ires;
@@ -1081,7 +1046,8 @@ struct InvZReal_s {
    double zee;
 };
 
-double InvZReal_f (void * stru, double val) {
+double InvZReal_f (void * stru, double val) 
+{
    struct InvZReal_s *sp;
    double retval;
 
@@ -1093,7 +1059,8 @@ double InvZReal_f (void * stru, double val) {
    return retval;
 }
 
-double InvZReal (double val, double zzz) {
+double InvZReal (double val, double zzz) 
+{
    struct InvZReal_s s;
    double retval;
    int intpart;

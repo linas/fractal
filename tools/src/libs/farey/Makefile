@@ -1,8 +1,10 @@
 
 #
-# Linas Vepstas January 1994
+#
+# HISTORY:
+# created Linas Vepstas January 1994
 
-TOP = ../../..
+TOP=../../..
 
 BIN = $(TOP)/bin
 LIB = $(TOP)/lib
@@ -10,7 +12,9 @@ INC = $(TOP)/inc
 
 # CC = /bin/cc -O2 -O -I $(INC) -DAIXV3
 # CC = /bin/fcc -f2 -O -I $(INC)
-CC = /usr/bin/cc  -O2 -I $(INC) -DANSI_C
+CC = cc -O2 -I $(INC) -DANSI_C -DLINUX
+
+RM= rm -f
 
 all: inc Farey.o Prime.o
 
@@ -32,8 +36,16 @@ Prime.o:	Prime.c Prime.h
 	touch Prime.o
 
 clean:
-	rm -f *.o core tmp a.out junk
+	cd test; make clean
+	cd maps; make clean
+	cd prods; make clean
+	cd loops; make clean
+	$(RM) core a.out *.o tmp junk glop inc
 
-realclean:	clean
-
+realclean: clean
+	cd test; make realclean
+	cd maps; make realclean
+	cd prods; make realclean
+	cd loops; make realclean
+	$(RM) Prime inc
 
