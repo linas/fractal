@@ -2670,6 +2670,132 @@ unknowable
  unknowable.
  How strange.
  
+\layout Standard
+
+Here's how code-word substitution works: start with the binary-digit (base-2)
+ expansion for 
+\begin_inset Formula $0\leq x\leq1$
+\end_inset 
+
+
+\begin_inset Formula \[
+x=\sum_{n=1}^{\infty}\frac{a_{n}}{2^{n}}=0.a_{1}a_{2}a_{3}...\]
+
+\end_inset 
+
+ where the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ can only take on the values 0 and 1.
+ Then pick any two integers 
+\begin_inset Formula $h,l\in\mathbb{N}$
+\end_inset 
+
+ and a third integer 
+\begin_inset Formula $m$
+\end_inset 
+
+ such that 
+\begin_inset Formula $h,l<2^{m}$
+\end_inset 
+
+ is satisfied (alternately, we start by picking 
+\begin_inset Formula $m$
+\end_inset 
+
+ first, then picking 
+\begin_inset Formula $h,l$
+\end_inset 
+
+ to satisfy this).
+ We then substitute the value of 
+\begin_inset Formula $0$
+\end_inset 
+
+ in the binary expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+ with 
+\begin_inset Formula $l$
+\end_inset 
+
+ and the binary value of 
+\begin_inset Formula $1$
+\end_inset 
+
+ in the expansion with 
+\begin_inset Formula $h$
+\end_inset 
+
+, padding each appropriately:
+\begin_inset Formula \[
+B_{h,l,m}(x)=\sum_{n=1}^{\infty}\frac{ha_{n}+l(1-a_{n})}{2^{n}2^{nm}}\]
+
+\end_inset 
+
+ which we now see as a highly discontinuous function of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ To get a better idea of why its called 
+\begin_inset Quotes eld
+\end_inset 
+
+codeword substitution
+\begin_inset Quotes erd
+\end_inset 
+
+, lets work an example.
+ Let 
+\begin_inset Formula $x=0.10101010101..._{2}$
+\end_inset 
+
+ and pick 
+\begin_inset Formula $m=4$
+\end_inset 
+
+ and 
+\begin_inset Formula $h=7$
+\end_inset 
+
+ and 
+\begin_inset Formula $l=4$
+\end_inset 
+
+.
+ Note that, in binary, 
+\begin_inset Formula $h=0111_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $l=0100_{2}$
+\end_inset 
+
+ and so we have
+\begin_inset Formula \[
+B_{7,3;4}(0.1010101..._{2})=0.0111\;0100\;0111\;0100\;0111\;..._{2}\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Lets now work backwards and get the question mark: thus
+\begin_inset Formula \[
+?([2,1,1,1,...])=0.1010101..._{2}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+?([2,3,1,1,3,3,1,1,3,3,1,1,...])=B_{7,3;4}(0.1010101..._{2})\]
+
+\end_inset 
+
+ blah blah why are we doing this again?
 \layout Subsection
 
 Islands, Sinai's Tongues
@@ -2829,16 +2955,28 @@ Recall that we were able to construct other trees that are isomorphic to
 \begin_inset Formula $x^{3}-x$
 \end_inset 
 
-, are in general not globally monotonic, but they are always locally monotonic
- (i.e.
- are monotic between a small finite number of turning points, such as the
- cubic which has three montonic regions.).
- Thus, these ploynomial-based mappings are not really self-similar, although
- they are distorted versions of the Minkowski question mark.
+, are in general not globally monotonic, but they are always locally monotonic.
+ In other words, 
+\begin_inset Formula $?((2x-1)^{3}-x+1)$
+\end_inset 
+
+ is montonic between the same regions that 
+\begin_inset Formula $(2x-1)^{3}-x+1$
+\end_inset 
+
+ is, and thus it does not yeild a fundamentally new function.
+ Thus, these ploynomial-based mappings of rationals into rationals do not
+ generate another self-similar map, they are distorted versions of the Minkowski
+ question mark.
 \layout Standard
 
 Need to exhibit a mapping that is continuous and is also fractally non-monotonic
  (and is thus self-similar).
+\layout Standard
+
+We can do this with the eigenfunctions of the Frobenius-Perron operator
+ of the Bernoulli map.
+ These eigenfunctions are
 \layout Subsection
 
 Cantor Dusts
@@ -3206,4 +3344,8 @@ Here is a very similarly titled paper with a very different subject matter:
 
  by Robert M.
  Corless
+\layout Bibliography
+\bibitem {key-2}
+
+Dean Driebe Fully Chaotic Maps and Broken Time Symmetry Kluwer Academic
 \the_end
