@@ -16,6 +16,85 @@
 #include <time.h>
 
 /*-------------------------------------------------------------------*/
+/* This routine computes a convergent for the Mandelbrot set iterator.
+ */
+
+void mandelbrot_cutoff (
+   float  	*glob,
+   unsigned int sizex,
+   unsigned int sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax)
+{
+   unsigned int	i,j, globlen;
+   double	re_start, im_start, delta;
+   double	re_position, im_position;
+   double	re, im, tmp;
+   int		loop;
+   double 	modulus=0.0, frac;
+   double 	escape_radius = 1.0e30;
+   double 	ren, tl;
+   double	tau;
+   double	*regulator;
+   double	sum_re, sum_im, sum_mod;
+
+   /* first, compute the regulator, so that the itermax'th iteration makes 
+    * a negligable contribution (about 1e-30) */
+   tau = 8.0 / ((double) itermax);
+
+   /* set up smooth ramp */
+   regulator = (double *) malloc ((itermax+1)*sizeof (double));
+   for (i=0; i<itermax; i++) {
+      regulator[i] = exp (- ((double)(i*i))*tau*tau);
+   }
+
+   ren = log( log (escape_radius)) / log(2.0);
+   tl = 1.0 / log(2.0);
+   
+
+   delta = width / (double) sizex;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   
+
+   im_position = im_start;
+   for (i=0; i<sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) {
+         sum_re = sum_im = sum_mod = 0.0;
+         re = re_position;
+         im = im_position;
+         modulus = (re*re + im*im);
+         for (loop=1; loop <itermax; loop++) {
+            sum_re += re * regulator [loop];
+            sum_im += im * regulator [loop];
+            sum_mod += sqrt(modulus) * regulator [loop];
+
+            tmp = re*re - im*im + re_position;
+            im = 2.0*re*im + im_position;
+            re = tmp;
+            modulus = (re*re + im*im);
+            if (modulus > escape_radius*escape_radius) break;
+         }    
+
+         modulus = sqrt (modulus);
+         frac = log (log (modulus)) * tl;
+
+         glob [i*sizex +j] = sqrt (sum_re*sum_re + sum_im*sum_im);
+
+         re_position += delta;
+      }
+      im_position -= delta;  /*top to bottom, not bottom to top */
+   }
+}
+
+/*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using */
 /* the classic algorithm */
 
@@ -2068,6 +2147,10 @@ main (int argc, char *argv[])
 
    if (!strcmp(argv[0], "brat"))
    mandelbrot_out (data, data_width, data_height,
+                  re_center, im_center, width, itermax); 
+   
+   if (!strcmp(argv[0], "cutoff"))
+   mandelbrot_cutoff (data, data_width, data_height,
                   re_center, im_center, width, itermax); 
    
    if (!strcmp(argv[0], "inf"))
