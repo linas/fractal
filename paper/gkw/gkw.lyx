@@ -1290,7 +1290,56 @@ U_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \lambda_{n}\left\langle \tilde
 
 \end_inset 
 
+ We can make use of this diagonal form to easily compute formal expressions
+ involving 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+.
+ Thus, for a function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ that is expresessible as a polynomial series in 
+\begin_inset Formula $x$
+\end_inset 
+
+, we can write the operator 
+\begin_inset Formula \[
+f\left(U_{B}\right)=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle f\left(\lambda_{n}\right)\left\langle \tilde{B}_{n}\right|\]
+
+\end_inset 
+
+ whose matrix elements we can explicitly demonstrate in the monomial basis:
  
+\begin_inset Formula \[
+\left\langle j\left|f\left(U_{B}\right)\right|k\right\rangle =\sum_{j\leq n\leq k}\left(\begin{array}{c}
+n\\
+j\end{array}\right)\left(\begin{array}{c}
+k\\
+n-1\end{array}\right)\frac{B_{n-j}}{n}f\left(2^{-n}\right)\]
+
+\end_inset 
+
+ This allows us to write, for example, 
+\begin_inset Formula $U_{B}=\exp(-H_{B})$
+\end_inset 
+
+ so that 
+\begin_inset Formula $H_{B}=-\log U_{B}$
+\end_inset 
+
+ has matrix elements 
+\begin_inset Formula \[
+\left\langle j\left|H_{B}\right|k\right\rangle =\frac{\log(2)}{k+1}\left(\begin{array}{c}
+k+1\\
+j\end{array}\right)\sum_{m=0}^{k-j}\left(\begin{array}{c}
+k-j+1\\
+m\end{array}\right)(j+m)\, B_{m}\]
+
+\end_inset 
+
+
 \layout Subsection
 
 Orthogonality
@@ -1450,7 +1499,7 @@ B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n|B_{k}\right\rangle \l
 \end_inset 
 
 .
- What makes this this seem so strange is that both the monomial basis states
+ What makes this seem so strange is that both the monomial basis states
  
 \begin_inset Formula $\left|n\right\rangle $
 \end_inset 
@@ -1466,6 +1515,39 @@ B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n|B_{k}\right\rangle \l
  We see here that for infinite-dimensional spaces, that this is not the
  case.
  
+\layout Standard
+
+XXX I'm still troubled by this.
+ Its not completely clear that the space spaned by the monimial basis is
+ really identitcal to the space spaned by the Bernoulli polynomial basis.
+ Either set of basis functions seems to be in a certain sense 
+\begin_inset Quotes eld
+\end_inset 
+
+complete
+\begin_inset Quotes erd
+\end_inset 
+
+, but we haven't truly proven the following: Thm: Consider a larger space
+ of functions, for example, the space of square integrable functions.
+ Then consider 
+\begin_inset Formula $\mathbb{I}_{M}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ as projection operators on this space.
+ Then is the image of 
+\begin_inset Formula $\mathbb{I}_{M}$
+\end_inset 
+
+ equal to image of 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ when embedded in this larger space?
 \layout Subsection
 
 The Fourier Representation 
