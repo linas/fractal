@@ -1099,14 +1099,91 @@ s-1\end{array}\right)\left(\frac{-p}{n}\right)^{k}\zeta_{H}\left(s+k,\frac{m}{n}
  of course gives the general relationship on the Riemann zeta.
  For reference, its worth writing these out explicitly, in finite form:
  
-\begin_inset Formula \[
-=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+\begin_inset Formula \begin{equation}
+\zeta_{H}\left(s,1+\frac{p}{n}\right)-G_{m-1}\left(s,1+\frac{p}{n}\right)=\sum_{k=0}^{\infty}\left(\begin{array}{c}
 s+k-1\\
-s-1\end{array}\right)\left(\frac{-p}{n}\right)^{k}\left[\zeta\left(s+k\right)-H_{m}(s+k)\right]\]
+s-1\end{array}\right)\left(\frac{-p}{n}\right)^{k}\left[\zeta\left(s+k\right)-H_{m}(s+k)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+where the 
+\begin_inset Formula $G_{m}(s,x)$
+\end_inset 
+
+ are the analog of the harmonic functions, but for the Hurwitz zeta: 
+\begin_inset Formula \begin{equation}
+G_{m}(s,q)=\sum_{k=0}^{m}(k+q)^{-s}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Similarly, the finite form of the general relation is 
+\begin_inset Formula \begin{equation}
+\zeta_{H}\left(s,\frac{m+p}{n}\right)-G_{j}\left(s,\frac{m+p}{n}\right)=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-p}{n}\right)^{k}\left[\zeta_{H}\left(s+k,\frac{m}{n}\right)-G_{j}\left(s+k,\frac{m}{n}\right)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
  
+\layout Standard
+
+In a certain sense, this last formula is not entirly new: it generalizes
+ a known, 
+\begin_inset Quotes eld
+\end_inset 
+
+obvious
+\begin_inset Quotes erd
+\end_inset 
+
+ relationship for the polygamma function, specifically, the Taylor's series
+ for the polygamma.
+ Let 
+\begin_inset Formula $\psi^{(m)}(z)$
+\end_inset 
+
+ be the polygamma: 
+\begin_inset Formula \begin{equation}
+\psi^{(m)}(z)=\frac{d^{m+1}}{dz^{m+1}}\ln\Gamma(z)\label{eq:}\end{equation}
+
+\end_inset 
+
+ It is related to the Hurwitz zeta as 
+\begin_inset Formula \begin{equation}
+\psi^{(m)}(z)=(-)^{m+1}\Gamma(m+1)\zeta_{H}(m+1,z)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Then, taking 
+\begin_inset Formula $s$
+\end_inset 
+
+ to be an integer instead of being real-valued, we can write the Taylor's
+ series as 
+\begin_inset Formula \begin{eqnarray}
+\zeta_{H}\left(s,\frac{m+p}{n}\right) & = & \frac{(-)^{s}}{\Gamma(s)}\;\psi^{(s-1)}\left(\frac{m+p}{n}\right)\nonumber \\
+ & = & \frac{(-)^{s}}{\Gamma(s)}\;\sum_{k=0}^{\infty}\frac{1}{k!}\,\left(\frac{p}{n}\right)^{k}\left.\frac{d^{k}}{dx^{k}}\psi^{(s-1)}(x)\right|_{x=m/n}\nonumber \\
+ & = & \frac{(-)^{s}}{\Gamma(s)}\;\sum_{k=0}^{\infty}\frac{1}{k!}\,\left(\frac{p}{n}\right)^{k}\psi^{(s+k-1)}\left(\frac{m}{n}\right)\nonumber \\
+ & = & \sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-p}{n}\right)^{k}\zeta_{H}\left(s+k,\frac{m}{n}\right)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ So we see that the general relation on the Hurwitz zeta generalizes the
+ Taylor series on the polygamma to non-integer values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+Dirichlet Charaters
+\layout Standard
+
+Since Dirichlet L-series can be written as linear combinations of the Hurwitz
+ zeta, all of the previously given relationships hold for L-series.
 \layout Subsection
 
 Reflection Formula
