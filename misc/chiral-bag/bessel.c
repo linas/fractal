@@ -87,7 +87,7 @@ C       THE RESULTS ARE RETURNED IN THE ARRAY BESS (0:N)
 void 
 bessel (int n, double x, double *bess)
 {
-#define ARRSZ 650
+#define ARRSZ 3650
 	double tmp [ARRSZ];
 	int i, m, nstart, mon[ARRSZ];
 	double c, z, oneoz, scale;
