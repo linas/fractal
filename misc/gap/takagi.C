@@ -40,6 +40,13 @@ long double parabola_down (long double x)
 	return 4.0L*t*(1.0L-t);
 }
 
+long double parabola_up (long double x)
+{
+	long double t = x - floorl(x);
+	if (0.5 < t) t = 1.0-t;
+	return 4.0L*t*t;
+}
+
 double bumps (double x)
 {
 	x -= floor (x);
@@ -76,6 +83,7 @@ long double takagi (long double w, long double x)
 	{
 		// long double term = tw* triangle (tp*x);
 		long double term = tw* parabola_down (tp*x);
+		// long double term = tw* parabola_up (tp*x);
 		acc += term;
 		tp *= 2.0L;
 		tw *= w;
@@ -411,7 +419,7 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 2048;
-	int nmax = 23;
+	int nmax = 523;
 
 	if (argc <2)
 	{
@@ -523,9 +531,10 @@ main (int argc, char *argv[])
 		// grg^2
 		double tw = takagi (w, (0.5-0.125*x));
 		double ts = 1.0 + x*(w+2.0*w*w) - x*x*(w*w+0.25*w+0.0625) + w*w*w*takagi (w, x);
+
 #endif
-		double tw = takagi (w, (0.5-0.125*x));
-		double ts = 1.0 + x*(w+2.0*w*w) - x*x*(w*w+0.25*w+0.0625) + w*w*w*takagi (w, x);
+		double tw = takagi (w, x);
+		double ts = 1.0;
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 		fflush (stdout);
