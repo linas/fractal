@@ -210,8 +210,9 @@ class SinaiView
 
       double eye[3]; // position of eye
 
-      int nbounces;
-      double distance;
+      int niterations;
+      double max_distance;
+      int max_manhattan;
       double reflectivity;
       double density;
       double radius;
@@ -231,7 +232,11 @@ SinaiView::SinaiView (int px, int py)
 {
    int i, j;
 
-   nbounces = 10000;
+   niterations = 10000;
+   max_manhattan = 10000;
+   max_distance = 10000.0;
+   density = 0.0;
+   reflectivity = 1.0;
 
    nx = px;
    ny = py;
@@ -281,7 +286,7 @@ SinaiView::Trace(void)
    for (i=0; i<nx*ny; i++) 
    {
 
-      for (int n=0; n<nbounces; n++)
+      for (int n=0; n<niterations; n++)
       {
          double dist = 0.0;
 
@@ -338,7 +343,8 @@ SinaiView::Trace(void)
          }
 #endif
 
-         if (sr[i].distance > distance) break;
+         if (sr[i].distance > max_distance) break;
+         if (sr[i].bounces[next_wall] >= max_manhattan) break;
       }
 
    }
@@ -353,7 +359,7 @@ SinaiView::TraceToroid(void)
    for (i=0; i<nx*ny; i++) 
    {
 
-      for (int n=0; n<nbounces; n++)
+      for (int n=0; n<niterations; n++)
       {
          double dist = 0.0;
 
@@ -399,7 +405,8 @@ SinaiView::TraceToroid(void)
             default: break;
          }
             
-         if (sr[i].distance > distance) break;
+         if (sr[i].distance > max_distance) break;
+         if (sr[i].bounces[next_wall] >= max_manhattan) break;
       }
 
    }
@@ -518,29 +525,33 @@ main (int argc, char * argv[])
 
    v.radius = 0.6;
    v.reflectivity = 0.9975;
-   v.distance = 1280.0;
+   v.max_distance = 1280.0;
 
    v.reflectivity = 0.92;
-   v.distance = 40.0;
+   v.max_distance = 40.0;
 
    v.reflectivity = 0.995;
-   v.distance = 640.0;
+   v.max_distance = 640.0;
 
    if (3 > argc) {
-      printf ("Usage: %s <radius> <maxdist> <nbounces>\n", argv[0]);
+      printf ("Usage: %s <radius> <maxdist> [<niterations> [<max manhattan>]]\n", argv[0]);
       exit (1);
    }
 
    double radius = atof (argv[1]);
    double maxdist= atof (argv[2]);
 
-   int nbounce = 1000000;
-   if (4 == argc) nbounce = atoi (argv[3]);
+   int niter = 1000000;
+   if (4 == argc) niter = atoi (argv[3]);
+
+   int manhat = 1000000;
+   if (5 == argc) manhat = atoi (argv[4]);
 
    v.radius = radius;
-   v.distance = maxdist;
+   v.max_distance = maxdist;
    v.reflectivity = 1.0 - 0.01 * 320.0 / maxdist;  // ad hoc lighting
-   v.nbounces = nbounce;
+   v.niterations = niter;
+   v.max_manhattan = manhat;
 
    // v.Trace();
    v.TraceToroid();
