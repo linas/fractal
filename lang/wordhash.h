@@ -1,21 +1,35 @@
 //
-// wordhash.C
+// FILE:
+// wordhash.h
 //
-// The lagWordtable class associates a unique ID number with a string.
+// FUNCTION:
+// The lagWordTable class associates a unique ID number with a string.
+//
 // The GetWordID() method returns the ID number of the string.
 //
+// The GetWordFromID() method returns the string associated with the ID.
+//
+// The GetCount() method returns the number of times the indicated
+//    word occurs in the text
+//
+// The Hash() method returns a fairly evenly distributed short
+//    suitable for a hash index.
+//
+// HISTORY:
 // January 1997 Linas Vepstas
 
 #ifndef __LAG_WORD_TABLE_H__
 #define __LAG_WORD_TABLE_H__
 
-#define LAG_WORD_TABLE_SIZE 65536
+#include "config.h"
 
 class lagWordTable {
    public:
       lagWordTable (void);
       ~lagWordTable ();
       int GetWordID (char *);
+      char * GetWordFromID (int);
+      int GetCount (int);
       void Dump (void);
 
    protected:
@@ -29,7 +43,11 @@ class lagWordTable {
             int id;
             int cnt;
       };
-      Helper * table [LAG_WORD_TABLE_SIZE];
+      Helper * table [LAG_HASH_TABLE_SIZE];
+      Helper * idx [LAG_WORD_TABLE_SIZE];
+
+      Helper * topten [LAG_TOP_TEN];
+      int top_ten_count [LAG_TOP_TEN];
 
       int unused_id;
       int num_entries;
@@ -40,4 +58,6 @@ class lagWordTable {
 #endif // __LAG_WORD_TABLE_H__
 
 // ================= END OF FILE ==================
+
+
 
