@@ -74,12 +74,12 @@ main (int argc, char *argv[])
 		int q = nmax;
 		double x = ((double) p)/ ((double) q);
 		
-		// double e = e_zl_re (0.35,0.0, ell, x);
+		double e = e_zl_re (0.5,0.0, ell, x/6.0);
 
-		// f.SetReal (e);
-		// double y = f.ToFarey();
-		double y = e_zl_re (x,0.0, ell, 0.33);
-		double e = y;
+		f.SetReal (x);
+		double y = x-f.ToFarey();
+		// double y = e_zl_re (x,0.0, ell, 0.33);
+		// double e = y;
 		
 		printf("%5d	%8.6g	%8.6g	%8.6g\n", i,x,y,e);
 
