@@ -16,49 +16,8 @@
 #include <stdlib.h>
 
 #include "brat.h"
+#include "modular.h"
 
-/* Return euler-product form of the q-series (dedekind eta) */
-
-static void euler_prod_c (double re_q, double im_q, double *prep, double *pimp)
-{
-	int i;
-	*prep = 0.0;
-	*pimp = 0.0;
-
-	double rep = 1.0;
-	double imp = 0.0;
-
-	double qpr = re_q;
-	double qpi = im_q;
-
-	double qpmod = qpr*qpr+qpi*qpi;
-	if (1.0 <= qpmod) return;
-
-	for (i=0; i<100100; i++)
-	{
-		double tmp;
-
-		/* compute prod (1-q^k) rember to use 1-real and -imag .. */
-		tmp = (1.0-qpr)*rep + qpi*imp;
-		imp = (1.0-qpr)*imp - qpi*rep;
-		rep = tmp;
-
-		/* compute q^k */
-		tmp = qpr*re_q - qpi * im_q;
-		qpi = qpr*im_q + qpi * re_q;
-		qpr = tmp;
-
-		qpmod = qpr*qpr + qpi*qpi;
-		if (qpmod < 1.0e-30) break;
-	}
-	if (90100 < i)
-	{
-		printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
-	}
-
-	*prep = rep;
-	*pimp = imp;
-}
 
 static double euler_prod (double re_q, double im_q)
 {
@@ -67,62 +26,12 @@ static double euler_prod (double re_q, double im_q)
 	return sqrt (rep*rep+imp*imp);
 }
 
-/* The dedekind eta multiplies by an additonal factor of q^1/24 */
-static void dedekind_eta_c (double re_q, double im_q, double *pre, double *pim)
-{
-	double rep, imp;
-	euler_prod_c (re_q, im_q, &rep, &imp);
-
-	double phase = atan2 (im_q, re_q);
-	phase /= 24.0;
-	double mod = sqrt (re_q*re_q + im_q*im_q);
-	mod = pow (mod, 1.0/24.0);
-
-	double reqt = mod * cos (phase);
-	double imqt = mod * sin (phase);
-
-	double tmp = reqt*rep - imqt*imp;
-	imp = reqt*imp + imqt*rep;
-	rep = tmp;
-
-	*pre = rep;
-	*pim = imp;
-}
 
 static double dedekind_eta (double re_q, double im_q)
 {
 	double rep, imp;
 	dedekind_eta_c (re_q, im_q, &rep, &imp);
 	return sqrt (rep*rep+imp*imp);
-}
-
-/* modular discriminat = eta to 24 */
-static void discriminant_c (double re_q, double im_q, double *pre,double *pim)
-{
-	double rep, imp;
-	euler_prod_c (re_q, im_q, &rep, &imp);
-
-	/* take euler product to 24'th power */
-	double phase = atan2 (imp, rep);
-	phase *= 24.0;
-	double mod = sqrt (rep*rep + imp*imp);
-	mod = pow (mod, 24.0);
-
-	double red = mod * cos (phase);
-	double imd = mod * sin (phase);
-
-	/* multply by q one more time .. */
-	double tmp = red * re_q - imd * im_q;
-	imd = red * im_q + imd * re_q;
-	red = tmp;
-
-	/* multiply by 2pi to the 12'th */
-	mod = pow (2.0*M_PI, 12.0);
-	red *= mod;
-	imd *= mod;
-
-	*pre = red;
-	*pim = imd;
 }
 
 static double discriminant (double re_q, double im_q)

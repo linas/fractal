@@ -34,6 +34,7 @@ image.o: image.h util.h
 gap-tongue.o: image.h util.h
 man.o: image.h util.h
 util.o:	util.h
+modular.o:	modular.h
 
 brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
@@ -53,8 +54,8 @@ brat-gap-hair: brat.o brat-gap-hair.o util.o $(FAREY)
 brat-gapper: brat.o brat-gapper.o util.o $(FAREY) $(GCF)
 cutoff: brat.o cutoff.o util.o
 elliptic: brat.o elliptic.o util.o
-erdos: brat.o erdos.o util.o
-euler-q: brat.o euler-q.o util.o
+erdos: brat.o erdos.o modular.o util.o
+euler-q: brat.o euler-q.o modular.o util.o
 
 mobius: brat.o mobius.o util.o $(GCF)
 	$(CC) -o $@ $^ ../tools/lib/moebius.o ../tools/lib/totient.o -lm -lstdc++
