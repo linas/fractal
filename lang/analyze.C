@@ -25,7 +25,8 @@ class lagTextAnalysis {
       void Construct (int);
    private:
       lagWordTable *wt;
-      lagWordQuadTable *pt;
+      // lagWordQuadTable *pt;
+      lagConcordQuadTable *pt;
       int was_used [LAG_USED_SIZE];
 };
 
@@ -34,7 +35,8 @@ class lagTextAnalysis {
 lagTextAnalysis :: lagTextAnalysis (void) {
    wt = new lagWordTable;
    // pt = new lagWordTripleTable;
-   pt = new lagWordQuadTable;
+   // pt = new lagWordQuadTable;
+   pt = new lagConcordQuadTable;
 
    int i=0;
    for (i=0; i<LAG_USED_SIZE; i++) {
@@ -88,6 +90,7 @@ void lagTextAnalysis :: Analyze (FILE *fh) {
 // =====================================================
 
 void lagTextAnalysis :: Dump (void) {
+   wt -> Dump();
    pt -> Dump();
 
    int i = 0;
@@ -151,7 +154,7 @@ void lagTextAnalysis :: Construct (int top) {
          j = 0;
          printf ("\n");
       }
-      pair = pt -> GetTopPairContainingWord (fo);
+      pair = pt -> GetTopTupleContainingWord (fo);
    }
 }
 
