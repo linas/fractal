@@ -2933,53 +2933,6 @@ whack (
    free (count);
 }
 
-
-
-/*-------------------------------------------------------------------*/
-/* The beigen does the Bernoulli-map eigenfunctions,
- * as per Dean Driebe
- */
-
-#if 0
-
-void 
-beigen (
-   float  	*glob,
-   int 		sizex,
-   int 		sizey,
-   double	re_center,
-   double	im_center,
-   double	width,
-   int		itermax,
-   double 	renorm)
-{
-   int		i,j;
-
-   int globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) {
-      glob [i] = 0.0;
-   }
-
-	for (n=1; n<d; n++)
-	{
-
-			i = (int) (gap * (double) sizex);
-			if (0>i) continue;
-			if (i>=sizex) continue;
-
-			glob [j*sizex +i] ++;
-		}
-	}
-
-   /* renormalize */
-	double r = ((double) sizex) / ((double) itermax);
-   for (i=0; i<sizex*sizey; i++) 
-	{
-		glob [i] *= r;
-   }
-}
-#endif
-
 /*-------------------------------------------------------------------*/
 /* This routine fills in the exterior of the mandelbrot set using 
  * an algorithm which is, well, a bit differnet. 

@@ -2,13 +2,11 @@
  * brat-gap-hair.C
  *
  * FUNCTION:
- * Explore Hausdorf measure of mandelbrot set.
- * And other stuff.
+ * The gap-tongue tries to draw the basic gaps
+ * of the continued fraction. Te resulting plots look like wavey hair
+ * or wavey seaweed. 
  *
  * HISTORY:
- * quick hack -- Linas Vepstas October 1989
- * modernize -- Linas Vepstas March 1996
- * more stuff -- January 2000
  * more stuff -- October 2004
  */
 
@@ -17,18 +15,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #include "brat.h"
 #include "Farey.h"
 #include "FareyTree.h"
-
-
-/*-------------------------------------------------------------------*/
-/* The gap-tongue tries to draw the basic gaps
- * of the continued fraction. Te resulting plots look like wavey hair
- * or wavey seaweed. 
- */
 
 
 void 

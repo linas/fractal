@@ -11,7 +11,7 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         abs clamp takelog reclamp dump renorm \
         draw dx image movie paste stats sum \
         angle curl diff div card mandel morph \
-        moire tong automatic wind winds ray \
+        moire automatic wind winds ray \
         manvert inf decide cutoff
 
 all:    ray automatic radius brat draw dx image
@@ -34,11 +34,15 @@ gap-tongue.o: image.h util.h
 man.o: image.h util.h
 util.o:	util.h
 
-brat-gapper.o: brat-gapper.C
+brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
+brat-gapper.o: brat-gapper.C
 
 ################## Dependencies and compile/link #########
 #
+brat-beigen: brat.o brat-beigen.o util.o
+	$(CC) -o $@ $^ -lm -lstdc++
+
 brat-gap-hair: brat.o brat-gap-hair.o util.o
 	$(CC) -o $@ $^ ../tools/lib/Farey.o ../tools/lib/FareyTree.o -lm -lstdc++
 
@@ -70,7 +74,6 @@ inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age
 	ln -f brat wind
 	ln -f brat winds
 	ln -f brat morph
-	ln -f brat tong
 
 card: card.c  util.o
 	$(CC) -o card card.c util.o -lm
