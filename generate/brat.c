@@ -26,10 +26,11 @@ void mandelbrot_out (
    double	re_center,
    double	im_center,
    double	width,
+   double	height,
    int		itermax)
 {
    unsigned int	i,j, globlen;
-   double		re_start, im_start, delta;
+   double		re_start, im_start, deltax, deltay;
    double		re_position, im_position;
    double		re_c, im_c;
    double		re, im, tmp;
@@ -42,9 +43,10 @@ void mandelbrot_out (
    tl = 1.0/ log(2.0);
    
 
-   delta = width / (double) sizex;
+   deltax = width / (double) sizex;
+   deltay = height / (double) sizey;
    re_start = re_center - width / 2.0;
-   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   im_start = im_center + height / 2.0;
    
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = 0.0;
@@ -113,9 +115,9 @@ if (0.25*width*width > ((re_position-re_center)* (re_position-re_center) +
 } 
 */
 
-         re_position += delta;
+         re_position += deltax;
       }
-      im_position -= delta;  /*top to bottom, not bottom to top */
+      im_position -= deltay;  /*top to bottom, not bottom to top */
    }
 }
 
@@ -2373,7 +2375,7 @@ main (int argc, char *argv[])
 {
    float	*data;		/* my data array */
    unsigned int	data_width, data_height;/* data array dimensions */
-   double	re_center, im_center, width;
+   double	re_center, im_center, width, height;
    int		itermax;
    double	renorm, tmp;
    FILE		*fp;
@@ -2381,7 +2383,7 @@ main (int argc, char *argv[])
    char buff [80];
    
    if (5 > argc) {
-      fprintf (stderr, "Usage: %s <filename> <width> <height> <niter> [<centerx> <centery> <size>]\n", argv[0]);
+      fprintf (stderr, "Usage: %s <filename> <width> <height> <niter> [<centerx> <centery> <width> [<height>]]\n", argv[0]);
       exit (1);
    }
 
@@ -2399,18 +2401,28 @@ main (int argc, char *argv[])
    im_center = 0.0;
    width = 2.8;
 
-   if (8 == argc) {
+   if (argc >= 8) {
       re_center = atof (argv[5]);
       im_center = atof (argv[6]);
       width = atof (argv[7]);
    }
+
+   if (argc == 9) {
+      height = atof (argv[8]);
+   } else {
+      height = width * ((double) data_height) / ((double) data_width);
+   }
+
+   printf ("file=%s (%d %d) iter=%d (%f %f) w=%f h=%f\n", 
+        argv[1], data_width, data_height, itermax, 
+        re_center, im_center, width, height); 
 
    /* Do the interior now */
    renorm = 1.0;
 
    if (!strcmp(argv[0], "brat"))
    mandelbrot_out (data, data_width, data_height,
-                  re_center, im_center, width, itermax); 
+                  re_center, im_center, width, height, itermax); 
    
    if (!strcmp(argv[0], "cutoff"))
    mandelbrot_cutoff (data, data_width, data_height,
