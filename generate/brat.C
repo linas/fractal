@@ -458,7 +458,7 @@ void mandelbrot_windsimple (
    double escape_radius = 1131.1;
    double ren, otl;
    double phi=0.0, phi_last, phi_c, h_phi_c;
-   int wind =0;
+   long long wind =0;
 
    ren = log( log (escape_radius)) / log(2.0);
    otl = 1.0/ log(2.0);
