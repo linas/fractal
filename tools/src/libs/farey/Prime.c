@@ -75,12 +75,7 @@ struct Prime * CreatePrime ()
 
 /* ====================================================== */
 
-#ifdef ANSI_C
 void PrintPrime (struct Prime *self)
-#else
-void PrintPrime (self)
-struct Prime *self;
-#endif
 {
    int i;
 
@@ -92,13 +87,7 @@ struct Prime *self;
 
 /* ====================================================== */
 
-#ifdef ANSI_C
 int GetPrime (struct Prime *self, int i)
-#else
-int GetPrime (self, i)
-struct Prime *self;
-int i;
-#endif
 {
    if (i < NPRIMES) {
       return (PRIME[i]);
@@ -110,13 +99,7 @@ int i;
 /* ====================================================== */
 /* Implements erasthmos seive test for primeness */
 
-#ifdef ANSI_C
 int IsPrime (struct Prime *self, int num) 
-#else
-int IsPrime (self, num) 
-struct Prime *self;
-int num;
-#endif
 {
    double tmp;
    int max;
