@@ -127,10 +127,6 @@ PathIntegral::Init (void)
 {
    int i;
 
-   shooter[0] = 0.0;
-   shooter[1] = 0.0;
-   shooter[2] = -1.0;
-
    for (i=0; i<nx*ny; i++)
    {
       side_amplitude[i] = 0.0;
@@ -160,6 +156,14 @@ PathIntegral::TraceToroid(void)
    int ox = (int) (oversample * ((double) nx));
    int oy = (int) (oversample * ((double) ny));
 
+   double co = cos (phi);
+   double si = sin (phi);
+
+   // rotate by phi radians around y axis
+   double tmp =  co*shooter[0] + si*shooter[2];
+   shooter[2] = -si*shooter[0] + co*shooter[2];
+   shooter[0] = tmp;
+
    // project rays from source
    for (i=0; i<ox; i++) 
    {
@@ -176,7 +180,13 @@ PathIntegral::TraceToroid(void)
          double pixel[3];
          pixel[0] = 2.0 * (((double) i) + 0.51333)/ ((double) ox) - 1.0;
          pixel[1] = 2.0 * (((double) j) + 0.51666)/ ((double) oy) - 1.0;
-         pixel[2] = 3.0;
+         pixel[2] = 13.0;
+
+         // rotate by phi radians around y axis
+         tmp      =  co*pixel[0] + si*pixel[2];
+         pixel[2] = -si*pixel[0] + co*pixel[2];
+         pixel[0] = tmp;
+
          sr.Init();
          sr.Set (pixel, shooter);
          sr.last_wall = 4;
@@ -243,13 +253,27 @@ PathIntegral::TraceToroid(void)
                 printf ("duude out of bounds !! %d %d \n", px, py);
              }
 
-#if DOPHASE
+#if DO_PHASE
              // next perform phase summation
              double phase = omega * sr.distance;
              side_amplitude [nx*py+px] += myexp (phase);
              side_count [nx*py+px] ++;
 #endif
+
+             // make sure we have enough room to store the ray results
              int n = side_count [nx*py+px];
+             int bits = 1;
+             while (n >>= 1) bits++;
+             if (3<bits)
+             {
+                size_t sz = 1<< bits;
+                side_raylens[nx*py+px] = 
+                     (double *) realloc (side_raylens[nx*py+px],
+                          sz*sizeof (double));
+             }
+
+             // store the ray length
+             n = side_count [nx*py+px];
              side_raylens[nx*py+px][n] = sr.distance;
              side_count [nx*py+px] ++;
           
@@ -377,12 +401,18 @@ main (int argc, char * argv[])
    // v.Trace();
    v.TraceToroid();
 
-   for (int i=0; i<2; i++)
+   int nframes = 240;
+   double delta_k = pow (10.0, 6.0 / ((double) nframes));
+   double k = 0.001;
+   for (int i=0; i<nframes; i++)
    {
-      v.SumRays (2.0);
+      char buff [200];
+      v.SumRays (k);
       v.AccumIntensity ();
       v.ToPixels ();
-      v.WriteMTV (outfile);
+      sprintf (buff, "%s-%d.mtv", outfile, i);
+      v.WriteMTV (buff);
+      k *= delta_k;
    }
 }
 
