@@ -14,15 +14,15 @@
 double triangle (double x)
 {
 	double t = x - floor(x);
-	if (0.5 > t) return t;
-	return 1.0-t;
+	if (0.5 > t) return 2.0*t;
+	return 2.0*(1.0-t);
 }
 
 double takagi (double w, double x)
 {
 	int k;
 	double acc = 0.0;
-	double tw = w;
+	double tw = 1.0;
 	double tp = 1.0;
 	for (k=0; k<1000; k++)
 	{
@@ -35,11 +35,66 @@ double takagi (double w, double x)
 	return acc;
 }
 
+double sin_takagi (double w, double x)
+{
+	int k;
+	double acc = 0.0;
+	double tw = 1.0;
+	double tp = 1.0;
+	for (k=0; k<1000; k++)
+	{
+		acc += tw* (1.0 - cos(tp*x*(2.0*M_PI)))*0.5;
+		tp *= 2.0;
+		tw *= w;
+		if (1.0e-14 > tw) break;
+	}
+
+	return acc;
+}
+
+double dtakagi (double w, double x)
+{
+	int k;
+	double acc = 0.0;
+	double tw = 1.0;
+	double tp = 4.0;
+	for (k=2; k<1000; k++)
+	{
+		double term = k* (k-1)*tw;
+		acc += term* triangle (tp*x);
+		tp *= 2.0;
+		tw *= w;
+		if (1.0e-14 > term) break;
+	}
+
+	return acc;
+}
+
+double ttakagi (double s, double x)
+{
+	int k;
+	double exps = exp(-s);
+	double w = exps;
+printf ("# duude w=%g\n", w);
+	double acc = 0.0;
+	double tw = 1.0;
+	double tp = 2.0;
+	for (k=1; k<1000; k++)
+	{
+		acc += k* tw* triangle (tp*x);
+		tp *= 2.0;
+		tw *= w;
+		if (1.0e-14 > tw) break;
+	}
+
+	return acc*exps;
+}
+
 main (int argc, char *argv[])
 {
 	int i;
 
-	int nmax = 531;
+	int nmax = 931;
 
 	if (argc <2)
 	{
@@ -52,7 +107,11 @@ main (int argc, char *argv[])
 	{
 		double x = i/((double)nmax);
 		double tw = takagi (w, x);
+		double ts = sin_takagi (w, x);
+		// double tw = dtakagi (w, x);
+		// double tw = log (takagi(w,x));
+		// double tw = ttakagi(w,x);
 
-		printf ("%d	%8.6g	%8.6g\n", i, x, tw);
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts);
 	}
 }
