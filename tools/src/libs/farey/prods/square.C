@@ -19,7 +19,6 @@ main (int argc, char *argv[])
 {
    ContinuedFraction f;
    double x, y, z, omega;
-   double delta_omega;
    int i, j, n;
    int nume, deno;
    FILE *fil;
@@ -68,6 +67,13 @@ main (int argc, char *argv[])
 
          f.SetReal (im);
          im = f.ToFarey ();
+
+         x = re*re - im*im;
+         y = 2 * re * im;
+
+         re = InvZReal (x, 1.0);
+         im = InvZReal (y, 1.0);
+      
 
          pixel_map [i*sizex +j] = sqrt (re*re + im*im);
          re_position += delta;
