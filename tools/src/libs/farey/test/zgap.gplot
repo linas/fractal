@@ -1,0 +1,18 @@
+
+# plot the convergence properties
+# set term x11
+# set term pbm
+set term gif size 400,300
+set out 'zgap.gif'
+set data style linespoints 
+set title "z gap"
+set key left
+# set xrange [] reverse
+set xlabel "x"
+set ylabel "log (gap)"
+# set format y2 "%d"
+plot "zgap.dat" using ($1):(log($2)) 			\
+     title "gaps"				\
+
+# plot "convergence.dat" using (log($1)):(log($1) * log($1))
+# pause 1000
