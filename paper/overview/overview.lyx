@@ -1240,6 +1240,15 @@ explanation
 
  for why Farey Numbers occur in period-doubling maps.
  
+\layout Standard
+
+
+\begin_inset Graphics
+	filename fgraph.png
+
+\end_inset 
+
+
 \layout Subsection
 
 Definition of the Question Mark Function
@@ -1501,17 +1510,139 @@ but its highly discontinuous.
 \end_inset 
 
 -fold symmetry.
+\layout Subsection
+
+Symmetries of the Question Mark
 \layout Standard
 
+It should be immediately appearent from the picture of the Question Mark
+ that it is highly self-similar, and thus should have a group of symmetries.
+ Below, we will give an explicit representation to this group, and show
+ that the group elements are enumerated by 
+\begin_inset Formula $\mathbb{Q}\times\mathbb{Z}$
+\end_inset 
+
+.
+ A later section will equate this symmetry group to that of the Mandelbrot
+ Set.
 \layout Standard
 
-The symmetries of the thing are blah blah, which hold for blah blah.
- It can be seen that every ratuional maps the Minkowski question mark back
- into itself; thus the set of rationals is the symmetry group of the damned
- thing.
- Because of these symmetries, its clear that the Minkowski question mark
- is powerfully fractal.
+We start by noticing that for any real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ having the continued fraction expansion 
+\begin_inset Formula $x=[a_{1},a_{2},...]$
+\end_inset 
+
+, that 
+\begin_inset Formula $g(x)=x/(1+x)=[a_{1}+1,a_{2},...]$
+\end_inset 
+
+ .
+ By the definition of 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ one sees immediately that 
+\begin_inset Formula $(?\circ g)(x)=?(g(x))=?(x)/2$
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $g$
+\end_inset 
+
+ represents one of the generators of the symmetry group.
+ Denoting repeated iterations of 
+\begin_inset Formula $g$
+\end_inset 
+
+ by 
+\begin_inset Formula $g^{n}$
+\end_inset 
+
+ we have 
+\begin_inset Formula $g^{n}(x)=x/(1+nx)$
+\end_inset 
+
+, so that 
+\begin_inset Formula $?(x/(1+nx))=?(x)/2^{n}$
+\end_inset 
+
+.
+ The generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ maps intervals to intervals, specifically 
+\begin_inset Formula $g^{n}:[[0,1]]\rightarrow[[0,\frac{1}{n+1}]]$
+\end_inset 
+
+ where we use the non-standard notation 
+\begin_inset Formula $[[]]$
+\end_inset 
+
+ to denote an interval, to avoid confusion with 
+\begin_inset Formula $[]$
+\end_inset 
+
+ for continued fraction expansions.
+ On the binary side, we have 
+\begin_inset Formula $(?g^{n}):[[0,1]]\rightarrow[[0,1/2^{n}]]$
+\end_inset 
+
+.
  
+\layout Standard
+
+One gets the general symmetry group by combining with the reflection operator
+ embodied in the left-right symmetry: 
+\begin_inset Formula $?(1-x)=1-?(x)$
+\end_inset 
+
+ which we denote with 
+\begin_inset Formula $r(x)=1-x$
+\end_inset 
+
+.
+ Note that 
+\begin_inset Formula $r$
+\end_inset 
+
+ commutes with 
+\begin_inset Formula $?$
+\end_inset 
+
+ as we have 
+\begin_inset Formula $(?\circ r)(x)=(r\circ?)(x)$
+\end_inset 
+
+.
+ Thus, for example, 
+\begin_inset Formula \[
+(?rg^{n})(x)=(r?g^{n})(x)=r\left(\frac{1}{2^{n}}?\right)(x)=1-?(x)/2^{n}=?\left(r\left(\frac{x}{1+nx}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)\]
+
+\end_inset 
+
+ shows that 
+\begin_inset Formula $rg^{n}$
+\end_inset 
+
+ is the group element that, under 
+\begin_inset Formula $?$
+\end_inset 
+
+, maps 
+\begin_inset Formula $[[0,1]]\rightarrow[[1,1-1/2^{n}]]$
+\end_inset 
+
+.
+ We can now write a general group element as 
+\begin_inset Formula $g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+.
 \layout Subsection
 
 Distribution of Rationals in the Farey Tree
@@ -1606,6 +1737,14 @@ See the pictures of phase-locking in the Circle map at the URL
 \end_inset 
 
  Yada Yada.
+\layout Section
+
+Conclusions
+\layout Standard
+
+Make sure to include some tantalizing closing remarks between all this and
+ the Riemann Hypothesis, which seems to be just, well, we're working on
+ it ...
  
 \layout Section
 
