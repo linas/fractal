@@ -92,7 +92,21 @@ void measure_radius (
             re_last = re;
             im_last = im;
 
-            for (n=0; n<nrecur; n++) {
+            /* iterate once, use this to detect spill back into main cardiod */
+            tmp = re*re - im*im + re_c;
+            im = 2.0*re*im + im_c;
+            re = tmp;
+
+            /* not the convergent we want; escape from loop */
+            dist = (re-re_last)*(re-re_last) + (im-im_last)*(im-im_last);
+            if (dist < esq) {
+               radius_outer = rad; /* radius must be smaller than this */
+               j+= sizer; /* break middle loop */
+               break;
+            }
+
+            /* iterate remaining number of times */
+            for (n=1; n<nrecur; n++) {
                tmp = re*re - im*im + re_c;
                im = 2.0*re*im + im_c;
                re = tmp;
