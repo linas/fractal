@@ -101,14 +101,14 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
          /* Check for termination of the expansion, and 
           * make sure that the continued fraction always has 
           * an even number of terms.  Huh?? Why do we do this?? 
-          * We do this in order to have a nice to-farey algorithm 
-          * working.
-          * */
+          */
          if (n == 0) {
+#if 0
             if (i%2 == 0) {
                tinued_frac [i] -= 1;
                tinued_frac [i+1] = 1;
             }
+#endif
             break;
          }
       }
@@ -316,7 +316,7 @@ ContinuedFraction::ToXPlus (double w)
    real = tmp;
    if (nterms == 0) return (tmp);
 
-	tmp = 1.0 / w;
+	tmp = w;
 
    /* Now, work backwards and reconstruct the fraction. */
    for (i=nterms-1; i>=0; i--) {
@@ -343,8 +343,7 @@ ContinuedFraction::ToXMinus (double w)
    real = tmp;
    if (nterms == 0) return (tmp);
 
-	tmp = 1.0 / w;
-	tmp += 1.0;
+	tmp = 1.0 + w;
 	tmp = 1.0 / tmp;
 	tmp += (double) (tinued_frac[nterms-1] -1);
    tmp = 1.0 / tmp;
@@ -357,6 +356,36 @@ ContinuedFraction::ToXMinus (double w)
 
    real += tmp;
    return (real);
+}
+
+/* ------------------------------------------------------------ */
+
+double 
+ContinuedFraction::ToXEven (double w)
+{
+	if (nterms%2)
+	{
+		return ToXMinus(w);
+	}
+	else
+	{
+		return ToXPlus(w);
+	}
+}
+
+/* ------------------------------------------------------------ */
+
+double 
+ContinuedFraction::ToXOdd (double w)
+{
+	if (nterms%2)
+	{
+		return ToXPlus(w);
+	}
+	else
+	{
+		return ToXMinus(w);
+	}
 }
 
 /* ------------------------------------------------------------ */

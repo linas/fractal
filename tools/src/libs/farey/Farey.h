@@ -29,6 +29,8 @@ class ContinuedFraction
       double ToReal (void);
       double ToXPlus (double w);
       double ToXMinus (double w);
+      double ToXEven (double w);
+      double ToXOdd (double w);
 
       double ToZReal (double z);
       double ToInvZReal (double z);
