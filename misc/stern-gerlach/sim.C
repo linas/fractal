@@ -19,6 +19,8 @@ main ()
    double sin_theta, cos_theta;
    double sin_phi, cos_phi;
    int nprec = 0;        // number of precessions
+   int last_i = 0;
+   double acc_theta = 0.0;
 
    double gb0 = 1.0e10;  // gyromagnetic * magnetic field 
    double gb1 = 1.0e9;   // gyromagnetic * magnetic field gradient
@@ -27,7 +29,7 @@ main ()
 
    double delta_t = 1.0e-13;  // time step
 
-   int imax = 1000111;  // max iterations
+   int imax = 123000111;  // max iterations
 
    theta = 0.6;
    nprec = 0;
@@ -45,7 +47,7 @@ main ()
    printf ("# initial theta = %g\n", theta);
    printf ("# delta_t = %g\n", delta_t);
    printf ("# \n");
-   printf ("# nprec	i	theta	x	z\n");
+   printf ("# nprec	i	delta_i	theta	x	z\n");
 
    for (int i=0; i<imax; i++)
    {
@@ -63,6 +65,7 @@ main ()
      d_phi *= delta_t;
 
      theta += d_theta;
+     acc_theta += d_theta;
      phi += d_phi;
 
      if (2.0*M_PI < phi)
@@ -71,8 +74,9 @@ main ()
         sin_phi = sin(phi);
         cos_phi = cos(phi);
         nprec ++;
-        printf ("%d	%d	%g	%g	%g\n",
-           nprec, i, theta, pos_x, pos_z);
+        printf ("%d	%d	%d	%g	%g	%g	%g\n",
+           nprec, i, i-last_i, theta, acc_theta, pos_x, pos_z);
+        last_i = i;
      }
      else
      if (-2.0*M_PI > phi)
@@ -81,8 +85,9 @@ main ()
         sin_phi = sin(phi);
         cos_phi = cos(phi);
         nprec --;
-        printf ("%d	%d	%g	%g	%g\n",
-           nprec, i, theta, pos_x, pos_z);
+        printf ("%d	%d	%d	%g	%g	%g	%g\n",
+           nprec, i, i-last_i, theta, acc_theta, pos_x, pos_z);
+        last_i = i;
      }
      else 
      {
