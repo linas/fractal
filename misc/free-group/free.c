@@ -8,6 +8,7 @@
  */
 
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <complex.h>
 
@@ -24,7 +25,7 @@ main (int argc, char * argv[])
 		exit (1);
 	} 
 
-	long double theta = acosl (1.0L,3.0L);
+	long double theta = acosl (1.0L/3.0L);
 
 	int imax = 500;
 	long double rn = 1.0L;
