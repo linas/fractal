@@ -3160,6 +3160,220 @@ e_{w}(x)=\sum_{k=0}^{\infty}\frac{w^{k}\tau^{k}(x)}{k!}\]
  the Bernoulli Operator.
 \layout Subsection
 
+The Frobenius-Perron Operator
+\layout Standard
+
+This section provides a basic review of the Frobenius-Perron operator and
+ its use in the description of fractals and chaotic iterated maps.
+ It is presented only to provide the background for later sections.
+ 
+\layout Standard
+
+The Frobenius-Perron operator of a function provides a tool for studying
+ the dynamics of the iteration of that function.
+ If one only studies how a point value jumps around during iteration, one
+ gets a very good sense of the point dynamics but no sense of how iteration
+ acts on non-point sets.
+ If the iterated function is applied on a continuous, possibly even smooth
+ density, then one wants to know how that smooth density evolves over repeated
+ iteration.
+ 
+\layout Standard
+
+If we consider a smooth density 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ as a set of values on a collection of points, we can take each point and
+ iterate it to find its new location, and then assign the old value to the
+ new location.
+ Of course, after iteration, several points may end up at the same location,
+ at which point we need to add thier values together.
+ Lets write the new density as 
+\begin_inset Formula $\rho_{1}(x)$
+\end_inset 
+
+, with the subscript 1 denoting we've iterated once.
+ We can express this idea of iterating the underlying points, and then assigning
+ thier old values to new locations as 
+\begin_inset Formula \[
+\rho_{1}(x)=\int dy\;\delta\left(x-g(y)\right)\;\rho(y)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+ is the iterated function.
+ To get 
+\begin_inset Formula $\rho_{n}(x)$
+\end_inset 
+
+, one simply repeats the proceedure 
+\begin_inset Formula $n$
+\end_inset 
+
+ times.
+ In more abstract notation, one writes 
+\begin_inset Formula \[
+\left[U_{g}\rho\right](x)=\rho_{1}(x)\]
+
+\end_inset 
+
+ to denote this time evolution.
+ The notation here emphasizes that 
+\begin_inset Formula $U_{g}:\; f\mapsto U_{g}f$
+\end_inset 
+
+ is an operator that maps functions to functions: written formally, we have
+ 
+\begin_inset Formula $U_{g}:\mathcal{F\mathcal{\rightarrow F}}$
+\end_inset 
+
+ where 
+\begin_inset Formula $\mathcal{F}=\left\{ f\;|\; f:\mathbb{\mathbb{R\rightarrow}R}\right\} $
+\end_inset 
+
+ is the set of all functions.
+ In analyzing 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+, we will often be interested in how it acts on the subset of square-integrable
+ functions, or possibly just 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ functions or polynomials or the like.
+ Repeated iteration just gives the time-evolution of the the density; that
+ is, 
+\begin_inset Formula \[
+U_{g}^{n}\rho\equiv\begin{array}{c}
+\underbrace{U_{g}\circ U_{g}\circ...\circ U_{g}}\\
+n\textrm{ times}\end{array}\;\circ\rho=\rho_{n}\]
+
+\end_inset 
+
+ where iteration is just ordinary operator multiplication.
+ 
+\layout Standard
+
+To understand 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+, one typically tries to understand its spectrum, that is, its eigenvalues
+ and eigenfunctions.
+ In most cases, one finds that 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ is contractive in that it has one eigenvalue equal to one and all the other
+ eigenvalues are real and smaller than one.
+ However, one must be terribly careful here, as there are land-mines strewn
+ about: the actual spectrum, and the nature of the eigenvalues, depends
+ very much on the function space choosen.
+ Typically, when acting on polynomials, one gets discrete, real eigenvalues
+ for 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+.
+ When acting on square-integrable functions, one seems to usually get continuous
+ set of complex-valued eigenvalues.
+ It is often considered to be a mistake to try to analyse 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ on a finite grid of discrete points, such as one might try on a computer:
+ it is all to easy to turn this into an excercise of analysing the permutation
+ group on a set of 
+\begin_inset Formula $k$
+\end_inset 
+
+ elements, of which any student knows that the eigenvalues are the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th roots of unity.
+ 
+\layout Standard
+
+Insofar as 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ is a linear operator, and thus induces a homomorphism in its mapping, one
+ should study its kernel 
+\begin_inset Formula $Ker\; U_{g}$
+\end_inset 
+
+ to gain insights into its symmetry.
+ Insofar as the iterated map might represent a dynamical system, one knows
+ that symmetries lead to conserved currents, via Noether's theorm, and sometimes
+ to toplogically-conserved (quantum) numbers or other invarients.
+ 
+\layout Standard
+
+Finally, we note that 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ looks like a time-evolution operator, and thus we are tempted to write
+\begin_inset Formula \[
+U_{g}^{t}=\exp\; tH_{g}\]
+
+\end_inset 
+
+ for some other operator 
+\begin_inset Formula $H_{g}$
+\end_inset 
+
+.
+ Since 
+\begin_inset Formula $U$
+\end_inset 
+
+ is in general not unitary, 
+\begin_inset Formula $H$
+\end_inset 
+
+ is not (anti-)Hermitian.
+ However, any group of symmetries on 
+\begin_inset Formula $U$
+\end_inset 
+
+ should express themselves as an algebra on 
+\begin_inset Formula $H$
+\end_inset 
+
+ and these might provide an alternate path for exploring and describing
+ the fractal in question.
+\layout Standard
+
+In practice, when one is given an iterated map 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+, one computes the Frobenius-Perron operator as 
+\begin_inset Formula \[
+\left[U_{g}\rho\right](x)=\sum_{x':x=g(x')}\frac{\rho(x')}{\left|dg(x')/dx'\right|}\]
+
+\end_inset 
+
+ which provides an expression for 
+\begin_inset Formula $U_{g}$
+\end_inset 
+
+ acting on a general function 
+\begin_inset Formula $\rho$
+\end_inset 
+
+.
+ If on is interested in only polynomial xxx 
+\layout Subsection
+
 The Frobenius-Perron Operator of the Bernoulli Map
 \layout Standard
 
@@ -3192,15 +3406,7 @@ b(x)=2x-\left\lfloor 2x\right\rfloor \]
  
 \layout Standard
 
-The Frobenius-Perron operator of an iterated map is given by 
-\begin_inset Formula \[
-\left[Uf\right](x)=\sum_{x':x=f(x')}\frac{f(x')}{\left|df(x')/dx'\right|}\]
-
-\end_inset 
-
- and one is typically interested in the eigenvalues and eigenfunctions of
- this operator.
- For the Bernoulli map, it is 
+The Frobenius-Perron operator of the Bernoulli map is given by
 \begin_inset Formula \[
 \left[U_{B}f\right](x)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]\]
 
