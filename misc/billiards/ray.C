@@ -28,8 +28,9 @@
 // plane.  If it does, then the ray will be traced forward and reflected
 // off the plane.  
 //
-// Sphere returns TRUE if the ray intersects with a sphere of radius R
-// centered at the origin. If so, the ray is bounced off the sphere.
+// Sphere returns a positive number if the ray intersects with a sphere
+// of radius R centered at the origin; otherwise negative.  The returned
+// value is the distance the ray travelled to hit the sphere.
 
 class Ray
 {
@@ -38,7 +39,7 @@ class Ray
       void Set (double, double, double, double, double, double);
       double Intersect (Ray& plane);
       void Bounce (Ray& plane);
-      short Sphere (double r);
+      double Sphere (double r);
    public:
       double position[3];   
       double direction[3];
@@ -114,14 +115,29 @@ Ray::Bounce (Ray& plane)
 
 /* ==================================== */
 
-short 
+double
 Ray::Sphere (double radius)
 {
-   double pact;
-   VEC_IMPACT_SQ (pact, direction, position);
-   if (radius*radius < pact) return FALSE;
+   double b[3], pact, r2, s;
+   double radial[3], dist, oldpos[3];
 
-   return TRUE;
+   VEC_PERP (b, position, direction);  
+   VEC_LENGTH (pact, b);  // impact paramter
+
+   r2 = radius*radius;
+   if (r2 < pact) return -1.0;
+   s = - sqrt (r2 - pact);
+
+   VEC_COPY (oldpos, position);
+   VEC_BLEND (radial, 1.0, b, s, direction);
+   VEC_COPY (position, radial);
+   VEC_NORMALIZE (radial);
+   VEC_REFLECT (direction, direction, radial);
+
+   VEC_DIFF (oldpos, position, oldpos);
+   VEC_LENGTH (dist, oldpos);
+
+   return dist;
 }
 
 /* ==================================== */
@@ -134,11 +150,13 @@ class SinaiRay
       double distance; // distance travelled by ray   
       int last_wall;   // last wall of intersection
       int bounces[6];  // how many bounces have occured off each wall
+      int sphere_hits;  // how many times ray bounced off sphere
 };
 
 
 SinaiRay::SinaiRay (void)
 {
+   sphere_hits = 0;
    last_wall = -1;
    distance = 0.0;
    for (int i=0; i<6; i++) bounces[i] = 0;
@@ -225,7 +243,18 @@ SinaiView::Trace(int nbounces)
 
       for (int n=0; n<nbounces; n++)
       {
-         // first we trace the ray to the nearest wall.
+         double dist = 0.0;
+
+         // first, see if ray bounces off sphere
+         dist = sr[i].Sphere (radius);
+         if (0.0 < dist) 
+         {
+            sr[i].sphere_hits ++;
+            sr[i].distance += dist;
+            sr[i].last_wall = -1;
+         }
+
+         // next, trace ray to wall.
          int next_wall = -1;
          double nearest = 1000000.0;
          for (int iwall=0; iwall<6; iwall ++)
@@ -241,7 +270,6 @@ SinaiView::Trace(int nbounces)
          sr[i].distance += nearest;
    
          sr[i].Bounce (walls[next_wall]);
-if(sr[i].Sphere (radius)) sr[i].bounces[next_wall]=0;
       }
 
    }
@@ -313,7 +341,7 @@ main ()
    v.absorbtivity = 0.3;
    v.radius = 0.6;
 
-   v.Trace(3);
+   v.Trace(32);
    v.ToPixels();
    v.WriteMTV ("junk.mtv");
     
