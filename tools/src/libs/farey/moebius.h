@@ -9,6 +9,9 @@
  * Linas Vepstas Jaunuary 2005
  */
 
+#ifdef   __cplusplus
+extern "C" {
+#endif
 
 /* classic Moebius mu function */
 int moebius_mu (int n);
@@ -21,3 +24,7 @@ int liouville_omega (int n);
 
 /* The Liouville lambda function */
 int liouville_lmbda (int n);
+
+#ifdef   __cplusplus
+};
+#endif
