@@ -30,6 +30,9 @@ main ()
    int nprec_max = 10000;
 
    printf ("# \n");
+   printf ("# nprec_max = %d\n", nprec_max);
+   printf ("# gb0 = %g\n", gb0);
+   printf ("# \n");
    printf ("# nprec	i	delta_i	initial_theta	theta\n");
 
    double initial_theta;
