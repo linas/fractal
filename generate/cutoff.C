@@ -189,7 +189,7 @@ MakeHisto (
             if (modulus > escape_radius*escape_radius) break;
          }    
 
-#if 0
+#if MISC_SIMPLE_THINGS
          modulus = sqrt (modulus);
          modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
          frac = log (log (modulus)) * tl;
@@ -201,15 +201,22 @@ MakeHisto (
           /* the following computes an almost-flat, divergence free thing */
          glob [i*sizex +j] = modulus / sum_n;
          glob [i*sizex +j] /= (sqrt (re_position*re_position+im_position*im_position));
+#endif
 
+#ifdef PLAIN_Z_PRIME_PRIME_NORMALIZED
+         /* --------------------------------------------------------- */
          /* the interesting one is the z-prime-prime */
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          glob [i*sizex +j] = modulus / sum_n;
          // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
+#endif
 
+#ifdef ZPRIME_PRIME_EXTRAPOLATION_NORMALIZED
          /* --------------------------------------------------------- */
          /* the interesting one is the z-prime-prime */
          /* here we use a taylor expansion to extrapolate to tau=0 */
+			/* This one extrapolates zpp/norm and thus can show only divergent term */
+
          /* first, we need the derivatives of modulus w.r.t tau */
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
@@ -226,9 +233,18 @@ MakeHisto (
          glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
 
          // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
+#endif
 
+
+#ifdef PLAIN_OLD_Z_NORMALIZED_DIVERGENCE_FREE
          /* --------------------------------------------------------- */
          /* OK, lets do the taylor expansion for just-plain Z */
+         /* here we use a taylor expansion to extrapolate to tau=0 */
+			/* this takes sum/normalization then subtracts fitted term. 
+			 * The resulting image should be identically zero; there should be
+			 * nothing left. */
+
+         /* first, we need the drerivatives of modulus w.r.t tau */
          modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
          mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
          mpp  = sum_rep * sum_rep + sum_re * sum_repp;
@@ -240,7 +256,7 @@ MakeHisto (
          dmod = (mp - mod * sum_np) / sum_n;
          ddmod = (mpp - 2.0 * dmod * sum_np - mod * sum_npp) / sum_n;
 
-         /* finally the taylor expansion */
+         /* finally the taylor expansion for the normalized sum */
          glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
 // printf ("%9.6g	%9.6g	%9.6g\n", re_position, glob[i*sizex+j], mod);
 
@@ -257,10 +273,15 @@ MakeHisto (
 
          glob [i*sizex +j] -= tmp;
 
+#endif
+
+#ifdef PLAIN_ZPP_DIVERGENCE_FREE
          /* --------------------------------------------------------- */
          /* the interesting one is the z-prime-prime */
-         /* here we use a taylor expansion to extrapolate to tau=0 */
-         /* first, we need the drerivatives of modulus w.r.t tau */
+			/* This one subtracts divergence from zpp and goes to tau=0 */
+
+         /* here, we subtract the leading divergence 
+			 * after computing teh modulus, not before. */
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
          mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
@@ -275,10 +296,12 @@ MakeHisto (
          glob [i*sizex +j] -= tau* ((mp-tmp*sum_np) - 0.5 * tau * (mpp-tmp*sum_npp));
 #endif
 
+#define PLAIN_OLD_Z_MINUS_DIVERGENCE
+#ifdef PLAIN_OLD_Z_MINUS_DIVERGENCE
          /* --------------------------------------------------------- */
          /* OK, lets do the taylor expansion for just-plain Z */
-         /* here, we subtract the leading divergence 
-          */
+			/* Perform the tau expanstion to extrapolate */
+         /* here, we subtract the leading divergence */
          modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
          mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
          mpp  = sum_rep * sum_rep + sum_re * sum_repp;
@@ -288,6 +311,7 @@ MakeHisto (
          /* finally the taylor expansion */
          glob [i*sizex +j] = modulus - tau* (mp - 0.5 * tau * mpp);
 
+			/* Divergence term == 1/2 - sqrt (1/4-c)  */
          theta = 0.5 * atan2 (-im_position, 0.25-re_position);
          mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
          mod = pow (mod, 0.25);
@@ -299,8 +323,9 @@ MakeHisto (
          if (0.5 < tmp) tmp = 0.5;
 
          glob [i*sizex +j] -= tmp * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+#endif
 
-#if 0
+#if WHATEVER
          /* --------------------------------------------------------- */
          /* the interesting one is the z-prime-prime */
          /* here we use a taylor expansion to extrapolate to tau=0 */
