@@ -115,8 +115,8 @@ Let us now consider the broader class of functions.
 \end_inset 
 
  consider the series 
-\begin_inset Formula \[
-t_{A}(x)=\sum_{k=0}^{\infty}a_{k}\tau\left(2^{k}x\right)\]
+\begin_inset Formula \begin{equation}
+t_{A}(x)=\sum_{k=0}^{\infty}a_{k}\tau\left(2^{k}x\right)\label{eq: takagi-series}\end{equation}
 
 \end_inset 
 
@@ -152,7 +152,47 @@ iable functions?
 The Projection Operator
 \layout Standard
 
-We can try to approach this question by thinking of the space for which
+Let us consider the space of Takagi-type curves, namely the space 
+\begin_inset Formula $\mathbb{T}$
+\end_inset 
+
+ of curves of the type given by equation 
+\begin_inset LatexCommand \ref{eq: takagi-series}
+
+\end_inset 
+
+.
+ To be precise, we should probably restrict ourselves to the space of bounded
+ curves, that is, curves that are bounded except possibly for a countable
+ set of points 
+\begin_inset Formula $x\in[0,1]$
+\end_inset 
+
+.
+ But we could define other spaces as well: for example, we could pick the
+ space of curves that are bounded except on a set of measure zero, which
+ is (presumably) not the same set.
+ We could be more restrictive as well, and insist that the series 
+\begin_inset Formula $\sum_{k=0}^{\infty}\left|a_{k}\right|<\infty$
+\end_inset 
+
+ or even 
+\begin_inset Formula $\sum_{k=0}^{\infty}\left|a_{k}\right|^{2}<\infty$
+\end_inset 
+
+, this last corresponding to a square-integrable subset.
+ It is not clear which of these spaces is the more interesting or more natural
+ to study, which has a more natural application to chaotic phenomena.
+ Thus, we will leave open for now a precise definition, and consider the
+ space in generality, and restrict later as the need becomes appearent.
+\layout Standard
+
+Let us now consider the intersection of this space with the space of square-inte
+grable functions, that is, functions that are Fourier-analyzable and have
+ a Fourier basis.
+\layout Standard
+
+try We can try to approach this question by thinking of the space for which
  the triangle waves for a basis, and then thinking of the identity operator
  on this space, and then thinking of the identity operator as a projection
  operator from a larger space.
@@ -161,14 +201,14 @@ We can try to approach this question by thinking of the space for which
 \end_inset 
 
  which has the coordinate-space components 
-\begin_inset Formula \[
-\left\langle x|\tau k\right\rangle =\tau\left(2^{k-1}x\right)\]
+\begin_inset Formula \begin{equation}
+\left\langle x|\tau k\right\rangle =\tau\left(2^{k-1}x\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  We then want to define the operator 
-\begin_inset Formula \[
-\mathbb{I}_{T}=\sum_{k=0}^{\infty}\left|\tau k\right\rangle \left\langle \tau k\right|\]
+\begin_inset Formula \begin{equation}
+\mathbb{I}_{T}=\sum_{k=0}^{\infty}\left|\tau k\right\rangle \left\langle \tau k\right|\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -187,20 +227,27 @@ We can try to approach this question by thinking of the space for which
  
 \layout Standard
 
-Start by expressing the Fourier components of 
+We start by presuming that the space of square-integrable functions is a
+ space that contains all functions of the type 
+\begin_inset LatexCommand \ref{eq: takagi-series}
+
+\end_inset 
+
+.
+ Start by expressing the Fourier components of 
 \begin_inset Formula $\left\langle x|\tau k\right\rangle $
 \end_inset 
 
 ; let 
-\begin_inset Formula \[
-\left\langle en|x\right\rangle =\exp\left(-2\pi inx\right)\]
+\begin_inset Formula \begin{equation}
+\left\langle en|x\right\rangle =\exp\left(-2\pi inx\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  so that 
-\begin_inset Formula \begin{eqnarray*}
-\left\langle en|\tau k\right\rangle  & = & \int_{0}^{1}dx\left\langle en|x\right\rangle \left\langle x|\tau k\right\rangle \\
- & = & \int_{0}^{1}\tau\left(2^{k}x\right)\exp\left(-2\pi inx\right)\, dx\end{eqnarray*}
+\begin_inset Formula \begin{eqnarray}
+\left\langle en|\tau k\right\rangle  & = & \int_{0}^{1}dx\left\langle en|x\right\rangle \left\langle x|\tau k\right\rangle \nonumber \\
+ & = & \int_{0}^{1}\tau\left(2^{k}x\right)\exp\left(-2\pi inx\right)\, dx\label{eq:}\end{eqnarray}
 
 \end_inset 
 
