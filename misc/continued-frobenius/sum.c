@@ -1372,27 +1372,29 @@ long double zoot (int s)
 
   printf ("np=%g   nm=%g\n", np, nm);
 
-  double Lp = np -0.5*(np+np*cp) +np*cp/3.0;
-  double Lm = nm -0.5*(nm+nm*cm) +nm*cm/3.0;
+  printf ("nlp=%g   nlm=%g\n", np*lp, nm*lm);
 
-  printf ("Lp=%g   Lm=%g\n", Lp, Lm);
-  printf ("Llp=%g   Llm=%g\n", Lp*lp, Lm*lm);
+  double A = 0.5*(np*lp+nm*lm);
+  double B = (np*lp*csp+nm*lm*csm)/6.0;
+  double C = (np*lp*cp+nm*lm*cm)/2.0;
+  double D = (np*lp*cp*csp+nm*lm*cm*csm)/6.0;
 
-  double P = Lp*lp*np + Lm*lm*nm;
-  double Q = Lp*lp*np*cp + Lm*lm*nm*cm;
+  printf ("A=%g  B=%g  C=%g  D=%g\n", A,B,C,D);
 
-  printf ("P=%g  Q=%g\n", P,Q);
+  double P = 1.0 - A - B;
+  double Q = 1.0 - C - D;
+  double R = A+B+C+D;
 
-  double re=0.5* (Q-1.0)/(1.0-P);
+  printf ("P=%g  Q=%g  R=%g\n", P,Q, R);
+
+  double re= -0.5* Q/P;
   printf ("re=%g\n", re);
-  double disc = (1.0-Q)*(1.0-Q) - 4.0*(P+Q)*(1.0-P);
+  double disc = Q*Q - 4.0*P*R;
 
   printf ("disc=%g\n", disc);
-  double im=0.5*sqrt(disc)/(1.0-P);
+  double im=0.5*sqrt(-disc)/P;
   printf ("im=%g\n", im);
 
-  printf ("1-p=%g   1-q=%g  p+q=%g\n", 1.0-P, 1.0-Q, P+Q);
-  printf(" re+im=%g\n", re-im);
 
 #if 0
 	int i,j;

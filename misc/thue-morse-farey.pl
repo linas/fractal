@@ -90,7 +90,17 @@ for ($i=1;$i<$max;$i++) {
 
 $jmax = $j;
 
-#print he nmber of digits
+# substitue in 3/7, 4/7 for 0.1
+$bud = 0;
+$scale=0.125;
+for ($j=0; $j<=$jmax; $j++) {
+   if ($b[$j]==0) { $bud += 3*$scale; } else { $bud +=4*$scale; }
+   $scale *=0.125;
+   print "Buddy $bud\n";
+}
+print "\n";
+
+#print the number of digits
 for ($j=0; $j<=$jmax; $j++) {
    print "$c[$j]";
 }

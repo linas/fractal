@@ -124,13 +124,19 @@ SinaiStats::MeanFreePath(void)
 {
    int i;
 	double mean_path = 0.0;
+	double norm = 0.0;
 	
    for (i=0; i<nx*ny; i++) 
    {
-		mean_path += sr[i].distance / ((double) sr[i].sphere_hits);
+		double x = sr[i].position[0];
+		double y = sr[i].position[1];
+		double w = 1.0 / (4.0 * (1.0 + (x*x + y*y)/16.0));
+
+		norm += w;
+		mean_path += w * sr[i].distance / ((double) sr[i].sphere_hits);
    }
 
-   mean_path /= (double) nx*ny;
+   mean_path /= norm;
 
    return mean_path;
 }
@@ -140,42 +146,42 @@ SinaiStats::MeanFreePath(void)
 
 main (int argc, char * argv[])
 {
-   SinaiStats v (100,100);
+	SinaiStats v (100,100);
 
 
-   v.radius = 0.6;
+	v.radius = 0.6;
 
-   if (3 > argc) {
-      printf ("Usage: %s <radius> <maxhits>\n", argv[0]);
-      exit (1);
-   }
+	if (3 > argc) {
+		printf ("Usage: %s <radius> <maxhits>\n", argv[0]);
+		exit (1);
+	}
 
-   double radius = atof (argv[1]);
-   int maxhits = atoi (argv[2]);
+	double radius = atof (argv[1]);
+	int maxhits = atoi (argv[2]);
 
-   v.radius = radius;
-   v.max_distance = 1.0e100;
-   v.niterations = 1123123123;
-   v.max_manhattan = 123456789;
-   v.max_sphere_hits = maxhits;
+	v.radius = radius;
+	v.max_distance = 1.0e100;
+	v.niterations = 1123123123;
+	v.max_manhattan = 123456789;
+	v.max_sphere_hits = maxhits;
 
   	printf ("#\n# mean free path vs. sphere radius\n");
   	printf ("#\n# average over %d bounces on a %d x %d grid\n", 
-	         maxhits, 100, 100);
+				maxhits, 100, 100);
   	printf ("#\n# radius  pathlen\n");
   	printf ("# --------------\n");
-   fflush (stdout);
-   // for (radius=0.05; radius <0.91; radius +=0.05)
-   for (radius=0.9; radius > 0.04; radius -=0.05)
+	fflush (stdout);
+	// for (radius=0.05; radius <0.91; radius +=0.05)
+	for (radius=0.9; radius > 0.04; radius -=0.05)
 	{
 		v.Init();
-   	v.radius = radius;
-   	// v.Trace();
-   	v.TraceToroid();
+		v.radius = radius;
+		// v.Trace();
+		v.TraceToroid();
 
-   	double fp = v.MeanFreePath ();
-   	printf ("%f\t%f\n", radius, fp);
-   	fflush (stdout);
+		double fp = v.MeanFreePath ();
+		printf ("%f\t%f\n", radius, fp);
+		fflush (stdout);
 	}
 }
 

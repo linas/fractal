@@ -10,7 +10,7 @@ set data style linespoints
 set title "Mean Free Path of Ray in Cubic Hard-Sphere Lattice"
 set key right
 set xlabel "sphere radius"
-set ylabel "mean free path"
+set ylabel "log mean free path"
 plot "mean_free-100.dat" using (($1)):(log ($2)) title "measured", \
      "mean_free-100.dat" using (($1)):(log (exp (1-$1*$1*$1*$1*$1*$1*$1*$1)/($1*$1*$1*$1))) title "fit"
 
