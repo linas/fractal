@@ -65,6 +65,10 @@ PrintTerm (Term *t)
 	{
 		printf ("+ ");
 	}
+	else if (-1 == t->coeff && NULL != t->parts)
+	{
+		printf ("- ");
+	}
 	else if (0 > t->coeff)
 	{
 		printf ("- %d ", - t->coeff);
@@ -210,7 +214,7 @@ Expr *Add_E_T (Expr *e, Term *t)
 	return e3;
 }
 
-Expr *Add_E_E (Expr *e1, Exper *e2)
+Expr *Add_E_E (Expr *e1, Expr *e2)
 {
 	if (!e1) return Copy_Expr(e2);
 
@@ -218,18 +222,18 @@ Expr *Add_E_E (Expr *e1, Exper *e2)
 	Expr *e4 = Copy_Expr(e2);
 
 	e3->terms = g_list_concat (e3->terms, e4->terms);
-	Simplify (e3);
+	SimplifyExpr (e3);
 
 	g_free (e4); // xxx mem leak
 	return e3;
 }
 
-Expr *Sub_E_E (Expr *e1, Exper *e2)
+Expr *Sub_E_E (Expr *e1, Expr *e2)
 {
 	Expr *e3 = Copy_Expr(e1);
 	Expr *e4 = Copy_Expr(e2);
 
-	GList tn;
+	GList *tn;
 	for (tn=e4->terms; tn; tn=tn->next)
 	{
 		Term *t = tn->data;
@@ -237,7 +241,7 @@ Expr *Sub_E_E (Expr *e1, Exper *e2)
 	}
 
 	e3->terms = g_list_concat (e3->terms, e4->terms);
-	Simplify (e3);
+	SimplifyExpr (e3);
 
 	g_free (e4); // xxx mem leak
 	return e3;
@@ -311,11 +315,13 @@ static gint part_compare (gconstpointer a, gconstpointer b)
 {
 	const Part *pa = a;
 	const Part *pb = b;
-	if (pa->dx < pb->dx) return -1;
-	if (pa->dx > pb->dx) return 1;
 
 	if (pa->dy < pb->dy) return -1;
 	if (pa->dy > pb->dy) return 1;
+
+	if (pa->dx < pb->dx) return -1;
+	if (pa->dx > pb->dx) return 1;
+
 	return 0;
 }
 
@@ -400,14 +406,14 @@ void SimplifyExpr (Expr *e)
 
 Term *tger (int x)
 {
-	Term *t = g_new (Term,1);
+	Term *t = g_new0 (Term,1);
 	t->coeff = x;
 	return t;
 }
 
 Term *dxf (void)
 {
-	Term *t = g_new (Term,1);
+	Term *t = g_new0 (Term,1);
 
 	Part *p = g_new0 (Part,1);
 	p->dx = 1;
@@ -421,7 +427,7 @@ Term *dxf (void)
 
 Term *dyf (void)
 {
-	Term *t = g_new (Term,1);
+	Term *t = g_new0 (Term,1);
 
 	Part *p = g_new0 (Part,1);
 	p->dx = 0;
@@ -516,9 +522,9 @@ Expr * Christoffel (int i, int k, int l)
 	for (m=0; m<2; m++)
 	{
 		Expr *sum = NULL;
-		Expr *e1 = DD (gmn (m,k)) , l);
-		Expr *e2 = DD (gmn (m,l)) , k);
-		Expr *e3 = DD (gmn (k,l)) , m);
+		Expr *e1 = DD (gmn (m,k) , l);
+		Expr *e2 = DD (gmn (m,l) , k);
+		Expr *e3 = DD (gmn (k,l) , m);
 
 		sum = Add_E_E (sum,e1);
 		sum = Add_E_E (sum,e2);
@@ -536,18 +542,18 @@ Expr * Christoffel (int i, int k, int l)
 
 void setup (void)
 {
-	Expr *e = gxx();
-
+#if 0
 	printf ("gxx is:\n");
-	PrintExpr (e);
+	PrintExpr (gxx());
 
-	e = gxy();
 	printf ("gxy is:\n");
-	PrintExpr (e);
+	PrintExpr (gxy());
 
-	e = gyy();
 	printf ("gyy is:\n");
-	PrintExpr (e);
+	PrintExpr (gyy());
+
+	printf ("ginv_yy is:\n");
+	PrintExpr (ginv_yy());
 
 	printf ("dx gxx is:\n");
 	PrintExpr (DDX(gxx()));
@@ -555,8 +561,27 @@ void setup (void)
 	printf ("dx gyy is:\n");
 	PrintExpr (DDX(gyy()));
 
+	printf ("dy gxx is:\n");
+	PrintExpr (DDY(gxx()));
+#endif
+
 	printf ("gamma xxx is:\n");
 	PrintExpr (Christoffel(0,0,0));
+	
+	printf ("gamma yxx is:\n");
+	PrintExpr (Christoffel(1,0,0));
+	
+	printf ("gamma xxy is:\n");
+	PrintExpr (Christoffel(0,0,1));
+	
+	printf ("gamma yxy is:\n");
+	PrintExpr (Christoffel(1,0,1));
+	
+	printf ("gamma xyy is:\n");
+	PrintExpr (Christoffel(0,1,1));
+	
+	printf ("gamma yyy is:\n");
+	PrintExpr (Christoffel(1,1,1));
 	
 }
 
