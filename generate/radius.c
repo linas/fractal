@@ -33,9 +33,13 @@ void measure_radius (
    unsigned int	i,j;
    double	deltar, rad, theta=0.0;
    double	radius_cand;
+   double	radius_outer;
    double	re_cg, im_cg;
+   double	re_outer_cg, im_outer_cg;
    double	radius_avg=0.0;
    double	radius_min, radius_max;
+   double	radius_outer_avg=0.0;
+   double	radius_outer_min, radius_outer_max;
    double	si, co;
    double	re_last, im_last;
    double	re_c, im_c;
@@ -55,6 +59,11 @@ void measure_radius (
    radius_avg = 0.0;
    radius_min = 1e30;
    radius_max = -1e30;
+
+   radius_outer = 0.0;
+   radius_outer_avg = 0.0;
+   radius_outer_min = 1e30;
+   radius_outer_max = -1e30;
 
    for (i=0; i<sizea; i++) {
       theta = ((double) i) / ((double) sizea);
@@ -88,6 +97,7 @@ void measure_radius (
 
             modulus = (re*re + im*im);
             if (modulus > escape_radius*escape_radius) {
+               radius_outer = rad; /* radius must be smaller than this */
                j+= sizer; /* break middle loop */
                break;
             }
@@ -107,16 +117,35 @@ void measure_radius (
       if (radius_min > radius_cand) { radius_min = radius_cand; }
       if (radius_max < radius_cand) { radius_max = radius_cand; }
       glob [i] = radius_cand; 
-      printf ("%d	%14.10f	%14.10f	%d\n", i, theta, radius_cand, loop_cand); 
+
+      re_outer_cg += radius_outer * co;
+      im_outer_cg += radius_outer * si;
+      radius_outer_avg += radius_outer;
+      if (radius_outer_min > radius_outer) { radius_outer_min = radius_outer; }
+      if (radius_outer_max < radius_outer) { radius_outer_max = radius_outer; }
+
+      printf ("%d	%14.10f	%14.10f	%14.10f %d\n", i, theta, radius_cand, radius_outer, loop_cand); 
    }
    radius_avg /= (double) sizea;
    re_cg /= (double) sizea;
    im_cg /= (double) sizea;
    
-   printf ("# ravg = %14.10f center o gravity = ( %14.10f %14.10f )\n", radius_avg, re_cg, im_cg);
-   printf ("# center= %14.10f %14.10f diam = %14.10f \n", re_center+re_cg, im_center+im_cg, 2.0*radius_avg);
-   printf ("# radius min, max= %14.10f %14.10f half-diff=%14.10f \n", radius_min,
-radius_max, 0.5*(radius_max-radius_min));
+   radius_outer_avg /= (double) sizea;
+   re_outer_cg /= (double) sizea;
+   im_outer_cg /= (double) sizea;
+   
+   printf ("# ravg = %14.10f center o gravity = ( %14.10f %14.10f )\n", 
+        radius_avg, re_cg, im_cg);
+   printf ("# rout = %14.10f outer center o g = ( %14.10f %14.10f )\n", 
+        radius_outer_avg, re_outer_cg, im_outer_cg);
+   printf ("# center= %14.10f %14.10f diam = %14.10f \n", 
+        re_center+re_cg, im_center+im_cg, 2.0*radius_avg);
+   printf ("# outcen= %14.10f %14.10f out diam = %14.10f \n", 
+        re_center+re_outer_cg, im_center+im_outer_cg, 2.0*radius_outer_avg);
+   printf ("# radius min, max= %14.10f %14.10f half-diff=%14.10f \n", 
+        radius_min, radius_max, 0.5*(radius_max-radius_min));
+   printf ("# outer  min, max= %14.10f %14.10f outer-half=%14.10f \n", 
+        radius_outer_min, radius_outer_max, 0.5*(radius_outer_max-radius_outer_min));
 }
 
 
