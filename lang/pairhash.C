@@ -3,9 +3,9 @@
 // pairhash.C
 //
 // FUNCTION:
-// The lagWordPairTable class associates a unique ID number with 
+// The lagGenericWordTable class associates a unique ID number with 
 // a pair of ids.
-// The GetWordPairID() method returns the ID number of the pair.
+// The GetGenericWordID() method returns the ID number of the pair.
 //
 // HISTORY:
 // January 1997 Linas Vepstas
@@ -17,7 +17,7 @@
 
 // =====================================================
 
-lagWordPairTable :: lagWordPairTable (void) {
+lagGenericWordTable :: lagGenericWordTable (void) {
    unused_id = 0;
    num_collisions = 0;
    num_processed = 0;
@@ -46,7 +46,7 @@ lagWordPairTable :: lagWordPairTable (void) {
 
 // =====================================================
 
-lagWordPairTable :: ~lagWordPairTable () {
+lagGenericWordTable :: ~lagGenericWordTable () {
    unused_id = 0;
    num_collisions = 0;
    num_processed = 0;
@@ -89,7 +89,7 @@ lagWordPairTable :: ~lagWordPairTable () {
 
 // =====================================================
 
-void lagWordPairTable :: AddConcord (int first, Helper *where) {
+void lagGenericWordTable :: AddConcord (int first, Helper *where) {
    if (!first) return;
    if (!where) return;
 
@@ -109,20 +109,81 @@ void lagWordPairTable :: AddConcord (int first, Helper *where) {
    concordance[first] = root; 
 }
 
-int lagWordPairTable :: GetWordPairID (int first, int second) {
+#if (defined LAG_TWO_WORD) | (defined LAG_THREE_WORD) | \
+    (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+
+#ifdef LAG_TWO_WORD
+int lagGenericWordTable :: GetID (int first, int second) {
+#endif // LAG_TWO_WORD
+
+#ifdef LAG_THREE_WORD
+int lagGenericWordTable :: GetID (int first, int second, int third) {
+#endif // LAG_THREE_WORD
+
+#ifdef LAG_FOUR_WORD
+int lagGenericWordTable :: GetID (int first, int second, int third,
+                                  int fourth) {
+#endif // LAG_FOUR_WORD
+
+#ifdef LAG_FIVE_WORD
+int lagGenericWordTable :: GetID (int first, int second, int third,
+                                  int fourth, int fifth) {
+#endif // LAG_FIVE_WORD
+
+#ifdef LAG_SIX_WORD
+int lagGenericWordTable :: GetID (int first, int second, int third,
+                                  int fourth, int fifth, int sixth) {
+#endif // LAG_SIX_WORD
 
    if (!first) return 0;
    if (!second) return 0;
+#if (defined LAG_THREE_WORD) | (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+   if (!third) return 0;
+#endif
+#if (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+   if (!fourth) return 0;
+#endif
+#if (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+   if (!fifth) return 0;
+#endif
+#if (defined LAG_SIX_WORD)
+   if (!sixth) return 0;
+#endif
+
+
+   unsigned short hash = (unsigned short) first;
+   hash += (unsigned short) second;
+#if (defined LAG_THREE_WORD) | (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+   hash += (unsigned short) third;
+#endif
+#if (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+   hash += (unsigned short) fourth;
+#endif
+#if (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+   hash += (unsigned short) fifth;
+#endif
+#if (defined LAG_SIX_WORD)
+   hash += (unsigned short) sixth;
+#endif
+
    num_processed ++;
-
-   unsigned short fi = first;
-   unsigned short se = second;
-   unsigned short hash = fi + se;
-   unsigned int cat = fi << 16 | se;
-
    Helper * root = table[hash];
    while (root) {
-      if (cat == root -> pair) {
+      if ((first == root -> tuple[0])
+         && (second == root -> tuple[1])
+#if (defined LAG_THREE_WORD) | (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+         && (third == root -> tuple[2])
+#endif
+#if (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+         && (fourth == root -> tuple[3])
+#endif
+#if (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+         && (fifth == root -> tuple[4])
+#endif
+#if (defined LAG_SIX_WORD)
+         && (sixth == root -> tuple[5])
+#endif
+         ) {
          root -> cnt ++;
          UPDATE_TOP_TEN ((root->cnt), (root));
          return (root -> id);
@@ -138,7 +199,20 @@ int lagWordPairTable :: GetWordPairID (int first, int second) {
    root -> next = table[hash];
    table[hash] = root;
 
-   root -> pair = cat;
+   root -> tuple[0] = first;
+   root -> tuple[1] = second;
+#if (defined LAG_THREE_WORD) | (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+   root -> tuple[2] = third;
+#endif
+#if (defined LAG_FOUR_WORD) | (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+   root -> tuple[3] = fourth;
+#endif
+#if (defined LAG_FIVE_WORD) | (defined LAG_SIX_WORD)
+   root -> tuple[4] = fifth;
+#endif
+#if (defined LAG_SIX_WORD)
+   root -> tuple[5] = sixth;
+#endif
 
    unused_id ++;
    root -> id = unused_id;
@@ -152,27 +226,19 @@ int lagWordPairTable :: GetWordPairID (int first, int second) {
    return (root->id);
 }
 
+#endif 
+
 // =====================================================
 
-int lagWordPairTable :: GetFirstOfPair (int id) {
+int lagGenericWordTable :: GetElt (int id, int elt) {
    if (!idx[id]) return 0;
-   unsigned int retval = idx[id] -> pair;
-   retval >>= 16;
+   unsigned int retval = idx[id] -> tuple[elt];
    return retval;   
 }
 
 // =====================================================
 
-int lagWordPairTable :: GetSecondOfPair (int id) {
-   if (!idx[id]) return 0;
-   unsigned int retval = idx[id] -> pair;
-   retval &= 0xffff;
-   return retval;   
-}
-
-// =====================================================
-
-int lagWordPairTable :: GetCount (int id) {
+int lagGenericWordTable :: GetCount (int id) {
    if (!idx[id]) return 0;
    unsigned int retval = idx[id] -> cnt;
    return retval;   
@@ -180,7 +246,7 @@ int lagWordPairTable :: GetCount (int id) {
 
 // =====================================================
 
-int lagWordPairTable :: GetTopTen (int n) {
+int lagGenericWordTable :: GetTopTen (int n) {
    if (LAG_TOP_TEN <= n) return 0;
    if (0 > n) return 0;
    if (!topten[n]) return 0;
@@ -190,7 +256,7 @@ int lagWordPairTable :: GetTopTen (int n) {
 
 // =====================================================
 
-int lagWordPairTable :: GetTopPairContainingWord (int word) {
+int lagGenericWordTable :: GetTopPairContainingWord (int word) {
    if (0 > word) return 0;
    if (LAG_WORD_TABLE_SIZE <= word) return 0;
 
@@ -213,7 +279,7 @@ int lagWordPairTable :: GetTopPairContainingWord (int word) {
 
 // =====================================================
 
-void lagWordPairTable :: Dump (void) {
+void lagGenericWordTable :: Dump (void) {
    printf ("num entries is %d \n", num_entries);
    printf ("num processed is %d \n", num_processed);
    printf ("num collisions is %d \n", num_collisions);

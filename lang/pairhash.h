@@ -3,11 +3,11 @@
 // pairhash.h
 //
 // FUNCTION:
-// The lagWordPairTable class associates a unique ID number with 
+// The lagGenericWordTable class associates a unique ID number with 
 // a pair of ints
 //
 // METHODS:
-// The GetWordPairID() method returns the ID number of the pair.
+// The GetGenericWordID() method returns the ID number of the pair.
 //
 // The GetFirstOfPair() method returns the first elt of the pair.
 //
@@ -30,13 +30,36 @@
 
 #include "config.h"
 
-class lagWordPairTable {
+#ifndef LAG_WORD_TUPLE
+#define LAG_WORD_TUPLE 2
+#endif
+
+class lagGenericWordTable {
    public:
-      lagWordPairTable (void);
-      ~lagWordPairTable ();
-      int GetWordPairID (int wordfirst, int wordsecond);
-      int GetFirstOfPair (int pairid);
-      int GetSecondOfPair (int pairid);
+      lagGenericWordTable (void);
+      ~lagGenericWordTable ();
+
+#ifdef LAG_TWO_WORD
+      int GetID (int wordfirst, int wordsecond);
+#endif // LAG_TWO_WORD
+
+#ifdef LAG_THREE_WORD
+      int GetID (int, int, int);
+#endif // LAG_THREE_WORD
+
+#ifdef LAG_FOUR_WORD
+      int GetID (int, int, int, int);
+#endif // LAG_FOUR_WORD
+
+#ifdef LAG_FIVE_WORD
+      int GetID (int, int, int, int, int);
+#endif // LAG_FIVE_WORD
+
+#ifdef LAG_SIX_WORD
+      int GetID (int, int, int, int, int, int);
+#endif // LAG_SIX_WORD
+
+      int GetElt (int pairid, int elt);
       int GetCount (int pairid);
 
       int GetTopPairContainingWord (int word);
@@ -48,7 +71,7 @@ class lagWordPairTable {
       class Helper {
          public:
             Helper * next;
-            unsigned int pair;
+            unsigned int tuple[LAG_WORD_TUPLE];
             int id;
             int cnt;
       };
