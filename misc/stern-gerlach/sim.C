@@ -33,7 +33,6 @@ main ()
    imax *= 1024*1024;
 
    theta = 0.6;
-   theta = 1.5;
    nprec = 0;
    phi = 0.0;
    pos_x = 0.0;
