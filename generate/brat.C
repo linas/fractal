@@ -443,7 +443,10 @@ void mandelbrot_windsimple (
    double	im_center,
    double	width,
    double	height,
-   int		itermax)
+   int		itermax,
+   int		nrays,
+   double	ppp,
+   double 	qqq)
 {
    int		i,j,k, globlen, itermax_orig;
    double	re_start, im_start, deltax, deltay;
@@ -525,6 +528,7 @@ void mandelbrot_windsimple (
 
          phi /= 2.0*M_PI;
 
+         // use the winding number count to compute the smooth phase
          if (loop < itermax) {
             phi += 0.5 * ((double) wind);
 
@@ -533,20 +537,24 @@ void mandelbrot_windsimple (
 
          }
 
-#define COLORIZE_RAYS
-#ifdef COLORIZE_RAYS 
          // colorize the landing rays
-         phi *= 512.0;
+         if (0 < nrays) {
+            double tphi = phi * 2.0 * ((double) nrays);
+   
+            k = (int) tphi;
+            if (k%2) { 
+               tphi -= (double)k;
+            } else {
+               tphi = (double)(k+1) -tphi;
+            }
 
-         k = (int) phi;
-         if (k%2) { 
-            phi -= (double)k;
-         } else {
-            phi = (double)(k+1) -phi;
+            if (phi < ppp/((double)nrays)) tphi *= 0.7;
+            if (phi > qqq/((double)nrays)) tphi *= 0.7;
+
+            tphi *= tphi;
+            tphi *= tphi;
+            phi = tphi;
          }
-         phi *= phi;
-         phi *= phi;
-#endif /* COLORIZE_RAYS */
 
          glob [i*sizex +j] = phi;
 
@@ -2889,7 +2897,8 @@ main (int argc, char *argv[])
    int		itermax;
    double	renorm, tmp;
    FILE		*fp;
-   int		i;
+   int		i, nray=-1;
+   double	p=0.0, q=1.0;
    char buff [80];
    
    if (5 > argc) {
@@ -2911,16 +2920,22 @@ main (int argc, char *argv[])
    im_center = 0.0;
    width = 2.8;
 
-   if (argc >= 8) {
+   if (8 <= argc) {
       re_center = atof (argv[5]);
       im_center = atof (argv[6]);
       width = atof (argv[7]);
    }
 
-   if (argc == 9) {
+   if (9 == argc) {
       height = atof (argv[8]);
    } else {
       height = width * ((double) data_height) / ((double) data_width);
+   }
+
+   if (9 < argc) {
+      nray = atoi (argv[8]);
+      p = atof (argv[9]);
+      q = atof (argv[10]);
    }
 
    printf ("file=%s (%d %d) iter=%d (%f %f) w=%f h=%f\n", 
@@ -2940,7 +2955,7 @@ main (int argc, char *argv[])
    
    if (!strcmp(argv[0], "winds"))
    mandelbrot_windsimple (data, data_width, data_height,
-                  re_center, im_center, width, height, itermax); 
+                  re_center, im_center, width, height, itermax, nray, p, q); 
    
    if (!strcmp(argv[0], "cutoff"))
    mandelbrot_cutoff (data, data_width, data_height,
