@@ -32,7 +32,7 @@ Symmetries of Period-Doubling Maps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 10 December 2004)
+12 October 2004 (revised 11 December 2004)
 \layout Abstract
 
 The concept of self-similarity is central to the notion of a fractal, but
@@ -165,8 +165,24 @@ In an earlier chapter, we have shown that an interesting subset of the Modular
  We show that this curve transforms under a three-dimensional representation
  of the Modular Group, and give variations that transform under higher-dimension
 al representations.
- Through conjugation, we find that the Takagi curve is representative of
- a large class of curves, all of which transform under the same symmetry.
+ 
+\layout Standard
+
+The Takagi Curve is notable in that it is constructed from the iterated
+ Tent Map.
+ Thus, we can generalize these results to any iterated map that is topologically
+ conjugate to the Tent Map.
+ The class of such curves is quite large, and contains many interesting
+ specimens, such as the Logistic Map of unit height.
+ These curves all transform under the same three-dimensional representation.
+ It is this observation that leads us to the hypothesis that essentially
+ all period-doubling maps transform under the three-dimensional representation.
+ In practice, however, there is a big difference between proving that a
+ map is conjugate to the Tent Map, and giving explicit expression to the
+ conjugating function.
+ As an example, we show how one very simple iterated map is conjugate to
+ the Tent Map, but the conjugating function is the Minkowski Question Mark.
+ Thus, finding the conjugating function is a non-trivial excercise.
 \layout Subsection
 
 The Weierstrass-Takagi-Landsberg-Hardy Curve
@@ -1744,7 +1760,7 @@ e, by following the same recipe:
  
 \layout Subsection
 
-Higher-Dimensional Reprsentations
+Higher-Dimensional Representations
 \layout Standard
 
 It should now be apparent how to build arbitrary higher-dimensional representati
@@ -2067,7 +2083,7 @@ g_{D}^{3}r_{D}g_{D}^{2}(x)=\frac{1}{8}-\frac{x}{32}\label{eq:}\end{equation}
  Peeling off one group element at a time, we finally get 
 \begin_inset Formula \begin{eqnarray}
 \psi_{z}\left(\frac{1}{8}-\frac{x}{32}\right) & = & \exp\left(i\pi\left(\frac{1}{4}-\frac{x}{16}\right)\right)+z\,\exp\left(i\pi\left(\frac{1}{2}-\frac{x}{8}\right)\right)+\nonumber \\
- & + & z^{2}\exp\left(i\pi\left(1-\frac{x}{4}\right)\right)+z^{3}\exp\left(-i\pi\frac{x}{2}\right)+\\
+ & + & z^{2}\exp\left(i\pi\left(1-\frac{x}{4}\right)\right)+z^{3}\exp\left(-i\pi\frac{x}{2}\right)+\nonumber \\
  & + & z^{4}\exp\left(-i\pi x\right)+z^{5}\psi_{z}\left(-x\right)\end{eqnarray}
 
 \end_inset 
@@ -2075,7 +2091,7 @@ g_{D}^{3}r_{D}g_{D}^{2}(x)=\frac{1}{8}-\frac{x}{32}\label{eq:}\end{equation}
  However, this obscures the true form of the transformation, which is exhibited
  more clearly if we write the above as 
 \begin_inset Formula \begin{eqnarray}
-g^{3}rg^{2}\psi_{z} & = & \psi_{z}g^{3}rg^{2}\label{eq:}\\
+g^{3}rg^{2}\psi_{z} & = & \psi_{z}g^{3}rg^{2}\nonumber \\
  & = & Eg^{3}rg^{2}+z\, Eg^{2}rg^{2}+z^{2}Egrg^{2}+z^{3}Erg^{2}+z^{4}Erg+z^{5}\psi_{z}r\end{eqnarray}
 
 \end_inset 
@@ -2335,6 +2351,35 @@ F(x)=(?^{-1}\circ\tau\circ?)(x)\]
 \end_inset 
 
  below.
+ The symmetry generators are 
+\begin_inset Formula \[
+g_{?^{-1}}(x)=(?^{-1}\circ g_{D}\circ?)(x)=g_{C}(x)=\frac{x}{1+x}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula $r_{?^{-1}}(x)=r_{D}(x)=1-x$
+\end_inset 
+
+.
+ These are the generators explored in a previous chapter.
+ Notice that the local minima in the graph correspond to the Farey Fractions,
+ of course.
+ Of interest here is that these arise out of iteration: the Farey Fractions
+ are the 
+\begin_inset Quotes eld
+\end_inset 
+
+pre-images
+\begin_inset Quotes erd
+\end_inset 
+
+ of the fixed point at zero.
+ Given any Farey Fraction, the Isola map will iterate them to zero after
+ a finite number of steps.
+ Insofar as the Farey Fractions are dense on the unit interval, then the
+ Julia Set of the iterated Isola Map is the whole unit interval.
+ 
 \layout Standard
 
 
@@ -2378,6 +2423,24 @@ F_{w}(x)=\sum_{k=0}^{\infty}w^{k}F^{k+1}(x)\label{eq:}\end{equation}
 \end_inset 
 
 
+\layout Standard
+
+As the above example shows, it is remarkably difficult to construct a conjugatin
+g function even when it is 
+\begin_inset Quotes eld
+\end_inset 
+
+obvious
+\begin_inset Quotes erd
+\end_inset 
+
+ that a map should be conjugate to the Tent map.
+ We were lucky to know that the Minkowski Question Mark was what was needed:
+ it would be very difficult to construct from first principles.
+ The Isola map is deceptively simple: it has a simple analytic form, yet
+ the conjugating function is highly singular.
+ In view of this difficulty, it is of some merit to create a dictionary
+ of conjugating functions.
 \layout Subsection
 
 Miscellany
