@@ -9,7 +9,7 @@ CC = /usr/bin/cc -O2 -I $(INC)
 EXES= dyadic entropy exacto fdist feigen \
       fiddle fliptree gappy gkw mute orbit padic \
       pair rdist summy swap sway sym \
-      sym-fun takagi theta tree vanish
+      sym-fun takagi theta tree vanish zeta
 
 all: 	$(EXES)
 
@@ -49,3 +49,4 @@ takagi.o:	takagi.C
 theta.o:	theta.C
 tree.o: tree.C $(LIB)/Farey.o $(INC)/Farey.h
 vanish.o:	vanish.C
+zeta.o:	zeta.C
