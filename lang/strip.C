@@ -64,8 +64,24 @@ main () {
       if (strstr (buff, "X-MSMail-Priority")) continue;
       if (strstr (buff, "X-Priority")) continue;
 
-      if (strstr (buff, "teleportal")) continue;
+      if (strstr (buff, "teleport")) continue;
+
+      if (strstr (buff, "<tr>")) continue;
+      if (strstr (buff, "<td>")) continue;
+      if (strstr (buff, "<html>")) continue;
+      if (strstr (buff, "<title>")) continue;
+      if (strstr (buff, "<input")) continue;
+      if (strstr (buff, "align")) continue;
+      if (strstr (buff, "<tr>")) continue;
 /*
+      if (strstr (buff, "")) continue;
+      if (strstr (buff, "")) continue;
+      if (strstr (buff, "")) continue;
+      if (strstr (buff, "")) continue;
+      if (strstr (buff, "")) continue;
+      if (strstr (buff, "")) continue;
+      if (strstr (buff, "")) continue;
+      if (strstr (buff, "")) continue;
       if (strstr (buff, "")) continue;
       if (strstr (buff, "")) continue;
       if (strstr (buff, "")) continue;
