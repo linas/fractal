@@ -26,6 +26,9 @@ clean:
 .c.o:
 	$(CC) -c $<
 
+.C.o:
+	$(CC) -c $<
+
 .o:
 	$(CC) -o $* $< -lm
 
