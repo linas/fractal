@@ -62,6 +62,7 @@ Fractals and Continued Fractions seem to be deeply related in many ways.
  not in non-Archimedean analysis either.
  It opens a whole set of new doors.
  An assortment of other curious observations is presented as well.
+ Its a candy-store of surprises!
 \layout Section
 
 Intro
@@ -1299,7 +1300,9 @@ Note that a standard way of analysing the dynamics of deterministic chaotic
 
 Note that I have another paper ready to go on the GKW and how it and the
  Riemann Zeta are intertwined.
- 
+ Its interesting that this is another connection between the Riemann Zeta
+ and chaotic dynamics.
+ I suspect that the relationship is very deep indeed.
 \layout Subsection
 
 The Parabolas in the Distribution
@@ -2182,24 +2185,27 @@ r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
 
 \end_inset 
 
-The operator to insert a digit at the front of the continued fraction expansion
- is thus 
+The operator to insert a digit 
+\begin_inset Formula $n\geq1$
+\end_inset 
+
+ at the front of the continued fraction expansion is thus 
 \begin_inset Formula \[
-(g^{n}rg)([a_{1},a_{2},...])=[n+1,a_{1},a_{2},...]\]
+(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]\]
 
 \end_inset 
 
 which we can immediately verify as
 \begin_inset Formula \[
-(g^{n}rg)(x)=\left(\left(\begin{array}{cc}
+(g^{n-1}rg)(x)=\left(\left(\begin{array}{cc}
 1 & 0\\
-n & 1\end{array}\right)\left(\begin{array}{cc}
+n-1 & 1\end{array}\right)\left(\begin{array}{cc}
 -1 & 1\\
 0 & 1\end{array}\right)\left(\begin{array}{cc}
 1 & 0\\
 1 & 1\end{array}\right)\right):(x)=\left(\begin{array}{cc}
 0 & 1\\
-1 & n+1\end{array}\right):(x)=\frac{1}{n+1+x}\]
+1 & n\end{array}\right):(x)=\frac{1}{n+x}\]
 
 \end_inset 
 
@@ -2215,8 +2221,61 @@ c & d\end{array}\right):(x)=\frac{ax+b}{cx+d}\]
 
 \end_inset 
 
- There are a number of other handy identities that one can use for computation
- that should be listed in an appendix.
+ It should be clear that we can now build up the continued fraction as desired
+ with this insertion operator acting on zero: 
+\begin_inset Formula \[
+(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j-1,k,m,...,x]\]
+
+\end_inset 
+
+
+\layout Standard
+
+One can also find the append operator, which we find by examining
+\begin_inset Formula \[
+[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]\]
+
+\end_inset 
+
+ We use these to construct the appending operator 
+\begin_inset Formula $(g^{-1}rg^{k+1})(x)=(kx+1)/x$
+\end_inset 
+
+ which, for 
+\begin_inset Formula $k\geq1$
+\end_inset 
+
+, acts as 
+\begin_inset Formula \[
+[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]\]
+
+\end_inset 
+
+ We can thus build up continued fractions by appending at the back, starting
+ from 
+\begin_inset Formula $(g^{-1}rg)(x)=1/x=[x]$
+\end_inset 
+
+ as follows: 
+\begin_inset Formula \[
+(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
+
+\end_inset 
+
+
+\layout Subsection
+
+Fractal Symmetry and the Subset 
+\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes\mathbb{Z}_{2}$
+\end_inset 
+
+ of the Modular Group
 \layout Standard
 
 Every group element of 
@@ -2503,25 +2562,48 @@ The field structure of the rationals in turn induces a field structure on
 Symmetry of the Mandelbrot Set and the Circle Map
 \layout Standard
 
-Enumerating the group elements as 
-\begin_inset Formula $\mathbb{Q\times Z}$
+To be written.
+ First we need to explain how to count with Farey numbers on the M-Set.
+ Here is a picture stolen from Robert L.
+ Devaney's website 
+\begin_inset LatexCommand \url[The Fractal Geometry of the Mandelbrot Set 
+
+
+II. How to Count and How to Add ]{http://math.bu.edu/DYSYS/FRACGEOM2/node5.html}
+
 \end_inset 
 
- rather than as 
-\begin_inset Formula $\mathbb{Q}$
+ :
+\layout Standard
+
+
+\begin_inset Graphics
+	filename farey-bud-numbers.gif
+
 \end_inset 
 
- alone, as the former is more intuitive for the M-set.
- This part to be written.
+
+\layout Standard
+
+This mapping and method of counting on the buds is well-known in the literature
+ and is explored in many ways.
+\layout Standard
+
+Next we note that enumerating the group elements of the modular group as
+ 
+\begin_inset Formula $\mathbb{Q\times\mathbb{N}}$
+\end_inset 
+
+ plays directly into the celebrated self-similarity of the Mandelbrot set.
 \layout Standard
 
 What does this mean for the symmetries of the Mandelbrot set? it means that
  the modular group maps buds to buds.
  Note, however, that the 
-\begin_inset Formula $\mathbb{Q\times Z}$
+\begin_inset Formula $\mathbb{Q\times\mathbb{N}}$
 \end_inset 
 
- paramtrization of the modular group means that one can map one bud onto
+ parameterization of the modular group means that one can map one bud onto
  any another, but that the mapping has to be onto the whole bud, and not
  just a portion of it.
  Put another way, it is a mapping of intervals to intervals.
@@ -2532,7 +2614,7 @@ What does this mean for the symmetries of the Mandelbrot set? it means that
 \end_inset 
 
  part of the symmetry, but after specifying the starting point, we have
- only a disscrete set of intrvals we can map to: this is the 
+ only a discrete set of intrvals we can map to: this is the 
 \begin_inset Formula $\mathbb{N}$
 \end_inset 
 
@@ -2908,6 +2990,19 @@ It seems intuitive that all other mappings from
 
  is discontinuous, but I think only on a countable set of points, and thus
  can be used to form well-defined integrals using classic techniques.
+ 
+\layout Standard
+
+Note that more generally, we can now define 
+\begin_inset Formula $h:SL\left(2,\mathbb{Z}\right)\rightarrow SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ as the operator that lops off the first term of teh expansion.
+ This has a kernel that contains the group element 
+\begin_inset Formula $g^{n}rg$
+\end_inset 
+
+ and so we ask about the group structure that results from this.
  
 \layout Standard
 
