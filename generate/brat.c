@@ -467,6 +467,7 @@ void dmandelbrot_out (
    double	ddre, ddim;
    double	d3re, d3im;
    double	d4re, d4im;
+   double	dare, daim;
    double	dfre, dfim;
    double	dofre, dofim;
    int		loop;
@@ -477,6 +478,8 @@ void dmandelbrot_out (
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0/ log(2.0);
    
+   /* adjust the iteration count to show the correct values */
+   // itermax +=1;
 
    delta = width / (double) sizex;
    re_start = re_center - width / 2.0;
@@ -539,9 +542,13 @@ void dmandelbrot_out (
 
          frac = ((double) loop) - frac + 1.0; 
 
+         /* compute d|z|/dc / |z| */
+         dare = re*dre / (re*re+im*im);
+         daim = im*dim / (re*re+im*im);
+
          /* compute dfrac/dc = d|z|/dc / |z| log|z| */
-         dfre = re*dre / ((re*re+im*im) *log (modulus));
-         dfim = im*dim / ((re*re+im*im) *log (modulus));
+         dfre = tl*re*dre / ((re*re+im*im) *log (modulus));
+         dfim = tl*im*dim / ((re*re+im*im) *log (modulus));
 
          /* compute 1/ (dfrac/dc)  */
          dofre = dfre / (dfre*dfre + dfim*dfim);
@@ -596,8 +603,9 @@ void dmandelbrot_out (
          modulus *= log((double) loop);
          modulus *= log((double) loop);
 
-         modulus = sqrt (dre*dre+dim*dim);
          modulus = sqrt (dofre*dofre+dofim*dofim);
+         modulus = 1.0/sqrt (dre*dre+dim*dim);
+         modulus = 1.0/sqrt (dare*dare+daim*daim);
         
          glob [i*sizex +j] = modulus;
 
