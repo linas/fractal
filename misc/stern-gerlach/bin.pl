@@ -12,7 +12,7 @@ while (<>) {
    chop;
    ($nprec, $i, $j, $init, $theta) = split /	/;
 
-   if (($j < 50000000) && ($j > 0)) { next; }   
+   if (($j < 30000000) && ($j > 0)) { next; }   
 
    $n = $theta / $binsz;
    $n = int ($n);
