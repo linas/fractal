@@ -71,6 +71,14 @@ double mink(double x)
 	return x;
 }
 
+// the farey/isola map
+long double pointy (long double x)
+{
+	long double t = x - floorl(x);
+	if (0.5L < t) return (1.0L-t)/t;
+	return t/(1.0L-t);
+}
+
 
 /* The main, core basic takagi curve */
 long double takagi (long double w, long double x)
@@ -86,6 +94,45 @@ long double takagi (long double w, long double x)
 		// long double term = tw* parabola_up (tp*x);
 		acc += term;
 		tp *= 2.0L;
+		tw *= w;
+		if (1.0e-16 > tw) break;
+	}
+
+	return acc;
+}
+
+/* The main, core basic isola curve */
+long double isola (long double w, long double x)
+{
+	int k;
+	long double acc = 0.0L;
+	long double tw = 1.0L;
+	long double xit = x;
+	for (k=0; k<50; k++)
+	{
+		xit = pointy (xit);
+		long double term = tw * xit;
+		acc += term;
+		tw *= w;
+		if (1.0e-16 > tw) break;
+	}
+
+	return acc;
+}
+
+long double iter_tak (long double w, long double x)
+{
+	int k;
+	long double acc = 0.0L;
+	long double tw = 1.0L;
+	long double xit = x;
+	for (k=0; k<50; k++)
+	{
+		xit = triangle (xit);
+		// xit = parabola_up (xit);
+		// xit = parabola_down (xit);
+		long double term = tw * xit;
+		acc += term;
 		tw *= w;
 		if (1.0e-16 > tw) break;
 	}
@@ -419,7 +466,7 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 2048;
-	int nmax = 523;
+	int nmax = 1523;
 
 	if (argc <2)
 	{
@@ -431,8 +478,9 @@ main (int argc, char *argv[])
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
-		double ts = 1.0;
+		// double ts = isola (w, x);
 		double tw = takagi (w, x);
+		double ts = iter_tak (w, x);
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
 		// double tw = log (takagi(w,x));
