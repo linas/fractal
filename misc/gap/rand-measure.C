@@ -15,7 +15,7 @@
 
 double randoid(int n)
 {
-#define NVAL 65186
+#define NVAL 2265186
 	static double array[NVAL];
 	static int inited=0;
 	if (!inited)
@@ -31,14 +31,22 @@ double randoid(int n)
 	}
 
 	if (NVAL<= n) return 0;
-	return array[n];
+	double val = array[n];
+
+#if 0
+	val *= n;
+	val *= n;
+	val *= n;
+#endif
+
+	return val;
 }
 
 main(int argc, char *argv[])
 {
 	int i;
 
-	if (argc <1)
+	if (argc <2)
 	{
 		fprintf (stderr, "Usage: %s <nbins>\n", argv[0]);
 		exit (1);
@@ -54,7 +62,7 @@ main(int argc, char *argv[])
 		int p = i/g;
 		int q = nbins/g;
 
-		double y = randoid (p+q);
+		double y = randoid (p*q);
 		z += y / ((double) nbins);
 
 		printf ("%d	%g	%g	%g\n", i,x ,y,z);

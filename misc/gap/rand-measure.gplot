@@ -1,0 +1,23 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'rand-measure.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Distrins"
+set xlabel "p/q"
+set ylabel "Probat)"
+
+# set yrange [0:]
+
+plot "rand-measure.dat" using 2:4 title ""
+
+# pause 100
+

@@ -19,7 +19,7 @@
 #include "modular.h"
 #include "moebius.h"
 
-int modular_max_terms;
+int modular_max_terms=100000;
 
 /** Compute the divisor arithmetic function
  *  Returns the number of divisors of n.
