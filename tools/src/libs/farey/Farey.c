@@ -37,7 +37,7 @@ struct Farey * CreateFarey ()
 
 #ifdef LINUX
    /* block floating point exceptions */
-   sigsetmask (0xffff);
+   sigsetmask (0x180);
 #endif /* LINUX */
    return (self);
 }
@@ -96,6 +96,7 @@ int numer, deno;
 
    REAL = ((double) numer) / ((double) deno);
    INTPART = numer / deno;
+   if (0.0 > REAL) INTPART--;
    numer -= deno * INTPART;
    NUM = numer;
    DENOM = deno;
@@ -163,7 +164,8 @@ double val;
    REAL = val;
    /* first, compute the integer and fractional parts of the real 
     * number x. Next, express the fractional part as a ratio of integers. */
-   INTPART = (int) REAL;
+   INTPART = (int) val;
+   if (0.0 > val) INTPART--;
    FRACPART = REAL - (double) INTPART;
    d = 0x7fffffff;
    tmp = (double) d;
@@ -439,6 +441,8 @@ double t;
  * The algorithm multiplies each term by g sub k (n) where
  * g sub k (n) = (1 + sin ((k+1)*t) / sin (k*t)) ** (-n)
  * If I computed this correctly, this function is continous at all rationals.
+ * (Ooops. It not continuous at all rationals. It is continuous at
+ * all rationals whose denominators are powers of two. Sigh. 
  */
 
 #ifdef ANSI_C
@@ -668,6 +672,84 @@ double omega;
    for (i=n-1; i>=0; i--) {
       tmp += (double) TINUED_FRAC[i];
       tmp = (1.0 + sin (((double) i) * omega)) / tmp;
+   }
+
+   retval += tmp;
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
+/* I've defined an cos-real to be the result of the continued fraction
+ * where each term is damped by a cosine. Read the code. */
+
+static struct Farey *scratch = 0x0;
+
+#ifdef ANSI_C
+double ContinuedFractionToFCnReal (struct Farey *self, double omega)
+#else
+double ContinuedFractionToFCnReal (self, omega)
+struct Farey *self;
+double omega;
+#endif
+{
+   int i, n;
+   double tmp;
+   double retval;
+   double fomega;
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   if (!scratch) scratch = CreateFarey ();
+
+   /* now, work backwards and reconstruct the fraction. */
+   n = NTERMS;
+   tmp = 0.0;
+   for (i=n-1; i>=0; i--) {
+
+      SetReal (scratch, ((double) i) * omega);
+      fomega = GetFarey (scratch);
+
+      tmp += (double) TINUED_FRAC[i];
+      tmp = (1.0 + cos (fomega)) / tmp;
+   }
+
+   retval += tmp;
+   return (retval);
+}
+
+/* ------------------------------------------------------------ */
+/* I've defined an cos-real to be the result of the continued fraction
+ * where each term is damped by a cosine. Read the code. */
+
+#ifdef ANSI_C
+double ContinuedFractionToFSnReal (struct Farey *self, double omega)
+#else
+double ContinuedFractionToFSnReal (self, omega)
+struct Farey *self;
+double omega;
+#endif
+{
+   int i, n;
+   double tmp;
+   double retval;
+   double fomega;
+
+   retval = (double) INTPART;
+   if (NTERMS == 0) return (retval);
+
+   if (!scratch) scratch = CreateFarey ();
+
+   /* now, work backwards and reconstruct the fraction. */
+   n = NTERMS;
+   tmp = 0.0;
+   for (i=n-1; i>=0; i--) {
+
+      SetReal (scratch, ((double) i) * omega);
+      fomega = GetFarey (scratch);
+
+      tmp += (double) TINUED_FRAC[i];
+      tmp = (1.0 + sin (fomega)) / tmp;
    }
 
    retval += tmp;
