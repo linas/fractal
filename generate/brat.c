@@ -38,6 +38,8 @@ void mandelbrot_out (
    double modulus=0.0, frac;
    double escape_radius = 3.1;
    double ren, tl;
+   double u,v;
+   double r, phi;
 
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0/ log(2.0);
@@ -64,10 +66,35 @@ void mandelbrot_out (
          // im_c = im_position - 2.0 * re_position * im_position;
 
          /* map to cardiod lam(1-lam) */
-         re_c = 0.5 * im_position * cos (M_PI*re_position);
-         re_c -= 0.25 * im_position * im_position * cos (2.0*M_PI*re_position);
-         im_c = 0.5 * im_position * sin (M_PI*re_position);
-         im_c -= 0.25 * im_position* im_position * sin (2.0*M_PI*re_position);
+         // r = im_position;
+         // phi = M_PI*re_position;
+         // re_c = 0.5 * r * cos (phi);
+         // re_c -= 0.25 * r * r * cos (2.0*phi);
+         // im_c = 0.5 * r * sin (phi);
+         // im_c -= 0.25 * r* r * sin (2.0*phi);
+         // 
+         // re_c = 0.5 * r * (cos (phi) - 0.5 * r * cos (2.0*phi));
+         // im_c = 0.5 * r * (sin (phi) - 0.5 * r * sin (2.0*phi));
+
+         /* remaps */
+         re = 0.25 - re_position;
+         im = -im_position;
+         u = sqrt (0.5*(re + sqrt (re*re + im*im)));
+         v = 0.5 * im / u;
+         u = 0.5 + u;
+         r = sqrt (u*u + v*v);
+         phi = atan2 (v,u);
+         if (0.0 > phi) phi += 2.0*M_PI;
+         phi /= 2.0*M_PI;
+         /* phi runs from 1 to 1 */
+
+         if (0.5 < phi) phi = 1.0 - phi;
+         phi = phi / (1.0-phi);
+
+         
+         phi *= 2.0*M_PI;
+         re_c = r * (cos (phi) - r * cos (2.0*phi));
+         im_c = r * (sin (phi) - r * sin (2.0*phi));
 
          re = re_c;
          im = im_c;
