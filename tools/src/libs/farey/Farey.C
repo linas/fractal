@@ -23,6 +23,7 @@
 /* ------------------------------------------------------------ */
 ContinuedFraction::ContinuedFraction (void)
 {
+   real = 0.0;
    cutoff = 0x7fffffff;
 
    scratch = 0x0;
@@ -31,6 +32,8 @@ ContinuedFraction::ContinuedFraction (void)
    /* block floating point exceptions */
    sigsetmask (0x180);
 #endif /* LINUX */
+
+   SetReal (0.0);
 }
 
 /* ------------------------------------------------------------ */
