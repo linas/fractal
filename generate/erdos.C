@@ -5,6 +5,7 @@
  * Display lambert series involving divisors
  * More generally, 
  * show Weierstrass elliptic function g_2 and g_3 invariants
+ * Also show the modular discriminant.
  *
  * HISTORY:
  * quick hack -- Linas Vepstas October 1989
@@ -138,7 +139,7 @@ static double erdos_series (double re_q, double im_q)
 }
 
 /* Weierstrass elliptic invarient g_2, where q is the nome */
-static double gee_2 (double re_q, double im_q)
+static void gee_2_c (double re_q, double im_q, double *pre, double *pim)
 {
 	double rep, imp;
 	double sqre, sqim;
@@ -153,16 +154,11 @@ static double gee_2 (double re_q, double im_q)
 	rep *= 4.0 *M_PI*M_PI*M_PI*M_PI / 3.0;
 	imp *= 4.0 *M_PI*M_PI*M_PI*M_PI / 3.0;
 
-	// return sqrt (rep*rep+imp*imp);
-	// return rep;
-	// return imp;
-	double phase = atan2 (imp, rep);
-	phase += M_PI;
-	phase /= 2.0*M_PI;
-	return phase;
+	*pre = rep;
+	*pim = imp;
 }
 
-static double gee_3 (double re_q, double im_q)
+static void gee_3_c (double re_q, double im_q, double *pre, double *pim)
 {
 	double rep, imp;
 	double sqre, sqim;
@@ -177,13 +173,80 @@ static double gee_3 (double re_q, double im_q)
 	rep *= 8.0 *M_PI*M_PI*M_PI*M_PI *M_PI*M_PI/ 27.0;
 	imp *= 8.0 *M_PI*M_PI*M_PI*M_PI *M_PI*M_PI/ 27.0;
 
-	// return sqrt (rep*rep+imp*imp);
-	return rep;
+	*pre = rep;
+	*pim = imp;
+}
+
+/* the modular discriminant */
+static void disc_c (double re_q, double im_q, double *pre, double *pim)
+{
+	double g2re, g2im;
+	double g3re, g3im;
+	double tmp;
+
+	gee_2_c (re_q, im_q, &g2re, &g2im);
+	gee_3_c (re_q, im_q, &g3re, &g3im);
+	
+	double g3sqre, g3sqim;
+	g3sqre = g3re*g3re - g3im*g3im;
+	g3sqim = 2.0 * g3re*g3im;
+	
+	double g2cure, g2cuim;
+	g2cure = g2re*g2re - g2im*g2im;
+	g2cuim = 2.0 * g2re*g2im;
+	tmp = g2cure*g2re - g2cuim*g2im;
+	g2cuim = g2cure*g2im + g2cuim* g2re;
+	g2cure = tmp;
+
+	double dre, dim;
+	dre = g2cure - 27.0*g3sqre;
+	dim = g2cuim - 27.0*g3sqim;
+
+	*pre = dre;
+	*pim = dim;
+}
+
+static double discriminant (double re_q, double im_q)
+{
+	double rep, imp;
+	disc_c (re_q, im_q, &rep, &imp);
+
+	return sqrt (rep*rep+imp*imp);
+	// return rep;
 	// return imp;
 	// double phase = atan2 (imp, rep);
 	// phase += M_PI;
 	// phase /= 2.0*M_PI;
 	// return phase;
+}
+
+/* Weierstrass elliptic invarient g_2, where q is the nome */
+static double gee_2 (double re_q, double im_q)
+{
+	double rep, imp;
+	gee_2_c (re_q, im_q, &rep, &imp);
+
+	// return sqrt (rep*rep+imp*imp);
+	// return rep;
+	// return imp;
+	double phase = atan2 (imp, rep);
+	phase += M_PI;
+	phase /= 2.0*M_PI;
+	return phase;
+}
+
+static double gee_3 (double re_q, double im_q)
+{
+	double rep, imp;
+	gee_3_c (re_q, im_q, &rep, &imp);
+
+	// return sqrt (rep*rep+imp*imp);
+	// return rep;
+	// return imp;
+	double phase = atan2 (imp, rep);
+	phase += M_PI;
+	phase /= 2.0*M_PI;
+	return phase;
 }
 
 /*-------------------------------------------------------------------*/
@@ -227,7 +290,8 @@ MakeHisto (
 
 			// double phi = erdos_series (re_position, im_position);
 			// double phi = gee_2 (re_position, im_position);
-			double phi = gee_3 (re_position, im_position);
+			// double phi = gee_3 (re_position, im_position);
+			double phi = discriminant (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;
