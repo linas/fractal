@@ -23,7 +23,7 @@ int mertens_m (int n);
 int liouville_omega (int n);
 
 /* The Liouville lambda function */
-int liouville_lmbda (int n);
+int liouville_lambda (int n);
 
 #ifdef   __cplusplus
 };
