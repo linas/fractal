@@ -12,25 +12,113 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "brat.h"
 
-long double swap12 (long double x)
+inline long double swap12 (long double x)
 {
 	long double ox = 1.0L/x;
 	long double a1 = floorl(ox);
 	long double r1 = ox - a1;
+	if (1.0e-10 > r1) return r1;
 	ox = 1.0L/r1;
 	long double a2 = floorl(ox);
 	long double r2 = ox - a2;
 	r2 += a1;
-	r2 = 1.0L / r2;
-	r2 += a2;
+	r1 = 1.0L / r2;
+	r1 += a2;
 	
-	r2 = 1.0L / r2;
-	return r2;
+	x = 1.0L / r1;
+	return x;
 }
 
+inline long double swap13 (long double x)
+{
+	long double ox = 1.0L/x;
+	long double a1 = floorl(ox);
+	long double r1 = ox - a1;
+	if (1.0e-10 > r1) return 0.69314718;  // "average" value
+	ox = 1.0L/r1;
+	long double a2 = floorl(ox);
+	long double r2 = ox - a2;
+	if (1.0e-10 > r2) return r2;
+	ox = 1.0L/r2;
+	long double a3 = floorl(ox);
+	long double r3 = ox - a3;
+
+	r3 += a1;
+
+	r2 = 1.0L / r3;
+	r2 += a2;
+	
+	r1 = 1.0L / r2;
+	r1 += a3;
+	
+	x = 1.0L / r1;
+	return x;
+}
+
+inline long double swap23 (long double x)
+{
+	long double ox = 1.0L/x;
+	long double a1 = floorl(ox);
+	long double r1 = ox - a1;
+	if (1.0e-10 > r1) return 0.0;
+	ox = 1.0L/r1;
+	long double a2 = floorl(ox);
+	long double r2 = ox - a2;
+	if (1.0e-10 > r2) return 0.0;
+	ox = 1.0L/r2;
+	long double a3 = floorl(ox);
+	long double r3 = ox - a3;
+
+	r3 += a2;
+
+	r2 = 1.0L / r3;
+	r2 += a3;
+	
+	r1 = 1.0L / r2;
+	r1 += a1;
+	
+	x = 1.0L / r1;
+	return x;
+}
+
+inline long double swap14 (long double x)
+{
+	long double ox = 1.0L/x;
+	long double a1 = floorl(ox);
+	long double r1 = ox - a1;
+	if (1.0e-10 > r1) return 0.0;
+	ox = 1.0L/r1;
+	long double a2 = floorl(ox);
+	long double r2 = ox - a2;
+	if (1.0e-10 > r2) return 0.0;
+	ox = 1.0L/r2;
+	long double a3 = floorl(ox);
+	long double r3 = ox - a3;
+	if (1.0e-10 > r3) return 0.0;
+	ox = 1.0L/r3;
+	long double a4 = floorl(ox);
+	long double r4 = ox - a4;
+
+	r4 += a1;
+
+	r3 = 1.0L / r4;
+	r3 += a3;
+	
+	r2 = 1.0L / r3;
+	r2 += a2;
+	
+	r1 = 1.0L / r2;
+	r1 += a4;
+	
+	x = 1.0L / r1;
+	return x;
+}
+
+/* The integrand, which is swap(x) * x^s */
 void grand (long double x, long double sre, long double sim, 
 					 long double *pre, long double *pim)
 {
@@ -39,14 +127,16 @@ void grand (long double x, long double sre, long double sim,
 	long double sw = ox - floorl(ox);
 #else
 	long double sw = swap12 (x);
+	// long double sw = swap13 (x);
 #endif
 
 	long double lnx = logl (x);
-
 	long double ire = expl (sre*lnx);
+	// long double ire = 1.0L/ sqrtl (x);
 	long double iim = ire;
-	ire *= cosl (sim*lnx);
-	iim *= sinl (sim*lnx);
+	long double phi = sim*lnx;
+	ire *= cosl (phi);
+	iim *= sinl (phi);
 	
 	ire *= sw;
 	iim *= sw;
@@ -55,6 +145,11 @@ void grand (long double x, long double sre, long double sim,
 	*pim = iim;
 }
 
+
+/* compute single integral of the integrand.
+ * actually compute 
+ * zeta = s/(s-1) - s \int_0^1 swap(x) x^{s-1} dx 
+ */
 void gral(int nsteps, long double sre, long double sim, 
 					 long double *pre, long double *pim)
 {
@@ -66,15 +161,30 @@ void gral(int nsteps, long double sre, long double sim,
 	long double sum_im= 0.0L;
 	long double x = 1.0L - 0.5*step;
 
+	long double r = RAND_MAX;
+	r = 1.0L / r;
+
 	/* integrate in a simple fashion */
+	int nh = 0;
 	for (i=0; i<nsteps; i++)
 	{
+// #define DO_RAND
+#ifdef DO_RAND
+		int nr = rand();
+		if (0 == nr) continue;
+		x = (long double) nr;
+		x *= r;
+#endif
 		long double val_re, val_im;
 		grand (x, sre-1.0, sim, &val_re, &val_im);
+		x -= step;
 		sum_re += val_re;
 		sum_im += val_im;
-		x -= step;
+		nh ++;
 	}
+
+	/* Divide by the actual number of samples */
+	step = 1.0L / ((long double) nh);
 	sum_re *= step;
 	sum_im *= step;
 
@@ -93,7 +203,7 @@ void gral(int nsteps, long double sre, long double sim,
 	sum_re = sre - sum_re;
 	sum_im = sim - sum_im;
 
-	/* ??? huih ? */
+	/* s/(s-1) so add 1 now */
 	sum_re += 1.0L;
 
 	*pre = sum_re;
@@ -107,6 +217,7 @@ rswap (long double sre, long double sim, int itermax)
 
 	gral (itermax, sre, sim, &zre, &zim);
 	long double vv = zre*zre+zim*zim;
+	vv = sqrt (vv);
 	return zre;
 }
 
@@ -150,6 +261,9 @@ MakeHisto (
 
 			double phi = rswap (re_position, im_position, itermax);
          glob [i*sizex +j] = phi;
+
+			if ((re_position <= 0.5) && (0.5<re_position+delta))
+         	glob [i*sizex +j] = -1.0;
 
          re_position += delta;
       }
