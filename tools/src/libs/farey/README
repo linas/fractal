@@ -1,0 +1,82 @@
+
+                    Notes & Diary on Continued Fractions
+                    ------------------------------------
+
+23 January 1994
+---------------
+Implemented a subroutine which convertes floating point numbers to
+continued fractions. Some numerical instabilites needed to be hacked
+around.  If x is a real number, then
+
+x = b0 +  1/ (b1 + 1 / (b2 + 1/ (b3 + ......... )))))
+
+is the continued fraction representation, with bi all integers.
+In my expansion, I always chose the rep so that there are always an odd
+number of bi.  The code for this is in the subroutine
+"RealToContinuedFraction()" in Farey.c.
+
+There are any number of interesting manipulations that can be performed
+on this representation. 
+Given above x, let
+
+x(z) = b0 +  1/ (b1 + z / (b2 + z/ (b3 + ......... )))))
+
+which appears to map real numbers into a Cantor set for any 0<z<1.
+For 1<z<+INF, the mapping overalps itself (i.e. is no longer
+monotonically increasing);
+For -0.25 < z < 0, the mapping is reflected,
+For z<= -0.25, the mapping seems to go berserk.
+See accompanying graphs for pictures.
+
+I've coded this transform up in the subroutine "ContinuedFractionToZReal()", 
+in Farey.c. The graphs are generated with zlist.c.
+
+For notational purposes, define x(z) == f(x,z). Then can express several
+identiies:
+
+  x = f( f(x, z), 1/z)   for 0<z<1
+
+Naively, this appears to be a statement about a function and it's
+inverse; however, since the mapping f is not continuous in x, this ends
+up being more of a statement about fixed points in the mapping.
+For 1 < z < +INF, the mapping is, well, see for yourself.
+For z < 0, the mapping looks turbulent !!
+The code exploring this relation is in zinv.c
+
+The next relation exposes some of the self-similarity:
+
+f (1/(1+y), t) = 1/ (1+t*f(y,t)) for -INF < t < +INF
+
+Except at a countable number of points, where the difference is small. I
+am not sure if the difference is due to numerical error, or if its
+really there. Will explore.  -- Is NOT due to numerical error ... It
+really does differ -- but amazingly, it seems to be accurate to approx 1
+part in 1.0e3 for all but 5 or 10 x's, and far more accurate for most 
+remaining x's ...
+
+Another intersting observation -- to make sure that I've been getting a
+good statistical sampling of x's, I compared a straight array to one with
+randomly generated offsets. The straight array seems to have 6-8 terms
+in the contnued fraction, the random array 12-14; I also tried an
+extreme case with 22-24 terms in the continued fraction. It would appear
+that jiggling x every so slightly seems to change the values of
+functions by no more than 1 part in 1.0e3 ... Hmm...  This is an
+important result; it shows that the games I've been palying with the
+continued fractions are really representative of real numbers, and not
+of the rationals I've been palying with.  (Hmm; that statement is too
+strong; I merely find that the games I play work for "almost
+irrationals" -- i.e. extra terms on teh continued fractions do not
+affect results in a significant way.)
+
+
+
+
+
+
+
+
+
+
+
+
+
