@@ -41,9 +41,9 @@ The Takagi curve is a simple, exactly solvable fractal curve exhibiting
 \end_inset 
 
 .
- By constructing a similar curve using a Dirichlet Series instea of a MacLaurin
- series, one gets a visually similar curve which obeys a more complex set
- of self-similarities.
+ By constructing a similar curve using a Dirichlet Series instead of the
+ MacLaurin series, one gets a visually similar curve which obeys a more
+ complex set of self-similarities.
  These can be expressed as a set of relations on the Riemann Zeta.
  
 \layout Abstract
@@ -51,6 +51,8 @@ The Takagi curve is a simple, exactly solvable fractal curve exhibiting
 This paper assumes familiarity with the development of the symmetries of
  the Takagi Curve and the Minkowski Question Mark exhibited in companion
  papers.
+ In other respects, the presentation is kept as simple as possible, avoiding
+ appeals to abstract mathematical concepts as much as possible.
 \layout Abstract
 
 This paper is part of a set of chapters that explore the relationship between
@@ -61,13 +63,7 @@ A Fractal Symmetry of the Riemann Zeta
 \layout Standard
 
 Introduction to be written.
- 
-\layout Subsection
-
-A Fractal Symmetry of the Riemann Zeta
-\layout Standard
-
-The moral of this section might be 
+ The moral of this section might be 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -77,7 +73,16 @@ if you fool with Dirichlet series, don't be surprised to find the Riemann
 \end_inset 
 
 , which is what we'll do and find.
- One can consider other series built out of the Tent Map.
+\layout Subsection
+
+The Analog of the Takagi Curve as a Dirichlet Series
+\layout Standard
+
+We saw in an earlier chapter how to build the Takagi Curve as a MacLaurin
+ sum over the Tent Map, and how this curve transformed under the three-dimension
+al representation of the Modular Group.
+ One can consider other series built out of the Tent Map, and ask what thier
+ transformation properties are.
  In this section, lets consider the Dirichlet series.
  These are related to the Takagi Curve through analytic transformations.
  Thus, we define 
@@ -86,6 +91,11 @@ if you fool with Dirichlet series, don't be surprised to find the Riemann
 
 \end_inset 
 
+ where 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+ is the tent map as defined before.
  By substituting 
 \begin_inset Formula \begin{equation}
 n^{-s}=\frac{1}{\Gamma(s)}\int_{0}^{\infty}y^{s-1}e^{-ny}dy\label{eq:}\end{equation}
@@ -102,6 +112,11 @@ n^{-s}=\frac{1}{\Gamma(s)}\int_{0}^{\infty}y^{s-1}e^{-ny}dy\label{eq:}\end{equat
 
 \end_inset 
 
+ where 
+\begin_inset Formula $t_{w}(x)$
+\end_inset 
+
+ is the Takagi Curve as defined in previous sections.
  Note that a pole in 
 \begin_inset Formula $t_{w}(x)$
 \end_inset 
@@ -130,6 +145,7 @@ noisier
 \end_inset 
 
  suffices to visualize this curve.
+ XXX redo.
  Although visually similar, and thus 
 \begin_inset Quotes eld
 \end_inset 
@@ -153,7 +169,7 @@ s-1\end{array}\right)\left(-\right)^{k}\zeta_{s+k}(x)\label{eq:zeta-g}\end{equat
 \begin_inset Formula \begin{equation}
 \left(\frac{n}{n+1}\right)^{s}=\sum_{k=0}^{\infty}\left(\begin{array}{c}
 s+k-1\\
-s-1\end{array}\right)\left(\frac{-1}{n}\right)^{k}\label{eq:}\end{equation}
+s-1\end{array}\right)\left(\frac{-1}{n}\right)^{k}\end{equation}
 
 \end_inset 
 
@@ -165,11 +181,35 @@ s-1\end{array}\right)\left(\frac{-1}{n}\right)^{k}\label{eq:}\end{equation}
  
 \layout Standard
 
-Certain special values of 
+Comparing equation 
+\begin_inset LatexCommand \ref{eq:zeta-g}
+
+\end_inset 
+
+  to the equivalent expression for the Takagi Curve, we see that the transformat
+ion law mixes curves with different order parameters 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ Comparing this equation to the expression for the matrix elements for the
+ Gauss-Kuzmin-Wirsing (GKW) Operator developed in earlier chapters, (xxx
+ give ref) we see that this is essentially a summation over the columns
+ of the GKW.
+ Essentially, what we would like to be able to say is that if we could work
+ with the diagonal form of the GKW, then we would get a curve that transforms
+ under the simple 3D representation of the modular group, just as the Takagi
+ Curve does.
+ We develop idea this a bit further in a later section.
+ 
+\layout Standard
+
+We can make an explict connection the the Riemann Zeta by considering specific
+ values of 
 \begin_inset Formula $x$
 \end_inset 
 
- are interesting.
+.
  For example, 
 \begin_inset Formula $t_{w}(1/3)=2/3(1-w)$
 \end_inset 
@@ -217,7 +257,7 @@ s-1\end{array}\right)\left(-\right)^{k}\left[\zeta(s+k)-1\right]\label{eq:}\end{
 \end_inset 
 
  Although not strictly necessary for the above, we can repeat the analytic
- continuatino trick to get 
+ continuation trick to get 
 \begin_inset Formula \begin{equation}
 \zeta(s)=1+2^{-s}+3^{-s}+\sum_{k=0}^{\infty}\left(\begin{array}{c}
 s+k-1\\
@@ -274,14 +314,162 @@ new
 \end_inset 
 
  is associated with 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \zeta(s)=H_{m+n}(s)+\sum_{k=0}^{\infty}\left(\begin{array}{c}
 s+k-1\\
-s-1\end{array}\right)\left(-n\right)^{k}\left[\zeta(s+k)-H_{m}(s)\right]\]
+s-1\end{array}\right)\left(-n\right)^{k}\left[\zeta(s+k)-H_{m}(s)\right]\end{equation}
 
 \end_inset 
 
+ where, for convergence of the right hand side, we should take 
+\begin_inset Formula $m\geq n$
+\end_inset 
 
+.
+\layout Subsection
+
+Relations for Fractional Values
+\layout Standard
+
+We would like to extend these relations to all group elements of the form
+ 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+.
+ This is easier said than done.
+ The curve 
+\begin_inset Formula $\zeta_{s}(x)$
+\end_inset 
+
+ is even across 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+ just like the Takagi Curve is, and so 
+\begin_inset Formula $(r_{S}\zeta_{s})(x)=(\zeta_{s}\circ r_{D})(x)=\zeta_{s}(x)$
+\end_inset 
+
+ and so we expect  the polynomial parts of the transformation law to be
+ identical to those for the Takagi curve.
+ Thus, we can write the representation as 
+\begin_inset Formula \begin{equation}
+g_{S}=\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+0 & \frac{1}{2} & 0\\
+0 & 1 & G\end{array}\right)\;\textrm{ and \;}r_{S}=\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+1 & -1\; & 0\\
+0 & 0 & I\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which acts on the vector
+\begin_inset Formula \[
+\left(\begin{array}{c}
+1\\
+x\\
+\zeta_{s}(x)\end{array}\right)\]
+
+\end_inset 
+
+ just as in the Takagi representation.
+ The difference is that here, 
+\begin_inset Formula $G$
+\end_inset 
+
+ is understood to be the operator that mixes together different orders:
+\begin_inset Formula \begin{equation}
+(G\zeta_{s})(x)=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(-\right)^{k}\zeta_{s+k}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Just to be crystal clear, we can now write equation 
+\begin_inset LatexCommand \ref{eq:zeta-g}
+
+\end_inset 
+
+ as 
+\begin_inset Formula \begin{equation}
+(g_{S}\zeta_{s})(x)=(\zeta_{s}\circ g_{D})(x)=x+(G\zeta_{s})(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and then use matrix concatentation to construct general elements 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ just as in the Takagi case.
+ 
+\layout Standard
+
+This result remains abstract until we plug in specific values of 
+\begin_inset Formula $x$
+\end_inset 
+
+ to get back relations on the Riemann Zeta.
+ This is where the true adventure begins.
+ We could try, for example, 
+\begin_inset Formula $x=(grg)(1/3)=5/12$
+\end_inset 
+
+ but this can lead to some confusion.
+ To unclutter the issue, pick 
+\begin_inset Formula $x=1/5$
+\end_inset 
+
+ and ignore connections to 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ for a moment.
+ We then have 
+\begin_inset Formula $\tau(1/5)=2/5$
+\end_inset 
+
+ and 
+\begin_inset Formula $\tau^{2}(1/5)=4/5$
+\end_inset 
+
+ and 
+\begin_inset Formula $\tau^{3}(1/5)=2/5$
+\end_inset 
+
+ and so we see that after one step, the iteration immediately settles down
+ to an orbit of period 2.
+ We then have 
+\begin_inset Formula \begin{eqnarray}
+\zeta_{s}\left(\frac{1}{5}\right) & = & \sum_{n=1}^{\infty}\tau^{n}\left(\frac{1}{5}\right)\; n^{-s}\nonumber \\
+ & = & \frac{2}{5}\left(1+\frac{1}{3^{s}}+\frac{1}{5^{s}}+...\right)+\frac{4}{5}\left(\frac{1}{2^{s}}+\frac{1}{4^{s}}+...\right)\nonumber \\
+ & = & \frac{2}{5}\left(1-2^{-s}\right)\zeta(s)+\frac{4}{5}2^{-s}\zeta(s)\nonumber \\
+ & = & \frac{2}{5}\zeta(s)\left(1+\frac{1}{2^{s}}\right)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Inserting this into equation 
+\begin_inset LatexCommand \ref{eq:zeta-g}
+
+\end_inset 
+
+ gives 
+\begin_inset Formula \begin{equation}
+\zeta(s)\left(1-\frac{1}{2^{s}}\right)=1+\frac{1}{2^{s}}\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-1}{2}\right)^{k}\zeta(s+k)\label{eq:}\end{equation}
+
+\end_inset 
+
+ What happens if we pick an 
+\begin_inset Formula $x$
+\end_inset 
+
+ giving an orbit of period three?  
 \layout Subsection
 
 Conclusions
