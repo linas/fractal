@@ -193,12 +193,12 @@ The Takagi-Landsberg curve was explored by Teiji Takagi, circa 1903 as an
 \end_inset 
 
 , the value 
-\begin_inset Formula \[
-t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
- where we anchor the recurrence with 
+where we anchor the recurrence with 
 \begin_inset Formula $t_{w}(0)=t_{w}(1)=0$
 \end_inset 
 
@@ -209,8 +209,8 @@ t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}
 .
  One extends this curve to all reals by 'linear interpolation' between the
  dyadic values, as 
-\begin_inset Formula \[
-t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\]
+\begin_inset Formula \begin{equation}
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -219,10 +219,10 @@ where
 \end_inset 
 
  is the triangle function:
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \tau(x)=\left\{ \begin{array}{ccc}
 2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
-2-2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\]
+2-2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -280,7 +280,7 @@ The Takagi-Landsberg Curve
 
 
 \begin_inset Graphics
-	filename takagi
+	filename takagi.png
 	rotateAngle 270
 
 \end_inset 
@@ -379,8 +379,8 @@ One also does not have to limit oneself to a power of two; Weierstrass
 \end_inset 
 
  considered 
-\begin_inset Formula \[
-\sum_{k=0}^{\infty}b^{k}\cos(a^{k}x\pi)\]
+\begin_inset Formula \begin{equation}
+\sum_{k=0}^{\infty}b^{k}\cos(a^{k}x\pi)\label{eq:asdf}\end{equation}
 
 \end_inset 
 
@@ -434,8 +434,8 @@ Of the many possible different choices for
 
 .
  Thus, we may write 
-\begin_inset Formula \[
-t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau^{k+1}(x)\]
+\begin_inset Formula \begin{equation}
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau^{k+1}(x)\label{eq:tee-w}\end{equation}
 
 \end_inset 
 
@@ -443,8 +443,8 @@ t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau^{k+1}(x)\]
 \layout Description
 
 Homework: Develop the curious sum 
-\begin_inset Formula \[
-e_{w}(x)=\sum_{k=0}^{\infty}\frac{w^{k}\tau^{k}(x)}{k!}\]
+\begin_inset Formula \begin{equation}
+e_{w}(x)=\sum_{k=0}^{\infty}\frac{w^{k}\tau^{k}(x)}{k!}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -530,14 +530,14 @@ Consider first the generator that is the interval contraction
 
 .
  It acts on the Takagi map as
-\begin_inset Formula \[
-\left[gt_{w}\right](x)=t_{w}\left(\frac{x}{2}\right)=x+wt_{w}(x)\]
+\begin_inset Formula \begin{equation}
+\left[gt_{w}\right](x)=t_{w}\left(\frac{x}{2}\right)=x+wt_{w}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
  Iterating on this generator gives 
-\begin_inset Formula \[
-\left[g^{n}t_{w}\right](x)=t_{w}\left(\frac{x}{2^{n}}\right)=\frac{x}{2^{n-1}}\left(\frac{1-2^{n}w^{n}}{1-2w}\right)+w^{n}t_{w}(x)\]
+\begin_inset Formula \begin{equation}
+\left[g^{n}t_{w}\right](x)=t_{w}\left(\frac{x}{2^{n}}\right)=\frac{x}{2^{n-1}}\left(\frac{1-2^{n}w^{n}}{1-2w}\right)+w^{n}t_{w}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -558,12 +558,12 @@ Consider first the generator that is the interval contraction
  three-dimensional representation of the modular group.
  To be explicit, we write a general element of the vector space as the dot-produ
 ct of a row of real numbers times a column of basis vectors 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 a+bx+ct_{w}(x)=\left(\begin{array}{ccc}
 a & \; b & \; c\end{array}\right)\left(\begin{array}{c}
 1\\
 x\\
-t_{w}(x)\end{array}\right)\]
+t_{w}(x)\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -579,21 +579,21 @@ t_{w}(x)\end{array}\right)\]
 \layout Standard
 
 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 g_{3}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 0 & \frac{1}{2} & 0\\
 0 & 1 & w\end{array}\right)\;\textrm{ and \;}r_{3}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 1 & -1\; & 0\\
-0 & 0 & 1\end{array}\right)\]
+0 & 0 & 1\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  where we use the subscript 3 to denote this is the 3-D representation.
  Under the action of this representation, 3-vectors transform as, for example,
  
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \left[gt_{w}\right](x)=\left(\begin{array}{ccc}
 0 & \;0 & \;1\end{array}\right)\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
@@ -601,18 +601,18 @@ g_{3}=\left(\begin{array}{ccc}
 0 & 1 & w\end{array}\right)\left(\begin{array}{c}
 1\\
 x\\
-t_{w}(x)\end{array}\right)\]
+t_{w}(x)\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  Previously, we had found the dyadic representation that acted on dyadic
  numbers as 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 g_{D}=\left(\begin{array}{cc}
 1 & 0\\
 0 & \frac{1}{2}\end{array}\right)\;\textrm{ and }\; r_{D}=\left(\begin{array}{cc}
 1 & 0\\
-1 & -1\end{array}\right)\]
+1 & -1\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -651,8 +651,8 @@ For the sake of clarity, and to drive the point home, lets now examine the
 \end_inset 
 
  with the dyadic representation: that is, 
-\begin_inset Formula \[
-\gamma:x=\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+\begin_inset Formula \begin{equation}
+\gamma:x=\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -678,12 +678,12 @@ For the sake of clarity, and to drive the point home, lets now examine the
 \layout Standard
 
 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 t_{w}(\gamma_{D}(x))=\left[\gamma_{3}t_{w}\right](x)=\left(\begin{array}{ccc}
 0 & \;0 & \;1\end{array}\right)g_{3}^{a_{1}}r_{3}g_{3}^{a_{2}}r_{3}g_{3}^{a_{3}}r_{3}...r_{3}g_{3}^{a_{N}}\left(\begin{array}{c}
 1\\
 x\\
-t_{w}(x)\end{array}\right)\]
+t_{w}(x)\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1019,8 +1019,8 @@ The action of a group element
 \layout Standard
 
 
-\begin_inset Formula \[
-t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\]
+\begin_inset Formula \begin{equation}
+t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1072,11 +1072,11 @@ t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\]
 \end_inset 
 
  to get 
-\begin_inset Formula \begin{eqnarray*}
-\gamma_{D}(1) & = & \sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\\
+\begin_inset Formula \begin{eqnarray}
+\gamma_{D}(1) & = & \sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\nonumber \\
 \, & = & \begin{array}{ccccc}
 0. & \underbrace{000...000} & \underbrace{111...111} & \underbrace{000...000} & ...\\
-\, & a_{1} & a_{2} & a_{3} & \,\end{array}\end{eqnarray*}
+\, & a_{1} & a_{2} & a_{3} & \,\end{array}\label{eq:}\end{eqnarray}
 
 \end_inset 
 
@@ -1086,10 +1086,10 @@ t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\]
 \end_inset 
 
  of the previous digits; that is, 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 b_{k}=\left\{ \begin{array}{ccc}
 1 & \;\textrm{ for N odd, }\; & \forall k>M\\
-0 & \;\textrm{ for N even, }\; & \forall k>M\end{array}\right.\]
+0 & \;\textrm{ for N even, }\; & \forall k>M\end{array}\right.\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1099,8 +1099,8 @@ b_{k}=\left\{ \begin{array}{ccc}
 
  can then be expressed directly in terms of this binary expansion.
  
-\begin_inset Formula \[
-q_{\gamma}(w)=\frac{(-)^{N}}{2^{M-1}}\sum_{k=1}^{M}(2b_{k}-1)\;(2w)^{k-1}\]
+\begin_inset Formula \begin{equation}
+q_{\gamma}(w)=\frac{(-)^{N}}{2^{M-1}}\sum_{k=1}^{M}(2b_{k}-1)\;(2w)^{k-1}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1174,14 +1174,14 @@ In either case, the polynomials that we are dealing with are closely related
 \end_inset 
 
  as 
-\begin_inset Formula \[
-x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\]
+\begin_inset Formula \begin{equation}
+x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq:}\end{equation}
 
 \end_inset 
 
  and then define its Cantorization as 
-\begin_inset Formula \[
-c_{z}(x)=\sum_{k=1}^{\infty}b_{k}z^{k}\]
+\begin_inset Formula \begin{equation}
+c_{z}(x)=\sum_{k=1}^{\infty}b_{k}z^{k}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1224,7 +1224,8 @@ Cantor Polynomial
 
 
 \begin_inset Graphics
-	filename dyadic-1-3.eps
+	filename dyadic-1-3.ps
+	rotateAngle 270
 
 \end_inset 
 
@@ -1324,7 +1325,7 @@ Cantor Polynomial
 
 
 \begin_inset Graphics
-	filename dyadic-2-3.ps
+	filename dyadic-2-3.png
 
 \end_inset 
 
@@ -1417,22 +1418,22 @@ Replacing the sawtooth shape that defines the the Takagi function with a
 \layout Standard
 
 Lets replace the sawtooth by a quadratic shape
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \alpha(x)=\left\{ \begin{array}{ccc}
 4x^{2} & \;\textrm{ when }\; & 0\leq x\leq1/2\\
-4(1-x)^{2} & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\]
+4(1-x)^{2} & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
 \end_inset 
 
  so that 
-\begin_inset Formula \[
-a_{w}(x)=\sum_{k=0}^{\infty}w^{k}\alpha\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\]
+\begin_inset Formula \begin{equation}
+a_{w}(x)=\sum_{k=0}^{\infty}w^{k}\alpha\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
 
 \end_inset 
 
  Its not hard to find that 
-\begin_inset Formula \[
-\left[g_{4}a_{w}\right](x)\equiv\left[a_{w}g_{D}\right](x)=a_{w}\left(\frac{x}{2}\right)=x^{2}+wa_{w}(x)\]
+\begin_inset Formula \begin{equation}
+\left[g_{4}a_{w}\right](x)\equiv\left[a_{w}g_{D}\right](x)=a_{w}\left(\frac{x}{2}\right)=x^{2}+wa_{w}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1447,12 +1448,12 @@ a_{w}(x)=\sum_{k=0}^{\infty}w^{k}\alpha\left(2^{k}x-\left\lfloor 2^{k}x\right\rf
 \end_inset 
 
 can be represented as the matrix 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 g_{4}=\left(\begin{array}{cccc}
 1 & 0 & 0 & 0\\
 0 & \frac{1}{2} & 0 & 0\\
 0 & 0 & \frac{1}{4} & 0\\
-0 & 0 & 1 & w\end{array}\right)\]
+0 & 0 & 1 & w\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1461,12 +1462,12 @@ g_{4}=\left(\begin{array}{cccc}
 \end_inset 
 
  as 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 r_{4}=\left(\begin{array}{cccc}
 1 & 0 & 0 & 0\\
 1 & -1 & 0 & 0\\
 1 & -2 & 1 & 0\\
-0 & 0 & 0 & 1\end{array}\right)\]
+0 & 0 & 0 & 1\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1491,24 +1492,24 @@ In general, if we replace
 
 .
  For example, if we were to construct the curve from 
-\begin_inset Formula \[
-\beta(x)=4x(1-x)\]
+\begin_inset Formula \begin{equation}
+\beta(x)=4x(1-x)\label{eq:}\end{equation}
 
 \end_inset 
 
  so that 
-\begin_inset Formula \[
-b_{w}(x)=\sum_{k=0}^{\infty}w^{k}\beta\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\]
+\begin_inset Formula \begin{equation}
+b_{w}(x)=\sum_{k=0}^{\infty}w^{k}\beta\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
 
 \end_inset 
 
  then we'd find that 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 g_{b}=\left(\begin{array}{cccc}
 1 & 0 & 0 & 0\\
 0 & \frac{1}{2} & 0 & 0\\
 0 & 0 & \frac{1}{4} & 0\\
-0 & 2 & -1 & w\end{array}\right)\]
+0 & 2 & -1 & w\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1525,12 +1526,12 @@ g_{b}=\left(\begin{array}{cccc}
 \end_inset 
 
  given by 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 U=\left(\begin{array}{cccc}
 1 & 0 & 0 & 0\\
 0 & 1 & 0 & 0\\
 0 & 0 & 1 & 0\\
-0 & \frac{4}{1-2w} & \frac{-4}{1-2w} & \frac{-2w}{1-2w}\end{array}\right)\]
+0 & \frac{4}{1-2w} & \frac{-4}{1-2w} & \frac{-2w}{1-2w}\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1557,10 +1558,10 @@ We can also construct a function that is odd about
 \end_inset 
 
 : 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \beta_{o}(x)=\left\{ \begin{array}{ccc}
 16x(1/2-x) & \;\textrm{ when }\; & 0\leq x\leq1/2\\
-16(1-x)(1/2-x) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\]
+16(1-x)(1/2-x) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1589,12 +1590,12 @@ o
 \end_inset 
 
  for this function has an extra minus sign: 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 r_{4o}=\left(\begin{array}{cccc}
 1 & 0 & 0 & 0\\
 1 & -1 & 0 & 0\\
 1 & -2 & 1 & 0\\
-0 & 0 & 0 & -1\end{array}\right)\]
+0 & 0 & 0 & -1\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1620,12 +1621,12 @@ r_{4o}=\left(\begin{array}{cccc}
 \end_inset 
 
  is 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 g_{4o}=\left(\begin{array}{cccc}
 1 & 0 & 0 & 0\\
 0 & \frac{1}{2} & 0 & 0\\
 0 & 0 & \frac{1}{4} & 0\\
-0 & 4 & -4 & w\end{array}\right)\]
+0 & 4 & -4 & w\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1642,11 +1643,11 @@ g_{4o}=\left(\begin{array}{cccc}
  Working backwards, we realize that there is actually another 3D representation,
  of odd parity, that is not conjugate to the even-parity representation.
  It is the one that is built out of the shifted sawtooth 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \sigma(x)=\left\{ \begin{array}{ccc}
 4x & \;\textrm{ for }\; & 0\leq x\leq1/4\\
 2-4x & \;\textrm{ for }\; & 1/4\leq x\leq3/4\\
-4x-4 & \;\textrm{ for }\; & 3/4\leq x\leq1\end{array}\right.\]
+4x-4 & \;\textrm{ for }\; & 3/4\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1704,11 +1705,11 @@ For the most part, we've tried to be careful to choose functions that yield
  Curiously, the odd-parity quadratic above has a continuous first derivative.
  We can in fact build an even-parity quadratic with a continuous first derivativ
 e, by following the same recipe:
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \beta_{e}(x)=\left\{ \begin{array}{ccc}
 1-16x^{2} & \;\textrm{ for }\; & 0\leq x\leq1/4\\
 16(x-1/2)^{2}-1 & \;\textrm{ for }\; & 1/4\leq x\leq3/4\\
-1-16(1-x)^{2} & \;\textrm{ for }\; & 3/4\leq x\leq1\end{array}\right.\]
+1-16(1-x)^{2} & \;\textrm{ for }\; & 3/4\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1745,16 +1746,16 @@ Higher-Dimensional Reprsentations
 It should now be apparent how to build arbitrary higher-dimensional representati
 ons.
  One can, for instance, start with 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \alpha_{n}(x)=\left\{ \begin{array}{ccc}
 2^{n}x^{n} & \;\textrm{ when }\; & 0\leq x\leq1/2\\
-2^{n}(1-x)^{n} & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\]
+2^{n}(1-x)^{n} & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
 \end_inset 
 
  and discover that 
-\begin_inset Formula \[
-\left[g_{n+2}a_{n,w}\right](x)\equiv\left[a_{n,w}g_{D}\right](x)=a_{n,w}\left(\frac{x}{2}\right)=x^{n}+wa_{n,w}(x)\]
+\begin_inset Formula \begin{equation}
+\left[g_{n+2}a_{n,w}\right](x)\equiv\left[a_{n,w}g_{D}\right](x)=a_{n,w}\left(\frac{x}{2}\right)=x^{n}+wa_{n,w}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1845,22 +1846,22 @@ The above
 \layout Standard
 
 
-\begin_inset Formula \[
-T_{n+}(x;w)=\sum_{k=0}^{\infty}w^{k}B_{n}\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\]
+\begin_inset Formula \begin{equation}
+T_{n+}(x;w)=\sum_{k=0}^{\infty}w^{k}B_{n}\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
 
 \end_inset 
 
  for the one parity, and, for the opposite parity, 
-\begin_inset Formula \[
-T_{n-}(x;w)=\sum_{k=0}^{\infty}w^{k}\check{B}_{n}\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\]
+\begin_inset Formula \begin{equation}
+T_{n-}(x;w)=\sum_{k=0}^{\infty}w^{k}\check{B}_{n}\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
 
 \end_inset 
 
  where we define 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \check{B}_{n}(x)=\left\{ \begin{array}{ccc}
 B_{n}(2x)-B_{n}(1) & \;\textrm{ when }\; & 0\leq x\leq1/2\\
-(-)^{n}\left(B_{n}(1)-B_{n}(2(1-x))\right) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\]
+(-)^{n}\left(B_{n}(1)-B_{n}(2(1-x))\right) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1901,8 +1902,8 @@ The eigenfunctions of the Bernoulli map
 \layout Standard
 
 
-\begin_inset Formula \[
-\phi_{z,l}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2l+1\right)x\right)\]
+\begin_inset Formula \begin{equation}
+\phi_{z,l}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2l+1\right)x\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2030,27 +2031,27 @@ It can be readily worked out that the factor of
 \end_inset 
 
  we have 
-\begin_inset Formula \[
-\left[g\phi_{z,l}\right](x)=\left[\phi_{z,l}g\right](x)=\phi_{z,l}(\frac{x}{2})=\exp\left((2l+1)\pi ix\right)+z\phi_{z,l}(x)\]
+\begin_inset Formula \begin{equation}
+\left[g\phi_{z,l}\right](x)=\left[\phi_{z,l}g\right](x)=\phi_{z,l}(\frac{x}{2})=\exp\left((2l+1)\pi ix\right)+z\phi_{z,l}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
  and for reflection,
-\begin_inset Formula \[
-\left[r\phi_{z,l}\right](x)=\left[\phi_{z,l}r\right](x)=\phi_{z,l}(1-x)=\phi_{z,l}(-x)\]
+\begin_inset Formula \begin{equation}
+\left[r\phi_{z,l}\right](x)=\left[\phi_{z,l}r\right](x)=\phi_{z,l}(1-x)=\phi_{z,l}(-x)\label{eq:}\end{equation}
 
 \end_inset 
 
  Concatenating group elements proceeds in a fashion similar to before.
  For example, 
-\begin_inset Formula \[
-g_{D}^{3}r_{D}g_{D}^{2}(x)=\frac{1}{8}-\frac{x}{32}\]
+\begin_inset Formula \begin{equation}
+g_{D}^{3}r_{D}g_{D}^{2}(x)=\frac{1}{8}-\frac{x}{32}\label{eq:}\end{equation}
 
 \end_inset 
 
  and so 
-\begin_inset Formula \[
-\left[g^{3}rg^{2}\phi_{z}\right](x)=\phi_{z}\left(\frac{1}{8}-\frac{x}{32}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{16}\right)\right)+z\phi_{z}\left(\frac{1}{4}-\frac{x}{16}\right)\]
+\begin_inset Formula \begin{equation}
+\left[g^{3}rg^{2}\phi_{z}\right](x)=\phi_{z}\left(\frac{1}{8}-\frac{x}{32}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{16}\right)\right)+z\phi_{z}\left(\frac{1}{4}-\frac{x}{16}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2060,21 +2061,18 @@ g_{D}^{3}r_{D}g_{D}^{2}(x)=\frac{1}{8}-\frac{x}{32}\]
 
 .
  Peeling off one group element at a time, we finally get 
-\begin_inset Formula \[
-\phi_{z}\left(\frac{1}{8}-\frac{x}{32}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{16}\right)\right)+z\,\exp\left(i\pi\left(\frac{1}{2}-\frac{x}{8}\right)\right)+\]
-
-\end_inset 
-
-
-\begin_inset Formula \[
-\;\;\;\;\;\;\;\;\;\;\;\;+z^{2}\exp\left(i\pi\left(1-\frac{x}{4}\right)\right)+z^{3}\exp\left(-i\pi\frac{x}{2}\right)+z^{4}\exp\left(-i\pi x\right)+z^{5}\phi_{z}\left(-x\right)\]
+\begin_inset Formula \begin{eqnarray}
+\phi_{z}\left(\frac{1}{8}-\frac{x}{32}\right) & = & \exp\left(i\pi\left(\frac{1}{4}-\frac{x}{16}\right)\right)+z\,\exp\left(i\pi\left(\frac{1}{2}-\frac{x}{8}\right)\right)+\nonumber \\
+ & + & z^{2}\exp\left(i\pi\left(1-\frac{x}{4}\right)\right)+z^{3}\exp\left(-i\pi\frac{x}{2}\right)+\\
+ & + & z^{4}\exp\left(-i\pi x\right)+z^{5}\phi_{z}\left(-x\right)\end{eqnarray}
 
 \end_inset 
 
  However, this obscures the true form of the transformation, which is exhibited
  more clearly if we write the above as 
-\begin_inset Formula \[
-g^{3}rg^{2}\phi_{z}=\phi_{z}g^{3}rg^{2}=Eg^{3}rg^{2}+z\, Eg^{2}rg^{2}+z^{2}Egrg^{2}+z^{3}Erg^{2}+z^{4}Erg+z^{5}\phi_{z}r\]
+\begin_inset Formula \begin{eqnarray}
+g^{3}rg^{2}\phi_{z} & = & \phi_{z}g^{3}rg^{2}\label{eq:}\\
+ & = & Eg^{3}rg^{2}+z\, Eg^{2}rg^{2}+z^{2}Egrg^{2}+z^{3}Erg^{2}+z^{4}Erg+z^{5}\phi_{z}r\end{eqnarray}
 
 \end_inset 
 
@@ -2135,6 +2133,49 @@ g^{3}rg^{2}\phi_{z}=\phi_{z}g^{3}rg^{2}=Eg^{3}rg^{2}+z\, Eg^{2}rg^{2}+z^{2}Egrg^
  cancels it out.
  None-the-less, this polynomial is curious, and calls for further development.
  
+\layout Subsection
+
+Topologically Conjugate Maps
+\layout Standard
+
+The Modular Group Symmetry describes not just this peculiar handful of curves,
+ but in fact a large Class of curves.
+ Any monotonically increasing function 
+\begin_inset Formula $\psi(x)$
+\end_inset 
+
+ with 
+\begin_inset Formula $\psi(0)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $\psi(1)=1$
+\end_inset 
+
+ can be used to build topologically conjugate maps.
+ For the tent map, we write 
+\begin_inset Formula $\sigma(x)=(\psi\circ\tau\circ\psi^{-1})(x)$
+\end_inset 
+
+ so that 
+\begin_inset Formula \begin{equation}
+s_{w}(x)=\sum_{k=0}^{\infty}w^{k}(\psi\circ\tau^{k+1}\circ\psi^{-1})(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which transforms under the action of 
+\begin_inset Formula \begin{equation}
+g_{\psi}(x)=(\psi\circ g_{D}\circ\psi^{-1})(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ as 
+\begin_inset Formula \[
+s_{w}(g_{\psi}(x))=x+ws_{w}(x)\]
+
+\end_inset 
+
+
 \layout Subsection
 
 Miscellany
@@ -2395,8 +2436,8 @@ So far, we have been looking at the Takagi curve as a function of
 
  is clearly entire.
  Continuing, we have
-\begin_inset Formula \[
-t_{w}\left(\frac{1}{2^{n}}\right)=\frac{2}{2^{n}}\;\frac{1-2^{n}w^{n}}{1-2w}\]
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{1}{2^{n}}\right)=\frac{2}{2^{n}}\;\frac{1-2^{n}w^{n}}{1-2w}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2419,8 +2460,8 @@ t_{w}\left(\frac{1}{2^{n}}\right)=\frac{2}{2^{n}}\;\frac{1-2^{n}w^{n}}{1-2w}\]
 \end_inset 
 
  By contrast, 
-\begin_inset Formula \[
-t_{w}\left(\frac{1}{3}\right)=\frac{2}{3(1-w)}\]
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{1}{3}\right)=\frac{2}{3(1-w)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2687,6 +2728,11 @@ sea of chaos
  group the symmetry group that maps islands into islands, for any period
  doubling map? What about the converse? Are there any maps, with islands,
  that do not have the Modular Group as its underlying symmetry? 
+\begin_inset LatexCommand \cite{bar88}
+
+\end_inset 
+
+
 \layout Subsubsection
 
 3-period Mode Locking
@@ -2706,6 +2752,17 @@ Note that some chaotic maps are seen to have period-doubling paths to chaos
 \end_inset 
 
 .
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
+
+\end_inset 
+
+
+\layout Standard
+
+I can't figure out how to make bibtex work !!!!
 \layout Bibliography
 \bibitem [Man88]{key-3}
 
