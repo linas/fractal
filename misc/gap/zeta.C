@@ -211,8 +211,8 @@ main (int argc, char * argv[])
 	double sre=2.345;
 	double sim = s;
 
-	// sre = -s;
-	// sim = 0.0;
+	sre = s;
+	sim = 0.0;
 
 	// double lambda = pow (0.5, s);
 	double lambda = pow (0.5, sre);
@@ -223,7 +223,7 @@ main (int argc, char * argv[])
 	printf ("#\n# ess=%g +i %g  eigenvalue lambda=%g +i %g \n#\n", sre, sim, re_lambda, im_lambda);
 	printf ("#\n#   |lambda|=%g  arg(lambda)=%g \n#\n", lambda, sim*log(2.0));
 	
-	int imax = 23;
+	int imax = 423;
 	for (i=1; i<imax; i++) 
 	{
 		double x = i/((double) imax);
@@ -323,13 +323,20 @@ main (int argc, char * argv[])
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, e, o);
 #endif
 
+#ifdef EQUIVALENCE_OF_FRACTAL_BITS
 		double bre, bim;
 		betas (x, sre, sim, &bre, &bim);
 
-		double fre, fim;
+		 double fre, fim;
 		fractal_beta (sre, sim, x, &fre, &fim);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bre, bim, bre-fre, bim-fim);
+#endif
+
+		double bre, bim;
+		betas (x, sre, sim, &bre, &bim);
+
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, bre, bim);
 
 		fflush (stdout);
 	}

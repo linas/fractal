@@ -7,7 +7,9 @@
  * Linas November 2004
  */
 
+#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 class Dyadic
 {
@@ -24,6 +26,10 @@ class Dyadic
 		// return alternating polynomial sum_n w^n (2b_n -1)
 		double ToAlternatingPoly (double w);
 		double ToCantorPoly (double w);
+
+		// return sum_n (2b_n -1) n^-s
+		double ToZetaPoly (double s);
+
 	private:
 		unsigned int ndigits;
 		short bdigits[32];
@@ -97,6 +103,27 @@ Dyadic :: ToAlternatingPoly (double z)
 
 
 double
+Dyadic :: ToZetaPoly (double s)
+{
+	int i;
+	double acc = 0.0;
+
+	for (i=0; i<ndigits; i++)
+	{
+		short alt = 2*bdigits[i] - 1;
+		double term = alt;
+
+		double en = i+1;
+		double z = pow (en, -s);
+		term *= z;
+		acc += term;
+	}
+
+	return acc;
+}
+
+
+double
 Dyadic :: ToCantorPoly (double z)
 {
 	int i;
@@ -117,13 +144,21 @@ Dyadic :: ToCantorPoly (double z)
 }
 
 
+int
 main (int argc, char * argv[])
 {
 	Dyadic dy;
-	int order = 10;
+	int order = 12;
 	int nmax = 1<<order;
 
 	double z = 1.0/3.0;
+	if (2 > argc) {
+		printf ("Usage: %s <z value>\n", argv[0]); 
+		exit(1);
+	}
+	z = atof (argv[1]);
+	printf ("# z=%g\n", z);
+
 	int p;
 	for (p=1; p<nmax; p+=2)
 	{
@@ -132,8 +167,15 @@ main (int argc, char * argv[])
 
 		dy.SetFrac (p, order);
 		// double y = dy.ToAlternatingPoly (z);
-		double y = dy.ToCantorPoly (z);
+		// double y = dy.ToCantorPoly (z);
+		double y = dy.ToZetaPoly (z);
+
+		dy.SetFrac (p+1, order);
+		y = dy.ToZetaPoly (z);
+		dy.SetFrac (p-1, order);
+		y -= dy.ToZetaPoly (z);
 
 		printf ("%d	%8.6g	%8.6g\n", p, x, y);
 	}
+	return 0;
 }

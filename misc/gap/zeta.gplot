@@ -4,21 +4,26 @@
 # set out 'read.gif'
 
 # set term png small color
-#set term png small
-#set out 'zeta.png'
-set term postscript
-set out 'zeta.ps'
+set term png small
+set out 'zeta.png'
+# set term postscript
+# set out 'zeta.ps'
 
 # set data style linespoints
 set data style lines
 set key right
 
-set title "Zeta Eigenfunctions"
+set title "Zeta Eigenfunction"
 set xlabel "x"
-set ylabel "eta(x;s) for s = -3.3"
+set ylabel "beta(x;s) for s = 0.02"
+plot "zeta.dat" using 2:3 title "Re beta", \
+     "zeta.dat" using 2:4 title "Im beta" 
 
-plot "zeta.dat" using 2:3 title "even", \
-     "zeta.dat" using 2:4 title "odd"
+# set title "Zeta Eigenfunctions"
+# set xlabel "x"
+# set ylabel "eta(x;s) for s = -3.3"
+# plot "zeta.dat" using 2:3 title "even", \
+#      "zeta.dat" using 2:4 title "odd"
 
 # set yrange [0:]
 
