@@ -343,8 +343,8 @@ main (int argc, char *argv[])
 {
 	int i;
 
-	// int nmax = 512;
-	int nmax = 431;
+	int nmax = 512;
+	// int nmax = 5431;
 	// int nmax = 23;
 
 	if (argc <2)
@@ -357,7 +357,7 @@ main (int argc, char *argv[])
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
-		double ts = 1.0;
+		// double ts = 1.0;
 		// double tw = takagi (w, x);
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
@@ -365,7 +365,7 @@ main (int argc, char *argv[])
 		// double tw = ttakagi(w,x);
 		// double tw = div_takagi (w, x);
 		// double tw = takagi_bumps (w, x);
-		double tw = takagi_prime (w, x);
+		// double tw = takagi_prime (w, x);
 		// double tw = takagi_exp (w, x);
 
 		// double tw = lytic (w, x);
@@ -386,6 +386,8 @@ main (int argc, char *argv[])
 		ts /= 1.0-2.0*w;
 		ts += w*w*takagi (w, x);
 #endif
+		double tw = takagi (w, x);
+		double ts = takagi_prime (0.5*w, x);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 	}

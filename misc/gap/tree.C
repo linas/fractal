@@ -2,6 +2,7 @@
  * tree.C
  *
  * Explore the eigenfunctions of bournoulli operator
+ * These are the proto-forms of he Levy Dragons
  *
  * Linas Vepstas October 2004
  */
