@@ -146,17 +146,23 @@ In an earlier chapter, we have shown that an interesting subset of the Modular
 \end_inset 
 
  (that is, a subset of the Modular Group has a set-theoretic representation).
- In this chapter, we apply these ideas to a fractal curve studied by Weierstrass
- in 1872
+ In this chapter, we apply these ideas to a family of fractal curves presented
+ by Weierstrass in 1872
 \begin_inset LatexCommand \cite{key-5}
 
 \end_inset 
 
-, and further developed by Teiji Takagi in 1903, and by G.H.
+, studied by Teiji Takagi in 1903
+\begin_inset LatexCommand \cite{key-9}
+
+\end_inset 
+
+, and further developed by G.H.
  Hardy in 1916 and by others, now bearing the name Takagi Curve or Blancmange
  Curve.
- We show that this curve, and its assorted and related generalizations,
- transform under a three-dimensional representation of the Modular Group.
+ We show that this curve transforms under a three-dimensional representation
+ of the Modular Group, and give variations that transform under higher-dimension
+al representations.
 \layout Subsection
 
 The Weierstrass-Takagi-Landsberg-Hardy Curve
@@ -164,7 +170,7 @@ The Weierstrass-Takagi-Landsberg-Hardy Curve
 
 The Takagi-Landsberg curve was explored by Teiji Takagi, circa 1903 as an
  example of a continuous-everywhere, differentiable-nowhere curve 
-\begin_inset LatexCommand \cite{key-3}
+\begin_inset LatexCommand \cite{key-3,key-9}
 
 \end_inset 
 
@@ -172,7 +178,7 @@ The Takagi-Landsberg curve was explored by Teiji Takagi, circa 1903 as an
  It is constructed by positive mid-point displacements of straight line
  segments, that is, by 'fractally' bumping a line segment upwards by an
  increasingly smaller displacement (xxxx we should diagram the standard
- Koch-Curve-like construction here).
+ Koch-Curve-like mid-point displacement construction here).
  Equivalently, one assigns geometrically smaller displacements to each level
  of the dyadic tree; that is, one picks some 
 \begin_inset Formula $0\leq w<1$
@@ -220,34 +226,35 @@ where
 
 \end_inset 
 
- Note that insofar as the triangle curve is differentiable, we could say
- that the Takagi curve is differentiable (along 
-\begin_inset Formula $x$
+ The curve is sometimes presented with 
+\begin_inset Formula $2^{-kH}$
 \end_inset 
 
-) as well, in that it has both leftward-going and rightward-going derivatives,
- although these derivatives differ at each dyadic point.
- We can choose to define the derivative 
-\begin_inset Formula $dt_{w}/dx$
+ taking the place of 
+\begin_inset Formula $w^{k}$
 \end_inset 
 
- by passing the 
-\begin_inset Formula $d/dx$
+ in the series summation, where 
+\begin_inset Formula $H=-\log_{2}w$
 \end_inset 
 
- past the summation above, to act on the triangle-wave, to give a square
- wave.
- Note that 
+ is called the Hurst parameter.
+ The value 
+\begin_inset Formula $w=1/4$
+\end_inset 
+
+ is special, in that 
 \begin_inset Formula $t_{1/4}(x)=4x(1-x)$
 \end_inset 
 
- is a parabola (the mid-point subdivision construction of a parabola is
- attributed to Archimedes
+ is a parabola.
+ This can perhaps best be seen with the mid-point displacement construction
+ of a parabola, which is attributed to Archimedes
 \begin_inset LatexCommand \cite{key-3}
 
 \end_inset 
 
-).
+.
  A prototypical Takagi-Landsberg curve is shown in figure 
 \begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
 
@@ -300,6 +307,29 @@ This graph shows the Takagi-Landsberg curve
 
 \layout Standard
 
+In a certain technical sense, the curve is not differentiable at any dyadic
+ value 
+\begin_inset Formula $x=p/2^{n}$
+\end_inset 
+
+, as such values correspond to the tip of the triangle wave, where the derivativ
+e is ill-defined.
+ However, one can still perform derivative-like manipulations with the curve,
+ which we will explore in greater depth below.
+ For example, we might choose to define the derivative 
+\begin_inset Formula $dt_{w}/dx$
+\end_inset 
+
+ by passing the 
+\begin_inset Formula $d/dx$
+\end_inset 
+
+ past the summation, to act on the triangle-wave, replacing it with a square
+ wave.
+ The result is a curve that is discontinuous everywhere, but does have a
+ number of derivative-like properties.
+\layout Standard
+
 One can generalize this curve in a variety of ways, for example, by replacing
  the tent 
 \begin_inset Formula $\tau(x)$
@@ -328,7 +358,17 @@ One can generalize this curve in a variety of ways, for example, by replacing
 \begin_inset Formula $\sigma(x)=d\tau/dx=1-2\left\lfloor 2x\right\rfloor $
 \end_inset 
 
- gives the self-similar shape shown below.
+ gives the self-similar shape shown int the figures
+\begin_inset LatexCommand \ref{cap:Cantor-Polynomial}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{cap:cantor-sawtooth}
+
+\end_inset 
+
+ below.
  
 \layout Standard
 
@@ -1243,6 +1283,11 @@ collapsed false
 
 \layout Caption
 
+
+\begin_inset LatexCommand \label{cap:cantor-sawtooth}
+
+\end_inset 
+
 Cantor Polynomial
 \layout Standard
 
@@ -1458,6 +1503,21 @@ U=\left(\begin{array}{cccc}
 
 \end_inset 
 
+ Note that this conjugacy breaks down when 
+\begin_inset Formula $w=1/2$
+\end_inset 
+
+.
+ This is because the curve generated by 
+\begin_inset Formula $\alpha(x)$
+\end_inset 
+
+ becomes a parabola at this point; that is, 
+\begin_inset Formula $a_{1/2}(x)=4x(1-x)$
+\end_inset 
+
+, which transforms under the three-dimensional, not the four-dimensional
+ representation.
  
 \layout Standard
 
@@ -1656,20 +1716,6 @@ The above
 
 ...
  
-\layout Description
-
-Homework: When 
-\begin_inset Formula $w=1/2$
-\end_inset 
-
-, the conjugacy matricies become undefined, and it appears that every polynomial
- will generate its own unique representation.
- Where before we had just a pair of representations, we now have a spectrum.
- Why does this happen? What makes 
-\begin_inset Formula $w=1/2$
-\end_inset 
-
- such a special value? 
 \layout Description
 
 Homework: Develop basis polynomials for the even and odd representations
@@ -2591,4 +2637,16 @@ The Science of Fractal Images, ed.
  (Springer-Verlag, 1988) pp.
  219-242.
  
+\layout Bibliography
+\bibitem [Tak1903]{key-9}
+
+T.
+ Takagi, 
+\emph on 
+A Simple Example of a Continuous Function without Derivative
+\emph default 
+, Proc.
+ Phys.
+ Math.
+ Japan, 1903, Volume 1, pp.176-177 
 \the_end
