@@ -27,8 +27,8 @@ class ContinuedFraction
       int GetNumTerms (void);
 
       double ToReal (void);
-		double ToXPlus (double w);
-		double ToXMinus (double w);
+      double ToXPlus (double w);
+      double ToXMinus (double w);
 
       double ToZReal (double z);
       double ToInvZReal (double z);
@@ -51,6 +51,8 @@ class ContinuedFraction
       double ToZRealGap (void);
 
       double ToFarey (void);
+      double ToPAdicFarey (int prime);
+		
       double ToEFarey (double t);
       double ToEFareyGap (double t);
       double ToSinFarey (double t);

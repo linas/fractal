@@ -100,7 +100,10 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
    
          /* Check for termination of the expansion, and 
           * make sure that the continued fraction always has 
-          * an even number of terms.  Huh?? Why do we do this?? */
+          * an even number of terms.  Huh?? Why do we do this?? 
+          * We do this in order to have a nice to-farey algorithm 
+          * working.
+          * */
          if (n == 0) {
             if (i%2 == 0) {
                tinued_frac [i] -= 1;
@@ -114,6 +117,7 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
    /* lets count the number of terms */
    for (i=0; i<32; i++) if (tinued_frac[i] == 0) break;
    nterms = i;
+   tinued_frac[i+1] = 0;
 }
 
 /* ------------------------------------------------------------ */
@@ -167,7 +171,7 @@ ContinuedFraction::GetNumTerms (void)
 /* ------------------------------------------------------------ */
 /* compute Farey Number from continued fraction.
  * Algorithm used here does base2 arithmetic by bit-shifting. 
- * For generalized algorithm, see below. 
+ * For generalized algorithm, see below.  (?? below where ??)
  */
 
 double 
@@ -223,6 +227,53 @@ ContinuedFraction::ToFarey (void)
    tinued_frac[0] = first_term;
 
    return (tmp);
+}
+
+/* ------------------------------------------------------------ */
+/* compute Farey Number from continued fraction.
+ * Algorithm used here does base-p arithmetic.
+ * XXX except that its mostly broken.
+ */
+
+double 
+ContinuedFraction::ToPAdicFarey (int prime)
+{
+   int i, j, k;
+	int v;
+	double acc, val, base, pos;
+
+   /* 
+   printf ("\n\n"); 
+   for (i=0; i<5; i++) { 
+      printf (" term %d is %d \n", i, tinued_frac[i]);
+   }
+   printf ("\n\n");
+   */
+
+   /* now, build the binary rep of the Farey number */
+	acc = 0.0;
+	v = 0;
+	val = 0.0;
+	base = 1.0 / ((double) prime);
+	pos = 1.0;
+	j = 0;
+	
+   while (1) {
+      for (k=0; k<tinued_frac[j]; k++) {
+         acc += val * pos;
+         pos *= base;
+      }
+      v --;
+      if (0 > v) v += prime;
+      val = (double) v;
+      j++;
+      if (tinued_frac[j] == 0) break;
+   }
+
+   /* finally, convert the farey number to floating point rep */
+   acc += (double) intpart;
+
+   return (acc);
 }
 
 /* ------------------------------------------------------------ */
