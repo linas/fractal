@@ -4,7 +4,8 @@
  * generate pixmap of continued fraction data.
  *
  * HISTORY:
- * Linas Vepstas Januery 16 1994
+ * Linas Vepstas January 16 1994
+ * Updates Linas April 1996
  */
 
 #include "Farey.h"
@@ -22,7 +23,11 @@ float straight_cmap (struct Farey *f, int nume, int deno, double nu)
    /* y = ContinuedFractionToSincReal (f, nu);  -- jmap */
    /* y = ContinuedFractionToCosReal (f, nu); -- cmap */
 
-   y = ContinuedFractionToCnReal (f, nu);
+   y = 0.5 * ContinuedFractionToCnReal (f, nu);
+   y *= 1.5;
+/*
+   y -= 0.3333333333;
+*/
 
    n = (int) y;
    if (y<0.0) n--;
@@ -46,14 +51,15 @@ void bin_sort (struct Farey *f, float *arr, int narr, double nu)
 
    for (bin=0; bin<narr; bin++) arr[bin] = 0.0;
 
-#define NUM_SAMPLES (10)
+#define NUM_SAMPLES (100)
    width = NUM_SAMPLES * narr;
 
    deno = 61 * width +1;
 #ifdef WIDE
    deno /= 2;
 #endif
-   for (j=0; j<width; j++){
+   /* for (j=0; j<width; j++){ */
+   for (j=width/2; j<2*width/3-2; j++){ 
       nume = 61*j; 
       y = straight_cmap (f, nume, deno, nu); 
       bin = (int) (y * ((double) narr));
@@ -106,7 +112,7 @@ char *argv[];
    pixel_row = (float *) malloc (width*sizeof (float));
 
    nu = 0.0;
-   delta_nu = 1.0;
+   delta_nu = 0.5;
    delta_nu /= ((double) height);
    nu -= delta_nu;
 

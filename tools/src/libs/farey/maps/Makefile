@@ -1,15 +1,17 @@
 ############### Symbol Definitions ###################### 
+TOP=../../../..
 
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
 # CC = /bin/fcc -f2 -O -I $(INC)
-CC = /bin/cc -O2 -O -I $(INC) -DAIX315
+# CC = /bin/cc -O2 -O -I $(INC) -DAIX315
 # CC = /bin/cc -g -I $(INC) -DAIX315
+CC = /usr/bin/cc -O2 -I $(INC) -DLINUX
 
 RM=	/bin/rm -f
 
-EXES= cmap dmap emap fmap imap jmap zmap
+EXES= cmap dmap imap zmap
 all: 	$(EXES)
 
 
@@ -21,6 +23,17 @@ reiter:	reiter.o
 
 
 ################## Dependencies and compile/link #########
+# newmap
+# 	(Jan 1994) excercise Farey Number converter
+#
+prodmap: prodmap.c $(LIB)/Farey.o $(INC)/Farey.h
+	$(CC) -o prodmap prodmap.c $(LIB)/Farey.o -lm
+	$(RM) prodmap.o
+
+newmap: newmap.c $(LIB)/Farey.o $(INC)/Farey.h
+	$(CC) -o newmap newmap.c $(LIB)/Farey.o -lm
+	$(RM) newmap.o
+
 # cmap
 # 	(Jan 1994) excercise Farey Number converter
 #
@@ -34,27 +47,6 @@ cmap: cmap.c $(LIB)/Farey.o $(INC)/Farey.h
 dmap: dmap.c $(LIB)/Farey.o $(INC)/Farey.h
 	$(CC) -o dmap dmap.c $(LIB)/Farey.o -lm
 	$(RM) dmap.o
-
-# emap
-# 	(Jan 1994) excercise Farey Number converter
-#
-emap: emap.c $(LIB)/Farey.o $(INC)/Farey.h
-	$(CC) -o emap emap.c $(LIB)/Farey.o -lm
-	$(RM) emap.o
-
-# fmap
-# 	(Jan 1994) excercise Farey Number converter
-#
-fmap: fmap.c $(LIB)/Farey.o $(INC)/Farey.h
-	$(CC) -o fmap fmap.c $(LIB)/Farey.o -lm
-	$(RM) fmap.o
-
-# jmap
-# 	(Jan 1994) excercise Farey Number converter
-#
-jmap: jmap.c $(LIB)/Farey.o $(INC)/Farey.h
-	$(CC) -o jmap jmap.c $(LIB)/Farey.o -lm
-	$(RM) jmap.o
 
 # imap
 # 	(Jan 1994) excercise Farey Number converter
