@@ -51,10 +51,13 @@ void betas (double x, double re_s, double im_s, double *rea, double *ima)
 	for (n=1; n<57550; n++)
 	{
 		double theta = im_s * log (2.0*M_PI*((double) n));
+		double ct = cos(theta);
+		double st = -sin(theta);
 		double term = pow(2.0*M_PI*((double) n), -re_s);
-		double arg = cos (2.0*M_PI*((double) n)*x);
-		reacc += term * arg * cos(theta);
-		imacc += -term * arg * sin(theta);
+		double rearg = cos (2.0*M_PI*((double) n)*x);
+		double imarg = sin (2.0*M_PI*((double) n)*x);
+		reacc += term * (rearg * ct - imarg*st);
+		imacc += term * (rearg * st + imarg*ct);
 		// acc += term * sin (2.0*M_PI*((double) n)*x);
 		if (1.0e-16>term) break;
 	}
