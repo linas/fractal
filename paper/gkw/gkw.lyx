@@ -1047,7 +1047,19 @@ k\end{array}\right)$
 .
  Because the matrix is upper-triangular, it is easily solvable for both
  the left and right eigenvectors, which agree perfectly w/ Driebe.
- 
+ Visually, the upper-left of this matrix looks like 
+\begin_inset Formula \[
+\Theta_{mk}=\left[\begin{array}{cccccc}
+1 & \frac{1}{4} & \frac{1}{8} & \frac{1}{16} & \frac{1}{32} & ...\\
+0 & \frac{1}{2} & \frac{1}{4} & \frac{3}{16} & \frac{1}{8}\\
+0 & 0 & \frac{1}{4} & \frac{3}{16} & \frac{3}{16}\\
+0 & 0 & 0 & \frac{1}{8} & \frac{1}{8}\\
+0 & 0 & 0 & 0 & \frac{1}{16}\\
+... &  &  &  &  & ...\end{array}\right]\]
+
+\end_inset 
+
+
 \layout Standard
 
 The right eigenvectors are denoted by 
@@ -1184,7 +1196,7 @@ case.
 
 Note that the left eigenvectors are adjoint ot the Bernoulli polynomials.
  Thus, the identity operator 
-\begin_inset Formula $\mathbb{I}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
+\begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
 \end_inset 
 
 turns out to be the Euler-Maclaurin summation formula in disguise, which
@@ -1195,9 +1207,9 @@ f(x) & = & \left\langle x|f\right\rangle \\
 
 \end_inset 
 
- Its not to hard to explicitly compute completeness: one finds that 
+ Its not to hard to explicitly validate completeness: one finds that 
 \begin_inset Formula \[
-\left\langle j\right|\mathbb{I}\left|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\]
+\left\langle j\right|\mathbb{I}_{B}\left|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\]
 
 \end_inset 
 
@@ -1211,21 +1223,271 @@ f(x) & = & \left\langle x|f\right\rangle \\
 
 \layout Standard
 
-Thus, frob-perrron is 
+Thus, in the polynomial representation, the Frobenius-Perrron operator of
+ the Bernoulli map is 
 \begin_inset Formula \[
 U_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \lambda_{n}\left\langle \tilde{B}_{n}\right|\]
 
 \end_inset 
 
- blah blah double check matrix elts this way and also and thus Koopman which
- is operator on observables is explicitly xxxxxxx fix this formula xxx finsish
- this 
-\begin_inset Formula \[
-K_{B}=\sum_{n=0}^{\infty}B_{n}(2x)+B_{n}(2x+1)\left\langle \tilde{B}_{n}\right|y\]
+ 
+\layout Subsection
+
+The Fourier Representation 
+\layout Standard
+
+The Koopman operator of the Bernoulli Map has the property of taking a function
+ and making two copies of it.
+ That is, 
+\begin_inset Formula \begin{eqnarray*}
+\left[K_{B}f\right](y) & = & \int_{0}^{1}\delta\left(x-b(y)\right)f(x)\, dx\\
+ & = & f(b(y))\\
+ & = & f(2y)\theta(1-2y)+f(2y-1)\theta(2y-1)\end{eqnarray*}
 
 \end_inset 
 
+ where 
+\begin_inset Formula $\theta(x)$
+\end_inset 
 
+ is the step function, identically zero for 
+\begin_inset Formula $x<0$
+\end_inset 
+
+ and identically one for 
+\begin_inset Formula $x>0$
+\end_inset 
+
+.
+ The Koopman operator for the Bernoulli map is not faithfully representatble
+ in the polynomial basis; this can be seen in two ways.
+ First, it introduces a discontinuity at 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+ which the polynomials cannot move beyond; the radius of the circle of converge
+ is limited by this singularity.
+ Secondly, it takes a function and more-or-less makes it periodic; again,
+ the polynomials cannot cope directly with this.
+ Thus, we are motivated to explore the Fourier representation, if only to
+ express the Koopman operator.
+ 
+\layout Standard
+
+It turns out to be exceedingly simple to find this operator in the Fourier
+ basis.
+ If we write 
+\begin_inset Formula \[
+f(x)=\sum_{n}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\]
+
+\end_inset 
+
+ then 
+\begin_inset Formula \[
+\left[K_{B}f\right](x)=\sum_{n}a_{n}\cos4\pi nx\;+b_{n}\sin4\pi nx\]
+
+\end_inset 
+
+ or, in Dirac notation, 
+\begin_inset Formula $\left\langle em|K_{B}|en\right\rangle =\delta_{2m,n}$
+\end_inset 
+
+.
+ This is a very singular operator in this basis.
+ Visually, it has the distinctive appearance of 
+\begin_inset Formula \[
+K_{B}=\left[\begin{array}{cccccc}
+1 & 0 & 0 & 0 & 0 & ...\\
+0 & 0 & 0 & 0 & ...\\
+0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & ...\\
+...\end{array}\right]\]
+
+\end_inset 
+
+ where every other row consists of zeros.
+ In this same basis, 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+is equally remarkable: it is literally the transpose: that is 
+\begin_inset Formula $K_{B}=U_{B}^{T}$
+\end_inset 
+
+ in this basis, and so 
+\begin_inset Formula \[
+U_{B}=\left[\begin{array}{cccccc}
+1 & 0 & 0 & 0 & 0 & ...\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & ...\\
+...\end{array}\right]\]
+
+\end_inset 
+
+ We can see that in this representation, we have 
+\begin_inset Formula $U_{B}K_{B}=1$
+\end_inset 
+
+ but 
+\begin_inset Formula $K_{B}U_{B}\neq1$
+\end_inset 
+
+, just as in the coordinate-space representation.
+ It is very instructive to verify that the bernoulli polynomials are still
+ eigenfunctions in this representation.
+ For 
+\begin_inset Formula $n\neq0$
+\end_inset 
+
+, we have 
+\begin_inset Formula \[
+\int_{0}^{1}B_{1}(x)\,\sin(2\pi nx)\, dx=\frac{-1}{\pi n}\]
+
+\end_inset 
+
+ and it is straightforward to visually verify that 
+\begin_inset Formula $U_{B}B_{1}=\frac{1}{2}B_{1}$
+\end_inset 
+
+.
+ By working with the generator for the Bernoulli polynomials, 
+\begin_inset Formula \[
+\frac{te^{xt}}{e^{t}-1}=\sum_{n=0}^{\infty}B_{n}(x)\,\frac{t^{n}}{n!}\]
+
+\end_inset 
+
+ one can immediately find, for 
+\begin_inset Formula $m\neq0$
+\end_inset 
+
+, the Fourier components 
+\begin_inset Formula \[
+\int_{0}^{1}B_{n}(x)\,\cos(2\pi mx)\, dx=\left\{ \begin{array}{cc}
+0 & \;\textrm{ for n odd }\\
+\left(-\right)^{1+n/2}n!/\left(2\pi m\right)^{n} & \;\textrm{ for n even }\end{array}\right.\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\int_{0}^{1}B_{n}(x)\,\sin(2\pi mx)\, dx=\left\{ \begin{array}{cc}
+0 & \;\textrm{ for n even }\\
+\left(-\right)^{(n+1)/2}n!/\left(2\pi m\right)^{n} & \;\textrm{ for n odd }\end{array}\right.\]
+
+\end_inset 
+
+ Applying 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ to these to these vector components makes it immediately clear how the
+ eigenvalue of 
+\begin_inset Formula $1/2^{n}$
+\end_inset 
+
+ is associated with the eigenvector 
+\begin_inset Formula $B_{n}$
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+The Hurwitz Zeta Eigenfunctions
+\layout Standard
+
+The Fourier representation also makes it clear that any vector with vector
+ components 
+\begin_inset Formula $a_{n}=1/n^{s}$
+\end_inset 
+
+ will be an eigenvector of 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ associated with the eigenvalue 
+\begin_inset Formula $\lambda=1/2^{s}$
+\end_inset 
+
+.
+ In coordinate space, we can write these eigenfunctions as 
+\begin_inset Formula \[
+\beta(x;s)=2\Gamma(s+1)\sum_{n=1}^{\infty}\frac{\exp(2\pi inx)}{\left(2\pi n\right)^{s}}\]
+
+\end_inset 
+
+ which transform as 
+\begin_inset Formula $U_{B}\beta(x;s)=2^{-s}\beta(x;s)$
+\end_inset 
+
+.
+ Given the nature of summation, we see that the series is strictly convergent
+ for any complex-valued 
+\begin_inset Formula $s$
+\end_inset 
+
+ with 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+.
+ This series recreates the Bernoulli polynomials for integer values of 
+\begin_inset Formula $n$
+\end_inset 
+
+, so for example, 
+\begin_inset Formula $\Re\beta(x;2)=B_{2}(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\Im\beta(x;3)=B_{3}(x)$
+\end_inset 
+
+ and generally 
+\begin_inset Formula $\Re\left[\left(-i\right)^{n}\beta(x;n)\right]=-B_{n}(x)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+These eigenfunctions are essentially a form of the Hurwitz Zeta function
+ 
+\begin_inset Formula \[
+\zeta(s,x)=\sum_{n=1}^{\infty}\frac{1}{\left(n+x\right)^{s}}\]
+
+\end_inset 
+
+ which can be recognized by writing it as 
+\begin_inset Formula \begin{eqnarray*}
+\zeta(z,x) & = & \frac{2\Gamma(1-z)}{\left(2\pi\right)^{1-z}}\left[\sin\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\cos(2\pi nx)}{n^{1-z}}+\cos\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\sin(2\pi nx)}{n^{1-z}}\right]\\
+ & = & \frac{-i}{2(1-z)}\left[e^{1\pi z/2}\beta(x;1-z)-e^{-1\pi z/2}\beta(-x;1-z)\right]\end{eqnarray*}
+
+\end_inset 
+
+ where the first identity holds form 
+\begin_inset Formula $\Re z<0$
+\end_inset 
+
+.
+ That is, the Hurwitz Zeta is itself an eigenvector of the Bernoulli Operator,
+ with eigenvalue 
+\begin_inset Formula $2^{z-1}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+We recognize the function 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ as forming a part of teh Hurwitz Zeta function.
+ 
 \layout Subsection
 
 The Kernel
