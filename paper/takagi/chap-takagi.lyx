@@ -131,6 +131,13 @@ L=\left(\begin{array}{cc}
  only in books on modular forms, and constructed out of Jacobi Theta functions,
  to see jaw-dropping similarities between it and the Mandelbrot set, complete
  with prototype Pickover Stalks.
+ The latest book by Mandelbrot 
+\begin_inset LatexCommand \cite{key-7}
+
+\end_inset 
+
+, published in 2004, comes perilously close, by touching the Minkowski function,
+ but still failing to mention the Modular Group.
  The goal here is to take some baby steps to remedy this situation.
 \layout Standard
 
@@ -894,7 +901,7 @@ The eigenfunctions of the Bernoulli map
 
  bear a close resemblance to the Takagi curve, and one might say they are
  generalization of the Takagi Curve to the complex plane.
- These 
+ These are
 \layout Standard
 
 
@@ -903,15 +910,115 @@ The eigenfunctions of the Bernoulli map
 
 \end_inset 
 
- The figure xxx shows one of these curves.
- It can be readily seen that the factor of 
+ The two figures shows two of these curves, for different values of 
+\begin_inset Formula $z$
+\end_inset 
+
+.
+ 
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Bernoulli Map Eigenfunction
+\layout Standard
+
+
+\begin_inset Graphics
+	filename beigen-0.55-0.0.png
+
+\end_inset 
+
+
+\layout Standard
+
+Above is shown a polar plot of the Bernoulli Map eigenfunction 
+\begin_inset Formula $\phi_{zl}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $l=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $z=0.55$
+\end_inset 
+
+.
+ The x and y axis are respectively the real and imaginary parts of 
+\begin_inset Formula $\phi_{zl}(x)$
+\end_inset 
+
+.
+ For smaller 
+\begin_inset Formula $|z|$
+\end_inset 
+
+, the loops shrink in size and quickly disappear.
+ Adding imaginary components breaks the mirror symmetry of the curve.
+ Larger values of 
+\begin_inset Formula $|z|$
+\end_inset 
+
+ makes the loops increasingly convoluted, as the next figure shows.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Bernoulli Map Eigenfunction
+\layout Standard
+
+
+\begin_inset Graphics
+	filename beigen-0.7-0.16.png
+
+\end_inset 
+
+
+\layout Standard
+
+Above is shown a polar plot of the Bernoulli Map eigenfunction 
+\begin_inset Formula $\phi_{zl}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $l=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $z=0.7+0.16i$
+\end_inset 
+
+.
+ The x and y axis are respectively the real and imaginary parts of 
+\begin_inset Formula $\phi_{zl}(x)$
+\end_inset 
+
+.
+ Because the curlicues of the figure overlap enough to make a big mess,
+ we've colored the image so that green and yellow indicate areas where the
+ curve overlaps many, many times, and the blue areas where the curve is
+ visited only a few times.
+\end_inset 
+
+It can be readily worked out that the factor of 
 \begin_inset Formula $2l+1$
 \end_inset 
 
 , which is needed to enumerate the eigenfunctions, does not add any new
  or interesting complications to the overall symmetry.
  With a minimum of effort, one can quickly see that these curves transform
- under exactly the same representation as the Takagi Curve.
+ in a fashion similar to the Takagi Curve.
  Starting with 
 \begin_inset Formula $g,$
 \end_inset 
@@ -928,34 +1035,64 @@ The eigenfunctions of the Bernoulli map
 
 \end_inset 
 
+ Concatenating group elements proceeds in a fashion similar to before.
+ For example, 
+\begin_inset Formula \[
+g_{D}^{3}r_{D}g_{D}(x)=\frac{1}{8}-\frac{x}{16}\]
 
-\layout Standard
+\end_inset 
 
-xxxx
+ and so 
+\begin_inset Formula \[
+\left[g^{3}rg\phi_{z}\right](x)=\phi_{z}\left(\frac{1}{8}-\frac{x}{16}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{8}\right)\right)+z\phi_{z}\left(\frac{1}{4}-\frac{x}{8}\right)\]
+
+\end_inset 
+
+ where we've taken, for convenience, 
+\begin_inset Formula $l=0$
+\end_inset 
+
+.
+ Peeling off one group element at a time, we finally get 
+\begin_inset Formula \[
+\phi_{z}\left(\frac{1}{8}-\frac{x}{16}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{8}\right)\right)+z\,\exp\left(i\pi\left(\frac{1}{2}-\frac{x}{4}\right)\right)\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+z^{2}\exp\left(i\pi\left(1-\frac{x}{2}\right)\right)+z^{3}\exp\left(-i\pi x\right)+z^{4}\phi_{z}\left(-x\right)\]
+
+\end_inset 
+
+ which we can also write as 
+\begin_inset Formula \[
+\left[g^{3}rg\phi_{z}\right](x)=\exp\left(2i\pi g^{3}rg(x)\right)+z\,\exp\left(2i\pi g^{2}rg(x)\right)\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+z^{2}\exp\left(2i\pi grg(x)\right)+z^{3}\exp\left(-2i\pi g(x)\right)+z^{4}\phi_{z}\left(-x\right)\]
+
+\end_inset 
+
+ XXXX The act of peeling off one group element creates this funny polynomial.
+ We need to develop a notational mechanism for writing this kind of thing
+ nicely.
+ Part of the diffuculty is that there is no easy way to define 
+\begin_inset Quotes eld
+\end_inset 
+
+the operator that pels off one group element
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ 
 \layout Standard
 
 What about the Bernoulli Polynomials ?
-\layout Standard
-
-\layout Subsection
-
-The Cantor Map and the Koch Curve
-\layout Standard
-
-We can apply essentially the same analysis to the Cantor Map and the Koch
- Curve.
- The Levy Dragon follows too.
- The highly irregular curves studied by Weierstrass-Hardy fall as well.
- This begs the question, are there any self-similar curves that do NOT have
- the modular group symmetry? One can promptly shoot back: oh, we of course,
- curves generated by **random** subdivision clearly cannot have this symmetry,
- but in fact, this assumption would be false.
- The evidence is that the continued fraction gaps are *randomly* distributed
- on the unit square, and thus one has a Cauchy sequence that converges arbitrari
-ly close to any given random value.
- We already know that the gaps obey the modular group symmetry, and thus
- we conclude that **even radnom walks** have the modular group symmetry.
- This is the killer result, I think.
 \layout Subsection
 
 Miscellany
@@ -1195,6 +1332,25 @@ Homework: Describe the analytic properties of
 Conclusions
 \layout Standard
 
+We can apply essentially the same analysis to the Cantor Map and the Koch
+ Curve.
+ The Levy Dragon follows too.
+ The highly irregular curves studied by Weierstrass-Hardy fall as well.
+ This begs the question, are there any self-similar curves that do NOT have
+ the modular group symmetry? One can promptly shoot back: oh, we of course,
+ curves generated by **random** subdivision clearly cannot have this symmetry,
+ but in fact, this assumption would be false.
+ The evidence is that the continued fraction gaps are *randomly* distributed
+ on the unit square, and thus one has a Cauchy sequence that converges arbitrari
+ly close to any given random value.
+ We already know that the gaps obey the modular group symmetry, and thus
+ we conclude that **even radnom walks** have the modular group symmetry.
+ This is the killer result, I think.
+\layout Standard
+
+Are there features which are *not* adequately described by the modular group?
+\layout Standard
+
 The Mandelbrot Set.
  Mode locking.
  Levy Dragons are probably exactly solvable..
@@ -1276,17 +1432,31 @@ The Science of Fractal Images, ed.
 \layout Bibliography
 \bibitem [deR57]{key-4}
 
-Georges de Rham, On Some Curves Defined by Functional Equations (1957),
- reprinted in Classics on Fractals, ed.
+Georges de Rham, 
+\emph on 
+On Some Curves Defined by Functional Equations
+\emph default 
+ (1957), reprinted in 
+\emph on 
+Classics on Fractals
+\emph default 
+, ed.
  Gerald A.
  Edgar, (Addison-Wesley, 1993) pp.
  285-298
 \layout Bibliography
-\bibitem [We72]{key-5}
+\bibitem [We1872]{key-5}
 
-Karl Weierstrass, On Continuous Functions of a Real Argument that do not
- have a Well-defined Differential Quotient (1872), reprinted in Classics
- on Fractals, ed.
+Karl Weierstrass, 
+\emph on 
+On Continuous Functions of a Real Argument that do not have a Well-defined
+ Differential Quotient
+\emph default 
+ (1872), reprinted in 
+\emph on 
+Classics on Fractals
+\emph default 
+, ed.
  Gerald A.
  Edgar, (Addison-Wesley, 1993) pp.
  2-9.
@@ -1294,6 +1464,17 @@ Karl Weierstrass, On Continuous Functions of a Real Argument that do not
 \bibitem [Dri99]{key-2}
 
 Dean J.
- Driebe, Fully Chaotic Maps and Broken Time Symmetry (Kluwer Academic Publishers
-, 1999)
+ Driebe, 
+\emph on 
+Fully Chaotic Maps and Broken Time Symmetry
+\emph default 
+ (Kluwer Academic Publishers, 1999)
+\layout Bibliography
+\bibitem [Man04]{key-7}
+
+Benoit Mandelbrot, 
+\emph on 
+Fractals and Chaos, the Mendelbrot Set and Beyond
+\emph default 
+ (Springer-Verlag, 2004)
 \the_end
