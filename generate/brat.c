@@ -124,6 +124,7 @@ void dmandelbrot_out (
    double	dre, dim;
    double	ddre, ddim;
    double	d3re, d3im;
+   double	d4re, d4im;
    int		loop;
    double modulus, phi, phip, phi3, frac;
    double escape_radius = 3450.0;
@@ -153,7 +154,18 @@ void dmandelbrot_out (
          ddim = 0.0;
          d3re = 0.0;
          d3im = 0.0;
+         d4re = 0.0;
+         d4im = 0.0;
          for (loop=1; loop <itermax; loop++) {
+            /* compute fourth derivative */
+            tmp = re*d4re - im*d4im + 4.0*(dre*d3re - dim*d3im);
+            tmp += 3.0 * (ddre*ddre - ddim*ddim);
+            tmp *= 2.0;
+            d4im = re*d4im + im*d4re + 4.0*(dre*d3im + dim*d3re); 
+            d4im += 6.0 * ddre * ddim;
+            d4im *= 2.0;
+            d4re = tmp;
+
             /* compute third derivative */
             tmp = 2.0 * (re*d3re - im*d3im + 3.0*(dre*ddre - dim*ddim));
             d3im = 2.0 * (re*d3im + im*d3re + 3.0*(dre*ddim + dim*ddre)); 
@@ -204,6 +216,13 @@ void dmandelbrot_out (
          d3re /= (re*re + im*im);
          d3im /= (re*re + im*im);
 
+         /* compute z(4)/z */
+         tmp = re*d4re + im*d4im;   /* divergence */
+         d4im = re*d4im - im*d4re;   /* curl */
+         d4re = tmp;
+         d4re /= (re*re + im*im);
+         d4im /= (re*re + im*im);
+
 
          /* phase */
          phi = atan2 (dim, dre);
@@ -220,15 +239,13 @@ void dmandelbrot_out (
 
          modulus = sqrt (dre*dre+dim*dim);
          modulus = sqrt (ddre*ddre+ddim*ddim);
-         // modulus /= (double) loop;
+         // modulus = sqrt (d4re*d4re+d4im*d4im);
+         modulus /= (double) loop;
+         modulus *= log((double) loop);
+         modulus *= log((double) loop);
 
         
-         // glob [i*sizex +j] = phi3;
-
-/*
-         glob [i*sizex +j] = sqrt ((dre*dre+dim*dim)/(re*re+im*im));
-         glob [i*sizex +j] /= (double) loop;
-*/
+         glob [i*sizex +j] = modulus;
 
          re_position += delta;
       }
