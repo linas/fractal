@@ -1,0 +1,24 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small 
+set out 'swap.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "reimann"
+set xlabel "x"
+set ylabel "y"
+
+# set yrange [0:]
+
+plot \
+     "swap.dat" using 3:4 title "r"
+
+
+# pause 100
+
