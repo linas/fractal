@@ -169,6 +169,29 @@ C       BESS (I) = C * TMP(I) * (10.0D0 ** (MON(I)-M))
 	}
 }
 
+/* ============================================================== */
+/*
+        SUBROUTINE QUICKBESSEL (N, X, BESSM1, BESS, BESSP1)
+
+C       THIS SUBROUTINE CALCULATES THE
+C       REGULAR SPHERICAL BESSEL FUNCTIONS BESS AND THE
+C       IRREGULAR SPHERICAL BESSEL FUNCTIONS NEU
+C       FOR THE ORDERS N-1, N AND N+1, FOR (POSITIVE) ARGUMENT Z.
+* Bugs: not as fast as it could be ...
+*/
+
+void 
+quickbessel (int n, double x, 
+             double *bessm1, double *bess, double *bessp1)
+{
+	double val [ARRSZ];
+	bessel (n,x,val);
+
+	*bessm1 = val[n-1];
+	*bess = val[n];
+	*bessp1 = val[n+1];
+}
+
 #if 0
 /***
 C       ******************************************************************

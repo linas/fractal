@@ -21,4 +21,8 @@ C       THE RESULTS ARE RETURNED IN THE ARRAY BESS (0:N)
 */
 void bessel (int n, double x, double *bess);
 
+void
+quickbessel (int n, double x,
+             double *bessm1, double *bess, double *bessp1);
+
 #endif
