@@ -3019,6 +3019,22 @@ if ((j>=sizey) || (0>j)) printf ("badddddd j=%d gap=%g p/q=%d/%d\n", j, gap, nn,
 		// printf ("duude i=%d b=%d t=%d\n", i, bin_cnt[i], tot_cnt[i]);
    }
 
+	/* Profile */
+	double norm = 0.0;
+	for (j=0; j<sizey; j++)
+	{
+		double tmp =0.0;
+		for (i=0; i<sizex; i++)
+		{
+			tmp += glob [j*sizex+i];
+		}
+		tmp /= sizex;
+		double y = ((double) j +0.5)/((double) sizey);
+		printf ("%g	%g\n", y, tmp);
+		norm += tmp;
+	}
+	printf ("# duude norm=%g\n", norm);
+
    free (bin_cnt);
    free (tot_cnt);
 }
