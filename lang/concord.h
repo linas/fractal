@@ -3,23 +3,12 @@
 // concord.h
 //
 // FUNCTION:
-// The lagConcord class associates builds a concordance
+// The lagConcord class builds a concordance.
 //
 // METHODS:
-// The GetGenericWordID() method returns the ID number of the pair.
-//
-// The GetFirstOfPair() method returns the first elt of the pair.
-//
-// The GetSecondOfPair() method returns the second elt. of the pair.
-//
-// The GetTopPairContainingWord() returns a pair id that contains the
-//    word as the first word.  The returned pairid is the pair 
+// The GetTopTupleContainingWord() returns a tuple id that contains the
+//    word as the first word.  The returned tupleid is the tuple 
 //    id with the highest count.  
-//
-// The GetCount() method returns how often the particular word
-//    occurs in the text.
-//
-// The GetTopTen() method returns the n'th most popular pair id.
 //
 // HISTORY:
 // January 1997 Linas Vepstas
