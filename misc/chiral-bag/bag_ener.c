@@ -228,7 +228,7 @@ c	       take a big step and save some cpu time.
 			}
 		}
 	}
-	return numfound+1;
+	return numfound;
 }
 
 /* ============================================================= */
