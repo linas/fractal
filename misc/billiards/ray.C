@@ -163,6 +163,7 @@ SinaiBox::SinaiBox (void)
    niterations = 10000;
    max_manhattan = 10000;
    max_distance = 10000.0;
+	max_sphere_hits = 10000;
 
    walls[0].Set(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
    walls[1].Set(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
@@ -239,6 +240,7 @@ SinaiBox::Trace (SinaiRay &sr)
 
       if (sr.distance > max_distance) break;
       if (sr.bounces[next_wall] >= max_manhattan) break;
+      if (sr.sphere_hits >= max_sphere_hits) break;
    }
 }
 
@@ -295,6 +297,7 @@ SinaiBox::TraceToroid (SinaiRay &sr)
          
       if (sr.distance > max_distance) break;
       if (sr.bounces[next_wall] >= max_manhattan) break;
+      if (sr.sphere_hits >= max_sphere_hits) break;
    }
 }
 

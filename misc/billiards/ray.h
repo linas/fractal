@@ -88,6 +88,7 @@ class SinaiBox
       int niterations;
       double max_distance;
       int max_manhattan;
+		int max_sphere_hits;
       double radius;
 
    private:
