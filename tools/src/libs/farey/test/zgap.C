@@ -29,20 +29,19 @@ main (int argc, char *argv[])
    }
 
    n = atoi (argv[1]);
-   deno = 2*n;
+   deno = n;
 
    for (i = 0; i <= n; i ++) 
    {
-
-      nume = 1;
-      deno = i+2;
+      nume = 2;
+      deno = 2*i+3;
       x = ((double) nume) / ((double) deno);
       f.SetRatio (nume, deno);
       v = f.ToZRealGap ();
       // z = (f.ToZReal(1.001) - f.ToZReal(1.0)) / 0.001;
       // f.Print ();
 
-      printf ("%g	%g	%g\n", x, 4.0*v, 2.0 /((double) deno*deno));
+      printf ("%d	%g	%g	%g\n", deno, x, v, 1.0 /((double) deno*deno));
       fflush (stdout);
    }
 

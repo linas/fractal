@@ -5,14 +5,11 @@
 set term gif size 400,300
 set out 'zgap.gif'
 set data style linespoints 
-set title "z gap"
+set title "Continued Z Fraction Gaps"
 set key left
-# set xrange [] reverse
 set xlabel "x"
-set ylabel "log (gap)"
-# set format y2 "%d"
-plot "zgap.dat" using (log($1)):(log($2)) 			\
+set ylabel "log (gap size)"
+plot "zgap.dat" using (($1)):(log($2)) 			\
      title "gaps"				\
 
-# plot "convergence.dat" using (log($1)):(log($1) * log($1))
 # pause 1000
