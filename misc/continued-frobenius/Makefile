@@ -1,6 +1,6 @@
 
 EXES = alpha asubn bern bern_h diagon diverge eicheck frobenius gsl-diag \
-	riemann sum tryall valuate zeta-sum zeta-takagi zeta-zero zero
+	riemann sum tryall valuate zeta-sum zeta-takagi zeta-zero zero zyx
 
 all: $(EXES)
 
@@ -23,6 +23,7 @@ riemann.o:	zetafn.h
 tryall.o:	zetafn.h
 zeta-sum.o: zetafn.h
 zeta-zero.o: zetafn.h
+zyx.o:	zetafn.h
 
 alpha: alpha.o ache.o zetafn.o
 asubn: asubn.o ache.o zetafn.o
@@ -42,6 +43,7 @@ zeta-sum: zeta-sum.o zetafn.o
 zeta-takagi: zeta-takagi.o zetafn.o
 zeta-zero: zeta-zero.o zetafn.o 
 zero: zero.o
+zyx: zyx.o zetafn.o
 
 
 .o:
