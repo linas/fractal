@@ -191,6 +191,8 @@ if (0.25*width*width > ((re_position-re_center)* (re_position-re_center) +
 /*-------------------------------------------------------------------*/
 /* utility function performs iteration, returns results of iteration */
 
+#define OFL  (1e30)
+
 void iterate (double re_c,
               double im_c,
               double escape_radius,
@@ -220,6 +222,14 @@ void iterate (double re_c,
       tmp = re*re - im*im + re_c;
       im = 2.0*re*im + im_c;
       re = tmp;
+
+      while ((OFL < re) || (OFL < im)) {
+         re /= OFL;
+         im /= OFL;
+         dre /= OFL;
+         dim /= OFL;
+      }
+
 
       modulus = (re*re + im*im);
       if (modulus > esq) break;
@@ -340,36 +350,36 @@ void mandelbrot_wind (
          {
             int lp = k;
             /* ok, now try it */
-            iterate (re_c, im_c, 1.0e10*escape_radius,
+            iterate (re_c, im_c, 1.0e50*escape_radius,
                  re, im, dre, dim, lp);
    
             /* compute the derivative */
             dmu_re = re*dre + im*dim;
             dmu_im = re*dim - im*dre;
             modulus = (re*re + im*im);
-            dmu_re *= -0.5 / modulus;
-            dmu_im *= -0.5 / modulus;
+            dmu_re *= -1.0 / modulus;
+            dmu_im *= -1.0 / modulus;
             modulus = 1.0 / log(sqrt (modulus));
             dmu_re *= modulus;
             dmu_im *= modulus;
             modulus = 1.0/(dmu_re*dmu_re + dmu_im*dmu_im);
 
             phi = atan2(im, re);
-printf ("its %d c=(%g %g) p=%g z=(%g %g) d=(%g %g) dm=(%g %g)\n", k,
-re_c, im_c, phi, re, im,
-dre, dim,
-dmu_re*modulus , dmu_im*modulus);
+// printf ("its %d c=(%g %g) p=%g	z=(%g %g) d=(%g %g)	dm=(%g %g)\n", k,
+// re_c, im_c, phi, re, im, dre, dim, -dmu_re*modulus , dmu_im*modulus);
 
             /* extract the binary bit */
             if (0.0<phi) { bits[k] = 0; } else { bits[k] =1; }
 
+            /* uhh, remember its contra not covarient */
+            // re_c -= 2.0*dmu_re*modulus;
+            // im_c += 2.0*dmu_im*modulus;
             re_c -= dmu_re*modulus;
-            im_c -= dmu_im*modulus;
-k=0;
-break;
+            im_c += dmu_im*modulus;
          }
-printf ("\n");
+// printf ("\n");
 
+#if 0
          phi /= 2.0*M_PI;
 
          if (loop < itermax) {
@@ -381,7 +391,14 @@ printf ("\n");
          }
 
          glob [i*sizex +j] = phi;
+#endif
 
+         phi = 0.0;
+         tmp = 1.0;
+         for (k=1; k<48; k++) {
+            tmp *= 0.5;
+            if (bits[k]) phi += tmp;
+         }
 #if 0
          // colorize the landing rays
          phi *= 512.0;
@@ -397,15 +414,7 @@ printf ("\n");
 #endif
 
 
-         phi = 0.0;
-         tmp = 1.0;
-         for (k=1; k<48; k++) {
-            tmp *= 0.5;
-            if (bits[k]) phi += tmp;
-         }
-phi = bits[2];
-phi = 0.5*atan2(dmu_im, dmu_re)/M_PI;
-if (phi<0.0) phi+=0.5;
+phi = bits[4];
          glob [i*sizex +j] = phi;
 
          re_position += deltax;
@@ -887,17 +896,19 @@ void dmandelbrot_out (
 
 
          /* phase */
-         /* ??? why is x the wrong sign ??? */
-         phi = atan2 (dim, dre);
+         /* just remember that gradient is contravarient
+          * i.e. grad = 2 d-bar so flip sign of y 
+          */
+         phi = atan2 (-dim, dre);
          if (0.0 > phi) phi += 2.0*M_PI;
          phi /= 2.0*M_PI;
 
-         phip = atan2 (ddim, ddre);
-         phip += M_PI;
+         phip = atan2 (-ddim, ddre);
+         if (0.0 > phip) phip += 2.0*M_PI;
          phip /= 2.0*M_PI;
 
-         phi3 = atan2 (d3im, d3re);
-         phi3 += M_PI;
+         phi3 = atan2 (-d3im, d3re);
+         if (0.0 > phi3) phi3 += 2.0*M_PI;
          phi3 /= 2.0*M_PI;
 
          modulus = sqrt (dre*dre+dim*dim);
