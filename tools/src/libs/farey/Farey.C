@@ -156,6 +156,7 @@ ContinuedFraction::Print (void)
    int i;
    printf (" ratio %d over %d is continued fraction of %d terms\n", num, denom, nterms);
    for (i=0; i<nterms; i++) { 
+		partial[i] = ((double) GetConvNum(i)) / ((double) GetConvDenom (i));
       printf (" term %d is %d partial=%g\n", i, tinued_frac[i], partial[i]);
    }
 }
