@@ -1,5 +1,5 @@
 /*
- * brat.c
+ * brat.C
  *
  * FUNCTION:
  * Explore Hausdorf measure of mandelbrot set.
@@ -189,6 +189,17 @@ if (0.25*width*width > ((re_position-re_center)* (re_position-re_center) +
 }
 
 /*-------------------------------------------------------------------*/
+/* utility helper for the winding */
+
+void iterate (double re_c,
+              double im_c,
+              double &re,
+              double &im
+              ) 
+{
+}
+
+/*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using 
  * the classic algorithm. used for exploring winding number and
  * angle-things 
@@ -205,10 +216,11 @@ void mandelbrot_wind (
    int		itermax)
 {
    unsigned int	i,j,k,  globlen, itermax_orig;
-   double		re_start, im_start, deltax, deltay;
-   double		re_position, im_position;
-   double		re_c, im_c;
-   double		re, im, tmp;
+   double	re_start, im_start, deltax, deltay;
+   double	re_position, im_position;
+   double	re_c, im_c;
+   double	re, im, tmp;
+   double 	dre, dim;
    int		loop;
    double modulus=0.0, frac, mu;
    double escape_radius = 1131.1;
@@ -245,6 +257,8 @@ void mandelbrot_wind (
 
          re = 0.0;
          im = 0.0;
+         dre = 0.0;
+         dim = 0.0;
          phi_last = -0.01;
          wind = 0;
 // printf ("\n phi_c= %12.8g   c=(%g %g)\n", phi_c, re_c, im_c);
@@ -335,7 +349,7 @@ void mandelbrot_cutoff (
    double	width,
    int		itermax)
 {
-   unsigned int	i,j, globlen;
+   int	i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
    double	re, im, tmp, mod, modulus=0.0;
@@ -1004,7 +1018,7 @@ void mandelbrot_inverse (
    double	width,
    int		itermax)
 {
-   unsigned int	i,j, globlen;
+   int	i,j, globlen;
    double		re_start, im_start, delta;
    double		re_position, im_position;
    double		re, im, tmp;
@@ -1062,7 +1076,7 @@ delta *= 0.25;
          re *= 24.0;
          im *= 1.0;
 
-         ire = sizex * (re + 0.5);
+         ire = (int) (sizex * (re + 0.5));
          if (0 > ire) ire = 0;
          if (sizex <= ire) ire = sizex-1;
 
