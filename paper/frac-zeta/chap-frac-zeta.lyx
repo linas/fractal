@@ -1127,6 +1127,30 @@ s-1\end{array}\right)\left(\frac{-p}{n}\right)^{k}\left[\zeta_{H}\left(s+k,\frac
  
 \layout Standard
 
+Althought the derivation these last relations explicitly required integers
+ and rationals, the final result is quite general, and it seems that standard
+ arguments about continuity and the convergence of Cauchy sequences in the
+ complex plane should suffice to provide expressions that are generaly valid.
+ That is, we can replace 
+\begin_inset Formula $m/n$
+\end_inset 
+
+ and 
+\begin_inset Formula $p/n$
+\end_inset 
+
+ with 
+\begin_inset Formula $x,y\in\mathbb{C}$
+\end_inset 
+
+, and obtain 
+\begin_inset Formula \begin{equation}
+\zeta_{H}\left(s,x+y\right)=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(-x\right)^{k}\zeta_{H}\left(s+k,y\right)\label{eq:}\end{equation}
+
+\end_inset 
+
 In a certain sense, this last formula is not entirly new: it generalizes
  a known, 
 \begin_inset Quotes eld
@@ -1161,12 +1185,12 @@ obvious
  to be an integer instead of being real-valued, we can write the Taylor's
  series as 
 \begin_inset Formula \begin{eqnarray}
-\zeta_{H}\left(s,\frac{m+p}{n}\right) & = & \frac{(-)^{s}}{\Gamma(s)}\;\psi^{(s-1)}\left(\frac{m+p}{n}\right)\nonumber \\
- & = & \frac{(-)^{s}}{\Gamma(s)}\;\sum_{k=0}^{\infty}\frac{1}{k!}\,\left(\frac{p}{n}\right)^{k}\left.\frac{d^{k}}{dx^{k}}\psi^{(s-1)}(x)\right|_{x=m/n}\nonumber \\
- & = & \frac{(-)^{s}}{\Gamma(s)}\;\sum_{k=0}^{\infty}\frac{1}{k!}\,\left(\frac{p}{n}\right)^{k}\psi^{(s+k-1)}\left(\frac{m}{n}\right)\nonumber \\
+\zeta_{H}\left(s,x+y\right) & = & \frac{(-)^{s}}{\Gamma(s)}\;\psi^{(s-1)}\left(x+y\right)\nonumber \\
+ & = & \frac{(-)^{s}}{\Gamma(s)}\;\sum_{k=0}^{\infty}\frac{x^{k}}{k!}\;\frac{d^{k}}{dy^{k}}\psi^{(s-1)}(y)\nonumber \\
+ & = & \frac{(-)^{s}}{\Gamma(s)}\;\sum_{k=0}^{\infty}\frac{x^{k}}{k!}\,\psi^{(s+k-1)}\left(y\right)\nonumber \\
  & = & \sum_{k=0}^{\infty}\left(\begin{array}{c}
 s+k-1\\
-s-1\end{array}\right)\left(\frac{-p}{n}\right)^{k}\zeta_{H}\left(s+k,\frac{m}{n}\right)\label{eq:}\end{eqnarray}
+s-1\end{array}\right)\left(-x\right)^{k}\zeta_{H}\left(s+k,y\right)\label{eq:}\end{eqnarray}
 
 \end_inset 
 
@@ -1177,6 +1201,50 @@ s-1\end{array}\right)\left(\frac{-p}{n}\right)^{k}\zeta_{H}\left(s+k,\frac{m}{n}
 
 .
  
+\layout Subsection
+
+Umbral Calculus
+\layout Standard
+
+This last result is interesting because this generalization takes the form
+ of a relation in Umbral calculus, or more generally, in Sheffer sequences.
+ In Umbral calculus, an elementary algebraic relationship, which normally
+ holds only for simple monomials, is found to also hold, in a symbolic sense,
+ for classes of polynomials.
+ Thus, for example, the binomial theorem, which gives the expansion of 
+\begin_inset Formula $(x+y)^{n}$
+\end_inset 
+
+ in terms of powers of 
+\begin_inset Formula $x$
+\end_inset 
+
+ and 
+\begin_inset Formula $y$
+\end_inset 
+
+, has a 
+\begin_inset Quotes eld
+\end_inset 
+
+shadow
+\begin_inset Quotes erd
+\end_inset 
+
+ relationship that takes the same form, for the Bernoulli polynomial 
+\begin_inset Formula $B_{n}(x+y)$
+\end_inset 
+
+.
+ Let us now see if we can find additional 
+\begin_inset Quotes eld
+\end_inset 
+
+shadow
+\begin_inset Quotes erd
+\end_inset 
+
+ relations on the Hurwitz zeta.
 \layout Subsection
 
 Dirichlet Charaters
