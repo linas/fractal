@@ -41,8 +41,9 @@ sum4 (double x)
 	double acc = 0.0;
 	for (n=1; n<20; n++)
 	{
-		double term = 4.0/(x+n);
-		term -= 1.0 / (x+n+2);
+		double term = 2.0/(x+n) - 1.0 / (x+n+1);
+		term *= term;
+		term /= tn;
 		acc += term;
 		tn *= 2.0;
 	}
@@ -51,6 +52,7 @@ sum4 (double x)
 	acc *= 0.25;
 	return acc;
 }
+
 
 double 
 sum1 (double x)
@@ -62,10 +64,30 @@ sum1 (double x)
 	for (n=1; n<20; n++)
 	{
 		double term = 1.0/(x+n);
+		term /=  tn;
 		acc += term;
 		tn *= 2.0;
 	}
 
+	return acc;
+}
+
+double 
+sum2 (double x)
+{
+
+	int n;
+	double tn = 4.0;
+	double acc = 0.0;
+	for (n=1; n<20; n++)
+	{
+		double term = 1.0/((x+n)*(x+n));
+		term /= tn;
+		acc += term;
+		tn *= 4.0;
+	}
+
+	acc = (8.0*acc -1.0);
 	return acc;
 }
 
@@ -95,10 +117,9 @@ main ()
 		double x = ((double) i ) / ((double) nmax);
 		// double y = summy (x);
 
-		double z = sum1(x);
-		double y = gkw (sum1, x);
-		y /= z;
-
+		double y = sum2(x);
+		// double z = 1.0;
+		double z = gkw (sum2, x);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x,y,z);
 	}
