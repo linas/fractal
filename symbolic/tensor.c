@@ -150,9 +150,7 @@ Term * Copy_Term (Term *t)
 	return t3;
 }
 
-/* ======================================================== */
-
-Expr *Add_E_T (Expr *e, Term *t)
+Expr *Copy_Expr (Expr *e)
 {
 	Expr *e3 = g_new0(Expr, 1);
 
@@ -162,10 +160,89 @@ Expr *Add_E_T (Expr *e, Term *t)
 		Term *tr = en->data;
 		e3->terms = g_list_append (e3->terms, Copy_Term(tr));
 	}
-	
+	return e3;
+}
+
+/* ======================================================== */
+
+Expr *Add_E_T (Expr *e, Term *t)
+{
+	Expr *e3 = Copy_Expr(e);
+
 	e3->terms = g_list_append (e3->terms, Copy_Term(t));
 	return e3;
 }
+
+/* ======================================================== */
+/* Derivatives */
+
+Expr *DD_Term (Term *t, int which)
+{
+	if (NULL == t->parts) return NULL;
+
+	Expr *e3 = g_new0(Expr, 1);
+
+	GList *pn;
+	for (pn = t->parts; pn; pn=pn->next)
+	{
+		Term *t3 = g_new0 (Term,1);
+		t3->coeff = t->coeff;
+
+		GList *pm;
+		for (pm = t->parts; pm; pm=pm->next)
+		{
+			Part *p = pm->data;
+			Part *p3 = Copy_Part (p);
+			
+			if (pm == pn)
+			{
+				if (1 == which) p3->dx ++;
+				if (2 == which) p3->dy ++;
+			}
+			t3->parts = g_list_append (t3->parts, p3);
+		}
+		e3 = Add_E_T (e3, t3);		
+	}
+
+	return e3;
+}
+
+Expr *DDX_Term (Term *t)
+{
+	return DD_Term (t,1);
+}
+
+Expr *DDY_Term (Term *t)
+{
+	return DD_Term (t,2);
+}
+
+Expr *DD (Expr *e, int which)
+{
+	Expr *e3 = g_new0(Expr, 1);
+	
+	GList *en;
+	for (en = e->terms; en; en=en->next)
+	{
+		Term *tr = en->data;
+		Expr *em = DD_Term (tr, which);
+		if (!em) continue;
+		e3->terms = g_list_append (e3->terms, em);
+		g_free (em);
+	}
+	return e3;
+}
+
+Expr *DDX (Expr *e)
+{
+	return DD (e,1);
+}
+
+Expr *DDY (Expr *e)
+{
+	return DD (e,2);
+}
+
 
 /* ======================================================== */
 /* userland */
@@ -247,6 +324,9 @@ void setup (void)
 	e = gyy();
 	printf ("gyy is:\n");
 	PrintExpr (e);
+
+	printf ("dx gxx is:\n");
+	PrintExpr (DDX(gxx()));
 }
 
 main ()

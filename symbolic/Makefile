@@ -1,5 +1,5 @@
 
-CC = /usr/bin/cc -O2  
+CC = /usr/bin/cc -g -O2  
 
 EXES= tensor
 
