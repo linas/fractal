@@ -22,19 +22,28 @@
 extern FILE *Fopen();
 
 /*-------------------------------------------------------------------*/
+/* initialize drawing area */
+
+void 
+initialize (float *glob, unsigned int sizex, unsigned int sizey)
+{
+   unsigned int	i, globlen;
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+}
+
+/*-------------------------------------------------------------------*/
 /* draws a circle */
 
 void draw_circle (float *glob, unsigned int sizex, unsigned int sizey,
                   double centerx, double centery, double radius)
 {
-   unsigned int	i, globlen;
+   unsigned int	i;
    int		ic, is;
    double theta, dtheta;
    double tmp, ds, dc, s, c;
    
-   globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.0;
-
    dtheta = 1.0 / radius;
    ds = sin (dtheta);
    dc = cos (dtheta);
@@ -63,13 +72,10 @@ void draw_parameter (float *glob, unsigned int sizex, unsigned int sizey,
                   double centerx, double centery, double scale, 
                   Param f, Param g)
 {
-   unsigned int	i,imax, globlen;
+   unsigned int	i,imax;
    double t, r, theta;
    int		ix, iy;
    
-   globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.0;
-
    imax = sizex *10;
    for (i=0; i< imax; i++) {
       t = ((double) i) / ((double) imax);
@@ -88,55 +94,110 @@ void draw_parameter (float *glob, unsigned int sizex, unsigned int sizey,
 /*-------------------------------------------------------------------*/
 
 double thet (double t) { return 2.0*M_PI*t; }
-double rad (double t) {return sin (2.0*M_PI*t); }
+double rad (double t) {return sin (M_PI*t); }
 
-/*-------------------------------------------------------------------*/
-/* draws a circle */
+struct Farey *far = NULL;
 
-void draw_fcircle (float *glob, unsigned int sizex, unsigned int sizey,
-                  double centerx, double centery, double radius)
-{
-   unsigned int	i, globlen;
-   int		ic, is;
-   double theta, dtheta;
-   double tmp, ds, dc, s, c;
-   struct Farey *far;
+/* a Farey distortion */
+double fthet (double t) 
+{ 
    double ecc;
-   
-   /* initialize pixmap */
-   globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.0;
-
-   dtheta = 1.0 / radius;
-   ds = sin (dtheta);
-   dc = cos (dtheta);
-   s = radius;
-   c = 0.0;
-   theta = 0.0;
 
    /* initialize Farey number class */
-   far = CreateFarey();
+   if (!far) far = CreateFarey();
 
-   for (i=0; i< 7.0*radius; i++) {
+   SetReal (far, t);
+   ecc = ContinuedFractionToFarey (far);
+   return 2.0*M_PI*ecc; 
+}
 
-      SetReal (far, 2.0 * c/((double) sizex));
+
+double frad (double t) 
+{ 
+   double ecc;
+
+   /* initialize Farey number class */
+   if (!far) far = CreateFarey();
+
+   SetReal (far, t);
+   ecc = ContinuedFractionToFarey (far);
+   return sin (M_PI * ecc); 
+}
+
+
+/*-------------------------------------------------------------------*/
+/* draws the mandelbrot bulb */
+
+void 
+draw_bulb (float *glob, unsigned int sizex, unsigned int sizey,
+                  double centerx, double centery, double scale)
+{
+   unsigned int	i,imax;
+   double t, r, theta;
+   int		ix, iy;
+   double ecc;
+
+   /* initialize Farey number class */
+   if (!far) far = CreateFarey();
+   
+   imax = sizex *10;
+   for (i=0; i< imax; i++) {
+      t = ((double) i) / ((double) imax);
+
+      /* cardiod in polar coords */
+      theta = 2.0*M_PI*t;
+      r = scale *  sin (M_PI*t);
+
+      /* bud size parameter */
+      SetReal (far, t);
       ecc = ContinuedFractionToFarey (far);
 
-      ecc /= 100;
-      ecc *= 600;
-
-      ic = (int) (c + centerx);
-      is = (int) (s + centery + ecc);
-      if (0 <= ic  && ic < sizex && 0 <= is && is < sizey) {
-         glob [is*sizex + ic] = 1.0;
+      /* lay down a point */
+      ix = (int) (centerx + r * cos (theta));
+      iy = (int) (centery + r * sin (theta));
+      if (0 <= ix  && ix < sizex && 0 <= iy && iy < sizey) {
+         glob [iy*sizex + ix] = 1.0;
       }
-      tmp = s*dc + c*ds;
-      c = c*dc - s*ds;
-      s = tmp;
-      theta += dtheta;
+
+      draw_circle (glob, sizex, sizey, ix, iy, scale*ecc);
    }
 }
 
+/*-------------------------------------------------------------------*/
+/* draws a median */
+
+void draw_median_circle (float *glob, unsigned int sizex, unsigned int sizey,
+                  double centerx, double centery, double radius)
+{
+   unsigned int	i, imax;
+   int		ic, is;
+   double theta, dtheta;
+   double rm, a,g, s, c;
+   
+   s = radius;
+   c = 0.0;
+
+   imax = 7.0*radius;
+   for (i=0; i<imax; i++) {
+      theta =  2.0 * M_PI * ((double) i) / ((double) imax);
+
+      c = 1.01 + cos (theta);
+      s = 1.01 + sin (theta);
+
+      a = 0.5 * (c+s);
+      g = sqrt (c*s);
+      rm = s/c;
+
+      a *= radius;
+      g *= radius;
+
+      ic = (int) (a + centerx);
+      is = (int) (g + centery);
+      if (0 <= ic  && ic < sizex && 0 <= is && is < sizey) {
+         glob [is*sizex + ic] = 1.0;
+      }
+   }
+}
 
 /*-------------------------------------------------------------------*/
    
@@ -157,8 +218,11 @@ void do_circle (char * filename, int width, int height,
 
    data_width = width;
    data_height = height;
+   initialize (data, data_width, data_height);
 
-   draw_parameter (data, data_width, data_height, cx, cy, scale, thet, rad);
+   // draw_parameter (data, data_width, data_height, cx, cy, scale, thet, rad);
+   // draw_bulb (data, data_width, data_height, cx, cy, scale);
+   draw_median_circle (data, data_width, data_height, cx, cy, scale);
    
    /* dump the floating point data */
    sprintf (buff, "%s", filename);
