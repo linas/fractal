@@ -152,8 +152,15 @@ void dump (float glob[],
               unsigned int sizex, unsigned int sizey)
 {
    long		i;
+   double	gmin=1.0e30, gmax=-1.0e30;
    
-   /* renormalize */
+   for (i=0; i<sizex*sizey; i++) {
+      if (glob[i] < gmin) gmin = glob[i];
+      if (glob[i] > gmax) gmax = glob[i];
+   }
+   printf ("min = %g, max=%g\n", gmin, gmax);
+
+   /* print output */
    for (i=0; i<sizex*sizey; i++) {
       printf ("(%ld, %ld) = %g \n", i%sizex, i/sizex,  glob[i]);
    }
