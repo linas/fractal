@@ -1,0 +1,15 @@
+# set term x11
+#
+# set term gif size 800,600
+set term png medium
+set out 'scat.png'
+# set data style linespoints 
+set data style points 
+set title "scatter plot"
+set key right
+set xlabel "n"
+set ylabel "theta"
+plot "clean.dat" using ($5)           \
+     title "val"                          \
+
+
