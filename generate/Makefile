@@ -10,14 +10,27 @@ XLIB =		$(LIBS)/libX11.a
 
 CC = cc -O -I$(INCLUDES)
 
-EXES = brat draw dx image
+EXES = stalk stalkmov mstop migrate measure offset \
+        lyapunov next squige age phase orig whack \
+        circout circin circmov brat \
+        abs clamp takelog reclamp dump renorm \
+        draw dx image movie paste stats sum \
+        angle curl diff div card mandel
 
-all:	$(EXES)
+all:    brat draw dx image
+
+
+clean:
+        rm -f a.out  *.o glop* junk* *.flo  *.txt *.gif  $(EXES)
+
 
 ################## Dependencies and compile/link #########
 #
-migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.c  util.o
-	$(CC) -o brat brat.c util.o -lm
+manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.c  util.o
+	$(CC) -o brat brat.c util.o -lm -lc
+	ln -f brat manvert
+	ln -f brat stalk
+	ln -f brat mstop
 	ln -f brat measure
 	ln -f brat offset
 	ln -f brat lyapunov
@@ -31,6 +44,7 @@ migrate measure offset lyapunov next squige age phase orig whack circout circin 
 	ln -f brat circout
 	ln -f brat circin
 	ln -f brat circmov
+	ln -f brat stalkmov
 
 card: card.c  util.o
 	$(CC) -o card card.c util.o -lm
@@ -50,9 +64,10 @@ sum: sum.c  util.o opers.o
 dx:	dx.c  util.o opers.o
 	$(CC)  -o dx dx.c util.o opers.o -lm
 
-abs takelog reclamp dump renorm:	renorm.c  util.o opers.o
+abs clamp takelog reclamp dump renorm:	renorm.c  util.o opers.o
 	$(CC)  -o renorm renorm.c opers.o util.o -lm
 	ln -f renorm abs
+	ln -f renorm clamp
 	ln -f renorm takelog
 	ln -f renorm reclamp
 	ln -f renorm dump
