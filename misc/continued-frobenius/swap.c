@@ -19,6 +19,7 @@ inline long double swap12 (long double x)
 	long double ox = 1.0L/x;
 	long double a1 = floorl(ox);
 	long double r1 = ox - a1;
+	if (1.0e-10 > r1) return r1;
 	ox = 1.0L/r1;
 	long double a2 = floorl(ox);
 	long double r2 = ox - a2;
@@ -35,10 +36,11 @@ inline long double swap13 (long double x)
 	long double ox = 1.0L/x;
 	long double a1 = floorl(ox);
 	long double r1 = ox - a1;
+	if (1.0e-10 > r1) return r1;
 	ox = 1.0L/r1;
 	long double a2 = floorl(ox);
 	long double r2 = ox - a2;
-	if (1.0e-15 > r2) return 0.0;
+	if (1.0e-10 > r2) return 0.0L;
 	ox = 1.0L/r2;
 	long double a3 = floorl(ox);
 	long double r3 = ox - a3;
@@ -60,10 +62,11 @@ inline long double swap23 (long double x)
 	long double ox = 1.0L/x;
 	long double a1 = floorl(ox);
 	long double r1 = ox - a1;
+	if (1.0e-10 > r1) return 0.0;
 	ox = 1.0L/r1;
 	long double a2 = floorl(ox);
 	long double r2 = ox - a2;
-	if (1.0e-15 > r2) return 0.0;
+	if (1.0e-10 > r2) return 0.0;
 	ox = 1.0L/r2;
 	long double a3 = floorl(ox);
 	long double r3 = ox - a3;
@@ -85,14 +88,15 @@ inline long double swap14 (long double x)
 	long double ox = 1.0L/x;
 	long double a1 = floorl(ox);
 	long double r1 = ox - a1;
+	if (1.0e-10 > r1) return 0.0;
 	ox = 1.0L/r1;
 	long double a2 = floorl(ox);
 	long double r2 = ox - a2;
-	if (1.0e-15 > r2) return 0.0;
+	if (1.0e-10 > r2) return 0.0;
 	ox = 1.0L/r2;
 	long double a3 = floorl(ox);
 	long double r3 = ox - a3;
-	if (1.0e-15 > r2) return 0.0;
+	if (1.0e-10 > r3) return 0.0;
 	ox = 1.0L/r3;
 	long double a4 = floorl(ox);
 	long double r4 = ox - a4;
@@ -116,21 +120,21 @@ inline long double swap14 (long double x)
 void grand (long double x, long double sre, long double sim, 
 					 long double *pre, long double *pim)
 {
-
-	long double lnx = logl (x);
-
-	long double ire = expl (sre*lnx);
-	long double iim = ire;
-	long double phi = sim*lnx;
-	ire *= cosl (phi);
-	iim *= sinl (phi);
-	
 #if 0
 	long double ox = 1.0L/x;
 	long double sw = ox - floorl(ox);
 #else
 	long double sw = swap12 (x);
 #endif
+
+	long double lnx = logl (x);
+	long double ire = expl (sre*lnx);
+	// long double ire = 1.0L/ sqrtl (x);
+	long double iim = ire;
+	long double phi = sim*lnx;
+	ire *= cosl (phi);
+	iim *= sinl (phi);
+	
 	ire *= sw;
 	iim *= sw;
 
@@ -150,7 +154,7 @@ void multi_grand (long double x, long double sre, long double sim,
 	long double phi = sim*lnx;
 	ire *= cosl (phi);
 	iim *= sinl (phi);
-	
+
 	long double ox = 1.0L/x;
 	long double sw = ox - floorl(ox);
 
@@ -189,15 +193,30 @@ void gral(int nsteps, long double sre, long double sim,
 	long double sum_im= 0.0L;
 	long double x = 1.0L - 0.5*step;
 
+	long double r = RAND_MAX;
+	r = 1.0L / r;
+
 	/* integrate in a simple fashion */
+	int nh = 0;
 	for (i=0; i<nsteps; i++)
 	{
+#define DO_RAND
+#ifdef DO_RAND
+		int nr = rand();
+		if (0 == nr) continue;
+		x = (long double) nr;
+		x *= r;
+#endif
 		long double val_re, val_im;
 		grand (x, sre-1.0, sim, &val_re, &val_im);
+		// x -= step;
 		sum_re += val_re;
 		sum_im += val_im;
-		x -= step;
+		nh ++;
 	}
+
+	/* Divide by the actual number of samples */
+	step = 1.0L / ((long double) nh);
 	sum_re *= step;
 	sum_im *= step;
 
@@ -282,6 +301,7 @@ void multi_gral(int nsteps, long double sre, long double sim,
 	}
 }
 
+#define SINGLE_MAIN
 #ifdef SINGLE_MAIN
 int
 main (int argc, char * argv[])
@@ -289,16 +309,30 @@ main (int argc, char * argv[])
 	long double sre, sim;
 	long double zre, zim;
 
-	sre = 0.5L;
-	sim = 13.0L;
+	if (1 >= argc) 
+	{
+		fprintf (stderr, "Usage %s <npoints>\n", argv[0]);
+		exit (1);
+	}
+	int npts = atoi (argv[1]);
 
+	sre = 0.5L;
+	sim = 25.6L;
+
+	printf ("#\n# col 1-2: re s,im s \n");
+	printf ("#\n# col 3-4: re & im  swap \n");
+	printf ("#\n# col 5: re^2+im^2 \n");
+	printf ("#\n# RANDMAX = %d\n", RAND_MAX);
+	printf ("#\n# n integration samples =%d\n", npts);
+	printf ("#\n#\n");
+	fflush (stdout);
 	int i;
-	for (i=0; i<200; i++) {
-		gral (204123, sre, sim, &zre, &zim);
-		sim += 0.1;
+	for (i=0; i<10; i++) {
+		gral (npts, sre, sim, &zre, &zim);
 		long double vv = zre*zre+zim*zim;
 		printf ("%Lg\t%Lg\t%13.9Lg\t%13.9Lg\t%13.9Lg\n", sre, sim, zre, zim, vv);
 		fflush (stdout);
+		sim += 0.01;
 	}
 	return 0;
 }
@@ -312,8 +346,15 @@ main (int argc, char * argv[])
 	long double zre[5], zim[5];
 
 	sre = 0.5L;
-	sim = 4.0L;
+	// sim = 20.95L;
+	sim = 24.95L;
+	sim = 25.6L;
 
+	if (1 >= argc) 
+	{
+		fprintf (stderr, "Usage %s <npoints>\n", argv[0]);
+		exit (1);
+	}
 	int npts = atoi (argv[1]);
 
 	printf ("#\n# col 1-2: re s,im s \n");
@@ -325,16 +366,17 @@ main (int argc, char * argv[])
 	printf ("#\n# RANDMAX = %d\n", RAND_MAX);
 	printf ("#\n# n integration samples =%d\n", npts);
 	printf ("#\n#\n");
+	fflush (stdout);
 	int i, j;
-	for (i=0; i<300; i++) {
+	for (i=0; i<30; i++) {
 		multi_gral (npts, sre, sim, zre, zim);
-		sim += 0.1;
 		printf ("%Lg\t%Lg", sre, sim);
 		for (j=0; j<5; j++) {
 			printf ("\t%13.9Lg\t%13.9Lg", zre[j], zim[j]);
 		}
 		printf ("\n");
 		fflush (stdout);
+		sim += 0.02;
 	}
 	
 	return 0;
