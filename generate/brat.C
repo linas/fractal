@@ -412,7 +412,7 @@ void mandelbrot_wind (
                tmp *= 0.5;
                if (bits[k]) tphi += tmp;
             }
-            phi = tphi;
+            // phi = tphi;
    
          }
 
