@@ -1,10 +1,10 @@
 
 
-ray:	ray.o
 
 all: ray
-	cc -o ray ray.o
+	cc -o ray ray.o -lm
 
+ray:	ray.o
 
 .C.o:
-	g++ -c $<
+	g++ -O2 -c $<
