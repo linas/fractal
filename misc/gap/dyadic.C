@@ -97,7 +97,7 @@ main (int argc, char * argv[])
 	int order = 9;
 	int nmax = 1<<order;
 
-	double z = 0.3;
+	double z = 0.8;
 	int p;
 	for (p=1; p<nmax; p+=2)
 	{
