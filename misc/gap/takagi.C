@@ -351,6 +351,44 @@ double takagi_mink (double w, double x)
 	return acc;
 }
 
+/* A completely multiplicaitve thingy */
+long double plicative_triangle (int n, long double x)
+{
+	int d;
+	for (d=2; d<n; d++)
+	{
+		if (0 == n%d)
+		{
+			return plicative_triangle(n/d, x) * plicative_triangle (d, x);
+		}
+	}
+
+	long double tp = 1.0L;
+	for (d=1; d<n; d++)
+	{
+		tp *= 2.0L;
+	}
+	return triangle (tp*x);
+}
+
+/* A number-theoritic construction, where curve is multiplicative */
+long double plicative_takagi (long double w, long double x)
+{
+	int k;
+	long double acc = 0.0L;
+	long double tw = 1.0L;
+	for (k=0; k<50; k++)
+	{
+		int d;
+		long double term = tw* plicative_triangle (k+1,x);
+		acc += term;
+		tw *= w;
+		if (1.0e-16 > tw) break;
+	}
+
+	return acc;
+}
+
 #if FAILED_ANALYTIC_CONTINUATION
 // ------------------------------------------------------------------
 // ------------------------------------------------------------------
@@ -504,8 +542,9 @@ main (int argc, char *argv[])
 	int i;
 
 	// int nmax = 512;
+	// int nmax = 432;
+	int nmax = 1720;
 	// int nmax = 2048;
-	int nmax = 12;
 
 	if (argc <2)
 	{
@@ -521,7 +560,8 @@ main (int argc, char *argv[])
 		// double tw = takagi (w, x);
 		// double tw = iter_tak (w, x);
 
-		double tw = dirichlet_takagi (w, x);
+		// double tw = dirichlet_takagi (w, x);
+		double tw = plicative_takagi (w, x);
 		double ts = 2.0*gsl_sf_zeta (w) / 3.0 -0.5 - pow(2.0, -w)/3.0;
 
 		// double ts = sin_takagi (w, x);
