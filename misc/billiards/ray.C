@@ -488,8 +488,8 @@ SinaiView::SinaiView (int px, int py)
          pixel[1] = 2.0 * (((double) j) + 0.51666)/ ((double) ny) - 1.0;
          pixel[2] = 1.0;
          VEC_DIFF (dir, pixel, eye);
-         sr[i].Set (pixel, dir);
-         sr[i].last_wall = 4;
+         sr[nx*j+i].Set (pixel, dir);
+         sr[nx*j+i].last_wall = 4;
 
       }
    }
