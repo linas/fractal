@@ -643,7 +643,11 @@ s-1\end{array}\right)\left[\zeta(s+k)-H_{m}(s+k)\right]x^{k}\label{eq:}\end{equa
 
 \end_inset 
 
- Iteration on this then gives the series 
+ This relation can be iterated, in that the left hand side can be brought
+ over the the right and expanded, giving a double sum.
+ One of teh two sums is then readily performed.
+ This iteration is a bit tedius, but when brought to the end gives the series
+ 
 \begin_inset Formula \begin{eqnarray}
 \zeta(s)\left(1-\frac{1}{2^{s}}\right) & = & 1+\frac{1}{3^{s}}+\frac{1}{4^{s}}\left[Z_{0}\left(s,\frac{1}{4}\right)+Z_{0}\left(s,\frac{3}{4}\right)\right]\nonumber \\
  & = & 1+\frac{1}{3^{s}}+\frac{1}{5^{s}}+\frac{1}{7^{s}}+\nonumber \\
@@ -838,11 +842,192 @@ s-1\end{array}\right)\left(\frac{-1}{3}\right)^{k}\left[\zeta_{H}\left(s+k,\frac
 
 \end_inset 
 
- Iterates of 
+ Iterating on 
+\begin_inset Formula $x=2/7$
+\end_inset 
+
+ gives another relation, as does 
+\begin_inset Formula $x=4/7$
+\end_inset 
+
+, but with the coefficients permuted.
+ We can write these three permutations in matrix form, to make the permutations
+ clearer: 
+\begin_inset Formula \begin{equation}
+\left[\begin{array}{cccc}
+3 & 1 & 2 & -3\\
+1 & 2 & 3 & -1\\
+2 & 3 & 1 & -2\end{array}\right]\left[\begin{array}{c}
+\zeta_{H}\left(s,\frac{1}{3}\right)\\
+\zeta_{H}\left(s,\frac{2}{3}\right)\\
+\zeta_{H}\left(s,\frac{3}{3}\right)\\
+3^{s}\end{array}\right]=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-1}{3}\right)^{k}\left[\begin{array}{ccc}
+1 & 2 & 3\\
+2 & 3 & 1\\
+3 & 1 & 2\end{array}\right]\left[\begin{array}{c}
+\zeta_{H}\left(s+k,\frac{1}{3}\right)\\
+\zeta_{H}\left(s+k,\frac{2}{3}\right)\\
+\zeta_{H}\left(s+k,\frac{3}{3}\right)\end{array}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ These permutation matrices are not singular.
+ We can bring the one on the right into diagonal form: 
+\begin_inset Formula \begin{equation}
+\left[\begin{array}{cccc}
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+1 & 0 & 0 & -1\end{array}\right]\left[\begin{array}{c}
+\zeta_{H}\left(s,\frac{1}{3}\right)\\
+\zeta_{H}\left(s,\frac{2}{3}\right)\\
+\zeta_{H}\left(s,\frac{3}{3}\right)\\
+3^{s}\end{array}\right]=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-1}{3}\right)^{k}\left[\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\end{array}\right]\left[\begin{array}{c}
+\zeta_{H}\left(s+k,\frac{1}{3}\right)\\
+\zeta_{H}\left(s+k,\frac{2}{3}\right)\\
+\zeta_{H}\left(s+k,\frac{3}{3}\right)\end{array}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so we can immediately read off three relations.
+ 
+\layout Standard
+
+It is now readily appearent how to generalize this structure to an orbit
+ of arbitrary length.
+ Consider an orbit of period 
+\begin_inset Formula $n$
+\end_inset 
+
+, and let 
+\begin_inset Formula $a_{1},a_{2},...,a_{n}$
+\end_inset 
+
+ be the cyclic sequence such that 
+\begin_inset Formula $\tau(a_{1})=a_{2}$
+\end_inset 
+
+, and so on: 
+\begin_inset Formula $\tau^{k}(a_{j})=a_{j+k\textrm{ mod }n}$
+\end_inset 
+
+ giving the cyclic group.
+ Let 
+\begin_inset Formula $A$
+\end_inset 
+
+ be the matrix of the permuted sequence sitting inside the sum:
+\begin_inset Formula \begin{equation}
+A=\left[\begin{array}{ccccc}
+a_{1} & a_{2} & a_{3} & ... & a_{n}\\
+a_{2} & a_{3} & a_{4} & ... & a_{1}\\
+a_{3} & a_{4} & a_{5} & ... & a_{2}\\
+\vdots & \vdots &  &  & \vdots\\
+a_{n} & a_{1} & a_{2} & ... & a_{n-1}\end{array}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ and let 
+\begin_inset Formula $B$
+\end_inset 
+
+ be the matrix sitting on the left hand side, outside of the sum: 
+\begin_inset Formula \begin{equation}
+B=\left[\begin{array}{cccccc}
+a_{n} & a_{1} & a_{2} & ... & a_{n-1} & -a_{n}\\
+a_{1} & a_{2} & a_{3} & ... & a_{n} & -a_{1}\\
+a_{2} & a_{3} & a_{4} & ... & a_{1} & -a_{2}\\
+\vdots & \vdots &  &  & \vdots\\
+a_{n-1} & a_{n} & a_{1} & ... & a_{n-2} & -a_{n-1}\end{array}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Clearly 
+\begin_inset Formula $A$
+\end_inset 
+
+ is invertible and 
+\begin_inset Formula $B$
+\end_inset 
+
+ is just shifted by one, so that 
+\begin_inset Formula \begin{equation}
+A^{-1}B=\left[\begin{array}{cccccc}
+0 & 1 & 0 & ... & 0 & 0\\
+0 & 0 & 1 & ... & 0 & 0\\
+0 & 0 & 0 & ... & 0 & 0\\
+\vdots & \vdots & \vdots &  &  & \vdots\\
+1 & 0 & 0 & ... & 0 & -1\end{array}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ and thus we can read off two relations.
+ The bottom row gives 
+\begin_inset Formula \begin{equation}
+\zeta_{H}\left(s,\frac{1}{n}\right)=n^{s}+\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-1}{n}\right)^{k}\zeta\left(s+k\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ whereas the other rows give 
+\begin_inset Formula \begin{equation}
+\zeta_{H}\left(s,\frac{m+1}{n}\right)=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-1}{n}\right)^{k}\zeta_{H}\left(s+k,\frac{m}{n}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ This last relation is formal, in that the sum on right-hand side is divergent,
+ due to the first term of the Hurwitz zeta.
+ However, this term is very easily removed and resummed, leaving the perfectly
+ convergent formula below 
+\begin_inset Formula \begin{equation}
+\zeta_{H}\left(s,\frac{m+1}{n}\right)=\left(\frac{n}{m+1}\right)^{s}+\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-1}{n}\right)^{k}\left[\zeta_{H}\left(s+k,\frac{m}{n}\right)-\left(\frac{n}{m}\right)^{s+k}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ which is finite and valid for all 
+\begin_inset Formula $m,n\geq1$
+\end_inset 
+
+.
+ Note that the derivation of this result does not depend on actual generators
+ of the orbit, but only on thier periods.
+ Thus, for example, both 
+\begin_inset Formula $x=2/7$
+\end_inset 
+
+ and 
 \begin_inset Formula $x=1/9$
 \end_inset 
 
- also give a period-three relation.
+ had a period of three; both would give rise to the same relations, as both
+ are isomorphic to the cyclic group of period three, which is essentially
+ unique.
+ 
+\layout Standard
+
+We can go a few steps farther.
+ Previously, we gave a relation involving 1/4 and 3/4'ths.
+ We can now pull this apart into its components, and give a distinct 3/4'ths
+ relationship: 
+\begin_inset Formula \[
+=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-3}{4}\right)^{k}\zeta(s+k)\]
+
+\end_inset 
+
+
 \layout Subsection
 
 Reflection Formula
