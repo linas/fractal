@@ -16,6 +16,110 @@
 #include <time.h>
 
 /*-------------------------------------------------------------------*/
+/* this routine fills in the exterior of the mandelbrot set using */
+/* the classic algorithm */
+
+void mandelbrot_out (
+   float  	*glob,
+   unsigned int sizex,
+   unsigned int sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   int		itermax)
+{
+   unsigned int	i,j, globlen;
+   double		re_start, im_start, delta;
+   double		re_position, im_position;
+   double		re_c, im_c;
+   double		re, im, tmp;
+   int		loop;
+   double modulus=0.0, frac;
+   double escape_radius = 3.1;
+   double ren, tl;
+
+   ren = log( log (escape_radius)) / log(2.0);
+   tl = 1.0/ log(2.0);
+   
+
+   delta = width / (double) sizex;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   
+   im_position = im_start;
+   for (i=0; i<sizey; i++) {
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) {
+         re_c = re_position;
+         im_c = im_position;
+
+         /* mapping tricks */
+         // re_c = re_position - (re_position*re_position-im_position*im_position);
+         // im_c = im_position - 2.0 * re_position * im_position;
+
+         re = re_c;
+         im = im_c;
+         for (loop=1; loop <itermax; loop++) {
+            tmp = re*re - im*im + re_c;
+            im = 2.0*re*im + im_c;
+            re = tmp;
+            modulus = (re*re + im*im);
+            if (modulus > escape_radius*escape_radius) break;
+         }    
+
+         modulus = sqrt (modulus);
+         frac = log (log (modulus)) *tl;
+
+         /* frac =  Re (c/z*z) */
+         tmp = (re*re-im*im);
+         im = 2.0*re*im;
+         re = tmp;
+         frac = re*re_c + im*im_c;
+         frac /= re*re+im*im;
+         if (0.0 > frac) frac = -frac;
+         
+#ifdef JUNK
+         /* second order correction */
+         frac = frac * ( 2.0 - frac + 2.0*ren);
+       
+         nprev = loop - nprev;
+         prev = frac - prev - (double)nprev;
+/*
+         printf ("ij %d %d deltan %d delta frac %f \n", i, j, nprev, prev);
+*/
+         nprev = loop;
+         prev = frac;
+         glob [i*sizex +j] = ((double) loop) - frac; 
+#endif 
+
+         glob [i*sizex +j] = frac; 
+         glob [i*sizex +j] = ((double) loop) / ((double) itermax); 
+/*
+         glob [i*sizex +j] = ((float) (loop%10)) / 10.0; 
+if (loop == itermax) {
+glob[i*sizex+j] = 0.0; } else {glob[i*sizex+j]=0.9999;}
+*/
+
+/*
+if (0.25*width*width > ((re_position-re_center)* (re_position-re_center) +
+(im_position-im_center)* (im_position-im_center))){
+         glob [i*sizex +j] -= 0.3;
+} else {
+         glob [i*sizex +j] += 0.3;
+} 
+*/
+
+         re_position += delta;
+      }
+      im_position -= delta;  /*top to bottom, not bottom to top */
+   }
+}
+
+/*-------------------------------------------------------------------*/
 /* This routine computes a convergent for the Mandelbrot set iterator.
  */
 
@@ -333,93 +437,6 @@ void mandelbrot_cutoff (
          glob [i*sizex +j] =  sqrt (re*re +im*im);
 #endif
          /* --------------------------------------------------------- */
-         re_position += delta;
-      }
-      im_position -= delta;  /*top to bottom, not bottom to top */
-   }
-}
-
-/*-------------------------------------------------------------------*/
-/* this routine fills in the exterior of the mandelbrot set using */
-/* the classic algorithm */
-
-void mandelbrot_out (
-   float  	*glob,
-   unsigned int sizex,
-   unsigned int sizey,
-   double	re_center,
-   double	im_center,
-   double	width,
-   int		itermax)
-{
-   unsigned int	i,j, globlen;
-   double		re_start, im_start, delta;
-   double		re_position, im_position;
-   double		re, im, tmp;
-   int		loop;
-   double modulus=0.0, frac;
-   double escape_radius = 3.1;
-   double ren, tl;
-
-   ren = log( log (escape_radius)) / log(2.0);
-   tl = 1.0/ log(2.0);
-   
-
-   delta = width / (double) sizex;
-   re_start = re_center - width / 2.0;
-   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
-   
-   globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.0;
-   
-   im_position = im_start;
-   for (i=0; i<sizey; i++) {
-      if (i%10==0) printf(" start row %d\n", i);
-      re_position = re_start;
-      for (j=0; j<sizex; j++) {
-         re = re_position;
-         im = im_position;
-         for (loop=1; loop <itermax; loop++) {
-            tmp = re*re - im*im + re_position;
-            im = 2.0*re*im + im_position;
-            re = tmp;
-            modulus = (re*re + im*im);
-            if (modulus > escape_radius*escape_radius) break;
-         }    
-
-         modulus = sqrt (modulus);
-         frac = log (log (modulus)) *tl;
-
-         /* frac =  Re (c/z*z) */
-         tmp = (re*re-im*im);
-         im = 2.0*re*im;
-         re = tmp;
-         frac = re*re_position + im*im_position;
-         frac /= re*re+im*im;
-         if (0.0 > frac) frac = -frac;
-         
-#ifdef JUNK
-         /* second order correction */
-         frac = frac * ( 2.0 - frac + 2.0*ren);
-       
-         nprev = loop - nprev;
-         prev = frac - prev - (double)nprev;
-/*
-         printf ("ij %d %d deltan %d delta frac %f \n", i, j, nprev, prev);
-*/
-         nprev = loop;
-         prev = frac;
-         glob [i*sizex +j] = ((double) loop) - frac; 
-#endif 
-
-         glob [i*sizex +j] = frac; 
-         glob [i*sizex +j] = ((double) loop); 
-/*
-         glob [i*sizex +j] = ((float) (loop%10)) / 10.0; 
-if (loop == itermax) {
-glob[i*sizex+j] = 0.0; } else {glob[i*sizex+j]=0.9999;}
-*/
-
          re_position += delta;
       }
       im_position -= delta;  /*top to bottom, not bottom to top */
