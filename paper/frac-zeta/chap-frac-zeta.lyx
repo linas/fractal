@@ -1,0 +1,324 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme pslatex
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Symmetries of Period-Doubling Maps 
+\layout Author
+
+Linas Vepstas <linas@linas.org>
+\layout Date
+
+12 October 2004 (revised 12 December 2004)
+\layout Abstract
+
+The concept of self-similarity is central to the notion of a fractal, but
+ the actual symmetry group that generates that self-similarity is oddly
+ never named, and it seems fractals are never studied according to their
+ symmetries.
+ Yet, in other branches of mathematics, it is well understood that symmetry
+ provides a powerful mechanism for studying systems.
+ Indeed, for dynamical systems, symmetries lead to conserved quantum numbers
+ and/or conserved currents (via Noether's Theorem).
+ 
+\layout Abstract
+
+In this paper, we identify the symmetry group of period-doubling maps as
+ being th
+\layout Section
+
+Symmetries of Period-Doubling Maps
+\layout Subsection
+
+A Fractal Symmetry of the Riemann Zeta
+\layout Standard
+
+The moral of this section might be 
+\begin_inset Quotes eld
+\end_inset 
+
+if you fool with Dirichlet series, don't be surprised to find the Riemann
+ Zeta
+\begin_inset Quotes erd
+\end_inset 
+
+, which is what we'll do and find.
+ One can consider other series built out of the Tent Map.
+ In this section, lets consider the Dirichlet series.
+ These are related to the Takagi Curve through analytic transformations.
+ Thus, we define 
+\begin_inset Formula \begin{equation}
+\zeta_{s}(x)\equiv\sum_{n=1}^{\infty}\tau^{n}(x)\; n^{-s}\label{eq:zeta-s}\end{equation}
+
+\end_inset 
+
+ By substituting 
+\begin_inset Formula \begin{equation}
+n^{-s}=\frac{1}{\Gamma(s)}\int_{0}^{\infty}y^{s-1}e^{-ny}dy\label{eq:}\end{equation}
+
+\end_inset 
+
+ and performing the sum, and making the change-of-variable 
+\begin_inset Formula $w=e^{-y}$
+\end_inset 
+
+ one finds that 
+\begin_inset Formula \begin{equation}
+\zeta_{s}(x)=\frac{1}{\Gamma(s)}\int_{0}^{1}\left(-\ln w\right)^{s-1}t_{w}(x)dw\label{eq:}\end{equation}
+
+\end_inset 
+
+ Note that a pole in 
+\begin_inset Formula $t_{w}(x)$
+\end_inset 
+
+ at 
+\begin_inset Formula $w=1$
+\end_inset 
+
+ translates into a pole (with the same residue) at 
+\begin_inset Formula $s=1$
+\end_inset 
+
+.
+ Graphically, a picture of this Dirichlet series looks very similar to the
+ Takagi curve itself, possibly looking a tad 
+\begin_inset Quotes eld
+\end_inset 
+
+noisier
+\begin_inset Quotes erd
+\end_inset 
+
+; thus, figure 
+\begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
+
+\end_inset 
+
+ suffices to visualize this curve.
+ Although visually similar, and thus 
+\begin_inset Quotes eld
+\end_inset 
+
+obviously
+\begin_inset Quotes erd
+\end_inset 
+
+ self-similar, the transformation properties of this curve are far, far
+ messier.
+ We get 
+\begin_inset Formula \begin{equation}
+(\zeta_{s}\circ g_{D})(x)=\zeta_{s}(\frac{x}{2})=x+\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(-\right)^{k}\zeta_{s+k}(x)\label{eq:zeta-g}\end{equation}
+
+\end_inset 
+
+ for the simplest relation.
+ This can be derived by using the identity 
+\begin_inset Formula \begin{equation}
+\left(\frac{n}{n+1}\right)^{s}=\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(\frac{-1}{n}\right)^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ in the expansion for 
+\begin_inset Formula $\zeta_{s}(x/2)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Certain special values of 
+\begin_inset Formula $x$
+\end_inset 
+
+ are interesting.
+ For example, 
+\begin_inset Formula $t_{w}(1/3)=2/3(1-w)$
+\end_inset 
+
+ and so we get 
+\begin_inset Formula \begin{equation}
+\zeta_{s}\left(\frac{1}{3}\right)=\frac{2}{3}\zeta(s)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\zeta(s)$
+\end_inset 
+
+ is the Riemann Zeta.
+ Similarly, we have 
+\begin_inset Formula $\zeta_{s}(1/6)=(2\zeta(s)-1)/3$
+\end_inset 
+
+.
+ Using this with equation 
+\begin_inset LatexCommand \ref{eq:zeta-g}
+
+\end_inset 
+
+ we find the following relation: 
+\begin_inset Formula \begin{equation}
+\zeta(s)=1+\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(-\right)^{k}\zeta(s+k)\label{eq:}\end{equation}
+
+\end_inset 
+
+ This sum is conditionally convergent, thus we prefer to make the analytic
+ continuation 
+\begin_inset Formula $\zeta(s+k)=\zeta(s+k)-1+1$
+\end_inset 
+
+ and perform the sum explicitly to get 
+\begin_inset Formula \begin{equation}
+\zeta(s)=1+2^{-s}+\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(-\right)^{k}\left[\zeta(s+k)-1\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Although not strictly necessary for the above, we can repeat the analytic
+ continuatino trick to get 
+\begin_inset Formula \begin{equation}
+\zeta(s)=1+2^{-s}+3^{-s}+\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(-\right)^{k}\left[\zeta(s+k)-1-2^{-s}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ or in general, 
+\begin_inset Formula \begin{equation}
+\zeta(s)=H_{m+1}(s)+\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(-\right)^{k}\left[\zeta(s+k)-H_{m}(s)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where we used 
+\begin_inset Formula $H_{m}(s)$
+\end_inset 
+
+ to stand for the harmonic number 
+\begin_inset Formula $H_{m}(s)=\sum_{k=1}^{m}k^{-s}$
+\end_inset 
+
+ and we require that 
+\begin_inset Formula $m\geq1$
+\end_inset 
+
+ for the summation over zetas to be convergent.
+ 
+\layout Standard
+
+This equation is interesting because, in a certain sense, it encapsulates
+ the action of the generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ of the Modular Group on the Riemann Zeta.
+ The equation itself is not 
+\begin_inset Quotes eld
+\end_inset 
+
+new
+\begin_inset Quotes erd
+\end_inset 
+
+, it can also be obtained using entirely classical methods: for example,
+ starting with Abramowitz & Stegun equation 6.4.9, the classical series expansion
+ for the polygamma function.
+ What is novel is that it seems to show a certain funny type of fractal
+ self-similarity in the Riemann Zeta.
+ We can recursively apply this relation to find additional relations.
+ The generator 
+\begin_inset Formula $g^{n}$
+\end_inset 
+
+ is associated with 
+\begin_inset Formula \[
+\zeta(s)=H_{m+n}(s)+\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s+k-1\\
+s-1\end{array}\right)\left(-n\right)^{k}\left[\zeta(s+k)-H_{m}(s)\right]\]
+
+\end_inset 
+
+
+\layout Subsection
+
+Conclusions
+\layout Standard
+
+The seeming general applicability of this mode of analysis seems to beg
+ the question, are there any self-similar curves that do NOT have the modular
+ group symmetry?
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
+
+\end_inset 
+
+
+\layout Standard
+
+I can't figure out how to make bibtex work !!!! and worse, they don't show
+ in html! See the DVI/PDF version for refs.
+\layout Bibliography
+\bibitem [Man88]{key-3}
+
+Benoit Mandelbrot, 
+\emph on 
+Fractal landscapes without creases and with rivers
+\emph default 
+, appearing in 
+\emph on 
+The Science of Fractal Images, ed.
+ Heinz-Otto Peitgen, Dietmar Saupe,
+\emph default 
+ (Springer-Verlag, 1988) pp.
+ 243-260.
+\layout Bibliography
+\bibitem [Tak1903]{key-9}
+
+T.
+ Takagi, 
+\emph on 
+A Simple Example of a Continuous Function without Derivative
+\emph default 
+, Proc.
+ Phys.
+ Math.
+ Japan, 1903, Volume 1, pp.176-177 
+\layout Bibliography
+\bibitem [Iso03]{Iso03}
+
+this is a bibtex reference
+\the_end
