@@ -234,6 +234,7 @@ void lagGenericWordTable :: Dump (void) {
 
    printf ("mem usage %d kbytes \n", num_entries * sizeof (Helper) / 1024);
    printf ("helper size %d \n", sizeof (Helper));
+   printf ("\n");
 
    // for (int i=0; i<LAG_PAIR_HASH_TABLE_SIZE; i++) {
    //   if (table[i]) printf ("its %d %d %d %d \n", i, 
