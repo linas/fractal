@@ -23,21 +23,27 @@ main (int argc, char *argv[])
 	{
 		double x = ((double) 2*i+1)/ ((double) (2*nmax));
 
+#ifdef SAWTOOTH
+		// this is what continued-fraction truncation looks like 
+		// in binary-digit space
 		double z = InvFarey(x);
-
 		double y = 1.0/z;
 		y -= floor (y);
-		
 		f.SetReal (y);
 		double qy = f.ToFarey();
+#endif
 
-		double yy = (1.0+x)/x;
-		yy -= floor (yy);
+#ifdef BERNOULLI
+		// this is what binary-digit truncation looks like in
+		// in continued fraction space.
+		f.SetReal (x);
+		double yb = f.ToFarey();
+		yb *= 2.0;
+		yb -= floor (yb);
+		double y = InvFarey (yb);
+#endif
 
-		double xx = 1.0/x;
-		xx -= floor (xx);
-
-		printf ("%5d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, xx, yy, xx-yy, qy);
+		printf ("%5d	%8.6g	%8.6g\n", i, x, y);
 
 	}
 }
