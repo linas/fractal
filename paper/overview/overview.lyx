@@ -44,7 +44,7 @@ Fractals and Continued Fractions seem to be deeply related in many ways.
 \end_inset 
 
 , which expains these curious relationships.
- An assortment of curious observations is presented as well.
+ An assortment of other curious observations is presented as well.
  
 \layout Section
 
@@ -482,7 +482,8 @@ Notice that a Moire pattern of fringes seems to be forming at
 \end_inset 
 
 .
- (Homework: describe the rationals that make up the parabolas).
+ (Homework: describe the rationals that make up the parabolas.
+ The solution is presented in a later section below.).
  The factorial in the denominator seems important: the picture for the denominat
 or 
 \begin_inset Formula $2\cdot3\cdot5\cdot7\cdot11=2310$
@@ -1153,6 +1154,7 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
  fraction, and it is clear that two points that start arbitrarily close
  together will have orbits under this map that eventually become uncorrelated.
  That is, this map clearly has a positive Lyapunov exponent for all irrationals.
+ (Homework: compute the Lyapunov exponent for this map).
  
 \layout Standard
 
@@ -1175,8 +1177,12 @@ y have binary expansions that are uncorrelated and completly 'random'.
 \end_inset 
 
  digits of the expansion, one cannot 'predict' the next digit of the expansion;
- and this is what we mean when we say 'radnom' or 'uncorrelated'.
- Now, stemming out of this same context comes an interesting paradox.
+ and this is what we mean when we say 'random' or 'uncorrelated'.
+ 
+\layout Standard
+
+As a side-note, I can't help noticing an interesting paradox concerning
+ the idea of 'randomness' in deterministic-chaos problems.
  We would like to be able to say, that, when considering the entire set
  of reals on the unit interval, that, when examining the 
 \begin_inset Formula $N$
@@ -1216,41 +1222,134 @@ y have binary expansions that are uncorrelated and completly 'random'.
  
 \layout Standard
 
-I humbly suggest that there is a way of escaping this paradox, but it requires
- invoking the Axiom of Choice.
- It is well-known from complexity theory (the theory of Turing Machines)
- that the set of computable numbers is a countable.
- In other words, we can give the value of a specific number, such as 
-\begin_inset Formula $\pi$
+I suppose there are two ways out of this paradox.
+ One way out is to say something like 
+\begin_inset Quotes eld
 \end_inset 
 
- or 
-\begin_inset Formula $e$
+Yea, Verily, Chooseth two Irrationals whose Binary Expansions are Completely
+ Uncorrelated
+\begin_inset Quotes erd
 \end_inset 
 
- or 
-\begin_inset Formula $\sqrt{2}$
-\end_inset 
-
-, only when we have an algorithm that can generate that number.
- As a famous counter-example, we have 
-\begin_inset Formula $\Omega$
-\end_inset 
-
-, the fraction of Turing machines that halt.
- It is well defined, but all we can say about it is that it is greater than
- 0 and less than 1; in all other respects, it is unknowable.
-  
-\layout Standard
-
-Here comes the interesting part: if we compare the 
+, which sounds like an invocation of the Axiom of Choice.
+ Indeed, the set of computable numbers is countable, and is of measure zero
+ on the real number line.
+ In order to compute the 
 \begin_inset Formula $N$
 \end_inset 
 
-'th binary digit of the expansion of every possible 
+'th digit of 
+\begin_inset Formula $x$
+\end_inset 
+
+, one must somehow already 'know' 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ Since the set of of unknowable numbers has measure one on the unit interval
+ of reals, one arguably must 'choose' if one is to get a truly 'random'
+ number.
+ 
 \layout Standard
 
-The shape of the principal parabola seen in the diagrams also 
+The other way out of the paradox is far more mundane, and seems constructive,
+ and that is to apply shop-worn statistical methods.
+ After all, chaos occurs in numerical simulations, and not in set theory.
+ Chaos is a computational phenomenon.
+ What we can say is that for any given real 
+\begin_inset Formula $y$
+\end_inset 
+
+ and 
+\begin_inset Formula $\delta>0$
+\end_inset 
+
+ and 
+\begin_inset Formula $\varepsilon>0$
+\end_inset 
+
+, one can always find an integer 
+\begin_inset Formula $N$
+\end_inset 
+
+ such that the average value of 
+\begin_inset Formula $e_{N}$
+\end_inset 
+
+ approaches 1/2 on the interval: that is, 
+\begin_inset Formula \[
+\left|\frac{1}{2}-\int_{y}^{y+\delta}e_{N}(x)dx\right|<\varepsilon\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Now, to move the conversation back to the iterated continued fraction map,
+ and that proof.
+ Blah Blah Blah.
+ To-Do: Provide the proof we promised.
+\layout Subsection
+
+The Gauss Kuz'min Wirsing Operator
+\layout Standard
+
+Note that a standard way of analysing the dynamics of deterministic chaotic
+ maps is to compute the Frobenius-Perron operator of the map, and solve
+ for its eigenvalues and eigenfunctions.
+ For the continued-fraction map, the Frobenius-Perron operator is known
+ as the Gauss-Kuz'min-Wirsing operator.
+ Blah blah blah.
+ Write some more here.
+\layout Standard
+
+Note that I have another paper ready to go on the GKW and how it and the
+ Riemann Zeta are intertwined.
+ 
+\layout Subsection
+
+The Parabolas in the Distribution
+\layout Standard
+
+The cause of the principal parabola seen in the pictures is now also clear.
+ Blah Blah Blah write this section too.
+ All work and no play makes Jack a dull boy...
+\layout Standard
+
+The main parabola that is visible is at 
+\begin_inset Formula $T_{p/q}(0)=4(x-1/2)^{2}$
+\end_inset 
+
+, which we can solve for directly to obtain 
+\begin_inset Formula $x=q_{N-1}/q_{N}$
+\end_inset 
+
+ and 
+\begin_inset Formula $x=1-q_{N-1}/q_{N}$
+\end_inset 
+
+ .
+ Recalling that by definition, 
+\begin_inset Formula $x\equiv p/q\equiv p_{N}/q_{N}$
+\end_inset 
+
+, we find that the rationals on the main parabola are given by 
+\begin_inset Formula $p_{N}=q_{N-1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{N}=q_{N}-q_{N-1}$
+\end_inset 
+
+.
+ Blah blah blah solve these equations.
+\layout Standard
+
+There are other parabolas visible as well, offset on other fractions.
+ Describe these as well.
+ Why are these rationals interesting? 
 \layout Subsection
 
 Iteration
@@ -1512,7 +1611,15 @@ It sure would be nice to develop a generalized theory that can work with
  In particular, the very first graph of this section has very clear self-similar
 ity properties; its very much a fractal, more obviously so than the later
  graphs.
- What is the symmetry group involved? What is the fractal dimension? 
+ What is the fractal dimension? What is the symmetry group involved? Is
+ it indeed a subgroup of the Modular Group, as the following chapter would
+ seem to suggest? (this should be an easy qustion to answer, I just haven't
+ done the calculation yet).
+ More importantly, why does the modular group show up when one is counting
+ rationals? What is it about rational numbers that makes them so hyperbolic?
+\layout Standard
+
+As a side-effect, 
 \layout Section
 
 The Minkowski Question Mark Function
@@ -2015,6 +2122,15 @@ r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\]
 \layout Standard
 
 Blah Blah Blah.
+ Note that 
+\begin_inset Formula $\gamma\in\Gamma$
+\end_inset 
+
+, the modular group Gamma.
+ 
+\layout Standard
+
+Blah Blah Blah.
  Theres some additional stuff here about the partial-symmetries, which are
  quite curious, and also about enumerating the group elements as 
 \begin_inset Formula $\mathbb{Q\times Z}$
@@ -2028,8 +2144,36 @@ Blah Blah Blah.
  This part to be written.
 \layout Standard
 
+What does this mean for the symmetries of teh Mandelbrot set? it means that
+ the modular group maps buds to buds.
+ Note, however, that the 
+\begin_inset Formula $\mathbb{Q\times Z}$
+\end_inset 
+
+ paramtrization of the modular group means that one can map one bud onto
+ any another, but that the mapping has to be onto the whole bud, and not
+ just a portion of it.
+ 
+\layout Standard
+
 Blah blah blah.
  How does this all compare to the known symmetry groups and reps of SL2?
+ is it PSL2? etc.
+ 
+\layout Standard
+
+Blah Blah Blah, this is again the symmetry group of the hyperbolic plane,
+ and trajectories on hyperbolic surfaces are known the have positive Lyapunov
+ exponents, so once again, we have another curious tie into chaotic behvaiour.
+\layout Standard
+
+Note that this also means that all of the results from modular forms now
+ have some sort of interpretation in the fractal world.
+ The program is now how to map those results into statements about classical
+ chaotic dynamics and more importantly, for quantum chaos.
+ Do statements about Hamiltonian dynamics have corresponding statements
+ in terms of modular forms? If so, what are they? What about the converse?
+ 
 \layout Subsection
 
 The 
@@ -2256,9 +2400,17 @@ generalized functions
  
 \layout Standard
 
-It seems intuitive taht all other mappings from n to z that satisfy this
- invertability propoerty are obtainable through the action of the permutation
- group, although one should always be careful with such statements..
+It seems intuitive that all other mappings from 
+\begin_inset Formula $\mathbb{N}$
+\end_inset 
+
+ to 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset 
+
+ that satisfy this invertability property are obtainable through the action
+ of the permutation group, although one should always be careful with such
+ statements..
  The permutation group elements are the shift operator 
 \begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
 \end_inset 
@@ -2289,7 +2441,7 @@ It seems intuitive taht all other mappings from n to z that satisfy this
 Islands, Sinai's Tongues
 \layout Standard
 
-blah blah add this text.
+blah blah write this section.
 \layout Standard
 
 See the pictures of phase-locking in the Circle map at the URL 
@@ -2303,6 +2455,36 @@ See the pictures of phase-locking in the Circle map at the URL
 \end_inset 
 
  Yada Yada.
+ The mode-locked regions are called Sinai's toungues.
+ This implies that the Modular Group is the symmetry group of the phase
+ locked-loop (the circle map) as well as the Mandelbrot Set.
+ 
+\layout Standard
+
+Notice that the mode-locked regions of the circle map are exactly those
+ regions that are *not* chaotic: in other words, these are the so-called
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+islands of order
+\begin_inset Quotes erd
+\end_inset 
+
+ that can be found in the 
+\begin_inset Quotes eld
+\end_inset 
+
+sea of chaos
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ One of course sees island is now lead to ask, is the modular group the
+ symmetry group of 
+\layout Standard
+
+Feigenbaum
 \layout Section
 
 Conclusions
