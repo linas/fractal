@@ -269,9 +269,13 @@ void mandelbrot_wind (
    int		loop;
    int		*bits;
    double modulus=0.0, frac, mu;
-   double escape_radius = 1.131e46;
    double ren, otl;
    double phi=0.0, tphi;
+
+   /* the qualty of the results depends on using as large an 
+    * escape radius as possible.
+    */
+   double escape_radius = 1.131e46;
 
    ren = log( log (escape_radius)) / log(2.0);
    otl = 1.0/ log(2.0);
@@ -408,7 +412,7 @@ void mandelbrot_wind (
                tmp *= 0.5;
                if (bits[k]) tphi += tmp;
             }
-            // phi = tphi + 0.5*tmp*phi/M_PI;
+            phi = tphi;
    
          }
 
