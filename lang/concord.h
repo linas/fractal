@@ -15,6 +15,9 @@
 //
 // The ResetToStart() method sets to the top of phrase list.
 //
+// The GetStart() method provides a cursor-based re-entrant interface
+// The GetNext() method provides a cursor-based re-entrant interface
+//
 // The memebr concordance contains a reverse index.  It is index by the
 // first cord of each tuple
 //
@@ -39,6 +42,10 @@ class lagGenericConcordTable :
       void ResetToStart (unsigned int phrase);
       float GetNextLinkWeight (void);
       unsigned int GetNextPhrase (void);
+
+      void * GetStart (unsigned int phrase);
+      unsigned int GetPhrase (void *);
+      void * GetNext (void *);
 
       void Dump (void);
 

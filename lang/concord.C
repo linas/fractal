@@ -131,6 +131,29 @@ unsigned int lagGenericConcordTable :: GetNextPhrase (void) {
 
 // =====================================================
 
+void * lagGenericConcordTable :: GetStart (unsigned int phrase) {
+   if (!phrase) return 0x0;
+   return ((void *) concordance [phrase]);
+}
+
+// =====================================================
+
+unsigned int lagGenericConcordTable :: GetPhrase (void *curse) {
+   if (!curse) return 0;
+   Concord *c = (Concord *) curse;
+   return (c -> where -> tuple[1]);
+}
+
+// =====================================================
+
+void *lagGenericConcordTable :: GetNext (void *curse) {
+   if (!curse) return 0x0;
+   Concord *c = (Concord *) curse;
+   return ((void *) c -> next);
+}
+
+// =====================================================
+
 int lagGenericConcordTable :: GetTopTupleContainingWord (int word) {
    if (0 > word) return 0;
    if (LAG_PAIR_TABLE_SIZE <= word) return 0;
