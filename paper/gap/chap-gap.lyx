@@ -31,7 +31,7 @@ Continued Fractions and Gaps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 10 November 2004)
+12 October 2004 (revised 14 November 2004)
 \layout Abstract
 
 Given a continued fraction, we construct a certain function that is discontinuou
@@ -66,7 +66,20 @@ curves
 \emph on 
 functions
 \emph default 
-).
+.
+ That is, a space-filling curve can be used to enumerate 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset 
+
+by 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ but such space-filling curves have locality properties induced by 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ that the gap function appears not to have).
  When examining this function for small rationals, some very curious algebraic
  relationships appear to relate various rationals.
  
@@ -1355,19 +1368,69 @@ b(x)=2x-\left\lfloor 2x\right\rfloor \]
 \end_inset 
 
 .
- Again, two irrationals that start out arbitrarily close together will eventuall
-y have binary expansions that are uncorrelated and completely 'random'.
+ Again, two 
+\begin_inset Quotes eld
+\end_inset 
+
+random
+\begin_inset Quotes erd
+\end_inset 
+
+ irrationals that start out arbitrarily close together will eventually have
+ binary expansions that are uncorrelated and completely 'random'.
  Even though one may know the first 
 \begin_inset Formula $N$
 \end_inset 
 
  digits of the expansion, one cannot 'predict' the next digit of the expansion;
  and this is what we mean when we say 'random' or 'uncorrelated'.
+ The only problem with this is that the language used in the last two sentances
+ is completely loaded.
+ If we 
+\begin_inset Quotes eld
+\end_inset 
+
+know
+\begin_inset Quotes erd
+\end_inset 
+
+ the number 
+\begin_inset Formula $x$
+\end_inset 
+
+, then we 
+\begin_inset Quotes eld
+\end_inset 
+
+know
+\begin_inset Quotes erd
+\end_inset 
+
+ the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th digit in its binary expansion; thus, how can it be 
+\begin_inset Quotes eld
+\end_inset 
+
+random
+\begin_inset Quotes erd
+\end_inset 
+
+ and 
+\begin_inset Quotes eld
+\end_inset 
+
+uncorrelated
+\begin_inset Quotes erd
+\end_inset 
+
+? This is a paradox of deterministic chaos that is worth exploring.
  
 \layout Standard
 
-As a side-note, I can't help noticing an interesting paradox concerning
- the idea of 'randomness' in deterministic-chaos problems.
+Lets try to restate the paradox.
  We would like to be able to say, that, when considering the entire set
  of reals on the unit interval, that, when examining the 
 \begin_inset Formula $N$
@@ -1394,7 +1457,7 @@ As a side-note, I can't help noticing an interesting paradox concerning
 \begin_inset Formula $e_{N}(x)=\left\lfloor 2^{N}x\right\rfloor -2\left\lfloor 2^{N-1}x\right\rfloor $
 \end_inset 
 
- and 
+ and the graph of 
 \begin_inset Formula $e_{N}(x)$
 \end_inset 
 
@@ -1403,8 +1466,20 @@ As a side-note, I can't help noticing an interesting paradox concerning
 \begin_inset Formula $N$
 \end_inset 
 
- getting very large, and approaching infinity.
- 
+ getting very large, and approaching infinity: the comb remains uniform
+ and entirely 
+\begin_inset Quotes eld
+\end_inset 
+
+predictable
+\begin_inset Quotes erd
+\end_inset 
+
+ no matter how large 
+\begin_inset Formula $N$
+\end_inset 
+
+ gets.
 \layout Standard
 
 I suppose there are two ways out of this paradox.
@@ -1436,12 +1511,17 @@ Yea, Verily, Chooseth two Irrationals whose Binary Expansions are Completely
  Since the set of of unknowable numbers has measure one on the unit interval
  of reals, one arguably must 'choose' if one is to get a truly 'random'
  number.
- 
+ Thus, we can anchor the concept of randomness of bit-sequences of the binary
+ expansion of real numbers in the concept of Turing-uncomputable numbers
+ and the Axiom of Choice for choosing one of these unknowable numbers.
+ This is cleary dangerous territory, and somewhat tangled as a definition
+ of randomness.
 \layout Standard
 
 The other way out of the paradox is far more mundane, and seems constructive,
  and that is to apply shop-worn statistical methods.
- After all, chaos occurs in numerical simulations, and not in set theory.
+ After all, chaos occurs in numerical simulations, on finite and computable
+ sets, and not in set-theoretical limits.
  Chaos is a computational phenomenon.
  What we can say is that for any given real 
 \begin_inset Formula $y$
@@ -1463,12 +1543,53 @@ The other way out of the paradox is far more mundane, and seems constructive,
 \begin_inset Formula $e_{N}$
 \end_inset 
 
- approaches 1/2 on the interval: that is, 
+ approaches 1/2 on the interval: that is, there exists an integer 
+\begin_inset Formula $N$
+\end_inset 
+
+ such that 
 \begin_inset Formula \[
 \left|\frac{1}{2}-\int_{y}^{y+\delta}e_{N}(x)dx\right|<\varepsilon\]
 
 \end_inset 
 
+ holds true for all real 
+\begin_inset Formula $y$
+\end_inset 
+
+ and 
+\begin_inset Formula $\delta>0$
+\end_inset 
+
+ and 
+\begin_inset Formula $\varepsilon>0$
+\end_inset 
+
+.
+ This is a constructive definition of randomness on the real number line
+ that does not require an appeal to the Axiom of Choice or to the choosing
+ of uncomputable (unknowable) numbers as a basis for the randomness of bit-seque
+nces in the binary expansion of a real number.
+ We can approach randomness through traditional delta-epsilon proofs on
+ the expectation values of well-defined quantities.
+ For the following, we are interested in 
+\begin_inset Quotes eld
+\end_inset 
+
+random
+\begin_inset Quotes erd
+\end_inset 
+
+ continued fractions, and by analogy, we extend the above definition of
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+randomness
+\begin_inset Quotes erd
+\end_inset 
+
+ to the sequence of digits in a continued fraction expansion.
  
 \layout Standard
 
@@ -1686,9 +1807,63 @@ We will study the iterated map
 \end_inset 
 
  in great detail in later chapters, where we shall find that it is deeply
- related to the modular group and thus the theory of the symmetry of fractals,
- to a variety of fascinating topics in number theory, as well as to the
- celebrated Riemann Hypothesis.
+ related to the Modular Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ and thus to the theory of the symmetry of fractals, and to a variety of
+ fascinating topics in number theory, as well as to the celebrated Riemann
+ Hypothesis.
+\layout Subsection
+
+Contrast to Space-Filling Curves
+\layout Standard
+
+The work of Cantor shows that the cardinality of 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset 
+
+ is the same as that of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, namely 
+\begin_inset Formula $\aleph_{1}$
+\end_inset 
+
+.
+ This implies that the points of 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset 
+
+ can be enumerated by 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ Space-filling curves such as those of Peano or Hilbert can be used to develop
+ that enumeration.
+ However, these curves have a locality property, in that if two points are
+ close to each other in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, then the points that they enumerate in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset 
+
+ are also close to each other.
+ This is by construction, of course: the curves of peano or Hilbert are
+ inherently continuous.
+ We can, for example, graph the distance of the Hilbert curve from the the
+ x-axis as a function of the parameter that takes us along the curve.
+ By construction, this is a continuous curve, and it is *not* space-filling.
+ 
+\layout Standard
+
+By contrast, the gap function is not a curve; by construction, it seems
+ to be discontinuous everywhere.
+ 
 \layout Subsection
 
 The Parabolas in the Distribution
