@@ -292,7 +292,12 @@ To understand
 \end_inset 
 
  form the unit disk.
- It is often considered to be a mistake to try to analyze 
+ Sometimes, 
+\begin_inset Formula $\phi(z)$
+\end_inset 
+
+ can be meromorphically extended to a larger region, and sometimes it cannot.
+  It is often considered to be a mistake to try to analyze 
 \begin_inset Formula $U_{g}$
 \end_inset 
 
@@ -987,7 +992,7 @@ ion.
  
 \layout Subsection
 
-Conjugate Maps
+Topologically Conjugate Maps
 \layout Standard
 
 Conjugation of the function that generates the map will provide, in general,
@@ -1053,12 +1058,22 @@ U_{\gamma}=U_{\phi}^{-1}U_{g}U_{\phi}\label{eq:}\end{equation}
 
 \layout Standard
 
-XXX derive the above.
+XXX ToDo derive the above.
  Show that eigenvalues are preserved.
- 
+ The most trivial way to see that the eigenvalues are unchanged is through
+ the formal definition of the characteristic polynomial for this operator,
+ which is 
+\begin_inset Formula \begin{equation}
+p_{U}(\lambda)=\det\left[U_{g}-\lambda\mathbb{I}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Just as in the finite-dimensional case, a similarity transform commutes
+ inside the determinant, leaving the characteristic polynomial unchanged.
+ XXX ToDo a more correct, non-formal proof that the eigenvalues are preserved.
 \layout Standard
 
-Note that this construction invokes the Jacobian 
+Note that in the construction of this proof, we invoke the Jacobian 
 \begin_inset Formula $\left|d\phi(y)/dy\right|_{y=\phi^{-1}(x)}$
 \end_inset 
 
@@ -1066,13 +1081,68 @@ Note that this construction invokes the Jacobian
  function must be a diffeomorphism; a homeomorphism does not suffice.
  We will show an example below of a conjugating function that is highly
  singular, and thus the Jacobian does not exist (in the ordinary sense).
- As a result, conjugate maps willhave completely isomorphic point dynamics,
- but the eigenvalue spectra associated with these maps will 
+ When the conjugating function is sufficiently singular, then 
+\begin_inset Formula $U_{\phi}$
+\end_inset 
+
+ cannot be coherently defined.
+ As a result, one can have conjugate maps with completely isomorphic point
+ dynamics, but the eigenvalue spectra associated with these maps will 
 \emph on 
 not
 \emph default 
  be identical.
  
+\layout Subsection
+
+The Topological Zeta
+\layout Standard
+
+Another interesting quantity is the topological zeta function associated
+ with the transfer operator.
+ It is formally defined by 
+\begin_inset Formula \[
+\zeta_{U_{g}}(t)=\frac{1}{\det\left[\mathbb{I}-tU_{g}\right]}\]
+
+\end_inset 
+
+ and embeds number-theoretic information about the map.
+ Of associated interest is the MacLaurin Series 
+\begin_inset Formula \[
+t\frac{d}{dt}\log\zeta_{U_{g}}(t)=\sum_{k=1}^{\infty}n_{k}t^{k}\]
+
+\end_inset 
+
+ From graph theory and the theory of dynamical systems, it is known that
+ the 
+\begin_inset Formula $n_{k}$
+\end_inset 
+
+ correspond to the number of periodic orbits of length 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ In the context of dynamical systems, this zeta is often refered to as the
+ Artin-Mazur Zeta function.
+ In the context of graph theory, it is refered to as the Ihara Zeta.
+ Both are connected to the Selberg Zeta.
+\layout Standard
+
+The standard definition of the Ihara Zeta applies only to the adjacency
+ matrix of finite-sized graphs.
+ Adjacency matrices only have (non-negative) integer entries as matrix elements.
+ Thus, we ask: given an appropriate basis, can an inifinite-dimensional
+ transfer operator be written so as to have integer entries as matrix elements?
+\layout Standard
+
+The standard definition of the Artin-Mazur Zeta function requires that the
+ number of fixed points (periodic orbits) be a finite number.
+ For the operators that we are studying, there will in general be (countably)
+ infinite number of periodic orbits.
+ Yet the zeta will still be well definied, although the coefficeints of
+ the MacLaurin expansion will not be integers.
+ Can these be reinterpreted as a density or measure? 
 \layout Section
 
 The Frobenius-Perron Operator of the Bernoulli Map
@@ -5190,20 +5260,26 @@ g_{D}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
  Just as we saw with the second sawtooth, the point dynamics of the Isola
  Map and the Tent Map are isomorphic to each other, but the eigenvalue spectra
  are inequivalent.
- 
-\layout Standard
-
-The Frobenius-Perron (Transfer) Operator for the Isola Map is 
+ The Frobenius-Perron (Transfer) Operator for the Isola Map is 
 \begin_inset Formula \begin{equation}
 \left[\mathcal{P}f\right](x)=\frac{1}{\left(1+x\right)^{2}}\left[f\left(\frac{x}{x+1}\right)+f\left(\frac{1}{x+1}\right)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
- XXX Define isola's M_n and copy equations 2.39 and 2.41 and 2.42 here.
- Restate for their equivalents on the sawtooth.
+ The Gauss-Kuzmin-Wirsing operator can be constructed through some simple
+ operator relationships on 
+\begin_inset Formula $\mathcal{P}$
+\end_inset 
+
+ and so it is a worthwhile goal to attempt to solve 
+\begin_inset Formula $\mathcal{P}$
+\end_inset 
+
+.
+ As we will see below, this seems to be an even harder task.
 \layout Subsection
 
-The Polynomial Basis
+The (Lack of a) Polynomial Basis
 \layout Standard
 
 Based on our previous luck, we attempt to define the operator 
@@ -5227,20 +5303,81 @@ k+1\end{array}\right)\right]\label{eq:}\end{eqnarray}
 
 \end_inset 
 
- Its clear that this matrix is very ill-conditioned.
+ This matrix is not triangular, and is thus not directly sovlable.
+ It is also very ill-conditioned, making it not numerically tractable, at
+ least, not in any simple fashion.
  As 
 \begin_inset Formula $n$
 \end_inset 
 
- gets large, the matrix elements explode.
- The matrix is not tractable numerically, and would be painful to work with
- analytically, without defining some sort of regulator.
+ gets large, the matrix elements grow exponentially on the diagonal.
+ This is easily seen by applying Stirling's asymptotic formula for the factorial
+ to the binomial; one easily gets 
+\begin_inset Formula \begin{equation}
+\left(\begin{array}{c}
+n\\
+k\end{array}\right)\approx\frac{2^{n+1}}{\sqrt{2\pi n}}\exp\left(\frac{-(2k-n)^{2}}{2n}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ when 
+\begin_inset Formula $n$
+\end_inset 
+
+ and 
+\begin_inset Formula $k$
+\end_inset 
+
+ get large.
+ Thus, along the diagonal, 
+\begin_inset Formula $\mathcal{P}_{nn}\approx4^{n+1}/2\sqrt{\pi n}$
+\end_inset 
+
+, and the matrix is not tractable numerically, and would be painful to work
+ with analytically, without defining some sort of regulator.
  Thus, we are motivated to look at the expansion at 
 \begin_inset Formula $x=1/2$
 \end_inset 
 
 .
- 
+ Here, however, the situation is not much better.
+ Defining 
+\begin_inset Formula $y=x-1/2$
+\end_inset 
+
+ so that 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{Q}f\right](x)=\frac{1}{\left(y+3/2\right)^{2}}\left[f\left(\frac{y+1/2}{y+3/2}\right)+f\left(\frac{1}{y+3/2}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ we work through the same set of steps to obtain 
+\begin_inset Formula \begin{eqnarray}
+\mathcal{Q}_{nk} & \equiv & \left\langle n\left|\mathcal{Q}\right|k\right\rangle \nonumber \\
+ & = & \left(\frac{-2}{3}\right)^{n+2}\left[\left(\frac{2}{3}\right)^{k}\left(\begin{array}{c}
+k+n+1\\
+k+1\end{array}\right)+\left(\frac{1}{3}\right)^{k}\;\sum_{p=0}^{\min(n,k)}\left(-3\right)^{p}\left(\begin{array}{c}
+n+k-p+1\\
+k+1\end{array}\right)\left(\begin{array}{c}
+k\\
+p\end{array}\right)\right]\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ which is far more complex, and only marginally less divergent: 
+\begin_inset Formula $\mathcal{Q}_{nn}\sim(16/9)^{n+1}$
+\end_inset 
+
+.
+ There is hardly any hope that a Taylor's expansion around any other value
+ of 
+\begin_inset Formula $x$
+\end_inset 
+
+ will give a tractable result, the trick of using the Taylor's expansion
+ to obtain polynomial eigenstates fails in this case.
+ Indeed, it seems likely that the eigenstates will not be analytic, although
+ it is not clear to me what theorem would establish or disprove this conjecture.
 \layout Section
 
 Conclusions
