@@ -340,12 +340,13 @@ SinaiView::ToPixels (void)
       double blue = 0.0;
 
       if (0 == sr[i].last_wall) red = 255.0;
-      if (1 == sr[i].last_wall) { red = 255.0; green = 255.0; }
+      if (1 == sr[i].last_wall) { green = 255.0; blue = 255.0; }
       if (2 == sr[i].last_wall) green = 255.0;
-      if (3 == sr[i].last_wall) { green = 255.0; blue = 255.0; }
+      if (3 == sr[i].last_wall) { blue = 255.0; red = 255.0; }
       if (4 == sr[i].last_wall) blue = 255.0;
-      if (5 == sr[i].last_wall) { blue = 255.0; red = 255.0; }
+      if (5 == sr[i].last_wall) { red = 255.0; green = 255.0; }
 
+#if 0
       int ib = 0;
       for (int iw=0; iw<6; iw++) ib += sr[i].bounces[iw];
 
@@ -353,7 +354,6 @@ SinaiView::ToPixels (void)
       green *= exp (-absorbtivity * ib);
       blue *= exp (-absorbtivity * ib);
 
-#if 0
       red *= exp (-density * sr[i].distance);
       green *= exp (-density * sr[i].distance);
       blue *= exp (-density * sr[i].distance);
@@ -452,9 +452,9 @@ main (int argc, char * argv[])
    v.nbounces = nbounce;
 
    v.Trace();
-   v.ColoredMirrors();
-   // v.ToPixels ();
-   v.WriteMTV ("j.mtv");
+   // v.ColoredMirrors();
+   v.ToPixels ();
+   v.WriteMTV ("junk.mtv");
 }
 
 /* ===================== end of file ====================== */
