@@ -20,6 +20,7 @@
 #include <stdio.h>
 
 #include "ache.h"
+#include "zetafn.h"
 #include "lapack.h"
 
 
@@ -70,6 +71,16 @@ kino (int m, int n)
 	return (double) (n*(n+1));
 }
 
+double sst (int i, int j)
+{
+	double lam;
+	if (i>j) return 0.0;
+	lam = pow (2.0, (double) (j+1)) -1.0;
+	double bin = binomial (j,i);
+	printf ("mat(%d, %d) = %g/%g\n", i,j,bin,lam);
+	return bin /lam;
+}
+
 main () 
 {
 	double *mat;
@@ -82,7 +93,7 @@ main ()
 	int workdim;
 	int i,j, k;
 	
-	dim = 30;
+	dim = 6;
 
 	printf ("#\n#\n");
 	printf ("# Eigenvectors of the GKW (Gauss Kuz'min Wirsing) Operator\n");
@@ -103,7 +114,8 @@ main ()
 		for (j=0; j<dim; j++)
 		{
 			/* Note transposed matrix'ing for FORTRAN */
-			mat[i+j*dim] = ache_mp(i,j);
+			// mat[i+j*dim] = ache_mp(i,j);
+			mat[i+j*dim] = sst(i,j);
 		}
 	}
 
@@ -121,7 +133,7 @@ main ()
 	
 	int wd = getworkdim (dim, mat, ere, eim, lev, rev, work);
 	printf ("# recommended dim=%d actual dim=%d\n#\n", wd, workdim);
-	workdim = wd;
+	// workdim = wd;
 	
 	work = (double *) realloc (work, workdim*sizeof (double));
 	geteigen (dim, mat, ere, eim, lev, rev, workdim, work);
