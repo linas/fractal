@@ -1,0 +1,30 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'deriv.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Derivative of first eigenmode"
+set xlabel "x"
+set ylabel "Density"
+
+# set yrange [0:]
+
+
+# very good fit for first eigenmode
+#    "frob.dat" using 2:(-0.75+1.75/((1+$2)*(1+$2)*sqrt(1+$2))) title "2.5 pow"
+
+
+plot "deriv.dat" using 2:6 title "data"
+
+#    "frob.dat" using 2:(-0.75+1.75/((1+$2)*(1+$2)*sqrt(1+$2))) title "2.5 pow"
+
+
+# pause 100
+

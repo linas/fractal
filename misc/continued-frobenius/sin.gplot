@@ -1,0 +1,30 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'sin.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "whatevr"
+set xlabel "ess"
+set ylabel "integ"
+
+# set yrange [0:]
+#       plot sin(x)
+#       plot f(x) = sin(x*a), a = .2, f(x), a = .4, f(x)
+#       plot [t=1:10] [-pi:pi*2] tan(t), \
+#            "data.1" using (tan($2)):($3/$4) smooth csplines \
+#                     axes x1y2 notitle with lines 5
+# 
+
+
+plot [x=0:3] z(x)=0, z(x), s(x) = sin(3*pi*x)+ 0.5*sin (5*pi*x), s(x), c(x) = 1.5+cos(3*pi*x)+0.5*cos(5*pi*x), c(x)
+
+
+# pause 100
+

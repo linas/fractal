@@ -1,0 +1,44 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'guess.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "One iteration"
+set xlabel "x"
+set ylabel "Density"
+
+# set yrange [0:]
+
+
+# decent fit quad for first eignmode
+#      "frob.dat" using 2:(-1+2/((1+$2)*(1+$2))) title "quad"
+
+#decent fit cubic for first eignemode
+#     "frob.dat" using 2:(-0.6+1.6/((1+$2)*(1+$2)*(1+$2))) title "cube"
+
+# very good fit for first eigenmode
+#    "frob.dat" using 2:(-0.75+1.75/((1+$2)*(1+$2)*sqrt(1+$2))) title "2.5 pow"
+
+# error term for fit to first eigenmode
+# plot "frob.dat" using 2:($3+0.75-1.75/((1+$2)*(1+$2)*sqrt(1+$2))) title "data - 2.5 pow"
+
+# plot "frob.dat" using 2:($4-0.6447) title "psi data ", \
+#     "frob.dat" using 2:(-0.55 + 1.55/((1+$2)*sqrt(1+$2))) title "1.5 pow"
+
+# ?? 
+# plot   "frob.dat" using 2:($4-0.6447+0.55 - 1.55/((1+$2)*sqrt(1+$2))) title "data-1.5 pow"
+
+plot "frob.dat" using 2:7 title "data", \
+    "frob.dat" using 2:(-0.75+1.75/((1+$2)*(1+$2)*sqrt(1+$2))) title "2.5 pow"
+#	"frob.dat" using 2:(1/(1+$2)) title "fitter"
+
+
+# pause 100
+

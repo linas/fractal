@@ -1,0 +1,25 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'riemann.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Riemann Zeta (Integral of continued fraction)"
+set xlabel "ess"
+set ylabel "integ"
+
+# set yrange [0:]
+
+plot "riemann.dat" using 1:2 title "re part", \
+     "riemann.dat" using 1:3 title "im part", \
+     "riemann.dat" using 1:(sqrt($2*$2+$3*$3)) title "mag"
+
+
+# pause 100
+

@@ -1,0 +1,31 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'basis.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "possible basis vectors"
+set xlabel "x"
+set ylabel "Density"
+
+# set yrange [0:]
+
+
+
+plot "frob.dat" using 2:(-0.5*((1/((1+$2)*(1+$2))) -1)) title "h0",\
+     "frob.dat" using 2:(-0.5*((1/((1+$2)*(1+$2)*(1+$2))) -1+$2)) title "h1",\
+     "frob.dat" using 2:(-0.5*((1/((1+$2)*(1+$2)*(1+$2)*(1+$2))) -1+2*$2-$2*$2)) title "h2",\
+     "frob.dat" using 2:(-0.5*((1/((1+$2)*(1+$2)*(1+$2)*(1+$2)*(1+$2))) - ((1-$2)*(1-$2)*(1-$2)))) title "h3",\
+     "frob.dat" using 2:(-0.5*((1/((1+$2)*(1+$2)*(1+$2)*(1+$2)*(1+$2)*(1+$2))) - ((1-$2)*(1-$2)*(1-$2)*(1-$2)))) title "h4"\
+
+#    "frob.dat" using 2:(-0.75+1.75/((1+$2)*(1+$2)*sqrt(1+$2))) title "2.5 pow"
+
+
+# pause 100
+
