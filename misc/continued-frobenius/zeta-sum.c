@@ -2,15 +2,46 @@
 /* zeta-sum.c
  *
  * Goal: numerically validate a sum over zeta's
- * */
+ * 
+ */
 
 #include <math.h>
 #include <stdio.h>
+
+#include <gsl/gsl_sf_zeta.h>
 #include "zetafn.h"
 
+int
 main ()
 {
 	int i;
+
+	long double twok = 1.0L;
+	long double acc = 0.0L;
+	long double ess = 2.2;
+	int s = ess;
+	long double ts = powl (0.5L, ess);
+
+	for (i=0; i<50; i++)
+	{
+		// long double term = zetam1(i+s) +1.0;
+		long double term = gsl_sf_zeta (i+ess);
+		term *= twok;
+		term *= binomial (s+i-1, s-1);
+		acc += term;
+		twok *= -0.5;
+	printf ("%d %30.25Lg\n", i, acc);
+	}
+	acc *= ts;
+	acc += 1.0;
+	acc /= 1.0-ts;
+	// acc -= zetam1(s) +1.0;
+	acc -= gsl_sf_zeta (ess);
+
+	printf ("result of sum is %Lg\n", acc);
+	
+
+#ifdef SOMETHING
 	long double sign = 1.0L;
 	long double acc = 0.0;
 	for (i=0; i<70; i++)
@@ -42,13 +73,12 @@ main ()
 	}
 	printf ("%Lg %30.25Lg\n", t, acc);
 	}
-
-	int m = 0;
-	int k;
-
+#endif
 
 
 #ifdef WHATEVER
+	int m = 0;
+	int k;
 	for (m=0; m<20; m++)
 	{
 	double t = 1.0;
@@ -152,4 +182,5 @@ main ()
 #endif
 	
 
+	return 0;
 }
