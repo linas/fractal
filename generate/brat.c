@@ -13,8 +13,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-int extra = 0;
+#include <time.h>
 
 /*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using */
@@ -263,6 +262,8 @@ void mandelbrot_decide (
    double escape_radius = 50.0;
    int		state;
    double	*limits;
+   clock_t	start, stop;
+   int          hunds;
 
 #define OUTSIDE    1
 #define UNDECIDED  6
@@ -275,7 +276,6 @@ void mandelbrot_decide (
    
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = (double) UNDECIDED;
-for (i=0; i<globlen; i++) glob [i] = -1.0;
 
    limits = (double *)malloc ((itermax+1) * sizeof (double));
    for (i=1; i<itermax; i++) {
@@ -284,9 +284,11 @@ for (i=0; i<globlen; i++) glob [i] = -1.0;
       limits[i] = (double)i;                      // too liberal
       limits[i] = sqrt ((double)i);               // too conservative
       limits[i] = ((double)i) / log ((double)i ); // too liberal
-      limits[i] = ((double)i) / (li*li);
+      limits[i] = ((double)i) / (li*li);          // just right !!
    }
 
+   start = clock();
+   hunds = 0;
    im_position = im_start;
    for (i=0; i<sizey; i++) {
       if (i%10==0) printf(" start row %d\n", i);
@@ -323,7 +325,6 @@ for (i=0; i<globlen; i++) glob [i] = -1.0;
              * error.
              */
             if (modulus > escape_radius*escape_radius) {
-glob [i*sizex +j] = ((double)loop) / ((double)itermax);
                if ((UNDECIDED == state) || (OUTSIDE == state)) {
                   state = OUTSIDE;
                } else {
@@ -348,27 +349,40 @@ glob [i*sizex +j] = ((double)loop) / ((double)itermax);
                state = INSIDE;
 // record time saved ...
 // state = loop;
-// break;
+break;
             }
-
-// colorize weird
-if ((0.0>glob [i*sizex +j]) ||  (1.0<glob [i*sizex +j])) {
-glob [i*sizex +j] =  modulus;
-}
 
          }    
         
-#ifdef SHOW_REGIONS
          if (ERROR > state) {
             glob [i*sizex +j] = ((double) state) / 8.1;
          } else {
             glob [i*sizex +j] = ((double) state) / ((double)itermax);
          }
-#endif
 
          re_position += delta;
       }
       im_position -= delta;  /*top to bottom, not bottom to top */
+      stop = clock();
+      hunds += (stop-start) / 10000;
+      start = stop;
+   }
+   free (limits);
+
+   /* do some counting. */
+   { 
+   int inside=0, uncertain=0;
+   double rem;
+   for (i=0; i<globlen; i++) {
+      if ((((double) UNDECIDED)+0.1 > 8.1*glob[i]) &&
+          (((double) UNDECIDED)-0.1 < 8.1*glob[i])) { uncertain ++; }
+      if ((((double) INSIDE)+0.1 > 8.1*glob[i]) &&
+          (((double) INSIDE)-0.1 < 8.1*glob[i])) {inside ++; }
+   }
+   rem = ((double) uncertain) / ((double)(uncertain+inside));
+   printf (">> %d %d %d %d %f %d\n", 
+       itermax, uncertain, inside, 
+       uncertain+inside, rem, hunds);
    }
 }
 
