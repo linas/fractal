@@ -593,13 +593,250 @@ singular sawtooth
  XXXX edit the above sentances.
 \layout Subsection
 
-Fourier Basis
+Fourier Representation
 \layout Standard
 
-blah
+We repeat the above analysis using standard Fourier Series techniques.
+ Although such an analysis may be considered to be old and shop-worn, it
+ is critical to note that in this context, the Fourier representation is
+ not only inequivalent to the polynomial representation, but that attempting
+ to establish an equivalence leads to divergences reminiscent of those seen
+ in more complicated Hilbert spaces, such as those encountered in Quantum
+ Field Theory and elsewhere.
+ In less flowery terms, we provide a simple example where undergraduate
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+textbook math
+\begin_inset Quotes erd
+\end_inset 
+
+ leads one to form incorrect conclusions about Hilbert Spaces and the behaviour
+ of operators in them.
+ What look like simple statements about orthogonality and completeness of
+ a set of basis functions can lead to serious trouble when analysing even
+ simple operators, as we shall show.
+ The goal here is to get this 
+\begin_inset Quotes eld
+\end_inset 
+
+dirty laundry
+\begin_inset Quotes erd
+\end_inset 
+
+ out in the open, as it affects the development of later sections.
+ 
+\layout Standard
+
+Lets quickly review the standard textbook treatment of a Fourier Series.
+ In traditional notation, for some (periodic) function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ one writes the Fourier Series as 
+\begin_inset Formula \[
+f(x)=\sum_{n=-\infty}^{\infty}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\]
+
+\end_inset 
+
+ where the conjugates of 
+\begin_inset Formula $f$
+\end_inset 
+
+ are given by 
+\begin_inset Formula \[
+a_{n}=\int_{0}^{1}f(x)\,\cos(2\pi nx)\, dx\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+b_{n}=\int_{0}^{1}f(x)\,\sin(2\pi nx)\, dx\]
+
+\end_inset 
+
+ Moving over to bra-ket notation, we can define the Fourier-space basis
+ vectors 
+\begin_inset Formula $\left|em\right\rangle $
+\end_inset 
+
+ in terms of thier components in coordinate space.
+ These components are 
+\begin_inset Formula $\left\langle x|em\right\rangle =\exp(i2\pi mx)$
+\end_inset 
+
+.
+ The conjugate vectors 
+\begin_inset Formula $\left\langle en\right|$
+\end_inset 
+
+ have an equally simple representation: 
+\begin_inset Formula $\left\langle en|x\right\rangle =\exp(-i2\pi nx)$
+\end_inset 
+
+.
+ One has the usual sense of orthogonality over coordinate space in that
+ 
+\begin_inset Formula \[
+\left\langle em|en\right\rangle =\int_{0}^{1}dx\,\left\langle em|x\right\rangle \left\langle x|en\right\rangle =\int_{0}^{1}dx\,\exp(2\pi i(n-m)x)=\delta_{nm}\]
+
+\end_inset 
+
+ and the traditional presentation of the Fourier Series is a statement of
+ completeness over coordinate space, in that for an arbitrary square-integrable
+ coordinate-space function 
+\begin_inset Formula $f(x)=\left\langle x|f\right\rangle $
+\end_inset 
+
+ one has 
+\begin_inset Formula \begin{eqnarray*}
+f(x)=\left\langle x|f\right\rangle  & = & \sum_{n=-\infty}^{\infty}\left\langle x|en\right\rangle \left\langle en|f\right\rangle \\
+ & = & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\left\langle en|y\right\rangle \left\langle y|f\right\rangle \\
+ & = & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\exp(-i2\pi ny)f(y)\\
+ & = & \int_{0}^{1}dy\,\delta(x-y)\, f(y)\end{eqnarray*}
+
+\end_inset 
+
+ Thus, one is accustomed to the notion of having an identity operator of
+ the form 
+\begin_inset Formula $1_{F}=\sum_{m=-\infty}^{\infty}\left|em\right\rangle \left\langle em\right|$
+\end_inset 
+
+ because it has the matrix elements that one expects in both the Fourier
+ space and in coordinate space: that is, 
+\begin_inset Formula $\left\langle em\right|1_{F}\left|en\right\rangle =\delta_{nm}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left\langle x\right|1_{F}\left|y\right\rangle =\delta(x-y)$
+\end_inset 
+
+ .
+ 
+\layout Standard
+
+Thus, in light of this perfectly ordinary standard textbook behaviour, the
+ following shall be surprising.
+ The matrix elements of this operator, expressed in the polynomial basis,
+ are not only non-trivial, but are divergent.
+ That is, one can be lulled into beleiving that 
+\begin_inset Formula $\left\langle m\right|1_{F}\left|n\right\rangle =\delta_{nm}$
+\end_inset 
+
+ for the polynomial basis, and indeed, by performing the operations in a
+ certain order, one can certainly show this.
+ However, reversing the order of operations shows that what might seem like
+ simple operations can in fact be quite treacherous.
+ 
+\layout Standard
+
+We begin by writing the compnents of the vector 
+\begin_inset Formula $\left|em\right\rangle $
+\end_inset 
+
+ in the polynomial-space representation:
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle n|em\right\rangle  & = & \int_{0}^{1}dx\left\langle n|x\right\rangle \left\langle x|em\right\rangle \\
+ & = & \int_{0}^{1}dx\,\frac{(-)^{n}}{n!}\delta^{(n)}(x)\, e^{i2\pi mx}\\
+ & = & \int_{0}^{1}dx\,\frac{\delta(x)}{n!}\,\frac{d^{n}}{dx^{n}}\, e^{i2\pi mx}\\
+ & = & \frac{(i2\pi m)^{n}}{n!}\end{eqnarray*}
+
+\end_inset 
+
+ Essentially, this is nothing more than a plain-old Taylor's Series expansion
+ of the exponential function.
+ The conjugate vectors have a slightly trickier form.
+ They are the Fourier components of monomials.
+ For 
+\begin_inset Formula $m\neq0$
+\end_inset 
+
+ 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle em|n\right\rangle  & = & \int_{0}^{1}dy\left\langle em|y\right\rangle \left\langle y|n\right\rangle \\
+ & = & \int_{0}^{1}\exp(-2\pi imy)\, y^{n}\, dy\\
+ & = & \frac{-1}{2\pi im}+\frac{n}{2\pi im}\int_{0}^{1}\exp(-2\pi imy)\, y^{n-1}\, dy\\
+ & = & -\frac{1}{2\pi im}\sum_{k=0}^{n-1}\frac{n!}{(n-k)!}\left(\frac{1}{2\pi im}\right)^{k}\end{eqnarray*}
+
+\end_inset 
+
+ and, for 
+\begin_inset Formula $m=0$
+\end_inset 
+
+, 
+\begin_inset Formula $\left\langle e0|n\right\rangle =1/(n+1)$
+\end_inset 
+
+.
+ Let us now try to explictly evaluate the matrix elements of the Fourier
+ identity operator in the polynomial representation.
+ That is, we attempt to write the amtrix elements of 
+\begin_inset Formula $1_{F}=\sum_{m=-\infty}^{\infty}\left|em\right\rangle \left\langle em\right|$
+\end_inset 
+
+ 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle p\right|1_{F}\left|n\right\rangle  & = & \sum_{m=-\infty}^{\infty}\left\langle p|em\right\rangle \left\langle em|n\right\rangle \\
+ & = & \sum_{m=-\infty}^{\infty}\left[\delta_{p0}+\left(1-\delta_{p0}\right)\frac{\left(2\pi im\right)^{p}}{p!}\right]\left[\frac{\delta_{m0}}{n+1}-\frac{\left(1-\delta_{m0}\right)}{2\pi im}\sum_{k=0}^{n-1}\frac{n!}{(n-k)!}\left(\frac{1}{2\pi im}\right)^{k}\right]\end{eqnarray*}
+
+\end_inset 
+
+ We need only to look at the relatively simple matrix element 
+\begin_inset Formula $n=1$
+\end_inset 
+
+, 
+\begin_inset Formula $p\neq0$
+\end_inset 
+
+ to see the misery of this expression: 
+\begin_inset Formula \[
+\left\langle p\neq0\right|1_{F}\left|n=1\right\rangle =\frac{\left(2\pi i\right)^{p}}{p!}\sum_{m=1}^{\infty}\frac{m^{p}}{2\pi im}\]
+
+\end_inset 
+
+ One can try to rescue teh situation by making the Ansatz that the summation
+ should have beenreplaced by 
+\begin_inset Formula $\zeta(1-p)$
+\end_inset 
+
+ which is regular, but already this is dangerous.
+ What is perhaps the more surprising is that one might have expected this
+ kind of trouble from the polynomial completeness relationship 
+\begin_inset Formula $\mathbb{I}_{A}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
+\end_inset 
+
+ because it ranges only over analytic functions: its essentially a statement
+ of the idea that analytic functions are expressible through a series expansion
+ in a variable.
+ Functions that are not infinitely differntiable more-or-less lie in the
+ kernel of 
+\begin_inset Formula $\mathbb{I}_{A}$
+\end_inset 
+
+.
+ However, we'd expect 
+\begin_inset Formula $1_{F}$
+\end_inset 
+
+ to be more faithful, as it would seem to venture over square-integrable
+ functions.
+ Thus, such a simple failing is surprising.
+ 
+\layout Standard
+
+The goal here is to simply present a signpost warning, as we make heavy
+ use of these techniques in the sections that follow, where we work with
+ functions that are differentiable-nowhere or worse.
+ 
 \layout Subsection
 
-Koopman Operator
+The Koopman Operator
 \layout Standard
 
 The Koopman operator is in a certain sense conjugate to the Frobenius-Perron
