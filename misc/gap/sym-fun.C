@@ -31,7 +31,7 @@ main (int argc, char *argv[])
 		f.SetReal (y);
 		double qy = f.ToFarey();
 
-		printf ("%5d	%8.6g	%8.6g\n", i, x, y);
+		printf ("%5d	%8.6g	%8.6g\n", i, x, qy);
 
 	}
 }

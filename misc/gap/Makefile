@@ -14,7 +14,7 @@ clean:
 	rm -f core tmp junk glop a.out *.o
 
 realclean:	clean
-	rm -f $(EXES) $(ENUMS)
+	rm -f $(EXES) 
 
 .C.o:
 	$(CC) -c -O2 $<
