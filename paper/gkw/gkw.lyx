@@ -58,11 +58,16 @@ Specifically, the Minkowski Question Mark Function is an isomorphism connecting
  
 \layout Abstract
 
-This chapter develops some of the tools for studying chaotic maps, spcifically
- the idea of studying the Frobenius-Perron (FP) operator of a chaotic map.
+This chapter develops some of the tools for studying chaotic maps, specifically
+ the idea of studying the Frobenius-Perron (FP) or Transfer operator of
+ a chaotic map.
  The FP operator of the map that generates continued fractions is the GKW.
  We thus apply the modular group symmetries of the continued fractions to
  study the GKW.
+ In the process, we explicitly demonstrate several operators whose point-wise
+ orbits are completely isomorphic, and yet whose spectra are inequivalent.
+ This surprising result is possible only because the isomorphism is highly
+ singular (namely, the Minkowski Question Mark).
  
 \layout Abstract
 
@@ -987,7 +992,7 @@ Conjugate Maps
 
 Conjugation of the function that generates the map will provide, in general,
  another map that behaves exactly the same as the first, as long as the
- conjugating function is a diffeomorphism.
+ conjugating function is a 1-1 and onto diffeomorphism.
  That is, if 
 \begin_inset Formula $\phi$
 \end_inset 
@@ -1006,7 +1011,31 @@ is out conjugating function, then
 \begin_inset Formula $\gamma^{n}=\phi\circ g^{n}\circ\phi^{-1}$
 \end_inset 
 
-, and we thus would expect that the Koopman and Frobenius-Perron operators
+.
+ The orbit of any point 
+\begin_inset Formula $x$
+\end_inset 
+
+ under the map 
+\begin_inset Formula $g$
+\end_inset 
+
+ is completely isomorphic to the orbit of a point 
+\begin_inset Formula $y=\phi(x)$
+\end_inset 
+
+ under the map 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+.
+ Because the (chaotic) point dynamics of these two maps are isomorphic,
+ we expect just about any related construction and analysis to show evidence
+ of this isomorphism.
+ 
+\layout Standard
+
+In particular, we expect that the Koopman and Frobenius-Perron operators
  for 
 \begin_inset Formula $\gamma$
 \end_inset 
@@ -1029,10 +1058,21 @@ XXX derive the above.
  
 \layout Standard
 
-In order to preserve the polynomial-rep eigenvalues, a diffeomorphism is
- required.
- Will show an example below of a homeomorphic but not diffeomorphic map
- that alters the polynomial-representation eigenvalues.
+Note that this construction invokes the Jacobian 
+\begin_inset Formula $\left|d\phi(y)/dy\right|_{y=\phi^{-1}(x)}$
+\end_inset 
+
+ and thus, in order to preserve the polynomial-rep eigenvalues, the conjugating
+ function must be a diffeomorphism; a homeomorphism does not suffice.
+ We will show an example below of a conjugating function that is highly
+ singular, and thus the Jacobian does not exist (in the ordinary sense).
+ As a result, conjugate maps willhave completely isomorphic point dynamics,
+ but the eigenvalue spectra associated with these maps will 
+\emph on 
+not
+\emph default 
+ be identical.
+ 
 \layout Section
 
 The Frobenius-Perron Operator of the Bernoulli Map
@@ -4587,8 +4627,36 @@ c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\label{eq:
 
 \end_inset 
 
- The Frobenius-Perron operator of this function provides a second model
- of the Gauss-Kuzmin-Wirsing operator.
+ Just as the Gauss Map is able to lop off the leading term of the continued
+ fraction expansion for 
+\begin_inset Formula $x$
+\end_inset 
+
+, so this map is able to lop off all of the leading zeros of the binary
+ expansion for 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ The downward slope of the sawtooth just reflects the binary expansion,
+ exchanging 1's for 0's, so that the next iteration can chop of the next
+ contibuous chunk.
+ Thus, the orbits of points under this map are completly isomorphic to the
+ orbits of points under the Gauss Map.
+ This is indeed the very idea of a 
+\begin_inset Quotes eld
+\end_inset 
+
+conjugate map
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The Frobenius-Perron operator of this function provides a second model of
+ the Gauss-Kuzmin-Wirsing operator.
  It can be solved exactly; unfortunately, while one might think that there
  is a similarity transform to take it back to GKW, it turns out this similarity
  transform is dastardly singular, being just the Jacobian of the Minkowski
@@ -4596,7 +4664,15 @@ c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\label{eq:
 \begin_inset Formula $(?'\circ?^{-1})(x)$
 \end_inset 
 
-, which we'll examine shortly.
+, which we examine in detail in a related paper of this series.
+ Thus, although the point dynamics of this sawtooth map are completely isomorphi
+c to the point dynamics of the Gauss Map, the spectra of the associated
+ transfer operators are 
+\emph on 
+not
+\emph default 
+ identical.
+ This is perhaps the most surprising result of this paper.
  The FP operator is 
 \begin_inset Formula \begin{equation}
 \left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-x}{2^{n}}\right)\label{eq:}\end{equation}
@@ -5111,6 +5187,9 @@ g_{D}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
 
 \end_inset 
 
+ Just as we saw with the second sawtooth, the point dynamics of the Isola
+ Map and the Tent Map are isomorphic to each other, but the eigenvalue spectra
+ are inequivalent.
  
 \layout Standard
 
