@@ -32,7 +32,7 @@ Symmetries of Period-Doubling Maps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 9 November 2004)
+12 October 2004 (revised 12 November 2004)
 \layout Abstract
 
 The concept of self-similarity is central to the notion of a fractal, but
@@ -841,8 +841,7 @@ Homework: Give the fractal dimension of the Takagi Curve, as a function
 Open-Question: We have demonstrated a one-dimensional manifold of representation
 s of the modular group.
  Below, we will show a representation on the complex plane.
- Are there other 3D representations, or is this it? Do we know anything
- about higher-dimensional representations?
+ Are there other 3D representations, or is this it? 
 \layout Description
 
 Homework: In the previous section, we considered functions on the real number
@@ -983,7 +982,39 @@ q_{\gamma}(w)=\frac{(-)^{N}}{2^{M-1}}\sum_{k=1}^{M}(2b_{k}-1)\;(2w)^{k-1}\]
 
 \end_inset 
 
- The 
+ Note that 
+\begin_inset Formula $q_{\gamma}$
+\end_inset 
+
+ is more-or-less equal to (up to a factor and a term of 
+\begin_inset Formula $1/(1-2w)$
+\end_inset 
+
+) the derivative 
+\begin_inset Formula $dt_{w}(x)/dx\;|\, x=\gamma_{D}(1)$
+\end_inset 
+
+.
+ We say 
+\begin_inset Quotes eld
+\end_inset 
+
+more or less
+\begin_inset Quotes erd
+\end_inset 
+
+ because some care has to be taken to define which bit expansion defines
+ the derivative.
+ In a certain sense, 
+\begin_inset Formula $q_{\gamma}$
+\end_inset 
+
+ is the dis-ambiguated derivative.
+ We leave this as an excercise.
+ 
+\layout Standard
+
+The 
 \begin_inset Formula $p_{\gamma}$
 \end_inset 
 
@@ -1010,6 +1041,120 @@ Homework: Describe
 
 .
  Is it possible to give a direct expression for the polynomial? 
+\layout Subsection
+
+Higher-Dimensional Representations
+\layout Standard
+
+Replacing the sawtooth shape that defines the the Takagi function with a
+ polynomial leads to a curve that transforms under a higher-dimensional
+ representation, specifically, as the order of the polynomial plus two.
+ In this section, we'll work out the four-dimensional representation and
+ then present the general finite-dimensional representation.
+\layout Standard
+
+Lets replace the sawtooth by a quadratic shape
+\begin_inset Formula \[
+\alpha(x)=\left\{ \begin{array}{ccc}
+4x^{2} & \;\textrm{ when }\; & 0\leq x\leq1/2\\
+4(1-x)^{2} & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ so that 
+\begin_inset Formula \[
+a_{w}(x)=\sum_{k=0}^{\infty}w^{k}\alpha\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\]
+
+\end_inset 
+
+ Its not hard to find that 
+\begin_inset Formula \[
+\left[g_{4}a_{w}\right](x)\equiv\left[a_{w}g_{D}\right](x)=a_{w}\left(\frac{x}{2}\right)=x^{2}+wa_{w}(x)\]
+
+\end_inset 
+
+ so that 
+\begin_inset Formula $g_{4}$
+\end_inset 
+
+can be represented as the matrix 
+\begin_inset Formula \[
+g_{4}=\left(\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+0 & \frac{1}{2} & 0 & 0\\
+0 & 0 & \frac{1}{4} & 0\\
+0 & 0 & 1 & w\end{array}\right)\]
+
+\end_inset 
+
+ and the reflection 
+\begin_inset Formula $r(x)=1-x$
+\end_inset 
+
+ as 
+\begin_inset Formula \[
+r_{4}=\left(\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+1 & -1 & 0 & 0\\
+1 & -2 & 1 & 0\\
+0 & 0 & 0 & 1\end{array}\right)\]
+
+\end_inset 
+
+ with the constructions of the isomorphisms proceeding as before.
+\layout Standard
+
+It seems that there is only one (two) four-dimensional representation (XXX
+ be careful only true for the symmetric case, the assymtric case is different).
+ For example, if we were to construct the curve from 
+\begin_inset Formula \[
+\beta(x)=4x(1-x)\]
+
+\end_inset 
+
+ so that 
+\begin_inset Formula \[
+b_{w}(x)=\sum_{k=0}^{\infty}w^{k}\beta\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\]
+
+\end_inset 
+
+ then we'd find that 
+\begin_inset Formula \[
+g_{b}=\left(\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+0 & \frac{1}{2} & 0 & 0\\
+0 & 0 & \frac{1}{4} & 0\\
+0 & 2 & -1 & w\end{array}\right)\]
+
+\end_inset 
+
+ is conjugate to 
+\begin_inset Formula $g_{4}$
+\end_inset 
+
+ through 
+\begin_inset Formula $Ug_{4}=g_{b}U$
+\end_inset 
+
+ with 
+\begin_inset Formula $U$
+\end_inset 
+
+ given by 
+\begin_inset Formula \[
+U=\left(\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & \frac{4}{1-2w} & \frac{-4}{1-2w} & \frac{-2w}{1-2w}\end{array}\right)\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+resembles a tranlsation in a projective space ...
+ 
 \layout Subsection
 
 Bernoulli Map Symmetry
