@@ -29,7 +29,7 @@ int main ()
 	ispect = +1;
 	kpty = 1;
 
-   emax = 100;
+   emax = 300;
 
 	printf ("#\n");
 	printf ("# FILE: \n");
@@ -39,7 +39,7 @@ int main ()
 	printf ("theta %21.15g\n", theta);
 	printf ("emax %21.15g\n", emax);
 
-	for (k=0; k<100; k++)
+	for (k=0; k<emax; k++)
 	{
 		int nfoundp, nfoundn, np, nn;
 
