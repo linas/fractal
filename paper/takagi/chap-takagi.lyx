@@ -39,7 +39,7 @@ The concept of self-similarity is central to the notion of a fractal, but
  the actual symmetry group that generates that self-similarity is oddly
  never named, and fractals are never studied according to thier symmetries.
  Yet, in other branches of mathematics, it is well understood that symmetry
- groups provide a powerful mechanism for studying systems.
+ provides a powerful mechanism for studying systems.
  
 \layout Abstract
 
@@ -59,10 +59,6 @@ This paper is part of a set of chapters that explore the relationship between
 \layout Section
 
 Symmetries of Period-Doubling Maps
-\layout Standard
-
-Intro To be written.
- 
 \layout Standard
 
 It has been widely noticed that Farey Numbers appear naturally in the Mandelbrot
@@ -131,14 +127,14 @@ In a seperate chapter, we show that an interesting subset of the Modular
 
 \end_inset 
 
-, and further developed by Tagaki in 1903, and by G.H.
+, and further developed by Teiji Takagi in 1903, and by G.H.
  Hardy in 1916 and by others, now bearing the name Takagi Curve or Blancmange
  Curve.
  We show that this curve, and its assorted and related generalizations,
  transform under a three-dimensional representation of the Modular Group.
 \layout Subsection
 
-The Takagi-Landsberg Curve
+The Weierstrass-Takagi-Landsberg-Hardy Curve
 \layout Standard
 
 The Takagi-Landsberg curve was explored by Teiji Tagaki, circa 1903 as an
@@ -200,7 +196,7 @@ where
 \end_inset 
 
  Note that insofar as the triangle curve is differentiable, we could say
- that the Takagi-Landsberg curve is differentiable (along 
+ that the Takagi curve is differentiable (along 
 \begin_inset Formula $x$
 \end_inset 
 
@@ -308,6 +304,45 @@ One can generalize this curve in a variety of ways, for example, by replacing
 \end_inset 
 
  gives the self-similar shape shown below.
+ 
+\layout Standard
+
+One also does not have to limit oneself to a power of two; Weierstrass considere
+d 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}b^{k}\cos(a^{k}x\pi)\]
+
+\end_inset 
+
+ and Hardy showed that this function is differentiable nowhere provided
+ that 
+\begin_inset Formula $0<b<1$
+\end_inset 
+
+, 
+\begin_inset Formula $a>1$
+\end_inset 
+
+ and 
+\begin_inset Formula $ab\geq1$
+\end_inset 
+
+.
+ Despite 
+\begin_inset Formula $a$
+\end_inset 
+
+ not having the value of two, this function stiil appears to have basic
+ fractal self-similarity, although it is not even about 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $a$
+\end_inset 
+
+ is not an integer.
+ 
 \layout Standard
 
 Of the many possible different choices for 
@@ -343,14 +378,15 @@ e_{w}(x)=\sum_{k=0}^{\infty}\frac{w^{k}\tau^{k}(x)}{k!}\]
 
 \end_inset 
 
+ and demonstrate its nascent self-similarity.
  
 \layout Subsection
 
-Symmetries of the Takagi-Landsberg Curve
+Symmetries of the Takagi Curve
 \layout Standard
 
-In this section, we will show that the Takagi-Landsberg curve transforms
- as a three-dimensional representation of the modular group.
+In this section, we will show that the Takagi curve transforms as a three-dimens
+ional representation of the modular group.
  This provides an example where the action of the group can be precisely
  and completely specified.
  
@@ -406,8 +442,8 @@ Consider first the generator that is the interval contraction
  is both linear and is also closed, thus forming a vector space.
  That is, we have discovered that the Takagi Curve transforms under the
  three-dimensional represention of the modular group.
- To be explicit, we write a general element as the dot-product of a row
- of real numbers times a column of basis vectors 
+ To be explicit, we write a general element of the vector space as the dot-produ
+ct of a row of real numbers times a column of basis vectors 
 \begin_inset Formula \[
 a+bx+ct_{w}(x)=\left(\begin{array}{ccc}
 a & \; b & \; c\end{array}\right)\left(\begin{array}{c}
@@ -441,7 +477,7 @@ g_{3}=\left(\begin{array}{ccc}
 \end_inset 
 
  where we use the subscript 3 to denote this is the 3-D representation.
- Under tha action of this representation, 3-vectors transform as, for example,
+ Under the action of this representation, 3-vectors transform as, for example,
  
 \begin_inset Formula \[
 \left[gt_{w}\right](x)=\left(\begin{array}{ccc}
@@ -490,8 +526,8 @@ For the sake of clarity, lets now examine the formulas for a contracting
 \end_inset 
 
 ; as before, expanding and general group elements require us to compute
- intersections of the dyadic tree intervals, which proceeds as before but
- complicates the language.
+ intersections of the dyadic tree intervals, which proceeds as before but,
+ as usual, complicates the language.
  We have that 
 \begin_inset Formula $\gamma$
 \end_inset 
@@ -537,7 +573,7 @@ t_{w}(x)\end{array}\right)\]
 
 \end_inset 
 
- which demonstrates the self-symmetry of the curve for arbitrary (expanding)
+ which demonstrates the self-symmetry of the curve for arbitrary (contracting)
  element 
 \begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
 \end_inset 
@@ -546,11 +582,21 @@ t_{w}(x)\end{array}\right)\]
  
 \layout Description
 
+Caution: We've really only demonstrated an isomorphism for the contracting
+ (and thier inverses, the expanding) group elements.
+ General group elements map intervals that do not intersect with each other,
+ and thus this isomorphism fails, or rather, becomes an isomorphism on the
+ empty set.
+ We should really provide a rigorous treatment for this.
+ (XXX viz, expand on this in the earlier chapters).
+ 
+\layout Description
+
 Homework: Compute the matrix elements for 
 \begin_inset Formula $grg^{3}$
 \end_inset 
 
- for both the dyadic and 3D rep.
+ for both the dyadic and the three-dimensional representation.
  Show that this implies the symmetry 
 \begin_inset Formula $t_{w}(1/2-x/16)=1+x(-1/8+w/4+w^{2}/2+w^{3})+w^{4}t_{w}(x)$
 \end_inset 
@@ -572,7 +618,7 @@ Homework: Provide a general, explicit proof of the commuting diagram by
  
 \layout Description
 
-Homework: Explore the curious polynomial in 
+Research-Topic: Explore the curious polynomial in 
 \begin_inset Formula $w$
 \end_inset 
 
@@ -581,7 +627,8 @@ Homework: Explore the curious polynomial in
 \end_inset 
 
 .
- 
+ (This is potentially a deeper and more interesting excercise; I haven't
+ yet done it myself...)
 \layout Standard
 
 What have we done here? We have accomplished two things.
@@ -705,6 +752,12 @@ QED
  
 \layout Description
 
+Open-Question: We have demonstrated a one-dimensional manifold of representation
+s of the modular group.
+ Are there other 3D representations, or is this it? Do we know anything
+ about higher-dimensional representations?
+\layout Description
+
 Homework: In the previous section, we considered functions on the real number
  line as set-theoretic expressions of functions on the binary tree.
  The uniqueness of the Takagi curve for each distinct value of 
@@ -746,64 +799,7 @@ f(x)=\int_{0}^{\infty}c(w)t_{w}(x)\; dw\]
  Provide other interesting examples.
 \layout Subsection
 
-Other constructions
-\layout Standard
-
-The recurrance relation 
-\layout Standard
-
-
-\begin_inset Formula \[
-t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
-
-\end_inset 
-
- will generate other interesting sequences if we pick a different set of
- starting conditions.
- For example, taking 
-\begin_inset Formula $w=0$
-\end_inset 
-
-, and writing 
-\begin_inset Formula $t_{0}\equiv d$
-\end_inset 
-
-, using the initial conditions 
-\begin_inset Formula $d(0)=0$
-\end_inset 
-
- and 
-\begin_inset Formula $d(1)=1$
-\end_inset 
-
-, we generate the tree of dyadic numbers between 0 and 1; that is, we can
- promptly deduce that 
-\begin_inset Formula $d(x)=x$
-\end_inset 
-
- for all 
-\begin_inset Formula $x=p/2^{n}$
-\end_inset 
-
-.
- If instead, we write 
-\begin_inset Formula $t_{0}\equiv J$
-\end_inset 
-
- with the boundary conditions 
-\begin_inset Formula $J(1)=1$
-\end_inset 
-
- and 
-\begin_inset Formula $J(1/2^{n})=2^{n}$
-\end_inset 
-
-, then we find that 
-\begin_inset Formula $J$
-\end_inset 
-
- generates the tree of dyadic numbers greater than one.
- 
+Miscellany
 \layout Standard
 
 A Batrachion is an integer sequence that hops from one integer to another
@@ -823,9 +819,6 @@ Homework: Apply the tools for working with the modular group to Batrachion
  Develop a general theory of Batrachion sequences in terms of representations
  of the modular group, if possible.
  
-\layout Subsection
-
-Miscellany
 \layout Standard
 
 In a previous section, we exhibited the hyperbolic maps 
