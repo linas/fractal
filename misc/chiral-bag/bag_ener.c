@@ -24,7 +24,7 @@ static int efn1_kay;
 static void efninit (double theta, int ispect, int kay, double emax, int kpty)
 {
 	efn1_ptyk = kpty;
-	efn_kay = kay;
+	efn1_kay = kay;
 	efn1_co = cos (theta);
 	efn1_si = sin (theta);
 }
@@ -38,19 +38,19 @@ static double efn (double omega)
 
 	if (0 < efn1_kay)
 	{
-		quickbessel (kay, omega, &bkm1, &bk, &bkp1);
+		quickbessel (efn1_kay, omega, &bkm1, &bk, &bkp1);
 		bks = bk*bk;
 		val = efn1_co * (bkp1 * bkm1 - bks) 
 			+ efn1_ptyk * bk * (bkp1 - bkm1)
-			+ efn1_si * bks / efn1_omega;
+			+ efn1_si * bks / omega;
 	}
 	else
 	{
 		double sn, cs, b0, b1;
-		sn = sin (efn1_omega);
-		cs = cos (efn1_omega);
-		b0 = sn/efn1_omega
-		b1 = (b0 - cs) / efn1_omega
+		sn = sin (omega);
+		cs = cos (omega);
+		b0 = sn/omega;
+		b1 = (b0 - cs) / omega;
 		val = efn1_co*b1-(efn1_ptyk-efn1_si)*b0;
 	}
 	return val;
@@ -58,33 +58,35 @@ static double efn (double omega)
 
 /* ============================================================= */
 
+#if 0
 static double yefn (double omega)
 {
 	double bkm1, bk, bkp1;
 	double ykm1, yk, ykp1;
-	double val, bks;
+	double val, yks;
 
 	if (0 < efn1_kay)
 	{
-		quickbessneu (kay, omega, &bkm1, &bk, &bkp1, &ykm1, &yk, &ykp1);
+		quickbessneu (efn1_kay, omega, &bkm1, &bk, &bkp1, &ykm1, &yk, &ykp1);
 
 		yks = yk*yk;
 		val = efn1_co * (ykp1 * ykm1-yks) 
 		     + efn1_ptyk * yk * (ykp1-ykm1)
-		     + efn1_si * yks / efn1_omega;
+		     + efn1_si * yks / omega;
 	}
 	else
 	{
 		double sn, cs, y0, y1;
-		sn = sin (efn1_omega);
-		cs = cos (efn1_omega);
+		sn = sin (omega);
+		cs = cos (omega);
 
-		y0 = -cs/efn1_omega;
-		y1 = (y0 - sn)/efn1_omega;
-		val = enf_co*y1-(efn1_ptyk-efn1_si)*y0;
+		y0 = -cs/omega;
+		y1 = (y0 - sn)/omega;
+		val = efn1_co * y1 - (efn1_ptyk - efn1_si) * y0;
 	}
 	return val;
 }
+#endif
 
 /* ============================================================= */
 /*
@@ -115,7 +117,7 @@ C               2-- EQUATION FOR J = L-1/2      KPTY = PTYK = -1
 */
 
 int
-quark_energy (double *ener, double theta, int ispect, int k, 
+quark_energy (double *ener, double theta, int ispect, int kay, 
                double emax,  int kpty)
 {
 /*
@@ -123,12 +125,16 @@ C       MAXIT-  MAXIMUM NUMBER OF ITERATIONS THE CONVERGENCE ALGORITHM
 C       IS TO PERFORM WHEN SEARCHING FOR THE EIGENVALUES.  IN PRACTICE,
 C       IT SEEMS TO TAKE LESS THAN TEN ITERATIONS-- SUGGEST MAXIT =15
 C       if there is failure, an error message will be printed
-        MAXIT = 40
+*/
+	int maxit = 40;
+/*
 C       NSIG-   NUMBER OF SIGNIFICANT DIGITS FOR THE SEARCH ROUTINE,
 C       I.E. THAT THE ENERGIES ARE TO BE CALCULATED TO.
-c       NSIG = 15   /* this will work on the Vax and the PC but ...*/
-        NSIG = 14
+c       NSIG = 15   -- this will work on the Vax and the PC but ...
+*/
+	int nsig = 14;
 
+/*
 C       LOOK FOR ZEROS of efn IN THE INTERVAL A .LE. ZERO .LE. B
 
 C       WE WILL NOT SEARCH FOR ZEROS NEAR ZERO, EXCEPT FOR K=0.
@@ -188,7 +194,7 @@ c	       take a big step and save some cpu time.
 		}
 		else
 		{
-			a = fabs (ener (numfound)) + step;
+			a = fabs (ener [numfound]) + step;
 			if (20 > numfound)
 			{
 				b = a + 2.2;
@@ -217,7 +223,7 @@ c	       take a big step and save some cpu time.
 			{
 				int nnn = numfound;
 				double dil = ener[nnn] - ener [nnn-1];
-				dil = fdabs (dil) * 0.4;
+				dil = fabs (dil) * 0.4;
 				step = fmin (step, dil);
 			}
 		}

@@ -9,7 +9,7 @@ bessel-test:	bessel-test.o bessel.o
 find_zero-test:	find_zero-test.o find_zero.o
 	cc -o $@ $^ -lm
 
-find_eig:	find_eig.o find_zero.o bessel.o
+find_eig:	find_eig.o bag_ener.o find_zero.o bessel.o
 	cc -o $@ $^ -lm
 
 
