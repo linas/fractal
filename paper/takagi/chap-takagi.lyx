@@ -1,0 +1,1334 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Rationals, Fractals and Continued Fractions
+\layout Author
+
+Linas Vepstas <linas@linas.org>
+\layout Date
+
+12 October 2004
+\layout Abstract
+
+Fractals and Continued Fractions seem to be deeply related in many ways.
+ Farey numbers appear naturally in both.
+ The shape of the Devil's Staircas
+\layout Section
+
+Symmetries of Period-Doubling Maps
+\layout Standard
+
+Intro To be written.
+ First we need to explain how to count with Farey numbers on the M-Set.
+ Here is a picture stolen from Robert L.
+ Devaney's website 
+\begin_inset LatexCommand \url[The Fractal Geometry of the Mandelbrot Set ]{}
+
+\end_inset 
+
+ :
+\layout Standard
+
+
+\begin_inset Graphics
+	filename farey-bud-numbers.gif
+
+\end_inset 
+
+
+\layout Standard
+
+This mapping and method of counting on the buds is well-known in the literature
+ and is explored in many ways.
+\layout Standard
+
+Next we note that enumerating the group elements of the modular group as
+ 
+\begin_inset Formula $\mathbb{Q\times\mathbb{N}}$
+\end_inset 
+
+ plays directly into the celebrated self-similarity of the Mandelbrot set.
+\layout Standard
+
+What does this mean for the symmetries of the Mandelbrot set? it means that
+ the modular group maps buds to buds.
+ Note, however, that the 
+\begin_inset Formula $\mathbb{Q\times\mathbb{N}}$
+\end_inset 
+
+ parameterization of the modular group means that one can map one bud onto
+ any another, but that the mapping has to be onto the whole bud, and not
+ just a portion of it.
+ Put another way, it is a mapping of intervals to intervals.
+ However, we can't just map any-old-interval anywhere we want.
+ We can map an interval to any starting point that we wish (this is the
+ 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ part of the symmetry, but after specifying the starting point, we have
+ only a discrete set of intrvals we can map to: this is the 
+\begin_inset Formula $\mathbb{N}$
+\end_inset 
+
+ part of the enumeration.
+ The buds appear discretely on the boundaries of the main cardiod.
+\layout Standard
+
+Let us start with something simpler, with an example of an exactly-solvable
+ fractal mapping.
+\layout Subsection
+
+The Takagi-Landsberg Curve
+\layout Standard
+
+The Takagi-Landsberg curve was first explored by Teiji Tagaki, circa 1903
+ as an example of a continuous-everywhere, differentiable-nowhere curve
+ 
+\begin_inset LatexCommand \cite{key-3}
+
+\end_inset 
+
+.
+ It is constructed by positive mid-point displacements of straight line
+ segments, that is, by 'fractally' bumping a line segment upwards by an
+ increasingly smaller displacement (xxxx we should diagram the standard
+ contruction here).
+ Equivalently, one assigns geometrically smaller displacements to each level
+ of the dyadic tree; that is, one picks some 
+\begin_inset Formula $w<1$
+\end_inset 
+
+, and assigns to each dyadic number 
+\begin_inset Formula $x=p/2^{n}$
+\end_inset 
+
+, for 
+\begin_inset Formula $n>1$
+\end_inset 
+
+, the value 
+\begin_inset Formula \[
+t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
+
+\end_inset 
+
+ where we anchor the recurrance with 
+\begin_inset Formula $t_{w}(0)=t_{w}(1)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $t_{w}(1/2)=1$
+\end_inset 
+
+.
+ One extends this curve to all reals by 'linear interpolation' between the
+ dyadic values, as 
+\begin_inset Formula \[
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+ is the triangle function:
+\begin_inset Formula \[
+\tau(x)=\left\{ \begin{array}{ccc}
+2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
+2(\left\lfloor x+1\right\rfloor -x) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\]
+
+\end_inset 
+
+ Note that insofar as the triangle curve is differentiable, we could say
+ that the Takagi-Landsberg curve is differentiable (along 
+\begin_inset Formula $x$
+\end_inset 
+
+) as well, in that it has both leftward-going and rightward-going derivatives,
+ although these derivatives differ at each dyadic point.
+ We can choose to define the derivative 
+\begin_inset Formula $dt_{w}/dx$
+\end_inset 
+
+ by passing the 
+\begin_inset Formula $d/dx$
+\end_inset 
+
+ past the usmmation above, to act on the triangle-wave, to give a square
+ wave.
+ Note that 
+\begin_inset Formula $t_{1/4}(x)=4x(1-x)$
+\end_inset 
+
+ is a parabola (the mid-point subdivision construction of a parabola is
+ attributed to Archimedes
+\begin_inset LatexCommand \cite{key-3}
+
+\end_inset 
+
+).
+ A prototypical Takagi-Landsberg curve is shown in figure 
+\begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:The-Takagi-Landsberg-Curve}
+
+\end_inset 
+
+The Takagi-Landsberg Curve
+\layout Standard
+
+
+\begin_inset Graphics
+	filename takagi.png
+
+\end_inset 
+
+
+\layout Standard
+
+This graph shows the Takagi-Landsberg curve 
+\begin_inset Formula $t_{w}(x)$
+\end_inset 
+
+ as a function of 
+\begin_inset Formula $x$
+\end_inset 
+
+ for a fixed value of 
+\begin_inset Formula $w=0.618$
+\end_inset 
+
+.
+ The fractal self-similarity of this curve is readily appearent.
+ 
+\end_inset 
+
+
+\layout Standard
+
+One can generalize this curve in a variety of ways, for example, by replacing
+ the tent 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+ with any 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ on the unit interval.
+ To get a continuous Takagi curve, one must have 
+\begin_inset Formula $f$
+\end_inset 
+
+ continuous and 
+\begin_inset Formula $f(0)=f(1)$
+\end_inset 
+
+.
+ Discontinuous functions 
+\begin_inset Formula $f$
+\end_inset 
+
+ yeild curves that are discontinuous everywhere: for example, the square
+ wave 
+\begin_inset Formula $\sigma(x)=d\tau/dx=1-2\left\lfloor 2x\right\rfloor $
+\end_inset 
+
+ gives the self-similar shape shown below.
+\layout Standard
+
+Of the many possible different choices for 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+, the traingle wave is special in that it stays self-similar through iteration;
+ that is, 
+\begin_inset Formula $(\tau\diamond\tau)(x)\equiv\tau^{2}(x)=\tau(2x)$
+\end_inset 
+
+ and generally, iterating on in 
+\begin_inset Formula $k$
+\end_inset 
+
+ times gives 
+\begin_inset Formula $\tau^{k}(x)=\tau(2^{k}x)$
+\end_inset 
+
+.
+ Thus, we may write 
+\begin_inset Formula \[
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau^{k}(x)\]
+
+\end_inset 
+
+ 
+\layout Description
+
+Homework: Develop the curious sum 
+\begin_inset Formula \[
+e_{w}(x)=\sum_{k=0}^{\infty}\frac{w^{k}\tau^{k}(x)}{k!}\]
+
+\end_inset 
+
+ 
+\layout Subsection
+
+Symmetries of the Takagi-Landsberg Curve
+\layout Standard
+
+In this section, we will show that the Takagi-Landsberg curve transforms
+ as a three-dimensional representation of the modular group.
+ This provides an example where the action of the group can be precisely
+ and completely specified.
+ 
+\layout Standard
+
+We recall from previous chapters that the modular group is generated by
+ the interval contraction 
+\begin_inset Formula $g$
+\end_inset 
+
+ and the unit interval reflection 
+\begin_inset Formula $r.$
+\end_inset 
+
+ We bear in mind that 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ are abstract group elements, and thus have distinct representations when
+ acting on different sets.
+ 
+\layout Standard
+
+Consider first the generator that is the interval contraction 
+\begin_inset Formula $g:[0,1]\rightarrow[0,1/2]$
+\end_inset 
+
+.
+ It acts on the Takagi map as
+\begin_inset Formula \[
+\left[gt_{w}\right](x)=t_{w}\left(\frac{x}{2}\right)=x+wt_{w}(x)\]
+
+\end_inset 
+
+ Iterating on this generator gives 
+\begin_inset Formula \[
+\left[g^{n}t_{w}\right](x)=t_{w}\left(\frac{x}{2^{n}}\right)=\frac{x}{2^{n-1}}\left(\frac{1-2^{n}w^{n}}{1-2w}\right)+w^{n}t_{w}(x)\]
+
+\end_inset 
+
+ Next, we notice that the action of 
+\begin_inset Formula $g$
+\end_inset 
+
+ on the expression 
+\begin_inset Formula $a+bx+ct_{w}(x)$
+\end_inset 
+
+ is both linear and is also closed, thus forming a vector space.
+ That is, we have discovered that the Takagi Curve transforms under the
+ three-dimensional represention of the modular group.
+ To be explicit, we write a general element as the dot-product of a row
+ of real numbers times a column of basis vectors 
+\begin_inset Formula \[
+a+bx+ct_{w}(x)=\left(\begin{array}{ccc}
+a & \; b & \; c\end{array}\right)\left(\begin{array}{c}
+1\\
+x\\
+t_{w}(x)\end{array}\right)\]
+
+\end_inset 
+
+ Then, we find that 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ have the representations 
+\layout Standard
+
+
+\begin_inset Formula \[
+g_{3}=\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+0 & \frac{1}{2} & 0\\
+0 & 1 & w\end{array}\right)\;\textrm{ and \;}r_{3}=\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+1 & -1\; & 0\\
+0 & 0 & 1\end{array}\right)\]
+
+\end_inset 
+
+ where we use the subscript 3 to denote this is the 3-D representation.
+ Under tha action of this representation, 3-vectors transform as, for example,
+ 
+\begin_inset Formula \[
+\left[gt_{w}\right](x)=\left(\begin{array}{ccc}
+0 & \;0 & \;1\end{array}\right)\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+0 & \frac{1}{2} & 0\\
+0 & 1 & w\end{array}\right)\left(\begin{array}{c}
+1\\
+x\\
+t_{w}(x)\end{array}\right)\]
+
+\end_inset 
+
+ Previously, we had found the dyadic representation that acted on dyadic
+ numbers as 
+\begin_inset Formula \[
+g_{D}=\left(\begin{array}{cc}
+1 & 0\\
+0 & \frac{1}{2}\end{array}\right)\;\textrm{ and }\; r_{D}=\left(\begin{array}{cc}
+1 & 0\\
+1 & -1\end{array}\right)\]
+
+\end_inset 
+
+ and so the 3D representation seems to be an extension of that vector space.
+  The Takagi Curve is then seen to commute with the generators 
+\begin_inset Formula $(g_{3}t_{w})(x)=(t_{w}g_{D})(x)$
+\end_inset 
+
+ and
+\begin_inset Formula $(r_{3}t_{w})(x)=(t_{w}r_{D})(x)$
+\end_inset 
+
+ in this representation.
+ 
+\layout Standard
+
+For the sake of clarity, lets now examine the formulas for a contracting
+ group element 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}\in SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ By 'contracting' we mean that we want to take all 
+\begin_inset Formula $a_{k}\geq0$
+\end_inset 
+
+; as before, expanding and general group elements require us to compute
+ intersections of the dyadic tree intervals, which proceeds as before but
+ complicates the language.
+ We have that 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ acts on the real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ with the dyadic representation: that is, 
+\begin_inset Formula \[
+\gamma:x=\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+
+\end_inset 
+
+ which can be quickly computed by multiplying together the representation
+ matrices 
+\begin_inset Formula $g_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $r_{D}$
+\end_inset 
+
+.
+ By contrast, on the Takagi curve, 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ acts as 
+\begin_inset Formula $\gamma_{3}$
+\end_inset 
+
+, thus: 
+\layout Standard
+
+
+\begin_inset Formula \[
+t_{w}(\gamma_{D}(x))=\left[\gamma_{3}t_{w}\right](x)=\left(\begin{array}{ccc}
+0 & \;0 & \;1\end{array}\right)g_{3}^{a_{1}}r_{3}g_{3}^{a_{2}}r_{3}g_{3}^{a_{3}}r_{3}...r_{3}g_{3}^{a_{N}}\left(\begin{array}{c}
+1\\
+x\\
+t_{w}(x)\end{array}\right)\]
+
+\end_inset 
+
+ which demonstrates the self-symmetry of the curve for arbitrary (expanding)
+ element 
+\begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Homework: Compute the matrix elements for 
+\begin_inset Formula $grg^{3}$
+\end_inset 
+
+ for both the dyadic and 3D rep.
+ Show that this implies the symmetry 
+\begin_inset Formula $t_{w}(1/2-x/16)=1+x(-1/8+w/4+w^{2}/2+w^{3})+w^{4}t_{w}(x)$
+\end_inset 
+
+.
+ Repeat the process for 
+\begin_inset Formula $g^{3}rg$
+\end_inset 
+
+ and for 
+\begin_inset Formula $g^{2}rg^{7}rg^{3}$
+\end_inset 
+
+.
+\layout Description
+
+Homework: Provide a general, explicit proof of the commuting diagram by
+ pulling out one generator at a time out from under the expressions.
+ 
+\layout Description
+
+Homework: Explore the curious polynomial in 
+\begin_inset Formula $w$
+\end_inset 
+
+ that arises as the coefficient of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+What have we done here? We have accomplished two things.
+ First, we've demonstrated the explict symmetry relationship of the Takagi
+ Curve.
+ Next, we've found that the curve, together with 1 and 
+\begin_inset Formula $x$
+\end_inset 
+
+, belong to the set of basis vectors 
+\begin_inset Formula $\{1,x,t_{w}\}$
+\end_inset 
+
+ of a three-dimensional representation of the modular group.
+ The matrix representations of 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ make it very easy to compute how the curve transforms under any given element
+ of the modular group.
+ 
+\layout Description
+
+Corollary: The modular group is a symmetry group of the parabola, where
+ the parabola is given by 
+\begin_inset Formula $t_{1/4}(x)=4x(1-x)$
+\end_inset 
+
+ and we can trivially validate that 
+\begin_inset Formula $(t_{1/4}\circ g)(x)=t_{1/4}(x/2)$
+\end_inset 
+
+ is equal to 
+\begin_inset Formula $(g\circ t_{1/4})(x)=x+t_{1/4}(x)/4$
+\end_inset 
+
+.
+\layout Description
+
+Theorm: Every real (or complex!) value of 
+\begin_inset Formula $w$
+\end_inset 
+
+ generates a unique, inequivalent representation of the modular group.
+ 
+\layout Description
+
+Proof: If two representations were equivalent, then we could find a matrix
+ 
+\begin_inset Formula $U$
+\end_inset 
+
+ such that 
+\begin_inset Formula $g_{v}=U^{-1}g_{w}U$
+\end_inset 
+
+ for 
+\begin_inset Formula $v\neq w$
+\end_inset 
+
+ and 
+\begin_inset Formula $r=U^{-1}rU$
+\end_inset 
+
+.
+ We try to do this by brute force.
+ Let 
+\begin_inset Formula \[
+U=\left(\begin{array}{ccc}
+a & b & c\\
+d & e & f\\
+k & l & m\end{array}\right)\]
+
+\end_inset 
+
+ Equating 
+\begin_inset Formula $rU=Ur$
+\end_inset 
+
+ we find immediately that 
+\begin_inset Formula $l=b=0$
+\end_inset 
+
+.
+ Next, equating 
+\begin_inset Formula $Ug_{v}=g_{w}U$
+\end_inset 
+
+ one finds that 
+\begin_inset Formula $d=k=c=f=0$
+\end_inset 
+
+, leaving 
+\begin_inset Formula $a=e=m$
+\end_inset 
+
+.
+ But when 
+\begin_inset Formula $v\neq w$
+\end_inset 
+
+ we find also that 
+\begin_inset Formula $m=0$
+\end_inset 
+
+, and so all elements of 
+\begin_inset Formula $U$
+\end_inset 
+
+ vanish.
+ There is no equivalency transformation between two different representations.
+ 
+\emph on 
+QED
+\emph default 
+.
+ 
+\layout Description
+
+Homework: In the previous section, we considered functions on the real number
+ line as set-theoretic expressions of functions on the binary tree.
+ The uniqueness of the Takagi curve for each distinct value of 
+\begin_inset Formula $w$
+\end_inset 
+
+ implies that we can use it to define a (partial) set of basis vectors on
+ the binary tree.
+ That is, there is a large class of functions on the unit interval 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ that can be expressed as 
+\begin_inset Formula \[
+f(x)=\int_{0}^{\infty}c(w)t_{w}(x)\; dw\]
+
+\end_inset 
+
+ for some function 
+\begin_inset Formula $c:\mathbb{R}^{+}\rightarrow\mathbb{R}$
+\end_inset 
+
+.
+ Describe the completeness, or rather, the lack-threof, of this function
+ basis.
+ Notice that already have one trivial example: for the parabola 
+\begin_inset Formula $f(x)=4x(1-x)$
+\end_inset 
+
+ we have 
+\begin_inset Formula $c(w)=\delta(w-1/4)$
+\end_inset 
+
+, where 
+\begin_inset Formula $\delta$
+\end_inset 
+
+ is the Dirac delta function.
+ Provide other interesting examples.
+\layout Subsection
+
+Other constructions
+\layout Standard
+
+The recurrance relation 
+\layout Standard
+
+
+\begin_inset Formula \[
+t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
+
+\end_inset 
+
+ will generate other interesting sequences if we pick a different set of
+ starting conditions.
+ For example, taking 
+\begin_inset Formula $w=0$
+\end_inset 
+
+, and writing 
+\begin_inset Formula $t_{0}\equiv d$
+\end_inset 
+
+, using the initial conditions 
+\begin_inset Formula $d(0)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $d(1)=1$
+\end_inset 
+
+, we generate the tree of dyadic numbers between 0 and 1; that is, we can
+ promptly deduce that 
+\begin_inset Formula $d(x)=x$
+\end_inset 
+
+ for all 
+\begin_inset Formula $x=p/2^{n}$
+\end_inset 
+
+.
+ If instead, we write 
+\begin_inset Formula $t_{0}\equiv J$
+\end_inset 
+
+ with the boundary conditions 
+\begin_inset Formula $J(1)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $J(1/2^{n})=2^{n}$
+\end_inset 
+
+, then we find that 
+\begin_inset Formula $J$
+\end_inset 
+
+ generates the tree of dyadic numbers greater than one.
+ 
+\layout Standard
+
+A Batrachion is an integer sequence that hops from one integer to another
+ using a a simple recurrence relation.
+ The Hofstadter-Conway 10,000-Dollar Sequence on particular 
+\layout Standard
+
+Many batrachions generate fractal curves, and these are often remarkably
+ similar to the Takagi curve.
+ Examples include the Hofstadter-Conway 10,000-Dollar Sequence, the Hofstadter's
+ Q-Sequence and Mallows' Sequence.
+ 
+\layout Description
+
+Homework: Apply the tools for working with the modular group to Batrachion
+ sequences.
+ Develop a general theory of Batrachion sequences in terms of representations
+ of the modular group, if possible.
+ 
+\layout Subsection
+
+Miscellany
+\layout Standard
+
+In a previous section, we exhibited the hyperbolic maps 
+\begin_inset Formula $\theta(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\eta(x)$
+\end_inset 
+
+ of the unit interval onto itself.
+ These maps consited of straight line segments, with each segments corresponding
+ to an element of the modular group.
+ Thus, for each individual line segment, the Takagi Curve is mapped back
+ into itself under three dimensional representation, as shown above.
+ Working out the general form of transformation of the curve under the hyperboli
+c maps is a bit harder.
+ 
+\layout Description
+
+Homework: Exhibit 
+\begin_inset Formula $t_{w}(\theta(x))$
+\end_inset 
+
+ and 
+\begin_inset Formula $t_{w}(\eta(x))$
+\end_inset 
+
+ explicitly.
+ Give a general form for how the Takagi curve transforms under a general
+ hyperbolic curve.
+ What is the dimension of the representation? 
+\layout Description
+
+Homework: Give the Hausdorff dimension of the Takagi curve, as defined by
+ Besicovitch.
+\layout Standard
+
+One can also explore the derivative of te Takagi Curve, which is reasonably
+ well defined for 
+\begin_inset Formula $w<1/2$
+\end_inset 
+
+; one takes the derivative under the summation, and notes the derivative
+ of a triangle wave is a square wave.
+ This is shown in figure 
+\begin_inset LatexCommand \ref{cap:Derivative-of-Takagi}
+
+\end_inset 
+
+.
+ Derivatives for higher 
+\begin_inset Formula $w$
+\end_inset 
+
+ require analytic continuation past 
+\begin_inset Formula $w=1/2$
+\end_inset 
+
+, which is always possible if 
+\begin_inset Formula $x$
+\end_inset 
+
+ is held fixed.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Derivative-of-Takagi}
+
+\end_inset 
+
+Derivative of the Takagi Curve
+\layout Standard
+
+
+\begin_inset Graphics
+	filename takagi-prime.png
+
+\end_inset 
+
+
+\layout Standard
+
+This graph shows 
+\begin_inset Formula $dt_{w}(x)/dx$
+\end_inset 
+
+ for a value of 
+\begin_inset Formula $w=0.4$
+\end_inset 
+
+.
+\end_inset 
+
+ 
+\layout Description
+
+Homework: Work out the transformation of the derivative curve under the
+ modular group.
+ This can be bit bit confusing, because there are two potential candidates
+ to distinguish.
+ Given a general element 
+\begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
+\end_inset 
+
+ one can define 
+\begin_inset Formula $\gamma_{1}d\overrightarrow{v}/dx\equiv d\gamma\overrightarrow{v}/dx$
+\end_inset 
+
+ for the vector 
+\begin_inset Formula $\overrightarrow{v}=a+bx+ct_{w}(x)$
+\end_inset 
+
+ as the rule for how the 3-rep elements transform, and one can also define
+ 
+\begin_inset Formula $\gamma't'_{w}(x)\equiv t'_{w}(\gamma x)$
+\end_inset 
+
+ as the rule for how the derivative transforms.
+ Note that 
+\begin_inset Formula $\gamma'\neq\gamma_{1}$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Homework: Perform an analysis of the Kiesswetter curve.
+ 
+\layout Description
+
+Homework: Perform an analysis of Bolzano's self-affine curve.
+\layout Standard
+
+So far, we have been looking at the Takagi curve as a function of 
+\begin_inset Formula $x,$
+\end_inset 
+
+ holding 
+\begin_inset Formula $w$
+\end_inset 
+
+ fixed.
+ We can also explore the converse.
+ For any fixed 
+\begin_inset Formula $x$
+\end_inset 
+
+, the Takagi Curve is analytic in 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ For example, 
+\begin_inset Formula $t_{w}(0)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $t_{w}(1/2)=1$
+\end_inset 
+
+ are trivial, and 
+\begin_inset Formula $t_{w}(1/4)=w+1/2$
+\end_inset 
+
+ is clearly entire.
+ Continuing, we have
+\begin_inset Formula \[
+t_{w}\left(\frac{1}{2^{n}}\right)=\frac{2}{2^{n}}\;\frac{1-2^{n}w^{n}}{1-2w}\]
+
+\end_inset 
+
+ which is a polynomial of finite degree, without any poles, and thus entire;
+ indeed, 
+\begin_inset Formula $t_{1/2}(2^{-n})=2^{1-n}n$
+\end_inset 
+
+.
+ Its not hard to see, for any integer 
+\begin_inset Formula $p$
+\end_inset 
+
+, that 
+\begin_inset Formula $t_{w}(p/2^{n})$
+\end_inset 
+
+ will be a finite polynomial in 
+\begin_inset Formula $w.$
+\end_inset 
+
+ By contrast, 
+\begin_inset Formula \[
+t_{w}\left(\frac{1}{3}\right)=\frac{2}{3(1-w)}\]
+
+\end_inset 
+
+ has a simple pole.
+\layout Description
+
+Homework: Show the explicit analytic continuation of the Takagi curve to
+ regions 
+\begin_inset Formula $|w|>1$
+\end_inset 
+
+.
+ Discuss the analytic properties of 
+\begin_inset Formula $t_{w}$
+\end_inset 
+
+.
+ Provide the asymptotic expansion for 
+\begin_inset Formula $w\rightarrow\infty$
+\end_inset 
+
+.
+\layout Description
+
+Homework: Describe the analytic properties of 
+\begin_inset Formula $dt_{w}(x)/dx$
+\end_inset 
+
+ considered as a function of 
+\begin_inset Formula $w$
+\end_inset 
+
+, with 
+\begin_inset Formula $x$
+\end_inset 
+
+ held fixed.
+ 
+\layout Subsection
+
+Mandelbrot Set; Douady-Hubbard Rays
+\layout Standard
+
+Douady Hubbard rays are a mapping of the unit circle to the boundary of
+ the Mandelbrot Set.
+ One of the properties is that a pair of rays pinches off each bud of the
+ M-Set.
+ Note that both of the rays occur at external angles that are also rationals.
+ This now induces some additional symmetries on the rational numbers, since
+ each bud can be labelled with a rational, and thus, for each rational,
+ we associate the upper and lower rays.
+ These two map are highly discontinuous.
+ But that is OK, because the discontinuities pinch off the bud in the middle.
+ We use the code-word substituion techniques of Doaudy-Hubbard to paste
+ into the discontinuities.
+ Since we are free to paste in any code-word desired, we have, in a certain
+ sense, total and complete randomness, which is then propagated everywhere
+ through the self-similarity.
+ 
+\layout Standard
+
+Here is a bizarro philosophical thought: we have complete freedom to choose
+ the codewords to be pasted into the period-doubling symmetry, in the sense
+ of philosophical free-will: we can choose as we wish.
+ The result of the application of our free will is multiplied through the
+ modular group so that choice now appears everywhere among the rationals.
+ But we know that the closure of rationals is the reals, and we know that
+ the reals are 
+\begin_inset Quotes eld
+\end_inset 
+
+unknowable
+\begin_inset Quotes erd
+\end_inset 
+
+ in the Turing-computable sense.
+ Thus, we conclde that the application of free-choice results in something
+ unknowable.
+ How strange.
+ 
+\layout Standard
+
+Here's how code-word substitution works: start with the dyadic (base-2)
+ expansion for 
+\begin_inset Formula $0\leq x\leq1$
+\end_inset 
+
+
+\begin_inset Formula \[
+x=\sum_{n=1}^{\infty}\frac{a_{n}}{2^{n}}=0.a_{1}a_{2}a_{3}...\]
+
+\end_inset 
+
+ where the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ can only take on the values 0 and 1.
+ Then pick any two integers 
+\begin_inset Formula $h,l\in\mathbb{N}$
+\end_inset 
+
+ and a third integer 
+\begin_inset Formula $m$
+\end_inset 
+
+ such that 
+\begin_inset Formula $h,l<2^{m}$
+\end_inset 
+
+ is satisfied (alternately, we start by picking 
+\begin_inset Formula $m$
+\end_inset 
+
+ first, then picking 
+\begin_inset Formula $h,l$
+\end_inset 
+
+ to satisfy this).
+ We then substitute the value of 
+\begin_inset Formula $0$
+\end_inset 
+
+ in the dyadic expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+ with 
+\begin_inset Formula $l$
+\end_inset 
+
+ and the binary value of 
+\begin_inset Formula $1$
+\end_inset 
+
+ in the expansion with 
+\begin_inset Formula $h$
+\end_inset 
+
+, padding each appropriately:
+\begin_inset Formula \[
+B_{h,l,m}(x)=\sum_{n=1}^{\infty}\frac{ha_{n}+l(1-a_{n})}{2^{n}2^{nm}}\]
+
+\end_inset 
+
+ which we now see as a highly discontinuous function of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ To get a better idea of why its called 
+\begin_inset Quotes eld
+\end_inset 
+
+codeword substitution
+\begin_inset Quotes erd
+\end_inset 
+
+, lets work an example.
+ Let 
+\begin_inset Formula $x=0.10101010101..._{2}$
+\end_inset 
+
+ and pick 
+\begin_inset Formula $m=4$
+\end_inset 
+
+ and 
+\begin_inset Formula $h=7$
+\end_inset 
+
+ and 
+\begin_inset Formula $l=4$
+\end_inset 
+
+.
+ Note that, in binary, 
+\begin_inset Formula $h=0111_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $l=0100_{2}$
+\end_inset 
+
+ and so we have
+\begin_inset Formula \[
+B_{7,3;4}(0.1010101..._{2})=0.0111\;0100\;0111\;0100\;0111\;..._{2}\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Lets now work backwards and get the question mark: thus
+\begin_inset Formula \[
+?([2,1,1,1,...])=0.1010101..._{2}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+?([2,3,1,1,3,3,1,1,3,3,1,1,...])=B_{7,3;4}(0.1010101..._{2})\]
+
+\end_inset 
+
+ blah blah why are we doing this again?
+\layout Subsection
+
+Islands, Sinai's Tongues
+\layout Standard
+
+blah blah write this section.
+\layout Standard
+
+See the pictures of phase-locking in the Circle map at the URL 
+\begin_inset LatexCommand \htmlurl[Circle Map]{http://www.linas.org/art-gallery/basic/basic.html}
+
+\end_inset 
+
+ and notice the similarities to the gaps pictured at 
+\begin_inset LatexCommand \htmlurl[Farey Room Pictures]{http://www.linas.org/art-gallery/farey/fthumb.html}
+
+\end_inset 
+
+ Yada Yada.
+ The mode-locked regions are called Sinai's toungues.
+ This implies that the Modular Group is the symmetry group of the phase
+ locked-loop (the circle map) as well as the Mandelbrot Set.
+ 
+\layout Standard
+
+Notice that the mode-locked regions of the circle map are exactly those
+ regions that are *not* chaotic: in other words, these are the so-called
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+islands of order
+\begin_inset Quotes erd
+\end_inset 
+
+ that can be found in the 
+\begin_inset Quotes eld
+\end_inset 
+
+sea of chaos
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ One of course sees such islands in other iterated equations, such as the
+ iterated Feigenbaum map, and one is naturally lead to ask, is the modular
+ group the symmetry group that maps islands into islands, for any period
+ doubling map? What about the converse? Are there any maps, with islands,
+ that do not have the Modular Form symmetry? 
+\layout Standard
+
+What about Misiurewicz points? Misiurewicz points on the M-set are the pre-perio
+dic points.
+ As such we expect to be able to label them in some way with xxx ???
+\layout Subsection
+
+3-period Mode Locking
+\layout Standard
+
+Note that some chaotic maps are seen to have period-doubling paths to chaos
+ that include a factor of three: viz.
+ 3,6,12,24,...
+ I'm not sure I think this is a manifestation of the fact that the modular
+ group can be written as the free product of the two and three cycles 
+\begin_inset Formula $C_{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $C_{3}$
+\end_inset 
+
+.
+\layout Subsection
+
+Iterating on the Hyperbolic Plane
+\layout Standard
+
+Of course, now that we know about the modular group and the hyperbolic plane,
+ we state that we really want to study the iteration of one-dimensional
+ maps like the logistic equation or the tent map by studying how it bounces
+ around on the fundamental domain.
+ That is, each time we iterate a 1-D map, we are bounced to somewhere else
+ on the unit interval.
+ This point on the unit interval is included in an enumerable set of line
+ segments, which can be maped back to the whole unit interval via the modular
+ group.
+ Thus, a single point is a representative element of the equivalence class
+ of all the points that the modular group maps it to.
+ We want to study how the logistic equation acts on these equivalence classes,
+ instead of asking how it acts on single points.
+\layout Standard
+
+Blah Blah Blah.
+ Define what equivalence class means when a group acts on a set.
+ viz define the quotient space.
+ 
+\layout Standard
+
+This is essentially how we get related to Julia sets.
+ After we iterate a map like the logistic map once, we then ask what other
+ points are in the same equivalence class, under the action of the modular
+ group.
+ That is, we now studay iteration in the quotient space, where the modular
+ group provides the quotient.
+ This quotient map is just the map of all hyperbolic triangles back to the
+ fundamental domain.
+ And so we really study iteration in this quotient space.
+ Blah blah.
+ Provide pretty pictures.
+ We now ask what do the points on the boundary of the fundamental domain
+ correspond to, blah blah, these are the Misiurewicz points, which is why
+ they relate to Julia sets; they essentially paste together the pieces.
+ 
+\layout Bibliography
+\bibitem [Man88]{key-3}
+
+Benoit Mandelbrot, in 
+\emph on 
+The Science of Fractal Images, ed.
+ Heinz-Otto Peitgen, Dietmar Saupe,
+\emph default 
+ (Springer-Verlag, 1988) p.
+ 246
+\layout Bibliography
+\bibitem [deR57]{key-4}
+
+Georges de Rham, On Some Curves Defined by Functional Equations (1957),
+ reprinted in Classics on Fractals, ed.
+ Gerald A.
+ Edgar, (Addison-Wesley, 1993) pp.
+ 285-298
+\the_end
