@@ -39,8 +39,8 @@ main ()
       double sin_phi, cos_phi;
       int nprec = 0;        // number of precessions
 
-      initial_theta = loop;
-      initial_theta -= M_PI * ((int) (((double)loop)/M_PI));
+      initial_theta = 1.8 * loop;
+      initial_theta -= M_PI * ((int) (((double)1.8*loop)/M_PI));
       theta = initial_theta;
       phi = 0.0;
       sin_theta = sin(theta);
