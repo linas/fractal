@@ -24,7 +24,7 @@ prt_pair (int nn, int dd)
 	rn = nn/gcf;
 	rd = dd/gcf;
 
-	t = ((double) nn) / ((double) dd);
+	double t = ((double) nn) / ((double) dd);
   	f.SetRatio (rn,rd);
 	double xp = f.ToLastPair();
 	double at = 2.0 *atan (xp)/M_PI;
