@@ -59,13 +59,13 @@ void fixpt (double val, double *x, double *y)
 	{
 		if (nt & 0x1) 
 		{
-			koch_1 (x,y);
-			// cesaro_1 (x,y);
+			// koch_1 (x,y);
+			cesaro_1 (x,y);
 		}
 		else
 		{
-			koch_0 (x,y);
-			// cesaro_0 (x,y);
+			// koch_0 (x,y);
+			cesaro_0 (x,y);
 		}
 		nt >>= 1;
 	}
