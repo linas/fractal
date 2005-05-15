@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC)
 
-EXES= curve
+EXES= curve de-rham
 
 all:  $(EXES)
 
@@ -26,4 +26,5 @@ dist:
 	$(CC) -o $* $< $(LIB)/gcf.o $(LIB)/Farey.o -lm -lstdc++
 
 curve.o:  curve.C
+de-rham.o:  de-rham.C
 
