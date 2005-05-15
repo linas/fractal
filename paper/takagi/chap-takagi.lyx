@@ -114,12 +114,12 @@ This figure shows how to count the buds on the Mandelbrot set by assigning
  web page at Cut-the-Knot details this relationship.
  It is also well known that the natural way to compute with Continued Fractions
  are to use a dyadic representation, using the matrices 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 L=\left(\begin{array}{cc}
 1 & 1\\
 0 & 1\end{array}\right)\;\;\textrm{ and }\;\; R=\left(\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right)\]
+1 & 1\end{array}\right)\label{eq:L and R}\end{equation}
 
 \end_inset 
 
@@ -2627,8 +2627,8 @@ Consider a pair of contracting maps of the plane
  Assume that each fixed point lies in the basin of attraction of the other
  map, and furthermore, that the one applied to the fixed point of the other
  yeilds the same point, that is, 
-\begin_inset Formula \[
-d_{1}(p_{0})=d_{0}(p_{1})\]
+\begin_inset Formula \begin{equation}
+d_{1}(p_{0})=d_{0}(p_{1})\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2667,8 +2667,8 @@ x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq:}\end{equation}
 \end_inset 
 
 : 
-\begin_inset Formula \[
-d_{x}=d_{b_{1}}\circ\; d_{b_{2}}\circ\,\ldots\:\circ\, d_{b_{k}}\circ\,\ldots\]
+\begin_inset Formula \begin{equation}
+d_{x}=d_{b_{1}}\circ\; d_{b_{2}}\circ\,\ldots\:\circ\, d_{b_{k}}\circ\,\ldots\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2702,14 +2702,14 @@ De Rham provides several examples.
 
 .
  Then consider the maps 
-\begin_inset Formula \[
-d_{0}(z)=az\]
+\begin_inset Formula \begin{equation}
+d_{0}(z)=az\label{eq:}\end{equation}
 
 \end_inset 
 
  and 
-\begin_inset Formula \[
-d_{1}(z)=a+(1-a)z\]
+\begin_inset Formula \begin{equation}
+d_{1}(z)=a+(1-a)z\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2723,7 +2723,7 @@ d_{1}(z)=a+(1-a)z\]
 
 , respectively.
  The generated curve is is the non-differentiable curve of Cesaro and Faber,
- now known more generally as teh Levy C-curve, especially when 
+ now known more generally as the Levy C-curve, especially when 
 \begin_inset Formula $a=0.5+i0.5$
 \end_inset 
 
@@ -2739,6 +2739,7 @@ d_{1}(z)=a+(1-a)z\]
 \end_inset 
 
 .
+ 
 \layout Standard
 
 
@@ -2779,7 +2780,7 @@ The Cesaro curve, graphed for the value of
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -2825,6 +2826,191 @@ strength
 \end_inset 
 
 
+\layout Standard
+
+Written as affine transformations, the two transforms can be expressed as
+ 
+\begin_inset Formula \begin{equation}
+d_{0}(u,v)=\left(\begin{array}{c}
+u'\\
+v'\end{array}\right)=\left(\begin{array}{ccc}
+\alpha & -\beta & 0\\
+\beta & \alpha & 0\end{array}\right)\left(\begin{array}{c}
+u\\
+v\\
+1\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+d_{1}(u,v)=\left(\begin{array}{c}
+u'\\
+v'\end{array}\right)=\left(\begin{array}{ccc}
+1-\alpha & \beta & \alpha\\
+-\beta & 1-\alpha & \beta\end{array}\right)\left(\begin{array}{c}
+u\\
+v\\
+1\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The Koch and Peano curves can be obtained by a very similar construction,
+ by introducing a mirror reflection through the complex conjugate: 
+\begin_inset Formula \begin{equation}
+d_{0}(z)=a\overline{z}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+d_{1}(z)=a+(1-a)\overline{z}\label{eq:}\end{equation}
+
+\end_inset 
+
+ The classic Koch snowflake is regained for 
+\begin_inset Formula $a=1/2+i\sqrt{3}/6$
+\end_inset 
+
+ and the Peano curve for 
+\begin_inset Formula $a=(1+i)/2$
+\end_inset 
+
+.
+ Values intermediate between these two generate intermediate curves, as
+ shown in figure 
+\begin_inset LatexCommand \ref{cap:Koch-Curve}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{cap:Peano-curve}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Koch-Curve}
+
+\end_inset 
+
+Koch Curve
+\layout Standard
+
+
+\begin_inset Graphics
+	filename koch.png
+
+\end_inset 
+
+
+\layout Standard
+
+The Koch snowflake curve, constructed for 
+\begin_inset Formula $a=0.6+i0.37$
+\end_inset 
+
+.
+ The classic, hexagonal-symmetry curve is regained by setting 
+\begin_inset Formula $a=0.5+i\sqrt{3}/6$
+\end_inset 
+
+, which centers the big point at 1/2, and opens the base of the point to
+ run between 1/3 and 2/3'rds.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Peano-curve}
+
+\end_inset 
+
+Peano curve
+\layout Standard
+
+
+\begin_inset Graphics
+	filename peano.png
+
+\end_inset 
+
+
+\layout Standard
+
+The Koch curve, for 
+\begin_inset Formula $a=0.6+i0.45$
+\end_inset 
+
+.
+ The classic Peano space-filling curve is regained for 
+\begin_inset Formula $a=(1+i)/2$
+\end_inset 
+
+.
+ 
+\end_inset 
+
+
+\layout Standard
+
+Yet another example of a curve generated by means of teh de Rham construction
+ is the Minkowski Question Mark function, which is given by the Moebius
+ functions 
+\begin_inset Formula \begin{equation}
+d_{0}(z)=z/(z+1)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+d_{1}(z)=1/(z+1)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Expressed as the usual 2x2 matrix representations for Mobius transforms,
+ these correspond to the generators 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ given in 
+\begin_inset LatexCommand \ref{eq:L and R}
+
+\end_inset 
+
+.
+ More precisely, the generated function is actually half the inverse: 
+\begin_inset Formula $d_{x}=?^{-1}(2x)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+From the construction properties, it should now be clear that this generalized
+ de Rham curve construction has the same set of modular-group self-similarities.
 \layout Subsection
 
 Miscellany
