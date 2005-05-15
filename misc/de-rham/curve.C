@@ -47,6 +47,9 @@ main (int argc, char *argv[])
 	int i;
 	int p,q;
 	q  = 43;
+	q = atoi (argv[1]);
+
+	printf ("#\n# denom=%d\n#\n", q);
 	for (p=0; p<q; p++) 
 	{
 		double val = (double) p / (double) q;
@@ -54,6 +57,6 @@ main (int argc, char *argv[])
 		double y = 0.0;
 		fixpt (val, &x, &y);
 
-		printf ("%d\t%d\t%g	%g	%g\n", p,q,val,x,y);
+		printf ("%d\t%g	%g	%g\n", p,val,x,y);
 	}
 }

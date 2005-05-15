@@ -11,19 +11,19 @@ EXES= curve
 all:  $(EXES)
 
 clean:
-   rm -f core tmp junk glop a.out *.o
+	rm -f core tmp junk glop a.out *.o
 
 realclean:  clean
-   rm -f $(EXES)
+	rm -f $(EXES)
 
 dist:
-   tar -zcvf gap.tgz *.c *.C *.gplot Makefile .cvsignore
+	tar -zcvf gap.tgz *.c *.C *.gplot Makefile .cvsignore
 
 .C.o:
-   $(CC) -c -O2 $<
+	$(CC) -c -O2 $<
 
 .o:
-   $(CC) -o $* $< $(LIB)/Farey.o -lm -lstdc++
+	$(CC) -o $* $< $(LIB)/gcf.o $(LIB)/Farey.o -lm -lstdc++
 
-curve.o:  curve.c
+curve.o:  curve.C
 
