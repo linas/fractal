@@ -32,7 +32,7 @@ Symmetries of Period-Doubling Maps
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (revised 16 December 2004)
+12 October 2004 (revised 15 May 2005)
 \layout Abstract
 
 The concept of self-similarity is central to the notion of a fractal, but
@@ -47,7 +47,7 @@ The concept of self-similarity is central to the notion of a fractal, but
 \layout Abstract
 
 In this paper, we identify the symmetry group of period-doubling maps as
- being the Modular Group 
+ being a semigroup subgroup of the Modular Group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
@@ -67,6 +67,13 @@ onal representation, and the set of conjugate maps is very large.
  We thus hypothesize that essentially all period-doubling maps will demonstrate
  a Modular Group symmetry, which is essentially an outcome of the dyadic
  representation of the Modular Group.
+ 
+\layout Abstract
+
+To provide support for this hypothesis, we review Georges deRham's 1958
+ construction of the Koch snowflake, the Levy C-curve and the Peano space-fillin
+g curve and the Minkowski Question Mark function as special cases of a curve
+ with the same set of symmetries.
 \layout Abstract
 
 This paper is part of a set of chapters that explore the relationship between
@@ -183,6 +190,26 @@ The Takagi Curve is notable in that it is constructed from the iterated
  As an example, we show how one very simple iterated map is conjugate to
  the Tent Map, but the conjugating function is the Minkowski Question Mark.
  Thus, finding the conjugating function is a non-trivial exercise.
+\layout Standard
+
+Iteration on the pairs of matrices 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ given above gives rise to the Minkowski Question Mark function.
+ In 1958, Georges de Rham considered the iteration of generalized transformation
+s on the two-dimensional plane, and showed that under certain broad conditions,
+ such iteration yeilded continuous but non-differentiable curves in the
+ plane.
+ A variety of classic curves arise in this construction, including the Koch
+ snowflake, the Levy C-curve, and the Peano space-filling curve.
+ The modular group symmetry of these curves then falls out as a simple by-produc
+t of thier construction.
+ 
 \layout Subsection
 
 The Weierstrass-Takagi-Landsberg-Hardy Curve
@@ -1194,7 +1221,7 @@ In either case, the polynomials that we are dealing with are closely related
 
  as 
 \begin_inset Formula \begin{equation}
-x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq:}\end{equation}
+x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equation}
 
 \end_inset 
 
@@ -2562,6 +2589,138 @@ obvious
  that are conjugate to the Tent Map.
 \layout Subsection
 
+The de Rham Construction
+\layout Standard
+
+In a classic 1958 paper
+\begin_inset LatexCommand \cite{key-4}
+
+\end_inset 
+
+, Georges de Rham constructs a class of curves, and proves that these curves
+ are everywhere continuous but mostly nowhere differentiable (or, if differentia
+ble, have mostly derivative zero).
+ The construction is simple.
+ This section illustrates some of these curves.
+ 
+\layout Standard
+
+Consider a pair of contracting maps of the plane 
+\begin_inset Formula $d_{0}:\mathbb{R}^{2}\to\mathbb{R}^{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $d_{1}:\mathbb{R}^{2}\to\mathbb{R}^{2}$
+\end_inset 
+
+.
+ By the Banach fixed point theorem, such contracting maps should have fixed
+ points 
+\begin_inset Formula $p_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{1}$
+\end_inset 
+
+.
+ Assume that each fixed point lies in the basin of attraction of the other
+ map, and furthermore, that the one applied to the fixed point of the other
+ yeilds the same point, that is, 
+\begin_inset Formula \[
+d_{1}(p_{0})=d_{0}(p_{1})\]
+
+\end_inset 
+
+ Then these maps can be used to construct a certain continuous curve between
+ 
+\begin_inset Formula $p_{0}$
+\end_inset 
+
+and 
+\begin_inset Formula $p_{1}$
+\end_inset 
+
+.
+ Consider next the expansion in binary digits of a real number 
+\begin_inset Formula $x$
+\end_inset 
+
+, as given previously in eqn.
+ 
+\begin_inset LatexCommand \ref{eq: binary expansion}
+
+\end_inset 
+
+:
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ The de Rham curve is then a map characterized by the continuous paramter
+ 
+\begin_inset Formula $x$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+d_{x}=d_{b_{1}}\circ\; d_{b_{2}}\circ\,\ldots\:\circ\, d_{b_{k}}\circ\,\ldots\]
+
+\end_inset 
+
+ The above map will map points in the common basin of attraction of the
+ two maps to a single point.
+ De Rham provides a simple proof that the resulting set of points form a
+ continous curve as a function of 
+\begin_inset Formula $x$
+\end_inset 
+
+, and that furthermore, this function is not differentiable in any conventional
+ sense.
+\layout Standard
+
+De Rham provides several examples.
+ Let 
+\begin_inset Formula $z=u+iv$
+\end_inset 
+
+ and 
+\begin_inset Formula $a\in\mathbb{C}$
+\end_inset 
+
+ be a constant such that 
+\begin_inset Formula $|a|<1$
+\end_inset 
+
+ and 
+\begin_inset Formula $|a-1|<1$
+\end_inset 
+
+.
+ Then consider the maps 
+\begin_inset Formula \[
+d_{0}(z)=az\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+d_{1}(z)=a+(1-a)z\]
+
+\end_inset 
+
+ The generated curve is is the non-differentiable curve of Cesaro and Faber,
+ now known more generally as teh Levy C-curve, especially when 
+\begin_inset Formula $a=0.5+ixx$
+\end_inset 
+
+
+\layout Subsection
+
 Miscellany
 \layout Standard
 
@@ -2641,14 +2800,15 @@ Homework: Affine transformations imply a projective space.
  Can something be made out of this projective nature? 
 \layout Subsubsection
 
-Levy Dragons; Weierstrass-Hardy Function
+Weierstrass-Hardy Function
 \layout Standard
 
-I believe that it would make for a good & interesting exercise to perform
- the same analysis on the Levy Dragons.
- Also, the Weierstrass-Hardy function has an obvious fractal self-similarity;
- can we analyze it in the same way, using the same mechanisms? I believe
- these should all be not too difficult.
+Perform the same analysis on the Weierstrass-Hardy function, which has an
+ obvious fractal self-similarity; can we analyze it in the same way, using
+ the same mechanisms? This analysis appears to generalize to most holomorphic
+ functions.
+ In a certain sense, most holomorphic functions have an inate symmetry of
+ this type.
 \layout Subsubsection
 
 Batrachions and Ladders of Symmetry
