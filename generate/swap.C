@@ -122,7 +122,7 @@ inline long double swap14 (long double x)
 void grand (long double x, long double sre, long double sim, 
 					 long double *pre, long double *pim)
 {
-#if 0
+#if 1
 	long double ox = 1.0L/x;
 	long double sw = ox - floorl(ox);
 #else
@@ -218,7 +218,7 @@ rswap (long double sre, long double sim, int itermax)
 	gral (itermax, sre, sim, &zre, &zim);
 	long double vv = zre*zre+zim*zim;
 	vv = sqrt (vv);
-	return zre;
+	return vv;
 }
 
 
@@ -247,6 +247,10 @@ MakeHisto (
    delta = width / (double) sizex;
    re_start = re_center - width / 2.0;
    im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   double im_end = im_center - width * ((double) sizey) / (2.0 * (double) sizex);
+
+	printf ("re=(%g,%g)\n", re_start, re_start+width);
+	printf ("im=(%g,%g)\n", im_end, im_start);
    
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = 0.0;
@@ -262,7 +266,11 @@ MakeHisto (
 			double phi = rswap (re_position, im_position, itermax);
          glob [i*sizex +j] = phi;
 
+			if ((re_position <= 0.0) && (0.0<re_position+delta))
+         	glob [i*sizex +j] = -1.0;
 			if ((re_position <= 0.5) && (0.5<re_position+delta))
+         	glob [i*sizex +j] = -1.0;
+			if ((re_position <= 1.0) && (1.0<re_position+delta))
          	glob [i*sizex +j] = -1.0;
 
          re_position += delta;
