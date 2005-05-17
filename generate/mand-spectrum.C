@@ -12,30 +12,28 @@
  * more stuff -- October 2004
  */
 
-#include <malloc.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <time.h>
 
 #include "brat.h"
-#include "Farey.h"
-#include "FareyTree.h"
 
 /*-------------------------------------------------------------------*/
 /* This routine fills in the interior and exterior of the mandelbrot set 
  * using derivitivee w.r.t c (the infintessimal flow) to obtain values.
  */
 
-void dmandelbrot_out (
+void 
+MakeHisto (
    float  	*glob,
    int 		sizex,
    int 		sizey,
    double	re_center,
    double	im_center,
    double	width,
-   int		itermax)
+   double	height,
+   int		itermax,
+   double 	renorm)
 {
    int		i,j, globlen;
    double	re_start, im_start, delta;

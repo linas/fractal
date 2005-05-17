@@ -12,9 +12,10 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         draw dx image movie paste stats sum \
         angle curl diff div card mandel morph \
         moire automatic wind winds ray \
-        manvert inf decide cutoff
+        manvert cutoff
 
-all:    cutoff elliptic erdos euler-q mobius swap totient  \
+all:    cutoff elliptic erdos euler-q mand-spectrum \
+        mobius swap totient  \
         ray automatic radius brat draw dx image
 
 
@@ -58,13 +59,13 @@ cutoff: brat.o cutoff.o util.o
 elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o util.o $(MODULAR)
 euler-q: brat.o euler-q.o util.o $(MODULAR)
+mand-spectrum: brat.o mand-spectrum.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
 swap: brat.o swap.o util.o
 totient: brat.o totient.o util.o $(GCF) $(TOTIENT)
 
-inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o $(FAREY)
+manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o $(FAREY)
 	$(CC) -o brat brat.o util.o -lm -lstdc++
-	ln -f brat decide
 	ln -f brat manvert
 	ln -f brat stalk
 	ln -f brat mstop
@@ -82,7 +83,6 @@ inf manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age
 	ln -f brat circin
 	ln -f brat circmov
 	ln -f brat stalkmov
-	ln -f brat inf
 	ln -f brat wind
 	ln -f brat winds
 	ln -f brat morph
