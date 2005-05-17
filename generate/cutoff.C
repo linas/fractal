@@ -122,12 +122,71 @@ tau * sum_npp)));
          sum_zppre = sum_zppim = sum_zppmod = 0.0;
          re = re_position;
          im = im_position;
+			double re_c = re_position;
+			double im_c = im_position;
          dre = 1.0;
          dim = 0.0;
          dmod = 0.0;
          ddre = 0.0;
          ddim = 0.0;
          ddmod = 0.0;
+
+#define FLATTEN_CARDIOD_MAP
+#ifdef FLATTEN_CARDIOD_MAP
+
+         /* map to cardiod lam(1-lam) */
+         double r = im_position;
+         double phi = M_PI*re_position;
+
+         phi = 2.0*M_PI / re_position;
+          
+         /* works pretty well
+         r *= r;
+         r = 1.0 + (r-1.0)*sin(0.5*phi)*sin(0.5*phi);
+         */
+         r -= 1.0;
+         r *= sin(0.5*phi)*sin(0.5*phi);
+         // r *= (0.5*phi)*sin(0.5*phi);
+         // r *= (0.5*phi)* (0.5*phi);
+        
+         r += 1.0;
+         re_c = 0.5 * r * (cos (phi) - 0.5 * r * cos (2.0*phi));
+         im_c = 0.5 * r * (sin (phi) - 0.5 * r * sin (2.0*phi));
+
+			re = re_c;
+			im = im_c;
+#endif /* FLATTEN_CARDIOD_MAP */
+
+         /* remaps */
+// #define REMAP_CARDIOD
+#ifdef REMAP_CARDIOD
+         {
+         double u,v;
+
+         re = 0.25 - re_position;
+         im = -im_position;
+         u = sqrt (0.5*(re + sqrt (re*re + im*im)));
+         v = 0.5 * im / u;
+         u = 0.5 - u;
+         r = sqrt (u*u + v*v);
+         phi = atan2 (v,u);
+         if (0.0 > phi) phi += 2.0*M_PI;
+         phi /= 2.0*M_PI;
+         /* phi runs from 0 to 1 */
+
+         phi = phi / (1.0+phi);
+
+         r = 0.5 *sqrt(2.0*r);
+         // r = 0.5*(r+0.5);
+         
+         phi *= 2.0*M_PI;
+         re_c = r * (cos (phi) - r * cos (2.0*phi));
+         im_c = r * (sin (phi) - r * sin (2.0*phi));
+
+         // printf ("start (%f %f) map to (%f %f)\n", re_position, im_position, re_c, im_c);
+         }
+#endif  /* REMAP_CARDIOD */
+
          modulus = (re*re + im*im);
          for (loop=1; loop <itermax; loop++) 
          {
@@ -186,8 +245,8 @@ tau * sum_npp)));
             dmod = dre*dre+dim*dim;
 
             /* compute iterate */
-            tmp = re*re - im*im + re_position;
-            im = 2.0*re*im + im_position;
+            tmp = re*re - im*im + re_c;
+            im = 2.0*re*im + im_c;
             re = tmp;
             modulus = (re*re + im*im);
             if (modulus > escape_radius*escape_radius) break;
@@ -300,7 +359,7 @@ tau * sum_npp)));
          
          /* finally the taylor expansion */
          /* subtract the main-body divergence */
-         tmp = 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
+         tmp = 0.25 * exp( -0.75 * log((re_c-0.25)*(re_c-0.25)+im_c*im_c));
          
          glob [i*sizex +j] = (modulus-tmp*sum_n);
          glob [i*sizex +j] -= tau* ((mp-tmp*sum_np) - 0.5 * tau * (mpp-tmp*sum_npp));
