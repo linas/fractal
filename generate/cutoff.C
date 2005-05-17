@@ -133,29 +133,37 @@ tau * sum_npp)));
 
 #define FLATTEN_CARDIOD_MAP
 #ifdef FLATTEN_CARDIOD_MAP
-
          /* map to cardiod lam(1-lam) */
          double r = im_position;
          double phi = M_PI*re_position;
 
-         phi = 2.0*M_PI / re_position;
-          
          /* works pretty well
          r *= r;
          r = 1.0 + (r-1.0)*sin(0.5*phi)*sin(0.5*phi);
          */
-         r -= 1.0;
-         r *= sin(0.5*phi)*sin(0.5*phi);
+         // r -= 1.0;
+         // r *= sin(0.5*phi)*sin(0.5*phi);
          // r *= (0.5*phi)*sin(0.5*phi);
          // r *= (0.5*phi)* (0.5*phi);
         
-         r += 1.0;
+         // r += 1.0;
          re_c = 0.5 * r * (cos (phi) - 0.5 * r * cos (2.0*phi));
          im_c = 0.5 * r * (sin (phi) - 0.5 * r * sin (2.0*phi));
 
 			re = re_c;
 			im = im_c;
 #endif /* FLATTEN_CARDIOD_MAP */
+
+#ifdef ALT_FLATTEN_DOESNT_WORK_AT_ALL
+         double r = im_position;
+         double phi = M_PI*re_position;
+
+			r *= 1.0- cos(phi);
+
+			re_c = 0.25+ r*cos(phi);
+			im_c = r*sin(phi);
+
+#endif /* ALT_FLATTEN */
 
          /* remaps */
 // #define REMAP_CARDIOD
