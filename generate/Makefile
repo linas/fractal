@@ -14,7 +14,7 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert cutoff
 
-all:    cutoff elliptic erdos euler-q mand-spectrum \
+all:    cutoff elliptic erdos euler-q mand-flow \
         mobius swap totient  \
         ray automatic radius brat draw dx image
 
@@ -59,7 +59,7 @@ cutoff: brat.o cutoff.o util.o
 elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o util.o $(MODULAR)
 euler-q: brat.o euler-q.o util.o $(MODULAR)
-mand-spectrum: brat.o mand-spectrum.o util.o
+mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
 swap: brat.o swap.o util.o
 totient: brat.o totient.o util.o $(GCF) $(TOTIENT)

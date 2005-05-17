@@ -220,7 +220,8 @@ tau * sum_npp)));
          /* the interesting one is the z-prime-prime */
 			/* This one does zpp/N i.e. the normalized divergent part */
          /* here we use a taylor expansion to extrapolate to tau=0 */
-			/* This one extrapolates zpp/norm and thus can show only divergent term */
+			/* This one extrapolates zpp/norm and thus can show only 
+			 * divergent term */
 
          /* first, we need the derivatives of modulus w.r.t tau */
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
@@ -280,13 +281,16 @@ tau * sum_npp)));
 
 #endif
 
-// #define ZPP_MODULUS_DIVERGENCE_FREE
+#define ZPP_MODULUS_DIVERGENCE_FREE
 #ifdef ZPP_MODULUS_DIVERGENCE_FREE
          /* --------------------------------------------------------- */
-         /* the interesting one is the z-prime-prime */
-			/* This one subtracts divergence from modulus of zpp and goes to tau=0 */
-         /* here, we subtract the leading divergence 
-			 * after computing teh modulus, not before. */
+         /* The interesting one is the z-prime-prime.
+			 * This one subtracts divergence from modulus of zpp 
+			 * and goes to tau=0.
+          * Here, we subtract the leading divergence 
+			 * after computing teh modulus, not before. 
+			 * This is the one which looks to be a modular form of some kind.
+			 */
 
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
@@ -302,11 +306,12 @@ tau * sum_npp)));
          glob [i*sizex +j] -= tau* ((mp-tmp*sum_np) - 0.5 * tau * (mpp-tmp*sum_npp));
 #endif
 
-#define COMPLEX_ZPP_MINUS_DIVERGENCE
+// #define COMPLEX_ZPP_MINUS_DIVERGENCE
 #ifdef COMPLEX_ZPP_MINUS_DIVERGENCE
          /* --------------------------------------------------------- */
-         /* the interesting one is the z-prime-prime */
+         /* The interesting one is the z-prime-prime */
 			/* This one subtracts divergence from zpp before taking modulus */
+			/* Unfortunately, it seems to be mostly crud */
 
          /* The taylor expansion */
 			double zre = sum_ddre - tau *(sum_ddrep - 0.5 * tau *sum_ddrepp);
