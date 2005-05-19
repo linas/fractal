@@ -17,6 +17,33 @@
 
 #include "brat.h"
 
+
+/* return real part of mobius x-form on the poincare disk */
+static inline double 
+remob (double a, double b, double c, double d, double x, double y)
+{
+	double nr = (a+d)*x + (c-b)*y +b+c;
+	double ni = (b-c)*x + (a+d)*y +a-d;
+	double dr = (b+c)*x + (a-d)*y +a+d;
+	double di = (d-a)*x + (b+c)*y +c-b;
+
+	double rem = (nr*dr + ni*di) / (dr*dr+di*di);
+	return rem;
+}
+              
+/* return imaginary part of mobius x-form on the poincare disk */
+static inline double 
+immob (double a, double b, double c, double d, double x, double y)
+{
+	double nr = (a+d)*x + (c-b)*y +b+c;
+	double ni = (b-c)*x + (a+d)*y +a-d;
+	double dr = (b+c)*x + (a-d)*y +a+d;
+	double di = (d-a)*x + (b+c)*y +c-b;
+
+	double imm = (ni*dr - nr*di) / (dr*dr+di*di);
+	return imm;
+}
+              
 /*-------------------------------------------------------------------*/
 /* This routine does a spectral analysis for the Mandelbrot set iterator.
  * That is, it computes a reimann-zeta-like sum of things like the modulus
@@ -131,11 +158,35 @@ tau * sum_npp)));
          ddim = 0.0;
          ddmod = 0.0;
 
-#define FLATTEN_CARDIOD_MAP
-#ifdef FLATTEN_CARDIOD_MAP
-         /* map to cardiod lam(1-lam) */
-         double r = im_position;
-         double phi = M_PI*re_position;
+#define MOBIUS
+#ifdef MOBIUS
+			int a,b,c,d;
+			a = 1; b=1; c=0; d=1;
+			double xp = remob (a,b,c,d, re_c, im_c);
+			double yp = immob (a,b,c,d, re_c, im_c);
+			re_c = xp;
+			im_c = yp;
+#endif /* MOBIUS */
+
+#define CIRCLE_COORDS
+#ifdef CIRCLE_COORDS
+			double rr = sqrt(re_c*re_c + im_c*im_c);
+			double theta = atan2 (im_c, re_c);
+			theta /= M_PI;
+			re_c = theta;
+			im_c = rr;
+#endif CIRCLE_COORDS
+
+#define FLATTEN_CARDIOID_MAP
+#ifdef FLATTEN_CARDIOID_MAP
+         /* Map to cardiod lam(1-lam) 
+			 * Input to this thing is assumed to be a ractangle, 
+			 * going from x= -1.0 to 1.0 and y= 0 to 1
+			 * which gets mapped to cardiod with y=1 at the edge,
+			 * and x=0 at the left side of cardioid
+			 */
+         double r = -im_c;
+         double phi = M_PI*re_c;
 
          /* works pretty well
          r *= r;
@@ -152,7 +203,7 @@ tau * sum_npp)));
 
 			re = re_c;
 			im = im_c;
-#endif /* FLATTEN_CARDIOD_MAP */
+#endif /* FLATTEN_CARDIOID_MAP */
 
 #ifdef ALT_FLATTEN_DOESNT_WORK_AT_ALL
          double r = im_position;
@@ -164,36 +215,6 @@ tau * sum_npp)));
 			im_c = r*sin(phi);
 
 #endif /* ALT_FLATTEN */
-
-         /* remaps */
-// #define REMAP_CARDIOD
-#ifdef REMAP_CARDIOD
-         {
-         double u,v;
-
-         re = 0.25 - re_position;
-         im = -im_position;
-         u = sqrt (0.5*(re + sqrt (re*re + im*im)));
-         v = 0.5 * im / u;
-         u = 0.5 - u;
-         r = sqrt (u*u + v*v);
-         phi = atan2 (v,u);
-         if (0.0 > phi) phi += 2.0*M_PI;
-         phi /= 2.0*M_PI;
-         /* phi runs from 0 to 1 */
-
-         phi = phi / (1.0+phi);
-
-         r = 0.5 *sqrt(2.0*r);
-         // r = 0.5*(r+0.5);
-         
-         phi *= 2.0*M_PI;
-         re_c = r * (cos (phi) - r * cos (2.0*phi));
-         im_c = r * (sin (phi) - r * sin (2.0*phi));
-
-         // printf ("start (%f %f) map to (%f %f)\n", re_position, im_position, re_c, im_c);
-         }
-#endif  /* REMAP_CARDIOD */
 
          modulus = (re*re + im*im);
          for (loop=1; loop <itermax; loop++) 
