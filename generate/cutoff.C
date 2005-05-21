@@ -158,8 +158,29 @@ tau * sum_npp)));
          ddim = 0.0;
          ddmod = 0.0;
 
-#define MOBIUS
-#ifdef MOBIUS
+#define Q_SERIES_MOBIUS
+#ifdef Q_SERIES_MOBIUS
+			/* First, make a map from q-series coords to the 
+			 * upper half-plane, then apply the mobius x-form, 
+			 * and then go back to the q-series coords */
+			double qre = re_c;
+			double qim = im_c;
+			double tau_im = -log (sqrt (qre*qre +qim*qim));
+			double tau_re = atan2 (qim, qre);
+
+			/* now apply mbius */
+			tau_re += 1.0;
+
+			/* now go back to q-series coords */
+			double rq = exp (-tau_im);
+			re_c = rq * cos (tau_re);
+			im_c = rq * sin (tau_re);
+
+#endif /* Q_SERIES_MOBIUS */
+
+#ifdef CIRCLE_MOBIUS
+			/* This is the mobius map for the poincare disk, which is 
+			 * incorrect for the punctured disk aka q-series disk */
 			int a,b,c,d;
 			a = 1; b=1; c=0; d=1;
 			double xp = remob (a,b,c,d, re_c, im_c);
