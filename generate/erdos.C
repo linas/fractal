@@ -82,13 +82,13 @@ double klein_j (double re_q, double im_q)
 	double rep, imp;
 	klein_j_invariant_c (re_q, im_q, &rep, &imp);
 
-	// return sqrt (rep*rep+imp*imp);
+	return sqrt (rep*rep+imp*imp);
 	// return rep;
 	// return imp;
-	long double phase = atan2 (imp, rep);
-	phase += M_PI;
-	phase /= 2.0*M_PI;
-	return phase;
+	// long double phase = atan2 (imp, rep);
+	// phase += M_PI;
+	// phase /= 2.0*M_PI;
+	// return phase;
 }
 
 double domain_bounce (double re_t, double im_t, 
@@ -189,13 +189,42 @@ MakeHisto (
       re_position = re_start;
       for (j=0; j<sizex; j++) 
 		{
+			double re_c = re_position;
+			double im_c = im_position;
 
-			// double phi = erdos_series (re_position, im_position);
-			// double phi = gee_2 (re_position, im_position);
-			// double phi = gee_3 (re_position, im_position);
-			// double phi = discriminant (re_position, im_position);
-			// double phi = klein_j (re_position, im_position);
-			double phi = domain (re_position, im_position);
+#define Q_SERIES_MOBIUS
+#ifdef Q_SERIES_MOBIUS
+			/* First, make a map from q-series coords to the 
+			 * upper half-plane, then apply the mobius x-form, 
+			 * and then go back to the q-series coords */
+			double qre = re_c;
+			double qim = im_c;
+			double tau_im = -log (sqrt (qre*qre +qim*qim)) / (2.0*M_PI);
+			double tau_re = atan2 (qim, qre) /(2.0*M_PI);
+
+			/* now apply mobius */
+			double a,b,c,d;
+			// a = 1; b=0; c=1; d=1;
+			a = 0; b=-1; c=1; d=0;
+			double deno = c*tau_re+d;
+			deno = deno*deno + c*c*tau_im*tau_im;
+			tau_re = (a*tau_re+b)*(c*tau_re+d) + a*c*tau_re*tau_im;
+			tau_re /= deno;
+			tau_im /= deno;
+
+			/* now go back to q-series coords */
+			double rq = exp (-tau_im * 2.0 * M_PI);
+			re_c = rq * cos (tau_re * 2.0 * M_PI);
+			im_c = rq * sin (tau_re * 2.0 * M_PI);
+
+#endif /* Q_SERIES_MOBIUS */
+
+			// double phi = erdos_series (re_c, im_c);
+			// double phi = gee_2 (re_c, im_c);
+			// double phi = gee_3 (re_c, im_c);
+			// double phi = discriminant (re_c, im_c);
+			double phi = klein_j (re_c, im_c);
+			// double phi = domain (re_c, im_c);
          glob [i*sizex +j] = phi;
 
          re_position += delta;

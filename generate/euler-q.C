@@ -103,10 +103,41 @@ MakeHisto (
       for (j=0; j<sizex; j++) 
 		{
 
-			// double phi = euler_prod (re_position, im_position);
-			// double phi = dedekind_eta (re_position, im_position);
-			// double phi = discriminant (re_position, im_position);
-			double phi = bernoulli_zeta (re_position, im_position);
+			double re_c = re_position;
+			double im_c = im_position;
+
+// #define Q_SERIES_MOBIUS
+#ifdef Q_SERIES_MOBIUS
+			/* First, make a map from q-series coords to the 
+			 * upper half-plane, then apply the mobius x-form, 
+			 * and then go back to the q-series coords */
+			double qre = re_c;
+			double qim = im_c;
+			double tau_im = -log (sqrt (qre*qre +qim*qim)) / (2.0*M_PI);
+			double tau_re = atan2 (qim, qre) /(2.0*M_PI);
+
+			/* now apply mobius */
+			double a,b,c,d;
+			// a = 1; b=0; c=1; d=1;
+			a = 0; b=-1; c=1; d=0;
+			double deno = c*tau_re+d;
+			deno = deno*deno + c*c*tau_im*tau_im;
+			tau_re = (a*tau_re+b)*(c*tau_re+d) + a*c*tau_re*tau_im;
+			tau_re /= deno;
+			tau_im /= deno;
+
+			/* now go back to q-series coords */
+			double rq = exp (-tau_im * 2.0 * M_PI);
+			re_c = rq * cos (tau_re * 2.0 * M_PI);
+			im_c = rq * sin (tau_re * 2.0 * M_PI);
+
+#endif /* Q_SERIES_MOBIUS */
+
+
+			// double phi = euler_prod (re_c, im_c);
+			double phi = dedekind_eta (re_c, im_c);
+			// double phi = discriminant (re_c, im_c);
+			// double phi = bernoulli_zeta (re_c, im_c);
          glob [i*sizex +j] = phi;
 
          re_position += delta;
