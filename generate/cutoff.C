@@ -168,8 +168,15 @@ tau * sum_npp)));
 			double tau_im = -log (sqrt (qre*qre +qim*qim));
 			double tau_re = atan2 (qim, qre);
 
-			/* now apply mbius */
-			tau_re += 1.0;
+			/* now apply mobius */
+			double a,b,c,d;
+			a = 1; b=0; c=1; d=1;
+			// a = 0; b=-1; c=1; d=0;
+			double deno = c*tau_re+d;
+			deno = deno*deno + c*c*tau_im*tau_im;
+			tau_re = (a*tau_re+b)*(c*tau_re+d) + a*c*tau_re*tau_im;
+			tau_re /= deno;
+			tau_im /= deno;
 
 			/* now go back to q-series coords */
 			double rq = exp (-tau_im);
@@ -181,7 +188,7 @@ tau * sum_npp)));
 #ifdef CIRCLE_MOBIUS
 			/* This is the mobius map for the poincare disk, which is 
 			 * incorrect for the punctured disk aka q-series disk */
-			int a,b,c,d;
+			double a,b,c,d;
 			a = 1; b=1; c=0; d=1;
 			double xp = remob (a,b,c,d, re_c, im_c);
 			double yp = immob (a,b,c,d, re_c, im_c);
