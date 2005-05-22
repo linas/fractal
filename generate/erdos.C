@@ -51,6 +51,20 @@ plane_to_q_disk_coords (double tau_re, double tau_im,
 	*py = rq * sin (tau_re * 2.0 * M_PI);
 }
 
+void 
+mobius_xform (double a, double b, double c, double d,
+              double tau_re, double tau_im, 
+              double *px, double *py)
+{
+	/* now apply mobius */
+	double deno = c*tau_re+d;
+	deno = deno*deno + c*c*tau_im*tau_im;
+	deno = 1.0/deno;
+
+	tau_re = (a*tau_re+b)*(c*tau_re+d) + a*c*tau_re*tau_im;
+	*px = tau_re * deno;
+	*py = tau_im * deno;
+}
 
 long double erdos_series (long double re_q, long double im_q)
 {
@@ -233,25 +247,9 @@ MakeHisto (
 			double tau_im = -log (sqrt (qre*qre +qim*qim)) / (2.0*M_PI);
 			double tau_re = atan2 (qim, qre) /(2.0*M_PI);
 
-#if 0
 			/* now apply mobius */
-			double a,b,c,d;
-			a = 1; b=0; c=0; d=1;
-			// a = 1; b=0; c=1; d=1;
-			// a = 0; b=-1; c=1; d=0;
-			double deno = c*tau_re+d;
-			deno = deno*deno + c*c*tau_im*tau_im;
-			tau_re = (a*tau_re+b)*(c*tau_re+d) + a*c*tau_re*tau_im;
-			tau_re /= deno;
-			tau_im /= deno;
-#endif
-
-/*
-double phi=1.0;
-if (tau_re < -0.5) phi = 0.0;
-if (tau_re > 0.5) phi = 0.0;
-if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
-*/
+			mobius_xform (1, 0, 1, 1, tau_re, tau_im, &tau_re, &tau_im);
+			// mobius_xform (0, -1, 1, 0, tau_re, tau_im, &tau_re, &tau_im);
 
 			plane_to_qdisk_coords (tau_re, tau_im, &re_c, &im_c);
 
@@ -259,13 +257,22 @@ if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
 
 			double tau_re, tau_im;
 			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+
+			mobius_xform (1, 0, 1, 1, tau_re, tau_im, &tau_re, &tau_im);
+			// mobius_xform (1, 1, 0, 1, tau_re, tau_im, &tau_re, &tau_im);
+			// mobius_xform (0, -1, 1, 0, tau_re, tau_im, &tau_re, &tau_im);
+double phi=1.0;
+if (tau_re < -0.5) phi = 0.0;
+if (tau_re > 0.5) phi = 0.0;
+if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
+
 			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
 
 			// double phi = erdos_series (re_c, im_c);
 			// double phi = gee_2 (re_c, im_c);
 			// double phi = gee_3 (re_c, im_c);
 			// double phi = discriminant (re_c, im_c);
-			double phi = klein_j (re_c, im_c);
+			// double phi = klein_j (re_c, im_c);
 			// double phi = domain (re_c, im_c);
          glob [i*sizex +j] = phi;
 
