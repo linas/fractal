@@ -21,6 +21,37 @@
 #include "brat.h"
 #include "modular.h"
 
+void 
+poincare_disk_to_plane_coords (double x, double y, 
+                               double *px, double *py)
+{
+	double deno = (1.0-x)*(1.0-x) + y*y;
+	deno = 1.0/deno;
+	*px = -2.0*y*deno;
+	*py = (1.0 - x*x - y*y) * deno;
+}
+
+void 
+plane_to_poincare_disk_coords (double x, double y, 
+                               double *px, double *py)
+{
+	double deno = x*x + (y+1.0)*(y+1.0);
+	deno = 1.0/deno;
+	*px = (x*x + y*y - 1.0) * deno;
+	*py = -2.0*deno; 
+}
+
+void 
+plane_to_q_disk_coords (double tau_re, double tau_im, 
+                        double *px, double *py)
+{
+	/* now go back to q-series coords */
+	double rq = exp (-tau_im * 2.0 * M_PI);
+	*px = rq * cos (tau_re * 2.0 * M_PI);
+	*py = rq * sin (tau_re * 2.0 * M_PI);
+}
+
+
 long double erdos_series (long double re_q, long double im_q)
 {
 	long double rep, imp;
@@ -192,7 +223,7 @@ MakeHisto (
 			double re_c = re_position;
 			double im_c = im_position;
 
-#define Q_SERIES_MOBIUS
+// #define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
 			/* First, make a map from q-series coords to the 
 			 * upper half-plane, then apply the mobius x-form, 
@@ -202,22 +233,33 @@ MakeHisto (
 			double tau_im = -log (sqrt (qre*qre +qim*qim)) / (2.0*M_PI);
 			double tau_re = atan2 (qim, qre) /(2.0*M_PI);
 
+#if 0
 			/* now apply mobius */
 			double a,b,c,d;
+			a = 1; b=0; c=0; d=1;
 			// a = 1; b=0; c=1; d=1;
-			a = 0; b=-1; c=1; d=0;
+			// a = 0; b=-1; c=1; d=0;
 			double deno = c*tau_re+d;
 			deno = deno*deno + c*c*tau_im*tau_im;
 			tau_re = (a*tau_re+b)*(c*tau_re+d) + a*c*tau_re*tau_im;
 			tau_re /= deno;
 			tau_im /= deno;
+#endif
 
-			/* now go back to q-series coords */
-			double rq = exp (-tau_im * 2.0 * M_PI);
-			re_c = rq * cos (tau_re * 2.0 * M_PI);
-			im_c = rq * sin (tau_re * 2.0 * M_PI);
+/*
+double phi=1.0;
+if (tau_re < -0.5) phi = 0.0;
+if (tau_re > 0.5) phi = 0.0;
+if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
+*/
+
+			plane_to_qdisk_coords (tau_re, tau_im, &re_c, &im_c);
 
 #endif /* Q_SERIES_MOBIUS */
+
+			double tau_re, tau_im;
+			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
 
 			// double phi = erdos_series (re_c, im_c);
 			// double phi = gee_2 (re_c, im_c);
