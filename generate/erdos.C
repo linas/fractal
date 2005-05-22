@@ -20,51 +20,7 @@
 
 #include "brat.h"
 #include "modular.h"
-
-void 
-poincare_disk_to_plane_coords (double x, double y, 
-                               double *px, double *py)
-{
-	double deno = (1.0-x)*(1.0-x) + y*y;
-	deno = 1.0/deno;
-	*px = -2.0*y*deno;
-	*py = (1.0 - x*x - y*y) * deno;
-}
-
-void 
-plane_to_poincare_disk_coords (double x, double y, 
-                               double *px, double *py)
-{
-	double deno = x*x + (y+1.0)*(y+1.0);
-	deno = 1.0/deno;
-	*px = (x*x + y*y - 1.0) * deno;
-	*py = -2.0*deno; 
-}
-
-void 
-plane_to_q_disk_coords (double tau_re, double tau_im, 
-                        double *px, double *py)
-{
-	/* now go back to q-series coords */
-	double rq = exp (-tau_im * 2.0 * M_PI);
-	*px = rq * cos (tau_re * 2.0 * M_PI);
-	*py = rq * sin (tau_re * 2.0 * M_PI);
-}
-
-void 
-mobius_xform (double a, double b, double c, double d,
-              double tau_re, double tau_im, 
-              double *px, double *py)
-{
-	/* now apply mobius */
-	double deno = c*tau_re+d;
-	deno = deno*deno + c*c*tau_im*tau_im;
-	deno = 1.0/deno;
-
-	tau_re = (a*tau_re+b)*(c*tau_re+d) + a*c*tau_re*tau_im;
-	*px = tau_re * deno;
-	*py = tau_im * deno;
-}
+#include "coord-xforms.h"
 
 long double erdos_series (long double re_q, long double im_q)
 {
@@ -239,21 +195,6 @@ MakeHisto (
 
 // #define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
-			/* First, make a map from q-series coords to the 
-			 * upper half-plane, then apply the mobius x-form, 
-			 * and then go back to the q-series coords */
-			double qre = re_c;
-			double qim = im_c;
-			double tau_im = -log (sqrt (qre*qre +qim*qim)) / (2.0*M_PI);
-			double tau_re = atan2 (qim, qre) /(2.0*M_PI);
-
-			/* now apply mobius */
-			mobius_xform (1, 0, 1, 1, tau_re, tau_im, &tau_re, &tau_im);
-			// mobius_xform (0, -1, 1, 0, tau_re, tau_im, &tau_re, &tau_im);
-
-			plane_to_qdisk_coords (tau_re, tau_im, &re_c, &im_c);
-
-#endif /* Q_SERIES_MOBIUS */
 
 			double tau_re, tau_im;
 			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
@@ -267,12 +208,13 @@ if (tau_re > 0.5) phi = 0.0;
 if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
 
 			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
+#endif /* Q_SERIES_MOBIUS */
 
 			// double phi = erdos_series (re_c, im_c);
 			// double phi = gee_2 (re_c, im_c);
 			// double phi = gee_3 (re_c, im_c);
 			// double phi = discriminant (re_c, im_c);
-			// double phi = klein_j (re_c, im_c);
+			double phi = klein_j (re_c, im_c);
 			// double phi = domain (re_c, im_c);
          glob [i*sizex +j] = phi;
 
