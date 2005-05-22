@@ -56,10 +56,10 @@ TOTIENT=../tools/lib/totient.o
 brat-beigen: brat.o brat-beigen.o util.o
 brat-gap-hair: brat.o brat-gap-hair.o util.o $(FAREY)
 brat-gapper: brat.o brat-gapper.o util.o $(FAREY) $(GCF)
-cutoff: brat.o cutoff.o util.o
+cutoff: brat.o cutoff.o coord-xforms.o util.o 
 elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o coord-xforms.o util.o $(MODULAR)
-euler-q: brat.o euler-q.o util.o $(MODULAR)
+euler-q: brat.o euler-q.o coord-xforms.o util.o $(MODULAR)
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
 swap: brat.o swap.o util.o
