@@ -62,8 +62,8 @@ mobius_xform (double a, double b, double c, double d,
 	deno = deno*deno + c*c*tau_im*tau_im;
 	deno = 1.0/deno;
 
-	tau_re = (a*tau_re+b)*(c*tau_re+d) + a*c*tau_re*tau_im;
+	tau_re = (a*tau_re+b)*(c*tau_re+d) + a*c*tau_im*tau_im;
 	*px = tau_re * deno;
-	*py = tau_im * deno;
+	*py = (a*d-b*c) * tau_im * deno;
 }
 

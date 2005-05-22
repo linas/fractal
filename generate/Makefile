@@ -31,6 +31,7 @@ clean:
 .o:
 	$(CC) -o $@ $^ -lm -lstdc++
 
+coord-xforms.o:	coord-xforms.h
 image.o: image.h util.h
 gap-tongue.o: image.h util.h
 man.o: image.h util.h
@@ -57,7 +58,7 @@ brat-gap-hair: brat.o brat-gap-hair.o util.o $(FAREY)
 brat-gapper: brat.o brat-gapper.o util.o $(FAREY) $(GCF)
 cutoff: brat.o cutoff.o util.o
 elliptic: brat.o elliptic.o util.o
-erdos: brat.o erdos.o util.o $(MODULAR)
+erdos: brat.o erdos.o coord-xforms.o util.o $(MODULAR)
 euler-q: brat.o euler-q.o util.o $(MODULAR)
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)

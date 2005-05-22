@@ -193,19 +193,21 @@ MakeHisto (
 			double re_c = re_position;
 			double im_c = im_position;
 
-// #define Q_SERIES_MOBIUS
+#define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
 
 			double tau_re, tau_im;
 			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
 
-			mobius_xform (1, 0, 1, 1, tau_re, tau_im, &tau_re, &tau_im);
-			// mobius_xform (1, 1, 0, 1, tau_re, tau_im, &tau_re, &tau_im);
+			mobius_xform (1, 0, 6, 1, tau_re, tau_im, &tau_re, &tau_im);
+			// mobius_xform (1, 7, 0, 1, tau_re, tau_im, &tau_re, &tau_im);
 			// mobius_xform (0, -1, 1, 0, tau_re, tau_im, &tau_re, &tau_im);
+#if 0
 double phi=1.0;
 if (tau_re < -0.5) phi = 0.0;
 if (tau_re > 0.5) phi = 0.0;
 if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
+#endif
 
 			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
 #endif /* Q_SERIES_MOBIUS */
