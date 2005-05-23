@@ -165,9 +165,10 @@ tau * sum_npp)));
 			 * and then go back to the q-series coords */
 
 			double tau_re, tau_im;
-			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+			// poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+			q_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
 
-			mobius_xform (1, 0, 4, 1, tau_re, tau_im, &tau_re, &tau_im);
+			mobius_xform (1, 0, 3, 1, tau_re, tau_im, &tau_re, &tau_im);
 			// mobius_xform (1, 7, 0, 1, tau_re, tau_im, &tau_re, &tau_im);
 			// mobius_xform (0, -1, 1, 0, tau_re, tau_im, &tau_re, &tau_im);
 
@@ -184,6 +185,10 @@ tau * sum_npp)));
 			re_c = xp;
 			im_c = yp;
 #endif /* MOBIUS */
+
+			/* A left-to-right inversion is needed to get the image in the
+			 * same coordinate frame as the q-series coords */
+			re_c = -re_c;
 
 #define CIRCLE_COORDS
 #ifdef CIRCLE_COORDS
