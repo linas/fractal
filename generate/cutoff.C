@@ -168,10 +168,17 @@ tau * sum_npp)));
 			// poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
 			q_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
 
-			mobius_xform (1, 0, 3, 1, tau_re, tau_im, &tau_re, &tau_im);
-			// mobius_xform (1, 7, 0, 1, tau_re, tau_im, &tau_re, &tau_im);
-			// mobius_xform (0, -1, 1, 0, tau_re, tau_im, &tau_re, &tau_im);
+			double a=1, b=0, c=3, d=1;
+			// double a=1, b=5, c=0, d=1;
+			// double a=0, b=-1, c=1, d=0;
+			mobius_xform (a,b,c,d, tau_re, tau_im, &tau_re, &tau_im);
 
+			double re_variance = c*tau_re+d;
+			double im_variance = c*tau_im;
+			double variance = re_variance*re_variance + im_variance*im_variance;
+			variance = sqrt (variance);
+
+// glob [i*sizex +j] = variance;
 			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
 #endif /* Q_SERIES_MOBIUS */
 
@@ -398,7 +405,7 @@ tau * sum_npp)));
 			 * This one subtracts divergence from modulus of zpp 
 			 * and goes to tau=0.
           * Here, we subtract the leading divergence 
-			 * after computing teh modulus, not before. 
+			 * after computing the modulus, not before. 
 			 * This is the one which looks to be a modular form of some kind.
 			 */
 
@@ -414,6 +421,7 @@ tau * sum_npp)));
          
          glob [i*sizex +j] = (modulus-tmp*sum_n);
          glob [i*sizex +j] -= tau* ((mp-tmp*sum_np) - 0.5 * tau * (mpp-tmp*sum_npp));
+glob [i*sizex +j] *= variance;
 #endif
 
 // #define COMPLEX_ZPP_MINUS_DIVERGENCE
