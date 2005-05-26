@@ -130,9 +130,18 @@ Note the modular group symmetry.
 \layout Standard
 
 Now consider the Mandelbrot set.
+ By means of a sequence of figures below, we shall uncover a structure inside
+ the Mandelbrot set that appears to be some kind of modular form.
+ 
 \layout Subsection
 
 Regulated Series 
+\layout Standard
+
+This section reviews the construction of a regulated series.
+ These series will be used to perform a kind of averaging over the values
+ of an iterated function; the asymptotic behaviour of an iterated function
+ may be studied in terms of these series.
 \layout Standard
 
 Consider the sequence 
@@ -948,7 +957,7 @@ Mandelbrot Interior
 
 \layout Standard
 
-The image below shows the finite piece in the main bulb, after the divergent
+The image above shows the finite piece in the main bulb, after the divergent
  piece has been subtracted.
  That is, it shows 
 \begin_inset Formula $\lim_{t\rightarrow0}\left|P_{c}(t)\right|-N(t)\left|(1/4-c)^{-3/2}/4\right|$
@@ -1252,8 +1261,153 @@ t with standard definitions of modular functions on the punctured disk.
  
 \layout Standard
 
-The problem with this mapping is subtle, and ever-so-slightly visible in
- the figure.
+Tha cardioid interior should be compared to the image of the Weierstrass
+ invariant 
+\begin_inset Formula $g_{2}$
+\end_inset 
+
+, shown in figure 
+\begin_inset LatexCommand \ref{cap:Weierstrass-invariant}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Weierstrass-invariant}
+
+\end_inset 
+
+Weierstrass invariant
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gee_two.jpeg
+
+\end_inset 
+
+
+\layout Standard
+
+An image of the the real part of the Weierstrass invariant 
+\begin_inset Formula $g_{2}$
+\end_inset 
+
+ expressed in 
+\begin_inset Formula $q$
+\end_inset 
+
+ coordinates.
+ This function can be written explicitly as 
+\begin_inset Formula \[
+g_{2}(\tau)=\frac{4\pi^{4}}{3}\left[1+240\sum_{k=1}^{\infty}\sigma_{3}(k)q^{2k}\right]\]
+
+\end_inset 
+
+ which can be rexpressed as a Lambert series 
+\begin_inset Formula \[
+g_{2}(\tau)=\frac{4\pi^{4}}{3}\left[1+240\sum_{k=1}^{\infty}\frac{k^{3}q^{2k}}{1-q^{2k}}\right]\]
+
+\end_inset 
+
+ This image uses a highly compressed logarithmic color scale adjusted to
+ resemble that used for the Mandelbrot interior.
+ Note tht the modulus of 
+\begin_inset Formula $g_{2}$
+\end_inset 
+
+does not show this lobe structure; the real and imaginary parts of this
+ function have complementary values.
+ Graphs of 
+\begin_inset Formula $g_{3}$
+\end_inset 
+
+ resemble this figure, as do those of higher terms in the Eisenstein series.
+ As one goes up the series, the number of lobes increases arithmetically.
+ For example, the above figure shows three red lobes; the comparable figure
+ for 
+\begin_inset Formula $g_{3}$
+\end_inset 
+
+ shows four lobes.
+ 
+\end_inset 
+
+
+\layout Standard
+
+By comparing the figures for the interior of the Mandelbrot set and the
+ Weierstrass elliptic invariant, the modular syummetry becomes painfully
+ appearent, even if not explicltly demonstrated.
+ There are several problems with an explcit demonstration, discussed below.
+\layout Standard
+
+The rank of the modular form can be read off the picture by lobe counting.
+ The picture of the Weierstrass invariant 
+\begin_inset Formula $g_{2}$
+\end_inset 
+
+ shows three red lobes; a comparable image of 
+\begin_inset Formula $g_{3}$
+\end_inset 
+
+ would show four lobes.
+ Since 
+\begin_inset Formula $g_{2}$
+\end_inset 
+
+ is a modular form of rank 2 and 
+\begin_inset Formula $g_{3}$
+\end_inset 
+
+ is a modular form of rank 3, then, based on lobe counting, one would want
+ to conclude that the interior is a modular function, that is, a form of
+ rank 0.
+ But this would not be right, as a simple application of a Mobius transform
+ shows that although the interior of the Mandelbrot seems to retain its
+ symmetry, the size of the lobe do change.
+ The function is somehow more subtle than that.
+\layout Standard
+
+Other problems:
+\layout Standard
+
+By construction, the function on the interior of the Mandelbrot set is a
+ real function.
+ To more fully explore the modular symmetry, we really need a complex function,
+ that is, a 
+\begin_inset Quotes eld
+\end_inset 
+
+real
+\begin_inset Quotes erd
+\end_inset 
+
+ part and an 
+\begin_inset Quotes eld
+\end_inset 
+
+imaginary
+\begin_inset Quotes erd
+\end_inset 
+
+ part.
+ Some work is needed to construct this.
+ 
+\layout Standard
+
+The other problem is that its not clear that this simple cardiod mapping
+ was the correct mapping.
+ The problem is subtle: is subtle, and ever-so-slightly visible in the figure.
  Each of the 
 \begin_inset Quotes eld
 \end_inset 
@@ -1263,15 +1417,19 @@ flames
 \end_inset 
 
  in the figure lean slightly over to the right.
- 
-\layout Standard
-
-next we apply conformal map to convert cardiod into circle so that we can
- directly compare.
- blah
+ Under Mobius transforms, this tilt is preserved, destroying the naive symmetry.
+ Its possible that the mapping from cardioid to q coordinates is not quire
+ right, and that some other, more complex mapping is required.
+ This is not clear at this point.
 \layout Subsection
 
 Numeric Techniques
+\layout Standard
+
+This section reviews the numeric techniques applied to perform the series
+ sums.
+ Specifically, some well-known techniques for series accelration are applied;
+ but these are not so well known as not to merit review.
 \layout Standard
 
 Note that the series explored on these pages can be slow to converge, especially
