@@ -158,7 +158,7 @@ tau * sum_npp)));
          ddim = 0.0;
          ddmod = 0.0;
 
-#define Q_SERIES_MOBIUS
+// xx #define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
 			/* First, make a map from q-series coords to the 
 			 * upper half-plane, then apply the mobius x-form, 
@@ -176,10 +176,11 @@ tau * sum_npp)));
 			double re_variance = c*tau_re+d;
 			double im_variance = c*tau_im;
 			double variance = re_variance*re_variance + im_variance*im_variance;
-			variance = sqrt (variance);
+			// variance = sqrt (variance);
 
 // glob [i*sizex +j] = variance;
 			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
+
 #endif /* Q_SERIES_MOBIUS */
 
 #ifdef CIRCLE_MOBIUS
@@ -193,18 +194,18 @@ tau * sum_npp)));
 			im_c = yp;
 #endif /* MOBIUS */
 
+#define CIRCLE_COORDS
+#ifdef CIRCLE_COORDS
 			/* A left-to-right inversion is needed to get the image in the
 			 * same coordinate frame as the q-series coords */
 			re_c = -re_c;
 
-#define CIRCLE_COORDS
-#ifdef CIRCLE_COORDS
 			double rr = sqrt(re_c*re_c + im_c*im_c);
 			double theta = atan2 (im_c, re_c);
 			theta /= M_PI;
 			re_c = theta;
 			im_c = rr;
-#endif CIRCLE_COORDS
+#endif /* CIRCLE_COORDS */
 
 #define FLATTEN_CARDIOID_MAP
 #ifdef FLATTEN_CARDIOID_MAP
@@ -421,7 +422,8 @@ tau * sum_npp)));
          
          glob [i*sizex +j] = (modulus-tmp*sum_n);
          glob [i*sizex +j] -= tau* ((mp-tmp*sum_np) - 0.5 * tau * (mpp-tmp*sum_npp));
-glob [i*sizex +j] *= variance;
+//glob [i*sizex +j] *= variance;
+//glob [i*sizex +j] = variance;
 #endif
 
 // #define COMPLEX_ZPP_MINUS_DIVERGENCE

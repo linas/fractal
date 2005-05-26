@@ -56,12 +56,12 @@ long double gee_2 (long double re_q, long double im_q)
 	gee_2_c (re_q, im_q, &rep, &imp);
 
 	// return sqrt (rep*rep+imp*imp);
-	// return rep;
+	return rep;
 	// return imp;
-	long double phase = atan2 (imp, rep);
-	phase += M_PI;
-	phase /= 2.0*M_PI;
-	return phase;
+	// long double phase = atan2 (imp, rep);
+	// phase += M_PI;
+	// phase /= 2.0*M_PI;
+	// return phase;
 }
 
 long double gee_3 (long double re_q, long double im_q)
@@ -193,7 +193,15 @@ MakeHisto (
 			double re_c = re_position;
 			double im_c = im_position;
 
-#define Q_SERIES_MOBIUS
+#ifdef POWER_SQRT
+			double mag = sqrt (re_c*re_c + im_c*im_c);
+			double arg = atan2 (im_c, re_c);
+			mag = sqrt (mag);
+			re_c = mag * cos (0.5*arg);
+			im_c = mag * sin (0.5*arg);
+#endif
+
+// #define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
 
 			double tau_re, tau_im;
@@ -213,10 +221,10 @@ if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
 #endif /* Q_SERIES_MOBIUS */
 
 			// double phi = erdos_series (re_c, im_c);
-			// double phi = gee_2 (re_c, im_c);
+			double phi = gee_2 (re_c, im_c);
 			// double phi = gee_3 (re_c, im_c);
 			// double phi = discriminant (re_c, im_c);
-			double phi = klein_j (re_c, im_c);
+			// double phi = klein_j (re_c, im_c);
 			// double phi = domain (re_c, im_c);
          glob [i*sizex +j] = phi;
 
