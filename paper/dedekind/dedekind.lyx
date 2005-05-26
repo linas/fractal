@@ -26,7 +26,7 @@
 
 \layout Title
 
-The Dedekind Eta and the Mandelbrot Set
+The Mandelbrot Set as a Modular Form
 \layout Author
 
 Linas Vepstas <linas@linas.org>
@@ -35,13 +35,26 @@ Linas Vepstas <linas@linas.org>
 2 January 2005 (revised 15 May 2005)
 \layout Abstract
 
-An exploration of the interior or the Mandelbrot Set and its relationship
- to the Dedekind eta function.
+An exploration of the interior or the Mandelbrot Set and the appearance
+ of functions appearing to be modular forms.
  This provides yet another example of the close interconnection between
- the structure of the Modular Group and fractals,and specifically connects
- modular forms to structures inside of the Mandelbrot set.
- Actually, itspropbably more like g_2, based on lobe-counting, I guess ...
- 
+ the structure of the Modular Group SL(2,Z) and fractals.
+ The relationship is demonstrated computationally and visually, and not
+ from first principles; visually, the interior closely resembles the Weierstass
+ elliptic invariant 
+\begin_inset Formula $g_{2}$
+\end_inset 
+
+.
+ The construction is based on averaging together iterated values with a
+ spectral-type summation, and then analysing the asymptotic behaviour of
+ the sum.
+ Leading dievergence are easy to explain and remove; the remaining finite
+ parts appear to have modular symmetry.
+\layout Abstract
+
+This is a work in progress.
+ A final conclusion and analysis has not been reached.
 \layout Abstract
 
 This paper is part of a set of chapters that explore the relationship between
@@ -79,7 +92,7 @@ Consider the Euler function
 \begin_inset Formula $\phi(q)$
 \end_inset 
 
- inside the unit circle 
+ inside the unit disk 
 \begin_inset Formula $|q|<1$
 \end_inset 
 
@@ -970,7 +983,7 @@ Remapping the Cardioid
 
 In order to proceed with the exploration of the interior of the Mandelbrot
  set as a modular form, we need to find a way of mapping the the cardioid
- to the complex upper half-plane or to the Poincare disk.
+ to the complex upper half-plane, the so-called the Poincare upper half-plane.
  Unfortunately, this is easier said than done.
  The problem lies with undoing a slight twist in the interior of the cardioid.
  This is best illustrated with figures.
@@ -1014,7 +1027,7 @@ is mapped to the interior of the cardioid.
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1059,7 +1072,12 @@ flames
 
  in this picture lean ever so slightly over to the right, rather than being
  completely vertical.
- 
+ The color scheme used is identical to that of the figure 
+\begin_inset LatexCommand \ref{cap:Mandelbrot-Interior}
+
+\end_inset 
+
+.
 \end_inset 
 
 
@@ -1085,14 +1103,153 @@ Circularized Cardioid
 \layout Standard
 
 The cardioid interior remapped to the circle 
-\begin_inset Formula $\rho e^{i\phi}$
+\begin_inset Formula $\rho e^{i\phi+i\pi}$
 \end_inset 
 
 .
  Bulbs on the exterior of the Mandelbrot set are also visible in this remapping.
+ The color scheme used is identical to that of the figure 
+\begin_inset LatexCommand \ref{cap:Mandelbrot-Interior}
+
+\end_inset 
+
+.
+ The additional factor of 
+\begin_inset Formula $e^{i\pi}$
+\end_inset 
+
+ merely left-right reflects the image.
 \end_inset 
 
 
+\layout Standard
+
+The linearized coordinates can be immediately remapped to a circle by using
+ the coordinates 
+\begin_inset Formula \[
+q=\rho e^{i\phi+i\pi}\]
+
+\end_inset 
+
+ where an extra factor of 
+\begin_inset Formula $-1$
+\end_inset 
+
+ is introduced to left-right reverse the image.
+ This extra flip is needed to bring the coordinate system precisely into
+ line with the Poincare punctured disk coordinates.
+ The punctured disk coordinates are sometimes refered to as the 
+\begin_inset Quotes eld
+\end_inset 
+
+nome
+\begin_inset Quotes erd
+\end_inset 
+
+ cordinates of elliptic geometry.
+ These are defined as follows.
+ Let 
+\begin_inset Formula $\tau=\omega_{2}/\omega_{1}$
+\end_inset 
+
+ be the so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+half-period ratio
+\begin_inset Quotes erd
+\end_inset 
+
+, where 
+\begin_inset Formula $\omega_{1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\omega_{2}$
+\end_inset 
+
+ are the periods of an ellptic function, such as the Weierstrass 
+\begin_inset Formula $\wp$
+\end_inset 
+
+function.
+ Then 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ is a coordinate on the upper half-plane, with 
+\begin_inset Formula $\Im\tau>0$
+\end_inset 
+
+.
+ The traditional 
+\begin_inset Quotes eld
+\end_inset 
+
+fundamental region
+\begin_inset Quotes erd
+\end_inset 
+
+ on the upper half-plane is defined as the region 
+\begin_inset Formula $-1/2<\Re\tau\le1/2$
+\end_inset 
+
+ and 
+\begin_inset Formula $|\tau|>1$
+\end_inset 
+
+.
+ This coordinate system on the uper half-plane can be mapped to the punctured
+ disk as 
+\begin_inset Formula \[
+q=e^{i\pi\tau}\]
+
+\end_inset 
+
+ with the word 
+\begin_inset Quotes eld
+\end_inset 
+
+puncture
+\begin_inset Quotes erd
+\end_inset 
+
+ refering to the fact that 
+\begin_inset Formula $q=0$
+\end_inset 
+
+ never occurs for finite values of 
+\begin_inset Formula $\tau$
+\end_inset 
+
+.
+ This mapping maps the upper half-plane to values of 
+\begin_inset Formula $|q|<1$
+\end_inset 
+
+.
+ The orientation of this mapping is specifically picked in order to be consisten
+t with standard definitions of modular functions on the punctured disk.
+ For example, the Euler phi-function, expressed in 
+\begin_inset Formula $q$
+\end_inset 
+
+ coordinates, is
+\layout Standard
+
+
+\begin_inset Formula \[
+\phi(q)=\prod_{k=1}^{\infty}(1-q^{k})\]
+
+\end_inset 
+
+ and is show in figure 
+\begin_inset LatexCommand \ref{cap:Euler-Function}
+
+\end_inset 
+
+.
+ 
 \layout Standard
 
 The problem with this mapping is subtle, and ever-so-slightly visible in
