@@ -8,7 +8,7 @@ LIB = $(TOP)/lib
 CC = /usr/bin/cc -O2 -I $(INC)
 
 
-EXES= ndist series
+EXES= buddy ndist series
 
 all: 	$(EXES)
 
@@ -28,6 +28,7 @@ dist:
 	$(CC) -o $* $^ -lm
 
 
+buddy:	buddy.o
 ndist:	ndist.o $(LIB)/gcf.o $(LIB)/totient.o
 series:	series.o divisor.o $(LIB)/gcf.o $(LIB)/moebius.o $(LIB)/totient.o
 

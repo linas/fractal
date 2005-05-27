@@ -24,46 +24,46 @@ void
 bud_sum (int sizex, int itermax)
 {
 	int		i,j;
-	double	re_start, delta;
-	double	re_position, im_position;
-	double	re, im, tmp, modulus=0.0;
-	double	dre, dim, dmod;
-	double	ddre, ddim, ddmod;
-	double	zpre, zpim, zppre, zppim;
+	long double	re_start, delta;
+	long double	re_position, im_position;
+	long double	re, im, tmp, modulus=0.0;
+	long double	dre, dim, dmod;
+	long double	ddre, ddim, ddmod;
+	long double	zpre, zpim, zppre, zppim;
 	int		loop;
-	double 	omod=0.0;
-	double 	escape_radius = 1.0e30;
-	double 	ren, tl;
-	double	tau;
-	double	*regulator, *rp, *rpp, *rppp, *rpppp;
-	double	sum_n, sum_np, sum_npp, sum_nppp, sum_npppp;
-	double	sum_re, sum_im, sum_mod;
-	double	sum_rep, sum_imp, sum_modp;
-	double	sum_repp, sum_impp, sum_modpp;
-	double	sum_dre, sum_dim, sum_dmod;
-	double	sum_ddre, sum_ddim, sum_ddmod;
-	double	sum_ddrep, sum_ddimp, sum_ddmodp;
-	double	sum_ddrepp, sum_ddimpp, sum_ddmodpp;
-	double	sum_zpre, sum_zpim, sum_zpmod;
-	double	sum_zppre, sum_zppim, sum_zppmod;
+	long double 	omod=0.0;
+	long double 	escape_radius = 1.0e30;
+	long double 	ren, tl;
+	long double	tau;
+	long double	*regulator, *rp, *rpp, *rppp, *rpppp;
+	long double	sum_n, sum_np, sum_npp, sum_nppp, sum_npppp;
+	long double	sum_re, sum_im, sum_mod;
+	long double	sum_rep, sum_imp, sum_modp;
+	long double	sum_repp, sum_impp, sum_modpp;
+	long double	sum_dre, sum_dim, sum_dmod;
+	long double	sum_ddre, sum_ddim, sum_ddmod;
+	long double	sum_ddrep, sum_ddimp, sum_ddmodp;
+	long double	sum_ddrepp, sum_ddimpp, sum_ddmodpp;
+	long double	sum_zpre, sum_zpim, sum_zpmod;
+	long double	sum_zppre, sum_zppim, sum_zppmod;
 
 	/* first, compute the regulator, so that the itermax'th iteration makes 
 	 * a negligable contribution (about 1e-30) */
-	tau = 16.0 / ((double) itermax);
+	tau = 16.0 / ((long double) itermax);
 
 	/* set up smooth ramp 
 	 * regulator is exponential, and rp is derivative w.r.t. tau,
 	 * rpp is second deriv. w.r.t. tau */
 	sum_n = sum_np = sum_npp = sum_nppp = sum_npppp = 0.0;
-	regulator = (double *) malloc ((itermax+1)*sizeof (double));
-	rp		  = (double *) malloc ((itermax+1)*sizeof (double));
-	rpp		 = (double *) malloc ((itermax+1)*sizeof (double));
-	rppp		= (double *) malloc ((itermax+1)*sizeof (double));
-	rpppp	  = (double *) malloc ((itermax+1)*sizeof (double));
+	regulator = (long double *) malloc ((itermax+1)*sizeof (long double));
+	rp		  = (long double *) malloc ((itermax+1)*sizeof (long double));
+	rpp		 = (long double *) malloc ((itermax+1)*sizeof (long double));
+	rppp		= (long double *) malloc ((itermax+1)*sizeof (long double));
+	rpppp	  = (long double *) malloc ((itermax+1)*sizeof (long double));
 
 	for (i=0; i<itermax; i++) 
 	{
-		tmp = - (double) (i*i);
+		tmp = - (long double) (i*i);
 		regulator[i] = exp (tmp * tau*tau);
 		rp[i] = 2.0 * tau * tmp * regulator[i];
 		rpp[i] = 2.0 * tmp * (regulator[i] + tau * rp[i]);
@@ -71,20 +71,20 @@ bud_sum (int sizex, int itermax)
 		sum_np += rp[i];
 		sum_npp += rpp[i];
 	}
-	printf ("# itermax=%d tau=%g 1/tau=%g sum_n=%g tau*sum_n=%g\n", 
+	printf ("# itermax=%d tau=%llg 1/tau=%llg sum_n=%llg tau*sum_n=%llg\n", 
 				itermax, tau, 1.0/tau, sum_n, tau*sum_n);
-	printf ("# sum_np=%g sum_npp=%g\n", sum_np, sum_npp);
-	printf ("#  n^2=%g 2n^3=%g\n", sum_n*sum_n, 2.0*sum_n*sum_n*sum_n);
-	printf ("#  n - tau* (np - 0.5 * tau * npp) = %g\n",  
+	printf ("# sum_np=%g sum_npp=%llg\n", sum_np, sum_npp);
+	printf ("#  n^2=%llg 2n^3=%llg\n", sum_n*sum_n, 2.0*sum_n*sum_n*sum_n);
+	printf ("#  n - tau* (np - 0.5 * tau * npp) = %llg\n",  
 	         sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
-	printf ("#  tau*(n - tau* (np - 0.5 * tau * npp)) = %g\n",  
+	printf ("#  tau*(n - tau* (np - 0.5 * tau * npp)) = %llg\n",  
 	         tau*(sum_n - tau* (sum_np - 0.5 * tau * sum_npp)));
 
 	ren = log( log (escape_radius)) / log(2.0);
 	tl = 1.0 / log(2.0);
 
 	/* start at the center of the bud which is at -1.0 */
-	delta = 0.25 / (double) sizex;
+	delta = 0.25 / (long double) sizex;
 	re_start = -1.0;
 	
 	im_position = 0.0;
@@ -102,8 +102,8 @@ bud_sum (int sizex, int itermax)
 		sum_zppre = sum_zppim = sum_zppmod = 0.0;
 		re = re_position;
 		im = im_position;
-		double re_c = re_position;
-		double im_c = im_position;
+		long double re_c = re_position;
+		long double im_c = im_position;
 		dre = 1.0;
 		dim = 0.0;
 		dmod = 0.0;
@@ -183,7 +183,7 @@ bud_sum (int sizex, int itermax)
 		 * bud to the west, its finite. */
 		modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
 
-		printf ("%d	%g	%g\n", j, re_position, modulus);
+		printf ("%d	%llg	%llg\n", j, re_position, modulus);
 
 		/* --------------------------------------------------------- */
 		re_position += delta;
@@ -192,7 +192,16 @@ bud_sum (int sizex, int itermax)
 
 int main (int argc, char * argv[])
 {
-	bud_sum (20, 20000);
+	if (3 > argc)
+	{
+		fprintf (stderr, "Usage: %s <npoints> <itermax>\n", argv[0]);
+		exit (1);
+	}
+
+	int npts = atoi (argv[1]);
+	int itermax = atoi (argv[2]);
+
+	bud_sum (npts, itermax);
 }
 
 /* --------------------------- END OF LIFE ------------------------- */
