@@ -194,8 +194,16 @@ bud_sum (int sizex, int itermax)
 
 		if (j != 0) modulus /= q*q*q*q*q*q;
 
+		sum_ddre -= 3.0;
+		sum_ddre -= 7.5*q;
+		sum_ddre -= 10.8*q*q;
+		sum_ddre -= 18.0*q*q*q;
+		sum_ddre -= 13.0*q*q*q*q;
+
+		if (j != 0) sum_ddre /= q*q*q*q*q;
+
 		printf ("%d	%llg	%llg	%llg\n", 
-			j, re_position, q, modulus);
+			j, re_position, q, sum_ddim);
 
 		/* --------------------------------------------------------- */
 		re_position += delta;
