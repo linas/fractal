@@ -71,6 +71,7 @@ bud_sum (int sizex, int itermax)
 		sum_np += rp[i];
 		sum_npp += rpp[i];
 	}
+	printf ("#\n# interior of mandelbrot bud\n#\n");
 	printf ("# itermax=%d tau=%llg 1/tau=%llg sum_n=%llg tau*sum_n=%llg\n", 
 				itermax, tau, 1.0/tau, sum_n, tau*sum_n);
 	printf ("# sum_np=%g sum_npp=%llg\n", sum_np, sum_npp);
@@ -183,7 +184,18 @@ bud_sum (int sizex, int itermax)
 		 * bud to the west, its finite. */
 		modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
 
-		printf ("%d	%llg	%llg\n", j, re_position, modulus);
+		long double q = 4.0L*(re_position+1.0L);
+		modulus -= 3.0 - 8.96e-06;
+		modulus -= 7.5 * q;
+		modulus -= 10.5*q*q;
+		modulus -= 20.5*q*q*q;
+		modulus -= 0.0*q*q*q*q;
+		modulus -= 65.0*q*q*q*q*q;
+
+		if (j != 0) modulus /= q*q*q*q*q*q;
+
+		printf ("%d	%llg	%llg	%llg\n", 
+			j, re_position, q, modulus);
 
 		/* --------------------------------------------------------- */
 		re_position += delta;
