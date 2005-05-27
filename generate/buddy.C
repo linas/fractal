@@ -23,18 +23,17 @@
  */
 
 void
-bud_sum (int itermax)
+bud_sum (int sizex, int itermax)
 {
-	int		i,j, globlen;
-	double	re_start, im_start, delta;
+	int		i,j;
+	double	re_start, delta;
 	double	re_position, im_position;
-	double	re, im, tmp, mod, modulus=0.0;
+	double	re, im, tmp, modulus=0.0;
 	double	dre, dim, dmod;
 	double	ddre, ddim, ddmod;
 	double	zpre, zpim, zppre, zppim;
-	double	mp, mpp;
 	int		loop;
-	double 	omod=0.0,  theta;
+	double 	omod=0.0;
 	double 	escape_radius = 1.0e30;
 	double 	ren, tl;
 	double	tau;
@@ -74,18 +73,19 @@ bud_sum (int itermax)
 		sum_np += rp[i];
 		sum_npp += rpp[i];
 	}
-	printf ("itermax=%d tau=%g 1/tau=%g sum_n=%g tau*sum_n=%g\n", 
+	printf ("# itermax=%d tau=%g 1/tau=%g sum_n=%g tau*sum_n=%g\n", 
 				itermax, tau, 1.0/tau, sum_n, tau*sum_n);
-	printf ("sum_np=%g sum_npp=%g\n", sum_np, sum_npp);
-	printf (" n^2=%g 2n^3=%g\n", sum_n*sum_n, 2.0*sum_n*sum_n*sum_n);
-	printf (" n - tau* (np - 0.5 * tau * npp) = %g\n",  sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
-	printf (" tau*(n - tau* (np - 0.5 * tau * npp)) = %g\n",  tau*(sum_n - tau* (sum_np - 0.5 *
-tau * sum_npp)));
+	printf ("# sum_np=%g sum_npp=%g\n", sum_np, sum_npp);
+	printf ("#  n^2=%g 2n^3=%g\n", sum_n*sum_n, 2.0*sum_n*sum_n*sum_n);
+	printf ("#  n - tau* (np - 0.5 * tau * npp) = %g\n",  
+	         sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+	printf ("#  tau*(n - tau* (np - 0.5 * tau * npp)) = %g\n",  
+	         tau*(sum_n - tau* (sum_np - 0.5 * tau * sum_npp)));
 
 	ren = log( log (escape_radius)) / log(2.0);
 	tl = 1.0 / log(2.0);
 
-	int sizex = 100;
+	/* start at the center of the bud which is at -1.0 */
 	delta = 0.25 / (double) sizex;
 	re_start = -1.0;
 	
@@ -185,9 +185,16 @@ tau * sum_npp)));
 		 * bud to the west, its finite. */
 		modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
 
+		printf ("%d	%g	%g\n", j, re_position, modulus);
+
 		/* --------------------------------------------------------- */
 		re_position += delta;
 	}
+}
+
+int main (int argc, char * argv[])
+{
+	bud_sum (20, 20000);
 }
 
 /* --------------------------- END OF LIFE ------------------------- */
