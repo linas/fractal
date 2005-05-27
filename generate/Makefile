@@ -14,7 +14,7 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert cutoff
 
-all:    buddy cutoff elliptic erdos euler-q mand-flow \
+all:    cutoff elliptic erdos euler-q mand-flow \
         mobius swap totient  \
         ray automatic radius brat draw dx image
 
@@ -64,8 +64,6 @@ mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
 swap: brat.o swap.o util.o
 totient: brat.o totient.o util.o $(GCF) $(TOTIENT)
-
-buddy: buddy.o
 
 manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o $(FAREY)
 	$(CC) -o brat brat.o util.o -lm -lstdc++
