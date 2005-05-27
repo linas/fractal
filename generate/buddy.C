@@ -1,5 +1,5 @@
 /*
- * cutoff.C
+ * buddy.C
  *
  * FUNCTION:
  * Explore spectral analysis of the interior of the Mandelbrot set
@@ -18,32 +18,6 @@
 #include "brat.h"
 #include "coord-xforms.h"
 
-/* return real part of mobius x-form on the poincare disk */
-static inline double 
-remob (double a, double b, double c, double d, double x, double y)
-{
-	double nr = (a+d)*x + (c-b)*y +b+c;
-	double ni = (b-c)*x + (a+d)*y +a-d;
-	double dr = (b+c)*x + (a-d)*y +a+d;
-	double di = (d-a)*x + (b+c)*y +c-b;
-
-	double rem = (nr*dr + ni*di) / (dr*dr+di*di);
-	return rem;
-}
-              
-/* return imaginary part of mobius x-form on the poincare disk */
-static inline double 
-immob (double a, double b, double c, double d, double x, double y)
-{
-	double nr = (a+d)*x + (c-b)*y +b+c;
-	double ni = (b-c)*x + (a+d)*y +a-d;
-	double dr = (b+c)*x + (a-d)*y +a+d;
-	double di = (d-a)*x + (b+c)*y +c-b;
-
-	double imm = (ni*dr - nr*di) / (dr*dr+di*di);
-	return imm;
-}
-              
 /* The following is the set of defines needed to be enabled to
  * get the flattening of the main cardioid into q-disk coords to work.
  */
@@ -141,8 +115,6 @@ tau * sum_npp)));
    for (i=0; i<globlen; i++) glob [i] = 0.0;
    
 
-// sizey=1;
-// im_start=0.0;
    im_position = im_start;
    for (i=0; i<sizey; i++) {
       if (i%10==0) printf(" start row %d\n", i);
@@ -168,31 +140,6 @@ tau * sum_npp)));
          ddim = 0.0;
          ddmod = 0.0;
 
-#define Q_SERIES_MOBIUS
-#ifdef Q_SERIES_MOBIUS
-			/* First, make a map from q-series coords to the 
-			 * upper half-plane, then apply the mobius x-form, 
-			 * and then go back to the q-series coords */
-
-			double tau_re, tau_im;
-			// poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
-			q_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
-
-			double a=1, b=0, c=1, d=1;
-			// double a=1, b=5, c=0, d=1;
-			// double a=0, b=-1, c=1, d=0;
-			mobius_xform (a,b,c,d, tau_re, tau_im, &tau_re, &tau_im);
-
-			double re_variance = c*tau_re+d;
-			double im_variance = c*tau_im;
-			double variance = re_variance*re_variance + im_variance*im_variance;
-			// variance = sqrt (variance);
-
-// glob [i*sizex +j] = variance;
-			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
-
-#endif /* Q_SERIES_MOBIUS */
-
 #define CIRCLE_TO_BUD
 #ifdef CIRCLE_TO_BUD
 			/* Map a unit disk centered at origin to the main bud
@@ -201,69 +148,6 @@ tau * sum_npp)));
 			im_c *= 0.25;
 			re_c -= 1.0;
 #endif /* CIRCLE_TO_BUD */
-
-#ifdef POINCARE_CIRCLE_MOBIUS
-			/* This is the mobius map for the poincare disk, which is 
-			 * incorrect for the punctured disk aka q-series disk */
-			double a,b,c,d;
-			a = 1; b=1; c=0; d=1;
-			double xp = remob (a,b,c,d, re_c, im_c);
-			double yp = immob (a,b,c,d, re_c, im_c);
-			re_c = xp;
-			im_c = yp;
-#endif /* MOBIUS */
-
-//xx #define CIRCLE_COORDS
-#ifdef CIRCLE_COORDS
-			/* This map takes a circle and maps it to a rectangle,
-			 * i.e. radius-theta coords, needed as input to cardioid */
-
-			/* A left-to-right inversion is needed to get the image in the
-			 * same coordinate frame as the q-series coords */
-			re_c = -re_c;
-
-			double rr = sqrt(re_c*re_c + im_c*im_c);
-			double theta = atan2 (im_c, re_c);
-			theta /= M_PI;
-			re_c = theta;
-			im_c = rr;
-#endif /* CIRCLE_COORDS */
-
-//xx #define FLATTEN_CARDIOID_MAP
-#ifdef FLATTEN_CARDIOID_MAP
-         /* Map to cardiod lam(1-lam) 
-			 * Input to this thing is assumed to be a ractangle, 
-			 * going from x= -1.0 to 1.0 and y= 0 to 1
-			 * which gets mapped to cardiod with y=1 at the edge,
-			 * and x=0 at the left side of cardioid
-			 */
-         double r = -im_c;
-         double phi = M_PI*re_c;
-
-         /* works pretty well
-         r *= r;
-         r = 1.0 + (r-1.0)*sin(0.5*phi)*sin(0.5*phi);
-         */
-         // r -= 1.0;
-         // r *= sin(0.5*phi)*sin(0.5*phi);
-         // r *= (0.5*phi)*sin(0.5*phi);
-         // r *= (0.5*phi)* (0.5*phi);
-        
-         // r += 1.0;
-         re_c = 0.5 * r * (cos (phi) - 0.5 * r * cos (2.0*phi));
-         im_c = 0.5 * r * (sin (phi) - 0.5 * r * sin (2.0*phi));
-#endif /* FLATTEN_CARDIOID_MAP */
-
-#ifdef ALT_FLATTEN_DOESNT_WORK_AT_ALL
-         double r = im_position;
-         double phi = M_PI*re_position;
-
-			r *= 1.0- cos(phi);
-
-			re_c = 0.25+ r*cos(phi);
-			im_c = r*sin(phi);
-
-#endif /* ALT_FLATTEN */
 
 			re = re_c;
 			im = im_c;
@@ -332,19 +216,6 @@ tau * sum_npp)));
             if (modulus > escape_radius*escape_radius) break;
          }    
 
-#if MISC_SIMPLE_THINGS
-         modulus = sqrt (modulus);
-         modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
-         frac = log (log (modulus)) * tl;
-
-         glob [i*sizex +j] = modulus / sum_n;
-         glob [i*sizex +j] = sum_mod / sum_n;
-         glob [i*sizex +j] = sum_mod - modulus;
-
-          /* the following computes an almost-flat, divergence free thing */
-         glob [i*sizex +j] = modulus / sum_n;
-         glob [i*sizex +j] /= (sqrt (re_position*re_position+im_position*im_position));
-#endif
 
 #define PLAIN_Z_PRIME_PRIME
 #ifdef PLAIN_Z_PRIME_PRIME
@@ -355,234 +226,6 @@ tau * sum_npp)));
          glob [i*sizex +j] = modulus;
 #endif
 
-#ifdef PLAIN_Z_PRIME_PRIME_NORMALIZED
-         /* --------------------------------------------------------- */
-         /* the interesting one is the z-prime-prime */
-         modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
-         glob [i*sizex +j] = modulus / sum_n;
-         // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
-#endif
-
-#ifdef ZPRIME_PRIME_DIVERGENT_PART
-         /* --------------------------------------------------------- */
-         /* the interesting one is the z-prime-prime */
-			/* This one does zpp/N i.e. the normalized divergent part */
-         /* here we use a taylor expansion to extrapolate to tau=0 */
-			/* This one extrapolates zpp/norm and thus can show only 
-			 * divergent term */
-
-         /* first, we need the derivatives of modulus w.r.t tau */
-         modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
-         mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
-         mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
-         mpp += sum_ddimp * sum_ddimp + sum_ddim * sum_ddimpp - mp*mp;
-         mpp /= modulus;
-         
-         /* next, we need derivatives of m/n w.r.t tau */
-         mod = modulus / sum_n;
-         dmod = (mp - mod * sum_np) / sum_n;
-         ddmod = (mpp - 2.0 * dmod * sum_np - mod * sum_npp) / sum_n;
-
-         /* finally the taylor expansion */
-         glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
-
-         // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
-#endif
-
-
-#ifdef PLAIN_OLD_Z_NORMALIZED_DIVERGENCE_FREE
-         /* --------------------------------------------------------- */
-         /* OK, lets do the taylor expansion for just-plain Z */
-         /* here we use a taylor expansion to extrapolate to tau=0 */
-			/* this takes sum/normalization then subtracts fitted term. 
-			 * The resulting image should be identically zero; there should be
-			 * nothing left. */
-
-         /* first, we need the drerivatives of modulus w.r.t tau */
-         modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
-         mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
-         mpp  = sum_rep * sum_rep + sum_re * sum_repp;
-         mpp += sum_imp * sum_imp + sum_im * sum_impp - mp*mp;
-         mpp /= modulus;
-         
-         /* next, we need derivatives of m/n w.r.t tau */
-         mod = modulus / sum_n;
-         dmod = (mp - mod * sum_np) / sum_n;
-         ddmod = (mpp - 2.0 * dmod * sum_np - mod * sum_npp) / sum_n;
-
-         /* finally the taylor expansion for the normalized sum */
-         glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
-// printf ("%9.6g	%9.6g	%9.6g\n", re_position, glob[i*sizex+j], mod);
-
-         /* ok, this part should be the divergent part ... */
-         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
-         mod = pow (mod, 0.25);
-         re = - mod * cos(theta);
-         im = - mod * sin(theta);
-
-         re += 0.5;
-         tmp = sqrt(re*re+im*im);
-         if (0.5 < tmp) tmp = 0.5;
-
-         glob [i*sizex +j] -= tmp;
-
-#endif
-
-// xx #define ZPP_MODULUS_DIVERGENCE_FREE
-#ifdef ZPP_MODULUS_DIVERGENCE_FREE
-         /* --------------------------------------------------------- */
-         /* The interesting one is the z-prime-prime.
-			 * This one subtracts divergence from modulus of zpp 
-			 * and goes to tau=0.
-          * Here, we subtract the leading divergence 
-			 * after computing the modulus, not before. 
-			 * This is the one which looks to be a modular form of some kind.
-			 */
-
-         modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
-         mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
-         mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
-         mpp += sum_ddimp * sum_ddimp + sum_ddim * sum_ddimpp - mp*mp;
-         mpp /= modulus;
-         
-         /* finally the taylor expansion */
-         /* subtract the main-body divergence */
-         tmp = 0.25 * exp( -0.75 * log((re_c-0.25)*(re_c-0.25)+im_c*im_c));
-         
-         glob [i*sizex +j] = (modulus-tmp*sum_n);
-         glob [i*sizex +j] -= tau* ((mp-tmp*sum_np) - 0.5 * tau * (mpp-tmp*sum_npp));
-//glob [i*sizex +j] *= variance;
-//glob [i*sizex +j] = variance;
-#endif
-
-// #define COMPLEX_ZPP_MINUS_DIVERGENCE
-#ifdef COMPLEX_ZPP_MINUS_DIVERGENCE
-         /* --------------------------------------------------------- */
-         /* The interesting one is the z-prime-prime */
-			/* This one subtracts divergence from zpp before taking modulus */
-			/* Unfortunately, it seems to be mostly crud */
-
-         /* The taylor expansion */
-			double zre = sum_ddre - tau *(sum_ddrep - 0.5 * tau *sum_ddrepp);
-			double zim = sum_ddim - tau *(sum_ddimp - 0.5 * tau *sum_ddimpp);
-
-			/* Divergence term == 0.25/ (0.25-c)^3/2  */
-         theta = -1.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
-         mod = 0.25 * pow (mod, -0.75);
-         re = mod * cos(theta);
-         im = mod * sin(theta);
-
-         zre -= re * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
-         zim -= im * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
-
-         modulus = sqrt (zre*zre + zim*zim);
-
-         glob [i*sizex +j] = modulus;
-#endif
-
-// #define PLAIN_OLD_MODULUS_Z_MINUS_DIVERGENCE
-#ifdef PLAIN_OLD_MODULUS_Z_MINUS_DIVERGENCE
-         /* --------------------------------------------------------- */
-         /* OK, lets do the taylor expansion for just-plain modulus of Z */
-			/* Perform the tau expanstion to extrapolate */
-         /* here, we subtract the leading divergence */
-         modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
-         mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
-         mpp  = sum_rep * sum_rep + sum_re * sum_repp;
-         mpp += sum_imp * sum_imp + sum_im * sum_impp - mp*mp;
-         mpp /= modulus;
-         
-         /* finally the taylor expansion */
-         glob [i*sizex +j] = modulus - tau* (mp - 0.5 * tau * mpp);
-
-			/* Divergence term == 1/2 - sqrt (1/4-c)  */
-         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
-         mod = pow (mod, 0.25);
-         re = - mod * cos(theta);
-         im = - mod * sin(theta);
-
-         re += 0.5;
-         tmp = sqrt(re*re+im*im);
-
-			/* Fix to make it at 1/2 on the large left bulb */
-         if (0.5 < tmp) tmp = 0.5;
-
-         glob [i*sizex +j] -= tmp * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
-#endif
-
-// #define COMPLEX_Z_MINUS_DIVERGENCE
-#ifdef COMPLEX_Z_MINUS_DIVERGENCE
-         /* --------------------------------------------------------- */
-         /* OK, lets do the taylor expansion for just-plain Z in full complex glory */
-			/* That is do it for z and not for the modulus */
-			/* Perform the tau expanstion to extrapolate */
-         /* here, we subtract the leading divergence */
-         
-         /* Now the taylor expansion */
-			double zre = sum_re - tau *(sum_rep - 0.5 * tau *sum_repp);
-			double zim = sum_im - tau *(sum_imp - 0.5 * tau *sum_impp);
-
-			/* Divergence term == 1/2 - sqrt (1/4-c)  */
-         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
-         mod = pow (mod, 0.25);
-         re = - mod * cos(theta);
-         im = - mod * sin(theta);
-         re += 0.5;
-
-			/* Fix to make it at 1/2 on the large left bulb */
-         tmp = sqrt(re*re+im*im);
-         if (0.5 < tmp) { re = -0.5; im = 0.0; }
-
-         zre -= re * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
-         zim -= im * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
-
-         modulus = sqrt (zre*zre + zim*zim);
-
-         glob [i*sizex +j] = modulus;
-#endif
-
-#if WHATEVER
-         /* --------------------------------------------------------- */
-         /* the interesting one is the z-prime-prime */
-         /* here we use a taylor expansion to extrapolate to tau=0 */
-         /* first, we need the derivatives of modulus w.r.t tau */
-         /* we compute the phase */
-         phi = atan2 (sum_ddim, sum_ddre);
-         modulus = 1.0 / sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
-         phip = (sum_ddre * sum_ddimp - sum_ddrep * sum_ddim) * modulus;
-         phipp = (sum_ddre * sum_ddimp - sum_ddrep * sum_ddim) * modulus;
-         phipp *=  -2.0* (sum_ddre * sum_ddrep + sum_ddim * sum_ddimp) * modulus;
-         phipp += (sum_ddre * sum_ddimpp - sum_ddrepp * sum_ddim) * modulus;
-
-         glob [i*sizex +j] = (phi + M_PI)/(2.0*M_PI);
-         // glob [i*sizex +j] = (phi - tau* (phip - 0.5 * tau * phipp) +M_PI)/(2.0*M_PI);
-
-         theta = -1.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
-         mod = pow (mod, -0.75);
-         re = 0.25 * mod * cos(theta);
-         im = 0.25 * mod * sin(theta);
-
-         glob [i*sizex +j] =  (sum_ddre/sum_n-re)*(sum_ddre/sum_n-re);
-         glob [i*sizex +j] += (sum_ddim/sum_n-im)*(sum_ddim/sum_n-im);
-         glob [i*sizex +j] = sqrt (glob[i*sizex+j]);
-
-         /* --------------------------------------------------------- */
-         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
-         mod = pow (mod, 0.25);
-         re = - mod * cos(theta);
-         im = - mod * sin(theta);
-
-         re += re_position;
-         im += im_position;
-
-         glob [i*sizex +j] =  sqrt (re*re +im*im);
-#endif
          /* --------------------------------------------------------- */
          re_position += delta;
       }
