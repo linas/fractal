@@ -168,7 +168,7 @@ tau * sum_npp)));
          ddim = 0.0;
          ddmod = 0.0;
 
-#define Q_SERIES_MOBIUS
+// #define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
 			/* First, make a map from q-series coords to the 
 			 * upper half-plane, then apply the mobius x-form, 
@@ -351,8 +351,38 @@ tau * sum_npp)));
          /* --------------------------------------------------------- */
          /* The interesting one is the z-prime-prime. In the main 
 			 * bud to the west, its finite. */
+
+         // modulus -= 3.0;
+         // modulus -= 7.5*q;
+         // modulus -= 10.5*q*q;
+         // modulus -= 20.5*q*q*q;
+         // modulus -= 0.0*q*q*q*q;
+         // modulus -= 65.0*q*q*q*q*q;
+
+         sum_ddre -= 3.0;
+			double qre = 4.0*(re_c+1.0);
+			double qim = 4.0*im_c;
+         sum_ddre -= 7.5 * qre;
+         sum_ddim -= 7.5 * qim;
+
+			double q2re = qre*qre - qim*qim;
+			double q2im = 2.0*qre*qim;
+
+         sum_ddre -= 10.8 * q2re;
+         sum_ddim -= 10.8 * q2im;
+
+			double q3re = q2re*qre - q2im*qim;
+			double q3im = q2re*qim + qre*q2im;
+
+         sum_ddre -= 19.0 * q3re;
+         sum_ddim -= 19.0 * q3im;
+
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
+         glob [i*sizex +j] = sum_ddim;
+         glob [i*sizex +j] = sum_ddre;
          glob [i*sizex +j] = modulus;
+			
+
 #endif
 
 #ifdef PLAIN_Z_PRIME_PRIME_NORMALIZED
