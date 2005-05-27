@@ -83,6 +83,18 @@ double klein_j (double re_q, double im_q)
 	double rep, imp;
 	klein_j_invariant_c (re_q, im_q, &rep, &imp);
 
+#define POWER_OF
+#ifdef POWER_OF
+	double xponent = 2.0;
+	double mag = sqrt (rep*rep + imp*imp);
+	double arg = atan2 (imp, rep);
+	mag = pow (mag, xponent);
+	double rez = mag * cos (xponent*arg);
+	double imz = mag * sin (xponent*arg);
+
+	rep = rez - 2.0*rep;
+	imp = imz - 2.0*imp;
+#endif
 	return sqrt (rep*rep+imp*imp);
 	// return rep;
 	// return imp;
@@ -221,10 +233,10 @@ if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
 #endif /* Q_SERIES_MOBIUS */
 
 			// double phi = erdos_series (re_c, im_c);
-			double phi = gee_2 (re_c, im_c);
+			// double phi = gee_2 (re_c, im_c);
 			// double phi = gee_3 (re_c, im_c);
 			// double phi = discriminant (re_c, im_c);
-			// double phi = klein_j (re_c, im_c);
+			double phi = klein_j (re_c, im_c);
 			// double phi = domain (re_c, im_c);
          glob [i*sizex +j] = phi;
 
