@@ -168,7 +168,7 @@ tau * sum_npp)));
          ddim = 0.0;
          ddmod = 0.0;
 
-// #define Q_SERIES_MOBIUS
+#define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
 			/* First, make a map from q-series coords to the 
 			 * upper half-plane, then apply the mobius x-form, 
@@ -178,15 +178,27 @@ tau * sum_npp)));
 			// poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
 			q_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
 
-			double a=1, b=0, c=1, d=1;
+			double a=1, b=0, c=3, d=1;
 			// double a=1, b=5, c=0, d=1;
 			// double a=0, b=-1, c=1, d=0;
 			mobius_xform (a,b,c,d, tau_re, tau_im, &tau_re, &tau_im);
 
-			double re_variance = c*tau_re+d;
-			double im_variance = c*tau_im;
-			double variance = re_variance*re_variance + im_variance*im_variance;
-			// variance = sqrt (variance);
+			/* compute the modular scaling factor */
+			double re_var = c*tau_re+d;
+			double im_var = c*tau_im;
+			double var = re_var*re_var + im_var*im_var;
+
+			double re_2v = re_var*re_var - im_var*im_var;
+			double im_2v = 2.0 * re_var* im_var;
+
+			double re_iv = re_var / var;
+			double im_iv = -im_var / var;
+
+			double theta = atan2 (im_var, re_var);
+			// theta += 0.5*M_PI;
+			double sca = -0.5;
+			double re_sca = pow (var, 0.5*sca) * cos (sca*theta);
+			double im_sca = pow (var, 0.5*sca) * sin (sca*theta);
 
 // glob [i*sizex +j] = variance;
 			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
@@ -352,6 +364,7 @@ tau * sum_npp)));
          /* The interesting one is the z-prime-prime. In the main 
 			 * bud to the west, its finite. */
 
+#ifdef LEADING_TERMS
          // modulus -= 3.0;
          // modulus -= 7.5*q;
          // modulus -= 10.5*q*q;
@@ -376,13 +389,22 @@ tau * sum_npp)));
 
          sum_ddre -= 19.0 * q3re;
          sum_ddim -= 19.0 * q3im;
+#endif /* LEADING_TERMS */
 
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          glob [i*sizex +j] = sum_ddim;
-         glob [i*sizex +j] = sum_ddre;
          glob [i*sizex +j] = modulus;
-			
+         glob [i*sizex +j] = sum_ddre;
 
+         glob [i*sizex +j] = sum_ddre*re_2v - sum_ddim*im_2v;
+         glob [i*sizex +j] = sum_ddre*re_var - sum_ddim*im_var;
+         glob [i*sizex +j] = sum_ddre*re_iv - sum_ddim*im_iv;
+         glob [i*sizex +j] = sum_ddre*re_sca - sum_ddim*im_sca;
+
+         double rem = sum_ddre*re_sca - sum_ddim*im_sca;
+         double imm = sum_ddre*im_sca + sum_ddim*re_sca;
+         modulus = sqrt (rem*rem + imm*imm);
+         glob [i*sizex +j] = modulus;
 #endif
 
 #ifdef PLAIN_Z_PRIME_PRIME_NORMALIZED
