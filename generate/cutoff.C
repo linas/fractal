@@ -56,12 +56,12 @@ immob (double a, double b, double c, double d, double x, double y)
 #define COMPLEX_ZPP_MINUS_DIVERGENCE
 #endif
 
-#define COMPLEX_ZPP_MINUS_DIVERGENCE
-
 /* The following sets up the complex divisor-sum-like thingy
  * in the main bud. 
  */
+#define BUD_COMPLEX_FORM
 #ifdef BUD_COMPLEX_FORM
+#define Q_SERIES_MOBIUS
 #define CIRCLE_TO_BUD
 #define PLAIN_Z_PRIME_PRIME
 #endif
@@ -185,15 +185,30 @@ MakeHisto (
 			/* First, make a map from q-series coords to the 
 			 * upper half-plane, then apply the mobius x-form, 
 			 * and then go back to the q-series coords */
-
 			double tau_re, tau_im;
-			// poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
-			q_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
 
-			double a=1, b=0, c=3, d=1;
-			// double a=1, b=5, c=0, d=1;
-			// double a=0, b=-1, c=1, d=0;
+			double mod = re_c*re_c + im_c*im_c;
+			double ngle = atan2 (im_c, re_c);
+			// angle += 0.5*M_PI;
+			double scal = 0.5;
+			re_c = pow (mod, 0.5*scal) * cos (scal*ngle);
+			im_c = pow (mod, 0.5*scal) * sin (scal*ngle);
+
+#ifdef ROT
+			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+			double a=1, b=0, c=-1, d=1;
 			mobius_xform (a,b,c,d, tau_re, tau_im, &tau_re, &tau_im);
+			plane_to_poincare_disk_coords (tau_re, tau_im, &re_c, &im_c);
+#endif
+
+			// poincare_disk_to_plane_coords (-im_c, re_c, &tau_re, &tau_im);
+			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+			// q_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+
+			double a=1, b=0, c=1, d=1;
+			// double a=1, b=15, c=0, d=1;
+			// double a=0, b=-1, c=1, d=0;
+			// mobius_xform (a,b,c,d, tau_re, tau_im, &tau_re, &tau_im);
 
 			/* compute the modular scaling factor */
 			double re_var = c*tau_re+d;
@@ -212,8 +227,8 @@ MakeHisto (
 			double re_sca = pow (var, 0.5*sca) * cos (sca*angle);
 			double im_sca = pow (var, 0.5*sca) * sin (sca*angle);
 
-// glob [i*sizex +j] = variance;
 			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
+			// plane_to_poincare_disk_coords (tau_re, tau_im, &re_c, &im_c);
 
 #endif /* Q_SERIES_MOBIUS */
 
@@ -405,6 +420,7 @@ MakeHisto (
 
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
 
+// #define MODULAR_FORM_CORRECTIONS
 #ifdef MODULAR_FORM_CORRECTIONS
          glob [i*sizex +j] = sum_ddim;
          glob [i*sizex +j] = modulus;
@@ -421,6 +437,8 @@ MakeHisto (
 #endif /* MODULAR_FORM_CORRECTIONS */
 
          glob [i*sizex +j] = modulus;
+         glob [i*sizex +j] = fabs(sum_ddim);
+         glob [i*sizex +j] = sum_ddre;
 #endif
 
 #ifdef PLAIN_Z_PRIME_PRIME_NORMALIZED
@@ -546,6 +564,20 @@ MakeHisto (
 
          modulus = sqrt (zre*zre + zim*zim);
 
+         glob [i*sizex +j] = zre;
+
+#define MODULAR_FORM_CORRECTIONS
+#ifdef MODULAR_FORM_CORRECTIONS
+         glob [i*sizex +j] = zre*re_2v - zim*im_2v;
+         glob [i*sizex +j] = zre*re_var - zim*im_var;
+         glob [i*sizex +j] = zre*re_iv - zim*im_iv;
+         glob [i*sizex +j] = zre*re_sca - zim*im_sca;
+
+         double rem = zre*re_sca - zim*im_sca;
+         double imm = zre*im_sca + zim*re_sca;
+         modulus = sqrt (rem*rem + imm*imm);
+         glob [i*sizex +j] = modulus;
+#endif /* MODULAR_FORM_CORRECTIONS */
          glob [i*sizex +j] = modulus;
 #endif
 
