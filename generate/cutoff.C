@@ -47,11 +47,21 @@ immob (double a, double b, double c, double d, double x, double y)
 /* The following is the set of defines needed to be enabled to
  * get the flattening of the main cardioid into q-disk coords to work.
  */
+#define MAIN_CARDIOID_MODULAR_FORM
 #ifdef MAIN_CARDIOID_MODULAR_FORM
-#define Q_SERIES_MOBIUS
+// #define Q_SERIES_MOBIUS
 #define CIRCLE_COORDS
 #define FLATTEN_CARDIOID_MAP
-#define ZPP_MODULUS_DIVERGENCE_FREE
+// #define ZPP_MODULUS_DIVERGENCE_FREE
+#define COMPLEX_ZPP_MINUS_DIVERGENCE
+#endif
+
+/* The following sets up the complex divisor-sum-like thingy
+ * in the main bud. 
+ */
+#ifdef BUD_COMPLEX_FORM
+#define CIRCLE_TO_BUD
+#define PLAIN_Z_PRIME_PRIME
 #endif
 
 /*-------------------------------------------------------------------*/
@@ -79,9 +89,8 @@ MakeHisto (
    double	dre, dim, dmod;
    double	ddre, ddim, ddmod;
    double	zpre, zpim, zppre, zppim;
-   double	mp, mpp;
    int		loop;
-   double 	omod=0.0,  theta;
+   double 	omod=0.0;
    double 	escape_radius = 1.0e30;
    double 	ren, tl;
    double	tau;
@@ -121,18 +130,19 @@ MakeHisto (
       sum_np += rp[i];
       sum_npp += rpp[i];
    }
-   printf ("itermax=%d tau=%g 1/tau=%g sum_n=%g tau*sum_n=%g\n", 
+	printf ("#\n#interiopr of mandelbrot\n#\n");
+   printf ("# itermax=%d tau=%g 1/tau=%g sum_n=%g tau*sum_n=%g\n", 
             itermax, tau, 1.0/tau, sum_n, tau*sum_n);
-   printf ("sum_np=%g sum_npp=%g\n", sum_np, sum_npp);
-   printf (" n^2=%g 2n^3=%g\n", sum_n*sum_n, 2.0*sum_n*sum_n*sum_n);
-	printf (" n - tau* (np - 0.5 * tau * npp) = %g\n",  sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
-	printf (" tau*(n - tau* (np - 0.5 * tau * npp)) = %g\n",  tau*(sum_n - tau* (sum_np - 0.5 *
-tau * sum_npp)));
+   printf ("# sum_np=%g sum_npp=%g\n", sum_np, sum_npp);
+   printf ("#  n^2=%g 2n^3=%g\n", sum_n*sum_n, 2.0*sum_n*sum_n*sum_n);
+	printf ("#  n - tau* (np - 0.5 * tau * npp) = %g\n",  
+	         sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
+	printf ("#  tau*(n - tau* (np - 0.5 * tau * npp)) = %g\n",  
+	         tau*(sum_n - tau* (sum_np - 0.5 * tau * sum_npp)));
 
    ren = log( log (escape_radius)) / log(2.0);
    tl = 1.0 / log(2.0);
    
-
    delta = width / (double) sizex;
    re_start = re_center - width / 2.0;
    im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
@@ -168,7 +178,7 @@ tau * sum_npp)));
          ddim = 0.0;
          ddmod = 0.0;
 
-#define Q_SERIES_MOBIUS
+// #define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
 			/* First, make a map from q-series coords to the 
 			 * upper half-plane, then apply the mobius x-form, 
@@ -194,18 +204,18 @@ tau * sum_npp)));
 			double re_iv = re_var / var;
 			double im_iv = -im_var / var;
 
-			double theta = atan2 (im_var, re_var);
-			// theta += 0.5*M_PI;
+			double angle = atan2 (im_var, re_var);
+			// angle += 0.5*M_PI;
 			double sca = -0.5;
-			double re_sca = pow (var, 0.5*sca) * cos (sca*theta);
-			double im_sca = pow (var, 0.5*sca) * sin (sca*theta);
+			double re_sca = pow (var, 0.5*sca) * cos (sca*angle);
+			double im_sca = pow (var, 0.5*sca) * sin (sca*angle);
 
 // glob [i*sizex +j] = variance;
 			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
 
 #endif /* Q_SERIES_MOBIUS */
 
-#define CIRCLE_TO_BUD
+// #define CIRCLE_TO_BUD
 #ifdef CIRCLE_TO_BUD
 			/* Map a unit disk centered at origin to the main bud
 			 * located to the west */
@@ -358,7 +368,7 @@ tau * sum_npp)));
          glob [i*sizex +j] /= (sqrt (re_position*re_position+im_position*im_position));
 #endif
 
-#define PLAIN_Z_PRIME_PRIME
+// #define PLAIN_Z_PRIME_PRIME
 #ifdef PLAIN_Z_PRIME_PRIME
          /* --------------------------------------------------------- */
          /* The interesting one is the z-prime-prime. In the main 
@@ -392,6 +402,8 @@ tau * sum_npp)));
 #endif /* LEADING_TERMS */
 
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
+
+#ifdef MODULAR_FORM_CORRECTIONS
          glob [i*sizex +j] = sum_ddim;
          glob [i*sizex +j] = modulus;
          glob [i*sizex +j] = sum_ddre;
@@ -404,6 +416,8 @@ tau * sum_npp)));
          double rem = sum_ddre*re_sca - sum_ddim*im_sca;
          double imm = sum_ddre*im_sca + sum_ddim*re_sca;
          modulus = sqrt (rem*rem + imm*imm);
+#endif /* MODULAR_FORM_CORRECTIONS */
+
          glob [i*sizex +j] = modulus;
 #endif
 
@@ -425,8 +439,8 @@ tau * sum_npp)));
 
          /* first, we need the derivatives of modulus w.r.t tau */
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
-         mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
-         mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
+         double mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
+         double mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
          mpp += sum_ddimp * sum_ddimp + sum_ddim * sum_ddimpp - mp*mp;
          mpp /= modulus;
          
@@ -452,8 +466,8 @@ tau * sum_npp)));
 
          /* first, we need the drerivatives of modulus w.r.t tau */
          modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
-         mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
-         mpp  = sum_rep * sum_rep + sum_re * sum_repp;
+         double mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
+         double mpp  = sum_rep * sum_rep + sum_re * sum_repp;
          mpp += sum_imp * sum_imp + sum_im * sum_impp - mp*mp;
          mpp /= modulus;
          
@@ -493,8 +507,8 @@ tau * sum_npp)));
 			 */
 
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
-         mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
-         mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
+         double mp = (sum_ddrep * sum_ddre + sum_ddimp * sum_ddim) / modulus;
+         double mpp  = sum_ddrep * sum_ddrep + sum_ddre * sum_ddrepp;
          mpp += sum_ddimp * sum_ddimp + sum_ddim * sum_ddimpp - mp*mp;
          mpp /= modulus;
          
@@ -513,7 +527,6 @@ tau * sum_npp)));
          /* --------------------------------------------------------- */
          /* The interesting one is the z-prime-prime */
 			/* This one subtracts divergence from zpp before taking modulus */
-			/* Unfortunately, it seems to be mostly crud */
 
          /* The taylor expansion */
 			double zre = sum_ddre - tau *(sum_ddrep - 0.5 * tau *sum_ddrepp);
@@ -541,8 +554,8 @@ tau * sum_npp)));
 			/* Perform the tau expanstion to extrapolate */
          /* here, we subtract the leading divergence */
          modulus = sqrt (sum_re*sum_re + sum_im*sum_im);
-         mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
-         mpp  = sum_rep * sum_rep + sum_re * sum_repp;
+         double mp = (sum_rep * sum_re + sum_imp * sum_im) / modulus;
+         double mpp  = sum_rep * sum_rep + sum_re * sum_repp;
          mpp += sum_imp * sum_imp + sum_im * sum_impp - mp*mp;
          mpp /= modulus;
          
