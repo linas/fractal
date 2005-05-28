@@ -36,7 +36,7 @@ Linas Vepstas <linas@linas.org>
 \layout Abstract
 
 An exploration of the interior or the Mandelbrot Set and the appearance
- of functions appearing to be modular forms.
+ of functions appearing to be similar to modular forms.
  This provides yet another example of the close interconnection between
  the structure of the Modular Group SL(2,Z) and fractals.
  The relationship is demonstrated computationally and visually, and not
@@ -50,7 +50,9 @@ An exploration of the interior or the Mandelbrot Set and the appearance
  spectral-type summation, and then analyzing the asymptotic behavior of
  the sum.
  Leading divergence are easy to explain and remove; the remaining finite
- parts appear to have modular symmetry.
+ parts hint at modular symmetry.
+ We are unable to find an expression that is explicitly a modular form,
+ however.
 \layout Abstract
 
 This is a work in progress.
@@ -97,6 +99,9 @@ Consider the Euler function
 \end_inset 
 
 .
+ Most modular forms resemble this picture in one way or another.
+ The exploration presented in this monograph will be mostly visual, not
+ algebraic.
 \layout Standard
 
 
@@ -1019,7 +1024,7 @@ constructed from the classic number-theoretic divisor function
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1141,7 +1146,105 @@ This figure shows the real part of
 
 Explicit numerical work shows that it does not seem to be a modular form
  of integer weight.
- Nor does it seem to be a modular 
+ Nor does it seem to be a modular form of fractional weight.
+ Lets review what this means.
+\layout Standard
+
+Modular symmetry on the 
+\begin_inset Formula $q$
+\end_inset 
+
+-disk is best explored by mapping the 
+\begin_inset Formula $q$
+\end_inset 
+
+-disk to the Poincare upper half-plane, applying a Mobius transformation
+ there, and then mapping back.
+ Given a point 
+\begin_inset Formula $\tau$
+\end_inset 
+
+in teh upper half-plane, i.e.
+ 
+\begin_inset Formula $\Im\tau>0$
+\end_inset 
+
+, one maps to the 
+\begin_inset Formula $q$
+\end_inset 
+
+-disk with 
+\begin_inset Formula \begin{equation}
+q=e^{i\pi\tau}\label{eq:}\end{equation}
+
+\end_inset 
+
+ One can then apply a Mobius transform to 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ on the upper half plane: 
+\begin_inset Formula \begin{equation}
+\tau\to\frac{a\tau+b}{c\tau+d}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and then map this back to the 
+\begin_inset Formula $q$
+\end_inset 
+
+-disk coordinates.
+\layout Standard
+
+A function 
+\begin_inset Formula $f$
+\end_inset 
+
+ on the upper half-plane is said to be a 
+\emph on 
+modular form
+\emph default 
+ if 
+\begin_inset Formula \begin{equation}
+f\left(\frac{a\tau+b}{c\tau+d}\right)=\left(c\tau+d\right)^{k}f(\tau)\label{eq:modular form}\end{equation}
+
+\end_inset 
+
+ for integers 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+ satisfying 
+\begin_inset Formula $ad-bc=1$
+\end_inset 
+
+.
+ The constant 
+\begin_inset Formula $k$
+\end_inset 
+
+ is said to be the 
+\emph on 
+weight
+\emph default 
+ of the form.
+ Mapped to the upper half-plane, the interior of the bud does not seem to
+ be a modular form for any real value of 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ In particular, equation
+\begin_inset LatexCommand \ref{eq:modular form}
+
+\end_inset 
+
+ doesn't even seem to hold even if the absolute value of each side is taken;
+ although it seems that it almost holds for small values of 
+\begin_inset Formula $k$
+\end_inset 
+
+.
 \layout Subsection
 
 Re-mapping the Cardioid
@@ -1149,14 +1252,9 @@ Re-mapping the Cardioid
 
 In order to proceed with the exploration of the interior of the Mandelbrot
  set as a modular form, we need to find a way of mapping the the cardioid
- to the complex upper half-plane, the so-called the Poincare upper half-plane.
- Unfortunately, this is easier said than done.
- The problem lies with undoing a slight twist in the interior of the cardioid.
- This is best illustrated with figures.
-\layout Standard
-
-The obvious cardiod mapping is to express the interior in terms of the coordinat
-es 
+ to the complex upper half-plane.
+ The most obvious mapping is to express the interior in terms of the coordinates
+ 
 \begin_inset Formula $\rho$
 \end_inset 
 
@@ -1503,72 +1601,28 @@ does not show this lobe structure; the real and imaginary parts of this
 \layout Standard
 
 By comparing the figures for the interior of the Mandelbrot set and the
- Weierstrass elliptic invariant, the modular symmetry becomes painfully
+ Weierstrass elliptic invariant, a general resemblance becomes painfully
  apparent, even if not explicitly demonstrated.
- There are several problems with an explicit demonstration, discussed below.
+ 
 \layout Standard
 
-The rank of the modular form can be read off the picture by lobe counting.
- The picture of the Weierstrass invariant 
-\begin_inset Formula $g_{2}$
-\end_inset 
-
- shows three red lobes; a comparable image of 
-\begin_inset Formula $g_{3}$
-\end_inset 
-
- would show four lobes.
- Since 
-\begin_inset Formula $g_{2}$
-\end_inset 
-
- is a modular form of rank 2 and 
-\begin_inset Formula $g_{3}$
-\end_inset 
-
- is a modular form of rank 3, then, based on lobe counting, one would want
- to conclude that the interior is a modular function, that is, a form of
- rank 0.
- But this would not be right, as a simple application of a Mobius transform
- shows that although the interior of the Mandelbrot seems to retain its
- symmetry, the size of the lobe do change.
- The function is somehow more subtle than that.
-\layout Standard
-
-Other problems:
-\layout Standard
-
-By construction, the function on the interior of the Mandelbrot set is a
- real function.
+By construction, the function just demonstrated on the interior of the Mandelbro
+t set is a real function.
  To more fully explore the modular symmetry, we really need a complex function,
- that is, a 
-\begin_inset Quotes eld
-\end_inset 
-
-real
-\begin_inset Quotes erd
-\end_inset 
-
- part and an 
-\begin_inset Quotes eld
-\end_inset 
-
-imaginary
-\begin_inset Quotes erd
-\end_inset 
-
- part.
- Some work is needed to construct this.
- Dooh.
- But of course! we are working with the wrong quantity, we should have been
- subtracting divergence and not taking the norm all along.
- Duhhhh.
- Will fix this shortly.
+ that is, one with real and imaginary parts.
+ Such a function is provided by not working with the modulus, but subtracting
+ the divergence directly; this is explored in the next section.
 \layout Standard
 
-The other problem is that its not clear that this simple cardiod mapping
- was the correct mapping.
- The problem is subtle: is subtle, and ever-so-slightly visible in the figure.
+There is also a more subtle issue.
+ It is not clear that the simple cardiod mapping 
+\begin_inset LatexCommand \ref{eq:cardioid coords}
+
+\end_inset 
+
+ is the correct mapping.
+ If one examines the figures, one can note a subtle, ever-so-slightly visible
+ feature.
  Each of the 
 \begin_inset Quotes eld
 \end_inset 
@@ -1579,16 +1633,48 @@ flames
 
  in the figure lean slightly over to the right.
  Under Mobius transforms, this tilt is preserved, destroying the naive symmetry.
- Its possible that the mapping from cardioid to q coordinates is not quire
- right, and that some other, more complex mapping is required.
- This is not clear at this point.
+ Its possible that the mapping from cardioid to 
+\begin_inset Formula $q$
+\end_inset 
+
+ coordinates is not the right mapping, and that some other, more complex
+ mapping is required.
+ What this mapping may be is not clear at this point.
 \layout Standard
 
 This problem is presumably related to the fact that the buds on the exterior
  of the M-set are almost circles, but not quite (with the exception of the
  main bud to the west).
  If one could find a suitable remapping on the exterior, that mapping might
- presumably carry over into the interior as well.
+ presumably carry over into the interior as well, and vice-versa.
+\layout Subsection
+
+The Finite Part in the Cardioid
+\layout Standard
+
+Lets revisit, this time exploring the function
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\Xi(c)=\lim_{t\rightarrow0}\left[P_{c}(t)-N(t)\;\frac{\left(\frac{1}{4}-c\right)^{3/2}}{4}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+Using the mappings given previously, 
+\begin_inset Formula $\Xi(c)$
+\end_inset 
+
+ can be re-expressed as 
+\begin_inset Formula $\Xi(q)$
+\end_inset 
+
+ on the 
+\begin_inset Formula $q$
+\end_inset 
+
+-disk.
+ It is shown in the figures...
 \layout Subsection
 
 Numeric Techniques
