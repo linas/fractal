@@ -28,7 +28,7 @@ plane_to_poincare_disk_coords (double x, double y,
 	double deno = x*x + (y+1.0)*(y+1.0);
 	deno = 1.0/deno;
 	*px = (x*x + y*y - 1.0) * deno;
-	*py = -2.0*deno; 
+	*py = -2.0*x*deno; 
 }
 
 void 
