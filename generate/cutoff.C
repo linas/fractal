@@ -47,7 +47,7 @@ immob (double a, double b, double c, double d, double x, double y)
 /* The following is the set of defines needed to be enabled to
  * get the flattening of the main cardioid into q-disk coords to work.
  */
-#define MAIN_CARDIOID_MODULAR_FORM
+// #define MAIN_CARDIOID_MODULAR_FORM
 #ifdef MAIN_CARDIOID_MODULAR_FORM
 // #define Q_SERIES_MOBIUS
 #define CIRCLE_COORDS
@@ -55,6 +55,8 @@ immob (double a, double b, double c, double d, double x, double y)
 // #define ZPP_MODULUS_DIVERGENCE_FREE
 #define COMPLEX_ZPP_MINUS_DIVERGENCE
 #endif
+
+#define COMPLEX_ZPP_MINUS_DIVERGENCE
 
 /* The following sets up the complex divisor-sum-like thingy
  * in the main bud. 
@@ -365,7 +367,7 @@ MakeHisto (
 
           /* the following computes an almost-flat, divergence free thing */
          glob [i*sizex +j] = modulus / sum_n;
-         glob [i*sizex +j] /= (sqrt (re_position*re_position+im_position*im_position));
+         glob [i*sizex +j] /= (sqrt (re_c*re_c+im_c*im_c));
 #endif
 
 // #define PLAIN_Z_PRIME_PRIME
@@ -426,7 +428,7 @@ MakeHisto (
          /* the interesting one is the z-prime-prime */
          modulus = sqrt (sum_ddre*sum_ddre + sum_ddim*sum_ddim);
          glob [i*sizex +j] = modulus / sum_n;
-         // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
+         // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_c-0.25)*(re_c-0.25)+im_c*im_c));
 #endif
 
 #ifdef ZPRIME_PRIME_DIVERGENT_PART
@@ -452,7 +454,7 @@ MakeHisto (
          /* finally the taylor expansion */
          glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
 
-         // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_position-0.25)*(re_position-0.25)+im_position*im_position));
+         // glob [i*sizex +j] -= 0.25 * exp( -0.75 * log((re_c-0.25)*(re_c-0.25)+im_c*im_c));
 #endif
 
 
@@ -478,11 +480,11 @@ MakeHisto (
 
          /* finally the taylor expansion for the normalized sum */
          glob [i*sizex +j] = mod - tau* (dmod - 0.5 * tau * ddmod);
-// printf ("%9.6g	%9.6g	%9.6g\n", re_position, glob[i*sizex+j], mod);
+// printf ("%9.6g	%9.6g	%9.6g\n", re_c, glob[i*sizex+j], mod);
 
          /* ok, this part should be the divergent part ... */
-         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         theta = 0.5 * atan2 (-im_c, 0.25-re_c);
+         mod = (re_c-0.25)*(re_c-0.25)+im_c*im_c;
          mod = pow (mod, 0.25);
          re = - mod * cos(theta);
          im = - mod * sin(theta);
@@ -533,11 +535,11 @@ MakeHisto (
 			double zim = sum_ddim - tau *(sum_ddimp - 0.5 * tau *sum_ddimpp);
 
 			/* Divergence term == 0.25/ (0.25-c)^3/2  */
-         theta = -1.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         double thet = -1.5 * atan2 (-im_c, 0.25-re_c);
+         mod = (re_c-0.25)*(re_c-0.25)+im_c*im_c;
          mod = 0.25 * pow (mod, -0.75);
-         re = mod * cos(theta);
-         im = mod * sin(theta);
+         re = mod * cos(thet);
+         im = mod * sin(thet);
 
          zre -= re * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
          zim -= im * (sum_n - tau* (sum_np - 0.5 * tau * sum_npp));
@@ -563,8 +565,8 @@ MakeHisto (
          glob [i*sizex +j] = modulus - tau* (mp - 0.5 * tau * mpp);
 
 			/* Divergence term == 1/2 - sqrt (1/4-c)  */
-         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         theta = 0.5 * atan2 (-im_c, 0.25-re_c);
+         mod = (re_c-0.25)*(re_c-0.25)+im_c*im_c;
          mod = pow (mod, 0.25);
          re = - mod * cos(theta);
          im = - mod * sin(theta);
@@ -591,8 +593,8 @@ MakeHisto (
 			double zim = sum_im - tau *(sum_imp - 0.5 * tau *sum_impp);
 
 			/* Divergence term == 1/2 - sqrt (1/4-c)  */
-         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         theta = 0.5 * atan2 (-im_c, 0.25-re_c);
+         mod = (re_c-0.25)*(re_c-0.25)+im_c*im_c;
          mod = pow (mod, 0.25);
          re = - mod * cos(theta);
          im = - mod * sin(theta);
@@ -626,8 +628,8 @@ MakeHisto (
          glob [i*sizex +j] = (phi + M_PI)/(2.0*M_PI);
          // glob [i*sizex +j] = (phi - tau* (phip - 0.5 * tau * phipp) +M_PI)/(2.0*M_PI);
 
-         theta = -1.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         theta = -1.5 * atan2 (-im_c, 0.25-re_c);
+         mod = (re_c-0.25)*(re_c-0.25)+im_c*im_c;
          mod = pow (mod, -0.75);
          re = 0.25 * mod * cos(theta);
          im = 0.25 * mod * sin(theta);
@@ -637,14 +639,14 @@ MakeHisto (
          glob [i*sizex +j] = sqrt (glob[i*sizex+j]);
 
          /* --------------------------------------------------------- */
-         theta = 0.5 * atan2 (-im_position, 0.25-re_position);
-         mod = (re_position-0.25)*(re_position-0.25)+im_position*im_position;
+         theta = 0.5 * atan2 (-im_c, 0.25-re_c);
+         mod = (re_c-0.25)*(re_c-0.25)+im_c*im_c;
          mod = pow (mod, 0.25);
          re = - mod * cos(theta);
          im = - mod * sin(theta);
 
-         re += re_position;
-         im += im_position;
+         re += re_c;
+         im += im_c;
 
          glob [i*sizex +j] =  sqrt (re*re +im*im);
 #endif
