@@ -24,7 +24,7 @@ extern int modular_max_terms;
  */
 int divisor (int n);
 
-/** Sigma arithmetic series, equals divisor airth series for a=0 
+/** Sigma arithmetic series, equals divisor arith series for a=0 
  *  Computes the divisors of n, raises each to the a'th power, and
  *  returns thier sum.
  */
