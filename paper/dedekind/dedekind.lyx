@@ -46,8 +46,10 @@ An exploration of the interior or the Mandelbrot Set and the appearance
 \end_inset 
 
 .
- However, it is a resemblance only; closer analysis reveals these are not
- actually modular forms.
+ However, it is a resemblance only; the various explicit expressions that
+ can be found are shown to not actually be modular forms.
+ It is hypothesized that some simple but currently unknown transformation
+ will convert them into modular forms.
  
 \layout Abstract
 
@@ -76,25 +78,33 @@ This paper is part of a set of chapters that explore the relationship between
 Dedekind Eta and the Mandelbrot Set
 \layout Standard
 
-XXX This paper is under construction.
- It is going to be an expansion and revision of an earlier paper 
-\begin_inset LatexCommand \htmlurl{http://www.linas.org/art-gallery/spectral/spectral.html}
+XXX This paper is under construction, and is subject ot occasional revision.
+ XXX
+\layout Standard
+
+Modular forms are a particular kind of function on the complex upper half-plane
+ studied in analytic number theory and the theory of elliptic curves.
+ A precise definition of a modular form
+\begin_inset LatexCommand \cite{key-8}
 
 \end_inset 
 
-.
- 
-\layout Standard
-
-Consider the Euler function 
+ will be given later in this paper.
+ As a simple example, consider the Euler function 
 \begin_inset Formula \begin{equation}
 \phi(q)=\prod_{k=1}^{\infty}(1-q^{k})\label{eq:}\end{equation}
 
 \end_inset 
 
  on the complex plane.
- It is closely related to the Dedekind eta function.
- The accompanying figure shows 
+ It is closely related to the Dedekind eta function, which is a modular
+ form.
+ Figure 
+\begin_inset LatexCommand \ref{cap:Euler-Function}
+
+\end_inset 
+
+ shows 
 \begin_inset Formula $\phi(q)$
 \end_inset 
 
@@ -103,9 +113,11 @@ Consider the Euler function
 \end_inset 
 
 .
- Most modular forms resemble this picture in one way or another.
+ Graphs of most modular forms visually resemble this picture in one way
+ or another.
  The exploration presented in this monograph will be mostly visual, not
- algebraic.
+ algebraic; none-the-less, various basic expressions will be developed to
+ make the hypothesis as explicit as possible.
 \layout Standard
 
 
@@ -133,7 +145,26 @@ Euler Function
 
 \layout Standard
 
-Note the modular group symmetry.
+A rendition of the absolute value 
+\begin_inset Formula $|\phi(q)|$
+\end_inset 
+
+ of the Euler function on the 
+\begin_inset Formula $q$
+\end_inset 
+
+-disk.
+ Note the readily appearent fractal self-similarity.
+ This type of self-similarity is explicitly associated with the properties
+ of the modular group 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ A crude general resemblance to the structure of the Mandelbrot set should
+ be equally evident.
+ This paper is devoted to making this vague resemblance into a relationship
+ as concrete as possible.
 \end_inset 
 
 
@@ -142,6 +173,31 @@ Note the modular group symmetry.
 Now consider the Mandelbrot set.
  By means of a sequence of figures below, we shall uncover a structure inside
  the Mandelbrot set that appears to be some kind of modular form.
+ The general devopment will be as follows: the first section develops a
+ set of series that capture the asymptotic behaviour of an iterated function.
+ In the next section, these series are then applied to the Mandelbrot set
+ iterator, where they are found to contain divergent and finite terms.
+ The next section develops explicit, exact expressions for the divergent
+ terms.
+ The remainder of the paper is devoted to an exploration of the finite terms,
+ and attempts to draw analogies to such modular forms as the Weierstrass
+ elliptic invariant 
+\begin_inset Formula $g_{2}$
+\end_inset 
+
+ and to series involving the divisor function.
+ Both the main cardioid and the large western bulb are explored.
+ The paper concludes with an appendix reviewing the numeric techniques of
+ series acceleration.
+ 
+\layout Standard
+
+This paper is an expansion and revision of an earlier paper posted at 
+\begin_inset LatexCommand \htmlurl{http://www.linas.org/art-gallery/spectral/spectral.html}
+
+\end_inset 
+
+.
  
 \layout Subsection
 
@@ -1160,6 +1216,15 @@ This figure shows the real part of
 Explicit numerical work shows that it does not seem to be a modular form
  of integer weight.
  Nor does it seem to be a modular form of fractional weight.
+ But is ure seems to 
+\begin_inset Quotes eld
+\end_inset 
+
+come close
+\begin_inset Quotes erd
+\end_inset 
+
+.
  Lets review what this means.
 \layout Standard
 
@@ -1408,7 +1473,7 @@ The figures
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -2116,7 +2181,7 @@ implies that the relation was search for on the upper half-plane and not
  
 \layout Subsection
 
-Numeric Techniques
+Appendix: Numeric Techniques
 \layout Standard
 
 This section reviews the numeric techniques applied to perform the series
@@ -2351,4 +2416,17 @@ Tom M.
 Modular Functions and Dirichlet Series in Number Theory
 \emph default 
 , Springer Verlag, New York, 1990.
+\layout Bibliography
+\bibitem [WMF]{key-8}
+
+Wikipedia, 
+\emph on 
+Modular forms
+\emph default 
+, 
+\begin_inset LatexCommand \url{http://en.wikipedia.org/wiki/Modular_form}
+
+\end_inset 
+
+
 \the_end
