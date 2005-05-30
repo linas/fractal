@@ -60,22 +60,29 @@ void limit (void)
 	}
 }
 
-long double divisor_series (long double x)
+long double divisor_series (long double r, long double theta)
 {
-	long double acc = 0.0;
+	long double re_acc = 0.0;
+	long double im_acc = 0.0;
 
-	long double xp = 1.0;
+	long double rp = 1.0;
+	long double thp = 0.0;
 	int n=1;
 	while (1)
 	{
-		long double term = xp * divisor (n);
-		acc += term;
+		long double term = rp * divisor (n);
+		long double re_term = term * cos (thp);
+		long double im_term = term * sin (thp);
+		re_acc += re_term;
+		im_acc += im_term;
 
-		if (term < 1.0e-20*acc) break;
-		xp *= x;
+		if (rp < 1.0e-20) break;
+		rp *= r;
+		thp += theta;
 		n++;
 	}
 
+	double acc = sqrt (re_acc*re_acc + im_acc*im_acc);
 	return acc;
 }
 
@@ -173,11 +180,21 @@ long double moebius_series (long double x)
 	return acc;
 }
 
-int main ()
+int 
+main (int argc, char * argv)
 {
 	int i;
 
-	int nmax = 41;
+	if (argc < 2) {
+		fprintf (stderr, "Usage: %s <radius> <npts>\n", argv[0]);
+		exit (1);
+	}
+	
+	double radius = atof(argv[1]);
+	int nmax = atoi (argv[2]);
+
+	printf ("#\n# angular series\n#\n");
+	printf ("# radius=%g  npts=%d\n#\n", radius, nmax);
 
 	long double tp = 0.5;
 	for (i=1; i<nmax; i++)
@@ -195,12 +212,9 @@ int main ()
 #endif
 
 
-// #define DIVISOR_SERIES
+#define DIVISOR_SERIES
 #ifdef DIVISOR_SERIES
-		x = 1.0L-tp;
-		long double y = divisor_series (x);
-		// y *= (1.0L-x)*(1.0L-x);
-		y *= tp;
+		long double y = divisor_series (radius, 2.0*M_PI* x);
 
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 #endif
