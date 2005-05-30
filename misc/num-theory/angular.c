@@ -13,6 +13,7 @@
 #include <complex.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "divisor.h"
 #include "gcf.h"
@@ -71,8 +72,8 @@ long double divisor_series (long double r, long double theta)
 	while (1)
 	{
 		long double term = rp * divisor (n);
-		long double re_term = term * cos (thp);
-		long double im_term = term * sin (thp);
+		long double re_term = term * cosl (thp);
+		long double im_term = term * sinl (thp);
 		re_acc += re_term;
 		im_acc += im_term;
 
@@ -82,7 +83,7 @@ long double divisor_series (long double r, long double theta)
 		n++;
 	}
 
-	double acc = sqrt (re_acc*re_acc + im_acc*im_acc);
+	long double acc = sqrtl (re_acc*re_acc + im_acc*im_acc);
 	return acc;
 }
 
@@ -181,20 +182,20 @@ long double moebius_series (long double x)
 }
 
 int 
-main (int argc, char * argv)
+main (int argc, char * argv[])
 {
 	int i;
 
-	if (argc < 2) {
+	if (argc < 3) {
 		fprintf (stderr, "Usage: %s <radius> <npts>\n", argv[0]);
 		exit (1);
 	}
 	
-	double radius = atof(argv[1]);
+	long double radius = atof(argv[1]);
 	int nmax = atoi (argv[2]);
 
 	printf ("#\n# angular series\n#\n");
-	printf ("# radius=%g  npts=%d\n#\n", radius, nmax);
+	printf ("# radius=%Lg  npts=%d\n#\n", radius, nmax);
 
 	long double tp = 0.5;
 	for (i=1; i<nmax; i++)
