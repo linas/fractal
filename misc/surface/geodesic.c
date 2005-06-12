@@ -17,11 +17,20 @@ int get_n_of_rho (double rho)
 	return (int) rho;
 }
 
+double geo_x (double rho)
+{
+	int n = get_n_of_rho (rho);
+
+	double ex = rho*rho + n*(n+2);
+	ex /= 2.0*(n+1);
+	return ex;
+}
+
 double geo_length (double rho)
 {
 	int n = get_n_of_rho (rho);
 
-	double nu = rho*rho + n*(n-2);
+	double nu = rho*rho + n*(n+2);
 	double de = -nu;
 	double cr = 2.0*rho*(n+1);
 	nu += cr;
@@ -36,7 +45,7 @@ main ()
 {
 	int i;
 
-	int n = 400;
+	int n = 1400;
 	double rho = 1.0;
 	double delta = 0.01;
 	rho += delta;
@@ -47,8 +56,9 @@ main ()
 	for (i=0; i<n; i++)
 	{
 		double len = geo_length (rho);
+		double ex = geo_x (rho);
 
-		printf ("%d	%g	%g\n", i, rho, len);
+		printf ("%d	%g	%g	%g\n", i, rho, ex, len);
 		rho += delta;
 	}
 }
