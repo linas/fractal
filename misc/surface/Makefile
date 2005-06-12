@@ -2,7 +2,7 @@
 
 all: geodesic
 
-geodesic: geodesic.o
+geodesic: geodesic.o geo-lib.o
 
 geodesic.o: geo-lib.h
 
@@ -12,5 +12,5 @@ geo-lib.o: geo-lib.h
 	cc -O2 -c $<
 
 .o:
-	cc -o $* $^ geo-lib.o -lm
+	cc -o $* $^ -lm
 
