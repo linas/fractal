@@ -9,5 +9,5 @@ geodesic: geodesic.o
 	cc -O2 -c $<
 
 .o:
-   cc -o $* $^ -lm
+	cc -o $* $^ -lm
 

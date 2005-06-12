@@ -36,10 +36,14 @@ main ()
 {
 	int i;
 
-	int n = 20;
+	int n = 400;
 	double rho = 1.0;
-	delta = 0.1;
+	double delta = 0.01;
 	rho += delta;
+
+	printf ("#\n# geodesic lengths\n#\n");
+	printf ("# delta = %g\n#\n", delta);
+
 	for (i=0; i<n; i++)
 	{
 		double len = geo_length (rho);
