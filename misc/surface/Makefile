@@ -1,8 +1,9 @@
 
 
-all: geodesic
+all: geodesic period
 
 geodesic: geodesic.o geo-lib.o
+period: period.o geo-lib.o
 
 geodesic.o: geo-lib.h
 
