@@ -54,6 +54,19 @@ hyperg_2F1(double a, double b, double c, complex double z)
 	return acc;
 }
 
+complex double 
+schwarz_s0 (double a, double b, double c, complex double z)
+{
+	double lambda = 1.0 - c;
+
+	double complex f0 = hyperg_2F1 (a,b,c,z);
+	double complex flam = hyperg_2F1 (a+lambda, b+lambda , 1.0+lambda , z);
+
+	flam *= cpow (z, lambda);
+
+	double complex s = flam/f0;
+	return s;
+}
 
 main () 
 {
@@ -68,11 +81,12 @@ main ()
 
 	for (i=0; i<20; i++)
 	{
-		j = 0.9 * cexp (2.0*M_PI*i*0.05);
+		j = 0.9 * cexp (2.0*M_PI*i*0.05 *I);
 
-		double complex f = hyperg_2F1 (a,b,c,j);
+		// double complex f = hyperg_2F1 (a,b,c,j);
+		double complex f = schwarz_s0 (a,b,c,j);
 
-		printf ("j=%d t= %g +I %g\n", j, creal (f), cimag (f));
+		printf ("i=%d j=%g +I %g, tau=%g +I %g\n", i, creal (j), cimag (j), creal (f), cimag (f));
 	}
 
 }
