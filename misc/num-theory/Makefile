@@ -8,7 +8,7 @@ LIB = $(TOP)/lib
 CC = /usr/bin/cc -O2 -I $(INC)
 
 
-EXES= angular buddy ndist series
+EXES= angular buddy hyperg ndist series
 
 all: 	$(EXES)
 
@@ -30,6 +30,7 @@ dist:
 
 angular:	angular.o $(LIB)/gcf.o $(LIB)/modular.o $(LIB)/moebius.o $(LIB)/totient.o
 buddy:	buddy.o
+hyperg:	hyperg.o
 ndist:	ndist.o $(LIB)/gcf.o $(LIB)/totient.o
 series:	series.o divisor.o $(LIB)/gcf.o $(LIB)/moebius.o $(LIB)/totient.o
 
