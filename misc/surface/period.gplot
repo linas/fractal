@@ -1,0 +1,27 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'period.png'
+
+# set data style linespoints
+set data style lines
+# set data style points
+set key right
+
+set title "tt"
+set xlabel "x"
+set ylabel "Tt"
+
+set yrange [0:15]
+
+plot "period.dat" using 2:3 title "", \
+     "period.dat" using 2:2 title ""
+
+
+
+# pause 100
+

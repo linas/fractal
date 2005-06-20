@@ -28,7 +28,7 @@ dist:
 	$(CC) -o $* $^ -lm
 
 
-angular:	angular.o divisor.o $(LIB)/gcf.o $(LIB)/moebius.o $(LIB)/totient.o
+angular:	angular.o $(LIB)/gcf.o $(LIB)/modular.o $(LIB)/moebius.o $(LIB)/totient.o
 buddy:	buddy.o
 ndist:	ndist.o $(LIB)/gcf.o $(LIB)/totient.o
 series:	series.o divisor.o $(LIB)/gcf.o $(LIB)/moebius.o $(LIB)/totient.o
