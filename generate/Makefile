@@ -5,7 +5,7 @@ LIBS =		/usr/lib
 
 CC = cc -Wall -g -O2 $(INCLUDES)
 
-EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
+OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
         circout circin circmov brat \
         abs clamp takelog reclamp dump renorm \
@@ -14,13 +14,18 @@ EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert cutoff
 
-all:    cutoff elliptic erdos euler-q mand-flow \
+NEW_EXES = cutoff elliptic erdos euler-q mand-flow \
         mobius swap totient  \
         ray automatic radius brat draw dx image
 
+all:    $(NEW_EXES)
+
 
 clean:
-	rm -f a.out  *.o glop* junk* *.flo  *.txt *.gif  $(EXES)
+	rm -f x j.c a.out  *.o glop* junk* *.flo  *.txt 
+
+realclean:
+	rm -f *.gif *.jpeg *.png $(OLD_EXES) $(NEW_EXES)
 
 .c.o:
 	$(CC) -c $<

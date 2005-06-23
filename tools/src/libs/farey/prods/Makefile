@@ -45,7 +45,7 @@ clean:
 
 realclean:	clean
 	$(RM) $(EXES) *.flo *.gif
-	cd pixmaps; rm -f *
+	rm -f pixmaps
 
 
 ###########################################################

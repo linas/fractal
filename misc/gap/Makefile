@@ -18,7 +18,7 @@ clean:
 	rm -f core tmp junk glop a.out *.o
 
 realclean:	clean
-	rm -f $(EXES) 
+	rm -f $(EXES) *.png *.jpeg *.tex *.dat *.ps *.eps
 
 dist:
 	tar -zcvf gap.tgz *.c *.C *.gplot Makefile .cvsignore

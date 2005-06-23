@@ -1,6 +1,8 @@
 
 
-all: bessel-test find_zero-test find_eig sums asym
+EXES= bessel-test find_zero-test find_eig sums asym
+
+all: $(EXES)
 
 bessel-test:	bessel-test.o bessel.o
 	cc -o $@ $^ -lm
@@ -21,3 +23,9 @@ asym: asym.o
 .c.o:
 	cc -g -O2 -c -Wall $<
 
+
+clean:
+	rm -f *.o a.out
+
+realclean: clean
+	rm -f $(EXES)

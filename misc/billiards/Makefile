@@ -1,7 +1,9 @@
 
 
 
-all: stats classic wave
+EXES = stats classic wave
+
+all: $(EXES)
 
 
 classic:	classic.o ray.o
@@ -14,7 +16,11 @@ wave:	wave.o ray.o
 stats:	stats.o ray.o
 	cc -o stats stats.o ray.o -lm
 
-
-
 .C.o:
 	g++ -g -O2 -c $<
+
+clean:
+	rm -f *.o
+
+realclean: clean
+	rm -f $(EXES)

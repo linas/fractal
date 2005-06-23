@@ -43,9 +43,3 @@ globals.o: globals.c
 
 flo2mtv:	flo2mtv.c
 	$(CC) flo2mtv.c -o flo2mtv
-
-clean: 
-	rm -f *.o
-
-realclean: clean
-	rm -f flo2mtv
