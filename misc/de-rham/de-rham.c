@@ -50,6 +50,32 @@ void cesaro_1 (double *x, double *y)
 	*y += ay;
 }
 
+void bernoulli_0 (double *x, double *y)
+{
+	double re = *x;
+	double im = *y;
+	*x = ax * re - ay * im;
+	*y = ay * re + ax * im;
+}
+
+void bernoulli_1 (double *x, double *y)
+{
+	double re = *x;
+	double im = *y;
+	*x = (1.0-ax) * re + ay * im;
+	*y = -ay * re + (1.0-ax) * im;
+}
+
+void mink_0 (double *x, double *y)
+{
+	*x /= *x+1.0;
+}
+
+void mink_1 (double *x, double *y)
+{
+	*x += 1.0;
+}
+
 void fixpt (double val, double *x, double *y)
 {
 	int i = 0;
@@ -59,13 +85,17 @@ void fixpt (double val, double *x, double *y)
 	{
 		if (nt & 0x1) 
 		{
-			// koch_1 (x,y);
-			cesaro_1 (x,y);
+			koch_1 (x,y);
+			// cesaro_1 (x,y);
+			// mink_1 (x,y);
+			// bernoulli_1 (x,y);
 		}
 		else
 		{
-			// koch_0 (x,y);
-			cesaro_0 (x,y);
+			koch_0 (x,y);
+			// cesaro_0 (x,y);
+			// mink_0 (x,y);
+			// bernoulli_0 (x,y);
 		}
 		nt >>= 1;
 	}

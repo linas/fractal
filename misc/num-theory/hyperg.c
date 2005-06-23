@@ -6,6 +6,8 @@
 #include <complex.h>
 #include <math.h>
 
+#include "modular.h"
+
 // double hyperg_2F1(double a, double b, double c, double re_z, double im_z);
 
 complex double 
@@ -84,9 +86,23 @@ main ()
 		j = 0.9 * cexp (2.0*M_PI*i*0.05 *I);
 
 		// double complex f = hyperg_2F1 (a,b,c,j);
-		double complex f = schwarz_s0 (a,b,c,j);
+		double complex tau = schwarz_s0 (a,b,c,j);
 
-		printf ("i=%d j=%g +I %g, tau=%g +I %g\n", i, creal (j), cimag (j), creal (f), cimag (f));
+		double complex q = cexp (M_PI * I * tau);
+
+		double qre = creal (q);
+		double qim = cimag (q);
+		double jre, jim;
+		klein_j_invariant_c (qre, qim, &jre, &jim);
+
+		printf ("i=%d j=%g +I %g, tau=%g +I %g\n", i, creal (j), cimag (j),
+creal (tau), cimag (tau));
+
+
+		jre /= 1728.0;
+		jim /= 1728.0;
+
+		printf ("                       jre=%g %g\n", jre, jim);
 	}
 
 }

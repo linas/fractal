@@ -187,30 +187,25 @@ MakeHisto (
 			 * and then go back to the q-series coords */
 			double tau_re, tau_im;
 
-			double mod = re_c*re_c + im_c*im_c;
-			double ngle = atan2 (im_c, re_c);
-			// angle += 0.5*M_PI;
-			double scal = 0.5;
-			re_c = pow (mod, 0.5*scal) * cos (scal*ngle);
-			im_c = pow (mod, 0.5*scal) * sin (scal*ngle);
-
 #ifdef ROT
 			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
-			double a=1, b=0, c=-1, d=1;
+			double a=1, b=1, c=0, d=1;
 			mobius_xform (a,b,c,d, tau_re, tau_im, &tau_re, &tau_im);
 			plane_to_poincare_disk_coords (tau_re, tau_im, &re_c, &im_c);
 #endif
 
 			// poincare_disk_to_plane_coords (-im_c, re_c, &tau_re, &tau_im);
-			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
-			// q_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+			// poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+			q_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+			mobius_xform (2,0,0,1, tau_re, tau_im, &tau_re, &tau_im);
 
 			double a=1, b=0, c=1, d=1;
-			// double a=1, b=15, c=0, d=1;
+			// double a=3, b=1, c=0, d=1;
 			// double a=0, b=-1, c=1, d=0;
-			// mobius_xform (a,b,c,d, tau_re, tau_im, &tau_re, &tau_im);
+			mobius_xform (a,b,c,d, tau_re, tau_im, &tau_re, &tau_im);
 
 			/* compute the modular scaling factor */
+c=0;
 			double re_var = c*tau_re+d;
 			double im_var = c*tau_im;
 			double var = re_var*re_var + im_var*im_var;
@@ -223,7 +218,7 @@ MakeHisto (
 
 			double angle = atan2 (im_var, re_var);
 			// angle += 0.5*M_PI;
-			double sca = -0.5;
+			double sca = 1.0;
 			double re_sca = pow (var, 0.5*sca) * cos (sca*angle);
 			double im_sca = pow (var, 0.5*sca) * sin (sca*angle);
 
@@ -436,9 +431,9 @@ MakeHisto (
          modulus = sqrt (rem*rem + imm*imm);
 #endif /* MODULAR_FORM_CORRECTIONS */
 
-         glob [i*sizex +j] = modulus;
          glob [i*sizex +j] = fabs(sum_ddim);
          glob [i*sizex +j] = sum_ddre;
+         glob [i*sizex +j] = modulus;
 #endif
 
 #ifdef PLAIN_Z_PRIME_PRIME_NORMALIZED

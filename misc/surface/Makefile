@@ -1,6 +1,6 @@
 
 
-all: geodesic period
+all: geodesic hyper period
 
 geodesic: geodesic.o geo-lib.o
 period: period.o geo-lib.o

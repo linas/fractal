@@ -10,7 +10,7 @@ LIB = $(TOP)/lib
 INC = $(TOP)/inc
 
 # CC = /bin/fcc -f2 -O -I $(INC) -DAIX221
-CC = /bin/cc -O2 -I $(INC) -DANSI_C
+CC = /usr/bin/cc -O2 -I $(INC) -DANSI_C
 
 all: inc fileio.o
 
