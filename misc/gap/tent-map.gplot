@@ -1,0 +1,23 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'tent-map.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "tent map dyadic"
+set xlabel "x"
+set ylabel "binary tent (x)"
+
+# set yrange [0:]
+
+plot "tent-map.dat" using 1:2 title ""
+
+# pause 100
+

@@ -17,8 +17,8 @@ long double tent_dyadic (long double x, long double left, long double right)
 {
 	int i;
 
-	long double b;
-	long double norm = 0.5L / (left-right);
+	long double b = 0.0L;
+	long double norm = 0.5L / (right-left);
 	x -= floorl (x);
 	for (i=0; i<30; i++)
 	{
