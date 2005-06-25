@@ -11,6 +11,7 @@
  */
 
 #include <math.h>
+#include <stdio.h>
 
 long double tent_dyadic (long double x, long double left, long double right)
 {
@@ -18,7 +19,7 @@ long double tent_dyadic (long double x, long double left, long double right)
 
 	long double b;
 	long double norm = 0.5L / (left-right);
-	x -= lfloor (x);
+	x -= floorl (x);
 	for (i=0; i<30; i++)
 	{
 		if (x <0.5L) 
