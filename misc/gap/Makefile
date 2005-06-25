@@ -10,7 +10,7 @@ EXES= conj dyadic entropy exacto fdist feigen \
       fiddle fliptree gappy gkw mod moebius \
       mute orbit orbit-s padic \
       pair pegs rand-measure rdist summy swap sway sym \
-      sym-fun takagi theta tree vanish zeta
+      sym-fun takagi tent-map theta tree vanish zeta
 
 all: 	$(EXES)
 
@@ -56,6 +56,7 @@ sway.o:  sway.C $(LIB)/Farey.o $(INC)/Farey.h
 sym.o: sym.C $(LIB)/Farey.o $(INC)/Farey.h
 sym-fun.o: sym-fun.C $(LIB)/Farey.o $(INC)/Farey.h
 takagi.o:	takagi.C
+tent-map.o:	tent-map.C
 theta.o:	theta.C
 tree.o: tree.C $(LIB)/Farey.o $(INC)/Farey.h
 vanish.o:	vanish.C
