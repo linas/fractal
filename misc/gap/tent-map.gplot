@@ -8,16 +8,18 @@ set term png small
 set out 'tent-map.png'
 
 # set data style linespoints
-set data style lines
+# set data style lines
+set data style points
 set key right
 
-set title "tent map dyadic"
-set xlabel "x"
-set ylabel "binary tent (x)"
+set title "Tent map orbits expressed as real numbers"
+set xlabel "Initial point x"
+set ylabel "Binary value of orbit string"
 
 # set yrange [0:]
 
-plot "tent-map.dat" using 1:2 title ""
+plot "tent-map.dat" using 2:3 title ""
+# plot "tent-map.dat" using 3:2 title ""
 
 # pause 100
 
