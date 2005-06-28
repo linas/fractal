@@ -67,8 +67,10 @@ main ()
 		long double z = -1.0 + 2.0* tent_dyadic (1.0-x/3.0, 0.0, 1.0);
 #endif /* THIRDS */
 		
-		long double y = tent_dyadic (x*x, 0.0, 1.0);
-		long double z = -1.0 + 2.0* tent_dyadic (1.0-0.5*x, 0.0, 1.0);
+		long double y = tent_dyadic (x, 0.0, 1.0);
+		y = 0.75 +0.25*y;
+
+		long double z = tent_dyadic (0.5+0.25*x, 0.0, 1.0);
 		
 		// long double y = tent_dyadic (x, -1.0, 1.0);
 
