@@ -51,13 +51,27 @@ main ()
 	int i;
 
 	int nmax = 723;
-	for (i=0; i<nmax; i++)
+	for (i=1; i<nmax; i++)
 	{
 		long double x = ((long double) i) / ((long double) nmax);
 
+// #define DIRECT_SYMMETRY
+#ifdef DIRECT_SYMMETRY
 		long double y = tent_dyadic (x, 0.0, 1.0);
+		// long double z = 2.0* tent_dyadic (0.5*x, 0.0, 1.0);
+		long double z = -1.0 + 2.0* tent_dyadic (1.0-0.5*x, 0.0, 1.0);
+#endif /* DIRECT_SYMMETRY */
+
+#ifdef THIRDS
+		long double y = tent_dyadic (2.0*x/3.0, 0.0, 1.0);
+		long double z = -1.0 + 2.0* tent_dyadic (1.0-x/3.0, 0.0, 1.0);
+#endif /* THIRDS */
+		
+		long double y = tent_dyadic (x*x, 0.0, 1.0);
+		long double z = -1.0 + 2.0* tent_dyadic (1.0-0.5*x, 0.0, 1.0);
+		
 		// long double y = tent_dyadic (x, -1.0, 1.0);
 
-		printf ("%d	%Lg	%Lg\n", i, x,y);
+		printf ("%d	%Lg	%Lg	%Lg	%Lg\n", i, x,y, z, z-y);
 	}
 }
