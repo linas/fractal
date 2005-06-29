@@ -1,5 +1,5 @@
 
-EXES = alpha asubn bern bern_h character \
+EXES = alpha asubn bern bern_h binom-graph character \
 	diagon diverge eicheck frobenius gsl-diag \
 	riemann swap sum tryall valuate \
 	zeta-sum zeta-takagi zeta-zero zero zyx
@@ -16,6 +16,7 @@ asubn.o:	ache.h zetafn.h
 bern.o: zetafn.h
 bern_h.o: zetafn.h
 beta.o: ache.h zetafn.h
+binom-graph.o: zetafn.h
 diagon.o: zetafn.h
 eicheck.o: ache.h zetafn.h
 frobenius.o: zetafn.h
@@ -32,6 +33,7 @@ asubn: asubn.o ache.o zetafn.o
 bern: bern.o zetafn.o
 bern_h: bern_h.o zetafn.o
 beta: beta.o ache.o zetafn.o
+binom-graph: binom-graph.o zetafn.o
 character: character.o 
 diagon: diagon.o zetafn.o
 diverge: diverge.o
