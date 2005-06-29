@@ -9,7 +9,8 @@ set out 'binom-graph.png'
 # set out 'binom-graph.ps'
 
 # set data style linespoints
-set data style lines
+# set data style lines
+set data style points
 set key right
 
 set title "a"
@@ -18,7 +19,7 @@ set ylabel ""
 
 # set yrange [0:]
 
-plot "binom-graph.dat" using 1:2 title ""
+plot "binom-graph.dat" using 1:(log ($2)) title ""
 
 
 # pause 100

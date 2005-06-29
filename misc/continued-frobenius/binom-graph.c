@@ -14,13 +14,13 @@ main ()
 {
 	int p,q;
 
-	for (q=1; q<25; q++)
+	for (q=1; q<45; q++)
 	{
 		for (p=1; p<q; p++)  
 		{
 			double x = (double) p / (double) q;
 
-			double y = binomial (p,q);
+			double y = binomial (q,p);
 			printf ("%g	%g\n", x, y);
 		}
 	}
