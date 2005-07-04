@@ -7,6 +7,9 @@
  * symbolic values, left or right. use these symbolic values 
  * to construct a binary real number. Graphs this number.
  *
+ * This model is exactly solvable; the symbolic dynamics is the 
+ * XOR of neighboring bits.
+ *
  * Linas June 2005
  */
 
@@ -46,6 +49,30 @@ long double tent_dyadic (long double x, long double left, long double right)
 	return b;
 }
 
+long double tent_xor (long double x)
+{
+	int b0, b1, i;
+	
+	long double sh = 0.0;
+	long double tn = 0.5;
+	x -= floorl (x);
+	b0 = 0;
+	for (i=0; i<40; i++)
+	{
+		x *= 2.0L;
+		b1 = (int) floorl (x);
+		x -= b1;
+		
+		int c = b0 ^ b1;
+		sh += c*tn;
+		tn *= 0.5L;
+
+		b0 = b1;
+	}
+
+	return sh;
+}
+
 main () 
 {
 	int i;
@@ -67,12 +94,16 @@ main ()
 		long double z = -1.0 + 2.0* tent_dyadic (1.0-x/3.0, 0.0, 1.0);
 #endif /* THIRDS */
 		
+#ifdef MORE_SYMMETRY
 		long double y = tent_dyadic (x, 0.0, 1.0);
 		y = 0.75 +0.25*y;
 
 		long double z = tent_dyadic (0.5+0.25*x, 0.0, 1.0);
+#endif
 		
 		// long double y = tent_dyadic (x, -1.0, 1.0);
+		long double y = tent_dyadic (x, 0.0, 1.0);
+		long double z = tent_xor (x);
 
 		printf ("%d	%Lg	%Lg	%Lg	%Lg\n", i, x,y, z, z-y);
 	}
