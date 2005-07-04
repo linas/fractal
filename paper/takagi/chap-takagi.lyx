@@ -37,13 +37,12 @@ Linas Vepstas <linas@linas.org>
 
 The concept of self-similarity is central to the notion of a fractal, but
  the actual symmetry group that generates that self-similarity is oddly
- never named, and it seems fractals are never studied according to their
- symmetries.
- Yet, in other branches of mathematics, it is well understood that symmetry
- provides a powerful mechanism for studying systems.
+ rarely named, and it seems fractals are almost never studied according
+ to their symmetries.
+ Yet, in other branches of mathematics and physics, it is well understood
+ that symmetry provides a powerful mechanism for understanding systems.
  Indeed, for dynamical systems, symmetries lead to conserved quantum numbers
- and/or conserved currents (via Noether's Theorem).
- 
+ and conserved currents.
 \layout Abstract
 
 In this paper, we identify the symmetry group of period-doubling maps as
@@ -54,26 +53,26 @@ In this paper, we identify the symmetry group of period-doubling maps as
 .
  To anchor this assertion, we work out an explicit, exactly-solvable fractal
  curve, the Takagi or Blancmange Curve, as transforming under the three-dimensio
-nal representation of the Modular Group.
+nal representation of the (semigroup of the) Modular Group.
  By replacing the triangular shape that generates the Blancmange curve with
  a polynomial, we find that the resulting curve transforms under the n+2
- dimensional representation of the Modular Group, where n is the degree
- of the polynomial.
+ dimensional representation of the semigroup, where n is the degree of the
+ polynomial.
  We also find that the (ill-defined) derivative of the Blancmange curve
  is essentially the (inverse of the) Cantor function, thus demonstrating
- the Modular Group symmetry on the Cantor Set as well.
+ the semigroup symmetry on the Cantor Set as well.
  In fact, any topologically conjugate map will transform under the three-dimensi
-onal representation, and the set of conjugate maps is very large.
- We thus hypothesize that essentially all period-doubling maps will demonstrate
- a Modular Group symmetry, which is essentially an outcome of the dyadic
- representation of the Modular Group.
+onal representation.
+ We then show how all period-doubling maps can demonstrate the semigroup
+ symmetry, which is essentially an outcome of the dyadic representation
+ of the semigroup.
  
 \layout Abstract
 
-To provide support for this hypothesis, we review Georges deRham's 1958
- construction of the Koch snowflake, the Levy C-curve and the Peano space-fillin
-g curve and the Minkowski Question Mark function as special cases of a curve
- with the same set of symmetries.
+Thist paper includes a very breif review of Georges deRham's 1958 construction
+ of the Koch snowflake, the Levy C-curve, the Peano space-filling curve
+ and the Minkowski Question Mark function as special cases of a curve with
+ the semigroup symmetry.
 \layout Abstract
 
 This paper is part of a set of chapters that explore the relationship between
@@ -2600,6 +2599,8 @@ In a classic 1958 paper
 , Georges de Rham constructs a class of curves, and proves that these curves
  are everywhere continuous but mostly nowhere differentiable (or, if differentia
 ble, have mostly derivative zero).
+ In addition, he shows how the curves may be parameterized by a real number
+ in the unit interval.
  The construction is simple.
  This section illustrates some of these curves.
  
@@ -3185,6 +3186,102 @@ The iteration of a pair of non-linear mappings to generate a de Rham curve
  seems to be an unexplored area of mathematics.
  There is a hint of richness.
  
+\layout Subsection
+
+Symbolic dynamics
+\layout Standard
+
+The construction and symmetry properties are not limited to continuous curves.
+ Any system with a symbolic dynamics in two symbols is naturally paramaterized
+ through real numbers.
+ Consider, for example, the symbolic dynamics of the tent map of unit height.
+ By picking an initial value, and then iteratating on the tent map, one
+ will get a sequence of values.
+ For each iteration, write down the letter 
+\begin_inset Formula $A$
+\end_inset 
+
+ if the value is less than 1/2, and write the letter 
+\begin_inset Formula $B$
+\end_inset 
+
+ if the value is more than 1/2.
+ The result of the iteration will be an inifinitely long string composed
+ ot the letters 
+\begin_inset Formula $A$
+\end_inset 
+
+ and 
+\begin_inset Formula $B$
+\end_inset 
+
+.
+ This string is the so-called symbolic dynamics of the iterated unit-height
+ tent map.
+ It can be shown that the symbolic dynamics of the iteration precisely and
+ completely defines the iteration.
+ 
+\layout Standard
+
+What is notable here is that any string in two letters can be exactly mapped
+ to a real number, by interpreting it as the dyadic expansion of that number.
+ In this case, let 
+\begin_inset Formula $c_{k}$
+\end_inset 
+
+ be zero if the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th letter is 
+\begin_inset Formula $A$
+\end_inset 
+
+, and let it be one if the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th letter is 
+\begin_inset Formula $B$
+\end_inset 
+
+.
+ We then define the value of a symbolic string to be 
+\begin_inset Formula \begin{equation}
+s(x)=\sum_{n=1}^{\infty}c_{k}2^{-k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $x$
+\end_inset 
+
+ was the initial value that was iterated.
+ The figure xxx shows the graph of the above, after iterating the tent map
+ of unit height.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Tent Map
+\layout Standard
+
+
+\begin_inset Graphics
+	filename tent-map.png
+	width 100text%
+
+\end_inset 
+
+
+\end_inset 
+
+
 \layout Subsection
 
 IFS Construction
