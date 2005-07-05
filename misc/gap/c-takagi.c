@@ -70,7 +70,7 @@ Complex takagi (Complex w, long double x)
 	long double tp = 1.0L;
 	for (k=0; k<36; k++)
 	{
-		long double term = tw* triangle (tp*x);
+		Complex term = tw* triangle (tp*x);
 		// long double term = tw* parabola_down (tp*x);
 		// long double term = tw* parabola_up (tp*x);
 		acc += term;
@@ -89,8 +89,8 @@ main (int argc, char *argv[])
 	int i;
 
 	// int nmax = 512;
-	int nmax = 432;
-	// int nmax = 1720;
+	// int nmax = 432;
+	int nmax = 2723;
 	// int nmax = 2048;
 
 	if (argc <3)
