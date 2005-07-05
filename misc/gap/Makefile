@@ -30,7 +30,7 @@ dist:
 	$(CC) -o $* $< $(LIB)/modular.o $(LIB)/gcf.o $(LIB)/Farey.o $(LIB)/FareyTree.o -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++ 
 
 
-c-takagi.o:	c-takagi.C
+c-takagi.o:	c-takagi.c
 conj.o:	conj.c
 dyadic.o:	dyadic.C
 entropy.o:  entropy.C $(LIB)/Farey.o $(INC)/Farey.h

@@ -111,7 +111,7 @@ main (int argc, char *argv[])
 		double re_t = creall (tw);
 		double im_t = cimagl (tw);
 		
-		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, re_t, im_t);
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, re_t, im_t);
 		fflush (stdout);
 	}
 }
