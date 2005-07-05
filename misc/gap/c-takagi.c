@@ -1,4 +1,3 @@
-
 /* 
  * c-takagi.C
  *
@@ -15,11 +14,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <gsl/gsl_sf_zeta.h>
-#include "Farey.h"
-
-ContinuedFraction far;
 
 long double triangle (long double x)
 {
@@ -64,15 +58,17 @@ double saw (double x)
 	return 2.0-x;
 }
 
+// #define Complex complex<long double>
+#define Complex long double complex
 
 /* The main, core basic takagi curve */
-long double takagi (long double w, long double x)
+Complex takagi (Complex w, long double x)
 {
 	int k;
-	long double acc = 0.0L;
-	long double tw = 1.0L;
+	Complex acc = 0.0L;
+	Complex tw = 1.0L;
 	long double tp = 1.0L;
-	for (k=0; k<50; k++)
+	for (k=0; k<36; k++)
 	{
 		long double term = tw* triangle (tp*x);
 		// long double term = tw* parabola_down (tp*x);
@@ -80,7 +76,6 @@ long double takagi (long double w, long double x)
 		acc += term;
 		tp *= 2.0L;
 		tw *= w;
-		if (1.0e-16 > tw) break;
 	}
 
 	return acc;
@@ -98,19 +93,25 @@ main (int argc, char *argv[])
 	// int nmax = 1720;
 	// int nmax = 2048;
 
-	if (argc <2)
+	if (argc <3)
 	{
-		printf ("Usage: %s <w-value>\n", argv[0]);
+		printf ("Usage: %s <real w-value> <imag w-value>\n", argv[0]);
 		exit (1);
 	}
-	double w = atof(argv[1]);
+	double re_w = atof(argv[1]);
+	double im_w = atof(argv[2]);
+
+	Complex w = re_w + I* im_w;
 
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
-		// double tw = takagi (w, x);
+		Complex tw = takagi (w, x);
 
-		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
+		double re_t = creall (tw);
+		double im_t = cimagl (tw);
+		
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, re_t, im_t);
 		fflush (stdout);
 	}
 }
