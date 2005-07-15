@@ -14,14 +14,21 @@ set out 'c-takagi.png'
 set data style lines
 set key right
 
-set title "Itera Curve"
-set xlabel "x"
-set ylabel "F(x)"
-
-plot "c-takagi.dat" using 2:3 title "real", \
-     "c-takagi.dat" using 2:4 title "imag"
-
+# set title "Takagi Phase plot for w=0.618 * i"
+# set xlabel "Re t(x)"
+# set ylabel "Im t(x)"
 # plot "c-takagi.dat" using 3:4 title ""
+
+# set title "Takagi Real and Imaginary parts for w=0.618 * i"
+# set xlabel "x"
+# set ylabel "t(x)"
+# plot "c-takagi.dat" using 2:3 title "Re t(x)", \
+#      "c-takagi.dat" using 2:4 title "Im t(x)"
+
+set title "Takagi Phase plot" 
+set xlabel "Re t(x)"
+set ylabel "Im t(x)"
+plot "c-takagi.dat" using 3:4 title ""
 
 # set yrange [0:]
 

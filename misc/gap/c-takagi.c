@@ -90,7 +90,7 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 432;
-	int nmax = 2723;
+	int nmax = 4723;
 	// int nmax = 2048;
 
 	if (argc <3)
@@ -108,10 +108,46 @@ main (int argc, char *argv[])
 		double x = i/((double)nmax);
 		Complex tw = takagi (w, x);
 
-		double re_t = creall (tw);
-		double im_t = cimagl (tw);
+#ifdef HALF_SYM
+		// g
+		Complex tw = takagi (w, 0.5*x);
+		Complex ts = x + w*takagi (w, x);
+
+		// g*g
+		Complex tw = takagi (w, 0.25*x);
+		Complex ts = 0.5*x + w*x + w*w*takagi (w, x);
+
+		// g*g*g
+		Complex tw = takagi (w, 0.125*x);
+		Complex ts =  x*(0.25+0.5*w +w*w) +w*w*w*takagi (w,x);
+
+		// r*g*g*g
+		Complex tw = takagi (w, 1.0-0.125*x);
+		Complex ts = x*(0.25+0.5*w +w*w) +w*w*w*takagi (w,x);
+
+		// g^4
+		Complex tw = takagi (w, 0.0625*x);
+		Complex ts = 0.125*x*(1.0-16.0*w*w*w*w)/(1.0-2.0*w) + w*w*w*w*takagi (w, x);
+		// gr
+		Complex tw = takagi (w, 0.5-0.5*x);
+		Complex ts = 1.0 - x + w*takagi (w,x);
+
+		// grg
+		Complex tw = takagi (w, 0.5-0.25*x);
+		Complex ts = 1.0 +x*(-0.5+w) +w*w*takagi (w, x);
+
+		// grg^3
+		Complex tw = takagi (w, 0.5-0.0625*x);
+		Complex ts = 1.0 + x*(-0.125+0.25*w +0.5*w*w + w*w*w) +w*w*w*w*takagi (w,x);
+
+		double re_ts = creall (ts);
+		double im_ts = cimagl (ts);
 		
-		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, re_t, im_t);
+#endif
+		double re_tw = creall (tw);
+		double im_tw = cimagl (tw);
+		
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, re_tw, im_tw);
 		fflush (stdout);
 	}
 }
