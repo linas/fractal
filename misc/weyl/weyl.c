@@ -55,11 +55,15 @@ main ()
 
 	int nmax = 723;
 
+	int n=1;
+
 	for (i=0; i<nmax; i++)
 	{
 		double x = (double) i / ((double) nmax);
 
-		double y = olap (x,1,5);
+		double y = olap (x,n,555);
+
+		y = cos (2.0*M_PI*n*x) - y;
 
 		printf ("%d	%g	%g\n", i, x,y);
 	}
