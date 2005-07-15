@@ -9,23 +9,27 @@
 #include <math.h>
 
 double 
-olap (double x, int n, int mmax)
+olap (double x, int n, int mterms)
 {
 	double re_acc = 0.0;
 	double im_acc = 0.0;
 
 	int m;
+	
+	int mmax = 4*mterms;
 
 	double re_ex = cos (2.0*M_PI*x);
 	double im_ex = sin (2.0*M_PI*x);
 
+	/* add terms 4 at a time (one is zero) */
 	for (m=-mmax-4*n; m<mmax-4*n; m+=4)
 	{
 		double re_emx = cos (2.0*M_PI*(m+2)*x);
-		double im_emx = cos (2.0*M_PI*(m+2)*x);
+		double im_emx = sin (2.0*M_PI*(m+2)*x);
 
 		double re_term = re_ex / ((double)m+1+4*n);
 		double im_term = -im_ex / ((double)m+1+4*n);
+					 
 		re_term -= 2.0 / ((double)m+2+4*n);
 		im_term -= 2.0 / ((double)m+2+4*n);
 		re_term += re_ex / ((double)m+3+4*n);
@@ -57,6 +61,6 @@ main ()
 
 		double y = olap (x,1,5);
 
-		printf ("%g	%g\n", x,y);
+		printf ("%d	%g	%g\n", i, x,y);
 	}
 }
