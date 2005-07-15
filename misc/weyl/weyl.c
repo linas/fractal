@@ -46,6 +46,11 @@ olap (double x, int n, int mterms)
 	re_acc = im_acc;
 	im_acc = -re_acc;
 
+	re_acc -= cos (2.0*M_PI*n*x);
+	im_acc -= sin (2.0*M_PI*n*x);
+
+	re_acc *= M_SQRT2;
+	im_acc *= M_SQRT2;
 	return re_acc;
 }
 
@@ -53,18 +58,36 @@ main ()
 {
 	int i;
 
-	int nmax = 723;
+	int nmax = 15723;
+
+	int mterms = 4555;
 
 	int n=1;
 
+	double gral = 0.0;
+	double grbase = 0.0;
 	for (i=0; i<nmax; i++)
 	{
 		double x = (double) i / ((double) nmax);
 
-		double y = olap (x,n,555);
+		double y = olap (x,n,mterms);
+		gral += y*y;
 
-		y = cos (2.0*M_PI*n*x) - y;
+		double b = M_SQRT2 * cos (2.0*M_PI*n*x);
+		// y = b - y;
+		
+		grbase += b*b;
 
+		if (i%100==0)
 		printf ("%d	%g	%g\n", i, x,y);
 	}
+
+	gral /= (double) nmax;
+	gral = sqrt (gral);
+	grbase /= (double) nmax;
+	grbase = sqrt (grbase);
+
+	// gral /= grbase;
+
+	printf ("# 1/h=%d  mterms=%d integral = %11.8g\n", nmax, mterms, gral);
 }
