@@ -77,7 +77,9 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
  */
 void fp_euler_mascheroni (mpf_t gam)
 {
-	mpf_set_d (gam, 0.577);
+	char * g="0.5772156649015328606065120900824024310421593359399235988057672348848677267776646709369470632917467495e0";
+	
+	mpf_set_str (gam, g, 10);
 }
 
 /* ============================================================================= */
@@ -180,6 +182,11 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	fp_euler_mascheroni (gam);
 	mpf_sub (a_n, term, gam);
 
+	/* subtract 1/2(n+1) */
+	mpf_div_ui (ok, one, 2*(n+1));
+	mpf_sub (term, a_n, ok);
+	mpf_set (a_n, term);
+	
 	mpf_clear (term);
 	mpf_clear (acc);
 	mpf_clear (zeta);
@@ -229,9 +236,13 @@ main ()
 	mpf_t a_n;
 	mpf_init (a_n);
 
-	a_sub_n (a_n, 2, 10);
-
-	fp_prt ("an= ", a_n);
+	int prec = 10;
+	a_sub_n (a_n, 0, prec);
+	fp_prt ("a_0= ", a_n);
+	a_sub_n (a_n, 1, prec);
+	fp_prt ("a_1= ", a_n);
+	a_sub_n (a_n, 2, prec);
+	fp_prt ("a_2= ", a_n);
 	
 #ifdef ZETA_STUFF
 	mpf_t zeta;
