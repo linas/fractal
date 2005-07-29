@@ -82,6 +82,57 @@ void fp_euler_mascheroni (mpf_t gam)
 	mpf_set_str (gam, g, 10);
 }
 
+void fp_pi (mpf_t pi)
+{
+	char *p = "3.1415926535 8979323846 2643383279 5028841971 6939937510"
+			   "5820974944 5923078164 0628620899 8628034825 3421170679"
+				 "8214808651 3282306647 0938446095 5058223172 5359408128"
+				  "4811174502 8410270193 8521105559 6446229489 5493038196"
+				   "4428810975 6659334461 2847564823 3786783165 2712019091"
+					 "4564856692 3460348610 4543266482 1339360726 0249141273"
+					  "7245870066 0631558817 4881520920 9628292540 9171536436"
+					   "7892590360 0113305305 4882046652 1384146951 9415116094"
+						 "3305727036 5759591953 0921861173 8193261179 3105118548"
+						  "0744623799 6274956735 1885752724 8912279381 8301194912"
+						   "9833673362 4406566430 8602139494 6395224737 1907021798"
+							 "6094370277 0539217176 2931767523 8467481846 7669405132"
+							  "0005681271 4526356082 7785771342 7577896091 7363717872"
+							   "1468440901 2249534301 4654958537 1050792279 6892589235"
+								 "4201995611 2129021960 8640344181 5981362977 4771309960"
+								  "5187072113 4999999837 2978049951 0597317328 1609631859"
+								   "5024459455 3469083026 4252230825 3344685035 2619311881";
+	mpf_set_str (pi, p, 10);
+}
+
+void fp_zeta2 (mpf_t zeta)
+{
+	mpf_t pi, pisq;
+	mpf_init (pi);
+	mpf_init (pisq);
+	
+	fp_pi (pi);
+	mpf_mul (pisq, pi, pi);
+	mpf_div_ui (zeta, pisq, 6);
+
+	mpf_clear (pi);
+	mpf_clear (pisq);
+}
+
+void fp_zeta4 (mpf_t zeta)
+{
+	mpf_t pi, pisq;
+	mpf_init (pi);
+	mpf_init (pisq);
+	
+	fp_pi (pi);
+	mpf_mul (pisq, pi, pi);
+	mpf_mul (pi, pisq, pisq);
+	mpf_div_ui (zeta, pi, 90);
+
+	mpf_clear (pi);
+	mpf_clear (pisq);
+}
+
 /* ============================================================================= */
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
@@ -92,6 +143,16 @@ void fp_euler_mascheroni (mpf_t gam)
 void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 {
 	unsigned long int us = s;
+
+	if (s<2) return;
+	switch (s)
+	{
+		case 2:
+			fp_zeta2 (zeta); return;
+		case 4:
+			fp_zeta4 (zeta); return;
+	}
+	
 	mpf_t acc;
 	mpf_t term;
 	mpf_t en;
@@ -162,20 +223,15 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 
 	for (k=1; k<= n; k++)
 	{
-	printf ("n=%d k=%d \n", n, k);
 		fp_zeta (zeta, k+1, prec);
-	fp_prt ("zeta = ", zeta);
 		mpf_div_ui (zt, zeta, k+1);
 		mpf_div_ui (ok, one, k);
 		mpf_sub (term, ok, zt);
-	fp_prt ("term = ", term);
 
 		i_binomial (ibin, n, k);
 		mpf_set_z (fbin, ibin);
-	fp_prt ("bin= ", fbin);
 
 		mpf_mul (zeta, term, fbin);
-	fp_prt ("binerm = ", zeta);
 
 		if (k%2) mpf_neg (term, zeta);
 		
@@ -237,7 +293,7 @@ main ()
 #endif
 	
 	/* set the precision */
-	mpf_set_default_prec (400);
+	mpf_set_default_prec (350);
 	
 #ifdef ZETA_STUFF
 	mpf_t zeta;
@@ -264,15 +320,16 @@ main ()
 	mpf_t a_n;
 	mpf_init (a_n);
 
+	fp_pi (a_n);
+	fp_prt ("duude pi ", a_n);
+
 	int prec = 10;
 	a_sub_n (a_n, 0, prec);
 	fp_prt ("a_0= ", a_n);
 	a_sub_n (a_n, 1, prec);
 	fp_prt ("a_1= ", a_n);
-#if 0
 	a_sub_n (a_n, 2, prec);
 	fp_prt ("a_2= ", a_n);
-#endif
-	
+
 }
 
