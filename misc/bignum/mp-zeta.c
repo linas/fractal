@@ -50,6 +50,28 @@ void i_factorial (mpz_t fact, unsigned int n)
 }
 
 /* ============================================================================= */
+/* fp_binomial
+ * Binomial coefficient
+ */
+
+void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
+{
+	mpz_t top, bot;
+
+	if (2*k < n) k = n-k;
+
+	mpz_init (top);
+	mpz_init (bot);
+	i_poch_rising (top, k+1, n-k);
+	i_factorial (bot, n-k); 
+
+	mpz_divexact (bin, top, bot);
+	
+	mpz_clear (top);
+	mpz_clear (bot);
+}
+
+/* ============================================================================= */
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
  * return value placed in the arg "zeta".
@@ -106,20 +128,72 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 /* ============================================================================= */
 /* compute a_sub_n
  */
-void a_sub_n (mpf_t a_n)
+void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 {
+	int k;
+	mpf_t bin, alt, term, zt, ok, one, acc, zeta;
+
+	mpf_init (term);
+	mpf_init (acc);
+	mpf_init (zeta);
+	mpf_init (zt);
+	mpf_init (ok);
+	mpf_init (one);
+	mpf_init (alt);
+	mpf_init (bin);
+	mpf_set_ui (one, 1);
+	mpf_set_ui (alt, 1);
+
+
+	for (k=1; k<= n; k++)
+	{
+		fp_zeta (zeta, k+1, prec);
+		mpf_div_ui (zt, zeta, k+1);
+		mpf_div_ui (ok, one, k);
+		mpf_add (term, zt, ok);
+		//mpf_set_z 
+	}
+
+	mpf_clear (term);
+	mpf_clear (acc);
+	mpf_clear (zeta);
+	mpf_clear (zt);
+	mpf_clear (ok);
+	mpf_clear (one);
+	mpf_clear (alt);
+	mpf_clear (bin);
 }
 
 /* ============================================================================= */
 main ()
 {
 	char str[4000];
+
+#ifdef FACT_TEST
 	mpz_t fact;
 	mpz_init (fact);
 
 	i_factorial (fact, 5);
 	mpz_get_str (str, 10, fact);
 	printf ("fact = %s\n", str);
+#endif
+
+#ifdef BINOMIAL_TEST
+	int n, k;
+	mpz_t bin;
+	mpz_init (bin);
+
+	for (n=1; n<7; n++)
+	{
+		for (k=0; k<=n; k++)
+		{
+			i_binomial (bin, n ,k);
+			mpz_get_str (str, 10, bin);
+			printf ("bin (%d %d) = %s\n", n, k, str);
+		}
+		printf ("---\n");
+	}
+#endif
 	
 	/* set the precision */
 	mpf_set_default_prec (400);
