@@ -410,11 +410,11 @@ main ()
 	fp_pi (a_n);
 	fp_prt ("duude pi ", a_n);
 
-	int prec = 20;
+	int prec = 35;
 	int n;
 	for (n=0; n<150; n++)
 	{
-		a_sub_n (a_n, n, prec+2*n);
+		a_sub_n (a_n, n, prec+n);
 
 		double dbn = 1.0/exp (-4.0*sqrt (n+1));
 		mpf_set_d (b_n, dbn);
@@ -422,6 +422,7 @@ main ()
 		
 		printf ("a(%d) ",n);
 		fp_prt ("= ", prod);
+		fflush (stdout);
 	}
 
 }
