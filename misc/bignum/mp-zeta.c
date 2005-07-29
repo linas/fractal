@@ -158,18 +158,24 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 
 	mpz_t ibin;
 	mpz_init (ibin);
+	mpf_set_ui (a_n, 0);
 
 	for (k=1; k<= n; k++)
 	{
+	printf ("n=%d k=%d \n", n, k);
 		fp_zeta (zeta, k+1, prec);
+	fp_prt ("zeta = ", zeta);
 		mpf_div_ui (zt, zeta, k+1);
 		mpf_div_ui (ok, one, k);
-		mpf_add (term, zt, ok);
+		mpf_sub (term, ok, zt);
+	fp_prt ("term = ", term);
 
 		i_binomial (ibin, n, k);
 		mpf_set_z (fbin, ibin);
+	fp_prt ("bin= ", fbin);
 
 		mpf_mul (zeta, term, fbin);
+	fp_prt ("binerm = ", zeta);
 
 		if (k%2) mpf_neg (term, zeta);
 		
@@ -232,17 +238,6 @@ main ()
 	
 	/* set the precision */
 	mpf_set_default_prec (400);
-
-	mpf_t a_n;
-	mpf_init (a_n);
-
-	int prec = 10;
-	a_sub_n (a_n, 0, prec);
-	fp_prt ("a_0= ", a_n);
-	a_sub_n (a_n, 1, prec);
-	fp_prt ("a_1= ", a_n);
-	a_sub_n (a_n, 2, prec);
-	fp_prt ("a_2= ", a_n);
 	
 #ifdef ZETA_STUFF
 	mpf_t zeta;
@@ -250,6 +245,8 @@ main ()
 	
 	printf ("           000000000011111111112222222222333333333344444444445555555555666666666677777777778\n");
 	printf ("           012345678901234567890123456789012345678901234567890123456789012345678901234567890\n");
+	fp_zeta (zeta, 2, 13);
+	fp_prt ("13 digs= ", zeta);
 	fp_zeta (zeta, 8, 30);
 	fp_prt ("30 digs= ", zeta);
 	fp_zeta (zeta, 8, 40);
@@ -263,5 +260,19 @@ main ()
 	fp_zeta (zeta, 8, 80);
 	fp_prt ("0 digs= ", zeta);
 #endif
+	
+	mpf_t a_n;
+	mpf_init (a_n);
+
+	int prec = 10;
+	a_sub_n (a_n, 0, prec);
+	fp_prt ("a_0= ", a_n);
+	a_sub_n (a_n, 1, prec);
+	fp_prt ("a_1= ", a_n);
+#if 0
+	a_sub_n (a_n, 2, prec);
+	fp_prt ("a_2= ", a_n);
+#endif
+	
 }
 
