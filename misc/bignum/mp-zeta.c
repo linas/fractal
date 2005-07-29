@@ -72,6 +72,15 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 }
 
 /* ============================================================================= */
+/* fp_euler
+ * return Euler-Mascheroni const
+ */
+void fp_euler_mascheroni (mpf_t gam)
+{
+	mpf_set_d (gam, 0.577);
+}
+
+/* ============================================================================= */
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
  * return value placed in the arg "zeta".
@@ -131,7 +140,8 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 {
 	int k;
-	mpf_t bin, alt, term, zt, ok, one, acc, zeta;
+	mpf_t fbin, term, zt, ok, one, acc, zeta;
+	mpf_t gam;
 
 	mpf_init (term);
 	mpf_init (acc);
@@ -139,11 +149,13 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpf_init (zt);
 	mpf_init (ok);
 	mpf_init (one);
-	mpf_init (alt);
-	mpf_init (bin);
+	mpf_init (fbin);
+	mpf_init (gam);
+	
 	mpf_set_ui (one, 1);
-	mpf_set_ui (alt, 1);
 
+	mpz_t ibin;
+	mpz_init (ibin);
 
 	for (k=1; k<= n; k++)
 	{
@@ -151,8 +163,22 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 		mpf_div_ui (zt, zeta, k+1);
 		mpf_div_ui (ok, one, k);
 		mpf_add (term, zt, ok);
-		//mpf_set_z 
+
+		i_binomial (ibin, n, k);
+		mpf_set_z (fbin, ibin);
+
+		mpf_mul (zeta, term, fbin);
+
+		if (k%2) mpf_neg (term, zeta);
+		
+		mpf_add (acc, a_n, term);
+		mpf_set (a_n, acc);
 	}
+
+	/* add const terms */
+	mpf_add_ui (term, a_n, 1);
+	fp_euler_mascheroni (gam);
+	mpf_sub (a_n, term, gam);
 
 	mpf_clear (term);
 	mpf_clear (acc);
@@ -160,8 +186,10 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpf_clear (zt);
 	mpf_clear (ok);
 	mpf_clear (one);
-	mpf_clear (alt);
-	mpf_clear (bin);
+	mpf_clear (fbin);
+	mpf_clear (gam);
+
+	mpz_clear (ibin);
 }
 
 /* ============================================================================= */
@@ -198,6 +226,14 @@ main ()
 	/* set the precision */
 	mpf_set_default_prec (400);
 
+	mpf_t a_n;
+	mpf_init (a_n);
+
+	a_sub_n (a_n, 2, 10);
+
+	fp_prt ("an= ", a_n);
+	
+#ifdef ZETA_STUFF
 	mpf_t zeta;
 	mpf_init (zeta);
 	
@@ -215,5 +251,6 @@ main ()
 	fp_prt ("70 digs= ", zeta);
 	fp_zeta (zeta, 8, 80);
 	fp_prt ("0 digs= ", zeta);
+#endif
 }
 
