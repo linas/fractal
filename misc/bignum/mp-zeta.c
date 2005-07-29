@@ -118,6 +118,39 @@ void fp_zeta2 (mpf_t zeta)
 	mpf_clear (pisq);
 }
 
+void fp_zeta3 (mpf_t zeta)
+{
+	// http://www.worldwideschool.org/library/books/sci/math/MiscellaneousMathematicalConstants/chap97.html
+	// char * g="1.202056903159594285399738161511449990764986292";
+	char * g="1.2020569031595942853997381615114499907649862923404988817922715553418382057863 130901864558736093352581461991577952607194184919959986732832137763968372079001 614539417829493600667191915755222424942439615639096641032911590957809655146512 799184051057152559880154371097811020398275325667876035223369849416618110570147 157786394997375237852779370309560257018531827900030765471075630488433208697115";
+
+	mpf_set_str (zeta, g, 10);
+}
+
+void fp_zeta5 (mpf_t zeta)
+{
+	// http://www.worldwideschool.org/library/books/sci/math/MiscellaneousMathematicalConstants/chap97.html
+	char * g="1.036927755143369926331365486457034168057080919501912811974192677 9038035897862814845600431065571333363796203414665566090428009617 7915597084183511072180087644866286337180353598363962365128888981 3352767752398275032022436845766444665958115993917977745039244643 9196666159664016205325205021519226713512567859748692860197447984 3200672681297530919900774656558601526573730037561532683149897971 9350398378581319922884886425335104251602510849904346402941172432 7576341508162332245618649927144272264614113007580868316916497918";
+
+	mpf_set_str (zeta, g, 10);
+}
+
+void fp_zeta7 (mpf_t zeta)
+{
+	// http://www.worldwideschool.org/library/books/sci/math/MiscellaneousMathematicalConstants/chap97.html
+	char * g="1.008349277381922826839797549849796759599863560565238706417283136 5716014783173557353460969689138513239689614536514910748872867774 1984033544031579830103398456212106946358524390658335396467699756 7696691427804314333947495215378902800259045551979353108370084210 7329399046107085641235605890622599776098694754076320000481632951 2586769250630734413632555601360305007373302413187037951026624779 3954650225467042015510405582224239250510868837727077426002177100 0195455778989836046745406121952650765461161356548679150080858554";
+
+	mpf_set_str (zeta, g, 10);
+}
+
+void fp_zeta9 (mpf_t zeta)
+{
+	// http://www.worldwideschool.org/library/books/sci/math/MiscellaneousMathematicalConstants/chap97.html
+	char * g="1.002008392826082214417852769232412060485605851394888756548596615 9097850533902583989503930691271695861574086047658470602614253739 7072243015306913249876425109092948687676545396979415407826022964 1544836250668629056707364521601531424421326337598815558052591454 0848901539527747456133451028740613274660692763390016294270864220 1123162209241265753326205462293215454665179945038662778223564776 1660330281492364570399301119383985017167926002064923069795850945 8457966548540026945118759481561430375776154443343398399851419383";
+
+	mpf_set_str (zeta, g, 10);
+}
+
 void fp_zeta4 (mpf_t zeta)
 {
 	mpf_t pi, pisq;
@@ -133,6 +166,39 @@ void fp_zeta4 (mpf_t zeta)
 	mpf_clear (pisq);
 }
 
+void fp_zeta6 (mpf_t zeta)
+{
+	mpf_t pi, pisq, ph;
+	mpf_init (pi);
+	mpf_init (pisq);
+	mpf_init (ph);
+	
+	fp_pi (pi);
+	mpf_mul (pisq, pi, pi);
+	mpf_mul (pi, pisq, pisq);
+	mpf_mul (ph, pi, pisq);
+	mpf_div_ui (zeta, ph, 945);
+
+	mpf_clear (pi);
+	mpf_clear (pisq);
+	mpf_clear (ph);
+}
+
+void fp_zeta8 (mpf_t zeta)
+{
+	mpf_t pi, pisq;
+	mpf_init (pi);
+	mpf_init (pisq);
+	
+	fp_pi (pi);
+	mpf_mul (pisq, pi, pi);
+	mpf_mul (pi, pisq, pisq);
+	mpf_mul (pisq, pi, pi);
+	mpf_div_ui (zeta, pisq, 9450);
+
+	mpf_clear (pi);
+	mpf_clear (pisq);
+}
 /* ============================================================================= */
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
@@ -147,10 +213,14 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	if (s<2) return;
 	switch (s)
 	{
-		case 2:
-			fp_zeta2 (zeta); return;
-		case 4:
-			fp_zeta4 (zeta); return;
+		case 2: fp_zeta2 (zeta); return;
+		case 3: fp_zeta3 (zeta); return;
+		case 4: fp_zeta4 (zeta); return;
+		case 5: fp_zeta5 (zeta); return;
+		case 6: fp_zeta6 (zeta); return;
+		case 7: fp_zeta7 (zeta); return;
+		case 8: fp_zeta8 (zeta); return;
+		case 9: fp_zeta9 (zeta); return;
 	}
 	
 	mpf_t acc;
@@ -179,7 +249,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		return;
 	}
 	int nmax = dig+1.0;
-	printf ("zeta will be computed with %d terms\n", nmax);
+	// printf ("zeta will be computed with %d terms\n", nmax);
 	
 	int n;
 	for (n=2; n<= nmax; n++)
@@ -234,6 +304,7 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 		mpf_mul (zeta, term, fbin);
 
 		if (k%2) mpf_neg (term, zeta);
+		else mpf_set (term, zeta);
 		
 		mpf_add (acc, a_n, term);
 		mpf_set (a_n, acc);
@@ -293,7 +364,7 @@ main ()
 #endif
 	
 	/* set the precision */
-	mpf_set_default_prec (350);
+	mpf_set_default_prec (200);
 	
 #ifdef ZETA_STUFF
 	mpf_t zeta;
@@ -323,13 +394,14 @@ main ()
 	fp_pi (a_n);
 	fp_prt ("duude pi ", a_n);
 
-	int prec = 10;
-	a_sub_n (a_n, 0, prec);
-	fp_prt ("a_0= ", a_n);
-	a_sub_n (a_n, 1, prec);
-	fp_prt ("a_1= ", a_n);
-	a_sub_n (a_n, 2, prec);
-	fp_prt ("a_2= ", a_n);
+	int prec = 30;
+	int n;
+	for (n=0; n<120; n++)
+	{
+		a_sub_n (a_n, n, prec);
+		printf ("a(%d) ",n);
+		fp_prt ("= ", a_n);
+	}
 
 }
 
