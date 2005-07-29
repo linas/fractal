@@ -18,6 +18,38 @@ void fp_prt (char * str, mpf_t val)
 	printf ("\n");
 }
 
+/* ============================================================================= */
+/* i_poch_rising
+ * rising pochhammer symbol, for integer values.
+ *
+ * Brute force, simple.
+ */
+
+void i_poch_rising (mpz_t poch, unsigned int k, unsigned int n)
+{
+	mpz_t acc;
+	
+	mpz_init (acc);
+
+	mpz_set_ui (poch, 1);
+	unsigned int i;
+	for (i=0; i<n; i++)
+	{
+		mpz_mul_ui (acc, poch, i+k);
+		mpz_set (poch, acc);
+	}
+
+	mpz_clear (acc);
+}
+
+/* i_factorial -- the factorial
+ */
+void i_factorial (mpz_t fact, unsigned int n)
+{
+	i_poch_rising (fact, 1, n);
+}
+
+/* ============================================================================= */
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
  * return value placed in the arg "zeta".
@@ -71,10 +103,26 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	mpf_clear (inv);
 }
 
+/* ============================================================================= */
+/* compute a_sub_n
+ */
+void a_sub_n (mpf_t a_n)
+{
+}
+
+/* ============================================================================= */
 main ()
 {
+	char str[4000];
+	mpz_t fact;
+	mpz_init (fact);
+
+	i_factorial (fact, 5);
+	mpz_get_str (str, 10, fact);
+	printf ("fact = %s\n", str);
+	
 	/* set the precision */
-	mpf_set_default_prec (200);
+	mpf_set_default_prec (400);
 
 	mpf_t zeta;
 	mpf_init (zeta);
