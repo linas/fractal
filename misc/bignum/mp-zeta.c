@@ -14,7 +14,7 @@
 void fp_prt (char * str, mpf_t val)
 {
 	printf (str);
-	mpf_out_str (stdout, 10, 0, val);
+	mpf_out_str (stdout, 10, 60, val);
 	printf ("\n");
 }
 
@@ -332,6 +332,20 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpz_clear (ibin);
 }
 
+void a_bound_n (mpf_t b_n, unsigned int n)
+{
+	mpf_t en, sq_en;
+	mpf_init (en);
+	mpf_init (sq_en);
+
+	mpf_set_ui (en, n+1);
+	mpf_sqrt (sq_en, en);
+	mpf_neg (en, sq_en);
+
+	mpf_clear (en);
+	mpf_clear (sq_en);
+}
+
 /* ============================================================================= */
 main ()
 {
@@ -364,7 +378,7 @@ main ()
 #endif
 	
 	/* set the precision */
-	mpf_set_default_prec (200);
+	mpf_set_default_prec (800);
 	
 #ifdef ZETA_STUFF
 	mpf_t zeta;
@@ -388,19 +402,26 @@ main ()
 	fp_prt ("0 digs= ", zeta);
 #endif
 	
-	mpf_t a_n;
+	mpf_t a_n, b_n, prod;
 	mpf_init (a_n);
+	mpf_init (b_n);
+	mpf_init (prod);
 
 	fp_pi (a_n);
 	fp_prt ("duude pi ", a_n);
 
-	int prec = 30;
+	int prec = 20;
 	int n;
-	for (n=0; n<120; n++)
+	for (n=0; n<150; n++)
 	{
-		a_sub_n (a_n, n, prec);
+		a_sub_n (a_n, n, prec+2*n);
+
+		double dbn = 1.0/exp (-4.0*sqrt (n+1));
+		mpf_set_d (b_n, dbn);
+		mpf_mul(prod, a_n, b_n);
+		
 		printf ("a(%d) ",n);
-		fp_prt ("= ", a_n);
+		fp_prt ("= ", prod);
 	}
 
 }
