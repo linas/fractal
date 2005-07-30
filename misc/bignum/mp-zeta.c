@@ -200,6 +200,25 @@ void fp_zeta8 (mpf_t zeta)
 	mpf_clear (pi);
 	mpf_clear (pisq);
 }
+
+void fp_zeta10 (mpf_t zeta)
+{
+	mpf_t pi, pisq, piq;
+	mpf_init (pi);
+	mpf_init (pisq);
+	mpf_init (piq);
+	
+	fp_pi (pi);
+	mpf_mul (pisq, pi, pi);
+	mpf_mul (piq, pisq, pisq);
+	mpf_mul (pi, piq, piq);
+	mpf_mul (piq, pi, pisq);
+	mpf_div_ui (zeta, piq, 93555);
+
+	mpf_clear (pi);
+	mpf_clear (pisq);
+	mpf_clear (piq);
+}
 /* ============================================================================= */
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
@@ -222,6 +241,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		case 7: fp_zeta7 (zeta); return;
 		case 8: fp_zeta8 (zeta); return;
 		case 9: fp_zeta9 (zeta); return;
+		case 10: fp_zeta10 (zeta); return;
 	}
 	
 	mpf_t acc;
@@ -408,14 +428,11 @@ main ()
 	mpf_init (b_n);
 	mpf_init (prod);
 
-	fp_pi (a_n);
-	fp_prt ("duude pi ", a_n);
-
-	int prec = 35;
+	int prec = 70;
 	int n;
 	for (n=0; n<150; n++)
 	{
-		a_sub_n (a_n, n, prec+n);
+		a_sub_n (a_n, n, prec);
 
 		double dbn = 1.0/exp (-4.0*sqrt (n+1));
 		mpf_set_d (b_n, dbn);
