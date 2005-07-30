@@ -173,18 +173,26 @@ void fp_zeta_even (mpf_t zeta, unsigned int n, unsigned int div)
 	mpf_clear (pip);
 }
 
-void fp_zeta_even_str (mpf_t zeta, unsigned int n, unsigned int div)
+void fp_zeta_even_str (mpf_t zeta, unsigned int n, char * snum, char * sdenom)
 {
-	mpf_t pi, pip;
+	mpf_t pi, pip, num, denom;
 	mpf_init (pi);
 	mpf_init (pip);
+	mpf_init (num);
+	mpf_init (denom);
+
+	mpf_set_str (num,snum, 10);
+	mpf_set_str (denom, sdenom, 10);
 	
 	fp_pi (pi);
 	mpf_pow_ui (pip, pi, n);
-	mpf_div_ui (zeta, pip, div);
+	mpf_mul(pi, pip, num);
+	mpf_div(zeta, pi, denom);
 
 	mpf_clear (pi);
 	mpf_clear (pip);
+	mpf_clear (num);
+	mpf_clear (denom);
 }
 
 /* return sum_n (n^k (e^{\pi k} \pm 1)^{-1}
@@ -266,10 +274,10 @@ void fp_zeta_odd (mpf_t zeta, unsigned int n,
 	mpf_init (c_plus);
 	mpf_init (c_minus);
 	
-	mpf_set_str (div, sdiv);
-	mpf_set_str (c_pi, spi);
-	mpf_set_str (c_plus, splus);
-	mpf_set_str (c_minus, sminus);
+	mpf_set_str (div, sdiv, 10);
+	mpf_set_str (c_pi, spi, 10);
+	mpf_set_str (c_plus, splus, 10);
+	mpf_set_str (c_minus, sminus, 10);
 	
 	fp_ess (spos, sneg, n, prec);
 	mpf_mul (spos_term, spos, c_plus);
@@ -337,6 +345,15 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		case 8: fp_zeta_even (zeta, 8, 9450); return;
 		case 9: fp_zeta9 (zeta); return;
 		case 10: fp_zeta_even (zeta, 10, 93555); return;
+					
+		case 12: fp_zeta_even_str (zeta, 12, "691", "638512875"); return;
+		case 14: fp_zeta_even_str (zeta, 14, "2", "18243225"); return;
+		case 16: fp_zeta_even_str (zeta, 16, "3617", "325641566250"); return;
+		case 18: fp_zeta_even_str (zeta, 18, "43867", "38979295480125"); return;
+		case 20: fp_zeta_even_str (zeta, 20, "174611", "1531329465290625"); return;
+		case 22: fp_zeta_even_str (zeta, 22, "155366", "13447856940643125"); return;
+		case 24: fp_zeta_even_str (zeta, 24, "236364091", "201919571963756521875"); return;
+
 		case 11: 
 			fp_zeta_odd (zeta, 11, "425675250", "1453", "851350500", "0", prec); 
 			return;
@@ -511,8 +528,14 @@ main ()
 	}
 #endif
 	
-	/* set the precision */
-	mpf_set_default_prec (800);
+	/* the decimal precison (number of decimal places) */
+	int prec = 115;
+
+	double v = ((double) prec) *log(10.0) / log(2.0);
+	int bits = v + 30;
+	
+	/* set the precision (number of binary bits) */
+	mpf_set_default_prec (bits);
 	
 #ifdef ZETA_STUFF
 	mpf_t zeta;
@@ -550,9 +573,9 @@ main ()
 	mpf_init (b_n);
 	mpf_init (prod);
 
-	int prec = 65;
 	int n;
-	printf ("computed with so-called precision of %d places\n", prec);
+	printf ("computed with so-called precision of %d decimal places\n", prec);
+	printf ("computed with %d bits of default mpf \n", bits);
 	for (n=0; n<350; n++)
 	{
 		a_sub_n (a_n, n, prec);
