@@ -72,6 +72,59 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 }
 
 /* ============================================================================= */
+/* floating point exponential */
+
+void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
+{
+	mpf_t z_n, fact, term, acc, tmp;
+
+	mpf_init (z_n);
+	mpf_init (fact);
+	mpf_init (term);
+	mpf_init (acc);
+	mpf_init (tmp);
+
+	mpf_set_ui (ex, 1);
+	mpf_set_ui (fact, 1);
+	mpf_set (z_n, z);
+	
+	double mex = ((double) prec) * log (10.0) / log(2.0);
+	unsigned int imax = mex +1.0;
+	mpf_t maxterm, one;
+	mpf_init (maxterm);
+	mpf_init (one);
+	mpf_set_ui (one, 1);
+	mpf_div_2exp (maxterm, one, imax);
+
+	unsigned int n=1;
+	while(1)
+	{
+		mpf_div (term, z_n, fact);
+		mpf_add (acc, ex, term);
+		mpf_set (ex,acc);
+		
+		/* don't go no father than this */
+		mpf_abs (tmp, term);
+		if (mpf_cmp (tmp, maxterm) < 0) break;
+		
+		n++;
+		mpf_mul (tmp, z_n, z);
+		mpf_set (z_n, tmp);
+		mpf_mul_ui (tmp, fact, n);
+		mpf_set (fact,tmp);
+	}
+	
+	mpf_clear (z_n);
+	mpf_clear (fact);
+	mpf_clear (term);
+	mpf_clear (acc);
+	mpf_clear (tmp);
+
+	mpf_clear (one);
+	mpf_clear (maxterm);
+}
+
+/* ============================================================================= */
 /* fp_euler
  * return Euler-Mascheroni const
  */
@@ -216,7 +269,13 @@ void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 	mpf_set_ui (ess_plus, 0);
 	mpf_set_ui (ess_minus, 0);
 
-	double maxterm = pow (10.0, prec);
+	double mex = ((double) prec) * log (10.0) / log(2.0);
+	unsigned int imax = mex +1.0;
+	mpf_t maxterm, one;
+	mpf_init (maxterm);
+	mpf_init (one);
+	mpf_set_ui (one, 1);
+	mpf_mul_2exp (maxterm, one, imax);
 	
 	int n;
 	for (n=1; n<1000000000; n++)
@@ -239,7 +298,7 @@ void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 		mpf_set (ess_minus, acc);
 
 		/* don't go no father than this */
-		if (mpf_cmp_d (term, maxterm) > 0) break;
+		if (mpf_cmp (term, maxterm) > 0) break;
 	}
 
 	mpf_clear (e_pi);
@@ -251,6 +310,9 @@ void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 	mpf_clear (term);
 	mpf_clear (oterm);
 	mpf_clear (acc);
+
+	mpf_clear (one);
+	mpf_clear (maxterm);
 }
 
 /* Implement Simon Plouffe odd-zeta sums */
@@ -399,7 +461,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		fprintf (stderr, "Sorry bucko, can't do it\n");
 		return;
 	}
-	int nmax = dig+1.0;
+	int nmax = 1.1*dig+1.0;
 	// printf ("zeta will be computed with %d terms\n", nmax);
 	
 	int n;
@@ -565,24 +627,49 @@ main ()
 	fp_zeta_odd (zeta, 3, 180, 7, 360, 0, 60); 
 	fp_prt ("duude zeta3= ", zeta);
 #endif
+
+#ifdef TEST_EXP
+	mpf_t ex, one;
+	mpf_init (ex);
+	mpf_init (one);
+	mpf_set_ui(one, 1);
+	fp_exp (ex, one, 50);
+	fp_prt ("e= ", ex);
+	mpf_clear (ex);
+	mpf_clear(one);
+#endif
 	
 #define A_SUB_N
 #ifdef A_SUB_N
-	mpf_t a_n, b_n, prod;
+	mpf_t a_n, en, sq, term, b_n, prod;
 	mpf_init (a_n);
+	mpf_init (en);
+	mpf_init (sq);
+	mpf_init (term);
 	mpf_init (b_n);
 	mpf_init (prod);
 
 	int n;
-	printf ("computed with so-called precision of %d decimal places\n", prec);
-	printf ("computed with %d bits of default mpf \n", bits);
+	printf ("# computed with so-called precision of %d decimal places\n", prec);
+	printf ("# computed with %d bits of default mpf \n", bits);
 	for (n=0; n<350; n++)
 	{
 		a_sub_n (a_n, n, prec);
 
+		/* compute the bound */
+		mpf_set_ui (en, n+1);
+		mpf_sqrt (sq, en);
+		mpf_mul_ui (term, sq, 4);
+		mpf_neg (en, term);
+		fp_exp (b_n, en, prec);
+		mpf_div (prod, a_n, b_n);
+		
+#ifdef FLT_BND
 		double dbn = 1.0/exp (-4.0*sqrt (n+1));
 		mpf_set_d (b_n, dbn);
 		mpf_mul(prod, a_n, b_n);
+#endif
+		
 		
 		printf ("a(%d) ",n);
 		fp_prt ("= ", prod);
