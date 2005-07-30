@@ -173,6 +173,20 @@ void fp_zeta_even (mpf_t zeta, unsigned int n, unsigned int div)
 	mpf_clear (pip);
 }
 
+void fp_zeta_even_str (mpf_t zeta, unsigned int n, unsigned int div)
+{
+	mpf_t pi, pip;
+	mpf_init (pi);
+	mpf_init (pip);
+	
+	fp_pi (pi);
+	mpf_pow_ui (pip, pi, n);
+	mpf_div_ui (zeta, pip, div);
+
+	mpf_clear (pi);
+	mpf_clear (pip);
+}
+
 /* return sum_n (n^k (e^{\pi k} \pm 1)^{-1}
  * The Simon Plouffe Ramanujan inspired thingy
  */
@@ -232,8 +246,8 @@ void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 }
 
 /* Implement Simon Plouffe odd-zeta sums */
-void fp_zeta_odd (mpf_t zeta, unsigned int n, unsigned int div, 
-					 unsigned int c_pi, unsigned int c_plus, unsigned int c_minus,
+void fp_zeta_odd (mpf_t zeta, unsigned int n, 
+					 char *sdiv, char * spi, char * sminus, char * splus,  
 					 unsigned int prec)
 {
 	mpf_t pi, pip, piterm, spos, sneg, spos_term, sneg_term, tmp;
@@ -245,19 +259,30 @@ void fp_zeta_odd (mpf_t zeta, unsigned int n, unsigned int div,
 	mpf_init (spos_term);
 	mpf_init (sneg_term);
 	mpf_init (tmp);
+
+	mpf_t div, c_pi, c_plus, c_minus;
+	mpf_init (div);
+	mpf_init (c_pi);
+	mpf_init (c_plus);
+	mpf_init (c_minus);
+	
+	mpf_set_str (div, sdiv);
+	mpf_set_str (c_pi, spi);
+	mpf_set_str (c_plus, splus);
+	mpf_set_str (c_minus, sminus);
 	
 	fp_ess (spos, sneg, n, prec);
-	mpf_mul_ui (spos_term, spos, c_plus);
-	mpf_mul_ui (sneg_term, sneg, c_minus);
+	mpf_mul (spos_term, spos, c_plus);
+	mpf_mul (sneg_term, sneg, c_minus);
 			  
 	fp_pi (pi);
 	mpf_pow_ui (pip, pi, n);
-	mpf_mul_ui (piterm, pip, c_pi);
+	mpf_mul (piterm, pip, c_pi);
 
 	mpf_set (tmp, piterm);
 	mpf_sub (zeta, tmp, spos_term);
 	mpf_sub (tmp, zeta, sneg_term);
-	mpf_div_ui (zeta, tmp, div);
+	mpf_div (zeta, tmp, div);
 	
 	mpf_clear (pi);
 	mpf_clear (pip);
@@ -267,6 +292,11 @@ void fp_zeta_odd (mpf_t zeta, unsigned int n, unsigned int div,
 	mpf_clear (spos_term);
 	mpf_clear (sneg_term);
 	mpf_clear (tmp);
+	
+	mpf_clear (div);
+	mpf_clear (c_pi);
+	mpf_clear (c_plus);
+	mpf_clear (c_minus);
 }
 
 /* ============================================================================= */
@@ -275,6 +305,21 @@ void fp_zeta_odd (mpf_t zeta, unsigned int n, unsigned int div,
  * return value placed in the arg "zeta".
  *
  * Simple-minded algo, carries out math to prec decimal digits
+ *
+ * OLEIS A046988
+ *  Numerator of zeta(2n)/Pi^(2n)
+ * 0,1,1,1,1,1,691,2,3617,43867,174611,155366,236364091,
+ * 1315862,6785560294,6892673020804,7709321041217,151628697551,
+ * 26315271553053477373,308420411983322,261082718496449122051,
+ * 3040195287836141605382,5060594468963822588186
+ *
+ * OLEIS A002432 
+ *  Denominator of zeta(2n)/Pi^(2n)
+ *  6,90,945,9450,93555,638512875,18243225,325641566250,
+ *  38979295480125,1531329465290625,13447856940643125,
+ *  201919571963756521875,11094481976030578125,
+ *  564653660170076273671875,5660878804669082674070015625,
+ *  62490220571022341207266406250,12130454581433748587292890625
  */
 void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 {
@@ -292,7 +337,24 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		case 8: fp_zeta_even (zeta, 8, 9450); return;
 		case 9: fp_zeta9 (zeta); return;
 		case 10: fp_zeta_even (zeta, 10, 93555); return;
-		case 11: fp_zeta_odd (zeta, 
+		case 11: 
+			fp_zeta_odd (zeta, 11, "425675250", "1453", "851350500", "0", prec); 
+			return;
+		case 13: 
+			fp_zeta_odd (zeta, 13, "257432175", "89", "514926720", "62370", prec); 
+			return;
+		case 15: 
+			fp_zeta_odd (zeta, 15, "390769879500", "13687", "781539759000", "0", prec); 
+			return;
+		case 17: 
+			fp_zeta_odd (zeta, 17, "1904417007743250", "6758333", "3808863131673600", "29116187100", prec); 
+			return;
+		case 19: 
+			fp_zeta_odd (zeta, 19, "21438612514068750", "7708537", "42877225028137500", "0", prec); 
+			return;
+		case 21: 
+			fp_zeta_odd (zeta, 21, "1881063815762259253125", "68529640373", "3762129424572110592000", "1793047592085750", prec); 
+			return;
 	}
 	
 	mpf_t acc;
@@ -477,7 +539,7 @@ main ()
 #if TEST_ZETA
 	mpf_t zeta;
 	mpf_init (zeta);
-	fp_zeta_odd (zeta, 3, 180, 7, 0, 360, 60); 
+	fp_zeta_odd (zeta, 3, 180, 7, 360, 0, 60); 
 	fp_prt ("duude zeta3= ", zeta);
 #endif
 	
