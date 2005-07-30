@@ -3,11 +3,12 @@
 #
 
 
-EXES= mp_zeta
-
-mp_zeta:	mp_zeta.o
+EXES= bound mp_zeta
 
 all:  $(EXES)
+
+mp_zeta:	mp_zeta.o
+bound:	bound.o
 
 clean:
 	rm -f core tmp junk glop a.out *.o

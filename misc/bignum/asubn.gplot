@@ -3,10 +3,10 @@
 # set term gif size 640,480
 # set out 'read.gif'
 
-# set term png small
-# set out 'asubn.png'
-set term postscript
-set out 'asubn.ps'
+set term png small
+set out 'asubn.png'
+# set term postscript
+# set out 'asubn.ps'
 
 # set data style linespoints
 set data style lines
@@ -14,12 +14,12 @@ set key right
 
 set title "a_n the oscillatory term in zeta function"
 set xlabel "n"
-set ylabel "a_n/exp(-4sqrt(n+1))"
+set ylabel "a_n)"
 
 # set yrange [0:]
 
 
-plot "asubn.dat" using 1:2 title "a_n/exp(-4sqrt(n+1))"
+plot "asubn.dat" using 1:(log(abs($2))) title "a_n/"
 
 
 # pause 100
