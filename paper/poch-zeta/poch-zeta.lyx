@@ -43,43 +43,172 @@ A series representation for the Riemann Zeta function in terms of th falling
 \layout Section
 
 Introduction
+\layout Standard
+
+The Gauss-Kuzmin-Wirsing operator [ref] occurs in the theory of continued
+ fraction representations of the real numbers.
+ The zeroth eigenvalue of this operator is related to the Gass-Kuzmin distributi
+on [ref], giving the likelyhood of the occurance of an integer in the continued-
+fraction expansion of an 
+\begin_inset Quotes eld
+\end_inset 
+
+arbitrary
+\begin_inset Quotes erd
+\end_inset 
+
+ real number.
+ The GKW operator is interesting in other ways, notably in its relationship
+ to the Minkowski Question Mark function, and thus its symmetry under the
+ action of a monoid sub-semi-group of the Modular Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ Except for the zeroth eigenvector, there is no known solution of the GKW
+ operator, although the eigenvalues may be computed relatively easily through
+ standard matrix diagonalization techniques.
+\layout Standard
+
+In this paper, a relationship to the Riemann Zeta function is noted, allowing
+ the easy derivation of a series expansion of the Zeta function in terms
+ of the Pochhammer symbols (the falling factorials), or equivalently the
+ binomial coefficients.
+ Specifically, the expansion that is given is
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{s}{s-1}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)t_{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+Here, the constants 
+\begin_inset Formula $t_{n}$
+\end_inset 
+
+, play the role of the Stieltjes constants, and can be given as a finite
+ number of terms involving the Riemann zeta function at integer values and
+ the Euler-Mascheroni constant.
+ These constants may be related back to the Stieltjes constants through
+ the Stirling numbers.
+ They are very well behaved, becoming small quite rapidly.
+ Some exact expressions can be derived for various sums involving these
+ constants.
+ A numerical exploration of thier values is also performed.
+ 
+\layout Standard
+
+The first section defines the GKWoperator in simple terms.
+ The second section obtains the series expansion for the zeta.
+ The third section explores the values of the constants 
+\begin_inset Formula $t_{n}$
+\end_inset 
+
+.
 \layout Section
 
 The Gauss-Kuzmin-Wirsing Operator
 \layout Standard
 
-The map that truncates continued fractions is 
+Succesive terms of a continued fraction fraction expansion for a real number
+ 
+\begin_inset Formula $x$
+\end_inset 
+
+ may be obtained by iterating on the function 
 \begin_inset Formula \begin{equation}
 h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
 \end_inset 
 
- and is sometimes called the Gauss Map.
+ This iterated map is sometimes called the Gauss Map.
  It is connected to the Riemann Zeta by a Mellin Transform:
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\label{eq:}\end{equation}
 
 \end_inset 
 
-The Frobenius-Perron operator for this map is known as the Gauss-Kuzmin-Wirsing
- (GKW) Operator, and is represented by.
+In the theory of iterated functions, the behaviour of a map may be studied
+ by means of the 
+\begin_inset Quotes eld
+\end_inset 
+
+transfer operator
+\begin_inset Quotes erd
+\end_inset 
+
+, sometimes called the Frobenius-Perron operator of a map.
+ Given a map of the unit interval onto itself, the transfer operator examines
+ the question of how a smooth, differentiable distribution behaves under
+ the action of the map, thus giving insight into the nature of iteration.
+ By using a set of orthonormal basis functions on the unit interval, such
+ as orthogonal polynomials, the matrix elements of the transfer operator
+ can often be explicitly computed, and the operator itself can be diagonalized,
+ using standard techniques from the theory of Hilbert spaces and functional
+ analysis in general.
  
+\layout Standard
+
+There are a variety of equivalent definitions for the transfer operator,
+ of varying degrees of sophistication.
+ One simple definition is 
 \layout Standard
 
 
 \begin_inset Formula \begin{equation}
-\left[U_{h}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{(n+x)^{2}}f\left(\frac{1}{n+x}\right)\label{eq:}\end{equation}
+\left[U\rho\right](x)=\int dy\;\delta\left(x-h(y)\right)\;\rho(y)\label{eq:}\end{equation}
 
 \end_inset 
 
- Thus, the Riemann zeta can be written under a change of variable as
+ Here, 
+\begin_inset Formula $h$
+\end_inset 
+
+ is the function being iterated, while 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is some density on which the transfer operator 
+\begin_inset Formula $U$
+\end_inset 
+
+ acts.
+ In this expression, 
+\begin_inset Formula $\delta$
+\end_inset 
+
+ is understood to be the Dirac delta function.
+ A more sophisticated definition is 
+\begin_inset Formula \[
+xxx\]
+
+\end_inset 
+
+ For the Gauss map,the transfer operator is known as the Gauss-Kuzmin-Wirsing
+ (GKW) operator, and has the representation 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\left[U_{h}\rho\right](x)=\sum_{n=1}^{\infty}\frac{1}{(n+x)^{2}}\rho\left(\frac{1}{n+x}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ It is not difficult perform this operation under the integral defining
+ the Riemann zeta function in terms of the gauss map; effectively the operation
+ is a change of variable.
+ One obtains the operator equation
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[U_{h}x^{s-1}\right]\label{eq:}\end{equation}
 
 \end_inset 
 
- and thus it seems that a better understanding of GKW may shed light on
- the Riemann Hypothesis.
+ This equation motivates a deeper study to the GKW operator, as its symmetry
+ properties under the monoid under the modular group may provide insight
+ into the behavior of the Riemann zeta, and, for example, the Riemann Hypothesis.
  There is one known eigenvector, 
 \begin_inset Formula $f(x)=1/(1+x)$
 \end_inset 
@@ -1171,8 +1300,6 @@ The matrix elements in
 
  are easily numerically ...
  etc.
-\layout Standard
-
 \layout Section
 
 Conclusions
