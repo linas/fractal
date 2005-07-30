@@ -591,7 +591,7 @@ main ()
 #endif
 	
 	/* the decimal precison (number of decimal places) */
-	int prec = 115;
+	int prec = 135;
 
 	double v = ((double) prec) *log(10.0) / log(2.0);
 	int bits = v + 30;
@@ -650,6 +650,7 @@ main ()
 	mpf_init (prod);
 
 	int n;
+	printf ("#\n# zeta expansion terms \n#\n");
 	printf ("# computed with so-called precision of %d decimal places\n", prec);
 	printf ("# computed with %d bits of default mpf \n", bits);
 	for (n=0; n<350; n++)
@@ -671,8 +672,8 @@ main ()
 #endif
 		
 		
-		printf ("a(%d) ",n);
-		fp_prt ("= ", prod);
+		printf ("%d\t",n);
+		fp_prt ("", prod);
 		fflush (stdout);
 	}
 #endif
