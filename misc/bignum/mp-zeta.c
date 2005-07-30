@@ -167,7 +167,7 @@ void fp_zeta_even (mpf_t zeta, unsigned int n, unsigned int div)
 	
 	fp_pi (pi);
 	mpf_pow_ui (pip, pi, n);
-	mpf_div_ui (zeta, pi, div);
+	mpf_div_ui (zeta, pip, div);
 
 	mpf_clear (pi);
 	mpf_clear (pip);
@@ -176,47 +176,97 @@ void fp_zeta_even (mpf_t zeta, unsigned int n, unsigned int div)
 /* return sum_n (n^k (e^{\pi k} \pm 1)^{-1}
  * The Simon Plouffe Ramanujan inspired thingy
  */
-void fp_ess (mpf_t zeta, unsigned int k, int c, unsigned int prec)
+void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 {
-	mpf_t e_pi, en, enp, epip, epp, term, acc;
+	mpf_t e_pi, en, enp, epip, eppos, epneg, term, oterm, acc;
 
 	mpf_init (e_pi);
 	mpf_init (en);
 	mpf_init (enp);
 	mpf_init (epip);
-	mpf_init (epp);
+	mpf_init (eppos);
+	mpf_init (epneg);
 	mpf_init (term);
+	mpf_init (oterm);
 	mpf_init (acc);
 
 	fp_e_pi (e_pi);
+	mpf_set_ui (ess_plus, 0);
+	mpf_set_ui (ess_minus, 0);
+
+	double maxterm = pow (10.0, prec);
 	
 	int n;
-	for (n=1; n<10; n++)
+	for (n=1; n<1000000000; n++)
 	{
 		mpf_set_ui (en, n);
 		mpf_pow_ui (enp, en, k);
 		mpf_pow_ui (epip, e_pi, 2*n);
-		if (c<0) 
-		{
-			mpf_neg (en, epip);
-			mpf_add_ui (epip, en, -c);
-			mpf_neg (epp, epip);
-		}
-		else
-		{
-			mpf_add_ui (epp, epip, c);
-		}
-		mpf_mul (term, enp, epp);
 		
+		mpf_add_ui (eppos, epip, 1);
+		mpf_sub_ui (epneg, epip, 1);
+
+		mpf_mul (term, enp, eppos);
+		mpf_ui_div (oterm, 1, term);
+		mpf_add (acc, ess_plus, oterm);
+		mpf_set (ess_plus, acc);
+
+		mpf_mul (term, enp, epneg);
+		mpf_ui_div (oterm, 1, term);
+		mpf_add (acc, ess_minus, oterm);
+		mpf_set (ess_minus, acc);
+
+		/* don't go no father than this */
+		if (mpf_cmp_d (term, maxterm) > 0) break;
 	}
 
 	mpf_clear (e_pi);
 	mpf_clear (en);
 	mpf_clear (enp);
 	mpf_clear (epip);
-	mpf_clear (epp);
+	mpf_clear (eppos);
+	mpf_clear (epneg);
 	mpf_clear (term);
+	mpf_clear (oterm);
 	mpf_clear (acc);
+}
+
+/* Implement Simon Plouffe odd-zeta sums */
+void fp_zeta_odd (mpf_t zeta, unsigned int n, unsigned int div, 
+					 unsigned int c_pi, unsigned int c_plus, unsigned int c_minus,
+					 unsigned int prec)
+{
+	mpf_t pi, pip, piterm, spos, sneg, spos_term, sneg_term, tmp;
+	mpf_init (pi);
+	mpf_init (pip);
+	mpf_init (piterm);
+	mpf_init (spos);
+	mpf_init (sneg);
+	mpf_init (spos_term);
+	mpf_init (sneg_term);
+	mpf_init (tmp);
+	
+	fp_ess (spos, sneg, n, prec);
+	mpf_mul_ui (spos_term, spos, c_plus);
+	mpf_mul_ui (sneg_term, sneg, c_minus);
+			  
+	fp_pi (pi);
+	mpf_pow_ui (pip, pi, n);
+	mpf_mul_ui (piterm, pip, c_pi);
+
+	mpf_set (tmp, piterm);
+	mpf_sub (zeta, tmp, spos_term);
+	mpf_sub (tmp, zeta, sneg_term);
+	mpf_div_ui (zeta, tmp, div);
+	
+	mpf_clear (pi);
+	mpf_clear (pip);
+	mpf_clear (piterm);
+	mpf_clear (spos);
+	mpf_clear (sneg);
+	mpf_clear (spos_term);
+	mpf_clear (sneg_term);
+	mpf_clear (tmp);
 }
 
 /* ============================================================================= */
@@ -241,7 +291,8 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		case 7: fp_zeta7 (zeta); return;
 		case 8: fp_zeta_even (zeta, 8, 9450); return;
 		case 9: fp_zeta9 (zeta); return;
-		case 10:fp_zeta_even (zeta, 10, 93555); return;
+		case 10: fp_zeta_even (zeta, 10, 93555); return;
+		case 11: fp_zeta_odd (zeta, 
 	}
 	
 	mpf_t acc;
@@ -421,6 +472,13 @@ main ()
 	fp_prt ("70 digs= ", zeta);
 	fp_zeta (zeta, 8, 80);
 	fp_prt ("0 digs= ", zeta);
+#endif
+	
+#if TEST_ZETA
+	mpf_t zeta;
+	mpf_init (zeta);
+	fp_zeta_odd (zeta, 3, 180, 7, 0, 360, 60); 
+	fp_prt ("duude zeta3= ", zeta);
 #endif
 	
 #define A_SUB_N
