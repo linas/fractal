@@ -415,7 +415,11 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		case 20: fp_zeta_even_str (zeta, 20, "174611", "1531329465290625"); return;
 		case 22: fp_zeta_even_str (zeta, 22, "155366", "13447856940643125"); return;
 		case 24: fp_zeta_even_str (zeta, 24, "236364091", "201919571963756521875"); return;
-
+		case 26: fp_zeta_even_str (zeta, 26, "1315862", "11094481976030578125"); return;
+		case 28: fp_zeta_even_str (zeta, 28, "6785560294", "564653660170076273671875"); return;
+		case 30: fp_zeta_even_str (zeta, 30, "6892673020804", "5660878804669082674070015625"); return;
+		case 32: fp_zeta_even_str (zeta, 32, "7709321041217", "62490220571022341207266406250"); return;
+		case 34: fp_zeta_even_str (zeta, 34, "151628697551", "12130454581433748587292890625"); return;
 		case 11: 
 			fp_zeta_odd (zeta, 11, "425675250", "1453", "851350500", "0", prec); 
 			return;

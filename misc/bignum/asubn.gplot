@@ -19,7 +19,8 @@ set ylabel "a_n)"
 # set yrange [0:]
 
 
-plot "asubn.dat" using 1:(log(abs($2))) title "a_n/"
+plot "asubn.dat" using 1:($2*log($1)/$1) title "", \
+     "asubn.dat" using 1:(-sin($1/log($1))) title "guess"
 
 
 # pause 100

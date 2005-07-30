@@ -12,11 +12,15 @@
 main ()
 {
 	int n;
-	for (n=0; n<500; n+=20)
+	for (n=1; n<500; n+=20)
 	{
-		double dbn = 1.0/exp (-4.0*sqrt (n+1));
+		double ref = exp (-4.0*sqrt (n+1));
+		double dbn = exp (-4.0*sqrt (n));
 		
-		printf ("%d\t%g\n",n, dbn);
+		double x = n;
+		double y = x/log(x);
+
+		printf ("%d\t%g	%g	%g\n",n, ref, dbn, y );
 		fflush (stdout);
 	}
 
