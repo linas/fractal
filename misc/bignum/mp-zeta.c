@@ -105,6 +105,13 @@ void fp_pi (mpf_t pi)
 	mpf_set_str (pi, p, 10);
 }
 
+/* return e^pi */
+void fp_e_pi (mpf_t e_pi)
+{
+	char *p= "23.140692632779269005729086367948547380266106242600211993445046409524342350690 452783516971997067549219675952704801087773144428044414693835844717445879609849 365327965863669242230268991013741764684401410395183868477243068059588162449844 491430966778413671631963414784038216511287637731470347353833162821294047891936 224820221006032065443362736557271823744989618858059591684872645479013397834026 595101499643792422968160799565381423536206957600770590460899883002254304871211 791300849327379580729427301931042601691939325853203428968661895283290521711157 185185506802254197204566370865568386830544799278170407497768540367556534957218 867882563994384718224585889428535247260568210271076018491534518468064887386774 439630514005169440540665265430968869063937315359837311042174433023967896690035";
+	mpf_set_str (e_pi, p, 10);
+}
+
 void fp_zeta2 (mpf_t zeta)
 {
 	mpf_t pi, pisq;
@@ -152,73 +159,66 @@ void fp_zeta9 (mpf_t zeta)
 	mpf_set_str (zeta, g, 10);
 }
 
-void fp_zeta4 (mpf_t zeta)
+void fp_zeta_even (mpf_t zeta, unsigned int n, unsigned int div)
 {
-	mpf_t pi, pisq;
+	mpf_t pi, pip;
 	mpf_init (pi);
-	mpf_init (pisq);
+	mpf_init (pip);
 	
 	fp_pi (pi);
-	mpf_mul (pisq, pi, pi);
-	mpf_mul (pi, pisq, pisq);
-	mpf_div_ui (zeta, pi, 90);
+	mpf_pow_ui (pip, pi, n);
+	mpf_div_ui (zeta, pi, div);
 
 	mpf_clear (pi);
-	mpf_clear (pisq);
+	mpf_clear (pip);
 }
 
-void fp_zeta6 (mpf_t zeta)
+/* return sum_n (n^k (e^{\pi k} \pm 1)^{-1}
+ * The Simon Plouffe Ramanujan inspired thingy
+ */
+void fp_ess (mpf_t zeta, unsigned int k, int c, unsigned int prec)
 {
-	mpf_t pi, pisq, ph;
-	mpf_init (pi);
-	mpf_init (pisq);
-	mpf_init (ph);
-	
-	fp_pi (pi);
-	mpf_mul (pisq, pi, pi);
-	mpf_mul (pi, pisq, pisq);
-	mpf_mul (ph, pi, pisq);
-	mpf_div_ui (zeta, ph, 945);
+	mpf_t e_pi, en, enp, epip, epp, term, acc;
 
-	mpf_clear (pi);
-	mpf_clear (pisq);
-	mpf_clear (ph);
+	mpf_init (e_pi);
+	mpf_init (en);
+	mpf_init (enp);
+	mpf_init (epip);
+	mpf_init (epp);
+	mpf_init (term);
+	mpf_init (acc);
+
+	fp_e_pi (e_pi);
+	
+	int n;
+	for (n=1; n<10; n++)
+	{
+		mpf_set_ui (en, n);
+		mpf_pow_ui (enp, en, k);
+		mpf_pow_ui (epip, e_pi, 2*n);
+		if (c<0) 
+		{
+			mpf_neg (en, epip);
+			mpf_add_ui (epip, en, -c);
+			mpf_neg (epp, epip);
+		}
+		else
+		{
+			mpf_add_ui (epp, epip, c);
+		}
+		mpf_mul (term, enp, epp);
+		
+	}
+
+	mpf_clear (e_pi);
+	mpf_clear (en);
+	mpf_clear (enp);
+	mpf_clear (epip);
+	mpf_clear (epp);
+	mpf_clear (term);
+	mpf_clear (acc);
 }
 
-void fp_zeta8 (mpf_t zeta)
-{
-	mpf_t pi, pisq;
-	mpf_init (pi);
-	mpf_init (pisq);
-	
-	fp_pi (pi);
-	mpf_mul (pisq, pi, pi);
-	mpf_mul (pi, pisq, pisq);
-	mpf_mul (pisq, pi, pi);
-	mpf_div_ui (zeta, pisq, 9450);
-
-	mpf_clear (pi);
-	mpf_clear (pisq);
-}
-
-void fp_zeta10 (mpf_t zeta)
-{
-	mpf_t pi, pisq, piq;
-	mpf_init (pi);
-	mpf_init (pisq);
-	mpf_init (piq);
-	
-	fp_pi (pi);
-	mpf_mul (pisq, pi, pi);
-	mpf_mul (piq, pisq, pisq);
-	mpf_mul (pi, piq, piq);
-	mpf_mul (piq, pi, pisq);
-	mpf_div_ui (zeta, piq, 93555);
-
-	mpf_clear (pi);
-	mpf_clear (pisq);
-	mpf_clear (piq);
-}
 /* ============================================================================= */
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
@@ -235,13 +235,13 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	{
 		case 2: fp_zeta2 (zeta); return;
 		case 3: fp_zeta3 (zeta); return;
-		case 4: fp_zeta4 (zeta); return;
+		case 4: fp_zeta_even (zeta, 4, 90); return;
 		case 5: fp_zeta5 (zeta); return;
-		case 6: fp_zeta6 (zeta); return;
+		case 6: fp_zeta_even (zeta, 6, 945); return;
 		case 7: fp_zeta7 (zeta); return;
-		case 8: fp_zeta8 (zeta); return;
+		case 8: fp_zeta_even (zeta, 8, 9450); return;
 		case 9: fp_zeta9 (zeta); return;
-		case 10: fp_zeta10 (zeta); return;
+		case 10:fp_zeta_even (zeta, 10, 93555); return;
 	}
 	
 	mpf_t acc;
@@ -423,14 +423,17 @@ main ()
 	fp_prt ("0 digs= ", zeta);
 #endif
 	
+#define A_SUB_N
+#ifdef A_SUB_N
 	mpf_t a_n, b_n, prod;
 	mpf_init (a_n);
 	mpf_init (b_n);
 	mpf_init (prod);
 
-	int prec = 70;
+	int prec = 65;
 	int n;
-	for (n=0; n<150; n++)
+	printf ("computed with so-called precision of %d places\n", prec);
+	for (n=0; n<350; n++)
 	{
 		a_sub_n (a_n, n, prec);
 
@@ -442,6 +445,7 @@ main ()
 		fp_prt ("= ", prod);
 		fflush (stdout);
 	}
+#endif
 
 }
 
