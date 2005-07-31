@@ -10,6 +10,7 @@
 #include <gmp.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void fp_prt (char * str, mpf_t val)
 {
@@ -466,7 +467,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		return;
 	}
 	int nmax = 1.1*dig+1.0;
-	printf ("zeta will be computed with %d terms\n", nmax);
+	// printf ("zeta will be computed with %d terms\n", nmax);
 	
 	int n;
 	for (n=2; n<= nmax; n++)
@@ -482,6 +483,24 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	mpf_clear (term);
 	mpf_clear (en);
 	mpf_clear (inv);
+}
+
+/* ============================================================================= */
+/* rought count of number of digits in a number */
+
+static inline unsigned int num_digits (mpz_t num, mpz_t tmpa, mpz_t tmpb)
+{
+	unsigned int n=0;
+	
+	mpz_set (tmpb, num);
+	while (1)
+	{
+		mpz_fdiv_q_ui (tmpa, tmpb, 100);
+		mpz_set (tmpb, tmpa);
+		if (0 == mpz_sgn  (tmpa)) break;
+		n += 2;
+	}
+	return n;
 }
 
 /* ============================================================================= */
@@ -502,6 +521,10 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpf_init (fbin);
 	mpf_init (gam);
 	
+	mpz_t tmpa, tmpb;
+	mpz_init (tmpa);
+	mpz_init (tmpb);
+	
 	mpf_set_ui (one, 1);
 
 	mpz_t ibin;
@@ -510,13 +533,25 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 
 	for (k=1; k<= n; k++)
 	{
-		fp_zeta (zeta, k+1, prec);
+		/* commputer the binomial */
+		i_binomial (ibin, n, k);
+		mpf_set_z (fbin, ibin);
+
+		/* The terms will have laternating signes, and
+		 * will mostly cancel one-another. Thus, we need 
+		 * to increase precision for those terms with the 
+		 * largest binomial coefficients. This is will
+		 * increase precision for the killer terms, 
+		 * while keeping the others in bearable range,
+		 * in terms to cpu time consumed.
+		 */
+		int ndigits = num_digits (ibin, tmpa,tmpb);
+
+		/* compute 1/k - zeta (k+1)/(k+1) */
+		fp_zeta (zeta, k+1, prec+ndigits);
 		mpf_div_ui (zt, zeta, k+1);
 		mpf_div_ui (ok, one, k);
 		mpf_sub (term, ok, zt);
-
-		i_binomial (ibin, n, k);
-		mpf_set_z (fbin, ibin);
 
 		mpf_mul (zeta, term, fbin);
 
@@ -547,6 +582,8 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpf_clear (gam);
 
 	mpz_clear (ibin);
+	mpz_clear (tmpa);
+	mpz_clear (tmpb);
 }
 
 void a_bound_n (mpf_t b_n, unsigned int n)
@@ -564,7 +601,8 @@ void a_bound_n (mpf_t b_n, unsigned int n)
 }
 
 /* ============================================================================= */
-main ()
+
+main (int argc, char * argv[])
 {
 	char str[4000];
 
@@ -595,7 +633,15 @@ main ()
 #endif
 	
 	/* the decimal precison (number of decimal places) */
-	int prec = 165;
+	int prec = 16;
+
+	if (argc < 1)
+	{
+		fprintf (stderr, "Usage: %s [ndigits]\n", argv[0]); 
+		exit (1);
+	}
+
+	prec = atoi (argv[1]);
 
 	double v = ((double) prec) *log(10.0) / log(2.0);
 	int bits = v + 30;
@@ -625,7 +671,7 @@ main ()
 	fp_prt ("0 digs= ", zeta);
 #endif
 	
-#define TEST_ZETA
+// #define TEST_ZETA
 #ifdef TEST_ZETA
 	mpf_t zeta;
 	mpf_init (zeta);
@@ -653,7 +699,17 @@ main ()
 	mpf_clear(one);
 #endif
 	
-// #define A_SUB_N
+#ifdef TEST_DIGIT_COUNT
+	mpz_t ival, tmpa, tmpb;
+	mpz_init (ival);
+	mpz_init (tmpa);
+	mpz_init (tmpb);
+	mpz_set_ui (ival, 3000000);
+	int nd = num_digits (ival, tmpa, tmpb);
+	printf ("found %d digits\n", nd);
+#endif
+	
+#define A_SUB_N
 #ifdef A_SUB_N
 	mpf_t a_n, en, sq, term, b_n, prod;
 	mpf_init (a_n);
@@ -665,9 +721,9 @@ main ()
 
 	int n;
 	printf ("#\n# zeta expansion terms \n#\n");
-	printf ("# computed with so-called precision of %d decimal places\n", prec);
+	printf ("# computed with variable precision of %d decimal places\n", prec);
 	printf ("# computed with %d bits of default mpf \n", bits);
-	for (n=300; n<500; n++)
+	for (n=0; n<500; n++)
 	{
 		a_sub_n (a_n, n, prec);
 
