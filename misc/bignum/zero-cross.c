@@ -63,7 +63,9 @@ main ()
 			x = prev / x;
 			x = fabs (x);
 			x += n-1;
-			// printf ("%d %g\n", icross, x);
+			double guess = 0.25*M_PI*(icross)*(icross);
+			guess += 2.0 + (2.553+0.25*M_PI) * icross;
+			printf ("crossings -- %d %g\t guess=%g\t err=%g\n", icross, x, guess, x-guess);
 			cross[icross] = x;
 			icross ++;
 		}
@@ -73,13 +75,21 @@ main ()
 
 	/* now take diffs */
 	int icmax = icross;
+	for (i=1; i<icmax; i++)
+	{
+		double d = cross[i] - cross[i-1];
+		double guess = 0.5*M_PI*i;
+		guess += 2.553;
+		printf ("first-order differences -- %d	%g\t\t guess=%g\t err=%g\n", i, d, guess, d-guess);
+	}
+
 
 	double avg = 0.0;
 	int acnt = 0;
-	for (i=4; i<icmax-1; i++)
+	for (i=1; i<icmax-1; i++)
 	{
 		double d = 2.0 * cross[i] - cross[i-1] - cross[i+1];
-		printf ("%d	%g\n", i, d);
+		printf ("second-order differences -- %d	%g\n", i, d);
 		avg += d;
 		acnt ++;
 	}

@@ -20,7 +20,7 @@ set ylabel "a_n)"
 
 
 plot "asubn.dat" using 1:($2*log($1)/$1) title "", \
-     "asubn.dat" using 1:(-sin($1/log($1))) title "guess"
+     "asubn.dat" using 1:(sin(3.14159*(-3.623+sqrt (3.623*3.623 - 4*(2.0-$1)/3.1416)))) title "guess"
 
 
 # pause 100
