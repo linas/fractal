@@ -3,12 +3,13 @@
 #
 
 
-EXES= bound mp_zeta zero-cross
+EXES= bound mp_zeta trunc zero-cross
 
 all:  $(EXES)
 
 bound:	bound.o
 mp_zeta:	mp_zeta.o
+trunc:	trunc.o
 zero-cross:	zero-cross.o
 
 clean:

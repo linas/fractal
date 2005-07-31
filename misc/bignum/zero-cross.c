@@ -45,9 +45,33 @@ main ()
 		i++;
 	}
 
+	int nmax = n;
+
+	/* numerical best fit */
+	double cee_0 = 2.0;
+	double cee_1 = 2.553;
+
+	for (i=0; i<nmax; i++)
+	{
+		double b2a = 2.0*cee_1 / M_PI + 0.5;
+		double guess = -b2a + sqrt (b2a*b2a + 4.0*(((double)i)-cee_0)/M_PI);
+		double x = guess;
+		// guess = cee_0 + (cee_1+0.25*M_PI)*x + 0.25*M_PI*x*x;
+#if 0
+		double a = 0.25*M_PI;
+		double b = cee_1 + 0.25*M_PI;
+		double c = cee_0 - ((double)i);
+		double guess = (-b + sqrt (b*b-4.0*a*c))/(2.0*a);
+		double x = guess;
+		// guess = a*x*x + b*x +c;
+#endif
+
+	
+		printf ("%d	%g\t guess=%g\n", i, var[i], guess);;
+	}
+
 	/* now interpolate */
 	double cross[100];
-	int nmax = n;
 	int icross = 0;
 
 	double prev = var[0];
@@ -64,7 +88,7 @@ main ()
 			x = fabs (x);
 			x += n-1;
 			double guess = 0.25*M_PI*(icross)*(icross);
-			guess += 2.0 + (2.553+0.25*M_PI) * icross;
+			guess += cee_0 + (cee_1+0.25*M_PI) * icross;
 			printf ("crossings -- %d %g\t guess=%g\t err=%g\n", icross, x, guess, x-guess);
 			cross[icross] = x;
 			icross ++;
@@ -79,7 +103,7 @@ main ()
 	{
 		double d = cross[i] - cross[i-1];
 		double guess = 0.5*M_PI*i;
-		guess += 2.553;
+		guess += cee_1;
 		printf ("first-order differences -- %d	%g\t\t guess=%g\t err=%g\n", i, d, guess, d-guess);
 	}
 
@@ -89,7 +113,7 @@ main ()
 	for (i=1; i<icmax-1; i++)
 	{
 		double d = 2.0 * cross[i] - cross[i-1] - cross[i+1];
-		printf ("second-order differences -- %d	%g\n", i, d);
+		printf ("second-order differences -- %d	%g\t guess=%g \terr=%g\n", i, d, 0.5*M_PI, d+0.5*M_PI);
 		avg += d;
 		acnt ++;
 	}
