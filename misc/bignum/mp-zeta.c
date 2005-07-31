@@ -470,6 +470,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	if ((s < ARRSZ) && (0 == zprec[s]))
 	{
 		mpf_init (zeta_cache[s]);
+		mpf_set_ui (zeta_cache[s], 1);
 		last_term[s] = 2;
 		zprec[s] = prec;
 	}
