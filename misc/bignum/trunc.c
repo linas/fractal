@@ -7,6 +7,7 @@
  * Linas Vepstas July 2005
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,6 +22,16 @@ main ()
 	int n=0;
 	while( (c=getchar()) != EOF)
 	{
+		if (c == '#')
+		{
+			printf ("%c", c);
+			while( (c=getchar()) != '\n')
+			{
+				printf ("%c", c);
+			}
+			printf("\n");
+			continue;
+		}
 		if (disc && c != '\t') continue;
 		disc = 0;
 		if (c == '\t') continue;
@@ -34,6 +45,9 @@ main ()
 		   i=-1;	
 
 			double var = atof(buf);
+
+			// double corr = exp (4.0* (sqrt(n+1)-sqrt(n)));
+			// var *= corr;
 			printf ("%d\t%23.18g\n", n, var);
 			n++;
 		}
