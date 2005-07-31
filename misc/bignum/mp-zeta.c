@@ -396,6 +396,23 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 {
 	unsigned long int us = s;
 
+#define ARRSZ 4000
+	static int first_time = 1;
+	static mpf_t zeta_cache[ARRSZ];
+	static int zprec[ARRSZ];
+	static unsigned int last_term[ARRSZ];
+
+	/* Cache of best values so far */
+	if(first_time)
+	{
+		first_time = 0;
+		int i;
+		for (i=0; i<ARRSZ; i++)
+		{
+			zprec[i] = 0;
+		}
+	}
+
 	if (s<2) return;
 	switch (s)
 	{
@@ -440,7 +457,24 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 			fp_zeta_odd (zeta, 21, "1881063815762259253125", "68529640373", "3762129424572110592000", "1793047592085750", prec); 
 			return;
 	}
+
+	/* If we are here, well have to compute values using brute force */
+	/* But first, lets see if we can get lucky with the cache. */
+	if ((s < ARRSZ) && (prec < zprec[s]))
+	{
+		mpf_set (zeta, zeta_cache[s]);
+		return;
+	}
+
+	/* initialize the cache line, if needed */
+	if ((s < ARRSZ) && (0 == zprec[s]))
+	{
+		mpf_init (zeta_cache[s]);
+		last_term[s] = 2;
+		zprec[s] = prec;
+	}
 	
+	/* If we are here, well have to compute values using brute force */
 	mpf_t acc;
 	mpf_t term;
 	mpf_t en;
@@ -469,8 +503,16 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	int nmax = 1.1*dig+1.0;
 	// printf ("zeta will be computed with %d terms\n", nmax);
 	
+	/* Start computations where we last left off. */
+	int nstart = 2;
+	if (s < ARRSZ)
+	{
+		mpf_set (zeta, zeta_cache[s]);
+		nstart = last_term[s];
+	}
+	
 	int n;
-	for (n=2; n<= nmax; n++)
+	for (n=nstart; n< nmax; n++)
 	{
 		mpf_set_ui (en, n);
 		mpf_ui_div (inv, 1, en);  /* inv = 1/n */
@@ -479,6 +521,13 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		mpf_set (zeta, acc);
 	}
 
+	/* cache the results */
+	if (s < ARRSZ)
+	{
+		mpf_set (zeta_cache[s], zeta);
+		last_term[s] = nmax;
+	}
+	
 	mpf_clear (acc);
 	mpf_clear (term);
 	mpf_clear (en);
@@ -486,7 +535,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 }
 
 /* ============================================================================= */
-/* rought count of number of digits in a number */
+/* rough count of number of digits in a number */
 
 static inline unsigned int num_digits (mpz_t num, mpz_t tmpa, mpz_t tmpb)
 {
@@ -531,6 +580,7 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpz_init (ibin);
 	mpf_set_ui (a_n, 0);
 
+	int maxbump = 0;
 	for (k=1; k<= n; k++)
 	{
 		/* commputer the binomial */
@@ -546,6 +596,7 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 		 * in terms to cpu time consumed.
 		 */
 		int ndigits = num_digits (ibin, tmpa,tmpb);
+		if (maxbump < ndigits) maxbump = ndigits;
 
 		/* compute 1/k - zeta (k+1)/(k+1) */
 		fp_zeta (zeta, k+1, prec+ndigits);
@@ -584,6 +635,8 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpz_clear (ibin);
 	mpz_clear (tmpa);
 	mpz_clear (tmpb);
+
+	// printf ("# max precision bump=%d\n", maxbump);
 }
 
 void a_bound_n (mpf_t b_n, unsigned int n)
@@ -632,19 +685,23 @@ main (int argc, char * argv[])
 	}
 #endif
 	
-	/* the decimal precison (number of decimal places) */
-	int prec = 16;
-
-	if (argc < 1)
+	if (argc < 3)
 	{
-		fprintf (stderr, "Usage: %s [ndigits]\n", argv[0]); 
+		fprintf (stderr, "Usage: %s [ndigits] [nterms]\n", argv[0]); 
 		exit (1);
 	}
 
-	prec = atoi (argv[1]);
+	/* the decimal precison (number of decimal places) */
+	int prec = atoi (argv[1]);
 
+	/* number of an's to compute */
+	int nterms = atoi (argv[2]);
+
+	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
-	int bits = v + 30;
+
+	/* the variable-precision calculations are touchy about this */
+	int bits = v + 30 + nterms/3;
 	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
