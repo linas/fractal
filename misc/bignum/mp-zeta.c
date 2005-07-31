@@ -466,7 +466,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		return;
 	}
 	int nmax = 1.1*dig+1.0;
-	// printf ("zeta will be computed with %d terms\n", nmax);
+	printf ("zeta will be computed with %d terms\n", nmax);
 	
 	int n;
 	for (n=2; n<= nmax; n++)
@@ -595,7 +595,7 @@ main ()
 #endif
 	
 	/* the decimal precison (number of decimal places) */
-	int prec = 135;
+	int prec = 165;
 
 	double v = ((double) prec) *log(10.0) / log(2.0);
 	int bits = v + 30;
@@ -625,11 +625,21 @@ main ()
 	fp_prt ("0 digs= ", zeta);
 #endif
 	
-#if TEST_ZETA
+#define TEST_ZETA
+#ifdef TEST_ZETA
 	mpf_t zeta;
 	mpf_init (zeta);
-	fp_zeta_odd (zeta, 3, 180, 7, 360, 0, 60); 
-	fp_prt ("duude zeta3= ", zeta);
+	// fp_zeta_odd (zeta, 3, 180, 7, 360, 0, 60); 
+	// fp_prt ("duude zeta3= ", zeta);
+	int i;
+	int pr = 205;
+	for (i=23; i<100; i+=2 ) {
+		fp_zeta (zeta, i, pr);
+		printf ("char * zeta_%d_%d = \"", i, pr);
+		mpf_out_str (stdout, 10, pr, zeta);
+		printf ("\";\n");
+		fflush (stdout);
+	}
 #endif
 
 #ifdef TEST_EXP
@@ -643,7 +653,7 @@ main ()
 	mpf_clear(one);
 #endif
 	
-#define A_SUB_N
+// #define A_SUB_N
 #ifdef A_SUB_N
 	mpf_t a_n, en, sq, term, b_n, prod;
 	mpf_init (a_n);
@@ -657,7 +667,7 @@ main ()
 	printf ("#\n# zeta expansion terms \n#\n");
 	printf ("# computed with so-called precision of %d decimal places\n", prec);
 	printf ("# computed with %d bits of default mpf \n", bits);
-	for (n=0; n<500; n++)
+	for (n=300; n<500; n++)
 	{
 		a_sub_n (a_n, n, prec);
 
