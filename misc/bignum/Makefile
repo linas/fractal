@@ -3,12 +3,13 @@
 #
 
 
-EXES= bound mp_zeta
+EXES= bound mp_zeta zero-cross
 
 all:  $(EXES)
 
-mp_zeta:	mp_zeta.o
 bound:	bound.o
+mp_zeta:	mp_zeta.o
+zero-cross:	zero-cross.o
 
 clean:
 	rm -f core tmp junk glop a.out *.o
