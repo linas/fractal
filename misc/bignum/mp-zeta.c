@@ -781,7 +781,7 @@ main (int argc, char * argv[])
 	printf ("#\n# zeta expansion terms \n#\n");
 	printf ("# computed with variable precision of %d decimal places\n", prec);
 	printf ("# computed with %d bits of default mpf \n", bits);
-	for (n=0; n<500; n++)
+	for (n=0; n<nterms; n++)
 	{
 		a_sub_n (a_n, n, prec);
 
