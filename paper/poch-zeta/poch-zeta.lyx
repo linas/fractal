@@ -569,7 +569,7 @@ k\end{array}\right)\left[\frac{1}{k}-\frac{\zeta(k+1)}{k+1}\right]\label{eq:}\en
 
 , motivating the definition of 
 \begin_inset Formula \begin{equation}
-a_{n}=t_{n}-1/2(n+1)\label{eq: a_n defn}\end{equation}
+a_{n}=t_{n}-\frac{1}{2(n+1)}\label{eq: a_n defn}\end{equation}
 
 \end_inset 
 
@@ -577,7 +577,7 @@ a_{n}=t_{n}-1/2(n+1)\label{eq: a_n defn}\end{equation}
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
 s-1\\
-n\end{array}\right)a_{n}\label{eq:}\end{equation}
+n\end{array}\right)a_{n}\label{eq:zeta-as-a_n}\end{equation}
 
 \end_inset 
 
@@ -609,30 +609,123 @@ divided differences
 \end_inset 
 
  have a simple, finite expression.
- The forst few may be written as 
-\begin_inset Formula \begin{equation}
-a_{0}=\frac{1}{2}-\gamma\label{eq:}\end{equation}
+ For example, the first few may be written as 
+\begin_inset Formula \begin{eqnarray}
+a_{0} & = & \frac{1}{2}-\gamma\label{eq:}\\
+a_{1} & = & \frac{\zeta(2)}{2}-\gamma-\frac{1}{4}\\
+a_{2} & = & \zeta(2)-\frac{\zeta(3)+2}{3}-\gamma\\
+a_{3} & = & \frac{3}{2}\zeta(2)-\zeta(3)+\frac{\zeta(4)}{4}-\frac{23}{24}-\gamma\end{eqnarray}
 
 \end_inset 
 
+ and so on.
+ Numiercally, the 
+\begin_inset Formula $a_{n}$
+\end_inset 
 
+ are small, and seem to be bounded and oscillatory.
+ A detailed numerical analysis of these values is given in the enxt section.
 \layout Standard
 
 The 
 \begin_inset Formula $a_{n}$
 \end_inset 
 
- are small and seem to be bounded and oscillatory.
- We have 
-\begin_inset Formula $a_{0}=0.5-\gamma$
+appear naturally in the Taylor's expansion for the Gamma function, and so
+ one finds, with little difficulty, that 
+\begin_inset Formula \begin{eqnarray}
+\alpha(z) & = & \sum_{n=0}^{\infty}a_{n}z^{n}\nonumber \\
+ & = & \frac{1}{1-z}+\frac{\ln(1-z)}{z}\left(\frac{1}{1-z}-\frac{1}{2}\right)+\frac{1}{z}\ln\Gamma\left(\frac{1}{1-z}\right)\label{eq:}\end{eqnarray}
+
 \end_inset 
 
- and the next few are shown in table 
+ This is an interesting function in its own right.
+ At first glance, one might think that its divergent at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, with a cut extending to the right for 
+\begin_inset Formula $1<z$
+\end_inset 
+
+.
+ In the cut one might guess that there are poles at 
+\begin_inset Formula $-n=1/(1-z)$
+\end_inset 
+
+, that is, at 
+\begin_inset Formula $z=1+1/n$
+\end_inset 
+
+, accumulating to an essential singularity at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ But this doesn't seem to be the case at all; some preliminary analysis
+ seems to show that 
+\begin_inset Formula $\alpha(z)$
+\end_inset 
+
+ is an entire function, and doesn't have any poles or singularities anywhere.
+ This function deserves a more thorough investigation.
+ Some curious values for this sum are 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}a_{n}=\ln\sqrt{2\pi}-1=-0.081061467...\label{eq:}\end{equation}
+
+\end_inset 
+
+ which can be obtained from Sterling's formula, and 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}a_{n}2^{-n}=2-3\ln2=-0.079441542...\label{eq:}\end{equation}
+
+\end_inset 
+
+ Its equally curious that other variations on the expression given in 
+\begin_inset LatexCommand \ref{eq:zeta-as-a_n}
+
+\end_inset 
+
+ are even more trivial, namely, one has 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)x^{n}=\sum_{n=0}^{\infty}(-)^{n}(s-1)_{n}\,\frac{x^{n}}{n!}=\left(1-x\right)^{s-1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $(s)_{n}=s(s-1)(s-2)...(s-n+1)$
+\end_inset 
+
+ is the falling factorial.
+ One is left to wonder what the function 
+\begin_inset Formula \begin{equation}
+\mu(s;x)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)a_{n}x^{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ might be like; it is presumably related to the Polylogarithm (Jonquiere's
+ function) XXXX Do the scratching needed to get the relationship nailed
+ down.
+ Ugh.
+ The general idea of replacing power series by series in rising or falling
+ Pochhammer symbols and then exploring the curious relationships that result
+ is referred to as Umbral Calculus; it seems that a number of interesting
+ relationships can be obtained in this way.
+\layout Subsection
+
+Numerical Analysis
+\layout Standard
+
+The table 
 \begin_inset LatexCommand \ref{cap:Some-values-of}
 
 \end_inset 
 
- below.
+ shows the numerical values of the first few of these constants.
  
 \layout Standard
 
@@ -701,7 +794,7 @@ Some values of
 
 \layout Standard
 
--0.0772156...
+-0.077215664901532851...
 \end_inset 
 </cell>
 </row>
@@ -719,7 +812,7 @@ Some values of
 
 \layout Standard
 
--0.00474863...
+-0.0047486314774196408...
 \end_inset 
 </cell>
 </row>
@@ -737,7 +830,7 @@ Some values of
 
 \layout Standard
 
-0.00036610...
+0.00036610089349548089...
 \end_inset 
 </cell>
 </row>
@@ -755,7 +848,7 @@ Some values of
 
 \layout Standard
 
-0.00037601...
+0.00037600730566372326...
 \end_inset 
 </cell>
 </row>
@@ -773,7 +866,7 @@ Some values of
 
 \layout Standard
 
-0.00014301...
+0.00014301182486231440...
 \end_inset 
 </cell>
 </row>
@@ -791,7 +884,7 @@ Some values of
 
 \layout Standard
 
-3.399...e-5
+3.3997818936021684...e-5
 \end_inset 
 </cell>
 </row>
@@ -809,7 +902,7 @@ Some values of
 
 \layout Standard
 
--4.832...e-7
+-4.8324221220657863...e-7
 \end_inset 
 </cell>
 </row>
@@ -827,7 +920,7 @@ Some values of
 
 \layout Standard
 
--6.778..e-6
+-6.7778497812918602..e-6
 \end_inset 
 </cell>
 </row>
@@ -838,140 +931,36 @@ Some values of
  
 \layout Standard
 
-xxx Lyx w/latex2html html table layout borken.
- See http://www.tug.org/pipermail/latex2html/2004-August/002758.html for details.
- Meanwhile, work around with following: xxx
-\layout Standard
-
-a_0=-0.0772156...
-\layout Standard
-
-a_1=-0.00474863...
-\layout Standard
-
-a_2=0.00036610...
-\layout Standard
-
-a_3=0.00037601...
-\layout Standard
-
-a_4=0.00014301...
-\layout Standard
-
-a_5=3.399...e-5
-\layout Standard
-
-a_6=-4.832...e-7
-\layout Standard
-
-a_7=-6.778..e-6
-\layout Standard
-
 This table shows the first few values of 
 \begin_inset Formula $a_{n}$
 \end_inset 
 
 .
+ These may be easily calculated to high precision if desired.
  As is immediately apparent, these get small quickly.
- As the next figure will show, the values are oscillatory.
+ 
 \end_inset 
 
 
 \layout Standard
 
-Numerically, it appears that 
-\begin_inset Formula $\left|a_{n}\right|\lesssim\exp\left(-4\sqrt{n+1}\right)$
-\end_inset 
-
- at least for 
-\begin_inset Formula $n\leq40$
-\end_inset 
-
-.
- The 
+Numerically, it appears that the 
 \begin_inset Formula $a_{n}$
 \end_inset 
 
-appear naturally in the Taylor's expansion for the Gamma function, and so
- one finds 
-\begin_inset Formula \begin{eqnarray}
-\alpha(z) & = & \sum_{n=0}^{\infty}a_{n}z^{n}\nonumber \\
- & = & \frac{1}{1-z}+\frac{\ln(1-z)}{z}\left(\frac{1}{1-z}-\frac{1}{2}\right)+\frac{1}{z}\ln\Gamma\left(\frac{1}{1-z}\right)\label{eq:}\end{eqnarray}
+are oscillatory, as shown in the figure 
+\begin_inset LatexCommand \ref{cap:Graph-of-a_n}
 
-\end_inset 
-
- This is an interesting function in its own right.
- At first glance, one might think that its divergent at 
-\begin_inset Formula $z=1$
-\end_inset 
-
-, with a cut extending to the right for 
-\begin_inset Formula $1<z$
 \end_inset 
 
 .
- In the cut one expects to find poles at 
-\begin_inset Formula $-n=1/(1-z)$
-\end_inset 
-
-, that is, at 
-\begin_inset Formula $z=1+1/n$
-\end_inset 
-
-, accumulating to an essential singularity at 
-\begin_inset Formula $z=1$
+ The values are also very rapidly decreasing, so that to the firstt order,
+ that 
+\begin_inset Formula $\left|a_{n}\right|\sim\exp\left(-4\sqrt{n+1}\right)$
 \end_inset 
 
 .
- But this doesn't seem to be the case at all; some preliminary analysis
- seems to show that 
-\begin_inset Formula $\alpha(z)$
-\end_inset 
-
- is an entire function, and doesn't have any poles or singularities anywhere.
- This function deserves a more thorough investigation.
- Some curious values for this sum are 
-\begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}a_{n}=\ln\sqrt{2\pi}-1=-0.081061467...\label{eq:}\end{equation}
-
-\end_inset 
-
- which can be obtained from Sterling's formula, and 
-\begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}a_{n}2^{-n}=2-3\ln2=-0.079441542...\label{eq:}\end{equation}
-
-\end_inset 
-
- Its equally curious that the other variation on the expression is even
- more trivial, namely 
-\begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
-s-1\\
-n\end{array}\right)x^{n}=\sum_{n=0}^{\infty}(-)^{n}(s-1)_{n}\,\frac{x^{n}}{n!}=\left(1-x\right)^{s-1}\label{eq:}\end{equation}
-
-\end_inset 
-
- where 
-\begin_inset Formula $(s)_{n}=s(s-1)(s-2)...(s-n+1)$
-\end_inset 
-
- is the falling factorial.
- One is left to wonder what the function 
-\begin_inset Formula \begin{equation}
-\mu(s;x)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
-s-1\\
-n\end{array}\right)a_{n}x^{n}\label{eq:}\end{equation}
-
-\end_inset 
-
- might be like; it is presumably related to the Polylogarithm (Jonquiere's
- function) XXXX Do the scratching needed to get the relationship nailed
- down.
- Ugh.
- The general idea of replacing power series by series in rising or falling
- Pochhammer symbols and then exploring the curious relationships that result
- is referred to as Umbral Calculus; it seems that a number of interesting
- relationships can be obtained in this way.
+ 
 \layout Standard
 
 
@@ -980,6 +969,11 @@ wide false
 collapsed false
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Graph-of-a_n}
+
+\end_inset 
 
 Graph of the first few values of 
 \begin_inset Formula $a_{n}$
