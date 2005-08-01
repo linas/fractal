@@ -50,6 +50,7 @@ main ()
 	/* numerical best fit */
 	double cee_0 = 2.0;
 	double cee_1 = 2.553;
+	cee_1 = 13.0*M_PI / 16.0;
 
 	for (i=0; i<nmax; i++)
 	{

@@ -12,18 +12,34 @@ set out 'asubn.png'
 set data style lines
 set key right
 
-set title "a_n the oscillatory term in zeta function"
-set xlabel "n"
-set ylabel "a_n)"
+# This set waas used to generate the asubn.png graph in the paper
+#
+# set title "Graph of the coefficients a_n * exp (4*sqrt(n+1))"
+# set xlabel "n"
+# set ylabel "a_n * exp (4*sqrt(n+1))"
+# plot "asubn.dat" using 1:2 title ""
+
+# This was used to tgen the amplitude figure
+# f(x) = (-2.125+sqrt (2.125*2.125 - 4*(2.0-x)/3.1416))
+# 
+# set title "Graph of the ratio a_n * exp (4*sqrt(n+1))/s_n"
+# set xlabel "n"
+# set ylabel "a_n * exp (4*sqrt(n+1))/s_n"
+# 
+# plot "asubn.dat" using 1:($2/ (sin(3.14159*f($1)))) title "" 
 
 # set yrange [0:]
 
 f(x) = (-2.125+sqrt (2.125*2.125 - 4*(2.0-x)/3.1416))
 
-# plot "asubn.dat" using 1:2 title "", \
-#     "asubn.dat" using 1:(f($1)*sin(3.14159*f($1))) title "guess"
+set title "Graph of the ratio a_n * exp (4*sqrt(n+1))/s_n"
+set xlabel "n"
+set ylabel "a_n * exp (4*sqrt(n+1))/s_n"
 
-plot "asubn.dat" using 1:($2/ ($1*$1*sin(3.14159*f($1)))) title "" 
+plot "asubn.dat" using 1:2 title "" 
+# plot "asubn.dat" using (log($1)):(log ($2)) title "" 
+# plot "asubn.dat" using 1:(log ($2/ (sin(3.14159*f($1))))) title "" 
+# plot "asubn.dat" using 1:2 title ""
 
 
 # pause 100
