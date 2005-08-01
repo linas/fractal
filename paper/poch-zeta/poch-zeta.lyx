@@ -234,7 +234,7 @@ XXX Provide the details.
 
 Todo: Give the Riemann Hypothesis as a vector equation.
  
-\layout Subsection
+\layout Section
 
 Assorted Algebraic Identities
 \layout Standard
@@ -404,7 +404,7 @@ Acting on a general power, the map gives the Hurwitz Zeta:
 \end_inset 
 
 , one concludes that the operator gives the Bernoulli polynomials.
-\layout Subsection
+\layout Section
 
 Polynomial Representation
 \layout Standard
@@ -518,7 +518,7 @@ n\end{array}\right)(-x)^{k}\label{eq:}\end{equation}
 \layout Standard
 
 (Maybe cut the above two formulas?) (Maybe give hypergeometric series?)
-\layout Subsection
+\layout Section
 
 The Riemann Zeta and Stieltjes Constants
 \layout Standard
@@ -715,7 +715,7 @@ n\end{array}\right)a_{n}x^{n}\label{eq:}\end{equation}
  Pochhammer symbols and then exploring the curious relationships that result
  is referred to as Umbral Calculus; it seems that a number of interesting
  relationships can be obtained in this way.
-\layout Subsection
+\layout Section
 
 Numerical Analysis
 \layout Standard
@@ -738,7 +738,11 @@ The equation
 \end_inset 
 
  with only a moderate investment in coding and computer time.
- 
+ Note, however, that in order to get up to these ranges, computations must
+ be performed keeping hundreds of decimal places of precision, due to the
+ very large values that the binomial coefficient can take.
+ In teh following, caluclations were performed using the GNU Multi-Precision
+ Library [ref].
 \layout Standard
 
 The table 
@@ -1051,7 +1055,12 @@ s_{n}=\sin\pi\left(\frac{-17}{16}+\sqrt{\frac{289}{256}+4\,\frac{(n-2)}{\pi}}\ri
 
 \end_inset 
 
- To demonstrate the quality of this fit, the graph xx shows 
+ To demonstrate the quality of this fit, the graph 
+\begin_inset LatexCommand \ref{cap:Graph-amplitude}
+
+\end_inset 
+
+ shows 
 \begin_inset Formula $a_{n}$
 \end_inset 
 
@@ -1069,7 +1078,12 @@ collapsed false
 
 \layout Caption
 
-Graph of 
+
+\begin_inset LatexCommand \label{cap:Graph-amplitude}
+
+\end_inset 
+
+Graph of the amplitude 
 \begin_inset Formula $a_{n}/s_{n}$
 \end_inset 
 
@@ -1078,16 +1092,46 @@ Graph of
 
 
 \begin_inset Graphics
-	filename asubn.png
+	filename aratio.png
 	width 100text%
 
 \end_inset 
 
 
+\layout Standard
+
+This figure shows a graph of 
+\begin_inset Formula $a_{n}\exp\left(4\sqrt{n+1}\right)/s_{n}$
+\end_inset 
+
+ out through 
+\begin_inset Formula $n\sim500$
+\end_inset 
+
+.
+ It is essentially a graph of the amplitude of the oscillations of 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+.
+ Note some occasional 
+\begin_inset Quotes eld
+\end_inset 
+
+blips
+\begin_inset Quotes erd
+\end_inset 
+
+ near zero crossings; there are presumably due to numerical errors occuring
+ near particularly small values of 
+\begin_inset Formula $s_{n}$
+\end_inset 
+
+.
 \end_inset 
 
 
-\layout Subsection
+\layout Section
 
 Relation to the Stieltjes constants
 \layout Standard
@@ -1212,7 +1256,7 @@ z-1\end{array}\right)\left[\zeta(n+2)-1\right]\label{eq:}\end{equation}
 \end_inset 
 
  is unclear.
-\layout Subsection
+\layout Section
 
 Sheffer Sequences
 \layout Standard
@@ -1264,7 +1308,7 @@ Generalized Stieltjes Constants
 \begin_inset Formula $w_{n}$
 \end_inset 
 
- take on a particularly simple form.
+ take on a particularly simple or interesting form.
  This is already suggested by the above, where the expression of the 
 \begin_inset Formula $a_{n}$
 \end_inset 
@@ -1276,82 +1320,12 @@ Generalized Stieltjes Constants
  the representation of the real numbers as p-adics or rationals is essentially
  a kind of lattice representation (having a modular group symmetry).
  
-\layout Subsection
-
-The Kernel
-\layout Standard
-
-We would like to know what the kernel of the GKW operator is.
- Consider 
-\begin_inset Formula \begin{equation}
-k(x)=\frac{1}{x^{2}}\exp(2k+1)\frac{\pi}{x}\label{eq:}\end{equation}
-
-\end_inset 
-
- Then 
-\begin_inset Formula \begin{eqnarray}
-\left[U_{h}k\right](x) & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}\cos(2k+1)n\pi\nonumber \\
- & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}(-)^{n}\label{eq:}\end{eqnarray}
-
-\end_inset 
-
- The value of the sum is ambiguous.
- One is tempted to cancel terms pairwise, and thus declare 
-\begin_inset Formula $k(x)$
-\end_inset 
-
- to belong to the kernel.
- On the other hand, we've seen that the regularized sum is not zero: 
-\begin_inset Formula \begin{equation}
-\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}e^{-tk}=\frac{1}{2}\label{eq:}\end{equation}
-
-\end_inset 
-
- and so one is left in a bit of a quandary.
- 
-\layout Standard
-
-Some progress might be made by applying the theory of the Henstock-Kurzweil
- integral.
-\layout Subsection
-
-Numeric Attacks
-\layout Standard
-
-One can mount numeric attacks on GKW.
- One can find, for instance, that 
-\begin_inset Formula \begin{equation}
-\rho_{1}(x)\approx\frac{-3}{4}+\frac{7}{4}\frac{1}{(1+x)^{5/2}}\label{eq:}\end{equation}
-
-\end_inset 
-
- is accurate to about one or two percent over the domain 
-\begin_inset Formula $x\in[0,1]$
-\end_inset 
-
-.
- It is associated with an eigenvalue 
-\begin_inset Formula $\lambda_{1}\approx0.3025$
-\end_inset 
-
-.
-\layout Standard
-
-The matrix elements in 
-\begin_inset LatexCommand \ref{eq:GKW-matrix-elts}
-
-\end_inset 
-
- are easily numerically ...
- etc.
 \layout Section
 
 Conclusions
 \layout Standard
 
-Apologies for the format of this paper.
- It's a veritable candy store of goodies; there are all these yummy toys
- to play with, which one first?
+To be written.
 \layout Bibliography
 \bibitem [Gas92]{key-10}
 
