@@ -720,12 +720,49 @@ n\end{array}\right)a_{n}x^{n}\label{eq:}\end{equation}
 Numerical Analysis
 \layout Standard
 
+The equation 
+\begin_inset LatexCommand \ref{eq: a_n defn}
+
+\end_inset 
+
+ is very conducive to numerical analysis.
+ The vaues of the zeta function for small integers are known to millions
+ of digits; Plouffe has given a series of very rapidly converging sums for
+ the larger integers.
+ Thus, it becomes possible to explore the behvaiour of the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ up to 
+\begin_inset Formula $n\sim500$
+\end_inset 
+
+ with only a moderate investment in coding and computer time.
+ 
+\layout Standard
+
 The table 
 \begin_inset LatexCommand \ref{cap:Some-values-of}
 
 \end_inset 
 
  shows the numerical values of the first few of these constants.
+ It appears that the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+are oscillatory, as shown in the figure 
+\begin_inset LatexCommand \ref{cap:Graph-of-a_n}
+
+\end_inset 
+
+.
+ The values are also very rapidly decreasing, so that to the first order,
+ that 
+\begin_inset Formula $\left|a_{n}\right|\sim\exp\left(-4\sqrt{n+1}\right)$
+\end_inset 
+
+.
  
 \layout Standard
 
@@ -944,25 +981,6 @@ This table shows the first few values of
 
 \layout Standard
 
-Numerically, it appears that the 
-\begin_inset Formula $a_{n}$
-\end_inset 
-
-are oscillatory, as shown in the figure 
-\begin_inset LatexCommand \ref{cap:Graph-of-a_n}
-
-\end_inset 
-
-.
- The values are also very rapidly decreasing, so that to the firstt order,
- that 
-\begin_inset Formula $\left|a_{n}\right|\sim\exp\left(-4\sqrt{n+1}\right)$
-\end_inset 
-
-.
- 
-\layout Standard
-
 
 \begin_inset Float figure
 wide false
@@ -992,7 +1010,7 @@ Graph of the first few values of
 
 \layout Standard
 
-This figure shows a graph of the first 40 values of 
+This figure shows a graph of the first 140 values of 
 \begin_inset Formula $a_{n}$
 \end_inset 
 
@@ -1001,16 +1019,77 @@ This figure shows a graph of the first 40 values of
 \end_inset 
 
 .
- The first value, 
-\begin_inset Formula $a_{0}$
+ Oscillation is clearly visible; the period of oscillation is slowly increasing.
 \end_inset 
 
-, is omitted on this graph; it would have a value of about -4.0.
- XXX todo graph the first 500 terms.
- 
+ The author attempted a numeric fit to the oscillatory behvaiour of the
+ function.
+ An excellent fit for the 
+\begin_inset Formula $k'th$
+\end_inset 
+
+ zero is provided by 
+\begin_inset Formula \begin{equation}
+q(k)=2+\frac{17\pi}{16}k+\frac{\pi}{4}k^{2}\label{eq:}\end{equation}
+
+\end_inset 
+
+ which appears to fit the zero-corssings to better than a few parts per
+ thousand, at least for the larger values of 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ This equation is trivially invertable to give the oscillatory behaviour
+ of the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+; it is given by
+\begin_inset Formula \begin{equation}
+s_{n}=\sin\pi\left(\frac{-17}{16}+\sqrt{\frac{289}{256}+4\,\frac{(n-2)}{\pi}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ To demonstrate the quality of this fit, the graph xx shows 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ divided by 
+\begin_inset Formula $s_{n}$
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Graph of 
+\begin_inset Formula $a_{n}/s_{n}$
 \end_inset 
 
 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename asubn.png
+	width 100text%
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Subsection
+
+Relation to the Stieltjes constants
 \layout Standard
 
 The 
