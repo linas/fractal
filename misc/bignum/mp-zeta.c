@@ -416,21 +416,28 @@ void fp_zeta_even (mpf_t zeta, unsigned int n)
 	mpq_t bern, b2, bb;
 	mpq_init (bern);
 	mpq_init (b2);
+	mpq_init (bb);
+
 	q_bernoulli (bern, n);
 	mpq_set_ui (bb, 1, 2);
 	mpq_mul (b2, bern, bb);
 
+	/* divide by factorial */
 	mpz_t fact;
 	mpz_init (fact);
 	i_factorial (fact, n);
 	mpq_set_z (bern, fact);
 	mpq_div (bb, b2, bern);
+
+	/* fix the sign */
+	if (0==n%4) mpq_neg (bb, bb);
 	
 	mpf_t pi, pip;
 	mpf_init (pi);
 	mpf_init (pip);
 	
 	fp_pi (pi);
+	mpf_mul_ui (pi, pi, 2);
 	mpf_pow_ui (pip, pi, n);
 
 	mpf_set_q (pi, bb);
@@ -620,8 +627,10 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 
 	/* Try some special fast-paths */
 	int slow_path = 0;
-	int imprecise = 0;
+	int imprecise = 1;
 
+#if HARD_CODED_STUFF
+	imprecise = 0;
 	switch (s)
 	{
 		case 2: fp_zeta2 (zeta); break;
@@ -649,6 +658,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		default:
 			imprecise = 1;
 	}
+#endif /* HARD_CODED_STUFF */
 
 	switch (s)
 	{
@@ -674,7 +684,6 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 #endif
 
 
-#ifdef FOR_REFRENCE
 		case 3:
 			fp_zeta_odd (zeta, 3, "180", "7", "360", "0", prec);
 			break;
@@ -690,7 +699,6 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		case 9:
 			fp_zeta_odd (zeta, 9, "18523890", "625", "37122624", "74844", prec);
 			break;
-#endif
 
 		case 11:
 			fp_zeta_odd (zeta, 11, "425675250", "1453", "851350500", "0", prec);
@@ -911,6 +919,32 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		case 119:
 			fp_zeta_odd (zeta, 119, "181961744064274353998732174876458083192401580310810970658317353559398594886909058323836349301639835028493133397370199672540329374986916978202036009397671930491924285888671875", "1261151562313641703816834464893880014977525934624571730625687371825311625760783202572888567761894854518812674014678", "363923488128548707997464349752916166384803160621621941316634707118797189773818116647672698603279670056986266794740399345080658749973833956404072018795343860983848571777343750", "0", prec);
 			break;
+			
+#ifdef HARD_CODED_STUFF
+		case 2:
+		case 3: 
+		case 4: 
+		case 5: 
+		case 6: 
+		case 7: 
+		case 8: 
+		case 9: 
+		case 10: 
+		case 12: 
+		case 14: 
+		case 16: 
+		case 18: 
+		case 20: 
+		case 22: 
+		case 24:
+		case 26: 
+		case 28: 
+		case 30: 
+		case 32: 
+		case 34: 
+			break;
+#endif /* HARD_CODED_STUFF */
+
 		default:
 			slow_path = 1;
 	}
@@ -963,7 +997,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	double dig = pow (10.0, fprec);
 	if (1.0e10 < dig)
 	{
-		fprintf (stderr, "Sorry bucko, can't do it\n");
+		fprintf (stderr, "Sorry bucko, can't do it, you asked for zeta(%d) in %g digits\n", s, fprec);
 		return;
 	}
 	int nmax = 1.1*dig+1.0;
@@ -1167,6 +1201,7 @@ main (int argc, char * argv[])
 	double v = ((double) prec) *log(10.0) / log(2.0);
 
 	/* the variable-precision calculations are touchy about this */
+	/* XXX this should be stirling's approx for binomial */ 
 	int bits = v + 30 + nterms/3;
 	
 	/* set the precision (number of binary bits) */
@@ -1201,8 +1236,8 @@ main (int argc, char * argv[])
 	// fp_zeta_odd (zeta, 3, 180, 7, 360, 0, 60); 
 	// fp_prt ("duude zeta3= ", zeta);
 	int i;
-	int pr = 205;
-	for (i=23; i<100; i+=2 ) {
+	int pr = prec;
+	for (i=3; i<nterms; i++ ) {
 		fp_zeta (zeta, i, pr);
 		printf ("char * zeta_%d_%d = \"", i, pr);
 		mpf_out_str (stdout, 10, pr, zeta);
@@ -1232,7 +1267,7 @@ main (int argc, char * argv[])
 	printf ("found %d digits\n", nd);
 #endif
 
-#define TEST_BERNOULLI
+// #define TEST_BERNOULLI
 #ifdef TEST_BERNOULLI
 	mpq_t bern;
 	mpq_init (bern);
@@ -1246,8 +1281,20 @@ main (int argc, char * argv[])
 	}
 #endif /* TEST_BERNOULLI */
 	
-// #define A_SUB_N
+#define A_SUB_N
 #ifdef A_SUB_N
+
+#ifdef PRECOMPUTE
+	/* precompute values */
+	mpf_t zeta;
+	mpf_init (zeta);
+	int i;
+	int pr = prec;
+	for (i=3; i<nterms; i++ ) {
+		fp_zeta (zeta, i, pr);
+	}
+#endif /* PRECOMPUTE */
+	
 	mpf_t a_n, en, sq, term, b_n, prod;
 	mpf_init (a_n);
 	mpf_init (en);
@@ -1277,7 +1324,6 @@ main (int argc, char * argv[])
 		mpf_set_d (b_n, dbn);
 		mpf_mul(prod, a_n, b_n);
 #endif
-		
 		
 		printf ("%d\t",n);
 		fp_prt ("", prod);
