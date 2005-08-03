@@ -12,6 +12,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define ARRSZ 4000
+#define BERNOULLI_CACHE_SIZE ARRSZ
+#define ZETA_CACHE_SIZE ARRSZ
+
 void fp_prt (char * str, mpf_t val)
 {
 	printf (str);
@@ -70,6 +74,84 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 	
 	mpz_clear (top);
 	mpz_clear (bot);
+}
+
+/* ============================================================================= */
+/* fixed-point bernoulli number */
+
+void q_bernoulli (mpq_t bern, int n)
+{
+	int i;
+	static mpq_t b_cache[BERNOULLI_CACHE_SIZE];
+	static short b_c[BERNOULLI_CACHE_SIZE];
+	static is_init = 0;
+
+	if (0 == is_init)
+	{
+		for (i=0; i<BERNOULLI_CACHE_SIZE; i++)
+		{
+			mpq_init (b_cache[i]);
+			b_c[i] = 0;
+		}
+		mpq_set_ui (b_cache[0], 1, 1);
+	}
+
+	if (0>n) return;
+	if (0==n) {	mpq_set_ui (bern, 1,1); return; }
+	if (1==n) { mpq_set_si (bern, -1,2); return; }
+
+	/* all other odd n's aer zero */
+	if (n%2) { mpq_set_ui (bern, 0, 1);  return; }
+
+	int hn = n/2;
+	if (BERNOULLI_CACHE_SIZE <= hn) 
+	{ 
+		fprintf (stderr, "Error, bernoulli overflow\n"); 
+		exit(1); 
+	}
+	
+	/* See if we get lucky and find it in the cache */
+	if (b_c[hn]) 
+	{
+		mpq_set (bern, b_cache[hn]);
+		return;
+	}
+
+	mpz_t binom;
+	mpz_init (binom);
+
+	mpq_t acc, term, tmp;
+	mpq_init (acc);
+	mpq_init (term);
+	mpq_init (tmp);
+
+	mpq_set_ui (acc, 1-hn, 1);
+	
+	for (i=1; i<hn; i++)
+	{
+		int k = 2*i;
+		i_binomial (binom, n+1, k);
+
+		if (0 == b_c[i])
+		{
+			q_bernoulli (tmp, k);
+		}
+
+		mpq_set_z (tmp, binom);
+		mpq_mul (term, tmp, b_cache[i]);
+		mpq_add (tmp, acc, term);
+		mpq_set (acc, tmp);
+	}
+
+	mpq_set_si (tmp, -1, n+1);
+	mpq_mul (bern, acc, tmp);
+
+	mpq_set (b_cache[hn], bern);
+
+	mpz_clear (binom);
+	mpq_clear (term);
+	mpq_clear (acc);
+	mpq_clear (tmp);
 }
 
 /* ============================================================================= */
@@ -474,18 +556,17 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 {
 	unsigned long int us = s;
 
-#define ARRSZ 4000
 	static int first_time = 1;
-	static mpf_t zeta_cache[ARRSZ];
-	static int zprec[ARRSZ];
-	static unsigned int last_term[ARRSZ];
+	static mpf_t zeta_cache[ZETA_CACHE_SIZE];
+	static int zprec[ZETA_CACHE_SIZE];
+	static unsigned int last_term[ZETA_CACHE_SIZE];
 
 	/* Cache of best values so far */
 	if(first_time)
 	{
 		first_time = 0;
 		int i;
-		for (i=0; i<ARRSZ; i++)
+		for (i=0; i<ZETA_CACHE_SIZE; i++)
 		{
 			zprec[i] = 0;
 		}
@@ -494,7 +575,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	if (s<2) return;
 	
 	/* Lets see if we can get lucky with the cache. */
-	if ((s < ARRSZ) && (prec < zprec[s]))
+	if ((s < ZETA_CACHE_SIZE) && (prec < zprec[s]))
 	{
 		mpf_set (zeta, zeta_cache[s]);
 		return;
@@ -502,6 +583,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 
 	/* Try some special fast-paths */
 	int slow_path = 0;
+	int imprecise = 0;
 
 	switch (s)
 	{
@@ -527,7 +609,12 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		case 30: fp_zeta_even_str (zeta, 30, "6892673020804", "5660878804669082674070015625"); break;
 		case 32: fp_zeta_even_str (zeta, 32, "7709321041217", "62490220571022341207266406250"); break;
 		case 34: fp_zeta_even_str (zeta, 34, "151628697551", "12130454581433748587292890625"); break;
+		default:
+			imprecise = 1;
+	}
 
+	switch (s)
+	{
 #ifdef PLOUFFE_ORIGINALS
 		case 11: 
 			fp_zeta_odd (zeta, 11, "425675250", "1453", "851350500", "0", prec); 
@@ -792,7 +879,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	}
 
 	/* initialize the cache line, if needed */
-	if ((s < ARRSZ) && (0 == zprec[s]))
+	if ((s < ZETA_CACHE_SIZE) && (0 == zprec[s]))
 	{
 		mpf_init (zeta_cache[s]);
 		mpf_set_ui (zeta_cache[s], 1);
@@ -803,6 +890,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	/* If this was fast path, then we've already got a value. Return */
 	if (0 == slow_path)
 	{
+		if (0 == imprecise) zprec[s] = 500;
 		mpf_set (zeta_cache[s], zeta);
 		return;
 	}
@@ -838,7 +926,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	
 	/* Start computations where we last left off. */
 	int nstart = 2;
-	if (s < ARRSZ)
+	if (s < ZETA_CACHE_SIZE)
 	{
 		mpf_set (zeta, zeta_cache[s]);
 		nstart = last_term[s];
@@ -855,7 +943,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	}
 
 	/* cache the results */
-	if (s < ARRSZ)
+	if (s < ZETA_CACHE_SIZE)
 	{
 		mpf_set (zeta_cache[s], zeta);
 		last_term[s] = nmax;
@@ -1098,8 +1186,18 @@ main (int argc, char * argv[])
 	int nd = num_digits (ival, tmpa, tmpb);
 	printf ("found %d digits\n", nd);
 #endif
+
+#define TEST_BERNOULLI
+#ifdef TEST_BERNOULLI
+	mpq_t bern;
+	mpq_init (bern);
+	q_bernoulli (bern, 6);
+	printf ("bernoulli (%d)= ", 4);
+	mpq_out_str (stdout, 10, bern);
+	printf ("\n");
+#endif /* TEST_BERNOULLI */
 	
-#define A_SUB_N
+// #define A_SUB_N
 #ifdef A_SUB_N
 	mpf_t a_n, en, sq, term, b_n, prod;
 	mpf_init (a_n);
