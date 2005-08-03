@@ -47,11 +47,11 @@ main ()
 			double var = atof(buf);
 
 			// double corr = exp (4.0* (sqrt(n+1)-sqrt(n)));
-#if 0
+#if 1
 			double corr = exp (-4.0* (sqrt(n+1)));
-			corr *= exp (3.602* (sqrt(n+1)));
+			// corr *= exp (3.602* (sqrt(n+1)));
 			var *= corr;
-			var /= sin(M_PI*(-2.125+sqrt(2.125*2.125+4.0*(n-2)/M_PI)));
+			var /= sin(M_PI*(-2.125+sqrt(2.125*2.125+4.0*(n-1.97)/M_PI)));
 #endif
 		 	printf ("%d\t%23.18g\n", n, var);
 
