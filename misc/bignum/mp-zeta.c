@@ -55,7 +55,7 @@ void i_factorial (mpz_t fact, unsigned int n)
 }
 
 /* ============================================================================= */
-/* fp_binomial
+/* i_binomial
  * Binomial coefficient
  */
 
@@ -74,6 +74,33 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 	
 	mpz_clear (top);
 	mpz_clear (bot);
+}
+
+/* ============================================================================= */
+/* fp_poch_rising
+ * rising pochhammer symbol, for real values.
+ *
+ * Brute force, simple.
+ */
+
+void fp_poch_rising (mpf_t poch, double x, unsigned int n)
+{
+	mpf_t acc, term;
+	
+	mpf_init (acc);
+	mpf_init (term);
+
+	mpf_set_ui (poch, 1);
+	unsigned int i;
+	for (i=0; i<n; i++)
+	{
+		mpf_set_d (term, x+i);
+		mpf_mul (acc, poch, term);
+		mpf_set (poch, acc);
+	}
+
+	mpf_clear (acc);
+	mpf_clear (term);
 }
 
 /* ============================================================================= */
