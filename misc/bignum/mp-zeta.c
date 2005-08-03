@@ -88,6 +88,7 @@ void q_bernoulli (mpq_t bern, int n)
 
 	if (0 == is_init)
 	{
+		is_init = 1;
 		for (i=0; i<BERNOULLI_CACHE_SIZE; i++)
 		{
 			mpq_init (b_cache[i]);
@@ -125,7 +126,7 @@ void q_bernoulli (mpq_t bern, int n)
 	mpq_init (term);
 	mpq_init (tmp);
 
-	mpq_set_ui (acc, 1-hn, 1);
+	mpq_set_si (acc, 1-n, 2);
 	
 	for (i=1; i<hn; i++)
 	{
@@ -147,6 +148,7 @@ void q_bernoulli (mpq_t bern, int n)
 	mpq_mul (bern, acc, tmp);
 
 	mpq_set (b_cache[hn], bern);
+	b_c[hn] = 1;
 
 	mpz_clear (binom);
 	mpq_clear (term);
@@ -1191,10 +1193,14 @@ main (int argc, char * argv[])
 #ifdef TEST_BERNOULLI
 	mpq_t bern;
 	mpq_init (bern);
-	q_bernoulli (bern, 6);
-	printf ("bernoulli (%d)= ", 4);
-	mpq_out_str (stdout, 10, bern);
-	printf ("\n");
+	int n = 4;
+	for (n=8; n<30; n++) 
+	{
+		q_bernoulli (bern, n);
+		printf ("bernoulli (%d)= ", n);
+		mpq_out_str (stdout, 10, bern);
+		printf ("\n");
+	}
 #endif /* TEST_BERNOULLI */
 	
 // #define A_SUB_N
