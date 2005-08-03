@@ -375,7 +375,7 @@ void fp_zeta9 (mpf_t zeta)
 	mpf_set (zeta, e);
 }
 
-void fp_zeta_even (mpf_t zeta, unsigned int n, unsigned int div)
+void fp_zeta_even_ui (mpf_t zeta, unsigned int n, unsigned int div)
 {
 	mpf_t pi, pip;
 	mpf_init (pi);
@@ -409,6 +409,41 @@ void fp_zeta_even_str (mpf_t zeta, unsigned int n, char * snum, char * sdenom)
 	mpf_clear (pip);
 	mpf_clear (num);
 	mpf_clear (denom);
+}
+
+void fp_zeta_even (mpf_t zeta, unsigned int n)
+{
+	mpq_t bern, b2, bb;
+	mpq_init (bern);
+	mpq_init (b2);
+	q_bernoulli (bern, n);
+	mpq_set_ui (bb, 1, 2);
+	mpq_mul (b2, bern, bb);
+
+	mpz_t fact;
+	mpz_init (fact);
+	i_factorial (fact, n);
+	mpq_set_z (bern, fact);
+	mpq_div (bb, b2, bern);
+	
+	mpf_t pi, pip;
+	mpf_init (pi);
+	mpf_init (pip);
+	
+	fp_pi (pi);
+	mpf_pow_ui (pip, pi, n);
+
+	mpf_set_q (pi, bb);
+	mpf_mul (zeta,pi, pip);
+
+	mpf_clear (pi);
+	mpf_clear (pip);
+
+	mpq_clear (bern);
+	mpq_clear (b2);
+	mpq_clear (bb);
+
+	mpz_clear (fact);
 }
 
 /* return sum_n (n^k (e^{\pi k} \pm 1)^{-1}
@@ -591,13 +626,13 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	{
 		case 2: fp_zeta2 (zeta); break;
 		case 3: fp_zeta3 (zeta); break;
-		case 4: fp_zeta_even (zeta, 4, 90); break;
+		case 4: fp_zeta_even_ui (zeta, 4, 90); break;
 		case 5: fp_zeta5 (zeta); break;
-		case 6: fp_zeta_even (zeta, 6, 945); break;
+		case 6: fp_zeta_even_ui (zeta, 6, 945); break;
 		case 7: fp_zeta7 (zeta); break;
-		case 8: fp_zeta_even (zeta, 8, 9450); break;
+		case 8: fp_zeta_even_ui (zeta, 8, 9450); break;
 		case 9: fp_zeta9 (zeta); break;
-		case 10: fp_zeta_even (zeta, 10, 93555); break;
+		case 10: fp_zeta_even_ui (zeta, 10, 93555); break;
 					
 		case 12: fp_zeta_even_str (zeta, 12, "691", "638512875"); break;
 		case 14: fp_zeta_even_str (zeta, 14, "2", "18243225"); break;
@@ -889,10 +924,18 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		zprec[s] = prec;
 	}
 
+	/* if this is an arbitary even number, we've got the exact result */
+	if (0 == s%2)
+	{
+		imprecise = 0;
+		slow_path = 0;
+		fp_zeta_even (zeta, s);
+	}
+	
 	/* If this was fast path, then we've already got a value. Return */
 	if (0 == slow_path)
 	{
-		if (0 == imprecise) zprec[s] = 500;
+		if (0 == imprecise) zprec[s] = 500; /* XXXX bogus precison value */
 		mpf_set (zeta_cache[s], zeta);
 		return;
 	}
