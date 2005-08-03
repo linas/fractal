@@ -629,6 +629,9 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	int slow_path = 0;
 	int imprecise = 1;
 
+	/* bump precision for fast path so ast to increase cache hits */
+	if ((120 > s) || (0==s%2)) prec += 100;
+
 #if HARD_CODED_STUFF
 	imprecise = 0;
 	switch (s)
@@ -969,7 +972,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	/* If this was fast path, then we've already got a value. Return */
 	if (0 == slow_path)
 	{
-		if (0 == imprecise) zprec[s] = 500; /* XXXX bogus precison value */
+		// if (0 == imprecise) zprec[s] = 500; /* XXXX bogus precison value */
 		mpf_set (zeta_cache[s], zeta);
 		return;
 	}
@@ -1202,7 +1205,7 @@ main (int argc, char * argv[])
 
 	/* the variable-precision calculations are touchy about this */
 	/* XXX this should be stirling's approx for binomial */ 
-	int bits = v + 30 + nterms/3;
+	int bits = v + 300 + 3*nterms;
 	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
