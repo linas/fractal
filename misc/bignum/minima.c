@@ -13,7 +13,7 @@
 
 double my_func (double a, double b, double c)
 {
-	return (a-1)*(a-1) + (b-2)(b-2) + (c-3)*(c-3);
+	return (a-1)*(a-1) + (b-2)*(b-2) + (c-3)*(c-3);
 }
 
 double fitter (const gsl_vector * x, void * params)
@@ -36,12 +36,12 @@ void fit (void)
 	f.n = 3;
 	f.params = 0;
 	
-	gsl_vector start_pt = gsl_vector_alloc (3);
+	gsl_vector *start_pt = gsl_vector_alloc (3);
 	gsl_vector_set (start_pt, 0, 5.0);
 	gsl_vector_set (start_pt, 1, 5.0);
 	gsl_vector_set (start_pt, 2, 5.0);
 	
-	gsl_vector stepsize = gsl_vector_alloc (3);
+	gsl_vector *stepsize = gsl_vector_alloc (3);
 	gsl_vector_set (stepsize, 0, 0.01);
 	gsl_vector_set (stepsize, 1, 0.01);
 	gsl_vector_set (stepsize, 2, 0.01);
@@ -66,6 +66,7 @@ void fit (void)
 			printf ("converged to minimum at\n");
 		}
 		printf ("%5d ", iter);
+		int i;
 		for (i = 0; i <3; i++)
 		{
 			printf ("%10.3e ", gsl_vector_get (fm->x, i));
@@ -75,7 +76,8 @@ void fit (void)
 	while (status == GSL_CONTINUE && iter < 100);
 }
 
-main () 
+int main (int argc,  char *argv[]) 
 {
 	fit();
 }
+

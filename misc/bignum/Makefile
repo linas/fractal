@@ -3,7 +3,7 @@
 #
 
 
-EXES= bound mp_zeta trunc zero-cross
+EXES= bound minima mp_zeta trunc zero-cross
 
 all:  $(EXES)
 
@@ -11,6 +11,9 @@ bound:	bound.o
 mp_zeta:	mp_zeta.o
 trunc:	trunc.o
 zero-cross:	zero-cross.o
+
+minima: minima.o
+	$(CC) -o minima $< -lgsl -lcblas -lm -lc
 
 clean:
 	rm -f core tmp junk glop a.out *.o
