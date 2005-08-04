@@ -56,6 +56,7 @@ read_data (void)
 			var *= corr;
 			var /= sin(M_PI*(-2.125+sqrt(2.125*2.125+4.0*(n-1.97)/M_PI)));
 
+// printf ("duude %d %g\n", n, var);
 			var = -log (var);
 			data[n] = var;
 			n++;
@@ -63,6 +64,7 @@ read_data (void)
 		i++;
 	}
 	num_data_pts = n;
+	printf ("read %d datapts\n", num_data_pts);
 }
 
 double my_func (double a, double b, double c)
@@ -70,13 +72,20 @@ double my_func (double a, double b, double c)
 	int i;
 	double ms = 0.0;
 	
-	for (i=0; i<num_data_pts; i++)
+	num_data_pts = 500;
+	
+	int n=0;
+	for (i=7; i<num_data_pts; i++)
 	{
-		fitter = a + sqrt (b+c*i);
+		double fitter = a + sqrt (b+c*i);
 		
 		double term = fitter - data[i];
 		ms += term*term;
+		// printf ("n=%d  %g %g %g %g \n", i, data[i], fitter, term, ms); 
+		n++;
 	}
+	ms /= n;
+	// printf ("fit %g %g %g gets %g\n", a,b,c, ms);
 	return ms;
 }
 
@@ -101,9 +110,9 @@ void fit (void)
 	f.params = 0;
 	
 	gsl_vector *start_pt = gsl_vector_alloc (3);
-	gsl_vector_set (start_pt, 0, 5.0);
-	gsl_vector_set (start_pt, 1, 5.0);
-	gsl_vector_set (start_pt, 2, 5.0);
+	gsl_vector_set (start_pt, 0, 2.0);
+	gsl_vector_set (start_pt, 1, 21.0);
+	gsl_vector_set (start_pt, 2, 13.3);
 	
 	gsl_vector *stepsize = gsl_vector_alloc (3);
 	gsl_vector_set (stepsize, 0, 0.01);
@@ -123,7 +132,7 @@ void fit (void)
 			break;
 
 		double size = gsl_multimin_fminimizer_size (fm);
-		status = gsl_multimin_test_size (size, 1e-4);
+		status = gsl_multimin_test_size (size, 1e-5);
 
 		if (status == GSL_SUCCESS)
 		{
@@ -133,15 +142,16 @@ void fit (void)
 		int i;
 		for (i = 0; i <3; i++)
 		{
-			printf ("%10.3e ", gsl_vector_get (fm->x, i));
+			printf ("%11.8g ", gsl_vector_get (fm->x, i));
 		}
-		printf ("f() = %7.3f size = %.3f\n", fm->fval, size);
+		printf ("f() = %8.8g size = %.3f\n", fm->fval, size);
 	}
-	while (status == GSL_CONTINUE && iter < 100);
+	while (status == GSL_CONTINUE && iter < 100000);
 }
 
 int main (int argc,  char *argv[]) 
 {
+	read_data ();
 	fit();
 }
 
