@@ -10,12 +10,74 @@
 
 #include <gsl/gsl_multimin.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+double data [4000];
+int num_data_pts = 0;
+
+void
+read_data (void)
+{
+	int c;
+	char buf[4000];
+
+	/* read in floating point values in the first column */
+	int disc = 1;	
+	int i =0;
+	int n=0;
+	while( (c=getchar()) != EOF)
+	{
+		if (c == '#')
+		{
+			printf ("%c", c);
+			while( (c=getchar()) != '\n')
+			{
+				printf ("%c", c);
+			}
+			printf("\n");
+			continue;
+		}
+		if (disc && c != '\t') continue;
+		disc = 0;
+		if (c == '\t') continue;
+
+		buf[i] = c;
+
+		if ( c == '\n')
+		{
+			buf[i] = 0;
+			disc = 1;
+		   i=-1;	
+
+			double var = atof(buf);
+
+			double corr = exp (-4.0* (sqrt(n+1)));
+			var *= corr;
+			var /= sin(M_PI*(-2.125+sqrt(2.125*2.125+4.0*(n-1.97)/M_PI)));
+
+			var = -log (var);
+			data[n] = var;
+			n++;
+		}
+		i++;
+	}
+	num_data_pts = n;
+}
 
 double my_func (double a, double b, double c)
 {
-	double val = (a-1)*(a-1) + (b-2)*(b-2) + (c-3)*(c-3);
-printf ("eval with %g %g %g val=%g\n", a,b,c, val);
-	return val;
+	int i;
+	double ms = 0.0;
+	
+	for (i=0; i<num_data_pts; i++)
+	{
+		fitter = a + sqrt (b+c*i);
+		
+		double term = fitter - data[i];
+		ms += term*term;
+	}
+	return ms;
 }
 
 double fitter (const gsl_vector * x, void * params)
