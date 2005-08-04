@@ -13,7 +13,9 @@
 
 double my_func (double a, double b, double c)
 {
-	return (a-1)*(a-1) + (b-2)*(b-2) + (c-3)*(c-3);
+	double val = (a-1)*(a-1) + (b-2)*(b-2) + (c-3)*(c-3);
+printf ("eval with %g %g %g val=%g\n", a,b,c, val);
+	return val;
 }
 
 double fitter (const gsl_vector * x, void * params)
@@ -22,7 +24,7 @@ double fitter (const gsl_vector * x, void * params)
 	double b = gsl_vector_get(x, 1);
 	double c = gsl_vector_get(x, 2);
 
-	my_func (a,b,c);
+	return my_func (a,b,c);
 }
 
 void fit (void)
@@ -58,8 +60,8 @@ void fit (void)
 		if (status) 
 			break;
 
-		int size = gsl_multimin_fminimizer_size (fm);
-		status = gsl_multimin_test_size (size, 1e-2);
+		double size = gsl_multimin_fminimizer_size (fm);
+		status = gsl_multimin_test_size (size, 1e-4);
 
 		if (status == GSL_SUCCESS)
 		{
