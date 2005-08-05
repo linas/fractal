@@ -67,17 +67,19 @@ read_data (void)
 	printf ("read %d datapts\n", num_data_pts);
 }
 
-double my_func (double a, double b, double c)
+double my_func (double a, double b, double c, double d)
 {
 	int i;
 	double ms = 0.0;
 	
-	num_data_pts = 500;
+	// num_data_pts = 200;
 	
 	int n=0;
 	for (i=7; i<num_data_pts; i++)
 	{
-		double fitter = a + sqrt (b+c*i);
+		double fitter = a + c*sqrt (1.0+i);
+		// double fitter = a + sqrt (b+c*i);
+		// double fitter = a + pow (b+c*i, d);
 		
 		double term = fitter - data[i];
 		ms += term*term;
@@ -85,7 +87,7 @@ double my_func (double a, double b, double c)
 		n++;
 	}
 	ms /= n;
-	// printf ("fit %g %g %g gets %g\n", a,b,c, ms);
+	// printf ("fit %g %g %g %g gets %g\n", a,b,c, d, ms);
 	return ms;
 }
 
@@ -94,30 +96,35 @@ double fitter (const gsl_vector * x, void * params)
 	double a = gsl_vector_get(x, 0);
 	double b = gsl_vector_get(x, 1);
 	double c = gsl_vector_get(x, 2);
+	double d = gsl_vector_get(x, 3);
 
-	return my_func (a,b,c);
+	return my_func (a,b,c, d);
 }
 
 void fit (void)
 {
 	gsl_multimin_fminimizer *fm;
 
-	fm = gsl_multimin_fminimizer_alloc (gsl_multimin_fminimizer_nmsimplex, 3);
+#define FITS 4
+	fm = gsl_multimin_fminimizer_alloc (gsl_multimin_fminimizer_nmsimplex, FITS);
 	
 	gsl_multimin_function f;
 	f.f = fitter;
-	f.n = 3;
+	f.n = FITS;
 	f.params = 0;
 	
-	gsl_vector *start_pt = gsl_vector_alloc (3);
-	gsl_vector_set (start_pt, 0, 2.0);
+	gsl_vector *start_pt = gsl_vector_alloc (FITS);
+	gsl_vector_set (start_pt, 0, 3.0);
 	gsl_vector_set (start_pt, 1, 21.0);
-	gsl_vector_set (start_pt, 2, 13.3);
+	// gsl_vector_set (start_pt, 2, 13.3);
+	gsl_vector_set (start_pt, 2, 3.6);
+	gsl_vector_set (start_pt, 3, 0.5);
 	
-	gsl_vector *stepsize = gsl_vector_alloc (3);
+	gsl_vector *stepsize = gsl_vector_alloc (FITS);
 	gsl_vector_set (stepsize, 0, 0.01);
 	gsl_vector_set (stepsize, 1, 0.01);
 	gsl_vector_set (stepsize, 2, 0.01);
+	gsl_vector_set (stepsize, 3, 0.01);
 	
 	gsl_multimin_fminimizer_set (fm, &f, start_pt, stepsize); 
 
@@ -140,7 +147,7 @@ void fit (void)
 		}
 		printf ("%5d ", iter);
 		int i;
-		for (i = 0; i <3; i++)
+		for (i = 0; i <FITS; i++)
 		{
 			printf ("%11.8g ", gsl_vector_get (fm->x, i));
 		}
