@@ -104,6 +104,30 @@ void fp_poch_rising (mpf_t poch, double x, unsigned int n)
 }
 
 /* ============================================================================= */
+/* fp_binomial
+ * Binomial coefficient
+ */
+
+void fp_binomial (mpf_t bin, double s, unsigned int k)
+{
+	mpf_t top, bot;
+	mpz_t fac;
+
+	mpf_init (top);
+	mpf_init (bot);
+	mpz_init (fac);
+	fp_poch_rising (top, s-k+1, k);
+	i_factorial (fac, k); 
+	mpf_set_z (bot, fac);
+
+	mpf_div (bin, top, bot);
+	
+	mpf_clear (top);
+	mpf_clear (bot);
+	mpz_clear (fac);
+}
+
+/* ============================================================================= */
 /* fixed-point bernoulli number */
 
 void q_bernoulli (mpq_t bern, int n)
@@ -1085,7 +1109,11 @@ static inline unsigned int num_digits (mpz_t num, mpz_t tmpa, mpz_t tmpb)
 /* ============================================================================= */
 /* compute a_sub_n
  */
+#ifdef INT_VERSION
 void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
+#else
+void a_sub_s (mpf_t a_n, double s, unsigned int prec)
+#endif
 {
 	int k;
 	mpf_t fbin, term, zt, ok, one, acc, zeta;
@@ -1110,12 +1138,21 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpz_init (ibin);
 	mpf_set_ui (a_n, 0);
 
+#ifdef INT_VBERSION
+	double s = n;
+#else
+	int n = 100;
+#endif
 	int maxbump = 0;
 	for (k=1; k<= n; k++)
 	{
-		/* commputer the binomial */
+		/* Commpute the binomial */
+#if INT_VERSION
 		i_binomial (ibin, n, k);
 		mpf_set_z (fbin, ibin);
+#else
+		fp_binomial (fbin, s, k);
+#endif
 
 		/* The terms will have laternating signes, and
 		 * will mostly cancel one-another. Thus, we need 
@@ -1149,7 +1186,12 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpf_sub (a_n, term, gam);
 
 	/* subtract 1/2(n+1) */
+#ifdef INT_VERSION
 	mpf_div_ui (ok, one, 2*(n+1));
+#else
+	mpf_set_d (zt, 2*(s+1));
+	mpf_div (ok, one, zt);
+#endif
 	mpf_sub (term, a_n, ok);
 	mpf_set (a_n, term);
 	
@@ -1198,7 +1240,7 @@ main (int argc, char * argv[])
 	printf ("fact = %s\n", str);
 #endif
 
-#ifdef BINOMIAL_TEST
+#ifdef I_BINOMIAL_TEST
 	int n, k;
 	mpz_t bin;
 	mpz_init (bin);
@@ -1210,6 +1252,25 @@ main (int argc, char * argv[])
 			i_binomial (bin, n ,k);
 			mpz_get_str (str, 10, bin);
 			printf ("bin (%d %d) = %s\n", n, k, str);
+		}
+		printf ("---\n");
+	}
+#endif
+
+// #define F_BINOMIAL_TEST
+#ifdef F_BINOMIAL_TEST
+	int n, k;
+	mpf_t bin;
+	mpf_init (bin);
+
+	for (n=1; n<7; n++)
+	{
+		for (k=0; k<=n; k++)
+		{
+			fp_binomial (bin, (double)n ,k);
+			printf ("bin (%d %d) = ", n, k);
+			mpf_out_str (stdout, 10, 60, bin);
+			printf ("\n");
 		}
 		printf ("---\n");
 	}
@@ -1311,7 +1372,7 @@ main (int argc, char * argv[])
 	}
 #endif /* TEST_BERNOULLI */
 	
-#define A_SUB_N
+// #define A_SUB_N
 #ifdef A_SUB_N
 
 #ifdef PRECOMPUTE
@@ -1357,6 +1418,27 @@ main (int argc, char * argv[])
 		
 		printf ("%d\t",n);
 		fp_prt ("", prod);
+		fflush (stdout);
+	}
+#endif
+	
+#define A_SUB_S
+#ifdef A_SUB_S
+
+	mpf_t a_s;
+	mpf_init (a_s);
+
+	int n;
+	printf ("#\n# zeta expansion terms \n#\n");
+	printf ("# computed with variable precision of %d decimal places\n", prec);
+	printf ("# computed with %d bits of default mpf \n", bits);
+	for (n=0; n<nterms; n++)
+	{
+		double s = n / 10.0;
+		a_sub_s (a_s, s, prec);
+
+		printf ("%d\t%12.9g\t",n, s);
+		fp_prt ("", a_s);
 		fflush (stdout);
 	}
 #endif
