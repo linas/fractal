@@ -228,7 +228,7 @@ The GKW operator has one well-known eigenvector,
  o solution was found.
 \layout Standard
 
-XXX Provide the details.
+XXX Provide more details for attempted fit.
  
 \layout Standard
 
@@ -775,7 +775,7 @@ are oscillatory, as shown in the figure
 
 \begin_inset Float table
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -990,7 +990,7 @@ This table shows the first few values of
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1028,15 +1028,17 @@ This figure shows a graph of the first 140 values of
  Oscillation is clearly visible; the period of oscillation is slowly increasing.
 \end_inset 
 
- The author attempted a numeric fit to the oscillatory behvaiour of the
- function.
+ 
+\layout Standard
+
+The author attempted a numeric fit to the oscillatory behvaiour of the function.
  An excellent fit for the 
 \begin_inset Formula $k'th$
 \end_inset 
 
  zero is provided by 
 \begin_inset Formula \begin{equation}
-q(k)=2+\frac{17\pi}{16}k+\frac{\pi}{4}k^{2}\label{eq:}\end{equation}
+q(k)=1.970+\frac{17\pi}{16}k+\frac{\pi}{4}k^{2}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1046,6 +1048,9 @@ q(k)=2+\frac{17\pi}{16}k+\frac{\pi}{4}k^{2}\label{eq:}\end{equation}
 \end_inset 
 
 .
+ Note that the value 17/16 is not meant to imply that this value is truly
+ exact; numerically, the value 2.125 seems to be the ideal fit, and it is
+ written here as 17/16 in order to be suggestive.
  This equation is trivially invertable to give the oscillatory behaviour
  of the 
 \begin_inset Formula $a_{n}$
@@ -1053,7 +1058,7 @@ q(k)=2+\frac{17\pi}{16}k+\frac{\pi}{4}k^{2}\label{eq:}\end{equation}
 
 ; it is given by
 \begin_inset Formula \begin{equation}
-s_{n}=\sin\pi\left(\frac{-17}{16}+\sqrt{\frac{289}{256}+4\,\frac{(n-2)}{\pi}}\right)\label{eq:}\end{equation}
+s_{n}=\sin\pi\left(\frac{-17}{16}+\sqrt{\frac{289}{256}+4\,\frac{(n-1.97)}{\pi}}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1076,7 +1081,7 @@ s_{n}=\sin\pi\left(\frac{-17}{16}+\sqrt{\frac{289}{256}+4\,\frac{(n-2)}{\pi}}\ri
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1133,6 +1138,54 @@ blips
 \end_inset 
 
 
+\layout Standard
+
+Asymptotically, the amplitude of the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ appears to be bounded by 
+\begin_inset Formula \begin{equation}
+a_{n}\lesssim\exp(3.6-\epsilon)\sqrt{n+1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ for any postive value of 
+\begin_inset Formula $\epsilon$
+\end_inset 
+
+.
+ However, this bound is not very confident: while it appears to hold for
+ 
+\begin_inset Formula $n<1000$
+\end_inset 
+
+, it is not unambiguous.
+\layout Standard
+
+The 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+may be further explored by generalizing them to be a function on the complex
+ plane, instead of an integer.
+ One such 
+\begin_inset Quotes eld
+\end_inset 
+
+obvious
+\begin_inset Quotes erd
+\end_inset 
+
+ and reasonable generalization is 
+\begin_inset Formula \begin{equation}
+a(s)=1-\gamma-\frac{1}{2(s+1)}+\sum_{k=1}^{\infty}(-)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\left[\frac{1}{k}-\frac{\zeta(k+1)}{k+1}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
 \layout Section
 
 Relation to the Stieltjes constants
