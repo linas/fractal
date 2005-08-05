@@ -1081,7 +1081,7 @@ s_{n}=\sin\pi\left(\frac{-17}{16}+\sqrt{\frac{289}{256}+4\,\frac{(n-1.97)}{\pi}}
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1090,7 +1090,7 @@ collapsed true
 
 \end_inset 
 
-Graph of the amplitude 
+Graph of the log of the amplitude 
 \begin_inset Formula $a_{n}/s_{n}$
 \end_inset 
 
@@ -1099,7 +1099,7 @@ Graph of the amplitude
 
 
 \begin_inset Graphics
-	filename aratio.png
+	filename alog.png
 	width 100text%
 
 \end_inset 
@@ -1108,30 +1108,29 @@ Graph of the amplitude
 \layout Standard
 
 This figure shows a graph of 
-\begin_inset Formula $a_{n}\exp\left(4\sqrt{n+1}\right)/s_{n}$
+\begin_inset Formula $-\log(a_{n}/s_{n})$
 \end_inset 
 
  out through 
-\begin_inset Formula $n\sim500$
+\begin_inset Formula $n\sim2000$
 \end_inset 
 
 .
- It is essentially a graph of the amplitude of the oscillations of 
+ It is essentially a graph of the log of the amplitude of the oscillations
+ of 
 \begin_inset Formula $a_{n}$
 \end_inset 
 
 .
- Note some occasional 
-\begin_inset Quotes eld
-\end_inset 
-
-blips
-\begin_inset Quotes erd
-\end_inset 
-
- near zero crossings; there are presumably due to numerical errors occuring
- near particularly small values of 
+ Note the absence of any 'blips' that would occur if the sinusoidal fit
+ to the data was poor; the sinusoidal curve 
 \begin_inset Formula $s_{n}$
+\end_inset 
+
+ models the data remarkably well.
+ This figure also illustrates a fit to the amplitude.
+ Specifically, the fit curve is given by 
+\begin_inset Formula $3+3.6\sqrt{n+1}$
 \end_inset 
 
 .
@@ -1144,23 +1143,36 @@ Asymptotically, the amplitude of the
 \begin_inset Formula $a_{n}$
 \end_inset 
 
- appears to be bounded by 
+ appears to be given by 
 \begin_inset Formula \begin{equation}
-a_{n}\lesssim\exp(3.6-\epsilon)\sqrt{n+1}\label{eq:}\end{equation}
+a_{n}\simeq s_{n}\exp\left(3+3.6\sqrt{n+1}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
- for any postive value of 
-\begin_inset Formula $\epsilon$
+ However, a more precise fit is strangely difficult.
+ An attempt to numerically fit the data with an expression of the form 
+\begin_inset Formula \begin{equation}
+a_{n}\simeq s_{n}\exp\left(b+\left(c+dn\right)^{\epsilon}\right)\label{eq:}\end{equation}
+
 \end_inset 
 
-.
- However, this bound is not very confident: while it appears to hold for
- 
-\begin_inset Formula $n<1000$
+ results in fit parameters of 
+\begin_inset Formula $b=3.9\pm1.5$
 \end_inset 
 
-, it is not unambiguous.
+ and 
+\begin_inset Formula $c=-50\pm100$
+\end_inset 
+
+ and 
+\begin_inset Formula $d=12.87\pm0.15$
+\end_inset 
+
+ and 
+\begin_inset Formula $\epsilon=0.5\pm0.007$
+\end_inset 
+
+
 \layout Standard
 
 The 
