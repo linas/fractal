@@ -3,10 +3,11 @@
  *
  * High-precison Riemann zeta function, using the 
  * Gnu Multiple-precision library.
+ *
+ * Actually, high-precision a_s on the complex plane
  * 
  * Linas Vepstas July 2005
  */
-
 
 #include <gmp.h>
 #include <math.h>
@@ -1165,125 +1166,6 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 }
 
 /* ============================================================================= */
-/* rough count of number of digits in a number */
-
-static inline unsigned int num_digits (mpz_t num, mpz_t tmpa, mpz_t tmpb)
-{
-	unsigned int n=0;
-	
-	mpz_set (tmpb, num);
-	while (1)
-	{
-		mpz_fdiv_q_ui (tmpa, tmpb, 100);
-		mpz_set (tmpb, tmpa);
-		if (0 == mpz_sgn  (tmpa)) break;
-		n += 2;
-	}
-	return n;
-}
-
-/* ============================================================================= */
-/* compute a_sub_n
- */
-void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
-{
-	int k;
-	mpf_t fbin, term, zt, ok, one, acc, zeta;
-	mpf_t gam;
-
-	mpf_init (term);
-	mpf_init (acc);
-	mpf_init (zeta);
-	mpf_init (zt);
-	mpf_init (ok);
-	mpf_init (one);
-	mpf_init (fbin);
-	mpf_init (gam);
-	
-	mpz_t tmpa, tmpb;
-	mpz_init (tmpa);
-	mpz_init (tmpb);
-	
-	mpf_set_ui (one, 1);
-
-	mpz_t ibin;
-	mpz_init (ibin);
-	mpf_set_ui (a_n, 0);
-
-	int maxbump = 0;
-	for (k=1; k<= n; k++)
-	{
-		/* Commpute the binomial */
-		i_binomial (ibin, n, k);
-		mpf_set_z (fbin, ibin);
-
-		/* The terms will have alternating signes, and
-		 * will mostly cancel one-another. Thus, we need 
-		 * to increase precision for those terms with the 
-		 * largest binomial coefficients. This is will
-		 * increase precision for the killer terms, 
-		 * while keeping the others in bearable range,
-		 * in terms to cpu time consumed.
-		 */
-		int ndigits = num_digits (ibin, tmpa,tmpb);
-		if (maxbump < ndigits) maxbump = ndigits;
-
-		/* compute 1/k - zeta (k+1)/(k+1) */
-		fp_zeta (zeta, k+1, prec+ndigits);
-		mpf_div_ui (zt, zeta, k+1);
-		mpf_div_ui (ok, one, k);
-		mpf_sub (term, ok, zt);
-
-		mpf_mul (zeta, term, fbin);
-
-		if (k%2) mpf_neg (term, zeta);
-		else mpf_set (term, zeta);
-		
-		mpf_add (acc, a_n, term);
-		mpf_set (a_n, acc);
-	}
-
-	/* add const terms */
-	mpf_add_ui (term, a_n, 1);
-	fp_euler_mascheroni (gam);
-	mpf_sub (a_n, term, gam);
-
-	/* subtract 1/2(n+1) */
-	mpf_div_ui (ok, one, 2*(n+1));
-	mpf_sub (term, a_n, ok);
-	mpf_set (a_n, term);
-	
-	mpf_clear (term);
-	mpf_clear (acc);
-	mpf_clear (zeta);
-	mpf_clear (zt);
-	mpf_clear (ok);
-	mpf_clear (one);
-	mpf_clear (fbin);
-	mpf_clear (gam);
-
-	mpz_clear (ibin);
-	mpz_clear (tmpa);
-	mpz_clear (tmpb);
-
-	// printf ("# max precision bump=%d\n", maxbump);
-}
-
-void a_bound_n (mpf_t b_n, unsigned int n)
-{
-	mpf_t en, sq_en;
-	mpf_init (en);
-	mpf_init (sq_en);
-
-	mpf_set_ui (en, n+1);
-	mpf_sqrt (sq_en, en);
-	mpf_neg (en, sq_en);
-
-	mpf_clear (en);
-	mpf_clear (sq_en);
-}
-
-/* ============================================================================= */
 /* compute a_sub_s for complex-valued s
  */
 void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int prec)
@@ -1382,7 +1264,9 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 
 /* ============================================================================= */
 
-static void a_s (double re_s, double im_s, double *prep, double *pimp)
+static mpf_t re_a, im_a;
+
+static void a_s_init (void)
 {
 	/* the decimal precison (number of decimal places) */
 	int prec = 100;
@@ -1397,27 +1281,21 @@ static void a_s (double re_s, double im_s, double *prep, double *pimp)
 	/* Set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 	
-	mpf_t re_a, im_a;
 	mpf_init (re_a);
 	mpf_init (im_a);
-
+}
+	
+static double a_s (double re_s, double im_s)
+{
 	a_sub_s (re_a, im_a, re_s, im_s, prec);
 
-}
+	double frea = mpf_get_d (re_a);
+	double fima = mpf_get_d (im_a);
 
-
-
-
-	*prep = rep;
-	*pimp = imp;
-}
-
-static double totient_series (double re_q, double im_q)
-{
-	double rep, imp;
-	totient_series_c (re_q, im_q, &rep, &imp);
-	// return sqrt (rep*rep+imp*imp);
-	return rep;
+	double phase = atan2 (fima, frea);
+	phase += M_PI;
+	phase /= 2.0*M_PI;
+	return phase;
 }
 
 /*-------------------------------------------------------------------*/
@@ -1459,7 +1337,7 @@ MakeHisto (
       for (j=0; j<sizex; j++) 
 		{
 
-			double phi = totient_series (re_position, im_position);
+			double phi = a_s (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;
