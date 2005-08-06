@@ -19,8 +19,7 @@
 void fp_prt (char * str, mpf_t val)
 {
 	printf (str);
-	// mpf_out_str (stdout, 10, 60, val);
-	mpf_out_str (stdout, 10, 21, val);
+	mpf_out_str (stdout, 10, 60, val);
 	printf ("\n");
 }
 
@@ -1323,8 +1322,8 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 		mpf_div_ui (ok, one, k);
 		mpf_sub (term, ok, zt);
 
-		mypf_mul (rzeta, term, rebin);
-		mypf_mul (izeta, term, imbin);
+		mpf_mul (rzeta, term, rebin);
+		mpf_mul (izeta, term, imbin);
 
 		if (k%2)
 		{ 
@@ -1347,7 +1346,7 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 	mpf_sub (re_a, term, gam);
 
 	/* subtract 1/2(s+1) */
-	double rex = 2.0*re_s +1.0;
+	double rex = 2.0*(re_s +1.0);
 	double imx = 2.0*im_s;
 	double den = rex*rex + imx*imx;
 	rex = rex / den;
@@ -1588,13 +1587,15 @@ main (int argc, char * argv[])
 	printf ("# computed with %d bits of default mpf \n", bits);
 	for (n=0; n<nterms; n++)
 	{
-		double re_s = 0.0;
-		double im_s = -10.99 + n / 3.0;
+		double re_s = n;
+		double im_s = 0;
 		a_sub_s (re_a, im_a, re_s, im_s, prec);
 
-		printf ("%d\t%12.9g\t%12.9g",n, re_s, im_s);
-		fp_prt ("\t", re_a);
-		fp_prt ("\t", im_a);
+		printf ("%d\t%12.9g\t%12.9g\t", n, re_s, im_s);
+		mpf_out_str (stdout, 10, 21, re_a);
+		printf ("\t");
+		mpf_out_str (stdout, 10, 21, im_a);
+		printf ("\n");
 		fflush (stdout);
 	}
 #endif
