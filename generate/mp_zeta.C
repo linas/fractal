@@ -212,7 +212,7 @@ void q_bernoulli (mpq_t bern, int n)
 	int i;
 	static mpq_t b_cache[BERNOULLI_CACHE_SIZE];
 	static short b_c[BERNOULLI_CACHE_SIZE];
-	static is_init = 0;
+	static int is_init = 0;
 
 	if (0 == is_init)
 	{
@@ -302,7 +302,7 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 	mpf_set (z_n, z);
 	
 	double mex = ((double) prec) * log (10.0) / log(2.0);
-	unsigned int imax = mex +1.0;
+	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
 	mpf_init (maxterm);
 	mpf_init (one);
@@ -603,7 +603,7 @@ void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 	mpf_set_ui (ess_minus, 0);
 
 	double mex = ((double) prec) * log (10.0) / log(2.0);
-	unsigned int imax = mex +1.0;
+	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
 	mpf_init (maxterm);
 	mpf_init (one);
@@ -1131,7 +1131,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		fprintf (stderr, "Sorry bucko, can't do it, you asked for zeta(%d) in %g digits\n", s, fprec);
 		return;
 	}
-	int nmax = 1.1*dig+1.0;
+	int nmax = (int) (1.1*dig+1.0);
 	// printf ("zeta will be computed with %d terms\n", nmax);
 	
 	/* Start computations where we last left off. */
@@ -1265,18 +1265,19 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 /* ============================================================================= */
 
 static mpf_t re_a, im_a;
+static int prec;
 
 static void a_s_init (void)
 {
 	/* the decimal precison (number of decimal places) */
-	int prec = 100;
+	prec = 100;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
 
 	/* the variable-precision calculations are touchy about this */
 	/* XXX this should be stirling's approx for binomial */ 
-	int bits = v + 30 ;
+	int bits = (int) (v + 30);
 	
 	/* Set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
@@ -1303,7 +1304,6 @@ static double a_s (double re_s, double im_s)
  * Euler totient in a simple way 
  */
 
-
 void 
 MakeHisto (
    float  	*glob,
@@ -1327,8 +1327,8 @@ MakeHisto (
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = 0.0;
 
-	max_terms = itermax;
-   
+	a_s_init();
+
    im_position = im_start;
    for (i=0; i<sizey; i++) 
 	{

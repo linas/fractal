@@ -15,7 +15,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         manvert cutoff
 
 NEW_EXES = cutoff elliptic erdos euler-q mand-flow \
-        mobius swap totient  \
+        mp_zeta mobius swap totient  \
         ray automatic radius brat draw dx image
 
 all:    $(NEW_EXES)
@@ -48,6 +48,7 @@ brat-gapper.o: brat-gapper.C
 cutoff.o: cutoff.C
 euler-q.o: euler-q.C
 mobius.o: mobius.C
+mp_zeta.o: mp_zeta.C
 swap.o: swap.C
 totient.o: totient.C
 
@@ -55,6 +56,8 @@ FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
 GCF=../tools/lib/gcf.o
 MODULAR=../tools/lib/modular.o
 TOTIENT=../tools/lib/totient.o
+
+GMP=-lgmp
 
 ################## Dependencies and compile/link #########
 #
@@ -67,8 +70,10 @@ erdos: brat.o erdos.o coord-xforms.o util.o $(MODULAR)
 euler-q: brat.o euler-q.o coord-xforms.o util.o $(MODULAR)
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
+mp_zeta: brat.o mp_zeta.o util.o $(GMP)
 swap: brat.o swap.o util.o
 totient: brat.o totient.o util.o $(GCF) $(TOTIENT)
+
 
 manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o $(FAREY)
 	$(CC) -o brat brat.o util.o -lm -lstdc++
