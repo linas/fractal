@@ -208,7 +208,7 @@ void q_bernoulli (mpq_t bern, int n)
 	int i;
 	static mpq_t b_cache[BERNOULLI_CACHE_SIZE];
 	static short b_c[BERNOULLI_CACHE_SIZE];
-	static is_init = 0;
+	static int is_init = 0;
 
 	if (0 == is_init)
 	{
@@ -298,7 +298,7 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 	mpf_set (z_n, z);
 	
 	double mex = ((double) prec) * log (10.0) / log(2.0);
-	unsigned int imax = mex +1.0;
+	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
 	mpf_init (maxterm);
 	mpf_init (one);
@@ -599,7 +599,7 @@ void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 	mpf_set_ui (ess_minus, 0);
 
 	double mex = ((double) prec) * log (10.0) / log(2.0);
-	unsigned int imax = mex +1.0;
+	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
 	mpf_init (maxterm);
 	mpf_init (one);
@@ -1127,7 +1127,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		fprintf (stderr, "Sorry bucko, can't do it, you asked for zeta(%d) in %g digits\n", s, fprec);
 		return;
 	}
-	int nmax = 1.1*dig+1.0;
+	int nmax = (int) (1.1*dig+1.0);
 	// printf ("zeta will be computed with %d terms\n", nmax);
 	
 	/* Start computations where we last left off. */
@@ -1445,7 +1445,7 @@ main (int argc, char * argv[])
 
 	/* the variable-precision calculations are touchy about this */
 	/* XXX this should be stirling's approx for binomial */ 
-	int bits = v + 300 + 3*nterms;
+	int bits = (int) (v + 300 + 3*nterms);
 	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
@@ -1587,8 +1587,8 @@ main (int argc, char * argv[])
 	printf ("# computed with %d bits of default mpf \n", bits);
 	for (n=0; n<nterms; n++)
 	{
-		double re_s = n;
-		double im_s = 0;
+		double re_s = 0;
+		double im_s = -10+n/10.0;
 		a_sub_s (re_a, im_a, re_s, im_s, prec);
 
 		printf ("%d\t%12.9g\t%12.9g\t", n, re_s, im_s);
