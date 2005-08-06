@@ -19,7 +19,8 @@
 void fp_prt (char * str, mpf_t val)
 {
 	printf (str);
-	mpf_out_str (stdout, 10, 60, val);
+	// mpf_out_str (stdout, 10, 60, val);
+	mpf_out_str (stdout, 10, 21, val);
 	printf ("\n");
 }
 
@@ -104,6 +105,52 @@ void fp_poch_rising (mpf_t poch, double x, unsigned int n)
 }
 
 /* ============================================================================= */
+/* c_poch_rising
+ * rising pochhammer symbol, for complex args.
+ *
+ * Brute force, simple.
+ */
+
+void c_poch_rising (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsigned int n)
+{
+	mpf_t racc, iacc, atmp, btmp, re_term, im_term;
+	
+	mpf_init (racc);
+	mpf_init (iacc);
+	mpf_init (atmp);
+	mpf_init (btmp);
+	mpf_init (re_term);
+	mpf_init (im_term);
+
+	mpf_set_ui (re_poch, 1);
+	mpf_set_ui (im_poch, 0);
+	unsigned int i;
+	for (i=0; i<n; i++)
+	{
+		mpf_set_d (re_term, re_s+i);
+		mpf_set_d (im_term, im_s);
+
+		mpf_mul (atmp, re_poch, re_term);
+		mpf_mul (btmp, im_poch, im_term);
+		mpf_sub (racc, atmp, btmp);
+
+		mpf_mul (atmp, re_poch, im_term);
+		mpf_mul (btmp, im_poch, re_term);
+		mpf_add (iacc, atmp, btmp);
+
+		mpf_set (re_poch, racc);
+		mpf_set (im_poch, iacc);
+	}
+
+	mpf_clear (racc);
+	mpf_clear (iacc);
+	mpf_clear (atmp);
+	mpf_clear (btmp);
+	mpf_clear (re_term);
+	mpf_clear (im_term);
+}
+
+/* ============================================================================= */
 /* fp_binomial
  * Binomial coefficient
  */
@@ -123,6 +170,33 @@ void fp_binomial (mpf_t bin, double s, unsigned int k)
 	mpf_div (bin, top, bot);
 	
 	mpf_clear (top);
+	mpf_clear (bot);
+	mpz_clear (fac);
+}
+
+/* ============================================================================= */
+/* c_binomial
+ * Complex binomial coefficient
+ */
+
+void c_binomial (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k)
+{
+	mpf_t retop, imtop, bot;
+	mpz_t fac;
+
+	mpf_init (retop);
+	mpf_init (imtop);
+	mpf_init (bot);
+	mpz_init (fac);
+	c_poch_rising (retop, imtop, re_s-k+1, im_s, k);
+	i_factorial (fac, k); 
+	mpf_set_z (bot, fac);
+
+	mpf_div (re_bin, retop, bot);
+	mpf_div (im_bin, imtop, bot);
+	
+	mpf_clear (retop);
+	mpf_clear (imtop);
 	mpf_clear (bot);
 	mpz_clear (fac);
 }
@@ -1109,11 +1183,7 @@ static inline unsigned int num_digits (mpz_t num, mpz_t tmpa, mpz_t tmpb)
 /* ============================================================================= */
 /* compute a_sub_n
  */
-#ifdef INT_VERSION
 void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
-#else
-void a_sub_s (mpf_t a_n, double s, unsigned int prec)
-#endif
 {
 	int k;
 	mpf_t fbin, term, zt, ok, one, acc, zeta;
@@ -1138,23 +1208,14 @@ void a_sub_s (mpf_t a_n, double s, unsigned int prec)
 	mpz_init (ibin);
 	mpf_set_ui (a_n, 0);
 
-#ifdef INT_VBERSION
-	double s = n;
-#else
-	int n = 100;
-#endif
 	int maxbump = 0;
 	for (k=1; k<= n; k++)
 	{
 		/* Commpute the binomial */
-#if INT_VERSION
 		i_binomial (ibin, n, k);
 		mpf_set_z (fbin, ibin);
-#else
-		fp_binomial (fbin, s, k);
-#endif
 
-		/* The terms will have laternating signes, and
+		/* The terms will have alternating signes, and
 		 * will mostly cancel one-another. Thus, we need 
 		 * to increase precision for those terms with the 
 		 * largest binomial coefficients. This is will
@@ -1186,12 +1247,7 @@ void a_sub_s (mpf_t a_n, double s, unsigned int prec)
 	mpf_sub (a_n, term, gam);
 
 	/* subtract 1/2(n+1) */
-#ifdef INT_VERSION
 	mpf_div_ui (ok, one, 2*(n+1));
-#else
-	mpf_set_d (zt, 2*(s+1));
-	mpf_div (ok, one, zt);
-#endif
 	mpf_sub (term, a_n, ok);
 	mpf_set (a_n, term);
 	
@@ -1223,6 +1279,103 @@ void a_bound_n (mpf_t b_n, unsigned int n)
 
 	mpf_clear (en);
 	mpf_clear (sq_en);
+}
+
+/* ============================================================================= */
+/* compute a_sub_s for complex-valued s
+ */
+void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int prec)
+{
+	int k;
+	mpf_t rebin, imbin, term, zt, ok, one, racc, iacc, rzeta, izeta;
+	mpf_t gam;
+
+	mpf_init (term);
+	mpf_init (racc);
+	mpf_init (iacc);
+	mpf_init (rzeta);
+	mpf_init (izeta);
+	mpf_init (ok);
+	mpf_init (one);
+	mpf_init (zt);
+	mpf_init (rebin);
+	mpf_init (imbin);
+	mpf_init (gam);
+	
+	mpz_t tmpa, tmpb;
+	mpz_init (tmpa);
+	mpz_init (tmpb);
+	
+	mpf_set_ui (one, 1);
+	mpf_set_ui (re_a, 0);
+	mpf_set_ui (im_a, 0);
+
+	int n = 100;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	for (k=1; k<= n; k++)
+	{
+		/* Commpute the binomial */
+		c_binomial (rebin, imbin, re_s, im_s, k);
+
+		/* compute 1/k - zeta (k+1)/(k+1) */
+		int ndigits = 0;
+		fp_zeta (rzeta, k+1, prec+ndigits);
+		mpf_div_ui (zt, rzeta, k+1);
+		mpf_div_ui (ok, one, k);
+		mpf_sub (term, ok, zt);
+
+		mypf_mul (rzeta, term, rebin);
+		mypf_mul (izeta, term, imbin);
+
+		if (k%2)
+		{ 
+			mpf_sub (racc, re_a, rzeta);
+			mpf_sub (iacc, im_a, izeta);
+		}
+		else 
+		{
+			mpf_add (racc, re_a, rzeta);
+			mpf_add (iacc, im_a, izeta);
+		}
+		
+		mpf_set (re_a, racc);
+		mpf_set (im_a, iacc);
+	}
+
+	/* add const terms */
+	mpf_add_ui (term, re_a, 1);
+	fp_euler_mascheroni (gam);
+	mpf_sub (re_a, term, gam);
+
+	/* subtract 1/2(s+1) */
+	double rex = 2.0*re_s +1.0;
+	double imx = 2.0*im_s;
+	double den = rex*rex + imx*imx;
+	rex = rex / den;
+	imx = -imx / den;
+
+	mpf_set_d (ok, rex);
+	mpf_sub (term, re_a, ok);
+	mpf_set (re_a, term);
+	
+	mpf_set_d (ok, imx);
+	mpf_sub (term, im_a, ok);
+	mpf_set (im_a, term);
+	
+	mpf_clear (term);
+	mpf_clear (racc);
+	mpf_clear (iacc);
+	mpf_clear (rzeta);
+	mpf_clear (izeta);
+	mpf_clear (ok);
+	mpf_clear (one);
+	mpf_clear (zt);
+	mpf_clear (rebin);
+	mpf_clear (imbin);
+	mpf_clear (gam);
+
+	mpz_clear (tmpa);
+	mpz_clear (tmpb);
+
 }
 
 /* ============================================================================= */
@@ -1425,8 +1578,9 @@ main (int argc, char * argv[])
 #define A_SUB_S
 #ifdef A_SUB_S
 
-	mpf_t a_s;
-	mpf_init (a_s);
+	mpf_t re_a, im_a;
+	mpf_init (re_a);
+	mpf_init (im_a);
 
 	int n;
 	printf ("#\n# zeta expansion terms \n#\n");
@@ -1434,11 +1588,13 @@ main (int argc, char * argv[])
 	printf ("# computed with %d bits of default mpf \n", bits);
 	for (n=0; n<nterms; n++)
 	{
-		double s = n / 10.0;
-		a_sub_s (a_s, s, prec);
+		double re_s = 0.0;
+		double im_s = -10.99 + n / 3.0;
+		a_sub_s (re_a, im_a, re_s, im_s, prec);
 
-		printf ("%d\t%12.9g\t",n, s);
-		fp_prt ("", a_s);
+		printf ("%d\t%12.9g\t%12.9g",n, re_s, im_s);
+		fp_prt ("\t", re_a);
+		fp_prt ("\t", im_a);
 		fflush (stdout);
 	}
 #endif
