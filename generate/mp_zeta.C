@@ -5,6 +5,10 @@
  * Gnu Multiple-precision library.
  *
  * Actually, high-precision a_s on the complex plane
+ * XXXX actually, this is not the original source, use the 
+ * other file mp_zeta.c  for teh more curently maintained 
+ * version of these routines.  these are cut-n-pasted from 
+ * there,for convenience
  * 
  * Linas Vepstas July 2005
  */
@@ -1327,12 +1331,14 @@ MakeHisto (
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = 0.0;
 
+	prec = itermax;
 	a_s_init();
 
    im_position = im_start;
    for (i=0; i<sizey; i++) 
 	{
-      if (i%10==0) printf(" start row %d\n", i);
+      // if (i%10==0) printf(" start row %d\n", i);
+      printf(" start row %d\n", i);
       re_position = re_start;
       for (j=0; j<sizex; j++) 
 		{
