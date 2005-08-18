@@ -33,10 +33,10 @@ ng Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 30 July 2005)
+2 January 2004 (revised 20 August 2005)
 \layout Abstract
 
-A series representation for the Riemann Zeta function in terms of th falling
+A series representation for the Riemann Zeta function in terms of the falling
  Pochhammer symbol is derived from the polynomial representation of the
  Gauss-Kuzmin-Wirsing (GKW) operator.
  
@@ -47,9 +47,9 @@ Introduction
 
 The Gauss-Kuzmin-Wirsing operator [ref] occurs in the theory of continued
  fraction representations of the real numbers.
- The zeroth eigenvalue of this operator is related to the Gass-Kuzmin distributi
-on [ref], giving the likelyhood of the occurance of an integer in the continued-
-fraction expansion of an 
+ The zeroth eigenvalue of this operator is related to the Gauss-Kuzmin distribut
+ion [ref], giving the likelyhood of the occurance of an integer in the continued
+-fraction expansion of an 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -60,14 +60,14 @@ arbitrary
  real number.
  The GKW operator is interesting in other ways, notably in its relationship
  to the Minkowski Question Mark function, and thus its symmetry under the
- action of a monoid sub-semi-group of the Modular Group 
+ action of a monoid sub-semi-group of the Modular group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
 .
- Except for the zeroth eigenvector, there is no known solution of the GKW
- operator, although the eigenvalues may be computed relatively easily through
- standard matrix diagonalization techniques.
+ Except for the zeroth eigenvector, there is no known closed-form solution
+ of the GKW operator, although the eigenvalues may be computed relatively
+ easily through standard matrix diagonalization techniques.
 \layout Standard
 
 In this paper, a relationship to the Riemann Zeta function is noted, allowing
@@ -89,10 +89,10 @@ Here, the constants
 \begin_inset Formula $t_{n}$
 \end_inset 
 
-, play the role of the Stieltjes constants, and can be given as a finite
- number of terms involving the Riemann zeta function at integer values and
- the Euler-Mascheroni constant.
- These constants may be related back to the Stieltjes constants through
+ play a role analogous to the Stieltjes constants, and can be given in a
+ simple, finite-term closed form, involving the Riemann zeta function at
+ integer values and the Euler-Mascheroni constant.
+ These constants are related to the Stieltjes constants as a sum involving
  the Stirling numbers.
  They are very well behaved, becoming small quite rapidly.
  Some exact expressions can be derived for various sums involving these
@@ -124,15 +124,15 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
 \end_inset 
 
- This iterated map is sometimes called the Gauss Map.
- It is connected to the Riemann Zeta by a Mellin Transform:
+ This iterated map is sometimes called the Gauss map.
+ It is connected to the Riemann zeta function by a Mellin transform:
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\label{eq:}\end{equation}
 
 \end_inset 
 
-In the theory of iterated functions, the behaviour of a map may be studied
- by means of the 
+In the theory of iterated functions [ref], the behaviour of a map may be
+ studied by means of the 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -141,9 +141,9 @@ transfer operator
 \end_inset 
 
 , sometimes called the Frobenius-Perron operator of a map.
- Given a map of the unit interval onto itself, the transfer operator examines
- the question of how a smooth, differentiable distribution behaves under
- the action of the map, thus giving insight into the nature of iteration.
+ Given a map of the unit interval onto itself, the transfer operator describes
+ how a smooth, differentiable distribution behaves under the action of the
+ map, thus giving insight into the nature of iteration.
  By using a set of orthonormal basis functions on the unit interval, such
  as orthogonal polynomials, the matrix elements of the transfer operator
  can often be explicitly computed, and the operator itself can be diagonalized,
@@ -187,7 +187,7 @@ xxx\]
 
 \end_inset 
 
- For the Gauss map,the transfer operator is known as the Gauss-Kuzmin-Wirsing
+ For the Gauss map, the transfer operator is known as the Gauss-Kuzmin-Wirsing
  (GKW) operator, and has the representation 
 \layout Standard
 
@@ -409,17 +409,25 @@ Acting on a general power, the map gives the Hurwitz Zeta:
 Polynomial Representation
 \layout Standard
 
-One can attempt to solve GKW by working in the polynomial representation.
- One possible choice is to make one's Taylor expansion about 
+One might hope to find an analytic solution to the GKW operator, and thus
+ it is antural to consider representations of the operator in a polynomial
+ basis.
+ A natural first choice is to consider a representation in terms of the
+ monomials 
+\begin_inset Formula $x^{n}$
+\end_inset 
+
+ or equivalently, a Taylor expansion about 
 \begin_inset Formula $x=0$
 \end_inset 
 
-, but this turns out to be a very poor choice, as we shall soon see.
- Thus, if we write 
+.
+ This proves to be an unfortunate choice, as will be shown.
+ Writing 
 \begin_inset Formula $U_{h}f=g$
 \end_inset 
 
- and substitute a Taylor's expansion for 
+ and substituting a Taylor's expansion for 
 \begin_inset Formula $f$
 \end_inset 
 
@@ -427,13 +435,13 @@ One can attempt to solve GKW by working in the polynomial representation.
 \begin_inset Formula $g$
 \end_inset 
 
-, we get 
+, one finds 
 \begin_inset Formula \begin{equation}
 \frac{g^{(m)}(0)}{m!}=\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}\,(-)^{m}\;\frac{(k+m+1)!}{m!\,(k+1)!}\,\zeta(k+m+2)\label{eq:}\end{equation}
 
 \end_inset 
 
- with the operator matrix elements given by 
+ The operator matrix elements can be immediately read off to be 
 \begin_inset Formula \begin{equation}
 \left[U_{h}\right]_{mk}=(-)^{m}\;\left(\begin{array}{c}
 k+m+1\\
@@ -441,16 +449,23 @@ m\end{array}\right)\,\zeta(k+m+2)\label{eq:}\end{equation}
 
 \end_inset 
 
- where we've replaced the factorials by the binomial coefficient that they
+ where the factorials are replaced by the binomial coefficient that they
  form.
- Unfortunately, this is clearly a very poorly conditioned matrix.
- One can make some progress, if one wishes, by applying a regulator and
- using Levin-type sequence acceleration techniques.
- One can thus find a number of curious identities, some of which we've listed
+ Unfortunately, this is a poorly conditioned matrix, with a rapidly increasing
+ matrix elements and a trace that does not converge.
+ Progress may be made by applying a regulator and using Levin-type sequence
+ acceleration techniques[ref].
+ This leads to a number of curious identities, some of which were listed
  previously.
  However, the difficulty of working with divergent sums seems to outweigh
  any advantages given by the relatively simple form of the matrix elements.
- Thus, one is lead to consider the matrix elements for a polynomial expansion
+ 
+\layout Standard
+
+Assuming 
+\layout Standard
+
+Thus, one is lead to consider the matrix elements for a polynomial expansion
  about 
 \begin_inset Formula $x=1$
 \end_inset 
@@ -1494,7 +1509,7 @@ z-1\end{array}\right)\left[\zeta(n+2)-1\right]\label{eq:}\end{equation}
  is unclear.
 \layout Section
 
-Sheffer Sequences
+Conclusions
 \layout Standard
 
 In the above, we stumbled over an expansion for the Riemann Zeta in terms
@@ -1556,12 +1571,9 @@ Generalized Stieltjes Constants
  the representation of the real numbers as p-adics or rationals is essentially
  a kind of lattice representation (having a modular group symmetry).
  
-\layout Section
-
-Conclusions
 \layout Standard
 
-To be written.
+.
 \layout Bibliography
 \bibitem [Gas92]{key-10}
 
