@@ -409,9 +409,9 @@ Acting on a general power, the map gives the Hurwitz Zeta:
 Polynomial Representation
 \layout Standard
 
-One might hope to find an analytic solution to the GKW operator, and thus
- it is antural to consider representations of the operator in a polynomial
- basis.
+The obvious avenue of attack is to look for an analytic solution to the
+ GKW operator, and thus to consider representations of the operator in a
+ polynomial basis.
  A natural first choice is to consider a representation in terms of the
  monomials 
 \begin_inset Formula $x^{n}$
@@ -443,7 +443,7 @@ One might hope to find an analytic solution to the GKW operator, and thus
 
  The operator matrix elements can be immediately read off to be 
 \begin_inset Formula \begin{equation}
-\left[U_{h}\right]_{mk}=(-)^{m}\;\left(\begin{array}{c}
+\left[U_{h}\right]_{mk}=(-1)^{m}\;\left(\begin{array}{c}
 k+m+1\\
 m\end{array}\right)\,\zeta(k+m+2)\label{eq:}\end{equation}
 
@@ -462,7 +462,75 @@ m\end{array}\right)\,\zeta(k+m+2)\label{eq:}\end{equation}
  
 \layout Standard
 
-Assuming 
+Presuming that there is some sort of singularity at 
+\begin_inset Formula $x=0$
+\end_inset 
+
+, one may try expansions at different locations.
+ Thus, consider 
+\begin_inset Formula $f(x)=\sum_{n=0}^{\infty}f^{(n)}(a)\,(x-a)^{n}/n!$
+\end_inset 
+
+ and 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+ likewise expanded about 
+\begin_inset Formula $x=b$
+\end_inset 
+
+.
+ With this expansion, the operator relation 
+\begin_inset Formula $U_{h}f=g$
+\end_inset 
+
+ becomes 
+\begin_inset Formula \begin{equation}
+\frac{g^{(m)}(b)}{m!}=\sum_{n=0}^{\infty}U_{mn}^{(b,a)}\;\frac{f^{(n)}(a)}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Without much difficulty, one discovers that the matrix elements are given
+ by 
+\begin_inset Formula \begin{equation}
+U_{mn}^{(b,a)}=(-1)^{m}\sum_{k=0}^{n}(-a)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\,\zeta_{H}(k+m+2,1+b)\label{eq:general elts}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\zeta_{H}(s,q)$
+\end_inset 
+
+ is the Hurwitz zeta function:
+\begin_inset Formula \begin{equation}
+\zeta_{H}(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Substituting 
+\begin_inset Formula $a=b=1/2$
+\end_inset 
+
+, one obtains the well-known expansion of xxx [ref], which is 
+\begin_inset Formula \begin{equation}
+U_{mn}^{(1/2,1/2)}=(-1)^{m}\sum_{k=0}^{n}\left(\frac{-1}{2}\right)^{n-k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\,\left[2^{m+k+2}\left(\zeta(k+m+2)-1\right)-\zeta(k+m+2)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ A simpler expression is obtained by expanding about 
+\begin_inset Formula $a=b=1$
+\end_inset 
+
+, and the matrix is rather well-conditioned and easier to work with.
+ 
 \layout Standard
 
 Thus, one is lead to consider the matrix elements for a polynomial expansion
@@ -474,7 +542,7 @@ Thus, one is lead to consider the matrix elements for a polynomial expansion
  These are far more complex, but give a very well-conditioned matrix.
  These are: 
 \begin_inset Formula \begin{equation}
-G_{mn}=\sum_{k=0}^{n}(-)^{k}\left(\begin{array}{c}
+G_{mn}=\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
 n\\
 k\end{array}\right)\left(\begin{array}{c}
 k+m+1\\
