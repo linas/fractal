@@ -525,22 +525,18 @@ m\end{array}\right)\,\left[2^{m+k+2}\left(\zeta(k+m+2)-1\right)-\zeta(k+m+2)\rig
 
 \end_inset 
 
- A simpler expression is obtained by expanding about 
+ 
+\layout Standard
+
+A simpler expression is obtained by expanding about 
 \begin_inset Formula $a=b=1$
 \end_inset 
 
 , and the matrix is rather well-conditioned and easier to work with.
- 
+ It is: 
 \layout Standard
 
-Thus, one is lead to consider the matrix elements for a polynomial expansion
- about 
-\begin_inset Formula $x=1$
-\end_inset 
 
-.
- These are far more complex, but give a very well-conditioned matrix.
- These are: 
 \begin_inset Formula \begin{equation}
 G_{mn}=\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
 n\\
@@ -550,35 +546,32 @@ m\end{array}\right)\,\left[\zeta(k+m+2)-1\right]\label{eq:GKW-matrix-elts}\end{e
 
 \end_inset 
 
- satisfying 
+ which satisfies
 \begin_inset Formula \begin{equation}
 (-)^{m}\frac{g^{(m)}(1)}{m!}=\sum_{n=0}^{\infty}G_{mn}(-)^{n}\frac{f^{(n)}(1)}{n!}\label{eq:}\end{equation}
 
 \end_inset 
 
- Other authors have chosen to expand about 
-\begin_inset Formula $x=1/2$
-\end_inset 
-
- [need ref here] but as can be seen the above is a more tractable expression.
- (copy the x=1/2 expansion here).
- Inserting this into the integral expression for the Riemann Zeta gives
- 
-\begin_inset Formula \begin{equation}
-\zeta(s)=\frac{s}{s-1}-s\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\frac{G_{mn}(-)^{n}}{(m+1)(m+2)}\left(\begin{array}{c}
-s-1\\
-n\end{array}\right)\label{eq:zeta-as-gkw}\end{equation}
-
-\end_inset 
-
- This expression may be considerably simplified, and this is developed in
- the next section.
+ The above will be the most convenient for expressing the Riemann zeta,
+ as will be done in the next section.
  
 \layout Standard
 
-It might be instructive to study the polynomials 
+All of these expressions for the matrix elements for the GKW operator have
+ a common form.
+ It contsists of two summations: the outer summation, and the summation
+ defining the Hurwitz zeta function.
+ Pulling out this second summation, one finds terms consisting of a series
+ of polynomials, which are most simply expresssed in terms of Gauss' hypergeomet
+ric series: 
+\layout Standard
+
+
 \begin_inset Formula \begin{equation}
-\Gamma_{mn}(x)\equiv\sum_{k=0}^{n}\left(\begin{array}{c}
+\Gamma_{mn}(x)\equiv(m+1)\,_{2}F_{1}\left[\begin{array}{c}
+\begin{array}{cc}
+-n\; & \; m+2\end{array}\\
+2\end{array}\;;\; x\right]=\sum_{k=0}^{n}\left(\begin{array}{c}
 n\\
 k\end{array}\right)\left(\begin{array}{c}
 k+m+1\\
@@ -586,7 +579,7 @@ m\end{array}\right)(-x)^{k}\label{eq:}\end{equation}
 
 \end_inset 
 
- based on thier superficial resemblance to the shifted Legendre polynomial
+ These have a curious superficial resemblance to the shifted Legendre polynomial
  
 \begin_inset Formula \begin{equation}
 \widetilde{P}_{n}(x)\equiv\sum_{k=0}^{n}\left(\begin{array}{c}
@@ -597,13 +590,43 @@ n\end{array}\right)(-x)^{k}\label{eq:}\end{equation}
 
 \end_inset 
 
+Switching the order of summation in equation 
+\begin_inset LatexCommand \ref{eq:general elts}
 
-\layout Standard
+\end_inset 
 
-(Maybe cut the above two formulas?) (Maybe give hypergeometric series?)
+ gives the following: 
+\begin_inset Formula \begin{equation}
+U_{mn}^{(b,a)}=(-1)^{m+n}a^{n}\sum_{j=0}^{\infty}\frac{1}{(j+1+b)^{m+2}}\,_{2}F_{1}\left[\begin{array}{c}
+\begin{array}{cc}
+-n\; & \; m+2\end{array}\\
+2\end{array}\;;\;\frac{-1}{a(j+1+b)}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ This has the general form of a zeta polynomial series, namely, 
+\begin_inset Formula \[
+\sum\]
+
+\end_inset 
+
+
 \layout Section
 
 The Riemann Zeta and Stieltjes Constants
+\layout Standard
+
+Inserting this into the integral expression for the Riemann Zeta gives 
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{s}{s-1}-s\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\frac{G_{mn}(-)^{n}}{(m+1)(m+2)}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)\label{eq:zeta-as-gkw}\end{equation}
+
+\end_inset 
+
+ This expression may be considerably simplified, and this is developed in
+ the next section.
+ 
 \layout Standard
 
 Some of the multiple sums appearing in equation 
