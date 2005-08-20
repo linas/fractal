@@ -355,7 +355,7 @@ This expression of the Riemann zeta function in terms of the GKW operator
 A complete anaylysis of the GKW operator has never been given, and appears
  to be difficult at many levels.
  The operator has one well-known eigenvector, 
-\begin_inset Formula $\rho(x)=\ln2/(1+x)$
+\begin_inset Formula $\rho(x)=1/(1+x)$
 \end_inset 
 
 , called the Gauss distribution, as it was known to Gauss.
@@ -436,58 +436,74 @@ This can be solved easily to get the zeroth eigenvector
 
 \end_inset 
 
- We can see one hint of the relationship between period-doubling and the
- GKW in the identity 
-\begin_inset Formula \begin{equation}
-\frac{1}{1+x}=\sum_{n=1}^{\infty}\,\frac{1}{2^{n}}\left[\frac{2}{x+n}-\frac{1}{x+n+1}\right]\label{eq:}\end{equation}
-
-\end_inset 
-
 
 \layout Standard
 
-A reflection identity: 
+A reflection identity is given by 
 \begin_inset Formula $f(x)=1-(1+x)^{-2}$
 \end_inset 
 
- satisfies 
+ which satisfies 
 \begin_inset Formula $U_{h}f=1-f$
 \end_inset 
 
 .
 \layout Standard
 
-Another: 
-\begin_inset Formula $U_{h}[(1+?(x))/(1+x)^{2}]=1-?(x)$
-\end_inset 
-
- where 
+A hint of the relation to the modular group is given by simple identities
+ involving the Minkowski Question Mark function 
 \begin_inset Formula $?(x)$
 \end_inset 
 
- is the Minkowski Question Mark function.
-\layout Standard
+: 
+\begin_inset Formula \begin{equation}
+U_{h}[(1+?(x))/(1+x)^{2}]=1-?(x)\label{eq:}\end{equation}
 
-Another: 
-\begin_inset Formula $U_{h}[?(x)\, x^{-2}]=2-?(x)$
 \end_inset 
 
- .
- One can construct a variety of identities of this sort, for example: 
+ The Minkowski Question Mark function is an isomorphism of dyadic trees;
+ specifically the binary tree that represents the real numbers as a binary
+ expansion, and the Stern-Brocot or Farey tree, the binary tree that represents
+ the real numbers by the rational numbers.
+ In this conext, we note that the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ is the group of symmetries or hyperbolic rotations of binary trees.
+ Another question mark identity is 
+\begin_inset Formula \begin{equation}
+U_{h}[?(x)\, x^{-2}]=2-?(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Additinoal identities may be constructed in this vein, for example: 
 \begin_inset Formula \begin{equation}
 U_{h}\left[?(x)\left(\frac{1}{(1+x)^{2}}-2\right)\right]=\frac{?(x)-2}{(1+x)^{2}}\label{eq:}\end{equation}
 
 \end_inset 
 
- but these types of exercises do not seem to lead to any sort of worthwhile
- recurrence relations.
+ but these types of exercises do not seem to lead to any sort of obviously
+ worthwhile recurrence relations; a deeper analysis of symmetries is required.
  
 \layout Standard
 
 Acting on the monomial, one gets 
 \begin_inset Formula \begin{equation}
-\left[U_{h}x^{k}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{k+2}}=\frac{(-)^{k+2}}{(k+1)!}\psi^{(k+1)}(1+x)\label{eq:}\end{equation}
+\left[U_{h}x^{s}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{s+2}}=\zeta_{H}(s+2,1+x)\label{eq:}\end{equation}
 
+\end_inset 
+
+ where 
+\begin_inset Formula $\zeta_{H}(s,q)$
+\end_inset 
+
+ is the Hurwitz zeta function.
+ For positive integer 
+\begin_inset Formula $s=k$
+\end_inset 
+
+, one has that and 
+\begin_inset Formula $\zeta_{H}(k+1,x)=(-1)^{k+1}\psi^{(k)}(x)/k!$
 \end_inset 
 
  where 
@@ -498,57 +514,58 @@ Acting on the monomial, one gets
 \begin_inset Formula $k$
 \end_inset 
 
-'th derivative of the Gamma function.
- The true difficulty of finding the solution to GKW becomes clear when the
- search leads one to start discovering complicated identities, such as 
-\begin_inset Formula \begin{equation}
-\sum_{m=1}^{\infty}\,\frac{1}{m^{2}}\psi^{(1)}\left(1+\frac{1}{m}+x\right)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{2}}\psi^{(1)}\left(\frac{1}{n+x}+1\right)\label{eq:}\end{equation}
-
+'th derivative of the gamma function.
+ For negative integers, one gets the Bernoulli polynomials: 
+\begin_inset Formula $\zeta_{H}(-n,x)=-B_{n+1}(x)/(n+1)$
 \end_inset 
 
- or curiosities such as 
+.
+ As a variation, one has curiosities such as 
 \begin_inset Formula $f(x)=(1+ax)^{2}$
 \end_inset 
 
- gives 
+ giving 
 \begin_inset Formula $U_{h}f=\psi^{(1)}(1+x+a)$
 \end_inset 
 
-.
- 
-\layout Standard
-
-For 
+ and 
 \begin_inset Formula $f(x)=(1+nx)^{-2}-1$
 \end_inset 
 
- one gets 
+ giving 
 \begin_inset Formula $U_{h}f=-\sum_{k=1}^{n}(x+k)^{-2}$
 \end_inset 
 
-
+ (this last being a finite sum).
 \layout Standard
 
-Acting on a general power, the map gives the Hurwitz Zeta: 
-\begin_inset Formula \begin{equation}
-\left[U_{h}x^{s}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{s+2}}=\zeta(s+2,x+1)\label{eq:}\end{equation}
-
+The relatively simple expressions involving the Hurwitz zeta and the Minkowski
+ question mark function again strongly hint that the modular group is deeply
+ involved in the correct theory of the GKW operator.
+ For example, the Bernoulli map 
+\begin_inset Formula $b(x)=2x-\left\lfloor 2x\right\rfloor $
 \end_inset 
 
- and this transformation gives us another hint of a deep relationship to
- the Bernoulli Map.
- The Hurwitz zeta function can be analytically continued to the entire complex
- plane; one may choose to take this as the defnition of the GKW operator
- acting on negative values of 
-\begin_inset Formula $s$
+, when iterated, gives the binary digits of the real number 
+\begin_inset Formula $x$
 \end_inset 
 
 .
- In particular, for negative integer values of 
-\begin_inset Formula $s$
+ The transfer operator of the Bernoulli map is exactly solvable: the eigenfuncti
+ons are the Bernoulli polynomials, and more generally, the Hurwitz zeta
+ function.
+ 
+\layout Standard
+
+In closing, one teasing hint of the relationship between period-doubling
+ and the GKW is this curious representation of the zeroth eigenvector as
+ a sum over progressively smaller intervals: 
+\begin_inset Formula \begin{equation}
+\frac{1}{1+x}=\sum_{n=1}^{\infty}\,\frac{1}{2^{n}}\left[\frac{2}{x+n}-\frac{1}{x+n+1}\right]\label{eq:}\end{equation}
+
 \end_inset 
 
-, one concludes that the operator gives the Bernoulli polynomials.
+
 \layout Section
 
 Polynomial Representation
