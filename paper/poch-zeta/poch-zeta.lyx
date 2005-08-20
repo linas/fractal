@@ -36,7 +36,7 @@ Linas Vepstas <linas@linas.org>
 2 January 2004 (revised 20 August 2005)
 \layout Abstract
 
-A series representation for the Riemann Zeta function in terms of the falling
+A series representation for the Riemann zeta function in terms of the falling
  Pochhammer symbol is derived from the polynomial representation of the
  Gauss-Kuzmin-Wirsing (GKW) operator.
  
@@ -45,8 +45,13 @@ A series representation for the Riemann Zeta function in terms of the falling
 Introduction
 \layout Standard
 
-The Gauss-Kuzmin-Wirsing operator [ref] occurs in the theory of continued
- fraction representations of the real numbers.
+The Gauss-Kuzmin-Wirsing operator 
+\begin_inset LatexCommand \cite{key-14,key-15,key-16}
+
+\end_inset 
+
+ occurs in the theory of continued fraction representations of the real
+ numbers.
  The zeroth eigenvalue of this operator is related to the Gauss-Kuzmin distribut
 ion [ref], giving the likelyhood of the occurance of an integer in the continued
 -fraction expansion of an 
@@ -60,7 +65,7 @@ arbitrary
  real number.
  The GKW operator is interesting in other ways, notably in its relationship
  to the Minkowski Question Mark function, and thus its symmetry under the
- action of a monoid sub-semi-group of the Modular group 
+ action of a monoid sub-semi-group of the modular group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
@@ -70,11 +75,11 @@ arbitrary
  easily through standard matrix diagonalization techniques.
 \layout Standard
 
-In this paper, a relationship to the Riemann Zeta function is noted, allowing
- the easy derivation of a series expansion of the Zeta function in terms
+In this paper, a relationship to the Riemann zeta function is noted, allowing
+ the easy derivation of a series expansion of the zeta function in terms
  of the Pochhammer symbols (the falling factorials), or equivalently the
  binomial coefficients.
- Specifically, the expansion that is given is
+ Specifically, the expansion given is
 \layout Standard
 
 
@@ -92,18 +97,32 @@ Here, the constants
  play a role analogous to the Stieltjes constants, and can be given in a
  simple, finite-term closed form, involving the Riemann zeta function at
  integer values and the Euler-Mascheroni constant.
- These constants are related to the Stieltjes constants as a sum involving
- the Stirling numbers.
- They are very well behaved, becoming small quite rapidly.
- Some exact expressions can be derived for various sums involving these
- constants.
- A numerical exploration of thier values is also performed.
  
 \layout Standard
 
-The first section defines the GKWoperator in simple terms.
- The second section obtains the series expansion for the zeta.
- The third section explores the values of the constants 
+The 
+\begin_inset Formula $t_{n}$
+\end_inset 
+
+ may be used to express the Stieltjes constants as a sum involving the Stirling
+ numbers.
+ The 
+\begin_inset Formula $t_{n}$
+\end_inset 
+
+ are very well behaved, becoming small quite rapidly.
+ Some exact expressions can be derived for various sums involving these
+ constants.
+ A numerical exploration of thier values is also performed, from which the
+ limiting behaviour is conjectured.
+\layout Standard
+
+The first section defines the GKW operator in simple terms, as the transfer
+ operator of the Gauss map.
+ The second section breifly reviews some of the properties of the GKW operator,
+ and the third section provides several polynomial representations.
+ The fourth section obtains the series expansion for the zeta.
+ The fifth section explores the values of the constants 
 \begin_inset Formula $t_{n}$
 \end_inset 
 
@@ -124,15 +143,20 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
 \end_inset 
 
- This iterated map is sometimes called the Gauss map.
+ This function maps the unit interval onto itself, and is sometimes called
+ the Gauss map.
  It is connected to the Riemann zeta function by a Mellin transform:
 \begin_inset Formula \begin{equation}
-\zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\label{eq:}\end{equation}
+\zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\label{eq:zeta-as-gauss-map}\end{equation}
 
 \end_inset 
 
-In the theory of iterated functions [ref], the behaviour of a map may be
- studied by means of the 
+In the theory of iterated functions 
+\begin_inset LatexCommand \cite{key-17}
+
+\end_inset 
+
+, the behaviour of a map may be studied by means of the 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -142,13 +166,21 @@ transfer operator
 
 , sometimes called the Frobenius-Perron operator of a map.
  Given a map of the unit interval onto itself, the transfer operator describes
- how a smooth, differentiable distribution behaves under the action of the
- map, thus giving insight into the nature of iteration.
- By using a set of orthonormal basis functions on the unit interval, such
- as orthogonal polynomials, the matrix elements of the transfer operator
- can often be explicitly computed, and the operator itself can be diagonalized,
- using standard techniques from the theory of Hilbert spaces and functional
- analysis in general.
+ how a distribution on the unit interval behaves under the action of the
+ map, thus giving an broader view of iteration.
+ In particular, the transfer operator can act as a bridge between the fractal
+ properties typically seen when iterating a function, and analytic descriptions
+ of the same process.
+ This is because transfer operators can be represented both on the space
+ of smooth, differentiable functions, as well as spaces of non-differentiable
+ functions.
+\layout Standard
+
+By using a set of smooth, differeniable, orthonormal basis functions on
+ the unit interval, such as orthogonal polynomials, the matrix elements
+ of a transfer operator can often be explicitly computed, and the operator
+ itself can be diagonalized, using standard techniques from the theory of
+ Hilbert spaces and functional analysis.
  
 \layout Standard
 
@@ -159,7 +191,7 @@ There are a variety of equivalent definitions for the transfer operator,
 
 
 \begin_inset Formula \begin{equation}
-\left[U\rho\right](x)=\int dy\;\delta\left(x-h(y)\right)\;\rho(y)\label{eq:}\end{equation}
+\left[U_{h}\rho\right](x)=\int dy\;\delta\left(x-h(y)\right)\;\rho(y)\label{eq:Transfer as Change of Variable}\end{equation}
 
 \end_inset 
 
@@ -172,22 +204,94 @@ There are a variety of equivalent definitions for the transfer operator,
 \end_inset 
 
  is some density on which the transfer operator 
-\begin_inset Formula $U$
+\begin_inset Formula $U_{h}$
 \end_inset 
 
  acts.
+ The subscript on 
+\begin_inset Formula $U_{h}$
+\end_inset 
+
+ is used to emphasize that the transfer operator is associated with the
+ function being iterated.
  In this expression, 
 \begin_inset Formula $\delta$
 \end_inset 
 
  is understood to be the Dirac delta function.
- A more sophisticated definition is 
-\begin_inset Formula \[
-xxx\]
+ As can be seen, as iteration maps one point to another, the transfer operator
+ describes how the density is mapped.
+ 
+\layout Standard
+
+A more abstract definition may be given.
+ Let 
+\begin_inset Formula $h:X\to X$
+\end_inset 
+
+ be a map from an arbitrary set 
+\begin_inset Formula $X$
+\end_inset 
+
+ onto itself.
+ Let 
+\begin_inset Formula $\rho:X\to\mathbb{C}$
+\end_inset 
+
+ be a valuation of that set on the complex numbers 
+\begin_inset Formula $\mathbb{C}$
+\end_inset 
+
+, and let 
+\begin_inset Formula $\mathcal{R}$
+\end_inset 
+
+ be the space of all such valuations 
+\begin_inset Formula $\rho$
+\end_inset 
+
+.
+ Then the transfer operator 
+\begin_inset Formula $U_{h}$
+\end_inset 
+
+ is a linear functional on the space 
+\begin_inset Formula $\mathcal{R}$
+\end_inset 
+
+, that is, 
+\begin_inset Formula $U_{h}:\mathcal{R}\to\mathcal{R}$
+\end_inset 
+
+, acting as 
+\begin_inset Formula \begin{equation}
+\left[U_{h}\rho\right](x)=\sum_{y\in h^{-1}(x)}\rho(y)\label{eq:}\end{equation}
 
 \end_inset 
 
- For the Gauss map, the transfer operator is known as the Gauss-Kuzmin-Wirsing
+ Rather than studying 
+\begin_inset Formula $U_{h}$
+\end_inset 
+
+ acting on the whole space 
+\begin_inset Formula $\mathcal{R}$
+\end_inset 
+
+, it is often insightful to represent 
+\begin_inset Formula $U_{h}$
+\end_inset 
+
+ acting only on a subspace.
+ For example, when 
+\begin_inset Formula $X$
+\end_inset 
+
+ is the unit interval, one may consider only the space of (finite) polynomials,
+ or the space of analytic functions, or the space of square-integrable functions
+, etc.
+\layout Standard
+
+For the Gauss map, the transfer operator is known as the Gauss-Kuzmin-Wirsing
  (GKW) operator, and has the representation 
 \layout Standard
 
@@ -197,42 +301,83 @@ xxx\]
 
 \end_inset 
 
- It is not difficult perform this operation under the integral defining
- the Riemann zeta function in terms of the gauss map; effectively the operation
- is a change of variable.
+ The definition 
+\begin_inset LatexCommand \ref{eq:Transfer as Change of Variable}
+
+\end_inset 
+
+ can be loosely viewed as a kind of change-of-variable.
+ This change-of-variable can be performed on equation 
+\begin_inset LatexCommand \ref{eq:zeta-as-gauss-map}
+
+\end_inset 
+
+, the order of integration exchanged, and the Gauss map replaced by its
+ transfer operator.
  One obtains the operator equation
 \begin_inset Formula \begin{equation}
-\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[U_{h}x^{s-1}\right]\label{eq:}\end{equation}
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[U_{h}x^{s-1}\right]\label{eq:Zeta as operator integral}\end{equation}
 
 \end_inset 
 
- This equation motivates a deeper study to the GKW operator, as its symmetry
- properties under the monoid under the modular group may provide insight
- into the behavior of the Riemann zeta, and, for example, the Riemann Hypothesis
- (RH).
- In particular, the above form allows the RH to be expressed as a vector
- equation, given below.
+ Although the above equation 
+\begin_inset LatexCommand \ref{eq:Zeta as operator integral}
+
+\end_inset 
+
+ is easy enough to derive, a proper, rigorous examination of its validity
+ requires a deep study of topics in functional analysis, topics outside
+ the scope of this paper.
  
 \layout Standard
 
-The GKW operator has one well-known eigenvector, 
-\begin_inset Formula $\rho(x)=1/(1+x)$
+This expression of the Riemann zeta function in terms of the GKW operator
+ motivates a deeper study to the GKW operator, and of transfer operators
+ in general.
+ Most curiously, continued fractions have a variety of interesting connections
+ to the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
-, which corresponds to the unit eigenvalue.
+, and indeed, the modular group can be viewed as a symmetry group of the
+ dyadic tree representation of the unit interval afforded by both the binary
+ numbers and the Farey numbers.
+ Thus, one is lead to ask if the Riemann Hypothesis (RH) can be deduced
+ from a set of symmetries/invariances of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ acting on the unit interval, and, in particular, the symetries of operators
+ that commute with the GKW oerator.
+ 
+\layout Standard
+
+A complete anaylysis of the GKW operator has never been given, and appears
+ to be difficult at many levels.
+ The operator has one well-known eigenvector, 
+\begin_inset Formula $\rho(x)=\ln2/(1+x)$
+\end_inset 
+
+, called the Gauss distribution, as it was known to Gauss.
+ It corresponds to the unit eigenvalue.
  A closed form for the other eigenvectors is not known.
- The author has attempted a computer-guided search for a closed-form solution
- in terms of a simple linear combination, with rational coefficients, of
- common special functions, including the factorial, the gamma and the digamma
- functions.
- o solution was found.
+ The next eigenvalue has the aproximate value 
+\begin_inset Formula $\lambda_{1}\thickapprox0.3036630029...$
+\end_inset 
+
+ and is known as the Gauss-Kuzmin-Wirsing constant; it gives the rate of
+ (exponential) convergence of distributions of continued fraction expansions
+ to the Gauss distribution.
 \layout Standard
 
-XXX Provide more details for attempted fit.
- 
+The author has attempted a computer-guided search for a closed-form solution
+ in terms of a simple linear combination of products of common special functions
+, including the factorial, the digamma, and Bessel functions.
+ No solution was found; it is not clear that the eigenvectors have any simple
+ solution in terms of the special functions.
 \layout Standard
 
-Todo: Give the Riemann Hypothesis as a vector equation.
+XXX Todo: Give the Riemann Hypothesis as a vector equation.
  
 \layout Section
 
@@ -1704,4 +1849,20 @@ Tom M.
 Introduction to Analytic Number Theory
 \emph default 
 , 1976, (Springer-Verlag, New York)
+\layout Bibliography
+\bibitem [Wir74]{key-14}
+
+Wirising, Acta Arithmetica (1974)
+\layout Bibliography
+\bibitem [Bab78]{key-15}
+
+Babenko, Soviet Math Dokl (1978)
+\layout Bibliography
+\bibitem [Kuz28]{key-16}
+
+Kuzmin, Atti del Congresso (1928)
+\layout Bibliography
+\bibitem [Rue94]{key-17}
+
+Ruelle, Dynamical Zeta CRMmonographs (1994)
 \the_end
