@@ -571,11 +571,10 @@ In closing, one teasing hint of the relationship between period-doubling
 Polynomial Representation
 \layout Standard
 
-The obvious avenue of attack is to look for an analytic solution to the
- GKW operator, and thus to consider representations of the operator in a
- polynomial basis.
- A natural first choice is to consider a representation in terms of the
- monomials 
+The search for analytic solutions to the GKW operator begins with a sepcificatio
+n of the operator in a polynomial basis.
+ To that end, a natural first choice is to consider a representation in
+ terms of the monomials 
 \begin_inset Formula $x^{n}$
 \end_inset 
 
@@ -584,7 +583,13 @@ The obvious avenue of attack is to look for an analytic solution to the
 \end_inset 
 
 .
- This proves to be an unfortunate choice, as will be shown.
+ This proves to be an unfortunate choice, as will become clear; The GKW
+ operator appears to have some sort of singularity associated with the point
+ 
+\begin_inset Formula $x=0$
+\end_inset 
+
+.
  Writing 
 \begin_inset Formula $U_{h}f=g$
 \end_inset 
@@ -655,7 +660,7 @@ Presuming that there is some sort of singularity at
  Without much difficulty, one discovers that the matrix elements are given
  by 
 \begin_inset Formula \begin{equation}
-U_{mn}^{(b,a)}=(-1)^{m}\sum_{k=0}^{n}(-a)^{k}\left(\begin{array}{c}
+U_{mn}^{(b,a)}=(-1)^{m}\sum_{k=0}^{n}(-a)^{n-k}\left(\begin{array}{c}
 n\\
 k\end{array}\right)\left(\begin{array}{c}
 k+m+1\\
@@ -715,7 +720,7 @@ m\end{array}\right)\,\left[\zeta(k+m+2)-1\right]\label{eq:GKW-matrix-elts}\end{e
 \end_inset 
 
  The above will be the most convenient for expressing the Riemann zeta,
- as will be done in the next section.
+ and will be used in the next section.
  
 \layout Standard
 
@@ -766,19 +771,126 @@ U_{mn}^{(b,a)}=(-1)^{m+n}a^{n}\sum_{j=0}^{\infty}\frac{1}{(j+1+b)^{m+2}}\,_{2}F_
 
 \end_inset 
 
- This has the general form of a zeta polynomial series, namely, 
-\begin_inset Formula \[
-\sum\]
+ 
+\layout Standard
+
+Oddly, this appears to be in the form of a slightly generalized form of
+ the GKW operator, the Ruelle-Mayer operator [ref], 
+\begin_inset Formula \begin{equation}
+\left[U^{(s)}f\right](x)\equiv\sum_{n=1}^{\infty}\frac{1}{(n+x)^{s}}f\left(\frac{1}{n+x}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
+ where 
+\begin_inset Formula $s$
+\end_inset 
 
+ is taken to be 
+\begin_inset Formula $s=m+2$
+\end_inset 
+
+ and 
+\begin_inset Formula $f=_{2}F_{1}$
+\end_inset 
+
+.
+ The general appearance and the matrix elements of the Ruelle-Mayer operator
+ are only a slight variation of those for the GKW; and, for completenes,
+ we give these: 
+\begin_inset Formula \begin{equation}
+\left[U^{(s)}\right]_{mn}^{(b,a)}=(-1)^{m}\sum_{k=0}^{n}(-a)^{n-k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+m+k+s-1\\
+m\end{array}\right)\,\zeta_{H}(m+k+s,1+b)\label{eq:RM-general elts}\end{equation}
+
+\end_inset 
+
+ The corresponding hypergeometric identity that comes into play is 
+\begin_inset Formula \begin{equation}
+\sum_{k=0}^{n}\left(-x\right)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+m+k+s-1\\
+m\end{array}\right)=\left(\begin{array}{c}
+m+s-1\\
+m\end{array}\right)\;_{2}F_{1}\left[\begin{array}{c}
+\begin{array}{cc}
+-n\; & \; m+s\end{array}\\
+s\end{array}\;;\; x\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\layout Standard
+
+As a final note, recall that the Hurwitz zeta may be expressed as the polygamma
+ function for integer arguments, and that the polygamma functions are the
+ chain of logarithmic derivatives of the gamma function.
+ Thus, one may also expresses the matrix elements of 
+\begin_inset Formula $U$
+\end_inset 
+
+ in the curious form 
+\begin_inset Formula \begin{equation}
+U_{mn}^{(b,a)}=\frac{(-a)^{n+1}}{m!}\sum_{k=0}^{n}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\frac{1}{a}\right)^{k+1}\frac{1}{(k+1)!}\,\frac{d^{k+1}}{dx^{k+1}}\psi^{(m)}(1+b)\label{eq:}\end{equation}
+
+\end_inset 
+
+Here, the curious operator making an appearance is
+\begin_inset Formula \begin{equation}
+\left[P_{n,y}f\right](x)=\sum_{k=0}^{n}\left(-y\right)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\,\frac{f^{(k)}(x)}{k!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $f^{(k)}(x)$
+\end_inset 
+
+ is the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th derivative of 
+\begin_inset Formula $f$
+\end_inset 
+
+ at 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ The operator 
+\begin_inset Formula $P_{n,y}$
+\end_inset 
+
+is upper-triangular, with all eigenvalues equal to 1, and all eigenvectors
+ being polynomials (or analytic series for 
+\begin_inset Formula $n$
+\end_inset 
+
+ not an integer).
+ 
 \layout Section
 
 The Riemann Zeta and Stieltjes Constants
 \layout Standard
 
-Inserting this into the integral expression for the Riemann Zeta gives 
+Inserting the representation 
+\begin_inset LatexCommand \ref{eq:GKW-matrix-elts}
+
+\end_inset 
+
+ into the integral expression 
+\begin_inset LatexCommand \ref{eq:Zeta as operator integral}
+
+\end_inset 
+
+ for the Riemann zeta gives 
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{s}{s-1}-s\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\frac{G_{mn}(-)^{n}}{(m+1)(m+2)}\left(\begin{array}{c}
 s-1\\
@@ -786,12 +898,8 @@ n\end{array}\right)\label{eq:zeta-as-gkw}\end{equation}
 
 \end_inset 
 
- This expression may be considerably simplified, and this is developed in
- the next section.
- 
-\layout Standard
-
-Some of the multiple sums appearing in equation 
+ This expression may be considerably simplified.
+ Several of the sums appearing in equation 
 \begin_inset LatexCommand \ref{eq:zeta-as-gkw}
 
 \end_inset 
@@ -871,7 +979,7 @@ divided differences
 \begin_inset Quotes erd
 \end_inset 
 
- type equation.
+ Newton-type equation.
  Unlike the Stieltjes constants, the 
 \begin_inset Formula $a_{n}$
 \end_inset 
@@ -887,7 +995,7 @@ a_{3} & = & \frac{3}{2}\zeta(2)-\zeta(3)+\frac{\zeta(4)}{4}-\frac{23}{24}-\gamma
 \end_inset 
 
  and so on.
- Numiercally, the 
+ Numerically, the 
 \begin_inset Formula $a_{n}$
 \end_inset 
 
@@ -937,15 +1045,17 @@ appear naturally in the Taylor's expansion for the Gamma function, and so
 \begin_inset Formula $\alpha(z)$
 \end_inset 
 
- is an entire function, and doesn't have any poles or singularities anywhere.
+ is an entire function, and doesn't have any poles or singularities anywhere,
+ except at infinity.
  This function deserves a more thorough investigation.
- Some curious values for this sum are 
+ Some curious values for this sum are easily computed: 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}a_{n}=\ln\sqrt{2\pi}-1=-0.081061467...\label{eq:}\end{equation}
 
 \end_inset 
 
- which can be obtained from Sterling's formula, and 
+ which can be obtained from Sterling's asymptotic expansion for the gamma
+ function, and 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}a_{n}2^{-n}=2-3\ln2=-0.079441542...\label{eq:}\end{equation}
 
@@ -998,7 +1108,7 @@ The equation
  is very conducive to numerical analysis.
  The vaues of the zeta function for small integers are known to millions
  of digits; Plouffe has given a series of very rapidly converging sums for
- the larger integers.
+ the larger integers[ref].
  Thus, it becomes possible to explore the behvaiour of the 
 \begin_inset Formula $a_{n}$
 \end_inset 
