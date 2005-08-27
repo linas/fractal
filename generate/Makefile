@@ -14,7 +14,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert cutoff
 
-NEW_EXES = cutoff elliptic erdos euler-q mand-flow \
+NEW_EXES = alpha cutoff elliptic erdos euler-q mand-flow \
         mp_zeta mobius swap totient  \
         ray automatic radius brat draw dx image
 
@@ -42,6 +42,7 @@ gap-tongue.o: image.h util.h
 man.o: image.h util.h
 util.o:	util.h
 
+alpha.o: alpha.C
 brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
@@ -58,9 +59,11 @@ MODULAR=../tools/lib/modular.o
 TOTIENT=../tools/lib/totient.o
 
 GMP=-lgmp
+GSL=-lgsl -lcblas
 
 ################## Dependencies and compile/link #########
 #
+alpha: brat.o alpha.o util.o $(GSL)
 brat-beigen: brat.o brat-beigen.o util.o
 brat-gap-hair: brat.o brat-gap-hair.o util.o $(FAREY)
 brat-gapper: brat.o brat-gapper.o util.o $(FAREY) $(GCF)

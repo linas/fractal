@@ -15,13 +15,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gsl/gsl_sf_gamma.h>
+#include <gsl/gsl_sf_log.h>
 
 #include "brat.h"
 
 static void alpha_series_c (double re_q, double im_q, double *prep, double *pimp)
 {
 	double tmp;
-	int i;
 	*prep = 0.0;
 	*pimp = 0.0;
 
@@ -43,7 +43,40 @@ static void alpha_series_c (double re_q, double im_q, double *prep, double *pimp
 	double re_one_over_z = re_q * tmp;
 	double im_one_over_z = -im_q * tmp;
 			  
+	/* ln gamma (1/(1-z)) */
+	gsl_sf_result mod_lng, arg_lng;
+	gsl_sf_lngamma_complex_e (re_one_over_one_minus_z, im_one_over_one_minus_z, 
+	                &mod_lng, &arg_lng);
 
+	double re_lng = mod_lng.val * cos (arg_lng.val);
+	double im_lng = mod_lng.val * sin (arg_lng.val);
+
+	/* (1/z) * ln gamma (1/(1-z)) */
+	rep += re_one_over_z * re_lng - im_one_over_z * im_lng;
+	imp += re_one_over_z * im_lng + im_one_over_z * re_lng;
+
+	/* log (1-z) */
+	gsl_sf_result m_lnz, t_lnz;
+	gsl_sf_complex_log_e (re_one_minus_z, im_one_minus_z, &m_lnz, &t_lnz);
+	double re_ln_omz = m_lnz.val;
+	double im_ln_omz = t_lnz.val;
+	
+	/* (1/z) * log (1-z) */
+	double re_log_over_z = re_ln_omz * re_one_over_z - im_ln_omz * im_one_over_z;
+	double im_log_over_z = re_ln_omz * im_one_over_z + im_ln_omz * re_one_over_z;
+
+	/* add (1/z) * log (1-z) * (1/(1-z)) */
+	rep += re_log_over_z * re_one_over_one_minus_z - im_log_over_z * im_one_over_one_minus_z;
+	imp += re_log_over_z * im_one_over_one_minus_z + im_log_over_z * re_one_over_one_minus_z;
+	
+	/* add - 0.5 * (1/z) * log (1-z) */
+	rep += -0.5 * re_log_over_z;
+	imp += -0.5 * im_log_over_z;
+
+	/* add 1/(1-z) */
+	rep += re_one_over_one_minus_z;
+	imp += im_one_over_one_minus_z;
+	
 	*prep = rep;
 	*pimp = imp;
 }
@@ -53,7 +86,8 @@ static double alpha_series (double re_q, double im_q)
 	double rep, imp;
 	alpha_series_c (re_q, im_q, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
-	return rep;
+	// return imp;
+	return (atan2 (imp, rep) + M_PI) / (2.0*M_PI);
 }
 
 /*-------------------------------------------------------------------*/
@@ -85,8 +119,6 @@ MakeHisto (
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = 0.0;
 
-	max_terms = itermax;
-   
    im_position = im_start;
    for (i=0; i<sizey; i++) 
 	{
