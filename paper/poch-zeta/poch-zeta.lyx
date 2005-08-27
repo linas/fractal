@@ -151,12 +151,8 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
 \end_inset 
 
-In the theory of iterated functions 
-\begin_inset LatexCommand \cite{Ruelle}
-
-\end_inset 
-
-, the behavior of a map may be studied by means of the 
+In the theory of iterated functions, the behavior of a map may be studied
+ by means of the 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -164,7 +160,12 @@ transfer operator
 \begin_inset Quotes erd
 \end_inset 
 
-, sometimes called the Frobenius-Perron operator of a map.
+, sometimes called the Frobenius-Perron operator of a map 
+\begin_inset LatexCommand \cite{Ruelle}
+
+\end_inset 
+
+.
  Given a map of the unit interval onto itself, the transfer operator describes
  how a distribution on the unit interval behaves under the action of the
  map, thus giving an broader view of iteration.
@@ -328,7 +329,14 @@ For the Gauss map, the transfer operator is known as the Gauss-Kuzmin-Wirsing
  is easy enough to derive, a proper, rigorous examination of its validity
  requires a deep study of topics in functional analysis, topics outside
  the scope of this paper.
- 
+ Wirsing does present some arguments concerning the existence and analyticity
+ of the eigenvectors of this operator; however, the arguments are specific
+ to this operator and do not draw on any general theory 
+\begin_inset LatexCommand \cite{Wirsing}
+
+\end_inset 
+
+.
 \layout Standard
 
 This expression of the Riemann zeta function in terms of the GKW operator
@@ -378,7 +386,7 @@ The author has attempted a computer-guided search for a closed-form solution
  in terms of a simple linear combination of products of common special functions
 , including the factorial, the digamma, and Bessel functions.
  No solution was found; it is not clear that the eigenvectors have any simple
- solution in terms of the special functions.
+ solution in terms of common special functions.
 \layout Standard
 
 XXX Todo: Give the Riemann Hypothesis as a vector equation.
@@ -508,7 +516,7 @@ Acting on the monomial, one gets
 \begin_inset Formula $s=k$
 \end_inset 
 
-, one has that and 
+, one has that 
 \begin_inset Formula $\zeta_{H}(k+1,x)=(-1)^{k+1}\psi^{(k)}(x)/k!$
 \end_inset 
 
@@ -942,7 +950,7 @@ take the form
 t_{n} & = & \sum_{m=0}^{\infty}\frac{G_{mn}}{(m+1)(m+2)}\nonumber \\
  & = & 1-\gamma+\sum_{k=1}^{n}(-)^{k}\left(\begin{array}{c}
 n\\
-k\end{array}\right)\left[\frac{1}{k}-\frac{\zeta(k+1)}{k+1}\right]\label{eq:}\end{eqnarray}
+k\end{array}\right)\left[\frac{1}{k}-\frac{\zeta(k+1)}{k+1}\right]\label{eq:t_n defn}\end{eqnarray}
 
 \end_inset 
 
@@ -1017,6 +1025,32 @@ a_{3} & = & \frac{3}{2}\zeta(2)-\zeta(3)+\frac{\zeta(4)}{4}-\frac{23}{24}-\gamma
 
  are small, and seem to be bounded and oscillatory.
  A detailed numerical analysis of these values is given in the next section.
+\layout Standard
+
+Identities useful in the course of the manipulations needed to derive the
+ above include 
+\begin_inset Formula \begin{equation}
+H_{n}=\sum_{m=1}^{n}\frac{1}{m}=-\sum_{k=1}^{n}\frac{(-1)^{k}}{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+-\sum_{k=0}^{n}\frac{(-x)^{k+1}}{k+1}\left(\begin{array}{c}
+n\\
+k\end{array}\right)=\frac{1-(1-x)^{n+1}}{n+1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ This last identity is useful for partially resumming equation 
+\begin_inset LatexCommand \ref{eq:t_n defn}
+
+\end_inset 
+
+ to improve convergence in numerical calculations.
+ 
 \layout Standard
 
 The 
@@ -1460,7 +1494,7 @@ q(k)=1.970+\frac{17\pi}{16}k+\frac{\pi}{4}k^{2}\label{eq:}\end{equation}
 
 .
  Note that the value 17/16 is not meant to imply that this value is truly
- exact; numerically, the value 2.125 seems to be the ideal fit, and it is
+ exact; numerically, the value 1.0625 seems to be the ideal fit, and it is
  written here as 17/16 in order to be suggestive.
  This equation is trivially invertible to give the oscillatory behavior
  of the 
@@ -1676,7 +1710,7 @@ k\end{array}\right)\left[\frac{1}{k}-\frac{\zeta(k+1)}{k+1}\right]\label{eq:}\en
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1718,7 +1752,7 @@ This figure shows the real and imaginary parts of
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1778,6 +1812,38 @@ This figure shows the phase of
 \end_inset 
 
 
+\layout Standard
+
+Of some utility are two identities, valid for 
+\begin_inset Formula $\Re s>-1$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+-\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\frac{(-y)^{k+1}}{k+1}=\frac{1-(1-y)^{s+1}}{s+1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\sum_{k=1}^{\infty}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\frac{(a-1)^{k}}{k}=\int_{a}^{1}\frac{1-x^{s}}{1-x}dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ For 
+\begin_inset Formula $a=0$
+\end_inset 
+
+, the last integral becomes the digamma function; see equation 6.3.22 of 
+\begin_inset LatexCommand \cite{A&S}
+
+\end_inset 
+
+.
 \layout Section
 
 Relation to the Stieltjes constants
@@ -2092,5 +2158,10 @@ Free Software Foundation, GNU Multiple Precision Arithmetic Library, version
 \layout Bibliography
 \bibitem [AS64]{A&S}
 
-Abramowitz & Stegun
+Milton Abramowitz and Irene A.
+ Stegun, eds., 
+\emph on 
+Handbook of Mathematical Functions
+\emph default 
+, Dover Publications, New York (1972).
 \the_end
