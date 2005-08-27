@@ -1198,7 +1198,7 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 	mpf_set_ui (re_a, 0);
 	mpf_set_ui (im_a, 0);
 
-	int n = 100;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	int n = 1300;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	for (k=1; k<= n; k++)
 	{
 		/* Commpute the binomial */
