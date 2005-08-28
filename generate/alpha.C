@@ -66,9 +66,10 @@ static void alpha_series_c (double re_q, double im_q, double *prep, double *pimp
 	double rep = 0.0;
 	double imp = 0.0;
 
+// printf ("z=%g + i %g\n", re_q, im_q);
 	/*  1-z */
 	double re_one_minus_z = 1.0 - re_q;
-	double im_one_minus_z = - re_q;
+	double im_one_minus_z = - im_q;
 
 	/* 1/(1-z) */
 	tmp = re_one_minus_z*re_one_minus_z + im_one_minus_z*im_one_minus_z;
@@ -76,28 +77,33 @@ static void alpha_series_c (double re_q, double im_q, double *prep, double *pimp
 	double re_one_over_one_minus_z = re_one_minus_z * tmp;
 	double im_one_over_one_minus_z = -im_one_minus_z * tmp;
 
+// printf ("1/(1-z)=%g + i %g\n", re_one_over_one_minus_z, im_one_over_one_minus_z);
 	/* 1/z */
 	tmp = 1.0/(re_q*re_q + im_q * im_q);
 	double re_one_over_z = re_q * tmp;
 	double im_one_over_z = -im_q * tmp;
+// printf (" 1/z=%g + i %g\n", re_one_over_z, im_one_over_z);
 			  
 	/* ln gamma (1/(1-z)) */
 	gsl_sf_result mod_lng, arg_lng;
 	gsl_sf_lngamma_complex_e (re_one_over_one_minus_z, im_one_over_one_minus_z, 
 	                &mod_lng, &arg_lng);
 
-	double re_lng = mod_lng.val * cos (arg_lng.val);
-	double im_lng = mod_lng.val * sin (arg_lng.val);
+	double re_lng = mod_lng.val;
+	double im_lng = arg_lng.val;
+// printf ("ln gamma 1/(1-z)=%g + i %g\n", re_lng, im_lng);
 
-	/* z * ln gamma (1/(1-z)) */
-	rep += re_q * re_lng - im_q * im_lng;
-	imp += re_q * im_lng + im_q * re_lng;
+	/* (1/z) * ln gamma (1/(1-z)) */
+	rep += re_one_over_z * re_lng - im_one_over_z * im_lng;
+	imp += re_one_over_z * im_lng + im_one_over_z * re_lng;
 
+// printf ("first gamma term =%g + i %g\n", rep, imp);
 	/* log (1-z) */
 	gsl_sf_result m_lnz, t_lnz;
 	gsl_sf_complex_log_e (re_one_minus_z, im_one_minus_z, &m_lnz, &t_lnz);
 	double re_ln_omz = m_lnz.val;
 	double im_ln_omz = t_lnz.val;
+// printf ("ln (1-z)=%g + i %g\n", re_ln_omz, im_ln_omz);
 	
 	/* (1/z) * (1/(1-z)) */
 	double re_zz = re_one_over_z * re_one_over_one_minus_z - im_one_over_z * im_one_over_one_minus_z;
@@ -110,14 +116,15 @@ static void alpha_series_c (double re_q, double im_q, double *prep, double *pimp
 	/* add 0.5 * log (1-z) * (1+z)/(z(1-z)) */
 	rep += 0.5 * (re_ln_omz * re_tz - im_ln_omz * im_tz);
 	imp += 0.5 * (re_ln_omz * im_tz + im_ln_omz * re_tz);
+// printf ("log term =%g + i %g\n", rep, imp);
 	
 	/* add 1/(1-z) */
 	rep += re_one_over_one_minus_z;
 	imp += im_one_over_one_minus_z;
-
-	rep += 0.577215664901532 * re_one_over_z;
-	imp += 0.577215664901532 * im_one_over_z;
 	
+// printf ("tot=%g + i %g\n", rep, imp);
+
+// printf ("\n");
 	*prep = rep;
 	*pimp = imp;
 }
