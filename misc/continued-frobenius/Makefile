@@ -1,7 +1,7 @@
 
 EXES = alpha asubn bern bern_h binom-graph character \
 	diagon diverge eicheck frobenius gsl-diag \
-	riemann swap sum tryall valuate \
+	harmonic riemann swap sum tryall valuate \
 	zeta-sum zeta-takagi zeta-zero zero zyx
 
 all: $(EXES)
@@ -40,6 +40,7 @@ diverge: diverge.o
 eicheck: eicheck.o ache.o zetafn.o 
 frobenius: frobenius.o zetafn.o
 gsl-diag: gsl-diag.o zetafn.o 
+harmonic: harmonic.o
 riemann: riemann.o zetafn.o
 sum: sum.o ache.o zetafn.o
 swap: swap.o
