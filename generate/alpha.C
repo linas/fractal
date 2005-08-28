@@ -107,15 +107,16 @@ static void alpha_series_c (double re_q, double im_q, double *prep, double *pimp
 	double re_tz = (1.0+re_q) * re_zz - im_q * im_zz;
 	double im_tz = (1.0+re_q) * im_zz + im_q * re_zz;
 
-	/* add log (1-z) * (1+z)/(z(1-z)) */
-	rep += re_ln_omz * re_tz - im_ln_omz * im_tz;
-	imp += re_ln_omz * im_tz + im_ln_omz * re_tz;
+	/* add 0.5 * log (1-z) * (1+z)/(z(1-z)) */
+	rep += 0.5 * (re_ln_omz * re_tz - im_ln_omz * im_tz);
+	imp += 0.5 * (re_ln_omz * im_tz + im_ln_omz * re_tz);
 	
 	/* add 1/(1-z) */
 	rep += re_one_over_one_minus_z;
 	imp += im_one_over_one_minus_z;
 
-	rep -= 0.577215664901532;
+	rep += 0.577215664901532 * re_one_over_z;
+	imp += 0.577215664901532 * im_one_over_z;
 	
 	*prep = rep;
 	*pimp = imp;
