@@ -710,7 +710,12 @@ m\end{array}\right)\,\zeta_{H}(k+m+2,1+b)\label{eq:general elts}\end{equation}
 \begin_inset Formula $a=b=1/2$
 \end_inset 
 
-, one obtains the well-known expansion of xxx [ref], which is 
+, one obtains the well-known expansion of 
+\begin_inset LatexCommand \cite{Briggs}
+
+\end_inset 
+
+, which is 
 \begin_inset Formula \begin{equation}
 U_{mn}^{(1/2,1/2)}=(-1)^{m}\sum_{k=0}^{n}\left(\frac{-1}{2}\right)^{n-k}\left(\begin{array}{c}
 n\\
@@ -1067,10 +1072,10 @@ The
 \end_inset 
 
 appear naturally in the Taylor's expansion for the Gamma function, and so
- one finds, with little difficulty, that 
+ one finds, with little difficulty, the generating function 
 \begin_inset Formula \begin{eqnarray}
 \alpha(z) & = & \sum_{n=0}^{\infty}a_{n}z^{n}\nonumber \\
- & = & \frac{1}{1-z}+\frac{\ln(1-z)}{z}\left(\frac{1}{1-z}-\frac{1}{2}\right)+\frac{1}{z}\ln\Gamma\left(\frac{1}{1-z}\right)\label{eq:}\end{eqnarray}
+ & = & \frac{1}{1-z}+\frac{\ln(1-z)}{z}\left(\frac{1}{1-z}-\frac{1}{2}\right)+\frac{1}{z}\ln\Gamma\left(\frac{1}{1-z}\right)\label{eq:alpha-exact}\end{eqnarray}
 
 \end_inset 
 
@@ -1081,17 +1086,13 @@ appear naturally in the Taylor's expansion for the Gamma function, and so
 \end_inset 
 
 .
- This representation is curiously misleading.
- At first glance, one might think that its divergent at 
-\begin_inset Formula $z=1$
-\end_inset 
-
-, with a cut extending to the right for 
+ This representation shows a complicated structure.
+ There is a cut (from the logarithm) extending to the right for 
 \begin_inset Formula $1<z$
 \end_inset 
 
 .
- In the cut one might guess that there are poles at 
+ In the cut there are poles (from the gamma function) at 
 \begin_inset Formula $-n=1/(1-z)$
 \end_inset 
 
@@ -1099,32 +1100,70 @@ appear naturally in the Taylor's expansion for the Gamma function, and so
 \begin_inset Formula $z=1+1/n$
 \end_inset 
 
-, accumulating to an essential singularity at 
+, accumulating to at 
 \begin_inset Formula $z=1$
 \end_inset 
 
 .
- But this doesn't seem to be the case at all; some preliminary work seems
- to show that 
-\begin_inset Formula $\alpha(z)$
+ There appears to be a simple zero at 
+\begin_inset Formula $z=\infty$
 \end_inset 
 
- is an entire function, and doesn't have any poles or singularities anywhere....
- XXXX something is wrong here, either numerics or something else.
-  Some curious values for this sum are easily computed: 
+.
+ The radius of convergence of the series involving the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+is one.
+ As will be seen in the next section, the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ are oscillatory and exponentially decreasing, and so the sum at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+is convergent.
+ One has:
+\layout Standard
+
+
 \begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}a_{n}=\ln\sqrt{2\pi}-1=-0.081061467...\label{eq:}\end{equation}
+\sum_{n=0}^{\infty}a_{n}=\ln\sqrt{2\pi}-1=-0.081061466795327...\label{eq:}\end{equation}
 
 \end_inset 
 
  which can be obtained from Sterling's asymptotic expansion for the gamma
  function, and 
 \begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}a_{n}2^{-n}=2-3\ln2=-0.079441542...\label{eq:}\end{equation}
+\sum_{n=0}^{\infty}a_{n}2^{-n}=2-3\ln2=-0.079441541679836...\label{eq:}\end{equation}
 
 \end_inset 
 
- Its equally curious that other variations on the expression given in 
+An exponential generating function is given by 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}a_{n}\frac{z^{n}}{n!}=\frac{1}{2z}+e^{z}\left[1-\gamma-\mbox{Ein}(z)-\frac{1}{z}\left(\frac{1}{2}+\sum_{k=2}^{\infty}\frac{(-z)^{k}}{k!}\zeta(k)\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\mbox{Ein}(z)$
+\end_inset 
+
+ is the entire exponential integral: 
+\begin_inset Formula \begin{equation}
+\mbox{Ein}(z)=-\sum_{k=1}^{\infty}\frac{1}{k}\frac{(-z)^{k}}{k!}=e^{-z}\sum_{n=1}^{\infty}H_{n}\frac{z^{n}}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula $H_{n}$
+\end_inset 
+
+ are the harmonic numbers.
+\layout Standard
+
+Its equally curious that other variations on the expression given in 
 \begin_inset LatexCommand \ref{eq:zeta-as-a_n}
 
 \end_inset 
@@ -2094,9 +2133,7 @@ K.
  I.
  Babenko, On a Problem of Gauss, 
 \emph on 
-Soviet Math.
- Dokl.
-
+Soviet Mathematical Doklady
 \emph default 
  
 \series bold 
@@ -2112,15 +2149,21 @@ K.
  P.
  Jur'ev, On the Discretization of a Problem of Gauss, 
 \emph on 
-Soviet Math.
- Dokl.
-
+Soviet Mathematical Doklady
 \emph default 
  
 \series bold 
 19
 \series default 
 :731-735 (1978)
+\layout Bibliography
+\bibitem [Br03]{Briggs}
+
+Keith Briggs, 
+\emph on 
+A precise computation of the Gauss-Kuzmin-Wirsing constant
+\emph default 
+, (2003) (http://keithbriggs.info/documents/wirsing.pdf, unpublished).
 \layout Bibliography
 \bibitem [Ed74]{Edwards}
 
