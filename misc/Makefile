@@ -10,6 +10,7 @@ clean:
 	cd de-rham; make clean
 	cd farey; make clean
 	cd gap; make clean
+	cd ising; make clean
 	cd modular; make clean
 	cd num-theory; make clean
 	cd weyl; make clean
@@ -23,6 +24,7 @@ realclean: clean
 	cd de-rham; make realclean
 	cd farey; make realclean
 	cd gap; make realclean
+	cd ising; make realclean
 	cd modular; make realclean
 	cd num-theory; make realclean
 	cd weyl; make realclean
