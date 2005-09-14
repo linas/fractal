@@ -28,7 +28,12 @@ double nearest_neighbor (double s)
 	s1 = -1.0;
 	if (s>= 0.5) s1 = 1.0;
 	
-	return 0.2 * s0*s1;
+	return -1.6 * s0*s1;
+}
+
+double pabola (double s)
+{
+	return -0.2 * s * (1.0-s);
 }
 
 /* Return the finite-state energy of string s (length n) */
@@ -67,7 +72,7 @@ double partition (double (*interaction)(double), int n)
 
 		z += exp (en);
 
-		printf ("%d	%10.8g	%8.6g	%8.6g\n", i, s, interaction(s), en);
+		printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g\n", i, s, interaction(s), en, z);
 	}
 
 	printf ("# partition=%g\n", z);
@@ -75,9 +80,17 @@ double partition (double (*interaction)(double), int n)
 	return z;
 }
 
-main () 
+int
+main (int argc, char * argv[]) 
 {
-	int n = 8;
+	int n = 10;
+
+	if (argc < 1) {
+		fprintf (stderr, "Usage: %s <n>\n", argv[0]);
+		exit (1);
+	}
+	n = atoi (argv[1]);
 
 	partition (nearest_neighbor, n);
+	// partition (pabola, n);
 }
