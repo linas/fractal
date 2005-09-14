@@ -1,0 +1,29 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'ising.png'
+# set term postscript
+# set out 'ising.ps'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# set xrange [-1:1]
+# set yrange [-1:1]
+
+set xrange [-6:6]
+
+set title " sss"
+set xlabel "s"
+set ylabel "s)"
+
+plot "ising.dat" using 2:3 title "inter", \
+     "ising.dat" using 2:4 title "ener"
+
+
+# pause 100
+
