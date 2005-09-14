@@ -49,7 +49,8 @@ double energy (double (*interaction)(double), double s, int n)
 	return en;
 }
 
-compute finite state partition
+/* compute finite state partition */
+
 double partition (double (*interaction)(double), int n)
 {
 	double z = 0.0;
@@ -58,7 +59,7 @@ double partition (double (*interaction)(double), int n)
 	int i;
 
 	double om = 1.0 / ((double) m);
-	for (i=0; i<m i++)
+	for (i=0; i<m; i++)
 	{
 		double s = om * ((double) i);
 
@@ -66,7 +67,7 @@ double partition (double (*interaction)(double), int n)
 
 		z += exp (en);
 
-		printf ("%d	%g	%g	%g\n", i, s, interaction(s), en);
+		printf ("%d	%10.8g	%8.6g	%8.6g\n", i, s, interaction(s), en);
 	}
 
 	printf ("# partition=%g\n", z);
