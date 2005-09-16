@@ -36,6 +36,42 @@ double pabola (double s)
 	return -0.2 * s * (1.0-s);
 }
 
+double tent (double s)
+{
+	return (s>0.5)? 2.0*s : 2.0*(1.0-s);
+}
+
+/* Kac Model */
+double kac (double s)
+{
+	double lambda = 0.6666;
+	
+	double s0 = -1.0;
+	if (s>= 0.5) {
+		s0 = 1.0;
+		s -= 0.5;
+	}
+	s *= 2.0;
+	
+	double lp = lambda;
+	double acc = 0.0;
+	while (1)
+	{
+		double s1 = -1.0;
+		if (s>= 0.5) {
+			s1 = 1.0;
+			s -= 0.5;
+		}
+		s *= 2.0;
+	
+		acc += lp * s1;
+		lp *= lambda;
+
+		if (lp < 1.0e-18) break;
+	}
+	return 0.2*s0*acc;
+}
+
 /* Return the finite-state energy of string s (length n) */
 double energy (double (*interaction)(double), double s, int n)
 {
@@ -91,6 +127,8 @@ main (int argc, char * argv[])
 	}
 	n = atoi (argv[1]);
 
-	partition (nearest_neighbor, n);
+	// partition (nearest_neighbor, n);
 	// partition (pabola, n);
+	// partition (tent, n);
+	partition (kac, n);
 }
