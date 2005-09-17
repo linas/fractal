@@ -28,6 +28,11 @@ long double triangle (long double x)
 	return 2.0L*(1.0L-t);
 }
 
+long double balanced_triangle (long double x)
+{
+	return (triangle(x) - 0.5L);
+}
+
 double square (double x)
 {
 	x -= floor (x);
@@ -97,7 +102,8 @@ long double takagi (long double w, long double x)
 	long double tp = 1.0L;
 	for (k=0; k<50; k++)
 	{
-		long double term = tw* triangle (tp*x);
+		// long double term = tw* triangle (tp*x);
+		long double term = tw* balanced_triangle (tp*x);
 		// long double term = tw* parabola_down (tp*x);
 		// long double term = tw* parabola_up (tp*x);
 		acc += term;
@@ -543,7 +549,7 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 432;
-	int nmax = 1720;
+	int nmax = 1717;
 	// int nmax = 2048;
 
 	if (argc <2)
@@ -553,16 +559,25 @@ main (int argc, char *argv[])
 	}
 	double w = atof(argv[1]);
 
+	double acc = 0.0;
 	for (i=0; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
+
+		/* jitter, as this can make a difference */
+		// x += ((double) rand()) / (RAND_MAX*((double)nmax));
+		
 		// double ts = isola (w, x);
-		// double tw = takagi (w, x);
+		double tw = takagi (w, x);
+		double ts = tw;
+		tw = exp (tw);
+		acc += tw;
+		ts = acc;
 		// double tw = iter_tak (w, x);
 
 		// double tw = dirichlet_takagi (w, x);
-		double tw = plicative_takagi (w, x);
-		double ts = 2.0*gsl_sf_zeta (w) / 3.0 -0.5 - pow(2.0, -w)/3.0;
+		// double tw = plicative_takagi (w, x);
+		// double ts = 2.0*gsl_sf_zeta (w) / 3.0 -0.5 - pow(2.0, -w)/3.0;
 
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
