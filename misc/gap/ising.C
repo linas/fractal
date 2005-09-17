@@ -59,6 +59,9 @@ main (int argc, char *argv[])
 	// int nmax = 432;
 	// int nmax = 1717;
 	int nmax = 2048;
+	// int nmax = 8192;
+	// int nmax = 32768;
+	// int nmax = 32;
 
 	if (argc <2)
 	{
@@ -66,6 +69,12 @@ main (int argc, char *argv[])
 		exit (1);
 	}
 	double w = atof(argv[1]);
+
+	double scale = exp (-1.0/(1.0-w));
+			  
+	printf ("#\n# scale=%g\n#\n", scale);
+
+	scale = 1.0 / ((double) nmax);
 
 	double acc = 0.0;
 	for (i=0; i<nmax; i++)
@@ -78,9 +87,11 @@ main (int argc, char *argv[])
 		// double ts = isola (w, x);
 		double tw = takagi (w, x);
 		double ts = tw;
-		tw = exp (-tw);
+		tw = exp (-2.0*tw);
 		acc += tw;
 		ts = acc;
+
+		tw = InvFarey(x);
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 		fflush (stdout);

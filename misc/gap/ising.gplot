@@ -1,0 +1,26 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'ising.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Ising Curve"
+set xlabel "x"
+set ylabel "F(x)"
+
+# plot "ising.dat" using 2:($4/2.07633e+08) title "ising"
+
+# plot "ising.dat" using 2:($4/ 8.27218e+09) title "ising", \
+
+plot "ising.dat" using 2:($4/  2.97811e+17  ) title "ising", \
+     "ising.dat" using 2:3 title "farey"
+
+
+# pause 100
+
