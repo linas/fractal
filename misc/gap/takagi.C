@@ -549,8 +549,8 @@ main (int argc, char *argv[])
 
 	// int nmax = 512;
 	// int nmax = 432;
-	int nmax = 1717;
-	// int nmax = 2048;
+	// int nmax = 1717;
+	int nmax = 2048;
 
 	if (argc <2)
 	{
@@ -570,7 +570,7 @@ main (int argc, char *argv[])
 		// double ts = isola (w, x);
 		double tw = takagi (w, x);
 		double ts = tw;
-		tw = exp (tw);
+		tw = exp (-tw);
 		acc += tw;
 		ts = acc;
 		// double tw = iter_tak (w, x);

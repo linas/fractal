@@ -7,7 +7,7 @@ LIB = $(TOP)/lib
 CC = /usr/bin/cc -O2 -I $(INC) 
 
 EXES= c-takagi conj dyadic entropy exacto fdist feigen \
-      fiddle fliptree gappy gkw mod moebius \
+      fiddle fliptree gappy gkw ising mod moebius \
       mute orbit orbit-s padic \
       pair pegs rand-measure rdist summy swap sway sym \
       sym-fun takagi tent-map theta tree vanish zeta
@@ -41,6 +41,7 @@ fiddle.o:  fiddle.C $(LIB)/Farey.o $(INC)/Farey.h
 fliptree.o:  fliptree.C $(LIB)/Farey.o $(INC)/Farey.h
 gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
 gkw.o:  gkw.C $(LIB)/Farey.o $(INC)/Farey.h
+ising.o:  ising.C $(LIB)/Farey.o $(INC)/Farey.h
 mod.o:  mod.C $(LIB)/modular.o $(INC)/modular.h
 moebius.o:	moebius.C
 mute.o:  mute.C $(LIB)/Farey.o $(INC)/Farey.h
