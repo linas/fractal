@@ -38,11 +38,46 @@ long double takagi (long double w, long double x)
 	long double tp = 1.0L;
 	for (k=0; k<50; k++)
 	{
-		long double term = tw* balanced_triangle (tp*x);
+		// long double term = tw* balanced_triangle (tp*x);
+		long double term = tw* triangle (tp*x);
 		acc += term;
 		tp *= 2.0L;
 		tw *= w;
 		if (1.0e-16 > tw) break;
+	}
+
+	return acc;
+}
+
+/* x = p / 2**n */
+int itriangle (int p, int n)
+{
+	unsigned int deno = 1<<n;
+
+	if (p >= deno) p-= deno;
+	if (p == 0) return 0;
+
+	if (2*p < deno) return p;
+
+	p = deno - p;
+	return p;
+}
+
+/* x = p / 2**n */
+long double itakagi (long double w, int p, int n)
+{
+	int k;
+	long double acc = 0.0L;
+	long double tw = 1.0L;
+	long double tp = 1.0L;
+	for (k=0; k<n; k++)
+	{
+		p = itriangle (p, n-k);
+		if (0 == p) break;
+		long double term = tw * ((long double) p) / ((long double) (1<<(n-k)));
+		acc += term;
+		tp *= 2.0L;
+		tw *= w;
 	}
 
 	return acc;
@@ -55,29 +90,32 @@ main (int argc, char *argv[])
 {
 	int i;
 
+	if (argc <2)
+	{
+		printf ("Usage: %s <len> <w-value>\n", argv[0]);
+		exit (1);
+	}
+	int p = atoi (argv[1]);
+	double w = atof(argv[2]);
+	
 	// int nmax = 512;
 	// int nmax = 432;
 	// int nmax = 1717;
-	int nmax = 2048;
+	// int nmax = 2048;
 	// int nmax = 8192;
 	// int nmax = 32768;
 	// int nmax = 32;
 
-	if (argc <2)
-	{
-		printf ("Usage: %s <w-value>\n", argv[0]);
-		exit (1);
-	}
-	double w = atof(argv[1]);
-
-	double scale = exp (-1.0/(1.0-w));
-			  
+	int nmax = 1<<p;
+	
+	double scale = sqrt ((double) nmax);
 	printf ("#\n# scale=%g\n#\n", scale);
 
-	scale = 1.0 / ((double) nmax);
-
+	double fa = 0.0;
 	double acc = 0.0;
-	for (i=0; i<nmax; i++)
+	double xlast = 0.0;
+	double step = 0.005;
+	for (i=1; i<nmax; i++)
 	{
 		double x = i/((double)nmax);
 
@@ -85,15 +123,21 @@ main (int argc, char *argv[])
 		// x += ((double) rand()) / (RAND_MAX*((double)nmax));
 		
 		// double ts = isola (w, x);
-		double tw = takagi (w, x);
-		double ts = tw;
-		tw = exp (-2.0*tw);
-		acc += tw;
-		ts = acc;
+		// double tw = takagi (w, x);
+		double tw = itakagi (w, i, p);
+		
+		// ts = exp (-2.0*0.69314*tw);
+		double ts = pow (4.0, -tw);
+		// ts = pow (M_PI, -tw);
+		// ts = pow (9.0/4.0, -tw);
+		acc += ts;
 
-		tw = InvFarey(x);
+		if (x> xlast + step) {
+			fa = InvFarey(x);
+			xlast += step;
+		}
 
-		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, acc, fa);
 		fflush (stdout);
 	}
 }
