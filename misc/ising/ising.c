@@ -1,19 +1,23 @@
 /*
  * ising.c
  *
- * Ising model
+ * 1 dimensional Ising model (and Kac model too)
+ * A given state of the system is encoded as 
+ * a 2-adic string.
  *
  * Linas September 2005
  *
- * State is encoded as a 2-adic string.
- *
  */
 
-#include "math.h"
-#include "stdio.h"
-#include "stdlib.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /* Nearest neighbor interaction */
+/* Given a string 's' encoding the a given state, 
+ * return the interaction energy associated with that 
+ * state space.
+ */
 double nearest_neighbor (double s)
 {
 	double s0,s1;
@@ -28,7 +32,7 @@ double nearest_neighbor (double s)
 	s1 = -1.0;
 	if (s>= 0.5) s1 = 1.0;
 	
-	return -1.6 * s0*s1;
+	return -0.6 * s0*s1;
 }
 
 double pabola (double s)
@@ -41,7 +45,7 @@ double tent (double s)
 	return (s>0.5)? 2.0*s : 2.0*(1.0-s);
 }
 
-/* Kac Model */
+/* Kac Model (which has shae of tent or cantor polynomial.) */
 double kac (double s)
 {
 	double lambda = 0.6666;
@@ -121,14 +125,15 @@ main (int argc, char * argv[])
 {
 	int n = 10;
 
-	if (argc < 1) {
+	if (argc < 2) {
 		fprintf (stderr, "Usage: %s <n>\n", argv[0]);
 		exit (1);
 	}
 	n = atoi (argv[1]);
 
-	// partition (nearest_neighbor, n);
+	printf ("#\n# n=%d\n#\n",n);
+	partition (nearest_neighbor, n);
 	// partition (pabola, n);
 	// partition (tent, n);
-	partition (kac, n);
+	// partition (kac, n);
 }
