@@ -52,8 +52,8 @@ long double takagi (long double w, long double x)
 	long double tp = 1.0L;
 	for (k=0; k<50; k++)
 	{
-		// long double term = tw* triangle (tp*x);
-		long double term = tw* balanced_triangle (tp*x);
+		long double term = tw* triangle (tp*x);
+		// long double term = tw* balanced_triangle (tp*x);
 		// long double term = tw* parabola_down (tp*x);
 		// long double term = tw* parabola_up (tp*x);
 		acc += term;
@@ -81,22 +81,20 @@ main (int argc, char *argv[])
 	}
 	double w = atof(argv[1]);
 
+	double delta = 1.0/((double)nmax);
 	double acc = 0.0;
 	for (i=0; i<nmax; i++)
 	{
-		double x = i/((double)nmax);
+		double x = i*delta;
 
 		/* jitter, as this can make a difference */
 		// x += ((double) rand()) / (RAND_MAX*((double)nmax));
 		
-		// double ts = isola (w, x);
 		double tw = takagi (w, x);
-		double ts = tw;
-		tw = exp (-tw);
-		acc += tw;
-		ts = acc;
+		double ts = exp (-tw);
+		acc += ts*delta;
 
-		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, acc);
 		fflush (stdout);
 	}
 }
