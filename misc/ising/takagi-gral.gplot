@@ -24,7 +24,10 @@ set title " sss"
 set xlabel "s"
 set ylabel "s)"
 
-plot "takagi-gral.dat" using 2:5 title "inter"
+# plot "takagi-gral.dat" using 2:3 title "inter" , \
+#      "takagi-gral.dat" using 2:((2*$4) *$2 ) title "fit"
+
+plot "takagi-gral.dat" using 2:(2*$4-$3) title "ratio" 
 
 # pause 100
 

@@ -83,6 +83,7 @@ main (int argc, char *argv[])
 
 	double delta = 1.0/((double)nmax);
 	double acc = 0.0;
+	double acc2 = 0.0;
 	for (i=0; i<nmax; i++)
 	{
 		double x = i*delta;
@@ -94,7 +95,16 @@ main (int argc, char *argv[])
 		double ts = exp (-tw);
 		acc += ts*delta;
 
-		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, acc);
+		/* and now, by half .. */ 
+		if (i%2 == 0) {
+			tw = takagi (w, 0.5*x);
+			ts = exp (-tw);
+			acc2 += ts*delta;
+		}
+
+		double fit = acc2;
+		
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, acc, fit, fit-acc);
 		fflush (stdout);
 	}
 }
