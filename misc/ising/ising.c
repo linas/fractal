@@ -45,7 +45,16 @@ double tent (double s)
 	return (s>0.5)? 2.0*s : 2.0*(1.0-s);
 }
 
-/* Kac Model (which has shae of tent or cantor polynomial.) */
+// The farey/isola map
+double pointy (double x)
+{
+	double t = x - floor(x);
+	if (0.5 < t) return (1.0-t)/t;
+	return t/(1.0-t);
+}
+
+
+/* Kac Model (which has shape of tent or cantor polynomial.) */
 double kac (double s)
 {
 	double lambda = 0.6666;
@@ -110,7 +119,7 @@ double partition (double (*interaction)(double), int n)
 
 		double en = energy (interaction, s, n);
 
-		z += exp (en);
+		z += om * exp (en);
 
 		printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g\n", i, s, interaction(s), en, z);
 	}
@@ -132,8 +141,9 @@ main (int argc, char * argv[])
 	n = atoi (argv[1]);
 
 	printf ("#\n# n=%d\n#\n",n);
-	partition (nearest_neighbor, n);
+	// partition (nearest_neighbor, n);
 	// partition (pabola, n);
-	// partition (tent, n);
+	partition (tent, n);
 	// partition (kac, n);
+	// partition (pointy, n);
 }
