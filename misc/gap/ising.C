@@ -37,7 +37,8 @@ long double takagi (long double w, long double x)
 	for (k=0; k<50; k++)
 	{
 		// long double term = tw* balanced_triangle (tp*x);
-		long double term = tw* triangle (tp*x);
+		// long double term = tw* triangle (tp*x);
+		long double term = tw* fabs(sin (tp*x*M_PI));
 		acc += term;
 		tp *= 2.0L;
 		tw *= w;
@@ -145,11 +146,14 @@ main (int argc, char *argv[])
 		// double ts = exp (-tw);
 		// double ts = pow (4.0, -tw);
 		// double ts = pow (M_PI, -tw);
-		// double ts = pow (base, -tw);
+		double ts = pow (base, -tw);
+		accr += ts* dh;
+#ifdef POLAR_PLOT
 		double ts = cos (base*tw);
 		accr += ts* dh;
 		ts = sin (base*tw);
 		acci += ts* dh;
+#endif
 
 		if (x <= 0.5) norm = accr;
 		if (x > 1.0) break;
@@ -157,9 +161,9 @@ main (int argc, char *argv[])
 		if (x> xlast + step) {
 			fa = InvFarey(x);
 			xlast += step;
-			printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, accr, acci, fa);
+			// printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, accr, acci, fa);
 			xa[ia] = x;
-			twa[ia] = tw;
+			twa[ia] = ts;
 			accar[ia] = accr;
 			accai[ia] = acci;
 			faa[ia] = fa;
@@ -168,7 +172,6 @@ main (int argc, char *argv[])
 
 		// fflush (stdout);
 	}
-return 0;
 
 	norm = 2.0*norm;
 	norm = 1.0/norm;
