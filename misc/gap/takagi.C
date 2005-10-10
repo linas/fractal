@@ -102,8 +102,8 @@ long double takagi (long double w, long double x)
 	long double tp = 1.0L;
 	for (k=0; k<50; k++)
 	{
-		// long double term = tw* triangle (tp*x);
-		long double term = tw* balanced_triangle (tp*x);
+		long double term = tw* triangle (tp*x);
+		// long double term = tw* balanced_triangle (tp*x);
 		// long double term = tw* parabola_down (tp*x);
 		// long double term = tw* parabola_up (tp*x);
 		acc += term;
@@ -208,7 +208,9 @@ double sin_takagi (double w, double x)
 	double tp = 1.0;
 	for (k=0; k<10000000; k++)
 	{
-		acc += tw* (1.0 - cos(tp*x*(2.0*M_PI)))*0.5;
+		// acc += tw* (1.0 - cos(tp*x*(2.0*M_PI)))*0.5;
+		// acc += tw* sin(tp*x*M_PI);
+		acc += tw* fabs(sin(tp*x*M_PI));
 		tp *= 2.0;
 		tw *= w;
 		if (1.0e-14 > tw) break;
@@ -569,17 +571,17 @@ main (int argc, char *argv[])
 		
 		// double ts = isola (w, x);
 		double tw = takagi (w, x);
-		double ts = tw;
-		tw = exp (-tw);
-		acc += tw;
-		ts = acc;
+		// double ts = tw;
+		// tw  = exp (-tw);
+		// acc += tw;
+		// ts = acc;
 		// double tw = iter_tak (w, x);
 
 		// double tw = dirichlet_takagi (w, x);
 		// double tw = plicative_takagi (w, x);
 		// double ts = 2.0*gsl_sf_zeta (w) / 3.0 -0.5 - pow(2.0, -w)/3.0;
 
-		// double ts = sin_takagi (w, x);
+		double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
 		// double tw = log (takagi(w,x));
 		// double tw = ttakagi(w,x);
