@@ -37,8 +37,8 @@ long double takagi (long double w, long double x)
 	for (k=0; k<50; k++)
 	{
 		// long double term = tw* balanced_triangle (tp*x);
-		// long double term = tw* triangle (tp*x);
-		long double term = tw* fabs(sin (tp*x*M_PI));
+		long double term = tw* triangle (tp*x);
+		// long double term = tw* fabs(sin (tp*x*M_PI));
 		acc += term;
 		tp *= 2.0L;
 		tw *= w;
@@ -48,6 +48,10 @@ long double takagi (long double w, long double x)
 	return acc;
 }
 
+// ===============================================
+// A simple minded integer variation.  Performs
+// only a finite sum
+// 
 /* x = p / 2**n */
 int itriangle (int p, int n)
 {
@@ -83,34 +87,72 @@ long double itakagi (long double w, int p, int n)
 }
 
 // ===============================================
+// Try to perform the full summation, in pure integer format.
+//  x = p / q;
+// 
+
+long double iexact_takagi (long double w, long long p, long long q)
+{
+	int k;
+
+	/* first,sum up the transient bit */
+	long double tracc = 0.0L;
+	long double tw = 1.0L;
+	while(1)
+	{
+		p *= 2;
+		if (p >= q) break;
+printf ("duude trans p=%d\n", p);
+		tracc += tw * ((long double) p);
+		tw *= w;
+	}
+
+	/* make note of the start at the peak. */
+	long long pstart = p/2;
+	int len = 1;
+	long double tran_tw = tw;
+printf ("duude pstart = %d\n", pstart);
+	
+	p = 2*q-p;
+	long double repacc = ((long double) p);
+	tw = w;
+	
+printf ("duude repeat starts with p=%d\n", p);
+	/* Now, sum up the repeating part */
+	while (p != pstart)
+	{
+		p *= 2;
+		if (p >= q) 
+		{
+			p = 2*q-p;
+		}
+printf ("duude len=%d rep p=%d\n", len, p);
+		repacc += tw * ((long double) p);
+		len ++;
+		tw *= w;
+	}
+
+printf ("dude exit len=%d, tw=%Lg\n", len, tw);
+printf ("dude trac =%Lg trantw=%Lg repacc=%Lg\n", tracc, tran_tw, repacc);
+	long double acc = tracc + tran_tw * repacc / (1.0L - tw);
+
+	acc /= (long double) q;
+printf ("duude result = %Lg\n", acc);
+	return acc;
+}
+
+// ===============================================
 // ===============================================
 
-int
-main (int argc, char *argv[])
+void
+do_integral (int p, double w, double base)
 {
 	ContinuedFraction fr;
-
 	int i;
-
-	if (argc <4)
-	{
-		printf ("Usage: %s <log2-len> <w-value> <exp-base>\n", argv[0]);
-		exit (1);
-	}
-	int p = atoi (argv[1]);
-	double w = atof(argv[2]);
-	double base = atof(argv[3]);
 	
-	// int nmax = 512;
 	// int nmax = 432;
-	// int nmax = 1717;
-	// int nmax = 2048;
-
 	int nmax = 1<<p;
 	
-	double scale = sqrt ((double) nmax);
-	printf ("#\n# scale=%g\n#\n", scale);
-
 	double fa = 0.0;
 	double accr = 0.0;
 	double acci = 0.0;
@@ -158,6 +200,12 @@ main (int argc, char *argv[])
 		if (x <= 0.5) norm = accr;
 		if (x > 1.0) break;
 
+if(x>0.5) {
+	printf ("%g	%g\n", w, norm);
+	fflush (stdout);
+	return;
+}
+
 		if (x> xlast + step) {
 			fa = InvFarey(x);
 			xlast += step;
@@ -182,9 +230,31 @@ main (int argc, char *argv[])
 		// fr.SetReal (acca[i]);
 		// double y = fr.ToFarey();
 		// faa[i] = xa[i] - y;
-		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, xa[i], twa[i], accar[i], accai[i], faa[i]);
+		// printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, xa[i], twa[i], accar[i], accai[i], faa[i]);
 	}
 	printf ("#\n# last= %f\n", accr);
 	fprintf (stderr, "#\n# last= %g\n", accr);
 	fprintf (stderr, "#\n# norm= %g\n", norm);
+}
+
+int
+main (int argc, char *argv[])
+{
+	iexact_takagi (0.99, 1, 3);
+	exit(1);
+
+	if (argc <4)
+	{
+		printf ("Usage: %s <log2-len> <w-value> <exp-base>\n", argv[0]);
+		exit (1);
+	}
+	int p = atoi (argv[1]);
+	double w = atof(argv[2]);
+	double base = atof(argv[3]);
+	
+	// do_integral (p,w,base);
+	
+	for (w=0.8; w < 1.0; w+= 0.005) { 
+		do_integral (p,w,base);
+	}
 }

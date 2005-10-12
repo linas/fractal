@@ -6,8 +6,8 @@
 set term png small
 set out 'ising.png'
 
-# set data style linespoints
-set data style lines
+set data style linespoints
+# set data style lines
 set key right
 
 set title "Ising Curve"
@@ -22,12 +22,16 @@ set ylabel "F(x)"
 # plot "ising.dat" using 2:($4/   12.4352  ) title "ising", \
 
 
-plot "ising.dat" using 2:4 title "ising", \
-    "ising.dat" using 2:6 title "farey"
+# plot "ising.dat" using 2:4 title "ising", \
+#    "ising.dat" using 2:6 title "farey"
 
 # plot "ising.dat" using 2:4 title ""
 
-# plot "ising.dat" using 2:5 title "err"
+# plot "ising.dat" using (log(1-$1)):(log($2)) title "div"
+# plot "ising.dat" using (1-$1):(log($2)) title "div"
+# plot "ising.dat" using (1-$1):(((1-$1)**1.8)*log($2)) title "div"
+plot "ising.dat" using (1-$1):($2*exp(0.5*1.0986/(1-$1))) title "div"
+# plot "ising.dat" using (1-$1):($2/((1-$1)**7)) title "div"
 
 
 
