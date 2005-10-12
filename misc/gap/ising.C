@@ -93,8 +93,14 @@ long double itakagi (long double w, int p, int n)
 
 long double iexact_takagi (long double w, long long p, long long q)
 {
-	int k;
+	long long pee = p;
 
+	if (0 == p)
+	{
+		fprintf (stderr, "P is zero!! \n");
+		return 0.0L;
+	}
+	
 	/* first,sum up the transient bit */
 	long double tracc = 0.0L;
 	long double tw = 1.0L;
@@ -102,7 +108,6 @@ long double iexact_takagi (long double w, long long p, long long q)
 	{
 		p *= 2;
 		if (p >= q) break;
-printf ("duude trans p=%d\n", p);
 		tracc += tw * ((long double) p);
 		tw *= w;
 	}
@@ -111,13 +116,12 @@ printf ("duude trans p=%d\n", p);
 	long long pstart = p/2;
 	int len = 1;
 	long double tran_tw = tw;
-printf ("duude pstart = %d\n", pstart);
 	
+	/* one term by hand */
 	p = 2*q-p;
 	long double repacc = ((long double) p);
 	tw = w;
 	
-printf ("duude repeat starts with p=%d\n", p);
 	/* Now, sum up the repeating part */
 	while (p != pstart)
 	{
@@ -126,18 +130,21 @@ printf ("duude repeat starts with p=%d\n", p);
 		{
 			p = 2*q-p;
 		}
-printf ("duude len=%d rep p=%d\n", len, p);
 		repacc += tw * ((long double) p);
 		len ++;
 		tw *= w;
+		if (len > 60) 
+		{
+			fprintf (stderr, "oh no len too long!!!!\n");
+			break;
+		}
 	}
+printf ("x=%lld/%lld len=%d\n", pee,q, len);
 
-printf ("dude exit len=%d, tw=%Lg\n", len, tw);
-printf ("dude trac =%Lg trantw=%Lg repacc=%Lg\n", tracc, tran_tw, repacc);
+	/* Result is transient plus repeating */
 	long double acc = tracc + tran_tw * repacc / (1.0L - tw);
 
 	acc /= (long double) q;
-printf ("duude result = %Lg\n", acc);
 	return acc;
 }
 
@@ -172,17 +179,21 @@ do_integral (int p, double w, double base)
 
 	double delta = 1.0 / ((double)nmax);
 	double x = 0.0;
-	for (i=1; i<nmax+30; i++)
+	for (i=1; x < 1.0; i++)
 	{
 		// x = i* delta;
 
 		/* jitter, as this can make a difference */
-		double dh = ((double) rand()) / ((double)RAND_MAX);
+		double dh = ((double) rand()) / (((double)RAND_MAX)+1.0);
 		dh *= 2.0*delta;
 		x += dh;
 		
 		// double ts = isola (w, x);
-		double tw = takagi (w, x);
+		// double tw = takagi (w, x);
+		double q = 3.0 + 458.0 * ((double) rand()) / (((double)RAND_MAX)+1.0);
+		long long deno = (long long ) q;
+		long long num = (long long) (x* ((double) deno));
+		double tw = iexact_takagi (w, num, deno);
 		// double tw = itakagi (w, i, p);
 		
 		// double ts = exp (-tw);
@@ -240,9 +251,6 @@ if(x>0.5) {
 int
 main (int argc, char *argv[])
 {
-	iexact_takagi (0.99, 1, 3);
-	exit(1);
-
 	if (argc <4)
 	{
 		printf ("Usage: %s <log2-len> <w-value> <exp-base>\n", argv[0]);
