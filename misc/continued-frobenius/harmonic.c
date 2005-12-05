@@ -7,6 +7,7 @@
  */
 
 #include <math.h>
+#include <stdio.h>
 
 double harmonic (int n)
 {
@@ -56,22 +57,25 @@ double gosper_z (double z)
 		zn *= -z;
 	}
 
-	acc *= exp (z);
+	acc *= -exp (z);
 
 	return acc;
 }
 
 
-main () {
+int
+main () 
+{
 	int i;
 
 	for (i=0; i<20; i++)
 	{
 		double z = 0.05*i;
 
-		double h = hamonic_z (z);
+		double h = harmonic_z (z);
 		double g = gosper_z (z);
-		printf ("its z=%g h=%g  g=%g\n", z,h,g);
+		printf ("its z=%g h=%g  g=%g\n", z,h,h-g);
 	}
 
+	return 0;
 }
