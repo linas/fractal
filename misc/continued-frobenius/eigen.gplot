@@ -1,0 +1,43 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small color
+set out 'eigen.png'
+
+# set data style linespoints
+set data style lines
+set key right
+set xzeroaxis
+
+set title "Characteristic Equation of H"
+set xlabel "lambda"
+set ylabel "v"
+
+# set yrange [0:]
+
+#	"eigen.dat" using 1:4 title "eigen 4", \
+
+#plot \
+#	"eigen.dat" using 1:5 title "eigen 5", \
+#	"eigen.dat" using 1:6 title "eigen 6", \
+#	"eigen.dat" using 1:7 title "eigen 7", \
+#	"eigen.dat" using 1:8 title "eigen 8", \
+#	"eigen.dat" using 1:9 title "eigen 9", \
+#	"eigen.dat" using 1:10 title "eigen 10", \
+#	"eigen.dat" using 1:11 title "eigen 11" \
+
+plot \
+	"eigen.dat" using 1:(log($4)) title "eigen 4", \
+	"eigen.dat" using 1:(log($5)) title "eigen 5", \
+	"eigen.dat" using 1:(log($6)) title "eigen 6", \
+	"eigen.dat" using 1:(log($7)) title "eigen 7", \
+	"eigen.dat" using 1:(log($8)) title "eigen 8", \
+	"eigen.dat" using 1:(log($9)) title "eigen 9", \
+	"eigen.dat" using 1:(log($10)) title "eigen 10", \
+	"eigen.dat" using 1:(log($11)) title "eigen 11" \
+
+
+# pause 100
+
