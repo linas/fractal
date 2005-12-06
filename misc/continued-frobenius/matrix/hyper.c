@@ -189,7 +189,10 @@ int main (int argc, char * argv[])
 	/* print the eigenvalues */
 	for (i=0; i<dim; i++)
 	{
-		printf ("# eigen[%d]=%20.15g +i %g\n", i, val[2*i], val[2*i+1]);
+		double re = val[2*i];
+		double im = val[2*i+1];
+		double md = sqrt (re*re+im*im);
+		printf ("# eigen[%d]=%20.15g +i %g = |%g|\n", i, re, im, md);
 	}
 	printf ("\n\n");
 	
@@ -200,7 +203,7 @@ int main (int argc, char * argv[])
 		for (j=0; j<prtdim; j++)
 		{
 			printf ("# right %d'th eigenvector[%d]=%g +i %g\n", 
-			            i,j, rev[j+i*dim], rev[j+i*dim+1]);
+			            i,j, rev[2*(j+i*dim)], rev[2*(j+i*dim)+1]);
 		}
 		printf ("#\n");
 	}
@@ -227,9 +230,13 @@ int main (int argc, char * argv[])
 			complex double sum = 0.0;
 			for (k=0; k<dim; k++)
 			{
-				complex double v = rev[k+i*dim] + I * rev[k+i*dim+1];
+				complex double v = rev[2*(k+i*dim)] + I * rev[2*(k+i*dim)+1];
 				sum += compose(j+nc,k+nc) * v;
 			}
+			double re = val[2*i];
+			double im = val[2*i+1];
+			complex double eiv = re + I* im;
+			sum /= eiv;
 			printf ("# %d'th eigenvec validation [%d]=%g+ i%g\n", 
 				i, j, creal(sum), cimag(sum));
 		}
