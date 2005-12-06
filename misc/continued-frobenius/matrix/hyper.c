@@ -16,13 +16,15 @@
  * Linas Vepstas December 2005
  */
 
+#include <complex.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "lapack.h"
 
 int 
-getworkdim (int dim, double *matrix,
+getworkdim (int dim, 
         double *matrix,  /* double precision complex */
         double *eigenvalues,
 		  double *left_vec, double *right_vec,
@@ -30,7 +32,6 @@ getworkdim (int dim, double *matrix,
 {
 	char jobvl = 'V';
 	char jobvr = 'V';
-	int workdim;
 	int info;
 
 	workdim = -1;
@@ -40,7 +41,7 @@ getworkdim (int dim, double *matrix,
 			 left_vec, &dim, right_vec, &dim, 
 			 workspace_a, &workdim, workspace_b, &info);
 
-	return (int) (workspace[0]+0.5);
+	return (int) (workspace_a[0]+0.5);
 }
 
 int 
@@ -62,11 +63,46 @@ get_complex_eigen (int dim,
 
 }
 
-main () 
+/* --------------------------------------------------- */
+
+complex double in (int n)
+{
+	if (n%4 == 0) return 1.0;
+	if (n%4 == 1) return I;
+	if (n%4 == 2) return -1.0;
+	if (n%4 == 3) return -I;
+	return 0.0;
+}
+
+complex double compose (int m, int n)
+{
+	complex double ret;
+
+	if (m == n)
+	{
+		if (0 == m) return (complex double) 1.0;
+
+		ret = 0.25 + (in(n) - 1.0)/ (3.0*M_PI*I*n);
+		return ret;
+	}
+	if (m == 2*n)
+	{
+		return ret;
+	}
+	if (n == 2*n)
+	{
+		return ret;
+	}
+
+	return ret;
+}
+  
+/* --------------------------------------------------- */
+
+int main (int argc, char * argv[]) 
 {
 	double *mat;
-	double *ere;
-	double *eim;
+	double *val;
 	double *lev;
 	double *rev;
 	double *work;
@@ -95,10 +131,14 @@ main ()
 		{
 			/* Note transposed matrix'ing for FORTRAN */
 			// mat[i+j*dim] = ache_mp(i,j);
-			mat[i+j*dim] = sst(i,j);
+			// mat[i+j*dim] = sst(i,j);
 		}
 	}
 
+	complex double v = compose (1,1);
+	printf ("duude %g + i %g \n", creal (v), cimag (v));
+
+#if 0
 	int wd = getworkdim (dim, mat, ere, eim, lev, rev, work);
 	printf ("# recommended dim=%d actual dim=%d\n#\n", wd, workdim);
 	// workdim = wd;
@@ -182,4 +222,5 @@ main ()
 		}
 		printf ("\n");
 	}
+#endif
 }

@@ -3,16 +3,17 @@
 # Makefile that uses lapack for matrix operations
 #
 
-all: eigen comb
+all: hyper eigen comb hyper
 
 OBJS=../ache.o ../zetafn.o
 
-eigen: eigen.o 
+comb: comb.o $(OBJS)
+eigen: eigen.o $(OBJS)
 
-comb: comb.o
+hyper: hyper.o 
 
 .o:
-	cc -o $@ $< $(OBJS) -llapack -lf77blas -latlas -lg2c -lm
+	cc -o $@ $^ -llapack -lf77blas -latlas -lg2c -lm
 
 .c.o:
 	cc -g -O2 -c $< -I..
