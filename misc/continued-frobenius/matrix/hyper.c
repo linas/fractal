@@ -62,6 +62,7 @@ get_complex_eigen (int dim,
 			 left_vec, &dim, right_vec, &dim, 
 			 workspace_a, &workdim, workspace_b, &info);
 
+	printf ("# duuude info = %d\n", info);
 }
 
 /* --------------------------------------------------- */
@@ -142,12 +143,12 @@ int main (int argc, char * argv[])
 	double *val;
 	double *lev;
 	double *rev;
-	double *work;
+	double *worka, *workb;
 	int dim;
 	int workdim;
 	int i,j, k;
 	
-	dim = 9;
+	dim = 3;
 	int nc = - (dim-1)/2;
 
 	printf ("#\n#\n");
@@ -160,7 +161,8 @@ int main (int argc, char * argv[])
 	lev = (double *) malloc (2*dim*dim*sizeof (double));
 	rev = (double *) malloc (2*dim*dim*sizeof (double));
 	workdim = 8*dim*dim;
-	work = (double *) malloc (workdim*sizeof (double));
+	worka = (double *) malloc (workdim*sizeof (double));
+	workb = (double *) malloc (workdim*sizeof (double));
 
 	/* Insert values for the GKW operator at x=1 (y=1-x) */
 	for (i=0; i<dim; i++)
@@ -169,40 +171,41 @@ int main (int argc, char * argv[])
 		{
 			/* Note transposed matrix'ing for FORTRAN */
 			complex double v = compose (i+nc,j+nc);
-			mat[i+j*dim] = creal(v);
-			mat[i+j*dim+1] = cimag(v);
-			// printf ("duude m(%d %d) = %g + i %g \n", i+nc, j+nc, creal (v), cimag (v));
+			mat[2*(i+j*dim)] = creal(v);
+			mat[2*(i+j*dim)+1] = cimag(v);
+			printf ("# m[%d, %d] = %g + i %g\n", i+nc, j+nc, creal (v), cimag (v));
 		}
 	}
 
 
-	int wd = getworkdim (dim, mat, val, lev, rev, work);
+	int wd = getworkdim (dim, mat, val, lev, rev, worka, workb);
 	printf ("# recommended dim=%d actual dim=%d\n#\n", wd, workdim);
 	// workdim = wd;
 	
-#if 0
-	work = (double *) realloc (work, workdim*sizeof (double));
-	geteigen (dim, mat, ere, eim, lev, rev, workdim, work);
+	// work = (double *) realloc (work, workdim*sizeof (double));
+	get_complex_eigen (dim, mat, val, lev, rev, workdim, worka, workb);
 
 	/* ---------------------------------------------- */
 	/* print the eigenvalues */
 	for (i=0; i<dim; i++)
 	{
-		printf ("# eigen[%d]=%20.15g +i %g\n", i, ere[i], eim[i]);
+		printf ("# eigen[%d]=%20.15g +i %g\n", i, val[2*i], val[2*i+1]);
 	}
 	printf ("\n\n");
 	
-	int prtdim = 6;
+	int prtdim = 9;
+	if (prtdim > dim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
 	{
 		for (j=0; j<prtdim; j++)
 		{
-			printf ("# right %d'th eigenvector[%d]=%g (normalized=%g)\n", 
-			            i,j, rev[j+i*dim], rev[j+i*dim]/rev[i*dim]);
+			printf ("# right %d'th eigenvector[%d]=%g +i %g\n", 
+			            i,j, rev[j+i*dim], rev[j+i*dim+1]);
 		}
 		printf ("#\n");
 	}
 	
+#if 0
 	for (i=0; i<prtdim; i++)
 	{
 		for (j=0; j<prtdim; j++)
@@ -212,6 +215,7 @@ int main (int argc, char * argv[])
 		}
 		printf ("#\n");
 	}
+#endif
 	
 	/* ---------------------------------------------- */
 	/* Verify i'th eigenvector */
@@ -220,17 +224,19 @@ int main (int argc, char * argv[])
 		/* The j'th element of the i'th eigenvector */
 		for (j=0; j<prtdim; j++)
 		{
-			double sum = 0.0;
+			complex double sum = 0.0;
 			for (k=0; k<dim; k++)
 			{
-				sum += ache_mp(j,k) * rev[k+i*dim];
+				complex double v = rev[k+i*dim] + I * rev[k+i*dim+1];
+				sum += compose(j+nc,k+nc) * v;
 			}
-			sum /= rev[j+i*dim];
-			printf ("# %d'th eigenvec validation [%d]=%g\n", i, j, sum);
+			printf ("# %d'th eigenvec validation [%d]=%g+ i%g\n", 
+				i, j, creal(sum), cimag(sum));
 		}
 		printf ("#\n");
 	}
 
+#if 0
 	/* ---------------------------------------------- */
 	/* Print graphable data */
 	double y;
