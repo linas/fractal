@@ -148,7 +148,7 @@ int main (int argc, char * argv[])
 	int workdim;
 	int i,j, k;
 	
-	dim = 3;
+	dim = 9;
 	int nc = - (dim-1)/2;
 
 	printf ("#\n#\n");
@@ -213,12 +213,11 @@ int main (int argc, char * argv[])
 	{
 		for (j=0; j<prtdim; j++)
 		{
-			printf ("# left %d'th eigenvector[%d]=%g (normalized=%g)\n", 
-			            i,j, lev[j+i*dim], lev[j+i*dim]/lev[i*dim]);
+			printf ("# left %d'th eigenvector[%d]=%g +i %g\n", 
+			            i,j, lev[2*(j+i*dim)], lev[2*(j+i*dim)+1]);
 		}
 		printf ("#\n");
 	}
-#endif
 	
 	/* ---------------------------------------------- */
 	/* Verify i'th eigenvector */
@@ -242,36 +241,25 @@ int main (int argc, char * argv[])
 		}
 		printf ("#\n");
 	}
+#endif
 
-#if 0
 	/* ---------------------------------------------- */
 	/* Print graphable data */
-	double y;
-	for (y=1.0; y>=0.0; y-=0.02)
+	i = 1;  // which egenvector
+	double x;
+	for (x=0.0; x<1.0; x+=0.02)
 	{
-		double x = 1.0-y;
 		printf ("%g", x);
-		// validate that the zeroth eignevec is 1/(1+x)
-		// printf ("\t%g", 1.73205/(1.0+x));
-		for (i=0; i<prtdim; i++)
+
+		double complex sum = 0.0;
+		/* The j'th element of the i'th eigenvector */
+		for (j=0; j<dim; j++)
 		{
-			double yn = 1.0;
-			double sum = 0.0;
-			double fact = 1.0;
-			/* The j'th element of the i'th eigenvector */
-			for (j=0; j<dim; j++)
-			{
-				// Factorial not needed, ache already has the factorial folded in.
-				// See, for example, the derives of seroth eigenvec. 
-				// sum += yn * rev[j+i*dim] / fact;
-				sum += yn * rev[j+i*dim];
-				// printf ("duuude j=%d fact=%g yn=%g\n", j, fact, yn);
-				yn *= y;
-				fact *= j+1;
-			}
-			printf("\t%g", -sum);
+			int k = j+nc;
+			complex double ex = cexp (2.0*M_PI*I*k*x);
+			complex double v = rev[2*(j+i*dim)] + I * rev[2*(j+i*dim)+1];
+			sum += v*ex;
 		}
-		printf ("\n");
+		printf("\t%g\t%g\n", sum);
 	}
-#endif
 }
