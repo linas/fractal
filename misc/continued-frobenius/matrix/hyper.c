@@ -1,6 +1,8 @@
-
 /*
  * Eigenvalue finding
+ * Find eigenvalues of the simple hyperbolic
+ * composition operator
+ *
  * Call lapack from C code.
  *
  * Get Schur factorization,
@@ -8,29 +10,24 @@
  * T is triangular.
  *
  * Use LAPACK xGEEV routine
- * specifically, real double precision:
- * DGEEV
+ * specifically, complex double precision:
+ * ZGEEV
  *
- * Apply to find eigenvalues of the Gauss-Kuz'min-Wirsing operator
- *
- * Linas Vepstas September 2004
+ * Linas Vepstas December 2005
  */
 
 #include <math.h>
 #include <stdio.h>
 
-#include "ache.h"
-#include "zetafn.h"
 #include "lapack.h"
-
 
 int 
 getworkdim (int dim, double *matrix,
-        double *eigenvalues_re, double *eigenvalues_im, 
-		  double *left_eigen, double *right_eigen,
-		  double *workspace)
+        double *matrix,  /* double precision complex */
+        double *eigenvalues,
+		  double *left_vec, double *right_vec,
+		  int workdim, double *workspace_a, double *workspace_b)
 {
-
 	char jobvl = 'V';
 	char jobvr = 'V';
 	int workdim;
@@ -38,47 +35,31 @@ getworkdim (int dim, double *matrix,
 
 	workdim = -1;
 
-	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
-	       eigenvalues_re, eigenvalues_im, 
-			 left_eigen, &dim, right_eigen, &dim, 
-			 workspace, &workdim, &info);
+	zgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
+	       eigenvalues, 
+			 left_vec, &dim, right_vec, &dim, 
+			 workspace_a, &workdim, workspace_b, &info);
 
 	return (int) (workspace[0]+0.5);
 }
 
 int 
-geteigen (int dim, double *matrix, 
-        double *eigenvalues_re, double *eigenvalues_im, 
-		  double *left_eigen, double *right_eigen,
-		  int workdim, double *workspace)
+get_complex_eigen (int dim, 
+        double *matrix,  /* double precision complex */
+        double *eigenvalues,
+		  double *left_vec, double *right_vec,
+		  int workdim, double *workspace_a, double *workspace_b)
 {
 
 	char jobvl = 'V';
 	char jobvr = 'V';
 	int info;
 
-	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
-	       eigenvalues_re, eigenvalues_im, 
-			 left_eigen, &dim, right_eigen, &dim, 
-			 workspace, &workdim, &info);
+	zgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
+	       eigenvalues, 
+			 left_vec, &dim, right_vec, &dim, 
+			 workspace_a, &workdim, workspace_b, &info);
 
-}
-
-double 
-kino (int m, int n)
-{
-	if (m != n-2) return 0.0;
-	return (double) (n*(n+1));
-}
-
-double sst (int i, int j)
-{
-	double lam;
-	if (i>j) return 0.0;
-	lam = pow (2.0, (double) (j+1)) -1.0;
-	double bin = binomial (j,i);
-	printf ("mat(%d, %d) = %g/%g\n", i,j,bin,lam);
-	return bin /lam;
 }
 
 main () 
@@ -96,16 +77,15 @@ main ()
 	dim = 6;
 
 	printf ("#\n#\n");
-	printf ("# Eigenvectors of the GKW (Gauss Kuz'min Wirsing) Operator\n");
+	printf ("# Eigenvectors of hyperbolic composition \n");
 	printf ("# Numerically solved to rank=%d\n", dim);
 	printf ("#\n#\n");
 
-	mat = (double *) malloc (dim*dim*sizeof (double));
-	ere = (double *) malloc (dim*sizeof (double));
-	eim = (double *) malloc (dim*sizeof (double));
-	lev = (double *) malloc (dim*dim*sizeof (double));
-	rev = (double *) malloc (dim*dim*sizeof (double));
-	workdim = 4*dim*dim;
+	mat = (double *) malloc (2*dim*dim*sizeof (double));
+	val = (double *) malloc (2*dim*sizeof (double));
+	lev = (double *) malloc (2*dim*dim*sizeof (double));
+	rev = (double *) malloc (2*dim*dim*sizeof (double));
+	workdim = 8*dim*dim;
 	work = (double *) malloc (workdim*sizeof (double));
 
 	/* Insert values for the GKW operator at x=1 (y=1-x) */
@@ -119,18 +99,6 @@ main ()
 		}
 	}
 
-#if POORLY_CONDITIONED_BOMB_OUT_KINETIC
-	/* Add in the kinetic term ! */
-	for (i=0; i<dim; i++)
-	{
-		for (j=0; j<dim; j++)
-		{
-			/* Note transposed matrix'ing for FORTRAN */
-			mat[i+j*dim] -= kino(i,j);
-		}
-	}
-#endif
-	
 	int wd = getworkdim (dim, mat, ere, eim, lev, rev, work);
 	printf ("# recommended dim=%d actual dim=%d\n#\n", wd, workdim);
 	// workdim = wd;
