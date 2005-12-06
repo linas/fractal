@@ -1,0 +1,26 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small 
+set out 'hyper.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "- hyperbolic compose"
+set xlabel "x"
+set ylabel "Density"
+
+# set yrange [0:]
+
+plot "hyper.dat" using 1:2 title "re",\
+     "hyper.dat" using 1:3 title "im", \
+     "hyper.dat" using 1:4 title "mag"
+
+
+# pause 100
+

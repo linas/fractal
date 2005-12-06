@@ -149,6 +149,13 @@ int main (int argc, char * argv[])
 	int i,j, k;
 	
 	dim = 9;
+
+	if (3 > argc) {
+		fprintf (stderr, "Usage: %s <dim> <vecno>\n", argv[0]);
+		exit (-1);
+	}
+	dim = atoi (argv[1]);
+	int nplot = atoi(argv[2]);
 	int nc = - (dim-1)/2;
 
 	printf ("#\n#\n");
@@ -245,9 +252,9 @@ int main (int argc, char * argv[])
 
 	/* ---------------------------------------------- */
 	/* Print graphable data */
-	i = 1;  // which egenvector
+	i = nplot;  // which egenvector
 	double x;
-	for (x=0.0; x<1.0; x+=0.02)
+	for (x=0.0; x<1.0; x+=0.005)
 	{
 		printf ("%g", x);
 
@@ -260,6 +267,9 @@ int main (int argc, char * argv[])
 			complex double v = rev[2*(j+i*dim)] + I * rev[2*(j+i*dim)+1];
 			sum += v*ex;
 		}
-		printf("\t%g\t%g\n", sum);
+		double re = creal(sum);
+		double im = cimag(sum);
+		double mg = sqrt(re*re + im*im);
+		printf("\t%g\t%g\t%g\n", re, im, mg);
 	}
 }
