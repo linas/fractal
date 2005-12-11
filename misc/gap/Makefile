@@ -10,7 +10,7 @@ EXES= c-takagi conj dyadic entropy exacto fdist feigen \
       fiddle fliptree gappy gkw ising mod moebius \
       mute orbit orbit-s padic \
       pair pegs quest rand-measure rdist summy swap sway sym \
-      sym-fun takagi tent-map theta tree vanish zeta
+      sym-fun takagi takagi-n tent-map theta tree vanish zeta
 
 all: 	$(EXES)
 
@@ -31,6 +31,7 @@ dist:
 
 
 c-takagi.o:	c-takagi.c
+takagi-n.o:	takagi-n.C
 conj.o:	conj.c
 dyadic.o:	dyadic.C
 entropy.o:  entropy.C $(LIB)/Farey.o $(INC)/Farey.h
