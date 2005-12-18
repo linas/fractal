@@ -1,0 +1,3 @@
+
+
+polynomial.o:	polynomial.c
