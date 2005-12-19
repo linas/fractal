@@ -6,6 +6,8 @@
  */
 
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define MAXORDER 100
 
@@ -80,15 +82,18 @@ poly_eval (Poly *a, double val)
 typedef struct 
 {
 	double sigma;
-	double mu;
+	double mean;
 	Poly derivs[MAXTERMS];
 } Gaussian;
 
-void 
-setup_gaussians (Gaussian *g, double sigma, double mu)
+Gaussian *
+gaussian_new (double mu, double sigma)
 {
+	Gaussian *g;
+	g = (Gaussian *) malloc (sizeof (Gaussian));
+
 	g->sigma = sigma;
-	g->mu = mu;
+	g->mean = mu;
 
 	int i;
 	for(i=0; i<MAXTERMS; i++)
@@ -106,14 +111,42 @@ setup_gaussians (Gaussian *g, double sigma, double mu)
 		poly_differntiate (&d,  &g->derivs[i-1]);
 		poly_clear (&p);
 		poly_mult (&p, &g->derivs[i-1], &g->derivs[1]);
-		poly_sum (&g->derivs[i], &d, &p);
+		poly_add (&g->derivs[i], &d, &p);
 	}
+
+	return g;
 }
 
+/* return the 'order'th derivative of a gaussian, at position val */
 double 
-eval_gaussian (int order, double val)
+gaussian_eval (Gaussian *g, int order, double val)
 {
-	double g;
+	double gv;
+	gv = val - g->mean;
+	gv *= gv;
+	gv /= 2.0 * g->sigma * g->sigma;
 
+	gv = exp (-gv);
+	gv *= poly_eval (&g->derivs[order], val);
+
+	return gv;
 }
 
+
+main () 
+{
+	Gaussian *g;
+
+	g = gaussian_new (0.0, 1.0);
+
+	double x;
+	for (x=0.0; x< 3.0; x+=0.2)
+	{
+		double n0 = gaussian_eval (g, 0, x);
+		double n1 = gaussian_eval (g, 1, x);
+		double n2 = gaussian_eval (g, 2, x);
+		double n3 = gaussian_eval (g, 3, x);
+		printf ("%g	%g	%g	%g	%g\n", x, n0, n1, n2, n3);
+	}
+
+}
