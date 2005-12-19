@@ -6,15 +6,14 @@ LIB = $(TOP)/lib
 
 all: green polynomial
 
-green:	green.o $(LIB)/bernoulli.o
-polynomial:	polynomial.o
+green:	green.o polynomial.o $(LIB)/bernoulli.o $(LIB)/binomial.o
 
 green.o:	green.c
-polynomial.o:	polynomial.c
+polynomial.o:	polynomial.c gaussian.h
 
 .c.o:
 	cc -c -O2 -I $(INC) $<
 
 .o:
-	cc -o $@ $< -lm
+	cc -o $@ $^ -lm
 

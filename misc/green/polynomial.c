@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "gaussian.h"
+
 #define MAXORDER 100
 
 typedef double Poly[MAXORDER];
@@ -83,19 +85,6 @@ poly_print (Poly *in)
 		printf ("n=%d  v=%g\n", i, (*in)[i]);
 	}
 }
-
-#define MAXTERMS 100
-
-/* derivatives of the standard normal distribution 
- * with mean mu and standard deviation sigma 
- */
-typedef struct 
-{
-	double sigma;
-	double mean;
-	double norm;
-	Poly derivs[MAXTERMS];
-} Gaussian;
 
 Gaussian *
 gaussian_new (double mu, double sigma)
