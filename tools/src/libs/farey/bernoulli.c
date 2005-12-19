@@ -13,6 +13,7 @@
 #include <stdlib.h>
 
 #include "bernoulli.h"
+#include "binomial.h"
 
 // ======================================================
 // return the nth' bernoulli number
@@ -106,6 +107,28 @@ int test_bernoulli (void)
 	return !passtest;
 }
 #endif 
+
+// ======================================================
+// return bernoulli polynomial; use simple binomial-coefficient 
+// expansion.
+
+long double bernoulli_poly (int n, long double x)
+{
+	int i;
+	long double acc = 0.0L;
+	long double xn = 1.0;
+	for (i=0; i<=n; i++)
+	{
+		int nm = n-i;
+		if ((nm%2 == 0) || (nm == 1)) 
+		{
+			acc += binomial (n, i) * bernoulli (nm) * xn;
+		}
+		xn *= x;
+	}
+
+	return acc;
+}
 
 // ======================================================
 // test harness

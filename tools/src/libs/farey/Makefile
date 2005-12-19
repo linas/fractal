@@ -21,6 +21,7 @@ all: inc bernoulli.o binomial.o Farey.o FareyTree.o gcf.o harmonic.o \
 inc:	bernoulli.h binomial.h Farey.h FareyTree.h gcf.h harmonic.h \
 	modular.h moebius.h Prime.h totient.h
 	touch inc
+	cp bernoulli.h $(INC)/bernoulli.h
 	cp binomial.h $(INC)/binomial.h
 	cp Farey.h $(INC)/Farey.h
 	cp FareyTree.h $(INC)/FareyTree.h

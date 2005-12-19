@@ -11,4 +11,8 @@
 // must have n>=0
 long double bernoulli (int n);
 
+// return the value of the n'th bernoulli polynomial
+// at the value ''x''
+long double bernoulli_poly (int n, long double x);
+
 #endif /* BERNOULLI_H__ */
