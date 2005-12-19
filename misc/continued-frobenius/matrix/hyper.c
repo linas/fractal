@@ -180,7 +180,7 @@ int main (int argc, char * argv[])
 			complex double v = compose (i+nc,j+nc);
 			mat[2*(i+j*dim)] = creal(v);
 			mat[2*(i+j*dim)+1] = cimag(v);
-			printf ("# m[%d, %d] = %g + i %g\n", i+nc, j+nc, creal (v), cimag (v));
+			// printf ("# m[%d, %d] = %g + i %g\n", i+nc, j+nc, creal (v), cimag (v));
 		}
 	}
 
@@ -254,7 +254,7 @@ int main (int argc, char * argv[])
 	/* Print graphable data */
 	i = nplot;  // which egenvector
 	double x;
-	for (x=0.0; x<1.0; x+=0.005)
+	for (x=0.0; x<1.0; x+=0.0005)
 	{
 		printf ("%g", x);
 
