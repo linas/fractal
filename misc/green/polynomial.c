@@ -74,6 +74,16 @@ poly_eval (Poly *a, double val)
 	return acc;
 }
 
+void 
+poly_print (Poly *in)
+{
+	int i;
+	for (i=0; i<20; i++)
+	{
+		printf ("n=%d  v=%g\n", i, (*in)[i]);
+	}
+}
+
 #define MAXTERMS 100
 
 /* derivatives of the standard normal distribution 
@@ -83,6 +93,7 @@ typedef struct
 {
 	double sigma;
 	double mean;
+	double norm;
 	Poly derivs[MAXTERMS];
 } Gaussian;
 
@@ -94,6 +105,7 @@ gaussian_new (double mu, double sigma)
 
 	g->sigma = sigma;
 	g->mean = mu;
+	g->norm = 1.0 / (sigma * sqrt (2.0 *M_PI));
 
 	int i;
 	for(i=0; i<MAXTERMS; i++)
@@ -102,7 +114,7 @@ gaussian_new (double mu, double sigma)
 	}
 	g->derivs[0][0] = 1.0;
 	g->derivs[1][0] = mu/(sigma*sigma);
-	g->derivs[1][1] = -mu/(sigma*sigma);
+	g->derivs[1][1] = -1.0/(sigma*sigma);
 	
 	for(i=2; i<MAXTERMS; i++)
 	{
@@ -127,26 +139,32 @@ gaussian_eval (Gaussian *g, int order, double val)
 	gv /= 2.0 * g->sigma * g->sigma;
 
 	gv = exp (-gv);
+	gv *= g->norm;
+
 	gv *= poly_eval (&g->derivs[order], val);
 
 	return gv;
 }
 
 
+#ifdef TEST
+
 main () 
 {
 	Gaussian *g;
 
-	g = gaussian_new (0.0, 1.0);
+	g = gaussian_new (1.0, 0.05);
 
 	double x;
-	for (x=0.0; x< 3.0; x+=0.2)
+	for (x=0.0; x< 3.0; x+=0.02)
 	{
-		double n0 = gaussian_eval (g, 0, x);
-		double n1 = gaussian_eval (g, 1, x);
-		double n2 = gaussian_eval (g, 2, x);
-		double n3 = gaussian_eval (g, 3, x);
+		double n0 = gaussian_eval (g, 3, x);
+		double n1 = gaussian_eval (g, 4, x);
+		double n2 = gaussian_eval (g, 5, x);
+		double n3 = gaussian_eval (g, 6, x);
 		printf ("%g	%g	%g	%g	%g\n", x, n0, n1, n2, n3);
 	}
 
 }
+
+#endif
