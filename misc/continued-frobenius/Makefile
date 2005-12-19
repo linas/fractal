@@ -1,4 +1,8 @@
 
+TOP = ../../tools
+INC = $(TOP)/inc
+LIB = $(TOP)/lib
+
 EXES = alpha asubn bern bern_h binom-graph character \
 	diagon diverge eicheck frobenius gsl-diag \
 	harmonic riemann swap sum tryall valuate \
@@ -8,10 +12,9 @@ all: $(EXES)
 
 # library files
 ache.o: ache.h zetafn.h
-zetafn.o: zetafn.h
 
 # executables
-alpha.o:	ache.h zetafn.h
+alpha.o:	ache.h $(INC)/binomial.h
 asubn.o:	ache.h zetafn.h
 bern.o: zetafn.h
 bern_h.o: zetafn.h
@@ -28,10 +31,10 @@ zeta-sum.o: zetafn.h
 zeta-zero.o: zetafn.h
 zyx.o:	zetafn.h
 
-alpha: alpha.o ache.o zetafn.o
-asubn: asubn.o ache.o zetafn.o
-bern: bern.o zetafn.o
-bern_h: bern_h.o zetafn.o
+alpha: alpha.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
+asubn: asubn.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
+bern: bern.o $(LIB)/binomial.o $(LIB)/harmonic.o $(LIB)/bernoulli.o
+bern_h: bern_h.o $(LIB)/binomial.o $(LIB)/bernoulli.o
 beta: beta.o ache.o zetafn.o
 binom-graph: binom-graph.o zetafn.o
 character: character.o 
@@ -57,7 +60,7 @@ zyx: zyx.o zetafn.o
 	cc -o $@ $^ -lgsl -lgslcblas -lm
 
 .c.o:
-	cc -g -c -O3 -Wall $<
+	cc -g -c -O3 -Wall -I $(INC) $<
 
 clean:
 	rm -f *.o $(EXES) a.out x y j.c x.c x.dat *.png x.gplot
