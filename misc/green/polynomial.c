@@ -5,6 +5,8 @@
  * Linas Vepstas 16 December 2005
  */
 
+#include <math.h>
+
 #define MAXORDER 100
 
 typedef double Poly[MAXORDER];
@@ -71,20 +73,47 @@ poly_eval (Poly *a, double val)
 }
 
 #define MAXTERMS 100
-static Poly gaussian_derivatives[MAXTERMS];
+
+/* derivatives of the standard normal distribution 
+ * with mean mu and standard deviation sigma 
+ */
+typedef struct 
+{
+	double sigma;
+	double mu;
+	Poly derivs[MAXTERMS];
+} Gaussian;
 
 void 
-setup_gaussians (double sigma, double mu)
+setup_gaussians (Gaussian *g, double sigma, double mu)
 {
+	g->sigma = sigma;
+	g->mu = mu;
+
 	int i;
 	for(i=0; i<MAXTERMS; i++)
 	{
-		poly_clear (&gaussian_derivatives[i]);
+		poly_clear (&(g->derivs)[i]);
 	}
-	gaussian_derivatives[0][0] = 1.0;
-	gaussian_derivatives[1][0] = mu/(sigma*sigma);
-	gaussian_derivatives[1][1] = -mu/(sigma*sigma);
+	g->derivs[0][0] = 1.0;
+	g->derivs[1][0] = mu/(sigma*sigma);
+	g->derivs[1][1] = -mu/(sigma*sigma);
 	
+	for(i=2; i<MAXTERMS; i++)
+	{
+		Poly d,p;
+		poly_clear (&d);
+		poly_differntiate (&d,  &g->derivs[i-1]);
+		poly_clear (&p);
+		poly_mult (&p, &g->derivs[i-1], &g->derivs[1]);
+		poly_sum (&g->derivs[i], &d, &p);
+	}
+}
+
+double 
+eval_gaussian (int order, double val)
+{
+	double g;
 
 }
 
