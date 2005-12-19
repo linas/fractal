@@ -15,10 +15,11 @@ CC = cc -O2 -I $(INC) -DANSI_C -DLINUX
 
 RM= rm -f
 
-all: inc Farey.o FareyTree.o gcf.o modular.o moebius.o Prime.o totient.o
+all: inc binomial.o Farey.o FareyTree.o gcf.o modular.o moebius.o Prime.o totient.o
 
-inc:	Farey.h FareyTree.h gcf.h modular.h moebius.h Prime.h totient.h
+inc:	binomial.h Farey.h FareyTree.h gcf.h modular.h moebius.h Prime.h totient.h
 	touch inc
+	cp binomial.h $(INC)/binomial.h
 	cp Farey.h $(INC)/Farey.h
 	cp FareyTree.h $(INC)/FareyTree.h
 	cp gcf.h $(INC)/gcf.h
@@ -26,6 +27,12 @@ inc:	Farey.h FareyTree.h gcf.h modular.h moebius.h Prime.h totient.h
 	cp modular.h $(INC)/modular.h
 	cp Prime.h $(INC)/Prime.h
 	cp totient.h $(INC)/totient.h
+
+binomial.o:	binomial.c binomial.h
+	$(CC) -c binomial.c
+	cp binomial.o $(LIB)/binomial.o
+	rm binomial.o
+	touch binomial.o
 
 Farey.o:	Farey.C Farey.h
 	$(CC) -c Farey.C
