@@ -8,6 +8,10 @@
 #ifndef GAUSSIAN_H__
 #define GAUSSIAN_H__
 
+#define MAXORDER 100
+
+typedef double Poly[MAXORDER];
+
 #define MAXTERMS 100
 
 /* derivatives of the standard normal distribution 

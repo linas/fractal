@@ -4,7 +4,7 @@ INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
 
-all: green polynomial
+all: green
 
 green:	green.o polynomial.o $(LIB)/bernoulli.o $(LIB)/binomial.o
 

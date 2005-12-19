@@ -11,10 +11,6 @@
 
 #include "gaussian.h"
 
-#define MAXORDER 100
-
-typedef double Poly[MAXORDER];
-
 void 
 poly_clear (Poly *b)
 {
