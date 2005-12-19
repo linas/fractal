@@ -11,13 +11,13 @@ EXES = alpha asubn bern bern_h binom-graph character \
 all: $(EXES)
 
 # library files
-ache.o: ache.h zetafn.h
+ache.o: ache.h 
 
 # executables
 alpha.o:	ache.h $(INC)/binomial.h
-asubn.o:	ache.h zetafn.h
-bern.o: zetafn.h
-bern_h.o: zetafn.h
+asubn.o:	ache.h 
+bern.o: 
+bern_h.o: 
 beta.o: ache.h zetafn.h
 binom-graph.o: zetafn.h
 diagon.o: zetafn.h
@@ -35,25 +35,25 @@ alpha: alpha.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
 asubn: asubn.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
 bern: bern.o $(LIB)/binomial.o $(LIB)/harmonic.o $(LIB)/bernoulli.o
 bern_h: bern_h.o $(LIB)/binomial.o $(LIB)/bernoulli.o
-beta: beta.o ache.o zetafn.o
-binom-graph: binom-graph.o zetafn.o
+beta: beta.o ache.o 
+binom-graph: binom-graph.o  $(LIB)/binomial.o
 character: character.o 
-diagon: diagon.o zetafn.o
+diagon: diagon.o  $(LIB)/harmonic.o
 diverge: diverge.o
-eicheck: eicheck.o ache.o zetafn.o 
-frobenius: frobenius.o zetafn.o
-gsl-diag: gsl-diag.o zetafn.o 
+eicheck: eicheck.o ache.o  $(LIB)/binomial.o $(LIB)/harmonic.o
+frobenius: frobenius.o $(LIB)/binomial.o $(LIB)/harmonic.o
+gsl-diag: gsl-diag.o $(LIB)/binomial.o $(LIB)/harmonic.o
 harmonic: harmonic.o
-riemann: riemann.o zetafn.o
-sum: sum.o ache.o zetafn.o
+riemann: riemann.o $(LIB)/binomial.o $(LIB)/harmonic.o
+sum: sum.o ache.o  $(LIB)/binomial.o $(LIB)/harmonic.o
 swap: swap.o
-tryall: tryall.o ache.o zetafn.o
+tryall: tryall.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
 valuate: valuate.o
-zeta-sum: zeta-sum.o zetafn.o
-zeta-takagi: zeta-takagi.o zetafn.o
-zeta-zero: zeta-zero.o zetafn.o 
+zeta-sum: zeta-sum.o $(LIB)/binomial.o
+zeta-takagi: zeta-takagi.o  $(LIB)/binomial.o $(LIB)/harmonic.o
+zeta-zero: zeta-zero.o  $(LIB)/binomial.o $(LIB)/harmonic.o
 zero: zero.o
-zyx: zyx.o zetafn.o
+zyx: zyx.o  $(LIB)/binomial.o $(LIB)/harmonic.o
 
 
 .o:
