@@ -12,8 +12,8 @@ takagi-gral:	takagi-gral.o
 
 
 clean:
-	rm *.o junk x
+	rm -f *.o junk x
 
 realclean: clean
-	rm $(EXES)  *.png
+	rm -f $(EXES)  *.png
 

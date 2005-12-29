@@ -10,9 +10,9 @@ weyl:	weyl.o
 	cc -o $@ $< -lm
 
 clean:
-	rm *.o junk x
+	rm -f *.o junk x
 
 realclean: clean
-	rm $(EXES)  *.png
+	rm -f $(EXES)  *.png
 
 
