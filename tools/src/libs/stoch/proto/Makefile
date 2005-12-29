@@ -6,7 +6,8 @@ LIB = $(TOP)/lib
 
 CC = /bin/fcc -f2 -O -I $(INC)
 
-all: testfract fbm
+EXES = lacune testgauss testfract fbm
+all: $(EXES)
 
 ################## Dependencies and compile/link #########
 #
@@ -124,3 +125,9 @@ grstn:
 	station fbm.7 i f |xgraph -x "log10 (t2-t1)" -y "log10 (Var [X(t2) - X(t1)])" -t "H=0.7 Fractal Motion Stationarity" &
 	station fbm.9 i f |xgraph -x "log10 (t2-t1)" -y "log10 (Var [X(t2) - X(t1)])" -t "H=0.9 Fractal Motion Stationarity" &
 
+
+clean:
+	rm -f *.o junk x
+
+realclean: clean
+	rm -f $EXES)
