@@ -11,3 +11,9 @@ takagi-gral:	takagi-gral.o
 	cc -o $@ $< -lm
 
 
+clean:
+	rm *.o junk x
+
+realclean: clean
+	rm $(EXES)  *.png
+
