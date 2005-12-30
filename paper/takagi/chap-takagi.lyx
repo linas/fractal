@@ -632,8 +632,9 @@ Consider first the generator that is the interval contraction
 \end_inset 
 
  are both linear and also closed, thus forming a vector space.
- That is, we have discovered that the Takagi Curve transforms under the
- three-dimensional representation of the modular group.
+ Sine there are only three terms in the expression, we have discovered that
+ the Takagi Curve transforms under the three-dimensional representation
+ of the modular group.
  To be explicit, we write a general element of the vector space as the dot-produ
 ct of a row of real numbers times a column of basis vectors 
 \begin_inset Formula \begin{equation}
@@ -683,8 +684,38 @@ t_{w}(x)\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
- Previously, we had found the dyadic representation that acted on dyadic
- numbers as 
+ This should be compared to the transformation properties of dyadic numbers.
+ By a 
+\begin_inset Quotes eld
+\end_inset 
+
+dyadic number
+\begin_inset Quotes erd
+\end_inset 
+
+, we mean a real number represented as a string of binary digits
+\begin_inset Formula \begin{equation}
+x=\sum_{n=0}^{\infty}b_{n}2^{-n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ with the binary digits 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ being either 0 or 1.
+ By replacing the number 2 with a different number, it is easily seen that
+ the dyadic representation forms a Cantor Set (discussed in greater detail
+ below), and that it's self-similarity properties are also given by the
+ same semigroup/monoid that describes the Takagi curve.
+ However, the representation of the transformation properties is a two-dimension
+al representation.
+ That is, the dyadic representation that acted on dyadic numbers arranged
+ in a doublet 
+\begin_inset Formula $(1,x)$
+\end_inset 
+
+ as 
 \begin_inset Formula \begin{equation}
 g_{D}=\left(\begin{array}{cc}
 1 & 0\\
@@ -694,17 +725,43 @@ g_{D}=\left(\begin{array}{cc}
 
 \end_inset 
 
- and so the 3D representation seems to be an extension of that vector space.
-  The Takagi Curve is then seen to commute with the generators 
-\begin_inset Formula $(g_{3}t_{w})(x)=(t_{w}g_{D})(x)$
+ That is, acting on the vector 
+\begin_inset Formula $(0,x)$
 \end_inset 
 
- and
-\begin_inset Formula $(r_{3}t_{w})(x)=(t_{w}r_{D})(x)$
+ and dropping the 0, one may write that 
+\begin_inset Formula $g_{D}(x)=x/2$
 \end_inset 
 
- in this representation.
- 
+ and 
+\begin_inset Formula $r_{D}(x)=1-x$
+\end_inset 
+
+.
+ The 3D representation is then seen to be a an extension of the 2D vector
+ space.
+ The Takagi Curve commutes with the generators as 
+\begin_inset Formula $g_{3}t_{w}=t_{w}(g_{D}\oplus e)$
+\end_inset 
+
+ and 
+\begin_inset Formula $r_{3}t_{w}=t_{w}(r_{D}\oplus e)$
+\end_inset 
+
+ where we embedded the 2D dyadic represtentation into 3D in the trivial
+ way: 
+\begin_inset Formula \begin{equation}
+g_{D}\oplus e=\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+0 & \frac{1}{2} & 0\\
+0 & 0 & 1\end{array}\right)\;\mbox{ and }\; r_{D}\oplus e=\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+1 & -1 & 0\\
+0 & 0 & 1\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ XXX this suggests that t_w is an operator, but its not linear.
 \layout Standard
 
 For the sake of clarity, and to drive the point home, lets now examine the
@@ -714,13 +771,18 @@ For the sake of clarity, and to drive the point home, lets now examine the
 
 .
  By 'contracting' we mean that we want to take all 
-\begin_inset Formula $a_{k}\geq0$
+\begin_inset Formula $a_{k}>0$
 \end_inset 
 
-; as before, expanding and general group elements require us to compute
- intersections of the dyadic tree intervals, which proceeds as before but,
- as usual, complicates the language.
- We have that 
+.
+ The contracting elements form the monoid, and we explicitly want to avoid
+ considering the inverses of these group elements.
+ Trying to incorporate the inverses significantly complicates the analysis,
+ and a full inclusion of all inverses cannot be satisfactorily done.
+ 
+\layout Standard
+
+We have that 
 \begin_inset Formula $\gamma$
 \end_inset 
 
