@@ -37,7 +37,7 @@ MakeHistoCB (
 	double   (*cb)(double, double, int));
 
 
-#define MAKE_HISTO(cb)  \
+#define DECL_MAKE_HISTO(cb)  \
 void MakeHisto (        \
    float  	*glob,      \
    int 		sizex,      \
