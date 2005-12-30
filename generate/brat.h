@@ -23,3 +23,32 @@ void MakeHisto (
    int		itermax,
 	double 	renorm);
 
+void 
+MakeHistoCB (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   double	height,
+   int		itermax,
+   double 	renorm,
+	double   (*cb)(double, double, int));
+
+
+#define MAKE_HISTO(cb)  \
+void MakeHisto (        \
+   float  	*glob,      \
+   int 		sizex,      \
+   int 		sizey,      \
+   double	re_center,  \
+   double	im_center,  \
+   double	width,      \
+   double	height,     \
+   int		itermax,    \
+	double 	renorm)     \
+{                       \
+   MakeHistoCB (glob, sizex, sizey, re_center, im_center,  \
+       width, height, itermax, renorm, cb);                \
+}

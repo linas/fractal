@@ -2325,6 +2325,49 @@ random_out (
 
 /*-------------------------------------------------------------------*/
 
+void 
+MakeHistoCB (
+   float  	*glob,
+   int 		sizex,
+   int 		sizey,
+   double	re_center,
+   double	im_center,
+   double	width,
+   double	height,
+   int		itermax,
+   double 	renorm,
+	double   (*cb)(double, double, int))
+{
+   int		i,j, globlen;
+   double	re_start, im_start, delta;
+   double	re_position, im_position;
+   
+   delta = width / (double) sizex;
+   re_start = re_center - width / 2.0;
+   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   
+   globlen = sizex*sizey;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
+
+   im_position = im_start;
+   for (i=0; i<sizey; i++) 
+	{
+      if (i%10==0) printf(" start row %d\n", i);
+      re_position = re_start;
+      for (j=0; j<sizex; j++) 
+		{
+
+			double phi = cb (re_position, im_position, itermax);
+         glob [i*sizex +j] = phi;
+
+         re_position += delta;
+      }
+      im_position -= delta;  /*top to bottom, not bottom to top */
+   }
+}
+
+/*-------------------------------------------------------------------*/
+
 extern "C" {
    extern FILE *Fopen(char *name, char *ext);
 };
