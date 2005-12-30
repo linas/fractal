@@ -17,14 +17,19 @@
 
 static int is_init = 0;
 
-#define MAX_TERMS 1000
+#define MAX_TERMS 300
 #define MANTISSA_BITS 48
 
 static char bits [MAX_TERMS+MANTISSA_BITS];
 
-static void setup(void)
+static void setup(int shift)
 {
 	int i;
+	// srand (331);
+	for (i=0; i<shift; i++)
+	{
+		rand();
+	}
 	for (i=0; i<MAX_TERMS+MANTISSA_BITS; i++)
 	{
 		bits[i] = (int) (2.0*rand()/(RAND_MAX+1.0));
@@ -63,6 +68,13 @@ static void takagi_series_c (double re_w, double im_w, double *prep, double *pim
 	double wcos = re_w / wmag;
 	double wsin = im_w / wmag;
 
+	if (wmag > 1.01) 
+	{
+		*prep = 0.0;
+		*pimp = 0.0;
+		return;
+	}
+
 	double rn = 1.0;
 	double cosn = 1.0;
 	double sinn = 0.0;
@@ -90,12 +102,14 @@ static void takagi_series_c (double re_w, double im_w, double *prep, double *pim
 
 static double takagi_series (double re_q, double im_q, int itermax)
 {
-	if (!is_init) { is_init = 1; setup(); }
+	if (!is_init) { is_init = 1; setup(itermax); }
 
 	double rep, imp;
 	takagi_series_c (re_q, im_q, &rep, &imp);
+	return (atan2 (imp, rep)+M_PI) / (2.0*M_PI);
 	// return sqrt (rep*rep+imp*imp);
-	return rep;
+	// return rep;
+	// return imp;
 }
 
 
