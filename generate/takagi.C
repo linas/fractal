@@ -28,11 +28,11 @@ static void setup(void)
 	for (i=0; i<MAX_TERMS+MANTISSA_BITS; i++)
 	{
 		bits[i] = (int) (2.0*rand()/(RAND_MAX+1.0));
-printf ("duuude its %d\n", bits[i]);
 	}
 }
 
-// return (2^n x)
+// return (2^n x) - floor (2^n x)
+//
 static double get_x (int n)
 {
 	int i;
@@ -43,12 +43,49 @@ static double get_x (int n)
 		x += bits[i+n] * tn;
 		tn *= 0.5;
 	}
+
+	return x;
 }
 
-static void takagi_series_c (double re_q, double im_q, double *prep, double *pimp)
+// basic triangle wave
+static double triangle (double x)
 {
-	//*prep = rep;
-	//*pimp = imp;
+	double y = 2.0*x;
+	if (x <= 0.5) return y;
+	return 2.0-y;
+}
+
+static void takagi_series_c (double re_w, double im_w, double *prep, double *pimp)
+{
+	int i;
+
+	double wmag = sqrt(re_w * re_w + im_w *im_w);
+	double wcos = re_w / wmag;
+	double wsin = im_w / wmag;
+
+	double rn = 1.0;
+	double cosn = 1.0;
+	double sinn = 0.0;
+
+	double resum = 0.0;
+	double imsum = 0.0;
+	for (i=0; i<MAX_TERMS; i++)
+	{
+		double x = get_x (i);
+		x = triangle(x);
+		resum += rn * cosn * x;
+		imsum += rn * sinn * x;
+
+		if (rn < 1.0e-18) break;
+
+		rn *= wmag;
+		double tmp = sinn * wcos + cosn * wsin;
+		cosn = cosn * wcos - sinn * wsin;
+		sinn = tmp;
+	}
+
+	*prep = resum;
+	*pimp = imsum;
 }
 
 static double takagi_series (double re_q, double im_q, int itermax)
