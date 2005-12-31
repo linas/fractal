@@ -38,6 +38,25 @@ static double get_x (int n)
 	return x;
 }
 
+static void set_x (double x)
+{
+	int i;
+	x -= floor (x);
+	for (i=0; i<MANTISSA_BITS; i++)
+	{
+		if (x >= 0.5)
+		{
+			bits[i] = 1;
+			x -= 0.5;
+		}
+		else
+		{
+			bits[i] = 0;
+		}
+		x *= 2.0;
+	}
+}
+
 static void setup(int shift)
 {
 	int i;
@@ -50,9 +69,6 @@ static void setup(int shift)
 	{
 		bits[i] = (int) (2.0*rand()/(RAND_MAX+1.0));
 	}
-
-	double x = get_x (0);
-	printf ("disk for x=%22.18g\n", x);
 }
 
 // basic triangle wave
@@ -103,9 +119,18 @@ static void takagi_series_c (double re_w, double im_w, double *prep, double *pim
 	*pimp = imsum;
 }
 
-static double takagi_series (double re_q, double im_q, int itermax)
+// This function sets up a fixed ''x'' value, and graphs the interior of
+// the disk (|w| < 1) as a funciton of w.
+// 
+static double takagi_disk (double re_q, double im_q, int itermax)
 {
-	if (!is_init) { is_init = 1; setup(itermax); }
+	if (!is_init) 
+	{ 
+		is_init = 1; 
+		setup(itermax);
+		double z = get_x (0);
+		printf ("disk for x=%22.18g\n", z);
+	}
 
 	double rep, imp;
 	takagi_series_c (re_q, im_q, &rep, &imp);
@@ -115,7 +140,36 @@ static double takagi_series (double re_q, double im_q, int itermax)
 	// return imp;
 }
 
+// This function sets up a cylinder slice, with |w| held constant
+// but the phase of w varying in the horizontal direction
+// In the veritical direction runs the ''x'' of the t_w(x).
+// 
+static double takagi_cylinder (double x, double y, int itermax)
+{
+	double w = 0.94;
 
-DECL_MAKE_HISTO(takagi_series);
+	static double yprev = -999.0;
+
+	if (y != yprev)
+	{
+		setup (itermax);
+		set_x (y);
+		yprev = y;
+		double z = get_x (0);
+		printf ("disk for x=%22.18g (x=%g y=%g)\n", z, x, y);
+	}
+ 
+	double re_q = w * cos (2.0 * M_PI * x);
+	double im_q = w * sin (2.0 * M_PI * x);
+
+	double rep, imp;
+	takagi_series_c (re_q, im_q, &rep, &imp);
+	return (atan2 (imp, rep)+M_PI) / (2.0*M_PI);
+	// return sqrt (rep*rep+imp*imp);
+	// return rep;
+}
+
+// DECL_MAKE_HISTO(takagi_disk);
+DECL_MAKE_HISTO(takagi_cylinder);
 
 /* --------------------------- END OF LIFE ------------------------- */
