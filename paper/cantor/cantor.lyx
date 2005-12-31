@@ -38,15 +38,31 @@ Linas Vepstas <linas@linas.org>
 In this breif note, we review the connection between the distribution of
  the Farey fractions on the real number line, and the derivative of the
  Minkowski Question Mark function.
- We point out that the derivivative of the question mark can also be obtained
+ We introduce a topology to give precise meaning to what it means to 
+\begin_inset Quotes eld
+\end_inset 
+
+take the derivative of the question mark function
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ This topology is recognized to be the natural topology of many types of
+ fractals, and in particular, can be considered to be the correct topology
+ for discussing the closure of the hyperboloic plane.
+\layout Abstract
+
+We point out that the derivivative of the question mark can also be obtained
  as the limiting behaviour of a modular form.
  Modular forms are analytic functions that are closely related to elliptic
  functions, and have a particular kind of modular group symmetry.
  
 \layout Abstract
 
-A research diary of results on other measures is presented as well, including
- results on the measures of fat cantor sets of various types.
+In its current state, this document is at least partly a research diary
+ of various results, and is oddly structured as a result.
+ Results on various measures are presented as well, including results on
+ the measures of fat Cantor sets of various types.
  A natural topology for exploring these measures is discussed.
 \layout Abstract
 
@@ -83,8 +99,49 @@ THIS IS A DRAFT WORK IN PROGRESS.
 \end_inset 
 
 , which yeilds highly singular functions defined on the real number line,
- yet inheriting a modular group symmetry of teh form of which they are the
+ yet inheriting a modular group symmetry of the form of which they are the
  limit.
+\layout Standard
+
+Most fractals presented in the popular literature have a form that suggests
+ that they live on the closure of the hyperbolic plane: that is, they live
+ on the 
+\begin_inset Quotes eld
+\end_inset 
+
+edge
+\begin_inset Quotes erd
+\end_inset 
+
+ of that plane.
+ Of course, the hyperbolic metrix never allows you to get to that edge,
+ but one can also put an ordinary Euclidean metric on the Poincare disk,
+ or the Poincare upper half plane, and get to that boundary.
+ The problem is, of course, that the topologies that seem to suggest themselves
+ in these two cases are subtly incompatible, and lead to a varity of confusions.
+ In particular, we argue below that when considering the limiting behaviour
+ of of functions at the 
+\begin_inset Quotes eld
+\end_inset 
+
+edge
+\begin_inset Quotes erd
+\end_inset 
+
+ of hyperbolic space, the correct topology is a kind of 
+\begin_inset Quotes eld
+\end_inset 
+
+binary tree topology
+\begin_inset Quotes erd
+\end_inset 
+
+, similar in form to the Cantor set, but a bit richer.
+ In particular, this topology is finer than the usual topology on the real
+ number line, and this additional fineness allows otherwise dubious expressions
+ to be given precise meaning.
+ It is only when functinos on this topology are mapped back onto the real
+ number line that confusions result.
 \layout Section
 
 Distributions of Rational Numbers
@@ -447,7 +504,7 @@ where
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -464,8 +521,8 @@ Sigma angular cross section
 
 \layout Standard
 
-his figure shows an angular cross section of a series build from the number-theo
-retic divisor function.
+This figure shows an angular cross section of a series build from the number-the
+oretic divisor function.
  Specifically, it is a graph of
 \begin_inset Formula \[
 \left|\sum_{n=1}^{\infty}\sigma_{2}(n)r^{n}e^{in\theta}\right|^{-1}\]
@@ -773,6 +830,20 @@ asdf asdf...
 A Binary Tree Topology
 \layout Standard
 
+
+\begin_inset Note
+collapsed true
+
+\layout Standard
+
+This section added in dec 2005, and was conceived in the summer of 2005.
+ This section should be split out into its own doc eventually, and dated
+ to the summer fo 2005.
+\end_inset 
+
+
+\layout Standard
+
 Consider the 
 \begin_inset Quotes eld
 \end_inset 
@@ -881,15 +952,82 @@ Because this topology is finer than the usual topology on the real number
  It should also be clear that this is the correct topology in which to discuss
  the closure of the upper half-plane when discussion the limiting behaviour
  of modular forms, Fuchsian groups, and ergodic processes.
+\layout Standard
+
+As an example, consider the Takagi curve.
+ When considered on the real-number line, it has a deriviative that seems
+ to be defined nowhere.
+ When considered on the binary tree topology, its derivative looks a lot
+ less intimidating: in fact, it is perfectly well-defined on the leaves;
+ the only ambiguity is on the interior nodes of the tree.
+ Furthermore, the interior nodes of the tree are a countable set, whereas
+ the leaves are uncountable.
+ This implies that the derivative of the Takagi curve is in fact defined
  
+\begin_inset Quotes eld
+\end_inset 
+
+almost everywhere
+\begin_inset Quotes erd
+\end_inset 
+
+, with the exception of only a countable set of points.
+ The goal here is to bootstrap this realization into providing a wholesome
+ topological definition for all fractal measures.
 \layout Standard
 
 Next, because the topology is that of a binary tree, it should be clear
  that any binary structure inherits this topology in a natural way.
- In particular, the Stern Brocot Tree has this topology.
+ In particular, the Stern-Brocot tree has this topology.
+ In particular, this means that there is a second natural mapping to the
+ real number line, given by the Minkowski Question Mark function.
+ The interior nodes of the tree are the rational numbers (a countable set),
+ and the leaves of the tree are the irrationals (of the cardinality of the
+ continuum).
+ By using the dyadic topology, the derivative of the question mark function
+ becomes a whole lot less intimidating as well: it becomes clear that the
+ derivative is precisely zero on the rationals (the interior nodes of the
+ tree), and non-zero on the leaves.
+ Again, because of the cardinality of the leaves, it becomes clear that
+ this measure can be integrated in a well-founded way.
+ The problem then is no longer 
+\begin_inset Quotes eld
+\end_inset 
+
+how can the derivative of the question mark be put on a good foundation
+\begin_inset Quotes erd
+\end_inset 
+
+, rather it becomes 
+\begin_inset Quotes eld
+\end_inset 
+
+what sort of easy to manipulate, easy to handle expressions for this measure
+ can be found?
+\begin_inset Quotes erd
+\end_inset 
+
+.
 \layout Standard
 
-gives a map of the real number line to a subset of the 
+XXXX ToDo: discuss the binary tree topology in greater detail, incl the
+ separation axioms, etc.
+ Also compare this topology to the topology of 
+\begin_inset Quotes eld
+\end_inset 
+
+cylinder sets
+\begin_inset Quotes erd
+\end_inset 
+
+ that is used in discussing subshifts of finite type, bernoulli processes
+ etc.
+ These topologies are similar but havemany odd differences.
+ Best to be clear as a bell here.
+ 
+\layout Subsection
+
+Cantor Set Measures
 \layout Standard
 
 There are a large variety of constructions that can be made from this series;
@@ -1079,37 +1217,6 @@ tricky
 \end_inset 
 
  
-\layout Standard
-
-The essential point is that every rational number has two possible binary
- expansions: for example, it is well known that 
-\begin_inset Formula $1.000..=0.111...$
-\end_inset 
-
- .
- But each such expansion yields two inequivalent Cantor polynomials.
- Cantor's essential insight was that these two inequivalent representations
- of the real numbers by binary sequences can be re-interpreted as the endpoints
- of a set of non-overlapping line segments.
- Converting the binary sequence into a polynomial series in 
-\begin_inset Formula $z$
-\end_inset 
-
- make these two endpoints explicit by assigning a different polynomial to
- each.
- 
-\layout Standard
-
-Note that there is another construction by which one can place gaps at every
- rational number.
- This construction is arrived at through the isomorphism between dyadic
- fractions and Farey Numbers by means of the Minkowski Question Mark function.
- Essentially, we can represent every rational as a continued fraction, and
- define gaps analogously.
- This idea is developed further in another chapter (chapter XXX).
-\layout Subsection
-
-Cantor Set Measures
 \layout Standard
 
 
