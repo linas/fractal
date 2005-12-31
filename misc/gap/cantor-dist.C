@@ -20,16 +20,16 @@ bincount (int nbins, int pmax, double z)
 	printf ("#\n# nbins=%d   pow=%d\n#\n",nbins,pmax);
 
 #define BINSZ 45720
-	int bin[BINSZ];
+	double bin[BINSZ];
 	for (i=0; i<BINSZ; i++)
 	{
-		bin[i] = 0;
+		bin[i] = 0.0;
 	}
 
 	int max = 1<<pmax;
 
 	int n, d;
-	int cnt = 0;
+	double cnt = 0.0;
 	for (d=0; d<max; d+=2)
 	{
 		int id;
@@ -57,22 +57,33 @@ bincount (int nbins, int pmax, double z)
 		// printf ("Cantor interval=%d/%d lo=%g hi=%g\n", d/2, max/2, clo, chi);
 
 		// now bincount
-		int nlo = (int) floor (nbins * clo);
-		int nhi = (int) ceil (nbins * chi);
-		for (n=nlo; n<=nhi; n++)
+		clo *= nbins;
+		chi *= nbins;
+		double nlo = ceil (clo);
+		double nhi = floor (chi);
+
+		int ilo = (int) nlo;
+		int ihi = (int) nhi;
+
+		bin [ilo-1] += nlo - clo;
+		bin [ihi] += chi - nhi;
+
+		cnt += (nlo-clo) + (chi-nhi);
+
+		for (n=ilo; n<ihi; n++)
 		{
-			bin[n] ++;
-			cnt ++;
+			bin[n] += 1.0;
+			cnt += 1.0;
 		}
 	}
-	double measure = ((double) cnt) / ((double) nbins);
-	printf ("# total count=%d measure=%g\n", cnt, measure);
+	double measure = cnt / ((double) nbins);
+	printf ("# total count=%g measure=%g\n", cnt, measure);
 	for (i=0; i<nbins; i++)
 	{
 		double bcnt = bin[i];
 		bcnt /= (double) cnt;
 		bcnt *= (double) nbins;
-		double x = ((double) i) / ((double) nbins);
+		double x = ((double) 2*i+1) / ((double) 2*nbins);
 		printf ("%5d	%8.6g	%g\n", i, x, bcnt);
 	}
 }
