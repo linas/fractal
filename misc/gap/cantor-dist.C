@@ -65,15 +65,30 @@ bincount (int nbins, int pmax, double z)
 		int ilo = (int) nlo;
 		int ihi = (int) nhi;
 
-		bin [ilo-1] += nlo - clo;
-		bin [ihi] += chi - nhi;
-
-		cnt += (nlo-clo) + (chi-nhi);
-
-		for (n=ilo; n<ihi; n++)
+		// if the interval is spread across multiple bins ... 
+		// or if the interval fits entirely within one bin
+		if (ilo-1 == ihi)
 		{
-			bin[n] += 1.0;
-			cnt += 1.0;
+			// printf ("onebin (%g, %g) i=(%d, %d), \tdelt= %g\n", clo, chi, ilo, ihi, chi-clo);
+			bin [ihi] += chi - clo;
+			cnt += chi - clo;
+		}
+		else
+		{ 
+			if (ilo-1 >= 0) {
+				bin [ilo-1] += nlo - clo;
+			}
+			bin [ihi] += chi - nhi;
+
+			// printf ("duude (%g, %g) i=(%d, %d), \tdelt= %g %g\n", clo, chi, ilo, ihi, nlo-clo, chi-nhi);
+
+			cnt += (nlo-clo) + (chi-nhi);
+	
+			for (n=ilo; n<ihi; n++)
+			{
+				bin[n] += 1.0;
+				cnt += 1.0;
+			}
 		}
 	}
 	double measure = cnt / ((double) nbins);
