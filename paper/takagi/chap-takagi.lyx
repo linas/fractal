@@ -56,13 +56,11 @@ In this paper, we identify the symmetry group of period-doubling maps as
 nal representation of the (monoid of the) modular group.
  By replacing the triangular shape that generates the Blancmange curve with
  a polynomial, we find that the resulting curve transforms under the 
-\begin_inset Formula n+2
-
+\begin_inset Formula $n+2$
 \end_inset 
 
  dimensional representation of the monoid, where 
-\begin_inset Formula n
-
+\begin_inset Formula $n$
 \end_inset 
 
  is the degree of the polynomial.
@@ -725,11 +723,7 @@ g_{D}=\left(\begin{array}{cc}
 
 \end_inset 
 
- That is, acting on the vector 
-\begin_inset Formula $(0,x)$
-\end_inset 
-
- and dropping the 0, one may write that 
+ Alternately, one may write 
 \begin_inset Formula $g_{D}(x)=x/2$
 \end_inset 
 
@@ -737,31 +731,19 @@ g_{D}=\left(\begin{array}{cc}
 \begin_inset Formula $r_{D}(x)=1-x$
 \end_inset 
 
-.
+ when acting on real numbers.
  The 3D representation is then seen to be a an extension of the 2D vector
  space.
  The Takagi Curve commutes with the generators as 
-\begin_inset Formula $g_{3}t_{w}=t_{w}(g_{D}\oplus e)$
+\begin_inset Formula $\left[g_{3}t_{w}\right]\left(x\right)=\left(t_{w}\circ g_{D}\right)\left(x\right)$
 \end_inset 
 
  and 
-\begin_inset Formula $r_{3}t_{w}=t_{w}(r_{D}\oplus e)$
+\begin_inset Formula $\left[r_{3}t_{w}\right](x)=\left(t_{w}\circ r_{D}\right)\left(x\right)$
 \end_inset 
 
- where we embedded the 2D dyadic represtentation into 3D in the trivial
- way: 
-\begin_inset Formula \begin{equation}
-g_{D}\oplus e=\left(\begin{array}{ccc}
-1\; & 0\; & 0\\
-0 & \frac{1}{2} & 0\\
-0 & 0 & 1\end{array}\right)\;\mbox{ and }\; r_{D}\oplus e=\left(\begin{array}{ccc}
-1\; & 0\; & 0\\
-1 & -1 & 0\\
-0 & 0 & 1\end{array}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- XXX this suggests that t_w is an operator, but its not linear.
+ where the left hand side is taken as an operator equation, and the right
+ hand side as function composition.
 \layout Standard
 
 For the sake of clarity, and to drive the point home, lets now examine the
@@ -968,8 +950,8 @@ What have we done here? We have accomplished two things.
  
 \layout Description
 
-Corollary: The modular group is a symmetry group of the parabola, where
- the parabola is given by 
+Corollary: The modular group monoid is a symmetry group of the parabola,
+ where the parabola is given by 
 \begin_inset Formula $t_{1/4}(x)=4x(1-x)$
 \end_inset 
 
@@ -984,6 +966,10 @@ Corollary: The modular group is a symmetry group of the parabola, where
 .
 \layout Standard
 
+Whether there is any deeper relationship to quartics in general is not clear.
+ 
+\layout Standard
+
 The next theorm shows that these representations, while isomorphic, are
  not equivalent in the traditional sense.
 \layout Description
@@ -992,7 +978,8 @@ Theorem: Every real (or complex!) value of
 \begin_inset Formula $w$
 \end_inset 
 
- generates a unique, inequivalent representation of the modular group.
+ generates a unique, inequivalent representation of the period-doubling
+ monoid.
  
 \layout Description
 
@@ -1146,133 +1133,6 @@ f(x)=\int_{0}^{\infty}c(w)t_{w}(x)\; dw\]
  is the Dirac delta function.
  Provide other interesting examples.
  (Are there other interesting examples?)
-\layout Subsection
-
-The Complex-valued Takagi Curve
-\layout Standard
-
-Some rather remarkable curves result when one considers the Takagi curve
- for complex values of the parameter 
-\begin_inset Formula $w$
-\end_inset 
-
-.
- The symmetry considerations given above apply equally well to real or complex
- values of 
-\begin_inset Formula $w$
-\end_inset 
-
-.
- What is remarkable is how the self similarity can in fact be so carefully
- hidden.
- The phase plot shown in figure 
-\begin_inset LatexCommand \ref{cap:Takagi-Phase-Plot}
-
-\end_inset 
-
- visually resembles nothing so much as a brownian random walk.
- Some of the mystery of this plot is revealed by examining the real and
- imaginary parts independently, as shown in figure 
-\begin_inset LatexCommand \ref{cap:Takagi-Real-and}
-
-\end_inset 
-
-.
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
-
-
-\begin_inset LatexCommand \label{cap:Takagi-Phase-Plot}
-
-\end_inset 
-
-Takagi Phase Plot
-\layout Standard
-
-
-\begin_inset Graphics
-	filename takagi-phase.png
-	width 100text%
-
-\end_inset 
-
-
-\layout Standard
-
-This figure shows a phase plot of 
-\begin_inset Formula $t_{w}(x)$
-\end_inset 
-
- as a function of 
-\begin_inset Formula $x$
-\end_inset 
-
- for a fixed value of 
-\begin_inset Formula $w=0.618i$
-\end_inset 
-
-.
- This curve has exactly the same fractal self-similarity as the curve shown
- in figure 
-\begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
-
-\end_inset 
-
-, but here, the self-similarity of this curve is far from apparent.
- 
-\end_inset 
-
-
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
-
-
-\begin_inset LatexCommand \label{cap:Takagi-Real-and}
-
-\end_inset 
-
-Takagi Real and Imaginary Parts
-\layout Standard
-
-
-\begin_inset Graphics
-	filename takagi-complex.png
-	width 100text%
-
-\end_inset 
-
-
-\layout Standard
-
-This figure shows the real and imaginary parts of 
-\begin_inset Formula $t_{w}(x)$
-\end_inset 
-
- as a function of 
-\begin_inset Formula $x$
-\end_inset 
-
- for a fixed value of 
-\begin_inset Formula $w=0.618i$
-\end_inset 
-
-.
- 
-\end_inset 
-
-
 \layout Subsection
 
 The Cantor Polynomials 
@@ -1793,6 +1653,133 @@ Presumably, it should be obvious by now that the Cantor Polynomials transform
  as the two-dimensional (dyadic) representation of the Modular Group.
  This is as we should expect, based on the reasoning about the dimension
  of the representation presented in the next section.
+\layout Subsection
+
+The Complex-valued Takagi Curve
+\layout Standard
+
+Some rather remarkable curves result when one considers the Takagi curve
+ for complex values of the parameter 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ The symmetry considerations given above apply equally well to real or complex
+ values of 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ What is remarkable is how the self similarity can in fact be so carefully
+ hidden.
+ The phase plot shown in figure 
+\begin_inset LatexCommand \ref{cap:Takagi-Phase-Plot}
+
+\end_inset 
+
+ visually resembles nothing so much as a brownian random walk.
+ Some of the mystery of this plot is revealed by examining the real and
+ imaginary parts independently, as shown in figure 
+\begin_inset LatexCommand \ref{cap:Takagi-Real-and}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Takagi-Phase-Plot}
+
+\end_inset 
+
+Takagi Phase Plot
+\layout Standard
+
+
+\begin_inset Graphics
+	filename takagi-phase.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a phase plot of 
+\begin_inset Formula $t_{w}(x)$
+\end_inset 
+
+ as a function of 
+\begin_inset Formula $x$
+\end_inset 
+
+ for a fixed value of 
+\begin_inset Formula $w=0.618i$
+\end_inset 
+
+.
+ This curve has exactly the same fractal self-similarity as the curve shown
+ in figure 
+\begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
+
+\end_inset 
+
+, but here, the self-similarity of this curve is far from apparent.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Takagi-Real-and}
+
+\end_inset 
+
+Takagi Real and Imaginary Parts
+\layout Standard
+
+
+\begin_inset Graphics
+	filename takagi-complex.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the real and imaginary parts of 
+\begin_inset Formula $t_{w}(x)$
+\end_inset 
+
+ as a function of 
+\begin_inset Formula $x$
+\end_inset 
+
+ for a fixed value of 
+\begin_inset Formula $w=0.618i$
+\end_inset 
+
+.
+ 
+\end_inset 
+
+
 \layout Subsection
 
 The Four-Dimensional Representation
@@ -3865,7 +3852,7 @@ Homework: Work out the transformation of the derivative curve under the
 
 .
  
-\layout Subsubsection
+\layout Subsection
 
 Analytic Continuation
 \layout Standard
@@ -3879,16 +3866,34 @@ So far, we have been looking at the Takagi curve as a function of
 \end_inset 
 
  fixed.
- We can also explore the converse.
+ One may also explore the dependency on 
+\begin_inset Formula $w$
+\end_inset 
+
+ for fixed 
+\begin_inset Formula $x$
+\end_inset 
+
+.
  For any fixed 
 \begin_inset Formula $x$
 \end_inset 
 
-, the Takagi Curve is analytic in 
+, the Takagi curve is analytic in 
 \begin_inset Formula $w$
 \end_inset 
 
+, by construction, with radius of convergence of 1.
+ One task is to describe the teh set of 
+\begin_inset Formula $x$
+\end_inset 
+
+ for which the function may be analyitically continued to values of 
+\begin_inset Formula $\left|w\right|>1$
+\end_inset 
+
 .
+ There are many easy cases.
  For example, 
 \begin_inset Formula $t_{w}(0)=0$
 \end_inset 
@@ -3904,7 +3909,7 @@ So far, we have been looking at the Takagi curve as a function of
  is clearly entire.
  Continuing, we have
 \begin_inset Formula \begin{equation}
-t_{w}\left(\frac{1}{2^{n}}\right)=\frac{2}{2^{n}}\;\frac{1-2^{n}w^{n}}{1-2w}\label{eq:}\end{equation}
+t_{w}\left(\frac{1}{2^{n}}\right)=\frac{1}{2^{n-1}}\;\frac{1-2^{n}w^{n}}{1-2w}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -3913,11 +3918,7 @@ t_{w}\left(\frac{1}{2^{n}}\right)=\frac{2}{2^{n}}\;\frac{1-2^{n}w^{n}}{1-2w}\lab
 \begin_inset Formula $w=1/2$
 \end_inset 
 
-), and thus entire; indeed, 
-\begin_inset Formula $t_{1/2}(2^{-n})=2^{1-n}n$
-\end_inset 
-
-.
+), and thus entire.
  Its not hard to see, for any integer 
 \begin_inset Formula $p$
 \end_inset 
@@ -3937,7 +3938,40 @@ t_{w}\left(\frac{1}{3}\right)=\frac{2}{3(1-w)}\label{eq:}\end{equation}
 \end_inset 
 
  has a simple pole.
- Thus, on at least a point-wise basis, one may analytically extend the Takagi
+ 
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{1}{3\cdot2^{n}}\right)=\frac{1-w-2^{n}w^{n+1}}{3\cdot2^{n-1}(1-w)(1-2w)}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{1}{5}\right)=\frac{2}{5}\cdot\frac{1+2w}{1-w^{2}}\label{eq:}\end{equation}
+
+\end_inset 
+
+and 
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{1}{7}\right)=\frac{2}{7}\cdot\frac{1+2w+3w^{2}}{1-w^{3}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{1}{9}\right)=\frac{2}{9}\cdot\frac{1+2w+4w^{2}}{1-w^{3}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{1}{11}\right)=\frac{2}{11}\cdot\frac{1+2w+4w^{2}+6w^{3}+5w^{4}}{1-w^{5}}\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+Thus, on at least a point-wise basis, one may analytically extend the Takagi
  curve to regions 
 \begin_inset Formula $|w|>1$
 \end_inset 
