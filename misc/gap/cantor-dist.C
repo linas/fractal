@@ -54,12 +54,19 @@ bincount (int nbins, int pmax, double z)
 
 		// clo and chi are the enpoints of the cantor intervals
 		// i.e. the stuff that's left after midpoint removal.
-		printf ("Cantor interval=%d/%d lo=%g hi=%g\n", d/2, max/2, clo, chi);
-		for (n=0; n<=d; n++)
+		// printf ("Cantor interval=%d/%d lo=%g hi=%g\n", d/2, max/2, clo, chi);
+
+		// now bincount
+		int nlo = (int) floor (nbins * clo);
+		int nhi = (int) ceil (nbins * chi);
+		for (n=nlo; n<=nhi; n++)
 		{
+			bin[n] ++;
+			cnt ++;
 		}
 	}
-	printf ("# total count=%d\n", cnt);
+	double measure = ((double) cnt) / ((double) nbins);
+	printf ("# total count=%d measure=%g\n", cnt, measure);
 	for (i=0; i<nbins; i++)
 	{
 		double bcnt = bin[i];
@@ -74,14 +81,15 @@ main(int argc, char *argv[])
 {
 	int i;
 
-	if (argc <2)
+	if (argc <3)
 	{
-		fprintf (stderr, "Usage: %s <nbins> <maxiter>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <nbins> <pow> <z>\n", argv[0]);
 		exit (1);
 	}
 	int nbins = atoi (argv[1]);
 	int max = atoi (argv[2]);
+	double z = atof (argv[3]);
 
-	bincount (nbins, max, 0.333333);
+	bincount (nbins, max, z);
 }
 
