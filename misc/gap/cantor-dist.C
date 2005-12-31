@@ -12,15 +12,15 @@
 #include <stdlib.h>
 
 void
-bincount (int nbins, int pmax, double z)
+bincount (int nbins, int pmax, long double z)
 {
 	int i;
 
 	printf ("#\n# bincount of projection of Cantor polynomial\n#\n");
-	printf ("#\n# nbins=%d   pow=%d\n#\n",nbins,pmax);
+	printf ("#\n# nbins=%d   pow=%d	z=%Lg\n#\n",nbins,pmax, z);
 
 #define BINSZ 45720
-	double bin[BINSZ];
+	long double bin[BINSZ];
 	for (i=0; i<BINSZ; i++)
 	{
 		bin[i] = 0.0;
@@ -29,15 +29,15 @@ bincount (int nbins, int pmax, double z)
 	int max = 1<<pmax;
 
 	int n, d;
-	double cnt = 0.0;
+	long double cnt = 0.0;
 	for (d=0; d<max; d+=2)
 	{
 		int id;
 		// work out the binary digit expansion of d / pmax
 		int mask = 1<<(pmax-1);
-		double clo = 0.0;
-		double chi = 0.0;
-		double zn = 1.0;
+		long double clo = 0.0;
+		long double chi = 0.0;
+		long double zn = 1.0;
 		for (id=0; id < pmax-1; id++)
 		{
 			if (mask & d)	
@@ -49,8 +49,8 @@ bincount (int nbins, int pmax, double z)
 		}
 		chi = clo + zn/(1-z);
 
-		clo *= 1.0-z;
-		chi *= 1.0-z;
+		clo *= 1.0L-z;
+		chi *= 1.0L-z;
 
 		// clo and chi are the enpoints of the cantor intervals
 		// i.e. the stuff that's left after midpoint removal.
@@ -59,8 +59,8 @@ bincount (int nbins, int pmax, double z)
 		// now bincount
 		clo *= nbins;
 		chi *= nbins;
-		double nlo = ceil (clo);
-		double nhi = floor (chi);
+		long double nlo = ceill (clo);
+		long double nhi = floorl (chi);
 
 		int ilo = (int) nlo;
 		int ihi = (int) nhi;
@@ -69,7 +69,7 @@ bincount (int nbins, int pmax, double z)
 		// or if the interval fits entirely within one bin
 		if (ilo-1 == ihi)
 		{
-			// printf ("onebin (%g, %g) i=(%d, %d), \tdelt= %g\n", clo, chi, ilo, ihi, chi-clo);
+			// printf ("onebin (%g, %g) i=(%d, %d), \tdelt= %Lg\n", clo, chi, ilo, ihi, chi-clo);
 			bin [ihi] += chi - clo;
 			cnt += chi - clo;
 		}
@@ -80,7 +80,7 @@ bincount (int nbins, int pmax, double z)
 			}
 			bin [ihi] += chi - nhi;
 
-			// printf ("duude (%g, %g) i=(%d, %d), \tdelt= %g %g\n", clo, chi, ilo, ihi, nlo-clo, chi-nhi);
+			// printf ("duude (%g, %g) i=(%d, %d), \tdelt= %Lg %Lg\n", clo, chi, ilo, ihi, nlo-clo, chi-nhi);
 
 			cnt += (nlo-clo) + (chi-nhi);
 	
@@ -91,15 +91,15 @@ bincount (int nbins, int pmax, double z)
 			}
 		}
 	}
-	double measure = cnt / ((double) nbins);
-	printf ("# total count=%g measure=%g\n", cnt, measure);
+	long double measure = cnt / ((long double) nbins);
+	printf ("# total count=%Lg measure=%Lg\n#\n", cnt, measure);
 	for (i=0; i<nbins; i++)
 	{
-		double bcnt = bin[i];
-		bcnt /= (double) cnt;
-		bcnt *= (double) nbins;
-		double x = ((double) 2*i+1) / ((double) 2*nbins);
-		printf ("%5d	%8.6g	%g\n", i, x, bcnt);
+		long double bcnt = bin[i];
+		bcnt /= (long double) cnt;
+		bcnt *= (long double) nbins;
+		long double x = ((long double) 2*i+1) / ((long double) 2*nbins);
+		printf ("%5d	%8.6Lg	%Lg\n", i, x, bcnt);
 	}
 }
 
@@ -114,7 +114,7 @@ main(int argc, char *argv[])
 	}
 	int nbins = atoi (argv[1]);
 	int max = atoi (argv[2]);
-	double z = atof (argv[3]);
+	long double z = atof (argv[3]);
 
 	bincount (nbins, max, z);
 }
