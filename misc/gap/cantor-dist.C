@@ -12,7 +12,7 @@
 #include <stdlib.h>
 
 void
-bincount (int nbins, int pmax, double c)
+bincount (int nbins, int pmax, double z)
 {
 	int i;
 
@@ -33,20 +33,28 @@ bincount (int nbins, int pmax, double c)
 	for (d=0; d<max; d+=2)
 	{
 		int id;
-	printf ("duude d=%d\n", d);
-		// work out the binary digits
+		// work out the binary digit expansion of d / pmax
 		int mask = 1<<(pmax-1);
-		for (id=0; id < pmax; id++)
+		double clo = 0.0;
+		double chi = 0.0;
+		double zn = 1.0;
+		for (id=0; id < pmax-1; id++)
 		{
-			if (mask & d)	{
-				printf ("hit id=%d mask=0x%x\n", id, mask);
-			}
-			else
+			if (mask & d)	
 			{
-				printf ("mis id=%d mask=0x%x\n", id, mask);
+				clo += zn;
 			}
 			mask >>= 1;
+			zn *= z;
 		}
+		chi = clo + zn/(1-z);
+
+		clo *= 1.0-z;
+		chi *= 1.0-z;
+
+		// clo and chi are the enpoints of the cantor intervals
+		// i.e. the stuff that's left after midpoint removal.
+		printf ("Cantor interval=%d/%d lo=%g hi=%g\n", d/2, max/2, clo, chi);
 		for (n=0; n<=d; n++)
 		{
 		}
@@ -74,6 +82,6 @@ main(int argc, char *argv[])
 	int nbins = atoi (argv[1]);
 	int max = atoi (argv[2]);
 
-	bincount (nbins, max, 0.6);
+	bincount (nbins, max, 0.333333);
 }
 
