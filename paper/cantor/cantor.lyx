@@ -504,7 +504,7 @@ where
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -672,7 +672,7 @@ ant, known as the Dedekind eta.
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -822,9 +822,6 @@ The presumption that we are making here is that the derivative of the Minkowski
  A very synoptic overview can be found in the article on elliptic functions
  in Wikipedia.
  An in-depth exposition can be found in the book by Apostol.
-\layout Standard
-
-asdf asdf...
 \layout Subsection
 
 A Binary Tree Topology
@@ -1030,8 +1027,13 @@ cylinder sets
 Cantor Set Measures
 \layout Standard
 
-There are a large variety of constructions that can be made from this series;
- for example 
+There are a large variety of constructions that can be made from the binary
+ series defined in equation 
+\begin_inset LatexCommand \ref{eq: binary expansion}
+
+\end_inset 
+
+; for example 
 \begin_inset Formula \begin{equation}
 c_{z}(x)=\sum_{k=1}^{\infty}b_{k}z^{k}\label{eq:}\end{equation}
 
@@ -1222,7 +1224,7 @@ tricky
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1259,26 +1261,157 @@ This figure shows a graph of the function
 
 \layout Standard
 
-The insight that we wish to provide here is that the two endpoints of Cantor's
- interval construction can also be mapped to the left and right derivatives
- of the Takagi function.
- That is, for any dyadic rational 
-\begin_inset Formula $p/2^{n}$
+We now want to consider how this function maps a measure defined on the
+ domain to the range of the function.
+ Each of the following figures shows the distribution of the uniform measure
+ on the domain as it is mapped to the codomain.
+ This is done by box-counting over a finite set of intervals.
+ For example, one starts by dividing up the unit interval into 
+\begin_inset Formula $2^{n}$
 \end_inset 
 
- for odd integer 
-\begin_inset Formula $p$
+equal-length intervals, whose endpoints lie on integral multiples of 
+\begin_inset Formula $2^{-n}$
 \end_inset 
 
-, we have two inequivalent binary sequences that represent this rational.
- Each sequence can be used to build a distinct polynomial.
- The value of two polynomials at the rational are the two endpoints of an
- interval in the Cantor Set construction.
- But these two endpoints are also the left and right derivatives of the
- Takagi Curve.
- One sequence maps to the derivative of the Takagi function on one side
- of this rational, and the other to the other side of this rational.
+.
+ The function 
+\begin_inset Formula $c_{z}(x)$
+\end_inset 
+
+, for fixed 
+\begin_inset Formula $z$
+\end_inset 
+
+, is used to map each of these intervals.
+ To avoid the ambiguity of which binary expansion to use, the map that results
+ in the shortest possible interval is used.
+ Each of these intervals is then histogrammed over a set of 
+\begin_inset Formula $N$
+\end_inset 
+
+ boxes, and then normalized, to generate an image.
+ The normalization is such that the sum of the histogram (the sum total
+ of the boxes) is normalized to one.
+ In principle, each such figure generated will depend not only on the number
+ of dyadic intervals 
+\begin_inset Formula $2^{n}$
+\end_inset 
+
+ but also on the number of bars 
+\begin_inset Formula $N$
+\end_inset 
+
+ in the histogram.
+ In paractice, most (but not all) such figures will exhibit a limiting behaviour
+ for large 
+\begin_inset Formula $n$
+\end_inset 
+
+ and 
+\begin_inset Formula $N$
+\end_inset 
+
+, and care is taken to try to always present a figure in this limiting regime.
+ Exceptions to this are noted.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Measure of the Cantor Dust
+\layout Standard
+
+
+\begin_inset Graphics
+	filename cantor-dust-0.333.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the histogram for the image of 
+\begin_inset Formula $c_{z}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $z=1/3$
+\end_inset 
+
+, histogrammed into 
+\begin_inset Formula $N=2001$
+\end_inset 
+
+ boxes.
+ This is essentially a diagram of the classic, canonical Cantor set.
+ The height of the bars is a simple function of the number of bars 
+\begin_inset Formula $N$
+\end_inset 
+
+, given by XXXX give the formula.
+ The un-evenness of the bar heights is a symptom of the fact that 
+\begin_inset Formula $N=2001$
+\end_inset 
+
+ is not divisible by 
+\begin_inset Formula $3$
+\end_inset 
+
+, and so one has a jittering effect.
  
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Measure of the Cantor Dust
+\layout Standard
+
+
+\begin_inset Graphics
+	filename cantor-dust-0.55.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the histogram for the image of 
+\begin_inset Formula $c_{z}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $z=0.55$
+\end_inset 
+
+, histogrammed into 
+\begin_inset Formula $N=2001$
+\end_inset 
+
+ boxes.
+ T The height of the bars is a simple function of the number of bars 
+\begin_inset Formula $N$
+\end_inset 
+
+, given by XXXX give the formula.
+ The un
+\end_inset 
+
+
 \layout Bibliography
 \bibitem [Apostol]{key-1}
 
