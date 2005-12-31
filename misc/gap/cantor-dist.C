@@ -12,12 +12,12 @@
 #include <stdlib.h>
 
 void
-bincount (int nbins, int max)
+bincount (int nbins, int pmax, double c)
 {
 	int i;
 
-	printf ("#\n# bincount of rationals using plain math\n#\n");
-	printf ("#\n# nbins=%d   maxiter=%d\n#\n",nbins,max);
+	printf ("#\n# bincount of projection of Cantor polynomial\n#\n");
+	printf ("#\n# nbins=%d   pow=%d\n#\n",nbins,pmax);
 
 #define BINSZ 45720
 	int bin[BINSZ];
@@ -26,10 +26,27 @@ bincount (int nbins, int max)
 		bin[i] = 0;
 	}
 
+	int max = 1<<pmax;
+
 	int n, d;
 	int cnt = 0;
-	for (d=1; d<max; d++)
+	for (d=0; d<max; d+=2)
 	{
+		int id;
+	printf ("duude d=%d\n", d);
+		// work out the binary digits
+		int mask = 1<<(pmax-1);
+		for (id=0; id < pmax; id++)
+		{
+			if (mask & d)	{
+				printf ("hit id=%d mask=0x%x\n", id, mask);
+			}
+			else
+			{
+				printf ("mis id=%d mask=0x%x\n", id, mask);
+			}
+			mask >>= 1;
+		}
 		for (n=0; n<=d; n++)
 		{
 		}
@@ -57,6 +74,6 @@ main(int argc, char *argv[])
 	int nbins = atoi (argv[1]);
 	int max = atoi (argv[2]);
 
-	bincount (nbins, max);
+	bincount (nbins, max, 0.6);
 }
 
