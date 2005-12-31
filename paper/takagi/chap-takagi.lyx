@@ -1634,6 +1634,8 @@ Homework: Make the above statements firm by providing all the correct factors
  Start by noticing that the traditional derivative is ill-defined only at
  dyadic fractions; for all other rationals and irrationals, there is no
  problem.
+ In particular, the dyadic fractions are a set of measure zero; the derivative
+ is well-defined on a set of measure one.
  At the dyadic fractions, use the gap to assign left and right derivatives,
  and give an exact expression for each.
 \layout Description
@@ -1642,17 +1644,17 @@ Homework: The classic example of a Cantor Set is built by means of a dyadic
  subdivision of the unit interval.
  Because of this, we can apply the Modular Group symmetry here as well.
  How do the limit points of the Cantor set (the points that are not the
- endpoints of intervals) behave under the Modular Group? Can we use this
- to gain insight into the structure of the Modular Group? Given that the
- cardinality of the Cantor Set is the cardinality of the Continuum, can
- we work backwards to deduce the action of the Modular Group on the Real
- Numbers?
+ endpoints of intervals) behave under the dyadic monoid? Given that the
+ Cantor set can be mapped to the real numbers (the cardinality of the Cantor
+ set is the cardinality of the continuum), can we work backwards to deduce
+ the action of the modular group monoid on the real number line?
 \layout Standard
 
 Presumably, it should be obvious by now that the Cantor Polynomials transform
  as the two-dimensional (dyadic) representation of the Modular Group.
  This is as we should expect, based on the reasoning about the dimension
  of the representation presented in the next section.
+ XXX the last frew paragraphs are a less-than satisfying treatment.
 \layout Subsection
 
 The Complex-valued Takagi Curve
@@ -3851,7 +3853,9 @@ Homework: Work out the transformation of the derivative curve under the
 \end_inset 
 
 .
- 
+ Keep in mind that the derivative is ill-defined only on the dyadics, which
+ is a set of measure zero.
+ The derivative is well-defined on a set of measure one.
 \layout Subsection
 
 Analytic Continuation
@@ -4158,7 +4162,7 @@ on the unit disk
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -4245,6 +4249,18 @@ This figure shows a combined
 \end_inset 
 
 
+\layout Standard
+
+
+\begin_inset Note
+collapsed true
+
+\layout Standard
+
+Above figures were generated with src/generate/takagi.C.
+\end_inset 
+
+
 \layout Description
 
 Homework: Describe the analytic properties of 
@@ -4261,18 +4277,6 @@ Homework: Describe the analytic properties of
 
  held fixed.
  
-\layout Standard
-
-
-\begin_inset Note
-collapsed true
-
-\layout Standard
-
-Above figures were generated with src/generate/takagi.C.
-\end_inset 
-
-
 \layout Subsection
 
 Conclusions
