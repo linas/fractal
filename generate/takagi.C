@@ -17,24 +17,10 @@
 
 static int is_init = 0;
 
-#define MAX_TERMS 300
+#define MAX_TERMS 2300
 #define MANTISSA_BITS 48
 
 static char bits [MAX_TERMS+MANTISSA_BITS];
-
-static void setup(int shift)
-{
-	int i;
-	// srand (331);
-	for (i=0; i<shift; i++)
-	{
-		rand();
-	}
-	for (i=0; i<MAX_TERMS+MANTISSA_BITS; i++)
-	{
-		bits[i] = (int) (2.0*rand()/(RAND_MAX+1.0));
-	}
-}
 
 // return (2^n x) - floor (2^n x)
 //
@@ -50,6 +36,23 @@ static double get_x (int n)
 	}
 
 	return x;
+}
+
+static void setup(int shift)
+{
+	int i;
+	// srand (331);
+	for (i=0; i<shift; i++)
+	{
+		rand();
+	}
+	for (i=0; i<MAX_TERMS+MANTISSA_BITS; i++)
+	{
+		bits[i] = (int) (2.0*rand()/(RAND_MAX+1.0));
+	}
+
+	double x = get_x (0);
+	printf ("disk for x=%22.18g\n", x);
 }
 
 // basic triangle wave
@@ -68,7 +71,7 @@ static void takagi_series_c (double re_w, double im_w, double *prep, double *pim
 	double wcos = re_w / wmag;
 	double wsin = im_w / wmag;
 
-	if (wmag > 1.01) 
+	if (wmag > 1.00001) 
 	{
 		*prep = 0.0;
 		*pimp = 0.0;
@@ -106,8 +109,8 @@ static double takagi_series (double re_q, double im_q, int itermax)
 
 	double rep, imp;
 	takagi_series_c (re_q, im_q, &rep, &imp);
-	return (atan2 (imp, rep)+M_PI) / (2.0*M_PI);
-	// return sqrt (rep*rep+imp*imp);
+	//return (atan2 (imp, rep)+M_PI) / (2.0*M_PI);
+	return sqrt (rep*rep+imp*imp);
 	// return rep;
 	// return imp;
 }
