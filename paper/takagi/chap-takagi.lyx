@@ -613,7 +613,7 @@ Consider first the generator that is the interval contraction
 
  Iterating on this generator gives 
 \begin_inset Formula \begin{equation}
-\left[g^{n}t_{w}\right](x)=t_{w}\left(\frac{x}{2^{n}}\right)=\frac{x}{2^{n-1}}\left(\frac{1-2^{n}w^{n}}{1-2w}\right)+w^{n}t_{w}(x)\label{eq:}\end{equation}
+\left[g^{n}t_{w}\right](x)=t_{w}\left(\frac{x}{2^{n}}\right)=\frac{x}{2^{n-1}}\left(\frac{1-2^{n}w^{n}}{1-2w}\right)+w^{n}t_{w}(x)\label{eq: power of two value}\end{equation}
 
 \end_inset 
 
@@ -3937,14 +3937,12 @@ t_{w}\left(\frac{1}{3}\right)=\frac{2}{3(1-w)}\label{eq:}\end{equation}
 
 \end_inset 
 
- has a simple pole.
- 
-\begin_inset Formula \begin{equation}
-t_{w}\left(\frac{1}{3\cdot2^{n}}\right)=\frac{1-w-2^{n}w^{n+1}}{3\cdot2^{n-1}(1-w)(1-2w)}\label{eq:}\end{equation}
-
+ has a simple pole at 
+\begin_inset Formula $w=1$
 \end_inset 
 
- and 
+.
+ Other values include 
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{1}{5}\right)=\frac{2}{5}\cdot\frac{1+2w}{1-w^{2}}\label{eq:}\end{equation}
 
@@ -3968,33 +3966,117 @@ t_{w}\left(\frac{1}{11}\right)=\frac{2}{11}\cdot\frac{1+2w+4w^{2}+6w^{3}+5w^{4}}
 
 \end_inset 
 
+ all of which appear to have simple poles at various roots of unity.
+ Note that for all of these cases, the limiting asymptotic behaviour for
+ large 
+\begin_inset Formula $w$
+\end_inset 
+
+ is finite.
+ 
+\layout Standard
+
+It could be interesting to provide a description in terms of the reduced
+ characters.
+ XXX do this.
+ 
+\layout Standard
+
+Given any one such value, one may deduce the related function using formula
+ 
+\begin_inset LatexCommand \ref{eq: power of two value}
+
+\end_inset 
+
+ given previously:
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{x}{2^{n}}\right)=\frac{x}{2^{n-1}}\left(\frac{1-2^{n}w^{n}}{1-2w}\right)+w^{n}t_{w}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+Thus, at least for many rational values of 
+\begin_inset Formula $x$
+\end_inset 
+
+, it appears that the Takagi curve may be analytically extended to regions
+ 
+\begin_inset Formula $|w|>1$
+\end_inset 
+
+, where it appears to be a rational function of 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+However, the rational numbers are a set of measure zero in the reals; can
+ anything be done for the irrationals? Some numerical explorations can provide
+ insight.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+disk
+\layout Standard
+
+
+\begin_inset Graphics
+	filename w-disk-arg.jpeg
+	width 100text%
+
+\end_inset 
+
 
 \layout Standard
 
-Thus, on at least a point-wise basis, one may analytically extend the Takagi
- curve to regions 
+This figure shows a phase portrait of 
+\begin_inset Formula $t_{w}\left(0.8959848989828067\right)$
+\end_inset 
+
+on the unit disk 
+\begin_inset Formula $|w|<1$
+\end_inset 
+
+.
+ The color coding is such that black corresponds to 
+\begin_inset Formula ${\rm arg}\, t_{w}\approx0$
+\end_inset 
+
+, green to 
+\begin_inset Formula ${\rm arg}\, t_{w}\approx\pi$
+\end_inset 
+
+ and red to 
+\begin_inset Formula ${\rm arg}\, t_{w}\approx2\pi$
+\end_inset 
+
+.
+ Simple zeros are clearly visible inside the disk, as endpoints of lines
+ where the phase wraps from black to red.
+ An arrangement of a large number of zeros along the boundary 
+\begin_inset Formula $|w|=1$
+\end_inset 
+
+ can be sensed.
+ The sums are not convergent for 
 \begin_inset Formula $|w|>1$
 \end_inset 
 
-, or at least give explicit, finite-form expressions.
-\layout Description
-
-Homework: Show the explicit analytic continuation of the Takagi curve to
- regions 
-\begin_inset Formula $|w|>1$
+ and are not shown.
 \end_inset 
 
-.
- Discuss the analytic properties of 
-\begin_inset Formula $t_{w}$
-\end_inset 
 
-.
- Provide the asymptotic expansion for 
-\begin_inset Formula $w\rightarrow\infty$
-\end_inset 
-
-.
 \layout Description
 
 Homework: Describe the analytic properties of 
