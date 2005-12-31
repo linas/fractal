@@ -44,16 +44,23 @@ long double parabola_up (long double x)
 	return 4.0L*t*t;
 }
 
+long double sine (long double x)
+{
+	long double t = sinl (M_PI*x);
+	return t*t;
+}
+
 /* Have triangle bumps at all integer frequencies */
 long double n_takagi (long double w, long double x)
 {
 	int k;
 	long double acc = 0.0L;
 	long double tw = 1.0L;
-	for (k=0; k<50; k++)
+	for (k=0; k<350; k++)
 	{
 		int d;
-		long double term = tw* triangle (k+1*x);
+		long double term = tw* triangle ((k+1)*x);
+		// long double term = tw* sine ((k+1)*x);
 		acc += term;
 		tw *= w;
 		if (1.0e-16 > tw) break;
@@ -70,7 +77,8 @@ main (int argc, char *argv[])
 	int i;
 
 	// int nmax = 512;
-	int nmax = 432;
+	int nmax = 721;
+	// int nmax = 432;
 	// int nmax = 1717;
 	// int nmax = 2048;
 
@@ -90,7 +98,10 @@ main (int argc, char *argv[])
 		// x += ((double) rand()) / (RAND_MAX*((double)nmax));
 		
 		double tw = n_takagi (w, x);
-		double ts = tw;
+		tw *= (1.0-w);
+		tw = 1.0-tw;
+		double ts = log(tw);
+		ts = tw;
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, ts, tw-ts);
 		fflush (stdout);
