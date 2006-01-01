@@ -32,21 +32,20 @@ void GetNextDyadic (unsigned int *n, unsigned int *d)
 	*d = last_d;
 }
 
-#define BINSZ 45400
-double bin[BINSZ];
-
 /* bincount the farey fractions */
-void bincount(int npow, int oversamp)
+double * 
+bincount(int npow, int oversamp)
 {
 	int i;
 	int nbins = 1<<npow;
 	int max = nbins * oversamp;
 
-	printf ("#\n# nbins=%d   maxiter=%d\n#\n",nbins,max);
+	printf ("#\n# nbins=%d   maxiter=%d\n#\n", nbins, max);
 
 	FareyIterator fi;
 
-	for (i=0; i<BINSZ; i++)
+	double *bin = (double *) malloc ((nbins+1)*sizeof (double));
+	for (i=0; i<nbins; i++)
 	{
 		bin[i] = 0.0;
 	}
@@ -103,6 +102,8 @@ void bincount(int npow, int oversamp)
 		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bcnt, gral, far);
 	}
 #endif
+
+	return bin;
 }
 
 /* perform fourier transform; However, this explcitly omits
@@ -115,7 +116,7 @@ void fourier (double *bins, int npow)
 	int p;
 	int nbins = 1<<npow;
 
-	int step = nbins >>1;
+	int step = nbins >>2;
 	for (p=0; p<npow; p++)
 	{
 		double aleft = 0.0;
@@ -163,10 +164,10 @@ main(int argc, char *argv[])
 		fprintf (stderr, "Usage: %s <npow> <oversamp>\n", argv[0]);
 		exit (1);
 	}
-	int npow = atoi (argv[1]);
-	int oversamp = atoi (argv[2]);
+	int npow = atoll (argv[1]);
+	int oversamp = atoll (argv[2]);
 
-	bincount (npow, oversamp);
-	fourier (bin, npow);
+	double * bins = bincount (npow, oversamp);
+	fourier (bins, npow);
 }
 
