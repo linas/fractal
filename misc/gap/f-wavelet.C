@@ -52,30 +52,34 @@ bincount(int npow, int oversamp)
 	bin[0] = 1.0;
 	bin[nbins-1] = 1.0;
 
-	/* Compute the distribution by bining */
+	/* Compute the distribution by histogramming */
 	int cnt =2;
-	for (i=0; i<max-1; i++)
+	for (i=1; i<max; i++)
 	{
 		int n,d;
 		fi.GetNextFarey (&n, &d);
 		// GetNextDyadic (&n, &d);
 		// printf ("duude i=%d n/d= %d/%d\n", i, n,d);
 
-		double x = ((double) n)/ ((double) d);
-		x *= nbins;
-		int ib = (int) x;
+		long double x = ((long double) n)/ ((long double) d);
+		x *= (long double) nbins;
+		int ib = (int) floorl(x);
 
 		// Is d a power of two ? if it is, then split its
 		// contribution over two neighboring bins
+		// make sure it really is on a bin boundary
 		int dd = d;
-		while (dd%2 == 0 && dd>1)
+		int np = npow;
+		while (dd%2 == 0 && np >0 && dd>1)
 		{
 			dd >>= 1;
+			np --;
 		}
 		if (dd == 1)
 		{
 			bin [ib-1] += 0.5;
 			bin [ib] += 0.5;
+			// printf ("split i=%d n/d= %d/%d	ibin=%d\n", i, n,d, ib);
 		}
 		else
 		{
@@ -116,8 +120,8 @@ void fourier (double *bins, int npow)
 	int p;
 	int nbins = 1<<npow;
 
-	int step = nbins >>2;
-	for (p=1; p<npow; p++)
+	int step = nbins >>1;
+	for (p=0; p<npow; p++)
 	{
 		double aleft = 0.0;
 		double aright =  0.0;
@@ -135,6 +139,13 @@ void fourier (double *bins, int npow)
 			}
 			ncnt += step;
 
+			double lpr = aleft+aright;
+			double lmr = aleft-aright;
+			printf ("p=%d step=%d/%d \ttot= %8.1f\tdiff= %8.1f\t%g\t%g\n", 
+				p, ncnt/(2*step), nbins/(2*step), lpr, lmr, lmr/lpr, lpr/lmr);
+			aleft = 0.0;
+			aright = 0.0;
+#if 0
 			for (i=0; i< step; i++)
 			{
 				aright += bins[ncnt+i];
@@ -146,11 +157,14 @@ void fourier (double *bins, int npow)
 				aleft += bins[ncnt+i];
 			}
 			ncnt += step;
+#endif
 		}
+		printf ("\n");
+
 		double lpr = aleft+aright;
 		double lmr = aleft-aright;
 		// printf ("duude p=%d step=%d \t(l,r)=( %g\t%g )\n", p, step, aleft, aright);
-		printf ("duude p=%d step=%d \t%g\t%g\t%g\t%g\n", p, step, lpr, lmr, lmr/lpr, lpr/lmr);
+		// printf ("duude p=%d step=%d \t%g\t%g\t%g\t%g\n", p, step, lpr, lmr, lmr/lpr, lpr/lmr);
 		step >>= 1;
 	}
 }
