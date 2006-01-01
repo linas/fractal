@@ -117,7 +117,7 @@ void fourier (double *bins, int npow)
 	int nbins = 1<<npow;
 
 	int step = nbins >>2;
-	for (p=0; p<npow; p++)
+	for (p=1; p<npow; p++)
 	{
 		double aleft = 0.0;
 		double aright =  0.0;
@@ -150,7 +150,7 @@ void fourier (double *bins, int npow)
 		double lpr = aleft+aright;
 		double lmr = aleft-aright;
 		// printf ("duude p=%d step=%d \t(l,r)=( %g\t%g )\n", p, step, aleft, aright);
-		printf ("duude p=%d step=%d \t%g\t%g\t%g\n", p, step, lpr, lmr, lmr/lpr);
+		printf ("duude p=%d step=%d \t%g\t%g\t%g\t%g\n", p, step, lpr, lmr, lmr/lpr, lpr/lmr);
 		step >>= 1;
 	}
 }
