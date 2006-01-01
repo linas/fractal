@@ -24,14 +24,17 @@ class Dyadic
 		// that is, gets the binary digits of p
 		void SetFrac (unsigned int p, unsigned int order);
 
-		// return alternating polynomial sum_n w^n (2b_n -1)
-		double ToAlternatingPoly (double w);
-
 		// return polynomial sum_n b_n w^n 
 		double ToCantorPoly (double w);
 
+		// return alternating polynomial sum_n w^n (2b_n -1)
+		double ToAlternatingPoly (double w);
+
 		// return sum_n b_n w^n /n!
 		double ToCantorExp (double w);
+
+		// return sum_n (b_n XOR b_{n+1}) w^n
+		double ToXOR (double w);
 
 		// return sum_n (2b_n -1) n^-s
 		double ToZetaPoly (double s);
@@ -151,6 +154,27 @@ Dyadic :: ToCantorExp (double z)
 
 		zn *= z;
 		fact *= i+1;
+	}
+
+	return acc;
+}
+
+double
+Dyadic :: ToXOR (double z)
+{
+	int i;
+	double acc = 0.0;
+	double zn = 1.0;
+
+	for (i=0; i<ndigits; i++)
+	{
+		short alt = bdigits[i];
+		if (alt == bdigits[i+1]) { alt=0; } else {alt=1;}
+		double term = alt;
+		term *= zn;
+		acc += term;
+
+		zn *= z;
 	}
 
 	return acc;
@@ -277,7 +301,8 @@ main (int argc, char * argv[])
 		// double y = dy.ToAlternatingPoly (zre);
 		// double y = dy.ToCantorPoly (zre);
 		// double y = dy.ToCantorExp (zre);
-		double y = dy.ToZetaPoly (zre);
+		double y = dy.ToXOR (zre);
+		// double y = dy.ToZetaPoly (zre);
 		// double y = dy.ToZetaPolyC (zre, zim);
 
 		acc += y;

@@ -27,15 +27,15 @@ bincount (int nbins, int pmax, long double z)
 		bin[i] = 0.0;
 	}
 
-	int max = 1<<pmax;
+	long long unsigned int max = 1ULL<<pmax;
 
-	int n, d;
+	long long unsigned int d;
 	long double cnt = 0.0;
 	for (d=0; d<max; d+=2)
 	{
 		int id;
 		// work out the binary digit expansion of d / pmax
-		int mask = 1<<(pmax-1);
+		long long unsigned int mask = 1ULL<<(pmax-1);
 		long double clo = 0.0;
 		long double chi = 0.0;
 		long double zn = 1.0;
@@ -85,6 +85,7 @@ bincount (int nbins, int pmax, long double z)
 
 			cnt += (nlo-clo) + (chi-nhi);
 	
+			int n;
 			for (n=ilo; n<ihi; n++)
 			{
 				bin[n] += 1.0;
