@@ -35,10 +35,12 @@ void GetNextDyadic (unsigned int *n, unsigned int *d)
 #define BINSZ 45400
 double bin[BINSZ];
 
-void bincount(int npow, int max)
+/* bincount the farey fractions */
+void bincount(int npow, int oversamp)
 {
 	int i;
 	int nbins = 1<<npow;
+	int max = nbins * oversamp;
 
 	printf ("#\n# nbins=%d   maxiter=%d\n#\n",nbins,max);
 
@@ -53,16 +55,33 @@ void bincount(int npow, int max)
 
 	/* Compute the distribution by bining */
 	int cnt =2;
-	for (i=0; i<max; i++)
+	for (i=0; i<max-1; i++)
 	{
 		int n,d;
 		fi.GetNextFarey (&n, &d);
 		// GetNextDyadic (&n, &d);
+		// printf ("duude i=%d n/d= %d/%d\n", i, n,d);
 
 		double x = ((double) n)/ ((double) d);
 		x *= nbins;
 		int ib = (int) x;
-		bin [ib] += 1.0;
+
+		// Is d a power of two ? if it is, then split its
+		// contribution over two neighboring bins
+		int dd = d;
+		while (dd%2 == 0 && dd>1)
+		{
+			dd >>= 1;
+		}
+		if (dd == 1)
+		{
+			bin [ib-1] += 0.5;
+			bin [ib] += 0.5;
+		}
+		else
+		{
+			bin [ib] += 1.0;
+		}
 		cnt ++;
 	}
 
@@ -114,10 +133,23 @@ void fourier (double *bins, int npow)
 				aright += bins[ncnt+i];
 			}
 			ncnt += step;
+
+			for (i=0; i< step; i++)
+			{
+				aright += bins[ncnt+i];
+			}
+			ncnt += step;
+
+			for (i=0; i< step; i++)
+			{
+				aleft += bins[ncnt+i];
+			}
+			ncnt += step;
 		}
 		double lpr = aleft+aright;
-		double lmr = (aleft-aright)/lpr;
-		printf ("duude p=%d step=%d \t%g\t%g\n", p, step, lpr, lmr);
+		double lmr = aleft-aright;
+		// printf ("duude p=%d step=%d \t(l,r)=( %g\t%g )\n", p, step, aleft, aright);
+		printf ("duude p=%d step=%d \t%g\t%g\t%g\n", p, step, lpr, lmr, lmr/lpr);
 		step >>= 1;
 	}
 }
@@ -128,13 +160,13 @@ main(int argc, char *argv[])
 
 	if (argc <2)
 	{
-		fprintf (stderr, "Usage: %s <npow> <maxiter>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <npow> <oversamp>\n", argv[0]);
 		exit (1);
 	}
 	int npow = atoi (argv[1]);
-	int max = atoi (argv[2]);
+	int oversamp = atoi (argv[2]);
 
-	bincount (npow, max);
+	bincount (npow, oversamp);
 	fourier (bin, npow);
 }
 
