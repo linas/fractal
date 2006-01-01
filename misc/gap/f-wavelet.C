@@ -38,7 +38,7 @@ bincount(int npow, int oversamp)
 {
 	int i;
 	int nbins = 1<<npow;
-	int max = nbins * oversamp;
+	int max = nbins * (1<<oversamp);
 
 	printf ("#\n# nbins=%d   maxiter=%d\n#\n", nbins, max);
 
@@ -141,8 +141,8 @@ void fourier (double *bins, int npow)
 
 			double lpr = aleft+aright;
 			double lmr = aleft-aright;
-			printf ("p=%d step=%d/%d \ttot= %8.1f\tdiff= %8.1f\t%g\t%g\n", 
-				p, ncnt/(2*step), nbins/(2*step), lpr, lmr, lmr/lpr, lpr/lmr);
+			printf ("p=%d step=%d/%d \ttot= %8.1f\tl=%8.1f (%6.4f) r=%8.1f (%6.4f) D=%8.1f (%6.5f)\t%g\n", 
+				p, ncnt/(2*step), nbins/(2*step), lpr, aleft, aleft/lpr, aright, aright/lpr, lmr, lmr/lpr, lpr/lmr);
 			aleft = 0.0;
 			aright = 0.0;
 #if 0
