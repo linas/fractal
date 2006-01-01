@@ -5,6 +5,7 @@
  * Some exploratinos of polynomials generated from binary expansion
  *
  * Linas November 2004
+ * Linas December 2005
  */
 
 #include <math.h>
@@ -28,6 +29,9 @@ class Dyadic
 
 		// return polynomial sum_n b_n w^n 
 		double ToCantorPoly (double w);
+
+		// return sum_n b_n w^n /n!
+		double ToCantorExp (double w);
 
 		// return sum_n (2b_n -1) n^-s
 		double ToZetaPoly (double s);
@@ -88,6 +92,26 @@ Dyadic :: SetFrac (unsigned int p, unsigned int order)
 }
 
 double
+Dyadic :: ToCantorPoly (double z)
+{
+	int i;
+	double acc = 0.0;
+	double zn = 1.0;
+
+	for (i=0; i<ndigits; i++)
+	{
+		short alt = bdigits[i];
+		double term = alt;
+		term *= zn;
+		acc += term;
+
+		zn *= z;
+	}
+
+	return acc;
+}
+
+double
 Dyadic :: ToAlternatingPoly (double z)
 {
 	int i;
@@ -107,6 +131,30 @@ Dyadic :: ToAlternatingPoly (double z)
 	return acc;
 }
 
+// sum in an exponential-like fashion
+double
+Dyadic :: ToCantorExp (double z)
+{
+	int i;
+	double acc = 0.0;
+	double zn = 1.0;
+	double fact = 1.0;
+
+	for (i=0; i<ndigits; i++)
+	{
+		// short alt = bdigits[i];
+		short alt = 2*bdigits[i] - 1;
+		double term = alt;
+		term *= zn;
+		term /= fact;
+		acc += term;
+
+		zn *= z;
+		fact *= i+1;
+	}
+
+	return acc;
+}
 
 double
 Dyadic :: ToZetaPoly (double s)
@@ -155,25 +203,6 @@ Dyadic :: ToZetaPolyC (double s_re, double s_im)
 }
 
 
-double
-Dyadic :: ToCantorPoly (double z)
-{
-	int i;
-	double acc = 0.0;
-	double zn = 1.0;
-
-	for (i=0; i<ndigits; i++)
-	{
-		short alt = bdigits[i];
-		double term = alt;
-		term *= zn;
-		acc += term;
-
-		zn *= z;
-	}
-
-	return acc;
-}
 
 double
 Dyadic :: ToProd (void)
@@ -245,8 +274,10 @@ main (int argc, char * argv[])
 #endif
 
 		dy.SetFrac (p, order);
-		double y = dy.ToAlternatingPoly (zre);
+		// double y = dy.ToAlternatingPoly (zre);
 		// double y = dy.ToCantorPoly (zre);
+		// double y = dy.ToCantorExp (zre);
+		double y = dy.ToZetaPoly (zre);
 		// double y = dy.ToZetaPolyC (zre, zim);
 
 		acc += y;
