@@ -6,6 +6,7 @@
  * Linas Vepstas January 2006 
  */
 
+#include "Farey.h"
 
 // return single-integer index corresponding to the
 // discrete wavelet index (j,k)
@@ -27,6 +28,13 @@ haar_domain_max (int j, int k)
 	return ((double) k+1) / ((double) (1<<(j))
 }
 
+ContinuedFraction f;
+
+inline double
+farey_domain_midpoint (int j, int k)
+{
+	f.SetRatio (
+}
 
 main ()
 {
