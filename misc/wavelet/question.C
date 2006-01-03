@@ -60,22 +60,45 @@ void SternBrocotTree::Fill (int jlo, int jhi)
 	{
 		numerators [HIDX(j,0)] = 1;
 		denominators [HIDX(j, 0)] = j+2;
-		for (k=1; k<(1<<j); k++)
+
+printf ("wtf idx=%d (%d/%d)\n", HIDX(j,0), numerators [HIDX(j,0)], denominators [HIDX(j,0)]);
+		if (0 == j) continue;
+
+		numerators [HIDX(j,(1<<j)-1)] = j+1;
+		denominators [HIDX(j, (1<<j)-1)] = j+2;
+k=(1<<j)-1;
+printf ("other idx=%d (%d/%d)\n", HIDX(j,k), numerators [HIDX(j,k)], denominators [HIDX(j,k)]);
+		for (k=1; k<(1<<j)-1; k++)
 		{
 			int kl, kr, jl, jr; 
 			kl = k-1;
 			kr = k+1;
 			jl = j;
 			jr = j;
-			while (kl%2 == 0) {kl>>= 1; jl -= 1; }
-			while (kr%2 == 0) {kr>>= 1; jr -= 1; }
+			kl>>= 1; jl -= 1;
+			kr>>= 1; jr -= 1;
+			if (kl != 0) { while (kl%2 == 0) {kl>>= 1; jl -= 1; } }
+			if (kr != 0) { while (kr%2 == 0) {kr>>= 1; jr -= 1; } }
 			
-			numerators [HIDX(j,k)] = numerators [HIDX(jl,kl)] + numerators [HIDX(jr,kr)];
-			denominators [HIDX(j,k)] = denominators [HIDX(jl,kl)] + denominators [HIDX(jr,kr)];
+printf ("duude left idx=%d (jl, kl)=(%d %d) lidx=%d (%d/%d) \n", HIDX(j,k), jl, kl,  HIDX(jl,kl), numerators [HIDX(jl,kl)], denominators [HIDX(jl,kl)] );
+printf ("duude rigt idx=%d (jr, kr)=(%d %d) ridx=%d (%d/%d) \n", HIDX(j,k), jr, kr,  HIDX(jr,kr), numerators [HIDX(jr,kr)], denominators [HIDX(jr,kr)] );
+			// numerators [HIDX(j,k)] = numerators [HIDX(jl,kl)] + numerators [HIDX(jr,kr)];
+			// denominators [HIDX(j,k)] = denominators [HIDX(jl,kl)] + denominators [HIDX(jr,kr)];
 
-printf ("dude its (%d/%d) == (%d/%d)\n", 2*k+1, 1<<(j+1), numerators [HIDX(j,k)], denominators [HIDX(j,k)]);
+printf ("dude its idx=%d (%d/%d) == (%d/%d)\n", HIDX(j,k), 2*k+1, 1<<(j+1), numerators [HIDX(j,k)], denominators [HIDX(j,k)]);
 		}
 	}
+
+printf ("\n");
+	for (j=jlo; j<=jhi;  j++)
+	{
+		for (k=0; k<(1<<j); k++)
+		{
+			int i = HIDX(j,k);
+printf ("really its idx=%d (%d/%d) == (%d/%d)\n", HIDX(j,k), 2*k+1, 1<<(j+1), numerators [HIDX(j,k)], denominators [HIDX(j,k)]);
+		}
+	}
+	
 }
 
 inline double
