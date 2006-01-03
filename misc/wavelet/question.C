@@ -45,8 +45,8 @@ class SternBrocotTree
 
 SternBrocotTree::SternBrocotTree (void)
 {
-	max_j = 3;
-	maxidx = 1<<max_j;
+	max_j = 4;
+	maxidx = 1<<(max_j+1);
 	numerators = (int *) malloc (maxidx * sizeof (int));
 	denominators = (int *) malloc (maxidx * sizeof (int));
 	Fill (0, max_j);
@@ -71,21 +71,22 @@ printf ("other idx=%d (%d/%d)\n", HIDX(j,k), numerators [HIDX(j,k)], denominator
 		for (k=1; k<(1<<j)-1; k++)
 		{
 			int kl, kr, jl, jr; 
-			kl = k-1;
+			kl = k;
 			kr = k+1;
-			jl = j;
-			jr = j;
-			kl>>= 1; jl -= 1;
-			kr>>= 1; jr -= 1;
-			if (kl != 0) { while (kl%2 == 0) {kl>>= 1; jl -= 1; } }
-			if (kr != 0) { while (kr%2 == 0) {kr>>= 1; jr -= 1; } }
+			jl = j-1;
+			jr = j-1;
+printf ("duude start left idx=%d (jl, kl)=(%d %d) lidx=%d \n", HIDX(j,k), jl, kl,  HIDX(jl,kl));
+			while (kl%2 == 0) {kl>>= 1; jl -= 1; } 
+			while (kr%2 == 0) {kr>>= 1; jr -= 1; } 
+			kl = (kl-1)>>1;
+			kr = (kr-1)>>1;
 			
 printf ("duude left idx=%d (jl, kl)=(%d %d) lidx=%d (%d/%d) \n", HIDX(j,k), jl, kl,  HIDX(jl,kl), numerators [HIDX(jl,kl)], denominators [HIDX(jl,kl)] );
 printf ("duude rigt idx=%d (jr, kr)=(%d %d) ridx=%d (%d/%d) \n", HIDX(j,k), jr, kr,  HIDX(jr,kr), numerators [HIDX(jr,kr)], denominators [HIDX(jr,kr)] );
-			// numerators [HIDX(j,k)] = numerators [HIDX(jl,kl)] + numerators [HIDX(jr,kr)];
-			// denominators [HIDX(j,k)] = denominators [HIDX(jl,kl)] + denominators [HIDX(jr,kr)];
+			numerators [HIDX(j,k)] = numerators [HIDX(jl,kl)] + numerators [HIDX(jr,kr)];
+			denominators [HIDX(j,k)] = denominators [HIDX(jl,kl)] + denominators [HIDX(jr,kr)];
 
-printf ("dude its idx=%d (%d/%d) == (%d/%d)\n", HIDX(j,k), 2*k+1, 1<<(j+1), numerators [HIDX(j,k)], denominators [HIDX(j,k)]);
+printf ("dude its idx=%d (%d/%d) == (%d/%d)\n\n", HIDX(j,k), 2*k+1, 1<<(j+1), numerators [HIDX(j,k)], denominators [HIDX(j,k)]);
 		}
 	}
 
@@ -97,6 +98,7 @@ printf ("\n");
 			int i = HIDX(j,k);
 printf ("really its idx=%d (%d/%d) == (%d/%d)\n", HIDX(j,k), 2*k+1, 1<<(j+1), numerators [HIDX(j,k)], denominators [HIDX(j,k)]);
 		}
+printf ("\n");
 	}
 	
 }
