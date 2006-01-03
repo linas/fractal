@@ -6,16 +6,19 @@
  * Linas Vepstas January 2006 
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 // return single-integer index corresponding to the
 // discrete wavelet index (j,k)
-#DEFINE HIDX(j,k)  ((1<<((j)-1))+(k))
+#define HIDX(j,k)  ((1<<(j))+(k))
 
 // Return the minimum value below which the 
 // (j,k)'th Haar wavelet is vanishing
 inline double 
 haar_domain_min (int j, int k)
 {
-	return ((double) k) / ((double) (1<<(j))
+	return ((double) k) / ((double) (1<<(j)));
 }
 
 // Return the maximum value above which the 
@@ -23,7 +26,7 @@ haar_domain_min (int j, int k)
 inline double 
 haar_domain_max (int j, int k)
 {
-	return ((double) k+1) / ((double) (1<<(j))
+	return ((double) k+1) / ((double) (1<<(j)));
 }
 
 class SternBrocotTree
@@ -40,9 +43,9 @@ class SternBrocotTree
 		int * denominators;
 };
 
-SternBrocotTree::SternBrocotTree (void);
+SternBrocotTree::SternBrocotTree (void)
 {
-	max_j = 10;
+	max_j = 3;
 	maxidx = 1<<max_j;
 	numerators = (int *) malloc (maxidx * sizeof (int));
 	denominators = (int *) malloc (maxidx * sizeof (int));
@@ -55,8 +58,22 @@ void SternBrocotTree::Fill (int jlo, int jhi)
 
 	for (j=jlo; j<=jhi;  j++)
 	{
-		for (k=0; k<(1<<j); k++)
+		numerators [HIDX(j,0)] = 1;
+		denominators [HIDX(j, 0)] = j+2;
+		for (k=1; k<(1<<j); k++)
 		{
+			int kl, kr, jl, jr; 
+			kl = k-1;
+			kr = k+1;
+			jl = j;
+			jr = j;
+			while (kl%2 == 0) {kl>>= 1; jl -= 1; }
+			while (kr%2 == 0) {kr>>= 1; jr -= 1; }
+			
+			numerators [HIDX(j,k)] = numerators [HIDX(jl,kl)] + numerators [HIDX(jr,kr)];
+			denominators [HIDX(j,k)] = denominators [HIDX(jl,kl)] + denominators [HIDX(jr,kr)];
+
+printf ("dude its (%d/%d) == (%d/%d)\n", 2*k+1, 1<<(j+1), numerators [HIDX(j,k)], denominators [HIDX(j,k)]);
 		}
 	}
 }
@@ -68,4 +85,5 @@ farey_domain_midpoint (int j, int k)
 
 main ()
 {
+	SternBrocotTree t;
 }

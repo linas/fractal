@@ -20,6 +20,6 @@ realclean:	clean
 	$(CC) -c -O2 $<
 
 .o:
-	$(CC) -o $* $< $(LIB)/gcf.o $(LIB)/Farey.o $(LIB)/FareyTree.o -lgsl -lcblas -lm -lstdc++ 
+	$(CC) -o $* $< -lgsl -lcblas -lm -lstdc++ 
 
-question.o:  question.C $(LIB)/Farey.o $(INC)/Farey.h
+question.o:  question.C 
