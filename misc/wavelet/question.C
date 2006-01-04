@@ -6,6 +6,7 @@
  * Linas Vepstas January 2006 
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -13,22 +14,9 @@
 // discrete wavelet index (j,k)
 #define HIDX(j,k)  ((1<<(j))+(k))
 
-// Return the minimum value below which the 
-// (j,k)'th Haar wavelet is vanishing
-inline double 
-haar_domain_min (int j, int k)
-{
-	return ((double) k) / ((double) (1<<(j)));
-}
-
-// Return the maximum value above which the 
-// (j,k)'th Haar wavelet is vanishing
-inline double 
-haar_domain_max (int j, int k)
-{
-	return ((double) k+1) / ((double) (1<<(j)));
-}
-
+// This class is meant to return the farey number corresponding
+// to the k/(2^j)'th dyadic fraction.
+// Note that two competing coorinate systems are at play
 class SternBrocotTree
 {
 	public:
@@ -92,7 +80,7 @@ void SternBrocotTree::Fill (int jlo, int jhi)
 		}
 	}
 
-#if 1
+#if DEBUG
 	for (j=jlo; j<jhi;  j++)
 	{
 		for (k=0; k<(1<<j); k++)
@@ -108,21 +96,99 @@ void SternBrocotTree::Fill (int jlo, int jhi)
 
 double SternBrocotTree::GetFarey (int j, int k)
 {
-	if (j > max_j) Enlarge (j);
+	if (0 == k) return 0.0;
+	j--;
+
+	while (k%2 == 0) { k>>= 1; j -= 1; } 
+	k = (k-1)/2;
+
+	if (j >= max_j) Enlarge (j);
 
 	return ((double)  numerators [HIDX(j,k)]) / ((double) denominators [HIDX(j,k)]);
 }
 
 // ==========================================================================
 
-inline double
-farey_domain_midpoint (int j, int k)
+// Return the minimum value below which the 
+// (j,k)'th Haar wavelet is vanishing
+inline double 
+haar_domain_min (int j, int k)
 {
+	return ((double) k) / ((double) (1<<(j)));
+}
+
+// Return the maximum value above which the 
+// (j,k)'th Haar wavelet is vanishing
+inline double 
+haar_domain_max (int j, int k)
+{
+	return ((double) k+1) / ((double) (1<<(j)));
+}
+
+inline double
+haar_domain_midpoint (int j, int k)
+{
+	return ((double) 2*k+1) / ((double) (1<<(j+1)));
+}
+
+// return overlap of two square bumps
+static inline double 
+overlap (double alo, double ahi, double blo, double bhi)
+{
+	double bot=alo;
+	double top = ahi;
+	if (bot < blo) bot = blo;
+	if (bhi < top) top = bhi;
+	if (top <= bot) return 0.0;
+	return top-bot;
+} 
+
+// return the matrix element of the question mark 
+// composition operator (== transfer operator).
+double 
+q_oper_elt (int j, int k, int l, int m)
+{
+	static SternBrocotTree t;
+
+	// There are two non-intersection cases
+	double haar_hi = haar_domain_max (l,m);
+	double farey_lo = t.GetFarey (j, k);
+	if (haar_hi <= farey_lo) return 0.0;
+
+	double haar_lo = haar_domain_min (l,m);
+	double farey_hi = t.GetFarey (j, k+1);
+	if (haar_lo >= farey_hi) return 0.0;
+
+	// There are four total-overlap cases
+	double haar_mid = haar_domain_midpoint (l,m);
+	double farey_mid = t.GetFarey (j+1, 2*k+1);
+
+	if (haar_lo  <= farey_lo && farey_hi <= haar_mid) return 0.0;
+	if (haar_mid <= farey_lo && farey_hi <= haar_hi) return 0.0;
+	if (farey_lo  <= haar_lo && haar_hi <= farey_mid) return 0.0;
+	if (farey_mid <= haar_lo && haar_hi <= farey_hi) return 0.0;
+
+printf ("haar= %g %g %g\n", haar_lo, haar_mid, haar_hi);
+printf ("farey= %g %g %g\n", farey_lo, farey_mid, farey_hi);
+
+	double elt = 0.0;
+	elt += overlap (haar_lo, haar_mid, farey_lo,  farey_mid);
+	elt -= overlap (haar_lo, haar_mid, farey_mid, farey_hi);
+	elt -= overlap (haar_mid, haar_hi, farey_lo,  farey_mid);
+	elt += overlap (haar_mid, haar_hi, farey_mid, farey_hi);
+
+	int p = j+l;
+	if (p%2 == 1) elt *= M_SQRT2;
+	elt *= 1 << (p/2);
+	return elt;
 }
 
 main ()
 {
-	SternBrocotTree t;
+	double x = q_oper_elt (1,1,2,0);
+	double y = q_oper_elt (1,1,2,1);
+	double z = q_oper_elt (1,1,2,2);
+	double w = q_oper_elt (1,1,2,3);
 
-	t.GetFarey (8,0);
+	printf ("its %g %g %g %g \n", x,y, z, w);
 }
