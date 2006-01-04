@@ -16,7 +16,11 @@
 
 // This class is meant to return the farey number corresponding
 // to the k/(2^j)'th dyadic fraction.
-// Note that two competing coorinate systems are at play
+//
+// Note that two competing coordinate systems are at play
+// The "external" coord system are the values k/2^j 
+// The "internal" coord system are the values (2k+1)/2^{j+1}
+//
 class SternBrocotTree
 {
 	public:
@@ -26,7 +30,6 @@ class SternBrocotTree
 	private:
 		void Enlarge (int j);
 		void Fill (int jlo, int jhi);
-		int maxidx;
 		int max_j;
 		int * numerators;
 		int * denominators;
@@ -35,7 +38,7 @@ class SternBrocotTree
 SternBrocotTree::SternBrocotTree (void)
 {
 	max_j = 4;
-	maxidx = 1<<max_j;
+	int maxidx = 1<<max_j +3;
 	numerators = (int *) malloc (maxidx * sizeof (int));
 	denominators = (int *) malloc (maxidx * sizeof (int));
 	Fill (0, max_j);
@@ -43,7 +46,8 @@ SternBrocotTree::SternBrocotTree (void)
 
 void SternBrocotTree::Enlarge (int j)
 {
-	maxidx = 1<<j;
+	j++;
+	int maxidx = 1<<j +3;
 	numerators = (int *) realloc (numerators, maxidx * sizeof (int));
 	denominators = (int *) realloc (denominators, maxidx * sizeof (int));
 	Fill (max_j, j);
@@ -96,11 +100,15 @@ void SternBrocotTree::Fill (int jlo, int jhi)
 
 double SternBrocotTree::GetFarey (int j, int k)
 {
+printf ("farey asking %d/2^%d\n", k, j);
 	if (0 == k) return 0.0;
 	j--;
 
 	while (k%2 == 0) { k>>= 1; j -= 1; } 
 	k = (k-1)/2;
+printf ("farey idx %d %d\n", j,k);
+
+	if (0 > j) return 1.0;
 
 	if (j >= max_j) Enlarge (j);
 
@@ -153,42 +161,99 @@ q_oper_elt (int j, int k, int l, int m)
 	// There are two non-intersection cases
 	double haar_hi = haar_domain_max (l,m);
 	double farey_lo = t.GetFarey (j, k);
+printf ("hh=%g fl=%g\n", haar_hi, farey_lo);
 	if (haar_hi <= farey_lo) return 0.0;
 
 	double haar_lo = haar_domain_min (l,m);
 	double farey_hi = t.GetFarey (j, k+1);
+printf ("hl=%g fh=%g\n", haar_lo, farey_hi);
 	if (haar_lo >= farey_hi) return 0.0;
 
 	// There are four total-overlap cases
 	double haar_mid = haar_domain_midpoint (l,m);
 	double farey_mid = t.GetFarey (j+1, 2*k+1);
 
+	printf ("haar= %g %g %g\n", haar_lo, haar_mid, haar_hi);
+	printf ("farey= %g %g %g\n", farey_lo, farey_mid, farey_hi);
+
 	if (haar_lo  <= farey_lo && farey_hi <= haar_mid) return 0.0;
 	if (haar_mid <= farey_lo && farey_hi <= haar_hi) return 0.0;
 	if (farey_lo  <= haar_lo && haar_hi <= farey_mid) return 0.0;
 	if (farey_mid <= haar_lo && haar_hi <= farey_hi) return 0.0;
 
-printf ("haar= %g %g %g\n", haar_lo, haar_mid, haar_hi);
-printf ("farey= %g %g %g\n", farey_lo, farey_mid, farey_hi);
+	printf ("haar= %g %g %g\n", haar_lo, haar_mid, haar_hi);
+	printf ("farey= %g %g %g\n", farey_lo, farey_mid, farey_hi);
 
 	double elt = 0.0;
 	elt += overlap (haar_lo, haar_mid, farey_lo,  farey_mid);
 	elt -= overlap (haar_lo, haar_mid, farey_mid, farey_hi);
 	elt -= overlap (haar_mid, haar_hi, farey_lo,  farey_mid);
 	elt += overlap (haar_mid, haar_hi, farey_mid, farey_hi);
-
 	int p = j+l;
 	if (p%2 == 1) elt *= M_SQRT2;
 	elt *= 1 << (p/2);
 	return elt;
 }
 
-main ()
+int test (void)
 {
 	double x = q_oper_elt (1,1,2,0);
 	double y = q_oper_elt (1,1,2,1);
 	double z = q_oper_elt (1,1,2,2);
 	double w = q_oper_elt (1,1,2,3);
 
+	// should be 0.0 except for third one which is sqrt(8)/6
 	printf ("its %g %g %g %g \n", x,y, z, w);
+
+	int j=4;
+	int k;
+	for (k=0; k<(1<<j); k++)
+	{
+		double x = q_oper_elt (1,0,j,k);
+		printf ("its %d %g\n", k, x);
+	}
+}
+
+// ==========================================================================
+
+void make_oper (int dim)
+{
+	dim ++;
+
+	double *mat = (double *) malloc ((dim+1)*(dim+1)*sizeof (double));
+
+	int j,k,l,m;
+
+	for (j=0; j<dim; j++)
+	{
+		for (k=0; k<(1<<j); k++)
+		{
+			printf ("jk=%d %d == ",j,k); 
+			for (l=0; l<dim; l++)
+			{
+				for (m=0; m<(1<<l); m++)
+				{
+					double x = q_oper_elt (j,k,l,m);
+					printf ("%5.2g ", x);
+				}
+			}
+			printf ("\n");
+		}
+	}
+}
+
+main ()
+{
+	double x = q_oper_elt (4,0, 3,0);
+
+
+return 1;
+	// make_oper (3);
+	int j=4;
+	int k;
+	for (k=0; k<(1<<j); k++)
+	{
+		double x = q_oper_elt (j,k, 3,0);
+		printf ("its %d %g\n", k, x);
+	}
 }
