@@ -35,35 +35,52 @@ Linas Vepstas <linas@linas.org>
 31 December 2005
 \layout Abstract
 
-In this breif note, we review the connection between the distribution of
- the Farey fractions on the real number line, and the derivative of the
- Minkowski Question Mark function.
- We introduce a topology to give precise meaning to what it means to 
+This breif note defines the idea of a 
 \begin_inset Quotes eld
 \end_inset 
 
-take the derivative of the question mark function
+very fat
 \begin_inset Quotes erd
 \end_inset 
 
-.
- This topology is recognized to be the natural topology of many types of
- fractals, and in particular, can be considered to be the correct topology
- for discussing the closure of the hyperboloic plane.
+ Cantor set, and breifly examines the measure associated with such a very
+ fat Cantor set.
 \layout Abstract
 
-We point out that the derivivative of the question mark can also be obtained
- as the limiting behaviour of a modular form.
- Modular forms are analytic functions that are closely related to elliptic
- functions, and have a particular kind of modular group symmetry.
- 
-\layout Abstract
+The canonical Cantor set is 
+\begin_inset Quotes eld
+\end_inset 
 
-In its current state, this document is at least partly a research diary
- of various results, and is oddly structured as a result.
- Results on various measures are presented as well, including results on
- the measures of fat Cantor sets of various types.
- A natural topology for exploring these measures is discussed.
+thin
+\begin_inset Quotes erd
+\end_inset 
+
+ in that it has a measure of zero.
+ There are a variety of methods by which on can construct 
+\begin_inset Quotes eld
+\end_inset 
+
+fat
+\begin_inset Quotes erd
+\end_inset 
+
+ Cantor sets (also known as Smith-Volterra-Cantor sets) which have a measure
+ greater than zero.
+ One of the commonest constructions, based on the dyadic numbers, has a
+ continuously-varying parameter that is associated with the measure.
+ The Smith-Volterra-Cantor set attains a measure of one for a finite value
+ of the parameter; this paper then explores what happens when the parameter
+ is pushed beyond this value.
+ These are the 
+\begin_inset Quotes eld
+\end_inset 
+
+very fat
+\begin_inset Quotes erd
+\end_inset 
+
+ Cantor sets refered to in the title.
+ The results consist almost entirely of a set of graphs showing this behaviour.
 \layout Abstract
 
 This paper is part of a set of chapters that explore the relationship between
@@ -73,81 +90,45 @@ This paper is part of a set of chapters that explore the relationship between
 Intro
 \layout Standard
 
-THIS IS A DRAFT WORK IN PROGRESS.
+THIS IS A DRAFT.
  The intro hasn't been written yet, but if it was, it would work like this:
- Modular forms are analytic functions that are closely related to elliptic
- functions, and have a particular kind of modular group symmetry.
- Modular forms are defined on the upper-half plane 
-\begin_inset Formula $\mathbb{H}$
-\end_inset 
-
- of the complex plane 
-\begin_inset Formula $\mathbb{C}$
-\end_inset 
-
-, that is, for complex numbers 
-\begin_inset Formula $\tau=x+iy$
-\end_inset 
-
- with 
-\begin_inset Formula $y>0$
-\end_inset 
-
-.
- Here, we are concerned with the limiting behaviour of 
-\begin_inset Formula $y\rightarrow0$
-\end_inset 
-
-, which yeilds highly singular functions defined on the real number line,
- yet inheriting a modular group symmetry of the form of which they are the
- limit.
+ 
 \layout Standard
 
-Most fractals presented in the popular literature have a form that suggests
- that they live on the closure of the hyperbolic plane: that is, they live
- on the 
+The 
 \begin_inset Quotes eld
 \end_inset 
 
-edge
+very fat
 \begin_inset Quotes erd
 \end_inset 
 
- of that plane.
- Of course, the hyperbolic metrix never allows you to get to that edge,
- but one can also put an ordinary Euclidean metric on the Poincare disk,
- or the Poincare upper half plane, and get to that boundary.
- The problem is, of course, that the topologies that seem to suggest themselves
- in these two cases are subtly incompatible, and lead to a varity of confusions.
- In particular, we argue below that when considering the limiting behaviour
- of of functions at the 
-\begin_inset Quotes eld
-\end_inset 
+ Cantor set and the concept of its measure is defined, and some of these
+ are graphed.
+ 
+\layout Standard
 
-edge
-\begin_inset Quotes erd
-\end_inset 
+Although much could be said about the topology associated with this construction
+, nothing is said here.
+\layout Standard
 
- of hyperbolic space, the correct topology is a kind of 
-\begin_inset Quotes eld
-\end_inset 
-
-binary tree topology
-\begin_inset Quotes erd
-\end_inset 
-
-, similar in form to the Cantor set, but a bit richer.
- In particular, this topology is finer than the usual topology on the real
- number line, and this additional fineness allows otherwise dubious expressions
- to be given precise meaning.
- It is only when functinos on this topology are mapped back onto the real
- number line that confusions result.
+Although the symmetry properties of the resulting measures could be analyzed
+ in light of the SL(2,Z) period-doubling monoid symmetry, they are not.
+ Maybe later.
 \layout Section
 
-Distributions of Rational Numbers
-\layout Subsection
+Dyadic numbers, Cantor Sets and Measures
+\layout Standard
 
-A
+The real numbers can be expressed with the binary digit or 
+\begin_inset Quotes eld
+\end_inset 
+
+dyadic
+\begin_inset Quotes erd
+\end_inset 
+
+ expansion
 \layout Standard
 
 
@@ -163,24 +144,11 @@ x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equatio
 \end_inset 
 
 .
- Therefore, we conclude that the dyadic topology is finer than the the usual
- topology on the real numbers.
- In particular, the dyadic topology distinguishes all three of these cases:
- 1/2 is a not in the middle of the tree (the root as it happens here), whereas
- the two inequivalent expansions belong to two different leafs at the end
- of the binary tree.
-\layout Subsection
-
-Cantor Set Measures
+ 
 \layout Standard
 
-There are a large variety of constructions that can be made from the binary
- series defined in equation 
-\begin_inset LatexCommand \ref{eq: binary expansion}
-
-\end_inset 
-
-; for example 
+The canonical Cantor function may be cconstructed from this expansion, as
+ 
 \begin_inset Formula \begin{equation}
 c_{z}(x)=\sum_{k=1}^{\infty}b_{k}z^{k}\label{eq:}\end{equation}
 
@@ -479,7 +447,7 @@ The most remarkable aspect of this series of figures is how drastically
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -541,7 +509,7 @@ This figure shows the histogram for the image of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -596,7 +564,7 @@ This figure shows the histogram for the image of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -651,7 +619,7 @@ This figure shows the histogram for the image of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -694,7 +662,7 @@ This figure shows the histogram for the image of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -737,7 +705,7 @@ This figure shows the histogram for the image of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
