@@ -26,13 +26,13 @@
 
 \layout Title
 
-Modular Fractal Measures
+Measure of the Very Fat Cantor Set
 \layout Author
 
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (updated 31 December 2005)
+31 December 2005
 \layout Abstract
 
 In this breif note, we review the connection between the distribution of
@@ -145,174 +145,12 @@ binary tree topology
 \layout Section
 
 Distributions of Rational Numbers
-\layout Standard
-
-In a different paper we looked at the distribution of rationals.
- Here we look at the distribution of the Farey fractions.
- These are sometimes called 
-\begin_inset Quotes erd
-\end_inset 
-
-multifractal measures
-\begin_inset Quotes erd
-\end_inset 
-
-.
 \layout Subsection
 
-Distribution of Rationals in the Farey Tree
-\layout Standard
-
-One way to enumerate all of the rationals is by placing them on the Farey
- Tree (or the Stern-Brocot Tree).
- One can prove that the Farey Tree enumerates all of the rationals in the
- unit interval exactly once (Proof at 
-\begin_inset LatexCommand \htmlurl[Cut-the-Knot]{http://www.cut-the-knot.org/blue/Stern.shtml}
-
-\end_inset 
-
-).
- However, the distribution of the rationals on the Farey Tree is highly
- non-uniform, if we walk that tree breadth-first.
- The figure 
-\begin_inset LatexCommand \ref{cap:Distribution-of-Farey}
-
-\end_inset 
-
- shows that distribution.
- This distribution is highly non-uniform, and by fooling with the number
- of bins in the histogram, it becomes clear that the figure is highly discontinu
-ous.
- Remarkably, though, in a certain sense, the figure also stays uniform in
- a certain sense as the number of bins is i
-\layout Standard
-
-The other remarkable property of this curve is that in the limit of an 'infinite
-' number of bins, this 'curve' is equal to exactly zero at every rational
- 
-\begin_inset Formula $p/q$
-\end_inset 
-
-, and infinite at every irrational.
- 
-\layout Standard
-
-f tools where we can talk about and manipulate the so-called 'first derivative'
- in a meaningful way.
-\layout Standard
-
-This is really a very curious circumstance.
- The above graphs show only the distribution of a finite number of points
- (they were, after all, computer generated).
- A finite set of points on the real number line is zero; yet we are using
- it to induce a measure that can be used for integration.
- How is this? The statistical properties of a finite sampling provide us
- with information about the limit.
- Its as if we were working with an anti-Cantor-set construction: we start
- with a dust, and average over intervals to discover analytic properties.
-\layout Standard
-
-example of this is the twenty-fourth root of the modular discriminant, known
- as the Dedekind eta.
- 
-\layout Subsection
-
-A Binary Tree Topology
+A
 \layout Standard
 
 
-\begin_inset Note
-collapsed true
-
-\layout Standard
-
-This section added in dec 2005, and was conceived in the summer of 2005.
- This section should be split out into its own doc eventually, and dated
- to the summer fo 2005.
-\end_inset 
-
-
-\layout Standard
-
-Consider the 
-\begin_inset Quotes eld
-\end_inset 
-
-dyadic topology
-\begin_inset Quotes erd
-\end_inset 
-
-: every rational of the form 
-\begin_inset Formula $p/2^{n}$
-\end_inset 
-
- for 
-\begin_inset Formula $p$
-\end_inset 
-
- odd and integer 
-\begin_inset Formula $n>0$
-\end_inset 
-
- is taken to be an open set.
- All points in between such dyadic rationals are taken to form an open set.
-\layout Standard
-
-One way to visualize this topology is as a binary tree.
- At the root of the tree is the point 1/2.
- At the next level, there is 1/4 and 3/4, and so on.
- Every such node in the tree is then taken to be an open set.
- At the leafs of the tree lie the irrationals, and the rationals not of
- the form 
-\begin_inset Formula $p/2^{n}$
-\end_inset 
-
-.
-\layout Standard
-
-The topology differs from that of the canonical Cantor set: in that case,
- the intermediate nodes are not even considered to be a part of the topology.
- The leaf nodes are taken to be closed sets, which is how the Cantor set
- becomes a perfect set.
-\layout Standard
-
-The point of introducing this binary tree topology is in order to give a
- more precise footing for much of the rest of the discussion.
- In particular, we are interested in constructing measures on this topology.
-\layout Standard
-
-Several remarks are in order.
- First, in the canonical Cantor set, each leaf was assigned a measure of
- zero.
- It should be clear that this choice is arbitrary, and that any measure
- can be assigned to the endpoints.
- The cardinality of the endpoints of the binary tree is the cardinality
- of the continuum, as can be seen by using more or less the same arguments
- used to discuss the cardinality of the Cantor set.
- Because of this, it is not unreasonable to beleive that one may be able
- to construct measures that 
-\begin_inset Quotes eld
-\end_inset 
-
-make sense
-\begin_inset Quotes erd
-\end_inset 
-
- in the context of the real number line.
- In particular, such measures can make well-defined integrals and the like.
-\layout Standard
-
-In particular, we are interested in measures that are functions of, and
- possibly holomorphic functions of the dyadic expansion.
- That is, consider the series 
-\begin_inset Formula $\{ b_{k}:b_{k}\in\{0,1\},\, k\in\mathbb{N}\}$
-\end_inset 
-
-of binary digits given by the dyadic expansion of a real number 
-\begin_inset Formula $x$
-\end_inset 
-
-: 
 \begin_inset Formula \begin{equation}
 x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equation}
 
@@ -331,90 +169,6 @@ x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equatio
  1/2 is a not in the middle of the tree (the root as it happens here), whereas
  the two inequivalent expansions belong to two different leafs at the end
  of the binary tree.
-\layout Standard
-
-Because this topology is finer than the usual topology on the real number
- line, we can define functions on this topology that would be ill-defined
- when considered on the real number line: in particular, the three points
- above map to just one point on the real numbers.
- However, it should be painfully clear at this point that this topology
- is the appropriate topology for discussing the structure of fractals.
- It should also be clear that this is the correct topology in which to discuss
- the closure of the upper half-plane when discussion the limiting behaviour
- of modular forms, Fuchsian groups, and ergodic processes.
-\layout Standard
-
-As an example, consider the Takagi curve.
- When considered on the real-number line, it has a deriviative that seems
- to be defined nowhere.
- When considered on the binary tree topology, its derivative looks a lot
- less intimidating: in fact, it is perfectly well-defined on the leaves;
- the only ambiguity is on the interior nodes of the tree.
- Furthermore, the interior nodes of the tree are a countable set, whereas
- the leaves are uncountable.
- This implies that the derivative of the Takagi curve is in fact defined
- 
-\begin_inset Quotes eld
-\end_inset 
-
-almost everywhere
-\begin_inset Quotes erd
-\end_inset 
-
-, with the exception of only a countable set of points.
- The goal here is to bootstrap this realization into providing a wholesome
- topological definition for all fractal measures.
-\layout Standard
-
-Next, because the topology is that of a binary tree, it should be clear
- that any binary structure inherits this topology in a natural way.
- In particular, the Stern-Brocot tree has this topology.
- In particular, this means that there is a second natural mapping to the
- real number line, given by the Minkowski Question Mark function.
- The interior nodes of the tree are the rational numbers (a countable set),
- and the leaves of the tree are the irrationals (of the cardinality of the
- continuum).
- By using the dyadic topology, the derivative of the question mark function
- becomes a whole lot less intimidating as well: it becomes clear that the
- derivative is precisely zero on the rationals (the interior nodes of the
- tree), and non-zero on the leaves.
- Again, because of the cardinality of the leaves, it becomes clear that
- this measure can be integrated in a well-founded way.
- The problem then is no longer 
-\begin_inset Quotes eld
-\end_inset 
-
-how can the derivative of the question mark be put on a good foundation
-\begin_inset Quotes erd
-\end_inset 
-
-, rather it becomes 
-\begin_inset Quotes eld
-\end_inset 
-
-what sort of easy to manipulate, easy to handle expressions for this measure
- can be found?
-\begin_inset Quotes erd
-\end_inset 
-
-.
-\layout Standard
-
-XXXX ToDo: discuss the binary tree topology in greater detail, incl the
- separation axioms, etc.
- Also compare this topology to the topology of 
-\begin_inset Quotes eld
-\end_inset 
-
-cylinder sets
-\begin_inset Quotes erd
-\end_inset 
-
- that is used in discussing subshifts of finite type, bernoulli processes
- etc.
- These topologies are similar but havemany odd differences.
- Best to be clear as a bell here.
- 
 \layout Subsection
 
 Cantor Set Measures
@@ -1127,12 +881,6 @@ le discontinuities, of the same general form as in the other figures.
 \end_inset 
 
 
-\layout Bibliography
-\bibitem [Apostol]{key-1}
-
-Tom M.
- Apostol, Modular Functions and Dirichlet Series in Number Theory, (1990)
- Springer-Verlag, New York.
 \layout Bibliography
 \bibitem [Wikipedia]{key-14}
 
