@@ -4036,6 +4036,99 @@ m\end{array}\right)\,\left[\zeta(k+m+2)-1\right]\label{eq:GKW-matrix-elts}\end{e
 \layout Standard
 
 The first eigenvalue is known as the GKW constant, and is about 0.3036.
+\layout Standard
+
+The eigenvector equation to be solved is then 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}G_{mn}v_{n}=\lambda v_{m}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $v=\{ v_{n}\}$
+\end_inset 
+
+ is an eigenvector with components 
+\begin_inset Formula $v_{n}$
+\end_inset 
+
+.
+ This beast has a discrete spectrum (need reference for proof), and so we
+ may label the eigenvalues and eigenvectors with a label 
+\begin_inset Formula $k$
+\end_inset 
+
+, so that the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th eigen equation is 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}G_{mn}v_{nk}=\lambda_{k}v_{mk}\label{eq:Eigenvalue eqn}\end{equation}
+
+\end_inset 
+
+ The 
+\begin_inset Formula $k$
+\end_inset 
+
+'th polynomial eigenfunction of the GKW operator is then given by 
+\begin_inset Formula \begin{equation}
+\rho_{k}(x)=\sum_{n=0}^{\infty}v_{nk}(1-x)^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Based on numerical explorations (reported below), the series appears to
+ be easily convergent even for 
+\begin_inset Formula $x=0$
+\end_inset 
+
+.
+ In particular, it appears that 
+\begin_inset Formula $\lim_{n\to\infty}v_{nk}=0$
+\end_inset 
+
+, and that the coefficients are oscillatory, with 
+\begin_inset Formula $k$
+\end_inset 
+
+ half-oscillations in the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th eigenvector.
+ That is, for 
+\begin_inset Formula $k=0$
+\end_inset 
+
+, all of the 
+\begin_inset Formula $v_{n0}$
+\end_inset 
+
+ can be taken to be of the same sign.
+ For 
+\begin_inset Formula $k=1$
+\end_inset 
+
+, the 
+\begin_inset Formula $v_{n1}$
+\end_inset 
+
+ change sign, once, between 
+\begin_inset Formula $n=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $n=1$
+\end_inset 
+
+.
+ For 
+\begin_inset Formula $k=2$
+\end_inset 
+
+, the coefficients change sign twice, and so on.
+ This is shown in the graph below.
 \layout Subsection
 
 The Kernel
@@ -4832,11 +4925,11 @@ This table lists te first dozen eigenvalues of the polynomial representation
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
-Right Eigenvectors
+GKW Right Eigenfunctions
 \layout Standard
 
 
@@ -4849,33 +4942,12 @@ Right Eigenvectors
 
 \layout Standard
 
-Graph of the right eigenvectors
-\end_inset 
-
-
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
-
-left Eigenvectors
-\layout Standard
-
-
-\begin_inset Graphics
-	filename levec.png
-	width 100text%
-
-\end_inset 
-
-
-\layout Standard
-
-Left eigenvectors
+This graph shows the right eigenfunctions of the GKW operator.
+ These were computed numerically, by truncating the GKW operator to a 50
+ by 50 matrix and then solving for the eigenvectors of the matrix.
+ The elements of the eigenvectors appear to be well-behaved, being oscillatory
+ for small values, and then converging to zero rapidly.
+ That is, if 
 \end_inset 
 
 
