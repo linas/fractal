@@ -23,3 +23,6 @@ hyper: hyper.o
 .c.o:
 	cc -g -O2 -c $< -I.. -I$(INC)
 
+
+dist:
+	tar -zcvf x *.c *.h *.gplot .cvsignore Makefile
