@@ -1,7 +1,9 @@
 /*
  * Eigenvalue finding
  * Find eigenvalues of the simple hyperbolic
- * composition operator
+ * composition operator. The code is good, but
+ * the eigenvalues can't be gotten in this way. 
+ * No matter, now have an exact solution...
  *
  * Call lapack from C code.
  *

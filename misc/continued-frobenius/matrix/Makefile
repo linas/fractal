@@ -3,6 +3,11 @@
 # Makefile that uses lapack for matrix operations
 #
 
+TOP = ../../../tools
+INC = $(TOP)/inc
+LIB = $(TOP)/lib
+
+
 all: hyper eigen comb hyper
 
 OBJS=../ache.o ../zetafn.o
@@ -16,5 +21,5 @@ hyper: hyper.o
 	cc -o $@ $^ -llapack -lf77blas -latlas -lg2c -lm
 
 .c.o:
-	cc -g -O2 -c $< -I..
+	cc -g -O2 -c $< -I.. -I$(INC)
 

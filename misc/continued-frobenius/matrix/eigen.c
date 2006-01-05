@@ -1,6 +1,6 @@
 
 /*
- * Eigenvalue finding
+ * Eigenvalue and eigenvector finding
  * Call lapack from C code.
  *
  * Get Schur factorization,
@@ -25,6 +25,7 @@
 #include "lapack.h"
 
 
+/* dry run -- get the working dimension */
 int 
 getworkdim (int dim, double *matrix,
         double *eigenvalues_re, double *eigenvalues_im, 
@@ -65,6 +66,7 @@ geteigen (int dim, double *matrix,
 
 }
 
+/* kinetic part only */
 double 
 kino (int m, int n)
 {
@@ -82,7 +84,7 @@ double sst (int i, int j)
 	return bin /lam;
 }
 
-main () 
+main (int argc, char * argv[]) 
 {
 	double *mat;
 	double *ere;
@@ -94,7 +96,14 @@ main ()
 	int workdim;
 	int i,j, k;
 	
-	dim = 6;
+	dim = 28;
+
+	if (argc < 2)
+	{
+		fprintf (stderr, "Usage: %s <dim>\n", argv[0]);
+		exit (-1);
+	}
+	dim = atoi (argv[1]);
 
 	printf ("#\n#\n");
 	printf ("# Eigenvectors of the GKW (Gauss Kuz'min Wirsing) Operator\n");
@@ -115,8 +124,8 @@ main ()
 		for (j=0; j<dim; j++)
 		{
 			/* Note transposed matrix'ing for FORTRAN */
-			// mat[i+j*dim] = ache_mp(i,j);
-			mat[i+j*dim] = sst(i,j);
+			mat[i+j*dim] = ache_mp(i,j);
+			// mat[i+j*dim] = sst(i,j);
 		}
 	}
 
@@ -143,7 +152,7 @@ main ()
 	/* print the eigenvalues */
 	for (i=0; i<dim; i++)
 	{
-		printf ("# eigen[%d]=%20.15g +i %g\n", i, ere[i], eim[i]);
+		printf ("# eigen[%d]=%20.15g +i %g  ratio=%20.15g\n", i, ere[i], eim[i], ere[i]/ere[i+1]);
 	}
 	printf ("\n\n");
 	
