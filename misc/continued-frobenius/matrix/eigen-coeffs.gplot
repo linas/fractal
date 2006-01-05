@@ -1,0 +1,32 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small 
+set out 'eigen-coeffs.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Right-Eigenvector Elements"
+set xlabel "n"
+set ylabel "Coefficient"
+
+# set yrange [0:]
+
+plot "eigen-coeffs.dat" using 1:2 title "zeroth",\
+     "eigen-coeffs.dat" using 1:3 title "first",\
+     "eigen-coeffs.dat" using 1:4 title "second",\
+     "eigen-coeffs.dat" using 1:5 title "third",\
+     "eigen-coeffs.dat" using 1:6 title "fourth",\
+     "eigen-coeffs.dat" using 1:7 title "fifth",\
+     "eigen-coeffs.dat" using 1:8 title "sixth",\
+     "eigen-coeffs.dat" using 1:9 title "seventh"
+
+
+
+# pause 100
+

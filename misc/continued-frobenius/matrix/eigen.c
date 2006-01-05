@@ -162,8 +162,10 @@ main (int argc, char * argv[])
 	{
 		for (j=0; j<prtdim; j++)
 		{
-			printf ("# right %d'th eigenvector[%d]=%g (normalized=%g)\n", 
-			            i,j, rev[j+i*dim], rev[j+i*dim]/rev[i*dim]);
+			// printf ("# right %d'th eigenvector[%d]=%g (normalized=%g)\n", 
+			//            i,j, rev[j+i*dim], rev[j+i*dim]/rev[i*dim]);
+			printf ("# right %d'th eigenvector[%d]=%g (ratio=%g)\n", 
+			            i,j, rev[j+i*dim], rev[j+i*dim]/rev[j+1+i*dim]);
 		}
 		printf ("#\n");
 	}
@@ -172,8 +174,10 @@ main (int argc, char * argv[])
 	{
 		for (j=0; j<prtdim; j++)
 		{
-			printf ("# left %d'th eigenvector[%d]=%g (normalized=%g)\n", 
-			            i,j, lev[j+i*dim], lev[j+i*dim]/lev[i*dim]);
+			// printf ("# left %d'th eigenvector[%d]=%g (normalized=%g)\n", 
+			//            i,j, lev[j+i*dim], lev[j+i*dim]/lev[i*dim]);
+			printf ("# left %d'th eigenvector[%d]=%g (ratio=%g)\n", 
+			            i,j, lev[j+i*dim], ((j+1)*lev[j+i*dim])/((j+2)*lev[j+1+i*dim]));
 		}
 		printf ("#\n");
 	}
@@ -240,6 +244,7 @@ main (int argc, char * argv[])
 	/* This time, they are printed so that the i'th eigenvector is in the
 	   i'th column, and each row is a component of the eigenvector */
 
+	printf ("# ------------------------------------------- \n");
 	double norm[50];
 	for (i=0; i<prtdim; i++)
 	{
