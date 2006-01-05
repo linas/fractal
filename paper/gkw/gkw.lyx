@@ -4033,6 +4033,9 @@ m\end{array}\right)\,\left[\zeta(k+m+2)-1\right]\label{eq:GKW-matrix-elts}\end{e
  [need ref here] but as can be seen the above is a more tractable expression.
  (copy the x=1/2 expansion here).
  
+\layout Standard
+
+The first eigenvalue is known as the GKW constant, and is about 0.3036.
 \layout Subsection
 
 The Kernel
@@ -4088,7 +4091,7 @@ One can mount numeric attacks on GKW.
 
 .
  It is associated with an eigenvalue 
-\begin_inset Formula $\lambda_{1}\approx0.3025$
+\begin_inset Formula $\lambda_{1}\approx0.303663$
 \end_inset 
 
 .
@@ -4100,7 +4103,7 @@ collapsed true
 
 \layout Standard
 
-programs are in fractal/misc/continued-frobenius/matrix/ etc.
+programs are in fractal/misc/continued-frobenius/matrix/eigen.c
 \end_inset 
 
 
@@ -4113,14 +4116,14 @@ The matrix elements in
 
  are easily numerically ...
  etc.
- Using LAPACK DGEEV routine.
+ Using the LAPACK DGEEV eigenvalue-finding routine.
  Can be numerically compared to previously published values (need ref).
 \layout Standard
 
 
 \begin_inset Float table
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -4821,6 +4824,58 @@ This table lists te first dozen eigenvalues of the polynomial representation
  GKW operator.
  The numbers are certain to about about the last figure or two quoted.
  They were obtained by nmerically inverting a 55 by 55 matrix.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Right Eigenvectors
+\layout Standard
+
+
+\begin_inset Graphics
+	filename revec.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+Graph of the right eigenvectors
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+left Eigenvectors
+\layout Standard
+
+
+\begin_inset Graphics
+	filename levec.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+Left eigenvectors
 \end_inset 
 
 
