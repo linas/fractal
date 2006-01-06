@@ -100,13 +100,11 @@ void SternBrocotTree::Fill (int jlo, int jhi)
 
 double SternBrocotTree::GetFarey (int j, int k)
 {
-printf ("farey asking %d/2^%d\n", k, j);
 	if (0 == k) return 0.0;
 	j--;
 
 	while (k%2 == 0) { k>>= 1; j -= 1; } 
 	k = (k-1)/2;
-printf ("farey idx %d %d\n", j,k);
 
 	if (0 > j) return 1.0;
 
@@ -161,28 +159,23 @@ q_oper_elt (int j, int k, int l, int m)
 	// There are two non-intersection cases
 	double haar_hi = haar_domain_max (l,m);
 	double farey_lo = t.GetFarey (j, k);
-printf ("hh=%g fl=%g\n", haar_hi, farey_lo);
 	if (haar_hi <= farey_lo) return 0.0;
 
 	double haar_lo = haar_domain_min (l,m);
 	double farey_hi = t.GetFarey (j, k+1);
-printf ("hl=%g fh=%g\n", haar_lo, farey_hi);
 	if (haar_lo >= farey_hi) return 0.0;
 
 	// There are four total-overlap cases
 	double haar_mid = haar_domain_midpoint (l,m);
 	double farey_mid = t.GetFarey (j+1, 2*k+1);
 
-	printf ("haar= %g %g %g\n", haar_lo, haar_mid, haar_hi);
-	printf ("farey= %g %g %g\n", farey_lo, farey_mid, farey_hi);
-
 	if (haar_lo  <= farey_lo && farey_hi <= haar_mid) return 0.0;
 	if (haar_mid <= farey_lo && farey_hi <= haar_hi) return 0.0;
 	if (farey_lo  <= haar_lo && haar_hi <= farey_mid) return 0.0;
 	if (farey_mid <= haar_lo && haar_hi <= farey_hi) return 0.0;
 
-	printf ("haar= %g %g %g\n", haar_lo, haar_mid, haar_hi);
-	printf ("farey= %g %g %g\n", farey_lo, farey_mid, farey_hi);
+	// printf ("haar= %g %g %g\n", haar_lo, haar_mid, haar_hi);
+	// printf ("farey= %g %g %g\n", farey_lo, farey_mid, farey_hi);
 
 	double elt = 0.0;
 	elt += overlap (haar_lo, haar_mid, farey_lo,  farey_mid);
@@ -244,12 +237,9 @@ void make_oper (int dim)
 
 main ()
 {
-	double x = q_oper_elt (4,0, 3,0);
-
-
+	make_oper (4);
 return 1;
-	// make_oper (3);
-	int j=4;
+	int j=8;
 	int k;
 	for (k=0; k<(1<<j); k++)
 	{

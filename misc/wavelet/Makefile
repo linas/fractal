@@ -10,6 +10,8 @@ EXES= question
 
 all: 	$(EXES)
 
+question.o:  question.C 
+
 clean:
 	rm -f core tmp junk glop a.out *.o
 
@@ -22,4 +24,6 @@ realclean:	clean
 .o:
 	$(CC) -o $* $< -lgsl -lcblas -lm -lstdc++ 
 
-question.o:  question.C 
+
+dist:
+	tar -zcvf x *.C Makefile .cvsignore
