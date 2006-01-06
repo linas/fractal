@@ -170,9 +170,13 @@ main (int argc, char * argv[])
 			// printf ("# right %d'th eigenvector[%d]=%g (vec ratio=%g)\n", 
 			//            i,j, rev[j+i*dim],  tn*rev[j+i*dim] );
 			//
-			double r = 2.0 * rev[j+1+i*dim]/rev[j+i*dim];
-			r -= 1.0;
+			// double r1 = 2.0 * rev[j+1+i*dim]/rev[j+i*dim] - 1.0;
+			// double r2 = 2.0 * rev[j+2+i*dim]/rev[j+1+i*dim] - 1.0;
+			// double r = r1/r2;
 			// r *= j*j*j*j*log(log (log (log (j+1))));
+			// r *= j;
+			double r = rev[j+1+i*dim]- 0.5*rev[j+i*dim];
+			r /= rev[j-1+i*dim];
 			r *= j*j*j;
 			printf ("# right %d'th eigenvector[%d]=%g (term log ratio=%g)\n", 
 			            i,j, rev[j+i*dim], r);
