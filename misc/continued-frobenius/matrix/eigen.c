@@ -156,7 +156,7 @@ main (int argc, char * argv[])
 	}
 	printf ("\n\n");
 	
-	int prtdim = 26;
+	int prtdim = 46;
 	if (dim < prtdim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
 	{
@@ -172,7 +172,8 @@ main (int argc, char * argv[])
 			//
 			double r = 2.0 * rev[j+1+i*dim]/rev[j+i*dim];
 			r -= 1.0;
-			r *= j*j*j*j*log(log (log (log (j+1))));
+			// r *= j*j*j*j*log(log (log (log (j+1))));
+			r *= j*j*j;
 			printf ("# right %d'th eigenvector[%d]=%g (term log ratio=%g)\n", 
 			            i,j, rev[j+i*dim], r);
 			tn *= 2.0;
@@ -264,6 +265,7 @@ main (int argc, char * argv[])
 		{
 			norm[i] += rev[j+i*dim];
 		}
+		norm[i] = 31.0 * lev[30+i*dim];
 	}
 
 	for (j=0; j<prtdim; j++)
@@ -271,7 +273,8 @@ main (int argc, char * argv[])
 		printf ("%d\t", j);
 		for (i=0; i<13; i++)
 		{
-			printf ("%g\t", rev[j+i*dim]/norm[i]);
+			// printf ("%g\t", rev[j+i*dim]/norm[i]);
+			printf ("%g\t", lev[j+i*dim]/norm[i]);
 		}
 		printf ("\n");
 	}
