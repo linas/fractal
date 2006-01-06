@@ -177,7 +177,9 @@ main (int argc, char * argv[])
 			// r *= j;
 			double r = rev[j+1+i*dim]- 0.5*rev[j+i*dim];
 			r /= rev[j-1+i*dim];
-			r *= j*j*j;
+			// r *= j*j*j* log(j+1) * log(j+1) * log(j+1);
+			r = log (r);
+			r /= j;
 			printf ("# right %d'th eigenvector[%d]=%g (term log ratio=%g)\n", 
 			            i,j, rev[j+i*dim], r);
 			tn *= 2.0;
