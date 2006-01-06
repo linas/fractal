@@ -10,7 +10,7 @@ LIB = $(TOP)/lib
 
 all: hyper eigen comb hyper
 
-OBJS=../ache.o ../zetafn.o $(LIB)/binomial.o $(LIB)/harmonic.o
+OBJS=../ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
 
 comb: comb.o $(OBJS)
 eigen: eigen.o $(OBJS)

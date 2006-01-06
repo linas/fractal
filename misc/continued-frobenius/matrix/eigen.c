@@ -160,12 +160,22 @@ main (int argc, char * argv[])
 	if (dim < prtdim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
 	{
+		double tn = 1.0;
 		for (j=0; j<prtdim; j++)
 		{
 			// printf ("# right %d'th eigenvector[%d]=%g (normalized=%g)\n", 
 			//            i,j, rev[j+i*dim], rev[j+i*dim]/rev[i*dim]);
-			printf ("# right %d'th eigenvector[%d]=%g (ratio=%g)\n", 
-			            i,j, rev[j+i*dim], rev[j+i*dim]/rev[j+1+i*dim]);
+			// printf ("# right %d'th eigenvector[%d]=%g (term ratio=%g)\n", 
+			//            i,j, rev[j+i*dim], rev[j+i*dim]/rev[j+1+i*dim]-2.0);
+			// printf ("# right %d'th eigenvector[%d]=%g (vec ratio=%g)\n", 
+			//            i,j, rev[j+i*dim],  tn*rev[j+i*dim] );
+			//
+			double r = 2.0 * rev[j+1+i*dim]/rev[j+i*dim];
+			r -= 1.0;
+			r *= j*j*j*j*log(log (log (log (j+1))));
+			printf ("# right %d'th eigenvector[%d]=%g (term log ratio=%g)\n", 
+			            i,j, rev[j+i*dim], r);
+			tn *= 2.0;
 		}
 		printf ("#\n");
 	}
