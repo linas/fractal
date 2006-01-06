@@ -4078,7 +4078,24 @@ The eigenvector equation to be solved is then
 
 \end_inset 
 
- Based on numerical explorations (reported below), the series appears to
+
+\layout Standard
+
+The zeroth eigenfunction was given by Gauss as 
+\begin_inset Formula \begin{equation}
+\rho_{0}(x)=\frac{1}{1+x}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and corresponds to the eigenvector 
+\begin_inset Formula $v_{n0}=2^{-n}$
+\end_inset 
+
+.
+ Again, we note the curious appearance of powers of two.
+\layout Standard
+
+Based on numerical explorations (reported below), the series appears to
  be easily convergent even for 
 \begin_inset Formula $x=0$
 \end_inset 
@@ -4088,7 +4105,37 @@ The eigenvector equation to be solved is then
 \begin_inset Formula $\lim_{n\to\infty}v_{nk}=0$
 \end_inset 
 
-, and that the coefficients are oscillatory, with 
+, and that furthermore, that 
+\begin_inset Formula $\lim_{n\to\infty}v_{nk}/v_{n+1,k}=2$
+\end_inset 
+
+.
+ One must not conclude that this implies that 
+\begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n})$
+\end_inset 
+
+, as this sort of asymptotic behaviour conflicts with the zeroth eigenfunction.
+ Thus, one might guess at 
+\begin_inset Formula $v_{nk}~\mathcal{O}(n^{s}2^{-n})$
+\end_inset 
+
+ but numeric data suggests that 
+\begin_inset Formula $s=0$
+\end_inset 
+
+.
+ Numeric data also excludes the form 
+\begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n}\log n)$
+\end_inset 
+
+ although it is possible that the softer 
+\begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n}\log\log n)$
+\end_inset 
+
+ might hold.
+\layout Standard
+
+The coefficients are oscillatory, with 
 \begin_inset Formula $k$
 \end_inset 
 
@@ -4129,21 +4176,10 @@ The eigenvector equation to be solved is then
 
 , the coefficients change sign twice, and so on.
  This is shown in the graph below.
+ 
 \layout Standard
 
-The zeroth eigenfunction was given by Gauss as 
-\begin_inset Formula \begin{equation}
-\rho_{0}(x)=\frac{1}{1+x}\label{eq:}\end{equation}
-
-\end_inset 
-
- and corresponds to the eigenvector 
-\begin_inset Formula $v_{n0}=2^{-n}$
-\end_inset 
-
-.
- Again, we note the curious appearance of powers of two.
- The left eigenvectors are given by 
+The left eigenvectors are given by 
 \begin_inset Formula \begin{equation}
 \sum_{m=0}^{\infty}w_{km}G_{mn}=\lambda_{k}w_{kn}\label{eq:}\end{equation}
 
@@ -4174,6 +4210,27 @@ The zeroth eigenfunction was given by Gauss as
  another manifestation of the duality between the dyadic rationals and rationals
 , the duality between the Stern-Brocot tree and the dyadic tree, the duality
  captured in the Minkowski Question Mark function.
+\layout Standard
+
+In analogy to the right eigenvectors, the series again appears to be not
+ only convergent in that 
+\begin_inset Formula $\lim_{n\to\infty}w_{kn}=0$
+\end_inset 
+
+, but also that a strict ratio is maintained in the limit: 
+\begin_inset Formula $\lim_{n\to\infty}(n+2)\, w_{kn}/(n+1)\, w_{k,n+1}=1$
+\end_inset 
+
+, with strict equality holding for all 
+\begin_inset Formula $n$
+\end_inset 
+
+, and not just in the limit, when 
+\begin_inset Formula $k=0$
+\end_inset 
+
+.
+ A similar oscillatory behaviour is shown as well.
 \layout Subsection
 
 The Kernel
