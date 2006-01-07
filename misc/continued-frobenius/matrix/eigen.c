@@ -84,6 +84,22 @@ double sst (int i, int j)
 	return bin /lam;
 }
 
+void prtbin (double x)
+{
+	if (0.0 > x) x = -x;
+	int i;
+	for (i=0; i<45; i++)
+	{
+		if (0.5 < x) {
+			printf ("1");
+			x -= 0.5;
+		} else {
+			printf ("0");
+		}
+		x *= 2.0;
+	}
+}
+
 main (int argc, char * argv[]) 
 {
 	double *mat;
@@ -156,11 +172,12 @@ main (int argc, char * argv[])
 	}
 	printf ("\n\n");
 	
-	int prtdim = 46;
+	int prtdim = 36;
 	if (dim < prtdim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
 	{
 		double tn = 1.0;
+		double thrn = 1.0;
 		for (j=0; j<prtdim; j++)
 		{
 			// printf ("# right %d'th eigenvector[%d]=%g (normalized=%g)\n", 
@@ -175,14 +192,32 @@ main (int argc, char * argv[])
 			// double r = r1/r2;
 			// r *= j*j*j*j*log(log (log (log (j+1))));
 			// r *= j;
+#if RECURRSION_RELATION
 			double r = rev[j+1+i*dim]- 0.5*rev[j+i*dim];
 			r /= rev[j-1+i*dim];
 			// r *= j*j*j* log(j+1) * log(j+1) * log(j+1);
 			r = log (r);
 			r /= j;
 			printf ("# right %d'th eigenvector[%d]=%g (term log ratio=%g)\n", 
+			           i,j, rev[j+i*dim], r);
+#endif
+			double r = rev[j+i*dim] / (rev[30+i*dim] * (1<<30));
+			r *= tn;
+			r -= 1.0;
+			r *= thrn;
+			printf ("# right %d'th eigenvector[%d]=%g (guh %g\n", 
 			            i,j, rev[j+i*dim], r);
+			            
+#if BINARY
+			printf ("# right %d'th eigenvector[%d]=%g (binary ", 
+			            i,j, rev[j+i*dim]);
+			r = rev[j+i*dim] / (rev[25+i*dim] * (1<<25));
+			r *= tn;
+			prtbin (r);
+			printf (" )\n");
+#endif 
 			tn *= 2.0;
+			thrn *= sqrt (3.0);
 		}
 		printf ("#\n");
 	}
@@ -271,7 +306,8 @@ main (int argc, char * argv[])
 		{
 			norm[i] += rev[j+i*dim];
 		}
-		norm[i] = 31.0 * lev[30+i*dim];
+		// norm[i] = 31.0 * lev[30+i*dim];
+		norm[i] = (1<<25) *rev[25+i*dim];
 	}
 
 	for (j=0; j<prtdim; j++)
@@ -279,8 +315,8 @@ main (int argc, char * argv[])
 		printf ("%d\t", j);
 		for (i=0; i<13; i++)
 		{
-			// printf ("%g\t", rev[j+i*dim]/norm[i]);
-			printf ("%g\t", lev[j+i*dim]/norm[i]);
+			printf ("%g\t", rev[j+i*dim]/norm[i]);
+			// printf ("%g\t", lev[j+i*dim]/norm[i]);
 		}
 		printf ("\n");
 	}
