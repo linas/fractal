@@ -9,6 +9,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 /* hyperbolic rotatins to the left and to the right */
 double rot_left (double x)
@@ -36,29 +37,39 @@ double scurve (double x)
 double rcurve (double x, int cnt)
 {
 	int i;
-	if (1 == cnt) return scurve (x);
+	if (0 == cnt) return scurve (x);
 
-	for (i=1; i<cnt; i++)
-	{
-		if (x<0.5) {
-			x = 0.5 * scurve (2.0*x);
-		} else {
-			x = 0.5 + 0.5 * scurve (2.0*x-1.0);
-		}
+	if (x<0.5) {
+		x = 0.5 * rcurve (2.0*x, cnt-1);
+	} else {
+		x = 0.5 + 0.5 * rcurve (2.0*x-1.0, cnt-1);
 	}
 
 	return x;
 }
 
-
-main ()
+double qcurve (double x, int imax)
 {
 	int i;
-	int imax = 100;
+	for (i=0; i<imax; i++)
+	{
+		x = rcurve (x, imax - i -1);
+	}
+	return x;
+}
+
+
+main (int argc, char *argv[])
+{
+	int i;
+
+	int ir = atoi (argv[1]);
+
+	int imax = 400;
 	for (i=0; i<imax; i++)
 	{
 		double x = i / ((double) imax);
-		double y = rcurve(x, 3);
+		double y = qcurve(x, ir);
 		printf ("%d	%g	%g\n", i, x, y);
 	}
 }
