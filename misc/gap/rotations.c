@@ -8,6 +8,7 @@
  * Linbas Vepstas January 2006
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -33,10 +34,22 @@ double scurve (double x)
 	return 0.5 + 0.5 * rot_left (2.0*x-1.0);
 }
 
-/* recursive s-curve */
+/* s-curve repeated n time */
+double ncurve (double x, int n)
+{
+
+	x *= n;
+	double step = floor (x);
+	x -= step;
+	x = scurve (x);
+	x = (step +x) / ((double) n);
+
+	return x;
+}
+
+/* recursive dyadic s-curve -- on power of two */
 double rcurve (double x, int cnt)
 {
-	int i;
 	if (0 == cnt) return scurve (x);
 
 	if (x<0.5) {
@@ -48,12 +61,16 @@ double rcurve (double x, int cnt)
 	return x;
 }
 
-double qcurve (double x, int imax)
+/* like the question mark but too strong, and dyadic only */
+double wcurve (double x, int imax)
 {
 	int i;
 	for (i=0; i<imax; i++)
 	{
-		x = rcurve (x, imax - i -1);
+		// x = rcurve (x, imax - i -1);  //  a wacky curve
+		// x = rcurve (x, i);      // like quesiton mark, but too strong
+		x = ncurve (x, i+1);    // hmm wrong ... 
+		// x = ncurve (x, imax-i); // wrong .. .
 	}
 	return x;
 }
@@ -69,7 +86,7 @@ main (int argc, char *argv[])
 	for (i=0; i<imax; i++)
 	{
 		double x = i / ((double) imax);
-		double y = qcurve(x, ir);
+		double y = wcurve(x, ir);
 		printf ("%d	%g	%g\n", i, x, y);
 	}
 }
