@@ -28,10 +28,17 @@ double rot_right (double x)
 }
 
 /* right joined to left */
-double scurve (double x)
+double sscurve (double x)
 {
 	if (x<0.5) return 0.5 * rot_right (2.0*x);
 	return 0.5 + 0.5 * rot_left (2.0*x-1.0);
+}
+
+/* right joined to left */
+double scurve (double x)
+{
+	if (x<0.5) return 0.5 * rot_left (2.0*x);
+	return 0.5 + 0.5 * rot_right (2.0*x-1.0);
 }
 
 /* s-curve repeated n time */
@@ -68,8 +75,8 @@ double wcurve (double x, int imax)
 	for (i=0; i<imax; i++)
 	{
 		// x = rcurve (x, imax - i -1);  //  a wacky curve
-		// x = rcurve (x, i);      // like quesiton mark, but too strong
-		x = ncurve (x, i+1);    // hmm wrong ... 
+		x = rcurve (x, i);      // like quesiton mark, but too strong
+		// x = ncurve (x, i+1);    // hmm wrong ... 
 		// x = ncurve (x, imax-i); // wrong .. .
 	}
 	return x;
