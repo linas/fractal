@@ -267,7 +267,7 @@ int
 main (int argc, char * argv[])
 {
 	Dyadic dy;
-	int order = 10;
+	int order = 13;
 	int nmax = 1<<order;
 
 	double zre = 1.0/3.0;
@@ -299,9 +299,9 @@ main (int argc, char * argv[])
 
 		dy.SetFrac (p, order);
 		// double y = dy.ToAlternatingPoly (zre);
-		// double y = dy.ToCantorPoly (zre);
+		double y = dy.ToCantorPoly (zre);
 		// double y = dy.ToCantorExp (zre);
-		double y = dy.ToXOR (zre);
+		// double y = dy.ToXOR (zre);
 		// double y = dy.ToZetaPoly (zre);
 		// double y = dy.ToZetaPolyC (zre, zim);
 
