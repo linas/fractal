@@ -82,7 +82,6 @@ a_sub_n_poor_convergence (int n)
 		long double term = 1.0L/ (long double) k;
 		term -= zetam1(k+1);
 		term /= (long double) (k+1);
-		// term -= zetam1(k+1)/((long double) (k+1));
 		term *= binomial (n,k);
 		term *= sk;
 		acc += term;
@@ -126,7 +125,8 @@ t_sub_n (int n, long double a)
 	for (k=1; k<=n; k++)
 	{
 		long double term = 1.0L/ (long double) (k);
-		term -= zetam1 (k+1)/ (long double) (k+1);
+		term -= zetam1 (k+1);
+		term /= (long double) (k+1);
 		term *= binomial (n,k);
 		term *= an;
 		acc += term;
