@@ -1,7 +1,8 @@
 /* 
  * asubn.c
  *
- * graph of a_sub_n 
+ *  Graph of a_sub_n -- for manuscript
+ * but also explore the gneral case better
  */
 
 #include <math.h>
@@ -28,11 +29,19 @@ main (int argc, char * argv[])
 		double r = sqrt (i+1);
 		r = exp (-4.0*r);
 		x /= r;
+		printf ("%d	%8.6g\n", i, x);
 #endif
+#if GEN
 		double x = t_sub_n (i, a);
-		x += 1.0-3.0/((double)(i+1));
+		x -= -1.0+3.0/(2.0*a*((double)(i+1)));
 		x = -x;
 		printf ("%d	%8.6g\n", i, x);
+#endif
+#if 1
+		double x = a_sub_n (i);
+		double y = a_sub_n_poor_convergence(i);
+		printf ("%d	%8.6g	%8.6g\n", i, x, y);
+#endif
 	}
 	return 0;
 }

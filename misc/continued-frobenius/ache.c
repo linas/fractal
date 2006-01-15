@@ -9,6 +9,7 @@
  */
 
 #include <math.h>
+#include <stdio.h>
 
 #include "ache.h"
 #include "zetafn.h"
@@ -52,6 +53,8 @@ a_sub_n (int n)
 	val += 1.0L - M_GAMMA;
 	val -= 0.5L/((long double) (n+1));
 
+printf ("duxxxudue ---------------------------------- %d %Lg\n", n, val);
+
 	// the following sum is still badly behaved
 	long double acc = 0.0L;
 	long double sign = -1.0L;
@@ -61,10 +64,10 @@ a_sub_n (int n)
 		term *= binomial (n,k);
 		term *= sign;
 		acc += term;
-		// printf ("duuude a_sub_n k=%d term=%Lg, acc=%Lg\n", k, term, acc);
+		printf ("duuude a_sub_n k=%d term=%Lg, acc=%Lg\n", k, term, acc);
 		sign = -sign;
 	}
-	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
+	printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
 	return val-acc;
 }
 
@@ -79,8 +82,9 @@ a_sub_n_poor_convergence (int n)
 	for (k=1; k<=n; k++)
 	{
 		long double term = 1.0L/ (long double) k;
-		term -= zetam1(k+1);
-		term /= (long double) (k+1);
+		// term -= zetam1(k+1);
+		// term /= (long double) (k+1);
+		term -= zetam1(k+1)/((long double) (k+1));
 		term *= binomial (n,k);
 		term *= sk;
 		acc += term;

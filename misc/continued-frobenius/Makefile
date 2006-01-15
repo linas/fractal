@@ -1,4 +1,7 @@
 
+CC=gcc-4.0
+CFLAGS= -g -O2 -Wall
+
 TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
@@ -57,10 +60,10 @@ zyx: zyx.o  $(LIB)/binomial.o $(LIB)/harmonic.o
 
 
 .o:
-	cc -o $@ $^ -lgsl -lgslcblas -lm
+	$(CC) -o $@ $^ -lgsl -lgslcblas -lm
 
 .c.o:
-	cc -g -c -O3 -Wall -I $(INC) $<
+	$(CC) -c $(CFLAGS) -I $(INC) $<
 
 clean:
 	rm -f *.o $(EXES) a.out x y j.c x.c x.dat *.png x.gplot

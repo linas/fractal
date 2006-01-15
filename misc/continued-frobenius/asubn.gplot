@@ -19,16 +19,16 @@ set ylabel "a_n/exp(-4sqrt(n+1))"
 # set yrange [0:]
 
 
+# This one is for the paper -- graph
 # plot "asubn.dat" using 1:2 title "a_n/exp(-4sqrt(n+1))"
 
-# plot "asubn.dat" using 1:(1-(((1+$2)*$1)/3)) title "data"
-
-# plot "asubn.dat" using 1:($1*(1-(((1+$2)*$1)/3))) title "data"
-# plot "asubn.dat" using 1:((1-($1*(1-(((1+$2)*$1)/3))))*$1) title "data"
-# plot "asubn.dat" using 1:((1-((1-($1*(1-(((1+$2)*$1)/3))))*$1))*$1) title "data"
-
+# This attempts fit on a=1/2
 # plot "asubn.dat" using 1:($2+1 -3/($1+1)) title "data"
-plot "asubn.dat" using 1:($2) title "data"
+
+# plot "asubn.dat" using 1:2 title "data"
+plot "asubn.dat" using 1:((1+$2)*($1+1)) title "data"
+# plot "asubn.dat" using 1:($2+1 -4.5/($1+1)) title "data"
+# plot "asubn.dat" using 1:(($2+1 -4.5/($1+1))*exp(3.6*sqrt($1+1))) title "data"
 
 # plot "asubn.dat" using 1:(1-(((1+$2)*$1)/3)) title "data", \
 #	"asubn.dat" using 1:(1/$1) title "fitta"
