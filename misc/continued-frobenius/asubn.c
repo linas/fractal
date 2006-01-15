@@ -35,7 +35,6 @@ main (int argc, char * argv[])
 		double x = t_sub_n (i, a);
 		double y = a_sub_n (i);
 		x -= 1.0/(2.0*a*((double)(i+1)));
-		// x = -x;
 		printf ("%d	%8.6g	%8.6g\n", i, x, y);
 #endif
 	}
