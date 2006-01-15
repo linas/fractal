@@ -3,6 +3,8 @@
  *
  * High-precison Riemann zeta function, using the 
  * Gnu Multiple-precision library.
+ *
+ * Also, high-precision values of the series a_n 
  * 
  * Linas Vepstas July 2005
  */
@@ -56,7 +58,7 @@ void i_factorial (mpz_t fact, unsigned int n)
 
 /* ============================================================================= */
 /* i_binomial
- * Binomial coefficient
+ * Binomial coefficient (n k)
  */
 
 void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
@@ -78,7 +80,7 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 
 /* ============================================================================= */
 /* fp_poch_rising
- * rising pochhammer symbol, for real values.
+ * rising pochhammer symbol (x)_n, for real values of x and integer n.
  *
  * Brute force, simple.
  */
@@ -105,7 +107,7 @@ void fp_poch_rising (mpf_t poch, double x, unsigned int n)
 
 /* ============================================================================= */
 /* c_poch_rising
- * rising pochhammer symbol, for complex args.
+ * rising pochhammer symbol (s)_n, for complex s and integer n.
  *
  * Brute force, simple.
  */
@@ -151,7 +153,7 @@ void c_poch_rising (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsi
 
 /* ============================================================================= */
 /* fp_binomial
- * Binomial coefficient
+ * Binomial coefficient 
  */
 
 void fp_binomial (mpf_t bin, double s, unsigned int k)
@@ -281,7 +283,7 @@ void q_bernoulli (mpq_t bern, int n)
 }
 
 /* ============================================================================= */
-/* floating point exponential */
+/* Floating point exponential */
 
 void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 {
@@ -535,6 +537,9 @@ void fp_zeta_even_str (mpf_t zeta, unsigned int n, char * snum, char * sdenom)
 	mpf_clear (denom);
 }
 
+/* Compute and return the "exact" result for the zeta function for 
+ * any value of even n 
+ */
 void fp_zeta_even (mpf_t zeta, unsigned int n)
 {
 	mpq_t bern, b2, bb;
@@ -1085,7 +1090,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		zprec[s] = prec;
 	}
 
-	/* if this is an arbitary even number, we've got the exact result */
+	/* If this is an arbitary even number, we've got the exact result */
 	if (0 == s%2)
 	{
 		imprecise = 0;
@@ -1180,13 +1185,15 @@ static inline unsigned int num_digits (mpz_t num, mpz_t tmpa, mpz_t tmpb)
 }
 
 /* ============================================================================= */
-/* compute a_sub_n
+/* 
+ * Compute a_sub_n
+ * the w argument is for the power bit -- 
  */
-void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
+void a_sub_n (mpf_t a_n, mpf_t w, unsigned int n, unsigned int prec)
 {
 	int k;
 	mpf_t fbin, term, zt, ok, one, acc, zeta;
-	mpf_t gam;
+	mpf_t gam, wneg, wn;
 
 	mpf_init (term);
 	mpf_init (acc);
@@ -1196,6 +1203,8 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpf_init (one);
 	mpf_init (fbin);
 	mpf_init (gam);
+	mpf_init (wneg);
+	mpf_init (wn);
 	
 	mpz_t tmpa, tmpb;
 	mpz_init (tmpa);
@@ -1207,6 +1216,9 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpz_init (ibin);
 	mpf_set_ui (a_n, 0);
 
+	mpf_neg (wneg, w);
+	mpf_set (wn, wneg);
+
 	int maxbump = 0;
 	for (k=1; k<= n; k++)
 	{
@@ -1214,7 +1226,7 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 		i_binomial (ibin, n, k);
 		mpf_set_z (fbin, ibin);
 
-		/* The terms will have alternating signes, and
+		/* The terms will have alternating signs, and
 		 * will mostly cancel one-another. Thus, we need 
 		 * to increase precision for those terms with the 
 		 * largest binomial coefficients. This is will
@@ -1233,8 +1245,14 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 
 		mpf_mul (zeta, term, fbin);
 
+#if W_IS_EQUAL_TO_ONE
 		if (k%2) mpf_neg (term, zeta);
 		else mpf_set (term, zeta);
+#else 
+		mpf_mul (term, wn, zeta);
+		mpf_mul (zt, wn, wneg);
+		mpf_set (wn, zt);
+#endif
 		
 		mpf_add (acc, a_n, term);
 		mpf_set (a_n, acc);
@@ -1258,6 +1276,8 @@ void a_sub_n (mpf_t a_n, unsigned int n, unsigned int prec)
 	mpf_clear (one);
 	mpf_clear (fbin);
 	mpf_clear (gam);
+	mpf_clear (wneg);
+	mpf_clear (wn);
 
 	mpz_clear (ibin);
 	mpz_clear (tmpa);
@@ -1309,7 +1329,7 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 	mpf_set_ui (re_a, 0);
 	mpf_set_ui (im_a, 0);
 
-	int n = 100;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	int n = 1500;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	for (k=1; k<= n; k++)
 	{
 		/* Commpute the binomial */
@@ -1524,7 +1544,7 @@ main (int argc, char * argv[])
 	}
 #endif /* TEST_BERNOULLI */
 	
-// #define A_SUB_N
+#define A_SUB_N
 #ifdef A_SUB_N
 
 #ifdef PRECOMPUTE
@@ -1538,13 +1558,16 @@ main (int argc, char * argv[])
 	}
 #endif /* PRECOMPUTE */
 	
-	mpf_t a_n, en, sq, term, b_n, prod;
+	mpf_t a_n, en, sq, term, b_n, prod, w;
 	mpf_init (a_n);
 	mpf_init (en);
 	mpf_init (sq);
 	mpf_init (term);
 	mpf_init (b_n);
 	mpf_init (prod);
+	mpf_init (w);
+
+	mpf_set_ui (w, 1);
 
 	int n;
 	printf ("#\n# zeta expansion terms \n#\n");
@@ -1552,7 +1575,7 @@ main (int argc, char * argv[])
 	printf ("# computed with %d bits of default mpf \n", bits);
 	for (n=0; n<nterms; n++)
 	{
-		a_sub_n (a_n, n, prec);
+		a_sub_n (a_n, w, n, prec);
 
 		/* compute the bound */
 		mpf_set_ui (en, n+1);
@@ -1569,12 +1592,13 @@ main (int argc, char * argv[])
 #endif
 		
 		printf ("%d\t",n);
-		fp_prt ("", prod);
+		// fp_prt ("", prod);
+		fp_prt ("", a_n);
 		fflush (stdout);
 	}
 #endif
 	
-#define A_SUB_S
+// #define A_SUB_S
 #ifdef A_SUB_S
 
 	mpf_t re_a, im_a;
