@@ -52,7 +52,7 @@ a_sub_n (int n)
 	val += 1.0L - M_GAMMA;
 	val -= 0.5L/((long double) (n+1));
 
-	// the following sum is still badly behcaved
+	// the following sum is still badly behaved
 	long double acc = 0.0L;
 	long double sign = -1.0L;
 	for (k=1; k<=n; k++)
@@ -104,3 +104,34 @@ long double zer_p (int p)
 	for (k=0; k<p; k++) term *= 0.5L;
 	return term;
 }
+
+// ==========================================================
+// t_sub_ne for general expanstion point "a"
+// The a_sub_n is this, for a=1, and leading fator subtracted.
+//
+long double 
+t_sub_n (int n, long double a)
+{
+	int k;
+	long double val = 0.0L;
+	
+	// minimize roundoff errors by doing this sum first
+	val += 1.0L - M_GAMMA;
+
+	// the following sum is still badly behaved
+	long double acc = 0.0L;
+	long double an = -a;
+	for (k=1; k<=n; k++)
+	{
+		long double term = 1.0L/ (long double) (k);
+		term -= zetam1 (k+1)/ (long double) (k+1);
+		term *= binomial (n,k);
+		term *= an;
+		acc += term;
+		// printf ("duuude a_sub_n k=%d term=%Lg, acc=%Lg\n", k, term, acc);
+		an *= -a;
+	}
+	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
+	return val+acc;
+}
+

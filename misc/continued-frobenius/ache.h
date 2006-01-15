@@ -14,6 +14,9 @@ long double ache_mp(int m, int p);
 // return the nth term of the binomial expansion of the zeta function
 long double a_sub_n (int n);
 
+// return the nth term of the binomial expansion of the zeta function
+long double t_sub_n (int n, long double a);
+
 // return the p'th element of the zeroth eigenvector.
 // this is the eigenvector with eigenvalue 1
 // Note that zer_m = sum_p h_mp zer_p and that
