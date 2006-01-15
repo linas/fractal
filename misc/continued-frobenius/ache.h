@@ -13,6 +13,7 @@ long double ache_mp(int m, int p);
 
 // return the nth term of the binomial expansion of the zeta function
 long double a_sub_n (int n);
+long double a_sub_n_poor_convergence (int n);
 
 // return the nth term of the binomial expansion of the zeta function
 long double t_sub_n (int n, long double a);
