@@ -1265,6 +1265,11 @@ void a_sub_n (mpf_t a_n, mpf_t w, unsigned int n, unsigned int prec)
 
 	/* subtract 1/2(n+1) */
 	mpf_div_ui (ok, one, 2*(n+1));
+#if W_IS_EQUAL_TO_ONE
+#else
+	mpf_div (zt, ok, w);
+	mpf_set (ok, zt);
+#endif
 	mpf_sub (term, a_n, ok);
 	mpf_set (a_n, term);
 	
@@ -1567,7 +1572,8 @@ main (int argc, char * argv[])
 	mpf_init (prod);
 	mpf_init (w);
 
-	mpf_set_ui (w, 1);
+	// The standard w value is 1 ... 
+	mpf_set_d (w, 2.0);
 
 	int n;
 	printf ("#\n# zeta expansion terms \n#\n");
