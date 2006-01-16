@@ -67,8 +67,64 @@ This integral quite amazed me; I hadn't seen it before, but I like it.
  poking around the last few years, I get the impression that the general
  topic of finite differences is not quite as simple as one might naively
  suppose.
- I'm not sure quite what I'm looking for, but if you had something to recommend,
- I'd look at it.
+ I'm not sure quite what I'm looking for, but was wondering is fomething
+ lept to mind.
+\layout Paragraph
+
+Series identities: 
+\layout Standard
+
+Here's a shallow question.
+ There seems to be a set of 
+\begin_inset Quotes eld
+\end_inset 
+
+well-known
+\begin_inset Quotes erd
+\end_inset 
+
+ exactly summable series of the form 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}{n+a \choose b}\zeta(n+a)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}(-1)^{n}{n+a \choose b}\zeta(n+a)\label{eq:}\end{equation}
+
+\end_inset 
+
+ with 
+\begin_inset Formula $a$
+\end_inset 
+
+ and 
+\begin_inset Formula $b$
+\end_inset 
+
+ some numbers or integers; for example: 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}{n+s+1 \choose n+1}\,\left(\zeta(n+s+2)-1\right)=1\label{eq:}\end{equation}
+
+\end_inset 
+
+ One may easily derive identities for different 
+\begin_inset Formula $a$
+\end_inset 
+
+ and 
+\begin_inset Formula $b$
+\end_inset 
+
+ by applying some simple trick or another, and even obtain some recurrence
+ relations.
+ However, when I do so, my approach, and results, are rather ad hoc; do
+ you know if there is a general statement of all of these identities? Do
+ they bear someone's name? Is there some accepted notation and normalization
+ for the various recursion relations that bind them together? I can't say
+ its deep; but it could be handy to have these tabulated.
+ 
 \layout Paragraph
 
 A slight generalization:
@@ -77,7 +133,7 @@ A slight generalization:
 I can generalize my formulas 35-37 ever so slightly: It seems I can write
  these as
 \begin_inset Formula \begin{equation}
-\zeta(s)=\frac{s}{s-1}-sw^{s-1}\sum_{n=0}^{\infty}(-1)^{n}{s-1 \choose n}\, u_{n}\label{eq:}\end{equation}
+\zeta(s)=\frac{s}{s-1}-sw^{s-1}\sum_{n=0}^{\infty}(-1)^{n}{s-1 \choose n}\, u_{n}\label{eq:zeta}\end{equation}
 
 \end_inset 
 
@@ -144,5 +200,92 @@ u_{n}(w)=\frac{1}{2w(n+1)}+\mathcal{O}\left(\exp-c\sqrt{n+1}\right)\label{eq:}\e
 A different generalization:
 \layout Standard
 
-There's a different generalization, 
+There's a different generalization, where equation (
+\begin_inset LatexCommand \ref{eq:un}
+
+\end_inset 
+
+) is expressed in terms for the Hurwitz zeta 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
+
+, for arbitrary value of 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+ I haven't quite written these out yet, they're a little more complex, and
+ I work without the luxury of an algebra system like Maple, but I expect
+ an overall similar development.
+ Again, I thought you'd be interested, as now one has relations on L-functions.
+ 
+\layout Paragraph
+
+Numerical fitting:
+\layout Standard
+
+I now realize that there is one aspect to the numerical fitting that I failed
+ to explain properly.
+ There is a reason for the unusual form of my estimate: 
+\begin_inset Formula \begin{equation}
+I(n)\approx\exp\left(-3.6\sqrt{n+1}-3\right)\sin\left(\sqrt{\frac{4}{\pi}(n-1.97)+\frac{289}{256}}-\frac{1}{16}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ During the fitting, I could start with an expression of the form 
+\begin_inset Formula \begin{equation}
+I(n)\approx\exp\left(-a\sqrt{n+b}-c\right)\sin\left(\sqrt{dn-e}+f\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ but it becomes clear that the quality of the fit has a very stiff dependence
+ on some of these parameters, but is quite soft in others.
+ For example, both 
+\begin_inset Formula $d$
+\end_inset 
+
+ and 
+\begin_inset Formula $f$
+\end_inset 
+
+ wanted to be quite 
+\begin_inset Quotes eld
+\end_inset 
+
+stiff
+\begin_inset Quotes erd
+\end_inset 
+
+, in that even a small change away from 
+\begin_inset Formula $4/\pi$
+\end_inset 
+
+ and 
+\begin_inset Formula $1/16$
+\end_inset 
+
+ seemed to provide a bad fit.
+ By contrast, the fit was very lenient with regards to the value of 
+\begin_inset Formula $c$
+\end_inset 
+
+.
+ I found this unusual.
+ I did not work out the eigenvalues of the fit, but I am tempted to go back
+ and do this.
+ (That is, the quality of the fit has some quadratic dependence on the 
+\begin_inset Formula $a,b,\ldots,f$
+\end_inset 
+
+: its some ellipsoid oriented in some direction; the 
+\begin_inset Quotes eld
+\end_inset 
+
+eigenvalues
+\begin_inset Quotes erd
+\end_inset 
+
+ are just the lengths of the axes of the ellipsoid).
+\layout Standard
+
 \the_end
