@@ -146,7 +146,7 @@ static double takagi_disk (double re_q, double im_q, int itermax)
 // 
 static double takagi_cylinder (double x, double y, int itermax)
 {
-	double w = 0.94;
+	double w = 0.98;
 
 	static double yprev = -999.0;
 
