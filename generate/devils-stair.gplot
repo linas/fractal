@@ -1,0 +1,24 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term svg
+set out 'quest.svg'
+
+# set data style linespoints
+set data style lines
+set key right
+set xzeroaxis linetype -1 linewidth 0.5
+set yzeroaxis linetype -1 linewidth 0.5
+set xtics axis
+set ytics axis
+
+set bmargin 5
+set lmargin 5
+
+set title "Minkowski ?(x)"
+set xlabel "x"  0, -1
+set ylabel "?(x)" -0.6, 0
+plot "quest.dat" using 2:3 title "" with lines linewidth 2
+
