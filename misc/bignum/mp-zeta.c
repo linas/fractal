@@ -1245,6 +1245,7 @@ void a_sub_n (mpf_t a_n, mpf_t w, unsigned int n, unsigned int prec)
 
 		mpf_mul (zeta, term, fbin);
 
+#define W_IS_EQUAL_TO_ONE 1
 #if W_IS_EQUAL_TO_ONE
 		if (k%2) mpf_neg (term, zeta);
 		else mpf_set (term, zeta);
@@ -1573,7 +1574,7 @@ main (int argc, char * argv[])
 	mpf_init (w);
 
 	// The standard w value is 1 ... 
-	mpf_set_d (w, 2.0);
+	mpf_set_d (w, 1.0);
 
 	int n;
 	printf ("#\n# zeta expansion terms \n#\n");
