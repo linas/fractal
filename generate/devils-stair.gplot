@@ -4,21 +4,24 @@
 # set out 'read.gif'
 
 set term svg
-set out 'quest.svg'
+set out 'devils-stair.svg'
 
 # set data style linespoints
 set data style lines
 set key right
 set xzeroaxis linetype -1 linewidth 0.5
 set yzeroaxis linetype -1 linewidth 0.5
-set xtics axis
-set ytics axis
+# set xtics axis
+# set ytics axis
+set size square
 
 set bmargin 5
-set lmargin 5
+set lmargin 7
 
-set title "Minkowski ?(x)"
-set xlabel "x"  0, -1
-set ylabel "?(x)" -0.6, 0
-plot "quest.dat" using 2:3 title "" with lines linewidth 2
+set title "Devil's Staircase"
+# set xlabel "Phase"  0, -1
+# set ylabel "Winding Number" -0.6, 0
+set xlabel "Phase"  0, 0.5
+set ylabel "Winding Number" 1, 0
+plot "devils-stair.dat" using 1:3 title "" with lines linewidth 2
 

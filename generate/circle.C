@@ -25,16 +25,28 @@
 static double winding_number (double omega, double K, int itermax)
 {
    double	x=0.0;
-   int		iter;
+   int		iter,j;
+	int cnt=0;
+	double start=0.0, end=0.0;
    
+#define SAMP 100
+	for (j=0; j<itermax/SAMP; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		t -= 0.5;
+		x = t;
+		start += x;
   
-   /* OK, now start iterating the circle map */
-   for (iter=0; iter < itermax; iter++) {
-      x += omega - K * sin (2.0 * M_PI * x);
-   }
+   	/* OK, now start iterating the circle map */
+   	for (iter=0; iter < SAMP; iter++) {
+      	x += omega - K * sin (2.0 * M_PI * x);
+			cnt ++;
+   	}
+		end += x;
+	}
 	
-   x /= (double) itermax;
-printf ("%g\t%g\t%g\n", omega, K, x);
+   x = (end-start) / ((double) cnt);
 	return x;
 }
 
