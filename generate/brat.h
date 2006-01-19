@@ -24,7 +24,7 @@ void MakeHisto (
 	double 	renorm);
 
 void 
-MakeHistoCB (
+MakeHistoWrap (
    float  	*glob,
    int 		sizex,
    int 		sizey,
@@ -49,6 +49,47 @@ void MakeHisto (        \
    int		itermax,    \
 	double 	renorm)     \
 {                       \
-   MakeHistoCB (glob, sizex, sizey, re_center, im_center,  \
-       width, height, itermax, renorm, cb);                \
+   MakeHistoWrap (glob, sizex, sizey, re_center, im_center,  \
+       width, height, itermax, renorm, cb);                  \
 }
+
+/* Bifurcation diagram callback, does one row at a time */
+typedef void
+MakeBifurCB (
+	float *array, 
+	int array_size, 
+	double x_center,
+	double x_width,
+	double y_paramter, 
+	int itermax,
+	double renorm);
+
+void
+MakeBifurWrap (
+	float    *glob,
+	int      sizex,
+	int      sizey,
+	double   re_center,
+	double   im_center,
+	double   width,
+	double   height,
+	int      itermax,
+	double   renorm,
+	MakeBifurCB cb);
+
+#define DECL_MAKE_BIFUR(cb)  \
+void MakeHisto (        \
+   float  	*glob,      \
+   int 		sizex,      \
+   int 		sizey,      \
+   double	re_center,  \
+   double	im_center,  \
+   double	width,      \
+   double	height,     \
+   int		itermax,    \
+	double 	renorm)     \
+{                       \
+   MakeBifurWrap (glob, sizex, sizey, re_center, im_center,  \
+       width, height, itermax, renorm, cb);                  \
+}
+

@@ -12,11 +12,11 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         draw dx image movie paste stats sum \
         angle curl diff div card mandel morph \
         moire automatic wind winds ray \
-        manvert cutoff
+        manvert cutoff brat draw dx image
 
 NEW_EXES = alpha circle cutoff elliptic erdos euler-q mand-flow \
         mp_zeta mobius swap takagi totient  \
-        ray automatic radius brat draw dx image
+        ray automatic radius
 
 all:    $(NEW_EXES)
 
@@ -48,14 +48,14 @@ alpha.o: alpha.C
 brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
-circle.o: circle.C
+circle.o: circle.C brat.h
 cutoff.o: cutoff.C
 euler-q.o: euler-q.C
 mobius.o: mobius.C
 mp_zeta.o: mp_zeta.C
 swap.o: swap.C
-takagi.o: takagi.C
-totient.o: totient.C
+takagi.o: takagi.C brat.h
+totient.o: totient.C brat.h
 
 FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
 GCF=../tools/lib/gcf.o

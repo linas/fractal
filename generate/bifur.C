@@ -1,27 +1,8 @@
-/*
- * bifur.C
- *
- * FUNCTION:
- * Display bifurcation diagrams for circle map
- *
- * HISTORY:
- * quick hack -- Linas Vepstas October 1989
- * modernize -- Linas Vepstas March 1996
- * more stuff -- January 2000
- * more stuff -- October 2004
- */
-
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "brat.h"
-
 /*-------------------------------------------------------------------*/
 /* This routine does bifurcation diagrams */
 
 void 
-MakeHisto (
+MakeBifurWrap (
    float  	*glob,
    int 		sizex,
    int 		sizey,
@@ -30,14 +11,14 @@ MakeHisto (
    double	width,
    double	height,
    int		itermax,
-   double 	renorm)
+   double 	renorm
+	MakeBifurCB cb)
 {
    int		i,j, globlen;
    double	re_start, im_start, delta;
    double	re_position, im_position;
    
    delta = width / (double) sizex;
-   re_start = re_center - width / 2.0;
    im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
    
    globlen = sizex*sizey;
@@ -48,6 +29,7 @@ MakeHisto (
 	{
       if (i%10==0) printf(" start row %d\n", i);
 
+		cb (&glob[i*sizex], sizex, re_center, width, im_position, itermax, renorm);
       im_position -= delta;  /*top to bottom, not bottom to top */
    }
 }
