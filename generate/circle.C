@@ -30,7 +30,7 @@ static double winding_number (double omega, double K, int itermax)
 	int cnt=0;
 	double start=0.0, end=0.0;
    
-#define SAMP 50
+#define SAMP 150
 	for (j=0; j<itermax/SAMP; j++)
 	{
 		double t = rand();
@@ -48,6 +48,33 @@ static double winding_number (double omega, double K, int itermax)
 	}
 	
    x = (end-start) / ((double) cnt);
+	return x;
+}
+
+/*-------------------------------------------------------------------*/
+/* 
+ * This routine computes average winding number taken by
+ * circle map iterator. -- subject to noise
+ */
+static double noisy_winding_number (double omega, double K, int itermax, double noise)
+{
+   double	x=0.0;
+   int		iter;
+	int cnt=0;
+   
+  	/* OK, now start iterating the circle map */
+  	for (iter=0; iter < itermax; iter++) {
+     	x += omega - K * sin (2.0 * M_PI * x);
+		cnt ++;
+
+		/* white noise, equi-distributed, sharp cutoff */
+		double t = rand();
+		t /= RAND_MAX;
+		t -= 0.5;
+		x += noise*t;
+  	}
+	
+   x /= ((double) cnt);
 	return x;
 }
 
@@ -72,7 +99,7 @@ static double rms_winding_number (double omega, double K, int itermax)
    	/* OK, now start iterating the circle map */
    	for (iter=0; iter < SAMP; iter++) {
 			int d;
-			int dmax = 4;
+			int dmax = 10;
 			for (d=0; d<dmax; d++)
 			{
       		x += omega - K * sin (2.0 * M_PI * x);
@@ -148,7 +175,8 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 static double circle_map (double omega, double K, int itermax)
 {
 	// return winding_number (omega,K, itermax);
-	return rms_winding_number (omega,K, itermax);
+	return noisy_winding_number (omega,K, itermax, 0.04);
+	// return rms_winding_number (omega,K, itermax);
 	// return circle_poincare_recurrance_time (omega,K, itermax);
 }
 
