@@ -108,7 +108,8 @@ static double rms_winding_number (double omega, double K, int itermax)
 		end += x;
 	}
 	
-   x = sqrt (sq) / (end-start);
+   // x = sqrt (sq) / (end-start);
+   x = sqrt (sq) / ((double) cnt);
 	// if (K != 0.0) x /= K;
 	return x;
 }
