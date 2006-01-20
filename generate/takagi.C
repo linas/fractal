@@ -122,7 +122,7 @@ static void takagi_series_c (double re_w, double im_w, double *prep, double *pim
 // This function sets up a fixed ''x'' value, and graphs the interior of
 // the disk (|w| < 1) as a funciton of w.
 // 
-static double takagi_disk (double re_q, double im_q, int itermax)
+static double takagi_disk (double re_q, double im_q, int itermax, double param)
 {
 	if (!is_init) 
 	{ 
@@ -144,7 +144,7 @@ static double takagi_disk (double re_q, double im_q, int itermax)
 // but the phase of w varying in the horizontal direction
 // In the veritical direction runs the ''x'' of the t_w(x).
 // 
-static double takagi_cylinder (double x, double y, int itermax)
+static double takagi_cylinder (double x, double y, int itermax, double param)
 {
 	double w = 0.98;
 

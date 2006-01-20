@@ -2336,7 +2336,7 @@ MakeHistoWrap (
    double	height,
    int		itermax,
    double 	renorm,
-	double   (*cb)(double, double, int))
+	MakeHistoCB cb)
 {
    int		i,j, globlen;
    double	re_start, im_start, delta;
@@ -2357,7 +2357,7 @@ MakeHistoWrap (
       for (j=0; j<sizex; j++) 
 		{
 
-			double phi = cb (re_position, im_position, itermax);
+			double phi = cb (re_position, im_position, itermax, renorm);
          glob [i*sizex +j] = phi;
 
          re_position += delta;

@@ -88,6 +88,7 @@ static double rms_winding_number (double omega, double K, int itermax)
    double	x=0.0, sq=0.0;
    int		iter,j;
 	int cnt=0;
+	double start=0.0, end=0.0;
    
 	for (j=0; j<itermax/SAMP; j++)
 	{
@@ -95,16 +96,12 @@ static double rms_winding_number (double omega, double K, int itermax)
 		t /= RAND_MAX;
 		t -= 0.5;
 		x = t;
+		start = x;
   
    	/* OK, now start iterating the circle map */
    	for (iter=0; iter < SAMP; iter++) {
-			int d;
-			int dmax = 10;
-			for (d=0; d<dmax; d++)
-			{
-      		x += omega - K * sin (2.0 * M_PI * x);
-			}
-			sq += (x-t-dmax*omega)*(x-t-dmax*omega);
+      	x += omega - K * sin (2.0 * M_PI * x);
+			sq += (x-t)*(x-t);
 			t = x;
 			cnt ++;
    	}
@@ -172,11 +169,11 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
    return x;
 }
 
-static double circle_map (double omega, double K, int itermax)
+static double circle_map (double omega, double K, int itermax, double param)
 {
 	// return winding_number (omega,K, itermax);
-	return noisy_winding_number (omega,K, itermax, 0.04);
-	// return rms_winding_number (omega,K, itermax);
+	// return noisy_winding_number (omega,K, itermax, param);
+	return rms_winding_number (omega,K, itermax);
 	// return circle_poincare_recurrance_time (omega,K, itermax);
 }
 

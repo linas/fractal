@@ -84,7 +84,7 @@ static void totient_series_c (double re_q, double im_q, double *prep, double *pi
 	*pimp = imp;
 }
 
-static double totient_series (double re_q, double im_q, int itermax)
+static double totient_series (double re_q, double im_q, int itermax, double param)
 {
 	max_terms = itermax;
 	double rep, imp;

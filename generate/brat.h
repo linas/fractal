@@ -23,6 +23,9 @@ void MakeHisto (
    int		itermax,
 	double 	renorm);
 
+typedef double MakeHistoCB 
+	(double x, double y, int itermax, double param);
+
 void 
 MakeHistoWrap (
    float  	*glob,
@@ -34,7 +37,7 @@ MakeHistoWrap (
    double	height,
    int		itermax,
    double 	renorm,
-	double   (*cb)(double, double, int));
+	MakeHistoCB cb);
 
 
 #define DECL_MAKE_HISTO(cb)  \
