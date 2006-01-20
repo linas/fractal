@@ -2345,7 +2345,11 @@ MakeHistoWrap (
    delta = width / (double) sizex;
    re_start = re_center - width / 2.0;
    im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
-   
+	double im_end = im_center - width * ((double) sizey) / (2.0 * (double) sizex);
+
+	printf ("re=(%g,%g)\n", re_start, re_start+width);
+	printf ("im=(%g,%g)\n", im_end, im_start);
+
    globlen = sizex*sizey;
    for (i=0; i<globlen; i++) glob [i] = 0.0;
 
