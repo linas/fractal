@@ -6,6 +6,7 @@
  * January 2006 -- Linas Vepstas
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -22,6 +23,18 @@ zero_ansatz (int n, double a8, double a6, double a4, double a2, double e)
 	return a;
 }
 
+double 
+gauss_ansatz (int n, double b6, double b4, double b2, double e)
+{
+	n += 4;
+	double b = b6 *(n*n+3*n+2)/16.0;
+	b += b4*(e/16.0 -0.5*n*n +3*n/8 -31.0/64.0);
+	b += b2*(n*n - 4*n +23.0/8.0 - e);
+
+	b /= 2*n-17.0/4.0 - e;
+	return b;
+}
+
 void make_coeffs (double *ar, int nlast, double energy)
 {
 	int n;
@@ -31,7 +44,8 @@ void make_coeffs (double *ar, int nlast, double energy)
 	ar[nlast-6] = 1.0;
 	for (n=nlast-8; n>=0; n-=2)
 	{
-		ar[n] = zero_ansatz (n, ar[n+8], ar[n+6], ar[n+4], ar[n+2], energy);
+		// ar[n] = zero_ansatz (n, ar[n+8], ar[n+6], ar[n+4], ar[n+2], energy);
+		ar[n] = gauss_ansatz (n, ar[n+6], ar[n+4], ar[n+2], energy);
 	}
 
 	int nstart = 0;
@@ -70,7 +84,9 @@ double psi_wf (double x, double * ar, int nlast)
 		// printf ("%d	ar=%g	xn=%g \t term=%g \tpsi=%g\n", n, ar[n], xn, xn*ar[n], psi);
 		xn *= x*x;
 	}
-	psi *= x*x-0.25;
+	// psi *= x*x-0.25;
+
+	psi *= exp (-0.5*x*x);
 	return psi;
 }
 
@@ -87,7 +103,7 @@ main(int argc, char* argv[])
 	}
 	double energy = atof (argv[1]);
 
-	int nlast = 100;
+	int nlast = 60;
 
 	make_coeffs (ar, nlast, energy);
 	psi_wf (5.0, ar, nlast);
