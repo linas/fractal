@@ -6,6 +6,7 @@
  * January 2006 -- Linas Vepstas
  */
 
+#include <stdio.h>
 #include <stdlib.h>
 
 /* Return a_n given higer an's and energy */
@@ -24,8 +25,10 @@ zero_ansatz (int n, double a8, double a6, double a4, double a2, double e)
 main(int argc, char* argv[])
 {
 	int n;
-#define NMAX 1000
+#define NMAX 10000
 	double ar[NMAX];
+
+	double e = atof (argv[1]);
 
 	ar[NMAX-2] = 1.0;
 	ar[NMAX-4] = 0.5;
