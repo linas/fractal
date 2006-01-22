@@ -45,7 +45,10 @@ void make_coeffs (double *ar, int nlast, double energy)
 	for (n=nstart; n<nlast; n+=2)
 	{
 		ar[n] *= off;
-		// printf ("%d	%g\n", n, ar[n]);
+	}
+	for (n=nstart; n<nlast; n+=2)
+	{
+		// printf ("%d	%g	%g\n", n, ar[n], ar[n]/(n*ar[n+2]));
 	}
 }
 
@@ -87,22 +90,27 @@ main(int argc, char* argv[])
 
 	make_coeffs (ar, nlast, energy);
 
+#define WAVE_FUNCTION
 #ifdef WAVE_FUNCTION
 	/* wave function */
 	double x;
 
-	for (x=-10.0; x<10.0; x +=0.4)
+	for (x=0.0; x<7.0; x +=0.4)
 	{
 		double psi = psi_wf (x, ar, nlast);
 		printf ("%g	%g\n", x, psi);
 	}
 #endif
 
-	for (energy=0.0; energy<50; energy+=0.05)
+// #define ASYMPTOTIC
+#ifdef ASYMPTOTIC
+	double x = 5.0;
+	for (energy=0.0; energy<50; energy+=0.01)
 	{
 		make_coeffs (ar, nlast, energy);
 		double psi = psi_wf (x, ar, nlast);
 		printf ("%g	%g\n", energy, psi);
 	}
+#endif
 }
 
