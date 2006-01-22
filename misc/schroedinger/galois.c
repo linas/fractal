@@ -67,6 +67,7 @@ double psi_wf (double x, double * ar, int nlast)
 	for (n=nstart; n<nlast; n+=2)
 	{
 		psi += ar[n] * xn;
+		// printf ("%d	ar=%g	xn=%g \t term=%g \tpsi=%g\n", n, ar[n], xn, xn*ar[n], psi);
 		xn *= x*x;
 	}
 	psi *= x*x-0.25;
@@ -89,6 +90,7 @@ main(int argc, char* argv[])
 	int nlast = 100;
 
 	make_coeffs (ar, nlast, energy);
+	psi_wf (5.0, ar, nlast);
 
 #define WAVE_FUNCTION
 #ifdef WAVE_FUNCTION
@@ -105,7 +107,7 @@ main(int argc, char* argv[])
 // #define ASYMPTOTIC
 #ifdef ASYMPTOTIC
 	double x = 5.0;
-	for (energy=0.0; energy<50; energy+=0.01)
+	for (energy=0.0; energy>-50; energy-=0.1)
 	{
 		make_coeffs (ar, nlast, energy);
 		double psi = psi_wf (x, ar, nlast);
