@@ -11,17 +11,17 @@
  * specifically, real double precision:
  * DGEEV
  *
- * Apply to find eigenvalues of the Gauss-Kuz'min-Wirsing operator
+ * Apply to solve 1D Schroedinger equation
+ * should use a trilinear solver instead
  *
  * Linas Vepstas September 2004
+ * Linas Vepstas January 2006
  */
 
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ache.h"
-#include "zetafn.h"
 #include "lapack.h"
 
 
@@ -66,38 +66,22 @@ geteigen (int dim, double *matrix,
 
 }
 
-/* kinetic part only */
 double 
-kino (int m, int n)
+kinetic (int i, int j, double step)
 {
-	if (m != n-2) return 0.0;
-	return (double) (n*(n+1));
+	if (i<j-1) return 0.0;
+	if (i>j+1) return 0.0;
+	if (i==j) return 2.0/(step*step);
+	return -1.0/(step*step);
 }
 
-double sst (int i, int j)
+double 
+potential (int n, double step)
 {
-	double lam;
-	if (i>j) return 0.0;
-	lam = pow (2.0, (double) (j+1)) -1.0;
-	double bin = binomial (j,i);
-	printf ("mat(%d, %d) = %g/%g\n", i,j,bin,lam);
-	return bin /lam;
-}
-
-void prtbin (double x)
-{
-	if (0.0 > x) x = -x;
-	int i;
-	for (i=0; i<45; i++)
-	{
-		if (0.5 < x) {
-			printf ("1");
-			x -= 0.5;
-		} else {
-			printf ("0");
-		}
-		x *= 2.0;
-	}
+	double y = n*step;
+	double t = y*y+0.75;
+	double s = y*y-0.25;
+	return t*t*t/(s*s);
 }
 
 main (int argc, char * argv[]) 
@@ -108,22 +92,28 @@ main (int argc, char * argv[])
 	double *lev;
 	double *rev;
 	double *work;
-	int dim;
 	int workdim;
 	int i,j, k;
 	
-	dim = 28;
+	int kstep = 10;
 
 	if (argc < 2)
 	{
-		fprintf (stderr, "Usage: %s <dim>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <kstep>\n", argv[0]);
 		exit (-1);
 	}
-	dim = atoi (argv[1]);
+	kstep = atoi (argv[1]);
+
+	int Mprec = 6;
+
+	double Npts = (2*kstep+1)*sqrt (2*Mprec*log(10.0));
+	double delta = 1.0/(2*kstep+1);
+
+	int dim = 2*Npts+1;
 
 	printf ("#\n#\n");
-	printf ("# Eigenvectors of the GKW (Gauss Kuz'min Wirsing) Operator\n");
-	printf ("# Numerically solved to rank=%d\n", dim);
+	printf ("# Eigenvectors of the Galois Schroedinger\n");
+	printf ("# Numerically solved on %d lattice points, step=%g\n", dim, delta);
 	printf ("#\n#\n");
 
 	mat = (double *) malloc (dim*dim*sizeof (double));
@@ -140,22 +130,11 @@ main (int argc, char * argv[])
 		for (j=0; j<dim; j++)
 		{
 			/* Note transposed matrix'ing for FORTRAN */
-			mat[i+j*dim] = ache_mp(i,j);
-			// mat[i+j*dim] = sst(i,j);
+			mat[i+j*dim] = kinetic(i,j, delta);
 		}
+		mat [i+i*dim] += potential (i-Npts, delta);
 	}
 
-#if POORLY_CONDITIONED_BOMB_OUT_KINETIC
-	/* Add in the kinetic term ! */
-	for (i=0; i<dim; i++)
-	{
-		for (j=0; j<dim; j++)
-		{
-			/* Note transposed matrix'ing for FORTRAN */
-			mat[i+j*dim] -= kino(i,j);
-		}
-	}
-#endif
 	
 	int wd = getworkdim (dim, mat, ere, eim, lev, rev, work);
 	printf ("# recommended dim=%d actual dim=%d\n#\n", wd, workdim);
@@ -172,6 +151,7 @@ main (int argc, char * argv[])
 	}
 	printf ("\n\n");
 	
+#if LATER
 	int prtdim = 36;
 	if (dim < prtdim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
@@ -192,32 +172,6 @@ main (int argc, char * argv[])
 			// double r = r1/r2;
 			// r *= j*j*j*j*log(log (log (log (j+1))));
 			// r *= j;
-#if RECURRSION_RELATION
-			double r = rev[j+1+i*dim]- 0.5*rev[j+i*dim];
-			r /= rev[j-1+i*dim];
-			// r *= j*j*j* log(j+1) * log(j+1) * log(j+1);
-			r = log (r);
-			r /= j;
-			printf ("# right %d'th eigenvector[%d]=%g (term log ratio=%g)\n", 
-			           i,j, rev[j+i*dim], r);
-#endif
-			double r = rev[j+i*dim] / (rev[30+i*dim] * (1<<30));
-			r *= tn;
-			r -= 1.0;
-			r *= thrn;
-			printf ("# right %d'th eigenvector[%d]=%g (guh %g\n", 
-			            i,j, rev[j+i*dim], r);
-			            
-#if BINARY
-			printf ("# right %d'th eigenvector[%d]=%g (binary ", 
-			            i,j, rev[j+i*dim]);
-			r = rev[j+i*dim] / (rev[25+i*dim] * (1<<25));
-			r *= tn;
-			prtbin (r);
-			printf (" )\n");
-#endif 
-			tn *= 2.0;
-			thrn *= sqrt (3.0);
 		}
 		printf ("#\n");
 	}
@@ -320,4 +274,5 @@ main (int argc, char * argv[])
 		}
 		printf ("\n");
 	}
+#endif
 }

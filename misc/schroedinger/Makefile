@@ -1,14 +1,19 @@
 
 
-EXES= galois
+EXES= diffy galois
 
 all: $(EXES)
 
 
 galois: galois.o
+diffy: diffy.o
+
 
 .o:
-	cc -o $@ $< -lm
+	cc -o $@ $^ -llapack -lf77blas -latlas -lg2c -lm
+
+.c.o:
+	cc -g -O2 -c $< 
 
 clean:
 	rm -f *.o junk a.out x
