@@ -71,8 +71,8 @@ kinetic (int i, int j, double step)
 {
 	if (i<j-1) return 0.0;
 	if (i>j+1) return 0.0;
-	if (i==j) return 2.0/(step*step);
-	return -1.0/(step*step);
+	if (i==j) return 1.0/(step*step);
+	return -0.5/(step*step);
 }
 
 double 
@@ -135,19 +135,29 @@ main (int argc, char * argv[])
 		mat [i+i*dim] += potential (i-Npts, delta);
 	}
 
-	
 	int wd = getworkdim (dim, mat, ere, eim, lev, rev, work);
-	printf ("# recommended dim=%d actual dim=%d\n#\n", wd, workdim);
-	// workdim = wd;
+	printf ("# recommended workdim=%d actual dim=%d\n#\n", wd, workdim);
+	workdim = wd+10;
 	
 	work = (double *) realloc (work, workdim*sizeof (double));
 	geteigen (dim, mat, ere, eim, lev, rev, workdim, work);
 
 	/* ---------------------------------------------- */
+	/* buble sort the eignes */
+	for (i=0; i<dim; i++) {
+		for (j=0; j<dim; j++) {
+			if (ere[i]< ere[j]) {
+				double tmp = ere[i];
+				ere [i] = ere[j];
+				ere[j] = tmp;
+			}
+		}
+	}
+
 	/* print the eigenvalues */
 	for (i=0; i<dim; i++)
 	{
-		printf ("# eigen[%d]=%20.15g +i %g  ratio=%20.15g\n", i, ere[i], eim[i], ere[i]/ere[i+1]);
+		printf ("# eigen[%d]=%20.15g  diff=%20.15g\n", i, ere[i], ere[i+1]-ere[i]);
 	}
 	printf ("\n\n");
 	
