@@ -81,7 +81,8 @@ potential (int n, double step)
 	double y = n*step;
 	double t = y*y+0.75;
 	double s = y*y-0.25;
-	return t*t*t/(s*s);
+	return 0.5*t*t*t/(s*s);
+	// return 0.5*y*y;  // plain old harmonic osc for comparison
 }
 
 main (int argc, char * argv[]) 
