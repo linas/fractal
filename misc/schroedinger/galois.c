@@ -24,45 +24,56 @@ zero_ansatz (int n, double a8, double a6, double a4, double a2, double e)
 }
 
 double 
-gauss_ansatz (int n, double b6, double b4, double b2, double e)
+gauss_ansatz (int n, double b0, double b2, double b4, double e)
 {
-	n += 4;
-	double b = b6 *(n*n+3*n+2)/16.0;
-	b += b4*(e/16.0 -0.5*n*n +3*n/8 -31.0/64.0);
-	b += b2*(n*n - 4*n +23.0/8.0 - e);
+	double b = 0.0;
 
-	b /= 2*n-17.0/4.0 - e;
+	if (4<=n)
+	{
+		n += 4;
+		b = (2*n-17.0/4.0 - e)*b0;
+		b += b2*(-n*n + 4*n -23.0/8.0 + 0.5*e);
+		b -= b4*(e/16.0 -0.5*n*n +(3.0*n)/8.0 -31.0/64.0);
+		b /= (n*n+3*n+2)/16.0;
+	}
+	else if (4==n)
+	{
+		return -((7*16-1-4*e)*b2 + (56+32*e)*b0)/48.0;
+	}
+	else if (2==n)
+	{
+		return (31.0/8.0 - 0.5*e)*b0;
+	}
+	else if (n=0)
+	{
+		return b0;
+	}
 	return b;
 }
 
 void make_coeffs (double *ar, int nlast, double energy)
 {
 	int n;
-	ar[nlast] = 0.0;
-	ar[nlast-2] = 0.0;
-	ar[nlast-4] = 0.0;
-	ar[nlast-6] = 1.0;
-	for (n=nlast-8; n>=0; n-=2)
-	{
-		// ar[n] = zero_ansatz (n, ar[n+8], ar[n+6], ar[n+4], ar[n+2], energy);
-		ar[n] = gauss_ansatz (n, ar[n+6], ar[n+4], ar[n+2], energy);
-	}
-
 	int nstart = 0;
 	if (nlast%2)
 	{
 		nstart = 1;
 	}
-
-	/* normalize */
-	double off = 1.0/ar[nstart];
-	for (n=nstart; n<nlast; n+=2)
+	ar[nstart] = 1.0;
+	
+	n=nstart;
+	ar[n+2] = gauss_ansatz (n+2, ar[n], 0.0, 0.0, energy);
+	n += 2;
+	ar[n+2] = gauss_ansatz (n+2, ar[n-2], ar[n], 0.0, energy);
+	for (n=nstart+4; n<=nlast; n+=2)
 	{
-		ar[n] *= off;
+		// ar[n] = zero_ansatz (n, ar[n+8], ar[n+6], ar[n+4], ar[n+2], energy);
+		ar[n+2] = gauss_ansatz (n+2, ar[n-4], ar[n-2], ar[n], energy);
 	}
+
 	for (n=nstart; n<nlast; n+=2)
 	{
-		// printf ("%d	%g	%g\n", n, ar[n], ar[n]/(n*ar[n+2]));
+		printf ("%d	%g	%g\n", n, ar[n], ar[n]/(n*ar[n+2]));
 	}
 }
 
@@ -108,7 +119,7 @@ main(int argc, char* argv[])
 	make_coeffs (ar, nlast, energy);
 	psi_wf (5.0, ar, nlast);
 
-#define WAVE_FUNCTION
+// #define WAVE_FUNCTION
 #ifdef WAVE_FUNCTION
 	/* wave function */
 	double x;
