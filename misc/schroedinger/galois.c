@@ -73,7 +73,7 @@ void make_coeffs (double *ar, int nlast, double energy)
 
 	for (n=nstart; n<nlast; n+=2)
 	{
-		printf ("%d	%g	%g\n", n, ar[n], ar[n]/(n*ar[n+2]));
+		printf ("%d	%g	%g\n", n, ar[n], ar[n+2]/(ar[n]));
 	}
 }
 
@@ -114,7 +114,7 @@ main(int argc, char* argv[])
 	}
 	double energy = atof (argv[1]);
 
-	int nlast = 60;
+	int nlast = 120;
 
 	make_coeffs (ar, nlast, energy);
 	psi_wf (5.0, ar, nlast);
