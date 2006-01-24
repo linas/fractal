@@ -95,13 +95,13 @@ kinetic_subdiag (double step)
 }
 
 double 
-potential (int n, double step)
+galois_potential (int n, double step)
 {
 	double y = n*step;
 	double t = y*y+0.75;
 	double s = y*y-0.25;
-	// return t*t*t/(s*s);
-	return 0.5*t*t*t/(s*s);
+	return t*t*t/(s*s);
+	// return 0.5*t*t*t/(s*s);
 	// return 0.5*y*y;  // plain old harmonic osc for comparison
 }
 
@@ -123,14 +123,16 @@ main (int argc, char * argv[])
 	
 	int kstep = 10;
 
-	if (argc < 2)
+	if (argc < 3)
 	{
-		fprintf (stderr, "Usage: %s <kstep>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <kstep> <eigen_prt>\n", argv[0]);
 		exit (-1);
 	}
 	kstep = atoi (argv[1]);
+	int eigen_prt = atoi(argv[2]);
 
-	int Mprec = 6;
+	int Mprec = 9;
+	double abstol=1.0e-6;
 
 	double Npts = (2*kstep+1)*sqrt (2*Mprec*log(10.0));
 	double delta = 1.0/(2*kstep+1);
@@ -152,14 +154,15 @@ main (int argc, char * argv[])
 	for (i=0; i<dim; i++)
 	{
 		diags[i] = kinetic_diag(delta);
-		// diags[i] += potential (i-Npts, delta);
+		// diags[i] += galois_potential (i-Npts, delta);
+		diags[i] += galois_potential (i+kstep+1, delta);
 		// diags[i] += potential (i, delta);
-		diags[i] += potential (i+kstep+1, delta);
+		// diags[i] += potential (i+kstep+1, delta);
 
 		subdiags[i] = kinetic_subdiag(delta);
 	}
 
-	geteigen (dim, diags, subdiags, 1.0e-4,
+	geteigen (dim, diags, subdiags, abstol,
         eigenvals, eigenvecs, support);
 
 	/* ---------------------------------------------- */
@@ -180,9 +183,9 @@ main (int argc, char * argv[])
 	/* Note transposed matrix'ing for FORTRAN */
 	for (j=0; j<dim; j++)
 	{
-		// printf ("%d	%g", j, (j-Npts)*delta);
-		printf ("%d	%g", j, (j+0.5)*delta);
-		for (i=0; i<9; i++)
+		printf ("%d	%g", j, (j-Npts)*delta);
+		// printf ("%d	%g", j, (j+0.5)*delta);
+		for (i=eigen_prt; i<9+eigen_prt; i++)
 		{
 			printf ("\t%g", eigenvecs[j+i*dim]);
 		}
