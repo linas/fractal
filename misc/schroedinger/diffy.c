@@ -103,6 +103,20 @@ int centered_quadratic_dim (int kstep, int decimal_prec)
 	return dim;
 }
 
+int one_sided_quadratic_dim (int kstep, int decimal_prec)
+{
+	double Npts = (2*kstep+1)*sqrt (2*decimal_prec*log(10.0));
+	int dim = Npts;
+	return dim;
+}
+
+int one_sided_linear_dim (int kstep, int decimal_prec)
+{
+	double Npts = (2*kstep+1)*decimal_prec*log(10.0);
+	int dim = Npts;
+	return dim;
+}
+
 /* --------------------------------------------------- */
 double 
 galois_potential (int n, double step)
@@ -150,6 +164,7 @@ void galois_data (int kstep, int dim,
 }
 
 /* --------------------------------------------------- */
+
 double 
 elliptic_potential (int n, double step)
 {
@@ -185,6 +200,41 @@ void elliptic_data (int kstep, int dim,
 }
 
 /* --------------------------------------------------- */
+
+double 
+comb_potential (int n, double step)
+{
+	double x = (n+0.5)*step;
+	double pot = sin(M_PI/x) + 1.0/x + x;
+	// double pot = 1.0/x + x;
+	return pot;
+}
+
+void comb_data (int kstep, int dim, 
+           double *diags, double *subdiags,
+           int *ncenter, double *pdelta)
+{
+	int i;
+	int Npts = 0;
+	double delta = 1.0/(2*kstep+1);
+	*ncenter = Npts;
+	*pdelta = delta;
+
+	printf ("#\n#\n");
+	printf ("# Eigenvectors of Comb\n");
+	printf ("# Numerically solved on %d lattice points, step=%g\n", dim, delta);
+	printf ("#\n#\n");
+
+	/* Insert values  */
+	for (i=0; i<dim; i++)
+	{
+		diags[i] = kinetic_diag(delta);
+		diags[i] += comb_potential (i, delta);
+		subdiags[i] = kinetic_subdiag(delta);
+	}
+}
+
+/* --------------------------------------------------- */
 main (int argc, char * argv[]) 
 {
 	double *diags;
@@ -206,7 +256,9 @@ main (int argc, char * argv[])
 
 	int Mprec = 9;
 	double abstol=1.0e-6;
-	int dim = centered_quadratic_dim (kstep, Mprec);
+	// int dim = centered_quadratic_dim (kstep, Mprec);
+	// int dim = one_sided_quadratic_dim (kstep, Mprec);
+	int dim = one_sided_linear_dim (kstep, Mprec);
 
 	diags = (double *) malloc (dim*sizeof (double));
 	subdiags = (double *) malloc (dim*sizeof (double));
@@ -217,7 +269,8 @@ main (int argc, char * argv[])
 	double delta;
 	int ncenter;
 	// galois_data (kstep, dim, diags, subdiags, &ncenter, &delta);
-	elliptic_data (kstep, dim, diags, subdiags, &ncenter, &delta);
+	// elliptic_data (kstep, dim, diags, subdiags, &ncenter, &delta);
+	comb_data (kstep, dim, diags, subdiags, &ncenter, &delta);
 
 	geteigen (dim, diags, subdiags, abstol,
         eigenvals, eigenvecs, support);
