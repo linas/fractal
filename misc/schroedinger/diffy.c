@@ -94,6 +94,16 @@ kinetic_subdiag (double step)
 	return -0.5/(step*step);
 }
 
+/* --------------------------------------------------- */
+
+int centered_quadratic_dim (int kstep, int decimal_prec)
+{
+	double Npts = (2*kstep+1)*sqrt (2*decimal_prec*log(10.0));
+	int dim = 2*Npts+1;
+	return dim;
+}
+
+/* --------------------------------------------------- */
 double 
 galois_potential (int n, double step)
 {
@@ -110,13 +120,6 @@ double_potential (int n, double step)
 {
 	double y = (n+0.5)*step;
 	return 0.5*(y*y + 1.0/(y*y));
-}
-
-int galois_dim (int kstep, int decimal_prec)
-{
-	double Npts = (2*kstep+1)*sqrt (2*decimal_prec*log(10.0));
-	int dim = 2*Npts+1;
-	return dim;
 }
 
 void galois_data (int kstep, int dim, 
@@ -138,15 +141,50 @@ void galois_data (int kstep, int dim,
 	for (i=0; i<dim; i++)
 	{
 		diags[i] = kinetic_diag(delta);
-		// diags[i] += galois_potential (i-Npts, delta);
-		diags[i] += galois_potential (i+kstep+1, delta);
+		diags[i] += galois_potential (i-Npts, delta);
+		// diags[i] += galois_potential (i+kstep+1, delta);
 		// diags[i] += potential (i, delta);
-		// diags[i] += potential (i+kstep+1, delta);
 
 		subdiags[i] = kinetic_subdiag(delta);
 	}
 }
 
+/* --------------------------------------------------- */
+double 
+elliptic_potential (int n, double step)
+{
+	double y = fabs(n*step);
+	double g2 =3.0;
+	double g3=1.0;
+	double x = sqrt (y*y*y +g2*y+g3);
+	return x;
+}
+
+void elliptic_data (int kstep, int dim, 
+           double *diags, double *subdiags,
+           int *ncenter, double *pdelta)
+{
+	int i;
+	int Npts = (dim-1)/2;
+	double delta = 1.0/(2*kstep+1);
+	*ncenter = Npts;
+	*pdelta = delta;
+
+	printf ("#\n#\n");
+	printf ("# Eigenvectors of Elliptic\n");
+	printf ("# Numerically solved on %d lattice points, step=%g\n", dim, delta);
+	printf ("#\n#\n");
+
+	/* Insert values  */
+	for (i=0; i<dim; i++)
+	{
+		diags[i] = kinetic_diag(delta);
+		diags[i] += elliptic_potential (i-Npts, delta);
+		subdiags[i] = kinetic_subdiag(delta);
+	}
+}
+
+/* --------------------------------------------------- */
 main (int argc, char * argv[]) 
 {
 	double *diags;
@@ -168,7 +206,7 @@ main (int argc, char * argv[])
 
 	int Mprec = 9;
 	double abstol=1.0e-6;
-	int dim = galois_dim (kstep, Mprec);
+	int dim = centered_quadratic_dim (kstep, Mprec);
 
 	diags = (double *) malloc (dim*sizeof (double));
 	subdiags = (double *) malloc (dim*sizeof (double));
@@ -178,7 +216,8 @@ main (int argc, char * argv[])
 
 	double delta;
 	int ncenter;
-	galois_data (kstep, dim, diags, subdiags, &ncenter, &delta);
+	// galois_data (kstep, dim, diags, subdiags, &ncenter, &delta);
+	elliptic_data (kstep, dim, diags, subdiags, &ncenter, &delta);
 
 	geteigen (dim, diags, subdiags, abstol,
         eigenvals, eigenvecs, support);
@@ -186,7 +225,7 @@ main (int argc, char * argv[])
 	/* ---------------------------------------------- */
 
 	/* print the eigenvalues */
-	int prtdim = 36;
+	int prtdim = 96;
 	if (dim < prtdim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
 	{
