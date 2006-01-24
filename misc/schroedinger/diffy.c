@@ -7,7 +7,6 @@
  * specifically, use DSTEGR -- real double precision:
  *
  * Apply to solve 1D Schroedinger equation
- * should use a trilinear solver instead
  *
  * Linas Vepstas September 2004
  * Linas Vepstas January 2006
@@ -20,53 +19,78 @@
 #include "lapack.h"
 
 
+#if 0
 /* dry run -- get the working dimension */
 int 
-getworkdim (int dim, double *matrix,
-        double *eigenvalues_re, double *eigenvalues_im, 
-		  double *left_eigen, double *right_eigen,
+getworkdim (int dim, double *diags,
+        double *subdiags, 
+        double abstol,
 		  double *workspace)
 {
-
-	char jobvl = 'V';
-	char jobvr = 'V';
+	char jobz = 'V';
+	char range = 'A';
+	double vu=0.0, vl=1.0E30;
+	int il=0, iu=12345670;
+	int m;
 	int workdim;
 	int info;
 
 	workdim = -1;
 
-	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
-	       eigenvalues_re, eigenvalues_im, 
-			 left_eigen, &dim, right_eigen, &dim, 
-			 workspace, &workdim, &info);
-
-	return (int) (workspace[0]+0.5);
+	dstegr_ (&jobz, &range, &dim, diags, subdiags,
+	         &vl, &vu, &il, &iu, &abstol,
+            &m, eigenvals, eigenvecs, &dim, 
+	         suppport, rwork, &rworkdim, iwork, &iworkdim,
+			   &info);
 }
+#endif
 
 int 
-geteigen (int dim, double *matrix, 
-        double *eigenvalues_re, double *eigenvalues_im, 
-		  double *left_eigen, double *right_eigen,
-		  int workdim, double *workspace)
+geteigen (int dim, double *diags,
+        double *subdiags, 
+        double abstol,
+        double *eigenvals,
+        double *eigenvecs,
+		  int *support)
 {
-
-	char jobvl = 'V';
-	char jobvr = 'V';
+	char jobz = 'V';
+	char range = 'A';
+	double vu=0.0, vl=1.0E30;
+	int il=0, iu=12345670;
+	int m;
+	int rworkdim, iworkdim;
+	double *rwork;
+	int * iwork;
 	int info;
 
-	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
-	       eigenvalues_re, eigenvalues_im, 
-			 left_eigen, &dim, right_eigen, &dim, 
-			 workspace, &workdim, &info);
+	rworkdim = 20*dim;
+	iworkdim = 10*dim;
 
+	rwork = (double *) malloc (rworkdim*sizeof (double));
+	iwork = (int *) malloc (iworkdim*sizeof (int));
+
+	dstegr_ (&jobz, &range, &dim, diags, subdiags,
+	         &vl, &vu, &il, &iu, &abstol,
+            &m, eigenvals, eigenvecs, &dim, 
+	         support, rwork, &rworkdim, iwork, &iworkdim,
+			   &info);
+
+	free (iwork);
+	free (rwork);
+
+	return info;
+}
+
+
+double 
+kinetic_diag (double step)
+{
+	return 1.0/(step*step);
 }
 
 double 
-kinetic (int i, int j, double step)
+kinetic_subdiag (double step)
 {
-	if (i<j-1) return 0.0;
-	if (i>j+1) return 0.0;
-	if (i==j) return 1.0/(step*step);
 	return -0.5/(step*step);
 }
 
@@ -82,13 +106,11 @@ potential (int n, double step)
 
 main (int argc, char * argv[]) 
 {
-	double *mat;
-	double *ere;
-	double *eim;
-	double *lev;
-	double *rev;
-	double *work;
-	int workdim;
+	double *diags;
+	double *subdiags;
+	double *eigenvals;
+	double *eigenvecs;
+	int * support;
 	int i,j, k;
 	
 	int kstep = 10;
@@ -112,33 +134,26 @@ main (int argc, char * argv[])
 	printf ("# Numerically solved on %d lattice points, step=%g\n", dim, delta);
 	printf ("#\n#\n");
 
-	mat = (double *) malloc (dim*dim*sizeof (double));
-	ere = (double *) malloc (dim*sizeof (double));
-	eim = (double *) malloc (dim*sizeof (double));
-	lev = (double *) malloc (dim*dim*sizeof (double));
-	rev = (double *) malloc (dim*dim*sizeof (double));
-	workdim = 4*dim*dim;
-	work = (double *) malloc (workdim*sizeof (double));
+	diags = (double *) malloc (dim*sizeof (double));
+	subdiags = (double *) malloc (dim*sizeof (double));
+	eigenvals = (double *) malloc (dim*sizeof (double));
+	eigenvecs = (double *) malloc (dim*dim*sizeof (double));
+	support = (int *) malloc (2*dim*sizeof (int));
 
 	/* Insert values for the GKW operator at x=1 (y=1-x) */
 	for (i=0; i<dim; i++)
 	{
-		for (j=0; j<dim; j++)
-		{
-			/* Note transposed matrix'ing for FORTRAN */
-			mat[i+j*dim] = kinetic(i,j, delta);
-		}
-		mat [i+i*dim] += potential (i-Npts, delta);
+		diags[i] = kinetic_diag(delta);
+		diags[i] += potential (i-Npts, delta);
+
+		subdiags[i] = kinetic_subdiag(delta);
 	}
 
-	int wd = getworkdim (dim, mat, ere, eim, lev, rev, work);
-	printf ("# recommended workdim=%d actual dim=%d\n#\n", wd, workdim);
-	workdim = wd+10;
-	
-	work = (double *) realloc (work, workdim*sizeof (double));
-	geteigen (dim, mat, ere, eim, lev, rev, workdim, work);
+	geteigen (dim, diags, subdiags, 1.0e-4,
+        eigenvals, eigenvecs, support);
 
 	/* ---------------------------------------------- */
+#if 0
 	/* buble sort the eignes */
 	for (i=0; i<dim; i++) {
 		for (j=0; j<dim; j++) {
@@ -149,15 +164,18 @@ main (int argc, char * argv[])
 			}
 		}
 	}
+#endif
 
 	/* print the eigenvalues */
 	for (i=0; i<dim; i++)
 	{
-		printf ("# eigen[%d]=%20.15g  diff=%20.15g\n", i, ere[i], ere[i+1]-ere[i]);
+		printf ("# eigen[%d]=%20.15g  diff=%20.15g\n", 
+		       i, eigenvals[i], eigenvals[i+1]-eigenvals[i]);
 	}
 	printf ("\n\n");
 	
 #if LATER
+			/* Note transposed matrix'ing for FORTRAN */
 	int prtdim = 36;
 	if (dim < prtdim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
