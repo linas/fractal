@@ -100,6 +100,7 @@ potential (int n, double step)
 	double y = n*step;
 	double t = y*y+0.75;
 	double s = y*y-0.25;
+	// return t*t*t/(s*s);
 	return 0.5*t*t*t/(s*s);
 	// return 0.5*y*y;  // plain old harmonic osc for comparison
 }
@@ -153,24 +154,14 @@ main (int argc, char * argv[])
         eigenvals, eigenvecs, support);
 
 	/* ---------------------------------------------- */
-#if 0
-	/* buble sort the eignes */
-	for (i=0; i<dim; i++) {
-		for (j=0; j<dim; j++) {
-			if (ere[i]< ere[j]) {
-				double tmp = ere[i];
-				ere [i] = ere[j];
-				ere[j] = tmp;
-			}
-		}
-	}
-#endif
 
 	/* print the eigenvalues */
 	for (i=0; i<dim; i++)
 	{
-		printf ("# eigen[%d]=%20.15g  diff=%20.15g\n", 
-		       i, eigenvals[i], eigenvals[i+1]-eigenvals[i]);
+		double eddie = eigenvals[i+1]/eigenvals[i];
+		eddie -= 1.0;
+		printf ("# eigen[%d]=%20.15g  diff=%8.5f\n", 
+		       i, eigenvals[i], eddie);
 	}
 	printf ("\n\n");
 	
