@@ -165,129 +165,18 @@ main (int argc, char * argv[])
 	}
 	printf ("\n\n");
 	
-#if LATER
-			/* Note transposed matrix'ing for FORTRAN */
+	/* Print the eigenvectors */
+	/* Note transposed matrix'ing for FORTRAN */
 	int prtdim = 36;
 	if (dim < prtdim) prtdim = dim;
-	for (i=0; i<prtdim; i++)
+	for (i=0; i<3; i++)
 	{
-		double tn = 1.0;
-		double thrn = 1.0;
 		for (j=0; j<prtdim; j++)
 		{
-			// printf ("# right %d'th eigenvector[%d]=%g (normalized=%g)\n", 
-			//            i,j, rev[j+i*dim], rev[j+i*dim]/rev[i*dim]);
-			// printf ("# right %d'th eigenvector[%d]=%g (term ratio=%g)\n", 
-			//            i,j, rev[j+i*dim], rev[j+i*dim]/rev[j+1+i*dim]-2.0);
-			// printf ("# right %d'th eigenvector[%d]=%g (vec ratio=%g)\n", 
-			//            i,j, rev[j+i*dim],  tn*rev[j+i*dim] );
-			//
-			// double r1 = 2.0 * rev[j+1+i*dim]/rev[j+i*dim] - 1.0;
-			// double r2 = 2.0 * rev[j+2+i*dim]/rev[j+1+i*dim] - 1.0;
-			// double r = r1/r2;
-			// r *= j*j*j*j*log(log (log (log (j+1))));
-			// r *= j;
+			printf ("# %d'th eigenvector[%d]=%g \n", 
+			           i,j, eigenvecs[j+i*dim]);
 		}
 		printf ("#\n");
 	}
 	
-	for (i=0; i<prtdim; i++)
-	{
-		for (j=0; j<prtdim; j++)
-		{
-			// printf ("# left %d'th eigenvector[%d]=%g (normalized=%g)\n", 
-			//            i,j, lev[j+i*dim], lev[j+i*dim]/lev[i*dim]);
-			printf ("# left %d'th eigenvector[%d]=%g (ratio=%g)\n", 
-			            i,j, lev[j+i*dim], ((j+1)*lev[j+i*dim])/((j+2)*lev[j+1+i*dim]));
-		}
-		printf ("#\n");
-	}
-	
-	/* ---------------------------------------------- */
-	/* Verify i'th eigenvector -- multiply by the matrix, see that 
-	 * we get the eigenvector back. */
-	for (i=0; i<prtdim; i++)
-	{
-		/* The j'th element of the i'th eigenvector */
-		for (j=0; j<prtdim; j++)
-		{
-			double sum = 0.0;
-			for (k=0; k<dim; k++)
-			{
-				sum += ache_mp(j,k) * rev[k+i*dim];
-			}
-			sum /= rev[j+i*dim];
-			sum /= ere[i];
-			sum -= 1.0;
-			printf ("# %d'th eigenvec validation [%d]=%g\n", i, j, sum);
-		}
-		printf ("#\n");
-	}
-
-	/* ---------------------------------------------- */
-	/* Print graphable data */
-	double y;
-	for (y=1.0; y>=0.0; y-=0.005)
-	{
-		double x = 1.0-y;
-		printf ("%g", x);
-		// validate that the zeroth eignevec is 1/(1+x)
-		// printf ("\t%g", 1.73205/(1.0+x));
-		for (i=0; i<8; i++)
-		{
-			double yn = 1.0;
-			double sum = 0.0;
-			double fact = 1.0;
-			double norm = 0.0;
-			/* The j'th element of the i'th eigenvector */
-			for (j=0; j<prtdim; j++)
-			{
-				norm += rev[j+i*dim];
-			}
-			for (j=0; j<prtdim; j++)
-			{
-				// Factorial not needed, ache already has the factorial folded in.
-				// See, for example, the derives of seroth eigenvec. 
-				// sum += yn * rev[j+i*dim] / fact;
-				// sum += yn * rev[j+i*dim];
-				sum += yn * rev[j+i*dim] / norm;
-				// printf ("duuude j=%d fact=%g yn=%g\n", j, fact, yn);
-				yn *= y;
-				fact *= j+1;
-			}
-			printf("\t%g", sum);
-		}
-		printf ("\n");
-	}
-
-	/* ---------------------------------------------- */
-	/* Print the eigenvectors again, normalized correctly, so we can graph. */
-	/* This time, they are printed so that the i'th eigenvector is in the
-	   i'th column, and each row is a component of the eigenvector */
-
-	printf ("# ------------------------------------------- \n");
-	double norm[50];
-	for (i=0; i<prtdim; i++)
-	{
-		norm[i] = 0.0;
-		/* The j'th element of the i'th eigenvector */
-		for (j=0; j<prtdim; j++)
-		{
-			norm[i] += rev[j+i*dim];
-		}
-		// norm[i] = 31.0 * lev[30+i*dim];
-		norm[i] = (1<<25) *rev[25+i*dim];
-	}
-
-	for (j=0; j<prtdim; j++)
-	{
-		printf ("%d\t", j);
-		for (i=0; i<13; i++)
-		{
-			printf ("%g\t", rev[j+i*dim]/norm[i]);
-			// printf ("%g\t", lev[j+i*dim]/norm[i]);
-		}
-		printf ("\n");
-	}
-#endif
 }
