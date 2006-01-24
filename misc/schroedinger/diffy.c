@@ -105,6 +105,13 @@ potential (int n, double step)
 	// return 0.5*y*y;  // plain old harmonic osc for comparison
 }
 
+double 
+double_potential (int n, double step)
+{
+	double y = (n+0.5)*step;
+	return 0.5*(y*y + 1.0/(y*y));
+}
+
 main (int argc, char * argv[]) 
 {
 	double *diags;
@@ -145,7 +152,9 @@ main (int argc, char * argv[])
 	for (i=0; i<dim; i++)
 	{
 		diags[i] = kinetic_diag(delta);
-		diags[i] += potential (i-Npts, delta);
+		// diags[i] += potential (i-Npts, delta);
+		// diags[i] += potential (i, delta);
+		diags[i] += potential (i+kstep+1, delta);
 
 		subdiags[i] = kinetic_subdiag(delta);
 	}
@@ -160,8 +169,8 @@ main (int argc, char * argv[])
 	if (dim < prtdim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
 	{
-		double eddie = eigenvals[i+1]/eigenvals[i];
-		eddie -= 1.0;
+		// double eddie = eigenvals[i+1]/eigenvals[i] - 1.0;
+		double eddie = eigenvals[i+1] -eigenvals[i];
 		printf ("# eigen[%d]=%20.15g  diff=%8.5f\n", 
 		       i, eigenvals[i], eddie);
 	}
@@ -171,7 +180,8 @@ main (int argc, char * argv[])
 	/* Note transposed matrix'ing for FORTRAN */
 	for (j=0; j<dim; j++)
 	{
-		printf ("%d	%g", j, (j-Npts)*delta);
+		// printf ("%d	%g", j, (j-Npts)*delta);
+		printf ("%d	%g", j, (j+0.5)*delta);
 		for (i=0; i<9; i++)
 		{
 			printf ("\t%g", eigenvecs[j+i*dim]);
