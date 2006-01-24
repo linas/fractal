@@ -3,13 +3,8 @@
  * Eigenvalue and eigenvector finding
  * Call lapack from C code.
  *
- * Get Schur factorization,
- * G = OTO^ where O is orthogonal (O^ == O transpose)
- * T is triangular.
- *
- * Use LAPACK xGEEV routine
- * specifically, real double precision:
- * DGEEV
+ * Use LAPACK xSTEGR routine to find eigenvalues of tri-diagonal matrix.
+ * specifically, use DSTEGR -- real double precision:
  *
  * Apply to solve 1D Schroedinger equation
  * should use a trilinear solver instead
