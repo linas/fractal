@@ -100,8 +100,8 @@ galois_potential (int n, double step)
 	double y = n*step;
 	double t = y*y+0.75;
 	double s = y*y-0.25;
-	return t*t*t/(s*s);
-	// return 0.5*t*t*t/(s*s);
+	// return t*t*t/(s*s);
+	return 0.5*t*t*t/(s*s);
 	// return 0.5*y*y;  // plain old harmonic osc for comparison
 }
 
@@ -110,6 +110,41 @@ double_potential (int n, double step)
 {
 	double y = (n+0.5)*step;
 	return 0.5*(y*y + 1.0/(y*y));
+}
+
+int galois_dim (int kstep, int decimal_prec)
+{
+	double Npts = (2*kstep+1)*sqrt (2*decimal_prec*log(10.0));
+	int dim = 2*Npts+1;
+	return dim;
+}
+
+void galois_data (int kstep, int dim, 
+           double *diags, double *subdiags,
+           int *ncenter, double *pdelta)
+{
+	int i;
+	int Npts = (dim-1)/2;
+	double delta = 1.0/(2*kstep+1);
+	*ncenter = Npts;
+	*pdelta = delta;
+
+	printf ("#\n#\n");
+	printf ("# Eigenvectors of the Galois Schroedinger\n");
+	printf ("# Numerically solved on %d lattice points, step=%g\n", dim, delta);
+	printf ("#\n#\n");
+
+	/* Insert values  */
+	for (i=0; i<dim; i++)
+	{
+		diags[i] = kinetic_diag(delta);
+		// diags[i] += galois_potential (i-Npts, delta);
+		diags[i] += galois_potential (i+kstep+1, delta);
+		// diags[i] += potential (i, delta);
+		// diags[i] += potential (i+kstep+1, delta);
+
+		subdiags[i] = kinetic_subdiag(delta);
+	}
 }
 
 main (int argc, char * argv[]) 
@@ -133,16 +168,7 @@ main (int argc, char * argv[])
 
 	int Mprec = 9;
 	double abstol=1.0e-6;
-
-	double Npts = (2*kstep+1)*sqrt (2*Mprec*log(10.0));
-	double delta = 1.0/(2*kstep+1);
-
-	int dim = 2*Npts+1;
-
-	printf ("#\n#\n");
-	printf ("# Eigenvectors of the Galois Schroedinger\n");
-	printf ("# Numerically solved on %d lattice points, step=%g\n", dim, delta);
-	printf ("#\n#\n");
+	int dim = galois_dim (kstep, Mprec);
 
 	diags = (double *) malloc (dim*sizeof (double));
 	subdiags = (double *) malloc (dim*sizeof (double));
@@ -150,17 +176,9 @@ main (int argc, char * argv[])
 	eigenvecs = (double *) malloc (dim*dim*sizeof (double));
 	support = (int *) malloc (2*dim*sizeof (int));
 
-	/* Insert values for the GKW operator at x=1 (y=1-x) */
-	for (i=0; i<dim; i++)
-	{
-		diags[i] = kinetic_diag(delta);
-		// diags[i] += galois_potential (i-Npts, delta);
-		diags[i] += galois_potential (i+kstep+1, delta);
-		// diags[i] += potential (i, delta);
-		// diags[i] += potential (i+kstep+1, delta);
-
-		subdiags[i] = kinetic_subdiag(delta);
-	}
+	double delta;
+	int ncenter;
+	galois_data (kstep, dim, diags, subdiags, &ncenter, &delta);
 
 	geteigen (dim, diags, subdiags, abstol,
         eigenvals, eigenvecs, support);
@@ -183,8 +201,7 @@ main (int argc, char * argv[])
 	/* Note transposed matrix'ing for FORTRAN */
 	for (j=0; j<dim; j++)
 	{
-		printf ("%d	%g", j, (j-Npts)*delta);
-		// printf ("%d	%g", j, (j+0.5)*delta);
+		printf ("%d	%g", j, (j-ncenter)*delta);
 		for (i=eigen_prt; i<9+eigen_prt; i++)
 		{
 			printf ("\t%g", eigenvecs[j+i*dim]);
