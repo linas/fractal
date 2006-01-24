@@ -156,7 +156,8 @@ main (int argc, char * argv[])
 	/* ---------------------------------------------- */
 
 	/* print the eigenvalues */
-	for (i=0; i<dim; i++)
+	int prtdim = 36;
+	for (i=0; i<prtdim; i++)
 	{
 		double eddie = eigenvals[i+1]/eigenvals[i];
 		eddie -= 1.0;
@@ -167,14 +168,14 @@ main (int argc, char * argv[])
 	
 	/* Print the eigenvectors */
 	/* Note transposed matrix'ing for FORTRAN */
-	int prtdim = 36;
 	if (dim < prtdim) prtdim = dim;
-	for (i=0; i<3; i++)
+	for (i=0; i<1; i++)
 	{
-		for (j=0; j<prtdim; j++)
+		printf ("# %d'th eigenvector \n", i);
+		for (j=0; j<dim; j++)
 		{
-			printf ("# %d'th eigenvector[%d]=%g \n", 
-			           i,j, eigenvecs[j+i*dim]);
+			printf ("%d	%g	%g\n", 
+			           j, (j-Npts)*delta, eigenvecs[j+i*dim]);
 		}
 		printf ("#\n");
 	}

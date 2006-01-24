@@ -1,0 +1,19 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'diffy.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "diffy Curve"
+set xlabel "x"
+set ylabel "F(x)"
+plot "diffy.dat" using 2:3 title "eigen"
+
+# pause 100
+
