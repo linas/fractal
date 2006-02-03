@@ -140,8 +140,10 @@ main (int argc, char * argv[])
 		for (j=0; j<dim; j++)
 		{
 			/* Note transposed matrix'ing for FORTRAN */
-			mat[i+j*dim] = ache_mp(i,j);
+			// mat[i+j*dim] = ache_mp(i,j);
 			// mat[i+j*dim] = sst(i,j);
+			mat[i+j*dim] = binomial(i,j) * exp (-(i+j)*0.2/dim);
+			// printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
 		}
 	}
 
