@@ -10,11 +10,14 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+#include <gsl/gsl_sf_zeta.h>
 
 #include "ache.h"
 #include "zetafn.h"
 
-// return the matrix element for H_mp
+// Return the matrix element for H_mp aka the matrix element of GKW.
 //
 long double
 ache_mp(int m, int p)
@@ -108,7 +111,9 @@ long double zer_p (int p)
 
 // ==========================================================
 // t_sub_ne for general expanstion point "a"
-// The a_sub_n is this, for a=1, and leading fator subtracted.
+// The a_sub_n is this, for a=1, and leading factor subtracted.
+//
+// That is, a_sub_n (n) == t_sub_n (n, 1.0) - 1/2(n+1)
 //
 long double 
 t_sub_n (int n, long double a)
@@ -135,5 +140,69 @@ t_sub_n (int n, long double a)
 	}
 	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
 	return val+acc;
+}
+
+// ==========================================================
+// return the harmonic numbers
+
+long double harmonic_n (int n)
+{
+	int k;
+	long double sum = 0.0L;
+	for (k=1; k<=n; k++)
+	{
+		sum += 1.0L/((long double) k);
+	}
+	return sum;
+}
+
+// Return a_sub_n but for Hurwitz zeta
+// 
+long double 
+hz_a_sub_n (int n, double q)
+{
+	int k;
+	long double val = 0.0L;
+	
+	val = (2.0L*M_GAMMA) - 1.0L;
+	val = M_GAMMA;
+	val = 1.0 - 0.25L*M_PI;
+	val *= 0.666666666;
+	// printf ("duude val=%Lg\n", val);
+
+	//
+	val = 0.0L;
+	// val -= M_GAMMA;
+	// val -= 0.25L*M_PI;
+	// val -= 0.135181;
+	val -= 0.5L/((long double) (n+1));
+	val += 1.0L /((long double) 6*n*(n+1));
+	// val -= 0.5*harmonic_n (n+1);
+	// val -= (2.0/3.0)*harmonic_n (n+1);
+
+	// the following sum is patterned on a sub n
+	long double acc = 0.0L;
+	long double sign = -1.0L;
+	for (k=1; k<=n; k++)
+	{
+		// long double term = zetam1 (k+1)/ (long double) (k+1);
+#ifdef CHARACTER_FOUR
+		// long double four = gsl_sf_hzeta (k+1, 0.25) + gsl_sf_hzeta (k+1, 0.75);
+		long double four = gsl_sf_hzeta (k+1, 0.25) - gsl_sf_hzeta (k+1, 0.75);
+		four *= powl (4.0, -(k+1));
+		long double term = (four -1.0L)/ ((long double) (k+1));
+#endif 
+		long double three = gsl_sf_hzeta (k+1, 1.0/3.0) - gsl_sf_hzeta (k+1, 2.0/3.0);
+		three *= powl (3.0, -(k+1));
+		long double term = (three -1.0L)/ ((long double) (k+1));
+		// long double term = four/ ((long double) (k+1));
+		term *= binomial (n,k);
+		term *= sign;
+		acc += term;
+		// printf ("duuude a_sub_n k=%d term=%Lg, acc=%Lg\n", k, term, acc);
+		sign = -sign;
+	}
+	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
+	return val-acc;
 }
 

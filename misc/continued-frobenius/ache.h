@@ -24,3 +24,6 @@ long double t_sub_n (int n, long double a);
 // zer is normalized to unit length.  
 // zer is just the taylor coeffs of 1/(2-y)
 long double zer_p (int p);
+
+// return the nth term of the binomial expansion of the hurwitz zeta function 
+long double hz_a_sub_n (int n, double q);
