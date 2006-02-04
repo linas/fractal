@@ -7,7 +7,7 @@
 #define HARMONIC_H__
 
 // Euler's constant Abramowitz & Stegun Table 1.1 
-#define M_GAMMA 0.577215664901532860606512L;
+#define M_GAMMA 0.577215664901532860606512L
 
 #include <complex.h>
 
