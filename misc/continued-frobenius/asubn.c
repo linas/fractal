@@ -45,7 +45,7 @@ main (int argc, char * argv[])
 		double x = a_sub_n (i);
 		double y = hz_a_sub_n (i, a);
 		double z = 1.0/(y-prev);
-		// z /= i*(i+1);
+		//z /= i*(i+1);
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 		prev = y;
 #endif

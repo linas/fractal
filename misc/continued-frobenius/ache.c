@@ -203,11 +203,37 @@ hz_a_sub_n (int n, double q)
 	val += (1.0/6.0)*harmonic_n2p1 (n);
 #endif
 
-#define CHARACTER_5_1
 #ifdef CHARACTER_5_1
-	val = 0.0L;
+	val = 1.0L;
 	val -= 0.5L/((long double) (n+1));
-	// val += (1.0/6.0)*harmonic_n2p1 (n);
+	val -= (4.0/5.0)*harmonic_n (n+1);
+	val -= 0.3*harmonic_n2p1 (n);
+#endif
+
+#ifdef CHARACTER_5_2_OOPS
+	val = 1.0L;
+	val -= 0.5L/((long double) (n+1));
+	val -= (2.0/5.0)*harmonic_n (n+1);
+	val += 0.1*harmonic_n2p1 (n);
+#endif
+
+#ifdef CHARACTER_5_X_1
+	val = 1.0L;
+	val -= 0.5L/((long double) (n+1));
+	val -= (1.0/5.0)*harmonic_n (n+1);
+#endif
+
+#ifdef CHARACTER_7_X_1
+	val = 1.0L;
+	val -= 0.5L/((long double) (n+1));
+	val -= (1.0/7.0)*harmonic_n (n+1);
+#endif
+
+#define CHARACTER_9_X_1
+#ifdef CHARACTER_9_X_1
+	val = 1.0L;
+	val -= 0.5L/((long double) (n+1));
+	val -= (1.0/9.0)*harmonic_n (n+1);
 #endif
 
 	// the following sum is patterned on a sub n
@@ -239,6 +265,27 @@ hz_a_sub_n (int n, double q)
 		five += gsl_sf_hzeta (k+1, 0.8);
 		five *= powl (5.0, -(k+1));
 		long double term = (five -1.0L)/ ((long double) (k+1));
+#endif
+#ifdef CHARACTER_5_2_OOPS
+		long double five = gsl_sf_hzeta (k+1, 0.2);
+		five += gsl_sf_hzeta (k+1, 0.8);
+		five *= powl (5.0, -(k+1));
+		long double term = (five -1.0L)/ ((long double) (k+1));
+#endif
+#ifdef CHARACTER_5_X_1
+		long double five = gsl_sf_hzeta (k+1, 0.2);
+		five *= powl (5.0, -(k+1));
+		long double term = (five -1.0L)/ ((long double) (k+1));
+#endif
+#ifdef CHARACTER_7_X_1
+		long double seven = gsl_sf_hzeta (k+1, 1.0/7.0);
+		seven *= powl (7.0, -(k+1));
+		long double term = (seven -1.0L)/ ((long double) (k+1));
+#endif
+#ifdef CHARACTER_9_X_1
+		long double nine = gsl_sf_hzeta (k+1, 1.0/9.0);
+		nine *= powl (9.0, -(k+1));
+		long double term = (nine -1.0L)/ ((long double) (k+1));
 #endif
 		// long double term = four/ ((long double) (k+1));
 		term *= binomial (n,k);
