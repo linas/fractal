@@ -65,15 +65,26 @@ main (int argc, char * argv[])
 		prev = y;
 #endif
 
-#define LFUNC_A_SUB_N
+// #define LFUNC_A_SUB_N
 #ifdef LFUNC_A_SUB_N
 		double x = a_sub_n (i);
-		double y = lfunc_a_sub_n (i, m, k);
-		// y += 1.0/((double)k) * harm_n2p1 (i);
+		// double y = lfunc_a_sub_n (i, m, k);
+		double y = eta_a_sub_n (i);
+		// y += 2.0/((double)k) * harm_n2p1 (i);
 		double z = 1.0/(y-prev);
 		// z /= i*(i+1);
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 		prev = y;
+#endif
+
+#define ETA_A_SUB_N
+#ifdef ETA_A_SUB_N
+		double x = a_sub_n (i);
+		x *= exp (sqrt (4.0*M_PI*i));
+		double y = eta_a_sub_n (i);
+		y *= exp (sqrt (2.0*M_PI*i));
+		double z = x;
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 #endif
 
 #ifdef XXLFUNC_A_SUB_N

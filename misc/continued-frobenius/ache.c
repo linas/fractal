@@ -312,9 +312,7 @@ lfunc_a_sub_n (int n, int m_idx, int k_order)
 	val -= 0.5L/((long double) (n+1));
 	val -= (1.0/kay_order)*harmonic_n (n+1);
 
-	if (2==m_idx) {
-		val += (1.0/kay_order)*harmonic_n2p1 (n);
-	}
+	val += ((em_idx-1.0)/kay_order)*harmonic_n2p1 (n);
 
 	// the following sum is patterned on a sub n
 	long double acc = 0.0L;
@@ -325,7 +323,36 @@ lfunc_a_sub_n (int n, int m_idx, int k_order)
 		nine *= powl (kay_order, -(k+1));
 		long double term = (nine -1.0L)/ ((long double) (k+1));
 
-		// long double term = four/ ((long double) (k+1));
+		term *= binomial (n,k);
+		term *= sign;
+		acc += term;
+		// printf ("duuude a_sub_n k=%d term=%Lg, acc=%Lg\n", k, term, acc);
+		sign = -sign;
+	}
+	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
+	return val-acc;
+}
+
+// Return a_sub_n but for Dirichlet eta
+// 
+long double 
+eta_a_sub_n (int n)
+{
+	int k;
+
+	long double val = 1.0L;
+	val -= 0.5L/((long double) (n+1));
+	val -= logl (2.0L);
+
+	// the following sum is patterned on a sub n
+	long double acc = 0.0L;
+	long double sign = -1.0L;
+	for (k=1; k<=n; k++)
+	{
+		long double eta = gsl_sf_zeta (k+1);
+		eta *= 1.0 - pow (0.5, k);
+		long double term = (eta -1.0L)/ ((long double) (k+1));
+
 		term *= binomial (n,k);
 		term *= sign;
 		acc += term;
