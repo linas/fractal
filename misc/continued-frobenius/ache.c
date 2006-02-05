@@ -298,3 +298,37 @@ hz_a_sub_n (int n, double q)
 	return val-acc;
 }
 
+// Return a_sub_n but for Hurwitz zeta
+// 
+long double 
+lfunc_a_sub_n (int n, int m_idx, int k_order)
+{
+	int k;
+
+	long double kay_order = k_order;	
+	long double em_idx = m_idx;
+
+	long double val = 1.0L;
+	val -= 0.5L/((long double) (n+1));
+	val -= (1.0/kay_order)*harmonic_n (n+1);
+
+	// the following sum is patterned on a sub n
+	long double acc = 0.0L;
+	long double sign = -1.0L;
+	for (k=1; k<=n; k++)
+	{
+		long double nine = gsl_sf_hzeta (k+1, em_idx/kay_order);
+		nine *= powl (kay_order, -(k+1));
+		long double term = (nine -1.0L)/ ((long double) (k+1));
+
+		// long double term = four/ ((long double) (k+1));
+		term *= binomial (n,k);
+		term *= sign;
+		acc += term;
+		// printf ("duuude a_sub_n k=%d term=%Lg, acc=%Lg\n", k, term, acc);
+		sign = -sign;
+	}
+	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
+	return val-acc;
+}
+

@@ -27,3 +27,6 @@ long double zer_p (int p);
 
 // return the nth term of the binomial expansion of the hurwitz zeta function 
 long double hz_a_sub_n (int n, double q);
+
+// Hurwitz, for q=m/k
+long double lfunc_a_sub_n (int n, int m, int k);

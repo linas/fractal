@@ -17,12 +17,13 @@ main (int argc, char * argv[])
 {
 	int i;
 
-	if (2> argc)
+	if (3> argc)
 	{
-		fprintf (stderr, "Usage: %s <a-val>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <m> <k>\n", argv[0]);
 		exit (1);
 	}
-	long double a = atof (argv[1]);
+	int m = atoi (argv[1]);
+	int k = atof (argv[2]);
 
 	double prev = 0.0;
 	for (i=1; i<40; i++)
@@ -40,10 +41,19 @@ main (int argc, char * argv[])
 		x -= 1.0/(2.0*a*((double)(i+1)));
 		printf ("%d	%8.6g	%8.6g\n", i, x, y);
 #endif
-#define HURWITZ_A_SUB_N
 #ifdef HURWITZ_A_SUB_N
 		double x = a_sub_n (i);
 		double y = hz_a_sub_n (i, a);
+		double z = 1.0/(y-prev);
+		//z /= i*(i+1);
+		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
+		prev = y;
+#endif
+
+#define LFUNC_A_SUB_N
+#ifdef LFUNC_A_SUB_N
+		double x = a_sub_n (i);
+		double y = lfunc_a_sub_n (i, m, k);
 		double z = 1.0/(y-prev);
 		//z /= i*(i+1);
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
