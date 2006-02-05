@@ -312,6 +312,10 @@ lfunc_a_sub_n (int n, int m_idx, int k_order)
 	val -= 0.5L/((long double) (n+1));
 	val -= (1.0/kay_order)*harmonic_n (n+1);
 
+	if (2==m_idx) {
+		val += (1.0/kay_order)*harmonic_n2p1 (n);
+	}
+
 	// the following sum is patterned on a sub n
 	long double acc = 0.0L;
 	long double sign = -1.0L;

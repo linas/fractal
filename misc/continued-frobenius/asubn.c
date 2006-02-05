@@ -12,6 +12,21 @@
 #include <stdlib.h>
 #include "ache.h"
 
+// ==========================================================
+// return the harmonic numbers
+
+long double harm_n2p1 (int n)
+{
+	int k;
+	long double sum = 0.0L;
+	for (k=1; k<=n; k++)
+	{
+		sum += 1.0L/((long double) k*(k+1));
+	}
+	return sum;
+}
+
+// ==========================================================
 int
 main (int argc, char * argv[])
 {
@@ -54,10 +69,16 @@ main (int argc, char * argv[])
 #ifdef LFUNC_A_SUB_N
 		double x = a_sub_n (i);
 		double y = lfunc_a_sub_n (i, m, k);
+		// y += 1.0/((double)k) * harm_n2p1 (i);
 		double z = 1.0/(y-prev);
-		//z /= i*(i+1);
+		// z /= i*(i+1);
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 		prev = y;
+#endif
+
+#ifdef XXLFUNC_A_SUB_N
+		double y = lfunc_a_sub_n (30, 1, i);
+		printf ("%d	%8.6g\n", i, y);
 #endif
 	}
 	return 0;
