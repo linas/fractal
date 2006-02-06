@@ -71,6 +71,7 @@ main (int argc, char * argv[])
 		double x = a_sub_n (i);
 		double y = hurwitz_a_sub_n (i, m, k);
 		// y += 2.0/((double)k) * harm_n2p1 (i);
+		y *= exp (sqrt (2.0*M_PI*i));
 		double z = 1.0/(y-prev);
 		// z /= i*(i+1);
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
