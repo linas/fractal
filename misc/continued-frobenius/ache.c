@@ -159,13 +159,7 @@ long double harmonic_n (int n)
 
 long double harmonic_n2p1 (int n)
 {
-	int k;
-	long double sum = 0.0L;
-	for (k=1; k<=n; k++)
-	{
-		sum += 1.0L/((long double) k*(k+1));
-	}
-	return sum;
+	return n/(n+1.0L);
 }
 
 // Return a_sub_n but for Dirichlet L-function
@@ -332,23 +326,6 @@ long double norlund_rice (int n, int m_idx, int k_order)
 	return val;
 }
 
-// burp huh
-long double burp (int n, int m_idx, int k_order)
-{
-	long double val = 0.0;
-	
-	long double x = ((long double) m_idx)/((long double) k_order);
-	val = gsl_sf_psi(x) + logl(k_order) + 1.0L;
-	val -= harmonic_n (n);
-	val /= (long double) k_order;
-
-	// val = - hurwitz_zero (m_idx, k_order) / ((long double) n+1);
-	val += (x-0.5) / ((long double) n+1);
-
-	return val;
-}
-
-
 // Return a_sub_n but for Hurwitz zeta
 // 
 long double 
@@ -370,17 +347,7 @@ hurwitz_a_sub_n (int n, int m_idx, int k_order)
 
 // printf ("duude n=%Lg vold=%Lg diff=%Lg\n", v, val, v-val);
 val = -v;
-val += harmonic_n2p1 (n);
-//---------------
-long double vol;
-vol = burp (n, m_idx, k_order);
-vol += (2.0L*em_idx/kay_order)*harmonic_n2p1 (n);
-vol += 1.0L - (2.0L*em_idx/kay_order);
-
-vol = harmonic_n2p1 (n);
-vol -= 1.0;
-vol += 1.0/(n+1);
-printf("duuda va;=%Lg vol=%Lg\n", val, vol);
+val += n/(n+1.0L);
 
 	// the following sum is patterned on a sub n
 	long double acc = 0.0L;
