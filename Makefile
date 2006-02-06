@@ -17,5 +17,5 @@ realclean:
 	cd queue; make realclean
 	cd symbolic; make realclean
 	cd tools; make realclean
-	rn -rf *.bak
+	rm -rf *.bak
 

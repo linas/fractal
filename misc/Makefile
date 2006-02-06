@@ -9,6 +9,7 @@ clean:
 	cd continued-frobenius; make clean
 	cd de-rham; make clean
 	cd farey; make clean
+	cd free-group; make clean
 	cd gap; make clean
 	cd ising; make clean
 	cd modular; make clean
@@ -25,6 +26,7 @@ realclean: clean
 	cd continued-frobenius; make realclean
 	cd de-rham; make realclean
 	cd farey; make realclean
+	cd free-group; make realclean
 	cd gap; make realclean
 	cd ising; make realclean
 	cd modular; make realclean

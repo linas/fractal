@@ -1,10 +1,13 @@
 
+EXES=rain
+
+all: rain
 
 rain: rain.c
 	cc -g rain.c -o rain
 
-clean:
-	rm -f *.o a.out
+clean: 
+	rm -rf *.o
 
 realclean: clean
-	rm -f rain
+	rm -rf $(EXES) a.out x y  z j.c

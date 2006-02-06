@@ -23,9 +23,10 @@ asym: asym.o
 .c.o:
 	cc -g -O2 -c -Wall $<
 
-
 clean:
-	rm -f *.o a.out
+	rm -f *.o
 
 realclean: clean
-	rm -f $(EXES)
+	rm -f $(EXES) a.out j.c x
+
+

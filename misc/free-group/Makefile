@@ -10,7 +10,7 @@ clean:
 	rm -f core tmp junk glop a.out *.o
 
 realclean:	clean
-	rm -f $(EXES) 
+	rm -rf $(EXES) 
 
 .c.o:
 	$(CC) -c -O2 $<
