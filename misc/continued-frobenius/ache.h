@@ -25,10 +25,12 @@ long double t_sub_n (int n, long double a);
 // zer is just the taylor coeffs of 1/(2-y)
 long double zer_p (int p);
 
-// return the nth term of the binomial expansion of the hurwitz zeta function 
-long double hz_a_sub_n (int n, double q);
+// return the nth term of the binomial expansion 
+// of some hard-coded L-function
+long double dirichlet_l_function_a_sub_n (int n);
 
+// return the nth term of the binomial expansion of the hurwitz zeta function 
 // Hurwitz, for q=m/k
-long double lfunc_a_sub_n (int n, int m, int k);
+long double hurwitz_a_sub_n (int n, int m, int k);
 long double eta_a_sub_n (int n);
 long double x_sub_n (int n);

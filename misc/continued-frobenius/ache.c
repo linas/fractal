@@ -13,6 +13,7 @@
 #include <stdlib.h>
 
 #include <gsl/gsl_sf_zeta.h>
+#include <gsl/gsl_sf_psi.h>
 
 #include "ache.h"
 #include "zetafn.h"
@@ -167,10 +168,10 @@ long double harmonic_n2p1 (int n)
 	return sum;
 }
 
-// Return a_sub_n but for Hurwitz zeta
+// Return a_sub_n but for Dirichlet L-function
 // 
 long double 
-hz_a_sub_n (int n, double q)
+dirichlet_L_function_a_sub_n (int n)
 {
 	int k;
 	long double val = 0.0L;
@@ -298,17 +299,46 @@ hz_a_sub_n (int n, double q)
 	return val-acc;
 }
 
+// ==========================================================
+// Hurwitz zeta at s=0
+long double hurwitz_zero (int m, int k)
+{
+	long double val = 0.0;
+	int n;
+	long double ok = 1.0L/ ((long double) k);
+	long double theta = 2.0L*M_PI*m * ok;
+	for (n=1; n<= k; n++)
+	{
+		val += sinl (theta*n) * gsl_sf_psi (n*ok);
+	}
+	val = -val / (M_PI*k);
+	return val;
+}
+
+// finite terms, per the Norlund-Rice integral
+long double norlund_rice (int n, int m_idx, int k_order)
+{
+	long double val = 0.0;
+	
+	val = hurwitz_zero (m_idx, k_order);
+	return val;
+}
+
 // Return a_sub_n but for Hurwitz zeta
 // 
 long double 
-lfunc_a_sub_n (int n, int m_idx, int k_order)
+hurwitz_a_sub_n (int n, int m_idx, int k_order)
 {
 	int k;
 
 	long double kay_order = k_order;	
 	long double em_idx = m_idx;
+	long double val;
 
-	long double val = 1.0L;
+	val = norlund_rice (n, m_idx, k_order);
+printf ("duude n=%Lg\n", val);
+
+	val = 1.0L;
 	val -= 0.5L/((long double) (n+1));
 	val -= (1.0/kay_order)*harmonic_n (n+1);
 
