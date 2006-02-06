@@ -31,3 +31,4 @@ long double hz_a_sub_n (int n, double q);
 // Hurwitz, for q=m/k
 long double lfunc_a_sub_n (int n, int m, int k);
 long double eta_a_sub_n (int n);
+long double x_sub_n (int n);

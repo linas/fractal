@@ -363,3 +363,25 @@ eta_a_sub_n (int n)
 	return val-acc;
 }
 
+// Return a_sub_n but for Dirichlet eta
+// 
+long double 
+x_sub_n (int n)
+{
+	int k;
+
+	// the following sum is patterned on a sub n
+	long double acc = 0.0L;
+	long double sign = -1.0L;
+	for (k=1; k<=n; k++)
+	{
+		long double term = 1.0/ ((long double) (k+1));
+
+		term *= binomial (n,k);
+		term *= sign;
+		acc += term;
+		sign = -sign;
+	}
+	return acc;
+}
+

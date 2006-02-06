@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ache.h"
+#include <gsl/gsl_sf_zeta.h>
 
 // ==========================================================
 // return the harmonic numbers
@@ -83,7 +84,8 @@ main (int argc, char * argv[])
 		x *= exp (sqrt (4.0*M_PI*i));
 		double y = eta_a_sub_n (i);
 		y *= exp (sqrt (2.0*M_PI*i));
-		double z = x;
+		double z = gsl_sf_hzeta (0, ((double) m) / ((double)k));
+x=z;
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 #endif
 

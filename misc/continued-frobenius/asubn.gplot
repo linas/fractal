@@ -33,8 +33,13 @@ set ylabel "a_n/exp(-4sqrt(n+1))"
 # plot "asubn.dat" using 1:(1-(((1+$2)*$1)/3)) title "data", \
 #	"asubn.dat" using 1:(1/$1) title "fitta"
 
-plot "asubn.dat" using (log($1)):(log(1-$2)) title "data", \
-	"asubn.dat" using (log($1)):(log(2-0.577)-0.7*log($1)) title "fitta"
+# The fit below is for the asymtptotic behaveiour of const term
+# in the large-value a_sub_n for hurwitz zeta
+# plot "asubn.dat" using (log($1)):(log(1-$2)) title "data", \
+#	"asubn.dat" using (log($1)):(log(2-0.577)-0.7*log($1)) title "fitta"
+
+plot "asubn.dat" using (log($1)):(log(1+$2)) title "data", \
+	"asubn.dat" using (log($1)):(log(2-0.577)-0.7*log($1)-1) title "fitta"
 
 
 # pause 100
