@@ -337,17 +337,7 @@ hurwitz_a_sub_n (int n, int m_idx, int k_order)
 	long double em_idx = m_idx;
 	long double val;
 
-	long double v = norlund_rice (n, m_idx, k_order);
-
-	val = 1.0L;
-	val -= 0.5L/((long double) (n+1));
-	val -= (1.0/kay_order)*harmonic_n (n+1);
-
-	val += ((em_idx-1.0)/kay_order)*harmonic_n2p1 (n);
-
-// printf ("duude n=%Lg vold=%Lg diff=%Lg\n", v, val, v-val);
-val = -v;
-val += n/(n+1.0L);
+	val = -norlund_rice (n, m_idx, k_order);
 
 	// the following sum is patterned on a sub n
 	long double acc = 0.0L;
@@ -356,7 +346,7 @@ val += n/(n+1.0L);
 	{
 		long double nine = gsl_sf_hzeta (k+1, em_idx/kay_order);
 		nine *= powl (kay_order, -(k+1));
-		long double term = (nine -1.0L)/ ((long double) (k+1));
+		long double term = nine/ ((long double) (k+1));
 
 		term *= binomial (n,k);
 		term *= sign;

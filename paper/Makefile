@@ -17,6 +17,7 @@ clean:
 	cd gkw; make clean
 	cd measure; make clean
 	cd minkowski; make clean
+	cd overview; make clean
 	cd poch-zeta; make clean
 	cd rat; make clean
 	cd rotations; make clean

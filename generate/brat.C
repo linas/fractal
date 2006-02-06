@@ -2428,7 +2428,7 @@ main (int argc, char *argv[])
 	char * progname;
    
    if (5 > argc) {
-      fprintf (stderr, "Usage: %s <filename> <width> <height> <niter> [<centerx> <centery> <width> [<height>]]\n", argv[0]);
+      fprintf (stderr, "Usage: %s <filename> <width> <height> <niter> [<centerx> <centery> <width> [<param>]]\n", argv[0]);
       exit (1);
    }
 
@@ -2455,12 +2455,10 @@ main (int argc, char *argv[])
       im_center = atof (argv[6]);
       width = atof (argv[7]);
    }
+   height = width * ((double) data_height) / ((double) data_width);
 
-   if (9 == argc) {
-      height = atof (argv[8]);
-   } else {
-      height = width * ((double) data_height) / ((double) data_width);
-   }
+   renorm = 1.0;
+   if (9 == argc) renorm = atof (argv[8]);
 
    if (9 < argc) {
       nray = atoi (argv[8]);
@@ -2468,12 +2466,11 @@ main (int argc, char *argv[])
       q = atof (argv[10]);
    }
 
-   printf ("file=%s (%d %d) iter=%d (%f %f) w=%f h=%f\n", 
+   printf ("file=%s (%d %d) iter=%d (%f %f) w=%f h=%f param=%f\n", 
         argv[1], data_width, data_height, itermax, 
-        re_center, im_center, width, height); 
+        re_center, im_center, width, height, renorm); 
 
    /* Do the interior now */
-   renorm = 1.0;
 
 	progname = argv[0];
 	progname = strrchr (progname, '/');

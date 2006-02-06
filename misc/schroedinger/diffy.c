@@ -204,10 +204,10 @@ void elliptic_data (int kstep, int dim,
 double 
 comb_potential (int n, double step)
 {
-	double x = (n+0.5)*step;
-	double pot = sin(M_PI/x) + 1.0/x + x;
-	// double pot = 1.0/x + x;
-	return pot;
+	double x = (n+0.27182818282653)*step;
+	double cob = sin(2.0*M_PI/x);
+	double pot = 1.0 / (cob*cob);
+	return pot*pot;
 }
 
 void comb_data (int kstep, int dim, 
@@ -293,7 +293,7 @@ main (int argc, char * argv[])
 	/* Note transposed matrix'ing for FORTRAN */
 	for (j=0; j<dim; j++)
 	{
-		printf ("%d	%g", j, (j-ncenter)*delta);
+		printf ("%d	%g	%g", j, (j-ncenter)*delta, comb_potential(j, delta));
 		for (i=eigen_prt; i<9+eigen_prt; i++)
 		{
 			printf ("\t%g", eigenvecs[j+i*dim]);

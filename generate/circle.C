@@ -171,6 +171,58 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
    return x;
 }
 
+/*-------------------------------------------------------------------*/
+/* Bifurcation diagram callback, does one row at a time */
+
+static void 
+bifurcation_diagram 
+(float *array, 
+	int array_size, 
+	double x_center,
+	double x_width,
+	double K, 
+	int itermax,
+	double omega)
+{
+   double	x=0.0;
+   int		iter,j;
+	int cnt=0;
+
+	/* clear out the row */   
+	for (j=0; j<array_size; j++)
+	{
+		array[j] = 0.0;
+	}
+
+#define BSAMP 500
+	for (j=0; j<itermax/BSAMP; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		t -= 0.5;
+		x = t;
+  
+   	/* OK, now start iterating the circle map */
+   	for (iter=0; iter < BSAMP; iter++) {
+      	x += omega - K * sin (2.0 * M_PI * x);
+
+			double en = array_size * (x-floor(x));
+			int n = en;
+			if (0 > n) n = 0;
+			if (n >= array_size) n = array_size-1;
+			array[n] += 1.0;
+			cnt ++;
+   	}
+	}
+	
+	for (j=0; j<array_size; j++)
+	{
+		array[j] /= cnt;
+	}
+}
+
+/*-------------------------------------------------------------------*/
+
 static double circle_map (double omega, double K, int itermax, double param)
 {
 	// return winding_number (omega,K, itermax);
@@ -179,7 +231,10 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return circle_poincare_recurrance_time (omega,K, itermax);
 }
 
-DECL_MAKE_HISTO (circle_map);
+// DECL_MAKE_HISTO (circle_map);
+
+DECL_MAKE_BIFUR(bifurcation_diagram)
 
 /* --------------------------- END OF LIFE ------------------------- */
+
 

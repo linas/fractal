@@ -13,9 +13,24 @@ set key right
 set title "diffy Curve"
 set xlabel "x"
 set ylabel "F(x)"
-plot "diffy.dat" using 2:3 title "0", \
+
+# set yrange [0:15]
+# set xrange [0:8]
+
+# plot "diffy.dat" using (1/$2):3 title "pot"
+
+plot \
      "diffy.dat" using 2:4 title "1", \
-     "diffy.dat" using 2:5 title "2"
+     "diffy.dat" using 2:5 title "2", \
+     "diffy.dat" using 2:6 title "3", \
+     "diffy.dat" using 2:7 title "4", \
+     "diffy.dat" using 2:8 title "5", \
+     "diffy.dat" using 2:9 title "6", \
+     "diffy.dat" using 2:10 title "7"
+
+# plot "diffy.dat" using 2:3 title "0", \
+#     "diffy.dat" using 2:4 title "1", \
+#     "diffy.dat" using 2:5 title "2"
 
 # plot "diffy.dat" using 2:5 title "2", \
 #     "diffy.dat" using 2:6 title "3"
