@@ -324,12 +324,28 @@ long double norlund_rice (int n, int m_idx, int k_order)
 	val = gsl_sf_psi(x) + logl(k_order) + 1.0L;
 	val -= harmonic_n (n);
 	val /= (long double) k_order;
+	val = -val;
 
 	// val = - hurwitz_zero (m_idx, k_order) / ((long double) n+1);
 	val += (x-0.5) / ((long double) n+1);
 
 	return val;
 }
+
+// burp huh
+long double burp (int n, int m_idx, int k_order)
+{
+	long double val = 0.0;
+	
+	long double x = ((long double) m_idx)/((long double) k_order);
+	val = gsl_sf_psi(x) + logl(k_order) + 1.0L;
+	val -= harmonic_n (n);
+	val /= (long double) k_order;
+
+	val += k_order*n;
+	return val;
+}
+
 
 // Return a_sub_n but for Hurwitz zeta
 // 
@@ -351,9 +367,10 @@ hurwitz_a_sub_n (int n, int m_idx, int k_order)
 	val += ((em_idx-1.0)/kay_order)*harmonic_n2p1 (n);
 
 // printf ("duude n=%Lg vold=%Lg diff=%Lg\n", v, val, v-val);
-val = v;
-val += (2.0L*em_idx/kay_order)*harmonic_n2p1 (n);
-val += 1.0L - (2.0L*em_idx/kay_order);
+val = -v;
+val += harmonic_n2p1 (n);
+// val += (2.0L*em_idx/kay_order)*harmonic_n2p1 (n);
+// val += 1.0L - (2.0L*em_idx/kay_order);
 
 	// the following sum is patterned on a sub n
 	long double acc = 0.0L;
@@ -371,6 +388,9 @@ val += 1.0L - (2.0L*em_idx/kay_order);
 		sign = -sign;
 	}
 	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
+
+acc = 0.0;
+val = burp (n, m_idx, k_order);
 	return val-acc;
 }
 
