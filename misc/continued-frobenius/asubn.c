@@ -44,12 +44,17 @@ main (int argc, char * argv[])
 	double prev = 0.0;
 	for (i=1; i<40; i++)
 	{
-#if TRADITIONAL_A_SUB_N
+#define TRADITIONAL_A_SUB_N
+#ifdef TRADITIONAL_A_SUB_N
 		double x = a_sub_n (i);
-		double r = sqrt (i+1);
-		r = exp (-4.0*r);
+		double r = sqrt (i*M_PI);
+		r = exp (-2.0*r);
+		r *= pow (i, -0.75);
 		x /= r;
-		printf ("%d	%8.6g\n", i, x);
+		double y = sqrt (4.0*M_PI*i) + 0.375*M_PI;
+		y = -cos(y);
+		y *= pow (2*M_PI, -0.25);
+		printf ("%d	%8.6g	%8.6g\n", i, x, y);
 #endif
 #if 0
 		double x = t_sub_n (i, a);
@@ -66,7 +71,7 @@ main (int argc, char * argv[])
 		prev = y;
 #endif
 
-#define LFUNC_A_SUB_N
+// #define LFUNC_A_SUB_N
 #ifdef LFUNC_A_SUB_N
 		double x = a_sub_n (i);
 		double y = hurwitz_a_sub_n (i, m, k);
