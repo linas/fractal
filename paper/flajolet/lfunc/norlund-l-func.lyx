@@ -321,7 +321,8 @@ A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2
 
 \end_inset 
 
- where one has the curious identity 
+ where one has the curious identity in the form of a multiplication theorem
+ for the digamma function:
 \begin_inset Formula \begin{equation}
 \zeta\left(0,\frac{m}{k}\right)=\frac{-1}{\pi k}\sum_{p=1}^{k}\sin\left(\frac{2\pi pm}{k}\right)\psi\left(\frac{p}{k}\right)=-B_{1}\left(\frac{m}{k}\right)=\frac{1}{2}-\frac{m}{k}\label{eq:}\end{equation}
 
@@ -344,4 +345,76 @@ A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2
 
 is the Bernoulli polynomial of order 1.
  The double pole at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+ evaluates to 
+\begin_inset Formula \begin{equation}
+\mbox{Res}(s=0)=\frac{-1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $H_{n}$
+\end_inset 
+
+ are the harmonic numbers 
+\begin_inset Formula \begin{equation}
+H_{n}=\sum_{j=1}^{n}\frac{1}{j}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Combining these, one obtains 
+\begin_inset Formula \begin{equation}
+A_{n}(m,k)=\frac{1}{n+1}\left(\frac{m}{k}-\frac{1}{2}\right)-\frac{1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n}\right]+a_{n}(m,k)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The remaining term has the remarkable property of being exponentially small;
+ that is, 
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)=\mathcal{O}\left(e^{-\sqrt{Kn}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ for a constant 
+\begin_inset Formula $K$
+\end_inset 
+
+ of order 
+\begin_inset Formula $m/k$
+\end_inset 
+
+.
+ The next section develops an explicit asymptotic form for this term.
+\layout Section
+
+Saddle-point methods
+\layout Standard
+
+The term 
+\begin_inset Formula $a_{n}(m,k)$
+\end_inset 
+
+ is represented by the integral
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{-3`}{2}-i\infty}^{\frac{-3}{2}+i\infty}\frac{\zeta\left(p+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:}\end{equation}
+
+\end_inset 
+
+ which resulted from shifting the integration cotour past the poles.
+ At this point, the functional equation for the Hurwitz zeta may be applied.
+ This equation is 
+\begin_inset Formula \begin{equation}
+\zeta\left(1-s,\frac{m}{k}\right)=\frac{2\Gamma(s)}{(2\pi k)^{s}}\sum_{p=1}^{k}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ This allows the integral to be expressed as
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)=\frac{n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\end{equation}
+
+\end_inset 
+
+ w
 \the_end
