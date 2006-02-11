@@ -453,7 +453,7 @@ For large values of
 .
  More precisely, The saddle-point theorem states that 
 \begin_inset Formula \begin{equation}
-\int e^{-Nf(x)}dx\approx\sqrt{\frac{2\pi}{N\left|f''(x_{0})\right|}}e^{-Nf(x_{0})}\left[1-\frac{f^{(4)}(x_{0})}{8N\left|f''(x_{0})\right|^{2}}+\cdots\right]\label{eq:}\end{equation}
+\int e^{-Nf(x)}dx\approx\sqrt{\frac{2\pi}{N\left|f^{\prime\prime}(x_{0})\right|}}e^{-Nf(x_{0})}\left[1-\frac{f^{(4)}(x_{0})}{8N\left|f^{\prime\prime}(x_{0})\right|^{2}}+\cdots\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -471,7 +471,7 @@ For large values of
 \end_inset 
 
  and 
-\begin_inset Formula $f''(x_{0})$
+\begin_inset Formula $f^{\prime\prime}(x_{0})$
 \end_inset 
 
  and 
@@ -538,8 +538,9 @@ To recast the equation
 
  large.
  Thus, one writes 
-\begin_inset Formula \begin{equation}
-a_{n}(m,k)=\frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{\psi}(z)}dz\right]\label{eq:}\end{equation}
+\begin_inset Formula \begin{eqnarray}
+a_{n}(m,k) & = & \frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz\right.\label{eq:saddle}\\
+ &  & \left.+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{\psi}(z)}dz\right]\end{eqnarray}
 
 \end_inset 
 
@@ -563,7 +564,7 @@ Proceeding, one has
 
  and 
 \begin_inset Formula \begin{equation}
-\phi(s)=-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\label{eq:}\end{equation}
+\phi(s)\approx-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -594,14 +595,14 @@ and
 
  and collecting terms, one obtains 
 \begin_inset Formula \begin{eqnarray}
-\psi(z) & = & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
+\psi(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
  &  & +\log2\pi-2\log z-\frac{z^{2}}{2}\label{eq:}\\
- &  & +\frac{1}{\sqrt{n}}\left[\frac{7}{6z}-\frac{z}{2}+\frac{z^{3}}{3}\right]+\frac{1}{n}\left[\frac{73}{144z^{2}}+\frac{5z^{2}}{4}\right]\end{eqnarray}
+ &  & +\frac{1}{\sqrt{n}}\left[\frac{7}{6z}-\frac{z}{2}+\frac{z^{3}}{3}\right]+\frac{1}{n}\left[\frac{73}{144z^{2}}+\frac{5z^{2}}{4}\right]+\mathcal{O}\left(n^{-3/2}\right)\end{eqnarray}
 
 \end_inset 
 
  The saddle point may be obtained by solving 
-\begin_inset Formula $\psi'(z)=0$
+\begin_inset Formula $\psi^{\prime}(z)=0$
 \end_inset 
 
 .
@@ -611,18 +612,57 @@ and
 
 .
  To use the saddle-point formula, one needs 
-\begin_inset Formula $\psi''(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$
+\begin_inset Formula $\psi^{\prime\prime}(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$
 \end_inset 
 
 .
  Substituting, one directly obtains 
 \begin_inset Formula \begin{equation}
-\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz=\left(\frac{2\pi^{3}p}{n^{3}k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:}\end{equation}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz\approx\left(\frac{2\pi^{3}p}{n^{3}k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)+\mathcal{O}\left(??\right)\label{eq:}\end{equation}
 
 \end_inset 
 
+ while the integral for 
+\begin_inset Formula $\overline{\psi}$
+\end_inset 
 
+ is the complex conjugate of this (having a saddle point at the complex
+ conjugate location).
+ Inserting this into equation 
+\begin_inset LatexCommand \ref{eq:saddle}
+
+\end_inset 
+
+ gives 
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi n^{3}}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\sin\left(\frac{2\pi pm}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+For large 
+\begin_inset Formula $n$
+\end_inset 
+
+, only the 
+\begin_inset Formula $p=1$
+\end_inset 
+
+ term contributes significantly, and so one may write
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\sin\left(\frac{2\pi m}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which demonstrates the desired result: the terms 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+are exponentially small.
+\layout Section
+
+Conclusion 
 \layout Standard
 
-Conjugate 
+We conclude by breifly returning to the structure of the Dirichlet L-functions.
+ 
 \the_end
