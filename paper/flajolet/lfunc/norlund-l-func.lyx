@@ -419,7 +419,7 @@ a_{n}(m,k)=\frac{n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{3}{2}-i\infty}^{\frac{3}{2
  It will prove to be convenient to pull the phase factor out of the cosine
  part; we do this now, and write this integral as 
 \begin_inset Formula \begin{eqnarray}
-a_{n}(m,k) & = & \frac{n!}{k\pi i}\sum_{p=1}^{k}\exp\left(i\frac{2\pi pm}{k}\right)\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\,\exp\left(-i\frac{\pi s}{2}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\\
+a_{n}(m,k) & = & \frac{n!}{k\pi i}\sum_{p=1}^{k}\exp\left(i\frac{2\pi pm}{k}\right)\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\,\exp\left(-i\frac{\pi s}{2}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:two-integrals}\\
  & + & c.c.\nonumber \end{eqnarray}
 
 \end_inset 
@@ -444,8 +444,9 @@ For large values of
 \end_inset 
 
 , this integral may be evaluated by means of the saddle-point method.
- The saddle-point method may be applied whenever the integrand can be approximat
-ed by a sharply peaked Gaussian, as the above can be for large 
+ The saddle-point method, or method of steepest descents, may be applied
+ whenever the integrand can be approximated by a sharply peaked Gaussian,
+ as the above can be for large 
 \begin_inset Formula $n$
 \end_inset 
 
@@ -478,4 +479,150 @@ ed by a sharply peaked Gaussian, as the above can be for large
 \end_inset 
 
  are the second and fourth derivatives at the local minumum.
+ 
+\layout Standard
+
+To recast the equation 
+\begin_inset LatexCommand \ref{eq:two-integrals}
+
+\end_inset 
+
+ into the form needed for the method of steepest descents, an asymptotic
+ expansion of the integrands will need to be made for large 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ After such an expansion, it is seen that the saddle point occurs at large
+ values of 
+\begin_inset Formula $s$
+\end_inset 
+
+, and so an asymptotic expansion in large 
+\begin_inset Formula $s$
+\end_inset 
+
+ is warrented as well.
+ As it is confusing and laborius to simultaneously expand in two parameters,
+ it is better to seek out an order parameter to couple the two.
+ This may be done as follows.
+ One notes that the integrands have a minimum, on the real 
+\begin_inset Formula $s$
+\end_inset 
+
+ axis, near 
+\begin_inset Formula $s=\sigma_{0}=\sqrt{\pi kn/p}$
+\end_inset 
+
+ and so the appropriate scaling parameter is 
+\begin_inset Formula $z=s/\sqrt{n}$
+\end_inset 
+
+.
+ One should then immediately perform a change of variable from 
+\begin_inset Formula $s$
+\end_inset 
+
+ to 
+\begin_inset Formula $z$
+\end_inset 
+
+.
+ The asymptotic expansion is then performed by holding 
+\begin_inset Formula $z$
+\end_inset 
+
+ constant, and takling 
+\begin_inset Formula $n$
+\end_inset 
+
+ large.
+ Thus, one writes 
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)=\frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{\psi}(z)}dz\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\overline{\psi}$
+\end_inset 
+
+ is the complex conjugate of 
+\begin_inset Formula $\psi$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Proceeding, one has 
+\begin_inset Formula \begin{equation}
+\psi(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\phi(s)=-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the approximation that 
+\begin_inset Formula $\zeta\left(s,p/k\right)\approx(k/p)^{s}$
+\end_inset 
+
+ for large 
+\begin_inset Formula $s$
+\end_inset 
+
+ has been made.
+ The asymptotic expansion for the Gamma function is given by the Stirling
+ expansion, 
+\begin_inset Formula \begin{equation}
+\log\Gamma(x)=\left(x-\frac{1}{2}\right)\log x-x+\frac{1}{2}\log2\pi+\sum_{j=1}^{\infty}\frac{B_{2j}}{2j(2j-1)x^{2j-1}}\label{eq:}\end{equation}
+
+\end_inset 
+
+and 
+\begin_inset Formula $B_{k}$
+\end_inset 
+
+ are the Bernoulli numbers.
+ Expanding to 
+\begin_inset Formula $\mathcal{O}(1/n)$
+\end_inset 
+
+ and collecting terms, one obtains 
+\begin_inset Formula \begin{eqnarray}
+\psi(z) & = & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
+ &  & +\log2\pi-2\log z-\frac{z^{2}}{2}\label{eq:}\\
+ &  & +\frac{1}{\sqrt{n}}\left[\frac{7}{6z}-\frac{z}{2}+\frac{z^{3}}{3}\right]+\frac{1}{n}\left[\frac{73}{144z^{2}}+\frac{5z^{2}}{4}\right]\end{eqnarray}
+
+\end_inset 
+
+ The saddle point may be obtained by solving 
+\begin_inset Formula $\psi'(z)=0$
+\end_inset 
+
+.
+ To lowest order, one obtains 
+\begin_inset Formula $z_{0}=(1+i)\sqrt{\pi p/k}$
+\end_inset 
+
+.
+ To use the saddle-point formula, one needs 
+\begin_inset Formula $\psi''(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$
+\end_inset 
+
+.
+ Substituting, one directly obtains 
+\begin_inset Formula \begin{equation}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz=\left(\frac{2\pi^{3}p}{n^{3}k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+Conjugate 
 \the_end
