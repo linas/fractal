@@ -91,12 +91,20 @@ Given a function
 
 \end_inset 
 
- When one has only an arhtimetic function or sequence of values 
+ where 
+\begin_inset Formula ${n \choose p}$
+\end_inset 
+
+ is the binomial coefficient.
+ When one has only an arithmetic function or sequence of values 
 \begin_inset Formula $f_{p}=f(p)$
 \end_inset 
 
-, rather than a function of a continuous variable, the above is refered
- to as the binomial transform of the sequence.
+, rather than a function of a continuous variable 
+\begin_inset Formula $x$
+\end_inset 
+
+, the above is refered to as the binomial transform of the sequence.
  If the function 
 \begin_inset Formula $f(x)$
 \end_inset 
@@ -207,4 +215,133 @@ L
 \end_inset 
 
 .
+ The 
+\emph on 
+L
+\emph default 
+-function assoicated with the character 
+\begin_inset Formula $\chi$
+\end_inset 
+
+is defined as 
+\begin_inset Formula \begin{equation}
+L(\chi,s)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ All such 
+\emph on 
+L
+\emph default 
+-functions may be re-expressed in terms of the Hurwitz zeta function as
+\begin_inset Formula \begin{equation}
+L(\chi,s)=\frac{1}{k^{s}}\sum_{m=1}^{k}\chi(m)\zeta\left(s,\frac{m}{k}\right)\label{eq:L-Hurwitz}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $k$
+\end_inset 
+
+ is the period of 
+\begin_inset Formula $\chi$
+\end_inset 
+
+ and 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
+
+ is the Hurwitz zeta function, given by 
+\begin_inset Formula \begin{equation}
+\zeta(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Thus, the study of the analytic properties of the 
+\emph on 
+L
+\emph default 
+-functions can be partially unified through the study of the Hurwitz zeta
+ function.
+\layout Section
+
+Forward differences
+\layout Standard
+
+In analogy to the study of the forward differences of the Riemann zeta function,
+ the remainder of this paper will concern itself with the analysis of the
+ series given by 
+\begin_inset Formula \begin{equation}
+L_{n}=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{L(\chi,p+1)}{p+1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Because of the relation 
+\begin_inset LatexCommand \ref{eq:L-Hurwitz}
+
+\end_inset 
+
+ connecting the Hurwitz zeta function to the L-function, it is sufficient
+ to study sums of the form
+\begin_inset Formula \begin{equation}
+A_{n}(m,k)=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{\zeta\left(p+1,\frac{m}{k}\right)}{k^{p+1}(p+1)}\label{eq:}\end{equation}
+
+\end_inset 
+
+ since 
+\begin_inset Formula \begin{equation}
+L_{n}=\sum_{m=1}^{k}\chi(m)\, A_{n}(m,k)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Converting the sum to the Norlund-Rice integral, and extending the contour
+ to the half-circle at positive infinity, and noting that the half-circle
+ does not contribute to the integral, one obtains 
+\begin_inset Formula \begin{equation}
+A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{\zeta\left(p+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:}\end{equation}
+
+\end_inset 
+
+ Moving the integral to the left, one encounters a single pole at 
+\begin_inset Formula $s=-1$
+\end_inset 
+
+ and a double pole at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+.
+ The residue of the pole at 
+\begin_inset Formula $s=-1$
+\end_inset 
+
+ is 
+\begin_inset Formula \begin{equation}
+\mbox{Res}(s=-1)=\frac{-1}{n+1}\zeta\left(0,\frac{m}{k}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where one has the curious identity 
+\begin_inset Formula \begin{equation}
+\zeta\left(0,\frac{m}{k}\right)=\frac{-1}{\pi k}\sum_{p=1}^{k}\sin\left(\frac{2\pi pm}{k}\right)\psi\left(\frac{p}{k}\right)=-B_{1}\left(\frac{m}{k}\right)=\frac{1}{2}-\frac{m}{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Here, 
+\begin_inset Formula $\psi$
+\end_inset 
+
+ is the digamma function, the logarithmic derivative of the Gamma function:
+ 
+\begin_inset Formula \begin{equation}
+\psi(z)=\frac{d}{dz}\log\Gamma(z)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula $B_{1}$
+\end_inset 
+
+is the Bernoulli polynomial of order 1.
+ The double pole at 
 \the_end
