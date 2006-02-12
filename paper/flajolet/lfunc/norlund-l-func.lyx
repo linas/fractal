@@ -340,7 +340,7 @@ L_{n}=\sum_{m=1}^{k}\chi(m)\, A_{n}(m,k)\label{eq:}\end{equation}
  to the half-circle at positive infinity, and noting that the half-circle
  does not contribute to the integral, one obtains 
 \begin_inset Formula \begin{equation}
-A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{\zeta\left(p+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:}\end{equation}
+A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{\zeta\left(s+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -452,7 +452,7 @@ The term
 
  is represented by the integral
 \begin_inset Formula \begin{equation}
-a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{-3`}{2}-i\infty}^{\frac{-3}{2}+i\infty}\frac{\zeta\left(s+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:}\end{equation}
+a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{-3`}{2}-i\infty}^{\frac{-3}{2}+i\infty}\frac{\zeta\left(s+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:little-a-integral}\end{equation}
 
 \end_inset 
 
@@ -822,4 +822,50 @@ G(n,\chi)=\sum_{m\mbox{ mod}k}\chi(m)e^{2\pi imn/k}\label{eq:}\end{equation}
 That's all.
  Not sure what more to say at this point.
  -- linas
+\layout Comment
+
+TODO -- The Hurwitz zeta can be avoided entirely by working directly with
+ the functional equation for the L-functions, as given by Apostol, Chapter
+ 12, Theorem 12.11.
+ The direct form seems to imply some sort of result/constraint on the 
+\begin_inset Formula $p\ne1$
+\end_inset 
+
+ terms in the expansion.
+ It also suggests that most of the deriviation above could be made clearer
+ by assuming a generic functional equation, and stating results in terms
+ of that.
+ (e.g.
+ assume Selberg-class type functional equation).
+ 
+\layout Section
+
+Appendix
+\layout Standard
+
+A related but simpler integral can be found in Tom M.
+ Apostol, 
+\emph on 
+Introduction to Analytic Number Theory
+\emph default 
+, Lemma 3, Chapter 13.
+ The integral resembles equation 
+\begin_inset LatexCommand \ref{eq:little-a-integral}
+
+\end_inset 
+
+.
+ Re-expressed so as to heighten the resemblance, it states 
+\begin_inset Formula \begin{eqnarray}
+b_{n}(m) & = & \frac{(-1)^{n}}{2\pi i}\, n!\,\int_{-\frac{3`}{2}-i\infty}^{-\frac{3}{2}+i\infty}\frac{1}{(s+1)m^{s+1}s(s-1)\cdots(s-n)}\, ds\nonumber \\
+ & = & \frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{m^{s}}{s(s+1)\cdots(s+n+1)}\, ds\nonumber \\
+ & = & \begin{cases}
+\frac{1}{n+1}\left(1-\frac{1}{m}\right)^{n+1} & \mbox{for }m\ge1\\
+0 & \mbox{for }m<1\end{cases}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ A naive application of this identity to the integrals in this paper leads
+ to divergent formal sums.
+ 
 \the_end
