@@ -272,7 +272,7 @@ In analogy to the study of the forward differences of the Riemann zeta function,
  the remainder of this paper will concern itself with the analysis of the
  series given by 
 \begin_inset Formula \begin{equation}
-L_{n}=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{L(\chi,p+1)}{p+1}\label{eq:}\end{equation}
+L_{n}=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-coeff}\end{equation}
 
 \end_inset 
 
@@ -635,7 +635,7 @@ and
 
  gives 
 \begin_inset Formula \begin{equation}
-a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi n^{3}}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\sin\left(\frac{2\pi pm}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:}\end{equation}
+a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi n^{3}}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\sin\left(\frac{2\pi pm}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:an-p}\end{equation}
 
 \end_inset 
 
@@ -664,5 +664,59 @@ Conclusion
 \layout Standard
 
 We conclude by breifly returning to the structure of the Dirichlet L-functions.
+ The L-function coefficients defined in equation 
+\begin_inset LatexCommand \ref{eq:L-coeff}
+
+\end_inset 
+
+ are now given by 
+\begin_inset Formula \begin{equation}
+L_{n}=\sum_{m=1}^{k}\chi(m)\left[A_{n}(m,k)+a_{n}(m,k)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ For the non-principal characters, one has 
+\begin_inset Formula $\sum_{m=1}^{k}\chi(m)=0$
+\end_inset 
+
+ and thus, the first term simplifies to 
+\begin_inset Formula \begin{equation}
+\sum_{m=1}^{k}\chi(m)A_{n}(m,k)=\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n+1}+\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ By contrast, the exponentially small term invokes a linear combination
+ of Gauss sums.
+ The Gauss sum associated with a character 
+\begin_inset Formula $\chi$
+\end_inset 
+
+is 
+\begin_inset Formula \begin{equation}
+G(n,\chi)=\sum_{m\mbox{ mod}k}\chi(m)e^{2\pi imn/k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so, to leading order 
+\begin_inset Formula \begin{eqnarray}
+\sum_{m=1}^{k}\chi(m)a_{n}(m,k) & \approx & \frac{1}{2ik}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\nonumber \\
+ &  & \left[\exp i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(1,\chi)-\exp-i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(-1,\chi)\right]\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ The higher-order terms with 
+\begin_inset Formula $p>1$
+\end_inset 
+
+ dropped from equation 
+\begin_inset LatexCommand \ref{eq:an-p}
+
+\end_inset 
+
+ correspond to terms involving 
+\begin_inset Formula $G(p,\chi)$
+\end_inset 
+
+.
  
 \the_end
