@@ -24,6 +24,48 @@
 \papersides 1
 \paperpagestyle default
 
+\layout Standard
+
+Hi Phillipe, 
+\layout Standard
+
+Here's the L-function version.
+ The mechanism for deriving the result is nearly identical to the Riemann
+ case.
+ Doing this helped clarify, for me, the mechanism; several remarks about
+ this.
+ First, instead of considering an approx for cos, its clearer to keep that
+ part exact, and instead consider two integrals.
+ Each integral now has one saddle point, each the complex conjugate of the
+ other.
+ Slightly cleaner, it seems.
+ Also, the saddle-point theorem is used naively, instead of being re-derived.
+ Just plug in the values, and voila.
+ For checking correctness, the Riemann case can be obtained by taking k=m=1
+ fairly naively throughout.
+ 
+\layout Standard
+
+I also seem to be missing an overall factor of 
+\begin_inset Formula $k$
+\end_inset 
+
+ somewhere fairly far in.
+ I haven't proof-read this.
+ Whether or not to fold this with the otther paper or not is up to you.
+ This is an intersting generalization, but I was unable to say anythig wise
+ by the time the end rolled around.
+ 
+\layout Standard
+
+Finally note that a similar derivation may be made for the Dirichlet beta,
+ for which the RH doesn't hold; so this is a more general feature, and not
+ something limited to the Selberg class.
+ It may be instructive to repeat the derivation for anything that has a
+ functional equation, so as to understand how broad the result is.
+\layout Standard
+
+--linas
 \layout Title
 
 Newton Series of L-functions
@@ -591,8 +633,19 @@ Proceeding, one has
 \end_inset 
 
  has been made.
- The asymptotic expansion for the Gamma function is given by the Stirling
- expansion, 
+ More generally, one has 
+\begin_inset Formula \begin{equation}
+\log\zeta(s)=\sum_{n=2}^{\infty}\;\frac{\Lambda(n)}{n^{s}\log n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\Lambda(n)$
+\end_inset 
+
+ is the Mangoldt function.
+ (What about Hurwitz?) The asymptotic expansion for the Gamma function is
+ given by the Stirling expansion, 
 \begin_inset Formula \begin{equation}
 \log\Gamma(x)=\left(x-\frac{1}{2}\right)\log x-x+\frac{1}{2}\log2\pi+\sum_{j=1}^{\infty}\frac{B_{2j}}{2j(2j-1)x^{2j-1}}\label{eq:}\end{equation}
 
