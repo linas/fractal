@@ -1,0 +1,5245 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme pslatex
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+The Bernoulli Operator, the Gauss-Kuzmin-Wirsing Operator, and the Riemann
+ Zeta
+\layout Author
+
+Linas Vepstas <linas@linas.org>
+\layout Date
+
+2 January 2004 (revised 4 January 2005)
+\layout Abstract
+
+The study of the Gauss-Kuzmin-Wirsing (GKW) operator can provide insight
+ into the structure of the Riemann Zeta function, as the Zeta is a Mellin
+ transform of the GKW.
+ Unfortunately, it is quite complex itself, and appears very difficult to
+ solve.
+ This chapter applies some tools developed for the study of fractals, and
+ their symmetries, to discuss and solve some related operators.
+ 
+\layout Abstract
+
+Specifically, the Minkowski Question Mark Function is an isomorphism connecting
+ the dyadic (binary) fractions and the Farey Fractions.
+ The Question Mark embodies the basic Modular Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ symmetries seen in the dyadic and Farey Trees, and thus seen in fractals.
+ This implies that GKW should have a set of modular-group symmetries as
+ well, which in turn might extend onto the Riemann Zeta.
+ 
+\layout Abstract
+
+This chapter develops some of the tools for studying chaotic maps, specifically
+ the idea of studying the Frobenius-Perron (FP) or Transfer operator of
+ a chaotic map.
+ The FP operator of the map that generates continued fractions is the GKW.
+ We thus apply the modular group symmetries of the continued fractions to
+ study the GKW.
+ In the process, we explicitly demonstrate several operators whose point-wise
+ orbits are completely isomorphic, and yet whose spectra are inequivalent.
+ This surprising result is possible only because the isomorphism is highly
+ singular (namely, the Minkowski Question Mark).
+ 
+\layout Abstract
+
+The general presentation attempts to assume very little prior acquaintance
+ with the concepts, and attempts a pedagogical approach.
+ This paper is part of a set of chapters that explore the relationship between
+ the real numbers, the modular group, and fractals.
+\layout Section
+
+The Bernoulli Operator, the Gauss-Kuzmin-Wirsing Operator and the Riemann
+ Zeta
+\layout Standard
+
+THIS IS A DRAFT WORK IN PROGRESS.
+ The intro hasn't been written yet.
+\layout Standard
+
+One of the new results is a demonstration that the Frobenius-Perron operator
+ can have a continuous spectrum that is 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+which flies in the face of common assumptions that the spectrum is either
+ discrete with 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ eigenfunctions, or is continuous, with non-differentiable (fractal) eigenfuncti
+ons.
+ Of course, there is a catch: the eigenfunctions are differentiable everywhere
+ except at the endpoints, which does render them 
+\begin_inset Quotes eld
+\end_inset 
+
+non-physical
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ Explicit transformations between these and the fractal eigenfunctions are
+ presented.
+ 
+\layout Standard
+
+The general layout is:
+\layout Standard
+
+-- present the Frobenius-Perron operator, which is our core tool
+\layout Standard
+
+-- analyze the Bernoulli Operator, which is exactly solvable, and has a
+ rich structure
+\layout Standard
+
+-- present the Hurwitz Zeta eigenfunctions
+\layout Standard
+
+-- present the topological zeta function
+\layout Standard
+
+-- present the Gauss-Kuzmin-Wirsing operator
+\layout Standard
+
+-- review its connection to the Riemann Zeta
+\layout Standard
+
+-- Solve the two sawtooth functions
+\layout Standard
+
+-- Review Farey/Isola Map
+\layout Standard
+
+Some of the sections, including section 3.2 on orthogonality and completeness,
+ are akwardly presented.
+ The topic is subtle, the notation is not elegant.
+ In a certain sense, this paper illustrates all the wrong ways in which
+ to present the notions of completeness with regards to a Hilbert space.
+ The notions of what is fractal, and what is differentiable, and what is
+ an operator, and what is an eigenvalue, is mudied as a result.
+ The journey, however faulty, is still educational, though.
+ To do: Riesz representation thm 
+\layout Section
+
+The Frobenius-Perron Operator of the Bernoulli Map
+\layout Standard
+
+The Bernoulli map is an exactly solvable example of deterministic chaos.
+ This map is presented in 
+\begin_inset LatexCommand \cite{key-10}
+
+\end_inset 
+
+ and a more thorough exposition of it is provided in 
+\begin_inset LatexCommand \cite{key-2}
+
+\end_inset 
+
+.
+ However, these authors seem to have missed or ignored certain key aspects
+ of the operator, including the fact that the Hurwitz Zeta function is an
+ eigenvector, as well as the action of the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ as a symmetry group playing an important part in the analysis.
+ Thus, we recap the results here, using simpler techniques, and then (making
+ use of these simpler tools) extend the results in several directions.
+ The motivation for the detailed development is, of course, that we will
+ want to extend these tools to the GKW operator.
+ 
+\layout Standard
+
+The Bernoulli map is given by 
+\begin_inset Formula \begin{equation}
+b(x)=2x-\left\lfloor 2x\right\rfloor \label{eq:}\end{equation}
+
+\end_inset 
+
+ and can be thought of as popping the leading digit off of the binary expansion
+ of 
+\begin_inset Formula $x.$
+\end_inset 
+
+ This map has a positive Lyapunov exponent and is highly chaotic, as, in
+ a certain sense, one can say that the digits of the binary expansion of
+ some 'arbitrary' number are unpredictable, and that the orbits of two close-by
+ numbers will eventually become 'uncorellated' (after suitably defining
+ what we mean by 'arbitrary' and 'unpredictable').
+ 
+\layout Standard
+
+The Frobenius-Perron operator of the Bernoulli map is given by
+\begin_inset Formula \begin{equation}
+\left[U_{B}f\right](x)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\layout Standard
+
+Blah blah blah.
+ How much more here do we want to say? A lot, apparently.
+\layout Subsection
+
+The Polynomial Representation
+\layout Standard
+
+Well, Provide the matrix elements.
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\left[U_{B}\right]_{mk}\equiv U_{mk}\equiv\left\langle m\right|U\left|k\right\rangle =\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
+k\\
+m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\left(\begin{array}{c}
+m\\
+k\end{array}\right)$
+\end_inset 
+
+ is the binomial coefficient, and 
+\begin_inset Formula \begin{equation}
+\Theta_{mk}=\left\{ \begin{array}{c}
+0\;\textrm{ if }\; k\leq m\\
+1\;\textrm{ if }\; k>m\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ is a traceless, pure upper-triangular matrix.
+ Thus, for the polynomial eigenstates, we can promptly read the eigenvalues
+ off the diagonal; these eigenvalues are 
+\begin_inset Formula $\lambda_{n}=2^{-n}$
+\end_inset 
+
+.
+ Because the matrix is upper-triangular, it is easily solvable for both
+ the left and right eigenvectors, which agree perfectly w/ Driebe
+\begin_inset LatexCommand \cite{key-2}
+
+\end_inset 
+
+.
+ Visually, the upper-left of this matrix looks like 
+\begin_inset Formula \begin{equation}
+U_{mk}=\left[\begin{array}{cccccc}
+1 & \frac{1}{4} & \frac{1}{8} & \frac{1}{16} & \frac{1}{32} & ...\\
+0 & \frac{1}{2} & \frac{1}{4} & \frac{3}{16} & \frac{1}{8}\\
+0 & 0 & \frac{1}{4} & \frac{3}{16} & \frac{3}{16}\\
+0 & 0 & 0 & \frac{1}{8} & \frac{1}{8}\\
+0 & 0 & 0 & 0 & \frac{1}{16}\\
+... &  &  &  &  & ...\end{array}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+The right eigenvectors are denoted by 
+\begin_inset Formula $\left|B_{n}\right\rangle $
+\end_inset 
+
+ and have the vector components 
+\begin_inset Formula \begin{equation}
+\left\langle k|B_{n}\right\rangle =\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(1-\Theta_{n,k}\right)B_{n-k}=\left\{ \begin{array}{ccc}
+\left(\begin{array}{c}
+n\\
+k\end{array}\right)B_{n-k} & \;\textrm{ for }\; & k\leq n\\
+0 & \;\textrm{ for }\; & k>n\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $B_{k}$
+\end_inset 
+
+ are the Bernoulli numbers.
+ We can verify this by multiplying the eigenvector into the matrix: 
+\begin_inset Formula \begin{eqnarray}
+\sum_{k=0}^{\infty}\left\langle m\right|U\left|k\right\rangle \left\langle k|B_{n}\right\rangle  & = & \sum_{k=m}^{n}\left[\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
+k\\
+m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\right]\left(\begin{array}{c}
+n\\
+k\end{array}\right)B_{n-k}\nonumber \\
+ & = & \frac{1}{2^{m}}\left(\begin{array}{c}
+n\\
+m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\nonumber \\
+ & = & \lambda_{n}\left\langle m|B_{n}\right\rangle \label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ In coordinate space, the right eigenvectors are the Bernoulli polynomials.
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\sum_{k=0}^{\infty}\left\langle x|k\right\rangle \left\langle k|B_{n}\right\rangle =\sum_{k=0}^{n}\left(\begin{array}{c}
+n\\
+k\end{array}\right)B_{n-k}x^{k}=B_{n}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which we can verify explicitly by substituting into the function-operator
+ form of the map:
+\begin_inset Formula \begin{eqnarray}
+\left[U_{B}B_{n}\right](x) & = & \frac{1}{2}\left[B_{n}\left(\frac{x}{2}\right)+B_{n}\left(\frac{x+1}{2}\right)\right]\nonumber \\
+ & = & \lambda_{n}B_{n}(x)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ The last identity follows from the 
+\begin_inset Quotes eld
+\end_inset 
+
+multiplication formula
+\begin_inset Quotes erd
+\end_inset 
+
+ for Bernoulli polynomials.
+\layout Standard
+
+The left eigenvectors are denoted by 
+\begin_inset Formula $\left\langle \tilde{B}_{n}\right|$
+\end_inset 
+
+and, for 
+\begin_inset Formula $n>0$
+\end_inset 
+
+, have the components 
+\begin_inset Formula \begin{equation}
+\left\langle \tilde{B}_{n}|k\right\rangle =\left(\begin{array}{c}
+k\\
+n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The zeroth left eigenvector is a special-case; it has components 
+\begin_inset Formula $\left\langle \tilde{B}_{0}|k\right\rangle =1/(k+1)$
+\end_inset 
+
+.
+ The left eigenvectors can also be written out in coordinate space: 
+\begin_inset Formula \begin{eqnarray}
+\left\langle \tilde{B}_{n}|x\right\rangle  & = & \sum_{k=0}^{\infty}\left\langle \tilde{B}_{n}|k\right\rangle \left\langle k|x\right\rangle \nonumber \\
+ & = & \sum_{k=0}^{\infty}\left\langle \tilde{B}_{n}|k\right\rangle (-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
+ & = & \frac{1}{n}\sum_{k=n}^{\infty}\left(\begin{array}{c}
+k\\
+n-1\end{array}\right)(-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
+ & = & \frac{(-)^{n+1}}{n!}\left[\delta^{(n-1)}(1-x)-\delta^{(n-1)}(x)\right]\label{eq:left bernoulli}\end{eqnarray}
+
+\end_inset 
+
+ for the 
+\begin_inset Formula $n>0$
+\end_inset 
+
+case.
+ The 
+\begin_inset Formula $n=0$
+\end_inset 
+
+ left eigenvector is best understood by integrating it over some arbitrary
+ function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{eqnarray}
+\int_{0}^{1}dx\,\left\langle \tilde{B}_{0}|x\right\rangle f(x) & = & \int_{0}^{1}dx\, f(x)\sum_{k=0}^{\infty}(-)^{k}\frac{\delta^{(k)}(x)}{(k+1)!}\nonumber \\
+ & = & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{(k+1)!}\nonumber \\
+ & = & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}\int_{0}^{1}x^{k}dx\nonumber \\
+ & = & \int_{0}^{1}f(x)dx\nonumber \\
+ & = & \left\langle \tilde{B}_{0}|f\right\rangle \label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Its instructive to look at the other left eigenvectors acting on some function
+ 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+; these can be written as 
+\begin_inset Formula \begin{equation}
+\left\langle \tilde{B}_{n}|f\right\rangle =\frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+Note that the left eigenvectors are adjoint to the Bernoulli polynomials.
+ Thus, the identity operator 
+\begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
+\end_inset 
+
+ turns out to be the Euler-Maclaurin summation formula in disguise, which
+ we can see more easily by writing 
+\begin_inset Formula \begin{eqnarray}
+f(x) & = & \left\langle x|f\right\rangle \nonumber \\
+ & = & \sum_{m=0}^{M}B_{m}(x)\left\langle \tilde{B}_{m}|f\right\rangle -\frac{1}{(M+1)!}\int_{0}^{1}dy\, B_{M+1}(x-y)\; f^{(M)}(y)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Its not to hard to explicitly validate completeness: one finds that 
+\begin_inset Formula \begin{equation}
+\left\langle j\left|\mathbb{I}_{B}\right|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Naively, the Euler-MacLaurin formula, one is tempted to deduce orthogonality
+ over coordinate space.
+ That is, from 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}\left\langle x|B_{n}\right\rangle \left\langle \tilde{B}_{n}|f\right\rangle =f(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ one wants to deduce that 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}\left\langle x|B_{n}\right\rangle \left\langle \tilde{B}_{n}|y\right\rangle =\delta(x-y)\label{eq: Bernoulli-faulty}\end{equation}
+
+\end_inset 
+
+However, this equation is 
+\begin_inset Quotes eld
+\end_inset 
+
+wrong
+\begin_inset Quotes erd
+\end_inset 
+
+ in a certain sense, as discussed in the next section.
+ The operator 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ is in fact a projection operator; it has a large kernel.
+ 
+\layout Standard
+
+Thus, in the polynomial representation, the Frobenius-Perron operator of
+ the Bernoulli map is 
+\begin_inset Formula \begin{equation}
+U_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \lambda_{n}\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ We can make use of this diagonal form to easily compute formal expressions
+ involving 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+.
+ Thus, for a function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ that is expressible as a polynomial series in 
+\begin_inset Formula $x$
+\end_inset 
+
+, we can write the operator 
+\begin_inset Formula \begin{equation}
+f\left(U_{B}\right)=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle f\left(\lambda_{n}\right)\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ whose matrix elements we can explicitly demonstrate in the monomial basis:
+ 
+\begin_inset Formula \begin{equation}
+\left\langle j\left|f\left(U_{B}\right)\right|k\right\rangle =\sum_{j\leq n\leq k}\left(\begin{array}{c}
+n\\
+j\end{array}\right)\left(\begin{array}{c}
+k\\
+n-1\end{array}\right)\frac{B_{n-j}}{n}f\left(2^{-n}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ This allows us to write, for example, 
+\begin_inset Formula $U_{B}=\exp(-H_{B})$
+\end_inset 
+
+ so that 
+\begin_inset Formula $H_{B}=-\log U_{B}$
+\end_inset 
+
+ has matrix elements 
+\begin_inset Formula \begin{equation}
+\left\langle j\left|H_{B}\right|k\right\rangle =\frac{\log(2)}{k+1}\left(\begin{array}{c}
+k+1\\
+j\end{array}\right)\sum_{m=0}^{k-j}\left(\begin{array}{c}
+k-j+1\\
+m\end{array}\right)(j+m)\, B_{m}\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\layout Subsection
+
+Completeness and Orthogonality
+\layout Standard
+
+The notions of completeness and orthogonality are somewhat cavalierly treated
+ above.
+ We attempt to remedy this here.
+ The operator 
+\begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
+\end_inset 
+
+, although appearing to embody a certain notion of 
+\begin_inset Quotes eld
+\end_inset 
+
+completeness
+\begin_inset Quotes erd
+\end_inset 
+
+, is in fact a projection operator when considered on a larger set of states.
+ In fact, it has a large kernel, consisting of all functions odd about 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+, that is, all functions can be written as 
+\begin_inset Formula \begin{equation}
+f(x)=\sum_{k=1}^{\infty}a_{k}\sin(2\pi kx)\label{eq:}\end{equation}
+
+\end_inset 
+
+ This is easily seen by noting that 
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray}
+\int_{0}^{1}dx\,\tilde{B}_{n}(x)\,\sin(2\pi kx) & = & \frac{1}{n!}\left[\left.\frac{d^{n-1}\sin2\pi kx}{dx^{n-1}}\right|_{x=1}-\left.\frac{d^{n-1}\sin2\pi kx}{dx^{n-1}}\right|_{x=0}\right]\label{eq:}\\
+ & = & 0\nonumber \end{eqnarray}
+
+\end_inset 
+
+ where we've written 
+\begin_inset Formula $\tilde{B}_{n}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $\left\langle \tilde{B}_{n}|x\right\rangle $
+\end_inset 
+
+.
+ Perhaps this lack of completess is due to the form of the left eigenstates
+ given in equation 
+\begin_inset LatexCommand \ref{eq:left bernoulli}
+
+\end_inset 
+
+.
+ So we make a guess that perhaps a more truly complete set of states can
+ be found by considering 
+\begin_inset Formula \begin{equation}
+\tilde{S}_{n}(x)=\frac{(-)^{n+1}}{n!}\left[\delta^{(n-1)}(1-x)+\delta^{(n-1)}(x)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ so that sums and differences of the duals 
+\begin_inset Formula $\tilde{B}_{m}(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\tilde{S}_{n}(x)$
+\end_inset 
+
+ can be used to regain the duals to the monomials 
+\begin_inset Formula $\left\langle n|y\right\rangle =(-)^{n}\delta^{(n)}(y)/n!$
+\end_inset 
+
+.
+ 
+\layout Description
+
+Theorem: The duals to 
+\begin_inset Formula $\tilde{S}_{n}(x)$
+\end_inset 
+
+ are given by 
+\begin_inset Formula $S_{n}(x)=nE_{n}(x)/2$
+\end_inset 
+
+ where the 
+\begin_inset Formula $E_{n}(x)$
+\end_inset 
+
+ are the Euler polynomials.
+ 
+\layout Description
+
+Proof: Consider the generating function for the Euler polynomials 
+\begin_inset Formula \begin{equation}
+G_{E}(x,t)=\frac{2e^{xt}}{1+e^{t}}=\sum_{n=0}^{\infty}E_{n}(x)\frac{t^{n}}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Then one has, by taking the left hand side, 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}\tilde{S}_{n}(x)\,\frac{2e^{xt}}{1+e^{t}}\, dx=\frac{2}{n}\frac{t^{n-1}}{(n-1)!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and, performing the same operation on the right hand side, 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}\tilde{S}_{n}(x)\sum_{k=0}^{\infty}E_{k}(x)\frac{t^{k}}{k!}\; dx=\sum_{k=0}^{\infty}\frac{t^{k}}{k!}\int_{0}^{1}\tilde{S}_{n}(x)\, E_{k}(x)\, dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ Then, equating the two sides, we have demonstrated orthogonality of the
+ dual states: 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}\tilde{S}_{n}(x)\, E_{k}(x)\, dx=\frac{2\delta_{k,n-1}}{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ QED.
+\layout Standard
+
+From this orthogonality relationship follows a certain restricted completeness
+ statement in coordinate space.
+ That is, if we decompose a function 
+\begin_inset Formula $f(y)=\sum_{k=1}^{\infty}a_{k}S_{k}(y)$
+\end_inset 
+
+ then one easily finds 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}\sum_{n=1}^{\infty}S_{n}(x)\tilde{S}_{n}(y)\, f(y)\, dy=f(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ from which one wants to conclude, incorrectly, that 
+\begin_inset Formula \begin{equation}
+\sum_{n=1}^{\infty}S_{n}(x)\tilde{S}_{n}(y)=\delta(x-y)\label{eq:}\end{equation}
+
+\end_inset 
+
+ using the same faulty logic as in equation 
+\begin_inset LatexCommand \ref{eq: Bernoulli-faulty}
+
+\end_inset 
+
+.
+ The fault is the assumption that 
+\begin_inset Formula $f(y)$
+\end_inset 
+
+ can be decomposed in the fashion given.
+ In fact, the operator 
+\begin_inset Formula $\mathbb{I}_{S}=\sum_{n=0}^{\infty}\left|S_{n}\right\rangle \left\langle \tilde{S}_{n}\right|$
+\end_inset 
+
+ has a large kernel: this time, all functions that are even about 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+ are in the kernel.
+ One might hope that one can remedy the above situation by taking the sum
+ 
+\begin_inset Formula $\mathbb{I}_{C}=\mathbb{I}_{B}+\mathbb{I}_{S}$
+\end_inset 
+
+ with one operator projecting out the even functions, and the other the
+ odd functions, but, between the two of them, making a whole.
+ However, one immediately runs into a problem with the basis functions.
+ The 
+\begin_inset Formula $\tilde{S}_{n}(x)$
+\end_inset 
+
+ are not orthogonal to the 
+\begin_inset Formula $B_{n}(x)$
+\end_inset 
+
+, and vice-versa.
+ This is easily seen by considering the the generating function for the
+ Bernoulli polynomials: 
+\begin_inset Formula \begin{equation}
+G_{B}(x,t)=\frac{te^{xt}}{e^{t}-1}=\sum_{n=0}^{\infty}B_{n}(x)\frac{t^{n}}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+Integrating, one gets 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}\tilde{S}_{n}(x)G_{B}(x,t)\, dx=\frac{t^{n}}{n!}\frac{e^{t}+1}{e^{t}-1}=\sum_{k=0}^{\infty}\frac{t^{k}}{k!}\int_{0}^{1}\tilde{S}_{n}(x)\, B_{k}(x)\, dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ from which one deduces that 
+\begin_inset Formula $\int_{0}^{1}\tilde{S}_{n}(x)\, B_{k}(x)\, dx=0$
+\end_inset 
+
+ only for 
+\begin_inset Formula $k<n-1$
+\end_inset 
+
+, and similarly for 
+\begin_inset Formula $\int_{0}^{1}\tilde{B}_{n}(x)\, S_{k}(x)\, dx$
+\end_inset 
+
+.
+\layout Subsection
+
+Basis Confusion Redux
+\layout Standard
+
+The nature and meaning of 
+\begin_inset Quotes eld
+\end_inset 
+
+vector space basis
+\begin_inset Quotes erd
+\end_inset 
+
+ is perhaps a bit confusing in Hilbert Space.
+ It is hard to discuss the notion of what an operator 
+\begin_inset Quotes eld
+\end_inset 
+
+is
+\begin_inset Quotes erd
+\end_inset 
+
+ without also discussing the basis at the same time.
+ Removing this confusion takes mathematical techniques beyond the scope
+ of this paper.
+ In this section, we'll merely review some of the sources of confusion,
+ and some of the notational devices that help minimize it.
+ We begin by asking, 
+\begin_inset Quotes eld
+\end_inset 
+
+what is the operator 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+, really
+\begin_inset Quotes erd
+\end_inset 
+
+? We saw above that the monomials form a complete set of basis states that
+ can be used to represent analytic functions.
+ The operator 
+\begin_inset Formula $\mathbb{I}_{M}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
+\end_inset 
+
+ can be called the identity operator over the space of real analytic functions;
+ it has no kernel in that space.
+ Here, the subscript 
+\begin_inset Formula $M$
+\end_inset 
+
+ is used to remind us that the identity operator is built from the monomial
+ states.
+ Thus, we can write 
+\begin_inset Formula $U_{B}=\mathbb{I}_{M}U_{B}\mathbb{I}_{M}$
+\end_inset 
+
+ which expands to 
+\begin_inset Formula \begin{equation}
+U_{B}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|m\right\rangle \left\langle m\left|U_{B}\right|n\right\rangle \left\langle n\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ As we saw above, the matrix elements 
+\begin_inset Formula $U_{mn}\equiv\left\langle m\left|U\right|n\right\rangle $
+\end_inset 
+
+ are upper-triangular, and so one wants to say that the operator 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ is clearly not Hermitian.
+ And yet, we can use the same trick to write 
+\begin_inset Formula $U_{B}=\mathbb{I}_{B}U_{B}\mathbb{I}_{B}$
+\end_inset 
+
+ to get matrix elements that are clearly non-zero only on the diagonal:
+ 
+\begin_inset Formula $\left\langle B_{m}\left|U_{B}\right|\tilde{B}_{n}\right\rangle =\delta_{mn}\lambda_{n}$
+\end_inset 
+
+.
+ Matrixes that are diagonal and have only real entries on the diagonal are
+ clearly Hermitian, so this implies that 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ is Hermitian.
+ So which is it? Is it Hermitian or not? Some of the confusion is due to
+ the fact that the use of the operator notation carries hidden with it an
+ implied choice of basis, and, so in the above, we have made an inadvertent
+ change of basis, which is 
+\begin_inset Quotes eld
+\end_inset 
+
+invisible
+\begin_inset Quotes erd
+\end_inset 
+
+ when we write things like 
+\begin_inset Formula $U_{B}=\mathbb{I}_{M}U_{B}\mathbb{I}_{M}$
+\end_inset 
+
+.
+ Much of the confusion is due to the fact that in a Hilbert space, the concept
+ of orthonormality violates the notions one gets from working with finite-dimens
+ional basis.
+ Lets show this change of basis explicitly.
+ We write 
+\begin_inset Formula \begin{eqnarray}
+U_{diagonal} & = & \sum_{j,k=0}^{\infty}\left|B_{j}\right\rangle \delta_{jk}\lambda_{k}\left\langle \tilde{B}_{k}\right|\nonumber \\
+ & = & \sum_{j,k,m,n=0}^{\infty}\left|B_{j}\right\rangle \left\langle \tilde{B}_{j}|m\right\rangle \left\langle m\left|U_{monomial}\right|n\right\rangle \left\langle n|B_{k}\right\rangle \left\langle \tilde{B}_{k}\right|\nonumber \\
+ & = & \tilde{B}\, U_{monomial}\, B\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ where the operators 
+\begin_inset Formula $\tilde{B}$
+\end_inset 
+
+ and 
+\begin_inset Formula $B$
+\end_inset 
+
+ show the change of basis: 
+\begin_inset Formula \begin{equation}
+\tilde{B}=\sum_{j,m=0}^{\infty}\left|B_{j}\right\rangle \left\langle \tilde{B}_{j}|m\right\rangle \left\langle m\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n|B_{k}\right\rangle \left\langle \tilde{B}_{k}\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ It is not hard to work out that 
+\begin_inset Formula $\tilde{B}B=\mathbb{I}_{B}$
+\end_inset 
+
+ and that 
+\begin_inset Formula $B\tilde{B}=\mathbb{I}_{M}$
+\end_inset 
+
+ so that, in a certain sense 
+\begin_inset Formula $\tilde{B}$
+\end_inset 
+
+ is both a left- and right-inverse of 
+\begin_inset Formula $B$
+\end_inset 
+
+.
+ However, 
+\begin_inset Formula $B$
+\end_inset 
+
+ is not orthogonal in the traditional sense: we had demonstrated the matrix
+ elements up above, and we clearly have 
+\begin_inset Formula $\left\langle n|B_{k}\right\rangle \neq\left\langle \tilde{B}_{n}|k\right\rangle $
+\end_inset 
+
+.
+ What makes this seem so strange is that both the monomial basis states
+ 
+\begin_inset Formula $\left|n\right\rangle $
+\end_inset 
+
+ and the Bernoulli polynomial basis states 
+\begin_inset Formula $\left|B_{j}\right\rangle $
+\end_inset 
+
+ are both complete and orthogonal.
+ From experience working with finite-dimensional matrices, we are accustomed
+ to believe that any change of basis between a set of ortho-normal basis
+ states is given by a similarity matrix with is orthogonal.
+ We see here that for infinite-dimensional spaces, that this is not the
+ case.
+ 
+\layout Standard
+
+XXX I'm still troubled by this.
+ Its not completely clear that the space spanned by the monomial basis is
+ really identical to the space spanned by the Bernoulli polynomial basis.
+ Either set of basis functions seems to be in a certain sense 
+\begin_inset Quotes eld
+\end_inset 
+
+complete
+\begin_inset Quotes erd
+\end_inset 
+
+, but we haven't truly proven the following: Thm: Consider a larger space
+ of functions, for example, the space of square integrable functions.
+ Then consider 
+\begin_inset Formula $\mathbb{I}_{M}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ as projection operators on this space.
+ Then is the image of 
+\begin_inset Formula $\mathbb{I}_{M}$
+\end_inset 
+
+ equal to image of 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ when embedded in this larger space?
+\layout Subsection
+
+The Fourier Representation 
+\layout Standard
+
+The Koopman operator of the Bernoulli Map has the property of taking a function
+ and making two copies of it.
+ That is, 
+\begin_inset Formula \begin{eqnarray}
+\left[K_{B}f\right](y) & = & \int_{0}^{1}\delta\left(x-b(y)\right)f(x)\, dx\nonumber \\
+ & = & f(b(y))\nonumber \\
+ & = & f(2y)\theta(1-2y)+f(2y-1)\theta(2y-1)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\theta(x)$
+\end_inset 
+
+ is the step function, identically zero for 
+\begin_inset Formula $x<0$
+\end_inset 
+
+ and identically one for 
+\begin_inset Formula $x>0$
+\end_inset 
+
+.
+ The Koopman operator for the Bernoulli map is not faithfully representable
+ in the polynomial basis; this can be seen in two ways.
+ First, it introduces a discontinuity at 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+ which the polynomials cannot move beyond; the radius of the circle of converge
+ is limited by this singularity.
+ Secondly, it takes a function and more-or-less makes it periodic; again,
+ the polynomials cannot cope directly with this.
+ Thus, we are motivated to explore the Fourier representation, if only to
+ express the Koopman operator.
+ 
+\layout Standard
+
+It turns out to be exceedingly simple to find this operator in the Fourier
+ basis.
+ If we write 
+\begin_inset Formula \begin{equation}
+f(x)=\sum_{n}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\label{eq:}\end{equation}
+
+\end_inset 
+
+ then 
+\begin_inset Formula \begin{equation}
+\left[K_{B}f\right](x)=\sum_{n}a_{n}\cos4\pi nx\;+b_{n}\sin4\pi nx\label{eq:}\end{equation}
+
+\end_inset 
+
+ or, in Dirac notation, 
+\begin_inset Formula $\left\langle em|K_{B}|en\right\rangle =\delta_{2m,n}$
+\end_inset 
+
+.
+ This is a very singular operator in this basis.
+ Visually, it has the distinctive appearance of 
+\begin_inset Formula \begin{equation}
+K_{B}=\left[\begin{array}{cccccc}
+1 & 0 & 0 & 0 & 0 & ...\\
+0 & 0 & 0 & 0 & ...\\
+0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & ...\\
+...\end{array}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where every other row consists of zeros.
+ In this same basis, 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+is equally remarkable: it is literally the transpose: that is 
+\begin_inset Formula $K_{B}=U_{B}^{T}$
+\end_inset 
+
+ in this basis, and so 
+\begin_inset Formula \begin{equation}
+U_{B}=\left[\begin{array}{cccccc}
+1 & 0 & 0 & 0 & 0 & ...\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & ...\\
+...\end{array}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ We can see that in this representation, we have 
+\begin_inset Formula $U_{B}K_{B}=1$
+\end_inset 
+
+ but 
+\begin_inset Formula $K_{B}U_{B}\neq1$
+\end_inset 
+
+, just as in the coordinate-space representation.
+ It is very instructive to verify that the Bernoulli polynomials are still
+ eigenfunctions in this representation.
+ For 
+\begin_inset Formula $n\neq0$
+\end_inset 
+
+, we have 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}B_{1}(x)\,\sin(2\pi nx)\, dx=\frac{-1}{\pi n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and it is straightforward to visually verify that 
+\begin_inset Formula $U_{B}B_{1}=\frac{1}{2}B_{1}$
+\end_inset 
+
+.
+ By working with the generator for the Bernoulli polynomials, 
+\begin_inset Formula \begin{equation}
+\frac{te^{xt}}{e^{t}-1}=\sum_{n=0}^{\infty}B_{n}(x)\,\frac{t^{n}}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ one can immediately find, for 
+\begin_inset Formula $m\neq0$
+\end_inset 
+
+, the Fourier components 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}B_{n}(x)\,\cos(2\pi mx)\, dx=\left\{ \begin{array}{cc}
+0 & \;\textrm{ for n odd }\\
+\left(-\right)^{1+n/2}n!/\left(2\pi m\right)^{n} & \;\textrm{ for n even }\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}B_{n}(x)\,\sin(2\pi mx)\, dx=\left\{ \begin{array}{cc}
+0 & \;\textrm{ for n even }\\
+\left(-\right)^{(n+1)/2}n!/\left(2\pi m\right)^{n} & \;\textrm{ for n odd }\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ Applying the Fourier-representation 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ to these to these vector components makes it immediately clear how the
+ eigenvalue of 
+\begin_inset Formula $1/2^{n}$
+\end_inset 
+
+ is associated with the eigenvector 
+\begin_inset Formula $B_{n}$
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+The Hurwitz Zeta Eigenfunctions
+\layout Standard
+
+The Fourier representation also makes it clear that any vector with vector
+ components 
+\begin_inset Formula $a_{n}=1/n^{s}$
+\end_inset 
+
+ will be an eigenvector of 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ associated with the eigenvalue 
+\begin_inset Formula $\lambda=1/2^{s}$
+\end_inset 
+
+.
+ In coordinate space, we can write these eigenfunctions as 
+\begin_inset Formula \begin{equation}
+\beta(x;s)=2\Gamma(s+1)\sum_{n=1}^{\infty}\frac{\exp(2\pi inx)}{\left(2\pi n\right)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ which transform as 
+\begin_inset Formula $U_{B}\beta(x;s)=2^{-s}\beta(x;s)$
+\end_inset 
+
+.
+ Given the nature of summation, we see that the series is strictly convergent
+ for any complex-valued 
+\begin_inset Formula $s$
+\end_inset 
+
+ with 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+.
+ This series recreates the Bernoulli polynomials for integer values of 
+\begin_inset Formula $n$
+\end_inset 
+
+, so for example, 
+\begin_inset Formula $\Re\beta(x;2)=B_{2}(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\Im\beta(x;3)=B_{3}(x)$
+\end_inset 
+
+ and generally 
+\begin_inset Formula $\Re\left[\left(-i\right)^{n}\beta(x;n)\right]=-B_{n}(x)$
+\end_inset 
+
+.
+ Equivalently, the Fourier series for the Bernoulli Polynomials can be written
+ as 
+\begin_inset Formula \begin{eqnarray}
+B_{n}(x) & = & -\Gamma(n+1)\sum_{k=1}^{\infty}\frac{\exp(2\pi ikx)+\exp(2\pi ik(1-x))}{\left(2\pi ik\right)^{n}}\label{eq:}\\
+ & = & \frac{-(-i)^{n}}{2}\left(\beta(x;n)+\beta(1-x;n)\right)\nonumber \end{eqnarray}
+
+\end_inset 
+
+See, for example 
+\begin_inset LatexCommand \cite[Thm. 12.19]{key-13}
+
+\end_inset 
+
+.
+ It turns out that these eigenfunctions are essentially a form of the Hurwitz
+ Zeta function 
+\begin_inset Formula \begin{equation}
+\zeta(s,x)=\sum_{n=0}^{\infty}\frac{1}{\left(n+x\right)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and that, in fact, the Hurwitz Zeta itself is an eigenfunction, with eigenvalue
+ 
+\begin_inset Formula $2^{s-1}$
+\end_inset 
+
+.
+ We can confirm this by following a very old-fashioned recipe for obtaining
+ the functional relation for a zeta-like sum.
+ We start by expressing the gamma function as 
+\begin_inset Formula \begin{equation}
+\int_{0}^{\infty}dy\, e^{-2\pi ny}y^{s-1}=\frac{\Gamma(s)}{(2\pi n)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Substituting into the expression for 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ and performing the sum, we find we can write 
+\begin_inset Formula \begin{equation}
+\beta(x;s)=2s\int_{0}^{\infty}dy\,\frac{y^{s-1}}{\exp\left(-2\pi i(x+iy)\right)-1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Then, following a traditional trick 
+\begin_inset LatexCommand \cite{key-11}
+
+\end_inset 
+
+ we can re-write this as a contour integral 
+\begin_inset Formula \begin{equation}
+\beta(x;s)=\frac{-is}{\sin\pi s}\oint\frac{(-y)^{s}}{\exp\left(-2\pi i(x+iy)\right)-1}\;\frac{dy}{y}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the contour is taken to extend from 
+\begin_inset Formula $+\infty+i\epsilon$
+\end_inset 
+
+, running just above the positive real axis, to the origin, circling the
+ origin in a clockwise fashion, and returning to 
+\begin_inset Formula $+\infty-i\epsilon$
+\end_inset 
+
+ just under the real axis.
+ The contour essentially encloses the cut of the logarithm in the expression
+ 
+\begin_inset Formula $(-y)^{s}=\exp s\,\log(-y)$
+\end_inset 
+
+.
+ The old fashioned recipe calls for closing the contour at infinity (in
+ a counter-clockwise direction) and then taking the dubious step of asserting
+ Cauchy's Theorem to equate the integral around the cut to the sum of the
+ poles, where we note that we have a pole whenever 
+\begin_inset Formula $x+iy=n$
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ By doing this we get the formal summation 
+\begin_inset Formula \begin{equation}
+\frac{i\sin\pi s}{s}\beta(x;s)=\exp\left(\frac{i\pi s}{2}\right)\sum_{n=-\infty}^{\infty}(n-x)^{s-1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ We call this a formal sum, since the preceding steps required taking 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+ whereas now we need to take 
+\begin_inset Formula $\Re s<0$
+\end_inset 
+
+.
+ This is a bit of jiggery-pokery that is common for this type of presentation;
+ and a different set of tools is required to do better.
+ So we proceed, ignoring these difficulties.
+ We re-write this sum as 
+\begin_inset Formula \begin{equation}
+\frac{i\sin\pi s}{s}\beta(x;s)=\exp\left(\frac{i\pi s}{2}\right)\left[\sum_{n=0}^{\infty}(n+(1-x))^{s-1}+e^{-i\pi(s-1)}\sum_{n=0}^{\infty}(n+x)^{s-1}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where we were mindful to rotate counter-clockwise for 
+\begin_inset Formula $n<0$
+\end_inset 
+
+ when replacing 
+\begin_inset Formula $(-)^{n}$
+\end_inset 
+
+ by 
+\begin_inset Formula $e^{-i\pi n}$
+\end_inset 
+
+ instead of the sloppy and incorrect 
+\begin_inset Formula $e^{i\pi n}$
+\end_inset 
+
+.
+ Recognizing the sums as the Hurwitz Zeta, this then gives us the desired
+ result: 
+\begin_inset Formula \begin{equation}
+\beta(x;s)=\frac{is}{\sin\pi s}\left[e^{-i\pi s/2}\zeta(1-s,x)-e^{i\pi s/2}\zeta(1-s,1-x)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ It is straightforward to invert this and solve for 
+\begin_inset Formula $\zeta$
+\end_inset 
+
+; one gets 
+\begin_inset Formula \begin{equation}
+\zeta(1-s,x)=\frac{1}{2s}\left[e^{-i\pi s/2}\beta(x;s)+e^{i\pi s/2}\beta(1-x;s)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ thus proving the assertion that the Hurwitz Zeta is an eigenfunction of
+ the Bernoulli Operator, with eigenvalue 
+\begin_inset Formula $2^{s-1}$
+\end_inset 
+
+.
+ To verify the correctness of the above steps, we can expand the exponentials
+ in terms of their real and imaginary parts, to find that 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\zeta(z,x)=\frac{2\Gamma(1-z)}{\left(2\pi\right)^{1-z}}\left[\sin\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\cos(2\pi nx)}{n^{1-z}}+\cos\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\sin(2\pi nx)}{n^{1-z}}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ which agrees with standard textbook presentations of the Hurwitz Zeta;
+ see for example 
+\begin_inset LatexCommand \cite[Thm 12.6]{key-13}
+
+\end_inset 
+
+.
+\layout Subsection
+
+Visualizing the Hurwitz Zeta Eigenfunctions
+\layout Standard
+
+Perhaps one surprising aspect of this result is that the Hurwitz Zeta eigenfunct
+ions appear to be smooth, since one is conditioned to expect that the only
+ continuous-spectrum eigenfunctions of a Frobenius-Perron operator are fractal.
+ Thus, it is worthwhile to take a few minutes to get acquainted with the
+ shape and nature of the zeta.
+ This section shows a number of graphs, and discusses the analytic structure
+ of the eigenvectors.
+ We'll see that the eigenfunctions are 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ in 
+\begin_inset Formula $x$
+\end_inset 
+
+ for almost all 
+\begin_inset Formula $x$
+\end_inset 
+
+: everywhere except at the endpoints 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+.
+ Thus, these are not 
+\begin_inset Quotes eld
+\end_inset 
+
+physical
+\begin_inset Quotes erd
+\end_inset 
+
+ eigenstates, if 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ for all 
+\begin_inset Formula $x$
+\end_inset 
+
+ is placed as a demand for being 
+\begin_inset Quotes eld
+\end_inset 
+
+physical
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ We also find that there are eigenfunctions that have eigenvalues greater
+ than one; these, while quite smooth and differentiable, are not square-integrab
+le: they are divergent at 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+.
+ However, in all other respects, the eigenfunctions are analytically well-behave
+d, even if a bit 
+\begin_inset Quotes eld
+\end_inset 
+
+lumpy
+\begin_inset Quotes erd
+\end_inset 
+
+ and uneven.
+ 
+\layout Standard
+
+There is a countably infinite degeneracy of eigenfunctions for a give eigenvalue.
+ We can see this by writing 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset 
+
+ in terms of its real and imaginary components.
+ Then the eigenvalue is 
+\begin_inset Formula $\lambda=2^{-s}=2^{-\sigma}\exp(-i\tau\ln2)$
+\end_inset 
+
+ and it belongs to a family of eigenvectors with 
+\begin_inset Formula $\tau'=\tau+2\pi n/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset 
+
+.
+ The next five figures show some of these, graphed in various ways.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Real Part of Symmetric Beta
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-2.2345-04.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\Re\left[\beta(x;s)+\beta(-x;s)\right]/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ Note that 
+\begin_inset Formula $\left|\Gamma(1+s)\right|$
+\end_inset 
+
+gets very small as n gets large, and so the normalization brings them to
+ visually comparable values.
+ Other real values of 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ can be understood by recalling that 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ essentially interpolates between Bernoulli polynomials at integer values
+ of 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+.
+ In short, they'll all look more or less like this.
+ 
+\layout Standard
+
+XXX redo this graph to show 
+\begin_inset Formula $\Re\left[\beta(x;s)+\beta(1-x;s)\right]/2\left|\Gamma(1+s)\right|$
+\end_inset 
+
+ instead XXX
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Magnitude of Symmetric Beta
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-abs-2.2345-04.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\left|\beta(x;s)+\beta(-x;s)\right|/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ Note that 
+\begin_inset Formula $\left|\Gamma(1+s)\right|$
+\end_inset 
+
+gets very small as n gets large, and so the normalization brings them to
+ visually comparable values.
+ 
+\layout Standard
+
+XXX redo this graph to show 
+\begin_inset Formula $\left|\beta(x;s)+\beta(1-x;s)\right|/2\left|\Gamma(1+s)\right|$
+\end_inset 
+
+ instead XXX
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Real part of Beta
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-exp-2.2345-04.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\Re\beta(x;s)/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ Although these curves clearly look very lumpy, they are 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ for all 
+\begin_inset Formula $x\in(0,1)$
+\end_inset 
+
+ but not at the endpoints 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+.
+ At the endpoints, the derivative becomes divergent after just a few derivatives
+, where the curves are behaving essentially as 
+\begin_inset Formula $x^{s-1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $(1-x)^{s-1}$
+\end_inset 
+
+.
+ It is impossible to see this pending divergence in the graphs above, because,
+ to the naked eye, a graph of, for example, 
+\begin_inset Formula $x^{1.5}$
+\end_inset 
+
+ is nearly indistinguishable from a graph of 
+\begin_inset Formula $x^{2}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Although these curves appear to be sine-wave-like, it is perhaps more correct
+ to think of them as being Bernoulli-polynomial-like.
+ That is, to better understand what eigenvectors near some arbitrary value
+ of 
+\begin_inset Formula $s$
+\end_inset 
+
+ look like, its useful to think of what the polynomial 
+\begin_inset Formula $B_{\left\lfloor \Re s\right\rfloor }(x)$
+\end_inset 
+
+ looks like.
+ Recall, however, that, of course, 
+\begin_inset Formula $B_{k}(x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $k\geq3$
+\end_inset 
+
+ is very sine-wave like! Note also that the first curve shown above, for
+ 
+\begin_inset Formula $n=0$
+\end_inset 
+
+, generally resembles 
+\begin_inset Formula $B_{2}(x)$
+\end_inset 
+
+ which is a parabola.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Magnitude of Beta 
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-emag-2.2345-04.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\left|\beta(x;s)\right|/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ Note that curiously, these functions seem to be smoother for larger x and
+ seem to have vanishing ripples as x approaches zero.
+ Curiously, the ripples seem to have a period of oscillation of approximately
+ 
+\begin_inset Formula $nx$
+\end_inset 
+
+ in the interval 
+\begin_inset Formula $x\in\left[1/2,1\right]$
+\end_inset 
+
+, and then repeating again between 1, 1/2, 1/4, 1/8, ...
+ We'll gain some insight into these ripples in a later section, where we
+ will analyze a sawtooth map having the same oscillatory behavior, for which
+ the Hurwitz Zeta also plays a role as an eigenvector.
+ That is, there is a certain sense in which the above curves are self-similar,
+ with the curve in the interval 
+\begin_inset Formula $x\in\left[2^{-k-1},2^{-k}\right]$
+\end_inset 
+
+ reprises the curve in the interval 
+\begin_inset Formula $x\in\left[1/2,1\right]$
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Argument of Beta
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-arg-2.2345-04.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure illustrates a family of eigenvectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ having the same eigenvalue.
+ To be precise, the illustration shows 
+\begin_inset Formula \[
+\arg\beta(x;s)/2\left|\Gamma(1+s)\right|\]
+
+\end_inset 
+
+ for values of 
+\begin_inset Formula $s=\sigma+2\pi in/\ln2$
+\end_inset 
+
+ for 
+\begin_inset Formula $\sigma=2.345$
+\end_inset 
+
+ and n=0,1,2,3,4.
+ 
+\end_inset 
+
+ 
+\layout Standard
+
+There are eigenfunctions with eigenvalues greater than one, essentially
+ because the Hurwitz Zeta can be analytically continued to everywhere on
+ the complex plane except for a simple pole at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Examining these eigenfunctions, one quickly discovers that these are not
+ square-integrable: they have singularities located at 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+.
+ That is, for for 
+\begin_inset Formula $\Re z>0$
+\end_inset 
+
+, the Hurwitz Zeta 
+\begin_inset Formula $\zeta(z,x)$
+\end_inset 
+
+ has a clear singularity 
+\begin_inset Formula $x^{-z}$
+\end_inset 
+
+ at 
+\begin_inset Formula $x=0$
+\end_inset 
+
+.
+ We remove this explicitly, and write 
+\begin_inset Formula \begin{eqnarray}
+\frac{\sin\pi s}{is}\beta(x;s) & = & \frac{e^{-i\pi s/2}}{x^{1-s}}-\frac{e^{i\pi s/2}}{(1-x)^{1-s}}+\nonumber \\
+ &  & e^{-i\pi s/2}\left(\zeta(1-s,x)-x^{s-1}\right)-e^{i\pi s/2}\left(\zeta(1-s,1-x)-(1-x)^{s-1}\right)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ The first part of the equation above encapsulates the singularities at
+ 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+ that occur when working with eigenvalues 
+\begin_inset Formula $\left|\lambda\right|=\left|2^{-s}\right|>1$
+\end_inset 
+
+, that is, with 
+\begin_inset Formula $\Re s<0$
+\end_inset 
+
+.
+ The remaining term is well-behaved and is shown in figure xx
+\begin_inset LatexCommand \ref{cap:The-non-singular-part}
+
+\end_inset 
+
+xx.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:The-non-singular-part}
+
+\end_inset 
+
+The Non-Singular Part of the Divergent Eigenfunctions
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-diverge.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows 
+\begin_inset Formula \[
+\eta_{even}(x;\sigma)=\frac{\cos\pi\sigma/2}{\sigma}\left[\beta(x;\sigma)+\beta(1-x;\sigma)\right]-x^{\sigma-1}-(1-x)^{\sigma-1}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\eta_{odd}(x;\sigma)=\frac{\sin\pi\sigma/2}{\sigma}\left[\beta(x;\sigma)-\beta(1-x;\sigma)\right]-x^{\sigma-1}+(1-x)^{\sigma-1}\]
+
+\end_inset 
+
+ for a value of 
+\begin_inset Formula $\sigma=-3.3$
+\end_inset 
+
+, corresponding to an eigenvalue of 
+\begin_inset Formula $9.85=2^{3.3}$
+\end_inset 
+
+.
+ Except for the singularity, we see that the finite part of these eigenfunctions
+ is very well behaved.
+ 
+\end_inset 
+
+ 
+\layout Standard
+
+Note that when 
+\begin_inset Formula $\left|\lambda\right|=\left|2^{-s}\right|<1/2$
+\end_inset 
+
+, that is, when 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+, there is no singularity, and 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ is finite on the entire interval 
+\begin_inset Formula $x\in[0,1]$
+\end_inset 
+
+ including the endpoints.
+ For 
+\begin_inset Formula $1/2<\Re s\leq1$
+\end_inset 
+
+ there is a bit of funny-business at the endpoints, that is, there is a
+ weak divergence there, but the function overall remains square-integrable.
+ Things break loose after that, with the exception of 
+\begin_inset Formula $s=0$
+\end_inset 
+
+, where we have 
+\begin_inset Formula $\beta(x;0)=-1$
+\end_inset 
+
+, a constant independent of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ This essentially follows from the nature of differentiation on the Bernoulli
+ polynomials, which we'll see below.
+ Note, however, that for 
+\begin_inset Formula $s$
+\end_inset 
+
+ near zero, the function 
+\begin_inset Formula $\beta(x;s)$
+\end_inset 
+
+ has severe ringing artifacts in 
+\begin_inset Formula $x$
+\end_inset 
+
+, suffering from a variation of Gibbs Phenomenon.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Ringing
+\layout Standard
+
+
+\begin_inset Graphics
+	filename zeta-gibbs.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows ringing/Gibbs phenomenon as 
+\begin_inset Formula $s$
+\end_inset 
+
+ approaches zero.
+ In the limit of 
+\begin_inset Formula $s=0$
+\end_inset 
+
+, we expect the real part of 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ to approach the trivial eigenfunction 
+\begin_inset Formula $\lim_{s\rightarrow0^{+}}\Re\beta(x;s)=-B_{0}(x)=-1$
+\end_inset 
+
+.
+ As this graph shows, the function is indeed trying very desperately to
+ get flat, with not much success.
+ The ringing occurs only at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+; there is no problem with convergence near larger integers, where 
+\begin_inset Formula $\lim_{s\rightarrow n}\Re(-i)^{s}\beta(x;s)=-B_{n}(x)$
+\end_inset 
+
+ converges very smoothly and cleanly.
+\end_inset 
+
+
+\layout Standard
+
+We conclude by noting that 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset 
+
+ for 
+\begin_inset Formula $x\in(0,1)$
+\end_inset 
+
+ but not at the endpoints 
+\begin_inset Formula $x=0,1$
+\end_inset 
+
+.
+ This can be easily seen by writing the derivative 
+\begin_inset Formula \begin{equation}
+\frac{d}{dx}\beta(x;s)=2\pi i\beta(x;s-1)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so even if we start with 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+, each derivative carries us one step closer into the danger zone.
+ 
+\layout Subsection
+
+The Kernel
+\layout Standard
+
+What is the kernel of 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+? It is the set of functions that have only odd Fourier terms.
+ 
+\layout Standard
+
+That is, for any integer 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset 
+
+ we have 
+\begin_inset Formula $U_{B}\cos2\pi(2k+1)x=0$
+\end_inset 
+
+ and so we write 
+\begin_inset Formula $\cos2\pi(2k+1)x\in K\left[U_{B}\right]$
+\end_inset 
+
+ and likewise 
+\begin_inset Formula $\sin2\pi(2k+1)x\in K\left[U_{B}\right]$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+This implies that 'half' of all square-integrable functions are in the kernel.
+ This is a huge space.
+ The quotient space of the implied isomorphism thus has the Bernoulli polynomial
+s as the representative elements.
+ This is I think the correct way to relate coordinate space to the Hilbert
+ space, is by means of the quotient space generated by the kernel of the
+ time-evolution operator.
+ 
+\layout Subsection
+
+The Continuous Fractal Spectrum
+\layout Standard
+
+An alternate set of eigenvectors with a continuous spectrum are given by
+ 
+\begin_inset Formula \begin{equation}
+\phi_{z,k}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2k+1\right)x\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and have eigenvalue 
+\begin_inset Formula $z$
+\end_inset 
+
+: that is 
+\begin_inset Formula $[U_{B}\phi_{z,k}](x)=z\phi_{z,k}(x)$
+\end_inset 
+
+.
+ Again, for a given fixed eigenvalue, they have a countably infinite degeneracy,
+ labelled by the parameter 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset 
+
+.
+ These eigenfunctions are fractal, as can be readily seen from the graph[xxx
+ need figure].
+ Since they are a generalization of the Takagi-Landsberg Curve, they have
+ an 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ symmetry, as discussed in an earlier chapter.
+ As is typical for Takagi-type curves, these eigenfunctions are differentiable
+ a finite number of times before they become differentiable nowhere.
+ For example, for 
+\begin_inset Formula $1/2<\left|z\right|<1$
+\end_inset 
+
+, these are continuous with respect to 
+\begin_inset Formula $x$
+\end_inset 
+
+ but nowhere differentiable.
+ For 
+\begin_inset Formula $1/2^{m+1}<\left|z\right|<1/2^{m}$
+\end_inset 
+
+, these are everywhere 
+\begin_inset Formula $m$
+\end_inset 
+
+ times differentiable with respect to 
+\begin_inset Formula $x$
+\end_inset 
+
+, but nowhere 
+\begin_inset Formula $m+1$
+\end_inset 
+
+ times differentiable.
+ 
+\layout Standard
+
+We can express these in terms of the Hurwitz Zeta eigenfunctions by considering
+ the sum 
+\begin_inset Formula \begin{eqnarray}
+\sum_{k=0}^{\infty}z^{\ln_{2}(2k+1)}\phi_{z,k}(x) & = & \sum_{n=1}^{\infty}z^{\ln_{2}n}\exp\left(2\pi inx\right)\nonumber \\
+ & = & \sum_{n=1}^{\infty}n^{\ln_{2}z}\exp\left(2\pi inx\right)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Thus, we see that we should equate 
+\begin_inset Formula $s=-\ln_{2}z$
+\end_inset 
+
+ so that the eigenvalues are 
+\begin_inset Formula $z=2^{-s}$
+\end_inset 
+
+.
+ Multiplying by the appropriate factors, we get the desired relationship
+ 
+\begin_inset Formula \begin{equation}
+\beta(x;s)=2\Gamma(s+1)\left(2\pi\right)^{-s}\sum_{k=0}^{\infty}\left(2k+1\right)^{-s}\phi_{z,k}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ That is, the Hurwitz zeta eigenfunctions are expressible as a linear combinatio
+n of the fractal eigenfunctions.
+ Essentially, either set of eigenfunctions can be used to form a set of
+ basis states for the Bernoulli Map transfer operator.
+ The Hurwitz Zeta eigenfunctions span a larger space than the fractal eigenfunct
+ions, as the Hurwitz Zeta is well-defined for eigenvalues with 
+\begin_inset Formula $\left|z\right|>1$
+\end_inset 
+
+, whereas the fractal eigenfunctions are not.
+ Of course, as we saw above, the Hurwitz Zeta eigenfunctions are not square-inte
+grable when 
+\begin_inset Formula $\left|z\right|>1$
+\end_inset 
+
+, which invalidates their consideration for most 
+\begin_inset Quotes eld
+\end_inset 
+
+physical
+\begin_inset Quotes erd
+\end_inset 
+
+ uses.
+ Note also that through careful work, the fractal eigenfunctions can probably
+ be extended to 
+\begin_inset Formula $\left|z\right|>1$
+\end_inset 
+
+ continuous-nowhere functions by considering their transformation properties
+ under 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ This would be in analogy to the exploration of the derivative of the Takagi
+ Curve, which, as we saw in an earlier chapter, can be defined as the Cantor
+ polynomial, built out of the digits of the binary expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+We can explicitly demonstrate the change of basis by defining 
+\begin_inset Formula \begin{equation}
+\beta_{n}(x;s)\equiv\beta(x;s+2\pi ni/\ln2)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which all share the same eigenvalue: 
+\begin_inset Formula $U_{B}\beta_{n}=2^{-s}\beta_{n}$
+\end_inset 
+
+.
+ We can then restrict 
+\begin_inset Formula $s$
+\end_inset 
+
+ to a principle domain 
+\begin_inset Formula $-\pi<\Im s\,\ln2=\arg\, z<\pi$
+\end_inset 
+
+ .
+ The change of basis can now be written explicitly as 
+\begin_inset Formula \begin{equation}
+\beta_{n}(x;s)=\sum_{k=0}^{\infty}F_{nk}\phi_{z,k}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the matrix elements are 
+\begin_inset Formula \begin{equation}
+F_{nk}=2\Gamma\left(s+1+\frac{2\pi ni}{\ln2}\right)\left(2\pi(2k+1)\right)^{-s}\exp\left[-2n\pi i\frac{\ln\pi(2k+1)}{\ln2}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Presumably 
+\begin_inset Formula $F$
+\end_inset 
+
+ is invertible; either set of eigenstates span the space.
+ Given that one set of basis functions are clearly fractal, while the other
+ is clearly analytic, it would be interesting to describe the space of functions
+ spanned by these basis states.
+ That is, given an arbitrary sequence 
+\begin_inset Formula $\{ b_{n}|b_{n}\in\mathbb{C}\}$
+\end_inset 
+
+, describe the nature of the functions 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}b_{n}\beta_{n}(x;s)\label{eq:}\end{equation}
+
+\end_inset 
+
+ considered as functions of 
+\begin_inset Formula $x$
+\end_inset 
+
+ or alternately of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The modular group symmetries of the fractal eigenfunctions do not seem to
+ provide any interesting insight into the zeta, since they do not mix or
+ permute eigenstates.
+ For example, applying the generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ on the fractal eigenstates gives
+\begin_inset Formula \begin{equation}
+g\phi_{zk}(x)=\phi_{zk}\left(\frac{x}{2}\right)=\exp((2k+1)\pi ix)+z\phi_{zk}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so one might hope that since the zetas are a linear combination of
+ the fractal eigenfunctions, one might get some new insight.
+ However, doing this gives the sum 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+g\beta(x;s)=\beta(\frac{x}{2};s)=\frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\infty}\frac{\exp2\pi ix(2k+1)}{(2k+1)^{s}}+2^{-s}\beta(x;s)\label{eq:}\end{equation}
+
+\end_inset 
+
+ as a symmetry, but the evaluation of the sum in the middle yields 
+\begin_inset Formula $\beta(x/2;s)-2^{-s}\beta(x;s)$
+\end_inset 
+
+ and so one gets a trivial relationship and no insight in particular.
+\layout Subsection
+
+Modular Group Symmetry and the Takagi Representation 
+\layout Standard
+
+Yet another way to understand the solution of the Bernoulli Map is to note
+ that it can be written as 
+\begin_inset Formula \begin{equation}
+\left[U_{B}f\right](x)=\frac{1}{2}\left(f(g_{D}(x))+f(r_{D}g_{D}r_{D}(x)\right)\label{eq: bern modular}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $g_{D}(x)=x/2$
+\end_inset 
+
+ and 
+\begin_inset Formula $r_{D}(x)=1-x$
+\end_inset 
+
+ are the generators of the dyadic representation of the Modular Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ Thus, we expect that we should be able to build eigenfunctions out of any
+ functions 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ that posses a Modular Group symmetry.
+\layout Standard
+
+As we saw in a previous chapter, the Takagi Curve fits this bill.
+ Start with the triangle wave/tent map: 
+\begin_inset Formula \begin{equation}
+\tau(x)=\left\{ \begin{array}{ccc}
+2(x-\left\lfloor x\right\rfloor ) & \;\textrm{ when }\; & 0\leq x-\left\lfloor x\right\rfloor \leq1/2\\
+2(1-x+\left\lfloor x\right\rfloor ) & \;\textrm{ when }\; & 1/2\leq x-\left\lfloor x\right\rfloor \leq1\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ which has the property that it doubles under iteration: 
+\begin_inset Formula $\tau^{k}(x)=\tau(2^{k-1}x)$
+\end_inset 
+
+.
+ The iterated tent map behaves sort-of like a shift state, in that 
+\begin_inset Formula \begin{equation}
+\left[U_{B}\tau^{k}\right](x)=\tau^{k-1}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ although it does not terminate properly for a shift state: 
+\begin_inset Formula \begin{equation}
+\left[U_{B}\tau\right](x)=\frac{1}{2}\label{eq:}\end{equation}
+
+\end_inset 
+
+ (a true shift state would vanish on the final iteration).
+ Thus we see that the Takagi curve transforms as 
+\begin_inset Formula \begin{equation}
+\left[U_{B}t_{w}\right](x)=\frac{1}{2}+wt_{w}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ under the Bernoulli operator.
+ We can use this to build an eigenfunction 
+\begin_inset Formula \begin{equation}
+b_{w}(x)=\frac{-1}{2(1-w)}+t_{w}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ so that 
+\begin_inset Formula $U_{B}b_{w}=wb_{w}$
+\end_inset 
+
+.
+ On closer examination, we can see that this eigenvalue has the same countable
+ degeneracy we've seen previously.
+ That is, we can replace 
+\begin_inset Formula $x$
+\end_inset 
+
+ on the right-hand-side of the equations above by 
+\begin_inset Formula $(2j+1)x$
+\end_inset 
+
+ for 
+\begin_inset Formula $j\in\mathbb{N}$
+\end_inset 
+
+ to obtain the set of eigenfunctions
+\begin_inset Formula \begin{equation}
+b_{w,j}(x)=\frac{-1}{2(1-w)}+t_{w}((2j+1)x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ all sharing the eigenvalue 
+\begin_inset Formula $w.$
+\end_inset 
+
+ It follows immediately that, just as above, we should be able to express
+ the Hurwitz Zeta eigenfunctions 
+\begin_inset Formula $\beta_{n}(x;s)$
+\end_inset 
+
+ for fixed 
+\begin_inset Formula $s=-\ln_{2}w$
+\end_inset 
+
+ as a linear combination of the 
+\begin_inset Formula $b_{w,j}$
+\end_inset 
+
+ if the 
+\begin_inset Formula $b_{w,j}$
+\end_inset 
+
+ are a complete set of eigenstates for the eigenvalue 
+\begin_inset Formula $w$
+\end_inset 
+
+.
+ One special case is immediately apparent: the Takagi Curve 
+\begin_inset Formula $t_{1/4}(x)$
+\end_inset 
+
+ is a parabola, corresponding to the Bernoulli polynomial 
+\begin_inset Formula $B_{2}(x)$
+\end_inset 
+
+.
+\layout Standard
+
+XXX finish me; give the explicit expressions between 
+\begin_inset Formula $b_{w,j}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\beta_{n}$
+\end_inset 
+
+.
+\layout Standard
+
+We can also obtain other eigenvectors by starting with the Takagi curves
+ that transform under the higher-dimensional representations of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ The equation 
+\begin_inset LatexCommand \ref{eq: bern modular}
+
+\end_inset 
+
+ implies that any curve that transforms under a linear representation of
+ the Modular Group can be used to build an eigenfunction of the Bernoulli
+ Map.
+ We exclude the non-linear representations, since we don't know how to build
+ a vector space out of a non-linear operator.
+ Thus, if 
+\begin_inset Formula $t_{w}^{(n)}((2j+1)x)$
+\end_inset 
+
+ is a Takagi curve that transforms under an 
+\begin_inset Formula $n$
+\end_inset 
+
+-dimensional representation, then 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ is represented by 
+\begin_inset Formula $(g_{n}+r_{n}g_{n}r_{n})/2$
+\end_inset 
+
+ where 
+\begin_inset Formula $r_{n},g_{n}\in GL(n,\mathbb{R})$
+\end_inset 
+
+ are the generators of that 
+\begin_inset Formula $n$
+\end_inset 
+
+-dimensional representation of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ Solving the eigenvalue equation then amounts to diagonalizing the (finite-dimen
+sional) matrix 
+\begin_inset Formula $(g_{n}+r_{n}g_{n}r_{n})/2$
+\end_inset 
+
+.
+\layout Standard
+
+For a fixed eigenvalue 
+\begin_inset Formula $w$
+\end_inset 
+
+, we expect a countably infinite degeneracy built out of the curves 
+\begin_inset Formula $t_{w}^{(n)}((2j+1)x)$
+\end_inset 
+
+.
+ Again, if these form a complete set of eigenstates, then we expect to be
+ able to write out 
+\begin_inset Formula $\beta_{n}(x;s)$
+\end_inset 
+
+ as a linear combination of these, and v.v.
+\layout Standard
+
+XXX finish me ..
+ Give explicit expression for the higher-dim reps and in particular,the
+ matrix from 
+\begin_inset Formula $b_{w,j}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\beta_{n}$
+\end_inset 
+
+ in explicit detail.
+ Also develop the lower-dim reps (move in opposite direction).
+ This material should probably go into the chapter on the Takagi Curves,
+ instead of here,right ...
+ ???
+\layout Standard
+
+Note this is a ladder of isomorphisms between the different dimensional
+ reps.
+ Note also the ability to choose different set of basis funcs for the higher-dim
+ Takagi Curves, viz, any polynomial of degree 
+\begin_inset Formula $n-2$
+\end_inset 
+
+.
+\layout Subsection
+
+The Topological Zeta
+\layout Standard
+
+The topological zeta of the Bernoulli operator can be computed very easily
+ in the polynomial basis because we know the eigenvalues and these form
+ a simple series.
+ We'll define the Bernoulli topological zeta as
+\begin_inset Formula \begin{equation}
+\zeta_{B}(t)\equiv\frac{1}{\det\left[\mathbb{I}-tU_{B}\right]}\label{eq:}\end{equation}
+
+\end_inset 
+
+ We start by noting its inverse: 
+\begin_inset Formula \begin{eqnarray}
+\det\left[\mathbb{I}-tU_{B}\right] & = & \prod_{n=0}^{\infty}\left(1-t\;2^{-n}\right)\nonumber \\
+ & = & 1-t\sum_{j=0}^{\infty}2^{-j}+t^{2}\sum_{j=0}^{\infty}2^{-j}\sum_{\begin{array}{c}
+k=0\\
+k\neq j\end{array}}^{\infty}2^{-k}-t^{3}...\nonumber \\
+ & = & 1-2t+\frac{8}{3}t^{2}-\frac{16}{7}t^{3}+\frac{128}{105}t^{4}-...\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Successive terms of this series are hard to compute, and it would be interestin
+g to know what the generating function for this series is.
+ The series appears to have a circle of convergence of radius one.
+ The zeta can be computed directly by working with its logarithm: 
+\begin_inset Formula \begin{eqnarray}
+\log\zeta_{B}(t) & = & \log\prod_{n=0}^{\infty}\left(1-t\;2^{-n}\right)^{-1}\nonumber \\
+ & = & -\sum_{n=0}^{\infty}\log\left(1-t\;2^{-n}\right)\nonumber \\
+ & = & \sum_{k=1}^{\infty}\frac{t^{k}}{k}\;\frac{2^{k}}{2^{k}-1}\nonumber \\
+ & = & -\log(1-t)+\sum_{k=1}^{\infty}\frac{t^{k}}{k}\;\frac{1}{2^{k}-1}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Thus we have 
+\begin_inset Formula $\textrm{Tr}U_{B}^{k}=2^{k}/(2^{k}-1)$
+\end_inset 
+
+.
+ Of some curiosity is the proximity of the Erdos-Borwein constant: 
+\begin_inset Formula \begin{eqnarray}
+1.6066... & = & \sum_{n=1}^{\infty}\frac{1}{2^{n}-1}\nonumber \\
+ & = & \sum_{n=1}^{\infty}\frac{d(n)}{2^{n}}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ which marks the first appearance of a classical number-theoretic function
+ in the proceedings so far: 
+\begin_inset Formula $d(n)$
+\end_inset 
+
+ is the number of divisors of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ This arises from the Lambert series
+\begin_inset Formula \begin{equation}
+\sum_{n=1}^{\infty}d(n)x^{n}=\sum_{n=1}^{\infty}\frac{x^{n}}{1-x^{n}}\label{eq:}\end{equation}
+
+\end_inset 
+
+The sum 
+\begin_inset Formula \begin{equation}
+E(t)=\sum_{k=1}^{\infty}\frac{t^{k}}{1-2^{-k}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ can be resummed as a Lambert series, namely, 
+\begin_inset Formula \begin{equation}
+E(t)=\sum_{k=1}^{\infty}b_{k}2^{-k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula \begin{equation}
+b_{k}=\sum_{n|k}(2t)^{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ The analytic/meromorphic structure of this zeta is not clear; its dull
+ within the unit disk, and its not quite obvious what the continuation is
+ outside of the disk.
+ XXX ToDo: get the full analytic structure.
+\layout Subsection
+
+Curiosities
+\layout Standard
+
+We list here some intriguing forms that suggest further relationships.
+\layout Standard
+
+The pochhammer symbol 
+\begin_inset Formula $(a)_{n}=\Gamma(a+n)/\Gamma(n)$
+\end_inset 
+
+ obeys a 
+\emph on 
+dimidiation formula
+\emph default 
+ that is reminiscent of the Bernoullit map:
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+(a)_{2n} & = & 2^{2n}\left(\frac{a}{2}\right)_{n}\left(\frac{a+1}{2}\right)_{n}\\
+(a)_{2n+1} & = & 2^{2n+1}\left(\frac{a}{2}\right)_{n}\left(\frac{a+1}{2}\right)_{n}\end{eqnarray*}
+
+\end_inset 
+
+
+\layout Section
+
+The Gauss-Kuzmin-Wirsing Operator
+\layout Standard
+
+The map that truncates continued fractions is 
+\begin_inset Formula \begin{equation}
+h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
+
+\end_inset 
+
+ and is sometimes called the Gauss Map.
+ It is connected to the Riemann Zeta by a Mellin Transform:
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\label{eq:}\end{equation}
+
+\end_inset 
+
+The Frobenius-Perron operator for this map is known as the Gauss-Kuzmin-Wirsing
+ (GKW) Operator, and is represented by.
+ 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\left[U_{h}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{(n+x)^{2}}f\left(\frac{1}{n+x}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Thus, the Riemann zeta can be written under a change of variable as
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[U_{h}x^{s-1}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ and thus it seems that a better understanding of GKW may shed light on
+ the Riemann Hypothesis.
+ There is one known eigenvector, 
+\begin_inset Formula $f(x)=1/(1+x)$
+\end_inset 
+
+ which corresponds to the unit eigenvalue.
+ The others do not seem to be (by combinatorial search) any simple combination
+ or summation of simple functions, including the digamma, and etc.
+ XXX Provide the details.
+ 
+\layout Standard
+
+Todo:Blah Blah.
+ Give the collection of interesting summations.
+ Give the Riemann Hypothesis as a vector equation.
+ 
+\layout Standard
+
+Details of the relationship w/ Riemann zeta are explored in a different
+ paper on this website.
+\layout Subsection
+
+Assorted Algebraic Identities
+\layout Standard
+
+This section lists an assortment of random algebraic results, none particularly
+ deep or interesting.
+ These are listed here mostly for the sake of completeness.
+ First, we notice that adjacent terms in the series can be made to cancel
+ by shifting the series by one:
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\left[U_{h}f\right](x)-\left[U_{h}f\right](x+1)=\frac{1}{(1+x)^{2}}f\left(\frac{1}{1+x}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which holds for any function 
+\begin_inset Formula $f(x).$
+\end_inset 
+
+ Thus, if 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ is an eigenvector, so that 
+\begin_inset Formula $U_{h}\rho=\lambda\rho$
+\end_inset 
+
+, then it would also solve 
+\begin_inset Formula \begin{equation}
+\frac{1}{(1+x)^{2}}\rho\left(\frac{1}{1+x}\right)=\lambda\left(\rho(x)-\rho(x+1)\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+This can be solved easily to get the zeroth eigenvector 
+\begin_inset Formula \begin{equation}
+\rho_{0}(x)=\frac{1}{\ln2}\;\frac{1}{1+x}\label{eq:}\end{equation}
+
+\end_inset 
+
+ which satisfies 
+\begin_inset Formula $[U_{h}\rho_{0}](x)=\rho_{0}(x)$
+\end_inset 
+
+ and the normalization is given by requiring 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}\rho_{0}(x)\, dx=1\label{eq:}\end{equation}
+
+\end_inset 
+
+ We can see one hint of the relationship between period-doubling and the
+ GKW in the identity 
+\begin_inset Formula \begin{equation}
+\frac{1}{1+x}=\sum_{n=1}^{\infty}\,\frac{1}{2^{n}}\left[\frac{2}{x+n}-\frac{1}{x+n+1}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+A reflection identity: 
+\begin_inset Formula $f(x)=1-(1+x)^{-2}$
+\end_inset 
+
+ satisfies 
+\begin_inset Formula $U_{h}f=1-f$
+\end_inset 
+
+.
+\layout Standard
+
+Another: 
+\begin_inset Formula $U_{h}[(1+?(x))/(1+x)^{2}]=1-?(x)$
+\end_inset 
+
+ where 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ is the Minkowski Question Mark function.
+\layout Standard
+
+Another: 
+\begin_inset Formula $U_{h}[?(x)\, x^{-2}]=2-?(x)$
+\end_inset 
+
+ .
+ One can construct a variety of identities of this sort, for example: 
+\begin_inset Formula \begin{equation}
+U_{h}\left[?(x)\left(\frac{1}{(1+x)^{2}}-2\right)\right]=\frac{?(x)-2}{(1+x)^{2}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ but these types of exercises do not seem to lead to any sort of worthwhile
+ recurrence relations.
+ 
+\layout Standard
+
+Acting on the monomial, one gets 
+\begin_inset Formula \begin{equation}
+\left[U_{h}x^{k}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{k+2}}=\frac{(-)^{k+2}}{(k+1)!}\psi^{(k+1)}(1+x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\psi^{(k)}(x)$
+\end_inset 
+
+ is the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th derivative of the Gamma function.
+ The true difficulty of finding the solution to GKW becomes clear when the
+ search leads one to start discovering complicated identities, such as 
+\begin_inset Formula \begin{equation}
+\sum_{m=1}^{\infty}\,\frac{1}{m^{2}}\psi^{(1)}\left(1+\frac{1}{m}+x\right)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{2}}\psi^{(1)}\left(\frac{1}{n+x}+1\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ or curiosities such as 
+\begin_inset Formula $f(x)=(1+ax)^{2}$
+\end_inset 
+
+ gives 
+\begin_inset Formula $U_{h}f=\psi^{(1)}(1+x+a)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+For 
+\begin_inset Formula $f(x)=(1+nx)^{-2}-1$
+\end_inset 
+
+ one gets 
+\begin_inset Formula $U_{h}f=-\sum_{k=1}^{n}(x+k)^{-2}$
+\end_inset 
+
+
+\layout Standard
+
+Acting on a general power, the map gives the Hurwitz Zeta: 
+\begin_inset Formula \begin{equation}
+\left[U_{h}x^{s}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{s+2}}=\zeta(s+2,x+1)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and this transformation gives us another hint of a deep relationship to
+ the Bernoulli Map.
+\layout Standard
+
+We have some conditionally convergent series: 
+\begin_inset Formula \begin{equation}
+\sum_{k=0}^{\infty}\,(-)^{k}\,\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\zeta(k+m+2)=1\label{eq:}\end{equation}
+
+\end_inset 
+
+ which holds for any integer 
+\begin_inset Formula $m$
+\end_inset 
+
+.
+ We also have series such as 
+\begin_inset Formula \begin{equation}
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}e^{-tk}=\frac{1}{2}\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\begin_inset Formula \begin{equation}
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)e^{-tk}=\frac{3}{4}\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\begin_inset Formula \begin{equation}
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)(k+3)e^{-tk}=\frac{7}{4}\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\begin_inset Formula \begin{equation}
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)(k+3)(k+4)e^{-tk}=\frac{45}{8}\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\begin_inset Formula \begin{equation}
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)(k+3)(k+4)(k+5)e^{-tk}=\frac{93}{4}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Its not clear what the general expression for forms of the above type is.
+ Similarly, if we let 
+\begin_inset Formula \begin{equation}
+S_{m}\equiv\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}\frac{(k+m+1)!}{(k+1)!}\left[\zeta(k+m+2)-1\right]e^{-tk}\label{eq:}\end{equation}
+
+\end_inset 
+
+ then we find 
+\begin_inset Formula $S_{0}=1/2$
+\end_inset 
+
+, 
+\begin_inset Formula $S_{1}=1/4$
+\end_inset 
+
+, 
+\begin_inset Formula $S_{2}=1/4$
+\end_inset 
+
+, 
+\begin_inset Formula $S_{3}=3/8$
+\end_inset 
+
+ and 
+\begin_inset Formula $S_{4}=3/4$
+\end_inset 
+
+ but its again not clear what the general expression might be.
+ The above sums are generated by considering 
+\begin_inset Formula \begin{equation}
+\psi(1+z)=\frac{-1}{1+z}+1-\gamma+\sum_{m=0}^{\infty}(-)^{m}\left[\zeta(m+2)-1\right]z^{m+1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and then writing 
+\begin_inset Formula $z^{m+1}=(z+1-1)^{m+1}=\sum_{k=0}^{m}(-)^{m-k}\left(\begin{array}{c}
+m\\
+k\end{array}\right)(z+1)^{k}$
+\end_inset 
+
+
+\layout Subsection
+
+Polynomial Representation
+\layout Standard
+
+One can attempt to solve GKW by working in the polynomial representation.
+ One possible choice is to make one's Taylor expansion about 
+\begin_inset Formula $x=0$
+\end_inset 
+
+, but this turns out to be a very poor choice, as we shall soon see.
+ Thus, if we write 
+\begin_inset Formula $U_{h}f=g$
+\end_inset 
+
+ and substitute a Taylor's expansion for 
+\begin_inset Formula $f$
+\end_inset 
+
+ and 
+\begin_inset Formula $g$
+\end_inset 
+
+, we get 
+\begin_inset Formula \begin{equation}
+\frac{g^{(m)}(0)}{m!}=\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}\,(-)^{m}\;\frac{(k+m+1)!}{m!\,(k+1)!}\,\zeta(k+m+2)\label{eq:}\end{equation}
+
+\end_inset 
+
+ or, adopting the bra-ket notation introduced earlier, we have 
+\begin_inset Formula \begin{equation}
+\left\langle m\left|U_{h}\right|k\right\rangle =(-)^{m}\;\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\,\zeta(k+m+2)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where we've replaced the factorials by the binomial coefficient that they
+ form.
+ Unfortunately, this is clearly a very poorly conditioned matrix.
+ One can make some progress, if one wishes, by applying a regulator and
+ using Levin-type sequence acceleration techniques.
+ One can thus find a number of curious identities, some of which we've listed
+ previously.
+ However, the difficulty of working with divergent sums seems to outweigh
+ any advantages given by the relatively simple form of the matrix elements.
+ Thus, we are lead to consider the matrix elements for a polynomial expansion
+ about 
+\begin_inset Formula $x=1$
+\end_inset 
+
+.
+ These are far more complex, but give a very well-conditioned matrix.
+ These are: 
+\begin_inset Formula \begin{equation}
+G_{mn}=\sum_{k=0}^{n}(-)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\,\left[\zeta(k+m+2)-1\right]\label{eq:GKW-matrix-elts}\end{equation}
+
+\end_inset 
+
+ satisfying 
+\begin_inset Formula \begin{equation}
+(-)^{m}\frac{g^{(m)}(1)}{m!}=\sum_{n=0}^{\infty}G_{mn}(-)^{n}\frac{f^{(n)}(1)}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Other authors have chosen to expand about 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+ [need ref here] but as can be seen the above is a more tractable expression.
+ (copy the x=1/2 expansion here).
+ 
+\layout Standard
+
+The first eigenvalue is known as the GKW constant, and is about 0.3036.
+\layout Standard
+
+The eigenvector equation to be solved is then 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}G_{mn}v_{n}=\lambda v_{m}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $v=\{ v_{n}\}$
+\end_inset 
+
+ is an eigenvector with components 
+\begin_inset Formula $v_{n}$
+\end_inset 
+
+.
+ This beast has a discrete spectrum (need reference for proof), and so we
+ may label the eigenvalues and eigenvectors with a label 
+\begin_inset Formula $k$
+\end_inset 
+
+, so that the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th eigen equation is 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}G_{mn}v_{nk}=\lambda_{k}v_{mk}\label{eq:Eigenvalue eqn}\end{equation}
+
+\end_inset 
+
+ The 
+\begin_inset Formula $k$
+\end_inset 
+
+'th polynomial eigenfunction of the GKW operator is then given by 
+\begin_inset Formula \begin{equation}
+\rho_{k}(x)=\sum_{n=0}^{\infty}v_{nk}(1-x)^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+The zeroth eigenfunction was given by Gauss as 
+\begin_inset Formula \begin{equation}
+\rho_{0}(x)=\frac{1}{1+x}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and corresponds to the eigenvector 
+\begin_inset Formula $v_{n0}=2^{-n}$
+\end_inset 
+
+.
+ Again, we note the curious appearance of powers of two.
+\layout Standard
+
+Based on numerical explorations (reported below), the series appears to
+ be easily convergent even for 
+\begin_inset Formula $x=0$
+\end_inset 
+
+.
+ In particular, it appears that 
+\begin_inset Formula $\lim_{n\to\infty}v_{nk}=0$
+\end_inset 
+
+, and that furthermore, that 
+\begin_inset Formula $\lim_{n\to\infty}v_{nk}/v_{n+1,k}=2$
+\end_inset 
+
+.
+ One must not conclude that this implies that 
+\begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n})$
+\end_inset 
+
+, as this sort of asymptotic behaviour conflicts with the zeroth eigenfunction.
+ Thus, one might guess at 
+\begin_inset Formula $v_{nk}~\mathcal{O}(n^{s}2^{-n})$
+\end_inset 
+
+ but numeric data suggests that 
+\begin_inset Formula $s=0$
+\end_inset 
+
+.
+ Numeric data also excludes the form 
+\begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n}\log n)$
+\end_inset 
+
+ although it is possible that the softer 
+\begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n}\log\log n)$
+\end_inset 
+
+ might hold.
+\layout Standard
+
+The coefficients are oscillatory, with 
+\begin_inset Formula $k$
+\end_inset 
+
+ half-oscillations in the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th eigenvector.
+ That is, for 
+\begin_inset Formula $k=0$
+\end_inset 
+
+, all of the 
+\begin_inset Formula $v_{n0}$
+\end_inset 
+
+ can be taken to be of the same sign.
+ For 
+\begin_inset Formula $k=1$
+\end_inset 
+
+, the 
+\begin_inset Formula $v_{n1}$
+\end_inset 
+
+ change sign, once, between 
+\begin_inset Formula $n=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $n=1$
+\end_inset 
+
+.
+ For 
+\begin_inset Formula $k=2$
+\end_inset 
+
+, the coefficients change sign twice, and so on.
+ This is shown in the graph below.
+ 
+\layout Standard
+
+The left eigenvectors are given by 
+\begin_inset Formula \begin{equation}
+\sum_{m=0}^{\infty}w_{km}G_{mn}=\lambda_{k}w_{kn}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and correspond to left eigenfunctions 
+\begin_inset Formula \begin{equation}
+\ell_{k}(x)=\sum_{n=0}^{\infty}w_{kn}(-1)^{n}\delta^{(n)}(1-x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\delta^{(n)}(x)$
+\end_inset 
+
+ is the 
+\begin_inset Formula $n$
+\end_inset 
+
+'th derivative of the Dirac delta function.
+ The zeroth left eigenvector is given by 
+\begin_inset Formula $w_{0n}=1/(n+1)$
+\end_inset 
+
+.
+ Very curiously, this is the harmonic series.
+ Thus, true to form, it appears that yet again, we are in the presence of
+ another manifestation of the duality between the dyadic rationals and rationals
+, the duality between the Stern-Brocot tree and the dyadic tree, the duality
+ captured in the Minkowski Question Mark function.
+\layout Standard
+
+In analogy to the right eigenvectors, the series again appears to be not
+ only convergent in that 
+\begin_inset Formula $\lim_{n\to\infty}w_{kn}=0$
+\end_inset 
+
+, but also that a strict ratio is maintained in the limit: 
+\begin_inset Formula $\lim_{n\to\infty}(n+2)\, w_{kn}/(n+1)\, w_{k,n+1}=1$
+\end_inset 
+
+, with strict equality holding for all 
+\begin_inset Formula $n$
+\end_inset 
+
+, and not just in the limit, when 
+\begin_inset Formula $k=0$
+\end_inset 
+
+.
+ A similar oscillatory behaviour is shown as well.
+\layout Subsection
+
+Identity
+\layout Standard
+
+We have the identity
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}G_{mn}p^{-n}=p\left[\zeta(m+1)-1-\zeta\left(m+1,2+\frac{1}{p-1}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ In particular, for 
+\begin_inset Formula $p=2$
+\end_inset 
+
+, the right hand side equals 
+\begin_inset Formula $p^{-m}$
+\end_inset 
+
+; this corresponds to the known eigenvector.
+ Note that for any value of 
+\begin_inset Formula $p$
+\end_inset 
+
+, the leading term on the right is 
+\begin_inset Formula $2^{-(m+1)}$
+\end_inset 
+
+.
+ A simple way to arrive at this is to note that 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}p^{-n}(1-x)^{n}=\frac{p}{p-1+x}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and then evaluate this simple expression under the action of the GKW operator.
+\layout Subsection
+
+The Kernel
+\layout Standard
+
+We would like to know what the kernel of the GKW operator is.
+ Consider 
+\begin_inset Formula \begin{equation}
+k(x)=\frac{1}{x^{2}}\exp(2k+1)\frac{\pi}{x}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Then 
+\begin_inset Formula \begin{eqnarray}
+\left[U_{h}k\right](x) & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}\cos(2k+1)n\pi\nonumber \\
+ & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}(-)^{n}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ The value of the sum is ambiguous.
+ One is tempted to cancel terms pairwise, and thus declare 
+\begin_inset Formula $k(x)$
+\end_inset 
+
+ to belong to the kernel.
+ On the other hand, we've seen that the regularized sum is not zero: 
+\begin_inset Formula \begin{equation}
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}e^{-tk}=\frac{1}{2}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so one is left in a bit of a quandary.
+ 
+\layout Standard
+
+Some progress might be made by applying the theory of the Henstock-Kurzweil
+ integral.
+\layout Subsection
+
+Numeric Attacks
+\layout Standard
+
+One can mount numeric attacks on GKW.
+ One can find, for instance, that 
+\begin_inset Formula \begin{equation}
+\rho_{1}(x)\approx\frac{-3}{4}+\frac{7}{4}\frac{1}{(1+x)^{5/2}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ is accurate to about one or two percent over the domain 
+\begin_inset Formula $x\in[0,1]$
+\end_inset 
+
+.
+ It is associated with an eigenvalue 
+\begin_inset Formula $\lambda_{1}\approx0.303663$
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Note
+collapsed true
+
+\layout Standard
+
+programs are in fractal/misc/continued-frobenius/matrix/eigen.c
+\end_inset 
+
+
+\layout Standard
+
+The matrix elements in 
+\begin_inset LatexCommand \ref{eq:GKW-matrix-elts}
+
+\end_inset 
+
+ are easily numerically ...
+ etc.
+ Using the LAPACK DGEEV eigenvalue-finding routine.
+ Can be numerically compared to previously published values (need ref).
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Caption
+
+GKW Eigenvalues
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="15" columns="3">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+N
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Eigenvalue 
+\begin_inset Formula $\lambda_{n}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Ratio 
+\begin_inset Formula $\lambda_{n}/\lambda_{n+1}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-3.29312425436788
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-0.303663002898733
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-3.0100062440358
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+0.100884509293104
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-2.842124671335
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-0.0354961590
+\family default 
+\series default 
+\shape default 
+\size default 
+\emph default 
+\bar default 
+\noun default 
+\color default
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+2.763682528286
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+0.01284379036244
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-2.7224239233
+\family default 
+\series default 
+\shape default 
+\size default 
+\emph default 
+\bar default 
+\noun default 
+\color default
+2
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-0.00471777751158
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-2.69791537939
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+6
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+0.0017486751243
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-2.681931264
+\family default 
+\series default 
+\shape default 
+\size default 
+\emph default 
+\bar default 
+\noun default 
+\color default
+5
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+7
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-0.0006520208580
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-2.67077775
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+8
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+0.00024413145
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-2.662606
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+9
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-9.16889
+\family default 
+\series default 
+\shape default 
+\size default 
+\emph default 
+\bar default 
+\noun default 
+\color default
+
+\begin_inset Formula $\times10^{-5}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-2.65651
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+10
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+3.45147
+\family default 
+\series default 
+\shape default 
+\size default 
+\emph default 
+\bar default 
+\noun default 
+\color default
+
+\begin_inset Formula $\times10^{-5}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-2.653
+\family default 
+\series default 
+\shape default 
+\size default 
+\emph default 
+\bar default 
+\noun default 
+\color default
+9
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+11
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\family roman 
+\series medium 
+\shape up 
+\size normal 
+\emph off 
+\bar no 
+\noun off 
+\color none
+-1.3005
+\family default 
+\series default 
+\shape default 
+\size default 
+\emph default 
+\bar default 
+\noun default 
+\color default
+
+\begin_inset Formula $\times10^{-5}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+12
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4.860
+\begin_inset Formula $\times10^{-6}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+13
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-1.7
+\begin_inset Formula $\times10^{-6}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+ 
+\layout Standard
+
+This table lists te first dozen eigenvalues of the polynomial representation
+ GKW operator.
+ The numbers are certain to about about the last figure or two quoted.
+ They were obtained by nmerically inverting a 55 by 55 matrix.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+GKW Right Eigenfunctions
+\layout Standard
+
+
+\begin_inset Graphics
+	filename revec.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This graph shows the right eigenfunctions of the GKW operator.
+ These were computed numerically, by truncating the GKW operator to a 50
+ by 50 matrix and then solving for the eigenvectors of the matrix.
+ The elements of the eigenvectors appear to be well-behaved, being oscillatory
+ for small values, and then converging to zero rapidly.
+ That is, if 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Right Eigenvector Coefficients
+\layout Standard
+
+
+\begin_inset Graphics
+	filename eigen-coeffs.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a graph of the coefficients of the first eight right-eigenvect
+ors of the GKW operator.
+ The red line corresponds to the zeroth eigenvector with components 
+\begin_inset Formula $v_{n0}=2^{-(n+1)}$
+\end_inset 
+
+.
+ All of these were obtained numerically.
+ The normalization used here is to require that 
+\begin_inset Formula $\sum_{n=0}^{\infty}v_{nk}=1$
+\end_inset 
+
+.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Left Eigenvector Coefficients
+\layout Standard
+
+
+\begin_inset Graphics
+	filename left-coeffs.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a graph of the coefficients of the first eight left-eigenvecto
+rs of the GKW operator.
+ The red line corresponds to the zeroth eigenvector with components 
+\begin_inset Formula $w_{n0}=1/(n+1)$
+\end_inset 
+
+.
+ All of these were obtained numerically.
+ The normalization used here is to require that 
+\begin_inset Formula $w_{nk}~1/(n+1)$
+\end_inset 
+
+ for large values of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ 
+\end_inset 
+
+
+\layout Section
+
+The Singular Sawtooth of the First Kind
+\layout Standard
+
+The Gauss Map 
+\begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
+\end_inset 
+
+ is used in the construction of continued fractions.
+ In this section, we will study a model for this function, where we replace
+ the curve by a set of straight lines arranged between values of 
+\begin_inset Formula $1/n$
+\end_inset 
+
+ for integer 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ This forms a singular sawtooth, with a singularity at 
+\begin_inset Formula $x=0.$
+\end_inset 
+
+ 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+w(x)=\left\{ \begin{array}{ccc}
+2-2x & \;\textrm{ for \;} & \frac{1}{2}<x\leq1\\
+3-6x & \;\textrm{ for \;} & \frac{1}{3}<x\leq\frac{1}{2}\\
+4-12x & \;\textrm{ for \;} & \frac{1}{4}<x\leq\frac{1}{3}\\
+n+1-n(n+1)x & \;\textrm{ for \;} & \frac{1}{n+1}<x\leq\frac{1}{n}\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ This function is pictured in figure 
+\begin_inset LatexCommand \ref{cap:The-Singular-Sawtooth}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:The-Singular-Sawtooth}
+
+\end_inset 
+
+The Singular Sawtooth of the First Kind
+\layout Standard
+
+
+\begin_inset Graphics
+	filename saw-first.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This sawtooth function joins values of 
+\begin_inset Formula $1/n$
+\end_inset 
+
+ with straight lines.
+\end_inset 
+
+ The Frobenius-Perron operator for this function is exactly solvable, and
+ provides a toy model of the Gauss-Kuzmin-Wirsing operator.
+ The Frobenius-Perron operator of this sawtooth, acting on a general function
+ 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+, is given by
+\begin_inset Formula \begin{equation}
+\left[U_{w}f\right](x)=\sum_{x':w(x')=x}\frac{f(x')}{\left|dw(x')/dx'\right|}=\sum_{n=1}^{\infty}\frac{1}{n(n+1)}f\left(\frac{n+1-x}{n(n+1)}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+We develop a representation of this operator in the monomial-basis Hilbert
+ space below.
+\layout Subsection
+
+The Polynomial Eigenfunctions
+\layout Standard
+
+We will want to consider the action of this operator on polynomials of 
+\begin_inset Formula $y=1-x$
+\end_inset 
+
+, so that we can express 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ as a Taylor's expansion about 
+\begin_inset Formula $y=0$
+\end_inset 
+
+.
+ Lets make this change-of-variable now, and write 
+\begin_inset Formula \begin{equation}
+f(y)=\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}y^{k}\equiv\sum_{k=0}^{\infty}a_{k}y^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ so that 
+\begin_inset Formula \begin{equation}
+\left[U_{w}f\right](y)=\sum_{k=0}^{\infty}b_{k}y^{k}=\sum_{n=1}^{\infty}\frac{1}{n(n+1)}\sum_{k=0}^{\infty}a_{k}\left(\frac{n+y}{n(n+1)}\right)^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Rearranging the sums, and equating terms with the same power of 
+\begin_inset Formula $y$
+\end_inset 
+
+, we define the matrix elements 
+\begin_inset Formula $W_{mk}$
+\end_inset 
+
+ so that 
+\begin_inset Formula \begin{equation}
+b_{m}=\sum_{k=0}^{\infty}W_{mk}a_{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and find that 
+\begin_inset Formula \begin{equation}
+W_{mk}=\left\{ \begin{array}{ccc}
+\left(\begin{array}{c}
+k\\
+m\end{array}\right)\sum_{n=1}^{\infty}n^{-m-1}(n+1)^{-k-1} & \;\textrm{ for \;} & k\geq m\\
+0 & \;\textrm{ for \;} & k<m\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ where we use 
+\begin_inset Formula $\left(\begin{array}{c}
+k\\
+m\end{array}\right)$
+\end_inset 
+
+ to denote the binomial coefficient.
+ This matrix is upper-triangular, and thus has its eigenvalues along the
+ diagonal.
+ These are 
+\begin_inset Formula \begin{equation}
+\lambda_{k}=\sum_{n=1}^{\infty}\frac{1}{n^{k+1}(n+1)^{k+1}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ so that 
+\begin_inset Formula $\lambda_{0}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $\lambda_{1}=2\zeta(2)-3$
+\end_inset 
+
+ where 
+\begin_inset Formula $\zeta(x)$
+\end_inset 
+
+ is the Riemann zeta.
+ Numerically, we can see that the first few eigenvalues are 
+\begin_inset Formula $\lambda_{1}=0.289868...$
+\end_inset 
+
+ and 
+\begin_inset Formula $\lambda_{2}=0.130396...$
+\end_inset 
+
+ and 
+\begin_inset Formula $\lambda_{3}=0.0633278...$
+\end_inset 
+
+ and 
+\begin_inset Formula $\lambda_{4}=0.031383...$
+\end_inset 
+
+ and 
+\begin_inset Formula $\lambda_{5}=0.0156468...$
+\end_inset 
+
+ We can trivially see that the ratio of eigenvalues settles down to 
+\begin_inset Formula $\lambda_{k}/\lambda_{k+1}=2$
+\end_inset 
+
+ for large 
+\begin_inset Formula $k$
+\end_inset 
+
+, since the first term of the sum will dominate for large 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+We can solve the operator through recursion on the matrix elements of a
+ related operator, by observing that 
+\begin_inset Formula \begin{equation}
+Z_{mk}\equiv\sum_{n=1}^{\infty}\frac{1}{n^{m}(n+1)^{k}}\left[\frac{1}{n}-\frac{1}{n+1}\right]=Z_{m,k-1}-Z_{m-1,k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ These recurrence relations are bounded on the edges by 
+\begin_inset Formula $Z_{00}=1$
+\end_inset 
+
+, 
+\begin_inset Formula $Z_{01}=2-\zeta(2)$
+\end_inset 
+
+ and thus 
+\begin_inset Formula \begin{eqnarray}
+Z_{0k} &  & =Z_{0,k-1}-\left(\zeta(k+1)-1\right)=1-\sum_{j=1}^{k}\left[\zeta(j+1)-1\right]\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ and 
+\begin_inset Formula $Z_{10}=\zeta(2)-1$
+\end_inset 
+
+ so that 
+\begin_inset Formula \begin{equation}
+Z_{m0}=\zeta(m+1)-Z_{m-1,0}=(-)^{m}\left[1+\sum_{j=1}^{m}(-)^{j}\zeta(j+1)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ and we have 
+\begin_inset Formula $Z_{mk}=W_{mk}$
+\end_inset 
+
+ for 
+\begin_inset Formula $m\leq k$
+\end_inset 
+
+ .
+ The first few eigenfunctions are 
+\begin_inset Formula \[
+e_{0}(y)=1\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+e_{1}(y)=1-2y\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \begin{eqnarray}
+e_{2}(y) & = & \frac{15-13\zeta(2)-9\zeta(3)+2\zeta(2)[\zeta(2)+3\zeta(3)]}{3(13\zeta(2)-8\zeta(3))(3-2\zeta(2))}+\nonumber \\
+ &  & +\frac{6\zeta(2)+2\zeta(3)-12}{13-8\zeta(2)}\, y+y^{2}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ We see that although the eigenfunctions are polynomials and are exactly
+ solvable, they quickly spiral out of control.
+ 
+\layout Standard
+
+XXX To Do: Double-check 
+\begin_inset Formula $e_{2}$
+\end_inset 
+
+ Provide the closed-form finite-sum matrix elements.
+ Provide graphs of the first dozen polynomials.
+ Discuss the similarity transform that takes 
+\begin_inset Formula $w(x)$
+\end_inset 
+
+ to 
+\begin_inset Formula $h(x)$
+\end_inset 
+
+ and discuss why this fails to preserve the eigenvalues.
+ What are the shift-states of this operator? What are the continuous-eigenvalue
+ (square-integrable) eigenfunctions? Graph these eigenfunctions, see what
+ kind of fractals they look like.
+ 
+\layout Section
+
+Singular Sawtooth of the Second Kind
+\layout Standard
+
+The singular sawtooth of the second kind is given by the dyadic-space conjugate
+ of the continued-fraction shift function 
+\begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
+\end_inset 
+
+, that is, 
+\begin_inset Formula \begin{equation}
+c(x)=?\left(\frac{1}{?^{-1}(x)}-\left\lfloor \frac{1}{?^{-1}(x)}\right\rfloor \right)=(?\circ h\circ?^{-1})(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+ is the Minkowski Question Mark, presented in earlier chapters.
+ This map consists of straight-line segments between values of 
+\begin_inset Formula $1/2^{k}$
+\end_inset 
+
+, as pictured in figure 
+\begin_inset LatexCommand \ref{cap:Singular-Sawtooth,-Second}
+
+\end_inset 
+
+, and can be written as 
+\begin_inset Formula \begin{equation}
+c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Just as the Gauss Map is able to lop off the leading term of the continued
+ fraction expansion for 
+\begin_inset Formula $x$
+\end_inset 
+
+, so this map is able to lop off all of the leading zeros of the binary
+ expansion for 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ The downward slope of the sawtooth just reflects the binary expansion,
+ exchanging 1's for 0's, so that the next iteration can chop of the next
+ contiguous chunk.
+ Thus, the orbits of points under this map are completely isomorphic to
+ the orbits of points under the Gauss Map.
+ This is indeed the very idea of a 
+\begin_inset Quotes eld
+\end_inset 
+
+conjugate map
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The Frobenius-Perron operator of this function provides a second model of
+ the Gauss-Kuzmin-Wirsing operator.
+ It can be solved exactly; unfortunately, while one might think that there
+ is a similarity transform to take it back to GKW, it turns out this similarity
+ transform is dastardly singular, being just the Jacobian of the Minkowski
+ Question Mark 
+\begin_inset Formula $(?'\circ?^{-1})(x)$
+\end_inset 
+
+, which we examine in detail in a related paper of this series.
+ Thus, although the point dynamics of this sawtooth map are completely isomorphi
+c to the point dynamics of the Gauss Map, the spectra of the associated
+ transfer operators are 
+\emph on 
+not
+\emph default 
+ identical.
+ This is perhaps the most surprising result of this paper.
+ The FP operator is 
+\begin_inset Formula \begin{equation}
+\left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-x}{2^{n}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The following sections develop this operator in different function spaces.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Singular-Sawtooth,-Second}
+
+\end_inset 
+
+Singular Sawtooth, Second Kind
+\layout Standard
+
+
+\begin_inset Graphics
+	filename saw-second.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+Picture of the second kind of sawtooth.
+ 
+\end_inset 
+
+ 
+\layout Subsection
+
+The Polynomial Basis Eigenfunctions
+\layout Standard
+
+As before, we change variables to 
+\begin_inset Formula $y=1-x$
+\end_inset 
+
+, expand both sides in terms of 
+\begin_inset Formula $y$
+\end_inset 
+
+, and match terms to find the matrix elements 
+\begin_inset Formula \begin{equation}
+C_{mk}=\left(\begin{array}{c}
+k\\
+m\end{array}\right)\frac{1}{2^{k+1}-1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ which is upper triangular (we take the binomial coefficients to be vanishing
+ when 
+\begin_inset Formula $k<m$
+\end_inset 
+
+).
+ The eigenvalues lie along the diagonal.
+ The first few are 
+\begin_inset Formula $\lambda_{0}=1$
+\end_inset 
+
+, 
+\begin_inset Formula $\lambda_{1}=1/3$
+\end_inset 
+
+, 
+\begin_inset Formula $\lambda_{2}=1/7$
+\end_inset 
+
+, 
+\emph on 
+etc
+\emph default 
+.
+ with the ratio of successive eigenvalues tending to 2.
+ The first few eigenvectors are 
+\begin_inset Formula \[
+e_{0}=1\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+e_{1}=1-2y=2x-1\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+e_{2}=1-\frac{18}{5}y+\frac{12}{5}y^{2}=\frac{-1}{5}\left(1+6x-12x^{2}\right)\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+e_{3}=1-\frac{66}{13}y+\frac{84}{13}y^{2}-\frac{32}{13}y^{3}=\frac{-1}{13}\left(1+6x+12x^{2}-32x^{3}\right)\]
+
+\end_inset 
+
+
+\begin_inset Formula \begin{eqnarray}
+e_{4} & = & 1-\frac{36450}{5597}y+\frac{67620}{5597}y^{2}-\frac{50400}{5597}y^{3}+\frac{13440}{5597}y^{4}\nonumber \\
+ & = & \frac{-1}{29\cdot193}\left(193+1350x+2940x^{2}+3360x^{3}-13440x^{4}\right)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ As we can see, the complexity of individual eigenvectors spirals out of
+ control; there's no obvious simple closed form expression for higher eigenvecto
+rs.
+ Indeed, it seems that the simplest algorithm is to directly invert the
+ matrix.
+ This is curious, because the matrix itself is so curiously simple, and
+ superficially similar to that for the Bernoulli map.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Second Sawtooth Polynomials
+\layout Standard
+
+
+\begin_inset Graphics
+	filename saw-eigen.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+Eigenvectors of the second sawtooth.
+\end_inset 
+
+
+\layout Subsection
+
+The Failure of the Similarity Transform for the Polynomial Basis
+\layout Standard
+
+Under normal circumstances, whenever one has a pair of maps 
+\begin_inset Formula $\alpha(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\beta(x)$
+\end_inset 
+
+ that are conjugate to each other through an invertible function 
+\begin_inset Formula $\phi(x)$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\alpha(x)=(\phi\circ\beta\circ\phi^{-1})(x)$
+\end_inset 
+
+, then there exists a similarity transform 
+\begin_inset Formula $S_{\phi}$
+\end_inset 
+
+ such that the Frobenius-Perron operators are also conjugate; that is, 
+\begin_inset Formula $U_{\alpha}=S_{\phi}U_{\beta}S_{\phi}^{-1}$
+\end_inset 
+
+ where 
+\begin_inset Formula $S_{\phi}^{-1}=S_{\phi^{-1}}$
+\end_inset 
+
+.
+ Formally, one finds that 
+\begin_inset Formula $S_{\phi}=1/(\phi'\circ\phi^{-1})$
+\end_inset 
+
+ where the prime denotes differentiation: 
+\begin_inset Formula $\phi'(x)=d\phi(x)/dx$
+\end_inset 
+
+ .
+ Since the continued-fraction shift function is conjugate to the sawtooth,
+ one might hope that GKW would be conjugate to 
+\begin_inset Formula $U_{C}$
+\end_inset 
+
+, that is, 
+\begin_inset Formula $U_{h}=S_{?}U_{C}S_{?}^{-1}$
+\end_inset 
+
+.
+ Unfortunately, the Minkowski Question Mark is highly singular and is not
+ traditionally differentiable, and so we cannot build such a similarity
+ transform using the polynomial function basis.
+ Another way to deduce this is to note that the similarity transform 
+\begin_inset Formula $S_{\phi}$
+\end_inset 
+
+, working as a traditional, ordinary operator, normally preserves the eigenvalue
+s; that is, the eigenvalues of 
+\begin_inset Formula $U_{\alpha}$
+\end_inset 
+
+ equal those of 
+\begin_inset Formula $U_{\beta}$
+\end_inset 
+
+.
+ In the current case, we see trouble in that the eigenvalues of 
+\begin_inset Formula $U_{C}$
+\end_inset 
+
+ are not those of GKW.
+ They are not even 'close', in that the ratio of tends to 
+\begin_inset Formula $\lambda_{k}/\lambda_{k+1}=2$
+\end_inset 
+
+ whereas for the GKW the ratio is 2.61803...
+ (square of golden mean (see Phillipe Flajolet and Brigitte Vallée, On the
+ Gauss-Kuzmin-Wirsing Constant (1995).)) 
+\layout Standard
+
+However, there are suggestive elements.
+ For example, the function argument 
+\begin_inset Formula $(2-x)/2^{n}$
+\end_inset 
+
+ is just the dyadic polynomial 
+\begin_inset Formula $(g_{D}^{n-1}r_{D}g_{D})(x)$
+\end_inset 
+
+.
+ Tantalizingly, the corresponding Moebius transform is 
+\begin_inset Formula $(g_{C}^{n-1}r_{C}g_{C})(x)=1/(n+x)$
+\end_inset 
+
+ which is the function argument to the GKW operator.
+ This suggests the tantalizing re-write of the terms of GKW as 
+\begin_inset Formula \begin{equation}
+f\left(\frac{1}{n+x}\right)=f\circ?^{-1}\left(\frac{2-?(x)}{2^{n}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Also, one can do strange things such as xxx but why do we want to do that?
+\layout Standard
+
+The point is to not give up hope on the operator relationships, even though
+ the polynomial basis breaks the relationship.
+ Thus, we are motivated to explore other bases, and not just the polynomial
+ basis.
+ Fortunately, we can find some of these.
+ 
+\layout Subsection
+
+Fractal Eigenfunctions of the Second Sawtooth
+\layout Standard
+
+The Takagi curve can be used to build an alternate set of eigenfunctions
+ for the second sawtooth, possessing continuous-spectrum eigenvalues.
+ These eigenfunctions are not differentiable, and thus cannot be obtained
+ through polynomials, and thus are not visible when working with the operator
+ in a polynomial-basis Hilbert Space.
+ They can be used to build an alternate function space, in which the Second
+ Sawtooth remains exactly solvable.
+ 
+\layout Standard
+
+We recognize from the studying of the dyadic representation of the Modular
+ Group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ that the second sawtooth is expressed in terms of the group element 
+\begin_inset Formula \begin{equation}
+\left[g_{D}^{k-1}r_{D}g_{D}\right](x)=\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ that is, 
+\begin_inset Formula \begin{equation}
+\left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\left[g_{D}^{n-1}r_{D}g_{D}\right](x)\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+and thus functions 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ possessing the modular group symmetry are candidates for solving the operator
+ 
+\begin_inset Formula $U_{C}$
+\end_inset 
+
+.
+ The candidates we have in mind are of course the family of Takagi Curves.
+ 
+\layout Standard
+
+We begin by defining the Takagi Curve as 
+\begin_inset Formula \begin{equation}
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+ is the triangle wave: 
+\begin_inset Formula \begin{equation}
+\tau(x)=\left\{ \begin{array}{ccc}
+2x & \;\textrm{ when }\; & 0\leq x\leq1/2\\
+2(1-x) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ This form of the Takagi curve transforms under the three-dimensional representa
+tion of the Modular Group.
+ Specifically, we write 
+\begin_inset Formula \begin{equation}
+g_{3}^{n}=\left(\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 1/2^{n} & 0\\
+0 & q_{n}(w) & w\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $q_{n}(w)$
+\end_inset 
+
+ is the polynomial 
+\begin_inset Formula \begin{equation}
+q_{n}(w)=\frac{1}{2^{n-1}}\sum_{k-0}^{n-1}(2w)^{k}=\frac{1}{2^{n-1}}\left(\frac{1-(2w)^{n}}{1-2w}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ We write out the full matrix form for 
+\begin_inset Formula $g_{3}^{k-1}r_{3}g_{3}$
+\end_inset 
+
+ and apply the group action isomorphism 
+\begin_inset Formula $t_{w}g_{D}^{k-1}r_{D}g_{D}=g_{3}^{k-1}r_{3}g_{3}t_{w}$
+\end_inset 
+
+ to obtain 
+\begin_inset Formula \begin{equation}
+t_{w}\left(\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\right)=q_{k-1}(w)+x\left(w^{k-1}-q_{k-1}(w)/2\right)+w^{k}t_{w}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Inserting the above back into the definition for the sawtooth operator,
+ and performing the sum, we get
+\begin_inset Formula \begin{equation}
+\left[U_{C}t_{w}\right](x)=\frac{4}{3(2-w)}+\frac{x}{3(2-w)}+\frac{wt_{w}(x)}{2-w}\label{eq:}\end{equation}
+
+\end_inset 
+
+ From this, we can immediately read off the eigenvalue as 
+\begin_inset Formula $w/(2-w)$
+\end_inset 
+
+.
+ To get the eigenfunction, we need to complete the diagonalization by using
+ 
+\begin_inset Formula $\left[U_{C}1\right](x)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left[U_{C}x\right](x)=(2-x)/3$
+\end_inset 
+
+ to get the eigenfunction 
+\begin_inset Formula \begin{equation}
+E_{2}(x)=\frac{2-w}{2(w+1)(w-1)}+\frac{x}{2(w+1)}+t_{w}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ It should be clear from this presentation that the higher and lower dimensional
+ Takagi curves, of both even and odd parity, give eigenvectors and eigenvalues
+ as well.
+ We present a few more here:
+\layout Standard
+
+XXX to do, present 
+\begin_inset Formula $E_{1}$
+\end_inset 
+
+and the odd-parity 
+\begin_inset Formula $E_{2}$
+\end_inset 
+
+and both parities for 
+\begin_inset Formula $E_{3}$
+\end_inset 
+
+ as well.
+ Show graphs as well.
+\layout Standard
+
+XXX Note a shallow relationship to the Gaussian Binomial: viz.
+\begin_inset Formula \[
+\left(\begin{array}{c}
+n\\
+1\end{array}\right)_{x}\equiv\frac{1-x^{n}}{1-x}\]
+
+\end_inset 
+
+
+\layout Standard
+
+Previously, we saw that the Takagi Curves served as basis vectors for a
+ space of degenerate eigenfunctions of the Bernoulli Map, associated with
+ arbitrary eigenvalue.
+ We saw that this space could also be spanned by the Hurwitz Zeta, through
+ a change of basis.
+ Thus, we expect that we can extend these results to this map as well.
+\layout Section
+
+The Isola Map 
+\layout Standard
+
+Stefano Isola proposes studying a map of deceptive simplicity
+\begin_inset LatexCommand \cite{key-12}
+
+\end_inset 
+
+.
+ Given by 
+\begin_inset Formula \begin{equation}
+F(x)=\left\{ \begin{array}{c}
+x/(1-x)\;\textrm{ if }\;0\leq x\leq1/2\\
+(1-x)/x\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ it is symmetric about 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+: that is, 
+\begin_inset Formula $F(x)=F(1-x)$
+\end_inset 
+
+, and has a very simple tent-like shape, and this is the source of the deception.
+ One wants to hastily conclude that it is topologically equivalent to the
+ standard tent map 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\tau(x)=\left\{ \begin{array}{c}
+2x\;\textrm{ if }\;0\leq x\leq1/2\\
+2-2x\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ and thus that the spectrum of its Frobenius-Perron Operator is identical
+ to that of the Bernoulli Map, and that this map can be trivially brushed
+ aside as belonging to that conjugacy class.
+ Nothing could be farther from the truth.
+ In fact, it is conjugate, but the conjugating function is the Minkowski
+ Question Mark: 
+\begin_inset Formula \begin{equation}
+F(x)=(?^{-1}\circ\tau\circ?)(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so the relationship is anything but trivial.
+ The easiest way to see this is to note that we can write 
+\begin_inset Formula $F$
+\end_inset 
+
+ and 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ are combinations of the modular group element 
+\begin_inset Formula $g^{-1}$
+\end_inset 
+
+:
+\begin_inset Formula \begin{equation}
+F(x)=\left\{ \begin{array}{c}
+g_{C}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
+(g_{C}^{-1}\circ r)(x)\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ following the notation of earlier chapters, and
+\begin_inset Formula \begin{equation}
+\tau(x)=\left\{ \begin{array}{c}
+g_{D}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
+(g_{D}^{-1}\circ r)(x)\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset 
+
+ Just as we saw with the second sawtooth, the point dynamics of the Isola
+ Map and the Tent Map are isomorphic to each other, but the eigenvalue spectra
+ are inequivalent.
+ The Frobenius-Perron (Transfer) Operator for the Isola Map is 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{P}f\right](x)=\frac{1}{\left(1+x\right)^{2}}\left[f\left(\frac{x}{x+1}\right)+f\left(\frac{1}{x+1}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ The Gauss-Kuzmin-Wirsing operator can be constructed through some simple
+ operator relationships on 
+\begin_inset Formula $\mathcal{P}$
+\end_inset 
+
+ and so it is a worthwhile goal to attempt to solve 
+\begin_inset Formula $\mathcal{P}$
+\end_inset 
+
+.
+ As we will see below, this seems to be an even harder task.
+\layout Subsection
+
+The (Lack of a) Polynomial Basis
+\layout Standard
+
+Based on our previous luck, we attempt to define the operator 
+\begin_inset Formula $\mathcal{P}$
+\end_inset 
+
+ in the polynomial basis.
+ First, we attempt an expansion at 
+\begin_inset Formula $x=0$
+\end_inset 
+
+.
+ This leads to 
+\begin_inset Formula \begin{eqnarray}
+\mathcal{P}_{nk} & \equiv & \left\langle n\left|\mathcal{P}\right|k\right\rangle \nonumber \\
+ & = & (-)^{n}\left[\left(\begin{array}{c}
+k+n+1\\
+k+1\end{array}\right)+\Theta_{k\leq n}(-)^{k}\left(\begin{array}{c}
+n+1\\
+k+1\end{array}\right)\right]\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ This matrix is not triangular, and is thus not directly solvable.
+ It is also very ill-conditioned, making it not numerically tractable, at
+ least, not in any simple fashion.
+ As 
+\begin_inset Formula $n$
+\end_inset 
+
+ gets large, the matrix elements grow exponentially on the diagonal.
+ This is easily seen by applying Stirling's asymptotic formula for the factorial
+ to the binomial; one easily gets 
+\begin_inset Formula \begin{equation}
+\left(\begin{array}{c}
+n\\
+k\end{array}\right)\approx\frac{2^{n+1}}{\sqrt{2\pi n}}\exp\left(\frac{-(2k-n)^{2}}{2n}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ when 
+\begin_inset Formula $n$
+\end_inset 
+
+ and 
+\begin_inset Formula $k$
+\end_inset 
+
+ get large.
+ Thus, along the diagonal, 
+\begin_inset Formula $\mathcal{P}_{nn}\approx4^{n+1}/2\sqrt{\pi n}$
+\end_inset 
+
+, and the matrix is not tractable numerically, and would be painful to work
+ with analytically, without defining some sort of regulator.
+ Thus, we are motivated to look at the expansion at 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+.
+ Here, however, the situation is not much better.
+ Defining 
+\begin_inset Formula $y=x-1/2$
+\end_inset 
+
+ so that 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{Q}f\right](x)=\frac{1}{\left(y+3/2\right)^{2}}\left[f\left(\frac{y+1/2}{y+3/2}\right)+f\left(\frac{1}{y+3/2}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ we work through the same set of steps to obtain 
+\begin_inset Formula \begin{eqnarray}
+\mathcal{Q}_{nk} & \equiv & \left\langle n\left|\mathcal{Q}\right|k\right\rangle \nonumber \\
+ & = & \left(\frac{-2}{3}\right)^{n+2}\left[\left(\frac{2}{3}\right)^{k}\left(\begin{array}{c}
+k+n+1\\
+k+1\end{array}\right)+\left(\frac{1}{3}\right)^{k}\;\sum_{p=0}^{\min(n,k)}\left(-3\right)^{p}\left(\begin{array}{c}
+n+k-p+1\\
+k+1\end{array}\right)\left(\begin{array}{c}
+k\\
+p\end{array}\right)\right]\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ which is far more complex, and only marginally less divergent: 
+\begin_inset Formula $\mathcal{Q}_{nn}\sim(16/9)^{n+1}$
+\end_inset 
+
+.
+ There is hardly any hope that a Taylor's expansion around any other value
+ of 
+\begin_inset Formula $x$
+\end_inset 
+
+ will give a tractable result; the trick of using the Taylor's expansion
+ to obtain polynomial eigenstates fails in this case.
+ Indeed, it seems likely that the eigenstates will not be analytic, although
+ it is not clear to me what theorem would establish or disprove this conjecture.
+\layout Section
+
+Conclusions
+\layout Standard
+
+Apologies for the format of this paper.
+ It's a veritable candy store of goodies; there are all these yummy toys
+ to play with, which one first?
+\layout Bibliography
+\bibitem [asdf]{key-1}
+
+Here is a very similarly titled paper with a very different subject matter:
+ 
+\begin_inset LatexCommand \htmlurl[Continued Fractions and Chaos]{http://www.cecm.sfu.ca/organics/papers/corless/confrac/html/confrac.html}
+
+\end_inset 
+
+ by Robert M.
+ Corless
+\layout Bibliography
+\bibitem [Dri99]{key-2}
+
+Dean Driebe, 
+\emph on 
+Fully Chaotic Maps and Broken Time Symmetry, 1999,
+\emph default 
+ Kluwer Academic Publishers
+\layout Bibliography
+\bibitem [Man88]{key-3}
+
+Benoit Mandelbrot, in 
+\emph on 
+The Science of Fractal Images, ed.
+ Heinz-Otto Peitgen, Dietmar Saupe,
+\emph default 
+ (Springer-Verlag, 1988) p.
+ 246
+\layout Bibliography
+\bibitem [deR57]{key-4}
+
+Georges de Rham, 
+\emph on 
+On Some Curves Defined by Functional Equations
+\emph default 
+ (1957), reprinted in
+\emph on 
+ Classics on Fractals, ed.
+ Gerald A.
+ Edgar
+\emph default 
+, (Addison-Wesley, 1993) pp.
+ 285-298
+\layout Bibliography
+\bibitem [Gas92]{key-10}
+
+P.
+ Gaspard, 
+\emph on 
+r-adic one-dimensional maps and the Euler summation formula
+\emph default 
+, 1992, Journal of Physics A: Mathematical and General, vol.
+ 25, L483-485.
+ 
+\layout Bibliography
+\bibitem [Ed74]{key-11}
+
+H.
+ M.
+ Edwards, 
+\emph on 
+Riemann's Zeta Function,
+\emph default 
+ 1972, (Dover Publications, New York) pp.
+ 13ff 
+\layout Bibliography
+\bibitem [Iso03]{key-12}
+
+Stefano Isola, 
+\emph on 
+On the Spectrum of Farey and Gauss Maps
+\emph default 
+, preprint, undated (2004 or earlier)
+\layout Bibliography
+\bibitem [Apo76]{key-13}
+
+Tom M.
+ Apostol, 
+\emph on 
+Introduction to Analytic Number Theory
+\emph default 
+, 1976, (Springer-Verlag, New York)
+\the_end
