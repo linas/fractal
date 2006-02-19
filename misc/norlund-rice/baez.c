@@ -11,17 +11,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gsl/gsl_sf_gamma.h>
+#include <gsl/gsl_sf_zeta.h>
 
-/* uses the Hasse expansion */
+#include "binomial.h"
+
+/* Compute the Riemann zeta for general complex argument.
+ * Uses the Hasse expansion. More or less accurate;
+ * has some accuracy trouble near the pole at s=1;
+ */
 void riemann_zeta (double res, double ims, double *rez, double *imz)
 {
 	double zre = 0.0;
 	double zim = 0.0;
+	double err;
 
 	int n;
 
 	double twn = 0.5;
-	for (n=0; n<50; n++)
+
+	/* don't change the 110 -- it seems liek the right 
+	 * thing for stuff going in the imaginary direction
+	 */
+	for (n=0; n<110; n++)
 	{
 		int k;
 		double reb = 0.0;
@@ -29,10 +40,10 @@ void riemann_zeta (double res, double ims, double *rez, double *imz)
 		double sgn = 1.0;
 		for (k=0; k<=n; k++)
 		{
+			double r = binomial (n,k);
+			// printf ("duude %d %d bin=%g\n", n, k, r);
 			double lnk = log (k+1.0);
-			double r = exp (-res*lnk);
-			r *= binomial (n,k);
-			r *= sgn;
+			r *= sgn * exp (-res*lnk);
 			reb += r * cos (ims*lnk);
 			imb += r * sin (ims*lnk);
 			sgn = -sgn;
@@ -43,15 +54,22 @@ void riemann_zeta (double res, double ims, double *rez, double *imz)
 		zre += ret;
 		zim += imt;
 
-		if (ret*ret+imt*imt < 1.0e-30) break;
+		err = ret*ret+imt*imt;
+		// printf ("duude n=%d z=(%g %g) err=%g\n", n, zre, zim, err);
+
+		/* Along imaginary axies, the error never seems 
+		 * get less than 1.0e-34, no matter what (I don't get why)
+		 * so cut off here.
+		 */
+		if (err < 1.0e-33) break;
 		twn *= 0.5;
 	}
 
-printf ("duude leave with n=%d\n", n);
+	// printf ("duude leave with n=%d err=%g \n", n, sqrt (err));
 
 	double r = pow (2.0, 1-res);
 	double ret = 1.0 - r* cos (ims*M_LN2);
-	double imt = r* sinc (ims*M_LN2);
+	double imt = r* sin (ims*M_LN2);
 	r = ret*ret + imt*imt;
 	r = 1.0/r;
 
@@ -65,19 +83,65 @@ printf ("duude leave with n=%d\n", n);
 	*rez = zre;
 	*imz = zim;
 }
+
 int
 main (int argc, char * argv[])
 {
 	double t=0.0;
-	int n=3;
+	int n;
 
-	for (t=-10.0; t<=10.0; t+=0.2)
+	int error_occured = 0;
+
+#if 0
+	for (n=2; n<=40; n++)
 	{
 		double reg, img;
-		// integrand (t, n, &reg, &img);
-		reimann_zeta (t, n, &reg, &img);
+		riemann_zeta (n, 0.0, &reg, &img);
+		double gslz = gsl_sf_zeta_int (n);
 
-		printf ("duude its %g   %g %g \n", t, reg, img);
+		double err = reg-gslz;
+		if ((fabs(err) > 1.0e-15) || (fabs (img) > 1.0e-15))
+		{
+			printf ("ERROR for n=%d   error=%g %g \n", n, err,  img);
+			error_occured ++;
+		}
+	}
+
+	for (t=2.0; t<=66.0; t+=0.0314683)
+	{
+		double reg, img;
+		riemann_zeta (t, 0.0, &reg, &img);
+		double gslz = gsl_sf_zeta (t);
+
+		double err = reg-gslz;
+		if ((fabs(err) > 1.0e-15) || (fabs (img) > 1.0e-15))
+		{
+			printf ("ERROR for s=%g   error=%g %g \n", t, err,  img);
+			error_occured ++;
+		}
+	}
+
+	for (t=1.01; t<=2.1; t+=0.00314683)
+	{
+		double reg, img;
+		riemann_zeta (t, 0.0, &reg, &img);
+		double gslz = gsl_sf_zeta (t);
+
+		double err = reg-gslz;
+		if ((fabs(err) > 1.0e-13) || (fabs (img) > 1.0e-15))
+		{
+			printf ("ERROR for s=%g   error=%g %g \n", t, err,  img);
+			error_occured ++;
+		}
+	}
+#endif
+
+	for (t=0.0; t<=66.0; t+=0.06314683)
+	{
+		double reg, img;
+		riemann_zeta (0.5, t, &reg, &img);
+
+		printf ("%g\t%g\t%g\n", t, reg, img);
 	}
 
 	return 0;
@@ -145,7 +209,7 @@ main (int argc, char * argv[])
 		// integrand (t, n, &reg, &img);
 		reimann_zeta (t, n, &reg, &img);
 
-		printf ("duude its %g   %g %g \n", t, reg, img);
+		printf ("%g\t%g\t%g\n", t, reg, img);
 	}
 
 	return 0;
