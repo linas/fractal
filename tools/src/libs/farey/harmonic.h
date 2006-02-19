@@ -11,15 +11,15 @@
 
 #include <complex.h>
 
-// return Reiman zeta -1
-// must have n>=2 
+// Return Reiman zeta -1
+// Must have integer n>=2 
 long double zetam1 (int n);
 
-// return the trigamma function per A&S chapter on gamma
+// Return the trigamma function per A&S chapter on gamma
 // trigamma = psi-prime derivative of psi
 long double trigamma (long double x);
 
-/* Return the n'th harmnic number */
+/* Return the n'th harmonic number */
 long double harmonic (int n, long double ess);
 
 /* Return Hurwitz zeta equiv of harmonic */
