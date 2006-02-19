@@ -45,7 +45,7 @@ void riemann_zeta (double res, double ims, double *rez, double *imz)
 			double lnk = log (k+1.0);
 			r *= sgn * exp (-res*lnk);
 			reb += r * cos (ims*lnk);
-			imb += r * sin (ims*lnk);
+			imb -= r * sin (ims*lnk);
 			sgn = -sgn;
 		}
 
@@ -136,7 +136,7 @@ main (int argc, char * argv[])
 	}
 #endif
 
-	for (t=0.0; t<=28.0; t+=0.06314683)
+	for (t=0.0; t<=48.0; t+=0.06314683)
 	{
 		double reg, img;
 		riemann_zeta (0.5, t, &reg, &img);
