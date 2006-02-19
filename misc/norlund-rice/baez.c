@@ -136,7 +136,7 @@ main (int argc, char * argv[])
 	}
 #endif
 
-	for (t=0.0; t<=66.0; t+=0.06314683)
+	for (t=0.0; t<=28.0; t+=0.06314683)
 	{
 		double reg, img;
 		riemann_zeta (0.5, t, &reg, &img);
@@ -144,7 +144,7 @@ main (int argc, char * argv[])
 		printf ("%g\t%g\t%g\n", t, reg, img);
 	}
 
-	return 0;
+	return error_occured;
 }
 
 #if 0
