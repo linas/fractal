@@ -23,7 +23,6 @@ static int max_terms;
 
 static void q_exp_c (double re_q, double im_q, double *prep, double *pimp)
 {
-	double tmp;
 	int i;
 	*prep = 0.0;
 	*pimp = 0.0;

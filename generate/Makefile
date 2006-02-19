@@ -15,7 +15,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         manvert cutoff brat draw dx image
 
 NEW_EXES = alpha circle cutoff elliptic erdos euler-q mand-flow \
-        mp_zeta mobius swap takagi totient  \
+        mp_zeta mobius q-exp swap takagi totient  \
         ray automatic radius
 
 all:    $(NEW_EXES)
@@ -53,6 +53,7 @@ cutoff.o: cutoff.C
 euler-q.o: euler-q.C
 mobius.o: mobius.C
 mp_zeta.o: mp_zeta.C
+q-exp.o: q-exp.C brat.h
 swap.o: swap.C
 takagi.o: takagi.C brat.h
 totient.o: totient.C brat.h
@@ -79,6 +80,7 @@ euler-q: brat.o euler-q.o coord-xforms.o util.o $(MODULAR)
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
 mp_zeta: brat.o mp_zeta.o util.o $(GMP)
+q-exp: brat.o q-exp.o util.o
 swap: brat.o swap.o util.o
 takagi: brat.o takagi.o util.o
 totient: brat.o totient.o util.o $(GCF) $(TOTIENT)
