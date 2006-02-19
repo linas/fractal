@@ -108,7 +108,7 @@ Hasse also gave a similar, globally convergent, expansion for the Hurwitz
 Dirichlet Beta
 \layout Standard
 
-The Dirichlet zeta is given by 
+The Dirichlet beta is given by 
 \begin_inset Formula \[
 \beta(s)=\sum_{n=0}^{\infty}\frac{(-1)^{n}}{(2n+1)^{s}}\]
 
@@ -152,10 +152,128 @@ S_{1}(n)\ge\frac{n}{2}\ln n+\left(\gamma-1\right)\frac{n}{2}+\frac{1}{2}\]
 \end_inset 
 
  We can read off the full result instantly from the result on the L-functions.
- 
+\layout Subsection
+
+Another Coffey sum
 \layout Standard
 
-adf
+Coffey 
+\begin_inset LatexCommand \cite{Cof05}
+
+\end_inset 
+
+ shows interest in another sum:
+\begin_inset Formula \[
+S_{3}(n)=\sum_{k=2}^{n}(-1)^{k}{n \choose k}2^{k}\zeta(k)\]
+
+\end_inset 
+
+ The reson for the interest in this sum is unclear.
+\layout Subsection
+
+A Li Criterion-related sum
+\layout Standard
+
+Coffey 
+\begin_inset LatexCommand \cite{Cof05}
+
+\end_inset 
+
+ provides a sequence 
+\begin_inset Formula $\eta_{k}$
+\end_inset 
+
+which seems to be of the form 
+\begin_inset Formula $\exp-k$
+\end_inset 
+
+ and thus suggests that the saddle-point techniques should be applicable.
+ These appear in equation 10 as
+\begin_inset Formula \[
+\lambda_{n}=-\sum_{k=1}^{n}{n \choose k}\eta_{k-1}+S_{1}(n)+1-\frac{n}{2}\left(\gamma+\ln\pi+2\ln2\right)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $S_{1}(n)$
+\end_inset 
+
+is given above, and 
+\begin_inset Formula $\lambda_{n}$
+\end_inset 
+
+ are the Li coefficients 
+\begin_inset Formula \[
+\lambda_{n}=\frac{1}{(n-1)!}\left.\frac{d^{n}}{ds^{n}}s^{n-1}\ln\xi(s)\right|_{s=1}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\xi(s)=\frac{1}{2}s(s-1)\pi^{-s/2}\Gamma\left(\frac{s}{2}\right)\zeta(s)\]
+
+\end_inset 
+
+ Part of what is curious is that the 
+\begin_inset Formula $\eta_{k}$
+\end_inset 
+
+ appear in an expression similar to the what is seen for the Stieltjes constants
+, but involve the von Mangoldt function.
+ 
+\layout Subsection
+
+Prodinger, Knuth
+\layout Standard
+
+Prodinger considers a curious sum, and provides an answer; Knuth 
+\begin_inset LatexCommand \cite{Knu73}
+
+\end_inset 
+
+ had previously provided a related sum.
+ Doesn't seem to be much to do here, as the leading terms are already given,
+ and,m from the comp-sci point of view, these are enough.
+ The motivation for providing the exponentially small terms is uncertain.
+ The Prodinger sum is 
+\begin_inset LatexCommand \cite{Prod93}
+
+\end_inset 
+
+:
+\begin_inset Formula \[
+S=\sum_{k=1}^{n-1}{n \choose k}\frac{B_{k}}{2^{k}-1}\simeq-\log_{2}n+\frac{1}{2}+\delta_{2}\left(\log_{2}n\right)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $B_{k}$
+\end_inset 
+
+ are the Bernoulli numbers.
+ The Norlund-Rice integral is 
+\begin_inset Formula \[
+S=\frac{1}{2\pi i}\int_{1/2-i\infty}^{1/2+i\infty}\frac{(-1)^{n}n!}{((s-1)(s-2)\cdots(s-n)}\cdot\frac{\zeta(1-s)}{2^{s}-1}\, ds\]
+
+\end_inset 
+
+ The poles due to 
+\begin_inset Formula $2^{z}-1$
+\end_inset 
+
+ lead to the curious term in the asymptotic expansion: 
+\begin_inset Formula \[
+\delta_{2}(x)=\frac{1}{\log2}\sum_{k\ne0}\zeta\left(1-\chi_{k}\right)\Gamma\left(1-\chi_{k}\right)e^{2\pi ikx}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula \[
+\chi_{k}=\frac{2\pi ki}{\log2}\]
+
+\end_inset 
+
+
 \layout Standard
 
 
