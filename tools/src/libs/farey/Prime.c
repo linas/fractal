@@ -9,6 +9,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "Prime.h"
 
 
@@ -109,10 +110,11 @@ int IsPrime (struct Prime *self, int num)
    max = tmp;
    max ++;
 
+	return 1;
 }
 
 /* ====================================================== */
-
+void
 test_prime ()
 {
    struct Prime *p;

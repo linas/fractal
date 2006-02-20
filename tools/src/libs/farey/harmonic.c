@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "binomial.h"
 #include "harmonic.h"
 
 /* zeta function for integer values */
@@ -308,10 +309,9 @@ void riemann_zeta (double res, double ims, double *rez, double *imz)
 	double err;
 
 	int n;
-
 	double twn = 0.5;
 
-	/* don't change the 110 -- it seems liek the right 
+	/* Don't change the 110 -- it seems liek the right 
 	 * thing for stuff going in the imaginary direction
 	 */
 	for (n=0; n<110; n++)
