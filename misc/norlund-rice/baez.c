@@ -87,12 +87,11 @@ void riemann_zeta (double res, double ims, double *rez, double *imz)
 int
 main (int argc, char * argv[])
 {
-	double t=0.0;
+	double s,t=0.0;
 	int n;
 
 	int error_occured = 0;
 
-#if 0
 	for (n=2; n<=40; n++)
 	{
 		double reg, img;
@@ -134,14 +133,24 @@ main (int argc, char * argv[])
 			error_occured ++;
 		}
 	}
-#endif
 
-	for (t=0.0; t<=48.0; t+=0.06314683)
+	for (s=-40.0; s<=40.0; s += 0.4356346)
 	{
-		double reg, img;
-		riemann_zeta (0.5, t, &reg, &img);
-
-		printf ("%g\t%g\t%g\n", t, reg, img);
+		for (t=0.0; t<=48.0; t+=0.6314683)
+		{
+			double reg, img;
+			riemann_zeta (0.5, t, &reg, &img);
+			double nreg, nimg;
+			riemann_zeta (0.5, -t, &nreg, &nimg);
+	
+			double rerr = reg-nreg;
+			double ierr = img+nimg;
+			if ((fabs(rerr) > 1.0e-13) || (fabs (ierr) > 1.0e-15))
+			{
+				printf ("ERROR for s=%g   error=%g %g \n", t, rerr,  ierr);
+				error_occured ++;
+			}
+		}
 	}
 
 	return error_occured;
