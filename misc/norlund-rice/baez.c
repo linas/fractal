@@ -15,14 +15,14 @@
 #include "binomial.h"
 #include "harmonic.h"
 
-void simple_integrand (double t, int n, double *reg, double * img)
+void simple_integrand (double sig, double t, int n, double *reg, double * img)
 {
 	gsl_sf_result lnr, arg;
 
 	double regr = 0.0;
 	double imgr = 0.0;
 
-	double res = 0.5;
+	double res = sig;
 	double ims = t;
 
 	/* Gamma (s) */
@@ -104,19 +104,21 @@ void reflect_integrand (double t, int n, double *reg, double * img)
 }
 
 double
-integrate (int n)
+arc_integral (int n, double radius)
 {
-	double t=0.0;
-
 	double reacc = 0.0;
 	double imacc = 0.0;
 
-	double step = 0.03;
-	double lim = 6.0;
-	for (t=-lim; t<=lim; t+=step)
+	double step = 0.1;
+	double theta;
+	for (theta=-0.5*M_PI; theta<=0.5*M_PI; theta+=step)
 	{
+		double res = -0.5 + radius * cos (theta);
+		double ims = radius * sin (theta);
+
 		double reg, img;
-		simple_integrand (t, n, &reg, &img);
+		simple_integrand (res, ims, n, &reg, &img);
+		// printf ("%g\t%g\t%g\n", t, reg, img);
 
 		double r = exp (reg);
 		reacc += r * cos (img);
@@ -125,11 +127,50 @@ integrate (int n)
 		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
 	}
 
+	reacc *= step;
+	reacc *= factorial (n);
+	reacc /= 2.0*M_PI;
+
 	imacc *= step;
 	imacc *= factorial (n);
-	imacc /= 4.0*M_PI;
+	imacc /= 2.0*M_PI;
 
-	return imacc;
+	printf ("duude arc integral=%g  %g\n", reacc, imacc);
+	return reacc;
+}
+
+double
+integrate (int n)
+{
+	double t=0.0;
+
+	double reacc = 0.0;
+	double imacc = 0.0;
+
+	double step = 0.1;
+	double lim = 6.0;
+	for (t=-lim; t<=lim; t+=step)
+	{
+		double reg, img;
+		simple_integrand (-0.5, t, n, &reg, &img);
+		// printf ("%g\t%g\t%g\n", t, reg, img);
+
+		double r = exp (reg);
+		reacc += r * cos (img);
+		imacc += r * sin (img);
+
+		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
+	}
+
+	reacc *= step;
+	reacc *= factorial (n);
+	reacc /= 2.0*M_PI;
+
+	imacc *= step;
+	imacc *= factorial (n);
+	imacc /= 2.0*M_PI;
+
+	return reacc;
 }
 
 double sum (int n)
@@ -156,11 +197,26 @@ main (int argc, char * argv[])
 	int n=3;
 
 	n = atoi (argv[1]);
+double rad = n;
+n=6;;
 
 	double in = integrate (n);
+	double ain = arc_integral (n, rad);
 	double su = sum (n);
 
-	printf ("integ=%g sum=%g r = %g\n", in, su, su/in);
+	printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, su/in);
+
+#if 0
+	for (n=1; n<40; n++)
+	{
+		su = sum (n);
+
+		double norm = pow (n, 0.75);
+		norm *= log(n)*log(n);
+		su *= norm;
+		printf ("%d\t%g\n", n, su);
+	}
+#endif
 
 	return 0;
 }
