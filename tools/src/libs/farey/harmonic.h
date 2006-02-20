@@ -15,6 +15,12 @@
 // Must have integer n>=2 
 long double zetam1 (int n);
 
+/* Compute the Riemann zeta for general complex argument.
+ * Uses the Hasse expansion. More or less accurate;
+ * has some accuracy trouble near the pole at s=1;
+ */
+void riemann_zeta (double res, double ims, double *rez, double *imz);
+
 // Return the trigamma function per A&S chapter on gamma
 // trigamma = psi-prime derivative of psi
 long double trigamma (long double x);
