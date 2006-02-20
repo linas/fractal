@@ -15,15 +15,94 @@
 #include "binomial.h"
 #include "harmonic.h"
 
-void simple_integrand (double sig, double t, int n, double *reg, double * img)
+void log_pole_integrand (double res, double ims, double *reg, double * img)
+{
+	double regr = 0.0;
+	double imgr = 0.0;
+
+	double r = res*res + ims*ims;
+	regr -= 0.5*log (r);
+	imgr -= atan2 (ims, res);
+
+	/* zeta (2s+2) */
+	double rez, imz;
+	riemann_zeta (2.0*res+2.0, 2.0*ims, &rez, &imz);
+
+	r = rez*rez + imz*imz;	
+	regr -= 0.5 * log (r);
+	imgr -= atan2 (imz, rez);
+
+	*reg = regr;
+	*img = imgr;
+}
+
+void pole_integrand (double res, double ims, double *reg, double * img)
+{
+	double regr = 1.0;
+	double imgr = 0.0;
+
+	double r = res*res + ims*ims;
+	double rer = res / r;
+	double imr = -ims / r;
+	double tmp = regr * rer - imgr * imr;
+	imgr = regr * imr + imgr * rer;
+	regr = tmp;
+
+#if 0
+	/* zeta (2s+2) */
+	double rez, imz;
+	riemann_zeta (2.0*res+2.0, 2.0*ims, &rez, &imz);
+
+	r = rez*rez + imz*imz;	
+	regr *= rez/r;
+	imgr *= -imz/r;
+#endif
+
+	*reg = regr;
+	*img = imgr;
+}
+
+double
+cauchy_integral (double re_center, double im_center, double radius)
+{
+	double reacc = 0.0;
+	double imacc = 0.0;
+
+	double step = 0.08;
+	double theta;
+	double npts = 0.0;
+	for (theta=-M_PI; theta<=M_PI; theta+=step)
+	{
+		double res = re_center + radius * cos (theta);
+		double ims = im_center + radius * sin (theta);
+
+		double reg, img;
+		pole_integrand (res, ims, &reg, &img);
+		// printf ("%g\t%g\t%g\n", t, reg, img);
+
+		reacc += reg;
+		imacc += img;
+
+		npts += 1.0;
+		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
+	}
+
+	reacc /= npts;
+	reacc /= 2.0*M_PI;
+
+	imacc /= npts;
+	imacc /= 2.0*M_PI;
+
+	printf ("# duude cauchy integral=%g  %g\n", reacc, imacc);
+	return reacc;
+}
+
+void simple_integrand (double res, double ims, int n, double *reg, double * img)
 {
 	gsl_sf_result lnr, arg;
 
 	double regr = 0.0;
 	double imgr = 0.0;
-
-	double res = sig;
-	double ims = t;
 
 	/* Gamma (s) */
 	gsl_sf_lngamma_complex_e (res, ims, &lnr, &arg);
@@ -127,7 +206,8 @@ arc_integral (int n, double re_center, double im_center, double radius)
 		double ims = im_center + radius * sin (theta);
 
 		double reg, img;
-		simple_integrand (res, ims, n, &reg, &img);
+		// simple_integrand (res, ims, n, &reg, &img);
+		pole_integrand (res, ims, &reg, &img);
 		// printf ("%g\t%g\t%g\n", t, reg, img);
 
 		double r = exp (reg);
@@ -219,7 +299,8 @@ main (int argc, char * argv[])
 n=0;;
 
 	double in = integrate (n);
-	double ain = arc_integral (n, 0.0, 0.0, rad);
+	// double ain = arc_integral (n, 0.0, 0.0, rad);
+	double ain = cauchy_integral (0.0, 0.0, rad);
 	double su = sum (n);
 
 	printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, su/in);
