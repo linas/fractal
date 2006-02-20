@@ -15,7 +15,39 @@
 #include "binomial.h"
 #include "harmonic.h"
 
-void integrand (double t, int n, double *reg, double * img)
+void simple_integrand (double t, int n, double *reg, double * img)
+{
+	gsl_sf_result lnr, arg;
+
+	double regr = 0.0;
+	double imgr = 0.0;
+
+	double res = 0.5;
+	double ims = t;
+
+	/* Gamma (s) */
+	gsl_sf_lngamma_complex_e (res, ims, &lnr, &arg);
+	regr += lnr.val;
+	imgr += arg.val;
+
+	/* Gamma (s+n+1) */
+	gsl_sf_lngamma_complex_e (res+n+1.0, ims, &lnr, &arg);
+	regr -= lnr.val;
+	imgr -= arg.val;
+
+	/* zeta (2s+2) */
+	double rez, imz;
+	riemann_zeta (2.0*res+2.0, 2.0*ims, &rez, &imz);
+	double r = rez*rez + imz*imz;	
+
+	regr -= 0.5 * log (r);
+	imgr -= atan2 (imz, rez);
+
+	*reg = regr;
+	*img = imgr;
+}
+
+void reflect_integrand (double t, int n, double *reg, double * img)
 {
 	gsl_sf_result lnr, arg;
 
@@ -47,18 +79,17 @@ void integrand (double t, int n, double *reg, double * img)
 
 	/* sin (pi s) */
 	double r = exp (-M_PI*ims);
-	double x = r * cos (M_PI*res);
-	double y = r * sin (M_PI*res);
-
-	r = 1.0/r;
-	x -= r * cos (M_PI*res);
-	y += r * sin (M_PI*res);
+	double rr = 1.0/r;
+	double x = (r - rr) * cos (M_PI*res);
+	double y = (r + rr) * sin (M_PI*res);
 
 	double theta = atan2 (y, x);
 	r = 0.5 * log (x*x+y*y);
 
 	regr -= r;
 	imgr -= theta;
+
+	regr += M_LN2;
 
 	/* zeta (2s+1) */
 	double rez, imz;
@@ -80,11 +111,12 @@ integrate (int n)
 	double reacc = 0.0;
 	double imacc = 0.0;
 
-	double step = 0.13;
-	for (t=-10.0; t<=10.0; t+=step)
+	double step = 0.03;
+	double lim = 6.0;
+	for (t=-lim; t<=lim; t+=step)
 	{
 		double reg, img;
-		integrand (t, n, &reg, &img);
+		simple_integrand (t, n, &reg, &img);
 
 		double r = exp (reg);
 		reacc += r * cos (img);
