@@ -48,51 +48,60 @@ void pole_integrand (double res, double ims, double *reg, double * img)
 	imgr = regr * imr + imgr * rer;
 	regr = tmp;
 
-#if 0
 	/* zeta (2s+2) */
 	double rez, imz;
 	riemann_zeta (2.0*res+2.0, 2.0*ims, &rez, &imz);
 
 	r = rez*rez + imz*imz;	
-	regr *= rez/r;
-	imgr *= -imz/r;
-#endif
+
+	rer = rez / r;
+	imr = -imz / r;
+	tmp = regr * rer - imgr * imr;
+	imgr = regr * imr + imgr * rer;
+	regr = tmp;
 
 	*reg = regr;
 	*img = imgr;
 }
 
+/* Sanity check the cauchy integral */
 double
 cauchy_integral (double re_center, double im_center, double radius)
 {
 	double reacc = 0.0;
 	double imacc = 0.0;
 
-	double step = 0.08;
+	double step = 0.01;
 	double theta;
 	double npts = 0.0;
-	for (theta=-M_PI; theta<=M_PI; theta+=step)
+	for (theta=-M_PI; theta<=M_PI; theta += step)
 	{
 		double res = re_center + radius * cos (theta);
 		double ims = im_center + radius * sin (theta);
 
 		double reg, img;
 		pole_integrand (res, ims, &reg, &img);
-		// printf ("%g\t%g\t%g\n", t, reg, img);
+		// printf ("%g\t%g\t%g\n", theta, reg, img);
 
-		reacc += reg;
-		imacc += img;
+		/* Multiply by the line-element, which is 
+		 * tangent to the radial point 
+		 */
+		double redl = -ims;
+		double imdl = res;
+		reacc += reg*redl-img*imdl;
+		imacc += img*redl+reg*imdl;
 
 		npts += 1.0;
 		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
 	}
 
 	reacc /= npts;
-	reacc /= 2.0*M_PI;
-
 	imacc /= npts;
-	imacc /= 2.0*M_PI;
 
+	double tmp = reacc;
+	reacc = imacc;
+	imacc = -tmp;
+	
 	printf ("# duude cauchy integral=%g  %g\n", reacc, imacc);
 	return reacc;
 }
