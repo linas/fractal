@@ -35,6 +35,15 @@ void simple_integrand (double sig, double t, int n, double *reg, double * img)
 	regr -= lnr.val;
 	imgr -= arg.val;
 
+#ifdef VALIDATE
+	double ra = exp (regr);
+	double x = ra*cos (imgr);
+	double y = ra*sin (imgr);
+	double f = res*x - ims*y;
+	double o = res*y + ims*x;
+	printf ("duude s=(%g %g) gam=%g %g\n", res, ims, f, o);
+#endif
+
 	/* zeta (2s+2) */
 	double rez, imz;
 	riemann_zeta (2.0*res+2.0, 2.0*ims, &rez, &imz);
@@ -135,7 +144,7 @@ arc_integral (int n, double radius)
 	imacc *= factorial (n);
 	imacc /= 2.0*M_PI;
 
-	printf ("duude arc integral=%g  %g\n", reacc, imacc);
+	printf ("# duude arc integral=%g  %g\n", reacc, imacc);
 	return reacc;
 }
 
@@ -198,7 +207,7 @@ main (int argc, char * argv[])
 
 	n = atoi (argv[1]);
 double rad = n;
-n=6;;
+n=0;;
 
 	double in = integrate (n);
 	double ain = arc_integral (n, rad);
