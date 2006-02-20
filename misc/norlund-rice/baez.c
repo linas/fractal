@@ -15,6 +15,8 @@
 #include "binomial.h"
 #include "harmonic.h"
 
+/* ======================================================== */
+/* Simple test finction -- logarithm of simple pole, residue 1, */
 void log_pole_integrand (double res, double ims, double *reg, double * img)
 {
 	double regr = 0.0;
@@ -24,6 +26,7 @@ void log_pole_integrand (double res, double ims, double *reg, double * img)
 	regr -= 0.5*log (r);
 	imgr -= atan2 (ims, res);
 
+#if 0
 	/* zeta (2s+2) */
 	double rez, imz;
 	riemann_zeta (2.0*res+2.0, 2.0*ims, &rez, &imz);
@@ -31,11 +34,13 @@ void log_pole_integrand (double res, double ims, double *reg, double * img)
 	r = rez*rez + imz*imz;	
 	regr -= 0.5 * log (r);
 	imgr -= atan2 (imz, rez);
+#endif
 
 	*reg = regr;
 	*img = imgr;
 }
 
+/* ======================================================== */
 /* An integrand with one single simple pole 
  * having a residue of 1/zeta(2) 
  * Used a sa sanity check for the integral 
@@ -68,6 +73,7 @@ void pole_integrand (double res, double ims, double *reg, double * img)
 	*img = imgr;
 }
 
+/* ======================================================== */
 /* Sanity check the cauchy integral of a simple pole */
 double
 cauchy_integral (double re_center, double im_center, double radius)
@@ -111,6 +117,10 @@ cauchy_integral (double re_center, double im_center, double radius)
 	return reacc;
 }
 
+/* ======================================================== */
+/* Integrand corresponding to naive norlund-rice of 
+ * the Baez-duarte sum.
+ */
 void simple_integrand (double res, double ims, int n, double *reg, double * img)
 {
 	gsl_sf_result lnr, arg;
@@ -128,13 +138,20 @@ void simple_integrand (double res, double ims, int n, double *reg, double * img)
 	regr -= lnr.val;
 	imgr -= arg.val;
 
+// #define VALIDATE
 #ifdef VALIDATE
 	double ra = exp (regr);
 	double x = ra*cos (imgr);
 	double y = ra*sin (imgr);
-	double f = res*x - ims*y;
-	double o = res*y + ims*x;
-	printf ("duude s=(%g %g) gam=%g %g\n", res, ims, f, o);
+	int k;
+	for (k=0; k<=n; k++)
+	{
+		double f = (res+k)*x - ims*y;
+		double o = (res+k)*y + ims*x;
+		x = f;
+		y = o;
+	}
+	printf ("duude s=(%g %g) pole gam=%g %g\n", res, ims, x, y);
 #endif
 
 	/* zeta (2s+2) */
@@ -149,6 +166,11 @@ void simple_integrand (double res, double ims, int n, double *reg, double * img)
 	*img = imgr;
 }
 
+/* ======================================================== */
+/* Integrand corresponding to norlund-rice of 
+ * the Baez-duarte sum. Here, the functional equation for the
+ * Riemann zeta has been applied.
+ */
 void reflect_integrand (double t, int n, double *reg, double * img)
 {
 	gsl_sf_result lnr, arg;
@@ -205,7 +227,8 @@ void reflect_integrand (double t, int n, double *reg, double * img)
 	*img = imgr;
 }
 
-/* integrate along a half-circle arc */
+/* ======================================================== */
+/* Integrate along a half-circle arc */
 double
 arc_integral (int n, double re_center, double im_center, double radius)
 {
@@ -222,7 +245,7 @@ arc_integral (int n, double re_center, double im_center, double radius)
 
 		double reg, img;
 		simple_integrand (res, ims, n, &reg, &img);
-		// pole_integrand (res, ims, &reg, &img);
+		// log_pole_integrand (res, ims, &reg, &img);
 		// printf ("%g\t%g\t%g\n", t, reg, img);
 
 		double r = exp (reg);
@@ -247,17 +270,20 @@ arc_integral (int n, double re_center, double im_center, double radius)
 	imacc /= npts;
 	imacc *= factorial (n);
 
-	/* Divide by i; the 2pi already came with the line elt */
-	double tmp = reacc;
-	reacc = imacc;
+	/* Divide by 2i; the pi already came with the line elt */
+	double tmp = 0.5*reacc;
+	reacc = 0.5*imacc;
 	imacc = -tmp;
 
 	printf ("# duude arc integral=%g  %g\n", reacc, imacc);
 	return reacc;
 }
 
+/* ======================================================== */
+/* integrate along imaginary direction */
+
 double
-integrate (int n, double lim)
+integrate (int n, double re_offset, double lim)
 {
 	double t=0.0;
 
@@ -269,7 +295,8 @@ integrate (int n, double lim)
 	for (t=-lim; t<=lim; t+=step)
 	{
 		double reg, img;
-		simple_integrand (-0.5, t, n, &reg, &img);
+		simple_integrand (re_offset, t, n, &reg, &img);
+		// log_pole_integrand (re_offset, t, &reg, &img);
 		// printf ("%g\t%g\t%g\n", t, reg, img);
 
 		double r = exp (reg);
@@ -292,6 +319,7 @@ integrate (int n, double lim)
 	return reacc;
 }
 
+/* ======================================================== */
 double sum (int n)
 {
 	int k;
@@ -310,6 +338,7 @@ double sum (int n)
 	return acc;
 }
 
+/* ======================================================== */
 int
 main (int argc, char * argv[])
 {
@@ -321,14 +350,18 @@ main (int argc, char * argv[])
 		exit (1);
 	}
 	double rad = atof (argv[1]);
-n=0;;
+n=1;;
 
-	double in = integrate (n, rad);
-	double ain = arc_integral (n, -0.5, 0.0, rad);
+	double in = integrate (n, 0.5, rad);
+	double ain = arc_integral (n, 0.5, 0.0, rad);
 	// double ain = cauchy_integral (0.0, 0.0, rad);
 	double su = sum (n);
 
-	printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, in+ain);
+	printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, -in+ain);
+
+	double rez, imz;
+	riemann_zeta (4.0, 0.0, &rez, &imz);
+	printf ("duude should re=%g\n", 1.0/rez);
 
 #if 0
 	for (n=1; n<40; n++)
