@@ -1,5 +1,6 @@
 
-CC=gcc-4.0
+# CC=gcc-4.0
+CC= cc
 CFLAGS= -g -O2 -Wall
 
 TOP = ../../tools

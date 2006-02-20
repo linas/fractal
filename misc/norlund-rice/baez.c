@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <gsl/gsl_sf_gamma.h>
 
+#include "binomial.h"
 #include "harmonic.h"
 
 void integrand (double t, int n, double *reg, double * img)
@@ -71,19 +72,58 @@ void integrand (double t, int n, double *reg, double * img)
 	*img = imgr;
 }
 
-int
-main (int argc, char * argv[])
+double
+integrate (int n)
 {
 	double t=0.0;
-	int n=3;
 
-	for (t=-10.0; t<=10.0; t+=0.2)
+	double reacc = 0.0;
+	double imacc = 0.0;
+
+	double step = 0.03;
+	for (t=-10.0; t<=10.0; t+=step)
 	{
 		double reg, img;
 		integrand (t, n, &reg, &img);
 
-		printf ("%g\t%g\t%g\n", t, reg, img);
+		double r = exp (reg);
+		reacc += r * cos (img);
+		imacc += r * sin (img);
+
+		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
 	}
+
+	return imacc;
+}
+
+double sum (int n)
+{
+	double acc = 0.0;
+
+	double sgn = 1.0;
+	for (k=0; k<=n; k++)
+	{
+		double b = binomial (n,k);
+		double z = zetam1 (2*k+2);
+		z = 1.0 / (1.0+z);
+		acc += sgn*b*z;
+		sgn = -sgn;
+	}
+
+	return acc;
+}
+
+int
+main (int argc, char * argv[])
+{
+	int n=3;
+
+	n = atoi (argv[1]);
+
+	double in = integrate (n);
+	double su = sum (n);
+
+	printf ("integ=%g sum=%g\n", in, su);
 
 	return 0;
 }
