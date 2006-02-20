@@ -26,6 +26,12 @@ void log_pole_integrand (double res, double ims, double *reg, double * img)
 	regr -= 0.5*log (r);
 	imgr -= atan2 (ims, res);
 
+	res -= 1.0;
+
+	r = res*res + ims*ims;
+	regr -= 0.5*log (r);
+	imgr -= atan2 (ims, res);
+
 #if 0
 	/* zeta (2s+2) */
 	double rez, imz;
@@ -128,18 +134,18 @@ void simple_integrand (double res, double ims, int n, double *reg, double * img)
 	double regr = 0.0;
 	double imgr = 0.0;
 
-	/* Gamma (s) */
-	gsl_sf_lngamma_complex_e (res, ims, &lnr, &arg);
+	/* Gamma (s-n) */
+	gsl_sf_lngamma_complex_e (res-n, ims, &lnr, &arg);
 	regr += lnr.val;
 	imgr += arg.val;
 
-	/* Gamma (s+n+1) */
-	gsl_sf_lngamma_complex_e (res+n+1.0, ims, &lnr, &arg);
+	/* Gamma (s+1) */
+	gsl_sf_lngamma_complex_e (res+1.0, ims, &lnr, &arg);
 	regr -= lnr.val;
 	imgr -= arg.val;
 
 // #define VALIDATE
-#ifdef VALIDATE
+#ifdef VALIDATE_XXXX
 	double ra = exp (regr);
 	double x = ra*cos (imgr);
 	double y = ra*sin (imgr);
@@ -297,7 +303,7 @@ integrate (int n, double re_offset, double lim)
 		double reg, img;
 		simple_integrand (re_offset, t, n, &reg, &img);
 		// log_pole_integrand (re_offset, t, &reg, &img);
-		// printf ("%g\t%g\t%g\n", t, reg, img);
+		// printf ("%g  gam=%g  \tpole=%g\n", t, reg, img);
 
 		double r = exp (reg);
 		reacc += r * cos (img);
@@ -350,18 +356,17 @@ main (int argc, char * argv[])
 		exit (1);
 	}
 	double rad = atof (argv[1]);
-n=1;;
+	n=rad;
 
-	double in = integrate (n, 0.5, rad);
-	double ain = arc_integral (n, 0.5, 0.0, rad);
+	rad = 14.0;
+
+	double in = integrate (n, -0.5, rad);
+	// double ain = arc_integral (n, -0.5, 0.0, rad);
 	// double ain = cauchy_integral (0.0, 0.0, rad);
 	double su = sum (n);
 
-	printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, -in+ain);
-
-	double rez, imz;
-	riemann_zeta (4.0, 0.0, &rez, &imz);
-	printf ("duude should re=%g\n", 1.0/rez);
+	// printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, );
+	printf ("# integ=%g sum=%g r = %g\n", in, su, in/su);
 
 #if 0
 	for (n=1; n<40; n++)
