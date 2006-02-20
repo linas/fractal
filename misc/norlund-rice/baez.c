@@ -36,6 +36,10 @@ void log_pole_integrand (double res, double ims, double *reg, double * img)
 	*img = imgr;
 }
 
+/* An integrand with one single simple pole 
+ * having a residue of 1/zeta(2) 
+ * Used a sa sanity check for the integral 
+ */
 void pole_integrand (double res, double ims, double *reg, double * img)
 {
 	double regr = 1.0;
@@ -64,7 +68,7 @@ void pole_integrand (double res, double ims, double *reg, double * img)
 	*img = imgr;
 }
 
-/* Sanity check the cauchy integral */
+/* Sanity check the cauchy integral of a simple pole */
 double
 cauchy_integral (double re_center, double im_center, double radius)
 {
@@ -98,6 +102,7 @@ cauchy_integral (double re_center, double im_center, double radius)
 	reacc /= npts;
 	imacc /= npts;
 
+	/* Divide by i; the 2pi already came with the line elt */
 	double tmp = reacc;
 	reacc = imacc;
 	imacc = -tmp;
@@ -200,28 +205,37 @@ void reflect_integrand (double t, int n, double *reg, double * img)
 	*img = imgr;
 }
 
+/* integrate along a half-circle arc */
 double
 arc_integral (int n, double re_center, double im_center, double radius)
 {
 	double reacc = 0.0;
 	double imacc = 0.0;
 
-	double step = 0.08;
+	double step = 0.003;
 	double theta;
 	double npts = 0.0;
-	for (theta=-M_PI; theta<=M_PI; theta+=step)
+	for (theta=-0.5*M_PI; theta<=0.5*M_PI; theta+=step)
 	{
 		double res = re_center + radius * cos (theta);
 		double ims = im_center + radius * sin (theta);
 
 		double reg, img;
-		// simple_integrand (res, ims, n, &reg, &img);
-		pole_integrand (res, ims, &reg, &img);
+		simple_integrand (res, ims, n, &reg, &img);
+		// pole_integrand (res, ims, &reg, &img);
 		// printf ("%g\t%g\t%g\n", t, reg, img);
 
 		double r = exp (reg);
-		reacc += r * cos (img);
-		imacc += r * sin (img);
+		double rei = r * cos (img);
+		double imi = r * sin (img);
+
+		/* Multiply by the line-element, which is 
+		 * tangent to the radial point 
+		 */
+		double redl = -ims;
+		double imdl = res;
+		reacc += rei*redl-imi*imdl;
+		imacc += imi*redl+rei*imdl;
 
 		npts += 1.0;
 		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
@@ -229,26 +243,28 @@ arc_integral (int n, double re_center, double im_center, double radius)
 
 	reacc /= npts;
 	reacc *= factorial (n);
-	reacc /= 2.0*M_PI;
 
 	imacc /= npts;
 	imacc *= factorial (n);
-	imacc /= 2.0*M_PI;
+
+	/* Divide by i; the 2pi already came with the line elt */
+	double tmp = reacc;
+	reacc = imacc;
+	imacc = -tmp;
 
 	printf ("# duude arc integral=%g  %g\n", reacc, imacc);
 	return reacc;
 }
 
 double
-integrate (int n)
+integrate (int n, double lim)
 {
 	double t=0.0;
 
 	double reacc = 0.0;
 	double imacc = 0.0;
 
-	double step = 0.1;
-	double lim = 10.0;
+	double step = 0.002*lim;
 	double npts = 0.0;
 	for (t=-lim; t<=lim; t+=step)
 	{
@@ -264,11 +280,11 @@ integrate (int n)
 		npts += 1.0;
 	}
 
-	reacc /= npts;
+	reacc *= 2.0*lim/npts;
 	reacc *= factorial (n);
 	reacc /= 2.0*M_PI;
 
-	imacc /= npts;
+	imacc *= 2.0*lim/npts;
 	imacc *= factorial (n);
 	imacc /= 2.0*M_PI;
 
@@ -307,12 +323,12 @@ main (int argc, char * argv[])
 	double rad = atof (argv[1]);
 n=0;;
 
-	double in = integrate (n);
-	// double ain = arc_integral (n, 0.0, 0.0, rad);
-	double ain = cauchy_integral (0.0, 0.0, rad);
+	double in = integrate (n, rad);
+	double ain = arc_integral (n, -0.5, 0.0, rad);
+	// double ain = cauchy_integral (0.0, 0.0, rad);
 	double su = sum (n);
 
-	printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, su/in);
+	printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, in+ain);
 
 #if 0
 	for (n=1; n<40; n++)
