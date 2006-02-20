@@ -13,7 +13,7 @@ all: $(EXES)
 # executables
 baez.o: 
 
-baez: baez.o $(LIB)/binomial.o
+baez: baez.o $(LIB)/binomial.o $(LIB)/harmonic.o
 
 .o:
 	$(CC) -o $@ $^ -lgsl -lgslcblas -lm
