@@ -177,8 +177,8 @@ void simple_integrand (double res, double ims, int n, double *reg, double * img)
  * the Baez-duarte sum. Here, the functional equation for the
  * Riemann zeta has been applied.
  *
- * At the moment, this appears to be buggy, as it failes to
- * agree with the non-reflected integrand.
+ * The real part appears to agree with the non-reflected integrand.
+ * The imaginary part seems to be off by pi/2 
  */
 void reflect_integrand (double res, double ims, int n, double *reg, double * img)
 {
@@ -197,8 +197,8 @@ void reflect_integrand (double res, double ims, int n, double *reg, double * img
 	regr -= lnr.val;
 	imgr -= arg.val;
 
-	/* Gamma (2*s+1) */
-	gsl_sf_lngamma_complex_e (2.0*res+1.0, 2.0*ims, &lnr, &arg);
+	/* Gamma (2*s-1) */
+	gsl_sf_lngamma_complex_e (2.0*res-1.0, 2.0*ims, &lnr, &arg);
 	regr -= lnr.val;
 	imgr -= arg.val;
 
@@ -219,11 +219,11 @@ void reflect_integrand (double res, double ims, int n, double *reg, double * img
 	regr -= r;
 	imgr -= theta;
 
-	regr += M_LN2;
+	// regr += M_LN2;
 
-	/* zeta (2s+1) */
+	/* zeta (2s-1) */
 	double rez, imz;
-	riemann_zeta (2.0*res+1.0, 2.0*ims, &rez, &imz);
+	riemann_zeta (2.0*res-1.0, 2.0*ims, &rez, &imz);
 	r = rez*rez + imz*imz;	
 
 	regr -= 0.5 * log (r);
@@ -305,16 +305,16 @@ integrate (int n, double re_offset, double lim)
 		// simple_integrand (re_offset, t, n, &reg, &img);
 		simple_integrand (-0.5, t, n, &reg, &img);
 
-		// double nreg, nimg;
+		double nreg, nimg;
 		// reflect_integrand (re_offset, t, n, &reg, &img);
-		// reflect_integrand (0.5, t, n, &reg, &img);
+		reflect_integrand (0.5, t, n, &nreg, &nimg);
 		// log_pole_integrand (re_offset, t, &reg, &img);
 
 		while (img >imlast+5.0) img -= 2.0*M_PI;
 		while (img <imlast-5.0) img += 2.0*M_PI;
 		imlast = img;
 		// printf ("%g\t%g\t%g\n", t, reg, img);
-		// printf ("%g\t%g\t%g\n", t, reg, nreg);
+		printf ("%g\t%g\t%g   %g\n", t, img, nimg, img+nimg);
 
 		double r = exp (reg);
 		reacc += r * cos (img);
