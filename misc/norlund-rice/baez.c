@@ -176,16 +176,16 @@ void simple_integrand (double res, double ims, int n, double *reg, double * img)
 /* Integrand corresponding to norlund-rice of 
  * the Baez-duarte sum. Here, the functional equation for the
  * Riemann zeta has been applied.
+ *
+ * At the moment, this appears to be buggy, as it failes to
+ * agree with the non-reflected integrand.
  */
-void reflect_integrand (double t, int n, double *reg, double * img)
+void reflect_integrand (double res, double ims, int n, double *reg, double * img)
 {
 	gsl_sf_result lnr, arg;
 
 	double regr = 0.0;
 	double imgr = 0.0;
-
-	double res = 0.5;
-	double ims = t;
 
 	/* Gamma (s) */
 	gsl_sf_lngamma_complex_e (res, ims, &lnr, &arg);
@@ -298,12 +298,23 @@ integrate (int n, double re_offset, double lim)
 
 	double step = 0.002*lim;
 	double npts = 0.0;
+	double imlast = 0.0;
 	for (t=-lim; t<=lim; t+=step)
 	{
 		double reg, img;
-		simple_integrand (re_offset, t, n, &reg, &img);
+		// simple_integrand (re_offset, t, n, &reg, &img);
+		simple_integrand (-0.5, t, n, &reg, &img);
+
+		// double nreg, nimg;
+		// reflect_integrand (re_offset, t, n, &reg, &img);
+		// reflect_integrand (0.5, t, n, &reg, &img);
 		// log_pole_integrand (re_offset, t, &reg, &img);
-		// printf ("%g  gam=%g  \tpole=%g\n", t, reg, img);
+
+		while (img >imlast+5.0) img -= 2.0*M_PI;
+		while (img <imlast-5.0) img += 2.0*M_PI;
+		imlast = img;
+		// printf ("%g\t%g\t%g\n", t, reg, img);
+		// printf ("%g\t%g\t%g\n", t, reg, nreg);
 
 		double r = exp (reg);
 		reacc += r * cos (img);
@@ -321,7 +332,7 @@ integrate (int n, double re_offset, double lim)
 	imacc *= factorial (n);
 	imacc /= 2.0*M_PI;
 
-	printf ("# duude line integral=%g  %g\n", reacc, imacc);
+	printf ("# duude line integral re=%g  im=%g\n", reacc, imacc);
 	return reacc;
 }
 
@@ -360,7 +371,7 @@ main (int argc, char * argv[])
 
 	rad = 14.0;
 
-	double in = integrate (n, -0.5, rad);
+	double in = integrate (n, 0.5, rad);
 	// double ain = arc_integral (n, -0.5, 0.0, rad);
 	// double ain = cauchy_integral (0.0, 0.0, rad);
 	double su = sum (n);
