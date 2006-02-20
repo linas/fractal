@@ -80,7 +80,7 @@ integrate (int n)
 	double reacc = 0.0;
 	double imacc = 0.0;
 
-	double step = 0.03;
+	double step = 0.13;
 	for (t=-10.0; t<=10.0; t+=step)
 	{
 		double reg, img;
@@ -93,11 +93,16 @@ integrate (int n)
 		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
 	}
 
+	imacc *= step;
+	imacc *= factorial (n);
+	imacc /= 4.0*M_PI;
+
 	return imacc;
 }
 
 double sum (int n)
 {
+	int k;
 	double acc = 0.0;
 
 	double sgn = 1.0;
@@ -123,7 +128,7 @@ main (int argc, char * argv[])
 	double in = integrate (n);
 	double su = sum (n);
 
-	printf ("integ=%g sum=%g\n", in, su);
+	printf ("integ=%g sum=%g r = %g\n", in, su, su/in);
 
 	return 0;
 }
