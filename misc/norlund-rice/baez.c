@@ -113,17 +113,18 @@ void reflect_integrand (double t, int n, double *reg, double * img)
 }
 
 double
-arc_integral (int n, double radius)
+arc_integral (int n, double re_center, double im_center, double radius)
 {
 	double reacc = 0.0;
 	double imacc = 0.0;
 
-	double step = 0.1;
+	double step = 0.08;
 	double theta;
-	for (theta=-0.5*M_PI; theta<=0.5*M_PI; theta+=step)
+	double npts = 0.0;
+	for (theta=-M_PI; theta<=M_PI; theta+=step)
 	{
-		double res = -0.5 + radius * cos (theta);
-		double ims = radius * sin (theta);
+		double res = re_center + radius * cos (theta);
+		double ims = im_center + radius * sin (theta);
 
 		double reg, img;
 		simple_integrand (res, ims, n, &reg, &img);
@@ -133,14 +134,15 @@ arc_integral (int n, double radius)
 		reacc += r * cos (img);
 		imacc += r * sin (img);
 
+		npts += 1.0;
 		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
 	}
 
-	reacc *= step;
+	reacc /= npts;
 	reacc *= factorial (n);
 	reacc /= 2.0*M_PI;
 
-	imacc *= step;
+	imacc /= npts;
 	imacc *= factorial (n);
 	imacc /= 2.0*M_PI;
 
@@ -157,7 +159,8 @@ integrate (int n)
 	double imacc = 0.0;
 
 	double step = 0.1;
-	double lim = 6.0;
+	double lim = 10.0;
+	double npts = 0.0;
 	for (t=-lim; t<=lim; t+=step)
 	{
 		double reg, img;
@@ -169,16 +172,18 @@ integrate (int n)
 		imacc += r * sin (img);
 
 		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
+		npts += 1.0;
 	}
 
-	reacc *= step;
+	reacc /= npts;
 	reacc *= factorial (n);
 	reacc /= 2.0*M_PI;
 
-	imacc *= step;
+	imacc /= npts;
 	imacc *= factorial (n);
 	imacc /= 2.0*M_PI;
 
+	printf ("# duude line integral=%g  %g\n", reacc, imacc);
 	return reacc;
 }
 
@@ -205,12 +210,16 @@ main (int argc, char * argv[])
 {
 	int n=3;
 
-	n = atoi (argv[1]);
-double rad = n;
+	if (2>argc)
+	{
+		fprintf (stderr, "Usage: %s <parm>\n", argv[0]);
+		exit (1);
+	}
+	double rad = atof (argv[1]);
 n=0;;
 
 	double in = integrate (n);
-	double ain = arc_integral (n, rad);
+	double ain = arc_integral (n, 0.0, 0.0, rad);
 	double su = sum (n);
 
 	printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, su/in);
