@@ -90,14 +90,33 @@ c_{n}\ll n^{-3/4+\epsilon}\forall\epsilon>0\]
 \end_inset 
 
  is equivalent to RH.
+ Note the summand is just a ratio of Bernoulli numbers and powers of 
+\begin_inset Formula $\pi$
+\end_inset 
+
+.
  The NR integral is 
 \begin_inset Formula \[
-c_{n}=\frac{(-1)^{n}}{2\pi i}\int_{-1/4-i\infty}^{-1/4+i\infty}\frac{1}{\zeta(2s+2)}\frac{n!}{s(s-1)\cdots(s-n)}ds\]
+c_{n}=\frac{(-1)^{n}}{2\pi i}\int_{-1/4-i\infty}^{-1/4+i\infty}\frac{1}{\zeta(2s+2)}\frac{n!}{s(s-1)\cdots(s-n)}ds+\frac{\delta_{n0}}{2}\]
 
 \end_inset 
 
- The integrand is clearly a saddle point, bounded by poles at 
-\begin_inset Formula $s=0,1$
+ The 
+\begin_inset Formula $n=0$
+\end_inset 
+
+ Cauchy integral has an contribution of 
+\begin_inset Formula $1/2$
+\end_inset 
+
+ coming from the semi-circular contour at infinity on the right, which vanishes
+ for 
+\begin_inset Formula $n\ne0$
+\end_inset 
+
+.
+ The integrand is suggests a saddle point, bounded by poles at 
+\begin_inset Formula $s=0,-2$
 \end_inset 
 
  while getting obviously small for large imaginary 
@@ -105,15 +124,41 @@ c_{n}=\frac{(-1)^{n}}{2\pi i}\int_{-1/4-i\infty}^{-1/4+i\infty}\frac{1}{\zeta(2s
 \end_inset 
 
 .
- The saddlepoint is near 
-\begin_inset Formula $s=-1/4$
+ The problem is the the pole at 
+\begin_inset Formula $s=0$
 \end_inset 
 
- and turns into a double-saddle for large 
+ has a residue of oppiste sign from that at 
+\begin_inset Formula $s=-2$
+\end_inset 
+
+ and, so, if we are lucky, there is an inflection point between thse two
+ locations, viz.
+ a point where the first derivative vanishes.
+ Its not clear that there's such a place for small 
 \begin_inset Formula $n$
 \end_inset 
 
- (???).
+ (due to numerical errors in my code).
+ If its there, it seems to be at s=-0.99 for small 
+\begin_inset Formula $n$
+\end_inset 
+
+ and around 
+\begin_inset Formula $s=-0.9$
+\end_inset 
+
+ for larger 
+\begin_inset Formula $n,$
+\end_inset 
+
+moving slowly to the right.
+ Presumable moving to the right as 
+\begin_inset Formula $\mathcal{O}\left(\frac{1}{\log n}\right)$
+\end_inset 
+
+ to some final deestination, if I did my quick sketch right.
+ This doesn't seem terribly tractable.
 \layout Standard
 
 
@@ -156,6 +201,28 @@ Graph of log and arg of integrand for
 \end_inset 
 
 
+\layout Standard
+
+I'm confused at this point, and am exploring the integral numerically.
+ It appears that I can push the contour at 
+\begin_inset Formula $\sigma=-1/4$
+\end_inset 
+
+ further to the left, which amazingly passes me through the critical strip
+ without changing the value of the integral (I guess that the contribution
+ of all of residues of the poles at the zeros of 
+\begin_inset Formula $\zeta$
+\end_inset 
+
+ must add up to zero.
+ I didn't know this, I presume it follows trivially by complex conjugation.).
+ 
+\layout Standard
+
+So not only is the saddle not a saddle but a slide with maybe a flat spot
+ in it, but there's no (simple) expansion at the flat spot.
+ Not sure where to take this next.
+ 
 \layout Subsection
 
 Hasse-Knoppe
@@ -172,14 +239,12 @@ Helmut Hasse and Conrad Knoppe (1930) give a series for the Riemann zeta
 
 ):
 \begin_inset Formula \[
-\zeta(s)=\frac{1}{1-2^{1-s}}\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}%\sum_{k=0}^{n}(-1)^{k}{n \choose k}(k+1)^{-s}
-\]
+\zeta(s)=\frac{1}{1-2^{1-s}}\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}(-1)^{k}{n \choose k}(k+1)^{-s}\]
 
 \end_inset 
 
- The binomial sum on the right is exactly solvable and is given in Apostol
- (right).
- A quick revieew of this result could be interesting.
+ It would be curious to explore the associated integral.
+ I'm particularly intrigued by the power-of-2 sum.
 \layout Subsection
 
 Hasse for Hurwitz
