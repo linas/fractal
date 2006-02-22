@@ -299,38 +299,47 @@ integrate (int n, double re_offset, double lim)
 	double step = 0.002*lim;
 	double npts = 0.0;
 	double imlast = 0.0;
+	double lf = log (factorial (n));
+	lf -= log (2.0*M_PI);
 	for (t=-lim; t<=lim; t+=step)
 	{
 		double reg, img;
-		// simple_integrand (re_offset, t, n, &reg, &img);
-		simple_integrand (-0.5, t, n, &reg, &img);
+		simple_integrand (re_offset, t, n, &reg, &img);
+		// simple_integrand (-0.25, t, n, &reg, &img);
 
-		double nreg, nimg;
+		// double nreg, nimg;
 		// reflect_integrand (re_offset, t, n, &reg, &img);
-		reflect_integrand (0.5, t, n, &nreg, &nimg);
+		// reflect_integrand (0.5, t, n, &nreg, &nimg);
 		// log_pole_integrand (re_offset, t, &reg, &img);
 
 		while (img >imlast+5.0) img -= 2.0*M_PI;
 		while (img <imlast-5.0) img += 2.0*M_PI;
 		imlast = img;
-		// printf ("%g\t%g\t%g\n", t, reg, img);
-		printf ("%g\t%g\t%g   %g\n", t, img, nimg, img+nimg);
+
+		reg += lf;
+
+		printf ("%g\t%g\t%g\n", t, reg, img);
+		// printf ("%g\t%g\t%g   %g\n", t, img, nimg, img+nimg);
 
 		double r = exp (reg);
-		reacc += r * cos (img);
-		imacc += r * sin (img);
+		double ret = r * cos (img);
+		double imt = r * sin (img);
+		// printf ("%g\t%g\t%g\n", t, ret, imt);
+
+		reacc += ret;
+		imacc += imt;
 
 		// printf ("%g\t%g\t%g\n", t, step*reacc, step*imacc);
 		npts += 1.0;
 	}
 
 	reacc *= 2.0*lim/npts;
-	reacc *= factorial (n);
-	reacc /= 2.0*M_PI;
+	// reacc *= factorial (n);
+	// reacc /= 2.0*M_PI;
 
 	imacc *= 2.0*lim/npts;
-	imacc *= factorial (n);
-	imacc /= 2.0*M_PI;
+	// imacc *= factorial (n);
+	// imacc /= 2.0*M_PI;
 
 	printf ("# duude line integral re=%g  im=%g\n", reacc, imacc);
 	return reacc;
@@ -369,9 +378,11 @@ main (int argc, char * argv[])
 	double rad = atof (argv[1]);
 	n=rad;
 
+	double offset = rad;
+	n = 6;
 	rad = 14.0;
 
-	double in = integrate (n, 0.5, rad);
+	double in = integrate (n, offset, rad);
 	// double ain = arc_integral (n, -0.5, 0.0, rad);
 	// double ain = cauchy_integral (0.0, 0.0, rad);
 	double su = sum (n);

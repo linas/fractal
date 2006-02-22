@@ -1,9 +1,11 @@
 
+# set term svg
+# set out 'baez.svg'
 set term png
 set out 'baez.png'
 #
 set data style lines
-set key right
+set key left
 set xzeroaxis linetype -1 linewidth 2
 set yzeroaxis linetype -1 linewidth 2
 set xtics axis
@@ -15,11 +17,11 @@ set ytics axis
 unset border
 # set border 2
 #
-set title "Pt)"
-set xlabel "Re1/2)"  0, 1
-set ylabel "Im2)" 1, 8
+set title "log modulus and phase of integrand"
+set xlabel ""  0, 1
+set ylabel "" 1, 8
 # plot "baez.dat" using 1:2 title "" with lines linewidth 2 
 
-plot "baez.dat" using 1:2 title "re" with lines linewidth 2, \
-     "baez.dat" using 1:3 title "im" with lines linewidth 2 
+plot "baez.dat" using 1:2 title "log r" with lines linewidth 2, \
+   "baez.dat" using 1:3 title "arg" with lines linewidth 2 
 
