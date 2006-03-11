@@ -37,10 +37,10 @@ double xdelta;
  
 void init_hermite_grid (double exmax, double exdelta, int enmax)
 {
-	nsteps = (int) floor(xmax / xdelta) +1;
 	nmax = enmax;
 	xmax = exmax;
 	xdelta = exdelta;
+	nsteps = (int) (xmax/xdelta) +1;
 
 	hermite_grid = (double **) malloc (nsteps * sizeof (double *));
 	double *arr = (double *) malloc (nsteps *nmax*sizeof (double));
@@ -84,12 +84,12 @@ static double hermite_green (double x, double y)
 		nfac *= n+1;
 		en = n+0.5;
 		tn *= 2.0;
-		printf ("duude n=%d term=%g\n", n, term);
+		// printf ("duude n=%d term=%g\n", n, term);
 	}
-	printf ("\n");
 
 	acc *= exp (-0.5*(x*x+y*y));
 	acc /= sqrt (M_PI);
+	printf ("x=%g y=%g v=%g\n", x,y, acc);
 	return acc;
 }
 
