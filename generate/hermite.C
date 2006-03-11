@@ -89,17 +89,18 @@ static double hermite_green (double x, double y)
 
 	acc *= exp (-0.5*(x*x+y*y));
 	acc /= sqrt (M_PI);
-	printf ("x=%g y=%g v=%g\n", x,y, acc);
+	// printf ("x=%g y=%g v=%g\n", x,y, acc);
 	return acc;
 }
 
 static double hermite_green_wrap (double x, double y, int itermax, double param)
 {
-	int is_init = 0;
+	static int is_init = 0;
 	if (!is_init)
 	{
 		is_init = 1;
-		init_hermite_grid (9.0, 0.01 ,100);
+		init_hermite_grid (4.0, 0.005 ,itermax);
+		printf ("done with hermite initialization, max=%d\n", itermax);
 	}
 	return hermite_green (x,y);
 }
