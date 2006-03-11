@@ -21,13 +21,12 @@
 
 static int max_terms;
 
-static void q_exp_c (double re_q, double im_q, double *prep, double *pimp)
+static void q_exp_c (double re_q, double im_q, double *prep, double
+*pimp, double zee)
 {
 	int i;
 	*prep = 0.0;
 	*pimp = 0.0;
-
-	double zee = 0.5;
 
 	double rep = 1.0;
 	double imp = 0.0;
@@ -76,7 +75,7 @@ static double q_exp_series (double re_q, double im_q, int itermax, double param)
 {
 	max_terms = itermax;
 	double rep, imp;
-	q_exp_c (re_q, im_q, &rep, &imp);
+	q_exp_c (re_q, im_q, &rep, &imp, param);
 	// return sqrt (rep*rep+imp*imp);
 	return rep;
 }
