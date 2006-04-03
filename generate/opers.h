@@ -41,6 +41,9 @@ extern void clamp (float glob[],
              unsigned int sizex, unsigned int sizey, 
              float scale_factor, float offset);
 
+extern void dump (float glob[], 
+             unsigned int sizex, unsigned int sizey);
+
 #endif  /* OPERS_H */
 
 /* --------------- END OF FILE ------------------------- */

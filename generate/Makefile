@@ -21,7 +21,7 @@ NEW_EXES = alpha circle cutoff elliptic erdos euler-q hermite mand-flow \
 all:    $(NEW_EXES)
 
 dist:
-	tar -zcvf gen.tgz *.C *.h Makefile .cvsignore cvt
+	tar -zcvf gen.tgz *.c *.C *.h Makefile .cvsignore cvt
 
 clean:
 	rm -f x j.c a.out  *.o glop* junk* *.flo  *.txt 

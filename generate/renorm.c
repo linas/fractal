@@ -14,7 +14,7 @@
 extern FILE *Fopen();
 extern FILE *Fopenr();
 
-void main (int argc, char *argv[]) 
+int main (int argc, char *argv[]) 
 {
    float	*data_in ;	/* my data array */
    // float	*data_out;	/* my data array */
@@ -28,7 +28,7 @@ void main (int argc, char *argv[])
    
    if (argc < 3) {
       fprintf (stderr, "usage: %s <input file> <output file> [<scale factor>] [<offset>] \n", argv[0]);
-      return;
+      return 1;
    }
 
    fprintf (stderr, "%s %s %s ", argv[0], argv[1], argv[2]);
@@ -53,7 +53,7 @@ void main (int argc, char *argv[])
    /* open input file */
    if ( (fp_in = Fopenr (argv[1], ".flo")) == NULL) {
       fprintf (stderr, " Can't open input file %s \n", argv[1]);
-      return;
+      return 2;
    }
 
    i = 0;
@@ -85,7 +85,7 @@ void main (int argc, char *argv[])
    /* open output file */
    if ( (fp_out = Fopen (argv[2], ".flo")) == NULL) {
       fprintf (stderr, " Can't open output file %s \n", argv[2]);
-      return;
+      return 3;
    }
    
    /* dump the size to output */
@@ -98,7 +98,7 @@ void main (int argc, char *argv[])
    if (!strcmp ("renorm", argv[0])) expand (data_in, data_width, data_height, scale_fact, offset);
    if (!strcmp ("reclamp", argv[0])) rescale (data_in, data_width, data_height, scale_fact);
    if (!strcmp ("clamp", argv[0])) clamp (data_in, data_width, data_height, scale_fact, offset);
-   if (!strcmp ("dump", argv[0])) dump (data_in, data_width, data_height, scale_fact);
+   if (!strcmp ("dump", argv[0])) dump (data_in, data_width, data_height);
 
 /*
    aver = avg (data_in, data_width, data_height);
@@ -111,6 +111,8 @@ void main (int argc, char *argv[])
    fwrite (data_in, sizeof(float), data_width*data_height, fp_out);
    
    fclose (fp_out);
+
+	return 0;
 }
 
 /* --------------- END OF FILE ------------------------- */
