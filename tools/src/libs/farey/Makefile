@@ -107,4 +107,4 @@ realclean: clean
 	$(RM) Prime inc
 
 dist:
-	tar -zcvf x *.C *.h *.c Makefile .cvsignore
+	tar -zcvf x *.C *.h *.c Makefile .cvsignore README
