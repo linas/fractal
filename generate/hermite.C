@@ -78,7 +78,8 @@ static double hermite_green (double x, double y)
 	for (n=0; n<nmax; n++)
 	{
 		double term =  hermite (x,n) * hermite (y,n);
-		term /= tn * nfac * en;
+		// term /= tn * nfac * en;
+		term /= tn * nfac;
 		acc += term;
 
 		nfac *= n+1;
