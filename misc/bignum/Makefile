@@ -3,11 +3,12 @@
 #
 
 
-EXES= bound minima mp_zeta trunc zero-cross
+EXES= bound cont_frac minima mp_zeta trunc zero-cross
 
 all:  $(EXES)
 
 bound:	bound.o
+cont_frac:	cont_frac.o
 mp_zeta:	mp_zeta.o
 trunc:	trunc.o
 zero-cross:	zero-cross.o

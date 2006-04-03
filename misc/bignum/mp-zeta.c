@@ -1584,6 +1584,8 @@ main (int argc, char * argv[])
 	{
 		a_sub_n (a_n, w, n, prec);
 
+// #define EXACT_BND
+#ifdef EXACT_BND
 		/* compute the bound */
 		mpf_set_ui (en, n+1);
 		mpf_sqrt (sq, en);
@@ -1591,6 +1593,7 @@ main (int argc, char * argv[])
 		mpf_neg (en, term);
 		fp_exp (b_n, en, prec);
 		mpf_div (prod, a_n, b_n);
+#endif
 		
 #ifdef FLT_BND
 		double dbn = 1.0/exp (-4.0*sqrt (n+1));
