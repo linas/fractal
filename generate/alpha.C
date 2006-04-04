@@ -133,6 +133,8 @@ static void init_r (void)
 	r[99] = -0.166850720660225523707822126933168193239337049815675767885134e1;
 	r[100] = -0.210014466980486256363682541169164912605159729681460335084457e1;
 	r[101] = -0.247658610542455633663357481827607288839163071852426074140943e1;
+
+#if LATER
 	r[102] = -0.278538198757563506178954964396891850036014642891797940895749e1;
 	r[103] = -0.301607027551096296590486429950226558333782545040292946478796e1;
 	r[104] = -0.31604804471177414344346954065177974196717313524116623293005e1;
@@ -433,6 +435,7 @@ static void init_r (void)
 	r[399] = 0.933027570184646075810409727417695493638630873826274667940206e2;
 	r[400] = 0.94910008775913653694916884876419713679635254593010769345515e2;
 	r[401] = 0.957889746952237554538877544017063948327473317831165456908748e2;
+
 	r[402] = 0.959215811263678289670857152712159072265603011089525313268493e2;
 	r[403] = 0.952954042710705687211059967749844802865642773967223318224597e2;
 	r[404] = 0.939038253631187323045687851057946670558901238882120459321495e2;
@@ -833,6 +836,7 @@ static void init_r (void)
 	r[799] = -0.139690656258043982048505007656828937991783666218500993259519e4;
 	r[800] = -0.128162489058262428602486687166004687793226629232089709278255e4;
 	r[801] = -0.115965208843532859124251541125943319895726723403636119458579e4;
+
 	r[802] = -0.103139077795736566756474772035811542952696770425522484047287e4;
 	r[803] = -0.897272985118100544295971819428457519290179751757395434245718e3;
 	r[804] = -0.757758723538429113063861343871964574564155647340600489437718e3;
@@ -2032,6 +2036,7 @@ static void init_r (void)
 	r[1998] = 0.18118723788381351720441034205727907762480425417908575595796e7;
 	r[1999] = 0.186101719446409870357058952194994051000826756926520300625478e7;
 #endif
+#endif
 }
 
 // This is the series summed as sum_n a_n z^n plain and simple
@@ -2080,7 +2085,43 @@ static void const_series_c (double re_q, double im_q, double *prep, double *pimp
 	*prep = rep;
 	*pimp = imp;
 }
-			  
+
+// This is the series summed as sum_n b_n z^n plain and simple
+static void b_series_c (double re_q, double im_q, double *prep, double *pimp)
+{
+	int i;
+	double tmp;
+	*prep = 0.0;
+	*pimp = 0.0;
+
+	long double rep = 0.5;
+	long double imp = 0.0;
+	rep = 2.0;
+
+	long double re_zn = 1.0;
+	long double im_zn = 0.0;
+
+	for (i=1; i<100; i++)
+	{
+		// a[i] += 0.5 / ((double) (i+1));
+		// rep += a[i] * re_zn;
+		// imp += a[i] * im_zn;
+		
+		long double b = i* r[i-1] * expl (-4.0L*sqrtl(i));
+		b = 1.0L / b;
+		rep += b * re_zn;
+		imp += b * im_zn;
+		
+		tmp = re_q * re_zn - im_q * im_zn;
+		im_zn = re_q * im_zn + im_q * re_zn;
+		re_zn = tmp;
+	}
+	// printf ("alpha(%g + i%g) = %g +i %g\n", re_q, im_q, rep, imp);
+	
+	*prep = rep;
+	*pimp = imp;
+}
+
 // This is the series done up in "exact" terms, i.e. summed in terms 
 // of gamma log, etc.
 static void alpha_analytic (double re_q, double im_q, double *prep, double *pimp)
@@ -2155,6 +2196,56 @@ static void alpha_analytic (double re_q, double im_q, double *prep, double *pimp
 	*pimp = imp;
 }
 
+// This is the series done up in "exact" terms, i.e. summed in terms 
+// of psi -log, etc.
+static void beta_analytic (double re_q, double im_q, double *prep, double *pimp)
+{
+	double tmp;
+	*prep = 0.0;
+	*pimp = 0.0;
+
+	double rep = 0.0;
+	double imp = 0.0;
+
+// printf ("z=%g + i %g\n", re_q, im_q);
+	/*  1-z */
+	double re_one_minus_z = 1.0 - re_q;
+	double im_one_minus_z = - im_q;
+
+	/* 1/(1-z) */
+	tmp = re_one_minus_z*re_one_minus_z + im_one_minus_z*im_one_minus_z;
+	tmp = 1.0/tmp;
+	double re_one_over_one_minus_z = re_one_minus_z * tmp;
+	double im_one_over_one_minus_z = -im_one_minus_z * tmp;
+
+// printf ("1/(1-z)=%g + i %g\n", re_one_over_one_minus_z, im_one_over_one_minus_z);
+			  
+	/* ln gamma (1/(1-z)) */
+	gsl_sf_result mod_lng, arg_lng;
+	gsl_sf_lngamma_complex_e (re_one_over_one_minus_z, im_one_over_one_minus_z, 
+	                &mod_lng, &arg_lng);
+
+	double re_lng = mod_lng.val;
+	double im_lng = arg_lng.val;
+// printf ("ln gamma 1/(1-z)=%g + i %g\n", re_lng, im_lng);
+
+//xxxx need psi not gamma
+
+// printf ("first gamma term =%g + i %g\n", rep, imp);
+	/* log (1-z) */
+	gsl_sf_result m_lnz, t_lnz;
+	gsl_sf_complex_log_e (re_one_minus_z, im_one_minus_z, &m_lnz, &t_lnz);
+	double re_ln_omz = m_lnz.val;
+	double im_ln_omz = t_lnz.val;
+// printf ("ln (1-z)=%g + i %g\n", re_ln_omz, im_ln_omz);
+	
+// printf ("tot=%g + i %g\n", rep, imp);
+
+// printf ("\n");
+	*prep = rep;
+	*pimp = imp;
+}
+
 static double alpha_series (double re_q, double im_q, int itermax, double param)
 {
 
@@ -2174,11 +2265,12 @@ static double alpha_series (double re_q, double im_q, int itermax, double param)
 	
 	double ran = 0.0;
 	double ian = 0.0;
-	alpha_analytic (re_q, im_q, &rep, &imp);
+	// alpha_analytic (re_q, im_q, &rep, &imp);
 	// ran = rep;
 	// ian = imp;
 
 	// const_series_c (re_q, im_q, &rep, &imp);
+	b_series_c (re_q, im_q, &rep, &imp);
 
 	rep -= ran;
 	imp -= ian;
