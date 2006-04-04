@@ -86,12 +86,12 @@ umbral calculus
 
 Perhaps a better normalization to use might be to write this as 
 \begin_inset Formula \begin{equation}
-\zeta(s)=\frac{s}{s-1}+\sum_{n=0}^{\infty}(-)^{n}\,\frac{b_{n}}{n!}\,(s)_{n}\label{eq:}\end{equation}
+\zeta(s)=\frac{1}{s-1}+\sum_{n=0}^{\infty}(-)^{n}\,\frac{b_{n}}{n!}\,(s)_{n}\label{eq:}\end{equation}
 
 \end_inset 
 
  so that 
-\begin_inset Formula $b_{0}=-1/2$
+\begin_inset Formula $b_{0}=1/2$
 \end_inset 
 
  and 
@@ -166,7 +166,8 @@ The
 
 take on a slightly more elegant form as well:
 \begin_inset Formula \begin{eqnarray}
-b_{1} & = & -\gamma+\frac{1}{2}\label{eq:}\\
+b_{0} & = & \frac{1}{2}\label{eq:}\\
+b_{1} & = & -\gamma+\frac{1}{2}\\
 b_{2} & = & -2\gamma-\frac{1}{2}+\zeta(2)\\
 b_{3} & = & -3\gamma-2-\zeta(3)+3\zeta(2)\\
 b_{4} & = & -4\gamma-\frac{23}{6}+\zeta(4)-4\zeta(3)+6\zeta(2)\end{eqnarray}
@@ -448,7 +449,7 @@ An example of a function that violates Carlson's theorem is
  along the imaginary axis.
 \layout Section
 
-The Riemann Zeta and Stieltjes Constants
+The Fourrier Transform
 \layout Standard
 
 Identities useful in the course of the manipulations needed to derive the
@@ -489,7 +490,27 @@ appear naturally in the Taylor's expansion for the Gamma function, and so
 
 \end_inset 
 
- The above may be obtained by the straightforward application of equation
+ 
+\layout Comment
+
+The above gets replaced by 
+\begin_inset Formula \begin{eqnarray}
+\beta(z) & = & \sum_{n=0}^{\infty}b_{n}z^{n}\nonumber \\
+ & = & \frac{1}{2(1-z)}+\frac{1}{(1-z)^{2}}\left[\ln(1-z)+\psi\left(\frac{1}{1-z}\right)\right]\label{eq:beta-exact}\end{eqnarray}
+
+\end_inset 
+
+ I scratched this quick, -- needs double-check.
+\begin_inset Formula \[
+\beta\left(\frac{w-1}{w}\right)=\frac{w}{2}+w^{2}\left[\psi(w)-\ln w\right]\]
+
+\end_inset 
+
+ which is rather simple.
+ 
+\layout Standard
+
+The above may be obtained by the straightforward application of equation
  6.1.33 from Abramowitz and Stegun 
 \begin_inset LatexCommand \cite{A&S}
 
@@ -1431,7 +1452,7 @@ z-1\end{array}\right)\left[\zeta(n+2)-1\right]\label{eq:}\end{equation}
 \begin_inset Formula $Q(z)$
 \end_inset 
 
- is unclear.
+ is unclear.xxx Bessel function!?!
 \layout Section
 
 Dirichlet 
@@ -1555,7 +1576,7 @@ In analogy to the study of the forward differences of the Riemann zeta function,
  the remainder of this paper will concern itself with the analysis of the
  series given by 
 \begin_inset Formula \begin{equation}
-L_{n}=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-coeff}\end{equation}
+L_{n}=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-coeff}\end{equation}
 
 \end_inset 
 
@@ -1567,7 +1588,7 @@ L_{n}=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-
  connecting the Hurwitz zeta function to the L-function, it is sufficient
  to study sums of the form
 \begin_inset Formula \begin{equation}
-A_{n}(m,k)=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{\zeta\left(p+1,\frac{m}{k}\right)}{k^{p+1}(p+1)}\label{eq:}\end{equation}
+A_{n}(m,k)=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{\zeta\left(p+1,\frac{m}{k}\right)}{k^{p+1}(p+1)}\label{eq:}\end{equation}
 
 \end_inset 
 
