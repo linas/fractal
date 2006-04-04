@@ -1,0 +1,1051 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass amsart
+\language english
+\inputencoding auto
+\fontscheme times
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Newton Series involving the Riemann Zeta Function
+\layout Author
+
+Phillipe Flajolet, Linas Vepstas
+\layout Date
+
+April 1, 2006
+\layout Abstract
+
+The finite differences or Newton series of certain expressions involving
+ the Riemann zeta function are explored.
+ These series may be given an asymptotic expansion by converting them to
+ Norlund-Rice integrals and applying saddle-point integration techniques.
+ Numerical evaluation is used to confirm the appropriateness of the asymptotic
+ expansion.
+ The results extend on previous results for such series, and a general form
+ for Dirichlet L-functins is given.
+ Curiously, because successive terms in the asymptotic expansion are exponential
+ly small, these series lead to simple near-identities.
+ A resemblance to similar near-identities arising in complex multiplication
+ is noted.
+ 
+\layout Section
+
+Introduction
+\layout Standard
+
+The binomial coefficient is implicated in various fractal phenomena, and
+ the Berry conjecture [ref] suggests that the zeros of the Riemann zeta
+ function correspond to the chaotic spectrum of an unknown quantization
+ of some simple chaotic mechanical system.
+ Thus, on vague and general principles, one might be lead to explore Newton
+ series involving the Riemann zeta function.
+ Of some curiosity is the series
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}+s\sum_{n=0}^{\infty}{s-1 \choose n}\, t_{n}\]
+
+\end_inset 
+
+ Here, the constants 
+\begin_inset Formula $t_{n}$
+\end_inset 
+
+ play a role analogous to the Stieltjes constants of the Taylor expansion.
+ The 
+\begin_inset Formula $t_{n}$
+\end_inset 
+
+ have several remarkable properties.
+ First, they may be written as a finite sum over well-known constants:
+\begin_inset Formula \[
+t_{n}=\sum_{k=1}^{n}{n \choose k}\left(-1\right)^{k}\left(\zeta xxx\right)\]
+
+\end_inset 
+
+ so that, for example, 
+\begin_inset Formula \[
+t_{0}=\gamma-\frac{1}{2}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+t_{1}=xxx\]
+
+\end_inset 
+
+ and so on.
+ Next, apart from a leading order, these become exponentially small:
+\begin_inset Formula \[
+t_{n}=\frac{1}{2(n+1)}+\mathcal{O}\left(\frac{\exp\left(-2\sqrt{\pi n}\right)}{n^{3/4}}\right)\]
+
+\end_inset 
+
+ That they become so small is remarkable in light of the fact that the terms
+ in the sum become exponentially large.
+\layout Standard
+
+The development of an explicit expression for the asymptototic behaviour
+ is the main focus of this essay.
+ The primary method of attack is to convert the Newton series into an integral
+ of the Norlund-Rice form
+\begin_inset LatexCommand \cite{Fla94}
+
+\end_inset 
+
+, which may be evaluated using steepest-descent/stationary-phase methods
+ [ref].
+ These techniques are sufficiently general that they can be applied to other
+ similar sums that appear in the literature [multiple refs].
+ One of the prinicpal results of this essay is to apply this asymptotic
+ expansion to the Newton series for the Dirichlet 
+\begin_inset Formula $L$
+\end_inset 
+
+-functions.
+ 
+\layout Standard
+
+The paper concludes by noting the general resemblance of the asymptotic
+ behaviour to that of two other famous number-theoretic sequences.
+ The partition function 
+\begin_inset Formula $p_{n}$
+\end_inset 
+
+is given by Euler's infinite product
+\begin_inset LatexCommand \cite{Apo90}
+
+\end_inset 
+
+:
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}p_{n}x^{n}=\prod_{m=1}^{\infty}\frac{1}{1-x^{m}}\]
+
+\end_inset 
+
+ and for large 
+\begin_inset Formula $n$
+\end_inset 
+
+, takes on the asymptotic form 
+\begin_inset Formula \[
+p_{n}\sim\frac{\exp K\sqrt{n}}{4n\sqrt{3}}\]
+
+\end_inset 
+
+ with 
+\begin_inset Formula $K=\pi\sqrt{2/3}$
+\end_inset 
+
+.
+ This form was given by Hardy and Ramanujan [ref] and Uspensky [ref], with
+ a full series valid to all orders given by Rademacher[ref].
+ There is a similar asymptotic form for the Fourier coefficients of the
+ modular 
+\begin_inset Formula $j$
+\end_inset 
+
+-invariant,
+\begin_inset Formula \[
+j(\tau)=e^{-2\pi i\tau}+\sum_{n=0}^{\infty}c_{n}e^{2\pi in\tau}\]
+
+\end_inset 
+
+ where the coefficients take on the asymptotic values
+\begin_inset Formula \[
+c_{n}\sim\frac{\exp4\pi\sqrt{n}}{n^{3/4}\sqrt{2}}\]
+
+\end_inset 
+
+ which was given by Petersson [ref]
+\begin_inset LatexCommand \cite{Apo90}
+
+\end_inset 
+
+.
+ The appearence of an asymptotic factor in the form of 
+\begin_inset Formula $e^{K\sqrt{n}}$
+\end_inset 
+
+ here and in the Newton series suggests yet another curious link between
+ the theory of modular forms and the Riemann zeta function.
+\layout Section
+
+Finite Differences and the Norlund-Rice Integral
+\layout Standard
+
+This section reviews the the definition of the Norlund-Rice integral, and
+ its application to finite differences and Newton series.
+ Theorems required for convergence, and in particular, Carlson's theorem,
+ are breifly stated.
+ The next section applies these techniques to the evaluation of the finite
+ differences of the Riemann zeta function.
+\layout Lemma
+
+(Norlund-Rice ?)
+\layout Lemma
+
+Given a function 
+\begin_inset Formula $f(s)$
+\end_inset 
+
+ holomorphic on a region containing the integers 
+\begin_inset Formula $\{ n_{0},\cdots,n\}$
+\end_inset 
+
+, then the finite differences of the sequence 
+\begin_inset Formula $\{ f(k)\}$
+\end_inset 
+
+ may be given an integral representation
+\begin_inset Formula \[
+\sum_{k=n_{0}}^{n}{n \choose k}(-1)^{k}f(k)=\frac{(-1)^{n}}{2\pi i}\oint_{\mathcal{C}}f(s)\frac{n!}{s(s-1)\cdots(s-n)}ds\]
+
+\end_inset 
+
+ where the contour of integration 
+\begin_inset Formula $\mathcal{C}$
+\end_inset 
+
+encircles the integers 
+\begin_inset Formula $\{ n_{0},\cdots,n\}$
+\end_inset 
+
+ in a postive direction, but does not include any of the integers 
+\begin_inset Formula $\{0,1,\cdots,n-1\}$
+\end_inset 
+
+.
+\layout Proof
+
+By residues.
+\begin_inset LatexCommand \cite{Fla94}
+
+\end_inset 
+
+
+\layout Standard
+
+Such sums commonly occur in the theory of finite differences.
+ Given a function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+, one defines its forward differences at point 
+\begin_inset Formula $x=a$
+\end_inset 
+
+ by 
+\begin_inset Formula \begin{equation}
+\Delta^{n}\left[f\right](a)=\sum_{p=0}^{n}(-1)^{n-p}{n \choose p}\, f(p+a)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula ${n \choose p}$
+\end_inset 
+
+ is the binomial coefficient.
+ When one has only an arithmetic function or sequence of values 
+\begin_inset Formula $f_{p}=f(p)$
+\end_inset 
+
+, rather than a function of a continuous variable 
+\begin_inset Formula $x$
+\end_inset 
+
+, the above is referred to as the binomial transform of the sequence.
+ 
+\layout Standard
+
+The forward differences may be used to construct the umbral calculus analog
+ of a Taylor's series:
+\begin_inset Formula \begin{equation}
+g(z+a)=\sum_{n=0}^{\infty}\Delta^{n}\left[f\right](a)\;\frac{(z)_{n}}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $(z)_{n}=z(z-1)\ldots(z-n+1)$
+\end_inset 
+
+ is the Pochhammer symbol or falling factorial.
+ When the growth rate of 
+\begin_inset Formula $f$
+\end_inset 
+
+ is suitably limited on the complex plane, then, by means of Carlson's Uniquenes
+s theorem, 
+\begin_inset Formula $g=f$
+\end_inset 
+
+, and this series is known as the Newton series for 
+\begin_inset Formula $f$
+\end_inset 
+
+.
+\layout Theorem
+
+(Carlson, 1914) If a function 
+\begin_inset Formula $f(z)$
+\end_inset 
+
+ vanishes on the positive integers, and if it is of exponential type, that
+ is, if 
+\begin_inset Formula \[
+f(z)=\mathcal{O}(1)e^{\tau|z|}\]
+
+\end_inset 
+
+ for 
+\begin_inset Formula $z\in\mathbb{C}$
+\end_inset 
+
+ and for some real 
+\begin_inset Formula $\tau<\infty$
+\end_inset 
+
+, and if furthermore its growth is bounded on the imaginary axis, so that
+ 
+\begin_inset Formula \[
+f(iy)=\mathcal{O}(1)e^{-c|y|}\]
+
+\end_inset 
+
+for 
+\begin_inset Formula $c<\pi$
+\end_inset 
+
+, then 
+\begin_inset Formula $f$
+\end_inset 
+
+ is identically zero.
+ 
+\layout Proof
+
+See 
+\begin_inset LatexCommand \cite{Boa64}
+
+\end_inset 
+
+.
+\layout Standard
+
+An example of a function that violates Carlson's theorem is 
+\begin_inset Formula $\sin\pi z$
+\end_inset 
+
+, which vanishes on the integers, but has a growth rate of 
+\begin_inset Formula $c=\pi$
+\end_inset 
+
+ along the imaginary axis.
+\layout Section
+
+adsf
+\layout Section
+
+Dirichlet 
+\begin_inset Formula $L$
+\end_inset 
+
+-functions
+\layout Standard
+
+The Dirichlet 
+\begin_inset Formula $L$
+\end_inset 
+
+-functions are defined in terms of the Dirichlet characters, which are group
+ representation characters of the cyclic group.
+ They play an important role in number theory, and the generalized Riemann
+ hypothesis is applied to the 
+\emph on 
+L
+\emph default 
+-functions.
+ The Dirichlet characters are multiplicative functions, and are periodic
+ modulo 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ That is, a character 
+\begin_inset Formula $\chi(n)$
+\end_inset 
+
+ is an arithmetic function of an integer 
+\begin_inset Formula $n$
+\end_inset 
+
+, with period 
+\begin_inset Formula $k$
+\end_inset 
+
+, so that 
+\begin_inset Formula $\chi(n+k)=\chi(n)$
+\end_inset 
+
+.
+ A character is multiplicative, in that 
+\begin_inset Formula $\chi(mn)=\chi(m)\chi(n)$
+\end_inset 
+
+ for all integers 
+\begin_inset Formula $m,n$
+\end_inset 
+
+.
+ Furthermore, one has that 
+\begin_inset Formula $\chi(1)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $\chi(n)=0$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $\gcd(n,k)\ne1$
+\end_inset 
+
+.
+ The 
+\emph on 
+L
+\emph default 
+-function associated with the character 
+\begin_inset Formula $\chi$
+\end_inset 
+
+is defined as 
+\begin_inset Formula \begin{equation}
+L(\chi,s)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ All such 
+\emph on 
+L
+\emph default 
+-functions may be re-expressed in terms of the Hurwitz zeta function as
+\begin_inset Formula \begin{equation}
+L(\chi,s)=\frac{1}{k^{s}}\sum_{m=1}^{k}\chi(m)\zeta\left(s,\frac{m}{k}\right)\label{eq:L-Hurwitz}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $k$
+\end_inset 
+
+ is the period of 
+\begin_inset Formula $\chi$
+\end_inset 
+
+ and 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
+
+ is the Hurwitz zeta function, given by 
+\begin_inset Formula \begin{equation}
+\zeta(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Thus, the study of the analytic properties of the 
+\emph on 
+L
+\emph default 
+-functions can be partially unified through the study of the Hurwitz zeta
+ function.
+\layout Section
+
+Forward differences
+\layout Standard
+
+In analogy to the study of the forward differences of the Riemann zeta function,
+ the remainder of this paper will concern itself with the analysis of the
+ series given by 
+\begin_inset Formula \begin{equation}
+L_{n}=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-coeff}\end{equation}
+
+\end_inset 
+
+ Because of the relation 
+\begin_inset LatexCommand \ref{eq:L-Hurwitz}
+
+\end_inset 
+
+ connecting the Hurwitz zeta function to the L-function, it is sufficient
+ to study sums of the form
+\begin_inset Formula \begin{equation}
+A_{n}(m,k)=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{\zeta\left(p+1,\frac{m}{k}\right)}{k^{p+1}(p+1)}\label{eq:}\end{equation}
+
+\end_inset 
+
+ since 
+\begin_inset Formula \begin{equation}
+L_{n}=\sum_{m=1}^{k}\chi(m)\, A_{n}(m,k)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Converting the sum to the Norlund-Rice integral, and extending the contour
+ to the half-circle at positive infinity, and noting that the half-circle
+ does not contribute to the integral, one obtains 
+\begin_inset Formula \begin{equation}
+A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{\zeta\left(s+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:}\end{equation}
+
+\end_inset 
+
+ Moving the integral to the left, one encounters a single pole at 
+\begin_inset Formula $s=-1$
+\end_inset 
+
+ and a double pole at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+.
+ The residue of the pole at 
+\begin_inset Formula $s=-1$
+\end_inset 
+
+ is 
+\begin_inset Formula \begin{equation}
+\mbox{Res}(s=-1)=\frac{-1}{n+1}\zeta\left(0,\frac{m}{k}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where one has the curious identity in the form of a multiplication theorem
+ for the digamma function:
+\begin_inset Formula \begin{equation}
+\zeta\left(0,\frac{m}{k}\right)=\frac{-1}{\pi k}\sum_{p=1}^{k}\sin\left(\frac{2\pi pm}{k}\right)\psi\left(\frac{p}{k}\right)=-B_{1}\left(\frac{m}{k}\right)=\frac{1}{2}-\frac{m}{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Here, 
+\begin_inset Formula $\psi$
+\end_inset 
+
+ is the digamma function, the logarithmic derivative of the Gamma function:
+ 
+\begin_inset Formula \begin{equation}
+\psi(z)=\frac{d}{dz}\log\Gamma(z)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula $B_{1}$
+\end_inset 
+
+is the Bernoulli polynomial of order 1.
+ The double pole at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+ evaluates to 
+\begin_inset Formula \begin{equation}
+\mbox{Res}(s=0)=\frac{-1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $H_{n}$
+\end_inset 
+
+ are the harmonic numbers 
+\begin_inset Formula \begin{equation}
+H_{n}=\sum_{j=1}^{n}\frac{1}{j}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Combining these, one obtains 
+\begin_inset Formula \begin{equation}
+A_{n}(m,k)=\frac{1}{n+1}\left(\frac{m}{k}-\frac{1}{2}\right)-\frac{1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n}\right]+a_{n}(m,k)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The remaining term has the remarkable property of being exponentially small;
+ that is, 
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)=\mathcal{O}\left(e^{-\sqrt{Kn}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ for a constant 
+\begin_inset Formula $K$
+\end_inset 
+
+ of order 
+\begin_inset Formula $m/k$
+\end_inset 
+
+.
+ The next section develops an explicit asymptotic form for this term.
+\layout Section
+
+Saddle-point methods
+\layout Comment
+
+Caution, there seems to be an extra factor of 
+\begin_inset Formula $k$
+\end_inset 
+
+ floating around; I haven't tracked that down yet; these expressions may
+ be too small/large by factor of 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+\layout Standard
+
+The term 
+\begin_inset Formula $a_{n}(m,k)$
+\end_inset 
+
+ is represented by the integral
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{-3`}{2}-i\infty}^{\frac{-3}{2}+i\infty}\frac{\zeta\left(s+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:little-a-integral}\end{equation}
+
+\end_inset 
+
+ which resulted from shifting the integration contour past the poles.
+ At this point, the functional equation for the Hurwitz zeta may be applied.
+ This equation is 
+\begin_inset Formula \begin{equation}
+\zeta\left(1-s,\frac{m}{k}\right)=\frac{2\Gamma(s)}{(2\pi k)^{s}}\sum_{p=1}^{k}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ This allows the integral to be expressed as
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)=\frac{n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\end{equation}
+
+\end_inset 
+
+ It will prove to be convenient to pull the phase factor out of the cosine
+ part; we do this now, and write this integral as 
+\begin_inset Formula \begin{eqnarray}
+a_{n}(m,k) & = & \frac{n!}{k\pi i}\sum_{p=1}^{k}\exp\left(i\frac{2\pi pm}{k}\right)\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\,\exp\left(-i\frac{\pi s}{2}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:two-integrals}\\
+ & + & c.c.\nonumber \end{eqnarray}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $c.c.$
+\end_inset 
+
+ means that 
+\begin_inset Formula $i$
+\end_inset 
+
+ should be replaced by 
+\begin_inset Formula $-i$
+\end_inset 
+
+ in the two exp parts.
+\layout Standard
+
+For large values of 
+\begin_inset Formula $n$
+\end_inset 
+
+, this integral may be evaluated by means of the saddle-point method.
+ The saddle-point method, or method of steepest descents, may be applied
+ whenever the integrand can be approximated by a sharply peaked Gaussian,
+ as the above can be for large 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ More precisely, The saddle-point theorem states that 
+\begin_inset Formula \begin{equation}
+\int e^{-Nf(x)}dx\approx\sqrt{\frac{2\pi}{N\left|f^{\prime\prime}(x_{0})\right|}}e^{-Nf(x_{0})}\left[1-\frac{f^{(4)}(x_{0})}{8N\left|f^{\prime\prime}(x_{0})\right|^{2}}+\cdots\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ is an asymptotic expansion for large 
+\begin_inset Formula $N$
+\end_inset 
+
+.
+ Here, the function 
+\begin_inset Formula $f$
+\end_inset 
+
+ is taken to have a local minimum at 
+\begin_inset Formula $x=x_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $f^{\prime\prime}(x_{0})$
+\end_inset 
+
+ and 
+\begin_inset Formula $f^{(4)}(x_{0})$
+\end_inset 
+
+ are the second and fourth derivatives at the local minimum.
+ 
+\layout Standard
+
+To recast the equation 
+\begin_inset LatexCommand \ref{eq:two-integrals}
+
+\end_inset 
+
+ into the form needed for the method of steepest descents, an asymptotic
+ expansion of the integrands will need to be made for large 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ After such an expansion, it is seen that the saddle point occurs at large
+ values of 
+\begin_inset Formula $s$
+\end_inset 
+
+, and so an asymptotic expansion in large 
+\begin_inset Formula $s$
+\end_inset 
+
+ is warranted as well.
+ As it is confusing and laborious to simultaneously expand in two parameters,
+ it is better to seek out an order parameter to couple the two.
+ This may be done as follows.
+ One notes that the integrands have a minimum, on the real 
+\begin_inset Formula $s$
+\end_inset 
+
+ axis, near 
+\begin_inset Formula $s=\sigma_{0}=\sqrt{\pi kn/p}$
+\end_inset 
+
+ and so the appropriate scaling parameter is 
+\begin_inset Formula $z=s/\sqrt{n}$
+\end_inset 
+
+.
+ One should then immediately perform a change of variable from 
+\begin_inset Formula $s$
+\end_inset 
+
+ to 
+\begin_inset Formula $z$
+\end_inset 
+
+.
+ The asymptotic expansion is then performed by holding 
+\begin_inset Formula $z$
+\end_inset 
+
+ constant, and taking 
+\begin_inset Formula $n$
+\end_inset 
+
+ large.
+ Thus, one writes 
+\begin_inset Formula \begin{eqnarray}
+a_{n}(m,k) & = & \frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz\right.\label{eq:saddle}\\
+ &  & \left.+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{\psi}(z)}dz\right]\end{eqnarray}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\overline{\psi}$
+\end_inset 
+
+ is the complex conjugate of 
+\begin_inset Formula $\psi$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Proceeding, one has 
+\begin_inset Formula \begin{equation}
+\psi(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\phi(s)\approx-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the approximation that 
+\begin_inset Formula $\zeta\left(s,p/k\right)\approx(k/p)^{s}$
+\end_inset 
+
+ for large 
+\begin_inset Formula $s$
+\end_inset 
+
+ has been made.
+ More generally, one has 
+\begin_inset Formula \begin{equation}
+\log\zeta(s)=\sum_{n=2}^{\infty}\;\frac{\Lambda(n)}{n^{s}\log n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\Lambda(n)$
+\end_inset 
+
+ is the Mangoldt function.
+ (What about Hurwitz?) The asymptotic expansion for the Gamma function is
+ given by the Stirling expansion, 
+\begin_inset Formula \begin{equation}
+\log\Gamma(x)=\left(x-\frac{1}{2}\right)\log x-x+\frac{1}{2}\log2\pi+\sum_{j=1}^{\infty}\frac{B_{2j}}{2j(2j-1)x^{2j-1}}\label{eq:}\end{equation}
+
+\end_inset 
+
+and 
+\begin_inset Formula $B_{k}$
+\end_inset 
+
+ are the Bernoulli numbers.
+ Expanding to 
+\begin_inset Formula $\mathcal{O}(1/n)$
+\end_inset 
+
+ and collecting terms, one obtains 
+\begin_inset Formula \begin{eqnarray}
+\psi(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
+ &  & +\log2\pi-2\log z-\frac{z^{2}}{2}\label{eq:}\\
+ &  & +\frac{1}{\sqrt{n}}\left[\frac{7}{6z}-\frac{z}{2}+\frac{z^{3}}{3}\right]+\frac{1}{n}\left[\frac{73}{144z^{2}}+\frac{5z^{2}}{4}\right]+\mathcal{O}\left(n^{-3/2}\right)\end{eqnarray}
+
+\end_inset 
+
+ The saddle point may be obtained by solving 
+\begin_inset Formula $\psi^{\prime}(z)=0$
+\end_inset 
+
+.
+ To lowest order, one obtains 
+\begin_inset Formula $z_{0}=(1+i)\sqrt{\pi p/k}$
+\end_inset 
+
+.
+ To use the saddle-point formula, one needs 
+\begin_inset Formula $\psi^{\prime\prime}(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$
+\end_inset 
+
+.
+ Substituting, one directly obtains 
+\begin_inset Formula \begin{equation}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz\approx\left(\frac{2\pi^{3}p}{n^{3}k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)+\mathcal{O}\left(??\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ while the integral for 
+\begin_inset Formula $\overline{\psi}$
+\end_inset 
+
+ is the complex conjugate of this (having a saddle point at the complex
+ conjugate location).
+ Inserting this into equation 
+\begin_inset LatexCommand \ref{eq:saddle}
+
+\end_inset 
+
+ gives 
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi n^{3}}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\sin\left(\frac{2\pi pm}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:an-p}\end{equation}
+
+\end_inset 
+
+For large 
+\begin_inset Formula $n$
+\end_inset 
+
+, only the 
+\begin_inset Formula $p=1$
+\end_inset 
+
+ term contributes significantly, and so one may write
+\begin_inset Formula \begin{equation}
+a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\sin\left(\frac{2\pi m}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which demonstrates the desired result: the terms 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+are exponentially small.
+\layout Section
+
+Conclusion 
+\layout Standard
+
+We conclude by briefly returning to the structure of the Dirichlet L-functions.
+ The L-function coefficients defined in equation 
+\begin_inset LatexCommand \ref{eq:L-coeff}
+
+\end_inset 
+
+ are now given by 
+\begin_inset Formula \begin{equation}
+L_{n}=\sum_{m=1}^{k}\chi(m)A_{n}(m,k)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Writing 
+\begin_inset Formula \begin{equation}
+A_{n}=B_{n}+a_{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ so that 
+\begin_inset Formula $B_{n}(m,k)$
+\end_inset 
+
+represents the non-exponential part, one may state a few results.
+ For the non-principal characters, one has 
+\begin_inset Formula $\sum_{m=1}^{k}\chi(m)=0$
+\end_inset 
+
+ and thus, the first term simplifies to 
+\begin_inset Formula \begin{equation}
+\sum_{m=1}^{k}\chi(m)B_{n}(m,k)=\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n+1}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ For the principal character 
+\begin_inset Formula $\chi_{1}$
+\end_inset 
+
+, one has 
+\begin_inset Formula $\sum_{m=1}^{k}\chi_{1}(m)=\varphi(k)$
+\end_inset 
+
+ with 
+\begin_inset Formula $\varphi(k)$
+\end_inset 
+
+ the Euler totient function.
+ Thus, for the principal character, one obtains 
+\begin_inset Formula \begin{equation}
+\sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k)=-\varphi(k)\left[\frac{1}{2(n+1)}+\frac{1}{k}\left(\ln k+1-H_{n}\right)\right]+\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n+1}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+By contrast, the exponentially small term invokes a linear combination of
+ Gauss sums.
+ The Gauss sum associated with a character 
+\begin_inset Formula $\chi$
+\end_inset 
+
+is 
+\begin_inset Formula \begin{equation}
+G(n,\chi)=\sum_{m\mbox{ mod}k}\chi(m)e^{2\pi imn/k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so, to leading order 
+\begin_inset Formula \begin{eqnarray}
+\sum_{m=1}^{k}\chi(m)a_{n}(m,k) & \approx & \frac{1}{2ik}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\nonumber \\
+ &  & \left[\exp i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(1,\chi)-\exp-i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(-1,\chi)\right]\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ The higher-order terms with 
+\begin_inset Formula $p>1$
+\end_inset 
+
+ dropped from equation 
+\begin_inset LatexCommand \ref{eq:an-p}
+
+\end_inset 
+
+ correspond to terms involving 
+\begin_inset Formula $G(p,\chi)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+That's all.
+ Not sure what more to say at this point.
+ -- linas
+\layout Comment
+
+TODO -- The Hurwitz zeta can be avoided entirely by working directly with
+ the functional equation for the L-functions, as given by Apostol, Chapter
+ 12, Theorem 12.11.
+ The direct form seems to imply some sort of result/constraint on the 
+\begin_inset Formula $p\ne1$
+\end_inset 
+
+ terms in the expansion.
+ It also suggests that most of the deriviation above could be made clearer
+ by assuming a generic functional equation, and stating results in terms
+ of that.
+ (e.g.
+ assume Selberg-class type functional equation).
+ 
+\layout Section
+
+Appendix
+\layout Standard
+
+A related but simpler integral can be found in Tom M.
+ Apostol, 
+\emph on 
+Introduction to Analytic Number Theory
+\emph default 
+, Lemma 3, Chapter 13.
+ The integral resembles equation 
+\begin_inset LatexCommand \ref{eq:little-a-integral}
+
+\end_inset 
+
+.
+ Re-expressed so as to heighten the resemblance, it states 
+\begin_inset Formula \begin{eqnarray}
+b_{n}(m) & = & \frac{(-1)^{n}}{2\pi i}\, n!\,\int_{-\frac{3`}{2}-i\infty}^{-\frac{3}{2}+i\infty}\frac{1}{(s+1)m^{s+1}s(s-1)\cdots(s-n)}\, ds\nonumber \\
+ & = & \frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{m^{s}}{s(s+1)\cdots(s+n+1)}\, ds\nonumber \\
+ & = & \begin{cases}
+\frac{1}{n+1}\left(1-\frac{1}{m}\right)^{n+1} & \mbox{for }m\ge1\\
+0 & \mbox{for }m<1\end{cases}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ A naive application of this identity to the integrals in this paper leads
+ to divergent formal sums.
+ 
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[plain]{/home/linas/src/fractal/paper/fractal}
+
+\end_inset 
+
+ 
+\the_end
