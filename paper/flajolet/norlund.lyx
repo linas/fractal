@@ -60,43 +60,125 @@ The binomial coefficient is implicated in various fractal phenomena, and
  Thus, on vague and general principles, one might be lead to explore Newton
  series involving the Riemann zeta function.
  Of some curiosity is the series
-\begin_inset Formula \[
-\zeta(s)=\frac{s}{s-1}+s\sum_{n=0}^{\infty}{s-1 \choose n}\, t_{n}\]
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\,\frac{a_{n}}{n!}\,(s-1)_{n}\label{eq:zeta-as-a_n}\end{equation}
 
 \end_inset 
 
- Here, the constants 
-\begin_inset Formula $t_{n}$
+where 
+\begin_inset Formula $(s-1)_{n}=(s-1)(s-2)\cdots(s-n)$
+\end_inset 
+
+ is the falling Pochhammer symbol.
+ Note the general resemblance to a Taylor's series, with the Pochhammer
+ symbol taking the place of the monomial.
+ Such general types of resemblances are the key idea underlying the so-called
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+umbral calculus
+\begin_inset Quotes erd
+\end_inset 
+
+.
+\layout Comment
+
+Perhaps a better normalization to use might be to write this as 
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{s}{s-1}+\sum_{n=0}^{\infty}(-)^{n}\,\frac{b_{n}}{n!}\,(s)_{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ so that 
+\begin_inset Formula $b_{0}=-1/2$
+\end_inset 
+
+ and 
+\begin_inset Formula $b_{n}=na_{n-1}$
+\end_inset 
+
+? The only motivation for this that I see now is that it looks cleaner.
+ 
+\layout Standard
+
+Another comment
+\layout Comment
+
+In the following, I use the notation I am used to.
+ I am open to suggestions of an alternate notation.
+\layout Standard
+
+Here, the constants 
+\begin_inset Formula $a_{n}$
 \end_inset 
 
  play a role analogous to the Stieltjes constants of the Taylor expansion.
  The 
-\begin_inset Formula $t_{n}$
+\begin_inset Formula $a_{n}$
 \end_inset 
 
  have several remarkable properties.
- First, they may be written as a finite sum over well-known constants:
+ Unlike the Stieltjes constants, they may be written as a finite sum over
+ well-known constants:
 \begin_inset Formula \[
-t_{n}=\sum_{k=1}^{n}{n \choose k}\left(-1\right)^{k}\left(\zeta xxx\right)\]
-
-\end_inset 
-
- so that, for example, 
-\begin_inset Formula \[
-t_{0}=\gamma-\frac{1}{2}\]
+a_{n}=1-\gamma-\frac{1}{2(n+1)}-H_{n}-\sum_{k=1}^{n}(-)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\frac{\zeta(k+1)}{k+1}\]
 
 \end_inset 
 
 
+\layout Comment
+
+The 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+look slightly better too: 
 \begin_inset Formula \[
-t_{1}=xxx\]
+b_{n}=n(1-\gamma-H_{n-1})-\frac{1}{2}+\sum_{k=2}^{n}(-)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\zeta(k)\]
+
+\end_inset 
+
+ since the nasty denominator is now gone ...
+ 
+\layout Standard
+
+so that, for example, 
+\begin_inset Formula \begin{eqnarray}
+a_{0} & = & \frac{1}{2}-\gamma\label{eq:}\\
+a_{1} & = & \frac{\zeta(2)}{2}-\gamma-\frac{1}{4}\\
+a_{2} & = & \zeta(2)-\frac{\zeta(3)+2}{3}-\gamma\\
+a_{3} & = & \frac{3}{2}\zeta(2)-\zeta(3)+\frac{\zeta(4)}{4}-\frac{23}{24}-\gamma\end{eqnarray}
 
 \end_inset 
 
  and so on.
- Next, apart from a leading order, these become exponentially small:
+ 
+\layout Comment
+
+The 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+take on a slightly more elegant form as well:
+\begin_inset Formula \begin{eqnarray}
+b_{1} & = & -\gamma+\frac{1}{2}\label{eq:}\\
+b_{2} & = & -2\gamma-\frac{1}{2}+\zeta(2)\\
+b_{3} & = & -3\gamma-2-\zeta(3)+3\zeta(2)\\
+b_{4} & = & -4\gamma-\frac{23}{6}+\zeta(4)-4\zeta(3)+6\zeta(2)\end{eqnarray}
+
+\end_inset 
+
+
+\layout Standard
+
+Next, apart from a leading order, these become exponentially small:
 \begin_inset Formula \[
-t_{n}=\frac{1}{2(n+1)}+\mathcal{O}\left(\frac{\exp\left(-2\sqrt{\pi n}\right)}{n^{3/4}}\right)\]
+a_{n}=\mathcal{O}\left(\frac{\exp\left(-2\sqrt{\pi n}\right)}{n^{3/4}}\right)\]
 
 \end_inset 
 
@@ -123,6 +205,10 @@ The development of an explicit expression for the asymptototic behaviour
 
 -functions.
  
+\layout Comment
+
+Not sure about the following ...
+ interesting but don't see here it goes.
 \layout Standard
 
 The paper concludes by noting the general resemblance of the asymptotic
@@ -362,7 +448,990 @@ An example of a function that violates Carlson's theorem is
  along the imaginary axis.
 \layout Section
 
-adsf
+The Riemann Zeta and Stieltjes Constants
+\layout Standard
+
+Identities useful in the course of the manipulations needed to derive the
+ above include 
+\begin_inset Formula \begin{equation}
+H_{n}=\sum_{m=1}^{n}\frac{1}{m}=-\sum_{k=1}^{n}\frac{(-1)^{k}}{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+-\sum_{k=0}^{n}\frac{(-x)^{k+1}}{k+1}\left(\begin{array}{c}
+n\\
+k\end{array}\right)=\frac{1-(1-x)^{n+1}}{n+1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ This last identity is useful for partially resumming equation 
+\begin_inset LatexCommand \ref{eq:t_n defn}
+
+\end_inset 
+
+ to improve convergence in numerical calculations.
+ 
+\layout Standard
+
+The 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+appear naturally in the Taylor's expansion for the Gamma function, and so
+ one finds, with little difficulty, the generating function 
+\begin_inset Formula \begin{eqnarray}
+\alpha(z) & = & \sum_{n=0}^{\infty}a_{n}z^{n}\nonumber \\
+ & = & \frac{1}{1-z}+\frac{\ln(1-z)}{z}\left(\frac{1}{1-z}-\frac{1}{2}\right)+\frac{1}{z}\ln\Gamma\left(\frac{1}{1-z}\right)\label{eq:alpha-exact}\end{eqnarray}
+
+\end_inset 
+
+ The above may be obtained by the straightforward application of equation
+ 6.1.33 from Abramowitz and Stegun 
+\begin_inset LatexCommand \cite{A&S}
+
+\end_inset 
+
+.
+ This representation shows a non-trivial structure.
+ There is a cut (from the first logarithm) extending to the right for 
+\begin_inset Formula $1<z$
+\end_inset 
+
+.
+ The log of the Gamma function results is a series of stitched cuts joining
+ pairs of poles for even and odd 
+\begin_inset Formula $m$
+\end_inset 
+
+ at 
+\begin_inset Formula $-m=1/(1-z)$
+\end_inset 
+
+, that is, at 
+\begin_inset Formula $z=1+1/m$
+\end_inset 
+
+, accumulating to an essential singularity(??) at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ There is a simple zero at 
+\begin_inset Formula $z=\infty$
+\end_inset 
+
+.
+ The radius of convergence of the series involving the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+is one.
+ As will be seen in the next section, the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ are oscillatory and exponentially decreasing, and so the sum at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+is convergent.
+ One has:
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}a_{n}=\ln\sqrt{2\pi}-1=-0.081061466795327...\label{eq:}\end{equation}
+
+\end_inset 
+
+ which can be obtained from Sterling's asymptotic expansion for the gamma
+ function, and 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}a_{n}2^{-n}=2-3\ln2=-0.079441541679836...\label{eq:}\end{equation}
+
+\end_inset 
+
+An exponential generating function is given by 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}a_{n}\frac{z^{n}}{n!}=\frac{1}{2z}+e^{z}\left[1-\gamma-\mbox{Ein}(z)-\frac{1}{z}\left(\frac{1}{2}+\sum_{k=2}^{\infty}\frac{(-z)^{k}}{k!}\zeta(k)\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\mbox{Ein}(z)$
+\end_inset 
+
+ is the entire exponential integral: 
+\begin_inset Formula \begin{equation}
+\mbox{Ein}(z)=-\sum_{k=1}^{\infty}\frac{1}{k}\frac{(-z)^{k}}{k!}=e^{-z}\sum_{n=1}^{\infty}H_{n}\frac{z^{n}}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula $H_{n}$
+\end_inset 
+
+ are the harmonic numbers.
+\layout Standard
+
+Its equally curious that other variations on the expression given in 
+\begin_inset LatexCommand \ref{eq:zeta-as-a_n}
+
+\end_inset 
+
+ are even more trivial, namely, one has 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)x^{n}=\sum_{n=0}^{\infty}(-)^{n}(s-1)_{n}\,\frac{x^{n}}{n!}=\left(1-x\right)^{s-1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $(s)_{n}=s(s-1)(s-2)...(s-n+1)$
+\end_inset 
+
+ is the falling factorial.
+ 
+\layout Comment
+
+One is left to wonder what the function 
+\begin_inset Formula \begin{equation}
+\mu(s;x)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)a_{n}x^{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ might be like; it is presumably related to the Polylogarithm (Jonquiere's
+ function) XXXX Do the scratching needed to get the relationship nailed
+ down.
+ Ugh.
+ 
+\layout Section
+
+Numerical Analysis
+\layout Standard
+
+The equation 
+\begin_inset LatexCommand \ref{eq: a_n defn}
+
+\end_inset 
+
+ is very conducive to numerical analysis.
+ The values of the zeta function for small integers are known to millions
+ of digits; Plouffe has given a series of very rapidly converging sums for
+ the larger integers[ref].
+ Thus, it becomes possible to explore the behavior of the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ up to 
+\begin_inset Formula $n\sim500$
+\end_inset 
+
+ with only a moderate investment in coding and computer time.
+ Note, however, that in order to get up to these ranges, computations must
+ be performed keeping hundreds of decimal places of precision, due to the
+ very large values that the binomial coefficient can take.
+ In the following, calculations were performed using the GNU Multiple Precision
+ Arithmetic Library 
+\begin_inset LatexCommand \cite{GMP}
+
+\end_inset 
+
+.
+\layout Standard
+
+The table 
+\begin_inset LatexCommand \ref{cap:Some-values-of}
+
+\end_inset 
+
+ shows the numerical values of the first few of these constants.
+ It appears that the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+are oscillatory, as shown in the figure 
+\begin_inset LatexCommand \ref{cap:Graph-of-a_n}
+
+\end_inset 
+
+.
+ The values are also very rapidly decreasing, so that to the first order,
+ that 
+\begin_inset Formula $\left|a_{n}\right|\sim\exp\left(-4\sqrt{n+1}\right)$
+\end_inset 
+
+.
+ This exponential decrease is vaguely reminiscent of an exact result from
+ Babenko 
+\begin_inset LatexCommand \cite{Babenko & Juriev}
+
+\end_inset 
+
+, and it is possible that Babenko's analysis might be applied to yeild a
+ more precise statement of the results of this section.
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Some-values-of}
+
+\end_inset 
+
+Some values of 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="9" columns="2">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $n$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-0.077215664901532851...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-0.0047486314774196408...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.00036610089349548089...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.00037600730566372326...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.00014301182486231440...
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3.3997818936021684...e-5
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+6
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-4.8324221220657863...e-7
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+7
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-6.7778497812918602..e-6
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+ 
+\layout Standard
+
+This table shows the first few values of 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+.
+ These may be easily calculated to high precision if desired.
+ As is immediately apparent, these get small quickly.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Graph-of-a_n}
+
+\end_inset 
+
+Graph of the first few values of 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename asubn.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a graph of the first 140 values of 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ normalized by a factor of 
+\begin_inset Formula $\exp-4\sqrt{n+1}$
+\end_inset 
+
+.
+ Oscillation is clearly visible; the period of oscillation is slowly increasing.
+\end_inset 
+
+ 
+\layout Standard
+
+The author attempted a numeric fit to the oscillatory behavior of the function.
+ An excellent fit for the 
+\begin_inset Formula $k'th$
+\end_inset 
+
+ zero is provided by 
+\begin_inset Formula \begin{equation}
+q(k)=1.970+\frac{17\pi}{16}k+\frac{\pi}{4}k^{2}\label{eq:}\end{equation}
+
+\end_inset 
+
+ which appears to fit the zero-crossings to better than a few parts per
+ thousand, at least for the larger values of 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ Note that the value 17/16 is not meant to imply that this value is truly
+ exact; numerically, the value 1.0625 seems to be the ideal fit, and it is
+ written here as 17/16 in order to be suggestive.
+ This equation is trivially invertible to give the oscillatory behavior
+ of the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+; it is given by
+\begin_inset Formula \begin{equation}
+s_{n}=\sin\pi\left(\frac{-1}{16}+\sqrt{\frac{289}{256}+4\,\frac{(n-1.97)}{\pi}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ To demonstrate the quality of this fit, the graph 
+\begin_inset LatexCommand \ref{cap:Graph-amplitude}
+
+\end_inset 
+
+ shows 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ divided by 
+\begin_inset Formula $s_{n}$
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Graph-amplitude}
+
+\end_inset 
+
+Graph of the log of the amplitude 
+\begin_inset Formula $a_{n}/s_{n}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename alog.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a graph of 
+\begin_inset Formula $-\log(a_{n}/s_{n})$
+\end_inset 
+
+ out through 
+\begin_inset Formula $n\sim2000$
+\end_inset 
+
+.
+ It is essentially a graph of the log of the amplitude of the oscillations
+ of 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+.
+ Note the absence of any 'blips' that would occur if the sinusoidal fit
+ to the data was poor; the sinusoidal curve 
+\begin_inset Formula $s_{n}$
+\end_inset 
+
+ models the data remarkably well.
+ This figure also illustrates a fit to the amplitude.
+ Specifically, the fit curve is given by 
+\begin_inset Formula $3+3.6\sqrt{n+1}$
+\end_inset 
+
+.
+ Note that this fit fails badly for values of 
+\begin_inset Formula $n\lesssim20$
+\end_inset 
+
+ and that for larger 
+\begin_inset Formula $n$
+\end_inset 
+
+, the fit is only good to 
+\begin_inset Formula $3+3.6\sqrt{n+1}+\log(a_{n}/s_{n})\simeq0\pm0.5$
+\end_inset 
+
+ on average.
+ 
+\end_inset 
+
+
+\layout Standard
+
+Asymptotically, the amplitude of the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ appears to be given by 
+\begin_inset Formula \begin{equation}
+a_{n}\simeq s_{n}\exp-\left(3+3.6\sqrt{n+1}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ However, a more precise fit is strangely difficult.
+ An attempt to numerically fit the data with an expression of the form 
+\begin_inset Formula \begin{equation}
+a_{n}\simeq s_{n}\exp-\left(b+\left(c+dn\right)^{\epsilon}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ results in fit parameters of 
+\begin_inset Formula $b=3.9\pm1.5$
+\end_inset 
+
+ and 
+\begin_inset Formula $c=-50\pm100$
+\end_inset 
+
+ and 
+\begin_inset Formula $d=12.87\pm0.15$
+\end_inset 
+
+ and 
+\begin_inset Formula $\epsilon=0.5\pm0.007$
+\end_inset 
+
+.
+ This fit is not very pleasing; in particular, the true asymptotic behavior
+ doesn't seem to set in until 
+\begin_inset Formula $n$
+\end_inset 
+
+ is larger than several hundred, which is unexpectedly high.
+\layout Section
+
+A Related Function
+\layout Standard
+
+The 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+may be further explored by generalizing them to be a function on the complex
+ plane, instead of an integer.
+ One such 
+\begin_inset Quotes eld
+\end_inset 
+
+obvious
+\begin_inset Quotes erd
+\end_inset 
+
+ and reasonable generalization is 
+\begin_inset Formula \begin{equation}
+a(s)=1-\gamma-\frac{1}{2(s+1)}+\sum_{k=1}^{\infty}(-)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\left[\frac{1}{k}-\frac{\zeta(k+1)}{k+1}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ By construction, this function interpolates the previous series, so that
+ 
+\begin_inset Formula $a(n)=a_{n}$
+\end_inset 
+
+ for non-negative integers 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ This function has a pole at 
+\begin_inset Formula $s=-1$
+\end_inset 
+
+, and this series expansion is convergent only for 
+\begin_inset Formula $\Re s>-1$
+\end_inset 
+
+.
+ The figure 
+\begin_inset LatexCommand \ref{cap:a-imag-axis}
+
+\end_inset 
+
+ illustrates 
+\begin_inset Formula $a(s)$
+\end_inset 
+
+ on the imaginary axis; the graphic 
+\begin_inset LatexCommand \ref{cap:Phase-of-a(s)}
+
+\end_inset 
+
+ illustrates the phase of 
+\begin_inset Formula $a(s)$
+\end_inset 
+
+ in the upper-right complex plane.
+ A numerical exploration of this function seems to indicate that the only
+ zeros of this function occur on the real number line.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:a-imag-axis}
+
+\end_inset 
+
+
+\begin_inset Formula $a(s)$
+\end_inset 
+
+ on the Imaginary Axis
+\layout Standard
+
+
+\begin_inset Graphics
+	filename as-imag-axis.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the real and imaginary parts of 
+\begin_inset Formula $a(s)$
+\end_inset 
+
+ along the imaginary axis.
+ The function appears to be oscillatory.
+ Note that the series expansion converges only with great difficulty as
+ one goes further out on the imaginary axis.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Phase-of-a(s)}
+
+\end_inset 
+
+Phase of 
+\begin_inset Formula $a(s)$
+\end_inset 
+
+ on the Complex Plane
+\layout Standard
+
+
+\begin_inset Graphics
+	filename as-big.jpeg
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the phase of 
+\begin_inset Formula $a(s)$
+\end_inset 
+
+ on the right half of the complex plane, running along the real-axis from
+ -2 to +62 and the imaginary axis from -24 to about +24.
+ The ribbing on the left is entirely due to numerical errors, as the sums
+ converge only with great difficulty.
+ The color scheme is such that black corresponds to 
+\begin_inset Formula $-\pi$
+\end_inset 
+
+, green to 0 and red to 
+\begin_inset Formula $+\pi$
+\end_inset 
+
+, on a smooth scale.
+ Thus, the red-to-black color discontinuities, correspond to a phase change
+ of 
+\begin_inset Formula $2\pi$
+\end_inset 
+
+.
+ Note that these terminate on zeros or poles; in this case, it appears that
+ there is only one pole, at 
+\begin_inset Formula $s=-1$
+\end_inset 
+
+, and all others are zeros.
+ In particular, it appears that all of the zeros occur on the real number
+ line.
+\end_inset 
+
+
+\layout Standard
+
+Of some utility are two identities, valid for 
+\begin_inset Formula $\Re s>-1$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+-\sum_{k=0}^{\infty}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\frac{(-y)^{k+1}}{k+1}=\frac{1-(1-y)^{s+1}}{s+1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\sum_{k=1}^{\infty}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\frac{(a-1)^{k}}{k}=\int_{a}^{1}\frac{1-x^{s}}{1-x}dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ For 
+\begin_inset Formula $a=0$
+\end_inset 
+
+, the last integral becomes the digamma function; see equation 6.3.22 of 
+\begin_inset LatexCommand \cite{A&S}
+
+\end_inset 
+
+.
+\layout Section
+
+Relation to the Stieltjes constants
+\layout Standard
+
+The 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ are can be used to express the Stieltjes constants and vice-versa by re-express
+ing the binomial coefficient with a power series, making use of Stirling
+ Numbers.
+ That is, the polynomial expression is given by
+\begin_inset Formula \begin{equation}
+\left(\begin{array}{c}
+s-1\\
+n\end{array}\right)=\frac{(s-1)_{n}}{n!}=\frac{1}{n!}\sum_{k=0}^{n}\left[\begin{array}{c}
+n\\
+k\end{array}\right](s-1)^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\left[\begin{array}{c}
+n\\
+k\end{array}\right]$
+\end_inset 
+
+ is the Stirling Number of the First Kind.
+ Substituting in the above, and comparing to the standard definition of
+ the Stieltjes constants 
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{1}{s-1}+\sum_{n=0}^{\infty}\frac{(-)^{n}}{n!}\gamma_{n}(s-1)^{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ shows that 
+\begin_inset Formula $\gamma_{0}=1/2-a_{0}=\gamma$
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\gamma_{k}=-ka_{k-1}+(-)^{k}k!\,\sum_{n=k}^{\infty}(-)^{n}\frac{a_{n}}{n!}\left(\left[\begin{array}{c}
+n\\
+k\end{array}\right]+\left[\begin{array}{c}
+n\\
+k-1\end{array}\right]\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Note that the Stirling Numbers can be written as a sum over a product of
+ harmonic numbers.
+ That is,
+\begin_inset Formula \begin{equation}
+\left[\begin{array}{c}
+n\\
+k\end{array}\right]=(-)^{k-n}\frac{(n-1)!}{(k-1)!}w(n,k-1)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $w(n,0)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+w(n,k)=\sum_{m=0}^{k-1}\frac{\Gamma(1-k+m)}{\Gamma(1-k)}H_{n-1}^{(m+1)}w(n,k-1-m)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and the Harmonic numbers 
+\begin_inset Formula $H_{n}^{(m)}$
+\end_inset 
+
+ are given by 
+\begin_inset Formula \begin{equation}
+H_{n}^{(m)}=\sum_{k=1}^{n}\frac{1}{k^{m}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ This finally allows us to write 
+\begin_inset Formula \begin{equation}
+\gamma_{k}=-ka_{k}+k\sum_{n=k}^{\infty}\frac{a_{n}}{n}\left(w(n,k-1)-(k-1)w(n,k-2)\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+and so the factorial factors cancel, leaving only the sum over the crazy
+ product of harmonics.
+ XXX todo show some of the values of w, esp.
+ along the diagonal.
+ XXX
+\layout Standard
+
+While on the topic of Umbral relations, the application of Newton's divided
+ differences to the Riemann zeta function leads to the curious function
+ 
+\begin_inset Formula \begin{equation}
+Q(z)=\sum_{n=0}^{\infty}\left(\begin{array}{c}
+n+1\\
+z-1\end{array}\right)\left[\zeta(n+2)-1\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ which has the curious properties that 
+\begin_inset Formula $Q(n)=\zeta(n)$
+\end_inset 
+
+ for all integers 
+\begin_inset Formula $n\geq2$
+\end_inset 
+
+.
+ The pole is absent: 
+\begin_inset Formula $Q(1)=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $Q(n)=0\;\forall\textrm{integers }n\leq0$
+\end_inset 
+
+.
+ The analytic structure of 
+\begin_inset Formula $Q(z)$
+\end_inset 
+
+ is unclear.
 \layout Section
 
 Dirichlet 
