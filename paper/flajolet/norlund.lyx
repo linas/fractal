@@ -61,12 +61,12 @@ The binomial coefficient is implicated in various fractal phenomena, and
  series involving the Riemann zeta function.
  Of some curiosity is the series
 \begin_inset Formula \begin{equation}
-\zeta(s)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\,\frac{a_{n}}{n!}\,(s-1)_{n}\label{eq:zeta-as-a_n}\end{equation}
+\zeta(s)=\frac{1}{s-1}+\sum_{n=0}^{\infty}(-)^{n}\,\frac{b_{n}}{n!}\,(s)_{n}\label{eq:}\end{equation}
 
 \end_inset 
 
 where 
-\begin_inset Formula $(s-1)_{n}=(s-1)(s-2)\cdots(s-n)$
+\begin_inset Formula $(s)_{n}=s(s-1)\cdots(s-n+1)$
 \end_inset 
 
  is the falling Pochhammer symbol.
@@ -84,58 +84,22 @@ umbral calculus
 .
 \layout Comment
 
-Perhaps a better normalization to use might be to write this as 
-\begin_inset Formula \begin{equation}
-\zeta(s)=\frac{1}{s-1}+\sum_{n=0}^{\infty}(-)^{n}\,\frac{b_{n}}{n!}\,(s)_{n}\label{eq:}\end{equation}
-
-\end_inset 
-
- so that 
-\begin_inset Formula $b_{0}=1/2$
-\end_inset 
-
- and 
-\begin_inset Formula $b_{n}=na_{n-1}$
-\end_inset 
-
-? The only motivation for this that I see now is that it looks cleaner.
- 
-\layout Standard
-
-Another comment
-\layout Comment
-
 In the following, I use the notation I am used to.
  I am open to suggestions of an alternate notation.
 \layout Standard
 
 Here, the constants 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
  play a role analogous to the Stieltjes constants of the Taylor expansion.
  The 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
  have several remarkable properties.
  Unlike the Stieltjes constants, they may be written as a finite sum over
  well-known constants:
-\begin_inset Formula \[
-a_{n}=1-\gamma-\frac{1}{2(n+1)}-H_{n}-\sum_{k=1}^{n}(-)^{k}\left(\begin{array}{c}
-n\\
-k\end{array}\right)\frac{\zeta(k+1)}{k+1}\]
-
-\end_inset 
-
-
-\layout Comment
-
-The 
-\begin_inset Formula $b_{n}$
-\end_inset 
-
-look slightly better too: 
 \begin_inset Formula \[
 b_{n}=n(1-\gamma-H_{n-1})-\frac{1}{2}+\sum_{k=2}^{n}(-)^{k}\left(\begin{array}{c}
 n\\
@@ -143,28 +107,19 @@ k\end{array}\right)\zeta(k)\]
 
 \end_inset 
 
- since the nasty denominator is now gone ...
- 
-\layout Standard
+ for 
+\begin_inset Formula $n>0$
+\end_inset 
 
-so that, for example, 
-\begin_inset Formula \begin{eqnarray}
-a_{0} & = & \frac{1}{2}-\gamma\label{eq:}\\
-a_{1} & = & \frac{\zeta(2)}{2}-\gamma-\frac{1}{4}\\
-a_{2} & = & \zeta(2)-\frac{\zeta(3)+2}{3}-\gamma\\
-a_{3} & = & \frac{3}{2}\zeta(2)-\zeta(3)+\frac{\zeta(4)}{4}-\frac{23}{24}-\gamma\end{eqnarray}
+.
+ Here 
+\begin_inset Formula \begin{equation}
+H_{n}=\sum_{m=1}^{n}\frac{1}{m}\label{eq:}\end{equation}
 
 \end_inset 
 
- and so on.
- 
-\layout Comment
-
-The 
-\begin_inset Formula $b_{n}$
-\end_inset 
-
-take on a slightly more elegant form as well:
+ are the harmonic numbers.
+ The first few values are 
 \begin_inset Formula \begin{eqnarray}
 b_{0} & = & \frac{1}{2}\label{eq:}\\
 b_{1} & = & -\gamma+\frac{1}{2}\\
@@ -174,20 +129,22 @@ b_{4} & = & -4\gamma-\frac{23}{6}+\zeta(4)-4\zeta(3)+6\zeta(2)\end{eqnarray}
 
 \end_inset 
 
-
-\layout Standard
-
-Next, apart from a leading order, these become exponentially small:
+Although intermediate terms in the sum become exponentially large, the values
+ themselves become exponentially small:
 \begin_inset Formula \[
-a_{n}=\mathcal{O}\left(\frac{\exp\left(-2\sqrt{\pi n}\right)}{n^{3/4}}\right)\]
+b_{n}=\mathcal{O}\left(n^{1/4}e^{-2\sqrt{\pi n}}\right)\]
 
 \end_inset 
 
- That they become so small is remarkable in light of the fact that the terms
- in the sum become exponentially large.
-\layout Standard
+ The development of an explicit expression for the asymptototic behaviour
+ of 
+\begin_inset Formula $b_{n}$
+\end_inset 
 
-The development of an explicit expression for the asymptototic behaviour
+ for 
+\begin_inset Formula $n\to\infty$
+\end_inset 
+
  is the main focus of this essay.
  The primary method of attack is to convert the Newton series into an integral
  of the Norlund-Rice form
@@ -209,7 +166,7 @@ The development of an explicit expression for the asymptototic behaviour
 \layout Comment
 
 Not sure about the following ...
- interesting but don't see here it goes.
+ interesting and suggestive but don't see where it leads.
 \layout Standard
 
 The paper concludes by noting the general resemblance of the asymptotic
@@ -273,8 +230,25 @@ c_{n}\sim\frac{\exp4\pi\sqrt{n}}{n^{3/4}\sqrt{2}}\]
 \begin_inset Formula $e^{K\sqrt{n}}$
 \end_inset 
 
- here and in the Newton series suggests yet another curious link between
- the theory of modular forms and the Riemann zeta function.
+ here and in the Newton series is suggestive.
+ However, unlike the 
+\begin_inset Formula $p_{n}$
+\end_inset 
+
+ and the 
+\begin_inset Formula $c_{n}$
+\end_inset 
+
+, the values 
+\begin_inset Formula $1/b_{n}$
+\end_inset 
+
+ are not integers; nor is the Fourier series 
+\begin_inset Formula $\sum_{n}x^{n}/b_{n}$
+\end_inset 
+
+ a modular form.
+ 
 \layout Section
 
 Finite Differences and the Norlund-Rice Integral
@@ -436,6 +410,7 @@ See
 \end_inset 
 
 .
+ [xXX need better ref]
 \layout Standard
 
 An example of a function that violates Carlson's theorem is 
@@ -449,66 +424,30 @@ An example of a function that violates Carlson's theorem is
  along the imaginary axis.
 \layout Section
 
-The Fourrier Transform
+Generating Functions
 \layout Standard
 
-Identities useful in the course of the manipulations needed to derive the
- above include 
-\begin_inset Formula \begin{equation}
-H_{n}=\sum_{m=1}^{n}\frac{1}{m}=-\sum_{k=1}^{n}\frac{(-1)^{k}}{k}\left(\begin{array}{c}
-n\\
-k\end{array}\right)\label{eq:}\end{equation}
-
+One may readily find the ordinary and the exponential generating functions
+ for the coefficients 
+\begin_inset Formula $b_{n}$
 \end_inset 
 
- and 
-\begin_inset Formula \begin{equation}
--\sum_{k=0}^{n}\frac{(-x)^{k+1}}{k+1}\left(\begin{array}{c}
-n\\
-k\end{array}\right)=\frac{1-(1-x)^{n+1}}{n+1}\label{eq:}\end{equation}
+.
+\layout Theorem
 
-\end_inset 
-
- This last identity is useful for partially resumming equation 
-\begin_inset LatexCommand \ref{eq:t_n defn}
-
-\end_inset 
-
- to improve convergence in numerical calculations.
- 
-\layout Standard
-
-The 
-\begin_inset Formula $a_{n}$
-\end_inset 
-
-appear naturally in the Taylor's expansion for the Gamma function, and so
- one finds, with little difficulty, the generating function 
-\begin_inset Formula \begin{eqnarray}
-\alpha(z) & = & \sum_{n=0}^{\infty}a_{n}z^{n}\nonumber \\
- & = & \frac{1}{1-z}+\frac{\ln(1-z)}{z}\left(\frac{1}{1-z}-\frac{1}{2}\right)+\frac{1}{z}\ln\Gamma\left(\frac{1}{1-z}\right)\label{eq:alpha-exact}\end{eqnarray}
-
-\end_inset 
-
- 
-\layout Comment
-
-The above gets replaced by 
+The ordinary generating function is given by 
 \begin_inset Formula \begin{eqnarray}
 \beta(z) & = & \sum_{n=0}^{\infty}b_{n}z^{n}\nonumber \\
- & = & \frac{1}{2(1-z)}+\frac{1}{(1-z)^{2}}\left[\ln(1-z)+\psi\left(\frac{1}{1-z}\right)\right]\label{eq:beta-exact}\end{eqnarray}
+ & = & \frac{1}{2(1-z)}+\frac{z}{(1-z)^{2}}\left[\ln(1-z)+\psi\left(\frac{1}{1-z}\right)\right]\label{eq:}\end{eqnarray}
 
 \end_inset 
 
- I scratched this quick, -- needs double-check.
-\begin_inset Formula \[
-\beta\left(\frac{w-1}{w}\right)=\frac{w}{2}+w^{2}\left[\psi(w)-\ln w\right]\]
-
+ where 
+\begin_inset Formula $\psi$
 \end_inset 
 
- which is rather simple.
- 
-\layout Standard
+ is the digamma function.
+\layout Proof
 
 The above may be obtained by the straightforward application of equation
  6.1.33 from Abramowitz and Stegun 
@@ -517,64 +456,22 @@ The above may be obtained by the straightforward application of equation
 \end_inset 
 
 .
- This representation shows a non-trivial structure.
- There is a cut (from the first logarithm) extending to the right for 
-\begin_inset Formula $1<z$
-\end_inset 
-
-.
- The log of the Gamma function results is a series of stitched cuts joining
- pairs of poles for even and odd 
-\begin_inset Formula $m$
-\end_inset 
-
- at 
-\begin_inset Formula $-m=1/(1-z)$
-\end_inset 
-
-, that is, at 
-\begin_inset Formula $z=1+1/m$
-\end_inset 
-
-, accumulating to an essential singularity(??) at 
-\begin_inset Formula $z=1$
-\end_inset 
-
-.
- There is a simple zero at 
-\begin_inset Formula $z=\infty$
-\end_inset 
-
-.
- The radius of convergence of the series involving the 
-\begin_inset Formula $a_{n}$
-\end_inset 
-
-is one.
- As will be seen in the next section, the 
-\begin_inset Formula $a_{n}$
-\end_inset 
-
- are oscillatory and exponentially decreasing, and so the sum at 
-\begin_inset Formula $z=1$
-\end_inset 
-
-is convergent.
- One has:
+ XXX expand on this ...
 \layout Standard
 
-
-\begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}a_{n}=\ln\sqrt{2\pi}-1=-0.081061466795327...\label{eq:}\end{equation}
-
-\end_inset 
-
- which can be obtained from Sterling's asymptotic expansion for the gamma
- function, and 
-\begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}a_{n}2^{-n}=2-3\ln2=-0.079441541679836...\label{eq:}\end{equation}
+The above simplifies considerably, to
+\begin_inset Formula \[
+\beta\left(\frac{w-1}{w}\right)=\frac{w}{2}+(w-1)(\psi(w)-\ln w)\]
 
 \end_inset 
+
+upon substitution of 
+\begin_inset Formula $z=(w-1)/w$
+\end_inset 
+
+.
+ The 
+\layout Standard
 
 An exponential generating function is given by 
 \begin_inset Formula \begin{equation}
@@ -604,27 +501,22 @@ Its equally curious that other variations on the expression given in
 
 \end_inset 
 
- are even more trivial, namely, one has 
+ are quite simple, namely, one has 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
-s-1\\
-n\end{array}\right)x^{n}=\sum_{n=0}^{\infty}(-)^{n}(s-1)_{n}\,\frac{x^{n}}{n!}=\left(1-x\right)^{s-1}\label{eq:}\end{equation}
+s\\
+n\end{array}\right)x^{n}=\sum_{n=0}^{\infty}(-)^{n}(s)_{n}\,\frac{x^{n}}{n!}=\left(1-x\right)^{s}\label{eq:}\end{equation}
 
 \end_inset 
 
- where 
-\begin_inset Formula $(s)_{n}=s(s-1)(s-2)...(s-n+1)$
-\end_inset 
 
- is the falling factorial.
- 
 \layout Comment
 
 One is left to wonder what the function 
 \begin_inset Formula \begin{equation}
-\mu(s;x)=\frac{s}{s-1}-\frac{1}{2}-s\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
-s-1\\
-n\end{array}\right)a_{n}x^{n}\label{eq:}\end{equation}
+\mu(s;x)=\frac{1}{s-1}+\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
+s\\
+n\end{array}\right)b_{n}x^{n}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1127,7 +1019,7 @@ A Related Function
 \layout Standard
 
 The 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
 may be further explored by generalizing them to be a function on the complex
@@ -1142,15 +1034,18 @@ obvious
 
  and reasonable generalization is 
 \begin_inset Formula \begin{equation}
-a(s)=1-\gamma-\frac{1}{2(s+1)}+\sum_{k=1}^{\infty}(-)^{k}\left(\begin{array}{c}
+b(s)=-\gamma+\frac{1}{2}+\sum_{k=2}^{\infty}(-)^{k}\left(\begin{array}{c}
 s\\
-k\end{array}\right)\left[\frac{1}{k}-\frac{\zeta(k+1)}{k+1}\right]\label{eq:}\end{equation}
+k\end{array}\right)\left[\zeta(k)-\frac{1}{k+1}-\gamma\right]\label{eq:}\end{equation}
 
 \end_inset 
 
- By construction, this function interpolates the previous series, so that
  
-\begin_inset Formula $a(n)=a_{n}$
+\layout Standard
+
+xxx give th bn .By construction, this function interpolates the previous
+ series, so that 
+\begin_inset Formula $b(n)=b_{n}$
 \end_inset 
 
  for non-negative integers 
@@ -1162,7 +1057,7 @@ k\end{array}\right)\left[\frac{1}{k}-\frac{\zeta(k+1)}{k+1}\right]\label{eq:}\en
 \begin_inset Formula $s=-1$
 \end_inset 
 
-, and this series expansion is convergent only for 
+, ???? and this series expansion is convergent only for 
 \begin_inset Formula $\Re s>-1$
 \end_inset 
 
@@ -1342,10 +1237,10 @@ ing the binomial coefficient with a power series, making use of Stirling
  That is, the polynomial expression is given by
 \begin_inset Formula \begin{equation}
 \left(\begin{array}{c}
-s-1\\
-n\end{array}\right)=\frac{(s-1)_{n}}{n!}=\frac{1}{n!}\sum_{k=0}^{n}\left[\begin{array}{c}
+s\\
+n\end{array}\right)=\frac{(s)_{n}}{n!}=\frac{1}{n!}\sum_{k=0}^{n}\left[\begin{array}{c}
 n\\
-k\end{array}\right](s-1)^{k}\label{eq:}\end{equation}
+k\end{array}\right]s^{k}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1364,12 +1259,12 @@ k\end{array}\right]$
 \end_inset 
 
  shows that 
-\begin_inset Formula $\gamma_{0}=1/2-a_{0}=\gamma$
+\begin_inset Formula $\gamma_{0}=1/2-b_{1}=\gamma$
 \end_inset 
 
  and 
 \begin_inset Formula \begin{equation}
-\gamma_{k}=-ka_{k-1}+(-)^{k}k!\,\sum_{n=k}^{\infty}(-)^{n}\frac{a_{n}}{n!}\left(\left[\begin{array}{c}
+\gamma_{k}=-b_{k}+(-)^{k}k!\,\sum_{n=k}^{\infty}(-)^{n}\frac{a_{n}}{n!}\left(\left[\begin{array}{c}
 n\\
 k\end{array}\right]+\left[\begin{array}{c}
 n\\
@@ -1409,7 +1304,7 @@ H_{n}^{(m)}=\sum_{k=1}^{n}\frac{1}{k^{m}}\label{eq:}\end{equation}
 
  This finally allows us to write 
 \begin_inset Formula \begin{equation}
-\gamma_{k}=-ka_{k}+k\sum_{n=k}^{\infty}\frac{a_{n}}{n}\left(w(n,k-1)-(k-1)w(n,k-2)\right)\label{eq:}\end{equation}
+\gamma_{k}=-b_{k}+k\sum_{n=k}^{\infty}\frac{a_{n}}{n}\left(w(n,k-1)-(k-1)w(n,k-2)\right)\label{eq:}\end{equation}
 
 \end_inset 
 
