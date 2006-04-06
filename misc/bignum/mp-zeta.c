@@ -1618,7 +1618,7 @@ main (int argc, char * argv[])
 		mpf_div (prod, b_n, p_n);
 		mpf_sqrt (sq, en);
 		mpf_sqrt (sq, sq);
-		mpf_mul (prod, prod, sq);
+		mpf_div (prod, prod, sq);
 #endif
 		
 		printf ("%d\t",n+1);
