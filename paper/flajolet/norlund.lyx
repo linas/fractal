@@ -26,7 +26,7 @@
 
 \layout Title
 
-Newton Series involving the Riemann Zeta Function
+Newton Series for the Riemann Zeta Function
 \layout Author
 
 Phillipe Flajolet, Linas Vepstas
@@ -249,179 +249,22 @@ c_{n}\sim\frac{\exp4\pi\sqrt{n}}{n^{3/4}\sqrt{2}}\]
 
  a modular form.
  
+\layout Comment
+
+The following sections are in no particular order, and for the most part
+ can be re-arranged.
+ I'm not sure what the best order is.
 \layout Section
 
-Finite Differences and the Norlund-Rice Integral
+Derivation
 \layout Standard
 
-This section reviews the the definition of the Norlund-Rice integral, and
- its application to finite differences and Newton series.
- Theorems required for convergence, and in particular, Carlson's theorem,
- are breifly stated.
- The next section applies these techniques to the evaluation of the finite
- differences of the Riemann zeta function.
-\layout Lemma
-
-(Norlund-Rice ?)
-\layout Lemma
-
-Given a function 
-\begin_inset Formula $f(s)$
+This section supplies a derivation of the values of 
+\begin_inset Formula $b_{n}$
 \end_inset 
 
- holomorphic on a region containing the integers 
-\begin_inset Formula $\{ n_{0},\cdots,n\}$
-\end_inset 
-
-, then the finite differences of the sequence 
-\begin_inset Formula $\{ f(k)\}$
-\end_inset 
-
- may be given an integral representation
-\begin_inset Formula \[
-\sum_{k=n_{0}}^{n}{n \choose k}(-1)^{k}f(k)=\frac{(-1)^{n}}{2\pi i}\oint_{\mathcal{C}}f(s)\frac{n!}{s(s-1)\cdots(s-n)}ds\]
-
-\end_inset 
-
- where the contour of integration 
-\begin_inset Formula $\mathcal{C}$
-\end_inset 
-
-encircles the integers 
-\begin_inset Formula $\{ n_{0},\cdots,n\}$
-\end_inset 
-
- in a postive direction, but does not include any of the integers 
-\begin_inset Formula $\{0,1,\cdots,n-1\}$
-\end_inset 
-
-.
-\layout Proof
-
-By residues.
-\begin_inset LatexCommand \cite{Fla94}
-
-\end_inset 
-
-
-\layout Standard
-
-Such sums commonly occur in the theory of finite differences.
- Given a function 
-\begin_inset Formula $f(x)$
-\end_inset 
-
-, one defines its forward differences at point 
-\begin_inset Formula $x=a$
-\end_inset 
-
- by 
-\begin_inset Formula \begin{equation}
-\Delta^{n}\left[f\right](a)=\sum_{p=0}^{n}(-1)^{n-p}{n \choose p}\, f(p+a)\label{eq:}\end{equation}
-
-\end_inset 
-
- where 
-\begin_inset Formula ${n \choose p}$
-\end_inset 
-
- is the binomial coefficient.
- When one has only an arithmetic function or sequence of values 
-\begin_inset Formula $f_{p}=f(p)$
-\end_inset 
-
-, rather than a function of a continuous variable 
-\begin_inset Formula $x$
-\end_inset 
-
-, the above is referred to as the binomial transform of the sequence.
- 
-\layout Standard
-
-The forward differences may be used to construct the umbral calculus analog
- of a Taylor's series:
-\begin_inset Formula \begin{equation}
-g(z+a)=\sum_{n=0}^{\infty}\Delta^{n}\left[f\right](a)\;\frac{(z)_{n}}{n!}\label{eq:}\end{equation}
-
-\end_inset 
-
- where 
-\begin_inset Formula $(z)_{n}=z(z-1)\ldots(z-n+1)$
-\end_inset 
-
- is the Pochhammer symbol or falling factorial.
- When the growth rate of 
-\begin_inset Formula $f$
-\end_inset 
-
- is suitably limited on the complex plane, then, by means of Carlson's Uniquenes
-s theorem, 
-\begin_inset Formula $g=f$
-\end_inset 
-
-, and this series is known as the Newton series for 
-\begin_inset Formula $f$
-\end_inset 
-
-.
-\layout Theorem
-
-(Carlson, 1914) If a function 
-\begin_inset Formula $f(z)$
-\end_inset 
-
- vanishes on the positive integers, and if it is of exponential type, that
- is, if 
-\begin_inset Formula \[
-f(z)=\mathcal{O}(1)e^{\tau|z|}\]
-
-\end_inset 
-
- for 
-\begin_inset Formula $z\in\mathbb{C}$
-\end_inset 
-
- and for some real 
-\begin_inset Formula $\tau<\infty$
-\end_inset 
-
-, and if furthermore its growth is bounded on the imaginary axis, so that
- 
-\begin_inset Formula \[
-f(iy)=\mathcal{O}(1)e^{-c|y|}\]
-
-\end_inset 
-
-for 
-\begin_inset Formula $c<\pi$
-\end_inset 
-
-, then 
-\begin_inset Formula $f$
-\end_inset 
-
- is identically zero.
- 
-\layout Proof
-
-See 
-\begin_inset LatexCommand \cite{Boa64}
-
-\end_inset 
-
-.
- [xXX need better ref]
-\layout Standard
-
-An example of a function that violates Carlson's theorem is 
-\begin_inset Formula $\sin\pi z$
-\end_inset 
-
-, which vanishes on the integers, but has a growth rate of 
-\begin_inset Formula $c=\pi$
-\end_inset 
-
- along the imaginary axis.
+ from first principles.
+ XXX to do.
 \layout Section
 
 Generating Functions
@@ -433,12 +276,15 @@ One may readily find the ordinary and the exponential generating functions
 \end_inset 
 
 .
+\layout Comment
+
+should a theorem-proof style be used, or a conversational style?
 \layout Theorem
 
 The ordinary generating function is given by 
 \begin_inset Formula \begin{eqnarray}
 \beta(z) & = & \sum_{n=0}^{\infty}b_{n}z^{n}\nonumber \\
- & = & \frac{1}{2(1-z)}+\frac{z}{(1-z)^{2}}\left[\ln(1-z)+\psi\left(\frac{1}{1-z}\right)\right]\label{eq:}\end{eqnarray}
+ & = & \frac{-1}{2(1-z)}+\frac{z}{(1-z)^{2}}\left[\ln(1-z)+\psi\left(\frac{1}{1-z}\right)\right]\label{eq:}\end{eqnarray}
 
 \end_inset 
 
@@ -449,14 +295,28 @@ The ordinary generating function is given by
  is the digamma function.
 \layout Proof
 
-The above may be obtained by the straightforward application of equation
- 6.1.33 from Abramowitz and Stegun 
+The above may be obtained by straightforward substitution follwed by an
+ exchange of the order of summation.
+ The harmonic numbers lead to the logarithm via the identity 
+\begin_inset Formula \[
+\ln(1-z)=-\sum_{k=1}^{\infty}\frac{z^{k}}{k}\]
+
+\end_inset 
+
+ while the binomial series re-sums to the digamma function, which has the
+ Taylor's series 
+\begin_inset Formula \[
+\psi(1+y)=-\gamma+\sum_{n=2}^{\infty}(-1)^{n}\zeta(n)y^{n-1}\]
+
+\end_inset 
+
+ (equation 6.3.14 from Abramowitz and Stegun
 \begin_inset LatexCommand \cite{A&S}
 
 \end_inset 
 
-.
- XXX expand on this ...
+).
+ 
 \layout Standard
 
 The above simplifies considerably, to
@@ -470,12 +330,12 @@ upon substitution of
 \end_inset 
 
 .
- The 
+ 
 \layout Standard
 
 An exponential generating function is given by 
 \begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}a_{n}\frac{z^{n}}{n!}=\frac{1}{2z}+e^{z}\left[1-\gamma-\mbox{Ein}(z)-\frac{1}{z}\left(\frac{1}{2}+\sum_{k=2}^{\infty}\frac{(-z)^{k}}{k!}\zeta(k)\right)\right]\label{eq:}\end{equation}
+\sum_{n=0}^{\infty}b_{n}\frac{z^{n}}{n!}=e^{z}\left[z\left(1-\gamma+\mbox{Ein}(z)\right)-\frac{1}{2}+\sum_{k=2}^{\infty}\frac{(-z)^{k}}{k!}\zeta(k)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -494,22 +354,6 @@ An exponential generating function is given by
 \end_inset 
 
  are the harmonic numbers.
-\layout Standard
-
-Its equally curious that other variations on the expression given in 
-\begin_inset LatexCommand \ref{eq:zeta-as-a_n}
-
-\end_inset 
-
- are quite simple, namely, one has 
-\begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}(-)^{n}\left(\begin{array}{c}
-s\\
-n\end{array}\right)x^{n}=\sum_{n=0}^{\infty}(-)^{n}(s)_{n}\,\frac{x^{n}}{n!}=\left(1-x\right)^{s}\label{eq:}\end{equation}
-
-\end_inset 
-
-
 \layout Comment
 
 One is left to wonder what the function 
@@ -530,21 +374,20 @@ n\end{array}\right)b_{n}x^{n}\label{eq:}\end{equation}
 Numerical Analysis
 \layout Standard
 
-The equation 
-\begin_inset LatexCommand \ref{eq: a_n defn}
-
+The series expression for the 
+\begin_inset Formula $b_{n}$
 \end_inset 
 
  is very conducive to numerical analysis.
  The values of the zeta function for small integers are known to millions
  of digits; Plouffe has given a series of very rapidly converging sums for
- the larger integers[ref].
+ the zeta function at the larger integers[ref].
  Thus, it becomes possible to explore the behavior of the 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
  up to 
-\begin_inset Formula $n\sim500$
+\begin_inset Formula $n\sim1000$
 \end_inset 
 
  with only a moderate investment in coding and computer time.
@@ -567,7 +410,7 @@ The table
 
  shows the numerical values of the first few of these constants.
  It appears that the 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
 are oscillatory, as shown in the figure 
@@ -595,7 +438,7 @@ are oscillatory, as shown in the figure
 
 \begin_inset Float table
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -605,7 +448,7 @@ collapsed true
 \end_inset 
 
 Some values of 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
 
@@ -613,7 +456,7 @@ Some values of
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="9" columns="2">
+<lyxtabular version="3" rows="10" columns="2">
 <features>
 <column alignment="center" valignment="top" leftline="true" width="0">
 <column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
@@ -636,7 +479,7 @@ Some values of
 \layout Standard
 
 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
 
@@ -657,7 +500,7 @@ Some values of
 
 \layout Standard
 
--0.077215664901532851...
+0.5
 \end_inset 
 </cell>
 </row>
@@ -675,7 +518,7 @@ Some values of
 
 \layout Standard
 
--0.0047486314774196408...
+-0.07721566490153286060651209...
 \end_inset 
 </cell>
 </row>
@@ -693,7 +536,7 @@ Some values of
 
 \layout Standard
 
-0.00036610089349548089...
+-0.00949726295483928474060901...
 \end_inset 
 </cell>
 </row>
@@ -711,7 +554,7 @@ Some values of
 
 \layout Standard
 
-0.00037600730566372326...
+0.001098302680486442197971068...
 \end_inset 
 </cell>
 </row>
@@ -729,7 +572,7 @@ Some values of
 
 \layout Standard
 
-0.00014301182486231440...
+0.001504029222654892992160356...
 \end_inset 
 </cell>
 </row>
@@ -747,7 +590,7 @@ Some values of
 
 \layout Standard
 
-3.3997818936021684...e-5
+0.000715059124311572276195930...
 \end_inset 
 </cell>
 </row>
@@ -765,11 +608,11 @@ Some values of
 
 \layout Standard
 
--4.8324221220657863...e-7
+0.000203986913616129918772188...
 \end_inset 
 </cell>
 </row>
-<row topline="true" bottomline="true">
+<row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -783,7 +626,25 @@ Some values of
 
 \layout Standard
 
--6.7778497812918602..e-6
+-0.000003382695485446052419661...
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+8
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-0.00005422279825033492206785...
 \end_inset 
 </cell>
 </row>
@@ -795,7 +656,7 @@ Some values of
 \layout Standard
 
 This table shows the first few values of 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
 .
@@ -810,7 +671,7 @@ This table shows the first few values of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1348,6 +1209,187 @@ z-1\end{array}\right)\left[\zeta(n+2)-1\right]\label{eq:}\end{equation}
 \end_inset 
 
  is unclear.xxx Bessel function!?!
+\layout Section
+
+Finite Differences and the Norlund-Rice Integral
+\layout Standard
+
+This section reviews the the definition of the Norlund-Rice integral, and
+ its application to finite differences and Newton series.
+ Theorems required for convergence, and in particular, Carlson's theorem,
+ are breifly stated.
+ The next section applies these techniques to the evaluation of the finite
+ differences of the Riemann zeta function.
+\layout Lemma
+
+(Norlund-Rice ?)
+\layout Lemma
+
+Given a function 
+\begin_inset Formula $f(s)$
+\end_inset 
+
+ holomorphic on a region containing the integers 
+\begin_inset Formula $\{ n_{0},\cdots,n\}$
+\end_inset 
+
+, then the finite differences of the sequence 
+\begin_inset Formula $\{ f(k)\}$
+\end_inset 
+
+ may be given an integral representation
+\begin_inset Formula \[
+\sum_{k=n_{0}}^{n}{n \choose k}(-1)^{k}f(k)=\frac{(-1)^{n}}{2\pi i}\oint_{\mathcal{C}}f(s)\frac{n!}{s(s-1)\cdots(s-n)}ds\]
+
+\end_inset 
+
+ where the contour of integration 
+\begin_inset Formula $\mathcal{C}$
+\end_inset 
+
+encircles the integers 
+\begin_inset Formula $\{ n_{0},\cdots,n\}$
+\end_inset 
+
+ in a postive direction, but does not include any of the integers 
+\begin_inset Formula $\{0,1,\cdots,n-1\}$
+\end_inset 
+
+.
+\layout Proof
+
+By residues.
+\begin_inset LatexCommand \cite{Fla94}
+
+\end_inset 
+
+
+\layout Standard
+
+Such sums commonly occur in the theory of finite differences.
+ Given a function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+, one defines its forward differences at point 
+\begin_inset Formula $x=a$
+\end_inset 
+
+ by 
+\begin_inset Formula \begin{equation}
+\Delta^{n}\left[f\right](a)=\sum_{p=0}^{n}(-1)^{n-p}{n \choose p}\, f(p+a)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula ${n \choose p}$
+\end_inset 
+
+ is the binomial coefficient.
+ When one has only an arithmetic function or sequence of values 
+\begin_inset Formula $f_{p}=f(p)$
+\end_inset 
+
+, rather than a function of a continuous variable 
+\begin_inset Formula $x$
+\end_inset 
+
+, the above is referred to as the binomial transform of the sequence.
+ 
+\layout Standard
+
+The forward differences may be used to construct the umbral calculus analog
+ of a Taylor's series:
+\begin_inset Formula \begin{equation}
+g(z+a)=\sum_{n=0}^{\infty}\Delta^{n}\left[f\right](a)\;\frac{(z)_{n}}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $(z)_{n}=z(z-1)\ldots(z-n+1)$
+\end_inset 
+
+ is the Pochhammer symbol or falling factorial.
+ When the growth rate of 
+\begin_inset Formula $f$
+\end_inset 
+
+ is suitably limited on the complex plane, then, by means of Carlson's Uniquenes
+s theorem, 
+\begin_inset Formula $g=f$
+\end_inset 
+
+, and this series is known as the Newton series for 
+\begin_inset Formula $f$
+\end_inset 
+
+.
+\layout Theorem
+
+(Carlson, 1914) If a function 
+\begin_inset Formula $f(z)$
+\end_inset 
+
+ vanishes on the positive integers, and if it is of exponential type, that
+ is, if 
+\begin_inset Formula \[
+f(z)=\mathcal{O}(1)e^{\tau|z|}\]
+
+\end_inset 
+
+ for 
+\begin_inset Formula $z\in\mathbb{C}$
+\end_inset 
+
+ and for some real 
+\begin_inset Formula $\tau<\infty$
+\end_inset 
+
+, and if furthermore its growth is bounded on the imaginary axis, so that
+ 
+\begin_inset Formula \[
+f(iy)=\mathcal{O}(1)e^{-c|y|}\]
+
+\end_inset 
+
+for 
+\begin_inset Formula $c<\pi$
+\end_inset 
+
+, then 
+\begin_inset Formula $f$
+\end_inset 
+
+ is identically zero.
+ 
+\layout Proof
+
+See 
+\begin_inset LatexCommand \cite{Boa64}
+
+\end_inset 
+
+.
+ [xXX need better ref]
+\layout Standard
+
+An example of a function that violates Carlson's theorem is 
+\begin_inset Formula $\sin\pi z$
+\end_inset 
+
+, which vanishes on the integers, but has a growth rate of 
+\begin_inset Formula $c=\pi$
+\end_inset 
+
+ along the imaginary axis.
+\layout Section
+
+Asymptotic analysis
+\layout Standard
+
+This section describes the Norlund-Rice asymptotic anslysis for the Riemann
+ b_n.
+ To Do xxx.
 \layout Section
 
 Dirichlet 
