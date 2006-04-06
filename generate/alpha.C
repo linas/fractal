@@ -2098,6 +2098,13 @@ static void b_series_c (double re_q, double im_q, double *prep, double *pimp)
 	long double imp = 0.0;
 	rep = 2.0;
 
+	tmp = 1.0/(re_q*re_q + im_q * im_q);
+	double re_one_over_z = re_q * tmp;
+	double im_one_over_z = -im_q * tmp;
+
+	rep += re_one_over_z;
+	imp += im_one_over_z;
+
 	long double re_zn = 1.0;
 	long double im_zn = 0.0;
 
