@@ -1564,18 +1564,21 @@ main (int argc, char * argv[])
 	}
 #endif /* PRECOMPUTE */
 	
-	mpf_t a_n, en, sq, term, b_n, prod, w;
+	mpf_t a_n, b_n, en, pi, sq, term, p_n, prod, w;
 	mpf_init (a_n);
+	mpf_init (b_n);
+	mpf_init (pi);
 	mpf_init (en);
 	mpf_init (sq);
 	mpf_init (term);
-	mpf_init (b_n);
+	mpf_init (p_n);
 	mpf_init (prod);
 	mpf_init (w);
 
 	// The standard w value is 1 ... 
 	mpf_set_d (w, 1.0);
-
+	fp_pi (pi);
+	
 	int n;
 	printf ("#\n# zeta expansion terms \n#\n");
 	printf ("# computed with variable precision of %d decimal places\n", prec);
@@ -1591,8 +1594,8 @@ main (int argc, char * argv[])
 		mpf_sqrt (sq, en);
 		mpf_mul_ui (term, sq, 4);
 		mpf_neg (en, term);
-		fp_exp (b_n, en, prec);
-		mpf_div (prod, a_n, b_n);
+		fp_exp (p_n, en, prec);
+		mpf_div (prod, a_n, p_n);
 #endif
 		
 #ifdef FLT_BND
@@ -1600,10 +1603,27 @@ main (int argc, char * argv[])
 		mpf_set_d (b_n, dbn);
 		mpf_mul(prod, a_n, b_n);
 #endif
+
+		// b_n = n a_{n-1}
+		mpf_mul_ui (b_n, a_n, n+1);
+
+#define B_N_SCALE
+#ifdef B_N_SCALE
+		mpf_set_ui (en, n+1);
+		mpf_mul_ui (term, en, 4);
+		mpf_mul (term, term, pi);
+		mpf_sqrt (sq, term);
+		mpf_neg (sq, sq);
+		fp_exp (p_n, sq, prec);
+		mpf_div (prod, b_n, p_n);
+		mpf_sqrt (sq, en);
+		mpf_sqrt (sq, sq);
+		mpf_mul (prod, prod, sq);
+#endif
 		
-		printf ("%d\t",n);
-		// fp_prt ("", prod);
-		fp_prt ("", a_n);
+		printf ("%d\t",n+1);
+		fp_prt ("", prod);
+		// fp_prt ("", a_n);
 		fflush (stdout);
 	}
 #endif
