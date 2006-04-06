@@ -1,0 +1,26 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'bsubn.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# -------------------------------------------------------
+# This set waas used to generate the bsubn.png graph in the paper
+
+set xrange [0:300]
+
+set title "Graph of the coefficeints b_n * n^{1/4} * exp(sqrt(4 pi n))"
+set xlabel "n"
+set ylabel "b_n * n^{1/4} * exp(sqrt(4 pi n))"
+
+plot "bsubn.dat" using 1:2 title "" 
+
+
+# pause 100
+
