@@ -239,11 +239,12 @@ PATH=$PATH:.
 # renorm j j2 0.004 0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
 
-# takelog j g
-# renorm g j2 1 3
+takelog j gg
+takelog gg g
+renorm g j2 0.2 0
 # cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.jpeg
 # cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
-renorm j j2 1 0
+# renorm j j2 0.01 0
 cat j2.flo | ../image/flo2mtv |mtvtoppm | pnmtojpeg > cout.jpeg
 # cat j.flo | ../image/flo2mtv |mtvtoppm | pnmtopng > cout.png
 

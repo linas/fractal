@@ -21,6 +21,7 @@
 #include "brat.h"
 
 static long double r[2002];
+static long double b[2002];
 
 static void init_r (void)
 {
@@ -134,7 +135,6 @@ static void init_r (void)
 	r[100] = -0.210014466980486256363682541169164912605159729681460335084457e1;
 	r[101] = -0.247658610542455633663357481827607288839163071852426074140943e1;
 
-#if LATER
 	r[102] = -0.278538198757563506178954964396891850036014642891797940895749e1;
 	r[103] = -0.301607027551096296590486429950226558333782545040292946478796e1;
 	r[104] = -0.31604804471177414344346954065177974196717313524116623293005e1;
@@ -436,6 +436,7 @@ static void init_r (void)
 	r[400] = 0.94910008775913653694916884876419713679635254593010769345515e2;
 	r[401] = 0.957889746952237554538877544017063948327473317831165456908748e2;
 
+#if LATER
 	r[402] = 0.959215811263678289670857152712159072265603011089525313268493e2;
 	r[403] = 0.952954042710705687211059967749844802865642773967223318224597e2;
 	r[404] = 0.939038253631187323045687851057946670558901238882120459321495e2;
@@ -2037,6 +2038,15 @@ static void init_r (void)
 	r[1999] = 0.186101719446409870357058952194994051000826756926520300625478e7;
 #endif
 #endif
+
+	int i;
+	for (i=1; i<2000; i++)
+	{
+		long double bn = i* r[i-1] * expl (-4.0L*sqrtl(i));
+		bn = 1.0L / bn;
+		b[i] = bn;
+	}
+	b[0] = 2.0;
 }
 
 // This is the series summed as sum_n a_n z^n plain and simple
@@ -2086,8 +2096,64 @@ static void const_series_c (double re_q, double im_q, double *prep, double *pimp
 	*pimp = imp;
 }
 
+// Tkae q to the integer power p.
+static void pow_c (double re_q, double im_q, int p, double *prep, double *pimp)
+{
+	int i;
+	double tmp;
+	*prep = 0.0;
+	*pimp = 0.0;
+
+	double rep = re_q;
+	double imp = im_q;
+	for (i=1; i<p; i++)
+	{
+		tmp = rep*re_q - imp *im_q;
+		imp = rep*im_q + imp *re_q;
+		rep = tmp;
+	}
+
+	*prep = rep;
+	*pimp = imp;
+}
+
+// Perform a generic dirichlet sum on an array of length n.
+static void 
+dirichlet_series_c (double re_s, double im_s, double *ser, int len, double *prep, double *pimp)
+{
+	int i;
+	double tmp;
+	*prep = 0.0;
+	*pimp = 0.0;
+
+	double rep = 0.0;
+	double imp = 0.0;
+
+	for (i=1; i<len; i++)
+	{
+		double lg = log (i);
+		double mg_q = exp (-re_s * lg);
+		double re_q = mg_q * cos (im_s * lg);
+		double im_q = mg_q * sin (-im_s * lg);
+
+		rep += ser[i] * re_q;
+		imp += ser[i] * im_q;
+	}
+	
+	*prep = rep;
+	*pimp = imp;
+}
+
+static void 
+d_series_c (double re_q, double im_q, double *prep, double *pimp)
+{
+
+	dirichlet_series_c (re_q, im_q, b, 400, prep, pimp);
+}
+
 // This is the series summed as sum_n b_n z^n plain and simple
-static void b_series_c (double re_q, double im_q, double *prep, double *pimp)
+static void 
+b_series_c (double re_q, double im_q, double *prep, double *pimp, int ival)
 {
 	int i;
 	double tmp;
@@ -2098,17 +2164,21 @@ static void b_series_c (double re_q, double im_q, double *prep, double *pimp)
 	long double imp = 0.0;
 	rep = 2.0;
 
+#if 0
 	tmp = 1.0/(re_q*re_q + im_q * im_q);
 	double re_one_over_z = re_q * tmp;
 	double im_one_over_z = -im_q * tmp;
 
-	rep += re_one_over_z;
-	imp += im_one_over_z;
+	double ren, imn;
+	pow_c (re_one_over_z, im_one_over_z, ival, &ren, &imn);
+	rep -= ren;
+	imp += imn;
+#endif
 
 	long double re_zn = 1.0;
 	long double im_zn = 0.0;
 
-	for (i=1; i<100; i++)
+	for (i=1; i<400; i++)
 	{
 		// a[i] += 0.5 / ((double) (i+1));
 		// rep += a[i] * re_zn;
@@ -2237,6 +2307,7 @@ static void beta_analytic (double re_q, double im_q, double *prep, double *pimp)
 // printf ("ln gamma 1/(1-z)=%g + i %g\n", re_lng, im_lng);
 
 //xxxx need psi not gamma
+//xxx this is curretnly borken.
 
 // printf ("first gamma term =%g + i %g\n", rep, imp);
 	/* log (1-z) */
@@ -2277,7 +2348,8 @@ static double alpha_series (double re_q, double im_q, int itermax, double param)
 	// ian = imp;
 
 	// const_series_c (re_q, im_q, &rep, &imp);
-	b_series_c (re_q, im_q, &rep, &imp);
+	// b_series_c (re_q, im_q, &rep, &imp, itermax);
+	d_series_c (re_q, im_q, &rep, &imp);
 
 	rep -= ran;
 	imp -= ian;
@@ -2292,10 +2364,10 @@ static double alpha_series (double re_q, double im_q, int itermax, double param)
 	imp = imo;
 #endif
 
-	// return sqrt (rep*rep+imp*imp);
+	return sqrt (rep*rep+imp*imp);
 	// return log (sqrt (rep*rep+imp*imp));
 	// return rep;
-	return (atan2 (imp, rep) + M_PI) / (2.0*M_PI);
+	// return (atan2 (imp, rep) + M_PI) / (2.0*M_PI);
 }
 
 DECL_MAKE_HISTO(alpha_series)
