@@ -13,19 +13,24 @@ set key right
 # -------------------------------------------------------
 
 # set xrange [0:300]
-set xrange [200:1500]
+# set xrange [200:1500]
+# set xrange [2:1500]
+set xrange [2:200]
+# set xrange [1200:1500]
 
 set title "Graph of xxxxx a the coefficeints b_n * n^{1/4} * exp(sqrt(4 pi n))"
 set xlabel "n"
 set ylabel "b_n * n^{1/4} * exp(sqrt(4 pi n))"
 
 # s(x) = sin (3.141592653*(-9/8 - sqrt (81/64 +6/7 +4*x/3.141592653)))
-s(x) = sin (3.141592653*(-9/8 + 0.1 - sqrt (81/64 +6/7 +4*x/3.141592653)))
+# s(x) = sin (3.141592653*(-9/8 + 0.1  - sqrt (81/64 +6/7 +4*x/3.141592653)))
+# s(x) = sin (3.141592653*(-9/8 +0.1375 -sqrt (81/64 +4*(x+0.5992)/3.141592653)))
+s(x) = sin (3.141592653*(-9/8 +0.16 -sqrt (81/64 +4*(x+0.5992)/3.141592653)))
 
-plot "bsubn.dat" using 1:2 title "" , \
-     "bsubn.dat" using 1:(s($1)) title "fit"
+# plot "bsubn.dat" using 1:2 title "" , \
+#      "bsubn.dat" using 1:(s($1)) title "fit"
 
-# plot "bsubn.dat" using 1:(2/s($1)) title "" 
+plot "bsubn.dat" using 1:($2/s($1)) title "" 
 
 
 # pause 100

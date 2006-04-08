@@ -57,10 +57,15 @@ main ()
 		if (vlast*var[i] < 0.0) 
 		{
 			double cross = (i-1) + vlast / (vlast-var[i]);
-			double c2 = (i-1) + var[i-2] / (var[i-2]-var[i+1]);
-			printf ("%d\t%20.10g\t%20.16g\n", ncross, cross, c2);
+			double m = var[i] - vlast;
+			double v = -vlast;
+			// if (cross-vlast > var[i]-cross) { v=var[i]; }
+			// double eps = -vlast*vlast*vlast / (3.0*m);
+			double eps = v*v*v / (3.0*m);
+			// printf ("%d\t%20.10g\t%20.16g\n", ncross, cross, eps);
+			cross += eps;
+			printf ("%d\t%20.10g\n", ncross-1, cross);
 
-			// cross = 0.75*cross + 0.25*c2;
 			zeros[ncross] = cross;
 			ncross ++;
 		}
@@ -115,7 +120,7 @@ main ()
 	cc += yen * (ex4*ex2 - ex3*ex3);
 	cc /= det;
 
-	printf ("# 14c/3pi=%20.10g\n", 14.0*cc/(M_PI*3.0));
+	printf ("# c=%20.10g\n", cc);
 
 #if WTF
 	/* numerical best fit */
