@@ -1,0 +1,26 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'bzero.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# -------------------------------------------------------
+
+set title "Graph of zero crossiings"
+set xlabel "n"
+set ylabel "zero"
+
+f(x) = (-2.125+sqrt (2.125*2.125 - 4*(2.0-x)/3.1416))
+
+plot "bsubn.dat" using 1:2 title "" , \
+     "bsubn.dat" using 1:(f($1)) title "fit"
+
+
+# pause 100
+

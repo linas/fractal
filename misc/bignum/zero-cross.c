@@ -2,12 +2,13 @@
 /*
  * zero-cross.c
  *
- * Get zero crossing fits for the data.
+ * Get zero crossing fits for the data.  Read in a file of oscillatory
+ * data in the form (n, value).
  *
  * The result of this is that the zero-crossing second derive appears to
  * be exactly pi/2.  So we're going now.
  *
- * Linas July 2005
+ * Linas Vepstas July 2005
  */
 
 #include <math.h>
@@ -47,6 +48,21 @@ main ()
 
 	int nmax = n;
 
+	/* compute zero corssing by linear interpolation */
+	int ncross = 0;
+	double vlast = var[0];
+	for (i=1; i<nmax; i++)
+	{
+		if (vlast*var[i] < 0.0) 
+		{
+			double cross = (i-1) + vlast / (vlast-var[i]);
+			printf ("%d\t%20.10g\n", ncross, cross);
+			ncross ++;
+		}
+		vlast = var[i];
+	}
+
+#if WTF
 	/* numerical best fit */
 	double cee_0 = 2.0;
 	double cee_1 = 2.553;
@@ -121,4 +137,5 @@ main ()
 
 	avg /= acnt;
 	printf ("average value = %g\n", avg);
+#endif
 }
