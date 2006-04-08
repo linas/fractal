@@ -57,14 +57,18 @@ main ()
 		if (vlast*var[i] < 0.0) 
 		{
 			double cross = (i-1) + vlast / (vlast-var[i]);
-			printf ("%d\t%20.10g\n", ncross, cross);
+			double c2 = (i-1) + var[i-2] / (var[i-2]-var[i+1]);
+			printf ("%d\t%20.10g\t%20.16g\n", ncross, cross, c2);
+
+			// cross = 0.75*cross + 0.25*c2;
 			zeros[ncross] = cross;
 			ncross ++;
 		}
 		vlast = var[i];
 	}
 
-	/* least-squeares */
+	/* Do a least-squares fit to a parabola, 
+	 * which requires  computaion and inversion of a 3x3 matrix */
 	double en = 0.0;
 	double ex = 0.0;
 	double ex2 = 0.0;
