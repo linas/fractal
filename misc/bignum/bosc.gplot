@@ -1,0 +1,39 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'bosc.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# -------------------------------------------------------
+
+# set xrange [0:300]
+set xrange [200:1500]
+
+set title "Graph of xxxxx a the coefficeints b_n * n^{1/4} * exp(sqrt(4 pi n))"
+set xlabel "n"
+set ylabel "b_n * n^{1/4} * exp(sqrt(4 pi n))"
+
+# s(x) = sin (3.141592653*(-1/16 + sqrt (289/256 +4*(x-0.97)/3.141592653)))
+s(x) = sin (3.141592653*(-1/16 + sqrt (-10+ *x)))
+
+plot "bsubn.dat" using 1:2 title "" , \
+     "bsubn.dat" using 1:(s($1)) title "fit"
+
+
+# pause 100
+
+# f(x) = (-2.125+sqrt (2.125*2.125 - 4*(2.0-x)/3.1416))
+# f(x) = (-2.125+sqrt (2.125*2.125 - 4*(1.98-x)/3.1416))
+# f(x) = (-2.125+sqrt (2.125*2.125 - 4*(1.97-x)/3.1416))
+# f(x) = (-2.125+sqrt (2.125*2.125 - 4*(1.969-x)/3.1416))
+f(x) = (-2.125+sqrt (2 + 4*x/3.1416))
+g(x) = sqrt (2 + 4*x/3.1416)
+# g(x) = sqrt (2.125*2.125 - 4*(1.97-x)/3.1416)
+
+

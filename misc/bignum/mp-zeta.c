@@ -1607,7 +1607,7 @@ main (int argc, char * argv[])
 		// b_n = n a_{n-1}
 		mpf_mul_ui (b_n, a_n, n+1);
 
-// #define B_N_SCALE
+#define B_N_SCALE
 #ifdef B_N_SCALE
 		mpf_set_ui (en, n+1);
 		mpf_mul_ui (term, en, 4);
@@ -1622,9 +1622,9 @@ main (int argc, char * argv[])
 #endif
 		
 		printf ("%d\t",n+1);
-		//fp_prt ("", prod);
+		fp_prt ("", prod);
 		// fp_prt ("", a_n);
-		fp_prt ("", b_n);
+		// fp_prt ("", b_n);
 		fflush (stdout);
 	}
 #endif
