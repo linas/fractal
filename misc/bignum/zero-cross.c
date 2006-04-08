@@ -97,7 +97,21 @@ main ()
 	a += yen * (ex3*ex - ex2*ex2);
 	a /= det;
 
-	printf ("a=%20.10g\n", 4.0*a);
+	printf ("# 4*a=%20.10g\n", 4.0*a/M_PI);
+
+	double b = - yex2 * (ex3*en - ex2*ex);
+	b += yex * (ex4*en - ex2*ex2);
+	b -= yen * (ex4*ex - ex3*ex2);
+	b /= det;
+
+	printf ("# 16*b/9=%20.10g\n", 16.0*b/(M_PI*9.0));
+
+	double cc = yex2*(ex3*ex - ex2*ex2);
+	cc -= yex * (ex4*ex - ex2*ex3);
+	cc += yen * (ex4*ex2 - ex3*ex3);
+	cc /= det;
+
+	printf ("# 14c/3pi=%20.10g\n", 14.0*cc/(M_PI*3.0));
 
 #if WTF
 	/* numerical best fit */
