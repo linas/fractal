@@ -16,10 +16,10 @@ set title "Graph of zero crossiings"
 set xlabel "n"
 set ylabel "zero"
 
-f(x) = (-2.125+sqrt (2.125*2.125 - 4*(2.0-x)/3.1416))
+f(x) = (0.25*3.1415926*x*x)
 
-plot "bsubn.dat" using 1:2 title "" , \
-     "bsubn.dat" using 1:(f($1)) title "fit"
+plot "bzero.dat" using 1:2 title "data" , \
+     "bzero.dat" using 1:(f($1)) title "fit"
 
 
 # pause 100

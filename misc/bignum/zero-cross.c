@@ -48,8 +48,9 @@ main ()
 
 	int nmax = n;
 
-	/* compute zero corssing by linear interpolation */
-	int ncross = 0;
+	/* Compute zero crossing by linear interpolation */
+	double zeros[100];
+	int ncross = 1;
 	double vlast = var[0];
 	for (i=1; i<nmax; i++)
 	{
@@ -57,10 +58,46 @@ main ()
 		{
 			double cross = (i-1) + vlast / (vlast-var[i]);
 			printf ("%d\t%20.10g\n", ncross, cross);
+			zeros[ncross] = cross;
 			ncross ++;
 		}
 		vlast = var[i];
 	}
+
+	/* least-squeares */
+	double en = 0.0;
+	double ex = 0.0;
+	double ex2 = 0.0;
+	double ex3 = 0.0;
+	double ex4 = 0.0;
+	double yen = 0.0;
+	double yex = 0.0;
+	double yex2 = 0.0;
+
+	for (i=1; i<ncross; i++)
+	{
+		double x = i;
+		double y = zeros[i];
+		en += 1;
+		ex += x;
+		ex2 += x*x;
+		ex3 += x*x*x;
+		ex4 += x*x*x*x;
+		yen += y;
+		yex += y*x;
+		yex2 += y*x*x;
+	}
+
+	double det = ex4 *(ex2*en - ex*ex); 
+	det -= ex3 *(ex3*en - ex*ex2);
+	det += ex2 * (ex3*ex - ex2*ex2);
+
+	double a = yex2 * (ex2*en - ex*ex);
+	a -= yex * (ex3*en - ex*ex2);
+	a += yen * (ex3*ex - ex2*ex2);
+	a /= det;
+
+	printf ("a=%20.10g\n", 4.0*a);
 
 #if WTF
 	/* numerical best fit */
