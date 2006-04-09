@@ -27,6 +27,7 @@ diagon.o: zetafn.h
 eicheck.o: ache.h zetafn.h
 frobenius.o: zetafn.h
 gsl-diag.o:	zetafn.h
+striling.o:	$(INC)/binomial.h
 sum.o:	ache.h zetafn.h
 riemann.o:	zetafn.h
 tryall.o:	zetafn.h
@@ -41,13 +42,14 @@ bern_h: bern_h.o $(LIB)/binomial.o $(LIB)/bernoulli.o
 beta: beta.o ache.o 
 binom-graph: binom-graph.o  $(LIB)/binomial.o
 character: character.o 
-diagon: diagon.o  $(LIB)/harmonic.o
+diagon: diagon.o  $(LIB)/binomial.o $(LIB)/harmonic.o
 diverge: diverge.o
 eicheck: eicheck.o ache.o  $(LIB)/binomial.o $(LIB)/harmonic.o
 frobenius: frobenius.o $(LIB)/binomial.o $(LIB)/harmonic.o
 gsl-diag: gsl-diag.o $(LIB)/binomial.o $(LIB)/harmonic.o
 harmonic: harmonic.o
 riemann: riemann.o $(LIB)/binomial.o $(LIB)/harmonic.o
+stirling: stirling.o $(LIB)/binomial.o 
 sum: sum.o ache.o  $(LIB)/binomial.o $(LIB)/harmonic.o
 swap: swap.o
 tryall: tryall.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o

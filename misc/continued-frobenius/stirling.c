@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "binomial.h"
+
 unsigned int stirling_first (unsigned int n, unsigned int k)
 {
 	if (0==k)
@@ -29,6 +31,25 @@ unsigned int stirling_first (unsigned int n, unsigned int k)
 	return s;
 }
 
+int sb_sum (unsigned int n, unsigned int m)
+{
+	unsigned int k;
+	int s, sg;
+	
+	sg = 1;
+	if (n%2) sg = -1;
+
+	s = 0;
+	for (k=m; k<=n; k++)
+	{
+		s += sg * binomial (k,m) * stirling_first (n, k);
+		sg = -sg;
+	}
+
+	return s;
+}
+
+int
 main () 
 {
 	int n, k;
@@ -37,7 +58,8 @@ main ()
 	{
 		for (k=0; k<=n; k++)
 		{
-			unsigned int s = stirling_first (n,k);
+			// unsigned int s = stirling_first (n,k);
+			int s = sb_sum (n,k);
 			printf ("duude (%d %d)  = %d\n", n, k, s);
 		}
 	}
