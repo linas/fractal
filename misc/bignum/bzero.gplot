@@ -17,7 +17,8 @@ set xlabel "n"
 set ylabel "zero"
 
 set xrange [10:43]
-set xrange [10:28]
+set xrange [10:32]
+# set xrange [0:43]
 
 # f(x) = (0.25*3.1415926*x*x + 9*3.1415926*x/16 - 3*3.1415926/14 )
 # f(x) = (0.25*3.1415926*x*x + 9*3.1415926*x/16 - 0.57)
@@ -30,10 +31,14 @@ set xrange [10:28]
 # f(x) = (0.25*3.14159265358979*x*x + 9*3.14159265358979*x/16 + 0.440579 - 0.25/x)
 f(x) = (0.25*3.14159265358979*x*x + 9*3.14159265358979*x/16 + 0.4405798 - 0.25/x)
 
+g(x) = (f(x) + 1/(215*x-685))
+
 # plot "bzero.dat" using 1:2 title "data" , \
 #    "bzero.dat" using 1:(f($1)) title "fit"
 
 # plot "bzero.dat" using 1:($2-f($1)) title "diff"
+# plot "bzero.dat" using 1:($2-f($1)) title "diff", \
+#     "bzero.dat" using 1:($2-g($1)) title "closer?"
 
 # plot "bzero.dat" using 1:(1/($2-f($1))-204*$1) title "diff"
 # plot "bzero.dat" using 1:(1/($2-f($1))-212*$1) title "diff"
