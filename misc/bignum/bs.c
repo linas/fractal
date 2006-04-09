@@ -59,7 +59,7 @@ double eff(double x)
 	mpf_init (re_b);
 	mpf_init (im_b);
 
-	b_sub_s (re_b, im_b, x, 0.0, 300, x*2+150);
+	b_sub_s (re_b, im_b, x, 0.0, 400, x*4+150);
 	double y = mpf_get_d (re_b);
 
 	mpf_clear (re_b);
@@ -89,15 +89,11 @@ main (int argc, char * argv[])
 	/* the variable-precision calculations are touchy about this */
 	/* XXX this should be stirling's approx for binomial */ 
 	int nterms = 1500;
-	int bits = (int) (v + 300 + 3*nterms);
+	int bits = (int) (v + 400 + 3*nterms);
 	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 	
-	mpf_t re_a, im_a;
-	mpf_init (re_a);
-	mpf_init (im_a);
-
 	double z[50];
 
 	z[1] = 2.756189414;
@@ -143,11 +139,11 @@ main (int argc, char * argv[])
 	z[41] = 1393.141954;
 	z[42] = 1460.097275;
 	int i;
-	for (i=13; i<43; i++)
+	for (i=38; i<43; i++)
 	{
-		double zer = find_zero (z[i]-0.05, z[i]+0.05, eff, 1.0e-8);
+		double zer = find_zero (z[i]-0.002, z[i]+0.002, eff, 1.0e-9);
 
-		printf ("%d\t%18.14g\n", i, zer);
+		printf ("%d\t%20.16g\n", i, zer);
 		fflush (stdout);
 	}
 
