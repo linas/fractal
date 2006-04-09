@@ -12,8 +12,14 @@
 
 #include "binomial.h"
 
+/* return stirling numbers of the first kind, 
+ * normalized so that they are all positive.
+ * Uses dynamically-sized cache.
+ */
 long double stirling_first (unsigned int n, unsigned int k)
 {
+
+	/* Cache management */
 	static int nmax = 0;
 	static long double *cache = NULL;
 	if (n> nmax)
@@ -35,17 +41,20 @@ long double stirling_first (unsigned int n, unsigned int k)
 		nmax = n;
 	}
 
+	/* Trivial case (not in the cache) */
 	if (0==k)
 	{
 		if (0==n) return 1.0L;
 		return 0.0L;
 	}
 
+	/* pull value from cache if it is there */
 	int idx = n * (n-1) / 2 -1;
 	if (cache[idx+k] > 0.0) return cache[idx+k];
 
 	if (n<k) return 0.0L;
 
+	/* use recursion to get new value */
 	long double s = stirling_first (n-1, k-1);
 	if (n-1 >= k)
 	{
@@ -76,11 +85,11 @@ long double sb_sum (unsigned int n, unsigned int m)
 }
 
 int
-main () 
+main (int argc, char *argv[]) 
 {
 	int n, k;
 
-#if 1
+#if 0
 	for (n=0; n<10; n++)
 	{
 		for (k=0; k<=n; k++)
@@ -94,8 +103,15 @@ main ()
 	}
 #endif
 
-#if 0
-	n=20;
+	if (2>argc)
+	{
+		fprintf (stderr, "Usage: %s <order>\n", argv[0]);
+		exit (1);
+	}
+
+	int order = atoi (argv[1]);
+
+	n=order;
 	for (k=0; k<=n; k++)
 	{
 		long double s = sb_sum (n,k);
@@ -103,7 +119,6 @@ main ()
 		double x = ((double) k)/ ((double) n);
 		printf ("%d	%g	%Lg\n", k, x, s);
 }
-#endif
 
 	return 0;
 }
