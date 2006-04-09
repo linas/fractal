@@ -44,7 +44,7 @@ main (int argc, char * argv[])
 	double prev = 0.0;
 	for (i=1; i<40; i++)
 	{
-#define TRADITIONAL_A_SUB_N
+// #define TRADITIONAL_A_SUB_N
 #ifdef TRADITIONAL_A_SUB_N
 		double x = a_sub_n (i);
 		double r = sqrt (i*M_PI);
@@ -53,7 +53,7 @@ main (int argc, char * argv[])
 		x /= r;
 		double y = sqrt (4.0*M_PI*i) + 0.375*M_PI;
 		y = -cos(y);
-		y *= pow (2*M_PI, -0.25);
+		y *= pow (0.5*M_PI, -0.25);
 		printf ("%d	%8.6g	%8.6g\n", i, x, y);
 #endif
 #if 0
@@ -71,12 +71,22 @@ main (int argc, char * argv[])
 		prev = y;
 #endif
 
-// #define LFUNC_A_SUB_N
+#define LFUNC_A_SUB_N
 #ifdef LFUNC_A_SUB_N
 		double x = a_sub_n (i);
+		x *= exp (sqrt(4.0*M_PI*i));
+		x *= pow (2.0/(M_PI*i*i*i), -0.25);
+
 		double y = hurwitz_a_sub_n (i, m, k);
-		// y += 2.0/((double)k) * harm_n2p1 (i);
-		// y *= exp (sqrt (2.0*M_PI*i));
+		y *= exp (sqrt(4.0*M_PI*i/((double) k)));
+		y *= pow (2.0/(M_PI*i*i*i*k), -0.25);
+
+		x = y;
+
+		y = M_PI *((2.0*m/((double)k)) + 0.125);
+		y -= sqrt (4.0*M_PI*i/((double) k));
+		y = -sin (y);
+
 		double z = 1.0/(y-prev);
 		// z /= i*(i+1);
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);

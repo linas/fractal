@@ -8,7 +8,7 @@ LIB = $(TOP)/lib
 
 EXES = alpha asubn bern bern_h binom-graph character \
 	diagon diverge eicheck frobenius gsl-diag \
-	harmonic riemann swap sum tryall valuate \
+	harmonic riemann stirling sum swap tryall valuate \
 	zeta-sum zeta-takagi zeta-zero zero zyx
 
 all: $(EXES)
