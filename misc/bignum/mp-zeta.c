@@ -1405,6 +1405,89 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 
 }
 
+/* ======================================================================= */
+/* compute b_sub_s for complex-valued s
+ */
+void b_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int prec)
+{
+	int k;
+	mpf_t rebin, imbin, term, ok, one, racc, iacc, rzeta, izeta;
+	mpf_t gam;
+
+	mpf_init (term);
+	mpf_init (racc);
+	mpf_init (iacc);
+	mpf_init (rzeta);
+	mpf_init (izeta);
+	mpf_init (ok);
+	mpf_init (one);
+	mpf_init (rebin);
+	mpf_init (imbin);
+	mpf_init (gam);
+	
+	mpz_t tmpa, tmpb;
+	mpz_init (tmpa);
+	mpz_init (tmpb);
+	
+	mpf_set_ui (one, 1);
+	mpf_set_ui (re_a, 0);
+	mpf_set_ui (im_a, 0);
+	fp_euler_mascheroni (gam);
+
+	int n = 1500;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	for (k=2; k<= n; k++)
+	{
+		/* Commpute the binomial */
+		c_binomial (rebin, imbin, re_s, im_s, k);
+
+		/* compute zeta (k)- 1/k - gamma */
+		int ndigits = 0;
+		fp_zeta (rzeta, k, prec+ndigits);
+		mpf_div_ui (ok, one, k);
+		mpf_sub (term, rzeta, ok);
+		mpf_sub (term, term, gam);
+
+		mpf_mul (rzeta, term, rebin);
+		mpf_mul (izeta, term, imbin);
+
+		if (k%2==0)
+		{ 
+			mpf_sub (racc, re_a, rzeta);
+			mpf_sub (iacc, im_a, izeta);
+		}
+		else 
+		{
+			mpf_add (racc, re_a, rzeta);
+			mpf_add (iacc, im_a, izeta);
+		}
+		
+		mpf_set (re_a, racc);
+		mpf_set (im_a, iacc);
+	}
+
+	/* add const terms */
+	mpf_sub (re_a, re_a, gam);
+
+	/* add 1/2 */
+	mpf_div_ui (ok, one, 2);
+	mpf_add (re_a, re_a, ok);
+	
+	mpf_clear (term);
+	mpf_clear (racc);
+	mpf_clear (iacc);
+	mpf_clear (rzeta);
+	mpf_clear (izeta);
+	mpf_clear (ok);
+	mpf_clear (one);
+	mpf_clear (rebin);
+	mpf_clear (imbin);
+	mpf_clear (gam);
+
+	mpz_clear (tmpa);
+	mpz_clear (tmpb);
+
+}
+
 /* ==================================================================== */
 #ifdef TEST
 

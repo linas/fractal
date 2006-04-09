@@ -45,7 +45,7 @@ main (int argc, char * argv[])
 	mpf_set_default_prec (bits);
 	
 	
-#define A_SUB_N
+// #define A_SUB_N
 #ifdef A_SUB_N
 
 #ifdef PRECOMPUTE
@@ -124,7 +124,7 @@ main (int argc, char * argv[])
 	}
 #endif
 	
-// #define A_SUB_S
+#define A_SUB_S
 #ifdef A_SUB_S
 
 	mpf_t re_a, im_a;
@@ -139,7 +139,8 @@ main (int argc, char * argv[])
 	{
 		double re_s = 0;
 		double im_s = -10+n/10.0;
-		a_sub_s (re_a, im_a, re_s, im_s, prec);
+		// a_sub_s (re_a, im_a, re_s, im_s, prec);
+		b_sub_s (re_a, im_a, re_s, im_s, prec);
 
 		printf ("%d\t%12.9g\t%12.9g\t", n, re_s, im_s);
 		mpf_out_str (stdout, 10, 21, re_a);
