@@ -61,7 +61,7 @@ The binomial coefficient is implicated in various fractal phenomena, and
  series involving the Riemann zeta function.
  Of some curiosity is the series
 \begin_inset Formula \begin{equation}
-\zeta(s)=\frac{1}{s-1}+\sum_{n=0}^{\infty}(-)^{n}\,\frac{b_{n}}{n!}\,(s)_{n}\label{eq:}\end{equation}
+\zeta(s)=\frac{1}{s-1}+\sum_{n=0}^{\infty}(-1)^{n}\,\frac{b_{n}}{n!}\,(s)_{n}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -162,92 +162,6 @@ b_{n}=\mathcal{O}\left(n^{1/4}e^{-2\sqrt{\pi n}}\right)\]
 \end_inset 
 
 -functions.
- 
-\layout Comment
-
-Not sure about the following ...
- interesting and suggestive but don't see where it leads.
-\layout Standard
-
-The paper concludes by noting the general resemblance of the asymptotic
- behaviour to that of two other famous number-theoretic sequences.
- The partition function 
-\begin_inset Formula $p_{n}$
-\end_inset 
-
-is given by Euler's infinite product
-\begin_inset LatexCommand \cite{Apo90}
-
-\end_inset 
-
-:
-\begin_inset Formula \[
-\sum_{n=0}^{\infty}p_{n}x^{n}=\prod_{m=1}^{\infty}\frac{1}{1-x^{m}}\]
-
-\end_inset 
-
- and for large 
-\begin_inset Formula $n$
-\end_inset 
-
-, takes on the asymptotic form 
-\begin_inset Formula \[
-p_{n}\sim\frac{\exp K\sqrt{n}}{4n\sqrt{3}}\]
-
-\end_inset 
-
- with 
-\begin_inset Formula $K=\pi\sqrt{2/3}$
-\end_inset 
-
-.
- This form was given by Hardy and Ramanujan [ref] and Uspensky [ref], with
- a full series valid to all orders given by Rademacher[ref].
- There is a similar asymptotic form for the Fourier coefficients of the
- modular 
-\begin_inset Formula $j$
-\end_inset 
-
--invariant,
-\begin_inset Formula \[
-j(\tau)=e^{-2\pi i\tau}+\sum_{n=0}^{\infty}c_{n}e^{2\pi in\tau}\]
-
-\end_inset 
-
- where the coefficients take on the asymptotic values
-\begin_inset Formula \[
-c_{n}\sim\frac{\exp4\pi\sqrt{n}}{n^{3/4}\sqrt{2}}\]
-
-\end_inset 
-
- which was given by Petersson [ref]
-\begin_inset LatexCommand \cite{Apo90}
-
-\end_inset 
-
-.
- The appearence of an asymptotic factor in the form of 
-\begin_inset Formula $e^{K\sqrt{n}}$
-\end_inset 
-
- here and in the Newton series is suggestive.
- However, unlike the 
-\begin_inset Formula $p_{n}$
-\end_inset 
-
- and the 
-\begin_inset Formula $c_{n}$
-\end_inset 
-
-, the values 
-\begin_inset Formula $1/b_{n}$
-\end_inset 
-
- are not integers; nor is the Fourier series 
-\begin_inset Formula $\sum_{n}x^{n}/b_{n}$
-\end_inset 
-
- a modular form.
  
 \layout Comment
 
@@ -381,13 +295,13 @@ The series expression for the
  is very conducive to numerical analysis.
  The values of the zeta function for small integers are known to millions
  of digits; Plouffe has given a series of very rapidly converging sums for
- the zeta function at the larger integers[ref].
+ the zeta function at the larger integers[xxx ref].
  Thus, it becomes possible to explore the behavior of the 
 \begin_inset Formula $b_{n}$
 \end_inset 
 
  up to 
-\begin_inset Formula $n\sim1000$
+\begin_inset Formula $n\sim2000$
 \end_inset 
 
  with only a moderate investment in coding and computer time.
@@ -414,31 +328,24 @@ The table
 \end_inset 
 
 are oscillatory, as shown in the figure 
-\begin_inset LatexCommand \ref{cap:Graph-of-a_n}
+\begin_inset LatexCommand \ref{cap:Graph-of-b_n}
 
 \end_inset 
 
 .
  The values are also very rapidly decreasing, so that to the first order,
  that 
-\begin_inset Formula $\left|a_{n}\right|\sim\exp\left(-4\sqrt{n+1}\right)$
+\begin_inset Formula $\left|b_{n}\right|\sim\exp\left(-\sqrt{4\pi n}\right)$
 \end_inset 
 
 .
- This exponential decrease is vaguely reminiscent of an exact result from
- Babenko 
-\begin_inset LatexCommand \cite{Babenko & Juriev}
-
-\end_inset 
-
-, and it is possible that Babenko's analysis might be applied to yeild a
- more precise statement of the results of this section.
+ 
 \layout Standard
 
 
 \begin_inset Float table
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -676,7 +583,7 @@ collapsed true
 \layout Caption
 
 
-\begin_inset LatexCommand \label{cap:Graph-of-a_n}
+\begin_inset LatexCommand \label{cap:Graph-of-b_n}
 
 \end_inset 
 
@@ -713,34 +620,27 @@ This figure shows a graph of the first 300 values of
  
 \layout Standard
 
-The author attempted a numeric fit to the oscillatory behavior of the function.
+A numeric fit to the oscillatory behavior of the function may be made.
  An excellent fit for the 
 \begin_inset Formula $k'th$
 \end_inset 
 
  zero is provided by 
 \begin_inset Formula \begin{equation}
-q(k)=1.970+\frac{17\pi}{16}k+\frac{\pi}{4}k^{2}\label{eq:}\end{equation}
+q(k)=\frac{\pi}{4}k^{2}+\frac{9\pi}{16}k+0.4408+\frac{1}{4k}\label{eq:}\end{equation}
 
 \end_inset 
 
  which appears to fit the zero-crossings to better than a few parts per
- thousand, at least for the larger values of 
-\begin_inset Formula $k$
-\end_inset 
-
-.
- Note that the value 17/16 is not meant to imply that this value is truly
- exact; numerically, the value 1.0625 seems to be the ideal fit, and it is
- written here as 17/16 in order to be suggestive.
- This equation is trivially invertible to give the oscillatory behavior
+ thousand.
+ This equation is XXXX easily invertible to give the oscillatory behavior
  of the 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
 ; it is given by
 \begin_inset Formula \begin{equation}
-s_{n}=\sin\pi\left(\frac{-1}{16}+\sqrt{\frac{289}{256}+4\,\frac{(n-1.97)}{\pi}}\right)\label{eq:}\end{equation}
+s_{n}=\sin\pi\left(\frac{-9}{8}-\sqrt{\frac{81}{64}+4\,\frac{(n+0.4408)}{\pi}}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -763,7 +663,7 @@ s_{n}=\sin\pi\left(\frac{-1}{16}+\sqrt{\frac{289}{256}+4\,\frac{(n-1.97)}{\pi}}\
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -836,17 +736,18 @@ This figure shows a graph of
 \layout Standard
 
 Asymptotically, the amplitude of the 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
  appears to be given by 
 \begin_inset Formula \begin{equation}
-a_{n}\simeq s_{n}\exp-\left(3+3.6\sqrt{n+1}\right)\label{eq:}\end{equation}
+b_{n}\simeq s_{n}n^{1/4}\exp-\left(\sqrt{4\pi n}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  However, a more precise fit is strangely difficult.
- An attempt to numerically fit the data with an expression of the form 
+ XXXX An attempt to numerically fit the data with an expression of the form
+ 
 \begin_inset Formula \begin{equation}
 a_{n}\simeq s_{n}\exp-\left(b+\left(c+dn\right)^{\epsilon}\right)\label{eq:}\end{equation}
 
@@ -896,17 +797,23 @@ obvious
 
  and reasonable generalization is 
 \begin_inset Formula \begin{equation}
-b(s)=-\gamma+\frac{1}{2}+\sum_{k=2}^{\infty}(-)^{k}\left(\begin{array}{c}
+b(s)=-\gamma+\frac{1}{2}+\sum_{k=2}^{\infty}(-1)^{k}\left(\begin{array}{c}
 s\\
-k\end{array}\right)\left[\zeta(k)-\frac{1}{k+1}-\gamma\right]\label{eq:}\end{equation}
+k\end{array}\right)\left[\zeta(k)-\frac{1}{k-1}-\gamma\right]\label{eq:}\end{equation}
 
 \end_inset 
 
- 
-\layout Standard
+ where the identity 
+\begin_inset Formula \[
+nH_{n-1}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\frac{k}{k-1}\]
 
-xxx give th bn .By construction, this function interpolates the previous
- series, so that 
+\end_inset 
+
+ was used to generalize the harmonic number to fractional values.
+ By construction, this function interpolates the previous series, so that
+ 
 \begin_inset Formula $b(n)=b_{n}$
 \end_inset 
 
@@ -984,6 +891,7 @@ This figure shows the real and imaginary parts of
  The function appears to be oscillatory.
  Note that the series expansion converges only with great difficulty as
  one goes further out on the imaginary axis.
+ XXX top be replaced by phase plot of b(s).
 \end_inset 
 
 
@@ -1049,53 +957,24 @@ This figure shows the phase of
 , and all others are zeros.
  In particular, it appears that all of the zeros occur on the real number
  line.
-\end_inset 
-
-
 \layout Standard
 
-Of some utility are two identities, valid for 
-\begin_inset Formula $\Re s>-1$
+XXX to be replaced by plot of b(s)
 \end_inset 
 
-: 
-\begin_inset Formula \begin{equation}
--\sum_{k=0}^{\infty}\left(\begin{array}{c}
-s\\
-k\end{array}\right)\frac{(-y)^{k+1}}{k+1}=\frac{1-(1-y)^{s+1}}{s+1}\label{eq:}\end{equation}
 
-\end_inset 
-
- and 
-\begin_inset Formula \begin{equation}
-\sum_{k=1}^{\infty}\left(\begin{array}{c}
-s\\
-k\end{array}\right)\frac{(a-1)^{k}}{k}=\int_{a}^{1}\frac{1-x^{s}}{1-x}dx\label{eq:}\end{equation}
-
-\end_inset 
-
- For 
-\begin_inset Formula $a=0$
-\end_inset 
-
-, the last integral becomes the digamma function; see equation 6.3.22 of 
-\begin_inset LatexCommand \cite{A&S}
-
-\end_inset 
-
-.
 \layout Section
 
 Relation to the Stieltjes constants
 \layout Standard
 
 The 
-\begin_inset Formula $a_{n}$
+\begin_inset Formula $b_{n}$
 \end_inset 
 
- are can be used to express the Stieltjes constants and vice-versa by re-express
-ing the binomial coefficient with a power series, making use of Stirling
- Numbers.
+ are can be used to express the Stieltjes constants and vice-versa, by re-expres
+sing the binomial coefficient with a power series and making use of the
+ Stirling numbers.
  That is, the polynomial expression is given by
 \begin_inset Formula \begin{equation}
 \left(\begin{array}{c}
@@ -1116,7 +995,7 @@ k\end{array}\right]$
  Substituting in the above, and comparing to the standard definition of
  the Stieltjes constants 
 \begin_inset Formula \begin{equation}
-\zeta(s)=\frac{1}{s-1}+\sum_{n=0}^{\infty}\frac{(-)^{n}}{n!}\gamma_{n}(s-1)^{n}\label{eq:}\end{equation}
+\zeta(s)=\frac{1}{s-1}+\sum_{n=0}^{\infty}\frac{(-1)^{n}}{n!}\gamma_{n}(s-1)^{n}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1240,7 +1119,7 @@ Given a function
 
  may be given an integral representation
 \begin_inset Formula \[
-\sum_{k=n_{0}}^{n}{n \choose k}(-1)^{k}f(k)=\frac{(-1)^{n}}{2\pi i}\oint_{\mathcal{C}}f(s)\frac{n!}{s(s-1)\cdots(s-n)}ds\]
+\sum_{k=n_{0}}^{n}{{n \choose k}}(-1)^{k}f(k)=\frac{(-1)^{n}}{2\pi i}\oint_{\mathcal{C}}f(s)\frac{n!}{s(s-1)\cdots(s-n)}ds\]
 
 \end_inset 
 
@@ -1278,12 +1157,12 @@ Such sums commonly occur in the theory of finite differences.
 
  by 
 \begin_inset Formula \begin{equation}
-\Delta^{n}\left[f\right](a)=\sum_{p=0}^{n}(-1)^{n-p}{n \choose p}\, f(p+a)\label{eq:}\end{equation}
+\Delta^{n}\left[f\right](a)=\sum_{p=0}^{n}(-1)^{n-p}{{n \choose p}}\, f(p+a)\label{eq:}\end{equation}
 
 \end_inset 
 
  where 
-\begin_inset Formula ${n \choose p}$
+\begin_inset Formula ${{n \choose p}}$
 \end_inset 
 
  is the binomial coefficient.
@@ -1371,7 +1250,7 @@ See
 \end_inset 
 
 .
- [xXX need better ref]
+ [XXX this ref doesn't actually contain proof]
 \layout Standard
 
 An example of a function that violates Carlson's theorem is 
@@ -1514,7 +1393,7 @@ In analogy to the study of the forward differences of the Riemann zeta function,
  the remainder of this paper will concern itself with the analysis of the
  series given by 
 \begin_inset Formula \begin{equation}
-L_{n}=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-coeff}\end{equation}
+L_{n}=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-coeff}\end{equation}
 
 \end_inset 
 
@@ -1526,7 +1405,7 @@ L_{n}=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-co
  connecting the Hurwitz zeta function to the L-function, it is sufficient
  to study sums of the form
 \begin_inset Formula \begin{equation}
-A_{n}(m,k)=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{\zeta\left(p+1,\frac{m}{k}\right)}{k^{p+1}(p+1)}\label{eq:}\end{equation}
+A_{n}(m,k)=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{\zeta\left(p+1,\frac{m}{k}\right)}{k^{p+1}(p+1)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1925,7 +1804,7 @@ a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\s
 are exponentially small.
 \layout Section
 
-Conclusion 
+More L-functions
 \layout Standard
 
 We conclude by briefly returning to the structure of the Dirichlet L-functions.
@@ -2037,6 +1916,95 @@ TODO -- The Hurwitz zeta can be avoided entirely by working directly with
  of that.
  (e.g.
  assume Selberg-class type functional equation).
+ 
+\layout Section
+
+Conclusions/Comments
+\layout Comment
+
+Not sure about the following ...
+ interesting and suggestive but don't see where it leads.
+\layout Standard
+
+The paper concludes by noting the general resemblance of the asymptotic
+ behaviour to that of two other famous number-theoretic sequences.
+ The partition function 
+\begin_inset Formula $p_{n}$
+\end_inset 
+
+is given by Euler's infinite product
+\begin_inset LatexCommand \cite{Apo90}
+
+\end_inset 
+
+:
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}p_{n}x^{n}=\prod_{m=1}^{\infty}\frac{1}{1-x^{m}}\]
+
+\end_inset 
+
+ and for large 
+\begin_inset Formula $n$
+\end_inset 
+
+, takes on the asymptotic form 
+\begin_inset Formula \[
+p_{n}\sim\frac{\exp K\sqrt{n}}{4n\sqrt{3}}\]
+
+\end_inset 
+
+ with 
+\begin_inset Formula $K=\pi\sqrt{2/3}$
+\end_inset 
+
+.
+ This form was given by Hardy and Ramanujan [ref] and Uspensky [ref], with
+ a full series valid to all orders given by Rademacher[ref].
+ There is a similar asymptotic form for the Fourier coefficients of the
+ modular 
+\begin_inset Formula $j$
+\end_inset 
+
+-invariant,
+\begin_inset Formula \[
+j(\tau)=e^{-2\pi i\tau}+\sum_{n=0}^{\infty}c_{n}e^{2\pi in\tau}\]
+
+\end_inset 
+
+ where the coefficients take on the asymptotic values
+\begin_inset Formula \[
+c_{n}\sim\frac{\exp4\pi\sqrt{n}}{n^{3/4}\sqrt{2}}\]
+
+\end_inset 
+
+ which was given by Petersson [ref]
+\begin_inset LatexCommand \cite{Apo90}
+
+\end_inset 
+
+.
+ The appearence of an asymptotic factor in the form of 
+\begin_inset Formula $e^{K\sqrt{n}}$
+\end_inset 
+
+ here and in the Newton series is suggestive.
+ However, unlike the 
+\begin_inset Formula $p_{n}$
+\end_inset 
+
+ and the 
+\begin_inset Formula $c_{n}$
+\end_inset 
+
+, the values 
+\begin_inset Formula $1/b_{n}$
+\end_inset 
+
+ are not integers; nor is the Fourier series 
+\begin_inset Formula $\sum_{n}x^{n}/b_{n}$
+\end_inset 
+
+ a modular form.
  
 \layout Section
 
