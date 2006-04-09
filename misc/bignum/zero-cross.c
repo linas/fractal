@@ -64,7 +64,7 @@ main ()
 			double eps = v*v*v / (3.0*m);
 			// printf ("%d\t%20.10g\t%20.16g\n", ncross, cross, eps);
 			cross += eps;
-			printf ("%d\t%20.10g\n", ncross-1, cross);
+			printf ("%d\t%20.10g\n", ncross, cross);
 
 			zeros[ncross] = cross;
 			ncross ++;

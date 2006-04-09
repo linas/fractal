@@ -25,10 +25,10 @@ set xrange [10:40]
 f(x) = (0.25*3.1415926*x*x + 9*3.1415926*x/16 - 0.5592 - 0.25/x)
 
 # plot "bzero.dat" using 1:2 title "data" , \
-#    "bzero.dat" using 1:(f($1+1)) title "fit"
+#    "bzero.dat" using 1:(f($1)) title "fit"
 
-plot "bzero.dat" using 1:($2-f($1+1)) title "diff"
-# plot "bzero.dat" using 1:(1/($2-f($1+1))+4*$1) title "diff"
+plot "bzero.dat" using 1:($2-f($1)) title "diff"
+# plot "bzero.dat" using 1:(1/($2-f($1))+4*$1) title "diff"
 
 
 # pause 100

@@ -31,13 +31,13 @@ double find_zero (double lo, double hi,  double f(double), double prec)
 	{
 		double mid = lo - flo * (hi-lo)/ (fhi-flo);
 
-		if (mid <= lo | mid >= hi)
+		double b = 0.8*(hi-lo);
+		if (mid <= lo+b | mid >= hi-b)
 		{
 			mid = 0.5*(lo+hi);
 		}
 		double fmid = f(mid);
-printf ("duude %14.12g %14.12g %14.12g hav %14.12g  del %14.12g\n", lo, mid, hi, fmid,
-hi-lo);
+// printf ("duude %14.12g %14.12g %14.12g hav %14.12g  del %14.12g\n", lo, mid, hi, fmid, hi-lo);
 		if (flo*fmid < 0.0)
 		{
 			hi = mid;
@@ -73,14 +73,14 @@ main (int argc, char * argv[])
 {
 	char str[4000];
 
-	if (argc < 3)
+	if (argc < 1)
 	{
-		fprintf (stderr, "Usage: %s [ndigits] [nterms]\n", argv[0]); 
+		fprintf (stderr, "Usage: %s \n", argv[0]); 
 		exit (1);
 	}
 
 	/* the decimal precison (number of decimal places) */
-	int prec = atoi (argv[1]);
+	int prec = 100;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -97,14 +97,7 @@ main (int argc, char * argv[])
 	mpf_init (re_a);
 	mpf_init (im_a);
 
-	int i;
-	for (i=1;i<10; i++)
-	{
-		double bn = eff (i);
-		printf ("duude %d  is %g\n", i, bn);
-	}
-
-	// find_zero (0.0, 5.0, eff, 1.0e-6);
+	double zer = find_zero (1.0, 3.0, eff, 1.0e-6);
 	fflush (stdout);
 
 }
