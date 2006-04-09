@@ -1434,7 +1434,7 @@ void b_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 	mpf_set_ui (im_a, 0);
 	fp_euler_mascheroni (gam);
 
-	int n = 1500;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	int n = 150;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	for (k=2; k<= n; k++)
 	{
 		/* Commpute the binomial */
