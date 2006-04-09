@@ -19,7 +19,6 @@ long double stirling_first (unsigned int n, unsigned int k)
 	if (n> nmax)
 	{
 		int newsize = n*(n+1)/2;
-printf ("duude c=%p\n", cache);
 		cache = (long double *) realloc (cache, newsize * sizeof (long double));
 
 		int en;
@@ -27,7 +26,7 @@ printf ("duude c=%p\n", cache);
 		{
 			int j;
 			int idx = en * (en-1) /2 - 1;
-			for (j=0; j<en; j++)
+			for (j=1; j<en; j++)
 			{
 				cache[idx+j] = 0.0;
 			}
