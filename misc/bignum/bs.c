@@ -18,14 +18,26 @@
 
 /* return zero by binary subdivision */
 
-double find_zero (double low, double hi,  double f(double), double prec)
+double find_zero (double lo, double hi,  double f(double), double prec)
 {
-	double flow = f(low);
+	double flo = f(lo);
 	double fhi = f(hi);
-	while (hi-low > prec)
+	if (flo*fhi > 0.0)
 	{
-		double mid = low - flow * (hi-low)/ (fhi-flow);
+		printf ("error flo=%g  fhi=%g\n", flo, fhi);
+		return 0.0;
+	}
+	while (hi-lo > prec)
+	{
+		double mid = lo - flo * (hi-lo)/ (fhi-flo);
+
+		if (mid <= lo | mid >= hi)
+		{
+			mid = 0.5*(lo+hi);
+		}
 		double fmid = f(mid);
+printf ("duude %14.12g %14.12g %14.12g hav %14.12g  del %14.12g\n", lo, mid, hi, fmid,
+hi-lo);
 		if (flo*fmid < 0.0)
 		{
 			hi = mid;
@@ -34,10 +46,10 @@ double find_zero (double low, double hi,  double f(double), double prec)
 		else
 		{
 			lo = mid;
-			flo = mid;
+			flo = fmid;
 		}
 	}
-	double mid = low - flow * (hi-low)/ (fhi-flow);
+	double mid = lo - flo * (hi-lo)/ (fhi-flo);
 	return mid;
 }
 
@@ -49,8 +61,6 @@ double eff(double x)
 
 	b_sub_s (re_b, im_b, x, 0.0, 100);
 	double y = mpf_get_d (re_b);
-	double z = mpf_get_d (im_b);
-printf ("duuude its %g %g\n", y,z);
 
 	mpf_clear (re_b);
 	mpf_clear (im_b);
@@ -77,6 +87,7 @@ main (int argc, char * argv[])
 
 	/* the variable-precision calculations are touchy about this */
 	/* XXX this should be stirling's approx for binomial */ 
+	int nterms = 50;
 	int bits = (int) (v + 300 + 3*nterms);
 	
 	/* set the precision (number of binary bits) */
@@ -86,8 +97,14 @@ main (int argc, char * argv[])
 	mpf_init (re_a);
 	mpf_init (im_a);
 
+	int i;
+	for (i=1;i<10; i++)
+	{
+		double bn = eff (i);
+		printf ("duude %d  is %g\n", i, bn);
+	}
 
-	find_zero (1.0, 2.0, eff, 1.0e-6);
+	// find_zero (0.0, 5.0, eff, 1.0e-6);
 	fflush (stdout);
 
 }
