@@ -1408,7 +1408,7 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 /* ======================================================================= */
 /* compute b_sub_s for complex-valued s
  */
-void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int prec)
+void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int prec, int nterms)
 {
 	int k;
 	mpf_t rebin, imbin, term, ok, one, racc, iacc, rzeta, izeta;
@@ -1430,7 +1430,8 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 	mpf_set_ui (im_b, 0);
 	fp_euler_mascheroni (gam);
 
-	int n = 150;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	int n = 650;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	n = nterms;
 	for (k=2; k<= n; k++)
 	{
 		/* Commpute the binomial */
