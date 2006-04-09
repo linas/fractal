@@ -11,12 +11,6 @@
 
 #include <gmp.h>
 
-#if 0
-#define ARRSZ 4000
-#define BERNOULLI_CACHE_SIZE ARRSZ
-#define ZETA_CACHE_SIZE ARRSZ
-#endif
-
 void fp_prt (char * str, mpf_t val);
 
 /* i_poch_rising

@@ -1,7 +1,7 @@
 /*
- * mp_zeta.c
+ * bsubn.c
  *
- * High-precison Riemann zeta function, using the 
+ * High-precison asub_n  using the 
  * Gnu Multiple-precision library.
  *
  * Also, high-precision values of the series a_n 
@@ -14,8 +14,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "mp_zeta.h"
 
-/* ============================================================================= */
+/* ==================================================================== */
 
 main (int argc, char * argv[])
 {

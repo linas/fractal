@@ -3,15 +3,18 @@
 #
 
 
-EXES= bound cont_frac minima mp_zeta trunc zero-cross
+EXES= bound bsubn cont_frac minima trunc zero-cross
 
 all:  $(EXES)
 
 bound:	bound.o
+bsubn:	bsubn.o mp_zeta.o
 cont_frac:	cont_frac.o
-mp_zeta:	mp_zeta.o
 trunc:	trunc.o
 zero-cross:	zero-cross.o
+
+mp_zeta.o: mp_zeta.h
+bsubn.o: mp_zeta.h
 
 minima: minima.o
 	$(CC) -o minima $< -lgsl -lcblas -lm -lc
@@ -29,4 +32,4 @@ dist:
 	$(CC) -c -O2 $<
 
 .o:
-	$(CC) -o $* $< -lgmp -lm
+	$(CC) -o $* $^ -lgmp -lm
