@@ -73,7 +73,7 @@ long double sb_sum (unsigned int n, unsigned int m)
 	long double s;
 	
 	sg = 1;
-	if (n%2) sg = -1;
+	if (m%2) sg = -1;
 
 	s = 0.0L;
 	for (k=m; k<=n; k++)
@@ -96,6 +96,28 @@ long double b_sum (int n)
 		term *= b_sub_n (k);
 		sum += term;
 	}
+
+	return sum;
+}
+
+long double steiltjes_gamma (int n)
+{
+	int k;
+
+	long double sum = 0.0L;
+	long double sg = 1.0L;
+	if (n%2) sg = -1.0L;
+	for (k=n; k<40; k++)
+	{
+		long double term = b_sub_n (k);
+		term *= sb_sum (k,n);
+		term /= factorial (k);
+		// term *= sg;
+		sum += term;
+		sg = -sg;
+	}
+	sum *= factorial (n);
+	if (n%2) sum = -sum;
 
 	return sum;
 }
@@ -149,12 +171,23 @@ main (int argc, char *argv[])
 	}
 #endif
 
+#if 0
 	for(k=0; k<40; k++)
 	{
 		long double val = b_sum (k);
 		val *= factorial (k);
 		printf ("%d	%Lg\n", k, val);
 	}
+#endif 
+
+#if 1
+	for (n=0; n<40; n++)
+	{
+		long double s = steiltjes_gamma (n);
+		printf ("%d	gam= %20.16Lg\n", n, s);
+	}
+#endif
+
 
 	return 0;
 }
