@@ -84,7 +84,7 @@ main (int argc, char * argv[])
 	mpf_t stie;
 	mpf_init (stie);
 	int i;
-	for (i=0; i<40; i++ ) {
+	for (i=0; i<80; i++ ) {
 		stieltjes_gamma (stie, i, prec, nterms);
 		printf ("gamma[%d] = ", i);
 		mpf_out_str (stdout, 10, 60, stie);
