@@ -107,7 +107,7 @@ void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 		{
 			int j;
 			int idx = en * (en-1) /2 - 1;
-			for (j=1; j<en; j++)
+			for (j=1; j<=en; j++)
 			{
 				mpz_init (cache[idx+j]);
 			}
@@ -1641,14 +1641,11 @@ void steiltjes_gamma (mpf_t gam, int n)
 	mpf_init (term);
 	mpf_init (sb);
 
-printf ("duude want gam=%d\n", n);
 	mpf_set_ui (gam, 0);
 	// XXXX precision violation !!
 	for (k=n; k<n+100; k++)
 	{
-printf ("duude want b=%d\n", k);
 		b_sub_n (term, k, 100);
-printf ("duude want sirta=%d\n", k);
 		i_stirbin_sum (isb, k,n);
 		mpf_set_z (sb, isb);
 		mpf_mul (term, term, sb);
@@ -1708,7 +1705,7 @@ main (int argc, char * argv[])
 	mpz_t sitrly;
 	mpz_init (sitrly);
 
-	for (n=0; n<7; n++)
+	for (n=0; n<21; n++)
 	{
 		for (k=0; k<=n; k++)
 		{
