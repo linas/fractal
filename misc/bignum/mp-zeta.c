@@ -1630,6 +1630,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 /* ==================================================================== */
 /* Return the Steiltjes constants */
 
+#if THIS_WORKS_BUT_HAS_PRECISION_PROBLEMS
 void steiltjes_gamma (mpf_t gam, int n)
 {
 	int k;
@@ -1643,9 +1644,9 @@ void steiltjes_gamma (mpf_t gam, int n)
 
 	mpf_set_ui (gam, 0);
 	// XXXX precision violation !!
-	for (k=n; k<n+240; k++)
+	for (k=n; k<n+260; k++)
 	{
-		b_sub_n (term, k, 200);
+		b_sub_n (term, k, 460);
 		i_stirbin_sum (isb, k,n);
 		mpf_set_z (sb, isb);
 		mpf_mul (term, term, sb);
@@ -1664,9 +1665,9 @@ void steiltjes_gamma (mpf_t gam, int n)
 	mpf_clear (sb);
 	mpz_clear (isb);
 }
+#endif
 
 /* ==================================================================== */
-#define TEST
 #ifdef TEST
 
 main (int argc, char * argv[])
@@ -1837,7 +1838,6 @@ main (int argc, char * argv[])
 	mpf_t stei;
 	mpf_init (stei);
 	int i;
-printf ("duude\n");
 	for (i=0; i<40; i++ ) {
 		steiltjes_gamma (stei, i);
 		printf ("gamma[%d] = ", i);

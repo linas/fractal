@@ -140,7 +140,7 @@ main (int argc, char * argv[])
 		double re_s = 0;
 		double im_s = -10+n/10.0;
 		// a_sub_s (re_a, im_a, re_s, im_s, prec);
-		b_sub_s (re_a, im_a, re_s, im_s, prec);
+		b_sub_s (re_a, im_a, re_s, im_s, prec, 100);
 
 		printf ("%d\t%12.9g\t%12.9g\t", n, re_s, im_s);
 		mpf_out_str (stdout, 10, 21, re_a);

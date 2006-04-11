@@ -113,7 +113,7 @@ void fp_zeta_even (mpf_t zeta, unsigned int n);
 void fp_zeta (mpf_t zeta, unsigned int s, int prec);
 
 /* Steiltjes constants */
-void steiltjes_gamma (mpf_t gam, int n);
+// void steiltjes_gamma (mpf_t gam, int n);
 
 /* 
  * Compute a_sub_n

@@ -17,7 +17,7 @@
 /* ==================================================================== */
 /* Return the Steiltjes constants */
 
-void steiltjes_gamma (mpf_t gam, int n)
+void steiltjes_gamma (mpf_t gam, int n, int prec, int nterms)
 {
 	int k;
 
@@ -30,9 +30,9 @@ void steiltjes_gamma (mpf_t gam, int n)
 
 	mpf_set_ui (gam, 0);
 	// XXXX precision violation !!
-	for (k=n; k<n+260; k++)
+	for (k=n; k<n+nterms; k++)
 	{
-		b_sub_n (term, k, 460);
+		b_sub_n (term, k, prec);
 		i_stirbin_sum (isb, k,n);
 		mpf_set_z (sb, isb);
 		mpf_mul (term, term, sb);
@@ -58,11 +58,24 @@ main (int argc, char * argv[])
 {
 	char str[4000];
 
+	if (argc < 3)
+	{
+		fprintf (stderr, "Usage: %s [ndigits] [nterms]\n", argv[0]); 
+		exit (1);
+	}
+
+	/* the decimal precison (number of decimal places) */
+	int prec = atoi (argv[1]);
+
+	/* number of an's to compute */
+	int nterms = atoi (argv[2]);
+
+	printf ("computing Steiltjes constants  (pr=%d nt=%d) \n", prec, nterms);
 	mpf_t stei;
 	mpf_init (stei);
 	int i;
 	for (i=0; i<40; i++ ) {
-		steiltjes_gamma (stei, i);
+		steiltjes_gamma (stei, i, prec, nterms);
 		printf ("gamma[%d] = ", i);
 		mpf_out_str (stdout, 10, 60, stei);
 		printf (";\n");
