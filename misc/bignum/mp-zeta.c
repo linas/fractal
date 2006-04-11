@@ -1643,9 +1643,9 @@ void steiltjes_gamma (mpf_t gam, int n)
 
 	mpf_set_ui (gam, 0);
 	// XXXX precision violation !!
-	for (k=n; k<n+100; k++)
+	for (k=n; k<n+240; k++)
 	{
-		b_sub_n (term, k, 100);
+		b_sub_n (term, k, 200);
 		i_stirbin_sum (isb, k,n);
 		mpf_set_z (sb, isb);
 		mpf_mul (term, term, sb);
