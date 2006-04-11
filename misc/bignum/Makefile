@@ -3,7 +3,7 @@
 #
 
 
-EXES= bound bs bsubn cont_frac minima steiltjes trunc zero-cross
+EXES= bound bs bsubn cont_frac minima stieltjes trunc zero-cross
 
 all:  $(EXES)
 
@@ -11,7 +11,7 @@ bound:	bound.o
 bs:	bs.o mp_zeta.o
 bsubn:	bsubn.o mp_zeta.o
 cont_frac:	cont_frac.o
-steiltjes:	steiltjes.o mp_zeta.o
+stieltjes:	stieltjes.o mp_zeta.o
 trunc:	trunc.o
 zero-cross:	zero-cross.o
 

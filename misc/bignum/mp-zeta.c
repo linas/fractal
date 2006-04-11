@@ -1631,7 +1631,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 /* Return the Steiltjes constants */
 
 #if THIS_WORKS_BUT_HAS_PRECISION_PROBLEMS
-void steiltjes_gamma (mpf_t gam, int n)
+void stieltjes_gamma (mpf_t gam, int n)
 {
 	int k;
 
@@ -1833,15 +1833,15 @@ main (int argc, char * argv[])
 	}
 #endif /* TEST_BERNOULLI */
 
-#define TEST_STEILTJES
-#ifdef TEST_STEILTJES
-	mpf_t stei;
-	mpf_init (stei);
+#define TEST_STIELTJES
+#ifdef TEST_STIELTJES
+	mpf_t stie;
+	mpf_init (stie);
 	int i;
 	for (i=0; i<40; i++ ) {
-		steiltjes_gamma (stei, i);
+		stieltjes_gamma (stie, i);
 		printf ("gamma[%d] = ", i);
-		mpf_out_str (stdout, 10, 60, stei);
+		mpf_out_str (stdout, 10, 60, stie);
 		printf (";\n");
 		fflush (stdout);
 	}
