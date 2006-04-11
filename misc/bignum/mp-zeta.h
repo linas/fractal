@@ -112,11 +112,15 @@ void fp_zeta_even (mpf_t zeta, unsigned int n);
  */
 void fp_zeta (mpf_t zeta, unsigned int s, int prec);
 
+/* Steiltjes constants */
+void steiltjes_gamma (mpf_t gam, int n);
+
 /* 
  * Compute a_sub_n
  * the w argument is for the power bit -- 
  */
 void a_sub_n (mpf_t a_n, mpf_t w, unsigned int n, unsigned int prec);
+void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec);
 
 /* compute a_sub_s for complex-valued s
  */

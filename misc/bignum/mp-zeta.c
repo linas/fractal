@@ -1434,6 +1434,25 @@ void a_bound_n (mpf_t b_n, unsigned int n)
 }
 
 /* ======================================================================= */
+/* 
+ * Compute b_sub_n
+ */
+void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec)
+{
+	if (0 == n)
+	{
+		mpf_set_d (b_n, 0.5);
+		return;
+	}
+	mpf_t en;
+	mpf_init (en);
+	a_sub_n (b_n, en, n-1, prec);
+	mpf_set_ui (en, n);
+	mpf_mul (b_n, b_n, en);
+	mpf_clear (en);
+}
+
+/* ======================================================================= */
 /* compute a_sub_s for complex-valued s
  */
 void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int prec)
@@ -1609,6 +1628,48 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 }
 
 /* ==================================================================== */
+/* Return the Steiltjes constants */
+
+void steiltjes_gamma (mpf_t gam, int n)
+{
+	int k;
+
+	mpz_t isb;
+	mpz_init (isb);
+
+	mpf_t term, sb;
+	mpf_init (term);
+	mpf_init (sb);
+
+printf ("duude want gam=%d\n", n);
+	mpf_set_ui (gam, 0);
+	// XXXX precision violation !!
+	for (k=n; k<n+100; k++)
+	{
+printf ("duude want b=%d\n", k);
+		b_sub_n (term, k, 100);
+printf ("duude want sirta=%d\n", k);
+		i_stirbin_sum (isb, k,n);
+		mpf_set_z (sb, isb);
+		mpf_mul (term, term, sb);
+
+		i_factorial (isb, k);
+		mpf_set_z (sb, isb);
+		mpf_div (term, term, sb);
+		mpf_add (gam, gam, term);
+	}
+	i_factorial (isb, n);
+	mpf_set_z (sb, isb);
+	mpf_mul (gam, gam, sb);
+	if (n%2) mpf_neg (gam, gam);
+
+	mpf_clear (term);
+	mpf_clear (sb);
+	mpz_clear (isb);
+}
+
+/* ==================================================================== */
+#define TEST
 #ifdef TEST
 
 main (int argc, char * argv[])
@@ -1641,7 +1702,7 @@ main (int argc, char * argv[])
 	}
 #endif
 
-#define I_STIRLING_TEST
+// #define I_STIRLING_TEST
 #ifdef I_STIRLING_TEST
 	int n, k;
 	mpz_t sitrly;
@@ -1773,6 +1834,21 @@ main (int argc, char * argv[])
 		printf ("\n");
 	}
 #endif /* TEST_BERNOULLI */
+
+#define TEST_STEILTJES
+#ifdef TEST_STEILTJES
+	mpf_t stei;
+	mpf_init (stei);
+	int i;
+printf ("duude\n");
+	for (i=0; i<40; i++ ) {
+		steiltjes_gamma (stei, i);
+		printf ("gamma[%d] = ", i);
+		mpf_out_str (stdout, 10, 60, stei);
+		printf (";\n");
+		fflush (stdout);
+	}
+#endif
 
 }
 #endif
