@@ -1,5 +1,5 @@
 /*
- * steiltjes.c
+ * stieltjes.c
  *
  * High-precison Steiltjes constants
  * Gnu Multiple-precision library.
@@ -17,7 +17,7 @@
 /* ==================================================================== */
 /* Return the Steiltjes constants */
 
-void steiltjes_gamma (mpf_t gam, int n, int prec, int nterms)
+void stieltjes_gamma (mpf_t gam, int n, int prec, int nterms)
 {
 	int k;
 
@@ -81,13 +81,13 @@ main (int argc, char * argv[])
 	mpf_set_default_prec (bits);
 
 	printf ("computing Steiltjes constants  (pr=%d nt=%d) \n", prec, nterms);
-	mpf_t stei;
-	mpf_init (stei);
+	mpf_t stie;
+	mpf_init (stie);
 	int i;
 	for (i=0; i<40; i++ ) {
-		steiltjes_gamma (stei, i, prec, nterms);
+		stieltjes_gamma (stie, i, prec, nterms);
 		printf ("gamma[%d] = ", i);
-		mpf_out_str (stdout, 10, 60, stei);
+		mpf_out_str (stdout, 10, 60, stie);
 		printf (";\n");
 		fflush (stdout);
 	}
