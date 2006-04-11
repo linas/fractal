@@ -33,7 +33,7 @@ long double stirling_first (unsigned int n, unsigned int k)
 		{
 			int j;
 			int idx = en * (en-1) /2 - 1;
-			for (j=1; j<en; j++)
+			for (j=1; j<=en; j++)
 			{
 				cache[idx+j] = 0.0;
 			}
