@@ -205,7 +205,7 @@ void c_binomial (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned 
 }
 
 /* ======================================================================= */
-/* fixed-point bernoulli number */
+/* Bernoulli number as a rational */
 
 void q_bernoulli (mpq_t bern, int n)
 {
