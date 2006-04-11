@@ -100,7 +100,7 @@ long double b_sum (int n)
 	return sum;
 }
 
-long double steiltjes_gamma (int n)
+long double stieltjes_gamma (int n)
 {
 	int k;
 
@@ -183,7 +183,7 @@ main (int argc, char *argv[])
 #if 1
 	for (n=0; n<40; n++)
 	{
-		long double s = steiltjes_gamma (n);
+		long double s = stieltjes_gamma (n);
 		printf ("%d	gam= %20.16Lg\n", n, s);
 	}
 #endif
