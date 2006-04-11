@@ -29,6 +29,12 @@ void i_factorial (mpz_t fact, unsigned int n);
  */
 void i_binomial (mpz_t bin, unsigned int n, unsigned int k);
 
+/* i_stirling
+ * Stirling number of the first kind 
+ * Normalized so that all entires are positive.
+ */
+void i_stirling_first (mpz_t s, unsigned int n, unsigned int k);
+
 /* fp_poch_rising
  * rising pochhammer symbol (x)_n, for real values of x and integer n.
  *

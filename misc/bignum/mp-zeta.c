@@ -85,7 +85,7 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
  * normalized so that they are all positive.
  * Uses dynamically-sized cache.
  */
-void stirling_first (mpz_t s, unsigned int n, unsigned int k)
+void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 {
 	/* Cache management */
 	static int nmax = 0;
@@ -138,16 +138,27 @@ void stirling_first (mpz_t s, unsigned int n, unsigned int k)
 	}
 
 	/* Use recursion to get new value */
-
-	long double s = stirling_first (n-1, k-1);
-	if (n-1 >= k)
+	/* s = stir(n-1, k-1) + (n-1) * stir(n-1, k) */
+	unsigned int i;
+	mpz_t skm, sk, en;
+	mpz_init (skm);
+	mpz_init (sk);
+	mpz_init (en);
+	mpz_set_ui (skm, 0);
+	mpz_set_ui (en, n-1);
+	for (i=1; i<n; i++)
 	{
-		mpz_t
-		s += (n-1) * stirling_first (n-1, k);
+		i_stirling_first (sk, n-1, i);
+		mpz_mul (s, en, sk);
+		mpz_add (s, s, skm);
+		mpz_set (cache[idx+i], s);
+		mpz_set (skm, sk);
 	}
+	mpz_clear (skm);
+	mpz_clear (sk);
+	mpz_clear (en);
 
-	cache[idx+k] = s;
-	return s;
+	mpz_set (s, cache[idx+k]);
 }
 
 
