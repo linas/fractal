@@ -81,6 +81,77 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 }
 
 /* ======================================================================= */
+/* stirling_first - Stirling Numbers of the First kind, 
+ * normalized so that they are all positive.
+ * Uses dynamically-sized cache.
+ */
+void stirling_first (mpz_t s, unsigned int n, unsigned int k)
+{
+	/* Cache management */
+	static int nmax = 0;
+	static mpz_t *cache = NULL;
+	if (n> nmax)
+	{
+		int newsize = n*(n+1)/2;
+		cache = (mpz_t *) realloc (cache, newsize * sizeof (mpz_t));
+
+		int en;
+		for (en=nmax+1; en <=n; en++)
+		{
+			int j;
+			int idx = en * (en-1) /2 - 1;
+			for (j=1; j<en; j++)
+			{
+				mpz_init (cache[idx+j]);
+			}
+		}
+
+		nmax = n;
+	}
+
+	/* Trivial case (not in the cache) */
+	if (0==k)
+	{
+		if (0==n) 
+		{ 
+			mpz_set_ui (s, 1);
+		}
+		else
+		{
+			mpz_set_ui (s, 0);
+		}
+		return;
+	}
+
+	/* Pull value from cache if it is there */
+	int idx = n * (n-1) / 2 -1;
+	if (mpz_cmp_ui(cache[idx+k],0))
+	{
+		mpz_set (s, cache[idx+k]);
+		return;
+	}
+
+	if (n<k)
+	{
+		mpz_set_ui (s, 0);
+		return;
+	}
+
+	/* Use recursion to get new value */
+
+	long double s = stirling_first (n-1, k-1);
+	if (n-1 >= k)
+	{
+		mpz_t
+		s += (n-1) * stirling_first (n-1, k);
+	}
+
+	cache[idx+k] = s;
+	return s;
+}
+
+
+/* ======================================================================= */
 /* fp_poch_rising
  * rising pochhammer symbol (x)_n, for real values of x and integer n.
  *
