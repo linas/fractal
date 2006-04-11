@@ -35,6 +35,47 @@ void fp_prt (char * str, mpf_t val)
 }
 
 /* ======================================================================= */
+/* Cache management */
+
+typedef struct {
+	int nmax;
+	mpz_t *cache;
+	char *ticky;
+} i_one_d_cache;
+
+int i_one_d_cache_check (i_one_d_cache *c, int n)
+{
+	if (n >= c->nmax)
+	{
+		int newsize = n+1;
+		c->cache = (mpz_t *) realloc (c->cache, newsize * sizeof (mpz_t));
+		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
+
+		int en;
+		for (en=c->nmax; en <newsize; en++)
+		{
+			mpz_init (c->cache[en]);
+			c->ticky[en] = 0;
+		}
+		c->nmax = newsize;
+		return 0;
+	}
+
+	return (c->ticky[n]);
+}
+
+void i_one_d_cache_fetch (i_one_d_cache *c, mpz_t val, int n)
+{
+	mpz_set (val, c->cache[n]);
+}
+
+void i_one_d_cache_store (i_one_d_cache *c, mpz_t val, int n)
+{
+	mpz_set (c->cache[n], val);
+	c->ticky[n] = 1;
+}
+
+/* ======================================================================= */
 /* i_poch_rising
  * rising pochhammer symbol, for integer values.
  *
@@ -62,7 +103,17 @@ void i_poch_rising (mpz_t poch, unsigned int k, unsigned int n)
  */
 void i_factorial (mpz_t fact, unsigned int n)
 {
-	i_poch_rising (fact, 1, n);
+	static i_one_d_cache cache = {.nmax=0, .cache=NULL, .ticky=NULL};
+	int hit = i_one_d_cache_check (&cache, n);
+	if (hit)
+	{
+		i_one_d_cache_fetch (&cache, fact, n);
+	}
+	else
+	{
+		i_poch_rising (fact, 1, n);
+		i_one_d_cache_store (&cache, fact, n);
+	}
 }
 
 /* ====================================================================== */

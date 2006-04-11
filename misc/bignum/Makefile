@@ -28,7 +28,7 @@ realclean:  clean
 	rm -f $(EXES) *.png *.jpeg *.tex *.dat *.ps *.eps
 
 dist:
-	tar -zcvf mp.tgz *.c *.gplot *.txt Makefile .cvsignore
+	tar -zcvf mp.tgz *.c *.h *.gplot *.txt Makefile .cvsignore
 
 .C.o:
 	$(CC) -c -O2 $<
