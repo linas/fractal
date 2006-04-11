@@ -49,11 +49,12 @@ long double stirling_first (unsigned int n, unsigned int k)
 		return 0.0L;
 	}
 
-	/* pull value from cache if it is there */
+	if (n<k) return 0.0L;
+	if (n==k) return 1.0L;
+
+	/* Pull value from cache if it is there */
 	int idx = n * (n-1) / 2 -1;
 	if (cache[idx+k] > 0.0) return cache[idx+k];
-
-	if (n<k) return 0.0L;
 
 	/* use recursion to get new value */
 	long double s = stirling_first (n-1, k-1);

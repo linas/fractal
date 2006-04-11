@@ -20,6 +20,13 @@
 #define BERNOULLI_CACHE_SIZE ARRSZ
 #define ZETA_CACHE_SIZE ARRSZ
 
+void i_prt (char * str, mpz_t val)
+{
+	printf (str);
+	mpz_out_str (stdout, 10, val);
+	printf ("\n");
+}
+
 void fp_prt (char * str, mpf_t val)
 {
 	printf (str);
@@ -123,17 +130,23 @@ void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 		return;
 	}
 
+	if (n<k)
+	{
+		mpz_set_ui (s, 0);
+		return;
+	}
+
+	if (n==k)
+	{
+		mpz_set_ui (s, 1);
+		return;
+	}
+
 	/* Pull value from cache if it is there */
 	int idx = n * (n-1) / 2 -1;
 	if (mpz_cmp_ui(cache[idx+k],0))
 	{
 		mpz_set (s, cache[idx+k]);
-		return;
-	}
-
-	if (n<k)
-	{
-		mpz_set_ui (s, 0);
 		return;
 	}
 
@@ -146,7 +159,7 @@ void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 	mpz_init (en);
 	mpz_set_ui (skm, 0);
 	mpz_set_ui (en, n-1);
-	for (i=1; i<n; i++)
+	for (i=1; i<=n; i++)
 	{
 		i_stirling_first (sk, n-1, i);
 		mpz_mul (s, en, sk);
@@ -160,7 +173,6 @@ void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 
 	mpz_set (s, cache[idx+k]);
 }
-
 
 /* ======================================================================= */
 /* fp_poch_rising
@@ -1566,6 +1578,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 }
 
 /* ==================================================================== */
+#define TEST
 #ifdef TEST
 
 main (int argc, char * argv[])
@@ -1593,6 +1606,24 @@ main (int argc, char * argv[])
 			i_binomial (bin, n ,k);
 			mpz_get_str (str, 10, bin);
 			printf ("bin (%d %d) = %s\n", n, k, str);
+		}
+		printf ("---\n");
+	}
+#endif
+
+#define I_STIRLING_TEST
+#ifdef I_STIRLING_TEST
+	int n, k;
+	mpz_t sitrly;
+	mpz_init (sitrly);
+
+	for (n=0; n<7; n++)
+	{
+		for (k=0; k<=n; k++)
+		{
+			i_stirling_first (sitrly, n ,k);
+			mpz_get_str (str, 10, sitrly);
+			printf ("sitrly (%d %d) = %s\n", n, k, str);
 		}
 		printf ("---\n");
 	}
