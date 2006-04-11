@@ -175,6 +175,37 @@ void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 }
 
 /* ======================================================================= */
+/* A funny off-by-one sum of stirling and binomial */
+
+void i_stirbin_sum (mpz_t s, unsigned int n, unsigned int m)
+{
+	unsigned int k;
+	
+	mpz_t term, stir, bin;
+	mpz_init (term);
+	mpz_init (stir);
+	mpz_init (bin);
+	mpz_set_ui (s, 0);
+	for (k=m; k<=n; k++)
+	{
+		i_stirling_first (stir, n, k);
+		i_binomial (bin, k,m);
+		mpz_mul (term, bin, stir);
+		if (k%2)
+		{
+			mpz_sub (s, s, term);
+		}
+		else
+		{
+			mpz_add (s, s, term);
+		}
+	}
+	mpz_clear (term);
+	mpz_clear (stir);
+	mpz_clear (bin);
+}
+
+/* ======================================================================= */
 /* fp_poch_rising
  * rising pochhammer symbol (x)_n, for real values of x and integer n.
  *
@@ -1578,7 +1609,6 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 }
 
 /* ==================================================================== */
-#define TEST
 #ifdef TEST
 
 main (int argc, char * argv[])
