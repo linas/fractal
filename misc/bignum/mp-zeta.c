@@ -1439,17 +1439,44 @@ void a_bound_n (mpf_t b_n, unsigned int n)
  */
 void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec)
 {
+	/* create and use a cache */
+	static int ncache = 0;
+	static mpf_t *cache;
+	static char *ticky;
+	if (ncache <= n)
+	{
+		cache = (mpf_t *) realloc (cache, (n+1)*sizeof (mpf_t));
+		ticky = (char *) realloc (ticky, (n+1)*sizeof (char));
+		int i;
+		for (i=ncache; i<=n; i++)
+		{
+			mpf_init (cache[i]);
+			ticky[i] = 0;
+		}
+		ncache = n+1;
+	}
 	if (0 == n)
 	{
 		mpf_set_d (b_n, 0.5);
 		return;
 	}
+	
+	/* Pull a value out of the cache, if there's a value there */
+	if (ticky[n])
+	{
+		mpf_set (b_n, cache[n]);
+		return;
+	}
+
 	mpf_t en;
 	mpf_init (en);
 	a_sub_n (b_n, en, n-1, prec);
 	mpf_set_ui (en, n);
 	mpf_mul (b_n, b_n, en);
 	mpf_clear (en);
+
+	mpf_set (cache[n], b_n);
+	ticky[n] = 1;
 }
 
 /* ======================================================================= */
