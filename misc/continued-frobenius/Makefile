@@ -49,7 +49,7 @@ frobenius: frobenius.o $(LIB)/binomial.o $(LIB)/harmonic.o
 gsl-diag: gsl-diag.o $(LIB)/binomial.o $(LIB)/harmonic.o
 harmonic: harmonic.o
 riemann: riemann.o $(LIB)/binomial.o $(LIB)/harmonic.o
-stirling: stirling.o $(LIB)/binomial.o 
+stirling: stirling.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
 sum: sum.o ache.o  $(LIB)/binomial.o $(LIB)/harmonic.o
 swap: swap.o
 tryall: tryall.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o

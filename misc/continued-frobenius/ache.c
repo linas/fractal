@@ -96,6 +96,13 @@ a_sub_n_poor_convergence (int n)
 	return val;
 }
 
+long double 
+b_sub_n (int n)
+{
+	if (n==0) return 0.5L;
+	return ((long double) n) * a_sub_n (n-1);
+}
+
 // ==========================================================
 // return the p'th element of the zeroth eigenvector.
 // this is the eigenvector with eigenvalue 1

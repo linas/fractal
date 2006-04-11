@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #include "binomial.h"
+#include "ache.h"
 
 /* return stirling numbers of the first kind, 
  * normalized so that they are all positive.
@@ -84,6 +85,21 @@ long double sb_sum (unsigned int n, unsigned int m)
 	return s;
 }
 
+long double b_sum (int n)
+{
+	int k;
+
+	long double sum = 0.0;
+	for (k=n; k<40; k++)
+	{
+		long double term = stirling_first (k,n) / factorial (k);
+		term *= b_sub_n (k);
+		sum += term;
+	}
+
+	return sum;
+}
+
 int
 main (int argc, char *argv[]) 
 {
@@ -112,13 +128,33 @@ main (int argc, char *argv[])
 	int order = atoi (argv[1]);
 
 	n=order;
+#if 0
 	for (k=0; k<=n; k++)
 	{
 		long double s = sb_sum (n,k);
 		s /= factorial (n);
 		double x = ((double) k)/ ((double) n);
 		printf ("%d	%g	%Lg\n", k, x, s);
-}
+	}
+#endif
+
+#if 0
+	k = order;
+	for (n=k; n<k+140; n++)
+	{
+		long double s = sb_sum (n,k);
+		// s /= factorial (n);
+		// s *= factorial (k);
+		printf ("%d	%Lg\n", n, s);
+	}
+#endif
+
+	for(k=0; k<40; k++)
+	{
+		long double val = b_sum (k);
+		val *= factorial (k);
+		printf ("%d	%Lg\n", k, val);
+	}
 
 	return 0;
 }
