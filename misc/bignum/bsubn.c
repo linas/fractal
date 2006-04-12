@@ -126,7 +126,7 @@ main (int argc, char * argv[])
 	}
 #endif
 	
-#define B_SUB_N
+// #define B_SUB_N
 #ifdef B_SUB_N
 
 	mpf_t b_n, en, pi, sq, term, p_n, prod;
@@ -198,18 +198,25 @@ main (int argc, char * argv[])
 	}
 #endif
 
-// #define TEST
+#define TEST
 #ifdef TEST
-	mpf_t z;
-	mpf_init (z);
+	mpf_t za, zb;
+	mpf_init (za);
+	mpf_init (zb);
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed with %d bits of default mpf \n", bits);
 	// fp_zeta (z, 121, prec);
 	// fp_hasse_zeta (z, 121, prec);
-	fp_borwein_zeta (z, 121, prec);
-	printf ("done: ");
-	mpf_out_str (stdout, 10, prec, z);
-	printf ("\n");
+	int i;
+	for (i=3; i<121; i+=2)
+	{
+		fp_borwein_zeta (za, i, prec);
+		fp_zeta_odd_plouffe (zb, i, prec);
+		mpf_sub (za, za, zb);
+		printf ("done: %d  ", i);
+		mpf_out_str (stdout, 10, 30, za);
+		printf ("\n");
+	}
 #endif
 }
 
