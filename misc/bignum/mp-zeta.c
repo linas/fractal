@@ -1877,7 +1877,8 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 
 	if (0 == plo)
 	{
-		fp_zeta_brute (zeta, s, prec);
+		// fp_zeta_brute (zeta, s, prec);
+		fp_borwein_zeta (zeta, s, prec);
 	}
 
 	/* Save computed value to the cache. */

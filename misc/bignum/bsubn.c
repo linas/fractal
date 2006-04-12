@@ -40,7 +40,7 @@ main (int argc, char * argv[])
 	/* The largest that a binomial (n,k) will get is 2^n
 	 * so need an extra norder bits if going to order norder. 
 	 * And pad a bit, just to be safe... */
-	int bits = (int) (v + 100 + norder);
+	int bits = (int) (v + 100 + 3.3*norder);
 	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
@@ -126,7 +126,7 @@ main (int argc, char * argv[])
 	}
 #endif
 	
-// #define B_SUB_N
+#define B_SUB_N
 #ifdef B_SUB_N
 
 	mpf_t b_n, en, pi, sq, term, p_n, prod;
@@ -198,6 +198,8 @@ main (int argc, char * argv[])
 	}
 #endif
 
+// #define TEST
+#ifdef TEST
 	mpf_t z;
 	mpf_init (z);
 	printf ("# computed to precision of %d decimal places\n", prec);
@@ -206,7 +208,8 @@ main (int argc, char * argv[])
 	// fp_hasse_zeta (z, 121, prec);
 	fp_borwein_zeta (z, 121, prec);
 	printf ("done: ");
-	mpf_out_str (stdout, 10, 41, z);
+	mpf_out_str (stdout, 10, prec, z);
 	printf ("\n");
+#endif
 }
 
