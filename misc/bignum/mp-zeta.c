@@ -1897,7 +1897,8 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	/* Bump precision so as to increase cache hits on next go-around. */
 	// prec += 100;
 
-	int plo = fp_zeta_odd_plouffe (zeta, s, prec);
+	int plo = 0;
+	// plo = fp_zeta_odd_plouffe (zeta, s, prec);
 
 	if (0 == plo)
 	{
