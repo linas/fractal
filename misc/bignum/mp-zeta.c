@@ -16,10 +16,6 @@
 
 #include "mp_zeta.h"
 
-#define ARRSZ 4000
-#define BERNOULLI_CACHE_SIZE ARRSZ
-#define ZETA_CACHE_SIZE ARRSZ
-
 void i_prt (char * str, mpz_t val)
 {
 	printf (str);
@@ -38,41 +34,271 @@ void fp_prt (char * str, mpf_t val)
 /* Cache management */
 
 typedef struct {
-	int nmax;
+	unsigned int nmax;
 	mpz_t *cache;
 	char *ticky;
-} i_one_d_cache;
+} i_cache;
 
-int i_one_d_cache_check (i_one_d_cache *c, int n)
+
+#define DECLARE_I_CACHE(name)         \
+	static i_cache name = {.nmax=0, .cache=NULL, .ticky=NULL}
+
+/** i_one_d_cache_check() -- check if mpz_t value is in the cache
+ *  Returns true if the value is in the cache, else returns false.
+ *  This assumes a 1-dimensional cache layout (simple aray)
+ */
+int i_one_d_cache_check (i_cache *c, unsigned int n)
 {
-	if (n >= c->nmax)
+	if (n > c->nmax)
 	{
-		int newsize = n+1;
+		unsigned int newsize = n+1;
 		c->cache = (mpz_t *) realloc (c->cache, newsize * sizeof (mpz_t));
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
-		int en;
+		unsigned int en;
 		for (en=c->nmax; en <newsize; en++)
 		{
 			mpz_init (c->cache[en]);
 			c->ticky[en] = 0;
 		}
-		c->nmax = newsize;
+		c->nmax = n;
 		return 0;
 	}
 
 	return (c->ticky[n]);
 }
 
-void i_one_d_cache_fetch (i_one_d_cache *c, mpz_t val, int n)
+/** 
+ * i_one_d_cache_fetch - fetch value from cache
+ */
+void i_one_d_cache_fetch (i_cache *c, mpz_t val, unsigned int n)
 {
 	mpz_set (val, c->cache[n]);
 }
 
-void i_one_d_cache_store (i_one_d_cache *c, mpz_t val, int n)
+/**
+ * i_one_d_cache_store - stre value in cache
+ */
+void i_one_d_cache_store (i_cache *c, mpz_t val, unsigned int n)
 {
 	mpz_set (c->cache[n], val);
 	c->ticky[n] = 1;
+}
+
+/* ======================================================================= */
+/** i_triangle_cache_check() -- check if mpz_t value is in the cache
+ *  Returns true if the value is in the cache, else returns false.
+ *  This assumes a trianglular cache layout (two indecies)
+ *  with 0 <= k <=n
+ */
+int i_triangle_cache_check (i_cache *c, unsigned int n, unsigned int k)
+{
+	if (n> c->nmax)
+	{
+		unsigned int newsize = (n+1)*(n+2)/2;
+		c->cache = (mpz_t *) realloc (c->cache, newsize * sizeof (mpz_t));
+		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
+
+		unsigned int en;
+		for (en=c->nmax+1; en <=n; en++)
+		{
+			unsigned int j;
+			unsigned int idx = en * (en+1) /2 ;
+			for (j=0; j<=en; j++)
+			{
+				mpz_init (c->cache[idx+j]);
+				c->ticky[idx+j]=0;
+			}
+		}
+		c->nmax = n;
+		return 0;
+	}
+	unsigned int idx = n * (n+1) /2 ;
+	return c->ticky[idx+k];
+}
+
+/** 
+ * i_triangle_cache_fetch - fetch value from cache
+ */
+void i_triangle_cache_fetch (i_cache *c, mpz_t val, unsigned int n, unsigned int k)
+{
+	unsigned int idx = n * (n+1) /2 ;
+	mpz_set (val, c->cache[idx+k]);
+}
+
+/**
+ * i_triangle_cache_store - store value in cache
+ */
+void i_triangle_cache_store (i_cache *c, mpz_t val, unsigned int n, unsigned int k)
+{
+	unsigned int idx = n * (n+1) /2 ;
+	mpz_set (c->cache[idx+k], val);
+	c->ticky[idx+k] = 1;
+}
+
+/* ======================================================================= */
+/* Cache management */
+/* pure cut-n-paste of he integer variant */
+
+typedef struct {
+	unsigned int nmax;
+	mpq_t *cache;
+	char *ticky;
+} q_cache;
+
+#define DECLARE_Q_CACHE(name)         \
+	static q_cache name = {.nmax=0, .cache=NULL, .ticky=NULL}
+
+/** q_one_d_cache_check() -- check if mpq_t value is in the cache
+ *  Returns true if the value is in the cache, else returns false.
+ *  This assumes a 1-dimensional cache layout (simple aray)
+ */
+int q_one_d_cache_check (q_cache *c, unsigned int n)
+{
+	if (n > c->nmax)
+	{
+		unsigned int newsize = n+1;
+		c->cache = (mpq_t *) realloc (c->cache, newsize * sizeof (mpq_t));
+		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
+
+		unsigned int en;
+		for (en=c->nmax; en <newsize; en++)
+		{
+			mpq_init (c->cache[en]);
+			c->ticky[en] = 0;
+		}
+		c->nmax = n;
+		return 0;
+	}
+
+	return (c->ticky[n]);
+}
+
+/** 
+ * q_one_d_cache_fetch - fetch value from cache
+ */
+void q_one_d_cache_fetch (q_cache *c, mpq_t val, unsigned int n)
+{
+	mpq_set (val, c->cache[n]);
+}
+
+/**
+ * q_one_d_cache_store - stre value in cache
+ */
+void q_one_d_cache_store (q_cache *c, mpq_t val, unsigned int n)
+{
+	mpq_set (c->cache[n], val);
+	c->ticky[n] = 1;
+}
+
+/* ======================================================================= */
+/* Cache management */
+/* Almost a cut-n-paste of above, but using fp instead */
+
+typedef struct {
+	unsigned int nmax;
+	mpf_t *cache;
+	int *precision; /* base-10 precision of cached value */
+} fp_cache;
+
+
+#define DECLARE_FP_CACHE(name)         \
+	static fp_cache name = {.nmax=0, .cache=NULL, .precision=NULL}
+
+/** fp_one_d_cache_check() -- check if mpf_t value is in the cache
+ *  If there is a cached value, this returns the precision of the 
+ *  value in the cache; else it returns zero.
+ *  This assumes a 1-dimensional cache layout (simple array)
+ */
+int fp_one_d_cache_check (fp_cache *c, unsigned int n)
+{
+	if (n > c->nmax)
+	{
+		unsigned int newsize = n+1;
+		c->cache = (mpf_t *) realloc (c->cache, newsize * sizeof (mpf_t));
+		c->precision = (int *) realloc (c->precision, newsize * sizeof (int));
+
+		unsigned int en;
+		for (en=c->nmax; en <newsize; en++)
+		{
+			mpf_init (c->cache[en]);
+			c->precision[en] = 0;
+		}
+		c->nmax = n;
+		return 0;
+	}
+
+	return (c->precision[n]);
+}
+
+/** 
+ * fp_one_d_cache_fetch - fetch value from cache
+ */
+void fp_one_d_cache_fetch (fp_cache *c, mpf_t val, unsigned int n)
+{
+	mpf_set (val, c->cache[n]);
+}
+
+/**
+ * fp_one_d_cache_store - stre value in cache
+ */
+void fp_one_d_cache_store (fp_cache *c, mpf_t val, unsigned int n, int prec)
+{
+	mpf_set (c->cache[n], val);
+	c->precision[n] = prec;
+}
+
+/* ======================================================================= */
+/** fp_triangle_cache_check() -- check if mpf_t value is in the cache
+ *  If there is a cached value, this returns the precision of the 
+ *  value in the cache; else it returns zero.
+ *  This assumes a trianglular cache layout (two indecies)
+ *  with 0 <= k <=n
+ */
+int fp_triangle_cache_check (fp_cache *c, unsigned int n, unsigned int k)
+{
+	if (n> c->nmax)
+	{
+		unsigned int newsize = (n+1)*(n+2)/2;
+		c->cache = (mpf_t *) realloc (c->cache, newsize * sizeof (mpf_t));
+		c->precision = (int *) realloc (c->precision, newsize * sizeof (int));
+
+		unsigned int en;
+		for (en=c->nmax+1; en <=n; en++)
+		{
+			unsigned int j;
+			unsigned int idx = en * (en+1) /2 ;
+			for (j=0; j<=en; j++)
+			{
+				mpf_init (c->cache[idx+j]);
+				c->precision[idx+j]=0;
+			}
+		}
+		c->nmax = n;
+		return 0;
+	}
+	unsigned int idx = n * (n+1) /2 ;
+	return c->precision[idx+k];
+}
+
+/** 
+ * fp_triangle_cache_fetch - fetch value from cache
+ */
+void fp_triangle_cache_fetch (fp_cache *c, mpf_t val, unsigned int n, unsigned int k)
+{
+	unsigned int idx = n * (n+1) /2 ;
+	mpf_set (val, c->cache[idx+k]);
+}
+
+/**
+ * fp_triangle_cache_store - store value in cache
+ */
+void fp_triangle_cache_store (fp_cache *c, mpf_t val, 
+					 unsigned int n, unsigned int k, int prec)
+{
+	unsigned int idx = n * (n+1) /2 ;
+	mpf_set (c->cache[idx+k], val);
+	c->precision[idx+k] = prec;
 }
 
 /* ======================================================================= */
@@ -85,7 +311,6 @@ void i_one_d_cache_store (i_one_d_cache *c, mpz_t val, int n)
 void i_poch_rising (mpz_t poch, unsigned int k, unsigned int n)
 {
 	mpz_t acc;
-	
 	mpz_init (acc);
 
 	mpz_set_ui (poch, 1);
@@ -99,11 +324,18 @@ void i_poch_rising (mpz_t poch, unsigned int k, unsigned int n)
 	mpz_clear (acc);
 }
 
-/* i_factorial -- the factorial
+/** 
+ * i_factorial -- the factorial
  */
 void i_factorial (mpz_t fact, unsigned int n)
 {
-	static i_one_d_cache cache = {.nmax=0, .cache=NULL, .ticky=NULL};
+	DECLARE_I_CACHE (cache);
+
+	if (1 >= n)
+	{
+		mpz_set_ui (fact, 1);
+		return;
+	}
 	int hit = i_one_d_cache_check (&cache, n);
 	if (hit)
 	{
@@ -121,7 +353,7 @@ void i_factorial (mpz_t fact, unsigned int n)
  * Binomial coefficient (n k)
  */
 
-void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
+void i_binomial_compute (mpz_t bin, unsigned int n, unsigned int k)
 {
 	mpz_t top, bot;
 
@@ -138,6 +370,33 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 	mpz_clear (bot);
 }
 
+/**
+ * i_binomial - return the binomial coefficient
+ * Uses a cached value if avalable.
+ */ 
+void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
+{
+	DECLARE_I_CACHE (cache);
+
+	if (1 >= n)
+	{
+		mpz_set_ui (bin, 1);
+		return;
+	}
+
+	if (2*k < n) k = n-k;
+	int hit = i_triangle_cache_check (&cache, n, k);
+	if (hit)
+	{
+		i_triangle_cache_fetch (&cache, bin, n, k);
+	}
+	else
+	{
+		i_binomial_compute (bin, n, k);
+		i_triangle_cache_store (&cache, bin, n, k);
+	}
+}
+
 /* ======================================================================= */
 /* stirling_first - Stirling Numbers of the First kind, 
  * normalized so that they are all positive.
@@ -145,27 +404,7 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
  */
 void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 {
-	/* Cache management */
-	static int nmax = 0;
-	static mpz_t *cache = NULL;
-	if (n> nmax)
-	{
-		int newsize = n*(n+1)/2;
-		cache = (mpz_t *) realloc (cache, newsize * sizeof (mpz_t));
-
-		int en;
-		for (en=nmax+1; en <=n; en++)
-		{
-			int j;
-			int idx = en * (en-1) /2 - 1;
-			for (j=1; j<=en; j++)
-			{
-				mpz_init (cache[idx+j]);
-			}
-		}
-
-		nmax = n;
-	}
+	DECLARE_I_CACHE (cache);
 
 	/* Trivial case (not in the cache) */
 	if (0==k)
@@ -194,13 +433,13 @@ void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 	}
 
 	/* Pull value from cache if it is there */
-	int idx = n * (n-1) / 2 -1;
-	if (mpz_cmp_ui(cache[idx+k],0))
+	int hit = i_triangle_cache_check (&cache, n, k);
+	if (hit)
 	{
-		mpz_set (s, cache[idx+k]);
+		i_triangle_cache_fetch (&cache, s, n, k);
 		return;
 	}
-
+	
 	/* Use recursion to get new value */
 	/* s = stir(n-1, k-1) + (n-1) * stir(n-1, k) */
 	unsigned int i;
@@ -215,20 +454,20 @@ void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 		i_stirling_first (sk, n-1, i);
 		mpz_mul (s, en, sk);
 		mpz_add (s, s, skm);
-		mpz_set (cache[idx+i], s);
+		i_triangle_cache_store (&cache, s, n, i);
 		mpz_set (skm, sk);
 	}
 	mpz_clear (skm);
 	mpz_clear (sk);
 	mpz_clear (en);
 
-	mpz_set (s, cache[idx+k]);
+	i_triangle_cache_fetch (&cache, s, n, k);
 }
 
 /* ======================================================================= */
 /* A funny off-by-one sum of stirling and binomial */
 
-void i_stirbin_sum (mpz_t s, unsigned int n, unsigned int m)
+void i_stirbin_sum_compute (mpz_t s, unsigned int n, unsigned int m)
 {
 	unsigned int k;
 	
@@ -254,6 +493,243 @@ void i_stirbin_sum (mpz_t s, unsigned int n, unsigned int m)
 	mpz_clear (term);
 	mpz_clear (stir);
 	mpz_clear (bin);
+}
+
+void i_stirbin_sum (mpz_t s, unsigned int n, unsigned int m)
+{
+	DECLARE_I_CACHE (cache);
+
+	if (0 >= n)
+	{
+		mpz_set_ui (s, 1);
+		return;
+	}
+
+	int hit = i_triangle_cache_check (&cache, n, m);
+	if (hit)
+	{
+		i_triangle_cache_fetch (&cache, s, n, m);
+	}
+	else
+	{
+		i_stirbin_sum_compute (s, n, m);
+		i_triangle_cache_store (&cache, s, n, m);
+	}
+}
+
+/* ======================================================================= */
+/**
+ * i_pow - raise n to the m power
+ */
+
+void i_pow (mpz_t p, unsigned int n, unsigned int m)
+{
+	DECLARE_I_CACHE (cache);
+	if ((1 == n) || (0 == m))
+	{
+		mpz_set_ui (p, 1); 
+		return;
+	}
+
+	int hit = i_triangle_cache_check (&cache, n+m, m);
+	if (hit)
+	{
+		i_triangle_cache_fetch (&cache, p, n+m, m);
+	}
+	else
+	{
+		i_pow (p, n, m-1);
+		mpz_mul_ui (p, p, n);
+		i_triangle_cache_store (&cache, p, n+m, m);
+	}
+}
+
+/**
+ * fp_inv_pow - raise n to the -m power, where m must be positive. 
+ */
+
+void fp_inv_pow (mpf_t p, unsigned int n, unsigned int m)
+{
+	DECLARE_FP_CACHE (cache);
+	if (1 == n)
+	{
+		mpf_set_ui (p, 1); 
+		return;
+	}
+
+	int hit = fp_triangle_cache_check (&cache, n+m, m);
+	if (hit)
+	{
+		fp_triangle_cache_fetch (&cache, p, n+m, m);
+	}
+	else
+	{
+		mpz_t ip;
+		mpz_init (ip);
+		i_pow (ip, n, m);
+		mpf_set_z (p, ip);
+		mpf_ui_div (p, 1, p);
+		mpz_clear (ip);
+		fp_triangle_cache_store (&cache, p, n+m, m, 1);
+	}
+}
+
+/* ======================================================================= */
+/* binomial transform of power sum */
+
+void fp_bin_xform_pow_compute (mpf_t bxp, unsigned int n, unsigned int s)
+{
+	mpz_t bin;
+	mpz_init (bin);
+
+	mpf_t vp, term;
+	mpf_init (vp);
+	mpf_init (term);
+	
+	mpf_set_ui (bxp, 0);
+	int k;
+	for (k=0; k<=n; k++)
+	{
+		i_binomial (bin, n, k);
+		mpf_set_z (term, bin);
+		fp_inv_pow (vp, k+1, s);
+		mpf_mul (term, term, vp);
+
+		if (k%2)
+		{
+			mpf_sub (bxp, bxp, term);
+		}
+		else
+		{
+			mpf_add (bxp, bxp, term);
+		}
+	}
+	mpz_clear (bin);
+	mpf_clear (vp);
+	mpf_clear (term);
+}
+
+void fp_bin_xform_pow (mpf_t bxp, unsigned int n, unsigned int s)
+{
+	DECLARE_FP_CACHE (cache);
+	if (0 == n)
+	{
+		mpf_set_ui (bxp, 1); 
+		return;
+	}
+	int hit = fp_triangle_cache_check (&cache, n+s, s);
+	if (hit)
+	{
+		fp_triangle_cache_fetch (&cache, bxp, n+s, s);
+	}
+	else
+	{
+		fp_bin_xform_pow_compute (bxp, n, s);
+		fp_triangle_cache_store (&cache, bxp, n+s, s, 1);
+	}
+}
+
+/* ======================================================================= */
+/* Helmut Hasse zeta -- use the globally convergent Helmut Hasse zeta
+ * series for computing the value of the zeta ... 
+ */
+
+void fp_hasse_zeta_compute (mpf_t zeta, unsigned int s, int prec)
+{
+	// This gets the decimal pecision just right!
+	// This works because the bin_xform_pow is always of order 1.
+	int nmax = (3.321928*prec+3);
+	int n;
+	
+	mpf_t twon, term;
+	mpf_init (twon);
+	mpf_init (term);
+	
+	mpf_set_ui (twon, 1);
+	mpf_div_ui (twon, twon, 2);
+	
+	mpf_set_ui (zeta, 0);
+	for (n=0; n<nmax; n++)
+	{
+		fp_bin_xform_pow (term, n, s);
+		mpf_mul (term, term, twon);
+		mpf_add (zeta, zeta, term);
+
+		mpf_div_ui (twon, twon, 2);
+	}
+	mpf_set_ui (twon, 1);
+	mpf_div_2exp (twon, twon, s-1);
+	
+	mpf_set_ui (term, 1);
+	mpf_sub (term, term, twon);
+	
+	mpf_div (zeta, zeta, term);
+
+	mpf_clear (twon);
+	mpf_clear (term);
+}
+
+void fp_hasse_zeta (mpf_t zeta, unsigned int s, int prec)
+{
+	DECLARE_FP_CACHE (cache);
+	if (1 >= s)
+	{
+		mpf_set_ui (zeta, 0); 
+		return;
+	}
+	int have_prec = fp_one_d_cache_check (&cache, s);
+	if (have_prec >= prec)
+	{
+		fp_one_d_cache_fetch (&cache, zeta, s);
+	}
+	else
+	{
+		fp_hasse_zeta_compute (zeta, s, prec);
+		fp_one_d_cache_store (&cache, zeta, s, prec);
+	}
+}
+
+/* ======================================================================= */
+/** 
+ * fp_harmonic -- The harmonic number
+ */
+void fp_harmonic (mpf_t harm, unsigned int n)
+{
+	DECLARE_FP_CACHE (cache);
+
+	if (1 >= n)
+	{
+		mpf_set_ui (harm, 1);
+		return;
+	}
+	int hit = fp_one_d_cache_check (&cache, n);
+	if (hit)
+	{
+		fp_one_d_cache_fetch (&cache, harm, n);
+		return;
+	}
+	
+	int istart = n-1;
+	hit = fp_one_d_cache_check (&cache, istart);
+	while (0 == hit && istart>1)
+	{
+		istart--;
+		hit = fp_one_d_cache_check (&cache, istart);
+	}
+
+	int i;
+	fp_harmonic (harm, istart);
+
+	mpf_t term;
+	mpf_init (term);
+	for (i=istart+1; i<=n; i++)
+	{
+		mpf_set_ui (term, 1);
+		mpf_div_ui (term, term, i);
+		mpf_add (harm, harm, term);
+		fp_one_d_cache_store (&cache, harm, i, 1);
+	}
+	mpf_clear (term);
 }
 
 /* ======================================================================= */
@@ -385,79 +861,54 @@ void c_binomial (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned 
 
 void q_bernoulli (mpq_t bern, int n)
 {
-	int i;
-	static mpq_t b_cache[BERNOULLI_CACHE_SIZE];
-	static short b_c[BERNOULLI_CACHE_SIZE];
-	static int is_init = 0;
-
-	if (0 == is_init)
-	{
-		is_init = 1;
-		for (i=0; i<BERNOULLI_CACHE_SIZE; i++)
-		{
-			mpq_init (b_cache[i]);
-			b_c[i] = 0;
-		}
-		mpq_set_ui (b_cache[0], 1, 1);
-	}
+	DECLARE_Q_CACHE (cache);
 
 	if (0>n) return;
 	if (0==n) {	mpq_set_ui (bern, 1,1); return; }
 	if (1==n) { mpq_set_si (bern, -1,2); return; }
 
-	/* all other odd n's aer zero */
+	/* All other odd n's are zero */
 	if (n%2) { mpq_set_ui (bern, 0, 1);  return; }
 
 	int hn = n/2;
-	if (BERNOULLI_CACHE_SIZE <= hn) 
-	{ 
-		fprintf (stderr, "Error, bernoulli overflow\n"); 
-		exit(1); 
-	}
-	
-	/* See if we get lucky and find it in the cache */
-	if (b_c[hn]) 
+
+	int hit = q_one_d_cache_check (&cache, hn);
+	if (hit)
 	{
-		mpq_set (bern, b_cache[hn]);
+		q_one_d_cache_fetch (&cache, bern, hn);
 		return;
 	}
-
+	
+	/* Not found in cache, will have to compute */
 	mpz_t binom;
 	mpz_init (binom);
 
-	mpq_t acc, term, tmp;
-	mpq_init (acc);
+	mpq_t term, tmp;
 	mpq_init (term);
 	mpq_init (tmp);
 
-	mpq_set_si (acc, 1-n, 2);
+	mpq_set_si (bern, 1-n, 2);
 	
+	int i;
 	for (i=1; i<hn; i++)
 	{
 		int k = 2*i;
 		i_binomial (binom, n+1, k);
 
-		if (0 == b_c[i])
-		{
-			q_bernoulli (tmp, k);
-		}
-
 		mpq_set_z (tmp, binom);
-		mpq_mul (term, tmp, b_cache[i]);
-		mpq_add (tmp, acc, term);
-		mpq_set (acc, tmp);
+		q_bernoulli (term, k);
+		mpq_mul (term, term, tmp);
+		mpq_add (bern, bern, term);
 	}
 
 	mpq_set_si (tmp, -1, n+1);
-	mpq_mul (bern, acc, tmp);
-
-	mpq_set (b_cache[hn], bern);
-	b_c[hn] = 1;
+	mpq_mul (bern, bern, tmp);
 
 	mpz_clear (binom);
 	mpq_clear (term);
-	mpq_clear (acc);
 	mpq_clear (tmp);
+
+	q_one_d_cache_store (&cache, bern, hn);
 }
 
 /* ======================================================================= */
@@ -679,6 +1130,8 @@ void fp_zeta9 (mpf_t zeta)
 	mpf_set (zeta, e);
 }
 
+/* ======================================================================= */
+
 void fp_zeta_even_ui (mpf_t zeta, unsigned int n, unsigned int div)
 {
 	mpf_t pi, pip;
@@ -715,8 +1168,11 @@ void fp_zeta_even_str (mpf_t zeta, unsigned int n, char * snum, char * sdenom)
 	mpf_clear (denom);
 }
 
+/* ======================================================================= */
 /* Compute and return the "exact" result for the zeta function for 
- * any value of even n 
+ * any value of even n. This is obtained by recursievly computing
+ * the Bernoulli numbers, and multiplying by an appropriate factor
+ * of pi and factorial. 
  */
 void fp_zeta_even (mpf_t zeta, unsigned int n)
 {
@@ -760,10 +1216,11 @@ void fp_zeta_even (mpf_t zeta, unsigned int n)
 	mpz_clear (fact);
 }
 
-/* return sum_n (n^k (e^{\pi k} \pm 1)^{-1}
+/* ======================================================================= */
+/* Return sum_n (n^k (e^{\pi k} \pm 1)^{-1}
  * The Simon Plouffe Ramanujan inspired thingy
  */
-void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
+static void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 {
 	mpf_t e_pi, en, enp, epip, eppos, epneg, term, oterm, acc;
 
@@ -781,7 +1238,8 @@ void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 	mpf_set_ui (ess_plus, 0);
 	mpf_set_ui (ess_minus, 0);
 
-	double mex = ((double) prec) * log (10.0) / log(2.0);
+	// double mex = ((double) prec) * log (10.0) / log(2.0);
+	double mex = ((double) prec) * 3.321928095;
 	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
 	mpf_init (maxterm);
@@ -828,7 +1286,7 @@ void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned int prec)
 }
 
 /* Implement Simon Plouffe odd-zeta sums */
-void fp_zeta_odd (mpf_t zeta, unsigned int n, 
+static void fp_zeta_odd_helper (mpf_t zeta, unsigned int n, 
 					 char *sdiv, char * spi, char * sminus, char * splus,  
 					 unsigned int prec)
 {
@@ -881,407 +1339,319 @@ void fp_zeta_odd (mpf_t zeta, unsigned int n,
 	mpf_clear (c_minus);
 }
 
-/* ======================================================================= */
-/* fp_zeta
- * Floating-point-valued Riemann zeta for positive integer arguments 
- * return value placed in the arg "zeta".
- *
- * Simple-minded algo, carries out math to prec decimal digits
- *
- * OLEIS A046988
- *  Numerator of zeta(2n)/Pi^(2n)
- * 0,1,1,1,1,1,691,2,3617,43867,174611,155366,236364091,
- * 1315862,6785560294,6892673020804,7709321041217,151628697551,
- * 26315271553053477373,308420411983322,261082718496449122051,
- * 3040195287836141605382,5060594468963822588186
- *
- * OLEIS A002432 
- *  Denominator of zeta(2n)/Pi^(2n)
- *  6,90,945,9450,93555,638512875,18243225,325641566250,
- *  38979295480125,1531329465290625,13447856940643125,
- *  201919571963756521875,11094481976030578125,
- *  564653660170076273671875,5660878804669082674070015625,
- *  62490220571022341207266406250,12130454581433748587292890625
- */
-void fp_zeta (mpf_t zeta, unsigned int s, int prec)
+int fp_zeta_odd_plouffe (mpf_t zeta, unsigned int n, unsigned int prec)
 {
-	unsigned long int us = s;
-
-	static int first_time = 1;
-	static mpf_t zeta_cache[ZETA_CACHE_SIZE];
-	static int zprec[ZETA_CACHE_SIZE];
-	static unsigned int last_term[ZETA_CACHE_SIZE];
-
-	/* Cache of best values so far */
-	if(first_time)
-	{
-		first_time = 0;
-		int i;
-		for (i=0; i<ZETA_CACHE_SIZE; i++)
-		{
-			zprec[i] = 0;
-		}
-	}
-
-	if (s<2) return;
-	
-	/* Lets see if we can get lucky with the cache. */
-	if ((s < ZETA_CACHE_SIZE) && (prec < zprec[s]))
-	{
-		mpf_set (zeta, zeta_cache[s]);
-		return;
-	}
-
-	/* Try some special fast-paths */
-	int slow_path = 0;
-	int imprecise = 1;
-
-	/* bump precision for fast path so ast to increase cache hits */
-	if ((120 > s) || (0==s%2)) prec += 100;
-
-#if HARD_CODED_STUFF
-	imprecise = 0;
-	switch (s)
-	{
-		case 2: fp_zeta2 (zeta); break;
-		case 3: fp_zeta3 (zeta); break;
-		case 4: fp_zeta_even_ui (zeta, 4, 90); break;
-		case 5: fp_zeta5 (zeta); break;
-		case 6: fp_zeta_even_ui (zeta, 6, 945); break;
-		case 7: fp_zeta7 (zeta); break;
-		case 8: fp_zeta_even_ui (zeta, 8, 9450); break;
-		case 9: fp_zeta9 (zeta); break;
-		case 10: fp_zeta_even_ui (zeta, 10, 93555); break;
-					
-		case 12: fp_zeta_even_str (zeta, 12, "691", "638512875"); break;
-		case 14: fp_zeta_even_str (zeta, 14, "2", "18243225"); break;
-		case 16: fp_zeta_even_str (zeta, 16, "3617", "325641566250"); break;
-		case 18: fp_zeta_even_str (zeta, 18, "43867", "38979295480125"); break;
-		case 20: fp_zeta_even_str (zeta, 20, "174611", "1531329465290625"); break;
-		case 22: fp_zeta_even_str (zeta, 22, "155366", "13447856940643125"); break;
-		case 24: fp_zeta_even_str (zeta, 24, "236364091", "201919571963756521875"); break;
-		case 26: fp_zeta_even_str (zeta, 26, "1315862", "11094481976030578125"); break;
-		case 28: fp_zeta_even_str (zeta, 28, "6785560294", "564653660170076273671875"); break;
-		case 30: fp_zeta_even_str (zeta, 30, "6892673020804", "5660878804669082674070015625"); break;
-		case 32: fp_zeta_even_str (zeta, 32, "7709321041217", "62490220571022341207266406250"); break;
-		case 34: fp_zeta_even_str (zeta, 34, "151628697551", "12130454581433748587292890625"); break;
-		default:
-			imprecise = 1;
-	}
-#endif /* HARD_CODED_STUFF */
-
-	switch (s)
+	int have_val = 1;
+	switch (n)
 	{
 #ifdef PLOUFFE_ORIGINALS
 		case 11: 
-			fp_zeta_odd (zeta, 11, "425675250", "1453", "851350500", "0", prec); 
+			fp_zeta_odd_helper (zeta, 11, "425675250", "1453", "851350500", "0", prec); 
 			break;
 		case 13: 
-			fp_zeta_odd (zeta, 13, "257432175", "89", "514926720", "62370", prec); 
+			fp_zeta_odd_helper (zeta, 13, "257432175", "89", "514926720", "62370", prec); 
 			break;
 		case 15: 
-			fp_zeta_odd (zeta, 15, "390769879500", "13687", "781539759000", "0", prec); 
+			fp_zeta_odd_helper (zeta, 15, "390769879500", "13687", "781539759000", "0", prec); 
 			break;
 		case 17: 
-			fp_zeta_odd (zeta, 17, "1904417007743250", "6758333", "3808863131673600", "29116187100", prec); 
+			fp_zeta_odd_helper (zeta, 17, "1904417007743250", "6758333", "3808863131673600", "29116187100", prec); 
 			break;
 		case 19: 
-			fp_zeta_odd (zeta, 19, "21438612514068750", "7708537", "42877225028137500", "0", prec); 
+			fp_zeta_odd_helper (zeta, 19, "21438612514068750", "7708537", "42877225028137500", "0", prec); 
 			break;
 		case 21: 
-			fp_zeta_odd (zeta, 21, "1881063815762259253125", "68529640373", "3762129424572110592000", "1793047592085750", prec); 
+			fp_zeta_odd_helper (zeta, 21, "1881063815762259253125", "68529640373", "3762129424572110592000", "1793047592085750", prec); 
 			break;
 #endif
 
 
 		case 3:
-			fp_zeta_odd (zeta, 3, "180", "7", "360", "0", prec);
+			fp_zeta_odd_helper (zeta, 3, "180", "7", "360", "0", prec);
 			break;
 
 		case 5:
-			fp_zeta_odd (zeta, 5, "1470", "5", "3024", "84", prec);
+			fp_zeta_odd_helper (zeta, 5, "1470", "5", "3024", "84", prec);
 			break;
 
 		case 7:
-			fp_zeta_odd (zeta, 7, "56700", "19", "113400", "0", prec);
+			fp_zeta_odd_helper (zeta, 7, "56700", "19", "113400", "0", prec);
 			break;
 
 		case 9:
-			fp_zeta_odd (zeta, 9, "18523890", "625", "37122624", "74844", prec);
+			fp_zeta_odd_helper (zeta, 9, "18523890", "625", "37122624", "74844", prec);
 			break;
 
 		case 11:
-			fp_zeta_odd (zeta, 11, "425675250", "1453", "851350500", "0", prec);
+			fp_zeta_odd_helper (zeta, 11, "425675250", "1453", "851350500", "0", prec);
 			break;
 
 		case 13:
-			fp_zeta_odd (zeta, 13, "257432175", "89", "514926720", "62370", prec);
+			fp_zeta_odd_helper (zeta, 13, "257432175", "89", "514926720", "62370", prec);
 			break;
 
 		case 15:
-			fp_zeta_odd (zeta, 15, "390769879500", "13687", "781539759000", "0", prec);
+			fp_zeta_odd_helper (zeta, 15, "390769879500", "13687", "781539759000", "0", prec);
 			break;
 
 		case 17:
-			fp_zeta_odd (zeta, 17, "1904417007743250", "6758333", "3808863131673600", "29116187100", prec);
+			fp_zeta_odd_helper (zeta, 17, "1904417007743250", "6758333", "3808863131673600", "29116187100", prec);
 			break;
 
 		case 19:
-			fp_zeta_odd (zeta, 19, "21438612514068750", "7708537", "42877225028137500", "0", prec);
+			fp_zeta_odd_helper (zeta, 19, "21438612514068750", "7708537", "42877225028137500", "0", prec);
 			break;
 
 		case 21:
-			fp_zeta_odd (zeta, 21, "1881063815762259253125", "68529640373", "3762129424572110592000", "1793047592085750", prec);
+			fp_zeta_odd_helper (zeta, 21, "1881063815762259253125", "68529640373", "3762129424572110592000", "1793047592085750", prec);
 			break;
 
 		case 23:
-			fp_zeta_odd (zeta, 23, "1211517431782539131250", "4472029801", "2423034863565078262500", "0", prec);
+			fp_zeta_odd_helper (zeta, 23, "1211517431782539131250", "4472029801", "2423034863565078262500", "0", prec);
 			break;
 
 		case 25:
-			fp_zeta_odd (zeta, 25, "6948173623016040171631875", "2598638688071", "13896347660226074115072000", "414193993771808250", prec);
+			fp_zeta_odd_helper (zeta, 25, "6948173623016040171631875", "2598638688071", "13896347660226074115072000", "414193993771808250", prec);
 			break;
 
 		case 27:
-			fp_zeta_odd (zeta, 27, "3952575621190533915703125", "149780635937", "7905151242381067831406250", "0", prec);
+			fp_zeta_odd_helper (zeta, 27, "3952575621190533915703125", "149780635937", "7905151242381067831406250", "0", prec);
 			break;
 
 		case 29:
-			fp_zeta_odd (zeta, 29, "42344185423359347502790906715625", "162580897794660958", "84688371004458264623668408320000", "157739569618086594888750", prec);
+			fp_zeta_odd_helper (zeta, 29, "42344185423359347502790906715625", "162580897794660958", "84688371004458264623668408320000", "157739569618086594888750", prec);
 			break;
 
 		case 31:
-			fp_zeta_odd (zeta, 31, "28870481903812321637757079687500", "11231299844779783", "57740963807624643275514159375000", "0", prec);
+			fp_zeta_odd_helper (zeta, 31, "28870481903812321637757079687500", "11231299844779783", "57740963807624643275514159375000", "0", prec);
 			break;
 
 		case 33:
-			fp_zeta_odd (zeta, 33, "17162190941764356274316709924901406250", "676470671886391879633", "34324381887524626998988066443264000000", "3995914450354646593461187500", prec);
+			fp_zeta_odd_helper (zeta, 33, "17162190941764356274316709924901406250", "676470671886391879633", "34324381887524626998988066443264000000", "3995914450354646593461187500", prec);
 			break;
 
 		case 35:
-			fp_zeta_odd (zeta, 35, "923465669416292826066116829424218750", "3688053840923281541", "1846931338832585652132233658848437500", "0", prec);
+			fp_zeta_odd_helper (zeta, 35, "923465669416292826066116829424218750", "3688053840923281541", "1846931338832585652132233658848437500", "0", prec);
 			break;
 
 		case 37:
-			fp_zeta_odd (zeta, 37, "3480645953760541547425811579090394140625", "1408434329374922032349", "6961291907571733063103925476843520000000", "50649968252302318662731718750", prec);
+			fp_zeta_odd_helper (zeta, 37, "3480645953760541547425811579090394140625", "1408434329374922032349", "6961291907571733063103925476843520000000", "50649968252302318662731718750", prec);
 			break;
 
 		case 39:
-			fp_zeta_odd (zeta, 39, "64875239172012679286579449799415644531250", "2659842854283579394387", "129750478344025358573158899598831289062500", "0", prec);
+			fp_zeta_odd_helper (zeta, 39, "64875239172012679286579449799415644531250", "2659842854283579394387", "129750478344025358573158899598831289062500", "0", prec);
 			break;
 
 		case 41:
-			fp_zeta_odd (zeta, 41, "12967172230363787667401358845511389649052092451171875", "53866969189211783266383835533253", "25934344460739368914866833166704469676132761600000000", "11793580064115475681690378028576697656250", prec);
+			fp_zeta_odd_helper (zeta, 41, "12967172230363787667401358845511389649052092451171875", "53866969189211783266383835533253", "25934344460739368914866833166704469676132761600000000", "11793580064115475681690378028576697656250", prec);
 			break;
 
 		case 43:
-			fp_zeta_odd (zeta, 43, "2919353325120984561556431951248804296083984375", "1228751826452728351300837", "5838706650241969123112863902497608592167968750", "0", prec);
+			fp_zeta_odd_helper (zeta, 43, "2919353325120984561556431951248804296083984375", "1228751826452728351300837", "5838706650241969123112863902497608592167968750", "0", prec);
 			break;
 
 		case 45:
-			fp_zeta_odd (zeta, 45, "25187657828037231081234525437683315511849888323792716796875", "1074151540472820600753617135934307286", "50375315656075893914882414558229863917282823887257600000000", "1431752413363682863232893583047239672166406250", prec);
+			fp_zeta_odd_helper (zeta, 45, "25187657828037231081234525437683315511849888323792716796875", "1074151540472820600753617135934307286", "50375315656075893914882414558229863917282823887257600000000", "1431752413363682863232893583047239672166406250", prec);
 			break;
 
 		case 47:
-			fp_zeta_odd (zeta, 47, "15630294667467231804893395882010267487892367285156250", "67537532722660373286810600661", "31260589334934463609786791764020534975784734570312500", "0", prec);
+			fp_zeta_odd_helper (zeta, 47, "15630294667467231804893395882010267487892367285156250", "67537532722660373286810600661", "31260589334934463609786791764020534975784734570312500", "0", prec);
 			break;
 
 		case 49:
-			fp_zeta_odd (zeta, 49, "125950123387606530332240169464377820361081282732372746373046875", "55141284330294633162607354950945193883", "251900246775213508129219880178582249920021784875591270400000000", "447464739541249826609197859219410845777653906250", prec);
+			fp_zeta_odd_helper (zeta, 49, "125950123387606530332240169464377820361081282732372746373046875", "55141284330294633162607354950945193883", "251900246775213508129219880178582249920021784875591270400000000", "447464739541249826609197859219410845777653906250", prec);
 			break;
 
 		case 51:
-			fp_zeta_odd (zeta, 51, "5669518082718741943709352250640941481892180509033203125", "251492292317888012003479295207", "11339036165437483887418704501281882963784361018066406250", "0", prec);
+			fp_zeta_odd_helper (zeta, 51, "5669518082718741943709352250640941481892180509033203125", "251492292317888012003479295207", "11339036165437483887418704501281882963784361018066406250", "0", prec);
 			break;
 
 		case 53:
-			fp_zeta_odd (zeta, 53, "19874174510194707355877113706035736161286459308343574747132284912109375", "89323943498389182315845947384336698100190998", "39748349020389419124707421860319918570808355970919336909209600000000000", "4412953194448248446248235437354232187414945030175781250", prec);
+			fp_zeta_odd_helper (zeta, 53, "19874174510194707355877113706035736161286459308343574747132284912109375", "89323943498389182315845947384336698100190998", "39748349020389419124707421860319918570808355970919336909209600000000000", "4412953194448248446248235437354232187414945030175781250", prec);
 			break;
 
 		case 55:
-			fp_zeta_odd (zeta, 55, "55921013802510257943421954165936644900510909734004056396484375", "25465609788816025420512226447159951", "111842027605020515886843908331873289801021819468008112792968750", "0", prec);
+			fp_zeta_odd_helper (zeta, 55, "55921013802510257943421954165936644900510909734004056396484375", "25465609788816025420512226447159951", "111842027605020515886843908331873289801021819468008112792968750", "0", prec);
 			break;
 
 		case 57:
-			fp_zeta_odd (zeta, 57, "22954447164806465666694724159311794529795895568196223401126410316992032470703125", "1059122358196688900203789673076338001301584601329842", "45908894329612931651946395910854437757981681764417748097577037463552000000000000", "318556947592230848698389890628025301295324216829567935058593750", prec);
+			fp_zeta_odd_helper (zeta, 57, "22954447164806465666694724159311794529795895568196223401126410316992032470703125", "1059122358196688900203789673076338001301584601329842", "45908894329612931651946395910854437757981681764417748097577037463552000000000000", "318556947592230848698389890628025301295324216829567935058593750", prec);
 			break;
 
 		case 59:
-			fp_zeta_odd (zeta, 59, "57522413794274203484482809918955361109315852011326949561410858154296875", "268916007610453025823381928132011055435166", "115044827588548406968965619837910722218631704022653899122821716308593750", "0", prec);
+			fp_zeta_odd_helper (zeta, 59, "57522413794274203484482809918955361109315852011326949561410858154296875", "268916007610453025823381928132011055435166", "115044827588548406968965619837910722218631704022653899122821716308593750", "0", prec);
 			break;
 
 		case 61:
-			fp_zeta_odd (zeta, 61, "2250150739271701988086825366594937743084692866382599667359017830172943115234375", "1065838541236193393315346133195915243192115099012", "4500301478543403978125345388231641365295026250831015394540658360320000000000000", "1951694655041765879125640518065816059822622699974113769531250", prec);
+			fp_zeta_odd_helper (zeta, 61, "2250150739271701988086825366594937743084692866382599667359017830172943115234375", "1065838541236193393315346133195915243192115099012", "4500301478543403978125345388231641365295026250831015394540658360320000000000000", "1951694655041765879125640518065816059822622699974113769531250", prec);
 			break;
 
 		case 63:
-			fp_zeta_odd (zeta, 63, "463064280646029534081391924895270496216317118822260609653905317504882812500", "22223954766213317384532039590736747648635617", "926128561292059068162783849790540992432634237644521219307810635009765625000", "0", prec);
+			fp_zeta_odd_helper (zeta, 63, "463064280646029534081391924895270496216317118822260609653905317504882812500", "22223954766213317384532039590736747648635617", "926128561292059068162783849790540992432634237644521219307810635009765625000", "0", prec);
 			break;
 
 		case 65:
-			fp_zeta_odd (zeta, 65, "26404424191089874513907356219303296584761107108581828553012585401810261376879659509277343750", "128397633128226123041771286885908496599459788259186164309559", "52808848382179749029246099142333651014202872070357803507247465934466726253035520000000000000", "1431386703727057844680657853194146401222295130846203499276200981445312500", prec);
+			fp_zeta_odd_helper (zeta, 65, "26404424191089874513907356219303296584761107108581828553012585401810261376879659509277343750", "128397633128226123041771286885908496599459788259186164309559", "52808848382179749029246099142333651014202872070357803507247465934466726253035520000000000000", "1431386703727057844680657853194146401222295130846203499276200981445312500", prec);
 			break;
 
 		case 67:
-			fp_zeta_odd (zeta, 67, "9549406932246083469671716326468923081604465571994768757702470085151062011718750", "4704971228496213648399974101471098623989701629", "19098813864492166939343432652937846163208931143989537515404940170302124023437500", "0", prec);
+			fp_zeta_odd_helper (zeta, 67, "9549406932246083469671716326468923081604465571994768757702470085151062011718750", "4704971228496213648399974101471098623989701629", "19098813864492166939343432652937846163208931143989537515404940170302124023437500", "0", prec);
 			break;
 
 		case 69:
-			fp_zeta_odd (zeta, 69, "353445647207320312589501556954581303661421782728654161427946569538661284243177326949461956787109375", "17644260606276991066616771034325190251496670227214096141913859099", "706891294414640625180200634342120635660287073156637984171165512058662587799658225991680000000000000", "1197520432958028337443507699329661315272372981340019313303572092756086425781250", prec);
+			fp_zeta_odd_helper (zeta, 69, "353445647207320312589501556954581303661421782728654161427946569538661284243177326949461956787109375", "17644260606276991066616771034325190251496670227214096141913859099", "706891294414640625180200634342120635660287073156637984171165512058662587799658225991680000000000000", "1197520432958028337443507699329661315272372981340019313303572092756086425781250", prec);
 			break;
 
 		case 71:
-			fp_zeta_odd (zeta, 71, "239800981547812029236551440284118221439891285487445040953972914548865012368257872009277343750", "1212919664600259084164537721476067892498197548805305939573", "479601963095624058473102880568236442879782570974890081907945829097730024736515744018554687500", "0", prec);
+			fp_zeta_odd_helper (zeta, 71, "239800981547812029236551440284118221439891285487445040953972914548865012368257872009277343750", "1212919664600259084164537721476067892498197548805305939573", "479601963095624058473102880568236442879782570974890081907945829097730024736515744018554687500", "0", prec);
 			break;
 
 		case 73:
-			fp_zeta_odd (zeta, 73, "1291329911419567870960140556214255029201526083431909096561562593514463691075674732164924032352752685546875", "661787479183328801575691663514487261630136303487249188772092842108801", "2582659822839135741920554562173698885802190035618893569495071298019577925088504114397052928000000000000000", "273449745188827399137868755075376371946110990650542937154650067204863294494628906250", prec);
+			fp_zeta_odd_helper (zeta, 73, "1291329911419567870960140556214255029201526083431909096561562593514463691075674732164924032352752685546875", "661787479183328801575691663514487261630136303487249188772092842108801", "2582659822839135741920554562173698885802190035618893569495071298019577925088504114397052928000000000000000", "273449745188827399137868755075376371946110990650542937154650067204863294494628906250", prec);
 			break;
 
 		case 75:
-			fp_zeta_odd (zeta, 75, "9223114674915847278328901549389162363072741749517116959768189021110192783394533538818359375", "478915836659382129612763840358992819232085424547810249", "18446229349831694556657803098778324726145483499034233919536378042220385566789067077636718750", "0", prec);
+			fp_zeta_odd_helper (zeta, 75, "9223114674915847278328901549389162363072741749517116959768189021110192783394533538818359375", "478915836659382129612763840358992819232085424547810249", "18446229349831694556657803098778324726145483499034233919536378042220385566789067077636718750", "0", prec);
 			break;
 
 		case 77:
-			fp_zeta_odd (zeta, 77, "256915999653722002385420620581925893062631689304446702874814171671741700710513130338502685214062203340984344482421875", "1351677223440059667534026579871660256551221213825244302327592126797148471501838", "513831999307444004770844641418795271767626655863931280554152862827608390064812095216024486385863884800000000000000000", "3400254943485642363277255037874804524519484124988643785834539019115957739478118031311035156250", prec);
+			fp_zeta_odd_helper (zeta, 77, "256915999653722002385420620581925893062631689304446702874814171671741700710513130338502685214062203340984344482421875", "1351677223440059667534026579871660256551221213825244302327592126797148471501838", "513831999307444004770844641418795271767626655863931280554152862827608390064812095216024486385863884800000000000000000", "3400254943485642363277255037874804524519484124988643785834539019115957739478118031311035156250", prec);
 			break;
 
 		case 79:
-			fp_zeta_odd (zeta, 79, "49730890667110062063780417096524621345713589999929696190237430116881950239082253054715538024902343750", "26509915083092912315730293342898546025433245995877421301815689", "99461781334220124127560834193049242691427179999859392380474860233763900478164506109431076049804687500", "0", prec);
+			fp_zeta_odd_helper (zeta, 79, "49730890667110062063780417096524621345713589999929696190237430116881950239082253054715538024902343750", "26509915083092912315730293342898546025433245995877421301815689", "99461781334220124127560834193049242691427179999859392380474860233763900478164506109431076049804687500", "0", prec);
 			break;
 
 		case 81:
-			fp_zeta_odd (zeta, 81, "10461016206657763952900402057947838221607973652032616773991058892666763307834520803510319865055904668370463053417205810546875", "565010122751068805311901539647748466645918598089367030993202855801018781817131385529", "20922032413315527905800812769045470197470074921363025449977418729263206306364731482648491918301061334433792000000000000000000", "8653149793754254127617297791901995300943929679690695689875627852188189251997692865893165588378906250", prec);
+			fp_zeta_odd_helper (zeta, 81, "10461016206657763952900402057947838221607973652032616773991058892666763307834520803510319865055904668370463053417205810546875", "565010122751068805311901539647748466645918598089367030993202855801018781817131385529", "20922032413315527905800812769045470197470074921363025449977418729263206306364731482648491918301061334433792000000000000000000", "8653149793754254127617297791901995300943929679690695689875627852188189251997692865893165588378906250", prec);
 			break;
 
 		case 83:
-			fp_zeta_odd (zeta, 83, "26003329595921675245471914390865080409321974652689816456520197013016076321011121153497045964145660400390625", "142302185198752633951003259184526109623109830283133673011603187937", "52006659191843350490943828781730160818643949305379632913040394026032152642022242306994091928291320800781250", "0", prec);
+			fp_zeta_odd_helper (zeta, 83, "26003329595921675245471914390865080409321974652689816456520197013016076321011121153497045964145660400390625", "142302185198752633951003259184526109623109830283133673011603187937", "52006659191843350490943828781730160818643949305379632913040394026032152642022242306994091928291320800781250", "0", prec);
 			break;
 
 		case 85:
-			fp_zeta_odd (zeta, 85, "38887084245571232615762239155351229364466156226547279826038447112434066271185219471082222529642634439158386222743930816650390625", "21561960394860281920216321561911380255606766990072138345979703279525004543524413853342", "77774168491142465231524480321117594144504021436180079970640469144174461457175404223268649384341238425780748288000000000000000000", "2010415135415571708983085520318563574919306328914804965281104204325055969547463975842512138366699218750", prec);
+			fp_zeta_odd_helper (zeta, 85, "38887084245571232615762239155351229364466156226547279826038447112434066271185219471082222529642634439158386222743930816650390625", "21561960394860281920216321561911380255606766990072138345979703279525004543524413853342", "77774168491142465231524480321117594144504021436180079970640469144174461457175404223268649384341238425780748288000000000000000000", "2010415135415571708983085520318563574919306328914804965281104204325055969547463975842512138366699218750", prec);
 			break;
 
 		case 87:
-			fp_zeta_odd (zeta, 87, "5610873017648410876525990935061819676319817885052156089528252688404559699557514116011091518472362041473388671875", "315219849778284027953565106963657850893545087258111919846837707734741", "11221746035296821753051981870123639352639635770104312179056505376809119399115028232022183036944724082946777343750", "0", prec);
+			fp_zeta_odd_helper (zeta, 87, "5610873017648410876525990935061819676319817885052156089528252688404559699557514116011091518472362041473388671875", "315219849778284027953565106963657850893545087258111919846837707734741", "11221746035296821753051981870123639352639635770104312179056505376809119399115028232022183036944724082946777343750", "0", prec);
 			break;
 
 		case 89:
-			fp_zeta_odd (zeta, 89, "11983306424292523563272487428740775172961865538497429764189823547419372730118055752847146537708032471764200256195786163951258716583251953125", "68211882774187975535408148026046986746381545623428772099736410778808772736067950451251376306862", "23966612848585047126544974896201701707084680777660422979512776209763923457223152291551015253332510812672596352734421057536000000000000000000", "38720151361160949700665563451133129114925177996987040785856722177916445869144195840342848729633482566833496093750", prec);
+			fp_zeta_odd_helper (zeta, 89, "11983306424292523563272487428740775172961865538497429764189823547419372730118055752847146537708032471764200256195786163951258716583251953125", "68211882774187975535408148026046986746381545623428772099736410778808772736067950451251376306862", "23966612848585047126544974896201701707084680777660422979512776209763923457223152291551015253332510812672596352734421057536000000000000000000", "38720151361160949700665563451133129114925177996987040785856722177916445869144195840342848729633482566833496093750", prec);
 			break;
 
 		case 91:
-			fp_zeta_odd (zeta, 91, "98850114315536531663646110435038604330731448188564979377792850094858885927168976360594071271568450890002186298370361328125", "57011281443492086454066209812376204392756637590670916128169677803388899195966", "197700228631073063327292220870077208661462896377129958755585700189717771854337952721188142543136901780004372596740722656250", "0", prec);
+			fp_zeta_odd_helper (zeta, 91, "98850114315536531663646110435038604330731448188564979377792850094858885927168976360594071271568450890002186298370361328125", "57011281443492086454066209812376204392756637590670916128169677803388899195966", "197700228631073063327292220870077208661462896377129958755585700189717771854337952721188142543136901780004372596740722656250", "0", prec);
 			break;
 
 		case 93:
-			fp_zeta_odd (zeta, 93, "204360232798243459477834020425322036897519411259299200372857852083551660110355253791974906854958627963075658651905457497836688137936115264892578125", "11942088084965907072485663838724465493618501820708239537797531067414422093362602012354356786198904884", "408720465596486918955668040891914294143556683991979354118834993008516690801243457625260357306325622591850127185391739613269196800000000000000000000", "41270220348517861473380953373119288841413370580532950041310543596408366665698809881580824617595820524127769470214843750", prec);
+			fp_zeta_odd_helper (zeta, 93, "204360232798243459477834020425322036897519411259299200372857852083551660110355253791974906854958627963075658651905457497836688137936115264892578125", "11942088084965907072485663838724465493618501820708239537797531067414422093362602012354356786198904884", "408720465596486918955668040891914294143556683991979354118834993008516690801243457625260357306325622591850127185391739613269196800000000000000000000", "41270220348517861473380953373119288841413370580532950041310543596408366665698809881580824617595820524127769470214843750", prec);
 			break;
 
 		case 95:
-			fp_zeta_odd (zeta, 95, "10413011211460717676250380323411563464940191729376966312797456539253869553468224695433458790140083700816192327770504951477050781250", "61653888415385795845515847826128391067032235441708936404643745680146263872104540729", "20826022422921435352500760646823126929880383458753932625594913078507739106936449390866917580280167401632384655541009902954101562500", "0", prec);
+			fp_zeta_odd_helper (zeta, 95, "10413011211460717676250380323411563464940191729376966312797456539253869553468224695433458790140083700816192327770504951477050781250", "61653888415385795845515847826128391067032235441708936404643745680146263872104540729", "20826022422921435352500760646823126929880383458753932625594913078507739106936449390866917580280167401632384655541009902954101562500", "0", prec);
 			break;
 
 		case 97:
-			fp_zeta_odd (zeta, 97, "1026678332572275501552243051603595456179421058408388098350756910116148274900440004795140240146693296274946945963224938704627728474235150814056396484375", "615912172499623151056497876552021098489602355300407939720593786636702371108898393310875263926765893647", "2053356665144551003104486103220149414739702368026464258237535687690778991748288527895268450557922715410934530844309268265024094208000000000000000000000", "12958502380860251209688061536021867458482441947408518304987970264536122861040638917859390855768637259529698371887207031250", prec);
+			fp_zeta_odd_helper (zeta, 97, "1026678332572275501552243051603595456179421058408388098350756910116148274900440004795140240146693296274946945963224938704627728474235150814056396484375", "615912172499623151056497876552021098489602355300407939720593786636702371108898393310875263926765893647", "2053356665144551003104486103220149414739702368026464258237535687690778991748288527895268450557922715410934530844309268265024094208000000000000000000000", "12958502380860251209688061536021867458482441947408518304987970264536122861040638917859390855768637259529698371887207031250", prec);
 			break;
 
 		case 99:
-			fp_zeta_odd (zeta, 99, "138242329869824150846594057174219062793343552968315549999019830815965948719447425713305868601176227514261236650225818157196044921875", "8402832178640067318790360222809790035833271338875779980075463442970968353567431741", "276484659739648301693188114348438125586687105936631099998039661631931897438894851426611737202352455028522473300451636314392089843750", "0", prec);
+			fp_zeta_odd_helper (zeta, 99, "138242329869824150846594057174219062793343552968315549999019830815965948719447425713305868601176227514261236650225818157196044921875", "8402832178640067318790360222809790035833271338875779980075463442970968353567431741", "276484659739648301693188114348438125586687105936631099998039661631931897438894851426611737202352455028522473300451636314392089843750", "0", prec);
 			break;
 
 		case 101:
-			fp_zeta_odd (zeta, 101, "2419351059238966794264065234862224995465261436040175798246839347584984396457333341690077573976455955796273704240226369594280227140212861819492280483245849609375", "14899915005118230329522234211978534030191269202300034004489347623029060683618344857609303598783891763287037838", "4838702118477933588528130469726358522397161536334908646728357564776512561849762720980319611363558624681176873630030125885314483551941427200000000000000000000000", "1908531466638664254557050234678869606543768935096037600164463410646713088629465149577386696754029271515703561015439033508300781250", prec);
+			fp_zeta_odd_helper (zeta, 101, "2419351059238966794264065234862224995465261436040175798246839347584984396457333341690077573976455955796273704240226369594280227140212861819492280483245849609375", "14899915005118230329522234211978534030191269202300034004489347623029060683618344857609303598783891763287037838", "4838702118477933588528130469726358522397161536334908646728357564776512561849762720980319611363558624681176873630030125885314483551941427200000000000000000000000", "1908531466638664254557050234678869606543768935096037600164463410646713088629465149577386696754029271515703561015439033508300781250", prec);
 			break;
 
 		case 103:
-			fp_zeta_odd (zeta, 103, "8197924577963036738779523235993054026338412855769777723411224872537802193027951967573559770704977805441824763159729318960607051849365234375", "5115511590011241057447329371766791619756062974358379446868597834892199267027172693354161", "16395849155926073477559046471986108052676825711539555446822449745075604386055903935147119541409955610883649526319458637921214103698730468750", "0", prec);
+			fp_zeta_odd_helper (zeta, 103, "8197924577963036738779523235993054026338412855769777723411224872537802193027951967573559770704977805441824763159729318960607051849365234375", "5115511590011241057447329371766791619756062974358379446868597834892199267027172693354161", "16395849155926073477559046471986108052676825711539555446822449745075604386055903935147119541409955610883649526319458637921214103698730468750", "0", prec);
 			break;
 
 		case 105:
-			fp_zeta_odd (zeta, 105, "33476488358106009825763023779631159333930662750380792623988169928684683541846583233039949042510088277372839071980087962351119169683052757572819981952352344989776611328125", "2116534265787916485294070652838082080793486125598617261243576592838819586359680190232924753656090810968893016676643182", "66952976716212019651526047559263969186168187761577827092747575098869588476838198884290140630310099544251049313116201021657262466921372241384334950400000000000000000000000", "1650518306862260816241844771235241500221393145032418210242545289922989505371169156025096955024127555266726238694986495295310020446777343750", prec);
+			fp_zeta_odd_helper (zeta, 105, "33476488358106009825763023779631159333930662750380792623988169928684683541846583233039949042510088277372839071980087962351119169683052757572819981952352344989776611328125", "2116534265787916485294070652838082080793486125598617261243576592838819586359680190232924753656090810968893016676643182", "66952976716212019651526047559263969186168187761577827092747575098869588476838198884290140630310099544251049313116201021657262466921372241384334950400000000000000000000000", "1650518306862260816241844771235241500221393145032418210242545289922989505371169156025096955024127555266726238694986495295310020446777343750", prec);
 			break;
 
 		case 107:
-			fp_zeta_odd (zeta, 107, "2783058325288414036849712398236214583698258217456119644924215406100220131744523364320583550775783967400316521027570187455100892106179893016815185546875", "17828219473673421907944196084848100601631041343219326565113363472678592211417261132053010397435946", "5566116650576828073699424796472429167396516434912239289848430812200440263489046728641167101551567934800633042055140374910201784212359786033630371093750", "0", prec);
+			fp_zeta_odd_helper (zeta, 107, "2783058325288414036849712398236214583698258217456119644924215406100220131744523364320583550775783967400316521027570187455100892106179893016815185546875", "17828219473673421907944196084848100601631041343219326565113363472678592211417261132053010397435946", "5566116650576828073699424796472429167396516434912239289848430812200440263489046728641167101551567934800633042055140374910201784212359786033630371093750", "0", prec);
 			break;
 
 		case 109:
-			fp_zeta_odd (zeta, 109, "2770331665932256818162743030592561365234229703112462320967361126017613656158622946584043403933481618972813773164102032875721296469999862273549059875039696490764617919921875", "1798115913378776908280510846581495927392919500045134728012557199809377541708858010727893155140611067717369930678676476", "5540663331864513636325486061185131267211997491200411704593289988764979140338855715882371890888045154659787061831237323833554579690290949200850095964160000000000000000000000", "8536743538084975487062658567736729751828021609822714285083021081916714159515503033258082111986750291224653751976214080607018470764160156250", prec);
+			fp_zeta_odd_helper (zeta, 109, "2770331665932256818162743030592561365234229703112462320967361126017613656158622946584043403933481618972813773164102032875721296469999862273549059875039696490764617919921875", "1798115913378776908280510846581495927392919500045134728012557199809377541708858010727893155140611067717369930678676476", "5540663331864513636325486061185131267211997491200411704593289988764979140338855715882371890888045154659787061831237323833554579690290949200850095964160000000000000000000000", "8536743538084975487062658567736729751828021609822714285083021081916714159515503033258082111986750291224653751976214080607018470764160156250", prec);
 			break;
 
 		case 111:
-			fp_zeta_odd (zeta, 111, "14154722304207990055970853205231108472106529924446704914669336044188681858792198003618005319551095388809433241618523006647676861851113894276320934295654296875", "930866768598038555037745721541506786862470847228989799903334802511940872169956683902397476952340874379", "28309444608415980111941706410462216944213059848893409829338672088377363717584396007236010639102190777618866483237046013295353723702227788552641868591308593750", "0", prec);
+			fp_zeta_odd_helper (zeta, 111, "14154722304207990055970853205231108472106529924446704914669336044188681858792198003618005319551095388809433241618523006647676861851113894276320934295654296875", "930866768598038555037745721541506786862470847228989799903334802511940872169956683902397476952340874379", "28309444608415980111941706410462216944213059848893409829338672088377363717584396007236010639102190777618866483237046013295353723702227788552641868591308593750", "0", prec);
 			break;
 
 		case 113:
-			fp_zeta_odd (zeta, 113, "535988016715013803215885177694905048863337478198426795760058206015602811630153582231911404971143236251176709142305551185761870020006558017553544133682564617258139066113531589508056640625", "3571424780838804649141752172968771217680454853370454729413198784149643035808789811076069610075146232317965831107065035516936474642", "1071976033430027606431770355389810200954212078813991794526733927062419132270996124333976445113230033066717508493692197433458049629408308677073541512606489446973440000000000000000000000000", "103227537122417138203006617515031213509010688959870153635170943560564364090209081095061934309589395192641966453245241360212457161867772936820983886718750", prec);
+			fp_zeta_odd_helper (zeta, 113, "535988016715013803215885177694905048863337478198426795760058206015602811630153582231911404971143236251176709142305551185761870020006558017553544133682564617258139066113531589508056640625", "3571424780838804649141752172968771217680454853370454729413198784149643035808789811076069610075146232317965831107065035516936474642", "1071976033430027606431770355389810200954212078813991794526733927062419132270996124333976445113230033066717508493692197433458049629408308677073541512606489446973440000000000000000000000000", "103227537122417138203006617515031213509010688959870153635170943560564364090209081095061934309589395192641966453245241360212457161867772936820983886718750", prec);
 			break;
 
 		case 115:
-			fp_zeta_odd (zeta, 115, "3071172780353379457032523843415732210823162649955964877499867887705336171175304348586221450337570021206447556909145132762843916595594523182667791843414306640625", "2073437420382515647798623037303990230623011183648874780288500296064825521017059758527851353888748509478", "6142345560706758914065047686831464421646325299911929754999735775410672342350608697172442900675140042412895113818290265525687833191189046365335583686828613281250", "0", prec);
+			fp_zeta_odd_helper (zeta, 115, "3071172780353379457032523843415732210823162649955964877499867887705336171175304348586221450337570021206447556909145132762843916595594523182667791843414306640625", "2073437420382515647798623037303990230623011183648874780288500296064825521017059758527851353888748509478", "6142345560706758914065047686831464421646325299911929754999735775410672342350608697172442900675140042412895113818290265525687833191189046365335583686828613281250", "0", prec);
 			break;
 
 		case 117:
-			fp_zeta_odd (zeta, 117, "21498736624687227040086513735664515356621082823324464377234984302189136308352789944695014299533816480962961428270060655639882451548138069036834366995973401718165905131535342909395694732666015625", "1470617995945929340823900939912466478922162017902177245157936266684462755304379703178802123827766074689212758305303974887068597968722324", "42997473249374454080173027471329030972023794596522064601278273085897596918512021096333316097845847228622530016105717753896003333477478893483777645464708595559741731635200000000000000000000000000", "258781628949873135846808304481519324301806441206943287498778214266696607159565596442616238430381202755410108911472761792123409921372129314181208610534667968750", prec);
+			fp_zeta_odd_helper (zeta, 117, "21498736624687227040086513735664515356621082823324464377234984302189136308352789944695014299533816480962961428270060655639882451548138069036834366995973401718165905131535342909395694732666015625", "1470617995945929340823900939912466478922162017902177245157936266684462755304379703178802123827766074689212758305303974887068597968722324", "42997473249374454080173027471329030972023794596522064601278273085897596918512021096333316097845847228622530016105717753896003333477478893483777645464708595559741731635200000000000000000000000000", "258781628949873135846808304481519324301806441206943287498778214266696607159565596442616238430381202755410108911472761792123409921372129314181208610534667968750", prec);
 			break;
 
 		case 119:
-			fp_zeta_odd (zeta, 119, "181961744064274353998732174876458083192401580310810970658317353559398594886909058323836349301639835028493133397370199672540329374986916978202036009397671930491924285888671875", "1261151562313641703816834464893880014977525934624571730625687371825311625760783202572888567761894854518812674014678", "363923488128548707997464349752916166384803160621621941316634707118797189773818116647672698603279670056986266794740399345080658749973833956404072018795343860983848571777343750", "0", prec);
+			fp_zeta_odd_helper (zeta, 119, "181961744064274353998732174876458083192401580310810970658317353559398594886909058323836349301639835028493133397370199672540329374986916978202036009397671930491924285888671875", "1261151562313641703816834464893880014977525934624571730625687371825311625760783202572888567761894854518812674014678", "363923488128548707997464349752916166384803160621621941316634707118797189773818116647672698603279670056986266794740399345080658749973833956404072018795343860983848571777343750", "0", prec);
 			break;
 			
-#ifdef HARD_CODED_STUFF
-		case 2:
-		case 3: 
-		case 4: 
-		case 5: 
-		case 6: 
-		case 7: 
-		case 8: 
-		case 9: 
-		case 10: 
-		case 12: 
-		case 14: 
-		case 16: 
-		case 18: 
-		case 20: 
-		case 22: 
-		case 24:
-		case 26: 
-		case 28: 
-		case 30: 
-		case 32: 
-		case 34: 
-			break;
-#endif /* HARD_CODED_STUFF */
-
 		default:
-			slow_path = 1;
+			have_val = 0;
+	}
+	return have_val;
+}
+
+/* ======================================================================= */
+/* Brute force summation of zeta values */
+
+void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec)
+{
+	unsigned long int us = s;
+
+	/* Set up cache of what we've computed so far */
+	static int cache_size = 0;
+	static mpf_t *zeta_cache = NULL;
+	static int *zprec= NULL;
+	static unsigned int *last_term= NULL;
+
+	if (s >= cache_size)
+	{
+		int newsize = (3*s)/2+20;
+		zeta_cache = (mpf_t *) realloc (zeta_cache, newsize*sizeof (mpf_t));
+		zprec = (int *) realloc (zprec, newsize*sizeof (int));
+		last_term = (unsigned int *) realloc (last_term, newsize*sizeof (unsigned int));
+		
+		int i;
+		for (i=cache_size; i<newsize; i++)
+		{
+			zprec[i] = 0;
+		}
+		cache_size = newsize;
 	}
 
-	/* initialize the cache line, if needed */
-	if ((s < ZETA_CACHE_SIZE) && (0 == zprec[s]))
+	if (s<2) return;
+	
+	/* Lets see if we can get lucky with the cache. */
+	if (prec < zprec[s])
+	{
+		mpf_set (zeta, zeta_cache[s]);
+		return;
+	}
+
+	/* Initialize the cache line, if needed */
+	if (0 == zprec[s])
 	{
 		mpf_init (zeta_cache[s]);
 		mpf_set_ui (zeta_cache[s], 1);
 		last_term[s] = 2;
 		zprec[s] = prec;
-	}
-
-	/* If this is an arbitary even number, we've got the exact result */
-	if (0 == s%2)
-	{
-		imprecise = 0;
-		slow_path = 0;
-		fp_zeta_even (zeta, s);
-	}
-	
-	/* If this was fast path, then we've already got a value. Return */
-	if (0 == slow_path)
-	{
-		// if (0 == imprecise) zprec[s] = 500; /* XXXX bogus precison value */
-		mpf_set (zeta_cache[s], zeta);
-		return;
 	}
 
 	/* If we are here, well have to compute values using brute force */
@@ -1297,29 +1667,30 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	
 	mpf_set_ui (zeta, 1);
 
-	/* Compute number of terms to be carried out 
-	 * However, this estimate is wrong; it stops 
-	 * when next term is "smaller than" rather 
-	 * than when its converged.
+	/* Compute number of terms to be carried out.
+	 * If we want error t be less than epsilon, 
+	 * then must sum to epsilon=N^{1-s} or
+	 * N = exp (ln(espilon) / (1-s))
+	 * But epsilon = 10^{-prec} so
+	 * Nmax = 10^{prec/(s-1)}
+	 *
+	 * Note that this provides a precise upper bound
+	 * on the error term, for an s>7.
 	 */
 	double fprec = prec;
-	fprec /= (double) s;
-	double dig = pow (10.0, fprec);
-	if (1.0e10 < dig)
+	fprec /= (double) (s-1);
+	double fnmax = pow (10.0, fprec);
+	if (1.0e9 < fnmax)
 	{
-		fprintf (stderr, "Sorry bucko, can't do it, you asked for zeta(%d) in %g digits\n", s, fprec);
+		fprintf (stderr, "Sorry bucko, can't do it, you asked for zeta(%d) in %g digits\n", s, fnmax);
 		return;
 	}
-	int nmax = (int) (1.1*dig+1.0);
+	int nmax = (int) (fnmax+1.0);
 	// printf ("zeta will be computed with %d terms\n", nmax);
 	
 	/* Start computations where we last left off. */
-	int nstart = 2;
-	if (s < ZETA_CACHE_SIZE)
-	{
-		mpf_set (zeta, zeta_cache[s]);
-		nstart = last_term[s];
-	}
+	mpf_set (zeta, zeta_cache[s]);
+	int nstart = last_term[s];
 	
 	int n;
 	for (n=nstart; n< nmax; n++)
@@ -1332,16 +1703,71 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	}
 
 	/* cache the results */
-	if (s < ZETA_CACHE_SIZE)
-	{
-		mpf_set (zeta_cache[s], zeta);
-		last_term[s] = nmax;
-	}
+	mpf_set (zeta_cache[s], zeta);
+	last_term[s] = nmax;
 	
 	mpf_clear (acc);
 	mpf_clear (term);
 	mpf_clear (en);
 	mpf_clear (inv);
+}
+
+/* ======================================================================= */
+/* fp_zeta
+ * Floating-point-valued Riemann zeta for positive integer arguments 
+ * return value placed in the arg "zeta".
+ *
+ * Carries out the math to "prec" decimal digits. Uses a combined
+ * algorithm: 
+ * 
+ * For even "n", computes an "exact" result be using recursion
+ * to get the Bernoulli numbers, and then working off of those.
+ *
+ * For odd "n", this uses a fast convergent sum based on consts 
+ * from Simon Plouffe for low odd values of "n" (n less than 120). 
+ *
+ * For large odd "n", performs the brute-force sum. This works,
+ * and works quite well, since the sum converges decently when "n"
+ * is large.
+ *
+ */
+void fp_zeta (mpf_t zeta, unsigned int s, int prec)
+{
+	DECLARE_FP_CACHE (cache);
+	if (2>s)
+	{
+		fprintf (stderr, "Domain error, asked for zeta(%d)\n", s);
+		mpf_set_ui (zeta, 0);
+		return;
+	}
+
+	int have_prec = fp_one_d_cache_check (&cache, s);
+	if (have_prec >= prec)
+	{
+		fp_one_d_cache_fetch (&cache, zeta, s);
+		return;
+	}
+	
+	/* We've got exact results for even numbers */
+	if (0 == s%2)
+	{
+		fp_zeta_even (zeta, s);
+		fp_one_d_cache_store (&cache, zeta, s, 10111222);
+		return;
+	}
+	
+	/* Bump precision so as to increase cache hits on next go-around. */
+	prec += 100;
+
+	int plo = fp_zeta_odd_plouffe (zeta, s, prec);
+
+	if (0 == plo)
+	{
+		fp_zeta_brute (zeta, s, prec);
+	}
+
+	/* Save computed value to the cache. */
+	fp_one_d_cache_store (&cache, zeta, s, prec);
 }
 
 /* ======================================================================= */
@@ -1416,7 +1842,9 @@ void a_sub_n (mpf_t a_n, mpf_t w, unsigned int n, unsigned int prec)
 		if (maxbump < ndigits) maxbump = ndigits;
 
 		/* compute 1/k - zeta (k+1)/(k+1) */
-		fp_zeta (zeta, k+1, prec+ndigits);
+		// fp_zeta (zeta, k+1, prec+ndigits);
+		fp_hasse_zeta (zeta, k+1, prec+ndigits);
+
 		mpf_div_ui (zt, zeta, k+1);
 		mpf_div_ui (ok, one, k);
 		mpf_sub (term, ok, zt);
@@ -1490,44 +1918,75 @@ void a_bound_n (mpf_t b_n, unsigned int n)
  */
 void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec)
 {
-	/* create and use a cache */
-	static int ncache = 0;
-	static mpf_t *cache;
-	static char *ticky;
-	if (ncache <= n)
-	{
-		cache = (mpf_t *) realloc (cache, (n+1)*sizeof (mpf_t));
-		ticky = (char *) realloc (ticky, (n+1)*sizeof (char));
-		int i;
-		for (i=ncache; i<=n; i++)
-		{
-			mpf_init (cache[i]);
-			ticky[i] = 0;
-		}
-		ncache = n+1;
-	}
+	DECLARE_FP_CACHE (cache);
 	if (0 == n)
 	{
-		mpf_set_d (b_n, 0.5);
+		mpf_set_ui (b_n, 1);
+		mpf_div_ui (b_n, b_n, 2);
+		return;
+	}
+
+	int have_prec = fp_one_d_cache_check (&cache, n);
+	if (have_prec >= prec)
+	{
+		fp_one_d_cache_fetch (&cache, b_n, n);
+		return;
+	}
+
+	if (1 == n)
+	{
+		mpf_set_ui (b_n, 1);
+		mpf_div_ui (b_n, b_n, 2);
+		mpf_t gam;
+		mpf_init (gam);
+		fp_euler_mascheroni (gam);
+		mpf_sub(b_n, b_n, gam);
+		mpf_clear (gam);
+		fp_one_d_cache_store (&cache, b_n, n, 10111222);
 		return;
 	}
 	
-	/* Pull a value out of the cache, if there's a value there */
-	if (ticky[n])
+	mpz_t ibin;
+	mpz_init (ibin);
+	
+	mpf_t bin, zeta;
+	mpf_init (bin);
+	mpf_init (zeta);
+
+	mpf_set_si (b_n, -1);
+	mpf_div_ui (b_n, b_n, 2);
+
+	int k;
+	for (k=2; k<=n; k++)
 	{
-		mpf_set (b_n, cache[n]);
-		return;
+		i_binomial (ibin, n, k);
+		mpf_set_z (bin, ibin);
+		fp_zeta (zeta, k, prec);
+		mpf_mul (zeta, zeta, bin);
+		if (k%2)
+		{
+			mpf_sub (b_n, b_n, zeta);
+		}
+		else
+		{
+			mpf_add (b_n, b_n, zeta);
+		}
 	}
 
-	mpf_t en;
-	mpf_init (en);
-	a_sub_n (b_n, en, n-1, prec);
-	mpf_set_ui (en, n);
-	mpf_mul (b_n, b_n, en);
-	mpf_clear (en);
+	/* now for the oddball terms */
+	fp_euler_mascheroni (bin);
+	mpf_set_ui (zeta, 1);
+	mpf_sub (zeta, zeta, bin);
+	fp_harmonic (bin, n-1);
+	mpf_sub (zeta, zeta, bin);
+	mpf_mul_ui (zeta, zeta, n);
+	mpf_add (b_n, b_n, zeta);
 
-	mpf_set (cache[n], b_n);
-	ticky[n] = 1;
+	mpf_clear (bin);
+	mpf_clear (zeta);
+	mpz_clear (ibin);
+
+	fp_one_d_cache_store (&cache, b_n, n, prec);
 }
 
 /* ======================================================================= */

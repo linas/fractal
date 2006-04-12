@@ -30,8 +30,8 @@ realclean:  clean
 dist:
 	tar -zcvf mp.tgz *.c *.h *.gplot *.txt Makefile .cvsignore
 
-.C.o:
-	$(CC) -c -O2 $<
+.c.o:
+	$(CC) -c -g -O2 $<
 
 .o:
-	$(CC) -o $* $^ -lgmp -lm
+	$(CC) -g -o $* $^ -lgmp -lm

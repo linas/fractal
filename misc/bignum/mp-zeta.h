@@ -13,6 +13,11 @@
 
 void fp_prt (char * str, mpf_t val);
 
+/**
+  * i_pow - raise n to the m power
+  */
+void i_pow (mpz_t p, unsigned int n, unsigned int m);
+		  
 /* i_poch_rising
  * rising pochhammer symbol, for integer values.
  *
@@ -60,7 +65,10 @@ void fp_binomial (mpf_t bin, double s, unsigned int k);
  */
 void c_binomial (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k);
 
-/* fixed-point bernoulli number */
+/* Harmonic number */
+void fp_harmonic (mpf_t harm, unsigned int n);
+
+/* Fixed-point bernoulli number */
 void q_bernoulli (mpq_t bern, int n);
 
 /* Floating point exponential */
@@ -88,29 +96,19 @@ void fp_zeta9 (mpf_t zeta);
 void fp_zeta_even (mpf_t zeta, unsigned int n);
 
 
-
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
  * return value placed in the arg "zeta".
  *
- * Simple-minded algo, carries out math to prec decimal digits
- *
- * OLEIS A046988
- *  Numerator of zeta(2n)/Pi^(2n)
- * 0,1,1,1,1,1,691,2,3617,43867,174611,155366,236364091,
- * 1315862,6785560294,6892673020804,7709321041217,151628697551,
- * 26315271553053477373,308420411983322,261082718496449122051,
- * 3040195287836141605382,5060594468963822588186
- *
- * OLEIS A002432 
- *  Denominator of zeta(2n)/Pi^(2n)
- *  6,90,945,9450,93555,638512875,18243225,325641566250,
- *  38979295480125,1531329465290625,13447856940643125,
- *  201919571963756521875,11094481976030578125,
- *  564653660170076273671875,5660878804669082674070015625,
- *  62490220571022341207266406250,12130454581433748587292890625
+ * Carries out math to prec decimal digits
  */
 void fp_zeta (mpf_t zeta, unsigned int s, int prec);
+
+/* Same, using Helmut Hasse convergent algo */
+void fp_hasse_zeta (mpf_t zeta, unsigned int s, int prec);
+
+/* Brute-force summation */
+void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec);
 
 /* Stieltjes constants */
 // void stieltjes_gamma (mpf_t gam, int n);

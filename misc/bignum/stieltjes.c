@@ -60,7 +60,7 @@ main (int argc, char * argv[])
 
 	if (argc < 3)
 	{
-		fprintf (stderr, "Usage: %s [ndigits] [nterms]\n", argv[0]); 
+		fprintf (stderr, "Usage: %s [ndigits] [norder]\n", argv[0]); 
 		exit (1);
 	}
 
@@ -68,24 +68,29 @@ main (int argc, char * argv[])
 	int prec = atoi (argv[1]);
 
 	/* number of an's to compute */
-	int nterms = atoi (argv[2]);
+	int norder = atoi (argv[2]);
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
 
-	/* the variable-precision calculations are touchy about this */
-	/* XXX this should be stirling's approx for binomial */
-	int bits = (int) (v + 300 + 3*nterms);
-
+	/* The largest that a binomial (n,k) will get is 2^n
+	 * so need an extra norder bits if going to order norder. 
+	 * And pad a bit, just to be safe... */
+	int bits = (int) (v + 100 + norder);
+	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 
-	printf ("computing Steiltjes constants  (pr=%d nt=%d) \n", prec, nterms);
+	printf ("# Computing Stieltjes constants\n");
+	printf ("# computed to precision of %d decimal places\n", prec);
+	printf ("# computed up to order of %d \n", norder);
+	printf ("# computed with %d bits of default mpf \n", bits);
+
 	mpf_t stie;
 	mpf_init (stie);
 	int i;
 	for (i=0; i<80; i++ ) {
-		stieltjes_gamma (stie, i, prec, nterms);
+		stieltjes_gamma (stie, i, prec, norder);
 		printf ("gamma[%d] = ", i);
 		mpf_out_str (stdout, 10, 60, stie);
 		printf (";\n");
