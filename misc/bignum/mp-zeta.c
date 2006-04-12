@@ -80,7 +80,7 @@ void i_one_d_cache_fetch (i_cache *c, mpz_t val, unsigned int n)
 }
 
 /**
- * i_one_d_cache_store - stre value in cache
+ * i_one_d_cache_store - store value in cache
  */
 void i_one_d_cache_store (i_cache *c, mpz_t val, unsigned int n)
 {
@@ -187,7 +187,7 @@ void q_one_d_cache_fetch (q_cache *c, mpq_t val, unsigned int n)
 }
 
 /**
- * q_one_d_cache_store - stre value in cache
+ * q_one_d_cache_store - store value in cache
  */
 void q_one_d_cache_store (q_cache *c, mpq_t val, unsigned int n)
 {
@@ -244,12 +244,21 @@ void fp_one_d_cache_fetch (fp_cache *c, mpf_t val, unsigned int n)
 }
 
 /**
- * fp_one_d_cache_store - stre value in cache
+ * fp_one_d_cache_store - store value in cache
  */
 void fp_one_d_cache_store (fp_cache *c, mpf_t val, unsigned int n, int prec)
 {
 	mpf_set (c->cache[n], val);
 	c->precision[n] = prec;
+}
+
+void fp_one_d_cache_clear (fp_cache *c)
+{
+	int i;
+	for (i=0; i<c->nmax; i++)
+	{
+		c->precision[i] = 0;
+	}
 }
 
 /* ======================================================================= */
@@ -1724,15 +1733,23 @@ void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec)
 static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 {
 	DECLARE_FP_CACHE (cache);
-	if (0 == n)
+
+	/* cache the likeliest case: same value of n every time. */
+	static int ncache = 0;
+	if (n != ncache)
+	{
+		fp_one_d_cache_clear(&cache);
+		ncache = n;
+	}
+	if ((0 == k) || (0 == n))
 	{
 		mpf_set_ui (d_k, 1); 
 		return;
 	}
-	int hit = fp_triangle_cache_check (&cache, n, k);
+	int hit = fp_one_d_cache_check (&cache, k);
 	if (hit)
 	{
-		fp_triangle_cache_fetch (&cache, d_k, n, k);
+		fp_one_d_cache_fetch (&cache, d_k, k);
 		return;
 	}
 
@@ -1762,7 +1779,7 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 
 		mpf_add (d_k, d_k, term);
 
-		fp_triangle_cache_store (&cache, d_k, n, i, 1);
+		fp_one_d_cache_store (&cache, d_k, i, 1);
 
 		mpf_mul_ui (four, four, 4);
 	}
@@ -1772,7 +1789,7 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 	mpf_clear (four);
 	mpz_clear (ifact);
 
-	fp_triangle_cache_fetch (&cache, d_k, n, k);
+	fp_one_d_cache_fetch (&cache, d_k, k);
 }
 
 void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)

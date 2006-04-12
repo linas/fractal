@@ -40,6 +40,8 @@ void stieltjes_gamma (mpf_t gam, int n, int prec, int nterms)
 		i_factorial (isb, k);
 		mpf_set_z (sb, isb);
 		mpf_div (term, term, sb);
+printf ("k=%d ", k);
+fp_prt ("term= ", term);
 		mpf_add (gam, gam, term);
 	}
 	i_factorial (isb, n);
