@@ -1715,44 +1715,6 @@ void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec)
 /* ======================================================================= */
 /* the d_k from the borwein 1995 paper */
 
-static void fp_borwein_tchebysheff_compute (mpf_t d_k, int n, int k)
-{
-	mpz_t ifact;
-	mpz_init (ifact);
-
-	mpf_t term, fact, four;
-	mpf_init (term);
-	mpf_init (fact);
-	mpf_init (four);
-
-	mpf_set_ui (d_k, 0);
-	mpf_set_ui (four, 1);
-	int i;
-	for (i=0; i<k; i++)
-	{
-		i_factorial (ifact, n+i-1);
-		mpf_set_z (term, ifact);
-		i_factorial (ifact, n-i);
-		mpf_set_z (fact, ifact);
-		mpf_div (term, term, fact);
-		i_factorial (ifact, 2*i);
-		mpf_set_z (fact, ifact);
-		mpf_div (term, term, fact);
-		mpf_mul (term, term, four);
-
-		mpf_add (d_k, d_k, term);
-
-		mpf_mul_ui (four, four, 4);
-	}
-
-	mpf_mul_ui(d_k, d_k, n);
-
-	mpf_clear (fact);
-	mpf_clear (term);
-	mpf_clear (four);
-	mpz_clear (ifact);
-}
-
 static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 {
 	DECLARE_FP_CACHE (cache);
@@ -1765,12 +1727,66 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 	if (hit)
 	{
 		fp_triangle_cache_fetch (&cache, d_k, n, k);
+		return;
 	}
-	else
+
+	mpz_t ifact;
+	mpz_init (ifact);
+
+	mpf_t term, fact, four;
+	mpf_init (term);
+	mpf_init (fact);
+	mpf_init (four);
+
+	mpf_set_ui (d_k, 0);
+	mpf_set_ui (four, 1);
+	int i;
+	for (i=0; i<n; i++)
 	{
-		fp_borwein_tchebysheff_compute (d_k, n, k);
-		fp_triangle_cache_store (&cache, d_k, n, k, 1);
+		i_factorial (ifact, n+i-1);
+		mpf_set_z (term, ifact);
+		i_factorial (ifact, n-i);
+		mpf_set_z (fact, ifact);
+		mpf_div (term, term, fact);
+		i_factorial (ifact, 2*i);
+		mpf_set_z (fact, ifact);
+		mpf_div (term, term, fact);
+		mpf_mul (term, term, four);
+		mpf_mul_ui(term, term, n);
+
+		mpf_add (d_k, d_k, term);
+
+		fp_triangle_cache_store (&cache, d_k, n, i, 1);
+
+		mpf_mul_ui (four, four, 4);
 	}
+
+	mpf_clear (fact);
+	mpf_clear (term);
+	mpf_clear (four);
+	mpz_clear (ifact);
+
+	fp_triangle_cache_fetch (&cache, d_k, n, k);
+}
+
+void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
+{
+	int n = 30;
+
+	mpf_t d_k, d_n;
+	mpf_init (d_k);
+	mpf_init (d_n);
+
+	fp_borwein_tchebyseff (d_k, n, n);
+
+	mpf_set_ui (zeta, 0);
+	int k;
+	for (k=0; k<n; k++)
+	{
+	}
+
+	mpf_clear (d_k);
+	mpf_clear (d_n);
 }
 
 /* ======================================================================= */
