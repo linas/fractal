@@ -30,9 +30,13 @@ void stieltjes_gamma (mpf_t gam, int n, int prec, int nterms)
 
 	mpf_set_ui (gam, 0);
 	// XXXX precision violation !!
+	// To get prec decimal places of precision, it seems we need
+	// about 10*prec terms. Which is nasty...
 	for (k=n; k<n+nterms; k++)
 	{
+printf ("k=%d ", k);
 		b_sub_n (term, k, prec);
+fp_prt ("bsubn= ", term);
 		i_stirbin_sum (isb, k,n);
 		mpf_set_z (sb, isb);
 		mpf_mul (term, term, sb);
@@ -40,8 +44,7 @@ void stieltjes_gamma (mpf_t gam, int n, int prec, int nterms)
 		i_factorial (isb, k);
 		mpf_set_z (sb, isb);
 		mpf_div (term, term, sb);
-printf ("k=%d ", k);
-fp_prt ("term= ", term);
+// fp_prt ("term= ", term);
 		mpf_add (gam, gam, term);
 	}
 	i_factorial (isb, n);
@@ -78,7 +81,7 @@ main (int argc, char * argv[])
 	/* The largest that a binomial (n,k) will get is 2^n
 	 * so need an extra norder bits if going to order norder. 
 	 * And pad a bit, just to be safe... */
-	int bits = (int) (v + 100 + norder);
+	int bits = (int) (v + 100 + 3*norder);
 	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
@@ -91,7 +94,7 @@ main (int argc, char * argv[])
 	mpf_t stie;
 	mpf_init (stie);
 	int i;
-	for (i=0; i<80; i++ ) {
+	for (i=1; i<80; i++ ) {
 		stieltjes_gamma (stie, i, prec, norder);
 		printf ("gamma[%d] = ", i);
 		mpf_out_str (stdout, 10, 60, stie);
