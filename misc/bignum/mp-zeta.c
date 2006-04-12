@@ -1773,19 +1773,52 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 {
 	int n = 30;
 
-	mpf_t d_k, d_n;
-	mpf_init (d_k);
-	mpf_init (d_n);
+	mpz_t ip;
+	mpz_init (ip);
 
-	fp_borwein_tchebyseff (d_k, n, n);
+	mpf_t d_n, po, term, twon;
+	mpf_init (d_n);
+	mpf_init (po);
+	mpf_init (term);
+	mpf_init (twon);
+
+	fp_borwein_tchebysheff (d_n, n, n);
 
 	mpf_set_ui (zeta, 0);
 	int k;
 	for (k=0; k<n; k++)
 	{
-	}
+		fp_borwein_tchebysheff (term, n, k);
+		mpf_sub (term, term, d_n); 
 
-	mpf_clear (d_k);
+		i_pow (ip, k+1, s);
+		mpf_set_z (po, ip);
+		mpf_div (term, term, po);
+
+		if (k%2)
+		{
+			mpf_sub(zeta, zeta, term);
+		}
+		else
+		{
+			mpf_add(zeta, zeta, term);
+		}
+	}
+	mpf_div (zeta, zeta, d_n);
+	mpf_neg (zeta, zeta);
+
+	mpf_set_ui (twon, 1);
+	mpf_div_2exp (twon, twon, s-1);
+	
+	mpf_set_ui (term, 1);
+	mpf_sub (term, term, twon);
+	
+	mpf_div (zeta, zeta, term);
+
+	mpz_clear (ip);
+	mpf_clear (twon);
+	mpf_clear (term);
+	mpf_clear (po);
 	mpf_clear (d_n);
 }
 
