@@ -1741,7 +1741,7 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 	mpf_set_ui (d_k, 0);
 	mpf_set_ui (four, 1);
 	int i;
-	for (i=0; i<n; i++)
+	for (i=0; i<=n; i++)
 	{
 		i_factorial (ifact, n+i-1);
 		mpf_set_z (term, ifact);
@@ -1771,7 +1771,7 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 
 void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 {
-	int n = 30;
+	int n = 90;   // XXXX
 
 	mpz_t ip;
 	mpz_init (ip);

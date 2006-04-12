@@ -203,7 +203,8 @@ main (int argc, char * argv[])
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed with %d bits of default mpf \n", bits);
 	// fp_zeta (z, 121, prec);
-	fp_hasse_zeta (z, 121, prec);
+	// fp_hasse_zeta (z, 121, prec);
+	fp_borwein_zeta (z, 121, prec);
 	printf ("done: ");
 	mpf_out_str (stdout, 10, 41, z);
 	printf ("\n");

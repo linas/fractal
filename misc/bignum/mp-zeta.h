@@ -107,6 +107,9 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec);
 /* Same, using Helmut Hasse convergent algo */
 void fp_hasse_zeta (mpf_t zeta, unsigned int s, int prec);
 
+/* Same, using P. Borwein convergent algo */
+void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec);
+
 /* Brute-force summation */
 void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec);
 
