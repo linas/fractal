@@ -103,7 +103,7 @@ int i_triangle_cache_check (i_cache *c, unsigned int n, unsigned int k)
 		for (en=c->nmax+1; en <=n; en++)
 		{
 			unsigned int j;
-			unsigned int idx = en * (en+1) /2 ;
+			unsigned int idx = en * (en+1) /2;
 			for (j=0; j<=en; j++)
 			{
 				mpz_init (c->cache[idx+j]);
@@ -1686,7 +1686,7 @@ void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec)
 		return;
 	}
 	int nmax = (int) (fnmax+1.0);
-	// printf ("zeta will be computed with %d terms\n", nmax);
+	printf ("zeta(%d) to precision %d will require %d terms\n", s, prec, nmax);
 	
 	/* Start computations where we last left off. */
 	mpf_set (zeta, zeta_cache[s]);
@@ -1757,7 +1757,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	}
 	
 	/* Bump precision so as to increase cache hits on next go-around. */
-	prec += 100;
+	// prec += 100;
 
 	int plo = fp_zeta_odd_plouffe (zeta, s, prec);
 
@@ -1842,8 +1842,8 @@ void a_sub_n (mpf_t a_n, mpf_t w, unsigned int n, unsigned int prec)
 		if (maxbump < ndigits) maxbump = ndigits;
 
 		/* compute 1/k - zeta (k+1)/(k+1) */
-		// fp_zeta (zeta, k+1, prec+ndigits);
-		fp_hasse_zeta (zeta, k+1, prec+ndigits);
+		fp_zeta (zeta, k+1, prec+ndigits);
+		// fp_hasse_zeta (zeta, k+1, prec+ndigits);
 
 		mpf_div_ui (zt, zeta, k+1);
 		mpf_div_ui (ok, one, k);
