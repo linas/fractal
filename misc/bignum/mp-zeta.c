@@ -37,11 +37,12 @@ typedef struct {
 	unsigned int nmax;
 	mpz_t *cache;
 	char *ticky;
+	short disabled;
 } i_cache;
 
 
 #define DECLARE_I_CACHE(name)         \
-	static i_cache name = {.nmax=0, .cache=NULL, .ticky=NULL}
+	static i_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, .disabled = 0}
 
 /** i_one_d_cache_check() -- check if mpz_t value is in the cache
  *  Returns true if the value is in the cache, else returns false.
@@ -49,6 +50,7 @@ typedef struct {
  */
 int i_one_d_cache_check (i_cache *c, unsigned int n)
 {
+	if (c->disabled) return 0;
 	if (n > c->nmax)
 	{
 		unsigned int newsize = n+1;
@@ -73,6 +75,7 @@ int i_one_d_cache_check (i_cache *c, unsigned int n)
  */
 void i_one_d_cache_fetch (i_cache *c, mpz_t val, unsigned int n)
 {
+	if (c->disabled) return;
 	mpz_set (val, c->cache[n]);
 }
 
@@ -81,6 +84,7 @@ void i_one_d_cache_fetch (i_cache *c, mpz_t val, unsigned int n)
  */
 void i_one_d_cache_store (i_cache *c, mpz_t val, unsigned int n)
 {
+	if (c->disabled) return;
 	mpz_set (c->cache[n], val);
 	c->ticky[n] = 1;
 }
@@ -525,6 +529,8 @@ void i_stirbin_sum (mpz_t s, unsigned int n, unsigned int m)
 void i_pow (mpz_t p, unsigned int n, unsigned int m)
 {
 	DECLARE_I_CACHE (cache);
+	cache.disabled = 1;
+
 	if ((1 == n) || (0 == m))
 	{
 		mpz_set_ui (p, 1); 
@@ -1795,7 +1801,8 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 		fp_borwein_tchebysheff (term, n, k);
 		mpf_sub (term, term, d_n); 
 
-		i_pow (ip, k+1, s);
+		// i_pow (ip, k+1, s);
+		mpz_ui_pow_ui (ip, k+1, s);
 		mpf_set_z (po, ip);
 		mpf_div (term, term, po);
 
