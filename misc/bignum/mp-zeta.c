@@ -1713,6 +1713,67 @@ void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec)
 }
 
 /* ======================================================================= */
+/* the d_k from the borwein 1995 paper */
+
+static void fp_borwein_tchebysheff_compute (mpf_t d_k, int n, int k)
+{
+	mpz_t ifact;
+	mpz_init (ifact);
+
+	mpf_t term, fact, four;
+	mpf_init (term);
+	mpf_init (fact);
+	mpf_init (four);
+
+	mpf_set_ui (d_k, 0);
+	mpf_set_ui (four, 1);
+	int i;
+	for (i=0; i<k; i++)
+	{
+		i_factorial (ifact, n+i-1);
+		mpf_set_z (term, ifact);
+		i_factorial (ifact, n-i);
+		mpf_set_z (fact, ifact);
+		mpf_div (term, term, fact);
+		i_factorial (ifact, 2*i);
+		mpf_set_z (fact, ifact);
+		mpf_div (term, term, fact);
+		mpf_mul (term, term, four);
+
+		mpf_add (d_k, d_k, term);
+
+		mpf_mul_ui (four, four, 4);
+	}
+
+	mpf_mul_ui(d_k, d_k, n);
+
+	mpf_clear (fact);
+	mpf_clear (term);
+	mpf_clear (four);
+	mpz_clear (ifact);
+}
+
+static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
+{
+	DECLARE_FP_CACHE (cache);
+	if (0 == n)
+	{
+		mpf_set_ui (d_k, 1); 
+		return;
+	}
+	int hit = fp_triangle_cache_check (&cache, n, k);
+	if (hit)
+	{
+		fp_triangle_cache_fetch (&cache, d_k, n, k);
+	}
+	else
+	{
+		fp_borwein_tchebysheff_compute (d_k, n, k);
+		fp_triangle_cache_store (&cache, d_k, n, k, 1);
+	}
+}
+
+/* ======================================================================= */
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
  * return value placed in the arg "zeta".
