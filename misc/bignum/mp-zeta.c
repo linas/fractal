@@ -1771,7 +1771,11 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 
 void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 {
-	int n = 90;   // XXXX
+	double nterms = 0.69 + 2.302585093 * prec;
+	// Huh? whazzup with the gamma ??
+	// nterms -=  s * log(s) -s;
+	nterms *= 0.567296329;
+	int n = nterms+1.0;
 
 	mpz_t ip;
 	mpz_init (ip);
