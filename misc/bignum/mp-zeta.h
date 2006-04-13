@@ -88,18 +88,11 @@ void fp_pi (mpf_t pi, unsigned int prec);
 /* return e^pi to prec decimal places */
 void fp_e_pi (mpf_t e_pi, unsigned int prec);
 
-void fp_zeta2 (mpf_t zeta);
-void fp_zeta3 (mpf_t zeta);
-void fp_zeta5 (mpf_t zeta);
-void fp_zeta7 (mpf_t zeta);
-void fp_zeta9 (mpf_t zeta);
-
 /* Compute and return the "exact" result for the zeta function for 
  * any value of even n. Computed top prec decimal places.
  * works by computing the Bernoulli number first.
  */
 void fp_zeta_even (mpf_t zeta, unsigned int n, int prec);
-
 
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
