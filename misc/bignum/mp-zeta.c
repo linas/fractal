@@ -945,15 +945,17 @@ void q_bernoulli (mpq_t bern, int n)
 
 void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 {
-	mpf_t z_n, fact, term;
+	mpf_t zee, z_n, fact, term;
 
+	mpf_init (zee);
 	mpf_init (z_n);
 	mpf_init (fact);
 	mpf_init (term);
 
 	mpf_set_ui (ex, 1);
 	mpf_set_ui (fact, 1);
-	mpf_set (z_n, z);
+	mpf_set (zee, z);
+	mpf_set (z_n, zee);
 	
 	// double mex = ((double) prec) * log (10.0) / log(2.0);
 	double mex = ((double) prec) * 3.321928095;
@@ -975,10 +977,11 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 		if (mpf_cmp (term, maxterm) < 0) break;
 		
 		n++;
-		mpf_mul (z_n, z_n, z);
+		mpf_mul (z_n, z_n, zee);
 		mpf_mul_ui (fact, fact, n);
 	}
 	
+	mpf_clear (zee);
 	mpf_clear (z_n);
 	mpf_clear (fact);
 	mpf_clear (term);
@@ -1137,7 +1140,7 @@ void fp_pi (mpf_t pi, int prec)
 }
 
 /* return e^pi */
-void fp_e_pi (mpf_t e_pi)
+void fp_e_pi_string (mpf_t e_pi)
 {
 	static int inited=0;
 	static mpf_t e;
@@ -1151,6 +1154,30 @@ void fp_e_pi (mpf_t e_pi)
 		mpf_set_str (e, p, 10);
 	}
 	mpf_set (e_pi, e);
+}
+
+/* return e^pi */
+void fp_e_pi (mpf_t e_pi, int prec)
+{
+	static int precision=0;
+	static mpf_t cached_e_pi;
+
+	if (precision >= prec)
+	{
+		mpf_set (e_pi, cached_e_pi);
+		return;
+	}
+
+	if (0 == precision)
+	{
+		mpf_init (cached_e_pi);
+	}
+
+	fp_pi (e_pi, prec);
+	fp_exp (e_pi, e_pi, prec);
+
+	mpf_set (cached_e_pi, e_pi);
+	precision = prec;
 }
 
 void fp_zeta2 (mpf_t zeta)
@@ -1352,7 +1379,7 @@ static void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned in
 	mpf_init (oterm);
 	mpf_init (acc);
 
-	fp_e_pi (e_pi);
+	fp_e_pi (e_pi, prec);
 	mpf_set_ui (ess_plus, 0);
 	mpf_set_ui (ess_minus, 0);
 
