@@ -83,10 +83,10 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
 void fp_euler_mascheroni (mpf_t gam);
 
 /* return pi to prec decimal places */
-void fp_pi (mpf_t pi, int prec);
+void fp_pi (mpf_t pi, unsigned int prec);
 
 /* return e^pi to prec decimal places */
-void fp_e_pi (mpf_t e_pi, int prec);
+void fp_e_pi (mpf_t e_pi, unsigned int prec);
 
 void fp_zeta2 (mpf_t zeta);
 void fp_zeta3 (mpf_t zeta);

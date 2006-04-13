@@ -108,6 +108,28 @@ main (int argc, char * argv[])
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 	
+#define TEST_PI
+#ifdef TEST_PI
+	mpf_t pi, pis;
+	mpf_init (pi);
+	mpf_init (pis);
+	fp_pi (pi, prec);
+	fp_prt ("pi= ", pi);
+	mpf_clear (pi);
+	mpf_clear(pis);
+#endif
+	
+#ifdef TEST_EXP
+	mpf_t ex, one;
+	mpf_init (ex);
+	mpf_init (one);
+	mpf_set_ui(one, 1);
+	fp_exp (ex, one, 50);
+	fp_prt ("e= ", ex);
+	mpf_clear (ex);
+	mpf_clear(one);
+#endif
+	
 #ifdef ZETA_STUFF
 	mpf_t zeta;
 	mpf_init (zeta);
@@ -147,17 +169,6 @@ main (int argc, char * argv[])
 	}
 #endif
 
-#ifdef TEST_EXP
-	mpf_t ex, one;
-	mpf_init (ex);
-	mpf_init (one);
-	mpf_set_ui(one, 1);
-	fp_exp (ex, one, 50);
-	fp_prt ("e= ", ex);
-	mpf_clear (ex);
-	mpf_clear(one);
-#endif
-	
 #ifdef TEST_DIGIT_COUNT
 	mpz_t ival, tmpa, tmpb;
 	mpz_init (ival);

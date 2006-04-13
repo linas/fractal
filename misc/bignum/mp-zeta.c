@@ -1019,24 +1019,24 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
 	mpf_set_ui (one, 1);
 	mpf_div_2exp (maxterm, one, imax);
 
-	unsigned int n=1;
+	unsigned int n=0;
 	while(1)
 	{
-		mpf_div_ui (term, z_n, n);
+		mpf_div_ui (term, z_n, 2*n+1);
 		if (n%2)
 		{
-			mpf_add (atn, atn, term);
+			mpf_sub (atn, atn, term);
 		}
 		else
 		{
-			mpf_sub (atn, atn, term);
+			mpf_add (atn, atn, term);
 		}
 		
 		/* don't go no father than this */
 		mpf_abs (term, term);
 		if (mpf_cmp (term, maxterm) < 0) break;
 		
-		n += 2;
+		n ++;
 		mpf_mul (z_n, z_n, zsq);
 	}
 	
@@ -1102,9 +1102,9 @@ void fp_pi_string (mpf_t pi)
 	mpf_set (pi, e);
 }
 
-void fp_pi (mpf_t pi, int prec)
+void fp_pi (mpf_t pi, unsigned int prec)
 {
-	static int precision=0;
+	static unsigned int precision=0;
 	static mpf_t cached_pi;
 
 	if (precision >= prec)
@@ -1156,10 +1156,13 @@ void fp_e_pi_string (mpf_t e_pi)
 	mpf_set (e_pi, e);
 }
 
-/* return e^pi */
-void fp_e_pi (mpf_t e_pi, int prec)
+/**
+ * fp_e_pi - return e^pi 
+ * @prec - number of decimal places of precision
+ */
+void fp_e_pi (mpf_t e_pi, unsigned int prec)
 {
-	static int precision=0;
+	static unsigned int precision=0;
 	static mpf_t cached_e_pi;
 
 	if (precision >= prec)
