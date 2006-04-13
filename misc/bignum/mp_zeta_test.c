@@ -108,15 +108,32 @@ main (int argc, char * argv[])
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 	
-#define TEST_PI
+// #define TEST_PI
 #ifdef TEST_PI
 	mpf_t pi, pis;
 	mpf_init (pi);
 	mpf_init (pis);
 	fp_pi (pi, prec);
+	fp_pi_string (pis);
 	fp_prt ("pi= ", pi);
+	mpf_sub (pi, pi, pis);
+	fp_prt ("diff= ", pi);
 	mpf_clear (pi);
 	mpf_clear(pis);
+#endif
+	
+#define TEST_ZETA_INT
+#ifdef TEST_ZETA_INT
+	mpf_t zeta, zetas;
+	mpf_init (zeta);
+	mpf_init (zetas);
+	fp_zeta5 (zetas);
+	fp_zeta (zeta, 5, prec);
+	fp_prt ("zeta= ", zeta);
+	mpf_sub (zeta, zeta, zetas);
+	fp_prt ("diff= ", zeta);
+	mpf_clear (zeta);
+	mpf_clear(zetas);
 #endif
 	
 #ifdef TEST_EXP
@@ -130,6 +147,7 @@ main (int argc, char * argv[])
 	mpf_clear(one);
 #endif
 	
+// #define ZETA_STUFF
 #ifdef ZETA_STUFF
 	mpf_t zeta;
 	mpf_init (zeta);
@@ -138,18 +156,18 @@ main (int argc, char * argv[])
 	printf ("           012345678901234567890123456789012345678901234567890123456789012345678901234567890\n");
 	fp_zeta (zeta, 2, 13);
 	fp_prt ("13 digs= ", zeta);
-	fp_zeta (zeta, 8, 30);
+	fp_zeta (zeta, 7, 30);
 	fp_prt ("30 digs= ", zeta);
-	fp_zeta (zeta, 8, 40);
+	fp_zeta (zeta, 7, 40);
 	fp_prt ("40 digs= ", zeta);
-	fp_zeta (zeta, 8, 50);
+	fp_zeta (zeta, 7, 50);
 	fp_prt ("50 digs= ", zeta);
-	fp_zeta (zeta, 8, 60);
+	fp_zeta (zeta, 7, 60);
 	fp_prt ("60 digs= ", zeta);
-	fp_zeta (zeta, 8, 70);
+	fp_zeta (zeta, 7, 70);
 	fp_prt ("70 digs= ", zeta);
-	fp_zeta (zeta, 8, 80);
-	fp_prt ("0 digs= ", zeta);
+	fp_zeta (zeta, 7, 80);
+	fp_prt ("80 digs= ", zeta);
 #endif
 	
 // #define TEST_ZETA
