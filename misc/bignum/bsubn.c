@@ -73,7 +73,7 @@ main (int argc, char * argv[])
 
 	// The standard w value is 1 ... 
 	mpf_set_d (w, 1.0);
-	fp_pi (pi);
+	fp_pi (pi, prec);
 	
 	int n;
 	printf ("#\n# zeta expansion -- using b_n = n*a_{n-1} variant \n#\n");
@@ -140,7 +140,7 @@ main (int argc, char * argv[])
 	mpf_init (p_n);
 	mpf_init (prod);
 
-	fp_pi (pi);
+	fp_pi (pi, prec);
 	
 	int n;
 	printf ("#\n# zeta expansion terms b_n straight up. \n#\n");
