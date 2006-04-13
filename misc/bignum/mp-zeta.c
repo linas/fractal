@@ -955,7 +955,8 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 	mpf_set_ui (fact, 1);
 	mpf_set (z_n, z);
 	
-	double mex = ((double) prec) * log (10.0) / log(2.0);
+	// double mex = ((double) prec) * log (10.0) / log(2.0);
+	double mex = ((double) prec) * 3.321928095;
 	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
 	mpf_init (maxterm);
@@ -1006,7 +1007,8 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
 	mpf_mul (zsq, z, z);
 	mpf_set (z_n, z);
 	
-	double mex = ((double) prec) * log (10.0) / log(2.0);
+	// double mex = ((double) prec) * log (10.0) / log(2.0);
+	double mex = ((double) prec) * 3.321928095;
 	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
 	mpf_init (maxterm);
@@ -1065,7 +1067,7 @@ void fp_euler_mascheroni (mpf_t gam)
 	mpf_set (gam, e);
 }
 
-void fp_pi (mpf_t pi)
+void fp_pi_string (mpf_t pi)
 {
 	static int inited=0;
 	static mpf_t e;
@@ -1095,6 +1097,43 @@ void fp_pi (mpf_t pi)
 		mpf_set_str (e, p, 10);
 	}
 	mpf_set (pi, e);
+}
+
+void fp_pi (mpf_t pi, int prec)
+{
+	static int precision=0;
+	static mpf_t cached_pi;
+
+	if (precision >= prec)
+	{
+		mpf_set (pi, cached_pi);
+		return;
+	}
+
+	if (0 == precision)
+	{
+		mpf_init (cached_pi);
+	}
+
+	/* Simple-minded Machin formula */
+	mpf_t tmp;
+	mpf_init(tmp);
+	mpf_set_ui (tmp, 1);
+	mpf_div_ui (tmp, tmp, 5);
+	fp_arctan (pi, tmp, prec);
+
+	mpf_mul_ui (pi, pi, 4);
+
+	mpf_set_ui (tmp, 1);
+	mpf_div_ui (tmp, tmp, 239);
+	fp_arctan (tmp, tmp, prec);
+
+	mpf_sub (pi, pi, tmp);
+	mpf_mul_ui (pi, pi, 4);
+	mpf_clear (tmp);
+
+	mpf_set (cached_pi, pi);
+	precision = prec;
 }
 
 /* return e^pi */
