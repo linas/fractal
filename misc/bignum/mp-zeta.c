@@ -945,13 +945,11 @@ void q_bernoulli (mpq_t bern, int n)
 
 void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 {
-	mpf_t z_n, fact, term, acc, tmp;
+	mpf_t z_n, fact, term;
 
 	mpf_init (z_n);
 	mpf_init (fact);
 	mpf_init (term);
-	mpf_init (acc);
-	mpf_init (tmp);
 
 	mpf_set_ui (ex, 1);
 	mpf_set_ui (fact, 1);
@@ -969,25 +967,77 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 	while(1)
 	{
 		mpf_div (term, z_n, fact);
-		mpf_add (acc, ex, term);
-		mpf_set (ex,acc);
+		mpf_add (ex, ex, term);
 		
 		/* don't go no father than this */
-		mpf_abs (tmp, term);
-		if (mpf_cmp (tmp, maxterm) < 0) break;
+		mpf_abs (term, term);
+		if (mpf_cmp (term, maxterm) < 0) break;
 		
 		n++;
-		mpf_mul (tmp, z_n, z);
-		mpf_set (z_n, tmp);
-		mpf_mul_ui (tmp, fact, n);
-		mpf_set (fact,tmp);
+		mpf_mul (z_n, z_n, z);
+		mpf_mul_ui (fact, fact, n);
 	}
 	
 	mpf_clear (z_n);
 	mpf_clear (fact);
 	mpf_clear (term);
-	mpf_clear (acc);
-	mpf_clear (tmp);
+
+	mpf_clear (one);
+	mpf_clear (maxterm);
+}
+
+/* ======================================================================= */
+/**
+ * fp_arctan -  Floating point arctangent
+ * Implemented using a brute-force, very simple algo, with 
+ * no attempts at optimization. Also, does not assume any 
+ * precomputed constants.
+ */
+
+void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
+{
+	mpf_t z_n, zsq, term;
+
+	mpf_init (z_n);
+	mpf_init (zsq);
+	mpf_init (term);
+
+	mpf_set_ui (atn, 0);
+	mpf_mul (zsq, z, z);
+	mpf_set (z_n, z);
+	
+	double mex = ((double) prec) * log (10.0) / log(2.0);
+	unsigned int imax = (unsigned int) (mex +1.0);
+	mpf_t maxterm, one;
+	mpf_init (maxterm);
+	mpf_init (one);
+	mpf_set_ui (one, 1);
+	mpf_div_2exp (maxterm, one, imax);
+
+	unsigned int n=1;
+	while(1)
+	{
+		mpf_div_ui (term, z_n, n);
+		if (n%2)
+		{
+			mpf_add (atn, atn, term);
+		}
+		else
+		{
+			mpf_sub (atn, atn, term);
+		}
+		
+		/* don't go no father than this */
+		mpf_abs (term, term);
+		if (mpf_cmp (term, maxterm) < 0) break;
+		
+		n += 2;
+		mpf_mul (z_n, z_n, zsq);
+	}
+	
+	mpf_clear (z_n);
+	mpf_clear (zsq);
+	mpf_clear (term);
 
 	mpf_clear (one);
 	mpf_clear (maxterm);

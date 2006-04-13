@@ -74,6 +74,9 @@ void q_bernoulli (mpq_t bern, int n);
 /* Floating point exponential */
 void fp_exp (mpf_t ex, mpf_t z, unsigned int prec);
 
+/* Floating point arctan */
+void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
+
 /* fp_euler
  * return Euler-Mascheroni const
  */
