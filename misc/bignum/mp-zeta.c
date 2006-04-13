@@ -1000,15 +1000,17 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 
 void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
 {
-	mpf_t z_n, zsq, term;
+	mpf_t zee, z_n, zsq, term;
 
+	mpf_init (zee);
 	mpf_init (z_n);
 	mpf_init (zsq);
 	mpf_init (term);
 
-	mpf_set_ui (atn, 0);
-	mpf_mul (zsq, z, z);
-	mpf_set (z_n, z);
+	mpf_set (zee, z);
+	mpf_mul (zsq, zee, zee);
+	mpf_mul (z_n, zee, zsq);
+	mpf_set (atn, zee);
 	
 	// double mex = ((double) prec) * log (10.0) / log(2.0);
 	double mex = ((double) prec) * 3.321928095;
@@ -1019,7 +1021,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
 	mpf_set_ui (one, 1);
 	mpf_div_2exp (maxterm, one, imax);
 
-	unsigned int n=0;
+	unsigned int n=1;
 	while(1)
 	{
 		mpf_div_ui (term, z_n, 2*n+1);
@@ -1040,6 +1042,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
 		mpf_mul (z_n, z_n, zsq);
 	}
 	
+	mpf_clear (zee);
 	mpf_clear (z_n);
 	mpf_clear (zsq);
 	mpf_clear (term);
