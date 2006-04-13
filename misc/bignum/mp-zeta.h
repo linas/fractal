@@ -95,9 +95,10 @@ void fp_zeta7 (mpf_t zeta);
 void fp_zeta9 (mpf_t zeta);
 
 /* Compute and return the "exact" result for the zeta function for 
- * any value of even n 
+ * any value of even n. Computed top prec decimal places.
+ * works by computing the Bernoulli number first.
  */
-void fp_zeta_even (mpf_t zeta, unsigned int n);
+void fp_zeta_even (mpf_t zeta, unsigned int n, int prec);
 
 
 /* fp_zeta

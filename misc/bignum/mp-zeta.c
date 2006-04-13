@@ -1194,7 +1194,7 @@ void fp_zeta2 (mpf_t zeta)
 		mpf_init (pi);
 		mpf_init (pisq);
 		
-		fp_pi (pi);
+		fp_pi (pi, 1000);  // XXX  bad hard-coded prcision value
 		mpf_mul (pisq, pi, pi);
 		mpf_div_ui (z, pisq, 6);
 	
@@ -1276,50 +1276,16 @@ void fp_zeta9 (mpf_t zeta)
 }
 
 /* ======================================================================= */
-
-void fp_zeta_even_ui (mpf_t zeta, unsigned int n, unsigned int div)
-{
-	mpf_t pi, pip;
-	mpf_init (pi);
-	mpf_init (pip);
-	
-	fp_pi (pi);
-	mpf_pow_ui (pip, pi, n);
-	mpf_div_ui (zeta, pip, div);
-
-	mpf_clear (pi);
-	mpf_clear (pip);
-}
-
-void fp_zeta_even_str (mpf_t zeta, unsigned int n, char * snum, char * sdenom)
-{
-	mpf_t pi, pip, num, denom;
-	mpf_init (pi);
-	mpf_init (pip);
-	mpf_init (num);
-	mpf_init (denom);
-
-	mpf_set_str (num,snum, 10);
-	mpf_set_str (denom, sdenom, 10);
-	
-	fp_pi (pi);
-	mpf_pow_ui (pip, pi, n);
-	mpf_mul(pi, pip, num);
-	mpf_div(zeta, pi, denom);
-
-	mpf_clear (pi);
-	mpf_clear (pip);
-	mpf_clear (num);
-	mpf_clear (denom);
-}
-
-/* ======================================================================= */
-/* Compute and return the "exact" result for the zeta function for 
- * any value of even n. This is obtained by recursievly computing
+/**
+ * fp_zeta_even - return the zeta value for even "n".
+ * @prec - decimal places of precision to work to.
+ *
+ * Uses a fast algorithm to compute the zeta function for any 
+ * even value of n. This is obtained by recursievly computing
  * the Bernoulli numbers, and multiplying by an appropriate factor
  * of pi and factorial. 
  */
-void fp_zeta_even (mpf_t zeta, unsigned int n)
+void fp_zeta_even (mpf_t zeta, unsigned int n, int prec)
 {
 	mpq_t bern, b2, bb;
 	mpq_init (bern);
@@ -1344,7 +1310,7 @@ void fp_zeta_even (mpf_t zeta, unsigned int n)
 	mpf_init (pi);
 	mpf_init (pip);
 	
-	fp_pi (pi);
+	fp_pi (pi, prec);
 	mpf_mul_ui (pi, pi, 2);
 	mpf_pow_ui (pip, pi, n);
 
@@ -1460,7 +1426,7 @@ static void fp_zeta_odd_helper (mpf_t zeta, unsigned int n,
 	mpf_mul (spos_term, spos, c_plus);
 	mpf_mul (sneg_term, sneg, c_minus);
 			  
-	fp_pi (pi);
+	fp_pi (pi, prec);
 	mpf_pow_ui (pip, pi, n);
 	mpf_mul (piterm, pip, c_pi);
 
@@ -2019,8 +1985,8 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	/* We've got exact results for even numbers */
 	if (0 == s%2)
 	{
-		fp_zeta_even (zeta, s);
-		fp_one_d_cache_store (&cache, zeta, s, 10111222);
+		fp_zeta_even (zeta, s, prec);
+		fp_one_d_cache_store (&cache, zeta, s, prec);
 		return;
 	}
 	
