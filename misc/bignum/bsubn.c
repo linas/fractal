@@ -76,11 +76,13 @@ main (int argc, char * argv[])
 	fp_pi (pi);
 	
 	int n;
-	printf ("#\n# zeta expansion terms \n#\n");
+	printf ("#\n# zeta expansion -- using b_n = n*a_{n-1} variant \n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
-	for (n=0; n<norder; n++)
+	fflush (stdout);
+	for (n=2590; n<2600; n++)
+	// for (n=0; n<norder; n++)
 	{
 		a_sub_n (a_n, w, n, prec);
 
@@ -141,12 +143,13 @@ main (int argc, char * argv[])
 	fp_pi (pi);
 	
 	int n;
-	printf ("#\n# zeta expansion terms \n#\n");
+	printf ("#\n# zeta expansion terms b_n straight up. \n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
+	fflush (stdout);
 	//for (n=1; n<norder; n++)
-	for (n=2600; n<2610; n++)
+	for (n=2590; n<2600; n++)
 	{
 		b_sub_n (b_n, n, prec);
 
