@@ -936,7 +936,12 @@ void q_bernoulli (mpq_t bern, int n)
 }
 
 /* ======================================================================= */
-/* Floating point exponential */
+/**
+ * fp_exp -  Floating point exponential
+ * Implemented using a brute-force, very simple algo, with 
+ * no attempts at optimization. Also, does not assume any 
+ * precomputed constants.
+ */
 
 void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 {
