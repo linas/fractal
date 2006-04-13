@@ -41,13 +41,15 @@ fp_prt ("bsubn= ", term);
 		mpf_set_z (sb, isb);
 		mpf_mul (term, term, sb);
 
-		i_factorial (isb, k);
+		// i_factorial (isb, k);
+		mpz_fac_ui (isb, k);
 		mpf_set_z (sb, isb);
 		mpf_div (term, term, sb);
 // fp_prt ("term= ", term);
 		mpf_add (gam, gam, term);
 	}
-	i_factorial (isb, n);
+	// i_factorial (isb, n);
+	mpz_fac_ui (isb, n);
 	mpf_set_z (sb, isb);
 	mpf_mul (gam, gam, sb);
 	if (n%2) mpf_neg (gam, gam);

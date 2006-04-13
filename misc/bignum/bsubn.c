@@ -126,7 +126,7 @@ main (int argc, char * argv[])
 	}
 #endif
 	
-// #define B_SUB_N
+#define B_SUB_N
 #ifdef B_SUB_N
 
 	mpf_t b_n, en, pi, sq, term, p_n, prod;
@@ -145,7 +145,8 @@ main (int argc, char * argv[])
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
-	for (n=1; n<norder; n++)
+	//for (n=1; n<norder; n++)
+	for (n=2600; n<2610; n++)
 	{
 		b_sub_n (b_n, n, prec);
 
@@ -198,24 +199,35 @@ main (int argc, char * argv[])
 	}
 #endif
 
-#define TEST
+// #define TEST
 #ifdef TEST
-	mpf_t za, zb;
+	mpf_t za, zb, sq;
 	mpf_init (za);
 	mpf_init (zb);
+	mpf_init (sq);
+	printf ("#\n# compare bernoulli zeta results to borwein zeta\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed with %d bits of default mpf \n", bits);
 	// fp_zeta (z, 121, prec);
 	// fp_hasse_zeta (z, 121, prec);
 	int i;
-	for (i=3; i<121; i+=2)
+	for (i=2000; i<5000; i+=12)
 	{
 		fp_borwein_zeta (za, i, prec);
-		fp_zeta_odd_plouffe (zb, i, prec);
-		mpf_sub (za, za, zb);
+		// fp_zeta_odd_plouffe (zb, i, prec);
+		// fp_zeta (zb, i, prec);
+		// mpf_sub (za, za, zb);
+
+#define TEST_QUAD_ROOT
+#ifdef TEST_QUAD_ROOT
+		mpf_set_ui (za, i);
+		mpf_sqrt (sq, za);
+		mpf_sqrt (sq, sq);
+#endif
 		printf ("done: %d  ", i);
-		mpf_out_str (stdout, 10, 30, za);
+		mpf_out_str (stdout, 10, 30, sq);
 		printf ("\n");
+		fflush (stdout);
 	}
 #endif
 }

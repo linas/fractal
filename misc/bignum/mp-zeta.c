@@ -340,6 +340,7 @@ void i_poch_rising (mpz_t poch, unsigned int k, unsigned int n)
 /** 
  * i_factorial -- the factorial
  */
+#ifdef USE_LOCAL_FACTORIAL
 void i_factorial (mpz_t fact, unsigned int n)
 {
 	DECLARE_I_CACHE (cache);
@@ -360,12 +361,16 @@ void i_factorial (mpz_t fact, unsigned int n)
 		i_one_d_cache_store (&cache, fact, n);
 	}
 }
+#else
+#define i_factorial mpz_fac_ui
+#endif /* USE_LOCAL_FACTORIAL */
 
 /* ====================================================================== */
 /* i_binomial
  * Binomial coefficient (n k)
  */
 
+#ifdef USE_LOCAL_BINOMIAL
 void i_binomial_compute (mpz_t bin, unsigned int n, unsigned int k)
 {
 	mpz_t top, bot;
@@ -409,6 +414,10 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 		i_triangle_cache_store (&cache, bin, n, k);
 	}
 }
+#else 
+#define i_binomial mpz_bin_uiui
+
+#endif /* USE_LOCAL_BINOMIAL */
 
 /* ======================================================================= */
 /* stirling_first - Stirling Numbers of the First kind, 
