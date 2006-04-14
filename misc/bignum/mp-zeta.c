@@ -254,7 +254,7 @@ void fp_one_d_cache_store (fp_cache *c, mpf_t val, unsigned int n, int prec)
 
 void fp_one_d_cache_clear (fp_cache *c)
 {
-	int i;
+	unsigned int i;
 	for (i=0; i<c->nmax; i++)
 	{
 		c->precision[i] = 0;
@@ -613,7 +613,7 @@ void fp_bin_xform_pow_compute (mpf_t bxp, unsigned int n, unsigned int s)
 	mpf_init (term);
 	
 	mpf_set_ui (bxp, 0);
-	int k;
+	unsigned int k;
 	for (k=0; k<=n; k++)
 	{
 		i_binomial (bin, n, k);
@@ -735,7 +735,7 @@ void fp_harmonic (mpf_t harm, unsigned int n)
 		return;
 	}
 	
-	int istart = n-1;
+	unsigned int istart = n-1;
 	hit = fp_one_d_cache_check (&cache, istart);
 	while (0 == hit && istart>1)
 	{
@@ -743,7 +743,7 @@ void fp_harmonic (mpf_t harm, unsigned int n)
 		hit = fp_one_d_cache_check (&cache, istart);
 	}
 
-	int i;
+	unsigned int i;
 	fp_harmonic (harm, istart);
 
 	mpf_t term;
@@ -1223,7 +1223,7 @@ static void fp_euler_mascheroni_compute (mpf_t gam, unsigned int prec)
 	// double en = log (prec) / log (2.0);
 	double en = log (prec);
 	en = 1.442695041 * (en + log (en));
-	int n = en;
+	int n = (int) en;
 	
 	mpf_t maxterm;
 	mpf_init (maxterm);
@@ -1918,7 +1918,7 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 	// Huh? whazzup with the gamma ??
 	// nterms -=  s * log(s) -s;
 	nterms *= 0.567296329;
-	int n = nterms+1.0;
+	int n = (int) (nterms+1.0);
 
 	mpz_t ip;
 	mpz_init (ip);
