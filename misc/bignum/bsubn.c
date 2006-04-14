@@ -40,7 +40,8 @@ main (int argc, char * argv[])
 	/* The largest that a binomial (n,k) will get is 2^n
 	 * so need an extra norder bits if going to order norder. 
 	 * And pad a bit, just to be safe... */
-	int bits = (int) (v + 100 + 3.3*norder);
+	// int bits = (int) (v + 100 + 3.3*norder);
+	int bits = (int) (v + 100 + norder);
 	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
@@ -148,8 +149,7 @@ main (int argc, char * argv[])
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
 	fflush (stdout);
-	//for (n=1; n<norder; n++)
-	for (n=2590; n<2600; n++)
+	for (n=1; n<norder; n++)
 	{
 		b_sub_n (b_n, n, prec);
 
@@ -221,12 +221,6 @@ main (int argc, char * argv[])
 		// fp_zeta (zb, i, prec);
 		// mpf_sub (za, za, zb);
 
-#define TEST_QUAD_ROOT
-#ifdef TEST_QUAD_ROOT
-		mpf_set_ui (za, i);
-		mpf_sqrt (sq, za);
-		mpf_sqrt (sq, sq);
-#endif
 		printf ("done: %d  ", i);
 		mpf_out_str (stdout, 10, 30, sq);
 		printf ("\n");

@@ -77,10 +77,13 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec);
 /* Floating point arctan */
 void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
 
+/* Floating point logarithm */
+void fp_log (mpf_t lg, mpf_t z, unsigned int prec);
+
 /* fp_euler
  * return Euler-Mascheroni const
  */
-void fp_euler_mascheroni (mpf_t gam);
+void fp_euler_mascheroni (mpf_t gam, unsigned int prec);
 
 /* return pi to prec decimal places */
 void fp_pi (mpf_t pi, unsigned int prec);

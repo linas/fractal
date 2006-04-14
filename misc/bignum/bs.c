@@ -59,6 +59,12 @@ double eff(double x)
 	mpf_init (re_b);
 	mpf_init (im_b);
 
+	/* precision that we should use is about 
+	 * x*log(10/log(2) = 3.3*x since b(x) 
+	 * rquires 2^x digits to calculate accurately.
+	 *
+	 * For real x, we need ... ?
+	 */
 	b_sub_s (re_b, im_b, x, 0.0, 400, x*4+150);
 	double y = mpf_get_d (re_b);
 
@@ -86,15 +92,16 @@ main (int argc, char * argv[])
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
 
-	/* the variable-precision calculations are touchy about this */
-	/* XXX this should be stirling's approx for binomial */ 
-	int nterms = 1500;
-	int bits = (int) (v + 400 + 3*nterms);
+	/* The largest that a binomial (n,k) will get is 2^n
+	 * so need an extra norder bits if going to order norder. 
+	 * And pad a bit, just to be safe... */
+	int norder = 5000;
+	int bits = (int) (v + 300 + norder);
 	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 	
-	double z[50];
+	double z[150];
 
 	z[1] = 2.756189414;
 	z[2] = 6.968997419;
@@ -138,12 +145,43 @@ main (int argc, char * argv[])
 	z[40] = 1327.757352;
 	z[41] = 1393.141954;
 	z[42] = 1460.097275;
+	z[43] = 1528.62338;
+	z[44] = 1598.720279;
+	z[45] = 1670.388035;
+	z[46] = 1743.626495;
+	z[47] = 1818.43581;
+	z[48] = 1894.81584;
+	z[49] = 1972.766716;
+	z[50] = 2052.288429;
+	z[51] = 2133.38088;
+	z[52] = 2216.044101;
+	z[53] = 2300.278171;
+	z[54] = 2386.082985;
+	z[55] = 2473.458622;
+	z[56] = 2562.405047;
+	z[57] = 2652.922223;
+	z[58] = 2745.010239;
+	z[59] = 2838.669045;
+	z[60] = 2933.898631;
+	z[61] = 3030.69903;
+	z[62] = 3129.070226;
+	z[63] = 3229.012193;
+	z[64] = 3330.52498;
+	z[65] = 3433.608541;
+	z[66] = 3538.262921;
+	z[67] = 3644.488069;
+	z[68] = 3752.284028;
+	z[69] = 3861.650754;
+	z[70] = 3972.5883;
+	z[71] = 4085.09664;
+	z[72] = 4199.175777;
+	z[73] = 4314.82568;
 	int i;
-	for (i=38; i<43; i++)
+	for (i=36; i<74; i++)
 	{
 		double zer = find_zero (z[i]-0.002, z[i]+0.002, eff, 1.0e-9);
 
-		printf ("%d\t%20.16g\n", i, zer);
+		printf ("%d\t%22.18g\n", i, zer);
 		fflush (stdout);
 	}
 

@@ -340,6 +340,7 @@ void i_poch_rising (mpz_t poch, unsigned int k, unsigned int n)
 /** 
  * i_factorial -- the factorial
  */
+// #define USE_LOCAL_FACTORIAL
 #ifdef USE_LOCAL_FACTORIAL
 void i_factorial (mpz_t fact, unsigned int n)
 {
@@ -370,6 +371,7 @@ void i_factorial (mpz_t fact, unsigned int n)
  * Binomial coefficient (n k)
  */
 
+// #define USE_LOCAL_BINOMIAL
 #ifdef USE_LOCAL_BINOMIAL
 void i_binomial_compute (mpz_t bin, unsigned int n, unsigned int k)
 {
@@ -943,7 +945,7 @@ void q_bernoulli (mpq_t bern, int n)
  * precomputed constants.
  */
 
-void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
+static void fp_exp_helper (mpf_t ex, mpf_t z, unsigned int prec)
 {
 	mpf_t zee, z_n, fact, term;
 
@@ -972,7 +974,7 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 		mpf_div (term, z_n, fact);
 		mpf_add (ex, ex, term);
 		
-		/* don't go no father than this */
+		/* don't go no farther than this */
 		mpf_abs (term, term);
 		if (mpf_cmp (term, maxterm) < 0) break;
 		
@@ -988,6 +990,93 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
 
 	mpf_clear (one);
 	mpf_clear (maxterm);
+}
+
+void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
+{
+	if (mpf_cmp_ui (z, 0) > 0)
+	{
+		fp_exp_helper (ex, z, prec);
+	}
+	else
+	{
+		mpf_t zee;
+		mpf_init (zee);
+		mpf_neg (zee, z);
+		fp_exp_helper (ex, zee, prec);
+		mpf_ui_div (ex, 1, ex);
+		mpf_clear (zee);
+	}
+}
+
+/* ======================================================================= */
+/**
+ * fp_log_m1 -  Floating point logarithm
+ * Implemented using a brute-force, very simple algo, with 
+ * no attempts at optimization. Also, does not assume any 
+ * precomputed constants.
+ */
+
+void fp_log_m1 (mpf_t lg, mpf_t z, unsigned int prec)
+{
+	mpf_t zee, z_n, term;
+
+	mpf_init (zee);
+	mpf_init (z_n);
+	mpf_init (term);
+
+	mpf_set (zee, z);
+	mpf_mul (z_n, zee, zee);
+	mpf_set (lg, zee);
+	
+	// double mex = ((double) prec) * log (10.0) / log(2.0);
+	double mex = ((double) prec) * 3.321928095;
+	unsigned int imax = (unsigned int) (mex +1.0);
+	mpf_t maxterm, one;
+	mpf_init (maxterm);
+	mpf_init (one);
+	mpf_set_ui (one, 1);
+	mpf_div_2exp (maxterm, one, imax);
+
+	unsigned int n=2;
+	while(1)
+	{
+		mpf_div_ui (term, z_n, n);
+		mpf_add (lg, lg, term);
+		
+		/* don't go no farther than this */
+		mpf_abs (term, term);
+		if (mpf_cmp (term, maxterm) < 0) break;
+		
+		n ++;
+		mpf_mul (z_n, z_n, zee);
+	}
+	
+	mpf_clear (zee);
+	mpf_clear (z_n);
+	mpf_clear (term);
+
+	mpf_clear (one);
+	mpf_clear (maxterm);
+}
+
+void fp_log (mpf_t lg, mpf_t z, unsigned int prec)
+{
+	mpf_t zee;
+	mpf_init (zee);
+	if (mpf_cmp_d(z, 1.5) > 0)
+	{
+		mpf_ui_div (zee, 1, z);
+		mpf_ui_sub (zee, 1, zee);
+		fp_log_m1 (lg, zee, prec);
+	}
+	else
+	{
+		mpf_ui_sub (zee, 1, z);
+		fp_log_m1 (lg, zee, prec);
+		mpf_neg (lg, lg);
+	}
+	mpf_clear (zee);
 }
 
 /* ======================================================================= */
@@ -1034,7 +1123,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
 			mpf_add (atn, atn, term);
 		}
 		
-		/* don't go no father than this */
+		/* don't go no farther than this */
 		mpf_abs (term, term);
 		if (mpf_cmp (term, maxterm) < 0) break;
 		
@@ -1052,27 +1141,12 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
 }
 
 /* ======================================================================= */
-/* fp_euler
- * return Euler-Mascheroni const
+/**
+ * fp_pi - return pi=3.14159... 
+ * @prec - number of decimal places of precision
+ *
+ * Uses simple, brute-force Machin formula
  */
-void fp_euler_mascheroni (mpf_t gam)
-{
-	static int inited=0;
-	static mpf_t e;
-
-	if (0 == inited)
-	{
-		inited = 1;
-		mpf_init (e);
-
-		// char * g="0.5772156649015328606065120900824024310421593359399235988057672348848677267776646709369470632917467495e0";
-	char * g="0.57721566490153286060651209008240243104215933593992359880576723488486772677766 467093694706329174674951463144724980708248096050401448654283622417399764492353 625350033374293733773767394279259525824709491600873520394816567085323315177661 152862119950150798479374508570574002992135478614669402960432542151905877553526 733139925401296742051375413954911168510280798423487758720503843109399736137255 306088933126760017247953783675927135157722610273492913940798430103417771778088 154957066107501016191663340152278935867965497252036212879226555953669628176388";
-	
-		mpf_set_str (e, g, 10);
-	}
-	mpf_set (gam, e);
-}
-
 void fp_pi (mpf_t pi, unsigned int prec)
 {
 	static unsigned int precision=0;
@@ -1113,6 +1187,8 @@ void fp_pi (mpf_t pi, unsigned int prec)
 /**
  * fp_e_pi - return e^pi 
  * @prec - number of decimal places of precision
+ *
+ * Uses simple, low-brow formula
  */
 void fp_e_pi (mpf_t e_pi, unsigned int prec)
 {
@@ -1134,6 +1210,92 @@ void fp_e_pi (mpf_t e_pi, unsigned int prec)
 	fp_exp (e_pi, e_pi, prec);
 
 	mpf_set (cached_e_pi, e_pi);
+	precision = prec;
+}
+
+
+/* fp_euler
+ * return Euler-Mascheroni const
+ */
+static void fp_euler_mascheroni_compute (mpf_t gam, unsigned int prec)
+{
+	/* power value, goes as log log n */
+	// double en = log (prec) / log (2.0);
+	double en = log (prec);
+	en = 1.442695041 * (en + log (en));
+	int n = en;
+	
+	mpf_t maxterm;
+	mpf_init (maxterm);
+	mpf_set_ui (maxterm, 1);
+
+	mpf_t z_n, twon, term, tmp, fact;
+	mpf_init (z_n);
+	mpf_init (twon);
+	mpf_init (term);
+	mpf_init (tmp);
+	mpf_init (fact);
+	mpf_set_ui (twon, 1);
+	mpf_mul_2exp(twon, twon, n);
+	mpf_set (z_n, twon);
+	mpf_set_ui (fact, 1);
+	mpf_div_ui (fact, fact, 2);
+	mpf_set_ui (gam, 1);
+
+	unsigned int k=2;
+	while(1)
+	{
+		fp_harmonic (tmp, k);
+		mpf_mul (term, z_n, tmp);
+		mpf_mul (term, term, fact);
+
+		mpf_add (gam, gam, term);
+
+		/* don't go no farther than this */
+		if (mpf_cmp (term, maxterm) < 0) break;
+
+		k ++;
+		mpf_mul (z_n, z_n, twon);
+		mpf_div_ui (fact, fact, k);
+	}
+
+	mpf_mul (gam, gam, twon);
+
+	fp_exp (tmp, twon, prec);
+	mpf_div (gam, gam, tmp);
+
+	mpf_set_ui (tmp, 2);
+	fp_log(tmp, tmp, prec);
+	mpf_mul_ui (tmp, tmp, n);
+	mpf_sub (gam, gam, tmp);
+	
+	mpf_clear (z_n);
+	mpf_clear (twon);
+	mpf_clear (term);
+	mpf_clear (tmp);
+	mpf_clear (fact);
+
+	mpf_clear (maxterm);
+}
+
+void fp_euler_mascheroni (mpf_t gam, unsigned int prec)
+{
+	static unsigned int precision=0;
+	static mpf_t cached_gam;
+
+	if (precision >= prec)
+	{
+		mpf_set (gam, cached_gam);
+		return;
+	}
+
+	if (0 == precision)
+	{
+		mpf_init (cached_gam);
+	}
+
+	fp_euler_mascheroni_compute (gam, prec);
+	mpf_set (cached_gam, gam);
 	precision = prec;
 }
 
@@ -1240,7 +1402,7 @@ static void fp_ess (mpf_t ess_plus, mpf_t ess_minus, unsigned int k, unsigned in
 		mpf_add (acc, ess_minus, oterm);
 		mpf_set (ess_minus, acc);
 
-		/* don't go no father than this */
+		/* don't go no farther than this */
 		if (mpf_cmp (term, maxterm) > 0) break;
 	}
 
@@ -1965,7 +2127,7 @@ void a_sub_n (mpf_t a_n, mpf_t w, unsigned int n, unsigned int prec)
 
 	/* add const terms */
 	mpf_add_ui (term, a_n, 1);
-	fp_euler_mascheroni (gam);
+	fp_euler_mascheroni (gam, prec);
 	mpf_sub (a_n, term, gam);
 
 	/* subtract 1/2(n+1) */
@@ -2037,7 +2199,7 @@ void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec)
 		mpf_div_ui (b_n, b_n, 2);
 		mpf_t gam;
 		mpf_init (gam);
-		fp_euler_mascheroni (gam);
+		fp_euler_mascheroni (gam, prec);
 		mpf_sub(b_n, b_n, gam);
 		mpf_clear (gam);
 		fp_one_d_cache_store (&cache, b_n, n, 10111222);
@@ -2072,7 +2234,7 @@ void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec)
 	}
 
 	/* now for the oddball terms */
-	fp_euler_mascheroni (bin);
+	fp_euler_mascheroni (bin, prec);
 	mpf_set_ui (zeta, 1);
 	mpf_sub (zeta, zeta, bin);
 	fp_harmonic (bin, n-1);
@@ -2149,7 +2311,7 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 
 	/* add const terms */
 	mpf_add_ui (term, re_a, 1);
-	fp_euler_mascheroni (gam);
+	fp_euler_mascheroni (gam,prec);
 	mpf_sub (re_a, term, gam);
 
 	/* subtract 1/2(s+1) */
@@ -2207,7 +2369,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 	mpf_set_ui (one, 1);
 	mpf_set_ui (re_b, 0);
 	mpf_set_ui (im_b, 0);
-	fp_euler_mascheroni (gam);
+	fp_euler_mascheroni (gam, prec);
 
 	int n = 650;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	n = nterms;
@@ -2219,8 +2381,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 // printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
 
 		/* compute zeta (k)- 1/(k-1) - gamma */
-		int ndigits = 0;
-		fp_zeta (rzeta, k, prec+ndigits);
+		fp_zeta (rzeta, k, prec);
 		mpf_div_ui (ok, one, k-1);
 		mpf_sub (term, rzeta, ok);
 		mpf_sub (term, term, gam);

@@ -18,8 +18,8 @@
 main ()
 {
 	int c;
-	char buf[4000];
-	double var[4000];
+	static char buf[14000];
+	static double var[14000];
 
 	/* read in floating point values in the first column */
 	int disc = 1;	
@@ -64,7 +64,8 @@ main ()
 			double eps = v*v*v / (3.0*m);
 			// printf ("%d\t%20.10g\t%20.16g\n", ncross, cross, eps);
 			// cross += eps;
-			printf ("%d\t%20.10g\n", ncross, cross);
+			// printf ("%d\t%20.10g\n", ncross, cross);
+			printf ("\tz[%d]=%20.10g;\n", ncross, cross);
 
 			zeros[ncross] = cross;
 			ncross ++;

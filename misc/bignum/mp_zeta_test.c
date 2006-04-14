@@ -59,6 +59,27 @@ void fp_e_pi_string (mpf_t e_pi)
 	mpf_set (e_pi, e);
 }
 
+/* fp_euler
+ * return Euler-Mascheroni const
+ */
+void fp_euler_mascheroni_string (mpf_t gam)
+{
+	static int inited=0;
+	static mpf_t e;
+
+	if (0 == inited)
+	{
+		inited = 1;
+		mpf_init (e);
+
+		// char * g="0.5772156649015328606065120900824024310421593359399235988057672348848677267776646709369470632917467495e0";
+	char * g="0.57721566490153286060651209008240243104215933593992359880576723488486772677766 467093694706329174674951463144724980708248096050401448654283622417399764492353 625350033374293733773767394279259525824709491600873520394816567085323315177661 152862119950150798479374508570574002992135478614669402960432542151905877553526 733139925401296742051375413954911168510280798423487758720503843109399736137255 306088933126760017247953783675927135157722610273492913940798430103417771778088 154957066107501016191663340152278935867965497252036212879226555953669628176388";
+	
+		mpf_set_str (e, g, 10);
+	}
+	mpf_set (gam, e);
+}
+
 
 void fp_zeta2 (mpf_t zeta)
 {
@@ -246,6 +267,17 @@ main (int argc, char * argv[])
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 	
+// #define TEST_LOG
+#ifdef TEST_LOG
+	mpf_t lg;
+	mpf_init (lg);
+	mpf_set_ui (lg, 1);
+	mpf_div_ui (lg, lg, 2);
+	fp_log (lg, lg, prec);
+	fp_prt ("log 2= ", lg);
+	mpf_clear (lg);
+#endif
+	
 // #define TEST_PI
 #ifdef TEST_PI
 	mpf_t pi, pis;
@@ -260,7 +292,21 @@ main (int argc, char * argv[])
 	mpf_clear(pis);
 #endif
 	
-#define TEST_ZETA_INT
+#define TEST_EULER
+#ifdef TEST_EULER
+	mpf_t gam, gams;
+	mpf_init (gam);
+	mpf_init (gams);
+	fp_euler_mascheroni (gam, prec);
+	fp_euler_mascheroni_string (gams);
+	fp_prt ("gamma= ", gam);
+	mpf_sub (gam, gam, gams);
+	fp_prt ("diff= ", gam);
+	mpf_clear (gam);
+	mpf_clear(gams);
+#endif
+	
+// #define TEST_ZETA_INT
 #ifdef TEST_ZETA_INT
 	mpf_t zeta, zetas;
 	mpf_init (zeta);
