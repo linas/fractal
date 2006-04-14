@@ -292,7 +292,7 @@ main (int argc, char * argv[])
 	mpf_clear(pis);
 #endif
 	
-#define TEST_EULER
+// #define TEST_EULER
 #ifdef TEST_EULER
 	mpf_t gam, gams;
 	mpf_init (gam);
@@ -404,6 +404,26 @@ main (int argc, char * argv[])
 		stieltjes_gamma (stie, i);
 		printf ("gamma[%d] = ", i);
 		mpf_out_str (stdout, 10, 60, stie);
+		printf (";\n");
+		fflush (stdout);
+	}
+#endif
+
+#define TEST_B_SUB_N
+#ifdef TEST_B_SUB_N
+	mpf_t rbs, ibs, bs;
+	mpf_init (rbs);
+	mpf_init (ibs);
+	mpf_init (bs);
+	int i;
+	for (i=0; i<40; i++ ) {
+		double re_s = i;
+		double im_s = 0.0;
+		b_sub_s (rbs, ibs, re_s, im_s, prec, nterms);
+		b_sub_n (bs, i, prec);
+		mpf_sub (bs, bs, rbs);
+		printf (" res=%g ", re_s);
+		mpf_out_str (stdout, 10, 60, bs);
 		printf (";\n");
 		fflush (stdout);
 	}

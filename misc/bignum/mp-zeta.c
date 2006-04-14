@@ -2380,11 +2380,10 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 
 // printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
 
-		/* compute zeta (k)- 1/(k-1) - gamma */
+		/* compute zeta (k)- 1/(k-1) */
 		fp_zeta (rzeta, k, prec);
 		mpf_div_ui (ok, one, k-1);
 		mpf_sub (term, rzeta, ok);
-		mpf_sub (term, term, gam);
 
 		mpf_mul (rzeta, term, rebin);
 		mpf_mul (izeta, term, imbin);
@@ -2405,9 +2404,15 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 	}
 
 	/* add const terms */
-	mpf_sub (re_b, re_b, gam);
+	mpf_set_d (term, re_s);
+	mpf_mul (term, term, gam);
+	mpf_sub (re_b, re_b, term);
 
-	/* add 1/2 */
+	mpf_set_d (term, im_s);
+	mpf_mul (term, term, gam);
+	mpf_sub (im_b, im_b, term);
+
+	/* subtract 1/2 */
 	mpf_div_ui (ok, one, 2);
 	mpf_add (re_b, re_b, ok);
 	

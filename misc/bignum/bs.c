@@ -87,7 +87,7 @@ main (int argc, char * argv[])
 	}
 
 	/* the decimal precison (number of decimal places) */
-	int prec = 100;
+	int prec = 1610;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -96,10 +96,16 @@ main (int argc, char * argv[])
 	 * so need an extra norder bits if going to order norder. 
 	 * And pad a bit, just to be safe... */
 	int norder = 5000;
-	int bits = (int) (v + 300 + norder);
+	int bits = (int) (v + 100 + norder);
 	
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
+	
+	printf ("# looking for precise zero locations\n");
+	printf ("# computed to precision of %d decimal places\n", prec);
+	printf ("# computed up to order of %d \n", norder);
+	printf ("# computed with %d bits of default mpf \n", bits);
+	fflush (stdout);
 	
 	double z[150];
 
@@ -176,10 +182,16 @@ main (int argc, char * argv[])
 	z[71] = 4085.09664;
 	z[72] = 4199.175777;
 	z[73] = 4314.82568;
+	z[74] = 4432.046412;
+	z[75] = 4550.837918;
+	z[76] = 4671.200252;
+	z[77] = 4793.133354;
+							 
+																									
 	int i;
-	for (i=36; i<74; i++)
+	for (i=36; i<78; i++)
 	{
-		double zer = find_zero (z[i]-0.002, z[i]+0.002, eff, 1.0e-9);
+		double zer = find_zero (z[i]-0.02, z[i]+0.02, eff, 1.0e-9);
 
 		printf ("%d\t%22.18g\n", i, zer);
 		fflush (stdout);

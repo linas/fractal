@@ -129,7 +129,7 @@ main (int argc, char * argv[])
 	}
 #endif
 	
-#define B_SUB_N
+// #define B_SUB_N
 #ifdef B_SUB_N
 
 	mpf_t b_n, en, pi, sq, term, p_n, prod;
@@ -202,27 +202,36 @@ main (int argc, char * argv[])
 	}
 #endif
 
-// #define TEST
+#define TEST
 #ifdef TEST
-	mpf_t za, zb, sq;
-	mpf_init (za);
-	mpf_init (zb);
-	mpf_init (sq);
-	printf ("#\n# compare bernoulli zeta results to borwein zeta\n");
+	mpf_t s, bin, term, acc;
+	mpf_init (s);
+	mpf_init (bin);
+	mpf_init (term);
+	mpf_init (acc);
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed with %d bits of default mpf \n", bits);
-	// fp_zeta (z, 121, prec);
-	// fp_hasse_zeta (z, 121, prec);
-	int i;
-	for (i=2000; i<5000; i+=12)
-	{
-		fp_borwein_zeta (za, i, prec);
-		// fp_zeta_odd_plouffe (zb, i, prec);
-		// fp_zeta (zb, i, prec);
-		// mpf_sub (za, za, zb);
 
-		printf ("done: %d  ", i);
-		mpf_out_str (stdout, 10, 30, sq);
+	mpf_set_ui (s, 1);
+	mpf_div_ui (s, s, 2);
+	mpf_set_ui (acc, 0);
+
+	double es = -0.5;
+	int n;
+	for (n=0; n<5000; n++)
+	{
+		fp_binomial (bin, es, n);
+		if (n%2)
+		{
+			mpf_sub (acc, acc, bin);
+		}
+		else
+		{
+			mpf_add (acc, acc, bin);
+		}
+
+		printf ("n= %d  ", n);
+		mpf_out_str (stdout, 10, 30, acc);
 		printf ("\n");
 		fflush (stdout);
 	}
