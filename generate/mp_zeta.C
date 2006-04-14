@@ -46,7 +46,7 @@ typedef struct {
 
 
 #define DECLARE_I_CACHE(name)         \
-	static i_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, .disabled = 0}
+	static i_cache name = {0, NULL, NULL, 0}
 
 /** i_one_d_cache_check() -- check if mpz_t value is in the cache
  *  Returns true if the value is in the cache, else returns false.
@@ -155,7 +155,7 @@ typedef struct {
 } q_cache;
 
 #define DECLARE_Q_CACHE(name)         \
-	static q_cache name = {.nmax=0, .cache=NULL, .ticky=NULL}
+	static q_cache name = {0, NULL, NULL}
 
 /** q_one_d_cache_check() -- check if mpq_t value is in the cache
  *  Returns true if the value is in the cache, else returns false.
@@ -211,7 +211,7 @@ typedef struct {
 
 
 #define DECLARE_FP_CACHE(name)         \
-	static fp_cache name = {.nmax=0, .cache=NULL, .precision=NULL}
+	static fp_cache name = {0, NULL, NULL}
 
 /** fp_one_d_cache_check() -- check if mpf_t value is in the cache
  *  If there is a cached value, this returns the precision of the 
@@ -258,7 +258,7 @@ void fp_one_d_cache_store (fp_cache *c, mpf_t val, unsigned int n, int prec)
 
 void fp_one_d_cache_clear (fp_cache *c)
 {
-	int i;
+	unsigned int i;
 	for (i=0; i<c->nmax; i++)
 	{
 		c->precision[i] = 0;
@@ -605,61 +605,6 @@ void fp_inv_pow (mpf_t p, unsigned int n, unsigned int m)
 }
 
 /* ======================================================================= */
-/* binomial transform of power sum */
-
-void fp_bin_xform_pow_compute (mpf_t bxp, unsigned int n, unsigned int s)
-{
-	mpz_t bin;
-	mpz_init (bin);
-
-	mpf_t vp, term;
-	mpf_init (vp);
-	mpf_init (term);
-	
-	mpf_set_ui (bxp, 0);
-	int k;
-	for (k=0; k<=n; k++)
-	{
-		i_binomial (bin, n, k);
-		mpf_set_z (term, bin);
-		fp_inv_pow (vp, k+1, s);
-		mpf_mul (term, term, vp);
-
-		if (k%2)
-		{
-			mpf_sub (bxp, bxp, term);
-		}
-		else
-		{
-			mpf_add (bxp, bxp, term);
-		}
-	}
-	mpz_clear (bin);
-	mpf_clear (vp);
-	mpf_clear (term);
-}
-
-void fp_bin_xform_pow (mpf_t bxp, unsigned int n, unsigned int s)
-{
-	DECLARE_FP_CACHE (cache);
-	if (0 == n)
-	{
-		mpf_set_ui (bxp, 1); 
-		return;
-	}
-	int hit = fp_triangle_cache_check (&cache, n+s, s);
-	if (hit)
-	{
-		fp_triangle_cache_fetch (&cache, bxp, n+s, s);
-	}
-	else
-	{
-		fp_bin_xform_pow_compute (bxp, n, s);
-		fp_triangle_cache_store (&cache, bxp, n+s, s, 1);
-	}
-}
-
-/* ======================================================================= */
 /** 
  * fp_harmonic -- The harmonic number
  */
@@ -679,7 +624,7 @@ void fp_harmonic (mpf_t harm, unsigned int n)
 		return;
 	}
 	
-	int istart = n-1;
+	unsigned int istart = n-1;
 	hit = fp_one_d_cache_check (&cache, istart);
 	while (0 == hit && istart>1)
 	{
@@ -687,7 +632,7 @@ void fp_harmonic (mpf_t harm, unsigned int n)
 		hit = fp_one_d_cache_check (&cache, istart);
 	}
 
-	int i;
+	unsigned int i;
 	fp_harmonic (harm, istart);
 
 	mpf_t term;
@@ -1167,7 +1112,7 @@ static void fp_euler_mascheroni_compute (mpf_t gam, unsigned int prec)
 	// double en = log (prec) / log (2.0);
 	double en = log (prec);
 	en = 1.442695041 * (en + log (en));
-	int n = en;
+	int n = (int) en;
 	
 	mpf_t maxterm;
 	mpf_init (maxterm);
@@ -1366,7 +1311,7 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 	// Huh? whazzup with the gamma ??
 	// nterms -=  s * log(s) -s;
 	nterms *= 0.567296329;
-	int n = nterms+1.0;
+	int n = (int) (nterms+1.0);
 
 	mpz_t ip;
 	mpz_init (ip);
@@ -1696,7 +1641,8 @@ static void a_s_init (void)
 	
 static double a_s (double re_s, double im_s)
 {
-	a_sub_s (re_a, im_a, re_s, im_s, prec);
+	// a_sub_s (re_a, im_a, re_s, im_s, prec);
+	b_sub_s (re_a, im_a, re_s, im_s, prec, 300);
 
 	double frea = mpf_get_d (re_a);
 	double fima = mpf_get_d (im_a);
