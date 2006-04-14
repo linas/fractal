@@ -2119,10 +2119,9 @@ static void pow_c (double re_q, double im_q, int p, double *prep, double *pimp)
 
 // Perform a generic dirichlet sum on an array of length n.
 static void 
-dirichlet_series_c (double re_s, double im_s, double *ser, int len, double *prep, double *pimp)
+dirichlet_series_c (double re_s, double im_s, long double *ser, int len, double *prep, double *pimp)
 {
 	int i;
-	double tmp;
 	*prep = 0.0;
 	*pimp = 0.0;
 
