@@ -58,7 +58,9 @@ int i_one_d_cache_check (i_cache *c, unsigned int n)
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
 		unsigned int en;
-		for (en=c->nmax+1; en <newsize; en++)
+		unsigned int nstart = c->nmax+1;
+		if (0 == c->nmax) nstart = 0;
+		for (en=nstart; en <newsize; en++)
 		{
 			mpz_init (c->cache[en]);
 			c->ticky[en] = 0;
@@ -166,7 +168,9 @@ int q_one_d_cache_check (q_cache *c, unsigned int n)
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
 		unsigned int en;
-		for (en=c->nmax+1; en <newsize; en++)
+		unsigned int nstart = c->nmax+1;
+		if (0 == c->nmax) nstart = 0;
+		for (en=nstart; en <newsize; en++)
 		{
 			mpq_init (c->cache[en]);
 			c->ticky[en] = 0;
@@ -223,7 +227,9 @@ int fp_one_d_cache_check (fp_cache *c, unsigned int n)
 		c->precision = (int *) realloc (c->precision, newsize * sizeof (int));
 
 		unsigned int en;
-		for (en=c->nmax+1; en <newsize; en++)
+		unsigned int nstart = c->nmax+1;
+		if (0 == c->nmax) nstart = 0;
+		for (en=nstart; en <newsize; en++)
 		{
 			mpf_init (c->cache[en]);
 			c->precision[en] = 0;
