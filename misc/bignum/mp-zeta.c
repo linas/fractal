@@ -2358,39 +2358,6 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 /* ======================================================================= */
 /* compute b_sub_s for complex-valued s
  */
-static void fp_zeta_minus_pole (mpf_t zeta, unsigned int s, int prec)
-{
-	DECLARE_FP_CACHE (cache);
-	if (2>s)
-	{
-		fprintf (stderr, "Domain error, asked for zeta(%d)\n", s);
-		mpf_set_ui (zeta, 0);
-		return;
-	}
-
-	int have_prec = fp_one_d_cache_check (&cache, s);
-	if (have_prec >= prec)
-	{
-		fp_one_d_cache_fetch (&cache, zeta, s);
-		return;
-	}
-	
-	mpf_t ok;
-
-	mpf_init (ok);
-
-	/* compute zeta (k)- 1/(k-1) */
-	fp_zeta (zeta, s, prec);
-	mpf_set_ui (ok, 1);
-	mpf_div_ui (ok, ok, s-1);
-	mpf_sub (zeta, zeta, ok);
-
-	mpf_clear (ok);
-
-	/* Save computed value to the cache. */
-	fp_one_d_cache_store (&cache, zeta, s, prec);
-}
-
 void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int prec, int nterms)
 {
 	int k;
@@ -2423,9 +2390,9 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 // printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
 
 		/* compute zeta (k)- 1/(k-1) */
-		fp_zeta_minus_pole (rzeta, k, prec);
-		// mpf_div_ui (ok, one, k-1);
-		// mpf_sub (term, rzeta, ok);
+		fp_zeta (rzeta, k, prec);
+		mpf_div_ui (ok, one, k-1);
+		mpf_sub (term, rzeta, ok);
 
 		mpf_mul (rzeta, term, rebin);
 		mpf_mul (izeta, term, imbin);
