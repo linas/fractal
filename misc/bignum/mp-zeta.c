@@ -53,7 +53,7 @@ int i_one_d_cache_check (i_cache *c, unsigned int n)
 	if (c->disabled) return 0;
 	if (n > c->nmax)
 	{
-		unsigned int newsize = n+1;
+		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpz_t *) realloc (c->cache, newsize * sizeof (mpz_t));
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
@@ -63,7 +63,7 @@ int i_one_d_cache_check (i_cache *c, unsigned int n)
 			mpz_init (c->cache[en]);
 			c->ticky[en] = 0;
 		}
-		c->nmax = n;
+		c->nmax = newsize-1;
 		return 0;
 	}
 
@@ -161,7 +161,7 @@ int q_one_d_cache_check (q_cache *c, unsigned int n)
 {
 	if (n > c->nmax)
 	{
-		unsigned int newsize = n+1;
+		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpq_t *) realloc (c->cache, newsize * sizeof (mpq_t));
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
@@ -171,7 +171,7 @@ int q_one_d_cache_check (q_cache *c, unsigned int n)
 			mpq_init (c->cache[en]);
 			c->ticky[en] = 0;
 		}
-		c->nmax = n;
+		c->nmax = newsize-1;
 		return 0;
 	}
 
@@ -218,7 +218,7 @@ int fp_one_d_cache_check (fp_cache *c, unsigned int n)
 {
 	if (n > c->nmax)
 	{
-		unsigned int newsize = n+1;
+		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpf_t *) realloc (c->cache, newsize * sizeof (mpf_t));
 		c->precision = (int *) realloc (c->precision, newsize * sizeof (int));
 
@@ -228,7 +228,7 @@ int fp_one_d_cache_check (fp_cache *c, unsigned int n)
 			mpf_init (c->cache[en]);
 			c->precision[en] = 0;
 		}
-		c->nmax = n;
+		c->nmax = newsize-1;
 		return 0;
 	}
 
