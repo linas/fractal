@@ -1,12 +1,10 @@
 /*
  * bs.c
  *
- * High-precison asub_n  using the 
- * Gnu Multiple-precision library.
- *
- * Also, high-precision values of the series a_n 
+ * Find the zeros of b_sub_n at high preicision, by using 
+ * set of initial guesses and a simple root-finding algo.
  * 
- * Linas Vepstas July 2005
+ * Linas Vepstas April 2006
  */
 
 #include <gmp.h>

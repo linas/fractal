@@ -175,7 +175,7 @@ main (int argc, char * argv[])
 	}
 #endif
 	
-// #define A_SUB_S
+#define A_SUB_S
 #ifdef A_SUB_S
 
 	mpf_t re_a, im_a;
@@ -185,13 +185,15 @@ main (int argc, char * argv[])
 	int n;
 	printf ("#\n# zeta expansion terms \n#\n");
 	printf ("# computed with variable precision of %d decimal places\n", prec);
+	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
-	for (n=0; n<norder; n++)
+	fflush (stdout);
+	for (n=0; n<201; n++)
 	{
 		double re_s = 0;
-		double im_s = -10+n/10.0;
+		double im_s = -10.0+n/10.0;
 		// a_sub_s (re_a, im_a, re_s, im_s, prec);
-		b_sub_s (re_a, im_a, re_s, im_s, prec, 100);
+		b_sub_s (re_a, im_a, re_s, im_s, prec, norder);
 
 		printf ("%d\t%12.9g\t%12.9g\t", n, re_s, im_s);
 		mpf_out_str (stdout, 10, 21, re_a);
@@ -202,7 +204,7 @@ main (int argc, char * argv[])
 	}
 #endif
 
-#define TEST
+// #define TEST
 #ifdef TEST
 	mpf_t s, bin, term, acc;
 	mpf_init (s);
