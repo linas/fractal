@@ -51,7 +51,7 @@ typedef struct {
 int i_one_d_cache_check (i_cache *c, unsigned int n)
 {
 	if (c->disabled) return 0;
-	if (n > c->nmax)
+	if ((n > c->nmax) || 0==n )
 	{
 		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpz_t *) realloc (c->cache, newsize * sizeof (mpz_t));
@@ -97,7 +97,7 @@ void i_one_d_cache_store (i_cache *c, mpz_t val, unsigned int n)
  */
 int i_triangle_cache_check (i_cache *c, unsigned int n, unsigned int k)
 {
-	if (n> c->nmax)
+	if ((n > c->nmax) || 0==n )
 	{
 		unsigned int newsize = (n+1)*(n+2)/2;
 		c->cache = (mpz_t *) realloc (c->cache, newsize * sizeof (mpz_t));
@@ -159,7 +159,7 @@ typedef struct {
  */
 int q_one_d_cache_check (q_cache *c, unsigned int n)
 {
-	if (n > c->nmax)
+	if ((n > c->nmax) || 0==n )
 	{
 		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpq_t *) realloc (c->cache, newsize * sizeof (mpq_t));
@@ -216,7 +216,7 @@ typedef struct {
  */
 int fp_one_d_cache_check (fp_cache *c, unsigned int n)
 {
-	if (n > c->nmax)
+	if ((n > c->nmax) || 0==n )
 	{
 		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpf_t *) realloc (c->cache, newsize * sizeof (mpf_t));
@@ -270,7 +270,7 @@ void fp_one_d_cache_clear (fp_cache *c)
  */
 int fp_triangle_cache_check (fp_cache *c, unsigned int n, unsigned int k)
 {
-	if (n> c->nmax)
+	if ((n > c->nmax) || 0==n )
 	{
 		unsigned int newsize = (n+1)*(n+2)/2;
 		c->cache = (mpf_t *) realloc (c->cache, newsize * sizeof (mpf_t));
