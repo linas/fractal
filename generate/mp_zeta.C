@@ -55,19 +55,21 @@ typedef struct {
 int i_one_d_cache_check (i_cache *c, unsigned int n)
 {
 	if (c->disabled) return 0;
-	if (n > c->nmax)
+	if ((n > c->nmax) || 0==n )
 	{
-		unsigned int newsize = n+1;
+		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpz_t *) realloc (c->cache, newsize * sizeof (mpz_t));
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
 		unsigned int en;
-		for (en=c->nmax; en <newsize; en++)
+		unsigned int nstart = c->nmax+1;
+		if (0 == c->nmax) nstart = 0;
+		for (en=nstart; en <newsize; en++)
 		{
 			mpz_init (c->cache[en]);
 			c->ticky[en] = 0;
 		}
-		c->nmax = n;
+		c->nmax = newsize-1;
 		return 0;
 	}
 
@@ -163,19 +165,21 @@ typedef struct {
  */
 int q_one_d_cache_check (q_cache *c, unsigned int n)
 {
-	if (n > c->nmax)
+	if ((n > c->nmax) || 0==n )
 	{
-		unsigned int newsize = n+1;
+		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpq_t *) realloc (c->cache, newsize * sizeof (mpq_t));
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
 		unsigned int en;
-		for (en=c->nmax; en <newsize; en++)
+		unsigned int nstart = c->nmax+1;
+		if (0 == c->nmax) nstart = 0;
+		for (en=nstart; en <newsize; en++)
 		{
 			mpq_init (c->cache[en]);
 			c->ticky[en] = 0;
 		}
-		c->nmax = n;
+		c->nmax = newsize-1;
 		return 0;
 	}
 
@@ -220,19 +224,21 @@ typedef struct {
  */
 int fp_one_d_cache_check (fp_cache *c, unsigned int n)
 {
-	if (n > c->nmax)
+	if ((n > c->nmax) || 0==n )
 	{
-		unsigned int newsize = n+1;
+		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpf_t *) realloc (c->cache, newsize * sizeof (mpf_t));
 		c->precision = (int *) realloc (c->precision, newsize * sizeof (int));
 
 		unsigned int en;
-		for (en=c->nmax; en <newsize; en++)
+		unsigned int nstart = c->nmax+1;
+		if (0 == c->nmax) nstart = 0;
+		for (en=nstart; en <newsize; en++)
 		{
 			mpf_init (c->cache[en]);
 			c->precision[en] = 0;
 		}
-		c->nmax = n;
+		c->nmax = newsize-1;
 		return 0;
 	}
 
@@ -344,7 +350,7 @@ void i_poch_rising (mpz_t poch, unsigned int k, unsigned int n)
 /** 
  * i_factorial -- the factorial
  */
-// #define USE_LOCAL_FACTORIAL
+#define USE_LOCAL_FACTORIAL
 #ifdef USE_LOCAL_FACTORIAL
 void i_factorial (mpz_t fact, unsigned int n)
 {
@@ -371,59 +377,7 @@ void i_factorial (mpz_t fact, unsigned int n)
 #endif /* USE_LOCAL_FACTORIAL */
 
 /* ====================================================================== */
-/* i_binomial
- * Binomial coefficient (n k)
- */
-
-// #define USE_LOCAL_BINOMIAL
-#ifdef USE_LOCAL_BINOMIAL
-void i_binomial_compute (mpz_t bin, unsigned int n, unsigned int k)
-{
-	mpz_t top, bot;
-
-	if (2*k < n) k = n-k;
-
-	mpz_init (top);
-	mpz_init (bot);
-	i_poch_rising (top, k+1, n-k);
-	i_factorial (bot, n-k); 
-
-	mpz_divexact (bin, top, bot);
-	
-	mpz_clear (top);
-	mpz_clear (bot);
-}
-
-/**
- * i_binomial - return the binomial coefficient
- * Uses a cached value if avalable.
- */ 
-void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
-{
-	DECLARE_I_CACHE (cache);
-
-	if (1 >= n)
-	{
-		mpz_set_ui (bin, 1);
-		return;
-	}
-
-	if (2*k < n) k = n-k;
-	int hit = i_triangle_cache_check (&cache, n, k);
-	if (hit)
-	{
-		i_triangle_cache_fetch (&cache, bin, n, k);
-	}
-	else
-	{
-		i_binomial_compute (bin, n, k);
-		i_triangle_cache_store (&cache, bin, n, k);
-	}
-}
-#else 
 #define i_binomial mpz_bin_uiui
-
-#endif /* USE_LOCAL_BINOMIAL */
 
 /* ======================================================================= */
 /* stirling_first - Stirling Numbers of the First kind, 
@@ -1277,6 +1231,7 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 	mpf_set_ui (d_k, 0);
 	mpf_set_ui (four, 1);
 	int i;
+	fp_one_d_cache_check (&cache, n);
 	for (i=0; i<=n; i++)
 	{
 		i_factorial (ifact, n+i-1);
@@ -1575,6 +1530,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 // printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
 
 		/* compute zeta (k)- 1/(k-1) */
+		// fp_zeta_minus_pole (rzeta, k, prec);
 		fp_zeta (rzeta, k, prec);
 		mpf_div_ui (ok, one, k-1);
 		mpf_sub (term, rzeta, ok);
