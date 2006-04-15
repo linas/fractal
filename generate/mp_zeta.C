@@ -1541,6 +1541,7 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 /* ======================================================================= */
 /* compute b_sub_s for complex-valued s
  */
+
 void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int prec, int nterms)
 {
 	int k;
@@ -1565,6 +1566,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 
 	int n = 650;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	n = nterms;
+	int downer  = 0;
 	for (k=2; k<= n; k++)
 	{
 		/* Commpute the binomial */
@@ -1572,11 +1574,10 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 
 // printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
 
-		/* compute zeta (k)- 1/(k-1) - gamma */
+		/* compute zeta (k)- 1/(k-1) */
 		fp_zeta (rzeta, k, prec);
 		mpf_div_ui (ok, one, k-1);
 		mpf_sub (term, rzeta, ok);
-		mpf_sub (term, term, gam);
 
 		mpf_mul (rzeta, term, rebin);
 		mpf_mul (izeta, term, imbin);
@@ -1594,12 +1595,30 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 		
 		mpf_set (re_b, racc);
 		mpf_set (im_b, iacc);
+#if 1
+		double rt = mpf_get_d (rzeta);
+		double it = mpf_get_d (izeta);
+		double ra = mpf_get_d (re_b);
+		double ia = mpf_get_d (im_b);
+		if (rt*rt +it*it < 1.0e-15 * (ra*ra+ia*ia)) 
+		{
+			if (downer > 5) break;
+			downer ++;
+		}
+#endif
+
 	}
 
 	/* add const terms */
-	mpf_sub (re_b, re_b, gam);
+	mpf_set_d (term, re_s);
+	mpf_mul (term, term, gam);
+	mpf_sub (re_b, re_b, term);
 
-	/* add 1/2 */
+	mpf_set_d (term, im_s);
+	mpf_mul (term, term, gam);
+	mpf_sub (im_b, im_b, term);
+
+	/* subtract 1/2 */
 	mpf_div_ui (ok, one, 2);
 	mpf_add (re_b, re_b, ok);
 	
@@ -1619,11 +1638,13 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 
 static mpf_t re_a, im_a;
 static int prec;
+static int nterms;
 
 static void a_s_init (void)
 {
 	/* the decimal precison (number of decimal places) */
-	prec = 100;
+	prec = 300;
+   nterms = 300;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -1642,7 +1663,7 @@ static void a_s_init (void)
 static double a_s (double re_s, double im_s)
 {
 	// a_sub_s (re_a, im_a, re_s, im_s, prec);
-	b_sub_s (re_a, im_a, re_s, im_s, prec, 300);
+	b_sub_s (re_a, im_a, re_s, im_s, prec, nterms);
 
 	double frea = mpf_get_d (re_a);
 	double fima = mpf_get_d (im_a);
