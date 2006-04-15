@@ -188,10 +188,12 @@ main (int argc, char * argv[])
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
 	fflush (stdout);
-	for (n=0; n<201; n++)
+	for (n=0; n<20; n++)
 	{
-		double re_s = 0;
-		double im_s = -10.0+n/10.0;
+		// double re_s = 0;
+		// double im_s = -10.0+n/10.0;
+		double re_s = 1.0 - 0.1*n;
+		double im_s = 0.0;
 		// a_sub_s (re_a, im_a, re_s, im_s, prec);
 		b_sub_s (re_a, im_a, re_s, im_s, prec, norder);
 
