@@ -1884,6 +1884,9 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 	mpf_set_ui (d_k, 0);
 	mpf_set_ui (four, 1);
 	int i;
+
+	/* prime the cache */
+	fp_one_d_cache_check (&cache, n);
 	for (i=0; i<=n; i++)
 	{
 		i_factorial (ifact, n+i-1);
