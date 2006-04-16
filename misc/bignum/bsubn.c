@@ -13,8 +13,122 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <gsl/gsl_sf_psi.h>
 
 #include "mp_zeta.h"
+
+double harmonic (double z, unsigned int prec, unsigned int norder)
+{
+	mpf_t acc, bin, term;
+	mpf_init (acc);
+	mpf_init (bin);
+	mpf_init (term);
+
+	mpf_set_ui (acc, 0);
+	int p;
+	for (p=2; p<norder; p++)
+	{
+		fp_binomial (bin, z, p);
+		mpf_div_ui (term, bin, p-1);
+		if (p%2)
+		{
+			mpf_sub (acc, acc, term);
+		}
+		else
+		{
+			mpf_add (acc, acc, term);
+		} 
+	}
+	double sum = mpf_get_d (acc);
+
+	sum -= 1.0;
+
+	double harm = 0.57721566490153286060-1.0;
+	harm += gsl_sf_psi (z);
+	sum -= z*harm;
+	
+// printf ("duude sum=%g\n", sum);
+
+	mpf_clear (term);
+	mpf_clear (bin);
+	mpf_clear (acc);
+
+	return sum;
+}
+
+double b_functional (double z, unsigned int prec, unsigned int norder)
+{
+	mpf_t acc, bin, term;
+	mpf_init (acc);
+	mpf_init (bin);
+	mpf_init (term);
+
+	mpf_set_ui (acc, 0);
+	int p;
+	for (p=0; p<norder; p++)
+	{
+		fp_zeta (term, p+2, prec);
+		mpf_sub_ui (term, term, 1);
+		fp_binomial (bin, z-1.0, p+1);
+		mpf_mul (term, term, bin);
+		mpf_add (acc, acc, term);
+	}
+	double sum = mpf_get_d (acc);
+
+	sum -= 1.5;
+	sum += pow (2.0, z-1.0);
+
+	double harm = 2.0*(0.57721566490153286060-1.0);
+	harm += gsl_sf_psi (z);
+	harm += M_PI / tan (M_PI*z);
+	sum += (z-1.0)*harm;
+	
+// printf ("duude sum=%g\n", sum);
+
+	mpf_clear (term);
+	mpf_clear (bin);
+	mpf_clear (acc);
+
+	return sum;
+}
+
+double b_fa (double z, unsigned int prec, unsigned int norder)
+{
+	mpf_t acc, bin, term;
+	mpf_init (acc);
+	mpf_init (bin);
+	mpf_init (term);
+
+	mpf_set_ui (acc, 0);
+	int p;
+	for (p=2; p<norder; p++)
+	{
+		fp_zeta (term, p, prec);
+		mpf_set_ui (bin, 1);
+		mpf_div_ui (bin, bin, p-1);
+		mpf_sub (term, term, bin);
+		fp_binomial (bin, z, p);
+		mpf_mul (term, term, bin);
+		if (p%2)
+		{
+			mpf_sub (acc, acc, term);
+		}
+		else
+		{
+			mpf_add (acc, acc, term);
+		} 
+	}
+	double sum = mpf_get_d (acc);
+
+	sum += 0.5;
+	sum -= z*0.57721566490153286060;
+
+	mpf_clear (term);
+	mpf_clear (bin);
+	mpf_clear (acc);
+
+	return sum;
+}
 
 /* ==================================================================== */
 
@@ -175,7 +289,7 @@ main (int argc, char * argv[])
 	}
 #endif
 	
-#define A_SUB_S
+// #define A_SUB_S
 #ifdef A_SUB_S
 
 	mpf_t re_a, im_a;
@@ -203,6 +317,25 @@ main (int argc, char * argv[])
 		mpf_out_str (stdout, 10, 21, im_a);
 		printf ("\n");
 		fflush (stdout);
+	}
+#endif
+
+#define B_FUNC
+#ifdef B_FUNC
+	mpf_t re_a, im_a;
+	mpf_init (re_a);
+	mpf_init (im_a);
+
+	int n;
+	for (n=1; n<10; n++)
+	{
+		double re_s = 0.1*n;
+		double im_s = 0.0;
+		b_sub_s (re_a, im_a, re_s, im_s, prec, norder);
+		double bs = mpf_get_d (re_a);
+		double bf = b_fa (re_s, prec, norder);
+		// double bf = b_functional (1.0-re_s, prec, norder);
+		printf ("z=%8.4g   bs=%g  \tbf=%g\n", re_s, bs, bf);
 	}
 #endif
 
@@ -240,5 +373,7 @@ main (int argc, char * argv[])
 		fflush (stdout);
 	}
 #endif
+
+
 }
 
