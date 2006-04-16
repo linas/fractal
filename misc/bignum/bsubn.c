@@ -130,6 +130,125 @@ double b_fa (double z, unsigned int prec, unsigned int norder)
 	return sum;
 }
 
+double b_fb (double z, unsigned int prec, unsigned int norder)
+{
+	mpf_t acc, bin, term;
+	mpf_init (acc);
+	mpf_init (bin);
+	mpf_init (term);
+
+	mpf_set_ui (acc, 0);
+	int p;
+	for (p=2; p<norder; p++)
+	{
+		fp_zeta (term, p, prec);
+		fp_binomial (bin, z, p);
+		mpf_mul (term, term, bin);
+		if (p%2)
+		{
+			mpf_sub (acc, acc, term);
+		}
+		else
+		{
+			mpf_add (acc, acc, term);
+		} 
+	}
+	double sum = mpf_get_d (acc);
+
+	sum += 0.5;
+	sum -= z*0.57721566490153286060;
+
+	double harm = 0.57721566490153286060-1.0;
+	harm += gsl_sf_psi (z);
+	sum -= 1.0+ z*harm;
+	
+	mpf_clear (term);
+	mpf_clear (bin);
+	mpf_clear (acc);
+
+	return sum;
+}
+
+double b_fc (double z, unsigned int prec, unsigned int norder)
+{
+	mpf_t acc, bin, term;
+	mpf_init (acc);
+	mpf_init (bin);
+	mpf_init (term);
+
+	mpf_set_ui (acc, 0);
+	int p;
+	for (p=2; p<norder; p++)
+	{
+		fp_zeta (term, p, prec);
+		mpf_sub_ui (term, term, 1);
+		fp_binomial (bin, z, p);
+		mpf_mul (term, term, bin);
+		if (p%2)
+		{
+			mpf_sub (acc, acc, term);
+		}
+		else
+		{
+			mpf_add (acc, acc, term);
+		} 
+	}
+	double sum = mpf_get_d (acc);
+
+#if 0
+	sum += 0.5;
+	sum -= z*0.57721566490153286060;
+
+	double harm = 0.57721566490153286060-1.0;
+	harm += gsl_sf_psi (z);
+	sum -= 1.0+ z*harm;
+
+	sum += z-1.0;
+#endif
+
+	sum -= 1.5;
+
+	double harm = 2.0* (1.0-0.57721566490153286060);
+	harm -= gsl_sf_psi (z);
+	sum += z*harm;
+
+	mpf_clear (term);
+	mpf_clear (bin);
+	mpf_clear (acc);
+
+	return sum;
+}
+
+double b_b (double z, unsigned int prec, unsigned int norder)
+{
+	mpf_t acc, bin, term;
+	mpf_init (acc);
+	mpf_init (bin);
+	mpf_init (term);
+
+	mpf_set_ui (acc, 0);
+	int p;
+	for (p=0; p<norder; p++)
+	{
+		fp_binomial (term, z, p);
+		if (p%2)
+		{
+			mpf_sub (acc, acc, term);
+		}
+		else
+		{
+			mpf_add (acc, acc, term);
+		} 
+	}
+	double sum = mpf_get_d (acc);
+
+	mpf_clear (term);
+	mpf_clear (bin);
+	mpf_clear (acc);
+
+	return sum;
+}
+
 /* ==================================================================== */
 
 main (int argc, char * argv[])
@@ -333,7 +452,10 @@ main (int argc, char * argv[])
 		double im_s = 0.0;
 		b_sub_s (re_a, im_a, re_s, im_s, prec, norder);
 		double bs = mpf_get_d (re_a);
-		double bf = b_fa (re_s, prec, norder);
+		double bz = b_b (re_s, prec, norder);
+		// double bf = b_fa (re_s, prec, norder);
+		// double bf = b_fb (re_s, prec, norder);
+		double bf = bz + b_fc (re_s, prec, norder);
 		// double bf = b_functional (1.0-re_s, prec, norder);
 		printf ("z=%8.4g   bs=%g  \tbf=%g\n", re_s, bs, bf);
 	}
