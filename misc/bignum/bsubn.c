@@ -63,6 +63,7 @@ double b_functional (double z, unsigned int prec, unsigned int norder)
 	mpf_init (bin);
 	mpf_init (term);
 
+	z = 1.0 - z;
 	mpf_set_ui (acc, 0);
 	int p;
 	for (p=0; p<norder; p++)
@@ -446,17 +447,17 @@ main (int argc, char * argv[])
 	mpf_init (im_a);
 
 	int n;
-	for (n=1; n<10; n++)
+	for (n=1; n<50; n++)
 	{
-		double re_s = 0.1*n;
+		double re_s = -1.05 - 0.1*n;
 		double im_s = 0.0;
-		b_sub_s (re_a, im_a, re_s, im_s, prec, norder);
+		// b_sub_s (re_a, im_a, re_s, im_s, prec, norder);
 		double bs = mpf_get_d (re_a);
 		double bz = b_b (re_s, prec, norder);
 		// double bf = b_fa (re_s, prec, norder);
 		// double bf = b_fb (re_s, prec, norder);
-		double bf = bz + b_fc (re_s, prec, norder);
-		// double bf = b_functional (1.0-re_s, prec, norder);
+		// double bf = bz + b_fc (re_s, prec, norder);
+		double bf = b_functional (re_s, prec, norder);
 		printf ("z=%8.4g   bs=%g  \tbf=%g\n", re_s, bs, bf);
 	}
 #endif
