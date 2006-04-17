@@ -254,8 +254,6 @@ double b_b (double z, unsigned int prec, unsigned int norder)
 
 main (int argc, char * argv[])
 {
-	char str[4000];
-
 	if (argc < 3)
 	{
 		fprintf (stderr, "Usage: %s [ndigits] [norder]\n", argv[0]); 

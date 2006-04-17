@@ -127,5 +127,6 @@ void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec);
 /* compute a_sub_s for complex-valued s
  */
 void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int prec);
-void b_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int prec, int nterms);
+void b_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, 
+              unsigned int prec, int nterms, double eps);
 

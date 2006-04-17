@@ -2356,9 +2356,17 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 }
 
 /* ======================================================================= */
-/* compute b_sub_s for complex-valued s
+/**
+ * b_sub_s - compute b_sub_s for complex-valued s
+ * @prec: compute using this many places of decimal point precision in 
+ *        the intermediate terms.
+ * @nterm: sum up the binomial to this many terms
+ * @eps: if positive, break out of the term summation loop
+ *       if the sum appears to have converged to within this tolerance.
+ *       if negative, continue suming binomial to the full number of nterms.
  */
-void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int prec, int nterms)
+void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, 
+              unsigned int prec, int nterms, double eps)
 {
 	int k;
 	mpf_t rebin, imbin, term, ok, one, racc, iacc, rzeta, izeta;
@@ -2382,6 +2390,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 
 	int n = 650;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	n = nterms;
+	int downer = 0;
 	for (k=2; k<= n; k++)
 	{
 		/* Commpute the binomial */
@@ -2410,6 +2419,19 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 		
 		mpf_set (re_b, racc);
 		mpf_set (im_b, iacc);
+		
+		if (eps > 0.0)
+		{
+			double rt = mpf_get_d (rzeta);
+			double it = mpf_get_d (izeta);
+			double ra = mpf_get_d (re_b);
+			double ia = mpf_get_d (im_b);
+			if (rt*rt +it*it < eps*eps * (ra*ra+ia*ia))
+			{
+				if (downer > 5) break;
+				downer ++;
+			}
+		}
 	}
 
 	/* add const terms */

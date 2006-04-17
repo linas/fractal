@@ -419,7 +419,7 @@ main (int argc, char * argv[])
 	for (i=0; i<40; i++ ) {
 		double re_s = i;
 		double im_s = 0.0;
-		b_sub_s (rbs, ibs, re_s, im_s, prec, nterms);
+		b_sub_s (rbs, ibs, re_s, im_s, prec, nterms, -1.0);
 		b_sub_n (bs, i, prec);
 		mpf_sub (bs, bs, rbs);
 		printf (" res=%g ", re_s);

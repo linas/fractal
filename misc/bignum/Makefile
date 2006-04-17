@@ -20,6 +20,9 @@ bsubn.o: mp_zeta.h
 mp_zeta.o: mp_zeta.h
 mp_zeta_test.o: mp_zeta.h
 
+bs:	bs.o mp_zeta.o
+	$(CC) -o bs $^ -lgmp -lgsl -lcblas -lm -lc
+
 bsubn:	bsubn.o mp_zeta.o
 	$(CC) -o bsubn $^ -lgmp -lgsl -lcblas -lm -lc
 

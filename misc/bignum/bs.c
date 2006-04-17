@@ -14,12 +14,13 @@
 
 #include "mp_zeta.h"
 
-/* return zero by binary subdivision */
-
-double find_zero (double lo, double hi,  double f(double), double prec)
+#ifdef USE_FLT_PT_BINARY_SUBDIVISION
+/* Find zero by binary subdivision */
+double binary_find_zero (double lo, double hi,  
+					 double f(double, void *), double prec)
 {
-	double flo = f(lo);
-	double fhi = f(hi);
+	double flo = f(lo, NULL);
+	double fhi = f(hi, NULL);
 	if (flo*fhi > 0.0)
 	{
 		printf ("error flo=%g  fhi=%g\n", flo, fhi);
@@ -34,7 +35,7 @@ double find_zero (double lo, double hi,  double f(double), double prec)
 		{
 			mid = 0.5*(lo+hi);
 		}
-		double fmid = f(mid);
+		double fmid = f(mid, NULL);
 // printf ("duude %14.12g %14.12g %14.12g hav %14.12g  del %14.12g\n", lo, mid, hi, fmid, hi-lo);
 		if (flo*fmid < 0.0)
 		{
@@ -50,8 +51,12 @@ double find_zero (double lo, double hi,  double f(double), double prec)
 	double mid = lo - flo * (hi-lo)/ (fhi-flo);
 	return mid;
 }
+#endif /* USE_FLT_PT_BINARY_SUBDIVISION */
 
-double eff(double x)
+int prec;
+int norder;
+
+double eff(double x, void * params)
 {
 	mpf_t re_b, im_b;
 	mpf_init (re_b);
@@ -63,7 +68,7 @@ double eff(double x)
 	 *
 	 * For real x, we need ... ?
 	 */
-	b_sub_s (re_b, im_b, x, 0.0, 400, x*4+150);
+	b_sub_s (re_b, im_b, x, 0.0, prec, norder, -1.0e-30);
 	double y = mpf_get_d (re_b);
 
 	mpf_clear (re_b);
@@ -72,20 +77,137 @@ double eff(double x)
 	return y;
 }
 
+#define USE_GSL_SLOVER
+#ifdef USE_GSL_SLOVER
+
+#include <gsl/gsl_errno.h>
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_roots.h>
+
+double brent_solver (double x_lo_bound, double x_hi_bound, double dprec)
+{
+	const gsl_root_fsolver_type *T;
+	T = gsl_root_fsolver_brent;
+
+	gsl_root_fsolver *s;
+	s = gsl_root_fsolver_alloc (T);
+
+	gsl_function F;
+	F.function = eff;
+	F.params = NULL;
+
+	gsl_root_fsolver_set (s, &F, x_lo_bound, x_hi_bound);
+	// printf ("# using %s method\n", gsl_root_fsolver_name (s));
+
+	double root = 0.0;
+	int status;
+	int iter=0;	
+	do
+	{
+		iter ++;
+		status = gsl_root_fsolver_iterate (s);
+		root = gsl_root_fsolver_root (s);
+		x_lo_bound = gsl_root_fsolver_x_lower (s);
+		x_hi_bound = gsl_root_fsolver_x_upper (s);
+		status = gsl_root_test_interval (x_lo_bound, x_hi_bound, 0, dprec);
+	}
+	while (status == GSL_CONTINUE && iter < 30);
+
+	return root;
+}
+#endif
+
+#ifdef BIGNUM_ROOT_FINDER
+
+void func (mpf_t y, mpf_t x, void * params)
+{
+}
+
+/*
+ * @prec: find root to this many decimal places
+ */
+void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,  
+					 void f(mpf_t, mpf_t, void *), void *params, int prec)
+{
+	mpf_t ra, rb, rc, rd, re;
+	mpf_init (ra);
+	mpf_init (rb);
+	mpf_init (rc);
+	mpf_init (rd);
+	mpf_init (re);
+
+	/* Initialize lower, upper bounds */
+	mpf_set_d (ra, root_bound_lo);
+	mpf_set_d (rb, root_bound_hi);
+	
+	mpf_t fa, fb, fc;
+	mpf_init (fa);
+	mpf_init (fb);
+	mpf_init (fc);
+
+	/* Evaluate the function at the bounds */
+	f (fa, ra, params);	
+	f (fb, rb, params);	
+
+	/* check that the interval bounds a zero */
+	int sig_b = mpf_sign (fb);
+	int sig_a = mpf_sign (fa);
+	if (sig_b * sig_a > 0)
+	{
+		fprintf (stderr, "Error duude: endpoints don't bracket a zero\n");
+		return;
+	}
+
+	/* linear interpolate cpoint */
+	mpf_t delt, slope;
+	mpf_init (delt);
+	mpf_init (slope);
+	
+	/* linear interpolation */
+	mpf_sub(delt, rb, ra);
+	mpf_sub(slope, fb, fa);
+	mpf_div(delt, delt, slope);
+	mpf_mul(delt, fb);
+	mpf_sub (rc, rb, delt);
+
+	f (fc, rc, params);	
+	int sig_c = mpf_sign (fc);
+	
+	while (1)
+	{
+
+	}
+
+	mpf_clear (slope);
+	mpf_clear (delt);
+	
+	mpf_clear (ra);
+	mpf_clear (rb);
+	mpf_clear (rc);
+	mpf_clear (rd);
+	mpf_clear (re);
+
+	mpf_clear (fa);
+	mpf_clear (fc);
+	mpf_clear (fb);
+}
+#endif /* BIGNUM_ROOT_FINDER */
+
 /* ==================================================================== */
 
 main (int argc, char * argv[])
 {
-	char str[4000];
-
-	if (argc < 1)
+	if (argc < 3)
 	{
-		fprintf (stderr, "Usage: %s \n", argv[0]); 
+		fprintf (stderr, "Usage: %s [ndigits] [norder]\n", argv[0]); 
 		exit (1);
 	}
 
 	/* the decimal precison (number of decimal places) */
-	int prec = 1610;
+	prec = atoi (argv[1]);
+
+	/* Number of binomial terms to sum up to */
+	norder = atoi (argv[2]);
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -93,10 +215,9 @@ main (int argc, char * argv[])
 	/* The largest that a binomial (n,k) will get is 2^n
 	 * so need an extra norder bits if going to order norder. 
 	 * And pad a bit, just to be safe... */
-	int norder = 5000;
 	int bits = (int) (v + 100 + norder);
 	
-	/* set the precision (number of binary bits) */
+	/* Set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 	
 	printf ("# looking for precise zero locations\n");
@@ -107,41 +228,43 @@ main (int argc, char * argv[])
 	
 	double z[150];
 
-	z[1] = 2.756189414;
-	z[2] = 6.968997419;
-	z[3] = 12.72989432;
-	z[4] = 20.01889832;
-	z[5] = 28.86402965;
-	z[6] = 39.28042409;
-	z[7] = 51.26259237;
-	z[8] = 64.812872;
-	z[9] = 79.93504911;
-	z[10] = 96.62793513;
-	z[11] = 114.8901331;
-	z[12] = 134.7234457;
-	z[13] = 156.1274901;
-	z[14] = 179.101592;
-	z[15] = 203.6462289;
-	z[16] = 229.7615883;
-	z[17] = 257.448081;
-	z[18] = 286.7046825;
-	z[19] = 317.5324154;
-	z[20] = 349.9305071;
-	z[21] = 383.8995559;
-	z[22] = 419.4395815;
-	z[23] = 456.550048;
-	z[24] = 495.2314281;
-	z[25] = 535.4834264;
-	z[26] = 577.3062935;
-	z[27] = 620.699736;
-	z[28] = 665.6641158;
-	z[29] = 712.1993556;
-	z[30] = 760.3052747;
-	z[31] = 809.9818344;
-	z[32] = 861.2294288;
-	z[33] = 914.0476105;
-	z[34] = 968.4366987;
-	z[35] = 1024.396526;
+	z[1] = 2.7245424726404;
+	z[2] = 6.9691123091236;
+	z[3] = 12.728018112883;
+	z[4] = 20.018162314288;
+	z[5] = 28.864209826344;
+	z[6] = 39.277617847981;
+	z[7] = 51.260486636309;
+	z[8] = 64.812914781276;
+	z[9] = 79.935164294348;
+	z[10] = 96.627537143746;
+	z[11] = 114.89022965254;
+	z[12] = 134.72336032412;
+	z[13] = 156.12700944974;
+	z[14] = 179.10123558051;
+	z[15] = 203.64608219242;
+	z[16] = 229.76158198699;
+	z[17] = 257.44776001299;
+	z[18] = 286.70463579943;
+	z[19] = 317.53222480004;
+	z[20] = 349.93053940158;
+	z[21] = 383.89958964768;
+	z[22] = 419.43938376745;
+	z[23] = 456.54992856739;
+	z[24] = 495.23122972587;
+	z[25] = 535.48329201745;
+	z[26] = 577.30611948572;
+	z[27] = 620.69971557796;
+	z[28] = 665.66408325113;
+	z[29] = 712.19922505597;
+	z[30] = 760.30514320447;
+	z[31] = 809.98183962424;
+	z[32] = 861.22931600277;
+	z[33] = 914.0475738237;
+	z[34] = 968.43661439668;
+	z[35] = 1024.3964388821;
+	
+	// z[35] = 1024.396526;
 	z[36] = 1081.927037;
 	z[37] = 1141.028462;
 	z[38] = 1201.700635;
@@ -184,12 +307,22 @@ main (int argc, char * argv[])
 	z[75] = 4550.837918;
 	z[76] = 4671.200252;
 	z[77] = 4793.133354;
+	z[78] = 4916.637246;
+	z[79] = 5041.711939;
+	z[80] = 5168.357449;
+	z[81] = 5296.573727;
+	z[82] = 5426.360819;
+	z[83] = 5557.718682;
+	z[84] = 5690.647359;
+	z[85] = 5825.146838;
+
 							 
 																									
 	int i;
-	for (i=36; i<78; i++)
+	for (i=23; i<86; i++)
 	{
-		double zer = find_zero (z[i]-0.02, z[i]+0.02, eff, 1.0e-9);
+		// double zer = bindary_find_zero (z[i]-0.02, z[i]+0.02, eff, 1.0e-12);
+		double zer = brent_solver (z[i]-4.0, z[i]+4.0, 1.0e-16);
 
 		printf ("%d\t%22.18g\n", i, zer);
 		fflush (stdout);
