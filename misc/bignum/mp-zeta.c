@@ -2439,7 +2439,7 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
  *       if the sum appears to have converged to within this tolerance.
  *       if negative, continue suming binomial to the full number of nterms.
  */
-void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, 
+void b_sub_s (mpf_t re_b, mpf_t im_b, mpf_t re_s, mpf_t im_s, 
               unsigned int prec, int nterms, double eps)
 {
 	int k;
@@ -2462,15 +2462,14 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s,
 	mpf_set_ui (im_b, 0);
 	fp_euler_mascheroni (gam, prec);
 
-	int n = 650;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	n = nterms;
 	int downer = 0;
 	for (k=2; k<= n; k++)
 	{
 		/* Commpute the binomial */
-		c_binomial_d (rebin, imbin, re_s, im_s, k);
+		c_binomial (rebin, imbin, re_s, im_s, k);
 
-// printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
+// printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", mpf_get_d(re_s), mpf_get_d(im_s), k, mpf_get_d(rebin), mpf_get_d(imbin));
 
 		/* compute zeta (k)- 1/(k-1) */
 		fp_zeta (rzeta, k, prec);
@@ -2509,12 +2508,10 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s,
 	}
 
 	/* add const terms */
-	mpf_set_d (term, re_s);
-	mpf_mul (term, term, gam);
+	mpf_mul (term, re_s, gam);
 	mpf_sub (re_b, re_b, term);
 
-	mpf_set_d (term, im_s);
-	mpf_mul (term, term, gam);
+	mpf_mul (term, im_s, gam);
 	mpf_sub (im_b, im_b, term);
 
 	/* subtract 1/2 */
@@ -2531,6 +2528,21 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s,
 	mpf_clear (rebin);
 	mpf_clear (imbin);
 	mpf_clear (gam);
+}
+
+void b_sub_s_d (mpf_t re_b, mpf_t im_b, double fre_s, double fim_s, 
+              unsigned int prec, int nterms, double eps)
+{
+	mpf_t re_s, im_s;
+	mpf_init (re_s);
+	mpf_init (im_s);
+	mpf_set_d (re_s, fre_s);
+	mpf_set_d (im_s, fim_s);
+
+	b_sub_s (re_b, im_b, re_s, im_s, prec, nterms, eps);
+
+	mpf_clear (re_s);
+	mpf_clear (im_s);
 }
 
 /* ==================================================================== */
