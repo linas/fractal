@@ -252,7 +252,7 @@ double b_b (double z, unsigned int prec, unsigned int norder)
 
 /* ==================================================================== */
 
-main (int argc, char * argv[])
+int main (int argc, char * argv[])
 {
 	if (argc < 3)
 	{
@@ -496,5 +496,6 @@ main (int argc, char * argv[])
 #endif
 
 
+	return 0;
 }
 

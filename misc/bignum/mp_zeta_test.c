@@ -10,11 +10,11 @@
  * Linas Vepstas July 2005
  */
 
-#include <gmp.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <gmp.h>
 #include "mp_zeta.h"
 
 /* ==================================================================== */
@@ -178,11 +178,10 @@ void fp_zeta9 (mpf_t zeta)
 
 /* ==================================================================== */
 
-main (int argc, char * argv[])
+int main (int argc, char * argv[])
 {
-	char str[4000];
-
 #ifdef FACT_TEST
+	char str[4000];
 	mpz_t fact;
 	mpz_init (fact);
 
@@ -429,6 +428,7 @@ main (int argc, char * argv[])
 	}
 #endif
 
+	return 0;
 }
 
 /* =============================== END OF FILE =========================== */
