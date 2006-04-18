@@ -9,11 +9,11 @@
  * Linas Vepstas July 2005
  */
 
-#include <gmp.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <gmp.h>
 #include "mp_zeta.h"
 
 void i_prt (char * str, mpz_t val)
@@ -798,7 +798,7 @@ void fp_poch_rising (mpf_t poch, double x, unsigned int n)
  * Brute force, simple.
  */
 
-void c_poch_rising (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsigned int n)
+void c_poch_rising_d (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsigned int n)
 {
 	mpf_t racc, iacc, atmp, btmp, re_term, im_term;
 	
@@ -816,6 +816,53 @@ void c_poch_rising (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsi
 	{
 		mpf_set_d (re_term, re_s+i);
 		mpf_set_d (im_term, im_s);
+
+		mpf_mul (atmp, re_poch, re_term);
+		mpf_mul (btmp, im_poch, im_term);
+		mpf_sub (racc, atmp, btmp);
+
+		mpf_mul (atmp, re_poch, im_term);
+		mpf_mul (btmp, im_poch, re_term);
+		mpf_add (iacc, atmp, btmp);
+
+		mpf_set (re_poch, racc);
+		mpf_set (im_poch, iacc);
+	}
+
+	mpf_clear (racc);
+	mpf_clear (iacc);
+	mpf_clear (atmp);
+	mpf_clear (btmp);
+	mpf_clear (re_term);
+	mpf_clear (im_term);
+}
+
+/* ======================================================================= */
+/* c_poch_rising
+ * rising pochhammer symbol (s)_n, for complex s and integer n.
+ *
+ * Brute force, simple.
+ */
+
+void c_poch_rising (mpf_t re_poch, mpf_t im_poch, mpf_t re_s, mpf_t im_s, unsigned int n)
+{
+	mpf_t racc, iacc, atmp, btmp, re_term, im_term;
+	
+	mpf_init (racc);
+	mpf_init (iacc);
+	mpf_init (atmp);
+	mpf_init (btmp);
+	mpf_init (re_term);
+	mpf_init (im_term);
+
+	mpf_set_ui (re_poch, 1);
+	mpf_set_ui (im_poch, 0);
+	unsigned int i;
+	for (i=0; i<n; i++)
+	{
+		mpf_set (re_term, re_s);
+		mpf_add_ui (re_term, re_term, i);
+		mpf_set (im_term, im_s);
 
 		mpf_mul (atmp, re_poch, re_term);
 		mpf_mul (btmp, im_poch, im_term);
@@ -866,7 +913,7 @@ void fp_binomial (mpf_t bin, double s, unsigned int k)
  * Complex binomial coefficient
  */
 
-void c_binomial (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k)
+void c_binomial_d (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k)
 {
 	mpf_t retop, imtop, bot;
 	mpz_t fac;
@@ -875,7 +922,34 @@ void c_binomial (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned 
 	mpf_init (imtop);
 	mpf_init (bot);
 	mpz_init (fac);
-	c_poch_rising (retop, imtop, re_s-k+1, im_s, k);
+	c_poch_rising_d (retop, imtop, re_s-k+1, im_s, k);
+	i_factorial (fac, k); 
+	mpf_set_z (bot, fac);
+
+	mpf_div (re_bin, retop, bot);
+	mpf_div (im_bin, imtop, bot);
+	
+	mpf_clear (retop);
+	mpf_clear (imtop);
+	mpf_clear (bot);
+	mpz_clear (fac);
+}
+
+void c_binomial (mpf_t re_bin, mpf_t im_bin, mpf_t re_s, mpf_t im_s, unsigned int k)
+{
+	mpf_t retop, imtop, bot;
+	mpz_t fac;
+
+	mpf_init (retop);
+	mpf_init (imtop);
+	mpf_init (bot);
+	mpz_init (fac);
+
+	mpf_set (bot, re_s);
+	mpf_sub_ui (bot, bot, k);
+	mpf_add_ui (bot, bot, 1);
+
+	c_poch_rising (retop, imtop, bot, im_s, k);
 	i_factorial (fac, k); 
 	mpf_set_z (bot, fac);
 
@@ -2291,7 +2365,7 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
 	for (k=1; k<= n; k++)
 	{
 		/* Commpute the binomial */
-		c_binomial (rebin, imbin, re_s, im_s, k);
+		c_binomial_d (rebin, imbin, re_s, im_s, k);
 
 		/* compute 1/k - zeta (k+1)/(k+1) */
 		int ndigits = 0;
@@ -2394,7 +2468,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s,
 	for (k=2; k<= n; k++)
 	{
 		/* Commpute the binomial */
-		c_binomial (rebin, imbin, re_s, im_s, k);
+		c_binomial_d (rebin, imbin, re_s, im_s, k);
 
 // printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
 

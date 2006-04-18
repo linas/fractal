@@ -39,7 +39,7 @@ dist:
 	tar -zcvf mp.tgz *.c *.h *.gplot *.txt bzero.dat Makefile .cvsignore
 
 .c.o:
-	$(CC) -c -g -O2 $<
+	$(CC) -c -g -O2 -Wall $<
 
 .o:
 	$(CC) -g -o $* $^ -lgmp -lm

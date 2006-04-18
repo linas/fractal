@@ -117,10 +117,18 @@ double brent_solver (double x_lo_bound, double x_hi_bound, double dprec)
 }
 #endif
 
+// #define BIGNUM_ROOT_FINDER
 #ifdef BIGNUM_ROOT_FINDER
 
 void func (mpf_t y, mpf_t x, void * params)
 {
+	mpf_t im_b;
+	mpf_init (im_b);
+
+	b_sub_s (y, im_b, x, 0.0, prec, norder, -1.0e-30);
+	double y = mpf_get_d (re_b);
+
+	mpf_clear (im_b);
 }
 
 /*
@@ -159,69 +167,94 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 		return;
 	}
 
-	/* linear interpolate cpoint */
+	/* utility values */
 	mpf_t tmp, fba, fcb, fca;
 	mpf_init (tmp);
 	mpf_init (fba);
 	mpf_init (fcb);
 	mpf_init (fca);
-	
-	/* linear interpolation */
-	mpf_sub(tmp, rb, ra);
-	mpf_sub(fba, fb, fa);
-	mpf_div(tmp, delt, fba);
-	mpf_mul(tmp, fb);
-	mpf_sub (rc, rb, tmp);
 
-	f (fc, rc, params);	
-	int sig_c = mpf_sign (fc);
-
-	/* arrange so that c is the worst estimate */
-	if (sig_c * sig_a > 0)
-	{
-		mp_set (tmp, ra);
-		mp_set (ra, rc);
-		mp_set (rc, tmp);
-		mp_set (tmp, fa);
-		mp_set (fa, fc);
-		mp_set (fc, tmp);
-	}
-	else
-	{
-		mp_set (tmp, rb);
-		mp_set (rb, rc);
-		mp_set (rc, tmp);
-		mp_set (tmp, fb);
-		mp_set (fb, fc);
-		mp_set (fc, tmp);
-	}
+	/* binary preecision */
+	int bin = (int) (3.32192809488 * prec) +1;
 	
+	int which = 1;
 	while (1)
 	{
-		/* quadratic interpolation */
-		mpf_sub(fba, fb, fa);
-		mpf_sub(fcb, fc, fb;
-		mpf_sub(fca, fc, fa);
+		switch (which)
+		{
+		case 1: 
+			/* linear interpolation */
+			mpf_sub(tmp, rb, ra);
+			mpf_sub(fba, fb, fa);
+			mpf_div(tmp, delt, fba);
+			mpf_mul(tmp, fb);
+			mpf_sub (rc, rb, tmp);
+		
+			f (fc, rc, params);	
+			int sig_c = mpf_sign (fc);
+		
+			/* arrange so that c is the worst estimate */
+			if (sig_c * sig_a > 0)
+			{
+				mp_set (tmp, ra);
+				mp_set (ra, rc);
+				mp_set (rc, tmp);
+				mp_set (tmp, fa);
+				mp_set (fa, fc);
+				mp_set (fc, tmp);
+			}
+			else
+			{
+				mp_set (tmp, rb);
+				mp_set (rb, rc);
+				mp_set (rc, tmp);
+				mp_set (tmp, fb);
+				mp_set (fb, fc);
+				mp_set (fc, tmp);
+			}
+			// which = 2;
+			break;
+	
+		case 2: 
+			/* quadratic interpolation */
+			mpf_sub(fba, fb, fa);
+			mpf_sub(fcb, fc, fb;
+			mpf_sub(fca, fc, fa);
+	
+			mpf_div (tmp, a, fba);
+			mpf_div (tmp, tmp, fca);
+			mpf_mul (tmp, tmp, fb);
+			mpf_mul (tmp, tmp, fc);
+			mpf_set (rd, tmp);
+	
+			mpf_div (tmp, b, fba);
+			mpf_div (tmp, tmp, fcb);
+			mpf_mul (tmp, tmp, fa);
+			mpf_mul (tmp, tmp, fc);
+			mpf_sub (rd, rd, tmp);
+	
+			mpf_div (tmp, c, fca);
+			mpf_div (tmp, tmp, fcb);
+			mpf_mul (tmp, tmp, fa);
+			mpf_mul (tmp, tmp, fb);
+			mpf_add (rd, rd, tmp);
+	
+			break;
+		}
 
-		mpf_div (tmp, a, fba);
-		mpf_div (tmp, tmp, fca);
-		mpf_mul (tmp, tmp, fb);
-		mpf_mul (tmp, tmp, fc);
-		mpf_set (rd, tmp);
+double gb = mpf_get_d(rb);
+double gfb = mpf_get_d(fb);
+printf ("duude god f(%g)= %g\n", gb, gfb);
 
-		mpf_div (tmp, b, fba);
-		mpf_div (tmp, tmp, fcb);
-		mpf_mul (tmp, tmp, fa);
-		mpf_mul (tmp, tmp, fc);
-		mpf_sub (rd, rd, tmp);
-
-		mpf_div (tmp, c, fca);
-		mpf_div (tmp, tmp, fcb);
-		mpf_mul (tmp, tmp, fa);
-		mpf_mul (tmp, tmp, fb);
-		mpf_add (rd, rd, tmp);
-
-
+		/* estimate bound */
+		mpf_sub (tmp, rb, ra);
+		mpf_abs (tmp, tmp);
+		mpf_mul_2exp (tmp, tmp, bin)
+		if (mpf_cmp_ui (tmp, 1) <= 0)
+		{
+			mpf_set (root, rb);
+			break;
+		}
 	}
 
 	mpf_clear (fba);
@@ -244,7 +277,7 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 
 /* ==================================================================== */
 
-main (int argc, char * argv[])
+int main (int argc, char * argv[])
 {
 	if (argc < 3)
 	{
@@ -377,5 +410,6 @@ main (int argc, char * argv[])
 		fflush (stdout);
 	}
 
+	return 0;
 }
 

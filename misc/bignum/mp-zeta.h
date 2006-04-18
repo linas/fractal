@@ -53,7 +53,8 @@ void fp_poch_rising (mpf_t poch, double x, unsigned int n);
  * Brute force, simple.
  */
 
-void c_poch_rising (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsigned int n);
+void c_poch_rising_d (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsigned int n);
+void c_poch_rising (mpf_t re_poch, mpf_t im_poch, mpf_t re_s, mpf_t im_s, unsigned int n);
 
 /* fp_binomial
  * Binomial coefficient 
@@ -63,7 +64,8 @@ void fp_binomial (mpf_t bin, double s, unsigned int k);
 /* c_binomial
  * Complex binomial coefficient
  */
-void c_binomial (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k);
+void c_binomial_d (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k);
+void c_binomial (mpf_t re_bin, mpf_t im_bin, mpf_t re_s, mpf_t im_s, unsigned int k);
 
 /* Harmonic number */
 void fp_harmonic (mpf_t harm, unsigned int n);
