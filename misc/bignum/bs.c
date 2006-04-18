@@ -140,10 +140,11 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 	mpf_set_d (ra, root_bound_lo);
 	mpf_set_d (rb, root_bound_hi);
 	
-	mpf_t fa, fb, fc;
+	mpf_t fa, fb, fc, fd;
 	mpf_init (fa);
 	mpf_init (fb);
 	mpf_init (fc);
+	mpf_init (fd);
 
 	/* Evaluate the function at the bounds */
 	f (fa, ra, params);	
@@ -159,27 +160,74 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 	}
 
 	/* linear interpolate cpoint */
-	mpf_t delt, slope;
-	mpf_init (delt);
-	mpf_init (slope);
+	mpf_t tmp, fba, fcb, fca;
+	mpf_init (tmp);
+	mpf_init (fba);
+	mpf_init (fcb);
+	mpf_init (fca);
 	
 	/* linear interpolation */
-	mpf_sub(delt, rb, ra);
-	mpf_sub(slope, fb, fa);
-	mpf_div(delt, delt, slope);
-	mpf_mul(delt, fb);
-	mpf_sub (rc, rb, delt);
+	mpf_sub(tmp, rb, ra);
+	mpf_sub(fba, fb, fa);
+	mpf_div(tmp, delt, fba);
+	mpf_mul(tmp, fb);
+	mpf_sub (rc, rb, tmp);
 
 	f (fc, rc, params);	
 	int sig_c = mpf_sign (fc);
+
+	/* arrange so that c is the worst estimate */
+	if (sig_c * sig_a > 0)
+	{
+		mp_set (tmp, ra);
+		mp_set (ra, rc);
+		mp_set (rc, tmp);
+		mp_set (tmp, fa);
+		mp_set (fa, fc);
+		mp_set (fc, tmp);
+	}
+	else
+	{
+		mp_set (tmp, rb);
+		mp_set (rb, rc);
+		mp_set (rc, tmp);
+		mp_set (tmp, fb);
+		mp_set (fb, fc);
+		mp_set (fc, tmp);
+	}
 	
 	while (1)
 	{
+		/* quadratic interpolation */
+		mpf_sub(fba, fb, fa);
+		mpf_sub(fcb, fc, fb;
+		mpf_sub(fca, fc, fa);
+
+		mpf_div (tmp, a, fba);
+		mpf_div (tmp, tmp, fca);
+		mpf_mul (tmp, tmp, fb);
+		mpf_mul (tmp, tmp, fc);
+		mpf_set (rd, tmp);
+
+		mpf_div (tmp, b, fba);
+		mpf_div (tmp, tmp, fcb);
+		mpf_mul (tmp, tmp, fa);
+		mpf_mul (tmp, tmp, fc);
+		mpf_sub (rd, rd, tmp);
+
+		mpf_div (tmp, c, fca);
+		mpf_div (tmp, tmp, fcb);
+		mpf_mul (tmp, tmp, fa);
+		mpf_mul (tmp, tmp, fb);
+		mpf_add (rd, rd, tmp);
+
 
 	}
 
-	mpf_clear (slope);
-	mpf_clear (delt);
+	mpf_clear (fba);
+	mpf_clear (fcb);
+	mpf_clear (fca);
+	mpf_clear (tmp);
 	
 	mpf_clear (ra);
 	mpf_clear (rb);
@@ -188,8 +236,9 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 	mpf_clear (re);
 
 	mpf_clear (fa);
-	mpf_clear (fc);
 	mpf_clear (fb);
+	mpf_clear (fc);
+	mpf_clear (fd);
 }
 #endif /* BIGNUM_ROOT_FINDER */
 
