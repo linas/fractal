@@ -380,7 +380,7 @@ int main (int argc, char * argv[])
 	
 	double z[150];
 
-	z[1] = 2.7245424726404;
+	z[1] = 2.72455103069766569;
 	z[2] = 6.9691123091236;
 	z[3] = 12.728018112883;
 	z[4] = 20.018162314288;
@@ -473,13 +473,13 @@ int main (int argc, char * argv[])
 	mpf_init (root);
 																									
 	int i;
-	for (i=12; i<13; i++)
+	for (i=1; i<86; i++)
 	{
 		// double zer = bindary_find_zero (z[i]-0.02, z[i]+0.02, eff, 1.0e-12);
 		// double zer = brent_solver (z[i]-4.0, z[i]+4.0, 1.0e-16);
 		// printf ("%d\t%22.18g\n", i, zer);
 
-		find_zero (root, z[i]-0.5, z[i]+0.5, big_func, NULL, 60);
+		find_zero (root, z[i]-0.001, z[i]+0.001, big_func, NULL, 60);
 		printf ("%d\t", i);
 		fp_prt ("", root);
 
