@@ -2462,7 +2462,7 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, mpf_t re_s, mpf_t im_s,
 	mpf_set_ui (im_b, 0);
 	fp_euler_mascheroni (gam, prec);
 
-	n = nterms;
+	int n = nterms;
 	int downer = 0;
 	for (k=2; k<= n; k++)
 	{
