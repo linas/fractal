@@ -165,7 +165,7 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 	int sig_a = mpf_sgn (fa);
 	if (sig_b * sig_a > 0)
 	{
-		fprintf (stderr, "Error duude: endpoints don't bracket a zero\n");
+		fprintf (stderr, "# Error duude: endpoints don't bracket a zero\n");
 		return;
 	}
 
@@ -229,7 +229,7 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 				}
 				else 
 				{
-					printf ("duude bisect\n");
+					printf ("# duude bisect, cnt=%d\n", count);
 					mpf_add (rc, ra, rb);
 					mpf_div_ui (rc, rc, 2);
 				}
@@ -242,7 +242,7 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 				}
 				else 
 				{
-					printf ("duude bisect\n");
+					printf ("# duude bisect, cnt=%d\n", count);
 					mpf_add (rc, ra, rb);
 					mpf_div_ui (rc, rc, 2);
 				}
@@ -314,8 +314,8 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 		/* estimate bound -- compare best (rb) to worst (rc) */
 		mpf_sub (tmp, rb, rc);
 		mpf_abs (tmp, tmp);
-printf ("count=%d ", count);
-fp_prt ("duude delt ", tmp);
+ printf ("# count=%d ", count);
+ fp_prt (" delt ", tmp);
 
 		mpf_mul_2exp (tmp, tmp, bin);
 		if (mpf_cmp_ui (tmp, 1) <= 0)
