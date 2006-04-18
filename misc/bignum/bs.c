@@ -179,6 +179,7 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 	/* binary preecision */
 	int bin = (int) (3.32192809488 * prec) +1;
 	
+	int count = 0;
 	int which = 1;
 	while (1)
 	{
@@ -192,29 +193,7 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 			mpf_mul(tmp, tmp, fb);
 			mpf_sub (rc, rb, tmp);
 		
-			f (fc, rc, params);	
-			int sig_c = mpf_sgn (fc);
-		
-			/* arrange so that c is the worst estimate */
-			if (sig_c * sig_a > 0)
-			{
-				mpf_set (tmp, ra);
-				mpf_set (ra, rc);
-				mpf_set (rc, tmp);
-				mpf_set (tmp, fa);
-				mpf_set (fa, fc);
-				mpf_set (fc, tmp);
-			}
-			else
-			{
-				mpf_set (tmp, rb);
-				mpf_set (rb, rc);
-				mpf_set (rc, tmp);
-				mpf_set (tmp, fb);
-				mpf_set (fb, fc);
-				mpf_set (fc, tmp);
-			}
-			// which = 2;
+			which = 2;
 			break;
 	
 		case 2: 
@@ -241,22 +220,111 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 			mpf_mul (tmp, tmp, fb);
 			mpf_add (rd, rd, tmp);
 	
+			/* if a to the left of b */
+			if (mpf_cmp (ra,rb) < 0) 
+			{
+				if ((mpf_cmp (ra,rd)<0) && (mpf_cmp(rd,rb)<0))
+				{
+					mpf_set (rc, rd);	
+				}
+				else 
+				{
+					printf ("duude bisect\n");
+					mpf_add (rc, ra, rb);
+					mpf_div_ui (rc, rc, 2);
+				}
+			}
+			else
+			{
+				if ((mpf_cmp (rb,rd)<0) && (mpf_cmp(rd,ra)<0))
+				{
+					mpf_set (rc, rd);	
+				}
+				else 
+				{
+					printf ("duude bisect\n");
+					mpf_add (rc, ra, rb);
+					mpf_div_ui (rc, rc, 2);
+				}
+			}
+			
+
 			break;
 		}
 
-double gb = mpf_get_d(rb);
-double gfb = mpf_get_d(fb);
-printf ("duude god f(%g)= %g\n", gb, gfb);
+		f (fc, rc, params);	
+		int sig_c = mpf_sgn (fc);
+	
+		/* arrange so that c is the worst estimate */
+		if (sig_c * sig_a > 0)
+		{
+			mpf_set (tmp, ra);
+			mpf_set (ra, rc);
+			mpf_set (rc, tmp);
+			mpf_set (tmp, fa);
+			mpf_set (fa, fc);
+			mpf_set (fc, tmp);
 
-		/* estimate bound */
-		mpf_sub (tmp, rb, ra);
+			sig_a = sig_c;
+		}
+		else
+		{
+			mpf_set (tmp, rb);
+			mpf_set (rb, rc);
+			mpf_set (rc, tmp);
+			mpf_set (tmp, fb);
+			mpf_set (fb, fc);
+			mpf_set (fc, tmp);
+
+			sig_b = sig_c;
+		}
+
+		/* arrange so that b is the best estimate */
+		int flip = 0;
+		if (sig_b > 0)
+		{
+			mpf_abs (tmp, fa);
+			if (mpf_cmp (tmp, fb) < 0) flip = 1;
+		}
+		else
+		{
+			mpf_abs (tmp, fb);
+			if (mpf_cmp (fa, tmp) < 0) flip = 1;
+		}
+		
+		if (flip)
+		{
+			mpf_set (tmp, ra);
+			mpf_set (ra, rb);
+			mpf_set (rb, tmp);
+			mpf_set (tmp, fa);
+			mpf_set (fa, fb);
+			mpf_set (fb, tmp);
+
+			int x = sig_a;
+			sig_a = sig_b;
+			sig_b = x;
+		}
+
+
+// fp_prt ("duude close ", rb);
+// double gfb = mpf_get_d(fb);
+// printf ("duude got f= %g\n", gfb);
+
+		/* estimate bound -- compare best (rb) to worst (rc) */
+		mpf_sub (tmp, rb, rc);
 		mpf_abs (tmp, tmp);
+printf ("count=%d ", count);
+fp_prt ("duude delt ", tmp);
+
 		mpf_mul_2exp (tmp, tmp, bin);
 		if (mpf_cmp_ui (tmp, 1) <= 0)
 		{
 			mpf_set (root, rb);
 			break;
 		}
+
+		count ++;
 	}
 
 	mpf_clear (fba);
@@ -405,14 +473,16 @@ int main (int argc, char * argv[])
 	mpf_init (root);
 																									
 	int i;
-	for (i=1; i<2; i++)
+	for (i=12; i<13; i++)
 	{
 		// double zer = bindary_find_zero (z[i]-0.02, z[i]+0.02, eff, 1.0e-12);
 		// double zer = brent_solver (z[i]-4.0, z[i]+4.0, 1.0e-16);
-		find_zero (root, z[i]-0.5, z[i]+0.5, big_func, NULL, 16);
-		double zer = mpf_get_d (root);
+		// printf ("%d\t%22.18g\n", i, zer);
 
-		printf ("%d\t%22.18g\n", i, zer);
+		find_zero (root, z[i]-0.5, z[i]+0.5, big_func, NULL, 60);
+		printf ("%d\t", i);
+		fp_prt ("", root);
+
 		fflush (stdout);
 	}
 
