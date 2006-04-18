@@ -401,12 +401,16 @@ int main (int argc, char * argv[])
 	z[85] = 5825.146838;
 
 							 
+	mpf_t root;
+	mpf_init (root);
 																									
 	int i;
-	for (i=23; i<86; i++)
+	for (i=1; i<2; i++)
 	{
 		// double zer = bindary_find_zero (z[i]-0.02, z[i]+0.02, eff, 1.0e-12);
-		double zer = brent_solver (z[i]-4.0, z[i]+4.0, 1.0e-16);
+		// double zer = brent_solver (z[i]-4.0, z[i]+4.0, 1.0e-16);
+		find_zero (root, z[i]-0.5, z[i]+0.5, big_func, NULL, 16);
+		double zer = mpf_get_d (root);
 
 		printf ("%d\t%22.18g\n", i, zer);
 		fflush (stdout);
