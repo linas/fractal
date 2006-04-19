@@ -316,6 +316,7 @@ void find_zero (mpf_t root, double root_bound_lo, double root_bound_hi,
 		mpf_abs (tmp, tmp);
  printf ("# count=%d ", count);
  fp_prt (" delt ", tmp);
+ fflush (stdout);
 
 		mpf_mul_2exp (tmp, tmp, bin);
 		if (mpf_cmp_ui (tmp, 1) <= 0)
@@ -415,8 +416,6 @@ int main (int argc, char * argv[])
 	z[33] = 914.0475738237;
 	z[34] = 968.43661439668;
 	z[35] = 1024.3964388821;
-	
-	// z[35] = 1024.396526;
 	z[36] = 1081.927037;
 	z[37] = 1141.028462;
 	z[38] = 1201.700635;
@@ -473,13 +472,13 @@ int main (int argc, char * argv[])
 	mpf_init (root);
 																									
 	int i;
-	for (i=1; i<86; i++)
+	for (i=36; i<86; i++)
 	{
 		// double zer = bindary_find_zero (z[i]-0.02, z[i]+0.02, eff, 1.0e-12);
 		// double zer = brent_solver (z[i]-4.0, z[i]+4.0, 1.0e-16);
 		// printf ("%d\t%22.18g\n", i, zer);
 
-		find_zero (root, z[i]-0.001, z[i]+0.001, big_func, NULL, 60);
+		find_zero (root, z[i]-0.1, z[i]+0.1, big_func, NULL, 60);
 		printf ("%d\t", i);
 		fp_prt ("", root);
 
