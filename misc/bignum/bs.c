@@ -472,7 +472,7 @@ int main (int argc, char * argv[])
 	mpf_init (root);
 																									
 	int i;
-	for (i=41; i<86; i++)
+	for (i=45; i<86; i++)
 	{
 		// double zer = bindary_find_zero (z[i]-0.02, z[i]+0.02, eff, 1.0e-12);
 		// double zer = brent_solver (z[i]-4.0, z[i]+4.0, 1.0e-16);
