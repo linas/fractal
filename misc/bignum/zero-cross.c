@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int
 main ()
 {
 	int c;
@@ -64,8 +65,8 @@ main ()
 			double eps = v*v*v / (3.0*m);
 			// printf ("%d\t%20.10g\t%20.16g\n", ncross, cross, eps);
 			// cross += eps;
-			// printf ("%d\t%20.10g\n", ncross, cross);
-			printf ("\tz[%d]=%20.10g;\n", ncross, cross);
+			printf ("%d\t%23.17g\n", ncross, cross);
+			// printf ("\tz[%d]=%23.17g;\n", ncross, cross);
 
 			zeros[ncross] = cross;
 			ncross ++;
@@ -199,4 +200,6 @@ main ()
 	avg /= acnt;
 	printf ("average value = %g\n", avg);
 #endif
+
+	return 0;
 }
