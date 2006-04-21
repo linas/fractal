@@ -15,6 +15,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+double cofit (double x, double y1, double y0)
+{
+	double r = y1/y0;
+}
+
 int
 main ()
 {
