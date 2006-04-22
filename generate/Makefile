@@ -64,7 +64,6 @@ zeta.o: zeta.C brat.h
 
 FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
 GCF=../tools/lib/gcf.o
-HARMONIC=../tools/lib/binomial.o ../tools/lib/harmonic.o
 MODULAR=../tools/lib/modular.o
 TOTIENT=../tools/lib/totient.o
 
@@ -90,6 +89,7 @@ q-exp: brat.o q-exp.o util.o
 swap: brat.o swap.o util.o
 takagi: brat.o takagi.o util.o
 totient: brat.o totient.o util.o $(GCF) $(TOTIENT)
+zeta: brat.o zeta.o util.o
 
 
 manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o $(FAREY)

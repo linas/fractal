@@ -39,36 +39,32 @@ inline long double factorial (int n)
 // must have m>=0
 // returns z*(z-1)*(z-2)...*(z-m+1) / m!
 //
-inline long double complex cbinomial (long double complex z, int m)
+void cbinomial (double zre, double zim, int m, double *pbre, double *pbim)
 {
-	if(0>m) return 0.0L;
+	if(0>m) return;
 
 	int k;
-	long double complex bin = 1.0L;
+	double bre = 1.0;
+	double bim = 0.0;
 	long double fac = 1.0L;
 	for (k=1; k<=m; k++)
 	{
-		bin *= z;
-		// printf ("bin term k=%d bin=(%Lg,%Lg) z=(%Lg,%Lg)\n", 
-		//    k, creall(bin), cimagl(bin), creall(z), cimagl(z));
-		z -= 1.0L;
-		fac *= (long double) k;
+		double tmp = zre * bre - zim*bim;
+		bim = zre * bim + zim * bre;
+		bre = tmp;
 
-		// avoid exponent overflows with periodic divisions
-		if (1.0e300 < fac)
-		{
-			bin /= fac;
-			fac = 1.0L;
-		}
+		zre -= 1.0;
+		fac *= (long double) k;
 	}
-	bin /= fac;
-	return bin;
+	bre /= fac;
+	bim /= fac;
+
+	*pbre = bre;
+	*pbim = bim;
 }
-#endif
 
 static void zeta_series_c (double re_q, double im_q, double *prep, double *pimp)
 {
-	double tmp;
 	int i;
 	*prep = 0.0;
 	*pimp = 0.0;
@@ -82,7 +78,7 @@ static void zeta_series_c (double re_q, double im_q, double *prep, double *pimp)
 	double qpmod = re_q*re_q+im_q*im_q;
 	if (1.0 <= qpmod) return;
 
-	for (i=0; i<max_terms; i++)
+	for (i=0; i<40; i++)
 	{
 		double t=1;
 
@@ -99,7 +95,6 @@ static void zeta_series_c (double re_q, double im_q, double *prep, double *pimp)
 
 static double zeta_series (double re_q, double im_q, int itermax, double param)
 {
-	max_terms = itermax;
 	double rep, imp;
 	zeta_series_c (re_q, im_q, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
