@@ -6,6 +6,10 @@
 #ifndef HARMONIC_H__
 #define HARMONIC_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Euler's constant Abramowitz & Stegun Table 1.1 
 #define M_GAMMA 0.577215664901532860606512L
 
@@ -33,5 +37,9 @@ long double harmonic_hurwitz (int n, long double x, long double ess);
 
 /* Return zeta function minus n'th harmonic */
 long double zeta_minus_harmonic (int n, long double ess);
+
+#ifdef __cplusplus
+};
+#endif
 
 #endif /* HARMONIC_H__ */

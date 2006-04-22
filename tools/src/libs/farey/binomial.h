@@ -6,6 +6,10 @@
 #ifndef BINOMIAL_H__
 #define BINOMIAL_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <complex.h>
 
 // brute-force factorial function
@@ -33,3 +37,8 @@ long double complex cbinomial (long double complex z, int m);
 long double frat (int n, int m);
 
 #endif /* BINOMIAL_H__ */
+
+#ifdef __cplusplus
+};
+#endif
+
