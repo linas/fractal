@@ -15,9 +15,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <gsl/gsl_sf_zeta.h>
+#include <gsl/gsl_sf_psi.h>
+
 #include "brat.h"
 
+// ======================================================
+// brute-force factorial function
+inline long double factorial (int n)
+{
+	int k;
+	long double fac = 1.0L;
+	for (k=2; k<=n; k++)
+	{
+		fac *= (long double) k;
+	}
+	if (0>n) fac = 0.0L;
+	return fac;
+}
 
+// ======================================================
+// complex-valued binomial coefficent
+// must have m>=0
+// returns z*(z-1)*(z-2)...*(z-m+1) / m!
+//
+inline long double complex cbinomial (long double complex z, int m)
+{
+	if(0>m) return 0.0L;
+
+	int k;
+	long double complex bin = 1.0L;
+	long double fac = 1.0L;
+	for (k=1; k<=m; k++)
+	{
+		bin *= z;
+		// printf ("bin term k=%d bin=(%Lg,%Lg) z=(%Lg,%Lg)\n", 
+		//    k, creall(bin), cimagl(bin), creall(z), cimagl(z));
+		z -= 1.0L;
+		fac *= (long double) k;
+
+		// avoid exponent overflows with periodic divisions
+		if (1.0e300 < fac)
+		{
+			bin /= fac;
+			fac = 1.0L;
+		}
+	}
+	bin /= fac;
+	return bin;
+}
+#endif
 
 static void zeta_series_c (double re_q, double im_q, double *prep, double *pimp)
 {
@@ -37,21 +84,13 @@ static void zeta_series_c (double re_q, double im_q, double *prep, double *pimp)
 
 	for (i=0; i<max_terms; i++)
 	{
-		double t = zeta_phi (i+1);
-
-		t *= (i+1);
-		t *= (i+1);
-		t *= (i+1);
+		double t=1;
 
 		rep += qpr *t;
 		imp += qpi *t;
 
 		qpmod = qpr*qpr + qpi*qpi;
 		if (qpmod < 1.0e-30) break;
-	}
-	if (max_terms-1 < i)
-	{
-		// printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
 	}
 
 	*prep = rep;

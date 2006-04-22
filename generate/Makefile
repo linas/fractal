@@ -15,7 +15,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         manvert cutoff brat draw dx image
 
 NEW_EXES = alpha circle cutoff elliptic erdos euler-q hermite mand-flow \
-        mp_zeta mobius q-exp swap takagi totient  \
+        mp_zeta mobius q-exp swap takagi totient zeta \
         ray automatic radius
 
 all:    $(NEW_EXES)
@@ -60,9 +60,11 @@ q-exp.o: q-exp.C brat.h
 swap.o: swap.C
 takagi.o: takagi.C brat.h
 totient.o: totient.C brat.h
+zeta.o: zeta.C brat.h
 
 FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
 GCF=../tools/lib/gcf.o
+HARMONIC=../tools/lib/binomial.o ../tools/lib/harmonic.o
 MODULAR=../tools/lib/modular.o
 TOTIENT=../tools/lib/totient.o
 
