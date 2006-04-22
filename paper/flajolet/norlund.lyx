@@ -32,7 +32,7 @@ Newton Series for the Riemann Zeta Function
 Phillipe Flajolet, Linas Vepstas
 \layout Date
 
-April 1, 2006
+April 16, 2006
 \layout Abstract
 
 The finite differences or Newton series of certain expressions involving
@@ -799,8 +799,11 @@ The
 \begin_inset Formula $b_{n}$
 \end_inset 
 
-may be further explored by generalizing them to be a function on the complex
- plane, instead of an integer.
+may be further explored by generalizing the parameter 
+\begin_inset Formula $n$
+\end_inset 
+
+ to a complex number.
  One such 
 \begin_inset Quotes eld
 \end_inset 
@@ -811,13 +814,13 @@ obvious
 
  and reasonable generalization is 
 \begin_inset Formula \begin{equation}
-b(s)=-\gamma+\frac{1}{2}+\sum_{k=2}^{\infty}(-1)^{k}\left(\begin{array}{c}
+b(s)=-s\gamma+\frac{1}{2}+\sum_{k=2}^{\infty}(-1)^{k}\left(\begin{array}{c}
 s\\
-k\end{array}\right)\left[\zeta(k)-\frac{1}{k-1}-\gamma\right]\label{eq:}\end{equation}
+k\end{array}\right)\left[\zeta(k)-\frac{1}{k-1}\right]\label{eq:}\end{equation}
 
 \end_inset 
 
- where the identity 
+ This is easily obtained by using  the identity 
 \begin_inset Formula \[
 nH_{n-1}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
 n\\
@@ -825,9 +828,36 @@ k\end{array}\right)\frac{k}{k-1}\]
 
 \end_inset 
 
- was used to generalize the harmonic number to fractional values.
- By construction, this function interpolates the previous series, so that
+ to re-express the harmonic number as a binomial sum.
+ The digamma function
+\begin_inset Formula \[
+\psi(s)=\frac{d}{ds}\ln\Gamma(s)\]
+
+\end_inset 
+
+ generalizes the harmonic numbers
+\begin_inset Formula \[
+\psi(n)=H_{n-1}-\gamma\]
+
+\end_inset 
+
+ and has a binomial series that is the suitable generalization of the series
+ for the harmonic numbers:
+\begin_inset Formula \[
+\psi(s+1)=-\gamma-\sum_{k=1}^{\infty}(-1)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\frac{1}{k}\]
+
+\end_inset 
+
  
+\layout Standard
+
+By construction, the function 
+\begin_inset Formula $b(s)$
+\end_inset 
+
+ interpolates the previous series, so that 
 \begin_inset Formula $b(n)=b_{n}$
 \end_inset 
 
@@ -840,12 +870,32 @@ k\end{array}\right)\frac{k}{k-1}\]
 \begin_inset Formula $s=-1$
 \end_inset 
 
-, ???? and this series expansion is convergent only for 
+, and this series expansion is convergent only for 
 \begin_inset Formula $\Re s>-1$
 \end_inset 
 
 .
- The figure 
+ The series may be continued to the left half-plane as 
+\begin_inset Formula \[
+b(s)=-\frac{1}{2}+s\left[2\left(1-\gamma\right)-\psi(1-s)+\pi\cot(\pi s)\right]+\sum_{k=2}^{\infty}\left(\begin{array}{c}
+-s\\
+k-1\end{array}\right)\zeta(k)\]
+
+\end_inset 
+
+ which is convergent for 
+\begin_inset Formula $\Re s<1$
+\end_inset 
+
+.
+ Both the sum and the digamma are regular in this region, and so 
+\begin_inset Formula $b(s)$
+\end_inset 
+
+ is seen to have poles at the negative integers.
+\layout Standard
+
+The figure 
 \begin_inset LatexCommand \ref{cap:a-imag-axis}
 
 \end_inset 
