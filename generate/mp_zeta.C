@@ -57,7 +57,7 @@ int i_one_d_cache_check (i_cache *c, unsigned int n)
 	if (c->disabled) return 0;
 	if ((n > c->nmax) || 0==n )
 	{
-		unsigned int newsize = 1.5*n+1;
+		unsigned int newsize = (int) (1.5*n+1.0);
 		c->cache = (mpz_t *) realloc (c->cache, newsize * sizeof (mpz_t));
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
@@ -116,7 +116,7 @@ int q_one_d_cache_check (q_cache *c, unsigned int n)
 {
 	if ((n > c->nmax) || 0==n )
 	{
-		unsigned int newsize = 1.5*n+1;
+		unsigned int newsize = (int) (1.5*n+1.0);
 		c->cache = (mpq_t *) realloc (c->cache, newsize * sizeof (mpq_t));
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
@@ -175,7 +175,7 @@ int fp_one_d_cache_check (fp_cache *c, unsigned int n)
 {
 	if ((n > c->nmax) || 0==n )
 	{
-		unsigned int newsize = 1.5*n+1;
+		unsigned int newsize = (int) (1.5*n+1.0);
 		c->cache = (mpf_t *) realloc (c->cache, newsize * sizeof (mpf_t));
 		c->precision = (int *) realloc (c->precision, newsize * sizeof (int));
 
@@ -1306,6 +1306,79 @@ void b_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int pre
 	mpf_clear (gam);
 }
 
+/* ======================================================================= */
+/* compute entire_sub_s for complex-valued s
+ */
+
+void entire_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int prec, int nterms)
+{
+	int k;
+	mpf_t rebin, imbin, term, racc, iacc, rzeta, izeta;
+
+	mpf_init (term);
+	mpf_init (racc);
+	mpf_init (iacc);
+	mpf_init (rzeta);
+	mpf_init (izeta);
+	mpf_init (rebin);
+	mpf_init (imbin);
+	
+	mpf_set_ui (re_b, 0);
+	mpf_set_ui (im_b, 0);
+
+	int n = 650;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	n = nterms;
+	int downer  = 0;
+	for (k=2; k<= n; k++)
+	{
+		/* Commpute the binomial */
+		c_binomial (rebin, imbin, re_s, im_s, k);
+
+// printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
+
+		/* compute zeta (k) */
+		fp_zeta (term, k, prec);
+		mpf_sub_ui (term, term, 1);
+
+		mpf_mul (rzeta, term, rebin);
+		mpf_mul (izeta, term, imbin);
+
+		if (k%2)
+		{ 
+			mpf_sub (racc, re_b, rzeta);
+			mpf_sub (iacc, im_b, izeta);
+		}
+		else 
+		{
+			mpf_add (racc, re_b, rzeta);
+			mpf_add (iacc, im_b, izeta);
+		}
+		
+		mpf_set (re_b, racc);
+		mpf_set (im_b, iacc);
+#if 0
+		double rt = mpf_get_d (rzeta);
+		double it = mpf_get_d (izeta);
+		double ra = mpf_get_d (re_b);
+		double ia = mpf_get_d (im_b);
+		if (rt*rt +it*it < 1.0e-15 * (ra*ra+ia*ia)) 
+		{
+			if (downer > 5) break;
+			downer ++;
+		}
+#endif
+
+	}
+
+	mpf_clear (term);
+	mpf_clear (racc);
+	mpf_clear (iacc);
+	mpf_clear (rzeta);
+	mpf_clear (izeta);
+	mpf_clear (rebin);
+	mpf_clear (imbin);
+}
+
 /* ============================================================================= */
 
 static mpf_t re_a, im_a;
@@ -1335,7 +1408,8 @@ static void a_s_init (void)
 static double a_s (double re_s, double im_s)
 {
 	// a_sub_s (re_a, im_a, re_s, im_s, prec);
-	b_sub_s (re_a, im_a, re_s, im_s, prec, nterms);
+	// b_sub_s (re_a, im_a, re_s, im_s, prec, nterms);
+	entire_sub_s (re_a, im_a, re_s, im_s, prec, nterms);
 
 	double frea = mpf_get_d (re_a);
 	double fima = mpf_get_d (im_a);

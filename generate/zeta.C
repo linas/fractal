@@ -98,9 +98,10 @@ static double zeta_series (double re_q, double im_q, int itermax, double param)
 {
 	double rep, imp;
 	zeta_series_c (re_q, im_q, &rep, &imp);
-	// return sqrt (rep*rep+imp*imp);
+	return sqrt (rep*rep+imp*imp);
 	// return rep;
-	return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
+	// return imp;
+	// return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
 }
 
 DECL_MAKE_HISTO(zeta_series);
