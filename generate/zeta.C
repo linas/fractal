@@ -72,21 +72,22 @@ static void zeta_series_c (double re_q, double im_q, double *prep, double *pimp)
 	double rep = 0.0;
 	double imp = 0.0;
 
-	double qpr = 1.0;
-	double qpi = 0.0;
-
-	double qpmod = re_q*re_q+im_q*im_q;
-	if (1.0 <= qpmod) return;
-
-	for (i=0; i<40; i++)
+	for (i=2; i<40; i++)
 	{
-		double t=1;
+		double bre, bim;
+		cbinomial (re_q, im_q, i, &bre, &bim);
 
-		rep += qpr *t;
-		imp += qpi *t;
-
-		qpmod = qpr*qpr + qpi*qpi;
-		if (qpmod < 1.0e-30) break;
+		double zetam1 = gsl_sf_zetam1 (i);
+		if (i%2)
+		{
+			rep -= bre * zetam1;
+			imp -= bim * zetam1;
+		}
+		else
+		{
+			rep += bre * zetam1;
+			imp += bim * zetam1;
+		}
 	}
 
 	*prep = rep;
@@ -98,7 +99,8 @@ static double zeta_series (double re_q, double im_q, int itermax, double param)
 	double rep, imp;
 	zeta_series_c (re_q, im_q, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
-	return rep;
+	// return rep;
+	return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
 }
 
 DECL_MAKE_HISTO(zeta_series);

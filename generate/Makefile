@@ -89,7 +89,7 @@ q-exp: brat.o q-exp.o util.o
 swap: brat.o swap.o util.o
 takagi: brat.o takagi.o util.o
 totient: brat.o totient.o util.o $(GCF) $(TOTIENT)
-zeta: brat.o zeta.o util.o
+zeta: brat.o zeta.o util.o $(GSL)
 
 
 manvert stalk stalkmov mstop migrate measure offset lyapunov next squige age phase orig whack circout circin circmov brat: brat.o  util.o $(FAREY)
