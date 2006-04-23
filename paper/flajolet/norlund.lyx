@@ -173,12 +173,173 @@ The following sections are in no particular order, and for the most part
 Derivation
 \layout Standard
 
-This section supplies a derivation of the values of 
+This section demonstrates the relationship between the Riemann zeta function
+ and the 
 \begin_inset Formula $b_{n}$
 \end_inset 
 
- from first principles.
- XXX to do.
+, starting from first principles.
+ First, the values of the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ are derived, and then it is shown that the resulting series is equivalent
+ to the Riemann zeta function.
+ 
+\layout Standard
+
+The 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ may be derived by a straightforward inversion of a binomial transform.
+ Given any sequence 
+\begin_inset Formula $\{ s_{n}\}$
+\end_inset 
+
+ whatsoever, the binomial transform [ref Knuth concrete math] of this sequence
+ is another sequence 
+\begin_inset Formula $\{ t_{n}\}$
+\end_inset 
+
+, given by 
+\begin_inset Formula \[
+t_{n}=\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)s_{k}\]
+
+\end_inset 
+
+ The binomial transformation is an involution, in that the original series
+ is regained by the same transform applied a second time:
+\begin_inset Formula \[
+s_{n}=\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)t_{k}\]
+
+\end_inset 
+
+ A demonstration of the above is straight-forward, in part because each
+ sum is finite.
+\layout Standard
+
+By assuming the sequence for the Riemann zeta at the integers: 
+\begin_inset Formula \[
+\zeta(n)=\frac{1}{n-1}+\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)b_{k}\]
+
+\end_inset 
+
+ and defining
+\begin_inset Formula \[
+s_{n}=\zeta(n)-\frac{1}{n-1}\]
+
+\end_inset 
+
+ for 
+\begin_inset Formula $n\ge2$
+\end_inset 
+
+, while leaving 
+\begin_inset Formula $s_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $s_{1}$
+\end_inset 
+
+ temporarily indeterminate, one may invert the series as 
+\begin_inset Formula \[
+b_{n}=s_{0}-ns_{1}+\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left[\zeta(k)-\frac{1}{k-1}\right]\]
+
+\end_inset 
+
+ The harmonic numbers appear as
+\begin_inset Formula \[
+\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\frac{1}{k-1}=1-n+nH_{n-1}\]
+
+\end_inset 
+
+ To complete the process, one need only to make the identification 
+\begin_inset Formula \[
+b_{0}=s_{0}=\lim_{s\to0}\zeta(s)-\frac{1}{s-1}=\zeta(0)+1=\frac{1}{2}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+s_{1}=\lim_{s\to1}\zeta(s)-\frac{1}{s-1}=\gamma\]
+
+\end_inset 
+
+ Thus, the binomial transform as been demonstrated at the integer values
+ of the zeta function.
+ 
+\layout Standard
+
+Next, one must prove that the series 
+\layout Standard
+
+
+\begin_inset Formula \[
+\frac{1}{s-1}+\sum_{n=0}^{\infty}(-1)^{n}\,\frac{b_{n}}{n!}\,\left(\begin{array}{c}
+s\\
+k\end{array}\right)\]
+
+\end_inset 
+
+is identical to the Riemann zeta function for all complex values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ To do this, one considers the function 
+\begin_inset Formula \[
+f(s)=-\zeta(s)+\frac{1}{s-1}+\sum_{n=0}^{\infty}(-1)^{n}\,\frac{b_{n}}{n!}\,\left(\begin{array}{c}
+s\\
+k\end{array}\right)\]
+
+\end_inset 
+
+ and note that 
+\begin_inset Formula $f(s)$
+\end_inset 
+
+ vanishes at all non-negative integers.
+ By Carlson's theorem (given below), 
+\begin_inset Formula $f(s)$
+\end_inset 
+
+ will vanish everywhere, provided that it can be shown that 
+\begin_inset Formula $f(s)$
+\end_inset 
+
+ is exponentially bounded in all directions for large 
+\begin_inset Formula $\left|s\right|$
+\end_inset 
+
+, and is exponentially bounded by 
+\begin_inset Formula $e^{c\left|s\right|}$
+\end_inset 
+
+for some real 
+\begin_inset Formula $c<\pi$
+\end_inset 
+
+ for 
+\begin_inset Formula $s$
+\end_inset 
+
+ large in the imaginary direction.
+ 
+\layout Standard
+
+XXX this proof should be supplied.
 \layout Section
 
 Generating Functions
@@ -293,20 +454,20 @@ The series expression for the
 \end_inset 
 
  is very conducive to numerical analysis.
- The values of the zeta function for small integers are known to millions
- of digits; Plouffe has given a series of very rapidly converging sums for
- the zeta function at the larger integers[xxx ref].
+ The values of the zeta function may be rapidly computed to exteremely high
+ precision using the Tchebysheff polynomial technique given by Borwein[xxx
+ ref].
  Thus, it becomes possible to explore the behavior of the 
 \begin_inset Formula $b_{n}$
 \end_inset 
 
  up to 
-\begin_inset Formula $n\sim2000$
+\begin_inset Formula $n\sim5000$
 \end_inset 
 
  with only a moderate investment in coding and computer time.
  Note, however, that in order to get up to these ranges, computations must
- be performed keeping hundreds of decimal places of precision, due to the
+ be performed keeping thousands of decimal places of precision, due to the
  very large values that the binomial coefficient can take.
  In the following, calculations were performed using the GNU Multiple Precision
  Arithmetic Library 
@@ -627,7 +788,7 @@ A numeric fit to the oscillatory behavior of the function may be made.
 
  zero is provided by 
 \begin_inset Formula \begin{equation}
-q(k)=\frac{\pi}{4}k^{2}+\frac{9\pi}{16}k+0.4405804-\frac{1}{4k}+\frac{1}{216k-702}\label{eq:}\end{equation}
+q(k)=\frac{\pi}{4}k^{2}+\frac{9\pi}{16}k+0.44057996-\frac{1}{4k}+\frac{1}{214.88k-685}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -804,7 +965,7 @@ may be further explored by generalizing the parameter
 \end_inset 
 
  to a complex number.
- One such 
+ The 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -819,39 +980,6 @@ s\\
 k\end{array}\right)\left[\zeta(k)-\frac{1}{k-1}\right]\label{eq:}\end{equation}
 
 \end_inset 
-
- This is easily obtained by using  the identity 
-\begin_inset Formula \[
-nH_{n-1}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
-n\\
-k\end{array}\right)\frac{k}{k-1}\]
-
-\end_inset 
-
- to re-express the harmonic number as a binomial sum.
- The digamma function
-\begin_inset Formula \[
-\psi(s)=\frac{d}{ds}\ln\Gamma(s)\]
-
-\end_inset 
-
- generalizes the harmonic numbers
-\begin_inset Formula \[
-\psi(n)=H_{n-1}-\gamma\]
-
-\end_inset 
-
- and has a binomial series that is the suitable generalization of the series
- for the harmonic numbers:
-\begin_inset Formula \[
-\psi(s+1)=-\gamma-\sum_{k=1}^{\infty}(-1)^{k}\left(\begin{array}{c}
-s\\
-k\end{array}\right)\frac{1}{k}\]
-
-\end_inset 
-
- 
-\layout Standard
 
 By construction, the function 
 \begin_inset Formula $b(s)$
@@ -870,29 +998,123 @@ By construction, the function
 \begin_inset Formula $s=-1$
 \end_inset 
 
-, and this series expansion is convergent only for 
+, and the above series expansion is convergent only for 
 \begin_inset Formula $\Re s>-1$
 \end_inset 
 
 .
- The series may be continued to the left half-plane as 
-\begin_inset Formula \[
-b(s)=-\frac{1}{2}+s\left[2\left(1-\gamma\right)-\psi(1-s)+\pi\cot(\pi s)\right]+\sum_{k=2}^{\infty}\left(\begin{array}{c}
--s\\
-k-1\end{array}\right)\zeta(k)\]
+ 
+\layout Standard
 
-\end_inset 
-
- which is convergent for 
-\begin_inset Formula $\Re s<1$
-\end_inset 
-
-.
- Both the sum and the digamma are regular in this region, and so 
+One may ask what form the analytic continuation of 
 \begin_inset Formula $b(s)$
 \end_inset 
 
- is seen to have poles at the negative integers.
+ to the entire complex plane may look like.
+ To examine this question, one makes use of two identites.
+ 
+\layout Standard
+
+First, one has 
+\layout Standard
+
+
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}(-x)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)=(1-x)^{s}\]
+
+\end_inset 
+
+ which holds for 
+\begin_inset Formula $s>0$
+\end_inset 
+
+ but not otherwise.
+ Taking the conditional limit 
+\begin_inset Formula $x\to1$
+\end_inset 
+
+, one gets 
+\begin_inset Formula \[
+\sum_{k=2}^{\infty}(-1)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)=s-1\]
+
+\end_inset 
+
+ Again, by Carlson's theorem (XXX oh really?? How exactly? Lets not be sloppy...)
+ one may take the left hand side to be the analytic continuation of the
+ right hand side.
+\layout Standard
+
+Another important identity uses the digamma function
+\begin_inset Formula \[
+\psi(s)=\frac{d}{ds}\ln\Gamma(s)\]
+
+\end_inset 
+
+ to generalize the harmonic numbers
+\begin_inset Formula \[
+\psi(n)=H_{n-1}-\gamma\]
+
+\end_inset 
+
+ The digamma has a suitable binomial series [XXX do we need a ref for this
+ formula?] valid for 
+\begin_inset Formula $s>-1$
+\end_inset 
+
+:
+\begin_inset Formula \[
+\psi(s+1)=-\gamma-\sum_{k=1}^{\infty}(-1)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\frac{1}{k}\]
+
+\end_inset 
+
+ Subsituting 
+\begin_inset Formula \[
+\frac{1}{k}=\frac{1}{k+1}+\frac{1}{k(k+1)}\]
+
+\end_inset 
+
+ and making use of the previous identity, one can readily show that, for
+ 
+\begin_inset Formula $s>0$
+\end_inset 
+
+, 
+\begin_inset Formula \[
+\sum_{k=2}^{\infty}(-1)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\frac{1}{k-1}=1+s\left(\gamma-1+\psi(s)\right)\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Combining the above, one may write 
+\begin_inset Formula $b(s)$
+\end_inset 
+
+ in a form that is regular on the entire complex plane 
+\begin_inset Formula \[
+b(s)=-\frac{3}{2}+s\left[2\left(1-\gamma\right)-\psi(s)\right]+\sum_{k=2}^{\infty}(-1)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\left[\zeta(k)-1\right]\]
+
+\end_inset 
+
+ The sum on the left is entire, having no poles except at infinity, and
+ converges for all complex values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ (XXX I suppose this should be demonstrated) The digamma is regular and
+ well-defined on the complex plane, having poles at the negative integers.
 \layout Standard
 
 The figure 
@@ -1156,9 +1378,9 @@ n\end{array}\right)s_{m}\]
 
 \end_inset 
 
- Applying this to the aove leads to the amusing identity 
+ Applying this to the above leads to the amusing identity 
 \begin_inset Formula \[
-c_{k}=\sum_{m=k}^{\infty}\frac{\gamma_{m}}{m!}\left(\begin{array}{c}
+\frac{c_{k}}{k!}=\sum_{m=k}^{\infty}\frac{\gamma_{m}}{m!}\left(\begin{array}{c}
 m\\
 k\end{array}\right)=\sum_{n=k}^{\infty}\frac{b_{n}}{n!}\left[\begin{array}{c}
 n\\
@@ -1166,9 +1388,17 @@ k\end{array}\right]\]
 
 \end_inset 
 
- where 
+ where the constants 
+\begin_inset Formula $c_{k}$
+\end_inset 
+
+ correspond to derivatives of the zeta function at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+:
 \begin_inset Formula \[
-\zeta(s)=\frac{1}{s-1}+\sum_{k=0}^{\infty}c_{k}(-s)^{k}\]
+\zeta(s)=\frac{1}{s-1}+\sum_{k=0}^{\infty}c_{k}\,\frac{(-s)^{k}}{k!}\]
 
 \end_inset 
 
@@ -1394,7 +1624,7 @@ An example of a function that violates Carlson's theorem is
 Asymptotic analysis
 \layout Standard
 
-This section describes the Norlund-Rice asymptotic anslysis for the Riemann
+This section describes the Norlund-Rice asymptotic analysis for the Riemann
  b_n.
  Should be cut-n-paste from Flajolet's early email ...
  To Do xxx.
@@ -1521,7 +1751,7 @@ In analogy to the study of the forward differences of the Riemann zeta function,
  the remainder of this paper will concern itself with the analysis of the
  series given by 
 \begin_inset Formula \begin{equation}
-L_{n}=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-coeff}\end{equation}
+L_{n}=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-coeff}\end{equation}
 
 \end_inset 
 
@@ -1533,7 +1763,7 @@ L_{n}=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-co
  connecting the Hurwitz zeta function to the L-function, it is sufficient
  to study sums of the form
 \begin_inset Formula \begin{equation}
-A_{n}(m,k)=\sum_{p=1}^{n}(-1)^{p}{n \choose p}\,\frac{\zeta\left(p+1,\frac{m}{k}\right)}{k^{p+1}(p+1)}\label{eq:}\end{equation}
+A_{n}(m,k)=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{\zeta\left(p+1,\frac{m}{k}\right)}{k^{p+1}(p+1)}\label{eq:}\end{equation}
 
 \end_inset 
 
