@@ -1356,7 +1356,7 @@ void entire_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned in
 		
 		mpf_set (re_b, racc);
 		mpf_set (im_b, iacc);
-#if 0
+#if 1
 		double rt = mpf_get_d (rzeta);
 		double it = mpf_get_d (izeta);
 		double ra = mpf_get_d (re_b);
@@ -1391,6 +1391,9 @@ static void a_s_init (void)
 	prec = 300;
    nterms = 300;
 
+	prec = 100;
+   nterms = 100;
+
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
 
@@ -1405,8 +1408,17 @@ static void a_s_init (void)
 	mpf_init (im_a);
 }
 	
-static double a_s (double re_s, double im_s)
+static double a_s (double re_q, double im_q)
 {
+	double deno = re_q - 1.0;
+	deno = deno*deno + im_q*im_q;
+	deno = 1.0/deno;
+	double re_s = 2.0*im_q* deno;
+	double im_s = (re_q*re_q + im_q*im_q - 1.0) * deno;;
+
+	// re_s = re_q;
+	// im_s = im_q;
+
 	// a_sub_s (re_a, im_a, re_s, im_s, prec);
 	// b_sub_s (re_a, im_a, re_s, im_s, prec, nterms);
 	entire_sub_s (re_a, im_a, re_s, im_s, prec, nterms);
