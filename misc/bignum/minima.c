@@ -52,7 +52,7 @@ read_data (void)
 		   i=-1;	
 
 			double var = atof(buf);
- printf ("duude %d %g\n", n, var);
+		// printf ("duude %d %g\n", n, var);
 
 			data[n] = var;
 			n++;
@@ -65,12 +65,28 @@ read_data (void)
 
 void a_sub_n_tweak_data (void)
 {
-#if 0
-	double corr = exp (-4.0* (sqrt(n+1)));
-	var *= corr;
-	var /= sin(M_PI*(-2.125+sqrt(2.125*2.125+4.0*(n-1.97)/M_PI)));
-	var = -log (var);
-#endif
+	int n;
+	for (n=0; n<num_data_pts; n++)
+	{
+		double corr = exp (-4.0* (sqrt(n+1)));
+		double var = data[n];
+		var *= corr;
+		var /= sin(M_PI*(-2.125+sqrt(2.125*2.125+4.0*(n-1.97)/M_PI)));
+		var = -log (var);
+		data[n] = var;
+	}
+}
+
+void double_pole_tweak_data (void)
+{
+	int i;
+	for (i=0; i<num_data_pts; i++)
+	{
+		int n = i+1;
+		double asym = 0.25 * M_PI *n*n + 9*M_PI * n / 16.0;
+		asym += 0.44 - 0.25 / ((double) n);
+		data[i] -= asym;
+	}
 }
 
 double a_sub_n_fitter (double a, double b, double c, double d)
@@ -97,8 +113,29 @@ double a_sub_n_fitter (double a, double b, double c, double d)
 	return ms;
 }
 
-double double_pole_fitter (double a, double b, double c, double d)
+double double_pole_fitter (double a, double b, double res, double off)
 {
+	int i;
+
+	double err = 0.0;
+	for (i=0; i<num_data_pts; i++)
+	{
+		int n = i+1;
+		double dpole = (n-b)/((n-b)*(n-b)+a*a);
+		dpole /= res;
+		dpole -= off;
+
+		double ptp = data[i] - dpole;
+		ptp /= data[i];
+		ptp *= ptp;
+
+		err += ptp;
+	}
+
+	err /= (num_data_pts);
+
+	err = sqrt(err);
+	return err;
 }
 
 double fitter (const gsl_vector * x, void * params)
@@ -124,18 +161,33 @@ void fit (void)
 	f.n = FITS;
 	f.params = 0;
 	
+#ifdef A_SUB_N
 	gsl_vector *start_pt = gsl_vector_alloc (FITS);
 	gsl_vector_set (start_pt, 0, 3.0);
 	gsl_vector_set (start_pt, 1, 21.0);
 	// gsl_vector_set (start_pt, 2, 13.3);
 	gsl_vector_set (start_pt, 2, 3.6);
 	gsl_vector_set (start_pt, 3, 0.5);
-	
+
 	gsl_vector *stepsize = gsl_vector_alloc (FITS);
 	gsl_vector_set (stepsize, 0, 0.01);
 	gsl_vector_set (stepsize, 1, 0.01);
 	gsl_vector_set (stepsize, 2, 0.01);
 	gsl_vector_set (stepsize, 3, 0.01);
+	
+#endif
+
+	gsl_vector *start_pt = gsl_vector_alloc (FITS);
+	gsl_vector_set (start_pt, 0, 0.1);
+	gsl_vector_set (start_pt, 1, 2.2);
+	gsl_vector_set (start_pt, 2, 216);
+	gsl_vector_set (start_pt, 3, 0.00057);
+	
+	gsl_vector *stepsize = gsl_vector_alloc (FITS);
+	gsl_vector_set (stepsize, 0, 0.01);
+	gsl_vector_set (stepsize, 1, 0.01);
+	gsl_vector_set (stepsize, 2, 1.0);
+	gsl_vector_set (stepsize, 3, 0.0001);
 	
 	gsl_multimin_fminimizer_set (fm, &f, start_pt, stepsize); 
 
@@ -170,7 +222,8 @@ void fit (void)
 int main (int argc,  char *argv[]) 
 {
 	read_data ();
-	// fit();
+	double_pole_tweak_data();
+	fit();
 
 	return 0;
 }
