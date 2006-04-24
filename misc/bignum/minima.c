@@ -84,7 +84,7 @@ void double_pole_tweak_data (void)
 	{
 		int n = i+1;
 		double asym = 0.25 * M_PI *n*n + 9*M_PI * n / 16.0;
-		asym += 0.44 - 0.25 / ((double) n);
+		asym += 0.44058 - 0.25 / ((double) n);
 		data[i] -= asym;
 	}
 }
@@ -118,7 +118,8 @@ double double_pole_fitter (double a, double b, double res, double off)
 	int i;
 
 	double err = 0.0;
-	for (i=0; i<num_data_pts; i++)
+	int is=9;
+	for (i=is; i<num_data_pts; i++)
 	{
 		int n = i+1;
 		double dpole = (n-b)/((n-b)*(n-b)+a*a);
@@ -132,7 +133,7 @@ double double_pole_fitter (double a, double b, double res, double off)
 		err += ptp;
 	}
 
-	err /= (num_data_pts);
+	err /= (num_data_pts-is);
 
 	err = sqrt(err);
 	return err;

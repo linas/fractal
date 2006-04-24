@@ -18,7 +18,7 @@ set ylabel "zero"
 
 set xrange [10:85]
 set xrange [0:10]
-set xrange [8:54]
+set xrange [0:55]
 
 # f(x) = (0.25*3.1415926*x*x + 9*3.1415926*x/16 - 3*3.1415926/14 )
 # f(x) = (0.25*3.1415926*x*x + 9*3.1415926*x/16 - 0.57)
@@ -66,16 +66,37 @@ g(x) = (f(x) + 1/(216*x-702))
 # a=0.08
 # b=3.185
 # r=1/214.88
+# pole(x)=(r*(x-b)/((x-b)*(x-b)+a*a))
 # plot "bzero.dat" using 1:($2-f($1)) title "diff", \
-#      "bzero.dat" using 1:(r*($1-b)/(($1-b)*($1-b)+a*a)) title "fit"
+#      "bzero.dat" using 1:(pole($1)) title "fit"
 
 
-f(x) = (0.25*3.14159265358979*x*x + 9*3.14159265358979*x/16 + 0.44057996 - 0.25/x)
+f(x) = (0.25*3.14159265358979*x*x + 9*3.14159265358979*x/16 + 0.44058 - 0.25/x)
 a=0.10
 b=3.205
 r=1/214.88
-pole(x)=(r*(x-b)/((x-b)*(x-b)+a*a)) 
-plot "bzero.dat" using 1:(($2-f($1)-pole($1))/($2-f($1))) title "err"
+
+
+# this is a good fit for the entire range
+a = 0.00041274544
+b = 3
+r= 1/204.8978
+o=0.0000057017
+# 0.44058
+
+# this is a better fit for the [8-58] range
+a = 0.28984278
+b = 3.1989644
+r = 1/215.07622
+o = -2.9926384e-08
+
+
+pole(x)=(r*(x-b)/((x-b)*(x-b)+a*a) -o)
+
+plot "bzero.dat" using 1:($2-f($1)) title "diff", \
+     "bzero.dat" using 1:(pole($1)) title "fit"
+
+# plot "bzero.dat" using 1:(($2-f($1)-pole($1))/($2-f($1))) title "err"
 
 
 # pause 100
