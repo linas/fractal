@@ -2,7 +2,8 @@
 /*
  * minima.c
  *
- * Find the fit for the amplitude of a(n)
+ * Find the fit for misc data, (e.g. the amplitude of a(n))
+ * by minimizing errors.
  *
  * Linas August 2005
  */
@@ -51,13 +52,8 @@ read_data (void)
 		   i=-1;	
 
 			double var = atof(buf);
+ printf ("duude %d %g\n", n, var);
 
-			double corr = exp (-4.0* (sqrt(n+1)));
-			var *= corr;
-			var /= sin(M_PI*(-2.125+sqrt(2.125*2.125+4.0*(n-1.97)/M_PI)));
-
-// printf ("duude %d %g\n", n, var);
-			var = -log (var);
 			data[n] = var;
 			n++;
 		}
@@ -67,7 +63,17 @@ read_data (void)
 	printf ("read %d datapts\n", num_data_pts);
 }
 
-double my_func (double a, double b, double c, double d)
+void a_sub_n_tweak_data (void)
+{
+#if 0
+	double corr = exp (-4.0* (sqrt(n+1)));
+	var *= corr;
+	var /= sin(M_PI*(-2.125+sqrt(2.125*2.125+4.0*(n-1.97)/M_PI)));
+	var = -log (var);
+#endif
+}
+
+double a_sub_n_fitter (double a, double b, double c, double d)
 {
 	int i;
 	double ms = 0.0;
@@ -91,6 +97,10 @@ double my_func (double a, double b, double c, double d)
 	return ms;
 }
 
+double double_pole_fitter (double a, double b, double c, double d)
+{
+}
+
 double fitter (const gsl_vector * x, void * params)
 {
 	double a = gsl_vector_get(x, 0);
@@ -98,7 +108,8 @@ double fitter (const gsl_vector * x, void * params)
 	double c = gsl_vector_get(x, 2);
 	double d = gsl_vector_get(x, 3);
 
-	return my_func (a,b,c, d);
+	// return a_sub_n_fitter (a,b,c, d);
+	return double_pole_fitter (a,b,c, d);
 }
 
 void fit (void)
@@ -159,6 +170,8 @@ void fit (void)
 int main (int argc,  char *argv[]) 
 {
 	read_data ();
-	fit();
+	// fit();
+
+	return 0;
 }
 
