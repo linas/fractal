@@ -18,7 +18,7 @@ set ylabel "zero"
 
 set xrange [10:85]
 set xrange [0:10]
-set xrange [0:55]
+set xrange [10:55]
 
 # f(x) = (0.25*3.1415926*x*x + 9*3.1415926*x/16 - 3*3.1415926/14 )
 # f(x) = (0.25*3.1415926*x*x + 9*3.1415926*x/16 - 0.57)
@@ -84,20 +84,37 @@ r= 1/204.8978
 o=0.0000057017
 # 0.44058
 
-# this is a better fit for the [8-58] range
+# very good fit to the [13-58] range err = 1e-5
+a=0
+b=3.2169643
+r=1/215.47968
+o=-1.8469424e-07
+
+#very good fit to [8-58] range err =  0.000219
+a=0.67385432
+b=3.2731798
+r=1/215.91859
+o=-2.8754842e-07
+
+# this is a better fit for the [7-58] range err=0.00031103594
 a = 0.28984278
 b = 3.1989644
 r = 1/215.07622
 o = -2.9926384e-08
 
+#  0.83073731   3.3128625   216.31426 -3.9810006e-07 f() = 0.000194
+#  0.07397486   3.2134622   215.41849 -1.6307044e-07 f() = 0.000116
+#  0.67386027   3.273182    215.91863 -2.8755958e-07 f() = 0.000219
+
 
 pole(x)=(r*(x-b)/((x-b)*(x-b)+a*a) -o)
 
-plot "bzero.dat" using 1:($2-f($1)) title "diff", \
-     "bzero.dat" using 1:(pole($1)) title "fit"
+# plot "bzero.dat" using 1:($2-f($1)) title "diff", \
+#     "bzero.dat" using 1:(pole($1)) title "fit"
 
 # plot "bzero.dat" using 1:(($2-f($1)-pole($1))/($2-f($1))) title "err"
 
+plot "bzero.dat" using 1:(1/($2-f($1)-2.9926384e-08)-215.07622*$1) title "diff"
 
 # pause 100
 

@@ -118,7 +118,7 @@ double double_pole_fitter (double a, double b, double res, double off)
 	int i;
 
 	double err = 0.0;
-	int is=9;
+	int is=7;
 	for (i=is; i<num_data_pts; i++)
 	{
 		int n = i+1;
@@ -179,16 +179,16 @@ void fit (void)
 #endif
 
 	gsl_vector *start_pt = gsl_vector_alloc (FITS);
-	gsl_vector_set (start_pt, 0, 0.1);
-	gsl_vector_set (start_pt, 1, 2.2);
+	gsl_vector_set (start_pt, 0, 0.3);
+	gsl_vector_set (start_pt, 1, 3.19);
 	gsl_vector_set (start_pt, 2, 216);
-	gsl_vector_set (start_pt, 3, 0.00057);
+	gsl_vector_set (start_pt, 3, 0.000);
 	
 	gsl_vector *stepsize = gsl_vector_alloc (FITS);
 	gsl_vector_set (stepsize, 0, 0.01);
-	gsl_vector_set (stepsize, 1, 0.01);
-	gsl_vector_set (stepsize, 2, 1.0);
-	gsl_vector_set (stepsize, 3, 0.0001);
+	gsl_vector_set (stepsize, 1, 0.005);
+	gsl_vector_set (stepsize, 2, 0.3);
+	gsl_vector_set (stepsize, 3, 0.00001);
 	
 	gsl_multimin_fminimizer_set (fm, &f, start_pt, stepsize); 
 
