@@ -32,7 +32,7 @@ Newton Series for the Riemann Zeta Function
 Phillipe Flajolet, Linas Vepstas
 \layout Date
 
-April 16, 2006
+April 24, 2006
 \layout Abstract
 
 The finite differences or Newton series of certain expressions involving
@@ -788,22 +788,33 @@ A numeric fit to the oscillatory behavior of the function may be made.
 
  zero is provided by 
 \begin_inset Formula \begin{equation}
-q(k)=\frac{\pi}{4}k^{2}+\frac{9\pi}{16}k+0.44057996-\frac{1}{4k}+\frac{1}{214.88k-685}\label{eq:}\end{equation}
+q(k)=\frac{\pi}{4}k^{2}+\frac{9\pi}{16}k-\frac{1}{4k}+c+\frac{r}{k-a+ib}+\frac{r}{k-a-ib}\label{eq:}\end{equation}
 
 \end_inset 
 
- which appears to fit the zero-crossings for 
-\begin_inset Formula $k\ge12$
+ where 
+\begin_inset Formula $c=0.44057997$
 \end_inset 
 
- to better than a part per million, while describing the lower crossings
- to a few parts per hundred.
- Numerically, it appears that this function has a sequence of poles extending
- to the left, located at the negative values of 
-\begin_inset Formula $k$
+, 
+\begin_inset Formula $2/r=215.08$
+\end_inset 
+
+, 
+\begin_inset Formula $a=3.19896$
+\end_inset 
+
+ and 
+\begin_inset Formula $b=0.2898$
 \end_inset 
 
 .
+ With these parameters, the fit to the zero-crossings for 
+\begin_inset Formula $k\ge9$
+\end_inset 
+
+ is better than a part per million, while describing the lower crossings
+ to a few parts per hundred.
  The leading quadratic term in this equation is easily invertible to give
  the oscillatory behavior of the 
 \begin_inset Formula $b_{n}$
@@ -1027,15 +1038,55 @@ k\end{array}\right)=(1-x)^{s}\]
 \end_inset 
 
  which holds for 
-\begin_inset Formula $s>0$
+\begin_inset Formula $\left|x\right|<1$
 \end_inset 
 
- but not otherwise.
- Taking the conditional limit 
+ for any 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ When 
+\begin_inset Formula $s$
+\end_inset 
+
+ is a positive integer, the sum on the left clearly vanishes in the limit
+ of 
 \begin_inset Formula $x\to1$
 \end_inset 
 
-, one gets 
+, because the sum consists of a finite number of terms.
+ That it also vanishes for any 
+\begin_inset Formula $s$
+\end_inset 
+
+ with 
+\begin_inset Formula $\Re s>0$
+\end_inset 
+
+, follows from Carlson's theorem.
+ The theorem applies because, for any 
+\begin_inset Formula $s$
+\end_inset 
+
+, one can has that 
+\begin_inset Formula $\left|s\log(1-x)\right|<\pi$
+\end_inset 
+
+ in the limit of 
+\begin_inset Formula $x\to1$
+\end_inset 
+
+.
+ Thus, for any 
+\begin_inset Formula $s$
+\end_inset 
+
+ with 
+\begin_inset Formula $\Re s>0$
+\end_inset 
+
+, one has 
 \begin_inset Formula \[
 \sum_{k=2}^{\infty}(-1)^{k}\left(\begin{array}{c}
 s\\
@@ -1043,9 +1094,9 @@ k\end{array}\right)=s-1\]
 
 \end_inset 
 
- Again, by Carlson's theorem (XXX oh really?? How exactly? Lets not be sloppy...)
- one may take the left hand side to be the analytic continuation of the
- right hand side.
+ and one may take the right hand side to be the analytic continuation, to
+ the entire complex plane, of the left hand side.
+ 
 \layout Standard
 
 Another important identity uses the digamma function
@@ -1073,6 +1124,8 @@ k\end{array}\right)\frac{1}{k}\]
 
 \end_inset 
 
+ As before, the uniqueness of this expansion may be argued by appeals to
+ Carlson's theorem.
  Subsituting 
 \begin_inset Formula \[
 \frac{1}{k}=\frac{1}{k+1}+\frac{1}{k(k+1)}\]
@@ -1113,11 +1166,31 @@ k\end{array}\right)\left[\zeta(k)-1\right]\]
 \end_inset 
 
 .
- (XXX I suppose this should be demonstrated) The digamma is regular and
- well-defined on the complex plane, having poles at the negative integers.
+ That it is entire follows easily, as the sum is bounded:
+\begin_inset Formula \begin{eqnarray*}
+\left|\sum_{k=2}^{\infty}(-1)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\left[\zeta(k)-1\right]\right| & < & 2\left|\sum_{k=2}^{\infty}\left(-\frac{1}{2}\right)^{k}\left(\begin{array}{c}
+s\\
+k\end{array}\right)\left[\zeta(k)-1\right]\right|\\
+ & \le & \left|2^{1-s}-2+s\right|\end{eqnarray*}
+
+\end_inset 
+
+and thus, the sum cannot have any poles for finite 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ The digamma is regular and single-valued on the complex plane, having simple
+ poles at the negative integers; and thus, 
+\begin_inset Formula $b(s)$
+\end_inset 
+
+ is likewise.
 \layout Standard
 
-The figure 
+XXXX remove or replace The figure 
 \begin_inset LatexCommand \ref{cap:a-imag-axis}
 
 \end_inset 
@@ -1637,14 +1710,25 @@ Dirichlet
 -functions
 \layout Standard
 
-The Dirichlet 
+The following section performs the asymptotic analysis for the Newton series
+ of the Dirichlet 
 \begin_inset Formula $L$
 \end_inset 
 
--functions are defined in terms of the Dirichlet characters, which are group
- representation characters of the cyclic group.
- They play an important role in number theory, and the generalized Riemann
- hypothesis is applied to the 
+-functions; this section breifly reviews thier definition.
+ The Dirichlet 
+\begin_inset Formula $L$
+\end_inset 
+
+-functions
+\begin_inset LatexCommand \cite{Apo76}
+
+\end_inset 
+
+ are defined in terms of the Dirichlet characters, which are group representatio
+n characters of the cyclic group.
+ They play an important role in number theory, and the Riemann hypothesis
+ generalizes to the 
 \emph on 
 L
 \emph default 
@@ -1667,7 +1751,7 @@ L
 \begin_inset Formula $k$
 \end_inset 
 
-, so that 
+, such that 
 \begin_inset Formula $\chi(n+k)=\chi(n)$
 \end_inset 
 
@@ -1745,13 +1829,19 @@ L
 \layout Section
 
 Forward differences
+\layout Comment
+
+Caution: I switched notation in the following, but haven't yet double-checked.
+ There may be errors.
 \layout Standard
 
 In analogy to the study of the forward differences of the Riemann zeta function,
  the remainder of this paper will concern itself with the analysis of the
  series given by 
 \begin_inset Formula \begin{equation}
-L_{n}=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-coeff}\end{equation}
+L_{n}=\sum_{p=2}^{n}(-1)^{p}\left(\begin{array}{c}
+n\\
+p\end{array}\right)\, L(\chi,p)\label{eq:L-coeff}\end{equation}
 
 \end_inset 
 
@@ -1763,7 +1853,9 @@ L_{n}=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{L(\chi,p+1)}{p+1}\label{eq:L-
  connecting the Hurwitz zeta function to the L-function, it is sufficient
  to study sums of the form
 \begin_inset Formula \begin{equation}
-A_{n}(m,k)=\sum_{p=1}^{n}(-1)^{p}{{n \choose p}}\,\frac{\zeta\left(p+1,\frac{m}{k}\right)}{k^{p+1}(p+1)}\label{eq:}\end{equation}
+A_{n}(m,k)=\sum_{p=2}^{n}(-1)^{p}\left(\begin{array}{c}
+n\\
+p\end{array}\right)\,\frac{\zeta\left(p,\frac{m}{k}\right)}{k^{p}}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1777,26 +1869,26 @@ L_{n}=\sum_{m=1}^{k}\chi(m)\, A_{n}(m,k)\label{eq:}\end{equation}
  to the half-circle at positive infinity, and noting that the half-circle
  does not contribute to the integral, one obtains 
 \begin_inset Formula \begin{equation}
-A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{\zeta\left(s+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:}\end{equation}
+A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{\zeta\left(s,\frac{m}{k}\right)}{k^{s}s(s-1)\cdots(s-n)}\, ds\label{eq:}\end{equation}
 
 \end_inset 
 
- Moving the integral to the left, one encounters a single pole at 
-\begin_inset Formula $s=-1$
+ Moving the integral to the left, one encounters single pole at 
+\begin_inset Formula $s=0$
 \end_inset 
 
  and a double pole at 
-\begin_inset Formula $s=0$
+\begin_inset Formula $s=1$
 \end_inset 
 
 .
  The residue of the pole at 
-\begin_inset Formula $s=-1$
+\begin_inset Formula $s=0$
 \end_inset 
 
  is 
 \begin_inset Formula \begin{equation}
-\mbox{Res}(s=-1)=\frac{-1}{n+1}\zeta\left(0,\frac{m}{k}\right)\label{eq:}\end{equation}
+\mbox{Res}(s=0)=-\frac{1}{n}\zeta\left(0,\frac{m}{k}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1811,41 +1903,24 @@ A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2
 \begin_inset Formula $\psi$
 \end_inset 
 
- is the digamma function, the logarithmic derivative of the Gamma function:
- 
-\begin_inset Formula \begin{equation}
-\psi(z)=\frac{d}{dz}\log\Gamma(z)\label{eq:}\end{equation}
-
-\end_inset 
-
- and 
+ is the digamma function and 
 \begin_inset Formula $B_{1}$
 \end_inset 
 
 is the Bernoulli polynomial of order 1.
  The double pole at 
-\begin_inset Formula $s=0$
+\begin_inset Formula $s=1$
 \end_inset 
 
- evaluates to 
+ evaluates to
 \begin_inset Formula \begin{equation}
-\mbox{Res}(s=0)=\frac{-1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n}\right]\label{eq:}\end{equation}
-
-\end_inset 
-
- where 
-\begin_inset Formula $H_{n}$
-\end_inset 
-
- are the harmonic numbers 
-\begin_inset Formula \begin{equation}
-H_{n}=\sum_{j=1}^{n}\frac{1}{j}\label{eq:}\end{equation}
+\mbox{Res}(s=1)=-\frac{1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]\label{eq:}\end{equation}
 
 \end_inset 
 
  Combining these, one obtains 
 \begin_inset Formula \begin{equation}
-A_{n}(m,k)=\frac{1}{n+1}\left(\frac{m}{k}-\frac{1}{2}\right)-\frac{1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n}\right]+a_{n}(m,k)\label{eq:}\end{equation}
+A_{n}(m,k)=\frac{1}{n}\left(\frac{m}{k}-\frac{1}{2}\right)-\frac{1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]+a_{n}(m,k)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1881,6 +1956,7 @@ Caution, there seems to be an extra factor of
 \end_inset 
 
 .
+ Also, am in the middle of changing notation, there are errors due to this.
 \layout Standard
 
 The term 
@@ -1889,7 +1965,7 @@ The term
 
  is represented by the integral
 \begin_inset Formula \begin{equation}
-a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{-3`}{2}-i\infty}^{\frac{-3}{2}+i\infty}\frac{\zeta\left(s+1,\frac{m}{k}\right)}{(s+1)k^{s+1}s(s-1)\cdots(s-n)}\, ds\label{eq:little-a-integral}\end{equation}
+a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{-\frac{1}{2}-i\infty}^{-\frac{1}{2}+i\infty}\frac{\zeta\left(s,\frac{m}{k}\right)}{k^{s}s(s-1)\cdots(s-n)}\, ds\label{eq:little-a-integral}\end{equation}
 
 \end_inset 
 
@@ -1903,7 +1979,7 @@ a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{-3`}{2}-i\infty}^{\frac{-3}
 
  This allows the integral to be expressed as
 \begin_inset Formula \begin{equation}
-a_{n}(m,k)=\frac{n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\end{equation}
+a_{n}(m,k)=\frac{n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{1}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2030,17 +2106,17 @@ To recast the equation
  large.
  Thus, one writes 
 \begin_inset Formula \begin{eqnarray}
-a_{n}(m,k) & = & \frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz\right.\label{eq:saddle}\\
- &  & \left.+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{\psi}(z)}dz\right]\end{eqnarray}
+a_{n}(m,k) & = & \frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\right.\label{eq:saddle}\\
+ &  & \left.+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{f}(z)}dz\right]\end{eqnarray}
 
 \end_inset 
 
  where 
-\begin_inset Formula $\overline{\psi}$
+\begin_inset Formula $\overline{f}$
 \end_inset 
 
  is the complex conjugate of 
-\begin_inset Formula $\psi$
+\begin_inset Formula $f$
 \end_inset 
 
 .
@@ -2049,7 +2125,7 @@ a_{n}(m,k) & = & \frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k
 
 Proceeding, one has 
 \begin_inset Formula \begin{equation}
-\psi(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equation}
+f(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2078,9 +2154,9 @@ Proceeding, one has
 \begin_inset Formula $\Lambda(n)$
 \end_inset 
 
- is the Mangoldt function.
- (What about Hurwitz?) The asymptotic expansion for the Gamma function is
- given by the Stirling expansion, 
+ is the Mangoldt functi on.
+ (XXXWhat about Hurwitz?) The asymptotic expansion for the Gamma function
+ is given by the Stirling expansion, 
 \begin_inset Formula \begin{equation}
 \log\Gamma(x)=\left(x-\frac{1}{2}\right)\log x-x+\frac{1}{2}\log2\pi+\sum_{j=1}^{\infty}\frac{B_{2j}}{2j(2j-1)x^{2j-1}}\label{eq:}\end{equation}
 
@@ -2097,14 +2173,14 @@ and
 
  and collecting terms, one obtains 
 \begin_inset Formula \begin{eqnarray}
-\psi(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
+f(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
  &  & +\log2\pi-2\log z-\frac{z^{2}}{2}\label{eq:}\\
  &  & +\frac{1}{\sqrt{n}}\left[\frac{7}{6z}-\frac{z}{2}+\frac{z^{3}}{3}\right]+\frac{1}{n}\left[\frac{73}{144z^{2}}+\frac{5z^{2}}{4}\right]+\mathcal{O}\left(n^{-3/2}\right)\end{eqnarray}
 
 \end_inset 
 
  The saddle point may be obtained by solving 
-\begin_inset Formula $\psi^{\prime}(z)=0$
+\begin_inset Formula $f^{\prime}(z)=0$
 \end_inset 
 
 .
@@ -2114,18 +2190,18 @@ and
 
 .
  To use the saddle-point formula, one needs 
-\begin_inset Formula $\psi^{\prime\prime}(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$
+\begin_inset Formula $f^{\prime\prime}(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$
 \end_inset 
 
 .
  Substituting, one directly obtains 
 \begin_inset Formula \begin{equation}
-\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\psi(z)}dz\approx\left(\frac{2\pi^{3}p}{n^{3}k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)+\mathcal{O}\left(??\right)\label{eq:}\end{equation}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\approx\left(\frac{2\pi^{3}p}{n^{3}k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)+\mathcal{O}\left(??\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  while the integral for 
-\begin_inset Formula $\overline{\psi}$
+\begin_inset Formula $\overline{f}$
 \end_inset 
 
  is the complex conjugate of this (having a saddle point at the complex
@@ -2194,7 +2270,7 @@ represents the non-exponential part, one may state a few results.
 
  and thus, the first term simplifies to 
 \begin_inset Formula \begin{equation}
-\sum_{m=1}^{k}\chi(m)B_{n}(m,k)=\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n+1}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+\sum_{m=1}^{k}\chi(m)B_{n}(m,k)=\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2213,7 +2289,7 @@ represents the non-exponential part, one may state a few results.
  the Euler totient function.
  Thus, for the principal character, one obtains 
 \begin_inset Formula \begin{equation}
-\sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k)=-\varphi(k)\left[\frac{1}{2(n+1)}+\frac{1}{k}\left(\ln k+1-H_{n}\right)\right]+\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n+1}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+\sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k)=-\varphi(k)\left[\frac{1}{2n}+\frac{1}{k}\left(\ln k+1-H_{n-1}\right)\right]+\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2374,26 +2450,32 @@ A related but simpler integral can be found in Tom M.
 \emph on 
 Introduction to Analytic Number Theory
 \emph default 
-, Lemma 3, Chapter 13.
+, Lemma 3, Chapter 13
+\begin_inset LatexCommand \cite{Apo76}
+
+\end_inset 
+
+.
  The integral resembles equation 
 \begin_inset LatexCommand \ref{eq:little-a-integral}
 
 \end_inset 
 
 .
- Re-expressed so as to heighten the resemblance, it states 
+ Re-expressed so as to heighten the resemblance, it states (XXX changed
+ notation here too, this is probably/certianly wrong too.)
 \begin_inset Formula \begin{eqnarray}
-b_{n}(m) & = & \frac{(-1)^{n}}{2\pi i}\, n!\,\int_{-\frac{3`}{2}-i\infty}^{-\frac{3}{2}+i\infty}\frac{1}{(s+1)m^{s+1}s(s-1)\cdots(s-n)}\, ds\nonumber \\
- & = & \frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{m^{s}}{s(s+1)\cdots(s+n+1)}\, ds\nonumber \\
+b_{n}(m) & = & \frac{(-1)^{n+1}}{2\pi i}\, n!\,\int_{-\frac{1}{2}-i\infty}^{-\frac{1}{2}+i\infty}\frac{1}{m^{s}s(s-1)\cdots(s-n)}\, ds\nonumber \\
+ & = & \frac{1}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{m^{s}}{s(s+1)\cdots(s+n)}\, ds\nonumber \\
  & = & \begin{cases}
-\frac{1}{n+1}\left(1-\frac{1}{m}\right)^{n+1} & \mbox{for }m\ge1\\
+\left(1-\frac{1}{m}\right)^{n} & \mbox{for }m\ge1\\
 0 & \mbox{for }m<1\end{cases}\label{eq:}\end{eqnarray}
 
 \end_inset 
 
  A naive application of this identity to the integrals in this paper leads
  to divergent formal sums.
- 
+ XXX clarify this statement.
 \layout Standard
 
 
