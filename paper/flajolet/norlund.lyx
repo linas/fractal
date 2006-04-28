@@ -32,7 +32,7 @@ Newton Series for the Riemann Zeta Function
 Phillipe Flajolet, Linas Vepstas
 \layout Date
 
-April 24, 2006
+April 27, 2006
 \layout Abstract
 
 The finite differences or Newton series of certain expressions involving
@@ -1560,7 +1560,7 @@ encircles the integers
 \end_inset 
 
  in a postive direction, but does not include any of the integers 
-\begin_inset Formula $\{0,1,\cdots,n-1\}$
+\begin_inset Formula $\{0,1,\cdots,n_{0}-1\}$
 \end_inset 
 
 .
@@ -1888,7 +1888,7 @@ A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}
 
  is 
 \begin_inset Formula \begin{equation}
-\mbox{Res}(s=0)=-\frac{1}{n}\zeta\left(0,\frac{m}{k}\right)\label{eq:}\end{equation}
+\mbox{Res}(s=0)=\zeta\left(0,\frac{m}{k}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1914,13 +1914,13 @@ is the Bernoulli polynomial of order 1.
 
  evaluates to
 \begin_inset Formula \begin{equation}
-\mbox{Res}(s=1)=-\frac{1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]\label{eq:}\end{equation}
+\mbox{Res}(s=1)=\frac{n}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]\label{eq:}\end{equation}
 
 \end_inset 
 
  Combining these, one obtains 
 \begin_inset Formula \begin{equation}
-A_{n}(m,k)=\frac{1}{n}\left(\frac{m}{k}-\frac{1}{2}\right)-\frac{1}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]+a_{n}(m,k)\label{eq:}\end{equation}
+A_{n}(m,k)=\left(\frac{m}{k}-\frac{1}{2}\right)-\frac{n}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]+a_{n}(m,k)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1979,15 +1979,15 @@ a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{-\frac{1}{2}-i\infty}^{-\frac{1}{
 
  This allows the integral to be expressed as
 \begin_inset Formula \begin{equation}
-a_{n}(m,k)=\frac{n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{1}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\end{equation}
+a_{n}(m,k)=-\frac{2n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\end{equation}
 
 \end_inset 
 
  It will prove to be convenient to pull the phase factor out of the cosine
  part; we do this now, and write this integral as 
 \begin_inset Formula \begin{eqnarray}
-a_{n}(m,k) & = & \frac{n!}{k\pi i}\sum_{p=1}^{k}\exp\left(i\frac{2\pi pm}{k}\right)\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\,\exp\left(-i\frac{\pi s}{2}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:two-integrals}\\
- & + & c.c.\nonumber \end{eqnarray}
+a_{n}(m,k) & = & -\frac{n!}{k\pi i}\sum_{p=1}^{k}\exp\left(i\frac{2\pi pm}{k}\right)\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\,\exp\left(-i\frac{\pi s}{2}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:two-integrals}\\
+ &  & +c.c.\nonumber \end{eqnarray}
 
 \end_inset 
 
@@ -2020,7 +2020,7 @@ For large values of
 .
  More precisely, The saddle-point theorem states that 
 \begin_inset Formula \begin{equation}
-\int e^{-Nf(x)}dx\approx\sqrt{\frac{2\pi}{N\left|f^{\prime\prime}(x_{0})\right|}}e^{-Nf(x_{0})}\left[1-\frac{f^{(4)}(x_{0})}{8N\left|f^{\prime\prime}(x_{0})\right|^{2}}+\cdots\right]\label{eq:}\end{equation}
+\int e^{-Nf(x)}dx\approx\sqrt{\frac{2\pi}{N\left|f^{\,\prime\prime}(x_{0})\right|}}e^{-Nf(x_{0})}\left[1-\frac{f^{(4)}(x_{0})}{8N\left|f^{\,\prime\prime}(x_{0})\right|^{2}}+\cdots\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2038,7 +2038,7 @@ For large values of
 \end_inset 
 
  and 
-\begin_inset Formula $f^{\prime\prime}(x_{0})$
+\begin_inset Formula $f^{\,\prime\prime}(x_{0})$
 \end_inset 
 
  and 
@@ -2106,7 +2106,7 @@ To recast the equation
  large.
  Thus, one writes 
 \begin_inset Formula \begin{eqnarray}
-a_{n}(m,k) & = & \frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\right.\label{eq:saddle}\\
+a_{n}(m,k) & = & -\frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\right.\label{eq:saddle}\\
  &  & \left.+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{f}(z)}dz\right]\end{eqnarray}
 
 \end_inset 
@@ -2131,7 +2131,7 @@ f(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equatio
 
  and 
 \begin_inset Formula \begin{equation}
-\phi(s)\approx-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n+1)}\label{eq:}\end{equation}
+\phi(s)\approx-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2154,8 +2154,8 @@ f(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equatio
 \begin_inset Formula $\Lambda(n)$
 \end_inset 
 
- is the Mangoldt functi on.
- (XXXWhat about Hurwitz?) The asymptotic expansion for the Gamma function
+ is the Mangoldt function.
+ (XXX What about Hurwitz?) The asymptotic expansion for the Gamma function
  is given by the Stirling expansion, 
 \begin_inset Formula \begin{equation}
 \log\Gamma(x)=\left(x-\frac{1}{2}\right)\log x-x+\frac{1}{2}\log2\pi+\sum_{j=1}^{\infty}\frac{B_{2j}}{2j(2j-1)x^{2j-1}}\label{eq:}\end{equation}
@@ -2171,7 +2171,8 @@ and
 \begin_inset Formula $\mathcal{O}(1/n)$
 \end_inset 
 
- and collecting terms, one obtains 
+ and collecting terms, one obtains XXX following and what follows is wrong
+ XXX
 \begin_inset Formula \begin{eqnarray}
 f(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
  &  & +\log2\pi-2\log z-\frac{z^{2}}{2}\label{eq:}\\
@@ -2180,7 +2181,7 @@ f(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\
 \end_inset 
 
  The saddle point may be obtained by solving 
-\begin_inset Formula $f^{\prime}(z)=0$
+\begin_inset Formula $f^{\,\prime}(z)=0$
 \end_inset 
 
 .
@@ -2190,7 +2191,7 @@ f(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\
 
 .
  To use the saddle-point formula, one needs 
-\begin_inset Formula $f^{\prime\prime}(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$
+\begin_inset Formula $f^{\,\prime\prime}(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$
 \end_inset 
 
 .
