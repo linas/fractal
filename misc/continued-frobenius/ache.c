@@ -301,6 +301,23 @@ dirichlet_L_function_a_sub_n (int n)
 }
 
 // ==========================================================
+// finite terms, per the Norlund-Rice integral
+static long double norlund_b_sub_n (int n, int m_idx, int k_order)
+{
+	long double val = 0.0;
+	
+	long double x = ((long double) m_idx)/((long double) k_order);
+	val = gsl_sf_psi(x) + logl(k_order) + 1.0L;
+	val -= harmonic_n (n-1);
+	val *= ((long double) n)/((long double) k_order);
+	val = -val;
+
+	// val = - hurwitz_zero (m_idx, k_order) / ((long double) n+1);
+	val += (x-0.5);
+
+	return val;
+}
+
 // Return b_sub_n but for Hurwitz zeta
 // 
 long double 
@@ -308,24 +325,9 @@ hurl_b_sub_n (int n, int m, int k)
 {
 	int p;
 	long double val = 0.0L;
+	val = norlund_b_sub_n (n,m,k);
 	
-	val = (2.0L*M_GAMMA) - 1.0L;
-	val = M_GAMMA;
-	val = 1.0 - 0.25L*M_PI;
-	val *= 0.666666666;
-	// printf ("duude val=%Lg\n", val);
-
-	//
-	val = 0.0L;
-	// val -= M_GAMMA;
-	// val -= 0.25L*M_PI;
-	// val -= 0.135181;
-	val -= 0.5L/((long double) (n+1));
-	// val += 1.0L /((long double) 6*n*(n+1));
-	// val -= 0.5*harmonic_n (n+1);
-	val = 0.0L;
-
-	// the following sum is patterned on a sub n
+	// the following sum is patterned on b sub n
 	long double acc = 0.0L;
 	long double sign = 1.0L;
 	for (p=2; p<=n; p++)
@@ -333,14 +335,14 @@ hurl_b_sub_n (int n, int m, int k)
 		long double term = gsl_sf_hzeta (p, ((double) m)/ ((double) k));
 		term *= powl (k, -p);
 
-		term *= binomial (n,k);
+		term *= binomial (n,p);
 		term *= sign;
 		acc += term;
-		printf ("duuude b_sub_n k=%d term=%Lg, acc=%Lg\n", p, term, acc);
+		// printf ("duuude b_sub_n k=%d term=%Lg, acc=%Lg\n", p, term, acc);
 		sign = -sign;
 	}
 	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
-	return acc;
+	return acc-val;
 }
 
 // ==========================================================

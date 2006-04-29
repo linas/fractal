@@ -42,7 +42,7 @@ main (int argc, char * argv[])
 	int k = atof (argv[2]);
 
 	double prev = 0.0;
-	for (i=1; i<40; i++)
+	for (i=2; i<40; i++)
 	{
 // #define TRADITIONAL_A_SUB_N
 #ifdef TRADITIONAL_A_SUB_N
@@ -71,7 +71,7 @@ main (int argc, char * argv[])
 		prev = y;
 #endif
 
-#define LFUNC_A_SUB_N
+// #define LFUNC_A_SUB_N
 #ifdef LFUNC_A_SUB_N
 		double x = a_sub_n (i);
 		x *= exp (sqrt(4.0*M_PI*i));
@@ -103,9 +103,11 @@ x=z;
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 #endif
 
-#ifdef XXLFUNC_A_SUB_N
-		double y = lfunc_a_sub_n (30, 1, i);
-		printf ("%d	%8.6g\n", i, y);
+#define HURL_B_SUB_N
+#ifdef HURL_B_SUB_N
+		double y = hurl_b_sub_n (i, m, k);
+		// double z = b_sub_n (i);
+		printf ("%d	%8.6g   \n", i, y);
 #endif
 	}
 	return 0;
