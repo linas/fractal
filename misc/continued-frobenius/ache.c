@@ -301,6 +301,49 @@ dirichlet_L_function_a_sub_n (int n)
 }
 
 // ==========================================================
+// Return b_sub_n but for Hurwitz zeta
+// 
+long double 
+hurl_b_sub_n (int n, int m, int k)
+{
+	int p;
+	long double val = 0.0L;
+	
+	val = (2.0L*M_GAMMA) - 1.0L;
+	val = M_GAMMA;
+	val = 1.0 - 0.25L*M_PI;
+	val *= 0.666666666;
+	// printf ("duude val=%Lg\n", val);
+
+	//
+	val = 0.0L;
+	// val -= M_GAMMA;
+	// val -= 0.25L*M_PI;
+	// val -= 0.135181;
+	val -= 0.5L/((long double) (n+1));
+	// val += 1.0L /((long double) 6*n*(n+1));
+	// val -= 0.5*harmonic_n (n+1);
+	val = 0.0L;
+
+	// the following sum is patterned on a sub n
+	long double acc = 0.0L;
+	long double sign = 1.0L;
+	for (p=2; p<=n; p++)
+	{
+		long double term = gsl_sf_hzeta (p, ((double) m)/ ((double) k));
+		term *= powl (k, -p);
+
+		term *= binomial (n,k);
+		term *= sign;
+		acc += term;
+		printf ("duuude b_sub_n k=%d term=%Lg, acc=%Lg\n", p, term, acc);
+		sign = -sign;
+	}
+	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
+	return acc;
+}
+
+// ==========================================================
 // Hurwitz zeta at s=0, should equal 0.5-m/k
 long double hurwitz_zero (int m, int k)
 {
@@ -317,7 +360,7 @@ long double hurwitz_zero (int m, int k)
 }
 
 // finite terms, per the Norlund-Rice integral
-long double norlund_rice (int n, int m_idx, int k_order)
+static long double norlund_a_sub_n (int n, int m_idx, int k_order)
 {
 	long double val = 0.0;
 	
@@ -344,7 +387,7 @@ hurwitz_a_sub_n (int n, int m_idx, int k_order)
 	long double em_idx = m_idx;
 	long double val;
 
-	val = -norlund_rice (n, m_idx, k_order);
+	val = -norlund_a_sub_n (n, m_idx, k_order);
 
 	// the following sum is patterned on a sub n
 	long double acc = 0.0L;
