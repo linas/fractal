@@ -472,13 +472,13 @@ int main (int argc, char * argv[])
 	mpf_init (root);
 																									
 	int i;
-	for (i=45; i<86; i++)
+	for (i=66; i<86; i++)
 	{
 		// double zer = bindary_find_zero (z[i]-0.02, z[i]+0.02, eff, 1.0e-12);
 		// double zer = brent_solver (z[i]-4.0, z[i]+4.0, 1.0e-16);
 		// printf ("%d\t%22.18g\n", i, zer);
 
-		find_zero (root, z[i]-0.1, z[i]+0.1, big_func, NULL, 60);
+		find_zero (root, z[i]-0.01, z[i]+0.1, big_func, NULL, 60);
 		printf ("%d\t", i);
 		fp_prt ("", root);
 
