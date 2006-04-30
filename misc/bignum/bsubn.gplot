@@ -16,11 +16,28 @@ set key right
 
 # set xrange [0:300]
 
-set title "Graph of the coefficeints b_n * n^{1/4} * exp(sqrt(4 pi n))"
-set xlabel "n"
-set ylabel "b_n * n^{1/4} * exp(sqrt(4 pi n))"
+# set title "Graph of the coefficeints b_n * n^{-1/4} * exp(sqrt(4 pi n))"
+# set xlabel "n"
+# set ylabel "b_n * n^{-1/4} * exp(sqrt(4 pi n))"
+# 
+# plot "bsubn.dat" using 1:2 title "" 
 
-plot "bsubn.dat" using 1:2 title "" 
+# -------------------------------------------------------
+# Verify the actual fit
+
+# set xrange [0:300]
+set xrange [300:1600]
+
+set title "Graph of the coefficeints b_n * (2n/pi)^{-1/4} * exp(sqrt(4 pi n))"
+set xlabel "n"
+set ylabel "b_n * (2n/pi)^{-1/4} * exp(sqrt(4 pi n))"
+
+osc(x)=cos(2*sqrt(3.141592653*x)+0.375*3.141592653)
+
+plot "bsubn.dat" using 1:($2/sqrt(sqrt(2/3.1415926))) title "data", \
+     "bsubn.dat" using 1:(-osc($1)) title "fit"
+
+# plot "bsubn.dat" using 1:($2/sqrt(sqrt(2/3.1415926))+osc($1)) title "diff"
 
 
 # pause 100

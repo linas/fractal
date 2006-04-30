@@ -438,7 +438,7 @@ int main (int argc, char * argv[])
 	}
 #endif
 
-#define B_FUNC
+// #define B_FUNC
 #ifdef B_FUNC
 	mpf_t re_a, im_a;
 	mpf_init (re_a);
