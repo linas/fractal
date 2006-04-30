@@ -318,10 +318,33 @@ static long double norlund_b_sub_n (int n, int m_idx, int k_order)
 	return val;
 }
 
+// return the leading part of the asymptotically small part of the 
+// asymptotoic expansion
+long double 
+small_b_sub_n (int n, int m, int k)
+{
+	int p;
+	long double acc=0.0L;
+
+	long double ang = 2.0L*M_PI/((long double) k);
+	for (p=1; p<=k; p++)
+	{
+		long double rt = sqrt(2.0L*ang*n*p);
+		long double term = expl (-rt);
+		term *= powl (M_PI*M_PI*ang*n*p, 0.25L);
+		term *= sinl (ang*p*m - rt + 0.125*M_PI);
+		acc += term;
+	}
+	acc /= M_PI;
+	acc /= (long double) k;
+	acc = -acc;
+	return acc;
+}
+
 // Return b_sub_n but for Hurwitz zeta
 // 
 long double 
-hurl_b_sub_n (int n, int m, int k)
+hurwitz_b_sub_n (int n, int m, int k)
 {
 	int p;
 	long double val = 0.0L;

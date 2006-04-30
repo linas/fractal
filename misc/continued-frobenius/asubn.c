@@ -105,9 +105,9 @@ x=z;
 
 #define HURL_B_SUB_N
 #ifdef HURL_B_SUB_N
-		double y = hurl_b_sub_n (i, m, k);
-		// double z = b_sub_n (i);
-		printf ("%d	%8.6g   \n", i, y);
+		double y = hurwitz_b_sub_n (i, m, k);
+		double z = small_b_sub_n (i,m,k);
+		printf ("%d	%8.6g   %8.6g\n", i, y,z);
 #endif
 	}
 	return 0;

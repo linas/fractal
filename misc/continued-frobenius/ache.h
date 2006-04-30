@@ -33,6 +33,7 @@ long double dirichlet_l_function_a_sub_n (int n);
 // return the nth term of the binomial expansion of the hurwitz zeta function 
 // Hurwitz, for q=m/k
 long double hurwitz_a_sub_n (int n, int m, int k);
-long double hurl_b_sub_n (int n, int m, int k);
+long double hurwitz_b_sub_n (int n, int m, int k);
+long double small_b_sub_n (int n, int m, int k);
 long double eta_a_sub_n (int n);
 long double x_sub_n (int n);
