@@ -347,8 +347,6 @@ long double
 hurwitz_b_sub_n (int n, int m, int k)
 {
 	int p;
-	long double val = 0.0L;
-	val = norlund_b_sub_n (n,m,k);
 	
 	// the following sum is patterned on b sub n
 	long double acc = 0.0L;
@@ -364,6 +362,9 @@ hurwitz_b_sub_n (int n, int m, int k)
 		// printf ("duuude b_sub_n k=%d term=%Lg, acc=%Lg\n", p, term, acc);
 		sign = -sign;
 	}
+
+	long double val = 0.0L;
+	val = norlund_b_sub_n (n,m,k);
 	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
 	return acc-val;
 }
