@@ -1829,10 +1829,6 @@ L
 \layout Section
 
 Forward differences
-\layout Comment
-
-Caution: I switched notation in the following, but haven't yet double-checked.
- There may be errors.
 \layout Standard
 
 In analogy to the study of the forward differences of the Riemann zeta function,
@@ -1946,17 +1942,35 @@ a_{n}(m,k)=\mathcal{O}\left(e^{-\sqrt{Kn}}\right)\label{eq:}\end{equation}
 Saddle-point methods
 \layout Comment
 
-Caution, there seems to be an extra factor of 
-\begin_inset Formula $k$
+Caution, the following predict an asymptotic behaviour for small 
+\begin_inset Formula $n$
 \end_inset 
 
- floating around; I haven't tracked that down yet; these expressions may
- be too small/large by factor of 
+ that naively seems to be too small by factor of 
 \begin_inset Formula $k$
 \end_inset 
 
 .
- Also, am in the middle of changing notation, there are errors due to this.
+ However, I think the expressions are actually correct; need to double-check
+ against numerics for high 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ I'm hoping that the next term in the asymptotic expansion will provide
+ the 
+\begin_inset Quotes eld
+\end_inset 
+
+missing
+\begin_inset Quotes erd
+\end_inset 
+
+ factor of 
+\begin_inset Formula $k$
+\end_inset 
+
+.
 \layout Standard
 
 The term 
@@ -1979,14 +1993,14 @@ a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{-\frac{1}{2}-i\infty}^{-\frac{1}{
 
  This allows the integral to be expressed as
 \begin_inset Formula \begin{equation}
-a_{n}(m,k)=-\frac{2n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\end{equation}
+a_{n}(m,k)=-\frac{n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\end{equation}
 
 \end_inset 
 
  It will prove to be convenient to pull the phase factor out of the cosine
  part; we do this now, and write this integral as 
 \begin_inset Formula \begin{eqnarray}
-a_{n}(m,k) & = & -\frac{n!}{k\pi i}\sum_{p=1}^{k}\exp\left(i\frac{2\pi pm}{k}\right)\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\,\exp\left(-i\frac{\pi s}{2}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:two-integrals}\\
+a_{n}(m,k) & = & -\frac{n!}{2k\pi i}\sum_{p=1}^{k}\exp\left(i\frac{2\pi pm}{k}\right)\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\,\exp\left(-i\frac{\pi s}{2}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:two-integrals}\\
  &  & +c.c.\nonumber \end{eqnarray}
 
 \end_inset 
@@ -2078,7 +2092,7 @@ To recast the equation
 \end_inset 
 
  axis, near 
-\begin_inset Formula $s=\sigma_{0}=\sqrt{\pi kn/p}$
+\begin_inset Formula $s=\sigma_{0}=\sqrt{\pi pn/k}$
 \end_inset 
 
  and so the appropriate scaling parameter is 
@@ -2106,7 +2120,7 @@ To recast the equation
  large.
  Thus, one writes 
 \begin_inset Formula \begin{eqnarray}
-a_{n}(m,k) & = & -\frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\right.\label{eq:saddle}\\
+a_{n}(m,k) & = & -\frac{1}{2k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\right.\label{eq:saddle}\\
  &  & \left.+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{f}(z)}dz\right]\end{eqnarray}
 
 \end_inset 
@@ -2171,12 +2185,11 @@ and
 \begin_inset Formula $\mathcal{O}(1/n)$
 \end_inset 
 
- and collecting terms, one obtains XXX following and what follows is wrong
- XXX
+ and collecting terms, one obtains 
 \begin_inset Formula \begin{eqnarray}
-f(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
+f(z) & \approx & \frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
  &  & +\log2\pi-2\log z-\frac{z^{2}}{2}\label{eq:}\\
- &  & +\frac{1}{\sqrt{n}}\left[\frac{7}{6z}-\frac{z}{2}+\frac{z^{3}}{3}\right]+\frac{1}{n}\left[\frac{73}{144z^{2}}+\frac{5z^{2}}{4}\right]+\mathcal{O}\left(n^{-3/2}\right)\end{eqnarray}
+ &  & +\frac{1}{6z\sqrt{n}}\left[10+z^{2}\right]+\frac{1}{2n}\left[1-\frac{z^{2}}{2}-\frac{z^{4}}{6}+\frac{73}{72z^{2}}\right]+\mathcal{O}\left(n^{-3/2}\right)\end{eqnarray}
 
 \end_inset 
 
@@ -2197,7 +2210,7 @@ f(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\
 .
  Substituting, one directly obtains 
 \begin_inset Formula \begin{equation}
-\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\approx\left(\frac{2\pi^{3}p}{n^{3}k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)+\mathcal{O}\left(??\right)\label{eq:}\end{equation}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\approx\left(\frac{2\pi^{3}pn}{k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)+\mathcal{O}\left(??\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2214,7 +2227,7 @@ f(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\
 
  gives 
 \begin_inset Formula \begin{equation}
-a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi n^{3}}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\sin\left(\frac{2\pi pm}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:an-p}\end{equation}
+a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2n}{\pi}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\cos\left(\frac{2\pi pm}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:an-p}\end{equation}
 
 \end_inset 
 
@@ -2228,7 +2241,7 @@ For large
 
  term contributes significantly, and so one may write
 \begin_inset Formula \begin{equation}
-a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\sin\left(\frac{2\pi m}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)\label{eq:}\end{equation}
+a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\cos\left(\frac{2\pi m}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2240,6 +2253,9 @@ are exponentially small.
 \layout Section
 
 More L-functions
+\layout Comment
+
+The following still uses the old notation and is thus wrong/misleading
 \layout Standard
 
 We conclude by briefly returning to the structure of the Dirichlet L-functions.
