@@ -35,7 +35,7 @@ Linas Vepstas
 <linas@linas.org>
 \layout Date
 
-3 May 2006
+4 May 2006
 \layout Abstract
 
 Recently, Simon Plouffe has discovered a number of identites for the Riemann
@@ -452,10 +452,7 @@ k+1\\
 
 \end_inset 
 
- (XXX this very last expression has not been double-checked yet.
- Watch for errors.
- If in doubt, use the previous sum involving the zetas.
- That one should be good.) The above introduces the binomial coefficient
+ The above introduces the binomial coefficient
 \begin_inset Formula \[
 \left(\begin{array}{c}
 n\\
@@ -562,53 +559,347 @@ A further curiosity in this regard is noted by Plouffe: if one takes
 Evaluating the Countour Integral
 \layout Standard
 
-Here xxx The basic result here is that 
-\begin_inset Formula $2S_{k}(x)=I_{k}(x)$
+The goal of this section is to relate the sum 
+\begin_inset Formula $S_{k}(x)$
 \end_inset 
 
- for 
-\begin_inset Formula $k=4m-1$
+ to the contour integral 
+\begin_inset Formula $I_{k}(x)$
 \end_inset 
 
- and I'm confused about other 
+.
+ 
+\layout Theorem
+
+For odd integers 
 \begin_inset Formula $k$
 \end_inset 
 
-'s for the moment.
- The above result is interesting: the integral 
+, one has that 
+\begin_inset Formula \[
+S_{k}(x)=I_{k}(x)+(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)\]
+
+\end_inset 
+
+
+\layout Proof
+
+To prove this result, consider evaluating the conour integral 
 \begin_inset Formula $I_{s}(x)$
 \end_inset 
 
- has a 
-\begin_inset Quotes eld
+ for a tall rectangular contour sourrounding the poles at 
+\begin_inset Formula $z=1,0,-1,\ldots,1-s$
 \end_inset 
 
-functional equation
-\begin_inset Quotes erd
+.
+ Thus, write 
+\begin_inset Formula $I_{s}(x)=A+B+C+D$
 \end_inset 
 
- for 
-\begin_inset Formula $s\to k-s$
+ with 
+\begin_inset Formula $A$
 \end_inset 
 
- which becomes an exact reflection symmetry for 
-\begin_inset Formula $s$
+ being the integral from 
+\begin_inset Formula $c-ih$
 \end_inset 
 
- an integer.
-\layout Comment
+ to 
+\begin_inset Formula $c+ih$
+\end_inset 
 
-Simon, Its very late at night here, and typing in all these formulas is
- quite time consuming.
- However, as you are excited by this topic, I thought that rather than making
- you wait, I thought it would be polite to show the half-finished work.
+ for a constant 
+\begin_inset Formula $c>1$
+\end_inset 
+
+ and the height 
+\begin_inset Formula $h$
+\end_inset 
+
+ large, eventually taking the limit 
+\begin_inset Formula $h\to\infty$
+\end_inset 
+
+.
+ That is, 
+\begin_inset Formula $A$
+\end_inset 
+
+ forms the right hand side of the rectangular contour.
+ In the limit of 
+\begin_inset Formula $h\to\infty$
+\end_inset 
+
+, one has by definition 
+\begin_inset Formula \[
+A=S_{s}(x)\]
+
+\end_inset 
+
+
+\layout Proof
+
+Let 
+\begin_inset Formula $B$
+\end_inset 
+
+ and 
+\begin_inset Formula $C$
+\end_inset 
+
+ be the top and bottom of the contour, so that for 
+\begin_inset Formula $B$
+\end_inset 
+
+, the integral runs from 
+\begin_inset Formula $c+ih$
+\end_inset 
+
+ to 
+\begin_inset Formula $ih-s-\epsilon$
+\end_inset 
+
+ leftwards.
+ For 
+\begin_inset Formula $C$
+\end_inset 
+
+, the integral runs rightwards from 
+\begin_inset Formula $-ih-s-\epsilon$
+\end_inset 
+
+ to 
+\begin_inset Formula $c-ih$
+\end_inset 
+
+; here we take 
+\begin_inset Formula $\epsilon>0$
+\end_inset 
+
+.
+ The integral 
+\begin_inset Formula $D$
+\end_inset 
+
+ on the left hand side of the rectangle closes the contour, running downwards,
+ from 
+\begin_inset Formula $ih-s-\epsilon$
+\end_inset 
+
+ to 
+\begin_inset Formula $-ih-s-\epsilon$
+\end_inset 
+
+.
+\layout Proof
+
+The integrals 
+\begin_inset Formula $B$
+\end_inset 
+
+ and 
+\begin_inset Formula $C$
+\end_inset 
+
+ will vanish in the limit of the height 
+\begin_inset Formula $h\to\infty$
+\end_inset 
+
+.
+ This can be easily seen after a simple change of variable: 
+\begin_inset Formula \begin{eqnarray*}
+B & = & \frac{1}{2\pi i}\int_{ih+c}^{ih-s-\epsilon}\frac{\Gamma(z)}{x^{z}}\zeta(s+z)\zeta(z)\, dz\\
+ & = & \frac{1}{2\pi i}\int_{c}^{-s-\epsilon}\frac{\Gamma(u+ih)}{x^{u+ih}}\zeta(s+u+ih)\zeta(u+ih)\, du\end{eqnarray*}
+
+\end_inset 
+
+ Much of the integrand is 
+\begin_inset Formula $\mathcal{O}(1)$
+\end_inset 
+
+ in 
+\begin_inset Formula $h$
+\end_inset 
+
+, or polynomially thereabouts.
+ The integrand is dominated by the Gamma function, which, from Stirling's
+ approximation, may be seen to be 
+\begin_inset Formula \[
+\Gamma(u+ih)~\mathcal{O}\left(e^{-\pi h/2}\right)\]
+
+\end_inset 
+
+ The complex conjugate argument applies to 
+\begin_inset Formula $C$
+\end_inset 
+
+, and thus 
+\begin_inset Formula $B$
+\end_inset 
+
+ and 
+\begin_inset Formula $C$
+\end_inset 
+
+ vanish in the limit of 
+\begin_inset Formula $h\to\infty$
+\end_inset 
+
+.
  
-\layout Comment
+\layout Proof
 
-A remark, and a requrest.
- First, I beleive that all of the results should be correct for all values
- of 
-\begin_inset Formula $x$
+To evaluate 
+\begin_inset Formula $D$
+\end_inset 
+
+, begin by writing
+\begin_inset Formula \begin{eqnarray*}
+D & = & -\frac{1}{2\pi i}\int_{-ih-s-\epsilon}^{ih-s-\epsilon}\frac{\Gamma(z)}{x^{z}}\zeta(s+z)\zeta(z)\, dz\\
+ & = & -\frac{1}{2\pi i}x^{s+\epsilon}\int_{-ih}^{ih}x^{u}\Gamma(-u-s-\epsilon)\zeta(-u-\epsilon)\zeta(-u-s-\epsilon)\, du\end{eqnarray*}
+
+\end_inset 
+
+ after a change of variable 
+\begin_inset Formula $z=-u-s-\epsilon$
+\end_inset 
+
+.
+ One then applies the functional equations for Gamma:
+\begin_inset Formula \[
+\Gamma(1-z)\Gamma(z)=\frac{\pi}{\sin\pi z}\]
+
+\end_inset 
+
+ and for zeta:
+\begin_inset Formula \[
+\zeta(s)=2^{s}\pi^{s-1}\sin\frac{\pi s}{2}\Gamma(1-s)\zeta(1-s)\]
+
+\end_inset 
+
+ to obtain 
+\begin_inset Formula \begin{eqnarray*}
+D & =\frac{1}{2\pi^{2}i}\left(\frac{x}{2\pi}\right)^{s+\epsilon}\left(\frac{1}{2\pi}\right)^{\epsilon}\int_{-ih}^{ih} & \left(\frac{x}{4\pi^{2}}\right)^{u}\frac{\sin\frac{u+\epsilon}{2}\pi\;\sin\frac{u+s+\epsilon}{2}\pi}{\sin(u+s+\epsilon)\pi}\;\times\\
+ &  & \Gamma(1+u+\epsilon)\zeta(1+u+\epsilon)\zeta(1+s+u+\epsilon)\, du\end{eqnarray*}
+
+\end_inset 
+
+ Another change of variable, this time as 
+\begin_inset Formula $w=1+u+\epsilon$
+\end_inset 
+
+take the integral to a slightly more recognizable form: 
+\begin_inset Formula \[
+D=-\frac{1}{\pi i}\left(\frac{x}{2\pi}\right)^{s-1}\int_{1+\epsilon-ih}^{1+\epsilon+ih}\left(\frac{x}{4\pi^{2}}\right)^{w}\frac{\cos\frac{w}{2}\pi\;\cos\frac{w+s}{2}\pi}{\sin(w+s)\pi}\Gamma(w)\zeta(w)\zeta(w+s)\, dw\]
+
+\end_inset 
+
+ Next, by taking 
+\begin_inset Formula $s=k$
+\end_inset 
+
+ to be an odd integer, the trigonometric piece simplifies and looses its
+ 
+\begin_inset Formula $w$
+\end_inset 
+
+ dependence: 
+\begin_inset Formula \[
+\frac{\cos\frac{w}{2}\pi\;\cos\frac{w+k}{2}\pi}{\sin(w+k)\pi}=\frac{1}{2}(-1)^{(k+1)/2}\]
+
+\end_inset 
+
+ and in the limit 
+\begin_inset Formula $h\to\infty$
+\end_inset 
+
+, one finally reaches the claimed result:
+\begin_inset Formula \[
+D=(-1)^{(k+1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)\]
+
+\end_inset 
+
+ that is, 
+\begin_inset Formula \[
+I_{k}(x)=A+D=S_{k}(x)-(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)\]
+
+\end_inset 
+
+ for odd integer 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+\layout Standard
+
+Next, some simple outcomes:
+\layout Corollary
+
+For 
+\begin_inset Formula $m$
+\end_inset 
+
+ integer, one has
+\begin_inset Formula \[
+I_{4m+1}(2\pi)=0.\]
+
+\end_inset 
+
+
+\layout Proof
+
+Substitute 
+\begin_inset Formula $x=2\pi$
+\end_inset 
+
+.
+\layout Standard
+
+The above hints that there are no results for 
+\begin_inset Formula $k=5,9,13,\ldots$
+\end_inset 
+
+ which means that more work is needed.
+\layout Corollary
+
+For 
+\begin_inset Formula $m$
+\end_inset 
+
+ integer, one has 
+\begin_inset Formula \[
+I_{4m-1}(2\pi)=2S_{4m-1}(2\pi).\]
+
+\end_inset 
+
+
+\layout Proof
+
+Substitute 
+\begin_inset Formula $x=2\pi$
+\end_inset 
+
+.
+\layout Standard
+
+This last corollary provides the main result of this exposition, namely
+ that 
+\begin_inset Formula \[
+2\sum_{n=1}^{\infty}\frac{1}{n^{4m-1}\left(e^{2\pi n}-1\right)}=-\zeta(4m-1)+\frac{(2\pi)^{4m-1}}{(4m)!}\;\sum_{j=0}^{2m}\left(\begin{array}{c}
+4m\\
+2j\end{array}\right)\left(-1\right)^{j}B_{2j}B_{4m-2j}\]
+
+\end_inset 
+
+ Which completely resolves one set of relationships.
+ However, There's nothing more that this approach seems to be able to provide.
+\layout Standard
+
+Next ...
+ it seems that the only relationships for which we can get any actual results
+ are those for 
+\begin_inset Formula $x=2\pi$
 \end_inset 
 
  and 
@@ -616,26 +907,37 @@ A remark, and a requrest.
 \end_inset 
 
 .
- But it would make me feel better if you could numerically verify that this
- is so.
-\layout Comment
-
-A second remark is that there is an error somewhere that I haven't found.
- My evaluation of the integral for 
-\begin_inset Formula $x=2\pi$
+ The above does not give any results for the other odd integers 
+\begin_inset Formula $k=5,9,13,\ldots$
 \end_inset 
 
- and 
-\begin_inset Formula $k=4m+1$
-\end_inset 
+.
+ So in fact, this is a dead end, and some new magic ingrdient is needed
+ to proceed further.
+\layout Standard
 
- seems to state that 
-\begin_inset Formula $I_{4m+1}(2\pi)=0$
-\end_inset 
+(---------------------------------
+\layout Standard
 
- but clearly the sum doesn't vanish.
- I presume that I stupidly dropped a sign somewhere, but its eluded me till
- now, and I haven't had time to push harder.
+---------------------------
+\layout Standard
+
+-----------------------------
+\layout Standard
+
+Simon, Its very late at night here, and typing in all these formulas is
+ quite time consuming.
+ However, as you are excited by this topic, I thought that rather than making
+ you wait, I thought it would be polite to show the half-finished work.
+ 
+\layout Standard
+
+A remark, and a request.
+ First, I beleive that all of the results should be correct.
+ Let me know if there are errors.
+\layout Standard
+
+-----------------------------------------------------------------
 \layout Section
 
 Appendix: Polylog Integral
