@@ -35,7 +35,7 @@ Linas Vepstas
 <linas@linas.org>
 \layout Date
 
-4 May 2006
+9 May 2006
 \layout Abstract
 
 Recently, Simon Plouffe has discovered a number of identites for the Riemann
@@ -57,8 +57,114 @@ Recently, Simon Plouffe has discovered a number of identites for the Riemann
 Introduction
 \layout Standard
 
-Quote some of Plouffe's formulas here.
- Give references.
+Inspired by an identity for 
+\begin_inset Formula $\zeta(3)$
+\end_inset 
+
+ given in Ramanujan's notebooks [need ref],
+\begin_inset Formula \[
+\zeta(3)=\frac{7\pi^{3}}{180}-2\sum_{n=1}^{\infty}\frac{1}{n^{3}\left(e^{2\pi n}-1\right)}\]
+
+\end_inset 
+
+ Plouffe describes a set of similar identities [need ref, 1998] that were
+ discovered numerically using arbitrary-precision software.
+ For example, Plouffe gives an identity for 
+\begin_inset Formula $\zeta(7)$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+\zeta(7)=\frac{19\pi^{7}}{56700}-2\sum_{n=1}^{\infty}\frac{1}{n^{7}\left(e^{2\pi n}-1\right)}\]
+
+\end_inset 
+
+ This text provides an analytically derived formula for expressions of this
+ type.
+ The resulting general formula, valid for integer 
+\begin_inset Formula $m\ge1$
+\end_inset 
+
+, is 
+\begin_inset Formula \begin{eqnarray*}
+\zeta(4m-1) & = & -2\sum_{n=1}^{\infty}\frac{1}{n^{4m-1}\left(e^{2\pi n}-1\right)}\\
+ & - & \frac{1}{2}\;(2\pi)^{4m-1}\;\sum_{j=0}^{2m}\left(-1\right)^{j}\frac{B_{2j}}{(2j)!}\frac{B_{4m-2j}}{(4m-2j)!}\end{eqnarray*}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $B_{k}$
+\end_inset 
+
+ is the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th Bernoulli number.
+ 
+\layout Standard
+
+Plouffe also notes similar relations for the other odd integers; for example,
+ 
+\begin_inset Formula \[
+\zeta(5)=\frac{\pi^{5}}{294}-\frac{72}{35}\sum_{n=1}^{\infty}\frac{1}{n^{5}\left(e^{2\pi n}-1\right)}-\frac{2}{35}\sum_{n=1}^{\infty}\frac{1}{n^{5}\left(e^{2\pi n}+1\right)}\]
+
+\end_inset 
+
+ The general form for this type of expression may be shown to be 
+\begin_inset Formula \begin{eqnarray*}
+\left[1-2(-4)^{m}+\frac{1}{(-4)^{m}}\right]\zeta(4m+1) & = & \frac{2}{(-4)^{m}}\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}+1\right)}\\
+ &  & -2\left[1-2(-4)^{m}\right]\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}-1\right)}\\
+ &  & +(2\pi)^{4m+1}\sum_{j=0}^{m}(-4)^{j}\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}\\
+ &  & -2(2\pi)^{4m+1}(-4)^{m}\;\sum_{j=0}^{2m+1}\frac{1}{(-4)^{j}}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
+
+\end_inset 
+
+ (Argghhhh!, above has an error in the bernoulli sums; to be corrected)
+\layout Standard
+
+The methods described in this text also allow for a large generalization
+ of these types of sums.
+ Defining 
+\begin_inset Formula \[
+P_{k}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi xn}-1\right)}\]
+
+\end_inset 
+
+ these generalizations follow from a functional equation relating 
+\begin_inset Formula $P_{k}(x)$
+\end_inset 
+
+ to 
+\begin_inset Formula $P_{k}(1/x)$
+\end_inset 
+
+ for odd integers 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ In particular, interesting relationships result from considering 
+\begin_inset Formula $x\in\mathbb{Q}[i]$
+\end_inset 
+
+, the field of Gaussian rationals, as well as Diophantine roots of quadratics.
+\layout Standard
+
+The rest of this paper is roughly layed out as follows (under construction):
+ The second section gives a relationship to the polylogarithm, and thence
+ to an integral on the complex plane.
+ The third section examines the related contour integral, which is easily
+ solved to give a finite sum involving the Bernoulli numbers.
+ The fourth section relates the contour integral to the polylogarithm integral,
+ thus resulting in a functional equation for 
+\begin_inset Formula $P_{k}(x)$
+\end_inset 
+
+.
+ The fifth section applies the functional equation, providing a variety
+ of lemmas, many of which explain Plouffe's discoveries.
+ The sixth section explores more general aspects of the system.
 \layout Section
 
 The Polylogarithm
@@ -833,34 +939,22 @@ I_{k}(x)=A+D=S_{k}(x)-(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(
 .
 \layout Standard
 
-Next, some simple outcomes:
-\layout Corollary
-
-For 
-\begin_inset Formula $m$
+The next section will review the application of this and the preceeding
+ sections to specific, simple values of 
+\begin_inset Formula $x$
 \end_inset 
 
- integer, one has
-\begin_inset Formula \[
-I_{4m+1}(2\pi)=0.\]
+, thus regaining many of Plouffe's sums.
+\layout Section
 
-\end_inset 
+Lemmas and Applications
+\layout Standard
 
-
-\layout Proof
-
-Substitute 
-\begin_inset Formula $x=2\pi$
+The first corollary demonstrates Plouffe's simplest sums for 
+\begin_inset Formula $\zeta(4m-1)$
 \end_inset 
 
 .
-\layout Standard
-
-The above hints that there are no results for 
-\begin_inset Formula $k=5,9,13,\ldots$
-\end_inset 
-
- which means that more work is needed.
 \layout Corollary
 
 For 
@@ -883,7 +977,7 @@ Substitute
 .
 \layout Standard
 
-This last corollary provides the main result of this exposition, namely
+This corollary provides the first concrete result of this exposition, namely
  that 
 \begin_inset Formula \[
 2\sum_{n=1}^{\infty}\frac{1}{n^{4m-1}\left(e^{2\pi n}-1\right)}=-\zeta(4m-1)+\frac{(2\pi)^{4m-1}}{(4m)!}\;\sum_{j=0}^{2m}\left(\begin{array}{c}
@@ -892,28 +986,135 @@ This last corollary provides the main result of this exposition, namely
 
 \end_inset 
 
- Which completely resolves one set of relationships.
- However, There's nothing more that this approach seems to be able to provide.
-\layout Standard
+ which completely resolves one set of relationships.
+ The next corollary shows that something more is needed for 
+\begin_inset Formula $\zeta(5)$
+\end_inset 
 
-Next ...
- it seems that the only relationships for which we can get any actual results
- are those for 
+, 
+\begin_inset Formula $\zeta(9)$
+\end_inset 
+
+, and so on, since the most direct approch does not give any information
+ for such sums.
+\layout Corollary
+
+For 
+\begin_inset Formula $k$
+\end_inset 
+
+ an odd integer, one has 
+\begin_inset Formula \[
+I_{k}(x)=(-1)^{(k+1)/2}I_{k}\left(\frac{4\pi^{2}}{x}\right)\]
+
+\end_inset 
+
+
+\layout Proof
+
+xxx
+\layout Corollary
+
+For 
+\begin_inset Formula $m$
+\end_inset 
+
+ a positive integer, one has
+\begin_inset Formula \[
+I_{4m+1}(2\pi)=0.\]
+
+\end_inset 
+
+
+\layout Proof
+
+Substitute 
 \begin_inset Formula $x=2\pi$
 \end_inset 
 
- and 
-\begin_inset Formula $k=4m-1$
+.
+\layout Standard
+
+Following directly from the above is another corollary:
+\layout Corollary
+
+For 
+\begin_inset Formula $m$
 \end_inset 
 
-.
- The above does not give any results for the other odd integers 
-\begin_inset Formula $k=5,9,13,\ldots$
+ a postive integer, one has 
+\begin_inset Formula \[
+0=\sum_{j=0}^{2m+1}(-1)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\]
+
 \end_inset 
 
-.
- So in fact, this is a dead end, and some new magic ingrdient is needed
- to proceed further.
+
+\layout Proof
+
+Write out the value of 
+\begin_inset Formula $I_{4m+1}(2\pi)$
+\end_inset 
+
+ in detail.
+\layout Standard
+
+To obtain results of the 
+\begin_inset Formula $4m+1$
+\end_inset 
+
+ form, one must introduce
+\begin_inset Formula \[
+T_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}+1\right)}\]
+
+\end_inset 
+
+
+\layout Theorem
+
+One has
+\begin_inset Formula \[
+T_{s}(x)=S_{s}(x)-2S_{s}(2x)\]
+
+\end_inset 
+
+
+\layout Proof
+
+Simple enough, follow your nose.
+ xxx to do
+\layout Standard
+
+The results for 
+\begin_inset Formula $\zeta(5)$
+\end_inset 
+
+, etc.
+ depend on a critical observation: that 
+\begin_inset Formula \[
+S_{s}(x+2\pi i)=S_{s}(x)\]
+
+\end_inset 
+
+ is a periodic function.
+ 
+\layout Theorem
+
+For positive integer 
+\begin_inset Formula $m$
+\end_inset 
+
+, one has 
+\begin_inset Formula \begin{eqnarray*}
+S_{4m+1}(2\pi) & = & I_{4m+1}(2\pi(1+i))\\
+ &  & +(-1)^{m}\left[\frac{T_{4m+1}(2\pi)}{4^{m}}+2\cdot4^{m}S_{4m+1}(2\pi)-4^{m}I_{4m+1}(\pi)\right]\\
+\end{eqnarray*}
+
+\end_inset 
+
+
+\layout Proof
+
+Let xxx
 \layout Standard
 
 (---------------------------------
@@ -933,7 +1134,8 @@ Simon, Its very late at night here, and typing in all these formulas is
 \layout Standard
 
 A remark, and a request.
- First, I beleive that all of the results should be correct.
+ First, I beleive that all of the results should be correct, except where
+ noted.
  Let me know if there are errors.
 \layout Standard
 
