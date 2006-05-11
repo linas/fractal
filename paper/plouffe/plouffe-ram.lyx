@@ -35,7 +35,7 @@ Linas Vepstas
 <linas@linas.org>
 \layout Date
 
-9 May 2006
+10 May 2006
 \layout Abstract
 
 Recently, Simon Plouffe has discovered a number of identites for the Riemann
@@ -113,30 +113,30 @@ Plouffe also notes similar relations for the other odd integers; for example,
 
  The general form for this type of expression may be shown to be 
 \begin_inset Formula \begin{eqnarray*}
-\left[1-2(-4)^{m}+\frac{1}{(-4)^{m}}\right]\zeta(4m+1) & = & \frac{2}{(-4)^{m}}\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}+1\right)}\\
- &  & -2\left[1-2(-4)^{m}\right]\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}-1\right)}\\
- &  & +(2\pi)^{4m+1}\sum_{j=0}^{m}(-4)^{j}\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}\\
- &  & -2(2\pi)^{4m+1}(-4)^{m}\;\sum_{j=0}^{2m+1}\frac{1}{(-4)^{j}}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
+\left[1+(-4)^{m}-2^{4m+1}\right]\zeta(4m+1) & = & 2\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}+1\right)}\\
+ &  & +2\left[2^{4m+1}-(-4)^{m}\right]\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}-1\right)}\\
+ &  & +(2\pi)^{4m+1}\sum_{j=0}^{m}(-4)^{m+j}\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}\\
+ &  & +\frac{1}{2}(2\pi)^{4m+1}\;\sum_{j=0}^{2m+1}(-4)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
 
 \end_inset 
 
- (Argghhhh!, above has an error in the bernoulli sums; to be corrected)
+ 
 \layout Standard
 
 The methods described in this text also allow for a large generalization
  of these types of sums.
  Defining 
 \begin_inset Formula \[
-P_{k}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi xn}-1\right)}\]
+P_{k}(\tau)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi in\tau}-1\right)}\]
 
 \end_inset 
 
- these generalizations follow from a functional equation relating 
-\begin_inset Formula $P_{k}(x)$
+ these generalizations follow from a modular equation relating 
+\begin_inset Formula $P_{k}(\tau)$
 \end_inset 
 
  to 
-\begin_inset Formula $P_{k}(1/x)$
+\begin_inset Formula $P_{k}(-1/\tau)$
 \end_inset 
 
  for odd integers 
@@ -145,32 +145,38 @@ P_{k}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi xn}-1\right)}\]
 
 .
  In particular, interesting relationships result from considering 
-\begin_inset Formula $x\in\mathbb{Q}[i]$
+\begin_inset Formula $\tau\in\mathbb{Q}[i]$
 \end_inset 
 
 , the field of Gaussian rationals, as well as Diophantine roots of quadratics.
 \layout Standard
 
 The rest of this paper is roughly layed out as follows (under construction):
- The second section gives a relationship to the polylogarithm, and thence
- to an integral on the complex plane.
+ The second section gives a relationship between the sums and the polylogarithm,
+ and thence to an integral on the complex plane.
  The third section examines the related contour integral, which is easily
- solved to give a finite sum involving the Bernoulli numbers.
+ integrated via Cauchy's residue theorem to give a finite sum involving
+ the Bernoulli numbers.
  The fourth section relates the contour integral to the polylogarithm integral,
  thus resulting in a functional equation for 
-\begin_inset Formula $P_{k}(x)$
+\begin_inset Formula $P_{k}(\tau)$
 \end_inset 
 
 .
  The fifth section applies the functional equation, providing a variety
  of lemmas, many of which explain Plouffe's discoveries.
- The sixth section explores more general aspects of the system.
+ The sixth section explores the modular nature of the relations on 
+\begin_inset Formula $P_{k}(\tau)$
+\end_inset 
+
+.
+ I suppose a conclusion may be written eventually.
 \layout Section
 
 The Polylogarithm
 \layout Standard
 
-The recurring theme in the identities is the sum 
+The recurring theme in Plouffe's identities is the sum 
 \begin_inset Formula \[
 S_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}-1\right)}\]
 
@@ -214,12 +220,12 @@ S_{s}(x) & = & \sum_{n=1}^{\infty}\sum_{m=0}^{\infty}\frac{e^{-xn(m+1)}}{n^{s}}\
 
 \end_inset 
 
- which is generally valid for positive 
-\begin_inset Formula $x$
+ which is generally valid for 
+\begin_inset Formula $\Re x>0$
 \end_inset 
 
 .
- This is easily obtained by applying the expansion 
+ The above is easily obtained by applying the expansion 
 \begin_inset Formula \[
 \frac{1}{1-z}=\sum_{m=0}^{\infty}z^{m}\]
 
@@ -257,7 +263,7 @@ S_{s}(x) & = & \frac{1}{2\pi i}\sum_{m=1}^{\infty}\int_{c-i\infty}^{c+i\infty}\G
 \end_inset 
 
  The exchange of the order of summation and integration is justified precisely
- because one has 
+ when one has 
 \begin_inset Formula $c>1$
 \end_inset 
 
@@ -280,9 +286,10 @@ If the integral can somehow be converted into a closed contour on the left,
  residue theorem.
  Performing this closure is in fact harder than one might hope, as there
  are non-zero contributions to the contour from its closure.
- The next section assumes that the contour can be closed, and evaluates
- the Cauchy integral.
- The section after that computes the contributions to the countour integral.
+ The next section evaluates the Cauchy integral, assuming that the contour
+ can be closed.
+ The section after that computes the contributions from closing the countour
+ integral.
 \layout Section
 
 The Contour Integral
@@ -360,7 +367,7 @@ I_{s}(x)={\rm Res}(z=1-s)+\frac{\zeta(s+1)}{x}+\sum_{n=0}^{\infty}\frac{(-x)^{n}
 
 \end_inset 
 
- However, the ineteresting case is for 
+ However, the interesting case is for 
 \begin_inset Formula $s=k$
 \end_inset 
 
@@ -1115,6 +1122,42 @@ S_{4m+1}(2\pi) & = & I_{4m+1}(2\pi(1+i))\\
 \layout Proof
 
 Let xxx
+\layout Standard
+
+FYI, the above formula is correct, I beleive.
+ The above is easier to work with than what's in the intro anyway.
+ Or rather, more clear.
+\layout Section
+
+Modular Relations
+\layout Standard
+
+Write blah blah 
+\begin_inset Formula $x=2\pi i\tau$
+\end_inset 
+
+.
+ Then define 
+\begin_inset Formula $K_{k}(\tau)=I_{k}(2\pi i\tau)$
+\end_inset 
+
+.
+ May be written as 
+\begin_inset Formula \[
+K_{k}(\tau)=\frac{\tau^{k-1}-1}{2}\zeta(k)-\frac{(2\pi i)^{k}}{2\tau}\;\sum_{j=0}^{(k+1)/2}\tau^{2j}\frac{B_{2j}}{(2j)!}\frac{B_{k+1-2j}}{(k+1-2j)!}\]
+
+\end_inset 
+
+ is a so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+Fourier series
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ 
 \layout Standard
 
 (---------------------------------
