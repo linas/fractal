@@ -35,7 +35,7 @@ Linas Vepstas
 <linas@linas.org>
 \layout Date
 
-10 May 2006
+11 May 2006
 \layout Abstract
 
 Recently, Simon Plouffe has discovered a number of identites for the Riemann
@@ -61,14 +61,28 @@ Inspired by an identity for
 \begin_inset Formula $\zeta(3)$
 \end_inset 
 
- given in Ramanujan's notebooks [need ref],
+ given in Ramanujan's notebooks 
+\begin_inset LatexCommand \cite{Ber}
+
+\end_inset 
+
+,
 \begin_inset Formula \[
 \zeta(3)=\frac{7\pi^{3}}{180}-2\sum_{n=1}^{\infty}\frac{1}{n^{3}\left(e^{2\pi n}-1\right)}\]
 
 \end_inset 
 
- Plouffe describes a set of similar identities [need ref, 1998] that were
- discovered numerically using arbitrary-precision software.
+ Plouffe describes a set of similar identities
+\begin_inset LatexCommand \cite{Plo98}
+
+\end_inset 
+
+,
+\begin_inset LatexCommand \cite{Plo06}
+
+\end_inset 
+
+ that were discovered numerically using arbitrary-precision software.
  For example, Plouffe gives an identity for 
 \begin_inset Formula $\zeta(7)$
 \end_inset 
@@ -694,7 +708,19 @@ S_{k}(x)=I_{k}(x)+(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\fra
 
 \end_inset 
 
+ For the remainder of this text, this will be refered to as the 
+\begin_inset Quotes eld
+\end_inset 
 
+functional equation for 
+\begin_inset Formula $S_{k}$
+\end_inset 
+
+
+\begin_inset Quotes erd
+\end_inset 
+
+.
 \layout Proof
 
 To prove this result, consider evaluating the conour integral 
@@ -981,7 +1007,7 @@ Substitute
 \begin_inset Formula $x=2\pi$
 \end_inset 
 
-.
+ in the functional equation.
 \layout Standard
 
 This corollary provides the first concrete result of this exposition, namely
@@ -993,8 +1019,54 @@ This corollary provides the first concrete result of this exposition, namely
 
 \end_inset 
 
- which completely resolves one set of relationships.
- The next corollary shows that something more is needed for 
+ which completely resolves one set of relationships given by Plouffe.
+ The functional equation opens additional possibilities.
+ By substituing 
+\begin_inset Formula $x=2\pi p/q$
+\end_inset 
+
+, one obtains, for 
+\begin_inset Formula $k=4m-1$
+\end_inset 
+
+, that 
+\begin_inset Formula \[
+q^{k-1}\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi pn/q}-1\right)}+p^{k-1}\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi qn/p}-1\right)}=q^{k-1}I_{k}\left(\frac{2\pi p}{q}\right)\]
+
+\end_inset 
+
+ Thus, for example, by choosing 
+\begin_inset Formula $p=2$
+\end_inset 
+
+, 
+\begin_inset Formula $q=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $k=3$
+\end_inset 
+
+, on obtains 
+\begin_inset Formula \[
+\zeta(3)=\frac{29\pi^{3}}{900}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{3}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]\]
+
+\end_inset 
+
+ and similarly, for 
+\begin_inset Formula $k=7$
+\end_inset 
+
+,
+\begin_inset Formula \[
+\zeta(7)=\frac{409\pi^{7}}{94500}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{7}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]\]
+
+\end_inset 
+
+ and one may proceed in a similar manner.
+\layout Standard
+
+The next corollary shows that something more is needed for 
 \begin_inset Formula $\zeta(5)$
 \end_inset 
 
@@ -1002,7 +1074,7 @@ This corollary provides the first concrete result of this exposition, namely
 \begin_inset Formula $\zeta(9)$
 \end_inset 
 
-, and so on, since the most direct approch does not give any information
+, and so on, since the most direct approach does not give any information
  for such sums.
 \layout Corollary
 
@@ -1019,7 +1091,13 @@ I_{k}(x)=(-1)^{(k+1)/2}I_{k}\left(\frac{4\pi^{2}}{x}\right)\]
 
 \layout Proof
 
-xxx
+This may be proved by applying the functional equation twice in a row.
+ That is, it may be proved by substituting 
+\begin_inset Formula $x\to4\pi^{2}/x$
+\end_inset 
+
+ in the functional equation and then employing the result.
+ 
 \layout Corollary
 
 For 
@@ -1039,7 +1117,7 @@ Substitute
 \begin_inset Formula $x=2\pi$
 \end_inset 
 
-.
+ in the preceeding corollary.
 \layout Standard
 
 Following directly from the above is another corollary:
@@ -1065,11 +1143,24 @@ Write out the value of
  in detail.
 \layout Standard
 
-To obtain results of the 
-\begin_inset Formula $4m+1$
+From the above, it should be clear that the functional equation for 
+\begin_inset Formula $S_{k}$
 \end_inset 
 
- form, one must introduce
+ does not provide any statements about 
+\begin_inset Formula $S_{k}$
+\end_inset 
+
+ when 
+\begin_inset Formula $k=4m+1$
+\end_inset 
+
+.
+ To obtain results on sums involving 
+\begin_inset Formula $k=4m+1$
+\end_inset 
+
+, one must introduce
 \begin_inset Formula \[
 T_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}+1\right)}\]
 
@@ -1087,8 +1178,24 @@ T_{s}(x)=S_{s}(x)-2S_{s}(2x)\]
 
 \layout Proof
 
-Simple enough, follow your nose.
- xxx to do
+This may be proved by re-writing in terms of the polylogarithm, along the
+ lines of the earlier development: 
+\begin_inset Formula \[
+T_{s}(x)=-\sum_{m=1}^{\infty}(-1)^{m}{\rm Li}_{s}\left(e^{-xm}\right)\]
+
+\end_inset 
+
+ The even and odd terms are regrouped, as 
+\begin_inset Formula \[
+T_{s}(x)=\sum_{m=1}^{\infty}{\rm Li}_{s}\left(e^{-xm}\right)-2{\rm Li}_{s}\left(e^{-2xm}\right)\]
+
+\end_inset 
+
+ which is seen to be a sum of 
+\begin_inset Formula $S_{s}$
+\end_inset 
+
+'s.
 \layout Standard
 
 The results for 
@@ -1096,14 +1203,14 @@ The results for
 \end_inset 
 
 , etc.
- depend on a critical observation: that 
+ follow from a critical observation: that 
 \begin_inset Formula \[
 S_{s}(x+2\pi i)=S_{s}(x)\]
 
 \end_inset 
 
  is a periodic function.
- 
+ This periodicity is employed directly in the next theorem.
 \layout Theorem
 
 For positive integer 
@@ -1113,42 +1220,137 @@ For positive integer
 , one has 
 \begin_inset Formula \begin{eqnarray*}
 S_{4m+1}(2\pi) & = & I_{4m+1}(2\pi(1+i))\\
- &  & +(-1)^{m}\left[\frac{T_{4m+1}(2\pi)}{4^{m}}+2\cdot4^{m}S_{4m+1}(2\pi)-4^{m}I_{4m+1}(\pi)\right]\\
-\end{eqnarray*}
+ &  & +(-1)^{m}\left[\frac{T_{4m+1}(2\pi)}{4^{m}}+2\cdot4^{m}S_{4m+1}(2\pi)-4^{m}I_{4m+1}(\pi)\right]\end{eqnarray*}
 
 \end_inset 
 
 
 \layout Proof
 
-Let xxx
+Using periodicity, one writes, for 
+\begin_inset Formula $k=4m+1$
+\end_inset 
+
+, 
+\begin_inset Formula \[
+S_{k}(2\pi+2\pi i)=S_{k}(2\pi)=I_{k}(2\pi(1+i))+2^{(k-1)/2}e^{3i\pi(k-1)/4}S_{k}(\pi(1-i))\]
+
+\end_inset 
+
+ The series 
+\begin_inset Formula $S_{k}(\pi(1-i))$
+\end_inset 
+
+ doesn't have an imaginary part; rather, it is an alternating series, which
+ may be expanded and written as 
+\begin_inset Formula \[
+S_{k}(\pi(1-i))=-T_{k}(\pi)+\frac{T_{k}(2\pi)+S_{k}(2\pi)}{2^{k}}\]
+
+\end_inset 
+
+ The 
+\begin_inset Formula $T_{k}(\pi)$
+\end_inset 
+
+ term may be eliminated by writing 
+\begin_inset Formula \[
+T_{k}(\pi)=S_{k}(\pi)-2S_{k}(2\pi)\]
+
+\end_inset 
+
+ and the 
+\begin_inset Formula $S_{k}(\pi)$
+\end_inset 
+
+ term may be eliminated by 
+\begin_inset Formula \begin{eqnarray*}
+S_{k}(\pi) & = & I_{k}(\pi)+2^{1-k}S_{k}(4\pi)\\
+ & = & I_{k}(\pi)+2^{-k}\left[S_{k}(2\pi)-T_{k}(2\pi)\right]\end{eqnarray*}
+
+\end_inset 
+
+ Performing the various substitutions suggested above proves the theorem.
+ 
 \layout Standard
 
-FYI, the above formula is correct, I beleive.
- The above is easier to work with than what's in the intro anyway.
- Or rather, more clear.
+As an example of the application of the above theorem, take 
+\begin_inset Formula $m=1$
+\end_inset 
+
+, that is, 
+\begin_inset Formula $k=5$
+\end_inset 
+
+.
+ One easily finds that 
+\begin_inset Formula \[
+I_{5}(\pi)=-\frac{15}{32}\zeta(5)+\frac{\pi^{5}}{9\cdot64}\]
+
+\end_inset 
+
+ and that 
+\begin_inset Formula \[
+I_{5}(2\pi(1+i))=-\frac{5}{2}\zeta(5)+\frac{\pi^{5}}{9\cdot15}\]
+
+\end_inset 
+
+ Combining these, one gets
+\begin_inset Formula \[
+\zeta(5)=\frac{\pi^{5}}{294}-\frac{2}{35}\left[T_{5}(2\pi)+36S_{5}(2\pi)\right]\]
+
+\end_inset 
+
+ which is given by Plouffe.
+ The theorem may be used to generate similar expressions for all 
+\begin_inset Formula $\zeta(4m+1)$
+\end_inset 
+
+.
+\layout Standard
+
+XXX to do the square root and rational variants.
 \layout Section
 
 Modular Relations
 \layout Standard
 
-Write blah blah 
+The various sums and quantities above can be seen to be quasi-modular by
+ making a simple change of variable, namely by making the substitution 
 \begin_inset Formula $x=2\pi i\tau$
 \end_inset 
 
 .
- Then define 
-\begin_inset Formula $K_{k}(\tau)=I_{k}(2\pi i\tau)$
+ By 
+\begin_inset Quotes eld
+\end_inset 
+
+quasi-modular
+\begin_inset Quotes erd
+\end_inset 
+
+, it is meant that the various terms almost have simple behaviours under
+ the Mobius transformation 
+\begin_inset Formula $\tau\to(a\tau+b)/(c\tau+d)$
+\end_inset 
+
+ for integer 
+\begin_inset Formula $a,b,c$
+\end_inset 
+
+ and 
+\begin_inset Formula $d$
 \end_inset 
 
 .
- May be written as 
-\begin_inset Formula \[
-K_{k}(\tau)=\frac{\tau^{k-1}-1}{2}\zeta(k)-\frac{(2\pi i)^{k}}{2\tau}\;\sum_{j=0}^{(k+1)/2}\tau^{2j}\frac{B_{2j}}{(2j)!}\frac{B_{k+1-2j}}{(k+1-2j)!}\]
+ These relationships are brought to focus here.
+ 
+\layout Standard
 
+First, define 
+\begin_inset Formula $K_{k}(\tau)=I_{k}(2\pi i\tau)$
 \end_inset 
 
- is a so-called 
+, which may be written as a so-called 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -1156,33 +1358,154 @@ Fourier series
 \begin_inset Quotes erd
 \end_inset 
 
+: 
+\begin_inset Formula \[
+K_{k}(\tau)=\frac{\tau^{k-1}-1}{2}\zeta(k)-\frac{(2\pi i)^{k}}{2\tau}\;\sum_{j=0}^{(k+1)/2}\tau^{2j}\frac{B_{2j}}{(2j)!}\frac{B_{k+1-2j}}{(k+1-2j)!}\]
+
+\end_inset 
+
+This quantity is almost a modular form of weight
+\begin_inset Formula $k-1$
+\end_inset 
+
+, in that 
+\begin_inset Formula \[
+K_{k}\left(\frac{-1}{\tau}\right)=-\tau^{1-k}K_{k}(\tau)\]
+
+\end_inset 
+
+ Its only 
+\begin_inset Quotes eld
+\end_inset 
+
+almost
+\begin_inset Quotes erd
+\end_inset 
+
+ a modular form, because it is not periodic in 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, that is 
+\begin_inset Formula \[
+K_{k}(\tau+1)\ne K_{k}(\tau)\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+By contrast, 
+\begin_inset Formula $P_{k}(\tau)=S_{k}(2\pi i\tau)$
+\end_inset 
+
+ is periodic: 
+\begin_inset Formula \[
+P_{k}(\tau+1)=P_{k}(\tau)\]
+
+\end_inset 
+
+ but is not quite modular under inversion: 
+\begin_inset Formula \[
+P_{k}\left(\frac{-1}{\tau}\right)=\tau^{1-k}P_{k}(\tau)+K_{k}\left(\frac{-1}{\tau}\right)\]
+
+\end_inset 
+
+ One may define a simple variant of the sums that does have a simple transformat
+ion under inversion, namely 
+\begin_inset Formula \[
+M_{k}(\tau)=P_{k}(\tau)-\frac{1}{2}K_{k}(\tau)\]
+
+\end_inset 
+
+ which transforms as 
+\begin_inset Formula \[
+M_{k}\left(\frac{-1}{\tau}\right)=-\tau^{1-k}M_{k}(\tau)\]
+
+\end_inset 
+
+ However, 
+\begin_inset Formula $M_{k}$
+\end_inset 
+
+ is then not periodic.
+ 
+\layout Standard
+
+The analytic structure of 
+\begin_inset Formula $P_{k}$
+\end_inset 
+
+ is curious: it has a pole at 
+\begin_inset Formula $\tau=i\infty$
+\end_inset 
+
+ and.
+ by the inversion formula and periodicity, at every rational value of 
+\begin_inset Formula $\tau$
+\end_inset 
+
 .
+ This is clearly visible in the graphic below, which shows 
+\begin_inset Formula $P_{3}$
+\end_inset 
+
+on the 
+\begin_inset Formula $q$
+\end_inset 
+
+-series or 
+\begin_inset Quotes eld
+\end_inset 
+
+punctured disk
+\begin_inset Quotes erd
+\end_inset 
+
+ coordinates 
+\begin_inset Formula $q=e^{2\pi i\tau}$
+\end_inset 
+
+:
+\begin_inset Formula \[
+P_{s}(q)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(q^{n}-1\right)}\]
+
+\end_inset 
+
+ Also, of minor curiosity is the form of the Lambert series for this, namely:
  
+\begin_inset Formula \[
+\sum_{n=1}^{\infty}\frac{1}{n^{s}}\frac{q^{n}}{1-q^{n}}=-\zeta(s)-P_{s}(q)=\sum_{m=1}^{\infty}b_{m}q^{m}\]
+
+\end_inset 
+
+ where one has 
+\begin_inset Formula \[
+b_{m}=\sum_{n|m}\;\frac{1}{n^{s}}\]
+
+\end_inset 
+
+ with the noation 
+\begin_inset Formula $n|m$
+\end_inset 
+
+ denoting that the sum extends over all divisors 
+\begin_inset Formula $n$
+\end_inset 
+
+ of 
+\begin_inset Formula $m$
+\end_inset 
+
+.
+\layout Section
+
+Conclusions
 \layout Standard
 
-(---------------------------------
-\layout Standard
-
----------------------------
-\layout Standard
-
------------------------------
-\layout Standard
-
-Simon, Its very late at night here, and typing in all these formulas is
- quite time consuming.
- However, as you are excited by this topic, I thought that rather than making
- you wait, I thought it would be polite to show the half-finished work.
+Please pardon the unfinished state of this text.
+ Thanks to Simon Plouffe for generating interest in such sums.
  
-\layout Standard
-
-A remark, and a request.
- First, I beleive that all of the results should be correct, except where
- noted.
- Let me know if there are errors.
-\layout Standard
-
------------------------------------------------------------------
 \layout Section
 
 Appendix: Polylog Integral
@@ -1202,4 +1525,12 @@ The polylogarithm may be written as the integral
 
 For now, see Wikipedia article on polylogarithms; I'll reproduce it here
  later.
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[plain]{/home/linas/src/fractal/paper/fractal,}
+
+\end_inset 
+
+
 \the_end
