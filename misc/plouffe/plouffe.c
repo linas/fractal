@@ -8,6 +8,8 @@
  */
 
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static double 
 ess_tee_k (int k, double x, int cyn)
@@ -40,7 +42,17 @@ double tee_k (int k, double x)
 	return ess_tee_k (k,x,1);
 }
  
-
-main (nt arc, char * argv[])
+main (int argc, char * argv[])
 {
+	if (argc < 3)
+	{
+		fprintf (stderr, "Usage: %s <k> <x>\n", argv[0]);
+		exit (1);
+	}
+	int k = atoi(argv[1]);
+	double x = atof(argv[2]);
+
+	double sum = ess_k (k,x);
+	
+	printf ("its %g\n", sum);
 }
