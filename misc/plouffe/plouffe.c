@@ -94,6 +94,34 @@ double eye_k (int k, double x)
 	return sum;
 }
 
+double beem (int m)
+{
+	int j;
+
+	double sum = 0.0;
+	double xn = 1.0;
+	for (j=0; j<=m; j++)
+	{
+		double term = bernoulli (4*j) * bernoulli (4*m-4*j);
+		term /= factorial (4*j) * factorial (4*m-4*j);
+
+		double berm = 0.0;
+		if (j<m) 
+		{
+			berm = bernoulli (4*j+2) * bernoulli (4*m-4*j-2);
+			berm /= factorial (4*j+2) * factorial (4*m-4*j-2);
+		}
+		term += 2.0*berm;
+
+		term *= xn;
+		sum += term;
+
+		xn *= -4.0;
+	}
+
+	return sum;
+}
+
 /* ==================================================== */
 
 int test_loop (char * testname, double (*func)(int, double), 
@@ -174,6 +202,8 @@ double eye_zero (int k, double x)
 	double alt = eye_k (k, 4.0*M_PI*M_PI/x);
 	if ((k-1)%4) alt = -alt;
 
+	//xxx mult by ...
+
 	return fabs(sum+alt);
 }
 
@@ -191,8 +221,21 @@ main (int argc, char * argv[])
 	test_loop ("tee ident", tee_zero, 7.0e-14, 50, 20);
 	test_eye ();
 	test_loop ("ess ident", ess_zero, 1.0e-10, 13, 25);
-	test_loop ("eye too ident", eye_zero, 1.0e-15, 23, 25);
+	// test_loop ("eye too ident", eye_zero, 1.0e-15, 23, 25);
 
-	double y = eye_k (k,x);
+	// double y = ess_k (1,2.0*M_PI)+ tee_k (1,2.0*M_PI);
+	// y -= M_PI/6.0 - 0.75*log(2.0);
+
+	// double y = ess_k(3,2.0*M_PI) + tee_k(3, 2.0*M_PI)/9.0;
+	// y = 7*M_PI*M_PI*M_PI/180.0 - y;
+	// y -= zetam1 (3)+1.0;
+
+	double y = ess_k(3,2.0*M_PI) + tee_k(3, 2.0*M_PI)/9.0;
+	y *= 18.0;
+	y -= 16.0*eye_k(3,M_PI);
+	y += 8.0*(zetam1(3)+1.0);
+
+	y += 16.0*M_PI*M_PI*M_PI*beem(1);
+
 	printf ("its %g\n", y);
 }
