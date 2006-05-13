@@ -81,14 +81,12 @@ double eye_k (int k, double x)
 	int j;
 
 	double cyn = 1.0;
-	if ((k+1)%2) cyn = -1.0;
+	if ((k+1)%4) cyn = -1.0;
 
 	double zt = 1.0 + cyn * pow (0.5*x/M_PI, k-1);
 	zt *= zetam1 (k) + 1.0;
 
-	double sum = bee_k (k, x);
-
-	sum *= cyn * pow (2.0*M_PI, k);
+	double sum = cyn * pow (2.0*M_PI, k) * bee_k (k,x);
 
 	sum += zt;
 	sum *= -0.5;
@@ -96,7 +94,7 @@ double eye_k (int k, double x)
 	return sum;
 }
 
-int test_tee_ident (void)
+int test_loop (char * testname, double (*func)(int, double), double bound)
 {
 	int errcnt = 0;
 	int k;
@@ -105,12 +103,10 @@ int test_tee_ident (void)
 		double x;
 		for (x=0.05; x<20; x+=0.12345)
 		{
-			double tee = tee_k (k,x);
-			double sum = tee - ess_k(k,x) + 2.0*ess_k(k, 2.0*x);
-			sum = fabs (sum/tee);
-			if (sum > 7.0e-14) 
+			double val = func (k,x);
+			if (val> bound) 
 			{
-				printf ("Error: tee ident failed, k=%d x=%g sum=%g\n", k, x, sum);
+				printf ("Error: %s failed, k=%d x=%g val=%g\n", testname, k, x, val);
 				errcnt ++;
 			}
 		}
@@ -118,40 +114,50 @@ int test_tee_ident (void)
 
 	if (0 == errcnt)
 	{
-		printf ("Tee ident test passed\n");
+		printf ("%s test passed\n", testname);
 	}
 	return errcnt;
 }
  
-int test_ess_ident (void)
+int test_eye (void)
 {
 	int errcnt = 0;
-	int k;
-	for (k=3; k<50; k+=2)
+	int m;
+	for (m=1; m<18; m++)
 	{
-		double x;
-		for (x=0.05; x<20; x+=0.12345)
+		int k = 4*m+1;
+		double val = eye_k (k, 2.0*M_PI);
+		if (val> 2.0e-16) 
 		{
-			double ess = ess_k (k,x);
-			double inv = ess_k (k, 4.0*M_PI*M_PI/x);
-			inv *= pow (0.5*x/M_PI, k-1);
-			if ((k+1)%2) inv = -inv;
-			
-			double sum = ess + inv - eye_k(k,x);
-			sum = fabs (sum/ess);
-			if (sum > 7.0e-14) 
-			{
-				printf ("Error: ess ident failed, k=%d x=%g sum=%g\n", k, x, sum);
-				errcnt ++;
-			}
+			printf ("Error: eye test failed, k=%d val=%g\n", k, val);
+			errcnt ++;
 		}
 	}
 
 	if (0 == errcnt)
 	{
-		printf ("Tee ident test passed\n");
+		printf ("eye test passed\n");
 	}
 	return errcnt;
+}
+ 
+double tee_zero (int k, double x)
+{
+	double tee = tee_k (k,x);
+	double sum = tee - ess_k(k,x) + 2.0*ess_k(k, 2.0*x);
+	sum = fabs (sum/tee);
+	return sum;
+}
+
+int ess_zero (int k, double x)
+{
+	double ess = ess_k (k,x);
+	double inv = ess_k (k, 4.0*M_PI*M_PI/x);
+	inv *= pow (0.5*x/M_PI, k-1);
+	if ((k+1)%2) inv = -inv;
+			
+	double sum = ess + inv - eye_k(k,x);
+	sum = fabs (sum/ess);
 }
  
 main (int argc, char * argv[])
@@ -164,9 +170,10 @@ main (int argc, char * argv[])
 	int k = atoi(argv[1]);
 	double x = atof(argv[2]);
 
-	test_tee_ident ();
+	test_loop ("tee ident", tee_zero, 7.0e-14);
+	test_eye ();
 
-	double y = bee_k (k,x);
+	double y = eye_k (k,x);
 	printf ("its %g\n", y);
 	// test_ess_ident ();
 }
