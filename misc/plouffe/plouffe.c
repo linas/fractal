@@ -94,14 +94,17 @@ double eye_k (int k, double x)
 	return sum;
 }
 
-int test_loop (char * testname, double (*func)(int, double), double bound)
+/* ==================================================== */
+
+int test_loop (char * testname, double (*func)(int, double), 
+              double bound, int kmax, double xmax)
 {
 	int errcnt = 0;
 	int k;
-	for (k=3; k<50; k+=2)
+	for (k=3; k<kmax; k+=2)
 	{
 		double x;
-		for (x=0.05; x<20; x+=0.12345)
+		for (x=0.05; x<xmax; x+=0.12345)
 		{
 			double val = func (k,x);
 			if (val> bound) 
@@ -149,17 +152,32 @@ double tee_zero (int k, double x)
 	return sum;
 }
 
-int ess_zero (int k, double x)
+double ess_zero (int k, double x)
 {
+	int m = (k-1)/2;
+	k = 4*m-1;
+
 	double ess = ess_k (k,x);
 	double inv = ess_k (k, 4.0*M_PI*M_PI/x);
 	inv *= pow (0.5*x/M_PI, k-1);
 	if ((k+1)%2) inv = -inv;
 			
-	double sum = ess + inv - eye_k(k,x);
-	sum = fabs (sum/ess);
+	double eye = eye_k(k,x);
+	double sum = ess + inv - eye;
+	sum = fabs (sum/eye);
+	return sum;
 }
  
+double eye_zero (int k, double x)
+{
+	double sum = eye_k (k,x);
+	double alt = eye_k (k, 4.0*M_PI*M_PI/x);
+	if ((k-1)%4) alt = -alt;
+
+	return fabs(sum+alt);
+}
+
+/* ==================================================== */
 main (int argc, char * argv[])
 {
 	if (argc < 3)
@@ -170,10 +188,11 @@ main (int argc, char * argv[])
 	int k = atoi(argv[1]);
 	double x = atof(argv[2]);
 
-	test_loop ("tee ident", tee_zero, 7.0e-14);
+	test_loop ("tee ident", tee_zero, 7.0e-14, 50, 20);
 	test_eye ();
+	test_loop ("ess ident", ess_zero, 1.0e-10, 13, 25);
+	test_loop ("eye too ident", eye_zero, 1.0e-15, 23, 25);
 
 	double y = eye_k (k,x);
 	printf ("its %g\n", y);
-	// test_ess_ident ();
 }
