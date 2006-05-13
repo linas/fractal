@@ -23,13 +23,13 @@ ess_tee_k (int k, double x, int cyn)
 	double sum = 0.0;
 	double ex = exp (x);
 	double exn = ex;
-	for (n=1; n<300; n++)
+	for (n=1; n<1300; n++)
 	{
 		double term = pow (n, -k);
 		term /= (exn + cyn);
 		sum += term;
 
-		if (term < 1.0e-16*sum) break;
+		if (term < 1.0e-18*sum) break;
 		exn *= ex;
 	}
 
@@ -46,17 +46,11 @@ double tee_k (int k, double x)
 	return ess_tee_k (k,x,1);
 }
 
-double eye_k (int k, double x)
+double bee_k (int k, double x)
 {
 	int j;
 
 	x /= 2.0*M_PI;
-
-	double cyn = 1.0;
-	if ((k+1)%2) cyn = -1.0;
-
-	double zt = 1.0 + cyn * pow (x, k-1);
-	zt *= zetam1 (k) + 1.0;
 
 	double sum = 0.0;
 	double xn = 1.0;
@@ -77,6 +71,22 @@ double eye_k (int k, double x)
 
 		xn *= x*x;
 	}
+	sum /= x;
+
+	return sum;
+}
+
+double eye_k (int k, double x)
+{
+	int j;
+
+	double cyn = 1.0;
+	if ((k+1)%2) cyn = -1.0;
+
+	double zt = 1.0 + cyn * pow (0.5*x/M_PI, k-1);
+	zt *= zetam1 (k) + 1.0;
+
+	double sum = bee_k (k, x);
 
 	sum *= cyn * pow (2.0*M_PI, k);
 
@@ -98,7 +108,7 @@ int test_tee_ident (void)
 			double tee = tee_k (k,x);
 			double sum = tee - ess_k(k,x) + 2.0*ess_k(k, 2.0*x);
 			sum = fabs (sum/tee);
-			if (sum > 2.0e-14) 
+			if (sum > 7.0e-14) 
 			{
 				printf ("Error: tee ident failed, k=%d x=%g sum=%g\n", k, x, sum);
 				errcnt ++;
@@ -106,6 +116,41 @@ int test_tee_ident (void)
 		}
 	}
 
+	if (0 == errcnt)
+	{
+		printf ("Tee ident test passed\n");
+	}
+	return errcnt;
+}
+ 
+int test_ess_ident (void)
+{
+	int errcnt = 0;
+	int k;
+	for (k=3; k<50; k+=2)
+	{
+		double x;
+		for (x=0.05; x<20; x+=0.12345)
+		{
+			double ess = ess_k (k,x);
+			double inv = ess_k (k, 4.0*M_PI*M_PI/x);
+			inv *= pow (0.5*x/M_PI, k-1);
+			if ((k+1)%2) inv = -inv;
+			
+			double sum = ess + inv - eye_k(k,x);
+			sum = fabs (sum/ess);
+			if (sum > 7.0e-14) 
+			{
+				printf ("Error: ess ident failed, k=%d x=%g sum=%g\n", k, x, sum);
+				errcnt ++;
+			}
+		}
+	}
+
+	if (0 == errcnt)
+	{
+		printf ("Tee ident test passed\n");
+	}
 	return errcnt;
 }
  
@@ -120,4 +165,8 @@ main (int argc, char * argv[])
 	double x = atof(argv[2]);
 
 	test_tee_ident ();
+
+	double y = bee_k (k,x);
+	printf ("its %g\n", y);
+	// test_ess_ident ();
 }
