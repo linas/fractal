@@ -14,6 +14,7 @@ clean:
 	cd ising; make clean
 	cd modular; make clean
 	cd num-theory; make clean
+	cd plouffe; make clean
 	cd schroedinger; make clean
 	cd wavelet; make clean
 	cd weyl; make clean
@@ -31,6 +32,7 @@ realclean: clean
 	cd ising; make realclean
 	cd modular; make realclean
 	cd num-theory; make realclean
+	cd plouffe; make realclean
 	cd schroedinger; make realclean
 	cd wavelet; make realclean
 	cd weyl; make realclean
