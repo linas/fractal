@@ -11,6 +11,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "bernoulli.h"
+#include "binomial.h"
+#include "harmonic.h"
+
 static double 
 ess_tee_k (int k, double x, int cyn)
 {
@@ -58,7 +62,7 @@ double eye_k (int k, double x)
 	double xn = 1.0;
 	for (j=0; j<=(k+1)/2; j++)
 	{
-		double term = bernoulli (2*j) * bernoulli (k+1`-2*j);
+		double term = bernoulli (2*j) * bernoulli (k+1-2*j);
 		term /= factorial (2*j) * factorial (k+1-2*j);
 		term *= xn;
 
@@ -81,6 +85,29 @@ double eye_k (int k, double x)
 
 	return sum;
 }
+
+int test_tee_ident (void)
+{
+	int errcnt = 0;
+	int k;
+	for (k=3; k<50; k+=2)
+	{
+		double x;
+		for (x=0.05; x<20; x+=0.12345)
+		{
+			double tee = tee_k (k,x);
+			double sum = tee - ess_k(k,x) + 2.0*ess_k(k, 2.0*x);
+			sum = fabs (sum/tee);
+			if (sum > 2.0e-14) 
+			{
+				printf ("Error: tee ident failed, k=%d x=%g sum=%g\n", k, x, sum);
+				errcnt ++;
+			}
+		}
+	}
+
+	return errcnt;
+}
  
 main (int argc, char * argv[])
 {
@@ -92,10 +119,5 @@ main (int argc, char * argv[])
 	int k = atoi(argv[1]);
 	double x = atof(argv[2]);
 
-	double sum;
-	for (x=0.1; x<20; x+=0.1)
-	{
-		sum = tee_k (k,x) - ess_k(k,x) + 2.0*ess_k(k, 2.0*x);
-		printf ("its %g %g\n", x, sum);
-	}
+	test_tee_ident ();
 }

@@ -9,7 +9,7 @@ EXES = plouffe
 
 all: $(EXES)
 
-plouffe:	plouffe.o $(LIB)/bernoulli.o $(LIB)/binomial.o
+plouffe:	plouffe.o $(LIB)/bernoulli.o $(LIB)/binomial.o $(LIB)/harmonic.o
 
 plouffe.o:	plouffe.c
 
