@@ -18,6 +18,7 @@
 #include "brat.h"
 
 static double ess;
+static int max_terms;
 
 static void plouffe_series_c (double re_q, double im_q, double *prep, double *pimp)
 {
@@ -38,7 +39,7 @@ static void plouffe_series_c (double re_q, double im_q, double *prep, double *pi
 	for (n=1; n<max_terms; n++)
 	{
 		/* compute n^(-s) */
-		double term = pow (n, -s);
+		double term = pow (n, -ess);
 
 		/* compute 1/(q^n-1) */
 		double qmr = qpr-1.0;
@@ -59,7 +60,7 @@ static void plouffe_series_c (double re_q, double im_q, double *prep, double *pi
 		qpmod = qpr*qpr + qpi*qpi;
 		if (qpmod < 1.0e-30) break;
 	}
-	if (max_terms-1 < i)
+	if (max_terms-1 < n)
 	{
 		// printf ("not converged re=%g im=%g modulus=%g\n", re_q, im_q, qpmod);
 	}
@@ -70,6 +71,7 @@ static void plouffe_series_c (double re_q, double im_q, double *prep, double *pi
 
 static double plouffe_series (double re_q, double im_q, int itermax, double param)
 {
+	max_terms = itermax;
 	ess = param;
 	ess = 3.0;
 	double rep, imp;
