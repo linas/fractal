@@ -35,7 +35,7 @@ Linas Vepstas
 <linas@linas.org>
 \layout Date
 
-13 May 2006
+14 May 2006
 \layout Abstract
 
 Recently, Simon Plouffe has discovered a number of identities for the Riemann
@@ -118,6 +118,27 @@ Inspired by an identity for
  
 \layout Standard
 
+Similar sums have been explored before; for example, Apostol gives 
+\begin_inset LatexCommand \cite[see exercise 15 at end of chapter 1.]{Apo90}
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\sum_{n=1;n\mbox{ odd}}^{\infty}\frac{n^{4k+1}}{1+e^{n\pi}}=\frac{2^{4k+1}-1}{8k+4}B_{4k+2}\]
+
+\end_inset 
+
+ Similar sums involving double Bernoulli numbers also appear in the analysis
+ of the Dedekind eta function; see for example, Sho Iseki's transformation
+ formula, as described by Apostol
+\begin_inset LatexCommand \cite[see theorem 3.5]{Apo90}
+
+\end_inset 
+
+.
+\layout Standard
+
 Plouffe also notes similar relations for the other odd integers; for example,
  
 \begin_inset Formula \[
@@ -186,6 +207,9 @@ The rest of this paper is roughly laid out as follows: The second section
 \end_inset 
 
 , followed by a conclusion.
+ An appendix gives a derivation of an integral representation of the polylogarit
+hm, that is central to the analysis.
+ 
 \layout Section
 
 The Polylogarithm
@@ -1610,6 +1634,191 @@ M_{k}\left(\frac{-1}{\tau}\right)=-\tau^{1-k}M_{k}(\tau)\]
  
 \layout Standard
 
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Phase of 
+\begin_inset Formula $P_{-1}(q)$
+\end_inset 
+
+ on the unit disk
+\layout Standard
+
+
+\begin_inset Graphics
+	filename plouffe-1.jpeg
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This graphic shows the phase
+\begin_inset Formula \[
+\arg P_{-1}(q)=\arg\sum_{n=1}^{\infty}\frac{n}{q^{n}-1}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\arg f(z)=\Im\log f(z)$
+\end_inset 
+
+ is the usual arg of a function.
+ The color scheme is such that black represents areas where 
+\begin_inset Formula $\arg>0$
+\end_inset 
+
+ and red represents areas where 
+\begin_inset Formula $\arg<$
+\end_inset 
+
+0.
+ The absence of other colors indicates that the phase is rather closely
+ confined to the vicinity of 
+\begin_inset Formula $0$
+\end_inset 
+
+ for most all of the disk.
+ Numerically, the absolute value of the phase is smaller than 
+\begin_inset Formula $10^{-3}$
+\end_inset 
+
+ for much of the disk.
+ In particular, this indicates that there are no zeros at all in the interior
+ of the disk, as a zero would be surounded by a region where the phase wraps
+ around by 
+\begin_inset Formula $2\pi$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The function 
+\begin_inset Formula $P_{s}(q)$
+\end_inset 
+
+ does have poles at 
+\begin_inset Formula $q=e^{2\pi im/n}$
+\end_inset 
+
+ for all rationals 
+\begin_inset Formula $m/n$
+\end_inset 
+
+; these are visible at the edges of the disk.
+ The fractal nature of this image is the characteristic signature of a modular
+ form of weight 2; the self-similar regions are just copies of the fundamental
+ region of the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Phase of 
+\begin_inset Formula $P_{-5}(q)$
+\end_inset 
+
+ on the unit disk
+\layout Standard
+
+
+\begin_inset Graphics
+	filename plouffe-5.jpeg
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This graphic shows the phase
+\begin_inset Formula \[
+\arg P_{-5}(q)=\arg\sum_{n=1}^{\infty}\frac{n^{5}}{q^{n}-1}\]
+
+\end_inset 
+
+The color scheme is as in the previous image, and similar conclusions apply:
+ there are no zeros at all in the interior of the disk.
+ The absolute value of the phase is tiny: numerically, it is within 
+\begin_inset Formula $10^{-9}$
+\end_inset 
+
+ of zero for much of the disk.
+\layout Standard
+
+The fractal nature of this image is the characteristic signature of a modular
+ form of weight 6; it should be compared to the image of the modular invariant
+ 
+\begin_inset Formula $g_{3}$
+\end_inset 
+
+ shown in the next image.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Graph of the modular invariant 
+\begin_inset Formula $g_{3}$
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Graphics
+	filename gee_three_imaginary.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the imaginary part of the modular invariant 
+\begin_inset Formula $g_{3}$
+\end_inset 
+
+, one of the invariants of an elliptic curve.
+ Specifically, it shows the imaginary part of 
+\begin_inset Formula \[
+g_{3}(q)=\frac{8\pi^{6}}{27}\left[1-504\sum_{n=1}^{\infty}\frac{n^{5}q^{n}}{1-q^{n}}\right]\]
+
+\end_inset 
+
+ which is a modular form of weight 6.
+ The colors are choosen such that black represents areas that are negative,
+ blue and green represent areas with smaller values, and red those areas
+ with the largest values.
+\end_inset 
+
+
+\layout Standard
+
 The analytic structure of 
 \begin_inset Formula $P_{k}$
 \end_inset 
@@ -1650,16 +1859,23 @@ P_{s}(q)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(q^{n}-1\right)}\]
 
 \end_inset 
 
- Also, of minor curiosity is the form of the Lambert series for this, namely:
  
+\layout Standard
+
+In this form, the relation to modular forms becomes the most immediate.
+ Consider the Lambert series:
 \begin_inset Formula \[
-\sum_{n=1}^{\infty}\frac{1}{n^{s}}\frac{q^{n}}{1-q^{n}}=-\zeta(s)-P_{s}(q)=\sum_{m=1}^{\infty}b_{m}q^{m}\]
+\sum_{n=1}^{\infty}\frac{1}{n^{s}}\frac{q^{n}}{1-q^{n}}=-\zeta(s)-P_{s}(q)=\sum_{m=1}^{\infty}\sigma_{-s}(m)q^{m}\]
 
 \end_inset 
 
- where one has 
+ Here, 
+\begin_inset Formula $\sigma_{s}(m)$
+\end_inset 
+
+ is the divisor function: 
 \begin_inset Formula \[
-b_{m}=\sum_{n|m}\;\frac{1}{n^{s}}\]
+\sigma_{s}(m)=\sum_{n|m}\; n^{s}\]
 
 \end_inset 
 
@@ -1676,6 +1892,22 @@ b_{m}=\sum_{n|m}\;\frac{1}{n^{s}}\]
 \end_inset 
 
 .
+ This should be compared to the Eisenstien series 
+\begin_inset LatexCommand \cite[see section 3.10]{Apo90}
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+G_{2k}(q)=2\zeta(2k)+\frac{2(2\pi i)^{2k}}{(2k-1)!}\sum_{m=1}^{\infty}\sigma_{2k-1}(m)q^{m}\]
+
+\end_inset 
+
+ etc.
+ In essence, we are dealing with an extension of the Eisenstein series to
+ general complex argument.
+ XXX unfinished; this should be elaborated on a bit more.
+ XXXX
 \layout Section
 
 Conclusions
@@ -1730,15 +1962,71 @@ This appendix proves the following theorem:
 
 The polylogarithm may be written as the integral 
 \begin_inset Formula \[
-{\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)u^{-z}dz\]
+{\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(r)\zeta(r+s)u^{-r}dr\]
 
 \end_inset 
 
 
 \layout Proof
 
-For now, see Wikipedia article on polylogarithms; I'll reproduce it here
- later.
+The proof below is cribbed from the Wikipedia article on polylogarithms
+\begin_inset LatexCommand \cite{WP-PL}
+
+\end_inset 
+
+.
+ One begins by writing the the Mellin transform of the polylog, as 
+\begin_inset Formula \[
+M_{s}(r)=\int_{0}^{\infty}{\rm Li}_{s}\left(ye^{-u}\right)u^{r}\frac{du}{u}\]
+
+\end_inset 
+
+ Using an integral representation of the polylogarithm, 
+\begin_inset Formula \[
+{\rm Li}_{s}\left(w\right)=\frac{1}{\Gamma(s)}\int_{0}^{\infty}\frac{t^{s-1}}{w^{-1}e^{t}-1}dt\]
+
+\end_inset 
+
+ and substituting, one obtains 
+\begin_inset Formula \[
+M_{s}(r)=\frac{1}{\Gamma(s)}\int_{0}^{\infty}\int_{0}^{\infty}\frac{u^{r-1}t^{s-1}}{y^{-1}e^{t+u}-1}dt\, du\]
+
+\end_inset 
+
+ A change of variable 
+\begin_inset Formula $t=ab$
+\end_inset 
+
+ and 
+\begin_inset Formula $u=a(1-b)$
+\end_inset 
+
+ with 
+\begin_inset Formula $dt\, du=a\, da\, db$
+\end_inset 
+
+ gives 
+\begin_inset Formula \begin{eqnarray*}
+M_{s}(r) & = & \frac{1}{\Gamma(s)}\int_{0}^{1}b^{s-1}(1-b)^{r-1}db\int_{0}^{\infty}\frac{a^{r+s-1}}{y^{-1}e^{a}-1}\, da\\
+ & = & \Gamma(r)\,{\rm Li}_{r+s}(y)\end{eqnarray*}
+
+\end_inset 
+
+ The inverse Mellin transform may now be employed to write 
+\begin_inset Formula \[
+{\rm Li}_{s}\left(ye^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}u^{-r}\Gamma(r)\,{\rm Li}_{r+s}(y)\, dr\]
+
+\end_inset 
+
+ By setting 
+\begin_inset Formula $y=1$
+\end_inset 
+
+, one then uses 
+\begin_inset Formula ${\rm Li}_{s+r}(1)=\zeta(s+r)$
+\end_inset 
+
+ to obtain the desired result.
 \layout Standard
 
 
@@ -1747,4 +2035,10 @@ For now, see Wikipedia article on polylogarithms; I'll reproduce it here
 \end_inset 
 
 
+\layout Standard
+
+--
+\layout Standard
+
+--
 \the_end
