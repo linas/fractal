@@ -230,12 +230,12 @@ main (int argc, char * argv[])
 	// y = 7*M_PI*M_PI*M_PI/180.0 - y;
 	// y -= zetam1 (3)+1.0;
 
-	double y = ess_k(3,2.0*M_PI) + tee_k(3, 2.0*M_PI)/9.0;
-	y *= 18.0;
-	y -= 16.0*eye_k(3,M_PI);
-	y += 8.0*(zetam1(3)+1.0);
+	// double y = ess_k(k,M_PI) + 4*ess_k(k, 4.0*M_PI)/pow(16,(k+1)/4);
+	// y -= eye_k (k, M_PI);
 
-	y += 16.0*M_PI*M_PI*M_PI*beem(1);
+	double y = -1.6 * ess_k(3,M_PI)-0.4*ess_k(3,4*M_PI);
+	y += 37*M_PI*M_PI*M_PI/900;
+	y -= zetam1(3)+1;
 
 	printf ("its %g\n", y);
 }
