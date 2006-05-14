@@ -35,7 +35,7 @@ Linas Vepstas
 <linas@linas.org>
 \layout Date
 
-11 May 2006
+13 May 2006
 \layout Abstract
 
 Recently, Simon Plouffe has discovered a number of identites for the Riemann
@@ -50,8 +50,8 @@ Recently, Simon Plouffe has discovered a number of identites for the Riemann
  This note provides an analytic derivation of these types of identities,
  providing insight into thier structure, and giving a general layout in
  which to discuss them.
- This is a report of a work in progress; it is neither complete, nor has
- it been proofed for errors.
+ The resemblance of these relations to the general structure of modular
+ forms is breifly sketched.
 \layout Section
 
 Introduction
@@ -165,9 +165,9 @@ P_{k}(\tau)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi in\tau}-1\right)}\]
 , the field of Gaussian rationals, as well as Diophantine roots of quadratics.
 \layout Standard
 
-The rest of this paper is roughly layed out as follows (under construction):
- The second section gives a relationship between the sums and the polylogarithm,
- and thence to an integral on the complex plane.
+The rest of this paper is roughly layed out as follows: The second section
+ gives a relationship between the sums and the polylogarithm, and thence
+ to an integral on the complex plane.
  The third section examines the related contour integral, which is easily
  integrated via Cauchy's residue theorem to give a finite sum involving
  the Bernoulli numbers.
@@ -179,12 +179,13 @@ The rest of this paper is roughly layed out as follows (under construction):
 .
  The fifth section applies the functional equation, providing a variety
  of lemmas, many of which explain Plouffe's discoveries.
- The sixth section explores the modular nature of the relations on 
+ The sixth section give a pair of relationships on the Bernoulli numbers
+ that arise naturally in this context.
+ The seventh section explores the modular nature of the relations on 
 \begin_inset Formula $P_{k}(\tau)$
 \end_inset 
 
-.
- I suppose a conclusion may be written eventually.
+, followed by a conclusion.
 \layout Section
 
 The Polylogarithm
@@ -1084,7 +1085,7 @@ For
 
  an odd integer, one has 
 \begin_inset Formula \[
-I_{k}(x)=(-1)^{(k+1)/2}I_{k}\left(\frac{4\pi^{2}}{x}\right)\]
+I_{k}(x)=(-1)^{(k+1)/2}\left(\frac{4\pi^{2}}{x}\right)^{k-1}I_{k}\left(\frac{4\pi^{2}}{x}\right)\]
 
 \end_inset 
 
@@ -1308,7 +1309,173 @@ I_{5}(2\pi(1+i))=-\frac{5}{2}\zeta(5)+\frac{\pi^{5}}{9\cdot15}\]
 .
 \layout Standard
 
-XXX to do the square root and rational variants.
+Curiously, the theorem yeilds results for 
+\begin_inset Formula $m=0$
+\end_inset 
+
+ as well.
+ In this case, one finds 
+\begin_inset Formula \[
+S_{1}(2\pi)+T_{1}(2\pi)=\frac{\pi}{6}-\frac{3}{4}\log2\]
+
+\end_inset 
+
+
+\layout Standard
+
+Many identities for 
+\begin_inset Formula $\pi$
+\end_inset 
+
+ are possible by taking two different expressions for a given zeta, and
+ subtracting them, leaving behind a rational combination of the sums and
+ 
+\begin_inset Formula $\pi$
+\end_inset 
+
+.
+ Thus, for example, the following theorem for Apery's constant:
+\layout Theorem
+
+A series expression for 
+\begin_inset Formula $\pi^{3}$
+\end_inset 
+
+is given by 
+\begin_inset Formula \[
+\pi^{3}=720\cdot S_{3}(\pi)-900\cdot S_{3}(2\pi)+180\cdot S_{3}(4\pi)\]
+
+\end_inset 
+
+ 
+\layout Proof
+
+This follows by taking the general expression for 
+\begin_inset Formula $k=4m-1$
+\end_inset 
+
+:
+\begin_inset Formula \begin{eqnarray*}
+16^{m}S_{4m-1}(\pi)+4S_{4m-1}(4\pi) & = & 16^{m}I_{4m-1}(\pi)\\
+ & = & -\frac{1}{2}\zeta(4m-1)\left[16^{m}+4\right]\\
+ &  & -(2\pi)^{4m-1}\sum_{j=0}^{2m}(-4)^{j}\frac{B_{4m-2j}}{(4m-2j)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
+
+\end_inset 
+
+ solving for 
+\begin_inset Formula $\zeta(4m-1)$
+\end_inset 
+
+ and then using 
+\begin_inset Formula \[
+2S_{4m-1}(2\pi)=I_{4m-1}(2\pi)=-\zeta(4m-1)+(2\pi)^{4m-1}\;\sum_{j=0}^{2m}\left(-1\right)^{j}\frac{B_{4m-2j}}{(4m-2j)!}\frac{B_{2j}}{(2j)!}\]
+
+\end_inset 
+
+ to eliminate the appearance of the zeta.
+ The resulting expression may then be solved for 
+\begin_inset Formula $\pi^{4m-1}$
+\end_inset 
+
+.
+\layout Standard
+
+Relationships involving square roots also arise naturally.
+ 
+\layout Theorem
+
+One has 
+\begin_inset Formula \[
+\zeta(3)=\frac{5\pi^{3}}{72}-\frac{1}{2}\, S_{3}\left(2\pi\sqrt{3}\right)-\frac{3}{2}\, S_{3}\left(\frac{2\pi\sqrt{3}}{3}\right)\]
+
+\end_inset 
+
+
+\layout Proof
+
+This follows from the general expression given earlier, that 
+\begin_inset Formula \[
+S_{k}\left(\frac{2\pi p}{q}\right)+\left(\frac{p}{q}\right)^{k-1}S_{k}\left(\frac{2\pi q}{p}\right)=I_{k}\left(\frac{2\pi p}{q}\right)\]
+
+\end_inset 
+
+ Here, making the substitution 
+\begin_inset Formula $q=\sqrt{p}$
+\end_inset 
+
+ one obtains 
+\begin_inset Formula \begin{eqnarray*}
+S_{k}\left(2\pi\sqrt{p}\right)+p^{(k-1)/2}S_{k}\left(\frac{2\pi\sqrt{p}}{p}\right) & = & -\frac{1}{2}\zeta(k)\left[1-(-p)^{(k-1)/2}\right]\\
+ &  & +\frac{(-1)^{(k-1)/2}}{2\sqrt{p}}(2\pi)^{k}\;\sum_{j=0}^{(k+1)/2}\left(-p\right)^{j}\frac{B_{k+1-2j}}{(k+1-2j)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
+
+\end_inset 
+
+The specific result follows after choosing 
+\begin_inset Formula $k=3$
+\end_inset 
+
+ and 
+\begin_inset Formula $p=3$
+\end_inset 
+
+.
+\layout Section
+
+Some Bernoulli number identities
+\layout Standard
+
+In addition to the previously noted identity 
+\begin_inset Formula \[
+0=\sum_{j=0}^{2m+1}(-1)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\]
+
+\end_inset 
+
+there are several other identities on sums of Bernoulli numbers that result
+ from the previous developments.
+ These are breifly stated here.
+ 
+\layout Theorem
+
+For integer 
+\begin_inset Formula $m$
+\end_inset 
+
+, one has
+\begin_inset Formula \[
+0=\sum_{j=0}^{m}(-4)^{j}\left[\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}+2\frac{B_{4m-4j}}{(4m-4j)!}\frac{B_{4j+2}}{(4j+2)!}\right]\]
+
+\end_inset 
+
+
+\layout Proof
+
+Consider the sums resulting from 
+\begin_inset Formula $0=I_{4m+1}(2\pi(1+i))-I_{4m+1}(2\pi(1-i))$
+\end_inset 
+
+.
+\layout Theorem
+
+For integer 
+\begin_inset Formula $m$
+\end_inset 
+
+, one has 
+\begin_inset Formula \[
+\sum_{k=0}^{2m}(-1)^{k}\frac{B_{4m-2k}}{(4m-2k)!}\frac{B_{2k}}{(2k)!}=\sum_{j=0}^{m}(-4)^{j}\frac{B_{4m-4j}}{(4m-4j)!}\frac{B_{4j}}{(4j)!}-2\sum_{j=0}^{m-1}(-4)^{j}\frac{B_{4m-4j-2}}{(4m-4j-2)!}\frac{B_{4j+2}}{(4j+2)!}\]
+
+\end_inset 
+
+ 
+\layout Proof
+
+Consider the sums resulting from the identity 
+\begin_inset Formula \[
+I_{4m-1}(2\pi)=I_{4m-1}(2\pi(1+i))+I_{4m-1}(2\pi(1-i))\]
+
+\end_inset 
+
+
 \layout Section
 
 Modular Relations
@@ -1350,7 +1517,18 @@ First, define
 \begin_inset Formula $K_{k}(\tau)=I_{k}(2\pi i\tau)$
 \end_inset 
 
-, which may be written as a so-called 
+.
+ This change of variable results in a definition which seems simpler than
+ that for 
+\begin_inset Formula $I_{k}$
+\end_inset 
+
+.
+ An expansion in 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ is often refered to as a 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -1358,7 +1536,7 @@ Fourier series
 \begin_inset Quotes erd
 \end_inset 
 
-: 
+ in the context of hyperbolic geometry: 
 \begin_inset Formula \[
 K_{k}(\tau)=\frac{\tau^{k-1}-1}{2}\zeta(k)-\frac{(2\pi i)^{k}}{2\tau}\;\sum_{j=0}^{(k+1)/2}\tau^{2j}\frac{B_{2j}}{(2j)!}\frac{B_{k+1-2j}}{(k+1-2j)!}\]
 
@@ -1503,8 +1681,44 @@ b_{m}=\sum_{n|m}\;\frac{1}{n^{s}}\]
 Conclusions
 \layout Standard
 
-Please pardon the unfinished state of this text.
- Thanks to Simon Plouffe for generating interest in such sums.
+Given any particular rational and set of sums, there is a rich variety of
+ possible relationships that can be formed.
+ It would be interesting to characterize the number of these relationships
+ as a function of the number of sums involved.
+ Thus, for example, given only 
+\begin_inset Formula $S_{3}(2\pi)$
+\end_inset 
+
+, there seems to be only one relationship that can be formed to give 
+\begin_inset Formula $\zeta(3)$
+\end_inset 
+
+.
+ However, given 
+\begin_inset Formula $S_{3}(\pi)$
+\end_inset 
+
+, 
+\begin_inset Formula $S_{3}(2\pi)$
+\end_inset 
+
+ and 
+\begin_inset Formula $S_{3}(4\pi)$
+\end_inset 
+
+, there seem to be two distinct relationsips, of which a linear combination
+ can be taken: thus there is a one-dimensional linear space of solutions.
+ It would be interesting to know what the higher order combinatorial possibiliti
+es may be, the dimensionality of the spaces they form, and how these depend
+ on the selected series.
+\layout Standard
+
+Another interesting avenue of research would be to strengthen the connections
+ to modular forms, to see if additional insights can be gained by following
+ that route.
+\layout Standard
+
+Thanks to Simon Plouffe for generating interest in such sums.
  
 \layout Section
 
