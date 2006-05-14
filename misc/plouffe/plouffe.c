@@ -233,8 +233,13 @@ main (int argc, char * argv[])
 	// double y = ess_k(k,M_PI) + 4*ess_k(k, 4.0*M_PI)/pow(16,(k+1)/4);
 	// y -= eye_k (k, M_PI);
 
-	double y = -1.6 * ess_k(3,M_PI)-0.4*ess_k(3,4*M_PI);
-	y += 37*M_PI*M_PI*M_PI/900;
+	// double y = -1.6 * ess_k(3,M_PI)-0.4*ess_k(3,4*M_PI);
+	// y += 37*M_PI*M_PI*M_PI/900;
+	// y -= zetam1(3)+1;
+
+	double y = -0.5 * ess_k(3,2*M_PI*sqrt(3));
+	y += -1.5*ess_k(3,2*M_PI*sqrt(3)/3.0);
+	y += 5*M_PI*M_PI*M_PI/(72*sqrt(3));
 	y -= zetam1(3)+1;
 
 	printf ("its %g\n", y);
