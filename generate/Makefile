@@ -86,6 +86,7 @@ hermite: brat.o hermite.o util.o
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
 mp_zeta: brat.o mp_zeta.o util.o $(GMP)
+plouffe: brat.o plouffe.o util.o
 q-exp: brat.o q-exp.o util.o
 swap: brat.o swap.o util.o
 takagi: brat.o takagi.o util.o

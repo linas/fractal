@@ -73,11 +73,12 @@ static double plouffe_series (double re_q, double im_q, int itermax, double para
 {
 	max_terms = itermax;
 	ess = param;
-	ess = 3.0;
 	double rep, imp;
 	plouffe_series_c (re_q, im_q, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
-	return rep;
+	return (atan2 (imp, rep)+M_PI) / (2.0*M_PI);
+
+	return -rep;
 }
 
 DECL_MAKE_HISTO(plouffe_series);
