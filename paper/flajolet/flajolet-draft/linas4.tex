@@ -30,7 +30,7 @@
 \author{Philippe Flajolet and Linas Vepstas}
 
 \begin{abstract}
-The finite differences of quantities involving values of zeta functions at the integers
+Finite differences of the Riemann zeta function at the integers
 are explored. Such quantities, which occur as coefficients in Newton series representations, 
 have surfaced in works of Ma{\'s}lanka, Coffey, B{\'a}ez-Duarte, Voros and others.
 We apply the theory of N\"orlund-Rice integrals in conjunction with
@@ -138,8 +138,8 @@ Given a function $\phi(s)$, one may attempt to represent it
 in some region of the complex plane by means of 
 such a series. Since $\Phi(s)$ terminates at $s=0,1,2,\ldots$,
 the conditions $\phi(m)=\Phi(m)$ at the nonnegative integers
-imply that the candidate sequence $(c_n)$ is linearly related to the
-sequence of values $(\phi(m))$ by
+imply that the candidate sequence $c_n$ is linearly related to the
+sequence of values $\phi(m)$ by
 \[
 \phi(m)=\sum_{n=0}^m (-1)^n c_n \binom{m}{n}.
 \]
@@ -153,10 +153,12 @@ determines the Newton series \emph{associated} to $\phi$.
 The coincidence of 
 the function $\phi$ and its associated series
 $\Phi$ is, by construction, granted at least
-at all the nonnegative integers. The validity
-of $\Phi(s)=\phi(s)$  is often found to extend to larger
-parts of the complex plane, but this fact requires specific
-properties much beyond the mere convergence of the series in~\eqref{gennew}.
+at all the nonnegative integers. The equivalence
+of $\Phi(m)=\phi(m)$ can be extended to a region
+of the complex plane containing the integers, provided that the
+growth of the difference $\Phi(s)-\phi(s)$ is bounded in the imaginary
+direction. This result is known as \emph{Carlson's theorem}, and is
+presented in a more precise form later in this paper."
 
 In the case of the Newton series for $\zeta(s)$, the general
 relation~\eqref{gencoeff} provides the coefficients in the form
@@ -186,8 +188,8 @@ simple facts regarding their elementary properties. Set
 \begin{equation}\label{deldef}
 \delta_n:=\sum_{k=2}^n \binom{n}{k} (-1)^k \zeta(k),
 \end{equation}
-which are, up to minor adjustments, differences of zeta values at the integer.
-Indeed, defining as usual $\Delta f(x):=f(x+1)-f(x)$,
+which are, up to minor adjustments, differences of zeta values at the
+integers.  Defining the forward difference $\Delta f(x):=f(x+1)-f(x)$,
 one has
 \[
 \delta_n= (-1)^n \Delta^n Z(x) \bigg|_{x=0},\]
@@ -200,7 +202,7 @@ exchanging the order of summations in the resulting double sum shows that
 It is surprising that such a simple sum should exhibit the complicated
 asymptotic behaviour described by Theorem~\ref{zetacoeff-thm} below.
 
-The ordinary generating function of $(\delta_n)$ 
+The ordinary generating function of $\delta_n$ 
 is also of interest.
 Given the classical expansion~\cite{WhWa27} 
 of the logarithmic derivative $\psi(z)$ of the Gamma function,
@@ -212,7 +214,7 @@ one finds
 \sum_{n\ge2}\delta_n z^n =\frac{z}{(1-z)^2}\left(\psi\left(\frac{1}{1-z}\right)
 +\gamma\right).
 \end{equation}
-The exponential generating function of $(\delta_n)$ reflects~\eqref{simpdel} and is even simpler:
+The exponential generating function of $\delta_n$ reflects~\eqref{simpdel} and is even simpler:
 % can be directly obtained from~\eqref{simpdel}: 
 % multiply by~$z^n/n!$ and sum, to get
 \begin{equation}\label{delegf}
@@ -236,7 +238,8 @@ precision using several efficient algorithms, which are available in several
 symbolic computation packages and numerical libraries.)
 
 A quick inspection of numerical data immediately reveals two features
-of the constants~$b_n$: they are oscillatory and their
+of the constants~$b_n$: they are oscillatory with slowly increasing
+period and their
 absolute values are very rapidly decreasing. For instance\footnote{%
 	The notation $x\doteq y$ designates a numerical approximation of
 	$x$ by $y$ to the last decimal digit stated. 
@@ -252,7 +255,7 @@ b_{50}&\doteq&-	1.08802\cdot 10^{-11}.
 \end{array}\]
 
 A numeric fit of the oscillatory behaviour of the function may be made.
-There are sign changes of $(b_n)$ at
+There are sign changes of $b_n$ at
 \[
 n=3,7,13,21,29,40,52,65,80,97,115,135,157,180,\ldots\,,
 \]
@@ -279,7 +282,7 @@ Right: a plot of $b_n/\beta(n)$.}
 \end{figure}
 Once the oscillatory behaviour has been disposed of, the task of quantifying
 the general trend in the decrease becomes easier. A plot of the values 
-of $\log|b_n/s_n|$ displayed in Figure~\ref{exper-fig} (left)
+of $\log|b_n/s(n)|$ displayed in Figure~\ref{exper-fig} (left)
 has a parabolic aspect, which suggests that
 \[
 b_n \approx s(n) e^{-K\sqrt{n}} \qquad \hbox{with}\quad K\approx 3.6,\]
@@ -346,7 +349,8 @@ As a consequence, the integral of~\eqref{norbn} remains
 convergent, when taken along any vertical line left of~0,
 as soon as~$n$ is large enough. Under these conditions, it is possible
 to replace the line of integration $\Re(s)=\frac32$ by the line~$\Re(s)=-\frac12$, upon
-taking into account the residues at the poles $s=1$ and $s=0$.
+taking into account the residues of a double pole at $s=1$ and a simple
+pole at $s=0$.
 We find in this way
 \[
 \delta_n=(-1)^{n-1} (R_1+R_0)+\frac{(-1)^{n-1}}{2\pi i}\int_{-1/2-i\infty}^{-1/2+i\infty} 
@@ -560,7 +564,7 @@ where
 
 The  choice of the abscissae, $c_1$  and $c_2$, is
 not critical (it is even possible to adapt the analysis to $c_1=c_2=\sqrt{\pi}$).
-One verifies  easily, from crude majorizations, that
+One verifies  easily, from crude approximations, that
 the contributions arising from the vertical parts of the contour are
 $O(e^{-L_0\sqrt{n}})$,    for   some $L_0>2\sqrt{\pi}$,   i.e.,   they  are
 exponentially small in the  scale of the problem:
@@ -573,7 +577,7 @@ exponentially small in the  scale of the problem:
 
 The slanted part of
 the contour is such that all the estimates of~\eqref{om012} apply. 
-The scale of the problem there is dictated by the value of $\omega''(\sigma)$,
+The scale of the problem is dictated by the value of $\omega''(\sigma)$,
  which is of order $O(n^{-1/2})$. This indicates that the ``second order'' scaling 
 to be adopted is~$n^{1/4}$. Accordingly, we set
 \begin{equation}\label{cregion}
@@ -668,7 +672,8 @@ both multiplied by $e^{-2\sqrt{\pi n}}n^{-1/4}$, for $n=5\,.\,.\,500$.}
 The Newton coefficient $b_n$ of $\zeta(s)-1/(s-1)$ defined in~\eqref{eq2}
 satisfies:
 \begin{equation}\label{thmz}
-b_n =2^{3/4}\pi^{-1/4}e^{-2\sqrt{\pi n}}\cos\left(2\sqrt{\pi n}+\frac{3\pi}{8}\right)n^{1/4}
+b_n = \left( \frac{8n}{\pi}\right)^{1/4}
+e^{-2\sqrt{\pi n}}\cos\left(2\sqrt{\pi n}+\frac{3\pi}{8}\right)
 +O\left(e^{-2\sqrt{\pi n}}n^{-1/4}\right).
 % \qquad
 % K:=2^{3/4}\pi^{-1/4}.
@@ -702,7 +707,7 @@ up to smaller order corrections that can be treated as constants in the range of
 The fact that the coefficients $b_n$ decay to~$0$ faster than any polynomial in~$1/n$ 
 implies that the Newton series
 \begin{equation}\label{newtonz}
-\Phi(s)=\sum_{n=0}^\infty (-1)^n b_n \binom{n}{s},
+\Phi(s)=\sum_{n=0}^\infty (-1)^n b_n \binom{s}{n},
 \end{equation}
 with $b_n$ given by~\eqref{eq2},
 converges throughout the complex plane, and consequently defines an entire function.
