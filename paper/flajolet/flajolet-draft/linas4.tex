@@ -74,12 +74,20 @@ n(1-\gamma-H_{n-1})+\frac12+\sum_{k=2}^n \binom{n}{k}
 \end{equation}
 (Here,
 $H_n=1+\frac12+\cdots\frac1n$ are the harmonic numbers.)
-We shall prove (Theorem~\ref{zetacoeff-thm}) that, although the terms in the sum defining~$b_n$ become
+Although the terms in the sum defining~$b_n$ become
 exponentially large, the values of the $b_n$ are exponentially small,
 \[
-b_n=O\left(n^{1/4}e^{-2\sqrt{\pi n}}\right),
+b_n=\mathcal{O}\left(n^{1/4}e^{-2\sqrt{\pi n}}\right),
 \]
-while exhibiting a curious oscillatory behaviour.
+while exhibiting a curious oscillatory behaviour. 
+We shall prove (Theorem~\ref{zetacoeff-thm}) that, to the next leading
+order,
+
+\[
+b_n =2^{3/4}\pi^{-1/4}e^{-2\sqrt{\pi n}}\cos\left(2\sqrt{\pi n}+\frac{3\pi}{8}\right)n^{1/4}
++\mathcal{O}\left(n^{-1/4} e^{-2\sqrt{\pi n}}\right).
+\]
+
 
 A prime reason for  interest in the representation~\eqref{eq1} and the
 companion           coefficients~\eqref{eq2}         is     \emph{Li's
@@ -99,20 +107,23 @@ decrease to~0. As we shall see in a later section,
 the methods originally developed for estimating~$b_n$
 yield precise asymptotic information on~$\hat b_n$ as well.
 
-On another register, motivated by an analogy with certain physical theories,
+The zeta function has also received attention in physics,
+for its role in regularization and renormalization in 
+quantum field theory. 
+Motivated by such connctions, 
 Ma\'slanka introduced in~\cite{Maslanka01} 
-what amounts to a Newton series representation of $\zeta(2s)$.
+what amounts to a Newton series representation of $(1-s)\zeta(s)$.
 Further numerical observations relative to the corresponding coefficients
 are presented in~\cite{Maslanka04}, which
 have been subsequently vindicated by B\'aez-Duarte in~\cite{Baez03}.
 In particular, B\'aez-Duarte's estimates imply that the coefficients
-in the Newton series of a regularized version of~$\zeta(2s)$ decrease to~0
-faster than any power of $1/n$. 
+in the Newton series of a regularized version of~$(1-s)\zeta(s)$ decrease to~0
+faster than any power of $1/n$.
 
 A third independent reason was an attempt by one of us (Linas) around 2003 to obtain
 alternative tractable expressions for the Gauss-Kuzmin-Wirsing operator of 
 continued fraction theory [unpublished; see
-\verb|http://linas.org|]
+\verb|http://linas.org/math/poch-zeta.pdf|]
 
 In this essay,  we  approach the problem of  asymptotically estimating
 differences of  zeta  values by means of   a combination  of  two well
@@ -126,20 +137,36 @@ of Voros~\cite{Voros05} (motivated by Li's criterion),
 which our results supplement by providing a fairly 
 detailed asymptotic analysis of differences of zeta values.
 
+The next section will review the Newton series for the zeta function,
+and give some generating functions for its coefficients. This is followed
+by a breif review of some numerical results. The fourth section
+gives the N\"orlund integral representation for the series,
+while the fifth section provides a careful saddle-point analysis 
+of the resulting integrand.  Section seven repeats the analysis
+for the Dirichlet $L$-functions, giving the leading asymptotic
+term.  We end with a conclusion outlining possible directions
+for further research.\footnote{% 
+  LV: This paragraph to be modified to fit final form of paper.}
+
+
 
 \section{Newton series and zeta values}
 
 
-A Newton series is in this paper normalized under the form
+This section defines the Newton series for the Riemann zeta
+that is to be studied, demonstrates some of its simple properties,
+and gives some generating functions for its coefficients.
+In this paper, a Newton series will be taken to be defined as
+
 \begin{equation}\label{gennew}
 \Phi(s)=\sum_{n=0}^\infty (-1)^n c_n \binom{s}{n}.
 \end{equation}
 Given a function $\phi(s)$, one may attempt to represent it 
 in some region of the complex plane by means of 
-such a series. Since $\Phi(s)$ terminates at $s=0,1,2,\ldots$,
+such a series. Since the series $\Phi(s)$ terminates at $s=0,1,2,\ldots$,
 the conditions $\phi(m)=\Phi(m)$ at the nonnegative integers
-imply that the candidate sequence $c_n$ is linearly related to the
-sequence of values $\phi(m)$ by
+imply that the candidate sequence $\{c_n\}$ is linearly related to the
+sequence of values $\{\phi(m)\}$ by
 \[
 \phi(m)=\sum_{n=0}^m (-1)^n c_n \binom{m}{n}.
 \]
@@ -158,7 +185,7 @@ of $\Phi(m)=\phi(m)$ can be extended to a region
 of the complex plane containing the integers, provided that the
 growth of the difference $\Phi(s)-\phi(s)$ is bounded in the imaginary
 direction. This result is known as \emph{Carlson's theorem}, and is
-presented in a more precise form later in this paper."
+presented in a more precise form later in this paper.
 
 In the case of the Newton series for $\zeta(s)$, the general
 relation~\eqref{gencoeff} provides the coefficients in the form
@@ -183,7 +210,7 @@ associated to~$\zeta(s)-1/(s-1)$.
 
 \smallskip
 
-Before engaging into a detailed study of the~$b_n$, we note a few 
+Before engaging in a detailed study of the~$b_n$, we note a few 
 simple facts regarding their elementary properties. Set
 \begin{equation}\label{deldef}
 \delta_n:=\sum_{k=2}^n \binom{n}{k} (-1)^k \zeta(k),
@@ -997,7 +1024,7 @@ terms of that. (e.g. assume Selberg-class type functional equation).
 
 \smallskip
 The previous results\footnote{%
-	PF: We need a theorem statement gsummarizing both the principal and nonprincipal
+	PF: We need a theorem statement summarizing both the principal and nonprincipal
 	characters.}
 unify and make precise a number of estimates carried out in the literature by a diversity
 of methods. For instance, the study of quantities arising in connection with Li's criterion
