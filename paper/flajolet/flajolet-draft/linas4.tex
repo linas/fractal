@@ -83,10 +83,10 @@ while exhibiting a curious oscillatory behaviour.
 We shall prove (Theorem~\ref{zetacoeff-thm}) that, to the next leading
 order,
 
-\[
+\begin{equation}\label{asympform}
 b_n =2^{3/4}\pi^{-1/4}e^{-2\sqrt{\pi n}}\cos\left(2\sqrt{\pi n}+\frac{3\pi}{8}\right)n^{1/4}
 +\mathcal{O}\left(n^{-1/4} e^{-2\sqrt{\pi n}}\right).
-\]
+\end{equation}
 
 
 A prime reason for  interest in the representation~\eqref{eq1} and the
@@ -226,10 +226,11 @@ exchanging the order of summations in the resulting double sum shows that
 \begin{equation}\label{simpdel}
 \delta_n = \sum_{\ell\ge1} \left[\left(1-\frac{1}{\ell}\right)^n-1+\frac{n}{\ell}\right].
 \end{equation}
-It is surprising that such a simple sum should exhibit the complicated
-asymptotic behaviour described by Theorem~\ref{zetacoeff-thm} below.
+This rather simple sum shows a remarkably complex behaviour;
+elucidating this behaviour is one of the principle topics of this paper.
 
-The ordinary generating function of $\delta_n$ 
+
+The ordinary generating function for the sequence $\{\delta_n\}$ 
 is also of interest.
 Given the classical expansion~\cite{WhWa27} 
 of the logarithmic derivative $\psi(z)$ of the Gamma function,
@@ -238,10 +239,10 @@ of the logarithmic derivative $\psi(z)$ of the Gamma function,
 \]
 one finds
 \begin{equation}\label{delogf}
-\sum_{n\ge2}\delta_n z^n =\frac{z}{(1-z)^2}\left(\psi\left(\frac{1}{1-z}\right)
-+\gamma\right).
+\sum_{n\ge2}\delta_n z^n =\frac{z}{(1-z)^2}\left[\psi\left(\frac{1}{1-z}\right)
++\gamma\right].
 \end{equation}
-The exponential generating function of $\delta_n$ reflects~\eqref{simpdel} and is even simpler:
+The exponential generating function for the sequence  $\{\delta_n\}$ reflects~\eqref{simpdel} and is even simpler:
 % can be directly obtained from~\eqref{simpdel}: 
 % multiply by~$z^n/n!$ and sum, to get
 \begin{equation}\label{delegf}
@@ -282,7 +283,7 @@ b_{50}&\doteq&-	1.08802\cdot 10^{-11}.
 \end{array}\]
 
 A numeric fit of the oscillatory behaviour of the function may be made.
-There are sign changes of $b_n$ at
+There are sign changes in the sequence $\{b_n\}$ at
 \[
 n=3,7,13,21,29,40,52,65,80,97,115,135,157,180,\ldots\,,
 \]
@@ -372,6 +373,9 @@ the first step is to move the line of integration further to the left.
 It is well known that the Riemann zeta function is of finite order in any right half-plane,
 that is, $|\zeta(s)|=O(|s|^A)$ uniformly as $|s|\to\infty$, for some~$A$ depending on the
 half-plane under consideration~\cite{Titchmarsh86}.
+\footnote{
+LV: This begs the question "What is A?" We should give values for the left, right plane.
+}
 As a consequence, the integral of~\eqref{norbn} remains 
 convergent, when taken along any vertical line left of~0,
 as soon as~$n$ is large enough. Under these conditions, it is possible
@@ -387,17 +391,24 @@ where, as shown by a routine calculation:
 (-1)^n R_0=-\frac12,
 \qquad
 (-1)^nR_1=-n(1-\gamma-H_{n-1}).
-.
 \]
 The residues thus compensate exactly 
-for the difference betwen~$\delta_n$ and~$b_n$ (see~\eqref{eq2}):
+for the difference betwen~$\delta_n$ and~$b_n$ (see~\eqref{eq2}), so that:
 \begin{equation}\label{norbn2}
 b_n=
 \frac{(-1)^{n-1}}{2\pi i}\int_{-1/2-i\infty}^{-1/2+i\infty} 
 \zeta(s) \frac{n!}{s(s-1)\cdots(s-n)}\, ds.
 \end{equation}
 
-At this stage, the change of variables $s\mapsto -s$ is natural.
+\section{Saddle point analysis of zeta differences}\label{sadzeta-sec}
+
+The integrand in~\eqref{sadzeta-sec} will be seen to be free of 
+singularities on the left-hand side, and is thus amenable to evalutation
+by the saddle point (or steepest-descent) method.  This evaluation 
+is the main topic of this section, and culminates with the derivation of
+one of the principle results of this paper, equation~\eqref{asympform}.
+
+It is conventient to perform a change of variables $s\mapsto -s$.
 The new integrand involves $\zeta(-s)$, which transforms by virtue of the 
 functional equation 
 of the zeta function,
@@ -413,8 +424,6 @@ b_n = -\frac{1}{\pi i}
 \end{equation}
 which is the starting point of our asymptotic analysis.
 
-\section{Saddle point analysis of zeta differences}\label{sadzeta-sec}
-
 The integral representation~\eqref{mainint} has several noticeable features. 
 First, the integrand has no singularity at all in $\Re(s)\ge\frac12$
 and it decays fast enough towards $\pm i \infty$,
@@ -426,31 +435,33 @@ b_n = -\frac{1}{\pi i}
 (2\pi)^{-s-1} \sin\left(\frac{\pi s}{2}\right)\zeta(1+s)
 \frac{n!\, \Gamma(s+1)}{s(s+1)\cdots(s+n)}\, ds.
 \end{equation}
-The very absence of singularities calls for an application of the saddle  point
-method (equivalently, steepest descent).
+Is is the very absence of singularities calls for an application 
+of the saddle  point method.
 
 The factor $\zeta(1+s)$ remains bounded in modulus by a constant,
 and is in fact barely distinguishable from~1, as $\Re(s)$ increases,
 since
 \begin{equation}\label{zetapp}
-\zeta(s)=1+O\left(2^{-\Re(s)}\right), \qquad \Re(s)\ge\frac32.
+\zeta(s)=1+\mathcal{O}\left(2^{-\Re(s)}\right), \qquad \Re(s)\ge\frac32.
 \end{equation}
 Also, for large $|s|$, the complex version of Stirling's formula 
 applies:
 \begin{equation}\label{stirapp}
-\Gamma(1+s) = s^s e^{-s}\sqrt{2\pi s}\left(1+O(|s|^{-1})\right),\qquad \Re(s)\ge0.
+\Gamma(1+s) = s^s e^{-s}\sqrt{2\pi s}\left(1+\mathcal{O}(|s|^{-1})\right),\qquad \Re(s)\ge0.
 \end{equation}
 Finally, the sine factor increases exponentially along vertical lines:
 one has
 \begin{equation}\label{sinapp}
 2i\sin\frac{\pi s}{2} =-\exp\left(-i\frac{\pi s}{2}\right)
-+O\left(e^{-\pi \Im(s)/2}\right), \qquad \Im(s)\ge0,
++\mathcal{O}\left(e^{-\pi \Im(s)/2}\right), \qquad \Im(s)\ge0,
 \end{equation}
 with a conjugate approximation holding for $\Im(s)<0$.
 % (The fact decay at complex infinity of $\Gamma(s)$ then 
 % compensates for the growth of the sine factor, so that, ultimately, the integrand 
 % decreases polynomially fast, due to the rising factorial in the denominator, roughly
 % like $|s|^{-n}$.)
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 The approximations~\eqref{zetapp}, \eqref{stirapp}, and~\eqref{sinapp}
 then suggest the function $e^{\omega(s)}$
