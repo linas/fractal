@@ -332,12 +332,11 @@ small_b_sub_n (int n, int m, int k)
 		long double rt = sqrt(2.0L*ang*n*p);
 		long double term = expl (-rt);
 		term *= powl (M_PI*M_PI*ang*n*p, 0.25L);
-		term *= sinl (ang*p*m - rt + 0.125*M_PI);
+		term *= cosl (ang*p*m - rt + 0.625*M_PI);
 		acc += term;
 	}
 	acc /= M_PI;
 	acc /= (long double) k;
-	acc = -acc;
 	return acc;
 }
 

@@ -103,10 +103,37 @@ x=z;
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 #endif
 
-#define HURL_B_SUB_N
-#ifdef HURL_B_SUB_N
+#define RIEMANN_B_SUB_N
+#ifdef RIEMANN_B_SUB_N
+		double y = b_sub_n (i);
+		y *= exp (sqrt(4*M_PI*i));
+		double z = -cos (sqrt(4*M_PI*i)+0.375*M_PI);
+		z *= sqrt(sqrt(2*i/M_PI));
+		printf ("%d	%8.6g   %8.6g\n", i, y,z);
+#endif
+
+// #define HURWITZ_B_SUB_N
+#ifdef HURWITZ_B_SUB_N
 		double y = hurwitz_b_sub_n (i, m, k);
-		double z = small_b_sub_n (i,m,k);
+		double z = k*small_b_sub_n (i,m,k);
+		printf ("%d	%8.6g   %8.6g\n", i, y,z);
+#endif
+
+// #define HURL_B_SUB_N
+#ifdef HURL_B_SUB_N
+		double y = hurwitz_b_sub_n (k, m, i);
+		double z = i*small_b_sub_n (k,m, i);
+		printf ("%d	%8.6g   %8.6g\n", i, y,z);
+#endif
+
+// #define WITZ_B_SUB_N
+#ifdef WITZ_B_SUB_N
+		double y = hurwitz_b_sub_n (i, 1, 1);
+		y -= hurwitz_b_sub_n (i, 1, 2);
+		y -= hurwitz_b_sub_n (i, 2, 2);
+		double z = small_b_sub_n (i,1,1);
+		z -= small_b_sub_n (i,1,2);
+		z -= small_b_sub_n (i,2,2);
 		printf ("%d	%8.6g   %8.6g\n", i, y,z);
 #endif
 	}
