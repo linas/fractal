@@ -1585,14 +1585,12 @@ Such sums commonly occur in the theory of finite differences.
 
  by 
 \begin_inset Formula \begin{equation}
-\Delta^{n}\left[f\right](a)=\sum_{p=0}^{n}(-1)^{n-p}\left(\begin{array}{c}
-n\\
-p\end{array}\right)\, f(p+a)\label{eq:}\end{equation}
+\Delta^{n}\left[f\right](a)=\sum_{p=0}^{n}(-1)^{n-p}\binom{n}{p}\, f(p+a)\label{eq:}\end{equation}
 
 \end_inset 
 
  where 
-\begin_inset Formula ${n \choose p}$
+\begin_inset Formula $\binom{n}{p}$
 \end_inset 
 
  is the binomial coefficient.
@@ -2145,12 +2143,12 @@ f(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equatio
 
  and 
 \begin_inset Formula \begin{equation}
-\phi(s)\approx-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\label{eq:}\end{equation}
+\phi(s)=-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}+\mathcal{O}\left(\left(\frac{p}{k+p}\right)^{s}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  where the approximation that 
-\begin_inset Formula $\zeta\left(s,p/k\right)\approx(k/p)^{s}$
+\begin_inset Formula $\zeta\left(s,p/k\right)=(k/p)^{s}+\mathcal{O}\left((p/(k+p))^{s}\right)$
 \end_inset 
 
  for large 
@@ -2187,7 +2185,7 @@ and
 
  and collecting terms, one obtains 
 \begin_inset Formula \begin{eqnarray}
-f(z) & \approx & \frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
+f(z) & = & \frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
  &  & +\log2\pi-2\log z-\frac{z^{2}}{2}\label{eq:}\\
  &  & +\frac{1}{6z\sqrt{n}}\left[10+z^{2}\right]+\frac{1}{2n}\left[1-\frac{z^{2}}{2}-\frac{z^{4}}{6}+\frac{73}{72z^{2}}\right]+\mathcal{O}\left(n^{-3/2}\right)\end{eqnarray}
 
@@ -2204,13 +2202,14 @@ f(z) & \approx & \frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\p
 
 .
  To use the saddle-point formula, one needs 
-\begin_inset Formula $f^{\,\prime\prime}(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$
+\begin_inset Formula $f^{\,\prime\prime}(z)=2\sqrt{n}/z+\mathcal{O}(1)$
 \end_inset 
 
 .
  Substituting, one directly obtains 
-\begin_inset Formula \begin{equation}
-\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\approx\left(\frac{2\pi^{3}pn}{k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)+\mathcal{O}\left(??\right)\label{eq:}\end{equation}
+\begin_inset Formula \begin{eqnarray}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz & = & \left(\frac{2\pi^{3}pn}{k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:}\\
+ &  & \quad\quad\qquad+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}}\right)\end{eqnarray}
 
 \end_inset 
 
@@ -2226,8 +2225,9 @@ f(z) & \approx & \frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\p
 \end_inset 
 
  gives 
-\begin_inset Formula \begin{equation}
-a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2n}{\pi}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\cos\left(\frac{2\pi pm}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:an-p}\end{equation}
+\begin_inset Formula \begin{eqnarray}
+a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\cos\left(\frac{2\pi pm}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:an-p}\\
+ &  & \qquad\qquad+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}}\right)\end{eqnarray}
 
 \end_inset 
 
@@ -2240,8 +2240,9 @@ For large
 \end_inset 
 
  term contributes significantly, and so one may write
-\begin_inset Formula \begin{equation}
-a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\cos\left(\frac{2\pi m}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)\label{eq:}\end{equation}
+\begin_inset Formula \begin{eqnarray}
+a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\cos\left(\frac{2\pi m}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)\label{eq:}\\
+ &  & \qquad\quad+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}}\right)\end{eqnarray}
 
 \end_inset 
 
@@ -2249,7 +2250,7 @@ a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{
 \begin_inset Formula $a_{n}$
 \end_inset 
 
-are exponentially small.
+ are exponentially small.
 \layout Section
 
 More L-functions
