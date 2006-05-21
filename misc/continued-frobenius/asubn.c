@@ -109,6 +109,8 @@ x=z;
 		y *= exp (sqrt(4*M_PI*i));
 		double z = -cos (sqrt(4*M_PI*i)+0.375*M_PI);
 		z *= sqrt(sqrt(2*i/M_PI));
+		// z = hurwitz_b_sub_n (i,1,1);
+		// z *= exp (sqrt(4*M_PI*i));
 		printf ("%d	%8.6g   %8.6g\n", i, y,z);
 #endif
 
