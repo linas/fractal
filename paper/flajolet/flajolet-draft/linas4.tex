@@ -1002,20 +1002,23 @@ large. Thus, one writes
 \begin{eqnarray}
 a_{n}(m,k) & = & -\frac{1}{k\pi i}\sum_{p=1}^{k}
 \left[\exp\left(i\frac{2\pi pm}{k}\right)
-\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\right.
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\omega(x\sqrt{n})}dx\right.
 \label{eq:saddle}\\
  &  & \qquad \qquad \left.+\exp\left(-i\frac{2\pi pm}{k}\right)
 \int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}
-e^{\overline{f}(z)}dz\right]
+e^{\overline{\omega}(x\sqrt{n})}dx\right]
 \end{eqnarray}
- where $\overline{f}$ is the complex conjugate of $f$. 
+ where $\overline{\omega}$ is the complex conjugate of $\omega$. 
 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Proceeding, one has \begin{equation}
-f(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equation}
- and \begin{equation}
-\phi(s)\approx-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\label{eq:}\end{equation}
- where the approximation that $\zeta\left(s,p/k\right)\approx(k/p)^{s}$
+Proceeding, one has 
+\begin{equation}
+\omega(s)=\log n!+\frac{1}{2}\log n
+-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}
++\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}
++\mathcal{O}\left( \left(\frac{p}{k+p}\right)^s \right)
+\end{equation}
+ where the approximation that 
+$\log \zeta\left(s,p/k\right)=(k/p)^{s}+\mathcal{O}\left( (p/(k+p))^s \right)$
 for large $s$ has been made. 
 
 % We don't use this!
@@ -1029,29 +1032,63 @@ expansion~\eqref{stirapp}.
 % \log\Gamma(x)=\left(x-\frac{1}{2}\right)\log x-x+\frac{1}{2}\log2\pi+\sum_{j=1}^{\infty}\frac{B_{2j}}{2j(2j-1)x^{2j-1}}\label{eq:}\end{equation}
 % and $B_{k}$ are the Bernoulli numbers. 
 Expanding to $\mathcal{O}(1/n)$
-and collecting terms, one obtains XXX following and what follows is
-wrong XXX\begin{eqnarray}
-f(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
- &  & +\log2\pi-2\log z-\frac{z^{2}}{2}+O\left(\frac{1}{\sqrt{n}}\right).\label{eq:}\\
-%  &  & +\frac{1}{\sqrt{n}}\left[\frac{7}{6z}-\frac{z}{2}+\frac{z^{3}}{3}\right]+
-% \frac{1}{n}\left[\frac{73}{144z^{2}}+\frac{5z^{2}}{4}\right]+\mathcal{O}\left(n^{-3/2}\right)
+and collecting terms, one obtains 
+
+\begin{eqnarray}
+\omega(x\sqrt{n}) & = & \frac{1}{2}\log n
+-x\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log x\right] \\
+ &  & +\log2\pi-2\log x-\frac{x^{2}}{2} \\
+ &  & +\frac{1}{6x\sqrt{n}}\left[10+x^{2}\right]
++\frac{1}{2n}\left[1-\frac{x^{2}}{2}-\frac{x^{4}}{6}
++\frac{73}{72x^{2}}\right]
++\mathcal{O}\left(n^{-3/2}\right)
 \end{eqnarray}
- The saddle point may be obtained  by solving $f^{\,\prime}(z)=0$.  To
- lowest order, one  obtains $z_{0}=(1+i)\sqrt{\pi  p/k}$. To  use  the
- saddle-point           formula,             one                 needs
- $f^{\,\prime\prime}(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)$.
- Substituting, one directly obtains \begin{equation}
-\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\approx\left(\frac{2\pi^{3}p}{n^{3}k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)+\mathcal{O}\left(??\right)\label{eq:}\end{equation}
- while the integral for $\overline{f}$ is the complex conjugate of
+
+\footnote{
+ LV: After subsitution of p=k=1 in this forumla, one of the log x 
+terms differs by a factor of two from that in equation \eqref{om012}. 
+This should be resolved.
+}
+ The saddle point may be obtained  by solving $\omega'(x\sqrt{n})=0$.  To
+ lowest order, one  obtains $x_{0}=(1+i)\sqrt{\pi  p/k}$. To  use  the
+ saddle-point  formula,  one needs
+ $\omega''(x\sqrt{n})=2/x\sqrt{n}+\mathcal{O}(n^{-1})$.
+ Substituting, one directly obtains 
+\begin{equation}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}
+e^{\omega(x\sqrt{n})}dx 
+=\left(\frac{2\pi^{3}pn}{k}\right)^{1/4}e^{i\pi/8}
+\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)
++\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}\right)
+\end{equation}
+ while the integral for $\overline{\omega}$ is the complex conjugate of
 this (having a saddle point at the complex conjugate location). Inserting
-this into equation \ref{eq:saddle} gives \begin{equation}
-a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi n^{3}}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\sin\left(\frac{2\pi pm}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:an-p}\end{equation}
+this into equation \ref{eq:saddle} gives 
+\begin{equation}
+a_{n}(m,k)=\frac{1}{k}
+\sum_{p=1}^{k}\left(\frac{2np}{\pi k}\right)^{1/4}
+\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)
+\cos\left(\frac{2\pi pm}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)
++\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}\right)
+\label{eq:an-p}\end{equation}
 For large $n$, only the $p=1$ term contributes significantly, and
-so one may write\begin{equation}
-a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\sin\left(\frac{2\pi m}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)\label{eq:}\end{equation}
- which demonstrates the desired result: the terms $a_{n}$are exponentially
+so one may write
+\begin{equation}
+a_{n}(m,k)=\frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}
+\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)
+\cos\left(\frac{2\pi m}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)
++\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}\right)
+\end{equation}
+ which demonstrates the desired result: the terms $a_{n}$ are exponentially
 small.
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+\footnote{
+ LV: At this time, subsituting p=k=1 into the above yeilds a formula 
+that differs by overall magnitude of sqrt(2) and also differs by a 
+phase of $\pi/4$ as compared to equation \eqref{thmz}.  I'm double-cheking 
+now. 
+}
 
 % \section{More L-functions}
 
