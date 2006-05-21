@@ -1938,37 +1938,6 @@ a_{n}(m,k)=\mathcal{O}\left(e^{-\sqrt{Kn}}\right)\label{eq:}\end{equation}
 \layout Section
 
 Saddle-point methods
-\layout Comment
-
-Caution, the following predict an asymptotic behaviour for small 
-\begin_inset Formula $n$
-\end_inset 
-
- that naively seems to be too small by factor of 
-\begin_inset Formula $k$
-\end_inset 
-
-.
- However, I think the expressions are actually correct; need to double-check
- against numerics for high 
-\begin_inset Formula $n$
-\end_inset 
-
-.
- I'm hoping that the next term in the asymptotic expansion will provide
- the 
-\begin_inset Quotes eld
-\end_inset 
-
-missing
-\begin_inset Quotes erd
-\end_inset 
-
- factor of 
-\begin_inset Formula $k$
-\end_inset 
-
-.
 \layout Standard
 
 The term 
@@ -2226,7 +2195,7 @@ f(z) & = & \frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+
 
  gives 
 \begin_inset Formula \begin{eqnarray}
-a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\cos\left(\frac{2\pi pm}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:an-p}\\
+a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\cos\left(\sqrt{\frac{4\pi pn}{k}}-\frac{5\pi}{8}-\frac{2\pi pm}{k}\right)\label{eq:an-p}\\
  &  & \qquad\qquad+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}}\right)\end{eqnarray}
 
 \end_inset 
@@ -2241,8 +2210,8 @@ For large
 
  term contributes significantly, and so one may write
 \begin_inset Formula \begin{eqnarray}
-a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\cos\left(\frac{2\pi m}{k}+\frac{5\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)\label{eq:}\\
- &  & \qquad\quad+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}}\right)\end{eqnarray}
+a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\cos\left(\sqrt{\frac{4\pi n}{k}}-\frac{5\pi}{8}-\frac{2\pi m}{k}\right)\label{eq:}\\
+ &  & \qquad\quad+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi n/k}}\right)\end{eqnarray}
 
 \end_inset 
 
@@ -2251,6 +2220,54 @@ a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{
 \end_inset 
 
  are exponentially small.
+\layout Standard
+
+The consistency of these results, with respect to the previous derivation
+ for the Riemann zeta can be checked inn several ways.
+ First, one may make the direct subsitution 
+\begin_inset Formula $m=k=1$
+\end_inset 
+
+ to obtain 
+\begin_inset Formula \begin{equation}
+b_{n}=a_{n}(1,1)=\left(\frac{2n}{\pi}\right)^{1/4}\exp\left(-\sqrt{4\pi n}\right)\cos\left(\sqrt{4\pi n}-\frac{5\pi}{8}\right)+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi n}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Alternately, the so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+multiplication theorem
+\begin_inset Quotes erd
+\end_inset 
+
+ for the Hurwitz zeta states that 
+\begin_inset Formula \begin{equation}
+\sum_{m=1}^{k}\zeta\left(s,\frac{m}{k}\right)=k^{s}\zeta(s)\label{eq:}\end{equation}
+
+\end_inset 
+
+ from which one may deduce both that 
+\begin_inset Formula \begin{equation}
+\sum_{k=1}^{m}A_{n}(m,k)=\sum_{p=2}^{n}(-1)^{p}\binom{n}{p}\zeta(p)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and that 
+\begin_inset Formula \begin{equation}
+\sum_{k=1}^{m}a_{n}(m,k)=b_{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ In particular, the above must hold order by order in the asymptotic expansion.
+ The correctness of the expansion given by equation 
+\begin_inset LatexCommand \ref{eq:an-p}
+
+\end_inset 
+
+ with regards to this identity may be readily verified by substitution.
+ 
 \layout Section
 
 More L-functions
