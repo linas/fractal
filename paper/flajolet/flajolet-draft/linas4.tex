@@ -1116,61 +1116,95 @@ From this, one may deduce both that
  and that 
 \begin{equation}
 \sum_{k=1}^{m}a_{n}(m,k)=b_{n}
+\label{eq:consistency}
 \end{equation}
  In particular, the above must hold order by order in the asymptotic
 expansion. The correctness of the expansion given by equation~\eqref{eq:an-p}
 with regards to this identity may be readily verified by direct substitution.
+An important special case of equation \ref{eq:consistency} is the $k=2$
+relation 
+\begin{equation}
+a_{n}(2,2)=b_{n}-a_{n}(1,2)=\sum_{p=2}^{n}(-1)^{p}\binom{n}{p}\left(1-2^{-p}\right)\zeta(p)
+\end{equation}
+
+which appears often in the literature {[}Coffey{]}.  It has the asymptotic expansion 
+\begin{equation}
+a_{n}(2,2)=\frac{1}{2}\sum_{p=1}^{2}\left(\frac{np}{\pi}\right)^{1/4}
+\exp\left(-\sqrt{2\pi np}\right) \cos\left(\sqrt{2\pi np}-\frac{5\pi}{8}\right)
++\mathcal{O}\left(n^{-1/4}e^{-\sqrt{2\pi n}}\right)
+\end{equation}
+
+                                                                                
                                                                                 
 
-% \section{More L-functions}
+\section{Gauss sums}
+XXXX I'm not sure that this section is necessary; its off to the side,
+and just summarizes a few manipulations that are not particularly hard,
+and have no particular bearing on the main ideas. 
+---------
 
 We conclude by briefly returning to the structure of the Dirichlet
 L-functions. The L-function coefficients defined in equation \ref{eq:L-coeff}
-are now given by \begin{equation}
-L_{n}=\sum_{m=1}^{k}\chi(m)A_{n}(m,k)\label{eq:}\end{equation}
- Writing \begin{equation}
-A_{n}=B_{n}+a_{n}\label{eq:}\end{equation}
+are now given by 
+\begin{equation}
+L_{n}=\sum_{m=1}^{k}\chi(m)A_{n}(m,k)
+\end{equation}
+ Writing 
+\begin{equation}
+A_{n}=B_{n}+a_{n}
+\end{equation}
  so that $B_{n}(m,k)$represents the non-exponential part, one may
 state a few results. For the non-principal characters, one has $\sum_{m=1}^{k}\chi(m)=0$
-and thus, the first term simplifies to \begin{equation}
-\sum_{m=1}^{k}\chi(m)B_{n}(m,k)=\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+and thus, the first term simplifies to 
+\begin{equation}
+\sum_{m=1}^{k}\chi(m)B_{n}(m,k)
+=\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[m-n\psi\left(\frac{m}{k}\right)\right]
+\end{equation}
  For the principal character $\chi_{1}$, one has $\sum_{m=1}^{k}\chi_{1}(m)=\varphi(k)$
 with $\varphi(k)$ the Euler totient function. Thus, for the principal
-character, one obtains \begin{equation}
-\sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k)=-\varphi(k)\left[\frac{1}{2n}+\frac{1}{k}\left(\ln k+1-H_{n-1}\right)\right]+\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
-
+character, one obtains 
+\begin{eqnarray}
+\sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k)
+ & = & -\varphi(k)\left[\frac12+\frac{n}{k}\left(\ln k+1-H_{n-1}\right)\right] \\
+ & & \qquad +\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[m-n\psi\left(\frac{m}{k}\right)\right]
+\end{eqnarray}
 
 By contrast, the exponentially small term invokes a linear combination
-of Gauss sums. The Gauss sum associated with a character $\chi$is
+of Gauss sums. The Gauss sum associated with a character $\chi$ is
 \begin{equation}
-G(n,\chi)=\sum_{m\mbox{ mod}k}\chi(m)e^{2\pi imn/k}\label{eq:}\end{equation}
- and so, to leading order \begin{eqnarray}
-\sum_{m=1}^{k}\chi(m)a_{n}(m,k) & \approx & \frac{1}{2ik}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\nonumber \\
- &  & \left[\exp i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(1,\chi)-\exp-i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(-1,\chi)\right]\label{eq:}\end{eqnarray}
- The higher-order terms with $p>1$ dropped from equation \ref{eq:an-p}
-correspond to terms involving $G(p,\chi)$. 
+G(n,\chi)=\sum_{m\mbox{ mod}k}\chi(m)e^{2\pi imn/k}
+\end{equation}
+ and so, to leading order 
+\begin{eqnarray}
+\sum_{m=1}^{k}\chi(m)a_{n}(m,k) 
+ & = & \frac{1}{2k}\sum_{p=1}^k 
+\left(\frac{2pn}{\pi k}\right)^{1/4} \exp\left(-\sqrt{\frac{4\pi pn}{k}}\right) \\
+ &  & \quad \left[\exp i\left(\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)G(p,\chi) \right. \\
+ &  & \quad\qquad\left. -\exp-i\left(\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)G(-p,\chi)\right] \\
+ & & \quad +\mathcal{O} \left(n^{-1/4}e^{-2\sqrt{\pi n/k}\right)
+\end{eqnarray}
 
-% That's all. Not sure what more to say at this point. -- linas
-
-\begin{comment}
-TODO -- The Hurwitz zeta can be avoided entirely by working directly
-with the functional equation for the L-functions, as given by Apostol,
-Chapter 12, Theorem 12.11. The direct form seems to imply some sort
-of result/constraint on the $p\ne1$ terms in the expansion. It also
-suggests that most of the deriviation above could be made clearer
-by assuming a generic functional equation, and stating results in
-terms of that. (e.g. assume Selberg-class type functional equation). 
-\end{comment}
-
+The above expression simplifies slightly for the principle character,
+since one has the identities 
+\begin{equation}
+G\left(1,\chi_{1}\right)=\mu(k)
+\end{equation}
+ with $\mu(k)$ the Mobius function and more generally, 
+\begin{equation}
+G\left(p,\chi_{1}\right)=
+\frac{\varphi(k)\mu\left(\frac{k}{(p,k)}\right)}{\varphi\left(\frac{k}{(p,k)}\right)}
+\end{equation}
+                                                                                
+\section{wrapup}
 \smallskip
 The previous results\footnote{%
 	PF: We need a theorem statement summarizing both the principal and nonprincipal
-	characters.}
+	characters. LV: or drop the discussion of principle and non-principle characters.}
 unify and make precise a number of estimates carried out in the literature by a diversity
 of methods. For instance, the study of quantities arising in connection with Li's criterion
 calls for estimating
 \begin{equation}\label{coffeyS1}
-\overline{b}_n=\sum_{k=2}^n \binom{n}{k}(-1)^k(1-2^{-k})\zeta(k).
+a_n(2,2)=\sum_{k=2}^n \binom{n}{k}(-1)^k(1-2^{-k})\zeta(k).
 \end{equation}
 Coffey encountered this quantity (his~$S_1(n)$ in~\cite{Coffey05}),
 and proved, by means of series rearrangements akin to~\eqref{simpdel}

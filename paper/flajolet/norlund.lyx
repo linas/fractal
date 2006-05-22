@@ -429,7 +429,7 @@ An exponential generating function is given by
 \end_inset 
 
  are the harmonic numbers.
-\layout Comment
+\layout Note*
 
 One is left to wonder what the function 
 \begin_inset Formula \begin{equation}
@@ -1476,7 +1476,7 @@ k\end{array}\right]\]
 \end_inset 
 
 
-\layout Comment
+\layout Note*
 
 The following is offtopic, not sure what to do with it.
  
@@ -2256,7 +2256,7 @@ multiplication theorem
 
  and that 
 \begin_inset Formula \begin{equation}
-\sum_{k=1}^{m}a_{n}(m,k)=b_{n}\label{eq:}\end{equation}
+\sum_{k=1}^{m}a_{n}(m,k)=b_{n}\label{eq:consistency}\end{equation}
 
 \end_inset 
 
@@ -2267,13 +2267,28 @@ multiplication theorem
 \end_inset 
 
  with regards to this identity may be readily verified by substitution.
- 
+ An important special case of equation 
+\begin_inset LatexCommand \ref{eq:consistency}
+
+\end_inset 
+
+ is the relation 
+\begin_inset Formula \begin{equation}
+a_{n}(2,2)=b_{n}-a_{n}(1,2)=\sum_{p=2}^{n}(-1)^{p}\binom{n}{p}\left(1-2^{-p}\right)\zeta(p)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which appears often in the literature [Coffey].
+ It has the asymptotic expansion 
+\begin_inset Formula \begin{equation}
+a_{n}(2,2)=\frac{1}{2}\sum_{p=1}^{2}\left(\frac{np}{\pi}\right)^{1/4}\exp\left(-\sqrt{2\pi np}\right)\cos\left(\sqrt{2\pi np}-\frac{5\pi}{8}\right)+\mathcal{O}\left(n^{-1/4}e^{-\sqrt{2\pi n}}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+
 \layout Section
 
 More L-functions
-\layout Comment
-
-The following still uses the old notation and is thus wrong/misleading
 \layout Standard
 
 We conclude by briefly returning to the structure of the Dirichlet L-functions.
@@ -2305,7 +2320,7 @@ represents the non-exponential part, one may state a few results.
 
  and thus, the first term simplifies to 
 \begin_inset Formula \begin{equation}
-\sum_{m=1}^{k}\chi(m)B_{n}(m,k)=\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+\sum_{m=1}^{k}\chi(m)B_{n}(m,k)=\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[m-n\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2323,8 +2338,9 @@ represents the non-exponential part, one may state a few results.
 
  the Euler totient function.
  Thus, for the principal character, one obtains 
-\begin_inset Formula \begin{equation}
-\sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k)=-\varphi(k)\left[\frac{1}{2n}+\frac{1}{k}\left(\ln k+1-H_{n-1}\right)\right]+\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+\begin_inset Formula \begin{eqnarray}
+\sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k) & = & -\varphi(k)\left[\frac{1}{2}+\frac{n}{k}\left(\ln k+1-H_{n-1}\right)\right]\label{eq:}\\
+ &  & \qquad+\frac{1}{k}\sum_{m=1}^{k}\chi_{1}(m)\left[m-n\psi\left(\frac{m}{k}\right)\right]\end{eqnarray}
 
 \end_inset 
 
@@ -2337,7 +2353,7 @@ By contrast, the exponentially small term invokes a linear combination of
 \begin_inset Formula $\chi$
 \end_inset 
 
-is 
+ is 
 \begin_inset Formula \begin{equation}
 G(n,\chi)=\sum_{m\mbox{ mod}k}\chi(m)e^{2\pi imn/k}\label{eq:}\end{equation}
 
@@ -2345,32 +2361,37 @@ G(n,\chi)=\sum_{m\mbox{ mod}k}\chi(m)e^{2\pi imn/k}\label{eq:}\end{equation}
 
  and so, to leading order 
 \begin_inset Formula \begin{eqnarray}
-\sum_{m=1}^{k}\chi(m)a_{n}(m,k) & \approx & \frac{1}{2ik}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\nonumber \\
- &  & \left[\exp i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(1,\chi)-\exp-i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(-1,\chi)\right]\label{eq:}\end{eqnarray}
+\sum_{m=1}^{k}\chi(m)a_{n}(m,k) & = & \frac{1}{2k}\sum_{p=1}^{k}\left(\frac{2pn}{\pi k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\times\nonumber \\
+ &  & \quad\left[\exp i\left(\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)G(p,\chi)\right.\label{eq:}\\
+ &  & \qquad\quad\left.+\exp-i\left(\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)G(-p,\chi)\right]\\
+ &  & \quad+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi n/k}}\right)\end{eqnarray}
 
 \end_inset 
 
- The higher-order terms with 
-\begin_inset Formula $p>1$
-\end_inset 
-
- dropped from equation 
-\begin_inset LatexCommand \ref{eq:an-p}
+The above expression simplifies slightly for the principle character, since
+ one has the identities 
+\begin_inset Formula \begin{equation}
+G\left(1,\chi_{1}\right)=\mu(k)\label{eq:}\end{equation}
 
 \end_inset 
 
- correspond to terms involving 
-\begin_inset Formula $G(p,\chi)$
+ with 
+\begin_inset Formula $\mu(k)$
 \end_inset 
 
-.
+ the Mobius function and more generally, 
+\begin_inset Formula \begin{equation}
+G\left(p,\chi_{1}\right)=\frac{\varphi(k)\mu\left(\frac{k}{(p,k)}\right)}{\varphi\left(\frac{k}{(p,k)}\right)}\label{eq:}\end{equation}
+
+\end_inset 
+
  
 \layout Standard
 
 That's all.
  Not sure what more to say at this point.
  -- linas
-\layout Comment
+\layout Note*
 
 TODO -- The Hurwitz zeta can be avoided entirely by working directly with
  the functional equation for the L-functions, as given by Apostol, Chapter
@@ -2385,11 +2406,16 @@ TODO -- The Hurwitz zeta can be avoided entirely by working directly with
  of that.
  (e.g.
  assume Selberg-class type functional equation).
- 
+ The only tricky part is understanding the asymptotic behaviour of zeta
+ for large 
+\begin_inset Formula $s$
+\end_inset 
+
+.
 \layout Section
 
 Conclusions/Comments
-\layout Comment
+\layout Note*
 
 Not sure about the following ...
  interesting and suggestive but don't see where it leads.
