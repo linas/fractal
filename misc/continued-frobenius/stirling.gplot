@@ -10,14 +10,16 @@ set out 'stirling.png'
 set data style lines
 set key right
 
-set title "Stirling s"
-set xlabel "x"
-set ylabel "s"
+# The following used to generate the graph in the paper.
+set xrange [0:20]
+set title "G_nm/(n-2)! as a function of m, for n=200"
+set xlabel "m"
+set ylabel "G_nm/(n-2)!"
 
 # set yrange [0:]
 
 
-plot  "stirling.dat" using 1:2 title ""
+plot  "stirling.dat" using 1:3 title ""
 
 
 # pause 100

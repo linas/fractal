@@ -183,7 +183,7 @@ main (int argc, char *argv[])
 {
 	int n, k;
 
-#if 1
+#if 0
 	for (n=0; n<258; n++)
 	{
 		long double orm=1.0;
@@ -193,14 +193,14 @@ main (int argc, char *argv[])
 		{
 			// long double s = stirling_first (n,k);
 			long double s = sb_sum (n,k);
-			long double g = gee_nk (n,k);
 			if (k%2) s=-s;
 			// if (n%2) s=-s;
-			if (1==k) orm = s;
-			// s /= orm;
+			long double g = gee_nk (n,k);
+			if (1==k) orm = g;
+			g /= orm;
 			// s /= factorial (n);
 			// s *= factorial (k);
-			printf ("duude (%d %d)  = %Lg  %Lg\n", n, k, s, s+g);
+			printf ("duude (%d %d)  = %Lg  \n", n, k, g);
 		}
 	}
 #endif
@@ -214,11 +214,13 @@ main (int argc, char *argv[])
 	int order = atoi (argv[1]);
 
 	n=order;
-#if 0
+#if 1
+	printf ("# \n# Gee sums to order n=%d \n# \n", n);
 	for (k=0; k<=n; k++)
 	{
-		long double s = sb_sum (n,k);
-		s /= factorial (n);
+		// long double s = sb_sum (n,k);
+		long double s = gee_nk (n,k);
+		s /= factorial (n-2);
 		double x = ((double) k)/ ((double) n);
 		printf ("%d	%g	%Lg\n", k, x, s);
 	}
