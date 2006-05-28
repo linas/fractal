@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ache.h"
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_sf_psi.h>
 #include <gsl/gsl_sf_zeta.h>
 
 // ==========================================================
@@ -103,7 +105,7 @@ x=z;
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 #endif
 
-#define RIEMANN_B_SUB_N
+// #define RIEMANN_B_SUB_N
 #ifdef RIEMANN_B_SUB_N
 		double y = b_sub_n (i);
 		y *= exp (sqrt(4*M_PI*i));
@@ -137,6 +139,33 @@ x=z;
 		z -= small_b_sub_n (i,1,2);
 		z -= small_b_sub_n (i,2,2);
 		printf ("%d	%8.6g   %8.6g\n", i, y,z);
+#endif
+
+// #define MUL_WITZ_B_SUB_N
+#ifdef MUL_WITZ_B_SUB_N
+		double y = hurwitz_b_sub_n (i, 1, 1);
+		for (m=1; m<=k; m++)
+		{
+			y -= hurwitz_b_sub_n (i, m, k);
+		}
+		double z = small_b_sub_n (i,1,1);
+		for (m=1; m<=k; m++)
+		{
+			z -= small_b_sub_n (i,m,k);
+		}
+		printf ("%d	%8.6g   %8.6g\n", i, y,z);
+#endif
+
+#define DIGAMMA_CHECK
+#ifdef DIGAMMA_CHECK
+		double y = 0.0;
+		k = i;
+		for (m=1; m<=k; m++)
+		{
+			y += gsl_sf_psi (((double)m)/((double) k));
+		}
+		y += k *(M_EULER + log(k));
+		printf ("%d	%8.6g\n", i, y);
 #endif
 	}
 	return 0;

@@ -13,7 +13,9 @@
 #include "binomial.h"
 #include "ache.h"
 
-/* return stirling numbers of the first kind, 
+/** stirling_first - Return stirling numbers of the first kind.
+ *
+ * Return stirling numbers of the first kind,
  * normalized so that they are all positive.
  * Uses dynamically-sized cache.
  */
@@ -54,13 +56,63 @@ long double stirling_first (unsigned int n, unsigned int k)
 
 	/* Pull value from cache if it is there */
 	int idx = n * (n-1) / 2 -1;
-	if (cache[idx+k] > 0.0) return cache[idx+k];
+	if (0.0 < cache[idx+k]) return cache[idx+k];
 
 	/* use recursion to get new value */
 	long double s = stirling_first (n-1, k-1);
 	if (n-1 >= k)
 	{
 		s += (n-1) * stirling_first (n-1, k);
+	}
+
+	cache[idx+k] = s;
+	return s;
+}
+
+long double gee_nk (unsigned int n, unsigned int k)
+{
+	/* Cache management */
+	static int nmax = 0;
+	static long double *cache = NULL;
+	if (n> nmax)
+	{
+		int newsize = n*(n+1)/2;
+		cache = (long double *) realloc (cache, newsize * sizeof (long double));
+
+		int en;
+		for (en=nmax+1; en <=n; en++)
+		{
+			int j;
+			int idx = en * (en-1) /2 - 1;
+			for (j=1; j<=en; j++)
+			{
+				cache[idx+j] = 0.0;
+			}
+		}
+
+		nmax = n;
+	}
+
+	/* Trivial case (not in the cache) */
+	if (0==k)
+	{
+		if (0==n) return -1.0L;
+		if (1==n) return 1.0L;
+		return 0.0L;
+	}
+
+	if (n<k) return 0.0L;
+	if (n==k) return -1.0L;
+
+	/* Pull value from cache if it is there */
+	int idx = n * (n-1) / 2 -1;
+	if (0.0 != cache[idx+k]) return cache[idx+k];
+
+	/* use recursion to get new value */
+	long double s = gee_nk (n-1, k-1);
+	if (n-1 >= k)
+	{
+		s += (n-2) * gee_nk (n-1, k);
 	}
 
 	cache[idx+k] = s;
@@ -79,7 +131,10 @@ long double sb_sum (unsigned int n, unsigned int m)
 	s = 0.0L;
 	for (k=m; k<=n; k++)
 	{
-		s += sg * binomial (k,m) * stirling_first (n, k);
+		long double stir = stirling_first (n,k);
+		long double bin = binomial (k,m);
+// printf ("duude m=%d k=%d n=%d st=%Lg  bi=%Lg\n", m, k, n, stir, bin);
+		s += sg * bin * stir;
 		sg = -sg;
 	}
 
@@ -128,16 +183,24 @@ main (int argc, char *argv[])
 {
 	int n, k;
 
-#if 0
-	for (n=0; n<10; n++)
+#if 1
+	for (n=0; n<258; n++)
 	{
-		for (k=0; k<=n; k++)
+		long double orm=1.0;
+		int kmax = n;
+		// if (10<kmax) kmax = 10;
+		for (k=0; k<=kmax; k++)
 		{
-			long double s = stirling_first (n,k);
-			// long double s = sb_sum (n,k);
+			// long double s = stirling_first (n,k);
+			long double s = sb_sum (n,k);
+			long double g = gee_nk (n,k);
+			if (k%2) s=-s;
+			// if (n%2) s=-s;
+			if (1==k) orm = s;
+			// s /= orm;
 			// s /= factorial (n);
 			// s *= factorial (k);
-			printf ("duude (%d %d)  = %Lg\n", n, k, s);
+			printf ("duude (%d %d)  = %Lg  %Lg\n", n, k, s, s+g);
 		}
 	}
 #endif
@@ -181,7 +244,7 @@ main (int argc, char *argv[])
 	}
 #endif 
 
-#if 1
+#if 0
 	for (n=0; n<40; n++)
 	{
 		long double s = stieltjes_gamma (n);
