@@ -4,18 +4,28 @@
 # set out 'read.gif'
 
 # set term png small color
-set term png small
-set out 'mertens.png'
+# set term png small
+# set out 'mertens.png'
+
+set term svg
+set out 'mertens.svg'
 
 # set data style linespoints
 set data style lines
 # set data style points
 
+set xzeroaxis linetype -1 linewidth 0.5
+set yzeroaxis linetype -1 linewidth 0.5
+set xtics axis
+set ytics axis
+
+set bmargin 5
+set lmargin 7
 
 set title "Mertens function"
-set xlabel "n"
-set ylabel "M(n)"
-plot "mertens.dat" using 1:2 title ""
+set xlabel "n" 1,0
+set ylabel "M(n)" -1, 0
+plot "mertens.dat" using 1:2 title "" with lines linewidth 2
 
 # set yrange [0:]
 

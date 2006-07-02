@@ -31,7 +31,7 @@ int main ()
 {
 	int i;
 
-	int nmax = 4100;
+	int nmax = 10000;
 
 	int mert = 0;
 	for (i=1; i<nmax; i++)
