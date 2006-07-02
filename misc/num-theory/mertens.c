@@ -14,9 +14,9 @@
 
 #include "moebius.h"
 
-long double mertnes (int n)
+int mertens (int n)
 {
-	long double acc = 0.0;
+	int acc = 0.0;
 
 	int i=1;
 	for (i=1; i<=n; i++)
@@ -31,13 +31,15 @@ int main ()
 {
 	int i;
 
-	int nmax = 41;
+	int nmax = 4100;
 
+	int mert = 0;
 	for (i=1; i<nmax; i++)
 	{
-		long double y = mertens (x);
+		// mert = mertens (i);
+		mert += moebius_mu(i);
 
-		printf ("%d	%26.18Lg\n", i, y);
+		printf ("%d	%d\n", i, mert);
 		fflush (stdout);
 	}
 }
