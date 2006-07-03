@@ -80,7 +80,7 @@ modular.o:	modular.c modular.h
 	rm modular.o
 	touch modular.o
 
-moebius.o:	moebius.c moebius.h
+moebius.o:	moebius.c moebius.h cache.h
 	$(CC) -c moebius.c
 	cp moebius.o $(LIB)/moebius.o
 	rm moebius.o

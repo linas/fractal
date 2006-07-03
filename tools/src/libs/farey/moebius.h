@@ -27,6 +27,7 @@ int liouville_lambda (int n);
 
 /* The Mangoldt lambda function */
 long double mangoldt_lambda (int n);
+long double mangoldt_lambda_cached (int n);
 
 #ifdef   __cplusplus
 };

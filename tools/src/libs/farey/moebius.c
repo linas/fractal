@@ -13,6 +13,7 @@
 #include <malloc.h>
 
 #include "moebius.h"
+#include "cache.h"
 
 static int *sieve = NULL;
 static int sieve_size = 0;
@@ -142,6 +143,23 @@ long double mangoldt_lambda (int n)
 	}
 
 	return 0;
+}
+
+/* ====================================================== */
+
+long double mangoldt_lambda_cached (int n)
+{
+	DECLARE_LD_CACHE (mangoldt_cache);
+	if(ld_one_d_cache_check (&mangoldt_cache, n))
+	{
+		return ld_one_d_cache_fetch(&mangoldt_cache, n);
+	}
+	else
+	{
+		long double val = mangoldt_lambda(n);
+		ld_one_d_cache_store (&mangoldt_cache, val, n);
+		return val;
+	}
 }
 
 /* ====================================================== */

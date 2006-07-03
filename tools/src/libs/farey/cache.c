@@ -5,6 +5,8 @@
  * Linas Vepstas 2005,2006
  */
 
+#include <stdlib.h>
+
 #include "cache.h"
 
 /** ld_one_d_cache_check() -- check if long double value is in the cache
@@ -25,7 +27,7 @@ int ld_one_d_cache_check (ld_cache *c, unsigned int n)
 		if (0 == c->nmax) nstart = 0;
 		for (en=nstart; en <newsize; en++)
 		{
-			mpz_init (c->cache[en]);
+			c->cache[en] = 0.0L;
 			c->ticky[en] = 0;
 		}
 		c->nmax = newsize-1;
@@ -40,7 +42,7 @@ int ld_one_d_cache_check (ld_cache *c, unsigned int n)
  */
 long double ld_one_d_cache_fetch (ld_cache *c, unsigned int n)
 {
-	if (c->disabled) return;
+	if (c->disabled) return 0.0L;
 	return c->cache[n];
 }
 
