@@ -31,10 +31,13 @@ int main ()
 {
 	int i;
 
-	int nmax = 1000;
+	int nmax = 10000000;
 	
 	long double sum = 0.0;
-	int scale = 1;
+	int scale = 10000;
+
+	long double offset = log(M_PI);
+	// long double offset = 0.0;
 	for (i=1; i<nmax; i++)
 	{
 		// sum = chebyshev (i);
@@ -42,7 +45,8 @@ int main ()
 
 		if (0 == i%scale) 
 		{
-			printf ("%d	%d\n", i, mert);
+			long double lead = sum - i+offset;
+			printf ("%d	%24.18Lg\n", i, lead);
 			fflush (stdout);
 			// if (i > scale*300) scale *= 2;
 		}

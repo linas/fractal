@@ -1,0 +1,36 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+# set term png small
+# set out 'von_mangoldt.png'
+
+set term svg
+set out 'von_mangoldt.svg'
+
+# set data style linespoints
+set data style lines
+# set data style points
+
+# set xzeroaxis linetype -1 linewidth 0.5
+# set yzeroaxis linetype -1 linewidth 0.5
+unset zeroaxis
+set xtics border
+# set ytics axis
+set ytics border
+
+set bmargin 5
+set lmargin 7
+
+# this is the version that was used for WP graphic
+set title "Chebyshev (summatory von Mangoldt) function"
+set xlabel "n" 1,0
+set ylabel "psi(n)-n+log(pi)" 1, 0
+plot "von_mangoldt.dat" using 1:2 title "" with lines linewidth 2
+
+# set yrange [0:]
+
+# pause 100
+
