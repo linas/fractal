@@ -31,7 +31,7 @@ int main ()
 {
 	int i;
 
-	int nmax = 10000;
+	int nmax = 10000000;
 
 	int mert = 0;
 	for (i=1; i<nmax; i++)
@@ -39,7 +39,10 @@ int main ()
 		// mert = mertens (i);
 		mert += moebius_mu(i);
 
-		printf ("%d	%d\n", i, mert);
-		fflush (stdout);
+		if (0 == i%3000) 
+		{
+			printf ("%d	%d\n", i, mert);
+			fflush (stdout);
+		}
 	}
 }

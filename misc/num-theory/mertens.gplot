@@ -14,17 +14,19 @@ set out 'mertens.svg'
 set data style lines
 # set data style points
 
-set xzeroaxis linetype -1 linewidth 0.5
-set yzeroaxis linetype -1 linewidth 0.5
-set xtics axis
-set ytics axis
+# set xzeroaxis linetype -1 linewidth 0.5
+# set yzeroaxis linetype -1 linewidth 0.5
+unset zeroaxis
+set xtics border
+# set ytics axis
+set ytics border
 
 set bmargin 5
 set lmargin 7
 
 set title "Mertens function"
 set xlabel "n" 1,0
-set ylabel "M(n)" -1, 0
+set ylabel "M(n)" 1, 0
 plot "mertens.dat" using 1:2 title "" with lines linewidth 2
 
 # set yrange [0:]
