@@ -28,7 +28,9 @@ set lmargin 7
 set title "Chebyshev (summatory von Mangoldt) function"
 set xlabel "n" 1,0
 set ylabel "psi(n)-n+log(pi)" 1, 0
-plot "von_mangoldt.dat" using 1:2 title "" with lines linewidth 2
+plot "von_mangoldt.dat" using 1:2 title "" with lines linewidth 2, \
+     "von_mangoldt.dat" using 1:(0.5*sqrt($1)) title "" with lines linewidth 2,\
+     "von_mangoldt.dat" using 1:(-0.5*sqrt($1)) title "" with lines linewidth 2 
 
 # set yrange [0:]
 
