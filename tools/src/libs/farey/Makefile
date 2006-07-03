@@ -15,7 +15,7 @@ CC = cc -Wall -O2 -I $(INC) -DANSI_C -DLINUX
 
 RM= rm -f
 
-all: inc bernoulli.o binomial.o Farey.o FareyTree.o gcf.o harmonic.o \
+all: inc bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o harmonic.o \
 	modular.o moebius.o Prime.o totient.o
 
 inc:	bernoulli.h binomial.h Farey.h FareyTree.h gcf.h harmonic.h \
@@ -43,6 +43,12 @@ binomial.o:	binomial.c binomial.h
 	cp binomial.o $(LIB)/binomial.o
 	rm binomial.o
 	touch binomial.o
+
+cache.o:	cache.c cache.h
+	$(CC) -c cache.c
+	cp cache.o $(LIB)/cache.o
+	rm cache.o
+	touch cache.o
 
 Farey.o:	Farey.C Farey.h
 	$(CC) -c Farey.C

@@ -1,29 +1,23 @@
 
-/* ======================================================================= */
-/* Cache management */
+/* cache.c
+ * Generic cache management for commonly computed numbers
+ *
+ * Linas Vepstas 2005,2006
+ */
 
-typedef struct {
-	unsigned int nmax;
-	mpz_t *cache;
-	char *ticky;
-	short disabled;
-} i_cache;
+#include "cache.h"
 
-
-#define DECLARE_I_CACHE(name)         \
-	static i_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, .disabled = 0}
-
-/** i_one_d_cache_check() -- check if mpz_t value is in the cache
+/** ld_one_d_cache_check() -- check if long double value is in the cache
  *  Returns true if the value is in the cache, else returns false.
  *  This assumes a 1-dimensional cache layout (simple aray)
  */
-int i_one_d_cache_check (i_cache *c, unsigned int n)
+int ld_one_d_cache_check (ld_cache *c, unsigned int n)
 {
 	if (c->disabled) return 0;
 	if ((n > c->nmax) || 0==n )
 	{
 		unsigned int newsize = 1.5*n+1;
-		c->cache = (mpz_t *) realloc (c->cache, newsize * sizeof (mpz_t));
+		c->cache = (long double *) realloc (c->cache, newsize * sizeof (long double));
 		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));
 
 		unsigned int en;
@@ -42,21 +36,21 @@ int i_one_d_cache_check (i_cache *c, unsigned int n)
 }
 
 /** 
- * i_one_d_cache_fetch - fetch value from cache
+ * ld_one_d_cache_fetch - fetch value from cache
  */
-void i_one_d_cache_fetch (i_cache *c, mpz_t val, unsigned int n)
+long double ld_one_d_cache_fetch (ld_cache *c, unsigned int n)
 {
 	if (c->disabled) return;
-	mpz_set (val, c->cache[n]);
+	return c->cache[n];
 }
 
 /**
- * i_one_d_cache_store - store value in cache
+ * ld_one_d_cache_store - store value in cache
  */
-void i_one_d_cache_store (i_cache *c, mpz_t val, unsigned int n)
+void ld_one_d_cache_store (ld_cache *c, long double val, unsigned int n)
 {
 	if (c->disabled) return;
-	mpz_set (c->cache[n], val);
+	c->cache[n] = val;
 	c->ticky[n] = 1;
 }
 
