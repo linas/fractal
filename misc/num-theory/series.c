@@ -181,7 +181,7 @@ long double mangoldt_series (long double y)
 	int n=1;
 	while (1)
 	{
-		long double term = xp * (mangoldt_lambda(n) - 1.0);
+		long double term = xp * (mangoldt_lambda_cached(n) - 1.0);
 		acc += term;
 
 		if (fabs(term) < 1.0e-16*fabs(acc)) break;
@@ -199,7 +199,8 @@ int main ()
 	int nmax = 410;
 
 	long double tp = 0.5;
-	for (i=1; i<=nmax; i++)
+	// for (i=1; i<=nmax; i++)
+	for (i=nmax; i>0; i--)
 	{
 		long double x = ((double) i)/((double) nmax);
 
@@ -250,7 +251,7 @@ int main ()
 
 #define MANGOLDT_SERIES
 #ifdef MANGOLDT_SERIES
-		x *= 0.01;
+		x *= 0.00001;
 		long double y = mangoldt_series (x);
 		// y *= sqrt(x);
 
