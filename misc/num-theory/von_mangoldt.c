@@ -1,8 +1,8 @@
 
 /*
- * mertens.c
+ * von_mangoldt.c
  *
- * Graph of merten function.
+ * Graph of Chebyshev (sum of von Mangoldt) function.
  * Ordinary x-y plot; output is ascii list of x-y values
  *
  * Linas Vepstas July 2006
@@ -14,14 +14,14 @@
 
 #include "moebius.h"
 
-int mertens (int n)
+long double chebyshev (int n)
 {
-	int acc = 0.0;
+	long double acc = 0.0;
 
 	int i=1;
 	for (i=1; i<=n; i++)
 	{
-		acc += moebius_mu (i);
+		acc += mangoldt_lambda (i);
 	}
 
 	return acc;
@@ -31,20 +31,20 @@ int main ()
 {
 	int i;
 
-	int nmax = 10000000;
+	int nmax = 1000;
 	
-	int mert = 0;
+	long double sum = 0.0;
 	int scale = 1;
 	for (i=1; i<nmax; i++)
 	{
-		// mert = mertens (i);
-		mert += moebius_mu(i);
+		// sum = chebyshev (i);
+		sum += mangoldt_lambda(i);
 
 		if (0 == i%scale) 
 		{
 			printf ("%d	%d\n", i, mert);
 			fflush (stdout);
-			if (i > scale*300) scale *= 2;
+			// if (i > scale*300) scale *= 2;
 		}
 	}
 }

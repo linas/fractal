@@ -24,10 +24,16 @@ set ytics border
 set bmargin 5
 set lmargin 7
 
+# this is the version that was used for WP graphic
+# set title "Mertens function"
+# set xlabel "n" 1,0
+# set ylabel "M(n)" 1, 0
+# plot "mertens.dat" using 1:2 title "" with lines linewidth 2
+
 set title "Mertens function"
 set xlabel "n" 1,0
 set ylabel "M(n)" 1, 0
-plot "mertens.dat" using 1:2 title "" with lines linewidth 2
+plot "mertens.dat" using (log($1)):(log($2)) title "" with lines linewidth 2
 
 # set yrange [0:]
 
