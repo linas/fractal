@@ -172,14 +172,34 @@ long double moebius_series (long double x)
 	return acc;
 }
 
+long double mangoldt_series (long double y)
+{
+	long double acc = 0.0;
+
+	long double x = expl (-y);
+	long double xp = 1.0;
+	int n=1;
+	while (1)
+	{
+		long double term = xp * (mangoldt_lambda(n) - 1.0);
+		acc += term;
+
+		if (fabs(term) < 1.0e-16*fabs(acc)) break;
+		xp *= x;
+		n++;
+	}
+
+	return -acc;
+}
+
 int main ()
 {
 	int i;
 
-	int nmax = 41;
+	int nmax = 410;
 
 	long double tp = 0.5;
-	for (i=1; i<nmax; i++)
+	for (i=1; i<=nmax; i++)
 	{
 		long double x = ((double) i)/((double) nmax);
 
@@ -204,7 +224,7 @@ int main ()
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 #endif
 
-#define C_DIVISOR_SERIES
+// #define C_DIVISOR_SERIES
 #ifdef C_DIVISOR_SERIES
 		long double y = c_divisor_series (x);
 		long double z = c_erdos_series (x);
@@ -223,6 +243,16 @@ int main ()
 // #define MOEBIUS_SERIES
 #ifdef MOEBIUS_SERIES
 		long double y = moebius_series (x);
+
+		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
+		fflush (stdout);
+#endif
+
+#define MANGOLDT_SERIES
+#ifdef MANGOLDT_SERIES
+		x *= 0.01;
+		long double y = mangoldt_series (x);
+		// y *= sqrt(x);
 
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 		fflush (stdout);

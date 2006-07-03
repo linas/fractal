@@ -6,8 +6,6 @@
 # set term png small color
 set term png small
 set out 'series.png'
-# set term epslatex 
-# set out 'series.eps'
 
 # set data style linespoints
 set data style lines
@@ -34,9 +32,14 @@ set data style lines
 # set ylabel "(1-x) sum_n x^n/(1-2^-n)"
 # plot "series.dat" using 2:3 title ""
 
-set title "Moebius Series"
-set xlabel "x"
-set ylabel "sum_n mu(n) x^n"
+# set title "Moebius Series"
+# set xlabel "x"
+# set ylabel "sum_n mu(n) x^n"
+# plot "series.dat" using 2:3 title ""
+
+set title "Mangoldt Series"
+set xlabel "y"
+set ylabel "sum_n (Lambda(n)-1) exp (-ny)"
 plot "series.dat" using 2:3 title ""
 
 # set yrange [0:]
