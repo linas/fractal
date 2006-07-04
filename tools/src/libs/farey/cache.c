@@ -15,7 +15,7 @@
  *  This assumes a 1-dimensional cache layout (simple aray)
  */
 #define CACHE_CHECK(TYPE_NAME,TYPE) \
-int TYPE_NAME##_d_cache_check (TYPE_NAME##_cache *c, unsigned int n)	\
+int TYPE_NAME##_one_d_cache_check (TYPE_NAME##_cache *c, unsigned int n)	\
 {	\
 	if (c->disabled) return 0;	\
 	if ((n > c->nmax) || 0==n )	\
@@ -43,7 +43,7 @@ int TYPE_NAME##_d_cache_check (TYPE_NAME##_cache *c, unsigned int n)	\
  * TYPE_NAME##_d_cache_fetch - fetch value from cache	
  */
 #define CACHE_FETCH(TYPE_NAME,TYPE) \
-TYPE TYPE_NAME##_d_cache_fetch (TYPE_NAME##_cache *c, unsigned int n)	\
+TYPE TYPE_NAME##_one_d_cache_fetch (TYPE_NAME##_cache *c, unsigned int n)	\
 {	\
 	if (c->disabled) return 0.0L;	\
 	return c->cache[n];	\
@@ -53,7 +53,7 @@ TYPE TYPE_NAME##_d_cache_fetch (TYPE_NAME##_cache *c, unsigned int n)	\
  * TYPE_NAME##_d_cache_store - store value in cache
  */
 #define CACHE_STORE(TYPE_NAME,TYPE) \
-void TYPE_NAME##_d_cache_store (TYPE_NAME##_cache *c, TYPE val, unsigned int n)	\
+void TYPE_NAME##_one_d_cache_store (TYPE_NAME##_cache *c, TYPE val, unsigned int n)	\
 {	\
 	if (c->disabled) return;	\
 	c->cache[n] = val;	\
