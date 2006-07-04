@@ -240,7 +240,7 @@ int liouville_omega (int n)
 	int i;
 	int acc = 2;
 
-	if (1 >= n) return 1;
+	if (1 >= n) return 0;
 	if (2 >= n) return 1;
 
 	INIT_PRIME_SIEVE(n);
