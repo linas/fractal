@@ -177,6 +177,7 @@ long double mangoldt_lambda_indexed (int n)
 	}
 	else
 	{
+		ui_one_d_cache_check (&mangoldt_pow_cache, n);
 		while (1)
 		{
 			man_last_val++;
@@ -201,6 +202,7 @@ unsigned int mangoldt_lambda_index_point (int n)
 	}
 	else
 	{
+		ld_one_d_cache_check (&mangoldt_idx_cache, n);
 		while (1)
 		{
 			man_last_val++;
