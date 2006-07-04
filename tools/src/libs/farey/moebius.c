@@ -122,7 +122,7 @@ int moebius_mu (int n)
 
 long double mangoldt_lambda (int n)
 {
-	if (1 >= n) return 0;
+	if (1 >= n) return 0.0L;
 	
 	INIT_PRIME_SIEVE(n);
 
@@ -142,7 +142,7 @@ long double mangoldt_lambda (int n)
 		if (k*k > n) return logl ((long double) n);
 	}
 
-	return 0;
+	return 0.0L;
 }
 
 /* ====================================================== */
@@ -159,6 +159,35 @@ long double mangoldt_lambda_cached (int n)
 		long double val = mangoldt_lambda(n);
 		ld_one_d_cache_store (&mangoldt_cache, val, n);
 		return val;
+	}
+}
+
+/* ====================================================== */
+
+DECLARE_LD_CACHE (mangoldt_idx_cache);
+static int man_last_val =1;
+static int man_last_idx =0;
+	
+long double mangoldt_lambda_indexed (int n)
+{
+	if(ld_one_d_cache_check (&mangoldt_idx_cache, n))
+	{
+		return ld_one_d_cache_fetch(&mangoldt_idx_cache, n);
+	}
+	else
+	{
+		while (1)
+		{
+			man_last_val++;
+			long double val = mangoldt_lambda(man_last_val);
+			if (val != 0.0L)
+			{
+				man_last_idx++;
+				ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
+				if (n == man_last_idx) 
+					return val;
+			}
+		}
 	}
 }
 

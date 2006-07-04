@@ -32,6 +32,11 @@ int liouville_lambda (int n);
 long double mangoldt_lambda (int n);
 long double mangoldt_lambda_cached (int n);
 
+/** The indexed von Mangoldt Lambda function 
+ *  Returns the n'th non-zero von Mangoldt value
+ *  */
+long double mangoldt_lambda_indexed (int n);
+
 #ifdef   __cplusplus
 };
 #endif
