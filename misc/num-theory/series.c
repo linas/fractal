@@ -192,6 +192,26 @@ long double mangoldt_series (long double y)
 	return -acc;
 }
 
+long double mangoldt_idx_series (long double y)
+{
+	long double acc = 0.0;
+
+	int n=1;
+	while (1)
+	{
+		unsigned int pnt = mangoldt_lambda_index_point (n);
+		long double xp = expl (-y*pnt);
+		long double term = xp * (mangoldt_lambda_indexed(n) - 1.0);
+		acc += term;
+
+		if (fabs(term) < 1.0e-16*fabs(acc)) break;
+		n++;
+	}
+	printf ("last index=%d\n");
+
+	return -acc;
+}
+
 int main ()
 {
 	int i;
