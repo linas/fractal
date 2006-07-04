@@ -13,19 +13,22 @@
 extern "C" {
 #endif
 
-/* classic Moebius mu function */
+/** classic Moebius mu function */
 int moebius_mu (int n);
 
-/* Mertens function, summation of mu */
+/** Mertens function, summatory function of mu */
 int mertens_m (int n);
 
-/* The number of prime factors of a number */
+/** The number of prime factors of a number */
 int liouville_omega (int n);
 
-/* The Liouville lambda function */
+/** The Liouville lambda function */
 int liouville_lambda (int n);
 
-/* The Mangoldt lambda function */
+/** The von Mangoldt Lambda function 
+ *  Returns von Mangoldt Lambda for n, which is
+ *  log(p) if n is a power of prime p, otherwise 
+ *  returns zero. */
 long double mangoldt_lambda (int n);
 long double mangoldt_lambda_cached (int n);
 

@@ -24,7 +24,7 @@ static int sieve_max = 0;
 		init_prime_sieve(N); \
 	}
 
-/* initialize and fill in a prime-number sieve */
+/* Initialize and fill in a prime-number sieve */
 static void
 init_prime_sieve (int prod)
 {
@@ -48,7 +48,7 @@ init_prime_sieve (int prod)
 	pos = sieve_max+1;
 	nstart = sieve[sieve_max] + 2;
 
-	/* dumb algo, test all odd numbers against known primes */
+	/* dumb algo, brute-force test all odd numbers against known primes */
 	for (n=nstart; n<=max; n+=2)
 	{
 		for (j=1; ; j++)
@@ -91,7 +91,7 @@ int moebius_mu (int n)
 	
 	INIT_PRIME_SIEVE(n);
 
-	/* implement the dumb/simple moebius algo */
+	/* Implement the dumb/simple moebius algo */
 	int cnt = 0;
 	int i;
 	for (i=0; ; i++)
