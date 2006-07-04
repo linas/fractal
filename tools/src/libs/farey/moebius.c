@@ -241,7 +241,7 @@ int liouville_omega (int n)
 	int acc = 2;
 
 	if (1 >= n) return 1;
-	if (2 >= n) return 2;
+	if (2 >= n) return 1;
 
 	INIT_PRIME_SIEVE(n);
 
@@ -261,7 +261,7 @@ int liouville_omega (int n)
 		if (d*d > n) break;
 	}
 
-	return acc;
+	return acc-1;
 }
 
 int liouville_lambda (int n)
