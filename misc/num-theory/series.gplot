@@ -4,8 +4,11 @@
 # set out 'read.gif'
 
 # set term png small color
-set term png small
-set out 'series.png'
+# set term png small
+# set out 'series.png'
+
+set term svg
+set out 'series.svg'
 
 # set data style linespoints
 set data style lines
@@ -37,10 +40,20 @@ set data style lines
 # set ylabel "sum_n mu(n) x^n"
 # plot "series.dat" using 2:3 title ""
 
-set title "Mangoldt Series"
-set xlabel "y"
-set ylabel "sum_n (Lambda(n)-1) exp (-ny)"
-plot "series.dat" using 2:3 title ""
+unset zeroaxis
+set xtics border
+# set ytics axis
+set ytics border
+
+set bmargin 5
+set lmargin 12
+
+set xrange [0:0.00002]
+
+set title "von Mangoldt Exponential Series"
+set xlabel "y"  0,0
+set ylabel "sum_n (Lambda(n)-1) exp (-ny)" 1.0
+plot "series.dat" using 2:(-$3) title ""  with lines linewidth 2
 
 # set yrange [0:]
 

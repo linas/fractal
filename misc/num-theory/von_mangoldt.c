@@ -31,11 +31,12 @@ int main ()
 {
 	int i;
 
-	int nmax = 100;
+	int nmax = 1000000;
 	
 	long double sum = 0.0;
 	long double mert = 0.0;
-	int scale = 1;
+	long double smooth = 0.0;
+	int scale = 100;
 
 	long double offset = log(M_PI);
 	// long double offset = 0.0;
@@ -43,13 +44,16 @@ int main ()
 	{
 		// sum = chebyshev (i);
 		sum += mangoldt_lambda(i);
+		smooth += sum;
 		// mert += moebius_mu(i);
 
 		if (0 == i%scale) 
 		{
 			long double lead = sum - i+offset;
+			long double sec = i;
+			sec = smooth-0.5L*sec*sec;
 			// long double lead = sum/mert;
-			printf ("%d	%24.18Lg\n", i, lead);
+			printf ("%d	%24.18Lg\t%24.18Lg\n", i, lead, sec);
 			fflush (stdout);
 			// if (i > scale*300) scale *= 2;
 		}

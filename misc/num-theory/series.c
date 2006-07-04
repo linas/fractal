@@ -13,8 +13,8 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "divisor.h"
 #include "gcf.h"
+#include "modular.h"
 #include "moebius.h"
 #include "totient.h"
 
@@ -212,7 +212,7 @@ long double mangoldt_idx_series (long double y)
 		term = xp * term;
 		// printf ("index=%d pnt=%d term=%Lg acc=%Lg\n", n, pnt, term, acc);
 		acc += term;
-		if (fabs(term) < 1.0e-16*fabs(acc)) break;
+		if (fabs(term) < 1.0e-19*fabs(acc)) break;
 
 		if (2 == pnt)
 		{
@@ -221,7 +221,14 @@ long double mangoldt_idx_series (long double y)
 		}
 		else
 		{
-			term = 1.0L - expl(-y*(pnt-last_pnt));
+			// term = expl(-y*(pnt-last_pnt));
+			term=1.0L;
+			int i;
+			for (i=0; i<pnt-last_pnt; i++)
+			{
+				term *= x;
+			}
+			term = 1.0L - term;
 			term *= last_xp*ox;
 			acc -= term;
 			//printf ("---dex=%d last_xp=%Lg term=%Lg acc=%Lg\n", n, last_xp, term, acc);
@@ -230,7 +237,7 @@ long double mangoldt_idx_series (long double y)
 		last_pnt = pnt;
 		n++;
 	}
-	// printf ("last index=%d pnt=%d\n", n, pnt);
+	fprintf (stderr, "last index=%d pnt=%d\n", n, pnt);
 
 	return -acc;
 }
@@ -239,7 +246,7 @@ int main ()
 {
 	int i;
 
-	int nmax = 410;
+	int nmax = 2410;
 
 	long double tp = 0.5;
 	// for (i=1; i<=nmax; i++)
@@ -294,11 +301,11 @@ int main ()
 
 #define MANGOLDT_SERIES
 #ifdef MANGOLDT_SERIES
-		x *= 0.00001;
+		x *= 0.00002;
 		// long double y = mangoldt_series (x);
 		long double y = mangoldt_idx_series (x);
-		y -= 0.337877;
-		y += 0.898*x;
+		// y -= 0.337877;
+		// y += 0.898*x;
 
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 		fflush (stdout);
