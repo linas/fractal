@@ -36,6 +36,7 @@ long double mangoldt_lambda_cached (int n);
  *  Returns the n'th non-zero von Mangoldt value
  *  */
 long double mangoldt_lambda_indexed (int n);
+unsigned int mangoldt_lambda_index_pnt (int n);
 
 #ifdef   __cplusplus
 };
