@@ -178,7 +178,7 @@ long double mangoldt_series (long double y)
 
 	long double x = expl (-y);
 	long double xp = 1.0;
-	int n=1;
+	int n=2;
 	while (1)
 	{
 		long double term = xp * (mangoldt_lambda_cached(n) - 1.0);
@@ -194,20 +194,24 @@ long double mangoldt_series (long double y)
 
 long double mangoldt_idx_series (long double y)
 {
-	long double acc = 0.0;
+	long double acc = 0.0L;
 
 	int n=1;
+	unsigned int pnt;
+	unsigned int last_pnt;
 	while (1)
 	{
-		unsigned int pnt = mangoldt_lambda_index_point (n);
+		pnt = mangoldt_lambda_index_point (n);
 		long double xp = expl (-y*pnt);
-		long double term = xp * (mangoldt_lambda_indexed(n) - 1.0);
+		long double term = mangoldt_lambda_indexed(n);
+		term = xp * (term - 1.0L);
+// printf ("index=%d pnt=%d term=%Lg acc=%Lg\n", n, pnt, term, acc);
 		acc += term;
 
 		if (fabs(term) < 1.0e-16*fabs(acc)) break;
 		n++;
 	}
-	printf ("last index=%d\n");
+	// printf ("last index=%d pnt=%d\n", n, pnt);
 
 	return -acc;
 }
@@ -271,9 +275,10 @@ int main ()
 
 #define MANGOLDT_SERIES
 #ifdef MANGOLDT_SERIES
-		x *= 0.00001;
+		x *= 0.0001;
 		long double y = mangoldt_series (x);
-		// y *= sqrt(x);
+		y -= 0.337877;
+		y += 0.22210*x;
 
 		printf ("%d	%Lg	%26.18Lg\n", i, x, y);
 		fflush (stdout);
