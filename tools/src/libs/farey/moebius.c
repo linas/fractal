@@ -165,6 +165,7 @@ long double mangoldt_lambda_cached (int n)
 /* ====================================================== */
 
 DECLARE_LD_CACHE (mangoldt_idx_cache);
+DECLARE_UI_CACHE (mangoldt_pow_cache);
 static int man_last_val =1;
 static int man_last_idx =0;
 	
@@ -184,8 +185,33 @@ long double mangoldt_lambda_indexed (int n)
 			{
 				man_last_idx++;
 				ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
+				ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
 				if (n == man_last_idx) 
 					return val;
+			}
+		}
+	}
+}
+
+unsigned int mangoldt_lambda_index_point (int n)
+{
+	if(ui_one_d_cache_check (&mangoldt_pow_cache, n))
+	{
+		return ui_one_d_cache_fetch(&mangoldt_pow_cache, n);
+	}
+	else
+	{
+		while (1)
+		{
+			man_last_val++;
+			long double val = mangoldt_lambda(man_last_val);
+			if (val != 0.0L)
+			{
+				man_last_idx++;
+				ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
+				ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
+				if (n == man_last_idx) 
+					return man_last_val;
 			}
 		}
 	}
