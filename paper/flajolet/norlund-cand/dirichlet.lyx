@@ -215,9 +215,93 @@ d_{n}=\sum_{m=1}^{\infty}a_{m}\left[\left(1-\frac{1}{m}\right)^{n}-1+\frac{n}{m}
 \end_inset 
 
 .
- All of the number-theoretic sums mentioned above satisfy this.
+ All of the number-theoretic sums mentioned previously satisfy this.
  
 \layout Standard
 
 Define 
+\begin_inset Formula \[
+D(x)=\sum_{m=1}^{\infty}a_{m}\left[e^{-x/m}-1+\frac{x}{m}\right]\]
+
+\end_inset 
+
+ which has similar convergence properties to the previous sum.
+ The estimate for the behvaiour of this sum proceeds essentially unmodified,
+ although I present some additional detail here to make this clear.
+ 
+\layout Standard
+
+The aim is to show that 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+ and 
+\begin_inset Formula $D(x)$
+\end_inset 
+
+ are substaintially similar, and that in particular, both quantities have
+ the same asymptotoc behaviour for 
+\begin_inset Formula $n\to\infty$
+\end_inset 
+
+ (that is, 
+\begin_inset Formula $x\to\infty$
+\end_inset 
+
+).
+ This will be done by comparing the two directly.
+ Let 
+\begin_inset Formula $m_{0}=n^{1-\delta}$
+\end_inset 
+
+ for some 
+\begin_inset Formula $\delta$
+\end_inset 
+
+ small but fixed.
+ Write
+\begin_inset Formula \[
+d_{n}-D(n)=\sum_{m<m_{0}}+\sum_{m\ge m_{0}}a_{m}e^{-n/m}\left[e^{n/m+n\log(1-1/m)}-1\right]\]
+
+\end_inset 
+
+ For large 
+\begin_inset Formula $m$
+\end_inset 
+
+, namely, those appearing in the second sum, one easily finds 
+\begin_inset Formula \[
+e^{n/m+n\log(1-1/m)}-1=\mathcal{O}\left(n/m^{2}\right)\]
+
+\end_inset 
+
+ as 
+\begin_inset Formula $m\to\infty$
+\end_inset 
+
+ with 
+\begin_inset Formula $n$
+\end_inset 
+
+ held fixed.
+ From this, one obtains 
+\begin_inset Formula \[
+\sum_{m\ge m_{0}}a_{m}e^{-n/m}\left[e^{n/m+n\log(1-1/m)}-1\right]=\mathcal{O}\left(n^{2\delta-1}\right)\]
+
+\end_inset 
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset 
+
+.
+ This result requires no additional constraints on the 
+\begin_inset Formula $a_{m}$
+\end_inset 
+
+ other than the weak condition already given.
+ 
+\layout Standard
+
+For the other sum, one has
 \the_end
