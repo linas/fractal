@@ -40,10 +40,10 @@ I worked through the second half of the last theorem in greater detail.
  I suppose you know this already, as it is hinted at in the paper, but not
  stated flat-out.
  I think it should be made more obvious, or stated more directly.
- The changes needed to make the more general statement are surprisinngly
+ The changes needed to make the more general statement are surprisingly
  minimal (assuming I haven't made a mistake).
  Below follow some notes and calculations that suggest how the second half
- of the proof could be modified/generlized.
+ of the proof could be modified/generalized.
  
 \layout Standard
 
@@ -66,6 +66,12 @@ Selberg class
  the definition of the class requires no math beyond generic complex analysis.
  Ideally, this proof draws all its support from the definition of that class...
  
+\layout Standard
+
+Also: regarding the second part of the proof, I note that we only prove
+ RH for the left-hand side of the critical strip; the proof makes no statements
+ about the right hand side.
+ Presumably this is not hard to fix up, but still, it shouldn't be assumed.
 \layout Section*
 
 Review of Dirichlet Series
@@ -75,7 +81,7 @@ Much of the proof depends on having
 \begin_inset Formula $\zeta(s)$
 \end_inset 
 
- in the denominator, and there are many Dirichlet series that acheive this.
+ in the denominator, and there are many Dirichlet series that achieve this.
  The canonical one, involving the Mobius function is
 \layout Standard
 
@@ -128,11 +134,11 @@ One may construct in a very straightforward way the Dirichlet series for
 \end_inset 
 
 .
- These can be constructed by a faily trival application of Dirichlet convolution
-, together with the Mobius inversion formula.
+ These can be constructed by a fairly trivial application of Dirichlet convoluti
+on, together with the Mobius inversion formula.
  In short, one has an old, general theorem that
 \begin_inset Formula \[
-\sum_{n=1}^{\infty}\frac{(f*g)(n)}{n^{s}}=\sum_{n=1}^{\infty}\frac{f(n)}{n^{s}}\;\;\sum_{m=1}^{\infty}\frac{g(m)}{m^{s}}\]
+\sum_{n=1}^{\infty}\frac{(f*g)(n)}{n^{s}}=\sum_{n=1}^{\infty}\frac{f(n)}{n^{s}}\;\sum_{m=1}^{\infty}\frac{g(m)}{m^{s}}\]
 
 \end_inset 
 
@@ -162,12 +168,11 @@ One may construct in a very straightforward way the Dirichlet series for
 \begin_inset Formula $g(1)\ne1$
 \end_inset 
 
-), one may mulltiply and divide Dirichlet series with impunity, more or
- less.
+), one may multiply and divide Dirichlet series with impunity, more or less.
  
 \layout Standard
 
-I havent yet seen a way of building 
+I haven't yet seen a way of building 
 \begin_inset Formula $1/\zeta(\alpha s+\beta)$
 \end_inset 
 
@@ -179,7 +184,7 @@ As regards to the proof, perhaps the most important generalization is that
 \begin_inset Formula $L$
 \end_inset 
 
--functions, since these are the onces for which the GRH applies.
+-functions, since these are the ones for which the GRH applies.
  Specifically, one has 
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{\mu(n)\chi(n)}{n^{s}}=\frac{1}{L(s,\chi)}\]
@@ -218,7 +223,7 @@ f(s)=\sum_{n=1}^{\infty}\frac{a_{n}}{n^{s}}\]
 .
  Defining 
 \begin_inset Formula \[
-d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\, f(k)\]
+d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\, f(k)\]
 
 \end_inset 
 
@@ -232,7 +237,7 @@ d_{n}=\sum_{m=1}^{\infty}a_{m}\left[\left(1-\frac{1}{m}\right)^{n}-1+\frac{n}{m}
 \begin_inset Formula $a_{m}n^{2}/m^{2}$
 \end_inset 
 
- and so convergence is gaurenteed for 
+ and so convergence is guaranteed for 
 \begin_inset Formula $a_{m}=\mathcal{O}\left(m^{2-\epsilon}\right)$
 \end_inset 
 
@@ -257,7 +262,7 @@ D(x)=\sum_{m=1}^{\infty}a_{m}\left[e^{-x/m}-1+\frac{x}{m}\right]\]
 \end_inset 
 
  which has similar convergence properties to the previous sum.
- The estimate for the behvaiour of this sum proceeds essentially unmodified,
+ The estimate for the behavior of this sum proceeds essentially unmodified,
  although I present some additional detail here to make this clear.
  
 \layout Standard
@@ -270,8 +275,8 @@ The aim is to show that
 \begin_inset Formula $D(x)$
 \end_inset 
 
- are substaintially similar, and that in particular, both quantities have
- the same asymptotoc behaviour for 
+ are substantially similar, and that in particular, both quantities have
+ the same asymptotic behavior for 
 \begin_inset Formula $n\to\infty$
 \end_inset 
 
@@ -366,7 +371,7 @@ To show that
 \begin_inset Formula $D(x)$
 \end_inset 
 
- have an identical asymptotic behvaiour for non-integer real 
+ have an identical asymptotic behavior for non-integer real 
 \begin_inset Formula $x$
 \end_inset 
 
@@ -389,7 +394,7 @@ D^{\prime}(x)=\mathcal{O}\left(n^{2\delta-1}\right)+\mathcal{O}(1)\sum_{m<m_{0}}
 
  At this point I notice an error in my notes, and, as it is late at night,
  I'd rather not guess my way out of it.
- I don't beleive its serious.
+ I don't believe its serious.
  The remainder of the proof, regarding the Mellin transform goes through
  unmodified.
  
@@ -425,13 +430,13 @@ Ramanujan conjecture
 \begin_inset Formula $r$
 \end_inset 
 
-'s are easily accomadated.
+'s are easily accommodated.
  Simply changing the definition to
 \layout Standard
 
 
 \begin_inset Formula \[
-d_{n}=\sum_{k=n_{0}}^{n}(-1)^{k}\left({n\atop k}\right)\, f(k)\]
+d_{n}=\sum_{k=n_{0}}^{n}(-1)^{k}\left({{n\atop k}}\right)\, f(k)\]
 
 \end_inset 
 
@@ -455,7 +460,7 @@ Poisson-Mellin-Newton
 \begin_inset Quotes erd
 \end_inset 
 
- cycle, there appears to be a simialr cycle, connection the so-called 
+ cycle, there appears to be a similar cycle, connection the so-called 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -475,10 +480,26 @@ Perron's formula
  expressing a finite sum as a Mellin transform.
  There appear to be various bounds on finite sums that are known to number
  theory, and I am hoping that by means of Perron's formula, these can be
- converted over to the asymptotic behaviour of the Norlund-Rice integral
+ converted over to the asymptotic behavior of the Norlund-Rice integral
  that we desire.
  Maybe.
  But this is only after mulling things over while walking the dog, it might
  not work.
  
+\layout Standard
+
+On further review of the Selberg class, it defines a lot of ingredients
+ that seem to be necessary in order for GRH to hold.
+ So far, we've used only one of these.
+ Perhaps the others come into play in this half of the proof, which might
+ suggest that this half of the proof is much harder?
+\layout Section*
+
+Discussion
+\layout Standard
+
+Its not clear how Li's criterion impacts on the Selberg class, and vice-versa.
+ It may be an edifying exercise to connect the two together.
+ Alternately, I'd like to translate Li's criterion to this proof, but don't
+ quite see how.
 \the_end
