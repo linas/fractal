@@ -44,6 +44,29 @@ I worked through the second half of the last theorem in greater detail.
  Below follow some notes and calculations that suggest how the second half
  of the proof could be modified/generlized.
  
+\layout Standard
+
+One thing I haven't attempted is to run the proof for a series for which
+ RH is obviously false, and see how the proof breaks down.
+ I'd very much like to do that soon.
+\layout Standard
+
+There is a whole class of Dirichlet series for which the RH is conjectured
+ to hold, this is the so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+Selberg class
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ See the Wikipedia article for a quick overview; the definition of the class
+ requires no math beyond generic complex analysis.
+ Disconcertingly, this proof draws little or no support from the definition
+ of that class, and this is ...
+ disconcerting.
+ 
 \layout Section*
 
 Review of Dirichlet Series
@@ -303,5 +326,104 @@ e^{n/m+n\log(1-1/m)}-1=\mathcal{O}\left(n/m^{2}\right)\]
  
 \layout Standard
 
-For the other sum, one has
+For the other sum, one has 
+\begin_inset Formula \[
+\sum_{m<m_{0}}a_{m}e^{-n/m}\left[e^{n/m+n\log(1-1/m)}-1\right]=\mathcal{O}\left(1\right)\sum_{m<m_{0}}a_{m}e^{-n/m}=\mathcal{O}\left(e^{-n/m_{0}}\right)\sum_{m<m_{0}}a_{m}\]
+
+\end_inset 
+
+ The remaining sum is at most quadratic in 
+\begin_inset Formula $m_{0}$
+\end_inset 
+
+, and is dominated by the exponential term 
+\begin_inset Formula $e^{-n/m_{0}}=e^{-n^{\delta}}$
+\end_inset 
+
+.
+ This one concludes that
+\begin_inset Formula \[
+d_{n}-D(n)=\mathcal{O}\left(n^{2\delta-1}\right)\]
+
+\end_inset 
+
+ Again, this result requires no particularly special assumptions
+\layout Standard
+
+To show that 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+ and 
+\begin_inset Formula $D(x)$
+\end_inset 
+
+ have an identical asymptotic behvaiour for non-integer real 
+\begin_inset Formula $x$
+\end_inset 
+
+, one may consider the derivative 
+\begin_inset Formula $D^{\prime}(x)$
+\end_inset 
+
+ and show that it is suitably bounded.
+ Proceeding along the same lines as before, and starting with 
+\begin_inset Formula \[
+D^{\prime}(x)=-\sum_{m=1}^{\infty}\frac{a_{m}}{m}\left[e^{-x/m}-1\right]\]
+
+\end_inset 
+
+one deduces that 
+\begin_inset Formula \[
+D^{\prime}(x)=\mathcal{O}\left(n^{2\delta-1}\right)+\mathcal{O}(1)\sum_{m<m_{0}}\frac{a_{m}}{m}\]
+
+\end_inset 
+
+ At this point I notice an error in my notes, and, as it is late at night,
+ I'd rather not guess my way out of it.
+ I don't beleive its serious.
+ The remainder of the proof, regarding the Mellin transform goes through
+ unmodified.
+ 
+\layout Section*
+
+Proof in the other direction
+\layout Standard
+
+I have no particular results going in the other direction.
+ I toyed with one particular route, but haven't done much with it.
+ Just as you have shown the so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+Poisson-Mellin-Newton
+\begin_inset Quotes erd
+\end_inset 
+
+ cycle, there appears to be a simialr cycle, connection the so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+Riesz means
+\begin_inset Quotes erd
+\end_inset 
+
+ defined by Hardy & Littlewood in the paper you sent me, with the so-called
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+Perron's formula
+\begin_inset Quotes erd
+\end_inset 
+
+ expressing a finite sum as a Mellin transform.
+ There appear to be various bounds on finite sums that are known to number
+ theory, and I am hoping that by means of Perron's formula, these can be
+ converted over to the asymptotic behaviour of the Norlund-Rice integral
+ that we desire.
+ Maybe.
+ But this is only after mulling things over while walking the dog, it might
+ not work.
+ 
 \the_end
