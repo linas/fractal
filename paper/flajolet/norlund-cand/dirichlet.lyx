@@ -44,6 +44,9 @@ I worked through the second half of the last theorem in greater detail.
  Below follow some notes and calculations that suggest how the second half
  of the proof could be modified/generlized.
  
+\layout Section*
+
+Review of Dirichlet Series
 \layout Standard
 
 Much of the proof depends on having 
@@ -84,7 +87,12 @@ Much of the proof depends on having
 
 \end_inset 
 
- One may construct in a very straightforward way the Dirichlet series for
+ There are a dozen others that can be readily found in introductory textbooks
+ and/or the web.
+ 
+\layout Standard
+
+One may construct in a very straightforward way the Dirichlet series for
  
 \begin_inset Formula $1/\zeta(s-a)$
 \end_inset 
@@ -120,12 +128,96 @@ Much of the proof depends on having
 
 :
 \begin_inset Formula \[
-(f*g)(n)=\sum_{d|n}\]
+(f*g)(n)=\sum_{d|n}f(d)g\left(\frac{n}{d}\right)\]
 
 \end_inset 
 
- Sin
+ Since Dirichlet convolution is invertible whenever 
+\begin_inset Formula $f(1)\ne1$
+\end_inset 
+
+ (and/or 
+\begin_inset Formula $g(1)\ne1$
+\end_inset 
+
+), one may mulltiply and divide Dirichlet series with impunity, more or
+ less.
+ 
 \layout Standard
 
-I havent
+I havent yet seen a way of building 
+\begin_inset Formula $1/\zeta(\alpha s+\beta)$
+\end_inset 
+
+, or more complicated expressions.
+\layout Standard
+
+As regards to the proof, perhaps the most important generalization is that
+ for the Dirichlet 
+\begin_inset Formula $L$
+\end_inset 
+
+-functions, since these are the onces for which the GRH applies.
+ Specifically, one has 
+\begin_inset Formula \[
+\sum_{n=1}^{\infty}\frac{\mu(n)\chi(n)}{n^{s}}=\frac{1}{L(s,\chi)}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\chi$
+\end_inset 
+
+ is the Dirichlet character.
+ 
+\layout Section*
+
+Proof in one direction
+\layout Standard
+
+Based on the above, I suggest modifying the proof so that, in one direction,
+ it runs as follows.
+\layout Standard
+
+Consider the general Dirichlet series 
+\begin_inset Formula \[
+f(s)=\sum_{n=1}^{\infty}\frac{a_{n}}{n^{s}}\]
+
+\end_inset 
+
+ for some arithmetic function 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+, for example, 
+\begin_inset Formula $a_{n}=\mu(n)$
+\end_inset 
+
+.
+ Defining 
+\begin_inset Formula \[
+d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\, f(k)\]
+
+\end_inset 
+
+ one finds immediately that 
+\begin_inset Formula \[
+d_{n}=\sum_{m=1}^{\infty}a_{m}\left[\left(1-\frac{1}{m}\right)^{n}-1+\frac{n}{m}\right]\]
+
+\end_inset 
+
+ The leading order of a term in this sum is 
+\begin_inset Formula $a_{m}n^{2}/m^{2}$
+\end_inset 
+
+ and so convergence is guarenteed for 
+\begin_inset Formula $a_{m}=\mathcal{O}\left(m^{2-\epsilon}\right)$
+\end_inset 
+
+.
+ All of the number-theoretic sums mentioned above satisfy this.
+ 
+\layout Standard
+
+Define 
 \the_end
