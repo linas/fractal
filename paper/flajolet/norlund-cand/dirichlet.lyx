@@ -37,8 +37,9 @@ Philippe,
 
 I worked through the second half of the last theorem in greater detail.
  It works for a more general class of Dirichlet series.
- I suppose you know this already, but this is not obvious from reading the
- paper, and I think it should be made more obvious, or stated more directly.
+ I suppose you know this already, as it is hinted at in the paper, but not
+ stated flat-out.
+ I think it should be made more obvious, or stated more directly.
  The changes needed to make the more general statement are surprisinngly
  minimal (assuming I haven't made a mistake).
  Below follow some notes and calculations that suggest how the second half
@@ -61,11 +62,9 @@ Selberg class
 \end_inset 
 
 .
- See the Wikipedia article for a quick overview; the definition of the class
- requires no math beyond generic complex analysis.
- Disconcertingly, this proof draws little or no support from the definition
- of that class, and this is ...
- disconcerting.
+ See the Wikipedia article for a quick overview (I wrote that article!);
+ the definition of the class requires no math beyond generic complex analysis.
+ Ideally, this proof draws all its support from the definition of that class...
  
 \layout Section*
 
@@ -233,13 +232,22 @@ d_{n}=\sum_{m=1}^{\infty}a_{m}\left[\left(1-\frac{1}{m}\right)^{n}-1+\frac{n}{m}
 \begin_inset Formula $a_{m}n^{2}/m^{2}$
 \end_inset 
 
- and so convergence is guarenteed for 
+ and so convergence is gaurenteed for 
 \begin_inset Formula $a_{m}=\mathcal{O}\left(m^{2-\epsilon}\right)$
 \end_inset 
 
 .
  All of the number-theoretic sums mentioned previously satisfy this.
- 
+ More generally, the 
+\begin_inset Quotes eld
+\end_inset 
+
+Ramanujan conjecture
+\begin_inset Quotes erd
+\end_inset 
+
+ states that any series obeying RH will satisfy a similar bound; this is
+ discussed further below.
 \layout Standard
 
 Define 
@@ -385,6 +393,53 @@ D^{\prime}(x)=\mathcal{O}\left(n^{2\delta-1}\right)+\mathcal{O}(1)\sum_{m<m_{0}}
  The remainder of the proof, regarding the Mellin transform goes through
  unmodified.
  
+\layout Standard
+
+The only fact about Selberg class functions used in this proof seems to
+ be the so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+Ramanujan conjecture
+\begin_inset Quotes erd
+\end_inset 
+
+, namely, a necessary condition for RH to hold is that 
+\begin_inset Formula $a_{n}=\mathcal{O}\left(n^{r+\epsilon}\right)$
+\end_inset 
+
+ for some real 
+\begin_inset Formula $r$
+\end_inset 
+
+ and any 
+\begin_inset Formula $\epsilon>0$
+\end_inset 
+
+.
+ In the above, it was required that 
+\begin_inset Formula $r<2$
+\end_inset 
+
+, but other 
+\begin_inset Formula $r$
+\end_inset 
+
+'s are easily accomadated.
+ Simply changing the definition to
+\layout Standard
+
+
+\begin_inset Formula \[
+d_{n}=\sum_{k=n_{0}}^{n}(-1)^{k}\left({n\atop k}\right)\, f(k)\]
+
+\end_inset 
+
+ allows for any 
+\begin_inset Formula $r<n_{0}$
+\end_inset 
+
+.
 \layout Section*
 
 Proof in the other direction
