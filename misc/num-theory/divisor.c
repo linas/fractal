@@ -12,7 +12,9 @@
 #include <math.h>
 #include <stdio.h>
 
+#include "harmonic.h"
 #include "modular.h"
+
 
 long double divisor_series (long double x)
 {
@@ -37,10 +39,12 @@ int main ()
 {
 	int i;
 
-	int nmax = 25000;
+	int nmax = 10000;
 	int scale = 10;
 
 	int sum = 0;
+	long double inf = 1.0e100;
+	long double sup = -1.0e100;
 	for (i=1; i<=nmax; i++)
 	// for (i=nmax; i>0; i--)
 	{
@@ -52,13 +56,20 @@ int main ()
 		
 		int d = divisor (i);
 		sum += d;
+		long double del = sum - (i * logl(i) + 2.0*i*(M_GAMMA -1.0L));
+		if (sup < del) sup=del;
+		if (inf > del) inf=del;
 		if (0 == i%scale)
 		{
 			long double lead = sum;
-			lead -= i * logl(i) - i + 0.1544L*i;
+			lead = i * logl(i) + 2.0*i*(M_GAMMA -1.0L);
 			// lead -= i;
 			// int d = sigma (i,1);
-			printf ("%d	%d	%26.18Lg\n", i, d, lead);
+			// printf ("%d	%d	%26.18Lg\n", i, d, sum-lead);
+			printf ("%d	%d	%26.18Lg\n", i, d, inf);
+			printf ("%d	%d	%26.18Lg\n", i, d, sup);
+			inf= 1.0e100;
+			sup=-1.0e100;
 		}
 	}
 }
