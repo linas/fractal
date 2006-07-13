@@ -3,7 +3,6 @@
  *
  * FUNCTION:
  * assorted modular functions.
- * -- divisor arithmetic function
  * -- Weierstrass elliptic function g_2 and g_3 invariants
  * -- modular discriminant.
  * -- Klein j-invariant
@@ -18,17 +17,6 @@ extern "C" {
 #endif
 
 extern int modular_max_terms;
-
-/** Compute the divisor arithmetic function
- *  Returns the number of divisors of n.
- */
-int divisor (int n);
-
-/** Sigma arithmetic series, equals divisor arith series for a=0 
- *  Computes the divisors of n, raises each to the a'th power, and
- *  returns thier sum.
- */
-int sigma (int n, int a);
 
 /* An erdos-borwein-like series sum_n sigma_k(n) x^n/(1-x^n) 
  * Actually computed via a q-series for the divisor function.

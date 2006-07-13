@@ -13,6 +13,17 @@
 extern "C" {
 #endif
 
+/** Compute the divisor arithmetic function
+ *  Returns the number of divisors of n.
+ */
+int divisor (int n);
+
+/** Sigma arithmetic series, equals divisor arith series for a=0 
+ *  Computes the divisors of n, raises each to the a'th power, and
+ *  returns thier sum.
+ */
+int sigma (int n, int a);
+
 /** classic Moebius mu function */
 int moebius_mu (int n);
 

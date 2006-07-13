@@ -3,7 +3,6 @@
  *
  * FUNCTION:
  * assorted modular functions.
- * -- divisor arithmetic function
  * -- Weierstrass elliptic function g_2 and g_3 invariants
  * -- modular discriminant.
  * -- Klein j-invariant
