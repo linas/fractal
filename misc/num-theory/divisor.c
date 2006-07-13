@@ -39,8 +39,8 @@ int main ()
 {
 	int i;
 
-	int nmax = 10000000;
-	int scale = 10000;
+	int nmax = 1000000000;
+	int scale = 1000000;
 
 	int sum = 0;
 	long double inf = 1.0e100;
@@ -56,10 +56,10 @@ int main ()
 		
 		int d = divisor (i);
 		sum += d;
-		long double del = sum - (i * logl(i) + 2.0*i*(M_GAMMA -1.0L));
+		long double del = sum - (i * logl(i) + i*(2.0*M_GAMMA -1.0L));
 		if (sup < del) sup=del;
 		if (inf > del) inf=del;
-		if (0 == i%scale)
+		if (0 == i%scale|| i==1)
 		{
 			long double lead = sum;
 			lead = i * logl(i) + 2.0*i*(M_GAMMA -1.0L);

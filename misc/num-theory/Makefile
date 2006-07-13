@@ -19,7 +19,7 @@ realclean:	clean
 	rm -f $(EXES) 
 
 dist:
-	tar -zcvf num.tgz *.c *.h *.gplot Makefile .cvsignore
+	tar -zcvf num.tgz *.c *.gplot Makefile .cvsignore
 
 .c.o:
 	$(CC) -c -O2 $<
