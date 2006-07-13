@@ -30,7 +30,7 @@ int divisor (int n)
 	int acc = 0;
 	int d;
 
-	for (d=1; d<= n/2+1; d++)
+	for (d=1; d<= n; d++)
 	{
 		if (n%d) continue;
 		acc ++;
@@ -48,7 +48,7 @@ int sigma (int n, int a)
 	int acc = 0;
 	int d;
 
-	for (d=1; d<=n/2+1; d++)
+	for (d=1; d<=n; d++)
 	{
 		if (n%d) continue;
 
