@@ -83,6 +83,58 @@ init_prime_sieve (int prod)
 }
 
 /* ====================================================== */
+/** Compute the divisor arithmetic function
+ *  Returns the number of divisors of n.
+ *  Almost a tail-recursive algorithm.
+ */
+
+int divisor (int n)
+{
+	int d;
+
+	if (1==n) return 1;
+	if (2==n) return 2;
+
+	for (d=2; d<n; d++)
+	{
+		if (n%d) continue;
+		int acc = 2;
+		n /=d;
+		while (0 == n%d)
+		{
+			n /=d;
+			acc ++;
+		}
+		if (1==n) return acc;
+		return acc * divisor (n);
+	}
+
+	return 2;
+}
+
+/** Sigma arithmetic series, equals divisor airth series for a=0 
+ *  Computes the divisors of n, raises each to the a'th power, and
+ *  returns thier sum.
+ */
+int sigma (int n, int a)
+{
+	int acc = 0;
+	int d;
+
+	for (d=1; d<=n; d++)
+	{
+		if (n%d) continue;
+
+		int dp = 1;
+		int ia;
+		for (ia=0; ia<a; ia++) dp *= d;
+		acc += dp;
+	}
+
+	return acc;
+}
+
+/* ====================================================== */
 
 int moebius_mu (int n)
 {
@@ -277,6 +329,45 @@ int liouville_lambda (int n)
 // #define TEST 1
 #ifdef TEST
 
+/** Compute the divisor arithmetic function
+ *  Returns the number of divisors of n.
+ *  Raw brute force algorithm.
+ */
+
+int divisor_simple_algo (int n)
+{
+	int acc = 0;
+	int d;
+
+	for (d=1; d<= n; d++)
+	{
+		if (n%d) continue;
+		acc ++;
+	}
+
+	return acc;
+}
+
+int test_divisor (void)
+{
+	int have_error=0;
+	int i;
+	int nmax=10000;
+	for (i=1; i<=nmax; i++)
+	{
+		if (divisor(i) != divisor_simple_algo(i))
+		{
+			printf ("ERROR: in divisor function at n=%d\n", i); 
+			have_error ++;
+		}
+	}
+	if (0 == have_error)
+	{
+		printf ("PASS: tested divisor function up to %d\n", nmax);
+	}
+	return have_error;
+}
+
 int test_moebius(void)
 {
 	int n;
@@ -347,7 +438,11 @@ int test_omega(void)
 
 int main()
 {
+	test_divisor ();
 	test_omega ();
 	test_moebius ();
 }
-#endif
+#endif /* TEST */
+
+
+/* --------------------------- END OF FILE ------------------------- */
