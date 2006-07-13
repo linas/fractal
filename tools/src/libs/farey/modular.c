@@ -23,9 +23,10 @@ int modular_max_terms=100000;
 
 /** Compute the divisor arithmetic function
  *  Returns the number of divisors of n.
+ *  Raw brute force algorithm.
  */
 
-int divisor (int n)
+int divisor_simple_algo (int n)
 {
 	int acc = 0;
 	int d;
@@ -37,6 +38,35 @@ int divisor (int n)
 	}
 
 	return acc;
+}
+
+/** Compute the divisor arithmetic function
+ *  Returns the number of divisors of n.
+ *  Almost a tail-recursive algorithm.
+ */
+
+int divisor (int n)
+{
+	int d;
+
+	if (1==n) return 1;
+	if (2==n) return 2;
+
+	for (d=2; d<n; d++)
+	{
+		if (n%d) continue;
+		int acc = 2;
+		n /=d;
+		while (0 == n%d)
+		{
+			n /=d;
+			acc ++;
+		}
+		if (1==n) return acc;
+		return acc * divisor (n);
+	}
+
+	return 2;
 }
 
 /** Sigma arithmetic series, equals divisor airth series for a=0 
