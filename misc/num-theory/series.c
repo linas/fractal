@@ -68,6 +68,7 @@ long double divisor_series (long double x)
 	while (1)
 	{
 		long double term = xp * divisor (n);
+printf ("duude n=%d div=%d\n", n, divisor(n));
 		acc += term;
 
 		if (term < 1.0e-20*acc) break;
@@ -265,7 +266,7 @@ int main ()
 #endif
 
 
-// #define DIVISOR_SERIES
+#define DIVISOR_SERIES
 #ifdef DIVISOR_SERIES
 		x = 1.0L-tp;
 		long double y = divisor_series (x);
@@ -299,7 +300,7 @@ int main ()
 		fflush (stdout);
 #endif
 
-#define MANGOLDT_SERIES
+// #define MANGOLDT_SERIES
 #ifdef MANGOLDT_SERIES
 		x *= 0.00002;
 		// long double y = mangoldt_series (x);

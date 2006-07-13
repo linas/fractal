@@ -39,8 +39,8 @@ int main ()
 {
 	int i;
 
-	int nmax = 10000;
-	int scale = 10;
+	int nmax = 10000000;
+	int scale = 10000;
 
 	int sum = 0;
 	long double inf = 1.0e100;
@@ -70,6 +70,7 @@ int main ()
 			printf ("%d	%d	%26.18Lg\n", i, d, sup);
 			inf= 1.0e100;
 			sup=-1.0e100;
+			fflush (stdout);
 		}
 	}
 }

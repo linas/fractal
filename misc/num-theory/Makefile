@@ -30,7 +30,7 @@ dist:
 
 angular:	angular.o $(LIB)/cache.o $(LIB)/gcf.o $(LIB)/modular.o $(LIB)/moebius.o $(LIB)/totient.o
 buddy:	buddy.o
-divisor:	divisor.o $(LIB)/modular.o
+divisor:	divisor.o $(LIB)/cache.o $(LIB)/moebius.o
 hyperg:	hyperg.o $(LIB)/modular.o
 liouville:	liouville.o $(LIB)/cache.o $(LIB)/gcf.o $(LIB)/moebius.o
 mertens:	mertens.o $(LIB)/cache.o $(LIB)/gcf.o $(LIB)/moebius.o
