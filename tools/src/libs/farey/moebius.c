@@ -90,14 +90,20 @@ init_prime_sieve (int prod)
 
 int divisor (int n)
 {
-	int d;
+	int ip;
 
 	if (1==n) return 1;
 	if (2==n) return 2;
 
-	for (d=2; d<n; d++)
+	INIT_PRIME_SIEVE(n);
+
+	for (ip=0; ; ip++)
 	{
+		int d = sieve[ip];
+		
+		if (d*d >n) break;
 		if (n%d) continue;
+
 		int acc = 2;
 		n /=d;
 		while (0 == n%d)
@@ -329,6 +335,8 @@ int liouville_lambda (int n)
 // #define TEST 1
 #ifdef TEST
 
+#include <stdio.h>
+
 /** Compute the divisor arithmetic function
  *  Returns the number of divisors of n.
  *  Raw brute force algorithm.
@@ -441,6 +449,8 @@ int main()
 	test_divisor ();
 	test_omega ();
 	test_moebius ();
+
+	return 1;
 }
 #endif /* TEST */
 
