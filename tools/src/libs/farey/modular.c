@@ -23,25 +23,6 @@ int modular_max_terms=100000;
 
 /** Compute the divisor arithmetic function
  *  Returns the number of divisors of n.
- *  Raw brute force algorithm.
- */
-
-int divisor_simple_algo (int n)
-{
-	int acc = 0;
-	int d;
-
-	for (d=1; d<= n; d++)
-	{
-		if (n%d) continue;
-		acc ++;
-	}
-
-	return acc;
-}
-
-/** Compute the divisor arithmetic function
- *  Returns the number of divisors of n.
  *  Almost a tail-recursive algorithm.
  */
 
@@ -380,5 +361,56 @@ void klein_j_invariant_c (double re_q, double im_q, double *pre, double *pim)
 	*pre = jre;
 	*pim = jim;
 }
+
+// #define TEST
+#ifdef TEST
+/** Compute the divisor arithmetic function
+ *  Returns the number of divisors of n.
+ *  Raw brute force algorithm.
+ */
+
+int divisor_simple_algo (int n)
+{
+	int acc = 0;
+	int d;
+
+	for (d=1; d<= n; d++)
+	{
+		if (n%d) continue;
+		acc ++;
+	}
+
+	return acc;
+}
+
+int divisor_test (void)
+{
+	int have_error=0;
+	int i;
+	int n=10000;
+	for (i=1; i<=n; i++)
+	{
+		if (divisor(i) != divisor_simple_algo(i))
+		{
+			printf ("error in divisor function at n=%d\n", i); 
+			have_error ++;
+		}
+	}
+	return have_error;
+}
+
+int main(int argc, char * argv[])
+{
+	int have_error;
+	have_error = divisor_test();
+	if (0 == have_error)
+	{
+		printf ("All tests passed\n");
+	}
+	return have_error;
+}
+
+#endif /* TEST */
+
 
 /* --------------------------- END OF FILE ------------------------- */
