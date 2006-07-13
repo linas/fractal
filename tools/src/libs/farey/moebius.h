@@ -16,7 +16,7 @@ extern "C" {
 /** Compute the divisor arithmetic function
  *  Returns the number of divisors of n.
  */
-int divisor (int n);
+int divisor (long long int n);
 
 /** Sigma arithmetic series, equals divisor arith series for a=0 
  *  Computes the divisors of n, raises each to the a'th power, and

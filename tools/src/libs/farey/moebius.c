@@ -1,4 +1,3 @@
-
 /*
  * moebius.c
  * 
@@ -7,6 +6,7 @@
  * due to poor-mans factorization algo.
  *
  * Linas Vepstas Jaunuary 2005
+ * Updates July 2006
  */
 
 #include <math.h>
@@ -15,30 +15,37 @@
 #include "moebius.h"
 #include "cache.h"
 
-static int *sieve = NULL;
-static int sieve_size = 0;
-static int sieve_max = 0;
+static unsigned int *sieve = NULL;
+static unsigned int sieve_size = 0;
+static unsigned int sieve_max = 0;
 
 #define INIT_PRIME_SIEVE(N) \
 	if (!sieve || sieve[sieve_max]*sieve[sieve_max] <(N)) {\
 		init_prime_sieve(N); \
 	}
 
-/* Initialize and fill in a prime-number sieve */
+/* Initialize and fill in a prime-number sieve.
+ * Handles primes up to 4 billion (2^32)
+ * long long int should be a 64-bit number 
+ */
 static void
-init_prime_sieve (int prod)
+init_prime_sieve (long long int prod)
 {
-	int n, j;
-	int nstart;
-	int pos;
+	unsigned int n, j;
+	unsigned int nstart;
+	unsigned int pos;
 	
-	if (sieve && sieve[sieve_max]*sieve[sieve_max] > prod) return;
+	if (sieve)
+	{
+		long long int ss = sieve[sieve_max];
+		if (ss*ss > prod) return;
+	}
 		
-	int max = 1000.0+sqrt (prod);
+	unsigned int max = 1000.0+sqrt (prod);
 
 	if (!sieve)
 	{
-		sieve = (int *) malloc (8192*sizeof (int));
+		sieve = (unsigned int *) malloc (8192*sizeof (unsigned int));
 		sieve_size = 8192;
 		sieve_max = 2;
 		sieve[0] = 2;
@@ -66,7 +73,7 @@ init_prime_sieve (int prod)
 				if (pos >= sieve_size)
 				{
 					sieve_size += 8192;
-					sieve = (int *)realloc (sieve, sieve_size * sizeof (int));
+					sieve = (unsigned int *)realloc (sieve, sieve_size * sizeof (unsigned int));
 				}
 				break;
 			}
@@ -88,7 +95,7 @@ init_prime_sieve (int prod)
  *  Almost a tail-recursive algorithm.
  */
 
-int divisor (int n)
+int divisor (long long int n)
 {
 	int ip;
 
@@ -99,7 +106,7 @@ int divisor (int n)
 
 	for (ip=0; ; ip++)
 	{
-		int d = sieve[ip];
+		long long int d = sieve[ip];
 		
 		if (d*d >n) break;
 		if (n%d) continue;
