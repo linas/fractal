@@ -76,9 +76,14 @@ static double plouffe_series (double re_q, double im_q, int itermax, double para
 	double rep, imp;
 	plouffe_series_c (re_q, im_q, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
-	return (atan2 (imp, rep)+M_PI) / (2.0*M_PI);
+	// return (atan2 (imp, rep)+M_PI) / (2.0*M_PI);
+	double ph = (atan2 (imp, rep)+M_PI) / (2.0*M_PI);
+	ph += 0.5;
+	if (1.0<ph) ph -= 1.0;
+	ph -= 0.5;
+	return ph;
 
-	return -rep;
+	// return -rep;
 }
 
 DECL_MAKE_HISTO(plouffe_series);
