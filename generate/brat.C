@@ -2324,9 +2324,13 @@ random_out (
 }
 
 /*-------------------------------------------------------------------*/
+/** This routine does an ordinary height map: the callback is given
+ *  an x,y coordinate pair, and is expected to return a single value,
+ *  which will be plotted as such.
+ */
 
 void 
-MakeHistoWrap (
+MakeHeightWrap (
    float  	*glob,
    int 		sizex,
    int 		sizey,
@@ -2336,7 +2340,7 @@ MakeHistoWrap (
    double	height,
    int		itermax,
    double 	renorm,
-	MakeHistoCB cb)
+	MakeHeightCB cb)
 {
    int		i,j, globlen;
    double	re_start, im_start, delta;
@@ -2371,7 +2375,9 @@ MakeHistoWrap (
 }
 
 /*-------------------------------------------------------------------*/
-/* This routine does bifurcation diagrams */
+/** This routine does bifurcation diagrams. The callback is passed a
+ * row of pixels, and it is expected to fill out the row, which is then
+ * plotted. */
 
 void 
 MakeBifurWrap (

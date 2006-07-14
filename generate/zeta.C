@@ -113,6 +113,6 @@ static double zeta_series (double re_q, double im_q, int itermax, double param)
 	return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
 }
 
-DECL_MAKE_HISTO(zeta_series);
+DECL_MAKE_HEIGHT(zeta_series);
 
 /* --------------------------- END OF LIFE ------------------------- */

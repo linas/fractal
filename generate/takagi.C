@@ -169,7 +169,7 @@ static double takagi_cylinder (double x, double y, int itermax, double param)
 	// return rep;
 }
 
-// DECL_MAKE_HISTO(takagi_disk);
-DECL_MAKE_HISTO(takagi_cylinder);
+// DECL_MAKE_HEIGHT(takagi_disk);
+DECL_MAKE_HEIGHT(takagi_cylinder);
 
 /* --------------------------- END OF LIFE ------------------------- */

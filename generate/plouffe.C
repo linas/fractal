@@ -86,6 +86,6 @@ static double plouffe_series (double re_q, double im_q, int itermax, double para
 	// return -rep;
 }
 
-DECL_MAKE_HISTO(plouffe_series);
+DECL_MAKE_HEIGHT(plouffe_series);
 
 /* --------------------------- END OF LIFE ------------------------- */

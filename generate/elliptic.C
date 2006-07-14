@@ -102,6 +102,6 @@ static double elliptic_sn (double re_q, double im_q, int itermax, double param)
 	// return rep;
 }
 
-DECL_MAKE_HISTO(elliptic_sn);
+DECL_MAKE_HEIGHT(elliptic_sn);
 
 /* --------------------------- END OF LIFE ------------------------- */

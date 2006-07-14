@@ -93,6 +93,6 @@ static double totient_series (double re_q, double im_q, int itermax, double para
 	return rep;
 }
 
-DECL_MAKE_HISTO(totient_series);
+DECL_MAKE_HEIGHT(totient_series);
 
 /* --------------------------- END OF LIFE ------------------------- */

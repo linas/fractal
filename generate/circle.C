@@ -231,7 +231,7 @@ static double circle_map (double omega, double K, int itermax, double param)
 	// return circle_poincare_recurrance_time (omega,K, itermax);
 }
 
-// DECL_MAKE_HISTO (circle_map);
+// DECL_MAKE_HEIGHT (circle_map);
 
 DECL_MAKE_BIFUR(bifurcation_diagram)
 

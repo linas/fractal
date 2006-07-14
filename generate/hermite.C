@@ -106,6 +106,6 @@ static double hermite_green_wrap (double x, double y, int itermax, double param)
 	return hermite_green (x,y);
 }
 
-DECL_MAKE_HISTO(hermite_green_wrap);
+DECL_MAKE_HEIGHT(hermite_green_wrap);
 
 /* --------------------------- END OF LIFE ------------------------- */

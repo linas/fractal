@@ -23,11 +23,12 @@ void MakeHisto (
    int		itermax,
 	double 	renorm);
 
-typedef double MakeHistoCB 
+/** callback for making a plain height-map */
+typedef double MakeHeightCB 
 	(double x, double y, int itermax, double param);
 
 void 
-MakeHistoWrap (
+MakeHeightWrap (
    float  	*glob,
    int 		sizex,
    int 		sizey,
@@ -37,10 +38,10 @@ MakeHistoWrap (
    double	height,
    int		itermax,
    double 	renorm,
-	MakeHistoCB cb);
+	MakeHeightCB cb);
 
 
-#define DECL_MAKE_HISTO(cb)  \
+#define DECL_MAKE_HEIGHT(cb)  \
 void MakeHisto (        \
    float  	*glob,      \
    int 		sizex,      \
@@ -52,7 +53,7 @@ void MakeHisto (        \
    int		itermax,    \
 	double 	renorm)     \
 {                       \
-   MakeHistoWrap (glob, sizex, sizey, re_center, im_center,  \
+   MakeHeightWrap (glob, sizex, sizey, re_center, im_center,  \
        width, height, itermax, renorm, cb);                  \
 }
 

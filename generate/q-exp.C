@@ -80,6 +80,6 @@ static double q_exp_series (double re_q, double im_q, int itermax, double param)
 	return rep;
 }
 
-DECL_MAKE_HISTO(q_exp_series);
+DECL_MAKE_HEIGHT(q_exp_series);
 
 /* --------------------------- END OF LIFE ------------------------- */
