@@ -14,7 +14,8 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert cutoff brat draw dx image
 
-NEW_EXES = alpha circle cutoff elliptic erdos euler-q hermite mand-flow \
+NEW_EXES = alpha circle cutoff divisor elliptic \
+        erdos euler-q hermite mand-flow \
         mp_zeta mobius plouffe q-exp swap takagi totient zeta \
         ray automatic radius
 
@@ -52,6 +53,7 @@ brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
 circle.o: circle.C brat.h
 cutoff.o: cutoff.C
+divisor.o: divisor.C brat.h
 euler-q.o: euler-q.C
 mobius.o: mobius.C
 hermite.o: hermite.C
@@ -65,6 +67,7 @@ zeta.o: zeta.C brat.h
 
 FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
 GCF=../tools/lib/gcf.o
+MOBIUS=../tools/lib/moebius.o ../tools/lib/cache.o
 MODULAR=../tools/lib/modular.o
 TOTIENT=../tools/lib/totient.o
 
@@ -79,6 +82,7 @@ brat-gap-hair: brat.o brat-gap-hair.o util.o $(FAREY)
 brat-gapper: brat.o brat-gapper.o util.o $(FAREY) $(GCF)
 circle: brat.o circle.o util.o
 cutoff: brat.o cutoff.o coord-xforms.o util.o 
+divisor: brat.o divisor.o util.o $(MOBIUS)
 elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o coord-xforms.o util.o $(MODULAR)
 euler-q: brat.o euler-q.o coord-xforms.o util.o $(MODULAR)

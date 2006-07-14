@@ -16,6 +16,7 @@
 #include <stdlib.h>
 
 #include "brat.h"
+#include "harmonic.h"
 #include "moebius.h"
 
 /*-------------------------------------------------------------------*/
@@ -34,9 +35,7 @@ divisor_diagram
 	int itermax,
 	double omega)
 {
-   double	x=0.0;
-   int		iter,j;
-	int cnt=0;
+	int j, cnt=0;
 
 	/* clear out the row */   
 	for (j=0; j<array_size; j++)
@@ -51,7 +50,7 @@ divisor_diagram
 		sum += d;
 
 		/* subtract leading term of the function */
-		long double del = sum - i*(logl(i) + 2.0*M_GAMMA -1.0L);
+		long double del = sum - ex*(logl(ex) + 2.0*M_GAMMA -1.0L);
 
 		/* scale as an estimate of vert size */
 		long double scale = 2.0L * powl (ex, 7.0L/22.0L);
@@ -61,7 +60,7 @@ divisor_diagram
 
 		/* convert coordinate to integer, and historgram it. */
 		double en = array_size * del;
-		int n = en;
+		int n = (int) en;
 		if (0 > n) n = 0;
 		if (n >= array_size) n = array_size-1;
 		array[n] += 1.0;
