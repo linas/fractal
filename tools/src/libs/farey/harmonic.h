@@ -13,8 +13,6 @@ extern "C" {
 // Euler's constant Abramowitz & Stegun Table 1.1 
 #define M_GAMMA 0.577215664901532860606512L
 
-#include <complex.h>
-
 // Return Reiman zeta -1
 // Must have integer n>=2 
 long double zetam1 (int n);
