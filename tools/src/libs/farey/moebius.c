@@ -95,7 +95,7 @@ init_prime_sieve (long long int prod)
  *  Almost a tail-recursive algorithm.
  */
 
-int divisor (long long int n)
+static int divisor_helper (long long int n, int last_prime_checked)
 {
 	int ip;
 
@@ -104,7 +104,7 @@ int divisor (long long int n)
 
 	INIT_PRIME_SIEVE(n);
 
-	for (ip=0; ; ip++)
+	for (ip=last_prime_checked+1; ; ip++)
 	{
 		long long int d = sieve[ip];
 		
@@ -119,10 +119,15 @@ int divisor (long long int n)
 			acc ++;
 		}
 		if (1==n) return acc;
-		return acc * divisor (n);
+		return acc * divisor_helper (n, ip);
 	}
 
 	return 2;
+}
+
+int divisor (long long int n)
+{
+	return divisor_helper (n, -1);
 }
 
 /** Sigma arithmetic series, equals divisor airth series for a=0 
