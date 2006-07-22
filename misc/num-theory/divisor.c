@@ -15,34 +15,14 @@
 #include "harmonic.h"
 #include "modular.h"
 
-
-long double divisor_series (long double x)
-{
-	long double acc = 0.0;
-
-	long double xp = 1.0;
-	int n=1;
-	while (1)
-	{
-		long double term = xp * divisor (n);
-		acc += term;
-
-		if (term < 1.0e-20*acc) break;
-		xp *= x;
-		n++;
-	}
-
-	return acc;
-}
-
 int main ()
 {
-	int i;
+	long long int i;
 
-	int nmax = 1000000000;
-	int scale = 1000000;
+	long long int nmax = 10000000000ll;
+	int scale = 10000000;
 
-	int sum = 0;
+	long double sum = 0.0L;
 	long double inf = 1.0e100;
 	long double sup = -1.0e100;
 	for (i=1; i<=nmax; i++)
@@ -65,9 +45,9 @@ int main ()
 			lead = i * logl(i) + 2.0*i*(M_GAMMA -1.0L);
 			// lead -= i;
 			// int d = sigma (i,1);
-			// printf ("%d	%d	%26.18Lg\n", i, d, sum-lead);
-			printf ("%d	%d	%26.18Lg\n", i, d, inf);
-			printf ("%d	%d	%26.18Lg\n", i, d, sup);
+			// printf ("%Ld	%d	%26.18Lg\n", i, d, sum-lead);
+			printf ("%Ld	%d	%26.18Lg\n", i, d, inf);
+			printf ("%Ld	%d	%26.18Lg\n", i, d, sup);
 			inf= 1.0e100;
 			sup=-1.0e100;
 			fflush (stdout);
