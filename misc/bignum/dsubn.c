@@ -33,6 +33,7 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 		i_binomial (ibin, en, p);
 		mpf_set_z (bin, ibin);
 		fp_zeta (term, p, prec);
+		// mpf_set_ui (term, 1);
 		mpf_div (term, bin, term);
 		if (p%2)
 		{
@@ -81,7 +82,8 @@ int main (int argc, char * argv[])
 #define D_SUB_N
 #ifdef D_SUB_N
 
-	mpf_t d_n, en, pi;
+	mpf_t term, d_n, en, pi;
+	mpf_init (term);
 	mpf_init (d_n);
 	mpf_init (pi);
 	mpf_init (en);
@@ -98,24 +100,15 @@ int main (int argc, char * argv[])
 	{
 		d_sub_n (d_n, n, prec);
 
-// #define B_N_SCALE
-#ifdef B_N_SCALE
-		mpf_set_ui (en, n);
-		mpf_mul_ui (term, en, 4);
-		mpf_mul (term, term, pi);
-		mpf_sqrt (sq, term);
-		mpf_neg (sq, sq);
-		fp_exp (p_n, sq, prec);
-		mpf_div (prod, b_n, p_n);
-		mpf_sqrt (sq, en);
-		mpf_sqrt (sq, sq);
-		mpf_div (prod, prod, sq);
+#define D_N_SCALE
+#ifdef D_N_SCALE
+		mpf_sub_ui (d_n, d_n, 2);
+		mpf_ui_div (term, 1, d_n);
+		mpf_div_ui (term, term, n);
 #endif
 		
 		printf ("%d\t",n);
-		fp_prt ("", d_n);
-		// fp_prt ("", a_n);
-		// fp_prt ("", b_n);
+		fp_prt ("", term);
 		fflush (stdout);
 	}
 #endif
