@@ -17,20 +17,23 @@
 
 #include "mp_zeta.h"
 
-double d_sub_n (double z, unsigned int prec, unsigned int norder)
+void d_sub_n (mpf_t acc, int en, unsigned int prec)
 {
-	mpf_t acc, bin, term;
-	mpf_init (acc);
+	mpz_t ibin;
+	mpz_init (ibin);
+
+	mpf_t bin, term;
 	mpf_init (bin);
 	mpf_init (term);
 
 	mpf_set_ui (acc, 0);
 	int p;
-	for (p=2; p<norder; p++)
+	for (p=2; p<=en; p++)
 	{
-		fp_binomial (bin, z, p);
-		fp_zeta (term, p+2, prec);
-		mpf_div_ui (term, bin, p-1);
+		i_binomial (ibin, en, p);
+		mpf_set_z (bin, ibin);
+		fp_zeta (term, p, prec);
+		mpf_div (term, bin, term);
 		if (p%2)
 		{
 			mpf_sub (acc, acc, term);
@@ -40,15 +43,10 @@ double d_sub_n (double z, unsigned int prec, unsigned int norder)
 			mpf_add (acc, acc, term);
 		} 
 	}
-	double sum = mpf_get_d (acc);
 
-// printf ("duude sum=%g\n", sum);
-
-	mpf_clear (term);
 	mpf_clear (bin);
-	mpf_clear (acc);
-
-	return sum;
+	mpf_clear (term);
+	mpz_clear (ibin);
 }
 
 /* ==================================================================== */
@@ -83,26 +81,22 @@ int main (int argc, char * argv[])
 #define D_SUB_N
 #ifdef D_SUB_N
 
-	mpf_t b_n, en, pi, sq, term, p_n, prod;
-	mpf_init (b_n);
+	mpf_t d_n, en, pi;
+	mpf_init (d_n);
 	mpf_init (pi);
 	mpf_init (en);
-	mpf_init (sq);
-	mpf_init (term);
-	mpf_init (p_n);
-	mpf_init (prod);
 
 	fp_pi (pi, prec);
 	
 	int n;
-	printf ("#\n# zeta expansion terms b_n straight up. \n#\n");
+	printf ("#\n# zeta expansion terms d_n straight up. \n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
 	fflush (stdout);
-	for (n=1; n<norder; n++)
+	for (n=2; n<=norder; n++)
 	{
-		b_sub_n (b_n, n, prec);
+		d_sub_n (d_n, n, prec);
 
 // #define B_N_SCALE
 #ifdef B_N_SCALE
@@ -119,7 +113,7 @@ int main (int argc, char * argv[])
 #endif
 		
 		printf ("%d\t",n);
-		fp_prt ("", prod);
+		fp_prt ("", d_n);
 		// fp_prt ("", a_n);
 		// fp_prt ("", b_n);
 		fflush (stdout);

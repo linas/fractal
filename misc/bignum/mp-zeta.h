@@ -32,7 +32,11 @@ void i_factorial (mpz_t fact, unsigned int n);
 /* i_binomial
  * Binomial coefficient (n k)
  */
+#ifdef USE_LOCAL_BINOMIAL
 void i_binomial (mpz_t bin, unsigned int n, unsigned int k);
+#else
+#define i_binomial mpz_bin_uiui
+#endif
 
 /* i_stirling
  * Stirling number of the first kind 
