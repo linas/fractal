@@ -1,0 +1,23 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'dsubn.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set xrange [400:]
+
+set title "G)"
+set xlabel "n"
+set ylabel "))"
+
+plot "dn.dat" using 1:($2-32.5) title "data", \
+     "dn.dat" using 1:($1-$1) title "fit"
+
+# pause 100
+

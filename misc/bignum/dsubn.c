@@ -102,9 +102,10 @@ int main (int argc, char * argv[])
 
 #define D_N_SCALE
 #ifdef D_N_SCALE
-		mpf_sub_ui (d_n, d_n, 2);
+		mpf_ui_sub (d_n, 2, d_n);
 		mpf_ui_div (term, 1, d_n);
-		mpf_div_ui (term, term, n);
+		mpf_div_ui (term, term, n*n);
+		mpf_ui_div (term, 1, term);
 #endif
 		
 		printf ("%d\t",n);
