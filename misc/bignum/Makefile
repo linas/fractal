@@ -3,7 +3,8 @@
 #
 
 
-EXES= bound bs bsubn cont_frac minima mp_zeta_test stieltjes trunc zero-cross
+EXES= bound bs bsubn cont_frac dsubn minima mp_zeta_test \
+      stieltjes trunc zero-cross
 
 all:  $(EXES)
 
@@ -17,6 +18,7 @@ zero-cross:	zero-cross.o
 
 bs.o: mp_zeta.h
 bsubn.o: mp_zeta.h
+dsubn.o: mp_zeta.h
 mp_zeta.o: mp_zeta.h
 mp_zeta_test.o: mp_zeta.h
 
@@ -25,6 +27,9 @@ bs:	bs.o mp_zeta.o
 
 bsubn:	bsubn.o mp_zeta.o
 	$(CC) -o bsubn $^ -lgmp -lgsl -lcblas -lm -lc
+
+dsubn:	dsubn.o mp_zeta.o
+	$(CC) -o dsubn $^ -lgmp -lgsl -lcblas -lm -lc
 
 minima: minima.o
 	$(CC) -o minima $< -lgsl -lcblas -lm -lc
