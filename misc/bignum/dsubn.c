@@ -13,7 +13,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <gsl/gsl_sf_psi.h>
 
 #include "mp_zeta.h"
 
@@ -91,21 +90,19 @@ int main (int argc, char * argv[])
 	fp_pi (pi, prec);
 	
 	int n;
-	printf ("#\n# zeta expansion terms d_n straight up. \n#\n");
+	printf ("#\n# zeta expansion terms n^2 * (2-d_n)   \n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
 	fflush (stdout);
-	for (n=2; n<=norder; n++)
+	for (n=2; n<=norder; n+=10)
 	{
 		d_sub_n (d_n, n, prec);
 
 #define D_N_SCALE
 #ifdef D_N_SCALE
 		mpf_ui_sub (d_n, 2, d_n);
-		mpf_ui_div (term, 1, d_n);
-		mpf_div_ui (term, term, n*n);
-		mpf_ui_div (term, 1, term);
+		mpf_mul_ui (term, d_n, n*n);
 #endif
 		
 		printf ("%d\t",n);

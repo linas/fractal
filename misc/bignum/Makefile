@@ -11,6 +11,7 @@ all:  $(EXES)
 bound:	bound.o
 bs:	bs.o mp_zeta.o
 cont_frac:	cont_frac.o
+dsubn:	dsubn.o mp_zeta.o
 mp_zeta_test:	mp_zeta_test.o mp_zeta.o
 stieltjes:	stieltjes.o mp_zeta.o
 trunc:	trunc.o
@@ -27,9 +28,6 @@ bs:	bs.o mp_zeta.o
 
 bsubn:	bsubn.o mp_zeta.o
 	$(CC) -o bsubn $^ -lgmp -lgsl -lcblas -lm -lc
-
-dsubn:	dsubn.o mp_zeta.o
-	$(CC) -o dsubn $^ -lgmp -lgsl -lcblas -lm -lc
 
 minima: minima.o
 	$(CC) -o minima $< -lgsl -lcblas -lm -lc
