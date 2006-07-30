@@ -2084,16 +2084,27 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
  * Carries out the math to "prec" decimal digits. Uses a combined
  * algorithm: 
  * 
+ * First, it searches the local memory cache for a value that
+ * satisfies the precision requirements; if found, it returns 
+ * that. 
+ *
+ * Next, it searches the disk cache for a suitable value.
+ * 
+ * For large "s", specifically, when prec < 3*s, it performs the 
+ * brute-force sum. This works, and works quite well, since the 
+ * sum converges decently when "s" is large. Basically, brute force 
+ * is used whenever less than several thousand terms are required 
+ * to perform the evaluation.
+ * 
  * For even "n", computes an "exact" result be using recursion
  * to get the Bernoulli numbers, and then working off of those.
  *
- * For odd "n", this uses a fast convergent sum based on consts 
- * from Simon Plouffe for low odd values of "n" (n less than 120). 
+ * For odd "n", this uses a fast convergent sum based on a rapidly
+ * converging polynomial series (in terms of Chebyshev polynomials)
+ * given by Borwein. 
  *
- * For large odd "n", performs the brute-force sum. This works,
- * and works quite well, since the sum converges decently when "n"
- * is large.
- *
+ * All computed values are stored in the disk cache for later 
+ * reference.
  */
 
 #define ZETA_DB_NAME "db-zeta.db"
@@ -2139,7 +2150,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	 * is appropriate.
 	 */
 	double marge = ((double) prec) / ((double) s-1);
-	if (marge < 3.3)
+	if (marge < 3.3 && s>20)
 	{
 		fp_zeta_brute (zeta, s, prec);
 		fp_one_d_cache_store (&cache, zeta, s, prec);
@@ -2156,9 +2167,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		return;
 	}
 	
-	/* Bump precision so as to increase cache hits on next go-around. */
-	// prec += 100;
-
+	/* Use the Plouffe algo for low values -- or not. */
 	int plo = 0;
 	// plo = fp_zeta_odd_plouffe (zeta, s, prec);
 
