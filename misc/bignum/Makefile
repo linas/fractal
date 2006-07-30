@@ -11,14 +11,15 @@ all:  $(EXES)
 bound:	bound.o
 bs:	bs.o mp_zeta.o
 cont_frac:	cont_frac.o
-dsubn:	dsubn.o mp_zeta.o
-mp_zeta_test:	mp_zeta_test.o mp_zeta.o
-stieltjes:	stieltjes.o mp_zeta.o
+dsubn:	dsubn.o mp_zeta.o db-cache.o
+mp_zeta_test:	mp_zeta_test.o mp_zeta.o db-cache.o
+stieltjes:	stieltjes.o mp_zeta.o db-cache.o
 trunc:	trunc.o
 zero-cross:	zero-cross.o
 
 bs.o: mp_zeta.h
 bsubn.o: mp_zeta.h
+db-cache.o:
 dsubn.o: mp_zeta.h
 mp_zeta.o: mp_zeta.h
 mp_zeta_test.o: mp_zeta.h
