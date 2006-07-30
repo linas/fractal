@@ -2113,6 +2113,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	/* Save computed value to the cache. */
 	fp_one_d_cache_store (&cache, zeta, s, prec);
 
+	fp_cache_get ("db-zeta.db", zeta, s, prec);
 	fp_cache_put ("db-zeta.db", zeta, s, prec);
 }
 
