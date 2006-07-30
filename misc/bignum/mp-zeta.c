@@ -1923,7 +1923,7 @@ void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec)
 		fprintf (stderr, "Sorry bucko, can't do it, you asked for zeta(%d) in %g digits\n", s, fnmax);
 		return;
 	}
-	int nmax = (int) (fnmax+1.0);
+	int nmax = (int) (fnmax+3.0); // Add 3 just to be safe
 	// printf ("zeta(%d) to precision %d will require %d terms\n", s, prec, nmax);
 	
 	/* Start computations where we last left off. */
