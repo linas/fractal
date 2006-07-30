@@ -1,7 +1,8 @@
 /* 
  * db-cache.h
  *
- * File cache for pre-computed bignum values.
+ * File cache for pre-computed bignum values. Stores values,
+ * with indicated precision, so we don't waste too much compute time
  *
  * Linas Vepstas July 2006
  */
