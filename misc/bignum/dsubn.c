@@ -4,7 +4,7 @@
  * High-precison dsub_n  using the 
  * Gnu Multiple-precision library.
  *
- * Here, d_sub_n is sum 1/zeta * sunomial
+ * Here, d_sub_n is sum 1/zeta * binomial
  *  
  * Linas Vepstas July 2005, July 2006
  */
@@ -34,6 +34,12 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 		fp_zeta (term, p, prec);
 		// mpf_set_ui (term, 1);
 		mpf_div (term, bin, term);
+
+// #define LIOUVILLE
+#ifdef LIOUVILLE
+		fp_zeta (bin, 2*p, prec);
+		mpf_mul (term, term, bin);
+#endif
 		if (p%2)
 		{
 			mpf_sub (acc, acc, term);
@@ -98,6 +104,7 @@ int main (int argc, char * argv[])
 	for (n=2; n<=norder; n+=10)
 	{
 		d_sub_n (d_n, n, prec);
+		mpf_set (term, d_n);
 
 #define D_N_SCALE
 #ifdef D_N_SCALE

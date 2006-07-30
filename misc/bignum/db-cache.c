@@ -7,6 +7,7 @@
  */
 
 #include <db_185.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
 #include <stdio.h>
@@ -22,12 +23,21 @@ void fp_cache_put (const char * dbname, mpf_t val, int idx, int nprec)
 {
 	DB *db;
 
-	db = dbopen (dbname, O_RDWR|O_CREAT, 
+	db = dbopen (dbname, O_RDWR|O_EXCL, 
 	             S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH, DB_HASH, NULL);
+#if 0
+	if (!db)
+	{
+		db = dbopen (dbname, O_RDWR|O_CREAT|O_EXCL, 
+	             S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH, DB_HASH, NULL);
+	}
+#endif
 
 	if (!db)
 	{
-		fprintf (stderr, "Error: cannot open the cache file\n");
+		int norr = errno;
+		fprintf (stderr, "Error: cannot open the cache file, idx=%d\n", idx);
+		fprintf (stderr, "(%d) %s\n", norr, strerror(norr));
 		return;
 	}
 

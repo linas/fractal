@@ -10,13 +10,14 @@ set out 'dsubn.png'
 set data style lines
 set key right
 
-set xrange [200:]
+set xrange [100:]
 
 set title "G)"
 set xlabel "n"
 set ylabel "))"
 
-plot "dn-10.dat" using 1:($2) title "data"
+# plot "dn-10.dat" using 1:($2) title "data"
+plot "ln.dat" using 1:($2/(sqrt($1))) title "data"
 
 # pause 100
 
