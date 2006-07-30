@@ -1924,7 +1924,7 @@ void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec)
 		return;
 	}
 	int nmax = (int) (fnmax+1.0);
-	printf ("zeta(%d) to precision %d will require %d terms\n", s, prec, nmax);
+	// printf ("zeta(%d) to precision %d will require %d terms\n", s, prec, nmax);
 	
 	/* Start computations where we last left off. */
 	mpf_set (zeta, zeta_cache[s]);
@@ -2131,6 +2131,19 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		mpf_add_ui (zeta, zeta, 1);
 		/* Save disk value to the ram cache. */
 		fp_one_d_cache_store (&cache, zeta, s, prec);
+		return;
+	}
+
+	/* If a high order is requested, but only a relatively low
+	 * number of digits of precision, then a brute force summation 
+	 * is appropriate.
+	 */
+	double marge = ((double) prec) / ((double) s-1);
+	if (marge < 3.3)
+	{
+		fp_zeta_brute (zeta, s, prec);
+		fp_one_d_cache_store (&cache, zeta, s, prec);
+		fp_zeta_file_cache_put (zeta, s, prec);
 		return;
 	}
 	
