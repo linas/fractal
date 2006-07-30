@@ -2073,6 +2073,18 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
  * is large.
  *
  */
+
+#define ZETA_DB_NAME "db-zeta.db"
+
+static void fp_zeta_file_cache_put(mpf_t zeta, unsigned int s, int prec)
+{
+	mpf_t zm1;
+	mpf_init (zm1);
+	mpf_sub_ui (zm1, zeta, 1);
+	fp_cache_put (ZETA_DB_NAME, zm1, s, prec);
+	mpf_clear (zm1);
+}
+
 void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 {
 	DECLARE_FP_CACHE (cache);
@@ -2083,10 +2095,20 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		return;
 	}
 
+	/* first, check the local cache */
 	int have_prec = fp_one_d_cache_check (&cache, s);
 	if (have_prec >= prec)
 	{
 		fp_one_d_cache_fetch (&cache, zeta, s);
+		return;
+	}
+	
+	/* check the disk cache next */
+	if (fp_cache_get (ZETA_DB_NAME, zeta, s, prec)) 
+	{
+		mpf_add_ui (zeta, zeta, 1);
+		/* Save disk value to the ram cache. */
+		fp_one_d_cache_store (&cache, zeta, s, prec);
 		return;
 	}
 	
@@ -2095,6 +2117,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	{
 		fp_zeta_even (zeta, s, prec);
 		fp_one_d_cache_store (&cache, zeta, s, prec);
+		fp_zeta_file_cache_put (zeta, s, prec);
 		return;
 	}
 	
@@ -2112,9 +2135,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 
 	/* Save computed value to the cache. */
 	fp_one_d_cache_store (&cache, zeta, s, prec);
-
-	fp_cache_get ("db-zeta.db", zeta, s, prec);
-	fp_cache_put ("db-zeta.db", zeta, s, prec);
+	fp_zeta_file_cache_put (zeta, s, prec);
 }
 
 /* ======================================================================= */

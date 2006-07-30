@@ -87,7 +87,8 @@ int fp_cache_get (const char * dbname, mpf_t val, int idx, int nprec)
 	if (rc) return 0;
 
 	/* check to see if we have enough precision */
-	if (nprec > *((int *)pdat.data)) return 0;
+	int have_prec = *((int *)pdat.data);
+	if (nprec > have_prec) return 0;
 
 	/* Get the value data from the file */
 	DBT vkey;
@@ -98,10 +99,11 @@ int fp_cache_get (const char * dbname, mpf_t val, int idx, int nprec)
 	rc = db->get (db, &vkey, &pdat, 0);
 	if (rc) return 0;
 
+	// printf ("found nprec=%d for %d = %s\n", have_prec, idx, pdat.data);
 	mpf_set_str (val, pdat.data, 10);
 	
 	db->close (db);
-	return 1;
+	return have_prec;
 }
 
 /* ========================== END OF FILE ============= */
