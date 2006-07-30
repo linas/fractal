@@ -37,7 +37,7 @@ void fp_cache_put (const char * dbname, mpf_t val, int idx, int nprec)
 	{
 		int norr = errno;
 		fprintf (stderr, "Error: cannot open the cache file, idx=%d\n", idx);
-		fprintf (stderr, "(%d) %s\n", norr, strerror(norr));
+		fprintf (stderr, "\t(%d) %s\n", norr, strerror(norr));
 		return;
 	}
 
