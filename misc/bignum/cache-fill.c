@@ -11,6 +11,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "mp_zeta.h"
 
@@ -45,9 +46,12 @@ int main (int argc, char * argv[])
 	int n;
 	for (n=nstart; ; n++)
 	{
+		time_t start = time(0);
 		fp_zeta (term, n, prec);
+		time_t end = time(0);
+		int elapsed = end-start;
 		
-		printf ("%d\t",n);
+		printf ("%d\t%d\t",elapsed, n);
 		mpf_sub_ui (term, term, 1);
 		fp_prt ("", term);
 		fflush (stdout);
