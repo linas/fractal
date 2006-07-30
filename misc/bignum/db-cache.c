@@ -71,7 +71,6 @@ void fp_cache_put (const char * dbname, mpf_t val, int idx, int nprec)
 	pdat.size = sizeof(int);
 
 	db->put (db, &pkey, &pdat, 0);
-
 	db->close (db);
 }
 
@@ -94,11 +93,19 @@ int fp_cache_get (const char * dbname, mpf_t val, int idx, int nprec)
 
 	/* if not key, then nothing */
 	int rc = db->get (db, &pkey, &pdat, 0);
-	if (rc) return 0;
+	if (rc)
+	{
+		db->close (db);
+		return 0;
+	}
 
 	/* check to see if we have enough precision */
 	int have_prec = *((int *)pdat.data);
-	if (nprec > have_prec) return 0;
+	if (nprec > have_prec)
+	{
+		db->close (db);
+		return 0;
+	}
 
 	/* Get the value data from the file */
 	DBT vkey;
@@ -107,7 +114,11 @@ int fp_cache_get (const char * dbname, mpf_t val, int idx, int nprec)
 	vkey.size = strlen(buf)+1;
 
 	rc = db->get (db, &vkey, &pdat, 0);
-	if (rc) return 0;
+	if (rc)
+	{
+		db->close (db);
+		return 0;
+	}
 
 	// printf ("found nprec=%d for %d = %s\n", have_prec, idx, pdat.data);
 	mpf_set_str (val, pdat.data, 10);
