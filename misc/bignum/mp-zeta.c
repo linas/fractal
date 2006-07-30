@@ -397,6 +397,21 @@ void i_binomial_compute (mpz_t bin, unsigned int n, unsigned int k)
 	mpz_clear (bot);
 }
 
+static void i_binomial_recurse (mpz_t bin, unsigned int n, unsigned int k)
+{
+	mpz_t top, bot;
+
+	mpz_init (top);
+	mpz_init (bot);
+
+	i_binomial (bot,n-1,k-1);
+	i_binomial (top,n-1,k);
+	mpz_add (bin, top, bot);
+	
+	mpz_clear (top);
+	mpz_clear (bot);
+}
+
 /**
  * i_binomial - return the binomial coefficient
  * Uses a cached value if avalable.
@@ -404,6 +419,12 @@ void i_binomial_compute (mpz_t bin, unsigned int n, unsigned int k)
 void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 {
 	DECLARE_I_CACHE (cache);
+
+	if (k > n || 0 > k)
+	{
+		mpz_set_ui (bin, 0);
+		return;
+	}
 
 	if (1 >= n)
 	{
@@ -419,7 +440,8 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 	}
 	else
 	{
-		i_binomial_compute (bin, n, k);
+		// i_binomial_compute (bin, n, k);
+		i_binomial_recurse (bin, n, k);
 		i_triangle_cache_store (&cache, bin, n, k);
 	}
 }
