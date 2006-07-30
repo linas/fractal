@@ -14,6 +14,7 @@
 #include <stdlib.h>
 
 #include <gmp.h>
+#include "db-cache.h"
 #include "mp_zeta.h"
 
 void i_prt (char * str, mpz_t val)
@@ -2111,6 +2112,8 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 
 	/* Save computed value to the cache. */
 	fp_one_d_cache_store (&cache, zeta, s, prec);
+
+	fp_cache_put ("db-zeta.db", zeta, s, prec);
 }
 
 /* ======================================================================= */

@@ -19,16 +19,16 @@ zero-cross:	zero-cross.o
 
 bs.o: mp_zeta.h
 bsubn.o: mp_zeta.h
-db-cache.o:
+db-cache.o: db-cache.h
 dsubn.o: mp_zeta.h
-mp_zeta.o: mp_zeta.h
+mp_zeta.o: mp_zeta.h db-cache.h
 mp_zeta_test.o: mp_zeta.h
 
-bs:	bs.o mp_zeta.o
-	$(CC) -o bs $^ -lgmp -lgsl -lcblas -lm -lc
+bs:	bs.o mp_zeta.o db-cache.o
+	$(CC) -o bs $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
-bsubn:	bsubn.o mp_zeta.o
-	$(CC) -o bsubn $^ -lgmp -lgsl -lcblas -lm -lc
+bsubn:	bsubn.o mp_zeta.o db-cache.o
+	$(CC) -o bsubn $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
 minima: minima.o
 	$(CC) -o minima $< -lgsl -lcblas -lm -lc
@@ -46,4 +46,4 @@ dist:
 	$(CC) -c -g -O2 -Wall $<
 
 .o:
-	$(CC) -g -o $* $^ -lgmp -lm
+	$(CC) -g -o $* $^ -lgmp -ldb -lm
