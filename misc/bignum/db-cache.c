@@ -25,13 +25,12 @@ void fp_cache_put (const char * dbname, mpf_t val, int idx, int nprec)
 
 	db = dbopen (dbname, O_RDWR|O_EXCL, 
 	             S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH, DB_HASH, NULL);
-#if 0
-	if (!db)
+
+	if (!db && (ENOENT == errno))
 	{
 		db = dbopen (dbname, O_RDWR|O_CREAT|O_EXCL, 
 	             S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH, DB_HASH, NULL);
 	}
-#endif
 
 	if (!db)
 	{
