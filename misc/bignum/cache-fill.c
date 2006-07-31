@@ -51,9 +51,10 @@ int main (int argc, char * argv[])
 		time_t end = time(0);
 		int elapsed = end-start;
 		
-		printf ("%d\t%d\t",elapsed, n);
+		printf ("%d\t", n);
 		mpf_sub_ui (term, term, 1);
 		fp_prt ("", term);
+		printf ("\t%d\n",elapsed);
 		fflush (stdout);
 	}
 	
