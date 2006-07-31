@@ -28,6 +28,7 @@ continued_frac_t *continued_frac_new (int len)
 	cf->len = len;
 	cf->nterms = 0;
 	cf->tinued_frac = (unsigned long *) malloc (len*sizeof(unsigned long));
+	return cf;
 }
 
 // convert mp float to a continued fraction
@@ -101,7 +102,7 @@ void continued_frac_print (continued_frac_t *cf)
 	printf ("nterms = %d\n", cf->nterms);
 	for (i=0; i<cf->nterms; i++)
 	{
-		printf ("its %d %d \n", i, cf->tinued_frac[i]);
+		printf ("its %d %lu \n", i, cf->tinued_frac[i]);
 	}
 }
 
@@ -113,7 +114,7 @@ void fp_prt (char * str, mpf_t val)
 }
 
 
-main ()
+int main ()
 {
 	continued_frac_t *cf = continued_frac_new(100);
 
@@ -156,4 +157,5 @@ main ()
 	continued_frac_print (cf);
 #endif
 	
+	return 0;
 }

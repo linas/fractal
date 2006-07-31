@@ -61,10 +61,9 @@ fp_prt ("bsubn= ", term);
 
 /* ==================================================================== */
 
+int
 main (int argc, char * argv[])
 {
-	char str[4000];
-
 	if (argc < 3)
 	{
 		fprintf (stderr, "Usage: %s [ndigits] [norder]\n", argv[0]); 
@@ -103,7 +102,7 @@ main (int argc, char * argv[])
 		printf (";\n");
 		fflush (stdout);
 	}
-
+	return 0;
 }
 
 /* =============================== END OF FILE =========================== */

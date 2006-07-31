@@ -18,6 +18,7 @@
 double cofit (double x, double y1, double y0)
 {
 	double r = y1/y0;
+	return r;
 }
 
 int
@@ -63,11 +64,11 @@ main ()
 		if (vlast*var[i] < 0.0) 
 		{
 			double cross = i-1 + vlast / (vlast-var[i]);
-			double m = var[i] - vlast;
-			double v = -vlast;
+			// double m = var[i] - vlast;
+			// double v = -vlast;
 			// if (cross-vlast > var[i]-cross) { v=var[i]; }
 			// double eps = -vlast*vlast*vlast / (3.0*m);
-			double eps = v*v*v / (3.0*m);
+			// double eps = v*v*v / (3.0*m);
 			// printf ("%d\t%20.10g\t%20.16g\n", ncross, cross, eps);
 			// cross += eps;
 			printf ("%d\t%23.17g\n", ncross, cross);

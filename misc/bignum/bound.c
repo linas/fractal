@@ -7,9 +7,9 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-
-main ()
+int main ()
 {
 	int n;
 	for (n=1; n<500; n+=20)
@@ -23,6 +23,6 @@ main ()
 		printf ("%d\t%g	%g	%g\n",n, ref, dbn, y );
 		fflush (stdout);
 	}
-
+	return 0;
 }
 
