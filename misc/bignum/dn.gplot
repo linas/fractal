@@ -17,7 +17,13 @@ set xlabel "n"
 set ylabel "))"
 
 # plot "dn-10.dat" using 1:($2) title "data"
-plot "ln.dat" using 1:($2/(sqrt($1))) title "data"
+plot "dn-hi.dat" using 1:($2) title "data"
+
+# liouville i.e. sum zeta(2n)/zeta(n)
+# plot "ln.dat" using 1:($2/(sqrt($1))) title "data"
+
+# totient
+# plot "ln.dat" using 1:(($1*$1*log($1))/$2) title "data"
 
 # pause 100
 

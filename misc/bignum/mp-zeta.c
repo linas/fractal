@@ -21,14 +21,12 @@ void i_prt (char * str, mpz_t val)
 {
 	printf (str);
 	mpz_out_str (stdout, 10, val);
-	printf ("\n");
 }
 
 void fp_prt (char * str, mpf_t val)
 {
 	printf (str);
 	mpf_out_str (stdout, 10, 60, val);
-	printf ("\n");
 }
 
 /* ======================================================================= */
