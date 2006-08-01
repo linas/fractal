@@ -19,7 +19,7 @@ main (int argc, char * argv[])
 {
 	if (argc<3)
 	{
-		fprintf (stderr,"Usage: %s <db> <count>", argv[0]);
+		fprintf (stderr,"Usage: %s <db> <count>\n", argv[0]);
 		exit (1);
 	}
 	char * db = argv[1];

@@ -23,7 +23,7 @@ main (int argc, char * argv[])
 
 	if (argc<5)
 	{
-		fprintf (stderr,"Usage: %s <out-db> <in-dba> <in-dbb> <count>", argv[0]);
+		fprintf (stderr,"Usage: %s <out-db> <in-dba> <in-dbb> <count>\n", argv[0]);
 		exit (1);
 	}
 	dbout = argv[1];
@@ -41,6 +41,9 @@ main (int argc, char * argv[])
 	{
 		int preca = fp_cache_get (dbina, vala, n, 10);
 		int precb = fp_cache_get (dbinb, valb, n, 10);
+
+		if (0 >= preca && 0 >= precb) continue;
+		
 		if (precb < preca)
 		{
 			fp_cache_put (dbout, vala, n, preca);
