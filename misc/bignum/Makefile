@@ -3,13 +3,15 @@
 #
 
 
-EXES= bound bs bsubn cache-fill cont_frac dsubn minima mp_zeta_test \
+EXES= bound bs bsubn cache-fill cont_frac db-merge \
+      dsubn minima mp_zeta_test \
       stieltjes trunc zero-cross
 
 all:  $(EXES)
 
 bound:	bound.o
 cache-fill:	cache-fill.o mp_zeta.o db-cache.o
+db-merge:	db-merge.o db-cache.o
 cont_frac:	cont_frac.o
 dsubn:	dsubn.o mp_zeta.o db-cache.o
 mp_zeta_test:	mp_zeta_test.o mp_zeta.o db-cache.o
