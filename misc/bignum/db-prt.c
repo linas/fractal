@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <gmp.h>
 
 #include "db-cache.h"
@@ -24,6 +25,13 @@ main (int argc, char * argv[])
 	}
 	char * db = argv[1];
 	int maxidx = atoi (argv[2]);
+
+	/* Compute number of binary bits this corresponds to. */
+	int prec = 100;
+	double v = ((double) prec) *log(10.0) / log(2.0);
+	int bits = (int) (v + 100);
+	/* set the precision (number of binary bits) */
+	mpf_set_default_prec (bits);
 
 	printf ("printout of %s up to n=%d\n", db, maxidx);
 

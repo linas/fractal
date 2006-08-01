@@ -81,7 +81,7 @@ int fp_cache_get (const char * dbname, mpf_t val, int idx, int nprec)
 
 	if (!db) return 0;
 
-	/* Look for the stored precisio of data in the file */
+	/* Look for the stored precision of data in the file */
 	DBT pkey;
 	char buf[50];
 	sprintf (buf, "prec[%d]", idx);

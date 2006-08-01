@@ -11,7 +11,7 @@ all:  $(EXES)
 
 bound:	bound.o
 cache-fill:	cache-fill.o mp_zeta.o db-cache.o
-db-merge:	db-merge.o db-cache.o
+db-merge:	db-merge.o db-cache.o mp_zeta.o
 db-prt:	db-prt.o mp_zeta.o db-cache.o
 cont_frac:	cont_frac.o
 dsubn:	dsubn.o mp_zeta.o db-cache.o
