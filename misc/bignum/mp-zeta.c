@@ -2148,7 +2148,8 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 	 * is appropriate.
 	 */
 	double marge = ((double) prec) / ((double) s-1);
-	if (marge < 3.3 && s>20)
+	if (((1 == s%2) && (marge < 3.3 && s>20)) ||
+	    ((0 == s%2) && (marge < 1.8 && s>20)))
 	{
 		fp_zeta_brute (zeta, s, prec);
 		fp_one_d_cache_store (&cache, zeta, s, prec);

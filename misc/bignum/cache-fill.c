@@ -44,7 +44,8 @@ int main (int argc, char * argv[])
 	mpf_init (term);
 
 	int n;
-	for (n=nstart; n>=0 ; n--)
+	// for (n=nstart; n>1 ; n--)
+	for (n=2; n<nstart; n++)
 	{
 		time_t start = time(0);
 		fp_zeta (term, n, prec);
@@ -58,7 +59,6 @@ int main (int argc, char * argv[])
 		fflush (stdout);
 	}
 	
-
 	return 0;
 }
 

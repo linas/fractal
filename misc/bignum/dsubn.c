@@ -105,7 +105,7 @@ int main (int argc, char * argv[])
 	printf ("# computed with %d bits of default mpf \n", bits);
 	fflush (stdout);
 	time_t then = time(0);
-	for (n=5002; n<=norder; n+=10)
+	for (n=2; n<=norder; n+=10)
 	{
 		d_sub_n (d_n, n, prec);
 		mpf_set (term, d_n);
