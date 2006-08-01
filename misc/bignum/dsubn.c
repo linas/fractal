@@ -94,14 +94,10 @@ int main (int argc, char * argv[])
 #define D_SUB_N
 #ifdef D_SUB_N
 
-	mpf_t term, d_n, en, pi;
+	mpf_t term, d_n;
 	mpf_init (term);
 	mpf_init (d_n);
-	mpf_init (pi);
-	mpf_init (en);
 
-	fp_pi (pi, prec);
-	
 	int n;
 	printf ("#\n# zeta expansion terms n^2 * (2-d_n)   \n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
@@ -125,7 +121,8 @@ int main (int argc, char * argv[])
 		
 		printf ("%d\t",n);
 		fp_prt ("", term);
-		printf ("\t%d\n",elapsed);
+		printf ("\n");
+		fprintf (stderr, "that took %d secs\n",elapsed);
 		fflush (stdout);
 	}
 #endif
