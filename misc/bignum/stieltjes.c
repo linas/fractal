@@ -7,11 +7,11 @@
  * Linas Vepstas April 2006
  */
 
-#include <gmp.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <gmp.h>
 #include "mp_zeta.h"
 
 /* ==================================================================== */

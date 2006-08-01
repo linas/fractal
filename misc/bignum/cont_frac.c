@@ -9,9 +9,9 @@
  *
  */
 
-#include <gmp.h>
 #include <malloc.h>
 #include <stdio.h>
+#include <gmp.h>
 
 typedef struct 
 {
