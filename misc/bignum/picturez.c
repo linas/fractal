@@ -24,11 +24,11 @@ main (int argc, char * argv[])
 	char * outfile = argv[1];
 	int width = atoi (argv[2]);
 	int height = atoi (argv[3]);
-	int base = 10;
+	int base = 9;
 
 	/* Compute number of binary bits this corresponds to. */
 	int prec = width;
-	double v = ((double) prec) *log(10.0) / log(2.0);
+	double v = ((double) prec) *log(base) / log(2.0);
 	int bits = (int) (v + 100);
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
