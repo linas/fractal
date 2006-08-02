@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 #include <gmp.h>
 
@@ -51,17 +52,23 @@ main (int argc, char * argv[])
 		
 		if (precb < preca)
 		{
-			fp_cache_put (dbout, vala, n, preca);
-			printf ("%d to %d from %s\t", n, preca, dbina);
-			fp_prt ("", vala);
-			printf ("\n");
+			if (strcmp (dbina, dbout))
+			{
+				fp_cache_put (dbout, vala, n, preca);
+				printf ("%d to %d from %s\t", n, preca, dbina);
+				fp_prt ("", vala);
+				printf ("\n");
+			}
 		}
 		else
 		{
-			fp_cache_put (dbout, valb, n, precb);
-			printf ("%d to %d from %s\t", n, precb, dbinb);
-			fp_prt ("", valb);
-			printf ("\n");
+			if (strcmp (dbinb, dbout))
+			{
+				fp_cache_put (dbout, valb, n, precb);
+				printf ("%d to %d from %s\t", n, precb, dbinb);
+				fp_prt ("", valb);
+				printf ("\n");
+			}
 		}
 	}
 	return 0;
