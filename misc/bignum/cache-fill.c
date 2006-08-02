@@ -19,9 +19,9 @@
 
 int main (int argc, char * argv[])
 {
-	if (argc < 3)
+	if (argc < 4)
 	{
-		fprintf (stderr, "Usage: %s [ndigits] [start]\n", argv[0]); 
+		fprintf (stderr, "Usage: %s <ndigits> <start> <end>\n", argv[0]); 
 		exit (1);
 	}
 
@@ -30,6 +30,7 @@ int main (int argc, char * argv[])
 
 	/* place to start */
 	int nstart = atoi (argv[2]);
+	int nend = atoi (argv[3]);
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -44,8 +45,7 @@ int main (int argc, char * argv[])
 	mpf_init (term);
 
 	int n;
-	// for (n=nstart; n>1 ; n--)
-	for (n=2; n<nstart; n++)
+	for (n=nstart; n<nend; n++)
 	{
 		time_t start = time(0);
 		fp_zeta (term, n, prec);

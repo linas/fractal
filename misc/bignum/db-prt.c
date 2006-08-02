@@ -18,13 +18,14 @@
 int
 main (int argc, char * argv[])
 {
-	if (argc<3)
+	if (argc<4)
 	{
-		fprintf (stderr,"Usage: %s <db> <count>\n", argv[0]);
+		fprintf (stderr,"Usage: %s <db> <from> <to>\n", argv[0]);
 		exit (1);
 	}
 	char * db = argv[1];
-	int maxidx = atoi (argv[2]);
+	int from = atoi (argv[2]);
+	int maxidx = atoi (argv[3]);
 
 	/* Compute number of binary bits this corresponds to. */
 	int prec = 100;
@@ -40,7 +41,7 @@ main (int argc, char * argv[])
 	int n;
 	int lastprec=-1;
 	int lastn = 0;
-	for (n=2; n<= maxidx; n++)
+	for (n=from; n<= maxidx; n++)
 	{
 		int prec = fp_cache_get (db, val, n, 10);
 		if (prec != lastprec)
@@ -59,6 +60,14 @@ main (int argc, char * argv[])
 			lastprec = prec;
 			lastn = n;
 		}
+	}
+	if ((-1 != lastprec) && (0 != lastn))
+	{
+		printf ("range %d : %d is to precision %d\n", lastn, n-1, lastprec);
+	}
+	else
+	{
+		printf ("range %d : %d is missing\n", lastn, n-1);
 	}
 	return 0;
 }
