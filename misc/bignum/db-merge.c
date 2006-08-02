@@ -18,20 +18,16 @@
 int
 main (int argc, char * argv[])
 {
-	int maxidx=10;
-	char * dbina;
-	char * dbinb;
-	char * dbout;
-
 	if (argc<5)
 	{
-		fprintf (stderr,"Usage: %s <out-db> <in-dba> <in-dbb> <count>\n", argv[0]);
+		fprintf (stderr,"Usage: %s <out-db> <in-dba> <in-dbb> <from> <to>\n", argv[0]);
 		exit (1);
 	}
-	dbout = argv[1];
-	dbina = argv[2];
-	dbinb = argv[3];
-	maxidx = atoi (argv[4]);
+	char * dbout = argv[1];
+	char * dbina = argv[2];
+	char * dbinb = argv[3];
+	int from = atoi (argv[4]);
+	int too = atoi (argv[5]);
 
 	/* Compute number of binary bits this corresponds to. */
 	int prec = 10000;
@@ -40,13 +36,13 @@ main (int argc, char * argv[])
 	/* set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
 
-	printf ("Merging %s and %s into %s for n=%d\n", dbina, dbinb, dbout, maxidx);
+	printf ("Merging %s and %s into %s from %d to %d\n", dbina, dbinb, dbout, from, too);
 
 	mpf_t vala, valb;
 	mpf_init (vala);
 	mpf_init (valb);
 	int n;
-	for (n=2; n<= maxidx; n++)
+	for (n=from; n<= too; n++)
 	{
 		int preca = fp_cache_get (dbina, vala, n, 10);
 		int precb = fp_cache_get (dbinb, valb, n, 10);

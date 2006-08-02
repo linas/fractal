@@ -38,12 +38,27 @@ main (int argc, char * argv[])
 	mpf_t val;
 	mpf_init (val);
 	int n;
+	int lastprec=-1;
+	int lastn = 0;
 	for (n=2; n<= maxidx; n++)
 	{
 		int prec = fp_cache_get (db, val, n, 10);
-		printf ("%d to %d\t", n, prec);
-		fp_prt("", val);
-		printf ("\n");
+		if (prec != lastprec)
+		{
+			if (-1 != lastprec)
+			{
+				if (0 != lastn)
+				{
+					printf ("range %d : %d is to precision %d\n", lastn, n-1, lastprec);
+				}
+				else
+				{
+					printf ("range %d : %d is missing\n", lastn, n-1);
+				}
+			}
+			lastprec = prec;
+			lastn = n;
+		}
 	}
 	return 0;
 }
