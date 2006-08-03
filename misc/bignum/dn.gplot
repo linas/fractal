@@ -10,14 +10,17 @@ set out 'dsubn.png'
 set data style lines
 set key right
 
-set xrange [100:]
 
 set title "G)"
 set xlabel "n"
 set ylabel "))"
 
-# plot "dn-10.dat" using 1:($2) title "data"
-plot "dn-hi.dat" using 1:($2) title "data"
+set xrange [100:]
+plot "dn-10.dat" using 1:($2) title "data"
+# plot "dn-hi.dat" using 1:($2) title "data"
+
+# set xrange [5:]
+# plot "dn-10.dat" using (log($1)):(log($2)) title "data"
 
 # liouville i.e. sum zeta(2n)/zeta(n)
 # plot "ln.dat" using 1:($2/(sqrt($1))) title "data"
