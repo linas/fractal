@@ -17,6 +17,31 @@
 
 #include "mp_zeta.h"
 
+#ifdef TESTING_123
+void bino (void)
+{
+	mpz_t ibin;
+	mpz_init (ibin);
+
+	int n;
+	for (n=0;n<2000; n++)
+	{
+		int k;
+		for (k=0; k<=n; k++)
+		{
+			// printf ("%d %d  ", n, k);
+			i_binomial_sequence (ibin, n, k);
+			// i_binomial (ibin, n, k);
+			// i_prt ("", ibin);
+			// printf ("\n");
+		}
+	}
+	mpz_clear (ibin);
+}
+#endif
+
+/* ==================================================================== */
+
 void d_sub_n (mpf_t acc, int en, unsigned int prec)
 {
 	mpz_t ibin;
@@ -27,11 +52,14 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 	mpf_init (term);
 
 	mpf_set_ui (acc, 0);
+	
+	i_binomial_sequence (ibin, en, 0);
+	i_binomial_sequence (ibin, en, 1);
 	int p;
 	for (p=2; p<=en; p++)
 	// for (p=3; p<=en; p++)
 	{
-		i_binomial (ibin, en, p);
+		i_binomial_sequence (ibin, en, p);
 		mpf_set_z (bin, ibin);
 		fp_zeta (term, p, prec);
 		// mpf_set_ui (term, 1);
@@ -105,7 +133,15 @@ int main (int argc, char * argv[])
 	printf ("# computed with %d bits of default mpf \n", bits);
 	fflush (stdout);
 	time_t then = time(0);
-	for (n=7392; n<=norder; n+=30)
+	
+	mpz_t ibin;
+	mpz_init (ibin);
+	i_binomial_sequence (ibin, 0, 0);
+	i_binomial_sequence (ibin, 1, 0);
+	i_binomial_sequence (ibin, 1, 1);
+	mpz_clear (ibin);
+
+	for (n=2; n<=norder; n+=1)
 	{
 		d_sub_n (d_n, n, prec);
 		mpf_set (term, d_n);
@@ -122,11 +158,10 @@ int main (int argc, char * argv[])
 		printf ("%d\t",n);
 		fp_prt ("", term);
 		printf ("\n");
-		fprintf (stderr, "that took %d secs\n",elapsed);
+		fprintf (stderr, "n=%d took %d secs\n", n, elapsed);
 		fflush (stdout);
 	}
 #endif
-	
 
 	return 0;
 }
