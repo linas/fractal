@@ -470,6 +470,13 @@ void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k)
 	/* standard sequential access */
 	if (k == last_k+1 && n == curr_n)
 	{
+		/* End of current row -- special case */
+		if (k == n)
+		{
+			mpz_set_ui (bin, 1);
+			return;
+		}
+
 		mpz_t bl;
 		mpz_init (bl);
 
@@ -492,13 +499,6 @@ void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k)
 		curr_cache = next_cache;
 		next_cache = tmp;
 		i_one_d_cache_check (next_cache, n+1);
-		mpz_set_ui (bin, 1);
-		return;
-	}
-
-	/* End of current row -- special case */
-	if (k == n && n == curr_n)
-	{
 		mpz_set_ui (bin, 1);
 		return;
 	}
