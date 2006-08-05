@@ -53,11 +53,8 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 
 	mpf_set_ui (acc, 0);
 	
-	i_binomial_sequence (ibin, en, 0);
-	i_binomial_sequence (ibin, en, 1);
 	int p;
 	for (p=2; p<=en; p++)
-	// for (p=3; p<=en; p++)
 	{
 		i_binomial_sequence (ibin, en, p);
 		mpf_set_z (bin, ibin);
@@ -70,11 +67,6 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 		fp_zeta (bin, 2*p, prec);
 		mpf_mul (term, term, bin);
 #endif
-// #define TOTIENT
-#ifdef TOTIENT
-		fp_zeta (bin, p-1, prec);
-		mpf_mul (term, term, bin);
-#endif
 		if (p%2)
 		{
 			mpf_sub (acc, acc, term);
@@ -85,6 +77,54 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 		} 
 	}
 
+// #define D_N_SCALE
+#ifdef D_N_SCALE
+		mpf_ui_sub (acc, 2, acc);
+		mpf_mul_ui (acc, acc, en*en);
+#endif
+	mpf_clear (bin);
+	mpf_clear (term);
+	mpz_clear (ibin);
+}
+
+/* ==================================================================== */
+
+void d_totient_n (mpf_t acc, int en, unsigned int prec)
+{
+	mpz_t ibin;
+	mpz_init (ibin);
+
+	mpf_t bin, term;
+	mpf_init (bin);
+	mpf_init (term);
+
+	mpf_set_ui (acc, 0);
+	
+	int p;
+	for (p=3; p<=en; p++)
+	{
+		i_binomial_sequence (ibin, en, p);
+		mpf_set_z (bin, ibin);
+		fp_zeta (term, p, prec);
+		// mpf_set_ui (term, 1);
+		mpf_div (term, bin, term);
+
+		fp_zeta (bin, p-1, prec);
+		mpf_mul (term, term, bin);
+		if (p%2)
+		{
+			mpf_sub (acc, acc, term);
+		}
+		else
+		{
+			mpf_add (acc, acc, term);
+		} 
+	}
+#define T_N_SCALE
+#ifdef T_N_SCALE
+		mpf_div_ui (acc, acc, en*en);
+#endif
+
 	mpf_clear (bin);
 	mpf_clear (term);
 	mpz_clear (ibin);
@@ -94,9 +134,9 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 
 int main (int argc, char * argv[])
 {
-	if (argc < 3)
+	if (argc < 4)
 	{
-		fprintf (stderr, "Usage: %s [ndigits] [norder]\n", argv[0]); 
+		fprintf (stderr, "Usage: %s <ndigits> <nlow> <nhigh>\n", argv[0]); 
 		exit (1);
 	}
 
@@ -104,7 +144,9 @@ int main (int argc, char * argv[])
 	int prec = atoi (argv[1]);
 
 	/* number of d_n's to compute */
-	int norder = atoi (argv[2]);
+	int nlow = atoi (argv[2]);
+	int nhigh = atoi (argv[3]);
+	int norder = nhigh;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -127,7 +169,8 @@ int main (int argc, char * argv[])
 	mpf_init (d_n);
 
 	int n;
-	printf ("#\n# zeta expansion terms n^2 * (2-d_n)   \n#\n");
+	// printf ("#\n# zeta expansion terms n^2 * (2-d_n)   \n#\n");
+	printf ("#\n# totient zeta expansion terms d_n/(n*n)   \n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
@@ -137,29 +180,25 @@ int main (int argc, char * argv[])
 	mpz_t ibin;
 	mpz_init (ibin);
 	i_binomial_sequence (ibin, 0, 0);
-	i_binomial_sequence (ibin, 1, 0);
-	i_binomial_sequence (ibin, 1, 1);
 	mpz_clear (ibin);
 
-	for (n=2; n<=norder; n+=1)
+	for (n=nlow; n<=nhigh; )
 	{
-		d_sub_n (d_n, n, prec);
-		mpf_set (term, d_n);
+		// d_sub_n (d_n, n, prec);
+		d_totient_n (d_n, n, prec);
 
-#define D_N_SCALE
-#ifdef D_N_SCALE
-		mpf_ui_sub (d_n, 2, d_n);
-		mpf_mul_ui (term, d_n, n*n);
-#endif
 		time_t now = time(0);
 		int elapsed = now-then;
 		then = now;
 		
 		printf ("%d\t",n);
-		fp_prt ("", term);
-		printf ("\n");
+		fp_prt ("", d_n);
+		printf ("\t%d\n", elapsed);
 		fprintf (stderr, "n=%d took %d secs\n", n, elapsed);
 		fflush (stdout);
+
+		int step = 1+n/10;
+		n += step;
 	}
 #endif
 
