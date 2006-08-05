@@ -41,7 +41,7 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k);
 /* i_binomial_sequential 
  * High-speed sequential access 
  */
-void i_binomial_sequential (mpz_t bin, unsigned int n, unsigned int k);
+void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k);
 
 /* i_stirling
  * Stirling number of the first kind 
