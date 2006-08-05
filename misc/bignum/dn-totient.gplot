@@ -1,0 +1,29 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'dn-totient.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# ----------------------------------------------------------
+# Used to graph dn-totient-basic.png for the paper
+# set title "d_n for totient function"
+# set xlabel "n"
+# set ylabel "d_n"
+# 
+# set xrange [0:100]
+# plot "dn-totient.dat" using 1:($2*$1*$1) title "" linewidth 3
+
+# ----------------------------------------------------------
+set title "Asymptotic behaviour of d_n for totient function"
+set xlabel "n"
+set ylabel "-d_n/(n^2 log n)"
+
+set xrange [100:]
+plot "dn-totient.dat" using 1:(-$2/log($1)) title "" linewidth 3
+
