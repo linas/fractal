@@ -15,8 +15,8 @@ set title "G)"
 set xlabel "n"
 set ylabel "))"
 
-set xrange [100:]
-plot "dn-10.dat" using 1:($2) title "data"
+# set xrange [100:]
+# plot "dn-10.dat" using 1:($2) title "data"
 # plot "dn-hi.dat" using 1:($2) title "data"
 
 # set xrange [5:]
@@ -28,5 +28,16 @@ plot "dn-10.dat" using 1:($2) title "data"
 # totient
 # plot "ln.dat" using 1:(($1*$1*log($1))/$2) title "data"
 
+#1312  0.327702157562257847761565310407211428407662582260350393518409e2
+# 1482  0.32766986706419146385140739974997385782686015918875231266123e2
+# plot "dn-hilo.dat" using 1:(abs($2-32.768601231322)) title "data"
+
+# plot "dn-hilo.dat" using 1:(abs($2-32.7686)) title "data", \
+#     "dn-hilo.dat" using 1:(1.2*($1/10000)*($1/10000)) title "fit"
+
+# plot "dn-hilo.dat" using (log($1)):(log(abs($2-32.7686))) title "data"
 # pause 100
 
+set xrange [6000:]
+plot "dn-10.dat" using 1:($2) title "data"
+# plot "dn-10.dat" using 1:($2/($1*$1)) title "data"
