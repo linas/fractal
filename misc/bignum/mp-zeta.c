@@ -47,7 +47,7 @@ typedef struct {
  *  Returns true if the value is in the cache, else returns false.
  *  This assumes a 1-dimensional cache layout (simple aray)
  */
-int i_one_d_cache_check (i_cache *c, unsigned int n)
+static int i_one_d_cache_check (i_cache *c, unsigned int n)
 {
 	if (c->disabled) return 0;
 	if ((n > c->nmax) || 0==n )
@@ -447,6 +447,83 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
 #define i_binomial mpz_bin_uiui
 
 #endif /* USE_LOCAL_BINOMIAL */
+
+/* ======================================================================= */
+
+/**
+ * i_binomial_sequence -- returns binomial, assumes purely sequeintial access
+ * 
+ * This routine assumes that the binomial coefficients will be 
+ * accessed in an utterly sequential mode, with k running from 
+ * zero to n, and n running from zero to k. For sequential access,
+ * this routine is very very fast. Otherwise, random access is used
+ * which is considerably slower.
+ */
+void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k)
+{
+	static int curr_n=0, last_k=0;
+	DECLARE_I_CACHE (a_cache);
+	DECLARE_I_CACHE (b_cache);
+	static i_cache *curr_cache = &a_cache;
+	static i_cache *next_cache = &b_cache;
+
+	/* standard sequential access */
+	if (k == last_k+1 && n == curr_n)
+	{
+		mpz_t bl;
+		mpz_init (bl);
+
+		i_one_d_cache_fetch (curr_cache, bin, k-1);
+		i_one_d_cache_fetch (curr_cache, bl, k);
+		mpz_add (bin, bin, bl);
+		i_one_d_cache_store (next_cache, bin, k);
+		mpz_clear (bl);
+
+		last_k = k;
+		return;
+	}
+	
+	/* Start a new row */
+	if (k == 0 && n == curr_n+1)
+	{
+		last_k = 0;
+		curr_n = n;
+		i_cache *tmp = curr_cache;
+		curr_cache = next_cache;
+		next_cache = tmp;
+		i_one_d_cache_check (next_cache, n+1);
+		mpz_set_ui (bin, 1);
+		return;
+	}
+
+	/* End of current row -- special case */
+	if (k == n && n == curr_n)
+	{
+		mpz_set_ui (bin, 1);
+		return;
+	}
+
+	/* Initialize the suential access system. */
+	if (0 == n && 0 == k)
+	{
+		curr_n = 0;
+		last_k = 0;
+		i_one_d_cache_check (curr_cache, 3);
+		i_one_d_cache_check (next_cache, 3);
+		mpz_set_ui (bin, 1);
+		return;
+	}
+
+	/* invalid input */
+	if (k > n || 0 > k)
+	{
+		mpz_set_ui (bin, 0);
+		return;
+	}
+
+	/* If we got to here, it must be some random access. */
+	i_binomial (bin, n, k);
+}
 
 /* ======================================================================= */
 /* stirling_first - Stirling Numbers of the First kind, 

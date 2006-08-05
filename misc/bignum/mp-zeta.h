@@ -38,6 +38,11 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k);
 #define i_binomial mpz_bin_uiui
 #endif
 
+/* i_binomial_sequential 
+ * High-speed sequential access 
+ */
+void i_binomial_sequential (mpz_t bin, unsigned int n, unsigned int k);
+
 /* i_stirling
  * Stirling number of the first kind 
  * Normalized so that all entires are positive.
