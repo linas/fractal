@@ -467,6 +467,37 @@ void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k)
 	static i_cache *curr_cache = &a_cache;
 	static i_cache *next_cache = &b_cache;
 
+	/* Gap in access sequence; fill in the gap */
+	if (k > last_k+1 || (n > curr_n && k !=0))
+	{
+		int j,m;
+		if (n == curr_n)
+		{
+			for (j=last_k+1; j<k; j++)
+			{
+				i_binomial_sequence (bin, n, j);
+			}
+		}
+		else
+		{
+			for (j=last_k+1; j<=curr_n; j++)
+			{
+				i_binomial_sequence (bin, curr_n, j);
+			}
+			for (m=curr_n+1; m<n; m++)
+			{
+				for (j=0; j<=m; j++)
+				{
+					i_binomial_sequence (bin, m, j);
+				}
+			}
+			for (j=0; j<k; j++)
+			{
+				i_binomial_sequence (bin, n, j);
+			}
+		}
+	}
+	
 	/* standard sequential access */
 	if (k == last_k+1 && n == curr_n)
 	{
@@ -525,6 +556,7 @@ void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k)
 
 	/* If we got to here, it must be some random access. */
 	i_binomial (bin, n, k);
+fprintf (stderr, "booooo! n=%d k=%d  currn=%d lastk=%d\n", n,k, curr_n, last_k);
 }
 
 /* ======================================================================= */
