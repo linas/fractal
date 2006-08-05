@@ -10,11 +10,43 @@ set out 'dsubn.png'
 set data style lines
 set key right
 
+# ----------------------------------------------------
+# Graphics used for paper for dsubn-basic.png
+# set title "d_n = sum_k (-1)^n {n choose k} / zeta(k)"
+# set xlabel "n"
+# set ylabel "d_n"
+# 
+# set xrange [0:60]
+# plot "dn.dat" using 1:(2-$2/($1*$1)) title "" linewidth 3
 
-set title "G)"
+# ----------------------------------------------------
+# Graphics used for peper for dsubn-asymp-500.png
+# set title "Asymptotic behaviour of d_n"
+# set xlabel "n"
+# set ylabel "n^2 (2-d_n)"
+# 
+# set xrange [0:500]
+# plot "dn.dat" using 1:2 title "" linewidth 3
+
+# ----------------------------------------------------
+# Graphic used for dsubn-asymp-30K.png
+# set title "Asymptotic behaviour of d_n"
+# set xlabel "n"
+# set ylabel "n^2 (2-d_n)"
+# 
+# set xrange [500:30000]
+# plot "dn-10.dat" using 1:2 title "" linewidth 3
+
+# ----------------------------------------------------
+# Graphic used for dsubn-large.png
+set title "2 - d_n = 2 - sum_k (-1)^n {n choose k} / zeta(k)"
 set xlabel "n"
-set ylabel "))"
+set ylabel "2-d_n"
 
+set xrange [10000:]
+plot "dn-10.dat" using 1:($2/($1*$1)) title "" linewidth 3
+
+# ----------------------------------------------------
 # set xrange [100:]
 # plot "dn-10.dat" using 1:($2) title "data"
 # plot "dn-hi.dat" using 1:($2) title "data"
@@ -39,5 +71,5 @@ set ylabel "))"
 # pause 100
 
 set xrange [6000:]
-plot "dn-10.dat" using 1:($2) title "data"
-# plot "dn-10.dat" using 1:($2/($1*$1)) title "data"
+# plot "dn-10.dat" using 1:($2) title "data"
+plot "dn-10.dat" using 1:($2/($1*$1)) title "data"
