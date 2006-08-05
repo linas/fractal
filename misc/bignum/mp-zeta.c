@@ -474,6 +474,7 @@ void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k)
 		if (k == n)
 		{
 			mpz_set_ui (bin, 1);
+			i_one_d_cache_store (next_cache, bin, k);
 			return;
 		}
 
@@ -500,6 +501,7 @@ void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k)
 		next_cache = tmp;
 		i_one_d_cache_check (next_cache, n+1);
 		mpz_set_ui (bin, 1);
+		i_one_d_cache_store (next_cache, bin, 0);
 		return;
 	}
 
