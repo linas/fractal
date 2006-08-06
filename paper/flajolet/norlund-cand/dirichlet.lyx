@@ -26,7 +26,7 @@
 
 \layout Date
 
-9 July 2006
+5 August 2006
 \layout Title
 
 Generalizations
@@ -43,7 +43,7 @@ I worked through the second half of the last theorem in greater detail.
  The changes needed to make the more general statement are surprisingly
  minimal (assuming I haven't made a mistake).
  Below follow some notes and calculations that suggest how the second half
- of the proof could be modified/generalized.
+ of the proof could be modified/generlized.
  
 \layout Standard
 
@@ -66,12 +66,6 @@ Selberg class
  the definition of the class requires no math beyond generic complex analysis.
  Ideally, this proof draws all its support from the definition of that class...
  
-\layout Standard
-
-Also: regarding the second part of the proof, I note that we only prove
- RH for the left-hand side of the critical strip; the proof makes no statements
- about the right hand side.
- Presumably this is not hard to fix up, but still, it shouldn't be assumed.
 \layout Section*
 
 Review of Dirichlet Series
@@ -81,7 +75,7 @@ Much of the proof depends on having
 \begin_inset Formula $\zeta(s)$
 \end_inset 
 
- in the denominator, and there are many Dirichlet series that achieve this.
+ in the denominator, and there are many Dirichlet series that acheive this.
  The canonical one, involving the Mobius function is
 \layout Standard
 
@@ -134,8 +128,8 @@ One may construct in a very straightforward way the Dirichlet series for
 \end_inset 
 
 .
- These can be constructed by a fairly trivial application of Dirichlet convoluti
-on, together with the Mobius inversion formula.
+ These can be constructed by a faily trival application of Dirichlet convolution
+, together with the Mobius inversion formula.
  In short, one has an old, general theorem that
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{(f*g)(n)}{n^{s}}=\sum_{n=1}^{\infty}\frac{f(n)}{n^{s}}\;\sum_{m=1}^{\infty}\frac{g(m)}{m^{s}}\]
@@ -168,11 +162,12 @@ on, together with the Mobius inversion formula.
 \begin_inset Formula $g(1)\ne1$
 \end_inset 
 
-), one may multiply and divide Dirichlet series with impunity, more or less.
+), one may mulltiply and divide Dirichlet series with impunity, more or
+ less.
  
 \layout Standard
 
-I haven't yet seen a way of building 
+I havent yet seen a way of building 
 \begin_inset Formula $1/\zeta(\alpha s+\beta)$
 \end_inset 
 
@@ -184,7 +179,7 @@ As regards to the proof, perhaps the most important generalization is that
 \begin_inset Formula $L$
 \end_inset 
 
--functions, since these are the ones for which the GRH applies.
+-functions, since these are the onces for which the GRH applies.
  Specifically, one has 
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{\mu(n)\chi(n)}{n^{s}}=\frac{1}{L(s,\chi)}\]
@@ -199,7 +194,603 @@ As regards to the proof, perhaps the most important generalization is that
  
 \layout Section*
 
-Proof in one direction
+Numeric Exploration
+\layout Standard
+
+This section provides a numeric exploration of the finite differences of
+ the various Dirichlet series given above.
+ Consider first
+\begin_inset Formula \[
+d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{1}{\zeta(k)}\]
+
+\end_inset 
+
+ By examining 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+ in the range of 
+\begin_inset Formula $2\le n\le1000$
+\end_inset 
+
+, one would be tempted to incorrectly conclude that 
+\begin_inset Formula $\lim_{n\to\infty}d_{n}=2$
+\end_inset 
+
+; this behaviour is shown in the graph below.
+ However, by exploring the range 
+\begin_inset Formula $1000\le n\le50000$
+\end_inset 
+
+, one discovers that 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+ is oscillatory.
+ The oscillations seem bounded, and thus the numeric work suggests that
+ 
+\begin_inset Formula \[
+d_{n}=\mathcal{O}\left\left (\log n\right)\]
+
+\end_inset 
+
+ or possibly better, but presumably not 
+\begin_inset Formula $\mathcal{O}(1)$
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+ for smaller 
+\begin_inset Formula $n$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dsubn-basic.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+The graphic above shows 
+\begin_inset Formula \[
+d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{1}{\zeta(k)}\]
+
+\end_inset 
+
+ in the range of 
+\begin_inset Formula $2\le n\le60$
+\end_inset 
+
+.
+ It strongly suggests an asymptotic approach to 
+\begin_inset Formula $d_{n}\to2$
+\end_inset 
+
+, which can be seen to be incorrect if larger 
+\begin_inset Formula $n$
+\end_inset 
+
+ are explored.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Asymptotic behaviour of 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dsubn-asymp-500.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+The above figure shows a graph of 
+\begin_inset Formula $n^{2}(2-d_{n})$
+\end_inset 
+
+ in the range of 
+\begin_inset Formula $2\le n\le500$
+\end_inset 
+
+.
+ As with the previous graphic, it strongly but incorrectly suggests that
+ 
+\begin_inset Formula $d_{n}\to2$
+\end_inset 
+
+in the limit of large 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ That this is not the case can be discovered by pursuing larger 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Asymptotic behaviour of 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dsubn-asymp-30K.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This graphic charts the value of 
+\begin_inset Formula $n^{2}(2-d_{n})$
+\end_inset 
+
+ in the range of 
+\begin_inset Formula $500\le n\le30000$
+\end_inset 
+
+.
+ Rather than approaching a limit for large 
+\begin_inset Formula $n$
+\end_inset 
+
+, there are a series of oscillations that seem to grow ever larger.
+ The amplitude of these oscillations appears to be of 
+\begin_inset Formula $\mathcal{O}\left(n^{2}\right)$
+\end_inset 
+
+ or possibly 
+\begin_inset Formula $\mathcal{O}\left(n^{2}\log n\right)$
+\end_inset 
+
+.
+ In either case, such oscillations indicate that 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+cannot be approaching a constant for large 
+\begin_inset Formula $n$
+\end_inset 
+
+, instead suggesting that 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+ is itself oscillatory for large 
+\begin_inset Formula $n$
+\end_inset 
+
+, as the next grahic shows.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+for large 
+\begin_inset Formula $n$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dsubn-large.png
+	width 100page%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a plot of 
+\begin_inset Formula $2-d_{n}$
+\end_inset 
+
+ for the range 
+\begin_inset Formula $10^{4}\le n\le3\times10^{4}$
+\end_inset 
+
+.
+ A nascent oscillatory behaviour can be seen.
+\end_inset 
+
+
+\layout Standard
+
+The finite differences for the other series appear to show a similar pattern,
+ except that the scale of the leading order is different.
+ Consider, for example, 
+\begin_inset Formula \[
+d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\]
+
+\end_inset 
+
+ whith the superscript 
+\begin_inset Formula $\varphi$
+\end_inset 
+
+ indicating that the corresponding Dirichlet series involves the totient
+ function 
+\begin_inset Formula $\varphi$
+\end_inset 
+
+.
+ For smaller values of 
+\begin_inset Formula $n$
+\end_inset 
+
+, numeric analysis suggests that 
+\begin_inset Formula $d_{n}^{\varphi}=\mathcal{O}\left(n^{2}\log n\right)$
+\end_inset 
+
+, as the following graphics illustrate.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Graph of 
+\begin_inset Formula $d_{n}^{\varphi}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dn-totient-basic.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+A graph of 
+\begin_inset Formula $d_{n}^{\varphi}$
+\end_inset 
+
+ for 
+\begin_inset Formula $3\le n\le100$
+\end_inset 
+
+ shows rapidly increasing behaviour.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Asymptotic behavour of 
+\begin_inset Formula $d_{n}^{\varphi}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dn-totient-asymp.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This graphic shows 
+\begin_inset Formula $-d_{n}^{\varphi}/n^{2}\log n$
+\end_inset 
+
+ for 
+\begin_inset Formula $100\le n\le16000$
+\end_inset 
+
+, suggesting a form for the asymptotic behvaiour of 
+\begin_inset Formula $d_{n}^{\varphi}$
+\end_inset 
+
+.
+ This figure has a logarithmic shape, suggesting that 
+\begin_inset Formula \[
+d_{n}^{\varphi}=A\,\left(1+B\log n\right)n^{2}\log n+\mathcal{O}\left(n^{2}\log^{3}n\right)\]
+
+\end_inset 
+
+ for some constants 
+\begin_inset Formula $A$
+\end_inset 
+
+, 
+\begin_inset Formula $B$
+\end_inset 
+
+.
+ Numerically, it seems that 
+\begin_inset Formula $A\approx0.316$
+\end_inset 
+
+, 
+\begin_inset Formula $B\approx7\times10^{-4}$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+Let 
+\begin_inset Formula \[
+d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
+
+\end_inset 
+
+be the series corresponding to the Liouville function.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset Formula $d_{n}^{\lambda}$
+\end_inset 
+
+ for the Liouville function
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dn-liouville-basic.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the basic behaviour for the finite differences 
+\begin_inset Formula $d_{n}^{\lambda}$
+\end_inset 
+
+ corresponding to the Liouville function.
+\end_inset 
+
+
+\layout Section*
+
+Saddle-point analysis
+\layout Standard
+
+The asymptotic behaviour of the 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+ can be obtained by performing a saddle-point evaluation of the corresponding
+ Norlund-Rice integral.
+ That is, one writes 
+\begin_inset Formula \[
+d_{n}=\frac{(-1)^{n}}{2\pi i}\int_{c-i\infty}^{c+i\infty}f(s)\frac{n!}{s(s-1)(s-2)\cdots(s-n)}ds\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $f(s)=1/\zeta(s)$
+\end_inset 
+
+ for 
+\begin_inset Formula $d_{n}^{\mu}$
+\end_inset 
+
+, and 
+\begin_inset Formula $f(s)=\zeta(s-1)/\zeta(s)$
+\end_inset 
+
+ for 
+\begin_inset Formula $d_{n}^{\phi}$
+\end_inset 
+
+, and so on.
+ By assuming the Riemann Hypothesis, it has been shown that
+\begin_inset Formula \[
+\zeta(s)=\mathcal{O}\left(\left|t\right|^{\epsilon}\right)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\frac{1}{\zeta(s)}=\mathcal{O}\left(\left|t\right|^{\epsilon}\right)\]
+
+\end_inset 
+
+ for any 
+\begin_inset Formula $\epsilon>0$
+\end_inset 
+
+ and 
+\begin_inset Formula $s=\sigma+it$
+\end_inset 
+
+, as 
+\begin_inset Formula $t\to\infty$
+\end_inset 
+
+.
+ This can be subsistuted directly into the integral; however, one must keep
+ in mind that 
+\begin_inset Formula $1/\zeta(s)$
+\end_inset 
+
+ has a zero at 
+\begin_inset Formula $s=1$
+\end_inset 
+
+ that cancels one of the poles in the integrand.
+ Thus, one obtains, 
+\begin_inset Formula \begin{eqnarray*}
+d_{n}^{\mu} & = & \mathcal{O}(1)\int_{c-i\infty}^{c+i\infty}\frac{\left|s\right|^{\epsilon}}{s}\,\frac{n!}{(s-2)(s-3)\cdots(s-n)}ds\\
+ & = & \mathcal{O}(1)\int_{c-i\infty}^{c+i\infty}e^{N\omega(s)}ds\\
+ & = & \mathcal{O}(1)\sqrt{\frac{2\pi}{N\omega^{\prime\prime}\left(s_{0}\right)}}e^{N\omega\left(s_{0}\right)}\end{eqnarray*}
+
+\end_inset 
+
+ with 
+\begin_inset Formula $s_{0}$
+\end_inset 
+
+ the saddle point.
+ Careful analysis shows that 
+\begin_inset Formula $N=\log n$
+\end_inset 
+
+, so that the saddle-point approximation is valid, and that the saddle point
+ is located at
+\begin_inset Formula \[
+s_{0}=\frac{1-\epsilon}{\log n}\left[1+\frac{1-\gamma}{\log n}+\mathcal{O}\left(\frac{1}{\log^{2}n}\right)\right]\]
+
+\end_inset 
+
+ This saddle point is located very near the origin; one must take the integratio
+n contour so that it passes from the lower-right quadrant, crosses 
+\begin_inset Formula $\sigma=1/2$
+\end_inset 
+
+ to approach the origin, and departs to the upper-right quadrant.
+ Completing the evaluation, one obtains
+\begin_inset Formula \[
+d_{n}^{\mu}=\mathcal{O}(1)\sqrt{\frac{2\pi}{1-\epsilon}}\left(1+\epsilon\log\left(\frac{1-\epsilon}{\log n}\right)\right)\left(1+\mathcal{O}\left(\frac{1}{\log n}\right)\right)\]
+
+\end_inset 
+
+ Pulling all of these factors together, one concludes that 
+\begin_inset Formula \[
+d_{n}^{\mu}=\mathcal{O}\left(\log\log n\right)\]
+
+\end_inset 
+
+
+\layout Subsection*
+
+Saddle-point analysis for the Liouville series
+\layout Standard
+
+This section summarizes a saddle-point analysis for the Liouville function
+ finite differene series 
+\begin_inset Formula \[
+d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
+
+\end_inset 
+
+ The integrand of the corresponding Norlund-Rice integral is regular at
+ 
+\begin_inset Formula $s=1$
+\end_inset 
+
+ and has a simple pole at 
+\begin_inset Formula $2s=1$
+\end_inset 
+
+.
+ In all other respects, it resembles the previous integrals.
+ Thus, a priori we expect a saddle point near 
+\begin_inset Formula $s=1/2$
+\end_inset 
+
+ to determine the asymptotic behaviour.
+ Indeed, proceeding as before, one obtains 
+\begin_inset Formula \[
+s_{0}=\frac{1}{2}+\frac{2+\epsilon/4}{\log n}+\mathcal{O}\left(\frac{1}{\log^{2}n}\right)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+d_{n}^{\lambda}=\mathcal{O}\left(\sqrt{n}\right)\]
+
+\end_inset 
+
+
+\layout Section*
+
+Proof in one direction 
 \layout Standard
 
 Based on the above, I suggest modifying the proof so that, in one direction,
@@ -223,7 +814,7 @@ f(s)=\sum_{n=1}^{\infty}\frac{a_{n}}{n^{s}}\]
 .
  Defining 
 \begin_inset Formula \[
-d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\, f(k)\]
+d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\, f(k)\]
 
 \end_inset 
 
@@ -237,7 +828,7 @@ d_{n}=\sum_{m=1}^{\infty}a_{m}\left[\left(1-\frac{1}{m}\right)^{n}-1+\frac{n}{m}
 \begin_inset Formula $a_{m}n^{2}/m^{2}$
 \end_inset 
 
- and so convergence is guaranteed for 
+ and so convergence is gaurenteed for 
 \begin_inset Formula $a_{m}=\mathcal{O}\left(m^{2-\epsilon}\right)$
 \end_inset 
 
@@ -262,7 +853,7 @@ D(x)=\sum_{m=1}^{\infty}a_{m}\left[e^{-x/m}-1+\frac{x}{m}\right]\]
 \end_inset 
 
  which has similar convergence properties to the previous sum.
- The estimate for the behavior of this sum proceeds essentially unmodified,
+ The estimate for the behvaiour of this sum proceeds essentially unmodified,
  although I present some additional detail here to make this clear.
  
 \layout Standard
@@ -275,8 +866,8 @@ The aim is to show that
 \begin_inset Formula $D(x)$
 \end_inset 
 
- are substantially similar, and that in particular, both quantities have
- the same asymptotic behavior for 
+ are substaintially similar, and that in particular, both quantities have
+ the same asymptotoc behaviour for 
 \begin_inset Formula $n\to\infty$
 \end_inset 
 
@@ -371,7 +962,7 @@ To show that
 \begin_inset Formula $D(x)$
 \end_inset 
 
- have an identical asymptotic behavior for non-integer real 
+ have an identical asymptotic behvaiour for non-integer real 
 \begin_inset Formula $x$
 \end_inset 
 
@@ -394,7 +985,7 @@ D^{\prime}(x)=\mathcal{O}\left(n^{2\delta-1}\right)+\mathcal{O}(1)\sum_{m<m_{0}}
 
  At this point I notice an error in my notes, and, as it is late at night,
  I'd rather not guess my way out of it.
- I don't believe its serious.
+ I don't beleive its serious.
  The remainder of the proof, regarding the Mellin transform goes through
  unmodified.
  
@@ -430,13 +1021,13 @@ Ramanujan conjecture
 \begin_inset Formula $r$
 \end_inset 
 
-'s are easily accommodated.
+'s are easily accomadated.
  Simply changing the definition to
 \layout Standard
 
 
 \begin_inset Formula \[
-d_{n}=\sum_{k=n_{0}}^{n}(-1)^{k}\left({{n\atop k}}\right)\, f(k)\]
+d_{n}=\sum_{k=n_{0}}^{n}(-1)^{k}\left({n\atop k}\right)\, f(k)\]
 
 \end_inset 
 
@@ -460,7 +1051,7 @@ Poisson-Mellin-Newton
 \begin_inset Quotes erd
 \end_inset 
 
- cycle, there appears to be a similar cycle, connection the so-called 
+ cycle, there appears to be a simialr cycle, connection the so-called 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -480,7 +1071,7 @@ Perron's formula
  expressing a finite sum as a Mellin transform.
  There appear to be various bounds on finite sums that are known to number
  theory, and I am hoping that by means of Perron's formula, these can be
- converted over to the asymptotic behavior of the Norlund-Rice integral
+ converted over to the asymptotic behaviour of the Norlund-Rice integral
  that we desire.
  Maybe.
  But this is only after mulling things over while walking the dog, it might
@@ -499,7 +1090,7 @@ Discussion
 \layout Standard
 
 Its not clear how Li's criterion impacts on the Selberg class, and vice-versa.
- It may be an edifying exercise to connect the two together.
+ It may be an edifying excercise to connect the two together.
  Alternately, I'd like to translate Li's criterion to this proof, but don't
  quite see how.
 \the_end
