@@ -1,0 +1,31 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'dn-liouville.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# ----------------------------------------------------------
+# Used to graph dn-liouville-basic.png for the paper
+set title "d_n for Liouville function"
+set xlabel "n"
+set ylabel "d_n"
+
+set xrange [0:100]
+plot "dn-liouville.dat" using 1:2 title "" linewidth 3
+
+# ----------------------------------------------------------
+# set title "d_n for Liouville function"
+# set xlabel "n"
+# set ylabel "d_n"
+# 
+# set xrange [100:]
+# plot "dn-liouville.dat" using 1:($2/(sqrt($1)*log(log($1)))) title "" linewidth 3
+
+
+
