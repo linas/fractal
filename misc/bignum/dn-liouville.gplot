@@ -12,20 +12,23 @@ set key right
 
 # ----------------------------------------------------------
 # Used to graph dn-liouville-basic.png for the paper
-set title "d_n for Liouville function"
-set xlabel "n"
-set ylabel "d_n"
-
-set xrange [0:100]
-plot "dn-liouville.dat" using 1:2 title "" linewidth 3
-
-# ----------------------------------------------------------
 # set title "d_n for Liouville function"
 # set xlabel "n"
 # set ylabel "d_n"
 # 
-# set xrange [100:]
-# plot "dn-liouville.dat" using 1:($2/(sqrt($1)*log(log($1)))) title "" linewidth 3
+# set xrange [0:100]
+# plot "dn-liouville.dat" using 1:2 title "" linewidth 3
+
+# ----------------------------------------------------------
+set title "d_n for Liouville function"
+set xlabel "n"
+set ylabel "d_n"
+
+set xrange [4100:]
+plot "dn-liouville.dat" using 1:($2/(sqrt($1))) title "" linewidth 3 
+
+# plot "dn-liouville.dat" using 1:($2/(sqrt($1))) title "" linewidth 3 ,\
+#     "dn-liouville.dat" using 1:(1.16+0.005*log($1)) title "fit"
 
 
 
