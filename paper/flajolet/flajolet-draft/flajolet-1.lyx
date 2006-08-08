@@ -1,0 +1,277 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme pslatex
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Quotation
+
+
+\series bold 
+From: Linas Vepstas <linas@linas.org>
+\layout Quotation
+
+
+\series bold 
+To: Philippe Flajolet <Philippe.Flajolet@inria.fr>
+\layout Quotation
+
+
+\series bold 
+Subject: Differences of Zeta values
+\layout Quotation
+
+
+\series bold 
+Date: 15 January 2006
+\newline 
+
+\layout Standard
+
+Salut Philippe,
+\layout Standard
+
+I had a chance to read through your letter a bit more carefully; I was rather
+ thrilled to receive it.
+ As to your offer of a joint publication of results; yes, I would very much
+ like to take you up on that offer.
+ 
+\layout Standard
+
+My apologies for taking so long to respond; I was hoping that after reading
+ it an digesting it, I might have something brilliant to add; but unfortunately,
+ I do not.
+ I was able to check some of your formulas, but not all; I haven't had much
+ time, and I do not have an algebra system such as Maple.
+ The final estimate that you arrive at is in excellent with the data.
+ I'm attaching a file with the first 600 values of the sequence for you
+ to play with as you wish.
+ I believe the values should all be correct (I fixed some accuracy problems
+ a while ago, but hadn't triple-checked.).
+ When I saw your final estimate for the sequence, I slapped my head; its
+ funny how numeric estimates to data can be so misleading, and I felt a
+ twinge of embarrassment over the convoluted nature of my best fit.
+\layout Standard
+
+I'm rediscovering your paper 
+\begin_inset Quotes eld
+\end_inset 
+
+Fine structure constants
+\begin_inset Quotes erd
+\end_inset 
+
+; its making more of an impact now than when I first read it.
+ In the intervening time, I've learned a lot about the various connections
+ between ergodic theory, modular forms, Riemann surfaces, Fuchsian groups,
+ and the like; its been a very interesting tour.
+ I haven't been able to apply much of this to actually solving any of the
+ problems I've been looking at, but I feel I'm certainly barking up an interesti
+ng tree.
+\layout Standard
+
+A couple of questions, and a couple of remarks, then: 
+\newline 
+
+\layout Paragraph
+
+Nordlund-Rice:
+\layout Standard
+
+This integral quite amazed me; I hadn't seen it before, but I like it.
+ Can you perhaps recommend a book or review on finite differences? After
+ poking around the last few years, I get the impression that the general
+ topic of finite differences is not quite as simple as one might naively
+ suppose.
+ I'm not sure quite what I'm looking for, but was wondering is something
+ lept to mind.
+\newline 
+
+\layout Paragraph
+
+Series identities: 
+\layout Standard
+
+Here's a shallow question.
+ There seems to be a set of 
+\begin_inset Quotes eld
+\end_inset 
+
+well-known
+\begin_inset Quotes erd
+\end_inset 
+
+ exactly summable series of the form 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}{n+a \choose b}\zeta(n+a)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}(-1)^{n}{n+a \choose b}\zeta(n+a)\label{eq:}\end{equation}
+
+\end_inset 
+
+ with 
+\begin_inset Formula $a$
+\end_inset 
+
+ and 
+\begin_inset Formula $b$
+\end_inset 
+
+ some numbers or integers; for example: 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}{n+s+1 \choose n+1}\,\left(\zeta(n+s+2)-1\right)=1\label{eq:}\end{equation}
+
+\end_inset 
+
+ One may easily derive identities for different 
+\begin_inset Formula $a$
+\end_inset 
+
+ and 
+\begin_inset Formula $b$
+\end_inset 
+
+ by applying some simple trick or another, and even obtain some recurrence
+ relations.
+ However, when I do so, my approach, and results, are rather ad hoc.
+ Is a general statement of all of these identities? Do they bear someone's
+ name? Is there some accepted notation and normalization for the various
+ recursion relations that bind them together? I can't say its deep; but
+ it could be handy to have these tabulated.
+ 
+\newline 
+
+\layout Paragraph
+
+A slight generalization:
+\layout Standard
+
+I can generalize my formulas 35-37 ever so slightly: It seems I can write
+ these as
+\begin_inset Formula \begin{equation}
+\zeta(s)=\frac{s}{s-1}-sw^{s-1}\sum_{n=0}^{\infty}(-1)^{n}{s-1 \choose n}\, u_{n}\label{eq:zeta}\end{equation}
+
+\end_inset 
+
+ where the 
+\begin_inset Formula $u_{m}$
+\end_inset 
+
+ are polynomials in 
+\begin_inset Formula $w$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+u_{n}(w)=1-\gamma+\sum_{k=1}^{n}(-w)^{k}{n \choose k}\,\left(\frac{1}{k}-\frac{\zeta(k+1)}{k+1}\right)\label{eq:un}\end{equation}
+
+\end_inset 
+
+ What we've discussed so far is the case of 
+\begin_inset Formula $w=1$
+\end_inset 
+
+.
+ The leading asymptotic behavior is 
+\begin_inset Formula \begin{equation}
+u_{n}(w)=\frac{1}{2w(n+1)}+\mathcal{O}\left(\exp-c\sqrt{n+1}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Now here's the interesting part: the constant 
+\begin_inset Formula $c$
+\end_inset 
+
+ depends on 
+\begin_inset Formula $w$
+\end_inset 
+
+ and seems to get larger as 
+\begin_inset Formula $w$
+\end_inset 
+
+ gets larger.
+ How, I can't quite tell; possibly 
+\begin_inset Formula $c\sim\sqrt{w}$
+\end_inset 
+
+.
+ The frequency of the oscillatory part drops with larger 
+\begin_inset Formula $w$
+\end_inset 
+
+ also.
+ I've done some numeric exploration up to about 
+\begin_inset Formula $w\approx2$
+\end_inset 
+
+ and 
+\begin_inset Formula $n<600$
+\end_inset 
+
+ although as you are well aware the terms in these sums are painfully large.
+ I'm not sure what to make of this, but thought you'd find this interesting.
+\newline 
+
+\layout Paragraph
+
+A different generalization:
+\layout Standard
+
+There's a different generalization, where equation (
+\begin_inset LatexCommand \ref{eq:un}
+
+\end_inset 
+
+) is expressed in terms for the Hurwitz zeta 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
+
+, for arbitrary value of 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+ I haven't quite written these out yet, they're a little more complex.
+ I expect an overall similar development.
+ Again, I thought you'd be interested, as now one has relations on L-function.
+\newline 
+
+\newline 
+I am not sure what to add; its been a while since I looked at this problem.
+ I hope to hear from you soon,
+\newline 
+
+\newline 
+
+\layout Standard
+
+Sincerely, 
+\layout Standard
+
+Linas Vepstas
+\the_end

@@ -26,7 +26,7 @@
 
 \layout Date
 
-5 August 2006
+6 August 2006
 \layout Title
 
 Generalizations
@@ -35,8 +35,38 @@ Generalizations
 Philippe,
 \layout Standard
 
-I worked through the second half of the last theorem in greater detail.
- It works for a more general class of Dirichlet series.
+I worked through the last part of the paper in greater detail.
+ The sections below review some other common Dirichlet series.
+ Numeric results are presented for the finite differences of these series;
+ particularly remarkable is the series for 
+\begin_inset Formula $1/\zeta(s)$
+\end_inset 
+
+, which has a suprising behaviour that is not manifested until very large
+ order.
+ This is followed by an asymptotic analysis of these sums, using the saddle-poin
+t method.
+ The analytic results are in general agreement with the numeric results.
+ 
+\layout Standard
+
+One interesting issue arises in deriving the analytic results.
+ These are most easily obtained by assuming the Riemann Hypothesis, so as
+ to enable the approximation 
+\begin_inset Formula $1/\zeta(s)=\mathcal{O}(|t|^{\epsilon})$
+\end_inset 
+
+ for large 
+\begin_inset Formula $t$
+\end_inset 
+
+ to be used inside of the Norlund-Rice integrals.
+\layout Standard
+
+----------------
+\layout Standard
+
+It works for a more general class of Dirichlet series.
  I suppose you know this already, as it is hinted at in the paper, but not
  stated flat-out.
  I think it should be made more obvious, or stated more directly.
@@ -665,7 +695,7 @@ d_{n}=\frac{(-1)^{n}}{2\pi i}\int_{c-i\infty}^{c+i\infty}f(s)\frac{n!}{s(s-1)(s-
 \end_inset 
 
  for 
-\begin_inset Formula $d_{n}^{\phi}$
+\begin_inset Formula $d_{n}^{\varphi}$
 \end_inset 
 
 , and so on.
@@ -694,8 +724,8 @@ d_{n}=\frac{(-1)^{n}}{2\pi i}\int_{c-i\infty}^{c+i\infty}f(s)\frac{n!}{s(s-1)(s-
 \end_inset 
 
 .
- This can be subsistuted directly into the integral; however, one must keep
- in mind that 
+ This can be substituted directly into the integral.
+ One should also take account of the fact that 
 \begin_inset Formula $1/\zeta(s)$
 \end_inset 
 
@@ -734,9 +764,24 @@ n contour so that it passes from the lower-right quadrant, crosses
 \end_inset 
 
  to approach the origin, and departs to the upper-right quadrant.
- Completing the evaluation, one obtains
+ 
+\layout Standard
+
+The two parts of the saddle point formula are 
 \begin_inset Formula \[
-d_{n}^{\mu}=\mathcal{O}(1)\sqrt{\frac{2\pi}{1-\epsilon}}\left(1+\epsilon\log\left(\frac{1-\epsilon}{\log n}\right)\right)\left(1+\mathcal{O}\left(\frac{1}{\log n}\right)\right)\]
+e^{N\omega(s_{0})}=\left(\frac{e\log n}{1-\epsilon}\right)^{1-\epsilon}+\mathcal{O}(1)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\sqrt{\frac{2\pi}{N\omega^{\prime\prime}\left(s_{0}\right)}}=\frac{\sqrt{2\pi\left(1-\epsilon\right)}}{\log n}\left(1+\mathcal{O}\left(\frac{1}{\log n}\right)\right)\]
+
+\end_inset 
+
+Combining these, one obtains
+\begin_inset Formula \[
+d_{n}^{\mu}=\mathcal{O}(1)\cdot\sqrt{\frac{2\pi}{1-\epsilon}}\left(1+\epsilon\log\left(\frac{1-\epsilon}{\log n}\right)\right)\left(1+\mathcal{O}\left(\frac{1}{\log n}\right)\right)\]
 
 \end_inset 
 
@@ -749,11 +794,139 @@ d_{n}^{\mu}=\mathcal{O}\left(\log\log n\right)\]
 
 \layout Subsection*
 
+An alternate analysis
+\layout Standard
+
+There is an alternate approach to the analysis which leads to some curious
+ observations about the relationship between the Riemann Hypothesis and
+ the location of saddle points.
+ One may take as the starting point the well known formula 
+\begin_inset Formula \[
+\zeta(s)=\frac{\exp\left(\log2\pi-1-\gamma/2\right)s}{2\left(s-1\right)\Gamma\left(1+s/2\right)}\prod_{\rho}\left(1-\frac{s}{\rho}\right)e^{s/\rho}\]
+
+\end_inset 
+
+ Here, the product extends over the zeros 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ of the Riemann zeta functon.
+ The derivation of this formula does not require the assumption of the RH,
+ and so this seems to provide a more general starting point for a saddle-point
+ analysis.
+ To proceed, one must 
+\emph on 
+assume
+\emph default 
+ that the only saddle point is located near the origin.
+ As will be made clear later, this assumption is equivalent to assuming
+ RH.
+ 
+\layout Standard
+
+Making this assumption that the only saddle point is near the origin, one
+ then obtains for its location 
+\begin_inset Formula \[
+s_{0}=\frac{1}{\log n}+\mathcal{O}\left(\frac{1}{\log^{2}n}\right)\]
+
+\end_inset 
+
+ The only direct requirement on the location of the zeros was that they
+ satisfy 
+\begin_inset Formula \[
+\sum_{\rho}\frac{1}{\rho\left(\rho-s\right)}=\mathcal{O}\left(1\right)\]
+
+\end_inset 
+
+ Proceeding with the saddle-point analysis, one obtains that 
+\begin_inset Formula \[
+d_{n}=\mathcal{O}\left(1\right)\]
+
+\end_inset 
+
+ Note that this result seems to be obtainable with only extremely weak assumptio
+ns about the location of the zeros of the Riemann zeta.
+ This makes sense: the saddle point is essentially a local property, and
+ local properties shouldn't really depend on the fine points of distant
+ parts of the integrand.
+ Thus, it is tempting to conclude that the result that 
+\begin_inset Formula $d_{n}=\mathcal{O}\left(1\right)$
+\end_inset 
+
+ follows without requiring RH; but this would be wrong.
+ This result was based on the assumption that the only saddle point was
+ near the origin, and this assumption must surely require RH, as will be
+ established in a later section.
+\layout Subsection*
+
+Saddle-point analysis for the Totient series
+\layout Standard
+
+This section summarizes a saddle-point analysis for the totient function
+ finite difference series 
+\begin_inset Formula \[
+d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\]
+
+\end_inset 
+
+ The integrand of the corresponding Norlund-Rice integral is regular at
+ 
+\begin_inset Formula $s=1$
+\end_inset 
+
+ and has a simple pole at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+, and a double pole at 
+\begin_inset Formula $s=2$
+\end_inset 
+
+.
+ In most other respects, it resembles the previous integral.
+ It can be seen to have a saddle point near 
+\begin_inset Formula $s=2$
+\end_inset 
+
+ which determines the asymptotic behaviour.
+ Evaluating the integrand for the location of the saddle point, one obtains
+ 
+\begin_inset Formula \[
+s_{0}=2+\frac{2}{\log n}+\frac{(1-\epsilon)/2-\gamma}{\log^{2}n}+\mathcal{O}\left(\frac{1}{\log^{3}n}\right)\]
+
+\end_inset 
+
+ The two parts of the formula are 
+\begin_inset Formula \[
+e^{N\omega(s_{0})}=\mathcal{O}(1)\cdot n^{2}\log^{2}n\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+N\omega^{\prime\prime}\left(s_{0}\right)=-2\log^{2}n+\frac{1-\epsilon}{4}+\mathcal{O}\left(\frac{1}{\log n}\right)\]
+
+\end_inset 
+
+Combining these, one obtains 
+\begin_inset Formula \[
+d_{n}^{\varphi}=\mathcal{O}\left(n^{2}\log n\right)\]
+
+\end_inset 
+
+ This result is in good agreement with the numerical calculations for the
+ range 
+\begin_inset Formula $10^{2}<n<10^{4}$
+\end_inset 
+
+.
+\layout Subsection*
+
 Saddle-point analysis for the Liouville series
 \layout Standard
 
 This section summarizes a saddle-point analysis for the Liouville function
- finite differene series 
+ finite difference series 
 \begin_inset Formula \[
 d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
 
@@ -781,16 +954,33 @@ s_{0}=\frac{1}{2}+\frac{2+\epsilon/4}{\log n}+\mathcal{O}\left(\frac{1}{\log^{2}
 
 \end_inset 
 
+ The two parts of the saddle-point formula may be obtained from 
+\begin_inset Formula \[
+e^{N\omega(s_{0})}=\mathcal{O}(1)\cdot\sqrt{n}\,\frac{\log n}{2+\epsilon/4}\]
+
+\end_inset 
+
  and 
+\begin_inset Formula \[
+N\omega^{\prime\prime}\left(s_{0}\right)=\frac{1-\epsilon/4}{2}\,\log^{2}n+\mathcal{O}(1)\]
+
+\end_inset 
+
+ which may be combined to obtain
 \begin_inset Formula \[
 d_{n}^{\lambda}=\mathcal{O}\left(\sqrt{n}\right)\]
 
 \end_inset 
 
+This result is in good agreement with the numerical calculations for the
+ range 
+\begin_inset Formula $10^{2}<n<10^{4}$
+\end_inset 
 
+.
 \layout Section*
 
-Proof in one direction 
+Equivalence to the Riemann Hypothesis
 \layout Standard
 
 Based on the above, I suggest modifying the proof so that, in one direction,
@@ -829,12 +1019,35 @@ d_{n}=\sum_{m=1}^{\infty}a_{m}\left[\left(1-\frac{1}{m}\right)^{n}-1+\frac{n}{m}
 \end_inset 
 
  and so convergence is gaurenteed for 
-\begin_inset Formula $a_{m}=\mathcal{O}\left(m^{2-\epsilon}\right)$
+\begin_inset Formula $a_{m}=\mathcal{O}\left(m^{1-\epsilon}\right)$
+\end_inset 
+
+ for some 
+\begin_inset Formula $\epsilon>0$
 \end_inset 
 
 .
- All of the number-theoretic sums mentioned previously satisfy this.
- More generally, the 
+ This condition is satisfied by both the Mobius and the Liouville sums,
+ for which 
+\begin_inset Formula $|\mu(m)|\le1$
+\end_inset 
+
+ and 
+\begin_inset Formula $|\lambda(m)|\le1$
+\end_inset 
+
+.
+ The analogous sum for the totient function starts at k=3, and thus has
+ the form 
+\begin_inset Formula \[
+d_{n}=\sum_{m=1}^{\infty}a_{m}\left[\left(1-\frac{1}{m}\right)^{n}-1+\frac{n}{m}-\frac{n(n-1)}{2m^{2}}\right]\]
+
+\end_inset 
+
+
+\layout Standard
+
+More generally, the 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -867,7 +1080,7 @@ The aim is to show that
 \end_inset 
 
  are substaintially similar, and that in particular, both quantities have
- the same asymptotoc behaviour for 
+ the same asymptotic behaviour for 
 \begin_inset Formula $n\to\infty$
 \end_inset 
 
@@ -912,8 +1125,9 @@ e^{n/m+n\log(1-1/m)}-1=\mathcal{O}\left(n/m^{2}\right)\]
 
  held fixed.
  From this, one obtains 
-\begin_inset Formula \[
-\sum_{m\ge m_{0}}a_{m}e^{-n/m}\left[e^{n/m+n\log(1-1/m)}-1\right]=\mathcal{O}\left(n^{2\delta-1}\right)\]
+\begin_inset Formula \begin{eqnarray*}
+\sum_{m\ge m_{0}}a_{m}e^{-n/m}\left[e^{n/m+n\log(1-1/m)}-1\right] & = & \mathcal{O}\left(n\right)\sum_{m\ge m_{0}}\frac{a_{m}}{m^{2}}+\mathcal{O}\left(\frac{1}{n^{2-3\delta}}\right)\\
+ & = & \mathcal{O}\left(n^{\delta}\right)\end{eqnarray*}
 
 \end_inset 
 
@@ -931,8 +1145,9 @@ e^{n/m+n\log(1-1/m)}-1=\mathcal{O}\left(n/m^{2}\right)\]
 \layout Standard
 
 For the other sum, one has 
-\begin_inset Formula \[
-\sum_{m<m_{0}}a_{m}e^{-n/m}\left[e^{n/m+n\log(1-1/m)}-1\right]=\mathcal{O}\left(1\right)\sum_{m<m_{0}}a_{m}e^{-n/m}=\mathcal{O}\left(e^{-n/m_{0}}\right)\sum_{m<m_{0}}a_{m}\]
+\begin_inset Formula \begin{eqnarray*}
+\sum_{m<m_{0}}a_{m}e^{-n/m}\left[e^{n/m+n\log(1-1/m)}-1\right] & = & \mathcal{O}\left(1\right)\sum_{m<m_{0}}a_{m}e^{-n/m}\\
+ & = & \mathcal{O}\left(e^{-n/m_{0}}\right)\sum_{m<m_{0}}a_{m}\end{eqnarray*}
 
 \end_inset 
 
@@ -945,13 +1160,18 @@ For the other sum, one has
 \end_inset 
 
 .
- This one concludes that
+ For fixed positive 
+\begin_inset Formula $\delta$
+\end_inset 
+
+, this term decreases exponentially.
+ Thus one concludes that
 \begin_inset Formula \[
-d_{n}-D(n)=\mathcal{O}\left(n^{2\delta-1}\right)\]
+d_{n}-D(n)=\mathcal{O}\left(n^{\delta}\right)\]
 
 \end_inset 
 
- Again, this result requires no particularly special assumptions
+ Again, this result requires no particularly special assumptions.
 \layout Standard
 
 To show that 
@@ -979,7 +1199,7 @@ D^{\prime}(x)=-\sum_{m=1}^{\infty}\frac{a_{m}}{m}\left[e^{-x/m}-1\right]\]
 
 one deduces that 
 \begin_inset Formula \[
-D^{\prime}(x)=\mathcal{O}\left(n^{2\delta-1}\right)+\mathcal{O}(1)\sum_{m<m_{0}}\frac{a_{m}}{m}\]
+D^{\prime}(x)=\mathcal{O}\left(n^{\delta}\right)+\mathcal{O}(1)\sum_{m<m_{0}}\frac{a_{m}}{m}\]
 
 \end_inset 
 
@@ -1038,12 +1258,10 @@ d_{n}=\sum_{k=n_{0}}^{n}(-1)^{k}\left({n\atop k}\right)\, f(k)\]
 .
 \layout Section*
 
-Proof in the other direction
+Comments
 \layout Standard
 
-I have no particular results going in the other direction.
- I toyed with one particular route, but haven't done much with it.
- Just as you have shown the so-called 
+Just as you have shown the so-called 
 \begin_inset Quotes eld
 \end_inset 
 

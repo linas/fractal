@@ -1,0 +1,3223 @@
+# The reLyX bundled with LyX 1.3 created this file.
+# For more info see http://www.lyx.org/
+\lyxformat 2.15
+\textclass amsart
+\inputencoding latin1
+\fontscheme times
+\use_natbib 0
+\use_numerical_citations 0
+\begin_preamble
+\usepackage{graphicx}
+\usepackage{comment}
+
+% \parindent0pt\parskip3pt
+\parskip2ptplus0.5ptminus0.3pt
+
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\ds{\displaystyle}
+\def\hat{\widehat}
+
+
+\newcommand{\Img}[2]{\includegraphics[width=#1truecm]{#2}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\end_preamble
+
+\layout Date
+
+
+\latex latex 
+
+\backslash today{}
+\latex default 
+
+\layout Title
+
+On Differences of Zeta Values
+\layout Author
+
+Philippe Flajolet and Linas Vepstas
+\layout Abstract
+
+Finite differences of the Riemann zeta function at the integers are explored.
+ Such quantities, which occur as coefficients in Newton series representations,
+ have surfaced in works of Ma
+\i \'{s}
+lanka, Coffey, B
+\i \'{a}
+ez-Duarte, Voros and others.
+ We apply the theory of N
+\i \"{o}
+rlund-Rice integrals in conjunction with the saddle point method or the
+ residue theorem and derive precise asymptotic estimates.
+ The method extends to Dirichlet 
+\begin_inset Formula \( L\)
+\end_inset 
+
+-functions, in which case our estimates appear to be partly related to earlier
+ investigations surrounding Li's criterion for the Riemann hypothesis. 
+\layout Section
+
+Introduction
+\layout Standard
+
+In recent times, a variety of authors have, for a variety of reasons, been
+ led to considering properties of representations of the Riemann zeta function
+ 
+\begin_inset Formula \( \zeta(s)=\sum 1/n^s\)
+\end_inset 
+
+ as a 
+\emph on 
+Newton interpolation series
+\emph default 
+.
+ Amongst the many possible forms, we single out the one relative to a regularize
+d
+ version of Riemann zeta, namely, 
+\begin_inset Formula \begin{equation} \label{eq1}
+\zeta(s)-\frac{1}{s-1}=\sum_{n=0}^\infty
+(-1)^n b_n \binom{s}{n},
+\end{equation}
+\end_inset 
+
+ where 
+\begin_inset Formula \( \binom{s}{n}\)
+\end_inset 
+
+ is a binomial coefficient: 
+\begin_inset Formula \[ 
+\binom{s}{n}:=\frac{s(s-1)\cdots(s-n+1)}{n!}.
+\]
+\end_inset 
+
+ Our results imply that the representation
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{eq1}
+\latex default 
+ is valid thoughout the complex plane, its coefficients being given by a
+ general formula in the calculus of finite differences
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Jordan65,Milne81,Norlund54}
+
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation} \label{eq2}
+b_n=
+n(1-\gamma-H_{n-1})+\frac12+\sum_{k=2}^n \binom{n}{k}
+(-1)^k\zeta(k),
+\end{equation}
+\end_inset 
+
+ (Here, 
+\begin_inset Formula \( H_n=1+\frac12+\cdots\frac1n\)
+\end_inset 
+
+ are the harmonic numbers.) Although the terms in the sum defining
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ become exponentially large, the values of the 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ are exponentially small, 
+\begin_inset Formula \[ 
+b_n=\mathcal{O}\left(n^{1/4}e^{-2\sqrt{\pi n}}\right),
+\]
+\end_inset 
+
+ while exhibiting a curious oscillatory behaviour.
+ We shall prove (Theorem
+\protected_separator 
+
+\begin_inset LatexCommand \ref{zetacoeff-thm}
+
+\end_inset 
+
+) that, to the next leading order,
+\layout Standard
+
+
+\begin_inset Formula \[ 
+b_n =2^{3/4}\pi^{-1/4}e^{-2\sqrt{\pi n}}\cos\left(2\sqrt{\pi n}+\frac{3\pi}{8}\right)n^{1/4}
++\mathcal{O}\left(n^{-1/4} e^{-2\sqrt{\pi n}}\right).
+\]
+\end_inset 
+
+
+\layout Standard
+
+A prime reason for interest in the representation
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{eq1}
+\latex default 
+ and the companion coefficients
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{eq2}
+\latex default 
+ is 
+\emph on 
+Li's criterion
+\emph default 
+
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Li97}
+
+\end_inset 
+
+ for the Riemann Hypothesis (RH).
+ Let 
+\begin_inset Formula \( \rho\)
+\end_inset 
+
+ range over the nontrivial zeros of
+\protected_separator 
+
+\begin_inset Formula \( \zeta(s)\)
+\end_inset 
+
+.
+ Li's theorem asserts that RH is true if and only if all members of the
+ sequence 
+\begin_inset Formula \[ 
+\lambda_n=\sum_\rho \left[1-\left(1-\frac{1}{\rho}\right)\right], \qquad n\geq0,
+\]
+\end_inset 
+
+ are nonnegative.
+ (Bombieri and Lagarias offer an insightful discussion of Li's criterion
+ in
+\protected_separator 
+
+\begin_inset LatexCommand \cite{BoLa99}
+
+\end_inset 
+
+.) Coffey
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Coffey05}
+
+\end_inset 
+
+ has shown that the 
+\begin_inset Formula \( \lambda_n\)
+\end_inset 
+
+ can be alternatively expressed as a sum of two terms, one of which (the
+ easier one, though) is an elementary variant 
+\begin_inset Formula \( \hat b_n\)
+\end_inset 
+
+ of 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+.
+ Theorem
+\protected_separator 
+2 of
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Coffey05}
+
+\end_inset 
+
+ amounts to the property that the coefficients 
+\begin_inset Formula \( \hat b_n\)
+\end_inset 
+
+ decrease to
+\protected_separator 
+0.
+ As we shall see in a later section, the methods originally developed for
+ estimating
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ yield precise asymptotic information on
+\protected_separator 
+
+\begin_inset Formula \( \hat b_n\)
+\end_inset 
+
+ as well.
+\layout Standard
+
+The zeta function has also received attention in physics, for its role in
+ regularization and renormalization in quantum field theory.
+ Motivated by such connctions, Ma
+\i \'{s}
+lanka introduced in
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Maslanka01}
+
+\end_inset 
+
+ what amounts to a Newton series representation of 
+\begin_inset Formula \( (1-s)\zeta(s)\)
+\end_inset 
+
+.
+ Further numerical observations relative to the corresponding coefficients
+ are presented in
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Maslanka04}
+
+\end_inset 
+
+, which have been subsequently vindicated by B
+\i \'{a}
+ez-Duarte in
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Baez03}
+
+\end_inset 
+
+.
+ In particular, B
+\i \'{a}
+ez-Duarte's estimates imply that the coefficients in the Newton series of
+ a regularized version of
+\protected_separator 
+
+\begin_inset Formula \( (1-s)\zeta(s)\)
+\end_inset 
+
+ decrease to
+\protected_separator 
+0 faster than any power of 
+\begin_inset Formula \( 1/n\)
+\end_inset 
+
+.
+\layout Standard
+
+A third independent reason was an attempt by one of us (Linas) around 2003
+ to obtain alternative tractable expressions for the Gauss-Kuzmin-Wirsing
+ operator of continued fraction theory [unpublished; see 
+\latex latex 
+
+\backslash verb|http://linas.org/math/poch-zeta.pdf|
+\latex default 
+]
+\layout Standard
+
+In this essay, we approach the problem of asymptotically estimating differences
+ of zeta values by means of a combination of two well established techniques.
+ We start from a contour integral representation of these differences as
+ defined by
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{eq2}
+\latex default 
+ (for this technique, see especially N
+\i \"{o}
+rlund's treatise
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Norlund54}
+
+\end_inset 
+
+ and the study
+\protected_separator 
+
+\begin_inset LatexCommand \cite{FlSe95}
+
+\end_inset 
+
+), then proceed to estimate the corresponding complex integral by means
+ of the classical saddle point method of asymptotic analysis
+\protected_separator 
+
+\begin_inset LatexCommand \cite{deBruijn81,Olver74}
+
+\end_inset 
+
+.
+ Our approach parallels a recent preprint of Voros
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Voros05}
+
+\end_inset 
+
+ (motivated by Li's criterion), which our results supplement by providing
+ a fairly detailed asymptotic analysis of differences of zeta values.
+\layout Standard
+
+The next section will review the Newton series for the zeta function, and
+ give some generating functions for its coefficients.
+ This is followed by a breif review of some numerical results.
+ The fourth section gives the N
+\i \"{o}
+rlund integral representation for the series, while the fifth section provides
+ a careful saddle-point analysis of the resulting integrand.
+ Section seven repeats the analysis for the Dirichlet 
+\begin_inset Formula \( L\)
+\end_inset 
+
+-functions, giving the leading asymptotic term.
+ We end with a conclusion outlining possible directions for further research.
+\begin_float footnote 
+
+\layout Standard
+
+LV: This paragraph to be modified to fit final form of paper.
+\end_float 
+
+
+\layout Section
+
+Newton series and zeta values
+\layout Standard
+
+This section defines the Newton series for the Riemann zeta that is to be
+ studied, demonstrates some of its simple properties, and gives some generating
+ functions for its coefficients.
+ In this paper, a Newton series will be taken to be defined as
+\layout Standard
+
+
+\begin_inset Formula \begin{equation} \label{gennew}
+\Phi(s)=\sum_{n=0}^\infty (-1)^n c_n \binom{s}{n}.
+\end{equation}
+\end_inset 
+
+ Given a function 
+\begin_inset Formula \( \phi(s)\)
+\end_inset 
+
+, one may attempt to represent it in some region of the complex plane by
+ means of such a series.
+ Since the series 
+\begin_inset Formula \( \Phi(s)\)
+\end_inset 
+
+ terminates at 
+\begin_inset Formula \( s=0,1,2,\ldots\)
+\end_inset 
+
+, the conditions 
+\begin_inset Formula \( \phi(m)=\Phi(m)\)
+\end_inset 
+
+ at the nonnegative integers imply that the candidate sequence 
+\begin_inset Formula \( \{c_n\}\)
+\end_inset 
+
+ is linearly related to the sequence of values 
+\begin_inset Formula \( \{\phi(m)\}\)
+\end_inset 
+
+ by 
+\begin_inset Formula \[ 
+\phi(m)=\sum_{n=0}^m (-1)^n c_n \binom{m}{n}.
+\]
+\end_inset 
+
+ The triangular system can then be inverted to give (by the binomial transform
+\protected_separator 
+
+\begin_inset LatexCommand \cite{GrKnPa89}
+
+\end_inset 
+
+ or by direct elimination) 
+\begin_inset Formula \begin{equation} \label{gencoeff}
+c_n = \sum_{k=0}^{n} \binom{n}{k} (-1)^k \phi(k), \qquad n=0,1,2,\ldots\,.
+\end{equation}
+\end_inset 
+
+ This choice of coefficients for
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{gennew}
+\latex default 
+ determines the Newton series 
+\emph on 
+associated
+\emph default 
+ to 
+\begin_inset Formula \( \phi\)
+\end_inset 
+
+.
+ The coincidence of the function 
+\begin_inset Formula \( \phi\)
+\end_inset 
+
+ and its associated series 
+\begin_inset Formula \( \Phi\)
+\end_inset 
+
+ is, by construction, granted at least at all the nonnegative integers.
+ The equivalence of 
+\begin_inset Formula \( \Phi(m)=\phi(m)\)
+\end_inset 
+
+ can be extended to a region of the complex plane containing the integers,
+ provided that the growth of the difference 
+\begin_inset Formula \( \Phi(s)-\phi(s)\)
+\end_inset 
+
+ is bounded in the imaginary direction.
+ This result is known as 
+\emph on 
+Carlson's theorem
+\emph default 
+, and is presented in a more precise form later in this paper.
+\layout Standard
+
+In the case of the Newton series for 
+\begin_inset Formula \( \zeta(s)\)
+\end_inset 
+
+, the general relation
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{gencoeff}
+\latex default 
+ provides the coefficients in the form 
+\begin_inset Formula \begin{equation} \label{bn0}
+b_n = s_0-ns_1+\sum_{k=2}^n \binom{n}{k} (-1)^k \left[\zeta(k)-\frac{1}{k-1}
+\right],
+\end{equation}
+\end_inset 
+
+ where 
+\begin_inset Formula \begin{equation} \label{bn1}
+s_0=\left[\zeta(s)-\frac{1}{s-1}\right]_{s=0}=\frac12,
+\qquad
+s_1=\lim_{s\rightarrow 1} \left[\zeta(s)-\frac{1}{s-1}\right] = \gamma.
+\end{equation}
+\end_inset 
+
+ The harmonic numbers appear as 
+\begin_inset Formula \begin{equation} \label{bn2}
+\sum_{k=2}^n \binom{n}{k}\frac{(-1)^k}{k-1}=1-n+nH_{n-1}.
+\end{equation}
+\end_inset 
+
+ Equations 
+\latex latex 
+
+\backslash eqref{bn0}
+\latex default 
+, 
+\latex latex 
+
+\backslash eqref{bn1}
+\latex default 
+, 
+\latex latex 
+
+\backslash eqref{bn2}
+\latex default 
+ then entail that the 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+, as defined by
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{eq2}
+\latex default 
+, are indeed the coefficients of the Newton series associated to
+\protected_separator 
+
+\begin_inset Formula \( \zeta(s)-1/(s-1)\)
+\end_inset 
+
+.
+\layout Standard
+
+
+\latex latex 
+
+\backslash smallskip
+\latex default 
+
+\layout Standard
+
+Before engaging in a detailed study of the
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+, we note a few simple facts regarding their elementary properties.
+ Set 
+\begin_inset Formula \begin{equation} \label{deldef}
+\delta_n:=\sum_{k=2}^n \binom{n}{k} (-1)^k \zeta(k),
+\end{equation}
+\end_inset 
+
+ which are, up to minor adjustments, differences of zeta values at the integers.
+ Defining the forward difference 
+\begin_inset Formula \( \Delta f(x):=f(x+1)-f(x)\)
+\end_inset 
+
+, one has 
+\begin_inset Formula \[ 
+\delta_n= (-1)^n \Delta^n Z(x) \bigg|_{x=0},\]
+\end_inset 
+
+ where 
+\begin_inset Formula \( Z(k)=\zeta(k)\)
+\end_inset 
+
+ for 
+\begin_inset Formula \( k\geq2\)
+\end_inset 
+
+ and 
+\begin_inset Formula \( Z(0)=Z(1)=0\)
+\end_inset 
+
+.
+ Expanding the zeta function according to its definition and exchanging
+ the order of summations in the resulting double sum shows that 
+\begin_inset Formula \begin{equation} \label{simpdel}
+\delta_n = \sum_{\ell\geq1} \left[\left(1-\frac{1}{\ell}\right)^n-1+\frac{n}{\ell}\right].
+\end{equation}
+\end_inset 
+
+ It is surprising that such a simple sum should exhibit the complicated
+ asymptotic behaviour described by Theorem
+\protected_separator 
+
+\begin_inset LatexCommand \ref{zetacoeff-thm}
+
+\end_inset 
+
+ below.
+\layout Standard
+
+The ordinary generating function for the sequence 
+\begin_inset Formula \( \{\delta_n\}\)
+\end_inset 
+
+ is also of interest.
+ Given the classical expansion
+\protected_separator 
+
+\begin_inset LatexCommand \cite{WhWa27}
+
+\end_inset 
+
+ of the logarithmic derivative 
+\begin_inset Formula \( \psi(z)\)
+\end_inset 
+
+ of the Gamma function, 
+\begin_inset Formula \[ 
+\psi(1+z)+\gamma=\zeta(2)z-\zeta(3)z^2+\zeta(4)z^3-\cdots,
+\]
+\end_inset 
+
+ one finds 
+\begin_inset Formula \begin{equation} \label{delogf}
+\sum_{n\geq2}\delta_n z^n =\frac{z}{(1-z)^2}\left[\psi\left(\frac{1}{1-z}\right)
++\gamma\right].
+\end{equation}
+\end_inset 
+
+ The exponential generating function of 
+\begin_inset Formula \( \delta_n\)
+\end_inset 
+
+ reflects
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{simpdel}
+\latex default 
+ and is even simpler: 
+\begin_inset Formula \begin{equation} \label{delegf}
+\sum_{n\geq2}\delta_n \frac{z^n}{n!}
+=e^z\sum_{n\geq2} \zeta(n) \frac{(-z)^n}{n!}=e^z \sum_{\ell\geq1}
+\left[e^{-z/\ell}-1+\frac{z}{\ell}\right]
+.
+\end{equation}
+\end_inset 
+
+
+\layout Section
+
+Experimental analysis
+\layout Standard
+
+Detailed experiments on the 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ coefficients conducted by one of us are at the origin of the present paper.
+ As it is usual when dealing with finite differences, the alternating binomial
+ sums giving the 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ involve exponential cancellation.
+ We conducted evaluations of the 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ up to 
+\begin_inset Formula \( n\approx 5000\)
+\end_inset 
+
+, which requires computing zeta values up to several thousand digits of
+ precision.
+ (Note that the zeta values can be computed rapidly to extremely high precision
+ using several efficient algorithms, which are available in several symbolic
+ computation packages and numerical libraries.)
+\layout Standard
+
+A quick inspection of numerical data immediately reveals two features of
+ the constants
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+: they are oscillatory with slowly increasing period and their absolute
+ values are very rapidly decreasing.
+ For instance
+\begin_float footnote 
+
+\layout Standard
+
+The notation 
+\begin_inset Formula \( x\doteq y\)
+\end_inset 
+
+ designates a numerical approximation of 
+\begin_inset Formula \( x\)
+\end_inset 
+
+ by 
+\begin_inset Formula \( y\)
+\end_inset 
+
+ to the last decimal digit stated. 
+\end_float 
+
+: 
+\begin_inset Formula \[ \renewcommand{\arraycolsep}{2truept}
+\begin{array}{lllllllll}
+b_1&\doteq&-	0.07721,\quad &
+b_2&\doteq&-	0.00949,\quad &
+b_5&\doteq& 	0.00071, \\
+b_{10}&\doteq&-	0.00002, \quad &
+b_{20}&\doteq& 	2.15965\cdot 10^{-9},\quad &
+b_{50}&\doteq&-	1.08802\cdot 10^{-11}.
+\end{array}\]
+\end_inset 
+
+
+\layout Standard
+
+A numeric fit of the oscillatory behaviour of the function may be made.
+ There are sign changes of 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ at 
+\begin_inset Formula \[ 
+n=3,7,13,21,29,40,52,65,80,97,115,135,157,180,\ldots\,,
+\]
+\end_inset 
+
+ the values growing roughly quadratically.
+ A good fit for the 
+\begin_inset Formula \( k\)
+\end_inset 
+
+th zero is provided by 
+\begin_inset Formula \[ 
+q(k)= \frac{\pi}{4}k^2+\frac{9\pi}{16}k+1,\]
+\end_inset 
+
+ rounded at the nearest integer.
+ (The precise values of the constants were inferred from values of 
+\begin_inset Formula \( n\)
+\end_inset 
+
+ well in the range of several thousands.) The quadratic polynomial is easily
+ inverted to give the approximate oscillatory behaviour of the 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+: 
+\begin_inset Formula \[ 
+s(n) = \sin\pi\left(2\sqrt{\frac{n}{\pi}}-\frac{9}{8}\right).\]
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_float fig 
+
+\layout Standard
+
+
+\align center 
+
+\latex latex 
+
+\backslash hbox{
+\backslash Img{6}{exper1.jpg}
+\backslash Img{6}{exper2.jpg}}
+\latex default 
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{exper-fig}
+
+\end_inset 
+
+ Numerical experiments with
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+.
+ Left: a plot of
+\protected_separator 
+
+\begin_inset Formula \( \log|b_n/s(n)|\)
+\end_inset 
+
+.
+ Right: a plot of 
+\begin_inset Formula \( b_n/\beta(n)\)
+\end_inset 
+
+.
+\end_float 
+
+
+\layout Standard
+
+Once the oscillatory behaviour has been disposed of, the task of quantifying
+ the general trend in the decrease becomes easier.
+ A plot of the values of 
+\begin_inset Formula \( \log|b_n/s(n)|\)
+\end_inset 
+
+ displayed in Figure
+\protected_separator 
+
+\begin_inset LatexCommand \ref{exper-fig}
+
+\end_inset 
+
+ (left) has a parabolic aspect, which suggests that 
+\begin_inset Formula \[ 
+b_n \approx s(n) e^{-K\sqrt{n}} \qquad \hbox{with}\quad K\approx 3.6,\]
+\end_inset 
+
+ but a more precise fit is strangely difficult.
+\layout Standard
+
+In summary, this together with similar experiments led us to conjecture
+ 
+\begin_inset Formula \begin{equation} \label{conj}
+\beta(n):=  \sin\pi\left(2\sqrt{\frac{n}{\pi}}-\frac{9}{8}\right)  e^{-K\sqrt{n}},
+\qquad K=3.6\pm 0.1.
+\end{equation}
+\end_inset 
+
+ as a rough approximation to
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+.
+ Figure
+\protected_separator 
+
+\begin_inset LatexCommand \ref{exper-fig}
+
+\end_inset 
+
+ (right) displays the ratios 
+\begin_inset Formula \( b_n/\beta(n)\)
+\end_inset 
+
+ for 
+\begin_inset Formula \( n=10\,.\,.\,200\)
+\end_inset 
+
+.
+ The trend is compatible furthermore with the presence of an extra factor
+ of the form 
+\begin_inset Formula \( -n^\kappa\)
+\end_inset 
+
+ for some 
+\begin_inset Formula \( \kappa\in(0,1)\)
+\end_inset 
+
+.
+ (The spikes correspond to occasional inaccuracies of our sign-change function,
+ 
+\begin_inset Formula \( s(n)\)
+\end_inset 
+
+.) As we shall see, these empirical observations match reality quite well.
+\layout Section
+
+The N
+\i \"{o}
+rlund integral representation
+\layout Standard
+
+Our approach to the asymptotic estimation of the 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ relies on a complex integral representation of finite differences of an
+ analytic function, to be found in N
+\i \"{o}
+rlund's classic treatise
+\protected_separator 
+
+\begin_inset LatexCommand \cite[\S VIII.5]{Norlund54}
+
+\end_inset 
+
+ first published in 1924.
+ In computer science, this representation was popularized by Knuth
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Knuth98a}
+
+\end_inset 
+
+, who attributed it to S.O.
+\protected_separator 
+Rice, so that it also came to be known as 
+\begin_inset Quotes eld
+\end_inset 
+
+Rice's method
+\begin_inset Quotes erd
+\end_inset 
+
+; see
+\protected_separator 
+
+\begin_inset LatexCommand \cite{FlSe95}
+
+\end_inset 
+
+ for a review.
+\layout Standard
+
+
+\latex latex 
+
+\backslash begin{lemma} Let 
+\backslash (
+\backslash phi(s)
+\backslash ) be holomorphic in the half-plane 
+\newline 
+
+\backslash (
+\backslash Re(s)
+\backslash ge n_0-
+\backslash frac12
+\backslash ). Then the finite differences of the sequence
+\newline 
+
+\backslash ((
+\backslash phi(k))
+\backslash ) admit the integral representation
+\newline 
+
+\backslash [
+\newline 
+
+\backslash sum_{k=n_0}^n 
+\backslash binom{n}{k}(-1)^k
+\backslash phi(k)=
+\backslash frac{(-1)^n}{2
+\backslash pi i}
+\backslash int_C 
+\newline 
+
+\backslash phi(s) 
+\backslash frac{n!}{s(s-1)
+\backslash cdots(s-n)}
+\backslash , ds,
+\backslash ]
+\newline 
+where the contour of integration~
+\backslash (C
+\backslash ) encircles the integers 
+\backslash (
+\backslash {n_0,
+\backslash ldots,n
+\backslash }
+\backslash )
+\newline 
+in a positive direction and is contained in~
+\backslash (
+\backslash Re(s)
+\backslash ge n_0-
+\backslash frac12
+\backslash ).
+\newline 
+
+\backslash end{lemma}
+\latex default 
+
+\layout Proof
+
+The verification by residues is immediate. 
+\layout Standard
+
+An immediate consequence is the following representation for the differences
+ of zeta values (
+\begin_inset Formula \( \delta_n\)
+\end_inset 
+
+ in
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{deldef}
+\latex default 
+): 
+\begin_inset Formula \begin{equation} \label{norbn}
+\delta_n\equiv \sum_{k=2}^n \binom{n}{k}(-1)^k\zeta(k)
+=-\frac{(-1)^n}{2\pi i}\int_{3/2-i\infty}^{3/2+i\infty} 
+\zeta(s) \frac{n!}{s(s-1)\cdots(s-n)}\, ds. 
+\end{equation}
+\end_inset 
+
+ (Start from a small rectangle encircling 
+\begin_inset Formula \( \{2,\ldots,n\}\)
+\end_inset 
+
+, then extend it to a long rectangle with horizontal sides at 
+\begin_inset Formula \( \pm i\infty\)
+\end_inset 
+
+, and finally push the right vertical side to 
+\begin_inset Formula \( +\infty\)
+\end_inset 
+
+.
+ The contributions relative to all but the left vertical side vanish, since
+ 
+\begin_inset Formula \( \zeta(s)\)
+\end_inset 
+
+ remains bounded in modulus by
+\protected_separator 
+
+\begin_inset Formula \( \zeta(\frac32)\)
+\end_inset 
+
+.)
+\layout Standard
+
+Since
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ is 
+\begin_inset Formula \( \delta_n\)
+\end_inset 
+
+ plus a correction term (see Equation
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{eq2}
+\latex default 
+), the first step is to move the line of integration further to the left.
+ It is well known that the Riemann zeta function is of finite order in any
+ right half-plane, that is, 
+\begin_inset Formula \( |\zeta(s)|=O(|s|^A)\)
+\end_inset 
+
+ uniformly as 
+\begin_inset Formula \( |s|\rightarrow\infty\)
+\end_inset 
+
+, for some
+\protected_separator 
+
+\begin_inset Formula \( A\)
+\end_inset 
+
+ depending on the half-plane under consideration
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Titchmarsh86}
+
+\end_inset 
+
+.
+ As a consequence, the integral of
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{norbn}
+\latex default 
+ remains convergent, when taken along any vertical line left of
+\protected_separator 
+0, as soon as
+\protected_separator 
+
+\begin_inset Formula \( n\)
+\end_inset 
+
+ is large enough.
+ Under these conditions, it is possible to replace the line of integration
+ 
+\begin_inset Formula \( \Re(s)=\frac32\)
+\end_inset 
+
+ by the line
+\protected_separator 
+
+\begin_inset Formula \( \Re(s)=-\frac12\)
+\end_inset 
+
+, upon taking into account the residues of a double pole at 
+\begin_inset Formula \( s=1\)
+\end_inset 
+
+ and a simple pole at 
+\begin_inset Formula \( s=0\)
+\end_inset 
+
+.
+ We find in this way 
+\begin_inset Formula \[ 
+\delta_n=(-1)^{n-1} (R_1+R_0)+\frac{(-1)^{n-1}}{2\pi i}\int_{-1/2-i\infty}^{-1/2+i\infty} 
+\zeta(s) \frac{n!}{s(s-1)\cdots(s-n)}\, ds, \]
+\end_inset 
+
+ where, as shown by a routine calculation: 
+\begin_inset Formula \[ 
+(-1)^n R_0=-\frac12,
+\qquad
+(-1)^nR_1=-n(1-\gamma-H_{n-1}).
+.
+\]
+\end_inset 
+
+ The residues thus compensate exactly for the difference betwen
+\protected_separator 
+
+\begin_inset Formula \( \delta_n\)
+\end_inset 
+
+ and
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ (see
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{eq2}
+\latex default 
+): 
+\begin_inset Formula \begin{equation} \label{norbn2}
+b_n=
+\frac{(-1)^{n-1}}{2\pi i}\int_{-1/2-i\infty}^{-1/2+i\infty} 
+\zeta(s) \frac{n!}{s(s-1)\cdots(s-n)}\, ds.
+\end{equation}
+\end_inset 
+
+
+\layout Standard
+
+At this stage, the change of variables 
+\begin_inset Formula \( s\mapsto -s\)
+\end_inset 
+
+ is natural.
+ The new integrand involves 
+\begin_inset Formula \( \zeta(-s)\)
+\end_inset 
+
+, which transforms by virtue of the functional equation of the zeta function,
+ 
+\begin_inset Formula \begin{equation} \label{funzeta}
+\zeta(1-s)=(2\pi)^{-s}2\cos\left(\frac{s\pi}{2}\right)\Gamma(s)\zeta(s).
+\end{equation}
+\end_inset 
+
+ A combination of
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{norbn2}
+\latex default 
+ and
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{funzeta}
+\latex default 
+ then gives 
+\begin_inset Formula \begin{equation} \label{mainint}
+b_n = -\frac{1}{\pi i} 
+\int_{1/2-i\infty}^{1/2+i\infty} 
+(2\pi)^{-s-1} \sin\left(\frac{\pi s}{2}\right)\zeta(1+s)
+\frac{n!\,\Gamma(1+s)}{s(s+1)\cdots(s+n)}\, ds,
+\end{equation}
+\end_inset 
+
+ which is the starting point of our asymptotic analysis.
+\layout Section
+
+Saddle point analysis of zeta differences
+\layout Standard
+
+
+\begin_inset LatexCommand \label{sadzeta-sec}
+
+\end_inset 
+
+
+\layout Standard
+
+The integral representation
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{mainint}
+\latex default 
+ has several noticeable features.
+ First, the integrand has no singularity at all in 
+\begin_inset Formula \( \Re(s)\geq\frac12\)
+\end_inset 
+
+ and it decays fast enough towards 
+\begin_inset Formula \( \pm i \infty\)
+\end_inset 
+
+, which means that one can freely choose the abscissa 
+\begin_inset Formula \( c\)
+\end_inset 
+
+ (with 
+\begin_inset Formula \( c\geq\frac12\)
+\end_inset 
+
+) in the representation 
+\begin_inset Formula \begin{equation} \label{mainint2}
+b_n = -\frac{1}{\pi i} 
+\int_{c-i\infty}^{c+i\infty} 
+(2\pi)^{-s-1} \sin\left(\frac{\pi s}{2}\right)\zeta(1+s)
+\frac{n!\, \Gamma(s+1)}{s(s+1)\cdots(s+n)}\, ds.
+\end{equation}
+\end_inset 
+
+ The very absence of singularities calls for an application of the saddle
+ point method (equivalently, steepest descent).
+\layout Standard
+
+The factor 
+\begin_inset Formula \( \zeta(1+s)\)
+\end_inset 
+
+ remains bounded in modulus by a constant, and is in fact barely distinguishable
+ from
+\protected_separator 
+1, as 
+\begin_inset Formula \( \Re(s)\)
+\end_inset 
+
+ increases, since 
+\begin_inset Formula \begin{equation} \label{zetapp}
+\zeta(s)=1+O\left(2^{-\Re(s)}\right), \qquad \Re(s)\geq\frac32.
+\end{equation}
+\end_inset 
+
+ Also, for large 
+\begin_inset Formula \( |s|\)
+\end_inset 
+
+, the complex version of Stirling's formula applies: 
+\begin_inset Formula \begin{equation} \label{stirapp}
+\Gamma(1+s) = s^s e^{-s}\sqrt{2\pi s}\left(1+O(|s|^{-1})\right),\qquad \Re(s)\geq0.
+\end{equation}
+\end_inset 
+
+ Finally, the sine factor increases exponentially along vertical lines:
+ one has 
+\begin_inset Formula \begin{equation} \label{sinapp}
+2i\sin\frac{\pi s}{2} =-\exp\left(-i\frac{\pi s}{2}\right)
++O\left(e^{-\pi \Im(s)/2}\right), \qquad \Im(s)\geq0,
+\end{equation}
+\end_inset 
+
+ with a conjugate approximation holding for 
+\begin_inset Formula \( \Im(s)<0\)
+\end_inset 
+
+.
+ The approximations
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{zetapp}
+\latex default 
+, 
+\latex latex 
+
+\backslash eqref{stirapp}
+\latex default 
+, and
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{sinapp}
+\latex default 
+ then suggest the function 
+\begin_inset Formula \( e^{\omega(s)}\)
+\end_inset 
+
+ as a simplified model of the integrand in the upper half-plane, where 
+\begin_inset Formula \begin{equation} \label{omdef}
+\omega(s)=-s\log(2\pi)-i\frac{\pi s}{2}+\log\frac{n! \Gamma(s)^2}{\Gamma(s+n)}.
+\end{equation}
+\end_inset 
+
+ The scaling regime 
+\begin_inset Formula \( s=x\sqrt{n}\)
+\end_inset 
+
+ is natural while being in accordance with our earlier numerical experiments.
+ We find, uniformly for 
+\begin_inset Formula \( x\)
+\end_inset 
+
+ in any compact region of 
+\begin_inset Formula \( \Re(x)>0\)
+\end_inset 
+
+, 
+\begin_inset Formula \( \Im(x)>0\)
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation} \label{om012}
+\left\{\begin{array}{lll}
+\omega(x\sqrt{n})&=&\ds x\sqrt{n}\left[2\log x-2-\log(2\pi)-\frac12i\pi \right]+\frac12\log n
+\\
+&&\ds \qquad -\log x +\log(2\pi)-\frac12x^2+O(n^{-1/2})
+\\
+\omega'(x\sqrt{n})&=& \ds \left[-\log(2\pi) -i\frac{\pi}{2}+2\log x\right]
+-\left(x+\frac1x\right)\frac{1}{\sqrt{n}}+O(n^{-1}).
+\\
+\omega''(x\sqrt{n})&=&\ds \frac{2}{x\sqrt{n}}+O(n^{-1}).
+\end{array}\right. 
+\end{equation}
+\end_inset 
+
+ (The symbolic manipulation system 
+\shape smallcaps 
+Maple
+\shape default 
+ is a great help in such computations.) From the second line of
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{om012}
+\latex default 
+, an approximate root of 
+\begin_inset Formula \( \omega'(s)\)
+\end_inset 
+
+ is obtained by choosing the particular value
+\protected_separator 
+
+\begin_inset Formula \( x_0\)
+\end_inset 
+
+ of 
+\begin_inset Formula \( x\)
+\end_inset 
+
+ that cancels 
+\begin_inset Formula \( \omega'\)
+\end_inset 
+
+ to main asymptotic order: 
+\begin_inset Formula \begin{equation} \label{x0}
+x_0=e^{i\pi/4}\sqrt{2\pi n}.
+\end{equation}
+\end_inset 
+
+ This corresponds to the following value for 
+\begin_inset Formula \( s\)
+\end_inset 
+
+, 
+\begin_inset Formula \begin{equation} \label{sad0}
+\sigma\equiv \sigma(n)= x_0\sqrt{n} = (1+i)\sqrt{\pi n},
+\end{equation}
+\end_inset 
+
+ which is thus also an approximate saddle point for 
+\begin_inset Formula \( e^{\omega(s)}\)
+\end_inset 
+
+.
+ The substitution of this value given the first line of
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{om012}
+\latex default 
+ then leads to 
+\begin_inset Formula \begin{equation} \label{appsad}
+\exp\left(\omega(\sigma(n))\right)
+=\exp\left(2i\sqrt{\pi n}\right) \cdot \exp\left(-2\sqrt{\pi n}\right)\cdot \Pi(n),
+\end{equation}
+\end_inset 
+
+ where 
+\begin_inset Formula \( \Pi\)
+\end_inset 
+
+ is an unspecified factor of at most polynomial growth.
+ By using a suitable contour that passes though
+\protected_separator 
+
+\begin_inset Formula \( \sigma(n)\)
+\end_inset 
+
+, we thus expect the quantity in
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{appsad}
+\latex default 
+ to be an approximation (up to polynomial factors again) of
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+.
+ This back-of-the-envelope calculation does predict the exponential decay
+ of
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ as 
+\begin_inset Formula \( \exp\left(-3.54490\sqrt{n}\right)\)
+\end_inset 
+
+, in a way consistent with numerical data, while the fluctuations, 
+\begin_inset Formula \( 
+\sin\left(2\sqrt{\pi n}+O(1)\right),
+\)
+\end_inset 
+
+ are seen to be in stunning agreement with the empirically obtained formula
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{conj}
+\latex default 
+.
+\layout Standard
+
+
+\begin_float fig 
+
+\layout Standard
+
+
+\align center 
+
+\latex latex 
+
+\backslash begin{footnotesize}
+\newline 
+
+\backslash setlength{
+\backslash unitlength}{0.6truecm}
+\newline 
+
+\backslash begin{picture}(6,10)(-1,-5)
+\newline 
+
+\backslash thicklines
+\newline 
+
+\backslash put(-1,0){
+\backslash line(1,0){6}}
+\newline 
+
+\backslash put(0,-5){
+\backslash line(0,1){10}}
+\newline 
+
+\backslash put(0,0.2){~
+\backslash (0
+\backslash )}
+\newline 
+
+\backslash put(1,4.2){
+\backslash (
+\backslash Re(s)=c_1
+\backslash sqrt{n}
+\backslash )}
+\newline 
+
+\backslash put(3,0.2){
+\backslash (
+\backslash Re(s)=c_2
+\backslash sqrt{n}
+\backslash )}
+\newline 
+
+\backslash put(2,2){
+\backslash circle*{0.2}}
+\newline 
+
+\backslash put(2,2){
+\backslash (
+\backslash quad
+\backslash ds 
+\backslash sigma=e^{i
+\backslash pi/4}
+\backslash sqrt{2
+\backslash pi n}
+\backslash )}
+\newline 
+
+\backslash put(1,3){
+\backslash line(1,-1){2}}
+\newline 
+
+\backslash put(1,3){
+\backslash line(0,1){2}}
+\newline 
+
+\backslash put(3,1){
+\backslash line(0,-1){1}}
+\newline 
+
+\backslash put(2,2){
+\backslash vector(1,-1){0.5}}
+\newline 
+
+\backslash put(2,2){
+\backslash vector(-1,1){0.5}}
+\newline 
+
+\backslash thinlines
+\newline 
+
+\backslash put(1,3){
+\backslash line(0,-1){3}}
+\newline 
+
+\backslash thicklines
+\newline 
+
+\backslash put(2,-2){
+\backslash circle*{0.2}}
+\newline 
+
+\backslash put(2,-2){
+\backslash (
+\backslash quad
+\backslash ds 
+\backslash overline
+\backslash sigma=e^{-i
+\backslash pi/4}
+\backslash sqrt{2
+\backslash pi n}
+\backslash )}
+\newline 
+
+\backslash put(1,-3){
+\backslash line(1,1){2}}
+\newline 
+
+\backslash put(1,-3){
+\backslash line(0,-1){2}}
+\newline 
+
+\backslash put(3,-1){
+\backslash line(0,1){1}}
+\newline 
+
+\backslash put(2,-2){
+\backslash vector(1,1){0.5}}
+\newline 
+
+\backslash put(2,-2){
+\backslash vector(-1,-1){0.5}}
+\newline 
+
+\backslash thinlines
+\newline 
+
+\backslash put(1,-3){
+\backslash line(0,1){3}}
+\newline 
+
+\backslash end{picture}
+\newline 
+
+\backslash end{footnotesize}
+\latex default 
+
+\latex latex 
+ 
+\backslash qquad
+\newline 
+
+\latex default 
+
+\latex latex 
+
+\backslash Img{7.5}{plotc.jpg}
+\latex default 
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{sad-fig}
+
+\end_inset 
+
+ Left: The saddle point contour used for estimating 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+.
+ The arrows point at the directions of steepest descent from the saddle
+ points.
+ Right: the landscape of the logarithm of the modulus of the integrand in
+ the representation of
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ for 
+\begin_inset Formula \( n=10\)
+\end_inset 
+
+.
+\end_float 
+
+
+\layout Standard
+
+
+\latex latex 
+
+\backslash smallskip
+\newline 
+
+\latex default 
+We must now fix the contour of integration and provide final approximations.
+ The contour adopted (Figure
+\protected_separator 
+
+\begin_inset LatexCommand \ref{sad-fig}
+
+\end_inset 
+
+) goes through the saddle point 
+\begin_inset Formula \( \sigma=\sigma(n)\)
+\end_inset 
+
+ and symmetrically through its complex conjugate 
+\begin_inset Formula \( \overline\sigma=\overline{\sigma(n)}\)
+\end_inset 
+
+.
+ In the upper half-plane, it traverses 
+\begin_inset Formula \( \sigma(n)\)
+\end_inset 
+
+ along a line of steepest descent whose direction, as determined from the
+ argument of 
+\begin_inset Formula \( \omega''(\sigma)\)
+\end_inset 
+
+, is at an angle of 
+\begin_inset Formula \( \frac{5\pi}{8}\)
+\end_inset 
+
+ with the horizontal axis.
+ The contour also includes parts of two vertical lines of respective abscissae
+ 
+\begin_inset Formula \( \Re(s)=c_1\sqrt{n}\)
+\end_inset 
+
+ and
+\protected_separator 
+
+\begin_inset Formula \( c_2\sqrt{n}\)
+\end_inset 
+
+, where 
+\begin_inset Formula \[ 
+0<c_1<\sqrt{\pi}<c_2<2\sqrt{\pi}.
+\]
+\end_inset 
+
+
+\layout Standard
+
+The choice of the abscissae, 
+\begin_inset Formula \( c_1\)
+\end_inset 
+
+ and 
+\begin_inset Formula \( c_2\)
+\end_inset 
+
+, is not critical (it is even possible to adapt the analysis to 
+\begin_inset Formula \( c_1=c_2=\sqrt{\pi}\)
+\end_inset 
+
+).
+ One verifies easily, from crude approximations, that the contributions
+ arising from the vertical parts of the contour are 
+\begin_inset Formula \( O(e^{-L_0\sqrt{n}})\)
+\end_inset 
+
+, for some 
+\begin_inset Formula \( L_0>2\sqrt{\pi}\)
+\end_inset 
+
+, i.e., they are exponentially small in the scale of the problem: 
+\begin_inset Formula \begin{equation} \label{vert}
+\int_{\operatorname{vertical}} = O\left(e^{-L_0\sqrt{n}}\right)\qquad L_0>2\sqrt{\pi}.
+\end{equation}
+\end_inset 
+
+
+\layout Standard
+
+The slanted part of the contour is such that all the estimates of
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{om012}
+\latex default 
+ apply.
+ The scale of the problem is dictated by the value of 
+\begin_inset Formula \( \omega''(\sigma)\)
+\end_inset 
+
+, which is of order 
+\begin_inset Formula \( O(n^{-1/2})\)
+\end_inset 
+
+.
+ This indicates that the 
+\begin_inset Quotes eld
+\end_inset 
+
+second order
+\begin_inset Quotes erd
+\end_inset 
+
+ scaling to be adopted is
+\protected_separator 
+
+\begin_inset Formula \( n^{1/4}\)
+\end_inset 
+
+.
+ Accordingly, we set 
+\begin_inset Formula \begin{equation} \label{cregion}
+s=(1+i)\sqrt{\pi n}+e^{5i\pi/8}yn^{1/4}.
+\end{equation}
+\end_inset 
+
+ Define the 
+\emph on 
+central region
+\emph default 
+ of the slanted part of the contour by the condition that 
+\begin_inset Formula \( |y|\leq \log^2 n\)
+\end_inset 
+
+.
+ Upon slightly varying the value of
+\protected_separator 
+
+\begin_inset Formula \( x\)
+\end_inset 
+
+ around
+\protected_separator 
+
+\begin_inset Formula \( x_0\)
+\end_inset 
+
+, one verifies from
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{om012}
+\latex default 
+ that, for large
+\protected_separator 
+
+\begin_inset Formula \( n\)
+\end_inset 
+
+, the quantity 
+\begin_inset Formula \[ 
+\Re\left(\frac{1}{\sqrt{n}}
+\omega\left(x_0\sqrt{n}+e^{5i\pi/8}t\sqrt{n}\right)\right)
+\]
+\end_inset 
+
+ is an upward concave function of
+\protected_separator 
+
+\begin_inset Formula \( t\)
+\end_inset 
+
+ near
+\protected_separator 
+
+\begin_inset Formula \( t=0\)
+\end_inset 
+
+.
+ There results, in the complement of the central part, 
+\begin_inset Formula \( |y|\geq \log^2n\)
+\end_inset 
+
+, the majorization 
+\begin_inset Formula \[ 
+\left|\exp\left(\omega\left(x_0\sqrt{n}+e^{5i\pi/8}yn^{1/4}\right)\right)\right|
+< e^{\omega(x_0\sqrt{n})}
+\cdot \exp\left(-L_1 \log^2 n\right),\qquad L_1>0.
+\]
+\end_inset 
+
+ Figuratively: 
+\begin_inset Formula \begin{equation} \label{cent}
+\int_{\operatorname{slanted}}=\int_{\operatorname{central}}+O\left(\exp\left(-L_1 \log^2 n\right)\right).
+\end{equation}
+\end_inset 
+
+ Thus, from
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{vert}
+\latex default 
+ and
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{cent}
+\latex default 
+, only the central part of the slanted region matters asymptotically.
+ This applies to 
+\begin_inset Formula \( e^{\omega(s)}\)
+\end_inset 
+
+ but also to the full integrand of the representation
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{mainint2}
+\latex default 
+ of 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+, given the approximations
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{zetapp}
+\latex default 
+--
+\latex latex 
+
+\backslash eqref{om012}
+\latex default 
+.
+\layout Standard
+
+
+\latex latex 
+
+\backslash smallskip
+\latex default 
+
+\layout Standard
+
+We are finally ready to reap the crop.
+ Take the integral representation of
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{mainint2}
+\latex default 
+ with the contour deformed as indicated in Figure
+\protected_separator 
+
+\begin_inset LatexCommand \ref{sad-fig}
+
+\end_inset 
+
+ and let 
+\begin_inset Formula \( b_n^{+}\)
+\end_inset 
+
+ be the contribution arising from the upper half-plane, to the effect that
+ 
+\begin_inset Formula \begin{equation} \label{conjug}
+b_n=2\Re(b_n^+),
+\end{equation}
+\end_inset 
+
+ by conjugacy.
+ In the central region, 
+\begin_inset Formula \[ 
+s=x_0\sqrt{n}+e^{5i\pi/8}yn^{1/4},
+\]
+\end_inset 
+
+ the integrand of
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{mainint2}
+\latex default 
+ becomes 
+\begin_inset Formula \begin{equation} \label{phis}
+\left(-\frac{1}{\pi i}\right)\cdot 
+(2\pi)^{-1}\cdot 
+\left(-\frac{1}{2i}\right)\cdot
+ \left(1+O(2^{-\sqrt{n}})\right)\cdot 
+\frac{x_0}{n} \cdot e^{\omega(x_0\sqrt{n})} \cdot
+e^{-y^2/\sqrt{2\pi}}\left(1+O(\frac{1}{\sqrt{n}}\right).
+\end{equation}
+\end_inset 
+
+ The various factors found there (compare
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{mainint2}
+\latex default 
+ to 
+\begin_inset Formula \( e^{\omega(s)}\)
+\end_inset 
+
+ with 
+\begin_inset Formula \( \omega(s)\)
+\end_inset 
+
+ defined in
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{omdef}
+\latex default 
+) are in sequence: the Cauchy integral prefactor; the correction 
+\begin_inset Formula \( (2\pi)^{-1}\)
+\end_inset 
+
+ to the functional equation of Riemann zeta; the factor 
+\begin_inset Formula \( -1/(2i)\)
+\end_inset 
+
+ relating the sine to its exponential approximation; the approximation of
+ Riemann zeta; the correction 
+\begin_inset Formula \( s/(s+n)\)
+\end_inset 
+
+ of the Gamma factors; the main term 
+\begin_inset Formula \( e^{\omega(\sigma)}\)
+\end_inset 
+
+; the anticipated local Gaussian approximation; the errors resulting from
+ approximations
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{zetapp}
+\latex default 
+--
+\latex latex 
+
+\backslash eqref{om012}
+\latex default 
+, which are of relative order 
+\begin_inset Formula \( O(n^{-1/2})\)
+\end_inset 
+
+.
+ Upon completing the tails of the integral and neglecting exponentially
+ small corrections, we get 
+\begin_inset Formula \begin{equation} \label{asy0}
+b_n^+ =K_0 e^{\omega(x_0\sqrt{n})}
+\frac{x_0}{\sqrt{n}}
+\int_{-\infty}^{+\infty} e^{-y^2/\sqrt{2\pi}}\,dy
+\cdot\left(e^{5i\pi/8}n^{1/4}\right)\left(1+O\left(\frac{1}{\sqrt{n}}\right)\right),
+\end{equation}
+\end_inset 
+
+ where
+\protected_separator 
+
+\begin_inset Formula \( K_0\)
+\end_inset 
+
+ is the contant factor of
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{phis}
+\latex default 
+, while the factor following the integral translates the change of variables:
+ 
+\begin_inset Formula \( ds=e^{5i\pi/8}n^{1/4}dy\)
+\end_inset 
+
+.
+\layout Standard
+
+The asymptotic form of
+\protected_separator 
+
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ is now completely determined by
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{conjug}
+\latex default 
+ and
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{asy0}
+\latex default 
+.
+ We have obtained:
+\layout Standard
+
+
+\begin_float fig 
+
+\layout Standard
+
+
+\align center 
+
+\latex latex 
+
+\backslash Img{7}{comparapp.jpg}
+\latex default 
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{comparapp-fig}
+
+\end_inset 
+
+ A comparative plot of 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ and the main term of its approximation
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{thmz}
+\latex default 
+, both multiplied by 
+\begin_inset Formula \( e^{-2\sqrt{\pi n}}n^{-1/4}\)
+\end_inset 
+
+, for 
+\begin_inset Formula \( n=5\,.\,.\,500\)
+\end_inset 
+
+.
+\end_float 
+
+
+\layout Standard
+
+
+\latex latex 
+
+\backslash begin{theorem} 
+\backslash label{zetacoeff-thm}
+\newline 
+The Newton coefficient 
+\backslash (b_n
+\backslash ) of 
+\backslash (
+\backslash zeta(s)-1/(s-1)
+\backslash ) defined in~
+\backslash eqref{eq2}
+\newline 
+satisfies:
+\newline 
+
+\backslash begin{equation}
+\backslash label{thmz}
+\newline 
+b_n = 
+\backslash left( 
+\backslash frac{8n}{
+\backslash pi}
+\backslash right)^{1/4}
+\newline 
+e^{-2
+\backslash sqrt{
+\backslash pi n}}
+\backslash cos
+\backslash left(2
+\backslash sqrt{
+\backslash pi n}+
+\backslash frac{3
+\backslash pi}{8}
+\backslash right)
+\newline 
++O
+\backslash left(e^{-2
+\backslash sqrt{
+\backslash pi n}}n^{-1/4}
+\backslash right).
+\newline 
+
+\backslash end{equation}
+\newline 
+
+\backslash end{theorem}
+\latex default 
+
+\layout Standard
+
+The agreement between asymptotic and exact values is quite good, even for
+ small values of
+\protected_separator 
+
+\begin_inset Formula \( n\)
+\end_inset 
+
+ (Figure
+\protected_separator 
+
+\begin_inset LatexCommand \ref{comparapp-fig}
+
+\end_inset 
+
+).
+\layout Standard
+
+
+\latex latex 
+
+\backslash smallskip
+\latex default 
+
+\layout Standard
+
+The foregoing developments justify a posteriori the application of the saddle
+ point formula to the N
+\i \"{o}
+rlund Rice integral representation
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{mainint2}
+\latex default 
+ of zeta value differences.
+ This formula reads 
+\begin_inset Formula \begin{equation} \label{sadfor}
+\int e^{-Nf(x)} \, dx =\sqrt{\frac{2\pi}{N|f''(x_0)|}}
+e^{-N f(x_0)}\left(1+O\left(\frac{1}{N}\right)\right).
+\end{equation}
+\end_inset 
+
+ Here the analytic function 
+\begin_inset Formula \( f(x)\)
+\end_inset 
+
+ should be such that 
+\begin_inset Formula \( |f(x)|\)
+\end_inset 
+
+ has a saddle-point at
+\protected_separator 
+
+\begin_inset Formula \( x_0\)
+\end_inset 
+
+, that is, 
+\begin_inset Formula \( f'(x_0)=0\)
+\end_inset 
+
+ and 
+\begin_inset Formula \( f''(x_0)\)
+\end_inset 
+
+ is the second derivative of
+\protected_separator 
+
+\begin_inset Formula \( f\)
+\end_inset 
+
+ at the saddle point.
+ In the case of differences of zeta values, the appropriate scaling parameter
+ is 
+\begin_inset Formula \( s=x\sqrt{n}\)
+\end_inset 
+
+ corresponding to 
+\begin_inset Formula \( N=\sqrt{n}\)
+\end_inset 
+
+, and the the function
+\protected_separator 
+
+\begin_inset Formula \( f\)
+\end_inset 
+
+ is 
+\begin_inset Formula \[ 
+f(x)=\lim_{n\rightarrow\infty} \frac{1}{\sqrt{n}}\omega\left(x\sqrt{n}\right),
+\]
+\end_inset 
+
+ up to smaller order corrections that can be treated as constants in the
+ range of the saddle point.
+\layout Section
+
+Convergence of the Newton series of zeta
+\layout Standard
+
+The fact that the coefficients 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ decay to
+\protected_separator 
+
+\begin_inset Formula \( 0\)
+\end_inset 
+
+ faster than any polynomial in
+\protected_separator 
+
+\begin_inset Formula \( 1/n\)
+\end_inset 
+
+ implies that the Newton series 
+\begin_inset Formula \begin{equation} \label{newtonz}
+\Phi(s)=\sum_{n=0}^\infty (-1)^n b_n \binom{s}{n},
+\end{equation}
+\end_inset 
+
+ with 
+\begin_inset Formula \( b_n\)
+\end_inset 
+
+ given by
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{eq2}
+\latex default 
+, converges throughout the complex plane, and consequently defines an entire
+ function.
+ Set 
+\begin_inset Formula \( Z(s):=\zeta(s)-1/(s-1)\)
+\end_inset 
+
+ with
+\protected_separator 
+
+\begin_inset Formula \( Z(1)=\gamma\)
+\end_inset 
+
+.
+ We have, by construction 
+\begin_inset Formula \( \Phi(s)=Z(s)\)
+\end_inset 
+
+ at 
+\begin_inset Formula \( s=0,1,2\ldots\,\)
+\end_inset 
+
+, but the relation between 
+\begin_inset Formula \( \Phi\)
+\end_inset 
+
+ and 
+\begin_inset Formula \( Z\)
+\end_inset 
+
+ at other points is still unclear.
+\layout Standard
+
+
+\latex latex 
+
+\backslash begin{corollary}
+\backslash label{newton-cor} The Newton series of~
+\backslash eqref{newtonz} 
+\newline 
+is a convergent representation of the function 
+\backslash (
+\backslash zeta(s)-1/(s-1)
+\backslash )
+\newline 
+at all points 
+\backslash (s
+\backslash in
+\backslash C
+\backslash ).
+\newline 
+
+\backslash end{corollary}
+\latex default 
+
+\layout Proof
+
+Here is our favorite proof.
+ A classic theorem of Carlson (for a discussion and a proof, see, e.g.,
+ Hardy's Lectures
+\protected_separator 
+
+\begin_inset LatexCommand \cite[pp.~188-191]{Hardy78}
+
+\end_inset 
+
+ or Titchmarsh's treatise
+\protected_separator 
+
+\begin_inset LatexCommand \cite[\S5.81]{Titchmarsh39}
+
+\end_inset 
+
+) says the following: 
+\emph on 
+Assume that 
+\begin_inset Formula \( (i)\)
+\end_inset 
+
+
+\protected_separator 
+
+\begin_inset Formula \( g(s)\)
+\end_inset 
+
+ is analytic and such that 
+\begin_inset Formula \[ 
+\left|g(s)\right|<C^{A|s|},
+\]
+\end_inset 
+
+ where 
+\begin_inset Formula \( A<\pi\)
+\end_inset 
+
+, in the right half-plane of complex values of
+\protected_separator 
+
+\begin_inset Formula \( s\)
+\end_inset 
+
+, and 
+\begin_inset Formula \( (ii)\)
+\end_inset 
+
+
+\protected_separator 
+
+\begin_inset Formula \( g(0)=g(1)=\ldots=0\)
+\end_inset 
+
+.
+ Then 
+\begin_inset Formula \( g(s)\)
+\end_inset 
+
+ vanishes identically.
+\emph default 
+
+\layout Proof
+
+To complete the proof, it suffices to apply Carlson's theorem to the difference
+ 
+\begin_inset Formula \( g(s)=\Phi(s+2)-Z(s+2)\)
+\end_inset 
+
+.
+ Condition
+\protected_separator 
+
+\begin_inset Formula \( (ii)\)
+\end_inset 
+
+ is satisfied by construction of the Newton series.
+ Condition
+\protected_separator 
+
+\begin_inset Formula \( (i)\)
+\end_inset 
+
+ results from the fact that 
+\begin_inset Formula \( Z(s+2)\)
+\end_inset 
+
+ is 
+\begin_inset Formula \( O(1)\)
+\end_inset 
+
+ while a general bound on Newton series (Equation
+\protected_separator 
+(58) of
+\protected_separator 
+
+\begin_inset LatexCommand \cite[p.~228]{Norlund54}
+
+\end_inset 
+
+) implies that 
+\begin_inset Formula \( |\Phi(s+2)|\)
+\end_inset 
+
+ is of growth at most 
+\begin_inset Formula \( e^{\frac{\pi}{2}|s|}\)
+\end_inset 
+
+, throughout 
+\begin_inset Formula \( \Re(s)>-\frac12\)
+\end_inset 
+
+. 
+\layout Standard
+
+An alternative proof can be given starting from a contour integral representatio
+n
+ for the remainder of a general Newton series given
+\protected_separator 
+
+\begin_inset LatexCommand \cite[p.~223]{Norlund54}
+
+\end_inset 
+
+.
+ In a short note, B
+\i \'{a}
+ez-Duarte
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Baez03}
+
+\end_inset 
+
+ justified a similar looking Newton series representation of the zeta function
+ due to Ma
+\i \'{s}
+lanka---however his bounds on the Newton coefficients are less precise than
+ ours and his arguments (based on a doubly indexed sequence of polynomials)
+ seem to be somewhat problem-specific.
+\layout Section
+
+Dirichlet 
+\begin_inset Formula \( L\)
+\end_inset 
+
+-functions
+\layout Standard
+
+The following section performs the asymptotic analysis for the Newton series
+ of the Dirichlet 
+\begin_inset Formula \( L\)
+\end_inset 
+
+-functions; this section briefly reviews theirr definition.
+ The Dirichlet 
+\begin_inset Formula \( L\)
+\end_inset 
+
+-functions
+\begin_inset LatexCommand \cite{Apostol76,Davenport80}
+
+\end_inset 
+
+ are defined in terms of the Dirichlet characters, which are group representatio
+n
+ characters of the cyclic group.
+ The Dirichlet characters are multiplicative functions, and are periodic
+ modulo 
+\begin_inset Formula \( k\)
+\end_inset 
+
+.
+ That is, a character 
+\begin_inset Formula \( \chi(n)\)
+\end_inset 
+
+ is an arithmetic function of an integer 
+\begin_inset Formula \( n\)
+\end_inset 
+
+, with period 
+\begin_inset Formula \( k\)
+\end_inset 
+
+, such that 
+\begin_inset Formula \( \chi(n+k)=\chi(n)\)
+\end_inset 
+
+.
+ A character is multiplicative, in that 
+\begin_inset Formula \( \chi(mn)=\chi(m)\chi(n)\)
+\end_inset 
+
+ for all integers 
+\begin_inset Formula \( m,n\)
+\end_inset 
+
+.
+ Furthermore, one has that 
+\begin_inset Formula \( \chi(1)=1\)
+\end_inset 
+
+ and 
+\begin_inset Formula \( \chi(n)=0\)
+\end_inset 
+
+ whenever 
+\begin_inset Formula \( \gcd(n,k)\ne1\)
+\end_inset 
+
+.
+ The 
+\emph on 
+L
+\emph default 
+-function associated with the character 
+\begin_inset Formula \( \chi\)
+\end_inset 
+
+ is defined as 
+\begin_inset Formula \begin{equation} 
+L(\chi,s)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^{s}}\label{eq:}\end{equation}
+\end_inset 
+
+ All such 
+\emph on 
+L
+\emph default 
+-functions may be re-expressed in terms of the Hurwitz zeta function as
+ 
+\begin_inset Formula \begin{equation} 
+L(\chi,s)=\frac{1}{k^{s}}\sum_{m=1}^{k}\chi(m)\zeta\left(s,\frac{m}{k}\right)\label{eq:L-Hurwitz}\end{equation}
+\end_inset 
+
+ where 
+\begin_inset Formula \( k\)
+\end_inset 
+
+ is the period of 
+\begin_inset Formula \( \chi\)
+\end_inset 
+
+ and 
+\begin_inset Formula \( \zeta(s,q)\)
+\end_inset 
+
+ is the Hurwitz zeta function, given by 
+\begin_inset Formula \begin{equation} 
+\zeta(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}\label{eq:}\end{equation}
+\end_inset 
+
+ Thus, the study of the analytic properties of the 
+\emph on 
+L
+\emph default 
+-functions can be partially unified through the study of the Hurwitz zeta
+ function.
+\layout Comment
+
+Caution: I switched notation in the following, but haven't yet double-checked.
+ There may be errors. 
+\layout Standard
+
+In analogy to the study of the forward differences of the Riemann zeta function,
+ the remainder of this paper will concern itself with the analysis of the
+ series given by 
+\begin_inset Formula \begin{equation} 
+L_{n}=\sum_{p=2}^{n}(-1)^{p}\left(\begin{array}{c}
+n\\
+p\end{array}\right)\, L(\chi,p)\label{eq:L-coeff}\end{equation}
+\end_inset 
+
+ Because of the relation 
+\begin_inset LatexCommand \ref{eq:L-Hurwitz}
+
+\end_inset 
+
+ connecting the Hurwitz zeta function to the L-function, it is sufficient
+ to study sums of the form
+\begin_inset Formula \begin{equation} 
+A_{n}(m,k)=\sum_{p=2}^{n}(-1)^{p}\left(\begin{array}{c}
+n\\
+p\end{array}\right)\,\frac{\zeta\left(p,\frac{m}{k}\right)}{k^{p}}\label{eq:}\end{equation}
+\end_inset 
+
+ since 
+\begin_inset Formula \begin{equation} 
+L_{n}=\sum_{m=1}^{k}\chi(m)\, A_{n}(m,k)\label{eq:}\end{equation}
+\end_inset 
+
+ Converting the sum to the Norlund-Rice integral, and extending the contour
+ to the half-circle at positive infinity, and noting that the half-circle
+ does not contribute to the integral, one obtains 
+\begin_inset Formula \begin{equation} 
+A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{\zeta\left(s,\frac{m}{k}\right)}{k^{s}s(s-1)\cdots(s-n)}\, ds\label{eq:}\end{equation}
+\end_inset 
+
+ Moving the integral to the left, one encounters single pole at 
+\begin_inset Formula \( s=0\)
+\end_inset 
+
+ and a double pole at 
+\begin_inset Formula \( s=1\)
+\end_inset 
+
+.
+ The residue of the pole at 
+\begin_inset Formula \( s=0\)
+\end_inset 
+
+ is 
+\begin_inset Formula \begin{equation} 
+\mbox{Res}(s=0)=\zeta\left(0,\frac{m}{k}\right)\label{eq:}\end{equation}
+\end_inset 
+
+ where one has the curious identity in the form of a multiplication theorem
+ for the digamma function:
+\begin_inset Formula \begin{equation} 
+\zeta\left(0,\frac{m}{k}\right)=\frac{-1}{\pi k}\sum_{p=1}^{k}\sin\left(\frac{2\pi pm}{k}\right)\psi\left(\frac{p}{k}\right)=-B_{1}\left(\frac{m}{k}\right)=\frac{1}{2}-\frac{m}{k}\label{eq:}\end{equation}
+\end_inset 
+
+ Here, 
+\begin_inset Formula \( \psi\)
+\end_inset 
+
+ is the digamma function and 
+\begin_inset Formula \( B_{1}\)
+\end_inset 
+
+is the Bernoulli polynomial of order 1.
+ The double pole at 
+\begin_inset Formula \( s=1\)
+\end_inset 
+
+ evaluates to
+\begin_inset Formula \begin{equation} 
+\mbox{Res}(s=1)=\frac{n}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]\label{eq:}\end{equation}
+\end_inset 
+
+ Combining these, one obtains 
+\begin_inset Formula \begin{equation} 
+A_{n}(m,k)=\left(\frac{m}{k}-\frac{1}{2}\right)-\frac{n}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]+a_{n}(m,k)\label{eq:}\end{equation}
+\end_inset 
+
+ The remaining term has the remarkable property of being exponentially small;
+ that is, 
+\begin_inset Formula \begin{equation} 
+a_{n}(m,k)=\mathcal{O}\left(e^{-\sqrt{Kn}}\right)\label{eq:}\end{equation}
+\end_inset 
+
+ for a constant 
+\begin_inset Formula \( K\)
+\end_inset 
+
+ of order 
+\begin_inset Formula \( m/k\)
+\end_inset 
+
+.
+ The next section develops an explicit asymptotic form for this term.
+\layout Section
+
+Saddle-point analysis of 
+\begin_inset Formula \( L\)
+\end_inset 
+
+-function differences
+\layout Comment
+
+Caution, there seems to be an extra factor of 
+\begin_inset Formula \( k\)
+\end_inset 
+
+ floating around; I haven't tracked that down yet; these expressions may
+ be too small/large by factor of 
+\begin_inset Formula \( k\)
+\end_inset 
+
+.
+ Also, am in the middle of changing notation, there are errors due to this.
+ 
+\layout Standard
+
+The term 
+\begin_inset Formula \( a_{n}(m,k)\)
+\end_inset 
+
+ is represented by the integral
+\begin_inset Formula \begin{equation} 
+a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,\int_{-\frac{1}{2}-i\infty}^{-\frac{1}{2}+i\infty}\frac{\zeta\left(s,\frac{m}{k}\right)}{k^{s}s(s-1)\cdots(s-n)}\, ds\label{eq:little-a-integral}\end{equation}
+\end_inset 
+
+ which resulted from shifting the integration contour past the poles.
+ At this point, the functional equation for the Hurwitz zeta may be applied.
+ This equation is 
+\begin_inset Formula \begin{equation} 
+\zeta\left(1-s,\frac{m}{k}\right)=\frac{2\Gamma(s)}{(2\pi k)^{s}}\sum_{p=1}^{k}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\label{eq:}\end{equation}
+\end_inset 
+
+ This allows the integral to be expressed as
+\begin_inset Formula \begin{equation} 
+a_{n}(m,k)=-\frac{2n!}{k\pi i}\sum_{p=1}^{k}\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:}\end{equation}
+\end_inset 
+
+ It will prove to be convenient to pull the phase factor out of the cosine
+ part; we do this now, and write this integral as 
+\begin_inset Formula \begin{eqnarray} 
+a_{n}(m,k) & = & -\frac{n!}{k\pi i}\sum_{p=1}^{k}\exp\left(i\frac{2\pi pm}{k}\right)\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\,\exp\left(-i\frac{\pi s}{2}\right)\zeta\left(s,\frac{p}{k}\right)\, ds\label{eq:two-integrals}\\
+ &  & +c.c.\nonumber \end{eqnarray}
+\end_inset 
+
+ where 
+\begin_inset Formula \( c.c.\)
+\end_inset 
+
+ means that 
+\begin_inset Formula \( i\)
+\end_inset 
+
+ should be replaced by 
+\begin_inset Formula \( -i\)
+\end_inset 
+
+ in the two exp parts.
+\layout Standard
+
+For large values of 
+\begin_inset Formula \( n\)
+\end_inset 
+
+, this integral may be evaluated by means of the saddle-point method, just
+ like in the case of differences of the Riemann zeta function.
+ In what follows, we dispense with analytic details---these would closely
+ mimick what was done in Section
+\protected_separator 
+
+\begin_inset LatexCommand \ref{sadzeta-sec}
+
+\end_inset 
+
+---and directly proceed from the saddle point formula
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{sadfor}
+\latex default 
+.
+\layout Standard
+
+To recast the equation 
+\latex latex 
+
+\backslash eqref{eq:two-integrals}
+\latex default 
+ into the form needed for the saddle point method, an asymptotic expansion
+ of the integrands needs to be made for large 
+\begin_inset Formula \( n\)
+\end_inset 
+
+.
+ One notes that the appropriate scaling parameter is 
+\begin_inset Formula \( z=s/\sqrt{n}\)
+\end_inset 
+
+.
+ One should then immediately perform a change of variable from 
+\begin_inset Formula \( s\)
+\end_inset 
+
+ to 
+\begin_inset Formula \( z\)
+\end_inset 
+
+.
+ The asymptotic expansion is then performed by holding 
+\begin_inset Formula \( z\)
+\end_inset 
+
+ constant, and taking 
+\begin_inset Formula \( n\)
+\end_inset 
+
+ large.
+ Thus, one writes 
+\begin_inset Formula \begin{eqnarray} 
+a_{n}(m,k) & = & -\frac{1}{k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\right.\label{eq:saddle}\\
+ &  & \left.+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{f}(z)}dz\right]\end{eqnarray}
+\end_inset 
+
+ where 
+\begin_inset Formula \( \overline{f}\)
+\end_inset 
+
+ is the complex conjugate of 
+\begin_inset Formula \( f\)
+\end_inset 
+
+.
+\layout Standard
+
+Proceeding, one has 
+\begin_inset Formula \begin{equation} 
+f(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equation}
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation} 
+\phi(s)\approx-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}+\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\label{eq:}\end{equation}
+\end_inset 
+
+ where the approximation that 
+\begin_inset Formula \( \zeta\left(s,p/k\right)\approx(k/p)^{s}\)
+\end_inset 
+
+ for large 
+\begin_inset Formula \( s\)
+\end_inset 
+
+ has been made.
+\layout Standard
+
+The asymptotic expansion for the Gamma function is given by the Stirling
+ expansion
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{stirapp}
+\latex default 
+.
+ Expanding to 
+\begin_inset Formula \( \mathcal{O}(1/n)\)
+\end_inset 
+
+ and collecting terms, one obtains XXX following and what follows is wrong
+ XXX
+\begin_inset Formula \begin{eqnarray} 
+f(z) & \approx & -\frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
+ &  & +\log2\pi-2\log z-\frac{z^{2}}{2}+O\left(\frac{1}{\sqrt{n}}\right).\label{eq:}\\\end{eqnarray}
+\end_inset 
+
+ The saddle point may be obtained by solving 
+\begin_inset Formula \( f^{\,\prime}(z)=0\)
+\end_inset 
+
+.
+ To lowest order, one obtains 
+\begin_inset Formula \( z_{0}=(1+i)\sqrt{\pi  p/k}\)
+\end_inset 
+
+.
+ To use the saddle-point formula, one needs 
+\begin_inset Formula \( f^{\,\prime\prime}(z_{0})=2\sqrt{n}/z+\mathcal{O}(1)\)
+\end_inset 
+
+.
+ Substituting, one directly obtains 
+\begin_inset Formula \begin{equation} 
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\approx\left(\frac{2\pi^{3}p}{n^{3}k}\right)^{1/4}e^{i\pi/8}\exp\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)+\mathcal{O}\left(??\right)\label{eq:}\end{equation}
+\end_inset 
+
+ while the integral for 
+\begin_inset Formula \( \overline{f}\)
+\end_inset 
+
+ is the complex conjugate of this (having a saddle point at the complex
+ conjugate location).
+ Inserting this into equation 
+\begin_inset LatexCommand \ref{eq:saddle}
+
+\end_inset 
+
+ gives 
+\begin_inset Formula \begin{equation} 
+a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi n^{3}}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\sin\left(\frac{2\pi pm}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)\label{eq:an-p}\end{equation}
+\end_inset 
+
+ For large 
+\begin_inset Formula \( n\)
+\end_inset 
+
+, only the 
+\begin_inset Formula \( p=1\)
+\end_inset 
+
+ term contributes significantly, and so one may write
+\begin_inset Formula \begin{equation} 
+a_{n}(m,k)\approx\frac{1}{k}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\sin\left(\frac{2\pi m}{k}+\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)\label{eq:}\end{equation}
+\end_inset 
+
+ which demonstrates the desired result: the terms 
+\begin_inset Formula \( a_{n}\)
+\end_inset 
+
+are exponentially small.
+\layout Standard
+
+We conclude by briefly returning to the structure of the Dirichlet L-functions.
+ The L-function coefficients defined in equation 
+\begin_inset LatexCommand \ref{eq:L-coeff}
+
+\end_inset 
+
+ are now given by 
+\begin_inset Formula \begin{equation} 
+L_{n}=\sum_{m=1}^{k}\chi(m)A_{n}(m,k)\label{eq:}\end{equation}
+\end_inset 
+
+ Writing 
+\begin_inset Formula \begin{equation} 
+A_{n}=B_{n}+a_{n}\label{eq:}\end{equation}
+\end_inset 
+
+ so that 
+\begin_inset Formula \( B_{n}(m,k)\)
+\end_inset 
+
+represents the non-exponential part, one may state a few results.
+ For the non-principal characters, one has 
+\begin_inset Formula \( \sum_{m=1}^{k}\chi(m)=0\)
+\end_inset 
+
+ and thus, the first term simplifies to 
+\begin_inset Formula \begin{equation} 
+\sum_{m=1}^{k}\chi(m)B_{n}(m,k)=\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+\end_inset 
+
+ For the principal character 
+\begin_inset Formula \( \chi_{1}\)
+\end_inset 
+
+, one has 
+\begin_inset Formula \( \sum_{m=1}^{k}\chi_{1}(m)=\varphi(k)\)
+\end_inset 
+
+ with 
+\begin_inset Formula \( \varphi(k)\)
+\end_inset 
+
+ the Euler totient function.
+ Thus, for the principal character, one obtains 
+\begin_inset Formula \begin{equation} 
+\sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k)=-\varphi(k)\left[\frac{1}{2n}+\frac{1}{k}\left(\ln k+1-H_{n-1}\right)\right]+\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[\frac{m}{n}-\psi\left(\frac{m}{k}\right)\right]\label{eq:}\end{equation}
+\end_inset 
+
+
+\layout Standard
+
+By contrast, the exponentially small term invokes a linear combination of
+ Gauss sums.
+ The Gauss sum associated with a character 
+\begin_inset Formula \( \chi\)
+\end_inset 
+
+is 
+\begin_inset Formula \begin{equation} 
+G(n,\chi)=\sum_{m\mbox{ mod}k}\chi(m)e^{2\pi imn/k}\label{eq:}\end{equation}
+\end_inset 
+
+ and so, to leading order 
+\begin_inset Formula \begin{eqnarray} 
+\sum_{m=1}^{k}\chi(m)a_{n}(m,k) & \approx & \frac{1}{2ik}\left(\frac{2}{\pi kn^{3}}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\nonumber \\
+ &  & \left[\exp i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(1,\chi)-\exp-i\left(\frac{\pi}{8}-\sqrt{\frac{4\pi n}{k}}\right)G(-1,\chi)\right]\label{eq:}\end{eqnarray}
+\end_inset 
+
+ The higher-order terms with 
+\begin_inset Formula \( p>1\)
+\end_inset 
+
+ dropped from equation 
+\begin_inset LatexCommand \ref{eq:an-p}
+
+\end_inset 
+
+ correspond to terms involving 
+\begin_inset Formula \( G(p,\chi)\)
+\end_inset 
+
+.
+\layout Comment
+
+TODO -- The Hurwitz zeta can be avoided entirely by working directly with
+ the functional equation for the L-functions, as given by Apostol, Chapter
+ 12, Theorem 12.11.
+ The direct form seems to imply some sort of result/constraint on the 
+\begin_inset Formula \( p\ne1\)
+\end_inset 
+
+ terms in the expansion.
+ It also suggests that most of the deriviation above could be made clearer
+ by assuming a generic functional equation, and stating results in terms
+ of that.
+ (e.g.
+ assume Selberg-class type functional equation). 
+\layout Standard
+
+
+\latex latex 
+
+\backslash smallskip
+\newline 
+
+\latex default 
+The previous results
+\begin_float footnote 
+
+\layout Standard
+
+PF: We need a theorem statement summarizing both the principal and nonprincipal
+ characters.
+\end_float 
+
+ unify and make precise a number of estimates carried out in the literature
+ by a diversity of methods.
+ For instance, the study of quantities arising in connection with Li's criterion
+ calls for estimating 
+\begin_inset Formula \begin{equation} \label{coffeyS1}
+\overline{b}_n=\sum_{k=2}^n \binom{n}{k}(-1)^k(1-2^{-k})\zeta(k).
+\end{equation}
+\end_inset 
+
+ Coffey encountered this quantity (his
+\protected_separator 
+
+\begin_inset Formula \( S_1(n)\)
+\end_inset 
+
+ in
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Coffey05}
+
+\end_inset 
+
+), and proved, by means of series rearrangements akin to
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{simpdel}
+\latex default 
+ used in conjunction with Euler-Maclaurin summation: 
+\begin_inset Formula \begin{equation} \label{coffeyineq}
+S_1(n)\geq \frac{n}{2}\log n+(\gamma-1)\frac{n}{2}+\frac12.
+\end{equation}
+\end_inset 
+
+ Our analysis quantifies the difference between the two quantities above
+ as being exponentially small and oscillating.
+\layout Standard
+
+Another observation is that the combination of N
+\i \"{o}
+rlund-Rice integrals and saddle point estimates applies to many 
+\begin_inset Quotes eld
+\end_inset 
+
+desingularized
+\begin_inset Quotes erd
+\end_inset 
+
+ versions of the Riemann zeta function: they apply equally well to the case
+ of
+\protected_separator 
+
+\begin_inset Formula \( (1-2^{1-s})\zeta(s)\)
+\end_inset 
+
+ corresponding to
+\protected_separator 
+
+\latex latex 
+
+\backslash eqref{coffeyS1}
+\latex default 
+ above and to functions like 
+\begin_inset Formula \[ 
+(s-1)\zeta(s), \quad
+\zeta(2s)-\frac{1}{2s-1},\quad
+(2s-1)\zeta(2s),
+\]
+\end_inset 
+
+ and so on.
+ The Newton series involving 
+\begin_inset Formula \( \zeta(2s)\)
+\end_inset 
+
+ include Ma
+\i \'{s}
+lanka's expansion
+\protected_separator 
+
+\begin_inset LatexCommand \cite{Maslanka01}
+
+\end_inset 
+
+, which is relative to 
+\begin_inset Formula \( (2s-1)\zeta(2s)\)
+\end_inset 
+
+.
+ They have a striking feature---their coefficients are, up to a gamma factor,
+ polynomials in
+\protected_separator 
+
+\begin_inset Formula \( \pi\)
+\end_inset 
+
+ with rational coefficients.
+ For a function like 
+\begin_inset Formula \( \zeta(2s)-1/(2s-1)\)
+\end_inset 
+
+ where the polar part is subtracted, the exponential smallness of the coefficien
+ts
+ then has the peculiar feature of providing near identities that relate
+ 
+\begin_inset Formula \( \pi\)
+\end_inset 
+
+ and Euler's constant
+\protected_separator 
+
+\begin_inset Formula \( \gamma\)
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[plain]{algo}
+
+\end_inset 
+
+
+\the_end
