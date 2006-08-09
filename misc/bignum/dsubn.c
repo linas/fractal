@@ -62,11 +62,8 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 		// mpf_set_ui (term, 1);
 		mpf_div (term, bin, term);
 
-// #define LIOUVILLE
-#ifdef LIOUVILLE
 		fp_zeta (bin, 2*p, prec);
 		mpf_mul (term, term, bin);
-#endif
 		if (p%2)
 		{
 			mpf_sub (acc, acc, term);
@@ -77,7 +74,7 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 		} 
 	}
 
-// #define D_N_SCALE
+#define D_N_SCALE
 #ifdef D_N_SCALE
 		mpf_ui_sub (acc, 2, acc);
 		mpf_mul_ui (acc, acc, en*en);
@@ -123,8 +120,54 @@ void d_totient_n (mpf_t acc, int en, unsigned int prec)
 #define T_N_SCALE
 #ifdef T_N_SCALE
 		mpf_div_ui (acc, acc, en*en);
+		// mpf_set_ui (bin, en);
+		// fp_log (term, bin, prec);
+		// mpf_div (acc, acc, term);
 #endif
 
+	mpf_clear (bin);
+	mpf_clear (term);
+	mpz_clear (ibin);
+}
+
+/* ==================================================================== */
+
+void d_liouville_n (mpf_t acc, int en, unsigned int prec)
+{
+	mpz_t ibin;
+	mpz_init (ibin);
+
+	mpf_t bin, term;
+	mpf_init (bin);
+	mpf_init (term);
+
+	mpf_set_ui (acc, 0);
+	
+	int p;
+	for (p=2; p<=en; p++)
+	{
+		i_binomial_sequence (ibin, en, p);
+		mpf_set_z (bin, ibin);
+		fp_zeta (term, p, prec);
+		// mpf_set_ui (term, 1);
+		mpf_div (term, bin, term);
+
+		fp_zeta (bin, 2*p, prec);
+		mpf_mul (term, term, bin);
+		if (p%2)
+		{
+			mpf_sub (acc, acc, term);
+		}
+		else
+		{
+			mpf_add (acc, acc, term);
+		} 
+	}
+
+// #define L_N_SCALE
+#ifdef L_N_SCALE
+		mpf_mul_ui (acc, acc, easssadf);
+#endif
 	mpf_clear (bin);
 	mpf_clear (term);
 	mpz_clear (ibin);
@@ -171,6 +214,7 @@ int main (int argc, char * argv[])
 	int n;
 	// printf ("#\n# zeta expansion terms n^2 * (2-d_n)   \n#\n");
 	printf ("#\n# totient zeta expansion terms d_n/(n*n)   \n#\n");
+	// printf ("#\n# liouville zeta expansion terms d_n/(n*n)   \n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
@@ -186,6 +230,7 @@ int main (int argc, char * argv[])
 	{
 		// d_sub_n (d_n, n, prec);
 		d_totient_n (d_n, n, prec);
+		// d_liouville_n (d_n, n, prec);
 
 		time_t now = time(0);
 		int elapsed = now-then;
