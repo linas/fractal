@@ -43,6 +43,7 @@ set title "Asymptotic behaviour of d_n for totient function"
 set xlabel "n"
 set ylabel "-d_n/(n^2 log n)"
 
-set xrange [10000:]
-plot "dn-totient.dat" using 1:(-$2/log($1)) title "" linewidth 3
+# set xrange [10000:]
+set xrange [5:]
+plot "dn-totient.dat" using (log($1)):(-$2/log($1)) title "" linewidth 3
 
