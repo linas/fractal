@@ -38,8 +38,11 @@ August 6, 2006
 This paper consists of the extended working notes and observations made
  during the development of a joint paper with Philippe Flajolet on the Riemann
  zeta function.
- Much of the core of that paper is reproduced here, along with the explorations
- of tangents shooting off in various directions.
+ Most of the core ideas of that paper, of which a majority are due to Flajolet,
+ are reproduced here; however, the choice of wording, and all errors and
+ omissions are my own fault.
+ This set of notes contains considerably more content, and is an exploration
+ of tangents, dead-ends, and ideas shooting off in uncertain directions.
  
 \layout Abstract
 
@@ -50,7 +53,7 @@ The finite differences or Newton series of certain expressions involving
  Numerical evaluation is used to confirm the appropriateness of the asymptotic
  expansion.
  The results extend on previous results for such series, and a general form
- for Dirichlet L-functins is given.
+ for Dirichlet L-functions is given.
  Curiously, because successive terms in the asymptotic expansion are exponential
 ly small, these series lead to simple near-identities.
  A resemblance to similar near-identities arising in complex multiplication
@@ -140,8 +143,8 @@ b_{n}=\mathcal{O}\left(n^{1/4}e^{-2\sqrt{\pi n}}\right)\]
 
 \end_inset 
 
- The development of an explicit expression for the asymptototic behaviour
- of 
+ The development of an explicit expression for the asymptotic behavior of
+ 
 \begin_inset Formula $b_{n}$
 \end_inset 
 
@@ -172,7 +175,7 @@ The method of attack used to obtain this result is to convert the Newton
  [need ref].
  These techniques are sufficiently general that they can be applied to other
  similar sums that appear in the literature [multiple refs].
- One of the prinicpal results of this essay is to apply this asymptotic
+ One of the principal results of this essay is to apply this asymptotic
  expansion to the Newton series for the Dirichlet 
 \begin_inset Formula $L$
 \end_inset 
@@ -205,7 +208,7 @@ Another set of sections explore the relationship to the Stieltjes constants,
  and attempt to find an asymptotic expansion for these.
 \layout Standard
 
-The devlopment of the sections below are in no particular order; they follow
+The development of the sections below are in no particular order; they follow
  threads of thoughts and ideas in various directions.
 \layout Section
 
@@ -406,7 +409,7 @@ The ordinary generating function is given by
  is the digamma function.
 \layout Proof
 
-The above may be obtained by straightforward substitution follwed by an
+The above may be obtained by straightforward substitution followed by an
  exchange of the order of summation.
  The harmonic numbers lead to the logarithm via the identity 
 \begin_inset Formula \[
@@ -490,7 +493,7 @@ The series expression for the
 \end_inset 
 
  is very conducive to numerical analysis.
- The values of the zeta function may be rapidly computed to exteremely high
+ The values of the zeta function may be rapidly computed to extremely high
  precision using the Tchebysheff polynomial technique given by Borwein[xxx
  ref].
  Thus, it becomes possible to explore the behavior of the 
@@ -775,7 +778,7 @@ This table shows the first few values of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -811,7 +814,7 @@ This figure shows a graph of the first 300 values of
 
 .
  Oscillation is clearly visible; the period of oscillation is slowly increasing.
- The figure also makes clear that the asymptotic behaviour is bounded.
+ The figure also makes clear that the asymptotic behavior is bounded.
 \end_inset 
 
  
@@ -951,7 +954,7 @@ This figure shows a graph of
  
 \layout Standard
 
-XXXthis graph should be replaced or removed.
+Xxx-this graph should be replaced or removed.
 \end_inset 
 
 
@@ -1062,7 +1065,7 @@ One may ask what form the analytic continuation of
 \end_inset 
 
  to the entire complex plane may look like.
- To examine this question, one makes use of two identites.
+ To examine this question, one makes use of two identities.
  
 \layout Standard
 
@@ -1166,7 +1169,7 @@ k\end{array}\right)\frac{1}{k}\]
 
  As before, the uniqueness of this expansion may be argued by appeals to
  Carlson's theorem.
- Subsituting 
+ Substituting 
 \begin_inset Formula \[
 \frac{1}{k}=\frac{1}{k+1}+\frac{1}{k(k+1)}\]
 
@@ -1256,7 +1259,7 @@ XXXX remove or replace The figure
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1299,7 +1302,7 @@ This figure shows the real and imaginary parts of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1523,15 +1526,15 @@ The relationship between the constants
 \end_inset 
 
  and the Stieltjes constants provide a possible avenue for exploring the
- asymptotic behaviour of the Stieltjes constants.
+ asymptotic behavior of the Stieltjes constants.
  This is explored in the next section.
 \layout Section
 
-Asymptotic Behaviour of the Stieltjes Constants
+Asymptotic Behavior of the Stieltjes Constants
 \layout Standard
 
-Perhaps one can capture the asymptotic behaviour of the Stieltjes constants
- by understanding the asymptotic behaviour of the operator 
+Perhaps one can capture the asymptotic behavior of the Stieltjes constants
+ by understanding the asymptotic behavior of the operator 
 \begin_inset Formula $G_{nm}$
 \end_inset 
 
@@ -1556,7 +1559,7 @@ with
 
 .
  Unfortunately, this proves rather hard.
- The rest of this section explores the asymptotic behaviour of 
+ The rest of this section explores the asymptotic behavior of 
 \begin_inset Formula $G_{nm}$
 \end_inset 
 
@@ -2535,7 +2538,7 @@ The table below shows some of the low values of this operator:
 \end_inset 
 
  Several interesting patterns are clearly visible in this table.
- Most of these follow easily from the recurrance relationship for the entiries
+ Most of these follow easily from the recurrence relationship for the entries
  in this table.
  One has that 
 \begin_inset Formula \begin{equation}
@@ -2544,7 +2547,7 @@ G_{nm}=(n-2)G_{n,m-1}+G_{n-1,m-1}\label{eq:G-recurse}\end{equation}
 \end_inset 
 
  which is easily proven by direct substitution and the application of the
- recurrance relations for the Stirling numbers and binomial coefficients.
+ recurrence relations for the Stirling numbers and binomial coefficients.
  The zeroth column follows from a well-known relationship on the Stirling
  numbers:
 \begin_inset Formula \begin{equation}
@@ -2554,7 +2557,7 @@ k\end{array}\right]=\delta_{n,1}-\delta_{n,0}\label{eq:}\end{equation}
 
 \end_inset 
 
- The next column follows readily from the recursion relatation 
+ The next column follows readily from the recursion relation 
 \begin_inset LatexCommand \ref{eq:G-recurse}
 
 \end_inset 
@@ -2624,8 +2627,8 @@ g_{n,3}=\sum_{k=1}^{n-2}\frac{H_{k-1}-1}{k}=-1-H_{n-2}+\sum_{k=1}^{n-3}\frac{H_{
 \end_inset 
 
 .
- This general patttern, of entries in a column starting negative and eventually
- turning positive, seems to be the asymptotic behaviour.
+ This general pattern, of entries in a column starting negative and eventually
+ turning positive, seems to be the asymptotic behavior.
  Another representative case is shown in the graph 
 \begin_inset LatexCommand \ref{cap:-g_{n,m}-func-m}
 
@@ -2638,7 +2641,7 @@ g_{n,3}=\sum_{k=1}^{n-2}\frac{H_{k-1}-1}{k}=-1-H_{n-2}+\sum_{k=1}^{n-3}\frac{H_{
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -2720,7 +2723,7 @@ ly: the first few entries are positive, then swing sharply negative before
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -2763,12 +2766,12 @@ This figure shows
 \end_inset 
 
 .
- This figure is represnetative; figures for both larger and smaller 
+ This figure is representative; figures for both larger and smaller 
 \begin_inset Formula $n$
 \end_inset 
 
  show the same general pattern: the first few coefficients are positive,
- the next few are negative, in a more-or-less smoothlky varying fashion,
+ the next few are negative, in a more-or-less smoothly varying fashion,
  decaying exponentially to zero for large 
 \begin_inset Formula $m$
 \end_inset 
@@ -2778,7 +2781,7 @@ This figure shows
 \begin_inset Formula $n$
 \end_inset 
 
-; conjuecturally, it goes presumably as 
+; conjecturally, it goes presumably as 
 \begin_inset Formula $\Gamma^{-1}(n)$
 \end_inset 
 
@@ -2790,24 +2793,23 @@ This figure shows
 
 \layout Standard
 
-The upshot of this excercise indicates that the asymptotic behaviour of
- 
+The upshot of this exercise indicates that the asymptotic behavior of 
 \begin_inset Formula $g_{n,m}$
 \end_inset 
 
  is difficult to ascertain.
  Even if an expression were in hand, it would then have to be integrated
- with the asymptotic behaviour for the 
+ with the asymptotic behavior for the 
 \begin_inset Formula $b_{n}$
 \end_inset 
 
- before the asymptotic behaviour for the Stieltjes constants were discernable.
+ before the asymptotic behavior for the Stieltjes constants were discernible.
 \layout Section
 
 Off-Topic 
 \layout Note*
 
-The following is offtopic, not sure what to do with it.
+The following is off-topic, not sure what to do with it.
  
 \layout Standard
 
@@ -2852,7 +2854,7 @@ Finite Differences and the Norlund-Rice Integral
 This section reviews the the definition of the Norlund-Rice integral, and
  its application to finite differences and Newton series.
  Theorems required for convergence, and in particular, Carlson's theorem,
- are breifly stated.
+ are briefly stated.
  The next section applies these techniques to the evaluation of the finite
  differences of the Riemann zeta function.
 \layout Lemma
@@ -2888,7 +2890,7 @@ encircles the integers
 \begin_inset Formula $\{ n_{0},\cdots,n\}$
 \end_inset 
 
- in a postive direction, but does not include any of the integers 
+ in a positive direction, but does not include any of the integers 
 \begin_inset Formula $\{0,1,\cdots,n_{0}-1\}$
 \end_inset 
 
@@ -3042,7 +3044,7 @@ The following section performs the asymptotic analysis for the Newton series
 \begin_inset Formula $L$
 \end_inset 
 
--functions; this section breifly reviews thier definition.
+-functions; this section briefly reviews their definition.
  The Dirichlet 
 \begin_inset Formula $L$
 \end_inset 
@@ -3464,7 +3466,7 @@ f(z)=\log n!+\frac{1}{2}\log n+\phi\left(z\sqrt{n}\right)\label{eq:}\end{equatio
 \begin_inset Formula $\Lambda(n)$
 \end_inset 
 
- is the Mangoldt function.
+ is the von Mangoldt function.
  (XXX What about Hurwitz?) The asymptotic expansion for the Gamma function
  is given by the Stirling expansion, 
 \begin_inset Formula \begin{equation}
@@ -3553,7 +3555,7 @@ a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{
 
 The consistency of these results, with respect to the previous derivation
  for the Riemann zeta can be checked inn several ways.
- First, one may make the direct subsitution 
+ First, one may make the direct substitution 
 \begin_inset Formula $m=k=1$
 \end_inset 
 
@@ -3665,7 +3667,7 @@ represents the non-exponential part, one may state a few results.
 \begin_inset Formula $\varphi(k)$
 \end_inset 
 
- the Euler totient function.
+ the Euler Totient function.
  Thus, for the principal character, one obtains 
 \begin_inset Formula \begin{eqnarray}
 \sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k) & = & -\varphi(k)\left[\frac{1}{2}+\frac{n}{k}\left(\ln k+1-H_{n-1}\right)\right]\label{eq:}\\
@@ -3730,13 +3732,13 @@ TODO -- The Hurwitz zeta can be avoided entirely by working directly with
 \end_inset 
 
  terms in the expansion.
- It also suggests that most of the deriviation above could be made clearer
+ It also suggests that most of the derivation above could be made clearer
  by assuming a generic functional equation, and stating results in terms
  of that.
  (e.g.
  assume Selberg-class type functional equation).
- The only tricky part is understanding the asymptotic behaviour of zeta
- for large 
+ The only tricky part is understanding the asymptotic behavior of zeta for
+ large 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -3751,7 +3753,7 @@ The following sections consider sums with
 \end_inset 
 
  in the denominator.
- There are many Dirichlet series that acheive this.
+ There are many Dirichlet series that achieve this.
  The canonical one, involving the Mobius function is
 \layout Standard
 
@@ -3804,8 +3806,8 @@ One may construct in a very straightforward way the Dirichlet series for
 \end_inset 
 
 .
- These can be constructed by a faily trival application of Dirichlet convolution
-, together with the Mobius inversion formula.
+ These can be constructed by a fairly trivial application of Dirichlet convoluti
+on, together with the Mobius inversion formula.
  In short, one has an old, general theorem that
 \begin_inset Formula \begin{equation}
 \sum_{n=1}^{\infty}\frac{(f*g)(n)}{n^{s}}=\sum_{n=1}^{\infty}\frac{f(n)}{n^{s}}\;\sum_{m=1}^{\infty}\frac{g(m)}{m^{s}}\label{eq:}\end{equation}
@@ -3838,12 +3840,11 @@ One may construct in a very straightforward way the Dirichlet series for
 \begin_inset Formula $g(1)\ne1$
 \end_inset 
 
-), one may mulltiply and divide Dirichlet series with impunity, more or
- less.
+), one may multiply and divide Dirichlet series with impunity, more or less.
  
 \layout Standard
 
-I havent yet seen a way of building 
+I haven't yet seen a way of building 
 \begin_inset Formula $1/\zeta(\alpha s+\beta)$
 \end_inset 
 
@@ -3854,7 +3855,7 @@ Perhaps the most important generalization is that for the Dirichlet
 \begin_inset Formula $L$
 \end_inset 
 
--functions, since these are the onces for which the GRH applies.
+-functions, since these are the ones for which the GRH applies.
  Specifically, one has 
 \begin_inset Formula \begin{equation}
 \sum_{n=1}^{\infty}\frac{\mu(n)\chi(n)}{n^{s}}=\frac{1}{L(s,\chi)}\label{eq:}\end{equation}
@@ -3892,7 +3893,7 @@ d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{1}{\zeta(k)}\label{
 \begin_inset Formula $\lim_{n\to\infty}d_{n}=2$
 \end_inset 
 
-; this behaviour is shown in the graph below.
+; this behavior is shown in the graph below.
  However, by exploring the range 
 \begin_inset Formula $1000\le n\le50000$
 \end_inset 
@@ -3919,7 +3920,7 @@ d_{n}=\mathcal{O}\left(\log n\right)\label{eq:}\end{equation}
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -3973,11 +3974,11 @@ d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{1}{\zeta(k)}\]
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
-Asymptotic behaviour of 
+Asymptotic behavior of 
 \begin_inset Formula $d_{n}$
 \end_inset 
 
@@ -4026,11 +4027,11 @@ in the limit of large
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
-Asymptotic behaviour of 
+Asymptotic behavior of 
 \begin_inset Formula $d_{n}$
 \end_inset 
 
@@ -4086,7 +4087,7 @@ cannot be approaching a constant for large
 \begin_inset Formula $n$
 \end_inset 
 
-, as the next grahic shows.
+, as the next graphic shows.
 \end_inset 
 
 
@@ -4095,7 +4096,7 @@ cannot be approaching a constant for large
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -4129,7 +4130,7 @@ This figure shows a plot of
 \end_inset 
 
 .
- A nascent oscillatory behaviour can be seen.
+ A nascent oscillatory behavior can be seen.
 \end_inset 
 
 
@@ -4143,11 +4144,11 @@ d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(k-1
 
 \end_inset 
 
- whith the superscript 
+ with the superscript 
 \begin_inset Formula $\varphi$
 \end_inset 
 
- indicating that the corresponding Dirichlet series involves the totient
+ indicating that the corresponding Dirichlet series involves the Totient
  function 
 \begin_inset Formula $\varphi$
 \end_inset 
@@ -4167,7 +4168,7 @@ d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(k-1
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -4196,7 +4197,7 @@ A graph of
 \begin_inset Formula $3\le n\le100$
 \end_inset 
 
- shows rapidly increasing behaviour.
+ shows rapidly increasing behavior.
 \end_inset 
 
 
@@ -4205,11 +4206,11 @@ A graph of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
-Asymptotic behavour of 
+Asymptotic behavior of 
 \begin_inset Formula $d_{n}^{\varphi}$
 \end_inset 
 
@@ -4234,7 +4235,7 @@ This graphic shows
 \begin_inset Formula $100\le n\le44000$
 \end_inset 
 
-, suggesting a form for the asymptotic behvaiour of 
+, suggesting a form for the asymptotic behavior of 
 \begin_inset Formula $d_{n}^{\varphi}$
 \end_inset 
 
@@ -4273,7 +4274,7 @@ d_{n}^{\varphi}=A\,\left(1+B\log n\right)n^{2}\log n+\mathcal{O}\left(n^{2}\log^
 \end_inset 
 
 , although this is a very crude fit.
- A semilog graph hints that in fact 
+ A semi-log graph hints that in fact 
 \begin_inset Formula $B=0$
 \end_inset 
 
@@ -4300,7 +4301,7 @@ be the series corresponding to the Liouville function.
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -4321,7 +4322,7 @@ collapsed true
 
 \layout Standard
 
-This figure shows the basic behaviour for the finite differences 
+This figure shows the basic behavior for the finite differences 
 \begin_inset Formula $d_{n}^{\lambda}$
 \end_inset 
 
@@ -4345,7 +4346,7 @@ collapsed false
 
 \layout Caption
 
-Asmptotic form of 
+Asymptotic form of 
 \begin_inset Formula $d_{n}^{\lambda}$
 \end_inset 
 
@@ -4355,13 +4356,14 @@ Asmptotic form of
 
 \begin_inset Graphics
 	filename dn-liouville-asymp.png
+	width 100text%
 
 \end_inset 
 
 
 \layout Standard
 
-This figure shos a graph of 
+This figure shows a graph of 
 \begin_inset Formula $d_{n}^{\lambda}/\sqrt{n}$
 \end_inset 
 
@@ -4390,7 +4392,7 @@ This figure shos a graph of
 Saddle-point analysis
 \layout Standard
 
-The asymptotic behaviour of the 
+The asymptotic behavior of the 
 \begin_inset Formula $d_{n}$
 \end_inset 
 
@@ -4530,7 +4532,7 @@ There is an alternate approach to the analysis which leads to some curious
 \begin_inset Formula $\rho$
 \end_inset 
 
- of the Riemann zeta functon.
+ of the Riemann zeta function.
  The derivation of this formula does not require the assumption of the RH,
  and so this seems to provide a more general starting point for a saddle-point
  analysis.
@@ -4582,7 +4584,7 @@ ns about the location of the zeros of the Riemann zeta.
 Saddle-point analysis for the Totient series
 \layout Standard
 
-This section summarizes a saddle-point analysis for the totient function
+This section summarizes a saddle-point analysis for the Totient function
  finite difference series 
 \begin_inset Formula \begin{equation}
 d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
@@ -4608,7 +4610,7 @@ d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(k-1
 \begin_inset Formula $s=2$
 \end_inset 
 
- which determines the asymptotic behaviour.
+ which determines the asymptotic behavior.
  Evaluating the integrand for the location of the saddle point, one obtains
  
 \begin_inset Formula \begin{equation}
@@ -4667,7 +4669,7 @@ d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(2k)
 \begin_inset Formula $s=1/2$
 \end_inset 
 
- to determine the asymptotic behaviour.
+ to determine the asymptotic behavior.
  Indeed, proceeding as before, one obtains 
 \begin_inset Formula \begin{equation}
 s_{0}=\frac{1}{2}+\frac{2+\epsilon/4}{\log n}+\mathcal{O}\left(\frac{1}{\log^{2}n}\right)\label{eq:}\end{equation}
@@ -4706,7 +4708,7 @@ Relation to literature
 The following is a list of Newton series or other suggestive sums or integrals
  that occur in the literature, both modern and older.
  Many of these may be amenable to the techniques given above, or have results
- taht follow immediately from the above.
+ that follow immediately from the above.
 \layout Subsection
 
 Reciprocal Riemann Zeta
@@ -4714,7 +4716,7 @@ Reciprocal Riemann Zeta
 
 The Riemann zeta function has regularly-spaced zeros along the negative
  real axis.
- Thus, the reciprocol has poles at the (even) integers, and thus resembles
+ Thus, the reciprocal has poles at the (even) integers, and thus resembles
  the Norlund-Rice integrand.
  Viz: 
 \begin_inset Formula \[
@@ -4791,11 +4793,11 @@ c_{n}=\frac{(-1)^{n}}{2\pi i}\int_{-1/4-i\infty}^{-1/4+i\infty}\frac{1}{\zeta(2s
 \begin_inset Formula $s=0$
 \end_inset 
 
- has a residue of opposte sign from that at 
+ has a residue of opposite sign from that at 
 \begin_inset Formula $s=-2$
 \end_inset 
 
- and, so, if we are lucky, there is an inflection point between thse two
+ and, so, if we are lucky, there is an inflection point between these two
  locations, viz.
  a point where the first derivative vanishes.
  
@@ -4923,7 +4925,7 @@ L(\chi_{1},s)=\left(1-2^{-s}\right)\zeta(s)\]
 
 \end_inset 
 
- and we already ahve expansions for this.
+ and we already have expansions for this.
  The Newton series for this appears in 
 \begin_inset LatexCommand \cite{Lag05}
 
@@ -4964,13 +4966,13 @@ S_{3}(n)=\sum_{k=2}^{n}(-1)^{k}{{n \choose k}}2^{k}\zeta(k)\]
 
 \end_inset 
 
- The reson for the interest in this sum is unclear.
+ The reason for the interest in this sum is unclear.
 \layout Subsection
 
 A Li Criterion-related sum
 \layout Standard
 
-Bombbieri 
+Bombieri 
 \begin_inset LatexCommand \cite{Bom99}
 
 \end_inset 
@@ -5109,7 +5111,7 @@ Not sure about the following ...
 \layout Standard
 
 The paper concludes by noting the general resemblance of the asymptotic
- behaviour to that of two other famous number-theoretic sequences.
+ behavior to that of two other famous number-theoretic sequences.
  The partition function 
 \begin_inset Formula $p_{n}$
 \end_inset 
@@ -5165,7 +5167,7 @@ c_{n}\sim\frac{\exp4\pi\sqrt{n}}{n^{3/4}\sqrt{2}}\]
 \end_inset 
 
 .
- The appearence of an asymptotic factor in the form of 
+ The appearance of an asymptotic factor in the form of 
 \begin_inset Formula $e^{K\sqrt{n}}$
 \end_inset 
 
@@ -5211,7 +5213,7 @@ Introduction to Analytic Number Theory
 
 .
  Re-expressed so as to heighten the resemblance, it states (XXX changed
- notation here too, this is probably/certianly wrong too.)
+ notation here too, this is probably/certainly wrong too.)
 \begin_inset Formula \begin{eqnarray}
 b_{n}(m) & = & \frac{(-1)^{n+1}}{2\pi i}\, n!\,\int_{-\frac{1}{2}-i\infty}^{-\frac{1}{2}+i\infty}\frac{1}{m^{s}s(s-1)\cdots(s-n)}\, ds\nonumber \\
  & = & \frac{1}{2\pi i}\, n!\,\int_{\frac{1`}{2}-i\infty}^{\frac{1}{2}+i\infty}\frac{m^{s}}{s(s+1)\cdots(s+n)}\, ds\nonumber \\
