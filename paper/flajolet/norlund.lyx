@@ -3876,7 +3876,7 @@ This section provides a numeric exploration of the finite differences of
  the various Dirichlet series given above.
  Consider first
 \begin_inset Formula \begin{equation}
-d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
+d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4052,7 +4052,7 @@ This graphic charts the value of
 \end_inset 
 
  in the range of 
-\begin_inset Formula $500\le n\le30000$
+\begin_inset Formula $500\le n\le33000$
 \end_inset 
 
 .
@@ -4139,7 +4139,7 @@ The finite differences for the other series appear to show a similar pattern,
  except that the scale of the leading order is different.
  Consider, for example, 
 \begin_inset Formula \begin{equation}
-d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
+d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4231,7 +4231,7 @@ This graphic shows
 \end_inset 
 
  for 
-\begin_inset Formula $100\le n\le16000$
+\begin_inset Formula $100\le n\le44000$
 \end_inset 
 
 , suggesting a form for the asymptotic behvaiour of 
@@ -4239,7 +4239,17 @@ This graphic shows
 \end_inset 
 
 .
- This figure has a logarithmic shape, suggesting that 
+ Particularly notable is the lack of even a hint of oscillation, as compared
+ to 
+\begin_inset Formula $d_{n}^{\mu}$
+\end_inset 
+
+, for which the oscillations have become quite violent for 
+\begin_inset Formula $n$
+\end_inset 
+
+ in this range.
+ This figure has a roughly logarithmic shape, suggesting that 
 \begin_inset Formula \[
 d_{n}^{\varphi}=A\,\left(1+B\log n\right)n^{2}\log n+\mathcal{O}\left(n^{2}\log^{3}n\right)\]
 
@@ -4255,11 +4265,20 @@ d_{n}^{\varphi}=A\,\left(1+B\log n\right)n^{2}\log n+\mathcal{O}\left(n^{2}\log^
 
 .
  Numerically, it seems that 
-\begin_inset Formula $A\approx0.316$
+\begin_inset Formula $A\approx0.31674$
 \end_inset 
 
 , 
-\begin_inset Formula $B\approx7\times10^{-4}$
+\begin_inset Formula $B\approx-6.6\times10^{-4}$
+\end_inset 
+
+, although this is a very crude fit.
+ A semilog graph hints that in fact 
+\begin_inset Formula $B=0$
+\end_inset 
+
+, but this is only the vaguest hint for this order of 
+\begin_inset Formula $n$
 \end_inset 
 
 .
@@ -4270,7 +4289,7 @@ d_{n}^{\varphi}=A\,\left(1+B\log n\right)n^{2}\log n+\mathcal{O}\left(n^{2}\log^
 
 Let 
 \begin_inset Formula \[
-d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
+d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
 
 \end_inset 
 
@@ -4307,6 +4326,62 @@ This figure shows the basic behaviour for the finite differences
 \end_inset 
 
  corresponding to the Liouville function.
+ Numeric work suggests that the divergence is similar to but stronger than
+ 
+\begin_inset Formula $\sqrt{n}$
+\end_inset 
+
+.
+ This conclusion is contradicted by higher-order work.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Asmptotic form of 
+\begin_inset Formula $d_{n}^{\lambda}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dn-liouville-asymp.png
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shos a graph of 
+\begin_inset Formula $d_{n}^{\lambda}/\sqrt{n}$
+\end_inset 
+
+ for the range of 
+\begin_inset Formula $1000\le n\le25000$
+\end_inset 
+
+.
+ A numerical study seems to indicate that this graph is not logarithmic,
+ but instead is converging to a value of 1.208 or so.
+ It should be noted that this graph shows no hint of oscillation, which
+ is in sharp contrast to the graph of 
+\begin_inset Formula $d_{n}^{\mu}$
+\end_inset 
+
+, which has a strongly manifested oscillation for this range of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
 \end_inset 
 
 
@@ -4510,7 +4585,7 @@ Saddle-point analysis for the Totient series
 This section summarizes a saddle-point analysis for the totient function
  finite difference series 
 \begin_inset Formula \begin{equation}
-d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
+d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4573,7 +4648,7 @@ Saddle-point analysis for the Liouville series
 This section summarizes a saddle-point analysis for the Liouville function
  finite difference series 
 \begin_inset Formula \begin{equation}
-d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(2k)}{\zeta(k)}\label{eq:}\end{equation}
+d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(2k)}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4643,7 +4718,7 @@ The Riemann zeta function has regularly-spaced zeros along the negative
  the Norlund-Rice integrand.
  Viz: 
 \begin_inset Formula \[
-\oint_{C}\frac{ds}{\zeta(s)}\sim\sum{n \choose k}\frac{1}{\zeta^{\prime}(2n)}\]
+\oint_{C}\frac{ds}{\zeta(s)}\sim\sum{{n \choose k}}\frac{1}{\zeta^{\prime}(2n)}\]
 
 \end_inset 
 
@@ -4667,7 +4742,7 @@ A similar sum appears in
 
  as 
 \begin_inset Formula \[
-c_{n}=\sum_{k=0}^{n}(-1)^{k}{n \choose k}\frac{1}{\zeta(2k+2)}\]
+c_{n}=\sum_{k=0}^{n}(-1)^{k}{{n \choose k}}\frac{1}{\zeta(2k+2)}\]
 
 \end_inset 
 
@@ -4798,7 +4873,7 @@ Helmut Hasse and Conrad Knoppe (1930) give a series for the Riemann zeta
 
 ):
 \begin_inset Formula \[
-\zeta(s)=\frac{1}{1-2^{1-s}}\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}(-1)^{k}{n \choose k}(k+1)^{-s}\]
+\zeta(s)=\frac{1}{1-2^{1-s}}\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}(-1)^{k}{{n \choose k}}(k+1)^{-s}\]
 
 \end_inset 
 
@@ -4812,7 +4887,7 @@ Hasse for Hurwitz
 Hasse also gave a similar, globally convergent, expansion for the Hurwitz
  zeta:
 \begin_inset Formula \[
-\zeta(s,q)=\frac{1}{s-1}\sum_{n=0}^{\infty}\frac{1}{n+1}\sum_{k=0}^{n}(-1)^{k}{n \choose k}(q+k)^{1-s}\]
+\zeta(s,q)=\frac{1}{s-1}\sum_{n=0}^{\infty}\frac{1}{n+1}\sum_{k=0}^{n}(-1)^{k}{{n \choose k}}(q+k)^{1-s}\]
 
 \end_inset 
 
@@ -4861,7 +4936,7 @@ L(\chi_{1},s)=\left(1-2^{-s}\right)\zeta(s)\]
 
  equation 16 as the sum
 \begin_inset Formula \[
-S_{1}(n)=\sum_{k=2}^{n}(-1)^{k}{n \choose k}\left(1-2^{-k}\right)\zeta(k)\]
+S_{1}(n)=\sum_{k=2}^{n}(-1)^{k}{{n \choose k}}\left(1-2^{-k}\right)\zeta(k)\]
 
 \end_inset 
 
@@ -4885,7 +4960,7 @@ Coffey
 
  shows interest in another sum:
 \begin_inset Formula \[
-S_{3}(n)=\sum_{k=2}^{n}(-1)^{k}{n \choose k}2^{k}\zeta(k)\]
+S_{3}(n)=\sum_{k=2}^{n}(-1)^{k}{{n \choose k}}2^{k}\zeta(k)\]
 
 \end_inset 
 
@@ -4921,7 +4996,7 @@ which seems to be of the form
  and thus suggests that the saddle-point techniques should be applicable.
  These appear in Lagarias equation 4.13 and in Coffey equation 10 as
 \begin_inset Formula \[
-\lambda_{n}=-\sum_{k=1}^{n}{n \choose k}\eta_{k-1}+S_{1}(n)+1-\frac{n}{2}\left(\gamma+\ln\pi+2\ln2\right)\]
+\lambda_{n}=-\sum_{k=1}^{n}{{n \choose k}}\eta_{k-1}+S_{1}(n)+1-\frac{n}{2}\left(\gamma+\ln\pi+2\ln2\right)\]
 
 \end_inset 
 
@@ -4973,7 +5048,7 @@ Prodinger considers a curious sum, and provides an answer; Knuth
 
 :
 \begin_inset Formula \[
-S=\sum_{k=1}^{n-1}{n \choose k}\frac{B_{k}}{2^{k}-1}\simeq-\log_{2}n+\frac{1}{2}+\delta_{2}\left(\log_{2}n\right)\]
+S=\sum_{k=1}^{n-1}{{n \choose k}}\frac{B_{k}}{2^{k}-1}\simeq-\log_{2}n+\frac{1}{2}+\delta_{2}\left(\log_{2}n\right)\]
 
 \end_inset 
 
@@ -5017,7 +5092,7 @@ Lagarias
 
  has a a sum over the Hurwitz zeta, equation 5.5: 
 \begin_inset Formula \[
-T(n,z)=\sum_{k=1}^{n}(-1)^{k}{n \choose k}\frac{1}{2^{k}}\zeta(k,z+1)\]
+T(n,z)=\sum_{k=1}^{n}(-1)^{k}{{n \choose k}}\frac{1}{2^{k}}\zeta(k,z+1)\]
 
 \end_inset 
 
@@ -5152,7 +5227,7 @@ b_{n}(m) & = & \frac{(-1)^{n+1}}{2\pi i}\, n!\,\int_{-\frac{1}{2}-i\infty}^{-\fr
 \layout Standard
 
 
-\begin_inset LatexCommand \BibTeX[plain]{/home/linas/src/fractal/paper/fractal}
+\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
 
 \end_inset 
 
