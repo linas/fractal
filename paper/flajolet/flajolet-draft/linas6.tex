@@ -1,0 +1,1484 @@
+\documentclass{amsart}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{comment}
+
+% \parindent0pt\parskip3pt
+\parskip2ptplus0.5ptminus0.3pt
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\ds{\displaystyle}
+\def\hat{\widehat}
+\def\O{\mathcal{O}}
+
+\newcommand{\Img}[2]{\includegraphics[width=#1truecm]{#2}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\begin{document}
+
+\date{\today}
+\title{On Differences of Zeta Values}
+\author{Philippe Flajolet and Linas Vepstas}
+
+\begin{abstract}
+Finite differences of the Riemann zeta function at the integers
+are explored. Such quantities, which occur as coefficients in Newton series representations, 
+have surfaced in works of Ma{\'s}lanka, Coffey, B{\'a}ez-Duarte, Voros and others.
+We apply the theory of N\"orlund-Rice integrals in conjunction with
+the saddle point method  and derive precise 
+asymptotic estimates. The method extends to Dirichlet $L$-functions,
+in which case our estimates appear to be partly related to
+earlier investigations surrounding Li's criterion for the Riemann hypothesis.
+\end{abstract}
+
+\maketitle
+
+\section*{Introduction}
+
+
+ 
+
+
+In recent  times, a variety of  authors have, for a variety  of reasons,
+been led  to considering   properties  of  representations of   the
+Riemann zeta function $\zeta(s)=\sum 1/n^s$  as a \emph{Newton interpolation
+series}.  Amongst the many  possible  forms, we single out
+the one relative to a regularized version of Riemann zeta, namely,
+\begin{equation}\label{eq1}
+\zeta(s)-\frac{1}{s-1}=\sum_{n=0}^\infty
+(-1)^n b_n \binom{s}{n},
+\end{equation}
+where $\binom{s}{n}$ is a binomial coefficient:
+\[
+\binom{s}{n}:=\frac{s(s-1)\cdots(s-n+1)}{n!}.
+\]
+Corollary~\ref{newton-cor} in Section~\ref{conv-sec}
+establishes that the representation~\eqref{eq1} is
+valid throughout the complex plane,
+its coefficients being determined by a general formula in the calculus of finite
+differences~\cite{Jordan65,Milne81,Norlund54}:
+\begin{equation}\label{eq2}
+b_n=
+% \sum_{k=0}^n
+% \binom{n}{k}(-1)^k\left[\zeta(k)-\frac{1}{k-1}\right]
+n(1-\gamma-H_{n-1})-\frac12+\sum_{k=2}^n \binom{n}{k}
+(-1)^k\zeta(k),
+\end{equation}
+(Here,
+$H_n=1+\frac12+\cdots\frac1n$ are the harmonic numbers.)
+Although the terms in the sum defining~$b_n$ become
+exponentially large, the values of the $b_n$ are exponentially small,
+% \[
+% b_n=\mathcal{O}\left(n^{1/4}e^{-2\sqrt{\pi n}}\right),
+% \]
+while exhibiting a curious oscillatory behavior. 
+We shall indeed prove the estimate (Theorem~\ref{zetacoeff-thm} of Section~\ref{sadzeta-sec}) 
+% that, to the next leading order,
+\begin{equation}\label{asympform}
+b_n =\left(\frac{2n}{\pi}\right)^{1/4}e^{-2\sqrt{\pi n}}\cos\left(2\sqrt{\pi n}+\frac{3\pi}{8}\right)
++\mathcal{O}\left(n^{-1/4} e^{-2\sqrt{\pi n}}\right).
+\end{equation}
+
+% \footnote{
+% LV: Based on my calculations, the amplitude of this expression is too 
+% large by a factor of $\sqrt{2}$, and the phase is off by $\pi$ (that is, 
+% the expression should be negative).  This is supported by my numerical 
+% calculations as well. The factor of two may or may not be due to a factor
+% of two that seems to be missing in \eqref{om012} (see the footnote there).
+% }
+
+A prime reason for  interest in the representation~\eqref{eq1} and the
+companion           coefficients~\eqref{eq2}         is     \emph{Li's
+criterion}~\cite{Li97} for the   Riemann Hypothesis (RH).   Let $\rho$
+range over the  nontrivial zeros of~$\zeta(s)$.   Li's theorem asserts
+that RH is true if and only if all members of the sequence
+\[
+\lambda_n=\sum_\rho \left[1-\left(1-\frac{1}{\rho}\right)\right], \qquad n\ge0,
+\]
+are nonnegative. (Bombieri and Lagarias
+ offer an insightful discussion of Li's criterion in~\cite{BoLa99}.) 
+Coffey~\cite{Coffey05} has shown that the $\lambda_n$
+can be alternatively  expressed as a  sum of  two terms, one  of which
+(the easier one, though) is an elementary variant $\hat b_n$ of $b_n$.
+Theorem~2 of~\cite{Coffey05}  amounts to the property that the coefficients $\hat b_n$ 
+decrease to~0. As we shall see in Secion~\ref{dir-sec},
+the methods originally developed for estimating~$b_n$
+yield precise asymptotic information on~$\hat b_n$ as well.
+
+The zeta function has also received attention in physics,
+for its role in regularization and renormalization in 
+quantum field theory. 
+Motivated by such connections, 
+Ma\'slanka introduced in~\cite{Maslanka01} 
+what amounts to a Newton series representation of $(1-2s)\zeta(2s)$.
+Further numerical observations relative to the corresponding coefficients
+are presented in~\cite{Maslanka04}, which
+have been subsequently vindicated by B\'aez-Duarte in~\cite{Baez03}.
+In particular, B\'aez-Duarte's estimates imply that the coefficients
+in the Newton series of a regularized version of~$(1-2s)\zeta(2s)$ decrease to~0
+faster than any power of $1/n$.
+
+A third independent reason was an attempt by one of us (Linas) around 2003 to obtain
+alternative tractable expressions for the Gauss-Kuzmin-Wirsing operator of 
+continued fraction theory [unpublished; see
+\verb|http://linas.org/math/poch-zeta.pdf|]
+
+In this essay,  we  approach the problem of  asymptotically estimating
+differences of  zeta  values by means of   a combination  of  two well
+established   techniques.   We   start   from   a   contour   integral
+representation of these  differences as defined by~\eqref{eq2}  (for this
+technique, see   especially N\"orlund's treatise~\cite{Norlund54}  and
+the study~\cite{FlSe95}),  then proceed to estimate the corresponding
+complex  integral by  means of the classical  saddle point method of asymptotic
+analysis~\cite{deBruijn81,Olver74}. Our approach parallels a recent  preprint
+of Voros~\cite{Voros05} (motivated by Li's criterion), 
+which our results supplement by providing a fairly 
+detailed asymptotic analysis of differences of zeta values.
+
+The next section (\S\ref{newtser-sec}) will review the Newton series for the zeta function,
+and give some generating functions for its coefficients. This is followed
+by a brief review of some numerical results in \S\ref{exper-sec}. Section~\ref{norl-sec}
+gives the N\"orlund integral representation for the series,
+while the Section~\ref{sadzeta-sec} provides a careful saddle-point analysis 
+of the resulting integrand.  Section~\ref{dir-sec} develops the corresponding analysis
+for the Dirichlet $L$-functions.
+ We end with a conclusion outlining other applications of N\"orlund integrals
+in the realm of finite differences and zeta functions.
+
+
+
+
+\section{Newton series and zeta values}\label{newtser-sec}
+
+
+This section defines the Newton series for the Riemann zeta
+that is to be studied, demonstrates some of its simple properties,
+and gives some generating functions for its coefficients.
+In this paper, a Newton series will be taken to be defined as
+
+\begin{equation}\label{gennew}
+\Phi(s)=\sum_{n=0}^\infty (-1)^n c_n \binom{s}{n}.
+\end{equation}
+Given a function $\phi(s)$, one may attempt to represent it 
+in some region of the complex plane by means of 
+such a series. Since the series $\Phi(s)$ terminates at $s=0,1,2,\ldots$,
+the conditions $\phi(m)=\Phi(m)$ at the nonnegative integers
+imply that the candidate sequence $\{c_n\}$ is linearly related to the
+sequence of values $\{\phi(m)\}$ by
+\[
+\phi(m)=\sum_{n=0}^m (-1)^n c_n \binom{m}{n}.
+\]
+The triangular system can then be inverted to 
+give (by the binomial transform~\cite{GrKnPa89} or by direct elimination)
+\begin{equation}\label{gencoeff}
+c_n = \sum_{k=0}^{n} \binom{n}{k} (-1)^k \phi(k), \qquad n=0,1,2,\ldots\,.
+\end{equation}
+This choice of coefficients for~\eqref{gennew}
+determines the Newton series \emph{associated} to $\phi$.
+The coincidence of 
+the function $\phi$ and its associated series
+$\Phi$ is, by construction, granted at least
+at all the nonnegative integers. 
+The validity
+of $\Phi(s)=\phi(s)$  is often found to extend to large
+parts of the complex plane, but this fact requires specific
+properties much beyond the mere convergence of the series in~\eqref{gennew}.
+
+
+% The equivalence
+% of $\Phi(m)=\phi(m)$ can be extended to a region
+% of the complex plane containing the integers, provided that the
+% growth of the difference $\Phi(s)-\phi(s)$ is bounded in the imaginary
+% direction. This result is known as \emph{Carlson's theorem}, and is
+% presented in a more precise form later in this paper.
+
+In the case of the Newton series for $\zeta(s)-1/(s-1)$, the general
+relation~\eqref{gencoeff} provides the coefficients in the form
+\begin{equation}\label{bn0}
+b_n = s_0-ns_1+\sum_{k=2}^n \binom{n}{k} (-1)^k \left[\zeta(k)-\frac{1}{k-1}
+\right],
+\end{equation}
+where
+\begin{equation}\label{bn1}
+s_0=\left[\zeta(s)-\frac{1}{s-1}\right]_{s=0}=\frac12,
+\qquad
+s_1=\lim_{s\to 1} \left[\zeta(s)-\frac{1}{s-1}\right] = \gamma.
+\end{equation}
+The harmonic numbers appear as
+\begin{equation}\label{bn2}
+\sum_{k=2}^n \binom{n}{k}\frac{(-1)^k}{k-1}=1-n+nH_{n-1}.
+\end{equation}
+Equations \eqref{bn0}, \eqref{bn1},   \eqref{bn2} 
+then entail that   the
+$b_n$, as  defined by~\eqref{eq2}, are indeed the  coefficients  of the Newton series
+associated to~$\zeta(s)-1/(s-1)$. A proof of that the equality
+$\Phi(s)=\zeta(s)-1/(s-1)$ holds for all complex~$s$ is given in Section~\ref{conv-sec},
+following the asymptotic analysis of the coefficients~$b_n$ and based on
+a Theorem of Carlson.
+
+\smallskip
+
+Before engaging in a detailed study of the~$b_n$, we note a few 
+simple facts regarding their elementary properties. Set
+\begin{equation}\label{deldef}
+\delta_n:=\sum_{k=2}^n \binom{n}{k} (-1)^k \zeta(k),
+\end{equation}
+which are, up to minor adjustments, differences of zeta values at the
+integers.  Defining the forward difference $\Delta f(x):=f(x+1)-f(x)$,
+one has
+\[
+\delta_n= (-1)^n \Delta^n Z(x) \bigg|_{x=0},\]
+where $Z(k)=\zeta(k)$ for $k\ge2$ and $Z(0)=Z(1)=0$.
+Expanding the zeta function according to its definition and 
+exchanging the order of summations in the resulting double sum shows that
+\begin{equation}\label{simpdel}
+\delta_n = \sum_{\ell\ge1} \left[\left(1-\frac{1}{\ell}\right)^n-1+\frac{n}{\ell}\right].
+\end{equation}
+This rather simple sum shows a remarkably complex behavior;
+elucidating its behavior is one of the principal topics of this paper.
+
+
+The ordinary generating function for the sequence $\{\delta_n\}$ 
+is also of interest.
+Given the classical expansion~\cite{WhWa27} 
+of the logarithmic derivative $\psi(z)$ of the Gamma function,
+\[
+\psi(1+z)+\gamma=\zeta(2)z-\zeta(3)z^2+\zeta(4)z^3-\cdots,
+\]
+one finds
+\begin{equation}\label{delogf}
+\sum_{n\ge2}\delta_n z^n =\frac{z}{(1-z)^2}\left[\psi\left(\frac{1}{1-z}\right)
++\gamma\right].
+\end{equation}
+The exponential generating function for the sequence  $\{\delta_n\}$ reflects~\eqref{simpdel} and is even simpler:
+% can be directly obtained from~\eqref{simpdel}: 
+% multiply by~$z^n/n!$ and sum, to get
+\begin{equation}\label{delegf}
+\sum_{n\ge2}\delta_n \frac{z^n}{n!}
+=e^z\sum_{n\ge2} \zeta(n) \frac{(-z)^n}{n!}=e^z \sum_{\ell\ge1}
+\left[e^{-z/\ell}-1+\frac{z}{\ell}\right]
+.
+\end{equation}
+% where the first form results directly from~\eqref{deldef},  the second from~\eqref{simpdel}.
+
+
+\section{Experimental analysis}\label{exper-sec}
+
+Detailed experiments on the $b_n$ coefficients conducted by one of us are
+at the origin of the present paper. As it is usual when dealing with finite differences,
+the alternating binomial sums giving the $b_n$ involve exponential
+cancellation since the binomial coefficients get almost as large as $2^n$. 
+We conducted evaluations of the $b_n$ up to $n\approx 5000$,
+which requires computing zeta values up to several thousand digits of precision.
+(Note that the zeta values can be computed rapidly to extremely high
+precision using several efficient algorithms, which are available in several
+symbolic computation packages and numerical libraries.)
+
+A quick inspection of numerical data immediately reveals two features
+of the constants~$b_n$: they are oscillatory with slowly increasing
+period and their
+absolute values are very rapidly decreasing. For instance\footnote{%
+	The notation $x\doteq y$ designates a numerical approximation of
+	$x$ by $y$ to the last decimal digit stated. 
+}:
+\[\renewcommand{\arraycolsep}{2truept}
+\begin{array}{lllllllll}
+b_1&\doteq&-	0.07721,\quad &
+b_2&\doteq&-	0.00949,\quad &
+b_5&\doteq& 	0.00071, \\
+b_{10}&\doteq&-	0.00002, \quad &
+b_{20}&\doteq& 	2.15965\cdot 10^{-9},\quad &
+b_{50}&\doteq&-	1.08802\cdot 10^{-11}.
+\end{array}\]
+
+A numeric fit of the oscillatory behavior of the function may be made.
+There are sign changes in the sequence $\{b_n\}$ at
+\[
+n=3,7,13,21,29,40,52,65,80,97,115,135,157,180,\ldots\,,
+\]
+the values growing roughly quadratically. A good fit for the $k$th zero is
+provided by
+\[
+q(k)= \frac{\pi}{4}k^2+\frac{9\pi}{16}k+1,\]
+rounded at the  nearest integer. (The precise values of the 
+first two constants were inferred from
+values of $n$ well in the range of several thousands.)
+The quadratic polynomial is easily 
+inverted to give the approximate oscillatory behavior of the $b_n$:
+\[
+s(n) = \sin\pi\left(2\sqrt{\frac{n}{\pi}}-\frac{9}{8}\right).\]
+
+\begin{figure}
+
+\begin{center}
+\hbox{\Img{6}{exper1.jpg}\Img{6}{exper2.jpg}}
+\end{center}
+
+\caption{\label{exper-fig}
+Numerical experiments with~$b_n$. Left: a plot of~$\log|b_n/s(n)|$.
+Right: a plot of $b_n/\beta(n)$.}
+\end{figure}
+Once the oscillatory behavior has been disposed of, the task of quantifying
+the general trend in the decrease becomes easier. A plot of the values 
+of $\log|b_n/s(n)|$ displayed in Figure~\ref{exper-fig} (left)
+has a parabolic aspect, which suggests that
+\[
+b_n \approx s(n) e^{-K\sqrt{n}} \qquad \hbox{with}\quad K\approx 3.6,\]
+but a more precise fit  is  difficult. 
+
+In summary, this together with similar experiments led us to conjecture 
+\begin{equation}\label{conj}
+\beta(n):=  \sin\pi\left(2\sqrt{\frac{n}{\pi}}-\frac{9}{8}\right)  e^{-K\sqrt{n}},
+\qquad K=3.6\pm 0.1.
+\end{equation}
+as  a   rough approximation  to~$b_n$.  Figure~\ref{exper-fig} (right)
+displays the ratios $b_n/\beta(n)$  for $n=10\,.\,.\,200$.   The trend  is
+compatible furthermore with the presence  of
+an   extra   factor   of     the  form   $-n^\kappa$   for   some
+$\kappa\in(0,1)$. (The spikes
+correspond  to    occasional inaccuracies  of  our sign-change function,    $s(n)$.) 
+As we shall see, these empirical observations match reality quite well.
+
+
+\section{The N\"orlund integral representation}\label{norl-sec}
+
+
+Our approach to the asymptotic estimation of the $b_n$ relies on
+a complex integral representation of finite differences of an analytic function,
+to be found in N\"orlund's classic treatise~\cite[\S VIII.5]{Norlund54} first published in 1924.
+In computer science, this representation was popularized by Knuth~\cite{Knuth98a},
+who attributed it to S.O.~Rice, so that
+it also came to be known as ``Rice's method''; see~\cite{FlSe95}
+for  a review. 
+
+\begin{lemma} Let $\phi(s)$ be holomorphic in the half-plane 
+$\Re(s)\ge n_0-\frac12$. Then the finite differences of the sequence
+$(\phi(k))$ admit the integral representation
+\begin{equation}\label{norint}
+\sum_{k=n_0}^n \binom{n}{k}(-1)^k\phi(k)=\frac{(-1)^{n}}{2\pi i}\int_C 
+\phi(s) \frac{n!}{s(s-1)\cdots(s-n)}\, ds,
+\end{equation}
+where the contour of integration~$C$ encircles the integers $\{n_0,\ldots,n\}$
+in a positive direction and is contained in~$\Re(s)\ge n_0-\frac12$.
+\end{lemma}
+\begin{proof}
+The integral on the right of~\eqref{norint} is the sum of its residues at~$s=n_0,\ldots,n$,
+which precisely equals the sum on the left.
+\end{proof}
+
+An immediate consequence is the following representation for the 
+differences of zeta values ($\delta_n$ in~\eqref{deldef}):
+\begin{equation}\label{norbn}
+\delta_n\equiv \sum_{k=2}^n \binom{n}{k}(-1)^k\zeta(k)
+=\frac{(-1)^{n-1}}{2\pi i}\int_{3/2-i\infty}^{3/2+i\infty} 
+\zeta(s) \frac{n!}{s(s-1)\cdots(s-n)}\, ds. 
+\end{equation}
+(Start from a small rectangle encircling $\{2,\ldots,n\}$, then 
+extend it to a long rectangle with horizontal sides at $\pm i\infty$,
+and finally push the right vertical side to $+\infty$.
+The contributions relative to 
+% the horizontal sizes and the right vertical side 
+all but the left vertical side vanish,
+since $\zeta(s)$ remains bounded in modulus by~$\zeta(\frac32)$.)
+
+Since~$b_n$ is $\delta_n$ plus a correction term (see Equation~\eqref{eq2}),
+the first step is to move the line of integration further to the left.
+It is well known that the Riemann zeta function is of finite order in any right half-plane,
+that is, $|\zeta(s)|=O(|s|^A)$ uniformly as $|s|\to\infty$, for some~$A$ depending on the
+half-plane under consideration~\cite{Titchmarsh86}.
+As a consequence, the integral of~\eqref{norbn} remains 
+convergent, when taken along any vertical line left of~0,
+as soon as~$n$ is large enough. Under these conditions, it is possible
+to replace the line of integration $\Re(s)=\frac32$ by the line~$\Re(s)=-\frac12$, upon
+taking into account the residues of a double pole at $s=1$ and a simple
+pole at $s=0$.
+We find in this way
+\[
+\delta_n=(-1)^{n-1} (R_1+R_0)+\frac{(-1)^{n-1}}{2\pi i}\int_{-1/2-i\infty}^{-1/2+i\infty} 
+\zeta(s) \frac{n!}{s(s-1)\cdots(s-n)}\, ds, \]
+where, as shown by a routine calculation:
+\[
+(-1)^n R_0=-\frac12,
+\qquad
+(-1)^nR_1=-n(1-\gamma-H_{n-1}).
+\]
+The residues thus compensate exactly 
+for the difference between~$\delta_n$ and~$b_n$, so that
+\begin{equation}\label{norbn2}
+b_n=
+\frac{(-1)^{n-1}}{2\pi i}\int_{-1/2-i\infty}^{-1/2+i\infty} 
+\zeta(s) \frac{n!}{s(s-1)\cdots(s-n)}\, ds.
+\end{equation}
+
+\section{Saddle point analysis of zeta differences}\label{sadzeta-sec}
+
+The integrand in~\eqref{sadzeta-sec} is free of 
+singularities on the left-hand side, and is thus amenable to evaluation
+by the saddle point (or steepest-descent) method.  This evaluation 
+is the main topic of this section, and culminates with the derivation of
+one of the principal results of this paper, equation~\eqref{asympform}.
+
+It is convenient to perform a change of variables $s\mapsto -s$.
+The new integrand involves $\zeta(-s)$, which transforms by virtue of the 
+functional equation 
+of the zeta function,
+\begin{equation}\label{funzeta}
+\zeta(1-s)=(2\pi)^{-s}2\cos\left(\frac{s\pi}{2}\right)\Gamma(s)\zeta(s).
+\end{equation}
+A combination of~\eqref{norbn2} and~\eqref{funzeta} then gives
+\begin{equation}\label{mainint}
+b_n = -\frac{1}{\pi i} 
+\int_{1/2-i\infty}^{1/2+i\infty} 
+(2\pi)^{-s-1} \sin\left(\frac{\pi s}{2}\right)\zeta(1+s)
+\frac{n!\,\Gamma(1+s)}{s(s+1)\cdots(s+n)}\, ds,
+\end{equation}
+which is the starting point of our asymptotic analysis.
+
+The integral representation~\eqref{mainint} has several noticeable features. 
+First, the integrand has no singularity at all in $\Re(s)\ge\frac12$
+and it decays fast enough towards $\pm i \infty$,
+which means that one can freely choose the abscissa $c$ (with $c\geq\frac12$)
+in the representation 
+\begin{equation}\label{mainint2}
+b_n = -\frac{1}{\pi i} 
+\int_{c-i\infty}^{c+i\infty} 
+(2\pi)^{-s-1} \sin\left(\frac{\pi s}{2}\right)\zeta(1+s)
+\frac{n!\, \Gamma(s+1)}{s(s+1)\cdots(s+n)}\, ds.
+\end{equation}
+The very absence of singularities calls for an application 
+of the saddle  point method.
+
+The factor $\zeta(1+s)$ remains bounded in modulus by a constant,
+and is in fact barely distinguishable from~1, as $\Re(s)$ increases,
+since
+\begin{equation}\label{zetapp}
+\zeta(s)=1+\mathcal{O}\left(2^{-\Re(s)}\right), \qquad \Re(s)\ge\frac32.
+\end{equation}
+Also, for large $|s|$, the complex version of Stirling's formula 
+applies:
+\begin{equation}\label{stirapp}
+\Gamma(1+s) = s^s e^{-s}\sqrt{2\pi s}\left(1+\mathcal{O}(|s|^{-1})\right),\qquad \Re(s)\ge0.
+\end{equation}
+Finally, the sine factor increases exponentially along vertical lines:
+one has
+\begin{equation}\label{sinapp}
+2i\sin\frac{\pi s}{2} =-\exp\left(-i\frac{\pi s}{2}\right)
++\mathcal{O}\left(e^{-\pi \Im(s)/2}\right), \qquad \Im(s)\ge0,
+\end{equation}
+with a conjugate approximation holding for $\Im(s)<0$.
+% (The fact decay at complex infinity of $\Gamma(s)$ then 
+% compensates for the growth of the sine factor, so that, ultimately, the integrand 
+% decreases polynomially fast, due to the rising factorial in the denominator, roughly
+% like $|s|^{-n}$.)
+
+In anticipation of applying saddle-point methods, 
+the approximations~\eqref{zetapp}, \eqref{stirapp}, and~\eqref{sinapp}
+then suggest the function $e^{\omega(s)}$
+ as a simplified model of the integrand in the upper half-plane, where
+\begin{equation}\label{omdef}
+\omega(s)=-s\log(2\pi)-i\frac{\pi s}{2}+\log\frac{n! \Gamma(s)^2}{\Gamma(s+n)}.
+\end{equation}
+We shall demonstrate shortly that the location of the appropriate saddle 
+points in the complex plane scale as $\sqrt{n}$, which may be confirmed 
+by numerical experiments. Therefore, in performing an asymptotic analysis,
+it is appropriate to perform a change of variable $s=x\sqrt{n}$, 
+and expand in descending powers of $n$, presuming $x$ to be approximately constant.
+We find, uniformly for $x$ in any compact region of $\Re(x)>0$, $\Im(x)>0$:
+\begin{equation}\label{om012}
+\left\{\begin{array}{lll}
+\omega(x\sqrt{n})&=&\ds x\sqrt{n}\left[2\log x-2-\log(2\pi)-\frac12i\pi \right]+\frac12\log n
+\\
+&&\ds \qquad -\log x +\log(2\pi)-\frac12x^2+\mathcal{O}(n^{-1/2})
+\\
+\omega'(x\sqrt{n})&=& \ds \left[-\log(2\pi) -i\frac{\pi}{2}+2\log x\right]
+-\left(x+\frac1x\right)\frac{1}{\sqrt{n}}+\mathcal{O}(n^{-1}).
+\\
+\omega''(x\sqrt{n})&=&\ds \frac{2}{x\sqrt{n}}+\mathcal{O}(n^{-1}).
+\end{array}\right. 
+\end{equation}
+(The symbolic manipulation system {\sc Maple} is a great help in such computations.)
+% Also, at $s=x\sqrt{n}$, one has 
+% \begin{equation}\label{om2}
+% \begin{array}{lll}
+% \log(n!\omega(x\sqrt{n})&=&\ds \sqrt{n}\left[2x\log x-2x-x\log(2\pi)-\frac12i\pi x\right]
+% \\
+% &=&\ds \quad -\log x -\log\sqrt{n}+\log(2\pi)-\frac12x^2+O(n^{-1/2}).
+% \end{array}
+% \end{equation}
+
+From the second line of~\eqref{om012}, an approximate root of $\omega'(s)$
+is obtained by choosing the particular value~$x_0$ of $x$ that cancels 
+$\omega'$ to main asymptotic order:
+\begin{equation}\label{x0}
+x_0=e^{i\pi/4}\sqrt{2\pi}.
+\end{equation}
+This corresponds to the following value for $s$,
+\begin{equation}\label{sad0}
+\sigma\equiv \sigma(n)= x_0\sqrt{n} = % e^{i\pi/4} \sqrt{2\pi n} =
+(1+i)\sqrt{\pi n},
+\end{equation}
+which is thus also an approximate saddle point for $e^{\omega(s)}$.
+The substitution of this value given the first line of~\eqref{om012} then leads to
+\begin{equation}\label{appsad}
+\exp\left(\omega(\sigma(n))\right)
+=\exp\left(2i\sqrt{\pi n}\right) \cdot \exp\left(-2\sqrt{\pi n}\right)\cdot \Pi(n),
+\end{equation}
+where $\Pi$ is an
+unspecified factor of at most polynomial growth. 
+By using a suitable contour that passes though~$\sigma(n)$,
+we thus expect the quantity in~\eqref{appsad} to be an approximation
+(up to polynomial factors again) of~$b_n$. This back-of-the-envelope calculation
+does predict  the exponential decay of~$b_n$ as $\exp\left(-3.54490\sqrt{n}\right)$,
+in a way consistent with numerical data, while 
+the fluctuations,
+$
+\sin\left(2\sqrt{\pi n}+\mathcal{O}(1)\right),
+$
+are seen to be in stunning agreement with the empirically obtained formula~\eqref{conj}.
+
+% Equipped with~\eqref{norbn2}, we propose to prove:
+% 
+% \begin{theorem} The $b_n$ satisfy the asymptotic expansion blabla.
+
+\begin{figure}
+
+\begin{center}
+\begin{footnotesize}
+\setlength{\unitlength}{0.6truecm}
+\begin{picture}(6,10)(-1,-5)
+\thicklines
+\put(-1,0){\line(1,0){6}}
+\put(0,-5){\line(0,1){10}}
+\put(0,0.2){~$0$}
+\put(1,4.2){$\Re(s)=c_1\sqrt{n}$}
+\put(3,0.2){$\Re(s)=c_2\sqrt{n}$}
+%%% begin upper diagram
+\put(2,2){\circle*{0.2}}
+\put(2,2){$\quad\ds \sigma=e^{i\pi/4}\sqrt{2\pi n}$}
+\put(1,3){\line(1,-1){2}}
+% \put(1,3){\line(2,-5){2}}
+\put(1,3){\line(0,1){2}}
+\put(3,1){\line(0,-1){1}}
+\put(2,2){\vector(1,-1){0.5}}
+\put(2,2){\vector(-1,1){0.5}}
+\thinlines
+\put(1,3){\line(0,-1){3}}
+%%% end  upper diagram
+%%% begin lower diagram
+\thicklines
+\put(2,-2){\circle*{0.2}}
+\put(2,-2){$\quad\ds \overline\sigma=e^{-i\pi/4}\sqrt{2\pi n}$}
+\put(1,-3){\line(1,1){2}}
+\put(1,-3){\line(0,-1){2}}
+\put(3,-1){\line(0,1){1}}
+\put(2,-2){\vector(1,1){0.5}}
+\put(2,-2){\vector(-1,-1){0.5}}
+\thinlines
+\put(1,-3){\line(0,1){3}}
+%%% end  lower diagram
+\end{picture}
+\end{footnotesize}
+\qquad
+\Img{7.5}{plotc.jpg}
+\end{center}
+\caption{\label{sad-fig}
+Left: The saddle point contour used for estimating $b_n$.
+The arrows point at the directions of steepest descent
+from the saddle points.
+Right: the landscape of the logarithm of the modulus of the integrand
+in the representation of~$b_n$ for $n=10$.}
+
+\end{figure}
+
+\smallskip
+We  must   now fix the   contour  of  integration  and  provide  final
+approximations. The   contour  adopted  (Figure~\ref{sad-fig})    goes
+through the saddle  point $\sigma=\sigma(n)$ and symmetrically  through
+its  complex conjugate $\overline\sigma=\overline{\sigma(n)}$.  In the
+upper half-plane, it traverses $\sigma(n)$ along  a line  of steepest
+descent   whose   direction, as   determined    from the  argument  of
+$\omega''(\sigma)$,  is at an    angle of $\frac{5\pi}{8}$    with the
+horizontal  axis.  The contour   also  includes parts of two  vertical
+lines of  respective abscissae $\Re(s)=c_1\sqrt{n}$ and~$c_2\sqrt{n}$,
+where
+\[
+0<c_1<\sqrt{\pi}<c_2<2\sqrt{\pi}.
+\] 
+
+The  choice of the abscissae, $c_1$  and $c_2$, is
+not critical (it is even possible to adapt the analysis to $c_1=c_2=\sqrt{\pi}$).
+One verifies  easily, from crude approximations, that
+the contributions arising from the vertical parts of the contour are
+$\mathcal{O}(e^{-L_0\sqrt{n}})$,    for   some $L_0>2\sqrt{\pi}$,   i.e.,   they  are
+exponentially small in the  scale of the problem:
+\begin{equation}\label{vert}
+\int_{\operatorname{vertical}} = \mathcal{O}\left(e^{-L_0\sqrt{n}}\right)\qquad L_0>2\sqrt{\pi}.
+\end{equation}
+
+
+The slanted part of
+the contour is such that all the estimates of~\eqref{om012} apply. 
+The scale of the problem is dictated by the value of $\omega''(\sigma)$,
+ which is of order $\mathcal{O}(n^{-1/2})$. This indicates that the ``second order'' scaling 
+to be adopted is~$n^{1/4}$. Accordingly, we set
+\begin{equation}\label{cregion}
+s=(1+i)\sqrt{\pi n}+e^{5i\pi/8}yn^{1/4}.
+\end{equation}
+% Equivalently, we let $x$ vary slightly 
+% around $e^{i\pi/4}\sqrt{2\pi}$ by amounts proportional to $n^{-1/4}$.
+Define the \emph{central region} of the slanted part of the contour by the condition
+that $|y|\le \log^2 n$.
+Upon slightly varying the value of~$x$ around~$x_0$, one verifies from~\eqref{om012} that,
+for large~$n$, the quantity
+\[
+\Re\left(\frac{1}{\sqrt{n}}
+\omega\left(x_0\sqrt{n}+e^{5i\pi/8}t\sqrt{n}\right)\right)
+\]
+is an upward concave function of~$t$ near~$t=0$. There results,
+in the complement of the central part, $|y|\ge \log^2n$,
+the approximation
+\[
+\left|\exp\left(\omega\left(x_0\sqrt{n}+e^{5i\pi/8}yn^{1/4}\right)\right)\right|
+< e^{\omega(x_0\sqrt{n})}
+\cdot \exp\left(-L_1 \log^2 n\right),\qquad L_1>0.
+\]
+Figuratively:
+\begin{equation}\label{cent}
+\int_{\operatorname{slanted}}=\int_{\operatorname{central}}+\mathcal{O}\left(\exp\left(-L_1 \log^2 n\right)\right).
+\end{equation}
+Thus, from~\eqref{vert}  and~\eqref{cent},  only the central   part of the
+slanted region matters asymptotically. This applies to $e^{\omega(s)}$ but also
+to the full integrand of the representation~\eqref{mainint2} of $b_n$,
+given the approximations~\eqref{zetapp}--\eqref{om012}.
+
+\smallskip
+
+We are finally ready to reap the crop. Take the integral representation
+of~\eqref{mainint2} with the contour deformed as indicated in Figure~\ref{sad-fig} and
+let $b_n^{+}$ be the contribution arising from the upper half-plane, to
+the effect that
+\begin{equation}\label{conjug}
+b_n=2\Re(b_n^+),
+\end{equation}
+by conjugacy. In the central region, 
+\[
+s=x_0\sqrt{n}+e^{5i\pi/8}yn^{1/4},
+\]
+the integrand of~\eqref{mainint2} becomes
+\begin{equation}\label{phis}
+\left(-\frac{1}{\pi i}\right)\cdot 
+(2\pi)^{-1}\cdot 
+\left(-\frac{1}{2i}\right)\cdot
+ \left(1+\mathcal{O}(2^{-\sqrt{n}})\right)\cdot 
+\frac{x_0}{n} \cdot e^{\omega(x_0\sqrt{n})} \cdot
+e^{-y^2/\sqrt{2\pi}}\left(1+\mathcal{O}(\frac{1}{\sqrt{n}}\right).
+\end{equation}
+The various factors found there (compare~\eqref{mainint2} to $e^{\omega(s)}$
+with $\omega(s)$ defined in~\eqref{omdef})
+are in sequence: the Cauchy integral prefactor; 
+the correction $(2\pi)^{-1}$ to the functional equation of Riemann zeta;
+the factor $-1/(2i)$ relating the sine to its
+exponential approximation; the approximation of Riemann zeta;
+the correction $s/(s+n)$ of the Gamma factors; 
+the main term $e^{\omega(\sigma)}$;
+the anticipated local Gaussian approximation;
+the errors resulting from approximations~\eqref{zetapp}--\eqref{om012},
+which are of relative order $O(n^{-1/2})$. Upon completing the tails of the 
+integral and neglecting exponentially small corrections,
+we get
+\begin{equation}\label{asy0}
+b_n^+ =K_0 e^{\omega(x_0\sqrt{n})}
+\frac{x_0}{\sqrt{n}}
+\int_{-\infty}^{+\infty} e^{-y^2/\sqrt{2\pi}}\,dy
+\cdot\left(e^{5i\pi/8}n^{1/4}\right)\left(1+\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\right),
+\end{equation}
+where~$K_0$    is the constant  factor  of~\eqref{phis}, while the factor
+following   the integral   translates the   change   of   variables:
+$ds=e^{5i\pi/8}n^{1/4}dy$. 
+
+The  asymptotic form of~$b_n$ is now completely
+determined by~\eqref{conjug} and~\eqref{asy0}.
+We have obtained:
+
+\begin{figure}
+\begin{center}
+\Img{7}{comparapp.jpg}
+\end{center}
+\caption{\label{comparapp-fig} A comparative plot of $b_n$ and 
+the main term of its approximation~\eqref{thmz},
+both multiplied by $e^{-2\sqrt{\pi n}}n^{-1/4}$, for $n=5\,.\,.\,500$.}
+\end{figure}
+
+\begin{theorem} \label{zetacoeff-thm}
+The Newton coefficient $b_n$ of $\zeta(s)-1/(s-1)$ defined in~\eqref{eq2}
+satisfies
+\begin{equation}\label{thmz}
+b_n = \left( \frac{2n}{\pi}\right)^{1/4}
+e^{-2\sqrt{\pi n}}\cos\left(2\sqrt{\pi n}-\frac{5\pi}{8}\right)
++\mathcal{O}\left(e^{-2\sqrt{\pi n}}n^{-1/4}\right).
+% \qquad
+% K:=2^{3/4}\pi^{-1/4}.
+\end{equation}
+\end{theorem}
+
+The agreement between asymptotic and exact values is quite good,
+even for small values of~$n$ (Figure~\ref{comparapp-fig}).
+
+\smallskip
+
+The foregoing developments justify a posteriori the application of the saddle point formula to the N\"orlund Rice
+integral representation~\eqref{mainint2} of zeta value differences. This formula
+reads
+\begin{equation}\label{sadfor}
+\int e^{-Nf(x)} \, dx =\sqrt{\frac{2\pi}{N|f''(x_0)|}}
+e^{-N f(x_0)}\left(1+\mathcal{O}\left(\frac{1}{N}\right)\right).
+\end{equation}
+Here the analytic function $f(x)$ should be such that $|f(x)|$ has a saddle-point at~$x_0$,
+that is, $f'(x_0)=0$ and $f''(x_0)$ is the second derivative of~$f$ at the saddle point.
+In the case of differences of zeta values, 
+the appropriate scaling parameter is $s=x\sqrt{n}$ corresponding to $N=\sqrt{n}$, and the
+the function~$f$ is
+\[
+f(x)=\lim_{n\to\infty} \frac{1}{\sqrt{n}}\omega\left(x\sqrt{n}\right),
+\]
+up to smaller order corrections that can be treated as constants in the range of the saddle point.
+
+\section{Convergence of the Newton series of zeta}\label{conv-sec}
+
+The fact that the coefficients $b_n$ decay to zero faster than any polynomial in~$1/n$ 
+implies that the Newton series
+\begin{equation}\label{newtonz}
+\Phi(s)=\sum_{n=0}^\infty (-1)^n b_n \binom{s}{n},
+\end{equation}
+with $b_n$ given by~\eqref{eq2},
+converges throughout the complex plane, and consequently defines an entire function.
+Set $Z(s):=\zeta(s)-1/(s-1)$ with~$Z(1)=\gamma$. We have, by construction $\Phi(s)=Z(s)$
+at $s=0,1,2\ldots\,$, but the relation between $\Phi$ and $Z$ at other points is still unclear.
+
+\begin{corollary}\label{newton-cor} The Newton series of~\eqref{newtonz} 
+is a convergent representation of the function $\zeta(s)-1/(s-1)$
+valid at all points $s\in\C$.
+\end{corollary}
+\begin{proof} 
+Here  is our favorite  proof.  A   classic theorem  of Carlson  (for a
+discussion        and      a     proof,     see,      e.g.,    Hardy's
+Lectures~\cite[pp.~188-191]{Hardy78}          or          Titchmarsh's
+treatise~\cite[\S5.81]{Titchmarsh39})  says the following:
+\emph{Assume that $(i)$~$g(s)$ is
+analytic and such that
+\[
+\left|g(s)\right|<C^{A|s|},
+\]
+where $A<\pi$, in the right half-plane of complex values of~$s$,
+and $(ii)$~$g(0)=g(1)=\ldots=0$. Then $g(s)$ vanishes identically.}
+
+
+To complete the proof, it  suffices to apply  Carlson's theorem to the
+difference    $g(s)=\Phi(s+2)-Z(s+2)$.
+Condition~$(ii)$ is    satisfied  by   construction  of    the  Newton
+series. Condition~$(i)$ results from  the fact that $Z(s+2)$ is $\mathcal{O}(1)$
+while  a general bound  due to N\"orlund 
+(Equation~(58) of~\cite[p.~228]{Norlund54})
+and valid for all convergent Newton series
+asserts that $|\Phi(s+2)|$  is of 
+growth at most $e^{\frac{\pi}{2}|s|}$, throughout $\Re(s)>-\frac12$.
+% I struggled quite a bit to find a direct elementary proof instead.
+% Please don't discard what follows for the moment!
+% 
+% Regarding the promised crude bounds,
+% use $f(x)\ll g(x)$ to express that $f(x)\le M g(x)$ for some absolute constant~$M$. We have,
+% with $S=|s|$:
+% \[
+% \begin{array}{lll}
+% |\Phi(s)|& \ll & \ds \sum_{n\ge0}e^{-\sqrt{n}}
+% \left|\binom}{s}{n}\right| \ll 
+% \left(\sum_{0\le n \le 2S}\binom{S+n-1}{n}\right)+
+% \left(\sum_{2S<n} e^{-\sqrt{n}}
+% \left|\binom}{s}{n}\right|\right) \\
+% &\ll& \ds e^{2S}+\sum_{2S<n} e^{-\sqrt{n}}
+% \left|\binom}{s}{n}\right|.
+% \end{array}
+% \]
+% Next, for $\Re(s)>0$ and $n>2|s|$, simple geometry shows that
+% \[
+% \left|\binom}{s}{n}\right| \le \left|\binom}{in/2}{n}\right|
+% 
+% 
+% \binom{S+n-1}{n}\ll\sum_{n\ge0}e^{-\sqrt{n}}\frac{(S+n)^n}{n!}
+% \ll \sum_{n\ge0}e^{-\sqrt{n}}\frac{n^n}{n!}\left(1+\frac{S}{n}\right)^n\\
+% &\ds \ll& e^{n\log(1+S/n)}\ll e^S.
+% \end{array}
+% \]
+\end{proof}
+
+An alternative proof can be given starting from a contour integral representation for the remainder of 
+a general Newton series given~\cite[p.~223]{Norlund54}. In a short note, B\'aez-Duarte~\cite{Baez03}
+justified a similar looking Newton series representation of the zeta function due to Ma\'slanka---however
+his bounds on the Newton coefficients are less precise than ours and his arguments (based on
+a doubly indexed sequence of polynomials) seem to be somewhat problem-specific.
+
+
+
+
+\section{Dirichlet $L$-functions}\label{dir-sec}
+
+The methods employed to deal with differences of zeta values have a
+more general scope, and we may reasonably expect them to be applicable to
+other kinds of Dirichlet series.
+%  which are of the form
+% \[
+% \phi(s)=\sum_{n\ge1} \frac{f_n}{n^s},
+% \]
+% after possible desingularization. 
+Such is indeed the case
+for any Dirichlet $L$-function,
+\[
+L(\chi,s)=\sum_{n=1}^\infty \frac{\chi(n)}{n^s},
+\]
+where $\chi$ is a multiplicative character 
+of some period~$k$, that is,
+for all integers~$m,n$, one has:
+$\chi(n+k)=\chi(n)$,  $\chi(mn)=\chi(m)\chi(n)$, $\chi(1)=1$, and
+$\chi(n)=$ whenever~$\gcd(n,k)\not=1$. 
+
+
+% This section defines the Dirichlet $L$-functions, and sets up 
+% the asymptotic analysis of their Newton series. The development
+% parallels the analysis performed for the Riemann zeta, and so
+% is given in abbreviated form. The results are similar in nature,
+% and indeed, the result for the Riemann zeta can be retrieved as 
+% a special case.  Thus, an effort will be made to focus on how these
+% sums differ.
+% 
+% The Dirichlet $L$-functions\cite{Apostol76,Davenport80} are defined
+% in terms of the Dirichlet characters, which are group representation
+% characters of the cyclic group. 
+% % They play an important role in number
+% % theory, and the Riemann hypothesis generalizes to the \emph{L}-functions.
+% The Dirichlet characters are multiplicative functions, and are periodic
+% modulo $k$. That is, a character $\chi(n)$ is an arithmetic function
+% of an integer $n$, with period $k$, such that $\chi(n+k)=\chi(n)$.
+% A character is multiplicative, in that $\chi(mn)=\chi(m)\chi(n)$
+% for all integers $m,n$. Furthermore, one has that $\chi(1)=1$ and
+% $\chi(n)=0$ whenever $\gcd(n,k)\ne1$. The \emph{L}-function associated
+% with the character $\chi$ is defined as \begin{equation}
+% L(\chi,s)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^{s}}\label{eq:}\end{equation}
+
+
+Let $\zeta(s,q)$ be the Hurwitz
+zeta function defined by
+\begin{equation}\label{defhur}
+\zeta(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}\end{equation}
+ Any $L$-function may be represented  as a combination of Hurwitz zeta
+\begin{equation}
+L(\chi,s)=\frac{1}{k^{s}}\sum_{m=1}^{k}\chi(m)\zeta\left(s,\frac{m}{k}\right)\label{eq:L-Hurwitz}\end{equation}
+where $k$ is the period of $\chi$.
+%  and $\zeta(s,q)$ is the Hurwitz
+% zeta function, given by \begin{equation}
+% \zeta(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}\label{eq:}\end{equation}
+% Thus, the study of the analytic properties of the \emph{L}-functions
+% can be partially unified through the study of the Hurwitz zeta function.
+In particular, the coefficients of the Newton series  for $L(\chi,s)$ 
+% 
+% \section{Forward differences}
+% 
+% In analogy to the forward differences of the Riemann
+% zeta function, 
+% the coefficients of the Newton series  for $L(\chi,s)$ 
+% being given by
+% \begin{equation*}
+% L_{n}=\sum_{\ell=2}^{n}(-1)^{\ell}
+% \binom{n}{\ell},
+% L(\chi,\ell)\label{eq:L-coeff}\end{equation*}
+%  Because of the relation~\eqref{eq:L-Hurwitz} connecting the Hurwitz
+% zeta function to the L-function, 
+are simple linear combinations of the quantities
+\begin{equation}\label{defA}
+A_{n}(m,k)=\sum_{\ell=2}^{n}
+\binom{n}{\ell}
+(-1)^{\ell}\frac{\zeta\left(\ell,\frac{m}{k}\right)}{k^{\ell}},
+\end{equation}
+which we adopt as our fundamental object of study.
+% since 
+% \begin{equation*}
+% L_{n}=\sum_{m=1}^{k}\chi(m)\, A_{n}(m,k)
+% \end{equation*}
+
+\begin{theorem}\label{L-thm} The differences of Hurwitz zeta values, $A_n(m,k)$
+defined by~\eqref{defA}, satisfy the estimate
+\begin{equation}\label{A1}
+A_{n}(m,k)=\left(\frac{m}{k}-\frac{1}{2}\right)
+-\frac{n}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]
++a_{n}(m,k)
+\end{equation}
+where the $a_n(m,k)$ are exponentially small:
+\begin{equation}\label{A2}
+\begin{array}{lll}
+a_{n}(m,k)&=&\ds \frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}
+\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)
+\cos\left(
+\sqrt{\frac{4\pi n}{k}} -\frac{5\pi}{8} -\frac{2\pi m}{k} \right)
+\\
+&& {} \ds +\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi n/k}}\right).
+\end{array}
+\end{equation}
+\end{theorem}
+
+The previous results for Riemann zeta may be regained by setting 
+$m=k=1$, so that $\delta_n=A_n(1,1)$ and $b_n=a_n(1,1)$.
+
+
+\begin{proof}
+ Converting the sum to the N\"orlund-Rice integral, and extending the
+contour to infinity, one obtains 
+\begin{equation}
+A_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,
+\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}
+\frac{\zeta\left(s,\frac{m}{k}\right)}{k^{s}s(s-1)\cdots(s-n)}\, ds
+\end{equation}
+ Moving the contour to the left, one encounters a single pole at $s=0$
+and a double pole at $s=1$. The residue of the pole at $s=0$ is
+\begin{equation*}
+\mbox{Res}(s=0)=\zeta\left(0,\frac{m}{k}\right)=\frac{1}{2}-\frac{m}{k}.
+\end{equation*}
+(See~\cite[p.~271]{WhWa27} for this evaluation.)
+%  where one has the curious identity in the form of a multiplication
+% theorem for the digamma function:
+% \begin{equation*}
+% \zeta\left(0,\frac{m}{k}\right)
+% =\frac{-1}{\pi k}\sum_{p=1}^{k}\sin\left(\frac{2\pi pm}{k}\right)
+% \psi\left(\frac{p}{k}\right)
+% =-B_{1}\left(\frac{m}{k}\right)
+% =\frac{1}{2}-\frac{m}{k}
+% \end{equation}
+%  Here, $\psi$ is the digamma function and $B_{1}$is the Bernoulli
+% polynomial of order 1. 
+The double pole at $s=1$ evaluates to
+\begin{equation*}
+\mbox{Res}(s=1)=\frac{n}{k}
+\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]
+\end{equation*}
+Combining these, one obtains~\eqref{A1}
+% \begin{equation*}
+% A_{n}(m,k)=\left(\frac{m}{k}-\frac{1}{2}\right)
+% -\frac{n}{k}\left[\psi\left(\frac{m}{k}\right)+\ln k+1-H_{n-1}\right]
+% +a_{n}(m,k),
+% \end{equation*}
+where the $a_n$ are given by
+\begin{equation}\label{defa}
+a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,
+\int_{-\frac{1}{2}-i\infty}^{-\frac{1}{2}+i\infty}
+\frac{\zeta\left(s,\frac{m}{k}\right)}{k^{s}s(s-1)\cdots(s-n)}\, ds.
+\end{equation}
+
+% The previous results for the Riemann zeta may be regained by setting 
+% $m=k=1$, so that $\delta_n=A_n(1,1)$ and $b_n=a_n(1,1)$.  
+As before,
+the $a_n(m,k)$ have the remarkable property of being exponentially
+small; that is, 
+% \begin{equation}
+$ a_{n}(m,k)=\mathcal{O}\left(e^{-\sqrt{Kn}}\right)$,
+% \end{equation}
+ for a constant $K$ that only depends on~$k$. 
+% The next section develops an
+% explicit asymptotic form for this term.
+% \section{Saddle-point analysis of $L$-function differences}
+The precise behavior of the exponentially small term may be obtained 
+by using the same saddle-point analysis given in the previous
+sections. Again, its application here is abbreviated, as there
+are no substantial differences in the course of the derivations.
+
+The term $a_{n}(m,k)$ is represented by the integral of~\eqref{defa}.
+% \begin{equation}
+% a_{n}(m,k)=\frac{(-1)^{n}}{2\pi i}\, n!\,
+% \int_{-\frac{1}{2}-i\infty}^{-\frac{1}{2}+i\infty}
+% \frac{\zeta\left(s,\frac{m}{k}\right)}{k^{s}s(s-1)\cdots(s-n)}\, ds
+% \label{eq:little-a-integral}\end{equation}
+% which resulted from shifting the integration contour past the poles.
+At this point, the functional equation for the Hurwitz zeta may be
+applied. This equation is 
+\begin{equation}
+\zeta\left(1-s,\frac{m}{k}\right)
+=\frac{2\Gamma(s)}{(2\pi k)^{s}}
+\sum_{p=1}^{k}\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)
+\zeta\left(s,\frac{p}{k}\right)
+\end{equation}
+ This allows the integral to be expressed as a sum:
+\begin{equation*}
+a_{n}(m,k)=-\frac{2n!}{k\pi i}\sum_{p=1}^{k}
+\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}
+\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}
+\cos\left(\frac{\pi s}{2}-\frac{2\pi pm}{k}\right)
+\zeta\left(s,\frac{p}{k}\right)\, ds
+\end{equation*}
+ It proves  convenient to pull the phase factor out of the
+cosine part % ; we do this now, 
+and write the integral as 
+\begin{equation*}
+\begin{array}{lll}
+a_{n}(m,k) & = & \ds -\frac{n!}{k\pi i}
+\sum_{p=1}^{k}\exp\left(i\frac{2\pi pm}{k}\right) \\
+ & & \quad \ds
+\int_{\frac{3}{2}-i\infty}^{\frac{3}{2}+i\infty}
+\frac{1}{(2\pi)^{s}}\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}\,
+\exp\left(-i\frac{\pi s}{2}\right)
+\zeta\left(s,\frac{p}{k}\right)\, ds   +{\bf c.c.},
+\end{array}
+\label{eq:two-integrals}
+\end{equation*}
+ where ${\bf c.c.}$ (``\emph{complex conjugate}'') means that $i$ should be replaced by $-i$ in the
+two exp parts.
+
+
+% For large values of $n$, this integral may be evaluated by means
+% of the saddle-point method.
+% % , just like in the case of
+% % differences of the Riemann zeta function.
+% %  The saddle-point method, or method of
+% % steepest descents, may be applied whenever the integrand can be approximated
+% % by a sharply peaked Gaussian, as the above can be for large $n$.
+% % More precisely, The saddle-point theorem states that \begin{equation}
+% % \int e^{-Nf(x)}dx\approx\sqrt{\frac{2\pi}{N\left|f^{\,\prime\prime}(x_{0})\right|}}e^{-Nf(x_{0})}\left[1-\frac{f^{(4)}(x_{0})}{8N\left|f^{\,\prime\prime}(x_{0})\right|^{2}}+\cdots\right]\label{eq:}\end{equation}
+% %  is an asymptotic expansion for large $N$. Here, the function $f$
+% % is taken to have a local minimum at $x=x_{0}$ and $f^{\,\prime\prime}(x_{0})$
+% % and $f^{(4)}(x_{0})$ are the second and fourth derivatives at the
+% % local minimum. 
+% % 
+% In what follows, we dispense with analytic details---these would
+% closely mimic what was done in Section~\ref{sadzeta-sec}---and directly proceed  
+% from the saddle point formula~\eqref{sadfor}.
+% 
+
+To recast the equation~\eqref{eq:two-integrals} into the form needed
+for the saddle point method, an asymptotic expansion of the
+integrands needs to be made for large $n$. 
+% After such an expansion,
+% it is seen that the saddle point occurs at large values of $s$, and
+% so an asymptotic expansion in large $s$ is warranted as well. 
+% As
+% it is confusing and laborious to simultaneously expand in two parameters,
+% it is better to seek out an order parameter to couple the two. This
+% may be done as follows. 
+% One notes that 
+% the integrands have a minimum,
+% on the real $s$ axis, near $s=\sigma_{0}=\sqrt{\pi kn/p}$ and so
+As before, the appropriate scaling parameter is $x=s/\sqrt{n}$,
+and so one may perform a change of variable from $s$ to $x$. The asymptotic
+expansion is then performed by holding $x$ constant, and taking $n$
+large. Thus, one writes 
+\begin{equation}\label{eq:saddle}
+a_{n}(m,k) = -\frac{1}{k\pi i}\sum_{p=1}^{k}
+\left[e^{i {2\pi pm}/{k}}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\omega(x\sqrt{n})}dx\right.
+\left.+e^{-i{2\pi pm}/{k}}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}
+e^{\overline{\omega}(x\sqrt{n})}dx\right].
+\end{equation}
+% \begin{equation}
+% a_{n}(m,k) = -\frac{1}{k\pi i}\sum_{p=1}^{k}
+% \left[\exp\left(i\frac{2\pi pm}{k}\right)
+% \int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\omega(x\sqrt{n})}dx\right.
+% \label{eq:saddle}
+% %  &  & \qquad \qquad 
+% \left.+\exp\left(-i\frac{2\pi pm}{k}\right)
+% \int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}
+% e^{\overline{\omega}(x\sqrt{n})}dx\right]
+% \end{equation}
+%  where $\overline{\omega}$ is the complex conjugate of $\omega$. 
+
+Proceeding, one finds 
+\begin{equation*}
+\omega(s)=\log n!+\frac{1}{2}\log n
+-s\log\left(\frac{2\pi p}{k}\right)-i\frac{\pi s}{2}
++\log\frac{\Gamma(s)\Gamma(s-1)}{\Gamma(s+n)}
++\mathcal{O}\left( \left(\frac{p}{k+p}\right)^s \right)
+\end{equation*}
+ where the approximation that 
+$\log \zeta\left(s,p/k\right)=(k/p)^{s}+\mathcal{O}\left( (p/(k+p))^s \right)$
+for large $s$ has been made. 
+% We don't use this!
+% More generally, one has \begin{equation}
+% \log\zeta(s)=\sum_{n=2}^{\infty}\;\frac{\Lambda(n)}{n^{s}\log n}\label{eq:}\end{equation}
+%  where $\Lambda(n)$ is the Mangoldt function. (XXX What about Hurwitz?)
+% The asymptotic expansion for the Gamma function is given by the Stirling
+% expansion~\eqref{stirapp}.
+% Do we need Bernoulli numbers??
+% \begin{equation}
+% \log\Gamma(x)=\left(x-\frac{1}{2}\right)\log x-x+\frac{1}{2}\log2\pi+\sum_{j=1}^{\infty}\frac{B_{2j}}{2j(2j-1)x^{2j-1}}\label{eq:}\end{equation}
+% and $B_{k}$ are the Bernoulli numbers. 
+Expanding to $\mathcal{O}(1/\sqrt{n})$
+and collecting terms, one obtains 
+\begin{equation}\begin{array}{lll}
+\omega(x\sqrt{n}) & = & \ds \frac{1}{2}\log n
+-x\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log x\right] \\
+ &  & \ds  {} +\log2\pi-2\log x-\frac{x^{2}}{2}+\mathcal{O}\left(n^{-1/2}\right) 
+% &  & +\frac{1}{6x\sqrt{n}}\left[10+x^{2}\right]
+%+\frac{1}{2n}\left[1-\frac{x^{2}}{2}-\frac{x^{4}}{6}
+%+\frac{73}{72x^{2}}\right]
+%+\mathcal{O}\left(n^{-3/2}\right).
+\end{array}
+\end{equation}
+% \footnote{
+%  LV: After substitution of p=k=1 in this formula, one of the log x 
+% terms differs by a factor of two from that in equation \eqref{om012}. 
+% This should be resolved.
+% }
+
+ The saddle point is obtained  by solving $\omega'(x\sqrt{n})=0$.  To
+ lowest order, one  obtains $x_{0}=(1+i)\sqrt{\pi  p/k}$. To  use  the
+ saddle-point  formula,  one needs
+ $\omega''(x\sqrt{n})=2/x\sqrt{n}+\mathcal{O}(n^{-1})$.
+ Substituting, one directly obtains 
+\begin{equation}
+\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}
+\!\!\! e^{\omega(x\sqrt{n})}dx 
+=\left(\frac{2\pi^{3}pn}{k}\right)^{1/4}\!\!\!e^{i\pi/8}
+\exp\!\left(-(1+i)\sqrt{\frac{4\pi pn}{k}}\right)\! {}
++\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}}\right)
+\end{equation}
+ while the integral for $\overline{\omega}$ is the complex conjugate 
+quantity (having a saddle point at the complex conjugate location). Inserting
+this into equation \eqref{eq:saddle} gives a sum of contributions for $p=1,\ldots,k$,
+of which, 
+% \begin{equation}
+% a_{n}(m,k)=\frac{1}{k}
+% \sum_{p=1}^{k}\left(\frac{2np}{\pi k}\right)^{1/4}
+% \exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)
+% \cos\left( \sqrt{\frac{4\pi pn}{k}} -\frac{5\pi}{8} -\frac{2\pi pm}{k} \right)
+% +\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}}\right)
+% \label{eq:an-p}\end{equation}
+for large $n$, only the $p=1$ term contributes significantly.
+So, one has obtained the estimation~\eqref{A2} of the statement.
+\end{proof}
+
+% may write
+% \begin{equation}
+% a_{n}(m,k)=\frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}
+% \exp\left(-\sqrt{\frac{4\pi n}{k}}\right)
+% \cos\left(
+% \sqrt{\frac{4\pi n}{k}} -\frac{5\pi}{8} -\frac{2\pi m}{k} \right)
+% +\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi n/k}}\right)
+% \end{equation}
+%  which demonstrates the desired result: the terms $a_{n}$ are exponentially
+% small. The previous result for the Riemann zeta, equation~\eqref{thmz}, 
+% may be regained by substituting $m=k=1$, so that $b_n=a_n(1,1)$.
+
+% xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+% \footnote{
+%  LV: At this time, substituting m=k=1 into the above yields a formula 
+% that differs by overall magnitude of sqrt(2) and also differs by a 
+% phase of $\pi$ as compared to equation \eqref{thmz}.  My numerical
+% work agrees with my calculation of $b_n$.
+% }
+% 
+% The consistency of this asymptotic expansion may also be verified by
+% applying the so-called "multiplication theorem" for the Hurwitz zeta,
+% which states that
+% 
+% \begin{equation}
+% \sum_{m=1}^{k}\zeta\left(s,\frac{m}{k}\right) =k^{s}\zeta(s)
+% \end{equation}
+% 
+% From this, one may deduce both that 
+% \begin{equation}
+% \sum_{k=1}^{m}A_{n}(m,k)=\delta_n
+% \end{equation}
+%  and that 
+% \begin{equation}
+% \sum_{k=1}^{m}a_{n}(m,k)=b_{n}
+% \label{eq:consistency}
+% \end{equation}
+%  In particular, the above must hold order by order in the asymptotic
+% expansion. The correctness of the expansion given by equation~\eqref{eq:an-p}
+% with regards to this identity may be readily verified by direct substitution.
+% An important special case of equation \ref{eq:consistency} is the $k=2$
+% relation 
+% \begin{equation}
+% a_{n}(2,2)=b_{n}-a_{n}(1,2)=\sum_{p=2}^{n}(-1)^{p}\binom{n}{p}\left(1-2^{-p}\right)\zeta(p)
+% \end{equation}
+% 
+% which appears often in the literature {[}Coffey{]}.  It has the asymptotic expansion 
+% \begin{equation}
+% a_{n}(2,2)=\frac{1}{2}\sum_{p=1}^{2}\left(\frac{np}{\pi}\right)^{1/4}
+% \exp\left(-\sqrt{2\pi np}\right) \cos\left(\sqrt{2\pi np}-\frac{5\pi}{8}\right)
+% +\mathcal{O}\left(n^{-1/4}e^{-\sqrt{2\pi n}}\right)
+% \end{equation}
+% 
+%                                                                                 
+%                                                                                 
+% 
+% \section{Gauss sums}
+% XXXX I'm not sure that this section is necessary; its off to the side,
+% and just summarizes a few manipulations that are not particularly hard,
+% and have no particular bearing on the main ideas. 
+% ---------
+% 
+% We conclude by briefly returning to the structure of the Dirichlet
+% L-functions. The L-function coefficients defined in equation \ref{eq:L-coeff}
+% are now given by 
+% \begin{equation}
+% L_{n}=\sum_{m=1}^{k}\chi(m)A_{n}(m,k)
+% \end{equation}
+%  Writing 
+% \begin{equation}
+% A_{n}=B_{n}+a_{n}
+% \end{equation}
+%  so that $B_{n}(m,k)$represents the non-exponential part, one may
+% state a few results. For the non-principal characters, one has $\sum_{m=1}^{k}\chi(m)=0$
+% and thus, the first term simplifies to 
+% \begin{equation}
+% \sum_{m=1}^{k}\chi(m)B_{n}(m,k)
+% =\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[m-n\psi\left(\frac{m}{k}\right)\right]
+% \end{equation}
+%  For the principal character $\chi_{1}$, one has $\sum_{m=1}^{k}\chi_{1}(m)=\varphi(k)$
+% with $\varphi(k)$ the Euler totient function. Thus, for the principal
+% character, one obtains 
+% \begin{eqnarray}
+% \sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k)
+%  & = & -\varphi(k)\left[\frac12+\frac{n}{k}\left(\ln k+1-H_{n-1}\right)\right] \\
+%  & & \qquad +\frac{1}{k}\sum_{m=1}^{k}\chi(m)\left[m-n\psi\left(\frac{m}{k}\right)\right]
+% \end{eqnarray}
+% 
+% By contrast, the exponentially small term invokes a linear combination
+% of Gauss sums. The Gauss sum associated with a character $\chi$ is
+% \begin{equation}
+% G(n,\chi)=\sum_{m\mbox{ mod}k}\chi(m)e^{2\pi imn/k}
+% \end{equation}
+%  and so, to leading order 
+% \begin{eqnarray}
+% \sum_{m=1}^{k}\chi(m)a_{n}(m,k) 
+%  & = & \frac{1}{2k}\sum_{p=1}^k 
+% \left(\frac{2pn}{\pi k}\right)^{1/4} \exp\left(-\sqrt{\frac{4\pi pn}{k}}\right) \\
+%  &  & \quad \left[\exp i\left(\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)G(p,\chi) \right. \\
+%  &  & \quad\qquad\left. -\exp-i\left(\frac{5\pi}{8}-\sqrt{\frac{4\pi pn}{k}}\right)G(-p,\chi)\right] \\
+%  & & \quad +\mathcal{O} \left(n^{-1/4}e^{-2\sqrt{\pi n/k}}\right)
+% \end{eqnarray}
+% 
+% The above expression simplifies slightly for the principle character,
+% since one has the identities 
+% \begin{equation}
+% G\left(1,\chi_{1}\right)=\mu(k)
+% \end{equation}
+%  with $\mu(k)$ the M\"obius function and more generally, 
+% \begin{equation}
+% G\left(p,\chi_{1}\right)=
+% \frac{\varphi(k)\mu\left(\frac{k}{(p,k)}\right)}{\varphi\left(\frac{k}{(p,k)}\right)}
+% \end{equation}
+                                                                                
+% \section{wrapup}
+\section{Perspective}\label{concl-sec}
+\smallskip
+The previous results serve to
+% \footnote{%
+% 	PF: We need a theorem statement summarizing both the principal and nonprincipal
+% 	characters. LV: or drop the discussion of principle and non-principle characters.}
+unify and make precise a number of estimates carried out in the literature by a diversity
+of methods. For instance, the study of quantities arising in connection with Li's criterion
+calls for estimating,  in the notations of~\eqref{defA},
+\begin{equation}\label{coffeyS1}
+A_n(2,2)=\sum_{k=2}^n \binom{n}{k}(-1)^k(1-2^{-k})\zeta(k).
+\end{equation}
+Coffey encountered this quantity (his~$S_1(n)$ in~\cite{Coffey05}),
+and proved, by means of series rearrangements akin to~\eqref{simpdel}
+used in conjunction with Euler-Maclaurin summation:
+\begin{equation}\label{coffeyineq}
+A_n(2,2) \ge \frac{n}{2}\log n+(\gamma-1)\frac{n}{2}+\frac12.
+\end{equation}
+Our analysis quantifies  the difference between the two quantities above as
+being exponentially small and oscillating:
+\begin{equation}
+ a_{n}(2,2)=\frac{1}{2}\left(\frac{n}{\pi}\right)^{1/4}
+\exp\left(-\sqrt{2\pi n}\right) \cos\left(\sqrt{2\pi n}-\frac{5\pi}{8}\right)
++\mathcal{O}\left(n^{-1/4}e^{-\sqrt{2\pi n}}\right)
+\end{equation}
+
+Another observation is that the combination of N\"orlund-Rice integrals
+and saddle point estimates applies to many ``desingularized'' versions of 
+the Riemann zeta function, like
+\[
+(1-2^{1-s})\zeta(s), \quad
+(s-1)\zeta(s), \quad
+\zeta(2s)-\frac{1}{2s-1},\quad
+(2s-1)\zeta(2s).
+\]
+The first one is directly amenable to Theorem~\ref{L-thm}. The
+Newton series involving $\zeta(2s)$ include Ma{\'s}lanka's expansion~\cite{Maslanka01}
+(relative to $(2s-1)\zeta(2s)$)
+and have a striking feature---their Newton coefficients are 
+polynomials in~$\pi$ with rational coefficients. 
+For a function like $\zeta(2s)-1/(2s-1)$ where the polar part is subtracted,
+the exponential smallness of the coefficients
+then has the peculiar feature of providing near identities that connect $\pi$ and
+Euler's constant~$\gamma$.
+
+
+\smallskip
+
+The N\"orlund integrals are also of interest in the context of 
+differences of inverse zeta values, for which curious relations
+with the Riemann hypothesis have been noticed by Flajolet--Vall\'ee~\cite{FlVa00} and
+independently by B\'aez-Duarte~\cite{Baez03b}. Consider the
+typical quantity
+\begin{equation}\label{invz}
+d_n=\sum_{k=2}^n \binom{n}{k}(-1)^k \frac{1}{\zeta(k)},
+\end{equation}
+which arises as coefficient in the Newton series representation of $1/\zeta(s)$. 
+Its asymptotic analysis can be approached by means of a N\"orlund-Rice representation
+as noted by the authors of~\cite{FlVa00} and more recently by Ma\'slanka in~\cite{Maslanka06},
+in related contexts.
+We have:
+\begin{theorem} The differences of inverse zeta values $d_n$ defined by~\eqref{invz} are such that
+the following two assertions are equivalent: 
+\begin{itemize}
+\item[]{\bf FVBD  Hypothesis (akin to~\cite{Baez03b,FlVa00})}. For any~$\epsilon>0$, there exists a constant $C_\epsilon>0$ such that
+\[
+|d_n|<C_\epsilon k^{1/2+\epsilon}.
+\]
+\item[]{\bf RH (Riemann hypothesis)}. The Riemann 
+zeta function~$\zeta(s)$ is free of zeros in the half-plane~$\Re(s)>\frac12$.
+\end{itemize}
+\end{theorem}
+\begin{proof}
+$(i)$~Assume {\bf RH}. Under RH, it is known that, given any~$\sigma_0>\frac12$ and any~$\epsilon>0$, 
+one has $1/\zeta(s)=O(|t|^\epsilon)$ for $\Re(s)=\sigma_0$,
+where $t=\Im(s)$ (see Equation~(14.2.6) of~\cite[p.~337]{Titchmarsh86}). 
+Then, apply the N\"orlund integral representation (valid unconditionally for $c>1$):
+\begin{equation}\label{norinv}
+d_n=\frac{(-1)^{n-1}}{2\pi i}\int_{c-i\infty}^{c+i\infty}
+\frac{1}{\zeta(s)} \frac{n!}{(s(s-1)\cdots(s-n)}\, ds,
+\end{equation}
+with $c=\sigma_0$.
+A simple majorization concludes the proof  that $d_n=O(n^{\sigma_0})$.
+
+$(ii)$~Assume {\bf FVBD}. First, a reorganization similar to the one leading to~\eqref{simpdel}
+but based on the expansion of $1/\zeta(s)$ shows that
+\[
+d_n=\sum_{\ell=1}^\infty \mu(\ell)\left[\left(1-\frac{1}{\ell}\right)-1+\frac{n}{\ell}\right],
+\]
+with $\mu(\ell)$ the M\"obius function. The general term of the sum decreases like $n/\ell^2$,
+which ensures absolute convergence. Next, introduce the function
+\[
+D(x)=\sum_{\ell\ge1} \mu(\ell)\left[e^{-x/\ell}-1+\frac{x}{\ell}\right],
+\]
+whose general term decreases like $x/\ell^2$. 
+
+Fix any small~$\delta>0$ ($\delta=\frac1{10}$ is suitable) and define $\ell_0=\lfloor x^{1-\delta}\rfloor$.
+The difference $d_n-D(n)$ satisfies
+\begin{equation}\label{dede}
+\begin{array}{lll}
+ d_n-D(n) &=& \ds \sum_{\ell=1}^\infty \mu(\ell)\left[\left(1-\frac{1}{\ell}\right)^n
+-e^{-n/\ell}\right]
+% \\
+%  &=& \ds \sum_{\ell=1}^\infty \mu(\ell)e^{-n/\ell}\left[e^{n/\ell+n\log(1-1/\ell)}
+% -1\right]
+\\
+&=& \ds \left(\sum_{\ell<\ell_0}+\sum_{\ell\ge \ell_0}\right)
+\mu(\ell)e^{-n/\ell}\left[e^{n/\ell+n\log(1-1/\ell)}
+-1\right]
+\\
+&=&\ds \O\left(\ell_0 e^{-n/\ell_0}\right) +\sum_{\ell\ge\ell_0}\O\left(\frac{n}{\ell^2}\right)
+ \quad = \quad\ds \O\left(n^\delta\right),
+\end{array}
+\end{equation}
+by series reorganization, a split of the sum according to $\ell \gtreqless\ell_0$,
+and trivial majorizations. 
+
+Given~\eqref{dede}, the FVBD Hypothesis implies that $D(x)=\O(x^{1/2+\epsilon})$,
+at least when $x$ is a positive \emph{integer}. To extend this estimate to real values of~$x$, 
+it suffices to note that $D(x)$ is differentiable on~$\R_{>0}$ and
+\[
+D'(x)=\sum_{\ell=1}^\infty \frac{\mu(\ell)}{\ell}\left[e^{-x/\ell}-1\right],
+\]
+is proved to be $\O(1)$ by bounding techniques similar to~\eqref{dede}.
+% 
+% we consider
+% the difference
+% \begin{equation}
+% \label{difd}
+% D(x+h)-D(x)=\sum_{\ell=1}^\infty \mu(\ell) \left[e^{-(x+h)/\ell}-e^{-x/\ell}+\frac{h}{\ell}\right],
+% \end{equation}
+% for $h\in[0,1]$ and $x>0$. Since $\sum_{\ell\ge1}\mu(\ell)\ell^{-1}=1=0$, a property recognized to
+% be equivalent to the prime number theorem, the term $h/\ell$ in~\eqref{difd} can be dropped,
+% giving
+% \[\begin{array}{lll}
+% D(x+h)-D(x)&=& \ds \sum_{\ell=1}^\infty \mu(\ell) \left[e^{-(x+h)/\ell}-e^{-x/\ell}\right]\\
+% &=& \ds \sum_{\ell=1}^\infty \mu(\ell) e^{-x/\ell} \left[-\frac{h}{\ell}+\O\left(\frac{1}{\ell^2}\right)\right]
+% \quad=\quad \O(1).
+% \end{array}\]
+Thus, assuming the FVBD Hypothesis, the estimate
+\[
+D(x)=\O\left(x^{1/2+\epsilon}\right), \qquad x\to+\infty
+\]
+holds for \emph{real} values of~$x$.
+
+
+Regarding the behaviour of~$D(x)$ at~$0$,
+the general term of $D(x)$ is asymptotic to $x^2/(2\ell^2)$, so that $D(x)=\O(x^2)$,
+as $x\to0^{+}$. This, combined with the estimate of $D(x)$ at infinity, implies that
+the Mellin transform
+\begin{equation}\label{mel1}
+D^\star(s):=\int_0^\infty D(x) x^{s-1}\, dx,
+\end{equation}
+exists and is an analytic function of $s$ for all $s$ in the strip $-2<\Re(s)<-\frac12-\epsilon$.
+On the other hand, the usual properties of Mellin transforms (see, e.g., the survey~\cite{FlGoDu95})
+imply that 
+\begin{equation}\label{mel2}
+D^\star(s)=\left(\sum_{\ell=1}^\infty \mu(\ell)\ell^{s}\right)
+\cdot \int_0^\infty e^{-x}x^{s-1}\, dx =\frac{\Gamma(s)}{\zeta(-s)},
+\end{equation}
+at least for $s$ such that $-2<\Re(s)<\-1$, which ensures that the expansion of $1/\zeta(-s)$
+is absolutely convergent. The comparison of the analytic character of~\eqref{mel1} in
+$-2<\Re(s)<-\frac12-\epsilon$ (implied by the FVBD Hypothesis) and of the explicit form of~\eqref{mel2}
+shows that the Riemann Hypothesis is a consequence of the FVBD Hypothesis.
+\end{proof}
+
+Regarding the numerical properties of
+the sequence~$d_n$, it appears that there are complicated oscillations, and these
+ can to some extent be understood by a residue evaluation 
+of~\eqref{norinv}, as we now explain. Assuming for notational convenience the simplicity 
+of the nontrivial zeros of $\zeta(s)$, one has (unconditionally)
+\begin{equation}\label{inv2}
+d_n= \sum_{\rho}\!{}^{\hbox{$\star$}} \frac{1}{\zeta'(\rho)} 
+\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n+1-\rho)},
+\end{equation}
+where   the   summation   extends  to   all   nontrivial  zeros~$\rho$
+of~$\zeta(s)$   with   $0<\Re(\rho)<1$,   while   the    starred   sum
+($\sum{}\!{}^{\star}$) means  that  zeros should  be  suitably grouped
+(see         the    discussion     in~\S9.8     of        Titchmarsh's
+treatise~\cite[p.~219]{Titchmarsh86},   in  relation to  a  formula of
+Ramanujan). A heuristic model of the sequence~$d_n$ then follows from the fact that,
+for large~$n$, any individual term of the sum in~\eqref{inv2} 
+corresponding to a zeta zero $\rho=\sigma+i\tau$
+is  asymptotically
+\[
+\frac{\Gamma(-\rho)}{\zeta'(\rho)} n^{\sigma} e^{i\tau\log n}.\]
+Such a term involves  a logarithmically oscillating  component,  a
+slowly growing  component  $n^\sigma$ ($n^{\frac12}$ under  RH), as well as a
+multiplier that  is likely   to  be extremely small, since    it involves
+the quantity $\Gamma(-\rho)\asymp e^{-\pi|\tau|/2}$.  The  resulting   oscillations
+then have the curious feature of being numerically detectable only for
+rather large  values  of~$n$, and a  possible failure  of RH is
+exponentially  offset---a       similar    fact   was     observed
+in~\cite{FlVa00,Maslanka06}.  It is finally of  interest to note  that
+such   phenomena   do  occur   in   nature,   specifically,   in   the
+determination by~\cite{FlVa00} of  \emph{the    expected number  of  continued
+fraction digits  that are  necessary to  sort $n$  real numbers
+drawn uniformly at random from the unit interval}.
+
+
+\bibliographystyle{plain}
+\bibliography{algo}
+
+
+\end{document}
+
