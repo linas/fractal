@@ -35,67 +35,32 @@ Generalizations
 Philippe,
 \layout Standard
 
-I worked through the last part of the paper in greater detail.
- The sections below review some other common Dirichlet series.
- Numeric results are presented for the finite differences of these series;
- particularly remarkable is the series for 
-\begin_inset Formula $1/\zeta(s)$
+I worked through the last part of the paper in greater detail, and have
+ come to the conclusion that the theorem is faulty.
+ I started by attempting to generalize the proof to other series, in particular
+ the Liouville and the Euler totient series.
+ All of these have in common that they have 
+\begin_inset Formula $\zeta(s)$
 \end_inset 
 
-, which has a suprising behaviour that is not manifested until very large
- order.
- This is followed by an asymptotic analysis of these sums, using the saddle-poin
-t method.
- The analytic results are in general agreement with the numeric results.
- 
+ in the denominator, implying poles on the critical line.
+ The asymptotic behaviour of the finite differences for each is quite different
+ -- and this is what leads me to conclude that we cannot deduce the location
+ of the poles based on the asymptotic behaviour, or that, at least, the
+ part of the proof that attempts to do this is not correct.
 \layout Standard
 
-One interesting issue arises in deriving the analytic results.
- These are most easily obtained by assuming the Riemann Hypothesis, so as
- to enable the approximation 
-\begin_inset Formula $1/\zeta(s)=\mathcal{O}(|t|^{\epsilon})$
-\end_inset 
-
- for large 
-\begin_inset Formula $t$
-\end_inset 
-
- to be used inside of the Norlund-Rice integrals.
+Anyway, here's what follows (its quite long): a review of the definition
+ of the series.
+ A numeric exploration of the series (a rather surprising/interesting behaviour
+ is seen for the Mobius series!).
+ A saddle-point analysis to obtain asymptotic behaviour.
+ The saddle point analysis appears to be consistent with the numeric work.
+ An attempted generalization of the proof, which I'm unable to complete.
 \layout Standard
 
-----------------
-\layout Standard
-
-It works for a more general class of Dirichlet series.
- I suppose you know this already, as it is hinted at in the paper, but not
- stated flat-out.
- I think it should be made more obvious, or stated more directly.
- The changes needed to make the more general statement are surprisingly
- minimal (assuming I haven't made a mistake).
- Below follow some notes and calculations that suggest how the second half
- of the proof could be modified/generlized.
- 
-\layout Standard
-
-One thing I haven't attempted is to run the proof for a series for which
- RH is obviously false, and see how the proof breaks down.
- I'd very much like to do that soon.
-\layout Standard
-
-There is a whole class of Dirichlet series for which the RH is conjectured
- to hold, this is the so-called 
-\begin_inset Quotes eld
-\end_inset 
-
-Selberg class
-\begin_inset Quotes erd
-\end_inset 
-
-.
- See the Wikipedia article for a quick overview (I wrote that article!);
- the definition of the class requires no math beyond generic complex analysis.
- Ideally, this proof draws all its support from the definition of that class...
- 
+I wrote most of the below before I realized that I couldn't make the RH
+ equivalence proof work, so there may be some inconsistent comments below.
 \layout Section*
 
 Review of Dirichlet Series
@@ -105,7 +70,7 @@ Much of the proof depends on having
 \begin_inset Formula $\zeta(s)$
 \end_inset 
 
- in the denominator, and there are many Dirichlet series that acheive this.
+ in the denominator, and there are many Dirichlet series that achieve this.
  The canonical one, involving the Mobius function is
 \layout Standard
 
@@ -158,8 +123,8 @@ One may construct in a very straightforward way the Dirichlet series for
 \end_inset 
 
 .
- These can be constructed by a faily trival application of Dirichlet convolution
-, together with the Mobius inversion formula.
+ These can be constructed by a fairly trivial application of Dirichlet convoluti
+on, together with the Mobius inversion formula.
  In short, one has an old, general theorem that
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{(f*g)(n)}{n^{s}}=\sum_{n=1}^{\infty}\frac{f(n)}{n^{s}}\;\sum_{m=1}^{\infty}\frac{g(m)}{m^{s}}\]
@@ -192,12 +157,11 @@ One may construct in a very straightforward way the Dirichlet series for
 \begin_inset Formula $g(1)\ne1$
 \end_inset 
 
-), one may mulltiply and divide Dirichlet series with impunity, more or
- less.
+), one may multiply and divide Dirichlet series with impunity, more or less.
  
 \layout Standard
 
-I havent yet seen a way of building 
+I haven't yet seen a way of building 
 \begin_inset Formula $1/\zeta(\alpha s+\beta)$
 \end_inset 
 
@@ -209,7 +173,7 @@ As regards to the proof, perhaps the most important generalization is that
 \begin_inset Formula $L$
 \end_inset 
 
--functions, since these are the onces for which the GRH applies.
+-functions, since these are the ones for which the GRH applies.
  Specifically, one has 
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{\mu(n)\chi(n)}{n^{s}}=\frac{1}{L(s,\chi)}\]
@@ -260,7 +224,7 @@ d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{1}{\zeta(k)}\]
  The oscillations seem bounded, and thus the numeric work suggests that
  
 \begin_inset Formula \[
-d_{n}=\mathcal{O}\left\left (\log n\right)\]
+d_{n}=\mathcal{O}\left(\log n\right)\]
 
 \end_inset 
 
@@ -274,7 +238,7 @@ d_{n}=\mathcal{O}\left\left (\log n\right)\]
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -328,7 +292,7 @@ d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{1}{\zeta(k)}\]
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -381,7 +345,7 @@ in the limit of large
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -441,7 +405,7 @@ cannot be approaching a constant for large
 \begin_inset Formula $n$
 \end_inset 
 
-, as the next grahic shows.
+, as the next graphic shows.
 \end_inset 
 
 
@@ -450,7 +414,7 @@ cannot be approaching a constant for large
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -468,7 +432,7 @@ for large
 
 \begin_inset Graphics
 	filename dsubn-large.png
-	width 100page%
+	width 100text%
 
 \end_inset 
 
@@ -498,7 +462,7 @@ d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(k-1)}
 
 \end_inset 
 
- whith the superscript 
+ with the superscript 
 \begin_inset Formula $\varphi$
 \end_inset 
 
@@ -522,7 +486,7 @@ d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(k-1)}
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -560,11 +524,11 @@ A graph of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
-Asymptotic behavour of 
+Asymptotic behaviour of 
 \begin_inset Formula $d_{n}^{\varphi}$
 \end_inset 
 
@@ -589,7 +553,7 @@ This graphic shows
 \begin_inset Formula $100\le n\le16000$
 \end_inset 
 
-, suggesting a form for the asymptotic behvaiour of 
+, suggesting a form for the asymptotic behaviour of 
 \begin_inset Formula $d_{n}^{\varphi}$
 \end_inset 
 
@@ -636,7 +600,7 @@ be the series corresponding to the Liouville function.
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -657,11 +621,68 @@ collapsed true
 
 \layout Standard
 
-This figure shows the basic behaviour for the finite differences 
+This figure shows the basic behavior for the finite differences 
 \begin_inset Formula $d_{n}^{\lambda}$
 \end_inset 
 
  corresponding to the Liouville function.
+ Numeric work suggests that the divergence is similar to but stronger than
+ 
+\begin_inset Formula $\sqrt{n}$
+\end_inset 
+
+.
+ This conclusion is contradicted by higher-order work.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Asymptotic form of 
+\begin_inset Formula $d_{n}^{\lambda}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dn-liouville-asymp.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a graph of 
+\begin_inset Formula $d_{n}^{\lambda}/\sqrt{n}$
+\end_inset 
+
+ for the range of 
+\begin_inset Formula $1000\le n\le25000$
+\end_inset 
+
+.
+ A numerical study seems to indicate that this graph is not logarithmic,
+ but instead is converging to a value of 1.208 or so.
+ It should be noted that this graph shows no hint of oscillation, which
+ is in sharp contrast to the graph of 
+\begin_inset Formula $d_{n}^{\mu}$
+\end_inset 
+
+, which has a strongly manifested oscillation for this range of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
 \end_inset 
 
 
@@ -810,7 +831,7 @@ There is an alternate approach to the analysis which leads to some curious
 \begin_inset Formula $\rho$
 \end_inset 
 
- of the Riemann zeta functon.
+ of the Riemann zeta function.
  The derivation of this formula does not require the assumption of the RH,
  and so this seems to provide a more general starting point for a saddle-point
  analysis.
@@ -865,7 +886,7 @@ Saddle-point analysis for the Totient series
 This section summarizes a saddle-point analysis for the totient function
  finite difference series 
 \begin_inset Formula \[
-d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\]
+d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\]
 
 \end_inset 
 
@@ -928,7 +949,7 @@ Saddle-point analysis for the Liouville series
 This section summarizes a saddle-point analysis for the Liouville function
  finite difference series 
 \begin_inset Formula \[
-d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({n\atop k}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
+d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
 
 \end_inset 
 
@@ -983,8 +1004,47 @@ This result is in good agreement with the numerical calculations for the
 Equivalence to the Riemann Hypothesis
 \layout Standard
 
+Based on the above, I'm concluding that the theorem regarding the equivalence
+ to the RH is faulty.
+ The Dirichlet series for 
+\begin_inset Formula $\mu$
+\end_inset 
+
+, 
+\begin_inset Formula $\phi$
+\end_inset 
+
+, and 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ all have poles on the critical line.
+ The general arguments for the asymptotic form of the 
+\begin_inset Formula $d_{n}^{\mu}$
+\end_inset 
+
+, 
+\begin_inset Formula $d_{n}^{\phi}$
+\end_inset 
+
+ and 
+\begin_inset Formula $d_{n}^{\lambda}$
+\end_inset 
+
+, etc.
+ are the same, but the actual form of the asymptotic behaviour is quite
+ different.
+ I don't see how this behaviour can be turned around to deduce the location
+ of the poles.
+ Before I realized this, I wrote the section below, attempting to generalize
+ the proof; apparently it went astray, and I was unable to proceed.
+\layout Subsection
+
+Generalization of the proof
+\layout Standard
+
 Based on the above, I suggest modifying the proof so that, in one direction,
- it runs as follows.
+ it runs as follows
 \layout Standard
 
 Consider the general Dirichlet series 
@@ -1018,7 +1078,7 @@ d_{n}=\sum_{m=1}^{\infty}a_{m}\left[\left(1-\frac{1}{m}\right)^{n}-1+\frac{n}{m}
 \begin_inset Formula $a_{m}n^{2}/m^{2}$
 \end_inset 
 
- and so convergence is gaurenteed for 
+ and so convergence is guaranteed for 
 \begin_inset Formula $a_{m}=\mathcal{O}\left(m^{1-\epsilon}\right)$
 \end_inset 
 
@@ -1066,7 +1126,7 @@ D(x)=\sum_{m=1}^{\infty}a_{m}\left[e^{-x/m}-1+\frac{x}{m}\right]\]
 \end_inset 
 
  which has similar convergence properties to the previous sum.
- The estimate for the behvaiour of this sum proceeds essentially unmodified,
+ The estimate for the behaviour of this sum proceeds essentially unmodified,
  although I present some additional detail here to make this clear.
  
 \layout Standard
@@ -1079,7 +1139,7 @@ The aim is to show that
 \begin_inset Formula $D(x)$
 \end_inset 
 
- are substaintially similar, and that in particular, both quantities have
+ are substantially similar, and that in particular, both quantities have
  the same asymptotic behaviour for 
 \begin_inset Formula $n\to\infty$
 \end_inset 
@@ -1182,7 +1242,7 @@ To show that
 \begin_inset Formula $D(x)$
 \end_inset 
 
- have an identical asymptotic behvaiour for non-integer real 
+ have an identical asymptotic behaviour for non-integer real 
 \begin_inset Formula $x$
 \end_inset 
 
@@ -1205,7 +1265,7 @@ D^{\prime}(x)=\mathcal{O}\left(n^{\delta}\right)+\mathcal{O}(1)\sum_{m<m_{0}}\fr
 
  At this point I notice an error in my notes, and, as it is late at night,
  I'd rather not guess my way out of it.
- I don't beleive its serious.
+ I don't believe its serious.
  The remainder of the proof, regarding the Mellin transform goes through
  unmodified.
  
@@ -1241,7 +1301,7 @@ Ramanujan conjecture
 \begin_inset Formula $r$
 \end_inset 
 
-'s are easily accomadated.
+'s are easily accommodated.
  Simply changing the definition to
 \layout Standard
 
@@ -1269,7 +1329,7 @@ Poisson-Mellin-Newton
 \begin_inset Quotes erd
 \end_inset 
 
- cycle, there appears to be a simialr cycle, connection the so-called 
+ cycle, there appears to be a similar cycle, connection the so-called 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -1308,7 +1368,7 @@ Discussion
 \layout Standard
 
 Its not clear how Li's criterion impacts on the Selberg class, and vice-versa.
- It may be an edifying excercise to connect the two together.
+ It may be an edifying exercise to connect the two together.
  Alternately, I'd like to translate Li's criterion to this proof, but don't
  quite see how.
 \the_end
