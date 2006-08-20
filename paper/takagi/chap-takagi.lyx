@@ -1828,16 +1828,17 @@ Open-Question: We have demonstrated a one-dimensional manifold of representation
 s of the modular group.
  Below, we will show a representation on the complex plane.
  Are there other 3D representations, or is this it? 
-\layout Description
+\layout Subsection
 
-Homework: In an earlier paper, we considered functions on the real number
- line as set-theoretic expressions of functions on the binary tree.
- The uniqueness of the Takagi curve for each distinct value of 
+Multi-fractals
+\layout Standard
+
+The uniqueness of the Takagi curve for each distinct value of 
 \begin_inset Formula $w$
 \end_inset 
 
- implies that we can use it to define a (partial) set of basis vectors on
- the binary tree.
+ implies that we can use it to define an (incomplete) set of basis vectors
+ for functions on the unit interval.
  That is, there is a large class of functions on the unit interval 
 \begin_inset Formula $f(x)$
 \end_inset 
@@ -1857,33 +1858,18 @@ f(x)=\int_{0}^{\infty}c(w)\, t_{w}(x)\; dw\]
 \end_inset 
 
 .
- Describe the completeness, or rather, the lack-thereof, of this function
- basis.
- A trivial example the parabola 
-\begin_inset Formula $f(x)=4x(1-x)$
-\end_inset 
-
-, for which 
-\begin_inset Formula $c(w)=\delta(w-1/4)$
-\end_inset 
-
-, where 
-\begin_inset Formula $\delta$
-\end_inset 
-
- is the Dirac delta function.
- Provide other interesting examples.
- Can the function of equation 
+ Thus, for example, the function of equation 
 \begin_inset LatexCommand \ref{eq:strange-expo}
 
 \end_inset 
 
- be expressed in this form? Can the Weierstrass function of equation 
-\begin_inset LatexCommand \ref{eq:weierstrass}
-
+ be expressed in this form.
+ The resulting function 
+\begin_inset Formula $f(x)$
 \end_inset 
 
- be expressed in this way?
+ does not have any particular self-similarity properties, but its decomposition
+ does.
 \layout Subsection
 
 The Cantor Polynomials 
@@ -1936,12 +1922,12 @@ t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\labe
 \begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}$
 \end_inset 
 
- as before, we have 
+ as before, one has 
 \begin_inset Formula $M_{\gamma}=a_{1}+...+a_{N}$
 \end_inset 
 
 .
- Next, we write out the binary expansion for 
+ Writing out the binary expansion for 
 \begin_inset Formula $\gamma_{D}(1)$
 \end_inset 
 
@@ -1949,7 +1935,7 @@ t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\labe
 \begin_inset Formula $b_{k}\in\left\{ 0,1\right\} $
 \end_inset 
 
- to get 
+, one has 
 \begin_inset Formula \begin{eqnarray}
 \gamma_{D}(1) & = & \sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\nonumber \\
 \, & = & \begin{array}{ccccc}
@@ -1958,7 +1944,7 @@ t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\labe
 
 \end_inset 
 
- where, as usual, we take the expansion such that the final binary digits
+ where, as usual, one takes the expansion such that the final binary digits
  repeat forever, without upsetting the count 
 \begin_inset Formula $a_{N}$
 \end_inset 
@@ -1986,11 +1972,11 @@ q_{\gamma}(w)=\frac{(-)^{N}}{2^{M-1}}\sum_{k=1}^{M}(2b_{k}-1)\;(2w)^{k-1}\label{
 \begin_inset Formula $q_{\gamma}$
 \end_inset 
 
- is more-or-less equal to (up to a factor and a term of 
+ is more-or-less equal (up to a factor and a term of 
 \begin_inset Formula $1/(1-2w)$
 \end_inset 
 
-) the derivative
+) to the derivative
 \begin_inset Formula \[
 \left.\frac{dt_{w}(x)}{dx}\right|_{x=\gamma_{D}(1)}\]
 
@@ -2011,7 +1997,7 @@ more or less
 \end_inset 
 
  is the dis-ambiguated derivative.
- We leave this as an exercise.
+ This is left as an exercise.
  
 \layout Standard
 
@@ -2022,7 +2008,7 @@ The
  polynomial seems to result from some more complex folding that is hard
  to discern by studying the matrix elements under matrix multiplication.
  However, determining its value for any given 
-\begin_inset Formula $w$
+\begin_inset Formula $\gamma$
 \end_inset 
 
  is straightforward enough: we merely need to set 
@@ -2044,10 +2030,10 @@ Homework: Describe
  Is it possible to give a direct expression for the polynomial? 
 \layout Standard
 
-In either case, the polynomials that we are dealing with are closely related
- to the inverse of the Cantor function.
- This is perhaps best presented visually: Let us write the binary expansion
- of a real number 
+The polynomials being dealt with here are closely related to the inverse
+ of the Cantor function.
+ This is perhaps best presented visually.
+ Write the binary expansion of a real number 
 \begin_inset Formula $x$
 \end_inset 
 
@@ -2264,10 +2250,10 @@ For larger values of
 
 , one can more clearly see the visual resemblance of the Cantor polynomial
  to the derivative of the Takagi function.
- The resemblance is not accidental, they really are the same thing, as long
+ The resemblance is not accidental; they really are the same thing, as long
  as one takes care to properly define which binary expansion one is working
  with.
- We don't give the details here, although they are not hard to work out
+ The details are not given here, although they are not hard to work out
  (see homework problem below).
  The essential point is that every rational number has two possible binary
  expansions: for example, it is well known that 
@@ -2362,9 +2348,9 @@ This figure shows a graph of the function
 
 \layout Standard
 
-The insight that we wish to provide here is that the two endpoints of Cantor's
- interval construction can also be mapped to the left and right derivatives
- of the Takagi function.
+The main insight provided here is that the two endpoints of Cantor's interval
+ construction can also be mapped to the left and right derivatives of the
+ Takagi function.
  That is, for any dyadic rational 
 \begin_inset Formula $p/2^{n}$
 \end_inset 
@@ -2373,7 +2359,7 @@ The insight that we wish to provide here is that the two endpoints of Cantor's
 \begin_inset Formula $p$
 \end_inset 
 
-, we have two inequivalent binary sequences that represent this rational.
+, there are two inequivalent binary sequences that represent this rational.
  Each sequence can be used to build a distinct polynomial.
  The value of two polynomials at the rational are the two endpoints of an
  interval in the Cantor Set construction.
@@ -2409,7 +2395,7 @@ Homework: Make the above statements firm by providing all the correct factors
 
 Homework: The classic example of a Cantor Set is built by means of a dyadic
  subdivision of the unit interval.
- Because of this, we can apply the Modular Group symmetry here as well.
+ Because of this, we can apply the monoid symmetry here as well.
  How do the limit points of the Cantor set (the points that are not the
  endpoints of intervals) behave under the dyadic monoid? Given that the
  Cantor set can be mapped to the real numbers (the cardinality of the Cantor
@@ -2418,10 +2404,10 @@ Homework: The classic example of a Cantor Set is built by means of a dyadic
 \layout Standard
 
 Presumably, it should be obvious by now that the Cantor Polynomials transform
- as the two-dimensional (dyadic) representation of the Modular Group.
- This is as we should expect, based on the reasoning about the dimension
- of the representation presented in the next section.
- XXX the last frew paragraphs are a less-than satisfying treatment.
+ as the two-dimensional (dyadic) representation of the period-doubling monoid.
+ This should be expected, based on the reasoning about the dimension of
+ the representation presented in the next section.
+ XXX These last few paragraphs are a less-than satisfying treatment.
 \layout Subsection
 
 The Complex-valued Takagi Curve
@@ -2557,8 +2543,8 @@ The Four-Dimensional Representation
 Replacing the sawtooth shape that defines the the Takagi function with a
  polynomial leads to a curve that transforms under a higher-dimensional
  representation, specifically, as the degree of the polynomial plus two.
- In this section, we'll work out the four-dimensional representation and
- then present the general finite-dimensional representation.
+ This section works out the four-dimensional representation and then presents
+ the general finite-dimensional representation.
 \layout Standard
 
 Lets replace the sawtooth by a quadratic shape
@@ -2577,7 +2563,7 @@ a_{w}(x)=\sum_{k=0}^{\infty}w^{k}\alpha\left(2^{k}x-\left\lfloor 2^{k}x\right\rf
 
  Its not hard to find that 
 \begin_inset Formula \begin{equation}
-\left[g_{4}a_{w}\right](x)\equiv\left[a_{w}g_{D}\right](x)=a_{w}\left(\frac{x}{2}\right)=x^{2}+wa_{w}(x)\label{eq:}\end{equation}
+\left[g_{4}a_{w}\right](x)\equiv\left(a_{w}\circ g_{D}\right)(x)=a_{w}\left(\frac{x}{2}\right)=x^{2}+wa_{w}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2585,9 +2571,9 @@ a_{w}(x)=\sum_{k=0}^{\infty}w^{k}\alpha\left(2^{k}x-\left\lfloor 2^{k}x\right\rf
 \begin_inset Formula $r(x)=1-x$
 \end_inset 
 
- we again see transformations that are linear and closed, and thus again
- a vector space, this time four-dimensional.
- So we have that 
+, it is seen again that the transformations are linear and closed, and thus
+ again a vector space, this time four-dimensional.
+ The generator 
 \begin_inset Formula $g_{4}$
 \end_inset 
 
@@ -2618,11 +2604,11 @@ r_{4}=\left(\begin{array}{cccc}
  with the constructions of the isomorphisms proceeding as before.
 \layout Standard
 
-In general, if we replace 
+In general, if 
 \begin_inset Formula $\alpha(x)$
 \end_inset 
 
- with another quadratic construction that is even about 
+ is replaced with another quadratic construction that is even about 
 \begin_inset Formula $x=1/2$
 \end_inset 
 
@@ -2804,7 +2790,7 @@ g_{4o}=\left(\begin{array}{cccc}
 \begin_inset Formula $g,$
 \end_inset 
 
-we have 
+ we have 
 \begin_inset Formula $\sigma(g(x))=\tau(x)+w\sigma(x)$
 \end_inset 
 
@@ -2822,8 +2808,15 @@ we have
  is greater or less than 1/2.
  Strictly speaking, then, this isn't a linear representation.
  We can try to save the day by building a different odd-parity sawtooth;
- but then we find that such a sawtooth will be discontinuous at x=0 and/or
- at x=1/2.
+ but then we find that such a sawtooth will be discontinuous at 
+\begin_inset Formula $x=0$
+\end_inset 
+
+ and/or at 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+.
  In other words, there doesn't seem to be a continuous odd-parity representation
  in 
 \begin_inset Formula $GL(3,\mathbb{R})$
@@ -2899,7 +2892,7 @@ ons.
 
  and discover that 
 \begin_inset Formula \begin{equation}
-\left[g_{n+2}a_{n,w}\right](x)\equiv\left[a_{n,w}g_{D}\right](x)=a_{n,w}\left(\frac{x}{2}\right)=x^{n}+wa_{n,w}(x)\label{eq:}\end{equation}
+\left[g_{n+2}a_{n,w}\right](x)\equiv\left(a_{n,w}\circ g_{D}\right)(x)=a_{n,w}\left(\frac{x}{2}\right)=x^{n}+wa_{n,w}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2963,9 +2956,9 @@ The above
 .
  The obvious choice for the differentiable-curve construction are the Bernoulli
  polynomials.
- These have several incredibly appealing properties for this task: they
- alternate in parity as they alternate in order, and, in higher orders,
- approximate sine and cosine.
+ These have several appealing properties for this task: they alternate in
+ parity as they alternate in order, and, in higher orders, approximate sine
+ and cosine.
  That is, 
 \begin_inset Formula $B_{2n}(x)\rightarrow\pm A_{2n}\cos(2\pi x)$
 \end_inset 
@@ -2983,7 +2976,7 @@ The above
 \end_inset 
 
 .
- That is, we assert that a very appropriate and natural choice for the basis
+ That is, we assert that an appropriate and natural choice for the basis
  vectors for the higher-dimensional representations are given by Bernoulli
  polynomials.
  We thus define the basis vectors to be 
@@ -3019,9 +3012,10 @@ ional representations, this implies that a Takagi curve built out of a general
  function will in some way transform as an 'infinite dimensional' representation.
  We find it curious, though, that alternating even and odd-parity representation
 s seem to allow sine and cosine to be built up in a natural fashion, thus
- opening the door for Fourier analysis.
- We will develop these ideas in later chapters.
- Meanwhile, lets take a quick look at one example of an 
+ opening the door for Fourier analysis
+\layout Standard
+
+The next section takes a quick look at one example of an 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -3069,7 +3063,7 @@ The two figures show two of these curves, for different values of
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
