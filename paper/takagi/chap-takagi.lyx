@@ -3892,9 +3892,11 @@ Written as affine transformations, the two transforms can be expressed as
 \begin_inset Formula \begin{equation}
 d_{0}(u,v)=\left(\begin{array}{c}
 u'\\
-v'\end{array}\right)=\left(\begin{array}{ccc}
+v'\\
+1\end{array}\right)=\left(\begin{array}{ccc}
 \alpha & -\beta & 0\\
-\beta & \alpha & 0\end{array}\right)\left(\begin{array}{c}
+\beta & \alpha & 0\\
+0 & 0 & 1\end{array}\right)\left(\begin{array}{c}
 u\\
 v\\
 1\end{array}\right)\label{eq:}\end{equation}
@@ -3905,16 +3907,72 @@ v\\
 \begin_inset Formula \begin{equation}
 d_{1}(u,v)=\left(\begin{array}{c}
 u'\\
-v'\end{array}\right)=\left(\begin{array}{ccc}
+v'\\
+1\end{array}\right)=\left(\begin{array}{ccc}
 1-\alpha & \beta & \alpha\\
--\beta & 1-\alpha & \beta\end{array}\right)\left(\begin{array}{c}
+-\beta & 1-\alpha & \beta\\
+0 & 0 & 1\end{array}\right)\left(\begin{array}{c}
 u\\
 v\\
 1\end{array}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
- The Koch and Peano curves can be obtained by a very similar construction,
+ where 
+\begin_inset Formula $a=\alpha+i\beta$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The 
+\begin_inset Formula $d_{0}$
+\end_inset 
+
+ and the 
+\begin_inset Formula $d_{1}$
+\end_inset 
+
+ transformations are essentially the 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ operators from the introduction of this paper.
+ Although these are repesented by three-dimensional linear transformations,
+ there is no equivalent to the transformations 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+.
+ This is because for every case, with the exception of 
+\begin_inset Formula $\alpha=1/2$
+\end_inset 
+
+, the curves are not left-right symmetric, and so there is no matrix 
+\begin_inset Formula $r$
+\end_inset 
+
+ such that 
+\begin_inset Formula $r^{2}=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $L=rRr$
+\end_inset 
+
+.
+\layout Standard
+
+The Koch and Peano curves can be obtained by a very similar construction,
  by introducing a mirror reflection through the complex conjugate: 
 \begin_inset Formula \begin{equation}
 d_{0}(z)=a\overline{z}\label{eq:}\end{equation}
