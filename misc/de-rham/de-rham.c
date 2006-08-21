@@ -1,7 +1,7 @@
 
 /* de-rham.C
  *
- * draw derham curves by iteration of functions
+ * draw de Rham curves by iteration of functions
  *
  * Linas Vepstas may 2005
  */
@@ -13,6 +13,7 @@
 
 static double ax = 0.5;
 static double ay = sqrt(3.0)/6.0;
+static double w = 0.6;
 
 void koch_0 (double *x, double *y)
 {
@@ -76,6 +77,22 @@ void mink_1 (double *x, double *y)
 	*x += 1.0;
 }
 
+void takagi_0 (double *x, double *y)
+{
+	double xx = *x;
+	double yy = *y;
+	*x = xx*0.5;
+	*y = xx + w*yy;
+}
+
+void takagi_1 (double *x, double *y)
+{
+	double xx = *x;
+	double yy = *y;
+	*x = 0.5*xx + 0.5;
+	*y = -xx +w *yy +1.0;
+}
+
 void fixpt (double val, double *x, double *y)
 {
 	int i = 0;
@@ -85,17 +102,19 @@ void fixpt (double val, double *x, double *y)
 	{
 		if (nt & 0x1) 
 		{
-			koch_1 (x,y);
+			// koch_1 (x,y);
 			// cesaro_1 (x,y);
 			// mink_1 (x,y);
 			// bernoulli_1 (x,y);
+			takagi_1 (x,y);
 		}
 		else
 		{
-			koch_0 (x,y);
+			// koch_0 (x,y);
 			// cesaro_0 (x,y);
 			// mink_0 (x,y);
 			// bernoulli_0 (x,y);
+			takagi_0 (x,y);
 		}
 		nt >>= 1;
 	}
@@ -105,10 +124,18 @@ main (int argc, char *argv[])
 {
 	int i;
 	int p,q;
+
+	if (4 > argc)
+	{
+		fprintf (stderr, "Usage: %s <q> <ax> <ay>\n", argv[0]);
+		exit (1);
+	}
+	
 	q  = 43;
 	q = atoi (argv[1]);
 	ax = atof (argv[2]);
 	ay = atof (argv[3]);
+	w = ay;
 
 	double aa = sqrt (ax*ax+ay*ay);
 	double ama = sqrt ((1.0-ax)*(1.0-ax)+ay*ay);
