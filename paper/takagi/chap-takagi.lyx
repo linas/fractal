@@ -3606,7 +3606,7 @@ Consider a pair of contracting maps of the plane
  map, and furthermore, that the one applied to the fixed point of the other
  yields the same point, that is, 
 \begin_inset Formula \begin{equation}
-d_{1}(p_{0})=d_{0}(p_{1})\label{eq:}\end{equation}
+d_{1}(p_{0})=d_{0}(p_{1})\label{eq:continuity condition}\end{equation}
 
 \end_inset 
 
@@ -3919,6 +3919,10 @@ v\end{array}\right)\label{eq:}\end{equation}
 \end_inset 
 
  where 
+\begin_inset Formula $z=u+iv$
+\end_inset 
+
+ and 
 \begin_inset Formula $a=\alpha+i\beta$
 \end_inset 
 
@@ -4043,7 +4047,7 @@ The classic Koch snowflake is regained for
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -4084,7 +4088,7 @@ The Koch snowflake curve, constructed for
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -4287,11 +4291,18 @@ l & m & n\end{array}\right)\label{eq:}\end{equation}
  The general set appears to have twelve free parameters, from which should
  be excluded 1 (for rotations) + 2 (for translations) + 2 (for scaling)
  + 1(for shearing) = 6 non-interesting parameter dimensions.
- These leaves behind a six-dimensional space of unique fractal curves.
+ Requiring that the curve be continuous, by using de Rham's continuity condition
+ 
+\begin_inset LatexCommand \ref{eq:continuity condition}
+
+\end_inset 
+
+, eliminates two more degrees of freedom.
+ This leaves behind a four-dimensional space of unique fractal curves.
  
 \layout Standard
 
-Of this six-dimensional space, one dimension has been explored with the
+Of this four-dimensional space, one dimension has been explored with the
  Takagi curves.
  A second dimension is explored with the 
 \begin_inset ERT
@@ -4304,12 +4315,96 @@ Ces
 \end_inset 
 
  curves, and a third with the Koch/Peano curves.
- A fourth dimension might be ascribed to the left-right asymmetry paramter
- associated with these curves.
- The fifth direction to be explored may be ascribed to the Minkowski question
- mark.
- This leaves a sixth direction which has not been adequately discussed yet.
  
+\layout Standard
+
+The general form amy be narrowed as follows.
+ Let 
+\begin_inset Formula $d_{0}$
+\end_inset 
+
+ have the fixed point 
+\begin_inset Formula $p_{0}$
+\end_inset 
+
+ located at the origin 
+\begin_inset Formula $(u,v)=(0,0)$
+\end_inset 
+
+.
+ This implies that 
+\begin_inset Formula $a=d=0$
+\end_inset 
+
+.
+ Next let 
+\begin_inset Formula $d_{1}$
+\end_inset 
+
+ have the fixed point 
+\begin_inset Formula $p_{1}$
+\end_inset 
+
+ at 
+\begin_inset Formula $(u,v)=(1,0)$
+\end_inset 
+
+.
+ This implies that 
+\begin_inset Formula $j=1-h$
+\end_inset 
+
+ and 
+\begin_inset Formula $m=-l$
+\end_inset 
+
+.
+ Finally, impose the de Rham condition for the continuity of the curve,
+ namely that 
+\begin_inset Formula $d_{0}(p_{1})=d_{1}(p_{0})$
+\end_inset 
+
+.
+ This implies that 
+\begin_inset Formula $h=b$
+\end_inset 
+
+ and 
+\begin_inset Formula $m=e$
+\end_inset 
+
+.
+ Changing symbols, the general form with the endpoints fixed may be written
+ as 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+d_{0}=\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+0 & \alpha & \delta\\
+0 & \beta & \epsilon\end{array}\right)\;\textrm{ and \;}d_{1}=\left(\begin{array}{ccc}
+1\; & 0\; & 0\\
+\alpha & 1-\alpha & \zeta\\
+\beta & -\beta & \eta\end{array}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The half-way point of this curve is located at 
+\begin_inset Formula $1/2=0.100\ldots=0.011\ldots=d_{1}d_{0}d_{0}\ldots=d_{0}d_{1}d_{1}\ldots$
+\end_inset 
+
+ which can be seen to be 
+\begin_inset Formula $(u,v)=(\alpha,\beta)$
+\end_inset 
+
+.
+ Using this last result to fix the location of the half-way point, what
+ remains is a four-paramter family of linear planar fractal curves.
+ 
+\layout Standard
+
+Homework: Complete this classification.
 \layout Subsection
 
 Symbolic dynamics
