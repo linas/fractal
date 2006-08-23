@@ -4,33 +4,35 @@
 # 
 
 while (<>) {
+	chop;
 	if (/d=/) {
-		split; 
+		split /=/; 
 		$d=$_[1];
 		next;
 	}
 	if (/e=/) {
-		split; 
+		split /=/; 
 		$e=$_[1];
 		next;
 	}
 	if (/f=/) {
-		split; 
+		split /=/; 
 		$f=$_[1];
 		next;
 	}
 	if (/g=/) {
-		split; 
+		split /=/; 
 		$g=$_[1];
 		break;
 	}
 }
+# print "duude its $d  $e $f $g \n";
 
 print "set term png small\n";
-print "set out 'curve_$d_$e_$f_$g.png'\n";
+print "set out \'curve\_$d\_$e\_$f\_$g.png\'\n";
 print "set data style lines\n";
 print "set key right\n";
-print "set size square\n";
+# print "set size square\n";
 
 print "set title \"General de Rham curve for $d $e $f $g\"\n";
 print "set xlabel \"u\"\n";
