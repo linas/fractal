@@ -160,6 +160,11 @@ main (int argc, char *argv[])
 	f = atof (argv[6]);
 	g = atof (argv[7]);
 
+	printf ("#\n# d=%.2f\n", d);
+	printf ("# e=%.2f\n", e);
+	printf ("# f=%.2f\n", f);
+	printf ("# g=%.2f\n", g);
+	printf ("#\n");
 	double x = 0.5;
 	double y = 0.0;
 #if 0
