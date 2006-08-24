@@ -29,7 +29,8 @@ while (<>) {
 # print "duude its $d  $e $f $g \n";
 
 print "set term png small\n";
-print "set out \'curve\_$d\_$e\_$f\_$g.png\'\n";
+# print "set out \'curve\_$d\_$e\_$f\_$g.png\'\n";
+print "set out \'curve.png\'\n";
 print "set data style lines\n";
 print "set key right\n";
 # print "set size square\n";
