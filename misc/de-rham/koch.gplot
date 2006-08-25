@@ -1,0 +1,32 @@
+
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+# set term png small color
+set term png small
+set out 'koch.png'
+
+# set data style linespoints
+set data style lines
+# set data style points
+set key right
+# set size square
+# set yrange [0:1]
+
+# Thiese settings were used to produce the graphs for WP articles
+#
+set title "Cesaro curve for a=0.5+i0.5"
+# set title "Cesaro curve for a=0.3+i0.3"
+# set title "Koch-Peano curve for a=0.6+i0.37"
+# set title "Koch-Peano curve for a=0.6+i0.45"
+set xlabel "u"
+set ylabel "v"
+
+# set yrange [0:]
+
+plot "curve.dat" using 3:4 title ""
+
+# pause 100
+
