@@ -1,23 +1,27 @@
 
 
-EXES= density trinary
+EXES= binom density trinary
 
 all: $(EXES)
 
+binom:	binom.o gcf.o
 density:	density.o
-
 trinary:	trinary.o
 
 
+TOP = ../../tools
+INC = $(TOP)/inc
+LIB = $(TOP)/lib
+
 .C.o:
-	gcc -c $^ -I ../../tools/inc
+	gcc -c $^ -I $(INC)
 
 .o:
-	g++ -o $* $^ ../../tools/lib/Farey.o -lm
+	g++ -o $* $^ -L $(LIB) -lm
 
 
 .c.o:
-	gcc -c $^ 
+	gcc -c $^ -I $(INC)
 
 clean:
 	rm -f *.o a.out
