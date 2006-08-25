@@ -1,17 +1,17 @@
 
-
-EXES= binom density trinary
-
-all: $(EXES)
-
-binom:	binom.o gcf.o
-density:	density.o
-trinary:	trinary.o
-
-
 TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
+
+
+EXES= binom trinary
+
+all: $(EXES)
+
+binom:	binom.o $(LIB)/gcf.o $(LIB)/binomial.o
+density:	density.o
+trinary:	trinary.o
+
 
 .C.o:
 	gcc -c $^ -I $(INC)
