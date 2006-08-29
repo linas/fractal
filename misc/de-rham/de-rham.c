@@ -8,6 +8,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static double ax = 0.5;
 static double ay = sqrt(3.0)/6.0;
