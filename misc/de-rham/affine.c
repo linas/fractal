@@ -59,12 +59,12 @@ void fixpt (double val)
 	{
 		if (nt & 0x1) 
 		{
-			mult (tmp, result, d1);
+			mult (tmp, d1, result);
 			copy(result,tmp);
 		}
 		else
 		{
-			mult (tmp, result, d0);
+			mult (tmp, d0, result);
 			copy(result,tmp);
 		}
 		nt >>= 1;
