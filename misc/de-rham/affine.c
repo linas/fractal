@@ -116,14 +116,16 @@ main (int argc, char *argv[])
 	for (p=0; p<q; p++) 
 	{
 		double val = (double) p / (double) q;
-		x = 0.5;
-		y = 0.0;
 		fixpt (val);
 
+#if 0
 		printf ("p=%d\tval=%g\n", p,val);
 		printf ("%6.3g\t%6.3g\t%6.3g\n", result[0][0], result[0][1], result[0][2]);
 		printf ("%6.3g\t%6.3g\t%6.3g\n", result[1][0], result[1][1], result[1][2]);
 		printf ("----------------------------\n\n");
-		// printf ("%d\t%g	%g	%g\n", p,val,x,y);
+#endif
+		x = result[0][2];
+		y = result[1][2];
+		printf ("%d\t%g	%g	%g\n", p,val,x,y);
 	}
 }
