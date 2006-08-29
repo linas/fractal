@@ -118,7 +118,7 @@ main (int argc, char *argv[])
 		double val = (double) p / (double) q;
 		fixpt (val);
 
-#if 0
+#if 1
 		printf ("p=%d\tval=%g\n", p,val);
 		printf ("%6.3g\t%6.3g\t%6.3g\n", result[0][0], result[0][1], result[0][2]);
 		printf ("%6.3g\t%6.3g\t%6.3g\n", result[1][0], result[1][1], result[1][2]);
@@ -126,6 +126,6 @@ main (int argc, char *argv[])
 #endif
 		x = result[0][2];
 		y = result[1][2];
-		printf ("%d\t%g	%g	%g\n", p,val,x,y);
+		//printf ("%d\t%g	%g	%g\n", p,val,x,y);
 	}
 }
