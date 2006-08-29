@@ -53,7 +53,7 @@ divisor_diagram
 		long double del = sum - ex*(logl(ex) + 2.0*M_GAMMA -1.0L);
 
 		/* scale as an estimate of vert size */
-		long double scale = 2.0L * powl (ex, 7.0L/22.0L);
+		long double scale = powl (ex, 7.0L/22.0L);
 		del /= scale;
 		del = 0.5L * (del+1.0L);
 		ex++;
