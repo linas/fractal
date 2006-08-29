@@ -14,7 +14,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert cutoff brat draw dx image
 
-NEW_EXES = alpha circle cutoff divisor elliptic \
+NEW_EXES = affine alpha circle cutoff divisor elliptic \
         erdos euler-q hermite mand-flow \
         mp_zeta mobius plouffe q-exp swap takagi totient zeta \
         ray automatic radius
@@ -47,6 +47,7 @@ opers.o: opers.h
 renorm.o: opers.h
 util.o:	util.h
 
+affine.o: affine.C
 alpha.o: alpha.C
 brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C

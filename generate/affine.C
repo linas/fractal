@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "brat.h"
+
 typedef double affine[2][3];
 
 affine d0;
@@ -71,26 +73,23 @@ void fixpt (double val)
 	}
 } 
 
-main (int argc, char *argv[])
+static double affine_series (double re_q, double im_q, int itermax, double param)
 {
 	int i;
 	int p,q;
 
-	if (8 > argc)
-	{
-		fprintf (stderr, "Usage: %s <q> <ax> <ay>\n", argv[0]);
-		exit (1);
-	}
-	
 	double ax, ay, d,e,f,g;
-	q  = 243;
-	q = atoi (argv[1]);
-	ax = atof (argv[2]);
-	ay = atof (argv[3]);
-	d = atof (argv[4]);
-	e = atof (argv[5]);
-	f = atof (argv[6]);
-	g = atof (argv[7]);
+	q  = 23;
+	ax = 0.5;
+	ay = 1.0;
+	d = 0.0;
+	e = 0.6;
+	f = 0.18;
+	g = 0.6;
+
+	e = re_q;
+	f = im_q;
+	g = param;
 
 	d0[0][0] = ax;
 	d0[1][0] = ay;
@@ -106,26 +105,22 @@ main (int argc, char *argv[])
 	d1[0][2] = ax;
 	d1[1][2] = ay;
 	
-	printf ("#\n# d=%.2f\n", d);
-	printf ("# e=%.2f\n", e);
-	printf ("# f=%.2f\n", f);
-	printf ("# g=%.2f\n", g);
-	printf ("#\n");
-	double x = 0.5;
-	double y = 0.0;
+	q = itermax;
+	double dist = 0.0;
 	for (p=0; p<q; p++) 
 	{
 		double val = (double) p / (double) q;
 		fixpt (val);
 
-#if 1
-		printf ("p=%d\tval=%g\n", p,val);
-		printf ("%6.3g\t%6.3g\t%6.3g\n", result[0][0], result[0][1], result[0][2]);
-		printf ("%6.3g\t%6.3g\t%6.3g\n", result[1][0], result[1][1], result[1][2]);
-		printf ("----------------------------\n\n");
-#endif
-		x = result[0][2];
-		y = result[1][2];
-		//printf ("%d\t%g	%g	%g\n", p,val,x,y);
+		double x = result[0][2];
+		double y = result[1][2];
+		dist += sqrt (x*x+y*y);
 	}
+	dist /= itermax;
+	return dist;
 }
+
+
+DECL_MAKE_HEIGHT(affine_series);
+
+/* --------------------------- END OF LIFE ------------------------- */
