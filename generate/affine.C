@@ -71,9 +71,27 @@ void fixpt (double val)
 		}
 		nt >>= 1;
 	}
+#define MORE
+#ifdef MORE
+	nt = rand();
+	for (i=1; i<30; i++)
+	{
+		if (nt & 0x1) 
+		{
+			mult (tmp, d1, result);
+			copy(result,tmp);
+		}
+		else
+		{
+			mult (tmp, d0, result);
+			copy(result,tmp);
+		}
+		nt >>= 1;
+	}
+#endif
 } 
 
-static double affine_series (double re_q, double im_q, int itermax, double param)
+static double affine_iteration (double re_q, double im_q, int itermax, double param)
 {
 	int p,q;
 
@@ -120,6 +138,43 @@ static double affine_series (double re_q, double im_q, int itermax, double param
 }
 
 
-DECL_MAKE_HEIGHT(affine_series);
+static double affine_bound (double re_q, double im_q, int itermax, double param)
+{
+	double ax, ay, d,e,f,g;
+	ax = 0.5;
+	ay = 1.0;
+	d = 0.0;
+	e = 0.6;
+	f = 0.18;
+	g = 0.6;
+
+	e = re_q;
+	f = im_q;
+	g = param;
+
+	double r=0.0;
+
+	double lam = 0.5*(ax+e) + 0.5 *sqrt( (ax-e)*(ax-e) + 4*ay*d);
+	if (lam>1.0) r = 1e30;
+	if (lam<-1.0) r = 1e30;
+	
+	lam = 0.5*(ax+e) - 0.5*sqrt( (ax-e)*(ax-e) + 4*ay*d);
+	if (lam>1.0) r = 1e30;
+	if (lam<-1.0) r = 1e30;
+	
+	lam = 0.5*(1.0-ax+g) - 0.5*sqrt( (1.0-ax-g)*(1.0-ax-g) - 4*ay*f);
+	if (lam>1.0) r = 1e30;
+	if (lam<-1.0) r = 1e30;
+	
+	lam = 0.5*(1.0-ax+g) + 0.5*sqrt( (1.0-ax-g)*(1.0-ax-g) - 4*ay*f);
+	if (lam>1.0) r = 1e30;
+	if (lam<-1.0) r = 1e30;
+	
+
+	return r;
+}
+
+// DECL_MAKE_HEIGHT(affine_iteration);
+DECL_MAKE_HEIGHT(affine_bound);
 
 /* --------------------------- END OF LIFE ------------------------- */
