@@ -77,6 +77,7 @@ GSL=-lgsl -lcblas
 
 ################## Dependencies and compile/link #########
 #
+affine: brat.o affine.o util.o
 alpha: brat.o alpha.o util.o $(GSL)
 brat-beigen: brat.o brat-beigen.o util.o
 brat-gap-hair: brat.o brat-gap-hair.o util.o $(FAREY)
