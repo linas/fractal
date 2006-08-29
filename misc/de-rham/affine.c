@@ -16,7 +16,7 @@ affine d0;
 affine d1;
 affine result;
 
-static inline copy (affine r, affine a)
+static inline void copy (affine r, affine a)
 {
 	r[0][0] = a[0][0];
 	r[0][1] = a[0][1];
@@ -27,7 +27,7 @@ static inline copy (affine r, affine a)
 	r[1][2] = a[1][2];
 }
 
-static inline mult (affine r, affine a, affine b)
+static inline void mult (affine r, affine a, affine b)
 {
 	r[0][0] = a[0][0]*b[0][0] + a[0][1] * b[1][0];
 	r[0][1] = a[0][0]*b[0][1] + a[0][1] * b[1][1];
