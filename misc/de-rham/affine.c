@@ -8,43 +8,64 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-static double ax = 0.5;
-static double ay = sqrt(3.0)/6.0;
-static double w = 0.6;
+typedef double affine[2][3];
 
-static double d,e,f,g;
+affine d0;
+affine d1;
+affine result;
 
-void generic_0 (double *x, double *y)
+static inline copy (affine r, affine a)
 {
-	double re = *x;
-	double im = *y;
-	*x = ax * re + d * im;
-	*y = ay * re + e * im;
+	r[0][0] = a[0][0];
+	r[0][1] = a[0][1];
+	r[0][2] = a[0][2];
+	
+	r[1][0] = a[1][0];
+	r[1][1] = a[1][1];
+	r[1][2] = a[1][2];
 }
 
-void generic_1 (double *x, double *y)
+static inline mult (affine r, affine a, affine b)
 {
-	double re = *x;
-	double im = *y;
-	*x = ax + (1.0-ax) * re + f * im;
-	*y = ay - ay * re + g * im;
+	r[0][0] = a[0][0]*b[0][0] + a[0][1] * b[1][0];
+	r[0][1] = a[0][0]*b[0][1] + a[0][1] * b[1][1];
+	r[0][2] = a[0][0]*b[0][2] + a[0][1] * b[1][2] + a[0][2];
+	
+	r[1][0] = a[1][0]*b[0][0] + a[1][1] * b[1][0];
+	r[1][1] = a[1][0]*b[0][1] + a[1][1] * b[1][1];
+	r[1][2] = a[1][0]*b[0][2] + a[1][1] * b[1][2] + a[1][2];
 }
 
-void fixpt (double val, double *x, double *y)
+void fixpt (double val)
 {
+	affine tmp;
+	
 	int i = 0;
 	val *= (double) (1<<30);
 	unsigned int nt = (int) val;
-	for (i=0; i<30; i++)
+	if (nt & 0x1) 
+	{
+		result = d1;
+	}
+	else
+	{
+		result = d0;
+	}
+	nt >>= 1;
+
+	for (i=1; i<30; i++)
 	{
 		if (nt & 0x1) 
 		{
-			generic_1 (x,y);
+			mult (tmp, result, d1);
+			result = tmp;
 		}
 		else
 		{
-			generic_0 (x,y);
+			mult (tmp, result, d0);
+			result = tmp;
 		}
 		nt >>= 1;
 	}
@@ -61,6 +82,7 @@ main (int argc, char *argv[])
 		exit (1);
 	}
 	
+	double ax, ay, d,e,f,g;
 	q  = 243;
 	q = atoi (argv[1]);
 	ax = atof (argv[2]);
@@ -70,6 +92,20 @@ main (int argc, char *argv[])
 	f = atof (argv[6]);
 	g = atof (argv[7]);
 
+	d0[0][0] = ax;
+	d0[1][0] = ay;
+	d0[0][1] = d;
+	d0[1][1] = e;
+	d0[0][2] = 0.0;
+	d0[1][2] = 0.0;
+	
+	d1[0][0] = 1.0-ax;
+	d1[1][0] = -ay;
+	d1[0][1] = f;
+	d1[1][1] = g;
+	d1[0][2] = ax;
+	d1[1][2] = ay;
+	
 	printf ("#\n# d=%.2f\n", d);
 	printf ("# e=%.2f\n", e);
 	printf ("# f=%.2f\n", f);
@@ -77,33 +113,17 @@ main (int argc, char *argv[])
 	printf ("#\n");
 	double x = 0.5;
 	double y = 0.0;
-#if 0
-	double aa = sqrt (ax*ax+ay*ay);
-	double ama = sqrt ((1.0-ax)*(1.0-ax)+ay*ay);
-	double c = sqrt (aa*aa+ama*ama);
-	printf ("#\n# denom=%d\n#\n", q);
-	printf ("# x=%g y=%g |a| = %g |1-a|=%g c=%g\n#\n", ax,ay, aa, ama,c);
-
-	for (i=0; i<30; i++) cesaro_0 (&x,&y);
-	printf ("# fxpt0 = %g + i %g\n", x ,y );
-	cesaro_1 (&x,&y);
-	printf ("#\n# 1-fxpt0 = %g + i %g\n", x ,y );
-
-	x = 1.0;
-	y = 0.0;
-	printf ("#\n# fxpt1 = %g + i %g\n", x ,y );
-	cesaro_0 (&x,&y);
-	printf ("#\n# 0-fxpt1 = %g + i %g\n", x ,y );
-	printf ("#\n");
-#endif
-
 	for (p=0; p<q; p++) 
 	{
 		double val = (double) p / (double) q;
 		x = 0.5;
 		y = 0.0;
-		fixpt (val, &x, &y);
+		fixpt (val);
 
-		printf ("%d\t%g	%g	%g\n", p,val,x,y);
+		printf ("p=%d\tval=%g\n", p,val);
+		printf ("%6.3g\t%6.3g\t%6.3g\n", result[0][0], result[0][1], result[0][2]);
+		printf ("%6.3g\t%6.3g\t%6.3g\n", result[1][0], result[1][1], result[1][2]);
+		printf ("\n");
+		// printf ("%d\t%g	%g	%g\n", p,val,x,y);
 	}
 }
