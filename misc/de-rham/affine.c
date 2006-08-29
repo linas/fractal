@@ -47,11 +47,11 @@ void fixpt (double val)
 	unsigned int nt = (int) val;
 	if (nt & 0x1) 
 	{
-		result = d1;
+		copy(result,d1);
 	}
 	else
 	{
-		result = d0;
+		copy(result,d0);
 	}
 	nt >>= 1;
 
@@ -60,12 +60,12 @@ void fixpt (double val)
 		if (nt & 0x1) 
 		{
 			mult (tmp, result, d1);
-			result = tmp;
+			copy(result,tmp);
 		}
 		else
 		{
 			mult (tmp, result, d0);
-			result = tmp;
+			copy(result,tmp);
 		}
 		nt >>= 1;
 	}
@@ -123,7 +123,7 @@ main (int argc, char *argv[])
 		printf ("p=%d\tval=%g\n", p,val);
 		printf ("%6.3g\t%6.3g\t%6.3g\n", result[0][0], result[0][1], result[0][2]);
 		printf ("%6.3g\t%6.3g\t%6.3g\n", result[1][0], result[1][1], result[1][2]);
-		printf ("\n");
+		printf ("----------------------------\n\n");
 		// printf ("%d\t%g	%g	%g\n", p,val,x,y);
 	}
 }
