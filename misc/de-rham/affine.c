@@ -1,7 +1,7 @@
 /* 
- * de-rham.c
+ * affine.c
  *
- * Draw de Rham curves by iteration of functions
+ * Draw de Rham curves by iteration of affine matrices
  *
  * Linas Vepstas may 2005, august 2006
  */
@@ -14,84 +14,6 @@ static double ay = sqrt(3.0)/6.0;
 static double w = 0.6;
 
 static double d,e,f,g;
-
-void koch_0 (double *x, double *y)
-{
-	double re = *x;
-	double im = *y;
-	*x = ax * re + ay * im;
-	*y = ay * re - ax * im;
-}
-
-void koch_1 (double *x, double *y)
-{
-	double re = *x;
-	double im = *y;
-	*x = (1.0-ax) * re - ay * im;
-	*y = -ay * re - (1.0-ax) * im;
-	*x += ax;
-	*y += ay;
-}
-
-void cesaro_0 (double *x, double *y)
-{
-	double re = *x;
-	double im = *y;
-	*x = ax * re - ay * im;
-	*y = ay * re + ax * im;
-}
-
-void cesaro_1 (double *x, double *y)
-{
-	double re = *x;
-	double im = *y;
-	*x = (1.0-ax) * re + ay * im;
-	*y = -ay * re + (1.0-ax) * im;
-	*x += ax;
-	*y += ay;
-}
-
-void bernoulli_0 (double *x, double *y)
-{
-	double re = *x;
-	double im = *y;
-	*x = ax * re - ay * im;
-	*y = ay * re + ax * im;
-}
-
-void bernoulli_1 (double *x, double *y)
-{
-	double re = *x;
-	double im = *y;
-	*x = (1.0-ax) * re + ay * im;
-	*y = -ay * re + (1.0-ax) * im;
-}
-
-void mink_0 (double *x, double *y)
-{
-	*x /= *x+1.0;
-}
-
-void mink_1 (double *x, double *y)
-{
-	*x += 1.0;
-}
-
-void takagi_0 (double *x, double *y)
-{
-	double xx = *x;
-	double yy = *y;
-	*x = xx*0.5;
-	*y = xx + w*yy;
-}
-
-void takagi_1 (double *x, double *y)
-{
-	double xx = *x;
-	double yy = *y;
-	*x = 0.5*xx + 0.5;
-	*y = -xx +w *yy +1.0;
-}
 
 void generic_0 (double *x, double *y)
 {
@@ -118,20 +40,10 @@ void fixpt (double val, double *x, double *y)
 	{
 		if (nt & 0x1) 
 		{
-			// koch_1 (x,y);
-			// cesaro_1 (x,y);
-			// mink_1 (x,y);
-			// bernoulli_1 (x,y);
-			// takagi_1 (x,y);
 			generic_1 (x,y);
 		}
 		else
 		{
-			// koch_0 (x,y);
-			// cesaro_0 (x,y);
-			// mink_0 (x,y);
-			// bernoulli_0 (x,y);
-			// takagi_0 (x,y);
 			generic_0 (x,y);
 		}
 		nt >>= 1;
