@@ -152,29 +152,43 @@ static double affine_bound (double re_q, double im_q, int itermax, double param)
 	f = im_q;
 	g = param;
 
-	double r=0.0;
+	double p=0.0;
 
-	double lam = 0.5*(ax+e) + 0.5 *sqrt( (ax-e)*(ax-e) + 4*ay*d);
-	if (lam>1.0) r = 1e30;
-	if (lam<-1.0) r = 1e30;
+	double mo;
+	double re = 0.5*(ax+e);
+	double de = (ax-e)*(ax-e) + 4*ay*d;
+	if (de>=0.0) {
+		re += 0.5 *sqrt(de);
+		mo = re*re;
+		if (mo>1.0) p = 1e30;
+		re -= sqrt(de);
+		mo = re*re;
+		if (mo>1.0) p = 1e30;
+	} else {
+		mo = re*re - 0.25*de;
+		if (mo>1.0) p = 1e30;
+	}
 	
-	lam = 0.5*(ax+e) - 0.5*sqrt( (ax-e)*(ax-e) + 4*ay*d);
-	if (lam>1.0) r = 1e30;
-	if (lam<-1.0) r = 1e30;
+	re = 0.5*(1.0-ax+g); 
+	de = (1.0-ax-g)*(1.0-ax-g) - 4*ay*f;
 	
-	lam = 0.5*(1.0-ax+g) - 0.5*sqrt( (1.0-ax-g)*(1.0-ax-g) - 4*ay*f);
-	if (lam>1.0) r = 1e30;
-	if (lam<-1.0) r = 1e30;
-	
-	lam = 0.5*(1.0-ax+g) + 0.5*sqrt( (1.0-ax-g)*(1.0-ax-g) - 4*ay*f);
-	if (lam>1.0) r = 1e30;
-	if (lam<-1.0) r = 1e30;
+	if (de>=0.0) {
+		re += 0.5 *sqrt(de);
+		mo = re*re;
+		if (mo>1.0) p = 1e30;
+		re -= sqrt(de);
+		mo = re*re;
+		if (mo>1.0) p = 1e30;
+	} else {
+		mo = re*re - 0.25*de;
+		if (mo>1.0) p = 1e30;
+	}
 	
 
-	return r;
+	return p;
 }
 
-// DECL_MAKE_HEIGHT(affine_iteration);
-DECL_MAKE_HEIGHT(affine_bound);
+DECL_MAKE_HEIGHT(affine_iteration);
+// DECL_MAKE_HEIGHT(affine_bound);
 
 /* --------------------------- END OF LIFE ------------------------- */
