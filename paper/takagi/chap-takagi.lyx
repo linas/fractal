@@ -3794,7 +3794,7 @@ x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq:}\end{equation}
 
 : 
 \begin_inset Formula \begin{equation}
-d_{x}=d_{b_{1}}\circ\; d_{b_{2}}\circ\,\ldots\:\circ\, d_{b_{k}}\circ\,\ldots\label{eq:}\end{equation}
+d_{x}=d_{b_{1}}\circ\; d_{b_{2}}\circ\,\ldots\:\circ\, d_{b_{k}}\circ\,\ldots\label{eq:de-Rham curve}\end{equation}
 
 \end_inset 
 
@@ -4057,7 +4057,17 @@ v\end{array}\right)\label{eq:}\end{equation}
 \end_inset 
 
 .
- 
+ If these look odd, it is because they are written 
+\begin_inset Quotes eld
+\end_inset 
+
+upside-down
+\begin_inset Quotes erd
+\end_inset 
+
+ from the way that affine transforms are commonly written.
+ The resason for this will become clear below: it is to connect with the
+ previous sections on the symmetries of the Takagi curve.
 \layout Standard
 
 The 
@@ -4643,8 +4653,8 @@ v & 0 & 0\end{array}\right)\label{eq:}\end{equation}
 \end_inset 
 
  independent of the starting point on the plane.
- In order to gaurentee absolute convergence, it is clear that each of the
- two transforms should be contracting; this is gaurenteed if the absolute
+ In order to guarantee absolute convergence, it is clear that each of the
+ two transforms should be contracting; this is guaranteed if the absolute
  value of each of the two eigenvalues of the two matrices
 \begin_inset Formula \begin{equation}
 \left(\begin{array}{cc}
@@ -4656,23 +4666,114 @@ v & 0 & 0\end{array}\right)\label{eq:}\end{equation}
 \end_inset 
 
  are less than one.
- The eigenvalues are readily obtained, and the paramter space is bounded
+ The eigenvalues are readily obtained, and the parameter space is bounded
  by eight quadratic surfaces.
- Naively speaking, there is no region of conditional convergence, as the
- possible sequences of contiguous 
-\begin_inset Formula $d_{0}$
+ One may wonder if there is a region of 
+\begin_inset Quotes eld
 \end_inset 
 
-'s and 
-\begin_inset Formula $d_{1}$
+almost-everywhere
+\begin_inset Quotes erd
 \end_inset 
 
-'s are unbounded, and so there can be no convergence unless the eigenvalues
- are buonded.
- More precisely, if the parameters are such that some of the eigenvectors
- line up exactly, then one could have the possibility of having a subspace
- converge to zero, while the orthogonal space diverges; but this situation
- is exceptional and doesn't seem interesting.
+ convergence, and numerical exploration indicates that there is, as illustrated
+ in the figure 
+\begin_inset LatexCommand \ref{cap:Almost-everywhere-convergence}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Almost-everywhere-convergence}
+
+\end_inset 
+
+Almost-everywhere convergence
+\layout Standard
+
+
+\begin_inset Graphics
+	filename almost-everywhere.jpeg
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a region of almost-everywhere convergence, with the region
+ of absolute convergence inscribed as a perfect rectangle.
+ The parameter space explored here has 
+\begin_inset Formula $\alpha=0.5$
+\end_inset 
+
+, 
+\begin_inset Formula $\beta=1$
+\end_inset 
+
+,
+\begin_inset Formula $\delta=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $\eta=0.6$
+\end_inset 
+
+ held fixed, 
+\begin_inset Formula $\epsilon$
+\end_inset 
+
+ varied along the horizontal, from -4 to +4, and 
+\begin_inset Formula $\zeta$
+\end_inset 
+
+ from -4 to 4 along the vertical.
+ The black area indicates the region of 
+\begin_inset Formula $(\epsilon,\zeta)$
+\end_inset 
+
+ for which equation 
+\begin_inset LatexCommand \ref{eq:de-Rham curve}
+
+\end_inset 
+
+ converged for all attempted 4621 trial values of 
+\begin_inset Formula $x$
+\end_inset 
+
+ (that is, for all values 
+\begin_inset Formula $x=k/4621$
+\end_inset 
+
+with integer 
+\begin_inset Formula $0<k<4621$
+\end_inset 
+
+).
+ The fuzziness around the edges and particularly the corners indicates that
+ some care must be taken with the notion of everywhere: in this case, the
+ measure of the set of diverging values can be argued to be less than 1/4621.
+ This slice through the four-dimensional space seems 
+\begin_inset Quotes eld
+\end_inset 
+
+generic
+\begin_inset Quotes erd
+\end_inset 
+
+, in that other slices are not dissimilar.
+\end_inset 
+
+
 \layout Subsection
 
 Symbolic dynamics
