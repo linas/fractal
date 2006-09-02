@@ -160,6 +160,9 @@ main (int argc, char *argv[])
 	f = atof (argv[6]);
 	g = atof (argv[7]);
 #else 
+
+	/* the following parameter arrangement explores only the 
+	 * left-right symmetric curves */
 	if (5 > argc)
 	{
 		fprintf (stderr, "Usage: %s <q> <beta> <delta> <epsilon>\n", argv[0]);
