@@ -144,6 +144,7 @@ main (int argc, char *argv[])
 	int i;
 	int p,q;
 
+#if GENERAL
 	if (8 > argc)
 	{
 		fprintf (stderr, "Usage: %s <q> <ax> <ay>\n", argv[0]);
@@ -158,6 +159,22 @@ main (int argc, char *argv[])
 	e = atof (argv[5]);
 	f = atof (argv[6]);
 	g = atof (argv[7]);
+#else 
+	if (5 > argc)
+	{
+		fprintf (stderr, "Usage: %s <q> <beta> <delta> <epsilon>\n", argv[0]);
+		exit (1);
+	}
+	
+	q  = 243;
+	q = atoi (argv[1]);
+	ax = 0.5;
+	ay = atof (argv[2]);
+	d = atof (argv[3]);
+	e = atof (argv[4]);
+	f = -d;
+	g = e;
+#endif
 
 	printf ("#\n# d=%.2f\n", d);
 	printf ("# e=%.2f\n", e);
