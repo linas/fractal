@@ -91,6 +91,49 @@ void fixpt (double val)
 #endif
 } 
 
+/* Bounds checker, based on the idea of absolute convergence
+ * of the de Rham curve when parameters are bounded. Returns
+ * true if params allow  for absolute convergence, else returns 
+ * false.
+ */
+static int interior (double ax, double ay, 
+                     double d, double e, double f, double g)
+{
+	int p=1;
+
+	double mo;
+	double re = 0.5*(ax+e);
+	double de = (ax-e)*(ax-e) + 4*ay*d;
+	if (de>=0.0) {
+		re += 0.5 *sqrt(de);
+		mo = re*re;
+		if (mo>1.0) p = 0;
+		re -= sqrt(de);
+		mo = re*re;
+		if (mo>1.0) p = 0;
+	} else {
+		mo = re*re - 0.25*de;
+		if (mo>1.0) p = 0;
+	}
+	
+	re = 0.5*(1.0-ax+g); 
+	de = (1.0-ax-g)*(1.0-ax-g) - 4*ay*f;
+	
+	if (de>=0.0) {
+		re += 0.5 *sqrt(de);
+		mo = re*re;
+		if (mo>1.0) p = 0;
+		re -= sqrt(de);
+		mo = re*re;
+		if (mo>1.0) p = 0;
+	} else {
+		mo = re*re - 0.25*de;
+		if (mo>1.0) p = 0;
+	}
+
+	return p;
+}
+
 static double affine_iteration (double re_q, double im_q, int itermax, double param)
 {
 	int p,q;
@@ -99,10 +142,10 @@ static double affine_iteration (double re_q, double im_q, int itermax, double pa
 	q  = 23;
 	ax = 0.5;
 	ay = 1.0;
-	d = 0.0;
+	d = 0;
 	e = 0.6;
 	f = 0.18;
-	g = 0.6;
+	g = -0.5;
 
 	e = re_q;
 	f = im_q;
@@ -134,6 +177,17 @@ static double affine_iteration (double re_q, double im_q, int itermax, double pa
 		dist += sqrt (x*x+y*y);
 	}
 	dist /= itermax;
+
+	int i1 = interior (ax, ay, d,e,f,g);
+	int i2 = interior (ax, ay, d,e+4.0/600.0,f,g);
+	if (i1 & !i2) dist = 1e30;
+	if (!i1 & i2) dist = 1e30;
+	
+	i1 = interior (ax, ay, d,e,f,g);
+	i2 = interior (ax, ay, d,e, f+4.0/600.0,g);
+	if (i1 & !i2) dist = 1e30;
+	if (!i1 & i2) dist = 1e30;
+
 	return dist;
 }
 
@@ -146,44 +200,14 @@ static double affine_bound (double re_q, double im_q, int itermax, double param)
 	d = 0.0;
 	e = 0.6;
 	f = 0.18;
-	g = 0.6;
+	g = 0.5;
 
 	e = re_q;
 	f = im_q;
 	g = param;
 
-	double p=0.0;
-
-	double mo;
-	double re = 0.5*(ax+e);
-	double de = (ax-e)*(ax-e) + 4*ay*d;
-	if (de>=0.0) {
-		re += 0.5 *sqrt(de);
-		mo = re*re;
-		if (mo>1.0) p = 1e30;
-		re -= sqrt(de);
-		mo = re*re;
-		if (mo>1.0) p = 1e30;
-	} else {
-		mo = re*re - 0.25*de;
-		if (mo>1.0) p = 1e30;
-	}
-	
-	re = 0.5*(1.0-ax+g); 
-	de = (1.0-ax-g)*(1.0-ax-g) - 4*ay*f;
-	
-	if (de>=0.0) {
-		re += 0.5 *sqrt(de);
-		mo = re*re;
-		if (mo>1.0) p = 1e30;
-		re -= sqrt(de);
-		mo = re*re;
-		if (mo>1.0) p = 1e30;
-	} else {
-		mo = re*re - 0.25*de;
-		if (mo>1.0) p = 1e30;
-	}
-	
+	double p = 1.0e30;
+	if (interior (ax, ay, d,e,f,g)) p = 0.0;
 
 	return p;
 }
