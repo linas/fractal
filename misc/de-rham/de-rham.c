@@ -11,10 +11,10 @@
 #include <stdlib.h>
 
 static double ax = 0.5;
-static double ay = sqrt(3.0)/6.0;
+static double ay = 1.7/6.0; /* sqrt(3.0)/6.0; */
 static double w = 0.6;
 
-static double d,e,f,g;
+static double a,b,c,d,e,f,g;
 
 void koch_0 (double *x, double *y)
 {
@@ -94,6 +94,22 @@ void takagi_1 (double *x, double *y)
 	*y = -xx +w *yy +1.0;
 }
 
+void markov_0 (double *x, double *y)
+{
+	double u = *x;
+	double v = *y;
+	*x = a * u + b * v;
+	*y = (1.0-a) * u + (1.0-b) * v;
+}
+
+void markov_1 (double *x, double *y)
+{
+	double u = *x;
+	double v = *y;
+	*x = c * u + d * v;
+	*y = (1.0-c) * u + (1.0-d) * v;
+}
+
 void generic_0 (double *x, double *y)
 {
 	double re = *x;
@@ -124,7 +140,8 @@ void fixpt (double val, double *x, double *y)
 			// mink_1 (x,y);
 			// bernoulli_1 (x,y);
 			// takagi_1 (x,y);
-			generic_1 (x,y);
+			markov_1 (x,y);
+			// generic_1 (x,y);
 		}
 		else
 		{
@@ -133,7 +150,8 @@ void fixpt (double val, double *x, double *y)
 			// mink_0 (x,y);
 			// bernoulli_0 (x,y);
 			// takagi_0 (x,y);
-			generic_0 (x,y);
+			markov_0 (x,y);
+			// generic_0 (x,y);
 		}
 		nt >>= 1;
 	}
@@ -159,8 +177,9 @@ main (int argc, char *argv[])
 	e = atof (argv[5]);
 	f = atof (argv[6]);
 	g = atof (argv[7]);
-#else 
+#endif 
 
+#if LR_SYMMETRIC
 	/* the following parameter arrangement explores only the 
 	 * left-right symmetric curves */
 	if (5 > argc)
@@ -178,6 +197,21 @@ main (int argc, char *argv[])
 	f = -d;
 	g = e;
 #endif
+
+	/* The following parameter arrangement is suitable for
+	 * the Markov-chain curves */
+	if (6 > argc)
+	{
+		fprintf (stderr, "Usage: %s <q> <a> <b> <c> <d>\n", argv[0]);
+		exit (1);
+	}
+	
+	q  = 243;
+	q = atoi (argv[1]);
+	a = atof (argv[2]);
+	b = atof (argv[3]);
+	c = atof (argv[4]);
+	d = atof (argv[5]);
 
 	printf ("#\n# d=%.2f\n", d);
 	printf ("# e=%.2f\n", e);
@@ -210,7 +244,7 @@ main (int argc, char *argv[])
 	{
 		double val = (double) p / (double) q;
 		x = 0.5;
-		y = 0.0;
+		y = 0.5;
 		fixpt (val, &x, &y);
 
 		printf ("%d\t%g	%g	%g\n", p,val,x,y);
