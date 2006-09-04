@@ -212,6 +212,8 @@ main (int argc, char *argv[])
 	b = atof (argv[3]);
 	c = atof (argv[4]);
 	d = atof (argv[5]);
+	// d = b*(1.0-c)/(1.0-a);  // degenerate fixed points, won't go
+	// d = c - (1.0-a+b);      // a continuous chain
 
 	printf ("#\n# d=%.2f\n", d);
 	printf ("# e=%.2f\n", e);
