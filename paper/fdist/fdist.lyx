@@ -32,13 +32,33 @@ Modular Fractal Measures
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (updated 31 December 2005)
+12 October 2004 (updated 11 September 2006)
 \layout Abstract
 
-In this brief note, we review the connection between the distribution of
- the Farey fractions on the real number line, and the derivative of the
- Minkowski Question Mark function.
- We introduce a topology to give precise meaning to what it means to 
+This breif note reviews a circle of topics connecting the derivative of
+ the Minkowski question mark function, the so-clled 
+\begin_inset Quotes eld
+\end_inset 
+
+multi-fractal measures
+\begin_inset Quotes erd
+\end_inset 
+
+, the distribution of the Farey fractions, one-dimensional lattice models
+ in physics, such as the Ising model, the Potts model and the Kac model,
+ and the symmetries of the maps between the 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ topologies that underly these objects.
+ 
+\layout Abstract
+
+The question of what it means to 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -46,28 +66,26 @@ take the derivative of the question mark function
 \begin_inset Quotes erd
 \end_inset 
 
-.
- This topology is recognized to be the natural topology of many types of
- fractals, and in particular, can be considered to be the correct topology
- for discussing the closure of the hyperbolic plane.
-\layout Abstract
-
-We point out that the derivative of the question mark can also be obtained
- as the limiting behavior of a modular form.
- Modular forms are analytic functions that are closely related to elliptic
- functions, and have a particular kind of modular group symmetry.
+ is explored.
+ The natural topology of one-dimensional lattice models is reviewed.
+ It is conjectured that the derivative of the question mark may be the limiting
+ behavior of a modular form.
+ (Modular forms are analytic functions that are closely related to elliptic
+ functions, and have a particular kind of modular group symmetry).
  
 \layout Abstract
 
-In its current state, this document is at least partly a research diary
- of various results, and is oddly structured as a result.
- Results on various measures are presented as well, including results on
- the measures of fat Cantor sets of various types.
- A natural topology for exploring these measures is discussed.
+This document is mostly a research diary noting various results, and is
+ haphazardly structured.
+ 
 \layout Abstract
 
 This paper is part of a set of chapters that explore the relationship between
- the real numbers, the modular group, and fractals.
+ the real numbers, the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+, and fractals.
 \layout Section
 
 Intro
@@ -91,6 +109,11 @@ THIS IS A DRAFT WORK IN PROGRESS.
 
  with 
 \begin_inset Formula $y>0$
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Apo90}
+
 \end_inset 
 
 .
@@ -144,36 +167,20 @@ binary tree topology
  number line that confusions result.
 \layout Section
 
-Distributions of Rational Numbers
-\layout Standard
-
-In a different paper we looked at the distribution of rationals.
- Here we look at the distribution of the Farey fractions.
- These are sometimes called 
-\begin_inset Quotes erd
-\end_inset 
-
-multi-fractal measures
-\begin_inset Quotes erd
-\end_inset 
-
-.
-\layout Subsection
-
-Distribution of Rationals in the Farey Tree
+Distribution of the Rational numbers in the Farey tree
 \layout Standard
 
 One way to enumerate all of the rationals is by placing them on the Farey
- Tree (or the Stern-Brocot Tree).
- One can prove that the Farey Tree enumerates all of the rationals in the
- unit interval exactly once (Proof at 
-\begin_inset LatexCommand \htmlurl[Cut-the-Knot]{http://www.cut-the-knot.org/blue/Stern.shtml}
+ tree (or the Stern-Brocot tree).
+ It can be shown that the Farey tree enumerates all of the rationals in
+ the unit interval exactly once
+\begin_inset LatexCommand \cite{Bog96}
 
 \end_inset 
 
-).
- However, the distribution of the rationals on the Farey Tree is highly
- non-uniform, if we walk that tree breadth-first.
+.
+ However, the distribution of the rationals on the Farey tree is highly
+ non-uniform, ifthe tree is walked breadth-first.
  The figure 
 \begin_inset LatexCommand \ref{cap:Distribution-of-Farey}
 
@@ -183,10 +190,9 @@ One way to enumerate all of the rationals is by placing them on the Farey
  This distribution is highly non-uniform, and by fooling with the number
  of bins in the histogram, it becomes clear that the figure is highly discontinu
 ous.
- Remarkably, though, in a certain sense, the figure also stays uniform in
- a certain sense as the number of bins is increased: it always has this
- humped form, even though the individual spikes vary strongly according
- to the number of bins.
+ As the number of bins is increased, it becomes clear that the distribution
+ has a peculiar structure: it always has a humped form, even though the
+ individual spikes vary strongly according to the number of bins.
  
 \layout Standard
 
@@ -284,23 +290,20 @@ shape
 
 \layout Standard
 
-The other remarkable property of this curve is that in the limit of an 'infinite
-' number of bins, this 'curve' is equal to exactly zero at every rational
- 
-\begin_inset Formula $p/q$
+The shape is suggestive, and the numerical evidence makes it clear that
+ it is somehow the 
+\begin_inset Quotes eld
 \end_inset 
 
-, and infinite at every irrational.
- 
-\layout Standard
+derivative
+\begin_inset Quotes erd
+\end_inset 
 
-This shape is remarkably suggestive.
- It appears to be the derivative 
+ of the Minkowski question mark function 
 \begin_inset Formula $?'(x)=d?(x)/dx$
 \end_inset 
 
- of the continued fraction mapping, although using classical analytic techniques
-, this derivative is not definable, as the question mark is highly singular.
+.
  Performing a simple numeric integral of the above, and comparing it to
  the exact expression shows a perfect match, as witnessed in the figure
  
@@ -309,25 +312,7 @@ This shape is remarkably suggestive.
 \end_inset 
 
 .
- The Minkowski question mark is infinitely differentiable on every rational,
- and all derivatives vanish at every rational; yet the mapping is strictly
- monotonically increasing.
- Just examining the graph visually suggests that the derivatives must be
- non-zero 
-\begin_inset Quotes eld
-\end_inset 
-
-somewhere
-\begin_inset Quotes erd
-\end_inset 
-
-, although its hard to define how to value these derivatives.
- Yet, visually comparing the Farey mapping to the distribution of the Farey
- Fractions, it seems that the distribution of Farey's provides an excellent
- estimate of that first derivative.
- Clearly, classical analytic techniques are sorely lacking and inapplicable;
- we need to find a set of tools where we can talk about and manipulate the
- so-called 'first derivative' in a meaningful way.
+ 
 \layout Standard
 
 
@@ -364,6 +349,80 @@ This figure shows the sum of the bin counts of the Farey fractions, together
 
 \layout Standard
 
+The derivative of the Minkowski question mark function cannot be defined
+ using the classical analytic techniques.
+ More precisely, traditional analytic tools applied to the 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ topology of open sets on the real number line are insufficient to construct
+ and describe the shape of this curve.
+ This motivates the study of alternative topologies for the real number
+ line, which constitutes one of the research programs of this paper.
+\layout Standard
+
+When one does attempt to use classical techniques applied to the classical
+ topology, the result is a number of perposterous-sounding statements, a
+ sampling of which are given below.
+ The question mark is highly singular.
+ It is infinitely differentiable at every rational, and all derivatives
+ vanish at every rational; yet the mapping is strictly monotonically increasing.
+ Just examining the graph visually suggests that the derivatives must be
+ non-zero 
+\begin_inset Quotes eld
+\end_inset 
+
+somewhere
+\begin_inset Quotes erd
+\end_inset 
+
+, although how to define how to value these derivatives is utterly unclear.
+ Naively, they seem to be 
+\begin_inset Quotes eld
+\end_inset 
+
+infinite
+\begin_inset Quotes erd
+\end_inset 
+
+ at every irrational; but this fails to explain how to integrate.
+ 
+\layout Standard
+
+Clearly, the classical approach is sorely lacking and inapplicable; something
+ different is needed.
+ Two possibilities arise: throw away traditional ideas of integration and
+ differentiation, and replace them with something new, something sutiable
+ for fractals, or keep these tools, but throw away the 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ topology on the real number line.
+ The latter approach seems to be far more promising.
+ There are several popssible alternative topologies.
+ Most immediately obvious is the topology of the Cantor set, which is readily
+ mapped to the real number line.
+ (discussed elsewhere in this cycle of papers).
+ Less obvious, but more appropriate, is the topology of 
+\begin_inset Quotes eld
+\end_inset 
+
+cylinder sets
+\begin_inset Quotes erd
+\end_inset 
+
+ that is the natural topology for studying shifts, symbolic dynamics, and
+ one-dimensional lattice models (discussed later).
+\layout Standard
+
 The figure 
 \begin_inset LatexCommand \ref{cap:Jacobian}
 
@@ -386,8 +445,9 @@ The figure
 \emph on 
 blancmange curve
 \emph default 
-), one can intuitively sense that there must be some tangent-space-to-Exp-space
- type relation between the two.
+), one can intuitively sense that there must be a more formal relation between
+ the two, as if the values of the one function could somehow be exponentiated
+ to give the other.
  The trick is to write down this relation.
  
 \layout Standard
@@ -499,72 +559,13 @@ where
 \end_inset 
 
 
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed true
-
-\layout Caption
-
-Sigma angular cross section
-\layout Standard
-
-
-\begin_inset Graphics
-	filename div2-ang-inv.png
-	width 100text%
-
-\end_inset 
-
-
-\layout Standard
-
-This figure shows an angular cross section of a series build from the number-the
-oretic divisor function.
- Specifically, it is a graph of
-\begin_inset Formula \[
-\left|\sum_{n=1}^{\infty}\sigma_{2}(n)r^{n}e^{in\theta}\right|^{-1}\]
-
-\end_inset 
-
- for a fixed value of r=0.95 and 
-\begin_inset Formula $\theta$
-\end_inset 
-
- running from 0 to 
-\begin_inset Formula $2\pi$
-\end_inset 
-
-.
- Each tall spike represents a close approach to a zero of the divisor series.
- Here, 
-\begin_inset Formula $\sigma_{2}(n)$
-\end_inset 
-
- is an arithmetic series, specifically, the multiplicative series 
-\begin_inset Formula \[
-\sigma_{a}(n)=\sum_{d|n}d^{a}\]
-
-\end_inset 
-
- where the sum extends over the integer divisors of 
-\begin_inset Formula $n$
-\end_inset 
-
-.
-\end_inset 
-
-
 \layout Subsection
 
-Formal Treatment
+Notes 
 \layout Standard
 
-The previous section provided only a hand-waving intro.
- We need a formal treatment.
- To prove that the measure vanishes on rationals, we need to show two things:
+Some slightly formal but not very fruitful remarks follow.
+ To prove that the measure vanishes on rationals, one must show two things:
  first, that the measure vanishes near 0 (or 1), in that the the bin count
  for bin 
 \begin_inset Formula $c_{0}$
@@ -603,7 +604,7 @@ The previous section provided only a hand-waving intro.
 \end_inset 
 
 .
-\layout Subsection
+\layout Section
 
 Modular Forms
 \layout Standard
@@ -814,15 +815,83 @@ le, and thus posses well-behaved analytic properties, again allowing a kind
  of study that is ill-afforded by the histograms.
 \layout Standard
 
-The presumption that we are making here is that the derivative of the Minkowski
- question mark function will be found to be the limit of some modular form,
- although which modular form that might be is not clear at this time.
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Sigma angular cross section
+\layout Standard
+
+
+\begin_inset Graphics
+	filename div2-ang-inv.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows an angular cross section of a series build from the number-the
+oretic divisor function.
+ Specifically, it is a graph of
+\begin_inset Formula \[
+\left|\sum_{n=1}^{\infty}\sigma_{2}(n)r^{n}e^{in\theta}\right|^{-1}\]
+
+\end_inset 
+
+ for a fixed value of r=0.95 and 
+\begin_inset Formula $\theta$
+\end_inset 
+
+ running from 0 to 
+\begin_inset Formula $2\pi$
+\end_inset 
+
+.
+ Each tall spike represents a close approach to a zero of the divisor series.
+ Here, 
+\begin_inset Formula $\sigma_{2}(n)$
+\end_inset 
+
+ is an arithmetic series, specifically, the multiplicative series 
+\begin_inset Formula \[
+\sigma_{a}(n)=\sum_{d|n}d^{a}\]
+
+\end_inset 
+
+ where the sum extends over the integer divisors of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+The presumption made here is that the derivative of the Minkowski question
+ mark function will be found to be the limit of some modular form, although
+ which modular form that might be is not clear.
  The theory of modular forms is deep and broad, and will not be reviewed
- here; the following assumes a basic understanding.
+ here.
  A very synoptic overview can be found in the article on elliptic functions
  in Wikipedia.
- An in-depth exposition can be found in the book by Apostol.
-\layout Subsection
+ There are many deep expositions on the topic
+\begin_inset LatexCommand \cite{Apo90}
+
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Ran77}
+
+\end_inset 
+
+.
+\layout Section
 
 A Binary Tree Topology
 \layout Standard
@@ -883,9 +952,8 @@ The topology differs from that of the canonical Cantor set: in that case,
  becomes a perfect set.
 \layout Standard
 
-The point of introducing this binary tree topology is in order to give a
- more precise footing for much of the rest of the discussion.
- In particular, we are interested in constructing measures on this topology.
+The point of introducing this binary tree topology is ....
+ Task: construct measures on this topology.
 \layout Standard
 
 Several remarks are in order.
@@ -909,8 +977,8 @@ make sense
  In particular, such measures can make well-defined integrals and the like.
 \layout Standard
 
-In particular, we are interested in measures that are functions of, and
- possibly holomorphic functions of the dyadic expansion.
+Of interest are measures that are functions of, and possibly holomorphic
+ functions, of the dyadic expansion.
  That is, consider the series 
 \begin_inset Formula $\{ b_{k}:b_{k}\in\{0,1\},\, k\in\mathbb{N}\}$
 \end_inset 
@@ -941,13 +1009,13 @@ x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equatio
 \layout Standard
 
 Because this topology is finer than the usual topology on the real number
- line, we can define functions on this topology that would be ill-defined
+ line, one can define functions on this topology that would be ill-defined
  when considered on the real number line: in particular, the three points
  above map to just one point on the real numbers.
  However, it should be painfully clear at this point that this topology
- is the appropriate topology for discussing the structure of fractals.
- It should also be clear that this is the correct topology in which to discuss
- the closure of the upper half-plane when discussion the limiting behavior
+ is compatible with the discussion the structure of dyadic fractals.
+ It should also be clear that this topology is compatible with discussions
+ of the closure of the upper half-plane when considering the limiting behavior
  of modular forms, Fuchsian groups, and ergodic processes.
 \layout Standard
 
@@ -959,7 +1027,23 @@ As an example, consider the Takagi curve.
  the only ambiguity is on the interior nodes of the tree.
  Furthermore, the interior nodes of the tree are a countable set, whereas
  the leaves are uncountable.
- This implies that the derivative of the Takagi curve is in fact defined
+ 
+\layout Standard
+
+XXX Discuss 
+\begin_inset Quotes eld
+\end_inset 
+
+fat cantor set
+\begin_inset Quotes erd
+\end_inset 
+
+, i.e.
+ a measure which puts all of the measure on the leaves ot the tree.
+ 
+\layout Standard
+
+This implies that the derivative of the Takagi curve is in fact defined
  
 \begin_inset Quotes eld
 \end_inset 
@@ -1007,21 +1091,30 @@ what sort of easy to manipulate, easy to handle expressions for this measure
 .
 \layout Standard
 
-XXXX ToDo: discuss the binary tree topology in greater detail, incl the
- separation axioms, etc.
- Also compare this topology to the topology of 
+XXXX ToDo: review standard topological notions for the binary tree topology
+ in greater detail, such as separation axioms, bases, metrics, continuity,
+ differentiability.
+ etc.
+ Note that finer topologies typically have fewer continuous, smooth functions
+ than coarse topologies.
+ Since this is finer than the 
 \begin_inset Quotes eld
 \end_inset 
 
-cylinder sets
+natural
 \begin_inset Quotes erd
 \end_inset 
 
- that is used in discussing subshifts of finite type, Bernoulli processes
- etc.
- These topologies are similar but have many odd differences.
- Best to be clear as a bell here.
- 
+ topology on the reals, who are the loosers?
+\layout Section
+
+Shifts
+\layout Standard
+
+By Shifts I mean anything with ...
+ whatever.
+\layout Standard
+
 \layout Standard
 
 
