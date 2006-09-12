@@ -1,3 +1,4 @@
+#! /usr/bin/gnuplot
 
 # set term x11
 # set term gif size 640,480
@@ -5,9 +6,7 @@
 
 # set term png small
 set term png giant size 800,600
-set out 'ising.png'
-# set term postscript
-# set out 'ising.ps'
+set out 'ising-config-energy.png'
 
 set style line 3
 
@@ -20,15 +19,19 @@ set key right
 # set xrange [-1:1]
 # set yrange [-1:1]
 
-set title " sss"
-set xlabel "s"
-set ylabel "s)"
+set title "Ising Model Configuration Energy"
+set xlabel "State Number"
+set ylabel "Energy"
 
-plot "ising.dat" using 2:3 title "inter", \
-     "ising.dat" using 2:4 title "ener"
+plot "ising.dat" using 2:3 title "Interaction energy", \
+     "ising.dat" using 2:4 title "Configuration energy"
 
-set out 'iising.png'
-plot "ising.dat" using 2:5 title "inter"
+set out 'ising-integral.png'
+set title "Ising Model Cumulative Partition"
+set xlabel "State Number"
+set ylabel "Cumulative Measure"
+
+plot "ising.dat" using 2:5 title ""
 
 
 # pause 100

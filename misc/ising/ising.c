@@ -13,11 +13,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Nearest neighbor interaction */
-/* Given a string 's' encoding the a given state, 
- * return the interaction energy associated with that 
- * state space.
+/* Interaction functions: Given a string 's' encoding 
+ * a given state, return the interaction energy associated 
+ * with that state. The string is represented as a real
+ * number between zero and one: it is the string of binary 
+ * bits of the expansion of the real in binary.
  */
+
+/* Nearest neighbor interaction */
 double nearest_neighbor (double s)
 {
 	double s0,s1;
@@ -103,7 +106,7 @@ double energy (double (*interaction)(double), double s, int n)
 	return en;
 }
 
-/* compute finite state partition */
+/* Compute finite state partition */
 
 double partition (double (*interaction)(double), int n)
 {
@@ -141,9 +144,9 @@ main (int argc, char * argv[])
 	n = atoi (argv[1]);
 
 	printf ("#\n# n=%d\n#\n",n);
-	// partition (nearest_neighbor, n);
+	partition (nearest_neighbor, n);
 	// partition (pabola, n);
-	partition (tent, n);
+	// partition (tent, n);
 	// partition (kac, n);
 	// partition (pointy, n);
 }
