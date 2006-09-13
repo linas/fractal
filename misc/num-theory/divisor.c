@@ -13,6 +13,7 @@
 #include <stdio.h>
 
 #include "harmonic.h"
+#include "moebius.h"
 #include "modular.h"
 
 int main ()
@@ -21,6 +22,9 @@ int main ()
 
 	long long int nmax = 10000000000ll;
 	int scale = 10000000;
+
+	nmax = 250;
+	scale=1;
 
 	long double sum = 0.0L;
 	long double inf = 1.0e100;
@@ -44,10 +48,11 @@ int main ()
 			long double lead = sum;
 			lead = i * logl(i) + 2.0*i*(M_GAMMA -1.0L);
 			// lead -= i;
-			// int d = sigma (i,1);
+			d = sigma (i,3);
+			printf ("%Ld	%d	%26.18Lg\n", i, d, sum);
 			// printf ("%Ld	%d	%26.18Lg\n", i, d, sum-lead);
-			printf ("%Ld	%d	%26.18Lg\n", i, d, inf);
-			printf ("%Ld	%d	%26.18Lg\n", i, d, sup);
+			// printf ("%Ld	%d	%26.18Lg\n", i, d, inf);
+			// printf ("%Ld	%d	%26.18Lg\n", i, d, sup);
 			inf= 1.0e100;
 			sup=-1.0e100;
 			fflush (stdout);
