@@ -10,9 +10,11 @@
 #include <stdio.h>
 #include "binomial.h"
 
-main()
+main(int argc, char * argv[])
 {
 	int n=30;
+
+	n = atoi (argv[1]);
 
 	int k;
 	for (k=1; k<=n; k++)
@@ -21,6 +23,8 @@ main()
 		int p = n/g;
 		int q = k/g;
 		double b = fbinomial (p,q);
+		double norm = fbinomial (p, p/2);
+		b = b/norm;
 		double x = ((double)q)/((double)p);
 		printf ("%g	%d	%d	%g\n", x, q,p,b);
 	}
