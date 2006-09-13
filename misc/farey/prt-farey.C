@@ -15,5 +15,7 @@ main (int argc, char * argv[])
 	
 	ContinuedFraction cf;
 	cf.SetRatio (num,deno);
-	cf.Print ();
+	double x = cf.ToFarey ();
+	printf ("its %g\n", x);
+	// cf.Print ();
 }
