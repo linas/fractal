@@ -31,17 +31,19 @@ void GetNextDyadic (unsigned int *n, unsigned int *d)
 }
 
 
-void bincount(int nbins, int max)
+void bincount(int nbins, int depth)
 {
 	int i;
 
-	printf ("#\n# nbins=%d   maxiter=%d\n#\n",nbins,max);
+	int max = 1 << depth;
+	printf ("#\n# nbins=%d   tree depth=%d\n#\n",nbins,depth);
+	printf ("# Legend:\n");
+	printf ("# i, x, bin_cnt, bin_cnt_sum, exact_farey\n");
 
 	FareyIterator fi;
 
-#define BINSZ 45400
-	int bin[BINSZ];
-	for (i=0; i<BINSZ; i++)
+	int *bin = (int *) malloc (nbins * sizeof (int));
+	for (i=0; i<nbins; i++)
 	{
 		bin[i] = 0;
 	}
@@ -66,31 +68,41 @@ void bincount(int nbins, int max)
 	/* Compute the integral of the distribution */
    ContinuedFraction f;
 	double gral = 0.0;
+	double dgral = 0.0;
+	double sqgral = 0.0;
+	double fprev = 0.0;
 	for (i=0; i<nbins; i++)
 	{
-		double bcnt = bin[i];
-		bcnt /= (double) cnt;
-		gral += bcnt;
-		bcnt *= nbins;
+		double rect = bin[i] / ((double) cnt);
+		gral += rect;
+		double bcnt = rect * nbins;
+
+		sqgral += rect*bcnt;
+		
 		double x = ((double) i) / ((double) nbins);
 
    	f.SetRatio (2*i+1, 2*nbins);
    	double far = f.ToFarey (); 
 
-		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bcnt, gral, far);
+		double delt = far - fprev;
+
+		if (1.0e-8 < delt) dgral += rect / delt;
+
+		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bcnt, gral, far, dgral, sqgral);
+		fprev = far;
 	}
 }
 
 void 
-gmp_bincount(int nbins, int max)
+gmp_bincount(int nbins, int depth)
 {
 	int i;
 
-	printf ("#\n# nbins=%d   maxiter=%d\n#\n",nbins,max);
+	int max = 1 << depth;
+	printf ("#\n# nbins=%d   tree depth=%d\n#\n",nbins,depth);
 
-#define BINSZ 45400
-	int bin[BINSZ];
-	for (i=0; i<BINSZ; i++)
+	int *bin = (int *) malloc (nbins * sizeof (int));
+	for (i=0; i<nbins; i++)
 	{
 		bin[i] = 0;
 	}
@@ -148,13 +160,13 @@ main(int argc, char *argv[])
 
 	if (argc <2)
 	{
-		fprintf (stderr, "Usage: %s <nbins> <maxiter>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <nbins> <tree-depth>\n", argv[0]);
 		exit (1);
 	}
 	int nbins = atoi (argv[1]);
-	int max = atoi (argv[2]);
+	int depth = atoi (argv[2]);
 
-	// bincount (nbins, max);
-	gmp_bincount (nbins, max);
+	bincount (nbins, depth);
+	// gmp_bincount (nbins, depth);
 }
 

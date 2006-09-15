@@ -1,8 +1,4 @@
 
-# set term x11
-# set term gif size 640,480
-# set out 'read.gif'
-
 # set term png small color
 set term png small
 set out 'fdist.png'
@@ -19,7 +15,13 @@ set ylabel "Probability (Normalized Bin Count)"
 
 # plot "fdist.dat" using 2:3 title ""
 # plot "fdist.dat" using 5:3 title ""
-plot "fdist.dat" using 2:4 title ""
+# plot "fdist.dat" using 2:4 title ""
+# plot "fdist.dat" using 4:3 title ""
+# plot "fdist.dat" using 2:4 title "sum", \
+#      "fdist.dat" using 2:5 title "exact"
+
+plot "fdist.dat" using ($6/132456):5 title "whack integral", \
+     "fdist.dat" using 2:5 title "exact"
 
 # pause 100
 
