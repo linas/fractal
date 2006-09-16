@@ -30,7 +30,7 @@ ContinuedFraction::ContinuedFraction (void)
 
    scratch = 0x0;
 
-#ifdef LINUX
+#ifdef LINUX_XXX
    /* block floating point exceptions */
    sigsetmask (0x180);
 #endif /* LINUX */
@@ -60,14 +60,15 @@ ContinuedFraction::SetRatio (int n, int d)
 void 
 ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
 {
-   double tmp;
    int i;
    unsigned int n, d, m;
 
-   real = ((double) numer) / ((double) deno);
-   intpart = numer / deno;
-   if (0.0 > real) intpart--;
-   numer -= deno * intpart;
+	if (numer > deno) {
+   	real = ((double) numer) / ((double) deno);
+   	intpart = (int) floor (real);
+   	// if (0.0 > real) intpart--;
+   	numer -= deno * intpart;
+	}
    num = numer;
    denom = deno;
 
@@ -126,7 +127,7 @@ void
 ContinuedFraction::RealToContinuedFraction (double val)
 {
    double tmp;
-   unsigned int n, d, m;
+   unsigned int n, d;
 
    real = val;
    /* first, compute the integer and fractional parts of the real 
@@ -219,6 +220,7 @@ ContinuedFraction::GetConvNum (int n)
 	if (0 == n) return intpart;
 
 	int a,am,amm;
+	a = 1;
 	amm = 1;
 	am = intpart;
 	int i;
@@ -227,7 +229,6 @@ ContinuedFraction::GetConvNum (int n)
 		a = tinued_frac[i]*am + amm;
 		amm = am;
 		am = a;
-		
 	}
 	return a;
 }
@@ -241,6 +242,7 @@ ContinuedFraction::GetConvDenom (int n)
 	if (0 == n) return 1;
 
 	int a,am,amm;
+	a = 1;
 	amm = 0;
 	am = 1;
 	int i;
@@ -276,8 +278,8 @@ ContinuedFraction::ToFarey (void)
 	}
 
    /* twidle the first bit */
+   first_term = tinued_frac[0];
    if (num != 0) {
-      first_term = tinued_frac[0];
       tinued_frac[0] -= 1;
    }
    
@@ -331,7 +333,7 @@ ContinuedFraction::ToFarey (void)
 double 
 ContinuedFraction::ToPAdicFarey (int prime)
 {
-   int i, j, k;
+   int j, k;
 	int v;
 	double acc, val, base, pos;
 
@@ -1114,7 +1116,7 @@ omega *= 2.0 * M_PI;
 double 
 ContinuedFraction::ToZCnReal (double omega, double zzz)
 {
-   int i, j, k, n;
+   int i, n;
    double tmp;
    double retval;
    double fomega;
@@ -1149,7 +1151,7 @@ ContinuedFraction::ToZCnReal (double omega, double zzz)
 double 
 ContinuedFraction::ToZSnReal (double omega, double zzz)
 {
-   int i, j, k, n;
+   int i, n;
    double tmp;
    double retval;
    double fomega;
@@ -1250,7 +1252,6 @@ ContinuedFraction::CFSum (ContinuedFraction *other,
    double eval;
    double znum;
    int minterms, maxterms;
-   ContinuedFraction *tmp;
 
    znum = alpha * (double) intpart;
    znum += beta * ((double) (other->intpart));
@@ -1299,8 +1300,7 @@ ContinuedFraction::CFProd (ContinuedFraction *other,
    int i;
    double eval;
    double znum;
-   int minterms, maxterms;
-   struct Farey *tmp;
+   int minterms;
 
    znum = alpha * (double) intpart;
    znum += beta * ((double) (other->intpart));

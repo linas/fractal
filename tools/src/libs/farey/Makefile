@@ -11,7 +11,7 @@ INC = $(TOP)/inc
 
 # CC = /bin/cc -O2 -O -I $(INC) -DAIXV3
 # CC = /bin/fcc -f2 -O -I $(INC)
-CC = cc -Wall -O2 -I $(INC) -DANSI_C -DLINUX
+CC = cc -Wall -g -O2 -I $(INC) -DANSI_C -DLINUX
 
 RM= rm -f
 
