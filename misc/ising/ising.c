@@ -128,34 +128,26 @@ double partition (double (*interaction)(double), int n)
 	int i;
 
 	double om = 1.0 / ((double) m);
+	double delta = om;
 	double sprev = 0.0;
 	
 	for (i=1; i<m; i++)
 	{
-#ifdef USE_MIDPOINTS /* proivides not accuract improvement */
-		double x = om * (((double) i)+0.5); /* midpopint */
-
-		double y = question_mark (2*i+1,2*m);  /* midpoint */
-		double s = question_mark (i,m);
-#endif
-
 		double x = om * ((double) i);
 		double y = question_mark (i,m);
-		double s = y;
 		
-		double en = energy (interaction, y, n);
+		double en = energy (interaction, x, n);
 		
-		double delta = s-sprev;
 		z += delta * en;
 		// ez += delta* exp (en);
 
 		// en = exp (en);
 		if (i%prt == 0) {
-			printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, y, interaction(s), en, z);
+			printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, y, interaction(x), en, z);
 			fflush (stdout);
 		}
 
-		sprev = s;
+		// sprev = s;
 	}
 
 	printf ("# partition=%g\n", z);
