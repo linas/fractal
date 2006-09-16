@@ -88,7 +88,8 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
          n = m;
    
          /* if ((d>>30)>n)  */
-         if ((d>>cutoff)>n) {
+         /* if ((d/0x7fffffff)>n) */
+         if ((d>>cutoff)>n) { 
             n = 0;   /* clamp for "virtually zero" */
             if (tinued_frac [i] == 1) {
                if (i != 0) {
