@@ -5,23 +5,38 @@ set out 'fdist.png'
 
 # set data style linespoints
 set data style lines
-set key right
+set key left
 
-set title "Distribution of Farey Numbers"
-set xlabel "?(p/q)"
-set ylabel "Probability (Normalized Bin Count)"
+# used to generate the graaph in the text
+# set title "Distribution of Farey Numbers"
+# set xlabel "?(p/q)"
+# set ylabel "Probability (Normalized Bin Count)"
+# plot "fdist.dat" using 2:4 title "sum", \
+#      "fdist.dat" using 2:5 title "exact"
+
+# used to generate the graaph in the text
+# set title "Integral of ?'(?^-1 (x))"
+# set xlabel ""
+# set ylabel "Integral"
+# plot "fdist.dat" using 5:($7/132456) title "integral", \
+#     "fdist.dat" using 5:2 title "?^-1 (x)"
+# 
+# plot "fdist.dat" using 5:($7/760033) title "integral", \
+#     "fdist.dat" using 5:2 title "?^-1 (x)"
 
 # set yrange [0:]
 
 # plot "fdist.dat" using 2:3 title ""
 # plot "fdist.dat" using 5:3 title ""
-# plot "fdist.dat" using 2:4 title ""
+
+plot "fdist.dat" using 2:($6/0.582685) title "pow", \
+     "fdist.dat" using 2:5 title "exact"
+
 # plot "fdist.dat" using 4:3 title ""
 # plot "fdist.dat" using 2:4 title "sum", \
 #      "fdist.dat" using 2:5 title "exact"
 
-plot "fdist.dat" using ($6/132456):5 title "whack integral", \
-     "fdist.dat" using 2:5 title "exact"
 
-# pause 100
+# plot "fdist.dat" using 2:($6/132456) title "integral", \
+#	"fdist.dat" using 5:($7/6.26011) title "sqint"
 

@@ -31,7 +31,7 @@ void GetNextDyadic (unsigned int *n, unsigned int *d)
 }
 
 
-void bincount(int nbins, int depth)
+void bincount(int nbins, int depth, double exponent)
 {
 	int i;
 
@@ -39,6 +39,7 @@ void bincount(int nbins, int depth)
 	printf ("#\n# nbins=%d   tree depth=%d\n#\n",nbins,depth);
 	printf ("# Legend:\n");
 	printf ("# i, x, bin_cnt, bin_cnt_sum, exact_farey\n");
+	fflush (stdout);
 
 	FareyIterator fi;
 
@@ -68,15 +69,21 @@ void bincount(int nbins, int depth)
 	/* Compute the integral of the distribution */
    ContinuedFraction f;
 	double gral = 0.0;
+	double egral = 0.0;
 	double dgral = 0.0;
 	double sqgral = 0.0;
 	double fprev = 0.0;
 	for (i=0; i<nbins; i++)
 	{
+		/* gral is the ordinary integral of the bin count */
 		double rect = bin[i] / ((double) cnt);
 		gral += rect;
-		double bcnt = rect * nbins;
 
+		/* raise the function to some power ... */
+		double bcnt = rect * nbins;
+		egral += pow (bcnt, exponent) / ((double) nbins);
+		
+		/* square */
 		sqgral += rect*bcnt;
 		
 		double x = ((double) i) / ((double) nbins);
@@ -84,11 +91,13 @@ void bincount(int nbins, int depth)
    	f.SetRatio (2*i+1, 2*nbins);
    	double far = f.ToFarey (); 
 
-		double delt = far - fprev;
+		/* Integral of the jacobian */
+		double delt = (far - fprev)*nbins;
 
 		if (1.0e-8 < delt) dgral += rect / delt;
 
-		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bcnt, gral, far, dgral, sqgral);
+		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bcnt, gral, far, egral, dgral, sqgral);
+		fflush (stdout);
 		fprev = far;
 	}
 }
@@ -158,15 +167,16 @@ main(int argc, char *argv[])
 {
 	int i;
 
-	if (argc <2)
+	if (argc <3)
 	{
-		fprintf (stderr, "Usage: %s <nbins> <tree-depth>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <nbins> <tree-depth> <pow>\n", argv[0]);
 		exit (1);
 	}
 	int nbins = atoi (argv[1]);
 	int depth = atoi (argv[2]);
+	double exponent = atof (argv[3]);
 
-	bincount (nbins, depth);
+	bincount (nbins, depth, exponent);
 	// gmp_bincount (nbins, depth);
 }
 
