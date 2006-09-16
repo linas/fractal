@@ -45,7 +45,10 @@ double pabola (double s)
 
 double tent (double s)
 {
-	return (s>0.5)? 2.0*s : 2.0*(1.0-s);
+	// double en = (s>0.5)? 2.0*s : 2.0*(1.0-s);
+	double en = (s>0.5)? 2.0*(1.0-s) : 2.0*s;
+	en -= 0.5;
+	return 1.0*en;
 }
 
 // The farey/isola map
@@ -110,6 +113,7 @@ double energy (double (*interaction)(double), double s, int n)
 
 double partition (double (*interaction)(double), int n)
 {
+	double ez = 0.0;
 	double z = 0.0;
 
 	int m = 1<<n;
@@ -122,7 +126,8 @@ double partition (double (*interaction)(double), int n)
 
 		double en = energy (interaction, s, n);
 
-		z += om * exp (en);
+		ez += om * exp (en);
+		z += om * en;
 
 		printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g\n", i, s, interaction(s), en, z);
 	}
@@ -144,9 +149,9 @@ main (int argc, char * argv[])
 	n = atoi (argv[1]);
 
 	printf ("#\n# n=%d\n#\n",n);
-	partition (nearest_neighbor, n);
+	// partition (nearest_neighbor, n);
 	// partition (pabola, n);
-	// partition (tent, n);
+	partition (tent, n);
 	// partition (kac, n);
 	// partition (pointy, n);
 }
