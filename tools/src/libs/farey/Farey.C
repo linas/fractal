@@ -73,11 +73,11 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
    denom = deno;
 
    /* Next, compute the continued fraction of the ratio */
-   for (i=0; i<32; i++) tinued_frac[i] = 0;
+   for (i=0; i<CONTINUED_FRAC_MAX_TERMS; i++) tinued_frac[i] = 0;
    n = num;
    d = denom;
    if (n != 0) {
-      for (i=0; i<32; i++) {
+      for (i=0; i<CONTINUED_FRAC_MAX_TERMS-1; i++) {
          m = d/n;     
          tinued_frac [i] = m;
          /* printf (" term %d  denom = %d num = %d termval = %d ",i, d, n, m); */
@@ -90,6 +90,7 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
          /* if ((d>>30)>n)  */
          /* if ((d/0x7fffffff)>n) */
          if ((d>>cutoff)>n) { 
+		printf ("# duude clamp cut=%d sh=%d i=%d n=%d d=%d\n", cutoff, (d>>cutoff), i,n,d);
             n = 0;   /* clamp for "virtually zero" */
             if (tinued_frac [i] == 1) {
                if (i != 0) {
@@ -117,7 +118,7 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
    }
 
    /* lets count the number of terms */
-   for (i=0; i<32; i++) if (tinued_frac[i] == 0) break;
+   for (i=0; i<CONTINUED_FRAC_MAX_TERMS; i++) if (tinued_frac[i] == 0) break;
    nterms = i;
    tinued_frac[i+1] = 0;
 }
@@ -194,7 +195,7 @@ ContinuedFraction::GetTerm (int n)
 void 
 ContinuedFraction::SwapTerms (int p, int q)
 {
-	if ((1>p) || (1>q) || (32<=p) || (32<=q))return;
+	if ((1>p) || (1>q) || (CONTINUED_FRAC_MAX_TERMS<=p) || (CONTINUED_FRAC_MAX_TERMS<=q))return;
 	p--;
 	q--;
 	if (p>= nterms) 
@@ -296,7 +297,7 @@ ContinuedFraction::ToFarey (void)
    f = 0;
    o = 0x80000000;
    j = 0;
-   for (i=0; i<32;) {
+   for (i=0; i<CONTINUED_FRAC_MAX_TERMS;) {
       if (j%2==0) {
          o >>= tinued_frac[j];
          /* printf (" tin = %d, o= 0x%x \n", tinued_frac[j], o); */

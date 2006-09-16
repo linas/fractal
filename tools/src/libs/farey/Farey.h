@@ -18,7 +18,7 @@
 // template<> class complex<double>;
 #define Complex complex<double>
 
-#define CONTINUED_FRAC_MAX_TERMS 32
+#define CONTINUED_FRAC_MAX_TERMS 36
 
 class ContinuedFraction
 {
@@ -107,7 +107,7 @@ class ContinuedFraction
 		/* Numerator and denominator of partial convergents */
 		// mpz_t p_convergent[CONTINUED_FRAC_MAX_TERMS];
 		// mpz_t q_convergent[CONTINUED_FRAC_MAX_TERMS];
-      double partial[32];   /* scratch area of partial values */
+      double partial[CONTINUED_FRAC_MAX_TERMS];   /* scratch area of partial values */
       ContinuedFraction *scratch;
 };
 
