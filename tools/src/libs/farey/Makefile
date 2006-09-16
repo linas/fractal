@@ -16,10 +16,10 @@ CC = cc -Wall -O2 -I $(INC) -DANSI_C -DLINUX
 RM= rm -f
 
 all: inc bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o harmonic.o \
-	modular.o moebius.o Prime.o totient.o
+	modular.o moebius.o Prime.o question.o totient.o
 
 inc:	bernoulli.h binomial.h Farey.h FareyTree.h gcf.h harmonic.h \
-	modular.h moebius.h Prime.h totient.h
+	modular.h moebius.h Prime.h question.h totient.h
 	touch inc
 	cp bernoulli.h $(INC)/bernoulli.h
 	cp binomial.h $(INC)/binomial.h
@@ -30,6 +30,7 @@ inc:	bernoulli.h binomial.h Farey.h FareyTree.h gcf.h harmonic.h \
 	cp moebius.h $(INC)/moebius.h
 	cp modular.h $(INC)/modular.h
 	cp Prime.h $(INC)/Prime.h
+	cp question.h $(INC)/question.h
 	cp totient.h $(INC)/totient.h
 
 bernoulli.o:	bernoulli.c bernoulli.h
@@ -91,6 +92,12 @@ Prime.o:	Prime.c Prime.h
 	cp Prime.o $(LIB)/Prime.o
 	rm Prime.o
 	touch Prime.o
+
+question.o:	question.C question.h
+	$(CC) -c question.C
+	cp question.o $(LIB)/question.o
+	rm question.o
+	touch question.o
 
 totient.o:	totient.c totient.h
 	$(CC) -c totient.c

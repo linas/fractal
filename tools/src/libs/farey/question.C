@@ -14,10 +14,12 @@ static ContinuedFraction work;
 
 double question_mark (int num, int denom)
 {
-	return 0.0;
+	work.SetRatio (num,denom);
+	return work.ToFarey ();
 }
 
 double fquestion_mark (double x)
 {
-	return 0.0;
+	work.SetReal (x);
+	return work.ToFarey ();
 }
