@@ -395,8 +395,7 @@ ContinuedFraction::ToReal (void)
    }
 
    real += tmp;
-   return (real);
-
+   return real;
 }
 
 /* ------------------------------------------------------------ */
