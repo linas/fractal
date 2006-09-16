@@ -93,7 +93,7 @@ Prime.o:	Prime.c Prime.h
 	rm Prime.o
 	touch Prime.o
 
-question.o:	question.C question.h
+question.o:	question.C question.h Farey.h
 	$(CC) -c question.C
 	cp question.o $(LIB)/question.o
 	rm question.o
