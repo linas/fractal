@@ -118,25 +118,35 @@ double partition (double (*interaction)(double), int n)
 	double ez = 0.0;
 	double z = 0.0;
 
-	int m = 1<<n;
+	int m = (1<<n) + 11;
 	int i;
 
 	double om = 1.0 / ((double) m);
 	double sprev = 0.0;
 	
-	for (i=1; i<=m; i++)
+	for (i=0; i<m; i++)
 	{
-		// double s = om * ((double) i);
-		//
+#ifdef USE_MIDPOINTS /* proivides not accuract improvement */
+		double x = om * (((double) i)+0.5); /* midpopint */
+
+		double y = question_mark (2*i+1,2*m);  /* midpoint */
 		double s = question_mark (i,m);
+#endif
 
-		double en = energy (interaction, s, n);
+		double x = om * ((double) i);
+		double y = question_mark (i,m);
+		double s = y;
+		
+		double en = energy (interaction, y, n);
+		
+		double delta = s-sprev;
+		z += delta * en;
+		// ez += delta* exp (en);
 
-		om = 1.0 / (s-sprev);
-		ez += om * exp (en);
-		z += om * en;
+		// en = exp (en);
+		if (i%(m/1000) == 3)
+			printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, y, interaction(s), en, z);
 
-		printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g\n", i, s, interaction(s), en, z);
 		sprev = s;
 	}
 
@@ -159,7 +169,7 @@ main (int argc, char * argv[])
 	printf ("#\n# n=%d\n#\n",n);
 	// partition (nearest_neighbor, n);
 	// partition (pabola, n);
-	partition (tent, n);
+	// partition (tent, n);
 	// partition (kac, n);
-	// partition (pointy, n);
+	partition (pointy, n);
 }

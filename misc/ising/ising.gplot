@@ -24,15 +24,20 @@ set title "Tent Model Configuration Energy"
 set xlabel "State Number"
 set ylabel "Energy"
 
-plot "ising.dat" using 2:3 title "Interaction energy", \
-     "ising.dat" using 2:4 title "Configuration energy"
+plot "ising.dat" using 2:4 title "Interaction energy", \
+     "ising.dat" using 2:5 title "Configuration energy"
 
 set out 'ising-integral.png'
 set title "Ising Model Cumulative Partition"
 set xlabel "State Number"
 set ylabel "Cumulative Measure"
 
-plot "ising.dat" using 2:5 title ""
+# plot "ising.dat" using 3:($6/8.10612)  title "Ising", \
+#     "ising.dat" using 3:3 title "question"
+
+# plot "ising.dat" using 3:(($6/8.10612)-$3)  title "22 bits"
+# plot "ising.dat" using 3:(($6/6.63281)-$3)  title "18 bits"
+plot "ising.dat" using 3:(($6/6.47497)-$3)  title "18 mids bits"
 
 
 # pause 100
