@@ -105,8 +105,8 @@ class ContinuedFraction
                              * that have even number of terms */
 
 		/* Numerator and denominator of partial convergents */
-		// mpz_t p_convergent[CONTINUED_FRAC_MAX_TEMRS];
-		// mpz_t q_convergent[CONTINUED_FRAC_MAX_TEMRS];
+		// mpz_t p_convergent[CONTINUED_FRAC_MAX_TERMS];
+		// mpz_t q_convergent[CONTINUED_FRAC_MAX_TERMS];
       double partial[32];   /* scratch area of partial values */
       ContinuedFraction *scratch;
 };
