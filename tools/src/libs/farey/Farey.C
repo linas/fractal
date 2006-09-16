@@ -82,9 +82,9 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
       for (i=0; i<CONTINUED_FRAC_MAX_TERMS-2; i++) {
          m = d/n;     
          tinued_frac [i] = m;
-         /* printf (" term %d  denom = %d num = %d termval = %d ",i, d, n, m); */
+         // printf (" term %d  denom = %d num = %d termval = %d ",i, d, n, m); 
          d -= m*n;
-         /* printf ("rem = %d \n", d); */
+         // printf ("rem = %d \n", d);
          m = d;
          d = n;
          n = m;
@@ -294,34 +294,34 @@ ContinuedFraction::ToFarey (void)
    printf ("\n\n");
    */
 
-   /* now, build the binary rep of the Farey number */
+   /* Now, build the binary rep of the Farey number */
    f = 0;
    o = 0x80000000;
    j = 0;
-   for (i=0; i<CONTINUED_FRAC_MAX_TERMS;) {
+   for (i=0; i<32;) {
       if (j%2==0) {
          o >>= tinued_frac[j];
-         /* printf (" tin = %d, o= 0x%x \n", tinued_frac[j], o); */
+         // printf (" j=%d tin = %d, o= 0x%x \n", j, tinued_frac[j], o);
       } else {
          for (k=0; k<tinued_frac[j]; k++) {
             f |= o;
             o >>= 1;
          }
       }
-      /* printf (" tin = %d f = 0x%x \n", tinued_frac[j], f); */
+      // printf ("j=%d tin = %d f = 0x%x \n", j, tinued_frac[j], f);
       i += tinued_frac[j];
       j++;
       if (tinued_frac[j] == 0) break;
    }
 
-   /* finally, convert the farey number to floating point rep */
+   /* Finally, convert the farey number to floating point rep */
    tmp = 1.0 / (double) 0x7fffffff;
    tmp *= 0.5;   /* since 0xffffffff hangs up on minus sign */
    tmp *= (double) f;
 
    tmp += (double) intpart;
 
-   /* reset the first term */
+   /* Reset the first term */
    tinued_frac[0] = first_term;
 
    return (tmp);
@@ -387,7 +387,7 @@ ContinuedFraction::ToReal (void)
    real = tmp;
    if (nterms == 0) return (tmp);
 
-   /* now, work backwards and reconstruct the fraction. */
+   /* Now, work backwards and reconstruct the fraction. */
    tmp = 1.0 / ((double) tinued_frac[nterms-1]);
    for (i=nterms-2; i>=0; i--) {
       tmp += (double) tinued_frac[i];
