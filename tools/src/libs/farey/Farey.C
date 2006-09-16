@@ -26,7 +26,7 @@
 ContinuedFraction::ContinuedFraction (void)
 {
    real = 0.0;
-   cutoff = 0x7fffffff;
+   cutoff = 29;
 
    scratch = 0x0;
 
@@ -87,8 +87,8 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
          d = n;
          n = m;
    
-         /* if (d/32>n)  */
-         if (d/cutoff>n) {
+         /* if ((d>>30)>n)  */
+         if ((d>>cutoff)>n) {
             n = 0;   /* clamp for "virtually zero" */
             if (tinued_frac [i] == 1) {
                if (i != 0) {
@@ -141,9 +141,9 @@ ContinuedFraction::RealToContinuedFraction (double val)
    n = (int) tmp;
 
    /* avoid rounding problems for floating point numbers */
-   cutoff = 54321;
+   cutoff = 20;
    RatioToContinuedFraction (n, d);
-   cutoff = 0x7fffffff;
+   cutoff = 29;
 
    intpart = (int) val;
    if (0.0 > val) intpart--;
