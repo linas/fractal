@@ -72,12 +72,14 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
    num = numer;
    denom = deno;
 
-   /* Next, compute the continued fraction of the ratio */
    for (i=0; i<CONTINUED_FRAC_MAX_TERMS; i++) tinued_frac[i] = 0;
+
+   /* Next, compute the continued fraction of the ratio */
    n = num;
    d = denom;
    if (n != 0) {
-      for (i=0; i<CONTINUED_FRAC_MAX_TERMS-1; i++) {
+		/* go to max-2, so that evenize has room */
+      for (i=0; i<CONTINUED_FRAC_MAX_TERMS-2; i++) {
          m = d/n;     
          tinued_frac [i] = m;
          /* printf (" term %d  denom = %d num = %d termval = %d ",i, d, n, m); */
@@ -90,7 +92,6 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
          /* if ((d>>30)>n)  */
          /* if ((d/0x7fffffff)>n) */
          if ((d>>cutoff)>n) { 
-		printf ("# duude clamp cut=%d sh=%d i=%d n=%d d=%d\n", cutoff, (d>>cutoff), i,n,d);
             n = 0;   /* clamp for "virtually zero" */
             if (tinued_frac [i] == 1) {
                if (i != 0) {
@@ -118,7 +119,7 @@ ContinuedFraction::RatioToContinuedFraction (int numer, int deno)
    }
 
    /* lets count the number of terms */
-   for (i=0; i<CONTINUED_FRAC_MAX_TERMS; i++) if (tinued_frac[i] == 0) break;
+   for (i=0; i<CONTINUED_FRAC_MAX_TERMS-2; i++) if (tinued_frac[i] == 0) break;
    nterms = i;
    tinued_frac[i+1] = 0;
 }
