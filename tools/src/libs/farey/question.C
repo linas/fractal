@@ -12,6 +12,8 @@
 
 static ContinuedFraction work;
 
+extern "C" {
+
 double question_mark (int num, int denom)
 {
 	work.SetRatio (num,denom);
@@ -23,3 +25,5 @@ double fquestion_mark (double x)
 	work.SetReal (x);
 	return work.ToFarey ();
 }
+
+};
