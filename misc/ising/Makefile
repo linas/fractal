@@ -12,10 +12,10 @@ ising:	ising.o $(LIB)/question.o $(LIB)/Farey.o $(LIB)/gcf.o
 takagi-gral:	takagi-gral.o
 
 .c.o:
-	cc -c -O2 -I $(INC) $<
+	cc -c -g -O2 -I $(INC) $<
 
 .o:
-	cc -o $@ $^ -lstdc++ -lm 
+	cc -g -o $@ $^ -lstdc++ -lm 
 
 
 clean:

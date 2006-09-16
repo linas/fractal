@@ -54,9 +54,10 @@ double tent (double s)
 }
 
 // The farey/isola map
-double pointy (double x)
+inline double pointy (double x)
 {
-	double t = x - floor(x);
+	// double t = x - floor(x);
+	double t = x;
 	if (0.5 < t) return (1.0-t)/t;
 	return t/(1.0-t);
 }
@@ -101,7 +102,11 @@ double energy (double (*interaction)(double), double s, int n)
 	double en = 0.0;
 	for (i=0; i<n; i++)
 	{
-		en += interaction (s);
+		// en += interaction (s);
+
+		// following is hand-inlined en += pointy (s);
+		if (0.5 < s) en += (1.0-s)/s;
+		else en += s/(1.0-s);
 		
 		/* shift one bit */
 		if (s>= 0.5) s -= 0.5;
@@ -118,13 +123,14 @@ double partition (double (*interaction)(double), int n)
 	double ez = 0.0;
 	double z = 0.0;
 
-	int m = (1<<n) + 11;
+	int m = (1<<n);
+	int prt = m/2000;
 	int i;
 
 	double om = 1.0 / ((double) m);
 	double sprev = 0.0;
 	
-	for (i=0; i<m; i++)
+	for (i=1; i<m; i++)
 	{
 #ifdef USE_MIDPOINTS /* proivides not accuract improvement */
 		double x = om * (((double) i)+0.5); /* midpopint */
@@ -144,8 +150,10 @@ double partition (double (*interaction)(double), int n)
 		// ez += delta* exp (en);
 
 		// en = exp (en);
-		if (i%(m/1000) == 3)
+		if (i%prt == 0) {
 			printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, y, interaction(s), en, z);
+			fflush (stdout);
+		}
 
 		sprev = s;
 	}
