@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "question.h"
+
 /* Interaction functions: Given a string 's' encoding 
  * a given state, return the interaction energy associated 
  * with that state. The string is represented as a real
@@ -120,16 +122,22 @@ double partition (double (*interaction)(double), int n)
 	int i;
 
 	double om = 1.0 / ((double) m);
-	for (i=0; i<m; i++)
+	double sprev = 0.0;
+	
+	for (i=1; i<=m; i++)
 	{
-		double s = om * ((double) i);
+		// double s = om * ((double) i);
+		//
+		double s = question_mark (i,m);
 
 		double en = energy (interaction, s, n);
 
+		om = 1.0 / (s-sprev);
 		ez += om * exp (en);
 		z += om * en;
 
 		printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g\n", i, s, interaction(s), en, z);
+		sprev = s;
 	}
 
 	printf ("# partition=%g\n", z);
