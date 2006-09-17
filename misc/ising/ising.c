@@ -55,6 +55,11 @@ double tent (double s)
 	return 1.0*en;
 }
 
+double qtent (double s)
+{
+	return tent(fquestion_mark (s));
+}
+
 // The farey/isola map
 inline double pointy (double x)
 {
@@ -122,8 +127,9 @@ double partition (double (*interaction)(double), int n)
 	double ez = 0.0;
 	double z = 0.0;
 
-	int m = (1<<n) +43;
-	int prt = m/24000;
+	int m = (1<<n);
+	int prt = m/2000;
+	prt=1;
 	int i;
 
 	double om = 1.0 / ((double) m);
@@ -136,6 +142,7 @@ double partition (double (*interaction)(double), int n)
 		double y = question_mark (i,m);
 		
 		double en = energy (interaction, y, n);
+		// double en = energy (interaction, x, n);
 		
 		en = exp (en);
 		z += delta * en;
@@ -165,7 +172,8 @@ main (int argc, char * argv[])
 	printf ("#\n# n=%d\n#\n",n);
 	// partition (nearest_neighbor, n);
 	// partition (pabola, n);
-	 partition (tent, n);
+	partition (tent, n);
+	// partition (qtent, n);
 	// partition (kac, n);
 	// partition (pointy, n);
 }

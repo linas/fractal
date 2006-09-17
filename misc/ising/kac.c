@@ -106,8 +106,7 @@ double partition (double (*interaction)(double, int), int len)
 	double z = 0.0;
 
 	int m = (1<<len);
-	int prt = m/24000;
-	prt = 1;
+	int prt = m/2000;
 	int i;
 
 	double om = 1.0 / ((double) m);
@@ -118,11 +117,12 @@ double partition (double (*interaction)(double, int), int len)
 	{
 		/* x is a label/location on the dyadic tree */
 		double x = 0.5 * om * ((double) 2*i+1);
-		double y = question_mark (i,m);
+		// double y = question_mark (i,m);
+		double y;
 		
 		double en = energy (interaction, x, len);
 		
-		en = exp (en);
+		en = exp (4.0*en);
 		z += delta * en;
 
 		if (i%prt == 0) {

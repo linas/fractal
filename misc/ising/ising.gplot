@@ -27,9 +27,19 @@ set ylabel "Energy"
 plot "ising.dat" using 2:4 title "Interaction energy", \
      "ising.dat" using 2:5 title "Configuration energy"
 
+set term png giant size 800,600
+set out 'ising-partition.png'
+# set title "Ising Model Configuration Energy"
+set title "Weighted Tent Model Partition Probability"
+set xlabel "Weighted State Number"
+set ylabel "Partition Measure"
+
+plot "ising.dat" using 2:5 title ""
+
+set term png giant size 800,600
 set out 'ising-integral.png'
-set title "Ising Model Cumulative Partition"
-set xlabel "State Number"
+set title "Ising Model Cumulative Partition Probability"
+set xlabel "Weighted State Number"
 set ylabel "Cumulative Measure"
 
 # plot "ising.dat" using 3:($6/8.10612)  title "Ising", \
@@ -44,8 +54,12 @@ set ylabel "Cumulative Measure"
 # plot "ising.dat" using 2:($6/0.280786)  title "kac 0.6-0.3-14", \
 #      "ising.dat" using 2:3 title "question"
 
+set key left
+plot "ising.dat" using 2:($6/0.404907)  title "Kac model partition", \
+     "ising.dat" using 2:3 title "Question mark function"
 
-plot "ising.dat" using 3:($6/0.11931-$3)  title "tent 24-a"
+
+# plot "ising.dat" using 3:($6/0.234395)  title "tent 14q"
 
 
 # pause 100
