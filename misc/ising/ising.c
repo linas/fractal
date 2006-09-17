@@ -67,6 +67,7 @@ inline double pointy (double x)
 double kac (double s)
 {
 	double lambda = 0.6666;
+	// double lambda = 0.5;
 	
 	double s0 = -1.0;
 	if (s>= 0.5) {
@@ -91,7 +92,7 @@ double kac (double s)
 
 		if (lp < 1.0e-18) break;
 	}
-	return 0.2*s0*acc;
+	return -(1.0-lambda)*s0*acc;
 }
 
 /* Return the finite-state energy of string s (length n) */
@@ -102,13 +103,9 @@ double energy (double (*interaction)(double), double s, int n)
 	double en = 0.0;
 	for (i=0; i<n; i++)
 	{
-		// en += interaction (s);
+		en += interaction (s);
 
-		// following is hand-inlined en += pointy (s);
-		if (0.5 < s) en += (1.0-s)/s;
-		else en += s/(1.0-s);
-		
-		/* shift one bit */
+		/* Shift one bit */
 		if (s>= 0.5) s -= 0.5;
 		s *= 2.0;
 	}
@@ -123,8 +120,8 @@ double partition (double (*interaction)(double), int n)
 	double ez = 0.0;
 	double z = 0.0;
 
-	int m = (1<<n);
-	int prt = m/2000;
+	int m = (1<<n) +43;
+	int prt = m/24000;
 	int i;
 
 	double om = 1.0 / ((double) m);
@@ -136,21 +133,18 @@ double partition (double (*interaction)(double), int n)
 		double x = om * ((double) i);
 		double y = question_mark (i,m);
 		
-		double en = energy (interaction, x, n);
+		double en = energy (interaction, y, n);
 		
+		en = exp (en);
 		z += delta * en;
-		// ez += delta* exp (en);
 
-		// en = exp (en);
 		if (i%prt == 0) {
 			printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, y, interaction(x), en, z);
 			fflush (stdout);
 		}
-
-		// sprev = s;
 	}
 
-	printf ("# partition=%g\n", z);
+	printf ("# partition = %g\n", z);
 
 	return z;
 }
@@ -169,7 +163,7 @@ main (int argc, char * argv[])
 	printf ("#\n# n=%d\n#\n",n);
 	// partition (nearest_neighbor, n);
 	// partition (pabola, n);
-	// partition (tent, n);
+	 partition (tent, n);
 	// partition (kac, n);
-	partition (pointy, n);
+	// partition (pointy, n);
 }
