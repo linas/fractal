@@ -1,0 +1,34 @@
+#! /usr/bin/gnuplot
+
+# set term png small
+set term png giant size 800,600
+set out 'kac-config-energy.png'
+
+set style line 3
+
+# set data style linespoints
+# set data style lines
+set style data line 
+set key right
+
+
+# set xrange [-1:1]
+# set yrange [-1:1]
+
+set title "Kac Model Configuration Energy"
+set xlabel "State Number"
+set ylabel "Energy"
+
+plot "kac.dat" using 2:4 title "Interaction energy", \
+     "kac.dat" using 2:5 title "Configuration energy"
+
+set out 'kac-integral.png'
+set title "Kac Model Cumulative Partition"
+set xlabel "State Number"
+set ylabel "Cumulative Measure"
+
+plot "kac.dat" using 2:6
+
+
+# pause 100
+
