@@ -50,7 +50,7 @@ double kac (double s, int len)
 	// double lambda = 0.6666;
 	double lambda = 0.5;
 
-	if (0 >= len) return 0.0;
+	if (1 >= len) return 0.0;
 	
 	double s0 = -1.0;
 	if (s>= 0.5) {
@@ -62,7 +62,7 @@ double kac (double s, int len)
 	double lp = lambda;
 	double acc = 0.0;
 	int i;
-	for (i=0; i<len; i++)
+	for (i=0; i<len-1; i++)
 	{
 		double s1 = -1.0;
 		if (s>= 0.5) {
@@ -74,7 +74,8 @@ double kac (double s, int len)
 		acc += lp * s1;
 		lp *= lambda;
 	}
-	return -(1.0-lambda)*s0*acc;
+	// return -(1.0-lambda)*s0*acc;
+	return -s0*acc;
 }
 
 /* 
@@ -100,31 +101,33 @@ double energy (double (*interaction)(double, int), double s, int len)
 
 /* Compute finite state partition */
 
-double partition (double (*interaction)(double, int), int n)
+double partition (double (*interaction)(double, int), int len)
 {
 	double ez = 0.0;
 	double z = 0.0;
 
-	int m = (1<<n);
+	int m = (1<<len);
 	int prt = m/24000;
+	prt = 1;
 	int i;
 
 	double om = 1.0 / ((double) m);
 	double delta = om;
 	double sprev = 0.0;
 	
-	for (i=1; i<m; i++)
+	for (i=0; i<m; i++)
 	{
-		double x = om * ((double) i);
+		/* x is a label/location on the dyadic tree */
+		double x = 0.5 * om * ((double) 2*i+1);
 		double y = question_mark (i,m);
 		
-		double en = energy (interaction, y, n);
+		double en = energy (interaction, x, len);
 		
-		en = exp (en);
+		// en = exp (en);
 		z += delta * en;
 
 		if (i%prt == 0) {
-			printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, y, interaction(x), en, z);
+			printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, y, interaction(x, len), en, z);
 			fflush (stdout);
 		}
 	}
@@ -147,8 +150,5 @@ main (int argc, char * argv[])
 
 	printf ("#\n# n=%d\n#\n",n);
 	// partition (nearest_neighbor, n);
-	// partition (pabola, n);
-	 partition (tent, n);
-	// partition (kac, n);
-	// partition (pointy, n);
+	partition (kac, n);
 }
