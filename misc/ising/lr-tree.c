@@ -25,7 +25,7 @@ double tree_to_dyadic (double x, int len)
 	int i;
 
 	double step=0.25;
-	for (i=0 i<len; i++)
+	for (i=0; i<len; i++)
 	{
 		if (0.5 <= x)
 		{
@@ -46,15 +46,16 @@ double tree_to_dyadic (double x, int len)
 
 main ()
 {
-	int k, len;
+	int k,n, len;
 
-	n=5;
+	n=10;
 
 	for (len=0; len<n; len++)
 	{
-		m = 1<<len;
+		int m = 1<<len;
 		for (k=0; k<m; k++)
 		{
+			// double x = ((double) k)/ ((double) m);
 			double x = ((double) k)/ ((double) m);
 			double y = tree_to_dyadic (x,len);
 
