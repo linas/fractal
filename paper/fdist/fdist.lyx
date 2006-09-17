@@ -32,7 +32,7 @@ Modular Fractal Measures
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (updated 11 September 2006)
+12 October 2004 (updated 16 September 2006)
 \layout Abstract
 
 This breif note reviews a circle of topics connecting the derivative of
@@ -1674,14 +1674,20 @@ P(\sigma)=\frac{1}{P(\Omega)}\;\exp\left(-\frac{H(\sigma)}{k_{B}T}\right)\label{
 \end_inset 
 
  ensures that the sum of probabilities over all states equals to one.
- A graph of this probability function is shown in figure Taking 
+ A graph of this probability function is shown in figure 
+\begin_inset LatexCommand \ref{cap:Partition-Probabilities}
+
+\end_inset 
+
+; where 
 \begin_inset Formula $k_{B}=T=1$
 \end_inset 
 
- 
-\layout Standard
+ was taken, and the minus sign absorbed into the constant 
+\begin_inset Formula $J$
+\end_inset 
 
-To the energy of a classical 
+.
 \layout Standard
 
 
@@ -1691,7 +1697,12 @@ collapsed true
 
 \layout Caption
 
-Partition
+
+\begin_inset LatexCommand \label{cap:Partition-Probabilities}
+
+\end_inset 
+
+Partition Probabilities
 \layout Standard
 
 
@@ -1704,7 +1715,40 @@ Partition
 
 \layout Standard
 
-q
+The above graph shows 
+\begin_inset Formula $P(x)=\exp\, H(x)$
+\end_inset 
+
+ for the Kac model configuration energy as a function of 
+\begin_inset Formula $x=x(\sigma)$
+\end_inset 
+
+.
+ A minus sign that might normally appear here has been absorbed into the
+ constant 
+\begin_inset Formula $J$
+\end_inset 
+
+.
+ This figure is for 
+\begin_inset Formula $N=10$
+\end_inset 
+
+, that is, a lattice with 
+\begin_inset Formula $2^{10}=1024$
+\end_inset 
+
+ possible configurations.
+ An even stronger resemblance to figure 
+\begin_inset LatexCommand \ref{cap:Jacobian}
+
+\end_inset 
+
+, which graphs 
+\begin_inset Formula $(?^{\prime}\circ?^{-1})(x)$
+\end_inset 
+
+, should be noted.
 \layout Standard
 
 
@@ -1714,20 +1758,59 @@ q
 
 \end_inset 
 
+ 
+\layout Standard
 
+This figure shows a graph of 
+\begin_inset Formula $\exp H(?(x))$
+\end_inset 
+
+.
+ The partition probability is graphed in this way to favor resemblance to
+ figure 
+\begin_inset LatexCommand \ref{cap:Distribution-of-Farey}
+
+\end_inset 
+
+, which shows 
+\begin_inset Formula $?^{\prime}(x)$
+\end_inset 
+
+.
+ Again, 
+\begin_inset Formula $N=10$
+\end_inset 
+
+.
 \end_inset 
 
 
 \layout Standard
 
+Does the sum over partition probabilities equal the question mark function,
+ as these figures all suggest? The numerical evidence suggests that the
+ answer is yes, as shown in figure 
+\begin_inset LatexCommand \ref{cap:Cumulative-Partition-Probability}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
-Cum
+
+\begin_inset LatexCommand \label{cap:Cumulative-Partition-Probability}
+
+\end_inset 
+
+Cumulative Partition Probability
 \layout Standard
 
 
@@ -1737,10 +1820,56 @@ Cum
 
 \end_inset 
 
+ 
+\layout Standard
 
+This figure shows a graph of the Minkowski question mark function 
+\begin_inset Formula $?(y)$
 \end_inset 
 
+ compared to a graph of the cumulative probability function 
+\begin_inset Formula $\sum_{\sigma\mbox{ s.t. }x(\sigma)<y}\exp H(?(x(\sigma)))$
+\end_inset 
 
+.
+ As for other cases, this graph is for 
+\begin_inset Formula $N=10$
+\end_inset 
+
+.
+ As the value of 
+\begin_inset Formula $N$
+\end_inset 
+
+ is increased, the graphs may be seen to numerically approach one-another.
+\end_inset 
+
+ 
+\layout Standard
+
+There are several noteworthy aspects to the above development.
+ First is the appearance and importance of the exponential function.
+ In the normal study of number theory, rationals, modular forms, the question
+ mark function, and the like, the exponential function makes almost no appearanc
+e ever.
+ Thus, it's appearance here should be more than just curious; it begs for
+ a deeper explanation.
+ Another note is that a certain 
+\begin_inset Quotes eld
+\end_inset 
+
+cheat
+\begin_inset Quotes erd
+\end_inset 
+
+ was applied to move from the thermodynamic partition probability to the
+ fractal measure: the domain of integration was weighted by the question
+ mark function itself.
+ The physical interpretation of this step merits further discussion.
+ It may be immediately intuited that this function gives a preferential
+ weight to configurations with aligned spins, but why this was not inherently
+ incorporated into the Hamiltonian deserves a review.
+ 
 \layout Subsection
 
 Measure theory
@@ -1889,13 +2018,6 @@ Topology
 \layout Standard
 
 ToDo: Discuss the cylinder set topology.
-\layout Subsection
-
-Lattice models
-\layout Standard
-
-ToDo: Discuss the one dimensional lattice models, specifically, the Ising
- model, the Potts model and the Kac model.
 \layout Standard
 
 
