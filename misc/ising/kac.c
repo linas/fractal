@@ -1,12 +1,15 @@
 /*
- * ising.c
+ * kac.c
  *
- * 1 dimensional Ising model (and Kac model too)
- * A given state of the system is encoded as 
- * a 2-adic string.
+ * One-dimensional Kac model. General resmblance to
+ * the code in ising.c except that more careful attention 
+ * is given to the cylinder-set topology.
+ * 
+ * A cylinder set is encoded as a 2-adic string (a real)
+ * with the number of bits in the string specified.
  *
  * Linas September 2005
- *
+ * Linas September 2006
  */
 
 #include <math.h>
@@ -15,15 +18,16 @@
 
 #include "question.h"
 
-/* Interaction functions: Given a string 's' encoding 
- * a given state, return the interaction energy associated 
- * with that state. The string is represented as a real
- * number between zero and one: it is the string of binary 
- * bits of the expansion of the real in binary.
+/* Interaction functions: Given a string 's' of length 'n'
+ * encoding a given cylinder set, * return the interaction 
+ * energy associated with that state. The string is represented 
+ * as a real number between zero and one: it is the string of 
+ * binary bits of the expansion of the real in binary. Only
+ * the first 'n' bits are used.
  */
 
 /* Nearest neighbor interaction */
-double nearest_neighbor (double s)
+double nearest_neighbor (double s, int len)
 {
 	double s0,s1;
 
@@ -40,34 +44,13 @@ double nearest_neighbor (double s)
 	return -0.6 * s0*s1;
 }
 
-double pabola (double s)
-{
-	return -0.2 * s * (1.0-s);
-}
-
-double tent (double s)
-{
-	// double en = (s>0.5)? 2.0*s : 2.0*(1.0-s);
-	double en = (s>0.5)? 2.0*(1.0-s) : 2.0*s;
-	en -= 0.5;
-	return 1.0*en;
-}
-
-// The farey/isola map
-inline double pointy (double x)
-{
-	// double t = x - floor(x);
-	double t = x;
-	if (0.5 < t) return (1.0-t)/t;
-	return t/(1.0-t);
-}
-
-
 /* Kac Model (which has shape of tent or cantor polynomial.) */
-double kac (double s)
+double kac (double s, int len)
 {
-	double lambda = 0.6666;
-	// double lambda = 0.5;
+	// double lambda = 0.6666;
+	double lambda = 0.5;
+
+	if (0 >= len) return 0.0;
 	
 	double s0 = -1.0;
 	if (s>= 0.5) {
@@ -78,7 +61,8 @@ double kac (double s)
 	
 	double lp = lambda;
 	double acc = 0.0;
-	while (1)
+	int i;
+	for (i=0; i<len; i++)
 	{
 		double s1 = -1.0;
 		if (s>= 0.5) {
@@ -89,38 +73,39 @@ double kac (double s)
 	
 		acc += lp * s1;
 		lp *= lambda;
-
-		if (lp < 1.0e-18) break;
 	}
 	return -(1.0-lambda)*s0*acc;
 }
 
-/* Return the finite-state energy of string s (length n) */
-double energy (double (*interaction)(double), double s, int n)
+/* 
+ * Return the energy associated with a cylinder set encoded
+ * by a string s of length n.
+ */
+double energy (double (*interaction)(double, int), double s, int len)
 {
 	int i;
 
-	double en = 0.0;
-	for (i=0; i<n; i++)
+	double h_n = 0.0;
+	for (i=0; i<len; i++)
 	{
-		en += interaction (s);
+		h_n += interaction (s, len-i);
 
 		/* Shift one bit */
 		if (s>= 0.5) s -= 0.5;
 		s *= 2.0;
 	}
 
-	return en;
+	return h_n;
 }
 
 /* Compute finite state partition */
 
-double partition (double (*interaction)(double), int n)
+double partition (double (*interaction)(double, int), int n)
 {
 	double ez = 0.0;
 	double z = 0.0;
 
-	int m = (1<<n) +43;
+	int m = (1<<n);
 	int prt = m/24000;
 	int i;
 

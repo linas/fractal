@@ -1,12 +1,14 @@
 /*
  * ising.c
  *
- * 1 dimensional Ising model (and Kac model too)
+ * One-dimensional Ising model (and Kac model too)
  * A given state of the system is encoded as 
- * a 2-adic string.
+ * a 2-adic string.  Encoding and general treatment
+ * is rather naive; a treatment that pays more careful 
+ * attention to topology is given in kac.c
  *
  * Linas September 2005
- *
+ * Linas September 2006
  */
 
 #include <math.h>
