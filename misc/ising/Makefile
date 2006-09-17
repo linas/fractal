@@ -3,12 +3,13 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES= ising takagi-gral
+EXES= ising lr-tree takagi-gral
 
 all: $(EXES)
 
 
 ising:	ising.o $(LIB)/question.o $(LIB)/Farey.o $(LIB)/gcf.o
+lr-tree:	lr-tree.o
 takagi-gral:	takagi-gral.o
 
 .c.o:
