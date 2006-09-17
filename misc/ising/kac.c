@@ -74,8 +74,7 @@ double kac (double s, int len)
 		acc += lp * s1;
 		lp *= lambda;
 	}
-	// return -(1.0-lambda)*s0*acc;
-	return -s0*acc;
+	return -(1.0-lambda)*s0*acc;
 }
 
 /* 
@@ -123,7 +122,7 @@ double partition (double (*interaction)(double, int), int len)
 		
 		double en = energy (interaction, x, len);
 		
-		// en = exp (en);
+		en = exp (en);
 		z += delta * en;
 
 		if (i%prt == 0) {
