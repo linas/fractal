@@ -1199,18 +1199,17 @@ on cannot be simply or naively defined on point sets, and requires the framework
  spin lattice models.
 \layout Standard
 
-None-the-less, one can make some forward progress (especially when doing
- numerical explorations) by taking a naive point-set topology approach,
- and 
-\begin_inset Quotes eld
+None-the-less, one can gain considerable intuition by sticking to naive
+ point-set topology, that is, by working with a lattice of finite size 
+\begin_inset Formula $N$
 \end_inset 
 
-randomly sampling
-\begin_inset Quotes erd
+ and considering the limit of 
+\begin_inset Formula $N\to\infty$
 \end_inset 
 
- some strings from this infinite set.
- This provides a simple, concrete approach that makes it easier to relate
+.
+ This provides a simple, concrete approach that makes it easy to relate
  the spin lattice models to the question mark function.
  This is presented in the next section.
  
@@ -1285,7 +1284,7 @@ V(\sigma)=-J\sigma_{0}\sigma_{1}+M\sigma_{0}\label{eq:}\end{equation}
 .
  The Ising potential consists of a nearest-neighbor interaction, with energy
  
-\begin_inset Formula $J$
+\begin_inset Formula $J\in\mathbb{R}$
 \end_inset 
 
  and the interaction of the spin with an external magnetic field 
@@ -1328,7 +1327,7 @@ The total energy of a given lattice configuration
 
  is given by 
 \begin_inset Formula \begin{equation}
-H=\sum_{k=0}^{N}V(\tau^{k}\sigma)\label{eq:}\end{equation}
+H(\sigma)=\sum_{k=0}^{N}V(\tau^{k}\sigma)\label{eq:Classical Hamiltonian}\end{equation}
 
 \end_inset 
 
@@ -1341,41 +1340,39 @@ H=\sum_{k=0}^{N}V(\tau^{k}\sigma)\label{eq:}\end{equation}
 \end_inset 
 
 .
- Ignore boundary ...
- 
-\layout Standard
+ That is, one takes the interaction potential to be translation invariant,
+ and so sums over all nearest-neighbor interactions.
+ In fact, the class of translation invariant interactions can be shown to
+ be isomorphic to a certain class of measure-preserving dynamical systems,
+ again, see 
+\begin_inset LatexCommand \cite{May91}
 
-which may be ordered as dyadic rationals 
-\begin_inset Formula $x=\sum_{k=1}^{N}b_{k}2^{-k}$
 \end_inset 
 
- where 
-\begin_inset Formula $b_{k}\in\{0,1\}$
+ for details.
+ The above summation glosses over boundary conditions, that is, it ignores
+ what happens when 
+\begin_inset Formula $k=N$
 \end_inset 
 
- is the lattice configuration at the 
+.
+ This gloss can be handwaved away by arguing that it makes no difference
+ to the 
+\begin_inset Formula $N\to\infty$
+\end_inset 
+
+limit.
+ Similarly, the lattice is considered to extend only to the right, 
+\emph on 
+i.e.
+
+\emph default 
+ to exist for non-negative 
 \begin_inset Formula $k$
 \end_inset 
 
-'th site.
- 
-\layout Standard
-
-Corresponding to such an 
-\begin_inset Formula $x$
-\end_inset 
-
- is an energy 
-\begin_inset Formula $\omega_{x}$
-\end_inset 
-
- given by the Ising model: 
-\begin_inset Formula \[
-\omega_{x}=etc.\]
-
-\end_inset 
-
-
+ values only; this is another gloss that makes little practical difference,
+ and is useful to keep notation simple and unburdened.
 \layout Standard
 
 
@@ -1384,6 +1381,11 @@ wide false
 collapsed true
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Ising-Model-Configuration}
+
+\end_inset 
 
 Ising Model Configuration Energy
 \layout Standard
@@ -1422,12 +1424,80 @@ where
 
 'th location.
  The interaction energy, shown in red, is given by 
-\begin_inset Formula $J=0.6(2b_{0}-1)(2b_{1}-1)$
+\begin_inset Formula $V=0.6(2b_{0}-1)(2b_{1}-1)$
 \end_inset 
 
 .
 \end_inset 
 
+ 
+\layout Standard
+
+Quantities, such as the energy, may be readily graphed by identifying lattice
+ locations with bit positions in the bit-string representation of a dyadic
+ rational.
+ That is, one represents the lattice configuration 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+with the rational 
+\begin_inset Formula $x(\sigma)$
+\end_inset 
+
+ given by
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+x(\sigma)=\sum_{k=0}^{N}\left(\frac{\sigma_{k}+1}{2}\right)2^{-(k+1)}=\sum_{k=0}^{N}b_{k}2^{-(k+1)}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $b_{k}\in\{0,1\}$
+\end_inset 
+
+ is the lattice configuration at the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th site.
+ A graph of the energy, as a function of 
+\begin_inset Formula $x$
+\end_inset 
+
+, is shown in the figure 
+\begin_inset LatexCommand \ref{cap:Ising-Model-Configuration}
+
+\end_inset 
+
+.
+ An obvious fractal-like shape is readily visible, and it should be straight-for
+ward to give an explicit representation of the action of the dyadic monoid
+ on this fractal curve.
+ XXX--is it a useful (if remedial) excercise to explicitly exhibit this
+ action? It could be ...
+ XXX to do.
+\layout Subsection
+
+The Kac model and the Question mark function
+\layout Standard
+
+The description of the Kac model is similar to that for the Ising model,
+ with the exception that the interaction potential is not limited to a nearest
+ neighbor interaction, but instead extends between distant sites, with a
+ geometrically decreasing strength.
+ That is, the potential is given by 
+\begin_inset Formula \begin{equation}
+V(\sigma)=-J\,\frac{\sigma_{0}}{1-\lambda}\;\sum_{k=1}^{N}\sigma_{k}\lambda^{k}\label{eq:Kac potential}\end{equation}
+
+\end_inset 
+
+ with 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ a real number determining the strength of the interaction.
  
 \layout Standard
 
@@ -1438,7 +1508,12 @@ collapsed true
 
 \layout Caption
 
-Tent Model Configuration Energy
+
+\begin_inset LatexCommand \label{cap:Kac-Model-Configuration}
+
+\end_inset 
+
+Kac Model Configuration Energy
 \layout Standard
 
 
@@ -1451,42 +1526,116 @@ Tent Model Configuration Energy
 
 \layout Standard
 
-This figure shows the configuration energy for the tent interaction.
- Given a lattice of 
-\begin_inset Formula $N$
+This figure shows the configuration energy for the tent interaction, that
+ is, for the Kac model with 
+\begin_inset Formula $\lambda=1/2$
 \end_inset 
 
- sites, there are 
-\begin_inset Formula $2^{N}$
+.
+ The red tent-shaped curve (labelled 
+\begin_inset Quotes eld
 \end_inset 
 
- different possible lattice configurations, which may be ordered as dyadic
- rationals 
-\begin_inset Formula $x=\sum_{k=1}^{N}b_{k}2^{-k}$
+Interaction Energy
+\begin_inset Quotes erd
 \end_inset 
 
- where 
-\begin_inset Formula $b_{k}\in\{0,1\}$
+) is simply a graph of the interaction potential 
+\begin_inset Formula $V(\sigma)$
 \end_inset 
 
- is the lattice configuration at the 
-\begin_inset Formula $k$
+ of equation 
+\begin_inset LatexCommand \ref{eq:Kac potential}
+
 \end_inset 
 
-'th site.
- Corresponding to such an 
+ as a function of 
 \begin_inset Formula $x$
 \end_inset 
 
- is an energy 
-\begin_inset Formula $\omega_{x}$
+.
+ The green curve, labelled 
+\begin_inset Quotes eld
 \end_inset 
 
- given by the tent interaction.
- 
+Configuration Energy
+\begin_inset Quotes erd
+\end_inset 
+
+, is a graph of the classical Hamiltonian of equation 
+\begin_inset LatexCommand \ref{eq:Classical Hamiltonian}
+
+\end_inset 
+
+ for the Kac potential.
+ A general resemblance to the figure 
+\begin_inset LatexCommand \ref{cap:Jacobian}
+
+\end_inset 
+
+ should be immediately appearant.
 \end_inset 
 
 
+\layout Standard
+
+The energy or classical Hamiltonian of a given configuration is given by
+ equation 
+\begin_inset LatexCommand \ref{eq:Classical Hamiltonian}
+
+\end_inset 
+
+.
+ As before, the boundary conditions are glossed over, but with a difference:
+ the interaction 
+\begin_inset LatexCommand \ref{eq:Kac potential}
+
+\end_inset 
+
+ may be truncated at the edge, or one may choose to use periodic boundary
+ conditions 
+\begin_inset Formula $\sigma_{N+1}=\sigma_{0}$
+\end_inset 
+
+.
+ A graph of the configuration energy is shown in figure 
+\begin_inset LatexCommand \ref{cap:Kac-Model-Configuration}
+
+\end_inset 
+
+ for the case of 
+\begin_inset Formula $\lambda=1/2$
+\end_inset 
+
+, 
+\begin_inset Formula $J=-1/2$
+\end_inset 
+
+.
+ For this value of 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, the interaction potential as a function of 
+\begin_inset Formula $x$
+\end_inset 
+
+ is easily seen to be the tent map 
+\begin_inset Formula \begin{equation}
+V(x)=\begin{cases}
+2x-1/2 & \quad\mbox{ for }0\le x\le1/2\\
+-2x+3/2 & \quad\mbox{ for }1/2\le x\le1\end{cases}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Readily appearent in the figure is the general resemblance of the configuration
+ energy to the shape of the curve in figure 
+\begin_inset LatexCommand \ref{cap:Jacobian}
+
+\end_inset 
+
+.
+ The resemblance can be made more precise.
 \layout Subsection
 
 Measure theory
