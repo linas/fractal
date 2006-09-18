@@ -1168,7 +1168,7 @@ Consider the one-dimensional, two-state lattice model, with the lattice
  having a countable infinity of lattice positions.
  The set of all possible states of the lattice is the set of all possible
  (infinitely-long) strings in two letters.
- Please note that this set of strings is a very large set: it has 
+ This set of strings is a very large set: it has 
 \begin_inset Formula $\aleph_{1}=2^{\omega}$
 \end_inset 
 
@@ -1176,40 +1176,61 @@ Consider the one-dimensional, two-state lattice model, with the lattice
  The cardinality of this set is the cardinality of the continuum.
  The (classical) Hamiltonian is a function that assigns a real value to
  each possible element of this set.
- The Hamiltonian is not the only physically interesting function; one may
- consider 
-\begin_inset Formula $\exp(-H/kT)$
-\end_inset 
-
-, and so on.
+ The Hamiltonian is not the only physically interesting function; in physics,
+ one may also be interested in the partition function, the mean magnetization,
+ ore correlation functions.
+ In mathematics, there are yet more interesting aspects.
 \layout Standard
 
-A minor problem arises: how should one label the points in this set? Each
- corresponds to an infinite string in two letters.
+When discussing such lattice models, a problem arises: how should one label
+ the points in this set? Each corresponds to an infinite string in two letters.
  This set is not enumerable, so one cannot label them with integers.
  Operations with respect to the label, such as summation or integration,
  are potentially troublesome.
- Summation requires a countable label; it is defined only on countable sets.
+ Summation requires a countable label; summation is defined only on countable
+ sets.
  The analog of summation for uncountable sets is integration; however, integrati
-on cannot be simply or naively defined on point sets, and requires the framework
- of measure theory to be mathematically rigorous.
- The following sections will provide the measure-theoretic analysis of the
- spin lattice models.
+on cannot be simply or naively defined on uncountable point-sets, and requires
+ the framework of measure theory to be mathematically rigorous.
+ 
 \layout Standard
 
-None-the-less, one can gain considerable intuition by sticking to naive
- point-set topology, that is, by working with a lattice of finite size 
+The following sections will develop the two-state one-dimensional lattice
+ model, primarily with the goal of elucidating the structure of Minkowski's
+ question mark function.
+ It is important to realize that lattice models can be generalized in a
+ large variety of ways, and many of these generalizations have important
+ implicaitons for physics, and are mathematically interesting for a large
+ variety of reasons.
+ Almost none of these generalizations or connections are mentioned below;
+ they can be found in 
+\begin_inset LatexCommand \cite{May91}
+
+\end_inset 
+
+.
+ The focus here really is intended to be the question mark function.
+ 
+\layout Standard
+
+The discussion will explore several directions, focusing on the natural
+ topology of one-dimensional lattice models, and relating that topology
+ to the Cantor set, and the natural topology on the real numbers.
+ The full exposition requires the application of measure theory and sigma
+ algrebras to the one-dimensional lattice models; these ideas are presented
+ here as simply as possible, assuming little prior acquaintance.
+ One can also gain considerable intuition by sticking to naive point-set
+ topology, that is, by working with a lattice of finite size 
 \begin_inset Formula $N$
 \end_inset 
 
- and considering the limit of 
+ and imagining the possibility of taking the limit of 
 \begin_inset Formula $N\to\infty$
 \end_inset 
 
 .
- This provides a simple, concrete approach that makes it easy to relate
- the spin lattice models to the question mark function.
- This is presented in the next section.
+ The finite-sized lattice provides a simple, concrete system for discussion,
+ and is thus presented first, in the following section.
  
 \layout Subsection
 
@@ -1376,7 +1397,7 @@ i.e.
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1478,7 +1499,7 @@ ward to give an explicit representation of the action of the dyadic monoid
  XXX to do.
 \layout Subsection
 
-The Kac model and the Question mark function
+The Kac model and the question mark function
 \layout Standard
 
 The description of the Kac model is similar to that for the Ising model,
@@ -1502,7 +1523,7 @@ V(\sigma)=-J(1-\lambda)\,\sigma_{0}\,\sum_{k=1}^{N}\sigma_{k}\lambda^{k}\label{e
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1691,7 +1712,7 @@ P(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\frac{H(\sigma)}{k_{B}T}\right)\label{
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1799,7 +1820,7 @@ Does the sum over partition probabilities equal the question mark function,
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1941,15 +1962,30 @@ The next section begins a more formal development, starting with a a review
  on it.
 \layout Subsection
 
-Measure theory
+Measure theory and sigma-algebras on a lattice.
+ 
 \layout Standard
 
-In order to do statistical mechanics on this lattice, one will need to integrate
- over subsets of this set, or possibly integrate over all of the set.
- The problem now arises: how does one define an integral on this space?
+From the above discussion, it is clear that taking the 
+\begin_inset Formula $N\to\infty$
+\end_inset 
+
+ limit of a one-dimensional lattice model will require a way to promote
+ the sums over configuration space into integrals.
+ As pointed out in the introduction, this is not a trivial matter, because
+ the cardinality 
+\begin_inset Formula $2^{N}$
+\end_inset 
+
+ of the configuration space changes from finite to uncountable in the limit.
+ In particular, it is known from measure theory that it is impossible to
+ define integration on a point set with the cardinality of the continuum.
+ To properly define integration, one must define a topology and a sigma-algebra
+ first.
+ A general presentation of this idea is given here.
 \layout Standard
 
-However, the machinery of measure theory forces a radical shift in the language,
+The machinery of measure theory forces a radical shift in the language,
  notation and concepts used to discuss the problem.
  First of all, one can no longer employ the idea that the space consists
  of a set of points.
