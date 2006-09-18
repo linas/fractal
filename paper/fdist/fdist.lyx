@@ -2117,13 +2117,72 @@ and
 
 , then one may honestly and truthfully insists that the "new" and the "old"
  Hamiltonians "are the same".
+\layout Standard
+
+More generally, this sort of a measure-theoretic refomulation of integration
+ over an uncountable set of points is refered to as 
+\begin_inset Quotes eld
+\end_inset 
+
+second quantization
+\begin_inset Quotes erd
+\end_inset 
+
+ in physics, and the integration is refered to as 
+\begin_inset Quotes eld
+\end_inset 
+
+functional integration
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ A word of caution: standard treatments of second quantization in physics
+ texts do not follow the above construction.
+ This approach only becomes apparent in mathematical treatments of second
+ quantization (need ref), where the aim is to construct a topological space
+ over which integration can be performed.
+ In the following, the 
+\begin_inset Quotes eld
+\end_inset 
+
+old
+\begin_inset Quotes erd
+\end_inset 
+
+ Hamiltonian shall be called the 
+\begin_inset Quotes eld
+\end_inset 
+
+classsical Hamiltonian
+\begin_inset Quotes erd
+\end_inset 
+
+, as it deals with points.
+ The 
+\begin_inset Quotes eld
+\end_inset 
+
+new
+\begin_inset Quotes erd
+\end_inset 
+
+ Hamiltonian will be called the 
+\begin_inset Quotes eld
+\end_inset 
+
+quantum Hamiltonian
+\begin_inset Quotes erd
+\end_inset 
+
+, because the sigma algebra may be used to define functional integrals.
 \layout Subsection
 
 The cylinder set topology
 \layout Standard
 
-The natural topology for this space has a subbase that consists of cylinder
- sets, to be defined.
+The natural topology for the configuration space of one-dimensional lattice
+ models has a subbase that consists of cylinder sets.
  It is 
 \begin_inset Quotes eld
 \end_inset 
@@ -2132,17 +2191,78 @@ natural
 \begin_inset Quotes erd
 \end_inset 
 
- in the sense that there is a natural action of the shift operator on the
- cylinder sets, and that there is a natural way to consider thier size.OK,
- next installment: the explicit construction of the sigma algebra.
- Let the positions on the lattice be labelled by an integer ''n''.
- The elements of the [[subbase]] of the sigma algebra can be completely
- enumerated by ordered pairs ''(n,s)'' where ''s'' is a string in two letters
- of finite length ''k'', for integer <math>k<
-\backslash 
-infty</math>.
- Visualize the pair ''(n,s)'' as the set of all states where the lattice
- values between location ''n'' and ''n+k-1'' are equal to the string ''s''.
+ in the sense that there is a simple and natural action of the shift operator
+ on the cylinder sets, and that there is a natural way to assign a size
+ to the cylinder sets.
+\layout Standard
+
+The subbase of a topology is a collection of sets such that any finite intersect
+ion or union of such sets belongs to the topology, and that furthermore,
+ every set in the topology can be written as a finite intersection or union
+ of sets in the subbase.
+ 
+\layout Standard
+
+A sigma algebra then consists of the topology, together with a function,
+ the measure, that assigns a non-negative, real value to every element of
+ the topology.
+ The measure must satisfy a property called 
+\begin_inset Quotes eld
+\end_inset 
+
+sigma-additivity
+\begin_inset Quotes erd
+\end_inset 
+
+: the measure of the union of a number of disjoint sets must equal the sum
+ of the measures of each set.
+ Notationally, sigma-additivity requires that:
+\begin_inset Formula \begin{equation}
+\mu\left(\bigcup_{i\in I}\, a_{i}\right)=\sum_{i\in I}\mu\left(a_{i}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where each of the sets 
+\begin_inset Formula $a_{i}$
+\end_inset 
+
+ are pairwise-disjoint from the other sets, and 
+\begin_inset Formula $I$
+\end_inset 
+
+ is a (countable) collection of indecies of the sets being considered.
+\layout Standard
+
+The cylinder sets may be defined as follows.
+ Let the positions on the lattice be labelled by an integer 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ The elements of the subbase of the sigma algebra can be completely enumerated
+ by ordered pairs 
+\begin_inset Formula $(n,s)$
+\end_inset 
+
+ where 
+\begin_inset Formula $s$
+\end_inset 
+
+ is a string in two letters of finite length 
+\begin_inset Formula $k$
+\end_inset 
+
+, for integer 
+\begin_inset Formula $k<\infty$
+\end_inset 
+
+.
+ The pair 
+\begin_inset Formula $(n,s)$
+\end_inset 
+
+ is to be visualized as the set of all states where the lattice values between
+ location ''n'' and ''n+k-1'' are equal to the string ''s''.
  Use <math>C_{(n,s)}</math> to denote an element of this sub-base.
 \layout Standard
 
@@ -2635,8 +2755,6 @@ infty</math>, so perhaps you are about to convince me that the p-adic metric
  in the infinite limit.
  Or perhaps I have jumped in too early, and the above is not where you are
  aiming for.
-\layout Standard
-
 \layout Standard
 
 
