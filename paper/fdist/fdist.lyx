@@ -2262,84 +2262,127 @@ The cylinder sets may be defined as follows.
 \end_inset 
 
  is to be visualized as the set of all states where the lattice values between
- location ''n'' and ''n+k-1'' are equal to the string ''s''.
- Use <math>C_{(n,s)}</math> to denote an element of this sub-base.
+ location 
+\begin_inset Formula $n$
+\end_inset 
+
+ and 
+\begin_inset Formula $n+k-1$
+\end_inset 
+
+ are equal to the string 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ Let 
+\begin_inset Formula $C_{(n,s)}$
+\end_inset 
+
+ denote an element of this subbase.
 \layout Standard
 
 The subbase of a topology is a collection of sets, which, by intersection
  and union, generate the rest of the topology.
  A brief review of intersection and union is in order.
- The intersection <math>C_{(n,s)} 
-\backslash 
-cap C_{(m,t)}</math> is the set of all configurations that match ''s'' at
- ''n'' '''AND''' match ''t'' at ''m''.
- The union <math>C_{(n,s)} 
-\backslash 
-cup C_{(m,t)}</math> is as above, with '''OR''' taking the place of '''AND'''.
-\layout Standard
+ The intersection 
+\begin_inset Formula $C_{(n,s)}\cap C_{(m,t)}$
+\end_inset 
 
-Let the two letters be "A" and "B".
- Then for example, :<math>C_{(n,A)} 
-\backslash 
-cap C_{(n,B)}=
-\backslash 
-varnothing</math> and :<math>C_{(n,AAA)} 
-\backslash 
-cap C_{(n,AAB)}=
-\backslash 
-varnothing</math> and :<math>C_{(n,A)} 
-\backslash 
-cup C_{(n,B)}=
-\backslash 
-Omega</math> with <math>
-\backslash 
-Omega</math> representing the entire space.
- One notworthy aspect of this topology is the somewhat "backwards" relation
- between the string labels and the sets, in that when two strings overlap,
- its is likely that the intersection of the corresponding sets will be empty,
- whereas when the strings don't overlap, the intersection will never be
- empty.
- Thus, for example, 
-\layout Standard
+ is the set of all configurations that match 
+\begin_inset Formula $s$
+\end_inset 
 
-:<math>C_{(n,s)} 
-\backslash 
-cap C_{(m,t)}
-\backslash 
-ne
-\backslash 
-varnothing</math> 
-\layout Standard
+ at 
+\begin_inset Formula $n$
+\end_inset 
 
-whenever <math>m>n+
-\backslash 
-operatorname{len}(s)</math>.
- (I believe that this property will be responsible for some of the "fractalishne
-ss", to be defined and discussed later.)
-\layout Standard
-
-:OK, with you so far.
- This topology seems pretty natural.
- ::At some point, we should list all other possible topologies.
- :::Agreed.
- ::::The dyadic map maps these to the real numbers.
- Thus, the natural topology (the topology of open sets) on the reals can
- be pulled back.
- There are topologies on the reals, e.g.
- all closed sets, or the set of half-open, half-closed sets.
- Both of these last two are finer than the natural topology, and thus make
- just about anything discontinuous, and have other things that make them
- unhappy, on the reals.
- Pulled back, they could be intersting.
-\layout Standard
-
-::::Hmm.
- Insane thought: [[filter (mathematics)|filter]] -> dual is [[ideal (order
- theory)]] -> is there such a thing as [[Zariski topology]] for order theory?
  
+\emph on 
+AND
+\emph default 
+ match 
+\begin_inset Formula $t$
+\end_inset 
+
+ at 
+\begin_inset Formula $m$
+\end_inset 
+
+.
+ The union 
+\begin_inset Formula $C_{(n,s)}\cup C_{(m,t)}$
+\end_inset 
+
+ is as above, with 
+\emph on 
+OR
+\emph default 
+ taking the place of 
+\emph on 
+AND
+\emph default 
+.
 \layout Standard
 
-===The measure=== The [[measure (mathematics)|measure]] is a function <math>
+Let the two letters that occur in the string be 
+\begin_inset Formula $A$
+\end_inset 
+
+ and 
+\begin_inset Formula $B$
+\end_inset 
+
+.
+ Then, for example, 
+\begin_inset Formula \[
+C_{(n,A)}\cap C_{(n,B)}=\varnothing\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+C_{(n,AAA)}\cap C_{(n,AAB)}=\varnothing\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+C_{(n,A)}\cup C_{(n,B)}=\Omega\]
+
+\end_inset 
+
+ with 
+\begin_inset Formula $\Omega$
+\end_inset 
+
+ representing the entire space.
+ One notworthy aspect of this topology is the somewhat intuitively "backwards"
+ relation between the string labels and the sets, in that when two strings
+ overlap, its is likely that the intersection of the corresponding sets
+ will be empty, whereas when the strings don't overlap, the intersection
+ will never be empty.
+ Thus, for example, 
+\begin_inset Formula \[
+C_{(n,s)}\cap C_{(m,t)}\ne\varnothing\]
+
+\end_inset 
+
+whenever 
+\begin_inset Formula $m>n+\mbox{len}(s)$
+\end_inset 
+
+ where 
+\begin_inset Formula $\mbox{len}(s)$
+\end_inset 
+
+ is the length of the string.
+\layout Subsection
+
+The measure 
+\layout Standard
+
+The measure is a function <math>
 \backslash 
 mu</math> that assigns to each element <math>C_{n,s)}</math> a real, non-negativ
 e value.
