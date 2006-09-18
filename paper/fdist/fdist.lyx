@@ -2379,35 +2379,45 @@ whenever
  is the length of the string.
 \layout Subsection
 
-The measure 
+Measures on cylinder sets 
 \layout Standard
 
-The measure is a function <math>
-\backslash 
-mu</math> that assigns to each element <math>C_{n,s)}</math> a real, non-negativ
-e value.
- We'll normalize the measure such that :<math>
-\backslash 
-mu(
-\backslash 
-varnothing)=0</math> and :<math>
-\backslash 
-mu(
-\backslash 
-Omega)=1</math> The requirement of [[sigma additivity]] implies that all
- other values will be less than one.
- A measure will be said to be '''translation invariant''' if 
+The measure is a function 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ that assigns to each element 
+\begin_inset Formula $C_{(n,s)}$
+\end_inset 
+
+ a real, non-negative value.
+ It is convenient to normalize the measure such that 
+\begin_inset Formula $\mu(\varnothing)=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mu(\Omega)=1$
+\end_inset 
+
+.
+ The requirement of sigma-additivity implies that all other values will
+ be less than one.
+ A measure will be said to be 
+\emph on 
+translation invariant
+\emph default 
+ if 
+\begin_inset Formula $\mu(C_{(n,s)})=\mu(C_{(m,s)})$
+\end_inset 
+
+ for all 
+\begin_inset Formula $m,n$
+\end_inset 
+
+.
 \layout Standard
 
-:<math>
-\backslash 
-mu(C_{(n,s)})=
-\backslash 
-mu(C_{(m,s)})</math> 
-\layout Standard
-
-for all <math>m,n</math>.
- We can use sigma additivity to construct a collection of translation invariant
+We can use sigma additivity to construct a collection of translation invariant
  measures as follows.
  Let
 \layout Standard
@@ -2550,254 +2560,38 @@ sigma_k} x^{
 sum_{j=0}^k {k 
 \backslash 
 choose j} x^j (1-x)^{k-j} = 1</math>
+\layout Subsection
+
+ToDo
 \layout Standard
 
-The appearance of the binomial coefficient is another hint that there might
- be something fractal around the corner.
- The binomial coefficient has many relations to fractals; for example, of
- one considers their values modulo a prime ''p'', then [[Pascal's triangle]]
- takes the form of the finite-difference version of [[Sierpinski's gasket]].
- Sums over rows i.e.
- <math>
-\backslash 
-sum_j {k 
-\backslash 
-choose j} 
-\backslash 
-mod p</math> generate the [[Batrachion]] curve, which is the finite-difference
- version of the [[Takagi curve]] -- which has a fractal, dyadic symmetry.
- Yes, this is a stretch at this point in the game, but the powerful p-adic
- fractal nature of the binomial coefficient should not be overlooked or
- under-estimated in its importance.
+To-do list:
 \layout Standard
 
-:OK.
- Well we will see if it crops up later.
+-- Define the measure on the cylinder sets that the Kac model induces (to
+ be copied from wikipedia page) 
 \layout Standard
 
-===Other translation-invariant measures=== The partition function, to be
- constructed later, will be seen to be another translation-invariant measure,
- not taking the form above.
+-- review: the 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ measure on the real-number line maps to the 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ measure on the cylinder sets via the question mark.
 \layout Standard
 
-===Non-translation-invariant measures=== For completeness, here's an example
- of a non-translation-invariant measure.
- One may assign 
-\layout Standard
-
-:<math>
-\backslash 
-mu
-\backslash 
-left(C_{(n,A)}
-\backslash 
-right) = f_n</math>
-\layout Standard
-
-for some arbitrary sequence <math>0
-\backslash 
-le f_n
-\backslash 
-le 1</math>.
- One then has
-\layout Standard
-
-:<math>
-\backslash 
-mu
-\backslash 
-left(C_{(n,B)}
-\backslash 
-right) = 1-f_n</math> 
-\layout Standard
-
-To get the measure on the remaining elements of the subbase, one uses a
- multiplicative construction, requiring that
-\layout Standard
-
-:<math>
-\backslash 
-mu
-\backslash 
-left(C_{(n,sA)}
-\backslash 
-right) = f_{n+
-\backslash 
-operatorname{len}(s)}
-\backslash 
-; 
-\backslash 
-mu
-\backslash 
-left(C_{(n,s)}
-\backslash 
-right) </math>
-\layout Standard
-
-and :<math>
-\backslash 
-mu
-\backslash 
-left(C_{(n,sB)}
-\backslash 
-right) = (1-f_{n+
-\backslash 
-operatorname{len}(s)} )
-\backslash 
-; 
-\backslash 
-mu
-\backslash 
-left(C_{(n,s)}
-\backslash 
-right) </math>
-\layout Standard
-
-I believe this measure is fully self-consistent.
- I think more general measures are possible, combining the above with partition-
-function-like measures.
-\layout Standard
-
-===Some general remarks=== It should be noted that, up to this point, the
- theory developed so far is more or less isomorphic to that of a certain
- class of [[Markov chain]]s, and also for [[subshifts of finite type]],
- and to a lesser degree, but more generally, [[measure-preserving dynamical
- system]]s.
- I don't want to pursue these relations just right now.
-\layout Standard
-
-FWIW, having a measure is more or less sufficient for defining entropy,
- for example, the [[Kolmogorov-Sinai entropy]].
- If one has a metric, one may also have a [[topological entropy]].
- These are all related to the entropies that can be given on Markov chains
- and in [[information theory]] and of course stat mech in general; the problem
- is to a large degree a problem of wildly varying notation.
- Perhaps we'll explore these later.
-\layout Standard
-
-We'll also have to do partition function.
-\layout Standard
-
-===Entropy=== Let <math>Q=
-\backslash 
-{Q_1,
-\backslash 
-ldots,Q_k
-\backslash 
-}</math> be a [[partition of a set|partition]] of <math>
-\backslash 
-Omega</math> into ''k'' measurable pair-wise disjoint pieces.
- The [[information entropy]] of a partition ''Q'' is defined as
-\layout Standard
-
-:<math>H_
-\backslash 
-mu(Q)=-
-\backslash 
-sum_{m=1}^k 
-\backslash 
-mu (Q_m) 
-\backslash 
-log 
-\backslash 
-mu(Q_m)</math>
-\layout Standard
-
-I believe that the correct definition of the "measure-theoretic entropy"
- is then
-\layout Standard
-
-:<math>h (
-\backslash 
-mu) = 
-\backslash 
-sup_{Q} H_
-\backslash 
-mu(Q)</math>
-\layout Standard
-
-where the [[supremum]] is taken over all finite measurable partitions.
- I'm not sure, I'm guessing that 
-\layout Standard
-
-:<math>h (
-\backslash 
-mu) = -x 
-\backslash 
-log x - (1-x)
-\backslash 
-log(1-x)</math>
-\layout Standard
-
-or something like that, for the translation-invariant measures given above,
- although I'd have to do some thinking to verify that this is correct.
- Anyway, its gives a general idea.
-\layout Standard
-
-===The metric=== Punting for now, until we need it.
- :OK.
- I don't really want to preempt your next installment, but I do have two
- comments so far.
-\layout Standard
-
-:(1) I guess you will explain precisely where the metric comes into the
- definition of the ising model, so I won't preempt that discussion at all.
-\layout Standard
-
-:(2) You haven't yet defined the p-adic metric, so I should probably wait.
- But...suppose I have two strings, s^1 and s^2, defined by <math>b^i_0 b^i_1
- ...b^i_
-\backslash 
-infty</math>, where <math>b_k
-\backslash 
-in
-\backslash 
-{0,1
-\backslash 
-}</math>, and i=1,2.
- I think by the dyadic map we both mean an assignment of the numbers :<math>
-\backslash 
-tilde{s}^i=
-\backslash 
-sum_{k=0}^
-\backslash 
-infty b^i_k 2^{-k}</math> to these strings.
- Will the dyadic metric be something like :<math>d(s_1,s_2)=|
-\backslash 
-tilde{s}^1-
-\backslash 
-tilde{s}^2|</math>?
-\layout Standard
-
-:If not, please do ignore me and continue! If so, my comment is that this
- is not quite the same as looking at how many letters match up, and how
- many letters differ, which goes back to what I said way above: {...001} is
- near to {...000}, but {100...} is *not* near to {000...}.
- Moreover, all the states like {011110} will be nearer to {000000}, the
- reason for this discrepancy being the weighting of <math>2^{-k}</math>
- in the definition of <math>
-\backslash 
-tilde{s}^i</math>.
- 
-\layout Standard
-
-:I suppose in the finite N case, one might prefer the metric :<math>d(s_1,s_2)=
-\backslash 
-sum_{k=0}^N |b^1_k-b^2_k|</math>, or even :<math>d(s_1,s_2)=
-\backslash 
-sum_{k=0}^N b^1_k-
-\backslash 
-sum_{k=0}^N b^2_k</math>, if one doesn't care about the ordering of the
- spins.
- I can see there might be problems with this in the limit <math>N
-\backslash 
-rightarrow
-\backslash 
-infty</math>, so perhaps you are about to convince me that the p-adic metric
- is the best one can do (as far as looking at how many letters match up),
- in the infinite limit.
- Or perhaps I have jumped in too early, and the above is not where you are
- aiming for.
+-- etc.
 \layout Standard
 
 
