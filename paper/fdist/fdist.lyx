@@ -32,7 +32,7 @@ Modular Fractal Measures
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (updated 17 September 2006)
+12 October 2004 (updated 18 September 2006)
 \layout Abstract
 
 This breif note reviews a circle of topics connecting the derivative of
@@ -1724,11 +1724,14 @@ Now, the question mark function maps the rational numbers to the dyadic
  binary strings: thus the quadratic irrationals and the rational numbers
  are in perfect one-to-one correspondance.
  
+\layout Subsubsection
+
+Gibbbs states and fractal self-similarity
 \layout Standard
 
-Thus, the physics of the Kac model provides insight to why the question
- mark has flat spots at every rational, and why its derivative is non-vanishing
- on the irrationals: only the irrationals are mapped to strings that don't
+The physics of the Kac model provides insight to why the question mark has
+ flat spots at every rational, and why its derivative is non-vanishing on
+ the irrationals: only the irrationals are mapped to strings that don't
  terminate.
  In physics, such states are called 
 \begin_inset Quotes eld
@@ -1795,24 +1798,60 @@ At first blush, the matching of real numbers to lattice model configurations
 
  may seem arbitrary: one might imagine a large class of maps that could
  connect these spaces.
- A reasonable requirement on the set of all such maps would be that they
- somehow preserve the translation invariance.
+ The seeming fractal nature of the problem may be a trick of the mind, wrapped
+ up in the mapping of equation x
+\begin_inset LatexCommand \ref{eq:dyadic map}
+
+\end_inset 
+
+ instead of being intrinsic to the physics of the configuration space.
+ This concern raises two important questions: does there exist a non-fractal
+ mapping from the space of configuration states to the real number line,
+ and how should the concept of 
+\begin_inset Quotes eld
+\end_inset 
+
+fractal
+\begin_inset Quotes erd
+\end_inset 
+
+ be expressed on spaces, such as the space of states, whose topology is
+ not naturally that of the real number line?
+\layout Standard
+
+A reasonable requirement on a map from the configuration space to the reals
+ would be that it somehow preserves the translation invariance.
  That is, if 
 \begin_inset Formula $f:\Omega\to\mathbb{R}$
 \end_inset 
 
- where 
-\begin_inset Formula $\Omega=\{\sigma\}$
+ is some map that assigns a real number to each point 
+\begin_inset Formula $\sigma\in\Omega$
 \end_inset 
 
- is the set of all possible states, then one might expect that there exists
- a funtion 
+, the set of all possible states, then one might require that there exists
+ a function 
 \begin_inset Formula $g:\mathbb{R}\to\mathbb{R}$
 \end_inset 
 
  such that 
+\begin_inset Formula \begin{equation}
+(f\circ\tau)(\sigma)=(g\circ f)(\sigma)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\tau$
+\end_inset 
+
+is the shift operator.
+ This requriment that the mapping preserve translation invariance is simply
+ a requriment that there exists a commuting diagram:
 \begin_inset Formula \[
-(f\circ\tau)(\sigma)=(g\circ f)(\sigma)\]
+\begin{array}{ccc}
+\Omega & {f\atop \longrightarrow} & \mathbb{R}\\
+\tau\downarrow &  & \downarrow g\\
+\Omega & {\longrightarrow\atop f} & \mathbb{R}\end{array}\]
 
 \end_inset 
 
