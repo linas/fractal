@@ -122,7 +122,7 @@ double partition (double (*interaction)(double, int), int len)
 		
 		double en = energy (interaction, x, len);
 		
-		en = exp (4.0*en);
+		en = exp (en);
 		z += delta * en;
 
 		if (i%prt == 0) {
