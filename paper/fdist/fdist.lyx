@@ -1821,6 +1821,8 @@ fractal
 
 A reasonable requirement on a map from the configuration space to the reals
  would be that it somehow preserves the translation invariance.
+ Translation invariance is an important physical requirment of a lattice
+ model, and one would like to have this requirement reflected in the mapping.
  That is, if 
 \begin_inset Formula $f:\Omega\to\mathbb{R}$
 \end_inset 
@@ -1847,15 +1849,36 @@ A reasonable requirement on a map from the configuration space to the reals
 is the shift operator.
  This requriment that the mapping preserve translation invariance is simply
  a requriment that there exists a commuting diagram:
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \begin{array}{ccc}
 \Omega & {f\atop \longrightarrow} & \mathbb{R}\\
 \tau\downarrow &  & \downarrow g\\
-\Omega & {\longrightarrow\atop f} & \mathbb{R}\end{array}\]
+\Omega & {\longrightarrow\atop f} & \mathbb{R}\end{array}\label{eq:}\end{equation}
 
 \end_inset 
 
+ It should now be clear that the representation of translation invariance
+ on the real number line is a requirement that the mapping have a fixed
+ point at which it is self-similar: that is, one must have 
+\begin_inset Formula \begin{equation}
+(f\circ\tau^{n})(\sigma)=(g^{n}\circ f)(\sigma)\label{eq:}\end{equation}
 
+\end_inset 
+
+ for all positive integers 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ Translation invariance implies iteration; it is well understood that, in
+ general, the iteration of functions on the real number line results in
+ fractals.
+ 
+\layout Standard
+
+Another important requirement is reflection so get g,r which generate the
+ dyadics.
+ Dohh! inevitable.
 \layout Standard
 
 ToDo finish up the following section.
@@ -1873,7 +1896,7 @@ Specifically translation invariance requeires that for any ordering one
 \begin_inset Formula $f(1-x)=1-f(x)$
 \end_inset 
 
- which is staisfied by the question mark: 
+ which is satisfied by te question mark: 
 \begin_inset Formula $?(1-x)=1-?(x)$
 \end_inset 
 
