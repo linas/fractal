@@ -1468,7 +1468,7 @@ with the rational
 
 
 \begin_inset Formula \begin{equation}
-x(\sigma)=\sum_{k=0}^{N}\left(\frac{\sigma_{k}+1}{2}\right)2^{-(k+1)}=\sum_{k=0}^{N}b_{k}2^{-(k+1)}\label{eq:}\end{equation}
+x(\sigma)=\sum_{k=0}^{N}\left(\frac{\sigma_{k}+1}{2}\right)2^{-(k+1)}=\sum_{k=0}^{N}b_{k}2^{-(k+1)}\label{eq:dyadic map}\end{equation}
 
 \end_inset 
 
@@ -1693,6 +1693,11 @@ P(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\frac{H(\sigma)}{k_{B}T}\right)\label{
 \end_inset 
 
  ensures that the sum of probabilities over all states equals to one.
+ Here, 
+\begin_inset Formula $\Omega=2^{N}=\{\sigma\}$
+\end_inset 
+
+ is merely used to denote the set of all possible configurations.
  A graph of this probability function is shown in figure 
 \begin_inset LatexCommand \ref{cap:Partition-Probabilities}
 
@@ -1887,6 +1892,15 @@ Z(N)=\sum_{\sigma}\exp\, H(\sigma)\label{eq:}\end{equation}
 
 \end_inset 
 
+ (The use of 
+\begin_inset Formula $N$
+\end_inset 
+
+ instead of 
+\begin_inset Formula $\Omega=2^{N}$
+\end_inset 
+
+ here is merely a notational convenience).
  In physics, this normalization is known as the 
 \begin_inset Quotes eld
 \end_inset 
@@ -2058,6 +2072,38 @@ explain
  That is, if one chooses some Gibbs state, and then chops off the leading
  binary digit, one must necessarily have another Gibbs state.
  
+\layout Standard
+
+At first blush, the matching of real numbers to lattice model configurations
+ given by the dyadic map of equation 
+\begin_inset LatexCommand \ref{eq:dyadic map}
+
+\end_inset 
+
+ may seem arbitrary: one might imagine a large class of maps that could
+ connect these spaces.
+ A reasonable requirement on the set of all such maps would be that they
+ somehow preserve the translation invariance.
+ That is, if 
+\begin_inset Formula $f:\Omega\to\mathbb{R}$
+\end_inset 
+
+ where 
+\begin_inset Formula $\Omega=\{\sigma\}$
+\end_inset 
+
+ is the set of all possible states, then one might expect that there exists
+ a funtion 
+\begin_inset Formula $g:\mathbb{R}\to\mathbb{R}$
+\end_inset 
+
+ such that 
+\begin_inset Formula \[
+(f\circ\tau)(\sigma)=(g\circ f)(\sigma)\]
+
+\end_inset 
+
+
 \layout Standard
 
 ToDo finish up the following section.
