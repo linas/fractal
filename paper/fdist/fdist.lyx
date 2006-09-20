@@ -997,7 +997,7 @@ Given a lattice of
  One defines an interaction potential between neighboring spins in the lattice.
  For the traditional Ising model, the interaction potential is 
 \begin_inset Formula \begin{equation}
-V(\sigma)=-J\sigma_{0}\sigma_{1}+M\sigma_{0}\label{eq:}\end{equation}
+V(\sigma)=-J\sigma_{0}\sigma_{1}+M\sigma_{0}\label{eq:Ising potential}\end{equation}
 
 \end_inset 
 
@@ -1871,48 +1871,296 @@ is the shift operator.
 
 .
  Translation invariance implies iteration; it is well understood that, in
- general, the iteration of functions on the real number line results in
+ general, the iteration of functions of the real number line results in
  fractals.
+ The above result is general; it applies to all one-dimensional lattice
+ models, and is not dependent one the form of the ineteraction, or even
+ on the number of states at a given lattice location.
+\layout Standard
+
+For the two-state model, there is another symmetry that one might expect
+ to preserve: this is the symmetry under the interchange of the two states.
+ In the absence of a magnetic-field-type interaction (so 
+\begin_inset Formula $M=0$
+\end_inset 
+
+ in equation 
+\begin_inset LatexCommand \ref{eq:Ising potential}
+
+\end_inset 
+
+), one might expect an absolute symmetry.
+ Let 
+\begin_inset Formula $\rho:\Omega\to\Omega$
+\end_inset 
+
+ be this reflection operator, the operator that, given a string of letters
+ 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+, exchanges state 
+\begin_inset Formula $A$
+\end_inset 
+
+ (or -1) for the letter 
+\begin_inset Formula $B$
+\end_inset 
+
+ (or +1), and 
+\emph on 
+vice-versa
+\emph default 
+.
+ Corresponding to this, one expects a function 
+\begin_inset Formula $r:\mathbb{R}\to\mathbb{R}$
+\end_inset 
+
+ that makes the following diagram commute: 
+\begin_inset Formula \begin{equation}
+\begin{array}{ccc}
+\Omega & {f\atop \longrightarrow} & \mathbb{R}\\
+\rho\downarrow &  & \downarrow r\\
+\Omega & {\longrightarrow\atop f} & \mathbb{R}\end{array}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Clearly, one has 
+\begin_inset Formula $\rho^{2}(\sigma)=\sigma$
+\end_inset 
+
+ the identity function, and so 
+\begin_inset Formula $r^{2}(x)=x$
+\end_inset 
+
+ is the identity as well.
  
 \layout Standard
 
-Another important requirement is reflection so get g,r which generate the
- dyadics.
- Dohh! inevitable.
-\layout Standard
-
-ToDo finish up the following section.
-\layout Standard
-
-Translation-invariant ordering of states: an ordering of states such that
- chopping off the first bit.
-\layout Standard
-
-Question mark function is such a tranlation-invariant ordering.
-\layout Standard
-
-Specifically translation invariance requeires that for any ordering one
- has 
-\begin_inset Formula $f(1-x)=1-f(x)$
+Given such a translation-invariant homomorphism 
+\begin_inset Formula $f$
 \end_inset 
 
- which is satisfied by te question mark: 
-\begin_inset Formula $?(1-x)=1-?(x)$
+, that has functions 
+\begin_inset Formula $g$
 \end_inset 
 
- and also self-similarity when first bit is cut off:
-\begin_inset Formula \[
-\frac{?(x)}{2}=?\left(\frac{x}{x+1}\right)\]
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ acting as representations of tranlsation and reflection, one has in essence
+ constructed everything that is needed to have a fractal with dyadic symmetry.
+ That is, one need only to recognize that 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ generate the dyadic monoid of the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ The elements of this monoid are of the form
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\gamma=g^{a}\circ r\circ g^{b}\circ r\circ g^{c}\circ\cdots\label{eq:}\end{equation}
 
 \end_inset 
 
+ where 
+\begin_inset Formula $a,b,c,\ldots$
+\end_inset 
 
+ are non-negative integers.
+ 
 \layout Standard
 
-Diophantine
+This construction holds for essentially all two-state lattice models.
+ That is, let 
+\begin_inset Formula $f$
+\end_inset 
+
+ be the translation-invariant homomorphism as above, and let 
+\begin_inset Formula $h:\Omega\to X$
+\end_inset 
+
+ be just about any function to some space 
+\begin_inset Formula $X$
+\end_inset 
+
+ which commutes with the reflection operator 
+\begin_inset Formula $\rho$
+\end_inset 
+
+.
+ Then 
+\begin_inset Formula $(h\circ f^{-1}):\mathbb{R}\to X$
+\end_inset 
+
+ is necessarily a fractal, having elements 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ of the dyadic monoid giving the set of self-symmetries of the fractal.
+ (The details on why anything having dyadic monoid symmetry is a fractal
+ are voluminously and excrutiatingly detailed in my other writings).
+ In particular, the result here is independent of the details of the interaction
+ between spins (barring the magnetic interaction, which can also be taken
+ care of).
+ We conclude: 
+\series bold 
+\emph on 
+all such lattice models have a fractal self-symmetry
+\series default 
+\emph default 
+.
 \layout Standard
 
-appearance of the question mark function can be given a physical interpretation.
+A very breif synopsis of the generalproperties of monoid elements 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ are in order.
+ First, all such elements may be represented by the continued fraction
+\begin_inset Formula \begin{equation}
+\gamma_{C}=\frac{1}{a+\frac{1}{b+\frac{1}{c+\cdots}}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Since every real number has an (essentially) unique representation in terms
+ of continued fractions (up to a 
+\begin_inset Formula $\mathbb{Z}_{2}$
+\end_inset 
+
+choice), this means the self-symmetries of the fractal may be labelled by
+ the real numbers.
+ The generators 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ also generate walks on the infinite binary tree: 
+\begin_inset Formula $g$
+\end_inset 
+
+ may be taken to mean 
+\begin_inset Quotes eld
+\end_inset 
+
+always take the left branch downwards
+\begin_inset Quotes erd
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ may be taken to mean 
+\begin_inset Quotes eld
+\end_inset 
+
+reverse the sense of left and right
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ Walks on the binary tree may also be represented as a sequence of left,
+ right moves.
+ An arbitrary string in two lettters 
+\begin_inset Formula $L$
+\end_inset 
+
+ and R may be taken to be a real number as well, which may be denoted by
+ 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+ when the sequence of 
+\begin_inset Formula $L,R$
+\end_inset 
+
+ moves take one to the same place as the series of 
+\begin_inset Formula $g,r$
+\end_inset 
+
+ moves given by 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+.
+ The Minkowski question mark function is nothing more and nothing less than
+ the function that relates 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+ to 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+.
+ That is,
+\begin_inset Formula \begin{equation}
+?(\gamma_{C})=\gamma_{D}\label{eq:}\end{equation}
+
+\end_inset 
+
+ In terms of the generators, on has 
+\begin_inset Formula $r(x)=1-r(1-x)$
+\end_inset 
+
+, which is satisfied by the question mark: 
+\begin_inset Formula $(?\circ r)(x)=?(1-x)=1-?(x)=(r\circ?)(x)$
+\end_inset 
+
+.
+ The generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ has inequivalent representations 
+\begin_inset Formula $g_{D}$
+\end_inset 
+
+and 
+\begin_inset Formula $g_{C}$
+\end_inset 
+
+ for the dyadic and continued fraction representations, given by 
+\begin_inset Formula $g_{D}(x)=x/2$
+\end_inset 
+
+ and 
+\begin_inset Formula $g_{C}(x)=x/(x+1)$
+\end_inset 
+
+, so that one has 
+\begin_inset Formula \begin{equation}
+\left(g_{D}\circ?\right)(x)=\frac{?(x)}{2}=?\left(\frac{x}{x+1}\right)=\left(?\circ g_{C}\right)(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Thus, we have demonstrated a corollary, of sorts: no matter what the form
+ of the function 
+\begin_inset Formula $f$
+\end_inset 
+
+, if it preserves the translation invariance of the lattice, then the Minkowski
+ question mark will inevitably appear in the theory.
+\layout Subsection
+
+Measure Theory
+\layout Standard
+
+ToDo This is what needs to be done for the following sections.
 \layout Standard
 
 Several questions arise.
@@ -1958,7 +2206,7 @@ ted into the Hamiltonian deserves a review.
 The next section begins a more formal development, starting with a a review
  of a topology for lattice models, and the sigma algebra that may be built
  on it.
-\layout Subsection
+\layout Subsubsection
 
 Measure theory and sigma-algebras on a lattice 
 \layout Standard
@@ -2174,7 +2422,7 @@ quantum Hamiltonian
 \end_inset 
 
 , because the sigma algebra may be used to define functional integrals.
-\layout Subsection
+\layout Subsubsection
 
 The cylinder set topology
 \layout Standard
@@ -2375,7 +2623,7 @@ whenever
 \end_inset 
 
  is the length of the string.
-\layout Subsection
+\layout Subsubsection
 
 Measures on cylinder sets 
 \layout Standard
@@ -2558,7 +2806,7 @@ sigma_k} x^{
 sum_{j=0}^k {k 
 \backslash 
 choose j} x^j (1-x)^{k-j} = 1</math>
-\layout Subsection
+\layout Subsubsection
 
 ToDo
 \layout Standard
