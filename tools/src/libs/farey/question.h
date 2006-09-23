@@ -16,6 +16,7 @@ extern "C" {
 
 double question_mark (int num, int denom);
 double fquestion_mark (double);
+double question_inverse (double);
 
 #ifdef   __cplusplus
 };
