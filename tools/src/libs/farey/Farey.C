@@ -1356,7 +1356,7 @@ double Inverse (void *cxt, double (*func)(void *, double), double val)
 /* ------------------------------------------------------------ */
 /* computes inverse of Farey (Minkowski) mapping */
 
-double InvFarey_f (void * stru, double val) 
+static double inv_cb (void * stru, double val) 
 {
 	ContinuedFraction *fp;
 
@@ -1380,7 +1380,7 @@ double InvFarey (double val)
    if (0.0 > val) intpart --;
    val -= (double) intpart;
 
-   retval = Inverse (((void *) &f), InvFarey_f, val);
+   retval = Inverse (((void *) &f), inv_cb, val);
 
    retval += (double) intpart;
 
