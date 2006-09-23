@@ -1355,6 +1355,7 @@ double Inverse (void *cxt, double (*func)(void *, double), double val)
 
 /* ------------------------------------------------------------ */
 /* computes inverse of Farey (Minkowski) mapping */
+/* using a really stooopid and ineffcient algorithm */
 
 static double inv_cb (void * stru, double val) 
 {
