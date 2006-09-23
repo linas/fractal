@@ -155,6 +155,46 @@ ContinuedFraction::RealToContinuedFraction (double val)
 /* ------------------------------------------------------------ */
 
 void 
+ContinuedFraction::SetFarey (double val) 
+{
+	int i,j;
+   intpart = (int) val;
+   if (0.0 > val) intpart --;
+   val -= (double) intpart;
+
+	nterms = 0;
+	tinued_frac[0] = 0;
+
+	if (0.5 < val)
+	{
+		nterms = 1;
+		tinued_frac[0] = 1;
+		val = 1.0-val;
+	}
+	
+	j=0;
+	/* There are 48 or so bits in a double ?? */
+	for (i=0; i<48; i++)
+	{
+		if (0.5 > val)
+		{
+			j++;
+		}
+		else
+		{
+			tinued_frac[nterms] = j;
+			nterms ++;
+			val = 1.0-val;
+			j = 0;
+		}
+	}
+	tinued_frac[nterms] = j;
+	nterms ++;
+}
+
+/* ------------------------------------------------------------ */
+
+void 
 ContinuedFraction::Print (void)
 {
    int i;
