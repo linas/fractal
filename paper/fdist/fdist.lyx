@@ -1003,7 +1003,7 @@ Given a lattice of
  One defines an interaction potential between neighboring spins in the lattice.
  For the traditional Ising model, the interaction potential is 
 \begin_inset Formula \begin{equation}
-V(\sigma)=-J\sigma_{0}\sigma_{1}+M\sigma_{0}\label{eq:Ising potential}\end{equation}
+V(\sigma)=J\sigma_{0}\sigma_{1}+M\sigma_{0}\label{eq:Ising potential}\end{equation}
 
 \end_inset 
 
@@ -1254,7 +1254,7 @@ canonical ensemble
  of all possible configurations.
  The probability is usually given by the Boltzmann distribution 
 \begin_inset Formula \begin{equation}
-P(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\frac{H(\sigma)}{k_{B}T}\right)\label{eq:}\end{equation}
+P(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\frac{H(\sigma)}{k_{B}T}\right)\label{eq:probability distribution}\end{equation}
 
 \end_inset 
 
@@ -1272,8 +1272,11 @@ P(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\frac{H(\sigma)}{k_{B}T}\right)\label{
 \begin_inset Formula $P(\sigma)$
 \end_inset 
 
- can be interpreted as a probability: it is non-negative, and with an appropriat
-e normalization factor 
+ can be interpreted as a probability (more precisely, a 
+\emph on 
+probability density function
+\emph default 
+): it is non-negative, and with an appropriate normalization factor 
 \begin_inset Formula $Z(\Omega)$
 \end_inset 
 
@@ -1290,6 +1293,101 @@ e normalization factor
 \end_inset 
 
 .
+ 
+\layout Standard
+
+At least a superficial resemblance of the probability to the distribution
+ of the Farey numbers of figure 
+\begin_inset LatexCommand \ref{cap:Distribution-of-Farey}
+
+\end_inset 
+
+ is readily appearant.
+ This resemblance can be emphasized by graphing the the cumulative distribution
+ as a function of 
+\begin_inset Formula $x(\sigma)$
+\end_inset 
+
+, that is, graphing
+\begin_inset Formula \begin{equation}
+F(y)=\sum_{\sigma;x(\sigma)<y}P(x)\label{eq:cumulative distribution}\end{equation}
+
+\end_inset 
+
+ A graph of the cumulative distribution is shown in the figure 
+\begin_inset LatexCommand \ref{cap:Ising-Model-Cumulative}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Ising-Model-Cumulative}
+
+\end_inset 
+
+Ising Model Cumulative Distribution
+\layout Standard
+
+
+\begin_inset Graphics
+	filename ising-integral.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the cumulative distribution 
+\begin_inset Formula $F(y)$
+\end_inset 
+
+ defined by equation 
+\begin_inset LatexCommand \ref{eq:cumulative distribution}
+
+\end_inset 
+
+, for the probability distribution 
+\begin_inset LatexCommand \ref{eq:probability distribution}
+
+\end_inset 
+
+ for the Ising model interaction 
+\begin_inset LatexCommand \ref{eq:Ising potential}
+
+\end_inset 
+
+.
+ As in the other graphs, the lattice size is taken as 
+\begin_inset Formula $N=10$
+\end_inset 
+
+, so that 
+\begin_inset Formula $2^{N}=1024$
+\end_inset 
+
+ states are graphed.
+ The Ising interaction is taken with 
+\begin_inset Formula $J=0.3$
+\end_inset 
+
+ and 
+\begin_inset Formula $M=0$
+\end_inset 
+
+.
+\end_inset 
+
+
 \layout Subsubsection
 
 Fractal self-symmetry
