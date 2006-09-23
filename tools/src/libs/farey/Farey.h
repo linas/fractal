@@ -26,7 +26,7 @@ class ContinuedFraction
       ContinuedFraction (void);
       void SetReal (double);
       void SetRatio (int num, int deno);
-      void SetFarey (double);
+      // void SetFarey (double);
 		void SetEvenize (void);
 
       void Print (void);

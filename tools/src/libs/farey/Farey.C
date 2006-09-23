@@ -153,7 +153,12 @@ ContinuedFraction::RealToContinuedFraction (double val)
 }
 
 /* ------------------------------------------------------------ */
+/* This algorithm sucks. The goal was to find inverse,
+ * but mere bit-counting is a terrible algorithm for getting the
+ * inverse. Thus its deprecated.
+ */
 
+#ifdef SUCKY_ROUTINE 
 void 
 ContinuedFraction::SetFarey (double val) 
 {
@@ -179,18 +184,20 @@ ContinuedFraction::SetFarey (double val)
 		if (0.5 > val)
 		{
 			j++;
+			val *=2.0;
 		}
 		else
 		{
 			tinued_frac[nterms] = j;
 			nterms ++;
 			val = 1.0-val;
-			j = 0;
+			j = 1;
 		}
 	}
 	tinued_frac[nterms] = j;
 	nterms ++;
 }
+#endif
 
 /* ------------------------------------------------------------ */
 
@@ -1394,8 +1401,11 @@ double Inverse (void *cxt, double (*func)(void *, double), double val)
 }
 
 /* ------------------------------------------------------------ */
-/* computes inverse of Farey (Minkowski) mapping */
-/* using a really stooopid and ineffcient algorithm */
+/* Computes inverse of Farey (Minkowski) mapping.
+ * Algorithm used here is a finding of inverse by binary subdivision
+ * which is slowwww but much more accurate than naive bit-counting.
+ */
+static ContinuedFraction workspace;
 
 static double inv_cb (void * stru, double val) 
 {
@@ -1411,17 +1421,16 @@ static double inv_cb (void * stru, double val)
 
 double InvFarey (double val) 
 {
-	ContinuedFraction f;
    double retval;
    int intpart;
 
-	f.SetEvenize();
+	workspace.SetEvenize();
 
    intpart = (int) val;
    if (0.0 > val) intpart --;
    val -= (double) intpart;
 
-   retval = Inverse (((void *) &f), inv_cb, val);
+   retval = Inverse (((void *) &workspace), inv_cb, val);
 
    retval += (double) intpart;
 
