@@ -71,7 +71,7 @@ FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
 GCF=../tools/lib/gcf.o
 MOBIUS=../tools/lib/moebius.o ../tools/lib/cache.o
 MODULAR=../tools/lib/modular.o
-QUESTION=../tools/lib/question.o
+QUESTION=../tools/lib/question.o $(FAREY) $(GCF)
 TOTIENT=../tools/lib/totient.o
 
 GMP=-lgmp

@@ -140,55 +140,32 @@ double energy (double (*interaction)(double), double s, int n)
 
 /* Compute finite state partition */
 
-double partition (double (*interaction)(double), int n)
+double partition (double (*interaction)(double), double x)
 {
-	double ez = 0.0;
-	double z = 0.0;
-
-	int m = (1<<n);
-	int prt = m/2000;
-	prt=1;
-	int i;
-
-	double om = 1.0 / ((double) m);
-	double delta = om;
-	double sprev = 0.0;
+	int n = 10;
+		
+	// double y = fquestion_mark (x);
+	// double en = energy (interaction, y, n);
 	
-	for (i=1; i<m; i++)
-	{
-		double x = om * ((double) i);
-		double y = question_mark (i,m);
+	double en = energy (interaction, x, n);
 		
-		// double en = energy (interaction, y, n);
-		double en = energy (interaction, x, n);
-		
-		en = exp (-en);
-		z += delta * en;
-
-		if (i%prt == 0) {
-			printf ("%d	%10.8g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, y, interaction(x), en, z);
-			fflush (stdout);
-		}
-	}
-
-	printf ("# partition = %g\n", z);
-
-	return z;
+	return en;
 }
 
 static double 
 density (double x, double y, int itermax, double param)
 {
-	int n = itermax;
-
-	partition (nearest_neighbor, n);
 	// partition (pabola, n);
 	// partition (tent, n);
 	// partition (vq, n);
 	// partition (qtent, n);
 	// partition (kac, n);
 	// partition (pointy, n);
-	returnxxx
+	
+	double en = partition (nearest_neighbor, x);
+	en += partition (nearest_neighbor, y);
+	en = exp (-en);
+	return en;
 }
 
 DECL_MAKE_HEIGHT(density);
