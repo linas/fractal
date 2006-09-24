@@ -2722,9 +2722,15 @@ H\left(\tau^{n}\sigma\right)=H\left(\sigma\right)\label{eq:}\end{equation}
 \layout Standard
 
 XXX develop more fully.
- Talk about Gibbs states.
- Also talk about transfer operators and the basis functions for the basis
- operators and the time-asymmetry of the spectrum for the transfer operator.
+ Talk about Gibbs states, which are the stationary states of the transfer
+ operator.
+ Also talk about the decyaing states i.e.
+ the eignenfunctions of the transfer operator that have an eignevalue of
+ less than one.
+ Possibly review time-symmetry breaking in the spectrum of the decaying
+ states (i.e.
+ the time-reversed decaying state is a growing state).
+ Ref.
 \begin_inset LatexCommand \cite{Dri99}
 
 \end_inset 
@@ -3749,52 +3755,48 @@ translation invariant
 .
 \layout Standard
 
+ToDo XXX finish this section.
+\layout Standard
+
 We can use sigma additivity to construct a collection of translation invariant
  measures as follows.
- Let
-\layout Standard
+ Let 
+\begin_inset Formula $\mu(C_{(n,A)})=x$
+\end_inset 
 
-:<math>
-\backslash 
-mu(C_{(n,A)})= x</math>
-\layout Standard
+ for some 
+\begin_inset Formula $0\le x\le1$
+\end_inset 
 
-for some <math>0
-\backslash 
-le x 
-\backslash 
-le 1</math>.
+.
  Then sigma-additivity requires that 
-\layout Standard
+\begin_inset Formula $\mu(C_{(n,B)})=1-x$
+\end_inset 
 
-:<math>
-\backslash 
-mu(C_{(n,B)})= 1-x</math>
-\layout Standard
-
-which follows from the fact that the union of these two disjoint sets is
+ which follows from the fact that the union of these two disjoint sets is
  the entire space.
  One may readily deduce that 
-\layout Standard
+\begin_inset Formula \begin{equation}
+\mu(C_{(n,s)})=x^{\# A(s)}(1-x)^{\# B(s)}\label{eq:}\end{equation}
 
-:<math>
-\backslash 
-mu(C_{(n,s)})= x^{
-\backslash 
-#A(s)} (1-x)^{
-\backslash 
-#B(s)}</math>
-\layout Standard
+\end_inset 
 
-where <math>
-\backslash 
-#A(s)</math> is the number of times the letter 'A' occurs in the string
- ''s'', and likewise for <math>
-\backslash 
-#B(s)</math>.
+where 
+\begin_inset Formula $\# A(s)$
+\end_inset 
+
+ is the number of times the letter 'A' occurs in the string ''s'', and likewise
+ for 
+\begin_inset Formula $\# B(s)$
+\end_inset 
+
+.
  In most physics applications, the canonical and symmetric choice would
- be <math>x=1/2</math>, but it should be clear that this is not mathematically
- constrained.
+ be 
+\begin_inset Formula $x=1/2$
+\end_inset 
+
+, but it should be clear that this is not mathematically constrained.
  One might even be able to make physical arguments to have ''x'' be something
  other than one-half, if, for example (and maybe a bad example), some external
  force is causing there to be more spins pointing in one direction than
@@ -3804,94 +3806,32 @@ where <math>
 
 Lets pursue this idea just a bit further.
  Let 
-\layout Standard
+\begin_inset Formula $\sigma_{k}=\{ s\,:\;\mbox{len}(s)=k\}$
+\end_inset 
 
-:<math>
-\backslash 
-sigma_k=
-\backslash 
-{s
-\backslash 
-,:
-\backslash 
-;
-\backslash 
-operatorname{len}(s)=k
-\backslash 
-}</math>
-\layout Standard
+ be the set of all strings of length ''k''.
+ Then, 
+\begin_inset Formula $\forall s,t\in\sigma_{k},s\ne t$
+\end_inset 
 
-be the set of all strings of length ''k''.
- Then, <math>
-\backslash 
-forall s,t 
-\backslash 
-in 
-\backslash 
-sigma_k, s
-\backslash 
-ne t</math> one has <math>C_{(n,s)} 
-\backslash 
-cap C_{(n,t)} = 
-\backslash 
-varnothing</math>, that is, this set of strings defines sets that are pair-wise
- disjoint.
- One has
-\layout Standard
+ one has 
+\begin_inset Formula $C_{(n,s)}\cap C_{(n,t)}=\varnothing$
+\end_inset 
 
-:<math>
-\backslash 
-bigcup_{s
-\backslash 
-in
-\backslash 
-sigma_k} C_{(n,s)}=
-\backslash 
-Omega</math>
-\layout Standard
+, that is, this set of strings defines sets that are pair-wise disjoint.
+ One has 
+\begin_inset Formula \[
+\bigcup_{s\in\sigma_{k}}C_{(n,s)}=\Omega\]
 
-and, from sigma additivity, we deduce
-\layout Standard
+\end_inset 
 
-:<math>1=
-\backslash 
-mu
-\backslash 
-left(
-\backslash 
-bigcup_{s
-\backslash 
-in
-\backslash 
-sigma_k} C_{(n,s)}
-\backslash 
-right)= 
-\backslash 
-sum_{s
-\backslash 
-in
-\backslash 
-sigma_k} 
-\backslash 
-mu 
-\backslash 
-left(C_{(n,s)}
-\backslash 
-right)= 
-\backslash 
-sum_{s
-\backslash 
-in
-\backslash 
-sigma_k} x^{
-\backslash 
-#A(s)} (1-x)^{
-\backslash 
-#B(s)} = 
-\backslash 
-sum_{j=0}^k {k 
-\backslash 
-choose j} x^j (1-x)^{k-j} = 1</math>
+and, from sigma additivity, we deduce 
+\begin_inset Formula \[
+1=\mu\left(\bigcup_{s\in\sigma_{k}}C_{(n,s)}\right)=\sum_{s\in\sigma_{k}}\mu\left(C_{(n,s)}\right)=\sum_{s\in\sigma_{k}}x^{\# A(s)}(1-x)^{\# B(s)}=\sum_{j=0}^{k}{k \choose j}x^{j}(1-x)^{k-j}=1\]
+
+\end_inset 
+
+
 \layout Subsubsection
 
 ToDo
