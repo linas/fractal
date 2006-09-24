@@ -3,7 +3,7 @@
  * hermite.C
  *
  * Green's function for the quantum harmonic oscillator
- * K(x,y)= sum_n H_n(x) H_N(y) / w_n   where w_n = n+1/2
+ * K(x,y)= sum_n H_n(x) H_n(y) / w_n   where w_n = n+1/2
  *
  * Linas Vepstas March 2006
  */

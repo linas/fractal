@@ -15,7 +15,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         manvert cutoff brat draw dx image
 
 NEW_EXES = affine alpha circle cutoff divisor elliptic \
-        erdos euler-q hermite mand-flow \
+        erdos euler-q hermite ising mand-flow \
         mp_zeta mobius plouffe q-exp swap takagi totient zeta \
         ray automatic radius
 
@@ -56,8 +56,9 @@ circle.o: circle.C brat.h
 cutoff.o: cutoff.C
 divisor.o: divisor.C brat.h
 euler-q.o: euler-q.C
-mobius.o: mobius.C
 hermite.o: hermite.C
+ising.o: ising.C
+mobius.o: mobius.C
 mp_zeta.o: mp_zeta.C
 plouffe.o: plouffe.C
 q-exp.o: q-exp.C brat.h
@@ -70,6 +71,7 @@ FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
 GCF=../tools/lib/gcf.o
 MOBIUS=../tools/lib/moebius.o ../tools/lib/cache.o
 MODULAR=../tools/lib/modular.o
+QUESTION=../tools/lib/question.o
 TOTIENT=../tools/lib/totient.o
 
 GMP=-lgmp
@@ -88,6 +90,7 @@ divisor: brat.o divisor.o util.o $(MOBIUS)
 elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o coord-xforms.o util.o $(MODULAR)
 euler-q: brat.o euler-q.o coord-xforms.o util.o $(MODULAR)
+ising: brat.o ising.o util.o $(QUESTION)
 hermite: brat.o hermite.o util.o 
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
