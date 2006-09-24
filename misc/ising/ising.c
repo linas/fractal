@@ -39,7 +39,7 @@ double nearest_neighbor (double s)
 	s1 = -1.0;
 	if (s>= 0.5) s1 = 1.0;
 	
-	return -0.6 * s0*s1;
+	return 0.3 * s0*s1;
 }
 
 double pabola (double s)
@@ -69,12 +69,25 @@ inline double pointy (double x)
 	return t/(1.0-t);
 }
 
+/* analytic solution potential */
+double vq (double s)
+{
+	if (0.5 < s) s  =1.0-s;
+	
+	double val = question_inverse (2.0*s);
+	val = 2.0* log (1.0+val);
+	val = log (2.0)-val;
+	val = -val;
+	return val;
+}
+
 
 /* Kac Model (which has shape of tent or cantor polynomial.) */
 double kac (double s)
 {
-	double lambda = 0.6666;
+	// double lambda = 0.6666;
 	// double lambda = 0.5;
+	double lambda = 0.306852819;
 	
 	double s0 = -1.0;
 	if (s>= 0.5) {
@@ -99,7 +112,8 @@ double kac (double s)
 
 		if (lp < 1.0e-18) break;
 	}
-	return -(1.0-lambda)*s0*acc;
+	// return -(1.0-lambda)*s0*acc;
+	return -0.693147181*(1.0-lambda)*s0*acc;
 }
 
 /* Return the finite-state energy of string s (length n) */
@@ -141,10 +155,10 @@ double partition (double (*interaction)(double), int n)
 		double x = om * ((double) i);
 		double y = question_mark (i,m);
 		
-		double en = energy (interaction, y, n);
-		// double en = energy (interaction, x, n);
+		// double en = energy (interaction, y, n);
+		double en = energy (interaction, x, n);
 		
-		en = exp (en);
+		en = exp (-en);
 		z += delta * en;
 
 		if (i%prt == 0) {
@@ -170,9 +184,10 @@ main (int argc, char * argv[])
 	n = atoi (argv[1]);
 
 	printf ("#\n# n=%d\n#\n",n);
-	// partition (nearest_neighbor, n);
+	partition (nearest_neighbor, n);
 	// partition (pabola, n);
-	partition (tent, n);
+	// partition (tent, n);
+	// partition (vq, n);
 	// partition (qtent, n);
 	// partition (kac, n);
 	// partition (pointy, n);

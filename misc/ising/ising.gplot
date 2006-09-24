@@ -19,28 +19,32 @@ set key right
 # set xrange [-1:1]
 # set yrange [-1:1]
 
-# set title "Ising Model Configuration Energy"
-set title "Tent Model Configuration Energy"
+set title "Ising Model Configuration Energy"
+# set title "Tent Model Configuration Energy"
 set xlabel "State Number"
 set ylabel "Energy"
 
-plot "ising.dat" using 2:4 title "Interaction energy", \
+plot "ising.dat" using 2:4 title "Interaction potential", \
      "ising.dat" using 2:5 title "Configuration energy"
 
+# ---------------------------------------------------------------
 set term png giant size 800,600
 set out 'ising-partition.png'
-# set title "Ising Model Configuration Energy"
-set title "Weighted Tent Model Partition Probability"
-set xlabel "Weighted State Number"
-set ylabel "Partition Measure"
+set title "Ising Model Partition Probability"
+# set title "Weighted Tent Model Partition Probability"
+# set xlabel "Weighted State Number"
+set xlabel "State Number"
+set ylabel "Partition Probability"
 
 plot "ising.dat" using 2:5 title ""
 
+# ---------------------------------------------------------------
 set term png giant size 800,600
 set out 'ising-integral.png'
-set title "Ising Model Cumulative Partition Probability"
-set xlabel "Weighted State Number"
-set ylabel "Cumulative Measure"
+set title "Ising Model Cumulative Distribution"
+# set xlabel "Weighted State Number"
+set xlabel "State Number"
+set ylabel "Cumulative Probability"
 
 # plot "ising.dat" using 3:($6/8.10612)  title "Ising", \
 #     "ising.dat" using 3:3 title "question"
@@ -54,8 +58,12 @@ set ylabel "Cumulative Measure"
 # plot "ising.dat" using 2:($6/0.280786)  title "kac 0.6-0.3-14", \
 #      "ising.dat" using 2:3 title "question"
 
+# set key left
+# plot "ising.dat" using 2:($6/0.404907)  title "Kac model partition", \
+#      "ising.dat" using 2:3 title "Question mark function"
+
 set key left
-plot "ising.dat" using 2:($6/0.404907)  title "Kac model partition", \
+plot "ising.dat" using 2:($6/1.55796)  title "Ising model", \
      "ising.dat" using 2:3 title "Question mark function"
 
 
