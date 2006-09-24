@@ -1325,7 +1325,7 @@ F(y)=\sum_{\sigma;x(\sigma)<y}P(x)\label{eq:cumulative distribution}\end{equatio
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1463,23 +1463,301 @@ H\left(\frac{1+x}{2}\right)=V\left(\frac{1+x}{2}\right)+H\left(x\right)\label{eq
 
 \end_inset 
 
- For the probability distribution, one has 
+ For the probability distribution, one has (after taking 
+\begin_inset Formula $k_{B}=T=1$
+\end_inset 
+
+) 
 \begin_inset Formula \begin{equation}
-P\left(\frac{x}{2}\right)=e^{V(x/2)}P\left(x\right)\label{eq:}\end{equation}
+P\left(\frac{x}{2}\right)=e^{-V(x/2)}P\left(x\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  and so on.
-\layout Standard
+ As any true self-similarity, this can be iterated repeatedly, so that 
+\begin_inset Formula \begin{equation}
+P\left(\frac{x}{2^{n}}\right)=P(x)\;\prod_{k=1}^{n}e^{-V(x/2^{k})}\label{eq:}\end{equation}
 
----------------------
-\layout Standard
-
-For this assumption, assume that the intercation potential 
-\begin_inset Formula $V(\sigma)$
 \end_inset 
 
- can be written in the form 
+ For the Ising potential 
+\begin_inset LatexCommand \ref{eq:Ising potential}
+
+\end_inset 
+
+, the function 
+\begin_inset Formula $V(x)$
+\end_inset 
+
+ takes a particularly simple form: 
+\begin_inset Formula \begin{equation}
+V_{\mbox{Ising}}(x)=\begin{cases}
+J-M & \quad\mbox{ for }0\le x<\frac{1}{4}\\
+-J-M & \quad\mbox{ for }\frac{1}{4}\le x<\frac{1}{2}\\
+-J+M & \quad\mbox{ for }\frac{1}{2}\le x<\frac{3}{4}\\
+J+M & \quad\mbox{ for }\frac{3}{4}\le x\le1\end{cases}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so the probability distribution has a simple scaling:
+\begin_inset Formula \begin{equation}
+P_{\mbox{Ising}}\left(\frac{x}{2^{n}}\right)=\lambda^{n}P_{\mbox{Ising}}(x)\qquad\mbox{for }0\le x\le\frac{1}{2}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\lambda=\exp(M-J)$
+\end_inset 
+
+.
+\layout Standard
+
+Another natural symmetry operation of the lattice is the exchange of spin
+ values 
+\begin_inset Formula $+\sigma_{k}\leftrightarrow-\sigma_{k}$
+\end_inset 
+
+.
+ For the dyadic mapping, this corresponds to the exchange 
+\begin_inset Formula $x\leftrightarrow1-x$
+\end_inset 
+
+.
+ Let the exchange of spin values be denoted by the operation 
+\begin_inset Formula $r$
+\end_inset 
+
+ (for 
+\emph on 
+reflection
+\emph default 
+); the dyadic representation of 
+\begin_inset Formula $r$
+\end_inset 
+
+ is the function 
+\begin_inset Formula $r_{D}(x)=1-x$
+\end_inset 
+
+.
+ Let the right shift operation, with an insertion of a spin of -1 at the
+ zeroth lattice position be denoted by 
+\begin_inset Formula $g$
+\end_inset 
+
+.
+ The dyadic representation of 
+\begin_inset Formula $g$
+\end_inset 
+
+ is 
+\begin_inset Formula $g_{D}(x)=x/2$
+\end_inset 
+
+.
+ The operations 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+, taken as a free monoid (that is a free group, but with non-negative powers
+ only) generate the dyadic monoid.
+ A synopsis of the properties of this monoid are given below, after which
+ the analysis of self-similarity resumes.
+\layout Subsubsection
+
+The dyadic monoid
+\layout Standard
+
+Given such a translation-invariant homomorphism 
+\begin_inset Formula $f$
+\end_inset 
+
+, that has functions 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ acting as representations of tranlsation and reflection, one has in essence
+ constructed everything that is needed to have a fractal with dyadic symmetry.
+ That is, one need only to recognize that 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ generate the dyadic monoid of the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ The elements of this monoid are of the form
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\gamma=g^{a}\circ r\circ g^{b}\circ r\circ g^{c}\circ\cdots\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $a,b,c,\ldots$
+\end_inset 
+
+ are non-negative integers.
+ 
+\layout Standard
+
+A very breif synopsis of the general properties of monoid elements 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ are in order (these are given in greater detail in my paper xxx).
+ First, all such elements may be represented by the continued fraction
+\begin_inset Formula \begin{equation}
+\gamma_{C}=\frac{1}{a+\frac{1}{b+\frac{1}{c+\cdots}}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Since every real number has an (essentially) unique representation in terms
+ of continued fractions (up to a 
+\begin_inset Formula $\mathbb{Z}_{2}$
+\end_inset 
+
+choice), this means the self-symmetries of the fractal may be labelled by
+ the real numbers.
+ The generators 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ also generate walks on the infinite binary tree: 
+\begin_inset Formula $g$
+\end_inset 
+
+ may be taken to mean 
+\begin_inset Quotes eld
+\end_inset 
+
+always take the left branch
+\begin_inset Quotes erd
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ may be taken to mean 
+\begin_inset Quotes eld
+\end_inset 
+
+reverse the sense of left and right
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ Walks on the binary tree may also be represented as a sequence of left,
+ right moves.
+ An arbitrary string in two lettters 
+\begin_inset Formula $L$
+\end_inset 
+
+ and R may be taken to be a real number as well, which may be denoted by
+ 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+ when the sequence of 
+\begin_inset Formula $L,R$
+\end_inset 
+
+ moves take one to the same place as the series of 
+\begin_inset Formula $g,r$
+\end_inset 
+
+ moves given by 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+.
+ The Minkowski question mark function is nothing more and nothing less than
+ the function that relates 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+ to 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+.
+ That is,
+\begin_inset Formula \begin{equation}
+?(\gamma_{C})=\gamma_{D}\label{eq:}\end{equation}
+
+\end_inset 
+
+ In terms of the generators, on has 
+\begin_inset Formula $r(x)=1-r(1-x)$
+\end_inset 
+
+, which is satisfied by the question mark: 
+\begin_inset Formula $(?\circ r)(x)=?(1-x)=1-?(x)=(r\circ?)(x)$
+\end_inset 
+
+.
+ The generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ has inequivalent representations 
+\begin_inset Formula $g_{D}$
+\end_inset 
+
+and 
+\begin_inset Formula $g_{C}$
+\end_inset 
+
+ for the dyadic and continued fraction representations, given by 
+\begin_inset Formula $g_{D}(x)=x/2$
+\end_inset 
+
+ and 
+\begin_inset Formula $g_{C}(x)=x/(x+1)$
+\end_inset 
+
+, so that one has 
+\begin_inset Formula \begin{equation}
+\left(g_{D}\circ?\right)(x)=\frac{?(x)}{2}=?\left(\frac{x}{x+1}\right)=\left(?\circ g_{C}\right)(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Thus, we have demonstrated a corollary, of sorts: no matter what the form
+ of the function 
+\begin_inset Formula $f$
+\end_inset 
+
+, if it preserves the translation invariance of the lattice, then the Minkowski
+ question mark will inevitably appear in the theory.
+\layout Subsubsection
+
+Self-similarity again
+\layout Standard
+
+-----------------
+\layout Standard
+
+The Ising model interaction potential has the general form 
 \begin_inset Formula \begin{equation}
 V(\sigma_{0},\sigma_{1},\sigma_{2},\cdots)=\sigma_{0}f(\sigma_{1},\sigma_{2},\cdots)\label{eq:}\end{equation}
 
@@ -1500,7 +1778,15 @@ V\left(\frac{1+x}{2}\right)=-V\left(\frac{x}{2}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
+In addition, for 
+\begin_inset Formula $M=0$
+\end_inset 
 
+, the Ising model potential has symmetry under the exchange of 
+\begin_inset Formula $+\sigma_{k}\leftrightarrow-\sigma_{k}$
+\end_inset 
+
+ 
 \layout Subsubsection
 
 The two-sided lattice
@@ -2277,141 +2563,6 @@ all such lattice models have a fractal self-symmetry
 in the above, without justifying its existance.
  Baaad.
  Fix that.)
-\layout Standard
-
-A very breif synopsis of the general properties of monoid elements 
-\begin_inset Formula $\gamma$
-\end_inset 
-
- are in order (these are given in greater detail in my paper xxx).
- First, all such elements may be represented by the continued fraction
-\begin_inset Formula \begin{equation}
-\gamma_{C}=\frac{1}{a+\frac{1}{b+\frac{1}{c+\cdots}}}\label{eq:}\end{equation}
-
-\end_inset 
-
- Since every real number has an (essentially) unique representation in terms
- of continued fractions (up to a 
-\begin_inset Formula $\mathbb{Z}_{2}$
-\end_inset 
-
-choice), this means the self-symmetries of the fractal may be labelled by
- the real numbers.
- The generators 
-\begin_inset Formula $g$
-\end_inset 
-
- and 
-\begin_inset Formula $r$
-\end_inset 
-
- also generate walks on the infinite binary tree: 
-\begin_inset Formula $g$
-\end_inset 
-
- may be taken to mean 
-\begin_inset Quotes eld
-\end_inset 
-
-always take the left branch
-\begin_inset Quotes erd
-\end_inset 
-
- and 
-\begin_inset Formula $r$
-\end_inset 
-
- may be taken to mean 
-\begin_inset Quotes eld
-\end_inset 
-
-reverse the sense of left and right
-\begin_inset Quotes erd
-\end_inset 
-
-.
- Walks on the binary tree may also be represented as a sequence of left,
- right moves.
- An arbitrary string in two lettters 
-\begin_inset Formula $L$
-\end_inset 
-
- and R may be taken to be a real number as well, which may be denoted by
- 
-\begin_inset Formula $\gamma_{D}$
-\end_inset 
-
- when the sequence of 
-\begin_inset Formula $L,R$
-\end_inset 
-
- moves take one to the same place as the series of 
-\begin_inset Formula $g,r$
-\end_inset 
-
- moves given by 
-\begin_inset Formula $\gamma_{C}$
-\end_inset 
-
-.
- The Minkowski question mark function is nothing more and nothing less than
- the function that relates 
-\begin_inset Formula $\gamma_{C}$
-\end_inset 
-
- to 
-\begin_inset Formula $\gamma_{D}$
-\end_inset 
-
-.
- That is,
-\begin_inset Formula \begin{equation}
-?(\gamma_{C})=\gamma_{D}\label{eq:}\end{equation}
-
-\end_inset 
-
- In terms of the generators, on has 
-\begin_inset Formula $r(x)=1-r(1-x)$
-\end_inset 
-
-, which is satisfied by the question mark: 
-\begin_inset Formula $(?\circ r)(x)=?(1-x)=1-?(x)=(r\circ?)(x)$
-\end_inset 
-
-.
- The generator 
-\begin_inset Formula $g$
-\end_inset 
-
- has inequivalent representations 
-\begin_inset Formula $g_{D}$
-\end_inset 
-
-and 
-\begin_inset Formula $g_{C}$
-\end_inset 
-
- for the dyadic and continued fraction representations, given by 
-\begin_inset Formula $g_{D}(x)=x/2$
-\end_inset 
-
- and 
-\begin_inset Formula $g_{C}(x)=x/(x+1)$
-\end_inset 
-
-, so that one has 
-\begin_inset Formula \begin{equation}
-\left(g_{D}\circ?\right)(x)=\frac{?(x)}{2}=?\left(\frac{x}{x+1}\right)=\left(?\circ g_{C}\right)(x)\label{eq:}\end{equation}
-
-\end_inset 
-
- Thus, we have demonstrated a corollary, of sorts: no matter what the form
- of the function 
-\begin_inset Formula $f$
-\end_inset 
-
-, if it preserves the translation invariance of the lattice, then the Minkowski
- question mark will inevitably appear in the theory.
 \layout Subsubsection
 
 Free monoids and the self-symmetries of lattices
