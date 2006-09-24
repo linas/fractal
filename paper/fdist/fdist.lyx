@@ -32,7 +32,7 @@ Modular Fractal Measures
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (updated 22 September 2006)
+12 October 2004 (updated 23 September 2006)
 \layout Abstract
 
 This breif note reviews a circle of topics connecting the derivative of
@@ -1572,11 +1572,7 @@ reflection
 The dyadic monoid
 \layout Standard
 
-Given such a translation-invariant homomorphism 
-\begin_inset Formula $f$
-\end_inset 
-
-, that has functions 
+Given operations 
 \begin_inset Formula $g$
 \end_inset 
 
@@ -1604,7 +1600,7 @@ Given such a translation-invariant homomorphism
 
 
 \begin_inset Formula \begin{equation}
-\gamma=g^{a}\circ r\circ g^{b}\circ r\circ g^{c}\circ\cdots\label{eq:}\end{equation}
+\gamma=g^{a}rg^{b}rg^{c}\cdots\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1613,14 +1609,17 @@ Given such a translation-invariant homomorphism
 \end_inset 
 
  are non-negative integers.
- 
-\layout Standard
-
-A very breif synopsis of the general properties of monoid elements 
+ This section provides a very breif synopsis of the general properties of
+ monoid elements 
 \begin_inset Formula $\gamma$
 \end_inset 
 
- are in order (these are given in greater detail in my paper xxx).
+; these properties are presented in greater detail in 
+\begin_inset LatexCommand \cite{Ve-M04,Ve-T04}
+
+\end_inset 
+
+.
  First, all such elements may be represented by the continued fraction
 \begin_inset Formula \begin{equation}
 \gamma_{C}=\frac{1}{a+\frac{1}{b+\frac{1}{c+\cdots}}}\label{eq:}\end{equation}
@@ -1691,7 +1690,26 @@ reverse the sense of left and right
 \end_inset 
 
 .
- The Minkowski question mark function is nothing more and nothing less than
+ That is, one has the representation as a binary fraction
+\begin_inset Formula \begin{equation}
+\gamma_{D}=\begin{array}{ccccc}
+0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
+a-1 & b & c & d & e\end{array}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $L=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $R=1$
+\end_inset 
+
+.
+\layout Standard
+
+The Minkowski question mark function is nothing more and nothing less than
  the function that relates 
 \begin_inset Formula $\gamma_{C}$
 \end_inset 
@@ -1742,16 +1760,168 @@ and
 
 \end_inset 
 
- Thus, we have demonstrated a corollary, of sorts: no matter what the form
- of the function 
-\begin_inset Formula $f$
+ To summarize, a general monoid element 
+\begin_inset Formula $\gamma=g^{a}rg^{b}rg^{c}\cdots$
 \end_inset 
 
-, if it preserves the translation invariance of the lattice, then the Minkowski
- question mark will inevitably appear in the theory.
+ has two inequivalent representations as a real number.
+ 
+\layout Standard
+
+Another important property is that both 
+\begin_inset Formula $g_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $g_{C}$
+\end_inset 
+
+ can also be understood to be maps from the unit interval to a specific
+ subinterval.
+ This, for example,
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\gamma_{D}(x)=(g_{D}^{a_{1}}r_{D}g_{D}^{a_{2}}r_{D}...r_{D}g_{D}^{a_{N}})(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:interval map}\end{equation}
+
+\end_inset 
+
+ maps the unit interval into a dyadic sub-interval.
+ Use of continued fractions gives another, differnt interval map for 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+.
 \layout Subsubsection
 
 Self-similarity again
+\layout Standard
+
+Returning to the self-symmetries of the classical lattice models, one can
+ write transformation properties of the probability distribution as
+\begin_inset Formula \begin{equation}
+\left(P\circ g_{D}\right)(x)=P\left(\frac{x}{2}\right)=e^{-V(x/2)}P\left(x\right)=e^{-\left(V\circ g_{D}\right)(x)}P(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\left(P\circ r\right)(x)=P\left(1-x\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ One may now ask for, and provide, the self-similarity transformation that
+ corresponds to the interval map 
+\begin_inset LatexCommand \ref{eq:interval map}
+
+\end_inset 
+
+.
+ The iterated application of the above two equations then provides a formula
+ that relates the probability distribution on a sub-interval to the probability
+ distribution on the entire interval.
+\layout Standard
+
+The simpler case, treated first, occurs when the potential is symmetric
+ under the exchange of 
+\begin_inset Formula $+\sigma_{k}\leftrightarrow-\sigma_{k}$
+\end_inset 
+
+; that is, when 
+\begin_inset Formula $V(x)=V(1-x)$
+\end_inset 
+
+.
+ One may then easily show that 
+\begin_inset Formula $P(x)=P(1-x)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Consider, for example, the interval given by 
+\begin_inset Formula $grg^{3}(x)=\frac{1}{2}-\frac{x}{8}$
+\end_inset 
+
+.
+ Then, repeatedly applying the above, one obtains 
+\begin_inset Formula \begin{eqnarray}
+P\left(\frac{1}{2}-\frac{x}{8}\right) & = & P\left(grg^{3}\right)\nonumber \\
+ & = & e^{-V(grg^{3})}P\left(rg^{3}\right)\nonumber \\
+ & = & e^{-V(grg^{3})}P\left(g^{3}\right)\nonumber \\
+ & = & e^{-V(grg^{3})}e^{-V(g^{3})}e^{-V(g^{2})}e^{-V(g)}P\left(x\right)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ where the argument 
+\begin_inset Formula $x$
+\end_inset 
+
+ was dropped to keep the notation simple.
+ This formula relates in a precise (and computable) way the probability
+ distribution on a subinterval to the whole interval.
+ The process can be repeated to obtain a relation joining any dyadic subinterval
+ to the whole interval.
+ 
+\layout Standard
+
+For potentials that are not symmetric, the development has some additonal
+ complications.
+ Write the potentional as in terms of even and odd parts 
+\begin_inset Formula $V(x)=V_{e}(x)+V_{o}(x)$
+\end_inset 
+
+, with 
+\begin_inset Formula $V_{e}(x)=V_{e}(1-x)$
+\end_inset 
+
+ and 
+\begin_inset Formula $V_{o}(x)=-V_{o}(1-x)$
+\end_inset 
+
+.
+ It follows from equation 
+\begin_inset LatexCommand \ref{eq:Classical Hamiltonian}
+
+\end_inset 
+
+ that the energy can be decomposed in the same way.
+ The probability is multiplicative, so one has 
+\begin_inset Formula $P(x)=P_{e}(x)P_{o}(x)$
+\end_inset 
+
+ with 
+\begin_inset Formula $P_{e}(x)=\exp(-H_{e}(x))$
+\end_inset 
+
+ and similarly for 
+\begin_inset Formula $P_{o}$
+\end_inset 
+
+.
+ Under inversion , one then has 
+\begin_inset Formula $P(1-x)=P_{e}(x)/P_{o}(x)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The point here is that the probability distribution has a self-similar structure
+, one might say a 
+\begin_inset Quotes eld
+\end_inset 
+
+covariant
+\begin_inset Quotes erd
+\end_inset 
+
+ structure, under the action of the dyadic monoid.
+ The generators of the monoid correspond to a right-shift on the one-sided
+ lattice, and the inversion of spins.
+ 
 \layout Standard
 
 -----------------
@@ -1792,7 +1962,23 @@ In addition, for
 The two-sided lattice
 \layout Standard
 
-The two-sidedlattice is a lattice 
+The two-sided lattice is the lattice that stretches off to both the left
+ and the right.
+ Represent it by two numbers, x,y x for the right and y to the left.
+ The dyadic mapping maps points in the unit square to the two-sided lattice.
+ The shift operator on the alttice corresponds to the Baker's transform
+ on the unit square.
+\layout Standard
+
+XXX develop more fully.
+ Also talk about Gibbs states.
+ Also talk about transfer operators and the basis functions for the basis
+ operators and the time-asymetry of the spectrum for the transfer operator.
+\begin_inset LatexCommand \cite{Dri99}
+
+\end_inset 
+
+
 \layout Subsubsection
 
 The Kac model and the question mark function
@@ -2161,6 +2347,25 @@ partition function
 .
 \layout Subsubsection
 
+Exact Solution
+\layout Standard
+
+There is an exact solution, wchi is not the Kac mkdoel at all.
+ It is given by the potential 
+\begin_inset Formula \begin{equation}
+V(y)=\log2-2\log\left(1+?^{-1}(2y)\right)\qquad\mbox{for }0\le y\le\frac{1}{2}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula $V(y)=V(1-y)$
+\end_inset 
+
+ XXXprovide derivation, discuss why that fails to resemble the Kac potential
+ utterly, yet both converge to a similar function.
+ The two have a completely different partition function.
+\layout Subsubsection
+
 Physical interpretation
 \layout Standard
 
@@ -2515,6 +2720,15 @@ Given such a translation-invariant homomorphism
 
  are non-negative integers.
  
+\layout Standard
+
+Thus, we have demonstrated a corollary, of sorts: no matter what the form
+ of the function 
+\begin_inset Formula $f$
+\end_inset 
+
+, if it preserves the translation invariance of the lattice, then the Minkowski
+ question mark will inevitably appear in the theory.
 \layout Standard
 
 This construction holds for essentially all two-state lattice models.
