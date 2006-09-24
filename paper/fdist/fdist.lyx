@@ -1116,7 +1116,7 @@ i.e.
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1325,7 +1325,7 @@ F(y)=\sum_{\sigma;x(\sigma)<y}P(x)\label{eq:cumulative distribution}\end{equatio
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -2096,7 +2096,7 @@ V(\sigma)=-J(1-\lambda)\,\sigma_{0}\,\sum_{k=1}^{N}\sigma_{k}\lambda^{k}\label{e
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -2233,7 +2233,7 @@ V(x)=\begin{cases}
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -2341,7 +2341,7 @@ Does the sum over partition probabilities equal the question mark function,
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -2544,14 +2544,185 @@ The two-sided lattice
 
 The two-sided lattice is the lattice that stretches off to both the left
  and the right.
- Represent it by two numbers, x,y x for the right and y to the left.
- The dyadic mapping maps points in the unit square to the two-sided lattice.
- The shift operator on the lattice corresponds to the Baker's transform
- on the unit square.
+ The state of the two-sided lattice may be represented by two numbers 
+\begin_inset Formula $0\le x,y\le1$
+\end_inset 
+
+ with 
+\begin_inset Formula $x$
+\end_inset 
+
+ given by equation 
+\begin_inset LatexCommand \ref{eq:dyadic map}
+
+\end_inset 
+
+, and 
+\begin_inset Formula $y$
+\end_inset 
+
+ likewise, but instead being a sum over the negative indexes, starting at
+ 
+\begin_inset Formula $k=-1$
+\end_inset 
+
+.
+ The energy is a simple sum of the energy of the half-lattices to the left
+ and to the right, plus an interaction term involving spins on both the
+ left and right.
+ The probability density is a product of the probability densities on the
+ left and right, adjusted by the interaction between the left and right
+ sides.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Ising-Tartan}
+
+\end_inset 
+
+Ising Tartan
+\layout Standard
+
+
+\begin_inset Graphics
+	filename ising-tartan.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This tartan-like graph shows the Ising model probability density 
+\begin_inset Formula $P(\sigma)$
+\end_inset 
+
+ for the two-sided lattice using the dyadic mapping.
+ That is, the lattice configuration 
+\begin_inset Formula $\sigma=(\sigma_{-N-1},\cdots,\sigma_{-2},\sigma_{-1},\sigma_{0},\sigma_{1},\sigma_{2},\cdots,\sigma_{N})$
+\end_inset 
+
+ is represented by two numbers 
+\begin_inset Formula $0\le x,y\le1$
+\end_inset 
+
+ with 
+\begin_inset Formula \[
+x(\sigma)=\sum_{k=0}^{N}\left(\frac{\sigma_{k}+1}{2}\right)2^{-(k+1)}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+y(\sigma)=\sum_{k=0}^{N}\left(\frac{\sigma_{-k-1}+1}{2}\right)2^{-(k+1)}\]
+
+\end_inset 
+
+ The energy of a given configuration 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ is computed using 
+\begin_inset LatexCommand \ref{eq:Classical Hamiltonian}
+
+\end_inset 
+
+, with the sum running from 
+\begin_inset Formula $-N$
+\end_inset 
+
+ to 
+\begin_inset Formula $+N$
+\end_inset 
+
+, of course.
+ The probability density 
+\begin_inset Formula $P(\sigma)$
+\end_inset 
+
+ is given by equation 
+\begin_inset LatexCommand \ref{eq:probability distribution}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The graph here assumes the Ising potential, with 
+\begin_inset Formula $J=0.3$
+\end_inset 
+
+ and 
+\begin_inset Formula $M=0$
+\end_inset 
+
+ for a finite sized lattice with 
+\begin_inset Formula $N=10$
+\end_inset 
+
+.
+ The color choices here are such that black represents values where 
+\begin_inset Formula $P(\sigma)=P(x,y)$
+\end_inset 
+
+ are zero, blue are small values, with yellow and red being progressively
+ larger values.
+ This fractal tartan is invariant under the Baker's map.
+\end_inset 
+
+
+\layout Standard
+
+The shift operator 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ can be understood to be an operator that pops a bit off the right-hand
+ half lattice, and pushes it onto the left half-lattice.
+ In the dyadic notation, it can be recognized as the so-called 
+\emph on 
+Baker's map
+\emph default 
+, a map from the unit square onto itself that cuts the square into two pieces,
+ and stacks and squashes them.
+ That is, given a pair of numbers 
+\begin_inset Formula $(x,y)$
+\end_inset 
+
+ in the unit square, one has 
+\begin_inset Formula \begin{equation}
+\tau(x,y)=\left(\frac{x+\left\lfloor 2y\right\rfloor }{2}\,,\,2y-\left\lfloor 2y\right\rfloor \right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The map is fully invertible, in that 
+\begin_inset Formula $\tau^{-1}$
+\end_inset 
+
+ is uniquely defined (and is easily obtainable).
+ 
+\layout Standard
+
+The energy and the probability density are invariant under the action of
+ the translation operator; that is, for the two sided lattice, one has 
+\begin_inset Formula \begin{equation}
+H\left(\tau^{n}\sigma\right)=H\left(\sigma\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+
 \layout Standard
 
 XXX develop more fully.
- Also talk about Gibbs states.
+ Talk about Gibbs states.
  Also talk about transfer operators and the basis functions for the basis
  operators and the time-asymmetry of the spectrum for the transfer operator.
 \begin_inset LatexCommand \cite{Dri99}
