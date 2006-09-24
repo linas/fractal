@@ -1956,29 +1956,115 @@ In addition, for
 \begin_inset Formula $+\sigma_{k}\leftrightarrow-\sigma_{k}$
 \end_inset 
 
+.
  
 \layout Subsubsection
 
-The two-sided lattice
+An exact solution
 \layout Standard
 
-The two-sided lattice is the lattice that stretches off to both the left
- and the right.
- Represent it by two numbers, x,y x for the right and y to the left.
- The dyadic mapping maps points in the unit square to the two-sided lattice.
- The shift operator on the alttice corresponds to the Baker's transform
- on the unit square.
-\layout Standard
-
-XXX develop more fully.
- Also talk about Gibbs states.
- Also talk about transfer operators and the basis functions for the basis
- operators and the time-asymetry of the spectrum for the transfer operator.
-\begin_inset LatexCommand \cite{Dri99}
+The graph
+\begin_inset LatexCommand \ref{cap:Ising-Model-Cumulative}
 
 \end_inset 
 
+ is remarkably suggestive, hinting that there may be some interaction that
+ gives a cumulative probability distribution that is exactly the question
+ mark function.
+ There is not just one, but several interactions that give such a cumulative
+ distribution.
+ One may obtained by a simple, explicit manipulation.
+ The other is hinted at numerically, under the name of the Kac model, given
+ below.
+\layout Standard
 
+Suppose one wants to have 
+\begin_inset Formula \begin{equation}
+P(x)=\left(?^{\prime}\circ?^{-1}\right)(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ exactly.
+ One may then work backwards to find the potential, as follows.
+ One must have 
+\begin_inset Formula $P(?(x))=?^{\prime}(x)$
+\end_inset 
+
+, and, applying the symmetries of the question mark function,
+\begin_inset Formula \begin{equation}
+\frac{?(x)}{2}=?\left(\frac{x}{1+x}\right)\label{eq:question-self}\end{equation}
+
+\end_inset 
+
+one has simply that 
+\begin_inset Formula \begin{equation}
+P\left(\frac{?(x)}{2}\right)=P\left(?\left(\frac{x}{1+x}\right)\right)=?^{\prime}\left(\frac{x}{1+x}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ Applying the symmetry of the lattice model under the action of 
+\begin_inset Formula $g$
+\end_inset 
+
+ as discussed above, one gets an expression involving the potential 
+\begin_inset Formula \begin{equation}
+P\left(\frac{?(x)}{2}\right)=\exp\left(-V\left(\frac{?(x)}{2}\right)\right)P\left(?(x)\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ from which one deduces 
+\begin_inset Formula \begin{equation}
+?^{\prime}\left(\frac{x}{1+x}\right)=?^{\prime}(x)\;\exp\left(-V\left(\frac{?(x)}{2}\right)\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ On the other hand, one has 
+\begin_inset Formula \begin{equation}
+\frac{?^{\prime}(x)}{2}=\frac{1}{(1+x)^{2}}?^{\prime}\left(\frac{x}{1+x}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which may be obtained by naively differenting the relation 
+\begin_inset LatexCommand \ref{eq:question-self}
+
+\end_inset 
+
+.
+ From this one deduces that 
+\begin_inset Formula \begin{equation}
+\frac{(1+x)^{2}}{2}=\exp\left(-V\left(\frac{?(x)}{2}\right)\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which is easily solved for 
+\begin_inset Formula $V$
+\end_inset 
+
+ to obtain
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+V(y)=\log2-2\log\left(1+?^{-1}(2y)\right)\qquad\mbox{for }0\le y\le\frac{1}{2}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula $V(y)=V(1-y)$
+\end_inset 
+
+ for 
+\begin_inset Formula $1/2<x\le1$
+\end_inset 
+
+.
+ XXX Discuss...Note partition function Z=1 for this potential.
+ discuss why that fails to resemble the Kac potential utterly, yet both
+ converge to a similar function.
+ The two have a completely different partition function.
+ Discuss potential in terms of spins -- is this a valid lattice model? why
+ not? The problem is to write down the potential .in terms of spins ..
+ 
 \layout Subsubsection
 
 The Kac model and the question mark function
@@ -2347,25 +2433,6 @@ partition function
 .
 \layout Subsubsection
 
-Exact Solution
-\layout Standard
-
-There is an exact solution, wchi is not the Kac mkdoel at all.
- It is given by the potential 
-\begin_inset Formula \begin{equation}
-V(y)=\log2-2\log\left(1+?^{-1}(2y)\right)\qquad\mbox{for }0\le y\le\frac{1}{2}\label{eq:}\end{equation}
-
-\end_inset 
-
- and 
-\begin_inset Formula $V(y)=V(1-y)$
-\end_inset 
-
- XXXprovide derivation, discuss why that fails to resemble the Kac potential
- utterly, yet both converge to a similar function.
- The two have a completely different partition function.
-\layout Subsubsection
-
 Physical interpretation
 \layout Standard
 
@@ -2465,6 +2532,28 @@ Now, the question mark function maps the rational numbers to the dyadic
  binary strings: thus the quadratic irrationals and the rational numbers
  are in perfect one-to-one correspondance.
  
+\layout Subsubsection
+
+The two-sided lattice
+\layout Standard
+
+The two-sided lattice is the lattice that stretches off to both the left
+ and the right.
+ Represent it by two numbers, x,y x for the right and y to the left.
+ The dyadic mapping maps points in the unit square to the two-sided lattice.
+ The shift operator on the alttice corresponds to the Baker's transform
+ on the unit square.
+\layout Standard
+
+XXX develop more fully.
+ Also talk about Gibbs states.
+ Also talk about transfer operators and the basis functions for the basis
+ operators and the time-asymetry of the spectrum for the transfer operator.
+\begin_inset LatexCommand \cite{Dri99}
+
+\end_inset 
+
+
 \layout Subsubsection
 
 Gibbbs states and fractal self-similarity
