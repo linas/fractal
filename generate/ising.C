@@ -90,8 +90,8 @@ double vq (double s)
 double kac (double s)
 {
 	// double lambda = 0.6666;
-	// double lambda = 0.5;
-	double lambda = 0.306852819;
+	double lambda = 0.5;
+	// double lambda = 0.306852819;
 	
 	double s0 = -1.0;
 	if (s>= 0.5) {
@@ -116,8 +116,7 @@ double kac (double s)
 
 		if (lp < 1.0e-18) break;
 	}
-	// return -(1.0-lambda)*s0*acc;
-	return -0.693147181*(1.0-lambda)*s0*acc;
+	return (1.0-lambda)*s0*acc;
 }
 
 /* Return the finite-state energy of string s (length n) */
@@ -138,9 +137,30 @@ double energy (double (*interaction)(double), double s, int n)
 	return en;
 }
 
-/* Compute finite state partition */
+double cross_energy (double (*interaction)(double), double sl, double sr, int n)
+{
+	int i;
 
-double partition (double (*interaction)(double), double x)
+	double en = 0.0;
+	for (i=0; i<n; i++)
+	{
+		/* Shift one bit */
+		double s = 0.5*sr;
+		sr = s;
+		sl *= 2.0;
+	  	if (1.0 < sl)
+		{
+			s += 0.5;
+			sl -= 1.0;
+		}	  
+		en += interaction (s);
+	}
+
+	return en;
+}
+
+/* Compute finite state partition */
+double partition (double (*interaction)(double), double x, double y)
 {
 	int n = 10;
 		
@@ -148,24 +168,49 @@ double partition (double (*interaction)(double), double x)
 	// double en = energy (interaction, y, n);
 	
 	double en = energy (interaction, x, n);
-		
+	en += energy (interaction, y, n);
+
+	// n=1; // need to specify for short-range interactions ... 
+	en += cross_energy (interaction, x, y, n);
+	
+	en = exp (-en);
+	return en;
+}
+
+static double 
+ising_density (double x, double y)
+{
+	int n = 10;
+
+	double en = energy (nearest_neighbor, x, n);
+	en += energy (nearest_neighbor, y, n);
+
+	if (x<0.5 && y<0.5) en += 0.3;
+	if (x<0.5 && y>=0.5) en -= 0.3;
+	if (x>=0.5 && y<0.5) en -= 0.3;
+	if (x>=0.5 && y>=0.5) en += 0.3;
+
+	en = exp (-en);
 	return en;
 }
 
 static double 
 density (double x, double y, int itermax, double param)
 {
+	double p;
 	// partition (pabola, n);
 	// partition (tent, n);
 	// partition (vq, n);
 	// partition (qtent, n);
-	// partition (kac, n);
 	// partition (pointy, n);
+ 
+	// p = partition (kac, x,y);
+
+	// should be equivalent to ising_density --- and it is.
+	// p = partition (nearest_neighbor, x,y);
 	
-	double en = partition (nearest_neighbor, x);
-	en += partition (nearest_neighbor, y);
-	en = exp (-en);
-	return en;
+	p = ising_density (x,y);
+	return p;
 }
 
 DECL_MAKE_HEIGHT(density);
