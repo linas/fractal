@@ -116,6 +116,30 @@ double kac (double s)
 	return -0.693147181*(1.0-lambda)*s0*acc;
 }
 
+/* ==========================================================  */
+/* Return the lattice configuration corresponding to a wave-vector k */
+
+double wave (double wave_vector)
+{
+	int n;
+	double x=0.0;
+
+	double w = 2*M_PI*wave_vector;
+	double t = 0.5;
+	for (n=0; n<48; n++)
+	{
+		int p = (int) floor(w*n);
+		if (p%2)
+		{
+			x += t;
+		}
+		t *= 0.5;
+	}
+
+	return x;
+}
+
+/* ==========================================================  */
 /* Return the finite-state energy of string s (length n) */
 double energy (double (*interaction)(double), double s, int n)
 {
@@ -153,10 +177,12 @@ double partition (double (*interaction)(double), int n)
 	for (i=1; i<m; i++)
 	{
 		double x = om * ((double) i);
-		double y = question_mark (i,m);
+		// double y = question_mark (i,m);
+
+		double y = wave (x/M_PI);
 		
-		// double en = energy (interaction, y, n);
-		double en = energy (interaction, x, n);
+		double en = energy (interaction, y, n);
+		// double en = energy (interaction, x, n);
 		
 		en = exp (-en);
 		z += delta * en;
