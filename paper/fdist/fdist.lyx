@@ -32,7 +32,7 @@ Modular Fractal Measures
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-12 October 2004 (updated 24 September 2006)
+12 October 2004 (updated 25 September 2006)
 \layout Abstract
 
 This breif note reviews a circle of topics connecting the derivative of
@@ -864,19 +864,95 @@ In ergodic theory, there is a well-known set of isomorphisms and correspondences
  applying it in a concrete fashion to the question mark function.
 \layout Standard
 
-The basic conjecture that is advanced in this section is that multi-fractal
- measures, of which the derivative of the Minkowski question mark is one,
- correspond to smooth and differentiable Hamiltonians, when considered as
- functions under the 
+The importance of lattice models to the study of dynamical systems arises
+ from the fact that the natural topology of the one-dimensional lattices,
+ the so-called 
 \begin_inset Quotes eld
 \end_inset 
 
-natural
+cylinder set topology
 \begin_inset Quotes erd
 \end_inset 
 
- topology for one-dimensional lattice models.
- To-do: explain what the above sentence means.
+ is a refinement of the natural topology of the real number line.
+ As such, it allows for the construction and consistent discussion of a
+ much larger class of functions than the natural topology of the real number
+ line allows.
+ In particular, functions which are well-behaved in various ways (such as
+ being smooth, or being symmetric) in the lattice topology are non-differentiabl
+e and non-integrable when mapped to the real number line.
+ Thus, the cylinder set topology allows for a natural setting for the discussion
+ of objects that otherwise appear to be difficult to manipulate.
+\layout Standard
+
+Possibly the very simplest exactly solvable model of deterministic chaos
+ is the Bernoulli map
+\begin_inset LatexCommand \cite{Dri99}
+
+\end_inset 
+
+.
+ The Bernoulli map can be understood to be the (one-sided) shift operator
+ on the set of (infinite) string strings in two letters.
+ The Bernoulli map, like all discrete dynamical systems, can be studied
+ in terms of its Frobenius-Perron operator or transfer operator.
+ The transfer operator is a curious construction.
+ Consider, for example, the set of all possible functions from the set of
+ strings in two letters, to the real numbers.
+ The transfer operator is then a representation of the the shift operator
+ on this function space.
+ That is, it describes what happens to the function when the underlying
+ string is shifted by one.
+ Transfer operators, being operators, may be decomposed in terms of eigenvalues
+ and eigenvectors.
+ Often one is interested in the polynomial or holomorphic eigenvectors.
+ One may also study the square-integrable eigenvectors.
+ Sometimes, the polynomial eigenvectors are a subset of the square-integrable
+ eigenvectors, sometimes not.
+ The transfer operator may be unitary in one function basis, but not in
+ another; it need not in general be either a compact operator or a trace-class
+ operator.
+ 
+\layout Standard
+
+If one considers a one-dimensional lattice where each lattice location can
+ take one of two values, then the Bernoulli operator is nothing more and
+ nothing less than the shift or translation operator on this lattice.
+ Lattice models provide a very natural way to construct translation-invariant
+ functions on them.
+ But of course (and as will be shown), a translation-invariant function
+ on a lattice is nothing more and nothing less than an eigenvector of the
+ transfer operator, with an eigenvalue of one: indeed this is the definition
+ of translation invariance.
+ The set of translation-invariant functions on a one-dimensional lattice
+ is much, much larger than the set of square integrable eigenvectors of
+ the transfer operator, which is in turn much larger than the set of polynomial
+ (or holomorphic) eigenvectors of this operator.
+ Thus, the study of lattice models provides a broader context for the discussion
+ of dynamical systems, and the lattice model topology allows for the discussion
+ and manipulation of functions (such as the derivative of the Minkowski
+ function) that are not otherwise easy to manipulate.
+ 
+\layout Standard
+
+The Bernoulli map is a one-sided shift operator, and it does not have a
+ time-reversible dynamics.
+ It corresponds to the shift operator on a lattice with extends only in
+ one direction.
+ The baker's map provides a simple, solvable time-reversible chaotic dynamical
+ system.
+ The baker's map corresponds to a bi-infinite one-dimensional lattice, where
+ the shift can be made to the right or to the left.
+ The connection to the Ising model is, in one sense, shallow: the Ising
+ model just happens to show how to construct translation-invariant functions
+ on a lattice, and thus construct eigenvectors (with unit eigenvalue) of
+ the transfer operator.
+ In another sense, the connection is much deeper: by understanding the cylinder
+ set topology, and the fractal self-similarities that it generates, one
+ may gain a better understanding of the structure of functional integrals
+ in quantum field theory.
+ The ideas are not disjoint: rather the methods and theorems from one field
+ of study can be imported to better understand the other.
  
 \layout Subsection
 
@@ -2390,7 +2466,7 @@ This figure shows a graph of the Minkowski question mark function
 To be explicit, the numerical evidence from finite-size lattices suggests
  that 
 \begin_inset Formula \begin{equation}
-\left(?^{\prime}\circ?^{-1}\right)(y)=\lim_{N\to\infty}\frac{1}{Z(N)}\sum_{{\sigma\atop x(\sigma)<y}}\exp\, H(\sigma)\label{eq:cumulative}\end{equation}
+\left(?^{\prime}\circ?^{-1}\right)(y)=\lim_{N\to\infty}\frac{1}{Z(N)}\sum_{{{\sigma\atop x(\sigma)<y}}}\exp\, H(\sigma)\label{eq:cumulative}\end{equation}
 
 \end_inset 
 
@@ -2863,9 +2939,9 @@ is the shift operator.
  a requirement that there exists a commuting diagram:
 \begin_inset Formula \begin{equation}
 \begin{array}{ccc}
-\Omega & {f\atop \longrightarrow} & \mathbb{R}\\
+\Omega & {{f\atop \longrightarrow}} & \mathbb{R}\\
 \tau\downarrow &  & \downarrow g\\
-\Omega & {\longrightarrow\atop f} & \mathbb{R}\end{array}\label{eq:}\end{equation}
+\Omega & {{\longrightarrow\atop f}} & \mathbb{R}\end{array}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -2931,9 +3007,9 @@ vice-versa
  that makes the following diagram commute: 
 \begin_inset Formula \begin{equation}
 \begin{array}{ccc}
-\Omega & {f\atop \longrightarrow} & \mathbb{R}\\
+\Omega & {{f\atop \longrightarrow}} & \mathbb{R}\\
 \rho\downarrow &  & \downarrow r\\
-\Omega & {\longrightarrow\atop f} & \mathbb{R}\end{array}\label{eq:}\end{equation}
+\Omega & {{\longrightarrow\atop f}} & \mathbb{R}\end{array}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -3827,7 +3903,7 @@ Lets pursue this idea just a bit further.
 
 and, from sigma additivity, we deduce 
 \begin_inset Formula \[
-1=\mu\left(\bigcup_{s\in\sigma_{k}}C_{(n,s)}\right)=\sum_{s\in\sigma_{k}}\mu\left(C_{(n,s)}\right)=\sum_{s\in\sigma_{k}}x^{\# A(s)}(1-x)^{\# B(s)}=\sum_{j=0}^{k}{k \choose j}x^{j}(1-x)^{k-j}=1\]
+1=\mu\left(\bigcup_{s\in\sigma_{k}}C_{(n,s)}\right)=\sum_{s\in\sigma_{k}}\mu\left(C_{(n,s)}\right)=\sum_{s\in\sigma_{k}}x^{\# A(s)}(1-x)^{\# B(s)}=\sum_{j=0}^{k}{{k \choose j}}x^{j}(1-x)^{k-j}=1\]
 
 \end_inset 
 
