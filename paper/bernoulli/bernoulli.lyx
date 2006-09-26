@@ -66,11 +66,13 @@ This paper is part of a set of chapters that explore the relationship between
  the real numbers, the modular group, and fractals.
 \layout Section
 
-The Bernoulli Operator
+The Bernoulli operator
 \layout Standard
 
 THIS IS A SET OF WORKING NOTES.
- Its messy and disjointed.
+ Its somewhat loosely structured, sometimes messy, and ocassionally assumes
+ familiarity with the authors other writings and/or a general knowledge
+ of dynamical systems.
  The intro hasn't been written yet.
 \layout Standard
 
@@ -96,7 +98,9 @@ The general layout is:
 
 The Bernoulli map and Bernoulli operator appear in many forms and guises
  throughout the theory of dynamical systems.
- Some of these appearances include: 
+ In order to give a proper and complete treatment of the subject, the topics
+ listed below should be presented/reviewed/understood.
+ 
 \layout Itemize
 
 The Bernoulli process in probability theory is one of the simplest Markov
@@ -218,21 +222,68 @@ b(x)=2x-\left\lfloor 2x\right\rfloor \label{eq:}\end{equation}
 The Frobenius-Perron operator or transfer operator of the Bernoulli map
  is given by
 \begin_inset Formula \begin{equation}
-\left[U_{B}f\right](x)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]\label{eq:}\end{equation}
+\left[U_{B}f\right](x)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]\label{eq:Bernoulli operator}\end{equation}
 
 \end_inset 
 
- 
-\layout Standard
+ A general definition of the transfer operator is given in 
+\begin_inset LatexCommand \cite{Ve-Tr04}
 
-Blah blah blah.
- How much more here do we want to say? A lot, apparently.
+\end_inset 
+
+, which also develops the general notation used in the following presentation.
+ This reference should be consulted if the notation below becomes confusing.
 \layout Subsection
 
 The Polynomial Representation
 \layout Standard
 
-Provide the matrix elements.
+The operator 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ has a representation in which it acts on the Hilbert space of polynomials.
+ That is, one may contemplate the structure of 
+\begin_inset Formula $U_{B}$
+\end_inset 
+
+ when the function 
+\begin_inset Formula $f$
+\end_inset 
+
+ in equation 
+\begin_inset LatexCommand \ref{eq:Bernoulli operator}
+
+\end_inset 
+
+ is a polynomial.
+ In what follows, the bra-ket notation from quantum mechanics is used.
+ The kets 
+\begin_inset Formula $\left|n\right\rangle $
+\end_inset 
+
+ refer to the monomial 
+\begin_inset Formula $x^{n}$
+\end_inset 
+
+, while the bras 
+\begin_inset Formula $\left\langle m\right|$
+\end_inset 
+
+refer to the Riesz duals of the monomials.
+ These duals are in fact derivatives of the Dirac delta function.
+ A presentation of the notation used here, including the general method
+ by which one may obtain the matrix elements of the transfer operator in
+ the polynomial bsis, is detailed in 
+\begin_inset LatexCommand \cite{Ve-Tr04}
+
+\end_inset 
+
+, which should be reviewed if confusion arises below.
+\layout Standard
+
+The matrix elements of the Bernoulli operator in the monomial basis are
+ given by
 \layout Standard
 
 
@@ -265,7 +316,8 @@ k\end{array}\right)$
 
 .
  Because the matrix is upper-triangular, it is easily solvable for both
- the left and right eigenvectors, which agree perfectly w/ Driebe
+ the left and right eigenvectors, which agree perfectly with those given
+ by Driebe
 \begin_inset LatexCommand \cite{Dri99}
 
 \end_inset 
@@ -292,7 +344,7 @@ The right eigenvectors are denoted by
 
  and have the vector components 
 \begin_inset Formula \begin{equation}
-\left\langle k|B_{n}\right\rangle =\left(\begin{array}{c}
+\left\langle k\left|B_{n}\right.\right\rangle =\left(\begin{array}{c}
 n\\
 k\end{array}\right)\left(1-\Theta_{n,k}\right)B_{n-k}=\left\{ \begin{array}{ccc}
 \left(\begin{array}{c}
@@ -309,7 +361,7 @@ k\end{array}\right)B_{n-k} & \;\textrm{ for }\; & k\leq n\\
  are the Bernoulli numbers.
  We can verify this by multiplying the eigenvector into the matrix: 
 \begin_inset Formula \begin{eqnarray}
-\sum_{k=0}^{\infty}\left\langle m\right|U\left|k\right\rangle \left\langle k|B_{n}\right\rangle  & = & \sum_{k=m}^{n}\left[\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
+\sum_{k=0}^{\infty}\left\langle m\right|U\left|k\right\rangle \left\langle k\left|B_{n}\right.\right\rangle  & = & \sum_{k=m}^{n}\left[\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
 k\\
 m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\right]\left(\begin{array}{c}
 n\\
@@ -317,7 +369,7 @@ k\end{array}\right)B_{n-k}\nonumber \\
  & = & \frac{1}{2^{m}}\left(\begin{array}{c}
 n\\
 m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\nonumber \\
- & = & \lambda_{n}\left\langle m|B_{n}\right\rangle \label{eq:}\end{eqnarray}
+ & = & \lambda_{n}\left\langle m\left|B_{n}\right.\right\rangle \label{eq:}\end{eqnarray}
 
 \end_inset 
 
@@ -326,7 +378,7 @@ m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\nonumber \\
 
 
 \begin_inset Formula \begin{equation}
-\sum_{k=0}^{\infty}\left\langle x|k\right\rangle \left\langle k|B_{n}\right\rangle =\sum_{k=0}^{n}\left(\begin{array}{c}
+\sum_{k=0}^{\infty}\left\langle x|k\right\rangle \left\langle k\left|B_{n}\right.\right\rangle =\sum_{k=0}^{n}\left(\begin{array}{c}
 n\\
 k\end{array}\right)B_{n-k}x^{k}=B_{n}(x)\label{eq:}\end{equation}
 
@@ -361,21 +413,21 @@ and, for
 
 , have the components 
 \begin_inset Formula \begin{equation}
-\left\langle \tilde{B}_{n}|k\right\rangle =\left(\begin{array}{c}
+\left\langle \left.\tilde{B}_{n}\right|k\right\rangle =\left(\begin{array}{c}
 k\\
 n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:}\end{equation}
 
 \end_inset 
 
  The zeroth left eigenvector is a special-case; it has components 
-\begin_inset Formula $\left\langle \tilde{B}_{0}|k\right\rangle =1/(k+1)$
+\begin_inset Formula $\left\langle \left.\tilde{B}_{0}\right|k\right\rangle =1/(k+1)$
 \end_inset 
 
 .
  The left eigenvectors can also be written out in coordinate space: 
 \begin_inset Formula \begin{eqnarray}
-\left\langle \tilde{B}_{n}|x\right\rangle  & = & \sum_{k=0}^{\infty}\left\langle \tilde{B}_{n}|k\right\rangle \left\langle k|x\right\rangle \nonumber \\
- & = & \sum_{k=0}^{\infty}\left\langle \tilde{B}_{n}|k\right\rangle (-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
+\left\langle \tilde{B}_{n}|x\right\rangle  & = & \sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle \left\langle k|x\right\rangle \nonumber \\
+ & = & \sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle (-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
  & = & \frac{1}{n}\sum_{k=n}^{\infty}\left(\begin{array}{c}
 k\\
 n-1\end{array}\right)(-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
@@ -399,11 +451,11 @@ case.
 
 : 
 \begin_inset Formula \begin{eqnarray}
-\int_{0}^{1}dx\,\left\langle \tilde{B}_{0}|x\right\rangle f(x) & = & \int_{0}^{1}dx\, f(x)\sum_{k=0}^{\infty}(-)^{k}\frac{\delta^{(k)}(x)}{(k+1)!}\nonumber \\
+\int_{0}^{1}dx\,\left\langle \left.\tilde{B}_{0}\right|x\right\rangle f(x) & = & \int_{0}^{1}dx\, f(x)\sum_{k=0}^{\infty}(-)^{k}\frac{\delta^{(k)}(x)}{(k+1)!}\nonumber \\
  & = & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{(k+1)!}\nonumber \\
  & = & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}\int_{0}^{1}x^{k}dx\nonumber \\
  & = & \int_{0}^{1}f(x)dx\nonumber \\
- & = & \left\langle \tilde{B}_{0}|f\right\rangle \label{eq:}\end{eqnarray}
+ & = & \left\langle \left.\tilde{B}_{0}\right|f\right\rangle \label{eq:}\end{eqnarray}
 
 \end_inset 
 
@@ -414,7 +466,7 @@ case.
 
 ; these can be written as 
 \begin_inset Formula \begin{equation}
-\left\langle \tilde{B}_{n}|f\right\rangle =\frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\label{eq:}\end{equation}
+\left\langle \left.\tilde{B}_{n}\right|f\right\rangle =\frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -427,7 +479,7 @@ Note that the left eigenvectors are adjoint to the Bernoulli polynomials.
  we can see more easily by writing 
 \begin_inset Formula \begin{eqnarray}
 f(x) & = & \left\langle x|f\right\rangle \nonumber \\
- & = & \sum_{m=0}^{M}B_{m}(x)\left\langle \tilde{B}_{m}|f\right\rangle -\frac{1}{(M+1)!}\int_{0}^{1}dy\, B_{M+1}(x-y)\; f^{(M)}(y)\label{eq:}\end{eqnarray}
+ & = & \sum_{m=0}^{M}B_{m}(x)\left\langle \left.\tilde{B}_{m}\right|f\right\rangle -\frac{1}{(M+1)!}\int_{0}^{1}dy\, B_{M+1}(x-y)\; f^{(M)}(y)\label{eq:}\end{eqnarray}
 
 \end_inset 
 
@@ -441,13 +493,13 @@ f(x) & = & \left\langle x|f\right\rangle \nonumber \\
  over coordinate space.
  That is, from 
 \begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}\left\langle x|B_{n}\right\rangle \left\langle \tilde{B}_{n}|f\right\rangle =f(x)\label{eq:}\end{equation}
+\sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \left\langle \left.\tilde{B}_{n}\right|f\right\rangle =f(x)\label{eq:}\end{equation}
 
 \end_inset 
 
  one wants to deduce that 
 \begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}\left\langle x|B_{n}\right\rangle \left\langle \tilde{B}_{n}|y\right\rangle =\delta(x-y)\label{eq: Bernoulli-faulty}\end{equation}
+\sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \left\langle \left.\tilde{B}_{n}\right|y\right\rangle =\delta(x-y)\label{eq: Bernoulli-faulty}\end{equation}
 
 \end_inset 
 
@@ -639,7 +691,7 @@ G_{E}(x,t)=\frac{2e^{xt}}{1+e^{t}}=\sum_{n=0}^{\infty}E_{n}(x)\frac{t^{n}}{n!}\l
 
 \end_inset 
 
- Then, equating the two sides, we have demonstrated orthogonality of the
+ Then, equating the two sides, one has demonstrated orthogonality of the
  dual states: 
 \begin_inset Formula \begin{equation}
 \int_{0}^{1}\tilde{S}_{n}(x)\, E_{k}(x)\, dx=\frac{2\delta_{k,n-1}}{n}\label{eq:}\end{equation}
@@ -651,7 +703,7 @@ G_{E}(x,t)=\frac{2e^{xt}}{1+e^{t}}=\sum_{n=0}^{\infty}E_{n}(x)\frac{t^{n}}{n!}\l
 
 From this orthogonality relationship follows a certain restricted completeness
  statement in coordinate space.
- That is, if we decompose a function 
+ That is, if one decomposes a function 
 \begin_inset Formula $f(y)=\sum_{k=1}^{\infty}a_{k}S_{k}(y)$
 \end_inset 
 
@@ -757,7 +809,7 @@ is
  of this paper.
  In this section, we'll merely review some of the sources of confusion,
  and some of the notational devices that help minimize it.
- We begin by asking, 
+ One begins by asking, 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -769,8 +821,8 @@ what is the operator
 \begin_inset Quotes erd
 \end_inset 
 
-? We saw above that the monomials form a complete set of basis states that
- can be used to represent analytic functions.
+? It was seen above that the monomials form a complete set of basis states
+ that can be used to represent analytic functions.
  The operator 
 \begin_inset Formula $\mathbb{I}_{M}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
 \end_inset 
@@ -783,7 +835,7 @@ what is the operator
 
  is used to remind us that the identity operator is built from the monomial
  states.
- Thus, we can write 
+ Thus, one may write 
 \begin_inset Formula $U_{B}=\mathbb{I}_{M}U_{B}\mathbb{I}_{M}$
 \end_inset 
 
@@ -793,7 +845,7 @@ U_{B}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|m\right\rangle \left\langle m\
 
 \end_inset 
 
- As we saw above, the matrix elements 
+ As seen above, the matrix elements 
 \begin_inset Formula $U_{mn}\equiv\left\langle m\left|U\right|n\right\rangle $
 \end_inset 
 
@@ -802,7 +854,7 @@ U_{B}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|m\right\rangle \left\langle m\
 \end_inset 
 
  is clearly not Hermitian.
- And yet, we can use the same trick to write 
+ And yet, one may use the same trick to write 
 \begin_inset Formula $U_{B}=\mathbb{I}_{B}U_{B}\mathbb{I}_{B}$
 \end_inset 
 
@@ -829,11 +881,11 @@ invisible
 \begin_inset Quotes erd
 \end_inset 
 
- when we write things like 
+ when things such as 
 \begin_inset Formula $U_{B}=\mathbb{I}_{M}U_{B}\mathbb{I}_{M}$
 \end_inset 
 
-.
+ are written.
  Much of the confusion is due to the fact that in a Hilbert space, the concept
  of orthonormality violates the notions one gets from working with finite-dimens
 ional basis.
@@ -888,7 +940,7 @@ B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n\left|B_{k}\right.\rig
 \end_inset 
 
  is not orthogonal in the traditional sense: we had demonstrated the matrix
- elements up above, and we clearly have 
+ elements up above, and one clearly has 
 \begin_inset Formula $\left\langle n|B_{k}\right\rangle \neq\left\langle \tilde{B}_{n}|k\right\rangle $
 \end_inset 
 
@@ -903,17 +955,19 @@ B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n\left|B_{k}\right.\rig
 \end_inset 
 
  are both complete and orthogonal.
- From experience working with finite-dimensional matrices, we are accustomed
+ From experience working with finite-dimensional matrices, one is accustomed
  to believe that any change of basis between a set of ortho-normal basis
  states is given by a similarity matrix with is orthogonal.
- We see here that for infinite-dimensional spaces, that this is not the
- case.
+ It is seen here that for infinite-dimensional spaces, that this is not
+ the case.
  
 \layout Standard
 
 XXX I'm still troubled by this.
  Its not completely clear that the space spanned by the monomial basis is
  really identical to the space spanned by the Bernoulli polynomial basis.
+ There is some conceptual monkey business that is not adequately explained
+ here.
  Either set of basis functions seems to be in a certain sense 
 \begin_inset Quotes eld
 \end_inset 
@@ -1052,7 +1106,7 @@ U_{B}=\left[\begin{array}{cccccc}
 \begin_inset Formula $n\neq0$
 \end_inset 
 
-, we have 
+, one has 
 \begin_inset Formula \begin{equation}
 \int_{0}^{1}B_{1}(x)\,\sin(2\pi nx)\, dx=\frac{-1}{\pi n}\label{eq:}\end{equation}
 
@@ -1123,7 +1177,7 @@ The Fourier representation also makes it clear that any vector with vector
 \end_inset 
 
 .
- In coordinate space, we can write these eigenfunctions as 
+ In coordinate space, one may write these eigenfunctions as 
 \begin_inset Formula \begin{equation}
 \beta(x;s)=2\Gamma(s+1)\sum_{n=1}^{\infty}\frac{\exp(2\pi inx)}{\left(2\pi n\right)^{s}}\label{eq:}\end{equation}
 
@@ -1134,8 +1188,8 @@ The Fourier representation also makes it clear that any vector with vector
 \end_inset 
 
 .
- Given the nature of summation, we see that the series is strictly convergent
- for any complex-valued 
+ Given the nature of summation, this series is strictly convergent for any
+ complex-valued 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -1188,9 +1242,9 @@ See, for example
 \end_inset 
 
 .
- We can confirm this by following a very old-fashioned recipe for obtaining
+ One may confirm this by following a very old-fashioned recipe for obtaining
  the functional relation for a zeta-like sum.
- We start by expressing the gamma function as 
+ Start by expressing the gamma function as 
 \begin_inset Formula \begin{equation}
 \int_{0}^{\infty}dy\, e^{-2\pi ny}y^{s-1}=\frac{\Gamma(s)}{(2\pi n)^{s}}\label{eq:}\end{equation}
 
@@ -1200,7 +1254,7 @@ See, for example
 \begin_inset Formula $\beta$
 \end_inset 
 
- and performing the sum, we find we can write 
+ and performing the sum, one may write 
 \begin_inset Formula \begin{equation}
 \beta(x;s)=2s\int_{0}^{\infty}dy\,\frac{y^{s-1}}{\exp\left(-2\pi i(x+iy)\right)-1}\label{eq:}\end{equation}
 
@@ -1211,7 +1265,7 @@ See, for example
 
 \end_inset 
 
- we can re-write this as a contour integral 
+, re-write this as a contour integral 
 \begin_inset Formula \begin{equation}
 \beta(x;s)=\frac{-is}{\sin\pi s}\oint\frac{(-y)^{s}}{\exp\left(-2\pi i(x+iy)\right)-1}\;\frac{dy}{y}\label{eq:}\end{equation}
 
@@ -1251,19 +1305,27 @@ See, for example
 
 \end_inset 
 
- We call this a formal sum, since the preceding steps required taking 
+ This is a 
+\begin_inset Quotes eld
+\end_inset 
+
+formal sum
+\begin_inset Quotes erd
+\end_inset 
+
+, since the preceding steps required taking 
 \begin_inset Formula $\Re s>1$
 \end_inset 
 
- whereas now we need to take 
+ whereas now one needs to take 
 \begin_inset Formula $\Re s<0$
 \end_inset 
 
 .
  This is a bit of jiggery-pokery that is common for this type of presentation;
- and a different set of tools is required to do better.
+ a different set of tools is required to do better.
  So we proceed, ignoring these difficulties.
- We re-write this sum as 
+ Re-write this sum as 
 \begin_inset Formula \begin{equation}
 \frac{i\sin\pi s}{s}\beta(x;s)=\exp\left(\frac{i\pi s}{2}\right)\left[\sum_{n=0}^{\infty}(n+(1-x))^{s-1}+e^{-i\pi(s-1)}\sum_{n=0}^{\infty}(n+x)^{s-1}\right]\label{eq:}\end{equation}
 
@@ -1286,8 +1348,8 @@ See, for example
 \end_inset 
 
 .
- Recognizing the sums as the Hurwitz Zeta, this then gives us the desired
- result: 
+ Recognizing the sums as the Hurwitz Zeta, this then gives the desired result:
+ 
 \begin_inset Formula \begin{equation}
 \beta(x;s)=\frac{is}{\sin\pi s}\left[e^{-i\pi s/2}\zeta(1-s,x)-e^{i\pi s/2}\zeta(1-s,1-x)\right]\label{eq:}\end{equation}
 
@@ -1309,8 +1371,8 @@ See, for example
 \end_inset 
 
 .
- To verify the correctness of the above steps, we can expand the exponentials
- in terms of their real and imaginary parts, to find that 
+ To verify the correctness of the above steps, expand the exponentials in
+ terms of their real and imaginary parts, to find that 
 \layout Standard
 
 
