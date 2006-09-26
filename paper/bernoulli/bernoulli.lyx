@@ -35,67 +35,73 @@ Linas Vepstas <linas@linas.org>
 2 January 2004 (revised 4 January 2005)
 \layout Abstract
 
-This chapter reviews a large raft of facts and ideas surrounding the Bernoulli
- operator.
- The Bernoulli operator is the transfer operator of the Bernoulli map, which
- is a very simple map, related to the tent map, that discards the digits
- of a binary expansion of a number.
- This map has been well studied in the literature, and much of what is presented
- here is well-known.
+This paper reviews a raft of related ideas surrounding the Bernoulli operator.
+ The Bernoulli operator is the transfer operator or Frobenius-Perron operator
+ of the Bernoulli map.
+ The Bernoulli map is a simple map of the unit interval onto itself, which
+ has the effect of discarding the leading binary digit of the binary expansion
+ of a number upon every iteration.
+ This map has been well studied in the literature, and much, if not most,
+ of what is presented here is well-known.
  
 \layout Abstract
 
-What is now, perhaps is that a representation is given of the Bernoulli
- mmap eigenfunctions in terms of the Takagi curve (or Blancmange curve).
+If there is anything new here, then perhaps it is a representation of the
+ Bernoulli mmap eigenfunctions in terms of the Takagi curve (or Blancmange
+ curve).
  In particular, it is shown that the Hurwitz-zeta function basis for the
  continuous spectrum is just a linear combination of the Takagi curves,
  and vice-versa.
- I find this curious and important somehow.
-\layout Abstract
-
-This establishes a connection to the Minkowski Question Mark Function as
- an isomorphism connecting the dyadic (binary) fractions and the Farey Fractions.
- The Question Mark embodies the basic Modular Group 
+ I find this curious and important somehow: the Blancmange curve has an
+ explicity fractal self-similarity given by the dyadic monoid.
+ The dyadic monoid is the monoid that describes the self-similarity of the
+ infinite binary tree, and is a subset of the modular group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
- symmetries seen in the dyadic and Farey Trees, and thus seen in fractals.
- 
+.
 \layout Abstract
 
-The general presentation requires only a modest math education, on par with
- the math a typical college engineering major might get.
- This paper is part of a set of chapters that explore the relationship between
+This paper is part of a set of chapters that explore the relationship between
  the real numbers, the modular group, and fractals.
 \layout Section
 
 The Bernoulli Operator
 \layout Standard
 
-THIS IS A DRAFT WORK IN PROGRESS.
+THIS IS A SET OF WORKING NOTES.
+ Its messy and disjointed.
  The intro hasn't been written yet.
 \layout Standard
 
 The general layout is:
 \layout Standard
 
--- analyze the Bernoulli Operator, which is exactly solvable, and has a
- rich structure
+-- Define the Bernoulli operator, demonstrate some of its eignefunctions
+ and eigenvalues.The presentation is a simplified variant of the material
+ in 
+\begin_inset LatexCommand \cite{Dri99}
+
+\end_inset 
+
+.
+ 
 \layout Standard
 
--- present the Hurwitz Zeta eigenfunctions
+-- Present the Hurwitz Zeta eigenfunctions
 \layout Standard
 
--- present the topological zeta function
+-- Present the topological zeta function
 \layout Standard
 
-ToDo:
+The Bernoulli map and Bernoulli operator appear in many forms and guises
+ throughout the theory of dynamical systems.
+ Some of these appearances include: 
 \layout Itemize
 
-Discuss the Bernoulli process in statistical mechanics/propbability theory.
- Discuss its generalizations.
- Define Markov processes very breifly.
- Show how this is the simplest of the Markov processes.
+The Bernoulli process in probability theory is one of the simplest Markov
+ processes.
+ Understood as a Markov process, it has a number of generalizations.
  
 \layout Itemize
 
@@ -141,16 +147,25 @@ bad
  that can result from triangular transfer operators?
 \layout Itemize
 
-Discuss Wavelet transforms, point out thier dyadic nature, point out thier
+Discuss wavelet transforms, point out thier dyadic nature, point out thier
  relationship to this mess; point out how wavelet transforms are a good
  tool for working with this kind of dyadic data.
 \layout Itemize
 
-Discuss the one-dimensional Ising and Potts models, whose space of thermodyanmic
- states are just the set of strings in two letters: i.e.
- can bre represented by binary numbers.
- Show that the partition function for the Potts model resembles the Question
- Mark function.
+While this paper focuses primarily on the polynomial and square-integrable
+ eigenfunctions of the Bernoulli operator, there is also a class of non-differen
+tiable, non-integrable eigenfunctions that can be precisely defined in terms
+ of the shift operator on a one-dimensional lattice model, the Ising model
+ of statistical mechanics.
+ The Ising model has a natural topology that is distinctly different from
+ the topology of the real number line; this alternate topology allows for
+ a much, much larger set of eigenfunctions.
+ This is discussed in greater detail in 
+\begin_inset LatexCommand \cite{Ve-I04}
+
+\end_inset 
+
+.
 \layout Standard
 
 Some of the sections, including the section on orthogonality and completeness,
@@ -168,28 +183,16 @@ The Frobenius-Perron Operator of the Bernoulli Map
 \layout Standard
 
 The Bernoulli map is an exactly solvable example of deterministic chaos.
- This map is presented in 
-\begin_inset LatexCommand \cite{key-10}
-
-\end_inset 
-
- and a more thorough exposition of it is provided in 
-\begin_inset LatexCommand \cite{key-2}
+ A good presentation of this map, its associated transfer operator and its
+ solution in terms of polynomial eigenfunctions is given in 
+\begin_inset LatexCommand \cite{Dri99}
 
 \end_inset 
 
 .
- However, these authors seem to have missed or ignored certain key aspects
- of the operator, including the fact that the Hurwitz Zeta function is an
- eigenvector, as well as the action of the modular group 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
- as a symmetry group playing an important part in the analysis.
- Thus, we recap the results here, using simpler techniques, and then (making
- use of these simpler tools) extend the results in several directions.
- The motivation for the detailed development is, of course, that we will
- want to extend these tools to the GKW operator.
+ The first section here recaps those results using a much simplified development
+ and simpler tools.
+ The simpler tools allow several extensions, explored in later sections.
  
 \layout Standard
 
@@ -212,7 +215,8 @@ b(x)=2x-\left\lfloor 2x\right\rfloor \label{eq:}\end{equation}
  
 \layout Standard
 
-The Frobenius-Perron operator of the Bernoulli map is given by
+The Frobenius-Perron operator or transfer operator of the Bernoulli map
+ is given by
 \begin_inset Formula \begin{equation}
 \left[U_{B}f\right](x)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]\label{eq:}\end{equation}
 
@@ -228,7 +232,7 @@ Blah blah blah.
 The Polynomial Representation
 \layout Standard
 
-Well, Provide the matrix elements.
+Provide the matrix elements.
 \layout Standard
 
 
@@ -262,7 +266,7 @@ k\end{array}\right)$
 .
  Because the matrix is upper-triangular, it is easily solvable for both
  the left and right eigenvectors, which agree perfectly w/ Driebe
-\begin_inset LatexCommand \cite{key-2}
+\begin_inset LatexCommand \cite{Dri99}
 
 \end_inset 
 
@@ -837,7 +841,7 @@ ional basis.
  We write 
 \begin_inset Formula \begin{eqnarray}
 U_{diagonal} & = & \sum_{j,k=0}^{\infty}\left|B_{j}\right\rangle \delta_{jk}\lambda_{k}\left\langle \tilde{B}_{k}\right|\nonumber \\
- & = & \sum_{j,k,m,n=0}^{\infty}\left|B_{j}\right\rangle \left\langle \tilde{B}_{j}|m\right\rangle \left\langle m\left|U_{monomial}\right|n\right\rangle \left\langle n|B_{k}\right\rangle \left\langle \tilde{B}_{k}\right|\nonumber \\
+ & = & \sum_{j,k,m,n=0}^{\infty}\left|B_{j}\right\rangle \left\langle \left.\tilde{B}_{j}\right|m\right\rangle \left\langle m\left|U_{monomial}\right|n\right\rangle \left\langle n\left|B_{k}\right.\right\rangle \left\langle \tilde{B}_{k}\right|\nonumber \\
  & = & \tilde{B}\, U_{monomial}\, B\label{eq:}\end{eqnarray}
 
 \end_inset 
@@ -852,13 +856,13 @@ U_{diagonal} & = & \sum_{j,k=0}^{\infty}\left|B_{j}\right\rangle \delta_{jk}\lam
 
  show the change of basis: 
 \begin_inset Formula \begin{equation}
-\tilde{B}=\sum_{j,m=0}^{\infty}\left|B_{j}\right\rangle \left\langle \tilde{B}_{j}|m\right\rangle \left\langle m\right|\label{eq:}\end{equation}
+\tilde{B}=\sum_{j,m=0}^{\infty}\left|B_{j}\right\rangle \left\langle \left.\tilde{B}_{j}\right|m\right\rangle \left\langle m\right|\label{eq:}\end{equation}
 
 \end_inset 
 
  and 
 \begin_inset Formula \begin{equation}
-B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n|B_{k}\right\rangle \left\langle \tilde{B}_{k}\right|\label{eq:}\end{equation}
+B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n\left|B_{k}\right.\right\rangle \left\langle \tilde{B}_{k}\right|\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -976,14 +980,13 @@ The Koopman operator of the Bernoulli Map has the property of taking a function
  is limited by this singularity.
  Secondly, it takes a function and more-or-less makes it periodic; again,
  the polynomials cannot cope directly with this.
- Thus, we are motivated to explore the Fourier representation, if only to
+ Thus, one is motivated to explore the Fourier representation, if only to
  express the Koopman operator.
  
 \layout Standard
 
-It turns out to be exceedingly simple to find this operator in the Fourier
- basis.
- If we write 
+It is easy to find an explicit form for this operator in the Fourier basis.
+ Writing 
 \begin_inset Formula \begin{equation}
 f(x)=\sum_{n}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\label{eq:}\end{equation}
 
@@ -996,7 +999,7 @@ f(x)=\sum_{n}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\label{eq:}\end{equation}
 \end_inset 
 
  or, in Dirac notation, 
-\begin_inset Formula $\left\langle em|K_{B}|en\right\rangle =\delta_{2m,n}$
+\begin_inset Formula $\left\langle em\left|K_{B}\right|en\right\rangle =\delta_{2m,n}$
 \end_inset 
 
 .
@@ -1034,7 +1037,7 @@ U_{B}=\left[\begin{array}{cccccc}
 
 \end_inset 
 
- We can see that in this representation, we have 
+ In this representation, it is easily seen that 
 \begin_inset Formula $U_{B}K_{B}=1$
 \end_inset 
 
@@ -1167,7 +1170,7 @@ B_{n}(x) & = & -\Gamma(n+1)\sum_{k=1}^{\infty}\frac{\exp(2\pi ikx)+\exp(2\pi ik(
 \end_inset 
 
 See, for example 
-\begin_inset LatexCommand \cite[Thm. 12.19]{key-13}
+\begin_inset LatexCommand \cite[Thm. 12.19]{Apo76}
 
 \end_inset 
 
@@ -1204,7 +1207,7 @@ See, for example
 \end_inset 
 
  Then, following a traditional trick 
-\begin_inset LatexCommand \cite{key-11}
+\begin_inset LatexCommand \cite[pp 13 ff]{Edw74}
 
 \end_inset 
 
@@ -1318,7 +1321,7 @@ See, for example
 
  which agrees with standard textbook presentations of the Hurwitz Zeta;
  see for example 
-\begin_inset LatexCommand \cite[Thm 12.6]{key-13}
+\begin_inset LatexCommand \cite[Thm 12.6]{Apo76}
 
 \end_inset 
 
@@ -2659,87 +2662,9 @@ Conclusions
 Apologies for the format of this paper.
  It's a veritable candy store of goodies; there are all these yummy toys
  to play with, which one first?
-\layout Bibliography
-\bibitem [asdf]{key-1}
-
-Here is a very similarly titled paper with a very different subject matter:
- 
-\begin_inset LatexCommand \htmlurl[Continued Fractions and Chaos]{http://www.cecm.sfu.ca/organics/papers/corless/confrac/html/confrac.html}
+\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
 
 \end_inset 
 
- by Robert M.
- Corless
-\layout Bibliography
-\bibitem [Dri99]{key-2}
 
-Dean Driebe, 
-\emph on 
-Fully Chaotic Maps and Broken Time Symmetry, 1999,
-\emph default 
- Kluwer Academic Publishers
-\layout Bibliography
-\bibitem [Man88]{key-3}
-
-Benoit Mandelbrot, in 
-\emph on 
-The Science of Fractal Images, ed.
- Heinz-Otto Peitgen, Dietmar Saupe,
-\emph default 
- (Springer-Verlag, 1988) p.
- 246
-\layout Bibliography
-\bibitem [deR57]{key-4}
-
-Georges de Rham, 
-\emph on 
-On Some Curves Defined by Functional Equations
-\emph default 
- (1957), reprinted in
-\emph on 
- Classics on Fractals, ed.
- Gerald A.
- Edgar
-\emph default 
-, (Addison-Wesley, 1993) pp.
- 285-298
-\layout Bibliography
-\bibitem [Gas92]{key-10}
-
-P.
- Gaspard, 
-\emph on 
-r-adic one-dimensional maps and the Euler summation formula
-\emph default 
-, 1992, Journal of Physics A: Mathematical and General, vol.
- 25, L483-485.
- 
-\layout Bibliography
-\bibitem [Ed74]{key-11}
-
-H.
- M.
- Edwards, 
-\emph on 
-Riemann's Zeta Function,
-\emph default 
- 1972, (Dover Publications, New York) pp.
- 13ff 
-\layout Bibliography
-\bibitem [Iso03]{key-12}
-
-Stefano Isola, 
-\emph on 
-On the Spectrum of Farey and Gauss Maps
-\emph default 
-, preprint, undated (2004 or earlier)
-\layout Bibliography
-\bibitem [Apo76]{key-13}
-
-Tom M.
- Apostol, 
-\emph on 
-Introduction to Analytic Number Theory
-\emph default 
-, 1976, (Springer-Verlag, New York)
 \the_end
