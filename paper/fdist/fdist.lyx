@@ -35,8 +35,40 @@ Linas Vepstas <linas@linas.org>
 12 October 2004 (updated 25 September 2006)
 \layout Abstract
 
-This breif note reviews a circle of topics connecting the derivative of
- the Minkowski question mark function, the so-clled 
+This paper reviews connections between the Bernoulli map, the baker's map
+ and the Ising model.
+ The Bernoulli map is possibly the simplest exactly solvable model of determinis
+tic chaos.
+ Its Frobenius-Perron operator or transfer operator has a set of well-known
+ polynomial eigenvectors, given by the Bernoulli polynomials.
+ Its also has a set of smooth but non-integrable eigenvectors given by the
+ Hurwitz zeta function.
+ Alternately, it has a set of fractal eigenvectors, of which the Blancmange
+ or Takagi curve is one.
+\layout Abstract
+
+An even larger set of functions that are eigenvectors of the Bernoulli operator
+ may be obtained by considering a one dimensional lattice model, such as
+ the Ising model.
+ Functions that are translationally invariant on a one-dimensional lattice
+ are nothing more or less than eigenvectors of the Bernoulli operator with
+ eigenvalue one.
+ These functions, when graphed on the real number line, are in general not
+ even continuous.
+ 
+\layout Abstract
+
+Functins that are continuous-nowhere are traditionally considered to be
+ intractible, and usually, very little can be said about them.
+ By identifying them with a set of simple, tractable operations on a one-dimensi
+onal lattice model, one obtains a set of tools with which to manipulate
+ and analyze such functions.
+\layout Abstract
+
+A notable example of a discontinuouis-everywhere function that is not traditiona
+lly integrable, yet, when properly defined, can be integrated, is derivative
+ of the Minkowski question mark function.
+ It, and its generalizations are known as 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -44,21 +76,8 @@ multi-fractal measures
 \begin_inset Quotes erd
 \end_inset 
 
-, the distribution of the Farey fractions, one-dimensional lattice models
- in physics, such as the Ising model, the Potts model and the Kac model,
- and the symmetries of the maps between the 
-\begin_inset Quotes eld
-\end_inset 
-
-natural
-\begin_inset Quotes erd
-\end_inset 
-
- topologies that underly these objects.
- 
-\layout Abstract
-
-The question of what it means to 
+.
+ Thus, this paper explores what it means to 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -66,16 +85,18 @@ take the derivative of the question mark function
 \begin_inset Quotes erd
 \end_inset 
 
- is explored.
- The natural topology of one-dimensional lattice models is reviewed.
- It is conjectured that the derivative of the question mark may be the limiting
- behavior of a modular form.
- (Modular forms are analytic functions that are closely related to elliptic
- functions, and have a particular kind of modular group symmetry).
- 
+.
+ As a side-effect, all of the various functions that occur have a particular
+ fractal self-symmetry, which can be made explicitly manifest; it is the
+ symmetry of the dyadic monoid, that is, the period-doubling subset of the
+ modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
 \layout Abstract
 
-This document is mostly a research diary noting various results, and is
+This document started as a research diary noting various results, and is
  haphazardly structured.
  
 \layout Abstract
@@ -99,78 +120,27 @@ Intro
 
 THIS IS A DRAFT WORK IN PROGRESS.
  The intro hasn't been written yet, but if it was, it would work like this:
- Modular forms are analytic functions that are closely related to elliptic
- functions, and have a particular kind of modular group symmetry.
- Modular forms are defined on the upper-half plane 
-\begin_inset Formula $\mathbb{H}$
+ 
+\layout Standard
+
+Exactly solvable chaotic dynamical systems are interesting because they
+ provide insight into the behaviour of chaotic dynamical systems 
+\begin_inset Quotes eld
 \end_inset 
 
- of the complex plane 
-\begin_inset Formula $\mathbb{C}$
+in the large
+\begin_inset Quotes erd
 \end_inset 
 
-, that is, for complex numbers 
-\begin_inset Formula $\tau=x+iy$
-\end_inset 
-
- with 
-\begin_inset Formula $y>0$
-\end_inset 
-
-
-\begin_inset LatexCommand \cite{Apo90}
+.
+ The simplest exactly solvable model of deterministic chaos is the Bernoulli
+ map
+\begin_inset LatexCommand \cite{Dri99}
 
 \end_inset 
 
 .
- Here, we are concerned with the limiting behavior of 
-\begin_inset Formula $y\rightarrow0$
-\end_inset 
-
-, which yields highly singular functions defined on the real number line,
- yet inheriting a modular group symmetry of the form of which they are the
- limit.
-\layout Standard
-
-Most fractals presented in the popular literature have a form that suggests
- that they live on the closure of the hyperbolic plane: that is, they live
- on the 
-\begin_inset Quotes eld
-\end_inset 
-
-edge
-\begin_inset Quotes erd
-\end_inset 
-
- of that plane.
- Of course, the hyperbolic metric never allows you to get to that edge,
- but one can also put an ordinary Euclidean metric on the Poincare disk,
- or the Poincare upper half plane, and get to that boundary.
- The problem is, of course, that the topologies that seem to suggest themselves
- in these two cases are subtly incompatible, and lead to a variety of confusions.
- In particular, we argue below that when considering the limiting behavior
- of of functions at the 
-\begin_inset Quotes eld
-\end_inset 
-
-edge
-\begin_inset Quotes erd
-\end_inset 
-
- of hyperbolic space, the correct topology is a kind of 
-\begin_inset Quotes eld
-\end_inset 
-
-binary tree topology
-\begin_inset Quotes erd
-\end_inset 
-
-, similar in form to the Cantor set, but a bit richer.
- In particular, this topology is finer than the usual topology on the real
- number line, and this additional fineness allows otherwise dubious expressions
- to be given precise meaning.
- It is only when functions on this topology are mapped back onto the real
- number line that confusions result.
+ 
 \layout Section
 
 Distribution of the Rational numbers in the Farey tree
@@ -631,221 +601,6 @@ Some slightly formal but not very fruitful remarks follow.
 \end_inset 
 
 .
-\layout Section
-
-A Binary Tree Topology
-\layout Standard
-
-
-\begin_inset Note
-collapsed true
-
-\layout Standard
-
-This section added in dec 2005, and was conceived in the summer of 2005.
- This section should be split out into its own doc eventually, and dated
- to the summer of 2005.
-\end_inset 
-
-
-\layout Standard
-
-Consider the 
-\begin_inset Quotes eld
-\end_inset 
-
-dyadic topology
-\begin_inset Quotes erd
-\end_inset 
-
-: every rational of the form 
-\begin_inset Formula $p/2^{n}$
-\end_inset 
-
- for 
-\begin_inset Formula $p$
-\end_inset 
-
- odd and integer 
-\begin_inset Formula $n>0$
-\end_inset 
-
- is taken to be an open set.
- All points in between such dyadic rationals are taken to form an open set.
-\layout Standard
-
-One way to visualize this topology is as a binary tree.
- At the root of the tree is the point 1/2.
- At the next level, there is 1/4 and 3/4, and so on.
- Every such node in the tree is then taken to be an open set.
- At the leafs of the tree lie the irrationals, and the rationals not of
- the form 
-\begin_inset Formula $p/2^{n}$
-\end_inset 
-
-.
-\layout Standard
-
-The topology differs from that of the canonical Cantor set: in that case,
- the intermediate nodes are not even considered to be a part of the topology.
- The leaf nodes are taken to be closed sets, which is how the Cantor set
- becomes a perfect set.
-\layout Standard
-
-The point of introducing this binary tree topology is ....
- Task: construct measures on this topology.
-\layout Standard
-
-Several remarks are in order.
- First, in the canonical Cantor set, each leaf was assigned a measure of
- zero.
- It should be clear that this choice is arbitrary, and that any measure
- can be assigned to the endpoints.
- The cardinality of the endpoints of the binary tree is the cardinality
- of the continuum, as can be seen by using more or less the same arguments
- used to discuss the cardinality of the Cantor set.
- Because of this, it is not unreasonable to believe that one may be able
- to construct measures that 
-\begin_inset Quotes eld
-\end_inset 
-
-make sense
-\begin_inset Quotes erd
-\end_inset 
-
- in the context of the real number line.
- In particular, such measures can make well-defined integrals and the like.
-\layout Standard
-
-Of interest are measures that are functions of, and possibly holomorphic
- functions, of the dyadic expansion.
- That is, consider the series 
-\begin_inset Formula $\{ b_{k}:b_{k}\in\{0,1\},\, k\in\mathbb{N}\}$
-\end_inset 
-
-of binary digits given by the dyadic expansion of a real number 
-\begin_inset Formula $x$
-\end_inset 
-
-: 
-\begin_inset Formula \begin{equation}
-x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equation}
-
-\end_inset 
-
- This expansion is not unique, because for every dyadic number, there are
- two inequivalent expansions.
- For example, 
-\begin_inset Formula $1/2=0.1000..=0.0111...$
-\end_inset 
-
-.
- Therefore, we conclude that the dyadic topology is finer than the the usual
- topology on the real numbers.
- In particular, the dyadic topology distinguishes all three of these cases:
- 1/2 is a not in the middle of the tree (the root as it happens here), whereas
- the two inequivalent expansions belong to two different leafs at the end
- of the binary tree.
-\layout Standard
-
-Because this topology is finer than the usual topology on the real number
- line, one can define functions on this topology that would be ill-defined
- when considered on the real number line: in particular, the three points
- above map to just one point on the real numbers.
- However, it should be painfully clear at this point that this topology
- is compatible with the discussion the structure of dyadic fractals.
- It should also be clear that this topology is compatible with discussions
- of the closure of the upper half-plane when considering the limiting behavior
- of modular forms, Fuchsian groups, and ergodic processes.
-\layout Standard
-
-As an example, consider the Takagi curve.
- When considered on the real-number line, it has a derivative that seems
- to be defined nowhere.
- When considered on the binary tree topology, its derivative looks a lot
- less intimidating: in fact, it is perfectly well-defined on the leaves;
- the only ambiguity is on the interior nodes of the tree.
- Furthermore, the interior nodes of the tree are a countable set, whereas
- the leaves are uncountable.
- 
-\layout Standard
-
-XXX Discuss 
-\begin_inset Quotes eld
-\end_inset 
-
-fat cantor set
-\begin_inset Quotes erd
-\end_inset 
-
-, i.e.
- a measure which puts all of the measure on the leaves of the tree.
- 
-\layout Standard
-
-This implies that the derivative of the Takagi curve is in fact defined
- 
-\begin_inset Quotes eld
-\end_inset 
-
-almost everywhere
-\begin_inset Quotes erd
-\end_inset 
-
-, with the exception of only a countable set of points.
- The goal here is to bootstrap this realization into providing a wholesome
- topological definition for all fractal measures.
-\layout Standard
-
-Next, because the topology is that of a binary tree, it should be clear
- that any binary structure inherits this topology in a natural way.
- In particular, the Stern-Brocot tree has this topology.
- In particular, this means that there is a second natural mapping to the
- real number line, given by the Minkowski Question Mark function.
- The interior nodes of the tree are the rational numbers (a countable set),
- and the leaves of the tree are the irrationals (of the cardinality of the
- continuum).
- By using the dyadic topology, the derivative of the question mark function
- becomes a whole lot less intimidating as well: it becomes clear that the
- derivative is precisely zero on the rationals (the interior nodes of the
- tree), and non-zero on the leaves.
- Again, because of the cardinality of the leaves, it becomes clear that
- this measure can be integrated in a well-founded way.
- The problem then is no longer 
-\begin_inset Quotes eld
-\end_inset 
-
-how can the derivative of the question mark be put on a good foundation
-\begin_inset Quotes erd
-\end_inset 
-
-, rather it becomes 
-\begin_inset Quotes eld
-\end_inset 
-
-what sort of easy to manipulate, easy to handle expressions for this measure
- can be found?
-\begin_inset Quotes erd
-\end_inset 
-
-.
-\layout Standard
-
-XXXX ToDo: review standard topological notions for the binary tree topology
- in greater detail, such as separation axioms, bases, metrics, continuity,
- differentiability.
- etc.
- Note that finer topologies typically have fewer continuous, smooth functions
- than coarse topologies.
- Since this is finer than the 
-\begin_inset Quotes eld
-\end_inset 
-
-natural
-\begin_inset Quotes erd
-\end_inset 
-
- topology on the reals, who are the losers?
 \layout Section
 
 Spin lattice models
@@ -3944,6 +3699,302 @@ natural
 \layout Standard
 
 -- lather rinse repeat .
+\layout Section
+
+Intro to remainder
+\layout Standard
+
+The remainder of this paper should be split off to be its own thing, as
+ it no longer hangs with the above.
+\layout Standard
+
+Modular forms are analytic functions that are closely related to elliptic
+ functions, and have a particular kind of modular group symmetry.
+ Modular forms are defined on the upper-half plane 
+\begin_inset Formula $\mathbb{H}$
+\end_inset 
+
+ of the complex plane 
+\begin_inset Formula $\mathbb{C}$
+\end_inset 
+
+, that is, for complex numbers 
+\begin_inset Formula $\tau=x+iy$
+\end_inset 
+
+ with 
+\begin_inset Formula $y>0$
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Apo90}
+
+\end_inset 
+
+.
+ Here, we are concerned with the limiting behavior of 
+\begin_inset Formula $y\rightarrow0$
+\end_inset 
+
+, which yields highly singular functions defined on the real number line,
+ yet inheriting a modular group symmetry of the form of which they are the
+ limit.
+\layout Standard
+
+Most fractals presented in the popular literature have a form that suggests
+ that they live on the closure of the hyperbolic plane: that is, they live
+ on the 
+\begin_inset Quotes eld
+\end_inset 
+
+edge
+\begin_inset Quotes erd
+\end_inset 
+
+ of that plane.
+ Of course, the hyperbolic metric never allows you to get to that edge,
+ but one can also put an ordinary Euclidean metric on the Poincare disk,
+ or the Poincare upper half plane, and get to that boundary.
+ The problem is, of course, that the topologies that seem to suggest themselves
+ in these two cases are subtly incompatible, and lead to a variety of confusions.
+ In particular, we argue below that when considering the limiting behavior
+ of of functions at the 
+\begin_inset Quotes eld
+\end_inset 
+
+edge
+\begin_inset Quotes erd
+\end_inset 
+
+ of hyperbolic space, the correct topology is a kind of 
+\begin_inset Quotes eld
+\end_inset 
+
+binary tree topology
+\begin_inset Quotes erd
+\end_inset 
+
+, similar in form to the Cantor set, but a bit richer.
+ In particular, this topology is finer than the usual topology on the real
+ number line, and this additional fineness allows otherwise dubious expressions
+ to be given precise meaning.
+ It is only when functions on this topology are mapped back onto the real
+ number line that confusions result.
+\layout Section
+
+A Binary Tree Topology
+\layout Standard
+
+
+\begin_inset Note
+collapsed true
+
+\layout Standard
+
+This section added in dec 2005, and was conceived in the summer of 2005.
+ This section should be split out into its own doc eventually, and dated
+ to the summer of 2005.
+\end_inset 
+
+
+\layout Standard
+
+Consider the 
+\begin_inset Quotes eld
+\end_inset 
+
+dyadic topology
+\begin_inset Quotes erd
+\end_inset 
+
+: every rational of the form 
+\begin_inset Formula $p/2^{n}$
+\end_inset 
+
+ for 
+\begin_inset Formula $p$
+\end_inset 
+
+ odd and integer 
+\begin_inset Formula $n>0$
+\end_inset 
+
+ is taken to be an open set.
+ All points in between such dyadic rationals are taken to form an open set.
+\layout Standard
+
+One way to visualize this topology is as a binary tree.
+ At the root of the tree is the point 1/2.
+ At the next level, there is 1/4 and 3/4, and so on.
+ Every such node in the tree is then taken to be an open set.
+ At the leafs of the tree lie the irrationals, and the rationals not of
+ the form 
+\begin_inset Formula $p/2^{n}$
+\end_inset 
+
+.
+\layout Standard
+
+The topology differs from that of the canonical Cantor set: in that case,
+ the intermediate nodes are not even considered to be a part of the topology.
+ The leaf nodes are taken to be closed sets, which is how the Cantor set
+ becomes a perfect set.
+\layout Standard
+
+The point of introducing this binary tree topology is ....
+ Task: construct measures on this topology.
+\layout Standard
+
+Several remarks are in order.
+ First, in the canonical Cantor set, each leaf was assigned a measure of
+ zero.
+ It should be clear that this choice is arbitrary, and that any measure
+ can be assigned to the endpoints.
+ The cardinality of the endpoints of the binary tree is the cardinality
+ of the continuum, as can be seen by using more or less the same arguments
+ used to discuss the cardinality of the Cantor set.
+ Because of this, it is not unreasonable to believe that one may be able
+ to construct measures that 
+\begin_inset Quotes eld
+\end_inset 
+
+make sense
+\begin_inset Quotes erd
+\end_inset 
+
+ in the context of the real number line.
+ In particular, such measures can make well-defined integrals and the like.
+\layout Standard
+
+Of interest are measures that are functions of, and possibly holomorphic
+ functions, of the dyadic expansion.
+ That is, consider the series 
+\begin_inset Formula $\{ b_{k}:b_{k}\in\{0,1\},\, k\in\mathbb{N}\}$
+\end_inset 
+
+of binary digits given by the dyadic expansion of a real number 
+\begin_inset Formula $x$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equation}
+
+\end_inset 
+
+ This expansion is not unique, because for every dyadic number, there are
+ two inequivalent expansions.
+ For example, 
+\begin_inset Formula $1/2=0.1000..=0.0111...$
+\end_inset 
+
+.
+ Therefore, we conclude that the dyadic topology is finer than the the usual
+ topology on the real numbers.
+ In particular, the dyadic topology distinguishes all three of these cases:
+ 1/2 is a not in the middle of the tree (the root as it happens here), whereas
+ the two inequivalent expansions belong to two different leafs at the end
+ of the binary tree.
+\layout Standard
+
+Because this topology is finer than the usual topology on the real number
+ line, one can define functions on this topology that would be ill-defined
+ when considered on the real number line: in particular, the three points
+ above map to just one point on the real numbers.
+ However, it should be painfully clear at this point that this topology
+ is compatible with the discussion the structure of dyadic fractals.
+ It should also be clear that this topology is compatible with discussions
+ of the closure of the upper half-plane when considering the limiting behavior
+ of modular forms, Fuchsian groups, and ergodic processes.
+\layout Standard
+
+As an example, consider the Takagi curve.
+ When considered on the real-number line, it has a derivative that seems
+ to be defined nowhere.
+ When considered on the binary tree topology, its derivative looks a lot
+ less intimidating: in fact, it is perfectly well-defined on the leaves;
+ the only ambiguity is on the interior nodes of the tree.
+ Furthermore, the interior nodes of the tree are a countable set, whereas
+ the leaves are uncountable.
+ 
+\layout Standard
+
+XXX Discuss 
+\begin_inset Quotes eld
+\end_inset 
+
+fat cantor set
+\begin_inset Quotes erd
+\end_inset 
+
+, i.e.
+ a measure which puts all of the measure on the leaves of the tree.
+ 
+\layout Standard
+
+This implies that the derivative of the Takagi curve is in fact defined
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+almost everywhere
+\begin_inset Quotes erd
+\end_inset 
+
+, with the exception of only a countable set of points.
+ The goal here is to bootstrap this realization into providing a wholesome
+ topological definition for all fractal measures.
+\layout Standard
+
+Next, because the topology is that of a binary tree, it should be clear
+ that any binary structure inherits this topology in a natural way.
+ In particular, the Stern-Brocot tree has this topology.
+ In particular, this means that there is a second natural mapping to the
+ real number line, given by the Minkowski Question Mark function.
+ The interior nodes of the tree are the rational numbers (a countable set),
+ and the leaves of the tree are the irrationals (of the cardinality of the
+ continuum).
+ By using the dyadic topology, the derivative of the question mark function
+ becomes a whole lot less intimidating as well: it becomes clear that the
+ derivative is precisely zero on the rationals (the interior nodes of the
+ tree), and non-zero on the leaves.
+ Again, because of the cardinality of the leaves, it becomes clear that
+ this measure can be integrated in a well-founded way.
+ The problem then is no longer 
+\begin_inset Quotes eld
+\end_inset 
+
+how can the derivative of the question mark be put on a good foundation
+\begin_inset Quotes erd
+\end_inset 
+
+, rather it becomes 
+\begin_inset Quotes eld
+\end_inset 
+
+what sort of easy to manipulate, easy to handle expressions for this measure
+ can be found?
+\begin_inset Quotes erd
+\end_inset 
+
+.
+\layout Standard
+
+XXXX ToDo: review standard topological notions for the binary tree topology
+ in greater detail, such as separation axioms, bases, metrics, continuity,
+ differentiability.
+ etc.
+ Note that finer topologies typically have fewer continuous, smooth functions
+ than coarse topologies.
+ Since this is finer than the 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ topology on the reals, who are the losers?
 \layout Section
 
 Modular Forms
