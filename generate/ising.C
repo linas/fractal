@@ -56,7 +56,7 @@ double tent (double s)
 	// double en = (s>0.5)? 2.0*s : 2.0*(1.0-s);
 	double en = (s>0.5)? 2.0*(1.0-s) : 2.0*s;
 	en -= 0.5;
-	return 1.0*en;
+	return -1.0*en;
 }
 
 double qtent (double s)
@@ -119,6 +119,9 @@ double kac (double s)
 	return (1.0-lambda)*s0*acc;
 }
 
+/* =========================================================== */
+static double phase;
+
 /* Return the finite-state energy of string s (length n) */
 double energy (double (*interaction)(double), double s, int n)
 {
@@ -127,7 +130,8 @@ double energy (double (*interaction)(double), double s, int n)
 	double en = 0.0;
 	for (i=0; i<n; i++)
 	{
-		en += interaction (s);
+		double lam = cos (n*phase);
+		en += lam * interaction (s);
 
 		/* Shift one bit */
 		if (s>= 0.5) s -= 0.5;
@@ -153,7 +157,9 @@ double cross_energy (double (*interaction)(double), double sl, double sr, int n)
 			s += 0.5;
 			sl -= 1.0;
 		}	  
-		en += interaction (s);
+		double lam = cos ((n+1)*phase);
+		en += lam * interaction (s);
+		
 	}
 
 	return en;
@@ -166,12 +172,20 @@ double partition (double (*interaction)(double), double x, double y)
 		
 	// double y = fquestion_mark (x);
 	// double en = energy (interaction, y, n);
+	double en = 0.0;
 	
-	double en = energy (interaction, x, n);
+#if WRONG
+	phase_offset = 0.0;
+	en = energy (interaction, x, n);
+	phase = -phase;
+	phase_offset = phase;
 	en += energy (interaction, y, n);
-
-	// n=1; // need to specify for short-range interactions ... 
+	// n=1; // need to specify for short-range interactions e.g. ising... 
 	en += cross_energy (interaction, x, y, n);
+#endif
+
+	en = energy (interaction, x, n);
+	en += cross_energy (interaction, y, x, n);
 	
 	en = exp (-en);
 	return en;
@@ -197,19 +211,21 @@ ising_density (double x, double y)
 static double 
 density (double x, double y, int itermax, double param)
 {
+	phase = acos(param);
+	
 	double p;
 	// partition (pabola, n);
-	// partition (tent, n);
 	// partition (vq, n);
 	// partition (qtent, n);
 	// partition (pointy, n);
  
+	// p = partition (tent, x,y);
 	// p = partition (kac, x,y);
 
 	// should be equivalent to ising_density --- and it is.
-	// p = partition (nearest_neighbor, x,y);
+	p = partition (nearest_neighbor, x,y);
 	
-	p = ising_density (x,y);
+	// p = ising_density (x,y);
 	return p;
 }
 
