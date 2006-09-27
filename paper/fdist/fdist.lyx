@@ -172,11 +172,11 @@ One method for studying a chaotic map is in terms of its Frobenius-Perron
  physics, and the statistical mechanics of continuum systems.
  The argument goes as follows: while iterated maps have a point dynamics
  that bounces all over the place, in nature, physical observables are smooth.
- Therefore, one should study the dynamics of smooth functions under the
- action of chaotic operators.
- The transfer operator gives one exactly such an opportunity.
- It is defined as a function 
-\begin_inset Formula $U:\mathcal{F}\to\mathcal{F}$
+ Therefore, one should study the dynamics of a smooth distrubution of particles
+ under the action of chaotic operators.
+ The transfer operator gives exactly such an opportunity.
+ It is defined as a certain map 
+\begin_inset Formula $\mathcal{L}:\mathcal{F}\to\mathcal{F}$
 \end_inset 
 
  where 
@@ -193,31 +193,238 @@ One method for studying a chaotic map is in terms of its Frobenius-Perron
 \end_inset 
 
  the set of square-integral functions on the unit interval.
- The transfer operator of the Bernoulli map is called the Bernoulli operator
- and is given by 
+ Given some iterated function (for example, 
+\begin_inset Formula $b(x)$
+\end_inset 
+
+), it is defined as the map 
 \begin_inset Formula \begin{equation}
-U_{B}f=g\label{eq:}\end{equation}
+\mathcal{L}f=g\label{eq:}\end{equation}
 
 \end_inset 
 
- with the values of 
-\begin_inset Formula $g$
+ with 
+\begin_inset Formula $f,g\in\mathcal{F}$
 \end_inset 
 
- on the unit interval given by
+ such that, on a pointwise basis, one has 
 \begin_inset Formula \begin{equation}
-\left[U_{B}f\right](x)=g(x)=\frac{1}{2}\left(\; f\left(\frac{x}{2}\right)+f\left(\frac{1+x}{2}\right)\;\right)\label{eq:}\end{equation}
+g(x)=\sum_{y\in b^{-1}(x)}\;\frac{f(y)}{b^{\prime}(y)}\label{eq:}\end{equation}
 
 \end_inset 
 
- A formal definition for the transfer operator of any iterated map can be
- found in many places in the literature; simple, workable definitions can
- be found in 
+ where 
+\begin_inset Formula $b^{\prime}(y)$
+\end_inset 
+
+ is the derivative of 
+\begin_inset Formula $b$
+\end_inset 
+
+ at 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ When the pre-image 
+\begin_inset Formula $b^{-1}(x)$
+\end_inset 
+
+ is not a countable collection of points, the sum may be replaced by an
+ integral.
+ The transfer operator can be defined with varying degrees of sophistication
+ and rigor, and can be found in many places in the literature; simple, workable
+ definitions can be found in 
 \begin_inset LatexCommand \cite{Dri99,Ve-Tr04}
 
 \end_inset 
 
 .
+ In short, while iterating a function such as 
+\begin_inset Formula $b(x)$
+\end_inset 
+
+ gives the time evolution of a point, iterating the operator 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+ gives the time evolution of a smooth distribution.
+ A general feature that is physically appealing is that the transfer operator
+ typically has only one eigenstate associated with an eigenvalue of 1: this
+ is the ground state or equilibrium state.
+ All other eigenstates are associated with real eigenvalues that are less
+ than one: upon iteration, the associated eigenstates must necessarily die
+ away geometrically.
+ This behaviour is physically appealing: it describes the approach to equilibriu
+m of a system that may initially be far from equilibrium, and it provides
+ a set of time scales at which that approach is made.
+\layout Standard
+
+The transfer operator of the Bernoulli map is called the Bernoulli operator
+ 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ and is given by 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{B}f\right](x)=g(x)=\frac{1}{2}\left(\; f\left(\frac{x}{2}\right)+f\left(\frac{1+x}{2}\right)\;\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ When 
+\begin_inset Formula $\mathcal{F}$
+\end_inset 
+
+ is the space of polynomials, the eigenfunctions of 
+\begin_inset Formula $\mathcal{L_{B}}$
+\end_inset 
+
+ are the Bernoulli polynomials 
+\begin_inset Formula $B_{n}(x)$
+\end_inset 
+
+, and are associated with the eigenvalues 
+\begin_inset Formula $2^{-n}$
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Gas92}
+
+\end_inset 
+
+.
+ The constant function 
+\begin_inset Formula $B_{0}(x)=1$
+\end_inset 
+
+ is associated with the eigenvalue 
+\begin_inset Formula $1$
+\end_inset 
+
+; it is the only non-decaying eigenfunction associated with the iteration
+ of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+: the equilibrium state is a constant distribution.
+ The spectrum of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ is discrete.
+\layout Standard
+
+If one considers a larger space of functions 
+\begin_inset Formula $\mathcal{F}$
+\end_inset 
+
+, then one finds that 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ has a larger set of eigenvalues.
+ For example, if one considers the collection 
+\begin_inset Formula $\mathcal{C}^{\infty}(0,1)$
+\end_inset 
+
+ of infinitly-differentiable functions on the 
+\emph on 
+open
+\emph default 
+ unit interval (
+\emph on 
+i.e
+\emph default 
+.
+ not containing the endpoints), then the spectrum of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ is continuous, and takes on all values in the unit disk 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset 
+
+ of the complex plane.
+ The eigenstates are given by the Hurwitz zeta function
+\begin_inset LatexCommand \cite{Ve-B04}
+
+\end_inset 
+
+.
+ The spectrum is degenerate, in that there are multiple eigenstates associated
+ with each eigenvalue.
+ Curiously, linear combinations of the Hurwitz zeta function may be taken,
+ constructing the fractal Blancmange or Takagi curve.
+ That is, for every eigenvalue on the complex unit disk, there is a correspondin
+g fractal curve that is an eigenvector of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+, with that fractal having a dyadic self-symmetry.
+ The Takagi curve is continuous but differentiable nowhere; however, it
+ is bounded, and it is integrable.
+ In this larger space, there is still only one unique eigenvector with eigenvalu
+e one: this is still the constant function.
+ 
+\layout Standard
+
+There is yet a larger space of functions 
+\begin_inset Formula $\mathcal{F}$
+\end_inset 
+
+ that one may consider, and this is the space of functions that are continuous
+ nowhere on the unit interval and are unbounded in magnitude, but are, in
+ a certain sense, integrable.
+ In classical analysis, such functions are outcasts, seemingly intractible
+ and uncoercible.
+ However, they may in fact be constructed in a very natural fashion: these
+ are functions on the state space of a one-dimensional lattice model.
+ They may be mapped to the unit interval with the dyadic mapping, and when
+ mapped in this way, are plainly discontinuous and generally beastly.
+ However, the lattice posses an alternate topology, which makes these functions
+ not only manipulable but well-studied.
+ Examples of functions on the lattice include the energy of the Ising model,
+ or the Boltzmann probability distribution of the set of states of the Ising
+ model.
+ In the lattice model, the Bernoulli map corresponds to nothing more than
+ the shift of the lattice by one: a translation of the lattice.
+ The eigenvectors of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ are simply functions whose magnitude changes geometrically as the lattice
+ is shifted by one: 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+is just the shift operator.
+ Curiously, there is now a very large class of functions associated with
+ the eigenvalue one: this is the class of translation-invariant functions.
+\layout Standard
+
+The remainder of this paper is devoted to an exposition of the lattice-model
+ construction of eigenstates of the transfer operator.
+ An exploration is made not only of the Bernoulli map, which corresponds
+ to a one-sided lattice, but also to the baker's map, which corresponds
+ to a two-sided lattice.
+ Since such continuous-nowhere functions seem outrageous, a motivation for
+ this study is provided in the next section.
+ It is a 
+\begin_inset Quotes eld
+\end_inset 
+
+multi-fractal measure
+\begin_inset Quotes erd
+\end_inset 
+
+, the derivative of the Minkowski question mark function, which is continuous
+ nowhere, and unbounded, and yet is integrable.
+ As multi-fractals occur naturally in physical systems, one cannot simply
+ dismiss such crazy eignevectors of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ as unphysical: they are not only physical, but actually observed.
 \layout Section
 
 Distribution of the Rational numbers in the Farey tree
@@ -233,7 +440,7 @@ One way to enumerate all of the rationals is by placing them on the Farey
 
 .
  However, the distribution of the rationals on the Farey tree is highly
- non-uniform, ifthe tree is walked breadth-first.
+ non-uniform, if the tree is walked breadth-first.
  The figure 
 \begin_inset LatexCommand \ref{cap:Distribution-of-Farey}
 
