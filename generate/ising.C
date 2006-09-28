@@ -132,11 +132,13 @@ double energy (double (*interaction)(double), double s, int n)
 	{
 		double lam = cos (i*phase);
 		en += lam * interaction (s);
+printf ("duude i=%d s=%9.6g en=%g\n", i, s, en); 
 
 		/* Shift one bit */
 		if (s>= 0.5) s -= 0.5;
 		s *= 2.0;
 	}
+printf ("\n");
 
 	return en;
 }
@@ -149,18 +151,20 @@ double cross_energy (double (*interaction)(double), double sl, double sr, int n)
 	for (i=0; i<n; i++)
 	{
 		/* Shift one bit */
-		double s = 0.5*sr;
-		sr = s;
+		sr *= 0.5;
 		sl *= 2.0;
 	  	if (1.0 < sl)
 		{
-			s += 0.5;
+			sr += 0.5;
 			sl -= 1.0;
 		}	  
+		double s = sr;
 		double lam = cos ((i+1)*phase);
 		en += lam * interaction (s);
+printf ("crude i=%d s=%9.6g en=%g\n", i, s, en); 
 		
 	}
+printf ("\n");
 
 	return en;
 }
@@ -229,11 +233,14 @@ density (double x, double y, int itermax, double param)
 	// p = partition (tent, x,y);
 	// p = partition (kac, x,y);
 
+x=0.325;
+y=0.3125;
 	// should be equivalent to ising_density --- and it is.
 	p = partition (nearest_neighbor, x,y);
 	
 	// p = ising_density (x,y);
-	// p = ising_density_alt (x,y);
+	p = ising_density_alt (x,y);
+exit (1);
 	return p;
 }
 
