@@ -174,35 +174,42 @@ double partition (double (*interaction)(double), double x, double y)
 	// double en = energy (interaction, y, n);
 	double en = 0.0;
 	
-#if WRONG
-	phase_offset = 0.0;
 	en = energy (interaction, x, n);
-	phase = -phase;
-	phase_offset = phase;
-	en += energy (interaction, y, n);
-	// n=1; // need to specify for short-range interactions e.g. ising... 
-	en += cross_energy (interaction, x, y, n);
-#endif
-
-	en = energy (interaction, x, n);
-	en += cross_energy (interaction, y, x, n);
+	en += cross_energy (interaction, y, x, n+1);
 	
 	en = exp (-en);
 	return en;
 }
 
+/* explicitly for ising model only, to double-check that lattice
+ * calcs are correct. Returns same answer as ising_density_alt. */
 static double 
 ising_density (double x, double y)
 {
 	int n = 10;
 
 	double en = energy (nearest_neighbor, x, n);
-	en += energy (nearest_neighbor, y, n);
 
 	if (x<0.5 && y<0.5) en += 0.3;
 	if (x<0.5 && y>=0.5) en -= 0.3;
 	if (x>=0.5 && y<0.5) en -= 0.3;
 	if (x>=0.5 && y>=0.5) en += 0.3;
+
+	en += energy (nearest_neighbor, y, n);
+
+	en = exp (-en);
+	return en;
+}
+
+static double 
+ising_density_alt (double x, double y)
+{
+	int n = 10;
+
+	double en = energy (nearest_neighbor, x, n);
+	y *= 0.5;
+	if (x>0.5) y+= 0.5;
+	en += energy (nearest_neighbor, y, n+1);
 
 	en = exp (-en);
 	return en;
@@ -226,6 +233,7 @@ density (double x, double y, int itermax, double param)
 	p = partition (nearest_neighbor, x,y);
 	
 	// p = ising_density (x,y);
+	// p = ising_density_alt (x,y);
 	return p;
 }
 
