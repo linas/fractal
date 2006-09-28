@@ -130,7 +130,7 @@ double energy (double (*interaction)(double), double s, int n)
 	double en = 0.0;
 	for (i=0; i<n; i++)
 	{
-		double lam = cos (n*phase);
+		double lam = cos (i*phase);
 		en += lam * interaction (s);
 
 		/* Shift one bit */
@@ -157,7 +157,7 @@ double cross_energy (double (*interaction)(double), double sl, double sr, int n)
 			s += 0.5;
 			sl -= 1.0;
 		}	  
-		double lam = cos ((n+1)*phase);
+		double lam = cos ((i+1)*phase);
 		en += lam * interaction (s);
 		
 	}
@@ -211,7 +211,7 @@ ising_density (double x, double y)
 static double 
 density (double x, double y, int itermax, double param)
 {
-	phase = acos(param);
+	phase = 0.25*M_PI*param;
 	
 	double p;
 	// partition (pabola, n);
