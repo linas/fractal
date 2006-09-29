@@ -4,7 +4,8 @@
  *
  * Probability density of a two-sided 1D lattice model 
  * mapped to 1x1 square. Invariant under the Baker's 
- * transform.
+ * transform. (actually, invariant only if phase is zero,
+ * else has eigenvalue of exp(i  phase)
  * 
  * One-dimensional Ising model (and Kac model too)
  * A given state of the system is encoded as 
@@ -35,6 +36,7 @@ double nearest_neighbor (double s)
 
 	s0 = -1.0;
 	if (s>= 0.5) {
+	// if (s> 0.5) {
 		s0 = 1.0;
 		s -= 0.5;
 	}
@@ -42,6 +44,7 @@ double nearest_neighbor (double s)
 	
 	s1 = -1.0;
 	if (s>= 0.5) s1 = 1.0;
+	// if (s> 0.5) s1 = 1.0;
 	
 	return 0.3 * s0*s1;
 }
@@ -123,31 +126,36 @@ double kac (double s)
 static double phase;
 
 /* Return the finite-state energy of string s (length n) */
-double energy (double (*interaction)(double), double s, int n)
+static void
+energy (double *re_en, double *im_en,
+       double (*interaction)(double), double s, int n)
 {
 	int i;
 
-	double en = 0.0;
+	double ren = 0.0;
+	double ien = 0.0;
 	for (i=0; i<n; i++)
 	{
-		double lam = cos (i*phase);
-		en += lam * interaction (s);
-printf ("duude i=%d s=%9.6g en=%g\n", i, s, en); 
+		double pot = interaction (s);
+		ren += cos (i*phase) * pot;
+		ien += sin (i*phase) * pot;
 
 		/* Shift one bit */
 		if (s>= 0.5) s -= 0.5;
 		s *= 2.0;
 	}
-printf ("\n");
-
-	return en;
+	*re_en += ren;
+	*im_en += ien;
 }
 
-double cross_energy (double (*interaction)(double), double sl, double sr, int n)
+static void 
+cross_energy (double *re_en, double *im_en,
+              double (*interaction)(double), double sl, double sr, int n)
 {
 	int i;
 
-	double en = 0.0;
+	double ren = 0.0;
+	double ien = 0.0;
 	for (i=0; i<n; i++)
 	{
 		/* Shift one bit */
@@ -159,14 +167,13 @@ double cross_energy (double (*interaction)(double), double sl, double sr, int n)
 			sl -= 1.0;
 		}	  
 		double s = sr;
-		double lam = cos ((i+1)*phase);
-		en += lam * interaction (s);
-printf ("crude i=%d s=%9.6g en=%g\n", i, s, en); 
 		
+		double pot = interaction (s);
+		ren += cos ((i+1)*phase) * pot;
+		ien += -sin ((i+1)*phase) * pot;
 	}
-printf ("\n");
-
-	return en;
+	*re_en += ren;
+	*im_en += ien;
 }
 
 /* Compute finite state partition */
@@ -174,15 +181,15 @@ double partition (double (*interaction)(double), double x, double y)
 {
 	int n = 10;
 		
-	// double y = fquestion_mark (x);
-	// double en = energy (interaction, y, n);
-	double en = 0.0;
+	double ren = 0.0;
+	double ien = 0.0;
 	
-	en = energy (interaction, x, n);
-	en += cross_energy (interaction, y, x, n+1);
+	energy (&ren, &ien, interaction, x, n);
+	cross_energy (&ren, &ien, interaction, y, x, n+1);
 	
-	en = exp (-en);
-	return en;
+	// return exp (-ren);
+	// return ren;
+	return ren*ren+ien*ien;
 }
 
 /* explicitly for ising model only, to double-check that lattice
@@ -192,14 +199,16 @@ ising_density (double x, double y)
 {
 	int n = 10;
 
-	double en = energy (nearest_neighbor, x, n);
+	double en = 0.0;
+	double xx = 0.0;
+	energy (&en, &xx, nearest_neighbor, x, n);
 
 	if (x<0.5 && y<0.5) en += 0.3;
 	if (x<0.5 && y>=0.5) en -= 0.3;
 	if (x>=0.5 && y<0.5) en -= 0.3;
 	if (x>=0.5 && y>=0.5) en += 0.3;
 
-	en += energy (nearest_neighbor, y, n);
+	energy (&en, &xx, nearest_neighbor, y, n);
 
 	en = exp (-en);
 	return en;
@@ -210,10 +219,12 @@ ising_density_alt (double x, double y)
 {
 	int n = 10;
 
-	double en = energy (nearest_neighbor, x, n);
+	double en = 0.0;
+	double xx = 0.0;
+	energy (&en, &xx, nearest_neighbor, x, n);
 	y *= 0.5;
 	if (x>0.5) y+= 0.5;
-	en += energy (nearest_neighbor, y, n+1);
+	energy (&en, &xx, nearest_neighbor, y, n+1);
 
 	en = exp (-en);
 	return en;
@@ -233,14 +244,11 @@ density (double x, double y, int itermax, double param)
 	// p = partition (tent, x,y);
 	// p = partition (kac, x,y);
 
-x=0.325;
-y=0.3125;
 	// should be equivalent to ising_density --- and it is.
 	p = partition (nearest_neighbor, x,y);
 	
 	// p = ising_density (x,y);
-	p = ising_density_alt (x,y);
-exit (1);
+	// p = ising_density_alt (x,y);
 	return p;
 }
 
