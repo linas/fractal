@@ -12,6 +12,10 @@
  * more stuff -- October 2004
  */
 
+/** callback for making a generic scatterplot.
+ *  Just implement this callback to draw a generic
+ *  scatterplot.
+ */
 void MakeHisto (
    float  	*glob,
    int 		sizex,
@@ -23,7 +27,11 @@ void MakeHisto (
    int		itermax,
 	double 	renorm);
 
-/** callback for making a plain height-map */
+/** callback for making a plain height-map. 
+ *  To graph is simple height map i.e. a distinct real 
+ *  for a point (x,y), implement this callback, 
+ *  and then use DECL_MAKE_HEIGHT()
+ */
 typedef double MakeHeightCB 
 	(double x, double y, int itermax, double param);
 
@@ -57,7 +65,10 @@ void MakeHisto (        \
        width, height, itermax, renorm, cb);                  \
 }
 
-/* Bifurcation diagram callback, does one row at a time */
+/* Bifurcation diagram callback, does one row at a time.
+ * To draw a bifurcation diagram, implement this callback, 
+ * and then declare DECL_MAKE_BIFUR */
+
 typedef void
 MakeBifurCB (
 	float *array, 
