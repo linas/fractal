@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 #include "brat.h"
-#include "gcf32.h"
+#include "gcf.h"
 
 /*-------------------------------------------------------------------*/
 /* This routine fills in the interior of the Baker's map square */
@@ -32,7 +32,6 @@ MakeHisto (
 {
    int		i,j, globlen;
    double	re_start, im_start, delta;
-   double	re_position, im_position;
    
    delta = width / (double) sizex;
    re_start = re_center - width / 2.0;
@@ -50,9 +49,14 @@ MakeHisto (
 			int m = gcf32 (p,q);
 			if (1<m) continue;
 
-			/* prime the pump */
+			double frac = ((double) p)/((double) q);
+
+#define GRID 8
+			/* prime the pump -- fill bits left to right,
+			 * with j on the left and i on the right. */
 			int n;
-			for (n=0; n<10; n++)
+			i=j=0;
+			for (n=0; n<GRID; n++)
 			{
 				p *= 2;
 				if (p < q)
@@ -62,13 +66,57 @@ MakeHisto (
 				else
 				{
 					/* bit is one */
+					j += 1<<n;
+					p -= q;
+				}
+			}
+			for (n=0; n<GRID; n++)
+			{
+				p *= 2;
+				if (p < q)
+				{
+					/* bit is zero */
+				}
+				else
+				{
+					/* bit is one */
+					i += 1<<(GRID-1-n);
+					p -= q;
+				}
+			}
+
+			/* now fill the array */
+			for (n=0; n<6*GRID; n++)
+			{
+				if (0.0 > glob [i*sizex +j])
+				{
+					glob [i*sizex +j] = frac;
+				}
+
+				/* shift the bits over to the left */
+				j /= 2;
+				if (i & (1<<(GRID-1)))
+				{
+					j += 1<<(GRID-1);
+					i -= 1<<(GRID-1);
+				}
+				i *= 2;
+
+				/* and add a bit on the far right */
+				p *= 2;
+				if (p < q)
+				{
+					/* bit is zero */
+				}
+				else
+				{
+					/* bit is one */
+					i += 1;
 					p -= q;
 				}
 			}
 		}
 	}
-         glob [i*sizex +j] = phi;
-   }
 }
 
 /* --------------------------- END OF LIFE ------------------------- */

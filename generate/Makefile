@@ -15,7 +15,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         manvert cutoff brat draw dx image
 
 NEW_EXES = affine alpha circle cutoff divisor elliptic \
-        erdos euler-q hermite ising mand-flow \
+        erdos euler-q hermite ising ising-moment mand-flow \
         mp_zeta mobius plouffe q-exp swap takagi totient zeta \
         ray automatic radius
 
@@ -91,6 +91,7 @@ elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o coord-xforms.o util.o $(MODULAR)
 euler-q: brat.o euler-q.o coord-xforms.o util.o $(MODULAR)
 ising: brat.o ising.o util.o $(QUESTION)
+ising-moment: brat.o ising-moment.o util.o $(GCF)
 hermite: brat.o hermite.o util.o 
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
