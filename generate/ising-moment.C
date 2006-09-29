@@ -2,7 +2,9 @@
  * ising-moment.C
  *
  * FUNCTION:
- * Display wave-vector of a periodic point
+ * Display wave-vector of periodic points of the iterated
+ * bakers map. (the name of this should be changed to 
+ * bakers map from ising.)
  *
  * HISTORY:
  * quick hack -- Linas Vepstas Sept 2006
