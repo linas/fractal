@@ -41,7 +41,7 @@ MakeHisto (
    for (i=0; i<globlen; i++) glob [i] = -1.0;
 
 	int p,q;
-	for(q=3; q<2000; q+=2)
+	for(q=3; q<itermax; q+=2)
 	{
 		for (p=1; p<q; p+=2)
 		{
@@ -49,12 +49,50 @@ MakeHisto (
 			int m = gcf32 (p,q);
 			if (1<m) continue;
 
-			double frac = ((double) p)/((double) q);
+			// double frac = ((double) p)/((double) q);
+			double frac = 1.0/((double) q);
 
-#define GRID 8
+			/* iterate past any decaying components */
+			int n;
+			for (n=0; n<15; n++)
+			{
+				p *= 2;
+				if (p < q)
+				{
+					/* bit is zero */
+				}
+				else
+				{
+					/* bit is one */
+					p -= q;
+				}
+			}
+			if (0 == p) continue;
+
+#if 1
+			/* measure the period */
+			int pstart = p;
+			frac = 0;
+			for (n=0; n<q; n++)
+			{
+				p *= 2;
+				if (p < q)
+				{
+					/* bit is zero */
+				}
+				else
+				{
+					/* bit is one */
+					p -= q;
+				}
+				frac ++;
+				if (p == pstart) break;
+			}
+#endif
+
+#define GRID 9
 			/* prime the pump -- fill bits left to right,
 			 * with j on the left and i on the right. */
-			int n;
 			i=j=0;
 			for (n=0; n<GRID; n++)
 			{
@@ -86,7 +124,7 @@ MakeHisto (
 			}
 
 			/* now fill the array */
-			for (n=0; n<6*GRID; n++)
+			for (n=0; n<60; n++)
 			{
 				if (0.0 > glob [i*sizex +j])
 				{
