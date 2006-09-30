@@ -14,7 +14,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert cutoff brat draw dx image
 
-NEW_EXES = affine alpha circle cutoff divisor elliptic \
+NEW_EXES = affine alpha baker circle cutoff divisor elliptic \
         erdos euler-q hermite ising ising-moment mand-flow \
         mp_zeta mobius plouffe q-exp swap takagi totient zeta \
         ray automatic radius
@@ -49,6 +49,7 @@ util.o:	util.h
 
 affine.o: affine.C
 alpha.o: alpha.C
+baker.o: baker.C
 brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
@@ -81,6 +82,7 @@ GSL=-lgsl -lcblas
 #
 affine: brat.o affine.o util.o
 alpha: brat.o alpha.o util.o $(GSL)
+baker: brat.o baker.o util.o
 brat-beigen: brat.o brat-beigen.o util.o
 brat-gap-hair: brat.o brat-gap-hair.o util.o $(FAREY)
 brat-gapper: brat.o brat-gapper.o util.o $(FAREY) $(GCF)
