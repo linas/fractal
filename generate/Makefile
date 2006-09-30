@@ -91,7 +91,7 @@ elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o coord-xforms.o util.o $(MODULAR)
 euler-q: brat.o euler-q.o coord-xforms.o util.o $(MODULAR)
 ising: brat.o ising.o util.o $(QUESTION)
-ising-moment: brat.o ising-moment.o util.o $(GCF)
+ising-moment: brat.o ising-moment.o util.o $(GCF) $(QUESTION)
 hermite: brat.o hermite.o util.o 
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)

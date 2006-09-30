@@ -16,6 +16,7 @@
 
 #include "brat.h"
 #include "gcf.h"
+#include "question.h"
 
 /*-------------------------------------------------------------------*/
 /* This routine fills in the interior of the Baker's map square */
@@ -40,7 +41,7 @@ MakeHisto (
    im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
    
    globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = -1.0;
+   for (i=0; i<globlen; i++) glob [i] = 0.0;
 
 	int p,q;
 	for(q=3; q<itermax; q+=2)
@@ -71,7 +72,7 @@ MakeHisto (
 			}
 			if (0 == p) continue;
 
-#if 1
+#if 0
 			/* measure the period */
 			int pstart = p;
 			frac = 0;
@@ -92,7 +93,7 @@ MakeHisto (
 			}
 #endif
 
-#define GRID 9
+#define GRID 20
 			/* prime the pump -- fill bits left to right,
 			 * with j on the left and i on the right. */
 			i=j=0;
@@ -128,10 +129,18 @@ MakeHisto (
 			/* now fill the array */
 			for (n=0; n<60; n++)
 			{
-				if (0.0 > glob [i*sizex +j])
+#if 1
+
+				int ii = (i*sizex)>>GRID;
+				int jj = (j*sizex)>>GRID;
+				// ii = sizex * question_mark (i, 1<<GRID);
+				// jj = sizex * question_mark (j, 1<<GRID);
+				if (frac > glob [ii*sizex +jj])
 				{
-					glob [i*sizex +j] = frac;
+					glob [ii*sizex + jj] = frac;
 				}
+#endif
+				// glob [i*sizex + j] ++;
 
 				/* shift the bits over to the left */
 				j /= 2;
