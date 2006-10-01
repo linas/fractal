@@ -13,12 +13,15 @@
 
 #include "brat.h"
 
+/* Ising model nerest-neighbor interaction */
 double ising(double x, double y)
 {
-	// x = y;
+	/* higher energy if pair of spins is  aligned, else, energy is lower */
 	if ((x<0.25) || (x>=0.75)) return 0.3;
 	return -0.3;
 }
+
+static int niter=10; 
 
 void eigenvec (double *re, double *im, double (*func)(double, double), 
                 double x, double y)
@@ -29,8 +32,7 @@ void eigenvec (double *re, double *im, double (*func)(double, double),
 	
 	double xo = x;
 	double yo = y;
-#define NITER 10
-	for (i=0; i<NITER; i++)
+	for (i=0; i<niter+1; i++)
 	{
 		hre += func (x,y);
 		int ty = (int) floor(2.0*y);
@@ -40,12 +42,12 @@ void eigenvec (double *re, double *im, double (*func)(double, double),
 
 	x = yo;
 	y = xo;
-	for (i=0; i<NITER; i++)
+	for (i=0; i<niter; i++)
 	{
 		int ty = (int) floor(2.0*y);
 		x = 0.5*(x+ty);
 		y = 2.0*y-ty;
-		hre += func (x,y);
+		hre += func (y,x);
 	}
 	// hre /= 80;
 	// him /= 80;
@@ -59,6 +61,7 @@ density (double x, double y, int itermax, double param)
 {
 	double re, im;
 
+	niter = itermax;
 	eigenvec (&re, &im, ising, x, y);
 	re = exp (-re);
 	return re;
