@@ -21,7 +21,22 @@ double ising(double x, double y)
 	return -0.3;
 }
 
+double parabola(double x, double y)
+{
+	x -= 0.5;
+	y -= 0.5;
+	return 1.5*(x*x+y*y-0.125);
+}
+
+double b1(double x, double y)
+{
+	return y-0.5;
+}
+
+/* =============================================================== */
+
 static int niter=10; 
+static double tee = 0.3;
 
 void eigenvec (double *re, double *im, double (*func)(double, double), 
                 double x, double y)
@@ -32,13 +47,18 @@ void eigenvec (double *re, double *im, double (*func)(double, double),
 	
 	double xo = x;
 	double yo = y;
+	double w = 1.0;
+#if 0
 	for (i=0; i<niter+1; i++)
 	{
-		hre += func (x,y);
+		// w = 1.0/(i-tee);
+		hre += w*func (x,y);
 		int ty = (int) floor(2.0*y);
 		x = 0.5*(x+ty);
 		y = 2.0*y-ty;
+
 	}
+#endif
 
 	x = yo;
 	y = xo;
@@ -47,10 +67,10 @@ void eigenvec (double *re, double *im, double (*func)(double, double),
 		int ty = (int) floor(2.0*y);
 		x = 0.5*(x+ty);
 		y = 2.0*y-ty;
-		hre += func (y,x);
+		// w = 1.0/(-(i+1)-tee);
+		hre += w*func (y,x);
+		w *= tee;
 	}
-	// hre /= 80;
-	// him /= 80;
 
 	*re = hre;
 	*im = him;
@@ -62,7 +82,10 @@ density (double x, double y, int itermax, double param)
 	double re, im;
 
 	niter = itermax;
+	tee = param;
 	eigenvec (&re, &im, ising, x, y);
+	// eigenvec (&re, &im, parabola, x, y);
+	// eigenvec (&re, &im, b1, x, y);
 	re = exp (-re);
 	return re;
 }
