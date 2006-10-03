@@ -32,7 +32,7 @@ Lattice models and fractal measures
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-15 September 2006 (updated 25 September 2006)
+15 September 2006 (updated 30 September 2006)
 \layout Abstract
 
 This paper reviews connections between the Bernoulli map, the baker's map
@@ -2818,22 +2818,284 @@ Baker's map
 
 \end_inset 
 
- The map is fully invertible, in that 
+ The Baker's map can be studied in its own right as a discrete-time dynamical
+ system, in that 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ can be taken to define the time evolution of a unit square over a single
+ time-step.
+ The time evolution is invertible, in that the inverse map 
 \begin_inset Formula $\tau^{-1}$
 \end_inset 
 
- is uniquely defined (and is easily obtainable).
+ is uniquely defined, being 
+\begin_inset Formula \begin{equation}
+\tau^{-1}(x,y)=\left(2x-\left\lfloor 2x\right\rfloor \,,\,\frac{y+\left\lfloor 2x\right\rfloor }{2}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The inverse map can be seen to be identical to the forward map with 
+\begin_inset Formula $x$
+\end_inset 
+
+ and 
+\begin_inset Formula $y$
+\end_inset 
+
+ interchanged: that is, translation to the left on the lattice is identical
+ to translation to the right, with left and right exchanged.
+ One may say the map is 
+\begin_inset Formula $PT$
+\end_inset 
+
+-symmetric, with 
+\begin_inset Formula $P$
+\end_inset 
+
+ standing for the 
+\begin_inset Quotes eld
+\end_inset 
+
+parity exchange
+\begin_inset Quotes erd
+\end_inset 
+
+ operation 
+\begin_inset Formula $x\leftrightarrow y$
+\end_inset 
+
+ and 
+\begin_inset Formula $T$
+\end_inset 
+
+ being the 
+\begin_inset Quotes eld
+\end_inset 
+
+time inversion
+\begin_inset Quotes erd
+\end_inset 
+
+ operator 
+\begin_inset Formula $\tau\leftrightarrow\tau^{-1}$
+\end_inset 
+
+.
  
 \layout Standard
 
-The energy and the probability density are invariant under the action of
- the translation operator; that is, for the two sided lattice, one has 
+The two-sided lattice may be studied either as a lattice model, or as a
+ dynamical system with time evolutino given by 
+\begin_inset Formula $\tau$
+\end_inset 
+
+.
+ It is interesting to juxtapose these two viewpoints.
+ As a lattice model, one is typically only interested in lattices for which
+ the energy and the probability density are invariant under the action of
+ the translation operator.
+ That is, one is interested only in the classical Hamiltonians of eqn 
+\begin_inset LatexCommand \ref{eq:Classical Hamiltonian}
+
+\end_inset 
+
+ which are translation-invariant: 
 \begin_inset Formula \begin{equation}
 H\left(\tau^{n}\sigma\right)=H\left(\sigma\right)\label{eq:}\end{equation}
 
 \end_inset 
 
+ for all 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset 
 
+.
+\layout Standard
+
+Considered as a dynamical system, one is typically interested in the time
+ evolution of densities on the unit square, that is, of real-valued maps
+ 
+\begin_inset Formula $\rho:[0,1]\times[0,1]\to\mathbb{R}$
+\end_inset 
+
+.
+ The time evolution of a density can be simply understood as a physical
+ model, where the density is a local density of some 
+\begin_inset Quotes eld
+\end_inset 
+
+dust
+\begin_inset Quotes erd
+\end_inset 
+
+ of points 
+\begin_inset Formula $(x,y)$
+\end_inset 
+
+, with the time evolution of each point given by 
+\begin_inset Formula $\tau$
+\end_inset 
+
+.
+ Thus, the time evolution of this 
+\begin_inset Quotes eld
+\end_inset 
+
+dust
+\begin_inset Quotes erd
+\end_inset 
+
+ or density is given by the transfer operator 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+ as
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}\rho\right](x,y)=\left(\rho\circ\tau^{-1}\right)(x,y)=\rho\left(2x-\left\lfloor 2x\right\rfloor \,,\,\frac{y+\left\lfloor 2x\right\rfloor }{2}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The transfer operator is thus a map 
+\begin_inset Formula $\mathcal{L}:\mathcal{F}\to\mathcal{F}$
+\end_inset 
+
+ where 
+\begin_inset Formula $\mathcal{F}$
+\end_inset 
+
+ is the set of functions on the unit square.
+ Clearly 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+ is a linear operator.
+ One is interested in characterizing the eigenfunctions and eigenvalues
+ of 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+.
+ The general idea behind equation 
+\begin_inset LatexCommand \ref{eq:Classical Hamiltonian}
+
+\end_inset 
+
+ can be immediately appealed to, to construct some of the eigenstates of
+ 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+.
+ That is, on considers functions 
+\begin_inset Formula $f(x,y)$
+\end_inset 
+
+ of the form 
+\begin_inset Formula \begin{equation}
+f=\sum_{k=-\infty}^{\infty}\lambda^{k}g\circ\tau^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ given some function 
+\begin_inset Formula $g(x,y)$
+\end_inset 
+
+ and number 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ Formally, such an 
+\begin_inset Formula $f$
+\end_inset 
+
+ is an eigenstate of 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+ with eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+: that is, 
+\begin_inset Formula $\mathcal{L}f=\lambda f$
+\end_inset 
+
+.
+ In practial terms, it is evident that not all possible 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ can make the sum convergent, although one might expect that 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ on the unit circle 
+\begin_inset Formula $\left|\lambda\right|=1$
+\end_inset 
+
+ of the complex plane might lead to a convergent sum.
+ Thus immediately, one deduces that 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+ must surely be a unitary operator.
+ The unitarity of 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+ makes intuitive sense in a certain way: the map 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ is invertible, and one expects time-reversible evolution to be described
+ by unitary operators.
+ The figure 
+\begin_inset LatexCommand \ref{cap:Ising-Tartan}
+
+\end_inset 
+
+ shows a tartan-like distribution corresponding to 
+\begin_inset Formula $\lambda=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $g(x,y)=V_{\mbox{Ising}}(x)$
+\end_inset 
+
+ the Ising model potential.
+ Some additional tartans, for other values of 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, are shown in figure xx.
+ 
+\layout Standard
+
+The proper analysis of the transfer operator 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+ requires that the function space 
+\begin_inset Formula $\mathcal{F}$
+\end_inset 
+
+ be pinned down more precisely.
+ Classic results on time-symmetry breaking 
+\begin_inset LatexCommand \cite{Has92,Fox96,Dri99}
+
+\end_inset 
+
+ indicate that whether or not 
+\begin_inset Formula $\mathcal{L}$
+\end_inset 
+
+ is unitary depends on the function space 
+\begin_inset Formula $\mathcal{F}$
+\end_inset 
+
+.
 \layout Standard
 
 XXX develop more fully.
@@ -2845,12 +3107,7 @@ XXX develop more fully.
  Possibly review time-symmetry breaking in the spectrum of the decaying
  states (i.e.
  the time-reversed decaying state is a growing state).
- Ref.
-\begin_inset LatexCommand \cite{Dri99}
-
-\end_inset 
-
-
+ 
 \layout Subsubsection
 
 Gibbs states and fractal self-similarity
