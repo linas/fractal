@@ -15,23 +15,17 @@ CC = cc -Wall -g -O2 -I $(INC) -DANSI_C -DLINUX
 
 RM= rm -f
 
-all: inc bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o harmonic.o \
-	modular.o moebius.o Prime.o question.o totient.o
+OBJS=bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o harmonic.o \
+	  modular.o moebius.o Prime.o question.o totient.o
 
-inc:	bernoulli.h binomial.h Farey.h FareyTree.h gcf.h harmonic.h \
-	modular.h moebius.h Prime.h question.h totient.h
+INCS=bernoulli.h binomial.h Farey.h FareyTree.h gcf.h harmonic.h \
+     modular.h moebius.h Prime.h question.h totient.h
+
+all: inc $(OBJS)
+
+inc:	$(INCS)
 	touch inc
-	cp bernoulli.h $(INC)/bernoulli.h
-	cp binomial.h $(INC)/binomial.h
-	cp Farey.h $(INC)/Farey.h
-	cp FareyTree.h $(INC)/FareyTree.h
-	cp gcf.h $(INC)/gcf.h
-	cp harmonic.h $(INC)/harmonic.h
-	cp moebius.h $(INC)/moebius.h
-	cp modular.h $(INC)/modular.h
-	cp Prime.h $(INC)/Prime.h
-	cp question.h $(INC)/question.h
-	cp totient.h $(INC)/totient.h
+	cp $? $(INC)/$?
 
 bernoulli.o:	bernoulli.c bernoulli.h
 	$(CC) -c bernoulli.c
