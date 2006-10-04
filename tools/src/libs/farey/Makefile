@@ -28,76 +28,21 @@ inc:	$(INCS)
 	cp $? $(INC)/$?
 
 bernoulli.o:	bernoulli.c bernoulli.h
-	$(CC) -c bernoulli.c
-	cp bernoulli.o $(LIB)/bernoulli.o
-	rm bernoulli.o
-	touch bernoulli.o
-
 binomial.o:	binomial.c binomial.h
-	$(CC) -c binomial.c
-	cp binomial.o $(LIB)/binomial.o
-	rm binomial.o
-	touch binomial.o
-
 cache.o:	cache.c cache.h
-	$(CC) -c cache.c
-	cp cache.o $(LIB)/cache.o
-	rm cache.o
-	touch cache.o
-
 Farey.o:	Farey.C Farey.h
-	$(CC) -c Farey.C
-	cp Farey.o $(LIB)/Farey.o
-	rm Farey.o
-	touch Farey.o
-
 FareyTree.o:	FareyTree.C FareyTree.h
-	$(CC) -c FareyTree.C
-	cp FareyTree.o $(LIB)/FareyTree.o
-	rm FareyTree.o
-	touch FareyTree.o
-
 gcf.o:	gcf.c gcf.h
-	$(CC) -c gcf.c
-	cp gcf.o $(LIB)/gcf.o
-	rm gcf.o
-	touch gcf.o
-
 harmonic.o:	harmonic.c harmonic.h
-	$(CC) -c harmonic.c
-	cp harmonic.o $(LIB)/harmonic.o
-	rm harmonic.o
-	touch harmonic.o
-
 modular.o:	modular.c modular.h
-	$(CC) -c modular.c
-	cp modular.o $(LIB)/modular.o
-	rm modular.o
-	touch modular.o
-
 moebius.o:	moebius.c moebius.h cache.h
-	$(CC) -c moebius.c
-	cp moebius.o $(LIB)/moebius.o
-	rm moebius.o
-	touch moebius.o
-
 Prime.o:	Prime.c Prime.h
-	$(CC) -c Prime.c
-	cp Prime.o $(LIB)/Prime.o
-	rm Prime.o
-	touch Prime.o
-
 question.o:	question.C question.h Farey.h
-	$(CC) -c question.C
-	cp question.o $(LIB)/question.o
-	rm question.o
-	touch question.o
-
 totient.o:	totient.c totient.h
-	$(CC) -c totient.c
-	cp totient.o $(LIB)/totient.o
-	rm totient.o
-	touch totient.o
+
+.c.o:
+	$(CC) -c $<
+	ar cru $(LIB)/libfunc.a $@
 
 clean:
 	cd test; make clean
