@@ -266,7 +266,7 @@ long double harmonic (int n, long double ess)
 	return acc;
 }
 
-/* Return Hurwitz zeta equiv of harmonic */
+/* Return Hurwitz zeta equiv of harmonic number */
 long double harmonic_hurwitz (int n, long double x, long double ess)
 {
 	long double acc = 0.0L;
