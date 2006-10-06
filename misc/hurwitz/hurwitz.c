@@ -18,55 +18,57 @@
  * and double precision is not enough to do anything useful here.
  */
 
-void hurwitz_zeta (double *hre, double *him, double sre, double sim, double q)
+void hurwitz_zeta (long double *phre, long double *phim, long double sre, long double sim, long double q)
 {
 	int norder = 80;
 
 	/* arrays storing values to be forward-differenced */
 #define NARR 1000
-	double refd[NARR];
-	double imfd[NARR];
-	double rens[NARR];
-	double imns[NARR];
+	long double refd[NARR];
+	long double imfd[NARR];
 
 	int k;
 	for (k=0; k<norder; k++)
 	{
-		double logkq = log(k+q);
-		double mag = exp((1.0-sre) * logkq);
-		refd[k] = mag * cos (sim*logkq);
-		imfd[k] = mag * sin (sim*logkq);
+		long double logkq = logl(k+q);
+		long double mag = expl((1.0L-sre) * logkq);
+		refd[k] = mag * cosl (sim*logkq);
+		imfd[k] = mag * sinl (sim*logkq);
 
-		// printf ("its %d \t%g \t%g\n", k, refd[k], imfd[k]);
+		// printf ("its %d \t%Lg \t%Lg\n", k, refd[k], imfd[k]);
 	}
 
+	long double hre = 0.0;
+	long double him = 0.0;
 	int n;
 	for (n=0; n<norder; n++)
 	{
-		double rs=0.0;
-		double is=0.0;
-		double cyn = 1.0;
+		long double rs=0.0L;
+		long double is=0.0L;
+		long double cyn = 1.0L;
 		for (k=0; k<=n; k++)
 		{
-			double bin = cyn*binomial (n,k);
+			long double bin = cyn*binomial (n,k);
 			rs += bin * refd[k];
 			is += bin * imfd[k];
 			cyn = -cyn;
 		}
-		rens[n] = rs;
-		imns[n] = is;
-		printf ("its %d \t%g \t%g\n", n, rens[n], imns[n]);
+
+		long double on = 1.0L/(n+1.0L);
+		hre += on * rs;
+		him += on * is;
+		printf ("its %d \t%Lg \thre=%Lg \t%Lg \thim=%Lg\n", n, rs, hre,is, him);
 	}
 } 
 
 main ()
 {
-	double q;
-	double sre, sim;
-	double hre, him;
+	long double q;
+	long double sre, sim;
+	long double hre, him;
 
 	sre = 0.5;
-	sim = 9.0;
+	sim = 2.0;
 	q = 0.3;
 	hurwitz_zeta (&hre, &him, sre,sim, q);
 }
