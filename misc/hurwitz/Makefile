@@ -1,15 +1,19 @@
 
+TOP = ../../tools
+INC = $(TOP)/inc
+LIB = $(TOP)/lib
+
 EXES= hurwitz
 
 all: $(EXES)
 
-hurwitz:	hurwtiz.o
+hurwitz:	hurwitz.o 
 
 .c.o:
-	cc -c -g -O2 $<
+	cc -c -g -O2 -I $(INC) $<
 
 .o:
-	cc -g -o $@ $^ -lm 
+	cc -g -o $@ $^ -L$(LIB) -lfunc -lm 
 
 
 clean:
