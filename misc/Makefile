@@ -11,6 +11,7 @@ clean:
 	cd farey; make clean
 	cd free-group; make clean
 	cd gap; make clean
+	cd hurwitz; make clean
 	cd ising; make clean
 	cd modular; make clean
 	cd num-theory; make clean
@@ -29,6 +30,7 @@ realclean: clean
 	cd farey; make realclean
 	cd free-group; make realclean
 	cd gap; make realclean
+	cd hurwitz; make realclean
 	cd ising; make realclean
 	cd modular; make realclean
 	cd num-theory; make realclean
