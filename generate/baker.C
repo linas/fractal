@@ -38,6 +38,28 @@ double b1(double x, double y)
 static int niter=10; 
 static double tee = 0.3;
 
+void backshift (double *re, double *im, 
+                double x, double y)
+{
+	int i;
+	double hre = 0.0;
+	double him = 0.0;
+	
+	/* shift right */
+	for (i=0; i<niter+1; i++)
+	{
+		int ty = (int) floor(2.0*y);
+		x = 0.5*(x+ty);
+		y = 2.0*y-ty;
+	}
+
+	/* Bernoulli_1(x) */
+	hre = x-0.5;
+
+	*re = hre;
+	*im = him;
+}
+
 void eigenvec (double *re, double *im, double (*func)(double, double), 
                 double x, double y)
 {
@@ -48,7 +70,8 @@ void eigenvec (double *re, double *im, double (*func)(double, double),
 	double xo = x;
 	double yo = y;
 	double w = 1.0;
-#if 0
+#if 1
+	/* shift right */
 	for (i=0; i<niter+1; i++)
 	{
 		// w = 1.0/(i-tee);
@@ -60,6 +83,7 @@ void eigenvec (double *re, double *im, double (*func)(double, double),
 	}
 #endif
 
+	/* shift left */
 	x = yo;
 	y = xo;
 	for (i=0; i<niter; i++)
@@ -83,10 +107,11 @@ density (double x, double y, int itermax, double param)
 
 	niter = itermax;
 	tee = param;
-	eigenvec (&re, &im, ising, x, y);
+	// eigenvec (&re, &im, ising, x, y);
 	// eigenvec (&re, &im, parabola, x, y);
 	// eigenvec (&re, &im, b1, x, y);
-	re = exp (-re);
+	backshift (&re, &im, x, y);
+	// re = exp (-re);
 	return re;
 }
 
