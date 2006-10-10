@@ -68,12 +68,7 @@ takagi.o: takagi.C brat.h
 totient.o: totient.C brat.h
 zeta.o: zeta.C brat.h
 
-FAREY=../tools/lib/Farey.o ../tools/lib/FareyTree.o
-GCF=../tools/lib/gcf.o
-MOBIUS=../tools/lib/moebius.o ../tools/lib/cache.o
-MODULAR=../tools/lib/modular.o
-QUESTION=../tools/lib/question.o $(FAREY) $(GCF)
-TOTIENT=../tools/lib/totient.o
+FUNC=../tools/lib/libfunc.a
 
 GMP=-lgmp
 GSL=-lgsl -lcblas
@@ -84,25 +79,25 @@ affine: brat.o affine.o util.o
 alpha: brat.o alpha.o util.o $(GSL)
 baker: brat.o baker.o util.o
 brat-beigen: brat.o brat-beigen.o util.o
-brat-gap-hair: brat.o brat-gap-hair.o util.o $(FAREY)
-brat-gapper: brat.o brat-gapper.o util.o $(FAREY) $(GCF)
+brat-gap-hair: brat.o brat-gap-hair.o util.o $(FUNC)
+brat-gapper: brat.o brat-gapper.o util.o $(FUNC)
 circle: brat.o circle.o util.o
 cutoff: brat.o cutoff.o coord-xforms.o util.o 
-divisor: brat.o divisor.o util.o $(MOBIUS)
+divisor: brat.o divisor.o util.o $(FUNC)
 elliptic: brat.o elliptic.o util.o
-erdos: brat.o erdos.o coord-xforms.o util.o $(MODULAR)
-euler-q: brat.o euler-q.o coord-xforms.o util.o $(MODULAR)
-ising: brat.o ising.o util.o $(QUESTION)
-ising-moment: brat.o ising-moment.o util.o $(GCF) $(QUESTION)
+erdos: brat.o erdos.o coord-xforms.o util.o $(FUNC)
+euler-q: brat.o euler-q.o coord-xforms.o util.o $(FUNC)
+ising: brat.o ising.o util.o $(FUNC)
+ising-moment: brat.o ising-moment.o util.o $(FUNC)
 hermite: brat.o hermite.o util.o 
 mand-flow: brat.o mand-flow.o util.o
-mobius: brat.o mobius.o util.o $(GCF) $(TOTIENT)
+mobius: brat.o mobius.o util.o $(FUNC)
 mp_zeta: brat.o mp_zeta.o util.o $(GMP)
 plouffe: brat.o plouffe.o util.o
 q-exp: brat.o q-exp.o util.o
 swap: brat.o swap.o util.o
 takagi: brat.o takagi.o util.o
-totient: brat.o totient.o util.o $(GCF) $(TOTIENT)
+totient: brat.o totient.o util.o $(FUNC)
 zeta: brat.o zeta.o util.o $(GSL)
 
 
