@@ -32,7 +32,7 @@ The Bernoulli Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 5 January 2005)
+2 January 2004 (revised 13 October 2006)
 \layout Abstract
 
 This paper reviews a raft of related ideas surrounding the Bernoulli operator.
@@ -180,7 +180,229 @@ Some of the sections, including the section on orthogonality and completeness,
  The notions of what is fractal, and what is differentiable, and what is
  an operator, and what is an eigenvalue, is muddied as a result.
  The journey, however faulty, is still educational, though.
- To do: Riesz representation thm 
+ To do: Riesz representation thm.
+\layout Section
+
+Introduction
+\layout Standard
+
+The method of the transfer operator was introduced by David Ruelle[need
+ ref] as a powerful mechanism for studying the nature of iterated maps.
+ The transfer operator, sometimes called the Frobenius-Perron operator,
+ or the Ruelle-Frobenius-Perron operator, provides a means to escape the
+ narrow confines of point-set topology when considering an iterated function,
+ and instead explore the function using wildly different topologies.
+ In its most conrete form, it is a linear operator acting on a Banach space
+ of functions.
+ However, the structure and the properties of the operator depend very much
+ on which space of functions one considers.
+ In the following, the spaces of polynmial functions of the real numbers,
+ as well as the space of square-integrable functions will be considered.
+ More broadly, one may also consider the transfer operator acting on other
+ spaces, such as the 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic numbers, endowed with unusual topologies: in particular, with the
+ so called 
+\begin_inset Quotes eld
+\end_inset 
+
+product topology
+\begin_inset Quotes erd
+\end_inset 
+
+ whose basis are the cylinder sets.
+ In this topology, the transfer operator can be made to resemble the lattice
+ models of theoretical physics, such as the Ising model, thus offering additiona
+l means of gaining insight.
+\begin_inset LatexCommand \cite{May91}
+
+\end_inset 
+
+ 
+\layout Standard
+
+It is easiest to begin with the concrete definition.
+ Consider a function 
+\begin_inset Formula $g:[0,1]\to[0,1]$
+\end_inset 
+
+, that is, a function mapping the unit interval of the real number line
+ to itself.
+ Upon iteration, the function may have fixed points or orbits of points.
+ These orbits may be attractors or repellors, or may be neutral saddle points.
+ The action of 
+\begin_inset Formula $g$
+\end_inset 
+
+ may be ergodic or chaotic, strong-mixing or merely topologically mixing.
+ In any case, the language used to discuss 
+\begin_inset Formula $g$
+\end_inset 
+
+ is inherently based on either the point-set topology of the unit interval,
+ or the 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ topology on the unit interval, the topology of open sets.
+ 
+\layout Standard
+
+A shift in perspective may be gained not by considering how 
+\begin_inset Formula $g$
+\end_inset 
+
+ acts on points or open sets, but instead by considering how 
+\begin_inset Formula $g$
+\end_inset 
+
+ acts on distributions on the unit interval.
+ Intuitively, one might consider a dusting of points on the unit interval,
+ with a local density given by 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ at point 
+\begin_inset Formula $x\in[0,1]$
+\end_inset 
+
+, and then consider how this dusting or density evolves upon iteration by
+ 
+\begin_inset Formula $g$
+\end_inset 
+
+.
+ This verbal description may be given form as 
+\begin_inset Formula \begin{equation}
+\rho^{\prime}(x)=\int_{0}^{1}\,\delta\left(x-g(y)\right)\rho(y)\; dy\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\rho^{\prime}(x)$
+\end_inset 
+
+ is the new density at point 
+\begin_inset Formula $x$
+\end_inset 
+
+ and 
+\begin_inset Formula $\delta$
+\end_inset 
+
+ is the Dirac delta function.
+ 
+\layout Standard
+
+In this viewpoint, 
+\begin_inset Formula $g$
+\end_inset 
+
+ becomes an operator that maps densities 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ to other densities 
+\begin_inset Formula $\rho^{\prime}$
+\end_inset 
+
+, or notationally, 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{g}\rho=\rho^{\prime}\label{eq:}\end{equation}
+
+\end_inset 
+
+ The operator 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset 
+
+ is callled the transfer operator or the Ruelle-Frobenius-Perron operator.
+ It is not hard to see that it is a linear operator, in that 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{g}(a\rho_{1}+b\rho_{2})=a\mathcal{L}_{g}\rho_{1}+b\mathcal{L}_{g}\rho_{2}\label{eq:}\end{equation}
+
+\end_inset 
+
+ for constants 
+\begin_inset Formula $a,b$
+\end_inset 
+
+ and densities 
+\begin_inset Formula $\rho_{1},\rho_{2}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+One generalization should be immediately appearent: although the word 
+\begin_inset Quotes eld
+\end_inset 
+
+density
+\begin_inset Quotes erd
+\end_inset 
+
+ implies that 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is a smooth map from the unit interval to the non-negative reals, no such
+ requirement need to be enforced: 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ may be a map from the unit interval to any ring 
+\begin_inset Formula $R$
+\end_inset 
+
+, and it need not be smooth, differentiable or even continuous.
+ This generalization give a very rich structure to 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset 
+
+: the precise form of 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset 
+
+ will take will depend very strongly on 
+\begin_inset Formula $R$
+\end_inset 
+
+, whether its the reals 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, the complex numbers 
+\begin_inset Formula $\mathbb{C}$
+\end_inset 
+
+, or some other field or ring.
+ It will also depend strongly on whether one restricts oneself to smooth
+ functions, continous functions, square-integrable functions, or some other
+ function space.
+ An adequate study requires reference to the specific topology that the
+ function space is endowed with; many different topologies may be considered.
+ That is, in general, one must consider 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ to be an operator acting on a topological space endowed with multiplication
+ and addition, that is, a topological ring.
+\layout Standard
+
+In most of what follows, the topological rings that will be considered will
+ be very concrete: these will be the Banach spaces of polynomial functions,
+ and of square-integrable functions.
+ 
+\layout Standard
+
 \layout Section
 
 The Frobenius-Perron Operator of the Bernoulli Map
@@ -219,10 +441,10 @@ b(x)=2x-\left\lfloor 2x\right\rfloor \label{eq:}\end{equation}
  
 \layout Standard
 
-The Frobenius-Perron operator or transfer operator of the Bernoulli map
- is given by
+The Ruelle-Frobenius-Perron operator or transfer operator of the Bernoulli
+ map is given by
 \begin_inset Formula \begin{equation}
-\left[U_{B}f\right](x)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]\label{eq:Bernoulli operator}\end{equation}
+\left[\mathcal{L}_{B}f\right](x)=\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{x+1}{2}\right)\right]\label{eq:Bernoulli operator}\end{equation}
 
 \end_inset 
 
@@ -233,18 +455,36 @@ The Frobenius-Perron operator or transfer operator of the Bernoulli map
 
 , which also develops the general notation used in the following presentation.
  This reference should be consulted if the notation below becomes confusing.
+ XXX remove above two sentenses.
+ 
+\layout Standard
+
+A critical issue and a point of confusion in what follows is that the operator
+ 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ is not well-defined without also specifying the function space on which
+ it acts, and without also specifying the topology to be used with the function
+ space.
+ In particular, the spectrum of eigenvalues and eigenvectors for 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ can vary from being discrete, to being continuous, depending on the the
+ function space and the topology to be used with it.
 \layout Subsection
 
 The Polynomial Representation
 \layout Standard
 
 The operator 
-\begin_inset Formula $U_{B}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  has a representation in which it acts on the Hilbert space of polynomials.
  That is, one may contemplate the structure of 
-\begin_inset Formula $U_{B}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  when the function 
@@ -257,7 +497,9 @@ The operator
 \end_inset 
 
  is a polynomial.
- In what follows, the bra-ket notation from quantum mechanics is used.
+\layout Standard
+
+In what follows, the bra-ket notation from quantum mechanics is used.
  The kets 
 \begin_inset Formula $\left|n\right\rangle $
 \end_inset 
@@ -271,10 +513,13 @@ The operator
 \end_inset 
 
  refer to the Riesz duals of the monomials.
- These duals are in fact derivatives of the Dirac delta function.
- A presentation of the notation used here, including the general method
- by which one may obtain the matrix elements of the transfer operator in
- the polynomial basis, is detailed in 
+ The Riesz duals may be expressed as derivatives of the Dirac delta function:
+ 
+\layout Standard
+
+A presentation of the notation used here, including the general method by
+ which one may obtain the matrix elements of the transfer operator in the
+ polynomial basis, is detailed in 
 \begin_inset LatexCommand \cite{Ve-Tr04}
 
 \end_inset 
