@@ -341,6 +341,24 @@ In this viewpoint,
  
 \layout Standard
 
+When the function 
+\begin_inset Formula $g$
+\end_inset 
+
+ is differentiable, and doesn't have a vanishing derivative, the integral
+ formulation of the transfer operator above can be rephrased in a more convenien
+t form, as 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{g}\rho\right]\left(x\right)=\sum_{y:x=g(y)}\frac{\rho(y)}{\left|dg(y)/dy\right|}\label{eq: transfer-jacobi}\end{equation}
+
+\end_inset 
+
+ where the sum is presumed to extend over at most a countable number of
+ points.
+ If these conditions do not hold, a transfer operator can still be defined,
+ although more care must be taken in its definition.
+\layout Standard
+
 One generalization should be immediately appearent: although the word 
 \begin_inset Quotes eld
 \end_inset 
@@ -439,29 +457,37 @@ onal, one-sided lattice, where each lattice location can take on one of
  values.
  Such lattices are commonly given the product topology, where the open sets
  are the cylinder sets consisting of substrings of sequences of letters.
- Besides the 
+ The topology also has a natural measure, derived from the length of letter
+ sequences.
+ Aside from the 
 \begin_inset Formula $p$
 \end_inset 
 
--adic expansion given above, one also has the continued fraction expansion,
- where one considers the sequence of integers making up the continued fraction
+-adic expansion above, one also has the continued fraction expansion, where
+ one considers the sequence of integers making up the continued fraction
  
 \begin_inset Formula \begin{equation}
 x=[0;\sigma_{1},\sigma_{2},\sigma_{3},\ldots]=\frac{1}{\sigma_{1}+\frac{1}{\sigma_{2}+\frac{1}{\sigma_{3}+\ldots}}}\label{eq:}\end{equation}
 
 \end_inset 
 
- 
-\layout Standard
+ where each 
+\begin_inset Formula $\sigma_{k}$
+\end_inset 
 
-Another generalization is the 
+ is a positive integer; the entire sequence again be given a product topology,
+ although the measure is constructed differently.
 \layout Standard
 
 In most of what follows, the topological rings that will be considered will
  be very concrete: these will be the Banach spaces of polynomial functions,
  and of square-integrable functions.
- Some exploration of the lattice-model topology is explored in XXX (ref
- the Ising model paper).
+ Some exploration of the lattice-model topology is explored in 
+\begin_inset LatexCommand \cite{Ve-L06}
+
+\end_inset 
+
+.
  Since 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
@@ -471,22 +497,30 @@ In most of what follows, the topological rings that will be considered will
  and eigenspaces associated with each representation, discuss any symmetries
  and pertinent isomorphisms these spaces might have.
  
+\layout Standard
+
+The eigenfunctions of 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset 
+
+ are called Ruelle resonances [need citation], elaborate.
 \layout Section
 
-The Frobenius-Perron Operator of the Bernoulli Map
+The Transfer Operator of the Bernoulli Map
 \layout Standard
 
 The Bernoulli map is an exactly solvable example of deterministic chaos.
- A good presentation of this map, its associated transfer operator and its
- solution in terms of polynomial eigenfunctions is given in 
+ A presentation of this map, its associated transfer operator and its solution
+ in terms of polynomial eigenfunctions is given by Driebe
 \begin_inset LatexCommand \cite{Dri99}
 
 \end_inset 
 
 .
- The first section here recaps those results using a much simplified development
+ This and the next section recaps those results using a simplified development
  and simpler tools.
- The simpler tools allow several extensions, explored in later sections.
+ The simplified development enables the discussion of more complex scenarios,
+ given in later sections.
  
 \layout Standard
 
@@ -496,8 +530,17 @@ b(x)=2x-\left\lfloor 2x\right\rfloor \label{eq:}\end{equation}
 
 \end_inset 
 
- and can be thought of as popping the leading digit off of the binary expansion
- of 
+ where 
+\begin_inset Formula $\left\lfloor x\right\rfloor $
+\end_inset 
+
+ denotes the integer part of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ The map can be intuitively thought of as popping the leading digit off
+ of the binary or 2-adic expansion of 
 \begin_inset Formula $x.$
 \end_inset 
 
@@ -506,7 +549,47 @@ b(x)=2x-\left\lfloor 2x\right\rfloor \label{eq:}\end{equation}
  some 'arbitrary' number are unpredictable, and that the orbits of two close-by
  numbers will eventually become 'uncorellated' (after suitably defining
  what we mean by 'arbitrary' and 'unpredictable').
- 
+ Closely related is the 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic map, given by 
+\begin_inset Formula \begin{equation}
+a(x)=px-\left\lfloor px\right\rfloor \label{eq:}\end{equation}
+
+\end_inset 
+
+ for 
+\begin_inset Formula $p$
+\end_inset 
+
+ an integer.
+ As above, this map has the effect of popping off the leading digit of the
+ base-
+\begin_inset Formula $p$
+\end_inset 
+
+ expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ In the same vein, one may also consider the Gauss map 
+\begin_inset Formula \begin{equation}
+g(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
+
+\end_inset 
+
+ which has the effect of lopping of the leading digit of the continued fraction
+ expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ What these three maps have in common is that they deal with different (and,
+ in a certain sense, inequivalent) representations of the continuum of real
+ numbers.
+ Each map is chaotic, but in a different way.
 \layout Standard
 
 The Ruelle-Frobenius-Perron operator or transfer operator of the Bernoulli
@@ -516,15 +599,35 @@ The Ruelle-Frobenius-Perron operator or transfer operator of the Bernoulli
 
 \end_inset 
 
- A general definition of the transfer operator is given in 
-\begin_inset LatexCommand \cite{Ve-Tr04}
+ which follows directly from equation 
+\begin_inset LatexCommand \ref{eq: transfer-jacobi}
 
 \end_inset 
 
-, which also develops the general notation used in the following presentation.
- This reference should be consulted if the notation below becomes confusing.
- XXX remove above two sentenses.
+.
+ Similarly, the transfer operator for the general 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic map is 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{p}f\right](x)=\frac{1}{p}\sum_{k=0}^{p-1}f\left(\frac{x+k}{p}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ while that for the Gauss map is 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{G}f\right](x)=\sum_{k=1}^{\infty}\;\frac{1}{(x+k)^{2}}\; f\left(\frac{1}{1+x}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ This last is known as the Gauss-Kuzmin-Wirsing operator [give ref].
+ It is not studied further here, although it has bearing on some results,
+ due to its relationship to the representation of the real numbers.
  
+\layout Standard
+
+xxxxx
 \layout Standard
 
 A critical issue and a point of confusion in what follows is that the operator
