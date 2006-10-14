@@ -627,24 +627,87 @@ The Ruelle-Frobenius-Perron operator or transfer operator of the Bernoulli
  
 \layout Standard
 
-xxxxx
-\layout Standard
-
-A critical issue and a point of confusion in what follows is that the operator
- 
+As indicated in the introduction a critical issue and a point of confusion
+ is that the operator 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  is not well-defined without also specifying the function space on which
- it acts, and without also specifying the topology to be used with the function
- space.
+ it acts, and without also specifying the topology to be used on the unit
+ interval.
  In particular, the spectrum of eigenvalues and eigenvectors for 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  can vary from being discrete, to being continuous, depending on the the
- function space and the topology to be used with it.
-\layout Subsection
+ function space and the topology.
+ The simplest case assumes the natural topology of the reals on the unit
+ interval, and takes as the function space the set of orthogoanl polynomials
+ on the unit interval.
+ In this case, the eigenfunctions may be shown to be the Bernoulli polynomials
+ 
+\begin_inset Formula $B_{n}(x)$
+\end_inset 
+
+, associated with the eigenvalues 
+\begin_inset Formula $2^{-n}$
+\end_inset 
+
+.
+ That is, one finds that 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{B}B_{n}\right](x)=\frac{1}{2^{n}}B_{n}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+where the first few 
+\begin_inset Formula $B_{n}(x)$
+\end_inset 
+
+ are 
+\begin_inset Formula \begin{eqnarray}
+B_{0}(x) & = & 1\nonumber \\
+B_{1}(x) & = & x-\frac{1`}{2}\nonumber \\
+B_{2}(x) & = & x^{2}-x+\frac{1}{6}\nonumber \\
+B_{3}(x) & = & x^{3}-\frac{3x^{2}}{2}+\frac{x}{2}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ and so on.
+ Perhaps the easiest proof that these are the eigenfunctions may be obtained
+ by considering the generating function for the Bernoulli polynomials: 
+\begin_inset Formula \begin{equation}
+G(x,t)=\frac{te^{xt}}{e^{t}-1}=\sum_{n=0}^{\infty}B_{n}(x)\,\frac{t^{n}}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ It is then straight-forward to verify that 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{B}G\right](x,t)=\frac{1}{2}\left[G\left(\frac{x}{2},t\right)+G\left(\frac{x+1}{2},t\right)\right]=G\left(x,\frac{t}{2}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ or equivalently, by applying the linearity of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+, that
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{B}G\right](x,t)=\sum_{n=0}^{\infty}\frac{t^{n}}{n!}\left[\mathcal{L}_{B}B_{n}\right](x)=\sum_{n=0}^{\infty}\left(\frac{t}{2}\right)^{n}\frac{B_{n}(x)}{n!}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and then equating the coefficients of the powers of 
+\begin_inset Formula $t$
+\end_inset 
+
+.
+\layout Standard
+
+The following section provides an alternate derivation of this same result.
+ However, rather than starting with the Hilbert space of orthogonal polynomials
+ on the unit interval, it starts with the Banach space on monomials.
+\layout Section
 
 The Polynomial Representation
 \layout Standard
