@@ -1,6 +1,6 @@
 #LyX 1.3 created this file. For more info see http://www.lyx.org/
 \lyxformat 221
-\textclass article
+\textclass amsart
 \language english
 \inputencoding auto
 \fontscheme pslatex
@@ -702,9 +702,88 @@ G(x,t)=\frac{te^{xt}}{e^{t}-1}=\sum_{n=0}^{\infty}B_{n}(x)\,\frac{t^{n}}{n!}\lab
 \end_inset 
 
 .
+ This derivation follows for the general 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic case:
+\layout Theorem
+
+The eigenvalues of the 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic transfer operator are the Bernoulli polynomials, and are associated
+ with the eigenvalues 
+\begin_inset Formula $p^{-n}$
+\end_inset 
+
+.
+ That is, one has
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{p}B_{n}\right](x)=\frac{1}{p^{n}}B_{n}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\layout Proof
+
+The proof proceeds as in the above 2-adic case, and hinges on the well-known
+ factorization 
+\begin_inset Formula \[
+w^{p}-1=\left(w-1\right)\left(w^{p-1}+w^{p-2}+\cdots+1\right)\]
+
+\end_inset 
+
+ Here, take 
+\begin_inset Formula $w^{p}-1=e^{t}-1$
+\end_inset 
+
+, so that 
+\begin_inset Formula \begin{eqnarray}
+\left[\mathcal{L}_{p}G\right](x,t) & = & \frac{1}{p}\sum_{k=0}^{p-1}G\left(\frac{x+k}{p},t\right)\label{eq:}\\
+ & = & \frac{1}{p}\frac{t}{e^{t}-1}\,\sum_{k=0}^{p-1}\exp\left(\frac{(x+k)t}{p}\right)\\
+ & = & \frac{t}{p}\;\frac{\left(1+e^{t/p}+e^{2t/p}+\cdots+e^{(p-1)t/p}\right)}{e^{t}-1}\\
+ & = & G\left(x,\frac{t}{p}\right)\end{eqnarray}
+
+\end_inset 
+
+ Then, equating coefficients of powers of 
+\begin_inset Formula $t$
+\end_inset 
+
+ of the generating function, one obtains the desired result.
+ 
 \layout Standard
 
-The following section provides an alternate derivation of this same result.
+The above theorem is a fancy restatement of an old and well-known result
+ on the Bernoulli polynomials, namely, the so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+multiplication theorem
+\begin_inset Quotes erd
+\end_inset 
+
+ given by Joeseph Ludwig Raabe in 1851.
+ This is usually given in the much more prosaic form of 
+\begin_inset Formula \begin{equation}
+B_{n}(px)=p^{n-1}\sum_{k=0}^{p-1}B_{n}\left(x+\frac{k}{p}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ but amounts to the same thing.
+ What the language of the transfer operator provides is an abstraction that
+ allows the multiplication theorem to be examined in a broader fashion.
+ In particular, multiplication theorems exist not only for the Bernoulli
+ polynomials, but more broadly, including the Gamma function and the Hurwitz
+ zeta function.
+ These will be re-discovered in later sections.
+ 
+\layout Standard
+
+The following section provides an alternate and more complex derivation
+ of the above result.
  However, rather than starting with the Hilbert space of orthogonal polynomials
  on the unit interval, it starts with the Banach space on monomials.
 \layout Section
