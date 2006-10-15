@@ -845,13 +845,42 @@ ed, with the basis elements being the monomials.
  In principle, this infinite-dimensional vector space may be taken to be
  a Banach space; however, the development below does not make any particular
  use of the norm that Banach spaces are equiped with.
+ 
 \layout Standard
 
-To be concrete, consider an infinite-dimensional vector space 
+This is perhaps a critical point, and deserves being belaboured.
+ In this section, the vocabulary for discussing an infinite-dimensional
+ vector space will be developed.
+ The sums appearing herein range formally over the countable infinity.
+ However, the language of this section avoids questions of the convergence
+ of these sums; the question of convergence can be defered to later sections,
+ when one is manipulating actual operators, and the sums take a concrete
+ form.
+ Thus, for the development of this section, a discussin of the vector norm,
+ a discussion of a metric on the vector space, and a discussion of the topology
+ of the vector space can be completely avoided.
+ The manipulations are completely algebraic in nature.
+ Curiously, this will continue to be the case when these algebraic manipulations
+ are applied to the Bernoulli operator.
+ That is, the resulting concrete sums will turn out to range over only a
+ finite number of non-zero terms, and so the question of convergence will
+ not come up.
+ As a result, the foundations do not require a notion of norm, metric or
+ topology on this vector space.
+ When the exceptions to this rule crop up, they will be discussed explicitly.
+\layout Standard
+
+XXX the above is false, as there are plenty of places where it is assumed
+ that an infinite number of elts are non-zero.
+ Again, need to work algebraic vs.
+ topological discussion.
+\layout Standard
+
+Consider an infinite-dimensional vector space 
 \begin_inset Formula $V$
 \end_inset 
 
- with a countable ordered set of basis vectors 
+ with a countable ordered set of linearly independent basis vectors 
 \begin_inset Formula $e_{k}$
 \end_inset 
 
@@ -873,7 +902,7 @@ To be concrete, consider an infinite-dimensional vector space
 \begin_inset Formula $V^{*}$
 \end_inset 
 
- is the set of all continuous linear functionals 
+ is the set of all linear functionals 
 \begin_inset Formula $L:V\to\mathbb{R}$
 \end_inset 
 
@@ -1137,7 +1166,7 @@ m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\label{eq:}\end{equation}
  where 
 \begin_inset Formula $\left(\begin{array}{c}
 m\\
-k\end{array}\right)$
+k\end{array}\right)=\frac{m!}{k!(m-k)!}$
 \end_inset 
 
  is the binomial coefficient, and 
@@ -1162,6 +1191,8 @@ k\end{array}\right)$
 
  Both the diagonal elements, and the reason for the appearance of the binomial
  coefficients should be immediately clear.
+ Note that the evaluation of these matrix elements does not require the
+ evaluation of any sums with an infinite number of non-zero terms.
 \layout Standard
 
 The eigenvalues may be promptly read off the diagonal; these eigenvalues
@@ -1214,7 +1245,33 @@ k\end{array}\right)B_{n-k} & \;\textrm{ for }\; & k\leq n\\
 \end_inset 
 
  are the Bernoulli numbers.
- One can verify this by multiplying the eigenvector into the matrix: 
+ Note that only a finite number of these vector components are non-vanishing.
+\layout Theorem
+
+The 
+\begin_inset Formula $\left|B_{n}\right\rangle $
+\end_inset 
+
+ are eigenvectors of 
+\begin_inset Formula $U_{mk}$
+\end_inset 
+
+, associated with eigenvalues 
+\begin_inset Formula $2^{-n}$
+\end_inset 
+
+.
+ That is, 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}\left|B_{n}\right\rangle =\frac{1}{2^{n}}\left|B_{n}\right\rangle \label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\layout Proof
+
+This may be verified in the monomial basis through brute-force mupltiplication
+ of the vector into the matrix: 
 \begin_inset Formula \begin{eqnarray}
 \sum_{k=0}^{\infty}\left\langle m\right|U\left|k\right\rangle \left\langle k\left|B_{n}\right.\right\rangle  & = & \sum_{k=m}^{n}\left[\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
 k\\
@@ -1228,7 +1285,12 @@ m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\nonumber \\
 
 \end_inset 
 
- The right eigenvectors can be given a representation in coordinate space,
+ XXX fill in details.
+ Note that this proof does not require the evaluation of any sums with an
+ infinite number of non-zero elements; all sums are algebraically finite.
+\layout Standard
+
+The right eigenvectors can be given a representation in coordinate space,
  and these are found to be the Bernoulli polynomials discussed previously:
 \layout Standard
 
@@ -1240,6 +1302,8 @@ k\end{array}\right)B_{n-k}x^{k}=B_{n}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
+ These were previously shown to be eigenvectors, and so this is consistent
+ with the above.
  Thus, at this level, one may conclude that the coordinate representation
  and the matrix representation for this transfer operator are consistent.
  
@@ -1271,6 +1335,8 @@ n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:}\
 \end_inset 
 
 .
+ Unlike the right eigenvectors, the left eigenvectors all have an infinite
+ number of non-zero components.
  They share the same eigenvalue spectrum with the right eigenvectors, so
  that 
 \begin_inset Formula \[
@@ -1278,7 +1344,10 @@ n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:}\
 
 \end_inset 
 
-
+ which may again be demonstrated by a brute-force evaluation of the sum.
+ Despite the fact that an infinite number of the left eigenvector components
+ are non-vanishing, this sum will only contain a finite number of non-zero
+ terms, and thus its finiteness is gaurenteed on algebraic grounds.
 \layout Standard
 
 One may write down a coordinate-space representation for the left eigenvectors,
@@ -1339,7 +1408,7 @@ n-1\end{array}\right)(-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
 That the left eigenvectors are dual to the Bernoulli polynomials, which
  can be verified in either the matrix-element basis, or the coordinate-space
  representation.
-\layout Theorem*
+\layout Theorem
 
 The left and right eigenvectors are dual, in that
 \begin_inset Formula \begin{equation}
@@ -1347,7 +1416,8 @@ The left and right eigenvectors are dual, in that
 
 \end_inset 
 
-
+ and furthermore, the duality is algebraic, in that no infinite sums need
+ be performed to demonstrate duality.
 \layout Proof
 
 Consider first the 
@@ -1368,18 +1438,88 @@ j\end{array}\right)B_{j}\\
 
 \end_inset 
 
+ where the substitution 
+\begin_inset Formula $j=m-k$
+\end_inset 
+
+ was made to obtain the last sum.
+ The vanishing of the last sum is a well-known identity on the Bernoulli
+ numbers.
  The 
 \begin_inset Formula $n\ne0$
 \end_inset 
 
- case 
+ case requires more work, but ends similarly: 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle \left.\tilde{B}_{n}\right|B_{m}\right\rangle  & = & \sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle \left\langle k\left|B_{m}\right.\right\rangle \\
+ & = & \sum_{k=0}^{m}\left(\begin{array}{c}
+k\\
+n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\left(\begin{array}{c}
+m\\
+k\end{array}\right)B_{m-k}\\
+ & = & \frac{1}{n}\left(\begin{array}{c}
+n\\
+n-1\end{array}\right)\left(\begin{array}{c}
+m\\
+n\end{array}\right)B_{m-n}+\sum_{k=n+1}^{m}\left(\begin{array}{c}
+k\\
+n-1\end{array}\right)\frac{1}{n}\left(\begin{array}{c}
+m\\
+k\end{array}\right)B_{m-k}\\
+ & = & \begin{cases}
+0 & \mbox{ for }n>m\\
+B_{0} & \mbox{ for }n=m\\
+\left(\begin{array}{c}
+m\\
+n\end{array}\right)B_{m-n}+\frac{m!}{n!(m-n+1)!}\sum_{k=n+1}^{m}\left(\begin{array}{c}
+m-n+1\\
+m-k\end{array}\right)B_{m-k} & \mbox{ for }n<m\end{cases}\end{eqnarray*}
+
+\end_inset 
+
+ The last case can be shown to vanish, by again making the subsitution 
+\begin_inset Formula $j=m-k$
+\end_inset 
+
+, to get 
+\begin_inset Formula \[
+\left(\begin{array}{c}
+m\\
+n\end{array}\right)B_{m-n}+\frac{m!}{n!(m-n+1)!}\sum_{j=0}^{m-n-1}\left(\begin{array}{c}
+m-n+1\\
+j\end{array}\right)B_{j}=\frac{m!}{n!(m-n+1)!}\sum_{j=0}^{m-n}\left(\begin{array}{c}
+m-n+1\\
+j\end{array}\right)B_{j}=0\]
+
+\end_inset 
+
+ thus concluding the proof.
+ Notice that this proof does not require the evaluation of any infinite
+ sums: all sums are performed over a finite number of terms.
 \layout Standard
 
-Thus, the identity operator 
+Given this duality, the operator 
 \begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
 \end_inset 
 
- turns out to be the Euler-MacLaurin summation formula in disguise, which
+ can then be recognized as a projection operator.
+ In fact, it is complete in the monomial basis, in that 
+\begin_inset Formula \begin{equation}
+\left\langle j\left|\mathbb{I}_{B}\right|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\label{eq:}\end{equation}
+
+\end_inset 
+
+ can be shown, using essentially the same operations as in the proof above.
+ Also, as before, this demonstration involves sums with only a finite number
+ of terms, and so completeness may be taken as an algebraic property.
+ That is, 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ may be taken to be the identity operator on the vector space of monomials.
+\layout Standard
+
+It turns out to be the Euler-MacLaurin summation formula in disguise, which
  we can see more easily by writing 
 \begin_inset Formula \begin{eqnarray}
 f(x) & = & \left\langle x|f\right\rangle \nonumber \\
@@ -1387,14 +1527,9 @@ f(x) & = & \left\langle x|f\right\rangle \nonumber \\
 
 \end_inset 
 
- Its not to hard to explicitly validate completeness: one finds that 
-\begin_inset Formula \begin{equation}
-\left\langle j\left|\mathbb{I}_{B}\right|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\label{eq:}\end{equation}
-
-\end_inset 
-
- Naively, the Euler-MacLaurin formula, one is tempted to deduce orthogonality
- over coordinate space.
+ Its not to hard to explicitly validate completeness: one finds that Naively,
+ the Euler-MacLaurin formula, one is tempted to deduce orthogonality over
+ coordinate space.
  That is, from 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \left\langle \left.\tilde{B}_{n}\right|f\right\rangle =f(x)\label{eq:}\end{equation}
