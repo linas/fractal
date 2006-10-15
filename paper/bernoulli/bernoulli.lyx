@@ -32,7 +32,7 @@ The Bernoulli Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 13 October 2006)
+2 January 2004 (revised 14 October 2006)
 \layout Abstract
 
 This paper reviews a raft of related ideas surrounding the Bernoulli operator.
@@ -280,7 +280,7 @@ A shift in perspective may be gained not by considering how
 .
  This verbal description may be given form as 
 \begin_inset Formula \begin{equation}
-\rho^{\prime}(x)=\int_{0}^{1}\,\delta\left(x-g(y)\right)\rho(y)\; dy\label{eq:}\end{equation}
+\rho^{\prime}(x)=\int_{0}^{1}\,\delta\left(x-g(y)\right)\rho(y)\; dy\label{eq:transfer-dirac}\end{equation}
 
 \end_inset 
 
@@ -906,7 +906,7 @@ For the space
 
  is written as 
 \begin_inset Formula \begin{equation}
-f(x)=\sum_{n=0}^{\infty}a_{n}x^{n}\label{eq:}\end{equation}
+f(x)=\sum_{n=0}^{\infty}a_{n}x^{n}\label{eq:taylor-f}\end{equation}
 
 \end_inset 
 
@@ -980,7 +980,10 @@ e_{j}^{*}\left(e_{k}\right)=\int_{0}^{1}x^{k}\;\frac{(-1)^{j}}{j!}\delta^{(j)}(x
 
 \end_inset 
 
- The remainder of the text switches to the quantum mechanical bra-ket notation,
+ 
+\layout Standard
+
+The remainder of the text switches to the quantum mechanical bra-ket notation,
  writing 
 \begin_inset Formula $\left|n\right\rangle =e_{n}$
 \end_inset 
@@ -1040,71 +1043,92 @@ f(x) & = & \left\langle x|f\right\rangle \nonumber \\
 
 \end_inset 
 
+ 
+\layout Standard
+
+This notation allows the matrix elements 
+\begin_inset Formula $U_{mn}=\left\langle m\left|\mathcal{L}\right|n\right\rangle $
+\end_inset 
+
+ of the transfer operator to be articulated as well.
+ Starting with the classical notation of equaiton 
+\begin_inset LatexCommand \ref{eq:taylor-f}
+
+\end_inset 
+
+, one has 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}f\right](x)=\sum_{m=0}^{\infty}b_{m}x^{m}=\sum_{m=0}^{\infty}x^{m}\sum_{n=0}^{\infty}U_{mn}a_{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ or, equivalently 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}f\right](x)=\left\langle x\left|\mathcal{L}f\right.\right\rangle =\sum_{m=0}^{\infty}\left\langle x\left|m\right.\right\rangle \left\langle m\left|\mathcal{L}f\right.\right\rangle =\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left\langle x\left|m\right.\right\rangle \left\langle m\left|\mathcal{L}\right|n\right\rangle \left\langle n|f\right\rangle \label{eq:}\end{equation}
+
+\end_inset 
+
+where 
+\begin_inset Formula $\left\langle n|f\right\rangle =a_{n}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left\langle n\left|\mathcal{L}f\right.\right\rangle =b_{n}$
+\end_inset 
+
+.
+ Equating each power of 
+\begin_inset Formula $x^{m}$
+\end_inset 
+
+ one finds, in the classical notation, that 
+\begin_inset Formula \begin{equation}
+\left.\frac{1}{m!}\;\frac{d^{m}\left[\mathcal{L}f\right](x)}{dx^{m}}\right|_{x=0}=\sum_{n=0}^{\infty}U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}f(x)}{dx^{n}}\right|_{x=0}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula \begin{equation}
+\left\langle n|f\right\rangle =a_{n}=\left.\frac{1}{n!}\;\frac{d^{n}f(x)}{dx^{n}}\right|_{x=0}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and so on.
+ The formulation of the transfer operator given in equation 
+\begin_inset LatexCommand \ref{eq:transfer-dirac}
+
+\end_inset 
+
+ fits in this framework as well; it is merely the spatial representation
+ of the matrix elements: 
+\begin_inset Formula \begin{eqnarray}
+\delta\left(x-g(y)\right)=\mathcal{L}(x,y) & = & \left\langle x\left|\mathcal{L}\right|y\right\rangle \nonumber \\
+ & = & \sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left\langle x|m\right\rangle \left\langle m\left|\mathcal{L}\right|n\right\rangle \left\langle n|y\right\rangle \label{eq:}\end{eqnarray}
+
+\end_inset 
+
 
 \layout Standard
 
-dual 
+Armed with this notation, the following section explores the matrix elements
+ of the Bernoulli operator in this polynomial basis.
+ 
 \layout Section
 
 The Bernoulli Operator in the Polynomial Basis
 \layout Standard
 
-The operator 
+This section reviews the structure of the Bernoulli operator 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
- has a representation in which it acts on the Hilbert space of polynomials.
- That is, one may contemplate the structure of 
-\begin_inset Formula $\mathcal{L}_{B}$
-\end_inset 
-
- when the function 
-\begin_inset Formula $f$
-\end_inset 
-
- in equation 
-\begin_inset LatexCommand \ref{eq:Bernoulli operator}
-
-\end_inset 
-
- is a polynomial.
-\layout Standard
-
-In what follows, the bra-ket notation from quantum mechanics is used.
- The kets 
-\begin_inset Formula $\left|n\right\rangle $
-\end_inset 
-
- refer to the monomial 
-\begin_inset Formula $x^{n}$
-\end_inset 
-
-, while the bras 
-\begin_inset Formula $\left\langle m\right|$
-\end_inset 
-
- refer to the Riesz duals of the monomials.
- The Riesz duals may be expressed as derivatives of the Dirac delta function:
- 
-\layout Standard
-
-A presentation of the notation used here, including the general method by
- which one may obtain the matrix elements of the transfer operator in the
- polynomial basis, is detailed in 
-\begin_inset LatexCommand \cite{Ve-Tr04}
-
-\end_inset 
-
-, which should be reviewed if confusion arises below.
-\layout Standard
-
-The matrix elements of the Bernoulli operator in the monomial basis are
- given by
+ in the polynomial basis developed above.
+ The matrix elements in the monomial basis are given by
 \layout Standard
 
 
 \begin_inset Formula \begin{equation}
-\left[U_{B}\right]_{mk}\equiv U_{mk}\equiv\left\langle m\right|U\left|k\right\rangle =\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
+\left[\mathcal{L}_{B}\right]_{mk}\equiv U_{mk}\equiv\left\langle m\right|U\left|k\right\rangle =\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
 k\\
 m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\label{eq:}\end{equation}
 
@@ -1125,8 +1149,23 @@ k\end{array}\right)$
 \end_inset 
 
  is a traceless, pure upper-triangular matrix.
- Thus, for the polynomial eigenstates, we can promptly read the eigenvalues
- off the diagonal; these eigenvalues are 
+ These matrix elements are easily obtained by direct substitution, that
+ is, by contemplating the coefficient to the 
+\begin_inset Formula $x^{m}$
+\end_inset 
+
+ term in the expansion of 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{B}x^{k}\right]=\frac{1}{2}\left[\left(\frac{x}{2}\right)^{k}+\left(\frac{1+x}{2}\right)^{k}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Both the diagonal elements, and the reason for the appearance of the binomial
+ coefficients should be immediately clear.
+\layout Standard
+
+The eigenvalues may be promptly read off the diagonal; these eigenvalues
+ are 
 \begin_inset Formula $\lambda_{n}=2^{-n}$
 \end_inset 
 
@@ -1175,7 +1214,7 @@ k\end{array}\right)B_{n-k} & \;\textrm{ for }\; & k\leq n\\
 \end_inset 
 
  are the Bernoulli numbers.
- We can verify this by multiplying the eigenvector into the matrix: 
+ One can verify this by multiplying the eigenvector into the matrix: 
 \begin_inset Formula \begin{eqnarray}
 \sum_{k=0}^{\infty}\left\langle m\right|U\left|k\right\rangle \left\langle k\left|B_{n}\right.\right\rangle  & = & \sum_{k=m}^{n}\left[\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
 k\\
@@ -1200,10 +1239,10 @@ k\end{array}\right)B_{n-k}x^{k}=B_{n}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
- which we can verify explicitly by substituting into the function-operator
+ which can be verified explicitly by substituting into the function-operator
  form of the map:
 \begin_inset Formula \begin{eqnarray}
-\left[U_{B}B_{n}\right](x) & = & \frac{1}{2}\left[B_{n}\left(\frac{x}{2}\right)+B_{n}\left(\frac{x+1}{2}\right)\right]\nonumber \\
+\left[\mathcal{L}_{B}B_{n}\right](x) & = & \frac{1}{2}\left[B_{n}\left(\frac{x}{2}\right)+B_{n}\left(\frac{x+1}{2}\right)\right]\nonumber \\
  & = & \lambda_{n}B_{n}(x)\label{eq:}\end{eqnarray}
 
 \end_inset 
@@ -1339,13 +1378,13 @@ wrong
 Thus, in the polynomial representation, the Frobenius-Perron operator of
  the Bernoulli map is 
 \begin_inset Formula \begin{equation}
-U_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \lambda_{n}\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
+\mathcal{L}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \lambda_{n}\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
 
 \end_inset 
 
  We can make use of this diagonal form to easily compute formal expressions
  involving 
-\begin_inset Formula $U_{B}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
 .
