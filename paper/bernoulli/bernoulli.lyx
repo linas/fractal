@@ -32,7 +32,7 @@ The Bernoulli Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 14 October 2006)
+2 January 2004 (revised 15 October 2006)
 \layout Abstract
 
 This paper reviews a raft of related ideas surrounding the Bernoulli operator.
@@ -1224,11 +1224,12 @@ k\end{array}\right)B_{n-k}\nonumber \\
  & = & \frac{1}{2^{m}}\left(\begin{array}{c}
 n\\
 m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\nonumber \\
- & = & \lambda_{n}\left\langle m\left|B_{n}\right.\right\rangle \label{eq:}\end{eqnarray}
+ & = & \frac{1}{2^{n}}\left\langle m\left|B_{n}\right.\right\rangle \label{eq:}\end{eqnarray}
 
 \end_inset 
 
- In coordinate space, the right eigenvectors are the Bernoulli polynomials.
+ The right eigenvectors can be given a representation in coordinate space,
+ and these are found to be the Bernoulli polynomials discussed previously:
 \layout Standard
 
 
@@ -1239,34 +1240,25 @@ k\end{array}\right)B_{n-k}x^{k}=B_{n}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
- which can be verified explicitly by substituting into the function-operator
- form of the map:
-\begin_inset Formula \begin{eqnarray}
-\left[\mathcal{L}_{B}B_{n}\right](x) & = & \frac{1}{2}\left[B_{n}\left(\frac{x}{2}\right)+B_{n}\left(\frac{x+1}{2}\right)\right]\nonumber \\
- & = & \lambda_{n}B_{n}(x)\label{eq:}\end{eqnarray}
-
-\end_inset 
-
- The last identity follows from the 
-\begin_inset Quotes eld
-\end_inset 
-
-multiplication formula
-\begin_inset Quotes erd
-\end_inset 
-
- for Bernoulli polynomials.
+ Thus, at this level, one may conclude that the coordinate representation
+ and the matrix representation for this transfer operator are consistent.
+ 
 \layout Standard
 
-The left eigenvectors are denoted by 
+This matrix expression for 
+\begin_inset Formula $U_{mn}$
+\end_inset 
+
+ also admits left eigenvectors which can be given an explicit representation.
+ Letting the left eigenvectors be denoted by 
 \begin_inset Formula $\left\langle \tilde{B}_{n}\right|$
 \end_inset 
 
- and, for 
+, they have, for 
 \begin_inset Formula $n>0$
 \end_inset 
 
-, have the components 
+, the components 
 \begin_inset Formula \begin{equation}
 \left\langle \left.\tilde{B}_{n}\right|k\right\rangle =\left(\begin{array}{c}
 k\\
@@ -1279,7 +1271,23 @@ n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:}\
 \end_inset 
 
 .
- The left eigenvectors can also be written out in coordinate space: 
+ They share the same eigenvalue spectrum with the right eigenvectors, so
+ that 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|m\right\rangle U_{mk}=\frac{1}{2^{n}}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle \]
+
+\end_inset 
+
+
+\layout Standard
+
+One may write down a coordinate-space representation for the left eigenvectors,
+ by contracting them against the dual-space basis elements 
+\begin_inset Formula $\left\langle k|x\right\rangle $
+\end_inset 
+
+.
+ This leads directly to the generalized functions: 
 \begin_inset Formula \begin{eqnarray}
 \left\langle \tilde{B}_{n}|x\right\rangle  & = & \sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle \left\langle k|x\right\rangle \nonumber \\
  & = & \sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle (-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
@@ -1314,19 +1322,60 @@ n-1\end{array}\right)(-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
 
 \end_inset 
 
- Its instructive to look at the other left eigenvectors acting on some function
- 
+ The other left eigenvectors can also be made more concrete by looking at
+ how they act on some function 
 \begin_inset Formula $f(x)$
 \end_inset 
 
-; these can be written as 
+; this may be written as 
 \begin_inset Formula \begin{equation}
 \left\langle \left.\tilde{B}_{n}\right|f\right\rangle =\frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
-Note that the left eigenvectors are adjoint to the Bernoulli polynomials.
- Thus, the identity operator 
+
+\layout Standard
+
+That the left eigenvectors are dual to the Bernoulli polynomials, which
+ can be verified in either the matrix-element basis, or the coordinate-space
+ representation.
+\layout Theorem*
+
+The left and right eigenvectors are dual, in that
+\begin_inset Formula \begin{equation}
+\left\langle \left.\tilde{B}_{n}\right|B_{m}\right\rangle =\sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle \left\langle k\left|B_{m}\right.\right\rangle =\delta_{nm}\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Proof
+
+Consider first the 
+\begin_inset Formula $n=0$
+\end_inset 
+
+ case.
+ One has 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle \left.\tilde{B}_{0}\right|B_{m}\right\rangle  & = & \sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{0}\right|k\right\rangle \left\langle k\left|B_{m}\right.\right\rangle \\
+ & = & \sum_{k=0}^{m}\frac{1}{k+1}\left(\begin{array}{c}
+m\\
+k\end{array}\right)B_{m-k}\\
+ & = & \frac{1}{m+1}\sum_{j=0}^{m}\left(\begin{array}{c}
+m+1\\
+j\end{array}\right)B_{j}\\
+ & = & \delta_{m0}\end{eqnarray*}
+
+\end_inset 
+
+ The 
+\begin_inset Formula $n\ne0$
+\end_inset 
+
+ case 
+\layout Standard
+
+Thus, the identity operator 
 \begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
 \end_inset 
 
@@ -2762,7 +2811,7 @@ There are eigenfunctions with eigenvalues greater than one, essentially
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
