@@ -1221,7 +1221,10 @@ U_{mk}=\left[\begin{array}{cccccc}
 
 \end_inset 
 
+ The right and left eigenvectors are developped in the following sections.
+\layout Subsection
 
+Right eigenvectors
 \layout Standard
 
 The right eigenvectors are denoted by 
@@ -1280,8 +1283,8 @@ n\\
 k\end{array}\right)B_{n-k}\nonumber \\
  & = & \frac{1}{2^{m}}\left(\begin{array}{c}
 n\\
-m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\nonumber \\
- & = & \frac{1}{2^{n}}\left\langle m\left|B_{n}\right.\right\rangle \label{eq:}\end{eqnarray}
+m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\\
+ & = & \frac{1}{2^{n}}\left\langle m\left|B_{n}\right.\right\rangle \end{eqnarray}
 
 \end_inset 
 
@@ -1307,6 +1310,9 @@ k\end{array}\right)B_{n-k}x^{k}=B_{n}(x)\label{eq:}\end{equation}
  Thus, at this level, one may conclude that the coordinate representation
  and the matrix representation for this transfer operator are consistent.
  
+\layout Subsection
+
+Left Eigenvectors
 \layout Standard
 
 This matrix expression for 
@@ -1339,8 +1345,8 @@ n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:}\
  number of non-zero components.
  They share the same eigenvalue spectrum with the right eigenvectors, so
  that 
-\begin_inset Formula \[
-\sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|m\right\rangle U_{mk}=\frac{1}{2^{n}}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle \]
+\begin_inset Formula \begin{equation}
+\sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|m\right\rangle U_{mk}=\frac{1}{2^{n}}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle \label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1403,6 +1409,9 @@ n-1\end{array}\right)(-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
 \end_inset 
 
 
+\layout Subsection
+
+Duality
 \layout Standard
 
 That the left eigenvectors are dual to the Bernoulli polynomials, which
@@ -1498,14 +1507,37 @@ j\end{array}\right)B_{j}=0\]
  sums: all sums are performed over a finite number of terms.
 \layout Standard
 
+This proof of duality may also be conducted in coordinate space, where it
+ takes the form 
+\begin_inset Formula \begin{eqnarray}
+\left\langle \left.\tilde{B}_{n}\right|B_{m}\right\rangle  & = & \int_{0}^{1}\left\langle \left.\tilde{B}_{n}\right|x\right\rangle \left\langle x\left|B_{m}\right.\right\rangle \, dx\label{eq:}\\
+ & = & \int_{0}^{1}\frac{(-1)^{n+1}}{n!}\left[\delta^{(n-1)}(1-x)-\delta^{(n-1)}(x)\right]B_{m}(x)\, dx\\
+ & = & \begin{cases}
+0 & \mbox{ for }m<n-1\\
+\frac{m!}{n!(m-n+1)!}\left[B_{m-n+1}(1)-B_{m-n+1}(0)\right] & \mbox{ for }m\ge n-1\end{cases}\\
+ & = & \delta_{mn}\end{eqnarray}
+
+\end_inset 
+
+ and so, as with most of the previous results, one may be lulled into a
+ sense of complacency about the equivalence of the coordinate-space and
+ monomial-vector-space representations.
+ This complacency is ill-founded, as demonstrated below.
+\layout Subsection
+
+Completeness
+\layout Standard
+
 Given this duality, the operator 
-\begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
+\begin_inset Formula \begin{equation}
+\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\label{eq:Bern-ident}\end{equation}
+
 \end_inset 
 
  can then be recognized as a projection operator.
  In fact, it is complete in the monomial basis, in that 
 \begin_inset Formula \begin{equation}
-\left\langle j\left|\mathbb{I}_{B}\right|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\label{eq:}\end{equation}
+\left\langle j\left|\mathbb{I}_{B}\right|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\label{eq:B-complete}\end{equation}
 
 \end_inset 
 
@@ -1516,51 +1548,113 @@ Given this duality, the operator
 \begin_inset Formula $\mathbb{I}_{B}$
 \end_inset 
 
- may be taken to be the identity operator on the vector space of monomials.
+ may be taken to be the identity operator on the vector space of polynomials.
 \layout Standard
 
-It turns out to be the Euler-MacLaurin summation formula in disguise, which
- we can see more easily by writing 
+Curiously, this identity operator 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ expanded in the Bernoulli basis as in formula 
+\begin_inset LatexCommand \ref{eq:Bern-ident}
+
+\end_inset 
+
+ is the Euler-MacLaurin summation formula in disguise.
+ This may be seen by expanding
+\layout Standard
+
+
 \begin_inset Formula \begin{eqnarray}
 f(x) & = & \left\langle x|f\right\rangle \nonumber \\
- & = & \sum_{m=0}^{M}B_{m}(x)\left\langle \left.\tilde{B}_{m}\right|f\right\rangle -\frac{1}{(M+1)!}\int_{0}^{1}dy\, B_{M+1}(x-y)\; f^{(M)}(y)\label{eq:}\end{eqnarray}
+ & = & \sum_{m=0}^{\infty}B_{m}(x)\left\langle \left.\tilde{B}_{m}\right|f\right\rangle \label{eq:B-maclaurin}\\
+ & = & \int_{0}^{1}f(y)\, dy+\sum_{m=0}^{\infty}\frac{B_{m}(x)}{m!}\left[f^{(m-1)}(1)-f^{(m-1)}(0)\right]\end{eqnarray}
 
 \end_inset 
 
- Its not to hard to explicitly validate completeness: one finds that Naively,
- the Euler-MacLaurin formula, one is tempted to deduce orthogonality over
- coordinate space.
- That is, from 
+ This may be compared to the 
+\begin_inset Formula $n=1$
+\end_inset 
+
+ case of the traditional Euler-Maclaurin summation formula, 
 \begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \left\langle \left.\tilde{B}_{n}\right|f\right\rangle =f(x)\label{eq:}\end{equation}
+\frac{1}{n}\sum_{k=0}^{n-1}f\left(\frac{k+x}{n}\right)=\int_{0}^{1}f(y)\, dy+\sum_{m=0}^{\infty}\frac{B_{m}(x)}{n^{m}m!}\left[f^{(m-1)}(1)-f^{(m-1)}(0)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
- one wants to deduce that 
+ By combining equations 
+\begin_inset LatexCommand \ref{eq:Bern-ident}
+
+\end_inset 
+
+
+\begin_inset LatexCommand \ref{eq:B-complete}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq:B-maclaurin}
+
+\end_inset 
+
+ one is sorely tempted to deduce orthogonality over coordinate space.
+ That is, one wants to deduce that 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \left\langle \left.\tilde{B}_{n}\right|y\right\rangle =\delta(x-y)\label{eq: Bernoulli-faulty}\end{equation}
 
 \end_inset 
 
-However, this equation is 
-\begin_inset Quotes eld
+ which superficially seems to be entirely reasonable.
+ The problem with equation 
+\begin_inset LatexCommand \ref{eq: Bernoulli-faulty}
+
 \end_inset 
 
-wrong
-\begin_inset Quotes erd
+ is that it is misleading, as will be expanded upon in the following sections.
+ As long as the functions 
+\begin_inset Formula $f(x)$
 \end_inset 
 
- in a certain sense, as discussed in the next section.
- The operator 
+ are in all cases understood to be polynomials, then there is no harm in
+ using equation 
+\begin_inset LatexCommand \ref{eq: Bernoulli-faulty}
+
+\end_inset 
+
+.
+ This follows in part because 
 \begin_inset Formula $\mathbb{I}_{B}$
 \end_inset 
 
- is in fact a projection operator; it has a large kernel.
- 
+ really is the identity operator on the space of polynomials: there are
+ no polynomials (other than 
+\begin_inset Formula $f(x)=0$
+\end_inset 
+
+) that are in the kernel of 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+.
+ However, one may consider larger function spaces than those consisting
+ of polynomials; on these spaces, 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ will be found to have a large and non-trivial kernel, while by contrast,
+ the Dirac delta function 
+\begin_inset Formula $\delta(x-y)$
+\end_inset 
+
+ does not have a non-trivial kernel on these same spaces.
+ This will be delved into in the next section.
+\layout Subsection
+
+The Bernoulli operator in diagonal form
 \layout Standard
 
-Thus, in the polynomial representation, the Frobenius-Perron operator of
- the Bernoulli map is 
+From the above manipulations, one may deduce that, in the polynomial representat
+ion, the Frobenius-Perron operator of the Bernoulli map is 
 \begin_inset Formula \begin{equation}
 \mathcal{L}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \lambda_{n}\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
 
@@ -1580,16 +1674,16 @@ Thus, in the polynomial representation, the Frobenius-Perron operator of
 \begin_inset Formula $x$
 \end_inset 
 
-, we can write the operator 
+, one may write the operator 
 \begin_inset Formula \begin{equation}
-f\left(U_{B}\right)=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle f\left(\lambda_{n}\right)\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
+f\left(\mathcal{L}_{B}\right)=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle f\left(\lambda_{n}\right)\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
 
 \end_inset 
 
- whose matrix elements we can explicitly demonstrate in the monomial basis:
+ whose matrix elements can be explicitly demonstrated in the monomial basis:
  
 \begin_inset Formula \begin{equation}
-\left\langle j\left|f\left(U_{B}\right)\right|k\right\rangle =\sum_{j\leq n\leq k}\left(\begin{array}{c}
+\left\langle j\left|f\left(\mathcal{L}_{B}\right)\right|k\right\rangle =\sum_{j\leq n\leq k}\left(\begin{array}{c}
 n\\
 j\end{array}\right)\left(\begin{array}{c}
 k\\
@@ -1597,12 +1691,18 @@ n-1\end{array}\right)\frac{B_{n-j}}{n}f\left(2^{-n}\right)\label{eq:}\end{equati
 
 \end_inset 
 
- This allows us to write, for example, 
-\begin_inset Formula $U_{B}=\exp(-H_{B})$
+ As in previous cases, note that the summation involves only a finite number
+ of terms, and is thus manifestly finite (provided that 
+\begin_inset Formula $f$
+\end_inset 
+
+ is finite).
+ As curious example, one may write, 
+\begin_inset Formula $\mathcal{L}_{B}=\exp(-H_{B})$
 \end_inset 
 
  so that 
-\begin_inset Formula $H_{B}=-\log U_{B}$
+\begin_inset Formula $H_{B}=-\log\mathcal{L}_{B}$
 \end_inset 
 
  has matrix elements 
@@ -1616,7 +1716,7 @@ m\end{array}\right)(j+m)\, B_{m}\label{eq:}\end{equation}
 \end_inset 
 
  
-\layout Subsection
+\layout Section
 
 Completeness and Orthogonality
 \layout Standard
@@ -1694,9 +1794,9 @@ f(x)=\sum_{k=1}^{\infty}a_{k}\sin(2\pi kx)\label{eq:}\end{equation}
 
 .
  
-\layout Description
+\layout Theorem
 
-Theorem: The duals to 
+The duals to 
 \begin_inset Formula $\tilde{S}_{n}(x)$
 \end_inset 
 
@@ -1710,9 +1810,9 @@ Theorem: The duals to
 
  are the Euler polynomials.
  
-\layout Description
+\layout Proof
 
-Proof: Consider the generating function for the Euler polynomials 
+Consider the generating function for the Euler polynomials 
 \begin_inset Formula \begin{equation}
 G_{E}(x,t)=\frac{2e^{xt}}{1+e^{t}}=\sum_{n=0}^{\infty}E_{n}(x)\frac{t^{n}}{n!}\label{eq:}\end{equation}
 
@@ -1737,7 +1837,7 @@ G_{E}(x,t)=\frac{2e^{xt}}{1+e^{t}}=\sum_{n=0}^{\infty}E_{n}(x)\frac{t^{n}}{n!}\l
 
 \end_inset 
 
- QED.
+ which completes the proof.
 \layout Standard
 
 From this orthogonality relationship follows a certain restricted completeness
