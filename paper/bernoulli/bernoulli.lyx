@@ -782,12 +782,15 @@ B_{n}(px)=p^{n-1}\sum_{k=0}^{p-1}B_{n}\left(x+\frac{k}{p}\right)\label{eq:}\end{
  
 \layout Standard
 
-The following section provides an alternate and more complex derivation
- of the above result.
- However, rather than starting with the Hilbert space of orthogonal polynomials
- on the unit interval, it starts with the Banach space on monomials.
- This abstraction will allow the construction of the dual of the transfer
- operator.
+The following two sections provide an alternate and more abstract and labored
+ derivation of the above result.
+ The goal of the abstraction is to develop the machinery needed to explore
+ the Bernoulli operator in more general topological settings.
+ Rather than starting with the Hilbert space of orthogonal polynomials on
+ the unit interval, the next section defines a Banach space on monomials,
+ and its dual.
+ The subsequent section then exposes the matrix elements of the Bernoulli
+ operator in this space.
 \layout Section
 
 The Polynomial Representation 
@@ -829,29 +832,221 @@ The polynomial eigenvectors of the Bernoulli operator can be derived in
  
 \layout Standard
 
-More precisely, a Hilbert space is simply a Banach space with an inner product,
- and the analysis of the transfer operator does not seem to make any particular
- use of or need for the inner product.
- Thus, for the following, the inner product is dispensed with.
- A Banach space is a vector space with a countable set of basis vectors
- labelled by the natural numbers:
-\begin_inset Formula $\left\{ e_{k}:k\in\mathbb{N}\right\} $
+Generalized functions can be loosely defined as linear functionals from
+ the space of functions to the reals.
+ In this sense, generalized functions belong to the dual space of a function
+ space.
+ Given that the left eigenvectors of the Bernoulli operator can be shown
+ to belong to such a dual space, it then makes sense to start in this way.
+ Thus, for the following, an infinite-dimensional vector space will be construct
+ed, with the basis elements being the monomials.
+ The generalized functions appear naturally as elements of the dual space.
+ The transfer operator then has a direct representation in this space.
+ In principle, this infinite-dimensional vector space may be taken to be
+ a Banach space; however, the development below does not make any particular
+ use of the norm that Banach spaces are equiped with.
+\layout Standard
+
+To be concrete, consider an infinite-dimensional vector space 
+\begin_inset Formula $V$
+\end_inset 
+
+ with a countable ordered set of basis vectors 
+\begin_inset Formula $e_{k}$
+\end_inset 
+
+ labelled by the natural numbers 
+\begin_inset Formula $k$
 \end_inset 
 
 .
- It has a norm 
-\begin_inset Formula $\left\Vert \cdot\right\Vert $
+ A general element 
+\begin_inset Formula $v\in V$
 \end_inset 
 
- so that the basis vectors can be taken to have a unit norm: 
-\begin_inset Formula $\left\Vert e_{k}\right\Vert =1\;\forall\, k\in\mathbb{N}$
+ may be written as 
+\begin_inset Formula $v=\sum_{k=0}^{\infty}a_{k}e_{k}$
+\end_inset 
+
+.
+ The dual space 
+\begin_inset Formula $V^{*}$
+\end_inset 
+
+ is the set of all continuous linear functionals 
+\begin_inset Formula $L:V\to\mathbb{R}$
+\end_inset 
+
+.
+ General elements of the dual space may be written as linear combinations
+ of the basis elements 
+\begin_inset Formula $e_{k}^{*}$
+\end_inset 
+
+, which are the maps such that 
+\begin_inset Formula $e_{j}^{*}(e_{k})=\delta_{jk}$
 \end_inset 
 
 .
  
 \layout Standard
 
-xxxxx
+For the space 
+\begin_inset Formula $\mathcal{P}$
+\end_inset 
+
+ of real-analytic functions on the unit interval, the basis elements may
+ be taken to be the monomials 
+\begin_inset Formula $e_{k}=x^{k}$
+\end_inset 
+
+, so that a general real-analytic function 
+\begin_inset Formula $f\in\mathcal{P}$
+\end_inset 
+
+ is written as 
+\begin_inset Formula \begin{equation}
+f(x)=\sum_{n=0}^{\infty}a_{n}x^{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ This may be trivially interpreted as nothing more than the Taylor's series
+ for a real-valued function expanded at 
+\begin_inset Formula $x=0$
+\end_inset 
+
+.
+ The correct formalism for discussing the dual space is a bit trickier.
+ There is a strong historical desire to represent the linear operators of
+ the dual space by means of integrals, that is, to represent the linear
+ functional 
+\begin_inset Formula $L:\mathcal{P}\to\mathbb{R}$
+\end_inset 
+
+ by an integral 
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}l(x)\, f(x)\, dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $f\in\mathcal{P}$
+\end_inset 
+
+ and 
+\begin_inset Formula $l$
+\end_inset 
+
+ is some 
+\begin_inset Quotes eld
+\end_inset 
+
+generalized function
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ Momentarily succombing to this desire, one finds that the  dual vectors
+ may be written as 
+\begin_inset Formula \begin{equation}
+e_{k}^{*}=\frac{(-1)^{k}}{k!}\delta^{(k)}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\delta(x)$
+\end_inset 
+
+ is the Dirac delta function.
+ Thus, one has as the duality relation 
+\begin_inset Formula \begin{equation}
+e_{j}^{*}\left(e_{k}\right)=\int_{0}^{1}x^{k}\;\frac{(-1)^{j}}{j!}\delta^{(j)}(x)\, dx=\int_{0}^{1}\,\delta(x)\,\frac{d^{j}x^{k}}{dx^{j}}\, dx=\delta_{jk}\label{eq:orthogonality}\end{equation}
+
+\end_inset 
+
+ after integration by parts.
+ Generalized functions are less than an ideal mechanism for representing
+ elements of the dual space, but it is a mostly workable and consistent
+ mechanism; its drawbacks in this particular context will be discussed in
+ great detail below.
+ The relation 
+\begin_inset LatexCommand \ref{eq:orthogonality}
+
+\end_inset 
+
+ above demonstrates orthogonality; one may also show completeness: 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}e_{n}\otimes e_{n}^{*}=\sum_{n=0}^{\infty}x^{n}\,\frac{(-1)^{n}}{n!}\delta^{(n)}(x)=\delta(x-y)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The remainder of the text switches to the quantum mechanical bra-ket notation,
+ writing 
+\begin_inset Formula $\left|n\right\rangle =e_{n}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left\langle n\right|=e_{n}^{*}$
+\end_inset 
+
+.
+ The orthogonality condition becomes 
+\begin_inset Formula $\left\langle n\right|\left.m\right\rangle =\delta_{nm}$
+\end_inset 
+
+ while for competeness one writes 
+\begin_inset Formula \[
+\mathbb{I}=\sum_{n=0}^{\infty}e_{n}\otimes e_{n}^{*}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|\]
+
+\end_inset 
+
+ The re-introduction of the coordinate 
+\begin_inset Formula $x$
+\end_inset 
+
+ is done by writing 
+\begin_inset Formula $\left\langle x\right|\left.m\right\rangle =x^{m}$
+\end_inset 
+
+, while for the transpose one writes 
+\begin_inset Formula $\left\langle n\right|\left.x\right\rangle =(-1)^{n}\delta^{(n)}(x)/n!$
+\end_inset 
+
+.
+ The advantage of the bra-ket notation over the use of the 
+\begin_inset Formula $e_{k}$
+\end_inset 
+
+ is that it can be used to make clear when one is discussing the coordinate
+ representation, involving 
+\begin_inset Formula $x$
+\end_inset 
+
+ or 
+\begin_inset Formula $\delta(x)$
+\end_inset 
+
+, and when one is discussing the vector space elements in the abstract,
+ without reference to the coordinate representation.
+ To fully articulate this notation, one may write the Taylor's series as
+ 
+\begin_inset Formula \begin{eqnarray}
+f(x) & = & \left\langle x|f\right\rangle \nonumber \\
+ & = & \sum_{n=0}^{\infty}\left\langle x|n\right\rangle \left\langle n|f\right\rangle \nonumber \\
+ & = & \sum_{n=0}^{\infty}x^{n}\left\langle n|f\right\rangle \nonumber \\
+ & = & \sum_{n=0}^{\infty}x^{n}\int dy\left\langle n|y\right\rangle \left\langle y|f\right\rangle \nonumber \\
+ & = & \sum_{n=0}^{\infty}x^{n}\int dy(-)^{n}\frac{\delta^{(n)}(y)}{n!}f(y)\nonumber \\
+ & = & \sum_{n=0}^{\infty}x^{n}\frac{f^{(n)}(0)}{n!}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+
+\layout Standard
+
+dual 
+\layout Section
+
+The Bernoulli Operator in the Polynomial Basis
 \layout Standard
 
 The operator 
