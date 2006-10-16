@@ -32,7 +32,7 @@ The Bernoulli Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 15 October 2006)
+2 January 2004 (revised 16 October 2006)
 \layout Abstract
 
 This paper reviews a raft of related ideas surrounding the Bernoulli operator.
@@ -1652,7 +1652,7 @@ f(x) & = & \left\langle x|f\right\rangle \nonumber \\
  This will be delved into in the next section.
 \layout Subsection
 
-The Bernoulli operator in diagonal form
+The Bernoulli operator in diagonal form; the Koopman operator
 \layout Standard
 
 From the above manipulations, one may deduce that, in the polynomial representat
@@ -1717,7 +1717,66 @@ m\end{array}\right)(j+m)\, B_{m}\label{eq:}\end{equation}
 
 \end_inset 
 
+
+\layout Standard
+
+None of the eigenvalues 
+\begin_inset Formula $\lambda_{n}$
+\end_inset 
+
+ are zero.
+ In the previous section, it was shown that the kernel of 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ is trivial.
+ Thus, 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ is invertible.
+ This inverse is known as the 
+\emph on 
+Koopman operator
+\emph default 
+, and is denoted by 
+\begin_inset Formula $\mathcal{K}_{B}$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+\mathcal{K}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \frac{1}{\lambda_{n}}\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ By duality and completeness, one has that the Koopman operator is both
+ a left and a right inverse, 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}\mathcal{K}_{B}=\mathcal{K}_{B}\mathcal{L}_{B}=\mathbb{I}_{B}\label{eq:}\end{equation}
+
+\end_inset 
+
+ in the polynomial representation.
+ In this representation, one may honestly write 
+\begin_inset Formula $\mathcal{K}_{B}=\mathcal{L}_{B}^{-1}$
+\end_inset 
+
+.
+ This will not at all be the case when one considers the Bernoulli operator
  
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ acting on other function spaces: it will be seen to have a large and non-trivia
+l kernel, and so it will not be invertible (as 
+\begin_inset Quotes eld
+\end_inset 
+
+half
+\begin_inset Quotes erd
+\end_inset 
+
+ of its eigenvlaues will be seen to be zero).
 \layout Section
 
 Topology, Completeness and Orthogonality
@@ -2300,7 +2359,7 @@ The Koopman operator of the Bernoulli Map has the property of taking a function
  and making two copies of it.
  That is, 
 \begin_inset Formula \begin{eqnarray}
-\left[K_{B}f\right](y) & = & \int_{0}^{1}\delta\left(x-b(y)\right)f(x)\, dx\nonumber \\
+\left[\mathcal{K}_{B}f\right](y) & = & \int_{0}^{1}\delta\left(x-b(y)\right)f(x)\, dx\nonumber \\
  & = & f(b(y))\nonumber \\
  & = & f(2y)\theta(1-2y)+f(2y-1)\theta(2y-1)\label{eq:}\end{eqnarray}
 
@@ -2343,19 +2402,19 @@ f(x)=\sum_{n}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\label{eq:}\end{equation}
 
  then 
 \begin_inset Formula \begin{equation}
-\left[K_{B}f\right](x)=\sum_{n}a_{n}\cos4\pi nx\;+b_{n}\sin4\pi nx\label{eq:}\end{equation}
+\left[\mathcal{K}_{B}f\right](x)=\sum_{n}a_{n}\cos4\pi nx\;+b_{n}\sin4\pi nx\label{eq:}\end{equation}
 
 \end_inset 
 
  or, in Dirac notation, 
-\begin_inset Formula $\left\langle em\left|K_{B}\right|en\right\rangle =\delta_{2m,n}$
+\begin_inset Formula $\left\langle em\left|\mathcal{K}_{B}\right|en\right\rangle =\delta_{2m,n}$
 \end_inset 
 
 .
  This is a very singular operator in this basis.
  Visually, it has the distinctive appearance of 
 \begin_inset Formula \begin{equation}
-K_{B}=\left[\begin{array}{cccccc}
+\mathcal{K}_{B}=\left[\begin{array}{cccccc}
 1 & 0 & 0 & 0 & 0 & ...\\
 0 & 0 & 0 & 0 & ...\\
 0 & 1 & 0 & 0\\
@@ -2367,16 +2426,16 @@ K_{B}=\left[\begin{array}{cccccc}
 
  where every other row consists of zeros.
  In this same basis, 
-\begin_inset Formula $U_{B}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
 is equally remarkable: it is literally the transpose: that is 
-\begin_inset Formula $K_{B}=U_{B}^{T}$
+\begin_inset Formula $\mathcal{K}_{B}=\mathcal{L}_{B}^{T}$
 \end_inset 
 
  in this basis, and so 
 \begin_inset Formula \begin{equation}
-U_{B}=\left[\begin{array}{cccccc}
+\mathcal{L}_{B}=\left[\begin{array}{cccccc}
 1 & 0 & 0 & 0 & 0 & ...\\
 0 & 0 & 1 & 0 & 0\\
 0 & 0 & 0 & 0 & 1\\
@@ -2387,11 +2446,11 @@ U_{B}=\left[\begin{array}{cccccc}
 \end_inset 
 
  In this representation, it is easily seen that 
-\begin_inset Formula $U_{B}K_{B}=1$
+\begin_inset Formula $\mathcal{L}_{B}\mathcal{K}_{B}=1$
 \end_inset 
 
  but 
-\begin_inset Formula $K_{B}U_{B}\neq1$
+\begin_inset Formula $\mathcal{K}_{B}\mathcal{L}_{B}\neq1$
 \end_inset 
 
 , just as in the coordinate-space representation.
@@ -2439,7 +2498,7 @@ U_{B}=\left[\begin{array}{cccccc}
 \end_inset 
 
  Applying the Fourier-representation 
-\begin_inset Formula $U_{B}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  to these to these vector components makes it immediately clear how the
@@ -2455,7 +2514,7 @@ U_{B}=\left[\begin{array}{cccccc}
  
 \layout Section
 
-The Hurwitz Zeta Eigenfunctions
+The Hurwitz zeta eigenfunctions
 \layout Standard
 
 The Fourier representation also makes it clear that any vector with vector
@@ -2464,7 +2523,7 @@ The Fourier representation also makes it clear that any vector with vector
 \end_inset 
 
  will be an eigenvector of 
-\begin_inset Formula $U_{B}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  associated with the eigenvalue 
@@ -2479,7 +2538,7 @@ The Fourier representation also makes it clear that any vector with vector
 \end_inset 
 
  which transform as 
-\begin_inset Formula $U_{B}\beta(x;s)=2^{-s}\beta(x;s)$
+\begin_inset Formula $\mathcal{L}_{B}\beta(x;s)=2^{-s}\beta(x;s)$
 \end_inset 
 
 .
@@ -2510,7 +2569,7 @@ The Fourier representation also makes it clear that any vector with vector
 \end_inset 
 
 .
- Equivalently, the Fourier series for the Bernoulli Polynomials can be written
+ Equivalently, the Fourier series for the Bernoulli polynomials can be written
  as 
 \begin_inset Formula \begin{eqnarray}
 B_{n}(x) & = & -\Gamma(n+1)\sum_{k=1}^{\infty}\frac{\exp(2\pi ikx)+\exp(2\pi ik(1-x))}{\left(2\pi ik\right)^{n}}\label{eq:}\\
@@ -2525,13 +2584,13 @@ See, for example
 
 .
  It turns out that these eigenfunctions are essentially a form of the Hurwitz
- Zeta function 
+ zeta function 
 \begin_inset Formula \begin{equation}
 \zeta(s,x)=\sum_{n=0}^{\infty}\frac{1}{\left(n+x\right)^{s}}\label{eq:}\end{equation}
 
 \end_inset 
 
- and that, in fact, the Hurwitz Zeta itself is an eigenfunction, with eigenvalue
+ and that, in fact, the Hurwitz zeta itself is an eigenfunction, with eigenvalue
  
 \begin_inset Formula $2^{s-1}$
 \end_inset 
@@ -2660,8 +2719,8 @@ formal sum
 
 \end_inset 
 
- thus proving the assertion that the Hurwitz Zeta is an eigenfunction of
- the Bernoulli Operator, with eigenvalue 
+ thus proving the assertion that the Hurwitz zeta is an eigenfunction of
+ the Bernoulli operator, with eigenvalue 
 \begin_inset Formula $2^{s-1}$
 \end_inset 
 
@@ -2676,7 +2735,7 @@ formal sum
 
 \end_inset 
 
- which agrees with standard textbook presentations of the Hurwitz Zeta;
+ which agrees with standard textbook presentations of the Hurwitz zeta;
  see for example 
 \begin_inset LatexCommand \cite[Thm 12.6]{Apo76}
 
@@ -2685,10 +2744,10 @@ formal sum
 .
 \layout Subsection
 
-Visualizing the Hurwitz Zeta Eigenfunctions
+Visualizing the Hurwitz zeta eigenfunctions
 \layout Standard
 
-Perhaps one surprising aspect of this result is that the Hurwitz Zeta eigenfunct
+Perhaps one surprising aspect of this result is that the Hurwitz zeta eigenfunct
 ions appear to be smooth, since one is conditioned to expect that the only
  continuous-spectrum eigenfunctions of a Frobenius-Perron operator are fractal.
  Thus, it is worthwhile to take a few minutes to get acquainted with the
@@ -3140,7 +3199,7 @@ This figure illustrates a family of eigenvectors
 \layout Standard
 
 There are eigenfunctions with eigenvalues greater than one, essentially
- because the Hurwitz Zeta can be analytically continued to everywhere on
+ because the Hurwitz zeta can be analytically continued to everywhere on
  the complex plane except for a simple pole at 
 \begin_inset Formula $z=1$
 \end_inset 
@@ -3156,7 +3215,7 @@ There are eigenfunctions with eigenvalues greater than one, essentially
 \begin_inset Formula $\Re z>0$
 \end_inset 
 
-, the Hurwitz Zeta 
+, the Hurwitz zeta 
 \begin_inset Formula $\zeta(z,x)$
 \end_inset 
 
@@ -3460,7 +3519,7 @@ An alternate set of eigenvectors with a continuous spectrum are given by
 .
  These eigenfunctions are fractal, as can be readily seen from the graph[xxx
  need figure].
- Since they are a generalization of the Takagi-Landsberg Curve, they have
+ Since they are a generalization of the Takagi-Landsberg curve, they have
  an 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
@@ -3524,14 +3583,14 @@ We can express these in terms of the Hurwitz Zeta eigenfunctions by considering
  That is, the Hurwitz zeta eigenfunctions are expressible as a linear combinatio
 n of the fractal eigenfunctions.
  Essentially, either set of eigenfunctions can be used to form a set of
- basis states for the Bernoulli Map transfer operator.
- The Hurwitz Zeta eigenfunctions span a larger space than the fractal eigenfunct
-ions, as the Hurwitz Zeta is well-defined for eigenvalues with 
+ basis states for the Bernoulli map transfer operator.
+ The Hurwitz zeta eigenfunctions span a larger space than the fractal eigenfunct
+ions, as the Hurwitz zeta is well-defined for eigenvalues with 
 \begin_inset Formula $\left|z\right|>1$
 \end_inset 
 
 , whereas the fractal eigenfunctions are not.
- Of course, as we saw above, the Hurwitz Zeta eigenfunctions are not square-inte
+ Of course, as we saw above, the Hurwitz zeta eigenfunctions are not square-inte
 grable when 
 \begin_inset Formula $\left|z\right|>1$
 \end_inset 
@@ -3557,7 +3616,7 @@ physical
 
 .
  This would be in analogy to the exploration of the derivative of the Takagi
- Curve, which, as we saw in an earlier chapter, can be defined as the Cantor
+ curve, which, as we saw in an earlier chapter, can be defined as the Cantor
  polynomial, built out of the digits of the binary expansion of 
 \begin_inset Formula $x$
 \end_inset 
@@ -3665,7 +3724,7 @@ Modular Group Symmetry and the Takagi Representation
 Yet another way to understand the solution of the Bernoulli Map is to note
  that it can be written as 
 \begin_inset Formula \begin{equation}
-\left[U_{B}f\right](x)=\frac{1}{2}\left(f(g_{D}(x))+f(r_{D}g_{D}r_{D}(x)\right)\label{eq: bern modular}\end{equation}
+\left[\mathcal{L}_{B}f\right](x)=\frac{1}{2}\left(f(g_{D}(x))+f(r_{D}g_{D}r_{D}(x)\right)\label{eq: bern modular}\end{equation}
 
 \end_inset 
 
@@ -3677,7 +3736,7 @@ Yet another way to understand the solution of the Bernoulli Map is to note
 \begin_inset Formula $r_{D}(x)=1-x$
 \end_inset 
 
- are the generators of the dyadic representation of the Modular Group 
+ are the generators of the dyadic representation of the Modular group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
 
@@ -3687,10 +3746,10 @@ Yet another way to understand the solution of the Bernoulli Map is to note
 \begin_inset Formula $f(x)$
 \end_inset 
 
- that posses a Modular Group symmetry.
+ that posses a Modular group symmetry.
 \layout Standard
 
-As we saw in a previous chapter, the Takagi Curve fits this bill.
+As we saw in a previous chapter, the Takagi curve fits this bill.
  Start with the triangle wave/tent map: 
 \begin_inset Formula \begin{equation}
 \tau(x)=\left\{ \begin{array}{ccc}
@@ -3706,20 +3765,20 @@ As we saw in a previous chapter, the Takagi Curve fits this bill.
 .
  The iterated tent map behaves sort-of like a shift state, in that 
 \begin_inset Formula \begin{equation}
-\left[U_{B}\tau^{k}\right](x)=\tau^{k-1}(x)\label{eq:}\end{equation}
+\left[\mathcal{L}_{B}\tau^{k}\right](x)=\tau^{k-1}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
  although it does not terminate properly for a shift state: 
 \begin_inset Formula \begin{equation}
-\left[U_{B}\tau\right](x)=\frac{1}{2}\label{eq:}\end{equation}
+\left[\mathcal{L}_{B}\tau\right](x)=\frac{1}{2}\label{eq:}\end{equation}
 
 \end_inset 
 
  (a true shift state would vanish on the final iteration).
  Thus we see that the Takagi curve transforms as 
 \begin_inset Formula \begin{equation}
-\left[U_{B}t_{w}\right](x)=\frac{1}{2}+wt_{w}(x)\label{eq:}\end{equation}
+\left[\mathcal{L}_{B}t_{w}\right](x)=\frac{1}{2}+wt_{w}(x)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -3731,7 +3790,7 @@ b_{w}(x)=\frac{-1}{2(1-w)}+t_{w}(x)\label{eq:}\end{equation}
 \end_inset 
 
  so that 
-\begin_inset Formula $U_{B}b_{w}=wb_{w}$
+\begin_inset Formula $\mathcal{L}_{B}b_{w}=wb_{w}$
 \end_inset 
 
 .
@@ -3828,7 +3887,7 @@ We can also obtain other eigenvectors by starting with the Takagi curves
 \end_inset 
 
 -dimensional representation, then 
-\begin_inset Formula $U_{B}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  is represented by 
@@ -3903,18 +3962,23 @@ Note this is a ladder of isomorphisms between the different dimensional
 The Topological Zeta
 \layout Standard
 
+XXX ToDo: explain topo zeta gets this has this name, and why this concept
+ is important.
+ XXX
+\layout Standard
+
 The topological zeta of the Bernoulli operator can be computed very easily
  in the polynomial basis because we know the eigenvalues and these form
  a simple series.
  We'll define the Bernoulli topological zeta as
 \begin_inset Formula \begin{equation}
-\zeta_{B}(t)\equiv\frac{1}{\det\left[\mathbb{I}-tU_{B}\right]}\label{eq:}\end{equation}
+\zeta_{B}(t)\equiv\frac{1}{\det\left[\mathbb{I}-t\mathcal{L}_{B}\right]}\label{eq:}\end{equation}
 
 \end_inset 
 
  We start by noting its inverse: 
 \begin_inset Formula \begin{eqnarray}
-\det\left[\mathbb{I}-tU_{B}\right] & = & \prod_{n=0}^{\infty}\left(1-t\;2^{-n}\right)\nonumber \\
+\det\left[\mathbb{I}-t\mathcal{L}_{B}\right] & = & \prod_{n=0}^{\infty}\left(1-t\;2^{-n}\right)\nonumber \\
  & = & 1-t\sum_{j=0}^{\infty}2^{-j}+t^{2}\sum_{j=0}^{\infty}2^{-j}\sum_{\begin{array}{c}
 k=0\\
 k\neq j\end{array}}^{\infty}2^{-k}-t^{3}...\nonumber \\
@@ -3935,7 +3999,7 @@ g to know what the generating function for this series is.
 \end_inset 
 
  Thus we have 
-\begin_inset Formula $\textrm{Tr}U_{B}^{k}=2^{k}/(2^{k}-1)$
+\begin_inset Formula $\textrm{Tr}\mathcal{L}_{B}^{k}=2^{k}/(2^{k}-1)$
 \end_inset 
 
 .
