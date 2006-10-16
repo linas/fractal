@@ -870,10 +870,10 @@ This is perhaps a critical point, and deserves being belaboured.
  When the exceptions to this rule crop up, they will be discussed explicitly.
 \layout Standard
 
-XXX the above is false, as there are plenty of places where it is assumed
- that an infinite number of elts are non-zero.
- Again, need to work algebraic vs.
- topological discussion.
+XXX the above is false, as there are plenty of places below where it is
+ assumed that an infinite number of elts are non-zero.
+ Again, need to refine the algebraic vs.
+ topological discussion to handle these subtlties XXX.
 \layout Standard
 
 Consider an infinite-dimensional vector space 
@@ -1568,7 +1568,7 @@ Curiously, this identity operator
 \begin_inset Formula \begin{eqnarray}
 f(x) & = & \left\langle x|f\right\rangle \nonumber \\
  & = & \sum_{m=0}^{\infty}B_{m}(x)\left\langle \left.\tilde{B}_{m}\right|f\right\rangle \label{eq:B-maclaurin}\\
- & = & \int_{0}^{1}f(y)\, dy+\sum_{m=0}^{\infty}\frac{B_{m}(x)}{m!}\left[f^{(m-1)}(1)-f^{(m-1)}(0)\right]\nonumber\end{eqnarray}
+ & = & \int_{0}^{1}f(y)\, dy+\sum_{m=0}^{\infty}\frac{B_{m}(x)}{m!}\left[f^{(m-1)}(1)-f^{(m-1)}(0)\right]\nonumber \end{eqnarray}
 
 \end_inset 
 
@@ -1718,37 +1718,115 @@ m\end{array}\right)(j+m)\, B_{m}\label{eq:}\end{equation}
  
 \layout Section
 
-Completeness and Orthogonality
+Topology, Completeness and Orthogonality
 \layout Standard
 
-The notions of completeness and orthogonality are somewhat cavalierly treated
- above.
- We attempt to remedy this here.
- The operator 
-\begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
-\end_inset 
+The notions of completeness and orthogonality are treated above without
+ any appeal to topology.
+ That is, they are handled with what is essentially an algebraic approach,
+ where all sums are essentially finite and well defined because all sums
+ involve only a finite number of non-zero terms.
+ This was possible in part by construction, and in part by luck: the Bernoulli
+ operator was a solvable, upper-triangular matrix in the infinite vector
+ space whose basis elements are the monomials.
+ A sum over monomials, where only a finite number of terms are non-zero,
+ is a polynomial.
+ To go beyond this, to get to more general functions, such as, for example,
+ a sum over monomials with an infinite number of non-zero elements, requires
+ the introduction of a topology on the infinite vector space, so that limits
+ of Cauchy sequences can be defined and discussed.
+ There are several ways to provide a topology; the straightforward way is
+ to provide the space with a metric topology.
+ A metric topology endows the infinite vector space with a norm, so that
+ the length of a vector can be given, and the distance between vectors defined
+ as the length of the vector difference.
+\layout Standard
 
-, although appearing to embody a certain notion of 
+WIth this in mind, the question then turns to 
 \begin_inset Quotes eld
 \end_inset 
 
-completeness
+what are the interesting topologies?
 \begin_inset Quotes erd
 \end_inset 
 
-, is in fact a projection operator when considered on a larger set of states.
- In fact, it has a large kernel, consisting of all functions for which 
-\begin_inset Formula $f(x)=-f(x+1/2)$
+.
+ Before this question is asked in earnest, it is worth illustrating why,
+ exactly, it is an important question, and why the role of topologies needs
+ to be addressed.
+ Some of the difficulties of sticking to a purely algebraic approach are
+ illustrated in this section.
+ 
+\layout Standard
+
+The operator 
+\begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
+\end_inset 
+
+ was shown to be complete on the space of polynomials.
+ By this, it is meant that there is no polynomial that lies in the kernel
+ of 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+, other than the trivial polynomial 
+\begin_inset Formula $p(x)=0$
 \end_inset 
 
 .
- all functions can be written as 
-\begin_inset Formula \begin{equation}
-f(x)=\sum_{k=1}^{\infty}a_{k}\sin(2\pi kx)\label{eq:}\end{equation}
+ Equivalently, there does not exist any polynomial for which the identity
+ 
+\begin_inset Formula $p(x)=-p(x+1/2)$
+\end_inset 
+
+ holds: more broadly, there is no such thing as a periodic polynomial.
+ A function which obeys 
+\begin_inset Formula $f(x)=-f(x+1/2)$
+\end_inset 
+
+ is of necessity periodic, of which 
+\begin_inset Formula $f(x)=\sin(2\pi kx)$
+\end_inset 
+
+ for integer 
+\begin_inset Formula $k$
+\end_inset 
+
+ is a canonical example.
+ Such sine waves are all in the kernel of the Bernoulli operator.
+ This may be seen very easily simply by direct substituion into equation
+ 
+\begin_inset LatexCommand \ref{eq:Bernoulli operator}
 
 \end_inset 
 
- This is easily seen by noting that 
+, which promptly yeilds 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}\sin2\pi kx=\frac{1}{2}\left[\sin\pi kx+\sin\pi k(x+1)\right]=0\label{eq:}\end{equation}
+
+\end_inset 
+
+ However, the sine function is the limit of a polynomial sequence, as every
+ student learns, and so it seems odd or somehow contradictory that 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ had only a trivial kernel on the space of polynomials.
+ However, in order to define 
+\begin_inset Formula $\sin2\pi kx$
+\end_inset 
+
+ as the limit of a sequence of polynomials, one must define the manner in
+ which a polynomial sequence can converge to a function, and, for that,
+ one must have a topology.
+\layout Standard
+
+Can this conundrum be escaped without appealing to topology? A more complex
+ proof that 
+\begin_inset Formula $\sin2\pi kx$
+\end_inset 
+
+ lies in the kernel may be given as 
 \layout Standard
 
 
@@ -1758,15 +1836,23 @@ f(x)=\sum_{k=1}^{\infty}a_{k}\sin(2\pi kx)\label{eq:}\end{equation}
 
 \end_inset 
 
- where we've written 
+ where 
 \begin_inset Formula $\tilde{B}_{n}(x)$
 \end_inset 
 
- for 
-\begin_inset Formula $\left\langle \tilde{B}_{n}|x\right\rangle $
+ was written for 
+\begin_inset Formula $\left\langle \left.\tilde{B}_{n}\right|x\right\rangle $
 \end_inset 
 
 .
+ 
+\layout Standard
+
+Thus, 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ seems to be somehow incomplete when considering sine functions.
  Perhaps this lack of completeness is due to the form of the left eigenstates
  given in equation 
 \begin_inset LatexCommand \ref{eq:left bernoulli}
@@ -1774,8 +1860,8 @@ f(x)=\sum_{k=1}^{\infty}a_{k}\sin(2\pi kx)\label{eq:}\end{equation}
 \end_inset 
 
 .
- So we make a guess that perhaps a more truly complete set of states can
- be found by considering 
+ One might make a guess that perhaps a more truly complete set of states
+ can be found by considering 
 \begin_inset Formula \begin{equation}
 \tilde{S}_{n}(x)=\frac{(-)^{n+1}}{n!}\left[\delta^{(n-1)}(1-x)+\delta^{(n-1)}(x)\right]\label{eq:}\end{equation}
 
@@ -1831,8 +1917,8 @@ G_{E}(x,t)=\frac{2e^{xt}}{1+e^{t}}=\sum_{n=0}^{\infty}E_{n}(x)\frac{t^{n}}{n!}\l
 
 \end_inset 
 
- Then, equating the two sides, one has demonstrated orthogonality of the
- dual states: 
+ Then, equating the two sides, one has demonstrated duality of these states:
+ 
 \begin_inset Formula \begin{equation}
 \int_{0}^{1}\tilde{S}_{n}(x)\, E_{k}(x)\, dx=\frac{2\delta_{k,n-1}}{n}\label{eq:}\end{equation}
 
@@ -1841,8 +1927,8 @@ G_{E}(x,t)=\frac{2e^{xt}}{1+e^{t}}=\sum_{n=0}^{\infty}E_{n}(x)\frac{t^{n}}{n!}\l
  which completes the proof.
 \layout Standard
 
-From this orthogonality relationship follows a certain restricted completeness
- statement in coordinate space.
+As with the Bernoulli polynomials, one can, to a limit extent, make a resetricte
+d completeness statement in coordinate space.
  That is, if one decomposes a function 
 \begin_inset Formula $f(y)=\sum_{k=1}^{\infty}a_{k}S_{k}(y)$
 \end_inset 
@@ -1853,19 +1939,20 @@ From this orthogonality relationship follows a certain restricted completeness
 
 \end_inset 
 
- from which one wants to conclude, incorrectly, that 
+ from which one wants to conclude, once again incorrectly, or at least misleadin
+gly, that 
 \begin_inset Formula \begin{equation}
 \sum_{n=1}^{\infty}S_{n}(x)\tilde{S}_{n}(y)=\delta(x-y)\label{eq:}\end{equation}
 
 \end_inset 
 
- using the same faulty logic as in equation 
+ by repeating the same concerns and issues that lead to equation 
 \begin_inset LatexCommand \ref{eq: Bernoulli-faulty}
 
 \end_inset 
 
 .
- The fault is the assumption that 
+ The fault is the assumption that arbitrary, non-polynomial 
 \begin_inset Formula $f(y)$
 \end_inset 
 
@@ -1874,18 +1961,27 @@ From this orthogonality relationship follows a certain restricted completeness
 \begin_inset Formula $\mathbb{I}_{S}=\sum_{n=0}^{\infty}\left|S_{n}\right\rangle \left\langle \tilde{S}_{n}\right|$
 \end_inset 
 
- has a large kernel: this time, all functions that are even about 
-\begin_inset Formula $x=1/2$
+ has a large kernel: this time, all functions that are evenly periodic are
+ in the kernel.
+ That is, any function for which one has 
+\begin_inset Formula $f(y)=f(y+1/2)$
 \end_inset 
 
- are in the kernel.
- One might hope that one can remedy the above situation by taking the sum
+ lies in the kernel of 
+\begin_inset Formula $\mathbb{I}_{S}$
+\end_inset 
+
+.
+\layout Standard
+
+One might hope that one can remedy the above situation by taking the sum
  
 \begin_inset Formula $\mathbb{I}_{C}=\mathbb{I}_{B}+\mathbb{I}_{S}$
 \end_inset 
 
- with one operator projecting out the even functions, and the other the
- odd functions, but, between the two of them, making a whole.
+ with one operator projecting out the even periodic functions, and the other
+ the odd periodic functions, and that somehow, between the two of them,
+ making a whole.
  However, one immediately runs into a problem with the basis functions.
  The 
 \begin_inset Formula $\tilde{S}_{n}(x)$
@@ -1922,79 +2018,171 @@ Integrating, one gets
 \end_inset 
 
 .
-\layout Subsection
-
-Basis Confusion Redux
+ 
 \layout Standard
 
-The nature and meaning of 
-\begin_inset Quotes eld
+More generally, any such attempt to patch up the situation is doomed to
+ fail.
+ This is a well-known theorem of functional analysis, which states that
+ the space 
+\begin_inset Formula $\mathbb{R}^{\omega}$
 \end_inset 
 
-vector space basis
-\begin_inset Quotes erd
+does not have a countable algebraic basis.
+ That is, while one may be able to write down a countable number of linearly
+ independent vectors 
+\begin_inset Formula $e_{k}$
 \end_inset 
 
- is perhaps a bit confusing in Hilbert Space.
- It is hard to discuss the notion of what an operator 
-\begin_inset Quotes eld
+ with 
+\begin_inset Formula $k\in\mathbb{N}_{0}$
 \end_inset 
 
-is
-\begin_inset Quotes erd
+, the linear combinations 
+\begin_inset Formula $\sum_{k}a_{k}e_{k}$
 \end_inset 
 
- without also discussing the basis at the same time.
- Removing this confusion takes mathematical techniques beyond the scope
- of this paper.
- In this section, we'll merely review some of the sources of confusion,
- and some of the notational devices that help minimize it.
- One begins by asking, 
-\begin_inset Quotes eld
+ with only a finite number of 
+\begin_inset Formula $a_{k}\in\mathbb{R}$
 \end_inset 
 
-what is the operator 
-\begin_inset Formula $U_{B}$
+ being non-zero fail to span all of 
+\begin_inset Formula $\mathbb{R}^{\omega}$
 \end_inset 
 
-, really
-\begin_inset Quotes erd
+.
+ In particular, the vector 
+\begin_inset Formula $v=\sum_{k}e_{k}$
 \end_inset 
 
-? It was seen above that the monomials form a complete set of basis states
- that can be used to represent analytic functions.
+ cannot be expressed as the sum over only a finite number of 
+\begin_inset Formula $e_{k}$
+\end_inset 
+
+.
+ XXX Does this theorem have a name? Need to reference a ref for this.
+ XXXX 
+\layout Subsection
+
+Hermiticity and Orthogonality: Here be Dragons
+\layout Standard
+
+There are other conceptual difficulties tied to infinite vector spaces when
+ these spaces are not given certain additional structure.
+ This section reviews the difficulty of defining the idea of a Hermition
+ operator and an orthogonal transformation on unadorned infinite vector
+ spaces, a difficulty that goes away when the space is a Hilbert space.
+ When an infinite-dimensional vector space is endowed with an inner product,
+ making it into a Hilbert space, then one may define the idea of a Hermition
+ operator 
+\begin_inset Formula $H$
+\end_inset 
+
+ as an operator that is equal to its (complex-conjugate) transpose: 
+\begin_inset Formula $H=H^{\dagger}$
+\end_inset 
+
+.
+ For Hermitian operators, there always exists a basis in which 
+\begin_inset Formula $H$
+\end_inset 
+
+ is diagonal, and all of the diagonal matrix elements are real.
+ All Hermitian operators may be brought to the diagonal form by applying
+ an orthogonal transformation 
+\begin_inset Formula $O$
+\end_inset 
+
+, where an operator 
+\begin_inset Formula $O$
+\end_inset 
+
+ is orthogonal when its inverse is equal to its transpose: 
+\begin_inset Formula $O^{-1}=O^{T}$
+\end_inset 
+
+, or equivalently, when 
+\begin_inset Formula $O^{T}O=OO^{T}=1$
+\end_inset 
+
+.
+ These concepts of Hermitian operators and orthogonal operators are violated
+ in the infinite vector space of polynomials, as demonstrated in this section.
+ 
+\layout Standard
+
+It was seen above that the monomials form a complete set of basis states
+ that can be used to represent polynomials.
  The operator 
 \begin_inset Formula $\mathbb{I}_{M}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
 \end_inset 
 
- can be called the identity operator over the space of real analytic functions;
- it has no kernel in that space.
+ can be called the identity operator over the space of polynomials; it has
+ no kernel in that space.
  Here, the subscript 
 \begin_inset Formula $M$
 \end_inset 
 
  is used to remind us that the identity operator is built from the monomial
  states.
- Thus, one may write 
-\begin_inset Formula $U_{B}=\mathbb{I}_{M}U_{B}\mathbb{I}_{M}$
+ Thus, for the Bernoulli operator 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+, one may confidently write 
+\begin_inset Formula $\mathcal{L}_{B}=\mathbb{I}_{M}\mathcal{L}_{B}\mathbb{I}_{M}$
 \end_inset 
 
  which expands to 
 \begin_inset Formula \begin{equation}
-U_{B}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|m\right\rangle \left\langle m\left|U_{B}\right|n\right\rangle \left\langle n\right|\label{eq:}\end{equation}
+\mathcal{L}_{B}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|m\right\rangle \left\langle m\left|\mathcal{L}_{B}\right|n\right\rangle \left\langle n\right|\label{eq:}\end{equation}
 
 \end_inset 
 
  As seen above, the matrix elements 
-\begin_inset Formula $U_{mn}\equiv\left\langle m\left|U\right|n\right\rangle $
+\begin_inset Formula $U_{mn}\equiv\left\langle m\left|\mathcal{L}_{B}\right|n\right\rangle $
 \end_inset 
 
  are upper-triangular, and so one wants to say that the operator 
-\begin_inset Formula $U_{B}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  is clearly not Hermitian.
- And yet, one may use the same trick to write 
+ That is, the matrix elements 
+\begin_inset Formula $H_{mn}$
+\end_inset 
+
+ of Hermitian operators 
+\begin_inset Formula $H$
+\end_inset 
+
+ are expected to obey the identity 
+\begin_inset Formula $H_{mn}=H_{nm}^{*}$
+\end_inset 
+
+ where the superscript 
+\begin_inset Formula $*$
+\end_inset 
+
+ denotes complex conjugation.
+ Here, the matrix elements 
+\begin_inset Formula $U_{mn}$
+\end_inset 
+
+are real, but clearly one has 
+\begin_inset Formula $U_{mn}\ne U_{nm}$
+\end_inset 
+
+.
+ Thus, in this basis it seems that 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ cannot be Hermitian.
+ 
+\layout Standard
+
+And yet, one may use the same trick to write 
 \begin_inset Formula $U_{B}=\mathbb{I}_{B}U_{B}\mathbb{I}_{B}$
 \end_inset 
 
@@ -2104,19 +2292,7 @@ B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n\left|B_{k}\right.\rig
 \layout Standard
 
 XXX I'm still troubled by this.
- Its not completely clear that the space spanned by the monomial basis is
- really identical to the space spanned by the Bernoulli polynomial basis.
- There is some conceptual monkey business that is not adequately explained
- here.
- Either set of basis functions seems to be in a certain sense 
-\begin_inset Quotes eld
-\end_inset 
-
-complete
-\begin_inset Quotes erd
-\end_inset 
-
-, but we haven't truly proven the following: Thm: Consider a larger space
+ Also, we haven't truly proven the following: Thm: Consider a larger space
  of functions, for example, the space of square integrable functions.
  Then consider 
 \begin_inset Formula $\mathbb{I}_{M}$
