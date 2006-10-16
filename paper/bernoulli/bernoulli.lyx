@@ -1275,16 +1275,16 @@ The
 
 This may be verified in the monomial basis through brute-force mupltiplication
  of the vector into the matrix: 
-\begin_inset Formula \begin{eqnarray}
+\begin_inset Formula \begin{eqnarray*}
 \sum_{k=0}^{\infty}\left\langle m\right|U\left|k\right\rangle \left\langle k\left|B_{n}\right.\right\rangle  & = & \sum_{k=m}^{n}\left[\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
 k\\
 m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\right]\left(\begin{array}{c}
 n\\
-k\end{array}\right)B_{n-k}\nonumber \\
+k\end{array}\right)B_{n-k}\\
  & = & \frac{1}{2^{m}}\left(\begin{array}{c}
 n\\
 m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\\
- & = & \frac{1}{2^{n}}\left\langle m\left|B_{n}\right.\right\rangle \end{eqnarray}
+ & = & \frac{1}{2^{n}}\left\langle m\left|B_{n}\right.\right\rangle \end{eqnarray*}
 
 \end_inset 
 
@@ -1510,12 +1510,12 @@ j\end{array}\right)B_{j}=0\]
 This proof of duality may also be conducted in coordinate space, where it
  takes the form 
 \begin_inset Formula \begin{eqnarray}
-\left\langle \left.\tilde{B}_{n}\right|B_{m}\right\rangle  & = & \int_{0}^{1}\left\langle \left.\tilde{B}_{n}\right|x\right\rangle \left\langle x\left|B_{m}\right.\right\rangle \, dx\label{eq:}\\
- & = & \int_{0}^{1}\frac{(-1)^{n+1}}{n!}\left[\delta^{(n-1)}(1-x)-\delta^{(n-1)}(x)\right]B_{m}(x)\, dx\\
+\left\langle \left.\tilde{B}_{n}\right|B_{m}\right\rangle  & = & \int_{0}^{1}\left\langle \left.\tilde{B}_{n}\right|x\right\rangle \left\langle x\left|B_{m}\right.\right\rangle \, dx\nonumber \\
+ & = & \int_{0}^{1}\frac{(-1)^{n+1}}{n!}\left[\delta^{(n-1)}(1-x)-\delta^{(n-1)}(x)\right]B_{m}(x)\, dx\nonumber \\
  & = & \begin{cases}
 0 & \mbox{ for }m<n-1\\
-\frac{m!}{n!(m-n+1)!}\left[B_{m-n+1}(1)-B_{m-n+1}(0)\right] & \mbox{ for }m\ge n-1\end{cases}\\
- & = & \delta_{mn}\end{eqnarray}
+\frac{m!}{n!(m-n+1)!}\left[B_{m-n+1}(1)-B_{m-n+1}(0)\right] & \mbox{ for }m\ge n-1\end{cases}\nonumber \\
+ & = & \delta_{mn}\label{eq:}\end{eqnarray}
 
 \end_inset 
 
@@ -1568,7 +1568,7 @@ Curiously, this identity operator
 \begin_inset Formula \begin{eqnarray}
 f(x) & = & \left\langle x|f\right\rangle \nonumber \\
  & = & \sum_{m=0}^{\infty}B_{m}(x)\left\langle \left.\tilde{B}_{m}\right|f\right\rangle \label{eq:B-maclaurin}\\
- & = & \int_{0}^{1}f(y)\, dy+\sum_{m=0}^{\infty}\frac{B_{m}(x)}{m!}\left[f^{(m-1)}(1)-f^{(m-1)}(0)\right]\end{eqnarray}
+ & = & \int_{0}^{1}f(y)\, dy+\sum_{m=0}^{\infty}\frac{B_{m}(x)}{m!}\left[f^{(m-1)}(1)-f^{(m-1)}(0)\right]\nonumber\end{eqnarray}
 
 \end_inset 
 
@@ -1737,11 +1737,12 @@ completeness
 \end_inset 
 
 , is in fact a projection operator when considered on a larger set of states.
- In fact, it has a large kernel, consisting of all functions odd about 
-\begin_inset Formula $x=1/2$
+ In fact, it has a large kernel, consisting of all functions for which 
+\begin_inset Formula $f(x)=-f(x+1/2)$
 \end_inset 
 
-, that is, all functions can be written as 
+.
+ all functions can be written as 
 \begin_inset Formula \begin{equation}
 f(x)=\sum_{k=1}^{\infty}a_{k}\sin(2\pi kx)\label{eq:}\end{equation}
 
