@@ -32,7 +32,7 @@ The Bernoulli Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 16 October 2006)
+2 January 2004 (revised 15 October 2006)
 \layout Abstract
 
 This paper reviews a raft of related ideas surrounding the Bernoulli operator.
@@ -1846,15 +1846,12 @@ The operator
 \end_inset 
 
  is of necessity periodic, of which 
-\begin_inset Formula $f(x)=\sin(2\pi kx)$
-\end_inset 
-
- for integer 
-\begin_inset Formula $k$
+\begin_inset Formula $f(x)=\sin(2\pi x)$
 \end_inset 
 
  is a canonical example.
- Such sine waves are all in the kernel of the Bernoulli operator.
+ More generally, sine and cosine waves which have an odd number of periods
+ in the unit interval are all in the kernel of the Bernoulli operator.
  This may be seen very easily simply by direct substitution into equation
  
 \begin_inset LatexCommand \ref{eq:Bernoulli operator}
@@ -1863,18 +1860,23 @@ The operator
 
 , which promptly yields 
 \begin_inset Formula \begin{equation}
-\mathcal{L}_{B}\sin2\pi kx=\frac{1}{2}\left[\sin\pi kx+\sin\pi k(x+1)\right]=0\label{eq:}\end{equation}
+\mathcal{L}_{B}\sin2\pi(2k+1)x=\frac{1}{2}\left[\sin\pi(2k+1)x+\sin\pi(2k+1)(x+1)\right]=0\label{eq:}\end{equation}
 
 \end_inset 
 
+ for integers 
+\begin_inset Formula $k$
+\end_inset 
+
+; likewise for the cosine.
  However, the sine function is the limit of a polynomial sequence, as every
- student learns, and so it seems odd or somehow contradictory that 
+ student learns, and so it seems strange or somehow contradictory that 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  had only a trivial kernel on the space of polynomials.
  However, in order to define 
-\begin_inset Formula $\sin2\pi kx$
+\begin_inset Formula $\sin2\pi x$
 \end_inset 
 
  as the limit of a sequence of polynomials, one must define the manner in
@@ -1884,7 +1886,7 @@ The operator
 
 Can this conundrum be escaped without appealing to topology? A more complex
  proof that 
-\begin_inset Formula $\sin2\pi kx$
+\begin_inset Formula $\sin2\pi(2k+1)x$
 \end_inset 
 
  lies in the kernel may be given as 
@@ -1892,7 +1894,7 @@ Can this conundrum be escaped without appealing to topology? A more complex
 
 
 \begin_inset Formula \begin{eqnarray}
-\int_{0}^{1}dx\,\tilde{B}_{n}(x)\,\sin(2\pi kx) & = & \frac{1}{n!}\left[\left.\frac{d^{n-1}\sin2\pi kx}{dx^{n-1}}\right|_{x=1}-\left.\frac{d^{n-1}\sin2\pi kx}{dx^{n-1}}\right|_{x=0}\right]\label{eq:}\\
+\int_{0}^{1}dx\,\tilde{B}_{n}(x)\,\sin(2\pi x) & = & \frac{1}{n!}\left[\left.\frac{d^{n-1}\sin2\pi x}{dx^{n-1}}\right|_{x=1}-\left.\frac{d^{n-1}\sin2\pi x}{dx^{n-1}}\right|_{x=0}\right]\label{eq:}\\
  & = & 0\nonumber \end{eqnarray}
 
 \end_inset 
@@ -3455,7 +3457,7 @@ The Kernel
 \layout Standard
 
 What is the kernel of 
-\begin_inset Formula $U_{B}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
 ? It is the set of functions that have only odd Fourier terms.
@@ -3467,15 +3469,15 @@ That is, for any integer
 \end_inset 
 
  we have 
-\begin_inset Formula $U_{B}\cos2\pi(2k+1)x=0$
+\begin_inset Formula $\mathcal{L}_{B}\cos2\pi(2k+1)x=0$
 \end_inset 
 
  and so we write 
-\begin_inset Formula $\cos2\pi(2k+1)x\in K\left[U_{B}\right]$
+\begin_inset Formula $\cos2\pi(2k+1)x\in K\left[\mathcal{L}_{B}\right]$
 \end_inset 
 
  and likewise 
-\begin_inset Formula $\sin2\pi(2k+1)x\in K\left[U_{B}\right]$
+\begin_inset Formula $\sin2\pi(2k+1)x\in K\left[\mathcal{L}_{B}\right]$
 \end_inset 
 
 .
@@ -3707,7 +3709,7 @@ g\phi_{zk}(x)=\phi_{zk}\left(\frac{x}{2}\right)=\exp((2k+1)\pi ix)+z\phi_{zk}(x)
 
 
 \begin_inset Formula \begin{equation}
-g\beta(x;s)=\beta(\frac{x}{2};s)=\frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\infty}\frac{\exp2\pi ix(2k+1)}{(2k+1)^{s}}+2^{-s}\beta(x;s)\label{eq:}\end{equation}
+g\beta(x;s)=\beta\left(\frac{x}{2};s\right)=\frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\infty}\frac{\exp2\pi ix(2k+1)}{(2k+1)^{s}}+2^{-s}\beta(x;s)\label{eq:}\end{equation}
 
 \end_inset 
 
