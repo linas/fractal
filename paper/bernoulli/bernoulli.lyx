@@ -1239,7 +1239,7 @@ k\end{array}\right)\left(1-\Theta_{n,k}\right)B_{n-k}=\left\{ \begin{array}{ccc}
 \left(\begin{array}{c}
 n\\
 k\end{array}\right)B_{n-k} & \;\textrm{ for }\; & k\leq n\\
-0 & \;\textrm{ for }\; & k>n\end{array}\right.\label{eq:}\end{equation}
+0 & \;\textrm{ for }\; & k>n\end{array}\right.\label{eq:B-right matrix elts}\end{equation}
 
 \end_inset 
 
@@ -1332,7 +1332,7 @@ This matrix expression for
 \begin_inset Formula \begin{equation}
 \left\langle \left.\tilde{B}_{n}\right|k\right\rangle =\left(\begin{array}{c}
 k\\
-n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:}\end{equation}
+n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:B-left matrix elts}\end{equation}
 
 \end_inset 
 
@@ -2182,19 +2182,30 @@ are real, but clearly one has
  
 \layout Standard
 
-And yet, one may use the same trick to write 
-\begin_inset Formula $U_{B}=\mathbb{I}_{B}U_{B}\mathbb{I}_{B}$
+In previous sections, it was shown that the operator 
+\begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
 \end_inset 
 
- to get matrix elements that are clearly non-zero only on the diagonal:
- 
+ is also the identity operator on the space of polynomials.
+ Using the same trick to write 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}=\mathbb{I}_{B}\mathcal{L}_{B}\mathbb{I}_{B}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|B_{m}\right\rangle \left\langle \tilde{B}_{m}\left|\mathcal{L}_{B}\right|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ one finds that 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+ is an operator which has matrix elements that are non-zero only on the
+ diagonal: 
 \begin_inset Formula $\left\langle B_{m}\left|U_{B}\right|\tilde{B}_{n}\right\rangle =\delta_{mn}\lambda_{n}$
 \end_inset 
 
 .
- Matrixes that are diagonal and have only real entries on the diagonal are
- clearly Hermitian, so this implies that 
-\begin_inset Formula $U_{B}$
+ Matricies that are diagonal and have only real entries on the diagonal
+ are clearly Hermitian, so this implies that 
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
  is Hermitian.
@@ -2214,15 +2225,16 @@ invisible
 \end_inset 
 
  are written.
- Much of the confusion is due to the fact that in a Hilbert space, the concept
- of orthonormality violates the notions one gets from working with finite-dimens
-ional basis.
- Lets show this change of basis explicitly.
- We write 
+ 
+\layout Standard
+
+Consider now the change of basis from the monomial basis to the Bernoulli
+ basis.
+ Explicitly, this change of basis is 
 \begin_inset Formula \begin{eqnarray}
-U_{diagonal} & = & \sum_{j,k=0}^{\infty}\left|B_{j}\right\rangle \delta_{jk}\lambda_{k}\left\langle \tilde{B}_{k}\right|\nonumber \\
- & = & \sum_{j,k,m,n=0}^{\infty}\left|B_{j}\right\rangle \left\langle \left.\tilde{B}_{j}\right|m\right\rangle \left\langle m\left|U_{monomial}\right|n\right\rangle \left\langle n\left|B_{k}\right.\right\rangle \left\langle \tilde{B}_{k}\right|\nonumber \\
- & = & \tilde{B}\, U_{monomial}\, B\label{eq:}\end{eqnarray}
+\mathcal{L}_{diagonal} & = & \sum_{j,k=0}^{\infty}\left|B_{j}\right\rangle \delta_{jk}\lambda_{k}\left\langle \tilde{B}_{k}\right|\nonumber \\
+ & = & \sum_{j,k,m,n=0}^{\infty}\left|B_{j}\right\rangle \left\langle \left.\tilde{B}_{j}\right|m\right\rangle \left\langle m\left|\mathcal{L}_{monomial}\right|n\right\rangle \left\langle n\left|B_{k}\right.\right\rangle \left\langle \tilde{B}_{k}\right|\nonumber \\
+ & = & \tilde{B}\,\mathcal{L}_{monomial}\, B\label{eq:}\end{eqnarray}
 
 \end_inset 
 
@@ -2263,18 +2275,51 @@ B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n\left|B_{k}\right.\rig
 \end_inset 
 
 .
+ Since both 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{I}_{M}$
+\end_inset 
+
+ are both identity operators, one wishes to deduce that 
+\begin_inset Formula $B$
+\end_inset 
+
+ must surely be an orthogonal operator.
  However, 
 \begin_inset Formula $B$
 \end_inset 
 
- is not orthogonal in the traditional sense: we had demonstrated the matrix
- elements up above, and one clearly has 
-\begin_inset Formula $\left\langle n|B_{k}\right\rangle \neq\left\langle \tilde{B}_{n}|k\right\rangle $
+ cannot be orthogonal in the traditional sense: The matrix elements of 
+\begin_inset Formula $B$
+\end_inset 
+
+ are given explicitly in equations 
+\begin_inset LatexCommand \ref{eq:B-right matrix elts}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq:B-left matrix elts}
+
+\end_inset 
+
+ above.
+ Comparing these two expressions, one clearly has 
+\begin_inset Formula $\left\langle n\left|B_{k}\right.\right\rangle \neq\left\langle \left.\tilde{B}_{n}\right|k\right\rangle $
 \end_inset 
 
 .
- What makes this seem so strange is that both the monomial basis states
- 
+ By contrast, an orthogonal operator 
+\begin_inset Formula $O$
+\end_inset 
+
+ on a Hilbert space 
+\layout Standard
+
+What makes this seem so strange is that both the monomial basis states 
 \begin_inset Formula $\left|n\right\rangle $
 \end_inset 
 
