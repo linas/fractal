@@ -32,7 +32,7 @@ The Bernoulli Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 15 October 2006)
+2 January 2004 (revised 16 October 2006)
 \layout Abstract
 
 This paper reviews a raft of related ideas surrounding the Bernoulli operator.
@@ -1068,7 +1068,7 @@ f(x) & = & \left\langle x|f\right\rangle \nonumber \\
  & = & \sum_{n=0}^{\infty}x^{n}\left\langle n|f\right\rangle \nonumber \\
  & = & \sum_{n=0}^{\infty}x^{n}\int dy\left\langle n|y\right\rangle \left\langle y|f\right\rangle \nonumber \\
  & = & \sum_{n=0}^{\infty}x^{n}\int dy(-)^{n}\frac{\delta^{(n)}(y)}{n!}f(y)\nonumber \\
- & = & \sum_{n=0}^{\infty}x^{n}\frac{f^{(n)}(0)}{n!}\label{eq:}\end{eqnarray}
+ & = & \sum_{n=0}^{\infty}x^{n}\frac{f^{(n)}(0)}{n!}\label{eq:Taylors bra-kets}\end{eqnarray}
 
 \end_inset 
 
@@ -1159,7 +1159,7 @@ This section reviews the structure of the Bernoulli operator
 \begin_inset Formula \begin{equation}
 \left[\mathcal{L}_{B}\right]_{mk}\equiv U_{mk}\equiv\left\langle m\right|U\left|k\right\rangle =\frac{\delta_{mk}}{2^{m}}+\left(\begin{array}{c}
 k\\
-m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\label{eq:}\end{equation}
+m\end{array}\right)\frac{\Theta_{mk}}{2^{k+1}}\label{eq:U_mn}\end{equation}
 
 \end_inset 
 
@@ -1404,7 +1404,7 @@ n-1\end{array}\right)(-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
 
 ; this may be written as 
 \begin_inset Formula \begin{equation}
-\left\langle \left.\tilde{B}_{n}\right|f\right\rangle =\frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\label{eq:}\end{equation}
+\left\langle \left.\tilde{B}_{n}\right|f\right\rangle =\frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\label{eq:B-tilde acting on f}\end{equation}
 
 \end_inset 
 
@@ -1851,7 +1851,8 @@ The operator
 
  is a canonical example.
  More generally, sine and cosine waves which have an odd number of periods
- in the unit interval are all in the kernel of the Bernoulli operator.
+ in the unit interval are all in the kernel of the Bernoulli operator, when
+ that operator is taken in the coordinate-space.
  This may be seen very easily simply by direct substitution into equation
  
 \begin_inset LatexCommand \ref{eq:Bernoulli operator}
@@ -1860,7 +1861,7 @@ The operator
 
 , which promptly yields 
 \begin_inset Formula \begin{equation}
-\mathcal{L}_{B}\sin2\pi(2k+1)x=\frac{1}{2}\left[\sin\pi(2k+1)x+\sin\pi(2k+1)(x+1)\right]=0\label{eq:}\end{equation}
+\mathcal{L}_{B}^{\mbox{Coordinate}}\sin2\pi(2k+1)x=\frac{1}{2}\left[\sin\pi(2k+1)x+\sin\pi(2k+1)(x+1)\right]=0\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -1869,13 +1870,130 @@ The operator
 \end_inset 
 
 ; likewise for the cosine.
- However, the sine function is the limit of a polynomial sequence, as every
- student learns, and so it seems strange or somehow contradictory that 
-\begin_inset Formula $\mathcal{L}_{B}$
+ Not so for waves with an even number of periods: 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}^{\mbox{Coordinate}}\sin4\pi kx=\frac{1}{2}\left[\sin2\pi kx+\sin2\pi k(x+1)\right]=\sin2\pi kx\label{eq:}\end{equation}
+
 \end_inset 
 
- had only a trivial kernel on the space of polynomials.
- However, in order to define 
+Here, the superscript 
+\begin_inset Quotes eld
+\end_inset 
+
+Coordinate
+\begin_inset Quotes erd
+\end_inset 
+
+ is introduced to distinguish the operator in the coordinate basis, as given
+ in equation 
+\begin_inset LatexCommand \ref{eq:Bernoulli operator}
+
+\end_inset 
+
+, from the same operator, but in the monomial basis:
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}^{\mbox{Monomial}}=\sum_{m,n=0}^{\infty}\left|m\right\rangle U_{mn}\left\langle n\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $U_{mn}$
+\end_inset 
+
+ is the upper-triangular matrix of equation 
+\begin_inset LatexCommand \ref{eq:U_mn}
+
+\end_inset 
+
+.
+ Similarly, for the Bernoulli basis: 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}^{\mbox{Bernoulli}}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \frac{1}{2^{n}}\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ Via the theorems in the previous section, it was established (XXX but perhaps
+ not very clearly? XXX) that 
+\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}=\mathcal{L}_{B}^{\mbox{Monomial}}$
+\end_inset 
+
+ when considered as operators acting on the space of polynomials.
+ However, these are not at all equivalent if one considers them as operators
+ acting sines and cosines.
+ In particular, consider 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ acting on 
+\begin_inset Formula $f(x)=\exp2\pi ikx$
+\end_inset 
+
+:
+\begin_inset Formula \begin{eqnarray}
+\left[\mathbb{I}_{B}f\right](x) & = & \left\langle x\left|\mathbb{I}_{B}\right|f\right\rangle \nonumber \\
+ &  & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \left\langle \left.\tilde{B}_{n}\right|f\right\rangle \\
+ & = & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\nonumber \\
+ & = & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[(2\pi ik)^{n-1}e^{2\pi ik}-(2\pi ik)^{n-1}\right]\nonumber \\
+ & = & 0\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ where the second step makes use of equation 
+\begin_inset LatexCommand \ref{eq:B-tilde acting on f}
+
+\end_inset 
+
+.
+ This is remarkable, as any periodic wave constructed from sines and cosines
+ seems to be in the kernel.
+ By contrast, 
+\begin_inset Formula $\mathbb{I}_{M}$
+\end_inset 
+
+ does not behave this way: 
+\begin_inset Formula \begin{eqnarray}
+\left[\mathbb{I}_{M}f\right](x) & = & \left\langle x\left|\mathbb{I}_{M}\right|f\right\rangle \nonumber \\
+ &  & \sum_{n=0}^{\infty}\left\langle x\left|n\right.\right\rangle \left\langle \left.n\right|f\right\rangle \\
+ & = & \sum_{n=0}^{\infty}\left\langle x\left|n\right.\right\rangle \frac{1}{n!}f^{(n)}(0)\nonumber \\
+ & = & \sum_{n=0}^{\infty}\left\langle x\left|n\right.\right\rangle \frac{1}{n!}(2\pi ik)^{n}\nonumber \\
+ & = & \sum_{n=0}^{\infty}x^{n}\frac{1}{n!}(2\pi ik)^{n}\label{eq:}\\
+ & = & \exp2\pi ikx\end{eqnarray}
+
+\end_inset 
+
+ which is just a re-derivation of equation 
+\begin_inset LatexCommand \ref{eq:Taylors bra-kets}
+
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{I}_{M}$
+\end_inset 
+
+ are inequivalent when acting on sine functions; so 
+\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Monomial}}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}$
+\end_inset 
+
+ are inequivalent as well.
+\layout Standard
+
+Since the sine function is the limit of a polynomial sequence, it seems
+ strange or somehow contradictory that 
+\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}$
+\end_inset 
+
+ has only a trivial kernel on the space of polynomials, while utterly and
+ completely killing all sine functions.
+ In order to define limits, or more precisely, in order to define 
 \begin_inset Formula $\sin2\pi x$
 \end_inset 
 
@@ -1884,40 +2002,13 @@ The operator
  one must have a topology.
 \layout Standard
 
-Can this conundrum be escaped without appealing to topology? A more complex
- proof that 
-\begin_inset Formula $\sin2\pi(2k+1)x$
-\end_inset 
-
- lies in the kernel may be given as 
-\layout Standard
-
-
-\begin_inset Formula \begin{eqnarray}
-\int_{0}^{1}dx\,\tilde{B}_{n}(x)\,\sin(2\pi x) & = & \frac{1}{n!}\left[\left.\frac{d^{n-1}\sin2\pi x}{dx^{n-1}}\right|_{x=1}-\left.\frac{d^{n-1}\sin2\pi x}{dx^{n-1}}\right|_{x=0}\right]\label{eq:}\\
- & = & 0\nonumber \end{eqnarray}
-
-\end_inset 
-
- where 
-\begin_inset Formula $\tilde{B}_{n}(x)$
-\end_inset 
-
- was written for 
-\begin_inset Formula $\left\langle \left.\tilde{B}_{n}\right|x\right\rangle $
-\end_inset 
-
-.
- 
-\layout Standard
-
-Thus, 
+Can this conundrum be escaped without appealing to topology? Since 
 \begin_inset Formula $\mathbb{I}_{B}$
 \end_inset 
 
- seems to be somehow incomplete when considering sine functions.
- Perhaps this lack of completeness is due to the form of the left eigenstates
- given in equation 
+ seems to be somehow incomplete when considering sine functions, perhaps,
+ one might think, this lack of completeness is due to the form of the left
+ eigenstates given in equation 
 \begin_inset LatexCommand \ref{eq:left bernoulli}
 
 \end_inset 
@@ -2127,7 +2218,7 @@ does not have a countable algebraic basis.
  XXXX 
 \layout Subsection
 
-Hermitian Operators: Here be Dragons
+Hermitian operators, orthogonal transformations: Here be Dragons
 \layout Standard
 
 There are other conceptual difficulties tied to infinite vector spaces when
