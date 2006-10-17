@@ -1777,6 +1777,164 @@ half
 \end_inset 
 
  of its eigenvlaues will be seen to be zero).
+\layout Subsection
+
+Change of Basis Recap
+\layout Standard
+
+This section simply recaps the previous results.
+ It was seen above that the monomials form a complete set of basis states
+ that can be used to represent polynomials.
+ The operator 
+\begin_inset Formula $\mathbb{I}_{M}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
+\end_inset 
+
+ can be called the identity operator over the space of polynomials; it has
+ no non-trivial kernel in that space.
+ Here, the subscript 
+\begin_inset Formula $M$
+\end_inset 
+
+ is used to indicate that the identity operator is built from the monomial
+ states.
+ Thus, for the Bernoulli operator 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset 
+
+, one may confidently write 
+\begin_inset Formula $\mathcal{L}_{B}=\mathbb{I}_{M}\mathcal{L}_{B}\mathbb{I}_{M}$
+\end_inset 
+
+ which expands to 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}=\mathcal{L}_{B}^{\mbox{Monomial}}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|m\right\rangle \left\langle m\left|\mathcal{L}_{B}\right|n\right\rangle \left\langle n\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ The superscript 
+\begin_inset Quotes eld
+\end_inset 
+
+Monomial
+\begin_inset Quotes erd
+\end_inset 
+
+ is a formal label, used only to emphasize the basis in which the operator
+ was expanded in.
+ As seen above, the matrix elements 
+\begin_inset Formula $U_{mn}\equiv\left\langle m\left|\mathcal{L}_{B}\right|n\right\rangle $
+\end_inset 
+
+ are upper-triangular.
+ 
+\layout Standard
+
+The operator 
+\begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
+\end_inset 
+
+ is also the identity operator on the space of polynomials.
+ Using the same trick to write 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}=\mathcal{L}_{B}^{\mbox{Bernoulli}}=\mathbb{I}_{B}\mathcal{L}_{B}\mathbb{I}_{B}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|B_{m}\right\rangle \left\langle \tilde{B}_{m}\left|\mathcal{L}_{B}\right|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ one finds that 
+\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}$
+\end_inset 
+
+ is an operator which has matrix elements that are non-zero only on the
+ diagonal: 
+\begin_inset Formula $\left\langle B_{m}\left|U_{B}\right|\tilde{B}_{n}\right\rangle =\delta_{mn}\lambda_{n}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Consider now the change of basis from the monomial basis to the Bernoulli
+ basis.
+ Explicitly, this change of basis is 
+\begin_inset Formula \begin{eqnarray}
+\mathcal{L}_{B}^{\mbox{Bernoulli}} & = & \sum_{j,k=0}^{\infty}\left|B_{j}\right\rangle \delta_{jk}\lambda_{k}\left\langle \tilde{B}_{k}\right|\nonumber \\
+ & = & \sum_{j,k,m,n=0}^{\infty}\left|B_{j}\right\rangle \left\langle \left.\tilde{B}_{j}\right|m\right\rangle \left\langle m\left|\mathcal{L}_{B}^{\mbox{Monomial}}\right|n\right\rangle \left\langle n\left|B_{k}\right.\right\rangle \left\langle \tilde{B}_{k}\right|\nonumber \\
+ & = & \tilde{B}\,\mathcal{L}_{B}^{\mbox{Monomial}}\, B\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ where the operators 
+\begin_inset Formula $\tilde{B}$
+\end_inset 
+
+ and 
+\begin_inset Formula $B$
+\end_inset 
+
+ show the change of basis: 
+\begin_inset Formula \begin{equation}
+\tilde{B}=\sum_{j,m=0}^{\infty}\left|B_{j}\right\rangle \left\langle \left.\tilde{B}_{j}\right|m\right\rangle \left\langle m\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n\left|B_{k}\right.\right\rangle \left\langle \tilde{B}_{k}\right|\label{eq:}\end{equation}
+
+\end_inset 
+
+ It is not hard to work out that 
+\begin_inset Formula $\tilde{B}B=\mathbb{I}_{B}$
+\end_inset 
+
+ and that 
+\begin_inset Formula $B\tilde{B}=\mathbb{I}_{M}$
+\end_inset 
+
+ so 
+\begin_inset Formula $\tilde{B}$
+\end_inset 
+
+ is both a left- and right-inverse of 
+\begin_inset Formula $B$
+\end_inset 
+
+; one may confidently write 
+\begin_inset Formula $B^{-1}=\tilde{B}$
+\end_inset 
+
+ as a two-sided inverse.
+ Although 
+\begin_inset Formula $B$
+\end_inset 
+
+ and 
+\begin_inset Formula $\tilde{B}$
+\end_inset 
+
+ are inverses of one-another, they are in no way orthogonal.
+ The matrix elements of the transpose of an orthogonal operator are equal
+ to those of the inverse; a quick review of equations 
+\begin_inset LatexCommand \ref{eq:B-right matrix elts}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq:B-left matrix elts}
+
+\end_inset 
+
+ makes it clear that 
+\begin_inset Formula $\left\langle \left.\tilde{B}_{k}\right|n\right\rangle \ne\left\langle n\left|B_{k}\right.\right\rangle $
+\end_inset 
+
+, and so 
+\begin_inset Formula $B$
+\end_inset 
+
+ is not an orthogonal operator.
+ This is not a surprise: orthogonal operators cannot take a diagonal operator
+ and make it triangular.
 \layout Section
 
 Topology, Completeness and Orthogonality
@@ -1890,36 +2048,18 @@ Coordinate
 
 \end_inset 
 
-, from the same operator, but in the monomial basis:
-\begin_inset Formula \begin{equation}
-\mathcal{L}_{B}^{\mbox{Monomial}}=\sum_{m,n=0}^{\infty}\left|m\right\rangle U_{mn}\left\langle n\right|\label{eq:}\end{equation}
+, from the same operator in the monomial basis.
+ 
+\layout Standard
 
-\end_inset 
-
- where 
-\begin_inset Formula $U_{mn}$
-\end_inset 
-
- is the upper-triangular matrix of equation 
-\begin_inset LatexCommand \ref{eq:U_mn}
-
-\end_inset 
-
-.
- Similarly, for the Bernoulli basis: 
-\begin_inset Formula \begin{equation}
-\mathcal{L}_{B}^{\mbox{Bernoulli}}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \frac{1}{2^{n}}\left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
-
-\end_inset 
-
- Via the theorems in the previous section, it was established (XXX but perhaps
- not very clearly? XXX) that 
+In the previous sections, it was established (XXX but perhaps not very clearly?
+ XXX) that 
 \begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}=\mathcal{L}_{B}^{\mbox{Monomial}}$
 \end_inset 
 
  when considered as operators acting on the space of polynomials.
  However, these are not at all equivalent if one considers them as operators
- acting sines and cosines.
+ acting on sines and cosines.
  In particular, consider 
 \begin_inset Formula $\mathbb{I}_{B}$
 \end_inset 
@@ -2216,283 +2356,6 @@ does not have a countable algebraic basis.
 .
  XXX Does this theorem have a name? Need to reference a ref for this.
  XXXX 
-\layout Subsection
-
-Hermitian Operators: Here be Dragons
-\layout Standard
-
-There are other conceptual difficulties tied to infinite vector spaces when
- these spaces are not given certain additional structure.
- This section reviews the difficulty of defining the idea of a Hermitian
- or self-adjoint operator on unadorned infinite vector spaces, a difficulty
- that goes away when the space is a Hilbert space.
- When an infinite-dimensional vector space is endowed with an inner product,
- making it into a Hilbert space, then one may define the idea of a Hermitian
- operator 
-\begin_inset Formula $H$
-\end_inset 
-
- as an operator that is equal to its (complex-conjugate) transpose: 
-\begin_inset Formula $H=H^{\dagger}$
-\end_inset 
-
-.
- For Hermitian operators, there always exists a basis in which 
-\begin_inset Formula $H$
-\end_inset 
-
- is diagonal, and all of the diagonal matrix elements are real.
- All Hermitian operators may be brought to the diagonal form by applying
- an orthogonal transformation 
-\begin_inset Formula $O$
-\end_inset 
-
-, where an operator 
-\begin_inset Formula $O$
-\end_inset 
-
- is orthogonal when its inverse is equal to its transpose: 
-\begin_inset Formula $O^{-1}=O^{T}$
-\end_inset 
-
-, or equivalently, when 
-\begin_inset Formula $O^{T}O=OO^{T}=1$
-\end_inset 
-
-.
- The usual concepts of a Hermitian operator are violated in the infinite
- vector space of polynomials, as demonstrated in this section.
- XXXX This statement needs clarification.
- We have 
-\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}=\mathcal{L}_{B}^{\mbox{Monomial}}$
-\end_inset 
-
-when acting on the space of polynomials, per previous results, which should
- be strengthened.
- Thus, if 
-\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}$
-\end_inset 
-
- is Hermitian, then 
-\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Monomial}}$
-\end_inset 
-
- should be as well, as demonstrated below.
- Right? XXX well No.
- Fix up this mess.
- XXXX.
-\layout Standard
-
-It was seen above that the monomials form a complete set of basis states
- that can be used to represent polynomials.
- The operator 
-\begin_inset Formula $\mathbb{I}_{M}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
-\end_inset 
-
- can be called the identity operator over the space of polynomials; it has
- no kernel in that space.
- Here, the subscript 
-\begin_inset Formula $M$
-\end_inset 
-
- is used to remind us that the identity operator is built from the monomial
- states.
- Thus, for the Bernoulli operator 
-\begin_inset Formula $\mathcal{L}_{B}$
-\end_inset 
-
-, one may confidently write 
-\begin_inset Formula $\mathcal{L}_{B}=\mathbb{I}_{M}\mathcal{L}_{B}\mathbb{I}_{M}$
-\end_inset 
-
- which expands to 
-\begin_inset Formula \begin{equation}
-\mathcal{L}_{B}^{\mbox{Monomial}}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|m\right\rangle \left\langle m\left|\mathcal{L}_{B}\right|n\right\rangle \left\langle n\right|\label{eq:}\end{equation}
-
-\end_inset 
-
- As seen above, the matrix elements 
-\begin_inset Formula $U_{mn}\equiv\left\langle m\left|\mathcal{L}_{B}\right|n\right\rangle $
-\end_inset 
-
- are upper-triangular, and so one wants to say that the operator 
-\begin_inset Formula $\mathcal{L}_{B}$
-\end_inset 
-
- is clearly not Hermitian.
- That is, the matrix elements 
-\begin_inset Formula $H_{mn}$
-\end_inset 
-
- of Hermitian operators 
-\begin_inset Formula $H$
-\end_inset 
-
- are expected to obey the identity 
-\begin_inset Formula $H_{mn}=H_{nm}^{*}$
-\end_inset 
-
- where the superscript 
-\begin_inset Formula $*$
-\end_inset 
-
- denotes complex conjugation.
- Here, the matrix elements 
-\begin_inset Formula $U_{mn}$
-\end_inset 
-
-are real, but clearly one has 
-\begin_inset Formula $U_{mn}\ne U_{nm}$
-\end_inset 
-
-.
- Thus, in this basis it seems that 
-\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Monomial}}$
-\end_inset 
-
- cannot be Hermitian.
- 
-\layout Standard
-
-In previous sections, it was shown that the operator 
-\begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
-\end_inset 
-
- is also the identity operator on the space of polynomials.
- Using the same trick to write 
-\begin_inset Formula \begin{equation}
-\mathcal{L}_{B}^{\mbox{Bernoulli}}=\mathbb{I}_{B}\mathcal{L}_{B}\mathbb{I}_{B}=\sum_{m=0}^{\infty}\sum_{n=0}^{\infty}\left|B_{m}\right\rangle \left\langle \tilde{B}_{m}\left|\mathcal{L}_{B}\right|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\label{eq:}\end{equation}
-
-\end_inset 
-
- one finds that 
-\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}$
-\end_inset 
-
- is an operator which has matrix elements that are non-zero only on the
- diagonal: 
-\begin_inset Formula $\left\langle B_{m}\left|U_{B}\right|\tilde{B}_{n}\right\rangle =\delta_{mn}\lambda_{n}$
-\end_inset 
-
-.
- Matrices that are diagonal and have only real entries on the diagonal are
- clearly Hermitian, so this implies that 
-\begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}$
-\end_inset 
-
- is Hermitian.
- So which is it? Is 
-\begin_inset Formula $\mathcal{L}_{B}$
-\end_inset 
-
- Hermitian or not? It appears that the Hermiticity of 
-\begin_inset Formula $\mathcal{L}_{B}$
-\end_inset 
-
- depends very much on which of the two polynomial bases are used.
-\layout Standard
-
-Consider now the change of basis from the monomial basis to the Bernoulli
- basis.
- Explicitly, this change of basis is 
-\begin_inset Formula \begin{eqnarray}
-\mathcal{L}_{B}^{\mbox{Bernoulli}} & = & \sum_{j,k=0}^{\infty}\left|B_{j}\right\rangle \delta_{jk}\lambda_{k}\left\langle \tilde{B}_{k}\right|\nonumber \\
- & = & \sum_{j,k,m,n=0}^{\infty}\left|B_{j}\right\rangle \left\langle \left.\tilde{B}_{j}\right|m\right\rangle \left\langle m\left|\mathcal{L}_{B}^{\mbox{Monomial}}\right|n\right\rangle \left\langle n\left|B_{k}\right.\right\rangle \left\langle \tilde{B}_{k}\right|\nonumber \\
- & = & \tilde{B}\,\mathcal{L}_{B}^{\mbox{Monomial}}\, B\label{eq:}\end{eqnarray}
-
-\end_inset 
-
- where the operators 
-\begin_inset Formula $\tilde{B}$
-\end_inset 
-
- and 
-\begin_inset Formula $B$
-\end_inset 
-
- show the change of basis: 
-\begin_inset Formula \begin{equation}
-\tilde{B}=\sum_{j,m=0}^{\infty}\left|B_{j}\right\rangle \left\langle \left.\tilde{B}_{j}\right|m\right\rangle \left\langle m\right|\label{eq:}\end{equation}
-
-\end_inset 
-
- and 
-\begin_inset Formula \begin{equation}
-B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n\left|B_{k}\right.\right\rangle \left\langle \tilde{B}_{k}\right|\label{eq:}\end{equation}
-
-\end_inset 
-
- It is not hard to work out that 
-\begin_inset Formula $\tilde{B}B=\mathbb{I}_{B}$
-\end_inset 
-
- and that 
-\begin_inset Formula $B\tilde{B}=\mathbb{I}_{M}$
-\end_inset 
-
- so that, in a certain sense 
-\begin_inset Formula $\tilde{B}$
-\end_inset 
-
- is both a left- and right-inverse of 
-\begin_inset Formula $B$
-\end_inset 
-
-; one may confidently write 
-\begin_inset Formula $B^{-1}=\tilde{B}$
-\end_inset 
-
- as a two-sided inverse.
- Is there any sense in which 
-\begin_inset Formula $B$
-\end_inset 
-
- and 
-\begin_inset Formula $\tilde{B}$
-\end_inset 
-
- are orthogonal operators? It seems not, which may be deduced from the matrix
- elements.
- If 
-\begin_inset Formula $O$
-\end_inset 
-
- is orthogonal, then one has 
-\begin_inset Formula $O^{-1}=O^{T}$
-\end_inset 
-
-.
- The matrix elements obey 
-\begin_inset Formula $\left[O^{-1}\right]_{nk}=\left[O^{T}\right]_{nk}=\left[O\right]_{kn}$
-\end_inset 
-
-.
- By contrast, a quick review of equations 
-\begin_inset LatexCommand \ref{eq:B-right matrix elts}
-
-\end_inset 
-
- and 
-\begin_inset LatexCommand \ref{eq:B-left matrix elts}
-
-\end_inset 
-
- makes it clear that 
-\begin_inset Formula $\left\langle \left.\tilde{B}_{k}\right|n\right\rangle \ne\left\langle n\left|B_{k}\right.\right\rangle $
-\end_inset 
-
-, and so 
-\begin_inset Formula $B$
-\end_inset 
-
- is not an orthogonal operator.
- This is perhaps not a surprise: orthogonal operators normally preserve
- the Hermitian-ness of an operator, whereas 
-\begin_inset Formula $B$
-\end_inset 
-
- clearly breaks it.
- 
 \layout Section
 
 The Fourier Representation 
