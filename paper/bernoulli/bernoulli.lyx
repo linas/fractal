@@ -4087,8 +4087,490 @@ Conclusions
 \layout Standard
 
 Apologies for the format of this paper.
- It's a veritable candy store of goodies; there are all these yummy toys
- to play with, which one first?
+ 
+\layout Section
+
+Appendix
+\layout Standard
+
+This section needs to be re-written, merged, abolished.
+ I think what its saying its mostly correct, but its misleading; there's
+ a more enlightening, better treatment possible, by focusing on topologies.
+\layout Subsection
+
+Fourier Representation
+\layout Standard
+
+Review of standard Fourier series techniques.
+ In traditional notation, for some (periodic) function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ one writes the Fourier Series as 
+\begin_inset Formula \begin{equation}
+f(x)=\sum_{n=-\infty}^{\infty}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the conjugates of 
+\begin_inset Formula $f$
+\end_inset 
+
+ are given by 
+\begin_inset Formula \begin{equation}
+a_{n}=\int_{0}^{1}f(x)\,\cos(2\pi nx)\, dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+b_{n}=\int_{0}^{1}f(x)\,\sin(2\pi nx)\, dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ Moving over to bra-ket notation, we can define the Fourier-space basis
+ vectors 
+\begin_inset Formula $\left|em\right\rangle $
+\end_inset 
+
+ in terms of their components in coordinate space.
+ These components are 
+\begin_inset Formula $\left\langle x|em\right\rangle =\exp(i2\pi mx)$
+\end_inset 
+
+.
+ The conjugate vectors 
+\begin_inset Formula $\left\langle en\right|$
+\end_inset 
+
+ have an equally simple representation: 
+\begin_inset Formula $\left\langle en|x\right\rangle =\exp(-i2\pi nx)$
+\end_inset 
+
+.
+ One has the usual sense of orthogonality over coordinate space in that
+ 
+\begin_inset Formula \begin{equation}
+\left\langle em|en\right\rangle =\int_{0}^{1}dx\,\left\langle em|x\right\rangle \left\langle x|en\right\rangle =\int_{0}^{1}dx\,\exp(2\pi i(n-m)x)=\delta_{nm}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and the traditional presentation of the Fourier Series is a statement of
+ completeness over coordinate space, in that for an arbitrary square-integrable
+ coordinate-space function 
+\begin_inset Formula $f(x)=\left\langle x|f\right\rangle $
+\end_inset 
+
+ one has 
+\begin_inset Formula \begin{eqnarray}
+f(x)=\left\langle x|f\right\rangle  & = & \sum_{n=-\infty}^{\infty}\left\langle x|en\right\rangle \left\langle en|f\right\rangle \nonumber \\
+ & = & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\left\langle en|y\right\rangle \left\langle y|f\right\rangle \nonumber \\
+ & = & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\exp(-i2\pi ny)f(y)\nonumber \\
+ & = & \int_{0}^{1}dy\,\delta(x-y)\, f(y)\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Thus, one is accustomed to the notion of having an identity operator of
+ the form 
+\begin_inset Formula $1_{F}=\sum_{m=-\infty}^{\infty}\left|em\right\rangle \left\langle em\right|$
+\end_inset 
+
+ because it has the matrix elements that one expects in both the Fourier
+ space and in coordinate space: that is, 
+\begin_inset Formula $\left\langle em\right|1_{F}\left|en\right\rangle =\delta_{nm}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left\langle x\right|1_{F}\left|y\right\rangle =\delta(x-y)$
+\end_inset 
+
+ .
+ 
+\layout Standard
+
+Thus, in light of this perfectly ordinary standard textbook behavior, the
+ following shall be surprising.
+ The matrix elements of this operator, expressed in the polynomial basis,
+ are not only non-trivial, but are divergent.
+ That is, one can be lulled into believing that 
+\begin_inset Formula $\left\langle m\right|1_{F}\left|n\right\rangle =\delta_{nm}$
+\end_inset 
+
+ for the polynomial basis, and indeed, by performing the operations in a
+ certain order, one can certainly show this.
+ However, reversing the order of operations shows that what might seem like
+ simple operations can in fact be quite treacherous.
+ 
+\layout Standard
+
+We begin by writing the components of the vector 
+\begin_inset Formula $\left|em\right\rangle $
+\end_inset 
+
+ in the polynomial-space representation:
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray}
+\left\langle n|em\right\rangle  & = & \int_{0}^{1}dx\left\langle n|x\right\rangle \left\langle x|em\right\rangle \nonumber \\
+ & = & \int_{0}^{1}dx\,\frac{(-)^{n}}{n!}\delta^{(n)}(x)\, e^{i2\pi mx}\nonumber \\
+ & = & \int_{0}^{1}dx\,\frac{\delta(x)}{n!}\,\frac{d^{n}}{dx^{n}}\, e^{i2\pi mx}\nonumber \\
+ & = & \frac{(i2\pi m)^{n}}{n!}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ Essentially, this is nothing more than a plain-old Taylor's Series expansion
+ of the exponential function.
+ The conjugate vectors have a slightly trickier form.
+ They are the Fourier components of monomials.
+ For 
+\begin_inset Formula $m\neq0$
+\end_inset 
+
+ 
+\begin_inset Formula \begin{eqnarray}
+\left\langle em|n\right\rangle  & = & \int_{0}^{1}dy\left\langle em|y\right\rangle \left\langle y|n\right\rangle \nonumber \\
+ & = & \int_{0}^{1}\exp(-2\pi imy)\, y^{n}\, dy\nonumber \\
+ & = & \frac{-1}{2\pi im}+\frac{n}{2\pi im}\int_{0}^{1}\exp(-2\pi imy)\, y^{n-1}\, dy\nonumber \\
+ & = & -\frac{1}{2\pi im}\sum_{k=0}^{n-1}\frac{n!}{(n-k)!}\left(\frac{1}{2\pi im}\right)^{k}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ and, for 
+\begin_inset Formula $m=0$
+\end_inset 
+
+, 
+\begin_inset Formula $\left\langle e0|n\right\rangle =1/(n+1)$
+\end_inset 
+
+.
+ Let us now try to explicitly evaluate the matrix elements of the Fourier
+ identity operator in the polynomial representation.
+ That is, we attempt to write the matrix elements of 
+\begin_inset Formula $1_{F}=\sum_{m=-\infty}^{\infty}\left|em\right\rangle \left\langle em\right|$
+\end_inset 
+
+ 
+\begin_inset Formula \begin{eqnarray}
+\left\langle p\right|1_{F}\left|n\right\rangle  & = & \sum_{m=-\infty}^{\infty}\left\langle p|em\right\rangle \left\langle em|n\right\rangle \nonumber \\
+ & = & \sum_{m=-\infty}^{\infty}\left[\delta_{p0}+\left(1-\delta_{p0}\right)\frac{\left(2\pi im\right)^{p}}{p!}\right]\left[\frac{\delta_{m0}}{n+1}-\frac{\left(1-\delta_{m0}\right)}{2\pi im}\sum_{k=0}^{n-1}\frac{n!}{(n-k)!}\left(\frac{1}{2\pi im}\right)^{k}\right]\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ We need only to look at the relatively simple matrix element 
+\begin_inset Formula $n=1$
+\end_inset 
+
+, 
+\begin_inset Formula $p\neq0$
+\end_inset 
+
+ to see the misery of this expression: 
+\begin_inset Formula \begin{equation}
+\left\langle p\neq0\right|1_{F}\left|n=1\right\rangle =\frac{\left(2\pi i\right)^{p}}{p!}\sum_{m=1}^{\infty}\frac{m^{p}}{2\pi im}\label{eq:}\end{equation}
+
+\end_inset 
+
+ One can try to rescue the situation by making the Ansatz that the summation
+ should have been replaced by 
+\begin_inset Formula $\zeta(1-p)$
+\end_inset 
+
+ which is regular, but already this is dangerous.
+ What is perhaps the more surprising is that one might have expected this
+ kind of trouble from the polynomial completeness relationship 
+\begin_inset Formula $\mathbb{I}_{A}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
+\end_inset 
+
+ because it ranges only over analytic functions: its essentially a statement
+ of the idea that analytic functions are expressible through a series expansion
+ in a variable.
+ Functions that are not infinitely differentiable more-or-less lie in the
+ kernel of 
+\begin_inset Formula $\mathbb{I}_{A}$
+\end_inset 
+
+.
+ However, we'd expect 
+\begin_inset Formula $1_{F}$
+\end_inset 
+
+ to be more faithful, as it would seem to venture over square-integrable
+ functions.
+ Thus, such a simple failing is surprising.
+ 
+\layout Standard
+
+The goal here is to simply present a signpost warning, as we make heavy
+ use of these techniques in the sections that follow, where we work with
+ functions that are differentiable-nowhere or worse.
+ 
+\layout Subsection
+
+The Koopman Operator
+\layout Standard
+
+The Koopman operator is in a certain sense conjugate to the Frobenius-Perron
+ operator, and defines how observables evolve.
+ Given a density 
+\begin_inset Formula $\rho(x)$
+\end_inset 
+
+ we say that the observation of a function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ by 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is 
+\begin_inset Formula \begin{equation}
+\left\langle f\,\right\rangle _{\rho}=\int_{0}^{1}f(x)\rho(x)\, dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ The term 
+\begin_inset Quotes eld
+\end_inset 
+
+observable
+\begin_inset Quotes erd
+\end_inset 
+
+ comes from usage in Quantum Mechanics, where 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ is associated with the eigenvalues of an operator.
+ We do not need to appeal to these operator equations for the following
+ development.
+ The Koopman operator 
+\begin_inset Formula $K$
+\end_inset 
+
+ gives the change in 
+\begin_inset Formula $f$
+\end_inset 
+
+ when 
+\begin_inset Formula $U$
+\end_inset 
+
+ acts on 
+\begin_inset Formula $\rho$
+\end_inset 
+
+, thus: 
+\begin_inset Formula \begin{equation}
+K_{g}:\left\langle f\,\right\rangle _{\rho}\rightarrow\left\langle K_{g}f\,\right\rangle _{\rho}=\int_{0}^{1}[K_{g}f](x)\rho(x)\, dx=\int_{0}^{1}f(x)[U_{g}\rho](x)\, dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ In Dirac bra-ket notation, we have 
+\begin_inset Formula \begin{eqnarray}
+\int_{0}^{1}f(x)[U_{g}\rho](x)\, dx & = & \int_{0}^{1}\left\langle x|U_{g}|\rho\right\rangle \left\langle x|f\right\rangle \, dx\nonumber \\
+ & = & \int_{0}^{1}dx\int_{0}^{1}dy\left\langle x|U_{g}|y\right\rangle \left\langle y|\rho\right\rangle \left\langle x|f\right\rangle \, dx\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ and so we have 
+\begin_inset Formula \begin{equation}
+\left[K_{g}f\right](y)=\int_{0}^{1}\left\langle x|U_{g}|y\right\rangle \left\langle x|f\right\rangle \, dx=\int_{0}^{1}U_{g}(x,y)f(x)\, dx=\int_{0}^{1}\delta\left(x-g(y)\right)f(x)\, dx\label{eq:}\end{equation}
+
+\end_inset 
+
+ This gives the action of the Koopman operator in a coordinate-space representat
+ion.
+ As is the recurring theme, different representations can lead to different
+ results.
+ In the coordinate-space representation, the Koopman operator appears to
+ be the transpose of the Frobenius-Perron operator, in that 
+\begin_inset Formula $K(x,y)=U(y,x)$
+\end_inset 
+
+.
+ However, in a general representation, whether the Koopman operator is the
+ transpose or the complex conjugate or something else needs to be determined
+ on a case-by-case basis, with an appeal to the particular operator 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+ and the representations on which it works.
+ 
+\layout Subsection
+
+Topologically Conjugate Maps
+\layout Standard
+
+Conjugation of the function that generates the map will provide, in general,
+ another map that behaves exactly the same as the first, as long as the
+ conjugating function is a 1-1 and onto diffeomorphism.
+ That is, if 
+\begin_inset Formula $\phi$
+\end_inset 
+
+ is invertible, so that 
+\begin_inset Formula \begin{equation}
+\gamma=\phi\circ g\circ\phi^{-1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ then 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ will iterate the same way that 
+\begin_inset Formula $g$
+\end_inset 
+
+ does: 
+\begin_inset Formula $\gamma^{n}=\phi\circ g^{n}\circ\phi^{-1}$
+\end_inset 
+
+.
+ The orbit of any point 
+\begin_inset Formula $x$
+\end_inset 
+
+ under the map 
+\begin_inset Formula $g$
+\end_inset 
+
+ is completely isomorphic to the orbit of a point 
+\begin_inset Formula $y=\phi(x)$
+\end_inset 
+
+ under the map 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+.
+ Because the (chaotic) point dynamics of these two maps are isomorphic,
+ we expect just about any related construction and analysis to show evidence
+ of this isomorphism.
+ 
+\layout Standard
+
+In particular, we expect that the Koopman and Frobenius-Perron operators
+ for 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ are conjugate to those for 
+\begin_inset Formula $g$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+U_{\gamma}=U_{\phi}^{-1}U_{g}U_{\phi}\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+XXX ToDo derive the above.
+ Show that eigenvalues are preserved.
+ The most trivial way to see that the eigenvalues are unchanged is through
+ the formal definition of the characteristic polynomial for this operator,
+ which is 
+\begin_inset Formula \begin{equation}
+p_{U}(\lambda)=\det\left[U_{g}-\lambda\mathbb{I}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Just as in the finite-dimensional case, a similarity transform commutes
+ inside the determinant, leaving the characteristic polynomial unchanged.
+ XXX ToDo a more correct, non-formal proof that the eigenvalues are preserved.
+\layout Standard
+
+Note that in the construction of this proof, we invoke the Jacobian 
+\begin_inset Formula $\left|d\phi(y)/dy\right|_{y=\phi^{-1}(x)}$
+\end_inset 
+
+ and thus, in order to preserve the polynomial-rep eigenvalues, the conjugating
+ function must be a diffeomorphism; a homeomorphism does not suffice.
+ We will show an example below of a conjugating function that is highly
+ singular, and thus the Jacobian does not exist (in the ordinary sense).
+ When the conjugating function is sufficiently singular, then 
+\begin_inset Formula $U_{\phi}$
+\end_inset 
+
+ cannot be coherently defined.
+ As a result, one can have conjugate maps with completely isomorphic point
+ dynamics, but the eigenvalue spectra associated with these maps will 
+\emph on 
+not
+\emph default 
+ be identical.
+ 
+\layout Subsection
+
+The Topological Zeta
+\layout Standard
+
+Another interesting quantity is the topological zeta function associated
+ with the transfer operator.
+ It is formally defined by 
+\begin_inset Formula \begin{equation}
+\zeta_{U_{g}}(t)=\frac{1}{\det\left[\mathbb{I}-tU_{g}\right]}\label{eq:}\end{equation}
+
+\end_inset 
+
+ and embeds number-theoretic information about the map.
+ Using standard formal manipulations on operators, one can re-write the
+ above as the operator equation 
+\begin_inset Formula \begin{equation}
+\zeta_{U_{g}}(t)=\exp\sum_{k=1}^{\infty}\frac{t^{k}}{k}\;\textrm{Tr}U_{g}^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Of associated interest is the Maclaurin Series 
+\begin_inset Formula \begin{equation}
+t\frac{d}{dt}\log\zeta_{U_{g}}(t)=\sum_{k=1}^{\infty}n_{k}t^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where we can read off 
+\begin_inset Formula $n_{k}=\textrm{Tr}U_{g}^{k}$
+\end_inset 
+
+.
+ From graph theory and the theory of dynamical systems, it is known that
+ the 
+\begin_inset Formula $n_{k}$
+\end_inset 
+
+ correspond to the number of periodic orbits of length 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ In the context of dynamical systems, this zeta is often referred to as
+ the Artin-Mazur Zeta function.
+ In the context of graph theory, it is referred to as the Ihara Zeta.
+ Both are connected to the Selberg Zeta.
+\layout Standard
+
+The standard definition of the Ihara Zeta applies only to the adjacency
+ matrix of finite-sized graphs.
+ Adjacency matrices only have (non-negative) integer entries as matrix elements.
+ Thus, we ask: given an appropriate basis, can an inifinite-dimensional
+ transfer operator be written so as to have integer entries as matrix elements?
+\layout Standard
+
+The standard definition of the Artin-Mazur Zeta function requires that the
+ number of fixed points (periodic orbits) be a finite number.
+ For the operators that we are studying, there will in general be (countably)
+ infinite number of periodic orbits.
+ Yet the zeta will still be well defined, although the coefficients of the
+ Maclaurin expansion will not be integers.
+ Can these be reinterpreted as a density or measure? 
+\layout Standard
+
+
 \begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
 
 \end_inset 
