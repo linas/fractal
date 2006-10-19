@@ -1935,6 +1935,20 @@ B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n\left|B_{k}\right.\rig
  is not an orthogonal operator.
  This is not a surprise: orthogonal operators cannot take a diagonal operator
  and make it triangular.
+\layout Subsection
+
+Operator recap
+\layout Standard
+
+XXX Talk about the operator 
+\begin_inset Formula \begin{equation}
+\sum_{n}\lambda_{n}e_{n}\otimes e_{n}^{*}\label{eq:}\end{equation}
+
+\end_inset 
+
+ in terms of bein a compact operator, a nuclear operator, etc.
+ Talk about the order of the operator, Talk about the projective topological
+ tensor product, in the language of Grothendieck.
 \layout Section
 
 Topology, Completeness and Orthogonality
@@ -3513,8 +3527,8 @@ It is well-known that one-dimensional lattice models, and more generally,
 ion of a class of Bernoulli operator eigenfunctions.
 \layout Standard
 
-Consider a lattice of points, labelled by the positive integers, that is,
- by 
+Consider a one-sided lattice of points, labelled by the positive integers,
+ that is, by 
 \begin_inset Formula $n\in\mathbb{N}$
 \end_inset 
 
@@ -3523,7 +3537,7 @@ Consider a lattice of points, labelled by the positive integers, that is,
 \begin_inset Formula $\sigma_{n}$
 \end_inset 
 
-, commonly called the 
+, sometimes called the 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -3540,6 +3554,207 @@ spin
 \end_inset 
 
 .
+ A given lattice configuration 
+\begin_inset Formula $\sigma=(\sigma_{1},\sigma_{2},\cdots)\in\Omega$
+\end_inset 
+
+ can be taken to be either a 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic number, or as a real number 
+\begin_inset Formula $x$
+\end_inset 
+
+, with the Cantor mapping 
+\begin_inset Formula $x:\Omega\to[0.1]$
+\end_inset 
+
+ from the set of all lattice configurations 
+\begin_inset Formula $\Omega$
+\end_inset 
+
+ to the unit interval 
+\begin_inset Formula $[0,1]$
+\end_inset 
+
+ given by
+\begin_inset Formula \begin{equation}
+x(\sigma)=\sum_{n=1}^{\infty}\sigma_{n}p^{-n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ The latter mapping allows every possible spin lattice configuration to
+ be mapped into the unit interval 
+\begin_inset Formula $[0,1]$
+\end_inset 
+
+, although not vice-versa: the usual topologies on the spin lattice is finer
+ than that on the reals, in that 
+\begin_inset Formula $\sigma=(0,1,1,\cdots)$
+\end_inset 
+
+ and 
+\begin_inset Formula $(1,0,0,\cdots)$
+\end_inset 
+
+ are inequivalent lattice configurations, whereas the binary numbers 
+\begin_inset Formula $0.0111\ldots$
+\end_inset 
+
+ and 
+\begin_inset Formula $0.1000\ldots$
+\end_inset 
+
+ both represent the rational 1/2.
+ Only certain rationals are double-pointed like this, all irrationals are
+ not.
+ This double-pointed topology can be understood to be one and the same as
+ the Cantor set topology, in that the Cantor set topology makes exactly
+ the same distinction between endpoints of intervals.
+ XXX See my other ref on fat cantor sets for details, if this is not clear.
+ XXX Note also that lattices have another natural topology as well, the
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+cylinder set topology
+\begin_inset Quotes erd
+\end_inset 
+
+, which is just the product topology of the discrete set of values at each
+ lattice point.
+ 
+\layout Standard
+
+This finer topology on the one-sided lattice allows a richer set of eigenfunctio
+ns to be constructed for the Bernoulli operator.
+ One begins by noting that the shift operator 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ on the lattice, defined by 
+\begin_inset Formula \begin{equation}
+\tau(\sigma)=\tau((\sigma_{1},\sigma_{2},\cdots))=(\sigma_{2},\sigma_{3},\cdots)\label{eq:}\end{equation}
+
+\end_inset 
+
+ corresponds exactly to the Bernoulli map: 
+\begin_inset Formula \begin{equation}
+x(\tau(\sigma))=2x(\sigma)-\left\lfloor 2x(\sigma)\right\rfloor \label{eq:}\end{equation}
+
+\end_inset 
+
+ where we've written 
+\begin_inset Formula $x(\sigma)$
+\end_inset 
+
+ instead of 
+\begin_inset Formula $x$
+\end_inset 
+
+ to help remind that 
+\begin_inset Formula $x$
+\end_inset 
+
+ should be thought of as a map, not a real number.
+ For the remainder of this section, this distinction will rarely be made
+ again, although every occurrance of 
+\begin_inset Formula $\textrm{x}$
+\end_inset 
+
+ should be implicitly understood to be the map 
+\begin_inset Formula $x:\Omega\to[0,1]$
+\end_inset 
+
+.
+\layout Standard
+
+Consider now some arbitrary function 
+\begin_inset Formula $V:\Omega\to R$
+\end_inset 
+
+, where 
+\begin_inset Formula $R$
+\end_inset 
+
+ may be taken to be the field 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, or 
+\begin_inset Formula $\mathbb{C}$
+\end_inset 
+
+, or more generally just some ring.
+ Then, given some 
+\begin_inset Formula $\lambda\in R$
+\end_inset 
+
+, one may construct the sum 
+\begin_inset Formula \begin{equation}
+H(\sigma)=\sum_{n=1}^{\infty}\lambda^{n}V(\tau^{n}\sigma)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\tau^{n}\sigma=(\tau\circ\tau\circ\cdots\circ\tau)(\sigma)$
+\end_inset 
+
+ is simply the 
+\begin_inset Formula $n$
+\end_inset 
+
+-fold iteration of the shift operator.
+ In physics, the function 
+\begin_inset Formula $H$
+\end_inset 
+
+ is usually called the translation-invariant Hamiltonian for the system,
+ while 
+\begin_inset Formula $V$
+\end_inset 
+
+ is the interaction potential.
+ For a one-sided lattice, 
+\begin_inset Formula $H$
+\end_inset 
+
+ is not strictly translation invariant, as 
+\begin_inset Formula \begin{equation}
+H(\tau(\sigma))=\sum_{n=1}^{\infty}\lambda^{n}V(\tau^{n+1}\sigma)=\frac{H(\sigma)-V(\sigma)}{\lambda}\label{eq:}\end{equation}
+
+\end_inset 
+
+ so that 
+\begin_inset Formula $H$
+\end_inset 
+
+ is 
+\begin_inset Quotes eld
+\end_inset 
+
+almost
+\begin_inset Quotes erd
+\end_inset 
+
+ an eigenvector of 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, with eigenvalue 
+\begin_inset Formula $1/\lambda$
+\end_inset 
+
+.
+ Almost, because the one-sided lattice introduces a correction 
+\begin_inset Formula $V/\lambda$
+\end_inset 
+
+.
+ For the bi-infinite, two-sided lattice, a truly translation-invariant Hamiltoni
+an can be defined.
+ The 
 \layout Section
 
 The Continuous Fractal Spectrum
