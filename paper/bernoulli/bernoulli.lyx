@@ -270,6 +270,15 @@ In this viewpoint,
  
 \layout Standard
 
+XXX Make the note that 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is an element of the dual topology.
+ That is, given a topology, and a function on toppology that blah dual...
+ 
+\layout Standard
+
 When the function 
 \begin_inset Formula $g$
 \end_inset 
@@ -3398,7 +3407,7 @@ We conclude by noting that
 
 , each derivative carries us one step closer into the danger zone.
  
-\layout Section
+\layout Subsection
 
 The Kernel
 \layout Standard
@@ -3600,11 +3609,11 @@ x(\tau(\sigma))=2x(\sigma)-\left\lfloor 2x(\sigma)\right\rfloor \label{eq:}\end{
 \layout Standard
 
 Consider now some arbitrary function 
-\begin_inset Formula $V:\Omega\to R$
+\begin_inset Formula $V:\Omega\to F$
 \end_inset 
 
 , where 
-\begin_inset Formula $R$
+\begin_inset Formula $F$
 \end_inset 
 
  may be taken to be the field 
@@ -3615,14 +3624,14 @@ Consider now some arbitrary function
 \begin_inset Formula $\mathbb{C}$
 \end_inset 
 
-, or more generally just some ring.
+, or some arbitrary generally field.
  Then, given some 
-\begin_inset Formula $\lambda\in R$
+\begin_inset Formula $\lambda\in F$
 \end_inset 
 
 , one may construct the sum 
 \begin_inset Formula \begin{equation}
-H(\sigma)=\sum_{n=1}^{\infty}\lambda^{n}V(\tau^{n}\sigma)\label{eq:}\end{equation}
+H(\sigma)=\sum_{n=1}^{\infty}\lambda^{n}V(\tau^{n}\sigma)\label{eq:Lattice Hamlitonian}\end{equation}
 
 \end_inset 
 
@@ -3698,94 +3707,116 @@ If
 \begin_inset Formula $p$
 \end_inset 
 
- inequivalent right-shift operators.
- Taking 
+ inequivalent right-shift operators 
+\begin_inset Formula $S_{k}$
+\end_inset 
+
+:
+\begin_inset Formula \begin{equation}
+S_{k}(\sigma_{1},\sigma_{2},\cdots)=(k,\sigma_{1},\sigma_{2},\cdots)\label{eq:}\end{equation}
+
+\end_inset 
+
+These right-shift operators are inverses to the left shift operator 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ only on one side, in that 
+\begin_inset Formula $\tau\circ S_{k}$
+\end_inset 
+
+ is the identity, but 
+\begin_inset Formula $S_{k}\circ\tau$
+\end_inset 
+
+ is not.
+ Clearly, 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ has no left-inverse, as 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ throws away data in its action.
+ For the 
 \begin_inset Formula $p=2$
 \end_inset 
 
- for simplicity, one has:
+ case, the shift operators act on the Cantor mapping as 
 \begin_inset Formula \begin{eqnarray}
-u(\sigma_{1},\sigma_{2},\cdots) & = & (1,\sigma_{1},\sigma_{2},\cdots)\nonumber \\
-d(\sigma_{1},\sigma_{2},\cdots) & = & (0,\sigma_{1},\sigma_{2},\cdots)\label{eq:}\end{eqnarray}
+x(S_{0}(\sigma)) & = & \frac{x(\sigma)}{2}\nonumber \\
+x(S_{1}(\sigma)) & = & \frac{1+x(\sigma)}{2}\label{eq:}\end{eqnarray}
 
 \end_inset 
 
- which clearly correspond to 
-\begin_inset Formula \begin{eqnarray}
-x(u(\sigma)) & = & \frac{1+x(\sigma)}{2}\nonumber \\
-x(d(\sigma)) & = & \frac{x(\sigma)}{2}\label{eq:}\end{eqnarray}
-
+ and so one may immediately recognize how to pose the Bernoulli operator
+ on the lattice model.
+ For some arbitrary 
+\begin_inset Formula $f:\Omega\to F$
 \end_inset 
 
- Thier action on the Hamiltonian 
-\begin_inset Formula $H$
-\end_inset 
-
- is readily computed, so that one has 
+ one defines 
 \begin_inset Formula \begin{equation}
-H(u(\sigma))+H(d(\sigma))=V(u(\sigma))+V(d(\sigma))+2\lambda H(\sigma)\label{eq:}\end{equation}
+\left[\mathcal{L}_{B}f\right](\sigma)=\frac{1}{2}\left[f(S_{0}(\sigma))+f(S_{1}(\sigma))\right]\label{eq:}\end{equation}
 
 \end_inset 
 
- Now, in the above, both 
-\begin_inset Formula $H$
+For the general 
+\begin_inset Formula $p$
 \end_inset 
 
- and 
-\begin_inset Formula $V$
+-adic case, this generalizes trivially:
+\layout Definition
+
+The 
+\begin_inset Formula $p$
 \end_inset 
 
- where defined as maps on the space of strings 
-\begin_inset Formula $\Omega$
-\end_inset 
-
-.
- Lets now momentarily revert to a coarser topology on 
-\begin_inset Formula $\Omega$
-\end_inset 
-
-, eliminating the double-points by equating them.
- In this coarser topology, 
-\begin_inset Formula $x:\Omega\to[0,1]$
-\end_inset 
-
- becomes an isomorphism, which is invertible, thus giving 
-\begin_inset Formula $\Omega$
-\end_inset 
-
- to topology of the real numbers.
- This allows the above equation to be written in the far more suggestive
- form 
+-adic Bernoulli operator acting on the dual space of lattice configurations
+ is given by 
 \begin_inset Formula \begin{equation}
-H\left(\frac{1+x}{2}\right)+H\left(\frac{x}{2}\right)=V\left(\frac{1+x}{2}\right)+V\left(\frac{x}{2}\right)+2\lambda H(x)\label{eq:}\end{equation}
+\left[\mathcal{L}_{B}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}f\left(S_{k}(\sigma)\right)\label{eq:Lattice Bernoulli}\end{equation}
 
 \end_inset 
 
- This last equation can be immediately recognized as an eigenfunction of
- the Bernoulli operator 
+ where 
+\begin_inset Formula $S_{k}$
+\end_inset 
+
+ is the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th right-shift operator.
+\layout Standard
+
+The action of 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
- with eigenvalue 
-\begin_inset Formula $\lambda$
+ on the Hamiltonian 
+\begin_inset Formula $H$
 \end_inset 
 
-, provided that the potential 
-\begin_inset Formula $V$
-\end_inset 
-
- was choosen so that 
+ is takes the form
 \begin_inset Formula \begin{equation}
-V\left(\frac{1+x}{2}\right)+V\left(\frac{x}{2}\right)=0\label{eq:}\end{equation}
+\mathcal{L}_{B}H=\mathcal{L}_{B}V+\lambda H\label{eq:}\end{equation}
 
 \end_inset 
 
- in other words, provided that 
+ and thus 
+\begin_inset Formula $H$
+\end_inset 
+
+ is is an eigenvector provided that 
 \begin_inset Formula $\mathcal{L}_{B}V=0$
 \end_inset 
 
 .
- Thus, curiously, functions in the kernel of 
+\layout Standard
+
+Thus, curiously, functions in the kernel of 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
@@ -3794,15 +3825,49 @@ V\left(\frac{1+x}{2}\right)+V\left(\frac{x}{2}\right)=0\label{eq:}\end{equation}
 \end_inset 
 
 .
- The above generalizes trivially to the 
-\begin_inset Formula $p$
-\end_inset 
-
--adic case, and, more importantly, generalizes to other transfer operators
- in general.
+ The above construction is not limited the the Bernoulli operator, but in
+ fact generalizes to other transfer operators in general.
  In particular, it can be used to define general eigenfunctions of the Gauss-Kuz
 min-Wirsing (GKW) operator XXX ref my other paper.
- 
+ XXX perhaps show how this is done in general.
+ In the next section ???XX
+\layout Standard
+
+The above construction shows how to construct a large number of general
+ eigenfunctions, provided that on can find non-trivial objects in the kernel,
+ and provided that the sum of equation 
+\begin_inset LatexCommand \ref{eq:Lattice Hamlitonian}
+
+\end_inset 
+
+ converges.
+\layout Standard
+
+Although the finer topology of the Cantor set promises a richer set of functions
+, one does not need to employ it to find interesting functions in the kernel.
+\layout Section
+
+Number theoretic connections
+\layout Standard
+
+XXX The definition 
+\begin_inset LatexCommand \ref{eq:Lattice Bernoulli}
+
+\end_inset 
+
+ is suggestive of the kinds of sums occuring in the definition of the Hecke
+ operator.
+ One may also consider a Gauss-sum-like extension 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{B}^{(m)}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}e^{2\pi ikm/p}f\left(S_{k}(\sigma)\right)\label{eq:Lattice Bernoulli}\end{equation}
+
+\end_inset 
+
+ regaining 
+\begin_inset Formula $\mathcal{L}_{B}=\mathcal{L}_{B}^{(0)}$
+\end_inset 
+
+.
 \layout Section
 
 The Continuous Fractal Spectrum
