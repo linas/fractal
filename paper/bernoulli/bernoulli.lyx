@@ -270,15 +270,6 @@ In this viewpoint,
  
 \layout Standard
 
-XXX Make the note that 
-\begin_inset Formula $\rho$
-\end_inset 
-
- is an element of the dual topology.
- That is, given a topology, and a function on toppology that blah dual...
- 
-\layout Standard
-
 When the function 
 \begin_inset Formula $g$
 \end_inset 
@@ -350,7 +341,9 @@ density
 \end_inset 
 
  to be an operator acting on a topological space endowed with multiplication
- and addition, that is, a topological ring.
+ and addition, that is, a topological vector space.
+ A precise definition of the transfer operator is given in the next section,
+ as being the restriction of the pushforward on the sheaf to its stalks.
  
 \layout Standard
 
@@ -444,7 +437,339 @@ The eigenfunctions of
  are called Ruelle resonances [need citation], elaborate.
 \layout Section
 
-The Transfer Operator of the Bernoulli Map
+Sheaf-theoretic description
+\layout Standard
+
+The clearest and most precise, although also the most abstract formulation
+ of the transfer operator is in the language of sheaves.
+ Here it gains a topological setting, which helps clarify how the transfer
+ function behaves on spaces of functions.
+ This definition is formulated, from first principles, below.
+\layout Standard
+
+Consider a topological space 
+\begin_inset Formula $X$
+\end_inset 
+
+, and a field 
+\begin_inset Formula $F$
+\end_inset 
+
+, which may be taken to be 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+, 
+\begin_inset Formula $\mathbb{C}$
+\end_inset 
+
+ or more generally, just some arbitrary field.
+ One may then define the algebra of functions 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+ on 
+\begin_inset Formula $X$
+\end_inset 
+
+ as the set of functions 
+\begin_inset Formula $f\in\mathcal{F}(X)$
+\end_inset 
+
+ such that 
+\begin_inset Formula $f:X\to F$
+\end_inset 
+
+.
+ The algebra of functions is a vector space, in that given two functions
+ 
+\begin_inset Formula $f_{1},f_{2}\in\mathcal{F}(X)$
+\end_inset 
+
+, thier linear combination 
+\begin_inset Formula $af_{1}+bf_{2}$
+\end_inset 
+
+ is also an element of 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+; thus 
+\begin_inset Formula $f_{1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $f_{2}$
+\end_inset 
+
+ may be interpreted to be the vectors of a vector space.
+ An algebra is a vector space for which the multiplication of vectors is
+ defined.
+ In the case of 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+, the multiplication is the pair-wise multiplication of functions; that
+ is, the product 
+\begin_inset Formula $f_{1}f_{2}$
+\end_inset 
+
+ is defined as the function 
+\begin_inset Formula $(f_{1}f_{2})(x)=f_{1}(x)\cdot f_{2}(x)$
+\end_inset 
+
+, and so 
+\begin_inset Formula $f_{1}f_{2}$
+\end_inset 
+
+ is again an element of 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+.
+ Sine one clearly has 
+\begin_inset Formula $f_{1}f_{2}=f_{2}f_{1}$
+\end_inset 
+
+, mutliplicaiton is commutative, and so 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+ is als a commutative ring.
+\layout Standard
+
+The space 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+ may be endowed with a topology.
+ The coarsest topology on 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+ is the 
+\emph on 
+weak topology
+\emph default 
+, which is obtained by taking 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+ to be the space that is dual to 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ As a vector space, 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+ may be endowed with a norm 
+\begin_inset Formula $\left\Vert f\right\Vert $
+\end_inset 
+
+.
+ For example, one may take the norm to be the 
+\begin_inset Formula $L^{p}$
+\end_inset 
+
+-norm 
+\begin_inset Formula \begin{equation}
+\left\Vert f\right\Vert _{p}=\left(\int\left|f(x)\right|^{p}dx\right)^{1/p}\label{eq:}\end{equation}
+
+\end_inset 
+
+ For 
+\begin_inset Formula $p=2$
+\end_inset 
+
+, this norm converts the space 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+ into the Hilbert space of square-integrable functions on 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ Other norms are possible, in which case 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset 
+
+ has the structure of a Banach space rather than a Hilbert space.
+\layout Standard
+
+Consider now a homomorphism of topolgical spaces 
+\begin_inset Formula $g:X\to Y$
+\end_inset 
+
+.
+ This homomorphism induces the pullback 
+\begin_inset Formula $g^{*}:\mathcal{F}(Y)\to\mathcal{F}(X)$
+\end_inset 
+
+ on the algebra of functions, by mapping 
+\begin_inset Formula $f\mapsto g^{*}(f)=f\circ g$
+\end_inset 
+
+ so that 
+\begin_inset Formula $f\circ g:Y\to F$
+\end_inset 
+
+.
+ The pullback is a linear operator, in that 
+\begin_inset Formula \begin{equation}
+g^{*}(af_{1}+bf_{2})=ag^{*}(f_{1})+bg^{*}(f_{2})\label{eq:}\end{equation}
+
+\end_inset 
+
+ This is very easily demonstrated by considering how 
+\begin_inset Formula $g^{*}f$
+\end_inset 
+
+ acts at a point: 
+\begin_inset Formula $(g^{*}f)(x)=(f\circ g)(x)=f(g(x))$
+\end_inset 
+
+ and so the linearity of 
+\begin_inset Formula $g^{*}$
+\end_inset 
+
+ on 
+\begin_inset Formula $af_{1}+bf_{2}$
+\end_inset 
+
+ follows trivially.
+\layout Standard
+
+An analogous mapping, but going in the opposite direction: 
+\layout Standard
+
+, called the pushforward or transfer operator, going in he 
+\begin_inset Formula $\mathcal{L}:\mathcal{F}(X)\to\mathcal{F}(Y)$
+\end_inset 
+
+
+\layout Standard
+
+XXX
+\layout Standard
+
+An analogous mapping going in the other direction, the pushforward , 
+\layout Standard
+
+XXX
+\layout Standard
+
+The measure-theoretic pushforward can be defined as follows.
+ One endows the spaces 
+\begin_inset Formula $X$
+\end_inset 
+
+ and 
+\begin_inset Formula $Y$
+\end_inset 
+
+ with sigma-algebras 
+\begin_inset Formula $(X,\mathcal{A})$
+\end_inset 
+
+ and 
+\begin_inset Formula $(Y,\mathcal{B})$
+\end_inset 
+
+, so that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset 
+
+ is the set of subsets of 
+\begin_inset Formula $X$
+\end_inset 
+
+ obeying the axioms of a sigma-algebra, and similarly for 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+.
+ A mapping 
+\begin_inset Formula $g:X\to Y$
+\end_inset 
+
+ is called 
+\begin_inset Quotes eld
+\end_inset 
+
+measureable
+\begin_inset Quotes erd
+\end_inset 
+
+ if, for all 
+\begin_inset Formula $B\in\mathcal{B}$
+\end_inset 
+
+, one has the preimage 
+\begin_inset Formula $g^{-1}(B)\in\mathcal{A}$
+\end_inset 
+
+.
+ Thus, a measurable mapping induces a pushforward on the sigma-algebras:
+ that is, one has a push-forward 
+\begin_inset Formula $g_{*}:\mathcal{F}(A)\to\mathcal{F}(B)$
+\end_inset 
+
+ given by 
+\begin_inset Formula $f\mapsto g_{*}(f)=f\circ g^{-1}$
+\end_inset 
+
+, which is defined by virtue of the measureability of 
+\begin_inset Formula $g$
+\end_inset 
+
+.
+ The push-forward is a linear operator, in that 
+\begin_inset Formula $g_{*}(af_{1}+bf_{2})=ag_{*}(f_{1})+bg_{*}(f_{2})$
+\end_inset 
+
+.
+ The transfer operator is an attempt to promote the measure-theoretic push-fowar
+d to the point-set topology on 
+\begin_inset Formula $X$
+\end_inset 
+
+ and 
+\begin_inset Formula $Y$
+\end_inset 
+
+.
+ That is, the transfer operator is defined as a linear operator 
+\begin_inset Formula $\mathcal{L}_{g}:\mathcal{F}(X)\to\mathcal{F}(Y)$
+\end_inset 
+
+ so that it coincides with the pushforward sheaf.
+\layout Standard
+
+XXXX
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{g}^{(\Phi)}f\right]\left(x\right)=\sum_{y=g^{-1}(x)}\Phi(y)f(y)\label{eq:}\end{equation}
+
+\end_inset 
+
+ The auxilliary function plays an important role when one start
+\layout Standard
+
+XXX Make the note that 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is an element of the dual topology.
+ That is, given a topology, and a function on toppology that blah dual...
+ 
+\layout Section
+
+Transfer Operator of the Bernoulli Map
 \layout Standard
 
 The Bernoulli map is an exactly solvable example of deterministic chaos.
