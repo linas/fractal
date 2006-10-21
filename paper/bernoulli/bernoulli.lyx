@@ -343,7 +343,7 @@ density
  to be an operator acting on a topological space endowed with multiplication
  and addition, that is, a topological vector space.
  A precise definition of the transfer operator is given in the next section,
- as being the restriction of the pushforward on the sheaf to its stalks.
+ as being the pushforward onset of measureable, sigma-additive functions.
  
 \layout Standard
 
@@ -437,14 +437,16 @@ The eigenfunctions of
  are called Ruelle resonances [need citation], elaborate.
 \layout Section
 
-Sheaf-theoretic description
+Measure-theoretic description
 \layout Standard
 
 The clearest and most precise, although also the most abstract formulation
- of the transfer operator is in the language of sheaves.
- Here it gains a topological setting, which helps clarify how the transfer
- function behaves on spaces of functions.
+ of the transfer operator is in the language of measure theory, where it
+ is seen to be same thing as the push-forward.
+ In this language, it gains a topological setting, which helps clarify how
+ the transfer function behaves on spaces of functions.
  This definition is formulated, from first principles, below.
+ 
 \layout Standard
 
 Consider a topological space 
@@ -642,27 +644,37 @@ g^{*}(af_{1}+bf_{2})=ag^{*}(f_{1})+bg^{*}(f_{2})\label{eq:}\end{equation}
  follows trivially.
 \layout Standard
 
-An analogous mapping, but going in the opposite direction: 
-\layout Standard
-
-, called the pushforward or transfer operator, going in he 
-\begin_inset Formula $\mathcal{L}:\mathcal{F}(X)\to\mathcal{F}(Y)$
+One may construct an analogous mapping, but going in the opposite direction,
+ called the pushforward: 
+\begin_inset Formula $g_{*}:\mathcal{F}(X)\to\mathcal{F}(Y)$
 \end_inset 
 
+.
+ There are two ways of defining a push-forward.
+ One way is to define it in terms of the sheaves of functions on subsets
+ of 
+\begin_inset Formula $X$
+\end_inset 
 
+ and 
+\begin_inset Formula $Y$
+\end_inset 
+
+.
+ The sheaf-theoretic description is more or less insensitive to the ideas
+ of measureability, whereas this is important to the defintion of the transfer
+ operator, as witnessed by the appearance of the Jacobian determinant in
+ equation 
+\begin_inset LatexCommand \ref{eq: transfer-jacobi}
+
+\end_inset 
+
+.
+ By contrast, the measure-theortic pushforward captures this aspect.
+ It may be defined as follows.
 \layout Standard
 
-XXX
-\layout Standard
-
-An analogous mapping going in the other direction, the pushforward , 
-\layout Standard
-
-XXX
-\layout Standard
-
-The measure-theoretic pushforward can be defined as follows.
- One endows the spaces 
+One endows the spaces 
 \begin_inset Formula $X$
 \end_inset 
 
@@ -703,7 +715,7 @@ measureable
 \begin_inset Quotes erd
 \end_inset 
 
- if, for all 
+ if, for all Borel sets 
 \begin_inset Formula $B\in\mathcal{B}$
 \end_inset 
 
@@ -711,10 +723,10 @@ measureable
 \begin_inset Formula $g^{-1}(B)\in\mathcal{A}$
 \end_inset 
 
-.
+ being a Borel set as well.
  Thus, a measurable mapping induces a pushforward on the sigma-algebras:
  that is, one has a push-forward 
-\begin_inset Formula $g_{*}:\mathcal{F}(A)\to\mathcal{F}(B)$
+\begin_inset Formula $g_{*}:\mathcal{F}(\mathcal{A})\to\mathcal{F}(\mathcal{B})$
 \end_inset 
 
  given by 
@@ -731,8 +743,283 @@ measureable
 \end_inset 
 
 .
- The transfer operator is an attempt to promote the measure-theoretic push-fowar
-d to the point-set topology on 
+ 
+\layout Standard
+
+One regains the transfer operator as defined in equation 
+\begin_inset LatexCommand \ref{eq: transfer-jacobi}
+
+\end_inset 
+
+ by considering the limiting behaviour of the pushforward on progressively
+ smaller sets.
+ Introduce a measure 
+\begin_inset Formula $\mu:\mathcal{A}\to\mathbb{R}^{+}$
+\end_inset 
+
+ and analogously 
+\begin_inset Formula $\nu:\mathcal{B}\to Y$
+\end_inset 
+
+.
+ The mapping 
+\begin_inset Formula $g$
+\end_inset 
+
+ is measure-preserving if 
+\begin_inset Formula $\nu$
+\end_inset 
+
+ is a pushforward of 
+\begin_inset Formula $\mu$
+\end_inset 
+
+, that is, if 
+\begin_inset Formula $\nu=g_{*}\mu=\mu\circ g^{-1}$
+\end_inset 
+
+.
+ The measure is used to rigorously define integration on 
+\begin_inset Formula $X$
+\end_inset 
+
+ and 
+\begin_inset Formula $Y$
+\end_inset 
+
+.
+ Elements of 
+\begin_inset Formula $\mathcal{F}(\mathcal{A})$
+\end_inset 
+
+ can be informaly understood to be integrals, in that 
+\begin_inset Formula $f(A)$
+\end_inset 
+
+ for 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset 
+
+ may be understood as 
+\begin_inset Formula \begin{equation}
+f(A)=\int_{A}\tilde{f}(z)d\mu(z)=\int_{A}\tilde{f}(z)\left|\mu^{\prime}(z)\right|dz\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\left|\mu^{\prime}(x)\right|$
+\end_inset 
+
+ is to be understood as the Jacobean determinant at a point 
+\begin_inset Formula $x\in X$
+\end_inset 
+
+.
+ Here, 
+\begin_inset Formula $\tilde{f}$
+\end_inset 
+
+ can be undersood to be a function that is being integrated over the set
+ 
+\begin_inset Formula $A$
+\end_inset 
+
+, whse integral is dnted by 
+\begin_inset Formula $f(A)$
+\end_inset 
+
+.
+ The value of 
+\begin_inset Formula $\tilde{f}$
+\end_inset 
+
+ at a point 
+\begin_inset Formula $x\in X$
+\end_inset 
+
+ can be obtained by means of a limit.
+ One considers a sequence of 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset 
+
+, each succesively smaler than the last, each containing the point 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ One then has 
+\begin_inset Formula \begin{equation}
+\lim_{\overrightarrow{A\ni x}}\,\frac{f(A)}{\mu(A)}=\tilde{f}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which can be intuitively proved by considering 
+\begin_inset Formula $A$
+\end_inset 
+
+ so small that 
+\begin_inset Formula $\tilde{f}$
+\end_inset 
+
+ is approximately constant over 
+\begin_inset Formula $A$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+f(A)=\int_{A}\tilde{f}(z)d\mu(z)\approx\tilde{f}(x)\int_{A}d\mu=\tilde{f}(x)\mu(A)\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\layout Standard
+
+To perform the analogous limit for the pushforward, one must consider a
+ point 
+\begin_inset Formula $y\in Y$
+\end_inset 
+
+ and sets 
+\begin_inset Formula $B\in\mathcal{B}$
+\end_inset 
+
+ containing 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ In what follows, it is now assumed that 
+\begin_inset Formula $g:X\to Y$
+\end_inset 
+
+ is a multi-sheeted countable covering of 
+\begin_inset Formula $Y$
+\end_inset 
+
+ by 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ By this it is meant that for any 
+\begin_inset Formula $y$
+\end_inset 
+
+ that is not a branch-point, there is a nice neighborhood of 
+\begin_inset Formula $y$
+\end_inset 
+
+ such that its pre-image consists of the union of an at most countable number
+ of pair-wise disjoint sets.
+ That is, for 
+\begin_inset Formula $y$
+\end_inset 
+
+ not a branch point, and for 
+\begin_inset Formula $B\ni y$
+\end_inset 
+
+ sufficiently small, one may write 
+\begin_inset Formula \begin{equation}
+g^{-1}(B)=A_{1}\cup A_{2}\cup\cdots=\bigcup_{j=1}^{k}A_{j}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $k$
+\end_inset 
+
+ is either finite or stands for 
+\begin_inset Formula $\infty$
+\end_inset 
+
+, and where 
+\begin_inset Formula $A_{i}\cap A_{j}=\varnothing$
+\end_inset 
+
+ for all 
+\begin_inset Formula $i\ne j$
+\end_inset 
+
+.
+ The axiom of sigma-additivity gaurentees that such multi-sheeted covers
+ behave just the way one expects integrals to behave: in other words, one
+ has 
+\begin_inset Formula \begin{equation}
+\mu\left(g^{-1}(B)\right)=\mu\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}\mu\left(A_{j}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ whenever the collection of 
+\begin_inset Formula $A_{j}$
+\end_inset 
+
+ are pair-wise disjoint.
+ Similarly, in order to have the elements 
+\begin_inset Formula $f\in\mathcal{F}(\mathcal{A})$
+\end_inset 
+
+ behave as one expects integrals to behave, one must restrict 
+\begin_inset Formula $\mathcal{F}(\mathcal{A})$
+\end_inset 
+
+ to contain only sigma-additive functions as well, so that 
+\begin_inset Formula \begin{equation}
+f\left(g^{-1}(B)\right)=f\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}f\left(A_{j}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ As the set 
+\begin_inset Formula $B$
+\end_inset 
+
+ is taken to be smaller and smaller, the sets 
+\begin_inset Formula $A_{j}$
+\end_inset 
+
+ will become smaller as well.
+ Denote by 
+\begin_inset Formula $x_{j}$
+\end_inset 
+
+ the corresponding limit point of each 
+\begin_inset Formula $A_{j}$
+\end_inset 
+
+, so that 
+\begin_inset Formula $g(x_{j})=y$
+\end_inset 
+
+ and the pre-image of 
+\begin_inset Formula $y$
+\end_inset 
+
+ consists of these points: 
+\begin_inset Formula $g^{-1}(y)=\left\{ x_{1},x_{2},\cdots\left|\, g(x_{j})=y\right.\right\} $
+\end_inset 
+
+.
+ One now combines these provisions to write 
+\begin_inset Formula \begin{eqnarray}
+\left[g_{*}\tilde{f}\right](y) & = & \lim_{\overrightarrow{B\ni y}}\,\left[\frac{\left(g_{*}f\right)(B)}{\nu(B)}\right]\nonumber \\
+ & = & \lim_{\overrightarrow{B\ni y}}\,\left[\frac{\left(f\circ g^{-1}\right)(B)}{\nu(B)}\right]\nonumber \\
+ & = & \lim_{\overrightarrow{Aj\ni g^{-1}(y)}}\,\frac{f\left(A_{1}\cup A_{2}\cup\cdots\right)}{\nu(B)}\nonumber \\
+ & = & \lim_{\overrightarrow{Aj\ni g^{-1}(y)}}\,\frac{\sum_{j=1}^{k}f\left(A_{j}\right)}{\nu(B)}\nonumber \\
+ & = & \sum_{j=1}^{k}\tilde{f}\left(x_{j}\right)\lim_{\overrightarrow{Aj\ni x_{j}}}\,\frac{\mu\left(A_{j}\right)}{\nu(B)}\label{eq:}\end{eqnarray}
+
+\end_inset 
+
+
+\layout Standard
+
+XXX
+\layout Standard
+
+smaller and smaller 
+\layout Standard
+
+XXX The transfer operator is an attempt to promote the measure-theoretic
+ push-foward to the point-set topology on 
 \begin_inset Formula $X$
 \end_inset 
 
