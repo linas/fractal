@@ -209,16 +209,16 @@ A shift in perspective may be gained not by considering how
 .
  This verbal description may be given form as 
 \begin_inset Formula \begin{equation}
-\rho^{\prime}(x)=\int_{0}^{1}\,\delta\left(x-g(y)\right)\rho(y)\; dy\label{eq:transfer-dirac}\end{equation}
+\rho^{\prime}(y)=\int_{0}^{1}\,\delta\left(y-g(x)\right)\rho(x)\; dx\label{eq:transfer-dirac}\end{equation}
 
 \end_inset 
 
  where 
-\begin_inset Formula $\rho^{\prime}(x)$
+\begin_inset Formula $\rho^{\prime}(y)$
 \end_inset 
 
  is the new density at point 
-\begin_inset Formula $x$
+\begin_inset Formula $y=g(x)$
 \end_inset 
 
  and 
@@ -278,7 +278,7 @@ When the function
  formulation of the transfer operator above can be rephrased in a more convenien
 t form, as 
 \begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{g}\rho\right]\left(x\right)=\sum_{y:x=g(y)}\frac{\rho(y)}{\left|dg(y)/dy\right|}\label{eq: transfer-jacobi}\end{equation}
+\left[\mathcal{L}_{g}\rho\right]\left(y\right)=\sum_{x:y=g(x)}\frac{\rho(x)}{\left|dg(x)/dx\right|}\label{eq: transfer-jacobi}\end{equation}
 
 \end_inset 
 
@@ -457,16 +457,39 @@ Consider a topological space
 \begin_inset Formula $F$
 \end_inset 
 
-, which may be taken to be 
+ over the reals 
 \begin_inset Formula $\mathbb{R}$
 \end_inset 
 
-, 
+.
+ Here, 
+\begin_inset Formula $F$
+\end_inset 
+
+ may be taken to be 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ itself, or 
 \begin_inset Formula $\mathbb{C}$
 \end_inset 
 
- or more generally, just some arbitrary field.
- One may then define the algebra of functions 
+ or some more general field over 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ The restriction of 
+\begin_inset Formula $F$
+\end_inset 
+
+ being a field over the reals is necessitated by the measure-theoretic manipulat
+ions below, where functions will need to be multiplied by the real-valued
+ measure.
+ 
+\layout Standard
+
+One may then define the algebra of functions 
 \begin_inset Formula $\mathcal{F}(X)$
 \end_inset 
 
@@ -753,7 +776,22 @@ One regains the transfer operator as defined in equation
 
  by considering the limiting behaviour of the pushforward on progressively
  smaller sets.
- Introduce a measure 
+ That is, one has
+\layout Theorem
+
+The transfer operator is the point-set topology limit of the measure-theoretic
+ pushforward.
+ 
+\layout Proof
+
+The proof that follows is rather informal, so as to keep it simple.
+ It is aimed mostly at articulating the language and terminology of measure
+ theory.
+ The result is none-the-less rigorous, if taken within the confines of the
+ defintions presented.
+\layout Proof
+
+Introduce a measure 
 \begin_inset Formula $\mu:\mathcal{A}\to\mathbb{R}^{+}$
 \end_inset 
 
@@ -871,10 +909,7 @@ f(A)=\int_{A}\tilde{f}(z)d\mu(z)\approx\tilde{f}(x)\int_{A}d\mu=\tilde{f}(x)\mu(
 
 \end_inset 
 
- 
-\layout Standard
-
-To perform the analogous limit for the pushforward, one must consider a
+ To perform the analogous limit for the pushforward, one must consider a
  point 
 \begin_inset Formula $y\in Y$
 \end_inset 
@@ -942,6 +977,7 @@ g^{-1}(B)=A_{1}\cup A_{2}\cup\cdots=\bigcup_{j=1}^{k}A_{j}\label{eq:}\end{equati
 \end_inset 
 
 .
+ A branch points, such a decomposition may not be possible.
  The axiom of sigma-additivity gaurentees that such multi-sheeted covers
  behave just the way one expects integrals to behave: in other words, one
  has 
@@ -1003,13 +1039,156 @@ f\left(g^{-1}(B)\right)=f\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}f\lef
 \begin_inset Formula \begin{eqnarray}
 \left[g_{*}\tilde{f}\right](y) & = & \lim_{\overrightarrow{B\ni y}}\,\left[\frac{\left(g_{*}f\right)(B)}{\nu(B)}\right]\nonumber \\
  & = & \lim_{\overrightarrow{B\ni y}}\,\left[\frac{\left(f\circ g^{-1}\right)(B)}{\nu(B)}\right]\nonumber \\
- & = & \lim_{\overrightarrow{Aj\ni g^{-1}(y)}}\,\frac{f\left(A_{1}\cup A_{2}\cup\cdots\right)}{\nu(B)}\nonumber \\
- & = & \lim_{\overrightarrow{Aj\ni g^{-1}(y)}}\,\frac{\sum_{j=1}^{k}f\left(A_{j}\right)}{\nu(B)}\nonumber \\
- & = & \sum_{j=1}^{k}\tilde{f}\left(x_{j}\right)\lim_{\overrightarrow{Aj\ni x_{j}}}\,\frac{\mu\left(A_{j}\right)}{\nu(B)}\label{eq:}\end{eqnarray}
+ & = & \lim_{\overrightarrow{A_{j}\ni g^{-1}(y)}}\,\frac{f\left(A_{1}\cup A_{2}\cup\cdots\right)}{\nu(B)}\nonumber \\
+ & = & \lim_{\overrightarrow{A_{j}\ni g^{-1}(y)}}\,\frac{\sum_{j=1}^{k}f\left(A_{j}\right)}{\nu(B)}\nonumber \\
+ & = & \sum_{j=1}^{k}\tilde{f}\left(x_{j}\right)\lim_{\overrightarrow{A_{j}\ni x_{j}}}\,\frac{\mu\left(A_{j}\right)}{\nu(B)}\label{eq:}\end{eqnarray}
 
 \end_inset 
 
+ The limit in the last line of this sequence of manipulations may be interpreted
+ in two ways, depending on whether one wants to define the measure 
+\begin_inset Formula $\nu$
+\end_inset 
 
+ on 
+\begin_inset Formula $Y$
+\end_inset 
+
+ to be the pushforward of 
+\begin_inset Formula $\mu$
+\end_inset 
+
+, or not.
+ If one does take it to be the pushforward, so that 
+\begin_inset Formula $\nu=g_{*}\mu$
+\end_inset 
+
+, then one has 
+\begin_inset Formula \begin{equation}
+\lim_{\overrightarrow{A_{j}\ni x_{j}}}\,\frac{\mu\left(A_{j}\right)}{g_{*}\mu(B)}=\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\left|g^{\prime}\left(x_{j}\right)\right|$
+\end_inset 
+
+ is the Jacobian determinant of 
+\begin_inset Formula $g$
+\end_inset 
+
+ at 
+\begin_inset Formula $x_{j}$
+\end_inset 
+
+.
+ This last is a standard result of measure theory, and can be intuitively
+ proved by noting that 
+\begin_inset Formula $g\left(A_{j}\right)=B$
+\end_inset 
+
+, so that 
+\begin_inset Formula \begin{equation}
+\nu\left(B\right)=\int_{A_{j}}g^{\prime}(z)\, d\mu(z)\approx g^{\prime}\left(x_{j}\right)\mu\left(A_{j}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ for 
+\begin_inset Quotes eld
+\end_inset 
+
+small enough
+\begin_inset Quotes erd
+\end_inset 
+
+ 
+\begin_inset Formula $B$
+\end_inset 
+
+.
+ Assembling this with the previous result, one has 
+\begin_inset Formula \begin{equation}
+\left[g_{*}\tilde{f}\right](y)=\sum_{x_{j}\in g^{-1}(y)}\frac{\tilde{f}\left(x_{j}\right)}{\left|g^{\prime}\left(x_{j}\right)\right|}\label{eq:Transfer-point}\end{equation}
+
+\end_inset 
+
+ which may be easily recognized as equation 
+\begin_inset LatexCommand \ref{eq: transfer-jacobi}
+
+\end_inset 
+
+.
+ This concludes the proof of the theorem, that the transfer operator is
+ just the point-set topology limit of the pushforward.
+ 
+\layout Standard
+
+Some curious lemmas show up along the way.
+ 
+\layout Lemma
+
+One has 
+\begin_inset Formula \begin{equation}
+\sum_{j=1}^{k}\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}=1\label{eq:}\end{equation}
+
+\end_inset 
+
+ 
+\layout Proof
+
+This follows by taking the limit 
+\begin_inset Formula $\overrightarrow{A_{j}\ni x_{j}}$
+\end_inset 
+
+ of 
+\begin_inset Formula \[
+\frac{\mu\left(A_{j}\right)}{g_{*}\mu(B)}=\frac{\mu\left(A_{j}\right)}{\sum_{i=1}^{k}\mu\left(A_{i}\right)}\]
+
+\end_inset 
+
+ and then summing over 
+\begin_inset Formula $j$
+\end_inset 
+
+.
+\layout Corollary
+
+The constant function is an eigenvector of the transfer operator, associated
+ with the eigenvalue one.
+ 
+\layout Proof
+
+This may be proved in two ways.
+ From the viewpoint of point-sets, one simply takes 
+\begin_inset Formula $\tilde{f}=\mbox{const.}$
+\end_inset 
+
+ in equation 
+\begin_inset LatexCommand \ref{eq:Transfer-point}
+
+\end_inset 
+
+, and applies the lemma above.
+ From the viewpoint of the sigma-algebra, this is nothing more than the
+ seemingly vacuous statement that 
+\begin_inset Formula $\nu=g_{*}\mu$
+\end_inset 
+
+.
+ This becomes slightly less vacuous if one takes the space 
+\begin_inset Formula $Y=X$
+\end_inset 
+
+, so that 
+\begin_inset Formula $g:X\to X$
+\end_inset 
+
+ is a measure-preserving map: 
+\begin_inset Formula $g_{*}\mu=\mu$
+\end_inset 
+
+.
+  
 \layout Standard
 
 XXX
