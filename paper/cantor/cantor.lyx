@@ -32,7 +32,7 @@ Measure of the Very Fat Cantor Set
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-31 December 2005
+31 December 2005 (updates 21 Oct 2006)
 \layout Abstract
 
 This breif note defines the idea of a 
@@ -117,6 +117,386 @@ Although the symmetry properties of the resulting measures could be analyzed
  Maybe later.
 \layout Section
 
+An Open Dyadic Topology
+\layout Standard
+
+Consider the the collection 
+\begin_inset Formula $\mathcal{A}$
+\end_inset 
+
+ of open intervals given by 
+\begin_inset Formula \begin{eqnarray}
+\mathcal{A} & = & \left\{ \left.\left(\frac{m}{2^{n}},\frac{m+1}{2^{n}}\right)\;\right|\; n\in\mathbb{N}_{0}\,\wedge\,0\le m<2^{n}\right\} \nonumber \\
+ & = & \left\{ \left(0,1\right),\left(0,\frac{1}{2}\right),\left(\frac{1}{2},1\right),\left(0,\frac{1}{4}\right),\left(\frac{1}{4},\frac{1}{2}\right),\cdots\right\} \label{eq:}\end{eqnarray}
+
+\end_inset 
+
+ and let 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ be the disjoint union of 
+\begin_inset Formula $\mathcal{A}$
+\end_inset 
+
+ and the empty set.
+ That is, 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ is the set containing the elements of 
+\begin_inset Formula $\mathcal{A}$
+\end_inset 
+
+ together with the empty set.
+\layout Standard
+
+The set 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ of open intervals forms a base for a topology on the open unit interval
+ 
+\begin_inset Formula $X=(0,1)$
+\end_inset 
+
+.
+ One may verify that it satisfies the axioms for being a topological base.
+ A base for 
+\begin_inset Formula $X$
+\end_inset 
+
+ must it cover 
+\begin_inset Formula $X$
+\end_inset 
+
+, and clearly 
+\begin_inset Formula $\mathcal{A}$
+\end_inset 
+
+ does this.
+ A base must be closed under the intersection of its elements.
+ Clearly, for any two elements 
+\begin_inset Formula $A_{i},A_{j}\in\mathcal{A}$
+\end_inset 
+
+, one has that 
+\begin_inset Formula $A_{i}\cap A_{j}$
+\end_inset 
+
+ is equal to either 
+\begin_inset Formula $A_{i}$
+\end_inset 
+
+ or 
+\begin_inset Formula $A_{j}$
+\end_inset 
+
+or is the empty set.
+ Thus 
+\begin_inset Formula $A_{i}\cap A_{j}\in\mathcal{B}$
+\end_inset 
+
+, which is why 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ was created from 
+\begin_inset Formula $\mathcal{A}$
+\end_inset 
+
+: adjoining the emptyset turns 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ into the closure of 
+\begin_inset Formula $\mathcal{A}$
+\end_inset 
+
+ under the operation of intersection.
+ Since 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ may be obtained by means of a finite intersection of elements of 
+\begin_inset Formula $\mathcal{A}$
+\end_inset 
+
+, one has that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset 
+
+ is a sub-base for 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+.
+\layout Standard
+
+The basis 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ generates a topology 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ on the reals, but this topology is clearly coarser than the natural topology.
+ In particular, the interval 
+\begin_inset Formula $(0,1/3)$
+\end_inset 
+
+ is not in 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+.
+ The closest that one can come is the countable union 
+\begin_inset Formula \begin{equation}
+\left(0,\frac{1}{4}\right)\cup\left(\frac{1}{4},\frac{5}{16}\right)\cup\left(\frac{5}{16},\frac{21}{64}\right)\cup\cdots\label{eq:}\end{equation}
+
+\end_inset 
+
+ which is properly contained in 
+\begin_inset Formula $(0,1/3)$
+\end_inset 
+
+, and is missing the points at 
+\begin_inset Formula $1/4$
+\end_inset 
+
+, 
+\begin_inset Formula $5/16$
+\end_inset 
+
+ and so on.
+ 
+\layout Standard
+
+XXX Elaborate on some other topological properties XXX.
+\layout Standard
+
+The set 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ has a countable number of elements, which may be conveniently enumerated
+ by the mid-points of the intervals.
+ In particular, the elements of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ are in one-to-one correpondance with the dyadic rationals.
+ Insofar as one may want to define a measure on 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+, this measure may be specified by a function taking values on the dyadic
+ rationals.
+ A measure is a function 
+\begin_inset Formula \begin{equation}
+\mu:\mathcal{T}\to\mathbb{R}^{+}\label{eq:}\end{equation}
+
+\end_inset 
+
+ that to each element of 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ assigns a non-negative real number, the measure of the element,
+\layout Standard
+
+XXX elaborate that this is enough to specify a meaasure.
+ 
+\layout Section
+
+A Closed Dyadic Topology
+\layout Standard
+
+Consider the collection 
+\begin_inset Formula $\mathcal{C}$
+\end_inset 
+
+ of closed intervals given by 
+\begin_inset Formula \begin{equation}
+\mathcal{C}=\left\{ \left.\left[\frac{m}{2^{n}},\frac{m+1}{2^{n}}\right]\;\right|\; n\in\mathbb{N}_{0}\,\wedge\,0\le m<2^{n}\right\} \label{eq:}\end{equation}
+
+\end_inset 
+
+ This collection is a sub-base for a topology on the reals.
+ That is, 
+\begin_inset Formula $\mathcal{C}$
+\end_inset 
+
+ is not closed under intersection, but its closure 
+\begin_inset Formula $\mathcal{D}$
+\end_inset 
+
+ is straight-forward enough: one adjoins the dyadic rationals.
+ That is, 
+\begin_inset Formula \begin{equation}
+\mathcal{D}=\left\{ c\left|\; c\in\mathcal{C}\;\vee\; c=\frac{m}{2^{n}}\,\mbox{for }n\in\mathbb{N}_{0}\,\wedge\,0\le m<2^{n}\right.\right\} \label{eq:}\end{equation}
+
+\end_inset 
+
+Each dyadic rational may be obtained as the intersection of two elements
+ of 
+\begin_inset Formula $\mathcal{C}$
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $\mathcal{D}$
+\end_inset 
+
+ is the basis for a topology 
+\begin_inset Formula $\mathcal{S}$
+\end_inset 
+
+ on the closed unit interval.
+ The topology 
+\begin_inset Formula $\mathcal{S}$
+\end_inset 
+
+ is finer than the natural topology on the reals.
+\layout Standard
+
+XXX a listing of properties of 
+\begin_inset Formula $\mathcal{S}$
+\end_inset 
+
+.
+ XXX
+\layout Section
+
+A Dyadic Lattice Topology
+\layout Standard
+
+Consider the set 
+\begin_inset Formula $\Omega$
+\end_inset 
+
+ consisting of all half-infinite strings in the two symbols 
+\begin_inset Formula $-1$
+\end_inset 
+
+ and 
+\begin_inset Formula $+1$
+\end_inset 
+
+ (or 
+\begin_inset Formula $A$
+\end_inset 
+
+ and 
+\begin_inset Formula $B$
+\end_inset 
+
+, or 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+, etc.).
+ That is,
+\begin_inset Formula \begin{equation}
+\Omega=\left\{ \sigma\left|\;\sigma=\left(\sigma_{1},\sigma_{2},\sigma_{3},\cdots\right)\,\mbox{with }\sigma_{k}\in\left\{ -1,+1\right\} \,\mbox{for }k\in\mathbb{N}\right.\right\} \label{eq:}\end{equation}
+
+\end_inset 
+
+The set 
+\begin_inset Formula $\Omega$
+\end_inset 
+
+ can be considered to be the set of all lattice configurations one the half-infi
+nite lattice, where each lattice position may take one of two values.
+ Such lattices have a natural topology, the product topology, whose basis
+ elements are the cylinder sets.
+ A cylinder set 
+\begin_inset Formula $C_{(k,s)}$
+\end_inset 
+
+ is specified by a pair 
+\begin_inset Formula $(k,s)$
+\end_inset 
+
+ where 
+\begin_inset Formula $k$
+\end_inset 
+
+ is a non-negative ineteger, and 
+\begin_inset Formula $s=(s_{1},s_{2},s_{3},\cdots)$
+\end_inset 
+
+ is a 
+\emph on 
+finite
+\emph default 
+-length string in two letters.
+ The cylinder sets are then the subsets of 
+\begin_inset Formula $\Omega$
+\end_inset 
+
+ where the lattice values starting at position 
+\begin_inset Formula $k$
+\end_inset 
+
+ are matched by the string 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ That is, 
+\begin_inset Formula \begin{equation}
+C_{(k,s)}=\left\{ \sigma\in\Omega\left|\,\sigma_{k}=s_{1}\wedge\sigma_{k+1}=s_{2}\wedge\cdots\right.\right\} \label{eq:}\end{equation}
+
+\end_inset 
+
+ The cylinder sets then provide a basis for a topology on the lattice, in
+ that the intersection of any two cylinder sets is again a cylinder set,
+ or the empty set.
+ 
+\layout Standard
+
+The cylinder sets impose a topology on the unit interval by means of the
+ dyadic or Cantor mapping 
+\begin_inset Formula \begin{equation}
+x(\sigma)=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equation}
+
+\end_inset 
+
+ where for convenience we define 
+\begin_inset Formula $b_{k}=(\sigma_{k}+1)/2$
+\end_inset 
+
+ so that 
+\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} $
+\end_inset 
+
+ can be interpreted as a binary digit.
+ This mapping is a homomorphism of the set 
+\begin_inset Formula $\Omega$
+\end_inset 
+
+ into the closed unit interval 
+\begin_inset Formula $[0,1]$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+XXX Vet this.
+ The point-set topology on 
+\begin_inset Formula $\Omega$
+\end_inset 
+
+ is a finer topology
+\layout Section
+
 Dyadic numbers, Cantor Sets and Measures
 \layout Standard
 
@@ -128,16 +508,16 @@ dyadic
 \begin_inset Quotes erd
 \end_inset 
 
- expansion
-\layout Standard
-
-
+ expansion 
 \begin_inset Formula \begin{equation}
-x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equation}
+b_{k}=\frac{\sigma_{k}+1}{2}\label{eq:}\end{equation}
 
 \end_inset 
 
- This expansion is not unique, because for every dyadic number, there are
+
+\layout Standard
+
+This expansion is not unique, because for every dyadic number, there are
  two inequivalent expansions.
  For example, 
 \begin_inset Formula $1/2=0.1000..=0.0111...$
