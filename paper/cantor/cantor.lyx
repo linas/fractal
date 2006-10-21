@@ -1,6 +1,6 @@
 #LyX 1.3 created this file. For more info see http://www.lyx.org/
 \lyxformat 221
-\textclass article
+\textclass amsart
 \language english
 \inputencoding auto
 \fontscheme pslatex
@@ -32,7 +32,7 @@ Measure of the Very Fat Cantor Set
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-31 December 2005 (updates 21 Oct 2006)
+31 December 2005 (updates 20 Oct 2006)
 \layout Abstract
 
 This breif note defines the idea of a 
@@ -241,7 +241,44 @@ The basis
 \begin_inset Formula $\mathcal{T}$
 \end_inset 
 
- on the reals, but this topology is clearly coarser than the natural topology.
+, so that elements of 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ may be expressed as the countable union of elements of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+.
+ That is, every element 
+\begin_inset Formula $T\in\mathcal{T}$
+\end_inset 
+
+ may be written as the finite or possibly countably-infinite union of elements
+ of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+T=A_{1}\cup A_{2}\cup\cdots\label{eq:}\end{equation}
+
+\end_inset 
+
+ where each 
+\begin_inset Formula $A_{k}\in\mathcal{B}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The topology 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ is a topology on the reals, but this topology is clearly coarser than the
+ natural topology.
  In particular, the interval 
 \begin_inset Formula $(0,1/3)$
 \end_inset 
@@ -273,7 +310,58 @@ The basis
  
 \layout Standard
 
+The topology 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ is 
+\emph on 
+not
+\emph default 
+ a sigma-algebra.
+ This is because 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ is not closed under complementation.
+ In fact, 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ does not contain the complement of any of its elements, except for the
+ empty set and the whole space 
+\begin_inset Formula $X$
+\end_inset 
+
+ itself.
+ The complement 
+\begin_inset Formula $\neg T$
+\end_inset 
+
+ of 
+\begin_inset Formula $T\in\mathcal{T}$
+\end_inset 
+
+ is defined as the set such that 
+\begin_inset Formula $\neg T\cap T=\varnothing$
+\end_inset 
+
+ while 
+\begin_inset Formula $\neg T\cup T=X$
+\end_inset 
+
+.
+ Clearly 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ fails to contain its complements.
+\layout Standard
+
 XXX Elaborate on some other topological properties XXX.
+\layout Subsection
+
+A measure on this topology
 \layout Standard
 
 The set 
@@ -303,11 +391,177 @@ The set
 \begin_inset Formula $\mathcal{T}$
 \end_inset 
 
- assigns a non-negative real number, the measure of the element,
+ assigns a non-negative real number, the measure of the element.
+ Measures must have the additional property of being additive, in that one
+ must have 
+\begin_inset Formula \begin{equation}
+\mu\left(T_{j}\cup T_{k}\right)=\mu\left(T_{j}\right)+\mu\left(T_{k}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ whenever 
+\begin_inset Formula $T_{j}\cap T_{k}=\varnothing$
+\end_inset 
+
+.
+ Now, the topology 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ has the curious property that every element of 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ may be written as the (countable) union of pairwise-disjoint sets, and
+ furthermore, this collection of pair-wise disjoint sets is a subset of
+ the basis 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+.
+ Thus, to define an additive measure on 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+, it is sufficient to define an additive measure on 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+, which can then be extended uniquely to an additive measure on 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+.
+ 
 \layout Standard
 
-XXX elaborate that this is enough to specify a meaasure.
+Because the the base 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ is countable, the measure may be uniquely defined by specifying a countable
+ set of real numbers.
+ Obe begins with the usual normalization, namely that 
+\begin_inset Formula $\mu(X)=1$
+\end_inset 
+
+.
+ To the interval 
+\begin_inset Formula $(0,1/2)$
+\end_inset 
+
+ one may assign a measure 
+\begin_inset Formula $a$
+\end_inset 
+
+ while to the interval 
+\begin_inset Formula $(1/2,1)$
+\end_inset 
+
+ one may assign the measure 
+\begin_inset Formula $b$
+\end_inset 
+
+.
+ In order to have this measure correspond to the usual sigma-additive measures
+ on the reals, one might demand that 
+\begin_inset Formula $a+b=1$
+\end_inset 
+
+.
+ However, there is nothing in particular about the topology 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ that demands this, and one might suggest that 
+\begin_inset Formula $a+b<1$
+\end_inset 
+
+.
+ Such a measure would still obey the containment axiom, namely, that 
+\begin_inset Formula $\mu(A)\le\mu(B)$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $A\subseteq B$
+\end_inset 
+
+.
+ Since 
+\begin_inset Formula $\mathcal{T}$
+\end_inset 
+
+ is not a sigma-algebra, as demonstrated above, one cannot invert this axiom
+ by taking the complement of 
+\begin_inset Formula $A$
+\end_inset 
+
+ and 
+\begin_inset Formula $B$
+\end_inset 
+
+, thus forcing the equality 
+\begin_inset Formula $a+b=1$
+\end_inset 
+
+.
+\layout Standard
+
+This deficiency of the measure can be codified with a definition.
+ Enumerate elements of the set 
+\begin_inset Formula $\mathcal{B}$
+\end_inset 
+
+ by a pair of integers 
+\begin_inset Formula $(m,n)$
+\end_inset 
+
+ so that 
+\begin_inset Formula $(2m+1)/2^{n}$
+\end_inset 
+
+ is the midpoint of the interval 
+\begin_inset Formula $I_{(m,n)}$
+\end_inset 
+
+.
  
+\layout Definition
+
+A measure 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ is said to be 
+\series bold 
+full
+\series default 
+ if 
+\begin_inset Formula \begin{equation}
+\mu\left(I_{(m,n)}\right)=\mu\left(I_{(2m,n+1)}\right)+\mu\left(I_{(2m+1,n+1)}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ for all intervals; else the measure is 
+\series bold 
+deficient
+\series default 
+ if 
+\begin_inset Formula \begin{equation}
+\mu\left(I_{(m,n)}\right)\ge\mu\left(I_{(2m,n+1)}\right)+\mu\left(I_{(2m+1,n+1)}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ If strict inequality holds, then the measure is 
+\series bold 
+strictly deficient
+\series default 
+.
+ 
+\layout Standard
+
+Any non-negative real function on the dyadic rationals which obeys the above
+ conditions can be taken to be a measure on this topology.
 \layout Section
 
 A Closed Dyadic Topology
@@ -494,27 +748,7 @@ XXX Vet this.
 \begin_inset Formula $\Omega$
 \end_inset 
 
- is a finer topology
-\layout Section
-
-Dyadic numbers, Cantor Sets and Measures
-\layout Standard
-
-The real numbers can be expressed with the binary digit or 
-\begin_inset Quotes eld
-\end_inset 
-
-dyadic
-\begin_inset Quotes erd
-\end_inset 
-
- expansion 
-\begin_inset Formula \begin{equation}
-b_{k}=\frac{\sigma_{k}+1}{2}\label{eq:}\end{equation}
-
-\end_inset 
-
-
+ is a finer topology than that on the reals.
 \layout Standard
 
 This expansion is not unique, because for every dyadic number, there are
@@ -525,6 +759,9 @@ This expansion is not unique, because for every dyadic number, there are
 
 .
  
+\layout Section
+
+Dyadic numbers, Cantor Sets and Measures
 \layout Standard
 
 The canonical Cantor function may be cconstructed from this expansion, as
@@ -1274,8 +1511,12 @@ le discontinuities, of the same general form as in the other figures.
 \end_inset 
 
 
-\layout Bibliography
-\bibitem [Wikipedia]{key-14}
+\layout Standard
 
-Wikipedia
+-- 
+\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
+
+\end_inset 
+
+
 \the_end
