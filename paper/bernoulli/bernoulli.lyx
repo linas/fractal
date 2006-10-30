@@ -32,7 +32,7 @@ The Bernoulli Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 18 October 2006)
+2 January 2004 (revised 19 October 2006)
 \layout Abstract
 
 This paper reviews a raft of related ideas surrounding the Bernoulli operator.
@@ -41,7 +41,7 @@ This paper reviews a raft of related ideas surrounding the Bernoulli operator.
  The Bernoulli map is a simple map of the unit interval onto itself, which
  has the effect of discarding the leading binary digit of the binary expansion
  of a number upon every iteration.
- This map has been well studied in the literature, and much, if not most,
+ This map has been well studied in the literature, and much, if not all,
  of what is presented here is well-known.
  
 \layout Abstract
@@ -1964,7 +1964,7 @@ The operator
 
 , which promptly yields 
 \begin_inset Formula \begin{equation}
-\mathcal{L}_{B}^{\mbox{Coordinate}}\sin2\pi(2k+1)x=\frac{1}{2}\left[\sin\pi(2k+1)x+\sin\pi(2k+1)(x+1)\right]=0\label{eq:}\end{equation}
+\mathcal{L}_{B}^{\mbox{Coordinate}}\sin2\pi(2k+1)x=\frac{1}{2}\left[\sin\pi(2k+1)x+\sin\pi(2k+1)(x+1)\right]=0\label{eq:Coordinate kernel}\end{equation}
 
 \end_inset 
 
@@ -2376,6 +2376,16 @@ f(x)=\sum_{n}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\label{eq:}\end{equation}
 \end_inset 
 
  where every other row consists of zeros.
+ The row-column numbering is such that the upper-left hand cell is numbered
+ 
+\begin_inset Formula $(0,0)$
+\end_inset 
+
+, so that the next nonzero cell 
+\begin_inset Formula $(2,1)$
+\end_inset 
+
+ is the third from the top, and second over.
  In this same basis, 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
@@ -2392,7 +2402,7 @@ is equally remarkable: it is literally the transpose: that is
 0 & 0 & 0 & 0 & 1\\
 0 & 0 & 0 & 0 & 0\\
 0 & 0 & 0 & 0 & ...\\
-...\end{array}\right]\label{eq:}\end{equation}
+...\end{array}\right]\label{eq:trig-matrix}\end{equation}
 
 \end_inset 
 
@@ -3659,7 +3669,7 @@ spin
 
  given by
 \begin_inset Formula \begin{equation}
-x(\sigma)=\sum_{n=1}^{\infty}\sigma_{n}p^{-n}\label{eq:}\end{equation}
+x(\sigma)=\sum_{n=1}^{\infty}\sigma_{n}p^{-n}\label{eq:Cantor mapping}\end{equation}
 
 \end_inset 
 
@@ -3765,7 +3775,7 @@ Consider now some arbitrary function
 \begin_inset Formula $\mathbb{C}$
 \end_inset 
 
-, or some arbitrary generally field.
+, or some arbitrary general field.
  Then, given some 
 \begin_inset Formula $\lambda\in F$
 \end_inset 
@@ -3917,7 +3927,7 @@ The
 -adic Bernoulli operator acting on the dual space of lattice configurations
  is given by 
 \begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}f\left(S_{k}(\sigma)\right)\label{eq:Lattice Bernoulli}\end{equation}
+\left[\mathcal{L}_{p}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}f\left(S_{k}(\sigma)\right)\label{eq:Lattice Bernoulli}\end{equation}
 
 \end_inset 
 
@@ -3933,7 +3943,7 @@ The
 \layout Standard
 
 The action of 
-\begin_inset Formula $\mathcal{L}_{B}$
+\begin_inset Formula $\mathcal{L}_{p}$
 \end_inset 
 
  on the Hamiltonian 
@@ -3942,22 +3952,24 @@ The action of
 
  is takes the form
 \begin_inset Formula \begin{equation}
-\mathcal{L}_{B}H=\mathcal{L}_{B}V+\lambda H\label{eq:}\end{equation}
+\mathcal{L}_{p}H=\mathcal{L}_{p}V+\lambda H\label{eq:}\end{equation}
 
 \end_inset 
 
- and thus 
+ This is easily shown by direct substitution.
+ 
+\layout Standard
+
+The critcal result here is that 
 \begin_inset Formula $H$
 \end_inset 
 
- is is an eigenvector provided that 
-\begin_inset Formula $\mathcal{L}_{B}V=0$
+ is an eigenvector provided that 
+\begin_inset Formula $\mathcal{L}_{p}V=0$
 \end_inset 
 
 .
-\layout Standard
-
-Thus, curiously, functions in the kernel of 
+ Curiously, functions in the kernel of 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
@@ -3982,10 +3994,258 @@ The above construction shows how to construct a large number of general
 \end_inset 
 
  converges.
+\layout Subsection
+
+Explicit form of the eigenfunctions
 \layout Standard
 
-Although the finer topology of the Cantor set promises a richer set of functions
-, one does not need to employ it to find interesting functions in the kernel.
+The above derivation of the eigenfunctions assumed a lattice model topology
+ for the unit interval.
+ Using equation 
+\begin_inset LatexCommand \ref{eq:Cantor mapping}
+
+\end_inset 
+
+ to regain the natural topology on the real numbers, one may use the constructio
+n to rediscover the full set of eigenfunctions of the Bernoulli operator.
+ This is done explicitly in this section.
+ 
+\layout Standard
+
+From equation 
+\begin_inset LatexCommand \ref{eq:Coordinate kernel}
+
+\end_inset 
+
+, it was seen that the kernel of the Bernoulli operator consists of the
+ odd harmonics: 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}\sin2\pi(2k+1)x=0\label{eq:}\end{equation}
+
+\end_inset 
+
+ These correspond precisely to the zero-columns of equation 
+\begin_inset LatexCommand \ref{eq:trig-matrix}
+
+\end_inset 
+
+.
+ Inserting these into equation 
+\begin_inset LatexCommand \ref{eq:Lattice Hamlitonian}
+
+\end_inset 
+
+, one has 
+\begin_inset Formula \begin{equation}
+H(x)=\sum_{n=0}^{\infty}\lambda^{n}\sin\left(2\pi\left(2k+1\right)\tau^{n}x\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ which is an eigenfunction: 
+\begin_inset Formula $\mathcal{L}_{B}H=\lambda H$
+\end_inset 
+
+.
+ Under the sine, one may replace 
+\begin_inset Formula $\tau^{n}(x)$
+\end_inset 
+
+ by 
+\begin_inset Formula $2^{n}x$
+\end_inset 
+
+.
+ There are also a set of eigenfunctions for the cosine.
+ Combining all of these elements together, and changing notation, one has
+ a collection of eigenfunctions 
+\begin_inset Formula \begin{equation}
+\phi_{\lambda,k}^{B}(x)=\sum_{n=0}^{\infty}\lambda^{n}\exp\left(2\pi i\;2^{n}\left(2k+1\right)x\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ for any 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset 
+
+.
+ This derivation allowed 
+\begin_inset Formula $\lambda\in F$
+\end_inset 
+
+ for any field 
+\begin_inset Formula $F$
+\end_inset 
+
+ over the reals; taking 
+\begin_inset Formula $F$
+\end_inset 
+
+ to be the complex numbers, the sum converges absolutely for 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset 
+
+ and conditionally for 
+\begin_inset Formula $\left|\lambda\right|=1$
+\end_inset 
+
+, depending on whether 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is a root of unity or not.
+ 
+\layout Standard
+
+The superscript 
+\begin_inset Formula $B$
+\end_inset 
+
+ denotes that these are eigenfunctions for the 
+\begin_inset Formula $p=2$
+\end_inset 
+
+ case of the Bernoulli operator.
+ For the general case, one builds the eigenfunctions out of the shift states
+ 
+\begin_inset Formula \begin{equation}
+v_{n,k,r}^{(p)}(x)=\exp2\pi ix\left(pk+r\right)p^{n}\label{eq:}\end{equation}
+
+\end_inset 
+
+ for 
+\begin_inset Formula $n\in\mathbb{N}_{0}$
+\end_inset 
+
+, 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ the 
+\begin_inset Quotes eld
+\end_inset 
+
+remainder
+\begin_inset Quotes erd
+\end_inset 
+
+, 
+\begin_inset Formula $0<r<p$
+\end_inset 
+
+.
+ 
+\layout Theorem
+
+The functions 
+\begin_inset Formula $v_{n,k,r}^{(p)}(x)$
+\end_inset 
+
+ are shift states of 
+\begin_inset Formula $\mathcal{L}_{p}$
+\end_inset 
+
+, that is, 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{p}v_{n,k,r}^{(p)}\right](x)=v_{n-1,k,r}^{(p)}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ for 
+\begin_inset Formula $n\ne0$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left[\mathcal{L}_{p}v_{0,k,r}^{(p)}\right](x)=0$
+\end_inset 
+
+ for the 
+\begin_inset Formula $n=0$
+\end_inset 
+
+ case.
+ 
+\layout Proof
+
+This is obtained by simple substitution: 
+\begin_inset Formula \begin{eqnarray*}
+\left[\mathcal{L}_{p}v_{n,k,r}^{(p)}\right](x) & = & \frac{1}{p}\sum_{m=0}^{p-1}v_{n,k,r}^{(p)}\left(\frac{x+m}{p}\right)\\
+ & = & \frac{1}{p}\exp\left[2\pi ix\left(pk+r\right)p^{n-1}\right]\sum_{m=0}^{p-1}\exp\left[2\pi i\frac{m}{p}(pk+r)p^{n}\right]\\
+ & = & v_{n-1,k,r}^{(p)}(x)\end{eqnarray*}
+
+\end_inset 
+
+ The sum in the middle line above is a Gauss sum, and may be shown to equal
+ 
+\begin_inset Formula $p$
+\end_inset 
+
+ when 
+\begin_inset Formula $n\ne0$
+\end_inset 
+
+ and equal to zero otherwise.
+ 
+\layout Standard
+
+In the language of quantum mechanics, the above shows that 
+\begin_inset Formula $\mathcal{L}_{p}$
+\end_inset 
+
+is the bosonic annhilation operator.
+ The corresponding Koopman operator 
+\begin_inset Formula $\mathcal{K}_{p}$
+\end_inset 
+
+ is the creation operator.
+ As noted in equation 
+\begin_inset LatexCommand \ref{eq:trig-matrix}
+
+\end_inset 
+
+, it is the adjoint of 
+\begin_inset Formula $\mathcal{L}_{p}$
+\end_inset 
+
+, but is not its inverse.
+ Indeed one has
+\layout Standard
+
+XXX Talk about how ladder operators that truncate are bosonic.
+ Ladder oerpators that do not are fermionic, in the sense that there is
+ a Dirac sea.
+ But in the latter model, the Dirac sea is the left half of a lattice stretching
+ off in both directions.
+ Thus, the Baker's map describes the fermionic ladder operators.
+ 
+\layout Standard
+
+XXX
+\layout Standard
+
+Talk about coherent states
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\phi_{\lambda,k,r}^{(p)}(x)=\sum_{n=0}^{\infty}\lambda^{n}\exp\left(2\pi ix\;\left(pk+r\right)p^{n}\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+These span an infinite-dimensional space: any linear combination of these
+ is also an eigenvector.
+ It can be shown that these functions span exactly the same space as the
+ Hurwitz zeta functions; this will be shown in later sections.
+ 
+\layout Standard
+
+XXX we can't yet say that zeta is degnerate.
 \layout Section
 
 Number theoretic connections
