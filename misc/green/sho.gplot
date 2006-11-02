@@ -1,0 +1,27 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'sho.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "ax"
+set xlabel "x"
+set ylabel "F(x)"
+
+# set xrange [0:1]
+
+# Basic Bernoulli process fit
+# plot "sho.dat" using 2:3 title "dat", \
+#     "sho.dat" using 2:(2*sin(($2)*3.1416)) title "fit"
+
+plot "sho.dat" using 2:3 title "dat", \
+     "sho.dat" using 2:(8*asin(2*$2)/3.1416) title "fit"
+
+
+
