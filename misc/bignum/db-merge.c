@@ -14,7 +14,7 @@
 #include <gmp.h>
 
 #include "db-cache.h"
-#include "mp_zeta.h"
+#include "mp-misc.h"
 
 int
 main (int argc, char * argv[])
