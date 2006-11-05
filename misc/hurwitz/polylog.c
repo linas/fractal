@@ -87,7 +87,7 @@ static inline double cplex_phase (cplex z)
 static inline cplex cplex_pow (cplex z, int n)
 {
 	cplex rv;
-	if (20>n)
+	if (50>n)
 	{
 		int k;
 		rv = z;
@@ -136,7 +136,10 @@ static cplex bee_k (int n, int k, cplex oz)
 	return acc;
 }
 
-cplex beta(int n, cplex z, cplex s)
+/*
+ * return estimate of polylog, Li_s(z) for estimator n.
+ */
+static cplex polylog_est (cplex s, cplex z, int n)
 {
 	int k;
 	cplex oz = cplex_recip(z);
@@ -164,7 +167,6 @@ cplex beta(int n, cplex z, cplex s)
 		cplex term = cplex_mult (ck, dir);
 		acc = cplex_add (acc, term);
 
-printf ("duude its %d %g %g\n", k, acc.re,acc.im);
 		pz = cplex_mult(pz, oz);
 	}
 
@@ -176,17 +178,52 @@ printf ("duude its %d %g %g\n", k, acc.re,acc.im);
 	return acc;
 }
 
+/* incomplete implementation */
+static cplex hurwitz_beta (cplex s, double q)
+{
+	int n=41;
+	cplex z;
+
+	if (0.16 > q)
+	{
+		/* use the duplication formula to get into convergent region */
+		cplex sm = cplex_minus(s);
+		sm.re += 1.0;
+		cplex ts = cplex_exp(cplex_scale (log(2), sm));
+		cplex bt = hurwitz_beta (s, 2.0*q);
+		bt = cplex_mult (bt, ts);
+
+		cplex z = hurwitz_beta (s, q+0.5);
+		z = cplex_sub(bt, z);
+		return z;
+
+	}
+	else if (1.0e-10 < q)
+	{
+		/* normal case; within the convergence region */
+		double ph = 2.0*M_PI*q;
+		z.re = cos (ph);
+		z.im = sin (ph);
+		return polylog_est (s, z, n);
+	}
+	else 
+	{
+		return cplex_zero();
+	}
+}
+
 main ()
 {
 	cplex z;
-	z.re = 0.0;
-	z.im = 1.0;
-	z = cplex_exp(z);
 
 	cplex s;
 	s.re = 2.0;
 	s.im = 0.0;
 
-	beta (9, z, s);
-
+	double q;
+	for (q=0.0; q<1.0; q+=0.05)
+	{
+		z = hurwitz_beta (s, q);
+		printf ("%g	%g	%g\n", q, z.re, z.im);
+	}
 }
