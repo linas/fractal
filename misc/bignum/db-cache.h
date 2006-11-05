@@ -10,7 +10,7 @@
 #include <gmp.h>
 
 /**
- * fp_cahce_put -- put mpf_t value into the database.
+ * fp_cache_put -- put mpf_t value into the database.
  * prec: number of decimal places of precision to store.
  * idx:  index under which to store the value
  */
