@@ -15,6 +15,7 @@
 #include <stdlib.h>
 
 #include <gmp.h>
+#include "mp-consts.h"
 #include "mp_zeta.h"
 
 /* ==================================================================== */

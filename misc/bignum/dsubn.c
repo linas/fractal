@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "mp-binomial.h"
 #include "mp_zeta.h"
 
 #ifdef TESTING_123

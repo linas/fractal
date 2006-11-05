@@ -13,67 +13,6 @@
 
 void fp_prt (char * str, mpf_t val);
 
-/* i_poch_rising
- * rising pochhammer symbol, for integer values.
- *
- * Brute force, simple.
- */
-void i_poch_rising (mpz_t poch, unsigned int k, unsigned int n);
-
-/* i_factorial -- the factorial
- */
-void i_factorial (mpz_t fact, unsigned int n);
-
-/* i_binomial
- * Binomial coefficient (n k)
- */
-#ifdef USE_LOCAL_BINOMIAL
-void i_binomial (mpz_t bin, unsigned int n, unsigned int k);
-#else
-#define i_binomial mpz_bin_uiui
-#endif
-
-/* i_binomial_sequential 
- * High-speed sequential access 
- */
-void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k);
-
-/* i_stirling
- * Stirling number of the first kind 
- * Normalized so that all entires are positive.
- */
-void i_stirling_first (mpz_t s, unsigned int n, unsigned int k);
-
-/* fp_poch_rising
- * rising pochhammer symbol (x)_n, for real values of x and integer n.
- *
- * Brute force, simple.
- */
-void fp_poch_rising (mpf_t poch, double x, unsigned int n);
-
-/* c_poch_rising
- * rising pochhammer symbol (s)_n, for complex s and integer n.
- *
- * Brute force, simple.
- */
-
-void c_poch_rising_d (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsigned int n);
-void c_poch_rising (mpf_t re_poch, mpf_t im_poch, mpf_t re_s, mpf_t im_s, unsigned int n);
-
-/* fp_binomial
- * Binomial coefficient 
- */
-void fp_binomial (mpf_t bin, double s, unsigned int k);
-
-/* c_binomial
- * Complex binomial coefficient
- */
-void c_binomial_d (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k);
-void c_binomial (mpf_t re_bin, mpf_t im_bin, mpf_t re_s, mpf_t im_s, unsigned int k);
-
-/* Harmonic number */
-void fp_harmonic (mpf_t harm, unsigned int n);
-
 /* Fixed-point bernoulli number */
 void q_bernoulli (mpq_t bern, int n);
 
