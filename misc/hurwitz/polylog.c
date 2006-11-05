@@ -74,6 +74,16 @@ static inline cplex cplex_recip (cplex z)
 	return rv;
 }
 
+static inline double cplex_modulus (cplex z)
+{
+	return sqrt (z.re*z.re + z.im*z.im);
+}
+
+static inline double cplex_phase (cplex z)
+{
+	return atan2 (z.im, z.re);
+}
+
 static inline cplex cplex_pow (cplex z, int n)
 {
 	cplex rv;
@@ -90,6 +100,15 @@ static inline cplex cplex_pow (cplex z, int n)
 	{
 		fprintf (stderr, "pow=%d unimplemented\n", n);
 	}
+	return rv;
+}
+
+static inline cplex cplex_exp (cplex z)
+{
+	cplex rv;
+	rv.re = rv.im = exp (z.re);
+	rv.re *= cos (z.im);
+	rv.im *= sin (z.im);
 	return rv;
 }
 
@@ -128,25 +147,46 @@ cplex beta(int n, cplex z, cplex s)
 	ska = cplex_pow (ska,n);
 	
 	cplex pz = cplex_one();
+	cplex acc = cplex_zero();
+
 	for (k=0; k<=2*n; k++)
 	{
-		cplex bk = bee_k (n,k,oz);
-		bk = cplex_sub (bk, ska);
-		bk = cplex_mult (bk, pz);
+		/* the coefficient c_k of the polynomial */
+		cplex ck = bee_k (n,k,oz);
+		ck = cplex_sub (ck, ska);
+		ck = cplex_mult (ck, pz);
 		
-	printf ("duude %d %g %g \n", k, bk.re, bk.im);
+		/* the inverse integer power */
+		cplex dir = cplex_scale (log(k+1), s);
+		dir = cplex_exp (cplex_minus(dir));
+
+		/* put it together */
+		cplex term = cplex_mult (ck, dir);
+		acc = cplex_add (acc, term);
+
+printf ("duude its %d %g %g\n", k, acc.re,acc.im);
 		pz = cplex_mult(pz, oz);
 	}
 
-	return z;
+	ska = cplex_recip(ska);
+	acc = cplex_mult (acc, ska);
+	acc = cplex_mult (acc, z);
+	acc = cplex_minus (acc);
+
+	return acc;
 }
 
 main ()
 {
 	cplex z;
-	z.re = -0.8;
-	z.im = 0.2;
+	z.re = 0.0;
+	z.im = 1.0;
+	z = cplex_exp(z);
 
-	beta (6, z,z);
+	cplex s;
+	s.re = 2.0;
+	s.im = 0.0;
+
+	beta (9, z, s);
 
 }
