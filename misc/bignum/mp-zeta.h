@@ -91,17 +91,6 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
 /* Floating point logarithm */
 void fp_log (mpf_t lg, mpf_t z, unsigned int prec);
 
-/* fp_euler
- * return Euler-Mascheroni const
- */
-void fp_euler_mascheroni (mpf_t gam, unsigned int prec);
-
-/* return pi to prec decimal places */
-void fp_pi (mpf_t pi, unsigned int prec);
-
-/* return e^pi to prec decimal places */
-void fp_e_pi (mpf_t e_pi, unsigned int prec);
-
 /* Compute and return the "exact" result for the zeta function for 
  * any value of even n. Computed top prec decimal places.
  * works by computing the Bernoulli number first.

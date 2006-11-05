@@ -10,14 +10,14 @@ EXES= bound bs bsubn cache-fill cont_frac db-merge db-prt \
 all:  $(EXES)
 
 bound:	bound.o
-cache-fill:	cache-fill.o mp_zeta.o db-cache.o mp-cache.o
-db-merge:	db-merge.o db-cache.o mp-cache.o mp_zeta.o
-db-prt:	db-prt.o mp_zeta.o db-cache.o mp-cache.o
+cache-fill:	cache-fill.o mp_zeta.o db-cache.o mp-cache.o mp-consts.o
+db-merge:	db-merge.o db-cache.o mp-cache.o mp_zeta.o mp-consts.o
+db-prt:	db-prt.o mp_zeta.o db-cache.o mp-cache.o mp-consts.o
 cont_frac:	cont_frac.o
-dsubn:	dsubn.o mp_zeta.o db-cache.o mp-cache.o
-mp_zeta_test:	mp_zeta_test.o mp_zeta.o db-cache.o mp-cache.o
-picturez:	picturez.o mp_zeta.o db-cache.o mp-cache.o
-stieltjes:	stieltjes.o mp_zeta.o db-cache.o mp-cache.o
+dsubn:	dsubn.o mp_zeta.o db-cache.o mp-cache.o mp-consts.o
+mp_zeta_test:	mp_zeta_test.o mp_zeta.o db-cache.o mp-cache.o mp-consts.o
+picturez:	picturez.o mp_zeta.o db-cache.o mp-cache.o mp-consts.o
+stieltjes:	stieltjes.o mp_zeta.o db-cache.o mp-cache.o mp-consts.o
 trunc:	trunc.o
 zero-cross:	zero-cross.o
 
@@ -26,13 +26,14 @@ bsubn.o: mp_zeta.h
 db-cache.o: db-cache.h
 dsubn.o: mp_zeta.h
 mp-cache.o: mp-cache.h
+mp-consts.o: mp-consts.h
 mp_zeta.o: mp_zeta.h db-cache.h mp-cache.h
 mp_zeta_test.o: mp_zeta.h
 
-bs:	bs.o mp_zeta.o db-cache.o mp-cache.o
+bs:	bs.o mp_zeta.o db-cache.o mp-cache.o mp-consts.o
 	$(CC) -o bs $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
-bsubn:	bsubn.o mp_zeta.o db-cache.o mp-cache.o
+bsubn:	bsubn.o mp_zeta.o db-cache.o mp-cache.o mp-consts.o
 	$(CC) -o bsubn $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
 minima: minima.o
