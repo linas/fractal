@@ -3,11 +3,12 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES= hurwitz
+EXES= hurwitz polylog
 
 all: $(EXES)
 
 hurwitz:	hurwitz.o 
+polylog:	polylog.o 
 
 .c.o:
 	cc -c -g -O2 -I $(INC) $<
