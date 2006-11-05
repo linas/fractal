@@ -14,7 +14,7 @@ polylog:	polylog.o
 	cc -c -g -O2 -I $(INC) $<
 
 .o:
-	cc -g -o $@ $^ -L$(LIB) -lfunc -lm 
+	cc -g -o $@ $^ -L$(LIB) -lgsl -lcblas -lfunc -lm 
 
 
 clean:

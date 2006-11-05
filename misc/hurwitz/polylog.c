@@ -9,6 +9,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <gsl/gsl_sf_zeta.h>
 #include "binomial.h"
 
 typedef struct {
@@ -87,7 +88,7 @@ static inline double cplex_phase (cplex z)
 static inline cplex cplex_pow (cplex z, int n)
 {
 	cplex rv;
-	if (50>n)
+	if (350>n)
 	{
 		int k;
 		rv = z;
@@ -173,18 +174,24 @@ static cplex polylog_est (cplex s, cplex z, int n)
 	ska = cplex_recip(ska);
 	acc = cplex_mult (acc, ska);
 	acc = cplex_mult (acc, z);
-	acc = cplex_minus (acc);
+	// acc = cplex_minus (acc);
 
 	return acc;
 }
 
+int nt = 41;
+
 /* incomplete implementation */
 static cplex hurwitz_beta (cplex s, double q)
 {
-	int n=41;
+	int nterms =nt;
 	cplex z;
 
-	if (0.16 > q)
+	if (1.0e-10 > q)
+	{
+		return cplex_zero();
+	}
+	else if (0.16 > q) 
 	{
 		/* use the duplication formula to get into convergent region */
 		cplex sm = cplex_minus(s);
@@ -198,32 +205,68 @@ static cplex hurwitz_beta (cplex s, double q)
 		return z;
 
 	}
-	else if (1.0e-10 < q)
+	else if (0.84 < q) 
+	{
+		/* use the duplication formula to get into convergent region */
+		cplex sm = cplex_minus(s);
+		sm.re += 1.0;
+		cplex ts = cplex_exp(cplex_scale (log(2), sm));
+		cplex bt = hurwitz_beta (s, 2.0*q-1.0);
+		bt = cplex_mult (bt, ts);
+
+		cplex z = hurwitz_beta (s, q-0.5);
+		z = cplex_sub(bt, z);
+		return z;
+
+	}
+	else
 	{
 		/* normal case; within the convergence region */
 		double ph = 2.0*M_PI*q;
 		z.re = cos (ph);
 		z.im = sin (ph);
-		return polylog_est (s, z, n);
-	}
-	else 
-	{
-		return cplex_zero();
+		return polylog_est (s, z, nterms);
 	}
 }
 
 main ()
 {
-	cplex z;
+	cplex zl, zh;
 
+#define RIEMANN_ZETA
+#ifdef RIEMANN_ZETA
 	cplex s;
-	s.re = 2.0;
+	s.im = 0.0;
+	for (s.re = 1.1; s.re < 8; s.re += 0.1)
+	{
+		zl = hurwitz_beta (s, 0.5);
+		
+		cplex sm = cplex_minus(s);
+		sm.re += 1.0;
+		cplex ts = cplex_exp(cplex_scale (log(2), sm));
+		ts = cplex_minus(ts);
+		ts.re += 1.0;
+		ts = cplex_recip(ts);
+		zl = cplex_mult (zl, ts);
+		
+		double zeta = gsl_sf_zeta (s.re);
+		
+		printf ("%7.3g	%15.10g	%15.10g	%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
+	}
+#endif
+
+#if 0
+	cplex s;
+	s.re = 6.0;
 	s.im = 0.0;
 
 	double q;
-	for (q=0.0; q<1.0; q+=0.05)
+	for (q=0.0; q<1.0; q+=0.02)
 	{
-		z = hurwitz_beta (s, q);
-		printf ("%g	%g	%g\n", q, z.re, z.im);
+		nt=41;
+		zl = hurwitz_beta (s, q);
+		double b = q*q-q+1.0/6.0;
+		printf ("%7.3g	%15.10g	%15.10g\n", q, zl.re, zl.im);
 	}
+#endif
 }
