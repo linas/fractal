@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 #include <gmp.h>
+#include "mp-binomial.h"
 #include "mp_zeta.h"
 
 /* ==================================================================== */

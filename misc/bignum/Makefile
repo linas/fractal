@@ -23,16 +23,20 @@ stieltjes:	stieltjes.o mp_zeta.o $(MPOBJS)
 trunc:	trunc.o
 zero-cross:	zero-cross.o
 
-bs.o: mp_zeta.h
-bsubn.o: mp_zeta.h mp-binomial.h
+# libarary objects
 db-cache.o: db-cache.h
-dsubn.o: mp_zeta.h mp-binomial.h
 mp-binomial.o: mp-binomial.h mp-cache.h mp-trig.h
 mp-cache.o: mp-cache.h
-mp-consts.o: mp-consts.h mp-trig.h
+mp-consts.o: mp-consts.h mp-binomial.h mp-trig.h
 mp-trig.o: mp-trig.h mp-cache.h mp-binomial.h
 mp_zeta.o: mp_zeta.h db-cache.h mp-cache.h
+
+# binaries
+bs.o: mp_zeta.h
+bsubn.o: mp_zeta.h mp-binomial.h
+dsubn.o: mp_zeta.h mp-binomial.h
 mp_zeta_test.o: mp_zeta.h mp-consts.h
+stieltjes.o: mp_zeta.h mp-binomial.h
 
 bs:	bs.o mp_zeta.o $(MPOBJS)
 	$(CC) -o bs $^ -lgmp -lgsl -lcblas -ldb -lm -lc

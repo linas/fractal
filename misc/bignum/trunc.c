@@ -11,7 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-main ()
+int
+main (int argc, char * argv[])
 {
 	int c;
 	char buf[4000];
@@ -62,5 +63,7 @@ main ()
 		}
 		i++;
 	}
+
+	return 0;
 }
 
