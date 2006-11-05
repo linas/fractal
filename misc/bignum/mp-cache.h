@@ -63,7 +63,7 @@ static inline void i_triangle_cache_fetch (i_cache *c, mpz_t val, unsigned int n
 /**
  * i_triangle_cache_store - store value in cache
  */
-static iniline void i_triangle_cache_store (i_cache *c, mpz_t val, unsigned int n, unsigned int k);
+static inline void i_triangle_cache_store (i_cache *c, mpz_t val, unsigned int n, unsigned int k)
 {
 	unsigned int idx = n * (n+1) /2 ;
 	mpz_set (c->cache[idx+k], val);
@@ -100,7 +100,7 @@ static inline void q_one_d_cache_fetch (q_cache *c, mpq_t val, unsigned int n)
 /**
  * q_one_d_cache_store - store value in cache
  */
-static iniline void q_one_d_cache_store (q_cache *c, mpq_t val, unsigned int n)
+static inline void q_one_d_cache_store (q_cache *c, mpq_t val, unsigned int n)
 {
 	mpq_set (c->cache[n], val);
 	c->ticky[n] = 1;
@@ -158,7 +158,7 @@ int fp_triangle_cache_check (fp_cache *c, unsigned int n, unsigned int k);
 /** 
  * fp_triangle_cache_fetch - fetch value from cache
  */
-static iniline void fp_triangle_cache_fetch (fp_cache *c, mpf_t val, unsigned int n, unsigned int k)
+static inline void fp_triangle_cache_fetch (fp_cache *c, mpf_t val, unsigned int n, unsigned int k)
 {
 	unsigned int idx = n * (n+1) /2 ;
 	mpf_set (val, c->cache[idx+k]);

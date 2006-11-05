@@ -25,6 +25,7 @@ bs.o: mp_zeta.h
 bsubn.o: mp_zeta.h
 db-cache.o: db-cache.h
 dsubn.o: mp_zeta.h
+mp-cache.o: mp-cache.h
 mp_zeta.o: mp_zeta.h db-cache.h
 mp_zeta_test.o: mp_zeta.h
 
