@@ -23,6 +23,12 @@ typedef struct {
 #define DECLARE_I_CACHE(name)         \
 	static i_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, .disabled = 0}
 
+/** i_one_d_cache_check() -- check if mpz_t value is in the cache
+ *  Returns true if the value is in the cache, else returns false.
+ *  This assumes a 1-dimensional cache layout (simple aray)
+ */
+int i_one_d_cache_check (i_cache *c, unsigned int n);
+
 /** 
  * i_one_d_cache_fetch - fetch value from cache
  */
