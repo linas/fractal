@@ -48,6 +48,8 @@ static inline void i_one_d_cache_store (i_cache *c, mpz_t val, unsigned int n)
 	c->ticky[n] = 1;
 }
 
+void i_one_d_cache_clear (i_cache *c);
+
 /* ======================================================================= */
 /** i_triangle_cache_check() -- check if mpz_t value is in the cache
  *  Returns true if the value is in the cache, else returns false.

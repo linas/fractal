@@ -76,6 +76,15 @@ int i_triangle_cache_check (i_cache *c, unsigned int n, unsigned int k)
 	return c->ticky[idx+k];
 }
 
+void i_one_d_cache_clear (i_cache *c)
+{
+	unsigned int i;
+	for (i=0; i<c->nmax; i++)
+	{
+		c->ticky[i] = 0;
+	}
+}
+
 /* ======================================================================= */
 /* Cache management */
 /* pure cut-n-paste of he integer variant */
