@@ -14,9 +14,9 @@
 #include <stdlib.h>
 
 #include <gmp.h>
-#include "db-cache.h"
 #include "mp-cache.h"
 #include "mp-consts.h"
+#include "mp-trig.h"
 
 /* ======================================================================= */
 /**

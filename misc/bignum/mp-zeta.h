@@ -13,11 +13,6 @@
 
 void fp_prt (char * str, mpf_t val);
 
-/**
-  * i_pow - raise n to the m power
-  */
-void i_pow (mpz_t p, unsigned int n, unsigned int m);
-		  
 /* i_poch_rising
  * rising pochhammer symbol, for integer values.
  *
@@ -81,15 +76,6 @@ void fp_harmonic (mpf_t harm, unsigned int n);
 
 /* Fixed-point bernoulli number */
 void q_bernoulli (mpq_t bern, int n);
-
-/* Floating point exponential */
-void fp_exp (mpf_t ex, mpf_t z, unsigned int prec);
-
-/* Floating point arctan */
-void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
-
-/* Floating point logarithm */
-void fp_log (mpf_t lg, mpf_t z, unsigned int prec);
 
 /* Compute and return the "exact" result for the zeta function for 
  * any value of even n. Computed top prec decimal places.
