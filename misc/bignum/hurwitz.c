@@ -10,6 +10,7 @@
 #include <stdio.h>
 
 #include <gmp.h>
+#include "mp-cache.h"
 
 typedef struct {
 	mpf_t re;
@@ -28,21 +29,37 @@ static inline void cpx_init (cpx_t z)
  * Values are cached, because they will be repeatedly called
  * for forward differencing.
  */
-static void diri_term (cpx_t diri, int k, double q)
+static void diri_term (cpx_t diri, int k, mpf_t q)
 {
 	DECLARE_FP_CACHE (re_diri);
 	DECLARE_FP_CACHE (im_diri);
+	static double cache_q=0.0;
 
-	int k;
-	for (k=0; k<norder; k++)
+	if (q != cache_q)
 	{
-		long double logkq = logl(k+q);
-		long double mag = expl((1.0L-sre) * logkq);
-		refd[k] = mag * cosl (sim*logkq);
-		imfd[k] = mag * sinl (sim*logkq);
-
-		// printf ("its %d \t%Lg \t%Lg\n", k, refd[k], imfd[k]);
+		fp_one_d_cache_clear (re_diri);
+		fp_one_d_cache_clear (im_diri);
 	}
+
+	if (fp_one_d_cache_check (re_diri, k))
+	{
+		fp_one_d_cache_fetch (re_diri, diri.re, k);
+		fp_one_d_cache_fetch (im_diri, diri.im, k);
+	}
+	
+	mpf_t kq, logkq;
+	mpf_init (kq);
+	mpf_init (logkq);
+
+	mpf_add_ui (kq, q, k);
+	
+	fp_log (logkq, kq, prec);
+	
+	long double mag = expl((1.0L-sre) * logkq);
+	refd[k] = mag * cosl (sim*logkq);
+	imfd[k] = mag * sinl (sim*logkq);
+
+	mpf_free(logkq);
 }
 
 
