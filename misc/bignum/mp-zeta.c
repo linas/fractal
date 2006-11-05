@@ -21,18 +21,6 @@
 #include "mp-trig.h"
 #include "mp_zeta.h"
 
-void i_prt (char * str, mpz_t val)
-{
-	printf (str);
-	mpz_out_str (stdout, 10, val);
-}
-
-void fp_prt (char * str, mpf_t val)
-{
-	printf (str);
-	mpf_out_str (stdout, 10, 60, val);
-}
-
 /* ======================================================================= */
 /* Helmut Hasse zeta -- use the globally convergent Helmut Hasse zeta
  * series for computing the value of the zeta ... 

@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "mp-misc.h"
 #include "mp_zeta.h"
 
 #ifdef USE_FLT_PT_BINARY_SUBDIVISION

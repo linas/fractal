@@ -11,8 +11,6 @@
 
 #include <gmp.h>
 
-void fp_prt (char * str, mpf_t val);
-
 /* Fixed-point bernoulli number */
 void q_bernoulli (mpq_t bern, int n);
 

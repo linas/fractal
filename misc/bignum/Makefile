@@ -9,12 +9,12 @@ EXES= bound bs bsubn cache-fill cont_frac db-merge db-prt \
 
 all:  $(EXES)
 
-MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o mp-trig.o
+MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o mp-misc.o mp-trig.o
 
 bound:	bound.o
 cache-fill:	cache-fill.o mp_zeta.o $(MPOBJS)
-db-merge:	db-merge.o mp_zeta.o $(MPOBJS)
-db-prt:	db-prt.o mp_zeta.o $(MPOBJS)
+db-merge:	db-merge.o $(MPOBJS)
+db-prt:	db-prt.o $(MPOBJS)
 cont_frac:	cont_frac.o
 dsubn:	dsubn.o mp_zeta.o $(MPOBJS)
 mp_zeta_test:	mp_zeta_test.o mp_zeta.o $(MPOBJS)
@@ -28,15 +28,16 @@ db-cache.o: db-cache.h
 mp-binomial.o: mp-binomial.h mp-cache.h mp-trig.h
 mp-cache.o: mp-cache.h
 mp-consts.o: mp-consts.h mp-binomial.h mp-trig.h
+mp-misc.o: mp-misc.h
 mp-trig.o: mp-trig.h mp-cache.h mp-binomial.h
 mp_zeta.o: mp_zeta.h db-cache.h mp-cache.h
 
 # binaries
-bs.o: mp_zeta.h
+bs.o: mp_zeta.h mp-misc.h
 bsubn.o: mp_zeta.h mp-binomial.h
-dsubn.o: mp_zeta.h mp-binomial.h
+dsubn.o: mp_zeta.h mp-binomial.h mp-misc.h
 mp_zeta_test.o: mp_zeta.h mp-consts.h
-stieltjes.o: mp_zeta.h mp-binomial.h
+stieltjes.o: mp_zeta.h mp-binomial.h mp-misc.h
 
 bs:	bs.o mp_zeta.o $(MPOBJS)
 	$(CC) -o bs $^ -lgmp -lgsl -lcblas -ldb -lm -lc

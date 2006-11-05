@@ -13,6 +13,7 @@
 
 #include <gmp.h>
 #include "mp-binomial.h"
+#include "mp-misc.h"
 #include "mp_zeta.h"
 
 /* ==================================================================== */
