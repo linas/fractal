@@ -20,14 +20,18 @@ set key right
 # plot "dn-liouville.dat" using 1:2 title "" linewidth 3
 
 # ----------------------------------------------------------
-set title "d_n/sqrt(n) for Liouville function"
-set xlabel "n"
-set ylabel "d_n/sqrt(n)"
+# set title "d_n/sqrt(n) for Liouville function"
+# set xlabel "n"
+# set ylabel "d_n/sqrt(n)"
+# 
+# set xrange [1000:]
+# plot "dn-liouville.dat" using 1:($2/(sqrt($1))) title "" linewidth 3 
 
-set xrange [1000:]
-plot "dn-liouville.dat" using 1:($2/(sqrt($1))) title "" linewidth 3 
+# set xrange [0:100]
+# plot "dn-liouville.dat" using 1:($2) title "" linewidth 3, \
+#     "dn-liouville.dat" using 1:(3*sqrt($2)) title "" linewidth 3 
 
-# plot "dn-liouville.dat" using (log(log($1))):($2/(sqrt($1))) title "" linewidth 3
+plot "dn-liouville.dat" using (log($1)):($2/(sqrt($1))) title "" linewidth 3
 
 # plot "dn-liouville.dat" using 1:($2/(sqrt($1))) title "" linewidth 3 ,\
 #     "dn-liouville.dat" using 1:(1.16+0.005*log($1)) title "fit"
