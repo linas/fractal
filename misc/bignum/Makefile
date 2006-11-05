@@ -27,9 +27,10 @@ bs.o: mp_zeta.h
 bsubn.o: mp_zeta.h
 db-cache.o: db-cache.h
 dsubn.o: mp_zeta.h
+mp-binomial.o: mp-binomial.h mp-cache.h mp-trig.h
 mp-cache.o: mp-cache.h
 mp-consts.o: mp-consts.h mp-trig.h
-mp-trig.o: mp-trig.h
+mp-trig.o: mp-trig.h mp-cache.h mp-binomial.h
 mp_zeta.o: mp_zeta.h db-cache.h mp-cache.h
 mp_zeta_test.o: mp_zeta.h
 

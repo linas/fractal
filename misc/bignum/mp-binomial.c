@@ -1,0 +1,678 @@
+/*
+ * mp-binomial.c
+ *
+ * High-precison factorials and binomials, using the 
+ * Gnu Multiple-precision library.
+ *
+ * Also, high-precision values of the series a_n 
+ * 
+ * Linas Vepstas July 2005
+ */
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <gmp.h>
+#include "mp-cache.h"
+#include "mp-binomial.h"
+#include "mp-trig.h"
+
+/* ======================================================================= */
+/* i_poch_rising
+ * rising pochhammer symbol, for integer values.
+ *
+ * Brute force, simple.
+ */
+
+void i_poch_rising (mpz_t poch, unsigned int k, unsigned int n)
+{
+	mpz_t acc;
+	mpz_init (acc);
+
+	mpz_set_ui (poch, 1);
+	unsigned int i;
+	for (i=0; i<n; i++)
+	{
+		mpz_mul_ui (acc, poch, i+k);
+		mpz_set (poch, acc);
+	}
+
+	mpz_clear (acc);
+}
+
+/** 
+ * i_factorial -- the factorial
+ */
+// #define USE_LOCAL_FACTORIAL
+#ifdef USE_LOCAL_FACTORIAL
+void i_factorial (mpz_t fact, unsigned int n)
+{
+	DECLARE_I_CACHE (cache);
+
+	if (1 >= n)
+	{
+		mpz_set_ui (fact, 1);
+		return;
+	}
+	int hit = i_one_d_cache_check (&cache, n);
+	if (hit)
+	{
+		i_one_d_cache_fetch (&cache, fact, n);
+	}
+	else
+	{
+		i_poch_rising (fact, 1, n);
+		i_one_d_cache_store (&cache, fact, n);
+	}
+}
+#else
+#define i_factorial mpz_fac_ui
+#endif /* USE_LOCAL_FACTORIAL */
+
+/* ====================================================================== */
+/* i_binomial
+ * Binomial coefficient (n k)
+ */
+
+// #define USE_LOCAL_BINOMIAL
+#ifdef USE_LOCAL_BINOMIAL
+static void i_binomial_compute (mpz_t bin, unsigned int n, unsigned int k)
+{
+	mpz_t top, bot;
+
+	if (2*k < n) k = n-k;
+
+	mpz_init (top);
+	mpz_init (bot);
+	i_poch_rising (top, k+1, n-k);
+	i_factorial (bot, n-k); 
+
+	mpz_divexact (bin, top, bot);
+	
+	mpz_clear (top);
+	mpz_clear (bot);
+}
+
+static void i_binomial_recurse (mpz_t bin, unsigned int n, unsigned int k)
+{
+	mpz_t top, bot;
+
+	mpz_init (top);
+	mpz_init (bot);
+
+	i_binomial (bot,n-1,k-1);
+	i_binomial (top,n-1,k);
+	mpz_add (bin, top, bot);
+	
+	mpz_clear (top);
+	mpz_clear (bot);
+}
+
+/**
+ * i_binomial - return the binomial coefficient
+ * Uses a cached value if avalable.
+ */ 
+void i_binomial (mpz_t bin, unsigned int n, unsigned int k)
+{
+	DECLARE_I_CACHE (cache);
+
+	if (k > n || 0 > k)
+	{
+		mpz_set_ui (bin, 0);
+		return;
+	}
+
+	if (1 >= n)
+	{
+		mpz_set_ui (bin, 1);
+		return;
+	}
+
+	if (2*k < n) k = n-k;
+	int hit = i_triangle_cache_check (&cache, n, k);
+	if (hit)
+	{
+		i_triangle_cache_fetch (&cache, bin, n, k);
+	}
+	else
+	{
+		// i_binomial_compute (bin, n, k);
+		i_binomial_recurse (bin, n, k);
+		i_triangle_cache_store (&cache, bin, n, k);
+	}
+}
+#else 
+#define i_binomial mpz_bin_uiui
+
+#endif /* USE_LOCAL_BINOMIAL */
+
+/* ======================================================================= */
+
+/**
+ * i_binomial_sequence -- returns binomial, assumes purely sequeintial access
+ * 
+ * This routine assumes that the binomial coefficients will be 
+ * accessed in an utterly sequential mode, with k running from 
+ * zero to n, and n running from zero to k. For sequential access,
+ * this routine is very very fast. Otherwise, random access is used
+ * which is considerably slower.
+ */
+void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k)
+{
+	static int curr_n=0, last_k=0;
+	DECLARE_I_CACHE (a_cache);
+	DECLARE_I_CACHE (b_cache);
+	static i_cache *curr_cache = &a_cache;
+	static i_cache *next_cache = &b_cache;
+
+	/* Gap in access sequence; fill in the gap */
+	if (k > last_k+1 || (n > curr_n && k !=0))
+	{
+		int j,m;
+		if (n == curr_n)
+		{
+			for (j=last_k+1; j<k; j++)
+			{
+				i_binomial_sequence (bin, n, j);
+			}
+		}
+		else
+		{
+			for (j=last_k+1; j<=curr_n; j++)
+			{
+				i_binomial_sequence (bin, curr_n, j);
+			}
+			for (m=curr_n+1; m<n; m++)
+			{
+				for (j=0; j<=m; j++)
+				{
+					i_binomial_sequence (bin, m, j);
+				}
+			}
+			for (j=0; j<k; j++)
+			{
+				i_binomial_sequence (bin, n, j);
+			}
+		}
+	}
+	
+	/* standard sequential access */
+	if (k == last_k+1 && n == curr_n)
+	{
+		/* End of current row -- special case */
+		if (k == n)
+		{
+			mpz_set_ui (bin, 1);
+			i_one_d_cache_store (next_cache, bin, k);
+			return;
+		}
+
+		mpz_t bl;
+		mpz_init (bl);
+
+		i_one_d_cache_fetch (curr_cache, bin, k-1);
+		i_one_d_cache_fetch (curr_cache, bl, k);
+		mpz_add (bin, bin, bl);
+		i_one_d_cache_store (next_cache, bin, k);
+		mpz_clear (bl);
+
+		last_k = k;
+		return;
+	}
+	
+	/* Start a new row */
+	if (k == 0 && n == curr_n+1)
+	{
+		last_k = 0;
+		curr_n = n;
+		i_cache *tmp = curr_cache;
+		curr_cache = next_cache;
+		next_cache = tmp;
+		i_one_d_cache_check (next_cache, n+1);
+		mpz_set_ui (bin, 1);
+		i_one_d_cache_store (next_cache, bin, 0);
+		return;
+	}
+
+	/* Initialize the suential access system. */
+	if (0 == n && 0 == k)
+	{
+		curr_n = 0;
+		last_k = 0;
+		i_one_d_cache_check (curr_cache, 3);
+		i_one_d_cache_check (next_cache, 3);
+		mpz_set_ui (bin, 1);
+		return;
+	}
+
+	/* invalid input */
+	if (k > n || 0 > k)
+	{
+		mpz_set_ui (bin, 0);
+		return;
+	}
+
+	/* If we got to here, it must be some random access. */
+	i_binomial (bin, n, k);
+fprintf (stderr, "booooo! n=%d k=%d  currn=%d lastk=%d\n", n,k, curr_n, last_k);
+}
+
+/* ======================================================================= */
+/* stirling_first - Stirling Numbers of the First kind, 
+ * normalized so that they are all positive.
+ * Uses dynamically-sized cache.
+ */
+void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
+{
+	DECLARE_I_CACHE (cache);
+
+	/* Trivial case (not in the cache) */
+	if (0==k)
+	{
+		if (0==n) 
+		{ 
+			mpz_set_ui (s, 1);
+		}
+		else
+		{
+			mpz_set_ui (s, 0);
+		}
+		return;
+	}
+
+	if (n<k)
+	{
+		mpz_set_ui (s, 0);
+		return;
+	}
+
+	if (n==k)
+	{
+		mpz_set_ui (s, 1);
+		return;
+	}
+
+	/* Pull value from cache if it is there */
+	int hit = i_triangle_cache_check (&cache, n, k);
+	if (hit)
+	{
+		i_triangle_cache_fetch (&cache, s, n, k);
+		return;
+	}
+	
+	/* Use recursion to get new value */
+	/* s = stir(n-1, k-1) + (n-1) * stir(n-1, k) */
+	unsigned int i;
+	mpz_t skm, sk, en;
+	mpz_init (skm);
+	mpz_init (sk);
+	mpz_init (en);
+	mpz_set_ui (skm, 0);
+	mpz_set_ui (en, n-1);
+	for (i=1; i<=n; i++)
+	{
+		i_stirling_first (sk, n-1, i);
+		mpz_mul (s, en, sk);
+		mpz_add (s, s, skm);
+		i_triangle_cache_store (&cache, s, n, i);
+		mpz_set (skm, sk);
+	}
+	mpz_clear (skm);
+	mpz_clear (sk);
+	mpz_clear (en);
+
+	i_triangle_cache_fetch (&cache, s, n, k);
+}
+
+/* ======================================================================= */
+/* A funny off-by-one sum of stirling and binomial */
+
+static void i_stirbin_sum_compute (mpz_t s, unsigned int n, unsigned int m)
+{
+	unsigned int k;
+	
+	mpz_t term, stir, bin;
+	mpz_init (term);
+	mpz_init (stir);
+	mpz_init (bin);
+	mpz_set_ui (s, 0);
+	for (k=m; k<=n; k++)
+	{
+		i_stirling_first (stir, n, k);
+		i_binomial (bin, k,m);
+		mpz_mul (term, bin, stir);
+		if (k%2)
+		{
+			mpz_sub (s, s, term);
+		}
+		else
+		{
+			mpz_add (s, s, term);
+		}
+	}
+	mpz_clear (term);
+	mpz_clear (stir);
+	mpz_clear (bin);
+}
+
+void i_stirbin_sum (mpz_t s, unsigned int n, unsigned int m)
+{
+	DECLARE_I_CACHE (cache);
+
+	if (0 >= n)
+	{
+		mpz_set_ui (s, 1);
+		return;
+	}
+
+	int hit = i_triangle_cache_check (&cache, n, m);
+	if (hit)
+	{
+		i_triangle_cache_fetch (&cache, s, n, m);
+	}
+	else
+	{
+		i_stirbin_sum_compute (s, n, m);
+		i_triangle_cache_store (&cache, s, n, m);
+	}
+}
+
+/* ======================================================================= */
+/* binomial transform of power sum */
+
+static void fp_bin_xform_pow_compute (mpf_t bxp, unsigned int n, unsigned int s)
+{
+	mpz_t bin;
+	mpz_init (bin);
+
+	mpf_t vp, term;
+	mpf_init (vp);
+	mpf_init (term);
+	
+	mpf_set_ui (bxp, 0);
+	unsigned int k;
+	for (k=0; k<=n; k++)
+	{
+		i_binomial (bin, n, k);
+		mpf_set_z (term, bin);
+		fp_inv_pow (vp, k+1, s);
+		mpf_mul (term, term, vp);
+
+		if (k%2)
+		{
+			mpf_sub (bxp, bxp, term);
+		}
+		else
+		{
+			mpf_add (bxp, bxp, term);
+		}
+	}
+	mpz_clear (bin);
+	mpf_clear (vp);
+	mpf_clear (term);
+}
+
+void fp_bin_xform_pow (mpf_t bxp, unsigned int n, unsigned int s)
+{
+	DECLARE_FP_CACHE (cache);
+	if (0 == n)
+	{
+		mpf_set_ui (bxp, 1); 
+		return;
+	}
+	int hit = fp_triangle_cache_check (&cache, n+s, s);
+	if (hit)
+	{
+		fp_triangle_cache_fetch (&cache, bxp, n+s, s);
+	}
+	else
+	{
+		fp_bin_xform_pow_compute (bxp, n, s);
+		fp_triangle_cache_store (&cache, bxp, n+s, s, 1);
+	}
+}
+
+/* ======================================================================= */
+/** 
+ * fp_harmonic -- The harmonic number
+ */
+void fp_harmonic (mpf_t harm, unsigned int n)
+{
+	DECLARE_FP_CACHE (cache);
+
+	if (1 >= n)
+	{
+		mpf_set_ui (harm, 1);
+		return;
+	}
+	int hit = fp_one_d_cache_check (&cache, n);
+	if (hit)
+	{
+		fp_one_d_cache_fetch (&cache, harm, n);
+		return;
+	}
+	
+	unsigned int istart = n-1;
+	hit = fp_one_d_cache_check (&cache, istart);
+	while (0 == hit && istart>1)
+	{
+		istart--;
+		hit = fp_one_d_cache_check (&cache, istart);
+	}
+
+	unsigned int i;
+	fp_harmonic (harm, istart);
+
+	mpf_t term;
+	mpf_init (term);
+	for (i=istart+1; i<=n; i++)
+	{
+		mpf_set_ui (term, 1);
+		mpf_div_ui (term, term, i);
+		mpf_add (harm, harm, term);
+		fp_one_d_cache_store (&cache, harm, i, 1);
+	}
+	mpf_clear (term);
+}
+
+/* ======================================================================= */
+/* fp_poch_rising
+ * rising pochhammer symbol (x)_n, for real values of x and integer n.
+ *
+ * Brute force, simple.
+ */
+
+void fp_poch_rising (mpf_t poch, double x, unsigned int n)
+{
+	mpf_t acc, term;
+	
+	mpf_init (acc);
+	mpf_init (term);
+
+	mpf_set_ui (poch, 1);
+	unsigned int i;
+	for (i=0; i<n; i++)
+	{
+		mpf_set_d (term, x+i);
+		mpf_mul (acc, poch, term);
+		mpf_set (poch, acc);
+	}
+
+	mpf_clear (acc);
+	mpf_clear (term);
+}
+
+/* ======================================================================= */
+/* c_poch_rising
+ * rising pochhammer symbol (s)_n, for complex s and integer n.
+ *
+ * Brute force, simple.
+ */
+
+void c_poch_rising_d (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsigned int n)
+{
+	mpf_t racc, iacc, atmp, btmp, re_term, im_term;
+	
+	mpf_init (racc);
+	mpf_init (iacc);
+	mpf_init (atmp);
+	mpf_init (btmp);
+	mpf_init (re_term);
+	mpf_init (im_term);
+
+	mpf_set_ui (re_poch, 1);
+	mpf_set_ui (im_poch, 0);
+	unsigned int i;
+	for (i=0; i<n; i++)
+	{
+		mpf_set_d (re_term, re_s+i);
+		mpf_set_d (im_term, im_s);
+
+		mpf_mul (atmp, re_poch, re_term);
+		mpf_mul (btmp, im_poch, im_term);
+		mpf_sub (racc, atmp, btmp);
+
+		mpf_mul (atmp, re_poch, im_term);
+		mpf_mul (btmp, im_poch, re_term);
+		mpf_add (iacc, atmp, btmp);
+
+		mpf_set (re_poch, racc);
+		mpf_set (im_poch, iacc);
+	}
+
+	mpf_clear (racc);
+	mpf_clear (iacc);
+	mpf_clear (atmp);
+	mpf_clear (btmp);
+	mpf_clear (re_term);
+	mpf_clear (im_term);
+}
+
+/* ======================================================================= */
+/* c_poch_rising
+ * rising pochhammer symbol (s)_n, for complex s and integer n.
+ *
+ * Brute force, simple.
+ */
+
+void c_poch_rising (mpf_t re_poch, mpf_t im_poch, mpf_t re_s, mpf_t im_s, unsigned int n)
+{
+	mpf_t racc, iacc, atmp, btmp, re_term, im_term;
+	
+	mpf_init (racc);
+	mpf_init (iacc);
+	mpf_init (atmp);
+	mpf_init (btmp);
+	mpf_init (re_term);
+	mpf_init (im_term);
+
+	mpf_set_ui (re_poch, 1);
+	mpf_set_ui (im_poch, 0);
+	unsigned int i;
+	for (i=0; i<n; i++)
+	{
+		mpf_set (re_term, re_s);
+		mpf_add_ui (re_term, re_term, i);
+		mpf_set (im_term, im_s);
+
+		mpf_mul (atmp, re_poch, re_term);
+		mpf_mul (btmp, im_poch, im_term);
+		mpf_sub (racc, atmp, btmp);
+
+		mpf_mul (atmp, re_poch, im_term);
+		mpf_mul (btmp, im_poch, re_term);
+		mpf_add (iacc, atmp, btmp);
+
+		mpf_set (re_poch, racc);
+		mpf_set (im_poch, iacc);
+	}
+
+	mpf_clear (racc);
+	mpf_clear (iacc);
+	mpf_clear (atmp);
+	mpf_clear (btmp);
+	mpf_clear (re_term);
+	mpf_clear (im_term);
+}
+
+/* ======================================================================= */
+/* fp_binomial
+ * Binomial coefficient 
+ */
+
+void fp_binomial (mpf_t bin, double s, unsigned int k)
+{
+	mpf_t top, bot;
+	mpz_t fac;
+
+	mpf_init (top);
+	mpf_init (bot);
+	mpz_init (fac);
+	fp_poch_rising (top, s-k+1, k);
+	i_factorial (fac, k); 
+	mpf_set_z (bot, fac);
+
+	mpf_div (bin, top, bot);
+	
+	mpf_clear (top);
+	mpf_clear (bot);
+	mpz_clear (fac);
+}
+
+/* ======================================================================== */
+/* c_binomial
+ * Complex binomial coefficient
+ */
+
+void c_binomial_d (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k)
+{
+	mpf_t retop, imtop, bot;
+	mpz_t fac;
+
+	mpf_init (retop);
+	mpf_init (imtop);
+	mpf_init (bot);
+	mpz_init (fac);
+	c_poch_rising_d (retop, imtop, re_s-k+1, im_s, k);
+	i_factorial (fac, k); 
+	mpf_set_z (bot, fac);
+
+	mpf_div (re_bin, retop, bot);
+	mpf_div (im_bin, imtop, bot);
+	
+	mpf_clear (retop);
+	mpf_clear (imtop);
+	mpf_clear (bot);
+	mpz_clear (fac);
+}
+
+void c_binomial (mpf_t re_bin, mpf_t im_bin, mpf_t re_s, mpf_t im_s, unsigned int k)
+{
+	mpf_t retop, imtop, bot;
+	mpz_t fac;
+
+	mpf_init (retop);
+	mpf_init (imtop);
+	mpf_init (bot);
+	mpz_init (fac);
+
+	mpf_set (bot, re_s);
+	mpf_sub_ui (bot, bot, k);
+	mpf_add_ui (bot, bot, 1);
+
+	c_poch_rising (retop, imtop, bot, im_s, k);
+	i_factorial (fac, k); 
+	mpf_set_z (bot, fac);
+
+	mpf_div (re_bin, retop, bot);
+	mpf_div (im_bin, imtop, bot);
+	
+	mpf_clear (retop);
+	mpf_clear (imtop);
+	mpf_clear (bot);
+	mpz_clear (fac);
+}
+
+/* =============================== END OF FILE =========================== */
+
