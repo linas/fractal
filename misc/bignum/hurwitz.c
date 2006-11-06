@@ -44,6 +44,46 @@ static inline void cpx_sub (cpx_t *dif, cpx_t *a, cpx_t *b)
 	mpf_sub (dif->im, a->im, b->im);
 }
 
+static inline void cpx_mul (cpx_t *prod, cpx_t *a, cpx_t *b)
+{
+	mpf_t pre, pim, tmp;
+	mpf_init (pre);
+	mpf_init (pim);
+	mpf_init (tmp);
+	
+	mpf_mul (tmp, a->im, b->im);
+	mpf_mul (pre, a->re, b->re);
+	mpf_sub (pre, pre, tmp);
+	
+	mpf_mul (tmp, a->im, b->re);
+	mpf_mul (pim, a->re, b->im);
+	mpf_add (pim, pim, tmp);
+	
+	mpf_set (prod->re, pre);
+	mpf_set (prod->im, pim);
+
+	mpf_clear (pre);
+	mpf_clear (pim);
+	mpf_clear (tmp);
+}
+
+static inline void cpx_recip (cpx_t *recip, cpx_t *z)
+{
+	mpf_t mag,tmp;
+	mpf_init (mag);
+	mpf_init (tmp);
+	mpf_mul (mag, z->re, z->re);
+	mpf_mul (tmp, z->im, z->im);
+	mpf_add (mag, mag, tmp);
+	mpf_ui_div (mag, 1, mag);
+	mpf_mul (recip->re, z->re, mag);
+	mpf_mul (recip->im, z->im, mag);
+	mpf_neg (recip->im, recip->im);
+	
+	mpf_clear (mag);
+	mpf_clear (tmp);
+}
+
 /* =========================================================== */
 
 /**
@@ -176,6 +216,14 @@ void hurwitz_zeta(cpx_t *zeta, cpx_t *ess, mpf_t q, int prec)
 	mpf_set_ui (zeta->re, 0);
 	mpf_set_ui (zeta->im, 0);
 
+	/* os contains value of 1/(s-1) */
+	cpx_t os;
+	cpx_init (&os);
+	mpf_sub_ui (os.re,ess->re, 1);
+	mpf_set (os.im, ess->im);
+	cpx_recip (&os, &os);
+
+	/* containes finite difference */
 	cpx_t fd;
 	cpx_init (&fd);
 
@@ -195,9 +243,14 @@ void hurwitz_zeta(cpx_t *zeta, cpx_t *ess, mpf_t q, int prec)
 printf ("duude %d ", n);
 fp_prt (" ", fd.re);
 		cpx_add (zeta, zeta, &fd);
-fp_prt ("   ", zeta->re);
+cpx_mul (&fd, zeta, &os);
+fp_prt ("   ", fd.re);
 printf ("\n");
 	}
+
+	cpx_mul (zeta, zeta, &os);
+
+	cpx_clear (&os);
 	
 	mpf_clear (on);
 	cpx_clear (&fd);
@@ -205,20 +258,21 @@ printf ("\n");
 
 int main ()
 {
-	int prec = 100;
+	int prec = 80;
 
-	set_bits (prec, prec);
+	/* Set the precision (number of binary bits) */
+	mpf_set_default_prec (3.3*prec+100);
 
 	cpx_t ess, zeta;
 	cpx_init (&ess);
 	cpx_init (&zeta);
 
-	mpf_set_d (ess.re, 2.0);
+	mpf_set_d (ess.re, 6.0);
 	mpf_set_d (ess.im, 0.0);
 	
 	mpf_t que;
 	mpf_init (que);
-	mpf_set_d (que,1.0);
+	mpf_set_d (que,0.5);
 	
 	hurwitz_zeta (&zeta, &ess, que, prec);
 
