@@ -4,7 +4,7 @@
 
 
 EXES= bound bs bsubn cache-fill cont_frac db-merge db-prt \
-      dsubn minima mp_zeta_test picturez \
+      dsubn hurwitz minima mp_zeta_test picturez \
       stieltjes trunc zero-cross
 
 all:  $(EXES)
@@ -17,6 +17,7 @@ db-merge:	db-merge.o $(MPOBJS)
 db-prt:	db-prt.o $(MPOBJS)
 cont_frac:	cont_frac.o
 dsubn:	dsubn.o mp_zeta.o $(MPOBJS)
+hurwitz:	hurwitz.o $(MPOBJS)
 mp_zeta_test:	mp_zeta_test.o mp_zeta.o $(MPOBJS)
 picturez:	picturez.o mp_zeta.o $(MPOBJS)
 stieltjes:	stieltjes.o mp_zeta.o $(MPOBJS)
