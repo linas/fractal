@@ -32,6 +32,18 @@ static inline void cpx_clear (cpx_t *z)
 	mpf_clear (z->im);
 }
 
+static inline void cpx_add (cpx_t *sum, cpx_t *a, cpx_t *b)
+{
+	mpf_add (sum->re, a->re, b->re);
+	mpf_add (sum->im, a->im, b->im);
+}
+
+static inline void cpx_sub (cpx_t *dif, cpx_t *a, cpx_t *b)
+{
+	mpf_sub (dif->re, a->re, b->re);
+	mpf_sub (dif->im, a->im, b->im);
+}
+
 /**
  * diri_term -- return (k+q)^{1-s}
  *
@@ -108,7 +120,8 @@ static void diri_term (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 
 /* =========================================================== */
 
-static void finite_diff_sum (cpx_t *fin, int n, mpf_t q, cpx_t *ess, int prec)
+/* Compute n'th forward difference of (k+q)^{1-s} */
+static void forward_diff_diri (cpx_t *fin, int n, mpf_t q, cpx_t *ess, int prec)
 {
 	mpf_set_ui (fin->re, 0);
 	mpf_set_ui (fin->im, 0);
@@ -134,13 +147,11 @@ static void finite_diff_sum (cpx_t *fin, int n, mpf_t q, cpx_t *ess, int prec)
 		  
 		if (0 == k%2)
 		{
-			mpf_add (fin->re, fin->re, diri.re);
-			mpf_add (fin->im, fin->im, diri.im);
+			cpx_add (fin, fin, &diri);
 		}
 		else
 		{
-			mpf_sub (fin->re, fin->re, diri.re);
-			mpf_sub (fin->im, fin->im, diri.im);
+			cpx_sub (fin, fin, &diri);
 		}
 	}
 
@@ -149,69 +160,58 @@ static void finite_diff_sum (cpx_t *fin, int n, mpf_t q, cpx_t *ess, int prec)
 	cpx_clear (&diri);
 }
 
-#if 0
+/* =========================================================== */
 /* A brute-force summation using Hasse formula, 
  * for complex s, real q.
  *
- * Unfortunately, the convergence is slow on the critical strip,
- * and double precision is not enough to do anything useful here.
+ * Unfortunately, the convergence is slow on the critical strip.
  */
 
-void hurwitz_zeta (long double *phre, long double *phim, double sre, double sim, long double q)
+void hurwitz_zeta(cpx_t *zeta, cpx_t *ess, mpf_t q, int prec)
 {
 	int norder = 80;
 
-	long double hre = 0.0;
-	long double him = 0.0;
+	mpf_set_ui (zeta->re, 0);
+	mpf_set_ui (zeta->im, 0);
+
+	cpx_t fd;
+	cpx_init (&fd);
+
+	mpf_t on;
+	mpf_init (on);
+
 	int n;
 	for (n=0; n<norder; n++)
 	{
-		long double rs=0.0L;
-		long double is=0.0L;
-		long double cyn = 1.0L;
-		for (k=0; k<=n; k++)
-		{
-			long double bin = cyn*binomial (n,k);
-			rs += bin * refd[k];
-			is += bin * imfd[k];
-			cyn = -cyn;
-		}
-
-		long double on = 1.0L/(n+1.0L);
-		hre += on * rs;
-		him += on * is;
-		printf ("its %d \t%Lg \thre=%Lg \t%Lg \thim=%Lg\n", n, rs, hre,is, him);
+		forward_diff_diri (&fd, n, q, ess, prec);
+		
+		mpf_set_ui (on, 1);
+		mpf_div_ui (on, on, n+1);
+		
+		mpf_mul (fd.re, fd.re, on);
+		mpf_mul (fd.im, fd.im, on);
+		cpx_add (zeta, zeta, &fd);
 	}
+	
+	mpf_clear (on);
+	cpx_clear (&fd);
 } 
-#endif
 
 int main ()
 {
-
-#if 0
-	long double q;
-	long double sre, sim;
-	long double hre, him;
-
-	sre = 0.5;
-	sim = 2.0;
-	q = 0.3;
-	hurwitz_zeta (&hre, &him, sre,sim, q);
-#endif
-
-	cpx_t ess, diri;
+	cpx_t ess, zeta;
 	cpx_init (&ess);
-	cpx_init (&diri);
+	cpx_init (&zeta);
 
-	mpf_set_ui (ess.re, 3);
+	mpf_set_ui (ess.re, 2);
 	
 	mpf_t que;
 	mpf_init (que);
-	mpf_set_d (que,0.5);
+	mpf_set_d (que,0.0);
 	
-	finite_diff_sum (&diri, 2, que, &ess, 50);
+	hurwitz_zeta (&zeta, &ess, que, 50);
 
-	fp_prt ("its ", diri.re);
+	fp_prt ("its ", zeta.re);
 	printf ("\n");
 
 	return 0;
