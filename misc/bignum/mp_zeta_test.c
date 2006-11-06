@@ -16,6 +16,8 @@
 
 #include <gmp.h>
 #include "mp-consts.h"
+#include "mp-misc.h"
+#include "mp-trig.h"
 #include "mp_zeta.h"
 
 /* ==================================================================== */
@@ -319,7 +321,7 @@ int main (int argc, char * argv[])
 	mpf_clear (zeta);
 	mpf_clear(zetas);
 #endif
-	
+
 #ifdef TEST_EXP
 	mpf_t ex, one;
 	mpf_init (ex);
@@ -329,6 +331,54 @@ int main (int argc, char * argv[])
 	fp_prt ("e= ", ex);
 	mpf_clear (ex);
 	mpf_clear(one);
+#endif
+
+#define TEST_SINE
+#ifdef TEST_SINE
+	mpf_t ex, pi2, pi2n;
+	mpf_init (ex);
+	mpf_init (pi2);
+	mpf_init (pi2n);
+	fp_pi (pi2, prec);
+	mpf_div_ui (pi2, pi2, 2);
+	mpf_set (pi2n, pi2);
+	
+	int n;
+	for (n=1; n<130; n++)
+	{
+		fp_sine (ex, pi2n, prec);
+		if (1==n%4)
+		{
+			mpf_sub_ui (ex,ex,1);
+		}
+		if (3==n%4)
+		{
+			mpf_add_ui (ex,ex,1);
+		}
+		printf ("sin(%d pi/2)= ", n);
+		fp_prt ("", ex);
+		printf ("\n");
+
+		fp_cosine (ex, pi2n, prec);
+		if (0==n%4)
+		{
+			mpf_sub_ui (ex,ex,1);
+		}
+		if (2==n%4)
+		{
+			mpf_add_ui (ex,ex,1);
+		}
+		printf ("cos(%d pi/2)= ", n);
+		fp_prt ("", ex);
+		printf ("\n");
+		printf ("\n");
+
+		mpf_add (pi2n, pi2n, pi2);
+	}
+
+	mpf_clear (ex);
+	mpf_clear(pi2);
+	mpf_clear(pi2n);
 #endif
 	
 // #define ZETA_STUFF
@@ -409,7 +459,7 @@ int main (int argc, char * argv[])
 	}
 #endif
 
-#define TEST_B_SUB_N
+// #define TEST_B_SUB_N
 #ifdef TEST_B_SUB_N
 	mpf_t rbs, ibs, bs;
 	mpf_init (rbs);

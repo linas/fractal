@@ -38,7 +38,7 @@ bsubn.o: mp_zeta.h mp-binomial.h
 cache-fill.o: db-cache.h mp_zeta.h mp-misc.h
 db-merge.o: db-cache.h mp-misc.h
 dsubn.o: mp_zeta.h mp-binomial.h mp-misc.h
-mp_zeta_test.o: mp_zeta.h mp-consts.h
+mp_zeta_test.o: mp_zeta.h mp-consts.h mp-misc.h mp-trig.h
 stieltjes.o: mp_zeta.h mp-binomial.h mp-misc.h
 
 bs:	bs.o mp_zeta.o $(MPOBJS)

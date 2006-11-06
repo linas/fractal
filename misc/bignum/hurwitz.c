@@ -11,6 +11,7 @@
 
 #include <gmp.h>
 #include "mp-cache.h"
+#include "mp-trig.h"
 
 typedef struct {
 	mpf_t re;
@@ -29,7 +30,7 @@ static inline void cpx_init (cpx_t z)
  * Values are cached, because they will be repeatedly called
  * for forward differencing.
  */
-static void diri_term (cpx_t diri, int k, mpf_t q)
+static void diri_term (cpx_t diri, int k, mpf_t q, cpx_t ess, int prec)
 {
 	DECLARE_FP_CACHE (re_diri);
 	DECLARE_FP_CACHE (im_diri);
@@ -45,21 +46,30 @@ static void diri_term (cpx_t diri, int k, mpf_t q)
 	{
 		fp_one_d_cache_fetch (re_diri, diri.re, k);
 		fp_one_d_cache_fetch (im_diri, diri.im, k);
+		return;
 	}
 	
-	mpf_t kq, logkq;
+	mpf_t kq, logkq, sre;
 	mpf_init (kq);
 	mpf_init (logkq);
+	mpf_init (sre);
 
 	mpf_add_ui (kq, q, k);
 	
 	fp_log (logkq, kq, prec);
 	
+	fp_neg (sre, ess.re);
+	fp_add_ui (sre, sre, 1);
+	fp_mul (sre, sre, logkq);
+
+
 	long double mag = expl((1.0L-sre) * logkq);
 	refd[k] = mag * cosl (sim*logkq);
 	imfd[k] = mag * sinl (sim*logkq);
 
-	mpf_free(logkq);
+	mpf_clear(kq);
+	mpf_clear(logkq);
+	mpf_clear(sre);
 }
 
 

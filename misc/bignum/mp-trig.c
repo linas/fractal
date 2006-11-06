@@ -86,16 +86,18 @@ void fp_inv_pow (mpf_t p, unsigned int n, unsigned int m)
  * precomputed constants.
  */
 
-static void fp_exp_helper (mpf_t ex, mpf_t zee, unsigned int prec)
+static void fp_exp_helper (mpf_t ex, mpf_t z, unsigned int prec)
 {
-	mpf_t z_n, fact, term;
+	mpf_t zee, z_n, fact, term;
 
+	mpf_init (zee);
 	mpf_init (z_n);
 	mpf_init (fact);
 	mpf_init (term);
 
 	mpf_set_ui (ex, 1);
 	mpf_set_ui (fact, 1);
+	mpf_set (zee, z);
 	mpf_set (z_n, zee);
 	
 	// double mex = ((double) prec) * log (10.0) / log(2.0);
@@ -122,6 +124,7 @@ static void fp_exp_helper (mpf_t ex, mpf_t zee, unsigned int prec)
 		mpf_mul_ui (fact, fact, n);
 	}
 	
+	mpf_clear (zee);
 	mpf_clear (z_n);
 	mpf_clear (fact);
 	mpf_clear (term);
@@ -155,19 +158,22 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
  * precomputed constants.
  */
 
-void fp_sine (mpf_t si, mpf_t zee, unsigned int prec)
+void fp_sine (mpf_t si, mpf_t z, unsigned int prec)
 {
-	mpf_t z_n, fact, term;
+	mpf_t zee, z_n, fact, term;
 
+	mpf_init (zee);
 	mpf_init (z_n);
 	mpf_init (fact);
 	mpf_init (term);
 
 	mpf_set_ui (si, 0);
 	mpf_set_ui (fact, 1);
+	mpf_set (zee, z);
 	mpf_set (z_n, zee);
 	
 	// double mex = ((double) prec) * log (10.0) / log(2.0);
+	prec += 2;
 	double mex = ((double) prec) * 3.321928095;
 	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
@@ -206,6 +212,7 @@ void fp_sine (mpf_t si, mpf_t zee, unsigned int prec)
 		s++;
 	}
 	
+	mpf_clear (zee);
 	mpf_clear (z_n);
 	mpf_clear (fact);
 	mpf_clear (term);
@@ -222,19 +229,22 @@ void fp_sine (mpf_t si, mpf_t zee, unsigned int prec)
  * precomputed constants.
  */
 
-void fp_cosine (mpf_t co, mpf_t zee, unsigned int prec)
+void fp_cosine (mpf_t co, mpf_t z, unsigned int prec)
 {
-	mpf_t z_n, fact, term;
+	mpf_t zee, z_n, fact, term;
 
+	mpf_init (zee);
 	mpf_init (z_n);
 	mpf_init (fact);
 	mpf_init (term);
 
 	mpf_set_ui (co, 1);
 	mpf_set_ui (fact, 2);
+	mpf_set (zee, z);
 	mpf_mul (z_n, zee, zee);
 	
 	// double mex = ((double) prec) * log (10.0) / log(2.0);
+	prec +=2;
 	double mex = ((double) prec) * 3.321928095;
 	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
@@ -273,6 +283,7 @@ void fp_cosine (mpf_t co, mpf_t zee, unsigned int prec)
 		s++;
 	}
 	
+	mpf_clear (zee);
 	mpf_clear (z_n);
 	mpf_clear (fact);
 	mpf_clear (term);
