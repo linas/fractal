@@ -10,6 +10,7 @@
 #include <stdio.h>
 
 #include <gmp.h>
+#include "mp-binomial.h"
 #include "mp-cache.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
@@ -23,6 +24,12 @@ static inline void cpx_init (cpx_t *z)
 {
 	mpf_init (z->re);
 	mpf_init (z->im);
+}
+
+static inline void cpx_clear (cpx_t *z)
+{
+	mpf_clear (z->re);
+	mpf_clear (z->im);
 }
 
 /**
@@ -59,12 +66,6 @@ static void diri_term_helper (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 	fp_sine (diri->im, pha, prec);
 	mpf_mul (diri->im, mag, diri->im);
 	
-fp_prt ("its re ", diri->re);
-printf ("\n");
-
-fp_prt ("its im ", diri->im);
-printf ("\n");
-
 	mpf_clear(kq);
 	mpf_clear(logkq);
 	mpf_clear(mag);
@@ -103,6 +104,49 @@ static void diri_term (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 	fp_one_d_cache_check (&im_diri, k);
 	fp_one_d_cache_store (&re_diri, diri->re, k, prec);
 	fp_one_d_cache_store (&im_diri, diri->im, k, prec);
+}
+
+/* =========================================================== */
+
+static void finite_diff_sum (cpx_t *fin, int n, mpf_t q, cpx_t *ess, int prec)
+{
+	mpf_set_ui (fin->re, 0);
+	mpf_set_ui (fin->im, 0);
+
+	mpz_t ibin;
+	mpz_init (ibin);
+	
+	mpf_t bin;
+	mpf_init (bin);
+
+	cpx_t diri;
+	cpx_init (&diri);
+
+	int k;
+	for (k=0; k<=n; k++)
+	{
+		i_binomial (ibin, n,k);
+		mpf_set_z (bin, ibin);
+
+		diri_term (&diri, k, q, ess, prec);
+		mpf_mul (diri.re, diri.re, bin);
+		mpf_mul (diri.im, diri.im, bin);
+		  
+		if (0 == k%2)
+		{
+			mpf_add (fin->re, fin->re, diri.re);
+			mpf_add (fin->im, fin->im, diri.im);
+		}
+		else
+		{
+			mpf_sub (fin->re, fin->re, diri.re);
+			mpf_sub (fin->im, fin->im, diri.im);
+		}
+	}
+
+	mpz_clear (ibin);
+	mpf_clear (bin);
+	cpx_clear (&diri);
 }
 
 #if 0
@@ -165,7 +209,7 @@ int main ()
 	mpf_init (que);
 	mpf_set_d (que,0.5);
 	
-	diri_term (&diri, 2, que, &ess, 50);
+	finite_diff_sum (&diri, 2, que, &ess, 50);
 
 	fp_prt ("its ", diri.re);
 	printf ("\n");
