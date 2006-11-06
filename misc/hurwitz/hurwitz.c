@@ -33,7 +33,7 @@ void hurwitz_zeta (long double *phre, long double *phim, long double sre, long d
 		long double logkq = logl(k+q);
 		long double mag = expl((1.0L-sre) * logkq);
 		refd[k] = mag * cosl (sim*logkq);
-		imfd[k] = mag * sinl (sim*logkq);
+		imfd[k] = mag * sinl (-sim*logkq);
 
 		// printf ("its %d \t%Lg \t%Lg\n", k, refd[k], imfd[k]);
 	}

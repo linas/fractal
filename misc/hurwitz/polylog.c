@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <gsl/gsl_sf_zeta.h>
 #include "binomial.h"
+#include "bernoulli.h"
 
 typedef struct {
 	double re;
@@ -187,7 +188,7 @@ static cplex hurwitz_beta (cplex s, double q)
 	int nterms =nt;
 	cplex z;
 
-	if (1.0e-10 > q)
+	if ((1.0e-10 > q) || (1.0e-10 > 1.0-q))
 	{
 		return cplex_zero();
 	}
@@ -233,7 +234,7 @@ main ()
 {
 	cplex zl, zh;
 
-#define RIEMANN_ZETA
+// #define RIEMANN_ZETA
 #ifdef RIEMANN_ZETA
 	cplex s;
 	s.im = 0.0;
@@ -250,6 +251,51 @@ main ()
 		zl = cplex_mult (zl, ts);
 		
 		double zeta = gsl_sf_zeta (s.re);
+		
+		printf ("%7.3g	%15.10g	%15.10g	%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
+	}
+#endif
+
+#define BERNOULLI_POLY
+#ifdef BERNOULLI_POLY
+
+	int n=6;
+	cplex s;
+	s.im = 0.0;
+	s.re = n;
+	double q;
+	for (q=0.0; q<1.0; q+=0.02)
+	{
+		zl = hurwitz_beta (s, q);
+		zh = hurwitz_beta (s, 1.0-q);
+		zh = cplex_zero();
+		cplex z = cplex_add (zl,zh);
+		
+		double bs = -z.re;
+		if (n%2) bs = z.im;
+		
+		bs *= factorial (n) * pow (2.0*M_PI, -n);
+		bs *= 2.0;
+		
+		// double b = q*q-q+1.0/6.0;
+		double b = bernoulli_poly (n,q);
+		
+		printf ("%7.3g	%15.10g	%15.10g	%6.3g\n", q, bs, b, bs-b);
+	}
+#endif
+
+// #define HURWITZ_ZETA
+#ifdef HURWITZ_ZETA
+	cplex s;
+	s.im = 0.0;
+	double q=0.4;
+	for (s.re = 1.1; s.re < 8; s.re += 0.1)
+	{
+		zl = hurwitz_beta (s, q);
+		zh = hurwitz_beta (s, 1.0-q);
+		
+		/* wrong ... */
+		double zeta = gsl_sf_hzeta (s.re, q);
 		
 		printf ("%7.3g	%15.10g	%15.10g	%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
 	}
