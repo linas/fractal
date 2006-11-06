@@ -127,7 +127,7 @@ int q_one_d_cache_check (q_cache *c, unsigned int n)
  */
 int fp_one_d_cache_check (fp_cache *c, unsigned int n)
 {
-	if ((n > c->nmax) || 0==n )
+	if (n >= c->nmax)
 	{
 		unsigned int newsize = 1.5*n+1;
 		c->cache = (mpf_t *) realloc (c->cache, newsize * sizeof (mpf_t));
