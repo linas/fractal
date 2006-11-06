@@ -25,5 +25,20 @@ void fp_prt (char * str, mpf_t val)
 	mpf_out_str (stdout, 10, 60, val);
 }
 
+/* prec is the decimal precison (number of decimal places) */
+/* nterms is the number of an's to compute */
+void set_bits (int prec, int nterms)
+{
+	/* Compute number of binary bits this corresponds to. */
+	double v = ((double) prec) *log(10.0) / log(2.0);
+
+	/* The variable-precision calculations are touchy about this */
+	/* XXX this should be stirling's approx for binomial */
+	int bits = (int) (v + 300 + 3*nterms);
+
+	/* Set the precision (number of binary bits) */
+	mpf_set_default_prec (bits);
+}
+
 /* =============================== END OF FILE =========================== */
 

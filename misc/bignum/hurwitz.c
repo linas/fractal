@@ -44,6 +44,8 @@ static inline void cpx_sub (cpx_t *dif, cpx_t *a, cpx_t *b)
 	mpf_sub (dif->im, a->im, b->im);
 }
 
+/* =========================================================== */
+
 /**
  * diri_term -- return (k+q)^{1-s}
  *
@@ -169,7 +171,7 @@ static void forward_diff_diri (cpx_t *fin, int n, mpf_t q, cpx_t *ess, int prec)
 
 void hurwitz_zeta(cpx_t *zeta, cpx_t *ess, mpf_t q, int prec)
 {
-	int norder = 80;
+	int norder = prec;
 
 	mpf_set_ui (zeta->re, 0);
 	mpf_set_ui (zeta->im, 0);
@@ -190,7 +192,11 @@ void hurwitz_zeta(cpx_t *zeta, cpx_t *ess, mpf_t q, int prec)
 		
 		mpf_mul (fd.re, fd.re, on);
 		mpf_mul (fd.im, fd.im, on);
+printf ("duude %d ", n);
+fp_prt (" ", fd.re);
 		cpx_add (zeta, zeta, &fd);
+fp_prt ("   ", zeta->re);
+printf ("\n");
 	}
 	
 	mpf_clear (on);
@@ -199,17 +205,22 @@ void hurwitz_zeta(cpx_t *zeta, cpx_t *ess, mpf_t q, int prec)
 
 int main ()
 {
+	int prec = 100;
+
+	set_bits (prec, prec);
+
 	cpx_t ess, zeta;
 	cpx_init (&ess);
 	cpx_init (&zeta);
 
-	mpf_set_ui (ess.re, 2);
+	mpf_set_d (ess.re, 2.0);
+	mpf_set_d (ess.im, 0.0);
 	
 	mpf_t que;
 	mpf_init (que);
-	mpf_set_d (que,0.0);
+	mpf_set_d (que,1.0);
 	
-	hurwitz_zeta (&zeta, &ess, que, 50);
+	hurwitz_zeta (&zeta, &ess, que, prec);
 
 	fp_prt ("its ", zeta.re);
 	printf ("\n");
