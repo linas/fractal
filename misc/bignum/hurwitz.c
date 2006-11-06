@@ -31,7 +31,7 @@ static inline void cpx_init (cpx_t *z)
  * Values are cached, because they will be repeatedly called
  * for forward differencing.
  */
-static void diri_term_helper (cpx_t diri, int k, mpf_t q, cpx_t ess, int prec)
+static void diri_term_helper (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 {
 	mpf_t kq, logkq, mag, pha;
 	mpf_init (kq);
@@ -44,28 +44,34 @@ static void diri_term_helper (cpx_t diri, int k, mpf_t q, cpx_t ess, int prec)
 	fp_log (logkq, kq, prec);
 	
 	/* magnitude is exp((1-re(s)) *log(k+q)) */
-	mpf_neg (mag, ess.re);
+	mpf_neg (mag, ess->re);
 	mpf_add_ui (mag, mag, 1);
 	mpf_mul (mag, mag, logkq);
 	fp_exp (mag, mag, prec);
 
 	/* phase is -im(s) *log(k+q)) */
-	mpf_mul (pha, ess.im, logkq);
+	mpf_mul (pha, ess->im, logkq);
 	mpf_neg (pha,pha);
 
-	fp_cosine (diri.re, pha, prec);
-	mpf_mul (diri.re, mag, diri.re);
+	fp_cosine (diri->re, pha, prec);
+	mpf_mul (diri->re, mag, diri->re);
 	
-	fp_sine (diri.im, pha, prec);
-	mpf_mul (diri.im, mag, diri.im);
+	fp_sine (diri->im, pha, prec);
+	mpf_mul (diri->im, mag, diri->im);
 	
+fp_prt ("its re ", diri->re);
+printf ("\n");
+
+fp_prt ("its im ", diri->im);
+printf ("\n");
+
 	mpf_clear(kq);
 	mpf_clear(logkq);
 	mpf_clear(mag);
 	mpf_clear(pha);
 }
 
-static void diri_term (cpx_t diri, int k, mpf_t q, cpx_t ess, int prec)
+static void diri_term (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 {
 	DECLARE_FP_CACHE (re_diri);
 	DECLARE_FP_CACHE (im_diri);
@@ -85,16 +91,18 @@ static void diri_term (cpx_t diri, int k, mpf_t q, cpx_t ess, int prec)
 		mpf_set(cache_q,q);
 	}
 
-	if (prec >= fp_one_d_cache_check (&re_diri, k))
+	if (prec <= fp_one_d_cache_check (&re_diri, k))
 	{
-		fp_one_d_cache_fetch (&re_diri, diri.re, k);
-		fp_one_d_cache_fetch (&im_diri, diri.im, k);
+		fp_one_d_cache_fetch (&re_diri, diri->re, k);
+		fp_one_d_cache_fetch (&im_diri, diri->im, k);
 		return;
 	}
 	
 	diri_term_helper (diri, k, q, ess, prec);
-	fp_one_d_cache_store (&re_diri, diri.re, k, prec);
-	fp_one_d_cache_store (&im_diri, diri.im, k, prec);
+
+	fp_one_d_cache_check (&im_diri, k);
+	fp_one_d_cache_store (&re_diri, diri->re, k, prec);
+	fp_one_d_cache_store (&im_diri, diri->im, k, prec);
 }
 
 #if 0
@@ -151,12 +159,13 @@ int main ()
 	cpx_init (&ess);
 	cpx_init (&diri);
 
-	mpf_set_ui (ess.re, 2);
+	mpf_set_ui (ess.re, 3);
 	
 	mpf_t que;
 	mpf_init (que);
+	mpf_set_d (que,0.5);
 	
-	diri_term (diri, 2, que, ess, 50);
+	diri_term (&diri, 2, que, &ess, 50);
 
 	fp_prt ("its ", diri.re);
 	printf ("\n");
