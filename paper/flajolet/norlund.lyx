@@ -4607,7 +4607,9 @@ Saddle-point analysis for the Totient series
 This section summarizes a saddle-point analysis for the Totient function
  finite difference series 
 \begin_inset Formula \begin{equation}
-d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
+d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4670,7 +4672,9 @@ Saddle-point analysis for the Liouville series
 This section summarizes a saddle-point analysis for the Liouville function
  finite difference series 
 \begin_inset Formula \begin{equation}
-d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(2k)}{\zeta(k)}\label{eq:}\end{equation}
+d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\,\frac{\zeta(2k)}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -5139,6 +5143,18 @@ k\end{array}\right)\frac{1}{2^{k}}\zeta(k,z+1)\]
  We've already computed this sum, so should be able to read off an answer
  directly, and improve significantly on Lagarias results.
  XXX Do this.
+ XXX Actually, not quite ...
+ the best from above is 
+\begin_inset Formula \[
+A_{n}(m,2)=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\frac{1}{2^{k}}\zeta\left(k,\frac{m}{2}\right)\]
+
+\end_inset 
+
+ which misses the general z.
+ I beleive saddle pt analysis can be generalized to handle the Lagarias
+ sum.
 \layout Section
 
 Conclusions/Comments
