@@ -258,17 +258,17 @@ printf ("\n");
 
 int main ()
 {
-	int prec = 80;
+	int prec = 580;
 
 	/* Set the precision (number of binary bits) */
-	mpf_set_default_prec (3.3*prec+100);
+	mpf_set_default_prec (3.3*prec+600);
 
 	cpx_t ess, zeta;
 	cpx_init (&ess);
 	cpx_init (&zeta);
 
-	mpf_set_d (ess.re, 6.0);
-	mpf_set_d (ess.im, 0.0);
+	mpf_set_d (ess.re, 0.5);
+	mpf_set_d (ess.im, 4.0);
 	
 	mpf_t que;
 	mpf_init (que);
