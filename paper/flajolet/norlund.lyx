@@ -3617,6 +3617,13 @@ a_{n}(2,2)=\frac{1}{2}\sum_{p=1}^{2}\left(\frac{np}{\pi}\right)^{1/4}\exp\left(-
 \end_inset 
 
 
+\layout Standard
+
+XXX Coffey's sum is actually 
+\begin_inset Formula $A_{n}(1,2)$
+\end_inset 
+
+ !!?? viz the Dirichlet eta ??
 \layout Section
 
 More L-functions
@@ -3721,7 +3728,7 @@ G\left(p,\chi_{1}\right)=\frac{\varphi(k)\mu\left(\frac{k}{(p,k)}\right)}{\varph
 
 That's all.
  Not sure what more to say at this point.
- -- linas
+ 
 \layout Note*
 
 TODO -- The Hurwitz zeta can be avoided entirely by working directly with
@@ -3877,7 +3884,9 @@ This section provides a numeric exploration of the finite differences of
  the various Dirichlet series given above.
  Consider first
 \begin_inset Formula \begin{equation}
-d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
+d_{n}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -3947,7 +3956,9 @@ collapsed false
 
 The graphic above shows 
 \begin_inset Formula \[
-d_{n}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{1}{\zeta(k)}\]
+d_{n}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\,\frac{1}{\zeta(k)}\]
 
 \end_inset 
 
@@ -4140,7 +4151,9 @@ The finite differences for the other series appear to show a similar pattern,
  except that the scale of the leading order is different.
  Consider, for example, 
 \begin_inset Formula \begin{equation}
-d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
+d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4290,7 +4303,9 @@ d_{n}^{\varphi}=A\,\left(1+B\log n\right)n^{2}\log n+\mathcal{O}\left(n^{2}\log^
 
 Let 
 \begin_inset Formula \[
-d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left({{n\atop k}}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
+d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
 
 \end_inset 
 
@@ -4390,6 +4405,11 @@ This figure shows a graph of
 \layout Section
 
 Saddle-point analysis
+\layout Standard
+
+XXXX The following sections are completely wrong, the application of saddle
+ point methods here are completely inapplicable.
+ XXXX
 \layout Standard
 
 The asymptotic behavior of the 
@@ -4720,7 +4740,9 @@ The Riemann zeta function has regularly-spaced zeros along the negative
  the Norlund-Rice integrand.
  Viz: 
 \begin_inset Formula \[
-\oint_{C}\frac{ds}{\zeta(s)}\sim\sum{{n \choose k}}\frac{1}{\zeta^{\prime}(2n)}\]
+\oint_{C}\frac{ds}{\zeta(s)}\sim\sum\left(\begin{array}{c}
+n\\
+k\end{array}\right)\frac{1}{\zeta^{\prime}(2n)}\]
 
 \end_inset 
 
@@ -4744,7 +4766,9 @@ A similar sum appears in
 
  as 
 \begin_inset Formula \[
-c_{n}=\sum_{k=0}^{n}(-1)^{k}{{n \choose k}}\frac{1}{\zeta(2k+2)}\]
+c_{n}=\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\frac{1}{\zeta(2k+2)}\]
 
 \end_inset 
 
@@ -4875,7 +4899,9 @@ Helmut Hasse and Conrad Knoppe (1930) give a series for the Riemann zeta
 
 ):
 \begin_inset Formula \[
-\zeta(s)=\frac{1}{1-2^{1-s}}\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}(-1)^{k}{{n \choose k}}(k+1)^{-s}\]
+\zeta(s)=\frac{1}{1-2^{1-s}}\sum_{n=0}^{\infty}\frac{1}{2^{n+1}}\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)(k+1)^{-s}\]
 
 \end_inset 
 
@@ -4889,7 +4915,9 @@ Hasse for Hurwitz
 Hasse also gave a similar, globally convergent, expansion for the Hurwitz
  zeta:
 \begin_inset Formula \[
-\zeta(s,q)=\frac{1}{s-1}\sum_{n=0}^{\infty}\frac{1}{n+1}\sum_{k=0}^{n}(-1)^{k}{{n \choose k}}(q+k)^{1-s}\]
+\zeta(s,q)=\frac{1}{s-1}\sum_{n=0}^{\infty}\frac{1}{n+1}\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)(q+k)^{1-s}\]
 
 \end_inset 
 
@@ -4938,7 +4966,9 @@ L(\chi_{1},s)=\left(1-2^{-s}\right)\zeta(s)\]
 
  equation 16 as the sum
 \begin_inset Formula \[
-S_{1}(n)=\sum_{k=2}^{n}(-1)^{k}{{n \choose k}}\left(1-2^{-k}\right)\zeta(k)\]
+S_{1}(n)=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(1-2^{-k}\right)\zeta(k)\]
 
 \end_inset 
 
@@ -4962,7 +4992,9 @@ Coffey
 
  shows interest in another sum:
 \begin_inset Formula \[
-S_{3}(n)=\sum_{k=2}^{n}(-1)^{k}{{n \choose k}}2^{k}\zeta(k)\]
+S_{3}(n)=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)2^{k}\zeta(k)\]
 
 \end_inset 
 
@@ -4998,7 +5030,9 @@ which seems to be of the form
  and thus suggests that the saddle-point techniques should be applicable.
  These appear in Lagarias equation 4.13 and in Coffey equation 10 as
 \begin_inset Formula \[
-\lambda_{n}=-\sum_{k=1}^{n}{{n \choose k}}\eta_{k-1}+S_{1}(n)+1-\frac{n}{2}\left(\gamma+\ln\pi+2\ln2\right)\]
+\lambda_{n}=-\sum_{k=1}^{n}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\eta_{k-1}+S_{1}(n)+1-\frac{n}{2}\left(\gamma+\ln\pi+2\ln2\right)\]
 
 \end_inset 
 
@@ -5050,7 +5084,9 @@ Prodinger considers a curious sum, and provides an answer; Knuth
 
 :
 \begin_inset Formula \[
-S=\sum_{k=1}^{n-1}{{n \choose k}}\frac{B_{k}}{2^{k}-1}\simeq-\log_{2}n+\frac{1}{2}+\delta_{2}\left(\log_{2}n\right)\]
+S=\sum_{k=1}^{n-1}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\frac{B_{k}}{2^{k}-1}\simeq-\log_{2}n+\frac{1}{2}+\delta_{2}\left(\log_{2}n\right)\]
 
 \end_inset 
 
@@ -5094,7 +5130,9 @@ Lagarias
 
  has a a sum over the Hurwitz zeta, equation 5.5: 
 \begin_inset Formula \[
-T(n,z)=\sum_{k=1}^{n}(-1)^{k}{{n \choose k}}\frac{1}{2^{k}}\zeta(k,z+1)\]
+T(n,z)=\sum_{k=1}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\frac{1}{2^{k}}\zeta(k,z+1)\]
 
 \end_inset 
 
