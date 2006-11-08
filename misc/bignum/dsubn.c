@@ -4,7 +4,11 @@
  * High-precison dsub_n  using the 
  * Gnu Multiple-precision library.
  *
- * Here, d_sub_n is sum 1/zeta * binomial
+ * Here, d_sub_n is d_n = sum_{k=2}^n (-1)^k {n \choose k} /zeta(k)
+ * which is given by the Mobious function.
+ *
+ * Similar sums for the totient ad Liouville function are also
+ * implemented.
  *  
  * Linas Vepstas July 2005, July 2006
  */
@@ -43,6 +47,9 @@ void bino (void)
 #endif
 
 /* ==================================================================== */
+/* Provide summation of 
+ * sum_{p=2}^n (-1)^p {n \choose p} \frac{1}{p}
+ */
 
 void d_sub_n (mpf_t acc, int en, unsigned int prec)
 {
@@ -78,8 +85,8 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 
 #define D_N_SCALE
 #ifdef D_N_SCALE
-		mpf_ui_sub (acc, 2, acc);
-		mpf_mul_ui (acc, acc, en*en);
+	mpf_ui_sub (acc, 2, acc);
+	mpf_mul_ui (acc, acc, en*en);
 #endif
 	mpf_clear (bin);
 	mpf_clear (term);
@@ -87,6 +94,8 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 }
 
 /* ==================================================================== */
+/* Same as above, but for totient function, instead of mobius
+ * That is, its for zeta(n+1)/zeta(n)
 
 void d_totient_n (mpf_t acc, int en, unsigned int prec)
 {
@@ -121,10 +130,10 @@ void d_totient_n (mpf_t acc, int en, unsigned int prec)
 	}
 #define T_N_SCALE
 #ifdef T_N_SCALE
-		mpf_div_ui (acc, acc, en*en);
-		// mpf_set_ui (bin, en);
-		// fp_log (term, bin, prec);
-		// mpf_div (acc, acc, term);
+	mpf_div_ui (acc, acc, en*en);
+	// mpf_set_ui (bin, en);
+	// fp_log (term, bin, prec);
+	// mpf_div (acc, acc, term);
 #endif
 
 	mpf_clear (bin);
@@ -133,6 +142,9 @@ void d_totient_n (mpf_t acc, int en, unsigned int prec)
 }
 
 /* ==================================================================== */
+/* Same as above, but for the Liouville function, instead of
+ * the totiet function. That is, its for zeta(2n)/zeta(n)
+ */
 
 void d_liouville_n (mpf_t acc, int en, unsigned int prec)
 {
@@ -168,7 +180,7 @@ void d_liouville_n (mpf_t acc, int en, unsigned int prec)
 
 // #define L_N_SCALE
 #ifdef L_N_SCALE
-		mpf_mul_ui (acc, acc, easssadf);
+	mpf_mul_ui (acc, acc, easssadf);
 #endif
 	mpf_clear (bin);
 	mpf_clear (term);

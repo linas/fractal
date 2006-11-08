@@ -1,8 +1,4 @@
 
-# set term x11
-# set term gif size 640,480
-# set out 'read.gif'
-
 set term png small
 set out 'dsubn.png'
 
@@ -20,7 +16,7 @@ set key right
 # plot "dn.dat" using 1:(2-$2/($1*$1)) title "" linewidth 3
 
 # ----------------------------------------------------
-# Graphics used for peper for dsubn-asymp-500.png
+# Graphics used for paper for dsubn-asymp-500.png
 # set title "Asymptotic behaviour of d_n"
 # set xlabel "n"
 # set ylabel "n^2 (2-d_n)"
@@ -54,11 +50,6 @@ set key right
 # set xrange [5:]
 # plot "dn-10.dat" using (log($1)):(log($2)) title "data"
 
-# liouville i.e. sum zeta(2n)/zeta(n)
-# plot "ln.dat" using 1:($2/(sqrt($1))) title "data"
-
-# totient
-# plot "ln.dat" using 1:(($1*$1*log($1))/$2) title "data"
 
 #1312  0.327702157562257847761565310407211428407662582260350393518409e2
 # 1482  0.32766986706419146385140739974997385782686015918875231266123e2
@@ -71,5 +62,17 @@ set key right
 # pause 100
 
 # set xrange [6000:]
-plot "dn-10.dat" using 1:($2) title "data"
+# plot "dn-10.dat" using 1:($2) title "data" 
 # plot "dn-10.dat" using 1:($2/($1*$1)) title "data"
+
+#      "dn-10.dat" using 1:(32.7686012313+1e-10*$1*$1*sqrt($1)*cos(14.13*log($1))) title "fit"
+
+# Fit to the first zero per Flajolet
+# exp (-pi*14.13/2) = 2.2944e-10
+#
+# The n^2 term is 4pi^2/zeta(3)= 4pi^2/1.20205..= 32.8425
+# its actually (n+1)(n+2)/n^2 * 32.8425...
+#
+set xrange [10:]
+plot "dn-10.dat" using 1:($2) title "data", \
+     "dn-10.dat" using 1:(32.8425*($1+1)*($1+2)/($1*$1)+1e-10*$1*$1*sqrt($1)*cos(14.134725*log($1))) title "fit"
