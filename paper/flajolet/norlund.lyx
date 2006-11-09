@@ -3912,24 +3912,13 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
 \end_inset 
 
  is oscillatory.
- The oscillations seem bounded, and thus the numeric work suggests that
  
-\begin_inset Formula \begin{equation}
-d_{n}=\mathcal{O}\left(\log n\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- or possibly better, but presumably not 
-\begin_inset Formula $\mathcal{O}(1)$
-\end_inset 
-
-.
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -3985,7 +3974,7 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\]
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -4030,6 +4019,94 @@ in the limit of large
 \end_inset 
 
 .
+\end_inset 
+
+
+\layout Standard
+
+The asymptotic behavior of the 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+ can be obtained by the corresponding Norlund-Rice integral.
+ That is, one writes 
+\begin_inset Formula \begin{equation}
+d_{n}=\frac{(-1)^{n}}{2\pi i}\int_{3/2-i\infty}^{3/2+i\infty}\frac{1}{\zeta(s)}\,\frac{n!}{s(s-1)(s-2)\cdots(s-n)}ds\label{eq:}\end{equation}
+
+\end_inset 
+
+ The contour may be closed to the left, and the Cauchy-Riemann theorem applied.
+ The integral has poles at zero, at the 
+\begin_inset Quotes eld
+\end_inset 
+
+trivial zeroes
+\begin_inset Quotes erd
+\end_inset 
+
+ 
+\begin_inset Formula $-2k$
+\end_inset 
+
+, and at the non-trivial zeroes 
+\begin_inset Formula $\rho=\sigma+i\tau$
+\end_inset 
+
+.
+ Thus, one has 
+\begin_inset Formula \begin{equation}
+d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\frac{n!\,(2k-1)!}{(2k+n)!}\,\frac{1}{\zeta^{\prime}(-2k)}+\left(-1\right)^{n}\sum_{\rho}\frac{n!}{\rho(\rho-1)\cdots(\rho-n)}\,\frac{1}{\zeta^{\prime}(\rho)}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Substituting for 
+\begin_inset Formula \[
+\zeta^{\prime}(-2k)=\left(-1\right)^{k}\,\frac{(2k)!}{2(2\pi)^{2k}}\,\zeta(2k+1)\]
+
+\end_inset 
+
+ one has 
+\begin_inset Formula \begin{equation}
+d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\left(-1\right)^{k}\frac{n!}{(2k+n)!}\,\frac{(2\pi)^{2k}}{k\zeta(2k+1)}+\left(-1\right)^{n}\sum_{\rho}\frac{n!}{\rho(\rho-1)\cdots(\rho-n)}\,\frac{1}{\zeta^{\prime}(\rho)}\label{eq:}\end{equation}
+
+\end_inset 
+
+ The value of zeta at zero, 
+\begin_inset Formula $\zeta(0)=-1/2$
+\end_inset 
+
+ accounts fully for the low-
+\begin_inset Formula $n$
+\end_inset 
+
+ behaviour seen in the numerical sums.
+ The next few terms in the 
+\begin_inset Formula $k$
+\end_inset 
+
+ summation provide corrections that die away rapidly for large 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ The contribution of the non-trivial zeros is more surprising.
+ The contribution of the first zero at 
+\begin_inset Formula $\rho=0.5+i14.134725$
+\end_inset 
+
+ is 
+\begin_inset Formula \[
+-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\zeta^{\prime}(\rho)}\]
+
+\end_inset 
+
+
+\layout Standard
+
+The first few terms are 
+\begin_inset Formula \[
+d_{n}=2-\frac{4\pi^{2}}{(n+1)(n+2)\zeta(3)}+\frac{2\pi^{4}}{(n+1)(n+2)(n+3)(n+4)\zeta(5)}+\]
+
 \end_inset 
 
 
@@ -4145,6 +4222,9 @@ This figure shows a plot of
 \end_inset 
 
 
+\layout Subsection
+
+Other series
 \layout Standard
 
 The finite differences for the other series appear to show a similar pattern,
@@ -4404,27 +4484,10 @@ This figure shows a graph of
 
 \layout Section
 
-Saddle-point analysis
+analytic Behaviour
 \layout Standard
 
-XXXX The following sections are completely wrong, the application of saddle
- point methods here are completely inapplicable.
- XXXX
-\layout Standard
-
-The asymptotic behavior of the 
-\begin_inset Formula $d_{n}$
-\end_inset 
-
- can be obtained by performing a saddle-point evaluation of the corresponding
- Norlund-Rice integral.
- That is, one writes 
-\begin_inset Formula \begin{equation}
-d_{n}=\frac{(-1)^{n}}{2\pi i}\int_{c-i\infty}^{c+i\infty}f(s)\frac{n!}{s(s-1)(s-2)\cdots(s-n)}ds\label{eq:}\end{equation}
-
-\end_inset 
-
- where 
+where 
 \begin_inset Formula $f(s)=1/\zeta(s)$
 \end_inset 
 
@@ -4479,61 +4542,12 @@ d_{n}=\frac{(-1)^{n}}{2\pi i}\int_{c-i\infty}^{c+i\infty}f(s)\frac{n!}{s(s-1)(s-
  Thus, one obtains, 
 \begin_inset Formula \begin{eqnarray}
 d_{n}^{\mu} & = & \mathcal{O}(1)\int_{c-i\infty}^{c+i\infty}\frac{\left|s\right|^{\epsilon}}{s}\,\frac{n!}{(s-2)(s-3)\cdots(s-n)}ds\label{eq:}\\
- & = & \mathcal{O}(1)\int_{c-i\infty}^{c+i\infty}e^{N\omega(s)}ds\nonumber \\
- & = & \mathcal{O}(1)\sqrt{\frac{2\pi}{N\omega^{\prime\prime}\left(s_{0}\right)}}e^{N\omega\left(s_{0}\right)}\nonumber \end{eqnarray}
+ & =\nonumber \\
+ & =\nonumber \end{eqnarray}
 
 \end_inset 
 
- with 
-\begin_inset Formula $s_{0}$
-\end_inset 
-
- the saddle point.
- Careful analysis shows that 
-\begin_inset Formula $N=\log n$
-\end_inset 
-
-, so that the saddle-point approximation is valid, and that the saddle point
- is located at
-\begin_inset Formula \begin{equation}
-s_{0}=\frac{1-\epsilon}{\log n}\left[1+\frac{1-\gamma}{\log n}+\mathcal{O}\left(\frac{1}{\log^{2}n}\right)\right]\label{eq:}\end{equation}
-
-\end_inset 
-
- This saddle point is located very near the origin; one must take the integratio
-n contour so that it passes from the lower-right quadrant, crosses 
-\begin_inset Formula $\sigma=1/2$
-\end_inset 
-
- to approach the origin, and departs to the upper-right quadrant.
- 
-\layout Standard
-
-The two parts of the saddle point formula are 
-\begin_inset Formula \begin{equation}
-e^{N\omega(s_{0})}=\left(\frac{e\log n}{1-\epsilon}\right)^{1-\epsilon}+\mathcal{O}(1)\label{eq:}\end{equation}
-
-\end_inset 
-
- and 
-\begin_inset Formula \begin{equation}
-\sqrt{\frac{2\pi}{N\omega^{\prime\prime}\left(s_{0}\right)}}=\frac{\sqrt{2\pi\left(1-\epsilon\right)}}{\log n}\left(1+\mathcal{O}\left(\frac{1}{\log n}\right)\right)\label{eq:}\end{equation}
-
-\end_inset 
-
-Combining these, one obtains
-\begin_inset Formula \begin{equation}
-d_{n}^{\mu}=\mathcal{O}(1)\cdot\sqrt{\frac{2\pi}{1-\epsilon}}\left(1+\epsilon\log\left(\frac{1-\epsilon}{\log n}\right)\right)\left(1+\mathcal{O}\left(\frac{1}{\log n}\right)\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- Pulling all of these factors together, one concludes that 
-\begin_inset Formula \begin{equation}
-d_{n}^{\mu}=\mathcal{O}\left(\log\log n\right)\label{eq:}\end{equation}
-
-\end_inset 
-
-
+ with
 \layout Subsection
 
 An alternate analysis
@@ -4564,44 +4578,9 @@ assume
  As will be made clear later, this assumption is equivalent to assuming
  RH.
  
-\layout Standard
-
-Making this assumption that the only saddle point is near the origin, one
- then obtains for its location 
-\begin_inset Formula \begin{equation}
-s_{0}=\frac{1}{\log n}+\mathcal{O}\left(\frac{1}{\log^{2}n}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- The only direct requirement on the location of the zeros was that they
- satisfy 
-\begin_inset Formula \begin{equation}
-\sum_{\rho}\frac{1}{\rho\left(\rho-s\right)}=\mathcal{O}\left(1\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- Proceeding with the saddle-point analysis, one obtains that 
-\begin_inset Formula \begin{equation}
-d_{n}=\mathcal{O}\left(1\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- Note that this result seems to be obtainable with only extremely weak assumptio
-ns about the location of the zeros of the Riemann zeta.
- This makes sense: the saddle point is essentially a local property, and
- local properties shouldn't really depend on the fine points of distant
- parts of the integrand.
- Thus, it is tempting to conclude that the result that 
-\begin_inset Formula $d_{n}=\mathcal{O}\left(1\right)$
-\end_inset 
-
- follows without requiring RH; but this would be wrong.
- This result was based on the assumption that the only saddle point was
- near the origin, and this assumption must surely require RH, as will be
- established in a later section.
 \layout Subsection
 
-Saddle-point analysis for the Totient series
+Analysis for the Totient series
 \layout Standard
 
 This section summarizes a saddle-point analysis for the Totient function
@@ -4628,45 +4607,10 @@ k\end{array}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
 
 .
  In most other respects, it resembles the previous integral.
- It can be seen to have a saddle point near 
-\begin_inset Formula $s=2$
-\end_inset 
-
- which determines the asymptotic behavior.
- Evaluating the integrand for the location of the saddle point, one obtains
  
-\begin_inset Formula \begin{equation}
-s_{0}=2+\frac{2}{\log n}+\frac{(1-\epsilon)/2-\gamma}{\log^{2}n}+\mathcal{O}\left(\frac{1}{\log^{3}n}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- The two parts of the formula are 
-\begin_inset Formula \begin{equation}
-e^{N\omega(s_{0})}=\mathcal{O}(1)\cdot n^{2}\log^{2}n\label{eq:}\end{equation}
-
-\end_inset 
-
- and 
-\begin_inset Formula \begin{equation}
-N\omega^{\prime\prime}\left(s_{0}\right)=-2\log^{2}n+\frac{1-\epsilon}{4}+\mathcal{O}\left(\frac{1}{\log n}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
-Combining these, one obtains 
-\begin_inset Formula \begin{equation}
-d_{n}^{\varphi}=\mathcal{O}\left(n^{2}\log n\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- This result is in good agreement with the numerical calculations for the
- range 
-\begin_inset Formula $10^{2}<n<10^{4}$
-\end_inset 
-
-.
 \layout Subsection
 
-Saddle-point analysis for the Liouville series
+Analysis for the Liouville series
 \layout Standard
 
 This section summarizes a saddle-point analysis for the Liouville function
@@ -4689,41 +4633,7 @@ k\end{array}\right)\,\frac{\zeta(2k)}{\zeta(k)}\label{eq:}\end{equation}
 
 .
  In all other respects, it resembles the previous integrals.
- Thus, a priori we expect a saddle point near 
-\begin_inset Formula $s=1/2$
-\end_inset 
-
- to determine the asymptotic behavior.
- Indeed, proceeding as before, one obtains 
-\begin_inset Formula \begin{equation}
-s_{0}=\frac{1}{2}+\frac{2+\epsilon/4}{\log n}+\mathcal{O}\left(\frac{1}{\log^{2}n}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- The two parts of the saddle-point formula may be obtained from 
-\begin_inset Formula \begin{equation}
-e^{N\omega(s_{0})}=\mathcal{O}(1)\cdot\sqrt{n}\,\frac{\log n}{2+\epsilon/4}\label{eq:}\end{equation}
-
-\end_inset 
-
- and 
-\begin_inset Formula \begin{equation}
-N\omega^{\prime\prime}\left(s_{0}\right)=\frac{1-\epsilon/4}{2}\,\log^{2}n+\mathcal{O}(1)\label{eq:}\end{equation}
-
-\end_inset 
-
- which may be combined to obtain
-\begin_inset Formula \begin{equation}
-d_{n}^{\lambda}=\mathcal{O}\left(\sqrt{n}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
-This result is in good agreement with the numerical calculations for the
- range 
-\begin_inset Formula $10^{2}<n<10^{4}$
-\end_inset 
-
-.
+ 
 \layout Section
 
 Relation to literature
