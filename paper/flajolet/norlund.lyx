@@ -4031,7 +4031,7 @@ The asymptotic behavior of the
  can be obtained by the corresponding Norlund-Rice integral.
  That is, one writes 
 \begin_inset Formula \begin{equation}
-d_{n}=\frac{(-1)^{n}}{2\pi i}\int_{3/2-i\infty}^{3/2+i\infty}\frac{1}{\zeta(s)}\,\frac{n!}{s(s-1)(s-2)\cdots(s-n)}ds\label{eq:}\end{equation}
+d_{n}=\frac{(-1)^{n-1}}{2\pi i}\int_{3/2-i\infty}^{3/2+i\infty}\frac{1}{\zeta(s)}\,\frac{n!}{s(s-1)(s-2)\cdots(s-n)}ds\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4055,11 +4055,17 @@ trivial zeroes
 .
  Thus, one has 
 \begin_inset Formula \begin{equation}
-d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\frac{n!\,(2k-1)!}{(2k+n)!}\,\frac{1}{\zeta^{\prime}(-2k)}+\left(-1\right)^{n}\sum_{\rho}\frac{n!}{\rho(\rho-1)\cdots(\rho-n)}\,\frac{1}{\zeta^{\prime}(\rho)}\label{eq:}\end{equation}
+d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\frac{n!\,(2k-1)!}{(2k+n)!}\,\frac{1}{\zeta^{\prime}(-2k)}+c_{n}\label{eq:}\end{equation}
 
 \end_inset 
 
- Substituting for 
+ where the non-trivial zeros contribute
+\begin_inset Formula \[
+c_{n}=\left(-1\right)^{n}\sum_{\rho}\frac{n!}{\rho(\rho-1)\cdots(\rho-n)}\,\frac{1}{\zeta^{\prime}(\rho)}\]
+
+\end_inset 
+
+Substituting for 
 \begin_inset Formula \[
 \zeta^{\prime}(-2k)=\left(-1\right)^{k}\,\frac{(2k)!}{2(2\pi)^{2k}}\,\zeta(2k+1)\]
 
@@ -4067,7 +4073,7 @@ d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\frac{n!\,(2k-1)!}{(2k+n)!}\,\frac{
 
  one has 
 \begin_inset Formula \begin{equation}
-d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\left(-1\right)^{k}\frac{n!}{(2k+n)!}\,\frac{(2\pi)^{2k}}{k\zeta(2k+1)}+\left(-1\right)^{n}\sum_{\rho}\frac{n!}{\rho(\rho-1)\cdots(\rho-n)}\,\frac{1}{\zeta^{\prime}(\rho)}\label{eq:}\end{equation}
+d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\left(-1\right)^{k}\frac{n!}{(2k+n)!}\,\frac{(2\pi)^{2k}}{k\zeta(2k+1)}+c_{n}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4088,19 +4094,93 @@ d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\left(-1\right)^{k}\frac{n!}{(2k+n)
 \begin_inset Formula $n$
 \end_inset 
 
-.
+, and thus aren't particularly interesting.
  The contribution of the non-trivial zeros is more surprising.
- The contribution of the first zero at 
+ One has
+\begin_inset Formula \[
+c_{n}=-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\zeta^{\prime}(\rho)}\]
+
+\end_inset 
+
+ For large 
+\begin_inset Formula $n$
+\end_inset 
+
+, the Stirling approximation may be applied.
+ The sum has two distinct regimes.
+ Write 
+\begin_inset Formula $\rho=\sigma+i\tau$
+\end_inset 
+
+ with 
+\begin_inset Formula $\sigma=1/2$
+\end_inset 
+
+ if the Riemann Hypothesis is assumed.
+ One may then consider the sum for the case where 
+\begin_inset Formula $\tau\ll n$
+\end_inset 
+
+, and the case where this does not hold.
+ Writing 
+\begin_inset Formula $\alpha_{n}$
+\end_inset 
+
+ for the first few terms of the sum, and 
+\begin_inset Formula $\beta_{n}$
+\end_inset 
+
+ for the remaining terms, one then has, after applying the Stirling approximatio
+n, that 
+\begin_inset Formula \[
+\alpha_{n}=\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sum_{\rho\ll n}\left(n+1\right)^{\sigma}\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}e^{i\tau\log\left(n+1\right)}\]
+
+\end_inset 
+
+ Assuming the Riemann hypothesis, so that 
+\begin_inset Formula $\sigma=1/2$
+\end_inset 
+
+, one has that 
+\begin_inset Formula $\alpha_{n}=\mathcal{O}\left(\sqrt{n}\right)$
+\end_inset 
+
+, although suppressed by small factors, and is oscillatory.
+ The remaining terms take the form 
+\begin_inset Formula \begin{eqnarray*}
+\beta_{n} & =\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sqrt{2\pi}\sum_{\rho\gtrsim n}\sqrt{\frac{\tau+in}{\tau n}} & \exp\left[\frac{n+1}{2}\log\left(\frac{n^{2}}{n^{2}+\tau^{2}}\right)+\frac{\sigma}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)-\tau\arctan\frac{n}{\tau}\right]\times\\
+ &  & \exp i\left[\left(n+1\right)\arctan\frac{\tau}{n}+\frac{\tau}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)\right]\times\frac{1}{\zeta^{\prime}(\rho)}\end{eqnarray*}
+
+\end_inset 
+
+Since one has 
+\begin_inset Formula $\log n^{2}/(n^{2}+\tau^{2})<0$
+\end_inset 
+
+, one has that the remaining terms in the sum are small.
+ Since the number of non-trivial zeros of the Riemann zeta does not increase
+ exponentially, one concludes that 
+\begin_inset Formula \[
+\beta_{n}=\mathcal{O}\left(e^{-Kn}\right)\]
+
+\end_inset 
+
+ for some 
+\begin_inset Formula $K>0$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+wn
+\layout Standard
+
+The contribution of the first zero at 
 \begin_inset Formula $\rho=0.5+i14.134725$
 \end_inset 
 
  is 
-\begin_inset Formula \[
--\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\zeta^{\prime}(\rho)}\]
-
-\end_inset 
-
-
 \layout Standard
 
 The first few terms are 
