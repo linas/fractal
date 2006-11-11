@@ -1,0 +1,78 @@
+
+set term png small
+set out 'dsubn.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# ----------------------------------------------------
+# Graphics used for paper for dsubn-basic.png
+# set title "d_n = sum_k (-1)^n {n choose k} / zeta(k)"
+# set xlabel "n"
+# set ylabel "d_n"
+# 
+# set xrange [0:60]
+# plot "dn.dat" using 1:(2-$2/($1*$1)) title "" linewidth 3
+
+# ----------------------------------------------------
+# Graphics used for paper for dsubn-asymp-500.png
+# set title "Asymptotic behaviour of d_n"
+# set xlabel "n"
+# set ylabel "n^2 (2-d_n)"
+# 
+# set xrange [0:500]
+# plot "dn.dat" using 1:2 title "" linewidth 3
+
+# ----------------------------------------------------
+# Graphic used for dsubn-asymp-30K.png
+# set title "Asymptotic behaviour of d_n"
+# set xlabel "n"
+# set ylabel "n^2 (2-d_n)"
+# 
+# set xrange [500:]
+# plot "dn-10.dat" using 1:2 title "" linewidth 3
+
+# ----------------------------------------------------
+# Graphic used for dsubn-large.png
+# set title "2 - d_n = 2 - sum_k (-1)^n {n choose k} / zeta(k)"
+# set xlabel "n"
+# set ylabel "2-d_n"
+# 
+# set xrange [10000:]
+# plot "dn-10.dat" using 1:($2/($1*$1)) title "" linewidth 3
+
+# ----------------------------------------------------
+# set xrange [100:]
+# plot "dn-10.dat" using 1:($2) title "data"
+# plot "dn-hi.dat" using 1:($2) title "data"
+
+# set xrange [5:]
+# plot "dn-10.dat" using (log($1)):(log($2)) title "data"
+
+
+#1312  0.327702157562257847761565310407211428407662582260350393518409e2
+# 1482  0.32766986706419146385140739974997385782686015918875231266123e2
+# plot "dn-hilo.dat" using 1:(abs($2-32.768601231322)) title "data"
+
+# plot "dn-hilo.dat" using 1:(abs($2-32.7686)) title "data", \
+#     "dn-hilo.dat" using 1:(1.2*($1/10000)*($1/10000)) title "fit"
+
+# plot "dn-hilo.dat" using (log($1)):(log(abs($2-32.7686))) title "data"
+# pause 100
+
+# set xrange [6000:]
+# plot "dn-10.dat" using 1:($2) title "data" 
+# plot "dn-10.dat" using 1:($2/($1*$1)) title "data"
+
+#      "dn-10.dat" using 1:(32.7686012313+1e-10*$1*$1*sqrt($1)*cos(14.13*log($1))) title "fit"
+
+# Fit to the first zero per Flajolet
+# exp (-pi*14.13/2) = 2.2944e-10
+#
+# The n^2 term is 4pi^2/zeta(3)= 4pi^2/1.20205..= 32.8425
+# its actually (n+1)(n+2)/n^2 * 32.8425...
+#
+set xrange [10:]
+plot "dn-10.dat" using 1:($2) title "data", \
+     "dn-10.dat" using 1:(32.8425*($1+1)*($1+2)/($1*$1)+1e-10*$1*$1*sqrt($1)*cos(14.134725*log($1))) title "fit"
