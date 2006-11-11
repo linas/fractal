@@ -16,7 +16,7 @@
 #include "harmonic.h"
 
 /* ======================================================== */
-/* Simple test finction -- logarithm of simple pole, residue 1, */
+/* Simple test function -- logarithm of simple pole, residue 1, */
 void log_pole_integrand (double res, double ims, double *reg, double * img)
 {
 	double regr = 0.0;
@@ -299,8 +299,8 @@ integrate (int n, double re_offset, double lim)
 	double step = 0.002*lim;
 	double npts = 0.0;
 	double imlast = 0.0;
-	double lf = log (factorial (n));
-	lf -= log (2.0*M_PI);
+	double lgf = log (factorial (n));
+	lgf -= log (2.0*M_PI);
 	for (t=-lim; t<=lim; t+=step)
 	{
 		double reg, img;
@@ -316,7 +316,7 @@ integrate (int n, double re_offset, double lim)
 		while (img <imlast-5.0) img += 2.0*M_PI;
 		imlast = img;
 
-		reg += lf;
+		reg += lgf;
 
 		printf ("%g\t%g\t%g\n", t, reg, img);
 		// printf ("%g\t%g\t%g   %g\n", t, img, nimg, img+nimg);
@@ -343,6 +343,43 @@ integrate (int n, double re_offset, double lim)
 
 	printf ("# duude line integral re=%g  im=%g\n", reacc, imacc);
 	return reacc;
+}
+
+/* ======================================================== */
+/* just print data */
+
+void
+show_integrand (int n, double im_offset, double lim)
+{
+	double t=0.0;
+
+	double step = 0.001;
+	double imlast = 0.0;
+	double lgf = log (factorial (n));
+	lgf -= log (2.0*M_PI);
+
+	double prev = 0.0;
+	for (t=-0.1; t>-1.9; t-=step)
+	{
+		double reg, img;
+		simple_integrand (t, im_offset, n, &reg, &img);
+
+		while (img >imlast+5.0) img -= 2.0*M_PI;
+		while (img <imlast-5.0) img += 2.0*M_PI;
+		imlast = img;
+
+		reg += lgf;
+
+		// printf ("%g\t%g\t%g\n", t, reg, img);
+		// printf ("%g\t%g\t%g   %g\n", t, img, nimg, img+nimg);
+
+		double r = exp (reg);
+		double ret = r * cos (img);
+		double imt = r * sin (img);
+
+		printf ("%g\t%g\t%g\n", t, ret, (prev-ret)/step);
+		prev = ret;
+	}
 }
 
 /* ======================================================== */
@@ -379,16 +416,17 @@ main (int argc, char * argv[])
 	n=rad;
 
 	double offset = rad;
-	n = 6;
+	n = 26;
 	rad = 14.0;
 
-	double in = integrate (n, offset, rad);
+	// double in = integrate (n, offset, rad);
 	// double ain = arc_integral (n, -0.5, 0.0, rad);
 	// double ain = cauchy_integral (0.0, 0.0, rad);
+	show_integrand (n, 0.0, rad);
 	double su = sum (n);
 
 	// printf ("# integ=%g arc=%g  sum=%g r = %g\n", in, ain, su, );
-	printf ("# integ=%g sum=%g r = %g\n", in, su, in/su);
+	// printf ("# integ=%g sum=%g r = %g\n", in, su, in/su);
 
 #if 0
 	for (n=1; n<40; n++)
