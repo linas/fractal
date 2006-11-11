@@ -32,7 +32,7 @@ Notes Relating to Newton Series for the Riemann Zeta Function
 Linas Vepstas
 \layout Date
 
-August 6, 2006
+November 11, 2006
 \layout Abstract
 
 This paper consists of the extended working notes and observations made
@@ -3890,7 +3890,7 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
- By examining 
+ After a numerical examination of 
 \begin_inset Formula $d_{n}$
 \end_inset 
 
@@ -3902,8 +3902,18 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
 \begin_inset Formula $\lim_{n\to\infty}d_{n}=2$
 \end_inset 
 
-; this behavior is shown in the graph below.
- However, by exploring the range 
+; this numerical behavior is shown in the graphs 
+\begin_inset LatexCommand \ref{cap:d_n-for-smaller-n}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{cap:d_n for intermediate n}
+
+\end_inset 
+
+.
+ Exploring numerically into the higher range 
 \begin_inset Formula $1000\le n\le50000$
 \end_inset 
 
@@ -3912,7 +3922,7 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
 \end_inset 
 
  is oscillatory.
- 
+ The explanation for this behaviour is presented below.
 \layout Standard
 
 
@@ -3923,6 +3933,11 @@ collapsed true
 \layout Caption
 
 
+\begin_inset LatexCommand \label{cap:d_n-for-smaller-n}
+
+\end_inset 
+
+Graph of 
 \begin_inset Formula $d_{n}$
 \end_inset 
 
@@ -3943,7 +3958,7 @@ collapsed true
 
 \layout Standard
 
-The graphic above shows 
+The red graphic shows the numerically computed values for 
 \begin_inset Formula \[
 d_{n}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
 n\\
@@ -3960,12 +3975,19 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\]
 \begin_inset Formula $d_{n}\to2$
 \end_inset 
 
-, which can be seen to be incorrect if larger 
+.
+ This numeric conclusion is incorrect, as demonstrated in the text.
+ The small-
 \begin_inset Formula $n$
 \end_inset 
 
- are explored.
- 
+ behaviour is reasonably approximated by the analytic form 
+\begin_inset Formula \[
+2-\frac{4\pi^{2}}{(n+1)(n+2)\zeta(3)}\]
+
+\end_inset 
+
+ which is graphed as the green line.
 \end_inset 
 
 
@@ -3978,8 +4000,17 @@ collapsed true
 
 \layout Caption
 
-Asymptotic behavior of 
+
+\begin_inset LatexCommand \label{cap:d_n for intermediate n}
+
+\end_inset 
+
+Graph of 
 \begin_inset Formula $d_{n}$
+\end_inset 
+
+ for intermediate 
+\begin_inset Formula $n$
 \end_inset 
 
 
@@ -4009,7 +4040,7 @@ The above figure shows a graph of
 \begin_inset Formula $d_{n}\to2$
 \end_inset 
 
-in the limit of large 
+ in the limit of large 
 \begin_inset Formula $n$
 \end_inset 
 
@@ -4019,6 +4050,11 @@ in the limit of large
 \end_inset 
 
 .
+ The value being approached is 
+\begin_inset Formula $4\pi^{2}/\zeta(3)=32.842386$
+\end_inset 
+
+
 \end_inset 
 
 
@@ -4123,6 +4159,10 @@ c_{n}=-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\z
 
 , and the case where this does not hold.
  Writing 
+\begin_inset Formula $c_{n}=\alpha_{n}+\beta_{n}$
+\end_inset 
+
+ with 
 \begin_inset Formula $\alpha_{n}$
 \end_inset 
 
@@ -4170,22 +4210,104 @@ Since one has
 \end_inset 
 
 .
- 
-\layout Standard
-
-wn
-\layout Standard
-
-The contribution of the first zero at 
-\begin_inset Formula $\rho=0.5+i14.134725$
+ The value of 
+\begin_inset Formula $K$
 \end_inset 
 
- is 
+ can be bounded away from zero, simply by arranging which terms are grouped
+ into the finite sum 
+\begin_inset Formula $\alpha_{n}$
+\end_inset 
+
+, and which are not.
+ Thus, for large 
+\begin_inset Formula $n$
+\end_inset 
+
+, the contribution of 
+\begin_inset Formula $\beta_{n}$
+\end_inset 
+
+ can be ignored, and the asymptotic form of 
+\begin_inset Formula $d_{n}$
+\end_inset 
+
+ is given by 
+\begin_inset Formula \[
+d_{n}=2+\alpha_{n}+\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\]
+
+\end_inset 
+
+ where the Riemann hypothesis is assumed, so that a term 
+\begin_inset Formula $\sqrt{n}$
+\end_inset 
+
+ can be brought out of the 
+\begin_inset Formula $\alpha_{n}$
+\end_inset 
+
+.
+ Since one has 
+\begin_inset Formula $\left|\Gamma(\frac{1}{2}+i\tau)\right|\sim e^{-\tau\pi/2}$
+\end_inset 
+
+, each term contributing to 
+\begin_inset Formula $\alpha_{n}$
+\end_inset 
+
+ is considerably smaller than the last.
+ Summing together the zeros above and below the axis, one has 
+\begin_inset Formula \[
+d_{n}=2+2\sqrt{n+1}\sum_{\tau}\Re\left[\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\]
+
+\end_inset 
+
+
 \layout Standard
 
-The first few terms are 
+The leading contribution to 
+\begin_inset Formula $\alpha_{n}$
+\end_inset 
+
+ is given by the first zero at 
+\begin_inset Formula $\rho=0.5\pm i14.1347251417\ldots$
+\end_inset 
+
+, followed by 
+\begin_inset Formula $\rho=0.5+i21.02203963877$
+\end_inset 
+
+.
+ Then one has 
 \begin_inset Formula \[
-d_{n}=2-\frac{4\pi^{2}}{(n+1)(n+2)\zeta(3)}+\frac{2\pi^{4}}{(n+1)(n+2)(n+3)(n+4)\zeta(5)}+\]
+\Gamma\left(-0.5-i14.1347251417\right)=4.036348365\times10^{-11}\times e^{-i\,2.850233468}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\Gamma\left(-0.5-i21.02203963877\right)=5.436324603\times10^{-16}\times e^{i\,2.572808318}\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\zeta^{\prime}\left(0.5+i14.1347251417\right)=0.783296+i\,0.1247\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\zeta^{\prime}\left(0.5+i21.02203963877\right)=1.109295-i\,0.2487297\]
+
+\end_inset 
+
+ which may be combined into 
+\layout Standard
+
+
+\begin_inset Formula \[
+d_{n}=2+\sqrt{n+1}\left[1.01779\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.0081\right)\right]\]
 
 \end_inset 
 

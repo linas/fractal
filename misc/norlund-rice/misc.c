@@ -1,25 +1,50 @@
-
-#include <gsl/gsl_sf_gamma.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <gsl/gsl_sf_gamma.h>
+#include "harmonic.h"
+
+void doit(double res, double ims)
+{
+	gsl_sf_result lnr, arg;
+	gsl_sf_lngamma_complex_e (-res, -ims, &lnr, &arg);
+
+	double r = exp(lnr.val);
+	printf("Gamma(%g+i%g)= %15.10g * exp(i %15.10g)\n", -res, -ims, r, arg.val);
+
+	double rez, imz, rezz, imzz;
+	double h=1.0e-8;
+	riemann_zeta (res+h, ims, &rez, &imz);
+	riemann_zeta (res, ims, &rezz, &imzz);
+	double zpre = (rez-rezz)/h;
+	double zpim = (imz-imzz)/h;
+	printf ("zeta-prime(%g+i%g)= %15.10g +i %15.10g\n", res, ims, zpre, zpim);
+
+	double zpm = sqrt(zpre*zpre + zpim*zpim);
+	double zarg = atan2 (zpim, zpre);
+
+	printf ("zeta-prime(%g+i%g)= %15.10g *exp(i %15.10g)\n", res, ims, zpm, zarg);
+	
+	double trm = r/zpm;
+	double trph = arg.val - zarg;
+
+	printf ("term(%g+i%g)= %15.10g *exp(i %15.10g)\n", res, ims, 2.0*trm, trph);
+	
+}
+	
 int
 main ()
 {
-	gsl_sf_result lnr, arg;
+
+	double res=0.5;
+	double ims = 14.13472514173469379;
 	
-	gsl_sf_lngamma_complex_e (-0.5, 14.13472514173469379, &lnr, &arg);
+	doit (res, ims);
+	
+	ims = 21.02203963877;
 
-	double r = exp(lnr.val);
-
-	printf("duude its %15.10g * exp(i %15.10g)\n", r, arg.val);
-
-	gsl_sf_lngamma_complex_e (-0.5, 21.02203963877, &lnr, &arg);
-
-	r = exp(lnr.val);
-
-	printf("duude its %15.10g * exp(i %15.10g)\n", r, arg.val);
+	doit (res, ims);
 
 	return 0;
 }
