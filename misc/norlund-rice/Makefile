@@ -7,7 +7,7 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES = baez zeta-imag
+EXES = baez misc zeta-imag
 
 all: $(EXES)
 
@@ -15,11 +15,12 @@ all: $(EXES)
 baez.o: 
 zeta-imag.o:
 
-baez: baez.o $(LIB)/binomial.o $(LIB)/harmonic.o
-zeta-imag: zeta-imag.o $(LIB)/binomial.o $(LIB)/harmonic.o
+baez: baez.o 
+misc:	misc.o
+zeta-imag: zeta-imag.o
 
 .o:
-	$(CC) -o $@ $^ -lgsl -lgslcblas -lm
+	$(CC) -o $@ $^ -L$(LIB) -lfunc -lgsl -lgslcblas -lm
 
 .c.o:
 	$(CC) -c $(CFLAGS) -I $(INC) $<
