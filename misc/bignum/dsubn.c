@@ -96,6 +96,7 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 /* ==================================================================== */
 /* Same as above, but for totient function, instead of mobius
  * That is, its for zeta(n-1)/zeta(n)
+ */
 
 void d_totient_n (mpf_t acc, int en, unsigned int prec)
 {
@@ -178,9 +179,15 @@ void d_liouville_n (mpf_t acc, int en, unsigned int prec)
 		} 
 	}
 
-// #define L_N_SCALE
+#define L_N_SCALE
 #ifdef L_N_SCALE
-	mpf_mul_ui (acc, acc, easssadf);
+	mpf_add_ui (acc, acc, 1);
+	
+	mpf_fac_ui (term, en);
+	fp_poch_rising (bin, 0.5, en-1);
+	mpf_div (term, term, bin);
+
+	mpf_div (acc, acc, term);
 #endif
 	mpf_clear (bin);
 	mpf_clear (term);
@@ -227,8 +234,8 @@ int main (int argc, char * argv[])
 
 	int n;
 	// printf ("#\n# zeta expansion terms n^2 * (2-d_n)   \n#\n");
-	printf ("#\n# totient zeta expansion terms d_n/(n*n)   \n#\n");
-	// printf ("#\n# liouville zeta expansion terms d_n/(n*n)   \n#\n");
+	// printf ("#\n# totient zeta expansion terms d_n/(n*n)   \n#\n");
+	printf ("#\n# liouville zeta expansion terms d_n/(n*n)   \n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
@@ -243,8 +250,8 @@ int main (int argc, char * argv[])
 	for (n=nlow; n<=nhigh; )
 	{
 		// d_sub_n (d_n, n, prec);
-		d_totient_n (d_n, n, prec);
-		// d_liouville_n (d_n, n, prec);
+		// d_totient_n (d_n, n, prec);
+		d_liouville_n (d_n, n, prec);
 
 		time_t now = time(0);
 		int elapsed = now-then;
@@ -256,7 +263,8 @@ int main (int argc, char * argv[])
 		fprintf (stderr, "n=%d took %d secs\n", n, elapsed);
 		fflush (stdout);
 
-		int step = 1+n/10;
+		// int step = 1+n/10;
+		int step = 1+n/50;
 		n += step;
 	}
 #endif
