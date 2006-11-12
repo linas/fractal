@@ -10,6 +10,7 @@
  */
 
 #include <gmp.h>
+#include "mp-complex.h"
 
 /* Fixed-point bernoulli number */
 void q_bernoulli (mpq_t bern, int n);
@@ -33,6 +34,9 @@ void fp_hasse_zeta (mpf_t zeta, unsigned int s, int prec);
 
 /* Same, using P. Borwein convergent algo */
 void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec);
+
+/* P. Borwein zeta for complex argument */
+void fp_borwein_zeta_c (cpx_t zeta, cpx_t ess, int prec);
 
 /* Brute-force summation */
 void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec);
