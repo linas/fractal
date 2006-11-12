@@ -12,34 +12,31 @@ set key right
 
 # ----------------------------------------------------------
 # Used to graph dn-liouville-basic.png for the paper
-set out 'dn-liouville-basic.png'
-set title "d_n for Liouville function"
-set xlabel "n"
-set ylabel "d_n"
-set key left
-
-set xrange [0:100]
-
-plot "dn-liouville.dat" using 1:2 title "numerical sum" linewidth 3, \
-     "dn-liouville.dat" using 1:(1.21371478*exp (lgamma($1+1)-lgamma($1+0.5)) - 1) \
-     linewidth 3 title "residue of poles"
+# set out 'dn-liouville-basic.png'
+# set title "d_n for Liouville function"
+# set xlabel "n"
+# set ylabel "d_n"
+# set key left
+# 
+# set xrange [0:100]
+# 
+# plot "dn-liouville.dat" using 1:2 title "numerical sum" linewidth 3, \
+#      "dn-liouville.dat" using 1:(1.21371478*exp (lgamma($1+1)-lgamma($1+0.5)) - 1) \
+#      linewidth 3 title "residue of poles"
 
 # ----------------------------------------------------------
-# set title "d_n/sqrt(n) for Liouville function"
-# set xlabel "n"
-# set ylabel "d_n/sqrt(n)"
-# 
-# set xrange [1000:]
-# plot "dn-liouville.dat" using 1:($2/(sqrt($1))) title "" linewidth 3 
+# Used to generate dn-liouville-asymp.png for the paper
+set out 'dn-liouville-asymp.png'
+set title "(d_n - leading residues) for Liouville function"
+set xlabel "n"
+set ylabel "d_n - residues"
 
-# set xrange [0:100]
-# plot "dn-liouville.dat" using 1:($2) title "" linewidth 3, \
-#     "dn-liouville.dat" using 1:(3*sqrt($2)) title "" linewidth 3 
+set xrange [150:]
+plot "dn-lio-fine.dat" using 1:($2-(1.21371478*exp (lgamma($1+1)-lgamma($1+0.5)) - 1)) \
+      title "" linewidth 3
 
-# plot "dn-liouville.dat" using (log($1)):($2/(sqrt($1))) title "" linewidth 3
+# ----------------------------------------------------------
 
-# plot "dn-liouville.dat" using 1:($2/(sqrt($1))) title "" linewidth 3 ,\
-#     "dn-liouville.dat" using 1:(1.16+0.005*log($1)) title "fit"
 
 
 
