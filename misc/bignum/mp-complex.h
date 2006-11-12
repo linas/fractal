@@ -97,8 +97,12 @@ static inline void cpx_recip (cpx_t *recip, cpx_t *z)
  */
 static inline void cpx_div (cpx_t *ratio, cpx_t *a, cpx_t *b)
 {
-	cpx_recip (ratio, b);
-	cpx_mul (ratio, ratio, a);
+	cpx_t recip;
+	cpx_init (&recip);
+
+	cpx_recip (&recip, b);
+	cpx_mul (ratio, a, &recip);
+	cpx_clear (&recip);
 }
 
 #endif /* __MP_COMPLEX_H__ */
