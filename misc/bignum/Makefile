@@ -31,7 +31,7 @@ mp-cache.o: mp-cache.h
 mp-consts.o: mp-consts.h mp-binomial.h mp-trig.h
 mp-misc.o: mp-misc.h
 mp-trig.o: mp-trig.h mp-cache.h mp-binomial.h
-mp_zeta.o: mp_zeta.h db-cache.h mp-cache.h
+mp_zeta.o: mp_zeta.h db-cache.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-trig.h
 
 # binaries
 bs.o: mp_zeta.h mp-misc.h
@@ -39,6 +39,7 @@ bsubn.o: mp_zeta.h mp-binomial.h
 cache-fill.o: db-cache.h mp_zeta.h mp-misc.h
 db-merge.o: db-cache.h mp-misc.h
 dsubn.o: mp_zeta.h mp-binomial.h mp-misc.h
+hurwitz.o: mp-complex.h
 mp_zeta_test.o: mp_zeta.h mp-consts.h mp-misc.h mp-trig.h
 stieltjes.o: mp_zeta.h mp-binomial.h mp-misc.h
 
