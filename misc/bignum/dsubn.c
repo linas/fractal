@@ -95,7 +95,7 @@ void d_sub_n (mpf_t acc, int en, unsigned int prec)
 
 /* ==================================================================== */
 /* Same as above, but for totient function, instead of mobius
- * That is, its for zeta(n+1)/zeta(n)
+ * That is, its for zeta(n-1)/zeta(n)
 
 void d_totient_n (mpf_t acc, int en, unsigned int prec)
 {
