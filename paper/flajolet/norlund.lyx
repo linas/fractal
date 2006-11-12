@@ -4197,7 +4197,7 @@ c_{n}=-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\z
  for the remaining terms, one then has, after applying the Stirling approximatio
 n, that 
 \begin_inset Formula \begin{equation}
-\alpha_{n}=-\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sum_{\rho\ll n}\left(n+1\right)^{\sigma}\frac{\Gamma\left(-\sigma-i\tau\right)}{\zeta^{\prime}\left(\sigma+i\tau\right)}e^{i\tau\log\left(n+1\right)}\label{eq: alpha_n}\end{equation}
+\alpha_{n}=-\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sum_{\tau\ll n}\left(n+1\right)^{\sigma}\frac{\Gamma\left(-\sigma-i\tau\right)}{\zeta^{\prime}\left(\sigma+i\tau\right)}e^{i\tau\log\left(n+1\right)}\label{eq: alpha_n}\end{equation}
 
 \end_inset 
 
@@ -4222,7 +4222,7 @@ n, that
  is also slowly oscillatory.
  The remaining terms take the form 
 \begin_inset Formula \begin{eqnarray*}
-\beta_{n} & =-\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sqrt{2\pi}\sum_{\rho\gtrsim n}\sqrt{\frac{\tau+in}{\tau n}} & \exp\left[\frac{n+1}{2}\log\left(\frac{n^{2}}{n^{2}+\tau^{2}}\right)+\frac{\sigma}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)-\tau\arctan\frac{n}{\tau}\right]\times\\
+\beta_{n} & =-\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sqrt{2\pi}\sum_{\tau\gtrsim n}\sqrt{\frac{\tau+in}{\tau n}} & \exp\left[\frac{n+1}{2}\log\left(\frac{n^{2}}{n^{2}+\tau^{2}}\right)+\frac{\sigma}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)-\tau\arctan\frac{n}{\tau}\right]\times\\
  &  & \exp i\left[\left(n+1\right)\arctan\frac{\tau}{n}+\frac{\tau}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)\right]\times\frac{1}{\zeta^{\prime}(\rho)}\end{eqnarray*}
 
 \end_inset 
@@ -4231,9 +4231,14 @@ Since one has
 \begin_inset Formula $\log n^{2}/(n^{2}+\tau^{2})<0$
 \end_inset 
 
-, one has that the remaining terms in the sum are small.
+, one has that the remaining terms in the sum are exponentially small, provided
+ that 
+\begin_inset Formula $\zeta^{\prime}(\rho)$
+\end_inset 
+
+ never becomes arbitrarily small.
  Since the number of non-trivial zeros of the Riemann zeta does not increase
- exponentially, one concludes that 
+ exponentially, the sum can be estimated, and one concludes that 
 \begin_inset Formula \[
 \beta_{n}=\mathcal{O}\left(e^{-Kn}\right)\]
 
@@ -4290,7 +4295,7 @@ d_{n}=2+\alpha_{n}+\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\]
 \end_inset 
 
  is considerably smaller than the last.
- Summing together the zeros above and below the axis, one has 
+ Summing together the zeros above and below the real axis, one has 
 \begin_inset Formula \[
 d_{n}=2-2\sqrt{n+1}\sum_{n\gg\tau>0}\Re\left[\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\]
 
