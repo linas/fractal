@@ -96,11 +96,13 @@ static void fp_exp_helper (mpf_t ex, mpf_t z, unsigned int prec)
 	mpf_init (fact);
 	mpf_init (term);
 
-	mpf_set_ui (ex, 1);
-	mpf_set_ui (fact, 1);
+	/* Make copy of argument now! */
 	mpf_set (zee, z);
 	mpf_set (z_n, zee);
 	
+	mpf_set_ui (ex, 1);
+	mpf_set_ui (fact, 1);
+
 	// double mex = ((double) prec) * log (10.0) / log(2.0);
 	double mex = ((double) prec) * 3.321928095;
 	unsigned int imax = (unsigned int) (mex +1.0);
@@ -168,10 +170,11 @@ void fp_sine (mpf_t si, mpf_t z, unsigned int prec)
 	mpf_init (fact);
 	mpf_init (term);
 
-	mpf_set_ui (si, 0);
-	mpf_set_ui (fact, 1);
+	/* Make copy of argument now! */
 	mpf_set (zee, z);
 	mpf_set (z_n, zee);
+	mpf_set_ui (si, 0);
+	mpf_set_ui (fact, 1);
 	
 	// double mex = ((double) prec) * log (10.0) / log(2.0);
 	prec += 2;
@@ -239,10 +242,11 @@ void fp_cosine (mpf_t co, mpf_t z, unsigned int prec)
 	mpf_init (fact);
 	mpf_init (term);
 
-	mpf_set_ui (co, 1);
-	mpf_set_ui (fact, 2);
+	/* Make copy of argument now! */
 	mpf_set (zee, z);
 	mpf_mul (z_n, zee, zee);
+	mpf_set_ui (co, 1);
+	mpf_set_ui (fact, 2);
 	
 	// double mex = ((double) prec) * log (10.0) / log(2.0);
 	prec +=2;
@@ -309,6 +313,7 @@ void fp_log_m1 (mpf_t lg, mpf_t z, unsigned int prec)
 	mpf_init (z_n);
 	mpf_init (term);
 
+	/* Make copy of argument now! */
 	mpf_set (zee, z);
 	mpf_mul (z_n, zee, zee);
 	mpf_set (lg, zee);
@@ -380,6 +385,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
 	mpf_init (zsq);
 	mpf_init (term);
 
+	/* Make copy of argument now! */
 	mpf_set (zee, z);
 	mpf_mul (zsq, zee, zee);
 	mpf_mul (z_n, zee, zsq);
@@ -431,7 +437,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
  * If q is held fixed, and k varied, then the values are cached,
  * allowing improved algorithm speeds.
  */
-static void fp_pow_rc_helper (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
+static void fp_pow_rc_helper (cpx_t *powc, int k, mpf_t q, cpx_t *ess, int prec)
 {
 	mpf_t kq, logkq, mag, pha;
 	mpf_init (kq);
@@ -445,16 +451,17 @@ static void fp_pow_rc_helper (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 	
 	/* magnitude is exp(re(s) * log(k+q)) */
 	mpf_mul (mag, ess->re, logkq);
+	
 	fp_exp (mag, mag, prec);
 
 	/* phase is im(s) * log(k+q)) */
 	mpf_mul (pha, ess->im, logkq);
 
-	fp_cosine (diri->re, pha, prec);
-	mpf_mul (diri->re, mag, diri->re);
+	fp_cosine (powc->re, pha, prec);
+	mpf_mul (powc->re, mag, powc->re);
 	
-	fp_sine (diri->im, pha, prec);
-	mpf_mul (diri->im, mag, diri->im);
+	fp_sine (powc->im, pha, prec);
+	mpf_mul (powc->im, mag, powc->im);
 	
 	mpf_clear(kq);
 	mpf_clear(logkq);
@@ -462,10 +469,10 @@ static void fp_pow_rc_helper (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 	mpf_clear(pha);
 }
 
-void fp_pow_rc (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
+void fp_pow_rc (cpx_t *powc, int k, mpf_t q, cpx_t *ess, int prec)
 {
-	DECLARE_FP_CACHE (re_diri);
-	DECLARE_FP_CACHE (im_diri);
+	DECLARE_FP_CACHE (re_powc);
+	DECLARE_FP_CACHE (im_powc);
 	static mpf_t cache_q;
 	static int init = 0;
 
@@ -477,23 +484,23 @@ void fp_pow_rc (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 
 	if (!mpf_eq(q,cache_q, prec*3.322))
 	{
-		fp_one_d_cache_clear (&re_diri);
-		fp_one_d_cache_clear (&im_diri);
+		fp_one_d_cache_clear (&re_powc);
+		fp_one_d_cache_clear (&im_powc);
 		mpf_set(cache_q,q);
 	}
 
-	if (prec <= fp_one_d_cache_check (&re_diri, k))
+	if (prec <= fp_one_d_cache_check (&re_powc, k))
 	{
-		fp_one_d_cache_fetch (&re_diri, diri->re, k);
-		fp_one_d_cache_fetch (&im_diri, diri->im, k);
+		fp_one_d_cache_fetch (&re_powc, powc->re, k);
+		fp_one_d_cache_fetch (&im_powc, powc->im, k);
 		return;
 	}
 	
-	fp_pow_rc_helper (diri, k, q, ess, prec);
+	fp_pow_rc_helper (powc, k, q, ess, prec);
 
-	fp_one_d_cache_check (&im_diri, k);
-	fp_one_d_cache_store (&re_diri, diri->re, k, prec);
-	fp_one_d_cache_store (&im_diri, diri->im, k, prec);
+	fp_one_d_cache_check (&im_powc, k);
+	fp_one_d_cache_store (&re_powc, powc->re, k, prec);
+	fp_one_d_cache_store (&im_powc, powc->im, k, prec);
 }
 
 /* =============================== END OF FILE =========================== */
