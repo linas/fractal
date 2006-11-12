@@ -20,22 +20,34 @@ set key right
 
 # ----------------------------------------------------
 # Graphics used for paper for dsubn-asymp-500.png
-set out 'dsubn-asymp-500.png'
+# set out 'dsubn-asymp-500.png'
+# set title "Asymptotic behaviour of d_n"
+# set xlabel "n"
+# set ylabel "(n+1)(n+2)(2-d_n)"
+# 
+# set xrange [0:500]
+# plot "dn.dat" using 1:($2*$1*$1/(($1+1)*($1+2))) title "" linewidth 3
+
+# ----------------------------------------------------
+# Graphic used for dsubn-asymp-30K.png
+set out 'dsubn-asymp-30K.png'
 set title "Asymptotic behaviour of d_n"
 set xlabel "n"
 set ylabel "(n+1)(n+2)(2-d_n)"
 
-set xrange [0:500]
-plot "dn.dat" using 1:($2*$1*$1/(($1+1)*($1+2))) title "" linewidth 3
-
-# ----------------------------------------------------
-# Graphic used for dsubn-asymp-30K.png
-# set title "Asymptotic behaviour of d_n"
-# set xlabel "n"
-# set ylabel "n^2 (2-d_n)"
-# 
-# set xrange [500:]
+set xrange [500:]
 # plot "dn-10.dat" using 1:2 title "" linewidth 3
+
+# Fit to the first zero per Flajolet
+# exp (-pi*14.13/2) = 2.2944e-10
+#
+# The n^2 term is 4pi^2/zeta(3)= 4pi^2/1.20205..= 32.8425
+# its actually (n+1)(n+2)/n^2 * 32.8425...
+#
+plot "dn-10.dat" using 1:($2*$1*$1/(($1+1)*($1+2))) title "d_n" linewidth 3, \
+     "dn-10.dat" using 1:(32.842386 \
+      - 1.01779e-10 * $1*$1 * sqrt($1+1)*cos(14.134725*log($1) - 3.0081)) \
+      title "asymptotic  fit" linewidth 3
 
 # ----------------------------------------------------
 # Graphic used for dsubn-large.png
