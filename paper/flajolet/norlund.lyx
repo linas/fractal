@@ -3928,7 +3928,7 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -3988,6 +3988,17 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\]
 \end_inset 
 
  which is graphed as the green line.
+ 
+\begin_inset Note
+collapsed true
+
+\layout Standard
+
+Graphed with data from fractal/misc/bignum/dn-mobius.gplot and data files
+ dn-10.dat 
+\end_inset 
+
+
 \end_inset 
 
 
@@ -4055,6 +4066,19 @@ The above figure shows a graph of
 \end_inset 
 
 
+\layout Standard
+
+
+\begin_inset Note
+collapsed true
+
+\layout Standard
+
+Graphed with data from fractal/misc/bignum/dn-mobius.gplot and data files
+ dn-10.dat 
+\end_inset 
+
+
 \end_inset 
 
 
@@ -4091,7 +4115,7 @@ trivial zeroes
 .
  Thus, one has 
 \begin_inset Formula \begin{equation}
-d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\frac{n!\,(2k-1)!}{(2k+n)!}\,\frac{1}{\zeta^{\prime}(-2k)}+c_{n}\label{eq:}\end{equation}
+d_{n}=-\frac{1}{\zeta(0)}+\sum_{k=1}^{\infty}\frac{n!\,(2k-1)!}{(2k+n)!}\,\frac{1}{\zeta^{\prime}(-2k)}+c_{n}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4109,7 +4133,7 @@ Substituting for
 
  one has 
 \begin_inset Formula \begin{equation}
-d_{n}=-\frac{1}{\zeta(0)}-\sum_{k=1}^{\infty}\left(-1\right)^{k}\frac{n!}{(2k+n)!}\,\frac{(2\pi)^{2k}}{k\zeta(2k+1)}+c_{n}\label{eq:}\end{equation}
+d_{n}=-\frac{1}{\zeta(0)}+\sum_{k=1}^{\infty}\left(-1\right)^{k}\frac{n!}{(2k+n)!}\,\frac{(2\pi)^{2k}}{k\zeta(2k+1)}+c_{n}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4185,7 +4209,17 @@ n, that
 \begin_inset Formula $\alpha_{n}=\mathcal{O}\left(\sqrt{n}\right)$
 \end_inset 
 
-, although suppressed by small factors, and is oscillatory.
+.
+ This is suppressed by a small factor, since 
+\begin_inset Formula $\left|\Gamma(\frac{1}{2}+i\tau)\right|\sim e^{-\tau\pi/2}$
+\end_inset 
+
+.
+ Clearly, 
+\begin_inset Formula $\alpha_{n}$
+\end_inset 
+
+ is also slowly oscillatory.
  The remaining terms take the form 
 \begin_inset Formula \begin{eqnarray*}
 \beta_{n} & =-\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sqrt{2\pi}\sum_{\rho\gtrsim n}\sqrt{\frac{\tau+in}{\tau n}} & \exp\left[\frac{n+1}{2}\log\left(\frac{n^{2}}{n^{2}+\tau^{2}}\right)+\frac{\sigma}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)-\tau\arctan\frac{n}{\tau}\right]\times\\
@@ -4258,7 +4292,7 @@ d_{n}=2+\alpha_{n}+\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\]
  is considerably smaller than the last.
  Summing together the zeros above and below the axis, one has 
 \begin_inset Formula \[
-d_{n}=2-2\sqrt{n+1}\sum_{\tau}\Re\left[\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\]
+d_{n}=2-2\sqrt{n+1}\sum_{n\gg\tau>0}\Re\left[\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\]
 
 \end_inset 
 
@@ -4372,6 +4406,19 @@ d_{n}\approx2-\sqrt{n+1}\left[1.01779\times10^{-10}\cos\left(14.1347\log\left(n+
 
  As can be seen, the fit is excellent.
  
+\layout Standard
+
+
+\begin_inset Note
+collapsed true
+
+\layout Standard
+
+Graphed with data from fractal/misc/bignum/dn-mobius.gplot and data files
+ dn-10.dat 
+\end_inset 
+
+
 \end_inset 
 
  
@@ -4415,7 +4462,11 @@ What is curious about this result is that, if the Riemann Hypothesis holds,
 \end_inset 
 
 , the deviation from the square-root behaviour would be numerically inaccessible.
- 
+ At any rate, the above sketch demonstrates that 
+\begin_inset Formula $d_{n}=\mathcal{O}\left(\sqrt{n}\right)$
+\end_inset 
+
+ is equivalent to the Riemann Hypothesis.
 \layout Subsection
 
 Totient series
@@ -4465,8 +4516,67 @@ The integrand of the corresponding Norlund-Rice integral is regular at
 \end_inset 
 
 .
- In most other respects, it resembles the previous integral.
+ In most other respects, it resembles the integral for the Mobius series.
+ The residue of the pol at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+ contributes 
+\begin_inset Formula \[
+\mbox{Res}\left(s=0\right)=-\frac{\zeta(-1)}{\zeta(0)}=-\frac{1}{6}\]
+
+\end_inset 
+
+ while that at 
+\begin_inset Formula $s=2$
+\end_inset 
+
+ contributes 
+\begin_inset Formula \begin{eqnarray*}
+\mbox{Res}\left(s=2\right) & = & -\frac{n(n-1)}{2}\left.\frac{d}{ds}\left[\frac{(s-2)\zeta(s-1)}{\zeta(s)}\right]\right|_{s=2}\\
+ & = & \frac{3n(n-1)}{\pi^{2}}\left[\log\left(2\pi\right)-12\log A\right]\\
+ & \approx & -0.348699865\ldots\times n(n-1)\end{eqnarray*}
+
+\end_inset 
+
+ Here, the constant 
+\begin_inset Formula $A$
+\end_inset 
+
+ is the Glaisher-Kinkelin constant 
+\begin_inset Formula $A=1.28242712\ldots$
+\end_inset 
+
+.
+ As before, the residues of the trivial zeros contribute 
+\begin_inset Formula $\mathcal{O}(1/n^{2})$
+\end_inset 
+
+ to the sum.
+ Thus, the analytic development indicates that 
+\begin_inset Formula \[
+d_{n}^{\varphi}=\frac{3n(n-1)}{\pi^{2}}\left[\log\left(2\pi\right)-12\log A\right]-\frac{1}{6}-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{\zeta(\rho-1)}{\zeta^{\prime}(\rho)}+\mathcal{O}\left(\frac{1}{n^{2}}\right)\]
+
+\end_inset 
+
+ for the series.
  
+\layout Standard
+
+Unlike the series for the Mobius function, the sum for the non-trivial zeroes
+ does not reduce to a simple oscillatory term.
+ This is because 
+\begin_inset Formula $\zeta(\rho-1)\sim e^{\tau\pi/2}$
+\end_inset 
+
+ which cancels 
+\begin_inset Formula $\left|\Gamma(-\rho)\right|\sim e^{-\tau\pi/2}$
+\end_inset 
+
+.
+ Thus, each non-trivial zero contributes a more or less similar amount to
+ the sum, and the techniques used in the previous section to estimate the
+ contributions of the non-trivial zeros cannot be applied here.
 \layout Standard
 
 
@@ -4614,7 +4724,20 @@ be the series corresponding to the Liouville function.
 \end_inset 
 
 .
- In all other respects, it resembles the previous integrals.
+ In other respects, it resembles the integral formulation for the totient
+ series.
+ The simple pole contributes a term of 
+\begin_inset Formula $\mathcal{O}(\sqrt{n})$
+\end_inset 
+
+, the trivial zeros contribute a term of 
+\begin_inset Formula $\mathcal{O}(1/n^{2})$
+\end_inset 
+
+.
+ The contributution of the non-trivial zeroes to the sum are again not easily
+ estimated, because the individual terms in the summation do not get small,
+ but rather, contribute a comparable amount.
  
 \layout Standard
 
