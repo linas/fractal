@@ -26,17 +26,20 @@ set key right
 
 # ----------------------------------------------------------
 # Used to generate dn-liouville-asymp.png for the paper
-set out 'dn-liouville-asymp.png'
-set title "(d_n - leading residues) for Liouville function"
-set xlabel "n"
-set ylabel "d_n - residues"
-
-set xrange [150:]
-plot "dn-lio-fine.dat" using 1:($2-(1.21371478*exp (lgamma($1+1)-lgamma($1+0.5)) - 1)) \
-      title "" linewidth 3
+# set out 'dn-liouville-asymp.png'
+# set title "(d_n - leading residues) for Liouville function"
+# set xlabel "n"
+# set ylabel "d_n - residues"
+# 
+# set xrange [150:]
+# plot "dn-liouville.dat" using 1:($2-(1.21371478*exp (lgamma($1+1)-lgamma($1+0.5)) - 1)) \
+#       title "" linewidth 3
 
 # ----------------------------------------------------------
 
+set xrange [0:150]
+plot "dn-liouville.dat" using 1:($2-(1.21371478*exp (lgamma($1+1)-lgamma($1+0.5)) - 1)) \
+      title "" linewidth 3
 
 
 
