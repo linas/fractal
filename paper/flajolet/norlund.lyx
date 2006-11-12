@@ -3983,7 +3983,7 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\]
 
  behaviour is reasonably approximated by the analytic form 
 \begin_inset Formula \[
-2-\frac{4\pi^{2}}{(n+1)(n+2)\zeta(3)}\]
+2-\frac{4\pi^{2}}{(n+1)(n+2)\zeta(3)}=2-\frac{32.842386\cdots}{(n+1)(n+2)}\]
 
 \end_inset 
 
@@ -4051,7 +4051,7 @@ The above figure shows a graph of
 
 .
  The value being approached is 
-\begin_inset Formula $4\pi^{2}/\zeta(3)=32.842386$
+\begin_inset Formula $4\pi^{2}/\zeta(3)=32.842386\ldots$
 \end_inset 
 
 
@@ -4172,8 +4172,8 @@ c_{n}=-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\z
 
  for the remaining terms, one then has, after applying the Stirling approximatio
 n, that 
-\begin_inset Formula \[
-\alpha_{n}=\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sum_{\rho\ll n}\left(n+1\right)^{\sigma}\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}e^{i\tau\log\left(n+1\right)}\]
+\begin_inset Formula \begin{equation}
+\alpha_{n}=-\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sum_{\rho\ll n}\left(n+1\right)^{\sigma}\frac{\Gamma\left(-\sigma-i\tau\right)}{\zeta^{\prime}\left(\sigma+i\tau\right)}e^{i\tau\log\left(n+1\right)}\label{eq: alpha_n}\end{equation}
 
 \end_inset 
 
@@ -4188,7 +4188,7 @@ n, that
 , although suppressed by small factors, and is oscillatory.
  The remaining terms take the form 
 \begin_inset Formula \begin{eqnarray*}
-\beta_{n} & =\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sqrt{2\pi}\sum_{\rho\gtrsim n}\sqrt{\frac{\tau+in}{\tau n}} & \exp\left[\frac{n+1}{2}\log\left(\frac{n^{2}}{n^{2}+\tau^{2}}\right)+\frac{\sigma}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)-\tau\arctan\frac{n}{\tau}\right]\times\\
+\beta_{n} & =-\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sqrt{2\pi}\sum_{\rho\gtrsim n}\sqrt{\frac{\tau+in}{\tau n}} & \exp\left[\frac{n+1}{2}\log\left(\frac{n^{2}}{n^{2}+\tau^{2}}\right)+\frac{\sigma}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)-\tau\arctan\frac{n}{\tau}\right]\times\\
  &  & \exp i\left[\left(n+1\right)\arctan\frac{\tau}{n}+\frac{\tau}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)\right]\times\frac{1}{\zeta^{\prime}(\rho)}\end{eqnarray*}
 
 \end_inset 
@@ -4258,7 +4258,7 @@ d_{n}=2+\alpha_{n}+\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\]
  is considerably smaller than the last.
  Summing together the zeros above and below the axis, one has 
 \begin_inset Formula \[
-d_{n}=2+2\sqrt{n+1}\sum_{\tau}\Re\left[\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\]
+d_{n}=2-2\sqrt{n+1}\sum_{\tau}\Re\left[\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\]
 
 \end_inset 
 
@@ -4302,24 +4302,32 @@ The leading contribution to
 
 \end_inset 
 
- which may be combined into 
-\layout Standard
-
-
+ Taking only the contribution from the first zero, one has 
 \begin_inset Formula \[
-d_{n}=2+\sqrt{n+1}\left[1.01779\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.0081\right)\right]\]
+d_{n}\approx2-\sqrt{n+1}\left[1.01779\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.0081\right)\right]\]
 
 \end_inset 
 
+ which may be seen to fit the data very well, as shown in figure 
+\begin_inset LatexCommand \ref{cap:Asymptotic behavior of d_n}
 
+\end_inset 
+
+.
+ 
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Asymptotic behavior of d_n}
+
+\end_inset 
 
 Asymptotic behavior of 
 \begin_inset Formula $d_{n}$
@@ -4339,7 +4347,7 @@ Asymptotic behavior of
 \layout Standard
 
 This graphic charts the value of 
-\begin_inset Formula $n^{2}(2-d_{n})$
+\begin_inset Formula $(n+1)(n+2)(2-d_{n})$
 \end_inset 
 
  in the range of 
@@ -4351,79 +4359,63 @@ This graphic charts the value of
 \begin_inset Formula $n$
 \end_inset 
 
-, there are a series of oscillations that seem to grow ever larger.
- The amplitude of these oscillations appears to be of 
-\begin_inset Formula $\mathcal{O}\left(n^{2}\right)$
+, there are a series of oscillations that grow ever larger.
+ The red line shows the numerically evaluated value of 
+\begin_inset Formula $d_{n}$
 \end_inset 
 
- or possibly 
-\begin_inset Formula $\mathcal{O}\left(n^{2}\log n\right)$
+, while the green line graphs the analytically derived 
+\begin_inset Formula \[
+d_{n}\approx2-\sqrt{n+1}\left[1.01779\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.0081\right)\right]\]
+
+\end_inset 
+
+ As can be seen, the fit is excellent.
+ 
+\end_inset 
+
+ 
+\layout Standard
+
+What is curious about this result is that, if the Riemann Hypothesis holds,
+ then there are no further corrections to this asymptotic behaviour.
+ The first zero gives the dominant term, and the second and subsequent zeroes
+ give corrections that are at least 
+\begin_inset Formula $10^{-5}$
+\end_inset 
+
+ smaller, but of the same order in 
+\begin_inset Formula $n$
 \end_inset 
 
 .
- In either case, such oscillations indicate that 
-\begin_inset Formula $d_{n}$
-\end_inset 
-
-cannot be approaching a constant for large 
-\begin_inset Formula $n$
-\end_inset 
-
-, instead suggesting that 
-\begin_inset Formula $d_{n}$
-\end_inset 
-
- is itself oscillatory for large 
-\begin_inset Formula $n$
-\end_inset 
-
-, as the next graphic shows.
-\end_inset 
-
-
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
-
-
-\begin_inset Formula $d_{n}$
-\end_inset 
-
-for large 
-\begin_inset Formula $n$
-\end_inset 
-
-
-\layout Standard
-
-
-\begin_inset Graphics
-	filename dsubn-large.png
-	width 100text%
+ If there is a non-trivial zero that is not on the critical line, then it
+ will contribute to equation 
+\begin_inset LatexCommand \ref{eq: alpha_n}
 
 \end_inset 
 
-
-\layout Standard
-
-This figure shows a plot of 
-\begin_inset Formula $2-d_{n}$
+ with a value of 
+\begin_inset Formula $\sigma_{broke}\ne1/2$
 \end_inset 
 
- for the range 
-\begin_inset Formula $10^{4}\le n\le3\times10^{4}$
+, and so one will instead have 
+\begin_inset Formula $d_{n}=\mathcal{O}\left(n^{\sigma_{broke}}\right)$
 \end_inset 
 
 .
- A nascent oscillatory behavior can be seen.
+ However, the contribution of such a zero would be strongly suppressed,
+ by a value of 
+\begin_inset Formula $e^{-\pi\tau/2}$
 \end_inset 
 
+.
+ Since the Riemann hypothesis has been verified to 
+\begin_inset Formula $\tau\sim10^{12}$
+\end_inset 
 
+, the deviation from the square-root behaviour would be numerically inaccessible.
+  
 \layout Subsection
 
 Other series
