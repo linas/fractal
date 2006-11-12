@@ -19,6 +19,7 @@
 #include "mp-cache.h"
 #include "mp-complex.h"
 #include "mp-consts.h"
+#include "mp-misc.h"
 #include "mp-trig.h"
 #include "mp_zeta.h"
 
@@ -811,7 +812,7 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 	mpf_clear (d_n);
 }
 
-void fp_borwein_zeta_c (cpx_t zeta, cpx_t ess, int prec)
+void fp_borwein_zeta_c (cpx_t *zeta, cpx_t *s, int prec)
 {
 	double nterms = 0.69 + 2.302585093 * prec;
 	// Huh? whazzup with the gamma ??
@@ -824,15 +825,21 @@ void fp_borwein_zeta_c (cpx_t zeta, cpx_t ess, int prec)
 	mpf_init (zero);
 	mpf_set_ui (zero, 0);
 
-	cpx_t po, term;
+	cpx_t po, term, ess;
 	cpx_init (&po);
 	cpx_init (&term);
+	cpx_init (&ess);
 
-	fp_borwein_tchebysheff (d_n, n, n);
+	/* make copy of input now ! */
+	mpf_set (ess.re, s->re);
+	mpf_set (ess.im, s->im);
 
-	mpf_set_ui(zeta.re, 0);
-	mpf_set_ui(zeta.im, 0);
+	mpf_set_ui(zeta->re, 0);
+	mpf_set_ui(zeta->im, 0);
 	
+	fp_borwein_tchebysheff (d_n, n, n);
+cpx_prt ("duuuude ess=", &ess);
+printf("\n");
 	int k;
 	for (k=0; k<n; k++)
 	{
@@ -842,36 +849,51 @@ void fp_borwein_zeta_c (cpx_t zeta, cpx_t ess, int prec)
 
 		// po = pow (k+1, s);
 		fp_pow_rc (&po, k+1, zero, &ess, prec);
-
 		cpx_div (&term, &term, &po);
 
 		if (k%2)
 		{
-			cpx_sub(&zeta, &zeta, &term);
+			cpx_sub(zeta, zeta, &term);
 		}
 		else
 		{
-			cpx_add(&zeta, &zeta, &term);
+			cpx_add(zeta, zeta, &term);
 		}
 	}
-	mpf_div (zeta.re, zeta.re, d_n);
-	mpf_div (zeta.im, zeta.im, d_n);
+	mpf_div (zeta->re, zeta->re, d_n);
+	mpf_div (zeta->im, zeta->im, d_n);
 
-	cpx_neg (&zeta, &zeta);
+	cpx_neg (zeta, zeta);
+cpx_prt ("duuuude almost zeta=", zeta);
+printf("\n");
 
 	/* po = 1 - 2^{-s} */
-	fp_pow_rc (&po, 2, zero, &ess, prec);
+	/* force flush needed to get fp_pow_rc to clear cache */
+	mpf_set_ui (zero, 1);
+	fp_pow_rc (&po, 1, zero, &ess, prec);
+cpx_prt ("duuuude 2^(s)=", &po);
+printf("\n");
 	cpx_recip (&po, &po);
+cpx_prt ("duuuude 2^(-s)=", &po);
+printf("\n");
 	cpx_neg (&po, &po);
 	mpf_add_ui (po.re, po.re, 1);
+cpx_prt ("duuuude 1-2^(-s)=", &po);
+printf("\n");
 	
-	cpx_div (&zeta, &zeta, &po);
+cpx_prt ("duuuude almost zeta=", zeta);
+printf("\n");
 
+	cpx_div (zeta, zeta, &po);
+
+cpx_prt ("duuuude zeta=", zeta);
+printf("\n");
 	mpf_clear (d_n);
 	mpf_clear (zero);
 	
 	cpx_clear (&po);
 	cpx_clear (&term);
+	cpx_clear (&ess);
 }
 
 /* ======================================================================= */

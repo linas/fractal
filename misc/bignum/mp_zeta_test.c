@@ -438,7 +438,7 @@ int main (int argc, char * argv[])
 		fp_zeta (nzeta, i, pr);
 		
 		mpf_set_ui (ess.re, i);
-		fp_borwein_zeta_c (zeta, ess, pr);
+		fp_borwein_zeta_c (&zeta, &ess, pr);
 
 		printf ("zeta(%d)_%d = ", i, pr);
 		cpx_prt ("", &zeta);
