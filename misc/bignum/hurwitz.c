@@ -18,83 +18,7 @@
 
 /* =========================================================== */
 
-/**
- * diri_term -- return (k+q)^{1-s}
- *
- * Values are cached, because they will be repeatedly called
- * for forward differencing.
- */
-static void diri_term_helper (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
-{
-	mpf_t kq, logkq, mag, pha;
-	mpf_init (kq);
-	mpf_init (logkq);
-	mpf_init (mag);
-	mpf_init (pha);
-
-	mpf_add_ui (kq, q, k);
-	
-	fp_log (logkq, kq, prec);
-	
-	/* magnitude is exp((1-re(s)) *log(k+q)) */
-	mpf_neg (mag, ess->re);
-	mpf_add_ui (mag, mag, 1);
-	mpf_mul (mag, mag, logkq);
-	fp_exp (mag, mag, prec);
-
-	/* phase is -im(s) *log(k+q)) */
-	mpf_mul (pha, ess->im, logkq);
-	mpf_neg (pha,pha);
-
-	fp_cosine (diri->re, pha, prec);
-	mpf_mul (diri->re, mag, diri->re);
-	
-	fp_sine (diri->im, pha, prec);
-	mpf_mul (diri->im, mag, diri->im);
-	
-	mpf_clear(kq);
-	mpf_clear(logkq);
-	mpf_clear(mag);
-	mpf_clear(pha);
-}
-
-static void diri_term (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
-{
-	DECLARE_FP_CACHE (re_diri);
-	DECLARE_FP_CACHE (im_diri);
-	static mpf_t cache_q;
-	static int init = 0;
-
-	if (!init)
-	{
-		init = 1;
-		mpf_init (cache_q);
-	}
-
-	if (!mpf_eq(q,cache_q, prec*3.322))
-	{
-		fp_one_d_cache_clear (&re_diri);
-		fp_one_d_cache_clear (&im_diri);
-		mpf_set(cache_q,q);
-	}
-
-	if (prec <= fp_one_d_cache_check (&re_diri, k))
-	{
-		fp_one_d_cache_fetch (&re_diri, diri->re, k);
-		fp_one_d_cache_fetch (&im_diri, diri->im, k);
-		return;
-	}
-	
-	diri_term_helper (diri, k, q, ess, prec);
-
-	fp_one_d_cache_check (&im_diri, k);
-	fp_one_d_cache_store (&re_diri, diri->re, k, prec);
-	fp_one_d_cache_store (&im_diri, diri->im, k, prec);
-}
-
-/* =========================================================== */
-
-/* Compute n'th forward difference of (k+q)^{1-s} */
+/* Compute n'th forward difference of (k+q)^{s} */
 static void forward_diff_diri (cpx_t *fin, int n, mpf_t q, cpx_t *ess, int prec)
 {
 	mpf_set_ui (fin->re, 0);
@@ -115,7 +39,7 @@ static void forward_diff_diri (cpx_t *fin, int n, mpf_t q, cpx_t *ess, int prec)
 		i_binomial (ibin, n,k);
 		mpf_set_z (bin, ibin);
 
-		diri_term (&diri, k, q, ess, prec);
+		fp_pow_rc (&diri, k, q, ess, prec);
 		mpf_mul (diri.re, diri.re, bin);
 		mpf_mul (diri.im, diri.im, bin);
 		  
@@ -148,6 +72,13 @@ void hurwitz_zeta(cpx_t *zeta, cpx_t *ess, mpf_t q, int prec)
 	mpf_set_ui (zeta->re, 0);
 	mpf_set_ui (zeta->im, 0);
 
+	/* smo contains value of (1-s) */
+	cpx_t smo;
+	cpx_init (&smo);
+	mpf_neg (smo.re,ess->re);
+	mpf_add_ui (smo.re,smo.re, 1);
+	mpf_neg (smo.im, ess->im);
+
 	/* os contains value of 1/(s-1) */
 	cpx_t os;
 	cpx_init (&os);
@@ -165,7 +96,7 @@ void hurwitz_zeta(cpx_t *zeta, cpx_t *ess, mpf_t q, int prec)
 	int n;
 	for (n=0; n<norder; n++)
 	{
-		forward_diff_diri (&fd, n, q, ess, prec);
+		forward_diff_diri (&fd, n, q, &smo, prec);
 		
 		mpf_set_ui (on, 1);
 		mpf_div_ui (on, on, n+1);

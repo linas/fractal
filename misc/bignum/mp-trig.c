@@ -431,7 +431,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
  * If q is held fixed, and k varied, then the values are cached,
  * allowing improved algorithm speeds.
  */
-static void mp_pow_rc_helper (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
+static void fp_pow_rc_helper (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 {
 	mpf_t kq, logkq, mag, pha;
 	mpf_init (kq);
@@ -462,7 +462,7 @@ static void mp_pow_rc_helper (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 	mpf_clear(pha);
 }
 
-void mp_pow_rc (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
+void fp_pow_rc (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 {
 	DECLARE_FP_CACHE (re_diri);
 	DECLARE_FP_CACHE (im_diri);
@@ -489,7 +489,7 @@ void mp_pow_rc (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec)
 		return;
 	}
 	
-	mp_pow_rc_helper (diri, k, q, ess, prec);
+	fp_pow_rc_helper (diri, k, q, ess, prec);
 
 	fp_one_d_cache_check (&im_diri, k);
 	fp_one_d_cache_store (&re_diri, diri->re, k, prec);
