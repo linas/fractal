@@ -838,8 +838,6 @@ void fp_borwein_zeta_c (cpx_t *zeta, cpx_t *s, int prec)
 	mpf_set_ui(zeta->im, 0);
 	
 	fp_borwein_tchebysheff (d_n, n, n);
-cpx_prt ("duuuude ess=", &ess);
-printf("\n");
 	int k;
 	for (k=0; k<n; k++)
 	{
@@ -864,30 +862,19 @@ printf("\n");
 	mpf_div (zeta->im, zeta->im, d_n);
 
 	cpx_neg (zeta, zeta);
-cpx_prt ("duuuude almost zeta=", zeta);
-printf("\n");
 
-	/* po = 1 - 2^{-s} */
+	/* po = 1 - 2^{1-s} */
+	mpf_sub_ui (ess.re, ess.re, 1);
+
 	/* force flush needed to get fp_pow_rc to clear cache */
 	mpf_set_ui (zero, 1);
 	fp_pow_rc (&po, 1, zero, &ess, prec);
-cpx_prt ("duuuude 2^(s)=", &po);
-printf("\n");
 	cpx_recip (&po, &po);
-cpx_prt ("duuuude 2^(-s)=", &po);
-printf("\n");
 	cpx_neg (&po, &po);
 	mpf_add_ui (po.re, po.re, 1);
-cpx_prt ("duuuude 1-2^(-s)=", &po);
-printf("\n");
 	
-cpx_prt ("duuuude almost zeta=", zeta);
-printf("\n");
-
 	cpx_div (zeta, zeta, &po);
 
-cpx_prt ("duuuude zeta=", zeta);
-printf("\n");
 	mpf_clear (d_n);
 	mpf_clear (zero);
 	
