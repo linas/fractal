@@ -39,7 +39,7 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k);
 #endif /* USE_LOCAL_BINOMIAL */
 
 /**
- * i_binomial_sequence -- returns binomial, assumes purely sequeintial access
+ * i_binomial_sequence -- returns binomial, assumes purely sequential access
  * 
  * This routine assumes that the binomial coefficients will be 
  * accessed in an utterly sequential mode, with k running from 
@@ -49,7 +49,8 @@ void i_binomial (mpz_t bin, unsigned int n, unsigned int k);
  */
 void i_binomial_sequence (mpz_t bin, unsigned int n, unsigned int k);
 
-/* stirling_first - Stirling Numbers of the First kind, 
+/** 
+ * stirling_first - Stirling Numbers of the First kind, 
  * normalized so that they are all positive.
  * Uses dynamically-sized cache.
  */
@@ -65,7 +66,8 @@ void fp_bin_xform_pow (mpf_t bxp, unsigned int n, unsigned int s);
  */
 void fp_harmonic (mpf_t harm, unsigned int n);
 
-/* fp_poch_rising
+/** 
+ * fp_poch_rising
  * rising pochhammer symbol (x)_n, for real values of x and integer n.
  *
  * Brute force, simple.
