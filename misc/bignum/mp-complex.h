@@ -40,6 +40,15 @@ static inline void cpx_sub (cpx_t *dif, cpx_t *a, cpx_t *b)
 	mpf_sub (dif->im, a->im, b->im);
 }
 
+static inline void cpx_neg (cpx_t *neg, cpx_t *a)
+{
+	mpf_neg (neg->re, a->re);
+	mpf_neg (neg->im, a->im);
+}
+
+/**
+ * cpx_mul -- prod = a * b
+ */
 static inline void cpx_mul (cpx_t *prod, cpx_t *a, cpx_t *b)
 {
 	mpf_t pre, pim, tmp;
@@ -63,6 +72,9 @@ static inline void cpx_mul (cpx_t *prod, cpx_t *a, cpx_t *b)
 	mpf_clear (tmp);
 }
 
+/**
+ * cpx_recip -- recip = 1/z
+ */
 static inline void cpx_recip (cpx_t *recip, cpx_t *z)
 {
 	mpf_t mag,tmp;
@@ -78,6 +90,15 @@ static inline void cpx_recip (cpx_t *recip, cpx_t *z)
 	
 	mpf_clear (mag);
 	mpf_clear (tmp);
+}
+
+/**
+ * cpx_div -- ratio = a/b
+ */
+static inline void cpx_div (cpx_t *ratio, cpx_t *a, cpx_t *b)
+{
+	cpx_recip (ratio, b);
+	cpx_mul (ratio, ratio, a);
 }
 
 #endif /* __MP_COMPLEX_H__ */
