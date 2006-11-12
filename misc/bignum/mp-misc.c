@@ -12,6 +12,8 @@
 #include <stdlib.h>
 
 #include <gmp.h>
+#include "mp-complex.h"
+#include "mp-misc.h"
 
 void i_prt (char * str, mpz_t val)
 {
@@ -23,6 +25,14 @@ void fp_prt (char * str, mpf_t val)
 {
 	printf (str);
 	mpf_out_str (stdout, 10, 60, val);
+}
+
+void cpx_prt (char * str, cpx_t *val)
+{
+	printf (str);
+	mpf_out_str (stdout, 10, 30, val->re);
+	printf (" + i ");
+	mpf_out_str (stdout, 10, 30, val->im);
 }
 
 /* prec is the decimal precison (number of decimal places) */

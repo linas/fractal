@@ -16,6 +16,7 @@
 
 #include <gmp.h>
 #include "mp-consts.h"
+#include "mp-complex.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
 #include "mp_zeta.h"
@@ -333,7 +334,7 @@ int main (int argc, char * argv[])
 	mpf_clear(one);
 #endif
 
-#define TEST_SINE
+// #define TEST_SINE
 #ifdef TEST_SINE
 	mpf_t ex, pi2, pi2n;
 	mpf_init (ex);
@@ -403,7 +404,7 @@ int main (int argc, char * argv[])
 	fp_zeta (zeta, 7, 80);
 	fp_prt ("80 digs= ", zeta);
 #endif
-	
+
 // #define TEST_ZETA
 #ifdef TEST_ZETA
 	mpf_t zeta;
@@ -417,6 +418,33 @@ int main (int argc, char * argv[])
 		printf ("char * zeta_%d_%d = \"", i, pr);
 		mpf_out_str (stdout, 10, pr, zeta);
 		printf ("\";\n");
+		fflush (stdout);
+	}
+#endif
+
+#define TEST_COMPLEX_ZETA
+#ifdef TEST_COMPLEX_ZETA
+	mpf_t nzeta;
+	mpf_init (nzeta);
+	
+	cpx_t zeta, ess;
+	cpx_init (&zeta);
+	cpx_init (&ess);
+	mpf_set_ui (ess.im, 0);
+
+	int i;
+	int pr = prec;
+	for (i=3; i<nterms; i++ ) {
+		fp_zeta (nzeta, i, pr);
+		
+		mpf_set_ui (ess.re, i);
+		fp_borwein_zeta_c (zeta, ess, pr);
+
+		printf ("zeta(%d)_%d = ", i, pr);
+		cpx_prt ("", &zeta);
+		printf ("  ");
+		mpf_out_str (stdout, 10, pr, nzeta);
+		printf ("\n");
 		fflush (stdout);
 	}
 #endif

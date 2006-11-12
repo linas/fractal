@@ -8,9 +8,11 @@
  */
 
 #include <gmp.h>
+#include "mp-complex.h"
 
 void i_prt (char * str, mpz_t val);
 void fp_prt (char * str, mpf_t val);
+void cpx_prt (char * str, cpx_t *val);
 
 /* prec is the decimal precison (number of decimal places) */
 /* nterms is the number of an's to compute */
