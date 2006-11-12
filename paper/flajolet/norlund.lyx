@@ -4415,10 +4415,10 @@ What is curious about this result is that, if the Riemann Hypothesis holds,
 \end_inset 
 
 , the deviation from the square-root behaviour would be numerically inaccessible.
-  
+ 
 \layout Subsection
 
-Other series
+Totient series
 \layout Standard
 
 The finite differences for the other series appear to show a similar pattern,
@@ -4450,6 +4450,23 @@ k\end{array}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
 \end_inset 
 
 , as the following graphics illustrate.
+\layout Standard
+
+The integrand of the corresponding Norlund-Rice integral is regular at 
+\begin_inset Formula $s=1$
+\end_inset 
+
+ and has a simple pole at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+, and a double pole at 
+\begin_inset Formula $s=2$
+\end_inset 
+
+.
+ In most other respects, it resembles the previous integral.
+ 
 \layout Standard
 
 
@@ -4573,6 +4590,9 @@ d_{n}^{\varphi}=A\,\left(1+B\log n\right)n^{2}\log n+\mathcal{O}\left(n^{2}\log^
 \end_inset 
 
 
+\layout Subsection
+
+Liouville series
 \layout Standard
 
 Let 
@@ -4584,6 +4604,17 @@ k\end{array}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
 \end_inset 
 
 be the series corresponding to the Liouville function.
+ The integrand of the corresponding Norlund-Rice integral is regular at
+ 
+\begin_inset Formula $s=1$
+\end_inset 
+
+ and has a simple pole at 
+\begin_inset Formula $2s=1$
+\end_inset 
+
+.
+ In all other respects, it resembles the previous integrals.
  
 \layout Standard
 
@@ -4676,158 +4707,6 @@ This figure shows a graph of
 \end_inset 
 
 
-\layout Section
-
-analytic Behaviour
-\layout Standard
-
-where 
-\begin_inset Formula $f(s)=1/\zeta(s)$
-\end_inset 
-
- for 
-\begin_inset Formula $d_{n}^{\mu}$
-\end_inset 
-
-, and 
-\begin_inset Formula $f(s)=\zeta(s-1)/\zeta(s)$
-\end_inset 
-
- for 
-\begin_inset Formula $d_{n}^{\varphi}$
-\end_inset 
-
-, and so on.
- By assuming the Riemann Hypothesis, it has been shown that
-\begin_inset Formula \begin{equation}
-\zeta(s)=\mathcal{O}\left(\left|t\right|^{\epsilon}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- and 
-\begin_inset Formula \begin{equation}
-\frac{1}{\zeta(s)}=\mathcal{O}\left(\left|t\right|^{\epsilon}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- for any 
-\begin_inset Formula $\epsilon>0$
-\end_inset 
-
- and 
-\begin_inset Formula $s=\sigma+it$
-\end_inset 
-
-, as 
-\begin_inset Formula $t\to\infty$
-\end_inset 
-
-.
- This can be substituted directly into the integral.
- One should also take account of the fact that 
-\begin_inset Formula $1/\zeta(s)$
-\end_inset 
-
- has a zero at 
-\begin_inset Formula $s=1$
-\end_inset 
-
- that cancels one of the poles in the integrand.
- Thus, one obtains, 
-\begin_inset Formula \begin{eqnarray}
-d_{n}^{\mu} & = & \mathcal{O}(1)\int_{c-i\infty}^{c+i\infty}\frac{\left|s\right|^{\epsilon}}{s}\,\frac{n!}{(s-2)(s-3)\cdots(s-n)}ds\label{eq:}\\
- & =\nonumber \\
- & =\nonumber \end{eqnarray}
-
-\end_inset 
-
- with
-\layout Subsection
-
-An alternate analysis
-\layout Standard
-
-There is an alternate approach to the analysis which leads to some curious
- observations about the relationship between the Riemann Hypothesis and
- the location of saddle points.
- One may take as the starting point the well known formula 
-\begin_inset Formula \begin{equation}
-\zeta(s)=\frac{\exp\left(\log2\pi-1-\gamma/2\right)s}{2\left(s-1\right)\Gamma\left(1+s/2\right)}\prod_{\rho}\left(1-\frac{s}{\rho}\right)e^{s/\rho}\label{eq:}\end{equation}
-
-\end_inset 
-
- Here, the product extends over the zeros 
-\begin_inset Formula $\rho$
-\end_inset 
-
- of the Riemann zeta function.
- The derivation of this formula does not require the assumption of the RH,
- and so this seems to provide a more general starting point for a saddle-point
- analysis.
- To proceed, one must 
-\emph on 
-assume
-\emph default 
- that the only saddle point is located near the origin.
- As will be made clear later, this assumption is equivalent to assuming
- RH.
- 
-\layout Subsection
-
-Analysis for the Totient series
-\layout Standard
-
-This section summarizes a saddle-point analysis for the Totient function
- finite difference series 
-\begin_inset Formula \begin{equation}
-d_{n}^{\varphi}=\sum_{k=3}^{n}(-1)^{k}\left(\begin{array}{c}
-n\\
-k\end{array}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
-
-\end_inset 
-
- The integrand of the corresponding Norlund-Rice integral is regular at
- 
-\begin_inset Formula $s=1$
-\end_inset 
-
- and has a simple pole at 
-\begin_inset Formula $s=0$
-\end_inset 
-
-, and a double pole at 
-\begin_inset Formula $s=2$
-\end_inset 
-
-.
- In most other respects, it resembles the previous integral.
- 
-\layout Subsection
-
-Analysis for the Liouville series
-\layout Standard
-
-This section summarizes a saddle-point analysis for the Liouville function
- finite difference series 
-\begin_inset Formula \begin{equation}
-d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
-n\\
-k\end{array}\right)\,\frac{\zeta(2k)}{\zeta(k)}\label{eq:}\end{equation}
-
-\end_inset 
-
- The integrand of the corresponding Norlund-Rice integral is regular at
- 
-\begin_inset Formula $s=1$
-\end_inset 
-
- and has a simple pole at 
-\begin_inset Formula $2s=1$
-\end_inset 
-
-.
- In all other respects, it resembles the previous integrals.
- 
 \layout Section
 
 Relation to literature
