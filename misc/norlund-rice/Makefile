@@ -7,7 +7,7 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES = baez misc zeta-imag
+EXES = baez dsubn-analytic zeta-imag
 
 all: $(EXES)
 
@@ -16,7 +16,7 @@ baez.o:
 zeta-imag.o:
 
 baez: baez.o 
-misc:	misc.o
+dsubn-analytic:	dsubn-analytic.o
 zeta-imag: zeta-imag.o
 
 .o:

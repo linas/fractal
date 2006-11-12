@@ -1,3 +1,12 @@
+
+/*
+ * dsubn.c
+ *
+ * proide analytic fit to d_n
+ *
+ * Linas November 2006
+ */
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
