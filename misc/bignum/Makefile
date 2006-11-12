@@ -30,7 +30,7 @@ mp-binomial.o: mp-binomial.h mp-cache.h mp-trig.h
 mp-cache.o: mp-cache.h
 mp-consts.o: mp-consts.h mp-binomial.h mp-trig.h
 mp-misc.o: mp-misc.h
-mp-trig.o: mp-trig.h mp-cache.h mp-binomial.h
+mp-trig.o: mp-trig.h mp-binomial.h mp-cache.h mp-complex.h
 mp_zeta.o: mp_zeta.h db-cache.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-trig.h
 
 # binaries

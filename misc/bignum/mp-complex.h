@@ -8,6 +8,9 @@
 
 #include <gmp.h>
 
+#ifndef __MP_COMPLEX_H__
+#define __MP_COMPLEX_H__
+
 typedef struct {
 	mpf_t re;
 	mpf_t im;
@@ -77,3 +80,4 @@ static inline void cpx_recip (cpx_t *recip, cpx_t *z)
 	mpf_clear (tmp);
 }
 
+#endif /* __MP_COMPLEX_H__ */

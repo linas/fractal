@@ -4,12 +4,11 @@
  * High-precison Elementary functions, using the 
  * Gnu Multiple-precision library.
  *
- * Also, high-precision values of the series a_n 
- * 
  * Linas Vepstas July 2005
  */
 
 #include <gmp.h>
+#include "mp-complex.h"
 
 /**
  * i_pow - raise n to the m power
@@ -48,6 +47,15 @@ void fp_log (mpf_t lg, mpf_t z, unsigned int prec);
  * precomputed constants.
  */
 void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
+
+/**
+ * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
+ *
+ * If q is held fixed, and k varied, then the values are cached,
+ * allowing improved algorithm speeds.
+ */
+
+void fp_pow_rc (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec);
 
 /* =============================== END OF FILE =========================== */
 
