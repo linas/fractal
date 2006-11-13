@@ -20,6 +20,7 @@
 #include <time.h>
 
 #include "mp-binomial.h"
+#include "mp-consts.h"
 #include "mp-misc.h"
 #include "mp_zeta.h"
 
@@ -187,8 +188,10 @@ void d_liouville_n (mpf_t acc, int en, unsigned int prec)
 	mpf_set_z (term, ibin);
 	fp_poch_rising (bin, 0.5, en-1);
 	mpf_div (term, term, bin);
+	fp_zeta_half (bin, prec);
+	mpf_div (term, term, bin);
 
-	mpf_div (acc, acc, term);
+	mpf_add (acc, acc, term);
 #endif
 	mpf_clear (bin);
 	mpf_clear (term);
