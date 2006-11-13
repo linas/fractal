@@ -12,6 +12,7 @@ set key right
 
 # ----------------------------------------------------------
 # Used to graph dn-totient-basic.png for the paper
+# set out 'dn-totient-basic.png'
 # set title "d_n for totient function"
 # set xlabel "n"
 # set ylabel "d_n"
@@ -21,18 +22,23 @@ set key right
 
 # ----------------------------------------------------------
 # Used to graph dn-totient-asymp.png
-# set title "Asymptotic behaviour of d_n for totient function"
-# set xlabel "n"
-# set ylabel "-d_n/(n^2 log n)"
-# 
-# set xrange [100:]
-# plot "dn-totient.dat" using 1:(-$2/log($1)) title "" linewidth 3
+set out 'dn-totient-asymp.png'
+set title "Asymptotic behaviour of d_n for totient function"
+set xlabel "n"
+set ylabel "d_n - Res(2,0,-2)"
+
+set xrange [150:]
+plot "dn-tot.dat" using 1:($2 + 0.273686517/(($1+1)*($1+2))) title "" linewidth 3
 
 # ----------------------------------------------------------
 # Attempt to provide a numeric fit
 # 
-# set xrange [100:]
+set xrange [150:]
 
-plot "dn-tot.dat" using 1:($2) title "asdf"
+# plot "dn-tot.dat" using 1:($2) title ""
+
+# plot "dn-tot.dat" using 1:($2 + 0.273686517/(($1+1)*($1+2))) title "" linewidth 3
+
+
 
 
