@@ -140,13 +140,14 @@ void d_totient_n (mpf_t acc, int en, unsigned int prec)
 	mpf_mul (bin, bin, bin);
 	mpf_mul (acc, acc, bin);
 
-	/* add psi */
+	/* 1.5 */
 	mpf_set_ui (bin, 3);
 	mpf_div_ui (bin, bin, 2);
 	mpf_sub (acc, acc, bin);
 
+	/* add psi */
 	fp_harmonic (bin, en-1);
-	mpf_sub (acc, acc, bin);
+	mpf_add (acc, acc, bin);
 
 	/* Glaisher-Kinkelin const */
 	mpf_set_str (bin, "1.282427129100622636875342568869791", 10);
