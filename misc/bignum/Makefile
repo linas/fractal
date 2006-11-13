@@ -9,18 +9,18 @@ EXES= bound bs bsubn cache-fill cont_frac db-merge db-prt \
 
 all:  $(EXES)
 
-MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o mp-misc.o mp-trig.o
+MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o mp-misc.o mp-trig.o mp_zeta.o
 
 bound:	bound.o
-cache-fill:	cache-fill.o mp_zeta.o $(MPOBJS)
+cache-fill:	cache-fill.o $(MPOBJS)
 db-merge:	db-merge.o $(MPOBJS)
 db-prt:	db-prt.o $(MPOBJS)
 cont_frac:	cont_frac.o
-dsubn:	dsubn.o mp_zeta.o $(MPOBJS)
+dsubn:	dsubn.o $(MPOBJS)
 hurwitz:	hurwitz.o $(MPOBJS)
-mp_zeta_test:	mp_zeta_test.o mp_zeta.o $(MPOBJS)
-picturez:	picturez.o mp_zeta.o $(MPOBJS)
-stieltjes:	stieltjes.o mp_zeta.o $(MPOBJS)
+mp_zeta_test:	mp_zeta_test.o $(MPOBJS)
+picturez:	picturez.o $(MPOBJS)
+stieltjes:	stieltjes.o $(MPOBJS)
 trunc:	trunc.o
 zero-cross:	zero-cross.o
 
@@ -28,7 +28,7 @@ zero-cross:	zero-cross.o
 db-cache.o: db-cache.h
 mp-binomial.o: mp-binomial.h mp-cache.h mp-trig.h
 mp-cache.o: mp-cache.h
-mp-consts.o: mp-consts.h mp-binomial.h mp-trig.h
+mp-consts.o: mp-consts.h mp-binomial.h mp-complex.h mp-trig.h mp_zeta.h
 mp-misc.o: mp-misc.h mp-complex.h
 mp-trig.o: mp-trig.h mp-binomial.h mp-cache.h mp-complex.h
 mp_zeta.o: mp_zeta.h db-cache.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-trig.h
