@@ -28,7 +28,9 @@ set xlabel "n"
 set ylabel "d_n - Res(2,0,-2)"
 
 set xrange [150:]
-plot "dn-tot.dat" using 1:($2 + 0.273686517/(($1+1)*($1+2))) title "" linewidth 3
+plot "dn-tot.dat" using 1:($2 + 0.273686517/(($1+1)*($1+2))) title "sum-residues" linewidth 3, \
+     "dn-tot.dat" using 1:(sqrt($1+1)* 1.247262e-10 *cos(14.1347*log($1+1) -5.890332767)) \
+     title "first zero" linewidth 3
 
 # ----------------------------------------------------------
 # Attempt to provide a numeric fit

@@ -663,8 +663,9 @@ int main (int argc, char * argv[])
 	}
 #endif
 
-#define TEST_COMPLEX_ZETA
+// #define TEST_COMPLEX_ZETA
 #ifdef TEST_COMPLEX_ZETA
+	/* this test was passing in Nov 2006 */
 	mpf_t nzeta;
 	mpf_init (nzeta);
 	
@@ -675,20 +676,6 @@ int main (int argc, char * argv[])
 
 	int i;
 	int pr = prec;
-
-#if HANDY
-	mpf_set_ui (ess.im, 0);
-	mpf_set_d (ess.re, 0.5);
-	fp_borwein_zeta_c (&zeta, &ess, pr);
-	cpx_prt ("zeta(1/2) = ", &zeta);
-	printf ("\n");
-#endif
-	mpf_set_ui (ess.re, 1);
-	zeta_zero (ess.im, 0);
-	mpf_mul_ui (ess.im, ess.im, 2);
-	fp_borwein_zeta_c (&zeta, &ess, pr);
-	cpx_prt ("zeta(2 rho)= ", &zeta);
-	printf ("\n");
 
 	/*  verify that its zero where it should be */
 	mpf_set_d (ess.re, 0.5);
@@ -772,6 +759,39 @@ int main (int argc, char * argv[])
 		printf (" res=%g ", re_s);
 		mpf_out_str (stdout, 10, 60, bs);
 		printf (";\n");
+		fflush (stdout);
+	}
+#endif
+
+#define HANDY_COMPLEX_ZETA
+#ifdef HANDY_COMPLEX_ZETA
+	mpf_t nzeta;
+	mpf_init (nzeta);
+	
+	cpx_t zeta, ess;
+	cpx_init (&zeta);
+	cpx_init (&ess);
+	mpf_set_ui (ess.im, 0);
+
+	int i;
+	int pr = prec;
+
+#if HANDY
+	mpf_set_ui (ess.im, 0);
+	mpf_set_d (ess.re, 0.5);
+	fp_borwein_zeta_c (&zeta, &ess, pr);
+	cpx_prt ("zeta(1/2) = ", &zeta);
+	printf ("\n");
+#endif
+
+	/* zero offsets */
+	mpf_set_d (ess.re, -0.5);
+	for (i=0; i<13; i++ ) {
+		zeta_zero (ess.im, i);
+		fp_borwein_zeta_c (&zeta, &ess, pr);
+		printf ("zeta(rho[%d]-1) = ", i);
+		cpx_prt (" ", &zeta);
+		printf ("\n");
 		fflush (stdout);
 	}
 #endif
