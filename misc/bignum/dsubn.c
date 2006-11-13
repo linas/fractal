@@ -134,33 +134,39 @@ void d_totient_n (mpf_t acc, int en, unsigned int prec)
 #define T_N_SCALE
 #ifdef T_N_SCALE
 
-	/* 3 n(n-1)/pi^2 */
-	mpf_div_ui (acc, acc, 3*en*(en-1));
-	fp_pi (bin, prec);
-	mpf_mul (bin, bin, bin);
-	mpf_mul (acc, acc, bin);
+	/* 1/6 */
+	mpf_set_ui (bin, 1);
+	mpf_div_ui (bin, bin, 6);
+	mpf_add (acc, acc, bin);
 
 	/* 1.5 */
 	mpf_set_ui (bin, 3);
 	mpf_div_ui (bin, bin, 2);
-	mpf_sub (acc, acc, bin);
+	mpf_set (term, bin);
 
-	/* add psi */
-	fp_harmonic (bin, en-1);
-	mpf_add (acc, acc, bin);
+	/* subtract psi */
+	fp_harmonic (bin, en-2);
+	mpf_sub (term, term, bin);
 
-	/* Glaisher-Kinkelin const */
-	mpf_set_str (bin, "1.282427129100622636875342568869791", 10);
-	fp_log (bin, bin, 50);
-	mpf_mul_ui (bin, bin, 12);
-	mpf_add (acc, acc, bin);
-
-	/* log (2pi) */
+	/* add log (2pi) */
 	fp_pi (bin, prec);
 	mpf_mul_ui (bin, bin, 2);
 	fp_log (bin, bin, prec);
-	mpf_sub (acc, acc, bin);
+	mpf_add (term, term, bin);
 	
+	/* Glaisher-Kinkelin const */
+	mpf_set_str (bin, "1.282427129100622636875342568869791", 10);
+	fp_log (bin, bin, 150);
+	mpf_mul_ui (bin, bin, 12);
+	mpf_sub (term, term, bin);
+
+	/* 3 n(n-1)/pi^2 */
+	mpf_mul_ui (term, term, 3*en*(en-1));
+	fp_pi (bin, prec);
+	mpf_mul (bin, bin, bin);
+	mpf_div (term, term, bin);
+
+	mpf_sub (acc, acc, term);
 #endif
 
 	mpf_clear (bin);

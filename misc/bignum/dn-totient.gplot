@@ -29,21 +29,10 @@ set key right
 # plot "dn-totient.dat" using 1:(-$2/log($1)) title "" linewidth 3
 
 # ----------------------------------------------------------
-# Attempot to provide a numeric fit
+# Attempt to provide a numeric fit
 # 
-set xrange [100:]
-# plot "dn-totient.dat" using 1:(-$2/log($1)) title "" , \
-#      "dn-totient.dat" using 1:(0.31745 - log($1)/1500) title "fit"
+# set xrange [100:]
 
-# plot "dn-totient.dat" using 1:($2*$1*$1) title "data" ,\
-#      "dn-totient.dat" using 1:(-1.095472933*3*$1*($1-1))
+plot "dn-tot.dat" using 1:($2) title "asdf"
 
-plot "dn-totient.dat" using 1:($2*$1*$1 + 1.095472933*3*$1*($1-1)) title "asdf"
-
-# ----------------------------------------------------------
-# set xlabel "n"
-# 
-# # set xrange [10000:]
-# set xrange [5:]
-# plot "dn-totient.dat" using (log($1)):(-$2/log($1)) title "" linewidth 3
 
