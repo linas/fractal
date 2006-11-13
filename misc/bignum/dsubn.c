@@ -22,6 +22,7 @@
 #include "mp-binomial.h"
 #include "mp-consts.h"
 #include "mp-misc.h"
+#include "mp-trig.h"
 #include "mp_zeta.h"
 
 #ifdef TESTING_123
@@ -132,10 +133,33 @@ void d_totient_n (mpf_t acc, int en, unsigned int prec)
 	}
 #define T_N_SCALE
 #ifdef T_N_SCALE
-	mpf_div_ui (acc, acc, en*en);
-	// mpf_set_ui (bin, en);
-	// fp_log (term, bin, prec);
-	// mpf_div (acc, acc, term);
+
+	/* 3 n(n-1)/pi^2 */
+	mpf_div_ui (acc, acc, 3*en*(en-1));
+	fp_pi (bin, prec);
+	mpf_mul (bin, bin, bin);
+	mpf_mul (acc, acc, bin);
+
+	/* add psi */
+	mpf_set_ui (bin, 3);
+	mpf_div_ui (bin, bin, 2);
+	mpf_sub (acc, acc, bin);
+
+	fp_harmonic (bin, en-1);
+	mpf_sub (acc, acc, bin);
+
+	/* Glaisher-Kinkelin const */
+	mpf_set_str (bin, "1.282427129100622636875342568869791", 10);
+	fp_log (bin, bin, 50);
+	mpf_mul_ui (bin, bin, 12);
+	mpf_add (acc, acc, bin);
+
+	/* log (2pi) */
+	fp_pi (bin, prec);
+	mpf_mul_ui (bin, bin, 2);
+	fp_log (bin, bin, prec);
+	mpf_sub (acc, acc, bin);
+	
 #endif
 
 	mpf_clear (bin);
@@ -241,9 +265,9 @@ int main (int argc, char * argv[])
 
 	int n;
 	// printf ("#\n# zeta expansion terms n^2 * (2-d_n)   \n#\n");
-	// printf ("#\n# totient zeta expansion terms d_n/(n*n)   \n#\n");
+	printf ("#\n# totient zeta expansion terms d_n/(n*n)   \n#\n");
 	// printf ("#\n# liouville zeta expansion terms d_n   \n#\n");
-	printf ("#\n# liouville zeta expansion terms d_n + 1 + gamma(n+0.5)/gamma(n+1)/zeta(1/2)\n#\n");
+	// printf ("#\n# liouville zeta expansion terms d_n + 1 + gamma(n+0.5)/gamma(n+1)/zeta(1/2)\n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
@@ -258,8 +282,8 @@ int main (int argc, char * argv[])
 	for (n=nlow; n<=nhigh; )
 	{
 		// d_sub_n (d_n, n, prec);
-		// d_totient_n (d_n, n, prec);
-		d_liouville_n (d_n, n, prec);
+		d_totient_n (d_n, n, prec);
+		// d_liouville_n (d_n, n, prec);
 
 		time_t now = time(0);
 		int elapsed = now-then;
