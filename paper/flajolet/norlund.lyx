@@ -4767,25 +4767,36 @@ be the series corresponding to the Liouville function.
 \begin_inset Formula $2s=1$
 \end_inset 
 
+ and another at 
+\begin_inset Formula $s=0$
+\end_inset 
+
 .
- In other respects, it resembles the integral formulation for the totient
+ In other respects, it resembles the integral formulation for the Mobius
  series.
  The simple pole contributes a term of 
 \begin_inset Formula $\mathcal{O}(\sqrt{n})$
 \end_inset 
 
-, the trivial zeros contribute a term of 
-\begin_inset Formula $\mathcal{O}(1/n^{2})$
-\end_inset 
-
 .
- The contributution of the non-trivial zeroes to the sum are again not easily
- estimated, because the individual terms in the summation do not get small,
- but rather, contribute a comparable amount.
+ Curiously, there are no poles from the trivial zeros, as these are balanced
+ out by the numerator.
+ The contributution of the non-trivial zeroes to the sum may be estimated
+ as in the Mobius sum.
  
 \layout Standard
 
 More precisely, the residue of the pole at 
+\begin_inset Formula $s=0$
+\end_inset 
+
+ provides a term
+\begin_inset Formula \[
+\mbox{Res}\left(s=0\right)=-1\]
+
+\end_inset 
+
+The residue of the pole at 
 \begin_inset Formula $s=1/2$
 \end_inset 
 
@@ -4797,19 +4808,34 @@ More precisely, the residue of the pole at
 
  where 
 \begin_inset Formula \[
-\zeta\left(\frac{1}{2}\right)\approx-1.4603450880\ldots\]
+\zeta\left(\frac{1}{2}\right)\approx-1.4603450880958681288499915252\ldots\]
 
 \end_inset 
 
+ This residue accounts very well for the behaviour of 
+\begin_inset Formula $d_{n}^{\lambda}$
+\end_inset 
 
+, as demonstrated in figure 
+\begin_inset LatexCommand \ref{cap:d_n^lambda low values}
+
+\end_inset 
+
+.
+ 
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:d_n^lambda low values}
+
+\end_inset 
 
 
 \begin_inset Formula $d_{n}^{\lambda}$
@@ -4835,7 +4861,7 @@ This figure shows the basic behavior for the finite differences
  corresponding to the Liouville function, plotted in red.
  For comparison, plotted in green, is the value of 
 \begin_inset Formula \[
--\frac{\sqrt{\pi}}{\zeta\left(\frac{1}{2}\right)}\;\frac{\Gamma\left(n+1\right)}{\Gamma\left(n+\frac{1}{2}\right)}-1\]
+-1-\frac{\sqrt{\pi}}{\zeta\left(\frac{1}{2}\right)}\;\frac{\Gamma\left(n+1\right)}{\Gamma\left(n+\frac{1}{2}\right)}\]
 
 \end_inset 
 
@@ -4846,12 +4872,59 @@ This figure shows the basic behavior for the finite differences
 
 \layout Standard
 
+The full behaviour of the 
+\begin_inset Formula $d_{n}^{\lambda}$
+\end_inset 
+
+ should be given by
+\begin_inset Formula \[
+d_{n}^{\lambda}=-\frac{\sqrt{\pi}}{\zeta\left(\frac{1}{2}\right)}\;\frac{\Gamma\left(n+1\right)}{\Gamma\left(n+\frac{1}{2}\right)}-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\zeta^{\prime}(\rho)}\]
+
+\end_inset 
+
+ Applying the Stirling approximation, one obtains 
+\layout Standard
+
+
+\begin_inset Formula \[
+d_{n}^{\lambda}=\mbox{Res}\left(s=0\right)+\mbox{Res}\left(s=\frac{1}{2}\right)-2\sqrt{n+1}\sum_{n\gg\tau>0}\Re\left[\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}\;\frac{\zeta\left(1+2i\tau\right)}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\]
+
+\end_inset 
+
+ Using 
+\begin_inset Formula \[
+\zeta\left(1+i2\times14.1347251417\right)=1.836735353402834-i0.6511975965222686\]
+
+\end_inset 
+
+ one then expects
+\layout Standard
+
+
+\begin_inset Formula \[
+d_{n}^{\lambda}\approx\mbox{Res}\left(s=0\right)+\mbox{Res}\left(s=\frac{1}{2}\right)+\sqrt{n+1}\left[1.98342\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.3488\right)\right]\]
+
+\end_inset 
+
+ A graph of this is shown in figure 
+\begin_inset LatexCommand \ref{cap:Asymptotic d_n^lambda}
+
+\end_inset 
+
+; again, the fit is excellent.
+\layout Standard
+
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Asymptotic d_n^lambda}
+
+\end_inset 
 
 Asymptotic form of 
 \begin_inset Formula $d_{n}^{\lambda}$
@@ -4870,14 +4943,34 @@ Asymptotic form of
 
 \layout Standard
 
-This figure shows a graph of 
+This figure shows a graph of the series 
+\begin_inset Formula $d_{n}^{\lambda}$
+\end_inset 
+
+ with the residue of the pole at 
+\begin_inset Formula $s=1/2$
+\end_inset 
+
+ removed.
+ That is, the red line shows 
 \begin_inset Formula \[
 d_{n}^{\lambda}+1+\frac{\sqrt{\pi}}{\zeta\left(\frac{1}{2}\right)}\;\frac{\Gamma\left(n+1\right)}{\Gamma\left(n+\frac{1}{2}\right)}\]
 
 \end_inset 
 
  for the range of 
-\begin_inset Formula $150\le n\le6000$
+\begin_inset Formula $110\le n\le6000$
+\end_inset 
+
+.
+ The green line is a graph of 
+\begin_inset Formula \[
+\sqrt{n+1}\left[1.98342\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.3488\right)\right]\]
+
+\end_inset 
+
+ As can be seen, the fit is very good, and improves for large 
+\begin_inset Formula $n$
 \end_inset 
 
 .
@@ -4885,6 +4978,18 @@ d_{n}^{\lambda}+1+\frac{\sqrt{\pi}}{\zeta\left(\frac{1}{2}\right)}\;\frac{\Gamma
 \end_inset 
 
 
+\layout Standard
+
+As is the case for the Mobius sums, the asymptotic behaviour of 
+\begin_inset Formula $d_{n}^{\lambda}=\mathcal{O}(\sqrt{n})$
+\end_inset 
+
+ implies and is implied by the Riemann hypothesis, provided that the coefficient
+ 
+\begin_inset Formula $\zeta\left(1+2i\tau\right)/\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)$
+\end_inset 
+
+ is bounded away from zero.
 \layout Section
 
 Relation to literature
