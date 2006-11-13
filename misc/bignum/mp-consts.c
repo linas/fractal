@@ -15,8 +15,10 @@
 
 #include <gmp.h>
 #include "mp-binomial.h"
+#include "mp-complex.h"
 #include "mp-consts.h"
 #include "mp-trig.h"
+#include "mp_zeta.h"
 
 /* ======================================================================= */
 /**
@@ -62,6 +64,7 @@ void fp_pi (mpf_t pi, unsigned int prec)
 	precision = prec;
 }
 
+/* ======================================================================= */
 /**
  * fp_e_pi - return e^pi 
  * @prec - number of decimal places of precision
@@ -92,8 +95,11 @@ void fp_e_pi (mpf_t e_pi, unsigned int prec)
 }
 
 
-/* fp_euler
- * return Euler-Mascheroni const
+/* ======================================================================= */
+/** 
+ * fp_euler - return Euler-Mascheroni const
+ * @prec - number of decimal places of precision
+ *
  */
 static void fp_euler_mascheroni_compute (mpf_t gam, unsigned int prec)
 {
@@ -173,6 +179,49 @@ void fp_euler_mascheroni (mpf_t gam, unsigned int prec)
 	}
 
 	fp_euler_mascheroni_compute (gam, prec);
+	mpf_set (cached_gam, gam);
+	precision = prec;
+}
+
+/* ======================================================================= */
+/** 
+ * fp_zeta_half - return zeta (1/2)
+ * @prec - number of decimal places of precision
+ *
+ */
+static void fp_zeta_half_compute (mpf_t gam, unsigned int prec)
+{
+	cpx_t ess, zeta;
+	cpx_init (&ess);
+	cpx_init (&zeta);
+	
+	mpf_set_d (ess.re, 0.5);
+	mpf_set_ui (ess.im, 0);
+
+	fp_borwein_zeta_c (&zeta, &ess, prec);
+	mpf_set (gam, zeta.re);
+
+	cpx_clear (&ess);
+	cpx_clear (&zeta);
+}
+
+void fp_zeta_half (mpf_t gam, unsigned int prec)
+{
+	static unsigned int precision=0;
+	static mpf_t cached_gam;
+
+	if (precision >= prec)
+	{
+		mpf_set (gam, cached_gam);
+		return;
+	}
+
+	if (0 == precision)
+	{
+		mpf_init (cached_gam);
+	}
+
+	fp_zeta_half_compute (gam, prec);
 	mpf_set (cached_gam, gam);
 	precision = prec;
 }

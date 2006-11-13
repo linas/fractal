@@ -27,8 +27,17 @@ void fp_pi (mpf_t pi, unsigned int prec);
  */
 void fp_e_pi (mpf_t e_pi, unsigned int prec);
 
-/* fp_euler
- * return Euler-Mascheroni const
+/**
+ * fp_euler - return Euler-Mascheroni const
+ * @prec - number of decimal places of precision
+ *
  */
 void fp_euler_mascheroni (mpf_t gam, unsigned int prec);
+
+/**
+ * fp_zeta_half - return zeta(1/2)
+ * @prec - number of decimal places of precision
+ *
+ */
+void fp_zeta_half (mpf_t zeta, unsigned int prec);
 
