@@ -676,14 +676,19 @@ int main (int argc, char * argv[])
 	int i;
 	int pr = prec;
 
-#if 1
+#if HANDY
 	mpf_set_ui (ess.im, 0);
 	mpf_set_d (ess.re, 0.5);
 	fp_borwein_zeta_c (&zeta, &ess, pr);
 	cpx_prt ("zeta(1/2) = ", &zeta);
 	printf ("\n");
-	exit(0);
 #endif
+	mpf_set_ui (ess.re, 1);
+	zeta_zero (ess.im, 0);
+	mpf_mul_ui (ess.im, ess.im, 2);
+	fp_borwein_zeta_c (&zeta, &ess, pr);
+	cpx_prt ("zeta(2 rho)= ", &zeta);
+	printf ("\n");
 
 	/*  verify that its zero where it should be */
 	mpf_set_d (ess.re, 0.5);

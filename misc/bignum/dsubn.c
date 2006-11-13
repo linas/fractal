@@ -186,13 +186,16 @@ void d_liouville_n (mpf_t acc, int en, unsigned int prec)
 	
 	mpz_fac_ui (ibin, en);
 	mpf_set_z (term, ibin);
-	fp_poch_rising (bin, 0.5, en-1);
+	
+	fp_poch_rising (bin, 0.5, en);
 	mpf_div (term, term, bin);
-	fp_zeta_half (bin, 100);
+	
+	fp_zeta_half (bin, 60);
 	mpf_div (term, term, bin);
 
 	mpf_add (acc, acc, term);
 #endif
+
 	mpf_clear (bin);
 	mpf_clear (term);
 	mpz_clear (ibin);
@@ -240,7 +243,7 @@ int main (int argc, char * argv[])
 	// printf ("#\n# zeta expansion terms n^2 * (2-d_n)   \n#\n");
 	// printf ("#\n# totient zeta expansion terms d_n/(n*n)   \n#\n");
 	// printf ("#\n# liouville zeta expansion terms d_n   \n#\n");
-	printf ("#\n# liouville zeta expansion terms (d_n+1)*gamma(n+0.5)/gamma(n+1)   \n#\n");
+	printf ("#\n# liouville zeta expansion terms d_n + 1 + gamma(n+0.5)/gamma(n+1)/zeta(1/2)\n#\n");
 	printf ("# computed to precision of %d decimal places\n", prec);
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
