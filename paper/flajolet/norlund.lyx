@@ -32,7 +32,7 @@ Notes Relating to Newton Series for the Riemann Zeta Function
 Linas Vepstas
 \layout Date
 
-November 11, 2006
+November 12, 2006
 \layout Abstract
 
 This paper consists of the extended working notes and observations made
@@ -4577,9 +4577,9 @@ The integrand of the corresponding Norlund-Rice integral is regular at
 
  contributes 
 \begin_inset Formula \begin{eqnarray*}
-\mbox{Res}\left(s=2\right) & = & -\frac{n(n-1)}{2}\left.\frac{d}{ds}\left[\frac{(s-2)\zeta(s-1)}{\zeta(s)}\right]\right|_{s=2}\\
- & = & \frac{3n(n-1)}{\pi^{2}}\left[\log\left(2\pi\right)-12\log A\right]\\
- & \approx & -0.348699865\ldots\times n(n-1)\end{eqnarray*}
+\mbox{Res}\left(s=2\right) & = & \Gamma\left(n+1\right)\left.\frac{d}{ds}\left[\frac{(s-2)^{2}\zeta(s-1)\Gamma(-s)}{\zeta(s)\Gamma(n-s+1)}\right]\right|_{s=2}\\
+ & = & \frac{3n(n-1)}{\pi^{2}}\left[\frac{3}{2}-\gamma+\log\left(2\pi\right)-12\log A-\psi(n-1)\right]\\
+\end{eqnarray*}
 
 \end_inset 
 
@@ -4592,14 +4592,25 @@ The integrand of the corresponding Norlund-Rice integral is regular at
 \end_inset 
 
 .
- As before, the residues of the trivial zeros contribute 
+ and 
+\begin_inset Formula $\psi(n)$
+\end_inset 
+
+ is the digamma function, which is just the harmonic number at the integers:
+ 
+\begin_inset Formula \[
+\psi(n)=-\gamma+\sum_{k=1}^{n-1}\frac{1}{k}\]
+
+\end_inset 
+
+As before, the residues of the trivial zeros contribute 
 \begin_inset Formula $\mathcal{O}(1/n^{2})$
 \end_inset 
 
  to the sum.
  Thus, the analytic development indicates that 
 \begin_inset Formula \[
-d_{n}^{\varphi}=\frac{3n(n-1)}{\pi^{2}}\left[\log\left(2\pi\right)-12\log A\right]-\frac{1}{6}-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{\zeta(\rho-1)}{\zeta^{\prime}(\rho)}+\mathcal{O}\left(\frac{1}{n^{2}}\right)\]
+d_{n}^{\varphi}=\mbox{Res}\left(s=0\right)+\mbox{Res}\left(s=2\right)-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{\zeta(\rho-1)}{\zeta^{\prime}(\rho)}+\mathcal{O}\left(\frac{1}{n^{2}}\right)\]
 
 \end_inset 
 
