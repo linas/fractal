@@ -188,7 +188,7 @@ void d_liouville_n (mpf_t acc, int en, unsigned int prec)
 	mpf_set_z (term, ibin);
 	fp_poch_rising (bin, 0.5, en-1);
 	mpf_div (term, term, bin);
-	fp_zeta_half (bin, prec);
+	fp_zeta_half (bin, 100);
 	mpf_div (term, term, bin);
 
 	mpf_add (acc, acc, term);

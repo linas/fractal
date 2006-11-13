@@ -4,8 +4,6 @@
  * High-precison Elementary functions, using the 
  * Gnu Multiple-precision library.
  *
- * Also, high-precision values of the series a_n 
- * 
  * Linas Vepstas July 2005
  */
 
@@ -436,6 +434,10 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
  *
  * If q is held fixed, and k varied, then the values are cached,
  * allowing improved algorithm speeds.
+ *
+ * Overall, though, this thing is pretty slow, as it requires
+ * a logarithm, an exp, sin and cos to be computed, each of which
+ * are kinda slow ... 
  */
 static void fp_pow_rc_helper (cpx_t *powc, int k, mpf_t q, cpx_t *ess, int prec)
 {

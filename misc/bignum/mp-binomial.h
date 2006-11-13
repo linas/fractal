@@ -4,8 +4,6 @@
  * High-precison factorials and binomials, using the 
  * Gnu Multiple-precision library.
  *
- * Also, high-precision values of the series a_n 
- * 
  * Linas Vepstas July 2005
  */
 

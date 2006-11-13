@@ -4,8 +4,6 @@
  * High-precison constants, using the 
  * Gnu Multiple-precision library.
  *
- * Also, high-precision values of the series a_n 
- * 
  * Linas Vepstas July 2005
  */
 
@@ -38,6 +36,7 @@ void fp_euler_mascheroni (mpf_t gam, unsigned int prec);
  * fp_zeta_half - return zeta(1/2)
  * @prec - number of decimal places of precision
  *
+ * Current algorithm is terribly slow.
  */
 void fp_zeta_half (mpf_t zeta, unsigned int prec);
 
