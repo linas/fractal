@@ -4157,8 +4157,8 @@ d_{n}=-\frac{1}{\zeta(0)}+\sum_{k=1}^{\infty}\left(-1\right)^{k}\frac{n!}{(2k+n)
 , and thus aren't particularly interesting.
  The contribution of the non-trivial zeros is more surprising.
  One has
-\begin_inset Formula \[
-c_{n}=-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\zeta^{\prime}(\rho)}\]
+\begin_inset Formula \begin{equation}
+c_{n}=-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\zeta^{\prime}(\rho)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4296,8 +4296,8 @@ d_{n}=2+\alpha_{n}+\mathcal{O}\left(\frac{1}{\sqrt{n}}\right)\]
 
  is considerably smaller than the last.
  Summing together the zeros above and below the real axis, one has 
-\begin_inset Formula \[
-d_{n}=2-2\sqrt{n+1}\sum_{n\gg\tau>0}\Re\left[\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\]
+\begin_inset Formula \begin{equation}
+d_{n}=2-2\sqrt{n+1}\sum_{n\gg\tau>0}\Re\left[\frac{\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4342,8 +4342,8 @@ The leading contribution to
 \end_inset 
 
  Taking only the contribution from the first zero, one has 
-\begin_inset Formula \[
-d_{n}\approx2-\sqrt{n+1}\left[1.01779\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.0081\right)\right]\]
+\begin_inset Formula \begin{equation}
+d_{n}\approx2-\sqrt{n+1}\left[1.01779\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.0081\right)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4530,7 +4530,7 @@ k\end{array}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
 \begin_inset Formula $\varphi$
 \end_inset 
 
- indicating that the corresponding Dirichlet series involves the Totient
+ indicating that the corresponding Dirichlet series involves the totient
  function 
 \begin_inset Formula $\varphi$
 \end_inset 
@@ -4544,7 +4544,55 @@ k\end{array}\right)\,\frac{\zeta(k-1)}{\zeta(k)}\label{eq:}\end{equation}
 \begin_inset Formula $d_{n}^{\varphi}=\mathcal{O}\left(n^{2}\log n\right)$
 \end_inset 
 
-, as the following graphics illustrate.
+, as shown in graph 
+\begin_inset LatexCommand \ref{cap:Graph-of-d_n^phi}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Graph-of-d_n^phi}
+
+\end_inset 
+
+Graph of 
+\begin_inset Formula $d_{n}^{\varphi}$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename dn-totient-basic.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+A graph of 
+\begin_inset Formula $d_{n}^{\varphi}$
+\end_inset 
+
+ for 
+\begin_inset Formula $3\le n\le100$
+\end_inset 
+
+ shows rapidly increasing behavior.
+\end_inset 
+
+
 \layout Standard
 
 The integrand of the corresponding Norlund-Rice integral is regular at 
@@ -4588,7 +4636,7 @@ The integrand of the corresponding Norlund-Rice integral is regular at
 \end_inset 
 
  is the Glaisher-Kinkelin constant 
-\begin_inset Formula $A=1.28242712\ldots$
+\begin_inset Formula $A=1.28242712910062263687534256886979\ldots$
 \end_inset 
 
 .
@@ -4608,9 +4656,15 @@ As before, the residues of the trivial zeros contribute
 \end_inset 
 
  to the sum.
- Thus, the analytic development indicates that 
+ These are 
 \begin_inset Formula \[
-d_{n}^{\varphi}=\mbox{Res}\left(s=0\right)+\mbox{Res}\left(s=2\right)-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{\zeta(\rho-1)}{\zeta^{\prime}(\rho)}+\mathcal{O}\left(\frac{1}{n^{2}}\right)\]
+\mbox{Res}\left(s<0\right)=\frac{n!}{2\pi^{2}}\sum_{k=1}^{\infty}\frac{(2k+1)!}{(2k+n)!}\;\frac{\zeta(2k+2)}{k\zeta(2k+1)}\]
+
+\end_inset 
+
+Thus, the analytic development indicates that 
+\begin_inset Formula \begin{equation}
+d_{n}^{\varphi}=\mbox{Res}\left(s\le2\right)-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{\zeta(\rho-1)}{\zeta^{\prime}(\rho)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4618,20 +4672,35 @@ d_{n}^{\varphi}=\mbox{Res}\left(s=0\right)+\mbox{Res}\left(s=2\right)-\sum_{\rho
  
 \layout Standard
 
-Unlike the series for the Mobius function, the sum for the non-trivial zeroes
- does not reduce to a simple oscillatory term.
- This is because 
-\begin_inset Formula $\zeta(\rho-1)\sim e^{\tau\pi/2}$
+It seems that, at least for the small zeroes, one has that 
+\begin_inset Formula $\zeta(\rho-1)\sim1$
 \end_inset 
 
- which cancels 
-\begin_inset Formula $\left|\Gamma(-\rho)\right|\sim e^{-\tau\pi/2}$
+, and so, just as in the Mobius function sums, one has oscillatory behaviour
+ given by
+\begin_inset Formula \begin{equation}
+d_{n}^{\varphi}-\mbox{Res}\left(s\le2\right)=2\sqrt{n+1}\sum_{n\gg\tau>0}\Re\left[\Gamma\left(-\frac{1}{2}-i\tau\right)e^{i\tau\log(n+1)}\frac{\zeta\left(-\frac{1}{2}+i\tau\right)}{\zeta^{\prime}\left(\frac{1}{2}+i\tau\right)}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where, for the first zero,
+\begin_inset Formula \[
+\zeta\left(-0.5+i14.1347251417\right)=-1.184474313-i\,0.3142933325\]
+
+\end_inset 
+
+ so that the oscillations are given by 
+\begin_inset Formula \begin{equation}
+d_{n}^{\varphi}-\mbox{Res}\left(s\le2\right)\approx\sqrt{n+1}\left[1.247262\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-5.89033\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ A graph comparing the two sides of this equation is shown in figure 
+\begin_inset LatexCommand \ref{cap:Asymptotic totient}
+
 \end_inset 
 
 .
- Thus, each non-trivial zero contributes a more or less similar amount to
- the sum, and the techniques used in the previous section to estimate the
- contributions of the non-trivial zeros cannot be applied here.
 \layout Standard
 
 
@@ -4641,43 +4710,10 @@ collapsed false
 
 \layout Caption
 
-Graph of 
-\begin_inset Formula $d_{n}^{\varphi}$
-\end_inset 
 
-
-\layout Standard
-
-
-\begin_inset Graphics
-	filename dn-totient-basic.png
-	width 100text%
+\begin_inset LatexCommand \label{cap:Asymptotic totient}
 
 \end_inset 
-
-
-\layout Standard
-
-A graph of 
-\begin_inset Formula $d_{n}^{\varphi}$
-\end_inset 
-
- for 
-\begin_inset Formula $3\le n\le100$
-\end_inset 
-
- shows rapidly increasing behavior.
-\end_inset 
-
-
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed false
-
-\layout Caption
 
 Asymptotic behavior of 
 \begin_inset Formula $d_{n}^{\varphi}$
@@ -4696,62 +4732,25 @@ Asymptotic behavior of
 
 \layout Standard
 
-This graphic shows 
-\begin_inset Formula $-d_{n}^{\varphi}/n^{2}\log n$
-\end_inset 
-
- for 
-\begin_inset Formula $100\le n\le44000$
-\end_inset 
-
-, suggesting a form for the asymptotic behavior of 
+This graphic shows the asymptotic behaviour of 
 \begin_inset Formula $d_{n}^{\varphi}$
 \end_inset 
 
-.
- Particularly notable is the lack of even a hint of oscillation, as compared
- to 
-\begin_inset Formula $d_{n}^{\mu}$
-\end_inset 
-
-, for which the oscillations have become quite violent for 
-\begin_inset Formula $n$
-\end_inset 
-
- in this range.
- This figure has a roughly logarithmic shape, suggesting that 
+ after the rleading residues are subtracted.
+ The red line shows
 \begin_inset Formula \[
-d_{n}^{\varphi}=A\,\left(1+B\log n\right)n^{2}\log n+\mathcal{O}\left(n^{2}\log^{3}n\right)\]
+d_{n}^{\varphi}-\mbox{Res}\left(s=2\right)-\mbox{Res}\left(s=0\right)-\mbox{Res}\left(s=-2\right)\]
 
 \end_inset 
 
- for some constants 
-\begin_inset Formula $A$
+ The green line shows the contribution of the first non-trivial zero, that
+ is, the green line shows 
+\begin_inset Formula \[
+\sqrt{n+1}\left[1.247262\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-5.89033\right)\right]\]
+
 \end_inset 
 
-, 
-\begin_inset Formula $B$
-\end_inset 
-
-.
- Numerically, it seems that 
-\begin_inset Formula $A\approx0.31674$
-\end_inset 
-
-, 
-\begin_inset Formula $B\approx-6.6\times10^{-4}$
-\end_inset 
-
-, although this is a very crude fit.
- A semi-log graph hints that in fact 
-\begin_inset Formula $B=0$
-\end_inset 
-
-, but this is only the vaguest hint for this order of 
-\begin_inset Formula $n$
-\end_inset 
-
-.
+ As may be seen, the match is excellent.
 \end_inset 
 
 
@@ -4761,10 +4760,10 @@ Liouville series
 \layout Standard
 
 Let 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 d_{n}^{\lambda}=\sum_{k=2}^{n}(-1)^{k}\left(\begin{array}{c}
 n\\
-k\end{array}\right)\,\frac{\zeta(2k)}{\zeta(k)}\]
+k\end{array}\right)\,\frac{\zeta(2k)}{\zeta(k)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4888,8 +4887,8 @@ The full behaviour of the
 \end_inset 
 
  should be given by
-\begin_inset Formula \[
-d_{n}^{\lambda}=-\frac{\sqrt{\pi}}{\zeta\left(\frac{1}{2}\right)}\;\frac{\Gamma\left(n+1\right)}{\Gamma\left(n+\frac{1}{2}\right)}-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{1}{\zeta^{\prime}(\rho)}\]
+\begin_inset Formula \begin{equation}
+d_{n}^{\lambda}=-\frac{\sqrt{\pi}}{\zeta\left(\frac{1}{2}\right)}\;\frac{\Gamma\left(n+1\right)}{\Gamma\left(n+\frac{1}{2}\right)}-\sum_{\rho}\frac{\Gamma(n+1)\Gamma(-\rho)}{\Gamma(n-\rho+1)}\,\frac{\zeta(2\rho)}{\zeta^{\prime}(\rho)}\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -4912,8 +4911,8 @@ d_{n}^{\lambda}=\mbox{Res}\left(s=0\right)+\mbox{Res}\left(s=\frac{1}{2}\right)-
 \layout Standard
 
 
-\begin_inset Formula \[
-d_{n}^{\lambda}\approx\mbox{Res}\left(s=0\right)+\mbox{Res}\left(s=\frac{1}{2}\right)+\sqrt{n+1}\left[1.98342\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.3488\right)\right]\]
+\begin_inset Formula \begin{equation}
+d_{n}^{\lambda}\approx\mbox{Res}\left(s=0\right)+\mbox{Res}\left(s=\frac{1}{2}\right)+\sqrt{n+1}\left[1.98342\times10^{-10}\cos\left(14.1347\log\left(n+1\right)-3.3488\right)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
