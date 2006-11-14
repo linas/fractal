@@ -32,17 +32,22 @@ Notes Relating to Newton Series for the Riemann Zeta Function
 Linas Vepstas
 \layout Date
 
-November 12, 2006
+November 14, 2006
 \layout Abstract
 
 This paper consists of the extended working notes and observations made
- during the development of a joint paper with Philippe Flajolet on the Riemann
- zeta function.
+ during the development of a joint paper
+\begin_inset LatexCommand \cite{Fla06}
+
+\end_inset 
+
+ with Philippe Flajolet on the Riemann zeta function.
  Most of the core ideas of that paper, of which a majority are due to Flajolet,
- are reproduced here; however, the choice of wording, and all errors and
- omissions are my own fault.
- This set of notes contains considerably more content, and is an exploration
- of tangents, dead-ends, and ideas shooting off in uncertain directions.
+ are reproduced here; however, the choice of wording used here, and all
+ errors and omissions are my own fault.
+ This set of notes contains considerably more content, although is looser
+ and sloppier, and is an exploration of tangents, dead-ends, and ideas shooting
+ off in uncertain directions.
  
 \layout Abstract
 
@@ -1297,7 +1302,7 @@ This figure shows the real and imaginary parts of
  The function appears to be oscillatory.
  Note that the series expansion converges only with great difficulty as
  one goes further out on the imaginary axis.
- XXX top be replaced by phase plot of b(s).
+ XXX top be replaced by phase plot of b(s), which should look similar.
 \end_inset 
 
 
@@ -1365,7 +1370,7 @@ This figure shows the phase of
  line.
 \layout Standard
 
-XXX to be replaced by plot of b(s)
+XXX to be replaced by plot of b(s), which should look similar.
 \end_inset 
 
 
@@ -3936,7 +3941,7 @@ k\end{array}\right)\,\frac{1}{\zeta(k)}\label{eq:}\end{equation}
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -4015,7 +4020,7 @@ Graphed with data from fractal/misc/bignum/dn-mobius.gplot and data files
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -4078,7 +4083,7 @@ The above figure shows a graph of
 
 
 \begin_inset Note
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -4248,8 +4253,8 @@ Since one has
  never becomes arbitrarily small.
  Since the number of non-trivial zeros of the Riemann zeta does not increase
  exponentially, the sum can be estimated, and one concludes that 
-\begin_inset Formula \[
-\beta_{n}=\mathcal{O}\left(e^{-Kn}\right)\]
+\begin_inset Formula \begin{equation}
+\beta_{n}=\mathcal{O}\left(e^{-Kn}\right)\label{eq:beta-n estimate}\end{equation}
 
 \end_inset 
 
@@ -4520,6 +4525,44 @@ This conclusion generalizes almost trivially to the Generalized Riemann
 
  is never small), then the argument follows through for the Generalized
  Riemann Hypothesis as well.
+\layout Standard
+
+The above casual derivation can be inverted to show that the Riemann Hypothesis
+ implies that the derivatives are bounded away from zero.
+ It may be rigirously shown
+\begin_inset LatexCommand \cite{Fla06}
+
+\end_inset 
+
+ that the RH is equivalent to having 
+\begin_inset Formula $d_{n}=\mathcal{O}\left(n^{1/2+\epsilon}\right)$
+\end_inset 
+
+ for all 
+\begin_inset Formula $\epsilon>0$
+\end_inset 
+
+.
+ To reconcile this with the above sketch that 
+\begin_inset Formula $d_{n}=\mathcal{O}\left(\sqrt{n}\right)$
+\end_inset 
+
+, one must conclude that, for all but possibly a finite set of zeroes 
+\begin_inset Formula $\rho$
+\end_inset 
+
+, one must have 
+\begin_inset Formula \[
+\left|\zeta^{\prime}(\rho)\right|>\mathcal{O}\left(e^{-\tau\pi/2}\right)\]
+
+\end_inset 
+
+ as otherwise the estimates for equation 
+\begin_inset LatexCommand \ref{eq:beta-n estimate}
+
+\end_inset 
+
+ would fail.
 \layout Subsection
 
 Totient series
