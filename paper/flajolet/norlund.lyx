@@ -112,10 +112,10 @@ Here, the constants
  have several remarkable properties.
  Unlike the Stieltjes constants, they may be written as a finite sum over
  well-known constants:
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 b_{n}=n(1-\gamma-H_{n-1})-\frac{1}{2}+\sum_{k=2}^{n}(-)^{k}\left(\begin{array}{c}
 n\\
-k\end{array}\right)\zeta(k)\]
+k\end{array}\right)\zeta(k)\label{eq:}\end{equation}
 
 \end_inset 
 
@@ -3430,7 +3430,7 @@ To recast the equation
  Thus, one writes 
 \begin_inset Formula \begin{eqnarray}
 a_{n}(m,k) & = & -\frac{1}{2k\pi i}\sum_{p=1}^{k}\left[\exp\left(i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{f(z)}dz\right.\label{eq:saddle}\\
- &  & \left.+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{f}(z)}dz\right]\nonumber\end{eqnarray}
+ &  & \left.+\exp\left(-i\frac{2\pi pm}{k}\right)\int_{\sigma_{0}-i\infty}^{\sigma_{0}+i\infty}e^{\overline{f}(z)}dz\right]\nonumber \end{eqnarray}
 
 \end_inset 
 
@@ -3498,7 +3498,7 @@ and
 \begin_inset Formula \begin{eqnarray}
 f(z) & = & \frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+2-2\log z\right]\nonumber \\
  &  & +\log2\pi-2\log z-\frac{z^{2}}{2}\label{eq:}\\
- &  & +\frac{1}{6z\sqrt{n}}\left[10+z^{2}\right]+\frac{1}{2n}\left[1-\frac{z^{2}}{2}-\frac{z^{4}}{6}+\frac{73}{72z^{2}}\right]+\mathcal{O}\left(n^{-3/2}\right)\nonumber\end{eqnarray}
+ &  & +\frac{1}{6z\sqrt{n}}\left[10+z^{2}\right]+\frac{1}{2n}\left[1-\frac{z^{2}}{2}-\frac{z^{4}}{6}+\frac{73}{72z^{2}}\right]+\mathcal{O}\left(n^{-3/2}\right)\nonumber \end{eqnarray}
 
 \end_inset 
 
@@ -3539,7 +3539,7 @@ f(z) & = & \frac{1}{2}\log n-z\sqrt{n}\left[\log\frac{2\pi p}{k}+i\frac{\pi}{2}+
 \begin_inset Formula \begin{eqnarray}
 a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi}\right)^{1/4}\sum_{p=1}^{k}\left(\frac{p}{k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi pn}{k}}\right)\times\label{eq:an-p}\\
  &  & \qquad\qquad\cos\left(\sqrt{\frac{4\pi pn}{k}}-\frac{5\pi}{8}-\frac{2\pi pm}{k}\right)\nonumber \\
- &  & +\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}}\right)\nonumber\end{eqnarray}
+ &  & +\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi pn/k}}\right)\nonumber \end{eqnarray}
 
 \end_inset 
 
@@ -3553,8 +3553,9 @@ For large
 
  term contributes significantly, and so one may write
 \begin_inset Formula \begin{eqnarray}
-a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\cos\left(\sqrt{\frac{4\pi n}{k}}-\frac{5\pi}{8}-\frac{2\pi m}{k}\right)\label{eq:}\\
- &  & \qquad\quad+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi n/k}}\right)\nonumber\end{eqnarray}
+a_{n}(m,k) & = & \frac{1}{k}\left(\frac{2n}{\pi k}\right)^{1/4}\exp\left(-\sqrt{\frac{4\pi n}{k}}\right)\times\label{eq:}\\
+ &  & \qquad\cos\left(\sqrt{\frac{4\pi n}{k}}-\frac{5\pi}{8}-\frac{2\pi m}{k}\right)\nonumber \\
+ &  & +\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi n/k}}\right)\nonumber \end{eqnarray}
 
 \end_inset 
 
@@ -3572,8 +3573,9 @@ The consistency of these results, with respect to the previous derivation
 \end_inset 
 
  to obtain 
-\begin_inset Formula \begin{equation}
-b_{n}=a_{n}(1,1)=\left(\frac{2n}{\pi}\right)^{1/4}\exp\left(-\sqrt{4\pi n}\right)\cos\left(\sqrt{4\pi n}-\frac{5\pi}{8}\right)+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi n}}\right)\label{eq:}\end{equation}
+\begin_inset Formula \begin{eqnarray}
+b_{n} & = & a_{n}(1,1)=\left(\frac{2n}{\pi}\right)^{1/4}\exp\left(-\sqrt{4\pi n}\right)\cos\left(\sqrt{4\pi n}-\frac{5\pi}{8}\right)\label{eq:}\\
+ &  & \qquad+\mathcal{O}\left(n^{-1/4}e^{-2\sqrt{\pi n}}\right)\nonumber\end{eqnarray}
 
 \end_inset 
 
@@ -3623,8 +3625,9 @@ a_{n}(2,2)=b_{n}-a_{n}(1,2)=\sum_{p=2}^{n}(-1)^{p}\binom{n}{p}\left(1-2^{-p}\rig
 
  which appears often in the literature [Coffey].
  It has the asymptotic expansion 
-\begin_inset Formula \begin{equation}
-a_{n}(2,2)=\frac{1}{2}\sum_{p=1}^{2}\left(\frac{np}{\pi}\right)^{1/4}\exp\left(-\sqrt{2\pi np}\right)\cos\left(\sqrt{2\pi np}-\frac{5\pi}{8}\right)+\mathcal{O}\left(n^{-1/4}e^{-\sqrt{2\pi n}}\right)\label{eq:}\end{equation}
+\begin_inset Formula \begin{eqnarray}
+a_{n}(2,2) & = & \frac{1}{2}\sum_{p=1}^{2}\left(\frac{np}{\pi}\right)^{1/4}\exp\left(-\sqrt{2\pi np}\right)\cos\left(\sqrt{2\pi np}-\frac{5\pi}{8}\right)\label{eq:}\\
+ &  & +\mathcal{O}\left(n^{-1/4}e^{-\sqrt{2\pi n}}\right)\nonumber\end{eqnarray}
 
 \end_inset 
 
@@ -3690,8 +3693,7 @@ represents the non-exponential part, one may state a few results.
  Thus, for the principal character, one obtains 
 \begin_inset Formula \begin{eqnarray}
 \sum_{m=1}^{k}\chi_{1}(m)B_{n}(m,k) & = & -\varphi(k)\left[\frac{1}{2}+\frac{n}{k}\left(\ln k+1-H_{n-1}\right)\right]\label{eq:}\\
- &  &
-\qquad+\frac{1}{k}\sum_{m=1}^{k}\chi_{1}(m)\left[m-n\psi\left(\frac{m}{k}\right)\right]\nonumber\end{eqnarray}
+ &  & \qquad+\frac{1}{k}\sum_{m=1}^{k}\chi_{1}(m)\left[m-n\psi\left(\frac{m}{k}\right)\right]\nonumber \end{eqnarray}
 
 \end_inset 
 
@@ -4239,9 +4241,9 @@ n, that
  is also slowly oscillatory.
  The remaining terms take the form 
 \begin_inset Formula \begin{eqnarray*}
-\beta_{n} & =-\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right] & \sqrt{2\pi}\sum_{\tau\gtrsim n}\sqrt{\frac{\tau+in}{\tau n}}\times\\
- &  & \exp\left[\frac{n+1}{2}\log\left(\frac{n^{2}}{n^{2}+\tau^{2}}\right)+\frac{\sigma}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)-\tau\arctan\frac{n}{\tau}\right]\times\\
- &  & \exp i\left[\left(n+1\right)\arctan\frac{\tau}{n}+\frac{\tau}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)\right]\times\frac{1}{\zeta^{\prime}(\rho)}\end{eqnarray*}
+\beta_{n} & = & -\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\sqrt{2\pi}\sum_{\tau\gtrsim n}\sqrt{\frac{\tau+in}{\tau n}}\times\\
+ &  & \quad\exp\left[\frac{n+1}{2}\log\left(\frac{n^{2}}{n^{2}+\tau^{2}}\right)+\frac{\sigma}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)-\tau\arctan\frac{n}{\tau}\right]\times\\
+ &  & \quad\exp i\left[\left(n+1\right)\arctan\frac{\tau}{n}+\frac{\tau}{2}\log\left(1+\frac{n^{2}}{\tau^{2}}\right)\right]\times\frac{1}{\zeta^{\prime}(\rho)}\end{eqnarray*}
 
 \end_inset 
 
