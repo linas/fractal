@@ -7,6 +7,8 @@ all:
 	/usr/bin/latex plouffe-ram.latex
 	/usr/bin/bibtex plouffe-ram.aux
 
-
 dist:
 	tar -zcvf plouffe-ram.tar.gz plouffe-ram.latex plouffe-ram.aux plouffe-ram.bbl *.eps
+
+clean:
+	rm -f *.log *.blg *.dvi
