@@ -130,11 +130,12 @@ Plouffe also notes similar relations for the other odd integers; for example,
 \end_inset 
 
  The general form for this type of expression may be shown to be 
-\begin_inset Formula \begin{eqnarray*}
-\left[1+(-4)^{m}-2^{4m+1}\right]\zeta(4m+1) & = & 2\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}+1\right)}\\
- &  & +2\left[2^{4m+1}-(-4)^{m}\right]\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}-1\right)}\\
- &  & +(2\pi)^{4m+1}\sum_{j=0}^{m}(-4)^{m+j}\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}\\
- &  & +\frac{1}{2}(2\pi)^{4m+1}\;\sum_{j=0}^{2m+1}(-4)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
+\begin_inset Formula \begin{gather*}
+\left[1+(-4)^{m}-2^{4m+1}\right]\zeta(4m+1)\\
+\quad=2\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}+1\right)}\\
+\qquad+2\left[2^{4m+1}-(-4)^{m}\right]\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}-1\right)}\\
+\quad\qquad+(2\pi)^{4m+1}\sum_{j=0}^{m}(-4)^{m+j}\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}\\
+\qquad\qquad+\frac{1}{2}(2\pi)^{4m+1}\;\sum_{j=0}^{2m+1}(-4)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\end{gather*}
 
 \end_inset 
 
@@ -169,13 +170,32 @@ P_{k}(\tau)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi in\tau}-1\right)}\]
 \end_inset 
 
  as 
-\begin_inset Formula \[
-xxx\]
+\begin_inset Formula \begin{multline*}
+\alpha^{-n}\left\{ \frac{1}{2}\zeta\left(2n+1\right)+\sum_{k=1}^{\infty}\frac{k^{2n-1}}{e^{2\alpha k}-1}\right\} \\
+\qquad=(-\beta)^{-n}\left\{ \frac{1}{2}\zeta\left(2n+1\right)+\sum_{k=1}^{\infty}\frac{k^{2n-1}}{e^{2\beta k}-1}\right\} \\
+\qquad\qquad-2^{2n}\sum_{k=0}^{n+1}(-1)^{k}\frac{B_{2k}}{(2k)!}\frac{B_{2n+2-2k}}{(2n+2-2k)!}\alpha^{n+1-k}\beta^{k}\end{multline*}
 
 \end_inset 
 
- This formula is perhaps one of the most studied of all the notebooks; it
- has been independently discovered perhaps a half-dozen times, and proven
+ where 
+\begin_inset Formula $\alpha>0$
+\end_inset 
+
+, 
+\begin_inset Formula $\beta>0$
+\end_inset 
+
+ with 
+\begin_inset Formula $\alpha\beta=\pi^{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $n$
+\end_inset 
+
+ any positive integer.
+ Berndt implies that this formula is the most studied of all the notebooks;
+ it has been independently discovered perhaps a half-dozen times, and proven
  twice as often.
  It has been generalized to 
 \begin_inset Formula $L$
@@ -185,21 +205,27 @@ xxx\]
 \begin_inset Formula $k$
 \end_inset 
 
-; Berndt provides a list
+; Berndt provides a long list
 \begin_inset LatexCommand \cite{Ber-II}
 
 \end_inset 
 
  of the various proofs and generalizations made.
+ 
 \layout Standard
 
-Working from this relationship, other interesting relationships result by
- considering, for example, 
+Much of this paper is devoted to (yet another! independently discovered)
+ proof of this relation, followed by a series of lemmas that provide the
+ connection to Plouffe's results.
+ In searching for curious and interesting special cases of this relation,
+ one senses that only the tip of the iceberg has been seen.
+ Unexplored possibilities include, for example, considering 
 \begin_inset Formula $\tau\in\mathbb{Q}[i]$
 \end_inset 
 
 , the field of Gaussian rationals, or from considering Diophantine roots
  of quadratics.
+ 
 \layout Standard
 
 The rest of this paper is roughly laid out as follows: The second section
@@ -1964,7 +1990,7 @@ graphic created with src/fractal/generate/plouffe.C 600 600 2000 0 0 2 -1
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
