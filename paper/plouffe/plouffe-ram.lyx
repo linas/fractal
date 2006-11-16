@@ -131,11 +131,11 @@ Plouffe also notes similar relations for the other odd integers; for example,
 
  The general form for this type of expression may be shown to be 
 \begin_inset Formula \begin{gather*}
-\left[1+(-4)^{m}-2^{4m+1}\right]\zeta(4m+1)\\
-\quad=2\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}+1\right)}\\
+\left[1+(-4)^{m}-2^{4m+1}\right]\zeta(4m+1)\qquad\qquad\\
+\quad=2\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}+1\right)}\qquad\\
 \qquad+2\left[2^{4m+1}-(-4)^{m}\right]\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}-1\right)}\\
-\quad\qquad+(2\pi)^{4m+1}\sum_{j=0}^{m}(-4)^{m+j}\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}\\
-\qquad\qquad+\frac{1}{2}(2\pi)^{4m+1}\;\sum_{j=0}^{2m+1}(-4)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\end{gather*}
+\qquad\qquad+(2\pi)^{4m+1}\sum_{j=0}^{m}(-4)^{m+j}\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}\\
+\qquad\qquad\qquad+\frac{1}{2}(2\pi)^{4m+1}\;\sum_{j=0}^{2m+1}(-4)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\end{gather*}
 
 \end_inset 
 
@@ -245,7 +245,7 @@ The rest of this paper is roughly laid out as follows: The second section
  of lemmas, many of which explain Plouffe's discoveries.
  The seventh section give a pair of relationships on the Bernoulli numbers
  that arise naturally in this context.
- The eight'th section explores the modular nature of the relations on 
+ The eighth section explores the modular nature of the relations on 
 \begin_inset Formula $P_{k}(\tau)$
 \end_inset 
 
@@ -278,7 +278,7 @@ A large number of similar sums have been explored before; this section reviews
 
 \end_inset 
 
- is proved by Brendt
+ is proved by Berndt
 \begin_inset LatexCommand \cite{Ber77}
 
 \end_inset 
@@ -295,7 +295,7 @@ A large number of similar sums have been explored before; this section reviews
 \end_inset 
 
 , based on the theory of Jacobian elliptic functions.
- A similar result is stated by Apostol in the form of an exercize
+ A similar result is stated by Apostol in the form of an exercise
 \begin_inset LatexCommand \cite[see exercise 15 at end of chapter 1.]{Apo90}
 
 \end_inset 
@@ -424,35 +424,31 @@ n\end{array}\right)\frac{B_{2-n}(\alpha)B_{n}(\beta)}{(iz)^{n}}\]
 \end_inset 
 
 : 
-\begin_inset Formula \begin{eqnarray*}
-\sum_{n=1}^{\infty}(-1)^{n+1}\frac{\mbox{sech}\left[(2n-1)\pi\sqrt{3}/2\right]}{(2n-1)^{6k+1}} & = & \frac{1}{2}(-1)^{k+1}\pi^{6k+1}\times\\
- &  & \quad\sum_{m=0}^{3k}\frac{E_{2m+1}}{(2m+1)!}\,\frac{B_{6k-2m}}{(6k-2m)!}\cos\left[(2m+1)\frac{\pi}{3}\right]\end{eqnarray*}
+\begin_inset Formula \begin{multline*}
+\sum_{n=1}^{\infty}(-1)^{n+1}\frac{\mbox{sech}\left[(2n-1)\pi\sqrt{3}/2\right]}{(2n-1)^{6k+1}}=\\
+\qquad\frac{1}{2}(-1)^{k+1}\pi^{6k+1}\sum_{m=0}^{3k}\frac{E_{2m+1}}{(2m+1)!}\,\frac{B_{6k-2m}}{(6k-2m)!}\cos\left[(2m+1)\frac{\pi}{3}\right]\end{multline*}
 
 \end_inset 
 
- 
+
 \layout Standard
 
-A sum of the above expressions for 
+Perhaps the results that are closest to those presented in this paper are
+ those noted by Borwein, 
+\emph on 
+et al
+\emph default 
+ 
+\begin_inset LatexCommand \cite[Section 5]{Bor00}
+
+\end_inset 
+
+, and in particular, given a very similar result involving 
 \begin_inset Formula $\zeta(4m-1)$
 \end_inset 
 
  and 
 \begin_inset Formula $\zeta(4m+1)$
-\end_inset 
-
- is noted by Borwein, 
-\emph on 
-et al
-\emph default 
-
-\begin_inset LatexCommand \cite[formula 60]{Bor00}
-
-\end_inset 
-
-, who attribute it to Ramanujan
-\begin_inset LatexCommand \cite[Ch. 14, entry 21(i), page 359]{Ber-II}
-
 \end_inset 
 
 .
@@ -1943,8 +1939,8 @@ This graphic shows the phase
 
  for much of the disk.
  In particular, this indicates that there are no zeros at all in the interior
- of the disk, as a zero would be surounded by a region where the phase wraps
- around by 
+ of the disk, as a zero would be surrounded by a region where the phase
+ wraps around by 
 \begin_inset Formula $2\pi$
 \end_inset 
 
@@ -1990,7 +1986,7 @@ graphic created with src/fractal/generate/plouffe.C 600 600 2000 0 0 2 -1
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -2055,7 +2051,7 @@ graphic created with src/fractal/generate/plouffe.C 600 600 6000 0 0 2 -5
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -2089,7 +2085,7 @@ g_{3}(q)=\frac{8\pi^{6}}{27}\left[1-504\sum_{n=1}^{\infty}\frac{n^{5}q^{n}}{1-q^
 \end_inset 
 
  which is a modular form of weight 6.
- The colors are choosen such that black represents areas that are negative,
+ The colors are chosen such that black represents areas that are negative,
  blue and green represent areas with smaller values, and red those areas
  with the largest values.
 \end_inset 
@@ -2170,7 +2166,7 @@ In this form, the relation to modular forms becomes the most immediate.
 \end_inset 
 
 .
- This should be compared to the Eisenstien series 
+ This should be compared to the Eisenstein series 
 \begin_inset LatexCommand \cite[see section 3.10]{Apo90}
 
 \end_inset 
