@@ -1,0 +1,22 @@
+
+
+set term png small
+set out 'sho.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# set xrange [-1:1]
+# set yrange [-1:1]
+
+set xrange [-4:4]
+
+set title "is"
+set xlabel "s"
+set ylabel "b)"
+
+plot "sho.dat" using 1:2 title"psi 1",\
+     "sho.dat" using 1:3 title"psi 2"
+
+
