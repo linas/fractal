@@ -25,9 +25,10 @@ void psi_1 (cpx_t *psi, cpx_t *lambda, mpf_t x, int prec)
 	cpx_set_ui (&b, 1, 0);
 	mpf_div_ui (b.re, b.re, 2);
 
-	/* a= 1/2-lambda */
+	/* a= 1/4-lambda/2 */
 	cpx_set (&a,&b);
 	cpx_sub (&a, &a, lambda);
+	cpx_div_ui (&a, &a, 2);
 
 	/* z = y^2 */
 	mpf_set (z.re, x);
@@ -54,17 +55,14 @@ void psi_2 (cpx_t *psi, cpx_t *lambda, mpf_t x, int prec)
 	cpx_init (&b);
 	cpx_init (&z);
 
-	/* b=1/2 */
-	cpx_set_ui (&b, 1, 0);
-	mpf_div_ui (b.re, b.re, 2);
-
-	/* a= 1/2-lambda */
-	cpx_set (&a,&b);
-	cpx_sub (&a, &a, lambda);
-
 	/* b=3/2 */
 	cpx_set_ui (&b, 3, 0);
 	mpf_div_ui (b.re, b.re, 2);
+
+	/* a= (3/2-lambda)/2 */
+	cpx_set (&a,&b);
+	cpx_sub (&a, &a, lambda);
+	cpx_div_ui (&a, &a, 2);
 
 	/* z = y^2 */
 	mpf_set (z.re, x);

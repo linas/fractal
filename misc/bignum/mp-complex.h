@@ -135,6 +135,12 @@ static inline void cpx_div_mpf (cpx_t *ratio, cpx_t *a, mpf_t b)
 	mpf_div (ratio->im, a->im, b);
 }
 
+static inline void cpx_div_ui (cpx_t *ratio, cpx_t *a, unsigned int b)
+{
+	mpf_div_ui (ratio->re, a->re, b);
+	mpf_div_ui (ratio->im, a->im, b);
+}
+
 /**
  * cpx_mod_sq -- modulus squared of z
  */
