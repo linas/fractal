@@ -54,7 +54,10 @@ void backshift (double *re, double *im,
 	}
 
 	/* Bernoulli_1(x) */
-	hre = x-0.5;
+	// hre = x - 0.5;
+	// hre = x*x - x + 1.0/6.0;
+	hre = x*x*x - 1.5*x*x + 0.5*x;
+	// hre = x*x*x*x - 2.0*x*x*x + x*x - 1.0/30.0;
 
 	*re = hre;
 	*im = him;
