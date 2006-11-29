@@ -5,10 +5,6 @@
  * Gnu Multiple-precision library.
  *
  * Actually, high-precision a_s on the complex plane
- * XXXX actually, this is not the original source, use the 
- * other file mp_zeta.c  for teh more curently maintained 
- * version of these routines.  these are cut-n-pasted from 
- * there,for convenience
  * 
  * Linas Vepstas July 2005
  */
