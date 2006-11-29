@@ -7,22 +7,24 @@ EXES= bound bs bsubn cache-fill cont_frac db-merge db-prt \
       dsubn hurwitz minima mp_zeta_test picturez \
       sho stieltjes trunc zero-cross
 
-all:  $(EXES)
+MPLIB=libzmp.a
+
+all:  $(MPLIB) $(EXES)
 
 MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o \
 	mp-hyper.o mp-misc.o mp-trig.o mp_zeta.o
 
 bound:	bound.o
-cache-fill:	cache-fill.o $(MPOBJS)
-db-merge:	db-merge.o $(MPOBJS)
-db-prt:	db-prt.o $(MPOBJS)
+cache-fill:	cache-fill.o $(MPLIB)
+db-merge:	db-merge.o $(MPLIB)
+db-prt:	db-prt.o $(MPLIB)
 cont_frac:	cont_frac.o
-dsubn:	dsubn.o $(MPOBJS)
-hurwitz:	hurwitz.o $(MPOBJS)
-mp_zeta_test:	mp_zeta_test.o $(MPOBJS)
-picturez:	picturez.o $(MPOBJS)
-sho:	sho.o $(MPOBJS)
-stieltjes:	stieltjes.o $(MPOBJS)
+dsubn:	dsubn.o $(MPLIB)
+hurwitz:	hurwitz.o $(MPLIB)
+mp_zeta_test:	mp_zeta_test.o $(MPLIB)
+picturez:	picturez.o $(MPLIB)
+sho:	sho.o $(MPLIB)
+stieltjes:	stieltjes.o $(MPLIB)
 trunc:	trunc.o
 zero-cross:	zero-cross.o
 
@@ -47,14 +49,17 @@ mp_zeta_test.o: mp_zeta.h mp-complex.h mp-consts.h mp-misc.h mp-trig.h
 sho.o: mp-complex.h mp-hyper.h mp-trig.h
 stieltjes.o: mp_zeta.h mp-binomial.h mp-misc.h
 
-bs:	bs.o mp_zeta.o $(MPOBJS)
+bs:	bs.o mp_zeta.o $(MPLIB)
 	$(CC) -o bs $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
-bsubn:	bsubn.o mp_zeta.o $(MPOBJS)
+bsubn:	bsubn.o mp_zeta.o $(MPLIB)
 	$(CC) -o bsubn $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
 minima: minima.o
 	$(CC) -o minima $< -lgsl -lcblas -lm -lc
+
+$(MPLIB): $(MPOBJS)
+	ar cru $(MPLIB) $^
 
 clean:
 	rm -f core tmp junk glop a.out *.o
