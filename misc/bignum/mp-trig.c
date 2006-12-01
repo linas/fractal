@@ -297,6 +297,31 @@ void fp_cosine (mpf_t co, mpf_t z, unsigned int prec)
 
 /* ======================================================================= */
 /**
+ * cpx_exp -  complex-valued exp, built out of the real-valued funcs.
+ */
+
+void cpx_exp (cpx_t *ex, cpx_t *z, unsigned int prec)
+{
+	mpf_t mag, si, co;
+
+	mpf_init (mag);
+	mpf_init (si);
+	mpf_init (co);
+
+	fp_exp (mag, z->re, prec);
+	fp_cosine (co, z->im, prec);
+	fp_sine (si, z->im, prec);
+
+	mpf_mul (ex->re, mag, co);
+	mpf_mul (ex->im, mag, si);
+	
+	mpf_clear (mag);
+	mpf_clear (si);
+	mpf_clear (co);
+}
+
+/* ======================================================================= */
+/**
  * fp_log_m1 -  Floating point logarithm
  * Implemented using a brute-force, very simple algo, with 
  * no attempts at optimization. Also, does not assume any 
