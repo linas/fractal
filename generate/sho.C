@@ -122,12 +122,12 @@ static double psi (double re_q, double im_q, int itermax, double param)
 		  
 	double mag = 1.0 - sqrt (re_q*re_q + im_q*im_q);
 
-	if (mag <= 0.0) return 0.0;
+	if (mag <= 1.0e-2) return 0.0;
 
 	double re_z = re_q / mag;
 	double im_z = im_q / mag;
 
-	printf ("duude compute %g  %g \n", re_z, im_z);
+	// printf ("duude compute %g  %g \n", re_z, im_z);
 	psi_one (re_a, im_a, re_z, im_z, prec, nterms);
 
 	double frea = mpf_get_d (re_a);
