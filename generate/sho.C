@@ -98,7 +98,7 @@ static void psi_init (void)
 	prec = 300;
    nterms = 300;
 
-	prec = 100;
+	prec = 50;
    nterms = 100;
 
 	/* compute number of binary bits this corresponds to. */
@@ -115,12 +115,19 @@ static void psi_init (void)
 	mpf_init (im_a);
 }
 	
-static double psi (double re_q, double im_q)
+static double psi (double re_q, double im_q, int itermax, double param)
 {
+	static int init = 0;
+	if (!init) {psi_init(); init=1; }
+		  
 	double mag = 1.0 - sqrt (re_q*re_q + im_q*im_q);
+
+	if (mag <= 0.0) return 0.0;
+
 	double re_z = re_q / mag;
 	double im_z = im_q / mag;
 
+	printf ("duude compute %g  %g \n", re_z, im_z);
 	psi_one (re_a, im_a, re_z, im_z, prec, nterms);
 
 	double frea = mpf_get_d (re_a);
@@ -132,53 +139,6 @@ static double psi (double re_q, double im_q)
 	return phase;
 }
 
-/*-------------------------------------------------------------------*/
-/* This routine fills in the interior of the the convergent area of the 
- * Euler totient in a simple way 
- */
-
-void 
-MakeHisto (
-   float  	*glob,
-   int 		sizex,
-   int 		sizey,
-   double	re_center,
-   double	im_center,
-   double	width,
-   double	height,
-   int		itermax,
-   double 	renorm)
-{
-   int		i,j, globlen;
-   double	re_start, im_start, delta;
-   double	re_position, im_position;
-   
-   delta = width / (double) sizex;
-   re_start = re_center - width / 2.0;
-   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
-   
-   globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.0;
-
-	prec = itermax;
-	psi_init();
-
-   im_position = im_start;
-   for (i=0; i<sizey; i++) 
-	{
-      // if (i%10==0) printf(" start row %d\n", i);
-      printf(" start row %d\n", i);
-      re_position = re_start;
-      for (j=0; j<sizex; j++) 
-		{
-
-			double phi = psi (re_position, im_position);
-         glob [i*sizex +j] = phi;
-
-         re_position += delta;
-      }
-      im_position -= delta;  /*top to bottom, not bottom to top */
-   }
-}
+DECL_MAKE_HEIGHT(psi);
 
 /* --------------------------- END OF LIFE ------------------------- */
