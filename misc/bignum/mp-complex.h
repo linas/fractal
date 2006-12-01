@@ -40,6 +40,12 @@ static inline void cpx_set_ui (cpx_t *z, unsigned int x, unsigned int y)
 	mpf_set_ui (z->im, y);
 }
 
+static inline void cpx_set_d (cpx_t *z, double x, double y)
+{
+	mpf_set_d (z->re, x);
+	mpf_set_d (z->im, y);
+}
+
 static inline void cpx_add (cpx_t *sum, cpx_t *a, cpx_t *b)
 {
 	mpf_add (sum->re, a->re, b->re);
