@@ -39,73 +39,32 @@ static inline unsigned int num_digits (mpz_t num, mpz_t tmpa, mpz_t tmpb)
 /* compute entire_sub_s for complex-valued s
  */
 
-void entire_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int prec, int nterms)
+void psi_one (mpf_t re_psi, mpf_t im_psi, 
+              double re_y, double im_y, unsigned int prec, int nterms)
 {
-	int k;
-	mpf_t rebin, imbin, term, racc, iacc, rzeta, izeta;
+	double reysq, imysq, tmp;
 
-	mpf_init (term);
-	mpf_init (racc);
-	mpf_init (iacc);
-	mpf_init (rzeta);
-	mpf_init (izeta);
-	mpf_init (rebin);
-	mpf_init (imbin);
+	double relam = 1.5;
+	double imlam = 0.0;
 	
-	mpf_set_ui (re_b, 0);
-	mpf_set_ui (im_b, 0);
+	/* first, take the square of y */
+	reysq = re_y*re_y - im_y*im_y;
+	imysq = 2.0*re_y*im_y;
+	
+	mpf_set_ui (re_psi, 0);
+	mpf_set_ui (im_psi, 0);
 
-	int n = 650;  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	n = nterms;
-	int downer  = 0;
-	for (k=2; k<= n; k++)
-	{
-		/* Commpute the binomial */
-		c_binomial_d (rebin, imbin, re_s, im_s, k);
+	cpx_t em, a, b;
+	cpx_init (&em);
+	cpx_init (&a);
+	cpx_init (&b);
 
-// printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
+	cpx_confluent (&em, 
+						 
+	cpx_clear (&em);
+	cpx_clear (&a);
+	cpx_clear (&b);
 
-		/* compute zeta (k) */
-		fp_zeta (term, k, prec);
-		mpf_sub_ui (term, term, 1);
-
-		mpf_mul (rzeta, term, rebin);
-		mpf_mul (izeta, term, imbin);
-
-		if (k%2)
-		{ 
-			mpf_sub (racc, re_b, rzeta);
-			mpf_sub (iacc, im_b, izeta);
-		}
-		else 
-		{
-			mpf_add (racc, re_b, rzeta);
-			mpf_add (iacc, im_b, izeta);
-		}
-		
-		mpf_set (re_b, racc);
-		mpf_set (im_b, iacc);
-#if 1
-		double rt = mpf_get_d (rzeta);
-		double it = mpf_get_d (izeta);
-		double ra = mpf_get_d (re_b);
-		double ia = mpf_get_d (im_b);
-		if (rt*rt +it*it < 1.0e-15 * (ra*ra+ia*ia)) 
-		{
-			if (downer > 5) break;
-			downer ++;
-		}
-#endif
-
-	}
-
-	mpf_clear (term);
-	mpf_clear (racc);
-	mpf_clear (iacc);
-	mpf_clear (rzeta);
-	mpf_clear (izeta);
-	mpf_clear (rebin);
-	mpf_clear (imbin);
 }
 
 /* ============================================================================= */
@@ -114,7 +73,7 @@ static mpf_t re_a, im_a;
 static int prec;
 static int nterms;
 
-static void a_s_init (void)
+static void psi_init (void)
 {
 	/* the decimal precison (number of decimal places) */
 	prec = 300;
@@ -137,7 +96,7 @@ static void a_s_init (void)
 	mpf_init (im_a);
 }
 	
-static double a_s (double re_q, double im_q)
+static double psi (double re_q, double im_q)
 {
 	double deno = re_q - 1.0;
 	deno = deno*deno + im_q*im_q;
@@ -148,9 +107,7 @@ static double a_s (double re_q, double im_q)
 	// re_s = re_q;
 	// im_s = im_q;
 
-	// a_sub_s (re_a, im_a, re_s, im_s, prec);
-	// b_sub_s (re_a, im_a, re_s, im_s, prec, nterms);
-	entire_sub_s (re_a, im_a, re_s, im_s, prec, nterms);
+	psi_one (re_a, im_a, re_s, im_s, prec, nterms);
 
 	double frea = mpf_get_d (re_a);
 	double fima = mpf_get_d (im_a);
@@ -190,7 +147,7 @@ MakeHisto (
    for (i=0; i<globlen; i++) glob [i] = 0.0;
 
 	prec = itermax;
-	a_s_init();
+	psi_init();
 
    im_position = im_start;
    for (i=0; i<sizey; i++) 
@@ -201,7 +158,7 @@ MakeHisto (
       for (j=0; j<sizex; j++) 
 		{
 
-			double phi = a_s (re_position, im_position);
+			double phi = psi (re_position, im_position);
          glob [i*sizex +j] = phi;
 
          re_position += delta;
