@@ -107,9 +107,13 @@ H=\frac{\mathcal{H}}{\hbar\omega}=\frac{1}{2}\left(-\frac{d^{2}}{dy^{2}}+y^{2}\r
 
  The remainder of this paper will be devoted to exploring the continuous-spectru
 m solutions of this normalized Hamiltonian, that is, discovering and describing
- the solutions of 
-\begin_inset Formula \[
-H\psi=\lambda\psi\]
+ the solutions 
+\begin_inset Formula $\psi(y)$
+\end_inset 
+
+ of 
+\begin_inset Formula \begin{equation}
+H\psi=\lambda\psi\label{eq:general sho hamiltonian}\end{equation}
 
 \end_inset 
 
@@ -119,6 +123,100 @@ H\psi=\lambda\psi\]
 
  the complex plane.
  
+\layout Section
+
+Confluent Hypergeometric Solutions
+\layout Standard
+
+This section derives the confluent hypergeometric eigenfunctions.
+ Let 
+\begin_inset Formula \[
+\psi(y)=\exp\left(-\frac{y^{2}}{2}\right)\varphi(y)\]
+
+\end_inset 
+
+ Then the differential equation becomes 
+\begin_inset Formula \[
+\varphi^{\prime\prime}-2y\varphi^{\prime}+\left(2\lambda-1\right)\varphi=0\]
+
+\end_inset 
+
+ Substituting 
+\begin_inset Formula $z=y^{2}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\eta(z)=\varphi(y)$
+\end_inset 
+
+, one obtains the differential equation 
+\begin_inset Formula \[
+z\eta^{\prime\prime}+\left(\frac{1}{2}-z\right)\eta^{\prime}-\left(\frac{1-2\lambda}{4}\right)\eta=0\]
+
+\end_inset 
+
+which may be immediately recognized as Kummer's differential equation for
+ the confluent hypergeometric functions: 
+\begin_inset Formula \[
+z\eta^{\prime\prime}+\left(b-z\right)\eta^{\prime}-a\eta=0\]
+
+\end_inset 
+
+ which has solutions 
+\begin_inset Formula \[
+M(a,b;z)=_{1}F_{1}(a,b;z)=\sum_{n=0}^{\infty}\frac{(a)_{n}}{(b)_{n}}\,\frac{z^{n}}{n!}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+U(a,b;z)=\frac{\pi}{\sin\pi b}\left[\frac{M(a,b;z)}{\Gamma(1+a-b)\Gamma(b)}+z^{1-b}\,\frac{M(1+a-b,2-b;z)}{\Gamma(a)\Gamma(2-b)}\right]\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $(a)_{n}=a(a+1)\cdots(a+n-1)$
+\end_inset 
+
+ is the rising factorial.
+ From the point of view of presenting solutions to equation 
+\begin_inset LatexCommand \ref{eq:general sho hamiltonian}
+
+\end_inset 
+
+, there are only two linearly independent solutions.
+ These are 
+\begin_inset Formula \[
+\psi_{1}(y)=e^{-y^{2}/2}M\left(\frac{1-2\lambda}{4},\frac{1}{2};\, y^{2}\right)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\psi_{2}(y)=y\, e^{-y^{2}/2}M\left(\frac{3-2\lambda}{4},\frac{3}{2};\, y^{2}\right)\]
+
+\end_inset 
+
+ The appropriate normalization for these two solutions is not yet clear,
+ since neither is square-integral along the real 
+\begin_inset Formula $y$
+\end_inset 
+
+-line, except when 
+\begin_inset Formula $\lambda=n+1/2$
+\end_inset 
+
+, of course.
+ 
+\layout Section
+
+ToDO
+\layout Standard
+
+Monodromy
+\layout Standard
+
+Theta function representation
 \layout Section
 
 Strange ideas
