@@ -117,16 +117,11 @@ static void psi_init (void)
 	
 static double psi (double re_q, double im_q)
 {
-	double deno = re_q - 1.0;
-	deno = deno*deno + im_q*im_q;
-	deno = 1.0/deno;
-	double re_s = 2.0*im_q* deno;
-	double im_s = (re_q*re_q + im_q*im_q - 1.0) * deno;;
+	double mag = 1.0 - sqrt (re_q*re_q + im_q*im_q);
+	double re_z = re_q / mag;
+	double im_z = im_q / mag;
 
-	// re_s = re_q;
-	// im_s = im_q;
-
-	psi_one (re_a, im_a, re_s, im_s, prec, nterms);
+	psi_one (re_a, im_a, re_z, im_z, prec, nterms);
 
 	double frea = mpf_get_d (re_a);
 	double fima = mpf_get_d (im_a);
