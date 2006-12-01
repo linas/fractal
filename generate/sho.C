@@ -42,28 +42,47 @@ static inline unsigned int num_digits (mpz_t num, mpz_t tmpa, mpz_t tmpb)
 void psi_one (mpf_t re_psi, mpf_t im_psi, 
               double re_y, double im_y, unsigned int prec, int nterms)
 {
-	double reysq, imysq, tmp;
-
 	double relam = 1.5;
 	double imlam = 0.0;
 	
-	/* first, take the square of y */
-	reysq = re_y*re_y - im_y*im_y;
-	imysq = 2.0*re_y*im_y;
-	
-	mpf_set_ui (re_psi, 0);
-	mpf_set_ui (im_psi, 0);
-
-	cpx_t em, a, b;
+	cpx_t em, a, b, z, ex;
 	cpx_init (&em);
 	cpx_init (&a);
 	cpx_init (&b);
+	cpx_init (&z);
+	cpx_init (&ex);
 
-	cpx_confluent (&em, 
+	/* a = 1/4 - lambda/2 */
+	cpx_set_d (&a, 0.25-0.5*relam, -0.5*imlam);
+
+	/* b=1/2 */
+	mpf_set_ui (b.re, 1);
+	mpf_div_ui (b.re, b.re, 2);
+	mpf_set_ui (b.im, 0);
+	
+	/* z = y^2 */
+	double reysq = re_y*re_y - im_y*im_y;
+	double imysq = 2.0*re_y*im_y;
+	cpx_set_d(&z, reysq, imysq);
+	
+	cpx_confluent (&em, &a, &b, &z, prec);
+
+	/* exp (-y^2/2) */
+	cpx_neg (&z, &z);
+	cpx_div_ui (&z, &z, 2);
+	cpx_exp (&ex, &z, prec);
+
+	/* psi = exp (-y^2/2) * M(a,b,y^2) */
+	cpx_mul (&em, &em, &ex);
+
+	mpf_set (re_psi, em.re);
+	mpf_set (im_psi, em.im);
 						 
 	cpx_clear (&em);
 	cpx_clear (&a);
 	cpx_clear (&b);
+	cpx_clear (&z);
+	cpx_clear (&ex);
 
 }
 
