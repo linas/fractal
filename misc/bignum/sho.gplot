@@ -4,15 +4,26 @@ set out 'sho.png'
 
 # set data style linespoints
 set data style lines
-set key right
+set key left
 
-# set yrange [-1:1]
-set xrange [-5:5]
+# This setup used to produce graphics for the paper
+# set yrange [-5:5]
+# set xrange [-6:6]
+# 
+# set title "Simple Harmonic Oscillator for lambda=4.505"
+# set xlabel "x"
+# set ylabel "psi(x)"
+# 
+# plot "sho.dat" using 1:2 title "psi_1" linewidth 3, \
+#      "sho.dat" using 1:3 title "psi_2" linewidth 3
+
+set yrange [-50:50]
+set xrange [-6:6]
 
 set title "Simple Harmonic Oscillator"
 set xlabel "x"
 set ylabel "psi(x)"
 
-plot "sho.dat" using 1:2 title "psi_1", \
-     "sho.dat" using 1:3 title "psi_2"
+plot "sho.dat" using 1:2 title "psi_1" linewidth 3, \
+     "sho.dat" using 1:3 title "psi_2" linewidth 3
 

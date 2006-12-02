@@ -88,8 +88,8 @@ main (int argc, char *argv[])
 {
 	int prec = 250;
 	
-	double en;
-	en = atof (argv[1]);
+	double lam;
+	lam = atof (argv[1]);
 
 	cpx_t ps1, ps2, lambda, z;
 	cpx_init (&ps1);
@@ -98,7 +98,7 @@ main (int argc, char *argv[])
 	cpx_init (&z);
 
 	cpx_set_ui (&lambda, 1,0);
-	mpf_set_d (lambda.re, en+0.5);
+	mpf_set_d (lambda.re, lam);
 
 	mpf_t ex;
 	mpf_init (ex);
