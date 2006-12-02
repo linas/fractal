@@ -22,7 +22,7 @@
 \quotes_times 2
 \papercolumns 1
 \papersides 1
-\paperpagestyle default
+\paperpagestyle fancy
 
 \layout Title
 
@@ -709,7 +709,83 @@ rotating
 Ladder Operators
 \layout Standard
 
-The
+The traditional ladder operators for the simple harmonic oscillator may
+ be written as 
+\begin_inset Formula \[
+a^{*}=\frac{1}{\sqrt{2}}\left(y-\frac{d}{dy}\right)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+a=\frac{1}{\sqrt{2}}\left(y+\frac{d}{dy}\right)\]
+
+\end_inset 
+
+ so that 
+\begin_inset Formula \[
+H=\frac{1}{2}\left(-\frac{d^{2}}{dy^{2}}+y^{2}\right)=a^{*}a+\frac{1}{2}\]
+
+\end_inset 
+
+ Under the action of these operators, one has that 
+\begin_inset Formula \[
+a\psi_{1}(\lambda)=\left(\frac{1-2\lambda}{\sqrt{2}}\right)\psi_{2}(\lambda-1)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+a\psi_{2}(\lambda)=\frac{1}{\sqrt{2}}\psi_{1}(\lambda-1)\]
+
+\end_inset 
+
+ Thus, while the eigenfunctions cannot be square-normalized to give them
+ a 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ scale, they can be scaled so that they appear more symmetric under the
+ action of the ladder operators.
+ Write 
+\begin_inset Formula \[
+\chi_{1}(\lambda)=\Gamma\left(\frac{2\lambda+1}{4}\right)\sqrt{\frac{2^{\lambda}}{\Gamma\left(\frac{2\lambda+1}{2}\right)}}\,\exp\left(\frac{i\pi\lambda}{2}\right)\psi_{1}(\lambda)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\chi_{2}(\lambda)=\Gamma\left(\frac{2\lambda-1}{4}\right)\sqrt{\frac{2^{\lambda}\left(\lambda-\frac{1}{2}\right)}{\Gamma\left(\frac{2\lambda-1}{2}\right)}}\,\exp\left(\frac{i\pi(\lambda-1)}{2}\right)\psi_{1}(\lambda)\]
+
+\end_inset 
+
+ Then one has the far more symmetric relations 
+\begin_inset Formula \[
+a\chi_{1}(\lambda)=\sqrt{\lambda-\frac{1}{2}}\,\chi_{2}(\lambda-1)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+a\chi_{2}(\lambda)=\sqrt{\lambda-\frac{1}{2}}\,\chi_{1}(\lambda-1)\]
+
+\end_inset 
+
+ The raising operators also have a nice form: 
+\begin_inset Formula \[
+a^{*}\chi_{1}(\lambda)=\frac{\chi_{2}(\lambda+1)}{\sqrt{\lambda+\frac{1}{2}}}\]
+
+\end_inset 
+
+ and similarly for the exchange 
+\begin_inset Formula $1\leftrightarrow2$
+\end_inset 
+
+.
 \layout Section
 
 ToDO
@@ -730,5 +806,9 @@ f_{n,p}(y)=\exp\left(y^{p}\right)\frac{d^{n}}{dy^{n}}\exp\left(-y^{p}\right)\]
 
 \end_inset 
 
- ???
+ for general values of 
+\begin_inset Formula $p$
+\end_inset 
+
+???
 \the_end
