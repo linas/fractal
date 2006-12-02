@@ -712,25 +712,25 @@ Ladder Operators
 The traditional ladder operators for the simple harmonic oscillator may
  be written as 
 \begin_inset Formula \[
-a^{*}=\frac{1}{\sqrt{2}}\left(y-\frac{d}{dy}\right)\]
+a^{\dagger}=\frac{1}{\sqrt{2}}\left(y-\frac{d}{dy}\right)\]
 
 \end_inset 
 
- and 
+ for the raising operator, and 
 \begin_inset Formula \[
 a=\frac{1}{\sqrt{2}}\left(y+\frac{d}{dy}\right)\]
 
 \end_inset 
 
- so that 
+ for the lowering operator, so that 
 \begin_inset Formula \[
-H=\frac{1}{2}\left(-\frac{d^{2}}{dy^{2}}+y^{2}\right)=a^{*}a+\frac{1}{2}\]
+H=\frac{1}{2}\left(-\frac{d^{2}}{dy^{2}}+y^{2}\right)=a^{\dagger}a+\frac{1}{2}\]
 
 \end_inset 
 
  Under the action of these operators, one has that 
 \begin_inset Formula \[
-a\psi_{1}(\lambda)=\left(\frac{1-2\lambda}{\sqrt{2}}\right)\psi_{2}(\lambda-1)\]
+a\psi_{1}(\lambda)=\sqrt{2}\left(\frac{1}{2}-\lambda\right)\psi_{2}(\lambda-1)\]
 
 \end_inset 
 
@@ -740,8 +740,45 @@ a\psi_{2}(\lambda)=\frac{1}{\sqrt{2}}\psi_{1}(\lambda-1)\]
 
 \end_inset 
 
- Thus, while the eigenfunctions cannot be square-normalized to give them
- a 
+ Note that the lowering operator has only one function in its kernel, namely
+ 
+\begin_inset Formula $\psi_{1}$
+\end_inset 
+
+ for 
+\begin_inset Formula $\lambda=1/2$
+\end_inset 
+
+; this is the ground state of the traditional harmonic oscillator.
+ For all other eigenvalues, the lowering operator is a bi-directional shift
+ operator.
+ A similar observation applies for the rasing operator, for which one has
+ 
+\begin_inset Formula \[
+a^{\dagger}\psi_{1}(\lambda)=\sqrt{2}\left(\lambda+\frac{1}{2}\right)\psi_{2}(\lambda+1)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+a^{\dagger}\psi_{2}(\lambda)=-\frac{1}{\sqrt{2}}\psi_{1}(\lambda+1)\]
+
+\end_inset 
+
+ and so again, the operator is a bi-directional shift, with only one function
+ in its kernel, namely 
+\begin_inset Formula $\psi_{1}$
+\end_inset 
+
+ for 
+\begin_inset Formula $\lambda=-1/2$
+\end_inset 
+
+.
+\layout Standard
+
+Although these eigenfunctions cannot be square-normalized to give them a
+ 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -775,9 +812,15 @@ a\chi_{2}(\lambda)=\sqrt{\lambda-\frac{1}{2}}\,\chi_{1}(\lambda-1)\]
 
 \end_inset 
 
- The raising operators also have a nice form: 
+ Substituting 
+\begin_inset Formula $\lambda=n+1/2$
+\end_inset 
+
+, it can be seen that these have precsely the normalization used for the
+ canonical half-integer-valued eigenfunctions.
+ The raising operators also have the standard form:
 \begin_inset Formula \[
-a^{*}\chi_{1}(\lambda)=\frac{\chi_{2}(\lambda+1)}{\sqrt{\lambda+\frac{1}{2}}}\]
+a^{\dagger}\chi_{1}(\lambda)=\sqrt{\lambda+\frac{1}{2}}\,\chi_{2}(\lambda+1)\]
 
 \end_inset 
 
@@ -786,6 +829,52 @@ a^{*}\chi_{1}(\lambda)=\frac{\chi_{2}(\lambda+1)}{\sqrt{\lambda+\frac{1}{2}}}\]
 \end_inset 
 
 .
+ 
+\layout Section
+
+Coherenet States
+\layout Standard
+
+The eigenfunctions of the shift operators are known as coherent states.
+ These are more easily constructed by using an alternate normalization for
+ the states.
+ Let 
+\begin_inset Formula \[
+\eta_{1,2}(\lambda)=\sqrt{\Gamma\left(\lambda+\frac{1}{2}\right)}\,\chi_{1,2}(\lambda)\]
+
+\end_inset 
+
+ Then the lowering operator has the simpler form 
+\begin_inset Formula $a\eta_{1}(\lambda)=\eta_{2}(\lambda-1)$
+\end_inset 
+
+ and 
+\begin_inset Formula $a\eta_{2}(\lambda)=\eta_{1}(\lambda-1)$
+\end_inset 
+
+ on these states.
+ For 
+\begin_inset Formula $\lambda\ne1/2$
+\end_inset 
+
+, eigenstates of the shift operator may be written as 
+\begin_inset Formula \[
+\phi_{\theta}(q)=\sum_{n=-\infty}^{\infty}q^{n}\left(\eta_{1}(\lambda+n)+e^{i\theta}\eta_{2}(\lambda+n)\right)\]
+
+\end_inset 
+
+ so that one has 
+\begin_inset Formula \[
+a\phi_{\theta}(q)=qe^{-i\theta}\phi_{\theta}(q)\]
+
+\end_inset 
+
+ Formulated in this way, one has an explicit 
+\begin_inset Formula $2\pi$
+\end_inset 
+
+degeneracy in the eigenvalue spectrum.
+ Or do we ?? 
 \layout Section
 
 ToDO
