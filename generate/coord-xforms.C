@@ -10,6 +10,7 @@
  */
 
 #include <math.h>
+#include "coord-xforms.h"
 
 void 
 poincare_disk_to_plane_coords (double x, double y, 
