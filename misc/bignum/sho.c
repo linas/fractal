@@ -184,24 +184,57 @@ void eta_2 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 
 /* ======================================================== */
 
-void coherent (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
+void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 {
+	cpx_t e1, e2, qn, lam;
+	cpx_init (e1);
+	cpx_init (e2);
+	cpx_init (qn);
+	cpx_init (lam);
+
+	cpx_set (qn, que);
+
+	eta_1 (e1, lambda, y, prec);
+	eta_2 (e2, lambda, y, prec);
+	cpx_add (coho, e1, e2);
+	
+	int n;
+	for (n=1; n<40; n++)
+	{
+		/* lambda+n */
+		cpx_add_ui (lam, lambda, n, 0);
+		eta_1 (e1, lam, y, prec);
+		eta_2 (e2, lam, y, prec);
+		cpx_add (e1, e1, e2);
+		cpx_mul (e1, e1, qn);
+		cpx_add (coho, coho, e1);
+		
+		/* lambda-n */
+		cpx_sub_ui (lam, lambda, n, 0);
+		eta_1 (e1, lam, y, prec);
+		eta_2 (e2, lam, y, prec);
+		cpx_add (e1, e1, e2);
+		cpx_div (e1, e1, qn);
+		cpx_add (coho, coho, e1);
+		
+		printf ("n=%d  ", n);
+		cpx_prt ("", coho);
+		printf ("\n");
+		
+		cpx_mul (qn, qn, que);
+	}
+
+	cpx_clear (e1);
+	cpx_clear (e2);	
+	cpx_clear (qn);
+	cpx_clear (lam);
 }
 
 /* ======================================================== */
-int
-main (int argc, char *argv[])
+
+void prt_graph (double lam)
 {
 	int prec = 250;
-	
-	if (2> argc)
-	{
-		fprintf (stderr, "Usage: %s lambda\n", argv[0]);
-		exit (1);
-	} 
-
-	double lam;
-	lam = atof (argv[1]);
 
 	cpx_t ps1, ps2, lambda, z;
 	cpx_init (ps1);
@@ -234,6 +267,39 @@ main (int argc, char *argv[])
 		fp_prt ("\t", ps2[0].re);
 		printf ("\n");
 	}
+}
+
+/* ======================================================== */
+
+int
+main (int argc, char *argv[])
+{
+	int prec = 250;
+	
+	if (2> argc)
+	{
+		fprintf (stderr, "Usage: %s lambda\n", argv[0]);
+		exit (1);
+	} 
+
+	double lam;
+	lam = atof (argv[1]);
+
+	// prt_graph (lam);
+	
+	cpx_t coho, lambda, q, z;
+	cpx_init (coho);
+	cpx_init (lambda);
+	cpx_init (q);
+	cpx_init (z);
+
+	cpx_set_ui (lambda, 1,0);
+	mpf_set_d (lambda[0].re, lam);
+
+	cpx_set_ui (q, 1,0);
+	cpx_set_ui (z, 1,0);
+	
+	coherent (coho, lambda, q, z, prec);
 
 	return 0;
 }
