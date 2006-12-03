@@ -190,17 +190,17 @@ void fp_euler_mascheroni (mpf_t gam, unsigned int prec)
 static void fp_zeta_half_compute (mpf_t gam, unsigned int prec)
 {
 	cpx_t ess, zeta;
-	cpx_init (&ess);
-	cpx_init (&zeta);
+	cpx_init (ess);
+	cpx_init (zeta);
 	
-	mpf_set_d (ess.re, 0.5);
-	mpf_set_ui (ess.im, 0);
+	mpf_set_d (ess[0].re, 0.5);
+	mpf_set_ui (ess[0].im, 0);
 
-	fp_borwein_zeta_c (&zeta, &ess, prec);
-	mpf_set (gam, zeta.re);
+	fp_borwein_zeta_c (zeta, ess, prec);
+	mpf_set (gam, zeta[0].re);
 
-	cpx_clear (&ess);
-	cpx_clear (&zeta);
+	cpx_clear (ess);
+	cpx_clear (zeta);
 }
 
 void fp_zeta_half (mpf_t gam, unsigned int prec)
