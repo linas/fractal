@@ -99,8 +99,12 @@ static inline void cpx_neg (cpx_t neg, const cpx_t const a)
  */
 static inline void cpx_times_i (cpx_t z, const cpx_t const a)
 {
-	mpf_set (z[0].im, a[0].re);
+	mpf_t tmp;
+	mpf_init (tmp);
+	mpf_set (tmp, a[0].re);
 	mpf_neg (z[0].re, a[0].im);
+	mpf_set (z[0].im, tmp);
+	mpf_clear (tmp);
 }
 
 /**
