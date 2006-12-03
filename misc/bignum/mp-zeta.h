@@ -36,7 +36,7 @@ void fp_hasse_zeta (mpf_t zeta, unsigned int s, int prec);
 void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec);
 
 /* P. Borwein zeta for complex argument */
-void fp_borwein_zeta_c (cpx_t *zeta, cpx_t *ess, int prec);
+void fp_borwein_zeta_c (cpx_t zeta, cpx_t ess, int prec);
 
 /* Brute-force summation */
 void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec);

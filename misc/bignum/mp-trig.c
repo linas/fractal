@@ -300,7 +300,7 @@ void fp_cosine (mpf_t co, mpf_t z, unsigned int prec)
  * cpx_exp -  complex-valued exp, built out of the real-valued funcs.
  */
 
-void cpx_exp (cpx_t *ex, cpx_t *z, unsigned int prec)
+void cpx_exp (cpx_t ex, cpx_t z, unsigned int prec)
 {
 	mpf_t mag, si, co;
 
@@ -464,7 +464,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
  * a logarithm, an exp, sin and cos to be computed, each of which
  * are kinda slow ... 
  */
-static void fp_pow_rc_helper (cpx_t *powc, int k, mpf_t q, cpx_t *ess, int prec)
+static void fp_pow_rc_helper (cpx_t powc, int k, mpf_t q, cpx_t ess, int prec)
 {
 	mpf_t kq, logkq, mag, pha;
 	mpf_init (kq);
@@ -496,7 +496,7 @@ static void fp_pow_rc_helper (cpx_t *powc, int k, mpf_t q, cpx_t *ess, int prec)
 	mpf_clear(pha);
 }
 
-void fp_pow_rc (cpx_t *powc, int k, mpf_t q, cpx_t *ess, int prec)
+void fp_pow_rc (cpx_t powc, int k, mpf_t q, cpx_t ess, int prec)
 {
 	DECLARE_FP_CACHE (re_powc);
 	DECLARE_FP_CACHE (im_powc);
@@ -526,8 +526,8 @@ void fp_pow_rc (cpx_t *powc, int k, mpf_t q, cpx_t *ess, int prec)
 	fp_pow_rc_helper (powc, k, q, ess, prec);
 
 	fp_one_d_cache_check (&im_powc, k);
-	fp_one_d_cache_store (&re_powc, powc->re, k, prec);
-	fp_one_d_cache_store (&im_powc, powc->im, k, prec);
+	fp_one_d_cache_store (&re_powc, powc[0].re, k, prec);
+	fp_one_d_cache_store (&im_powc, powc[0].im, k, prec);
 }
 
 /* =============================== END OF FILE =========================== */

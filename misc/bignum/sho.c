@@ -9,12 +9,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <gmp.h>
 #include "mp-complex.h"
 #include "mp-hyper.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
 
-void psi_1 (cpx_t *psi, cpx_t *lambda, mpf_t x, int prec)
+void psi_1 (cpx_t *psi, cpx_t *lambda, cpx_t *y, int prec)
 {
 	cpx_t a, b, z;
 	cpx_init (&a);
@@ -31,17 +32,15 @@ void psi_1 (cpx_t *psi, cpx_t *lambda, mpf_t x, int prec)
 	cpx_div_ui (&a, &a, 2);
 
 	/* z = y^2 */
-	mpf_set (z.re, x);
-	mpf_mul (z.re, z.re, x);
-	mpf_set_ui (z.im, 0);
+	cpx_mul (&z, y, y);
 
 	cpx_confluent (psi, &a, &b, &z, prec);
 
 	/* psi_1 = exp (-y^2/2) * M(a,b,z) */
-	mpf_div_ui (z.re, z.re, 2);
-	mpf_neg (z.re, z.re);
-	fp_exp (z.im, z.re, prec);
-	cpx_mul_mpf (psi, psi, z.im);
+	cpx_div_ui (&z, &z, 2);
+	cpx_neg (&z, &z);
+	cpx_exp (&z, &z, prec);
+	cpx_mul (psi, psi, &z);
 	
 	cpx_clear (&a);
 	cpx_clear (&b);

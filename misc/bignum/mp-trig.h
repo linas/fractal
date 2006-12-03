@@ -30,7 +30,7 @@ void fp_inv_pow (mpf_t p, unsigned int n, unsigned int m);
 void fp_exp (mpf_t ex, mpf_t z, unsigned int prec);
 void fp_sine (mpf_t ex, mpf_t z, unsigned int prec);
 void fp_cosine (mpf_t ex, mpf_t z, unsigned int prec);
-void cpx_exp (cpx_t *ex, cpx_t *z, unsigned int prec);
+void cpx_exp (cpx_t ex, cpx_t z, unsigned int prec);
 
 /**
  * fp_log_m1 -  Floating point logarithm
@@ -56,7 +56,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
  * allowing improved algorithm speeds.
  */
 
-void fp_pow_rc (cpx_t *diri, int k, mpf_t q, cpx_t *ess, int prec);
+void fp_pow_rc (cpx_t diri, int k, mpf_t q, cpx_t ess, int prec);
 
 /* =============================== END OF FILE =========================== */
 

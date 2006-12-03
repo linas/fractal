@@ -27,12 +27,12 @@ void fp_prt (char * str, mpf_t val)
 	mpf_out_str (stdout, 10, 60, val);
 }
 
-void cpx_prt (char * str, cpx_t *val)
+void cpx_prt (char * str, cpx_t val)
 {
 	printf (str);
-	mpf_out_str (stdout, 10, 30, val->re);
+	mpf_out_str (stdout, 10, 30, val[0].re);
 	printf (" + i ");
-	mpf_out_str (stdout, 10, 30, val->im);
+	mpf_out_str (stdout, 10, 30, val[0].im);
 }
 
 /* prec is the decimal precison (number of decimal places) */

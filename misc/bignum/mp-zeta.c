@@ -812,7 +812,7 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 	mpf_clear (d_n);
 }
 
-void fp_borwein_zeta_c (cpx_t *zeta, cpx_t *s, int prec)
+void fp_borwein_zeta_c (cpx_t zeta, cpx_t s, int prec)
 {
 	double nterms = 0.69 + 2.302585093 * prec;
 	// Huh? whazzup with the gamma ??
@@ -826,61 +826,61 @@ void fp_borwein_zeta_c (cpx_t *zeta, cpx_t *s, int prec)
 	mpf_set_ui (zero, 0);
 
 	cpx_t po, term, ess;
-	cpx_init (&po);
-	cpx_init (&term);
-	cpx_init (&ess);
+	cpx_init (po);
+	cpx_init (term);
+	cpx_init (ess);
 
 	/* make copy of input now ! */
-	mpf_set (ess.re, s->re);
-	mpf_set (ess.im, s->im);
+	mpf_set (ess[0].re, s[0].re);
+	mpf_set (ess[0].im, s[0].im);
 
-	mpf_set_ui(zeta->re, 0);
-	mpf_set_ui(zeta->im, 0);
+	mpf_set_ui(zeta[0].re, 0);
+	mpf_set_ui(zeta[0].im, 0);
 	
 	fp_borwein_tchebysheff (d_n, n, n);
 	int k;
 	for (k=0; k<n; k++)
 	{
-		mpf_set_ui (term.im, 0);
-		fp_borwein_tchebysheff (term.re, n, k);
-		mpf_sub (term.re, term.re, d_n); 
+		mpf_set_ui (term[0].im, 0);
+		fp_borwein_tchebysheff (term[0].re, n, k);
+		mpf_sub (term[0].re, term[0].re, d_n); 
 
 		// po = pow (k+1, s);
-		fp_pow_rc (&po, k+1, zero, &ess, prec);
-		cpx_div (&term, &term, &po);
+		fp_pow_rc (po, k+1, zero, ess, prec);
+		cpx_div (term, term, po);
 
 		if (k%2)
 		{
-			cpx_sub(zeta, zeta, &term);
+			cpx_sub(zeta, zeta, term);
 		}
 		else
 		{
-			cpx_add(zeta, zeta, &term);
+			cpx_add(zeta, zeta, term);
 		}
 	}
-	mpf_div (zeta->re, zeta->re, d_n);
-	mpf_div (zeta->im, zeta->im, d_n);
+	mpf_div (zeta[0].re, zeta[0].re, d_n);
+	mpf_div (zeta[0].im, zeta[0].im, d_n);
 
 	cpx_neg (zeta, zeta);
 
 	/* po = 1 - 2^{1-s} */
-	mpf_sub_ui (ess.re, ess.re, 1);
+	mpf_sub_ui (ess[0].re, ess[0].re, 1);
 
 	/* force flush needed to get fp_pow_rc to clear cache */
 	mpf_set_ui (zero, 1);
-	fp_pow_rc (&po, 1, zero, &ess, prec);
-	cpx_recip (&po, &po);
-	cpx_neg (&po, &po);
-	mpf_add_ui (po.re, po.re, 1);
+	fp_pow_rc (po, 1, zero, ess, prec);
+	cpx_recip (po, po);
+	cpx_neg (po, po);
+	mpf_add_ui (po[0].re, po[0].re, 1);
 	
-	cpx_div (zeta, zeta, &po);
+	cpx_div (zeta, zeta, po);
 
 	mpf_clear (d_n);
 	mpf_clear (zero);
 	
-	cpx_clear (&po);
-	cpx_clear (&term);
-	cpx_clear (&ess);
+	cpx_clear (po);
+	cpx_clear (term);
+	cpx_clear (ess);
 }
 
 /* ======================================================================= */
