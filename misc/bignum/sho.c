@@ -91,25 +91,36 @@ void psi_2 (cpx_t psi, cpx_t lambda, cpx_t y, int prec)
  */
 static void gamma_hack (cpx_t gam, const cpx_t const z)
 {
+	cpx_t reduced_gamma;
+	cpx_init (reduced_gamma);
+	cpx_set_ui (reduced_gamma, 1, 0);
+	
+	cpx_t ans;
+	cpx_init (ans);
+	
 	double flo = mpf_get_d (z[0].re);
 	if (flo > 2.0)
 	{
 		unsigned int intpart = (unsigned int) floor (flo-1.0);
-		cpx_set (gam, z);
-		mpf_sub_ui (gam[0].re, gam[0].re, intpart);
-		cpx_poch_rising (gam, gam, intpart);
+		cpx_set (ans, z);
+		mpf_sub_ui (ans[0].re, ans[0].re, intpart);
+		cpx_poch_rising (ans, ans, intpart);
 	}
 	else if (flo < 1.0)
 	{
 		unsigned int intpart = (unsigned int) floor (1.0-flo);
-		cpx_set (gam, z);
-		cpx_poch_rising (gam, gam, intpart);
-		cpx_recip (gam, gam);
+		cpx_set (ans, z);
+		cpx_poch_rising (ans, ans, intpart);
+		cpx_recip (ans, ans);
 	}
 	else
 	{
-		cpx_set_ui (gam, 1, 0);
+		cpx_set_ui (ans, 1, 0);
 	}
+
+	cpx_set (gam, ans);
+	cpx_clear (ans);
+	cpx_clear (reduced_gamma);
 }
 
 void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
@@ -118,6 +129,8 @@ void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 	cpx_init (pha);
 
 	psi_1 (eta, lambda, y, prec);
+cpx_prt ("eta=", eta);
+printf ("\n");
 
 	mpf_t tmp;
 	mpf_init (tmp);
@@ -129,7 +142,12 @@ void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 	cpx_mul_mpf (pha, pha, tmp);
 	cpx_times_i (pha, pha);
 	cpx_exp (pha, pha, prec);
+cpx_prt ("exp i pha=", pha);
+printf ("\n");
 	cpx_mul (eta, eta, pha);
+cpx_prt ("phaseeta=", eta);
+printf ("\n");
+
 
 	/* power of two term */
 	mpf_set_ui (tmp, 2);
@@ -137,6 +155,8 @@ void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 	cpx_div_ui (pha, pha, 2);
 	cpx_pow_mpf (pha, tmp, pha, prec);
 	cpx_mul (eta, eta, pha);
+cpx_prt ("twoeeta=", eta);
+printf ("\n");
 	
 	/* Gamma (1/4+lambda/2) */
 	mpf_set_ui (tmp, 1);
@@ -214,10 +234,15 @@ void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 	int n;
 	for (n=1; n<40; n++)
 	{
+	printf ("n=%d  \n", n);
 		/* lambda+n */
 		cpx_add_ui (lam, lambda, n, 0);
 		eta_1 (e1, lam, y, prec);
+	cpx_prt ("e1=", e1);
+	printf ("\n");
 		eta_2 (e2, lam, y, prec);
+	cpx_prt ("e2=", e2);
+	printf ("\n");
 		cpx_add (e1, e1, e2);
 		cpx_mul (e1, e1, qn);
 		cpx_add (coho, coho, e1);
@@ -225,14 +250,18 @@ void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 		/* lambda-n */
 		cpx_sub_ui (lam, lambda, n, 0);
 		eta_1 (e1, lam, y, prec);
+	cpx_prt ("neg e1", e1);
+	printf ("\n");
 		eta_2 (e2, lam, y, prec);
+	cpx_prt ("neg e2", e2);
+	printf ("\n");
 		cpx_add (e1, e1, e2);
 		cpx_div (e1, e1, qn);
 		cpx_add (coho, coho, e1);
 		
-		printf ("n=%d  ", n);
-		cpx_prt ("", coho);
-		printf ("\n");
+	cpx_prt ("coho", coho);
+	printf ("\n");
+	printf ("\n");
 		
 		cpx_mul (qn, qn, que);
 	}
@@ -245,10 +274,8 @@ void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 
 /* ======================================================== */
 
-void prt_graph (double lam)
+void prt_graph (double lam, int prec)
 {
-	int prec = 250;
-
 	cpx_t ps1, ps2, lambda, z;
 	cpx_init (ps1);
 	cpx_init (ps2);
@@ -282,24 +309,8 @@ void prt_graph (double lam)
 	}
 }
 
-/* ======================================================== */
-
-int
-main (int argc, char *argv[])
+void do_coho (double lam, int prec)
 {
-	int prec = 250;
-	
-	if (2> argc)
-	{
-		fprintf (stderr, "Usage: %s lambda\n", argv[0]);
-		exit (1);
-	} 
-
-	double lam;
-	lam = atof (argv[1]);
-
-	// prt_graph (lam);
-	
 	cpx_t coho, lambda, q, z;
 	cpx_init (coho);
 	cpx_init (lambda);
@@ -313,6 +324,26 @@ main (int argc, char *argv[])
 	cpx_set_ui (z, 1,0);
 	
 	coherent (coho, lambda, q, z, prec);
+}
 
+/* ======================================================== */
+
+int
+main (int argc, char *argv[])
+{
+	int prec = 650;
+	
+	if (2> argc)
+	{
+		fprintf (stderr, "Usage: %s lambda\n", argv[0]);
+		exit (1);
+	} 
+
+	double lam;
+	lam = atof (argv[1]);
+
+	prt_graph (lam, prec);
+	// do_coho (lam, prec);
+	
 	return 0;
 }
