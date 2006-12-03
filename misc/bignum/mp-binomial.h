@@ -8,6 +8,7 @@
  */
 
 #include <gmp.h>
+#include "mp-complex.h"
 
 /* i_poch_rising
  * rising pochhammer symbol, for integer values.
@@ -72,29 +73,29 @@ void fp_harmonic (mpf_t harm, unsigned int n);
  */
 void fp_poch_rising (mpf_t poch, double x, unsigned int n);
 
-/* c_poch_rising
+/* cpx_poch_rising
  * rising pochhammer symbol (s)_n, for complex s and integer n.
  *
  * Brute force, simple.
  */
-void c_poch_rising_d (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsigned int n);
+void cpx_poch_rising_d (cpx_t poch, double re_s, double im_s, unsigned int n);
 
-/* c_poch_rising
+/* cpx_poch_rising
  * rising pochhammer symbol (s)_n, for complex s and integer n.
  *
  * Brute force, simple.
  */
-void c_poch_rising (mpf_t re_poch, mpf_t im_poch, mpf_t re_s, mpf_t im_s, unsigned int n);
+void cpx_poch_rising (cpx_t poch, const cpx_t const s, unsigned int n);
 
 /* fp_binomial
  * Binomial coefficient 
  */
 void fp_binomial (mpf_t bin, double s, unsigned int k);
 
-/* c_binomial
+/* cpx_binomial
  * Complex binomial coefficient
  */
-void c_binomial_d (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k);
-void c_binomial (mpf_t re_bin, mpf_t im_bin, mpf_t re_s, mpf_t im_s, unsigned int k);
+void cpx_binomial_d (cpx_t bin, double re_s, double im_s, unsigned int k);
+void cpx_binomial (cpx_t bin, const cpx_t const s, unsigned int k);
 
 

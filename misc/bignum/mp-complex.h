@@ -67,6 +67,15 @@ static inline void cpx_neg (cpx_t neg, const cpx_t const a)
 }
 
 /**
+ * cpx_times_i -- z = a*i
+ */
+static inline void cpx_times_i (cpx_t z, const cpx_t const a)
+{
+	mpf_set (z[0].im, a[0].re);
+	mpf_neg (z[0].re, a[0].im);
+}
+
+/**
  * cpx_mul -- prod = a * b
  */
 static inline void cpx_mul (cpx_t prod, const cpx_t const a, const cpx_t const b)

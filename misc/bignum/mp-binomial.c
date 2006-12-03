@@ -504,96 +504,55 @@ void fp_poch_rising (mpf_t poch, double x, unsigned int n)
 }
 
 /* ======================================================================= */
-/* c_poch_rising
+/* cpx_poch_rising
  * rising pochhammer symbol (s)_n, for complex s and integer n.
  *
  * Brute force, simple.
  */
 
-void c_poch_rising_d (mpf_t re_poch, mpf_t im_poch, double re_s, double im_s, unsigned int n)
+void cpx_poch_rising_d (cpx_t poch, double re_s, double im_s, unsigned int n)
 {
-	mpf_t racc, iacc, atmp, btmp, re_term, im_term;
-	
-	mpf_init (racc);
-	mpf_init (iacc);
-	mpf_init (atmp);
-	mpf_init (btmp);
-	mpf_init (re_term);
-	mpf_init (im_term);
+	cpx_t term;
+	cpx_init (term);
 
-	mpf_set_ui (re_poch, 1);
-	mpf_set_ui (im_poch, 0);
+	cpx_set_ui (poch, 1, 0);
+	
 	unsigned int i;
 	for (i=0; i<n; i++)
 	{
-		mpf_set_d (re_term, re_s+i);
-		mpf_set_d (im_term, im_s);
+		mpf_set_d (term[0].re, re_s+i);
+		mpf_set_d (term[0].im, im_s);
 
-		mpf_mul (atmp, re_poch, re_term);
-		mpf_mul (btmp, im_poch, im_term);
-		mpf_sub (racc, atmp, btmp);
-
-		mpf_mul (atmp, re_poch, im_term);
-		mpf_mul (btmp, im_poch, re_term);
-		mpf_add (iacc, atmp, btmp);
-
-		mpf_set (re_poch, racc);
-		mpf_set (im_poch, iacc);
+		cpx_mul (poch, poch, term);
 	}
 
-	mpf_clear (racc);
-	mpf_clear (iacc);
-	mpf_clear (atmp);
-	mpf_clear (btmp);
-	mpf_clear (re_term);
-	mpf_clear (im_term);
+	cpx_clear (term);
 }
 
 /* ======================================================================= */
-/* c_poch_rising
+/* cpx_poch_rising
  * rising pochhammer symbol (s)_n, for complex s and integer n.
  *
  * Brute force, simple.
  */
 
-void c_poch_rising (mpf_t re_poch, mpf_t im_poch, mpf_t re_s, mpf_t im_s, unsigned int n)
+void cpx_poch_rising (cpx_t poch, const cpx_t const ess, unsigned int n)
 {
-	mpf_t racc, iacc, atmp, btmp, re_term, im_term;
-	
-	mpf_init (racc);
-	mpf_init (iacc);
-	mpf_init (atmp);
-	mpf_init (btmp);
-	mpf_init (re_term);
-	mpf_init (im_term);
+	cpx_t term;
+	cpx_init (term);
 
-	mpf_set_ui (re_poch, 1);
-	mpf_set_ui (im_poch, 0);
+	cpx_set_ui (poch, 1, 0);
+
 	unsigned int i;
 	for (i=0; i<n; i++)
 	{
-		mpf_set (re_term, re_s);
-		mpf_add_ui (re_term, re_term, i);
-		mpf_set (im_term, im_s);
+		cpx_set (term, ess);
+		mpf_add_ui (term[0].re, term[0].re, i);
 
-		mpf_mul (atmp, re_poch, re_term);
-		mpf_mul (btmp, im_poch, im_term);
-		mpf_sub (racc, atmp, btmp);
-
-		mpf_mul (atmp, re_poch, im_term);
-		mpf_mul (btmp, im_poch, re_term);
-		mpf_add (iacc, atmp, btmp);
-
-		mpf_set (re_poch, racc);
-		mpf_set (im_poch, iacc);
+		cpx_mul (poch, poch, term);
 	}
 
-	mpf_clear (racc);
-	mpf_clear (iacc);
-	mpf_clear (atmp);
-	mpf_clear (btmp);
-	mpf_clear (re_term);
-	mpf_clear (im_term);
+	cpx_clear (term);
 }
 
 /* ======================================================================= */
@@ -621,57 +580,63 @@ void fp_binomial (mpf_t bin, double s, unsigned int k)
 }
 
 /* ======================================================================== */
-/* c_binomial
+/* cpx_binomial
  * Complex binomial coefficient
  */
 
-void c_binomial_d (mpf_t re_bin, mpf_t im_bin, double re_s, double im_s, unsigned int k)
+void cpx_binomial_d (cpx_t bin, double re_s, double im_s, unsigned int k)
 {
-	mpf_t retop, imtop, bot;
-	mpz_t fac;
-
-	mpf_init (retop);
-	mpf_init (imtop);
-	mpf_init (bot);
-	mpz_init (fac);
-	c_poch_rising_d (retop, imtop, re_s-k+1, im_s, k);
-	i_factorial (fac, k); 
-	mpf_set_z (bot, fac);
-
-	mpf_div (re_bin, retop, bot);
-	mpf_div (im_bin, imtop, bot);
+	cpx_t top;
+	cpx_init (top);
 	
-	mpf_clear (retop);
-	mpf_clear (imtop);
-	mpf_clear (bot);
-	mpz_clear (fac);
+	cpx_poch_rising_d (top, re_s-k+1, im_s, k);
+	
+	mpz_t ifac;
+	mpz_init (ifac);
+	i_factorial (ifac, k); 
+	
+	mpf_t fac;
+	mpf_init (fac);
+	mpf_set_z (fac, ifac);
+	mpz_clear (ifac);
+
+	cpx_div_mpf (bin, top, fac);
+	
+	mpf_clear (fac);
+	cpx_clear (top);
 }
 
-void c_binomial (mpf_t re_bin, mpf_t im_bin, mpf_t re_s, mpf_t im_s, unsigned int k)
+void cpx_binomial (cpx_t bin, const cpx_t const ess, unsigned int k)
 {
-	mpf_t retop, imtop, bot;
-	mpz_t fac;
-
-	mpf_init (retop);
-	mpf_init (imtop);
-	mpf_init (bot);
-	mpz_init (fac);
-
-	mpf_set (bot, re_s);
-	mpf_sub_ui (bot, bot, k);
-	mpf_add_ui (bot, bot, 1);
-
-	c_poch_rising (retop, imtop, bot, im_s, k);
-	i_factorial (fac, k); 
-	mpf_set_z (bot, fac);
-
-	mpf_div (re_bin, retop, bot);
-	mpf_div (im_bin, imtop, bot);
+	if (0 >= k) {
+		cpx_set_ui (bin, 1, 0);
+		return;
+	}
+			  
+	cpx_t top, bot;
+	cpx_init (top);
+	cpx_init (bot);
 	
-	mpf_clear (retop);
-	mpf_clear (imtop);
-	mpf_clear (bot);
-	mpz_clear (fac);
+	cpx_set (bot, ess);
+	mpf_sub_ui (bot[0].re, bot[0].re, k-1);
+
+	cpx_poch_rising (top, bot, k);
+	
+	mpz_t ifac;
+	mpz_init (ifac);
+	i_factorial (ifac, k); 
+
+	mpf_t fac;
+	mpf_init(fac);
+	mpf_set_z (fac, ifac);
+
+	cpx_div_mpf (bin, top, fac);
+	
+	mpf_clear (fac);
+	mpz_clear (ifac);
+	
+	cpx_clear (top);
+	cpx_clear (bot);
 }
 
 /* =============================== END OF FILE =========================== */
