@@ -48,6 +48,12 @@ static inline void cpx_set_d (cpx_t z, double x, double y)
 	mpf_set_d (z[0].im, y);
 }
 
+static inline void cpx_set_mpf (cpx_t z, const mpf_t x, const mpf_t y)
+{
+	mpf_set (z[0].re, x);
+	mpf_set (z[0].im, y);
+}
+
 static inline void cpx_add (cpx_t sum, const cpx_t const a, const cpx_t const b)
 {
 	mpf_add (sum[0].re, a[0].re, b[0].re);

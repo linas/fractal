@@ -1212,6 +1212,17 @@ void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec)
 /* ======================================================================= */
 /* compute a_sub_s for complex-valued s
  */
+/* XXX should be converted to use true complex numbers, */
+static void c_binomial_d (mpf_t rebin, mpf_t imbin, double re_s, double im_s, int k)
+{
+	cpx_t bin;
+	cpx_init (bin);
+	cpx_binomial_d (bin, re_s,im_s, k);
+	mpf_set (rebin, bin[0].re);
+	mpf_set (imbin, bin[0].im);
+	cpx_clear (bin);
+}
+
 void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int prec)
 {
 	int k;
@@ -1316,6 +1327,20 @@ void a_sub_s (mpf_t re_a, mpf_t im_a, double re_s, double im_s, unsigned int pre
  *       if the sum appears to have converged to within this tolerance.
  *       if negative, continue suming binomial to the full number of nterms.
  */
+/* XXX should be converted to use true complex numbers, */
+static void c_binomial (mpf_t rebin, mpf_t imbin, mpf_t re_s, mpf_t im_s, int k)
+{
+	cpx_t bin, ess;
+	cpx_init (bin);
+	cpx_init (ess);
+	cpx_set_mpf (ess, re_s, im_s);
+	cpx_binomial (bin, ess, k);
+	mpf_set (rebin, bin[0].re);
+	mpf_set (imbin, bin[0].im);
+	cpx_clear (ess);
+	cpx_clear (bin);
+}
+
 void b_sub_s (mpf_t re_b, mpf_t im_b, mpf_t re_s, mpf_t im_s, 
               unsigned int prec, int nterms, double eps)
 {
