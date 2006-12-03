@@ -769,28 +769,28 @@ int main (int argc, char * argv[])
 	mpf_init (nzeta);
 	
 	cpx_t zeta, ess;
-	cpx_init (&zeta);
-	cpx_init (&ess);
-	mpf_set_ui (ess.im, 0);
+	cpx_init (zeta);
+	cpx_init (ess);
+	mpf_set_ui (ess[0].im, 0);
 
 	int i;
 	int pr = prec;
 
 #if HANDY
-	mpf_set_ui (ess.im, 0);
-	mpf_set_d (ess.re, 0.5);
-	fp_borwein_zeta_c (&zeta, &ess, pr);
-	cpx_prt ("zeta(1/2) = ", &zeta);
+	mpf_set_ui (ess[0].im, 0);
+	mpf_set_d (ess[0].re, 0.5);
+	fp_borwein_zeta_c (zeta, ess, pr);
+	cpx_prt ("zeta(1/2) = ", zeta);
 	printf ("\n");
 #endif
 
 	/* zero offsets */
-	mpf_set_d (ess.re, -0.5);
+	mpf_set_d (ess[0].re, -0.5);
 	for (i=0; i<13; i++ ) {
-		zeta_zero (ess.im, i);
-		fp_borwein_zeta_c (&zeta, &ess, pr);
+		zeta_zero (ess[0].im, i);
+		fp_borwein_zeta_c (zeta, ess, pr);
 		printf ("zeta(rho[%d]-1) = ", i);
-		cpx_prt (" ", &zeta);
+		cpx_prt (" ", zeta);
 		printf ("\n");
 		fflush (stdout);
 	}
