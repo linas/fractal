@@ -27,10 +27,10 @@ void fp_inv_pow (mpf_t p, unsigned int n, unsigned int m);
  * no attempts at optimization. Also, does not assume any 
  * precomputed constants.
  */
-void fp_exp (mpf_t ex, mpf_t z, unsigned int prec);
-void fp_sine (mpf_t ex, mpf_t z, unsigned int prec);
-void fp_cosine (mpf_t ex, mpf_t z, unsigned int prec);
-void cpx_exp (cpx_t ex, cpx_t z, unsigned int prec);
+void fp_exp (mpf_t ex, const mpf_t z, unsigned int prec);
+void fp_sine (mpf_t ex, const mpf_t z, unsigned int prec);
+void fp_cosine (mpf_t ex, const mpf_t z, unsigned int prec);
+void cpx_exp (cpx_t ex, const cpx_t const z, unsigned int prec);
 
 /**
  * fp_log_m1 -  Floating point logarithm
@@ -38,8 +38,8 @@ void cpx_exp (cpx_t ex, cpx_t z, unsigned int prec);
  * no attempts at optimization. Also, does not assume any 
  * precomputed constants.
  */
-void fp_log_m1 (mpf_t lg, mpf_t z, unsigned int prec);
-void fp_log (mpf_t lg, mpf_t z, unsigned int prec);
+void fp_log_m1 (mpf_t lg, const mpf_t z, unsigned int prec);
+void fp_log (mpf_t lg, const mpf_t z, unsigned int prec);
 
 /**
  * fp_arctan -  Floating point arctangent
@@ -47,7 +47,7 @@ void fp_log (mpf_t lg, mpf_t z, unsigned int prec);
  * no attempts at optimization. Also, does not assume any 
  * precomputed constants.
  */
-void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
+void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec);
 
 /*
  * cpx_pow_mpf-- return q^s for complex s, real q.
@@ -56,7 +56,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
  * a logarithm, an exp, sin and cos to be computed, each of which
  * are kinda slow ...
  */
-void cpx_pow_mpf (cpx_t powc, mpf_t kq, cpx_t ess, int prec);
+void cpx_pow_mpf (cpx_t powc, const mpf_t kq, const cpx_t const ess, int prec);
 
 /**
  * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
@@ -65,7 +65,7 @@ void cpx_pow_mpf (cpx_t powc, mpf_t kq, cpx_t ess, int prec);
  * allowing improved algorithm speeds.
  */
 
-void fp_pow_rc (cpx_t diri, int k, mpf_t q, cpx_t ess, int prec);
+void fp_pow_rc (cpx_t diri, int k, const mpf_t q, const cpx_t const ess, int prec);
 
 /* =============================== END OF FILE =========================== */
 

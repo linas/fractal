@@ -85,7 +85,7 @@ void fp_inv_pow (mpf_t p, unsigned int n, unsigned int m)
  * precomputed constants.
  */
 
-static void fp_exp_helper (mpf_t ex, mpf_t z, unsigned int prec)
+static void fp_exp_helper (mpf_t ex, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, z_n, fact, term;
 
@@ -134,7 +134,7 @@ static void fp_exp_helper (mpf_t ex, mpf_t z, unsigned int prec)
 	mpf_clear (maxterm);
 }
 
-void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
+void fp_exp (mpf_t ex, const mpf_t z, unsigned int prec)
 {
 	if (mpf_cmp_ui (z, 0) > 0)
 	{
@@ -159,7 +159,7 @@ void fp_exp (mpf_t ex, mpf_t z, unsigned int prec)
  * precomputed constants.
  */
 
-void fp_sine (mpf_t si, mpf_t z, unsigned int prec)
+void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, z_n, fact, term;
 
@@ -231,7 +231,7 @@ void fp_sine (mpf_t si, mpf_t z, unsigned int prec)
  * precomputed constants.
  */
 
-void fp_cosine (mpf_t co, mpf_t z, unsigned int prec)
+void fp_cosine (mpf_t co, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, z_n, fact, term;
 
@@ -300,7 +300,7 @@ void fp_cosine (mpf_t co, mpf_t z, unsigned int prec)
  * cpx_exp -  complex-valued exp, built out of the real-valued funcs.
  */
 
-void cpx_exp (cpx_t ex, cpx_t z, unsigned int prec)
+void cpx_exp (cpx_t ex, const cpx_t const z, unsigned int prec)
 {
 	mpf_t mag, si, co;
 
@@ -328,7 +328,7 @@ void cpx_exp (cpx_t ex, cpx_t z, unsigned int prec)
  * precomputed constants.
  */
 
-void fp_log_m1 (mpf_t lg, mpf_t z, unsigned int prec)
+void fp_log_m1 (mpf_t lg, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, z_n, term;
 
@@ -372,7 +372,7 @@ void fp_log_m1 (mpf_t lg, mpf_t z, unsigned int prec)
 	mpf_clear (maxterm);
 }
 
-void fp_log (mpf_t lg, mpf_t z, unsigned int prec)
+void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee;
 	mpf_init (zee);
@@ -399,7 +399,7 @@ void fp_log (mpf_t lg, mpf_t z, unsigned int prec)
  * precomputed constants.
  */
 
-void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
+void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, z_n, zsq, term;
 
@@ -461,7 +461,7 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
  * a logarithm, an exp, sin and cos to be computed, each of which
  * are kinda slow ... 
  */
-void cpx_pow_mpf (cpx_t powc, mpf_t kq, cpx_t ess, int prec)
+void cpx_pow_mpf (cpx_t powc, const mpf_t kq, const cpx_t const ess, int prec)
 {
 	mpf_t logkq, mag, pha;
 	mpf_init (logkq);
@@ -500,7 +500,7 @@ void cpx_pow_mpf (cpx_t powc, mpf_t kq, cpx_t ess, int prec)
  * a logarithm, an exp, sin and cos to be computed, each of which
  * are kinda slow ... 
  */
-void fp_pow_rc (cpx_t powc, int k, mpf_t q, cpx_t ess, int prec)
+void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t const ess, int prec)
 {
 	DECLARE_FP_CACHE (re_powc);
 	DECLARE_FP_CACHE (im_powc);
