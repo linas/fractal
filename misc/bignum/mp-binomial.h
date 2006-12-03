@@ -67,7 +67,8 @@ void fp_harmonic (mpf_t harm, unsigned int n);
 
 /** 
  * fp_poch_rising
- * rising pochhammer symbol (x)_n, for real values of x and integer n.
+ * Rising pochhammer symbol (x)_n, for real values of x and integer n.
+ * p = x(x+1)(x+2)...(x+n-1) = Gamma(x+n)/Gamma(x)
  *
  * Brute force, simple.
  */

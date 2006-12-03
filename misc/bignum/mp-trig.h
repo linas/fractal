@@ -49,6 +49,15 @@ void fp_log (mpf_t lg, mpf_t z, unsigned int prec);
  */
 void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec);
 
+/*
+ * cpx_pow_mpf-- return q^s for complex s, real q.
+ *
+ * Brute-force algo, this thing is pretty slow, as it requires
+ * a logarithm, an exp, sin and cos to be computed, each of which
+ * are kinda slow ...
+ */
+void cpx_pow_mpf (cpx_t powc, mpf_t kq, cpx_t ess, int prec);
+
 /**
  * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
  *

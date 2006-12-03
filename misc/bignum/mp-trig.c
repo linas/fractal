@@ -455,33 +455,27 @@ void fp_arctan (mpf_t atn, mpf_t z, unsigned int prec)
 
 /* ======================================================================= */
 /**
- * mp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
+ * cpx_pow_mpf-- return q^s for complex s, real q.
  *
- * If q is held fixed, and k varied, then the values are cached,
- * allowing improved algorithm speeds.
- *
- * Overall, though, this thing is pretty slow, as it requires
+ * Brute-force algo, this thing is pretty slow, as it requires
  * a logarithm, an exp, sin and cos to be computed, each of which
  * are kinda slow ... 
  */
-static void fp_pow_rc_helper (cpx_t powc, int k, mpf_t q, cpx_t ess, int prec)
+void cpx_pow_mpf (cpx_t powc, mpf_t kq, cpx_t ess, int prec)
 {
-	mpf_t kq, logkq, mag, pha;
-	mpf_init (kq);
+	mpf_t logkq, mag, pha;
 	mpf_init (logkq);
 	mpf_init (mag);
 	mpf_init (pha);
 
-	mpf_add_ui (kq, q, k);
-	
 	fp_log (logkq, kq, prec);
 	
-	/* magnitude is exp(re(s) * log(k+q)) */
+	/* magnitude is exp(re(s) * log(kq)) */
 	mpf_mul (mag, ess->re, logkq);
 	
 	fp_exp (mag, mag, prec);
 
-	/* phase is im(s) * log(k+q)) */
+	/* phase is im(s) * log(kq)) */
 	mpf_mul (pha, ess->im, logkq);
 
 	fp_cosine (powc->re, pha, prec);
@@ -490,12 +484,22 @@ static void fp_pow_rc_helper (cpx_t powc, int k, mpf_t q, cpx_t ess, int prec)
 	fp_sine (powc->im, pha, prec);
 	mpf_mul (powc->im, mag, powc->im);
 	
-	mpf_clear(kq);
 	mpf_clear(logkq);
 	mpf_clear(mag);
 	mpf_clear(pha);
 }
 
+/* ======================================================================= */
+/**
+ * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
+ *
+ * If q is held fixed, and k varied, then the values are cached,
+ * allowing improved algorithm speeds.
+ *
+ * Overall, though, this thing is pretty slow, as it requires
+ * a logarithm, an exp, sin and cos to be computed, each of which
+ * are kinda slow ... 
+ */
 void fp_pow_rc (cpx_t powc, int k, mpf_t q, cpx_t ess, int prec)
 {
 	DECLARE_FP_CACHE (re_powc);
@@ -523,7 +527,11 @@ void fp_pow_rc (cpx_t powc, int k, mpf_t q, cpx_t ess, int prec)
 		return;
 	}
 	
-	fp_pow_rc_helper (powc, k, q, ess, prec);
+	mpf_t kq;
+	mpf_init (kq);
+	mpf_add_ui (kq, q, k);
+	cpx_pow_mpf (powc, kq, ess, prec);
+	mpf_clear (kq);
 
 	fp_one_d_cache_check (&im_powc, k);
 	fp_one_d_cache_store (&re_powc, powc[0].re, k, prec);

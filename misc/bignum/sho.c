@@ -15,6 +15,9 @@
 #include "mp-misc.h"
 #include "mp-trig.h"
 
+/* ======================================================== */
+/* The two eigenfunctions of the simple harmonic oscillator */
+
 void psi_1 (cpx_t psi, cpx_t lambda, cpx_t y, int prec)
 {
 	cpx_t a, b, z;
@@ -80,6 +83,54 @@ void psi_2 (cpx_t psi, cpx_t lambda, cpx_t y, int prec)
 	cpx_clear (z);
 }
 
+/* ======================================================== */
+/* cheap hack for the gamma function. Incorrect, but holds water.
+ * Approximates gamma(z)=1 for 1<z<2.
+ */
+static void gamma_hack (cpx_t gam, cpx_t z)
+{
+	double flo = mpf_get_d (z[0].re);
+	unsigned int intpart = (unsigned int) floor (flo);
+	intpart ++;
+	cpx_set (gam, z);
+	mpf_sub_ui (gam[0].re, gam[0].re, inpart);
+	cpx_poch_rising (gam, gam, intpart);
+}
+
+void eta_1 (cpx_t psi, cpx_t lambda, cpx_t y, int prec)
+{
+	cpx_t psi;
+	cpx_t pha;
+	cpx_init (psi);
+	cpx_init (pha);
+
+	psi_1 (psi, lambda, y, prec);
+
+	mpf_t pi;
+	mpf_init (pi);
+	fp_pi (pi, prec);
+
+	/* phase term, exp (i pi lambda/2) */
+	cpx_set (pha, lambda);
+	cpx_div_ui (pha, 2);
+	cpx_mul_mpf (pha, pi);
+	cpx_times_i (pha, pha);
+	cpx_exp (pha, pha);
+	cpx_mul (psi, psi, pha);
+
+	/* power of two term */
+	mpf_set_ui (pi, 2);
+	cpx_set (pha, lambda);
+	cpx_div_ui (pha, 2);
+	cpx_pow_mpf (pha, pi, pha, prec);
+	
+
+	cpx_clear (psi);
+	cpx_clear (pha);
+	mpf_clear (pi);
+}
+
+/* ======================================================== */
 int
 main (int argc, char *argv[])
 {
