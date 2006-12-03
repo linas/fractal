@@ -92,11 +92,24 @@ void psi_2 (cpx_t psi, cpx_t lambda, cpx_t y, int prec)
 static void gamma_hack (cpx_t gam, const cpx_t const z)
 {
 	double flo = mpf_get_d (z[0].re);
-	unsigned int intpart = (unsigned int) floor (flo);
-	intpart ++;
-	cpx_set (gam, z);
-	mpf_sub_ui (gam[0].re, gam[0].re, intpart);
-	cpx_poch_rising (gam, gam, intpart);
+	if (flo > 2.0)
+	{
+		unsigned int intpart = (unsigned int) floor (flo-1.0);
+		cpx_set (gam, z);
+		mpf_sub_ui (gam[0].re, gam[0].re, intpart);
+		cpx_poch_rising (gam, gam, intpart);
+	}
+	else if (flo < 1.0)
+	{
+		unsigned int intpart = (unsigned int) floor (1.0-flo);
+		cpx_set (gam, z);
+		cpx_poch_rising (gam, gam, intpart);
+		cpx_recip (gam, gam);
+	}
+	else
+	{
+		cpx_set_ui (gam, 1, 0);
+	}
 }
 
 void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
