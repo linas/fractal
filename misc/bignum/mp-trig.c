@@ -395,8 +395,9 @@ void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
 /**
  * fp_arctan -  Floating point arctangent
  * Implemented using a brute-force, very simple algo, with 
- * no attempts at optimization. Also, does not assume any 
- * precomputed constants.
+ * no attempts at optimization. 
+ * Implements A&S equation 4.4.42 
+ * Current algo is very slow for z near one.
  */
 
 void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
@@ -411,10 +412,8 @@ void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
 	/* Make copy of argument now! */
 	mpf_set (zee, z);
 	mpf_mul (zsq, zee, zee);
-	mpf_mul (z_n, zee, zsq);
-	mpf_set (atn, zee);
 	
-	// double mex = ((double) prec) * log (10.0) / log(2.0);
+	/* double mex = ((double) prec) * log (10.0) / log(2.0); */
 	double mex = ((double) prec) * 3.321928095;
 	unsigned int imax = (unsigned int) (mex +1.0);
 	mpf_t maxterm, one;
@@ -423,25 +422,64 @@ void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
 	mpf_set_ui (one, 1);
 	mpf_div_2exp (maxterm, one, imax);
 
-	unsigned int n=1;
-	while(1)
+	mpf_abs(atn, zee);
+	if (mpf_cmp (atn, one) <= 0)
 	{
-		mpf_div_ui (term, z_n, 2*n+1);
-		if (n%2)
-		{
-			mpf_sub (atn, atn, term);
-		}
-		else
-		{
-			mpf_add (atn, atn, term);
-		}
+		mpf_mul (z_n, zee, zsq);
+		mpf_set (atn, zee);
 		
-		/* don't go no farther than this */
-		mpf_abs (term, term);
-		if (mpf_cmp (term, maxterm) < 0) break;
+		unsigned int n=1;
+		while(1)
+		{
+			mpf_div_ui (term, z_n, 2*n+1);
+			if (n%2)
+			{
+				mpf_sub (atn, atn, term);
+			}
+			else
+			{
+				mpf_add (atn, atn, term);
+			}
+			
+			/* don't go no farther than this */
+			mpf_abs (term, term);
+			if (mpf_cmp (term, maxterm) < 0) break;
+			
+			n ++;
+			mpf_mul (z_n, z_n, zsq);
+		}
+	}
+	else
+	{
+		fp_pi (atn, prec);
+		mpf_div_ui (atn, atn, 2);
 		
-		n ++;
+		mpf_div (z_n, one, zee);
+		mpf_sub (atn, atn, z_n);
+
+		mpf_mul (zsq, z_n, z_n);
 		mpf_mul (z_n, z_n, zsq);
+		
+		unsigned int n=1;
+		while(1)
+		{
+			mpf_div_ui (term, z_n, 2*n+1);
+			if (n%2)
+			{
+				mpf_add (atn, atn, term);
+			}
+			else
+			{
+				mpf_sub (atn, atn, term);
+			}
+			
+			/* don't go no farther than this */
+			mpf_abs (term, term);
+			if (mpf_cmp (term, maxterm) < 0) break;
+			
+			n ++;
+			mpf_mul (z_n, z_n, zsq);
+		}
 	}
 	
 	mpf_clear (zee);
