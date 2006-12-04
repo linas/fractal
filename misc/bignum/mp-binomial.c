@@ -512,10 +512,11 @@ void fp_poch_rising (mpf_t poch, double x, unsigned int n)
 
 void cpx_poch_rising_d (cpx_t poch, double re_s, double im_s, unsigned int n)
 {
-	cpx_t term;
+	cpx_t term, acc;
 	cpx_init (term);
+	cpx_init (acc);
 
-	cpx_set_ui (poch, 1, 0);
+	cpx_set_ui (acc, 1, 0);
 	
 	unsigned int i;
 	for (i=0; i<n; i++)
@@ -523,10 +524,12 @@ void cpx_poch_rising_d (cpx_t poch, double re_s, double im_s, unsigned int n)
 		mpf_set_d (term[0].re, re_s+i);
 		mpf_set_d (term[0].im, im_s);
 
-		cpx_mul (poch, poch, term);
+		cpx_mul (acc, acc, term);
 	}
 
+	cpx_set (poch, acc);
 	cpx_clear (term);
+	cpx_clear (acc);
 }
 
 /* ======================================================================= */
@@ -538,10 +541,11 @@ void cpx_poch_rising_d (cpx_t poch, double re_s, double im_s, unsigned int n)
 
 void cpx_poch_rising (cpx_t poch, const cpx_t const ess, unsigned int n)
 {
-	cpx_t term;
+	cpx_t term, acc;
 	cpx_init (term);
+	cpx_init (acc);
 
-	cpx_set_ui (poch, 1, 0);
+	cpx_set_ui (acc, 1, 0);
 
 	unsigned int i;
 	for (i=0; i<n; i++)
@@ -549,10 +553,12 @@ void cpx_poch_rising (cpx_t poch, const cpx_t const ess, unsigned int n)
 		cpx_set (term, ess);
 		mpf_add_ui (term[0].re, term[0].re, i);
 
-		cpx_mul (poch, poch, term);
+		cpx_mul (acc, acc, term);
 	}
 
+	cpx_set (poch, acc);
 	cpx_clear (term);
+	cpx_clear (acc);
 }
 
 /* ======================================================================= */
