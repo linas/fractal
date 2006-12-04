@@ -44,10 +44,10 @@ void fp_log (mpf_t lg, const mpf_t z, unsigned int prec);
 /**
  * fp_arctan -  Floating point arctangent
  * Implemented using a brute-force, very simple algo, with 
- * no attempts at optimization. Also, does not assume any 
- * precomputed constants.
+ * no attempts at optimization. Very slow near y=x
  */
 void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec);
+void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec);
 
 /*
  * cpx_pow_mpf-- return q^s for complex s, real q.

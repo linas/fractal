@@ -400,7 +400,7 @@ void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
  * Current algo is very slow for z near one.
  */
 
-void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
+void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec)
 {
 	mpf_t zee, z_n, zsq, term;
 
@@ -410,8 +410,9 @@ void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
 	mpf_init (term);
 
 	/* Make copy of argument now! */
-	mpf_set (zee, z);
-	mpf_mul (zsq, zee, zee);
+	mpf_div (zee, y, x);
+	int sgn_y = mpf_sgn(y);
+	int sgn_x = mpf_sgn(x);
 	
 	/* double mex = ((double) prec) * log (10.0) / log(2.0); */
 	double mex = ((double) prec) * 3.321928095;
@@ -423,8 +424,9 @@ void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
 	mpf_div_2exp (maxterm, one, imax);
 
 	mpf_abs(atn, zee);
-	if (mpf_cmp (atn, one) <= 0)
+	if (mpf_cmp_ui (atn, 1) <= 0)
 	{
+		mpf_mul (zsq, zee, zee);
 		mpf_mul (z_n, zee, zsq);
 		mpf_set (atn, zee);
 		
@@ -481,6 +483,17 @@ void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
 			mpf_mul (z_n, z_n, zsq);
 		}
 	}
+
+	if ((sgn_y >0) && (sgn_x <0) && (mpf_sgn (atn)<0))
+	{
+		fp_pi (zsq, prec);
+		mpf_add (atn, atn, zsq);
+	}
+	else if ((sgn_y <0) && (mpf_sgn (atn)>0))
+	{
+		fp_pi (zsq, prec);
+		mpf_sub (atn, atn, zsq);
+	}
 	
 	mpf_clear (zee);
 	mpf_clear (z_n);
@@ -489,6 +502,15 @@ void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
 
 	mpf_clear (one);
 	mpf_clear (maxterm);
+}
+
+void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
+{
+	mpf_t one;
+	mpf_init (one);
+	mpf_set_ui (one,1);
+	fp_arctan2 (atn, z, one, prec);
+	mpf_clear (one);
 }
 
 /* ======================================================================= */
