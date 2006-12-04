@@ -102,9 +102,14 @@ static void gamma_hack (cpx_t gam, const cpx_t const z)
 	if (flo > 2.0)
 	{
 		unsigned int intpart = (unsigned int) floor (flo-1.0);
+printf ("duude intpart=%d\n", intpart);
 		cpx_set (ans, z);
 		mpf_sub_ui (ans[0].re, ans[0].re, intpart);
+cpx_prt ("zminusi=", ans);
+printf ("\n");
 		cpx_poch_rising (ans, ans, intpart);
+cpx_prt ("pockky=", ans);
+printf ("\n");
 	}
 	else if (flo < 1.0)
 	{
@@ -125,8 +130,9 @@ static void gamma_hack (cpx_t gam, const cpx_t const z)
 
 void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 {
-	cpx_t pha;
+	cpx_t pha, lmo;
 	cpx_init (pha);
+	cpx_init (lmo);
 
 	psi_1 (eta, lambda, y, prec);
 cpx_prt ("eta=", eta);
@@ -142,12 +148,7 @@ printf ("\n");
 	cpx_mul_mpf (pha, pha, tmp);
 	cpx_times_i (pha, pha);
 	cpx_exp (pha, pha, prec);
-cpx_prt ("exp i pha=", pha);
-printf ("\n");
 	cpx_mul (eta, eta, pha);
-cpx_prt ("phaseeta=", eta);
-printf ("\n");
-
 
 	/* power of two term */
 	mpf_set_ui (tmp, 2);
@@ -161,20 +162,33 @@ printf ("\n");
 	/* Gamma (1/4+lambda/2) */
 	mpf_set_ui (tmp, 1);
 	mpf_div_ui (tmp, tmp, 2);
-	cpx_set (pha, lambda);
-	cpx_add_mpf (pha, pha, tmp);
-	cpx_div_ui (pha, pha, 2);
+	cpx_add_mpf (lmo, lambda, tmp);
+	cpx_div_ui (pha, lmo, 2);
+cpx_prt ("half lammy=", pha);
+printf ("\n");
 	gamma_hack (pha, pha);
+cpx_prt ("gammaup=", pha);
+printf ("\n");
 	cpx_mul (eta, eta, pha);
 
+	/* Gamma (lambda + 1/2) */
+cpx_prt ("lammy=", lmo);
+printf ("\n");
+	gamma_hack (pha, lmo);
+cpx_prt ("gammadown=", pha);
+printf ("\n");
+	cpx_div (eta, eta, pha);
+
 	cpx_clear (pha);
+	cpx_clear (lmo);
 	mpf_clear (tmp);
 }
 
 void eta_2 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 {
-	cpx_t pha;
+	cpx_t pha, lmo;
 	cpx_init (pha);
+	cpx_init (lmo);
 
 	psi_2 (eta, lambda, y, prec);
 
@@ -194,24 +208,24 @@ void eta_2 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 
 	/* power of two term */
 	mpf_set_ui (tmp, 2);
-	cpx_set (pha, lambda);
-	cpx_div_ui (pha, pha, 2);
+	cpx_div_ui (pha, lambda, 2);
 	cpx_pow_mpf (pha, tmp, pha, prec);
 	cpx_mul (eta, eta, pha);
 	
-	/* times (lambda-1/2) */
+	/* Gamma (-1/4+lambda/2) */
 	mpf_set_ui (tmp, 1);
 	mpf_div_ui (tmp, tmp, 2);
-	cpx_set (pha, lambda);
-	cpx_sub_mpf (pha, pha, tmp);
-	cpx_mul (eta, eta, pha);
-	
-	/* Gamma (-1/4+lambda/2) */
-	cpx_div_ui (pha, pha, 2);
+	cpx_sub_mpf (lmo, lambda, tmp);
+	cpx_div_ui (pha, lmo, 2);
 	gamma_hack (pha, pha);
 	cpx_mul (eta, eta, pha);
 
+	/* Gamma (lambda - 1/2) */
+	gamma_hack (pha, lmo);
+	cpx_div (eta, eta, pha);
+
 	cpx_clear (pha);
+	cpx_clear (lmo);
 	mpf_clear (tmp);
 }
 
