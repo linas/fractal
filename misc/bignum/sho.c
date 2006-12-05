@@ -278,8 +278,14 @@ void prt_graph (double lam, int prec)
 	cpx_init (lambda);
 	cpx_init (z);
 
-	cpx_set_ui (lambda, 1,0);
+	cpx_set_ui (lambda, 1, 0);
 	mpf_set_d (lambda[0].re, lam);
+	mpf_set_d (lambda[0].im, 0.0);
+
+	printf ("# \n# Graph of simple harmonic oscillator\n# \n");
+	cpx_prt ("# lambda = ", lambda);
+	printf ("\n# \n");
+	fflush (stdout);
 
 	cpx_t ex;
 	cpx_init (ex);
@@ -289,6 +295,7 @@ void prt_graph (double lam, int prec)
 	for (x=-6.0; x<6.01; x+=0.1)
 	{
 		mpf_set_d (ex[0].re, x);
+		mpf_set_d (ex[0].im, 1.0);
 
 #if 0
 		psi_1 (ps1, lambda, ex, prec);
@@ -299,10 +306,23 @@ void prt_graph (double lam, int prec)
 		eta_2 (ps2, lambda, ex, prec);
 
 		printf ("%g", x);
+		// fp_prt ("\t", ps1[0].re);
+		// fp_prt ("\t", ps1[0].im);
+		// fp_prt ("\t", ps2[0].re);
+		// fp_prt ("\t", ps2[0].im);
+
+		/* phase */
+		fp_arctan2 (ps1[0].re, ps1[0].im, ps1[0].re, 30);
+		fp_arctan2 (ps2[0].re, ps2[0].im, ps2[0].re, 30);
+
+		mpf_sub (ps1[0].re, ps1[0].re, ps2[0].re);
+
 		fp_prt ("\t", ps1[0].re);
 		fp_prt ("\t", ps2[0].re);
 		printf ("\n");
+		fflush (stdout);
 	}
+
 }
 
 void do_coho (double lam, int prec)
@@ -316,7 +336,7 @@ void do_coho (double lam, int prec)
 	cpx_set_ui (lambda, 1,0);
 	mpf_set_d (lambda[0].re, lam);
 
-	cpx_set_ui (q, 1,0);
+	cpx_set_d (q, 2.1, 0.0);
 	cpx_set_ui (z, 1,0);
 	
 	coherent (coho, lambda, q, z, prec);
@@ -327,7 +347,7 @@ void do_coho (double lam, int prec)
 int
 main (int argc, char *argv[])
 {
-	int prec = 650;
+	int prec = 150;
 	
 	if (2> argc)
 	{
@@ -338,6 +358,9 @@ main (int argc, char *argv[])
 	double lam;
 	lam = atof (argv[1]);
 
+	/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
+	mpf_set_default_prec (3.3*prec);
+	
 	// prt_graph (lam, prec);
 	do_coho (lam, prec);
 	
