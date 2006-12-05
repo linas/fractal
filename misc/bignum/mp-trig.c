@@ -412,7 +412,6 @@ void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec)
 	/* Make copy of argument now! */
 	mpf_div (zee, y, x);
 	int sgn_y = mpf_sgn(y);
-	int sgn_x = mpf_sgn(x);
 	
 	/* double mex = ((double) prec) * log (10.0) / log(2.0); */
 	double mex = ((double) prec) * 3.321928095;
@@ -484,7 +483,7 @@ void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec)
 		}
 	}
 
-	if ((sgn_y >0) && (sgn_x <0) && (mpf_sgn (atn)<0))
+	if ((sgn_y >0) && (mpf_sgn (atn)<0))
 	{
 		fp_pi (zsq, prec);
 		mpf_add (atn, atn, zsq);
