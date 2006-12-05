@@ -227,35 +227,48 @@ void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 	eta_2 (e2, lambda, y, prec);
 	cpx_add (coho, e1, e2);
 	
+cpx_t prev; cpx_init (prev); cpx_set_ui(prev,1,0);
 	int n;
-	for (n=1; n<40; n++)
+	for (n=1; n<140; n++)
 	{
 	printf ("n=%d  \n", n);
 		/* lambda+n */
 		cpx_add_ui (lam, lambda, n, 0);
 		eta_1 (e1, lam, y, prec);
-	cpx_prt ("e1=", e1);
-	printf ("\n");
+//	cpx_prt ("e1=", e1);
+//	printf ("\n");
 		eta_2 (e2, lam, y, prec);
-	cpx_prt ("e2=", e2);
-	printf ("\n");
+//	cpx_prt ("e2=", e2);
+//	printf ("\n");
 		cpx_add (e1, e1, e2);
 		cpx_mul (e1, e1, qn);
+//	printf ("\n");
+//	cpx_prt ("pos sum * q^n=", e1);
+//	printf ("\n");
+//	printf ("\n");
 		cpx_add (coho, coho, e1);
 		
 		/* lambda-n */
 		cpx_sub_ui (lam, lambda, n, 0);
 		eta_1 (e1, lam, y, prec);
-	cpx_prt ("neg e1", e1);
-	printf ("\n");
+//	cpx_prt ("neg eta1=", e1);
+//	printf ("\n");
+cpx_div (prev, e1,prev);
+cpx_prt ("ratio=", prev);
+printf ("\n");
+cpx_set (prev,e1);
 		eta_2 (e2, lam, y, prec);
-	cpx_prt ("neg e2", e2);
-	printf ("\n");
+//	cpx_prt ("neg eta2=", e2);
+//	printf ("\n");
 		cpx_add (e1, e1, e2);
 		cpx_div (e1, e1, qn);
+//	printf ("\n");
+//	cpx_prt ("neg sum * q^n=", e1);
+//	printf ("\n");
+//	printf ("\n");
 		cpx_add (coho, coho, e1);
 		
-	cpx_prt ("coho", coho);
+	cpx_prt ("coho=", coho);
 	printf ("\n");
 	printf ("\n");
 		
@@ -336,7 +349,7 @@ void do_coho (double lam, int prec)
 	cpx_set_ui (lambda, 1,0);
 	mpf_set_d (lambda[0].re, lam);
 
-	cpx_set_d (q, 2.1, 0.0);
+	cpx_set_d (q, 4.1, 0.0);
 	cpx_set_ui (z, 1,0);
 	
 	coherent (coho, lambda, q, z, prec);
@@ -362,7 +375,7 @@ main (int argc, char *argv[])
 	mpf_set_default_prec (3.3*prec);
 	
 	// prt_graph (lam, prec);
-	do_coho (lam, prec);
+	do_coho (lam, 450);
 	
 	return 0;
 }
