@@ -1,9 +1,14 @@
-
-/* db-cache.c
+/* 
+ * db-cache.c
  *
  * File cache for pre-computed bignum values.
  *
- * Linas Vepstas July 2006
+ * You may redistribute this, and/or modify this, under the terms 
+ * of the GNU Lesser General Public License as  published by the
+ * Free Software Foundation; either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * Copyright Linas Vepstas July 2006
  */
 
 #include <db_185.h>
@@ -19,7 +24,7 @@
 #include <gmp.h>
 #include "db-cache.h"
 
-void fp_cache_put (const char * dbname, mpf_t val, int idx, int nprec)
+void fp_cache_put (const char * dbname, const mpf_t val, int idx, int nprec)
 {
 	DB *db;
 

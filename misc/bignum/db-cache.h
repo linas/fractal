@@ -2,19 +2,25 @@
  * db-cache.h
  *
  * File cache for pre-computed bignum values. Stores values,
- * with indicated precision, so we don't waste too much compute time
+ * with indicated precision, so we don't waste too much compute 
+ * time.
  *
- * Linas Vepstas July 2006
+ * You may redistribute this, and/or modify this, under the terms 
+ * of the GNU Lesser General Public License as  published by the
+ * Free Software Foundation; either version 2.1 of the License,
+ * or (at your option) any later version.
+ * 
+ * Copyright Linas Vepstas July 2006
  */
 
 #include <gmp.h>
 
 /**
  * fp_cache_put -- put mpf_t value into the database.
- * prec: number of decimal places of precision to store.
- * idx:  index under which to store the value
+ * @prec: number of decimal places of precision to store.
+ * @idx:  index under which to store the value
  */
-void fp_cache_put (const char * dbname, mpf_t val, int idx, int nprec);
+void fp_cache_put (const char * dbname, const mpf_t val, int idx, int nprec);
 
 /**
  * fp_cache_get -- get mpf_t from database
