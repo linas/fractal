@@ -52,16 +52,17 @@ void psi_1 (cpx_t psi, cpx_t lambda, cpx_t y, int prec)
 	cpx_clear (z);
 }
 
-void psi_2 (cpx_t psi, cpx_t lambda, cpx_t y, int prec)
+void psi_2 (cpx_t psiret, cpx_t lambda, cpx_t y, int prec)
 {
-	cpx_t a, b, z;
+	cpx_t a, b, z, psi;
 	cpx_init (a);
 	cpx_init (b);
 	cpx_init (z);
+	cpx_init (psi);
 
 	/* b=3/2 */
 	cpx_set_ui (b, 3, 0);
-	mpf_div_ui (b[0].re, b[0].re, 2);
+	cpx_div_ui (b, b, 2);
 
 	/* a= (3/2-lambda)/2 */
 	cpx_set (a,b);
@@ -80,9 +81,13 @@ void psi_2 (cpx_t psi, cpx_t lambda, cpx_t y, int prec)
 	cpx_mul (psi, psi, z);
 	cpx_mul (psi, psi, y);
 	
+	/* copy now, thus avoiding possible clobber of args */
+	cpx_set (psiret, psi);
+
 	cpx_clear (a);
 	cpx_clear (b);
 	cpx_clear (z);
+	cpx_clear (psi);
 }
 
 /* ======================================================== */
@@ -213,6 +218,81 @@ void eta_2 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 
 /* ======================================================== */
 
+void validate_ratio (cpx_t lambda, cpx_t y, int prec)
+{
+	cpx_t e1, e2, lam, rat;
+	cpx_init (e1);
+	cpx_init (e2);
+	cpx_init (lam);
+	cpx_init (rat);
+
+	int n;
+	for (n=5640; n<5680; n+=1)
+	{
+		printf ("n=%d  \n", n);
+
+		/* lambda-n */
+		cpx_add_ui (lam, lambda, n, 0);
+		
+#if VALIDATE_PSI_ONE
+		psi_1 (e1, lam, y, prec);
+		cpx_prt ("e1=", e1);
+		printf ("\n");
+
+		double flam = mpf_get_d (lam[0].re);
+		double fy = mpf_get_d (y[0].re);
+		double s1 = sqrt (1.0-2.0*flam);
+		//double cs1 = cos (fy*s1);
+		double cs1 = 0.5* exp (fy*s1);
+		double fe1 = mpf_get_d (e1[0].re);
+		printf ("duude cs1=%g cmp=%g\n", cs1, cs1/fe1);
+#endif
+
+#if 1
+		psi_2 (e2, lam, y, prec);
+		cpx_prt ("e2=", e2);
+		printf ("\n");
+
+		double flam = mpf_get_d (lam[0].re);
+		double fy = mpf_get_d (y[0].re);
+		double s2 = sqrt (2.0*flam-3.0);
+		double cs2 = cos (fy*s2);
+		// double cs2 = 0.5* exp (fy*s2);
+		double fe2 = mpf_get_d (e2[0].re);
+		printf ("duude cs1=%g cmp=%g\n", cs2, cs2/fe2);
+#endif
+
+#if 0
+		psi_2 (e2, lam, y, prec);
+		cpx_div (rat, e2,e1);
+
+		double frat = fy * exp (fy*(s1-s2));
+		double s2 = sqrt (3.0-2.0*flam);
+
+		frat /= fwa;
+		
+		printf ("duude s1=%g s2=%g frat=%g\n", s1, s2, frat);
+#endif
+#if 0
+		//	eta_1 (e1, lam, y, prec);
+		// eta_2 (e2, lam, y, prec);
+		cpx_prt ("neg eta1=", e1);
+		printf ("\n");
+		cpx_prt ("neg eta2=", e2);
+		printf ("\n");
+#endif
+
+		printf ("\n");
+	}
+
+	cpx_clear (e1);
+	cpx_clear (e2);	
+	cpx_clear (lam);
+	cpx_clear (rat);
+}
+
+/* ======================================================== */
+
 void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 {
 	cpx_t e1, e2, qn, lam;
@@ -235,11 +315,16 @@ cpx_t prev; cpx_init (prev); cpx_set_ui(prev,1,0);
 		/* lambda+n */
 		cpx_add_ui (lam, lambda, n, 0);
 		eta_1 (e1, lam, y, prec);
-//	cpx_prt ("e1=", e1);
-//	printf ("\n");
 		eta_2 (e2, lam, y, prec);
-//	cpx_prt ("e2=", e2);
-//	printf ("\n");
+#if 0
+cpx_prt ("e1=", e1);
+printf ("\n");
+cpx_prt ("e2=", e2);
+printf ("\n");
+cpx_div (prev, e1,e2);
+cpx_prt ("ratio=", prev);
+printf ("\n");
+#endif
 		cpx_add (e1, e1, e2);
 		cpx_mul (e1, e1, qn);
 //	printf ("\n");
@@ -251,15 +336,19 @@ cpx_t prev; cpx_init (prev); cpx_set_ui(prev,1,0);
 		/* lambda-n */
 		cpx_sub_ui (lam, lambda, n, 0);
 		eta_1 (e1, lam, y, prec);
-//	cpx_prt ("neg eta1=", e1);
-//	printf ("\n");
-cpx_div (prev, e1,prev);
+		eta_2 (e2, lam, y, prec);
+#if 0
+cpx_prt ("neg eta1=", e1);
+printf ("\n");
+cpx_prt ("neg eta2=", e2);
+printf ("\n");
+#endif
+
+#if 1
+cpx_div (prev, e1,e2);
 cpx_prt ("ratio=", prev);
 printf ("\n");
-cpx_set (prev,e1);
-		eta_2 (e2, lam, y, prec);
-//	cpx_prt ("neg eta2=", e2);
-//	printf ("\n");
+#endif
 		cpx_add (e1, e1, e2);
 		cpx_div (e1, e1, qn);
 //	printf ("\n");
@@ -268,8 +357,8 @@ cpx_set (prev,e1);
 //	printf ("\n");
 		cpx_add (coho, coho, e1);
 		
-	cpx_prt ("coho=", coho);
-	printf ("\n");
+//	cpx_prt ("coho=", coho);
+//	printf ("\n");
 	printf ("\n");
 		
 		cpx_mul (qn, qn, que);
@@ -346,13 +435,13 @@ void do_coho (double lam, int prec)
 	cpx_init (q);
 	cpx_init (z);
 
-	cpx_set_ui (lambda, 1,0);
-	mpf_set_d (lambda[0].re, lam);
+	cpx_set_d (lambda, lam, 0.0);
 
 	cpx_set_d (q, 4.1, 0.0);
-	cpx_set_ui (z, 1,0);
+	cpx_set_d (z, 2.5671, 0.0);
 	
-	coherent (coho, lambda, q, z, prec);
+	// coherent (coho, lambda, q, z, prec);
+	validate_ratio (lambda, z, prec);
 }
 
 /* ======================================================== */
@@ -360,7 +449,7 @@ void do_coho (double lam, int prec)
 int
 main (int argc, char *argv[])
 {
-	int prec = 150;
+	int prec = 625;
 	
 	if (2> argc)
 	{
@@ -375,7 +464,8 @@ main (int argc, char *argv[])
 	mpf_set_default_prec (3.3*prec);
 	
 	// prt_graph (lam, prec);
-	do_coho (lam, 450);
+	do_coho (lam, prec);
+	// do_coho (lam, prec);
 	
 	return 0;
 }
