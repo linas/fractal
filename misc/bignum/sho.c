@@ -235,6 +235,8 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		cpx_add_ui (lam, lambda, n, 0);
 		
 #if VALIDATE_PSI_ONE
+		/* The following validates just great, 
+		 * for both large positive and large negative lambda */
 		psi_1 (e1, lam, y, prec);
 		cpx_prt ("e1=", e1);
 		printf ("\n");
@@ -256,21 +258,18 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		double flam = mpf_get_d (lam[0].re);
 		double fy = mpf_get_d (y[0].re);
 		double s2 = sqrt (2.0*flam-3.0);
-		double cs2 = cos (fy*s2);
-		// double cs2 = 0.5* exp (fy*s2);
+		double cs2 = fy* cos (fy*s2);
+		// double cs2 = 0.5* fy * exp (fy*s2);
 		double fe2 = mpf_get_d (e2[0].re);
 		printf ("duude cs1=%g cmp=%g\n", cs2, cs2/fe2);
 #endif
 
 #if 0
-		psi_2 (e2, lam, y, prec);
 		cpx_div (rat, e2,e1);
 
 		double frat = fy * exp (fy*(s1-s2));
 		double s2 = sqrt (3.0-2.0*flam);
 
-		frat /= fwa;
-		
 		printf ("duude s1=%g s2=%g frat=%g\n", s1, s2, frat);
 #endif
 #if 0
