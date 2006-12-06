@@ -227,12 +227,12 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 	cpx_init (rat);
 
 	int n;
-	for (n=5640; n<5680; n+=1)
+	for (n=114; n<1116; n+=10)
 	{
 		printf ("n=%d  \n", n);
 
 		/* lambda-n */
-		cpx_add_ui (lam, lambda, n, 0);
+		cpx_sub_ui (lam, lambda, n, 0);
 		
 #if VALIDATE_PSI_ONE
 		/* The following validates just great, 
@@ -250,34 +250,47 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		printf ("duude cs1=%g cmp=%g\n", cs1, cs1/fe1);
 #endif
 
-#if 1
+#if VALIDATE_PSI_TWO
+		/* The following validates just great, for large negative
+		 * lambda, and seems numerically unstable for pos lambda */
 		psi_2 (e2, lam, y, prec);
 		cpx_prt ("e2=", e2);
 		printf ("\n");
 
 		double flam = mpf_get_d (lam[0].re);
 		double fy = mpf_get_d (y[0].re);
-		double s2 = sqrt (2.0*flam-3.0);
-		double cs2 = fy* cos (fy*s2);
-		// double cs2 = 0.5* fy * exp (fy*s2);
+		double s2 = sqrt (3.0-2.0*flam);
+		// double cs2 = 0.5 * cos (fy*s2);
+		double cs2 = 0.5 * exp (fy*s2) / s2;
 		double fe2 = mpf_get_d (e2[0].re);
 		printf ("duude cs1=%g cmp=%g\n", cs2, cs2/fe2);
 #endif
 
-#if 0
-		cpx_div (rat, e2,e1);
-
-		double frat = fy * exp (fy*(s1-s2));
-		double s2 = sqrt (3.0-2.0*flam);
-
-		printf ("duude s1=%g s2=%g frat=%g\n", s1, s2, frat);
-#endif
-#if 0
-		//	eta_1 (e1, lam, y, prec);
-		// eta_2 (e2, lam, y, prec);
-		cpx_prt ("neg eta1=", e1);
+#if VALIDATE_PSI_RATIO
+		/* The following validates just great, 
+		 * for large negative lambda. */
+		psi_1 (e1, lam, y, prec);
+		psi_2 (e2, lam, y, prec);
+		cpx_div (rat, e2, e1);
+		cpx_prt ("rat=", rat);
 		printf ("\n");
-		cpx_prt ("neg eta2=", e2);
+
+		double flam = mpf_get_d (lam[0].re);
+		double fy = mpf_get_d (y[0].re);
+		double s1 = sqrt (1.0-2.0*flam);
+		double s2 = sqrt (3.0-2.0*flam);
+		double frat = exp (fy*(s2-s1)) / s2;
+		frat = 1.0 / s2;
+		double fr = mpf_get_d (rat[0].re);
+
+		printf ("duude frat=%g rr=%g\n", frat, frat/fr);
+#endif
+
+#if 1
+		eta_1 (e1, lam, y, prec);
+		eta_2 (e2, lam, y, prec);
+		cpx_div (rat, e2, e1);
+		cpx_prt ("rat=", rat);
 		printf ("\n");
 #endif
 
