@@ -143,6 +143,15 @@ static inline void cpx_mul_mpf (cpx_t prod, const cpx_t const a, const mpf_t b)
 }
 
 /**
+ * cpx_mul_mpf -- prod = a * b
+ */
+static inline void cpx_mul_ui (cpx_t prod, const cpx_t const a, unsigned int b)
+{
+	mpf_mul_ui (prod[0].re, a[0].re, b);
+	mpf_mul_ui (prod[0].im, a[0].im, b);
+}
+
+/**
  * cpx_recip -- recip = 1/z
  */
 static inline void cpx_recip (cpx_t recip, const cpx_t const z)
