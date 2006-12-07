@@ -917,11 +917,16 @@ int main (int argc, char * argv[])
 	int i;
 	for (i=1; i<nterms; i++)
 	{
-		mpf_set_ui (gam, i);
+		double step=0.13245876;
+		double x = -nterms/2 + 0.1234567 + i;
+		x *= step;
+		mpf_set_d (gam, x);
 		fp_gamma (gam, gam, prec);
-		printf ("i=%d ", i);
-		fp_prt (" gam=", gam);
-		printf ("\n");
+
+		double y = tgamma (x);
+		double fy = mpf_get_d (gam);
+		
+		printf ("x=%g y=%g fy=%g diff=%g\n", x, y, fy, y-fy);
 	}
 #endif /* TEST_GAMMA */
 

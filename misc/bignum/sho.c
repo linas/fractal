@@ -103,6 +103,7 @@ static void gamma_hack (cpx_t gam, const cpx_t const z, int prec)
 	/* Make copy of argument NOW! */
 	cpx_set (zee, z);
 
+#if 0
 	double flo = mpf_get_d (zee[0].re);
 	if (flo > 2.0)
 	{
@@ -121,7 +122,9 @@ static void gamma_hack (cpx_t gam, const cpx_t const z, int prec)
 	{
 		cpx_set_ui (gam, 1, 0);
 	}
+#endif
 
+	cpx_set_ui (gam, 1, 0);
 	cpx_t rgamma;
 	cpx_init (rgamma);
 	cpx_set_ui (rgamma, 1, 0);
@@ -233,7 +236,7 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 	cpx_init (rat);
 
 	int n;
-	for (n=140; n<1160; n+=40)
+	for (n=40; n<60; n+=4)
 	{
 		printf ("n=%d  \n", n);
 
@@ -301,7 +304,7 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		printf ("\n");
 
 		double fr = mpf_get_d (rat[0].im);
-		fr *= -M_PI / sqrt(M_E);
+		fr *= -1.0 / sqrt(M_E);
 		printf ("duude fr=%g\n", fr);
 #endif
 
@@ -449,7 +452,6 @@ void do_coho (double lam, int prec)
 
 	cpx_set_d (q, 4.1, 0.0);
 	cpx_set_d (z, 2.5671, 0.0);
-	cpx_set_d (z, lam, lam);
 	
 	// coherent (coho, lambda, q, z, prec);
 	validate_ratio (lambda, z, prec);
