@@ -13,6 +13,7 @@
 
 #include <gmp.h>
 #include "mp-complex.h"
+#include "mp-misc.h"
 
 /* ======================================================================= */
 /**
@@ -51,14 +52,14 @@ cpx_confluent (cpx_t em, cpx_t a, cpx_t b, cpx_t z, unsigned int prec)
 	cpx_set_ui (em, 1, 0);
 	mpf_set_ui (fact, 1);
 
-	// double mex = ((double) prec) * log (10.0) / log(2.0);
-	double mex = ((double) prec) * 3.321928095;
-	unsigned int imax = (unsigned int) (mex +1.0);
-	mpf_t maxterm, one;
+	mpf_t mag;
+	mpf_init (mag);
+	
+	/* Use 10^{-2 * prec} for smallest term in sum */
+	mpf_t maxterm;
 	mpf_init (maxterm);
-	mpf_init (one);
-	mpf_set_ui (one, 1);
-	mpf_div_2exp (maxterm, one, 2*imax);
+	fp_epsilon (maxterm, prec);
+	mpf_mul (maxterm, maxterm, maxterm);
 
 	unsigned int n=1;
 	while(1)
@@ -69,8 +70,8 @@ cpx_confluent (cpx_t em, cpx_t a, cpx_t b, cpx_t z, unsigned int prec)
 		cpx_add (em, em, term);
 		
 		/* Don't go no farther than this */
-		cpx_mod_sq (one, term);
-		if (mpf_cmp (one, maxterm) < 0) break;
+		cpx_mod_sq (mag, term);
+		if (mpf_cmp (mag, maxterm) < 0) break;
 		
 		n++;
 		cpx_mul (z_n, z_n, zee);
@@ -83,7 +84,7 @@ cpx_confluent (cpx_t em, cpx_t a, cpx_t b, cpx_t z, unsigned int prec)
 	}
 	
 	mpf_clear (fact);
-	mpf_clear (one);
+	mpf_clear (mag);
 	mpf_clear (maxterm);
 	
 	cpx_clear (zee);

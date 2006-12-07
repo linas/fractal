@@ -36,9 +36,9 @@ void cpx_prt (char * str, const cpx_t const val)
 }
 
 /**
- * get_epsilon - return 10^{-prec} 
+ * fp_epsilon - return 10^{-prec} 
  */
-void get_epsilon (mpf_t eps, int prec)
+void fp_epsilon (mpf_t eps, int prec)
 {
 	static int cache_prec = -1;
 	mpf_t cache_eps;

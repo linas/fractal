@@ -101,14 +101,10 @@ static void fp_exp_helper (mpf_t ex, const mpf_t z, unsigned int prec)
 	mpf_set_ui (ex, 1);
 	mpf_set_ui (fact, 1);
 
-	// double mex = ((double) prec) * log (10.0) / log(2.0);
-	double mex = ((double) prec) * 3.321928095;
-	unsigned int imax = (unsigned int) (mex +1.0);
-	mpf_t maxterm, one;
+	/* Use 10^{-prec} for smallest term in sum */
+	mpf_t maxterm;
 	mpf_init (maxterm);
-	mpf_init (one);
-	mpf_set_ui (one, 1);
-	mpf_div_2exp (maxterm, one, imax);
+	fp_epsilon (maxterm, prec);
 
 	unsigned int n=1;
 	while(1)
@@ -130,7 +126,6 @@ static void fp_exp_helper (mpf_t ex, const mpf_t z, unsigned int prec)
 	mpf_clear (fact);
 	mpf_clear (term);
 
-	mpf_clear (one);
 	mpf_clear (maxterm);
 }
 
@@ -174,15 +169,11 @@ void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 	mpf_set_ui (si, 0);
 	mpf_set_ui (fact, 1);
 	
-	// double mex = ((double) prec) * log (10.0) / log(2.0);
+	/* Use 10^{-prec} for smallest term in sum */
 	prec += 2;
-	double mex = ((double) prec) * 3.321928095;
-	unsigned int imax = (unsigned int) (mex +1.0);
-	mpf_t maxterm, one;
+	mpf_t maxterm;
 	mpf_init (maxterm);
-	mpf_init (one);
-	mpf_set_ui (one, 1);
-	mpf_div_2exp (maxterm, one, imax);
+	fp_epsilon (maxterm, prec);
 
 	unsigned int n=1;
 	unsigned int s=0;
@@ -219,7 +210,6 @@ void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 	mpf_clear (fact);
 	mpf_clear (term);
 
-	mpf_clear (one);
 	mpf_clear (maxterm);
 }
 
@@ -246,15 +236,11 @@ void fp_cosine (mpf_t co, const mpf_t z, unsigned int prec)
 	mpf_set_ui (co, 1);
 	mpf_set_ui (fact, 2);
 	
-	// double mex = ((double) prec) * log (10.0) / log(2.0);
+	/* Use 10^{-prec} for smallest term in sum */
 	prec +=2;
-	double mex = ((double) prec) * 3.321928095;
-	unsigned int imax = (unsigned int) (mex +1.0);
-	mpf_t maxterm, one;
+	mpf_t maxterm;
 	mpf_init (maxterm);
-	mpf_init (one);
-	mpf_set_ui (one, 1);
-	mpf_div_2exp (maxterm, one, imax);
+	fp_epsilon (maxterm, prec);
 
 	unsigned int n=2;
 	unsigned int s=1;
@@ -291,7 +277,6 @@ void fp_cosine (mpf_t co, const mpf_t z, unsigned int prec)
 	mpf_clear (fact);
 	mpf_clear (term);
 
-	mpf_clear (one);
 	mpf_clear (maxterm);
 }
 
@@ -341,14 +326,10 @@ void fp_log_m1 (mpf_t lg, const mpf_t z, unsigned int prec)
 	mpf_mul (z_n, zee, zee);
 	mpf_set (lg, zee);
 	
-	// double mex = ((double) prec) * log (10.0) / log(2.0);
-	double mex = ((double) prec) * 3.321928095;
-	unsigned int imax = (unsigned int) (mex +1.0);
-	mpf_t maxterm, one;
+	/* Use 10^{-prec} for smallest term in sum */
+	mpf_t maxterm;
 	mpf_init (maxterm);
-	mpf_init (one);
-	mpf_set_ui (one, 1);
-	mpf_div_2exp (maxterm, one, imax);
+	fp_epsilon (maxterm, prec);
 
 	unsigned int n=2;
 	while(1)
@@ -368,7 +349,6 @@ void fp_log_m1 (mpf_t lg, const mpf_t z, unsigned int prec)
 	mpf_clear (z_n);
 	mpf_clear (term);
 
-	mpf_clear (one);
 	mpf_clear (maxterm);
 }
 
@@ -413,15 +393,15 @@ void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec)
 	mpf_div (zee, y, x);
 	int sgn_y = mpf_sgn(y);
 	
-	/* double mex = ((double) prec) * log (10.0) / log(2.0); */
-	double mex = ((double) prec) * 3.321928095;
-	unsigned int imax = (unsigned int) (mex +1.0);
-	mpf_t maxterm, one;
+	/* Use 10^{-prec} for smallest term in sum */
+	mpf_t maxterm;
 	mpf_init (maxterm);
+	fp_epsilon (maxterm, prec);
+
+	mpf_t one;
 	mpf_init (one);
 	mpf_set_ui (one, 1);
-	mpf_div_2exp (maxterm, one, imax);
-
+	
 	mpf_abs(atn, zee);
 	if (mpf_cmp_ui (atn, 1) <= 0)
 	{
