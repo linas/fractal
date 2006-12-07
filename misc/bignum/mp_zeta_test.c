@@ -870,6 +870,8 @@ int main (int argc, char * argv[])
 	}
 #endif /* CONFLUENT_HYPERGEOMETRIC */
 
+#define TEST_GAMMA
+#ifdef TEST_GAMMA
 	mpf_t gam, pi;
 	mpf_init (gam);
 	mpf_init (pi);
@@ -879,8 +881,40 @@ int main (int argc, char * argv[])
 	fp_pi (pi, prec);
 	mpf_sqrt (pi, pi);
 	mpf_sub (gam,gam,pi);
-	fp_prt (" gam should be zero=", gam);
+	fp_prt (" gam 0.5 should be zero=", gam);
 	printf ("\n");
+	
+	mpf_set_d (gam, 1.5);
+	fp_gamma (gam, gam, prec);
+	mpf_mul_ui (gam, gam, 2);
+	mpf_sub (gam,gam,pi);
+	fp_prt (" gam 1.5 should be zero=", gam);
+	printf ("\n");
+	
+	mpf_set_d (gam, 2.5);
+	fp_gamma (gam, gam, prec);
+	mpf_mul_ui (gam, gam, 4);
+	mpf_div_ui (gam, gam, 3);
+	mpf_sub (gam,gam,pi);
+	fp_prt (" gam 2.5 should be zero=", gam);
+	printf ("\n");
+	
+	mpf_set_d (gam, -0.5);
+	fp_gamma (gam, gam, prec);
+	mpf_div_ui (gam, gam, 2);
+	mpf_add (gam,gam,pi);
+	fp_prt (" gam -0.5 should be zero=", gam);
+	printf ("\n");
+	
+	mpf_set_d (gam, -1.5);
+	fp_gamma (gam, gam, prec);
+	mpf_mul_ui (gam, gam, 3);
+	mpf_div_ui (gam, gam, 4);
+	mpf_sub (gam,gam,pi);
+	fp_prt (" gam -1.5 should be zero=", gam);
+	printf ("\n");
+	
+#endif /* TEST_GAMMA */
 
 	return 0;
 }
