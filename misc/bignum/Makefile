@@ -12,7 +12,7 @@ MPLIB=libzmp.a
 all:  $(MPLIB) $(EXES)
 
 MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o \
-	mp-hyper.o mp-misc.o mp-trig.o mp-zeta.o
+	mp-gamma.o mp-hyper.o mp-misc.o mp-trig.o mp-zeta.o
 
 bound:	bound.o
 cache-fill:	cache-fill.o $(MPLIB)
@@ -33,9 +33,10 @@ db-cache.o: db-cache.h
 mp-binomial.o: mp-binomial.h mp-cache.h mp-trig.h
 mp-cache.o: mp-cache.h
 mp-consts.o: mp-consts.h mp-binomial.h mp-complex.h mp-trig.h mp-zeta.h
-mp-hyper.o: mp-hyper.h mp-complex.h
+mp-gamma.o: mp-gamma.h mp-complex.h mp-consts.h mp-misc.h
+mp-hyper.o: mp-hyper.h mp-complex.h mp-misc.h
 mp-misc.o: mp-misc.h mp-complex.h
-mp-trig.o: mp-trig.h mp-binomial.h mp-cache.h mp-complex.h
+mp-trig.o: mp-trig.h mp-binomial.h mp-cache.h mp-complex.h mp-misc.h
 mp-zeta.o: mp-zeta.h db-cache.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-trig.h
 
 # binaries
