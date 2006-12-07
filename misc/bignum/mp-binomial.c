@@ -483,7 +483,7 @@ void fp_harmonic (mpf_t harm, unsigned int n)
  * Brute force, simple.
  */
 
-void fp_poch_rising (mpf_t poch, double x, unsigned int n)
+void fp_poch_rising_d (mpf_t poch, double x, unsigned int n)
 {
 	mpf_t term;
 	mpf_init (term);
@@ -494,6 +494,25 @@ void fp_poch_rising (mpf_t poch, double x, unsigned int n)
 	{
 		mpf_set_d (term, x+i);
 		mpf_mul (poch, poch, term);
+	}
+
+	mpf_clear (term);
+}
+
+void fp_poch_rising (mpf_t poch, mpf_t x, unsigned int n)
+{
+	mpf_t term;
+	mpf_init (term);
+
+	/* Make copy of arg NOW! */
+	mpf_set (term,x);
+
+	mpf_set_ui (poch, 1);
+	unsigned int i;
+	for (i=0; i<n; i++)
+	{
+		mpf_mul (poch, poch, term);
+		mpf_add_ui (term, term, 1);
 	}
 
 	mpf_clear (term);
@@ -562,7 +581,7 @@ void cpx_poch_rising (cpx_t poch, const cpx_t const ess, unsigned int n)
  * Binomial coefficient 
  */
 
-void fp_binomial (mpf_t bin, double s, unsigned int k)
+void fp_binomial_d (mpf_t bin, double s, unsigned int k)
 {
 	mpf_t top, bot;
 	mpz_t fac;
@@ -570,7 +589,7 @@ void fp_binomial (mpf_t bin, double s, unsigned int k)
 	mpf_init (top);
 	mpf_init (bot);
 	mpz_init (fac);
-	fp_poch_rising (top, s-k+1, k);
+	fp_poch_rising_d (top, s-k+1, k);
 	i_factorial (fac, k); 
 	mpf_set_z (bot, fac);
 

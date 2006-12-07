@@ -72,7 +72,8 @@ void fp_harmonic (mpf_t harm, unsigned int n);
  *
  * Brute force, simple.
  */
-void fp_poch_rising (mpf_t poch, double x, unsigned int n);
+void fp_poch_rising (mpf_t poch, mpf_t x, unsigned int n);
+void fp_poch_rising_d (mpf_t poch, double x, unsigned int n);
 
 /* cpx_poch_rising
  * rising pochhammer symbol (s)_n, for complex s and integer n.
@@ -91,7 +92,7 @@ void cpx_poch_rising (cpx_t poch, const cpx_t const s, unsigned int n);
 /* fp_binomial
  * Binomial coefficient 
  */
-void fp_binomial (mpf_t bin, double s, unsigned int k);
+void fp_binomial_d (mpf_t bin, double s, unsigned int k);
 
 /* cpx_binomial
  * Complex binomial coefficient

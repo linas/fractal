@@ -29,7 +29,7 @@ double harmonic (double z, unsigned int prec, unsigned int norder)
 	int p;
 	for (p=2; p<norder; p++)
 	{
-		fp_binomial (bin, z, p);
+		fp_binomial_d (bin, z, p);
 		mpf_div_ui (term, bin, p-1);
 		if (p%2)
 		{
@@ -71,7 +71,7 @@ double b_functional (double z, unsigned int prec, unsigned int norder)
 	{
 		fp_zeta (term, p+2, prec);
 		mpf_sub_ui (term, term, 1);
-		fp_binomial (bin, z-1.0, p+1);
+		fp_binomial_d (bin, z-1.0, p+1);
 		mpf_mul (term, term, bin);
 		mpf_add (acc, acc, term);
 	}
@@ -109,7 +109,7 @@ double b_fa (double z, unsigned int prec, unsigned int norder)
 		mpf_set_ui (bin, 1);
 		mpf_div_ui (bin, bin, p-1);
 		mpf_sub (term, term, bin);
-		fp_binomial (bin, z, p);
+		fp_binomial_d (bin, z, p);
 		mpf_mul (term, term, bin);
 		if (p%2)
 		{
@@ -144,7 +144,7 @@ double b_fb (double z, unsigned int prec, unsigned int norder)
 	for (p=2; p<norder; p++)
 	{
 		fp_zeta (term, p, prec);
-		fp_binomial (bin, z, p);
+		fp_binomial_d (bin, z, p);
 		mpf_mul (term, term, bin);
 		if (p%2)
 		{
@@ -184,7 +184,7 @@ double b_fc (double z, unsigned int prec, unsigned int norder)
 	{
 		fp_zeta (term, p, prec);
 		mpf_sub_ui (term, term, 1);
-		fp_binomial (bin, z, p);
+		fp_binomial_d (bin, z, p);
 		mpf_mul (term, term, bin);
 		if (p%2)
 		{
@@ -232,7 +232,7 @@ double b_b (double z, unsigned int prec, unsigned int norder)
 	int p;
 	for (p=0; p<norder; p++)
 	{
-		fp_binomial (term, z, p);
+		fp_binomial_d (term, z, p);
 		if (p%2)
 		{
 			mpf_sub (acc, acc, term);
@@ -479,7 +479,7 @@ int main (int argc, char * argv[])
 	int n;
 	for (n=0; n<5000; n++)
 	{
-		fp_binomial (bin, es, n);
+		fp_binomial_d (bin, es, n);
 		if (n%2)
 		{
 			mpf_sub (acc, acc, bin);
