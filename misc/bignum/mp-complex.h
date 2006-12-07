@@ -60,6 +60,17 @@ static inline void cpx_add (cpx_t sum, const cpx_t const a, const cpx_t const b)
 	mpf_add (sum[0].im, a[0].im, b[0].im);
 }
 
+static inline void cpx_add_d (cpx_t sum, const cpx_t const a, double rb, double ib)
+{
+	mpf_t tmp;
+	mpf_init (tmp);
+	mpf_set_d (tmp, rb);
+	mpf_add (sum[0].re, a[0].re, tmp);
+	mpf_set_d (tmp, ib);
+	mpf_add (sum[0].im, a[0].im, tmp);
+	mpf_clear (tmp);
+}
+
 static inline void cpx_add_ui (cpx_t sum, const cpx_t const a, unsigned int rb, unsigned int ib)
 {
 	mpf_add_ui (sum[0].re, a[0].re, rb);
