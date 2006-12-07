@@ -17,6 +17,7 @@
 #include <gmp.h>
 #include "mp-consts.h"
 #include "mp-complex.h"
+#include "mp-hyper.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
 #include "mp_zeta.h"
@@ -763,7 +764,7 @@ int main (int argc, char * argv[])
 	}
 #endif
 
-#define HANDY_COMPLEX_ZETA
+// #define HANDY_COMPLEX_ZETA
 #ifdef HANDY_COMPLEX_ZETA
 	mpf_t nzeta;
 	mpf_init (nzeta);
@@ -795,6 +796,49 @@ int main (int argc, char * argv[])
 		fflush (stdout);
 	}
 #endif
+
+	cpx_t a,b,z,m1,m2,m3,c1,c2,c3;
+	cpx_init (a);
+	cpx_init (b);
+	cpx_init (z);
+	cpx_init (m1);
+	cpx_init (m2);
+	cpx_init (m3);
+
+	cpx_init (c1);
+	cpx_init (c2);
+	cpx_init (c3);
+
+	cpx_set_d (a, 0.3, 0.678);
+	cpx_set_d (b, 0.3434, 0.678);
+	cpx_set_d (z, 1.3434, 2.678);
+	
+	int n;
+	for (n=0; n< nterms; n++) 
+	{
+		/* identity 13.4.1. from A&S */
+		cpx_sub (c1,b,a);
+		cpx_mul_ui (c2, a, 2);
+		cpx_sub (c2, c2, b);
+		cpx_add (c2, c2, z);
+		cpx_neg(c3,a);
+		cpx_sub_ui (a, a, 1, 0);
+		cpx_confluent (m1, a, b, z, prec);
+		cpx_add_ui (a, a, 1, 0);
+		cpx_confluent (m2, a, b, z, prec);
+		cpx_add_ui (a, a, 1, 0);
+		cpx_confluent (m3, a, b, z, prec);
+		cpx_mul (m1, c1, m1);
+		cpx_mul (m2, c2, m2);
+		cpx_mul (m3, c3, m3);
+		cpx_add (m1, m1, m2);
+		cpx_add (m1, m1, m3);
+		cpx_prt (" should be zero=", m1);
+
+		cpx_add_d (a, a, 0.123, -0.3);
+		cpx_add_d (b, b, 0.623, 0.53);
+		cpx_add_d (z, z, 1.1237, -0.549353);
+	}
 
 	return 0;
 }
