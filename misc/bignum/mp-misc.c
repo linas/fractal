@@ -35,6 +35,38 @@ void cpx_prt (char * str, const cpx_t const val)
 	mpf_out_str (stdout, 10, 30, val[0].im);
 }
 
+/**
+ * get_epsilon - return 10^{-prec} 
+ */
+void get_epsilon (mpf_t eps, int prec)
+{
+	static int cache_prec = -1;
+	mpf_t cache_eps;
+
+	if (-1 == cache_prec)
+	{
+		mpf_init (cache_eps);
+	}
+
+	if (prec == cache_prec)
+	{
+		mpf_set (eps, cache_eps);
+		return;
+	}
+
+	/* double mex = ((double) prec) * log (10.0) / log(2.0); */
+	double mex = ((double) prec) * 3.321928095;
+	unsigned int imax = (unsigned int) (mex +1.0);
+	mpf_t one;
+	mpf_init (one);
+	mpf_set_ui (one, 1);
+	mpf_div_2exp (cache_eps, one, imax);
+
+	mpf_set (eps, cache_eps);
+	cache_prec = prec;
+	mpf_clear (one);
+}
+
 /* prec is the decimal precison (number of decimal places) */
 /* nterms is the number of an's to compute */
 void set_bits (int prec, int nterms)
