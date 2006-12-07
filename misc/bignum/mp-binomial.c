@@ -485,9 +485,7 @@ void fp_harmonic (mpf_t harm, unsigned int n)
 
 void fp_poch_rising (mpf_t poch, double x, unsigned int n)
 {
-	mpf_t acc, term;
-	
-	mpf_init (acc);
+	mpf_t term;
 	mpf_init (term);
 
 	mpf_set_ui (poch, 1);
@@ -495,11 +493,9 @@ void fp_poch_rising (mpf_t poch, double x, unsigned int n)
 	for (i=0; i<n; i++)
 	{
 		mpf_set_d (term, x+i);
-		mpf_mul (acc, poch, term);
-		mpf_set (poch, acc);
+		mpf_mul (poch, poch, term);
 	}
 
-	mpf_clear (acc);
 	mpf_clear (term);
 }
 
