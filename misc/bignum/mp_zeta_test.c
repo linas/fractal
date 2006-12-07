@@ -17,6 +17,7 @@
 #include <gmp.h>
 #include "mp-consts.h"
 #include "mp-complex.h"
+#include "mp-gamma.h"
 #include "mp-hyper.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
@@ -797,6 +798,7 @@ int main (int argc, char * argv[])
 	}
 #endif
 
+#ifdef CONFLUENT_HYPERGEOMETRIC
 	cpx_t a,b,z,m1,m2,m3,c1,c2,c3;
 	cpx_init (a);
 	cpx_init (b);
@@ -866,6 +868,19 @@ int main (int argc, char * argv[])
 		cpx_add_d (b, b, 0.623, 0.53);
 		cpx_add_d (z, z, 1.1237, -0.549353);
 	}
+#endif /* CONFLUENT_HYPERGEOMETRIC */
+
+	mpf_t gam, pi;
+	mpf_init (gam);
+	mpf_init (pi);
+	mpf_set_d (gam, 0.5);
+	fp_gamma (gam, gam, prec);
+
+	fp_pi (pi, prec);
+	mpf_sqrt (pi, pi);
+	mpf_sub (gam,gam,pi);
+	fp_prt (" gam should be zero=", gam);
+	printf ("\n");
 
 	return 0;
 }

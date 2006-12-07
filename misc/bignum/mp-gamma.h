@@ -9,8 +9,15 @@
 #include <gmp.h>
 
 /**
- * fp_lngamma -- compute log of gamma for real argument
+ * fp_lngamma -- compute log of Gamma for real argument
  *
  * Uses simple, quickly converging algo-- A&S 6.1.33
  */
 void fp_lngamma (mpf_t gam, mpf_t ex, int prec);
+
+/**
+ * fp_gamma -- compute Gamma for real argument
+ *
+ * Uses simple, quickly converging algo-- A&S 6.1.33
+ */
+void fp_gamma (mpf_t gam, mpf_t ex, int prec);

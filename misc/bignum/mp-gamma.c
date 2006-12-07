@@ -14,6 +14,7 @@
 #include "mp-trig.h"
 #include "mp-zeta.h"
 
+/* ================================================= */
 /**
  * fp_lngamma -- compute log of gamma for real argument
  *
@@ -75,3 +76,16 @@ void fp_lngamma (mpf_t gam, mpf_t ex, int prec)
 	mpf_clear (zn);
 	mpf_clear (term);
 }
+
+/* ================================================= */
+
+/*
+ * fp_gamma -- compute gamma for real argument
+ */
+void fp_gamma (mpf_t gam, mpf_t ex, int prec)
+{
+	fp_lngamma (gam, ex, prec);
+	fp_exp (gam, gam, prec);
+}
+
+/* ==================  END OF FILE ===================== */
