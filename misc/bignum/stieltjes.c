@@ -14,7 +14,7 @@
 #include <gmp.h>
 #include "mp-binomial.h"
 #include "mp-misc.h"
-#include "mp_zeta.h"
+#include "mp-zeta.h"
 
 /* ==================================================================== */
 /* Return the Steiltjes constants */

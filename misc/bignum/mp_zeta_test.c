@@ -20,7 +20,7 @@
 #include "mp-hyper.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
-#include "mp_zeta.h"
+#include "mp-zeta.h"
 
 /* ==================================================================== */
 

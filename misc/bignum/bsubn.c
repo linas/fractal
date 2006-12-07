@@ -16,7 +16,7 @@
 #include <gsl/gsl_sf_psi.h>
 
 #include "mp-binomial.h"
-#include "mp_zeta.h"
+#include "mp-zeta.h"
 
 double harmonic (double z, unsigned int prec, unsigned int norder)
 {

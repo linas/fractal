@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 #include "mp-misc.h"
-#include "mp_zeta.h"
+#include "mp-zeta.h"
 
 #ifdef USE_FLT_PT_BINARY_SUBDIVISION
 /* Find zero by binary subdivision */

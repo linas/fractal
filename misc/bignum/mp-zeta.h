@@ -1,5 +1,5 @@
 /*
- * mp_zeta.h
+ * mp-zeta.h
  *
  * High-precison Riemann zeta function, using the 
  * Gnu Multiple-precision library.

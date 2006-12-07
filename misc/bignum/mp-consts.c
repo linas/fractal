@@ -16,7 +16,7 @@
 #include "mp-complex.h"
 #include "mp-consts.h"
 #include "mp-trig.h"
-#include "mp_zeta.h"
+#include "mp-zeta.h"
 
 /* ======================================================================= */
 /**

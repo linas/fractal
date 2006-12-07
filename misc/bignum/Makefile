@@ -12,7 +12,7 @@ MPLIB=libzmp.a
 all:  $(MPLIB) $(EXES)
 
 MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o \
-	mp-hyper.o mp-misc.o mp-trig.o mp_zeta.o
+	mp-hyper.o mp-misc.o mp-trig.o mp-zeta.o
 
 bound:	bound.o
 cache-fill:	cache-fill.o $(MPLIB)
@@ -32,27 +32,27 @@ zero-cross:	zero-cross.o
 db-cache.o: db-cache.h
 mp-binomial.o: mp-binomial.h mp-cache.h mp-trig.h
 mp-cache.o: mp-cache.h
-mp-consts.o: mp-consts.h mp-binomial.h mp-complex.h mp-trig.h mp_zeta.h
+mp-consts.o: mp-consts.h mp-binomial.h mp-complex.h mp-trig.h mp-zeta.h
 mp-hyper.o: mp-hyper.h mp-complex.h
 mp-misc.o: mp-misc.h mp-complex.h
 mp-trig.o: mp-trig.h mp-binomial.h mp-cache.h mp-complex.h
-mp_zeta.o: mp_zeta.h db-cache.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-trig.h
+mp-zeta.o: mp-zeta.h db-cache.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-trig.h
 
 # binaries
-bs.o: mp_zeta.h mp-misc.h
-bsubn.o: mp_zeta.h mp-binomial.h
-cache-fill.o: db-cache.h mp_zeta.h mp-misc.h
+bs.o: mp-zeta.h mp-misc.h
+bsubn.o: mp-zeta.h mp-binomial.h
+cache-fill.o: db-cache.h mp-zeta.h mp-misc.h
 db-merge.o: db-cache.h mp-misc.h
-dsubn.o: mp_zeta.h mp-binomial.h mp-misc.h
+dsubn.o: mp-zeta.h mp-binomial.h mp-misc.h
 hurwitz.o: mp-complex.h
-mp_zeta_test.o: mp_zeta.h mp-complex.h mp-consts.h mp-misc.h mp-trig.h
+mp_zeta_test.o: mp-zeta.h mp-complex.h mp-consts.h mp-misc.h mp-trig.h
 sho.o: mp-complex.h mp-hyper.h mp-trig.h
-stieltjes.o: mp_zeta.h mp-binomial.h mp-misc.h
+stieltjes.o: mp-zeta.h mp-binomial.h mp-misc.h
 
-bs:	bs.o mp_zeta.o $(MPLIB)
+bs:	bs.o mp-zeta.o $(MPLIB)
 	$(CC) -o bs $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
-bsubn:	bsubn.o mp_zeta.o $(MPLIB)
+bsubn:	bsubn.o mp-zeta.o $(MPLIB)
 	$(CC) -o bsubn $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
 minima: minima.o

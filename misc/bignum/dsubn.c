@@ -23,7 +23,7 @@
 #include "mp-consts.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
-#include "mp_zeta.h"
+#include "mp-zeta.h"
 
 #ifdef TESTING_123
 void bino (void)

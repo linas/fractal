@@ -1,5 +1,5 @@
 /*
- * mp_zeta.c
+ * mp-zeta.c
  *
  * High-precison Riemann zeta function, using the 
  * Gnu Multiple-precision library.
@@ -21,7 +21,7 @@
 #include "mp-consts.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
-#include "mp_zeta.h"
+#include "mp-zeta.h"
 
 /* ======================================================================= */
 /* Helmut Hasse zeta -- use the globally convergent Helmut Hasse zeta

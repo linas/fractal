@@ -14,7 +14,7 @@
 #include <time.h>
 
 #include "mp-misc.h"
-#include "mp_zeta.h"
+#include "mp-zeta.h"
 
 /* ==================================================================== */
 
