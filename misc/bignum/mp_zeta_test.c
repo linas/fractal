@@ -833,7 +833,34 @@ int main (int argc, char * argv[])
 		cpx_mul (m3, c3, m3);
 		cpx_add (m1, m1, m2);
 		cpx_add (m1, m1, m3);
-		cpx_prt (" should be zero=", m1);
+		cpx_prt (" id1 should be zero=", m1);
+		printf ("\n");
+		fflush (stdout);
+
+		/* identity 13.4.2. from A&S */
+		cpx_sub_ui (c1,b,1,0);
+		cpx_mul (c1, c1, b);
+		cpx_set_ui (c2, 1, 0);
+		cpx_sub (c2, c2, b);
+		cpx_sub (c2, c2, z);
+		cpx_mul (c2, c2, b);
+		cpx_sub (c3,b,a);
+		cpx_mul (c3,c3,z);
+
+		cpx_sub_ui (b, b, 1, 0);
+		cpx_confluent (m1, a, b, z, prec);
+		cpx_add_ui (b, b, 1, 0);
+		cpx_confluent (m2, a, b, z, prec);
+		cpx_add_ui (b, b, 1, 0);
+		cpx_confluent (m3, a, b, z, prec);
+		cpx_mul (m1, c1, m1);
+		cpx_mul (m2, c2, m2);
+		cpx_mul (m3, c3, m3);
+		cpx_add (m1, m1, m2);
+		cpx_add (m1, m1, m3);
+		cpx_prt (" id2 should be zero=", m1);
+		printf ("\n");
+		fflush (stdout);
 
 		cpx_add_d (a, a, 0.123, -0.3);
 		cpx_add_d (b, b, 0.623, 0.53);
