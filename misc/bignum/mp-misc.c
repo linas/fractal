@@ -35,13 +35,14 @@ void cpx_prt (char * str, const cpx_t const val)
 	mpf_out_str (stdout, 10, 30, val[0].im);
 }
 
+/* ===================================================== */
 /**
  * fp_epsilon - return 10^{-prec} 
  */
 void fp_epsilon (mpf_t eps, int prec)
 {
 	static int cache_prec = -1;
-	mpf_t cache_eps;
+	static mpf_t cache_eps;
 
 	if (-1 == cache_prec)
 	{
@@ -66,6 +67,8 @@ void fp_epsilon (mpf_t eps, int prec)
 	cache_prec = prec;
 	mpf_clear (one);
 }
+
+/* ===================================================== */
 
 /* prec is the decimal precison (number of decimal places) */
 /* nterms is the number of an's to compute */
