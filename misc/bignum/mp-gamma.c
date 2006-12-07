@@ -99,7 +99,8 @@ static void reduced_gamma (mpf_t gam, mpf_t ex, int prec)
 /* ================================================= */
 /* 
  * fp_gamma
- * Use pochhammer to get into range of 1 < z < 2
+ * Use pochhammer to get into range of 1 < z < 2,
+ * Then use the reduced summation formula.
  */
 void fp_gamma (mpf_t gam, const mpf_t z, int prec)
 {
@@ -109,6 +110,8 @@ void fp_gamma (mpf_t gam, const mpf_t z, int prec)
 	/* make a copy of the input arg NOW! */
 	mpf_set (zee, z);
 	
+	/* double-presision used, this code doesn't need to 
+	 * be all that accurate. */
 	double flo = mpf_get_d (zee);
 	if (flo > 2.0)
 	{

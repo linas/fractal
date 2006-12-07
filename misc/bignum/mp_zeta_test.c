@@ -914,6 +914,15 @@ int main (int argc, char * argv[])
 	fp_prt (" gam -1.5 should be zero=", gam);
 	printf ("\n");
 	
+	int i;
+	for (i=1; i<nterms; i++)
+	{
+		mpf_set_ui (gam, i);
+		fp_gamma (gam, gam, prec);
+		printf ("i=%d ", i);
+		fp_prt (" gam=", gam);
+		printf ("\n");
+	}
 #endif /* TEST_GAMMA */
 
 	return 0;
