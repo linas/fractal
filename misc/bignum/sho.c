@@ -227,7 +227,7 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 	cpx_init (rat);
 
 	int n;
-	for (n=114; n<1116; n+=10)
+	for (n=140; n<1160; n+=40)
 	{
 		printf ("n=%d  \n", n);
 
@@ -250,7 +250,8 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		printf ("duude cs1=%g cmp=%g\n", cs1, cs1/fe1);
 #endif
 
-#if VALIDATE_PSI_TWO
+// #define VALIDATE_PSI_TWO
+#ifdef VALIDATE_PSI_TWO
 		/* The following validates just great, for large negative
 		 * lambda, and seems numerically unstable for pos lambda */
 		psi_2 (e2, lam, y, prec);
@@ -292,6 +293,10 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		cpx_div (rat, e2, e1);
 		cpx_prt ("rat=", rat);
 		printf ("\n");
+
+		double fr = mpf_get_d (rat[0].im);
+		fr *= -M_PI / sqrt(M_E);
+		printf ("duude fr=%g\n", fr);
 #endif
 
 		printf ("\n");
@@ -328,21 +333,8 @@ cpx_t prev; cpx_init (prev); cpx_set_ui(prev,1,0);
 		cpx_add_ui (lam, lambda, n, 0);
 		eta_1 (e1, lam, y, prec);
 		eta_2 (e2, lam, y, prec);
-#if 0
-cpx_prt ("e1=", e1);
-printf ("\n");
-cpx_prt ("e2=", e2);
-printf ("\n");
-cpx_div (prev, e1,e2);
-cpx_prt ("ratio=", prev);
-printf ("\n");
-#endif
 		cpx_add (e1, e1, e2);
 		cpx_mul (e1, e1, qn);
-//	printf ("\n");
-//	cpx_prt ("pos sum * q^n=", e1);
-//	printf ("\n");
-//	printf ("\n");
 		cpx_add (coho, coho, e1);
 		
 		/* lambda-n */
@@ -447,10 +439,11 @@ void do_coho (double lam, int prec)
 	cpx_init (q);
 	cpx_init (z);
 
-	cpx_set_d (lambda, lam, 0.0);
+	cpx_set_d (lambda, lam, lam);
 
 	cpx_set_d (q, 4.1, 0.0);
 	cpx_set_d (z, 2.5671, 0.0);
+	cpx_set_d (z, lam, lam);
 	
 	// coherent (coho, lambda, q, z, prec);
 	validate_ratio (lambda, z, prec);
