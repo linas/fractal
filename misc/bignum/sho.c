@@ -13,6 +13,7 @@
 #include "mp-binomial.h"
 #include "mp-complex.h"
 #include "mp-consts.h"
+#include "mp-gamma.h"
 #include "mp-hyper.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
@@ -94,37 +95,42 @@ void psi_2 (cpx_t psiret, cpx_t lambda, cpx_t y, int prec)
 /* cheap hack for the gamma function. Incorrect, but holds water.
  * Approximates gamma(z)=1 for 1<z<2.
  */
-static void gamma_hack (cpx_t gam, const cpx_t const z)
+static void gamma_hack (cpx_t gam, const cpx_t const z, int prec)
 {
-	cpx_t reduced_gamma;
-	cpx_init (reduced_gamma);
-	cpx_set_ui (reduced_gamma, 1, 0);
-	
-	cpx_t ans;
-	cpx_init (ans);
-	
-	double flo = mpf_get_d (z[0].re);
+	cpx_t zee;
+	cpx_init (zee);
+
+	/* Make copy of argument NOW! */
+	cpx_set (zee, z);
+
+	double flo = mpf_get_d (zee[0].re);
 	if (flo > 2.0)
 	{
 		unsigned int intpart = (unsigned int) floor (flo-1.0);
-		cpx_set (ans, z);
-		mpf_sub_ui (ans[0].re, z[0].re, intpart);
-		cpx_poch_rising (ans, ans, intpart);
+		mpf_sub_ui (zee[0].re, zee[0].re, intpart);
+		cpx_poch_rising (gam, zee, intpart);
 	}
 	else if (flo < 1.0)
 	{
-		unsigned int intpart = (unsigned int) floor (1.0-flo);
-		cpx_poch_rising (ans, z, intpart);
-		cpx_recip (ans, ans);
+		unsigned int intpart = (unsigned int) floor (2.0-flo);
+		cpx_poch_rising (gam, zee, intpart);
+		cpx_recip (gam, gam);
+		mpf_add_ui (zee[0].re, zee[0].re, intpart);
 	}
 	else
 	{
-		cpx_set_ui (ans, 1, 0);
+		cpx_set_ui (gam, 1, 0);
 	}
 
-	cpx_set (gam, ans);
-	cpx_clear (ans);
-	cpx_clear (reduced_gamma);
+	cpx_t rgamma;
+	cpx_init (rgamma);
+	cpx_set_ui (rgamma, 1, 0);
+
+	fp_gamma (rgamma[0].re, zee[0].re, prec);
+	cpx_mul (gam, gam, rgamma);
+
+	cpx_clear (zee);
+	cpx_clear (rgamma);
 }
 
 void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
@@ -159,11 +165,11 @@ void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 	mpf_div_ui (tmp, tmp, 2);
 	cpx_add_mpf (lmo, lambda, tmp);
 	cpx_div_ui (pha, lmo, 2);
-	gamma_hack (pha, pha);
+	gamma_hack (pha, pha, prec);
 	cpx_mul (eta, eta, pha);
 
 	/* Gamma (lambda + 1/2) */
-	gamma_hack (pha, lmo);
+	gamma_hack (pha, lmo, prec);
 	cpx_div (eta, eta, pha);
 
 	cpx_clear (pha);
@@ -204,11 +210,11 @@ void eta_2 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 	mpf_div_ui (tmp, tmp, 2);
 	cpx_sub_mpf (lmo, lambda, tmp);
 	cpx_div_ui (pha, lmo, 2);
-	gamma_hack (pha, pha);
+	gamma_hack (pha, pha, prec);
 	cpx_mul (eta, eta, pha);
 
 	/* Gamma (lambda - 1/2) */
-	gamma_hack (pha, lmo);
+	gamma_hack (pha, lmo, prec);
 	cpx_div (eta, eta, pha);
 
 	cpx_clear (pha);
@@ -439,7 +445,7 @@ void do_coho (double lam, int prec)
 	cpx_init (q);
 	cpx_init (z);
 
-	cpx_set_d (lambda, lam, lam);
+	cpx_set_d (lambda, lam, 0.0);
 
 	cpx_set_d (q, 4.1, 0.0);
 	cpx_set_d (z, 2.5671, 0.0);
@@ -454,7 +460,7 @@ void do_coho (double lam, int prec)
 int
 main (int argc, char *argv[])
 {
-	int prec = 625;
+	int prec = 125;
 	
 	if (2> argc)
 	{
