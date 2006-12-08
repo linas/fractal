@@ -30,9 +30,9 @@ void fp_inv_pow (mpf_t p, unsigned int n, unsigned int m);
 void fp_exp (mpf_t ex, const mpf_t z, unsigned int prec);
 void fp_sine (mpf_t sine, const mpf_t z, unsigned int prec);
 void fp_cosine (mpf_t cosine, const mpf_t z, unsigned int prec);
-void cpx_exp (cpx_t ex, const cpx_t const z, unsigned int prec);
-void cpx_sine (cpx_t sine, const cpx_t const z, unsigned int prec);
-void cpx_tangent (cpx_t tang, const cpx_t const z, unsigned int prec);
+void cpx_exp (cpx_t ex, const cpx_t z, unsigned int prec);
+void cpx_sine (cpx_t sine, const cpx_t z, unsigned int prec);
+void cpx_tangent (cpx_t tang, const cpx_t z, unsigned int prec);
 
 /**
  * fp_log_m1 -  Floating point logarithm
@@ -58,7 +58,7 @@ void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec);
  * a logarithm, an exp, sin and cos to be computed, each of which
  * are kinda slow ...
  */
-void cpx_pow_mpf (cpx_t powc, const mpf_t q, const cpx_t const ess, int prec);
+void cpx_pow_mpf (cpx_t powc, const mpf_t q, const cpx_t ess, int prec);
 
 /**
  * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
@@ -67,7 +67,7 @@ void cpx_pow_mpf (cpx_t powc, const mpf_t q, const cpx_t const ess, int prec);
  * allowing improved algorithm speeds.
  */
 
-void fp_pow_rc (cpx_t diri, int k, const mpf_t q, const cpx_t const ess, int prec);
+void fp_pow_rc (cpx_t diri, int k, const mpf_t q, const cpx_t ess, int prec);
 
 /* =============================== END OF FILE =========================== */
 

@@ -554,7 +554,7 @@ void cpx_poch_rising_d (cpx_t poch, double re_s, double im_s, unsigned int n)
  * Brute force, simple.
  */
 
-void cpx_poch_rising (cpx_t poch, const cpx_t const ess, unsigned int n)
+void cpx_poch_rising (cpx_t poch, const cpx_t ess, unsigned int n)
 {
 	cpx_t term, acc;
 	cpx_init (term);
@@ -627,7 +627,7 @@ void cpx_binomial_d (cpx_t bin, double re_s, double im_s, unsigned int k)
 	cpx_clear (top);
 }
 
-void cpx_binomial (cpx_t bin, const cpx_t const ess, unsigned int k)
+void cpx_binomial (cpx_t bin, const cpx_t ess, unsigned int k)
 {
 	if (0 >= k) {
 		cpx_set_ui (bin, 1, 0);

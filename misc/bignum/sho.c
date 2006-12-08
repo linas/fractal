@@ -335,21 +335,51 @@ void wtf (void)
 
 /* ======================================================== */
 
+void get_ratio (cpx_t tang, cpx_t lambda, int prec)
+{
+	mpf_t pi;
+	mpf_init (pi);
+	fp_pi (pi, prec);
+
+	cpx_t lam;
+	cpx_init (lam);
+	cpx_set (lam, lambda);
+
+	/* compute lambda/2 + 1/4 */
+	cpx_set_ui (tang, 1,0);
+	cpx_div_ui (tang, tang, 2);
+	cpx_add (tang, tang, lam);
+	cpx_div_ui (tang, tang, 2);
+		
+	/* compute tan(lambda/2 + 1/4) */
+	cpx_mul_mpf (tang, tang, pi);
+	cpx_tangent (tang, tang, prec);
+	cpx_times_i (tang, tang);
+
+	cpx_recip (tang, tang);
+
+	cpx_clear (lam);
+	mpf_clear (pi);
+}
+
 void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 {
-	cpx_t e1, e2, qn, lam;
+	cpx_t e1, e2, rat, qn, lam;
 	cpx_init (e1);
 	cpx_init (e2);
+	cpx_init (rat);
 	cpx_init (qn);
 	cpx_init (lam);
 
 	cpx_set (qn, que);
 
+
 	eta_1 (e1, lambda, y, prec);
 	eta_2 (e2, lambda, y, prec);
-	cpx_add (coho, e1, e2);
+	get_ratio (rat, lambda, prec);
+	cpx_mul (e2,e2,rat);
+	cpx_sub (coho, e1, e2);
 	
-cpx_t prev; cpx_init (prev); cpx_set_ui(prev,1,0);
 	int n;
 	for (n=1; n<140; n++)
 	{
@@ -358,7 +388,11 @@ cpx_t prev; cpx_init (prev); cpx_set_ui(prev,1,0);
 		cpx_add_ui (lam, lambda, n, 0);
 		eta_1 (e1, lam, y, prec);
 		eta_2 (e2, lam, y, prec);
-		cpx_add (e1, e1, e2);
+
+		get_ratio (rat, lam, prec);
+		cpx_mul (e2,e2,rat);
+		cpx_sub (e1, e1, e2);
+
 		cpx_mul (e1, e1, qn);
 		cpx_add (coho, coho, e1);
 		
@@ -366,28 +400,20 @@ cpx_t prev; cpx_init (prev); cpx_set_ui(prev,1,0);
 		cpx_sub_ui (lam, lambda, n, 0);
 		eta_1 (e1, lam, y, prec);
 		eta_2 (e2, lam, y, prec);
-#if 0
-cpx_prt ("neg eta1=", e1);
-printf ("\n");
-cpx_prt ("neg eta2=", e2);
-printf ("\n");
-#endif
 
-#if 1
-cpx_div (prev, e1,e2);
-cpx_prt ("ratio=", prev);
-printf ("\n");
-#endif
-		cpx_add (e1, e1, e2);
+	cpx_prt ("neg e1 =", e1);
+	printf ("\n");
+		get_ratio (rat, lam, prec);
+		cpx_mul (e2,e2,rat);
+		cpx_sub (e1, e1, e2);
+
+	cpx_prt ("neg thing=", e1);
+	printf ("\n");
 		cpx_div (e1, e1, qn);
-//	printf ("\n");
-//	cpx_prt ("neg sum * q^n=", e1);
-//	printf ("\n");
-//	printf ("\n");
 		cpx_add (coho, coho, e1);
 		
-//	cpx_prt ("coho=", coho);
-//	printf ("\n");
+	cpx_prt ("coho=", coho);
+	printf ("\n");
 	printf ("\n");
 		
 		cpx_mul (qn, qn, que);
@@ -395,6 +421,7 @@ printf ("\n");
 
 	cpx_clear (e1);
 	cpx_clear (e2);	
+	cpx_clear (rat);	
 	cpx_clear (qn);
 	cpx_clear (lam);
 }
@@ -464,13 +491,13 @@ void do_coho (double lam, int prec)
 	cpx_init (q);
 	cpx_init (z);
 
-	cpx_set_d (lambda, lam, 0.01);
+	cpx_set_d (lambda, lam, 0.0);
 
 	cpx_set_d (q, 4.1, 0.0);
 	cpx_set_d (z, 2.5671, 0.0);
 	
-	// coherent (coho, lambda, q, z, prec);
-	validate_ratio (lambda, z, prec);
+	coherent (coho, lambda, q, z, prec);
+	// validate_ratio (lambda, z, prec);
 }
 
 /* ======================================================== */
@@ -478,7 +505,7 @@ void do_coho (double lam, int prec)
 int
 main (int argc, char *argv[])
 {
-	int prec = 125;
+	int prec = 425;
 	
 	if (2> argc)
 	{

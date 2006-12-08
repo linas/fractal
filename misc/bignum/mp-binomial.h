@@ -87,7 +87,7 @@ void cpx_poch_rising_d (cpx_t poch, double re_s, double im_s, unsigned int n);
  *
  * Brute force, simple.
  */
-void cpx_poch_rising (cpx_t poch, const cpx_t const s, unsigned int n);
+void cpx_poch_rising (cpx_t poch, const cpx_t s, unsigned int n);
 
 /* fp_binomial
  * Binomial coefficient 
@@ -98,6 +98,6 @@ void fp_binomial_d (mpf_t bin, double s, unsigned int k);
  * Complex binomial coefficient
  */
 void cpx_binomial_d (cpx_t bin, double re_s, double im_s, unsigned int k);
-void cpx_binomial (cpx_t bin, const cpx_t const s, unsigned int k);
+void cpx_binomial (cpx_t bin, const cpx_t s, unsigned int k);
 
 

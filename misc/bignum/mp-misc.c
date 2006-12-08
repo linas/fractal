@@ -27,7 +27,7 @@ void fp_prt (char * str, mpf_t val)
 	mpf_out_str (stdout, 10, 60, val);
 }
 
-void cpx_prt (char * str, const cpx_t const val)
+void cpx_prt (char * str, const cpx_t val)
 {
 	printf (str);
 	mpf_out_str (stdout, 10, 30, val[0].re);

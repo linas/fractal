@@ -30,7 +30,7 @@ static inline void cpx_clear (cpx_t z)
 	mpf_clear (z[0].im);
 }
 
-static inline void cpx_set (cpx_t z, const cpx_t const y)
+static inline void cpx_set (cpx_t z, const cpx_t y)
 {
 	mpf_set (z[0].re, y[0].re);
 	mpf_set (z[0].im, y[0].im);
@@ -54,13 +54,13 @@ static inline void cpx_set_mpf (cpx_t z, const mpf_t x, const mpf_t y)
 	mpf_set (z[0].im, y);
 }
 
-static inline void cpx_add (cpx_t sum, const cpx_t const a, const cpx_t const b)
+static inline void cpx_add (cpx_t sum, const cpx_t a, const cpx_t b)
 {
 	mpf_add (sum[0].re, a[0].re, b[0].re);
 	mpf_add (sum[0].im, a[0].im, b[0].im);
 }
 
-static inline void cpx_add_d (cpx_t sum, const cpx_t const a, double rb, double ib)
+static inline void cpx_add_d (cpx_t sum, const cpx_t a, double rb, double ib)
 {
 	mpf_t tmp;
 	mpf_init (tmp);
@@ -71,35 +71,35 @@ static inline void cpx_add_d (cpx_t sum, const cpx_t const a, double rb, double 
 	mpf_clear (tmp);
 }
 
-static inline void cpx_add_ui (cpx_t sum, const cpx_t const a, unsigned int rb, unsigned int ib)
+static inline void cpx_add_ui (cpx_t sum, const cpx_t a, unsigned int rb, unsigned int ib)
 {
 	mpf_add_ui (sum[0].re, a[0].re, rb);
 	mpf_add_ui (sum[0].im, a[0].im, ib);
 }
 
-static inline void cpx_add_mpf (cpx_t sum, const cpx_t const a, const mpf_t b)
+static inline void cpx_add_mpf (cpx_t sum, const cpx_t a, const mpf_t b)
 {
 	mpf_add (sum[0].re, a[0].re, b);
 }
 
-static inline void cpx_sub (cpx_t dif, const cpx_t const a, const cpx_t const b)
+static inline void cpx_sub (cpx_t dif, const cpx_t a, const cpx_t b)
 {
 	mpf_sub (dif[0].re, a[0].re, b[0].re);
 	mpf_sub (dif[0].im, a[0].im, b[0].im);
 }
 
-static inline void cpx_sub_ui (cpx_t sum, const cpx_t const a, unsigned int rb, unsigned int ib)
+static inline void cpx_sub_ui (cpx_t sum, const cpx_t a, unsigned int rb, unsigned int ib)
 {
 	mpf_sub_ui (sum[0].re, a[0].re, rb);
 	mpf_sub_ui (sum[0].im, a[0].im, ib);
 }
 
-static inline void cpx_sub_mpf (cpx_t sum, const cpx_t const a, const mpf_t b)
+static inline void cpx_sub_mpf (cpx_t sum, const cpx_t a, const mpf_t b)
 {
 	mpf_sub (sum[0].re, a[0].re, b);
 }
 
-static inline void cpx_neg (cpx_t neg, const cpx_t const a)
+static inline void cpx_neg (cpx_t neg, const cpx_t a)
 {
 	mpf_neg (neg[0].re, a[0].re);
 	mpf_neg (neg[0].im, a[0].im);
@@ -108,7 +108,7 @@ static inline void cpx_neg (cpx_t neg, const cpx_t const a)
 /**
  * cpx_times_i -- z = a*i
  */
-static inline void cpx_times_i (cpx_t z, const cpx_t const a)
+static inline void cpx_times_i (cpx_t z, const cpx_t a)
 {
 	mpf_t tmp;
 	mpf_init (tmp);
@@ -121,7 +121,7 @@ static inline void cpx_times_i (cpx_t z, const cpx_t const a)
 /**
  * cpx_mul -- prod = a * b
  */
-static inline void cpx_mul (cpx_t prod, const cpx_t const a, const cpx_t const b)
+static inline void cpx_mul (cpx_t prod, const cpx_t a, const cpx_t b)
 {
 	mpf_t pre, pim, tmp;
 	mpf_init (pre);
@@ -147,7 +147,7 @@ static inline void cpx_mul (cpx_t prod, const cpx_t const a, const cpx_t const b
 /**
  * cpx_mul_mpf -- prod = a * b
  */
-static inline void cpx_mul_mpf (cpx_t prod, const cpx_t const a, const mpf_t b)
+static inline void cpx_mul_mpf (cpx_t prod, const cpx_t a, const mpf_t b)
 {
 	mpf_mul (prod[0].re, a[0].re, b);
 	mpf_mul (prod[0].im, a[0].im, b);
@@ -156,7 +156,7 @@ static inline void cpx_mul_mpf (cpx_t prod, const cpx_t const a, const mpf_t b)
 /**
  * cpx_mul_mpf -- prod = a * b
  */
-static inline void cpx_mul_ui (cpx_t prod, const cpx_t const a, unsigned int b)
+static inline void cpx_mul_ui (cpx_t prod, const cpx_t a, unsigned int b)
 {
 	mpf_mul_ui (prod[0].re, a[0].re, b);
 	mpf_mul_ui (prod[0].im, a[0].im, b);
@@ -165,7 +165,7 @@ static inline void cpx_mul_ui (cpx_t prod, const cpx_t const a, unsigned int b)
 /**
  * cpx_recip -- recip = 1/z
  */
-static inline void cpx_recip (cpx_t recip, const cpx_t const z)
+static inline void cpx_recip (cpx_t recip, const cpx_t z)
 {
 	mpf_t mag,tmp;
 	mpf_init (mag);
@@ -185,7 +185,7 @@ static inline void cpx_recip (cpx_t recip, const cpx_t const z)
 /**
  * cpx_div -- ratio = a/b
  */
-static inline void cpx_div (cpx_t ratio, const cpx_t const a, const cpx_t const b)
+static inline void cpx_div (cpx_t ratio, const cpx_t a, const cpx_t b)
 {
 	cpx_t recip;
 	cpx_init (recip);
@@ -198,13 +198,13 @@ static inline void cpx_div (cpx_t ratio, const cpx_t const a, const cpx_t const 
 /**
  * cpx_div_mpf -- ratio = a/b
  */
-static inline void cpx_div_mpf (cpx_t ratio, const cpx_t const a, const mpf_t b)
+static inline void cpx_div_mpf (cpx_t ratio, const cpx_t a, const mpf_t b)
 {
 	mpf_div (ratio[0].re, a[0].re, b);
 	mpf_div (ratio[0].im, a[0].im, b);
 }
 
-static inline void cpx_div_ui (cpx_t ratio, const cpx_t const a, unsigned int b)
+static inline void cpx_div_ui (cpx_t ratio, const cpx_t a, unsigned int b)
 {
 	mpf_div_ui (ratio[0].re, a[0].re, b);
 	mpf_div_ui (ratio[0].im, a[0].im, b);
@@ -213,7 +213,7 @@ static inline void cpx_div_ui (cpx_t ratio, const cpx_t const a, unsigned int b)
 /**
  * cpx_mod_sq -- modulus squared of z
  */
-static inline void cpx_mod_sq (mpf_t mod, const cpx_t const z)
+static inline void cpx_mod_sq (mpf_t mod, const cpx_t z)
 {
 	mpf_t tmp;
 	mpf_init (tmp);
