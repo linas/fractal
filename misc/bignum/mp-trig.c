@@ -317,6 +317,8 @@ void cpx_sine (cpx_t sn, const cpx_t const z, unsigned int prec)
 	cpx_exp (zee, zee, prec);
 	cpx_sub (sn, sn, zee);
 	cpx_div_ui (sn, sn, 2);
+	cpx_times_i (sn, sn);
+	cpx_neg (sn, sn);
 	
 	cpx_clear (zee);
 }
