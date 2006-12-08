@@ -323,6 +323,34 @@ void cpx_sine (cpx_t sn, const cpx_t const z, unsigned int prec)
 	cpx_clear (zee);
 }
 
+void cpx_tangent (cpx_t tn, const cpx_t const z, unsigned int prec)
+{
+	cpx_t zee, cn;
+	cpx_init (zee);
+	cpx_init (cn);
+	
+	/* compute the cosine bit */
+	cpx_set (zee, z);
+	cpx_exp (cn, zee, prec);
+	cpx_neg (zee, zee);
+	cpx_exp (tn, zee, prec);
+	cpx_sub (cn, cn, tn);
+	
+	/* compute the sine bit */
+	cpx_times_i (zee, zee);
+	cpx_exp (tn, zee, prec);
+	cpx_neg (zee, zee);
+	cpx_exp (zee, zee, prec);
+	cpx_sub (tn, tn, zee);
+	
+	/* tan = sin/cos */
+	cpx_div (tn, tn, cn);
+	cpx_times_i (tn, tn);
+	
+	cpx_clear (zee);
+	cpx_clear (cn);
+}
+
 /* ======================================================================= */
 /**
  * fp_log_m1 -  Floating point logarithm
