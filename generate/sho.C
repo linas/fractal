@@ -15,6 +15,7 @@
 #include <stdlib.h>
 
 #include "brat.h"
+#include "coord-xforms.h"
 #include "../misc/bignum/zmp.h"
 
 /* ======================================================================= */
@@ -129,6 +130,12 @@ static double psi (double re_q, double im_q, int itermax, double param)
 
 	double re_z = re_q;
 	double im_z = im_q;
+
+#if USE_POINCARE_DISK
+	double mag = (re_q*re_q + im_q*im_q);
+	if (mag >= 0.97) return 0.0;
+	poincare_disk_to_plane_coords (re_q, im_q, &re_z, &im_z);
+#endif
 
 	// printf ("duude compute %g  %g \n", re_z, im_z);
 	psi_one (re_a, im_a, re_z, im_z, prec, param);

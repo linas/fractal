@@ -64,7 +64,7 @@ mp_zeta.o: mp_zeta.C
 plouffe.o: plouffe.C
 q-exp.o: q-exp.C brat.h
 swap.o: swap.C
-sho.o: sho.C
+sho.o: sho.C brat.h coord-xforms.h
 takagi.o: takagi.C brat.h
 totient.o: totient.C brat.h
 zeta.o: zeta.C brat.h
@@ -97,7 +97,7 @@ mp_zeta: brat.o mp_zeta.o util.o $(MP) $(GMP) -ldb
 plouffe: brat.o plouffe.o util.o
 q-exp: brat.o q-exp.o util.o
 swap: brat.o swap.o util.o
-sho: brat.o sho.o util.o $(MP) $(GMP) -ldb
+sho: brat.o sho.o util.o coord-xforms.o $(MP) $(GMP) -ldb
 takagi: brat.o takagi.o util.o
 totient: brat.o totient.o util.o $(FUNC)
 zeta: brat.o zeta.o util.o $(GSL)
