@@ -525,6 +525,77 @@ int test_real_gamma (int nterms, int prec)
 }
 
 /* ==================================================================== */
+/* Test the complex-valued gamma function, return the number of failures
+ */
+int test_complex_gamma (int nterms, int prec)
+{
+	int nfaults = 0;
+
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, 2*(prec-5));
+
+	mpf_t pi;
+	mpf_init (pi);
+	fp_pi (pi, prec);
+	
+	cpx_t gam, rgam;
+	cpx_init (gam);
+	cpx_init (rgam);
+
+	/* Do a reflection-formula test */
+	int i;
+	double red = 0.398721;
+	double imd = 0.3225121;
+	double rez = -0.5*nterms*red;
+	double imz = -0.5*nterms*imd;
+	for (i=0; i<nterms; i++)
+	{
+		/* set up z and 1-z */
+		cpx_set_d (gam, rez, imz);
+		cpx_set_ui (rgam, 1,0);
+		cpx_sub (rgam, rgam, gam);
+		
+		/* compute Gamma(z) * Gamma (1-z) */
+		cpx_gamma (gam, gam, prec);
+		cpx_gamma (rgam, rgam, prec);
+		cpx_mul (gam, gam, rgam);
+
+		/* Product of gammas, times sine */
+		cpx_div_mpf (gam, gam, pi);
+		cpx_set_d (rgam, rez, imz);
+		cpx_mul_mpf (rgam, rgam, pi);
+		cpx_sine (rgam, rgam, prec);
+		cpx_mul (gam, gam, rgam);
+		cpx_sub_ui (gam,gam, 1,0);
+		
+		cpx_mod_sq (gam[0].re, gam);
+		if (mpf_cmp (gam[0].re, epsi) > 0)
+		{
+			nfaults ++;
+			fprintf (stderr, "Error: complex gamma imprecise for z=%g +i %g\n", rez, imz);
+			cpx_prt (" gam should be zero=", gam);
+			printf ("\n");
+		}
+
+		rez +=red;
+		imz+=imd;
+	}
+
+	cpx_clear (gam);
+	cpx_clear (rgam);
+	mpf_clear (pi);
+	mpf_clear (epsi);
+	
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Complex gamma test passed!\n");
+	}
+	return nfaults;
+}
+
+/* ==================================================================== */
 
 int main (int argc, char * argv[])
 {
@@ -972,27 +1043,13 @@ int main (int argc, char * argv[])
 #endif /* CONFLUENT_HYPERGEOMETRIC */
 
 	int nfaults = test_real_gamma (nterms, prec);
+	nfaults += test_complex_gamma (nterms, prec);
 
 	if (0 == nfaults)
 	{
 		fprintf(stderr, "Test success!\n");
 	}
 
-	/* compute square root of pi */
-	mpf_t pi;
-	mpf_init (pi);
-	fp_pi (pi, prec);
-	mpf_sqrt (pi, pi);
-	
-	cpx_t gam;
-	cpx_init (gam);
-
-	/* gamma=0.5 */
-	cpx_set_d (gam, 0.5, 3.1);
-	cpx_gamma (gam, gam, prec);
-	mpf_sub (gam[0].re, gam[0].re,pi);
-	cpx_prt (" gam should be zero=", gam);
-	printf ("\n");
 	
 	return 0;
 }

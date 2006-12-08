@@ -91,51 +91,6 @@ void psi_2 (cpx_t psiret, cpx_t lambda, cpx_t y, int prec)
 	cpx_clear (psi);
 }
 
-/* ======================================================== */
-/* cheap hack for the gamma function. Incorrect, but holds water.
- * Approximates gamma(z)=1 for 1<z<2.
- */
-static void gamma_hack (cpx_t gam, const cpx_t const z, int prec)
-{
-	cpx_t zee;
-	cpx_init (zee);
-
-	/* Make copy of argument NOW! */
-	cpx_set (zee, z);
-
-#if 0
-	double flo = mpf_get_d (zee[0].re);
-	if (flo > 2.0)
-	{
-		unsigned int intpart = (unsigned int) floor (flo-1.0);
-		mpf_sub_ui (zee[0].re, zee[0].re, intpart);
-		cpx_poch_rising (gam, zee, intpart);
-	}
-	else if (flo < 1.0)
-	{
-		unsigned int intpart = (unsigned int) floor (2.0-flo);
-		cpx_poch_rising (gam, zee, intpart);
-		cpx_recip (gam, gam);
-		mpf_add_ui (zee[0].re, zee[0].re, intpart);
-	}
-	else
-	{
-		cpx_set_ui (gam, 1, 0);
-	}
-#endif
-
-	cpx_set_ui (gam, 1, 0);
-	cpx_t rgamma;
-	cpx_init (rgamma);
-	cpx_set_ui (rgamma, 1, 0);
-
-	fp_gamma (rgamma[0].re, zee[0].re, prec);
-	cpx_mul (gam, gam, rgamma);
-
-	cpx_clear (zee);
-	cpx_clear (rgamma);
-}
-
 void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 {
 	cpx_t pha, lmo;
@@ -168,11 +123,11 @@ void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 	mpf_div_ui (tmp, tmp, 2);
 	cpx_add_mpf (lmo, lambda, tmp);
 	cpx_div_ui (pha, lmo, 2);
-	gamma_hack (pha, pha, prec);
+	cpx_gamma (pha, pha, prec);
 	cpx_mul (eta, eta, pha);
 
 	/* Gamma (lambda + 1/2) */
-	gamma_hack (pha, lmo, prec);
+	cpx_gamma (pha, lmo, prec);
 	cpx_div (eta, eta, pha);
 
 	cpx_clear (pha);
@@ -213,11 +168,11 @@ void eta_2 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 	mpf_div_ui (tmp, tmp, 2);
 	cpx_sub_mpf (lmo, lambda, tmp);
 	cpx_div_ui (pha, lmo, 2);
-	gamma_hack (pha, pha, prec);
+	cpx_gamma (pha, pha, prec);
 	cpx_mul (eta, eta, pha);
 
 	/* Gamma (lambda - 1/2) */
-	gamma_hack (pha, lmo, prec);
+	cpx_gamma (pha, lmo, prec);
 	cpx_div (eta, eta, pha);
 
 	cpx_clear (pha);

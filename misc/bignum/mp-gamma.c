@@ -296,7 +296,6 @@ void cpx_gamma (cpx_t gam, const cpx_t z, int prec)
 		cpx_reduced_gamma (gam, z, prec);
 		return;
 	}
-printf ("duude m=%d\n", m);
 	
 	/* step two: prepare to use the multiplicatin theorem */
 	cpx_t zee, mzee, term, acc;
