@@ -24,7 +24,7 @@ static int prec;
 static void psi_init (void)
 {
 	/* the decimal precison (number of decimal places) */
-	prec = 120;
+	prec = 40;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -58,7 +58,8 @@ static double cgamma (double re_q, double im_q, int itermax, double param)
 	double re_z = re_q;
 	double im_z = im_q;
 
-#if USE_POINCARE_DISK
+#define USE_POINCARE_DISK
+#ifdef USE_POINCARE_DISK
 	double mag = (re_q*re_q + im_q*im_q);
 	if (mag >= 0.97) return 0.0;
 	poincare_disk_to_plane_coords (re_q, im_q, &re_z, &im_z);
@@ -68,6 +69,7 @@ static double cgamma (double re_q, double im_q, int itermax, double param)
 
 	// printf ("duude compute %g  %g \n", re_z, im_z);
 	cpx_gamma (gam, z, prec);
+	// cpx_exp (gam, z, prec);
 
 	double frea = mpf_get_d (gam[0].re);
 	double fima = mpf_get_d (gam[0].im);

@@ -12,6 +12,14 @@
 #include <math.h>
 #include "coord-xforms.h"
 
+/**
+ * poincare_disk_to_plane_coords
+ *
+ * Return i (1+z)/(1-z) where z=x+iy is a disk coord
+ * Interior of disk is mapped only to the upper half-plane,
+ * and the real number line is wrapped around the circumference.
+ * Exterior of disk maps to the lower half-plane.
+ */
 void 
 poincare_disk_to_plane_coords (double x, double y, 
                                double *px, double *py)
@@ -22,6 +30,13 @@ poincare_disk_to_plane_coords (double x, double y,
 	*py = (1.0 - x*x - y*y) * deno;
 }
 
+/**
+ * plane_to_poincare_disk_coords
+ *
+ * Return (tau-i)/(tau+i) where tau=x+iy are (upper half) plane coords
+ * Points in the upper half plane map to inside the unit circle, 
+ * Points in teh lower-half plane map to the outside of the circle.
+ */
 void 
 plane_to_poincare_disk_coords (double x, double y, 
                                double *px, double *py)
