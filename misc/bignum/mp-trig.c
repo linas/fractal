@@ -325,29 +325,28 @@ void cpx_sine (cpx_t sn, const cpx_t const z, unsigned int prec)
 
 void cpx_tangent (cpx_t tn, const cpx_t const z, unsigned int prec)
 {
-	cpx_t zee, cn;
+	cpx_t zee, cn, sn;
 	cpx_init (zee);
 	cpx_init (cn);
+	cpx_init (sn);
 	
-	/* compute the cosine bit */
-	cpx_set (zee, z);
-	cpx_exp (cn, zee, prec);
-	cpx_neg (zee, zee);
-	cpx_exp (tn, zee, prec);
-	cpx_sub (cn, cn, tn);
-	
-	/* compute the sine bit */
-	cpx_times_i (zee, zee);
+	cpx_times_i (zee, z);
 	cpx_exp (tn, zee, prec);
 	cpx_neg (zee, zee);
-	cpx_exp (zee, zee, prec);
-	cpx_sub (tn, tn, zee);
+	cpx_exp (sn, zee, prec);
+	
+	/* cn now holds 2*cos */
+	cpx_add (cn, tn, sn);
+	
+	/* sn now holds 2i*sin */
+	cpx_sub (sn, tn, sn);
 	
 	/* tan = sin/cos */
-	cpx_div (tn, tn, cn);
+	cpx_div (tn, sn, cn);
 	cpx_times_i (tn, tn);
 	
 	cpx_clear (zee);
+	cpx_clear (sn);
 	cpx_clear (cn);
 }
 
