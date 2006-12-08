@@ -166,8 +166,9 @@ static inline void reduced_gamma (mpf_t gam, const mpf_t ex, int prec)
 /* ================================================= */
 /* 
  * fp_gamma
- * Use pochhammer to get into range of 1 < z < 2,
- * Then use the reduced summation formula.
+ * Use pochhammer to get into range of 1.5 < z < 2.5,
+ * Then use the reduced summation formula. The range
+ * of 1.5 < z < 2.5 is particularly quickly convergent
  */
 void fp_gamma (mpf_t gam, const mpf_t z, int prec)
 {
@@ -222,12 +223,61 @@ void fp_gamma (mpf_t gam, const mpf_t z, int prec)
 
 /* ================================================= */
 /* 
- * gamma function, but valid only for -1 < x < 3 
+ * gamma function, but valid only for -2 < ImZ < 2 
+ * Use pochhammer to get into range of 1.5 < Re Z < 2.5,
+ * Then use the reduced summation formula. The range
+ * of 1.5 < ReZ < 2.5 is particularly quickly convergent
  */ 
-static void cpx_reduced_gamma (cpx_t gam, const cpx_t zee, int prec)
+static void cpx_reduced_gamma (cpx_t gam, const cpx_t z, int prec)
 {
-	cpx_reduced_lngamma (gam, zee, prec);
-	cpx_exp (gam, gam, prec);
+	cpx_t zee;
+	cpx_init (zee);
+
+	/* make a copy of the input arg NOW! */
+	cpx_set (zee, z);
+	
+	/* double-presision used, this code doesn't need to 
+	 * be all that accurate; just need a reasonable int part. 
+	 */
+	double flo = mpf_get_d (zee[0].re);
+	if (flo > 2.5)
+	{
+		unsigned int intpart = (unsigned int) floor (flo-1.0);
+		
+		/* The goal of the next if statement is to make sure that
+		 * -0.5<zee<0.5, which helps maintain excellent convergence.
+		 */
+		if (flo-intpart < 1.5) intpart --;
+		cpx_sub_ui (zee, zee, intpart, 0);
+		cpx_poch_rising (gam, zee, intpart);
+	}
+	else if (flo < 1.5)
+	{
+		unsigned int intpart = (unsigned int) floor (2.0-flo);
+
+		/* The goal of the next if statement is to make sure that
+		 * -0.5<zee<0.5, which helps maintain excellent convergence.
+		 */
+		if (flo+intpart < 1.5) intpart ++;
+		cpx_poch_rising (gam, zee, intpart);
+		cpx_recip (gam, gam);
+
+		cpx_add_ui (zee, zee, intpart, 0);
+	}
+	else
+	{
+		cpx_set_ui (gam, 1, 0);
+	}
+
+	cpx_t rgamma;
+	cpx_init (rgamma);
+
+	cpx_reduced_lngamma (rgamma, zee, prec);
+	cpx_exp (rgamma, rgamma, prec);
+	cpx_mul (gam, gam, rgamma);
+
+	cpx_clear (zee);
+	cpx_clear (rgamma);
 }
 
 /* ================================================= */
