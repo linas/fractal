@@ -31,6 +31,7 @@ void fp_exp (mpf_t ex, const mpf_t z, unsigned int prec);
 void fp_sine (mpf_t ex, const mpf_t z, unsigned int prec);
 void fp_cosine (mpf_t ex, const mpf_t z, unsigned int prec);
 void cpx_exp (cpx_t ex, const cpx_t const z, unsigned int prec);
+void cpx_sine (cpx_t ex, const cpx_t const z, unsigned int prec);
 
 /**
  * fp_log_m1 -  Floating point logarithm

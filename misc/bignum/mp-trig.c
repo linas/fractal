@@ -306,6 +306,21 @@ void cpx_exp (cpx_t ex, const cpx_t const z, unsigned int prec)
 	mpf_clear (co);
 }
 
+void cpx_sine (cpx_t sn, const cpx_t const z, unsigned int prec)
+{
+	cpx_t zee;
+	cpx_init (zee);
+	cpx_times_i (zee, z);
+	
+	cpx_exp (sn, zee, prec);
+	cpx_neg (zee, zee);
+	cpx_exp (zee, zee, prec);
+	cpx_sub (sn, sn, zee);
+	cpx_div_ui (sn, sn, 2);
+	
+	cpx_clear (zee);
+}
+
 /* ======================================================================= */
 /**
  * fp_log_m1 -  Floating point logarithm
