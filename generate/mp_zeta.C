@@ -18,24 +18,6 @@
 #include "../misc/bignum/zmp.h"
 
 /* ======================================================================= */
-/* rough count of number of digits in a number */
-
-static inline unsigned int num_digits (mpz_t num, mpz_t tmpa, mpz_t tmpb)
-{
-	unsigned int n=0;
-	
-	mpz_set (tmpb, num);
-	while (1)
-	{
-		mpz_fdiv_q_ui (tmpa, tmpb, 100);
-		mpz_set (tmpb, tmpa);
-		if (0 == mpz_sgn  (tmpa)) break;
-		n += 2;
-	}
-	return n;
-}
-
-/* ======================================================================= */
 /* compute entire_sub_s for complex-valued s
  */
 
