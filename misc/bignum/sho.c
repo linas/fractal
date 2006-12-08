@@ -319,6 +319,41 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 
 /* ======================================================== */
 
+void wtf (void)
+{
+	double lam;
+
+	for (lam=2.321; lam<30; lam += 0.3)
+	{
+		double r = tgamma (0.5*lam-0.25);
+		r /= tgamma (0.5*lam+0.25);
+		r *= lam-0.5;
+		r /= sqrt (2*lam);
+
+		double a = sqrt(M_E);
+		a = 1.0;
+
+		printf ("its lam=%g\t rat=%g\t asymp=%g\t rr=%g\n", lam, r, a, r/a);
+	}
+	
+	for (lam=-2.321; lam>-30; lam -= 0.3)
+	{
+		double r = tgamma (0.5*lam-0.25);
+		r /= tgamma (0.5*lam+0.25);
+		r *= lam-0.5;
+		r /= sqrt (-2*lam);
+
+		double a = sqrt(M_E);
+		a = 1.0;
+		a *= tan (M_PI*(0.5*lam+0.25));
+
+		printf ("its lam=%g\t rat=%g\t asymp=%g\t rr=%g\n", lam, r, a, r/a);
+	}
+	
+}
+
+/* ======================================================== */
+
 void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 {
 	cpx_t e1, e2, qn, lam;
@@ -454,7 +489,8 @@ void do_coho (double lam, int prec)
 	cpx_set_d (z, 2.5671, 0.0);
 	
 	// coherent (coho, lambda, q, z, prec);
-	validate_ratio (lambda, z, prec);
+	// validate_ratio (lambda, z, prec);
+	wtf();
 }
 
 /* ======================================================== */

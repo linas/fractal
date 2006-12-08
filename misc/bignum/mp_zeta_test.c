@@ -424,6 +424,107 @@ static void zeta_zero (mpf_t zero, int k)
 	mpf_set_str (zero, zp[k], 10);
 }
 /* ==================================================================== */
+/* Test the real-valued gamma function, return the number of failures
+ */
+
+static inline int check_gam_err (int nfaults, mpf_t gam, mpf_t epsi, double x)
+{
+	mpf_abs(gam, gam);
+	if (mpf_cmp (gam, epsi) > 0)
+	{
+		nfaults ++;
+		fprintf (stderr, "Error: real gamma imprecise for x=%g\n", x);
+		fp_prt (" gam should be zero=", gam);
+		printf ("\n");
+	}
+	return nfaults;
+}
+
+int test_real_gamma (int nterms, int prec)
+{
+	int nfaults = 0;
+
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, prec-5);
+
+	/* compute square root of pi */
+	mpf_t pi;
+	mpf_init (pi);
+	fp_pi (pi, prec);
+	mpf_sqrt (pi, pi);
+	
+	mpf_t gam;
+	mpf_init (gam);
+
+	/* gamma=0.5 */
+	mpf_set_d (gam, 0.5);
+	fp_gamma (gam, gam, prec);
+	mpf_sub (gam,gam,pi);
+	nfaults = check_gam_err (nfaults, gam, epsi, 0.5);
+	
+	mpf_set_d (gam, 1.5);
+	fp_gamma (gam, gam, prec);
+	mpf_mul_ui (gam, gam, 2);
+	mpf_sub (gam,gam,pi);
+	nfaults = check_gam_err (nfaults, gam, epsi, 1.5);
+	
+	mpf_set_d (gam, 2.5);
+	fp_gamma (gam, gam, prec);
+	mpf_mul_ui (gam, gam, 4);
+	mpf_div_ui (gam, gam, 3);
+	mpf_sub (gam,gam,pi);
+	nfaults = check_gam_err (nfaults, gam, epsi, 2.5);
+	
+	mpf_set_d (gam, -0.5);
+	fp_gamma (gam, gam, prec);
+	mpf_div_ui (gam, gam, 2);
+	mpf_add (gam,gam,pi);
+	nfaults = check_gam_err (nfaults, gam, epsi, -0.5);
+	
+	mpf_set_d (gam, -1.5);
+	fp_gamma (gam, gam, prec);
+	mpf_mul_ui (gam, gam, 3);
+	mpf_div_ui (gam, gam, 4);
+	mpf_sub (gam,gam,pi);
+	nfaults = check_gam_err (nfaults, gam, epsi, -1.5);
+	
+	int i;
+	for (i=1; i<nterms; i++)
+	{
+		double step=0.13245876;
+		double x = -nterms/2 + 0.1234567 + i;
+		x *= step;
+		mpf_set_d (gam, x);
+		fp_gamma (gam, gam, prec);
+
+		double y = tgamma (x);
+		double fy = mpf_get_d (gam);
+		
+		/* y should equal fy to within double-prescision */
+		// printf ("x=%g y=%g fy=%g diff=%g\n", x, y, fy, y-fy);
+		double diff = fabs(fy-y);
+		if (2.0e-14 < diff)
+		{
+			nfaults ++;
+			fprintf (stderr, "Error: real gamma faulty: "
+			        "x=%g\t y=%g\t fy=%g\t diff=%g\n", x, y, fy, y-fy);
+		}
+	}
+
+	mpf_clear (gam);
+	mpf_clear (pi);
+	mpf_clear (epsi);
+	
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Real gamma test passed!\n");
+	}
+	return nfaults;
+}
+
+/* ==================================================================== */
 
 int main (int argc, char * argv[])
 {
@@ -870,66 +971,29 @@ int main (int argc, char * argv[])
 	}
 #endif /* CONFLUENT_HYPERGEOMETRIC */
 
-#define TEST_GAMMA
-#ifdef TEST_GAMMA
-	mpf_t gam, pi;
-	mpf_init (gam);
-	mpf_init (pi);
-	mpf_set_d (gam, 0.5);
-	fp_gamma (gam, gam, prec);
+	int nfaults = test_real_gamma (nterms, prec);
 
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Test success!\n");
+	}
+
+	/* compute square root of pi */
+	mpf_t pi;
+	mpf_init (pi);
 	fp_pi (pi, prec);
 	mpf_sqrt (pi, pi);
-	mpf_sub (gam,gam,pi);
-	fp_prt (" gam 0.5 should be zero=", gam);
-	printf ("\n");
 	
-	mpf_set_d (gam, 1.5);
-	fp_gamma (gam, gam, prec);
-	mpf_mul_ui (gam, gam, 2);
-	mpf_sub (gam,gam,pi);
-	fp_prt (" gam 1.5 should be zero=", gam);
-	printf ("\n");
-	
-	mpf_set_d (gam, 2.5);
-	fp_gamma (gam, gam, prec);
-	mpf_mul_ui (gam, gam, 4);
-	mpf_div_ui (gam, gam, 3);
-	mpf_sub (gam,gam,pi);
-	fp_prt (" gam 2.5 should be zero=", gam);
-	printf ("\n");
-	
-	mpf_set_d (gam, -0.5);
-	fp_gamma (gam, gam, prec);
-	mpf_div_ui (gam, gam, 2);
-	mpf_add (gam,gam,pi);
-	fp_prt (" gam -0.5 should be zero=", gam);
-	printf ("\n");
-	
-	mpf_set_d (gam, -1.5);
-	fp_gamma (gam, gam, prec);
-	mpf_mul_ui (gam, gam, 3);
-	mpf_div_ui (gam, gam, 4);
-	mpf_sub (gam,gam,pi);
-	fp_prt (" gam -1.5 should be zero=", gam);
-	printf ("\n");
-	
-	int i;
-	for (i=1; i<nterms; i++)
-	{
-		double step=0.13245876;
-		double x = -nterms/2 + 0.1234567 + i;
-		x *= step;
-		mpf_set_d (gam, x);
-		fp_gamma (gam, gam, prec);
+	cpx_t gam;
+	cpx_init (gam);
 
-		double y = tgamma (x);
-		double fy = mpf_get_d (gam);
-		
-		printf ("x=%g y=%g fy=%g diff=%g\n", x, y, fy, y-fy);
-	}
-#endif /* TEST_GAMMA */
-
+	/* gamma=0.5 */
+	cpx_set_d (gam, 0.5, 3.1);
+	cpx_gamma (gam, gam, prec);
+	mpf_sub (gam[0].re, gam[0].re,pi);
+	cpx_prt (" gam should be zero=", gam);
+	printf ("\n");
+	
 	return 0;
 }
 
