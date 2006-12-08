@@ -184,14 +184,18 @@ void eta_2 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 
 void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 {
-	cpx_t e1, e2, lam, rat;
+	cpx_t e1, e2, lam, rat, tang;
 	cpx_init (e1);
 	cpx_init (e2);
 	cpx_init (lam);
 	cpx_init (rat);
+	cpx_init (tang);
+
+	mpf_t pi;
+	mpf_init (pi);
 
 	int n;
-	for (n=40; n<60; n+=4)
+	for (n=40; n<60; n+=3)
 	{
 		printf ("n=%d  \n", n);
 
@@ -255,29 +259,55 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		eta_1 (e1, lam, y, prec);
 		eta_2 (e2, lam, y, prec);
 		cpx_div (rat, e2, e1);
-		cpx_prt ("rat=", rat);
+		cpx_prt ("rat=",rat);
 		printf ("\n");
 
-		double fr = mpf_get_d (rat[0].im);
-		fr *= -1.0 / sqrt(M_E);
-		printf ("duude fr=%g\n", fr);
+		// double fr = mpf_get_d (rat[0].im);
+		// fr /= tan (M_PI * 0.5*(mpf_get_d(lam[0].re)+0.5));
+		// printf ("duude fr=%g\n", fr);
+		
+		/* compute lambda/2 + 1/4 */
+		cpx_set_ui (tang, 1,0);
+		cpx_div_ui (tang, tang, 2);
+		cpx_add (tang, tang, lam);
+		cpx_div_ui (tang, tang, 2);
+		
+		/* compute tan(lambda/2 + 1/4) */
+		fp_pi (pi, prec);
+		cpx_mul_mpf (tang, tang, pi);
+		cpx_tangent (tang, tang, prec);
+		cpx_times_i (tang, tang);
+		
+		cpx_prt ("tan=", tang);
+		printf ("\n");
+		
+		/* ratio */
+		cpx_div (rat, rat, tang);
+		cpx_neg (rat, rat);
+		cpx_sub_ui (rat, rat, 1, 0);
+
+
 #endif
 
 		printf ("\n");
 	}
 
+	mpf_clear (pi);
 	cpx_clear (e1);
 	cpx_clear (e2);	
 	cpx_clear (lam);
 	cpx_clear (rat);
+	cpx_clear (tang);
 }
 
 /* ======================================================== */
-
+/* Validate the asymptotic expansion for the gamma */
+#if 0
 void wtf (void)
 {
 	double lam;
 
+	/* the plus-infty direction */
 	for (lam=2.321; lam<30; lam += 0.3)
 	{
 		double r = tgamma (0.5*lam-0.25);
@@ -285,12 +315,10 @@ void wtf (void)
 		r *= lam-0.5;
 		r /= sqrt (2*lam);
 
-		double a = sqrt(M_E);
-		a = 1.0;
-
-		printf ("its lam=%g\t rat=%g\t asymp=%g\t rr=%g\n", lam, r, a, r/a);
+		printf ("its lam=%g\t rat=%g\n", lam, r);
 	}
 	
+	/* The minus-infty direction, which is what we want */
 	for (lam=-2.321; lam>-30; lam -= 0.3)
 	{
 		double r = tgamma (0.5*lam-0.25);
@@ -298,14 +326,12 @@ void wtf (void)
 		r *= lam-0.5;
 		r /= sqrt (-2*lam);
 
-		double a = sqrt(M_E);
-		a = 1.0;
-		a *= tan (M_PI*(0.5*lam+0.25));
+		double a = tan (M_PI*(0.5*lam+0.25));
 
 		printf ("its lam=%g\t rat=%g\t asymp=%g\t rr=%g\n", lam, r, a, r/a);
 	}
-	
 }
+#endif
 
 /* ======================================================== */
 
@@ -438,14 +464,13 @@ void do_coho (double lam, int prec)
 	cpx_init (q);
 	cpx_init (z);
 
-	cpx_set_d (lambda, lam, 0.0);
+	cpx_set_d (lambda, lam, 0.01);
 
 	cpx_set_d (q, 4.1, 0.0);
 	cpx_set_d (z, 2.5671, 0.0);
 	
 	// coherent (coho, lambda, q, z, prec);
-	// validate_ratio (lambda, z, prec);
-	wtf();
+	validate_ratio (lambda, z, prec);
 }
 
 /* ======================================================== */
