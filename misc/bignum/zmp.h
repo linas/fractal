@@ -9,6 +9,7 @@ extern "C" {
 #include "mp-cache.h"
 #include "mp-complex.h"
 #include "mp-consts.h"
+#include "mp-gamma.h"
 #include "mp-hyper.h"
 #include "mp-misc.h"
 #include "mp-trig.h"
