@@ -8,7 +8,10 @@
  */
 
 #include <math.h>
+#include <stdio.h>
+
 #include <gmp.h>
+
 #include "mp-binomial.h"
 #include "mp-complex.h"
 #include "mp-consts.h"
@@ -228,6 +231,7 @@ void fp_gamma (mpf_t gam, const mpf_t z, int prec)
  * Then use the reduced summation formula. The range
  * of 1.5 < ReZ < 2.5 is particularly quickly convergent
  */ 
+
 static void cpx_reduced_gamma (cpx_t gam, const cpx_t z, int prec)
 {
 	cpx_t zee;
