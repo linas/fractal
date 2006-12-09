@@ -323,6 +323,21 @@ void cpx_sine (cpx_t sn, const cpx_t z, unsigned int prec)
 	cpx_clear (zee);
 }
 
+void cpx_cosine (cpx_t cs, const cpx_t z, unsigned int prec)
+{
+	cpx_t zee;
+	cpx_init (zee);
+	cpx_times_i (zee, z);
+	
+	cpx_exp (cs, zee, prec);
+	cpx_neg (zee, zee);
+	cpx_exp (zee, zee, prec);
+	cpx_add (cs, cs, zee);
+	cpx_div_ui (cs, cs, 2);
+	
+	cpx_clear (zee);
+}
+
 void cpx_tangent (cpx_t tn, const cpx_t z, unsigned int prec)
 {
 	cpx_t zee, cn, sn;

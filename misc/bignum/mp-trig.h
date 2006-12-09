@@ -32,6 +32,7 @@ void fp_sine (mpf_t sine, const mpf_t z, unsigned int prec);
 void fp_cosine (mpf_t cosine, const mpf_t z, unsigned int prec);
 void cpx_exp (cpx_t ex, const cpx_t z, unsigned int prec);
 void cpx_sine (cpx_t sine, const cpx_t z, unsigned int prec);
+void cpx_cosine (cpx_t cosine, const cpx_t z, unsigned int prec);
 void cpx_tangent (cpx_t tang, const cpx_t z, unsigned int prec);
 
 /**
