@@ -508,8 +508,8 @@ void do_coho (double lam, int prec)
 	cpx_set_d (q, 4.1, 0.0);
 	cpx_set_d (z, 2.5671, 0.2);
 	
-	// coherent (coho, lambda, q, z, prec);
-	validate_ratio (lambda, z, prec);
+	coherent (coho, lambda, q, z, prec);
+	// validate_ratio (lambda, z, prec);
 }
 
 /* ======================================================== */
@@ -517,7 +517,7 @@ void do_coho (double lam, int prec)
 int
 main (int argc, char *argv[])
 {
-	int prec = 50;
+	int prec = 350;
 	
 	if (2> argc)
 	{

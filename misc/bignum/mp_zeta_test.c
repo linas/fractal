@@ -623,19 +623,6 @@ int test_real_sine (int nterms, int prec)
 /* Test the real-valued gamma function, return the number of failures
  */
 
-static inline int check_gam_err (int nfaults, mpf_t gam, mpf_t epsi, double x)
-{
-	mpf_abs(gam, gam);
-	if (mpf_cmp (gam, epsi) > 0)
-	{
-		nfaults ++;
-		fprintf (stderr, "Error: real gamma imprecise for x=%g\n", x);
-		fp_prt (" gam should be zero=", gam);
-		printf ("\n");
-	}
-	return nfaults;
-}
-
 int test_real_gamma (int nterms, int prec)
 {
 	int nfaults = 0;
@@ -651,42 +638,70 @@ int test_real_gamma (int nterms, int prec)
 	fp_pi (pi, prec);
 	mpf_sqrt (pi, pi);
 	
-	mpf_t gam;
+	mpf_t gam, ex, acc;
+	mpf_init (ex);
 	mpf_init (gam);
+	mpf_init (acc);
 
 	/* gamma=0.5 */
-	mpf_set_d (gam, 0.5);
-	fp_gamma (gam, gam, prec);
+	mpf_set_d (ex, 0.5);
+	fp_gamma (gam, ex, prec);
 	mpf_sub (gam,gam,pi);
-	nfaults = check_gam_err (nfaults, gam, epsi, 0.5);
+	nfaults = check_for_zero (nfaults, gam, epsi, "real gamma", 0.5);
 	
-	mpf_set_d (gam, 1.5);
-	fp_gamma (gam, gam, prec);
+	mpf_set_d (ex, 1.5);
+	fp_gamma (gam, ex, prec);
 	mpf_mul_ui (gam, gam, 2);
 	mpf_sub (gam,gam,pi);
-	nfaults = check_gam_err (nfaults, gam, epsi, 1.5);
+	nfaults = check_for_zero (nfaults, gam, epsi, "real gamma", 1.5);
 	
 	mpf_set_d (gam, 2.5);
 	fp_gamma (gam, gam, prec);
 	mpf_mul_ui (gam, gam, 4);
 	mpf_div_ui (gam, gam, 3);
 	mpf_sub (gam,gam,pi);
-	nfaults = check_gam_err (nfaults, gam, epsi, 2.5);
+	nfaults = check_for_zero (nfaults, gam, epsi, "real gamma", 2.5);
 	
 	mpf_set_d (gam, -0.5);
 	fp_gamma (gam, gam, prec);
 	mpf_div_ui (gam, gam, 2);
 	mpf_add (gam,gam,pi);
-	nfaults = check_gam_err (nfaults, gam, epsi, -0.5);
+	nfaults = check_for_zero (nfaults, gam, epsi, "real gamma", -0.5);
 	
 	mpf_set_d (gam, -1.5);
 	fp_gamma (gam, gam, prec);
 	mpf_mul_ui (gam, gam, 3);
 	mpf_div_ui (gam, gam, 4);
 	mpf_sub (gam,gam,pi);
-	nfaults = check_gam_err (nfaults, gam, epsi, -1.5);
+	nfaults = check_for_zero (nfaults, gam, epsi, "real gamma", -1.5);
 	
+	/* Use the reflection test */
 	int i;
+	for (i=1; i<nterms; i++)
+	{
+		double step=0.13245876;
+		double x = -nterms/2 + 0.1234567 + i;
+		x *= step;
+
+		mpf_set_d (ex, x);
+		mpf_mul (acc, pi, ex);
+		fp_sine (acc, acc, prec);
+		mpf_div (acc, acc, pi);
+		
+		fp_gamma (gam, ex, prec);
+		mpf_mul (acc, acc, gam);
+
+		mpf_ui_sub (ex, 1,ex);
+		fp_gamma (gam, ex, prec);
+		mpf_mul (acc, acc, gam);
+		
+		mpf_sub_ui (acc, acc, 1);
+		nfaults = check_for_zero (nfaults, acc, epsi, "real gamma duplication", x);
+	}
+
+	/* This test is failing for the larger ranges;
+	 * its possible that the unix gamma is broken for large values? 
+	 */
 	for (i=1; i<nterms; i++)
 	{
 		double step=0.13245876;
@@ -695,21 +710,19 @@ int test_real_gamma (int nterms, int prec)
 		mpf_set_d (gam, x);
 		fp_gamma (gam, gam, prec);
 
-		double y = tgamma (x);
-		double fy = mpf_get_d (gam);
-		
-		/* y should equal fy to within double-prescision */
-		// printf ("x=%g y=%g fy=%g diff=%g\n", x, y, fy, y-fy);
-		double diff = fabs(fy-y);
-		if (2.0e-14 < diff)
-		{
-			nfaults ++;
-			fprintf (stderr, "Error: real gamma faulty: "
-			        "x=%g\t y=%g\t fy=%g\t diff=%g\n", x, y, fy, y-fy);
-		}
+		nfaults = check_for_equality (nfaults, gam, tgamma(x), "real gamma", x);
+
+		double y = tgamma(x);
+		y *= tgamma(1.0-x);
+		y /= M_PI;
+		y *= sin (M_PI *x);
+		y -= 1.0;
+		printf ("x=%g y=%g\n", x,y);
 	}
 
+	mpf_clear (ex);
 	mpf_clear (gam);
+	mpf_clear (acc);
 	mpf_clear (pi);
 	mpf_clear (epsi);
 	
