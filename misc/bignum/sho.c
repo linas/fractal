@@ -91,7 +91,128 @@ void psi_2 (cpx_t psiret, cpx_t lambda, cpx_t y, int prec)
 	cpx_clear (psi);
 }
 
-void eta_1 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
+void bzeta_1 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
+{
+	cpx_t pha, lambda;
+	cpx_init (pha);
+	cpx_init (lambda);
+
+	/* Make copy of argument NOW! */
+	cpx_set (lambda, lam);
+	
+	cpx_set_ui (eta, 1,0);
+
+	mpf_t tmp;
+	mpf_init (tmp);
+
+	/* times sqrt(2pi) */
+	fp_sqrt_two_pi (tmp, prec);
+	cpx_mul_mpf(eta, eta, tmp);
+	
+	/* power of two term */
+	mpf_set_ui (tmp, 1);
+	mpf_div_ui (tmp, tmp, 4);
+	cpx_set (pha, lambda);
+	cpx_div_ui (pha, pha, 2);
+	cpx_pow_mpf (pha, tmp, pha, prec);
+	cpx_mul (eta, eta, pha);
+	
+	/* Gamma (3/4+lambda/2) */
+	mpf_set_ui (tmp, 3);
+	mpf_div_ui (tmp, tmp, 2);
+	cpx_add_mpf (lambda, lambda, tmp);
+	cpx_div_ui (pha, lambda, 2);
+	cpx_gamma (pha, pha, prec);
+	cpx_div (eta, eta, pha);
+
+	cpx_clear (pha);
+	cpx_clear (lambda);
+	mpf_clear (tmp);
+}
+
+void bzeta_1_old (cpx_t eta, cpx_t lam, cpx_t y, int prec)
+{
+	cpx_t pha, lambda;
+	cpx_init (pha);
+	cpx_init (lambda);
+
+	/* Make copy of argument NOW! */
+	cpx_set (lambda, lam);
+	
+	cpx_set_ui (eta, 1,0);
+
+	mpf_t tmp;
+	mpf_init (tmp);
+
+	/* Gamma (1/4+lambda/2) */
+	mpf_set_ui (tmp, 1);
+	mpf_div_ui (tmp, tmp, 2);
+	cpx_add_mpf (pha, lambda, tmp);
+	cpx_div_ui (pha, pha, 2);
+	cpx_gamma (pha, pha, prec);
+	cpx_mul (eta, eta, pha);
+
+	/* Gamma (lambda + 1/2) */
+	mpf_set_ui (tmp, 1);
+	mpf_div_ui (tmp, tmp, 2);
+	cpx_add_mpf (pha, lambda, tmp);
+	cpx_gamma (pha, pha, prec);
+	cpx_div (eta, eta, pha);
+
+	cpx_clear (pha);
+	cpx_clear (lambda);
+	mpf_clear (tmp);
+}
+
+void eta_1 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
+{
+	cpx_t pha, lambda;
+	cpx_init (pha);
+	cpx_init (lambda);
+
+	/* Make copy of argument NOW! */
+	cpx_set (lambda, lam);
+	
+	psi_1 (eta, lambda, y, prec);
+
+	mpf_t tmp;
+	mpf_init (tmp);
+
+	/* phase term, exp (i pi lambda/2) */
+	cpx_set (pha, lambda);
+	cpx_div_ui (pha, pha, 2);
+	fp_pi (tmp, prec);
+	cpx_mul_mpf (pha, pha, tmp);
+	cpx_times_i (pha, pha);
+	cpx_exp (pha, pha, prec);
+	cpx_mul (eta, eta, pha);
+
+	/* times sqrt(2pi) */
+	fp_sqrt_two_pi (tmp, prec);
+	cpx_mul_mpf(eta, eta, tmp);
+	
+	/* power of two term */
+	mpf_set_ui (tmp, 1);
+	mpf_div_ui (tmp, tmp, 2);
+	cpx_set (pha, lambda);
+	cpx_div_ui (pha, pha, 2);
+	cpx_pow_mpf (pha, tmp, pha, prec);
+	cpx_mul (eta, eta, pha);
+	
+	/* Gamma (3/4+lambda/2) */
+	mpf_set_ui (tmp, 3);
+	mpf_div_ui (tmp, tmp, 2);
+	cpx_add_mpf (lambda, lambda, tmp);
+	cpx_div_ui (pha, lambda, 2);
+	cpx_gamma (pha, pha, prec);
+	cpx_div (eta, eta, pha);
+
+	cpx_clear (pha);
+	cpx_clear (lambda);
+	mpf_clear (tmp);
+}
+
+void eta_1_old (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 {
 	cpx_t pha, lmo;
 	cpx_init (pha);
@@ -195,14 +316,22 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 	mpf_init (pi);
 
 	int n;
-	for (n=40; n<60; n+=3)
+	for (n=4; n<14; n+=3)
 	{
 		printf ("n=%d  \n", n);
 
 		/* lambda-n */
 		cpx_add_ui (lam, lambda, n, 0);
 		
-#define VALIDATE_PSI_ONE
+		bzeta_1 (e1, lam, y, prec);
+		cpx_prt ("eta_1=", e1);
+		printf ("\n");
+		
+		bzeta_1_old (e1, lam, y, prec);
+		cpx_prt ("old_1=", e1);
+		printf ("\n");
+		
+// #define VALIDATE_PSI_ONE
 #ifdef VALIDATE_PSI_ONE
 		/* The following validates just great, 
 		 * for both large positive and large negative lambda */
@@ -495,10 +624,10 @@ void do_coho (double lam, int prec)
 	cpx_init (q);
 	cpx_init (z);
 
-	cpx_set_d (lambda, lam, 0.0);
+	cpx_set_d (lambda, lam, 0.2);
 
 	cpx_set_d (q, 4.1, 0.0);
-	cpx_set_d (z, 2.5671, 0.0);
+	cpx_set_d (z, 2.5671, 0.2);
 	
 	// coherent (coho, lambda, q, z, prec);
 	validate_ratio (lambda, z, prec);
@@ -509,7 +638,7 @@ void do_coho (double lam, int prec)
 int
 main (int argc, char *argv[])
 {
-	int prec = 425;
+	int prec = 50;
 	
 	if (2> argc)
 	{
