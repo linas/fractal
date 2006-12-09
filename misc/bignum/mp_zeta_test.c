@@ -428,54 +428,115 @@ static void zeta_zero (mpf_t zero, int k)
 /* Test the real-valued sine function, return the number of failures
  */
 
+static inline int check_for_zero (int nfaults, mpf_t zer, mpf_t epsi, char * str, double x)
+{
+	mpf_abs(zer, zer);
+	if (mpf_cmp (zer, epsi) > 0)
+	{
+		nfaults ++;
+		fprintf (stderr, "Error: %s imprecise for x=%g\n", str, x);
+		fp_prt ("should be zero=", zer);
+		printf ("\n");
+	}
+	return nfaults;
+}
+
+/* val should equal fval to within double-prescision */
+static inline int check_for_equality (int nfaults, mpf_t val, double fval, char * str, double x)
+{
+	double y = mpf_get_d (val);
+		
+	double diff = fabs(y-fval);
+	if (2.0e-14 < diff)
+	{
+		nfaults ++;
+		fprintf (stderr, "Error: %s faulty: "
+		        "x=%g\t expected=%g\t got=%g\t diff=%g\n", str, x, fval, y, fval-y);
+	}
+	return nfaults;
+}
+
 int test_real_sine (int nterms, int prec)
 {
+	int nfaults = 0;
+
 	mpf_t ex, pi2, pi2n;
 	mpf_init (ex);
 	mpf_init (pi2);
 	mpf_init (pi2n);
-	fp_pi (pi2, prec);
-	mpf_div_ui (pi2, pi2, 2);
-	mpf_set (pi2n, pi2);
+
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, prec-5);
+
+	/* compute pi-halves */
+	fp_pi_half (pi2, prec);
+
+	int nstart = -25;
+	mpf_mul_ui (pi2n, pi2, -nstart);
+	mpf_neg (pi2n,pi2n);
 	
+	/* check values at pi-halves, should be zero, or one */
 	int n;
-	for (n=1; n<130; n++)
+	for (n=nstart; n<13+nterms; n++)
 	{
+		int rem = n%4;
+		if (0>rem) rem +=4;
+		
 		fp_sine (ex, pi2n, prec);
-		if (1==n%4)
+		if (1==rem)
 		{
 			mpf_sub_ui (ex,ex,1);
 		}
-		if (3==n%4)
+		if (3==rem)
 		{
 			mpf_add_ui (ex,ex,1);
 		}
-		printf ("sin(%d pi/2)= ", n);
-		fp_prt ("", ex);
-		printf ("\n");
+		nfaults = check_for_zero (nfaults, ex, epsi, "real sine", 0.5*n*M_PI);
 
 		fp_cosine (ex, pi2n, prec);
-		if (0==n%4)
+		if (0==rem)
 		{
 			mpf_sub_ui (ex,ex,1);
 		}
-		if (2==n%4)
+		if (2==rem)
 		{
 			mpf_add_ui (ex,ex,1);
 		}
-		printf ("cos(%d pi/2)= ", n);
-		fp_prt ("", ex);
-		printf ("\n");
-		printf ("\n");
+		nfaults = check_for_zero (nfaults, ex, epsi, "real cosine", 0.5*n*M_PI);
 
 		mpf_add (pi2n, pi2n, pi2);
 	}
 
+	/* check values against built-in functions */
+	int i;
+	for (i=1; i<nterms; i++)
+	{
+		double step=0.13245876;
+		double x = -nterms/2 + 0.1234567 + i;
+		x *= step;
+		mpf_set_d (ex, x);
+		fp_sine (ex, ex, prec);
+
+		nfaults = check_for_equality (nfaults, ex, sin(x), "real sine", x);
+		
+		mpf_set_d (ex, x);
+		fp_cosine (ex, ex, prec);
+
+		nfaults = check_for_equality (nfaults, ex, cos(x), "real cosine", x);
+	}
+	
 	mpf_clear (ex);
 	mpf_clear(pi2);
 	mpf_clear(pi2n);
+	mpf_clear(epsi);
 
-	return 0;
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Real sine test passed!\n");
+	}
+	return nfaults;
 }
 
 /* ==================================================================== */
@@ -1058,6 +1119,10 @@ int main (int argc, char * argv[])
 	if (0 == nfaults)
 	{
 		fprintf(stderr, "Test success!\n");
+	}
+	else
+	{
+		fprintf(stderr, "FAILURE!! %d failed tests\n", nfaults);
 	}
 
 	
