@@ -224,7 +224,7 @@ void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 	/* Make copy of argument now! */
 	mpf_set (zee, z);
 
-	/* subtract off multiple of pi/halves */
+	/* subtract off multiple of pi-halves */
 	fp_pi_half (pih, prec);
 	mpf_div (per, zee, pih);
 	mpf_floor (per, per);
@@ -241,8 +241,10 @@ void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 	}
 	fp_sine_series (si, zee, prec);
 
-	quad /= 2;
-	if (quad %2)
+	/* bump for negative quadrants */
+	if (0>quad) iq++;
+	iq /= 2;
+	if (iq%2)
 	{
 		mpf_neg (si, si);
 	}
@@ -254,13 +256,21 @@ void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 
 /* ======================================================================= */
 /**
- * fp_cosine -  Floating point cosine function
+ * fp_cosine_series -  Floating point cosine function
  * Implemented using a brute-force, very simple algo, with 
  * no attempts at optimization. Also, does not assume any 
  * precomputed constants.
  */
+#if OBSOLETE_FOR_REFERENCE_ONLY
+/* The cosine_series code below works great, except that it has poorer
+ * convergence for large z values. Thus, its re-implemented in terms 
+ * of sine, which is more efficient.
+ *
+ * This routine should be useful as an alternate high-precision algo, 
+ * useful for testing/validation, and should be moved to the test package.
+ */
 
-void fp_cosine (mpf_t co, const mpf_t z, unsigned int prec)
+static void fp_cosine_series (mpf_t co, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, z_n, fact, term;
 
@@ -317,6 +327,26 @@ void fp_cosine (mpf_t co, const mpf_t z, unsigned int prec)
 	mpf_clear (term);
 
 	mpf_clear (maxterm);
+}
+#endif /* OBSOLETE_FOR_REFERENCE_ONLY */
+
+void fp_cosine (mpf_t si, const mpf_t z, unsigned int prec)
+{
+	mpf_t zee, pih;
+
+	mpf_init (zee);
+	mpf_init (pih);
+
+	/* Make copy of argument now! */
+	mpf_set (zee, z);
+
+	/* add pi-halves */
+	fp_pi_half (pih, prec);
+	mpf_add (zee, zee, pih);
+	fp_sine(si, zee, prec);
+
+	mpf_clear (zee);
+	mpf_clear (pih);
 }
 
 /* ======================================================================= */
