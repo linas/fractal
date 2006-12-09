@@ -423,6 +423,61 @@ static void zeta_zero (mpf_t zero, int k)
 
 	mpf_set_str (zero, zp[k], 10);
 }
+
+/* ==================================================================== */
+/* Test the real-valued sine function, return the number of failures
+ */
+
+int test_real_sine (int nterms, int prec)
+{
+	mpf_t ex, pi2, pi2n;
+	mpf_init (ex);
+	mpf_init (pi2);
+	mpf_init (pi2n);
+	fp_pi (pi2, prec);
+	mpf_div_ui (pi2, pi2, 2);
+	mpf_set (pi2n, pi2);
+	
+	int n;
+	for (n=1; n<130; n++)
+	{
+		fp_sine (ex, pi2n, prec);
+		if (1==n%4)
+		{
+			mpf_sub_ui (ex,ex,1);
+		}
+		if (3==n%4)
+		{
+			mpf_add_ui (ex,ex,1);
+		}
+		printf ("sin(%d pi/2)= ", n);
+		fp_prt ("", ex);
+		printf ("\n");
+
+		fp_cosine (ex, pi2n, prec);
+		if (0==n%4)
+		{
+			mpf_sub_ui (ex,ex,1);
+		}
+		if (2==n%4)
+		{
+			mpf_add_ui (ex,ex,1);
+		}
+		printf ("cos(%d pi/2)= ", n);
+		fp_prt ("", ex);
+		printf ("\n");
+		printf ("\n");
+
+		mpf_add (pi2n, pi2n, pi2);
+	}
+
+	mpf_clear (ex);
+	mpf_clear(pi2);
+	mpf_clear(pi2n);
+
+	return 0;
+}
+
 /* ==================================================================== */
 /* Test the real-valued gamma function, return the number of failures
  */
@@ -749,53 +804,6 @@ int main (int argc, char * argv[])
 	mpf_clear(one);
 #endif
 
-// #define TEST_SINE
-#ifdef TEST_SINE
-	mpf_t ex, pi2, pi2n;
-	mpf_init (ex);
-	mpf_init (pi2);
-	mpf_init (pi2n);
-	fp_pi (pi2, prec);
-	mpf_div_ui (pi2, pi2, 2);
-	mpf_set (pi2n, pi2);
-	
-	int n;
-	for (n=1; n<130; n++)
-	{
-		fp_sine (ex, pi2n, prec);
-		if (1==n%4)
-		{
-			mpf_sub_ui (ex,ex,1);
-		}
-		if (3==n%4)
-		{
-			mpf_add_ui (ex,ex,1);
-		}
-		printf ("sin(%d pi/2)= ", n);
-		fp_prt ("", ex);
-		printf ("\n");
-
-		fp_cosine (ex, pi2n, prec);
-		if (0==n%4)
-		{
-			mpf_sub_ui (ex,ex,1);
-		}
-		if (2==n%4)
-		{
-			mpf_add_ui (ex,ex,1);
-		}
-		printf ("cos(%d pi/2)= ", n);
-		fp_prt ("", ex);
-		printf ("\n");
-		printf ("\n");
-
-		mpf_add (pi2n, pi2n, pi2);
-	}
-
-	mpf_clear (ex);
-	mpf_clear(pi2);
-	mpf_clear(pi2n);
-#endif
 	
 // #define ZETA_STUFF
 #ifdef ZETA_STUFF
@@ -1042,7 +1050,9 @@ int main (int argc, char * argv[])
 	}
 #endif /* CONFLUENT_HYPERGEOMETRIC */
 
-	int nfaults = test_real_gamma (nterms, prec);
+	int nfaults = 0;
+	nfaults += test_real_sine (nterms, prec);
+	nfaults += test_real_gamma (nterms, prec);
 	nfaults += test_complex_gamma (nterms, prec);
 
 	if (0 == nfaults)
