@@ -425,7 +425,7 @@ static void zeta_zero (mpf_t zero, int k)
 }
 
 /* ==================================================================== */
-/* Test the real-valued sine function, return the number of failures
+/* Test comparison utilities
  */
 
 static inline int check_for_zero (int nfaults, mpf_t zer, mpf_t epsi, char * str, double x)
@@ -436,6 +436,20 @@ static inline int check_for_zero (int nfaults, mpf_t zer, mpf_t epsi, char * str
 		nfaults ++;
 		fprintf (stderr, "Error: %s imprecise for x=%g\n", str, x);
 		fp_prt ("should be zero=", zer);
+		printf ("\n");
+	}
+	return nfaults;
+}
+
+static inline int cpx_check_for_zero (int nfaults, cpx_t zer, mpf_t epsi, char * str, double x)
+{
+	mpf_abs(zer[0].re, zer[0].re);
+	mpf_abs(zer[0].im, zer[0].im);
+	if ((mpf_cmp (zer[0].re, epsi) > 0) || (mpf_cmp (zer[0].im, epsi) > 0))
+	{
+		nfaults ++;
+		fprintf (stderr, "Error: %s imprecise for x=%g\n", str, x);
+		cpx_prt ("should be zero=", zer);
 		printf ("\n");
 	}
 	return nfaults;
@@ -455,6 +469,58 @@ static inline int check_for_equality (int nfaults, mpf_t val, double fval, char 
 	}
 	return nfaults;
 }
+
+/* ==================================================================== */
+/* Test the complex-valued sqrt function, return the number of failures
+ */
+
+int test_cpx_sqrt (int nterms, int prec)
+{
+	int nfaults = 0;
+
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, prec-5);
+
+	cpx_t za, zb;
+	cpx_init (za);
+	cpx_init (zb);
+	
+	/* take square of square root */
+	double step=0.13245876;
+	cpx_set_d (za, -2.39876, 0.0184735);
+	int i;
+	for (i=1; i<nterms; i++)
+	{
+		cpx_sqrt (zb, za, prec);
+		cpx_mul (zb, zb, zb);
+		cpx_sub (zb, zb, za);
+		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111);
+
+		cpx_neg (za, za);
+		cpx_sqrt (zb, za, prec);
+		cpx_mul (zb, zb, zb);
+		cpx_sub (zb, zb, za);
+		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111);
+
+		cpx_neg (za, za);
+		cpx_add_d (za, za, step, 0.312347*step);
+	}
+	
+	cpx_clear (za);
+	cpx_clear (zb);
+
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Complex sqrt test passed!\n");
+	}
+	return nfaults;
+}
+
+/* ==================================================================== */
+/* Test the real-valued sine function, return the number of failures
+ */
 
 int test_real_sine (int nterms, int prec)
 {
@@ -1112,6 +1178,7 @@ int main (int argc, char * argv[])
 #endif /* CONFLUENT_HYPERGEOMETRIC */
 
 	int nfaults = 0;
+	nfaults += test_cpx_sqrt (nterms, prec);
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
 	nfaults += test_complex_gamma (nterms, prec);
