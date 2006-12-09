@@ -621,7 +621,31 @@ void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
 }
 
 /* ======================================================================= */
-/**
+
+void cpx_sqrt (cpx_t rt, const cpx_t z, int prec)
+{
+	mpf_t modulus, phase;
+	mpf_init (modulus);
+	mpf_init (phase);
+
+	cpx_mod_sq (modulus, z);
+	mpf_sqrt (modulus, modulus);
+	mpf_sqrt (modulus, modulus);
+	
+	fp_arctan2 (phase, z[0].im, z[0].re, prec);
+	mpf_div_ui (phase, phase, 2);
+
+	fp_cosine (rt[0].re, phase, prec);
+	fp_sine (rt[0].im, phase, prec);
+
+	cpx_mul_mpf (rt, rt, modulus);
+
+	mpf_clear (modulus);
+	mpf_clear (phase);
+}
+
+/* ======================================================================= */
+/*
  * cpx_pow_mpf-- return q^s for complex s, real q.
  *
  * Brute-force algo, this thing is pretty slow, as it requires

@@ -57,7 +57,13 @@ void fp_log (mpf_t lg, const mpf_t z, unsigned int prec);
 void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec);
 void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec);
 
-/*
+/**
+ * cpx_sqrt
+ * Simple implemenmtation of complex square-root
+ */
+void cpx_sqrt (cpx_t sqrt, const cpx_t zee, int prec);
+
+/**
  * cpx_pow_mpf-- return q^s for complex s, real q.
  *
  * Brute-force algo, this thing is pretty slow, as it requires
