@@ -93,6 +93,36 @@ void fp_pi_half (mpf_t pih, unsigned int prec)
 
 /* ======================================================================= */
 /**
+ * fp_sqrt_two_pi - return sqrt(2pi) = sqrt (2 * 3.14159...) 
+ * @prec - number of decimal places of precision
+ *
+ * The idea is that it caches the value to avoid recomputation
+ */
+void fp_sqrt_two_pi (mpf_t sqtpi, unsigned int prec)
+{
+	static unsigned int precision=0;
+	static mpf_t cached_sqtpi;
+
+	if (precision >= prec)
+	{
+		mpf_set (sqtpi, cached_sqtpi);
+		return;
+	}
+
+	if (0 == precision)
+	{
+		mpf_init (cached_sqtpi);
+	}
+
+	fp_pi (sqtpi, prec);
+	mpf_mul_ui (sqtpi, sqtpi, 2);
+	mpf_sqrt (sqtpi, sqtpi);
+	mpf_set (cached_sqtpi, sqtpi);
+	precision = prec;
+}
+
+/* ======================================================================= */
+/**
  * fp_e_pi - return e^pi 
  * @prec - number of decimal places of precision
  *
