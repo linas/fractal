@@ -494,12 +494,26 @@ int test_cpx_sqrt (int nterms, int prec)
 	for (i=1; i<nterms; i++)
 	{
 		cpx_sqrt (zb, za, prec);
+		if ( 1 != mpf_sgn(zb[0].im))
+		{
+			nfaults ++;
+			fprintf (stderr, "Error: sqrt phase should be positive\n");
+			cpx_prt ("sqrt", zb);
+			printf ("\n");
+		}
 		cpx_mul (zb, zb, zb);
 		cpx_sub (zb, zb, za);
 		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111);
 
 		cpx_neg (za, za);
 		cpx_sqrt (zb, za, prec);
+		if ( -1 != mpf_sgn(zb[0].im))
+		{
+			nfaults ++;
+			fprintf (stderr, "Error: sqrt phase should be negative\n");
+			cpx_prt ("sqrt", zb);
+			printf ("\n");
+		}
 		cpx_mul (zb, zb, zb);
 		cpx_sub (zb, zb, za);
 		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111);
