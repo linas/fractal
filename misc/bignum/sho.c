@@ -91,79 +91,6 @@ void psi_2 (cpx_t psiret, cpx_t lambda, cpx_t y, int prec)
 	cpx_clear (psi);
 }
 
-void bzeta_1 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
-{
-	cpx_t pha, lambda;
-	cpx_init (pha);
-	cpx_init (lambda);
-
-	/* Make copy of argument NOW! */
-	cpx_set (lambda, lam);
-	
-	cpx_set_ui (eta, 1,0);
-
-	mpf_t tmp;
-	mpf_init (tmp);
-
-	/* times sqrt(2pi) */
-	fp_sqrt_two_pi (tmp, prec);
-	cpx_mul_mpf(eta, eta, tmp);
-	
-	/* power of two term */
-	mpf_set_ui (tmp, 1);
-	mpf_div_ui (tmp, tmp, 4);
-	cpx_set (pha, lambda);
-	cpx_div_ui (pha, pha, 2);
-	cpx_pow_mpf (pha, tmp, pha, prec);
-	cpx_mul (eta, eta, pha);
-	
-	/* Gamma (3/4+lambda/2) */
-	mpf_set_ui (tmp, 3);
-	mpf_div_ui (tmp, tmp, 2);
-	cpx_add_mpf (lambda, lambda, tmp);
-	cpx_div_ui (pha, lambda, 2);
-	cpx_gamma (pha, pha, prec);
-	cpx_div (eta, eta, pha);
-
-	cpx_clear (pha);
-	cpx_clear (lambda);
-	mpf_clear (tmp);
-}
-
-void bzeta_1_old (cpx_t eta, cpx_t lam, cpx_t y, int prec)
-{
-	cpx_t pha, lambda;
-	cpx_init (pha);
-	cpx_init (lambda);
-
-	/* Make copy of argument NOW! */
-	cpx_set (lambda, lam);
-	
-	cpx_set_ui (eta, 1,0);
-
-	mpf_t tmp;
-	mpf_init (tmp);
-
-	/* Gamma (1/4+lambda/2) */
-	mpf_set_ui (tmp, 1);
-	mpf_div_ui (tmp, tmp, 2);
-	cpx_add_mpf (pha, lambda, tmp);
-	cpx_div_ui (pha, pha, 2);
-	cpx_gamma (pha, pha, prec);
-	cpx_mul (eta, eta, pha);
-
-	/* Gamma (lambda + 1/2) */
-	mpf_set_ui (tmp, 1);
-	mpf_div_ui (tmp, tmp, 2);
-	cpx_add_mpf (pha, lambda, tmp);
-	cpx_gamma (pha, pha, prec);
-	cpx_div (eta, eta, pha);
-
-	cpx_clear (pha);
-	cpx_clear (lambda);
-	mpf_clear (tmp);
-}
-
 void eta_1 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
 {
 	cpx_t pha, lambda;
@@ -202,8 +129,8 @@ void eta_1 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
 	/* Gamma (3/4+lambda/2) */
 	mpf_set_ui (tmp, 3);
 	mpf_div_ui (tmp, tmp, 2);
-	cpx_add_mpf (lambda, lambda, tmp);
-	cpx_div_ui (pha, lambda, 2);
+	cpx_add_mpf (pha, lambda, tmp);
+	cpx_div_ui (pha, pha, 2);
 	cpx_gamma (pha, pha, prec);
 	cpx_div (eta, eta, pha);
 
@@ -323,11 +250,9 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		/* lambda-n */
 		cpx_add_ui (lam, lambda, n, 0);
 		
-		bzeta_1 (e1, lam, y, prec);
-		cpx_prt ("eta_1=", e1);
-		printf ("\n");
-		
-		bzeta_1_old (e1, lam, y, prec);
+		eta_1 (e1, lam, y, prec);
+		eta_1_old (e2, lam, y, prec);
+		cpx_sub(e1,e1,e2);
 		cpx_prt ("old_1=", e1);
 		printf ("\n");
 		

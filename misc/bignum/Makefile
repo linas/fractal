@@ -30,7 +30,7 @@ zero-cross:	zero-cross.o
 
 # libarary objects
 db-cache.o: db-cache.h
-mp-binomial.o: mp-binomial.h mp-cache.h mp-trig.h
+mp-binomial.o: mp-binomial.h mp-cache.h mp-misc.h mp-trig.h
 mp-cache.o: mp-cache.h
 mp-consts.o: mp-consts.h mp-binomial.h mp-complex.h mp-trig.h mp-zeta.h
 mp-gamma.o: mp-gamma.h mp-binomial.h mp-complex.h mp-consts.h mp-misc.h mp-trig.h mp-zeta.h
