@@ -441,14 +441,14 @@ static inline int check_for_zero (int nfaults, mpf_t zer, mpf_t epsi, char * str
 	return nfaults;
 }
 
-static inline int cpx_check_for_zero (int nfaults, cpx_t zer, mpf_t epsi, char * str, double x)
+static inline int cpx_check_for_zero (int nfaults, cpx_t zer, mpf_t epsi, char * str, double x, double y)
 {
 	mpf_abs(zer[0].re, zer[0].re);
 	mpf_abs(zer[0].im, zer[0].im);
 	if ((mpf_cmp (zer[0].re, epsi) > 0) || (mpf_cmp (zer[0].im, epsi) > 0))
 	{
 		nfaults ++;
-		fprintf (stderr, "Error: %s imprecise for x=%g\n", str, x);
+		fprintf (stderr, "Error: %s imprecise for x=%g +i %g\n", str, x,y);
 		cpx_prt ("should be zero=", zer);
 		printf ("\n");
 	}
@@ -503,7 +503,7 @@ int test_cpx_sqrt (int nterms, int prec)
 		}
 		cpx_mul (zb, zb, zb);
 		cpx_sub (zb, zb, za);
-		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111);
+		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111, 0.222);
 
 		cpx_neg (za, za);
 		cpx_sqrt (zb, za, prec);
@@ -516,7 +516,7 @@ int test_cpx_sqrt (int nterms, int prec)
 		}
 		cpx_mul (zb, zb, zb);
 		cpx_sub (zb, zb, za);
-		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111);
+		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111, 0.22);
 
 		cpx_neg (za, za);
 		cpx_add_d (za, za, step, 0.312347*step);
@@ -730,59 +730,103 @@ int test_complex_gamma (int nterms, int prec)
 	/* Set up max allowed error */
 	mpf_t epsi;
 	mpf_init (epsi);
-	fp_epsilon (epsi, 2*(prec-5));
+	fp_epsilon (epsi, prec-5);
 
 	mpf_t pi;
 	mpf_init (pi);
 	fp_pi (pi, prec);
 	
-	cpx_t gam, rgam;
+	mpf_t tmp;
+	mpf_init (tmp);
+
+	cpx_t za, zb, gam, rgam;
+	cpx_init (za);
+	cpx_init (zb);
 	cpx_init (gam);
 	cpx_init (rgam);
 
-	/* Do a reflection-formula test */
+	/* Do a duplication-formula test */
 	int i;
-	double red = 0.398721;
-	double imd = 0.3225121;
-	double rez = -0.5*nterms*red;
-	double imz = -0.5*nterms*imd;
+	double red = 0.368791;
+	double imd = 0.3824121;
+	double rez = -0.5*nterms*red + 0.02;
+	double imz = -0.5*nterms*imd + 0.03;
+	for (i=0; i<nterms; i++)
+	{
+		/* set up z and z+1/2 */
+		cpx_set_d (za, rez, imz);
+		cpx_set_ui (zb, 1,0);
+		cpx_div_ui (zb, zb, 2);
+		cpx_add (zb, zb, za);
+		
+		/* compute Gamma(z) * Gamma (z+1/2) */
+		cpx_gamma (gam, za, prec);
+		cpx_gamma (rgam, zb, prec);
+		cpx_mul (gam, gam, rgam);
+		
+		/* divide by Gamma (2z) */
+		cpx_mul_ui (zb, za, 2);
+		cpx_gamma (rgam, zb, prec);
+		cpx_div (gam, gam, rgam);
+
+		/* Divide by 2sqrt(pi) */
+		cpx_div_ui (gam, gam, 2);
+		mpf_sqrt (tmp, pi);
+		cpx_div_mpf (gam, gam, tmp);
+		
+		/* times 4^z */
+		mpf_set_ui (tmp, 4);
+		cpx_pow_mpf (rgam, tmp, za, prec);
+		cpx_mul (gam, gam, rgam);
+
+		/* this should be one */
+		cpx_sub_ui (gam,gam, 1,0);
+		
+		nfaults = cpx_check_for_zero (nfaults, gam, epsi, "complex gamma duplication", rez, imz);
+
+		rez += red;
+		imz += imd;
+	}
+
+	/* Do a reflection-formula test */
+	red = 0.398721;
+	imd = 0.3225121;
+	rez = -0.5*nterms*red + 0.03;
+	imz = -0.5*nterms*imd + 0.02;
 	for (i=0; i<nterms; i++)
 	{
 		/* set up z and 1-z */
-		cpx_set_d (gam, rez, imz);
-		cpx_set_ui (rgam, 1,0);
-		cpx_sub (rgam, rgam, gam);
+		cpx_set_d (za, rez, imz);
+		cpx_set_ui (zb, 1,0);
+		cpx_sub (zb, zb, za);
 		
 		/* compute Gamma(z) * Gamma (1-z) */
-		cpx_gamma (gam, gam, prec);
-		cpx_gamma (rgam, rgam, prec);
+		cpx_gamma (gam, za, prec);
+		cpx_gamma (rgam, zb, prec);
 		cpx_mul (gam, gam, rgam);
 
 		/* Product of gammas, times sine */
 		cpx_div_mpf (gam, gam, pi);
-		cpx_set_d (rgam, rez, imz);
-		cpx_mul_mpf (rgam, rgam, pi);
-		cpx_sine (rgam, rgam, prec);
+		cpx_mul_mpf (za, za, pi);
+		cpx_sine (rgam, za, prec);
 		cpx_mul (gam, gam, rgam);
+
+		/* this should be one */
 		cpx_sub_ui (gam,gam, 1,0);
 		
-		cpx_mod_sq (gam[0].re, gam);
-		if (mpf_cmp (gam[0].re, epsi) > 0)
-		{
-			nfaults ++;
-			fprintf (stderr, "Error: complex gamma imprecise for z=%g +i %g\n", rez, imz);
-			cpx_prt (" gam should be zero=", gam);
-			printf ("\n");
-		}
+		nfaults = cpx_check_for_zero (nfaults, gam, epsi, "complex gamma reflection", rez, imz);
 
 		rez +=red;
 		imz+=imd;
 	}
 
+	cpx_clear (za);
+	cpx_clear (zb);
 	cpx_clear (gam);
 	cpx_clear (rgam);
 	mpf_clear (pi);
 	mpf_clear (epsi);
+	mpf_clear (tmp);
 	
 	if (0 == nfaults)
 	{
@@ -1192,8 +1236,8 @@ int main (int argc, char * argv[])
 #endif /* CONFLUENT_HYPERGEOMETRIC */
 
 	int nfaults = 0;
-	nfaults += test_cpx_sqrt (nterms, prec);
 	nfaults += test_real_sine (nterms, prec);
+	nfaults += test_cpx_sqrt (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
 	nfaults += test_complex_gamma (nterms, prec);
 
