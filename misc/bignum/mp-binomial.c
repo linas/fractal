@@ -16,6 +16,7 @@
 #include <gmp.h>
 #include "mp-cache.h"
 #include "mp-binomial.h"
+#include "mp-misc.h"
 #include "mp-trig.h"
 
 /* ======================================================================= */
