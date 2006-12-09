@@ -16,6 +16,7 @@
  * Uses simple, brute-force Machin formula
  */
 void fp_pi (mpf_t pi, unsigned int prec);
+void fp_pi_half (mpf_t pihalf, unsigned int prec);
 
 /**
  * fp_e_pi - return e^pi 
