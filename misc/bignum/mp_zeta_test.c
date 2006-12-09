@@ -460,12 +460,12 @@ static inline int check_for_equality (int nfaults, mpf_t val, double fval, char 
 {
 	double y = mpf_get_d (val);
 		
-	double diff = fabs(y-fval);
+	double diff = fabs(y/fval-1.0);
 	if (2.0e-14 < diff)
 	{
 		nfaults ++;
 		fprintf (stderr, "Error: %s faulty: "
-		        "x=%g\t expected=%g\t got=%g\t diff=%g\n", str, x, fval, y, fval-y);
+		        "x=%g\t expected=%g\t got=%g\t diff=%g\n", str, x, fval, y, diff);
 	}
 	return nfaults;
 }
@@ -635,13 +635,14 @@ int test_real_gamma (int nterms, int prec)
 	/* compute square root of pi */
 	mpf_t pi;
 	mpf_init (pi);
-	fp_pi (pi, prec);
-	mpf_sqrt (pi, pi);
 	
 	mpf_t gam, ex, acc;
 	mpf_init (ex);
 	mpf_init (gam);
 	mpf_init (acc);
+
+	fp_pi (pi, prec);
+	mpf_sqrt (pi, pi);
 
 	/* gamma=0.5 */
 	mpf_set_d (ex, 0.5);
@@ -675,8 +676,21 @@ int test_real_gamma (int nterms, int prec)
 	mpf_sub (gam,gam,pi);
 	nfaults = check_for_zero (nfaults, gam, epsi, "real gamma", -1.5);
 	
-	/* Use the reflection test */
+	/* Expect factorial for simple products */
 	int i;
+	double fac=1.0;
+	for (i=1; i<28; i++)
+	{
+		mpf_set_ui (ex, i+1);
+		
+		fp_gamma (gam, ex, prec);
+		nfaults = check_for_equality (nfaults, gam, fac, "real factorial", i+1);
+
+		fac *= i+1;
+	}
+	
+	/* Use the reflection test */
+	fp_pi (pi, prec);
 	for (i=1; i<nterms; i++)
 	{
 		double step=0.13245876;
@@ -699,9 +713,7 @@ int test_real_gamma (int nterms, int prec)
 		nfaults = check_for_zero (nfaults, acc, epsi, "real gamma duplication", x);
 	}
 
-	/* This test is failing for the larger ranges;
-	 * its possible that the unix gamma is broken for large values? 
-	 */
+	/* Compare bignum results to the unix routine */
 	for (i=1; i<nterms; i++)
 	{
 		double step=0.13245876;
@@ -711,13 +723,6 @@ int test_real_gamma (int nterms, int prec)
 		fp_gamma (gam, gam, prec);
 
 		nfaults = check_for_equality (nfaults, gam, tgamma(x), "real gamma", x);
-
-		double y = tgamma(x);
-		y *= tgamma(1.0-x);
-		y /= M_PI;
-		y *= sin (M_PI *x);
-		y -= 1.0;
-		printf ("x=%g y=%g\n", x,y);
 	}
 
 	mpf_clear (ex);
