@@ -150,12 +150,11 @@ void fp_exp (mpf_t ex, const mpf_t z, unsigned int prec)
 /* ======================================================================= */
 /**
  * fp_sine -  Floating point sine function
- * Implemented using a brute-force, very simple algo, with 
- * no attempts at optimization. Also, does not assume any 
- * precomputed constants.
+ * Implemented using a brute-force, very simple algo: 
+ * i.e. sum the series. No other adjustments made.
  */
 
-void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
+static void fp_sine_series (mpf_t si, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, z_n, fact, term;
 
@@ -212,6 +211,45 @@ void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 	mpf_clear (term);
 
 	mpf_clear (maxterm);
+}
+
+void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
+{
+	mpf_t zee, pih, per;
+
+	mpf_init (zee);
+	mpf_init (pih);
+	mpf_init (per);
+
+	/* Make copy of argument now! */
+	mpf_set (zee, z);
+
+	/* subtract off multiple of pi/halves */
+	fp_pi_half (pih, prec);
+	mpf_div (per, zee, pih);
+	mpf_floor (per, per);
+	long quad = mpf_get_si (per);
+	
+	mpf_mul (per, per, pih);
+	mpf_sub (zee, zee, per);
+
+	/* adjust for the quadrant */
+	unsigned long iq = labs (quad);
+	if ((1 == iq%4) || (3 == iq%4))
+	{
+		mpf_sub (zee, pih, zee);
+	}
+	fp_sine_series (si, zee, prec);
+
+	quad /= 2;
+	if (quad %2)
+	{
+		mpf_neg (si, si);
+	}
+
+	mpf_clear (zee);
+	mpf_clear (pih);
+	mpf_clear (per);
 }
 
 /* ======================================================================= */

@@ -25,7 +25,12 @@ void fp_inv_pow (mpf_t p, unsigned int n, unsigned int m);
  * fp_exp -  Floating point exponential
  * Implemented using a brute-force, very simple algo, with 
  * no attempts at optimization. Also, does not assume any 
- * precomputed constants.
+ * precomputed constants. 
+ *
+ * The complex exp is built up from the real trig functions.
+ * The complex trig functions are built up from the complex exp.
+ * In all cases, the most basic idents are used, so these
+ * are not speedy!.
  */
 void fp_exp (mpf_t ex, const mpf_t z, unsigned int prec);
 void fp_sine (mpf_t sine, const mpf_t z, unsigned int prec);
