@@ -137,21 +137,27 @@ void eta_1 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
 	mpf_clear (tmp);
 }
 
-void eta_2 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
+void eta_2 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
 {
-	cpx_t pha, lmo;
+	cpx_t pha, lambda, l2;
 	cpx_init (pha);
-	cpx_init (lmo);
+	cpx_init (lambda);
+	cpx_init (l2);
+
+	/* Make copy of arg NOW! */
+	cpx_set (lambda, lam);
+	cpx_set (l2, lam);
+	cpx_div_ui (l2, l2, 2);
 
 	psi_2 (eta, lambda, y, prec);
 
 	mpf_t tmp;
 	mpf_init (tmp);
 
-	/* phase term, exp (i pi (lambda/2-1)) */
-	cpx_set (pha, lambda);
-	cpx_div_ui (pha, pha, 2);
-	cpx_sub_ui (pha, pha, 1, 0);
+	/* phase term, exp (i pi (lambda-1)/2) */
+	mpf_set_ui (tmp, 1);
+	mpf_div_ui (tmp, tmp, 2);
+	cpx_sub_mpf (pha, l2, tmp);
 	fp_pi (tmp, prec);
 	cpx_mul_mpf (pha, pha, tmp);
 	cpx_times_i (pha, pha);
@@ -165,69 +171,20 @@ void eta_2 (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
 	/* power of two term */
 	mpf_set_ui (tmp, 1);
 	mpf_div_ui (tmp, tmp, 2);
-	cpx_set (pha, lambda);
-	cpx_div_ui (pha, pha, 2);
-	cpx_sub_ui (pha, pha, 1, 0);
-	// xxxx
-	cpx_pow_mpf (pha, tmp, pha, prec);
+	cpx_pow_mpf (pha, tmp, l2, prec);
 	cpx_mul (eta, eta, pha);
+	cpx_mul_ui (eta, eta, 2);
 	
-	/* Gamma (3/4+lambda/2) */
-	mpf_set_ui (tmp, 3);
-	mpf_div_ui (tmp, tmp, 2);
-	cpx_add_mpf (pha, lambda, tmp);
-	cpx_div_ui (pha, pha, 2);
-	cpx_gamma (pha, pha, prec);
-	cpx_div (eta, eta, pha);
-
-
-	cpx_clear (pha);
-	cpx_clear (lmo);
-	mpf_clear (tmp);
-}
-
-void eta_2_old (cpx_t eta, cpx_t lambda, cpx_t y, int prec)
-{
-	cpx_t pha, lmo;
-	cpx_init (pha);
-	cpx_init (lmo);
-
-	psi_2 (eta, lambda, y, prec);
-
-	mpf_t tmp;
-	mpf_init (tmp);
-
-	/* phase term, exp (i pi (lambda-1)/2) */
-	cpx_set (pha, lambda);
-	cpx_div_ui (pha, pha, 2);
-	fp_pi (tmp, prec);
-	cpx_mul_mpf (pha, pha, tmp);
-	cpx_times_i (pha, pha);
-	cpx_exp (pha, pha, prec);
-	cpx_times_i (pha, pha);
-	cpx_neg (pha, pha);
-	cpx_mul (eta, eta, pha);
-
-	/* power of two term */
-	mpf_set_ui (tmp, 2);
-	cpx_div_ui (pha, lambda, 2);
-	cpx_pow_mpf (pha, tmp, pha, prec);
-	cpx_mul (eta, eta, pha);
-	
-	/* Gamma (-1/4+lambda/2) */
+	/* Gamma (1/4+lambda/2) */
 	mpf_set_ui (tmp, 1);
-	mpf_div_ui (tmp, tmp, 2);
-	cpx_sub_mpf (lmo, lambda, tmp);
-	cpx_div_ui (pha, lmo, 2);
+	mpf_div_ui (tmp, tmp, 4);
+	cpx_add_mpf (pha, l2, tmp);
 	cpx_gamma (pha, pha, prec);
-	cpx_mul (eta, eta, pha);
-
-	/* Gamma (lambda - 1/2) */
-	cpx_gamma (pha, lmo, prec);
 	cpx_div (eta, eta, pha);
 
 	cpx_clear (pha);
-	cpx_clear (lmo);
+	cpx_clear (lambda);
+	cpx_clear (l2);
 	mpf_clear (tmp);
 }
 
@@ -252,12 +209,6 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 
 		/* lambda-n */
 		cpx_add_ui (lam, lambda, n, 0);
-		
-		eta_1 (e1, lam, y, prec);
-		eta_1_old (e2, lam, y, prec);
-		cpx_sub(e1,e1,e2);
-		cpx_prt ("old_1=", e1);
-		printf ("\n");
 		
 // #define VALIDATE_PSI_ONE
 #ifdef VALIDATE_PSI_ONE
