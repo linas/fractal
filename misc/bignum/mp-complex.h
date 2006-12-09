@@ -80,6 +80,7 @@ static inline void cpx_add_ui (cpx_t sum, const cpx_t a, unsigned int rb, unsign
 static inline void cpx_add_mpf (cpx_t sum, const cpx_t a, const mpf_t b)
 {
 	mpf_add (sum[0].re, a[0].re, b);
+	mpf_set (sum[0].im, a[0].im);
 }
 
 static inline void cpx_sub (cpx_t dif, const cpx_t a, const cpx_t b)
@@ -97,6 +98,7 @@ static inline void cpx_sub_ui (cpx_t sum, const cpx_t a, unsigned int rb, unsign
 static inline void cpx_sub_mpf (cpx_t sum, const cpx_t a, const mpf_t b)
 {
 	mpf_sub (sum[0].re, a[0].re, b);
+	mpf_set (sum[0].im, a[0].im);
 }
 
 static inline void cpx_neg (cpx_t neg, const cpx_t a)
