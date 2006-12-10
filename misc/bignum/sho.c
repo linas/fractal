@@ -208,7 +208,7 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		printf ("n=%d  \n", n);
 
 		/* lambda-n */
-		cpx_add_ui (lam, lambda, n, 0);
+		cpx_sub_ui (lam, lambda, n, 0);
 		
 // #define VALIDATE_PSI_ONE
 #ifdef VALIDATE_PSI_ONE
@@ -267,7 +267,8 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		printf ("duude frat=%g rr=%g\n", frat, frat/fr);
 #endif
 
-#if VALIDATE_ETA_RATIO
+// #define VALIDATE_ETA_RATIO
+#ifdef VALIDATE_ETA_RATIO
 		eta_1 (e1, lam, y, prec);
 		eta_2 (e2, lam, y, prec);
 		cpx_div (rat, e2, e1);
@@ -363,7 +364,7 @@ void get_ratio (cpx_t tang, cpx_t lambda, int prec)
 	cpx_add (tang, tang, lam);
 	cpx_div_ui (tang, tang, 2);
 		
-	/* compute tan(lambda/2 + 1/4) */
+	/* compute tan(pi (lambda/2 + 1/4)) */
 	cpx_mul_mpf (tang, tang, pi);
 	cpx_tangent (tang, tang, prec);
 	cpx_times_i (tang, tang);
@@ -417,9 +418,10 @@ void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 	printf ("\n");
 		get_ratio (rat, lam, prec);
 		cpx_mul (e2,e2,rat);
-		cpx_sub (e1, e1, e2);
+		// cpx_sub (e1, e1, e2);
+		cpx_add (e1, e1, e2);
 
-	cpx_prt ("neg thing=", e1);
+	cpx_prt ("cancel thing=", e1);
 	printf ("\n");
 		cpx_div (e1, e1, qn);
 		cpx_add (coho, coho, e1);
@@ -505,8 +507,8 @@ void do_coho (double lam, int prec)
 
 	cpx_set_d (lambda, lam, 0.2);
 
-	cpx_set_d (q, 4.1, 0.0);
-	cpx_set_d (z, 2.5671, 0.2);
+	cpx_set_d (q, 1.0, 0.0);
+	cpx_set_d (z, -3.5671, 0);
 	
 	coherent (coho, lambda, q, z, prec);
 	// validate_ratio (lambda, z, prec);
@@ -517,7 +519,7 @@ void do_coho (double lam, int prec)
 int
 main (int argc, char *argv[])
 {
-	int prec = 350;
+	int prec = 50;
 	
 	if (2> argc)
 	{
