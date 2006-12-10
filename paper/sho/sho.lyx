@@ -848,9 +848,19 @@ a^{\dagger}\chi_{1}(\lambda)=\sqrt{\lambda+\frac{1}{2}}\,\chi_{2}(\lambda+1)\]
 Coherenet States
 \layout Standard
 
-The eigenfunctions of the shift operators are known as coherent states.
- These are more easily constructed by using an alternate normalization for
- the states.
+The eigenfunctions of shift operators are known as coherent states.
+ Although these may be formally defined, they cannot be explicitly constructed
+ for the SHO, except for the special cases of 
+\begin_inset Formula $\lambda=\pm1/2$
+\end_inset 
+
+.
+ This section explores why these states cannot be constructed.
+ 
+\layout Standard
+
+A more suitable normalization for the construction of coherent states removes
+ the extraneous factors.
  Let 
 \begin_inset Formula \[
 \eta_{1,2}(\lambda)=\frac{\chi_{1,2}(\lambda)}{\sqrt{\Gamma\left(\lambda+\frac{1}{2}\right)}}\]
@@ -865,44 +875,134 @@ The eigenfunctions of the shift operators are known as coherent states.
 \begin_inset Formula $a\eta_{2}(\lambda)=\eta_{1}(\lambda-1)$
 \end_inset 
 
- on these states.
- Explicitly, one has
+ on these states, when 
+\begin_inset Formula $\lambda\ne1/2$
+\end_inset 
+
+.
+ For the special case of 
+\begin_inset Formula $\lambda=1/2$
+\end_inset 
+
+, one has 
+\begin_inset Formula $a\eta_{1,2}(1/2)=0$
+\end_inset 
+
+, and so the shift sequence terminates, instead of extending to infinity
+ in both directions.
+ These states may be written explicitly as 
 \begin_inset Formula \[
-\eta_{1}(\lambda)=2^{\lambda/2}\frac{\Gamma\left(\frac{2\lambda+1}{4}\right)}{\Gamma\left(\frac{2\lambda+1}{2}\right)}\,\exp\left(\frac{i\pi\lambda}{2}\right)\psi_{1}(\lambda)\]
+\eta_{1}(\lambda)=\frac{\sqrt{2\pi}}{2^{\lambda/2}\Gamma\left(\frac{2\lambda+3}{4}\right)}\,\exp\left(\frac{i\pi\lambda}{2}\right)\psi_{1}(\lambda)\]
 
 \end_inset 
 
  and 
 \begin_inset Formula \[
-\eta_{2}(\lambda)=2^{\lambda/2}\frac{\Gamma\left(\frac{2\lambda-1}{4}\right)}{\Gamma\left(\frac{2\lambda-1}{2}\right)}\,\exp\left(\frac{i\pi(\lambda-1)}{2}\right)\psi_{2}(\lambda)\]
+\eta_{2}(\lambda)=\frac{\sqrt{8\pi}}{2^{\lambda/2}\Gamma\left(\frac{2\lambda+1}{4}\right)}\,\exp\left(\frac{i\pi(\lambda-1)}{2}\right)\psi_{2}(\lambda)\]
 
 \end_inset 
 
-
+ after the duplication formula for the gamma is applied.
 \layout Standard
 
 For 
 \begin_inset Formula $\lambda\ne1/2$
 \end_inset 
 
-, eigenstates of the shift operator may be written as 
+, eigenstates of the shift operator may be formally written as 
 \begin_inset Formula \[
-\phi_{\theta}(q)=\sum_{n=-\infty}^{\infty}q^{n}\left(\eta_{1}(\lambda+n)+e^{i\theta}\eta_{2}(\lambda+n)\right)\]
+\phi_{\pm}(q)=\sum_{n=-\infty}^{\infty}q^{n}\left(\eta_{1}(\lambda+n)\pm\eta_{2}(\lambda+n)\right)\]
 
 \end_inset 
 
  so that one has 
 \begin_inset Formula \[
-a\phi_{\theta}(q)=qe^{-i\theta}\phi_{\theta}(q)\]
+a\phi_{\pm}(q)=\pm q\phi_{\pm}(q)\]
 
 \end_inset 
 
- Formulated in this way, one has an explicit 
-\begin_inset Formula $2\pi$
+ The sum, however, is formal, as there is no value of 
+\begin_inset Formula $q$
 \end_inset 
 
-degeneracy in the eigenvalue spectrum.
- Or do we ?? 
+ for which the sum converges.
+ The problem lies primarily with large negative 
+\begin_inset Formula $n$
+\end_inset 
+
+, for which the 
+\begin_inset Formula $\eta$
+\end_inset 
+
+ diverges as the factorial.
+ The asymptotic values of these functions, for large 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, are as follows.
+ 
+\layout Standard
+
+In the limit of 
+\begin_inset Formula $\left|\lambda\right|\to\infty$
+\end_inset 
+
+, one has 
+\begin_inset Formula \[
+\psi_{1}=\cos\left(y\sqrt{2\lambda-1}\right)-\frac{y\sin\left(y\sqrt{2\lambda-1}\right)}{2\sqrt{2\lambda-1}}\left[1-\frac{y^{2}}{3}\right]+\mathcal{O}\left(\frac{1}{\lambda}\right)\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\psi_{2}=\frac{\cos\left(y\sqrt{2\lambda-3}\right)}{\sqrt{2\lambda-3}}+\mathcal{O}\left(\frac{1}{\lambda}\right)\]
+
+\end_inset 
+
+ Both of these follow from the remarkable expansion of the confluent hypergeoemt
+ric functions in terms of the spherical bessel functions 
+\begin_inset Formula $j_{n}(z)$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+\psi_{1}=\left(\frac{2\lambda-1}{2}\right)\sum_{n=0}^{\infty}c_{n}\left(\frac{2y}{\sqrt{2\lambda-1}}\right)^{n+1}j_{n-1}\left(y\sqrt{2\lambda-1}\right)\]
+
+\end_inset 
+
+ with the constant coefficients given by the recursion relation 
+\begin_inset Formula \[
+4(n+1)c_{n+1}=-c_{n}+\left(n-\frac{1}{2}\right)c_{n-1}+\left(\frac{1-2\lambda}{4}\right)c_{n-2}\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula $c_{0}=1$
+\end_inset 
+
+, 
+\begin_inset Formula $c_{1}=-1/4$
+\end_inset 
+
+ and 
+\begin_inset Formula $c_{2}=3/32$
+\end_inset 
+
+.
+ This expansion is a special case of Abramowitz and Stegun equation 13.3.8.
+\layout Standard
+
+In the limit of 
+\begin_inset Formula $\left|\lambda\right|\to\infty$
+\end_inset 
+
+, one has 
+\begin_inset Formula \[
+\frac{\eta_{2}}{\eta_{1}}=i\,\mbox{sgn }y\;\tan\pi\left(\frac{2\lambda-1}{4}\right)\]
+
+\end_inset 
+
+
 \layout Section
 
 ToDO
