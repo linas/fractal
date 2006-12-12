@@ -190,6 +190,14 @@ void eta_2 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
 
 /* ======================================================== */
 
+#ifdef FIDDLE_WITH_COHERENT_STATES
+/* Well, actually it turns out that there aren't any coherent
+ * (except the usual ones) and so there's no particular point in
+ * fiddling with this stuff.
+ * So its ifdef'ed out. To the extent it work, it works, but
+ * currently, there seems to be no point.
+ */
+
 void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 {
 	cpx_t e1, e2, lam, rat, tang;
@@ -440,6 +448,45 @@ void coherent (cpx_t coho, cpx_t lambda, cpx_t que, cpx_t y, int prec)
 	cpx_clear (lam);
 }
 
+void do_coho (double lam, int prec)
+{
+	cpx_t coho, lambda, q, z;
+	cpx_init (coho);
+	cpx_init (lambda);
+	cpx_init (q);
+	cpx_init (z);
+
+	cpx_set_d (lambda, lam, 0.2);
+
+	cpx_set_d (q, 1.0, 0.0);
+	cpx_set_d (z, -3.5671, 0);
+	
+	coherent (coho, lambda, q, z, prec);
+	// validate_ratio (lambda, z, prec);
+}
+#endif /* FIDDLE_WITH_COHERENT_STATES */
+
+/* ======================================================== */
+
+void recurse (cpx_t lambda)
+{
+	int n;
+
+	cpx_t dnp2, dn, dnm2;
+	cpx_init (dnp2);
+	cpx_init (dn);
+	cpx_init (dnm2);
+
+	int nbound = 10;
+	for (n=-nbound; n<nbound; n++)
+	{
+	}
+						 
+	cpx_clear (dnp2);
+	cpx_clear (dn);
+	cpx_clear (dnm2);
+}
+
 /* ======================================================== */
 
 void prt_graph (double lam, int prec)
@@ -497,23 +544,6 @@ void prt_graph (double lam, int prec)
 
 }
 
-void do_coho (double lam, int prec)
-{
-	cpx_t coho, lambda, q, z;
-	cpx_init (coho);
-	cpx_init (lambda);
-	cpx_init (q);
-	cpx_init (z);
-
-	cpx_set_d (lambda, lam, 0.2);
-
-	cpx_set_d (q, 1.0, 0.0);
-	cpx_set_d (z, -3.5671, 0);
-	
-	coherent (coho, lambda, q, z, prec);
-	// validate_ratio (lambda, z, prec);
-}
-
 /* ======================================================== */
 
 int
@@ -535,7 +565,6 @@ main (int argc, char *argv[])
 	
 	// prt_graph (lam, prec);
 	do_coho (lam, prec);
-	// do_coho (lam, prec);
 	
 	return 0;
 }
