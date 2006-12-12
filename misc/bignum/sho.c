@@ -468,23 +468,72 @@ void do_coho (double lam, int prec)
 
 /* ======================================================== */
 
-void recurse (cpx_t lambda)
+void recurse (cpx_t lambda, cpx_t mu)
 {
 	int n;
 
-	cpx_t dnp2, dn, dnm2;
+	cpx_t dnp2, dn, dnm2, toomu, lam, lamp, tmp;
 	cpx_init (dnp2);
 	cpx_init (dn);
 	cpx_init (dnm2);
+	cpx_init (toomu);
+	cpx_init (lam);
+	cpx_init (lamp);
+	cpx_init (tmp);
 
+	/* toomu = 2*mu+1 */
+	cpx_mul_ui (toomu, mu, 2);
+	cpx_add_ui (toomu, toomu, 1, 0);
+	
+	/* lam=lambda+1/2; lamp = lambda+3/2 */
+	cpx_set_ui (lam, 1, 0);
+	cpx_div_ui (lam, lam, 2);
+	cpx_add (lam, lam, lambda);
+	cpx_add_ui (lamp, lam, 1, 0);
+	
+	cpx_set_ui (dnp2, 0,0);
+	cpx_set_ui (dn, 1,0);
+	
 	int nbound = 10;
-	for (n=-nbound; n<nbound; n++)
+
+	cpx_add_ui (lam,  lam,  nbound, 0);
+	cpx_add_ui (lamp, lamp, nbound, 0);
+
+	for (n=nbound; n>-nbound; n-=2)
 	{
+		cpx_mul (dnm2, dnp2, lamp);
+		cpx_mul (dnm2, dnm2, lam);
+		cpx_mul (tmp, dn, toomu);
+		cpx_sub (dnm2, dnm2, tmp);
+
+		printf ("duude n=%d dn=%g\t +i %g \n", n, mpf_get_d (dnm2[0].re), mpf_get_d (dnm2[0].im));
+
+		cpx_sub_ui (lamp, lamp, 2, 0);
+		cpx_sub_ui (lam,  lam,  2, 0);
+		
+		cpx_set (dnp2, dn);
+		cpx_set (dn, dnm2);
 	}
 						 
 	cpx_clear (dnp2);
 	cpx_clear (dn);
 	cpx_clear (dnm2);
+	cpx_clear (toomu);
+	cpx_clear (lam);
+	cpx_clear (lamp);
+	cpx_clear (tmp);
+}
+
+void do_recurse (double flambda, double fmu)
+{
+	cpx_t lambda, mu;
+	cpx_init (lambda);
+	cpx_init (mu);
+
+	cpx_set_d (lambda, flambda, 0);
+	cpx_set_d (mu, fmu, 0);
+	
+	recurse (lambda, mu);
 }
 
 /* ======================================================== */
@@ -564,7 +613,7 @@ main (int argc, char *argv[])
 	mpf_set_default_prec (3.3*prec);
 	
 	// prt_graph (lam, prec);
-	do_coho (lam, prec);
+	do_recurse (4.6, lam);
 	
 	return 0;
 }
