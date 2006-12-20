@@ -31,43 +31,42 @@ void psi_one (mpf_t re_psi, mpf_t im_psi,
 	relam = param;
 	
 	cpx_t em, a, b, z, ex;
-	cpx_init (&em);
-	cpx_init (&a);
-	cpx_init (&b);
-	cpx_init (&z);
-	cpx_init (&ex);
+	cpx_init (em);
+	cpx_init (a);
+	cpx_init (b);
+	cpx_init (z);
+	cpx_init (ex);
 
 	/* a = 1/4 - lambda/2 */
-	cpx_set_d (&a, 0.25-0.5*relam, -0.5*imlam);
+	cpx_set_d (a, 0.25-0.5*relam, -0.5*imlam);
 
 	/* b=1/2 */
-	mpf_set_ui (b.re, 1);
-	mpf_div_ui (b.re, b.re, 2);
-	mpf_set_ui (b.im, 0);
+	cpx_set_ui (b, 1, 0);
+	cpx_div_ui (b, b, 2);
 	
 	/* z = y^2 */
 	double reysq = re_y*re_y - im_y*im_y;
 	double imysq = 2.0*re_y*im_y;
-	cpx_set_d(&z, reysq, imysq);
+	cpx_set_d(z, reysq, imysq);
 	
-	cpx_confluent (&em, &a, &b, &z, prec);
+	cpx_confluent (em, a, b, z, prec);
 
 	/* exp (-y^2/2) */
-	cpx_neg (&z, &z);
-	cpx_div_ui (&z, &z, 2);
-	cpx_exp (&ex, &z, prec);
+	cpx_neg (z, z);
+	cpx_div_ui (z, z, 2);
+	cpx_exp (ex, z, prec);
 
 	/* psi = exp (-y^2/2) * M(a,b,y^2) */
-	cpx_mul (&em, &em, &ex);
+	cpx_mul (em, em, ex);
 
-	mpf_set (re_psi, em.re);
-	mpf_set (im_psi, em.im);
+	mpf_set (re_psi, em[0].re);
+	mpf_set (im_psi, em[0].im);
 						 
-	cpx_clear (&em);
-	cpx_clear (&a);
-	cpx_clear (&b);
-	cpx_clear (&z);
-	cpx_clear (&ex);
+	cpx_clear (em);
+	cpx_clear (a);
+	cpx_clear (b);
+	cpx_clear (z);
+	cpx_clear (ex);
 
 }
 
@@ -79,7 +78,7 @@ static int prec;
 static void psi_init (void)
 {
 	/* the decimal precison (number of decimal places) */
-	prec = 120;
+	prec = 50;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -125,6 +124,9 @@ static double psi (double re_q, double im_q, int itermax, double param)
 	double frea = mpf_get_d (re_a);
 	double fima = mpf_get_d (im_a);
 
+	double fmag = sqrt(frea*frea + fima*fima);
+	return fmag;
+	
 	double phase = atan2 (fima, frea);
 	phase += M_PI;
 	phase /= 2.0*M_PI;
