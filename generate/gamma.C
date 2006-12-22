@@ -61,10 +61,14 @@ static double cgamma (double re_q, double im_q, int itermax, double param)
 #define USE_POINCARE_DISK
 #ifdef USE_POINCARE_DISK
 	double mag = (re_q*re_q + im_q*im_q);
-	if (mag >= 0.97) return 0.0;
+	if ((mag >= 0.995) && (mag <=1.005)) return 0.0;
 	poincare_disk_to_plane_coords (re_q, im_q, &re_z, &im_z);
 #endif
 
+	/* avoid hang evaluating near infty */
+	mag = (re_z*re_z + im_z*im_z);
+	if (mag >= 10100.97) return 0.0;
+	
 	cpx_set_d (z, re_z, im_z);
 
 	// printf ("duude compute %g  %g \n", re_z, im_z);
@@ -75,6 +79,7 @@ static double cgamma (double re_q, double im_q, int itermax, double param)
 	double fima = mpf_get_d (gam[0].im);
 
 	double phase = atan2 (fima, frea);
+
 	phase += M_PI;
 	phase /= 2.0*M_PI;
 	return phase;
