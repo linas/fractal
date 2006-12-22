@@ -11,7 +11,9 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <gsl/gsl_sf_zeta.h>
+
 #include "binomial.h"
 #include "bernoulli.h"
 
@@ -184,7 +186,7 @@ static cplex polylog_est (cplex s, cplex z, int n)
 	return acc;
 }
 
-int nt = 41;
+int nt = 31;
 
 /* incomplete implementation */
 static cplex hurwitz_beta (cplex s, double q)
@@ -196,7 +198,8 @@ static cplex hurwitz_beta (cplex s, double q)
 	{
 		return cplex_zero();
 	}
-	else if (0.16 > q) 
+	// else if (0.16 > q) 
+	else if (0.25 > q) 
 	{
 		/* use the duplication formula to get into convergent region */
 		cplex sm = cplex_minus(s);
@@ -210,7 +213,8 @@ static cplex hurwitz_beta (cplex s, double q)
 		return z;
 
 	}
-	else if (0.84 < q) 
+	// else if (0.84 < q) 
+	else if (0.75 < q) 
 	{
 		/* use the duplication formula to get into convergent region */
 		cplex sm = cplex_minus(s);
@@ -287,7 +291,7 @@ int test_bernoulli_poly (int n)
 {
 	cplex zl, zh;
 
-	cplex s;
+	cplex s, z;
 	s.im = 0.0;
 	s.re = n;
 	double q;
@@ -295,8 +299,12 @@ int test_bernoulli_poly (int n)
 	{
 		zl = hurwitz_beta (s, q);
 		zh = hurwitz_beta (s, 1.0-q);
-		zh = cplex_zero();
-		cplex z = cplex_add (zl,zh);
+		// zh = cplex_zero();
+		if (n%2) {
+			z = cplex_sub (zl,zh);
+		} else {
+			z = cplex_add (zl,zh);
+		}
 		
 		double bs = z.re;
 		if (n%2)
@@ -307,7 +315,7 @@ int test_bernoulli_poly (int n)
 		if (n%2 == 0) bs = -bs;
 
 		bs *= factorial (n) * pow (2.0*M_PI, -n);
-		bs *= 2.0;
+		// bs *= 2.0;
 		
 		// double b = q*q-q+1.0/6.0;
 		double b = bernoulli_poly (n,q);
@@ -320,7 +328,7 @@ main (int argc, char * argv[])
 {
 	int n;
 
-	if (argc != 1)
+	if (argc != 2)
 	{
 		fprintf (stderr, "Usage: %s <n>\n", argv[0]);
 		exit (1);
