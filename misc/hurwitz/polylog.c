@@ -4,6 +4,8 @@
  * Implement Borwein-style polylogarithm 
  * on unit circle.
  *
+ * Incomplte, partly functional.
+ *
  * Linas November 2006
  */
 
@@ -115,7 +117,9 @@ static inline cplex cplex_exp (cplex z)
 }
 
 /* 
- * Return value of sum^k_{j=0} (n j) oz^j
+ * Return value of sum_{j=0}^k (n j) oz^j
+ *
+ * where (n j) is binomial coefficient 
  */
 static cplex bee_k (int n, int k, cplex oz)
 {
@@ -139,7 +143,7 @@ static cplex bee_k (int n, int k, cplex oz)
 }
 
 /*
- * return estimate of polylog, Li_s(z) for estimator n.
+ * Return estimate of polylog, Li_s(z) for estimator n.
  */
 static cplex polylog_est (cplex s, cplex z, int n)
 {
@@ -230,12 +234,12 @@ static cplex hurwitz_beta (cplex s, double q)
 	}
 }
 
-main ()
+/* ============================================================= */
+
+void test_zeta_values (void)
 {
 	cplex zl, zh;
 
-#define RIEMANN_ZETA
-#ifdef RIEMANN_ZETA
 	/* As of 21 December 2006, this test is passing, more or less,
 	 * Explores value of hurwitz zeta on s=real line, for 
 	 * q=1/2, where it can be compared to the Riemann zeta.
@@ -277,12 +281,12 @@ main ()
 		
 		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
 	}
-#endif
+}
 
-// #define BERNOULLI_POLY
-#ifdef BERNOULLI_POLY
+int test_bernoulli_poly (int n)
+{
+	cplex zl, zh;
 
-	int n=6;
 	cplex s;
 	s.im = 0.0;
 	s.re = n;
@@ -294,18 +298,35 @@ main ()
 		zh = cplex_zero();
 		cplex z = cplex_add (zl,zh);
 		
-		double bs = -z.re;
-		if (n%2) bs = z.im;
-		
+		double bs = z.re;
+		if (n%2)
+		{
+			bs = z.im;
+			if (n%4 == 3) bs = -bs;
+		}
+		if (n%2 == 0) bs = -bs;
+
 		bs *= factorial (n) * pow (2.0*M_PI, -n);
 		bs *= 2.0;
 		
 		// double b = q*q-q+1.0/6.0;
 		double b = bernoulli_poly (n,q);
 		
-		printf ("%7.3g	%15.10g	%15.10g	%6.3g\n", q, bs, b, bs-b);
+		printf ("q=%5.3g	bs=%13.10g	bernoulli=%13.10g	reldiff=%6.3g\n", q, bs, b, (bs-b)/b);
 	}
-#endif
+}
+
+main (int argc, char * argv[])
+{
+	int n;
+
+	if (argc != 1)
+	{
+		fprintf (stderr, "Usage: %s <n>\n", argv[0]);
+		exit (1);
+	}
+	n = atoi (argv[1]);
+	test_bernoulli_poly (n);
 
 // #define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
