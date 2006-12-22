@@ -109,7 +109,7 @@ int test_bernoulli (void)
 #endif 
 
 // ======================================================
-// return bernoulli polynomial; use simple binomial-coefficient 
+// Return bernoulli polynomial; use simple binomial-coefficient 
 // expansion.
 
 long double bernoulli_poly (int n, long double x)
