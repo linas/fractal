@@ -188,8 +188,14 @@ static cplex polylog_est (cplex s, cplex z, int n)
 
 int nt = 31;
 
-/* incomplete implementation */
-static cplex hurwitz_beta (cplex s, double q)
+/**
+ * periodic_zeta -- Implement peridoci zeta function
+ *  incomplete implementation 
+ *
+ * Periodic zeta function is defined as F(s,q) by Tom Apostol, chapter 12
+ *
+ */
+static cplex periodic_zeta (cplex s, double q)
 {
 	int nterms =nt;
 	cplex z;
@@ -205,10 +211,10 @@ static cplex hurwitz_beta (cplex s, double q)
 		cplex sm = cplex_minus(s);
 		sm.re += 1.0;
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
-		cplex bt = hurwitz_beta (s, 2.0*q);
+		cplex bt = periodic_zeta (s, 2.0*q);
 		bt = cplex_mult (bt, ts);
 
-		cplex z = hurwitz_beta (s, q+0.5);
+		cplex z = periodic_zeta (s, q+0.5);
 		z = cplex_sub(bt, z);
 		return z;
 
@@ -220,10 +226,10 @@ static cplex hurwitz_beta (cplex s, double q)
 		cplex sm = cplex_minus(s);
 		sm.re += 1.0;
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
-		cplex bt = hurwitz_beta (s, 2.0*q-1.0);
+		cplex bt = periodic_zeta (s, 2.0*q-1.0);
 		bt = cplex_mult (bt, ts);
 
-		cplex z = hurwitz_beta (s, q-0.5);
+		cplex z = periodic_zeta (s, q-0.5);
 		z = cplex_sub(bt, z);
 		return z;
 
@@ -240,21 +246,26 @@ static cplex hurwitz_beta (cplex s, double q)
 
 /* ============================================================= */
 
+/** 
+ * test_zeta_values() -- compare periodic zeta to reiman zeta
+ * 
+ * As of 21 December 2006, this test is passing, more or less,
+ * Explores value of hurwitz zeta on s=real line, for 
+ * q=1/2, where it can be compared to the Riemann zeta.
+ * Passes, for s>1 far enough away from the pole at s=1.
+ * Fails, for s<1
+ *
+ * XXXX why is it failing ??
+ */
 void test_zeta_values (void)
 {
 	cplex zl, zh;
 
-	/* As of 21 December 2006, this test is passing, more or less,
-	 * Explores value of hurwitz zeta on s=real line, for 
-	 * q=1/2, where it can be compared to the Riemann zeta.
-	 * Passes, for s>1 far enough away from the pole at s=1.
-	 * Fails, for s<1
-	 */
 	cplex s;
 	s.im = 0.0;
 	for (s.re = 1.1; s.re < 8; s.re += 0.1)
 	{
-		zl = hurwitz_beta (s, 0.5);
+		zl = periodic_zeta (s, 0.5);
 		
 		cplex sm = cplex_minus(s);
 		sm.re += 1.0;
@@ -271,7 +282,7 @@ void test_zeta_values (void)
 	printf ("\n\n");
 	for (s.re = 0.9; s.re >-6.0; s.re -= 0.1)
 	{
-		zl = hurwitz_beta (s, 0.5);
+		zl = periodic_zeta (s, 0.5);
 		
 		cplex sm = cplex_minus(s);
 		sm.re += 1.0;
@@ -287,6 +298,17 @@ void test_zeta_values (void)
 	}
 }
 
+/* ============================================================= */
+
+/** 
+ * test_bernoulli_poly - compare periodic zeta to the Bernmoulli poly's
+ *
+ * The Bernoulli polynomials have a fourier transform that is the 
+ * periodic zeta function. 
+ *
+ * Test is mostly right except for n%4 == zero, where a sign goes 
+ * crazy. WTF !!??
+ */
 int test_bernoulli_poly (int n)
 {
 	cplex zl, zh;
@@ -297,9 +319,8 @@ int test_bernoulli_poly (int n)
 	double q;
 	for (q=0.0; q<1.0; q+=0.02)
 	{
-		zl = hurwitz_beta (s, q);
-		zh = hurwitz_beta (s, 1.0-q);
-		// zh = cplex_zero();
+		zl = periodic_zeta (s, q);
+		zh = periodic_zeta (s, 1.0-q);
 		if (n%2) {
 			z = cplex_sub (zl,zh);
 		} else {
@@ -315,7 +336,6 @@ int test_bernoulli_poly (int n)
 		if (n%2 == 0) bs = -bs;
 
 		bs *= factorial (n) * pow (2.0*M_PI, -n);
-		// bs *= 2.0;
 		
 		// double b = q*q-q+1.0/6.0;
 		double b = bernoulli_poly (n,q);
@@ -323,6 +343,8 @@ int test_bernoulli_poly (int n)
 		printf ("q=%5.3g	bs=%13.10g	bernoulli=%13.10g	reldiff=%6.3g\n", q, bs, b, (bs-b)/b);
 	}
 }
+
+/* ============================================================= */
 
 main (int argc, char * argv[])
 {
@@ -343,8 +365,8 @@ main (int argc, char * argv[])
 	double q=0.4;
 	for (s.re = 1.1; s.re < 8; s.re += 0.1)
 	{
-		zl = hurwitz_beta (s, q);
-		zh = hurwitz_beta (s, 1.0-q);
+		zl = periodic_zeta (s, q);
+		zh = periodic_zeta (s, 1.0-q);
 		
 		/* wrong ... */
 		double zeta = gsl_sf_hzeta (s.re, q);
@@ -362,7 +384,7 @@ main (int argc, char * argv[])
 	for (q=0.0; q<1.0; q+=0.02)
 	{
 		nt=41;
-		zl = hurwitz_beta (s, q);
+		zl = periodic_zeta (s, q);
 		double b = q*q-q+1.0/6.0;
 		printf ("%7.3g	%15.10g	%15.10g\n", q, zl.re, zl.im);
 	}
