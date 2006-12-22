@@ -31,7 +31,7 @@ static inline cplex cplex_one (void)
 	cplex z; z.re=1.0; z.im=0.0; return z;
 }
 
-static inline cplex cplex_minus (cplex z)
+static inline cplex cplex_neg (cplex z)
 {
 	cplex rv;
 	rv.re = -z.re;
@@ -96,8 +96,8 @@ static inline cplex cplex_pow (cplex z, int n)
 	if (350>n)
 	{
 		int k;
-		rv = z;
-		for (k=1; k<n; k++)
+		rv = cplex_one ();
+		for (k=0; k<n; k++)
 		{
 			rv = cplex_mult (rv, z);
 		}
@@ -119,6 +119,7 @@ static inline cplex cplex_exp (cplex z)
 }
 
 /* 
+ * bee_k() 
  * Return value of sum_{j=0}^k (n j) oz^j
  *
  * where (n j) is binomial coefficient 
@@ -129,16 +130,14 @@ static cplex bee_k (int n, int k, cplex oz)
 	cplex pz = cplex_one();
 	cplex acc = cplex_zero();
 
-	double sgn = 1.0;
 	for (j=0; j<=k; j++)
 	{
 		cplex term = pz;
-		double bin = sgn * binomial (n,j);
+		double bin = binomial (n,j);
 
 		term = cplex_scale (bin, term);
 		acc = cplex_add (acc, term);
 		pz = cplex_mult(pz, oz);
-		sgn = -sgn;
 	}
 
 	return acc;
@@ -150,8 +149,12 @@ static cplex bee_k (int n, int k, cplex oz)
 static cplex polylog_est (cplex s, cplex z, int n)
 {
 	int k;
-	cplex oz = cplex_recip(z);
 
+	/* oz = 1/z   whereas moz = -1/z */
+	cplex oz = cplex_recip(z);
+	cplex moz = cplex_neg(oz);
+
+	/* ska = [(z-1)/z^2 ]^n */
 	cplex ska = z;
 	ska.re -= 1.0;
 	ska = cplex_mult (ska, cplex_recip(cplex_mult(z,z)));
@@ -162,26 +165,26 @@ static cplex polylog_est (cplex s, cplex z, int n)
 
 	for (k=0; k<=2*n; k++)
 	{
-		/* the coefficient c_k of the polynomial */
-		cplex ck = bee_k (n,k,oz);
+		/* The coefficient c_k of the polynomial */
+		cplex ck = bee_k (n,k,moz);
 		ck = cplex_sub (ck, ska);
 		ck = cplex_mult (ck, pz);
 		
-		/* the inverse integer power */
+		/* The inverse integer power */
 		cplex dir = cplex_scale (log(k+1), s);
-		dir = cplex_exp (cplex_minus(dir));
+		dir = cplex_exp (cplex_neg(dir));
 
 		/* put it together */
 		cplex term = cplex_mult (ck, dir);
 		acc = cplex_add (acc, term);
 
-		pz = cplex_mult(pz, oz);
+		pz = cplex_mult(pz, z);
 	}
 
 	ska = cplex_recip(ska);
 	acc = cplex_mult (acc, ska);
 	acc = cplex_mult (acc, z);
-	// acc = cplex_minus (acc);
+	// acc = cplex_neg (acc);
 
 	return acc;
 }
@@ -204,11 +207,11 @@ static cplex periodic_zeta (cplex s, double q)
 	{
 		return cplex_zero();
 	}
-	// else if (0.16 > q) 
-	else if (0.25 > q) 
+	else if (0.16 > q) 
+	// else if (0.25 > q) 
 	{
 		/* use the duplication formula to get into convergent region */
-		cplex sm = cplex_minus(s);
+		cplex sm = cplex_neg(s);
 		sm.re += 1.0;
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
 		cplex bt = periodic_zeta (s, 2.0*q);
@@ -219,11 +222,11 @@ static cplex periodic_zeta (cplex s, double q)
 		return z;
 
 	}
-	// else if (0.84 < q) 
-	else if (0.75 < q) 
+	else if (0.84 < q) 
+	// else if (0.75 < q) 
 	{
 		/* use the duplication formula to get into convergent region */
-		cplex sm = cplex_minus(s);
+		cplex sm = cplex_neg(s);
 		sm.re += 1.0;
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
 		cplex bt = periodic_zeta (s, 2.0*q-1.0);
@@ -267,10 +270,10 @@ void test_zeta_values (void)
 	{
 		zl = periodic_zeta (s, 0.5);
 		
-		cplex sm = cplex_minus(s);
+		cplex sm = cplex_neg(s);
 		sm.re += 1.0;
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
-		ts = cplex_minus(ts);
+		ts = cplex_neg(ts);
 		ts.re += 1.0;
 		ts = cplex_recip(ts);
 		zl = cplex_mult (zl, ts);
@@ -284,10 +287,10 @@ void test_zeta_values (void)
 	{
 		zl = periodic_zeta (s, 0.5);
 		
-		cplex sm = cplex_minus(s);
+		cplex sm = cplex_neg(s);
 		sm.re += 1.0;
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
-		ts = cplex_minus(ts);
+		ts = cplex_neg(ts);
 		ts.re += 1.0;
 		ts = cplex_recip(ts);
 		zl = cplex_mult (zl, ts);
