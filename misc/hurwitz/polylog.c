@@ -222,7 +222,7 @@ static cplex hurwitz_beta (cplex s, double q)
 	}
 	else
 	{
-		/* normal case; within the convergence region */
+		/* Normal case; within the convergence region */
 		double ph = 2.0*M_PI*q;
 		z.re = cos (ph);
 		z.im = sin (ph);
@@ -234,8 +234,14 @@ main ()
 {
 	cplex zl, zh;
 
-// #define RIEMANN_ZETA
+#define RIEMANN_ZETA
 #ifdef RIEMANN_ZETA
+	/* As of 21 December 2006, this test is passing, more or less,
+	 * Explores value of hurwitz zeta on s=real line, for 
+	 * q=1/2, where it can be compared to the Riemann zeta.
+	 * Passes, for s>1 far enough away from the pole at s=1.
+	 * Fails, for s<1
+	 */
 	cplex s;
 	s.im = 0.0;
 	for (s.re = 1.1; s.re < 8; s.re += 0.1)
@@ -252,11 +258,28 @@ main ()
 		
 		double zeta = gsl_sf_zeta (s.re);
 		
-		printf ("%7.3g	%15.10g	%15.10g	%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
+		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
+	}
+	printf ("\n\n");
+	for (s.re = 0.9; s.re >-6.0; s.re -= 0.1)
+	{
+		zl = hurwitz_beta (s, 0.5);
+		
+		cplex sm = cplex_minus(s);
+		sm.re += 1.0;
+		cplex ts = cplex_exp(cplex_scale (log(2), sm));
+		ts = cplex_minus(ts);
+		ts.re += 1.0;
+		ts = cplex_recip(ts);
+		zl = cplex_mult (zl, ts);
+		
+		double zeta = gsl_sf_zeta (s.re);
+		
+		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
 	}
 #endif
 
-#define BERNOULLI_POLY
+// #define BERNOULLI_POLY
 #ifdef BERNOULLI_POLY
 
 	int n=6;
