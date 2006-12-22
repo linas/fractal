@@ -70,5 +70,10 @@ main ()
 	sre = 0.5;
 	sim = 2.0;
 	q = 0.3;
+
+	sre = 2.0;
+	sim = 0;
+	q = 1.0;
+
 	hurwitz_zeta (&hre, &him, sre,sim, q);
 }
