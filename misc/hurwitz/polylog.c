@@ -211,14 +211,21 @@ int nt = 31;
  *
  * Periodic zeta function is defined as F(s,q) by Tom Apostol, chapter 12
  *
+ * Incomplete implementation, n3eeds to 
  */
 static cplex periodic_zeta (cplex s, double q)
 {
 	int nterms =nt;
 	cplex z;
 
+	if ((0.0>q) || (1.0<q))
+	{
+		q -= floor (q);
+	}
+	
 	if ((1.0e-10 > q) || (1.0e-10 > 1.0-q))
 	{
+		// XXX this is wrong, it should return riemann zeta 
 		return cplex_zero();
 	}
 	else if (0.25 > q) 
@@ -264,7 +271,7 @@ static cplex periodic_zeta (cplex s, double q)
 /** 
  * test_zeta_values() -- compare periodic zeta to reiman zeta
  * 
- * As of 21 December 2006, this test is passing, more or less,
+ * As of 22 December 2006, this test is passing, with flying colors
  * Explores value of hurwitz zeta on s=real line, for 
  * q=1/2, where it can be compared to the Riemann zeta.
  * Passes, very nicely and cleanly, (i.e. error of order 1e-16)
@@ -306,7 +313,7 @@ void test_zeta_values (double max)
 /* ============================================================= */
 
 /** 
- * test_bernoulli_poly - compare periodic zeta to the Bernmoulli poly's
+ * test_bernoulli_poly - compare periodic zeta to the Bernoulli poly's
  *
  * The Bernoulli polynomials have a fourier transform that is the 
  * periodic zeta function. 
@@ -322,7 +329,7 @@ int test_bernoulli_poly (int n)
 	s.im = 0.0;
 	s.re = n;
 	double q;
-	for (q=0.0; q<1.0; q+=0.02)
+	for (q=-0.2; q<=1.2; q+=0.02)
 	{
 		zl = periodic_zeta (s, q);
 		zh = periodic_zeta (s, 1.0-q);
@@ -362,8 +369,8 @@ main (int argc, char * argv[])
 	}
 	n = atoi (argv[1]);
 
-	test_zeta_values (n);
-	// test_bernoulli_poly (n);
+	// test_zeta_values (n);
+	test_bernoulli_poly (n);
 
 // #define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
