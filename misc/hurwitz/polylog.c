@@ -154,37 +154,51 @@ static cplex polylog_est (cplex s, cplex z, int n)
 	cplex oz = cplex_recip(z);
 	cplex moz = cplex_neg(oz);
 
-	/* ska = [(z-1)/z^2 ]^n */
+	/* ska = [z/(z-1)]^n */
 	cplex ska = z;
 	ska.re -= 1.0;
-	ska = cplex_mult (ska, cplex_recip(cplex_mult(z,z)));
+	ska = cplex_mult (z, cplex_recip(ska));
 	ska = cplex_pow (ska,n);
 	
-	cplex pz = cplex_one();
+	cplex pz = z;
 	cplex acc = cplex_zero();
+	cplex cacc = cplex_zero();
 
-	for (k=0; k<=2*n; k++)
+	for (k=1; k<=n; k++)
 	{
-		/* The coefficient c_k of the polynomial */
-		cplex ck = bee_k (n,k,moz);
-		ck = cplex_sub (ck, ska);
-		ck = cplex_mult (ck, pz);
-		
 		/* The inverse integer power */
-		cplex dir = cplex_scale (log(k+1), s);
+		cplex dir = cplex_scale (log(k), s);
 		dir = cplex_exp (cplex_neg(dir));
 
-		/* put it together */
-		cplex term = cplex_mult (ck, dir);
+		/* Put it together */
+		cplex term = cplex_mult (pz, dir);
 		acc = cplex_add (acc, term);
 
 		pz = cplex_mult(pz, z);
 	}
 
-	ska = cplex_recip(ska);
-	acc = cplex_mult (acc, ska);
-	acc = cplex_mult (acc, z);
-	// acc = cplex_neg (acc);
+	for (k=n+1; k<=2*n; k++)
+	{
+		/* The inverse integer power */
+		cplex dir = cplex_scale (log(k), s);
+		dir = cplex_exp (cplex_neg(dir));
+
+		/* Put it together */
+		cplex term = cplex_mult (pz, dir);
+		acc = cplex_add (acc, term);
+
+		/* The coefficient c_k of the polynomial */
+		cplex ck = bee_k (n,k-n-1,moz);
+		term = cplex_mult (ck, term);
+		cacc = cplex_add (cacc, term);
+
+		pz = cplex_mult(pz, z);
+	}
+
+	cacc = cplex_mult (cacc, ska);
+	acc = cplex_sub (acc, cacc);
+
+	acc = cplex_neg (acc);
 
 	return acc;
 }
@@ -207,8 +221,7 @@ static cplex periodic_zeta (cplex s, double q)
 	{
 		return cplex_zero();
 	}
-	else if (0.16 > q) 
-	// else if (0.25 > q) 
+	else if (0.25 > q) 
 	{
 		/* use the duplication formula to get into convergent region */
 		cplex sm = cplex_neg(s);
@@ -222,8 +235,7 @@ static cplex periodic_zeta (cplex s, double q)
 		return z;
 
 	}
-	else if (0.84 < q) 
-	// else if (0.75 < q) 
+	else if (0.75 < q) 
 	{
 		/* use the duplication formula to get into convergent region */
 		cplex sm = cplex_neg(s);
@@ -260,30 +272,38 @@ static cplex periodic_zeta (cplex s, double q)
  *
  * XXXX why is it failing ??
  */
-void test_zeta_values (void)
+void test_zeta_values (double max)
 {
 	cplex zl, zh;
 
 	cplex s;
 	s.im = 0.0;
-	for (s.re = 1.1; s.re < 8; s.re += 0.1)
+	for (s.re = 1.1; s.re < max; s.re += 0.1)
 	{
 		zl = periodic_zeta (s, 0.5);
 		
+		/* sm = 1-s */
 		cplex sm = cplex_neg(s);
 		sm.re += 1.0;
+
+		/* ts = 2^(1-s) */
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
-		ts = cplex_neg(ts);
-		ts.re += 1.0;
-		ts = cplex_recip(ts);
-		zl = cplex_mult (zl, ts);
+		
+		/* ots = 1/(1-2^(1-s)) */
+		cplex ots = cplex_neg(ts);
+		ots.re += 1.0;
+		ots = cplex_recip(ots);
+		
+		zl = cplex_mult (zl, ots);
 		
 		double zeta = gsl_sf_zeta (s.re);
 		
 		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
 	}
+
+#if TEST_NEGATIVE_S
 	printf ("\n\n");
-	for (s.re = 0.9; s.re >-6.0; s.re -= 0.1)
+	for (s.re = 0.9; s.re >-max; s.re -= 0.1)
 	{
 		zl = periodic_zeta (s, 0.5);
 		
@@ -299,6 +319,7 @@ void test_zeta_values (void)
 		
 		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
 	}
+#endif
 }
 
 /* ============================================================= */
@@ -359,7 +380,9 @@ main (int argc, char * argv[])
 		exit (1);
 	}
 	n = atoi (argv[1]);
-	test_bernoulli_poly (n);
+
+	test_zeta_values (n);
+	// test_bernoulli_poly (n);
 
 // #define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
