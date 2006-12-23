@@ -143,8 +143,11 @@ static cplex bee_k (int n, int k, cplex oz)
 	return acc;
 }
 
-/*
+/* polylog_est() 
  * Return estimate of polylog, Li_s(z) for estimator n.
+ *
+ * Appears to work well. Suggest n=31 for most cases,
+ * should return answers accurate to 1e-16
  */
 static cplex polylog_est (cplex s, cplex z, int n)
 {
@@ -198,16 +201,13 @@ static cplex polylog_est (cplex s, cplex z, int n)
 	cacc = cplex_mult (cacc, ska);
 	acc = cplex_sub (acc, cacc);
 
-	acc = cplex_neg (acc);
-
 	return acc;
 }
 
 int nt = 31;
 
 /**
- * periodic_zeta -- Implement peridoci zeta function
- *  incomplete implementation 
+ * periodic_zeta -- Implement periodic zeta function
  *
  * Periodic zeta function is defined as F(s,q) by Tom Apostol, chapter 12
  *
@@ -276,8 +276,10 @@ void test_zeta_values (double max)
 
 	cplex s;
 	s.im = 0.0;
-	for (s.re = 1.1; s.re < max; s.re += 0.1)
+	for (s.re = -2; s.re < max; s.re += 0.1)
 	{
+		if (1 == s.re) continue;
+
 		zl = periodic_zeta (s, 0.5);
 		
 		/* sm = 1-s */
@@ -287,30 +289,13 @@ void test_zeta_values (double max)
 		/* ts = 2^(1-s) */
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
 		
-		/* ots = 1/(1-2^(1-s)) */
+		/* ots = -1/(1-2^(1-s)) */
 		cplex ots = cplex_neg(ts);
 		ots.re += 1.0;
 		ots = cplex_recip(ots);
+		ots = cplex_neg (ots);
 		
 		zl = cplex_mult (zl, ots);
-		
-		double zeta = gsl_sf_zeta (s.re);
-		
-		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
-	}
-
-	printf ("\n\n");
-	for (s.re = 0.9; s.re >-max; s.re -= 0.1)
-	{
-		zl = periodic_zeta (s, 0.5);
-		
-		cplex sm = cplex_neg(s);
-		sm.re += 1.0;
-		cplex ts = cplex_exp(cplex_scale (log(2), sm));
-		ts = cplex_neg(ts);
-		ts.re += 1.0;
-		ts = cplex_recip(ts);
-		zl = cplex_mult (zl, ts);
 		
 		double zeta = gsl_sf_zeta (s.re);
 		
@@ -377,8 +362,8 @@ main (int argc, char * argv[])
 	}
 	n = atoi (argv[1]);
 
-	// test_zeta_values (n);
-	test_bernoulli_poly (n);
+	test_zeta_values (n);
+	// test_bernoulli_poly (n);
 
 // #define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
