@@ -441,16 +441,16 @@ static inline int check_for_zero (int nfaults, mpf_t zer, mpf_t epsi, char * str
 	return nfaults;
 }
 
-static inline int cpx_check_for_zero (int nfaults, cpx_t zer, mpf_t epsi, char * str, double x, double y)
+static inline int cpx_check_for_zero (int nfaults, cpx_t zer, mpf_t epsi, char * str, int n, double x, double y)
 {
 	mpf_abs(zer[0].re, zer[0].re);
 	mpf_abs(zer[0].im, zer[0].im);
 	if ((mpf_cmp (zer[0].re, epsi) > 0) || (mpf_cmp (zer[0].im, epsi) > 0))
 	{
 		nfaults ++;
-		fprintf (stderr, "Error: %s imprecise for x=%g +i %g\n", str, x,y);
-		cpx_prt ("should be zero=", zer);
-		printf ("\n");
+		fprintf (stderr, "Error: %s imprecise for n=%d x=%g +i %g\n", str, n, x,y);
+		ecpx_prt ("should be zero=", zer);
+		fprintf (stderr, "\n");
 	}
 	return nfaults;
 }
@@ -503,7 +503,7 @@ int test_cpx_sqrt (int nterms, int prec)
 		}
 		cpx_mul (zb, zb, zb);
 		cpx_sub (zb, zb, za);
-		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111, 0.222);
+		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0, 0.1111, 0.222);
 
 		cpx_neg (za, za);
 		cpx_sqrt (zb, za, prec);
@@ -516,7 +516,7 @@ int test_cpx_sqrt (int nterms, int prec)
 		}
 		cpx_mul (zb, zb, zb);
 		cpx_sub (zb, zb, za);
-		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0.1111, 0.22);
+		nfaults = cpx_check_for_zero (nfaults, zb, epsi, "complex sqrt", 0, 0.1111, 0.22);
 
 		cpx_neg (za, za);
 		cpx_add_d (za, za, step, 0.312347*step);
@@ -524,10 +524,58 @@ int test_cpx_sqrt (int nterms, int prec)
 	
 	cpx_clear (za);
 	cpx_clear (zb);
+	mpf_clear (epsi);
 
 	if (0 == nfaults)
 	{
 		fprintf(stderr, "Complex sqrt test passed!\n");
+	}
+	return nfaults;
+}
+
+/* ==================================================================== */
+/* Test the complex-valued pow function, return the number of failures
+ */
+
+int test_complex_pow (int nterms, int prec)
+{
+	int nfaults = 0;
+	int n;
+
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, prec-5);
+
+	cpx_t z, zn, pn;
+	cpx_init (z);
+	cpx_init (zn);
+	cpx_init (pn);
+	cpx_set_ui (z, 1, 0);
+
+	double rfz, ifz;
+	rfz = -2.34567;
+	ifz = 19.39841;
+	for (; rfz<33.0; rfz += 1.013349852, ifz -= 2.3147)
+	{
+		cpx_set_d (z, rfz, ifz);
+		cpx_set_ui (zn, 1, 0);
+		for (n=0; n<60; n++)
+		{
+			cpx_pow_ui (pn, z, n);
+			cpx_sub (pn, pn, zn);
+			nfaults = cpx_check_for_zero (nfaults, pn, epsi, "complex pow ui", n, rfz, ifz);
+			cpx_mul (zn,zn, z);
+		}
+	}
+	cpx_clear (z);
+	cpx_clear (zn);
+	cpx_clear (pn);
+	mpf_clear (epsi);
+
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Complex pow test passed!\n");
 	}
 	return nfaults;
 }
@@ -800,7 +848,7 @@ int test_complex_gamma (int nterms, int prec)
 		/* this should be one */
 		cpx_sub_ui (gam,gam, 1,0);
 		
-		nfaults = cpx_check_for_zero (nfaults, gam, epsi, "complex gamma duplication", rez, imz);
+		nfaults = cpx_check_for_zero (nfaults, gam, epsi, "complex gamma duplication", i, rez, imz);
 
 		rez += red;
 		imz += imd;
@@ -832,7 +880,7 @@ int test_complex_gamma (int nterms, int prec)
 		/* this should be one */
 		cpx_sub_ui (gam,gam, 1,0);
 		
-		nfaults = cpx_check_for_zero (nfaults, gam, epsi, "complex gamma reflection", rez, imz);
+		nfaults = cpx_check_for_zero (nfaults, gam, epsi, "complex gamma reflection", i, rez, imz);
 
 		rez +=red;
 		imz+=imd;
@@ -1256,6 +1304,7 @@ int main (int argc, char * argv[])
 	int nfaults = 0;
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
+	nfaults += test_complex_pow (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
 	nfaults += test_complex_gamma (nterms, prec);
 

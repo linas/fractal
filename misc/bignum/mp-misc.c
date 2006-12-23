@@ -35,6 +35,14 @@ void cpx_prt (char * str, const cpx_t val)
 	mpf_out_str (stdout, 10, 30, val[0].im);
 }
 
+void ecpx_prt (char * str, const cpx_t val)
+{
+	fprintf (stderr, str);
+	mpf_out_str (stderr, 10, 30, val[0].re);
+	fprintf (stderr, " + i ");
+	mpf_out_str (stderr, 10, 30, val[0].im);
+}
+
 /* ===================================================== */
 /**
  * fp_epsilon - return 10^{-prec} 
