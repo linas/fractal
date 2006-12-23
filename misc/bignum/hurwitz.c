@@ -62,7 +62,7 @@ static void forward_diff_diri (cpx_t fin, int n, mpf_t q, cpx_t ess, int prec)
 /* A brute-force summation using Hasse formula, 
  * for complex s, real q.
  *
- * Unfortunately, the convergence is slow on the critical strip.
+ * Unfortunately, the convergence is unbearably slow, seems to be logarithmic....
  */
 
 void hurwitz_zeta(cpx_t zeta, cpx_t ess, mpf_t q, int prec)
@@ -75,9 +75,8 @@ void hurwitz_zeta(cpx_t zeta, cpx_t ess, mpf_t q, int prec)
 	/* smo contains value of (1-s) */
 	cpx_t smo;
 	cpx_init (smo);
-	mpf_neg (smo[0].re, ess[0].re);
-	mpf_add_ui (smo[0].re, smo[0].re, 1);
-	mpf_neg (smo[0].im, ess[0].im);
+	cpx_neg (smo, ess);
+	cpx_add_ui (smo, smo, 1, 0);
 
 	/* os contains value of 1/(s-1) */
 	cpx_t os;
@@ -120,7 +119,7 @@ printf ("\n");
 
 int main ()
 {
-	int prec = 580;
+	int prec = 180;
 
 	/* Set the precision (number of binary bits) */
 	mpf_set_default_prec (3.3*prec+600);
@@ -129,12 +128,12 @@ int main ()
 	cpx_init (ess);
 	cpx_init (zeta);
 
-	mpf_set_d (ess[0].re, 0.5);
-	mpf_set_d (ess[0].im, 4.0);
+	cpx_set_d (ess, 0.5, 4.0);
+	cpx_set_d (ess, 2.0, 0.0);
 	
 	mpf_t que;
 	mpf_init (que);
-	mpf_set_d (que,0.5);
+	mpf_set_d (que,1.0);
 	
 	hurwitz_zeta (zeta, ess, que, prec);
 
