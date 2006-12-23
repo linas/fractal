@@ -34,6 +34,14 @@ static inline cplex cplex_one (void)
 	cplex z; z.re=1.0; z.im=0.0; return z;
 }
 
+static inline cplex cplex_times_i (cplex z)
+{
+	cplex rv;
+	rv.re = -z.im;
+	rv.im = z.re;
+	return rv;
+}
+
 static inline cplex cplex_neg (cplex z)
 {
 	cplex rv;
@@ -80,6 +88,14 @@ static inline cplex cplex_recip (cplex z)
 	double mag = 1.0/ (z.re*z.re + z.im*z.im);
 	rv.re = z.re * mag;
 	rv.im = -z.im * mag;
+	return rv;
+}
+
+static inline cplex cplex_div (cplex a, cplex b)
+{
+	cplex rv, deno;
+	deno = cplex_recip (b);
+	rv = cplex_mult (a, deno);
 	return rv;
 }
 
@@ -286,7 +302,6 @@ cplex periodic_zeta (cplex s, double q)
 cplex periodic_beta (cplex s, double q)
 {
 	static double log_two_pi = 0.0;
-
 	if (0.0 == log_two_pi) log_two_pi = -log (2.0*M_PI);
 	
 	cplex z, tps;
@@ -306,6 +321,50 @@ cplex periodic_beta (cplex s, double q)
 	z = cplex_mult (z, tps);
 	z = cplex_scale (2.0, z);
 	
+	return z;
+}
+
+/* ============================================================= */
+/**
+ * hurwitz_zeta -- Hurwitz zeta function
+ *
+ * Built up from the periodic beta
+ *
+ */
+cplex hurwitz_zeta (cplex ess, double q)
+{
+	static double log_two_pi = 0.0;
+	if (0.0 == log_two_pi) log_two_pi = -log (2.0*M_PI);
+
+	cplex s = cplex_neg (ess);
+	s.re += 1.0;
+
+	cplex zl, zh;
+
+	zl = periodic_zeta (s, q);
+	zh = periodic_zeta (s, 1.0-q);
+
+	cplex piss = cplex_scale (0.5*M_PI, s);
+	piss = cplex_times_i(piss);
+	piss = cplex_exp (piss);
+
+	zh = cplex_mult (zh, piss);
+	zl = cplex_div (zh, piss);
+
+	cplex z = cplex_add (zl, zh);
+	
+	cplex tps = cplex_scale (log_two_pi, s);
+
+	gsl_sf_result lnr, arg;
+	gsl_sf_lngamma_complex_e(s.re, s.im, &lnr, &arg);
+
+	tps.re += lnr.val;
+	tps.im += arg.val;
+	
+	tps = cplex_exp (tps);
+
+	z = cplex_mult (z, tps);
+
 	return z;
 }
 
@@ -419,22 +478,20 @@ main (int argc, char * argv[])
 	n = atoi (argv[1]);
 
 	// test_zeta_values (n);
-	test_bernoulli_poly (n);
+	// test_bernoulli_poly (n);
 
-// #define HURWITZ_ZETA
+#define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
 	cplex s;
 	s.im = 0.0;
 	double q=0.4;
 	for (s.re = 1.1; s.re < 8; s.re += 0.1)
 	{
-		zl = periodic_zeta (s, q);
-		zh = periodic_zeta (s, 1.0-q);
+		cplex hz= hurwitz_zeta (s, q);
 		
-		/* wrong ... */
 		double zeta = gsl_sf_hzeta (s.re, q);
 		
-		printf ("%7.3g	%15.10g	%15.10g	%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
+		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	reldiff=%6.3g\n", s.re, hz.re, zeta, (hz.re-zeta)/zeta);
 	}
 #endif
 
