@@ -681,6 +681,40 @@ void cpx_pow_mpf (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
 }
 
 /* ======================================================================= */
+/*
+ * cpx_pow_ui-- return q^n for complex q, integer n.
+ *
+ * Uses a log(n) algo, by masking out the bit-string of n.
+ * Basically, walk over the bits in n, and multiply by that
+ * appropriate power-of-two power for the arg.
+ */
+void cpx_pow_ui (cpx_t powc, const cpx_t q, unsigned int n, int prec)
+{
+	int k;
+	cpx_t qsq;
+
+	cpx_init (qsq);
+
+	cpx_set (qsq, q);
+	cpx_set_ui (powc, 1, 0);
+
+	for (k=0; k<32;k++)
+	{
+		if (0 == n) return;
+
+		if (n & 0x1)
+		{
+			cpx_mul (powc, powc, qsq);
+		}
+
+		n >>= 1;
+		cpx_mul(qsq, qsq, qsq);
+	}
+	
+	cpx_clear (qsq);
+}
+
+/* ======================================================================= */
 /**
  * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
  *

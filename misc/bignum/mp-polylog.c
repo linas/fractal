@@ -64,24 +64,32 @@ static void bee_k (cpx_t bee, int n, int k, cpx_t oz)
 }
 
 #if 0
-/* polylog_est() 
- * Return estimate of polylog, Li_s(z) for estimator n.
+/* polylog_est() -- Return polylog, Li_s(z) for estimator n.
  *
  * Appears to work well. Suggest n=31 for most cases,
  * should return answers accurate to 1e-16
  */
-static cplex polylog_est (cplex s, cplex z, int n)
+static void polylog_est (cpx_t plog, cpx_t s, cpx_t z, int norder)
 {
+	cpx_t oz, moz, ska, pz, acc;
 	int k;
 
+	cpx_init (oz);
+	cpx_init (omz);
+	cpx_init (ska);
+	cpx_init (pz);
+	cpx_init (acc);
+
 	/* oz = 1/z   whereas moz = -1/z */
-	cplex oz = cplex_recip(z);
-	cplex moz = cplex_neg(oz);
+	cpx_recip (oz, z);
+	cpx_neg (moz, oz);
 
 	/* ska = [z/(z-1)]^n */
-	cplex ska = z;
-	ska.re -= 1.0;
-	ska = cplex_mult (z, cplex_recip(ska));
+	cpx_set (ska, z);
+	cpx_sub_ui (ska, ska, 1, 0);
+	cpx_recip (ska, ska);
+	cpx_mul (ska, ska, z);
+	cpx_
 	ska = cplex_pow (ska,n);
 	
 	cplex pz = z;
