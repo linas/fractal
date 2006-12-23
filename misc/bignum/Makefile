@@ -51,14 +51,17 @@ mp_zeta_test.o: mp-zeta.h mp-complex.h mp-consts.h mp-misc.h mp-trig.h
 sho.o: mp-complex.h mp-hyper.h mp-trig.h
 stieltjes.o: mp-zeta.h mp-binomial.h mp-misc.h
 
-bs:	bs.o mp-zeta.o $(MPLIB)
+bs:	bs.o $(MPLIB)
 	$(CC) -o bs $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
-bsubn:	bsubn.o mp-zeta.o $(MPLIB)
+bsubn:	bsubn.o $(MPLIB)
 	$(CC) -o bsubn $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
 minima: minima.o
 	$(CC) -o minima $< -lgsl -lcblas -lm -lc
+
+mp_zeta_test:	mp_zeta_test.o $(MPLIB)
+	$(CC) -o mp_zeta_test $^ -lgmp -lgsl -lcblas -ldb -lm -lc
 
 $(MPLIB): $(MPOBJS)
 	ar cru $(MPLIB) $^

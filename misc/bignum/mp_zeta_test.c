@@ -13,6 +13,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <gsl/gsl_complex_math.h>
 
 #include <gmp.h>
 #include "mp-consts.h"
@@ -552,6 +553,9 @@ int test_complex_pow (int nterms, int prec)
 	cpx_init (zn);
 	cpx_init (pn);
 	cpx_set_ui (z, 1, 0);
+	
+	mpf_t q;
+	mpf_init (q);
 
 	double rfz, ifz;
 	rfz = -2.34567;
@@ -560,7 +564,7 @@ int test_complex_pow (int nterms, int prec)
 	{
 		cpx_set_d (z, rfz, ifz);
 		cpx_set_ui (zn, 1, 0);
-		for (n=0; n<60; n++)
+		for (n=0; n<55; n++)
 		{
 			cpx_pow_ui (pn, z, n);
 			cpx_sub (pn, pn, zn);
@@ -568,9 +572,34 @@ int test_complex_pow (int nterms, int prec)
 			cpx_mul (zn,zn, z);
 		}
 	}
+	
+	rfz = -2.34567;
+	ifz = 19.39841;
+	double rfmax = 33.3334567;
+	double rdelta = (rfmax - rfz) / nterms;
+	for (; rfz<33.0; rfz += rdelta, ifz -= 20.3147/nterms)
+	{
+		cpx_set_d (z, rfz, ifz);
+		
+		double que = -2.34567;
+		for (; que<rfmax; que += rfmax / nterms)
+		{
+			mpf_set_d (q, que);
+			cpx_pow_mpf (pn, q, z, prec);
+
+			gsl_complex cq, ce, cp;
+			GSL_SET_COMPLEX (&cq, que, 0.0);
+			GSL_SET_COMPLEX (&ce, rfz, ifz);
+			cp = gsl_complex_pow (cq, ce);
+
+			nfaults = check_for_equality (nfaults, pn[0].re, GSL_REAL(cp), "complex pow real part", que);
+			nfaults = check_for_equality (nfaults, pn[0].im, GSL_IMAG(cp), "complex pow imag part", que);
+		}
+	}
 	cpx_clear (z);
 	cpx_clear (zn);
 	cpx_clear (pn);
+	mpf_clear (q);
 	mpf_clear (epsi);
 
 	if (0 == nfaults)
