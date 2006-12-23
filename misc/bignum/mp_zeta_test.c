@@ -580,8 +580,8 @@ int test_complex_pow (int nterms, int prec)
 	for (; rfz<33.0; rfz += rdelta, ifz -= 20.3147/nterms)
 	{
 		cpx_set_d (z, rfz, ifz);
-		
-		double que = -2.34567;
+
+		double que = 0.234567;
 		for (; que<rfmax; que += rfmax / nterms)
 		{
 			mpf_set_d (q, que);

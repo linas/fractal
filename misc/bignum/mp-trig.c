@@ -659,6 +659,14 @@ void cpx_pow_mpf (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
 	mpf_init (mag);
 	mpf_init (pha);
 
+	/* Domain error is kq is not positive 
+	 * We could define this to be exp (i pi s) times result, but I'm lazy */
+	if (mpf_cmp_ui (kq, 0) < 0)
+	{
+		fprintf (stderr, "cpx_pow_mpf() domain error, q<0\n");
+		return;
+	}
+
 	fp_log (logkq, kq, prec);
 	
 	/* magnitude is exp(re(s) * log(kq)) */
