@@ -12,10 +12,13 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_zeta.h>
 
 #include "binomial.h"
 #include "bernoulli.h"
+#include "harmonic.h"
 
 typedef struct {
 	double re;
@@ -207,13 +210,16 @@ static cplex polylog_est (cplex s, cplex z, int n)
 int nt = 31;
 
 /**
- * periodic_zeta -- Implement periodic zeta function
+ * periodic_zeta -- Periodic zeta function 
+ *
+ * F(s,q) = sum_{n=1}^infty exp(2pi iqn)/ n^s
+ *        = Li_s (exp(2pi iq))
+ * where 
+ * Li_s(z) is the polylogarithm
  *
  * Periodic zeta function is defined as F(s,q) by Tom Apostol, chapter 12
- *
- * Incomplete implementation, n3eeds to 
  */
-static cplex periodic_zeta (cplex s, double q)
+cplex periodic_zeta (cplex s, double q)
 {
 	int nterms =nt;
 	cplex z;
@@ -225,8 +231,10 @@ static cplex periodic_zeta (cplex s, double q)
 	
 	if ((1.0e-10 > q) || (1.0e-10 > 1.0-q))
 	{
-		// XXX this is wrong, it should return riemann zeta 
-		return cplex_zero();
+		// XXX should be more precise with the next order
+		// q correction ... 
+		riemann_zeta (s.re, s.im, &z.re, &z.im);
+		return z;
 	}
 	else if (0.25 > q) 
 	{
@@ -264,6 +272,41 @@ static cplex periodic_zeta (cplex s, double q)
 		z.im = sin (ph);
 		return polylog_est (s, z, nterms);
 	}
+}
+
+/* ============================================================= */
+/**
+ * periodic_beta -- Periodic beta function 
+ *
+ * similar to periodic zeta, but with different normalization
+ *
+ * beta = 2 Gamma(s+1) (2\pi)^{-s} F(s,q)
+ *
+ */
+cplex periodic_beta (cplex s, double q)
+{
+	static double log_two_pi = 0.0;
+
+	if (0.0 == log_two_pi) log_two_pi = -log (2.0*M_PI);
+	
+	cplex z, tps;
+
+	z = periodic_zeta (s,q);
+
+	tps = cplex_scale (log_two_pi, s);
+
+	gsl_sf_result lnr, arg;
+	gsl_sf_lngamma_complex_e(s.re+1.0, s.im, &lnr, &arg);
+
+	tps.re += lnr.val;
+	tps.im += arg.val;
+	
+	tps = cplex_exp (tps);
+
+	z = cplex_mult (z, tps);
+	z = cplex_scale (2.0, z);
+	
+	return z;
 }
 
 /* ============================================================= */
@@ -318,8 +361,7 @@ void test_zeta_values (double max)
  * The Bernoulli polynomials have a fourier transform that is the 
  * periodic zeta function. 
  *
- * Test is mostly right except for n%4 == zero, where a sign goes 
- * crazy. WTF !!??
+ * Test is now passijng with flying colors
  */
 int test_bernoulli_poly (int n)
 {
@@ -331,23 +373,30 @@ int test_bernoulli_poly (int n)
 	double q;
 	for (q=-0.2; q<=1.2; q+=0.02)
 	{
-		zl = periodic_zeta (s, q);
-		zh = periodic_zeta (s, 1.0-q);
+		// zl = periodic_zeta (s, q);
+		// zh = periodic_zeta (s, 1.0-q);
+		zl = periodic_beta (s, q);
+		zh = periodic_beta (s, 1.0-q);
 		if (n%2) {
 			z = cplex_sub (zl,zh);
 		} else {
 			z = cplex_add (zl,zh);
 		}
 		
-		double bs = z.re;
+		double bs;
+		if (0 == n%2)
+		{
+	 		bs = z.re;
+			if (n%4 == 0) bs = -bs;
+		}
 		if (n%2)
 		{
-			bs = z.im;
+			bs = -z.im;
 			if (n%4 == 3) bs = -bs;
 		}
-		if (n%2 == 0) bs = -bs;
 
-		bs *= factorial (n) * pow (2.0*M_PI, -n);
+		// bs *= factorial (n) * pow (2.0*M_PI, -n);
+		bs *= 0.5;
 		
 		// double b = q*q-q+1.0/6.0;
 		double b = bernoulli_poly (n,q);
