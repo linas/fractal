@@ -1,6 +1,6 @@
 
 /** 
- * polylog.c
+ * mp-polylog.c
  *
  * Implement Borwein-style polylogarithm.
  * Also implement the "periodic zeta" and 
@@ -15,131 +15,11 @@
 
 #include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-#include <gsl/gsl_sf_gamma.h>
-#include <gsl/gsl_sf_zeta.h>
-
-#include "binomial.h"
-#include "bernoulli.h"
-#include "harmonic.h"
-
-typedef struct {
-	double re;
-	double im;
-} cplex;
-
-static inline cplex cplex_zero (void)
-{
-	cplex z; z.re=0.0; z.im=0.0; return z;
-}
-static inline cplex cplex_one (void)
-{
-	cplex z; z.re=1.0; z.im=0.0; return z;
-}
-
-static inline cplex cplex_times_i (cplex z)
-{
-	cplex rv;
-	rv.re = -z.im;
-	rv.im = z.re;
-	return rv;
-}
-
-static inline cplex cplex_neg (cplex z)
-{
-	cplex rv;
-	rv.re = -z.re;
-	rv.im = -z.im;
-	return rv;
-}
-
-static inline cplex cplex_add (cplex a, cplex b)
-{
-	cplex rv;
-	rv.re = a.re + b.re;
-	rv.im = a.im + b.im;
-	return rv;
-}
-
-static inline cplex cplex_sub (cplex a, cplex b)
-{
-	cplex rv;
-	rv.re = a.re - b.re;
-	rv.im = a.im - b.im;
-	return rv;
-}
-
-static inline cplex cplex_scale (double x, cplex z)
-{
-	cplex rv;
-	rv.re = x * z.re;
-	rv.im = x * z.im;
-	return rv;
-}
-
-static inline cplex cplex_mult (cplex a, cplex b)
-{
-	cplex rv;
-	rv.re = a.re * b.re - a.im * b.im;
-	rv.im = a.re * b.im + b.re * a.im;
-	return rv;
-}
-
-static inline cplex cplex_recip (cplex z)
-{
-	cplex rv;
-	double mag = 1.0/ (z.re*z.re + z.im*z.im);
-	rv.re = z.re * mag;
-	rv.im = -z.im * mag;
-	return rv;
-}
-
-static inline cplex cplex_div (cplex a, cplex b)
-{
-	cplex rv, deno;
-	deno = cplex_recip (b);
-	rv = cplex_mult (a, deno);
-	return rv;
-}
-
-static inline double cplex_modulus (cplex z)
-{
-	return sqrt (z.re*z.re + z.im*z.im);
-}
-
-static inline double cplex_phase (cplex z)
-{
-	return atan2 (z.im, z.re);
-}
-
-static inline cplex cplex_pow (cplex z, int n)
-{
-	cplex rv;
-	if (350>n)
-	{
-		int k;
-		rv = cplex_one ();
-		for (k=0; k<n; k++)
-		{
-			rv = cplex_mult (rv, z);
-		}
-	}
-	else
-	{
-		fprintf (stderr, "pow=%d unimplemented\n", n);
-	}
-	return rv;
-}
-
-static inline cplex cplex_exp (cplex z)
-{
-	cplex rv;
-	rv.re = rv.im = exp (z.re);
-	rv.re *= cos (z.im);
-	rv.im *= sin (z.im);
-	return rv;
-}
+#include "mp-binomial.h"
+#include "mp-complex.h"
+//#include "mp-bernoulli.h"
+//#include "mp-harmonic.h"
 
 /* 
  * bee_k() 
@@ -147,25 +27,43 @@ static inline cplex cplex_exp (cplex z)
  *
  * where (n j) is binomial coefficient 
  */
-static cplex bee_k (int n, int k, cplex oz)
+static void bee_k (cpx_t bee, int n, int k, cpx_t oz)
 {
 	int j;
-	cplex pz = cplex_one();
-	cplex acc = cplex_zero();
+	cpx_t pz, z, term;
+	mpz_t bin;
+	mpf_t binom;
+
+	mpz_init (bin);
+	mpf_init (binom);
+	cpx_init (z);
+	cpx_init (pz);
+	cpx_init (term);
+
+	/* Make a copy if input arg now! */
+	cpx_set (z, oz);
+	cpx_set_ui (pz, 1,0);
+	cpx_set_ui (bee, 0,0);
 
 	for (j=0; j<=k; j++)
 	{
-		cplex term = pz;
-		double bin = binomial (n,j);
+		cpx_set (term, pz);
 
-		term = cplex_scale (bin, term);
-		acc = cplex_add (acc, term);
-		pz = cplex_mult(pz, oz);
+		i_binomial (bin, n,j);
+		mpf_set_z (binom, bin);
+		cpx_mul_mpf (term, term, binom);
+		cpx_add (bee, bee, term);
+		cpx_mul(pz, pz, z);
 	}
 
-	return acc;
+	mpz_clear (bin);
+	mpf_clear (binom);
+	cpx_clear (z);
+	cpx_clear (pz);
+	cpx_clear (term);
 }
 
+#if 0
 /* polylog_est() 
  * Return estimate of polylog, Li_s(z) for estimator n.
  *
@@ -478,6 +376,10 @@ int test_bernoulli_poly (int n)
 }
 
 /* ============================================================= */
+#include <stdlib.h>
+
+#include <gsl/gsl_sf_gamma.h>
+#include <gsl/gsl_sf_zeta.h>
 
 main (int argc, char * argv[])
 {
@@ -526,3 +428,4 @@ main (int argc, char * argv[])
 	}
 #endif
 }
+#endif
