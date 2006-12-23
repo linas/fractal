@@ -1,10 +1,14 @@
 
-/* polylog.c
+/** 
+ * polylog.c
  *
- * Implement Borwein-style polylogarithm 
- * on unit circle.
+ * Implement Borwein-style polylogarithm.
+ * Also implement the "periodic zeta" and 
+ * the Hurwitz zeta function.
  *
- * Incomplte, partly functional.
+ * As of 22 December 2006, seems to be fully functional
+ * and correct, and passes tests. The range of convergence
+ * is rather limited because of precision/rounding errors.
  *
  * Linas November 2006
  */
@@ -459,6 +463,7 @@ int test_bernoulli_poly (int n)
 		// bs *= factorial (n) * pow (2.0*M_PI, -n);
 		bs *= 0.5;
 
+		/* short-circuit the above, test directly */
 		cplex ess;
 		ess.re = 1-n;
 		ess.im = 0;
@@ -477,6 +482,7 @@ int test_bernoulli_poly (int n)
 main (int argc, char * argv[])
 {
 	int n;
+	double en;
 
 	if (argc != 2)
 	{
@@ -484,16 +490,20 @@ main (int argc, char * argv[])
 		exit (1);
 	}
 	n = atoi (argv[1]);
+	en = atof (argv[1]);
 
 	// test_zeta_values (n);
-	test_bernoulli_poly (n);
+	// test_bernoulli_poly (n);
 
 // #define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
+	/* As of 22 December 2006, this test seems to be passing, 
+	 * with decent accuracy, for anything with real part less than about 8
+	 */
 	cplex s;
 	s.im = 0.0;
 	double q=0.5;
-	for (s.re = 1.1; s.re < n; s.re += 0.1)
+	for (s.re = 1.05; s.re < n; s.re += 0.1)
 	{
 		cplex hz= hurwitz_zeta (s, q);
 		
@@ -503,18 +513,16 @@ main (int argc, char * argv[])
 	}
 #endif
 
-#if 0
+#if 1
 	cplex s;
-	s.re = 6.0;
-	s.im = 0.0;
+	s.re = en;
+	s.im = 0.5;
 
 	double q;
-	for (q=0.0; q<1.0; q+=0.02)
+	for (q=0.02; q<1.0; q+=0.04)
 	{
-		nt=41;
-		zl = periodic_zeta (s, q);
-		double b = q*q-q+1.0/6.0;
-		printf ("%7.3g	%15.10g	%15.10g\n", q, zl.re, zl.im);
+		cplex hz = hurwitz_zeta (s, q);
+		printf ("%7.3g	%15.10g	%15.10g\n", q, hz.re, hz.im);
 	}
 #endif
 }
