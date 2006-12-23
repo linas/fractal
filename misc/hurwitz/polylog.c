@@ -298,6 +298,9 @@ cplex periodic_zeta (cplex s, double q)
  *
  * beta = 2 Gamma(s+1) (2\pi)^{-s} F(s,q)
  *
+ * As of 22 December, seems to be passing the tests -- 
+ * that is, it gives the Bernoulli polynomials for integer s,
+ * with all the right scale factors and signs, etc. Yay!
  */
 cplex periodic_beta (cplex s, double q)
 {
@@ -329,6 +332,7 @@ cplex periodic_beta (cplex s, double q)
  * hurwitz_zeta -- Hurwitz zeta function
  *
  * Built up from the periodic beta
+ * Borken at the mopment
  *
  */
 cplex hurwitz_zeta (cplex ess, double q)
@@ -339,17 +343,15 @@ cplex hurwitz_zeta (cplex ess, double q)
 	cplex s = cplex_neg (ess);
 	s.re += 1.0;
 
-	cplex zl, zh;
-
-	zl = periodic_zeta (s, q);
-	zh = periodic_zeta (s, 1.0-q);
+	cplex zl = periodic_zeta (s, q);
+	cplex zh = periodic_zeta (s, 1.0-q);
 
 	cplex piss = cplex_scale (0.5*M_PI, s);
 	piss = cplex_times_i(piss);
 	piss = cplex_exp (piss);
 
 	zh = cplex_mult (zh, piss);
-	zl = cplex_div (zh, piss);
+	zl = cplex_div (zl, piss);
 
 	cplex z = cplex_add (zl, zh);
 	
@@ -456,6 +458,12 @@ int test_bernoulli_poly (int n)
 
 		// bs *= factorial (n) * pow (2.0*M_PI, -n);
 		bs *= 0.5;
+
+		cplex ess;
+		ess.re = 1-n;
+		ess.im = 0;
+		cplex hz = hurwitz_zeta(ess,q);
+		bs = -n * hz.re;
 		
 		// double b = q*q-q+1.0/6.0;
 		double b = bernoulli_poly (n,q);
@@ -478,14 +486,14 @@ main (int argc, char * argv[])
 	n = atoi (argv[1]);
 
 	// test_zeta_values (n);
-	// test_bernoulli_poly (n);
+	test_bernoulli_poly (n);
 
-#define HURWITZ_ZETA
+// #define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
 	cplex s;
 	s.im = 0.0;
-	double q=0.4;
-	for (s.re = 1.1; s.re < 8; s.re += 0.1)
+	double q=0.5;
+	for (s.re = 1.1; s.re < n; s.re += 0.1)
 	{
 		cplex hz= hurwitz_zeta (s, q);
 		
