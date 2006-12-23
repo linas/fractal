@@ -267,10 +267,8 @@ static cplex periodic_zeta (cplex s, double q)
  * As of 21 December 2006, this test is passing, more or less,
  * Explores value of hurwitz zeta on s=real line, for 
  * q=1/2, where it can be compared to the Riemann zeta.
- * Passes, for s>1 far enough away from the pole at s=1.
- * Fails, for s<1
- *
- * XXXX why is it failing ??
+ * Passes, very nicely and cleanly, (i.e. error of order 1e-16)
+ * although starts to get rough for the large negative s.
  */
 void test_zeta_values (double max)
 {
@@ -301,7 +299,6 @@ void test_zeta_values (double max)
 		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
 	}
 
-#if TEST_NEGATIVE_S
 	printf ("\n\n");
 	for (s.re = 0.9; s.re >-max; s.re -= 0.1)
 	{
@@ -319,7 +316,6 @@ void test_zeta_values (double max)
 		
 		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
 	}
-#endif
 }
 
 /* ============================================================= */
@@ -381,8 +377,8 @@ main (int argc, char * argv[])
 	}
 	n = atoi (argv[1]);
 
-	test_zeta_values (n);
-	// test_bernoulli_poly (n);
+	// test_zeta_values (n);
+	test_bernoulli_poly (n);
 
 // #define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
