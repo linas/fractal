@@ -688,7 +688,7 @@ void cpx_pow_mpf (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
  * Basically, walk over the bits in n, and multiply by that
  * appropriate power-of-two power for the arg.
  */
-void cpx_pow_ui (cpx_t powc, const cpx_t q, unsigned int n, int prec)
+void cpx_pow_ui (cpx_t powc, const cpx_t q, unsigned int n)
 {
 	int k;
 	cpx_t qsq;

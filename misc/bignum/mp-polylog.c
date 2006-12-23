@@ -18,8 +18,7 @@
 
 #include "mp-binomial.h"
 #include "mp-complex.h"
-//#include "mp-bernoulli.h"
-//#include "mp-harmonic.h"
+#include "mp-trig.h"
 
 /* 
  * bee_k() 
@@ -63,23 +62,30 @@ static void bee_k (cpx_t bee, int n, int k, cpx_t oz)
 	cpx_clear (term);
 }
 
-#if 0
 /* polylog_est() -- Return polylog, Li_s(z) for estimator n.
  *
  * Appears to work well. Suggest n=31 for most cases,
  * should return answers accurate to 1e-16
  */
-static void polylog_est (cpx_t plog, cpx_t s, cpx_t z, int norder)
+static void polylog_est (cpx_t plog, cpx_t ess, cpx_t zee, int norder, int prec)
 {
-	cpx_t oz, moz, ska, pz, acc;
+	cpx_t s, z, oz, moz, ska, pz, acc, term, ck;
 	int k;
 
+	cpx_init (s);
+	cpx_init (z);
 	cpx_init (oz);
-	cpx_init (omz);
+	cpx_init (moz);
 	cpx_init (ska);
 	cpx_init (pz);
 	cpx_init (acc);
+	cpx_init (term);
+	cpx_init (ck);
 
+	/* s = -ess */
+	cpx_neg (s, ess);
+	cpx_set (z, zee);
+	
 	/* oz = 1/z   whereas moz = -1/z */
 	cpx_recip (oz, z);
 	cpx_neg (moz, oz);
@@ -89,49 +95,58 @@ static void polylog_est (cpx_t plog, cpx_t s, cpx_t z, int norder)
 	cpx_sub_ui (ska, ska, 1, 0);
 	cpx_recip (ska, ska);
 	cpx_mul (ska, ska, z);
-	cpx_
-	ska = cplex_pow (ska,n);
+	cpx_pow_ui (ska, ska, norder);
 	
-	cplex pz = z;
-	cplex acc = cplex_zero();
-	cplex cacc = cplex_zero();
+	cpx_set (pz, z);
+	cpx_set_ui (acc, 0, 0);
+	cpx_set_ui (plog, 0, 0);
 
-	for (k=1; k<=n; k++)
+	for (k=1; k<=norder; k++)
 	{
 		/* The inverse integer power */
-		cplex dir = cplex_scale (log(k), s);
-		dir = cplex_exp (cplex_neg(dir));
+		mpf_set_ui (term[0].re, k);
+		cpx_pow_mpf (term, term[0].re, s, prec);
 
 		/* Put it together */
-		cplex term = cplex_mult (pz, dir);
-		acc = cplex_add (acc, term);
+		cpx_mul (term, term, pz);
+		cpx_add (acc, acc, term);
 
-		pz = cplex_mult(pz, z);
+		cpx_mul(pz, pz, z);
 	}
 
-	for (k=n+1; k<=2*n; k++)
+	for (k=norder+1; k<=2*norder; k++)
 	{
 		/* The inverse integer power */
-		cplex dir = cplex_scale (log(k), s);
-		dir = cplex_exp (cplex_neg(dir));
+		mpf_set_ui (term[0].re, k);
+		cpx_pow_mpf (term, term[0].re, s, prec);
 
 		/* Put it together */
-		cplex term = cplex_mult (pz, dir);
-		acc = cplex_add (acc, term);
+		cpx_mul (term, term, pz);
+		cpx_add (acc, acc, term);
 
 		/* The coefficient c_k of the polynomial */
-		cplex ck = bee_k (n,k-n-1,moz);
-		term = cplex_mult (ck, term);
-		cacc = cplex_add (cacc, term);
+		bee_k (ck, norder, k-norder-1, moz);
+		cpx_mul (term, ck, term);
+		cpx_add (plog, plog, term);
 
-		pz = cplex_mult(pz, z);
+		cpx_mul(pz, pz, z);
 	}
 
-	cacc = cplex_mult (cacc, ska);
-	acc = cplex_sub (acc, cacc);
-
-	return acc;
+	cpx_mul (plog, plog, ska);
+	cpx_sub (plog, acc, plog);
+	
+	cpx_clear (s);
+	cpx_clear (z);
+	cpx_clear (oz);
+	cpx_clear (moz);
+	cpx_clear (ska);
+	cpx_clear (pz);
+	cpx_clear (acc);
+	cpx_clear (term);
+	cpx_clear (ck);
 }
+
+#if 0
 
 int nt = 31;
 

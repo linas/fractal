@@ -76,7 +76,7 @@ void cpx_pow_mpf (cpx_t powc, const mpf_t q, const cpx_t ess, int prec);
  * cpx_pow_ui-- return q^n for complex q, positive integer n.
  * Should be fairly speedy, as it uses a log(n) implementation
  */
-void cpx_pow_ui (cpx_t powc, const cpx_t q, unsigned int n, int prec);
+void cpx_pow_ui (cpx_t powc, const cpx_t q, unsigned int n);
 
 /**
  * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
