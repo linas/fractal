@@ -179,10 +179,38 @@ void fp_sqrt_two_pi (mpf_t sqtpi, unsigned int prec)
 		mpf_init (cached_sqtpi);
 	}
 
-	fp_pi (sqtpi, prec);
-	mpf_mul_ui (sqtpi, sqtpi, 2);
+	fp_two_pi (sqtpi, prec);
 	mpf_sqrt (sqtpi, sqtpi);
 	mpf_set (cached_sqtpi, sqtpi);
+	precision = prec;
+}
+
+/* ======================================================================= */
+/**
+ * fp_log_two_pi - return log(2pi) = log(2 * 3.14159...) 
+ * @prec - number of decimal places of precision
+ *
+ * The idea is that it caches the value to avoid recomputation
+ */
+void fp_log_two_pi (mpf_t ltp, unsigned int prec)
+{
+	static unsigned int precision=0;
+	static mpf_t cached_ltp;
+
+	if (precision >= prec)
+	{
+		mpf_set (ltp, cached_ltp);
+		return;
+	}
+
+	if (0 == precision)
+	{
+		mpf_init (cached_ltp);
+	}
+
+	fp_two_pi (ltp, prec);
+	fp_log (ltp, ltp, prec);
+	mpf_set (cached_ltp, ltp);
 	precision = prec;
 }
 
