@@ -224,6 +224,30 @@ void fp_gamma (mpf_t gam, const mpf_t z, int prec)
 	mpf_clear (rgamma);
 }
 
+void mpf_gamma_cache (mpf_t gam, const mpf_t z, int prec)
+{
+	static mpf_t cache_z, cache_gam;
+	static int init = 0;
+
+	if (!init)
+	{
+		init = 1;
+		mpf_init (cache_z);
+		mpf_init (cache_gam);
+	}
+
+	if (!mpf_eq (z, cache_z, prec*3.322))
+	{
+		mpf_set (cache_z, z);
+		fp_gamma (gam, z, prec);
+		mpf_set (cache_gam, gam);
+	}
+	else
+	{
+		mpf_set (gam, cache_gam);
+	}
+}
+
 /* ================================================= */
 /* 
  * gamma function, but valid only for -2 < ImZ < 2 
@@ -355,6 +379,30 @@ void cpx_gamma (cpx_t gam, const cpx_t z, int prec)
 	cpx_clear (term); 
 	cpx_clear (acc); 
 	mpf_clear (frac);
+}
+
+void cpx_gamma_cache (cpx_t gam, const cpx_t z, int prec)
+{
+	static cpx_t cache_z, cache_gam;
+	static int init = 0;
+
+	if (!init)
+	{
+		init = 1;
+		cpx_init (cache_z);
+		cpx_init (cache_gam);
+	}
+
+	if (!cpx_eq (z, cache_z, prec*3.322))
+	{
+		cpx_set (cache_z, z);
+		cpx_gamma (gam, z, prec);
+		cpx_set (cache_gam, gam);
+	}
+	else
+	{
+		cpx_set (gam, cache_gam);
+	}
 }
 
 /* ==================  END OF FILE ===================== */
