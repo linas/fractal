@@ -226,4 +226,12 @@ static inline void cpx_mod_sq (mpf_t mod, const cpx_t z)
 	mpf_clear (tmp);
 }
 
+/**
+ * Return true if the first nbits of both the imaginary and real parts are equal
+ */
+static inline int cpx_eq (const cpx_t a, const cpx_t b, unsigned int nbits)
+{
+	return (mpf_eq(a[0].re, b[0].re, nbits)) && (mpf_eq(a[0].im, b[0].im, nbits));
+}
+
 #endif /* __MP_COMPLEX_H__ */
