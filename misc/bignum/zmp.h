@@ -12,6 +12,7 @@ extern "C" {
 #include "mp-gamma.h"
 #include "mp-hyper.h"
 #include "mp-misc.h"
+#include "mp-polylog.h"
 #include "mp-trig.h"
 #include "mp-zeta.h"
 
