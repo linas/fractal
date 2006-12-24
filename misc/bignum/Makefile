@@ -4,7 +4,7 @@
 
 
 EXES= bound bs bsubn cache-fill cont_frac db-merge db-prt \
-      dsubn hurwitz minima mp_zeta_test picturez \
+      dsubn exact hurwitz minima mp_zeta_test picturez \
       sho stieltjes trunc zero-cross
 
 MPLIB=libzmp.a
@@ -20,6 +20,7 @@ db-merge:	db-merge.o $(MPLIB)
 db-prt:	db-prt.o $(MPLIB)
 cont_frac:	cont_frac.o
 dsubn:	dsubn.o $(MPLIB)
+exact:	exact.o $(MPLIB)
 hurwitz:	hurwitz.o $(MPLIB)
 mp_zeta_test:	mp_zeta_test.o $(MPLIB)
 picturez:	picturez.o $(MPLIB)
@@ -46,7 +47,8 @@ bsubn.o: mp-zeta.h mp-binomial.h
 cache-fill.o: db-cache.h mp-zeta.h mp-misc.h
 db-merge.o: db-cache.h mp-misc.h
 dsubn.o: mp-zeta.h mp-binomial.h mp-misc.h
-hurwitz.o: mp-complex.h
+exact.o: mp-complex.h mp-misc.h mp-polylog.h
+hurwitz.o: mp-complex.h mp-misc.h
 mp_zeta_test.o: mp-zeta.h mp-complex.h mp-consts.h mp-misc.h mp-trig.h
 sho.o: mp-complex.h mp-hyper.h mp-trig.h
 stieltjes.o: mp-zeta.h mp-binomial.h mp-misc.h
