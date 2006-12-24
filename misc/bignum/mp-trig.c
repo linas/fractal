@@ -86,7 +86,8 @@ void fp_inv_pow (mpf_t p, unsigned int n, unsigned int m)
  * precomputed constants.
  */
 
-static void fp_exp_helper (mpf_t ex, const mpf_t z, unsigned int prec)
+/* exp_helpter is not static, because its sneakily used by fp_e to return e */
+void fp_exp_helper (mpf_t ex, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, z_n, fact, term;
 
@@ -130,28 +131,58 @@ static void fp_exp_helper (mpf_t ex, const mpf_t z, unsigned int prec)
 	mpf_clear (maxterm);
 }
 
+/**
+ * fp_exp -- return exp(z) for real z
+ *
+ * Uses two-part algo for computing this:
+ * It computes z = n+x so that |x|<0.5
+ * Thus, e^z = e^n e^x
+ * e^n is quickly computed as an integer power.
+ * e^x is computed by classical taylor's series.
+ */
 void fp_exp (mpf_t ex, const mpf_t z, unsigned int prec)
 {
-	if (mpf_cmp_ui (z, 0) > 0)
+	mpf_t zee, zf;
+	mpf_init (zee);
+	mpf_init (zf);
+	
+	mpf_set (zee, z);
+	mpf_floor (zf, zee);
+	mpf_sub (zee, zee, zf);
+	long intpart = mpf_get_si (zf);
+
+	if (mpf_cmp_d (zee, 0.5) > 0)
 	{
-		fp_exp_helper (ex, z, prec);
+		mpf_sub_ui (zee, zee, 1);
+		intpart ++;
 	}
-	else
+	fp_exp_helper (ex, zee, prec);
+
+	/* If there's an integerpart, compute e^intpart */
+	if (intpart)
 	{
-		mpf_t zee;
-		mpf_init (zee);
-		mpf_neg (zee, z);
-		fp_exp_helper (ex, zee, prec);
-		mpf_ui_div (ex, 1, ex);
-		mpf_clear (zee);
+		fp_e (zee, prec);
+		if (0 < intpart)
+		{
+			mpf_pow_ui (zf, zee, intpart);
+			mpf_mul (ex, ex, zf);
+		}
+		else
+		{
+			mpf_pow_ui (zf, zee, -intpart);
+			mpf_div (ex, ex, zf);
+		}
 	}
+
+	mpf_clear (zee);
+	mpf_clear (zf);
 }
 
 /* ======================================================================= */
 /**
- * fp_sine -  Floating point sine function
+ * fp_sine_series -  Floating point sine function
  * Implemented using a brute-force, very simple algo: 
- * i.e. sum the series. No other adjustments made.
+ * i.e. sum the Taylor expansion. No other adjustments made.
  */
 
 static void fp_sine_series (mpf_t si, const mpf_t z, unsigned int prec)
@@ -213,6 +244,14 @@ static void fp_sine_series (mpf_t si, const mpf_t z, unsigned int prec)
 	mpf_clear (maxterm);
 }
 
+/**
+ * fp_sine -  Floating point sine function
+ *
+ * Adds or subtracts multiples of pi-halves until the argument
+ * is in the first or fourth quadrant, and then performs the
+ * brute-force taylor summation on it. 
+ */
+
 void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, pih, per;
@@ -255,12 +294,6 @@ void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 }
 
 /* ======================================================================= */
-/**
- * fp_cosine_series -  Floating point cosine function
- * Implemented using a brute-force, very simple algo, with 
- * no attempts at optimization. Also, does not assume any 
- * precomputed constants.
- */
 #if OBSOLETE_FOR_REFERENCE_ONLY
 /* The cosine_series code below works great, except that it has poorer
  * convergence for large z values. Thus, its re-implemented in terms 
@@ -330,6 +363,10 @@ static void fp_cosine_series (mpf_t co, const mpf_t z, unsigned int prec)
 }
 #endif /* OBSOLETE_FOR_REFERENCE_ONLY */
 
+/**
+ * fp_cosine -  Floating point cosine function
+ * Implemented on top of the sine function, just to keep things simple, stupid.
+ */
 void fp_cosine (mpf_t si, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee, pih;
