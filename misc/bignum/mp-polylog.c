@@ -152,7 +152,7 @@ static void polylog_est (cpx_t plog, cpx_t ess, cpx_t zee, int norder, int prec)
 int nt = 91;
 
 /**
- * periodic_zeta -- Periodic zeta function 
+ * cpx_periodic_zeta -- Periodic zeta function 
  *
  * F(s,q) = sum_{n=1}^infty exp(2pi iqn)/ n^s
  *        = Li_s (exp(2pi iq))
@@ -292,6 +292,7 @@ void cpx_periodic_beta (cpx_t zee, cpx_t ess, mpf_t que, int prec)
 	cpx_set (s, ess);
 	cpx_periodic_zeta (zee, s, que, prec);
 
+	/* times (2pi)^{-s} */
 	cpx_neg (s, s);
 	cpx_pow_mpf (tps, twopi, s, prec); 
 	cpx_mul (zee, zee, tps);
@@ -308,48 +309,59 @@ void cpx_periodic_beta (cpx_t zee, cpx_t ess, mpf_t que, int prec)
 	mpf_clear (twopi);
 }
 
-#if 0
 /* ============================================================= */
 /**
- * hurwitz_zeta -- Hurwitz zeta function
+ * cpx_hurwitz_zeta -- Hurwitz zeta function
  *
  * Built up from the periodic beta
- * Borken at the mopment
- *
  */
-cplex hurwitz_zeta (cplex ess, double q)
+void cpx_hurwitz_zeta (cpx_t zee, cpx_t ess, mpf_t que, int prec)
 {
-	static double log_two_pi = 0.0;
-	if (0.0 == log_two_pi) log_two_pi = -log (2.0*M_PI);
-
-	cplex s = cplex_neg (ess);
-	s.re += 1.0;
-
-	cplex zl = periodic_zeta (s, q);
-	cplex zh = periodic_zeta (s, 1.0-q);
-
-	cplex piss = cplex_scale (0.5*M_PI, s);
-	piss = cplex_times_i(piss);
-	piss = cplex_exp (piss);
-
-	zh = cplex_mult (zh, piss);
-	zl = cplex_div (zl, piss);
-
-	cplex z = cplex_add (zl, zh);
+	mpf_t t;
+	mpf_init (t);
 	
-	cplex tps = cplex_scale (log_two_pi, s);
+	cpx_t s, tps, zm, piss;
+	cpx_init (s);
+	cpx_init (tps);
+	cpx_init (zm);
+	cpx_init (piss);
 
-	gsl_sf_result lnr, arg;
-	gsl_sf_lngamma_complex_e(s.re, s.im, &lnr, &arg);
+	/* s = 1-ess */
+	cpx_neg (s, ess);
+	cpx_add_ui (s, s, 1, 0);
 
-	tps.re += lnr.val;
-	tps.im += arg.val;
+	/* F(s,q) and F(s, 1-q) */
+	cpx_periodic_zeta (zee, s, que, prec);
+	mpf_ui_sub (t, 1, que);
+	cpx_periodic_zeta (zm, s, t, prec);
+
+	/* exp (i pi s/2) */
+	fp_pi_half (t, prec);
+	cpx_mul_mpf (piss, s, t);
+	cpx_times_i (piss, piss);
+	cpx_exp (piss, piss, prec);
+
+	/* assemble the thing */
+	cpx_mul (zm, zm, piss);
+	cpx_div (zee, zee, piss);
+	cpx_add (zee, zee, zm);
 	
-	tps = cplex_exp (tps);
+	/* times gamma(s) */
+	cpx_gamma (tps, s, prec);
+	cpx_mul (zee, zee, tps);
+	cpx_mul_ui (zee, zee, 2);
+	
+	/* times (2pi)^{-s} */
+	fp_two_pi (t, prec);
+	cpx_neg (s, s);
+	cpx_pow_mpf (tps, t, s, prec); 
+	cpx_mul (zee, zee, tps);
 
-	z = cplex_mult (z, tps);
-
-	return z;
+	cpx_clear (s);
+	cpx_clear (tps);
+	cpx_clear (zm);
+	cpx_clear (piss);
+	mpf_clear (t);
 }
 
 /* ============================================================= */
@@ -360,8 +372,9 @@ cplex hurwitz_zeta (cplex ess, double q)
  * The Bernoulli polynomials have a fourier transform that is the 
  * periodic zeta function. 
  *
- * Test is now passijng with flying colors
+ * Test is now passing with flying colors
  */
+#if 0
 int test_bernoulli_poly (int n)
 {
 	cplex zl, zh;
@@ -451,17 +464,5 @@ main (int argc, char * argv[])
 	}
 #endif
 
-#if 1
-	cplex s;
-	s.re = en;
-	s.im = 0.5;
-
-	double q;
-	for (q=0.02; q<1.0; q+=0.04)
-	{
-		cplex hz = hurwitz_zeta (s, q);
-		printf ("%7.3g	%15.10g	%15.10g\n", q, hz.re, hz.im);
-	}
-#endif
 }
 #endif

@@ -29,3 +29,12 @@ void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec);
  * beta = 2 Gamma(s+1) (2\pi)^{-s} F(s,q)
  */
 void cpx_periodic_beta (cpx_t zee, cpx_t ess, mpf_t que, int prec);
+
+/**
+ * cpx_hurwitz_zeta -- Hurwitz zeta function
+ * Returns zeta = sum_{n=0}^infty 1/(n+q)^s
+ * Accepts complex s, real-valued q.
+ *
+ * Built up from the fast polylogarithm algo
+ */
+void cpx_hurwitz_zeta (cpx_t hzeta, cpx_t ess, mpf_t que, int prec);
