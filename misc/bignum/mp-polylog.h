@@ -37,6 +37,9 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec);
  * Similar to periodic zeta, but with different normalization
  *
  * beta = 2 Gamma(s+1) (2\pi)^{-s} F(s,q)
+ *
+ * Caches intermediate terms, and so performance is much better 
+ * if s is held const, while q is varied.
  */
 void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec);
 
@@ -46,5 +49,7 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec);
  * Accepts complex s, real-valued q.
  *
  * Built up from the fast polylogarithm algo
+ * Caches intermediate terms, and so performance is much better 
+ * if s is held const, while q is varied.
  */
 void cpx_hurwitz_zeta (cpx_t hzeta, const cpx_t ess, const mpf_t que, int prec);

@@ -283,86 +283,123 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
  */
 void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 {
-	mpf_t twopi;
-	mpf_init (twopi);
-	fp_two_pi (twopi, prec);
-	
-	cpx_t s, tps;
-	cpx_init (s);
-	cpx_init (tps);
+	static cpx_t cache_s, scale;
+	static int init = 0;
 
-	cpx_set (s, ess);
-	cpx_periodic_zeta (zee, s, que, prec);
+	if (!init)
+	{
+		init = 1;
+		cpx_init (cache_s);
+		cpx_init (scale);
+	}
 
-	/* times (2pi)^{-s} */
-	cpx_neg (s, s);
-	cpx_mpf_pow (tps, twopi, s, prec); 
-	cpx_mul (zee, zee, tps);
-	cpx_neg (s, s);
+	if (!cpx_eq (ess, cache_s, prec*3.322))
+	{
+		cpx_set (cache_s, ess);
 
-	/* times gamma(s+1) */
-	cpx_add_ui (s, s, 1,0);
-	cpx_gamma (tps, s, prec);
-	cpx_mul (zee, zee, tps);
-	cpx_mul_ui (zee, zee, 2);
-	
-	cpx_clear (s);
-	cpx_clear (tps);
-	mpf_clear (twopi);
+		mpf_t two_pi;
+		mpf_init (two_pi);
+
+		cpx_t s, tps;
+		cpx_init (s);
+		cpx_init (tps);
+
+		/* 2 gamma(s+1)/ (2pi)^s */
+		cpx_add_ui (s, ess, 1,0);
+		cpx_gamma (scale, s, prec);
+
+		/* times (2pi)^{-s} */
+		fp_two_pi (two_pi, prec);
+		cpx_neg (s, ess);
+		cpx_mpf_pow (tps, two_pi, s, prec); 
+		cpx_mul (scale, scale, tps);
+
+		/* times two */
+		cpx_mul_ui (scale, scale, 2);
+		cpx_clear (tps);
+		cpx_clear (s);
+		mpf_clear (two_pi);
+	}
+
+	cpx_periodic_zeta (zee, ess, que, prec);
+	cpx_mul (zee, zee, scale);
 }
 
 /* ============================================================= */
 /**
  * cpx_hurwitz_zeta -- Hurwitz zeta function
  *
- * Built up from the periodic beta
+ * Built up from the periodic zeta. Caches intermediate terms, and so
+ * performance is much better if s is held const, while q is varied.
  */
+
 void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 {
+	static cpx_t cache_s, piss, niss, scale;
+	static int init = 0;
+
+	if (!init)
+	{
+		init = 1;
+		cpx_init (cache_s);
+		cpx_init (piss);
+		cpx_init (niss);
+		cpx_init (scale);
+	}
+
 	mpf_t t;
 	mpf_init (t);
-	
-	cpx_t s, tps, zm, piss;
+
+	cpx_t s, zm;
 	cpx_init (s);
-	cpx_init (tps);
 	cpx_init (zm);
-	cpx_init (piss);
 
 	/* s = 1-ess */
 	cpx_neg (s, ess);
 	cpx_add_ui (s, s, 1, 0);
 
+	if (!cpx_eq (s, cache_s, prec*3.322))
+	{
+		cpx_set (cache_s, s);
+
+		cpx_t tps;
+		cpx_init (tps);
+
+		/* exp (i pi s/2) */
+		fp_pi_half (t, prec);
+		cpx_mul_mpf (piss, s, t);
+		cpx_times_i (piss, piss);
+		cpx_exp (piss, piss, prec);
+		cpx_recip (niss, piss);
+
+		/* 2 gamma(s)/ (2pi)^s */
+		cpx_gamma (scale, s, prec);
+
+		/* times (2pi)^{-s} */
+		fp_two_pi (t, prec);
+		cpx_neg (s, s);
+		cpx_mpf_pow (tps, t, s, prec); 
+		cpx_neg (s, s);
+		cpx_mul (scale, scale, tps);
+
+		/* times two */
+		cpx_mul_ui (scale, scale, 2);
+		cpx_clear (tps);
+	}
+	
 	/* F(s,q) and F(s, 1-q) */
 	cpx_periodic_zeta (zee, s, que, prec);
 	mpf_ui_sub (t, 1, que);
 	cpx_periodic_zeta (zm, s, t, prec);
 
-	/* exp (i pi s/2) */
-	fp_pi_half (t, prec);
-	cpx_mul_mpf (piss, s, t);
-	cpx_times_i (piss, piss);
-	cpx_exp (piss, piss, prec);
-
 	/* assemble the thing */
 	cpx_mul (zm, zm, piss);
-	cpx_div (zee, zee, piss);
+	cpx_mul (zee, zee, niss);
 	cpx_add (zee, zee, zm);
-	
-	/* times gamma(s) */
-	cpx_gamma (tps, s, prec);
-	cpx_mul (zee, zee, tps);
-	cpx_mul_ui (zee, zee, 2);
-	
-	/* times (2pi)^{-s} */
-	fp_two_pi (t, prec);
-	cpx_neg (s, s);
-	cpx_mpf_pow (tps, t, s, prec); 
-	cpx_mul (zee, zee, tps);
+	cpx_mul (zee, zee, scale);
 
 	cpx_clear (s);
-	cpx_clear (tps);
 	cpx_clear (zm);
-	cpx_clear (piss);
 	mpf_clear (t);
 }
 
