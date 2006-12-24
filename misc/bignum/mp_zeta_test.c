@@ -21,6 +21,7 @@
 #include "mp-gamma.h"
 #include "mp-hyper.h"
 #include "mp-misc.h"
+#include "mp-polylog.h"
 #include "mp-trig.h"
 #include "mp-zeta.h"
 
@@ -944,14 +945,24 @@ int test_periodic_zeta (int nterms, int prec)
 {
 	int nfaults = 0;
 
-	mpf_t q;
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, prec-5);
+
+	mpf_t q,l2;
 	mpf_init (q);
+	mpf_init (l2);
+
 	mpf_set_ui (q, 1);
 	mpf_div_ui (q, q, 2);
 
-	cpx_t s, zl, sm, ts;
+	fp_log2 (l2, prec);
+
+	cpx_t s, zl, zb, sm, ts;
 	cpx_init (s);
 	cpx_init (zl);
+	cpx_init (zb);
 	cpx_init (sm);
 	cpx_init (ts);
 
@@ -970,32 +981,34 @@ int test_periodic_zeta (int nterms, int prec)
 		cpx_add_ui (sm, sm, 1, 0);
 
 		/* ts = 2^{1-s} */
-		fp_log2 (ts, prec);
-		cpx_mul_mpf (sm, sm, ts);
+		cpx_mul_mpf (sm, sm, l2);
 		cpx_exp (ts, sm, prec);
 		
-
 		/* ts = -(1-2^(1-s)) */
 		cpx_neg (ts, ts);
 		cpx_add_ui (ts, ts, 1,0);
-		cplex_neg (ts, ts);
+		cpx_neg (ts, ts);
+		cpx_div (zl, zl, ts);
 		
-		zl = cpx_div (zl, zl, ts);
+		fp_borwein_zeta_c (zb, s, prec);
+
+		cpx_sub (zl, zl, zb);
 		
-		double zeta = gsl_sf_zeta (s.re);
-		
-		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
+		nfaults = cpx_check_for_zero (nfaults, zl, epsi, "periodic zeta", 0, sre, 0);
 	}
 	
 	mpf_clear (q);
+	mpf_clear (l2);
 	cpx_clear (s);
 	cpx_clear (zl);
+	cpx_clear (zb);
 	cpx_clear (sm);
 	cpx_clear (ts);
+	mpf_clear (epsi);
 
 	if (0 == nfaults)
 	{
-		fprintf(stderr, "Complex pow test passed!\n");
+		fprintf(stderr, "Periodic zeta test passed!\n");
 	}
 	return nfaults;
 }
@@ -1403,6 +1416,7 @@ int main (int argc, char * argv[])
 	int nfaults = 0;
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
+nfaults += test_periodic_zeta (nterms, prec);
 	nfaults += test_complex_pow (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
 	nfaults += test_complex_gamma (nterms, prec);
