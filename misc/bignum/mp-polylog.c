@@ -19,6 +19,7 @@
 #include "mp-binomial.h"
 #include "mp-complex.h"
 #include "mp-consts.h"
+#include "mp-gamma.h"
 #include "mp-polylog.h"
 #include "mp-trig.h"
 
@@ -148,7 +149,7 @@ static void polylog_est (cpx_t plog, cpx_t ess, cpx_t zee, int norder, int prec)
 	cpx_clear (ck);
 }
 
-int nt = 41;
+int nt = 91;
 
 /**
  * periodic_zeta -- Periodic zeta function 
@@ -268,9 +269,9 @@ void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
 
 /* ============================================================= */
 /**
- * periodic_beta -- Periodic beta function 
+ * cpx_periodic_beta -- Periodic beta function 
  *
- * similar to periodic zeta, but with different normalization
+ * Similar to periodic zeta, but with different normalization
  *
  * beta = 2 Gamma(s+1) (2\pi)^{-s} F(s,q)
  *
@@ -278,32 +279,36 @@ void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
  * that is, it gives the Bernoulli polynomials for integer s,
  * with all the right scale factors and signs, etc. Yay!
  */
-#if 0
-cplex periodic_beta (cplex s, double q)
+void cpx_periodic_beta (cpx_t zee, cpx_t ess, mpf_t que, int prec)
 {
-	static double log_two_pi = 0.0;
-	if (0.0 == log_two_pi) log_two_pi = -log (2.0*M_PI);
+	mpf_t twopi;
+	mpf_init (twopi);
+	fp_two_pi (twopi, prec);
 	
-	cplex z, tps;
+	cpx_t s, tps;
+	cpx_init (s);
+	cpx_init (tps);
 
-	z = periodic_zeta (s,q);
+	cpx_set (s, ess);
+	cpx_periodic_zeta (zee, s, que, prec);
 
-	tps = cplex_scale (log_two_pi, s);
+	cpx_neg (s, s);
+	cpx_pow_mpf (tps, twopi, s, prec); 
+	cpx_mul (zee, zee, tps);
+	cpx_neg (s, s);
 
-	gsl_sf_result lnr, arg;
-	gsl_sf_lngamma_complex_e(s.re+1.0, s.im, &lnr, &arg);
-
-	tps.re += lnr.val;
-	tps.im += arg.val;
+	/* times gamma(s+1) */
+	cpx_add_ui (s, s, 1,0);
+	cpx_gamma (tps, s, prec);
+	cpx_mul (zee, zee, tps);
+	cpx_mul_ui (zee, zee, 2);
 	
-	tps = cplex_exp (tps);
-
-	z = cplex_mult (z, tps);
-	z = cplex_scale (2.0, z);
-	
-	return z;
+	cpx_clear (s);
+	cpx_clear (tps);
+	mpf_clear (twopi);
 }
 
+#if 0
 /* ============================================================= */
 /**
  * hurwitz_zeta -- Hurwitz zeta function
