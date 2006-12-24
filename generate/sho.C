@@ -1,5 +1,5 @@
 /*
- * sho.c
+ * sho.C
  *
  * High-precison Simple Harmonic Oscillator, using the 
  * Gnu Multiple-precision library.
