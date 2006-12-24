@@ -3,6 +3,7 @@
  *
  * High-precison constants, using the 
  * Gnu Multiple-precision library.
+ * Uses caching so as to speed up subsequent derefs.
  *
  * Linas Vepstas July 2005
  */
@@ -34,6 +35,14 @@ void fp_sqrt_two_pi (mpf_t sqtpi, unsigned int prec);
  * Uses simple, low-brow formula
  */
 void fp_e_pi (mpf_t e_pi, unsigned int prec);
+
+/**
+ * fp_log2 - return log(2)=0.693147181...
+ * @prec - number of decimal places of precision
+ *
+ * Uses simple, brute-force summation
+ */
+void fp_log2 (mpf_t l2, unsigned int prec);
 
 /**
  * fp_euler - return Euler-Mascheroni const

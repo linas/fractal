@@ -159,6 +159,40 @@ void fp_sqrt_two_pi (mpf_t sqtpi, unsigned int prec)
 
 /* ======================================================================= */
 /**
+ * fp_log2 - return log(2)=0.69...
+ * @prec - number of decimal places of precision
+ *
+ * Uses simple, brute-force summation
+ */
+
+void fp_log2 (mpf_t l2, unsigned int prec)
+{
+	static unsigned int precision=0;
+	static mpf_t cached_log2;
+
+	if (precision >= prec)
+	{
+		mpf_set (l2, cached_log2);
+		return;
+	}
+
+	if (0 == precision)
+	{
+		mpf_init (cached_log2);
+	}
+
+	mpf_t two;
+	mpf_init (two);
+	mpf_set_ui (two, 2);
+	fp_log (cached_log2, two, prec);
+	mpf_set (l2, cached_log2);
+
+	mpf_clear (two);
+	precision = prec;
+}
+
+/* ======================================================================= */
+/**
  * fp_e_pi - return e^pi 
  * @prec - number of decimal places of precision
  *
