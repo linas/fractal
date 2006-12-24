@@ -345,7 +345,7 @@ void cpx_gamma (cpx_t gam, const cpx_t z, int prec)
 
 	/* m^(mz-0.5) */
 	mpf_set_ui (frac, m);
-	cpx_pow_mpf (term, frac, mzee, prec);
+	cpx_mpf_pow (term, frac, mzee, prec);
 	cpx_mul (acc, acc, term);
 
 	cpx_set (gam, acc);

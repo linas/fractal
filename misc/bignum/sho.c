@@ -121,7 +121,7 @@ void eta_1 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
 	/* power of two term */
 	mpf_set_ui (tmp, 1);
 	mpf_div_ui (tmp, tmp, 2);
-	cpx_pow_mpf (pha, tmp, l2, prec);
+	cpx_mpf_pow (pha, tmp, l2, prec);
 	cpx_mul (eta, eta, pha);
 	
 	/* Gamma (3/4+lambda/2) */
@@ -171,7 +171,7 @@ void eta_2 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
 	/* power of two term */
 	mpf_set_ui (tmp, 1);
 	mpf_div_ui (tmp, tmp, 2);
-	cpx_pow_mpf (pha, tmp, l2, prec);
+	cpx_mpf_pow (pha, tmp, l2, prec);
 	cpx_mul (eta, eta, pha);
 	cpx_mul_ui (eta, eta, 2);
 	

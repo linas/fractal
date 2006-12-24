@@ -68,13 +68,13 @@ void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec);
 void cpx_sqrt (cpx_t sqrt, const cpx_t zee, int prec);
 
 /**
- * cpx_pow_mpf-- return q^s for complex s, real, positive q.
+ * cpx_mpf_pow-- return q^s for complex s, real, positive q.
  *
  * Brute-force algo, this thing is pretty slow, as it requires
  * a logarithm, an exp, sin and cos to be computed, each of which
  * are kinda slow ...
  */
-void cpx_pow_mpf (cpx_t powc, const mpf_t q, const cpx_t ess, int prec);
+void cpx_mpf_pow (cpx_t powc, const mpf_t q, const cpx_t ess, int prec);
 
 /**
  * cpx_pow_ui-- return q^n for complex q, positive integer n.

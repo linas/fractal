@@ -586,7 +586,7 @@ int test_complex_pow (int nterms, int prec)
 		for (; que<rfmax; que += rfmax / nterms)
 		{
 			mpf_set_d (q, que);
-			cpx_pow_mpf (pn, q, z, prec);
+			cpx_mpf_pow (pn, q, z, prec);
 
 			gsl_complex cq, ce, cp;
 			GSL_SET_COMPLEX (&cq, que, 0.0);
@@ -871,8 +871,7 @@ int test_complex_gamma (int nterms, int prec)
 		cpx_div_mpf (gam, gam, tmp);
 		
 		/* times 4^z */
-		mpf_set_ui (tmp, 4);
-		cpx_pow_mpf (rgam, tmp, za, prec);
+		cpx_ui_pow (rgam, 4, za, prec);
 		cpx_mul (gam, gam, rgam);
 
 		/* this should be one */

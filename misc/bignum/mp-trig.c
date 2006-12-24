@@ -704,13 +704,13 @@ void cpx_sqrt (cpx_t rt, const cpx_t z, int prec)
 
 /* ======================================================================= */
 /*
- * cpx_pow_mpf-- return q^s for complex s, real q.
+ * cpx_mpf_pow-- return q^s for complex s, real q.
  *
  * Brute-force algo, this thing is pretty slow, as it requires
  * a logarithm, an exp, sin and cos to be computed, each of which
  * are kinda slow ... 
  */
-void cpx_pow_mpf (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
+void cpx_mpf_pow (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
 {
 	mpf_t logkq, mag, pha;
 	mpf_init (logkq);
@@ -896,7 +896,7 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 	mpf_t kq;
 	mpf_init (kq);
 	mpf_add_ui (kq, q, k);
-	cpx_pow_mpf (powc, kq, ess, prec);
+	cpx_mpf_pow (powc, kq, ess, prec);
 	mpf_clear (kq);
 
 	fp_one_d_cache_check (&im_powc, k);

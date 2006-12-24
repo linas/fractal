@@ -296,7 +296,7 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 
 	/* times (2pi)^{-s} */
 	cpx_neg (s, s);
-	cpx_pow_mpf (tps, twopi, s, prec); 
+	cpx_mpf_pow (tps, twopi, s, prec); 
 	cpx_mul (zee, zee, tps);
 	cpx_neg (s, s);
 
@@ -356,7 +356,7 @@ void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 	/* times (2pi)^{-s} */
 	fp_two_pi (t, prec);
 	cpx_neg (s, s);
-	cpx_pow_mpf (tps, t, s, prec); 
+	cpx_mpf_pow (tps, t, s, prec); 
 	cpx_mul (zee, zee, tps);
 
 	cpx_clear (s);
