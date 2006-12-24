@@ -190,6 +190,7 @@ void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
 		cpx_init (ts);
 		cpx_init (bt);
 
+		/* sm = 1-s */
 		cpx_neg (sm, s);
 		cpx_add_ui (sm, sm, 1, 0);
 
@@ -220,6 +221,7 @@ void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
 		cpx_init (ts);
 		cpx_init (bt);
 
+		/* sm = 1-s */
 		cpx_neg (sm, s);
 		cpx_add_ui (sm, sm, 1, 0);
 
@@ -263,7 +265,6 @@ void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
 	cpx_clear (sm);
 }
 
-#if 0
 /* ============================================================= */
 /**
  * periodic_beta -- Periodic beta function 
@@ -276,6 +277,7 @@ void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
  * that is, it gives the Bernoulli polynomials for integer s,
  * with all the right scale factors and signs, etc. Yay!
  */
+#if 0
 cplex periodic_beta (cplex s, double q)
 {
 	static double log_two_pi = 0.0;
@@ -343,11 +345,12 @@ cplex hurwitz_zeta (cplex ess, double q)
 
 	return z;
 }
+#endif
 
 /* ============================================================= */
 
 /** 
- * test_zeta_values() -- compare periodic zeta to reiman zeta
+ * test_zeta_values() -- compare periodic zeta to rieman zeta
  * 
  * As of 22 December 2006, this test is passing, with flying colors
  * Explores value of hurwitz zeta on s=real line, for 
@@ -355,39 +358,61 @@ cplex hurwitz_zeta (cplex ess, double q)
  * Passes, very nicely and cleanly, (i.e. error of order 1e-16)
  * although starts to get rough for the large negative s.
  */
-void test_zeta_values (double max)
+int test_zeta_values (int nterms, int prec)
 {
-	cplex zl, zh;
+	int nfaults = 0;
 
-	cplex s;
-	s.im = 0.0;
-	for (s.re = -2; s.re < max; s.re += 0.1)
+	mpf_t q;
+	mpf_init (q);
+	mpf_set_ui (q, 1);
+	mpf_div_ui (q, q, 2);
+
+	cpx_t s, zl, sm, ts;
+	cpx_init (s);
+	cpx_init (zl);
+	cpx_init (sm);
+	cpx_init (ts);
+
+	cpx_set_ui (s, 0, 0);
+
+	double sre;
+	for (sre = -12.01396826; sre < 12.7577232; sre += 23.1835567/nterms)
 	{
-		if (1 == s.re) continue;
+		if (1 == sre) continue;
 
-		zl = periodic_zeta (s, 0.5);
+		cpx_set_d (s, sre, 0.0);
+		cpx_periodic_zeta (zl, s, q, prec);
 		
 		/* sm = 1-s */
-		cplex sm = cplex_neg(s);
-		sm.re += 1.0;
+		cpx_neg (sm, s);
+		cpx_add_ui (sm, sm, 1, 0);
 
-		/* ts = 2^(1-s) */
-		cplex ts = cplex_exp(cplex_scale (log(2), sm));
+		/* ts = 2^{1-s} */
+		fp_log2 (ts, prec);
+		cpx_mul_mpf (sm, sm, ts);
+		cpx_exp (ts, sm, prec);
 		
-		/* ots = -1/(1-2^(1-s)) */
-		cplex ots = cplex_neg(ts);
-		ots.re += 1.0;
-		ots = cplex_recip(ots);
-		ots = cplex_neg (ots);
+
+		/* ts = -(1-2^(1-s)) */
+		cpx_neg (ts, ts);
+		cpx_add_ui (ts, ts, 1,0);
+		cplex_neg (ts, ts);
 		
-		zl = cplex_mult (zl, ots);
+		zl = cpx_div (zl, zl, ts);
 		
 		double zeta = gsl_sf_zeta (s.re);
 		
 		printf ("s=%5.3g	algo=%12.10g	exact=%12.10g	diff=%6.3g\n", s.re, zl.re, zeta, zl.re-zeta);
 	}
+	
+	mpf_clear (q);
+	cpx_clear (s);
+	cpx_clear (zl);
+	cpx_clear (sm);
+	cpx_clear (ts);
 }
 
+#if 0
 /* ============================================================= */
 
 /** 
