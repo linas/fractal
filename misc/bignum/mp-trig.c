@@ -782,6 +782,81 @@ void cpx_pow_ui (cpx_t powc, const cpx_t q, unsigned int n)
 
 /* ======================================================================= */
 /**
+ * cpx_ui_pow -- return k^s for complex s, integer k.
+ *
+ * Uses a brute-force algo: it requires a logarithm, an exp, sin 
+ * and cos to be computed, each of which are kinda slow ... 
+ */
+void cpx_ui_pow (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
+{
+	mpf_t logkq, mag, pha;
+	mpf_init (logkq);
+	mpf_init (mag);
+	mpf_init (pha);
+
+	fp_log_ui (logkq, k, prec);
+	
+	/* magnitude is exp(re(s) * log(kq)) */
+	mpf_mul (mag, ess->re, logkq);
+	
+	fp_exp (mag, mag, prec);
+
+	/* phase is im(s) * log(kq)) */
+	mpf_mul (pha, ess->im, logkq);
+
+	fp_cosine (powc->re, pha, prec);
+	mpf_mul (powc->re, mag, powc->re);
+	
+	fp_sine (powc->im, pha, prec);
+	mpf_mul (powc->im, mag, powc->im);
+	
+	mpf_clear(logkq);
+	mpf_clear(mag);
+	mpf_clear(pha);
+}
+
+/**
+ * cpx_ui_pow_cache -- return k^s for complex s, integer k.
+ *
+ * If s is held fixed, and k varied, then the values are cached,
+ * allowing improved algorithm speeds.
+ */
+void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
+{
+	DECLARE_FP_CACHE (re_powc);
+	DECLARE_FP_CACHE (im_powc);
+	static cpx_t cache_s;
+	static int init = 0;
+
+	if (!init)
+	{
+		init = 1;
+		cpx_init (cache_s);
+	}
+
+	if (!cpx_eq (ess, cache_s, prec*3.322))
+	{
+		fp_one_d_cache_clear (&re_powc);
+		fp_one_d_cache_clear (&im_powc);
+		cpx_set (cache_s, ess);
+	}
+
+	if (prec <= fp_one_d_cache_check (&re_powc, k))
+	{
+		fp_one_d_cache_fetch (&re_powc, powc->re, k);
+		fp_one_d_cache_fetch (&im_powc, powc->im, k);
+		return;
+	}
+	
+	cpx_ui_pow (powc, k, ess, prec);
+
+	fp_one_d_cache_check (&im_powc, k);
+	fp_one_d_cache_store (&re_powc, powc[0].re, k, prec);
+	fp_one_d_cache_store (&im_powc, powc[0].im, k, prec);
+}
+
+/* ======================================================================= */
+/**
  * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
  *
  * If q is held fixed, and k varied, then the values are cached,

@@ -83,6 +83,23 @@ void cpx_pow_mpf (cpx_t powc, const mpf_t q, const cpx_t ess, int prec);
 void cpx_pow_ui (cpx_t powc, const cpx_t q, unsigned int n);
 
 /**
+ * cpx_ui_pow -- return k^s for complex s, integer k.
+ *
+ * Uses a brute-force algo: it requires a logarithm, an exp, sin 
+ * and cos to be computed, each of which are kinda slow ... 
+ */
+void cpx_ui_pow (cpx_t powc, unsigned int k, const cpx_t ess, int prec);
+
+/**
+ * cpx_ui_pow_cache -- return k^s for complex s, integer k.
+ *
+ * If s is held fixed, and k varied, then the values are cached,
+ * allowing improved algorithm speeds. If is is changed from call
+ * to call, then the cache is cleared.
+ */
+void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec);
+
+/**
  * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
  *
  * If q is held fixed, and k varied, then the values are cached,
