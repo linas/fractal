@@ -9,19 +9,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "mp-complex.h"
 #include "mp-misc.h"
 #include "mp-polylog.h"
 
 int
-main ()
+main (int argc, char * argv[])
 {
-	int prec = 40;
+	int prec = 90;
 	double q;
 
 	/* Set the precision (number of binary bits) */
 	int nbits = 3.3*prec+100;
 	mpf_set_default_prec (nbits);
 
+	double sim = atof (argv[1]);
+	
 	cpx_t ess, zeta;
 	cpx_init (ess);
 	cpx_init (zeta);
@@ -29,7 +32,9 @@ main ()
 	mpf_t que;
 	mpf_init (que);
 			  
-	cpx_set_d (ess, 0.5, 14.1);
+	cpx_set_d (ess, 0.5, sim);
+
+#if 0
 	char * zero;
 	zero = "14.134725141734693790457251983562470270784257115699243175685567460149 \
 	        9634298092567649490103931715610127792029715487974367661426914698822545 \
@@ -43,15 +48,16 @@ main ()
 	        0920984416442778402382245580624407504710461490557783782998515227308011 \
 	        8813393358267168958722516981043873551292849372719199462297591267547869";
 
-	zero = "10.0";
+	zero = "50.0";
 	mpf_set_str (ess[0].im, zero, 10);
+#endif
 
-	// printf ("#\n# graph of Hurwitz zeta as function of q, at the Riemann zero\n#\n");
-	printf ("#\n# graph of periodic zeta as function of q, at the Riemann zero\n#\n");
+	// printf ("#\n# graph of Hurwitz zeta as function of q, at \n#\n");
+	printf ("#\n# graph of periodic zeta as function of q, at \n#\n");
 	fp_prt ("# at s=0.5+i ", ess[0].im);
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
-	for (q=0.01; q<1.0; q+=0.01)
+	for (q=0.02; q<0.991; q+=0.002)
 	{
 		mpf_set_d (que, q);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
