@@ -25,6 +25,7 @@ void fp_e (mpf_t e, unsigned int prec);
  * Uses simple, brute-force Machin formula
  */
 void fp_pi (mpf_t pi, unsigned int prec);
+void fp_two_pi (mpf_t pi, unsigned int prec);
 void fp_pi_half (mpf_t pihalf, unsigned int prec);
 void fp_sqrt_two_pi (mpf_t sqtpi, unsigned int prec);
 
