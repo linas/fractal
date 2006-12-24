@@ -457,12 +457,12 @@ static inline int cpx_check_for_zero (int nfaults, cpx_t zer, mpf_t epsi, char *
 }
 
 /* val should equal fval to within double-prescision */
-static inline int check_for_equality (int nfaults, mpf_t val, double fval, char * str, double x)
+static inline int check_for_equality (int nfaults, mpf_t val, double fval, double epsi, char * str, double x)
 {
 	double y = mpf_get_d (val);
 		
 	double diff = fabs(y/fval-1.0);
-	if (2.0e-14 < diff)
+	if (epsi < diff)
 	{
 		nfaults ++;
 		fprintf (stderr, "Error: %s faulty: "
@@ -592,8 +592,8 @@ int test_complex_pow (int nterms, int prec)
 			GSL_SET_COMPLEX (&ce, rfz, ifz);
 			cp = gsl_complex_pow (cq, ce);
 
-			nfaults = check_for_equality (nfaults, pn[0].re, GSL_REAL(cp), "complex pow real part", que);
-			nfaults = check_for_equality (nfaults, pn[0].im, GSL_IMAG(cp), "complex pow imag part", que);
+			nfaults = check_for_equality (nfaults, pn[0].re, GSL_REAL(cp), 2e-12, "complex pow real part", que);
+			nfaults = check_for_equality (nfaults, pn[0].im, GSL_IMAG(cp), 2e-12, "complex pow imag part", que);
 		}
 	}
 	cpx_clear (z);
@@ -676,12 +676,12 @@ int test_real_sine (int nterms, int prec)
 		mpf_set_d (ex, x);
 		fp_sine (ex, ex, prec);
 
-		nfaults = check_for_equality (nfaults, ex, sin(x), "real sine", x);
+		nfaults = check_for_equality (nfaults, ex, sin(x), 1e-16, "real sine", x);
 		
 		mpf_set_d (ex, x);
 		fp_cosine (ex, ex, prec);
 
-		nfaults = check_for_equality (nfaults, ex, cos(x), "real cosine", x);
+		nfaults = check_for_equality (nfaults, ex, cos(x), 1e-16, "real cosine", x);
 	}
 	
 	mpf_clear (ex);
@@ -761,7 +761,7 @@ int test_real_gamma (int nterms, int prec)
 		mpf_set_ui (ex, i+1);
 		
 		fp_gamma (gam, ex, prec);
-		nfaults = check_for_equality (nfaults, gam, fac, "real factorial", i+1);
+		nfaults = check_for_equality (nfaults, gam, fac, 1e-16, "real factorial", i+1);
 
 		fac *= i+1;
 	}
@@ -799,7 +799,7 @@ int test_real_gamma (int nterms, int prec)
 		mpf_set_d (gam, x);
 		fp_gamma (gam, gam, prec);
 
-		nfaults = check_for_equality (nfaults, gam, tgamma(x), "real gamma", x);
+		nfaults = check_for_equality (nfaults, gam, tgamma(x), 5e-16, "real gamma", x);
 	}
 
 	mpf_clear (ex);
