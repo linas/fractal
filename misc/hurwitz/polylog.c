@@ -336,8 +336,8 @@ cplex periodic_beta (cplex s, double q)
  * hurwitz_zeta -- Hurwitz zeta function
  *
  * Built up from the periodic beta
- * Borken at the mopment
- *
+ * As of 22 December 2006,seems to be working, with some trouble
+ * due to insufficient precision.
  */
 cplex hurwitz_zeta (cplex ess, double q)
 {
@@ -493,7 +493,7 @@ main (int argc, char * argv[])
 	en = atof (argv[1]);
 
 	// test_zeta_values (n);
-	// test_bernoulli_poly (n);
+	test_bernoulli_poly (n);
 
 // #define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
