@@ -107,8 +107,7 @@ static void polylog_est (cpx_t plog, const cpx_t ess, const cpx_t zee, int norde
 	for (k=1; k<=norder; k++)
 	{
 		/* The inverse integer power */
-		mpf_set_ui (term[0].re, k);
-		cpx_pow_mpf (term, term[0].re, s, prec);
+		cpx_ui_pow_cache (term, k, s, prec);
 
 		/* Put it together */
 		cpx_mul (term, term, pz);
@@ -120,8 +119,7 @@ static void polylog_est (cpx_t plog, const cpx_t ess, const cpx_t zee, int norde
 	for (k=norder+1; k<=2*norder; k++)
 	{
 		/* The inverse integer power */
-		mpf_set_ui (term[0].re, k);
-		cpx_pow_mpf (term, term[0].re, s, prec);
+		cpx_ui_pow_cache (term, k, s, prec);
 
 		/* Put it together */
 		cpx_mul (term, term, pz);
