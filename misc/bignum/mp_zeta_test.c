@@ -968,33 +968,39 @@ int test_periodic_zeta (int nterms, int prec)
 
 	cpx_set_ui (s, 0, 0);
 
-	double sre;
-	for (sre = -12.01396826; sre < 12.7577232; sre += 23.1835567/nterms)
+	double sre, sim;
+	double srlo = -4.01396826;
+	double srhi = 12.7577232;
+	double silo = -0.0239926;
+	double sihi = 42.7755777232;
+	for (sre = srlo; sre < srhi; sre += (srhi-srlo+0.01835567)/nterms)
 	{
-		if (1 == sre) continue;
-
-		cpx_set_d (s, sre, 0.0);
-		cpx_periodic_zeta (zl, s, q, prec);
-		
-		/* sm = 1-s */
-		cpx_neg (sm, s);
-		cpx_add_ui (sm, sm, 1, 0);
-
-		/* ts = 2^{1-s} */
-		cpx_mul_mpf (sm, sm, l2);
-		cpx_exp (ts, sm, prec);
-		
-		/* ts = -(1-2^(1-s)) */
-		cpx_neg (ts, ts);
-		cpx_add_ui (ts, ts, 1,0);
-		cpx_neg (ts, ts);
-		cpx_div (zl, zl, ts);
-		
-		fp_borwein_zeta_c (zb, s, prec);
-
-		cpx_sub (zl, zl, zb);
-		
-		nfaults = cpx_check_for_zero (nfaults, zl, epsi, "periodic zeta", 0, sre, 0);
+		for (sim = silo; sim < sihi; sim += (sihi-silo+0.01835567)/nterms)
+		{
+printf ("start test %g +i%g\n", sre, sim);
+			cpx_set_d (s, sre, sim);
+			cpx_periodic_zeta (zl, s, q, prec);
+			
+			/* sm = 1-s */
+			cpx_neg (sm, s);
+			cpx_add_ui (sm, sm, 1, 0);
+	
+			/* ts = 2^{1-s} */
+			cpx_mul_mpf (sm, sm, l2);
+			cpx_exp (ts, sm, prec);
+			
+			/* ts = -(1-2^(1-s)) */
+			cpx_neg (ts, ts);
+			cpx_add_ui (ts, ts, 1,0);
+			cpx_neg (ts, ts);
+			cpx_div (zl, zl, ts);
+			
+			fp_borwein_zeta_c (zb, s, prec);
+	
+			cpx_sub (zl, zl, zb);
+			
+			nfaults = cpx_check_for_zero (nfaults, zl, epsi, "periodic zeta", 0, sre, sim);
+		}
 	}
 	
 	mpf_clear (q);

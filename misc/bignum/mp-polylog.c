@@ -148,7 +148,7 @@ static void polylog_est (cpx_t plog, cpx_t ess, cpx_t zee, int norder, int prec)
 	cpx_clear (ck);
 }
 
-int nt = 131;
+int nt = 41;
 
 /**
  * periodic_zeta -- Periodic zeta function 
