@@ -2,6 +2,8 @@
  * hurwitz.c
  *
  * Compute the Hurwitz zeta function for arbitrary complex argument
+ * Incomplete, slow, broken. If this si what you want, look in
+ * mp-polylog.h instead, for a tested, optimized, functioning implementation.
  *
  * Linas Vepstas October 2006
  */

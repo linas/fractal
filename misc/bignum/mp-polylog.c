@@ -29,7 +29,7 @@
  *
  * where (n j) is binomial coefficient 
  */
-static void bee_k (cpx_t bee, int n, int k, cpx_t oz)
+static void bee_k (cpx_t bee, int n, int k, const cpx_t oz)
 {
 	int j;
 	cpx_t pz, z, term;
@@ -70,7 +70,7 @@ static void bee_k (cpx_t bee, int n, int k, cpx_t oz)
  * Appears to work well. Suggest n=31 for most cases,
  * should return answers accurate to 1e-16
  */
-static void polylog_est (cpx_t plog, cpx_t ess, cpx_t zee, int norder, int prec)
+static void polylog_est (cpx_t plog, const cpx_t ess, const cpx_t zee, int norder, int prec)
 {
 	cpx_t s, z, oz, moz, ska, pz, acc, term, ck;
 	int k;
@@ -149,7 +149,12 @@ static void polylog_est (cpx_t plog, cpx_t ess, cpx_t zee, int norder, int prec)
 	cpx_clear (ck);
 }
 
-int nt = 91;
+void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+{
+	// XXX this is a really crappy estimate
+	int nterms = 20 + 0.7*prec;
+	polylog_est (plog, ess, zee, nterms, prec);
+}
 
 /**
  * cpx_periodic_zeta -- Periodic zeta function 
@@ -161,9 +166,8 @@ int nt = 91;
  *
  * Periodic zeta function is defined as F(s,q) by Tom Apostol, chapter 12
  */
-void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
+void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
 {
-	int nterms =nt;  // XXXXXXXXX
 	mpf_t q, qf;
 	mpf_init (q);
 	mpf_init (qf);
@@ -257,7 +261,7 @@ void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
 		fp_cosine (z[0].re, qf, prec);
 		fp_sine (z[0].im, qf, prec);
 		
-		polylog_est (z, s, z, nterms, prec);
+		cpx_polylog (z, s, z, prec);
 	}
 	
 	mpf_clear (q);
@@ -279,7 +283,7 @@ void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
  * that is, it gives the Bernoulli polynomials for integer s,
  * with all the right scale factors and signs, etc. Yay!
  */
-void cpx_periodic_beta (cpx_t zee, cpx_t ess, mpf_t que, int prec)
+void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 {
 	mpf_t twopi;
 	mpf_init (twopi);
@@ -315,7 +319,7 @@ void cpx_periodic_beta (cpx_t zee, cpx_t ess, mpf_t que, int prec)
  *
  * Built up from the periodic beta
  */
-void cpx_hurwitz_zeta (cpx_t zee, cpx_t ess, mpf_t que, int prec)
+void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 {
 	mpf_t t;
 	mpf_init (t);
