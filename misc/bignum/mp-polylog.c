@@ -18,6 +18,7 @@
 
 #include "mp-binomial.h"
 #include "mp-complex.h"
+#include "mp-consts.h"
 #include "mp-trig.h"
 
 /* 
@@ -146,9 +147,7 @@ static void polylog_est (cpx_t plog, cpx_t ess, cpx_t zee, int norder, int prec)
 	cpx_clear (ck);
 }
 
-#if 0
-
-int nt = 31;
+int nt = 131;
 
 /**
  * periodic_zeta -- Periodic zeta function 
@@ -160,61 +159,111 @@ int nt = 31;
  *
  * Periodic zeta function is defined as F(s,q) by Tom Apostol, chapter 12
  */
-cplex periodic_zeta (cplex s, double q)
+void cpx_periodic_zeta (cpx_t z, cpx_t ess, mpf_t que, int prec)
 {
-	int nterms =nt;
-	cplex z;
-
-	if ((0.0>q) || (1.0<q))
-	{
-		q -= floor (q);
-	}
+	int nterms =nt;  // XXXXXXXXX
+	mpf_t q, qf;
+	mpf_init (q);
+	mpf_init (qf);
 	
-	if ((1.0e-10 > q) || (1.0e-10 > 1.0-q))
+	cpx_t s, sm;
+	cpx_init (s);
+	cpx_init (sm);
+
+	mpf_set (q, que);
+	mpf_floor (qf, q);
+	mpf_sub (q, q, qf);
+
+	cpx_set (s, ess);
+	
+	// if ((1.0e-10 > q) || (1.0e-10 > 1.0-q))
+	if (0)
 	{
 		// XXX should be more precise with the next order
 		// q correction ... 
-		riemann_zeta (s.re, s.im, &z.re, &z.im);
-		return z;
+		// riemann_zeta (s.re, s.im, &z.re, &z.im);
 	}
-	else if (0.25 > q) 
+	else if (mpf_cmp_d (q, 0.25) < 0) 
 	{
-		/* use the duplication formula to get into convergent region */
-		cplex sm = cplex_neg(s);
-		sm.re += 1.0;
-		cplex ts = cplex_exp(cplex_scale (log(2), sm));
-		cplex bt = periodic_zeta (s, 2.0*q);
-		bt = cplex_mult (bt, ts);
+		/* Use the duplication formula to get into convergent region */
+		cpx_t ts, bt;
+		cpx_init (ts);
+		cpx_init (bt);
 
-		cplex z = periodic_zeta (s, q+0.5);
-		z = cplex_sub(bt, z);
-		return z;
+		cpx_neg (sm, s);
+		cpx_add_ui (sm, sm, 1, 0);
 
+		/* ts = 2^{1-s} */
+		fp_log2 (qf, prec);
+		cpx_mul_mpf (sm, sm, qf);
+		cpx_exp (ts, sm, prec);
+		
+		/* bt = pzeta (2q) * 2^{1-s} */
+		mpf_mul_ui (qf, q, 2);
+		cpx_periodic_zeta (bt, s, qf, prec);
+		cpx_mul (bt, bt, ts);
+
+		/* pzeta (q+0.5) */
+		mpf_set_ui (qf, 1);
+		mpf_div_ui (qf, qf, 2);
+		mpf_add (qf, q, qf);
+		cpx_periodic_zeta (z, s, qf, prec);
+		cpx_sub (z, bt, z);
+		
+		cpx_clear (ts);
+		cpx_clear (bt);
 	}
-	else if (0.75 < q) 
+	else if (mpf_cmp_d (q, 0.75) > 0) 
 	{
-		/* use the duplication formula to get into convergent region */
-		cplex sm = cplex_neg(s);
-		sm.re += 1.0;
-		cplex ts = cplex_exp(cplex_scale (log(2), sm));
-		cplex bt = periodic_zeta (s, 2.0*q-1.0);
-		bt = cplex_mult (bt, ts);
+		/* Use the duplication formula to get into convergent region */
+		cpx_t ts, bt;
+		cpx_init (ts);
+		cpx_init (bt);
 
-		cplex z = periodic_zeta (s, q-0.5);
-		z = cplex_sub(bt, z);
-		return z;
+		cpx_neg (sm, s);
+		cpx_add_ui (sm, sm, 1, 0);
 
+		/* ts = 2^{1-s} */
+		fp_log2 (qf, prec);
+		cpx_mul_mpf (sm, sm, qf);
+		cpx_exp (ts, sm, prec);
+		
+		/* bt = pzeta (2q-1) * 2^{1-s} */
+		mpf_mul_ui (qf, q, 2);
+		mpf_sub_ui (qf, qf, 1);
+		cpx_periodic_zeta (bt, s, qf, prec);
+		cpx_mul (bt, bt, ts);
+
+		/* pzeta (q-0.5) */
+		mpf_set_ui (qf, 1);
+		mpf_div_ui (qf, qf, 2);
+		mpf_sub (qf, q, qf);
+		cpx_periodic_zeta (z, s, qf, prec);
+		cpx_sub (z, bt, z);
+
+		cpx_clear (ts);
+		cpx_clear (bt);
 	}
 	else
 	{
 		/* Normal case; within the convergence region */
-		double ph = 2.0*M_PI*q;
-		z.re = cos (ph);
-		z.im = sin (ph);
-		return polylog_est (s, z, nterms);
+		fp_two_pi (qf, prec);
+		mpf_mul (qf, qf, q);
+
+		fp_cosine (z[0].re, qf, prec);
+		fp_sine (z[0].im, qf, prec);
+		
+		polylog_est (z, s, z, nterms, prec);
 	}
+	
+	mpf_clear (q);
+	mpf_clear (qf);
+
+	cpx_clear (s);
+	cpx_clear (sm);
 }
 
+#if 0
 /* ============================================================= */
 /**
  * periodic_beta -- Periodic beta function 
