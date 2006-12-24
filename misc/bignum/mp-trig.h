@@ -45,9 +45,13 @@ void cpx_tangent (cpx_t tang, const cpx_t z, unsigned int prec);
  * Implemented using a brute-force, very simple algo, with 
  * no attempts at optimization. Also, does not assume any 
  * precomputed constants.
+ *
+ * fp_log_ui takes integer arguments, and keeps previous 
+ * results cached for improved performance.
  */
 void fp_log_m1 (mpf_t lg, const mpf_t z, unsigned int prec);
 void fp_log (mpf_t lg, const mpf_t z, unsigned int prec);
+void fp_log_ui (mpf_t lg, unsigned int z, unsigned int prec);
 
 /**
  * fp_arctan -  Floating point arctangent

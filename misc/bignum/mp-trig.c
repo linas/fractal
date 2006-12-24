@@ -536,6 +536,27 @@ void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
 	mpf_clear (zee);
 }
 
+/**
+ * fp_log_ui-- return log(k) for integer k.
+ *
+ * The values are cached, allowing improved algorithm speeds.
+ */
+void fp_log_ui (mpf_t lg, unsigned int k, unsigned int prec)
+{
+	DECLARE_FP_CACHE (log_n);
+
+	if (prec <= fp_one_d_cache_check (&log_n, k))
+	{
+		fp_one_d_cache_fetch (&log_n, lg, k);
+		return;
+	}
+	
+	mpf_set_ui (lg, k);
+	fp_log (lg, lg, prec);
+
+	fp_one_d_cache_store (&log_n, lg, k, prec);
+}
+
 /* ======================================================================= */
 /**
  * fp_arctan -  Floating point arctangent
