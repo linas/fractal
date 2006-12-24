@@ -10,6 +10,14 @@
 #include <gmp.h>
 
 /**
+ * fp_e - return e=2.718281828...
+ * @prec - number of decimal places of precision
+ *
+ * Uses simple, brute-force summation
+ */
+void fp_e (mpf_t e, unsigned int prec);
+
+/**
  * fp_pi - return pi=3.14159... 
  * @prec - number of decimal places of precision
  *

@@ -20,6 +20,42 @@
 
 /* ======================================================================= */
 /**
+ * fp_e - return e=2.718281828...
+ * @prec - number of decimal places of precision
+ *
+ * Uses simple, brute-force summation
+ */
+
+extern void fp_exp_helper (mpf_t ex, const mpf_t z, unsigned int prec);
+
+void fp_e (mpf_t e, unsigned int prec)
+{
+	static unsigned int precision=0;
+	static mpf_t cached_e;
+
+	if (precision >= prec)
+	{
+		mpf_set (e, cached_e);
+		return;
+	}
+
+	if (0 == precision)
+	{
+		mpf_init (cached_e);
+	}
+
+	mpf_t one;
+	mpf_init (one);
+	mpf_set_ui (one, 1);
+	fp_exp_helper (cached_e, one, prec);
+	mpf_set (e, cached_e);
+
+	mpf_clear (one);
+	precision = prec;
+}
+
+/* ======================================================================= */
+/**
  * fp_pi - return pi=3.14159... 
  * @prec - number of decimal places of precision
  *
