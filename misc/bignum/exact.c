@@ -16,7 +16,7 @@
 int
 main (int argc, char * argv[])
 {
-	int prec = 90;
+	int prec = 60;
 	double q;
 
 	/* Set the precision (number of binary bits) */
@@ -61,6 +61,7 @@ main (int argc, char * argv[])
 	{
 		mpf_set_d (que, q);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
+		// cpx_periodic_beta (zeta, ess, que, prec);
 		cpx_periodic_zeta (zeta, ess, que, prec);
 
 		printf ("%g",q);
