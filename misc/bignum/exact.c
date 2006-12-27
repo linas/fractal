@@ -13,6 +13,81 @@
 #include "mp-misc.h"
 #include "mp-polylog.h"
 
+#include "mp-consts.h"
+#include "mp-gamma.h"
+#include "mp-trig.h"
+#include "mp-zeta.h"
+
+void cpx_zeta_series (cpx_t result, const cpx_t ess, const mpf_t que, int prec)
+{
+	int k;
+	cpx_t mu, pmu, term, s, sk;
+
+	mpf_t twopi, fact, arg;
+	mpf_init (twopi);
+	mpf_init (fact);
+	mpf_init (arg);
+	fp_two_pi (twopi, prec);
+	mpf_set_ui (fact, 1);
+
+	cpx_init (mu);
+	cpx_init (pmu);
+	cpx_init (term);
+	cpx_init (s);
+	cpx_init (sk);
+
+	cpx_set (s, ess);
+
+	mpf_mul (arg, que, twopi);
+	cpx_set_ui (mu, 0, 1);
+	cpx_mul_mpf (mu, mu, arg);
+	cpx_set_ui (pmu, 1, 0);
+
+	cpx_set_ui (result, 0, 0);
+
+	for (k=0; k<20; k++)
+	{
+		/* zeta (s-k) * mu^k / k! */
+		cpx_sub_ui (sk, s, k, 0);
+		cpx_borwein_zeta (term, sk, prec);
+		cpx_mul (term, term, pmu);
+		cpx_mul_mpf (term, term, fact);
+		
+		cpx_add (result, result, term);
+
+		/* pmu = mu^k and fact = 1/k! */
+		cpx_mul (pmu, pmu, mu);
+		mpf_div_ui (fact, fact, k+1);
+	}
+
+	/* (-mu)^{s-1} = (-2pi q)^{s-1} exp(i pi (s-1)/2) */
+	mpf_neg (arg, arg);
+	cpx_sub_ui (sk, s, 1, 0);
+	cpx_mpf_pow (term, arg, sk, prec);
+
+	cpx_mul_mpf (sk, sk, twopi);
+	cpx_div_ui (sk, sk, 4);
+	cpx_exp (sk,sk,prec);
+	cpx_mul (term, term, sk);
+
+	/* Gamma (1-s) */
+	cpx_sub_ui (sk, s, 1, 0);
+	cpx_neg (sk, sk);
+	cpx_gamma_cache (pmu, sk, prec);
+	cpx_mul (term, term, pmu);
+
+	cpx_add (result, result, term);
+
+	cpx_clear (mu);
+	cpx_clear (pmu);
+	cpx_clear (term);
+	cpx_clear (s);
+	cpx_clear (sk);
+	mpf_clear (twopi);
+	mpf_clear (fact);
+	mpf_clear (arg);
+}
+
 int
 main (int argc, char * argv[])
 {
@@ -25,9 +100,10 @@ main (int argc, char * argv[])
 
 	double sim = atof (argv[1]);
 	
-	cpx_t ess, zeta;
+	cpx_t ess, zeta, z2;
 	cpx_init (ess);
 	cpx_init (zeta);
+	cpx_init (z2);
 
 	mpf_t que;
 	mpf_init (que);
@@ -63,10 +139,12 @@ main (int argc, char * argv[])
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
 		cpx_periodic_zeta (zeta, ess, que, prec);
+		cpx_zeta_series (zeta, ess, que, prec);
 
 		printf ("%g",q);
 		fp_prt ("\t", zeta[0].re);
-		fp_prt ("\t", zeta[0].im);
+		fp_prt ("\t", z2[0].re);
+		// fp_prt ("\t", zeta[0].im);
 		printf ("\n");
 		fflush (stdout);
 	}
