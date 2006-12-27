@@ -8,10 +8,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "mp-complex.h"
 #include "mp-misc.h"
 #include "mp-polylog.h"
+
+
+#ifdef BORKOKEN_AND_DONT_WORK
 
 #include "mp-consts.h"
 #include "mp-gamma.h"
@@ -104,11 +108,12 @@ printf ("\n");
 	mpf_clear (fact);
 	mpf_clear (arg);
 }
+#endif
 
 int
 main (int argc, char * argv[])
 {
-	int prec = 40;
+	int prec = 20;
 	double q;
 
 	/* Set the precision (number of binary bits) */
@@ -122,15 +127,19 @@ main (int argc, char * argv[])
 	}
 	double sim = atof (argv[1]);
 	
-	cpx_t ess, zeta, z2;
+	cpx_t ess, zeta, zee, plog;
 	cpx_init (ess);
 	cpx_init (zeta);
-	cpx_init (z2);
+	cpx_init (zee);
+	cpx_init (plog);
 
 	mpf_t que;
 	mpf_init (que);
 			  
 	cpx_set_d (ess, 0.5, sim);
+	cpx_set_d (ess, 0.5, 14.134725);
+
+	double zmag = sim;
 
 #if 0
 	char * zero;
@@ -155,18 +164,23 @@ main (int argc, char * argv[])
 	fp_prt ("# at s=0.5+i ", ess[0].im);
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
-	for (q=0.5; q<0.991; q+=0.1)
+	for (q=0.02; q<0.991; q+=0.008)
 	{
 		mpf_set_d (que, q);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
 		cpx_periodic_zeta (zeta, ess, que, prec);
-		cpx_zeta_series (z2, ess, que, prec);
+
+		double zre = zmag * cos (2.0*M_PI * q);
+		double zim = zmag * sin (2.0*M_PI * q);
+		cpx_set_d (zee, zre, zim);
+		cpx_polylog_sum (plog, ess, zee, prec);
 
 		printf ("%g",q);
-		fp_prt ("\t", zeta[0].re);
-		fp_prt ("\t", z2[0].re);
-		// fp_prt ("\t", zeta[0].im);
+		// fp_prt ("\t", zeta[0].re);
+		fp_prt ("\t", zeta[0].im);
+		// fp_prt ("\t", plog[0].re);
+		fp_prt ("\t", plog[0].im);
 		printf ("\n");
 		fflush (stdout);
 	}
