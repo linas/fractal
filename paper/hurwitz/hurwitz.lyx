@@ -442,6 +442,27 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
 \end_inset 
 
 .
+ This bound is derived in the next section.
+ 
+\layout Standard
+
+The polynomial coefficients may be
+\layout Section
+
+Error Bound on the Error Term
+\layout Standard
+
+In order for equation 
+\begin_inset LatexCommand \ref{eq:Polylog estimate}
+
+\end_inset 
+
+ to be useful computationally, an upper bound on the value of 
+\begin_inset Formula $\xi$
+\end_inset 
+
+ needs to be given.
+ This bound is derived below.
  Writing 
 \begin_inset Formula $s=\sigma+i\tau$
 \end_inset 
@@ -500,13 +521,134 @@ p_{2n}(y)\left|\log y\right|^{s-1} & \le & p_{2n}(y)\left|\log y\right|^{n}\labe
 \end_inset 
 
 .
- Num
+ Assembling these various pieces, one deduces that 
+\begin_inset Formula \begin{equation}
+\left|\xi(s,z)\right|\le\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|\frac{(0.261)^{n}}{\sqrt{n}}\label{eq:error bound}\end{equation}
+
+\end_inset 
+
+ A useful estimate for 
+\begin_inset Formula $\left|\Gamma(s)\right|^{-1}$
+\end_inset 
+
+ is given by Borwein 
+\begin_inset LatexCommand \cite{Bor00-A,Bor95}
+
+\end_inset 
+
+ when 
+\begin_inset Formula $\sigma\ge-m+1/2$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{eqnarray*}
+\frac{1}{\left|\Gamma(s)\right|} & = & \frac{1}{\left|\Gamma(\sigma)\right|}\sqrt{\prod_{k=0}^{\infty}\left(1+\frac{\tau^{2}}{\left(\sigma+k\right)^{2}}\right)}\\
+ & \le & \frac{1}{\left|\Gamma(\sigma)\right|}\sqrt{\prod_{k=0}^{m}\left(1+\frac{\tau^{2}}{\left(\frac{1}{2}+k\right)^{2}}\right)\frac{\sinh\tau\pi}{\tau\pi}}\end{eqnarray*}
+
+\end_inset 
+
+ Thus, one may conclude that the estimate 
+\begin_inset LatexCommand \ref{eq:Polylog estimate}
+
+\end_inset 
+
+ can be effectively applied whenever 
+\begin_inset Formula $\Re z\le0$
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+0.261\left|\frac{z^{2}}{z-1}\right|<1\]
+
+\end_inset 
+
+ 
+\layout Section
+
+Duplication formula
 \layout Standard
 
-so hwatever.
-\layout Standard
+The formula 
+\begin_inset LatexCommand \ref{eq:Polylog estimate}
 
-Writing 
+\end_inset 
+
+ together with the error bound 
+\begin_inset LatexCommand \ref{eq:error bound}
+
+\end_inset 
+
+ allow 
+\begin_inset Formula $F(s;q)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
+\end_inset 
+
+ to be computed for real 
+\begin_inset Formula $q$
+\end_inset 
+
+ in region 
+\begin_inset Formula $1/4\le q\le3/4$
+\end_inset 
+
+.
+ To obtain values on the region 
+\begin_inset Formula $0<q<1/4$
+\end_inset 
+
+, one applies the duplication formula 
+\begin_inset Formula \[
+F\left(s;q\right)=2^{1-s}F\left(s;2q\right)-F\left(s;q+\frac{1}{2}\right)\]
+
+\end_inset 
+
+ recursively until one obtains values of 
+\begin_inset Formula $q\ge1/4$
+\end_inset 
+
+.
+ Rearranging terms, one obtains a similar formula for iterating values of
+ 
+\begin_inset Formula $q>3/4$
+\end_inset 
+
+ until they are less than or equal to 
+\begin_inset Formula $3/4$
+\end_inset 
+
+.
+ The duplication formula follows from a general 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic identity 
+\begin_inset Formula \[
+\sum_{m=0}^{p-1}F\left(s;\frac{m+q}{p}\right)=p^{1-s}F\left(s;q\right)\]
+
+\end_inset 
+
+ which is valid for any positive integer 
+\begin_inset Formula $p$
+\end_inset 
+
+.
+ This formula may be obtained by noting that the function 
+\begin_inset Formula $F\left(s;q\right)$
+\end_inset 
+
+ is an eigenvalue of the 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic Bernoulli transfer operator associated with eigenvalue 
+\begin_inset Formula $p^{1-s}$
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Ve-B04}
+
+\end_inset 
+
+.
 \layout Section
 
 Pictures
