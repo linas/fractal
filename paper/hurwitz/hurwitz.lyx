@@ -148,7 +148,7 @@ Actually we have
 \end_inset 
 
  and 
-\begin_inset Formula $z\notin[1,\infty]$
+\begin_inset Formula $z\notin(1,\infty]$
 \end_inset 
 
  , uuu hh confusion about principle branch of logarithm ....
@@ -344,7 +344,7 @@ This result may be immediately employed in equation
 
  to obtain 
 \begin_inset Formula \begin{equation}
-\xi(s,z)=\mbox{Li}_{s}\left(z\right)+\frac{z}{p_{n}(1/z)}\sum_{k=0}^{n-1}\frac{c_{k}}{(k+1)^{s}}\label{eq:Polylog estimate}\end{equation}
+\xi(s,z)=\mbox{Li}_{s}\left(z\right)+\frac{z}{p_{n}(1/z)}\sum_{k=0}^{n-1}\frac{c_{k}}{(k+1)^{s}}\label{eq:Polylog general estimate}\end{equation}
 
 \end_inset 
 
@@ -425,7 +425,7 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
 
 -plane.
  However, in order for equation 
-\begin_inset LatexCommand \ref{eq:Polylog estimate}
+\begin_inset LatexCommand \ref{eq:Polylog general estimate}
 
 \end_inset 
 
@@ -446,14 +446,87 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
  
 \layout Standard
 
-The polynomial coefficients may be
+The polynomial coefficients are easily obtained, and are 
+\begin_inset Formula \begin{eqnarray*}
+a_{0} & = & a_{1}=\cdots=a_{n-1}=0\\
+a_{n+k} & = & \left(-1\right)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\quad\mbox{ for }0\le k\le n\end{eqnarray*}
+
+\end_inset 
+
+ This leads to 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}(z)=-\frac{z^{2n+1}}{\left(z-1\right)^{n}}\sum_{k=0}^{2n-1}\frac{c_{k}}{\left(k+1\right)^{s}}+\xi(s,z)\label{eq:}\end{equation}
+
+\end_inset 
+
+where the 
+\begin_inset Formula $c_{k}$
+\end_inset 
+
+ are given by 
+\begin_inset Formula \begin{equation}
+c_{k}=z^{k}\left[-\left(\frac{z-1}{z^{2}}\right)^{n}+\frac{1}{z^{n}}\sum_{j=0}^{k-n}\left(-1\right)^{j}\left(\begin{array}{c}
+n\\
+j\end{array}\right)\frac{1}{z^{j}}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the summation above is to be understood to be zero when 
+\begin_inset Formula $k<n$
+\end_inset 
+
+.
+ The above summations can be re-organized into the slightly more suggestive
+ form 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}(z)=\sum_{k=1}^{2n}\frac{z^{k}}{k^{s}}\;-\left(\frac{z}{z-1}\right)^{n}\sum_{m=n+1}^{2n}\frac{z^{m}}{m^{s}}\;\sum_{j=0}^{m-n-1}\left(\frac{-1}{z}\right)^{j}\left(\begin{array}{c}
+n\\
+j\end{array}\right)+\xi(s,z)\label{eq:polylog specific estimate}\end{equation}
+
+\end_inset 
+
+ The error term 
+\begin_inset Formula $\xi(s,z)$
+\end_inset 
+
+ is negligable for only a very specific area of the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane.
+ The region where 
+\begin_inset Formula $\xi$
+\end_inset 
+
+ may be ignored as a small error is derived in the next section.
+ Substituting 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+ in the above formulas agrees with expressions previously given by Borwein
+\begin_inset LatexCommand \cite{Bor95}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The above formula has been implemented using the Gnu Multi-Precision library
+ (GMP) (need ref for GMP), and has been numerically validated for correctness
+ in several different ways.
+ The source code, under the license terms of the LGPL, may be obtained by
+ contacting the author.
+ 
 \layout Section
 
-Error Bound on the Error Term
+Bound on the Error Term
 \layout Standard
 
 In order for equation 
-\begin_inset LatexCommand \ref{eq:Polylog estimate}
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
@@ -548,7 +621,7 @@ p_{2n}(y)\left|\log y\right|^{s-1} & \le & p_{2n}(y)\left|\log y\right|^{n}\labe
 \end_inset 
 
  Thus, one may conclude that the estimate 
-\begin_inset LatexCommand \ref{eq:Polylog estimate}
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
@@ -569,7 +642,7 @@ Duplication formula
 \layout Standard
 
 The formula 
-\begin_inset LatexCommand \ref{eq:Polylog estimate}
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
