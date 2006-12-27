@@ -147,10 +147,40 @@ static void polylog_est (cpx_t plog, const cpx_t ess, const cpx_t zee, int norde
 	cpx_clear (ck);
 }
 
+static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
+{
+	double fterms = 2.302585 * prec;  /* log(10) */
+
+	double zre = mpf_get_d (zee[0].re);	
+	double zim = mpf_get_d (zee[0].im);	
+
+	if ((0.0 < zre) && (zre < 1.0)) fterms += log (zim);
+
+	/* poor estimate for the gamma */
+	double sre = mpf_get_d (ess[0].re);	
+	double sim = mpf_get_d (ess[0].im);	
+	if (0.0 > sim) sim = -sim;
+	fterms += 0.5*M_PI*sim;
+
+	/* | z^2 / (z-1) | */
+	double den = 1.0 / ((zre-1.0)*(zre-1.0) + zim*zim);
+	double fre = (zre*zre - zim*zim) * (zre-1.0) * den;
+	double fim = (2.0*zre*zim) * zim * den;
+	den = fre*fre + fim*fim;
+	
+	fterms /= 0.5*log(den) -1.345746719;  /* log (0.260345491) */
+
+	int nterms = (int) (-fterms+1.0);
+
+// printf ("# duude z= %g +i %g den=%g  nterms = %d\n", zre, zim, den, nterms);
+	return nterms;
+}
+
 void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 {
 	// XXX this is a really crappy estimate
-	int nterms = 20 + 0.7*prec;
+	// int nterms = 20 + 0.7*prec;
+	int nterms = polylog_terms_est (ess, zee, prec);
 	polylog_est (plog, ess, zee, nterms, prec);
 }
 
