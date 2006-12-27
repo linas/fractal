@@ -160,11 +160,18 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	 * if ((0.0 < zre) && (zre < 1.0)) fterms += log (zim);
 	 */
 
-	/* Piss-poor estimate for the gamma; works only for 0<Re s<1 */
+	/* Estimate for the gamma. A slightly better estimate
+	 * can be obtains for sre negative but still small. 
+	 */
 	double sre = mpf_get_d (ess[0].re);	
 	double sim = mpf_get_d (ess[0].im);	
 	if (0.0 > sim) sim = -sim;
-	fterms += 0.5*M_PI*sim;
+	if (0.0 < sre) {
+		fterms += 0.5*M_PI*sim;
+	} else {
+		fterms += M_PI*sim;
+	}
+	fterms -= lgamma(sre);
 
 	/* | z^2 / (z-1) | */
 	double den = 1.0 / ((zre-1.0)*(zre-1.0) + zim*zim);
