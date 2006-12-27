@@ -147,8 +147,18 @@ static void polylog_est (cpx_t plog, const cpx_t ess, const cpx_t zee, int norde
 	cpx_clear (ck);
 }
 
+/*
+ * polylog_terms_est() -- estimate number of terms needed 
+ * in the polylog summation in order to keep the error
+ * to be less than 10^-prec.
+ *
+ * The estimation is based on the  development in the 
+ * paper, but is broken for values of ess which are 
+ * non-positive integers, since then, the gamma explodes
+ */
 static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 {
+#if BOROKEN
 	double fterms = 2.302585 * prec;  /* log(10) */
 
 	double zre = mpf_get_d (zee[0].re);	
@@ -183,7 +193,10 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 
 	int nterms = (int) (-fterms+1.0);
 
-// printf ("# duude z= %g +i %g den=%g  nterms = %d\n", zre, zim, den, nterms);
+printf ("# duude z= %g +i %g den=%g  nterms = %d\n", zre, zim, den, nterms);
+#endif /* BOROKEN */
+
+int nterms = 30+0.7*prec;
 	return nterms;
 }
 

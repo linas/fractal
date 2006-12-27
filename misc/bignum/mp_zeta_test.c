@@ -911,8 +911,8 @@ int test_complex_gamma (int nterms, int prec)
 		
 		nfaults = cpx_check_for_zero (nfaults, gam, epsi, "complex gamma reflection", i, rez, imz);
 
-		rez +=red;
-		imz+=imd;
+		rez += red;
+		imz += imd;
 	}
 
 	cpx_clear (za);
@@ -926,6 +926,120 @@ int test_complex_gamma (int nterms, int prec)
 	if (0 == nfaults)
 	{
 		fprintf(stderr, "Complex gamma test passed!\n");
+	}
+	return nfaults;
+}
+
+/* ==================================================================== */
+/** 
+ * test_polylog() -- very trivial test of polylog
+ */
+int test_polylog (int nterms, int prec)
+{
+	int i;
+	int nfaults = 0;
+
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, prec-5);
+
+	cpx_t plog, exact, term, zee, ess;
+	cpx_init (plog);
+	cpx_init (exact);
+	cpx_init (zee);
+	cpx_init (ess);
+	cpx_init (term);
+
+	double red = 4.5 / ((double) nterms);
+	double imd = 1.555 / ((double) nterms);
+	double rez = -3.33423331;
+	double imz = -1.233387765;
+
+	cpx_set_ui (ess, 0, 0);
+	for (i=0; i<nterms; i++)
+	{
+		cpx_set_d (zee, rez, imz);
+		
+		/* compute z/(1-z) */
+		cpx_sub_ui (exact, zee, 1, 0);
+		cpx_neg (exact, exact);
+		cpx_div (exact, zee, exact);
+	
+		cpx_polylog (plog, ess, zee, prec);
+		cpx_sub (plog, plog, exact);
+	
+		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, rez, imz);
+		
+		rez += red;
+		imz += imd;
+	}
+
+	red = 2.5 / ((double) nterms);
+	imd = 1.555 / ((double) nterms);
+	rez = -2.1334123331;
+	imz = -1.31233387765;
+	
+	cpx_set_ui (ess, 1, 0);
+	cpx_neg (ess, ess);
+	for (i=0; i<nterms; i++)
+	{
+		cpx_set_d (zee, rez, imz);
+		
+		/* compute z/(1-z)^2 */
+		cpx_sub_ui (exact, zee, 1, 0);
+		cpx_mul (exact, exact, exact);
+		cpx_div (exact, zee, exact);
+	
+		cpx_polylog (plog, ess, zee, prec);
+		cpx_sub (plog, plog, exact);
+	
+		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -1, rez, imz);
+		
+		rez += red;
+		imz += imd;
+	}
+
+	red = 2.5 / ((double) nterms);
+	imd = 1.555 / ((double) nterms);
+	rez = -2.1334123331;
+	imz = -1.31233387765;
+	
+	cpx_set_ui (ess, 2, 0);
+	cpx_neg (ess, ess);
+	for (i=0; i<nterms; i++)
+	{
+		cpx_set_d (zee, rez, imz);
+		
+		/* compute z(z+1)/(1-z)^3 */
+		cpx_sub_ui (term, zee, 1, 0);
+		cpx_neg (term, term);
+		cpx_mul (exact, term, term);
+		cpx_mul (exact, exact, term);
+		cpx_div (exact, zee, exact);
+		cpx_add_ui (term, zee, 1, 0);
+		cpx_mul (exact, exact, term);
+
+		cpx_polylog (plog, ess, zee, prec);
+		cpx_sub (plog, plog, exact);
+	
+		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -2, rez, imz);
+		
+		rez += red;
+		imz += imd;
+	}
+
+	cpx_clear (plog);
+	cpx_clear (exact);
+	cpx_clear (zee);
+	cpx_clear (ess);
+	cpx_clear (term);
+
+	mpf_clear (epsi);
+
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Polylog test passed!\n");
 	}
 	return nfaults;
 }
@@ -1421,7 +1535,8 @@ int main (int argc, char * argv[])
 	int nfaults = 0;
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
-nfaults += test_periodic_zeta (nterms, prec);
+	nfaults += test_polylog (nterms, prec);
+// nfaults += test_periodic_zeta (nterms, prec);
 	nfaults += test_complex_pow (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
 	nfaults += test_complex_gamma (nterms, prec);
