@@ -154,9 +154,13 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
 
-	if ((0.0 < zre) && (zre < 1.0)) fterms += log (zim);
+	/* This part of the estimate not needed, since
+	 * we assume that zre =< 0.0 always; if not then
+	 * there are other, more severe problems.
+	 * if ((0.0 < zre) && (zre < 1.0)) fterms += log (zim);
+	 */
 
-	/* poor estimate for the gamma */
+	/* Piss-poor estimate for the gamma; works only for 0<Re s<1 */
 	double sre = mpf_get_d (ess[0].re);	
 	double sim = mpf_get_d (ess[0].im);	
 	if (0.0 > sim) sim = -sim;
