@@ -20,6 +20,19 @@
 void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
 
 /**
+ * cpx_polylog_sum -- compute the polylogarithm by direct summation
+ *
+ * Li_s(z) = sum_{n=1}^infty z^n/ n^s
+ * 
+ * The magnitude of z must be less than one in order for the 
+ * summation to be caqrried out.
+ *
+ * Caches intermediate results, so that overall performance is
+ * considerably better if z is varied while s is held fixed.
+ */
+void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
+
+/**
  * cpx_periodic_zeta -- Periodic zeta function 
  *
  * F(s,q) = sum_{n=1}^infty exp(2pi iqn)/ n^s

@@ -217,6 +217,10 @@ void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
  * Li_s(z) is the polylogarithm
  *
  * Periodic zeta function is defined as F(s,q) by Tom Apostol, chapter 12
+ *
+ * For 0<q<1/4 or for 3/4<q<1, this algo applies the duplication
+ * formula, and calls itself recusrively, until 1/4<q<3/4, which
+ * can then be evaluated at a single shot using teh Borwein algorithm.
  */
 void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
 {
@@ -455,6 +459,59 @@ void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 	cpx_clear (s);
 	cpx_clear (zm);
 	mpf_clear (t);
+}
+
+/* ============================================================= */
+/**
+ * cpx_polylog_sum -- compute the polylogarithm by direct summation
+ *
+ * Caches intermediate results, so that overall performance is
+ * considerably better if z is varied while s is held fixed.
+ *
+ * The magnitude of z must be less than one.
+ */
+
+void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+{
+	int n;
+
+	cpx_t s, z, zp, term;
+	cpx_init (s);
+	cpx_init (z);
+	cpx_init (zp);
+	cpx_init (term);
+
+	cpx_set (s, ess);
+	cpx_set (z, zee);
+	cpx_set (zp, zee);
+	cpx_set_ui (plog, 0, 0);
+
+	/* Estimate the number of terms needed to sum over */
+	double zre = mpf_get_d (z[0].re);
+	double zim = mpf_get_d (z[0].im);
+	double mag = zre*zre + zim*zim;
+	
+	/* Domain error, should be less than one */
+	if (1.0 <= mag)
+	{
+		fprintf (stderr, "cpx_polylog_sum(): Domain error, |z|=%g\n", sqrt(mag)); 
+		return;
+	}
+	
+	int nterms = -2.0 * prec *2.302585093 / log(mag);
+	for (n=1; n<nterms; n++)
+	{
+		cpx_ui_pow_cache (term, n, s, prec);
+		cpx_div (term, zp, term);
+
+		cpx_add (plog, plog, term);
+		cpx_mul (zp, zp, z);
+	}
+
+	cpx_clear (s);
+	cpx_clear (z);
+	cpx_clear (zp);
+	cpx_clear (term);
 }
 
 /* ============================================================= */
