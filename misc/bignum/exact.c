@@ -18,6 +18,13 @@
 #include "mp-trig.h"
 #include "mp-zeta.h"
 
+/* The cpx_zeta_series() is supposed to sum up to 
+ * the periodic zeta function. However, its does not,
+ * not sure why -- maybe the formula is wrong, maybe 
+ * the evaluation of the reimann zeta at large values in the 
+ * second quadrant is wrong. At any rate, the sum
+ * doesn't even converge.
+ */
 void cpx_zeta_series (cpx_t result, const cpx_t ess, const mpf_t que, int prec)
 {
 	int k;
@@ -45,28 +52,38 @@ void cpx_zeta_series (cpx_t result, const cpx_t ess, const mpf_t que, int prec)
 
 	cpx_set_ui (result, 0, 0);
 
-	for (k=0; k<20; k++)
+	for (k=0; k<70; k++)
 	{
+printf ("duude k=%d\t", k);
 		/* zeta (s-k) * mu^k / k! */
 		cpx_sub_ui (sk, s, k, 0);
 		cpx_borwein_zeta (term, sk, prec);
+cpx_prt ("zeta=", term);
+printf ("\n");
 		cpx_mul (term, term, pmu);
 		cpx_mul_mpf (term, term, fact);
 		
+cpx_prt ("term=", term);
+printf ("\n");
 		cpx_add (result, result, term);
+cpx_prt ("sum=", result);
+printf ("\n");
+printf ("\n");
 
 		/* pmu = mu^k and fact = 1/k! */
 		cpx_mul (pmu, pmu, mu);
 		mpf_div_ui (fact, fact, k+1);
 	}
+cpx_prt ("sum=", result);
+printf ("\n");
 
-	/* (-mu)^{s-1} = (-2pi q)^{s-1} exp(i pi (s-1)/2) */
-	mpf_neg (arg, arg);
+	/* (-mu)^{s-1} = (2pi q)^{s-1} exp(-i pi (s-1)/2) */
 	cpx_sub_ui (sk, s, 1, 0);
 	cpx_mpf_pow (term, arg, sk, prec);
 
 	cpx_mul_mpf (sk, sk, twopi);
 	cpx_div_ui (sk, sk, 4);
+	cpx_neg (sk, sk);
 	cpx_exp (sk,sk,prec);
 	cpx_mul (term, term, sk);
 
@@ -91,13 +108,18 @@ void cpx_zeta_series (cpx_t result, const cpx_t ess, const mpf_t que, int prec)
 int
 main (int argc, char * argv[])
 {
-	int prec = 20;
+	int prec = 40;
 	double q;
 
 	/* Set the precision (number of binary bits) */
 	int nbits = 3.3*prec+100;
 	mpf_set_default_prec (nbits);
 
+	if (argc != 2)
+	{
+		fprintf (stderr, "Usage: %s <sim>\n", argv[0]);
+		exit (1);
+	}
 	double sim = atof (argv[1]);
 	
 	cpx_t ess, zeta, z2;
@@ -133,13 +155,13 @@ main (int argc, char * argv[])
 	fp_prt ("# at s=0.5+i ", ess[0].im);
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
-	for (q=0.02; q<0.991; q+=0.002)
+	for (q=0.5; q<0.991; q+=0.1)
 	{
 		mpf_set_d (que, q);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
 		cpx_periodic_zeta (zeta, ess, que, prec);
-		cpx_zeta_series (zeta, ess, que, prec);
+		cpx_zeta_series (z2, ess, que, prec);
 
 		printf ("%g",q);
 		fp_prt ("\t", zeta[0].re);
