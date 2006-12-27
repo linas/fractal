@@ -994,7 +994,7 @@ printf ("start test %g +i%g\n", sre, sim);
 			cpx_neg (ts, ts);
 			cpx_div (zl, zl, ts);
 			
-			fp_borwein_zeta_c (zb, s, prec);
+			cpx_borwein_zeta (zb, s, prec);
 	
 			cpx_sub (zl, zl, zb);
 			

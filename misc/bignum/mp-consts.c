@@ -382,7 +382,7 @@ static void fp_zeta_half_compute (mpf_t gam, unsigned int prec)
 	mpf_set_d (ess[0].re, 0.5);
 	mpf_set_ui (ess[0].im, 0);
 
-	fp_borwein_zeta_c (zeta, ess, prec);
+	cpx_borwein_zeta (zeta, ess, prec);
 	mpf_set (gam, zeta[0].re);
 
 	cpx_clear (ess);

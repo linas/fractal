@@ -812,7 +812,7 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 	mpf_clear (d_n);
 }
 
-void fp_borwein_zeta_c (cpx_t zeta, cpx_t s, int prec)
+void cpx_borwein_zeta (cpx_t zeta, const cpx_t s, int prec)
 {
 	double nterms = 0.69 + 2.302585093 * prec;
 	// Huh? whazzup with the gamma ??
