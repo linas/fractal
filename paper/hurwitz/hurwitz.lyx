@@ -38,7 +38,7 @@ Linas Vepstas
 12 October 2006
 \layout Abstract
 
-This paper sketches an extension of the techniques given by Borwein's 
+This paper develops an extension of the techniques given by Borwein's 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -51,90 +51,157 @@ An efficient algorithm for computing the Riemann zeta function
 
 \end_inset 
 
- to the Polylogarithm and the Hurwitz zeta function.
- The algorithm given is essentially that of Borwein, generalized slightly
- to give 
+ to the polylogarithm and the Hurwitz zeta function.
+ The algorithm provides a rapid means of evaluating 
 \begin_inset Formula $\mbox{Li}_{s}(z)$
 \end_inset 
 
- for all complex values of 
-\begin_inset Formula $\sigma>-n$
+ for general values of complex 
+\begin_inset Formula $s$
 \end_inset 
 
- and 
+ and the region of complex 
 \begin_inset Formula $z$
 \end_inset 
 
+ values given by 
+\begin_inset Formula $\left|z^{2}/(z-1)\right|<3.3$
+\end_inset 
+
 .
- In particular, this gives 
+ This region includes the the Hurwitz zeta 
 \begin_inset Formula $\zeta(s,q)$
 \end_inset 
 
- for all 
-\begin_inset Formula $\sigma>-n$
+ for general complex 
+\begin_inset Formula $s$
 \end_inset 
 
- and 
-\begin_inset Formula $q>0$
+ and real 
+\begin_inset Formula $1/4\le q\le3/4$
 \end_inset 
 
 .
- The algorithm runs logarithmically slower as 
-\begin_inset Formula $q$
+ By using the duplication formula, the range of convergence for the Hurwitz
+ zeta can be extended to the whole real interval 
+\begin_inset Formula $0<q<1$
 \end_inset 
 
- approaches zero.
- 
+, although the algorithm does run logarithmically slower as it approaches
+ the endpoints.
+ In particular, this algorithm allows the exploration of the Hurwitz zeta
+ in the critical strip, where fast algorthms are otherwise unavailable.
 \layout Section
 
-Intro
+Introduction
 \layout Standard
 
-This short note generalizes the principal algorithm given by Peter Borwein
- for computing the Riemann zeta function to the computation of the Hurwitz
- zeta function.
- The principle result is that blah blah general but slower.
+This note generalizes an algorithm given by Peter Borwein for computing
+ the Riemann zeta function, to the computation of the polylogarithm and,
+ in particular, to the Hurwitz zeta function.
+ The principle result is an algorithm that efficiently obtains values of
+ the Hurwitz zeta in the critical strip 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset 
+
+ with 
+\begin_inset Formula $0\le\sigma\le1$
+\end_inset 
+
+.
  
+\layout Standard
+
+The Hurwitz zeta function may be defined as 
+\layout Standard
+
+
 \begin_inset Formula \begin{equation}
 \zeta(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}\label{eq:}\end{equation}
 
 \end_inset 
 
- for q real dohh and s ge 1 etc
-\layout Standard
+ This series may be directly summed for 
+\begin_inset Formula $\sigma>1$
+\end_inset 
 
-Dirichlet L-functions
+, although, for high-precision work, convergence is annoyingly slow unless
+ one has at least 
+\begin_inset Formula $\sigma\gtrsim2$
+\end_inset 
+
+.
+ A globally convergent series was given by Helmut Hasse in 1930
+\begin_inset LatexCommand \cite{Has30}
+
+\end_inset 
+
+: 
+\begin_inset Formula \[
+\zeta(s,q)=\frac{1}{s-1}\sum_{n=0}^{\infty}\frac{1}{n+1}\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)(q+k)^{1-s}\]
+
+\end_inset 
+
+ Although techically convergent in the critical strip, in practice, the
+ convergence is abismally slow on the critical strip.
+ Since the Generalized Riemann Hypothesis can be phrased in terms of the
+ values of the Hurwitz zeta function on the critical strip, it is of some
+ interest to have a fast algorithm for computing high-precision values of
+ this function in this region.
+ There seems to be a paucity of work in this area.
+ There is a discussion of fast algorithms for Dirichlet L-functions in 
 \begin_inset LatexCommand \cite{Sle04}
 
 \end_inset 
 
-
-\layout Standard
-
-Polylog, but only for integers
-\begin_inset LatexCommand \cite{Cra06}
-
-\end_inset 
-
+ (but this techniques seems to be limited in scope ????).
  
-\layout Section
-
-The Polylogarithm
 \layout Standard
 
-A more convenient starting point for the analysis is the polylogarithm:
+The Hurwitz zeta may be expressed in terms of the polylogarithm: 
 \begin_inset Formula \begin{equation}
-\mbox{Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\label{eq:}\end{equation}
+\mbox{Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\label{eq:polylog definition}\end{equation}
 
 \end_inset 
 
-which is related to the Hurwitz zeta as 
+ by means of the identity 
 \begin_inset Formula \begin{equation}
 \mbox{Li}_{s}\left(e^{2\pi iq}\right)+\left(-1\right)^{s}\mbox{Li}_{s}\left(e^{-2\pi iq}\right)=\frac{\left(2\pi i\right)^{s}}{\Gamma(s)}\zeta(1-s,q)\label{eq:}\end{equation}
 
 \end_inset 
 
-The above has a rather complicated domain description over which its valid.
+  and so one might hope for some efficient algorithms in that area.
+ However, a recent survey
+\begin_inset LatexCommand \cite{Cra06}
+
+\end_inset 
+
+ indicates a similar paucity as well.
+ The series defining the polylogarithm may be directly evaluated when 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset 
+
+, although direct evaluation becomes quite slow when 
+\begin_inset Formula $\left|z\right|\gtrsim0.95$
+\end_inset 
+
+ and 
+\begin_inset Formula $\sigma\lesssim2$
+\end_inset 
+
+.
+ There do not appear to be any generalalgorithms that may be applied on
+ the critical strip.
+\layout Section
+
+The Polylogarithm
+\layout Standard
+
+A more convenient starting point for the analysis is the polylogarithm:which
+ is related to the Hurwitz zeta as The above has a rather complicated domain
+ description over which its valid.
 \layout Standard
 
 Actually we have 
@@ -148,7 +215,7 @@ Actually we have
 \end_inset 
 
  and 
-\begin_inset Formula $z\notin(1,\infty]$
+\begin_inset Formula $z\notin(1,+\infty]$
 \end_inset 
 
  , uuu hh confusion about principle branch of logarithm ....
@@ -635,7 +702,7 @@ p_{2n}(y)\left|\log y\right|^{s-1} & \le & p_{2n}(y)\left|\log y\right|^{n}\labe
 
 \end_inset 
 
- 
+
 \layout Section
 
 Duplication formula
@@ -724,10 +791,80 @@ F\left(s;q\right)=2^{1-s}F\left(s;2q\right)-F\left(s;q+\frac{1}{2}\right)\]
 .
 \layout Section
 
-Pictures
+Validation
 \layout Standard
 
-Soo like 
+The correctness of a given numerical implementation can be validated in
+ a number of ways.
+ For positive integer 
+\begin_inset Formula $n$
+\end_inset 
+
+, one has 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{n}\left(e^{2\pi iq}\right)+\left(-1\right)^{n}\mbox{Li}_{n}\left(e^{-2\pi iq}\right)=-\frac{\left(2\pi i\right)^{n}}{n!}B_{n}(q)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the 
+\begin_inset Formula $B_{n}(x)$
+\end_inset 
+
+ are the Bernoulli polynomials.
+ For 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, one regains the Riemann zeta function 
+\begin_inset Formula $\zeta(s)$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}\left(-1\right)=\frac{1}{2^{1-s}-1}\,\zeta(s)\label{eq:}\end{equation}
+
+\end_inset 
+
+ For 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset 
+
+, the defining series 
+\begin_inset LatexCommand \ref{eq:polylog definition}
+
+\end_inset 
+
+ is explicitly convergent, and may be directly summed, thus offering another
+ check.
+\layout Section
+
+Conclusion
+\layout Standard
+
+Conclude whatever.
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
+
+\end_inset 
+
+
+\layout Section*
+
+Appendix: Some Pretty Pictures
+\layout Standard
+
+Below follow some interesting pictures of the Hurwitz zeta function for
+ values of 
+\begin_inset Formula $s$
+\end_inset 
+
+ on the critical line 
+\begin_inset Formula $s=1/2+i\tau$
+\end_inset 
+
+.
 \layout Standard
 
 
@@ -930,7 +1067,7 @@ periodicity
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -981,7 +1118,7 @@ Extended range
 
 \begin_inset Graphics
 	filename periodic-100-sqrt.png
-	width 100text%
+	height 100text%
 
 \end_inset 
 
@@ -1033,20 +1170,6 @@ Note the cryptic pattern of hexagonal cells that seem to form at the upper
  part of the figure.
  These cells can presumably be labelled in some number-theoretic way, possibly
  through factorizations of integers in some way.
-\end_inset 
-
-
-\layout Standard
-
-xxx
-\layout Standard
-
-xxx
-\layout Standard
-
-
-\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
-
 \end_inset 
 
 
