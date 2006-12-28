@@ -192,8 +192,98 @@ The Hurwitz zeta may be expressed in terms of the polylogarithm:
 \end_inset 
 
 .
- There do not appear to be any generalalgorithms that may be applied on
+ There do not appear to be any general algorithms that may be applied on
  the critical strip.
+\layout Standard
+
+The primary effort of this paper is to take the algorithm given by Borwein
+\begin_inset LatexCommand \cite{Bor95,Bor00-A}
+
+\end_inset 
+
+, and generalize it to the polylogarithm.
+ The result is a relatively small finite sum that approximates the polylogarithm
+, and whose error, or difference from the exact value can be precisely character
+ized and bounded.
+ Increased precision is easily obtainable by evaluating a slightly larger
+ sum; one may obtain roughly 
+\begin_inset Formula $2N$
+\end_inset 
+
+ to 
+\begin_inset Formula $4N$
+\end_inset 
+
+ bits of precisicision by evaluating a sum of 
+\begin_inset Formula $N$
+\end_inset 
+
+ terms.
+ The sum may be readily evaluated for just about any value 
+\begin_inset Formula $s$
+\end_inset 
+
+ on the complex 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane.
+ However, it is convergent only in a limited region of the 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, and specifically, is only convergent when 
+\begin_inset Formula \[
+0.261\left|\frac{z^{2}}{z-1}\right|<1\]
+
+\end_inset 
+
+ This is sufficient for evaluating the Hurwitz zeta for general complex
+ 
+\begin_inset Formula $s$
+\end_inset 
+
+ and real 
+\begin_inset Formula $0<q<1$
+\end_inset 
+
+.
+ Unfortunately, there does not apepar to be any simple and efficient way
+ of extending this result to the general complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane.
+\layout Standard
+
+The development proceeds as follows.
+ First, an certain specific integral representation is given for the polylogarit
+hm.
+ This representation is such that a certain trick, here called 
+\begin_inset Quotes eld
+\end_inset 
+
+the Borwein trick
+\begin_inset Quotes erd
+\end_inset 
+
+, may be applied, to expressed the integral as a polynomial plus a small
+ error term.
+ Next, a specific polynomial is selected, and the resulting error term is
+ precisely bounded.
+ This is followed by a breif presentation of the duplication formula for
+ the Hurwitz zeta, and a short discussion of ways in which a numerical algorithm
+ may be tested for correctness.
+ The algorithm has been implemented by the author using the Gnu Multiple
+ Precision arithmetic library
+\begin_inset LatexCommand \cite{GMP}
+
+\end_inset 
+
+, and is avalaible on request, under the terms of the LGPL license.
+ The paper concludes with some intrigueing images of the Hurwitz zeta function
+ on the cirtical strip.
+ 
 \layout Section
 
 The Polylogarithm
