@@ -137,7 +137,7 @@ main (int argc, char * argv[])
 	mpf_init (que);
 			  
 	cpx_set_d (ess, 0.5, sim);
-	cpx_set_d (ess, 0.5, 14.134725);
+	cpx_set_d (ess, 1.5, 14.134725);
 
 	double zmag = sim;
 
@@ -169,18 +169,21 @@ main (int argc, char * argv[])
 		mpf_set_d (que, q);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
+		//
+	cpx_set_d (ess, 1.5, 14.134725);
 		cpx_periodic_zeta (zeta, ess, que, prec);
 
 		double zre = zmag * cos (2.0*M_PI * q);
 		double zim = zmag * sin (2.0*M_PI * q);
 		cpx_set_d (zee, zre, zim);
+	cpx_set_d (ess, 0.5, 14.134725);
 		cpx_polylog_sum (plog, ess, zee, prec);
 
 		printf ("%g",q);
-		// fp_prt ("\t", zeta[0].re);
-		fp_prt ("\t", zeta[0].im);
-		// fp_prt ("\t", plog[0].re);
-		fp_prt ("\t", plog[0].im);
+		fp_prt ("\t", zeta[0].re);
+		// fp_prt ("\t", zeta[0].im);
+		fp_prt ("\t", plog[0].re);
+		// fp_prt ("\t", plog[0].im);
 		printf ("\n");
 		fflush (stdout);
 	}
