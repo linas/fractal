@@ -35,7 +35,7 @@ the Polylogarithm and Hurwitz zeta functions
 Linas Vepstas
 \layout Date
 
-12 October 2006
+12 October 2006, revised 27 December 2006
 \layout Abstract
 
 This paper develops an extension of the techniques given by Borwein's 
@@ -168,7 +168,7 @@ The Hurwitz zeta may be expressed in terms of the polylogarithm:
 
  by means of the identity 
 \begin_inset Formula \begin{equation}
-\mbox{Li}_{s}\left(e^{2\pi iq}\right)+\left(-1\right)^{s}\mbox{Li}_{s}\left(e^{-2\pi iq}\right)=\frac{\left(2\pi i\right)^{s}}{\Gamma(s)}\zeta(1-s,q)\label{eq:}\end{equation}
+\mbox{Li}_{s}\left(e^{2\pi iq}\right)+\left(-1\right)^{s}\mbox{Li}_{s}\left(e^{-2\pi iq}\right)=\frac{\left(2\pi i\right)^{s}}{\Gamma(s)}\zeta(1-s,q)\label{eq:poly-hur relation}\end{equation}
 
 \end_inset 
 
@@ -289,30 +289,32 @@ the Borwein trick
 The Polylogarithm
 \layout Standard
 
-A more convenient starting point for the analysis is the polylogarithm:which
- is related to the Hurwitz zeta as The above has a rather complicated domain
- description over which its valid.
+The polylogarithm has a non-trivial analytic structure.
+ For fixed 
+\begin_inset Formula $s$
+\end_inset 
+
+, it has a branch cut on the positive real axis, for 
+\begin_inset Formula $1<z<+\infty$
+\end_inset 
+
+.
+ The location of the branch-point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ is, as is always the case with branch points, the cause of limited convergence
+ of analytic series in the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane.
+ This is noted here, as this branch point has a direct impact on the algorithm.
+ The polylogarithm has many interesting properties, which are not reviewed
+ here.
 \layout Standard
 
-Actually we have 
-\begin_inset Formula \begin{equation}
-\mbox{Li}_{s}\left(z\right)+\left(-1\right)^{s}\mbox{Li}_{s}\left(\frac{1}{z}\right)=\frac{\left(2\pi i\right)^{s}}{\Gamma(s)}\zeta\left(1-s,\frac{\log z}{2\pi i}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- for all 
-\begin_inset Formula $s\in\mathbb{C}$
-\end_inset 
-
- and 
-\begin_inset Formula $z\notin(1,+\infty]$
-\end_inset 
-
- , uuu hh confusion about principle branch of logarithm ....
- !?
-\layout Standard
-
-Anyway...
+The development of the algorithm requires the following integral representation.
 \layout Lemma
 
 The polylogarithm has the integral representation 
@@ -529,8 +531,8 @@ This result may be immediately employed in equation
 \end_inset 
 
  as small as possible.
- One possible sequence, based on the Gaussian distribution, is explored
- in the next section.
+ One possible sequence, based on the Bernoulli process or Gaussian distribution,
+ is explored in the next section.
  
 \layout Section
 
@@ -671,9 +673,14 @@ j\end{array}\right)+\xi(s,z)\label{eq:polylog specific estimate}\end{equation}
  
 \layout Standard
 
-The above formula has been implemented using the Gnu Multi-Precision library
- (GMP) (need ref for GMP), and has been numerically validated for correctness
- in several different ways.
+The above formula has been implemented using the Gnu Multiple Precision
+ arithmetic library (GMP)
+\begin_inset LatexCommand \cite{GMP}
+
+\end_inset 
+
+, and has been numerically validated for correctness in several different
+ ways.
  The source code, under the license terms of the LGPL, may be obtained by
  contacting the author.
  
@@ -698,7 +705,7 @@ In order for equation
 \end_inset 
 
 , and assuming that 
-\begin_inset Formula $\sigma<n$
+\begin_inset Formula $-\sigma<n$
 \end_inset 
 
 , an estimate for the integrand may be given: 
@@ -738,7 +745,7 @@ p_{2n}(y)\left|\log y\right|^{s-1} & \le & p_{2n}(y)\left|\log y\right|^{n}\labe
 
 \end_inset 
 
- Combing these, and evaluating the resulting integral over the gaussian,
+ Combining these, and evaluating the resulting integral over the Gaussian,
  one has 
 \begin_inset Formula \begin{eqnarray}
 \int_{0}^{1}\,\frac{p_{2n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy & \le & p_{2n}(y_{0})\left|\log y_{0}\right|^{n}n^{-1/2}\label{eq:}\\
@@ -777,7 +784,94 @@ p_{2n}(y)\left|\log y\right|^{s-1} & \le & p_{2n}(y)\left|\log y\right|^{n}\labe
 
 \end_inset 
 
- Thus, one may conclude that the estimate 
+ 
+\layout Standard
+
+Of course, for 
+\begin_inset Formula $s$
+\end_inset 
+
+ equal to negative integers, one has that 
+\begin_inset Formula $\Gamma(s)$
+\end_inset 
+
+ is infinite, and thus implying that the error term is zero.
+ This somewhat surprising result corresponds to the fact that 
+\begin_inset Formula $\mbox{Li}_{-n}(z)$
+\end_inset 
+
+ has an exact expression as a ratio of two polynomials, the denominator
+ being of degree 
+\begin_inset Formula $n+1$
+\end_inset 
+
+.
+ Indeed, setting 
+\begin_inset Formula $s=0$
+\end_inset 
+
+ and so 
+\begin_inset Formula $n=1$
+\end_inset 
+
+ into equation 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ gives the exact result 
+\begin_inset Formula \[
+\mbox{Li}_{0}(z)=\frac{z}{1-z}\]
+
+\end_inset 
+
+ while for 
+\begin_inset Formula $s=-1$
+\end_inset 
+
+, one must use 
+\begin_inset Formula $n=2$
+\end_inset 
+
+, to obtain the exact result
+\begin_inset Formula \[
+\mbox{Li}_{-1}(z)=\frac{z}{\left(1-z\right)^{2}}\]
+
+\end_inset 
+
+ In general, the formula 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ seems to have the curious property of always evaluating to exactly the
+ same rational function whenever 
+\begin_inset Formula $s$
+\end_inset 
+
+ is a non-positive integer, and 
+\begin_inset Formula $-s<n$
+\end_inset 
+
+.
+ That is, for fixed non-positive integer 
+\begin_inset Formula $s$
+\end_inset 
+
+, the sum is independent of 
+\begin_inset Formula $n$
+\end_inset 
+
+, provided that 
+\begin_inset Formula $n$
+\end_inset 
+
+ is large enough.
+ Thus, this polynomial approximation has the pleasing result of giving exact
+ answers in the case when an exact polynomial answer is possible.
+\layout Standard
+
+For the general case, one may conclude that the estimate 
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
@@ -846,7 +940,23 @@ F\left(s;q\right)=2^{1-s}F\left(s;2q\right)-F\left(s;q+\frac{1}{2}\right)\]
 \end_inset 
 
 .
- The duplication formula follows from a general 
+ Thus, as 
+\begin_inset Formula $q$
+\end_inset 
+
+ approaches 0 or 1, the algorithm requires more time, but only logarithmically
+ so, as 
+\begin_inset Formula $-\log_{2}q$
+\end_inset 
+
+ or 
+\begin_inset Formula $-\log_{2}(1-q)$
+\end_inset 
+
+ as the case may be.
+\layout Standard
+
+The duplication formula follows from a general 
 \begin_inset Formula $p$
 \end_inset 
 
@@ -886,11 +996,16 @@ Validation
 
 The correctness of a given numerical implementation can be validated in
  a number of ways.
+ For non-positive integer 
+\begin_inset Formula $s$
+\end_inset 
+
+, one has the exact rational functions previously mentioned.
  For positive integer 
 \begin_inset Formula $n$
 \end_inset 
 
-, one has 
+, one has the relationship 
 \begin_inset Formula \begin{equation}
 \mbox{Li}_{n}\left(e^{2\pi iq}\right)+\left(-1\right)^{n}\mbox{Li}_{n}\left(e^{-2\pi iq}\right)=-\frac{\left(2\pi i\right)^{n}}{n!}B_{n}(q)\label{eq:}\end{equation}
 
@@ -955,12 +1070,36 @@ Below follow some interesting pictures of the Hurwitz zeta function for
 \end_inset 
 
 .
+ Precisely speaking, they are for the 
+\begin_inset Quotes eld
+\end_inset 
+
+periodic zeta
+\begin_inset Quotes erd
+\end_inset 
+
+ 
+\begin_inset Formula $F(s,q)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
+\end_inset 
+
+ only.
+ However, from the relation 
+\begin_inset LatexCommand \ref{eq:poly-hur relation}
+
+\end_inset 
+
+, one may deduce that this differs from the Hurwitz zeta only by an exponentiall
+y small amount when 
+\begin_inset Formula $s$
+\end_inset 
+
+ is on the critical line.
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -1207,7 +1346,7 @@ Extended range
 
 
 \begin_inset Graphics
-	filename periodic-100-sqrt.png
+	filename periodic-100-log.png
 	height 100text%
 
 \end_inset 
@@ -1217,15 +1356,20 @@ Extended range
 
 This figure shows the periodic zeta over an extended range.
  The attempted rescaling here is 
-\begin_inset Formula $s=\frac{1}{2}+\tau q^{-1/2}$
+\begin_inset Formula $s=\frac{1}{2}+\tau q^{1.2/\log\tau}$
 \end_inset 
 
-, which is clearly too strong for small 
-\begin_inset Formula $q$
+, which is seems to do a passablejob of straightening out the striations,
+ at least for small 
+\begin_inset Formula $\tau$
 \end_inset 
 
 .
- The vertical scale on the right edge runs from 0 to 100.
+ The vertical scale on the right edge has 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ running from 0 to 100.
  
 \layout Standard
 
@@ -1260,6 +1404,7 @@ Note the cryptic pattern of hexagonal cells that seem to form at the upper
  part of the figure.
  These cells can presumably be labelled in some number-theoretic way, possibly
  through factorizations of integers in some way.
+ However, that labelling is not at all obvious.
 \end_inset 
 
 
