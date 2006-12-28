@@ -1050,6 +1050,10 @@ int test_polylog (int nterms, int prec)
 /* ==================================================================== */
 /** 
  * test_polylog_series() -- compare the two difference polylog algos.
+ *
+ * Works great. Just note that the Borwein-style sums fail near z=1,
+ * and so we avoid this area. Note also the summation gets meg slow
+ * when z gets too close to the unit circle.
  */
 int test_polylog_series (int nterms, int prec)
 {
