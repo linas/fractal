@@ -933,6 +933,9 @@ int test_complex_gamma (int nterms, int prec)
 /* ==================================================================== */
 /** 
  * test_polylog() -- very trivial test of polylog
+ * Performs a check of polylog at a few negative integer values.
+ * Mostly sort-of-passes, except that it has some convergence 
+ * problems in some areas.
  */
 int test_polylog (int nterms, int prec)
 {
@@ -1040,6 +1043,61 @@ int test_polylog (int nterms, int prec)
 	if (0 == nfaults)
 	{
 		fprintf(stderr, "Polylog test passed!\n");
+	}
+	return nfaults;
+}
+
+/* ==================================================================== */
+/** 
+ * test_polylog_series() -- compare the two difference polylog algos.
+ */
+int test_polylog_series (int nterms, int prec)
+{
+	int nfaults = 0;
+
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, prec-5);
+
+	cpx_t plog, psum, term, zee, ess;
+	cpx_init (plog);
+	cpx_init (psum);
+	cpx_init (zee);
+	cpx_init (ess);
+	cpx_init (term);
+
+	cpx_set_ui (ess, 0.9124444431, 12.1234077777);
+
+	double r;
+	for (r=0.0623746562; r<0.9; r+=0.1052892347222)
+	{
+		double q;
+		for (q=0.21111176486599; q<0.8; q+= 0.0999856581)
+		{
+			double rez = r * cos (2.0*M_PI*q);
+			double imz = r * sin (2.0*M_PI*q);
+			cpx_set_d (zee, rez, imz);
+			
+			cpx_polylog_sum (psum, ess, zee, prec);
+			cpx_polylog (plog, ess, zee, prec);
+			cpx_sub (plog, plog, psum);
+		
+			nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, r, q);
+		}
+	}
+
+	cpx_clear (plog);
+	cpx_clear (psum);
+	cpx_clear (zee);
+	cpx_clear (ess);
+	cpx_clear (term);
+
+	mpf_clear (epsi);
+
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Polylog series test passed!\n");
 	}
 	return nfaults;
 }
@@ -1535,7 +1593,8 @@ int main (int argc, char * argv[])
 	int nfaults = 0;
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
-	nfaults += test_polylog (nterms, prec);
+//	nfaults += test_polylog (nterms, prec);
+	nfaults += test_polylog_series (nterms, prec);
 // nfaults += test_periodic_zeta (nterms, prec);
 	nfaults += test_complex_pow (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
