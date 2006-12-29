@@ -49,7 +49,7 @@ db-merge.o: db-cache.h mp-misc.h
 dsubn.o: mp-zeta.h mp-binomial.h mp-misc.h
 exact.o: mp-complex.h mp-misc.h mp-polylog.h
 hurwitz.o: mp-complex.h mp-misc.h
-mp_zeta_test.o: mp-zeta.h mp-complex.h mp-consts.h mp-misc.h mp-trig.h
+mp_zeta_test.o: mp-zeta.h mp-binomial.h mp-complex.h mp-consts.h mp-gamma.h mp-misc.h mp-polylog.h mp-trig.h
 sho.o: mp-complex.h mp-hyper.h mp-trig.h
 stieltjes.o: mp-zeta.h mp-binomial.h mp-misc.h
 

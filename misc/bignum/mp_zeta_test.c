@@ -16,6 +16,7 @@
 #include <gsl/gsl_complex_math.h>
 
 #include <gmp.h>
+#include "mp-binomial.h"
 #include "mp-consts.h"
 #include "mp-complex.h"
 #include "mp-gamma.h"
@@ -1198,8 +1199,8 @@ printf ("start test %g +i%g\n", sre, sim);
 
 int main (int argc, char * argv[])
 {
-#ifdef FACT_TEST
 	char str[4000];
+#ifdef FACT_TEST
 	mpz_t fact;
 	mpz_init (fact);
 
@@ -1225,8 +1226,8 @@ int main (int argc, char * argv[])
 	}
 #endif
 
-// #define I_STIRLING_TEST
-#ifdef I_STIRLING_TEST
+// #define I_STIRLING_FIRST_TEST
+#ifdef I_STIRLING_FIRST_TEST
 	int n, k;
 	mpz_t sitrly;
 	mpz_init (sitrly);
@@ -1237,7 +1238,25 @@ int main (int argc, char * argv[])
 		{
 			i_stirling_first (sitrly, n ,k);
 			mpz_get_str (str, 10, sitrly);
-			printf ("sitrly (%d %d) = %s\n", n, k, str);
+			printf ("strily first (%d %d) = %s\n", n, k, str);
+		}
+		printf ("---\n");
+	}
+#endif
+
+#define I_STIRLING_SECOND_TEST
+#ifdef I_STIRLING_SECOND_TEST
+	int n, k;
+	mpz_t sitrly;
+	mpz_init (sitrly);
+
+	for (n=0; n<21; n++)
+	{
+		for (k=0; k<=n; k++)
+		{
+			i_stirling_second (sitrly, n ,k);
+			mpz_get_str (str, 10, sitrly);
+			printf ("stirly second (%d %d) = %s\n", n, k, str);
 		}
 		printf ("---\n");
 	}

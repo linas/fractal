@@ -422,25 +422,25 @@ void i_stirling_second (mpz_t s, unsigned int n, unsigned int k)
 	}
 	
 	/* Use recursion to get new value */
-	/* S = Stir(n-1, k-1) + k * Stir(n-1, k) */
+	/* S(n, k) = S(n-1, k-1) + k * S(n-1, k) */
 	unsigned int i;
-	mpz_t skm, sk, kay;
+	mpz_t skm, sk, eye;
 	mpz_init (skm);
 	mpz_init (sk);
-	mpz_init (kay);
+	mpz_init (eye);
 	mpz_set_ui (skm, 0);
-	mpz_set_ui (kay, k);
 	for (i=1; i<=n; i++)
 	{
-		i_stirling_first (sk, n-1, i);
-		mpz_mul (s, kay, sk);
+		i_stirling_second (sk, n-1, i);
+		mpz_set_ui (eye, i);
+		mpz_mul (s, eye, sk);
 		mpz_add (s, s, skm);
 		i_triangle_cache_store (&cache, s, n, i);
 		mpz_set (skm, sk);
 	}
 	mpz_clear (skm);
 	mpz_clear (sk);
-	mpz_clear (kay);
+	mpz_clear (eye);
 
 	i_triangle_cache_fetch (&cache, s, n, k);
 }
