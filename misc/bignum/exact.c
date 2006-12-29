@@ -22,6 +22,7 @@
 #include "mp-trig.h"
 #include "mp-zeta.h"
 
+/* ============================================================================ */
 /* The cpx_zeta_series() is supposed to sum up to 
  * the periodic zeta function. However, its does not,
  * not sure why -- maybe the formula is wrong, maybe 
@@ -110,6 +111,51 @@ printf ("\n");
 }
 #endif
 
+/* ============================================================================ */
+
+void cohere (cpx_t coho, const cpx_t lambda, const cpx_t zee, int prec)
+{
+	int n;
+
+	cpx_t sum, term, lamp, ess, om;
+	cpx_init (om);
+	cpx_init (ess);
+	cpx_init (sum);
+	cpx_init (term);
+	cpx_init (lamp);
+	
+	cpx_recip (om, lambda);
+	cpx_set_ui (lamp, 1, 0);
+	cpx_set_ui (sum, 0, 0);
+	for (n=0; n<20; n++)
+	{
+		cpx_polylog_nint (term, n, zee);
+		cpx_mul (term, term, lamp);
+		cpx_add (sum, sum, term);
+		cpx_mul (lamp, lamp, om); 
+	}
+
+	cpx_set (lamp, lambda);
+	for (n=1; n<20; n++)
+	{
+		cpx_set_ui (ess, n, 0);
+		cpx_polylog_sum (term, ess, zee, prec);
+		cpx_mul (term, term, lamp);
+		cpx_add (sum, sum, term);
+		cpx_mul (lamp, lamp, lambda); 
+	}
+
+	cpx_set (coho, sum);
+	
+	cpx_clear (om);
+	cpx_clear (ess);
+	cpx_clear (sum);
+	cpx_clear (term);
+	cpx_clear (lamp);
+}
+
+/* ============================================================================ */
+
 int
 main (int argc, char * argv[])
 {
@@ -159,6 +205,7 @@ main (int argc, char * argv[])
 	mpf_set_str (ess[0].im, zero, 10);
 #endif
 
+#if 0
 	// printf ("#\n# graph of Hurwitz zeta as function of q, at \n#\n");
 	printf ("#\n# graph of periodic zeta as function of q, at \n#\n");
 	fp_prt ("# at s=0.5+i ", ess[0].im);
@@ -187,6 +234,23 @@ main (int argc, char * argv[])
 		printf ("\n");
 		fflush (stdout);
 	}
+#endif 
 
+	cpx_t lam;
+	cpx_init (lam);
+	cpx_set_ui (lam, 1,0);
+	
+	double z;
+	for (z=-0.9; z< 0.9; z+= 0.03)
+	{
+		cpx_set_d (zee, z, 0);
+		cohere (zeta, lam, zee, prec);
+
+		printf ("%g",z);
+		fp_prt ("\t", zeta[0].re);
+		// fp_prt ("\t", zeta[0].im);
+		printf ("\n");
+		fflush (stdout);
+	}
 	return 0;
 }
