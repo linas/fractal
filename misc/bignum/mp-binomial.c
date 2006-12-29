@@ -303,7 +303,7 @@ void i_stirling_first (mpz_t s, unsigned int n, unsigned int k)
 	}
 	
 	/* Use recursion to get new value */
-	/* s = stir(n-1, k-1) + (n-1) * stir(n-1, k) */
+	/* s(n,k) = s(n-1, k-1) + (n-1) * s(n-1, k) */
 	unsigned int i;
 	mpz_t skm, sk, en;
 	mpz_init (skm);
