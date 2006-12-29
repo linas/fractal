@@ -57,6 +57,12 @@ void i_stirling_first (mpz_t s, unsigned int n, unsigned int k);
 /* A funny off-by-one sum of stirling and binomial */
 void i_stirbin_sum (mpz_t s, unsigned int n, unsigned int m);
 
+/** 
+ * stirling_second - Stirling Numbers of the Second kind, 
+ * Uses dynamically-sized cache.
+ */
+void i_stirling_second (mpz_t s, unsigned int n, unsigned int k);
+
 /* binomial transform of power sum */
 void fp_bin_xform_pow (mpf_t bxp, unsigned int n, unsigned int s);
 

@@ -380,6 +380,72 @@ void i_stirbin_sum (mpz_t s, unsigned int n, unsigned int m)
 }
 
 /* ======================================================================= */
+/* stirling_second - Stirling Numbers of the Second kind, 
+ * Uses dynamically-sized cache.
+ */
+void i_stirling_second (mpz_t s, unsigned int n, unsigned int k)
+{
+	DECLARE_I_CACHE (cache);
+
+	/* Trivial case (not in the cache) */
+	if (0==k)
+	{
+		if (0==n) 
+		{ 
+			mpz_set_ui (s, 1);
+		}
+		else
+		{
+			mpz_set_ui (s, 0);
+		}
+		return;
+	}
+
+	if (n<k)
+	{
+		mpz_set_ui (s, 0);
+		return;
+	}
+
+	if (n==k)
+	{
+		mpz_set_ui (s, 1);
+		return;
+	}
+
+	/* Pull value from cache if it is there */
+	int hit = i_triangle_cache_check (&cache, n, k);
+	if (hit)
+	{
+		i_triangle_cache_fetch (&cache, s, n, k);
+		return;
+	}
+	
+	/* Use recursion to get new value */
+	/* S = Stir(n-1, k-1) + k * Stir(n-1, k) */
+	unsigned int i;
+	mpz_t skm, sk, kay;
+	mpz_init (skm);
+	mpz_init (sk);
+	mpz_init (kay);
+	mpz_set_ui (skm, 0);
+	mpz_set_ui (kay, k);
+	for (i=1; i<=n; i++)
+	{
+		i_stirling_first (sk, n-1, i);
+		mpz_mul (s, kay, sk);
+		mpz_add (s, s, skm);
+		i_triangle_cache_store (&cache, s, n, i);
+		mpz_set (skm, sk);
+	}
+	mpz_clear (skm);
+	mpz_clear (sk);
+	mpz_clear (kay);
+
+	i_triangle_cache_fetch (&cache, s, n, k);
+}
+
+/* ======================================================================= */
 /* binomial transform of power sum */
 
 static void fp_bin_xform_pow_compute (mpf_t bxp, unsigned int n, unsigned int s)
