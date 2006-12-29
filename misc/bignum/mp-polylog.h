@@ -10,14 +10,13 @@
 #include "mp-complex.h"
 
 /**
- * cpx_polylog -- polylogarithm
+ * cpx_polylog_nint -- compute the polylogarithm at negetive integers
  *
- * Li_s(z) = sum_{n=1}^infty z^n/ n^s
- * Works for complex s, z, and uhhhh ,,, this works only for a particular
- * domain that needs to be documented ... may be broken, or incompletely
- * tested.
+ * Li_{-n}(z) 
+ * At the negative integers, the polylog is a rational function,
+ * meromorphic everywhere except for multiple poles at z=1.
  */
-void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
+void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee);
 
 /**
  * cpx_polylog_sum -- compute the polylogarithm by direct summation
@@ -31,6 +30,17 @@ void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
  * considerably better if z is varied while s is held fixed.
  */
 void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
+
+/**
+ * cpx_polylog -- polylogarithm
+ *
+ * Li_s(z) = sum_{n=1}^infty z^n/ n^s
+ * 
+ * Works for complex s, z; however, must have |z^2/(1-z)| < 3.3
+ * This is basically a blobby neighborhood around z=-1, it includes
+ * some values whos magnitude is greater than one.
+ */
+void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
 
 /**
  * cpx_periodic_zeta -- Periodic zeta function 

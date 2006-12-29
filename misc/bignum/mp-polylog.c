@@ -515,6 +515,67 @@ void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 }
 
 /* ============================================================= */
+/**
+ * cpx_polylog_nint -- compute the polylogarithm at negetive integers
+ *
+ * At the negative integers, the polylog is a rational function,
+ * meromorphic everywhere except for multiple poles at z=1.
+ */
+
+void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
+{
+	int k;
+
+	mpz_t stir, fac;
+	mpz_init (stir);
+	mpz_init (fac);
+
+	cpx_t z, zp, term;
+	cpx_init (z);
+	cpx_init (zp);
+	cpx_init (term);
+
+	cpx_set (z, zee);
+	cpx_sub_ui (zp, zee, 1, 0);
+	cpx_recip (zp, zp);
+
+	if (0 == negn)
+	{
+		cpx_mul (plog, z, zp);
+		cpx_neg (plog, plog);
+	}
+	else
+	{
+		cpx_set_ui (plog, 0, 0);
+		mpz_set_ui (fac, 1);
+		for (k=1; k<= negn+1; k++)
+		{
+			i_stirling_second (stir, negn+1, k);
+			mpz_mul (stir, stir, fac);
+			mpf_set_z (term[0].re, stir);
+			mpf_set_ui (term[0].im, 0);
+
+			cpx_mul (term, term, zp);
+	
+			cpx_add (plog, plog, term);
+			cpx_mul (zp, zp, z);
+			mpz_mul_ui (fac, fac, k);
+		}
+	}
+
+	if (0==negn%2)
+	{
+		cpx_neg (plog, plog);
+	}
+
+	cpx_clear (z);
+	cpx_clear (zp);
+	cpx_clear (term);
+	mpz_clear (stir);
+	mpz_clear (fac);
+}
+
+/* ============================================================= */
 
 /** 
  * test_bernoulli_poly - compare periodic zeta to the Bernoulli poly's
