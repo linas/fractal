@@ -131,16 +131,22 @@ void cohere (cpx_t coho, const cpx_t lambda, const cpx_t zee, int prec)
 	{
 		cpx_polylog_nint (term, n, zee);
 		cpx_mul (term, term, lamp);
+printf("n=%d ", -n);
+cpx_prt ("neg term= ", term);
+printf("\n");
 		cpx_add (sum, sum, term);
 		cpx_mul (lamp, lamp, om); 
 	}
 
 	cpx_set (lamp, lambda);
-	for (n=1; n<20; n++)
+	for (n=1; n<50; n++)
 	{
 		cpx_set_ui (ess, n, 0);
 		cpx_polylog_sum (term, ess, zee, prec);
 		cpx_mul (term, term, lamp);
+printf("n=%d ", n);
+cpx_prt ("pos term= ", term);
+printf("\n");
 		cpx_add (sum, sum, term);
 		cpx_mul (lamp, lamp, lambda); 
 	}
@@ -159,7 +165,7 @@ void cohere (cpx_t coho, const cpx_t lambda, const cpx_t zee, int prec)
 int
 main (int argc, char * argv[])
 {
-	int prec = 20;
+	int prec = 40;
 	double q;
 
 	/* Set the precision (number of binary bits) */
@@ -238,10 +244,10 @@ main (int argc, char * argv[])
 
 	cpx_t lam;
 	cpx_init (lam);
-	cpx_set_ui (lam, 1,0);
+	cpx_set_d (lam, 0,1.0);
 	
 	double z;
-	for (z=-0.9; z< 0.9; z+= 0.03)
+	for (z=-0.6; z< 0.6; z+= 0.03)
 	{
 		cpx_set_d (zee, z, 0);
 		cohere (zeta, lam, zee, prec);
