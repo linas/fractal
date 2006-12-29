@@ -113,21 +113,51 @@ printf ("\n");
 
 /* ============================================================================ */
 
+void sumpos (cpx_t coho, const cpx_t lambda, const cpx_t zee)
+{
+	int n;
+
+	cpx_t sum, term, zp;
+	cpx_init (sum);
+	cpx_init (term);
+	cpx_init (zp);
+	
+	cpx_set_ui (sum, 0, 0);
+	cpx_set (zp, zee);
+
+	/* sum_{n=1} nz^n / (n-lambda) */
+	for (n=1; n<50; n++)
+	{
+		cpx_sub_ui (term, lambda, n, 0);
+		cpx_div (term, zp, term);
+		cpx_mul_ui (term, term, n);
+		cpx_add (sum, sum, term);
+		cpx_mul (zp, zp, zee); 
+	}
+
+	cpx_neg (coho, sum);
+	
+	cpx_clear (sum);
+	cpx_clear (term);
+	cpx_clear (zp);
+}
+
 void cohere (cpx_t coho, const cpx_t lambda, const cpx_t zee, int prec)
 {
 	int n;
 
-	cpx_t sum, term, lamp, ess, om;
+	cpx_t sum, term, lamp, om;
 	cpx_init (om);
-	cpx_init (ess);
 	cpx_init (sum);
 	cpx_init (term);
 	cpx_init (lamp);
 	
+	cpx_set_ui (sum, 0, 0);
+	sumpos (sum, lambda, zee);
+			  
 	cpx_recip (om, lambda);
 	cpx_set_ui (lamp, 1, 0);
-	cpx_set_ui (sum, 0, 0);
-	for (n=0; n<20; n++)
+	for (n=1; n<80; n++)
 	{
 		cpx_polylog_nint (term, n, zee);
 		cpx_mul (term, term, lamp);
@@ -138,23 +168,9 @@ printf("\n");
 		cpx_mul (lamp, lamp, om); 
 	}
 
-	cpx_set (lamp, lambda);
-	for (n=1; n<50; n++)
-	{
-		cpx_set_ui (ess, n, 0);
-		cpx_polylog_sum (term, ess, zee, prec);
-		cpx_mul (term, term, lamp);
-printf("n=%d ", n);
-cpx_prt ("pos term= ", term);
-printf("\n");
-		cpx_add (sum, sum, term);
-		cpx_mul (lamp, lamp, lambda); 
-	}
-
 	cpx_set (coho, sum);
 	
 	cpx_clear (om);
-	cpx_clear (ess);
 	cpx_clear (sum);
 	cpx_clear (term);
 	cpx_clear (lamp);
@@ -244,7 +260,9 @@ main (int argc, char * argv[])
 
 	cpx_t lam;
 	cpx_init (lam);
-	cpx_set_d (lam, 0,1.0);
+	cpx_set_d (lam, sim, 0.0);
+	cpx_set_d (lam, 0.5, 14.134725);
+	cpx_set_d (lam, 0.5, sim);
 	
 	double z;
 	for (z=-0.6; z< 0.6; z+= 0.03)
