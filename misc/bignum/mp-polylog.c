@@ -548,6 +548,7 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
 	{
 		cpx_set_ui (plog, 0, 0);
 		mpz_set_ui (fac, 1);
+		cpx_set (z, zp);
 		for (k=1; k<= negn+1; k++)
 		{
 			i_stirling_second (stir, negn+1, k);
@@ -561,11 +562,11 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
 			cpx_mul (zp, zp, z);
 			mpz_mul_ui (fac, fac, k);
 		}
-	}
 
-	if (0==negn%2)
-	{
-		cpx_neg (plog, plog);
+		if (0==negn%2)
+		{
+			cpx_neg (plog, plog);
+		}
 	}
 
 	cpx_clear (z);

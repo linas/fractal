@@ -970,7 +970,8 @@ int test_polylog (int nterms, int prec)
 		cpx_neg (exact, exact);
 		cpx_div (exact, zee, exact);
 	
-		cpx_polylog (plog, ess, zee, prec);
+		// cpx_polylog (plog, ess, zee, prec);
+		cpx_polylog_nint (plog, 0, zee);
 		cpx_sub (plog, plog, exact);
 	
 		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, rez, imz);
@@ -995,7 +996,8 @@ int test_polylog (int nterms, int prec)
 		cpx_mul (exact, exact, exact);
 		cpx_div (exact, zee, exact);
 	
-		cpx_polylog (plog, ess, zee, prec);
+		// cpx_polylog (plog, ess, zee, prec);
+		cpx_polylog_nint (plog, 1, zee);
 		cpx_sub (plog, plog, exact);
 	
 		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -1, rez, imz);
@@ -1024,7 +1026,8 @@ int test_polylog (int nterms, int prec)
 		cpx_add_ui (term, zee, 1, 0);
 		cpx_mul (exact, exact, term);
 
-		cpx_polylog (plog, ess, zee, prec);
+		// cpx_polylog (plog, ess, zee, prec);
+		cpx_polylog_nint (plog, 2, zee);
 		cpx_sub (plog, plog, exact);
 	
 		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -2, rez, imz);
@@ -1244,7 +1247,7 @@ int main (int argc, char * argv[])
 	}
 #endif
 
-#define I_STIRLING_SECOND_TEST
+// #define I_STIRLING_SECOND_TEST
 #ifdef I_STIRLING_SECOND_TEST
 	int n, k;
 	mpz_t sitrly;
@@ -1616,7 +1619,7 @@ int main (int argc, char * argv[])
 	int nfaults = 0;
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
-//	nfaults += test_polylog (nterms, prec);
+	nfaults += test_polylog (nterms, prec);
 	nfaults += test_polylog_series (nterms, prec);
 // nfaults += test_periodic_zeta (nterms, prec);
 	nfaults += test_complex_pow (nterms, prec);
