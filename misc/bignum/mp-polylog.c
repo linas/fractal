@@ -147,6 +147,24 @@ static void polylog_est (cpx_t plog, const cpx_t ess, const cpx_t zee, int norde
 	cpx_clear (ck);
 }
 
+/* polylog_get_zone -- return | z^2 / (z-1) |^2
+ *
+ * The value of | z^2 / (z-1) | is used to determine
+ * the convergence zone.
+ */
+inline static double polylog_get_zone (const cpx_t zee)
+{
+	double zre = mpf_get_d (zee[0].re);	
+	double zim = mpf_get_d (zee[0].im);	
+
+	double den = 1.0 / ((zre-1.0)*(zre-1.0) + zim*zim);
+	double fre = (zre*zre - zim*zim) * (zre-1.0) * den;
+	double fim = (2.0*zre*zim) * zim * den;
+	den = fre*fre + fim*fim;
+
+	return den;
+}
+	
 /*
  * polylog_terms_est() -- estimate number of terms needed 
  * in the polylog summation in order to keep the error
@@ -161,15 +179,6 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 #if BOROKEN
 	double fterms = 2.302585 * prec;  /* log(10) */
 
-	double zre = mpf_get_d (zee[0].re);	
-	double zim = mpf_get_d (zee[0].im);	
-
-	/* This part of the estimate not needed, since
-	 * we assume that zre =< 0.0 always; if not then
-	 * there are other, more severe problems.
-	 * if ((0.0 < zre) && (zre < 1.0)) fterms += log (zim);
-	 */
-
 	/* Estimate for the gamma. A slightly better estimate
 	 * can be obtains for sre negative but still small. 
 	 */
@@ -183,12 +192,17 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	}
 	fterms -= lgamma(sre);
 
-	/* | z^2 / (z-1) | */
-	double den = 1.0 / ((zre-1.0)*(zre-1.0) + zim*zim);
-	double fre = (zre*zre - zim*zim) * (zre-1.0) * den;
-	double fim = (2.0*zre*zim) * zim * den;
-	den = fre*fre + fim*fim;
-	
+	/* This part of the estimate not needed, since
+	 * we assume that zre =< 0.0 always; if not then
+	 * there are other, more severe problems.
+	 *
+	 * double zre = mpf_get_d (zee[0].re);	
+	 * double zim = mpf_get_d (zee[0].im);	
+	 * if ((0.0 < zre) && (zre < 1.0)) fterms += log (zim);
+	 */
+
+	/* den = | z^2/(z-1)|^2 */
+	double den = polylog_get_zone (zee);
 	fterms /= 0.5*log(den) -1.345746719;  /* log (0.260345491) */
 
 	int nterms = (int) (-fterms+1.0);
@@ -196,14 +210,50 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 printf ("# duude z= %g +i %g den=%g  nterms = %d\n", zre, zim, den, nterms);
 #endif /* BOROKEN */
 
+	// XXX this is a really crappy estimate
 int nterms = 30+0.7*prec;
 	return nterms;
 }
 
 void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 {
-	// XXX this is a really crappy estimate
-	// int nterms = 20 + 0.7*prec;
+	/* The zone of convergence for the Borwein algorithm is 
+	 * |z^2/(z-1)| < 3.  If z is within this zone, then all is 
+	 * well, otherwise, use the duplication formula to move the 
+	 * point into this zone. 
+	 */
+	/* den = | z^2/(z-1)|^2 */
+	double den = polylog_get_zone (zee);
+	if (den > 10.0)
+	{
+		cpx_t zroot, s, pp, pn;
+		cpx_init (zroot);
+		cpx_init (s);
+		cpx_init (pp);
+		cpx_init (pn);
+
+		cpx_sqrt (zroot, zee, prec);
+		cpx_set (s, ess);
+		
+		int nterms = polylog_terms_est (s, zroot, prec);
+		polylog_est (pp, s, zroot, nterms, prec);
+
+		cpx_neg (zroot, zroot);
+		nterms = polylog_terms_est (s, zroot, prec);
+		polylog_est (pn, s, zroot, nterms, prec);
+
+		cpx_add (plog, pp, pn);
+		cpx_sub_ui (s, s, 1, 0);
+		cpx_ui_pow (s, 2, s, prec);
+		cpx_mul (plog, plog, s);
+
+		cpx_clear (s);
+		cpx_clear (pp);
+		cpx_clear (pn);
+		cpx_clear (zroot);
+		return;
+	}
+	
 	int nterms = polylog_terms_est (ess, zee, prec);
 	polylog_est (plog, ess, zee, nterms, prec);
 }
