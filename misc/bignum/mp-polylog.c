@@ -158,10 +158,11 @@ inline static double polylog_get_zone (const cpx_t zee)
 	double zim = mpf_get_d (zee[0].im);	
 
 	double den = 1.0 / ((zre-1.0)*(zre-1.0) + zim*zim);
-	den = sqrt(den);
-	double fre = (zre*zre - zim*zim) * (zre-1.0) * den;
-	double fim = (2.0*zre*zim) * zim * den;
-	den = fre*fre + fim*fim;
+	double sre = zre*zre - zim*zim;
+	double sim = 2.0*zre*zim;
+	double fre = sre * (zre-1.0) + zim*sim;
+	double fim = sim * (zre-1.0) - zim*sre;
+	den = (fre*fre + fim*fim)*den*den;
 
 	return den;
 }
@@ -177,21 +178,23 @@ inline static double polylog_get_zone (const cpx_t zee)
  */
 static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 {
-#if BORKEN_RIGHT
+#if 1
 	double fterms = 2.302585 * prec;  /* log(10) */
 
 	/* Estimate for the gamma. A slightly better estimate
 	 * can be obtains for sre negative but still small. 
 	 */
+	double gamterms;
 	double sre = mpf_get_d (ess[0].re);	
 	double sim = mpf_get_d (ess[0].im);	
 	if (0.0 > sim) sim = -sim;
 	if (0.0 < sre) {
-		fterms += 0.5*M_PI*sim;
+		gamterms = 0.5*M_PI*sim;
 	} else {
-		fterms += M_PI*sim;
+		gamterms = M_PI*sim;
 	}
-	fterms -= lgamma(sre);
+	gamterms -= lgamma(sre);
+	fterms += gamterms;
 
 	/* This part of the estimate not needed, since
 	 * we assume that zre =< 0.0 always; if not then
@@ -204,17 +207,18 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 
 	/* den = | z^2/(z-1)|^2 */
 	double den = polylog_get_zone (zee);
-	fterms /= 0.5*log(den) -1.345746719;  /* log (0.260345491) */
+	fterms /= -0.5*log(den) + 1.345746719;  /* log (0.260345491) */
 
-	int nterms = (int) (-fterms+1.0);
+	int nterms = (int) (fterms+1.0);
 
 double zre = mpf_get_d (zee[0].re);	
 double zim = mpf_get_d (zee[0].im);	
-printf ("# duude z= %g +i %g den=%g  nterms = %d\n", zre, zim, den, nterms);
+gamterms /=  -0.5*log(den) +1.345746719;
+printf ("# duude z= %g +i %g den=%g  nterms = %d gam=%g\n", zre, zim, sqrt(den), nterms, gamterms);
 #endif
 
 	// XXX this is a really crappy estimate
-int nterms = 30+0.8*prec;
+// int nterms = 30+0.8*prec;
 	return nterms;
 }
 

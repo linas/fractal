@@ -234,20 +234,20 @@ main (int argc, char * argv[])
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.02; q<0.991; q+=0.008)
-	for (q=0.02; q>-130.0; q-=0.1)
+	for (q=-1.02; q<2.0; q+=0.1)
 	{
 		mpf_set_d (que, q);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
 		// cpx_periodic_zeta (zeta, ess, que, prec);
 		// cpx_polylog_sum (plog, ess, zee, prec);
-		cpx_set_d (zee, q, 40.0);
+		cpx_set_d (zee, q, 0.002);
 		cpx_set_ui (zeta, 0, 0);
 		cpx_polylog (zeta, ess, zee, prec);
 
 		printf ("%g",q);
 		fp_prt ("\t", zeta[0].re);
-		// fp_prt ("\t", zeta[0].im);
+		fp_prt ("\t", zeta[0].im);
 		// fp_prt ("\t", plog[0].re);
 		// fp_prt ("\t", plog[0].im);
 		printf ("\n");
