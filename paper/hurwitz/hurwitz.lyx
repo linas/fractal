@@ -33,7 +33,7 @@ An efficient algorithm for computing the polylogarithm and Hurwitz zeta
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 27 December 2006
+12 October 2006, revised 29 December 2006
 \layout Abstract
 
 This paper develops an extension of the techniques given by Borwein's 
@@ -80,12 +80,19 @@ An efficient algorithm for computing the Riemann zeta function
 \end_inset 
 
 .
- By using the duplication formula, the range of convergence for the Hurwitz
- zeta can be extended to the whole real interval 
+ By using the duplication formula, the range of convergence for the polylogarith
+m may be extended to the entire complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, and the Hurwitz zeta can be extended to the whole real interval
+ 
 \begin_inset Formula $0<q<1$
 \end_inset 
 
-, although the algorithm does run logarithmically slower as it approaches
+.
+ The speed of the algorithm is approximately linear in the number of XXX
+ although the algorithm does run logarithmically slower as it approaches
  the endpoints.
  In particular, this algorithm allows the exploration of the Hurwitz zeta
  in the critical strip, where fast algorithms are otherwise unavailable.
@@ -1022,7 +1029,28 @@ The duplication formula follows from a general
 .
 \layout Standard
 
-To-do: discuss the use of the duplication formula for the polylog.
+The equivalent formulas for the polylogarithm are 
+\begin_inset Formula \[
+\mbox{Li}_{s}(z)+\mbox{Li}_{s}(-z)=2^{1-s}\mbox{Li}_{s}\left(z^{2}\right)\]
+
+\end_inset 
+
+ and the 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic version has the appearance of a Gauss sum:
+\begin_inset Formula \[
+\sum_{m=0}^{p-1}\mbox{Li}_{s}\left(ze^{2\pi im/p}\right)=p^{1-s}\mbox{Li}_{s}\left(z^{p}\right)\]
+
+\end_inset 
+
+ The repeated application of the duplication formula is sufficient to bring
+ the entire complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane into the region of convergence of Borwein's algorithm.
 \layout Section
 
 Validation
