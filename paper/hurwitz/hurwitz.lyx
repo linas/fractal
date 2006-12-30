@@ -837,7 +837,24 @@ Of course, for
 
 \end_inset 
 
- In general, the formula 
+ The generic form for the polylogarithm at the negative integers is 
+\begin_inset Formula \[
+\mbox{Li}_{-n}(z)=\left(-1\right)^{n}\,\sum_{k=0}^{n}\left(-1\right)^{k}\frac{k!}{\left(1-z\right)^{k+1}}\left\{ \begin{array}{c}
+n+1\\
+k+1\end{array}\right\} \]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\left\{ \begin{array}{c}
+n\\
+k\end{array}\right\} $
+\end_inset 
+
+ denotes the Stirling numbers of the second kind.
+\layout Standard
+
+In general, the formula 
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
@@ -884,7 +901,23 @@ For the general case, one may conclude that the estimate
 
 \end_inset 
 
+ To obtain a value of the polylogarithm to within some given numerical precision
+, one must invert the formula 
+\begin_inset LatexCommand \ref{eq:error bound}
 
+\end_inset 
+
+, solving for the value of 
+\begin_inset Formula $n$
+\end_inset 
+
+ which is to be used in equation 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+.
+ 
 \layout Section
 
 Duplication formula
@@ -987,6 +1020,9 @@ The duplication formula follows from a general
 \end_inset 
 
 .
+\layout Standard
+
+To-do: discuss the use of the duplication formula for the polylog.
 \layout Section
 
 Validation
@@ -1044,7 +1080,34 @@ The correctness of a given numerical implementation can be validated in
 Conclusion
 \layout Standard
 
-Conclude whatever.
+The updated algorithm apears to offer a stable and fast way of computing
+ the Hurwitz zeta function for general complex 
+\begin_inset Formula $s$
+\end_inset 
+
+ and real 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+ It allows the polylogarithm to be compted over an extended range as well.
+ An actual implementation using a variable-precision library shows that
+ the algorithm is quite tractable.
+ An unexplored area is the optimal implementation of the algorithm using
+ standard IEEE double-precision floating-point mathematics.
+ Preliminary work shows that some of the intermediate terms are just large
+ enough so that rounding error may be of concern; the region of high-precision
+ convergence has not been characterized.
+ The propagation of rounding erors through the algorithm has not been characteri
+zed.
+ Such a characterization is necessary before reliable double-precision code
+ can be created.
+ By contrast, such considerations can be swept under the carpet when employing
+ arbitrary-precision arithmetic.
+\layout Standard
+
+Additional effort should be placed into the proper and speedy evaluation
+ of the bound
 \layout Standard
 
 
