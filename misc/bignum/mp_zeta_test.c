@@ -938,7 +938,7 @@ int test_complex_gamma (int nterms, int prec)
  * Mostly sort-of-passes, except that it has some convergence 
  * problems in some areas.
  */
-int test_polylog (int nterms, int prec)
+int test_polylog (int nterms, int prec, int which)
 {
 	int i;
 	int nfaults = 0;
@@ -970,8 +970,11 @@ int test_polylog (int nterms, int prec)
 		cpx_neg (exact, exact);
 		cpx_div (exact, zee, exact);
 	
-		// cpx_polylog (plog, ess, zee, prec);
-		cpx_polylog_nint (plog, 0, zee);
+		if (0 == which) {
+			cpx_polylog_nint (plog, 0, zee);
+		} else {
+			cpx_polylog (plog, ess, zee, prec);
+		}
 		cpx_sub (plog, plog, exact);
 	
 		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, rez, imz);
@@ -996,8 +999,11 @@ int test_polylog (int nterms, int prec)
 		cpx_mul (exact, exact, exact);
 		cpx_div (exact, zee, exact);
 	
-		// cpx_polylog (plog, ess, zee, prec);
-		cpx_polylog_nint (plog, 1, zee);
+		if (0 == which) {
+			cpx_polylog_nint (plog, 1, zee);
+		} else {
+			cpx_polylog (plog, ess, zee, prec);
+		}
 		cpx_sub (plog, plog, exact);
 	
 		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -1, rez, imz);
@@ -1026,8 +1032,11 @@ int test_polylog (int nterms, int prec)
 		cpx_add_ui (term, zee, 1, 0);
 		cpx_mul (exact, exact, term);
 
-		// cpx_polylog (plog, ess, zee, prec);
-		cpx_polylog_nint (plog, 2, zee);
+		if (0 == which) {
+			cpx_polylog_nint (plog, 2, zee);
+		} else {
+			cpx_polylog (plog, ess, zee, prec);
+		}
 		cpx_sub (plog, plog, exact);
 	
 		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -2, rez, imz);
@@ -1046,7 +1055,11 @@ int test_polylog (int nterms, int prec)
 
 	if (0 == nfaults)
 	{
-		fprintf(stderr, "Polylog test passed!\n");
+		if (0 == which) {
+			fprintf(stderr, "Negative integer polylog test passed!\n");
+		} else {
+			fprintf(stderr, "Simple Polylog test passed!\n");
+		}
 	}
 	return nfaults;
 }
@@ -1077,11 +1090,13 @@ int test_polylog_series (int nterms, int prec)
 
 	cpx_set_ui (ess, 0.9124444431, 12.1234077777);
 
+	double erms = 1.0/sqrt (nterms);
+	
 	double r;
-	for (r=0.0623746562; r<0.9; r+=0.1052892347222)
+	for (r=0.0623746562; r<0.9; r+=0.9*erms +0.01052892347222)
 	{
 		double q;
-		for (q=0.21111176486599; q<0.8; q+= 0.0999856581)
+		for (q=0.21111176486599; q<0.8; q+= 0.6*erms+0.00999856581)
 		{
 			double rez = r * cos (2.0*M_PI*q);
 			double imz = r * sin (2.0*M_PI*q);
@@ -1619,7 +1634,8 @@ int main (int argc, char * argv[])
 	int nfaults = 0;
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
-	nfaults += test_polylog (nterms, prec);
+	nfaults += test_polylog (nterms, prec, 0);
+	nfaults += test_polylog (nterms, prec, 1);
 	nfaults += test_polylog_series (nterms, prec);
 // nfaults += test_periodic_zeta (nterms, prec);
 	nfaults += test_complex_pow (nterms, prec);
