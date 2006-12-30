@@ -227,37 +227,36 @@ main (int argc, char * argv[])
 	mpf_set_str (ess[0].im, zero, 10);
 #endif
 
-#if 0
+#if 1
 	// printf ("#\n# graph of Hurwitz zeta as function of q, at \n#\n");
 	printf ("#\n# graph of periodic zeta as function of q, at \n#\n");
 	fp_prt ("# at s=0.5+i ", ess[0].im);
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
-	for (q=0.02; q<0.991; q+=0.008)
+	// for (q=0.02; q<0.991; q+=0.008)
+	for (q=0.02; q>-130.0; q-=0.1)
 	{
 		mpf_set_d (que, q);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
-		//
-	cpx_set_d (ess, 1.5, 14.134725);
-		cpx_periodic_zeta (zeta, ess, que, prec);
-
-		double zre = zmag * cos (2.0*M_PI * q);
-		double zim = zmag * sin (2.0*M_PI * q);
-		cpx_set_d (zee, zre, zim);
-	cpx_set_d (ess, 0.5, 14.134725);
-		cpx_polylog_sum (plog, ess, zee, prec);
+		// cpx_periodic_zeta (zeta, ess, que, prec);
+		// cpx_polylog_sum (plog, ess, zee, prec);
+		cpx_set_d (zee, q, 40.0);
+		cpx_set_ui (zeta, 0, 0);
+		cpx_polylog (zeta, ess, zee, prec);
 
 		printf ("%g",q);
 		fp_prt ("\t", zeta[0].re);
 		// fp_prt ("\t", zeta[0].im);
-		fp_prt ("\t", plog[0].re);
+		// fp_prt ("\t", plog[0].re);
 		// fp_prt ("\t", plog[0].im);
 		printf ("\n");
 		fflush (stdout);
 	}
 #endif 
 
+#ifdef COHERENT_BORKEN
+	/* remnants of failed experiment */
 	cpx_t lam;
 	cpx_init (lam);
 	cpx_set_d (lam, sim, 0.0);
@@ -276,5 +275,6 @@ main (int argc, char * argv[])
 		printf ("\n");
 		fflush (stdout);
 	}
+#endif 
 	return 0;
 }

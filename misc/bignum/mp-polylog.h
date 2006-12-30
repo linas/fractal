@@ -36,9 +36,8 @@ void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
  *
  * Li_s(z) = sum_{n=1}^infty z^n/ n^s
  * 
- * Works for complex s, z; however, must have |z^2/(1-z)| < 3.3
- * This is basically a blobby neighborhood around z=-1, it includes
- * some values whos magnitude is greater than one.
+ * Works for general complex s, z; lightly tested, may be buggy.
+ * Watch out for branchpoint at z=1.
  */
 void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
 

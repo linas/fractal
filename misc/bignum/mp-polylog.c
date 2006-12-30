@@ -158,6 +158,7 @@ inline static double polylog_get_zone (const cpx_t zee)
 	double zim = mpf_get_d (zee[0].im);	
 
 	double den = 1.0 / ((zre-1.0)*(zre-1.0) + zim*zim);
+	den = sqrt(den);
 	double fre = (zre*zre - zim*zim) * (zre-1.0) * den;
 	double fim = (2.0*zre*zim) * zim * den;
 	den = fre*fre + fim*fim;
@@ -219,8 +220,9 @@ void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 {
 	/* The zone of convergence for the Borwein algorithm is 
 	 * |z^2/(z-1)| < 3.  If z is within this zone, then all is 
-	 * well, otherwise, use the duplication formula to move the 
-	 * point into this zone. 
+	 * well, otherwise, use the duplication formula to make 
+	 * recusrsive calls, until the leaves of the recursion 
+	 * in in this zone.
 	 */
 	/* den = | z^2/(z-1)|^2 */
 	double den = polylog_get_zone (zee);
@@ -235,14 +237,14 @@ void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 		cpx_sqrt (zroot, zee, prec);
 		cpx_set (s, ess);
 		
-		int nterms = polylog_terms_est (s, zroot, prec);
-		polylog_est (pp, s, zroot, nterms, prec);
+		cpx_polylog (pp, s, zroot, prec);
 
 		cpx_neg (zroot, zroot);
-		nterms = polylog_terms_est (s, zroot, prec);
-		polylog_est (pn, s, zroot, nterms, prec);
+		cpx_polylog (pn, s, zroot, prec);
 
 		cpx_add (plog, pp, pn);
+
+		/* now, compute 2^{s-1} in place */
 		cpx_sub_ui (s, s, 1, 0);
 		cpx_ui_pow (s, 2, s, prec);
 		cpx_mul (plog, plog, s);
@@ -367,7 +369,9 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
 		fp_cosine (z[0].re, qf, prec);
 		fp_sine (z[0].im, qf, prec);
 		
-		cpx_polylog (z, s, z, prec);
+		// cpx_polylog (z, s, z, prec);
+		int nterms = polylog_terms_est (s, z, prec);
+		polylog_est (z, s, z, nterms, prec);
 	}
 	
 	mpf_clear (q);
