@@ -682,24 +682,50 @@ void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
 
 void cpx_sqrt (cpx_t rt, const cpx_t z, int prec)
 {
-	mpf_t modulus, phase;
+	mpf_t modulus;
 	mpf_init (modulus);
-	mpf_init (phase);
 
 	cpx_mod_sq (modulus, z);
 	mpf_sqrt (modulus, modulus);
-	mpf_sqrt (modulus, modulus);
 	
+#ifdef GET_HALF_ANGLE_ARCTAN_STYLE
+	mptf_t phase;
+	mpf_init (phase);
 	fp_arctan2 (phase, z[0].im, z[0].re, prec);
 	mpf_div_ui (phase, phase, 2);
 
 	fp_cosine (rt[0].re, phase, prec);
 	fp_sine (rt[0].im, phase, prec);
+	mpf_clear (phase);
+#endif
 
+#define GET_HALF_ANGLE_TRIG_IDENT_STYLE
+#ifdef GET_HALF_ANGLE_TRIG_IDENT_STYLE
+	/* use half-angle formulas for sine and cosine */
+	/* cos A = sqrt(0.5*(1+cos 2A)) */
+	cpx_div_mpf (rt, z, modulus);
+	mpf_add_ui (rt[0].re, rt[0].re, 1);
+	mpf_div_ui (rt[0].re, rt[0].re, 2);
+	mpf_sqrt (rt[0].re, rt[0].re);
+	
+	/* avoid divide by zero when cosine(half) is zero
+	 * i.e. when sine (full angle) is zero */
+	if (mpf_cmp_ui(rt[0].im,0))
+	{
+		/* sin A = sin 2A / (2 cos A) */
+		mpf_div_ui (rt[0].im, rt[0].im, 2);
+		mpf_div (rt[0].im, rt[0].im, rt[0].re);
+	}
+	else
+	{
+		mpf_set_ui (rt[0].im, 1);
+	}
+#endif
+
+	mpf_sqrt (modulus, modulus);
 	cpx_mul_mpf (rt, rt, modulus);
 
 	mpf_clear (modulus);
-	mpf_clear (phase);
 }
 
 /* ======================================================================= */
