@@ -23,6 +23,7 @@
 #include "mp-polylog.h"
 #include "mp-trig.h"
 
+/* ============================================================= */
 /* 
  * bee_k() 
  * Return value of sum_{j=0}^k (n j) oz^j
@@ -65,12 +66,19 @@ static void bee_k (cpx_t bee, int n, int k, const cpx_t oz)
 	cpx_clear (term);
 }
 
-/* polylog_est() -- Return polylog, Li_s(z) for estimator n.
+/**
+ * polylog_borwein() -- Return polylog, Li_s(z) for estimator n.
+ *
+ * Uses the Borwein algorithm to estimate the polylog value.
+ * A polynomial of order 2n is used to perform the estimation.
+ * The value of n must be suitably large.
+ * Muse have |z^2/(z-1)| < 3.7 in order for the thing to converge
+ * to an accurate answer. 
  *
  * Appears to work well. Suggest n=31 for most cases,
  * should return answers accurate to 1e-16
  */
-static void polylog_est (cpx_t plog, const cpx_t ess, const cpx_t zee, int norder, int prec)
+static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int norder, int prec)
 {
 	cpx_t s, z, oz, moz, ska, pz, acc, term, ck;
 	int k;
@@ -147,6 +155,8 @@ static void polylog_est (cpx_t plog, const cpx_t ess, const cpx_t zee, int norde
 	cpx_clear (ck);
 }
 
+/* ============================================================= */
+
 /* polylog_get_zone -- return | z^2 / (z-1) |^2
  *
  * The value of | z^2 / (z-1) | is used to determine
@@ -166,7 +176,17 @@ inline static double polylog_get_zone (const cpx_t zee)
 
 	return den;
 }
-	
+
+inline static double polylog_modsq (const cpx_t zee)
+{
+	double zre = mpf_get_d (zee[0].re);	
+	double zim = mpf_get_d (zee[0].im);	
+
+	double den = zre*zre + zim*zim;
+
+	return den;
+}
+
 /*
  * polylog_terms_est() -- estimate number of terms needed 
  * in the polylog summation in order to keep the error
@@ -222,6 +242,40 @@ printf ("# duude z= %g +i %g den=%g  nterms = %d gam=%g\n", zre, zim, sqrt(den),
 	return nterms;
 }
 
+static inline void polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+{
+	cpx_t zroot, s, pp, pn;
+	cpx_init (zroot);
+	cpx_init (s);
+	cpx_init (pp);
+	cpx_init (pn);
+
+	cpx_sqrt (zroot, zee, prec);
+	cpx_set (s, ess);
+
+printf ("splitsville, den=%g\n", den);
+cpx_prt ("zee= ", zee);
+printf ("\n");
+cpx_prt ("zroot= ", zroot);
+printf ("\n");
+	cpx_polylog (pp, s, zroot, prec);
+
+	cpx_neg (zroot, zroot);
+	cpx_polylog (pn, s, zroot, prec);
+
+	cpx_add (plog, pp, pn);
+
+	/* now, compute 2^{s-1} in place */
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_ui_pow (s, 2, s, prec);
+	cpx_mul (plog, plog, s);
+
+	cpx_clear (s);
+	cpx_clear (pp);
+	cpx_clear (pn);
+	cpx_clear (zroot);
+}
+
 void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 {
 	/* The zone of convergence for the Borwein algorithm is 
@@ -229,41 +283,34 @@ void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 	 * well, otherwise, use the duplication formula to make 
 	 * recusrsive calls, until the leaves of the recursion 
 	 * in in this zone.
+	 *
+	 * Two types of recursion to be applied: 
+	 * If |z| > 1, use square-root to move to Borwein.
+	 * If |z| < 0.9, use the simple series summation
+	 * If |z| > 0.9, and Im z > 0, square down
+	 * If |z| > 0.9, and Im z < 0, square up
 	 */
+	double mod = polylog_modsq (zee);
+	if (0.8>mod)
+	{
+		cpx_polylog_sum (plog, ess, zee);
+		return;
+	}
+
 	/* den = | z^2/(z-1)|^2 */
 	double den = polylog_get_zone (zee);
+
 	if (den > 10.0)
 	{
-		cpx_t zroot, s, pp, pn;
-		cpx_init (zroot);
-		cpx_init (s);
-		cpx_init (pp);
-		cpx_init (pn);
-
-		cpx_sqrt (zroot, zee, prec);
-		cpx_set (s, ess);
-		
-		cpx_polylog (pp, s, zroot, prec);
-
-		cpx_neg (zroot, zroot);
-		cpx_polylog (pn, s, zroot, prec);
-
-		cpx_add (plog, pp, pn);
-
-		/* now, compute 2^{s-1} in place */
-		cpx_sub_ui (s, s, 1, 0);
-		cpx_ui_pow (s, 2, s, prec);
-		cpx_mul (plog, plog, s);
-
-		cpx_clear (s);
-		cpx_clear (pp);
-		cpx_clear (pn);
-		cpx_clear (zroot);
-		return;
+		if (1.01 < mod)
+		{
+			polylog_recurse_sqrt (plog, ess, zee, prec);
+			return;
+		}
 	}
 	
 	int nterms = polylog_terms_est (ess, zee, prec);
-	polylog_est (plog, ess, zee, nterms, prec);
+	polylog_borwein (plog, ess, zee, nterms, prec);
 }
 
 /**
@@ -377,7 +424,7 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
 		
 		// cpx_polylog (z, s, z, prec);
 		int nterms = polylog_terms_est (s, z, prec);
-		polylog_est (z, s, z, nterms, prec);
+		polylog_borwein (z, s, z, nterms, prec);
 	}
 	
 	mpf_clear (q);
@@ -547,9 +594,7 @@ void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 	cpx_set_ui (plog, 0, 0);
 
 	/* Estimate the number of terms needed to sum over */
-	double zre = mpf_get_d (z[0].re);
-	double zim = mpf_get_d (z[0].im);
-	double mag = zre*zre + zim*zim;
+	double mag = polylog_modsq (zee);
 	
 	/* Domain error, should be less than one */
 	if (1.0 <= mag)
