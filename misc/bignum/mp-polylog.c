@@ -253,7 +253,6 @@ static inline void polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_
 	cpx_sqrt (zroot, zee, prec);
 	cpx_set (s, ess);
 
-printf ("splitsville, den=%g\n", den);
 cpx_prt ("zee= ", zee);
 printf ("\n");
 cpx_prt ("zroot= ", zroot);
@@ -276,6 +275,40 @@ printf ("\n");
 	cpx_clear (zroot);
 }
 
+static inline void polylog_recurse_dupl (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+{
+	cpx_t zsq, s, pp, pn;
+	cpx_init (zsq);
+	cpx_init (s);
+	cpx_init (pp);
+	cpx_init (pn);
+
+	cpx_mul (zsq, zee, zee);
+	cpx_set (s, ess);
+
+cpx_prt ("dupl zee= ", zee);
+printf ("\n");
+cpx_prt ("zsq= ", zsq);
+printf ("\n");
+	cpx_polylog (pp, s, zsq, prec);
+
+	cpx_neg (zsq, zee);
+	cpx_polylog (pn, s, zsq, prec);
+
+	/* now, compute 2^{1-s} in place */
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_neg (s, s);
+	cpx_ui_pow (s, 2, s, prec);
+	cpx_mul (plog, pp, s);
+
+	cpx_sub (plog, plog, pn);
+	
+	cpx_clear (s);
+	cpx_clear (pp);
+	cpx_clear (pn);
+	cpx_clear (zsq);
+}
+
 void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 {
 	/* The zone of convergence for the Borwein algorithm is 
@@ -287,13 +320,12 @@ void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 	 * Two types of recursion to be applied: 
 	 * If |z| > 1, use square-root to move to Borwein.
 	 * If |z| < 0.9, use the simple series summation
-	 * If |z| > 0.9, and Im z > 0, square down
-	 * If |z| > 0.9, and Im z < 0, square up
+	 * If 1.01 > |z| > 0.9, square away from z=1
 	 */
 	double mod = polylog_modsq (zee);
 	if (0.8>mod)
 	{
-		cpx_polylog_sum (plog, ess, zee);
+		cpx_polylog_sum (plog, ess, zee, prec);
 		return;
 	}
 
@@ -302,17 +334,23 @@ void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 
 	if (den > 10.0)
 	{
+printf ("splitsville, den=%g\n", den);
 		if (1.01 < mod)
 		{
 			polylog_recurse_sqrt (plog, ess, zee, prec);
-			return;
 		}
+		else
+		{
+			polylog_recurse_dupl (plog, ess, zee, prec);
+		}
+		return;
 	}
 	
 	int nterms = polylog_terms_est (ess, zee, prec);
 	polylog_borwein (plog, ess, zee, nterms, prec);
 }
 
+/* ============================================================= */
 /**
  * cpx_periodic_zeta -- Periodic zeta function 
  *
