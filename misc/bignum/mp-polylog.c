@@ -162,11 +162,8 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
  * The value of | z^2 / (z-1) | is used to determine
  * the convergence zone.
  */
-inline static double polylog_get_zone (const cpx_t zee)
+inline static double polylog_get_zone (double zre, double zim)
 {
-	double zre = mpf_get_d (zee[0].re);	
-	double zim = mpf_get_d (zee[0].im);	
-
 	double den = 1.0 / ((zre-1.0)*(zre-1.0) + zim*zim);
 	double sre = zre*zre - zim*zim;
 	double sim = 2.0*zre*zim;
@@ -226,15 +223,16 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	 */
 
 	/* den = | z^2/(z-1)|^2 */
-	double den = polylog_get_zone (zee);
+	double zre = mpf_get_d (zee[0].re);	
+	double zim = mpf_get_d (zee[0].im);	
+	double den = polylog_get_zone (zre, zim);
+
 	fterms /= -0.5*log(den) + 1.345746719;  /* log (0.260345491) */
 
 	int nterms = (int) (fterms+1.0);
 
-double zre = mpf_get_d (zee[0].re);	
-double zim = mpf_get_d (zee[0].im);	
-gamterms /=  -0.5*log(den) +1.345746719;
-printf ("# duude z= %g +i %g den=%g  nterms = %d gam=%g\n", zre, zim, sqrt(den), nterms, gamterms);
+// gamterms /=  -0.5*log(den) +1.345746719;
+// printf ("# duude z= %g +i %g den=%g  nterms = %d gam=%g\n", zre, zim, sqrt(den), nterms, gamterms);
 #endif
 
 	// XXX this is a really crappy estimate
@@ -253,10 +251,12 @@ static inline void polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_
 	cpx_sqrt (zroot, zee, prec);
 	cpx_set (s, ess);
 
+#if 0
 cpx_prt ("zee= ", zee);
 printf ("\n");
 cpx_prt ("zroot= ", zroot);
 printf ("\n");
+#endif
 	cpx_polylog (pp, s, zroot, prec);
 
 	cpx_neg (zroot, zroot);
@@ -286,10 +286,12 @@ static inline void polylog_recurse_dupl (cpx_t plog, const cpx_t ess, const cpx_
 	cpx_mul (zsq, zee, zee);
 	cpx_set (s, ess);
 
+#if 0
 cpx_prt ("dupl zee= ", zee);
 printf ("\n");
 cpx_prt ("zsq= ", zsq);
 printf ("\n");
+#endif
 	cpx_polylog (pp, s, zsq, prec);
 
 	cpx_neg (zsq, zee);
@@ -309,6 +311,14 @@ printf ("\n");
 	cpx_clear (zsq);
 }
 
+inline static int accept (double zre, double zim)
+{
+	double mod = zre*zre + zim*zim;
+	if (0.3>mod) return 1;
+	if ((0.85>mod) && (0.0 <zre)) return 1;
+	return 0;
+}
+
 void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 {
 	/* The zone of convergence for the Borwein algorithm is 
@@ -322,27 +332,43 @@ void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 	 * If |z| < 0.9, use the simple series summation
 	 * If 1.01 > |z| > 0.9, square away from z=1
 	 */
-	double mod = polylog_modsq (zee);
-	if (0.8>mod)
+	double zre = mpf_get_d (zee[0].re);	
+	double zim = mpf_get_d (zee[0].im);	
+	double mod = zre*zre + zim*zim;
+	if ((0.3>mod) || ((0.85>mod) && (0.0 <zre)))
 	{
 		cpx_polylog_sum (plog, ess, zee, prec);
 		return;
 	}
 
 	/* den = | z^2/(z-1)|^2 */
-	double den = polylog_get_zone (zee);
+	double den = polylog_get_zone (zre, zim);
 
 	if (den > 10.0)
 	{
-printf ("splitsville, den=%g\n", den);
-		if (1.01 < mod)
-		{
-			polylog_recurse_sqrt (plog, ess, zee, prec);
-		}
-		else
+// printf ("splitsville, den=%g\n", den);
+double dre = zre*zre - zim*zim;
+double dim = 2.0 *zre*zim;
+double d1 = polylog_get_zone (dre, dim);
+double d2 = polylog_get_zone (-dre, -dim);
+		if (((d1 < den)||accept(dre, dim)) && ((d2 < den)||accept(-dre,-dim)))
 		{
 			polylog_recurse_dupl (plog, ess, zee, prec);
+			return;
 		}
+zre /= mod;
+zim /= mod;
+dre = sqrt (0.5*(zre + 1.0));
+dim = 0.5*zim / dre;
+d1 = polylog_get_zone (dre, dim);
+d2 = polylog_get_zone (-dre, -dim);
+		if (((d1 < den)||accept(dre, dim)) && ((d2 < den)||accept(-dre,-dim)))
+		{
+			polylog_recurse_sqrt (plog, ess, zee, prec);
+			return;
+		}
+		fprintf (stderr, "no convergence at z=%g+ i%g\n", zre, zim);
+		cpx_set_ui (plog, 0,0);
 		return;
 	}
 	
