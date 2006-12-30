@@ -177,7 +177,7 @@ inline static double polylog_get_zone (const cpx_t zee)
  */
 static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 {
-#if BOROKEN
+#if BORKEN_RIGHT
 	double fterms = 2.302585 * prec;  /* log(10) */
 
 	/* Estimate for the gamma. A slightly better estimate
@@ -208,11 +208,13 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 
 	int nterms = (int) (-fterms+1.0);
 
+double zre = mpf_get_d (zee[0].re);	
+double zim = mpf_get_d (zee[0].im);	
 printf ("# duude z= %g +i %g den=%g  nterms = %d\n", zre, zim, den, nterms);
-#endif /* BOROKEN */
+#endif
 
 	// XXX this is a really crappy estimate
-int nterms = 30+0.7*prec;
+int nterms = 30+0.8*prec;
 	return nterms;
 }
 
