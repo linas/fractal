@@ -25,8 +25,8 @@ static void psi_init (void)
 	/* the decimal precison (number of decimal places) */
 	// prec = 90;
 	// prec = 60;
-	// prec = 40;
-	prec = 15;
+	prec = 45;
+	// prec = 25;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -41,7 +41,9 @@ static void psi_init (void)
 	cpx_init (ess);
 	cpx_init (zee);
 
-	cpx_set_d (ess, 0.5, 14.13);
+	cpx_set_d (ess, 0.5, 14.134725141734);
+	cpx_set_d (ess, 0.5, 21.022039638771);
+	cpx_set_d (ess, 0.5, 37.5861781588256712);
 }
 	
 static double plogger (double re_q, double im_q, int itermax, double param)
