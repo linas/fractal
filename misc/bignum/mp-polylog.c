@@ -223,6 +223,7 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	{
 		double mod = zre*zre + zim*zim;
 		fterms += 0.5 * log (mod);
+		if (0.0 > zim) zim = -zim;
 		fterms -= log (zim);
 	}
 
