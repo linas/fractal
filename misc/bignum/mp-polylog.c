@@ -195,7 +195,6 @@ inline static double polylog_modsq (const cpx_t zee)
  */
 static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 {
-#if 1
 	double fterms = 2.302585 * prec;  /* log(10) */
 
 	/* Estimate for the gamma. A slightly better estimate
@@ -213,35 +212,32 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	gamterms -= lgamma(sre);
 	fterms += gamterms;
 
-	/* This part of the estimate not needed, since
-	 * we assume that zre =< 0.0 always; if not then
-	 * there are other, more severe problems.
-	 *
-	 * double zre = mpf_get_d (zee[0].re);	
-	 * double zim = mpf_get_d (zee[0].im);	
-	 * if ((0.0 < zre) && (zre < 1.0)) fterms += log (zim);
-	 */
-
-	/* den = | z^2/(z-1)|^2 */
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
+	if (zre > 1.0)
+	{
+		double mod = (zre-1.0)*(zre-1.0) + zim*zim;
+		fterms -= 0.5 * log (mod);
+	}
+	else if (0.0 < zre)
+	{
+		double mod = zre*zre + zim*zim;
+		fterms += 0.5 * log (mod);
+		fterms -= log (zim);
+	}
+
+	/* den = | z^2/(z-1)|^2 */
 	double den = polylog_get_zone (zre, zim);
 
-	fterms /= -0.5*log(den) + 1.345746719;  /* log (0.260345491) */
+	fterms /= -0.5*log(den) + 1.386294361;  /* log 4 */
 
 	int nterms = (int) (fterms+1.0);
 
-	if (nterms > prec*10+150)
-	{
-		fprintf (stderr, "Truncate nterms=%d at z=%g + i %g\n", nterms, zre, zim);
-		nterms = 10*prec;
-	}
-// gamterms /=  -0.5*log(den) +1.345746719;
+// gamterms /=  -0.5*log(den) + 1.386294361;
 // printf ("# duude z= %g +i %g den=%g  nterms = %d gam=%g\n", zre, zim, sqrt(den), nterms, gamterms);
-#endif
 
 	// XXX this is a really crappy estimate
-// int nterms = 30+0.8*prec;
+	// int nterms = 30+0.8*prec;
 	return nterms;
 }
 
@@ -378,7 +374,7 @@ static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 
 	if (4 < depth)
 	{
-		fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
+		// fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
 		cpx_set_ui (plog, 0,0);
 		return;
 	}
@@ -393,34 +389,40 @@ static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	 * Two types of recursion to be applied: 
 	 * If |z| > 1, use square-root to move to Borwein.
 	 * If |z| < 0.9, use the simple series summation
-	 * If 1.01 > |z| > 0.9, cube away from z=1
 	 */
+#if 0
 	if (accept (zre,zim))
 	{
 		cpx_polylog_sum (plog, ess, zee, prec);
 		return;
 	}
+#endif
 
 	/* den = | z^2/(z-1)|^2 */
 	double den = polylog_get_zone (zre, zim);
 
-	// if (den > 10.0)
-	if (den > 16.0)
+	/* nterms = number of terms needed for computation */
+	int nterms = polylog_terms_est (ess, zee, prec);
+	
+	if ((den > 10.0) || (10*prec+30 < nterms))
+	// if (den > 0.5)
 	{
+cpx_set_ui (plog, 0, 0);
+return;
 // printf ("splitsville, den=%g\n", den);
 		double mod = zre * zre + zim*zim;
 		double bra = (zre-1.0) * (zre-1.0) + zim*zim;
 		// if ((1.0>mod) || (0.125 > bra))
 		if (1)
 		{
-			polylog_recurse_triple (plog, ess, zee, prec, depth);
+			polylog_recurse_duple (plog, ess, zee, prec, depth);
+			// polylog_recurse_triple (plog, ess, zee, prec, depth);
 			return;
 		}
 		polylog_recurse_sqrt (plog, ess, zee, prec, depth);
 		return;
 	}
 	
-	int nterms = polylog_terms_est (ess, zee, prec);
 	polylog_borwein (plog, ess, zee, nterms, prec);
 }
 
