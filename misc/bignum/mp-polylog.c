@@ -231,6 +231,11 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 
 	int nterms = (int) (fterms+1.0);
 
+	if (nterms > prec*10+150)
+	{
+		fprintf (stderr, "Truncate nterms=%d at z=%g + i %g\n", nterms, zre, zim);
+		nterms = 10*prec;
+	}
 // gamterms /=  -0.5*log(den) +1.345746719;
 // printf ("# duude z= %g +i %g den=%g  nterms = %d gam=%g\n", zre, zim, sqrt(den), nterms, gamterms);
 #endif
@@ -240,7 +245,9 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	return nterms;
 }
 
-static inline void polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth);
+		  
+static inline void polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	cpx_t zroot, s, pp, pn;
 	cpx_init (zroot);
@@ -257,10 +264,10 @@ printf ("\n");
 cpx_prt ("zroot= ", zroot);
 printf ("\n");
 #endif
-	cpx_polylog (pp, s, zroot, prec);
+	recurse_polylog (pp, s, zroot, prec, depth);
 
 	cpx_neg (zroot, zroot);
-	cpx_polylog (pn, s, zroot, prec);
+	recurse_polylog (pn, s, zroot, prec, depth);
 
 	cpx_add (plog, pp, pn);
 
@@ -275,7 +282,7 @@ printf ("\n");
 	cpx_clear (zroot);
 }
 
-static inline void polylog_recurse_dupl (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+static inline void polylog_recurse_dupl (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	cpx_t zsq, s, pp, pn;
 	cpx_init (zsq);
@@ -292,10 +299,10 @@ printf ("\n");
 cpx_prt ("zsq= ", zsq);
 printf ("\n");
 #endif
-	cpx_polylog (pp, s, zsq, prec);
+	recurse_polylog (pp, s, zsq, prec, depth);
 
 	cpx_neg (zsq, zee);
-	cpx_polylog (pn, s, zsq, prec);
+	recurse_polylog (pn, s, zsq, prec, depth);
 
 	/* now, compute 2^{1-s} in place */
 	cpx_sub_ui (s, s, 1, 0);
@@ -319,8 +326,19 @@ inline static int accept (double zre, double zim)
 	return 0;
 }
 
-void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
+	double zre = mpf_get_d (zee[0].re);	
+	double zim = mpf_get_d (zee[0].im);	
+
+	if (5 < depth)
+	{
+		fprintf (stderr, "ecessive recusrsion at z=%g+ i%g\n", zre, zim);
+		cpx_set_ui (plog, 0,0);
+		return;
+	}
+	depth ++;
+
 	/* The zone of convergence for the Borwein algorithm is 
 	 * |z^2/(z-1)| < 3.  If z is within this zone, then all is 
 	 * well, otherwise, use the duplication formula to make 
@@ -332,10 +350,7 @@ void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 	 * If |z| < 0.9, use the simple series summation
 	 * If 1.01 > |z| > 0.9, square away from z=1
 	 */
-	double zre = mpf_get_d (zee[0].re);	
-	double zim = mpf_get_d (zee[0].im);	
-	double mod = zre*zre + zim*zim;
-	if ((0.3>mod) || ((0.85>mod) && (0.0 <zre)))
+	if (accept (zre,zim))
 	{
 		cpx_polylog_sum (plog, ess, zee, prec);
 		return;
@@ -352,19 +367,22 @@ double dim = 2.0 *zre*zim;
 double d1 = polylog_get_zone (dre, dim);
 double d2 = polylog_get_zone (-dre, -dim);
 		if (((d1 < den)||accept(dre, dim)) && ((d2 < den)||accept(-dre,-dim)))
+		// if ((d1 < den) && (d2 < den))
 		{
-			polylog_recurse_dupl (plog, ess, zee, prec);
+			polylog_recurse_dupl (plog, ess, zee, prec, depth);
 			return;
 		}
-zre /= mod;
-zim /= mod;
+double mod = 1.0 / sqrt(zre*zre+zim*zim);
+zre *= mod;
+zim *= mod;
 dre = sqrt (0.5*(zre + 1.0));
 dim = 0.5*zim / dre;
 d1 = polylog_get_zone (dre, dim);
 d2 = polylog_get_zone (-dre, -dim);
 		if (((d1 < den)||accept(dre, dim)) && ((d2 < den)||accept(-dre,-dim)))
+		// if ((d1 < den) && (d2 < den))
 		{
-			polylog_recurse_sqrt (plog, ess, zee, prec);
+			polylog_recurse_sqrt (plog, ess, zee, prec, depth);
 			return;
 		}
 		fprintf (stderr, "no convergence at z=%g+ i%g\n", zre, zim);
@@ -374,6 +392,11 @@ d2 = polylog_get_zone (-dre, -dim);
 	
 	int nterms = polylog_terms_est (ess, zee, prec);
 	polylog_borwein (plog, ess, zee, nterms, prec);
+}
+
+void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+{
+	recurse_polylog (plog, ess, zee, prec, 0);
 }
 
 /* ============================================================= */

@@ -182,6 +182,7 @@ int
 main (int argc, char * argv[])
 {
 	int prec = 40;
+	prec = 20;
 	double q;
 
 	/* Set the precision (number of binary bits) */
