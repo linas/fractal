@@ -376,9 +376,9 @@ static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
 
-	if (5 < depth)
+	if (4 < depth)
 	{
-		fprintf (stderr, "ecessive recusrsion at z=%g+ i%g\n", zre, zim);
+		fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
 		cpx_set_ui (plog, 0,0);
 		return;
 	}
@@ -393,7 +393,7 @@ static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	 * Two types of recursion to be applied: 
 	 * If |z| > 1, use square-root to move to Borwein.
 	 * If |z| < 0.9, use the simple series summation
-	 * If 1.01 > |z| > 0.9, square away from z=1
+	 * If 1.01 > |z| > 0.9, cube away from z=1
 	 */
 	if (accept (zre,zim))
 	{
@@ -404,56 +404,19 @@ static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	/* den = | z^2/(z-1)|^2 */
 	double den = polylog_get_zone (zre, zim);
 
-#if 0
-	if (den > 10.0)
+	// if (den > 10.0)
+	if (den > 16.0)
 	{
 // printf ("splitsville, den=%g\n", den);
-double dre = zre*zre - zim*zim;
-double dim = 2.0 *zre*zim;
-double d1 = polylog_get_zone (dre, dim);
-double d2 = polylog_get_zone (-dre, -dim);
-		if (((d1 < den)||accept(dre, dim)) && ((d2 < den)||accept(-dre,-dim)))
-		// if ((d1 < den) && (d2 < den))
+		double mod = zre * zre + zim*zim;
+		double bra = (zre-1.0) * (zre-1.0) + zim*zim;
+		// if ((1.0>mod) || (0.125 > bra))
+		if (1)
 		{
-			polylog_recurse_dupl (plog, ess, zee, prec, depth);
+			polylog_recurse_triple (plog, ess, zee, prec, depth);
 			return;
 		}
-double mod = 1.0 / sqrt(zre*zre+zim*zim);
-zre *= mod;
-zim *= mod;
-dre = sqrt (0.5*(zre + 1.0));
-dim = 0.5*zim / dre;
-d1 = polylog_get_zone (dre, dim);
-d2 = polylog_get_zone (-dre, -dim);
-		if (((d1 < den)||accept(dre, dim)) && ((d2 < den)||accept(-dre,-dim)))
-		// if ((d1 < den) && (d2 < den))
-		{
-			polylog_recurse_sqrt (plog, ess, zee, prec, depth);
-			return;
-		}
-		fprintf (stderr, "no convergence at z=%g+ i%g\n", zre, zim);
-		cpx_set_ui (plog, 0,0);
-		return;
-	}
-#endif
-
-	if (den > 10.0)
-	{
-// printf ("splitsville, den=%g\n", den);
-double mod = 1.0 / sqrt(zre*zre+zim*zim);
-zre *= mod;
-zim *= mod;
-double dre = sqrt (0.5*(zre + 1.0));
-double dim = 0.5*zim / dre;
-double d1 = polylog_get_zone (dre, dim);
-double d2 = polylog_get_zone (-dre, -dim);
-		if (((d1 < den)||accept(dre, dim)) && ((d2 < den)||accept(-dre,-dim)))
-		// if ((d1 < den) && (d2 < den))
-		{
-			polylog_recurse_sqrt (plog, ess, zee, prec, depth);
-			return;
-		}
-		polylog_recurse_triple (plog, ess, zee, prec, depth);
+		polylog_recurse_sqrt (plog, ess, zee, prec, depth);
 		return;
 	}
 	
