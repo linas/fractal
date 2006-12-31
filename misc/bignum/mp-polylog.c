@@ -282,7 +282,7 @@ printf ("\n");
 	cpx_clear (zroot);
 }
 
-static inline void polylog_recurse_dupl (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+static inline void polylog_recurse_duple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	cpx_t zsq, s, pp, pn;
 	cpx_init (zsq);
@@ -316,6 +316,51 @@ printf ("\n");
 	cpx_clear (pp);
 	cpx_clear (pn);
 	cpx_clear (zsq);
+}
+
+static inline void polylog_recurse_triple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+{
+	cpx_t zcu, s, tr, pp, pu, pd;
+	cpx_init (zcu);
+	cpx_init (s);
+	cpx_init (tr);
+	cpx_init (pp);
+	cpx_init (pu);
+	cpx_init (pd);
+
+	cpx_set (s, ess);
+
+	cpx_mul (zcu, zee, zee);
+	cpx_mul (zcu, zcu, zee);
+	recurse_polylog (pp, s, zcu, prec, depth);
+
+	/* tr = exp (i 2pi/3) = -1/2  + i sqrt(3)/2 */
+	mpf_set_ui (tr[0].re, 1);
+	mpf_div_ui (tr[0].re, tr[0].re, 2);
+	mpf_neg (tr[0].re, tr[0].re);
+	fp_half_sqrt_three (tr[0].im);
+	
+	cpx_mul (zcu, tr, zee);
+	recurse_polylog (pu, s, zcu, prec, depth);
+
+	cpx_mul (zcu, tr, zcu);
+	recurse_polylog (pd, s, zcu, prec, depth);
+
+	/* now, compute 3^{1-s} in place */
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_neg (s, s);
+	cpx_ui_pow (s, 3, s, prec);
+	cpx_mul (plog, pp, s);
+
+	cpx_sub (plog, plog, pu);
+	cpx_sub (plog, plog, pd);
+	
+	cpx_clear (s);
+	cpx_clear (tr);
+	cpx_clear (pp);
+	cpx_clear (pu);
+	cpx_clear (pd);
+	cpx_clear (zcu);
 }
 
 inline static int accept (double zre, double zim)
@@ -359,6 +404,7 @@ static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	/* den = | z^2/(z-1)|^2 */
 	double den = polylog_get_zone (zre, zim);
 
+#if 0
 	if (den > 10.0)
 	{
 // printf ("splitsville, den=%g\n", den);
@@ -387,6 +433,27 @@ d2 = polylog_get_zone (-dre, -dim);
 		}
 		fprintf (stderr, "no convergence at z=%g+ i%g\n", zre, zim);
 		cpx_set_ui (plog, 0,0);
+		return;
+	}
+#endif
+
+	if (den > 10.0)
+	{
+// printf ("splitsville, den=%g\n", den);
+double mod = 1.0 / sqrt(zre*zre+zim*zim);
+zre *= mod;
+zim *= mod;
+double dre = sqrt (0.5*(zre + 1.0));
+double dim = 0.5*zim / dre;
+double d1 = polylog_get_zone (dre, dim);
+double d2 = polylog_get_zone (-dre, -dim);
+		if (((d1 < den)||accept(dre, dim)) && ((d2 < den)||accept(-dre,-dim)))
+		// if ((d1 < den) && (d2 < den))
+		{
+			polylog_recurse_sqrt (plog, ess, zee, prec, depth);
+			return;
+		}
+		polylog_recurse_triple (plog, ess, zee, prec, depth);
 		return;
 	}
 	
