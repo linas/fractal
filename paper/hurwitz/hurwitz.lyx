@@ -33,7 +33,7 @@ An efficient algorithm for computing the polylogarithm and Hurwitz zeta
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 29 December 2006
+12 October 2006, revised 30 December 2006
 \layout Abstract
 
 This paper develops an extension of the techniques given by Borwein's 
@@ -177,8 +177,19 @@ The Hurwitz zeta may be expressed in terms of the polylogarithm:
 
 \end_inset 
 
-  and so one might hope for some efficient algorithms in that area.
- However, a recent survey
+ and so one might hope for some efficient algorithms in that area.
+ Wood
+\begin_inset LatexCommand \cite{Wood92}
+
+\end_inset 
+
+ provides a extensive review of the means of computing the polylogarithm,
+ but limits himself entirely to real values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ A recent survey
 \begin_inset LatexCommand \cite{Cra06}
 
 \end_inset 
@@ -346,6 +357,15 @@ This identity is easily obtained by inserting the integral representation
 \end_inset 
 
  in the last integral.
+ Although this derivation casually interchanges the order of integration
+ and summation, one may appeal to general arguments about analytic continuation
+ to argue that the final result is generally valid, provided one is careful
+ to navigate about the branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ 
 \layout Section
 
 The Borwein trick
@@ -694,6 +714,9 @@ The above formula has been implemented using the Gnu Multiple Precision
 Bound on the Error Term
 \layout Standard
 
+XXX this section contains errors.
+\layout Standard
+
 In order for equation 
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
@@ -713,7 +736,7 @@ In order for equation
 \begin_inset Formula $-\sigma<n$
 \end_inset 
 
-, an estimate for the integrand may be given: 
+, an estimate for the integrand may be given -- WRONG WRONG: 
 \begin_inset Formula \begin{equation}
 p_{2n}(y)\left|\log y\right|^{s-1}\le p_{2n}(y)\left|\log y\right|^{n}\label{eq:}\end{equation}
 
@@ -759,7 +782,7 @@ p_{2n}(y)\left|\log y\right|^{s-1} & \le & p_{2n}(y)\left|\log y\right|^{n}\labe
 \end_inset 
 
  where 
-\begin_inset Formula $y_{0}(1-y_{0})\left|\log y\right|\approx0.260345491$
+\begin_inset Formula $y_{0}(1-y_{0})\left|\log y_{0}\right|\approx0.260345491$
 \end_inset 
 
 .
@@ -785,7 +808,7 @@ p_{2n}(y)\left|\log y\right|^{s-1} & \le & p_{2n}(y)\left|\log y\right|^{n}\labe
 : 
 \begin_inset Formula \begin{eqnarray*}
 \frac{1}{\left|\Gamma(s)\right|} & = & \frac{1}{\left|\Gamma(\sigma)\right|}\sqrt{\prod_{k=0}^{\infty}\left(1+\frac{\tau^{2}}{\left(\sigma+k\right)^{2}}\right)}\\
- & \le & \frac{1}{\left|\Gamma(\sigma)\right|}\sqrt{\prod_{k=0}^{m}\left(1+\frac{\tau^{2}}{\left(\frac{1}{2}+k\right)^{2}}\right)\frac{\sinh\tau\pi}{\tau\pi}}\end{eqnarray*}
+ & \le & \frac{1}{\left|\Gamma(\sigma)\right|}\sqrt{\frac{\sinh\tau\pi}{\tau\pi}\,\prod_{k=0}^{m}\left(1+\frac{\tau^{2}}{\left(\frac{1}{2}+k\right)^{2}}\right)}\end{eqnarray*}
 
 \end_inset 
 
@@ -1045,12 +1068,13 @@ The equivalent formulas for the polylogarithm are
 
 \end_inset 
 
- The repeated application of the duplication formula is sufficient to bring
- the entire complex 
+ The repeated application of the duplication formula is crucial for the
+ extension of Borwein's algorithm to the entire complex 
 \begin_inset Formula $z$
 \end_inset 
 
--plane into the region of convergence of Borwein's algorithm.
+-plane, as, by repeated application, it will map the entire plane into to
+ region of convergence of Borwein's algorithm.
 \layout Section
 
 Validation
