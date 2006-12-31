@@ -20,6 +20,31 @@
 
 /* ======================================================================= */
 /**
+ * fp_half_sqrt_three - return 0.5*sqrt(3)= 0.86602...
+ */
+
+void fp_half_sqrt_three (mpf_t sqt)
+{
+	static unsigned int init=0;
+	static mpf_t cached_sqt;
+
+	if (init)
+	{
+		mpf_set (sqt, cached_sqt);
+		return;
+	}
+	mpf_init (cached_sqt);
+
+	mpf_set_ui (sqt, 3);
+	mpf_sqrt (sqt, sqt);
+	mpf_div_ui (sqt, sqt, 2);
+	mpf_set (cached_sqt, sqt);
+
+	init =1;
+}
+
+/* ======================================================================= */
+/**
  * fp_e - return e=2.718281828...
  * @prec - number of decimal places of precision
  *

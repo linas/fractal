@@ -11,6 +11,11 @@
 #include <gmp.h>
 
 /**
+ * fp_half_sqrt_three - return sqrt(3)/2 = 0.86602...
+ */
+void fp_half_sqrt_three (mpf_t sqt);
+
+/**
  * fp_e - return e=2.718281828...
  * @prec - number of decimal places of precision
  *
