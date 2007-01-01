@@ -242,7 +242,7 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	return nterms;
 }
 
-static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth);
+static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth);
 		  
 static inline void polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
@@ -279,8 +279,9 @@ printf ("\n");
 	cpx_clear (zroot);
 }
 
-static inline void polylog_recurse_duple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+static inline int polylog_recurse_duple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
+	int rc;
 	cpx_t zsq, s, pp, pn;
 	cpx_init (zsq);
 	cpx_init (s);
@@ -296,10 +297,12 @@ printf ("\n");
 cpx_prt ("zsq= ", zsq);
 printf ("\n");
 #endif
-	recurse_polylog (pp, s, zsq, prec, depth);
+	rc = recurse_polylog (pp, s, zsq, prec, depth);
+	if (rc) goto bailout;
 
 	cpx_neg (zsq, zee);
-	recurse_polylog (pn, s, zsq, prec, depth);
+	rc = recurse_polylog (pn, s, zsq, prec, depth);
+	if (rc) goto bailout;
 
 	/* now, compute 2^{1-s} in place */
 	cpx_sub_ui (s, s, 1, 0);
@@ -309,10 +312,12 @@ printf ("\n");
 
 	cpx_sub (plog, plog, pn);
 	
+bailout:
 	cpx_clear (s);
 	cpx_clear (pp);
 	cpx_clear (pn);
 	cpx_clear (zsq);
+	return rc;
 }
 
 static inline void polylog_recurse_triple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
@@ -368,16 +373,24 @@ inline static int accept (double zre, double zim)
 	return 0;
 }
 
-static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+/* recurse_polylog() -- use duplication formula to extend domain
+ *
+ * Evaluate the polylog directly, if possible; else use the 
+ * duplication formula to get into a region where its directly 
+ * evaluable.
+ * 
+ * Return a non-zero value if no value was computed.
+ */
+static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
+	int rc;
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
 
 	if (4 < depth)
 	{
 		// fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
-		cpx_set_ui (plog, 0,0);
-		return;
+		return 1;
 	}
 	depth ++;
 
@@ -388,14 +401,14 @@ static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	 * in in this zone.
 	 *
 	 * Two types of recursion to be applied: 
-	 * If |z| > 1, use square-root to move to Borwein.
+	 * If |z| > 1, use square to move point to Borwein region.
 	 * If |z| < 0.9, use the simple series summation
 	 */
 #if 0
 	if (accept (zre,zim))
 	{
 		cpx_polylog_sum (plog, ess, zee, prec);
-		return;
+		return 0;
 	}
 #endif
 
@@ -403,33 +416,39 @@ static void recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	double den = polylog_get_zone (zre, zim);
 
 	/* nterms = number of terms needed for computation */
-	int nterms = polylog_terms_est (ess, zee, prec);
+	// int nterms = polylog_terms_est (ess, zee, prec);
+	int nterms = polylog_terms_est (ess, zee, 15);
 	
-	if ((den > 10.0) || (10*prec+30 < nterms))
-	// if (den > 0.5)
+	if ((den > 15.0) || (4*prec+30 < nterms))
 	{
 cpx_set_ui (plog, 0, 0);
-return;
+return 0;
 // printf ("splitsville, den=%g\n", den);
 		double mod = zre * zre + zim*zim;
 		double bra = (zre-1.0) * (zre-1.0) + zim*zim;
 		// if ((1.0>mod) || (0.125 > bra))
 		if (1)
 		{
-			polylog_recurse_duple (plog, ess, zee, prec, depth);
+			rc = polylog_recurse_duple (plog, ess, zee, prec, depth);
 			// polylog_recurse_triple (plog, ess, zee, prec, depth);
-			return;
+			return rc;
 		}
-		polylog_recurse_sqrt (plog, ess, zee, prec, depth);
-		return;
+		// polylog_recurse_sqrt (plog, ess, zee, prec, depth);
+		return 0;
 	}
 	
 	polylog_borwein (plog, ess, zee, nterms, prec);
+	return 0;
 }
 
-void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 {
-	recurse_polylog (plog, ess, zee, prec, 0);
+	int rc = recurse_polylog (plog, ess, zee, prec, 0);
+	if (rc)
+	{
+		cpx_set_ui (plog, 0,0);
+	}
+	return rc;
 }
 
 /* ============================================================= */

@@ -38,8 +38,11 @@ void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
  * 
  * Works for general complex s, z; lightly tested, may be buggy.
  * Watch out for branchpoint at z=1.
+ *
+ * Returns a non-zero value if algo was unable to evaluate at
+ * the given point.
  */
-void cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
+int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
 
 /**
  * cpx_periodic_zeta -- Periodic zeta function 
