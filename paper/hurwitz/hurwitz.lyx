@@ -914,18 +914,59 @@ The case where
  One writes 
 \begin_inset Formula \begin{eqnarray*}
 \left|p_{2n}(y)\left|\log y\right|^{s-1}\right| & \le & p_{2n}(y)\left|\log y\right|^{\sigma-1}\\
- & = & \left|\frac{1-y}{\log y}\right|^{1-\sigma}y^{n}(1-y)^{n-\sigma+1}\\
- & \le & y^{n}(1-y)^{n-\sigma+1}\end{eqnarray*}
+ & = & \left|\frac{1-y}{\log y}\right|^{1-\sigma}y^{n}(1-y)^{n+\sigma-1}\\
+ & \le & y^{n}(1-y)^{n+\sigma-1}\end{eqnarray*}
+
+\end_inset 
+
+ The integrand may now be recognized as the Beta function, so that
+\begin_inset Formula \[
+\left|\int_{0}^{1}\,\frac{p_{2n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\right|\le C(z)\frac{\Gamma(n+1)\Gamma(n+\sigma)}{\Gamma(2n+\sigma+1)}\]
+
+\end_inset 
+
+ In the region where 
+\begin_inset Formula $\left|\sigma\right|\ll n$
+\end_inset 
+
+, one may approximate 
+\begin_inset Formula \[
+\frac{\Gamma(n+1)\Gamma(n+\sigma)}{\Gamma(2n+\sigma+1)}\le\frac{2^{1-\sigma}}{4^{n}}\]
+
+\end_inset 
+
+ Combining the various pieces, one obtains a result remarkably similar to
+ the previous one;namely, when 
+\begin_inset Formula $\sigma\le1$
+\end_inset 
+
+ but 
+\begin_inset Formula $n$
+\end_inset 
+
+ is such that 
+\begin_inset Formula $\left|\sigma\right|\ll n$
+\end_inset 
+
+, one has 
+\begin_inset Formula \[
+\left|\xi(s,z)\right|\le\frac{1}{4^{n}}\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|2^{1-\sigma}C(z)\]
 
 \end_inset 
 
 
 \layout Standard
 
-xxxx
-\layout Standard
+For evaluations on the critical line 
+\begin_inset Formula $\sigma=1/2$
+\end_inset 
 
-A useful estimate for 
+, one needs a good estimate for 
+\begin_inset Formula $\left|\Gamma(s)\right|^{-1}$
+\end_inset 
+
+, which becomes large.
+ A useful estimate for 
 \begin_inset Formula $\left|\Gamma(s)\right|^{-1}$
 \end_inset 
 
@@ -934,7 +975,7 @@ A useful estimate for
 
 \end_inset 
 
- when 
+, for the case where 
 \begin_inset Formula $\sigma\ge-m+1/2$
 \end_inset 
 
@@ -948,7 +989,7 @@ A useful estimate for
  
 \layout Standard
 
-Of course, for 
+A remarkable side-effect of the estimation is that, for 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -956,7 +997,7 @@ Of course, for
 \begin_inset Formula $\Gamma(s)$
 \end_inset 
 
- is infinite, and thus implying that the error term is zero.
+ is infinite, thus implying that the error term is zero.
  This somewhat surprising result corresponds to the fact that 
 \begin_inset Formula $\mbox{Li}_{-n}(z)$
 \end_inset 
@@ -1049,18 +1090,17 @@ In general, the formula
  answers in the case when an exact polynomial answer is possible.
 \layout Standard
 
+XXXX
+\layout Standard
+
 For the general case, one may conclude that the estimate 
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
- can be effectively applied whenever 
-\begin_inset Formula $\Re z\le0$
-\end_inset 
-
- and 
+ can be effectively applied whenever
 \begin_inset Formula \[
-0.261\left|\frac{z^{2}}{z-1}\right|<1\]
+\left|\frac{z^{2}}{z-1}\right|<4\]
 
 \end_inset 
 
