@@ -416,13 +416,21 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	double den = polylog_get_zone (zre, zim);
 
 	/* nterms = number of terms needed for computation */
-	// int nterms = polylog_terms_est (ess, zee, prec);
-	int nterms = polylog_terms_est (ess, zee, 15);
-	
-	if ((den > 15.0) || (4*prec+30 < nterms))
+	int nterms = polylog_terms_est (ess, zee, prec);
+	int maxterms = nterms;
+
+	if (1 == depth)
+	{
+		int nbits = mpf_get_default_prec();
+		maxterms = nbits - (int) (3.321928095 *prec); /* log(10) / log(2) */
+		prec += (int) (0.301029996 * nterms) +1;
+printf ("maxterms=%d nterms=%d prec=%d\n", maxterms, nterms, prec);
+	}
+
+	if ((den > 15.0) || (maxterms < nterms))
 	{
 cpx_set_ui (plog, 0, 0);
-return 0;
+return 1;
 // printf ("splitsville, den=%g\n", den);
 		double mod = zre * zre + zim*zim;
 		double bra = (zre-1.0) * (zre-1.0) + zim*zim;
