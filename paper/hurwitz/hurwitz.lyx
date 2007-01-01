@@ -785,6 +785,14 @@ The general behaviour of the integrand appearing in equation
 \begin_inset Formula $\sigma\ge1$
 \end_inset 
 
+ and choosing 
+\begin_inset Formula $n$
+\end_inset 
+
+ so that 
+\begin_inset Formula $\sigma\le n$
+\end_inset 
+
 , one has
 \begin_inset Formula \begin{eqnarray}
 \left|p_{2n}(y)\left|\log y\right|^{s-1}\right| & \le & p_{2n}(y)\left|\log y\right|^{\sigma-1}\label{eq:}\\
@@ -824,7 +832,11 @@ The general behaviour of the integrand appearing in equation
 
 \end_inset 
 
- 
+ Curiously, the numerical value of the factor in the Gaussian is 
+\begin_inset Formula $1/2y_{0}(1-2y_{0})=4.013295587\ldots$
+\end_inset 
+
+
 \layout Standard
 
 To evaluate the integral in 
@@ -832,49 +844,88 @@ To evaluate the integral in
 
 \end_inset 
 
-
-\layout Standard
-
-XXX this section contains errors.xxx
-\layout Standard
-
-Thus, one has 
-\begin_inset Formula \begin{eqnarray}
-p_{2n}(y)\left|\log y\right|^{s-1} & \le & p_{2n}(y)\left|\log y\right|^{n}\label{eq:}\\
- & \le & p_{2n}(y_{0})\left|\log y_{0}\right|^{n}\exp\left(-\frac{n\left(y-y_{0}\right)^{2}}{2y_{0}\left(1-2y_{0}\right)}\right)\end{eqnarray}
-
-\end_inset 
-
- By assuming that 
-\begin_inset Formula $\Re z\le0$
-\end_inset 
-
-, one can bound the denominator 
+, one also needs a bound on the denominator.
+ This is furnished by 
 \begin_inset Formula \[
-\frac{1}{1-yz}\le1\]
+\left|\frac{1}{1-yz}\right|\le C(z)=\begin{cases}
+1 & \mbox{ if }\Re z<0\\
+\left|\frac{z}{\Im z}\right| & \mbox{ if }0\le\Re z\le1\\
+\frac{1}{\left|1-z\right|} & \mbox{ if }1<\Re z\end{cases}\]
 
 \end_inset 
 
- Combining these, and evaluating the resulting integral over the Gaussian,
- one has 
-\begin_inset Formula \begin{eqnarray}
-\int_{0}^{1}\,\frac{p_{2n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy & \le & p_{2n}(y_{0})\left|\log y_{0}\right|^{n}n^{-1/2}\label{eq:}\\
- & \le & \frac{(0.261)^{n}}{\sqrt{n}}\end{eqnarray}
+ Thus, the integrand is bounded by a Gaussian.
+ Multiplying the two Gaussians, completing the square, and evaluating the
+ resulting integral is a bit tedious.
+ The result is that 
+\begin_inset Formula \[
+\left|\int_{0}^{1}\,\frac{p_{2n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\right|\le C(z)\frac{\left|4y_{0}\left(1-y_{0}\right)\log y_{0}\right|^{\sigma-1}}{4^{n}}\, G(s)\]
 
 \end_inset 
 
- where 
-\begin_inset Formula $y_{0}(1-y_{0})\left|\log y_{0}\right|\approx0.260345491$
+ The constant may be taken as 
+\begin_inset Formula $\left|4y_{0}\left(1-y_{0}\right)\log y_{0}\right|=1.041381965\ldots$
 \end_inset 
 
 .
- Assembling these various pieces, one deduces that 
-\begin_inset Formula \begin{equation}
-\left|\xi(s,z)\right|\le\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|\frac{(0.261)^{n}}{\sqrt{n}}\label{eq:error bound}\end{equation}
+ The factor 
+\begin_inset Formula $G(s)$
+\end_inset 
+
+ is bounded by 
+\begin_inset Formula \begin{eqnarray*}
+G(s) & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\left(\sigma-1\right)\frac{8y_{0}\left(1-2y_{0}\right)}{8y_{0}\left(1-2y_{0}\right)+\frac{\sigma-1}{n-\sigma+1}}\\
+ & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\frac{\sigma-1}{\sigma}\\
+ & \le & 1\end{eqnarray*}
 
 \end_inset 
 
- A useful estimate for 
+ Useful for estimation is that 
+\begin_inset Formula $8y_{0}(1-2y_{0})=0.996687115\ldots$
+\end_inset 
+
+.
+ Combining these results, one obtains 
+\begin_inset Formula \[
+\left|\xi(s,z)\right|\le\frac{1}{4^{n}}\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|C(z)G(s)\left(1.0414\ldots\right)^{\sigma-1}\]
+
+\end_inset 
+
+ for the case where 
+\begin_inset Formula $1\le\sigma$
+\end_inset 
+
+ and 
+\begin_inset Formula $n$
+\end_inset 
+
+ must be choosen so that 
+\begin_inset Formula $\sigma\le n$
+\end_inset 
+
+.
+\layout Standard
+
+The case where 
+\begin_inset Formula $\sigma\le1$
+\end_inset 
+
+ may be evaluated as follows.
+ One writes 
+\begin_inset Formula \begin{eqnarray*}
+\left|p_{2n}(y)\left|\log y\right|^{s-1}\right| & \le & p_{2n}(y)\left|\log y\right|^{\sigma-1}\\
+ & = & \left|\frac{1-y}{\log y}\right|^{1-\sigma}y^{n}(1-y)^{n-\sigma+1}\\
+ & \le & y^{n}(1-y)^{n-\sigma+1}\end{eqnarray*}
+
+\end_inset 
+
+
+\layout Standard
+
+xxxx
+\layout Standard
+
+A useful estimate for 
 \begin_inset Formula $\left|\Gamma(s)\right|^{-1}$
 \end_inset 
 
