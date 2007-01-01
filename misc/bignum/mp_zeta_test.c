@@ -11,6 +11,8 @@
  */
 
 #include <math.h>
+double tgamma (double);  // libc is missing the correct prototype
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <gsl/gsl_complex_math.h>
@@ -197,7 +199,7 @@ void fp_zeta9 (mpf_t zeta)
  * <A HREF="http://www.research.att.com/~amo">his home page.</a>
  */
 
-static void zeta_zero (mpf_t zero, int k)
+void zeta_zero (mpf_t zero, int k)
 {
 	char *zp[20];
 	zp[0] = " \
@@ -940,6 +942,7 @@ int test_complex_gamma (int nterms, int prec)
  */
 int test_polylog (int nterms, int prec, int which)
 {
+	int rc = 0;
 	int i;
 	int nfaults = 0;
 
@@ -973,11 +976,13 @@ int test_polylog (int nterms, int prec, int which)
 		if (0 == which) {
 			cpx_polylog_nint (plog, 0, zee);
 		} else {
-			cpx_polylog (plog, ess, zee, prec);
+			rc = cpx_polylog (plog, ess, zee, prec);
 		}
 		cpx_sub (plog, plog, exact);
 	
-		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, rez, imz);
+		/* returned value is good iff rc == 0 */
+		if (0 == rc)
+			nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, rez, imz);
 		
 		rez += red;
 		imz += imd;
@@ -1002,11 +1007,13 @@ int test_polylog (int nterms, int prec, int which)
 		if (0 == which) {
 			cpx_polylog_nint (plog, 1, zee);
 		} else {
-			cpx_polylog (plog, ess, zee, prec);
+			rc = cpx_polylog (plog, ess, zee, prec);
 		}
 		cpx_sub (plog, plog, exact);
 	
-		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -1, rez, imz);
+		/* returned value is good iff rc == 0 */
+		if (0 == rc)
+			nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -1, rez, imz);
 		
 		rez += red;
 		imz += imd;
@@ -1035,11 +1042,13 @@ int test_polylog (int nterms, int prec, int which)
 		if (0 == which) {
 			cpx_polylog_nint (plog, 2, zee);
 		} else {
-			cpx_polylog (plog, ess, zee, prec);
+			rc = cpx_polylog (plog, ess, zee, prec);
 		}
 		cpx_sub (plog, plog, exact);
 	
-		nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -2, rez, imz);
+		/* returned value is good iff rc == 0 */
+		if (0 == rc)
+			nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", -2, rez, imz);
 		
 		rez += red;
 		imz += imd;
@@ -1074,6 +1083,7 @@ int test_polylog (int nterms, int prec, int which)
  */
 int test_polylog_series (int nterms, int prec)
 {
+	int rc;
 	int nfaults = 0;
 
 	/* Set up max allowed error */
@@ -1103,10 +1113,12 @@ int test_polylog_series (int nterms, int prec)
 			cpx_set_d (zee, rez, imz);
 			
 			cpx_polylog_sum (psum, ess, zee, prec);
-			cpx_polylog (plog, ess, zee, prec);
+			rc = cpx_polylog (plog, ess, zee, prec);
 			cpx_sub (plog, plog, psum);
 		
-			nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, r, q);
+			/* returned value is good iff rc == 0 */
+			if (0 == rc)
+				nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, r, q);
 		}
 	}
 
@@ -1217,8 +1229,8 @@ printf ("start test %g +i%g\n", sre, sim);
 
 int main (int argc, char * argv[])
 {
-	char str[4000];
 #ifdef FACT_TEST
+	char str[4000];
 	mpz_t fact;
 	mpz_init (fact);
 

@@ -231,14 +231,16 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	double den = polylog_get_zone (zre, zim);
 
 	fterms /= -0.5*log(den) + 1.386294361;  /* log 4 */
+	if (4.0 >= fterms)
+	{
+		fterms = 2.0123456e8;
+	}
 
 	int nterms = (int) (fterms+1.0);
 
 // gamterms /=  -0.5*log(den) + 1.386294361;
 // printf ("# duude z= %g +i %g den=%g  nterms = %d gam=%g\n", zre, zim, sqrt(den), nterms, gamterms);
 
-	// XXX this is a really crappy estimate
-	// int nterms = 30+0.8*prec;
 	return nterms;
 }
 
@@ -419,17 +421,22 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	int nterms = polylog_terms_est (ess, zee, prec);
 	int maxterms = nterms;
 
+	/* To carry out the computation, an internal precision is needed 
+	 * that is a bit higher than what the user asked for. This internal
+	 * precision depends on the degree of the approximating polynomial.
+	 * Thus, look at the available bits of precision, and decide if
+	 * the calculation can be performed in that way. Ohh, and pass the
+	 * larger, adjusted internal precision to the subroutines.
+	 */
 	if (1 == depth)
 	{
 		int nbits = mpf_get_default_prec();
 		maxterms = nbits - (int) (3.321928095 *prec); /* log(10) / log(2) */
 		prec += (int) (0.301029996 * nterms) +1;
-printf ("maxterms=%d nterms=%d prec=%d\n", maxterms, nterms, prec);
 	}
 
 	if ((den > 15.0) || (maxterms < nterms))
 	{
-cpx_set_ui (plog, 0, 0);
 return 1;
 // printf ("splitsville, den=%g\n", den);
 		double mod = zre * zre + zim*zim;
