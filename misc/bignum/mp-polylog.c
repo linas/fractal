@@ -17,6 +17,7 @@
 #include <stdio.h>
 
 #include "mp-binomial.h"
+#include "mp-cache.h"
 #include "mp-complex.h"
 #include "mp-consts.h"
 #include "mp-gamma.h"
@@ -24,6 +25,8 @@
 #include "mp-trig.h"
 
 /* ============================================================= */
+
+#ifdef OLD_STYLE
 /* 
  * bee_k() 
  * Return value of sum_{j=0}^k (n j) oz^j
@@ -65,6 +68,7 @@ static void bee_k (cpx_t bee, int n, int k, const cpx_t oz)
 	cpx_clear (pz);
 	cpx_clear (term);
 }
+#endif
 
 /**
  * polylog_borwein() -- Return polylog, Li_s(z) for estimator n.
@@ -80,13 +84,18 @@ static void bee_k (cpx_t bee, int n, int k, const cpx_t oz)
  */
 static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int norder, int prec)
 {
-	cpx_t s, z, oz, moz, ska, pz, acc, term, ck;
+#ifdef OLD_STYLE
+	cpx_t oz, moz;
+#else
+	mpz_t ibin;
+	DECLARE_CPX_CACHE (bin_sum);
+	cpx_t bins;
+#endif
+	cpx_t s, z, ska, pz, acc, term, ck;
 	int k;
 
 	cpx_init (s);
 	cpx_init (z);
-	cpx_init (oz);
-	cpx_init (moz);
 	cpx_init (ska);
 	cpx_init (pz);
 	cpx_init (acc);
@@ -97,6 +106,10 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 	cpx_neg (s, ess);
 	cpx_set (z, zee);
 	
+#ifdef OLD_STYLE
+	cpx_init (oz);
+	cpx_init (moz);
+
 	/* oz = 1/z   whereas moz = -1/z */
 	cpx_recip (oz, z);
 	cpx_neg (moz, oz);
@@ -107,13 +120,30 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 	cpx_recip (ska, ska);
 	cpx_mul (ska, ska, z);
 	cpx_pow_ui (ska, ska, norder);
+
+#else
+	mpz_init (ibin);
+	cpx_init (bins);
 	
-	cpx_set (pz, z);
+	cpx_set_ui (bins, 1, 0);
+	cpx_one_d_cache_check (&bin_sum, 0);
+	cpx_one_d_cache_store (&bin_sum, bins, 0, prec);
+
+	/* ska = [1/(z-1)]^n */
+	cpx_set (ska, z);
+	cpx_sub_ui (ska, ska, 1, 0);
+	cpx_recip (ska, ska);
+	cpx_pow_ui (ska, ska, norder);
+#endif
+	
+	cpx_set_ui (pz, 1, 0);
 	cpx_set_ui (acc, 0, 0);
 	cpx_set_ui (plog, 0, 0);
 
 	for (k=1; k<=norder; k++)
 	{
+		cpx_mul(pz, pz, z);
+
 		/* The inverse integer power */
 		cpx_ui_pow_cache (term, k, s, prec);
 
@@ -121,11 +151,32 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 		cpx_mul (term, term, pz);
 		cpx_add (acc, acc, term);
 
-		cpx_mul(pz, pz, z);
+#ifndef OLD_STYLE
+		/* computer the binomial sum */
+		i_binomial (ibin, norder, k);
+		mpf_set_z (term[0].re, ibin);
+		mpf_set_ui (term[0].im, 0);
+		cpx_mul (term, term, pz);
+		
+		if (k%2)
+		{
+			cpx_sub (bins, bins, term);
+		}
+		else
+		{
+			cpx_add (bins, bins, term);
+		}
+
+		cpx_one_d_cache_check (&bin_sum, k);
+		cpx_one_d_cache_store (&bin_sum, bins, k, prec);
+#endif
 	}
 
+#ifdef OLD_STYLE
 	for (k=norder+1; k<=2*norder; k++)
 	{
+		cpx_mul(pz, pz, z);
+
 		/* The inverse integer power */
 		cpx_ui_pow_cache (term, k, s, prec);
 
@@ -137,22 +188,54 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 		bee_k (ck, norder, k-norder-1, moz);
 		cpx_mul (term, ck, term);
 		cpx_add (plog, plog, term);
-
-		cpx_mul(pz, pz, z);
 	}
 
 	cpx_mul (plog, plog, ska);
 	cpx_sub (plog, acc, plog);
 	
+#else
+
+	for (k=norder+1; k<=2*norder; k++)
+	{
+		cpx_mul(pz, pz, z);
+
+		/* The inverse integer power */
+		cpx_ui_pow_cache (term, k, s, prec);
+		cpx_mul (term, term, pz);
+
+		cpx_one_d_cache_fetch (&bin_sum, bins, 2*norder-k);
+		cpx_mul (term, term, bins);
+
+		/* Put it together */
+		cpx_add (plog, plog, term);
+	}
+
+	cpx_mul (plog, plog, ska);
+	if (norder%2)
+	{
+		cpx_sub (plog, acc, plog);
+	}
+	else
+	{
+		cpx_add (plog, acc, plog);
+	}
+#endif
+	
 	cpx_clear (s);
 	cpx_clear (z);
-	cpx_clear (oz);
-	cpx_clear (moz);
 	cpx_clear (ska);
 	cpx_clear (pz);
 	cpx_clear (acc);
 	cpx_clear (term);
 	cpx_clear (ck);
+#ifdef OLD_STYLE
+	cpx_clear (oz);
+	cpx_clear (moz);
+#else
+	mpz_clear (ibin);
+	cpx_clear (bins);
+	cpx_one_d_cache_clear(&bin_sum);
+#endif
 }
 
 /* ============================================================= */
