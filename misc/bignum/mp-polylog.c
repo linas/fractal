@@ -25,51 +25,6 @@
 #include "mp-trig.h"
 
 /* ============================================================= */
-
-#ifdef OLD_STYLE
-/* 
- * bee_k() 
- * Return value of sum_{j=0}^k (n j) oz^j
- *
- * where (n j) is binomial coefficient 
- */
-static void bee_k (cpx_t bee, int n, int k, const cpx_t oz)
-{
-	int j;
-	cpx_t pz, z, term;
-	mpz_t bin;
-	mpf_t binom;
-
-	mpz_init (bin);
-	mpf_init (binom);
-	cpx_init (z);
-	cpx_init (pz);
-	cpx_init (term);
-
-	/* Make a copy if input arg now! */
-	cpx_set (z, oz);
-	cpx_set_ui (pz, 1,0);
-	cpx_set_ui (bee, 0,0);
-
-	for (j=0; j<=k; j++)
-	{
-		cpx_set (term, pz);
-
-		i_binomial (bin, n,j);
-		mpf_set_z (binom, bin);
-		cpx_mul_mpf (term, term, binom);
-		cpx_add (bee, bee, term);
-		cpx_mul(pz, pz, z);
-	}
-
-	mpz_clear (bin);
-	mpf_clear (binom);
-	cpx_clear (z);
-	cpx_clear (pz);
-	cpx_clear (term);
-}
-#endif
-
 /**
  * polylog_borwein() -- Return polylog, Li_s(z) for estimator n.
  *
@@ -84,16 +39,12 @@ static void bee_k (cpx_t bee, int n, int k, const cpx_t oz)
  */
 static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int norder, int prec)
 {
-#ifdef OLD_STYLE
-	cpx_t oz, moz;
-#else
-	mpz_t ibin;
 	DECLARE_CPX_CACHE (bin_sum);
-	cpx_t bins;
-#endif
-	cpx_t s, z, ska, pz, acc, term, ck;
+	mpz_t ibin;
+	cpx_t s, z, ska, pz, acc, term, ck, bins;
 	int k;
 
+	mpz_init (ibin);
 	cpx_init (s);
 	cpx_init (z);
 	cpx_init (ska);
@@ -101,30 +52,13 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 	cpx_init (acc);
 	cpx_init (term);
 	cpx_init (ck);
+	cpx_init (bins);
 
 	/* s = -ess */
 	cpx_neg (s, ess);
 	cpx_set (z, zee);
-	
-#ifdef OLD_STYLE
-	cpx_init (oz);
-	cpx_init (moz);
 
-	/* oz = 1/z   whereas moz = -1/z */
-	cpx_recip (oz, z);
-	cpx_neg (moz, oz);
-
-	/* ska = [z/(z-1)]^n */
-	cpx_set (ska, z);
-	cpx_sub_ui (ska, ska, 1, 0);
-	cpx_recip (ska, ska);
-	cpx_mul (ska, ska, z);
-	cpx_pow_ui (ska, ska, norder);
-
-#else
-	mpz_init (ibin);
-	cpx_init (bins);
-	
+	/* first binomial summation term is 1 */
 	cpx_set_ui (bins, 1, 0);
 	cpx_one_d_cache_check (&bin_sum, 0);
 	cpx_one_d_cache_store (&bin_sum, bins, 0, prec);
@@ -134,7 +68,6 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 	cpx_sub_ui (ska, ska, 1, 0);
 	cpx_recip (ska, ska);
 	cpx_pow_ui (ska, ska, norder);
-#endif
 	
 	cpx_set_ui (pz, 1, 0);
 	cpx_set_ui (acc, 0, 0);
@@ -151,8 +84,7 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 		cpx_mul (term, term, pz);
 		cpx_add (acc, acc, term);
 
-#ifndef OLD_STYLE
-		/* computer the binomial sum */
+		/* Compute the binomial sum */
 		i_binomial (ibin, norder, k);
 		mpf_set_z (term[0].re, ibin);
 		mpf_set_ui (term[0].im, 0);
@@ -167,33 +99,12 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 			cpx_add (bins, bins, term);
 		}
 
+		/* Stow the binomial sum away in an array;
+		 * we'll need to reference this in reverse order later.
+		 */
 		cpx_one_d_cache_check (&bin_sum, k);
 		cpx_one_d_cache_store (&bin_sum, bins, k, prec);
-#endif
 	}
-
-#ifdef OLD_STYLE
-	for (k=norder+1; k<=2*norder; k++)
-	{
-		cpx_mul(pz, pz, z);
-
-		/* The inverse integer power */
-		cpx_ui_pow_cache (term, k, s, prec);
-
-		/* Put it together */
-		cpx_mul (term, term, pz);
-		cpx_add (acc, acc, term);
-
-		/* The coefficient c_k of the polynomial */
-		bee_k (ck, norder, k-norder-1, moz);
-		cpx_mul (term, ck, term);
-		cpx_add (plog, plog, term);
-	}
-
-	cpx_mul (plog, plog, ska);
-	cpx_sub (plog, acc, plog);
-	
-#else
 
 	for (k=norder+1; k<=2*norder; k++)
 	{
@@ -203,6 +114,7 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 		cpx_ui_pow_cache (term, k, s, prec);
 		cpx_mul (term, term, pz);
 
+		/* Fetch binomial sum from the array */
 		cpx_one_d_cache_fetch (&bin_sum, bins, 2*norder-k);
 		cpx_mul (term, term, bins);
 
@@ -219,7 +131,6 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 	{
 		cpx_add (plog, acc, plog);
 	}
-#endif
 	
 	cpx_clear (s);
 	cpx_clear (z);
@@ -228,14 +139,10 @@ static void polylog_borwein (cpx_t plog, const cpx_t ess, const cpx_t zee, int n
 	cpx_clear (acc);
 	cpx_clear (term);
 	cpx_clear (ck);
-#ifdef OLD_STYLE
-	cpx_clear (oz);
-	cpx_clear (moz);
-#else
-	mpz_clear (ibin);
 	cpx_clear (bins);
+	mpz_clear (ibin);
+
 	cpx_one_d_cache_clear(&bin_sum);
-#endif
 }
 
 /* ============================================================= */
@@ -524,7 +431,8 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 		if (4 < nterms)
 			prec += (int) (0.301029996 * nterms) +1;
 	}
-	if (66 < maxterms) maxterms = 66;
+	// if (66 < maxterms) maxterms = 66;
+	if (96 < maxterms) maxterms = 96;
 
 	/* if (4> nterms) (i.e. nterms is netgative) then the thing will
 	 * never converge, and so subdivision is the only option.
