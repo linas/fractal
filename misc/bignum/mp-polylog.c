@@ -188,10 +188,6 @@ inline static double polylog_modsq (const cpx_t zee)
  * polylog_terms_est() -- estimate number of terms needed 
  * in the polylog summation in order to keep the error
  * to be less than 10^-prec.
- *
- * The estimation is based on the  development in the 
- * paper, but is broken for values of ess which are 
- * non-positive integers, since then, the gamma explodes
  */
 static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 {
@@ -230,12 +226,10 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	/* den = | z^2/(z-1)|^2 */
 	double den = polylog_get_zone (zre, zim);
 
+	/* fterms may become negative -- a negative value means 
+	 * it will never converge. Caller must test for negative value.
+	 */
 	fterms /= -0.5*log(den) + 1.386294361;  /* log 4 */
-	if (4.0 >= fterms)
-	{
-		fterms = 2.0123456e8;
-	}
-
 	int nterms = (int) (fterms+1.0);
 
 // gamterms /=  -0.5*log(den) + 1.386294361;
@@ -246,8 +240,9 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 
 static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth);
 		  
-static inline void polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+static inline int polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
+	int rc;
 	cpx_t zroot, s, pp, pn;
 	cpx_init (zroot);
 	cpx_init (s);
@@ -263,10 +258,12 @@ printf ("\n");
 cpx_prt ("zroot= ", zroot);
 printf ("\n");
 #endif
-	recurse_polylog (pp, s, zroot, prec, depth);
+	rc = recurse_polylog (pp, s, zroot, prec, depth);
+	if (rc) goto bailout;
 
 	cpx_neg (zroot, zroot);
-	recurse_polylog (pn, s, zroot, prec, depth);
+	rc = recurse_polylog (pn, s, zroot, prec, depth);
+	if (rc) goto bailout;
 
 	cpx_add (plog, pp, pn);
 
@@ -275,10 +272,12 @@ printf ("\n");
 	cpx_ui_pow (s, 2, s, prec);
 	cpx_mul (plog, plog, s);
 
+bailout:
 	cpx_clear (s);
 	cpx_clear (pp);
 	cpx_clear (pn);
 	cpx_clear (zroot);
+	return rc;
 }
 
 static inline int polylog_recurse_duple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
@@ -389,7 +388,7 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
 
-	if (4 < depth)
+	if (5 < depth)
 	{
 		// fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
 		return 1;
@@ -431,25 +430,37 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	if (1 == depth)
 	{
 		int nbits = mpf_get_default_prec();
-		maxterms = nbits - (int) (3.321928095 *prec); /* log(10) / log(2) */
-		prec += (int) (0.301029996 * nterms) +1;
+		double fm = nbits - (3.321928095 *prec); /* log(10) / log(2) */
+		// The 0.666 looked good
+		// double fm = 0.66666666 * nbits - (3.321928095 *prec); /* log(10) / log(2) */
+		maxterms = (int) (fm);
+		// 0.57 works for prec=15, nbits=180 -->maxterms = 75
+		// maxterms = (int) (0.57 * fm);
+		// 0.22 works for prec=15, nbits=380 --> maxterms = 72
+		// maxterms = (int) (0.22 * fm);
+		if (4 < nterms)
+			prec += (int) (0.301029996 * nterms) +1;
 	}
+	if (75 < maxterms) maxterms = 75;
 
-	if ((den > 15.0) || (maxterms < nterms))
+	/* if (4> nterms) (i.e. nterms is netgative) then the thing will
+	 * never converge, and so subdivision is the only option.
+	 * Uhh, this should be equivalent to den>15
+	 */
+	if ((den > 15.0) || (maxterms < nterms) || (4 > nterms))
 	{
-return 1;
-// printf ("splitsville, den=%g\n", den);
+// printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
 		double mod = zre * zre + zim*zim;
 		double bra = (zre-1.0) * (zre-1.0) + zim*zim;
-		// if ((1.0>mod) || (0.125 > bra))
-		if (1)
+		if ((1.2>mod) || (0.125 > bra))
 		{
 			rc = polylog_recurse_duple (plog, ess, zee, prec, depth);
-			// polylog_recurse_triple (plog, ess, zee, prec, depth);
+			// rc = polylog_recurse_triple (plog, ess, zee, prec, depth);
 			return rc;
 		}
-		// polylog_recurse_sqrt (plog, ess, zee, prec, depth);
-		return 0;
+		rc = polylog_recurse_sqrt (plog, ess, zee, prec, depth);
+if (0 == rc) cpx_set_d (plog, 0.03, 0);
+		return rc;
 	}
 	
 	polylog_borwein (plog, ess, zee, nterms, prec);
@@ -578,7 +589,14 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
 		
 		// cpx_polylog (z, s, z, prec);
 		int nterms = polylog_terms_est (s, z, prec);
-		polylog_borwein (z, s, z, nterms, prec);
+		if (4 < nterms)
+		{
+			polylog_borwein (z, s, z, nterms, prec);
+		}
+		else
+		{
+			fprintf (stderr, "Error: cpx_periodic_zeta() has bad terms estimate\n");
+		}
 	}
 	
 	mpf_clear (q);
