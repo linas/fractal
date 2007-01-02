@@ -8,6 +8,7 @@
  */
 
 #include <gmp.h>
+#include "mp-complex.h"
 
 /* ======================================================================= */
 /* Cache management */
@@ -41,7 +42,7 @@ static inline void i_one_d_cache_fetch (i_cache *c, mpz_t val, unsigned int n)
 /**
  * i_one_d_cache_store - store value in cache
  */
-static inline void i_one_d_cache_store (i_cache *c, mpz_t val, unsigned int n)
+static inline void i_one_d_cache_store (i_cache *c, const mpz_t val, unsigned int n)
 {
 	if (c->disabled) return;
 	mpz_set (c->cache[n], val);
@@ -71,7 +72,7 @@ static inline void i_triangle_cache_fetch (i_cache *c, mpz_t val, unsigned int n
 /**
  * i_triangle_cache_store - store value in cache
  */
-static inline void i_triangle_cache_store (i_cache *c, mpz_t val, unsigned int n, unsigned int k)
+static inline void i_triangle_cache_store (i_cache *c, const mpz_t val, unsigned int n, unsigned int k)
 {
 	unsigned int idx = n * (n+1) /2 ;
 	mpz_set (c->cache[idx+k], val);
@@ -108,7 +109,7 @@ static inline void q_one_d_cache_fetch (q_cache *c, mpq_t val, unsigned int n)
 /**
  * q_one_d_cache_store - store value in cache
  */
-static inline void q_one_d_cache_store (q_cache *c, mpq_t val, unsigned int n)
+static inline void q_one_d_cache_store (q_cache *c, const mpq_t val, unsigned int n)
 {
 	mpq_set (c->cache[n], val);
 	c->ticky[n] = 1;
@@ -146,7 +147,7 @@ static inline void fp_one_d_cache_fetch (fp_cache *c, mpf_t val, unsigned int n)
 /**
  * fp_one_d_cache_store - store value in cache
  */
-static inline void fp_one_d_cache_store (fp_cache *c, mpf_t val, unsigned int n, int prec)
+static inline void fp_one_d_cache_store (fp_cache *c, const mpf_t val, unsigned int n, int prec)
 {
 	mpf_set (c->cache[n], val);
 	c->precision[n] = prec;
@@ -175,13 +176,53 @@ static inline void fp_triangle_cache_fetch (fp_cache *c, mpf_t val, unsigned int
 /**
  * fp_triangle_cache_store - store value in cache
  */
-static inline void fp_triangle_cache_store (fp_cache *c, mpf_t val, 
+static inline void fp_triangle_cache_store (fp_cache *c, const mpf_t val, 
 					 unsigned int n, unsigned int k, int prec)
 {
 	unsigned int idx = n * (n+1) /2 ;
 	mpf_set (c->cache[idx+k], val);
 	c->precision[idx+k] = prec;
 }
+
+/* ======================================================================= */
+/* Cache management */
+/* A cut-n-paste of above, but using cpx instead */
+
+typedef struct {
+	unsigned int nmax;
+	cpx_t *cache;
+	int *precision; /* base-10 precision of cached value */
+} cpx_cache;
+
+
+#define DECLARE_CPX_CACHE(name)         \
+	static cpx_cache name = {.nmax=0, .cache=NULL, .precision=NULL}
+
+/** cpx_one_d_cache_check() -- check if cpx_t value is in the cache
+ *  If there is a cached value, this returns the precision of the 
+ *  value in the cache; else it returns zero.
+ *  This assumes a 1-dimensional cache layout (simple array)
+ */
+int cpx_one_d_cache_check (cpx_cache *c, unsigned int n);
+
+/** 
+ * cpx_one_d_cache_fetch - fetch value from cache
+ */
+static inline void cpx_one_d_cache_fetch (cpx_cache *c, cpx_t val, unsigned int n)
+{
+	cpx_set (val, c->cache[n]);
+}
+
+/**
+ * cpx_one_d_cache_store - store value in cache
+ */
+static inline void cpx_one_d_cache_store (cpx_cache *c, const cpx_t val, unsigned int n, int prec)
+{
+	cpx_set (c->cache[n], val);
+	c->precision[n] = prec;
+}
+
+void cpx_one_d_cache_clear (cpx_cache *c);
 
 /* =============================== END OF FILE =========================== */
 

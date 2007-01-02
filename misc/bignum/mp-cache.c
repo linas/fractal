@@ -190,5 +190,46 @@ int fp_triangle_cache_check (fp_cache *c, unsigned int n, unsigned int k)
 	return c->precision[idx+k];
 }
 
+/* ======================================================================= */
+/* Cache management */
+/* A cut-n-paste of above, but using cpx instead */
+
+/** cpx_one_d_cache_check() -- check if cpx_t value is in the cache
+ *  If there is a cached value, this returns the precision of the 
+ *  value in the cache; else it returns zero.
+ *  This assumes a 1-dimensional cache layout (simple array)
+ */
+int cpx_one_d_cache_check (cpx_cache *c, unsigned int n)
+{
+	if (n >= c->nmax)
+	{
+		unsigned int newsize = 1.5*n+1;
+		c->cache = (cpx_t *) realloc (c->cache, newsize * sizeof (cpx_t));
+		c->precision = (int *) realloc (c->precision, newsize * sizeof (int));
+
+		unsigned int en;
+		unsigned int nstart = c->nmax+1;
+		if (0 == c->nmax) nstart = 0;
+		for (en=nstart; en <newsize; en++)
+		{
+			cpx_init (c->cache[en]);
+			c->precision[en] = 0;
+		}
+		c->nmax = newsize-1;
+		return 0;
+	}
+
+	return (c->precision[n]);
+}
+
+void cpx_one_d_cache_clear (cpx_cache *c)
+{
+	unsigned int i;
+	for (i=0; i<c->nmax; i++)
+	{
+		c->precision[i] = 0;
+	}
+}
+
 /* =============================== END OF FILE =========================== */
 
