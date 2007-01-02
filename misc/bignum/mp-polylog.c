@@ -368,9 +368,9 @@ static inline void polylog_recurse_triple (cpx_t plog, const cpx_t ess, const cp
 
 inline static int accept (double zre, double zim)
 {
-	double mod = zre*zre + zim*zim;
-	if (0.3>mod) return 1;
-	if ((0.85>mod) && (0.0 <zre)) return 1;
+	double mod = (zre-0.65)*(zre-0.65) + zim*zim;
+	/* accept within 0.95 */
+	if (0.09>mod) return 1;
 	return 0;
 }
 
@@ -441,7 +441,7 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 		if (4 < nterms)
 			prec += (int) (0.301029996 * nterms) +1;
 	}
-	if (75 < maxterms) maxterms = 75;
+	if (66 < maxterms) maxterms = 66;
 
 	/* if (4> nterms) (i.e. nterms is netgative) then the thing will
 	 * never converge, and so subdivision is the only option.
@@ -452,7 +452,8 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 // printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
 		double mod = zre * zre + zim*zim;
 		double bra = (zre-1.0) * (zre-1.0) + zim*zim;
-		if ((1.2>mod) || (0.125 > bra))
+		// if ((1.2>mod) || (0.125 > bra))
+		if (1)
 		{
 			rc = polylog_recurse_duple (plog, ess, zee, prec, depth);
 			// rc = polylog_recurse_triple (plog, ess, zee, prec, depth);
