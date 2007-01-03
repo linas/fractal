@@ -393,18 +393,12 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	int rc;
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
+	double mod = zre*zre + zim*zim;
 
-	/* The zone of convergence for the Borwein algorithm is 
-	 * |z^2/(z-1)| < 3.  If z is within this zone, then all is 
-	 * well. If not, use the duplication formula to make 
-	 * recursive calls, until the leaves of the recursion 
-	 * are in this zone. 
-	 *
-	 * The algo seems to be more precise (!??) and have less 
-	 * trouble when an even smaller bound is used, e.g.
-	 * when |z^2/(z-1)| < 1.25. The non-recursive algo seems
-	 * to choke up when it gets too close to z=1.
-	 *
+	/* The algo will never converge when modulus >= 5 or so */
+	if (25 < mod) return 1;
+
+	/*
 	 * Limit the dept of recursion to avoid run-away. Now
 	 * that the algo is working well, this seems to almost
 	 * never be needed (!?).
@@ -429,6 +423,18 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 		return 0;
 	}
 #endif
+
+	/* The zone of convergence for the Borwein algorithm is 
+	 * |z^2/(z-1)| < 3.  If z is within this zone, then all is 
+	 * well. If not, use the duplication formula to make 
+	 * recursive calls, until the leaves of the recursion 
+	 * are in this zone. 
+	 *
+	 * The algo seems to be more precise (!??) and have less 
+	 * trouble when an even smaller bound is used, e.g.
+	 * when |z^2/(z-1)| < 1.25. The non-recursive algo seems
+	 * to choke up when it gets too close to z=1.
+	 */
 
 	/* den = | z^2/(z-1)|^2 */
 	double den = polylog_get_zone (zre, zim);
