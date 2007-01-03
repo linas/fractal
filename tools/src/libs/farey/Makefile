@@ -44,6 +44,10 @@ totient.o:	totient.c totient.h
 	$(CC) -c $<
 	ar cru $(LIB)/libfunc.a $@
 
+.C.o:
+	$(CC) -c $<
+	ar cru $(LIB)/libfunc.a $@
+
 clean:
 	cd test; make clean
 	cd maps; make clean
