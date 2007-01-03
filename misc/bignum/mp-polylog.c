@@ -200,17 +200,20 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
-	if (zre > 1.0)
-	{
-		double mod = (zre-1.0)*(zre-1.0) + zim*zim;
-		fterms -= 0.5 * log (mod);
-	}
-	else if (0.0 < zre)
+	if (0.0 < zre)
 	{
 		double mod = zre*zre + zim*zim;
-		fterms += 0.5 * log (mod);
-		if (0.0 > zim) zim = -zim;
-		fterms -= log (zim);
+		if (1.0 >mod)
+		{
+			double mod = (zre-1.0)*(zre-1.0) + zim*zim;
+			fterms -= 0.5 * log (mod);
+		}
+		else
+		{
+			fterms += 0.5 * log (mod);
+			if (0.0 > zim) zim = -zim;
+			fterms -= log (zim);
+		}
 	}
 
 	/* den = | z^2/(z-1)|^2 */
@@ -378,7 +381,8 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
 
-	if (5 < depth)
+	// if (5 < depth)
+	if (8 < depth)
 	{
 		// fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
 		return 1;
@@ -432,13 +436,16 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 			prec += (int) (0.301029996 * nterms) +1;
 	}
 	// if (66 < maxterms) maxterms = 66;
-	if (96 < maxterms) maxterms = 96;
+	if (196 < maxterms) maxterms = 196;
 
+int i; for (i=0;i<depth; i++) printf ("   ");
+printf ("invoke, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
 	/* if (4> nterms) (i.e. nterms is netgative) then the thing will
 	 * never converge, and so subdivision is the only option.
 	 * Uhh, this should be equivalent to den>15
 	 */
-	if ((den > 15.0) || (maxterms < nterms) || (4 > nterms))
+	// if ((den > 15.0) || (maxterms < nterms) || (4 > nterms))
+	if ((den > 1.6) || (maxterms < nterms))
 	{
 // printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
 		double mod = zre * zre + zim*zim;

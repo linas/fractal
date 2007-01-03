@@ -235,7 +235,7 @@ main (int argc, char * argv[])
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.02; q<0.991; q+=0.008)
-	for (q=-1.02; q<2.0; q+=0.1)
+	for (q=0.82; q<1.0; q+=0.02)
 	{
 		mpf_set_d (que, q);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
