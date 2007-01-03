@@ -394,24 +394,29 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
 
-	if (5 < depth)
+	/* The zone of convergence for the Borwein algorithm is 
+	 * |z^2/(z-1)| < 3.  If z is within this zone, then all is 
+	 * well. If not, use the duplication formula to make 
+	 * recursive calls, until the leaves of the recursion 
+	 * are in this zone. 
+	 *
+	 * The algo seems to be more precise (!??) and have less 
+	 * trouble when an even smaller bound is used, e.g.
+	 * when |z^2/(z-1)| < 1.25. The non-recursive algo seems
+	 * to choke up when it gets too close to z=1.
+	 *
+	 * Limit the dept of recursion to avoid run-away. Now
+	 * that the algo is working well, this seems to almost
+	 * never be needed (!?).
+	 */
+	if (9 < depth)
 	{
 		// fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
 		return 1;
 	}
 	depth ++;
 
-	/* The zone of convergence for the Borwein algorithm is 
-	 * |z^2/(z-1)| < 3.  If z is within this zone, then all is 
-	 * well, otherwise, use the duplication formula to make 
-	 * recusrsive calls, until the leaves of the recursion 
-	 * in in this zone. Actually, the algo seems to be more
-	 * precise (!??) and have less trouble when an even smaller 
-	 * bound is used.
-	 *
-	 * Recursion is use to more some points outside the 
-	 * convergence region into the convergence region.
-	 *
+	/*
 	 * The Borwein algo seems to always be faster than direct 
 	 * summation, even when the direct-sum region is made quite 
 	 * small, e.g. even when it is of radius less than 1/4.
@@ -430,28 +435,20 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 
 	/* nterms = number of terms needed for computation */
 	int nterms = polylog_terms_est (ess, zee, prec);
-	int maxterms = nterms;
 
 	/* To carry out the computation, an internal precision is needed 
 	 * that is a bit higher than what the user asked for. This internal
 	 * precision depends on the degree of the approximating polynomial.
 	 * Thus, look at the available bits of precision, and decide if
 	 * the calculation can be performed in that way. 
+	 *
+	 * The degree of internal precision available limits the largest
+	 * effective order of the apprximating polynomial that can be used.
+	 * Its pointless/erroneous to try to use a polynomial of degree
+	 * more than "maxterms".
 	 */
-	if (1 == depth)
-	{
-		int nbits = mpf_get_default_prec();
-		double fm = nbits - (3.321928095 *prec); /* log(10) / log(2) */
-		// The 0.666 looked good
-		// double fm = 0.66666666 * nbits - (3.321928095 *prec); /* log(10) / log(2) */
-		maxterms = (int) (fm);
-		// 0.57 works for prec=15, nbits=180 -->maxterms = 75
-		// maxterms = (int) (0.57 * fm);
-		// 0.22 works for prec=15, nbits=380 --> maxterms = 72
-		// maxterms = (int) (0.22 * fm);
-	}
-	// if (66 < maxterms) maxterms = 66;
-	if (96 < maxterms) maxterms = 96;
+	int nbits = mpf_get_default_prec();
+	int maxterms = nbits - (int) (3.321928095 *prec); /* log(10) / log(2) */
 
 	/* if (4> nterms) (i.e. nterms is negative), then the thing will
 	 * never converge, and so subdivision is the only option.
@@ -463,7 +460,7 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	 */
 	if ((den > 1.6) || (maxterms < nterms))
 	{
-// printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
+		// printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
 		rc = polylog_recurse_duple (plog, ess, zee, prec, depth);
 		/* 
 		 * The angle-tripling recursion equation is not as effective 
