@@ -371,15 +371,6 @@ bailout:
 	return rc;
 }
 
-inline static int accept (double zre, double zim)
-{
-	// double mod = (zre-0.65)*(zre-0.65) + zim*zim;
-	double mod = zre*zre + zim*zim;
-	/* accept within 0.95 */
-	if (0.0625>mod) return 1;
-	return 0;
-}
-
 /* recurse_polylog() -- use duplication formula to extend domain
  *
  * Evaluate the polylog directly, if possible; else use the 
@@ -417,7 +408,7 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	 * Never use direct summation.
 	 */
 #if 0
-	if (accept (zre,zim))
+	if (0.0625>mod)
 	{
 		cpx_polylog_sum (plog, ess, zee, prec);
 		return 0;
