@@ -455,7 +455,7 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	 * The algo seems to have some trouble near z=1 when 
 	 * if (den>4) is used to decide subdivision. 
 	 */
-	if ((den > 1.6) || (maxterms < nterms))
+	if ((den > 1.5) || (maxterms < nterms))
 	{
 		// printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
 		rc = polylog_recurse_duple (plog, ess, zee, prec, depth);
@@ -528,12 +528,13 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
 
 	cpx_set (s, ess);
 	
-	// if ((1.0e-10 > q) || (1.0e-10 > 1.0-q))
-	if (0)
+	double fq = mpf_get_d (q);
+	if ((1.0e-15 > fq) || (1.0e-15 > 1.0-fq))
 	{
 		// XXX should be more precise with the next order
 		// q correction ... 
 		// riemann_zeta (s.re, s.im, &z.re, &z.im);
+		cpx_set_ui (z, 0, 0);
 	}
 	else if (mpf_cmp_d (q, 0.25) < 0) 
 	{
