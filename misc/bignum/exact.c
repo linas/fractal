@@ -205,8 +205,8 @@ main (int argc, char * argv[])
 	mpf_t que;
 	mpf_init (que);
 			  
+	// cpx_set_d (ess, 1.5, 14.134725);
 	cpx_set_d (ess, 0.5, sim);
-	cpx_set_d (ess, 1.5, 14.134725);
 
 	double zmag = sim;
 
@@ -224,7 +224,6 @@ main (int argc, char * argv[])
 	        0920984416442778402382245580624407504710461490557783782998515227308011 \
 	        8813393358267168958722516981043873551292849372719199462297591267547869";
 
-	zero = "50.0";
 	mpf_set_str (ess[0].im, zero, 10);
 #endif
 
@@ -235,22 +234,20 @@ main (int argc, char * argv[])
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.02; q<0.991; q+=0.008)
-	for (q=0.82; q<1.0; q+=0.02)
+	for (q=0.02; q<1.0; q+=0.002)
 	{
 		mpf_set_d (que, q);
-		// cpx_hurwitz_zeta (zeta, ess, que, prec);
+		cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
 		// cpx_periodic_zeta (zeta, ess, que, prec);
 		// cpx_polylog_sum (plog, ess, zee, prec);
-		cpx_set_d (zee, q, 0.002);
-		cpx_set_ui (zeta, 0, 0);
-		cpx_polylog (zeta, ess, zee, prec);
+		// cpx_set_d (zee, q, 0.002);
+		// cpx_set_ui (zeta, 0, 0);
+		// cpx_polylog (zeta, ess, zee, prec);
 
 		printf ("%g",q);
 		fp_prt ("\t", zeta[0].re);
 		fp_prt ("\t", zeta[0].im);
-		// fp_prt ("\t", plog[0].re);
-		// fp_prt ("\t", plog[0].im);
 		printf ("\n");
 		fflush (stdout);
 	}

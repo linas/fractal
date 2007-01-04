@@ -977,6 +977,10 @@ int test_polylog (int nterms, int prec, int which)
 			cpx_polylog_nint (plog, 0, zee);
 		} else {
 			rc = cpx_polylog (plog, ess, zee, prec);
+cpx_prt ("duude plog=", plog);
+printf ("\n");
+cpx_prt ("duude exac=", exact);
+printf ("\n");
 		}
 		cpx_sub (plog, plog, exact);
 	

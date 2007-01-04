@@ -201,10 +201,14 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	 * If lngamma is divergent, then sre is a negative integer,
 	 * and the approximation is in fact an exact result. Thus,
 	 * we need only set nterms to be minus the real part of s.
+	 *
+	 * XXXX this is wrong, this would hold only for
+	 * sim = 0. But if someone passes in sre=-n and sim != 0,
+	 * then this does the wrong thing :-( Boooo...
 	 */
 	if ((-10123>gamterms) || (10123 < gamterms))
 	{
-		return (int) (-sre-1.0);
+		return (int) (-sre+3.0);
 	}
 	
 	fterms += gamterms;
@@ -238,7 +242,7 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	fterms /= -0.5*log(den) + 1.386294361;  /* log 4 */
 	int nterms = (int) (fterms+1.0);
 
-#if 1
+#if 0
 gamterms /=  -0.5*log(den) + 1.386294361;
 cterms /=  -0.5*log(den) + 1.386294361;
 printf ("# duude z= %g +i %g den=%g  prec=%d deno=%g nterms = %d gam=%g ct=%g\n", 
@@ -458,7 +462,7 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 	int nbits = mpf_get_default_prec();
 	int maxterms = nbits - (int) (3.321928095 *prec); /* log(10) / log(2) */
 
-printf ("invoke, z=%g +i %g  den=%g nterms=%d, maxterms=%d\n", zre, zim, den, nterms, maxterms);
+// printf ("invoke, z=%g +i %g  den=%g nterms=%d, maxterms=%d\n", zre, zim, den, nterms, maxterms);
 	/* if (4> nterms) (i.e. nterms is negative), then the thing will
 	 * never converge, and so subdivision is the only option.
 	 * Uhh, this should be equivalent to den>15, and we already subdivide
@@ -742,7 +746,7 @@ void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 		cpx_exp (piss, piss, prec);
 		cpx_recip (niss, piss);
 
-		/* 2 gamma(s)/ (2pi)^s */
+		/* gamma(s)/ (2pi)^s */
 		cpx_gamma (scale, s, prec);
 
 		/* times (2pi)^{-s} */
@@ -753,7 +757,6 @@ void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 		cpx_mul (scale, scale, tps);
 
 		/* times two */
-		cpx_mul_ui (scale, scale, 2);
 		cpx_clear (tps);
 	}
 	
