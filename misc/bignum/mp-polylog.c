@@ -195,7 +195,9 @@ static int polylog_terms_est (const cpx_t ess, const cpx_t zee, int prec)
 	} else {
 		gamterms = M_PI*sim;
 	}
-	gamterms -= lgamma(sre);
+	/* XXX TODO replace lgamma with stirling approx slog(s)-s for better
+	 * performance and speed */
+	gamterms -= lgamma(sre); 
 
 	/*
 	 * If lngamma is divergent, then sre is a negative integer,

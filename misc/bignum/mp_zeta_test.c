@@ -16,6 +16,7 @@ double tgamma (double);  // libc is missing the correct prototype
 #include <stdio.h>
 #include <stdlib.h>
 #include <gsl/gsl_complex_math.h>
+#include <gsl/gsl_sf_zeta.h>
 
 #include <gmp.h>
 #include "mp-binomial.h"
@@ -709,7 +710,7 @@ int test_complex_riemann_zeta (int nterms, int prec)
 	/* Set up max allowed error */
 	mpf_t epsi;
 	mpf_init (epsi);
-	fp_epsilon (epsi, prec-3);
+	fp_epsilon (epsi, prec-6);
 
 	/* This test was passing in Nov 2006 */
 	mpf_t nzeta;
@@ -724,12 +725,12 @@ int test_complex_riemann_zeta (int nterms, int prec)
 	int pr = prec;
 
 	/*  Verify that its zero where it should be */
-	for (i=0; i<13; i++ ) {
+	int nz = 13;
+	if (nterms < nz) nz = nterms;
+	for (i=0; i<nz; i++ ) {
 		zeta_zero (ess[0].im, i);
 		cpx_borwein_zeta (zeta, ess, pr);
-		printf ("zeta(rho[%d]) = ", i);
-		cpx_prt (" ", zeta);
-		printf ("\n");
+		nfaults = cpx_check_for_zero (nfaults, zeta, epsi, "complex riemann at non-triv zeroes", i, i, 0);
 	}
 
 	/* compare values to integer zeta routine */
@@ -747,6 +748,10 @@ int test_complex_riemann_zeta (int nterms, int prec)
 	if (0 == nfaults)
 	{
 		fprintf(stderr, "Complex Riemann zeta test passed!\n");
+	}
+	else
+	{
+		fprintf(stderr, "Complex Riemann zeta test FAILED!\n");
 	}
 	return nfaults;
 }
@@ -1243,7 +1248,7 @@ int test_periodic_zeta (int nterms, int prec)
 	{
 		for (sim = silo; sim < sihi; sim += (sihi-silo+0.01835567)/nterms)
 		{
-printf ("start test %g +i%g\n", sre, sim);
+printf ("start periodic zeta test at %g +i%g\n", sre, sim);
 			cpx_set_d (s, sre, sim);
 			cpx_periodic_zeta (zl, s, q, prec);
 			
@@ -1289,7 +1294,8 @@ printf ("start test %g +i%g\n", sre, sim);
 /* ==================================================================== */
 /** 
  * test_hurwitz_zeta() -- compare hurwitz zeta to Riemann zeta, and to gsl_sf_hzeta
- * 
+ * As of Dec 2006, passing, more or less, with some rounding errors bigger than
+ * desired.
  */
 int test_hurwitz_zeta (int nterms, int prec)
 {
@@ -1304,45 +1310,61 @@ int test_hurwitz_zeta (int nterms, int prec)
 	mpf_init (q);
 	mpf_init (l2);
 
-	mpf_set_ui (q, 1);
-	mpf_div_ui (q, q, 2);
-
 	fp_log2 (l2, prec);
 
-	cpx_t s, zl, zb, sm, ts;
+	cpx_t s, zl, zb, ts;
 	cpx_init (s);
 	cpx_init (zl);
 	cpx_init (zb);
-	cpx_init (sm);
 	cpx_init (ts);
 
 	cpx_set_ui (s, 0, 0);
+	cpx_set_ui (zl, 0, 0);
 
-	double sre, sim;
-	double srlo = -4.01396826;
-	double srhi = 12.7577232;
+	/* Compare the Hurwitz zeta on the real axis to the gsl implementation */
+	double sre, que;
+	double srlo = 1.301396826;
+	double srhi = 12.7152773232;
+	double qlo = 0.023456789;
+	double qhi = 0.9807873430222;
+	for (sre = srlo; sre < srhi; sre += (srhi-srlo+0.01835567)/nterms)
+	{
+		cpx_set_d (s, sre, 0);
+		for (que = qlo; que < qhi; que += (qhi-qlo+0.01835567)/nterms)
+		{
+printf ("start gsl hurwitz zeta test s=%g q=%g\n", sre, que);
+			mpf_set_d (q, que);
+			cpx_hurwitz_zeta (zl, s, q, prec);
+			double gz = gsl_sf_hzeta (sre, que);
+
+			nfaults = check_for_zero (nfaults, zl[0].im, epsi, "gsl hurwitz im part", que);
+			nfaults = check_for_equality (nfaults, zl[0].re, gz, 5e-16, "gsl hurwitz zeta", sre);
+		}
+	}
+
+	/* Compare Hurwitz zeta at q=1/2 to the Riemann zeta */
+	srlo = -4.01396826;
+	srhi = 12.7577232;
+	double sim;
 	double silo = -0.0239926;
 	double sihi = 42.7755777232;
+
+	mpf_set_ui (q, 1);
+	mpf_div_ui (q, q, 2);
+
 	for (sre = srlo; sre < srhi; sre += (srhi-srlo+0.01835567)/nterms)
 	{
 		for (sim = silo; sim < sihi; sim += (sihi-silo+0.01835567)/nterms)
 		{
-printf ("start test %g +i%g\n", sre, sim);
+printf ("start hurwitz zeta test %g +i%g\n", sre, sim);
 			cpx_set_d (s, sre, sim);
 			cpx_hurwitz_zeta (zl, s, q, prec);
 			
-			/* sm = 1-s */
-			cpx_neg (sm, s);
-			cpx_add_ui (sm, sm, 1, 0);
-	
-			/* ts = 2^{1-s} */
-			cpx_mul_mpf (sm, sm, l2);
-			cpx_exp (ts, sm, prec);
-			
-			/* ts = -(1-2^(1-s)) */
-			cpx_neg (ts, ts);
-			cpx_add_ui (ts, ts, 1,0);
-			cpx_neg (ts, ts);
+			/* ts = 2^s - 1 */
+			cpx_mul_mpf (ts, s, l2);
+			cpx_exp (ts, ts, prec);
+			cpx_sub_ui (ts, ts, 1,0);
+
 			cpx_div (zl, zl, ts);
 			
 			/* compare to the known-working Riemann zeta function */
@@ -1353,13 +1375,12 @@ printf ("start test %g +i%g\n", sre, sim);
 			nfaults = cpx_check_for_zero (nfaults, zl, epsi, "hurwitz zeta", 0, sre, sim);
 		}
 	}
-	
+
 	mpf_clear (q);
 	mpf_clear (l2);
 	cpx_clear (s);
 	cpx_clear (zl);
 	cpx_clear (zb);
-	cpx_clear (sm);
 	cpx_clear (ts);
 	mpf_clear (epsi);
 
@@ -1750,6 +1771,7 @@ int main (int argc, char * argv[])
 	int nfaults = 0;
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
+ 	nfaults += test_hurwitz_zeta (nterms, prec);
 	nfaults += test_complex_riemann_zeta (nterms, prec);
 	nfaults += test_polylog (nterms, prec, 0);
 	nfaults += test_polylog (nterms, prec, 1);
