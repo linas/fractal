@@ -1322,6 +1322,8 @@ int test_hurwitz_zeta (int nterms, int prec)
 	cpx_set_ui (zl, 0, 0);
 
 	/* Compare the Hurwitz zeta on the real axis to the gsl implementation */
+	/* XXX this should be extended to q values greater than 1.0
+	 * which is right now not implemented */
 	double sre, que;
 	double srlo = 1.301396826;
 	double srhi = 12.7152773232;

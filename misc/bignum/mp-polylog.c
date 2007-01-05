@@ -764,7 +764,8 @@ void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 	
 	/* F(s,q) and F(s, 1-q) */
 	cpx_periodic_zeta (zee, s, que, prec);
-	mpf_ui_sub (t, 1, que);
+//	mpf_ui_sub (t, 1, que);
+mpf_neg (t, que);
 	cpx_periodic_zeta (zm, s, t, prec);
 
 	/* assemble the thing */
