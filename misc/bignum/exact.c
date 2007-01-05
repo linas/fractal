@@ -237,9 +237,9 @@ main (int argc, char * argv[])
 	for (q=0.02; q<1.0; q+=0.002)
 	{
 		mpf_set_d (que, q);
-		cpx_hurwitz_zeta (zeta, ess, que, prec);
+		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
-		// cpx_periodic_zeta (zeta, ess, que, prec);
+		cpx_periodic_zeta (zeta, ess, que, prec);
 		// cpx_polylog_sum (plog, ess, zee, prec);
 		// cpx_set_d (zee, q, 0.002);
 		// cpx_set_ui (zeta, 0, 0);

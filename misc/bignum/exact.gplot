@@ -39,8 +39,8 @@ set key right
 set ylabel "|F(s,q)| for s = 0.5 + i 25" 0,0
 set xlabel "q" 1,0
 # set title "Hurwitz zeta at s=0.5+i14.1"
-plot "exact.dat" using 1:2 title "Re", \
-     "exact.dat" using 1:3 title "Im"
+# plot "exact.dat" using 1:2 title "Re", \
+#     "exact.dat" using 1:3 title "Im"
 
 # plot "exact.dat" using 1:2 title "Re", \
 #   "exact.dat" using 1:(cos(25.01086*log($1))/sqrt($1)) title "refit"
@@ -48,11 +48,11 @@ plot "exact.dat" using 1:2 title "Re", \
 # plot "exact.dat" using 1: ($2-cos(25.01086*log($1))/sqrt($1)) title "recontinue", \
 #      "exact.dat" using 1: (cos(25.01086*log($1+1))/sqrt($1+1)) title "refit"
 
-# plot "exact.dat" using (log($1)):2 title "Re", \
-#    "exact.dat" using (log($1)):(cos(25.01086*log($1))/sqrt($1)) title "refit"
+plot "exact.dat" using (log($1)):2 title "Re", \
+     "exact.dat" using (log($1)):(cos(25.01086*log($1))/sqrt($1)) title "refit"
 
 # plot "exact.dat" using (log($1)):3 title "Im", \
-#    "exact.dat" using (log($1)):(sin(25.01086*log($1))/sqrt($1)) title "refit"
+#      "exact.dat" using (log($1)):(-sin(25.01086*log($1))/sqrt($1)) title "refit"
 
 # set title "Periodic Zeta"
 # plot "per.dat" using 1:2 title "Re" with lines linewidth 2, \

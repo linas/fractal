@@ -701,6 +701,62 @@ int test_real_sine (int nterms, int prec)
 }
 
 /* ==================================================================== */
+
+int test_complex_riemann_zeta (int nterms, int prec)
+{
+	int nfaults = 0;
+
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, prec-5);
+
+	/* This test was passing in Nov 2006 */
+	mpf_t nzeta;
+	mpf_init (nzeta);
+	
+	cpx_t zeta, ess;
+	cpx_init (zeta);
+	cpx_init (ess);
+	cpx_set_d (ess, 0.5, 0);
+
+	int i;
+	int pr = prec;
+
+	/*  Verify that its zero where it should be */
+	for (i=0; i<13; i++ ) {
+		zeta_zero (ess[0].im, i);
+		cpx_borwein_zeta (zeta, ess, pr);
+		printf ("zeta(rho[%d]) = ", i);
+		cpx_prt (" ", zeta);
+		printf ("\n");
+	}
+
+	/* compare values to integer zeta routine */
+	cpx_set_ui (ess, 0, 0);
+	for (i=3; i<nterms; i++ ) {
+		fp_zeta (nzeta, i, pr);
+		
+		mpf_set_ui (ess[0].re, i);
+		cpx_borwein_zeta (zeta, ess, pr);
+
+		mpf_sub (zeta[0].re,zeta[0].re, nzeta);
+
+		/* should print zero more or less */
+		printf ("zeta(%d)_%d = ", i, pr);
+		cpx_prt ("", zeta);
+		printf ("\n");
+		fflush (stdout);
+	}
+
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Complex Riemann zeta test passed!\n");
+	}
+	return nfaults;
+}
+
+/* ==================================================================== */
 /* Test the real-valued gamma function, return the number of failures
  */
 
@@ -1138,6 +1194,10 @@ int test_polylog_series (int nterms, int prec)
 	{
 		fprintf(stderr, "Polylog series test passed!\n");
 	}
+	else 
+	{
+		fprintf(stderr, "Polylog series test FAILED!\n");
+	}
 	return nfaults;
 }
 
@@ -1205,6 +1265,7 @@ printf ("start test %g +i%g\n", sre, sim);
 			cpx_neg (ts, ts);
 			cpx_div (zl, zl, ts);
 			
+			/* compare to the known-working Riemann zeta function */
 			cpx_borwein_zeta (zb, s, prec);
 	
 			cpx_sub (zl, zl, zb);
@@ -1442,47 +1503,6 @@ int main (int argc, char * argv[])
 	}
 #endif
 
-// #define TEST_COMPLEX_ZETA
-#ifdef TEST_COMPLEX_ZETA
-	/* this test was passing in Nov 2006 */
-	mpf_t nzeta;
-	mpf_init (nzeta);
-	
-	cpx_t zeta, ess;
-	cpx_init (&zeta);
-	cpx_init (&ess);
-	mpf_set_ui (ess.im, 0);
-
-	int i;
-	int pr = prec;
-
-	/*  verify that its zero where it should be */
-	mpf_set_d (ess.re, 0.5);
-	for (i=0; i<13; i++ ) {
-		zeta_zero (ess.im, i);
-		fp_borwein_zeta_c (&zeta, &ess, pr);
-		printf ("zeta(rho[%d]) = ", i);
-		cpx_prt (" ", &zeta);
-		printf ("\n");
-	}
-
-	/* compare values to integer zeta routine */
-	mpf_set_ui (ess.im, 0);
-	for (i=3; i<nterms; i++ ) {
-		fp_zeta (nzeta, i, pr);
-		
-		mpf_set_ui (ess.re, i);
-		fp_borwein_zeta_c (&zeta, &ess, pr);
-
-		mpf_sub (zeta.re,zeta.re, nzeta);
-
-		/* should print zero more or less */
-		printf ("zeta(%d)_%d = ", i, pr);
-		cpx_prt ("", &zeta);
-		printf ("\n");
-		fflush (stdout);
-	}
-#endif
 
 #ifdef TEST_DIGIT_COUNT
 	mpz_t ival, tmpa, tmpb;
@@ -1558,7 +1578,7 @@ int main (int argc, char * argv[])
 #if HANDY
 	mpf_set_ui (ess[0].im, 0);
 	mpf_set_d (ess[0].re, 0.5);
-	fp_borwein_zeta_c (zeta, ess, pr);
+	cpx_borwein_zeta (zeta, ess, pr);
 	cpx_prt ("zeta(1/2) = ", zeta);
 	printf ("\n");
 #endif
@@ -1567,7 +1587,7 @@ int main (int argc, char * argv[])
 	mpf_set_d (ess[0].re, -0.5);
 	for (i=0; i<13; i++ ) {
 		zeta_zero (ess[0].im, i);
-		fp_borwein_zeta_c (zeta, ess, pr);
+		cpx_borwein_zeta (zeta, ess, pr);
 		printf ("zeta(rho[%d]-1) = ", i);
 		cpx_prt (" ", zeta);
 		printf ("\n");
@@ -1650,10 +1670,11 @@ int main (int argc, char * argv[])
 	int nfaults = 0;
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
+	// nfaults += test_complex_riemann_zeta (nterms, prec);
 	nfaults += test_polylog (nterms, prec, 0);
 	nfaults += test_polylog (nterms, prec, 1);
 	nfaults += test_polylog_series (nterms, prec);
-// nfaults += test_periodic_zeta (nterms, prec);
+ 	nfaults += test_periodic_zeta (nterms, prec);
 	nfaults += test_complex_pow (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
 	nfaults += test_complex_gamma (nterms, prec);
