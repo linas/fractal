@@ -687,7 +687,11 @@ void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec)
 }
 
 /* ======================================================================= */
-/* the d_k from the borwein 1995 paper */
+/**
+ * fp_borwein_tchebysheff() -- return the d_k from the Borwein 1995 paper
+ *
+ * "An Efficient Algorithm for Computing ... etc.
+ */
 
 static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 {
@@ -812,13 +816,24 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 	mpf_clear (d_n);
 }
 
-void cpx_borwein_zeta (cpx_t zeta, const cpx_t s, int prec)
+static inline int bor_zeta_terms_est (const cpx_t s, int prec)
 {
 	double nterms = 0.69 + 2.302585093 * prec;
-	// Huh? whazzup with the gamma ??
+
+	// This is a real sleazy way of estimating the number
+	// of terms needed for complex values far from the real axis.
+	// works OK for s=1/2+itau, should be cleaned up to be better.
 	// nterms -=  s * log(s) -s;
+	double sim = mpf_get_d (s[0].im);
+	nterms += 0.5*M_PI*sim;
+	
 	nterms *= 0.567296329;
-	int n = (int) (nterms+1.0);
+	return (int) (nterms+1.0);
+}
+
+void cpx_borwein_zeta (cpx_t zeta, const cpx_t s, int prec)
+{
+	int n = bor_zeta_terms_est (s, prec);
 
 	mpf_t d_n, zero;
 	mpf_init (d_n);
