@@ -893,8 +893,15 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
 }
 
 /* ============================================================= */
-/* Implement algorithm 1 from Cohen, Villegas, Zagier et al */
+/* Implement algorithm 1 from Cohen, Villegas, Zagier et al 
+ * The naive implementation below is a total failure, I don't know why.
+ * Clearly, for real s, one might expect failure, since the series
+ * is not alternating. However, for s with a large imaginary component,
+ * the terms in the series are oscillatory, i.e. quasi-alternating,
+ * and, for whatever reason, doesn't work there.
+ */
 
+#ifdef BORKEN_DOESNT_WORK_DONT_KNOW_WHY
 void cpx_pade_hurwitz_zeta (cpx_t hur, const cpx_t ess, const mpf_t que, int prec)
 {
 	int k;
@@ -939,7 +946,6 @@ void cpx_pade_hurwitz_zeta (cpx_t hur, const cpx_t ess, const mpf_t que, int pre
 
 		mpf_mul_ui (b,b, 2*(k+nterms)*(k-nterms));
 		mpf_div_ui (b,b, (2*k+1)*(k+1));
-		
 	}
 
 	cpx_div_mpf (hur, hur, d);
@@ -951,6 +957,7 @@ void cpx_pade_hurwitz_zeta (cpx_t hur, const cpx_t ess, const mpf_t que, int pre
 	cpx_clear (s);
 	cpx_clear (term);
 }
+#endif
 
 /* ============================================================= */
 
