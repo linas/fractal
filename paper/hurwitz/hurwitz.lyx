@@ -146,10 +146,10 @@ The Hurwitz zeta function may be defined as
 \end_inset 
 
 : 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \zeta(s,q)=\frac{1}{s-1}\sum_{n=0}^{\infty}\frac{1}{n+1}\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
 n\\
-k\end{array}\right)(q+k)^{1-s}\]
+k\end{array}\right)(q+k)^{1-s}\label{eq:Hasse series}\end{equation}
 
 \end_inset 
 
@@ -565,14 +565,131 @@ This result may be immediately employed in equation
  
 \layout Section
 
+Convergence Acceleration
+\layout Standard
+
+For the special case of 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, the integrals and polynomials above are typical of those found in Pade-type
+ approximation
+\begin_inset LatexCommand \cite{Coh00}
+
+\end_inset 
+
+.
+ For the case of 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{n}(y)=y^{n}$
+\end_inset 
+
+, the technique corresponds to Euler's method for the convergence acceleration
+ of an alternating series
+\begin_inset LatexCommand \cite[eqn 3.6.27]{A&S}
+
+\end_inset 
+
+; a particularly efficient algorithm is given by van Wijngaarden
+\begin_inset LatexCommand \cite{Pre88}
+
+\end_inset 
+
+.
+ The application of Euler's method on the polylogarithm does not give a
+ quickly converging series, although it does convert the series from one
+ with a small region of convergence into a series convergent on all of the
+ complex plane.
+ 
+\layout Standard
+
+The Euler method applied to the Hurwitz zeta function gives the series 
+\begin_inset LatexCommand \ref{eq:Hasse series}
+
+\end_inset 
+
+, which was shown to be globally convergent by Hasse
+\begin_inset LatexCommand \cite{Has30}
+
+\end_inset 
+
+.
+ A quick numerical experiment will show that the series does not converge
+ rapidly, espcially in the critical strip.
+\begin_inset Formula \[
+\zeta\]
+
+\end_inset 
+
+
+\layout Standard
+
+The poor convergence of these traditional techniques motivates the development
+ of this paper.
+ Strictly speaking, the slow convergence can be attributed to the fact that
+ the naive series representations 
+\begin_inset LatexCommand \ref{eq:Hurwitz zeta}
+
+\end_inset 
+
+ or 
+\begin_inset LatexCommand \ref{eq:polylog definition}
+
+\end_inset 
+
+ are not strictly alternating series, as would be required to justify the
+ use of the Euler method.
+ Instead, the series are a superposition of oscillatory terms; for the polylogar
+ithm, an explicit oscillation coming from 
+\begin_inset Formula $z^{n}=\left|z\right|^{n}e^{in\arg z}$
+\end_inset 
+
+ and a slower oscillation coming from 
+\begin_inset Formula $n^{-s}=n^{-\sigma}e^{-i\tau\log n}$
+\end_inset 
+
+.
+ Thus, what one needs is a theory of sequence acceleration not for alternating
+ series, but for oscillatory series.
+ Above and below represent the 
+\emph on 
+ad-hoc
+\emph default 
+ development of a special case for such a general theory.
+\layout Section
+
 The Gaussian Distribution 
 \layout Standard
 
-The polynomial sequence 
+In order to suppress the logarithmic branch point at 
+\begin_inset Formula $y=0$
+\end_inset 
+
+ in the integrand of 
+\begin_inset LatexCommand \ref{eq:xi integral}
+
+\end_inset 
+
+, this section will consider the polynomial sequence 
+\begin_inset Formula $p_{n}(y)=y^{a}(1-y)^{n-a}$
+\end_inset 
+
+, a sequence which goes over to the Gaussian distrubution for large 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Consider first the polynomial sequence 
 \begin_inset Formula $p_{2n}(y)=y^{n}(1-y)^{n}$
 \end_inset 
 
- seems to have reasonably good properties for this problem.
+.
  It becomes sharply peaked at 
 \begin_inset Formula $y=1/2$
 \end_inset 
@@ -1570,7 +1687,7 @@ The first figure,
  in the picture, one may ignore the second term, so that the whole expression
  simplifies to 
 \begin_inset Formula \[
-F\left(\frac{1}{2}+i\tau,\, q\right)\approx\exp\, i\left(\frac{\pi}{4}+\phi+\tau\log2\pi\right)\;\zeta\left(\frac{1}{2}-i\tau,\, q\right)\]
+F\left(\frac{1}{2}+i\tau,\, q\right)\approx\exp\, i\left(\frac{\pi}{4}-\phi+\tau\log2\pi\right)\;\zeta\left(\frac{1}{2}-i\tau,\, q\right)\]
 
 \end_inset 
 
@@ -1588,7 +1705,7 @@ F\left(\frac{1}{2}+i\tau,\, q\right)\approx\exp\, i\left(\frac{\pi}{4}+\phi+\tau
 \end_inset 
 
 : that is, 
-\begin_inset Formula $q^{-s}=e^{-i\tau\log q}/\sqrt{q}$
+\begin_inset Formula $q^{-s}=e^{i\tau\log q}/\sqrt{q}$
 \end_inset 
 
 , so that 
@@ -1658,7 +1775,7 @@ Curiously, the limit
  is the discontinuity between sheets.
  That is, one has
 \begin_inset Formula \[
-F\left(\frac{1}{2}+i\tau,\, q+1\right)=F\left(\frac{1}{2}+i\tau,\, q\right)-\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}}\]
+F\left(\frac{1}{2}+i\tau,\, q+1\right)\approx F\left(\frac{1}{2}+i\tau,\, q\right)-\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}}\]
 
 \end_inset 
 
@@ -1680,22 +1797,7 @@ periodic
 \end_inset 
 
 .
- This discontinuity also manifests itself in other ways; this is in fact
- the very same discontinuity seen in the Jacobi theta function 
-\begin_inset Formula $\vartheta(q,\tau)$
-\end_inset 
-
- in the limit of 
-\begin_inset Formula $\tau\to-i0$
-\end_inset 
-
-, where it is seen to become the Dirac comb, the periodic sum of Dirac delta
- functions.
- That this is the same discontinuity may be seen by noting that the Hurwitz
- zeta function may be defined as an integral over the theta function XXX
-\layout Standard
-
-XXX fiunish up this note later.
+ 
 \layout Section
 
 Conclusion
