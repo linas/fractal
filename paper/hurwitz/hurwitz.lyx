@@ -98,6 +98,10 @@ m may be extended to the entire complex
  in the critical strip, where fast algorithms are otherwise unavailable.
 \layout Abstract
 
+XXX this paper in fact reviews a rather general method for series acceleration,
+ for the summation of oscillatory series.
+\layout Abstract
+
 XXX Draft, incomplete, should not, but may, contain errors.
  Caveat emptor.
 \layout Section
@@ -414,7 +418,7 @@ Given a polynomial
 
 , it can be shown that 
 \begin_inset Formula \begin{equation}
-r_{n}(y)=\frac{p_{n}(y)-p_{n}(1/z)}{1-yz}\label{eq:}\end{equation}
+r_{n}(y)=\frac{p_{n}(y)-p_{n}(1/z)}{1-yz}\label{eq:r_n definition}\end{equation}
 
 \end_inset 
 
@@ -446,7 +450,7 @@ p_{n}(y)=\sum_{k=0}^{n}a_{k}y^{k}\label{eq:}\end{equation}
 
  assume only a general series: 
 \begin_inset Formula \begin{equation}
-r_{n}(y)=\sum_{k=0}^{\infty}c_{k}y^{k}\label{eq:}\end{equation}
+r_{n}(y)=\sum_{k=0}^{\infty}c_{k}y^{k}\label{eq:r_n series}\end{equation}
 
 \end_inset 
 
@@ -565,7 +569,7 @@ This result may be immediately employed in equation
  
 \layout Section
 
-Convergence Acceleration
+Convergence Acceleration of Oscillatory Series 
 \layout Standard
 
 For the special case of 
@@ -599,32 +603,25 @@ For the special case of
 \end_inset 
 
 .
- The application of Euler's method on the polylogarithm does not give a
- quickly converging series, although it does convert the series from one
- with a small region of convergence into a series convergent on all of the
- complex plane.
  
 \layout Standard
 
-The Euler method applied to the Hurwitz zeta function gives the series 
+The Euler method applied to the Hurwitz zeta function gives the Hasse series
+ 
 \begin_inset LatexCommand \ref{eq:Hasse series}
 
 \end_inset 
 
-, which was shown to be globally convergent by Hasse
-\begin_inset LatexCommand \cite{Has30}
-
-\end_inset 
-
 .
- A quick numerical experiment will show that the series does not converge
- rapidly, espcially in the critical strip.
-\begin_inset Formula \[
-\zeta\]
+ It has improved convergence in that the result is globally convergent,
+ whereas the traditional series representation of equation 
+\begin_inset LatexCommand \ref{eq:Hurwitz zeta}
 
 \end_inset 
 
-
+ is not.
+ However, a quick numerical experiment will show that the series does not
+ converge rapidly, especially in the critical strip.
 \layout Standard
 
 The poor convergence of these traditional techniques motivates the development
@@ -641,7 +638,7 @@ The poor convergence of these traditional techniques motivates the development
 \end_inset 
 
  are not strictly alternating series, as would be required to justify the
- use of the Euler method.
+ application of the Euler method.
  Instead, the series are a superposition of oscillatory terms; for the polylogar
 ithm, an explicit oscillation coming from 
 \begin_inset Formula $z^{n}=\left|z\right|^{n}e^{in\arg z}$
@@ -654,11 +651,297 @@ ithm, an explicit oscillation coming from
 .
  Thus, what one needs is a theory of sequence acceleration not for alternating
  series, but for oscillatory series.
- Above and below represent the 
+ The polylogarithm approximation represents the 
 \emph on 
 ad-hoc
 \emph default 
  development of a special case for such a general theory.
+\layout Standard
+
+A loose sketch of a possible general theory is presented below.
+ Suppose that 
+\begin_inset Formula $c_{n}$
+\end_inset 
+
+ is some more or less arbitrary sequence of numbers, oscillatory in 
+\begin_inset Formula $n$
+\end_inset 
+
+, and that one wishes to compute the sum 
+\begin_inset Formula \[
+S=\sum_{n=0}^{\infty}c_{n}\]
+
+\end_inset 
+
+ but that one wants to apply convergence acceleration techniques to its
+ evaluation.
+ If the leading component of oscillation is 
+\begin_inset Formula $c_{n}\sim\cos n\theta$
+\end_inset 
+
+, then one makes the ansatz that there must exist some dual series 
+\begin_inset Formula $s_{n}$
+\end_inset 
+
+ oscillating as 
+\begin_inset Formula $s_{n}\sim\sin n\theta$
+\end_inset 
+
+ to give 
+\begin_inset Formula $e_{n}=c_{n}+is_{n}\sim e^{in\theta}$
+\end_inset 
+
+.
+ One may then consider a sum of 
+\begin_inset Formula $a_{n}=e^{in(\pi-\theta)}e_{n}$
+\end_inset 
+
+ and consider the  summation of an alternating series 
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}\left(-1\right)^{n}a_{n}\]
+
+\end_inset 
+
+ By construction, the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ are now presumed to be relatively tame, so that series acceleration techniques
+ can be applied.
+ 
+\layout Standard
+
+More directly, suppose one is interested in the sum
+\begin_inset Formula \begin{equation}
+S(z)=\sum_{n=0}^{\infty}z^{n}b_{n}\label{eq: geo series}\end{equation}
+
+\end_inset 
+
+ If the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ are expressible as moments, so that 
+\begin_inset Formula \[
+b_{n}=\int_{0}^{1}y^{n}g(y)dy\]
+
+\end_inset 
+
+ for some function 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+, then 
+\begin_inset Formula \[
+S(z)=\int_{0}^{1}\frac{g(y)}{1-yz}\, dy\]
+
+\end_inset 
+
+ Applying the Borwein trick, one obtains 
+\begin_inset Formula \[
+S(z)=S_{n}(z)+\xi(z)\]
+
+\end_inset 
+
+ with 
+\begin_inset Formula \[
+S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\int_{0}^{1}\frac{p_{n}(y)-p_{n}\left(\frac{1}{z}\right)}{1-yz}g(y)\, dy\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\xi_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\int_{0}^{1}\frac{p_{n}(y)g(y)}{1-yz}\, dy\]
+
+\end_inset 
+
+ The goal is to show that the 
+\begin_inset Formula $S_{n}(z)$
+\end_inset 
+
+ are easily evaluated, while also showing tht the 
+\begin_inset Formula $\xi_{n}(z)$
+\end_inset 
+
+ are arbitrarily small.
+ The first is easy enough: using equations 
+\begin_inset LatexCommand \ref{eq:r_n definition}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq:r_n series}
+
+\end_inset 
+
+ one has 
+\begin_inset Formula \[
+S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}b_{k}\]
+
+\end_inset 
+
+ With a suitable choice of 
+\begin_inset Formula $p_{n}(z)$
+\end_inset 
+
+, the coefficients 
+\begin_inset Formula $c_{k}$
+\end_inset 
+
+ are presumably easy to evaluate.
+ To show that the 
+\begin_inset Formula $S_{n}(z)$
+\end_inset 
+
+ is really a series acceleration for the geometric series 
+\begin_inset LatexCommand \ref{eq: geo series}
+
+\end_inset 
+
+, one must show that 
+\begin_inset Formula $\left|\xi_{n}(z)\right|$
+\end_inset 
+
+ is bounded.
+ If 
+\begin_inset Formula $g(y)\ge0$
+\end_inset 
+
+, then 
+\begin_inset Formula \[
+\left|\xi_{n}(z)\right|\le\left|\frac{p_{n}\left(y_{0}\right)}{p_{n}\left(\frac{1}{z}\right)}\right|S(z)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $y_{0}$
+\end_inset 
+
+ is the point on the unit interval where 
+\begin_inset Formula $p_{n}(y)$
+\end_inset 
+
+ assumes its maximum.
+ Then, provided that one can find a polynomial sequence such that 
+\begin_inset Formula \[
+\left|\frac{p_{n}\left(y_{0}\right)}{p_{n}\left(\frac{1}{z}\right)}\right|\sim A^{-n}\]
+
+\end_inset 
+
+ for some number 
+\begin_inset Formula $A>\left|1/z\right|$
+\end_inset 
+
+, then one has that the series 
+\begin_inset Formula $S_{n}(z)$
+\end_inset 
+
+ converges to 
+\begin_inset Formula $S(z)$
+\end_inset 
+
+ more rapidly than the simple parital sums 
+\begin_inset Formula $\sum_{k=0}^{n}z^{k}b_{k}$
+\end_inset 
+
+ of equation 
+\begin_inset LatexCommand \ref{eq: geo series}
+
+\end_inset 
+
+.
+\layout Standard
+
+Note that the above is a proof of a series acceleration for a more-or-less
+ general sequence of 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+, and is in no way particular to the polylogarithm or the Hurwitz zeta.
+ The only ingredients of the proof were that the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ are 
+\begin_inset Quotes eld
+\end_inset 
+
+well-behaved
+\begin_inset Quotes erd
+\end_inset 
+
+ -- in this case, being expressible as moments of a rather general function
+ 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+.
+ For the proof to hold, 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+ needs to be (mostly) positive, and integrable; it needs not be analytic,
+ differentiable or even continuous.
+ It needs to be 
+\begin_inset Quotes eld
+\end_inset 
+
+mostly
+\begin_inset Quotes erd
+\end_inset 
+
+ positive only so that the bound on the integrand, 
+\begin_inset Formula $p_{n}(y)g(y)\le\left|p_{n}\left(y_{0}\right)\right|g(y)$
+\end_inset 
+
+ can be established.
+ Thus, one might hope that the acceleration method might work, even for
+ those general cases where 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+ is not explicitly known, but the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ are somehow 
+\begin_inset Quotes eld
+\end_inset 
+
+reasonable
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ 
+\layout Standard
+
+For the special case of 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, 
+\emph on 
+i.e.
+
+\emph default 
+ for the case of an alternating series, Cohen et al.
+\begin_inset LatexCommand \cite{Coh00}
+
+\end_inset 
+
+ suggest some remarkably strongly converging polynomials, with values of
+ 
+\begin_inset Formula $A$
+\end_inset 
+
+ from 5.8 to as much as 17.9.
+ The generalization of those results to arbitrary 
+\begin_inset Formula $z$
+\end_inset 
+
+ is not immediately appearant.
+ (??? Or is it ???)
 \layout Section
 
 The Gaussian Distribution 
@@ -1798,6 +2081,9 @@ periodic
 
 .
  
+\layout Standard
+
+XXX re-write this entire section completely
 \layout Section
 
 Conclusion
