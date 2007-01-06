@@ -78,3 +78,4 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec);
  * if s is held const, while q is varied.
  */
 void cpx_hurwitz_zeta (cpx_t hzeta, const cpx_t ess, const mpf_t que, int prec);
+void cpx_pade_hurwitz_zeta (cpx_t hzeta, const cpx_t ess, const mpf_t que, int prec);

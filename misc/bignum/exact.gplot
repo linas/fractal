@@ -49,7 +49,7 @@ set xlabel "q" 1,0
 #      "exact.dat" using 1: (cos(25.01086*log($1+1))/sqrt($1+1)) title "refit"
 
 plot "exact.dat" using (log($1)):2 title "Re", \
-     "exact.dat" using (log($1)):(cos(25.01086*log($1))/sqrt($1)) title "refit"
+     "exact.dat" using (log($1)):(-cos(25.01086*log($1))/sqrt($1)) title "refit"
 
 # plot "exact.dat" using (log($1)):3 title "Im", \
 #      "exact.dat" using (log($1)):(-sin(25.01086*log($1))/sqrt($1)) title "refit"

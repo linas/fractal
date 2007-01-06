@@ -893,6 +893,66 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
 }
 
 /* ============================================================= */
+/* Implement algorithm 1 from Cohen, Villegas, Zagier et al */
+
+void cpx_pade_hurwitz_zeta (cpx_t hur, const cpx_t ess, const mpf_t que, int prec)
+{
+	int k;
+	int nterms;
+
+	nterms = 1.31*prec;
+	
+	cpx_t s, term;
+	cpx_init (s);
+	cpx_init (term);
+	cpx_set (s, ess);
+
+	mpf_t b,c,d,q;
+	mpf_init (q);
+	mpf_init (b);
+	mpf_init (c);
+	mpf_init (d);
+	mpf_set (q, que);
+
+	/* d = (3+sqrt(8))^n */
+	mpf_set_ui (d, 8);
+	mpf_sqrt (d, d);
+	mpf_add_ui (d,d,3);
+	mpf_pow_ui (d,d,nterms);
+
+	/* d = 0.5 * (d + 1/d) */
+	mpf_ui_div (c, 1, d);
+	mpf_add (d, d, c);
+	mpf_div_ui (d, d, 2);
+
+	mpf_neg (c, d);
+	mpf_set_ui (b, 1);
+	mpf_neg (b, b);
+
+	cpx_set_ui (hur, 0,0);
+	for (k=0; k<nterms-1; k++)
+	{
+		mpf_sub (c, b, c);
+		fp_pow_rc (term, k, q, s, prec);
+		cpx_mul_mpf (term, term, c);
+		cpx_add (hur, hur, term);
+
+		mpf_mul_ui (b,b, 2*(k+nterms)*(k-nterms));
+		mpf_div_ui (b,b, (2*k+1)*(k+1));
+		
+	}
+
+	cpx_div_mpf (hur, hur, d);
+	
+	mpf_clear (b);
+	mpf_clear (c);
+	mpf_clear (d);
+	mpf_clear (q);
+	cpx_clear (s);
+	cpx_clear (term);
+}
+
+/* ============================================================= */
 
 /** 
  * test_bernoulli_poly - compare periodic zeta to the Bernoulli poly's
