@@ -107,6 +107,11 @@ static inline void cpx_neg (cpx_t neg, const cpx_t a)
 	mpf_neg (neg[0].im, a[0].im);
 }
 
+static inline void cpx_conj (cpx_t neg, const cpx_t a)
+{
+	mpf_neg (neg[0].im, a[0].im);
+}
+
 /**
  * cpx_times_i -- z = a*i
  */
