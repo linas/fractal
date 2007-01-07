@@ -973,6 +973,38 @@ int test_complex_gamma (int nterms, int prec)
 		rez += red;
 		imz += imd;
 	}
+	
+	/* Do a reflection-formula test along Re z = 1/2 */
+	red = 0.0;
+	imd = 1.3225121;
+	rez = 0.5;
+	imz = -nterms*imd + 0.02;
+	for (i=0; i<nterms; i++)
+	{
+		/* set up z and 1-z */
+		cpx_set_d (za, rez, imz);
+		cpx_set_ui (zb, 1,0);
+		cpx_sub (zb, zb, za);
+		
+		/* compute Gamma(z) * Gamma (1-z) */
+		cpx_gamma (gam, za, prec);
+		cpx_gamma (rgam, zb, prec);
+		cpx_mul (gam, gam, rgam);
+
+		/* Product of gammas, times sine */
+		cpx_div_mpf (gam, gam, pi);
+		cpx_mul_mpf (za, za, pi);
+		cpx_sine (rgam, za, prec);
+		cpx_mul (gam, gam, rgam);
+
+		/* this should be one */
+		cpx_sub_ui (gam,gam, 1,0);
+		
+		nfaults = cpx_check_for_zero (nfaults, gam, epsi, "complex gamma im axis", i, rez, imz);
+
+		rez += red;
+		imz += imd;
+	}
 
 	cpx_clear (za);
 	cpx_clear (zb);
@@ -1773,6 +1805,7 @@ int main (int argc, char * argv[])
 	int nfaults = 0;
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
+	nfaults += test_complex_gamma (nterms, prec);
  	nfaults += test_hurwitz_zeta (nterms, prec);
 	nfaults += test_complex_riemann_zeta (nterms, prec);
 	nfaults += test_polylog (nterms, prec, 0);
@@ -1781,7 +1814,6 @@ int main (int argc, char * argv[])
  	nfaults += test_periodic_zeta (nterms, prec);
 	nfaults += test_complex_pow (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
-	nfaults += test_complex_gamma (nterms, prec);
 
 	if (0 == nfaults)
 	{
