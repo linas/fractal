@@ -11,15 +11,15 @@
 #include <math.h>
 
 #include "mp-complex.h"
+#include "mp-consts.h"
+#include "mp-gamma.h"
 #include "mp-misc.h"
 #include "mp-polylog.h"
+#include "mp-trig.h"
 
 
 #ifdef BORKOKEN_AND_DONT_WORK
 
-#include "mp-consts.h"
-#include "mp-gamma.h"
-#include "mp-trig.h"
 #include "mp-zeta.h"
 
 /* ============================================================================ */
@@ -177,6 +177,43 @@ printf("\n");
 }
 
 /* ============================================================================ */
+/* branch discontinuity */
+
+void disco (cpx_t disco, const cpx_t ess, int prec)
+{
+	mpf_t p;
+	mpf_init (p);
+
+	cpx_t s, term;
+	cpx_init (s);
+	cpx_init (term);
+	
+	/* s = (1-s) */
+	cpx_set_ui (s, 1, 0);
+	cpx_sub (s, s, ess);
+
+	cpx_gamma (disco, s, prec);
+
+	/* times exp(i pi (1-s)/2) */
+	fp_pi_half (p, prec);
+	cpx_mul_mpf (term, s, p);
+	cpx_times_i (term, term);
+	cpx_exp (term, term, prec);
+	cpx_mul (disco, disco,term);
+
+	/* times (2pi)^{s-1} */
+	fp_two_pi (p, prec);
+	cpx_neg (s, s);
+	cpx_mpf_pow (term, p, s, prec);
+	cpx_mul (disco, disco,term);
+	
+	cpx_clear (s);
+	cpx_clear (term);
+	mpf_clear (p);
+}
+
+
+/* ============================================================================ */
 
 int
 main (int argc, char * argv[])
@@ -229,6 +266,12 @@ main (int argc, char * argv[])
 #endif
 
 #if 1
+
+	cpx_t fac, ms;
+	cpx_init (fac);
+	cpx_init (ms);
+	disco (fac, ess, prec);
+	
 	// printf ("#\n# graph of Hurwitz zeta as function of q, at \n#\n");
 	printf ("#\n# graph of periodic zeta as function of q, at \n#\n");
 	fp_prt ("# at s=0.5+i ", ess[0].im);
@@ -238,14 +281,19 @@ main (int argc, char * argv[])
 	for (q=0.02; q<1.0; q+=0.1)
 	{
 		mpf_set_d (que, q);
-		cpx_hurwitz_zeta (zeta, ess, que, prec);
-		cpx_pade_hurwitz_zeta (z2, ess, que, prec);
+		// cpx_hurwitz_zeta (zeta, ess, que, prec);
+		// cpx_pade_hurwitz_zeta (z2, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
-		// cpx_periodic_zeta (zeta, ess, que, prec);
+		cpx_periodic_zeta (zeta, ess, que, prec);
 		// cpx_polylog_sum (plog, ess, zee, prec);
 		// cpx_set_d (zee, q, 0.002);
 		// cpx_set_ui (zeta, 0, 0);
 		// cpx_polylog (zeta, ess, zee, prec);
+		//
+		cpx_set (ms,ess);
+		cpx_sub_ui (ms,ms,1, 0);
+		cpx_mpf_pow (z2, que, ms, prec);
+		cpx_mul (z2, z2, fac);
 
 		printf ("%g",q);
 		fp_prt ("\t", zeta[0].re);
