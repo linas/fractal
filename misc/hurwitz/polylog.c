@@ -113,13 +113,14 @@ static inline double cplex_phase (cplex z)
 	return atan2 (z.im, z.re);
 }
 
-static inline cplex cplex_pow (cplex z, int n)
+/** return z^n */
+static inline cplex cplex_pow_ui (cplex z, unsigned int n)
 {
 	cplex rv;
+	rv = cplex_one ();
 	if (350>n)
 	{
 		int k;
-		rv = cplex_one ();
 		for (k=0; k<n; k++)
 		{
 			rv = cplex_mult (rv, z);
@@ -141,6 +142,16 @@ static inline cplex cplex_exp (cplex z)
 	return rv;
 }
 
+/** return n^s */
+static inline cplex cplex_ui_pow (unsigned int n, cplex s)
+{
+	double lnn = log (n);
+	s.re *= lnn;
+	s.im *= lnn;
+	return cplex_exp (s);
+}
+
+/* ============================================================= */
 /* 
  * bee_k() 
  * Return value of sum_{j=0}^k (n j) oz^j
@@ -184,7 +195,7 @@ static cplex polylog_est (cplex s, cplex z, int n)
 	cplex ska = z;
 	ska.re -= 1.0;
 	ska = cplex_mult (z, cplex_recip(ska));
-	ska = cplex_pow (ska,n);
+	ska = cplex_pow_ui (ska,n);
 	
 	cplex pz = z;
 	cplex acc = cplex_zero();
@@ -227,6 +238,7 @@ static cplex polylog_est (cplex s, cplex z, int n)
 	return acc;
 }
 
+/* ============================================================= */
 int nt = 31;
 
 /**
@@ -238,6 +250,9 @@ int nt = 31;
  * Li_s(z) is the polylogarithm
  *
  * Periodic zeta function is defined as F(s,q) by Tom Apostol, chapter 12
+ *
+ * Uses the polylog implementation for the calculation,
+ * and so is capable of returning results for Re s < 1.
  */
 cplex periodic_zeta (cplex s, double q)
 {
@@ -292,6 +307,45 @@ cplex periodic_zeta (cplex s, double q)
 		z.im = sin (ph);
 		return polylog_est (s, z, nterms);
 	}
+}
+
+/* ============================================================= */
+/**
+ * periodic_zeta_sum -- return value of periodic zeta.
+ *
+ * Evaluation performed by brute-force sum, thus, 
+ * only practical for Re s > 2, otherwise, it will take
+ * too long to converge.
+ */
+cplex periodic_zeta_sum (cplex s, double q)
+{
+	cplex sum, term;
+
+	sum = cplex_zero ();
+	s = cplex_neg (s);
+
+	double th = 2.0*M_PI*q;
+	cplex eith;
+	eith.re = cos (th);
+	eith.im = sin (th);
+
+	cplex einth;
+	einth = eith;
+	
+	int n;
+	for (n=1; n<1123456789; n++)
+	{
+		term = cplex_ui_pow (n, s);
+		term = cplex_mult (term, einth);
+		sum = cplex_add (sum, term);
+		einth = cplex_mult (einth, eith);
+
+		double sz = term.re*term.re + term.im*term.im;
+		// if (1.0e-28 > sz) break;
+		if (1.0e-16 > sz) break;
+	}
+
+	return sum;
 }
 
 /* ============================================================= */
@@ -493,7 +547,7 @@ main (int argc, char * argv[])
 	en = atof (argv[1]);
 
 	// test_zeta_values (n);
-	test_bernoulli_poly (n);
+	// test_bernoulli_poly (n);
 
 // #define HURWITZ_ZETA
 #ifdef HURWITZ_ZETA
@@ -515,14 +569,19 @@ main (int argc, char * argv[])
 
 #if 1
 	cplex s;
-	s.re = en;
-	s.im = 0.5;
+	s.re = 1.5;
+	s.im = en;
+
+	printf ("#\n# periodic zeta for s=%g +i %g\n#\n", s.re, s.im);
+	fflush (stdout);
 
 	double q;
-	for (q=0.02; q<1.0; q+=0.04)
+	for (q=0.002; q<1.0; q+=0.004)
 	{
-		cplex hz = hurwitz_zeta (s, q);
+		// cplex hz = hurwitz_zeta (s, q);
+		cplex hz = periodic_zeta_sum (s, q);
 		printf ("%7.3g	%15.10g	%15.10g\n", q, hz.re, hz.im);
+		fflush (stdout);
 	}
 #endif
 }
