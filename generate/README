@@ -1,0 +1,22 @@
+
+ffmpeg - multimedia player, server and encoder
+ffmpeg2theora - Theora video encoder using ffmpeg
+libtheora-bin - The Theora Video Compression Codec (example encoder,
+decoder)
+stopmotion - program for creating stop motion animations
+librte-dev - Real Time Encoder Audio/Video library - Development files
+librte1 - Real Time Encoder Audio/Video library - Runtime files
+mencoder - MPlayer's Movie Encoder
+x264-bin - a free library for encoding H264/AVC video streams
+stopmotion - program for creating stop motion animations
+
+
+mencoder mf://*jpg -mf w=640:h=480:fps=12:type=jpg -ovc lavc -lavcopts vcodec=mpeg4video -oac copy -o myfile
+
+
+mencoder mf://*png -mf w=600:h=600:fps=12:type=png -ovc lavc -lavcopts vcodec=mpeg4video -oac copy -o myfile
+
+oac is audio codec 
+mpeg4 is the default audio codec
+
+mencoder mf://*png -mf fps=12:type=png -ovc lavc -of avi -o myfile.avi
