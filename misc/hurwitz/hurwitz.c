@@ -11,6 +11,7 @@
 
 #include "binomial.h"
 
+/* ========================================================================== */
 /* A brute-force summation using Hasse formula, 
  * for complex s, real q.
  *
@@ -60,6 +61,8 @@ void hurwitz_zeta (long double *phre, long double *phim, long double sre, long d
 		printf ("its %d \t%Lg \thre=%Lg \t%Lg \thim=%Lg\n", n, rs, hre,is, him);
 	}
 } 
+
+/* ========================================================================== */
 
 main ()
 {
