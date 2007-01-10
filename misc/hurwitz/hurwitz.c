@@ -8,8 +8,10 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "binomial.h"
+#include "cplex.h"
 
 /* ========================================================================== */
 /* A brute-force summation using Hasse formula, 
@@ -63,20 +65,53 @@ void hurwitz_zeta (long double *phre, long double *phim, long double sre, long d
 } 
 
 /* ========================================================================== */
+/* ordinary sum */
 
-main ()
+cplex hurwitz_zeta_sum (cplex s, double q)
 {
-	long double q;
-	long double sre, sim;
-	long double hre, him;
+	int k;
 
-	sre = 0.5;
-	sim = 2.0;
-	q = 0.3;
+	s = cplex_neg (s);
+	
+	cplex sum = cplex_zero();
+	
+	for (k=0; k<10123123; k++)
+	{
+		cplex term = cplex_d_pow (k+q, s);
+		sum = cplex_add (sum, term);
 
-	sre = 2.0;
-	sim = 0;
-	q = 1.0;
+		// if (1.0e-32 > term.re*term.re+ term.im*term.im) break;
+		if (1.0e-20 > term.re*term.re+ term.im*term.im) break;
+	}
+	return sum;
+}
 
-	hurwitz_zeta (&hre, &him, sre,sim, q);
+/* ========================================================================== */
+
+main (int argc, char * argv[])
+{
+	double en;
+
+	if (argc != 2)
+	{
+		fprintf (stderr, "Usage: %s <n>\n", argv[0]);
+		exit (1);
+	}
+	en = atof (argv[1]);
+
+	cplex s;
+	s.re = 1.5;
+	s.im = en;
+
+	printf ("#\n# periodic zeta for s=%g +i %g\n#\n", s.re, s.im);
+	fflush (stdout);
+
+	double q;
+	for (q=0.002; q<1.0; q+=0.004)
+	{
+		// cplex hz = hurwitz_zeta (s, q);
+		cplex hz = hurwitz_zeta_sum (s, q);
+		printf ("%7.3g	%15.10g	%15.10g\n", q, hz.re, hz.im);
+		fflush (stdout);
+	}
 }

@@ -24,7 +24,7 @@ static inline cplex cplex_one (void)
 	cplex z; z.re=1.0; z.im=0.0; return z;
 }
 
-static inline cplex cplex_times_i (cplex z)
+static inline cplex cplex_times_i (const cplex z)
 {
 	cplex rv;
 	rv.re = -z.im;
@@ -32,7 +32,7 @@ static inline cplex cplex_times_i (cplex z)
 	return rv;
 }
 
-static inline cplex cplex_neg (cplex z)
+static inline cplex cplex_neg (const cplex z)
 {
 	cplex rv;
 	rv.re = -z.re;
@@ -40,7 +40,7 @@ static inline cplex cplex_neg (cplex z)
 	return rv;
 }
 
-static inline cplex cplex_add (cplex a, cplex b)
+static inline cplex cplex_add (const cplex a, const cplex b)
 {
 	cplex rv;
 	rv.re = a.re + b.re;
@@ -48,7 +48,7 @@ static inline cplex cplex_add (cplex a, cplex b)
 	return rv;
 }
 
-static inline cplex cplex_sub (cplex a, cplex b)
+static inline cplex cplex_sub (const cplex a, const cplex b)
 {
 	cplex rv;
 	rv.re = a.re - b.re;
@@ -56,7 +56,7 @@ static inline cplex cplex_sub (cplex a, cplex b)
 	return rv;
 }
 
-static inline cplex cplex_scale (double x, cplex z)
+static inline cplex cplex_scale (double x, const cplex z)
 {
 	cplex rv;
 	rv.re = x * z.re;
@@ -64,7 +64,7 @@ static inline cplex cplex_scale (double x, cplex z)
 	return rv;
 }
 
-static inline cplex cplex_mul (cplex a, cplex b)
+static inline cplex cplex_mul (const cplex a, const cplex b)
 {
 	cplex rv;
 	rv.re = a.re * b.re - a.im * b.im;
@@ -72,7 +72,7 @@ static inline cplex cplex_mul (cplex a, cplex b)
 	return rv;
 }
 
-static inline cplex cplex_recip (cplex z)
+static inline cplex cplex_recip (const cplex z)
 {
 	cplex rv;
 	double mag = 1.0/ (z.re*z.re + z.im*z.im);
@@ -81,15 +81,15 @@ static inline cplex cplex_recip (cplex z)
 	return rv;
 }
 
-static inline cplex cplex_div (cplex a, cplex b)
+static inline cplex cplex_div (const cplex a, const cplex b)
 {
 	cplex rv, deno;
 	deno = cplex_recip (b);
-	rv = cplex_mult (a, deno);
+	rv = cplex_mul (a, deno);
 	return rv;
 }
 
-static inline double cplex_modulus (cplex z)
+static inline double cplex_modulus (const cplex z)
 {
 	return sqrt (z.re*z.re + z.im*z.im);
 }
@@ -100,7 +100,7 @@ static inline double cplex_phase (cplex z)
 }
 
 /** return z^n */
-static inline cplex cplex_pow_ui (cplex z, unsigned int n)
+static inline cplex cplex_pow_ui (const cplex z, unsigned int n)
 {
 	cplex rv;
 	rv = cplex_one ();
@@ -109,7 +109,7 @@ static inline cplex cplex_pow_ui (cplex z, unsigned int n)
 		int k;
 		for (k=0; k<n; k++)
 		{
-			rv = cplex_mult (rv, z);
+			rv = cplex_mul (rv, z);
 		}
 	}
 	else
@@ -119,7 +119,7 @@ static inline cplex cplex_pow_ui (cplex z, unsigned int n)
 	return rv;
 }
 
-static inline cplex cplex_exp (cplex z)
+static inline cplex cplex_exp (const cplex z)
 {
 	cplex rv;
 	rv.re = rv.im = exp (z.re);
@@ -132,6 +132,15 @@ static inline cplex cplex_exp (cplex z)
 static inline cplex cplex_ui_pow (unsigned int n, cplex s)
 {
 	double lnn = log (n);
+	s.re *= lnn;
+	s.im *= lnn;
+	return cplex_exp (s);
+}
+
+/** return q^s */
+static inline cplex cplex_d_pow (double q, cplex s)
+{
+	double lnn = log (q);
 	s.re *= lnn;
 	s.im *= lnn;
 	return cplex_exp (s);
