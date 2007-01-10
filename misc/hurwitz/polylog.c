@@ -21,135 +21,9 @@
 #include <gsl/gsl_sf_zeta.h>
 
 #include "binomial.h"
+#include "cplex.h"
 #include "bernoulli.h"
 #include "harmonic.h"
-
-typedef struct {
-	double re;
-	double im;
-} cplex;
-
-static inline cplex cplex_zero (void)
-{
-	cplex z; z.re=0.0; z.im=0.0; return z;
-}
-static inline cplex cplex_one (void)
-{
-	cplex z; z.re=1.0; z.im=0.0; return z;
-}
-
-static inline cplex cplex_times_i (cplex z)
-{
-	cplex rv;
-	rv.re = -z.im;
-	rv.im = z.re;
-	return rv;
-}
-
-static inline cplex cplex_neg (cplex z)
-{
-	cplex rv;
-	rv.re = -z.re;
-	rv.im = -z.im;
-	return rv;
-}
-
-static inline cplex cplex_add (cplex a, cplex b)
-{
-	cplex rv;
-	rv.re = a.re + b.re;
-	rv.im = a.im + b.im;
-	return rv;
-}
-
-static inline cplex cplex_sub (cplex a, cplex b)
-{
-	cplex rv;
-	rv.re = a.re - b.re;
-	rv.im = a.im - b.im;
-	return rv;
-}
-
-static inline cplex cplex_scale (double x, cplex z)
-{
-	cplex rv;
-	rv.re = x * z.re;
-	rv.im = x * z.im;
-	return rv;
-}
-
-static inline cplex cplex_mult (cplex a, cplex b)
-{
-	cplex rv;
-	rv.re = a.re * b.re - a.im * b.im;
-	rv.im = a.re * b.im + b.re * a.im;
-	return rv;
-}
-
-static inline cplex cplex_recip (cplex z)
-{
-	cplex rv;
-	double mag = 1.0/ (z.re*z.re + z.im*z.im);
-	rv.re = z.re * mag;
-	rv.im = -z.im * mag;
-	return rv;
-}
-
-static inline cplex cplex_div (cplex a, cplex b)
-{
-	cplex rv, deno;
-	deno = cplex_recip (b);
-	rv = cplex_mult (a, deno);
-	return rv;
-}
-
-static inline double cplex_modulus (cplex z)
-{
-	return sqrt (z.re*z.re + z.im*z.im);
-}
-
-static inline double cplex_phase (cplex z)
-{
-	return atan2 (z.im, z.re);
-}
-
-/** return z^n */
-static inline cplex cplex_pow_ui (cplex z, unsigned int n)
-{
-	cplex rv;
-	rv = cplex_one ();
-	if (350>n)
-	{
-		int k;
-		for (k=0; k<n; k++)
-		{
-			rv = cplex_mult (rv, z);
-		}
-	}
-	else
-	{
-		fprintf (stderr, "pow=%d unimplemented\n", n);
-	}
-	return rv;
-}
-
-static inline cplex cplex_exp (cplex z)
-{
-	cplex rv;
-	rv.re = rv.im = exp (z.re);
-	rv.re *= cos (z.im);
-	rv.im *= sin (z.im);
-	return rv;
-}
-
-/** return n^s */
-static inline cplex cplex_ui_pow (unsigned int n, cplex s)
-{
-	double lnn = log (n);
-	s.re *= lnn;
-	s.im *= lnn;
-	return cplex_exp (s);
-}
 
 /* ============================================================= */
 /* 
@@ -171,7 +45,7 @@ static cplex bee_k (int n, int k, cplex oz)
 
 		term = cplex_scale (bin, term);
 		acc = cplex_add (acc, term);
-		pz = cplex_mult(pz, oz);
+		pz = cplex_mul(pz, oz);
 	}
 
 	return acc;
@@ -194,7 +68,7 @@ static cplex polylog_est (cplex s, cplex z, int n)
 	/* ska = [z/(z-1)]^n */
 	cplex ska = z;
 	ska.re -= 1.0;
-	ska = cplex_mult (z, cplex_recip(ska));
+	ska = cplex_mul (z, cplex_recip(ska));
 	ska = cplex_pow_ui (ska,n);
 	
 	cplex pz = z;
@@ -208,10 +82,10 @@ static cplex polylog_est (cplex s, cplex z, int n)
 		dir = cplex_exp (cplex_neg(dir));
 
 		/* Put it together */
-		cplex term = cplex_mult (pz, dir);
+		cplex term = cplex_mul (pz, dir);
 		acc = cplex_add (acc, term);
 
-		pz = cplex_mult(pz, z);
+		pz = cplex_mul(pz, z);
 	}
 
 	for (k=n+1; k<=2*n; k++)
@@ -221,18 +95,18 @@ static cplex polylog_est (cplex s, cplex z, int n)
 		dir = cplex_exp (cplex_neg(dir));
 
 		/* Put it together */
-		cplex term = cplex_mult (pz, dir);
+		cplex term = cplex_mul (pz, dir);
 		acc = cplex_add (acc, term);
 
 		/* The coefficient c_k of the polynomial */
 		cplex ck = bee_k (n,k-n-1,moz);
-		term = cplex_mult (ck, term);
+		term = cplex_mul (ck, term);
 		cacc = cplex_add (cacc, term);
 
-		pz = cplex_mult(pz, z);
+		pz = cplex_mul(pz, z);
 	}
 
-	cacc = cplex_mult (cacc, ska);
+	cacc = cplex_mul (cacc, ska);
 	acc = cplex_sub (acc, cacc);
 
 	return acc;
@@ -278,7 +152,7 @@ cplex periodic_zeta (cplex s, double q)
 		sm.re += 1.0;
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
 		cplex bt = periodic_zeta (s, 2.0*q);
-		bt = cplex_mult (bt, ts);
+		bt = cplex_mul (bt, ts);
 
 		cplex z = periodic_zeta (s, q+0.5);
 		z = cplex_sub(bt, z);
@@ -292,7 +166,7 @@ cplex periodic_zeta (cplex s, double q)
 		sm.re += 1.0;
 		cplex ts = cplex_exp(cplex_scale (log(2), sm));
 		cplex bt = periodic_zeta (s, 2.0*q-1.0);
-		bt = cplex_mult (bt, ts);
+		bt = cplex_mul (bt, ts);
 
 		cplex z = periodic_zeta (s, q-0.5);
 		z = cplex_sub(bt, z);
@@ -336,9 +210,9 @@ cplex periodic_zeta_sum (cplex s, double q)
 	for (n=1; n<1123456789; n++)
 	{
 		term = cplex_ui_pow (n, s);
-		term = cplex_mult (term, einth);
+		term = cplex_mul (term, einth);
 		sum = cplex_add (sum, term);
-		einth = cplex_mult (einth, eith);
+		einth = cplex_mul (einth, eith);
 
 		double sz = term.re*term.re + term.im*term.im;
 		// if (1.0e-28 > sz) break;
@@ -379,7 +253,7 @@ cplex periodic_beta (cplex s, double q)
 	
 	tps = cplex_exp (tps);
 
-	z = cplex_mult (z, tps);
+	z = cplex_mul (z, tps);
 	z = cplex_scale (2.0, z);
 	
 	return z;
@@ -408,7 +282,7 @@ cplex hurwitz_zeta (cplex ess, double q)
 	piss = cplex_times_i(piss);
 	piss = cplex_exp (piss);
 
-	zh = cplex_mult (zh, piss);
+	zh = cplex_mul (zh, piss);
 	zl = cplex_div (zl, piss);
 
 	cplex z = cplex_add (zl, zh);
@@ -423,7 +297,7 @@ cplex hurwitz_zeta (cplex ess, double q)
 	
 	tps = cplex_exp (tps);
 
-	z = cplex_mult (z, tps);
+	z = cplex_mul (z, tps);
 
 	return z;
 }
@@ -464,7 +338,7 @@ void test_zeta_values (double max)
 		ots = cplex_recip(ots);
 		ots = cplex_neg (ots);
 		
-		zl = cplex_mult (zl, ots);
+		zl = cplex_mul (zl, ots);
 		
 		double zeta = gsl_sf_zeta (s.re);
 		
