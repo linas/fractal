@@ -179,7 +179,7 @@ printf("\n");
 /* ============================================================================ */
 /* branch discontinuity */
 
-void disco (cpx_t disco, const cpx_t ess, int prec)
+void disco (cpx_t disco, const cpx_t ess, int dir, int prec)
 {
 	mpf_t p;
 	mpf_init (p);
@@ -198,6 +198,7 @@ void disco (cpx_t disco, const cpx_t ess, int prec)
 	fp_pi_half (p, prec);
 	cpx_mul_mpf (term, s, p);
 	cpx_times_i (term, term);
+	if (dir) cpx_neg (term, term);
 	cpx_exp (term, term, prec);
 	cpx_mul (disco, disco,term);
 
@@ -244,7 +245,8 @@ main (int argc, char * argv[])
 	mpf_init (que);
 			  
 	// cpx_set_d (ess, 1.5, 14.134725);
-	cpx_set_d (ess, 1.5, sim);
+	cpx_set_d (ess, 1.563331235, sim);
+	// cpx_set_d (ess, 0.5, sim);
 
 	double zmag = sim;
 
@@ -267,10 +269,13 @@ main (int argc, char * argv[])
 
 #if 1
 
-	cpx_t fac, ms;
-	cpx_init (fac);
+	cpx_t facup, facdown, ms, z3;
+	cpx_init (facup);
+	cpx_init (facdown);
 	cpx_init (ms);
-	disco (fac, ess, prec);
+	cpx_init (z3);
+	disco (facup, ess, 0, prec);
+	disco (facdown, ess, 1, prec);
 	
 	// printf ("#\n# graph of Hurwitz zeta as function of q, at \n#\n");
 	printf ("#\n# graph of periodic zeta as function of q, at \n#\n");
@@ -278,7 +283,7 @@ main (int argc, char * argv[])
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.02; q<0.991; q+=0.008)
-	for (q=0.02; q<1.0; q+=0.1)
+	for (q=0.002; q<1.0; q+=0.002)
 	{
 		mpf_set_d (que, q);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
@@ -293,11 +298,38 @@ main (int argc, char * argv[])
 		cpx_set (ms,ess);
 		cpx_sub_ui (ms,ms,1, 0);
 		cpx_mpf_pow (z2, que, ms, prec);
-		cpx_mul (z2, z2, fac);
+		cpx_mul (z2, z2, facup);
+
+		mpf_ui_sub (que, 1, que);
+		cpx_mpf_pow (z3, que, ms, prec);
+		cpx_mul (z3, z3, facdown);
+		
+		// cpx_sub (z2, zeta, z2);
+		// cpx_add (z3, z2, z3);
+
+#if 0
+		fp_two_pi (que, prec);
+		cpx_mul_mpf (z3, ms, que);
+		cpx_times_i (z3, z3);
+		cpx_neg (z3, z3);
+		cpx_exp (z3, z3, prec);
+		cpx_sub_ui (z3,z3, 1, 0);
+		cpx_mul (z2, z2, z3);
+		cpx_add (z2, zeta, z2);
+#endif
+
+
+#if 0
+		cpx_conj (ess, ess);
+		mpf_ui_sub (que, 1, que);
+		cpx_periodic_zeta (z2, ess, que, prec);
+		cpx_conj (ess, ess);
+#endif
 
 		printf ("%g",q);
 		fp_prt ("\t", zeta[0].re);
 		fp_prt ("\t", z2[0].re);
+		fp_prt ("\t", z3[0].re);
 		// fp_prt ("\t", zeta[0].im);
 		printf ("\n");
 		fflush (stdout);
