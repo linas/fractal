@@ -33,7 +33,7 @@ An efficient algorithm for computing the polylogarithm and Hurwitz zeta
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 3 January 2007
+12 October 2006, revised 5 January 2007
 \layout Abstract
 
 This paper develops an extension of the techniques given by Borwein's 
@@ -717,7 +717,12 @@ S(z)=\sum_{n=0}^{\infty}z^{n}b_{n}\label{eq: geo series}\end{equation}
 
 \end_inset 
 
- If the 
+ In general, one is interested in general sequences 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+.
+ Suppose, however, that the 
 \begin_inset Formula $b_{n}$
 \end_inset 
 
@@ -731,7 +736,22 @@ b_{n}=\int_{0}^{1}y^{n}g(y)dy\]
 \begin_inset Formula $g(y)$
 \end_inset 
 
-, then 
+.
+ Since 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+ is still fairly general (subject to constraints discussed below), this
+ assumption does not overly restrict the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+.
+ If the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ are expressible as moments, then one has
 \begin_inset Formula \[
 S(z)=\int_{0}^{1}\frac{g(y)}{1-yz}\, dy\]
 
@@ -809,7 +829,7 @@ S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}b_{k}\]
 
 , then 
 \begin_inset Formula \[
-\left|\xi_{n}(z)\right|\le\left|\frac{p_{n}\left(y_{0}\right)}{p_{n}\left(\frac{1}{z}\right)}\right|S(z)\]
+\left|\xi_{n}(z)\right|\le\left|\frac{p_{n}\left(y_{0}\right)}{p_{n}\left(\frac{1}{z}\right)}\right|\left|S(z)\right|\]
 
 \end_inset 
 
@@ -822,7 +842,7 @@ S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}b_{k}\]
 \end_inset 
 
  assumes its maximum.
- Then, provided that one can find a polynomial sequence such that 
+ Provided that one can find a polynomial sequence such that 
 \begin_inset Formula \[
 \left|\frac{p_{n}\left(y_{0}\right)}{p_{n}\left(\frac{1}{z}\right)}\right|\sim A^{-n}\]
 
@@ -852,8 +872,8 @@ S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}b_{k}\]
 .
 \layout Standard
 
-Note that the above is a proof of a series acceleration for a more-or-less
- general sequence of 
+Note that the above is a proof of a series acceleration method for a more-or-les
+s general sequence of 
 \begin_inset Formula $b_{n}$
 \end_inset 
 
@@ -880,7 +900,7 @@ well-behaved
 \begin_inset Formula $g(y)$
 \end_inset 
 
- needs to be (mostly) positive, and integrable; it needs not be analytic,
+ needs to be (mostly) positive, and integrable; it need not be analytic,
  differentiable or even continuous.
  It needs to be 
 \begin_inset Quotes eld
@@ -947,7 +967,20 @@ i.e.
 The Gaussian Distribution 
 \layout Standard
 
-In order to suppress the logarithmic branch point at 
+Returning to the polylogarithm, the task at hand is to find a polynomial
+ sequence that is suitable for establishing a tight bound on the error term
+ 
+\begin_inset Formula $\xi$
+\end_inset 
+
+.
+ A good bound minimizes the integrand, while also maximizing the value of
+ 
+\begin_inset Formula $\left|p_{n}(1/z)\right|$
+\end_inset 
+
+.
+ In order to suppress the logarithmic branch point at 
 \begin_inset Formula $y=0$
 \end_inset 
 
@@ -982,7 +1015,7 @@ Consider first the polynomial sequence
 \begin_inset Formula $n$
 \end_inset 
 
-, the polynomial sequence approximates a Gaussian:
+, this polynomial sequence approximates a Gaussian:
 \begin_inset Formula \begin{equation}
 p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{2}+\mathcal{O}\left(\left(y-\frac{1}{2}\right)^{4}\right)\right]\label{eq:}\end{equation}
 
@@ -1655,6 +1688,9 @@ The equivalent formulas for the polylogarithm are
 
 -plane, as, by repeated application, it will map the entire plane into to
  region of convergence of Borwein's algorithm.
+\layout Standard
+
+XXX mention multiplication formula seems not that useful.
 \layout Section
 
 Validation
