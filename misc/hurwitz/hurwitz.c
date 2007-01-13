@@ -81,7 +81,7 @@ cplex hurwitz_zeta_sum (cplex s, double q)
 		sum = cplex_add (sum, term);
 
 		// if (1.0e-32 > term.re*term.re+ term.im*term.im) break;
-		if (1.0e-20 > term.re*term.re+ term.im*term.im) break;
+		if (1.0e-16 > term.re*term.re+ term.im*term.im) break;
 	}
 	return sum;
 }
@@ -107,7 +107,7 @@ main (int argc, char * argv[])
 	fflush (stdout);
 
 	double q;
-	for (q=0.002; q<1.0; q+=0.004)
+	for (q=0.02; q<1.0; q+=0.04)
 	{
 		// cplex hz = hurwitz_zeta (s, q);
 		cplex hz = hurwitz_zeta_sum (s, q);
