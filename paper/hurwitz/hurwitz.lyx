@@ -26,17 +26,21 @@
 
 \layout Title
 
-An efficient algorithm for computing the polylogarithm and Hurwitz zeta
- functions
+An efficient algorithm for accelerating the convergence of oscillatory series,
+ useful for computing the polylogarithm and Hurwitz zeta functions
 \layout Author
 
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 5 January 2007
+12 October 2006, revised 13 January 2007
 \layout Abstract
 
-This paper develops an extension of the techniques given by Borwein's 
+This paper sketches a technique for improving the rate of convergence of
+ a general oscillatory sequence, and then applies this series acceleration
+ algorithm to the polylogarithm and the Hurwitz zeta function.
+ As such, it may be taken as  an extension of the techniques given by Borwein's
+ 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -49,7 +53,7 @@ An efficient algorithm for computing the Riemann zeta function
 
 \end_inset 
 
-, to the polylogarithm and the Hurwitz zeta function.
+, to more general series.
  The algorithm provides a rapid means of evaluating 
 \begin_inset Formula $\mbox{Li}_{s}(z)$
 \end_inset 
@@ -63,7 +67,7 @@ An efficient algorithm for computing the Riemann zeta function
 \end_inset 
 
  values given by 
-\begin_inset Formula $\left|z^{2}/(z-1)\right|<3.3$
+\begin_inset Formula $\left|z^{2}/(z-1)\right|<4$
 \end_inset 
 
 .
@@ -81,25 +85,26 @@ An efficient algorithm for computing the Riemann zeta function
 
 .
  By using the duplication formula, the range of convergence for the polylogarith
-m may be extended to the entire complex 
+m may be extended to a kidney-shaped region in the complex 
 \begin_inset Formula $z$
 \end_inset 
 
--plane, and the Hurwitz zeta can be extended to the whole real interval
- 
+-plane containing the unit circle surrounding the origin but excluding 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ The Hurwitz zeta can be extended to the whole real interval 
 \begin_inset Formula $0<q<1$
 \end_inset 
 
 .
- The speed of the algorithm is approximately linear in the number of XXX
- although the algorithm does run logarithmically slower as it approaches
- the endpoints.
- In particular, this algorithm allows the exploration of the Hurwitz zeta
- in the critical strip, where fast algorithms are otherwise unavailable.
-\layout Abstract
-
-XXX this paper in fact reviews a rather general method for series acceleration,
- for the summation of oscillatory series.
+ The speed of the algorithm is approximately linear in the number of operations
+ required, although it does require the computation of integers raised to
+ a complex power, which is generally a non-trivial and slow numerical operation.
+ The primary, concrete result of this paper is an algorithm allows the explorati
+on of the Hurwitz zeta in the critical strip, where fast algorithms are
+ otherwise unavailable.
 \layout Abstract
 
 XXX Draft, incomplete, should not, but may, contain errors.
@@ -109,9 +114,14 @@ XXX Draft, incomplete, should not, but may, contain errors.
 Introduction
 \layout Standard
 
-This note generalizes an algorithm given by Peter Borwein for computing
- the Riemann zeta function, to the computation of the polylogarithm and,
- in particular, to the Hurwitz zeta function.
+This note sketches a general technique for improving the rate of convergence
+ of a general oscillatory series, and then applies this technique to the
+ c
+\layout Standard
+
+generalizes an algorithm given by Peter Borwein for computing the Riemann
+ zeta function, to the computation of the polylogarithm and, in particular,
+ to the Hurwitz zeta function.
  The principle result is an algorithm that efficiently obtains values of
  the Hurwitz zeta in the critical strip 
 \begin_inset Formula $s=\sigma+i\tau$
@@ -1785,7 +1795,7 @@ F(q,s)=\sum_{n=1}^{\infty}\frac{e^{i2\pi nq}}{n^{s}}\label{eq:periodic zeta}\end
  The periodic zeta function occurs when one attempts to state a reflection
  formula for the Hurwitz zeta function, as 
 \begin_inset Formula \begin{equation}
-\zeta(1-s,q)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{-i\pi s/2}F(q,s)+e^{i\pi s/2}F(-q,s)\right]\label{eq:Hurwitz reflection}\end{equation}
+\zeta(1-s,q)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{-i\pi s/2}F(q,s)+e^{i\pi s/2}F(1-q,s)\right]\label{eq:Hurwitz reflection}\end{equation}
 
 \end_inset 
 
@@ -1920,11 +1930,6 @@ F(q,s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)\]
 
 \layout Standard
 
-This image can be understood as horizontal cross section of the previous
- image, running through the middle of the image.
- 
-\layout Standard
-
 Noteworthy is that the presumed 
 \begin_inset Quotes eld
 \end_inset 
@@ -1974,7 +1979,7 @@ The first figure,
 
  gives 
 \begin_inset Formula \[
-\zeta\left(\frac{1}{2}-i\tau,\, q\right)=\frac{e^{-i\pi/4}e^{-i\tau\log2\pi}e^{i\phi}}{\sqrt{2\cosh\tau\pi}}\left[e^{\pi\tau/2}F(q,s)+ie^{-\pi\tau/2}F(-q,s)\right]\]
+\zeta\left(\frac{1}{2}-i\tau,\, q\right)=\frac{e^{-i\pi/4}e^{-i\tau\log2\pi}e^{i\phi}}{\sqrt{2\cosh\tau\pi}}\left[e^{\pi\tau/2}F(q,s)+ie^{-\pi\tau/2}F(1-q,s)\right]\]
 
 \end_inset 
 
@@ -2006,10 +2011,15 @@ The first figure,
  in the picture, one may ignore the second term, so that the whole expression
  simplifies to 
 \begin_inset Formula \[
-F\left(\frac{1}{2}+i\tau,\, q\right)\approx\exp\, i\left(\frac{\pi}{4}-\phi+\tau\log2\pi\right)\;\zeta\left(\frac{1}{2}-i\tau,\, q\right)\]
+F\left(\frac{1}{2}+i\tau,\, q\right)=\exp\, i\left(\frac{\pi}{4}-\phi+\tau\log2\pi\right)\;\zeta\left(\frac{1}{2}-i\tau,\, q\right)+\mathcal{O}\left(C^{-\tau}\right)\]
 
 \end_inset 
 
+ for some real constant 
+\begin_inset Formula $C>0$
+\end_inset 
+
+.
  Then, as 
 \begin_inset Formula $q\to0$
 \end_inset 
@@ -2085,20 +2095,24 @@ Curiously, the limit
 
 \end_inset 
 
- shows how to move through the branch point, from one sheet to the next:
+ hints at how to move through the branch point, from one sheet to the next:
  
 \begin_inset LatexCommand \ref{eq:F-approx}
 
 \end_inset 
 
  is the discontinuity between sheets.
- That is, one has
+ That is, one has, for large, positive 
+\begin_inset Formula $\tau$
+\end_inset 
+
+
 \begin_inset Formula \[
 F\left(\frac{1}{2}+i\tau,\, q+1\right)\approx F\left(\frac{1}{2}+i\tau,\, q\right)-\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}}\]
 
 \end_inset 
 
- as the formula that expresses the movement from one sheet to the next.
+ as the formula that approximates the movement from one sheet to the next.
  In essence, this shows that the 
 \begin_inset Quotes eld
 \end_inset 
@@ -2119,7 +2133,66 @@ periodic
  
 \layout Standard
 
-XXX re-write this entire section completely
+The complete relationship between the Hurwitz zeta and the periodic zeta
+ is rather subtle.
+ For example, if instead one considers large 
+\emph on 
+negative
+\emph default 
+ 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, and graphs the periodic zeta, one obtains what is essentially the left-right
+ reversed image of 
+\begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
+
+\end_inset 
+
+, with oscillations approaching a singularity at 
+\begin_inset Formula $q\to1$
+\end_inset 
+
+.
+ One may easily 
+\emph on 
+numerically
+\emph default 
+ verify that these oscillations are precisely of the form 
+\begin_inset Formula $(1-q)^{-s}$
+\end_inset 
+
+.
+ From this, one may deduce that the correct form of the reflection formula
+ is 
+\begin_inset Formula \begin{equation}
+F(q,1-s)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{i\pi s/2}\zeta(s,q)+e^{-i\pi s/2}\zeta(s,1-q)\right]\label{eq:periodic reflection}\end{equation}
+
+\end_inset 
+
+ which captures the oscillatory behaviour at 
+\begin_inset Formula $q\to0$
+\end_inset 
+
+ for large positive 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ and the oscillations at 
+\begin_inset Formula $q\to1$
+\end_inset 
+
+ for large negative 
+\begin_inset Formula $\tau$
+\end_inset 
+
+.
+ The precise form of the discontinuity across the branch point, that would
+ be valid for small positive or negative 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, is not at all clear.
 \layout Section
 
 Conclusion
@@ -2156,6 +2229,9 @@ Additional effort should be placed into the proper and speedy evaluation
 \layout Standard
 
 Also number of dgits needed for intermediate terms.
+\layout Standard
+
+conclusion: need discontinuity to be made clear.
 \layout Standard
 
 
