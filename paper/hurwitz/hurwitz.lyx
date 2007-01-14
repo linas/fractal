@@ -114,14 +114,11 @@ XXX Draft, incomplete, should not, but may, contain errors.
 Introduction
 \layout Standard
 
-This note sketches a general technique for improving the rate of convergence
- of a general oscillatory series, and then applies this technique to the
- c
-\layout Standard
-
-generalizes an algorithm given by Peter Borwein for computing the Riemann
- zeta function, to the computation of the polylogarithm and, in particular,
- to the Hurwitz zeta function.
+This note sketches a technique for improving the rate of convergence of
+ a general oscillatory series, and then applies this technique to the computatio
+n of the polylogarithm, and, in particular, to the Hurwitz zeta function.
+ It essentially generalizes an algorithm given by Peter Borwein for computing
+ the Riemann zeta function.
  The principle result is an algorithm that efficiently obtains values of
  the Hurwitz zeta in the critical strip 
 \begin_inset Formula $s=\sigma+i\tau$
@@ -195,7 +192,7 @@ The Hurwitz zeta may be expressed in terms of the polylogarithm:
 
 \end_inset 
 
- and so one might hope for some efficient algorithms in that area.
+ and so one might search for good algorithms for polylogarithms.
  Wood
 \begin_inset LatexCommand \cite{Wood92}
 
@@ -212,7 +209,7 @@ The Hurwitz zeta may be expressed in terms of the polylogarithm:
 
 \end_inset 
 
- indicates a similar paucity as well.
+ indicates a similar paucity of genreral algorithms as well.
  The series defining the polylogarithm may be directly evaluated when 
 \begin_inset Formula $\left|z\right|<1$
 \end_inset 
@@ -226,7 +223,7 @@ The Hurwitz zeta may be expressed in terms of the polylogarithm:
 \end_inset 
 
 .
- There do not appear to be any general algorithms that may be applied on
+ There do not seem to be any published algorithms that may be applied on
  the critical strip.
 \layout Standard
 
@@ -235,7 +232,8 @@ The primary effort of this paper is to take the algorithm given by Borwein
 
 \end_inset 
 
-, and generalize it to the polylogarithm.
+, which is a simple Padé-approximant type algorithm, and generalize it to
+ the polylogarithm.
  The result is a relatively small finite sum that approximates the polylogarithm
 , and whose error, or difference from the exact value can be precisely character
 ized and bounded.
@@ -268,7 +266,7 @@ ized and bounded.
 
 -plane, and specifically, is only convergent when 
 \begin_inset Formula \[
-0.261\left|\frac{z^{2}}{z-1}\right|<1\]
+\left|\frac{z^{2}}{z-1}\right|<4\]
 
 \end_inset 
 
@@ -287,12 +285,16 @@ ized and bounded.
 \begin_inset Formula $z$
 \end_inset 
 
--plane.
+-plane, at least not for general values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
 \layout Standard
 
-The development proceeds as follows.
- First, an certain specific integral representation is given for the polylogarit
-hm.
+The development of this paper proceeds as follows.
+ First, a certain specific integral representation is given for the polylogarith
+m.
  This representation is such that a certain trick, here called 
 \begin_inset Quotes eld
 \end_inset 
@@ -303,10 +305,12 @@ the Borwein trick
 
 , may be applied, to expressed the integral as a polynomial plus a small
  error term.
- Next, a specific polynomial is selected, and the resulting error term is
- precisely bounded.
- This is followed by a brief presentation of the duplication formula for
- the Hurwitz zeta, and a short discussion of ways in which a numerical algorithm
+ This is followed by a sketch of a generalization of the trick to the convergenc
+e acceleration of general oscillatory series.
+ The next section selects a specific polynomial, and the error term of the
+ resulting approximation is precisely bounded.
+ This is followed by a brief review of the duplication formula for the Hurwitz
+ zeta, and a short discussion of ways in which this numerical algorithm
  may be tested for correctness.
  The algorithm has been implemented by the author using the Gnu Multiple
  Precision arithmetic library
@@ -315,8 +319,8 @@ the Borwein trick
 \end_inset 
 
 , and is available on request, under the terms of the LGPL license.
- The paper concludes with some intriguing images of the Hurwitz zeta function
- on the critical strip.
+ The paper concludes with some intriguing images of the polylogarithm and
+ the Hurwitz zeta function on the critical strip.
  
 \layout Section
 
@@ -343,7 +347,8 @@ The polylogarithm has a non-trivial analytic structure.
 \end_inset 
 
 -plane.
- This is noted here, as this branch point has a direct impact on the algorithm.
+ This is noted here, as this branch point has a direct impact on the algorithm,
+ preventing convergence in its vicinity.
  The polylogarithm has many interesting properties, which are not reviewed
  here.
 \layout Standard
@@ -383,7 +388,6 @@ This identity is easily obtained by inserting the integral representation
 \end_inset 
 
 .
- 
 \layout Section
 
 The Borwein trick
@@ -575,7 +579,7 @@ This result may be immediately employed in equation
 
  as small as possible.
  One possible sequence, based on the Bernoulli process or Gaussian distribution,
- is explored in the next section.
+ is explored in a subsequent section.
  
 \layout Section
 
@@ -2232,6 +2236,9 @@ Also number of dgits needed for intermediate terms.
 \layout Standard
 
 conclusion: need discontinuity to be made clear.
+\layout Standard
+
+are more general pade approximants possible?
 \layout Standard
 
 
