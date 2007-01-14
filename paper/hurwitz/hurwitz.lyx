@@ -586,18 +586,7 @@ This result may be immediately employed in equation
 Convergence Acceleration of Oscillatory Series 
 \layout Standard
 
-For the special case of 
-\begin_inset Formula $z=-1$
-\end_inset 
-
-, the integrals and polynomials above are typical of those found in Pade-type
- approximation
-\begin_inset LatexCommand \cite{Coh00}
-
-\end_inset 
-
-.
- For the case of 
+For the case of 
 \begin_inset Formula $z=-1$
 \end_inset 
 
@@ -611,31 +600,91 @@ For the special case of
 
 \end_inset 
 
-; a particularly efficient algorithm is given by van Wijngaarden
+; a particularly efficient algorithm for Euler's method is given by van
+ Wijngaarden
 \begin_inset LatexCommand \cite{Pre88}
 
+\end_inset 
+
+.
+ Polynomials that provide much more powerful series acceleration are discussed
+ by Cohen 
+\emph on 
+etal
+\emph default 
+
+\begin_inset LatexCommand \cite{Coh00}
+
+\end_inset 
+
+, but again in the context of 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+; these include the Tchebysheff orthogonal polynomials considered by Borwien,
+ which do a rather good job of minimizing the integrand of equation 
+\begin_inset LatexCommand \ref{eq:xi integral}
+
+\end_inset 
+
+ when 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ In a certain sense, an alternating series can be considred to be a series
+ from which an explicit factor of 
+\begin_inset Formula $z^{n}$
+\end_inset 
+
+ has been factored out, for the very special case of 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ Thus, one is lead to ask if one can find series acceleration methods for
+ more general oscillatory series, where the oscillatory component can be
+ thought of as going as 
+\begin_inset Formula $z^{n}$
+\end_inset 
+
+ for some root of unity 
+\begin_inset Formula $z$
 \end_inset 
 
 .
  
 \layout Standard
 
-The Euler method applied to the Hurwitz zeta function gives the Hasse series
- 
+The Euler method applied to the Hurwitz zeta function essentially leads
+ to the Hasse series 
 \begin_inset LatexCommand \ref{eq:Hasse series}
 
 \end_inset 
 
 .
- It has improved convergence in that the result is globally convergent,
- whereas the traditional series representation of equation 
+ This may be seen by noting that the inner sum is just a forward difference:
+\begin_inset Formula \[
+\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)(q+k)^{1-s}=\triangle^{n}q^{1-s}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\triangle$
+\end_inset 
+
+ is the forward difference operator.
+ The Hasse series has improved convergence in that the result is globally
+ convergent, whereas the traditional series representation of equation 
 \begin_inset LatexCommand \ref{eq:Hurwitz zeta}
 
 \end_inset 
 
  is not.
- However, a quick numerical experiment will show that the series does not
- converge rapidly, especially in the critical strip.
+ However, a quick numerical experiment will show that the Hasse series does
+ not converge rapidly, especially in the critical strip.
 \layout Standard
 
 The poor convergence of these traditional techniques motivates the development
@@ -722,10 +771,59 @@ S=\sum_{n=0}^{\infty}c_{n}\]
 
  are now presumed to be relatively tame, so that series acceleration techniques
  can be applied.
+ This trick may be applied to any oscillatory sequence; one need not know
+ a precise or 
+\emph on 
+a priori
+\emph default 
+ value for 
+\begin_inset Formula $\theta$
+\end_inset 
+
+; one need only guess at a reasonable value, based on the data at hand.
  
 \layout Standard
 
-More directly, suppose one is interested in the sum
+Alternately, one may consider replacing the forward difference operator
+ 
+\begin_inset Formula $\triangle b_{n}=b_{n+1}-b_{n}$
+\end_inset 
+
+ by 
+\begin_inset Formula $\triangle_{q}b_{n}=b_{n+1}-qb_{n}$
+\end_inset 
+
+.
+ Straightforward manipulations lead to 
+\begin_inset Formula \[
+\sum_{m=0}^{\infty}\left(\frac{z}{1-qz}\right)^{m+1}\triangle_{q}^{m}b_{0}=\sum_{n=0}^{\infty}z^{n}b_{n}\]
+
+\end_inset 
+
+ with the traditional Euler's series regained by taking 
+\begin_inset Formula $q=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ Assuming that the oscillatory part 
+\begin_inset Formula $z$
+\end_inset 
+
+ is known, or can be approximately guessed at from the period of the oscillation
+, then choosing 
+\begin_inset Formula $q=-1/z$
+\end_inset 
+
+ should make the left hand side an accelerated series for the right hand
+ side.
+ However, there are more powerful techniques.
+\layout Standard
+
+Suppose one is interested in the sum
 \begin_inset Formula \begin{equation}
 S(z)=\sum_{n=0}^{\infty}z^{n}b_{n}\label{eq: geo series}\end{equation}
 
@@ -974,8 +1072,13 @@ i.e.
 \begin_inset Formula $z$
 \end_inset 
 
- is not immediately appearant.
- (??? Or is it ???)
+ is not immediately appearant, but is surely possible.
+ 
+\layout Standard
+
+There is another, possibly fruitful direction one might take.
+ This hinges on noting that the integrands above take the general form of
+ a Padé approximation, and one proceeds from there.
 \layout Section
 
 The Gaussian Distribution 
@@ -1262,7 +1365,7 @@ The general behaviour of the integrand appearing in equation
 
 \end_inset 
 
- whwhich is centered on the maximum of 
+ which is centered on the maximum of 
 \begin_inset Formula $\left|y_{0}\left(1-y_{0}\right)\log y_{0}\right|$
 \end_inset 
 
@@ -1328,6 +1431,11 @@ G(s) & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\left(\sigma-1\r
 
 \end_inset 
 
+ when 
+\begin_inset Formula $1\le\sigma$
+\end_inset 
+
+.
  Useful for estimation is that 
 \begin_inset Formula $8y_{0}(1-2y_{0})=0.996687115\ldots$
 \end_inset 
@@ -1347,7 +1455,7 @@ G(s) & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\left(\sigma-1\r
 \begin_inset Formula $n$
 \end_inset 
 
- must be choosen so that 
+ choosen so that 
 \begin_inset Formula $\sigma\le n$
 \end_inset 
 
@@ -1384,7 +1492,7 @@ The case where
 \end_inset 
 
  Combining the various pieces, one obtains a result remarkably similar to
- the previous one;namely, when 
+ the previous one; namely, when 
 \begin_inset Formula $\sigma\le1$
 \end_inset 
 
@@ -1413,7 +1521,11 @@ For evaluations on the critical line
 \begin_inset Formula $\left|\Gamma(s)\right|^{-1}$
 \end_inset 
 
-, which becomes large.
+, which can become quite large as the imaginarypart of 
+\begin_inset Formula $s$
+\end_inset 
+
+ increases.
  A useful estimate for 
 \begin_inset Formula $\left|\Gamma(s)\right|^{-1}$
 \end_inset 
