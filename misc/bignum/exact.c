@@ -245,7 +245,7 @@ main (int argc, char * argv[])
 	mpf_init (que);
 			  
 	// cpx_set_d (ess, 1.5, 14.134725);
-	cpx_set_d (ess, 1.563331235, sim);
+	cpx_set_d (ess, -1.563331235, sim);
 	// cpx_set_d (ess, 0.5, sim);
 
 	double zmag = sim;
@@ -295,6 +295,7 @@ main (int argc, char * argv[])
 		// cpx_set_ui (zeta, 0, 0);
 		// cpx_polylog (zeta, ess, zee, prec);
 		//
+#if 0
 		cpx_set (ms,ess);
 		cpx_sub_ui (ms,ms,1, 0);
 		cpx_mpf_pow (z2, que, ms, prec);
@@ -306,6 +307,7 @@ main (int argc, char * argv[])
 		
 		// cpx_sub (z2, zeta, z2);
 		// cpx_add (z3, z2, z3);
+#endif
 
 #if 0
 		fp_two_pi (que, prec);
@@ -328,9 +330,9 @@ main (int argc, char * argv[])
 
 		printf ("%g",q);
 		fp_prt ("\t", zeta[0].re);
-		fp_prt ("\t", z2[0].re);
-		fp_prt ("\t", z3[0].re);
-		// fp_prt ("\t", zeta[0].im);
+		// fp_prt ("\t", z2[0].re);
+		// fp_prt ("\t", z3[0].re);
+		fp_prt ("\t", zeta[0].im);
 		printf ("\n");
 		fflush (stdout);
 	}
