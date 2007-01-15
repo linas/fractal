@@ -1442,8 +1442,8 @@ G(s) & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\left(\sigma-1\r
 
 .
  Combining these results, one obtains 
-\begin_inset Formula \[
-\left|\xi(s,z)\right|\le\frac{1}{4^{n}}\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|C(z)G(s)\left(1.0414\ldots\right)^{\sigma-1}\]
+\begin_inset Formula \begin{equation}
+\left|\xi(s,z)\right|\le\frac{1}{4^{n}}\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|C(z)G(s)\left(1.0414\ldots\right)^{\sigma-1}\label{eq:error-bound-positive}\end{equation}
 
 \end_inset 
 
@@ -1505,8 +1505,8 @@ The case where
 \end_inset 
 
 , one has 
-\begin_inset Formula \[
-\left|\xi(s,z)\right|\le\frac{1}{4^{n}}\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|2^{1-\sigma}C(z)\]
+\begin_inset Formula \begin{equation}
+\left|\xi(s,z)\right|\le\frac{1}{4^{n}}\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|2^{1-\sigma}C(z)\label{eq:error-bound-negative}\end{equation}
 
 \end_inset 
 
@@ -1650,15 +1650,6 @@ In general, the formula
  answers in the case when an exact polynomial answer is possible.
 \layout Standard
 
-XXXX
-\layout Standard
-
-TODO -- discussion of precision needed for intermediate terms.
-\layout Standard
-
-XXXX
-\layout Standard
-
 For the general case, one may conclude that the estimate 
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
@@ -1671,8 +1662,13 @@ For the general case, one may conclude that the estimate
 \end_inset 
 
  To obtain a value of the polylogarithm to within some given numerical precision
-, one must invert the formula 
-\begin_inset LatexCommand \ref{eq:error bound}
+, one must invert the formulas 
+\begin_inset LatexCommand \ref{eq:error-bound-positive}
+
+\end_inset 
+
+ or 
+\begin_inset LatexCommand \ref{eq:error-bound-negative}
 
 \end_inset 
 
@@ -1686,19 +1682,78 @@ For the general case, one may conclude that the estimate
 \end_inset 
 
 .
- 
+ To obtain a fixed number of digits of precision, one must carry out intermediat
+e calculations with at least that many digits of precision.
+ In fact, one must have more.
+ The appearence of the binomial coefficient in equation 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ is the problem.
+ Since 
+\begin_inset Formula $2^{n}>\left(\begin{array}{c}
+n\\
+j\end{array}\right)$
+\end_inset 
+
+, one concludes that 
+\begin_inset Formula $n$
+\end_inset 
+
+ additional binary bits of precision are needed with which to carry out
+ the calculations.
+ As a result, it becomes difficult to implement the algorithm robustly using
+ only double-precision arithmetic.
+ For values of 
+\begin_inset Formula $z$
+\end_inset 
+
+ near 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, the algorithm is well-enough behaved; however, round-off errors significantly
+ disturb the calculations as 
+\begin_inset Formula $z$
+\end_inset 
+
+ approaches 
+\begin_inset Formula $+1$
+\end_inset 
+
+.
+ This trouble with precision can be at least partly alleviated by making
+ use of the duplication formula, as discussed in the next section.
 \layout Section
 
 Duplication formula
 \layout Standard
 
-The formula 
+The region of applicability of the algorithm may be exteneded by making
+ use of the duplication formula for the polylogarithm or periodic zeta.
+ The duplication formula, or more generally, the multiplication theorem,
+ is an extension of the well-known Legendre duplication formula for the
+ Gamma function
+\begin_inset LatexCommand \cite[(6.1.18),(6.3.8)(23.1.10)]{A&S}
+
+\end_inset 
+
+, into the domain of the polylogarithm.
+\layout Standard
+
+Thus, for example, the formula 
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
- together with the error bound 
-\begin_inset LatexCommand \ref{eq:error bound}
+ together with the error bounds 
+\begin_inset LatexCommand \ref{eq:error-bound-positive}
+
+\end_inset 
+
+,
+\begin_inset LatexCommand \ref{eq:error-bound-negative}
 
 \end_inset 
 
@@ -1807,16 +1862,45 @@ The equivalent formulas for the polylogarithm are
 
 \end_inset 
 
- The repeated application of the duplication formula is crucial for the
- extension of Borwein's algorithm to the entire complex 
+ 
+\layout Standard
+
+The repeated application of the duplication formula is crucial for the extension
+ of the algorithm to points that get near 
+\begin_inset Formula $z=1$
+\end_inset 
+
+; indeed, one can get arbitrarily close to 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ in this way.
+ A more general application of the duplication formula, to extend the algorithm
+ to the entire complex 
 \begin_inset Formula $z$
 \end_inset 
 
--plane, as, by repeated application, it will map the entire plane into to
- region of convergence of Borwein's algorithm.
-\layout Standard
+-plane, is stymied by the fact that the algorithm uttterly fails near the
+ branch cut.
+ One may make some progress by moving values away from the branch cut with
+ the relation 
+\begin_inset Formula \[
+e^{-i\pi2/s}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}{z}\right)=\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\zeta\left(1-s,\frac{\log z}{2\pi i}\right)\]
 
-XXX mention multiplication formula seems not that useful.
+\end_inset 
+
+However, this presumes that one has some independent means of computing
+ the Hurwitz zeta.
+ The Hurwitz zeta 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
+
+ may be summed directly for 
+\begin_inset Formula $\sigma\gtrsim2$
+\end_inset 
+
+ but is not easily calculable in other regions; indeed, the point of this
+ paper is to compute the Hurwitz zeta by employing the above relation.
 \layout Section
 
 Validation
@@ -1867,8 +1951,9 @@ The correctness of a given numerical implementation can be validated in
 
 \end_inset 
 
- is explicitly convergent, and may be directly summed, thus offering another
- check.
+ is explicitly convergent, and may be directly summed, thus offering a fourth
+ check of the correctness of an implementation.
+ Finally, the multiplication theorem can be used to check for consistency.
 \layout Section
 
 The 
@@ -2324,33 +2409,65 @@ The updated algorithm apears to offer a stable and fast way of computing
 \end_inset 
 
 .
- It allows the polylogarithm to be compted over an extended range as well.
+ It allows the polylogarithm to be computed over an extended range as well.
  An actual implementation using a variable-precision library shows that
  the algorithm is quite tractable.
- An unexplored area is the optimal implementation of the algorithm using
+ 
+\layout Standard
+
+An unexplored area is the optimal implementation of the algorithm using
  standard IEEE double-precision floating-point mathematics.
  Preliminary work shows that some of the intermediate terms are just large
  enough so that rounding error may be of concern; the region of high-precision
  convergence has not been characterized.
  The propagation of rounding erors through the algorithm has not been characteri
-zed.
+zed; it may be possible to re-arrange terms to minimize the propagation
+ of errors.
  Such a characterization is necessary before reliable double-precision code
  can be created.
  By contrast, such considerations can be swept under the carpet when employing
  arbitrary-precision arithmetic.
 \layout Standard
 
-Additional effort should be placed into the proper and speedy evaluation
- of the bound
+Evaluating the bounds 
+\begin_inset LatexCommand \ref{eq:error-bound-positive}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq:error-bound-negative}
+
+\end_inset 
+
+, so as to obtain an order estimate, is non-trivial, and can account for
+ a significant amount of compute time.
+ A speedier heuristic is desirable.
 \layout Standard
 
-Also number of dgits needed for intermediate terms.
+It may be possible to find even more repidly converging algorithms, by generaliz
+ing some of the results from Cohen 
+\emph on 
+et al
+\emph default 
+
+\begin_inset LatexCommand \cite{Coh00}
+
+\end_inset 
+
+, or by appealing to the general theory of Padé approximants.
+ Both approaches seem promising, although that of Padé approximants may
+ yeild a more general theory.
 \layout Standard
 
-conclusion: need discontinuity to be made clear.
+Another peculiar corner of of the theory of special functions is the characteriz
+ation of the periodic zeta function.
+ The discontinuity across the branch cut of the periodic zeta is unclear;
+ it should be carefully characterized in relation to the branch cuts of
+ the polylogarithm and the Hurwitz zeta.
 \layout Standard
 
-are more general pade approximants possible?
+This paper concludes with the application of the algorithm to render some
+ pretty images.
 \layout Standard
 
 
@@ -2364,8 +2481,8 @@ are more general pade approximants possible?
 Appendix: Some Pretty Pictures
 \layout Standard
 
-Below follow some interesting pictures of the Hurwitz zeta function for
- values of 
+Below follow some interesting pictures of the polylogarithm and the Hurwitz
+ zeta function for values of 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -2374,30 +2491,7 @@ Below follow some interesting pictures of the Hurwitz zeta function for
 \end_inset 
 
 .
- Precisely speaking, they are for the 
-\begin_inset Quotes eld
-\end_inset 
-
-periodic zeta
-\begin_inset Quotes erd
-\end_inset 
-
  
-\begin_inset Formula $F(s,q)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
-\end_inset 
-
- only.
- However, from the relation 
-\begin_inset LatexCommand \ref{eq:poly-hur relation}
-
-\end_inset 
-
-, one may deduce that this differs from the Hurwitz zeta only by an exponentiall
-y small amount when 
-\begin_inset Formula $s$
-\end_inset 
-
- is on the critical line.
 \layout Standard
 
 
@@ -2481,6 +2575,16 @@ F(s,q)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)=\sum_{n=1}^{\infty}\frac{\exp(2i\pi
 \end_inset 
 
 .
+ Due to the relation to the Dirichlet eta function, the zeros also materialize
+ at the same values of 
+\begin_inset Formula $s$
+\end_inset 
+
+, but on the 
+\begin_inset Formula $q=1/2$
+\end_inset 
+
+ line.
 \layout Standard
 
 Remarkably, the blue streaks seem to be roughly parabolic, but are interrupted
@@ -2499,6 +2603,20 @@ erasures
  of the Mathieu functions.
  These cross over one another in a curious fashion; see for example, figure
  20.1 in Abramowitz & Stegun.
+ 
+\layout Standard
+
+The precise form of the dominant blue streaks are given by 
+\begin_inset Formula $q^{-s}$
+\end_inset 
+
+, as given by equation 
+\begin_inset LatexCommand \ref{eq:F-approx}
+
+\end_inset 
+
+.
+ These may be subtracted, as illustrated in the next image.
 \layout Standard
 
 
@@ -2511,6 +2629,32 @@ generated with generate/hurwitz.C conversion with takelog, renorm 0.24 2
 \end_inset 
 
 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Hurwitz zeta, with leading term subtracted
+\layout Standard
+
+
+\begin_inset Graphics
+	filename hurwitz-non-leading.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This
 \end_inset 
 
 
