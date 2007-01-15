@@ -1758,7 +1758,7 @@ Thus, for example, the formula
 \end_inset 
 
  allow 
-\begin_inset Formula $F(s;q)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
+\begin_inset Formula $F(q;s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
 \end_inset 
 
  to be computed for real 
@@ -1776,7 +1776,7 @@ Thus, for example, the formula
 
 , one applies the duplication formula 
 \begin_inset Formula \[
-F\left(s;q\right)=2^{1-s}F\left(s;2q\right)-F\left(s;q+\frac{1}{2}\right)\]
+F\left(q;s\right)=2^{1-s}F\left(2q;s\right)-F\left(q+\frac{1}{2};s\right)\]
 
 \end_inset 
 
@@ -1817,7 +1817,7 @@ The duplication formula follows from a general
 
 -adic identity 
 \begin_inset Formula \[
-\sum_{m=0}^{p-1}F\left(s;\frac{m+q}{p}\right)=p^{1-s}F\left(s;q\right)\]
+\sum_{m=0}^{p-1}F\left(\frac{m+q}{p};s\right)=p^{1-s}F\left(q;s\right)\]
 
 \end_inset 
 
@@ -1984,7 +1984,7 @@ periodic zeta function
 
  as 
 \begin_inset Formula \begin{equation}
-F(q,s)=\sum_{n=1}^{\infty}\frac{e^{i2\pi nq}}{n^{s}}\label{eq:periodic zeta}\end{equation}
+F(q;s)=\sum_{n=1}^{\infty}\frac{e^{i2\pi nq}}{n^{s}}\label{eq:periodic zeta}\end{equation}
 
 \end_inset 
 
@@ -1996,7 +1996,7 @@ F(q,s)=\sum_{n=1}^{\infty}\frac{e^{i2\pi nq}}{n^{s}}\label{eq:periodic zeta}\end
  The periodic zeta function occurs when one attempts to state a reflection
  formula for the Hurwitz zeta function, as 
 \begin_inset Formula \begin{equation}
-\zeta(1-s,q)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{-i\pi s/2}F(q,s)+e^{i\pi s/2}F(1-q,s)\right]\label{eq:Hurwitz reflection}\end{equation}
+\zeta(1-s,q)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{-i\pi s/2}F(q;s)+e^{i\pi s/2}F(1-q;s)\right]\label{eq:Hurwitz reflection}\end{equation}
 
 \end_inset 
 
@@ -2180,7 +2180,7 @@ The first figure,
 
  gives 
 \begin_inset Formula \[
-\zeta\left(\frac{1}{2}-i\tau,\, q\right)=\frac{e^{-i\pi/4}e^{-i\tau\log2\pi}e^{i\phi}}{\sqrt{2\cosh\tau\pi}}\left[e^{\pi\tau/2}F(q,s)+ie^{-\pi\tau/2}F(1-q,s)\right]\]
+\zeta\left(\frac{1}{2}-i\tau,\, q\right)=\frac{e^{-i\pi/4}e^{-i\tau\log2\pi}e^{i\phi}}{\sqrt{2\cosh\tau\pi}}\left[e^{\pi\tau/2}F(q;s)+ie^{-\pi\tau/2}F(1-q;s)\right]\]
 
 \end_inset 
 
@@ -2212,7 +2212,7 @@ The first figure,
  in the picture, one may ignore the second term, so that the whole expression
  simplifies to 
 \begin_inset Formula \[
-F\left(\frac{1}{2}+i\tau,\, q\right)=\exp\, i\left(\frac{\pi}{4}-\phi+\tau\log2\pi\right)\;\zeta\left(\frac{1}{2}-i\tau,\, q\right)+\mathcal{O}\left(C^{-\tau}\right)\]
+F\left(q;\frac{1}{2}+i\tau\right)=\exp\, i\left(\frac{\pi}{4}-\phi+\tau\log2\pi\right)\;\zeta\left(\frac{1}{2}-i\tau,\, q\right)+\mathcal{O}\left(C^{-\tau}\right)\]
 
 \end_inset 
 
@@ -2240,7 +2240,7 @@ F\left(\frac{1}{2}+i\tau,\, q\right)=\exp\, i\left(\frac{\pi}{4}-\phi+\tau\log2\
 
 , so that 
 \begin_inset Formula \begin{equation}
-F\left(\frac{1}{2}+i\tau,\, q\right)\approx\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}}\;\mbox{ as }q\to0\label{eq:F-approx}\end{equation}
+F\left(q;\frac{1}{2}+i\tau\right)\approx\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}}\;\mbox{ as }q\to0\label{eq:F-approx}\end{equation}
 
 \end_inset 
 
@@ -2309,7 +2309,7 @@ Curiously, the limit
 
 
 \begin_inset Formula \[
-F\left(\frac{1}{2}+i\tau,\, q+1\right)\approx F\left(\frac{1}{2}+i\tau,\, q\right)-\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}}\]
+F\left(q+1;\,\frac{1}{2}+i\tau\right)\approx F\left(q,\,\frac{1}{2}+i\tau\right)-\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}}\]
 
 \end_inset 
 
@@ -2323,7 +2323,7 @@ periodic
 \end_inset 
 
  zeta function is not at all periodic: 
-\begin_inset Formula $F(s,q+1)\ne F(s,q)$
+\begin_inset Formula $F(q+1;s)\ne F(q;s)$
 \end_inset 
 
  whenever 
@@ -2497,7 +2497,7 @@ Below follow some interesting pictures of the polylogarithm and the Hurwitz
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -2524,12 +2524,12 @@ periodic zeta function
 
  
 \begin_inset Formula \[
-F(s,q)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)=\sum_{n=1}^{\infty}\frac{\exp(2i\pi nq)}{n^{s}}\]
+F(q;s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)=\sum_{n=1}^{\infty}\frac{\exp(2i\pi nq)}{n^{s}}\]
 
 \end_inset 
 
  Graphed is the magnitude of 
-\begin_inset Formula $F(s,q)$
+\begin_inset Formula $F(q;s)$
 \end_inset 
 
 , with a color scale such that black represents zero, greenish-blue being
@@ -2566,7 +2566,7 @@ F(s,q)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)=\sum_{n=1}^{\infty}\frac{\exp(2i\pi
 
  at the top of the image.
  Zeroes of the Riemann zeta function 
-\begin_inset Formula $\zeta(s)=F(s,1)$
+\begin_inset Formula $\zeta(s)=F(1,s)$
 \end_inset 
 
  are located where the blue lines intersect the right edge of the image.
@@ -2606,7 +2606,8 @@ erasures
  
 \layout Standard
 
-The precise form of the dominant blue streaks are given by 
+The precise form of the parabolic blue streaks are due to a term of the
+ form 
 \begin_inset Formula $q^{-s}$
 \end_inset 
 
@@ -2654,7 +2655,54 @@ Hurwitz zeta, with leading term subtracted
 
 \layout Standard
 
-This
+This image shows the magnitude of 
+\begin_inset Formula \[
+\zeta(s,q+1)=\zeta(s,q)-q^{-s}\]
+
+\end_inset 
+
+ for the range of 
+\begin_inset Formula $0\le q\le1$
+\end_inset 
+
+along the horizontal axis, and 
+\begin_inset Formula $0\le\tau\le50$
+\end_inset 
+
+ along the verticla axis, just as in the previous image; the same coloration
+ scheme is used as well.
+ This essentially corresponds to the previous picture, with the leading
+ divergence subtracted; for large positive 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, the magnitude of the periodic zeta and the Hurwitz zeta differ by an exponenti
+ally small amount.
+ A careful comparison of this picture to the previous now shows that the
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+erasures
+\begin_inset Quotes erd
+\end_inset 
+
+ or 
+\begin_inset Quotes eld
+\end_inset 
+
+streaks
+\begin_inset Quotes erd
+\end_inset 
+
+ in the previous image correspond exactly to the dark parts of this image.
+ Again, a cross-cross lattice pattern can be seen.
+ The dominant streaks in this picture are presumably due to the 
+\begin_inset Formula $(1+q)^{-s}$
+\end_inset 
+
+ term.
+  
 \end_inset 
 
 
