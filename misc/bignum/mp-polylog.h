@@ -76,5 +76,7 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec);
  * Built up from the fast polylogarithm algo
  * Caches intermediate terms, and so performance is much better 
  * if s is held const, while q is varied.
+ * The input value of q must be postive; 
+ * the algo gets slow if q is very large.
  */
 void cpx_hurwitz_zeta (cpx_t hzeta, const cpx_t ess, const mpf_t que, int prec);

@@ -707,9 +707,10 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
  *
  * Built up from the periodic zeta. Caches intermediate terms, and so
  * performance is much better if s is held const, while q is varied.
+ * Expects the input value of q to be between 0 and 1.
  */
 
-void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
+static void hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 {
 	static cpx_t cache_s, piss, niss, scale;
 	static int init = 0;
@@ -776,6 +777,46 @@ void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 	cpx_clear (s);
 	cpx_clear (zm);
 	mpf_clear (t);
+}
+
+/* ============================================================= */
+/**
+ * cpx_hurwitz_zeta -- Hurwitz zeta function
+ *
+ * Built up from the periodic zeta. Caches intermediate terms, and so
+ * performance is much better if s is held const, while q is varied.
+ * The value for q must be positive; the algo gets slow if q is large.
+ */
+
+void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
+{
+	cpx_t s, term;
+	mpf_t q;
+	cpx_init (s);
+	cpx_init (term);
+	mpf_init (q);
+	cpx_set (s, ess);
+	mpf_set (q, que);
+
+	/* Make sure q is between 0 and 1, by subtracting the integer part */
+	long nq = mpf_get_si (q);
+	mpf_sub_ui (q, q, nq);
+
+	hurwitz_zeta (zee, s, q, prec);
+
+	cpx_neg (s, s);
+	int k;
+	for (k=0; k<nq; k++)
+	{
+		/* subtract off the leading terms -- the 1/(q+k)^s */
+		cpx_mpf_pow (term, q, s, prec);
+		cpx_sub (zee, zee, term);
+		mpf_add_ui (q, q, 1);
+	}
+
+	cpx_clear (s);
+	cpx_clear (term);
+	mpf_clear (q);
 }
 
 /* ============================================================= */
