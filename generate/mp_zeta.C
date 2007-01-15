@@ -24,15 +24,15 @@
 void entire_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned int prec, int nterms)
 {
 	int k;
-	mpf_t rebin, imbin, term, racc, iacc, rzeta, izeta;
+	cpx_t bin;
+	mpf_t term, racc, iacc, rzeta, izeta;
 
 	mpf_init (term);
 	mpf_init (racc);
 	mpf_init (iacc);
 	mpf_init (rzeta);
 	mpf_init (izeta);
-	mpf_init (rebin);
-	mpf_init (imbin);
+	cpx_init (bin);
 	
 	mpf_set_ui (re_b, 0);
 	mpf_set_ui (im_b, 0);
@@ -43,7 +43,7 @@ void entire_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned in
 	for (k=2; k<= n; k++)
 	{
 		/* Commpute the binomial */
-		c_binomial_d (rebin, imbin, re_s, im_s, k);
+		cpx_binomial_d (bin, re_s, im_s, k);
 
 // printf ("duude s= (%g %g) k=%d bin=(%g %g)\n", re_s, im_s, k, mpf_get_d(rebin), mpf_get_d(imbin));
 
@@ -51,8 +51,8 @@ void entire_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned in
 		fp_zeta (term, k, prec);
 		mpf_sub_ui (term, term, 1);
 
-		mpf_mul (rzeta, term, rebin);
-		mpf_mul (izeta, term, imbin);
+		mpf_mul (rzeta, term, bin[0].re);
+		mpf_mul (izeta, term, bin[0].im);
 
 		if (k%2)
 		{ 
@@ -86,8 +86,7 @@ void entire_sub_s (mpf_t re_b, mpf_t im_b, double re_s, double im_s, unsigned in
 	mpf_clear (iacc);
 	mpf_clear (rzeta);
 	mpf_clear (izeta);
-	mpf_clear (rebin);
-	mpf_clear (imbin);
+	cpx_clear (bin);
 }
 
 /* ============================================================================= */
