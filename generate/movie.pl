@@ -3,12 +3,12 @@
 # Perl script to generate frames of a movie
 #
 
-$nframes = 30;
-$taumax = 100;
+$nframes = 5400;
+$taumax = 150;
 $tau = 0;
 $taudelta = $taumax / $nframes;
-for ($i=0; $i<$nframes, $i++)
+for ($i=1852; $i<$nframes; $i++)
 {
-	system ("./polylog /home2/linas/tmp/ptest-$i-$tau 600 600 3 -0.35 0 3 $tau");
-	$tau += $taudelta;
+	$tau = $i * $taudelta;
+	system ("./polylog /home2/linas/tmp/phase-small-$i-$tau 300 300 3 -0.35 0 3 $tau");
 }
