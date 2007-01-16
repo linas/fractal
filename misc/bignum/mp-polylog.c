@@ -21,6 +21,7 @@
 #include "mp-complex.h"
 #include "mp-consts.h"
 #include "mp-gamma.h"
+#include "mp-misc.h"
 #include "mp-polylog.h"
 #include "mp-trig.h"
 #include "mp-zeta.h"
@@ -837,12 +838,17 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 	cpx_init (bin);
 	cpx_init (term);
 
+	/* Use 10^{-prec} for smallest term in sum */
+	mpf_t maxterm, aterm;
+	mpf_init (maxterm);
+	mpf_init (aterm);
+	fp_epsilon (maxterm, 2*prec);
+
 	cpx_set (s, ess);
 	cpx_set (q, que);
 
-	cpx_set_ui (zee, 0, 0);
 	cpx_neg (s, s);
-	// cpx_pow (zee, q, s);
+	cpx_pow (zee, q, s, prec);
 	cpx_neg (s, s);
 
 	cpx_neg (q, q);
@@ -861,6 +867,10 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 		cpx_mul (term, term, qn);
 		cpx_add (zee, zee, term);
 
+		/* Don't go no farther than this */
+		cpx_mod_sq (aterm, term);
+		if (mpf_cmp (aterm, maxterm) < 0) break;
+
 		n++;
 
 		/* qn = q^n */
@@ -872,6 +882,8 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 	cpx_clear (qn);
 	cpx_clear (bin);
 	cpx_clear (term);
+	mpf_clear (aterm);
+	mpf_clear (maxterm);
 }
 
 /* ============================================================= */

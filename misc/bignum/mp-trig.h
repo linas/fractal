@@ -52,6 +52,7 @@ void cpx_tangent (cpx_t tang, const cpx_t z, unsigned int prec);
 void fp_log_m1 (mpf_t lg, const mpf_t z, unsigned int prec);
 void fp_log (mpf_t lg, const mpf_t z, unsigned int prec);
 void fp_log_ui (mpf_t lg, unsigned int z, unsigned int prec);
+void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec);
 
 /**
  * fp_arctan -  Floating point arctangent
@@ -66,6 +67,15 @@ void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec);
  * Simple implemenmtation of complex square-root
  */
 void cpx_sqrt (cpx_t sqrt, const cpx_t zee, int prec);
+
+/**
+ * cpx_pow-- return q^s for complex q, s.
+ *
+ * Brute-force algo, this thing is pretty slow, as it requires
+ * a logarithm, an exp, sin and cos to be computed, each of which
+ * are kinda slow ...
+ */
+void cpx_pow (cpx_t powc, const cpx_t q, const cpx_t ess, int prec);
 
 /**
  * cpx_mpf_pow-- return q^s for complex s, real, positive q.

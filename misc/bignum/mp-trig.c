@@ -557,6 +557,10 @@ void fp_log_ui (mpf_t lg, unsigned int k, unsigned int prec)
 	fp_one_d_cache_store (&log_n, lg, k, prec);
 }
 
+void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec)
+{
+}
+
 /* ======================================================================= */
 /**
  * fp_arctan -  Floating point arctangent
@@ -770,6 +774,26 @@ void cpx_mpf_pow (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
 	mpf_clear(logkq);
 	mpf_clear(mag);
 	mpf_clear(pha);
+}
+
+/* ======================================================================= */
+/*
+ * cpx_pow-- return q^s for complex q, s.
+ *
+ * Brute-force algo, this thing is pretty slow, as it requires
+ * a logarithm, an exp, sin and cos to be computed, each of which
+ * are kinda slow ... 
+ */
+void cpx_pow (cpx_t powc, const cpx_t que, const cpx_t ess, int prec)
+{
+	cpx_t logq;
+	cpx_init (logq);
+
+	cpx_log (logq, que, prec);
+	cpx_mul (logq, logq, ess);
+	cpx_exp (powc, logq, prec);
+
+	cpx_clear(logq);
 }
 
 /* ======================================================================= */
