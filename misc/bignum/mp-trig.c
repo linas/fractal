@@ -611,36 +611,18 @@ void cpx_log_m1 (cpx_t lg, const cpx_t z, unsigned int prec)
 
 void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec)
 {
-	cpx_t zee;
-	cpx_init (zee);
-	double rez = mpf_get_d (z[0].re) - 1.0;
-	double imz = mpf_get_d (z[0].im);
-	double mg = rez*rez + imz*imz;
-	if ((1.5 < rez) || (1.0 < mg))
-	{
-		cpx_recip (zee, z);
-		mpf_ui_sub (zee[0].re, 1, zee[0].re);
+	mpf_t r;
+	mpf_init (r);
 
-		rez = mpf_get_d (zee[0].re);
-		imz = mpf_get_d (zee[0].im);
-		mg = rez*rez + imz*imz;
-		if (0.25 < mg)
-		{
-			rez = mpf_get_d (z[0].re);
-			imz = mpf_get_d (z[0].im);
-			fprintf (stderr, "Error: cannot compute log for z=%g +i %g\n", rez, imz);
-			cpx_set_ui (lg, 1, 0);
-			return;
-		}
-		cpx_log_m1 (lg, zee, prec);
-	}
-	else
-	{
-		cpx_ui_sub (zee, 1, 0, z);
-		cpx_log_m1 (lg, zee, prec);
-		cpx_neg (lg, lg);
-	}
-	cpx_clear (zee);
+	/* log (re^{itheta}) = log(r) +  itheta) 
+	 * theta = arctan (y/x)
+	 */
+	cpx_mod_sq (r, z);
+	fp_arctan2 (lg[0].im, z[0].im, z[0].re, prec);
+	fp_log (lg[0].re, r, prec);
+	mpf_div_ui (lg[0].re, lg[0].re, 2);
+
+	mpf_clear (r);
 }
 
 /* ======================================================================= */
