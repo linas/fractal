@@ -33,7 +33,7 @@ An efficient algorithm for accelerating the convergence of oscillatory series,
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 13 January 2007
+12 October 2006, revised 16 January 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -84,24 +84,25 @@ An efficient algorithm for computing the Riemann zeta function
 \end_inset 
 
 .
- By using the duplication formula, the range of convergence for the polylogarith
-m may be extended to a kidney-shaped region in the complex 
+ By using the duplication formula and the reflection formula, the range
+ of convergence for the polylogarithm may be extended to the entire complex
+ 
 \begin_inset Formula $z$
 \end_inset 
 
--plane containing the unit circle surrounding the origin but excluding 
-\begin_inset Formula $z=1$
-\end_inset 
-
-.
- The Hurwitz zeta can be extended to the whole real interval 
+-plane.
+ Similarly, the Hurwitz zeta can be extended to the whole real interval
+ 
 \begin_inset Formula $0<q<1$
 \end_inset 
 
 .
- The speed of the algorithm is approximately linear in the number of operations
- required, although it does require the computation of integers raised to
- a complex power, which is generally a non-trivial and slow numerical operation.
+ The speed of the algorithm is significantly superior to a Taylor's series
+ evaluation for the Hurwitz zeta; quadratically so when a large number of
+ digits of precision is required.
+ The speed is approximately linear in the number of operations required,
+ although it does require the computation of integers raised to a complex
+ power, which is generally a non-trivial and slow numerical operation.
  The primary, concrete result of this paper is an algorithm allows the explorati
 on of the Hurwitz zeta in the critical strip, where fast algorithms are
  otherwise unavailable.
@@ -176,6 +177,72 @@ k\end{array}\right)(q+k)^{1-s}\label{eq:Hasse series}\end{equation}
  
 \layout Standard
 
+A not unreasonable algorithm may be given by considering a Taylor's series
+ in 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+ Expanding about 
+\begin_inset Formula $q=0$
+\end_inset 
+
+, one obtains 
+\begin_inset Formula \begin{equation}
+\zeta(s,q)=\frac{1}{q^{s}}+\sum_{n=0}^{\infty}\left(-q\right)^{n}\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)\zeta(s+n)\label{eq:Hurwitz taylor}\end{equation}
+
+\end_inset 
+
+ It is not hard to show that the sum on the right is convergent for 
+\begin_inset Formula $\left|q\right|<1$
+\end_inset 
+
+.
+ Alternately, an expansion may be made about 
+\begin_inset Formula $q=1/2$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+\zeta\left(s,q+\frac{1}{2}\right)=\sum_{n=0}^{\infty}\left(-q\right)^{n}\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
+
+\end_inset 
+
+ It may be shown that the above has a region of convergence 
+\begin_inset Formula $\left|q\right|<1/2$
+\end_inset 
+
+.
+ Either of these expansions provide a computable expression for the Hurwitz
+ zeta function that is convergent on the entire complex 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane (minus, of course, 
+\begin_inset Formula $s=1$
+\end_inset 
+
+, and taking the appropriate limit, via l'Hopital's rule, when 
+\begin_inset Formula $s$
+\end_inset 
+
+ is a non-positive integer).
+ The principal drawback to the use of these sums for high-precision calculations
+ is the need for many high-precision evaluations of the Riemann zeta; the
+ compute time can grow exponentially as the number of required digits is
+ increased, especially when 
+\begin_inset Formula $q$
+\end_inset 
+
+ approaches the radius of convergence of the sums.
+ It is the poor performance of these sums that motivates the development
+ of this paper.
+\layout Standard
+
 The Hurwitz zeta may be expressed in terms of the polylogarithm: 
 \begin_inset Formula \begin{equation}
 \mbox{Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\label{eq:polylog definition}\end{equation}
@@ -195,17 +262,27 @@ The Hurwitz zeta may be expressed in terms of the polylogarithm:
 \end_inset 
 
  provides a extensive review of the means of computing the polylogarithm,
- but limits himself entirely to real values of 
+ but limits himself to real values of 
 \begin_inset Formula $s$
 \end_inset 
 
 .
- A recent survey
+ Crandall
 \begin_inset LatexCommand \cite{Cra06}
 
 \end_inset 
 
- indicates a similar paucity of general algorithms as well.
+ discusses evaluating the polylogarithm on the entire complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, but limits himself to integer values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ Thus, there appears to be a similar paucity of general algorithms for the
+ polylogarithm as well.
  The series defining the polylogarithm may be directly evaluated when 
 \begin_inset Formula $\left|z\right|<1$
 \end_inset 
@@ -231,8 +308,8 @@ The primary effort of this paper is to take the algorithm given by Borwein
 , which is a simple Padé-approximant type algorithm, and generalize it to
  the polylogarithm.
  The result is a relatively small finite sum that approximates the polylogarithm
-, and whose error, or difference from the exact value can be precisely character
-ized and bounded.
+, and whose error, or difference from the exact value, can be precisely
+ characterized and bounded.
  Increased precision is easily obtainable by evaluating a slightly larger
  sum; one may obtain roughly 
 \begin_inset Formula $2N$
@@ -283,6 +360,17 @@ ized and bounded.
 
 -plane, at least not for general values of 
 \begin_inset Formula $s$
+\end_inset 
+
+.
+ Using duplication and reflection formulas, one may extend the algorithm
+ to the entire complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane; however, this requires the independent evaluation of equation 
+\begin_inset LatexCommand \ref{eq:Hurwitz taylor}
+
 \end_inset 
 
 .
@@ -2799,7 +2887,7 @@ The increasing complexity of the chain-link pattern is apparent as one moves
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
