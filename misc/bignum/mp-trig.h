@@ -41,10 +41,12 @@ void cpx_cosine (cpx_t cosine, const cpx_t z, unsigned int prec);
 void cpx_tangent (cpx_t tang, const cpx_t z, unsigned int prec);
 
 /**
- * fp_log_m1 -  Floating point logarithm
+ * fp_log -  Floating point logarithm
  * Implemented using a brute-force, very simple algo, with 
  * no attempts at optimization. Also, does not assume any 
  * precomputed constants.
+ *
+ * fp_log_m1 computes -log(1-z) using Taylor's expansion for small z.
  *
  * fp_log_ui takes integer arguments, and keeps previous 
  * results cached for improved performance.
@@ -52,6 +54,7 @@ void cpx_tangent (cpx_t tang, const cpx_t z, unsigned int prec);
 void fp_log_m1 (mpf_t lg, const mpf_t z, unsigned int prec);
 void fp_log (mpf_t lg, const mpf_t z, unsigned int prec);
 void fp_log_ui (mpf_t lg, unsigned int z, unsigned int prec);
+void cpx_log_m1 (cpx_t lg, const cpx_t z, unsigned int prec);
 void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec);
 
 /**

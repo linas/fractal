@@ -473,6 +473,7 @@ void cpx_tangent (cpx_t tn, const cpx_t z, unsigned int prec)
 /* ======================================================================= */
 /**
  * fp_log_m1 -  Floating point logarithm
+ * Computes -log(1-z) using Taylor expansion for small z.
  * Implemented using a brute-force, very simple algo, with 
  * no attempts at optimization. Also, does not assume any 
  * precomputed constants.
@@ -557,8 +558,87 @@ void fp_log_ui (mpf_t lg, unsigned int k, unsigned int prec)
 	fp_one_d_cache_store (&log_n, lg, k, prec);
 }
 
+/* ======================================================================= */
+/**
+ * cpx_log_m1 -  Floating point logarithm
+ * Computes -log(1-z) using Taylor expansion for small z.
+ * Implemented using a brute-force, very simple algo, with 
+ * no attempts at optimization. Also, does not assume any 
+ * precomputed constants.
+ * Direct cut-n-paste of algos above.
+ */
+
+void cpx_log_m1 (cpx_t lg, const cpx_t z, unsigned int prec)
+{
+	cpx_t zee, z_n, term;
+
+	cpx_init (zee);
+	cpx_init (z_n);
+	cpx_init (term);
+
+	/* Make copy of argument now! */
+	cpx_set (zee, z);
+	cpx_mul (z_n, zee, zee);
+	cpx_set (lg, zee);
+	
+	/* Use 10^{-prec} for smallest term in sum */
+	mpf_t sqterm, maxterm;
+	mpf_init (maxterm);
+	mpf_init (sqterm);
+	fp_epsilon (maxterm, 2*prec);
+
+	unsigned int n=2;
+	while(1)
+	{
+		cpx_div_ui (term, z_n, n);
+		cpx_add (lg, lg, term);
+		
+		/* don't go no farther than this */
+		cpx_mod_sq (sqterm, term);
+		if (mpf_cmp (sqterm, maxterm) < 0) break;
+		
+		n ++;
+		cpx_mul (z_n, z_n, zee);
+	}
+	
+	cpx_clear (zee);
+	cpx_clear (z_n);
+	cpx_clear (term);
+
+	mpf_clear (maxterm);
+	mpf_clear (sqterm);
+}
+
 void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec)
 {
+	cpx_t zee;
+	cpx_init (zee);
+	double rez = mpf_get_d (z[0].re) - 1.0;
+	double imz = mpf_get_d (z[0].im);
+	double mg = rez*rez + imz*imz;
+	if (0.25 < mg)
+	{
+		cpx_ui_div (zee, 1, z);
+		mpf_ui_sub (zee[0].re, 1, zee[0].re);
+
+		rez = mpf_get_d (zee[0].re);
+		imz = mpf_get_d (zee[0].im);
+		mg = rez*rez + imz*imz;
+		if (0.25 < mg)
+		{
+			rez = mpf_get_d (z[0].re);
+			imz = mpf_get_d (z[0].im);
+			fprintf (stderr, "Error: cannot compute log for z=%g +i %g\n", rez, imz);
+		}
+		cpx_log_m1 (lg, zee, prec);
+	}
+	else
+	{
+		cpx_ui_sub (zee, 1, 0, z);
+		cpx_log_m1 (lg, zee, prec);
+		cpx_neg (lg, lg);
+	}
+	cpx_clear (zee);
 }
 
 /* ======================================================================= */
