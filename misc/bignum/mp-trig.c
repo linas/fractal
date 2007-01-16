@@ -618,7 +618,7 @@ void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec)
 	double mg = rez*rez + imz*imz;
 	if (0.25 < mg)
 	{
-		cpx_ui_div (zee, 1, z);
+		cpx_recip (zee, z);
 		mpf_ui_sub (zee[0].re, 1, zee[0].re);
 
 		rez = mpf_get_d (zee[0].re);
