@@ -223,6 +223,12 @@ static inline void cpx_div_ui (cpx_t ratio, const cpx_t a, unsigned int b)
 	mpf_div_ui (ratio[0].im, a[0].im, b);
 }
 
+static inline void cpx_ui_div (cpx_t ratio, unsigned int a, const cpx_t b)
+{
+	mpf_ui_div (ratio[0].re, a, b[0].re);
+	mpf_ui_div (ratio[0].im, a, b[0].im);
+}
+
 /**
  * cpx_mod_sq -- modulus squared of z
  */
