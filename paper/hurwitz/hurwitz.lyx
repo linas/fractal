@@ -90,7 +90,16 @@ An efficient algorithm for computing the Riemann zeta function
 \begin_inset Formula $z$
 \end_inset 
 
--plane.
+-plane, and so the algorithms described here allow for the evaluation of
+ the polylogarithm for all complex 
+\begin_inset Formula $s$
+\end_inset 
+
+ and 
+\begin_inset Formula $z$
+\end_inset 
+
+ values.
  Similarly, the Hurwitz zeta can be extended to the whole real interval
  
 \begin_inset Formula $0<q<1$
@@ -98,8 +107,8 @@ An efficient algorithm for computing the Riemann zeta function
 
 .
  The speed of the algorithm is significantly superior to a Taylor's series
- evaluation for the Hurwitz zeta; quadratically so when a large number of
- digits of precision is required.
+ in evaluation for the Hurwitz zeta; quadratically so when a large number
+ of digits of precision is required.
  The speed is approximately linear in the number of operations required,
  although it does require the computation of integers raised to a complex
  power, which is generally a non-trivial and slow numerical operation.
@@ -1968,10 +1977,43 @@ The repeated application of the duplication formula is crucial for the extension
 \begin_inset Formula $z$
 \end_inset 
 
--plane, is stymied by the fact that the algorithm utterly fails near the
- branch cut.
- One may make some progress by moving values away from the branch cut with
- the relation 
+-plane, is stymied by the fact that the algorithm presented above utterly
+ fails near the branch cut.
+ Using only the duplication formula, together with the polynomial approximation,
+ allows the polylogarithm to be evaluated on a kidney-shaped region on the
+ complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane.
+ The cusp of the kidney is located at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+; the kidney contains the unit disk 
+\begin_inset Formula $\left|z\right|\le1$
+\end_inset 
+
+, excluding the point 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Although the precise shape of the kidney depends on the number of terms
+ one wishes to use in the polynomial approximation, the shape that can be
+ acheived while still maintaining good running time is shown in figure 
+\begin_inset LatexCommand \ref{cap:Polylogarithm-phase-plot}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+One may extend the XXXX
+\layout Standard
+
+by moving values away from the branch cut with the relation 
 \begin_inset Formula \[
 e^{-i\pi2/s}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}{z}\right)=\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\zeta\left(1-s,\frac{\log z}{2\pi i}\right)\]
 
@@ -2887,9 +2929,14 @@ The increasing complexity of the chain-link pattern is apparent as one moves
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Polylogarithm-phase-plot}
+
+\end_inset 
 
 Polylogarithm phase plot
 \layout Standard
