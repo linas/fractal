@@ -616,7 +616,7 @@ void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec)
 	double rez = mpf_get_d (z[0].re) - 1.0;
 	double imz = mpf_get_d (z[0].im);
 	double mg = rez*rez + imz*imz;
-	if (0.25 < mg)
+	if ((1.5 < rez) || (1.0 < mg))
 	{
 		cpx_recip (zee, z);
 		mpf_ui_sub (zee[0].re, 1, zee[0].re);
@@ -629,6 +629,8 @@ void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec)
 			rez = mpf_get_d (z[0].re);
 			imz = mpf_get_d (z[0].im);
 			fprintf (stderr, "Error: cannot compute log for z=%g +i %g\n", rez, imz);
+			cpx_set_ui (lg, 1, 0);
+			return;
 		}
 		cpx_log_m1 (lg, zee, prec);
 	}

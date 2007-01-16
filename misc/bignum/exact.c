@@ -220,7 +220,7 @@ int
 main (int argc, char * argv[])
 {
 	int prec = 40;
-	prec = 20;
+	// prec = 20;
 	double q;
 
 	/* Set the precision (number of binary bits) */
@@ -246,7 +246,7 @@ main (int argc, char * argv[])
 			  
 	// cpx_set_d (ess, 1.5, 14.134725);
 	cpx_set_d (ess, -1.563331235, sim);
-	// cpx_set_d (ess, 0.5, sim);
+	cpx_set_d (ess, 0.5, sim);
 
 	double zmag = sim;
 
@@ -269,27 +269,33 @@ main (int argc, char * argv[])
 
 #if 1
 
-	cpx_t facup, facdown, ms, z3;
+	cpx_t facup, facdown, ms, z3, cq;
 	cpx_init (facup);
 	cpx_init (facdown);
 	cpx_init (ms);
 	cpx_init (z3);
+	cpx_init (cq);
 	disco (facup, ess, 0, prec);
 	disco (facdown, ess, 1, prec);
 	
 	// printf ("#\n# graph of Hurwitz zeta as function of q, at \n#\n");
 	printf ("#\n# graph of periodic zeta as function of q, at \n#\n");
-	fp_prt ("# at s=0.5+i ", ess[0].im);
+	fp_prt ("# at s= ", ess[0].re);
+	fp_prt (" +i ", ess[0].im);
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.02; q<0.991; q+=0.008)
-	for (q=0.002; q<1.0; q+=0.002)
+	for (q=0.002; q<1.0; q+=0.02)
 	{
 		mpf_set_d (que, q);
+		cpx_set_d (cq, q, 0.0);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
+		cpx_hurwitz_zeta (z3, ess, que, prec);
+		cpx_hurwitz_taylor (zeta, ess, cq, prec);
+		cpx_sub (zeta, zeta, z3);
 		// cpx_pade_hurwitz_zeta (z2, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
-		cpx_periodic_zeta (zeta, ess, que, prec);
+		// cpx_periodic_zeta (zeta, ess, que, prec);
 		// cpx_polylog_sum (plog, ess, zee, prec);
 		// cpx_set_d (zee, q, 0.002);
 		// cpx_set_ui (zeta, 0, 0);
