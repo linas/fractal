@@ -80,3 +80,12 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec);
  * the algo gets slow if q is very large.
  */
 void cpx_hurwitz_zeta (cpx_t hzeta, const cpx_t ess, const mpf_t que, int prec);
+
+/**
+ * cpx_hurwitz_taylor -- Hurwitz zeta function taylor series
+ *
+ * Implement the Hurwitz zeta as a taylor expansion about q=0
+ * (pulling out the leading 1/q^s term to handle uniquely)
+ */
+void cpx_hurwitz_taylor (cpx_t hzeta, const cpx_t ess, const cpx_t que, int prec);
+

@@ -23,6 +23,7 @@
 #include "mp-gamma.h"
 #include "mp-polylog.h"
 #include "mp-trig.h"
+#include "mp-zeta.h"
 
 /* ============================================================= */
 /**
@@ -703,7 +704,7 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 
 /* ============================================================= */
 /**
- * cpx_hurwitz_zeta -- Hurwitz zeta function
+ * hurwitz_zeta -- Hurwitz zeta function
  *
  * Built up from the periodic zeta. Caches intermediate terms, and so
  * performance is much better if s is held const, while q is varied.
@@ -817,6 +818,60 @@ void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 	cpx_clear (s);
 	cpx_clear (term);
 	mpf_clear (q);
+}
+
+/* ============================================================= */
+/**
+ * cpx_hurwitz_taylor -- Hurwitz zeta function taylor series
+ *
+ * Implement the Hurwitz zeta as a taylor expansion about q=0
+ * (pulling out the leading 1/q^s term to handle uniquely)
+ */
+
+void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
+{
+	cpx_t s, q, qn, bin, term;
+	cpx_init (s);
+	cpx_init (q);
+	cpx_init (qn);
+	cpx_init (bin);
+	cpx_init (term);
+
+	cpx_set (s, ess);
+	cpx_set (q, que);
+
+	cpx_set_ui (zee, 0, 0);
+	cpx_neg (s, s);
+	// cpx_pow (zee, q, s);
+	cpx_neg (s, s);
+
+	cpx_neg (q, q);
+	cpx_set_ui (qn, 1, 0);
+	cpx_sub_ui (s, s, 1, 0);
+	int n = 0;
+	while (1)
+	{
+		/* s+n-1 */
+		cpx_binomial (bin, s, n);
+
+		/* s+n */
+		cpx_add_ui (s, s, 1, 0);
+		cpx_borwein_zeta (term, s, prec);
+		cpx_mul (term, term, bin);
+		cpx_mul (term, term, qn);
+		cpx_add (zee, zee, term);
+
+		n++;
+
+		/* qn = q^n */
+		cpx_mul (qn, qn, q);
+	}
+
+	cpx_clear (s);
+	cpx_clear (q);
+	cpx_clear (qn);
+	cpx_clear (bin);
+	cpx_clear (term);
 }
 
 /* ============================================================= */
