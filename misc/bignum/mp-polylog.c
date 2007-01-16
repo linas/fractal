@@ -298,6 +298,65 @@ bailout:
 	return rc;
 }
 
+/* Implement the following reflection formula for polylog:
+ * Li_s(z) = - e^{i\pi s} Li_s(1/z) 
+ *           + (2pi i)^s zeta(1-s, ln z/(2pi i)) / Gamma (s)
+ */
+static void polylog_reflect (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+{
+	mpf_t twopi;
+	mpf_init (twopi);
+	fp_two_pi (twopi, prec);
+
+	cpx_t s, oz, tmp, ph, term, logz;
+	cpx_init (s);
+	cpx_init (oz);
+	cpx_init (tmp);
+	cpx_init (term);
+	cpx_init (ph);
+	cpx_init (logz);
+	cpx_set (s, ess);
+	cpx_recip (oz, zee);
+
+	/* compute ph = e^{i pi s / 2} = i^s */
+	cpx_mul_mpf (tmp, s, twopi);
+	cpx_div_ui (tmp,tmp, 4);
+	cpx_times_i (tmp, tmp);
+	cpx_exp (ph, tmp, prec);
+
+	/* - e^i\pi s Li_s(1/z) */
+	cpx_polylog (plog, s, oz, prec);
+	cpx_mul (plog, plog, ph);
+	cpx_mul (plog, plog, ph);
+	cpx_neg (plog, plog);
+
+	/* compute ln z/(2pi i) */
+	cpx_log (logz, oz, prec);
+	cpx_div_mpf (logz, logz, twopi);
+	cpx_times_i (logz, logz);
+
+	/* zeta (1-s, ln z/(2pi i)) */
+	cpx_ui_sub (tmp, 1, 0, s);
+	cpx_hurwitz_taylor (term, tmp, logz, prec);
+
+	/* (2pi)^s i^s zeta /gamma (s) */
+	cpx_mul (term, term, ph);
+	cpx_mpf_pow (tmp, twopi, s, prec);
+	cpx_mul (term, term, tmp);
+	cpx_gamma (tmp, s, prec);
+	cpx_div (term, term, tmp);
+
+	cpx_add (plog, plog, term);
+
+	cpx_clear (s);
+	cpx_clear (oz);
+	cpx_clear (logz);
+	cpx_clear (tmp);
+	cpx_clear (term);
+	cpx_clear (ph);
+	mpf_clear (twopi);
+}
+
 static inline int polylog_recurse_duple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	int rc;
@@ -509,6 +568,13 @@ static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int pr
 
 int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 {
+	// xxx hack
+	double rez = mpf_get_d (zee[0].re);
+	if (rez >1.0)
+	{
+		polylog_reflect (plog, ess, zee, prec);
+		return 0;
+	}
 	int rc = recurse_polylog (plog, ess, zee, prec, 0);
 	if (rc)
 	{
