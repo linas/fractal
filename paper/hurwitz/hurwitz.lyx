@@ -84,8 +84,8 @@ An efficient algorithm for computing the Riemann zeta function
 \end_inset 
 
 .
- By using the duplication formula and the reflection formula, the range
- of convergence for the polylogarithm may be extended to the entire complex
+ By using the duplication formula and the inversion formula, the range of
+ convergence for the polylogarithm may be extended to the entire complex
  
 \begin_inset Formula $z$
 \end_inset 
@@ -107,7 +107,7 @@ An efficient algorithm for computing the Riemann zeta function
 
 .
  The speed of the algorithm is significantly superior to a Taylor's series
- in evaluation for the Hurwitz zeta; quadratically so when a large number
+ for the evaluation of the Hurwitz zeta; quadratically so when a large number
  of digits of precision is required.
  The speed is approximately linear in the number of operations required,
  although it does require the computation of integers raised to a complex
@@ -1962,67 +1962,134 @@ The equivalent formulas for the polylogarithm are
 
 \end_inset 
 
- 
+
 \layout Standard
 
-The repeated application of the duplication formula is crucial for the extension
- of the algorithm to points that get near 
+The application of the duplication formula, together with the inversion
+ relation 
+\begin_inset LatexCommand \ref{eq:poly-hur relation}
+
+\end_inset 
+
+ can be used to extend the evaluation of the polylogarithm to the entire
+ complex plane.
+ Both formulas must be applied, one alone is not enough.
+ Consider first the application of the duplication formula only.
+ It may be used to take points that are near to 
 \begin_inset Formula $z=1$
 \end_inset 
 
-; indeed, one can get arbitrarily close to 
+, and map them further away from 
 \begin_inset Formula $z=1$
 \end_inset 
 
- in this way.
- A more general application of the duplication formula, to extend the algorithm
- to the entire complex 
-\begin_inset Formula $z$
-\end_inset 
-
--plane, is stymied by the fact that the algorithm presented above utterly
- fails near the branch cut.
- Using only the duplication formula, together with the polynomial approximation,
- allows the polylogarithm to be evaluated on a kidney-shaped region on the
- complex 
-\begin_inset Formula $z$
-\end_inset 
-
--plane.
- The cusp of the kidney is located at 
+, into the convergent region for the Borwein polynomial.
+ Repeated application allows arbitrarily close approach to 
 \begin_inset Formula $z=1$
 \end_inset 
 
-; the kidney contains the unit disk 
+ from the left-hand side.
+ The resulting region of convergence is kidney-shaped, with the cusp of
+ the kidney at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and the kidney containing the unit disk 
 \begin_inset Formula $\left|z\right|\le1$
 \end_inset 
 
-, excluding the point 
-\begin_inset Formula $z=1$
-\end_inset 
-
 .
- Although the precise shape of the kidney depends on the number of terms
- one wishes to use in the polynomial approximation, the shape that can be
- acheived while still maintaining good running time is shown in figure 
+ The precise shape of the kidney depends on the number of terms one wishes
+ to use in the polynomial approximation, the shape that can be acheived
+ while still maintaining good running time is shown in figure 
 \begin_inset LatexCommand \ref{cap:Polylogarithm-phase-plot}
 
 \end_inset 
 
 .
- 
+ However, as can be seen, this strategy barely penetrates the 
+\begin_inset Formula $\Re z>1$
+\end_inset 
+
+ region.
 \layout Standard
 
-One may extend the XXXX
+To extend the algorithm to the entire complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, one must make use of the inversion formula
 \layout Standard
 
-by moving values away from the branch cut with the relation 
+
 \begin_inset Formula \[
 e^{-i\pi2/s}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}{z}\right)=\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\zeta\left(1-s,\frac{\log z}{2\pi i}\right)\]
 
 \end_inset 
 
-Blah blah z=+1 for this, use the duplication for the interior etc.
+ together with some sort of independent means of evaluating the Hurwitz
+ zeta function.
+ The Taylor expansion 
+\begin_inset LatexCommand \ref{eq:Hurwitz taylor}
+
+\end_inset 
+
+ is particularly well-suited, as it is rapidly convergent in the vicinity
+ of 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Specifically, it is convergent when 
+\begin_inset Formula $\left|\log z\right|<2\pi$
+\end_inset 
+
+, although the region of acceptable numerical convergence is smaller, roughly
+ 
+\begin_inset Formula $\left|\log z\right|<\pi$
+\end_inset 
+
+.
+ Either way, this encompasses a rather large region in the vicinity of 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, which is exactly the region where the Borwein algorithm has trouble.
+ The inversion formula is used to move points 
+\begin_inset Formula $\left|z\right|>1$
+\end_inset 
+
+ outside of the unit circle to the inside.
+ Not all points inside the unit circle are directly accessible to the Borwein
+ algorithm; the duplication formula must still be used to handle points
+ in the disk interior that are near 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Similarly, points with very large 
+\begin_inset Formula $z$
+\end_inset 
+
+, such as those for which 
+\begin_inset Formula $\left|z\right|>e^{2\pi}$
+\end_inset 
+
+, require the use of the duplication formula to be moved into the region
+ of convergence for the Hurwitz Taylor series.
+ A typical view of the polylogarithm on the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane is shown in figure 
+\begin_inset LatexCommand \ref{cap:Polylog-whole-plane}
+
+\end_inset 
+
+.
+\layout Standard
+
+xxxBlah blah discuss the branch cut XXX.
 \layout Section
 
 Validation
@@ -2987,9 +3054,9 @@ fingers
 
 .
  The outer boundary of the image, adjoining to the solid green area, represents
- the limit of convergence of the algorithm; one can enlarge the region of
- convergence slightly, but not much, but using polynomial approximations
- of higher order.
+ the limit of convergence for the combination of the Borwein algorithm and
+ the duplication formula; one can enlarge the region of convergence slightly,
+ but not much, but using polynomial approximations of higher order.
  The image is offset somehat, rather than being centered on 
 \begin_inset Formula $z=0$
 \end_inset 
@@ -3034,6 +3101,122 @@ generated with fractal/generate/polylog.C
 \end_inset 
 
 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Polylog-whole-plane}
+
+\end_inset 
+
+Polylog whole plane
+\layout Standard
+
+
+\begin_inset Graphics
+	filename polylog-whole.png
+	width 100text%
+
+\end_inset 
+
+ 
+\layout Standard
+
+This image illustrates the results of combining the Borwein algorithm together
+ with the inversion and duplication formulas.
+ The image shows the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, is centered on 
+\begin_inset Formula $z=0,$
+\end_inset 
+
+ and runs from -3.5 to +3.5, left to right, top to bottom.
+ The value of 
+\begin_inset Formula $s$
+\end_inset 
+
+ is fixed at 
+\begin_inset Formula $s=0.5+15i$
+\end_inset 
+
+ for the whole picture.
+ The color scheme is the same as for the previous picture.
+ 
+\layout Standard
+
+Besides the zero at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ at the center of the picture, another zero is visible to the left, and
+ slightly down.
+ This zero is an 
+\begin_inset Quotes eld
+\end_inset 
+
+ex-Riemann zero
+\begin_inset Quotes erd
+\end_inset 
+
+, in that, if instead one had created the image for 
+\begin_inset Formula $s=0.5+i14.1347\ldots$
+\end_inset 
+
+, then this point would have been located exactly at 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ As it happens, this point has now rotated to slightly below 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ The zeroes above and to the right of the origin are Riemann zeroes to be:
+ as 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ increases, each will in turn rotate counterclockwise to assume the position
+ at 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The concentric shells are centered on the point 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ This image does not show the conventional location of the branch cut extending
+ from 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ By convention, one may take the branch cut to extend to the right of 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, on the positive real axis.
+ In this image, the branch cut is placed on a more contorted route: it extends
+ downwards, in a rough hemi-circular way, eventually hitting the negative
+ real axis, where it continues onto negative infinity.
+ 
 \end_inset 
 
 
