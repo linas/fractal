@@ -28,14 +28,14 @@ static void psi_init (int cmd_prec, double ims)
 	// prec = 55;
 	// prec = 45;
 	// prec = 35;
-	prec = 25;
-	// prec = 15;
+	// prec = 25;
+	prec = 20;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
 	
 	/* the variable-precision calculations are touchy about this */
-	int bits = (int) (v + 460);
+	int bits = (int) (v + 120);
 	
 	/* Set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
@@ -56,7 +56,7 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	static int init = 0;
 	if (!init) {psi_init(itermax, param); init=1; }
 		  
-	// printf ("duude compute %g  %g \n", re_q, im_q);
+	printf ("duude compute %g  %g \n", re_q, im_q);
 
 	cpx_set_d (zee, re_q, im_q);
 	cpx_polylog (zeta, ess, zee, prec);
