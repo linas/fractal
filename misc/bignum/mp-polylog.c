@@ -612,9 +612,9 @@ static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee
 	 * that the algo is working well, this seems to almost
 	 * never be needed (!?).
 	 */
-	if (9 < depth)
+	if (5 < depth)
 	{
-		// fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
+		fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
 		return 1;
 	}
 	depth ++;
@@ -681,6 +681,16 @@ static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee
 		return 0;
 	}
 
+	/* Everything inside the unit circle is best handled by the
+	 * recurse_away algorithm, which is proven, safe and effective.
+	 * In fact, this should even be extended a bit, probably?
+	 */
+	if (mod <= 1.0)
+	{
+		rc = recurse_away_polylog (plog, ess, zee, prec, depth);
+		return rc;
+	}
+
 	/* Use the polylog-hurwitz reflection formula, if the z value
 	 * is sufficiently close to z=1. Basically, the hurwitz series 
 	 * converges well when |q| < 0.5, or, in this case, if 
@@ -697,7 +707,7 @@ static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee
 	 * so the only option is to use the duplication formula to try 
 	 * to get into one of these regions.
 	 */
-	// printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
+	printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
 
 	rc = polylog_recurse_sqrt (plog, ess, zee, prec, depth);
 	return rc;
