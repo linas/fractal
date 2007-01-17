@@ -485,7 +485,8 @@ int cpx_polylog_away (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 
 static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth);
 
-static inline int polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+static inline int 
+polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	int rc;
 	cpx_t zroot, s, pp, pn;
@@ -529,7 +530,8 @@ bailout:
  * Li_s(z) = - e^{i\pi s} Li_s(1/z) 
  *           + (2pi i)^s zeta(1-s, ln z/(2pi i)) / Gamma (s)
  */
-static void polylog_reflect (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+static int 
+polylog_reflect(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	mpf_t twopi;
 	mpf_init (twopi);
@@ -552,7 +554,9 @@ static void polylog_reflect (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	cpx_exp (ph, tmp, prec);
 
 	/* - e^i\pi s Li_s(1/z) */
-	cpx_polylog (plog, s, oz, prec);
+	int rc = recurse_towards_polylog (plog, s, oz, prec, depth);
+	if (rc) goto bail;
+	
 	cpx_mul (plog, plog, ph);
 	cpx_mul (plog, plog, ph);
 	cpx_neg (plog, plog);
@@ -575,6 +579,7 @@ static void polylog_reflect (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 
 	cpx_add (plog, plog, term);
 
+bail:
 	cpx_clear (s);
 	cpx_clear (oz);
 	cpx_clear (logz);
@@ -582,6 +587,7 @@ static void polylog_reflect (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	cpx_clear (term);
 	cpx_clear (ph);
 	mpf_clear (twopi);
+	return rc;
 }
 
 /**
@@ -589,8 +595,8 @@ static void polylog_reflect (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
  *
  * Evaluate the polylog directly, if possible; else use the 
  * duplication formula to get into a region where its directly 
- * evaluable. The duplication formula is used to move away from
- * z=1, and the Hurwitz series at z=1 is *not* used.
+ * evaluable. The duplication formula is used to towards z=1
+ * which is where the Hurwitz series at z=1 can be employed.
  * 
  * Return a non-zero value if no value was computed.
  */
@@ -600,9 +606,6 @@ static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee
 	double zre = mpf_get_d (zee[0].re);	
 	double zim = mpf_get_d (zee[0].im);	
 	double mod = zre*zre + zim*zim;
-
-	/* The algo will never converge when modulus >= 5 or so */
-	if (25 < mod) return 1;
 
 	/*
 	 * Limit the dept of recursion to avoid run-away. Now
@@ -663,55 +666,45 @@ static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee
 	int maxterms = nbits - (int) (3.321928095 *prec); /* log(10) / log(2) */
 
 // printf ("invoke, z=%g +i %g  den=%g nterms=%d, maxterms=%d\n", zre, zim, den, nterms, maxterms);
-	/* if (4> nterms) (i.e. nterms is negative), then the thing will
-	 * never converge, and so subdivision is the only option.
-	 * Uhh, this should be equivalent to den>15, and we already subdivide
-	 * for large den.
-	 * 
-	 * The algo seems to have some trouble near z=1 when 
-	 * if (den>4) is used to decide subdivision. 
-	 */
-	if ((den > 1.5) || (maxterms < nterms))
-	{
-		// printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
-		rc = polylog_recurse_duple (plog, ess, zee, prec, depth);
-		/* 
-		 * The angle-tripling recursion equation is not as effective 
-		 * as the angle-doubling equation in pulling points into the
-		 * zone of convergence. So we don't use it.
-		 *
-		 * rc = polylog_recurse_triple (plog, ess, zee, prec, depth);
-		 */
-		return rc;
 
-		/* 
-		 * Under no circumstances does it ever seem to work to bring
-		 * distant points closer in by using the sqrt relation to 
-		 * pull them in. The problem seems to be that distant points
-		 * get pulled in close to z>=1, where they can't be evaluated 
-		 * anyway, so this is no particular help.
-		 * 
-		 * rc = polylog_recurse_sqrt (plog, ess, zee, prec, depth);
-		 */
-	}
-	
-	/* Use the larger, adjusted internal precision discussed above
-	 * in the final calculation.
+	/* If the z value is sufficently close to z=-1, then the Borwein 
+	 * algorithm can be applied directly. So apply it. Oh, make sure
+	 * that it doesn't take a hopeless numer of terms to get there.
 	 */
-	prec += (int) (0.301029996 * nterms) +1;
-	polylog_borwein (plog, ess, zee, nterms, prec);
-	return 0;
+	if ((den < 1.5) && (maxterms > nterms))
+	{
+		/* Use the larger, adjusted internal precision discussed above
+		 * in the final calculation.
+		 */
+		prec += (int) (0.301029996 * nterms) +1;
+		polylog_borwein (plog, ess, zee, nterms, prec);
+		return 0;
+	}
+
+	/* Use the polylog-hurwitz reflection formula, if the z value
+	 * is sufficiently close to z=1. Basically, the hurwitz series 
+	 * converges well when |q| < 0.5, or, in this case, if 
+	 * |ln z / (2 pi i) | < 0.5. Note that flt point is good 
+	 * enough for this test.
+	 */
+	if (log(mod) < 6.28)
+	{
+		rc = polylog_reflect (plog, ess, zee, prec, depth);
+		return rc;
+	}
+
+	/* If we are here, we are not close to either z=-1 or z=+1, and
+	 * so the only option is to use the duplication formula to try 
+	 * to get into one of these regions.
+	 */
+	// printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
+
+	rc = polylog_recurse_sqrt (plog, ess, zee, prec, depth);
+	return rc;
 }
 
 int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 {
-	// xxx hack
-	double rez = mpf_get_d (zee[0].re);
-	if (rez >1.0)
-	{
-		polylog_reflect (plog, ess, zee, prec);
-		return 0;
-	}
 	int rc = recurse_towards_polylog (plog, ess, zee, prec, 0);
 	if (rc)
 	{
