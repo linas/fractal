@@ -256,8 +256,235 @@ zre, zim, sqrt(den), prec,  -0.5*log(den) + 1.386294361, nterms, gamterms, cterm
 	return nterms;
 }
 
-static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth);
-		  
+/* ============================================================= */
+
+static int recurse_away_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth);
+  
+static inline int polylog_recurse_duple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+{
+	int rc;
+	cpx_t zsq, s, pp, pn;
+	cpx_init (zsq);
+	cpx_init (s);
+	cpx_init (pp);
+	cpx_init (pn);
+
+	cpx_mul (zsq, zee, zee);
+	cpx_set (s, ess);
+
+#if 0
+cpx_prt ("dupl zee= ", zee);
+printf ("\n");
+cpx_prt ("zsq= ", zsq);
+printf ("\n");
+#endif
+	rc = recurse_away_polylog (pp, s, zsq, prec, depth);
+	if (rc) goto bailout;
+
+	cpx_neg (zsq, zee);
+	rc = recurse_away_polylog (pn, s, zsq, prec, depth);
+	if (rc) goto bailout;
+
+	/* now, compute 2^{1-s} in place */
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_neg (s, s);
+	cpx_ui_pow (s, 2, s, prec);
+	cpx_mul (plog, pp, s);
+
+	cpx_sub (plog, plog, pn);
+	
+bailout:
+	cpx_clear (s);
+	cpx_clear (pp);
+	cpx_clear (pn);
+	cpx_clear (zsq);
+	return rc;
+}
+
+static inline int polylog_recurse_triple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+{
+	int rc;
+	cpx_t zcu, s, tr, pp, pu, pd;
+	cpx_init (zcu);
+	cpx_init (s);
+	cpx_init (tr);
+	cpx_init (pp);
+	cpx_init (pu);
+	cpx_init (pd);
+
+	cpx_set (s, ess);
+
+	cpx_mul (zcu, zee, zee);
+	cpx_mul (zcu, zcu, zee);
+	rc = recurse_away_polylog (pp, s, zcu, prec, depth);
+	if (rc) goto bailout;
+
+	/* tr = exp (i 2pi/3) = -1/2  + i sqrt(3)/2 */
+	mpf_set_ui (tr[0].re, 1);
+	mpf_div_ui (tr[0].re, tr[0].re, 2);
+	mpf_neg (tr[0].re, tr[0].re);
+	fp_half_sqrt_three (tr[0].im);
+	
+	cpx_mul (zcu, tr, zee);
+	rc = recurse_away_polylog (pu, s, zcu, prec, depth);
+	if (rc) goto bailout;
+
+	cpx_mul (zcu, tr, zcu);
+	rc = recurse_away_polylog (pd, s, zcu, prec, depth);
+	if (rc) goto bailout;
+
+	/* now, compute 3^{1-s} in place */
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_neg (s, s);
+	cpx_ui_pow (s, 3, s, prec);
+	cpx_mul (plog, pp, s);
+
+	cpx_sub (plog, plog, pu);
+	cpx_sub (plog, plog, pd);
+	
+bailout:
+	cpx_clear (s);
+	cpx_clear (tr);
+	cpx_clear (pp);
+	cpx_clear (pu);
+	cpx_clear (pd);
+	cpx_clear (zcu);
+	return rc;
+}
+
+/**
+ * recurse_away_polylog() -- use duplication formula to extend domain
+ *
+ * Evaluate the polylog directly, if possible; else use the 
+ * duplication formula to get into a region where its directly 
+ * evaluable. The duplication formula is used to move away from
+ * z=1, and the Hurwitz series at z=1 is *not* used.
+ * 
+ * Return a non-zero value if no value was computed.
+ */
+static int recurse_away_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+{
+	int rc;
+	double zre = mpf_get_d (zee[0].re);	
+	double zim = mpf_get_d (zee[0].im);	
+	double mod = zre*zre + zim*zim;
+
+	/* The algo will never converge when modulus >= 5 or so */
+	if (25 < mod) return 1;
+
+	/*
+	 * Limit the dept of recursion to avoid run-away. Now
+	 * that the algo is working well, this seems to almost
+	 * never be needed (!?).
+	 */
+	if (9 < depth)
+	{
+		// fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
+		return 1;
+	}
+	depth ++;
+
+	/*
+	 * The Borwein algo seems to always be faster than direct 
+	 * summation, even when the direct-sum region is made quite 
+	 * small, e.g. even when it is of radius less than 1/4.
+	 * Never use direct summation.
+	 */
+#if 0
+	if (0.0625>mod)
+	{
+		cpx_polylog_sum (plog, ess, zee, prec);
+		return 0;
+	}
+#endif
+
+	/* The zone of convergence for the Borwein algorithm is 
+	 * |z^2/(z-1)| < 3.  If z is within this zone, then all is 
+	 * well. If not, use the duplication formula to make 
+	 * recursive calls, until the leaves of the recursion 
+	 * are in this zone. 
+	 *
+	 * The algo seems to be more precise (!??) and have less 
+	 * trouble when an even smaller bound is used, e.g.
+	 * when |z^2/(z-1)| < 1.25. The non-recursive algo seems
+	 * to choke up when it gets too close to z=1.
+	 */
+
+	/* den = | z^2/(z-1)|^2 */
+	double den = polylog_get_zone (zre, zim);
+
+	/* nterms = number of terms needed for computation */
+	int nterms = polylog_terms_est (ess, zee, prec);
+
+	/* To carry out the computation, an internal precision is needed 
+	 * that is a bit higher than what the user asked for. This internal
+	 * precision depends on the degree of the approximating polynomial.
+	 * Thus, look at the available bits of precision, and decide if
+	 * the calculation can be performed in that way. 
+	 *
+	 * The degree of internal precision available limits the largest
+	 * effective order of the apprximating polynomial that can be used.
+	 * Its pointless/erroneous to try to use a polynomial of degree
+	 * more than "maxterms".
+	 */
+	int nbits = mpf_get_default_prec();
+	int maxterms = nbits - (int) (3.321928095 *prec); /* log(10) / log(2) */
+
+// printf ("invoke, z=%g +i %g  den=%g nterms=%d, maxterms=%d\n", zre, zim, den, nterms, maxterms);
+	/* if (4> nterms) (i.e. nterms is negative), then the thing will
+	 * never converge, and so subdivision is the only option.
+	 * Uhh, this should be equivalent to den>15, and we already subdivide
+	 * for large den.
+	 * 
+	 * The algo seems to have some trouble near z=1 when 
+	 * if (den>4) is used to decide subdivision. 
+	 */
+	if ((den > 1.5) || (maxterms < nterms))
+	{
+		// printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
+		rc = polylog_recurse_duple (plog, ess, zee, prec, depth);
+		/* 
+		 * The angle-tripling recursion equation is not as effective 
+		 * as the angle-doubling equation in pulling points into the
+		 * zone of convergence. So we don't use it.
+		 *
+		 * rc = polylog_recurse_triple (plog, ess, zee, prec, depth);
+		 */
+		return rc;
+
+		/* 
+		 * Under no circumstances does it ever seem to work to bring
+		 * distant points closer in by using the sqrt relation to 
+		 * pull them in. The problem seems to be that distant points
+		 * get pulled in close to z>=1, where they can't be evaluated 
+		 * anyway, so this is no particular help.
+		 * 
+		 * rc = polylog_recurse_sqrt (plog, ess, zee, prec, depth);
+		 */
+	}
+	
+	/* Use the larger, adjusted internal precision discussed above
+	 * in the final calculation.
+	 */
+	prec += (int) (0.301029996 * nterms) +1;
+	polylog_borwein (plog, ess, zee, nterms, prec);
+	return 0;
+}
+
+int cpx_polylog_away (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+{
+	int rc = recurse_away_polylog (plog, ess, zee, prec, 0);
+	if (rc)
+	{
+		cpx_set_ui (plog, 0,0);
+	}
+	return rc;
+}
+
+/* ============================================================= */
+
+static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth);
+
 static inline int polylog_recurse_sqrt (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	int rc;
@@ -276,11 +503,11 @@ printf ("\n");
 cpx_prt ("zroot= ", zroot);
 printf ("\n");
 #endif
-	rc = recurse_polylog (pp, s, zroot, prec, depth);
+	rc = recurse_towards_polylog (pp, s, zroot, prec, depth);
 	if (rc) goto bailout;
 
 	cpx_neg (zroot, zroot);
-	rc = recurse_polylog (pn, s, zroot, prec, depth);
+	rc = recurse_towards_polylog (pn, s, zroot, prec, depth);
 	if (rc) goto bailout;
 
 	cpx_add (plog, pp, pn);
@@ -357,107 +584,17 @@ static void polylog_reflect (cpx_t plog, const cpx_t ess, const cpx_t zee, int p
 	mpf_clear (twopi);
 }
 
-static inline int polylog_recurse_duple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
-{
-	int rc;
-	cpx_t zsq, s, pp, pn;
-	cpx_init (zsq);
-	cpx_init (s);
-	cpx_init (pp);
-	cpx_init (pn);
-
-	cpx_mul (zsq, zee, zee);
-	cpx_set (s, ess);
-
-#if 0
-cpx_prt ("dupl zee= ", zee);
-printf ("\n");
-cpx_prt ("zsq= ", zsq);
-printf ("\n");
-#endif
-	rc = recurse_polylog (pp, s, zsq, prec, depth);
-	if (rc) goto bailout;
-
-	cpx_neg (zsq, zee);
-	rc = recurse_polylog (pn, s, zsq, prec, depth);
-	if (rc) goto bailout;
-
-	/* now, compute 2^{1-s} in place */
-	cpx_sub_ui (s, s, 1, 0);
-	cpx_neg (s, s);
-	cpx_ui_pow (s, 2, s, prec);
-	cpx_mul (plog, pp, s);
-
-	cpx_sub (plog, plog, pn);
-	
-bailout:
-	cpx_clear (s);
-	cpx_clear (pp);
-	cpx_clear (pn);
-	cpx_clear (zsq);
-	return rc;
-}
-
-static inline int polylog_recurse_triple (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
-{
-	int rc;
-	cpx_t zcu, s, tr, pp, pu, pd;
-	cpx_init (zcu);
-	cpx_init (s);
-	cpx_init (tr);
-	cpx_init (pp);
-	cpx_init (pu);
-	cpx_init (pd);
-
-	cpx_set (s, ess);
-
-	cpx_mul (zcu, zee, zee);
-	cpx_mul (zcu, zcu, zee);
-	rc = recurse_polylog (pp, s, zcu, prec, depth);
-	if (rc) goto bailout;
-
-	/* tr = exp (i 2pi/3) = -1/2  + i sqrt(3)/2 */
-	mpf_set_ui (tr[0].re, 1);
-	mpf_div_ui (tr[0].re, tr[0].re, 2);
-	mpf_neg (tr[0].re, tr[0].re);
-	fp_half_sqrt_three (tr[0].im);
-	
-	cpx_mul (zcu, tr, zee);
-	rc = recurse_polylog (pu, s, zcu, prec, depth);
-	if (rc) goto bailout;
-
-	cpx_mul (zcu, tr, zcu);
-	rc = recurse_polylog (pd, s, zcu, prec, depth);
-	if (rc) goto bailout;
-
-	/* now, compute 3^{1-s} in place */
-	cpx_sub_ui (s, s, 1, 0);
-	cpx_neg (s, s);
-	cpx_ui_pow (s, 3, s, prec);
-	cpx_mul (plog, pp, s);
-
-	cpx_sub (plog, plog, pu);
-	cpx_sub (plog, plog, pd);
-	
-bailout:
-	cpx_clear (s);
-	cpx_clear (tr);
-	cpx_clear (pp);
-	cpx_clear (pu);
-	cpx_clear (pd);
-	cpx_clear (zcu);
-	return rc;
-}
-
-/* recurse_polylog() -- use duplication formula to extend domain
+/**
+ * recurse_towards_polylog() -- use duplication formula to extend domain
  *
  * Evaluate the polylog directly, if possible; else use the 
  * duplication formula to get into a region where its directly 
- * evaluable.
+ * evaluable. The duplication formula is used to move away from
+ * z=1, and the Hurwitz series at z=1 is *not* used.
  * 
  * Return a non-zero value if no value was computed.
  */
-static int recurse_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	int rc;
 	double zre = mpf_get_d (zee[0].re);	
@@ -575,7 +712,7 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 		polylog_reflect (plog, ess, zee, prec);
 		return 0;
 	}
-	int rc = recurse_polylog (plog, ess, zee, prec, 0);
+	int rc = recurse_towards_polylog (plog, ess, zee, prec, 0);
 	if (rc)
 	{
 		cpx_set_ui (plog, 0,0);
