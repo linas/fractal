@@ -35,8 +35,28 @@ void fp_hasse_zeta (mpf_t zeta, unsigned int s, int prec);
 /* Same, using P. Borwein convergent algo */
 void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec);
 
-/* P. Borwein zeta for complex argument */
+/**
+ * cpx_borwein_zeta -- use the Borwein algorithm for complex argument
+ * 
+ * Compute and return a value for the Riemann zeta function, for
+ * a complex value of 's'. Uses the  P. Borwein algorithm for 
+ * rapid computation.
+ */
 void cpx_borwein_zeta (cpx_t zeta, const cpx_t ess, int prec);
+
+/**
+ * cpx_borwein_zeta_cache -- Caching Riemann zeta for complex argument
+ * 
+ * Compute and return a value for the Riemann zeta function, for
+ * a complex value of 's+n'. Uses the  P. Borwein algorithm for 
+ * rapid computation.
+ *
+ * If the value of 's' is held constant, while the value of 'n'
+ * is varied, then this routine caches the computed values,
+ * returning the cached values on the second and later calls,
+ * thus avoiding the overhead of repeated recalculation.
+ */
+void cpx_borwein_zeta_cache (cpx_t zeta, const cpx_t ess, unsigned int n, int prec);
 
 /* Brute-force summation */
 void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec);

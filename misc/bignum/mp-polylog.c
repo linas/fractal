@@ -561,10 +561,21 @@ polylog_reflect(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int dept
 	cpx_mul (plog, plog, ph);
 	cpx_neg (plog, plog);
 
+#if 0
 	/* compute ln z/(2pi i) */
 	cpx_log (logz, oz, prec);
 	cpx_div_mpf (logz, logz, twopi);
 	cpx_times_i (logz, logz);
+#else
+	/* compute (ln (-z) + i pi) /(2pi i) */
+	cpx_neg (oz, oz);
+	cpx_log (logz, oz, prec);
+	cpx_div_mpf (logz, logz, twopi);
+	cpx_times_i (logz, logz);
+	mpf_set_ui (tmp[0].re, 1);
+	mpf_div_ui (tmp[0].re, tmp[0].re, 2);
+	mpf_add (logz[0].re, logz[0].re, tmp[0].re);
+#endif
 
 	/* zeta (1-s, ln z/(2pi i)) */
 	cpx_ui_sub (tmp, 1, 0, s);
@@ -1037,8 +1048,9 @@ void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 
 void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 {
-	cpx_t s, q, qn, bin, term;
+	cpx_t s, sn, q, qn, bin, term;
 	cpx_init (s);
+	cpx_init (sn);
 	cpx_init (q);
 	cpx_init (qn);
 	cpx_init (bin);
@@ -1053,22 +1065,24 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 	cpx_set (s, ess);
 	cpx_set (q, que);
 
+	/* compute 1/q^s */
 	cpx_neg (s, s);
 	cpx_pow (zee, q, s, prec);
 	cpx_neg (s, s);
 
 	cpx_neg (q, q);
 	cpx_set_ui (qn, 1, 0);
-	cpx_sub_ui (s, s, 1, 0);
+	cpx_sub_ui (sn, s, 1, 0);
 	int n = 0;
 	while (1)
 	{
 		/* s+n-1 */
-		cpx_binomial (bin, s, n);
+		cpx_binomial (bin, sn, n);
+		cpx_add_ui (sn, sn, 1, 0);
 
-		/* s+n */
-		cpx_add_ui (s, s, 1, 0);
-		cpx_borwein_zeta (term, s, prec);
+		/* zeta_cache returns vale at s+n */
+		cpx_borwein_zeta_cache (term, s, n, prec);
+		// cpx_borwein_zeta (term, sn, prec);
 		cpx_mul (term, term, bin);
 		cpx_mul (term, term, qn);
 		cpx_add (zee, zee, term);
@@ -1084,6 +1098,7 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 	}
 
 	cpx_clear (s);
+	cpx_clear (sn);
 	cpx_clear (q);
 	cpx_clear (qn);
 	cpx_clear (bin);

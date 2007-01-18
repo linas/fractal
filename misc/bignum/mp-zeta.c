@@ -898,6 +898,41 @@ void cpx_borwein_zeta (cpx_t zeta, const cpx_t s, int prec)
 	cpx_clear (ess);
 }
 
+void cpx_borwein_zeta_cache (cpx_t zeta, const cpx_t s, unsigned int n, int prec)
+{
+	DECLARE_CPX_CACHE (cache);
+	static int cinit = 0;
+	static cpx_t cache_s;
+	if (!cinit)
+	{
+		cinit = 1;
+		cpx_init (cache_s);
+		cpx_set_ui (cache_s, 1, 0);
+	}
+
+	/* First, check if this is the same s value as before */
+	if (!cpx_eq (cache_s, s, prec*3.322))
+	{
+		cpx_one_d_cache_clear (&cache);
+		cpx_set (cache_s, s);
+	}
+	
+	/* Check the local cache */
+	int have_prec = cpx_one_d_cache_check (&cache, n);
+	if (have_prec >= prec)
+	{
+		cpx_one_d_cache_fetch (&cache, zeta, n);
+		return;
+	}
+
+	cpx_t ess;
+	cpx_init (ess);
+	cpx_add_ui (ess, s, n, 0);
+	cpx_borwein_zeta (zeta, ess, prec);
+	cpx_one_d_cache_store (&cache, zeta, n, prec);
+	cpx_clear (ess);
+}
+
 /* ======================================================================= */
 /* fp_zeta
  * Floating-point-valued Riemann zeta for positive integer arguments 
@@ -950,7 +985,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		return;
 	}
 
-	/* first, check the local cache */
+	/* First, check the local cache */
 	int have_prec = fp_one_d_cache_check (&cache, s);
 	if (have_prec >= prec)
 	{
@@ -958,7 +993,7 @@ void fp_zeta (mpf_t zeta, unsigned int s, int prec)
 		return;
 	}
 	
-	/* check the disk cache next */
+	/* Check the disk cache next */
 	if (fp_cache_get (ZETA_DB_NAME, zeta, s, prec)) 
 	{
 		mpf_add_ui (zeta, zeta, 1);
