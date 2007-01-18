@@ -1827,6 +1827,376 @@ j\end{array}\right)$
  use of the duplication formula, as discussed in the next section.
 \layout Section
 
+Performance
+\layout Standard
+
+The performance of the Borwein algorithm appears to be very good.
+ In fact, it appears to have better performance than the direct summation
+ formula 
+\begin_inset LatexCommand \ref{eq:polylog definition}
+
+\end_inset 
+
+ in all cases, even when direct summation might seem to have an advantage.
+ The figures 
+\begin_inset LatexCommand \ref{cap:Polylogarithm-cold-cache}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{cap:Polylogarithm-warm-cache}
+
+\end_inset 
+
+ compare the performance of actual implementations.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Polylogarithm-cold-cache}
+
+\end_inset 
+
+Polylogarithm cold cache performance
+\layout Standard
+
+
+\begin_inset Graphics
+	filename poly-perf-cold-cache.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the time, in seconds, needed to compute the polylogarithm
+ to the indicated number of decimal places of precision.The values choosen
+ for evaluation are 
+\begin_inset Formula $s=0.5+i14.13$
+\end_inset 
+
+, which is very near to one of the Riemann zeroes, and 
+\begin_inset Formula $z=0.4+i0.3$
+\end_inset 
+
+, which is relatively near to the origin: thus, one might have hoped that,
+ for such a small value (
+\begin_inset Formula $\left|z\right|=0.5$
+\end_inset 
+
+), direct summation migh compete favorably against the Borwein algorithm,
+ as the point is closer to +1 than to -1.
+ Nevertheless, 
+\begin_inset Formula $\left|z^{2}/(z-1)\right|\approx0.373$
+\end_inset 
+
+ for this point, and e Borwein algorithm wins.
+ 
+\layout Standard
+
+The primary contribution to the calculation of the either value is the evaluatio
+n of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ in the sumations.
+ If these are precomputed, the Borwein algorithm still wins, as shown in
+ the next figure.
+ All calculations were performed on a contemporary desktop computer, using
+ the GMP library; the algorithms were implemented in the C programming language.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Polylogarithm-warm-cache}
+
+\end_inset 
+
+Polylogarithm warm cache
+\layout Standard
+
+
+\begin_inset Graphics
+	filename poly-perf-warm-cache.png
+	width 100text%
+
+\end_inset 
+
+This graph compares the compute times for the Borwein algorithm and the
+ direct summation of the polylogarithm, for a 
+\begin_inset Quotes eld
+\end_inset 
+
+warm cache
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ That is, an array of values of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ were precomputed, prior to begining the timing measurements.
+ These precomputed values were used in the Borwein and direct sums.
+ Despite the use of such cached, pre-computed values, the Borwein algorithm
+ still wins.
+ This graph uses the same 
+\begin_inset Formula $s$
+\end_inset 
+
+ and 
+\begin_inset Formula $z$
+\end_inset 
+
+ values as in the previous gaph.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Hurwitz zeta cold cache performance
+\layout Standard
+
+
+\begin_inset Graphics
+	filename hurwitz-perf-cold.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure cmpares the performance of the Borwein algorithm to the evaluation
+ of the Taylor expansion for the Hurwitz zeta.
+ The vales computed are for 
+\begin_inset Formula $s=0.5+i14.13$
+\end_inset 
+
+ and 
+\begin_inset Formula $q=0.2$
+\end_inset 
+
+.
+ For such a small value of 
+\begin_inset Formula $q$
+\end_inset 
+
+, one might have hoped that the Taylor expansion might converge quickly.
+ This appears to not be the case, as the binomial coefficients can grow
+ to be quite large, and thus force many terms to be summed.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Hurwitz zeta warm cache performance
+\layout Standard
+
+
+\begin_inset Graphics
+	filename hurwitz-perf-warm.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure compares the evaluation times for the Borwein algorithm, and
+ the Hurwitz zeta Taylor's expansion, for the 
+\begin_inset Quotes eld
+\end_inset 
+
+warm cache
+\begin_inset Quotes erd
+\end_inset 
+
+ scenario.
+ In this case, it is recognized that if 
+\begin_inset Formula $s$
+\end_inset 
+
+ is assumed to be held fixed, then the values of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ appearing in the Borwein algorithm may be precomputed.
+ Similarly, the values of 
+\begin_inset Formula $\zeta(s+n)$
+\end_inset 
+
+ and the binomial coefficients 
+\begin_inset Formula $\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)$
+\end_inset 
+
+ appearing in the Taylor's series may be precomputed.
+ In this case, the Taylor's series evaluation appears to be almost three
+ times faster.
+ 
+\layout Standard
+
+Performing the precomputations can be terribly expensive.
+ For example, for 100 decimal places of pecision, the precomputations take
+ 5 minutes, and for 150 decimal places, the precomputation takes half an
+ hour.
+ The break-even point, where both algorithms are equally fast at fixed 
+\begin_inset Formula $s$
+\end_inset 
+
+, when including the pre-computation overhead, occurs at about 300 evaluations
+ of 100 decimal places, and 750 evaluations of 150 decimal places.
+ In other words, the precomputation of the 
+\begin_inset Formula $\zeta(s+n)$
+\end_inset 
+
+ and the 
+\begin_inset Formula $\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)$
+\end_inset 
+
+ needed for the Taylor's expansion becomes prohibitively expensive as the
+ number of desired decimal places goes up.
+\end_inset 
+
+
+\layout Standard
+
+The first figure shows 
+\begin_inset Quotes eld
+\end_inset 
+
+cold cache
+\begin_inset Quotes erd
+\end_inset 
+
+ performance, measured in seconds, as compared to the number of desired
+ decimal places of precision.
+ The figure is termed 
+\begin_inset Quotes eld
+\end_inset 
+
+cold cache
+\begin_inset Quotes erd
+\end_inset 
+
+, in recognition of the fact that some constants may be pre-computed.
+ For example, if 
+\begin_inset Formula $s$
+\end_inset 
+
+ is held fixed, while 
+\begin_inset Formula $z$
+\end_inset 
+
+ is varied, then the values of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ appearing in both the direct sum and the Borwein algorithm may be computed
+ once, and then re-used for subsequent calculations.
+ As the figures indicate, computing 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ can be very expensive for general complex-valued 
+\begin_inset Formula $s$
+\end_inset 
+
+, and so the caching strategy offers a big gain when 
+\begin_inset Formula $s$
+\end_inset 
+
+ is held constant.
+ 
+\layout Standard
+
+As the 
+\begin_inset Quotes eld
+\end_inset 
+
+cold cache
+\begin_inset Quotes erd
+\end_inset 
+
+ figure demonstrates, the Borwein algorithm is faster than direct summation.
+ The problem with direct summation is that it requires more values of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ to be computed to acheive comparable precision.
+ 
+\layout Standard
+
+As the 
+\begin_inset Quotes eld
+\end_inset 
+
+warm cache
+\begin_inset Quotes erd
+\end_inset 
+
+ figure shows, the Borwein algorithm will still win against direct summation,
+ even when the values of the 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ are pre-computed.
+ Even when these are pre-computed, and can be pulled from the cache, direct
+ summation still reqires more operations.
+\layout Standard
+
+A different but equally dramatic set of results obtain, when one compares
+ the performance of the Borwein algorithm applied to the Hurwitz zeta function,
+ as compared to the use of the Taylor's expansion 
+\begin_inset LatexCommand \ref{eq:Hurwitz taylor}
+
+\end_inset 
+
+ for the Hurwitz zeta.
+ In this case, as the figures show, the Taylor's series outperforms the
+ Borwein algorithm by a constant factor of three, when both algorithms use
+ precomputed constants.
+ However, the cost of precomputing these constants skyrockets for the Taylor's
+ series, making it unattractive as the number of required decimal places
+ increases.
+\layout Section
+
 Duplication formula
 \layout Standard
 
