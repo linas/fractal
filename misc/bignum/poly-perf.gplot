@@ -37,6 +37,16 @@ set key left
 #      "poly-perf.dat" using 1:(($4/100)) title "Taylor expansion" linewidth 3
 # 
 # -------------------------------------------------------------
+# Settings used to create Hurwitz warm cache figure in text
+# 
+# set title "Compute time for zeta (0.5+i14.13, 0.2) for a warm cache"
+# set xlabel "Decimal digits of precision"
+# set ylabel "Milliseconds"
+# 
+# plot "poly-perf.dat" using 1:(($5*10)) title "Borwein algorithm" linewidth 3, \
+#      "poly-perf.dat" using 1:(($6*10)) title "Taylor expansion" linewidth 3
+# 
+# -------------------------------------------------------------
 
 set title "Compute time for zeta (0.5+i14.13, 0.2) for a warm cache"
 set xlabel "Decimal digits of precision"
@@ -44,5 +54,4 @@ set ylabel "Milliseconds"
 
 plot "poly-perf.dat" using 1:(($5*10)) title "Borwein algorithm" linewidth 3, \
      "poly-perf.dat" using 1:(($6*10)) title "Taylor expansion" linewidth 3
-
 
