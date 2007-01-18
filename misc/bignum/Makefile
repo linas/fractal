@@ -5,7 +5,7 @@
 
 EXES= bound bs bsubn cache-fill cont_frac db-merge db-prt \
       dsubn exact hurwitz minima mp_zeta_test picturez \
-      sho stieltjes trunc zero-cross
+      poly-perf sho stieltjes trunc zero-cross
 
 MPLIB=libzmp.a
 
@@ -24,6 +24,7 @@ exact:	exact.o $(MPLIB)
 hurwitz:	hurwitz.o $(MPLIB)
 mp_zeta_test:	mp_zeta_test.o $(MPLIB)
 picturez:	picturez.o $(MPLIB)
+poly-perf:	poly-perf.o $(MPLIB)
 sho:	sho.o $(MPLIB)
 stieltjes:	stieltjes.o $(MPLIB)
 trunc:	trunc.o

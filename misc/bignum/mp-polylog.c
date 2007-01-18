@@ -1066,8 +1066,11 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 	while (1)
 	{
 		/* s+n-1 */
-		cpx_binomial (bin, sn, n);
-		cpx_add_ui (sn, sn, 1, 0);
+		/* The Caching version uses precomputed values,
+		 * if these are avaliable */
+		// cpx_binomial (bin, sn, n);
+		// cpx_add_ui (sn, sn, 1, 0);
+		cpx_binomial_sum_cache (bin, sn, n);
 
 		/* zeta_cache returns vale at s+n */
 		cpx_borwein_zeta_cache (term, s, n, prec);

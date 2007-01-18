@@ -727,5 +727,42 @@ void cpx_binomial (cpx_t bin, const cpx_t ess, unsigned int k)
 	cpx_clear (bot);
 }
 
+void cpx_binomial_sum_cache (cpx_t bin, const cpx_t ess, unsigned int k)
+{
+	DECLARE_CPX_CACHE (cache);
+	static int cinit = 0;
+	static cpx_t cache_s;
+	if (!cinit)
+	{
+		cinit = 1;
+		cpx_init (cache_s);
+		cpx_set_ui (cache_s, 1, 0);
+	}
+	int prec = mpf_get_default_prec();
+
+	/* First, check if this is the same s value as before */
+	if (!cpx_eq (cache_s, ess, prec))
+	{
+		cpx_one_d_cache_clear (&cache);
+		cpx_set (cache_s, ess);
+	}
+	
+	/* Check the local cache */
+	int have_prec = cpx_one_d_cache_check (&cache, k);
+	if (have_prec >= prec)
+	{
+		cpx_one_d_cache_fetch (&cache, bin, k);
+		return;
+	}
+
+	cpx_t sn;
+	cpx_init (sn);
+	cpx_add_ui (sn, ess, k, 0);
+	cpx_binomial (bin, sn, prec);
+	cpx_one_d_cache_store (&cache, bin, k, prec);
+	cpx_clear (sn);
+}
+
+
 /* =============================== END OF FILE =========================== */
 

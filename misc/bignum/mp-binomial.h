@@ -100,10 +100,19 @@ void cpx_poch_rising (cpx_t poch, const cpx_t s, unsigned int n);
  */
 void fp_binomial_d (mpf_t bin, double s, unsigned int k);
 
-/* cpx_binomial
- * Complex binomial coefficient
+/**
+ * cpx_binomial-- Complex binomial coefficient
+ * Compute the binomial coefficient (s, k)
  */
 void cpx_binomial_d (cpx_t bin, double re_s, double im_s, unsigned int k);
 void cpx_binomial (cpx_t bin, const cpx_t s, unsigned int k);
+
+/**
+ * cpx_binomial_sum_cache-- Complex binomial coefficient
+ * Compute the binomial coefficient for (s+k, k)
+ * This routine caches computed values, and thus can be considerably
+ * faster if called again with the same k and s values.
+ */
+void cpx_binomial_sum_cache (cpx_t bin, const cpx_t s, unsigned int k);
 
 
