@@ -561,21 +561,10 @@ polylog_reflect(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int dept
 	cpx_mul (plog, plog, ph);
 	cpx_neg (plog, plog);
 
-#if 0
 	/* compute ln z/(2pi i) */
 	cpx_log (logz, oz, prec);
 	cpx_div_mpf (logz, logz, twopi);
 	cpx_times_i (logz, logz);
-#else
-	/* compute (ln (-z) + i pi) /(2pi i) */
-	cpx_neg (oz, oz);
-	cpx_log (logz, oz, prec);
-	cpx_div_mpf (logz, logz, twopi);
-	cpx_times_i (logz, logz);
-	mpf_set_ui (tmp[0].re, 1);
-	mpf_div_ui (tmp[0].re, tmp[0].re, 2);
-	mpf_add (logz[0].re, logz[0].re, tmp[0].re);
-#endif
 
 	/* zeta (1-s, ln z/(2pi i)) */
 	cpx_ui_sub (tmp, 1, 0, s);
