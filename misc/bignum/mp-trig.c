@@ -627,114 +627,160 @@ void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec)
 
 /* ======================================================================= */
 /**
- * fp_arctan -  Floating point arctangent
+ * atan_series -  Floating point arctangent
  * Implemented using a brute-force, very simple algo, with 
  * no attempts at optimization. 
  * Implements A&S equation 4.4.42 
- * Current algo is very slow for z near one.
+ * Input value of z should be less than 1/2 for fastest convergence.
  */
 
-void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec)
+static void atan_series (mpf_t atn, const mpf_t zee, unsigned int prec)
 {
-	mpf_t zee, z_n, zsq, term;
+	mpf_t z_n, zsq, term;
 
-	mpf_init (zee);
 	mpf_init (z_n);
 	mpf_init (zsq);
 	mpf_init (term);
 
-	/* Make copy of argument now! */
-	mpf_div (zee, y, x);
-	int sgn_y = mpf_sgn(y);
-	
 	/* Use 10^{-prec} for smallest term in sum */
 	mpf_t maxterm;
 	mpf_init (maxterm);
 	fp_epsilon (maxterm, prec);
 
-	mpf_t one;
-	mpf_init (one);
-	mpf_set_ui (one, 1);
-	
-	mpf_abs(atn, zee);
-	if (mpf_cmp_ui (atn, 1) <= 0)
-	{
-		mpf_mul (zsq, zee, zee);
-		mpf_mul (z_n, zee, zsq);
-		mpf_set (atn, zee);
+	mpf_mul (zsq, zee, zee);
+	mpf_mul (z_n, zee, zsq);
+	mpf_set (atn, zee);
 		
-		unsigned int n=1;
-		while(1)
+	unsigned int n=1;
+	while(1)
+	{
+		mpf_div_ui (term, z_n, 2*n+1);
+		if (n%2)
 		{
-			mpf_div_ui (term, z_n, 2*n+1);
-			if (n%2)
-			{
-				mpf_sub (atn, atn, term);
-			}
-			else
-			{
-				mpf_add (atn, atn, term);
-			}
-			
-			/* don't go no farther than this */
-			mpf_abs (term, term);
-			if (mpf_cmp (term, maxterm) < 0) break;
-			
-			n ++;
-			mpf_mul (z_n, z_n, zsq);
+			mpf_sub (atn, atn, term);
 		}
-	}
-	else
-	{
-		fp_pi (atn, prec);
-		mpf_div_ui (atn, atn, 2);
+		else
+		{
+			mpf_add (atn, atn, term);
+		}
 		
-		mpf_div (z_n, one, zee);
-		mpf_sub (atn, atn, z_n);
-
-		mpf_mul (zsq, z_n, z_n);
+		/* don't go no farther than this */
+		mpf_abs (term, term);
+		if (mpf_cmp (term, maxterm) < 0) break;
+		
+		n ++;
 		mpf_mul (z_n, z_n, zsq);
-		
-		unsigned int n=1;
-		while(1)
-		{
-			mpf_div_ui (term, z_n, 2*n+1);
-			if (n%2)
-			{
-				mpf_add (atn, atn, term);
-			}
-			else
-			{
-				mpf_sub (atn, atn, term);
-			}
-			
-			/* don't go no farther than this */
-			mpf_abs (term, term);
-			if (mpf_cmp (term, maxterm) < 0) break;
-			
-			n ++;
-			mpf_mul (z_n, z_n, zsq);
-		}
 	}
 
-	if ((sgn_y >0) && (mpf_sgn (atn)<0))
-	{
-		fp_pi (zsq, prec);
-		mpf_add (atn, atn, zsq);
-	}
-	else if ((sgn_y <0) && (mpf_sgn (atn)>0))
-	{
-		fp_pi (zsq, prec);
-		mpf_sub (atn, atn, zsq);
-	}
-	
-	mpf_clear (zee);
 	mpf_clear (z_n);
 	mpf_clear (zsq);
 	mpf_clear (term);
 
-	mpf_clear (one);
 	mpf_clear (maxterm);
+}
+
+/**
+ * atan2_reduce -- use half-angle reduction to quickly eval arctangent.
+ *
+ * The half-angle reduction formula is 
+ * atan(z) = 2 atan (z/(1+sqrt(1+z^2)))
+ *
+ * For the half-angle formula to work, its assumed that x>0
+ */
+static void atan2_reduce (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec)
+{
+	mpf_t zee;
+	mpf_init (zee);
+
+	double fy = fabs (mpf_get_d (y));
+	double fx = fabs (mpf_get_d (x));
+	if (fy > 0.3*fx)
+	{
+		mpf_t ysq;
+		mpf_init (ysq);
+		mpf_mul (ysq, y, y);
+		mpf_mul (zee, x, x);
+		mpf_add (zee, zee, ysq);
+		mpf_sqrt (zee, zee);
+		mpf_add (zee, zee, x);
+
+		atan2_reduce (atn, y, zee, prec);
+		mpf_mul_ui (atn, atn, 2);
+
+		mpf_clear (ysq);
+	}
+	else
+	{
+		mpf_div (zee, y, x);
+		atan_series (atn, zee, prec);
+	}
+	mpf_clear (zee);
+}
+
+/**
+ * fp_arctan -  Floating point arctangent
+ * Implemented using a brute-force, very simple algo, with 
+ * no serious attempts at optimization. 
+ * Implements A&S equation 4.4.42 
+ */
+
+void fp_arctan2 (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec)
+{
+	int sgn_x = mpf_sgn(x);
+	int sgn_y = mpf_sgn(y);
+	
+	if (0 < sgn_y)
+	{
+		if (0 < sgn_x)
+		{
+			atan2_reduce (atn, y, x, prec);
+		}
+		else if (0 > sgn_x)
+		{
+			mpf_t pi, negx;
+			mpf_init (pi);
+			mpf_init (negx);
+			fp_pi (pi, prec);
+			mpf_neg (negx, x);
+
+			atan2_reduce (atn, y, negx, prec);
+			mpf_sub (atn, pi, atn);
+
+			mpf_clear (pi);
+			mpf_clear (negx);
+		}
+		else
+		{
+			fp_pi_half (atn, prec);
+		}
+	}
+	else 
+	{
+		if (0 < sgn_x)
+		{
+			atan2_reduce (atn, y, x, prec);
+		}
+		else if (0 > sgn_x)
+		{
+			mpf_t negpi, negx;
+			mpf_init (negpi);
+			mpf_init (negx);
+			fp_pi (negpi, prec);
+			mpf_neg (negpi, negpi);
+			mpf_neg (negx, x);
+
+			atan2_reduce (atn, y, negx, prec);
+			mpf_sub (atn, negpi, atn);
+
+			mpf_clear (negpi);
+			mpf_clear (negx);
+		}
+		else
+		{
+			fp_pi_half (atn, prec);
+			mpf_neg (atn, atn);
+		}
+	}
 }
 
 void fp_arctan (mpf_t atn, const mpf_t z, unsigned int prec)
