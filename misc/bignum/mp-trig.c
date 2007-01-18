@@ -685,36 +685,51 @@ static void atan_series (mpf_t atn, const mpf_t zee, unsigned int prec)
  * The half-angle reduction formula is 
  * atan(z) = 2 atan (z/(1+sqrt(1+z^2)))
  *
+ * We also get a "free" reduction (no sqrt needed) by using
+ * atan (z) = pi/2 - atan (1/z) 
+ * whenever z>1.
+ *
  * For the half-angle formula to work, its assumed that x>0
  */
 static void atan2_reduce (mpf_t atn, const mpf_t y, const mpf_t x, unsigned int prec)
 {
-	mpf_t zee;
-	mpf_init (zee);
-
 	double fy = fabs (mpf_get_d (y));
 	double fx = fabs (mpf_get_d (x));
+	if (fy > fx)
+	{
+		mpf_t pih;
+		mpf_init (pih);
+		fp_pi_half (pih, prec);
+		atan2_reduce (atn, x, y, prec);
+		mpf_sub (atn, pih, atn);
+		mpf_clear (pih);
+	}
 	if (fy > 0.3*fx)
 	{
-		mpf_t ysq;
+		mpf_t newx, ysq;
+		mpf_init (newx);
 		mpf_init (ysq);
 		mpf_mul (ysq, y, y);
-		mpf_mul (zee, x, x);
-		mpf_add (zee, zee, ysq);
-		mpf_sqrt (zee, zee);
-		mpf_add (zee, zee, x);
+		mpf_mul (newx, x, x);
+		mpf_add (newx, newx, ysq);
+		mpf_sqrt (newx, newx);
+		mpf_add (newx, newx, x);
 
-		atan2_reduce (atn, y, zee, prec);
+		atan2_reduce (atn, y, newx, prec);
 		mpf_mul_ui (atn, atn, 2);
 
 		mpf_clear (ysq);
+		mpf_clear (newx);
 	}
 	else
 	{
+		mpf_t zee;
+		mpf_init (zee);
+
 		mpf_div (zee, y, x);
 		atan_series (atn, zee, prec);
+		mpf_clear (zee);
 	}
-	mpf_clear (zee);
 }
 
 /**
