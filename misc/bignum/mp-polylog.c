@@ -567,7 +567,7 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	cpx_log (logz, oz, prec);
 	cpx_div_mpf (logz, logz, twopi);
 	cpx_times_i (logz, logz);
-	
+
 	/* Place branch cut so that it extends to the right from z=1 */
 	if (mpf_sgn(logz[0].re) < 0)
 	{
@@ -610,41 +610,74 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 	mpf_init (twopi);
 	fp_two_pi (twopi, prec);
 
-	cpx_t s, oz, tmp, ph, logz;
+	cpx_t s, oz, tmp, ph, q;
 	cpx_init (s);
 	cpx_init (oz);
 	cpx_init (tmp);
 	cpx_init (ph);
-	cpx_init (logz);
+	cpx_init (q);
 	cpx_set (s, ess);
-	cpx_recip (oz, zee);
+	cpx_recip (oz, zee);   // XXX optimize this later
 
-	/* Compute ph = e^{i pi s / 2} = i^s */
-	cpx_mul_mpf (tmp, s, twopi);
-	cpx_div_ui (tmp,tmp, 4);
-	cpx_times_i (tmp, tmp);
-	cpx_exp (ph, tmp, prec);
-
-	/* Compute ln z/(2pi i) */
-	cpx_log (logz, oz, prec);
-	cpx_div_mpf (logz, logz, twopi);
-	cpx_times_i (logz, logz);
+	/* Compute q = ln z/(2pi i) */
+	cpx_log (q, oz, prec);
+	cpx_div_mpf (q, q, twopi);
+	cpx_times_i (q, q);
 	
-	/* Move to the n'th sheet */
+	/* Place branch cut of the polylog so that it extends to the 
+	 * right from z=1. This is the same as adding 2pi i to the value 
+	 * of the log, if the value is in the lower half plane, so that
+	 * we move the cut of the log to lie along the positive, not 
+	 * negative axis. */
+	if (mpf_sgn(q[0].re) < 0)
+	{
+		mpf_add_ui (q[0].re, q[0].re, 1);
+	}
+
+	/* Move to the n'th sheet; sheets of the log and the polylog
+	 * are now one and the same thing. */
 	if (0 < sheet)
 	{
-		mpf_add_ui (logz[0].re, logz[0].re, sheet);
+		mpf_add_ui (q[0].re, q[0].re, sheet);
 	}
 	else
 	{
-		mpf_sub_ui (logz[0].re, logz[0].re, -sheet);
+		mpf_sub_ui (q[0].re, q[0].re, -sheet);
 	}
 
-	/* (ln z/(2pi i))^{1-s} */
-	cpx_ui_sub (tmp, 1, 0, s);
-	cpx_pow (delta, logz, tmp, prec);
-	
-	/* (2pi)^s i^s zeta /gamma (s) */
+	/* Compute sum over 1/q^s = (ln z/(2pi i))^{1-s} */
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_set_ui (delta, 0, 0);
+#if 0
+	while (mpf_cmp_d (q[0].re, 0.5) < 0)
+	{
+		cpx_pow (tmp, q, s, prec);
+		cpx_add (delta, delta, tmp);
+		mpf_add_ui (q[0].re, q[0].re, 1);
+	}
+	mpf_sub_ui (q[0].re, q[0].re, 1);
+	while (mpf_cmp_d (q[0].re, 0.5) > 0)
+	{
+		mpf_sub_ui (q[0].re, q[0].re, 1);
+		cpx_pow (tmp, q, s, prec);
+		cpx_sub (delta, delta, tmp);
+	}
+#endif
+	mpf_sub_ui (q[0].re, q[0].re, 1);
+	cpx_pow (tmp, q, s, prec);
+	cpx_sub (delta, delta, tmp);
+
+	cpx_add_ui (s, s, 1, 0);
+
+	/* compute normalization */
+	// XXX this can be optimized, later.
+	/* Compute ph = e^{i pi s / 2} = i^s */
+	cpx_mul_mpf (tmp, s, twopi);
+	cpx_div_ui (tmp, tmp, 4);
+	cpx_times_i (tmp, tmp);
+	cpx_exp (ph, tmp, prec);
+
+	/* (2pi)^s i^s (sum) /gamma (s) */
 	cpx_mul (delta, delta, ph);
 	cpx_mpf_pow (tmp, twopi, s, prec);
 	cpx_mul (delta, delta, tmp);
@@ -653,7 +686,7 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 
 	cpx_clear (s);
 	cpx_clear (oz);
-	cpx_clear (logz);
+	cpx_clear (q);
 	cpx_clear (tmp);
 	cpx_clear (ph);
 	mpf_clear (twopi);
@@ -790,12 +823,13 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 		cpx_set_ui (plog, 0,0);
 		return rc;
 	}
-
+#if 1
 	cpx_t delta;
 	cpx_init (delta);
 	polylog_sheet (delta, ess, zee, 1, prec);
-	cpx_sub (plog, plog, delta);
+	cpx_add (plog, plog, delta);
 	cpx_clear (delta);
+#endif
 	return 0;
 }
 
