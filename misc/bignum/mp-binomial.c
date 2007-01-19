@@ -758,7 +758,7 @@ void cpx_binomial_sum_cache (cpx_t bin, const cpx_t ess, unsigned int k)
 	cpx_t sn;
 	cpx_init (sn);
 	cpx_add_ui (sn, ess, k, 0);
-	cpx_binomial (bin, sn, prec);
+	cpx_binomial (bin, sn, k);
 	cpx_one_d_cache_store (&cache, bin, k, prec);
 	cpx_clear (sn);
 }
