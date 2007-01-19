@@ -526,12 +526,14 @@ bailout:
 	return rc;
 }
 
-/* Implement the following reflection formula for polylog:
+/*
+ * polylog_invert -- implement the polylog inversion formula
+ * Implement the following inversion formula for polylog:
  * Li_s(z) = - e^{i\pi s} Li_s(1/z) 
  *           + (2pi i)^s zeta(1-s, ln z/(2pi i)) / Gamma (s)
  */
 static int 
-polylog_reflect(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	mpf_t twopi;
 	mpf_init (twopi);
@@ -594,6 +596,67 @@ bail:
 	cpx_clear (ph);
 	mpf_clear (twopi);
 	return rc;
+}
+
+/*
+ * polylog_sheet -- move to sheet N of polylog
+ * The Nth sheet of Li_s(z) is given by
+ *      (2pi i)^s zeta(1-s, ln z/(2pi i)) / Gamma (s)
+ */
+static void 
+polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec)
+{
+	mpf_t twopi;
+	mpf_init (twopi);
+	fp_two_pi (twopi, prec);
+
+	cpx_t s, oz, tmp, ph, logz;
+	cpx_init (s);
+	cpx_init (oz);
+	cpx_init (tmp);
+	cpx_init (ph);
+	cpx_init (logz);
+	cpx_set (s, ess);
+	cpx_recip (oz, zee);
+
+	/* Compute ph = e^{i pi s / 2} = i^s */
+	cpx_mul_mpf (tmp, s, twopi);
+	cpx_div_ui (tmp,tmp, 4);
+	cpx_times_i (tmp, tmp);
+	cpx_exp (ph, tmp, prec);
+
+	/* Compute ln z/(2pi i) */
+	cpx_log (logz, oz, prec);
+	cpx_div_mpf (logz, logz, twopi);
+	cpx_times_i (logz, logz);
+	
+	/* Move to the n'th sheet */
+	if (0 < sheet)
+	{
+		mpf_add_ui (logz[0].re, logz[0].re, sheet);
+	}
+	else
+	{
+		mpf_sub_ui (logz[0].re, logz[0].re, -sheet);
+	}
+
+	/* zeta (1-s, ln z/(2pi i)) */
+	cpx_ui_sub (tmp, 1, 0, s);
+	cpx_hurwitz_taylor (delta, tmp, logz, prec);
+	
+	/* (2pi)^s i^s zeta /gamma (s) */
+	cpx_mul (delta, delta, ph);
+	cpx_mpf_pow (tmp, twopi, s, prec);
+	cpx_mul (delta, delta, tmp);
+	cpx_gamma (tmp, s, prec);
+	cpx_div (delta, delta, tmp);
+
+	cpx_clear (s);
+	cpx_clear (oz);
+	cpx_clear (logz);
+	cpx_clear (tmp);
+	cpx_clear (ph);
+	mpf_clear (twopi);
 }
 
 /**
@@ -705,7 +768,7 @@ static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee
 	 */
 	if (log(mod) < 6.28)
 	{
-		rc = polylog_reflect (plog, ess, zee, prec, depth);
+		rc = polylog_invert (plog, ess, zee, prec, depth);
 		return rc;
 	}
 
@@ -725,8 +788,15 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 	if (rc)
 	{
 		cpx_set_ui (plog, 0,0);
+		return rc;
 	}
-	return rc;
+
+	cpx_t delta;
+	cpx_init (delta);
+	polylog_sheet (delta, ess, zee, -1, prec);
+	cpx_add (plog, plog, delta);
+	cpx_clear (delta);
+	return 0;
 }
 
 /* ============================================================= */
@@ -1063,11 +1133,13 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 	/* Compute 1/q^s */
 	cpx_neg (s, s);
 	cpx_set_ui (zee, 0, 0);
-	if (mpf_cmp_d (q[0].re, 0.5) < 0)
+	while (mpf_cmp_d (q[0].re, 0.5) < 0)
 	{
 		cpx_pow (qn, q, s, prec);
 		cpx_add (zee, zee, qn);
+		mpf_add_ui (q[0].re, q[0].re, 1);
 	}
+	mpf_sub_ui (q[0].re, q[0].re, 1);
 	while (mpf_cmp_d (q[0].re, 1.5) > 0)
 	{
 		mpf_sub_ui (q[0].re, q[0].re, 1);
