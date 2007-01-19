@@ -648,24 +648,27 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 	/* Compute sum over 1/q^s = (ln z/(2pi i))^{1-s} */
 	cpx_sub_ui (s, s, 1, 0);
 	cpx_set_ui (delta, 0, 0);
+
+// sorta works outside the unit disk ... what happened inside ????
+		cpx_pow (tmp, q, s, prec);
+		cpx_add (delta, delta, tmp);
 #if 0
-	while (mpf_cmp_d (q[0].re, 0.5) < 0)
+	while (mpf_cmp_ui (q[0].re, 0) < 0)
 	{
 		cpx_pow (tmp, q, s, prec);
 		cpx_add (delta, delta, tmp);
 		mpf_add_ui (q[0].re, q[0].re, 1);
 	}
 	mpf_sub_ui (q[0].re, q[0].re, 1);
-	while (mpf_cmp_d (q[0].re, 0.5) > 0)
+#endif
+#if 0
+	while (mpf_cmp_ui (q[0].re, 1) > 0)
 	{
 		mpf_sub_ui (q[0].re, q[0].re, 1);
 		cpx_pow (tmp, q, s, prec);
 		cpx_sub (delta, delta, tmp);
 	}
 #endif
-	mpf_sub_ui (q[0].re, q[0].re, 1);
-	cpx_pow (tmp, q, s, prec);
-	cpx_sub (delta, delta, tmp);
 
 	cpx_add_ui (s, s, 1, 0);
 
@@ -826,7 +829,7 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 #if 1
 	cpx_t delta;
 	cpx_init (delta);
-	polylog_sheet (delta, ess, zee, 1, prec);
+	polylog_sheet (delta, ess, zee, -1, prec);
 	cpx_add (plog, plog, delta);
 	cpx_clear (delta);
 #endif
