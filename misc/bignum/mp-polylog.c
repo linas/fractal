@@ -582,7 +582,7 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	cpx_mul (term, term, ph);
 	cpx_mpf_pow (tmp, twopi, s, prec);
 	cpx_mul (term, term, tmp);
-	cpx_gamma (tmp, s, prec);
+	cpx_gamma_cache (tmp, s, prec);
 	cpx_div (term, term, tmp);
 
 	cpx_add (plog, plog, term);
@@ -640,15 +640,15 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 		mpf_sub_ui (logz[0].re, logz[0].re, -sheet);
 	}
 
-	/* zeta (1-s, ln z/(2pi i)) */
+	/* (ln z/(2pi i))^{1-s} */
 	cpx_ui_sub (tmp, 1, 0, s);
-	cpx_hurwitz_taylor (delta, tmp, logz, prec);
+	cpx_pow (delta, logz, tmp, prec);
 	
 	/* (2pi)^s i^s zeta /gamma (s) */
 	cpx_mul (delta, delta, ph);
 	cpx_mpf_pow (tmp, twopi, s, prec);
 	cpx_mul (delta, delta, tmp);
-	cpx_gamma (tmp, s, prec);
+	cpx_gamma_cache (tmp, s, prec);
 	cpx_div (delta, delta, tmp);
 
 	cpx_clear (s);
@@ -793,8 +793,8 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 
 	cpx_t delta;
 	cpx_init (delta);
-	polylog_sheet (delta, ess, zee, -1, prec);
-	cpx_add (plog, plog, delta);
+	polylog_sheet (delta, ess, zee, 1, prec);
+	cpx_sub (plog, plog, delta);
 	cpx_clear (delta);
 	return 0;
 }
@@ -966,7 +966,7 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 
 		/* 2 gamma(s+1)/ (2pi)^s */
 		cpx_add_ui (s, ess, 1,0);
-		cpx_gamma (scale, s, prec);
+		cpx_gamma_cache (scale, s, prec);
 
 		/* times (2pi)^{-s} */
 		fp_two_pi (two_pi, prec);
@@ -1034,7 +1034,7 @@ static void hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 		cpx_recip (niss, piss);
 
 		/* gamma(s)/ (2pi)^s */
-		cpx_gamma (scale, s, prec);
+		cpx_gamma_cache (scale, s, prec);
 
 		/* times (2pi)^{-s} */
 		fp_two_pi (t, prec);
