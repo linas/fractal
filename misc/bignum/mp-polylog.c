@@ -566,20 +566,16 @@ polylog_reflect(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int dept
 	cpx_div_mpf (logz, logz, twopi);
 	cpx_times_i (logz, logz);
 	
+	/* Place branch cut so that it extends to the right from z=1 */
+	if (mpf_sgn(logz[0].re) < 0)
+	{
+		mpf_add_ui (logz[0].re, logz[0].re, 1);
+	}
+
 	/* zeta (1-s, ln z/(2pi i)) */
 	cpx_ui_sub (tmp, 1, 0, s);
 	cpx_hurwitz_taylor (term, tmp, logz, prec);
 	
-	/* Place branch cut so that it extends to the right from z=1 */
-	double fre = mpf_get_d (logz[0].re);
-	if (fre < 0)
-	{
-		/* compute 1/q^s */
-		cpx_neg (tmp, tmp);
-		cpx_pow (tmp, logz, tmp, prec);
-		cpx_sub (term, term, tmp);
-	}
-
 	/* (2pi)^s i^s zeta /gamma (s) */
 	cpx_mul (term, term, ph);
 	cpx_mpf_pow (tmp, twopi, s, prec);
@@ -1064,11 +1060,34 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 	cpx_set (s, ess);
 	cpx_set (q, que);
 
-	/* compute 1/q^s */
+	/* Compute 1/q^s */
 	cpx_neg (s, s);
-	cpx_pow (zee, q, s, prec);
+	cpx_set_ui (zee, 0, 0);
+	if (mpf_cmp_d (q[0].re, 0.5) < 0)
+	{
+		cpx_pow (qn, q, s, prec);
+		cpx_add (zee, zee, qn);
+	}
+	while (mpf_cmp_d (q[0].re, 1.5) > 0)
+	{
+		mpf_sub_ui (q[0].re, q[0].re, 1);
+		cpx_pow (qn, q, s, prec);
+		cpx_sub (zee, zee, qn);
+	}
+	if (mpf_cmp_d (q[0].re, 0.5) > 0)
+	{
+		mpf_sub_ui (q[0].re, q[0].re, 1);
+	}
 	cpx_neg (s, s);
 
+double qre = mpf_get_d (q[0].re);
+double qim = mpf_get_d (q[0].im);
+double mod = sqrt(qre*qre+qim*qim);
+if (0.9 < mod) {
+printf ("oh no mr bill! q=%g +i%g m=%g\n", qre, qim, mod);
+goto punt;
+}
+	/* Now do a power series in -q */
 	cpx_neg (q, q);
 	cpx_set_ui (qn, 1, 0);
 	cpx_sub_ui (sn, s, 1, 0);
@@ -1100,6 +1119,7 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 		cpx_mul (qn, qn, q);
 	}
 
+punt:
 	cpx_clear (s);
 	cpx_clear (sn);
 	cpx_clear (q);
