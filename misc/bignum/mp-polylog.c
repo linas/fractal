@@ -650,7 +650,14 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 	cpx_set_ui (delta, 0, 0);
 
 // sorta works outside the unit disk ... what happened inside ????
-		cpx_pow (tmp, q, s, prec);
+cpx_log (tmp, q, prec);
+if (mpf_sgn(tmp[0].im) > 0)
+{
+mpf_sub (tmp[0].im, tmp[0].im, twopi);
+}
+cpx_mul (tmp, tmp, s);
+cpx_exp (tmp, tmp, prec);
+		// cpx_pow (tmp, q, s, prec);
 		cpx_add (delta, delta, tmp);
 #if 0
 	while (mpf_cmp_ui (q[0].re, 0) < 0)
@@ -826,7 +833,7 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 		cpx_set_ui (plog, 0,0);
 		return rc;
 	}
-#if 1
+#if 0
 	cpx_t delta;
 	cpx_init (delta);
 	polylog_sheet (delta, ess, zee, -1, prec);
