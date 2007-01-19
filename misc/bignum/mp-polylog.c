@@ -565,10 +565,20 @@ polylog_reflect(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int dept
 	cpx_log (logz, oz, prec);
 	cpx_div_mpf (logz, logz, twopi);
 	cpx_times_i (logz, logz);
-
+	
 	/* zeta (1-s, ln z/(2pi i)) */
 	cpx_ui_sub (tmp, 1, 0, s);
 	cpx_hurwitz_taylor (term, tmp, logz, prec);
+	
+	/* Place branch cut so that it extends to the right from z=1 */
+	double fre = mpf_get_d (logz[0].re);
+	if (fre < 0)
+	{
+		/* compute 1/q^s */
+		cpx_neg (tmp, tmp);
+		cpx_pow (tmp, logz, tmp, prec);
+		cpx_sub (term, term, tmp);
+	}
 
 	/* (2pi)^s i^s zeta /gamma (s) */
 	cpx_mul (term, term, ph);
@@ -1066,8 +1076,9 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 	while (1)
 	{
 		/* s+n-1 */
-		/* The Caching version uses precomputed values,
-		 * if these are avaliable */
+		/* The caching version uses precomputed values,
+		 * making te algo faster. This also means that 
+		 * sn does not need to be incremented. */
 		// cpx_binomial (bin, sn, n);
 		// cpx_add_ui (sn, sn, 1, 0);
 		cpx_binomial_sum_cache (bin, sn, n);
