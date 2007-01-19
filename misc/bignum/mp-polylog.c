@@ -649,26 +649,27 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 	cpx_sub_ui (s, s, 1, 0);
 	cpx_set_ui (delta, 0, 0);
 
-// sorta works outside the unit disk ... what happened inside ????
-cpx_log (tmp, q, prec);
-if (mpf_sgn(tmp[0].im) > 0)
-{
-mpf_sub (tmp[0].im, tmp[0].im, twopi);
-}
-cpx_mul (tmp, tmp, s);
-cpx_exp (tmp, tmp, prec);
-		// cpx_pow (tmp, q, s, prec);
-		cpx_add (delta, delta, tmp);
 #if 0
 	while (mpf_cmp_ui (q[0].re, 0) < 0)
 	{
-		cpx_pow (tmp, q, s, prec);
+		/* Can't use cpx_pow directly, because of
+		 * yet another funky sheet thing happening 
+		 * on the unit circle. So do the pow by hand. */
+		/* cpx_pow (tmp, q, s, prec); */
+		cpx_log (tmp, q, prec);
+		if (mpf_sgn(tmp[0].im) > 0)
+		{
+			mpf_sub (tmp[0].im, tmp[0].im, twopi);
+		}
+		cpx_mul (tmp, tmp, s);
+		cpx_exp (tmp, tmp, prec);
+
 		cpx_add (delta, delta, tmp);
 		mpf_add_ui (q[0].re, q[0].re, 1);
 	}
 	mpf_sub_ui (q[0].re, q[0].re, 1);
 #endif
-#if 0
+#if 1
 	while (mpf_cmp_ui (q[0].re, 1) > 0)
 	{
 		mpf_sub_ui (q[0].re, q[0].re, 1);
@@ -833,10 +834,10 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 		cpx_set_ui (plog, 0,0);
 		return rc;
 	}
-#if 0
+#if 1
 	cpx_t delta;
 	cpx_init (delta);
-	polylog_sheet (delta, ess, zee, -1, prec);
+	polylog_sheet (delta, ess, zee, 1, prec);
 	cpx_add (plog, plog, delta);
 	cpx_clear (delta);
 #endif
