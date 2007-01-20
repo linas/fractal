@@ -610,20 +610,22 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 	mpf_init (twopi);
 	fp_two_pi (twopi, prec);
 
-	cpx_t s, oz, tmp, ph, q;
+	cpx_t s, tmp, ph, q;
 	cpx_init (s);
-	cpx_init (oz);
 	cpx_init (tmp);
 	cpx_init (ph);
 	cpx_init (q);
 	cpx_set (s, ess);
-	cpx_recip (oz, zee);   // XXX optimize this later
 
 	/* Compute q = ln z/(2pi i) */
-	cpx_log (q, oz, prec);
+	cpx_log (q, zee, prec);
 	cpx_div_mpf (q, q, twopi);
 	cpx_times_i (q, q);
+	cpx_neg (q,q);
 	
+double qr = mpf_get_d (q[0].re);
+double qi = mpf_get_d (q[0].im);
+printf ("firstq= %g+i%g\n", qr, qi);
 	/* Place branch cut of the polylog so that it extends to the 
 	 * right from z=1. This is the same as adding 2pi i to the value 
 	 * of the log, if the value is in the lower half plane, so that
@@ -649,34 +651,40 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 	cpx_sub_ui (s, s, 1, 0);
 	cpx_set_ui (delta, 0, 0);
 
-#if 0
-	while (mpf_cmp_ui (q[0].re, 0) < 0)
+	if (0 > sheet)
 	{
-		/* Can't use cpx_pow directly, because of
-		 * yet another funky sheet thing happening 
-		 * on the unit circle. So do the pow by hand. */
-		/* cpx_pow (tmp, q, s, prec); */
-		cpx_log (tmp, q, prec);
-		if (mpf_sgn(tmp[0].im) > 0)
+		while (mpf_cmp_ui (q[0].re, 0) < 0)
 		{
-			mpf_sub (tmp[0].im, tmp[0].im, twopi);
-		}
-		cpx_mul (tmp, tmp, s);
-		cpx_exp (tmp, tmp, prec);
+			/* Can't use cpx_pow directly, because of
+			 * yet another funky sheet thing happening 
+			 * on the unit circle. So do the pow by hand. */
+			/* cpx_pow (tmp, q, s, prec); */
+			cpx_log (tmp, q, prec);
+			if (mpf_sgn(tmp[0].im) > 0)
+			{
+				mpf_sub (tmp[0].im, tmp[0].im, twopi);
+			}
+double lqr = mpf_get_d (tmp[0].re);
+double lqi = mpf_get_d (tmp[0].im);
+printf ("second log= %g+i%g\n", lqr, lqi);
+			cpx_mul (tmp, tmp, s);
+			cpx_exp (tmp, tmp, prec);
 
-		cpx_add (delta, delta, tmp);
-		mpf_add_ui (q[0].re, q[0].re, 1);
-	}
-	mpf_sub_ui (q[0].re, q[0].re, 1);
-#endif
-#if 1
-	while (mpf_cmp_ui (q[0].re, 1) > 0)
-	{
+			cpx_add (delta, delta, tmp);
+			mpf_add_ui (q[0].re, q[0].re, 1);
+		}
 		mpf_sub_ui (q[0].re, q[0].re, 1);
-		cpx_pow (tmp, q, s, prec);
-		cpx_sub (delta, delta, tmp);
 	}
-#endif
+
+	if (0 < sheet)
+	{
+		while (mpf_cmp_ui (q[0].re, 1) > 0)
+		{
+			mpf_sub_ui (q[0].re, q[0].re, 1);
+			cpx_pow (tmp, q, s, prec);
+			cpx_sub (delta, delta, tmp);
+		}
+	}
 
 	cpx_add_ui (s, s, 1, 0);
 
@@ -696,7 +704,6 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 	cpx_div (delta, delta, tmp);
 
 	cpx_clear (s);
-	cpx_clear (oz);
 	cpx_clear (q);
 	cpx_clear (tmp);
 	cpx_clear (ph);
@@ -834,10 +841,10 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 		cpx_set_ui (plog, 0,0);
 		return rc;
 	}
-#if 1
+#if 0
 	cpx_t delta;
 	cpx_init (delta);
-	polylog_sheet (delta, ess, zee, 1, prec);
+	polylog_sheet (delta, ess, zee, -1, prec);
 	cpx_add (plog, plog, delta);
 	cpx_clear (delta);
 #endif
