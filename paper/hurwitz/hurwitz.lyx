@@ -33,7 +33,7 @@ An efficient algorithm for accelerating the convergence of oscillatory series,
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 16 January 2007
+12 October 2006, revised 20 January 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -2451,6 +2451,20 @@ e^{-i\pi2/s}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}{
 \end_inset 
 
 .
+\layout Section
+
+The Branch Cut
+\layout Standard
+
+The polylogarithm has a branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and by convention, a branch cut is placed along the positive real 
+\begin_inset Formula $z$
+\end_inset 
+
+-axis, extending to the right.
 \layout Standard
 
 xxxBlah blah discuss the branch cut XXX.
@@ -3500,7 +3514,7 @@ Polylog whole plane
 
 
 \begin_inset Graphics
-	filename polylog-whole.png
+	filename polylog-0-sheet.png
 	width 100text%
 
 \end_inset 
@@ -3579,20 +3593,111 @@ The concentric shells are centered on the point
 \end_inset 
 
 .
- This image does not show the conventional location of the branch cut extending
- from 
-\begin_inset Formula $z=1$
-\end_inset 
-
-.
- By convention, one may take the branch cut to extend to the right of 
+ The branch cut can be seen extending to the right from from 
 \begin_inset Formula $z=1$
 \end_inset 
 
 , on the positive real axis.
- In this image, the branch cut is placed on a more contorted route: it extends
- downwards, in a rough hemi-circular way, eventually hitting the negative
- real axis, where it continues onto negative infinity.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Upper sheet of the polylogarithm
+\layout Standard
+
+
+\begin_inset Graphics
+	filename polylog-p1-sheet.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows another sheet of the polylogarithm on the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, obtained as described in the text.
+ Two zeroes are visible: one at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+, and the other an 
+\begin_inset Quotes eld
+\end_inset 
+
+ex-Riemann zero
+\begin_inset Quotes erd
+\end_inset 
+
+, located not far from 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, but above the real axis.
+ For this image, 
+\begin_inset Formula $s$
+\end_inset 
+
+ is held constant, at 
+\begin_inset Formula $s=0.5+i15$
+\end_inset 
+
+; the Riemann zeta function has its first non-trivial zero at 
+\begin_inset Formula $s=0.5+i14.13\ldots$
+\end_inset 
+
+.
+ At that value, the above zero would have been located precisely at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, on the branch point of the polylogarithm.
+ As 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ increases, the Riemann zeroes pass preciesely through this branch point,
+ leaving the first sheet and moving to this.
+ 
+\layout Standard
+
+Indeed, the Riemann hypothesis can be taken as being equivalent to the statement
+ that the Riemann zeroes always pass through the branch point in moving
+ from one sheet to another.
+ Taking 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset 
+
+, if 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ is held constant at 
+\begin_inset Formula $\sigma>1/2$
+\end_inset 
+
+ while 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ is increased, the polylogarithm zeroes never pass through thr branch cut,
+ and stay on the main sheet; whereas for 
+\begin_inset Formula $\sigma<1/2$
+\end_inset 
+
+, they do pass through the branch cut, but not at the branch point.
  
 \end_inset 
 
@@ -3606,12 +3711,12 @@ collapsed false
 
 \layout Caption
 
-Another sheet of the polylogarithm
+Lower sheet of the polylogarithm
 \layout Standard
 
 
 \begin_inset Graphics
-	filename polylog-other.png
+	filename polylog-m1-sheet.png
 	width 100text%
 
 \end_inset 
@@ -3619,13 +3724,12 @@ Another sheet of the polylogarithm
 
 \layout Standard
 
-This figure shows the polylogairthm on the complex 
+This figure shows another sheet of the polylogarithm on the complex 
 \begin_inset Formula $z$
 \end_inset 
 
--plane, just as the previous figure, except that a different sheet is shown.
- In this case, the branch cut is made to wrap over the to of the origin,
- before extended off to the left.
+-plane, obtained as described in the text.
+ 
 \end_inset 
 
 
