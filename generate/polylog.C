@@ -56,7 +56,7 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 	static int init = 0;
 	if (!init) {psi_init(itermax, param); init=1; }
 		  
-	printf ("duude compute %g  %g \n", re_q, im_q);
+	// printf ("duude compute %g  %g \n", re_q, im_q);
 
 	cpx_set_d (zee, re_q, im_q);
 	cpx_polylog (zeta, ess, zee, prec);
