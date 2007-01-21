@@ -561,7 +561,7 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	
 	cpx_mul (plog, plog, ph);
 	cpx_mul (plog, plog, ph);
-	cpx_neg (plog, plog);
+//	cpx_neg (plog, plog);
 
 	/* compute ln z/(2pi i) */
 	cpx_log (logz, oz, prec);
@@ -578,13 +578,13 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	cpx_ui_sub (tmp, 1, 0, s);
 	cpx_hurwitz_taylor (term, tmp, logz, prec);
 	
-	/* plus e^{ipi s} zeta (1-s, -ln z/(2pi i)) */
+	/* plus e^{ipi s} zeta (1-s, 1-ln z/(2pi i)) */
 	cpx_neg (logz, logz);
-cpx_add_ui (logz, logz, 1, 0);
+	cpx_add_ui (logz, logz, 1, 0);
 	cpx_hurwitz_taylor (tmp, tmp, logz, prec);
 	cpx_mul (tmp, tmp, ph);
 	cpx_mul (tmp, tmp, ph);
-	cpx_add (term, term, tmp);
+	cpx_sub (term, term, tmp);
 
 	/* (2pi)^s i^s zeta /gamma (s) */
 	cpx_mul (term, term, ph);
