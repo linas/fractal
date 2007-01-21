@@ -555,13 +555,17 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	cpx_times_i (tmp, tmp);
 	cpx_exp (ph, tmp, prec);
 
+int rc = 0;
+cpx_set_ui (plog, 0, 0);
+#if 0
 	/* - e^i\pi s Li_s(1/z) */
 	int rc = recurse_towards_polylog (plog, s, oz, prec, depth);
 	if (rc) goto bail;
 	
 	cpx_mul (plog, plog, ph);
 	cpx_mul (plog, plog, ph);
-//	cpx_neg (plog, plog);
+	cpx_neg (plog, plog);
+#endif
 
 	/* compute ln z/(2pi i) */
 	cpx_log (logz, oz, prec);
@@ -594,6 +598,13 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	cpx_div (term, term, tmp);
 
 	cpx_add (plog, plog, term);
+
+cpx_mul(ph, ph, ph);
+cpx_mul(ph, ph, ph);
+
+cpx_neg(ph,ph);
+cpx_add_ui (ph, ph, 1, 0);
+cpx_div (plog, plog, ph);
 
 bail:
 	cpx_clear (s);
