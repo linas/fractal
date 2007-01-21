@@ -578,6 +578,14 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	cpx_ui_sub (tmp, 1, 0, s);
 	cpx_hurwitz_taylor (term, tmp, logz, prec);
 	
+	/* plus e^{ipi s} zeta (1-s, -ln z/(2pi i)) */
+	cpx_neg (logz, logz);
+cpx_add_ui (logz, logz, 1, 0);
+	cpx_hurwitz_taylor (tmp, tmp, logz, prec);
+	cpx_mul (tmp, tmp, ph);
+	cpx_mul (tmp, tmp, ph);
+	cpx_add (term, term, tmp);
+
 	/* (2pi)^s i^s zeta /gamma (s) */
 	cpx_mul (term, term, ph);
 	cpx_mpf_pow (tmp, twopi, s, prec);
@@ -1182,7 +1190,9 @@ void cpx_hurwitz_taylor (cpx_t zee, const cpx_t ess, const cpx_t que, int prec)
 	cpx_set (s, ess);
 	cpx_set (q, que);
 
-	/* Compute 1/q^s */
+	/* Compute 1/q^s if the real part of q is near 0. 
+	 * Else navigate the waters of the Hurwitz branch cut.
+	 */
 	cpx_neg (s, s);
 	cpx_set_ui (zee, 0, 0);
 	while (mpf_cmp_d (q[0].re, 0.5) < 0)
