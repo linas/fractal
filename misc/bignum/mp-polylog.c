@@ -529,8 +529,11 @@ bailout:
 /*
  * polylog_invert -- implement the polylog inversion formula
  * Implement the following inversion formula for polylog:
- * Li_s(z) = - e^{i\pi s} Li_s(1/z) 
- *           + (2pi i)^s zeta(1-s, ln z/(2pi i)) / Gamma (s)
+ * (1-e^{2pi is}) Li_s(z) =  e^{i\pi s} (2pi i)^s / Gamma(s) 
+ *           (zeta(1-s, ln z/(2pi i) -e^{ipi s} zeta(1-s, 1- ln z/(2pi i)) 
+ *
+ * This formula appears to work well for both positive and negative 
+ * half s-plane.
  */
 static int 
 polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
@@ -554,18 +557,6 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	cpx_div_ui (tmp,tmp, 4);
 	cpx_times_i (tmp, tmp);
 	cpx_exp (ph, tmp, prec);
-
-int rc = 0;
-cpx_set_ui (plog, 0, 0);
-#if 0
-	/* - e^i\pi s Li_s(1/z) */
-	int rc = recurse_towards_polylog (plog, s, oz, prec, depth);
-	if (rc) goto bail;
-	
-	cpx_mul (plog, plog, ph);
-	cpx_mul (plog, plog, ph);
-	cpx_neg (plog, plog);
-#endif
 
 	/* compute ln z/(2pi i) */
 	cpx_log (logz, oz, prec);
@@ -597,14 +588,163 @@ cpx_set_ui (plog, 0, 0);
 	cpx_gamma_cache (tmp, s, prec);
 	cpx_div (term, term, tmp);
 
+	cpx_set (plog, term);
+
+	/* divide by (1-e^{2pi s}) */
+	cpx_mul(ph, ph, ph);
+	cpx_mul(ph, ph, ph);
+
+	cpx_neg(ph,ph);
+	cpx_add_ui (ph, ph, 1, 0);
+	cpx_div (plog, plog, ph);
+
+	cpx_clear (s);
+	cpx_clear (oz);
+	cpx_clear (logz);
+	cpx_clear (tmp);
+	cpx_clear (term);
+	cpx_clear (ph);
+	mpf_clear (twopi);
+	return 0;
+}
+
+#if NON_WORKING_INVERSION_ROUTINES
+/* The following should work, but it doesn't.
+ * Is it possible that the gamma function is broken ???
+ */
+static int 
+polylog_invert_alt(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+{
+	mpf_t twopi;
+	mpf_init (twopi);
+	fp_two_pi (twopi, prec);
+
+	cpx_t s, oz, tmp, ph, term, logz;
+	cpx_init (s);
+	cpx_init (oz);
+	cpx_init (tmp);
+	cpx_init (term);
+	cpx_init (ph);
+	cpx_init (logz);
+	cpx_ui_sub (s, 1, 0, ess);
+	cpx_set (oz, zee);
+
+	/* compute ph = e^{i pi s / 2} = i^s */
+	cpx_mul_mpf (tmp, s, twopi);
+	cpx_div_ui (tmp,tmp, 4);
+	cpx_times_i (tmp, tmp);
+	cpx_exp (ph, tmp, prec);
+
+	/* compute ln z/(2pi i) */
+	cpx_log (logz, oz, prec);
+	cpx_div_mpf (logz, logz, twopi);
+	cpx_times_i (logz, logz);
+	cpx_neg (logz, logz);
+
+	/* Place branch cut so that it extends to the right from z=1 */
+	if (mpf_sgn(logz[0].re) < 0)
+	{
+		mpf_add_ui (logz[0].re, logz[0].re, 1);
+	}
+
+	/* zeta (s, ln z/(2pi i)) */
+	cpx_hurwitz_taylor (term, tmp, logz, prec);
+	
+	/* plus e^{ipi s} zeta (s, 1-ln z/(2pi i)) */
+	cpx_neg (logz, logz);
+	cpx_add_ui (logz, logz, 1, 0);
+	cpx_hurwitz_taylor (tmp, tmp, logz, prec);
+	cpx_mul (tmp, tmp, ph);
+	cpx_mul (tmp, tmp, ph);
+	cpx_add (term, term, tmp);
+
+	/* - gamma(s) i^s / (2pi)^s i^s */
+	cpx_gamma_cache (tmp, s, prec);
+	cpx_mul (term, term, tmp);
+	cpx_mul (term, term, ph);
+	cpx_mpf_pow (tmp, twopi, s, prec);
+	cpx_div (term, term, tmp);
+
+	cpx_set (plog, term);
+	cpx_neg (plog, plog);
+
+	cpx_clear (s);
+	cpx_clear (oz);
+	cpx_clear (logz);
+	cpx_clear (tmp);
+	cpx_clear (term);
+	cpx_clear (ph);
+	mpf_clear (twopi);
+	return 0;
+}
+
+/* Implement the following inversion formula for polylog:
+ * Li_s(z) = - e^{i\pi s} Li_s(1/z) 
+ *           + (2pi i)^s zeta(1-s, ln z/(2pi i)) / Gamma (s)
+ *
+ * This polylog inversion formula "should" work well.
+ * and it does, for the upper half s-plane. However, for the
+ * lower-half s-plane, its broken, and the reason for this
+ * brokenness is confusing, since its theoretically the same
+ * formula as the one that works. Not clear what the gig is.
+ *
+ * Maybe gamma is broken for lower-half-plane s ????
+ */
+static int 
+polylog_invert_broken_for_lower_half_plane(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+{
+	mpf_t twopi;
+	mpf_init (twopi);
+	fp_two_pi (twopi, prec);
+
+	cpx_t s, oz, tmp, ph, term, logz;
+	cpx_init (s);
+	cpx_init (oz);
+	cpx_init (tmp);
+	cpx_init (term);
+	cpx_init (ph);
+	cpx_init (logz);
+	cpx_set (s, ess);
+	cpx_recip (oz, zee);
+
+	/* compute ph = e^{i pi s / 2} = i^s */
+	cpx_mul_mpf (tmp, s, twopi);
+	cpx_div_ui (tmp,tmp, 4);
+	cpx_times_i (tmp, tmp);
+	cpx_exp (ph, tmp, prec);
+
+	/* - e^i\pi s Li_s(1/z) */
+	int rc = recurse_towards_polylog (plog, s, oz, prec, depth);
+	if (rc) goto bail;
+	
+	cpx_mul (plog, plog, ph);
+	cpx_mul (plog, plog, ph);
+	cpx_neg (plog, plog);
+
+	/* compute ln z/(2pi i) */
+	cpx_log (logz, oz, prec);
+	cpx_div_mpf (logz, logz, twopi);
+	cpx_times_i (logz, logz);
+
+	/* Place branch cut so that it extends to the right from z=1 */
+	if (mpf_sgn(logz[0].re) < 0)
+	{
+		mpf_add_ui (logz[0].re, logz[0].re, 1);
+	}
+
+	/* zeta (1-s, ln z/(2pi i)) */
+	cpx_ui_sub (tmp, 1, 0, s);
+	cpx_hurwitz_taylor (term, tmp, logz, prec);
+	
+	/* (2pi)^s i^s zeta /gamma (s) */
+	cpx_mul (term, term, ph);
+
+	cpx_mpf_pow (tmp, twopi, s, prec);
+	cpx_mul (term, term, tmp);
+	cpx_gamma_cache (tmp, s, prec);
+	cpx_div (term, term, tmp);
+
 	cpx_add (plog, plog, term);
-
-cpx_mul(ph, ph, ph);
-cpx_mul(ph, ph, ph);
-
-cpx_neg(ph,ph);
-cpx_add_ui (ph, ph, 1, 0);
-cpx_div (plog, plog, ph);
 
 bail:
 	cpx_clear (s);
@@ -616,6 +756,7 @@ bail:
 	mpf_clear (twopi);
 	return rc;
 }
+#endif /* NON_WORKING_INVERSION_ROUTINES */
 
 /*
  * polylog_sheet -- move to sheet N of polylog
@@ -642,9 +783,6 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 	cpx_times_i (q, q);
 	cpx_neg (q,q);
 	
-double qr = mpf_get_d (q[0].re);
-double qi = mpf_get_d (q[0].im);
-printf ("firstq= %g+i%g\n", qr, qi);
 	/* Place branch cut of the polylog so that it extends to the 
 	 * right from z=1. This is the same as adding 2pi i to the value 
 	 * of the log, if the value is in the lower half plane, so that
@@ -683,9 +821,6 @@ printf ("firstq= %g+i%g\n", qr, qi);
 			{
 				mpf_sub (tmp[0].im, tmp[0].im, twopi);
 			}
-double lqr = mpf_get_d (tmp[0].re);
-double lqi = mpf_get_d (tmp[0].im);
-printf ("second log= %g+i%g\n", lqr, lqi);
 			cpx_mul (tmp, tmp, s);
 			cpx_exp (tmp, tmp, prec);
 
@@ -708,7 +843,8 @@ printf ("second log= %g+i%g\n", lqr, lqi);
 	cpx_add_ui (s, s, 1, 0);
 
 	/* compute normalization */
-	// XXX this can be optimized, later.
+	// XXX this code can be more optimized than this
+	// current form is easier to validate vs. theory
 	/* Compute ph = e^{i pi s / 2} = i^s */
 	cpx_mul_mpf (tmp, s, twopi);
 	cpx_div_ui (tmp, tmp, 4);
