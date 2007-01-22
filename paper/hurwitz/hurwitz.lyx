@@ -2522,15 +2522,157 @@ The polylogarithm has a branch point at
 
 -axis, extending to the right.
  Moving from one sheet to another is trecherous and confusing.
- The inversion formula 
+ 
+\layout Standard
+
+The inversion formula 
 \begin_inset LatexCommand \ref{eq:Inversion formula}
 
 \end_inset 
 
- suggests a way to move from one sheet to another: 
+ suggests a way to move from one sheet to another.
+ Suppose one starts at the point 
+\begin_inset Formula $z=x+i\epsilon$
+\end_inset 
+
+ with 
+\begin_inset Formula $x$
+\end_inset 
+
+ real, positive, and greater than one, and epsilon some arbitrarily small
+ postive real number; thus 
+\begin_inset Formula $z$
+\end_inset 
+
+ is very near the branch cut.
+ One wishes to compare this to the straddling value at 
+\begin_inset Formula $x-i\epsilon$
+\end_inset 
+
+.
+ Applying the inversion formula, one can bounce these two points inside
+ the unit circle, where there is no cut, and thus the polylog differs by
+ 
+\begin_inset Formula $\mathcal{O}(\epsilon)$
+\end_inset 
+
+.
+ The difference accross the cut is thus 
+\begin_inset Formula \[
+\Delta=\mbox{Li}_{s}\left(x+i\epsilon\right)-\mbox{Li}_{s}\left(x-i\epsilon\right)=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\log x+i\epsilon}{2\pi i}\right)-\zeta\left(1-s,\frac{\log x-i\epsilon}{2\pi i}\right)\right]+\mathcal{O}(\epsilon)\]
+
+\end_inset 
+
+ Now, since 
+\begin_inset Formula $x>1$
+\end_inset 
+
+, a naive application of this formula yeilds 
+\begin_inset Formula $\Delta=0$
+\end_inset 
+
+ since 
+\begin_inset Formula $\log(x+i\epsilon)-\log(x-i\epsilon)=\mathcal{O}(\epsilon)$
+\end_inset 
+
+.
+ Instead, one must make the Ansatz that this act crosses the cut of the
+ logarithm (for example, by taking the cut of the logarithm to extend to
+ the right, instead of to the left, as it is by convention).
+ One then gets 
+\begin_inset Formula $\log(x+i\epsilon)-\log(x-i\epsilon)=2\pi iN+\mathcal{O}(\epsilon)$
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $N$
+\end_inset 
+
+.
+ The difference across the cut, for positive 
+\begin_inset Formula $N$
+\end_inset 
+
+, is then 
+\begin_inset Formula \[
+\zeta\left(s,q\right)-\zeta\left(s,N+q\right)=\sum_{k=0}^{N-1}\frac{1}{\left(k+q\right)^{s}}\]
+
+\end_inset 
+
+ with 
+\begin_inset Formula $q=\log(x)/2\pi i$
+\end_inset 
+
+.
+ Taking 
+\begin_inset Formula $N=1$
+\end_inset 
+
+, this seems to provide an excellent description of things.
+ The concentric semi-circles visible in the image 
+\begin_inset LatexCommand \ref{cap:Polylog-whole-plane}
+
+\end_inset 
+
+ can be entirely explained by the behaviour of 
+\begin_inset Formula $q^{s}$
+\end_inset 
+
+ as 
+\begin_inset Formula $q\to0$
+\end_inset 
+
+, that is, as 
+\begin_inset Formula $z\to1$
+\end_inset 
+
+.
+ Thus, for 
+\begin_inset Formula $N=1$
+\end_inset 
+
+, one takes 
+\begin_inset Formula \[
+\Delta=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(\frac{\log z}{2\pi i}\right)^{s-1}\]
+
+\end_inset 
+
+ The result 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta$
+\end_inset 
+
+ is illustrated in figure
+\begin_inset LatexCommand \ref{cap:Upper-sheet}
+
+\end_inset 
+
+; the concnetric rings are seen to be cancelled out precisely, leaving behind
+ a smoothly varying function, seemingly having the expected smooth structure.
+ The joint across the cut appears to be smooth.
+\layout Standard
+
+The discontinuity for 
+\begin_inset Formula $N=-1$
+\end_inset 
+
+ is more problematic.
+ The difference is now given by 
+\begin_inset Formula $1/(-1+q)^{s}=e^{i\pi s}/(1-q)^{s}$
+\end_inset 
+
+ XXXX whoops see figure 
+\begin_inset LatexCommand \ref{cap:Attempted Lower-sheet}
+
+\end_inset 
+
+.
+ 
 \layout Standard
 
 XXX finish me 
+\layout Standard
+
+There is an entirely different approach one can use instead ....
+ that seems to avoid these complications.
 \layout Section
 
 Validation
@@ -3670,9 +3812,106 @@ The concentric shells are centered on the point
 
 \begin_inset Float figure
 wide false
+collapsed true
+
+\layout Caption
+
+Polylogarithm off the critical axis
+\layout Standard
+
+
+\begin_inset Graphics
+	filename polylog-1.2-14.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the polylogarithm in the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, at fixed 
+\begin_inset Formula $s=\sigma+i\tau=1.2+i14$
+\end_inset 
+
+.
+ It is superficially similar to the previous image, with two notable differences.
+ Visibile just under the cut, on the right is a zero.
+ If 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ were smaller, this zero would move to the left; at 
+\begin_inset Formula $\sigma=0.5$
+\end_inset 
+
+, it would be very near to the branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ As 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ gets larger, this point moves up, crossing the branch cut and moving onto
+ the next sheet.
+ Of course, if instead one had 
+\begin_inset Formula $\sigma+i\tau=0.5+i14.13\ldots$
+\end_inset 
+
+, this zero would be located precisely at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Thus, this figure illustrates what a Riemann zero looks like when it is
+ not on the critical strip.
+\layout Standard
+
+As 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ increases, the remaining zeroes circle around in a widening spiral: thus,
+ the zero at the far left of the image is not near 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, but is to the left of there (and thus is not going to be a zero of the
+ Dirichlet eta function).
+ If instead one had 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ with a value of less than 0.5, the zeroes would spiral around in an ever-tighten
+ing spiral, and would never hit the branch cut or cross over.
+ The Riemann hypothesis is essentially that these zeroes are impacting exactly
+ at the branch point; a violation of RH would be a pair of zeroes that failed
+ to hit the branch point, instead passing to the left and right of the branch
+ point.
+ This figure suggests that RH holds: the zeroes are clearly lined up in
+ single file; it is hard to imagine how this single file might break ranks
+ into a pair of zeros that simultaneously passed near the branch point.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
 collapsed false
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Upper-sheet}
+
+\end_inset 
 
 Upper sheet of the polylogarithm
 \layout Standard
@@ -3770,9 +4009,14 @@ Indeed, the Riemann hypothesis can be taken as being equivalent to the statement
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Attempted Lower-sheet}
+
+\end_inset 
 
 Lower sheet of the polylogarithm
 \layout Standard
