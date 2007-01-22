@@ -33,7 +33,7 @@ An efficient algorithm for accelerating the convergence of oscillatory series,
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 20 January 2007
+12 October 2006, revised 21 January 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -117,16 +117,7 @@ on of the Hurwitz zeta in the critical strip, where fast algorithms are
  otherwise unavailable.
 \layout Abstract
 
-XXX There is something wrong with the so-called 
-\begin_inset Quotes eld
-\end_inset 
-
-hurwitz formula
-\begin_inset Quotes erd
-\end_inset 
-
-, see section on branch cuts.
- .
+XXX Nearing final draft
 \layout Section
 
 Introduction
@@ -2460,6 +2451,62 @@ e^{-i\pi s/2}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}
 \end_inset 
 
 .
+\layout Standard
+
+As a practical computational matter, rather than using 
+\begin_inset LatexCommand \ref{eq:Inversion formula}
+
+\end_inset 
+
+, it seems to be more convenient to use the formula
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{1-s}\left(z\right)=\frac{\Gamma(s)}{\left(2\pi\right)^{s}}\left[e^{i\pi s/2}\zeta\left(s,\frac{\log z}{2\pi i}\right)+e^{-i\pi s/2}\zeta\left(s,1-\frac{\log z}{2\pi i}\right)\right]\label{eq:polylog as pure hurwitz}\end{equation}
+
+\end_inset 
+
+ Although this is equivalent to the equation 
+\begin_inset LatexCommand \ref{eq:Inversion formula}
+
+\end_inset 
+
+ immediately above, it correctly captures the apropriate branch of the logarithm
+ that should be used: equation 
+\begin_inset LatexCommand \ref{eq:polylog as pure hurwitz}
+
+\end_inset 
+
+ works well for values of 
+\begin_inset Formula $s$
+\end_inset 
+
+ in both the upper and lower half-planes, whereas equation 
+\begin_inset LatexCommand \ref{eq:Inversion formula}
+
+\end_inset 
+
+ is more difficult to correctly evaluate in the lower half 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane.
+ In either case, one must use the logarithm with an unusual branch cut,
+ taking it to run from 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ to the right along the positive real axis, as opposed to the usual cut
+ taken for the logarithm.
+ 
+\layout Standard
+
+It is of some curiosity to note that the sheet that is forced takes the
+ form 
+\begin_inset Formula \[
+\zeta\left(s,q\right)+e^{-i\pi s}\zeta\left(s,1-q\right)=\sum_{n=-\infty}^{+\infty}\frac{1}{(n+q)^{s}}\]
+
+\end_inset 
+
+
 \layout Section
 
 The Branch Cut
@@ -2474,30 +2521,16 @@ The polylogarithm has a branch point at
 \end_inset 
 
 -axis, extending to the right.
-\layout Standard
-
-xxxThere is a problem.
- The inversion formula is wrong somehow.
- Formula 
-\begin_inset LatexCommand \ref{eq:poly-hur relation}
-
-\end_inset 
-
- is not symmetric under interchange of 
-\begin_inset Formula $q\to-q$
-\end_inset 
-
- and formula 
+ Moving from one sheet to another is trecherous and confusing.
+ The inversion formula 
 \begin_inset LatexCommand \ref{eq:Inversion formula}
 
 \end_inset 
 
- is not symmetric under interchange of 
-\begin_inset Formula $z\to1/z$
-\end_inset 
+ suggests a way to move from one sheet to another: 
+\layout Standard
 
-.
- XXX.
+XXX finish me 
 \layout Section
 
 Validation
