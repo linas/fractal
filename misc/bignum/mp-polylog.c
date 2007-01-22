@@ -536,7 +536,7 @@ bailout:
  * half s-plane.
  */
 static int 
-polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+polylog_invert_works(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	mpf_t twopi;
 	mpf_init (twopi);
@@ -608,12 +608,14 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	return 0;
 }
 
-#if NON_WORKING_INVERSION_ROUTINES
-/* The following should work, but it doesn't.
- * Is it possible that the gamma function is broken ???
+/* The following is an alternate version of the invert routine,
+ * it works, too, for the upper half or the lower half plane.
+ * The only difference between this and the above is that the 
+ * gamma function reflection formula was used to put the gamma
+ * on the top and not the bottom.
  */
 static int 
-polylog_invert_alt(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
+polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
 	mpf_t twopi;
 	mpf_init (twopi);
@@ -629,10 +631,11 @@ polylog_invert_alt(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int d
 	cpx_ui_sub (s, 1, 0, ess);
 	cpx_set (oz, zee);
 
-	/* compute ph = e^{i pi s / 2} = i^s */
+	/* compute ph = e^{-i pi s / 2} = (-i)^s */
 	cpx_mul_mpf (tmp, s, twopi);
-	cpx_div_ui (tmp,tmp, 4);
+	cpx_div_ui (tmp, tmp, 4);
 	cpx_times_i (tmp, tmp);
+	cpx_neg (tmp, tmp);
 	cpx_exp (ph, tmp, prec);
 
 	/* compute ln z/(2pi i) */
@@ -648,25 +651,23 @@ polylog_invert_alt(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int d
 	}
 
 	/* zeta (s, ln z/(2pi i)) */
-	cpx_hurwitz_taylor (term, tmp, logz, prec);
+	cpx_hurwitz_taylor (term, s, logz, prec);
 	
-	/* plus e^{ipi s} zeta (s, 1-ln z/(2pi i)) */
+	/* plus e^{-ipi s} zeta (s, 1-ln z/(2pi i)) */
 	cpx_neg (logz, logz);
 	cpx_add_ui (logz, logz, 1, 0);
-	cpx_hurwitz_taylor (tmp, tmp, logz, prec);
+	cpx_hurwitz_taylor (tmp, s, logz, prec);
 	cpx_mul (tmp, tmp, ph);
 	cpx_mul (tmp, tmp, ph);
 	cpx_add (term, term, tmp);
 
-	/* - gamma(s) i^s / (2pi)^s i^s */
+	/* gamma(s) (i)^s / (2pi)^s */
 	cpx_gamma_cache (tmp, s, prec);
 	cpx_mul (term, term, tmp);
-	cpx_mul (term, term, ph);
 	cpx_mpf_pow (tmp, twopi, s, prec);
 	cpx_div (term, term, tmp);
-
+	cpx_div (term, term, ph);
 	cpx_set (plog, term);
-	cpx_neg (plog, plog);
 
 	cpx_clear (s);
 	cpx_clear (oz);
@@ -678,6 +679,7 @@ polylog_invert_alt(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int d
 	return 0;
 }
 
+#if NON_WORKING_INVERSION_ROUTINES
 /* Implement the following inversion formula for polylog:
  * Li_s(z) = - e^{i\pi s} Li_s(1/z) 
  *           + (2pi i)^s zeta(1-s, ln z/(2pi i)) / Gamma (s)
@@ -687,8 +689,6 @@ polylog_invert_alt(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int d
  * lower-half s-plane, its broken, and the reason for this
  * brokenness is confusing, since its theoretically the same
  * formula as the one that works. Not clear what the gig is.
- *
- * Maybe gamma is broken for lower-half-plane s ????
  */
 static int 
 polylog_invert_broken_for_lower_half_plane(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
