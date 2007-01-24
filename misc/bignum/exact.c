@@ -17,6 +17,8 @@
 #include "mp-polylog.h"
 #include "mp-trig.h"
 
+void polylog_sheet_a(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec);
+void polylog_sheet_b(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec);
 
 #ifdef BORKOKEN_AND_DONT_WORK
 
@@ -220,7 +222,7 @@ int
 main (int argc, char * argv[])
 {
 	int prec = 40;
-	// prec = 20;
+	prec = 20;
 	double q;
 
 	/* Set the precision (number of binary bits) */
@@ -285,14 +287,13 @@ main (int argc, char * argv[])
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.02; q<0.991; q+=0.008)
-	for (q=0.002; q<1.0; q+=0.02)
+	for (q=-0.52; q<2.0; q+=0.10)
 	{
 		mpf_set_d (que, q);
 		cpx_set_d (cq, q, 0.0);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
-		cpx_hurwitz_zeta (z3, ess, que, prec);
-		cpx_hurwitz_taylor (zeta, ess, cq, prec);
-		cpx_sub (zeta, zeta, z3);
+		// cpx_hurwitz_zeta (z3, ess, que, prec);
+		// cpx_hurwitz_taylor (zeta, ess, cq, prec);
 		// cpx_pade_hurwitz_zeta (z2, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
 		// cpx_periodic_zeta (zeta, ess, que, prec);
@@ -334,11 +335,28 @@ main (int argc, char * argv[])
 		cpx_conj (ess, ess);
 #endif
 
-		printf ("%g",q);
-		fp_prt ("\t", zeta[0].re);
+		printf ("%g\t",q);
+		cpx_set_d (zee, q, -0.01);
+		cpx_polylog (zeta, ess, zee, prec);
+		double zre = mpf_get_d(zeta[0].re);
+		double zim = mpf_get_d(zeta[0].im);
+		printf ("%g\t%g\t", zre, zim);
+
+		polylog_sheet_a(z2, ess, zee, -1, prec);
+		zre = mpf_get_d(z2[0].re);
+		zim = mpf_get_d(z2[0].im);
+		printf ("%g\t%g\t", zre, zim);
+
+		polylog_sheet_b(z3, ess, zee, -1, prec);
+		cpx_add (z3, z2, z3);
+		zre = mpf_get_d(z3[0].re);
+		zim = mpf_get_d(z3[0].im);
+		printf ("%g\t%g\n", zre, zim);
+
+		// fp_prt ("\t", zeta[0].re);
 		// fp_prt ("\t", z2[0].re);
 		// fp_prt ("\t", z3[0].re);
-		fp_prt ("\t", zeta[0].im);
+		// fp_prt ("\t", zeta[0].im);
 		printf ("\n");
 		fflush (stdout);
 	}
