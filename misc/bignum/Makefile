@@ -1,6 +1,8 @@
 
 # build Gnu MP code
 #
+# CC = cc -pg
+CC = cc
 
 
 EXES= bound bs bsubn cache-fill cont_frac db-merge db-prt \
@@ -51,6 +53,7 @@ dsubn.o: mp-zeta.h mp-binomial.h mp-misc.h
 exact.o: mp-complex.h mp-misc.h mp-polylog.h
 hurwitz.o: mp-complex.h mp-misc.h
 mp_zeta_test.o: mp-zeta.h mp-binomial.h mp-complex.h mp-consts.h mp-gamma.h mp-misc.h mp-polylog.h mp-trig.h
+picturez.o: mp-zeta.h
 sho.o: mp-complex.h mp-hyper.h mp-trig.h
 stieltjes.o: mp-zeta.h mp-binomial.h mp-misc.h
 
