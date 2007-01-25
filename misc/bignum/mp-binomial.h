@@ -27,6 +27,12 @@ void i_factorial (mpz_t fact, unsigned int n);
 #define i_factorial mpz_fac_ui
 #endif /* USE_LOCAL_FACTORIAL */
 
+/** 
+ * fp_inv_factorial -- Return 1/n!
+ * Returns a cached value to improve performance
+ */
+void fp_inv_factorial (mpf_t invfac, unsigned int n, unsigned int prec);
+
 /* i_binomial
  * Binomial coefficient (n k)
  */

@@ -34,6 +34,7 @@ void fp_two_pi (mpf_t pi, unsigned int prec);
 void fp_pi_half (mpf_t pihalf, unsigned int prec);
 void fp_sqrt_two_pi (mpf_t sqtpi, unsigned int prec);
 void fp_log_two_pi (mpf_t ltpi, unsigned int prec);
+void fp_two_over_pi (mpf_t tpi, unsigned int prec);
 
 /**
  * fp_e_pi - return e^pi 

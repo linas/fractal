@@ -125,8 +125,9 @@ static void cpx_reduced_lngamma (cpx_t gam, const cpx_t ex, int prec)
 		mpf_set_ui (term[0].im, 0);
 		fp_zeta (term[0].re, n, prec);
 		mpf_sub_ui (term[0].re, term[0].re, 1);
+		mpf_div_ui (term[0].re, term[0].re, n);
 		cpx_mul (term, term, zn);
-		cpx_div_ui (term, term, n);
+		
 		if (n%2)
 		{
 			cpx_sub (gam, gam, term);
@@ -364,7 +365,8 @@ void cpx_gamma (cpx_t gam, const cpx_t z, int prec)
 
 	/* mz - 0.5 */
 	mpf_set_ui (frac, 1);
-	mpf_div_ui (frac, frac, 2);
+	// mpf_div_ui (frac, frac, 2);
+	mpf_div_2exp (frac, frac, 1);  /* frac = frac/2, which is faster than mpf_div_ui(frac,frac,2); */
 	mpf_sub (mzee[0].re, mzee[0].re,frac);
 
 	/* m^(mz-0.5) */

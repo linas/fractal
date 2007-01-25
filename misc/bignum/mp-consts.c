@@ -154,6 +154,35 @@ void fp_two_pi (mpf_t two_pi, unsigned int prec)
 
 /* ======================================================================= */
 /**
+ * fp_two_over_pi - return 2/pi = 2 / 3.14159... 
+ * @prec - number of decimal places of precision
+ *
+ * The idea is that it caches the value to avoid recomputation
+ */
+void fp_two_over_pi (mpf_t two_over_pi, unsigned int prec)
+{
+	static unsigned int precision=0;
+	static mpf_t cached_two_over_pi;
+
+	if (precision >= prec)
+	{
+		mpf_set (two_over_pi, cached_two_over_pi);
+		return;
+	}
+
+	if (0 == precision)
+	{
+		mpf_init (cached_two_over_pi);
+	}
+
+	fp_pi (two_over_pi, prec);
+	mpf_ui_div (two_over_pi, 2, two_over_pi);
+	mpf_set (cached_two_over_pi, two_over_pi);
+	precision = prec;
+}
+
+/* ======================================================================= */
+/**
  * fp_pi_half - return pi/2 = 0.5 * 3.14159... 
  * @prec - number of decimal places of precision
  *

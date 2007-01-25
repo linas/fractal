@@ -111,7 +111,8 @@ void fp_exp_helper (mpf_t ex, const mpf_t z, unsigned int prec)
 	unsigned int n=1;
 	while(1)
 	{
-		mpf_div (term, z_n, fact);
+		fp_inv_factorial (fact, n, prec);
+		mpf_mul (term, z_n, fact);
 		mpf_add (ex, ex, term);
 		
 		/* don't go no farther than this */
@@ -120,7 +121,6 @@ void fp_exp_helper (mpf_t ex, const mpf_t z, unsigned int prec)
 		
 		n++;
 		mpf_mul (z_n, z_n, zee);
-		mpf_mul_ui (fact, fact, n);
 	}
 	
 	mpf_clear (zee);
@@ -187,18 +187,17 @@ void fp_exp (mpf_t ex, const mpf_t z, unsigned int prec)
 
 static void fp_sine_series (mpf_t si, const mpf_t z, unsigned int prec)
 {
-	mpf_t zee, z_n, fact, term;
+	mpf_t zsq, z_n, fact, term;
 
-	mpf_init (zee);
+	mpf_init (zsq);
 	mpf_init (z_n);
 	mpf_init (fact);
 	mpf_init (term);
 
 	/* Make copy of argument now! */
-	mpf_set (zee, z);
-	mpf_set (z_n, zee);
+	mpf_set (z_n, z);
+	mpf_mul (zsq, z, z);
 	mpf_set_ui (si, 0);
-	mpf_set_ui (fact, 1);
 	
 	/* Use 10^{-prec} for smallest term in sum */
 	prec += 2;
@@ -210,7 +209,8 @@ static void fp_sine_series (mpf_t si, const mpf_t z, unsigned int prec)
 	unsigned int s=0;
 	while(1)
 	{
-		mpf_div (term, z_n, fact);
+		fp_inv_factorial (fact, n, prec);
+		mpf_mul (term, z_n, fact);
 
 		if (0 == s%2)
 		{
@@ -225,18 +225,13 @@ static void fp_sine_series (mpf_t si, const mpf_t z, unsigned int prec)
 		mpf_abs (term, term);
 		if (mpf_cmp (term, maxterm) < 0) break;
 		
-		n++;
-		mpf_mul (z_n, z_n, zee);
-		mpf_mul_ui (fact, fact, n);
-		
-		n++;
-		mpf_mul (z_n, z_n, zee);
-		mpf_mul_ui (fact, fact, n);
+		n+=2;
+		mpf_mul (z_n, z_n, zsq);
 
 		s++;
 	}
 	
-	mpf_clear (zee);
+	mpf_clear (zsq);
 	mpf_clear (z_n);
 	mpf_clear (fact);
 	mpf_clear (term);
@@ -254,21 +249,23 @@ static void fp_sine_series (mpf_t si, const mpf_t z, unsigned int prec)
 
 void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 {
-	mpf_t zee, pih, per;
+	mpf_t zee, pih, per, top;
 
 	mpf_init (zee);
 	mpf_init (pih);
 	mpf_init (per);
+	mpf_init (top);
 
 	/* Make copy of argument now! */
 	mpf_set (zee, z);
 
 	/* subtract off multiple of pi-halves */
-	fp_pi_half (pih, prec);
-	mpf_div (per, zee, pih);
+	fp_two_over_pi (top, prec);
+	mpf_mul (per, zee, top);
 	mpf_floor (per, per);
 	long quad = mpf_get_si (per);
 	
+	fp_pi_half (pih, prec);
 	mpf_mul (per, per, pih);
 	mpf_sub (zee, zee, per);
 
@@ -291,6 +288,7 @@ void fp_sine (mpf_t si, const mpf_t z, unsigned int prec)
 	mpf_clear (zee);
 	mpf_clear (pih);
 	mpf_clear (per);
+	mpf_clear (top);
 }
 
 /* ======================================================================= */
@@ -421,7 +419,11 @@ void cpx_sine (cpx_t sn, const cpx_t z, unsigned int prec)
 	cpx_neg (zee, zee);
 	cpx_exp (zee, zee, prec);
 	cpx_sub (sn, sn, zee);
-	cpx_div_ui (sn, sn, 2);
+
+	/* divide by two; using mpf_div_2exp() is faster than mpf_div_ui() */
+	// cpx_div_ui (sn, sn, 2);
+	mpf_div_2exp (sn[0].re, sn[0].re, 1);
+	mpf_div_2exp (sn[0].im, sn[0].im, 1);
 	cpx_times_i (sn, sn);
 	cpx_neg (sn, sn);
 	
@@ -537,6 +539,65 @@ static inline void fp_log_simple (mpf_t lg, const mpf_t z, unsigned int prec)
 	mpf_clear (zee);
 }
 
+/* compute and cache logarithm of 1+2^-k */
+void fp_log_2exp (mpf_t lg, unsigned int k, unsigned int prec)
+{
+	DECLARE_FP_CACHE (log_n);
+
+	if (prec <= fp_one_d_cache_check (&log_n, k))
+	{
+		fp_one_d_cache_fetch (&log_n, lg, k);
+		return;
+	}
+	
+	mpf_set_ui (lg, 1);
+	mpf_div_2exp (lg, lg, k);
+	mpf_neg (lg, lg);
+	fp_log_m1 (lg, lg, prec);
+	mpf_neg (lg, lg);
+
+	fp_one_d_cache_store (&log_n, lg, k, prec);
+}
+
+/* Implement the Feynman shift-add algorithm 
+ * The argument z must lie between 1 and 2 inclusive
+ */
+static void fp_log_shiftadd (mpf_t lg, const mpf_t z, unsigned int prec)
+{
+	mpf_t zee, ex, tp, su;
+	mpf_init (zee);
+	mpf_init (tp);
+	mpf_init (ex);
+	mpf_init (su);
+	
+	/* Make a copy of the input arguments now! */
+	mpf_set (zee, z);
+	mpf_set_ui (lg, 0);
+	
+	mpf_set_ui (tp, 1);
+	mpf_set_ui (ex, 1);
+	int n;
+  	for (n=1; n<3.322*prec; n++)
+	{
+		// mpf_div_ui (tp, tp, 2);
+		mpf_div_2exp (tp, tp, 1);
+		while (1)
+		{
+			mpf_mul (su, ex, tp);
+			mpf_add (su, su, ex);
+			if (mpf_cmp(su, zee) > 0) break;
+
+			fp_log_2exp (ex, n, prec);
+			mpf_add (lg, lg, ex);
+			mpf_set (ex, su);
+		}
+	}
+	mpf_clear (su);
+	mpf_clear (ex);
+	mpf_clear (tp);
+	mpf_clear (zee);
+}
+
 void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee;
@@ -557,7 +618,10 @@ void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
 		mpf_mul_ui (zee, zee, 2);
 	}
 
-	/* Apply simple-minded series summation */
+#if 1
+	/* Apply simple-minded series summation
+	 * This appears to be faster than the Feynman algorithm
+	 * for the types of numbers and precisions I'm encountering. */
 	if (mpf_cmp_d(zee, 1.618) > 0)
 	{
 		mpf_ui_div (zee, 1, zee);
@@ -570,6 +634,9 @@ void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
 		fp_log_m1 (lg, zee, prec);
 		mpf_neg (lg, lg);
 	}
+#else
+	fp_log_shiftadd (lg, zee, prec);
+#endif
 
 	/* Add log (2^n) = n log (2) to result. */
 	if (0 != nexp)
@@ -673,7 +740,10 @@ void cpx_log (cpx_t lg, const cpx_t z, unsigned int prec)
 	cpx_mod_sq (r, z);
 	fp_arctan2 (lg[0].im, z[0].im, z[0].re, prec);
 	fp_log (lg[0].re, r, prec);
-	mpf_div_ui (lg[0].re, lg[0].re, 2);
+
+	/* divide by two; using mpf_div_2exp() is faster than mpf_div_ui() */
+	// mpf_div_ui (lg[0].re, lg[0].re, 2);
+	mpf_div_2exp (lg[0].re, lg[0].re, 1);
 
 	mpf_clear (r);
 }
@@ -887,7 +957,10 @@ void cpx_sqrt (cpx_t rt, const cpx_t z, int prec)
 	/* cos A = sqrt(0.5*(1+cos 2A)) */
 	cpx_div_mpf (rt, z, modulus);
 	mpf_add_ui (rt[0].re, rt[0].re, 1);
-	mpf_div_ui (rt[0].re, rt[0].re, 2);
+
+	/* divide by two; using mpf_div_2exp() is faster than mpf_div_ui() */
+	// mpf_div_ui (rt[0].re, rt[0].re, 2);
+	mpf_div_2exp (rt[0].re, rt[0].re, 1);
 	mpf_sqrt (rt[0].re, rt[0].re);
 	
 	/* avoid divide by zero when cosine(half) is zero
@@ -895,7 +968,8 @@ void cpx_sqrt (cpx_t rt, const cpx_t z, int prec)
 	if (mpf_cmp_ui(rt[0].im,0))
 	{
 		/* sin A = sin 2A / (2 cos A) */
-		mpf_div_ui (rt[0].im, rt[0].im, 2);
+		// mpf_div_ui (rt[0].im, rt[0].im, 2);
+		mpf_div_2exp (rt[0].im, rt[0].im, 1);
 		mpf_div (rt[0].im, rt[0].im, rt[0].re);
 	}
 	else

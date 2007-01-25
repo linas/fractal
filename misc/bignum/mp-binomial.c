@@ -72,6 +72,29 @@ void i_factorial (mpz_t fact, unsigned int n)
 #endif /* USE_LOCAL_FACTORIAL */
 
 /* ====================================================================== */
+
+/* compute and cache inverse factorial */
+void fp_inv_factorial (mpf_t inv, unsigned int k, unsigned int prec)
+{
+	DECLARE_FP_CACHE (infac);
+
+	if (prec <= fp_one_d_cache_check (&infac, k))
+	{
+		fp_one_d_cache_fetch (&infac, inv, k);
+		return;
+	}
+
+	mpz_t fac;
+	mpz_init (fac);
+	mpz_fac_ui (fac, k);
+	mpf_set_z (inv, fac);
+	mpf_ui_div (inv, 1, inv);
+	
+	mpz_clear (fac);
+	fp_one_d_cache_store (&infac, inv, k, prec);
+}
+
+/* ====================================================================== */
 /* i_binomial
  * Binomial coefficient (n k)
  */
