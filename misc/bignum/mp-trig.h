@@ -42,11 +42,12 @@ void cpx_tangent (cpx_t tang, const cpx_t z, unsigned int prec);
 
 /**
  * fp_log -  Floating point logarithm
- * Implemented using a brute-force, very simple algo, with 
- * no attempts at optimization. Also, does not assume any 
- * precomputed constants.
+ * Implemented using a brute-force, simple algo, with 
+ * minor attempts at optimization. 
  *
  * fp_log_m1 computes -log(1-z) using Taylor's expansion for small z.
+ * Does not perform any other optimizations -- just simply sums the
+ * Taylor series, and that's all.
  *
  * fp_log_ui takes integer arguments, and keeps previous 
  * results cached for improved performance.

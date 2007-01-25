@@ -518,11 +518,11 @@ void fp_log_m1 (mpf_t lg, const mpf_t z, unsigned int prec)
 	mpf_clear (maxterm);
 }
 
-void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
+static inline void fp_log_simple (mpf_t lg, const mpf_t z, unsigned int prec)
 {
 	mpf_t zee;
 	mpf_init (zee);
-	if (mpf_cmp_d(z, 1.5) > 0)
+	if (mpf_cmp_d(z, 1.618) > 0)
 	{
 		mpf_ui_div (zee, 1, z);
 		mpf_ui_sub (zee, 1, zee);
@@ -534,6 +534,59 @@ void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
 		fp_log_m1 (lg, zee, prec);
 		mpf_neg (lg, lg);
 	}
+	mpf_clear (zee);
+}
+
+void fp_log (mpf_t lg, const mpf_t z, unsigned int prec)
+{
+	mpf_t zee;
+	mpf_init (zee);
+	mpf_set (zee, z);
+	int nexp = 0;
+
+	/* Find power of two by means of bit-shifts */
+	while (mpf_cmp_ui(zee, 2) > 0)
+	{
+		nexp ++;
+		mpf_div_ui (zee, zee, 2);
+	}
+
+	while (mpf_cmp_ui(zee, 1) < 0)
+	{
+		nexp --;
+		mpf_mul_ui (zee, zee, 2);
+	}
+
+	/* Apply simple-minded series summation */
+	if (mpf_cmp_d(zee, 1.618) > 0)
+	{
+		mpf_ui_div (zee, 1, zee);
+		mpf_ui_sub (zee, 1, zee);
+		fp_log_m1 (lg, zee, prec);
+	}
+	else
+	{
+		mpf_ui_sub (zee, 1, zee);
+		fp_log_m1 (lg, zee, prec);
+		mpf_neg (lg, lg);
+	}
+
+	/* Add log (2^n) = n log (2) to result. */
+	if (0 != nexp)
+	{
+		fp_log2 (zee, prec);
+		if (0 > nexp)
+		{
+			mpf_mul_ui (zee, zee, -nexp);
+			mpf_neg (zee, zee);
+		}
+		else
+		{
+			mpf_mul_ui (zee, zee, nexp);
+		}
+		mpf_add (lg,lg, zee);
+	}
+
 	mpf_clear (zee);
 }
 
