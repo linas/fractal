@@ -11,7 +11,7 @@
 #include <math.h>
 #include <gmp.h>
 
-#include "mp_zeta.h"
+#include "mp-zeta.h"
 
 int
 main (int argc, char * argv[])
