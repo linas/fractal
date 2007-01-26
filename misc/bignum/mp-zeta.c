@@ -823,8 +823,10 @@ static inline int bor_zeta_terms_est (const cpx_t s, int prec)
 	// This is a real sleazy way of estimating the number
 	// of terms needed for complex values far from the real axis.
 	// works OK for s=1/2+itau, should be cleaned up to be better.
-	// nterms -=  s * log(s) -s;
+	// what we want is an estimate for size of gamma
+	// nterms -=  s * log(s) -s;  -- Stirling approx for gamma ...
 	double sim = mpf_get_d (s[0].im);
+	sim = fabs(sim);
 	nterms += 0.5*M_PI*sim;
 	
 	nterms *= 0.567296329;
