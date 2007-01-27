@@ -617,32 +617,70 @@ polylog_invert_works(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int
 static int 
 polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
-	mpf_t twopi;
-	mpf_init (twopi);
-	fp_two_pi (twopi, prec);
+	/* create a cache of commonly re-used values */
+	static int not_inited = 1;
+	static int cache_prec = -1;
+	static mpf_t twopi, otp, log_twopi;
+	static cpx_t phase, scale, cache_ess, s;
+	if (not_inited)
+	{
+		not_inited = 0;
+		mpf_init (twopi);
+		mpf_init (otp);
 
-	cpx_t s, oz, tmp, ph, term, logz;
-	cpx_init (s);
+		cpx_init (phase);
+		cpx_init (scale);
+		cpx_init (s);
+		cpx_init (cache_ess);
+		cpx_set_ui(cache_ess, 123123123, 321321321);
+	}
+
+	if (cache_prec != prec)
+	{
+		cache_prec = prec;
+		fp_two_pi (twopi, prec);
+
+		/* otp = -1/2pi */
+		mpf_set_ui (otp, 1);
+		mpf_neg (otp, otp);
+		mpf_div (otp, otp, twopi);
+
+		fp_log (log_twopi, twopi, prec);
+	}
+
+	cpx_t oz, tmp, logz;
 	cpx_init (oz);
 	cpx_init (tmp);
-	cpx_init (term);
-	cpx_init (ph);
 	cpx_init (logz);
-	cpx_ui_sub (s, 1, 0, ess);
-	cpx_set (oz, zee);
 
-	/* compute ph = e^{-i pi s / 2} = (-i)^s */
-	cpx_mul_mpf (tmp, s, twopi);
-	cpx_div_ui (tmp, tmp, 4);
-	cpx_times_i (tmp, tmp);
-	cpx_neg (tmp, tmp);
-	cpx_exp (ph, tmp, prec);
+	/* Recompute these values only if s differs from last time. */
+	if(!cpx_eq (ess, cache_ess, prec*3.322))
+	{
+		cpx_set (cache_ess, ess);
+		cpx_ui_sub (s, 1, 0, ess);
+
+		/* compute ph = e^{-i pi s / 2} = (-i)^s */
+		cpx_mul_mpf (tmp, s, twopi);
+		cpx_div_ui (tmp, tmp, 4);
+		cpx_times_i (tmp, tmp);
+		cpx_neg (tmp, tmp);
+		cpx_exp (oz, tmp, prec);
+		cpx_mul (phase, oz, oz);
+
+		/* gamma(s) (i)^s / (2pi)^s */
+		cpx_gamma_cache (scale, s, prec);
+		cpx_mul_mpf (tmp, s, log_twopi);
+		cpx_neg (tmp, tmp);
+		cpx_exp (tmp, tmp, prec);
+		cpx_mul (scale, scale, tmp);
+		cpx_div (scale, scale, oz);
+	}
 
 	/* compute ln z/(2pi i) */
+	cpx_set (oz, zee);
 	cpx_log (logz, oz, prec);
-	cpx_div_mpf (logz, logz, twopi);
+	cpx_mul_mpf (logz, logz, otp);
 	cpx_times_i (logz, logz);
-	cpx_neg (logz, logz);
 
 	/* Place branch cut so that it extends to the right from z=1 */
 	if (mpf_sgn(logz[0].re) < 0)
@@ -651,31 +689,19 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	}
 
 	/* zeta (s, ln z/(2pi i)) */
-	cpx_hurwitz_taylor (term, s, logz, prec);
+	cpx_hurwitz_taylor (plog, s, logz, prec);
 	
 	/* plus e^{-ipi s} zeta (s, 1-ln z/(2pi i)) */
-	cpx_neg (logz, logz);
-	cpx_add_ui (logz, logz, 1, 0);
+	cpx_ui_sub (logz, 1, 0, logz);
 	cpx_hurwitz_taylor (tmp, s, logz, prec);
-	cpx_mul (tmp, tmp, ph);
-	cpx_mul (tmp, tmp, ph);
-	cpx_add (term, term, tmp);
+	cpx_mul (tmp, tmp, phase);
+	cpx_add (plog, plog, tmp);
 
-	/* gamma(s) (i)^s / (2pi)^s */
-	cpx_gamma_cache (tmp, s, prec);
-	cpx_mul (term, term, tmp);
-	cpx_mpf_pow (tmp, twopi, s, prec);
-	cpx_div (term, term, tmp);
-	cpx_div (term, term, ph);
-	cpx_set (plog, term);
+	cpx_mul (plog, plog, scale);
 
-	cpx_clear (s);
 	cpx_clear (oz);
 	cpx_clear (logz);
 	cpx_clear (tmp);
-	cpx_clear (term);
-	cpx_clear (ph);
-	mpf_clear (twopi);
 	return 0;
 }
 
@@ -867,7 +893,7 @@ polylog_sheet_a(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int pr
 }
 
 void 
-polylog_sheet_b(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec)
+polylog_sheet_bneg(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec)
 {
 	mpf_t twopi;
 	mpf_init (twopi);
@@ -913,8 +939,8 @@ polylog_sheet_b(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int pr
 
 	if (0 > sheet)
 	{
-// #define POSITIVE_CUT
-#ifdef POSITIVE_CUT
+// #define YPOSITIVE_CUT
+#ifdef YPOSITIVE_CUT
 cpx_neg (s,s);
 cpx_mul_mpf (tmp, s, twopi);
 cpx_times_i (tmp, tmp);
@@ -932,9 +958,154 @@ cpx_neg (s,s);
 cpx_neg (s,s);
 cpx_mul_mpf (tmp, s, twopi);
 cpx_times_i (tmp, tmp);
-cpx_neg (tmp, tmp);  // since N=-1
+// cpx_neg (tmp, tmp);  // since N=-1
 cpx_exp (ph, tmp, prec);
 cpx_ui_sub (ph, 1,0, ph);
+
+cpx_ui_sub (q,1,0,q);
+cpx_hurwitz_taylor (delta, s, q, prec);
+cpx_mul(delta, delta,ph);
+
+cpx_mul_mpf (tmp, s, twopi);
+cpx_times_i (tmp, tmp);
+cpx_div_ui (tmp, tmp,2);
+cpx_neg (tmp, tmp);
+cpx_exp (ph, tmp, prec);
+cpx_mul(delta, delta,ph);
+
+// cpx_neg (delta, delta);
+cpx_neg (s,s);
+#endif
+
+#if 0
+		while (mpf_cmp_ui (q[0].re, 0) < 0)
+		{
+			/* Can't use cpx_pow directly, because of
+			 * yet another funky sheet thing happening 
+			 * on the unit circle. So do the pow by hand. */
+			/* cpx_pow (tmp, q, s, prec); */
+			cpx_log (tmp, q, prec);
+			if (mpf_sgn(tmp[0].im) > 0)
+			{
+				mpf_sub (tmp[0].im, tmp[0].im, twopi);
+			}
+			cpx_mul (tmp, tmp, s);
+			cpx_exp (tmp, tmp, prec);
+
+			cpx_add (delta, delta, tmp);
+			mpf_add_ui (q[0].re, q[0].re, 1);
+		}
+		mpf_sub_ui (q[0].re, q[0].re, 1);
+#endif
+	}
+
+	if (0 < sheet)
+	{
+		while (mpf_cmp_ui (q[0].re, 1) > 0)
+		{
+			mpf_sub_ui (q[0].re, q[0].re, 1);
+			cpx_pow (tmp, q, s, prec);
+			cpx_sub (delta, delta, tmp);
+		}
+	}
+
+	cpx_add_ui (s, s, 1, 0);
+
+	/* compute normalization */
+	// XXX this code can be more optimized than this
+	// current form is easier to validate vs. theory
+	/* Compute ph = e^{i pi s / 2} = i^s */
+	cpx_mul_mpf (tmp, s, twopi);
+	cpx_div_ui (tmp, tmp, 4);
+	cpx_times_i (tmp, tmp);
+	cpx_exp (ph, tmp, prec);
+
+	/* (2pi)^s i^s (sum) /gamma (s) */
+	cpx_mul (delta, delta, ph);
+	cpx_mpf_pow (tmp, twopi, s, prec);
+	cpx_mul (delta, delta, tmp);
+	cpx_gamma_cache (tmp, s, prec);
+	cpx_div (delta, delta, tmp);
+
+	cpx_clear (s);
+	cpx_clear (q);
+	cpx_clear (tmp);
+	cpx_clear (ph);
+	mpf_clear (twopi);
+}
+
+void 
+polylog_sheet_bpos(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec)
+{
+	mpf_t twopi;
+	mpf_init (twopi);
+	fp_two_pi (twopi, prec);
+
+	cpx_t s, tmp, ph, q;
+	cpx_init (s);
+	cpx_init (tmp);
+	cpx_init (ph);
+	cpx_init (q);
+	cpx_set (s, ess);
+
+	/* Compute q = ln z/(2pi i) */
+	cpx_log (q, zee, prec);
+	cpx_div_mpf (q, q, twopi);
+	cpx_times_i (q, q);
+	cpx_neg (q,q);
+	
+	/* Place branch cut of the polylog so that it extends to the 
+	 * right from z=1. This is the same as adding 2pi i to the value 
+	 * of the log, if the value is in the lower half plane, so that
+	 * we move the cut of the log to lie along the positive, not 
+	 * negative axis. */
+	if (mpf_sgn(q[0].re) < 0)
+	{
+		mpf_add_ui (q[0].re, q[0].re, 1);
+	}
+
+	/* Move to the n'th sheet; sheets of the log and the polylog
+	 * are now one and the same thing. */
+	if (0 < sheet)
+	{
+		mpf_add_ui (q[0].re, q[0].re, sheet);
+	}
+	else
+	{
+//		mpf_sub_ui (q[0].re, q[0].re, -sheet);
+	}
+
+	/* Compute sum over 1/q^s = (ln z/(2pi i))^{1-s} */
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_set_ui (delta, 0, 0);
+
+	if (0 > sheet)
+	{
+#define POSITIVE_CUT
+#ifdef POSITIVE_CUT
+cpx_neg (s,s);
+cpx_mul_mpf (tmp, s, twopi);
+cpx_times_i (tmp, tmp);
+// cpx_neg (tmp, tmp);  // since N=-1
+cpx_exp (ph, tmp, prec);
+cpx_ui_sub (ph, 1,0, ph);
+
+cpx_hurwitz_taylor (delta, s, q, prec);
+cpx_mul(delta, delta,ph);
+
+cpx_neg (delta, delta);
+cpx_neg (s,s);
+#endif
+
+// #define XNEGATIVE_CUT
+#ifdef XNEGATIVE_CUT
+cpx_neg (s,s);
+cpx_mul_mpf (tmp, s, twopi);
+cpx_times_i (tmp, tmp);
+// cpx_neg (tmp, tmp);  // since N=-1
+cpx_exp (ph, tmp, prec);
+cpx_ui_sub (ph, 1,0, ph);
+
 cpx_ui_sub (q,1,0,q);
 cpx_hurwitz_taylor (delta, s, q, prec);
 cpx_mul(delta, delta,ph);
