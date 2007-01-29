@@ -2522,7 +2522,8 @@ The polylogarithm has a branch point at
 
 -axis, extending to the right.
  Moving from one sheet to another is trecherous and confusing.
- 
+ This section discusses the branch cut, but leaves the problem of correctly
+ determining it unsolved.
 \layout Standard
 
 The inversion formula 
@@ -2575,10 +2576,15 @@ The inversion formula
 \begin_inset Formula $\log(x+i\epsilon)-\log(x-i\epsilon)=\mathcal{O}(\epsilon)$
 \end_inset 
 
-.
- Instead, one must make the Ansatz that this act crosses the cut of the
- logarithm (for example, by taking the cut of the logarithm to extend to
- the right, instead of to the left, as it is by convention).
+; but clearly 
+\begin_inset Formula $\Delta$
+\end_inset 
+
+ cannot be zero.
+ To resolve this situation, one must make the Ansatz that the cut of the
+ logarithm should be crossed.
+ This may be done by taking the cut of the logarithm to extend to the right,
+ instead of to the left, as it is by convention.
  One then gets 
 \begin_inset Formula $\log(x+i\epsilon)-\log(x-i\epsilon)=2\pi iN+\mathcal{O}(\epsilon)$
 \end_inset 
@@ -2607,7 +2613,8 @@ The inversion formula
 \begin_inset Formula $N=1$
 \end_inset 
 
-, this seems to provide an excellent description of things.
+, this, by numerical exploration, seems to provide an excellent description
+ of things.
  The concentric semi-circles visible in the image 
 \begin_inset LatexCommand \ref{cap:Polylog-whole-plane}
 
@@ -2630,13 +2637,13 @@ The inversion formula
 \begin_inset Formula $N=1$
 \end_inset 
 
-, one takes 
+, one wishes to conclude that 
 \begin_inset Formula \[
 \Delta=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(\frac{\log z}{2\pi i}\right)^{s-1}\]
 
 \end_inset 
 
- The result 
+ The difference 
 \begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta$
 \end_inset 
 
@@ -2645,7 +2652,7 @@ The inversion formula
 
 \end_inset 
 
-; the concnetric rings are seen to be cancelled out precisely, leaving behind
+; the concentric rings are seen to be cancelled out precisely, leaving behind
  a smoothly varying function, seemingly having the expected smooth structure.
  The joint across the cut appears to be smooth.
 \layout Standard
