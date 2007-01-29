@@ -26,6 +26,7 @@
 int
 main (int argc, char * argv[])
 {
+	int i;
 	int prec = 40;
 	// prec = 20;
 
@@ -62,45 +63,67 @@ main (int argc, char * argv[])
 
 		struct tms start, end;
 
+// #define MEASURE_POLYLOG_PERFORMANCE 1
 #ifdef MEASURE_POLYLOG_PERFORMANCE
 		cpx_set_d (ess, 0.5, 14.134725);
 		cpx_set_d (zee, 0.4, 0.3);
 
+#if 1
+		/* First we warm the cache */
+		times (&start);
+		cpx_polylog (zeta, ess, zee, prec);
+		times (&end);
+		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
+		
+		/* Then with a hot cache */
+		times (&start);
+		for (i=0; i<1000; i++)
+			cpx_polylog (zeta, ess, zee, prec);
+		times (&end);
+		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
+#endif
+
+#if 0
 		/* First we warm the cache */
 		times (&start);
 		cpx_polylog_sum (plog, ess, zee, prec);
 		times (&end);
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
 
-		times (&start);
-		cpx_polylog (zeta, ess, zee, prec);
-		times (&end);
-		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
-
 		/* Then with a hot cache */
 		times (&start);
-		cpx_polylog_sum (plog, ess, zee, prec);
+		for (i=0; i<100; i++)
+			cpx_polylog_sum (plog, ess, zee, prec);
 		times (&end);
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
-
-		times (&start);
-		cpx_polylog (zeta, ess, zee, prec);
-		times (&end);
-		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
+#endif
 
 		printf ("\n");
 #endif
 
+#define MEASURE_HURWITZ_PERFORMANCE
+#ifdef MEASURE_HURWITZ_PERFORMANCE
 		cpx_set_d (ess, 0.5, 14.134725);
 		cpx_set_d (zee, 0.2, 0.0);
 		mpf_set_d (que, 0.2);
 
+#if 0
 		/* First we warm the cache */
 		times (&start);
 		cpx_hurwitz_zeta (zeta, ess, que, prec);
 		times (&end);
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
 
+		/* Then with a hot cache */
+		times (&start);
+		for (i=0; i<1000; i++)
+			cpx_hurwitz_zeta (zeta, ess, que, prec);
+		times (&end);
+		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
+#endif
+
+#if 1
+		/* First we warm the cache */
 		times (&start);
 		cpx_hurwitz_taylor (zeta, ess, zee, prec);
 		times (&end);
@@ -108,18 +131,13 @@ main (int argc, char * argv[])
 
 		/* Then with a hot cache */
 		times (&start);
-		int i;
-		for (i=0; i<100; i++)
-			cpx_hurwitz_zeta (zeta, ess, que, prec);
-		times (&end);
-		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
-
-		times (&start);
-		for (i=0; i<100; i++)
+		for (i=0; i<1000; i++)
 			cpx_hurwitz_taylor (zeta, ess, zee, prec);
 		times (&end);
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
+#endif
 		printf ("\n");
+#endif
 
 		cpx_clear (ess);
 		cpx_clear (zeta);
