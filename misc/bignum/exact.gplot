@@ -36,12 +36,11 @@ set key right
 # =========================================================
 
 
-set xrange [:0.95]
-set ylabel "|F(s,q)| for s = 0.5 + i 25" 0,0
+# set xrange [:0.95]
+set ylabel "|F( 25" 0,0
 set xlabel "q" 1,0
-# set title "Hurwitz zeta at s=0.5+i14.1"
-plot "exact.dat" using 1:2 title "Re", \
-     "exact.dat" using 1:3 title "Im"
+plot "exact.dat" using 1:(($2)) title "Re", \
+     "exact.dat" using 1:(($3)) title "Im"
 
 # plot "exact.dat" using 1:($2) title "Re",\
 #      "exact.dat" using 1:3 title "leaderup", \
