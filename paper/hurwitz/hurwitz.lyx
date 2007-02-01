@@ -33,7 +33,7 @@ An efficient algorithm for accelerating the convergence of oscillatory series,
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 21 January 2007
+12 October 2006, revised 27 January 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -2466,7 +2466,7 @@ The application of the duplication formula, together with the inversion
 
  can be used to extend the evaluation of the polylogarithm to the entire
  complex plane.
- Both formulas must be applied, one alone is not enough.
+ For numerical work, both formulas must be applied, one alone is not enough.
  Consider first the application of the duplication formula only.
  It may be used to take points that are near to 
 \begin_inset Formula $z=1$
@@ -2557,7 +2557,7 @@ e^{-i\pi s/2}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}
 \begin_inset Formula $\left|z\right|>1$
 \end_inset 
 
- outside of the unit circle to the inside.
+ outside of the unit circle, to the inside.
  Not all points inside the unit circle are directly accessible to the Borwein
  algorithm; the duplication formula must still be used to handle points
  in the disk interior that are near 
@@ -2640,13 +2640,13 @@ It is of some curiosity to note that the sheet that is forced takes the
 
 \end_inset 
 
-
+ A discussion of the monodromy follows.
 \layout Section
 
-The Branch Cut
+Branch Points and Monodromy
 \layout Standard
 
-The polylogarithm has a branch point at 
+The principal sheet of the polylogarithm has a branch point at 
 \begin_inset Formula $z=1$
 \end_inset 
 
@@ -2655,9 +2655,40 @@ The polylogarithm has a branch point at
 \end_inset 
 
 -axis, extending to the right.
- Moving from one sheet to another is trecherous and confusing.
- This section discusses the branch cut, but leaves the problem of correctly
- determining it unsolved.
+ As one moves off of the principal sheet, one discovers that there is another
+ branch point at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+.
+ The resulting monodromy group of loops passing around the points 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ or 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ is 
+\begin_inset Formula $\mathbb{Z}^{2}=\mathbb{Z}\oplus\mathbb{Z}$
+\end_inset 
+
+.
+ The author is not aware of any simple published discussion of the monodromy
+ for the polylogarithm, see however
+\begin_inset LatexCommand \cite{Hain91}
+
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Bloch91}
+
+\end_inset 
+
+.
+ Thus, the following provides a short discussion; moving from one sheet
+ to another is trecherous and confusing.
+ 
 \layout Standard
 
 The inversion formula 
@@ -2665,7 +2696,11 @@ The inversion formula
 
 \end_inset 
 
- suggests a way to move from one sheet to another.
+ suggests a way to move around the branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
  Suppose one starts at the point 
 \begin_inset Formula $z=x+i\epsilon$
 \end_inset 
@@ -2674,12 +2709,15 @@ The inversion formula
 \begin_inset Formula $x$
 \end_inset 
 
- real, positive, and greater than one, and epsilon some arbitrarily small
- postive real number; thus 
+ real, positive, and greater than one, and 
+\begin_inset Formula $\epsilon$
+\end_inset 
+
+ some arbitrarily small postive real number; thus 
 \begin_inset Formula $z$
 \end_inset 
 
- is very near the branch cut.
+ is very near the branch cut of the principal sheet.
  One wishes to compare this to the straddling value at 
 \begin_inset Formula $x-i\epsilon$
 \end_inset 
@@ -2743,7 +2781,49 @@ The inversion formula
 \end_inset 
 
 .
- Taking 
+ By swinging the cut of the logarithm so that it extends to the right, one
+ obtains that the real part of 
+\begin_inset Formula $q$
+\end_inset 
+
+ is positive.
+ As a result, the value of 
+\begin_inset Formula $\left(k+q\right)^{s}$
+\end_inset 
+
+ is unambiguous; as otherwise taking something to the power 
+\begin_inset Formula $s$
+\end_inset 
+
+ also begs the question of which sheet the power must be taken on.
+ That is, for general complex 
+\begin_inset Formula $w$
+\end_inset 
+
+, the power function is multi-sheeted:
+\begin_inset Formula \[
+w^{s}=e^{s\ln w}\to e^{s(\ln w+2\pi iM)}=e^{2\pi isM}w^{s}\]
+
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $M$
+\end_inset 
+
+ representing the sheet of the power function.
+ Since the real part of 
+\begin_inset Formula $q$
+\end_inset 
+
+ is taken as positive, one can temporarily operate with the assumption that
+ 
+\begin_inset Formula $M=0$
+\end_inset 
+
+.
+\layout Standard
+
+Taking 
 \begin_inset Formula $N=1$
 \end_inset 
 
