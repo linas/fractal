@@ -847,19 +847,20 @@ polylog_sheet_a(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int pr
 			cpx_log (tmp, q, prec);
 			if (mpf_sgn(tmp[0].im) > 0)
 			{
-//printf ("duude bumpee!!\n");
 				mpf_sub (tmp[0].im, tmp[0].im, twopi);
 			}
 			cpx_mul (tmp, tmp, s);
 			cpx_exp (tmp, tmp, prec);
 
+#if 0
 double qre = mpf_get_d (q[0].re);
 double qim = mpf_get_d (q[0].im);
 double sre = mpf_get_d (s[0].re);
 double sim = mpf_get_d (s[0].im);
 double tmpre = mpf_get_d (tmp[0].re);
 double tmpim = mpf_get_d (tmp[0].im);
-// printf ("duude first q=%g+i %g   s=%g+i%g pow=%g+i%g \n", qre, qim, sre, sim, tmpre, tmpim);
+printf ("duude first q=%g+i %g   s=%g+i%g pow=%g+i%g \n", qre, qim, sre, sim, tmpre, tmpim);
+#endif
 			cpx_add (delta, delta, tmp);
 			mpf_add_ui (q[0].re, q[0].re, 1);
 		}
@@ -921,8 +922,7 @@ polylog_sheet_aneg(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int
 	cpx_log (q, zee, prec);
 	cpx_div_mpf (q, q, twopi);
 	cpx_times_i (q, q);
-	//cpx_neg (q,q);
-cpx_add_ui (q, q, 1,0);
+	cpx_neg (q,q);
 	
 	/* Place branch cut of the polylog so that it extends to the 
 	 * right from z=1. This is the same as adding 2pi i to the value 
@@ -942,7 +942,8 @@ cpx_add_ui (q, q, 1,0);
 	}
 	else
 	{
-//		mpf_sub_ui (q[0].re, q[0].re, -sheet);
+		mpf_sub_ui (q[0].re, q[0].re, -sheet);
+		cpx_neg (q, q);
 	}
 
 	/* Compute sum over 1/q^s = (ln z/(2pi i))^{s-1} */
@@ -951,12 +952,8 @@ cpx_add_ui (q, q, 1,0);
 
 	if (0 > sheet)
 	{
-		while (mpf_cmp_ui (q[0].re, 1) > 0)
-		{
-			mpf_sub_ui (q[0].re, q[0].re, 1);
-			cpx_pow (tmp, q, s, prec);
-			cpx_sub (delta, delta, tmp);
-		}
+		cpx_pow (tmp, q, s, prec);
+		cpx_add (delta, delta, tmp);
 	}
 
 	cpx_add_ui (s, s, 1, 0);
@@ -973,7 +970,7 @@ cpx_add_ui (q, q, 1,0);
 
 cpx_mul (tmp, ph, ph);
 cpx_recip (tmp, tmp);
-cpx_sub_ui (tmp, tmp, 1,0);
+cpx_neg (tmp, tmp);
 cpx_mul (delta,delta,tmp);
 	/* (2pi)^s i^s (sum) /gamma (s) */
 	cpx_mul (delta, delta, ph);
