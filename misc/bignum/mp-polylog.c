@@ -787,14 +787,14 @@ bail:
 #endif /* NON_WORKING_INVERSION_ROUTINES */
 
 /*
- * polylog_sheet -- move to sheet N of polylog
+ * cpx_polylog_sheet -- move to sheet N of polylog
  * The Nth sheet of Li_s(z) is given by
  *      (2pi i)^s zeta(1-s, ln z/(2pi i)) / Gamma (s)
  */
 void 
-polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec)
+cpx_polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int z0_dromy, int z1_dromy, int prec)
 {
-	if (0 == sheet)
+	if (0 == z1_dromy)
 	{
 		cpx_set_ui (delta, 0,0);
 		return;
@@ -829,14 +829,14 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 
 	/* Move to the n'th sheet; sheets of the log and the polylog
 	 * are now one and the same thing. */
-	if (0 < sheet)
+	if (0 < z1_dromy)
 	{
-		mpf_add_ui (q[0].re, q[0].re, sheet);
+		mpf_add_ui (q[0].re, q[0].re, z1_dromy);
 	}
 	else
 	{
 		cpx_neg (q, q);
-		mpf_add_ui (q[0].re, q[0].re, -sheet);
+		mpf_add_ui (q[0].re, q[0].re, -z1_dromy);
 
 		/* and one more, for the loop */
 		mpf_add_ui (q[0].re, q[0].re, 1);
@@ -863,7 +863,7 @@ polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec
 	cpx_div_ui (tmp, tmp, 4);
 	cpx_times_i (tmp, tmp);
 
-	if (0> sheet)
+	if (0> z1_dromy)
 	{
 		cpx_neg (tmp, tmp);
 	}
@@ -1014,13 +1014,6 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 		cpx_set_ui (plog, 0,0);
 		return rc;
 	}
-#if 0
-	cpx_t delta;
-	cpx_init (delta);
-	polylog_sheet_a (delta, ess, zee, 1, prec);
-	cpx_sub (plog, plog, delta);
-	cpx_clear (delta);
-#endif
 	return 0;
 }
 

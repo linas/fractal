@@ -45,6 +45,21 @@ void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
 int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
 
 /**
+ * cpx_polylog_sheet -- give the branch difference for the polylog
+ * M is the monodromy number of going around z=0
+ * N is the monodromy number of going around z=1
+ *
+ * For M=0, the branch difference is that given between the principle
+ * sheet, and the N'th winding around the z=1 branch point.
+ * Thus, for example, the (0,1)'th sheet of Li_s(z) is given by
+ *      (2pi i)^s (ln z/(2pi i)^{s-1} / Gamma (s)
+ *
+ * For N=0, the monodromy M has no effect.
+ * For N!=0, the monodromy is given with respect to the N=1 sheet.
+ */
+void cpx_polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int z0_dromy, int z1_dromy, int prec);
+
+/**
  * cpx_periodic_zeta -- Periodic zeta function 
  *
  * F(s,q) = sum_{n=1}^infty exp(2pi iqn)/ n^s
