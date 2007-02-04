@@ -343,7 +343,7 @@ main (int argc, char * argv[])
 #define PARALLEL_TO_CUT 1
 #ifdef PARALLEL_TO_CUT
 		printf ("%g\t",q);
-		cpx_set_d (zee, q, 0.03);
+		cpx_set_d (zee, q, -0.03);
 		cpx_polylog (zeta, ess, zee, prec);
 		double zre = mpf_get_d(zeta[0].re);
 		double zim = mpf_get_d(zeta[0].im);
