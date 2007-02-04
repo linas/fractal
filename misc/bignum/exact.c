@@ -239,6 +239,7 @@ main (int argc, char * argv[])
 	double sre = atof (argv[1]);
 	double sim = atof (argv[2]);
 	double zre = atof (argv[3]);
+	double zim = zre;
 	
 	cpx_t ess, zeta, z2, zee, plog;
 	cpx_init (ess);
@@ -254,6 +255,7 @@ main (int argc, char * argv[])
 	// cpx_set_d (ess, 1.5, 14.134725);
 	cpx_set_d (ess, -1.563331235, sim);
 	cpx_set_d (ess, 0.5, sim);
+	cpx_set_d (ess, sre, sim);
 
 #if 0
 	char * zero;
@@ -291,11 +293,11 @@ main (int argc, char * argv[])
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.02; q<0.991; q+=0.008)
-	// for (q=-0.53; q<2.00; q+=0.10)
-	for (q=-0.0999999; q<0.100001; q+=0.00311)
+	for (zre=-0.53; zre<1.00; zre+=0.05)
+	// for (q=-0.0999999; q<0.0999999; q+=0.000311)
 	{
-		mpf_set_d (que, q);
-		cpx_set_d (cq, q, 0.0);
+		// mpf_set_d (que, q);
+		// cpx_set_d (cq, q, 0.0);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_hurwitz_zeta (z3, ess, que, prec);
 		// cpx_hurwitz_taylor (zeta, ess, cq, prec);
@@ -340,44 +342,61 @@ main (int argc, char * argv[])
 		cpx_conj (ess, ess);
 #endif
 
-// #define PARALLEL_TO_CUT 1
+#define PARALLEL_TO_CUT 1
 #ifdef PARALLEL_TO_CUT
-		printf ("%g\t",q);
-		cpx_set_d (zee, q, -0.03);
+		printf ("%g\t",zre);
+		cpx_set_d (zee, zre, zim);
 		cpx_polylog (zeta, ess, zee, prec);
-		double zre = mpf_get_d(zeta[0].re);
-		double zim = mpf_get_d(zeta[0].im);
-		printf ("%g\t%g\t", zre, zim);
+		double zetare = mpf_get_d(zeta[0].re);
+		double zetaim = mpf_get_d(zeta[0].im);
+		printf ("%g\t%g\t", zetare, zetaim);
 
-		polylog_sheet_a(z2, ess, zee, -1, prec);
-		zre = mpf_get_d(z2[0].re);
-		zim = mpf_get_d(z2[0].im);
-		printf ("%g\t%g\t", zre, zim);
+		polylog_sheet(z2, ess, zee, 1, prec);
+		zetare = mpf_get_d(z2[0].re);
+		zetaim = mpf_get_d(z2[0].im);
+		printf ("%g\t%g\t", zetare, zetaim);
 
-		polylog_sheet_bneg(z3, ess, zee, -1, prec);
-		// cpx_sub(z3,z3,z2);
-		zre = mpf_get_d(z3[0].re);
-		zim = mpf_get_d(z3[0].im);
-		printf ("%g\t%g\t", zre, zim);
+		polylog_sheet(z3, ess, zee, 2, prec);
+		zetare = mpf_get_d(z3[0].re);
+		zetaim = mpf_get_d(z3[0].im);
+		printf ("%g\t%g\t", zetare, zetaim);
 
-		polylog_sheet_bpos(z4, ess, zee, -1, prec);
+		// polylog_sheet_bpos(z4, ess, zee, -1, prec);
 		// cpx_sub (z4, z4, z3);
-		zre = mpf_get_d(z4[0].re);
-		zim = mpf_get_d(z4[0].im);
-		// printf ("%g\t%g", zre, zim);
+		zetare = mpf_get_d(z4[0].re);
+		zetaim = mpf_get_d(z4[0].im);
+		// printf ("%g\t%g\t", zetare, zetaim);
 #endif
 
-#define CROSS_CUT 1
+// #define CROSS_CUT 1
 #ifdef CROSS_CUT
 		printf ("%g\t",q);
 		cpx_set_d (ess, sre, sim);
 		cpx_set_d (zee, zre, q);
+#if 1
 		cpx_polylog (zeta, ess, zee, prec);
 		if (q > 0)
 		{
-			polylog_sheet_a(z2, ess, zee, 1, prec);
-			cpx_add(zeta, zeta, z2);
+			polylog_sheet(z2, ess, zee, 2, prec);
+			cpx_sub(zeta, zeta, z2);
+		} else {
+			polylog_sheet(z2, ess, zee, 1, prec);
+			cpx_sub(zeta, zeta, z2);
 		}
+#endif
+#if 0
+		cpx_polylog (zeta, ess, zee, prec);
+		if (q < 0)
+		{
+			polylog_sheet_a(z2, ess, zee, -2, prec);
+			cpx_sub(zeta, zeta, z2);
+		}
+		else
+		{
+			polylog_sheet_a(z2, ess, zee, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+		}
+#endif
 		double zetare = mpf_get_d(zeta[0].re);
 		double zetaim = mpf_get_d(zeta[0].im);
 		printf ("%g\t%g\t", zetare, zetaim);
