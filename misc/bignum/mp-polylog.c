@@ -794,6 +794,12 @@ bail:
 void 
 polylog_sheet_a(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int prec)
 {
+	if (0 == sheet)
+	{
+		cpx_set_ui (delta, 0,0);
+		return;
+	}
+
 	mpf_t twopi;
 	mpf_init (twopi);
 	fp_two_pi (twopi, prec);
