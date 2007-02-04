@@ -224,19 +224,21 @@ int
 main (int argc, char * argv[])
 {
 	int prec = 40;
-	// prec = 40;
+	prec = 20;
 	double q;
 
 	/* Set the precision (number of binary bits) */
 	int nbits = 3.3*prec+100;
 	mpf_set_default_prec (nbits);
 
-	if (argc != 2)
+	if (argc != 4)
 	{
-		fprintf (stderr, "Usage: %s <sim>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <sre> <sim> <zre>\n", argv[0]);
 		exit (1);
 	}
-	double sim = atof (argv[1]);
+	double sre = atof (argv[1]);
+	double sim = atof (argv[2]);
+	double zre = atof (argv[3]);
 	
 	cpx_t ess, zeta, z2, zee, plog;
 	cpx_init (ess);
@@ -252,8 +254,6 @@ main (int argc, char * argv[])
 	// cpx_set_d (ess, 1.5, 14.134725);
 	cpx_set_d (ess, -1.563331235, sim);
 	cpx_set_d (ess, 0.5, sim);
-
-	double zmag = sim;
 
 #if 0
 	char * zero;
@@ -291,8 +291,8 @@ main (int argc, char * argv[])
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.02; q<0.991; q+=0.008)
-	for (q=-0.53; q<2.00; q+=0.10)
-	// for (q=-0.1; q<0.100001; q+=0.000311)
+	// for (q=-0.53; q<2.00; q+=0.10)
+	for (q=-0.0999999; q<0.100001; q+=0.00311)
 	{
 		mpf_set_d (que, q);
 		cpx_set_d (cq, q, 0.0);
@@ -340,7 +340,7 @@ main (int argc, char * argv[])
 		cpx_conj (ess, ess);
 #endif
 
-#define PARALLEL_TO_CUT 1
+// #define PARALLEL_TO_CUT 1
 #ifdef PARALLEL_TO_CUT
 		printf ("%g\t",q);
 		cpx_set_d (zee, q, -0.03);
@@ -354,8 +354,8 @@ main (int argc, char * argv[])
 		zim = mpf_get_d(z2[0].im);
 		printf ("%g\t%g\t", zre, zim);
 
-		polylog_sheet_aneg(z3, ess, zee, -1, prec);
-		cpx_sub(z3,z3,z2);
+		polylog_sheet_bneg(z3, ess, zee, -1, prec);
+		// cpx_sub(z3,z3,z2);
 		zre = mpf_get_d(z3[0].re);
 		zim = mpf_get_d(z3[0].im);
 		printf ("%g\t%g\t", zre, zim);
@@ -367,20 +367,20 @@ main (int argc, char * argv[])
 		// printf ("%g\t%g", zre, zim);
 #endif
 
-// #define CROSS_CUT 1
+#define CROSS_CUT 1
 #ifdef CROSS_CUT
 		printf ("%g\t",q);
-		cpx_set_d (ess, 0.5, -2);
-		cpx_set_d (zee, zmag, q);
+		cpx_set_d (ess, sre, sim);
+		cpx_set_d (zee, zre, q);
 		cpx_polylog (zeta, ess, zee, prec);
 		if (q > 0)
 		{
 			polylog_sheet_a(z2, ess, zee, 1, prec);
 			cpx_add(zeta, zeta, z2);
 		}
-		double zre = mpf_get_d(zeta[0].re);
-		double zim = mpf_get_d(zeta[0].im);
-		printf ("%g\t%g\t", zre, zim);
+		double zetare = mpf_get_d(zeta[0].re);
+		double zetaim = mpf_get_d(zeta[0].im);
+		printf ("%g\t%g\t", zetare, zetaim);
 #endif
 
 		// fp_prt ("\t", zeta[0].re);
