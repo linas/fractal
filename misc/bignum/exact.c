@@ -377,14 +377,15 @@ main (int argc, char * argv[])
 #if 1
 		// cpx_polylog (zeta, ess, zee, prec);
 		cpx_set_ui (zeta, 0, 0);
+		int m = 0;
 		if (zim > 0)
 		{
-			polylog_sheet(z2, ess, zee, 1, prec);
-			cpx_mul (z2,z2,ph);
-			cpx_neg (z2,z2);
+			cpx_polylog_sheet(z2, ess, zee, m, 2, prec);
+			cpx_div (z2,z2,ph);
 			cpx_sub(zeta, zeta, z2);
 		} else {
-			polylog_sheet(z2, ess, zee, -1, prec);
+			/* N is less here */
+			cpx_polylog_sheet(z2, ess, zee, m-1, 1, prec);
 			cpx_sub(zeta, zeta, z2);
 		}
 #endif

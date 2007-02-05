@@ -804,12 +804,36 @@ cpx_polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int z0_dromy, i
 	mpf_init (twopi);
 	fp_two_pi (twopi, prec);
 
-	cpx_t s, tmp, ph, q;
+	cpx_t s, tmp, ph, q, norm;
 	cpx_init (s);
 	cpx_init (tmp);
 	cpx_init (ph);
 	cpx_init (q);
+	cpx_init (norm);
 	cpx_set (s, ess);
+	cpx_set_ui (norm, 1, 0);
+
+	/* Do the z0_dromy */
+	if (z0_dromy) 
+	{
+		cpx_mul_mpf (tmp, s, twopi);
+		cpx_times_i (tmp, tmp);
+		cpx_neg (tmp, tmp);
+		if (z0_dromy > 0)
+		{
+			cpx_mul_ui (tmp, tmp, z0_dromy);
+		}
+		else
+		{
+			cpx_mul_ui (tmp, tmp, -z0_dromy);
+			cpx_neg (tmp,tmp);
+		}
+		cpx_exp (norm, tmp, prec);
+		if (z0_dromy%2) 
+		{
+			cpx_neg (norm, norm);
+		}
+	}
 
 	/* Compute q = ln z/(2pi i) */
 	cpx_log (q, zee, prec);
@@ -875,6 +899,8 @@ cpx_polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int z0_dromy, i
 	cpx_mul (delta, delta, tmp);
 	cpx_gamma_cache (tmp, s, prec);
 	cpx_div (delta, delta, tmp);
+
+	cpx_mul (delta, delta, norm);
 
 	cpx_clear (s);
 	cpx_clear (q);
