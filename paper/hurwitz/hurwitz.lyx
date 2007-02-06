@@ -33,7 +33,7 @@ An efficient algorithm for accelerating the convergence of oscillatory series,
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 3 February 2007
+12 October 2006, revised 4 February 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -2672,11 +2672,11 @@ The principal sheet of the polylogarithm has a branch point at
 \begin_inset Formula $z=1$
 \end_inset 
 
- is 
+ is XXX wrong 
 \begin_inset Formula $\mathbb{Z}^{2}=\mathbb{Z}\oplus\mathbb{Z}$
 \end_inset 
 
-.
+ XXXerr please be carefull, see ahead XXXX.
  The author is not aware of any simple published discussion of the monodromy
  for the polylogarithm; a much more abstract discussion is given in 
 \begin_inset LatexCommand \cite{Hain91}
@@ -2872,12 +2872,12 @@ Taking
 
  sheet is 
 \begin_inset Formula \begin{equation}
-\Delta_{1,0}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(\frac{\log z}{2\pi i}\right)^{s-1}\label{eq: N=+1 monodromy}\end{equation}
+\Delta_{1}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(\frac{\log z}{2\pi i}\right)^{s-1}\label{eq: N=+1 monodromy}\end{equation}
 
 \end_inset 
 
  The difference 
-\begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta_{1,0}$
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta_{1}$
 \end_inset 
 
  is illustrated in figure
@@ -2910,7 +2910,7 @@ Taking
 
  cut is 
 \begin_inset Formula \[
-\Delta_{N,N-1}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(N-1+\frac{\log z}{2\pi i}\right)^{s-1}\]
+\Delta_{N}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(N-1+\frac{\log z}{2\pi i}\right)^{s-1}\]
 
 \end_inset 
 
@@ -2936,7 +2936,7 @@ The discontinuity across the cut
 
 , or 
 \begin_inset Formula \[
-\Delta_{0,-1}=e^{-i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(1-\frac{\log z}{2\pi i}\right)^{s-1}\]
+\Delta_{-1}=e^{-i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(1-\frac{\log z}{2\pi i}\right)^{s-1}\]
 
 \end_inset 
 
@@ -2946,7 +2946,7 @@ The discontinuity across the cut
 \end_inset 
 
  illustrates the difference 
-\begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta_{0,-1}$
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta_{-1}$
 \end_inset 
 
 .
@@ -2954,22 +2954,22 @@ The discontinuity across the cut
 \begin_inset Formula $N$
 \end_inset 
 
-, the difference between the principal sheet and the 
-\begin_inset Formula $N$
-\end_inset 
-
-'th sheet is then 
+, the difference between adjacent sheets is then 
 \begin_inset Formula \[
-\Delta_{0,N}=e^{-i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\sum_{k=1}^{-N}\frac{1}{\left(k-q\right)^{1-s}}\]
+\Delta_{-N}=e^{-i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(N-q\right)^{s-1}\]
 
 \end_inset 
 
- Again, it can be numerically verified that that the tranisition from sheet
+ Again, it can be numerically verified that that the transition from sheet
  to sheet is smooth as one crosses the cut 
 \begin_inset Formula $\Re z>1$
 \end_inset 
 
 .
+\layout Standard
+
+It is perhaps more clear to use explicit topological language.
+ 
 \layout Standard
 
 In the development above, in the joining of sheets across 
@@ -3048,7 +3048,7 @@ In the development above, in the joining of sheets across
 
 , one has 
 \begin_inset Formula \[
-\lim_{\epsilon\to0}\left[\Delta_{1,0}(x+i\epsilon)+e^{i2\pi s}\Delta_{0,-1}(x-i\epsilon)\right]=0\]
+\lim_{\epsilon\to0}\left[\Delta_{0,1}(x+i\epsilon)+e^{i2\pi s}\Delta_{-1,0}(x-i\epsilon)\right]=0\]
 
 \end_inset 
 
@@ -4497,6 +4497,9 @@ This figure shows the
 \end_inset 
 
 
+\layout Standard
+
+
 \begin_inset Float figure
 wide false
 collapsed false
@@ -4517,6 +4520,7 @@ More Polylogarithm sheets
 
 \begin_inset Graphics
 	filename polylog,-0,-2-sheet.png
+	lyxscale 25
 	width 33text%
 
 \end_inset 
@@ -4524,6 +4528,7 @@ More Polylogarithm sheets
 
 \begin_inset Graphics
 	filename polylog,-0,-3-sheet.png
+	lyxscale 25
 	width 33text%
 
 \end_inset 
@@ -4534,7 +4539,22 @@ More Polylogarithm sheets
 
 \begin_inset Graphics
 	filename polylog,1,1-sheet.png
+	lyxscale 25
 	width 33text%
+
+\end_inset 
+
+
+\begin_inset Graphics
+	filename polylog,1,-2-sheet.png
+	scale 33
+
+\end_inset 
+
+
+\begin_inset Graphics
+	filename polylog,1,-3-sheet.png
+	scale 33
 
 \end_inset 
 
@@ -4545,7 +4565,7 @@ Top row: (M,N)=(0,-1),(0,-2),(0,-3) shows the result of winding around
 \begin_inset Formula $z=1$
 \end_inset 
 
-one, two and three times in a left-handed fashion.
+, one, two and three times in a left-handed fashion.
  The cuts to the right of 
 \begin_inset Formula $z=$
 \end_inset 
@@ -4567,6 +4587,8 @@ Second row: Result of winding left-handed around
 \end_inset 
 
  joins smoothly to the images in the row above.
+ The three images appear to be visually indistinguishable; but in fact they
+ are not the same.
 \end_inset 
 
 
