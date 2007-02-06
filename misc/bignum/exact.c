@@ -374,18 +374,32 @@ main (int argc, char * argv[])
 		printf ("%g\t",zim);
 		cpx_set_d (ess, sre, sim);
 		cpx_set_d (zee, zre, zim);
-#if 1
+#if 0
 		// cpx_polylog (zeta, ess, zee, prec);
 		cpx_set_ui (zeta, 0, 0);
-		int m = 0;
+		int m = 1;
 		if (zim > 0)
 		{
-			cpx_polylog_sheet(z2, ess, zee, m, 2, prec);
-			cpx_div (z2,z2,ph);
+			cpx_polylog_sheet(z2, ess, zee, m, 1, prec);
 			cpx_sub(zeta, zeta, z2);
 		} else {
 			/* N is less here */
-			cpx_polylog_sheet(z2, ess, zee, m-1, 1, prec);
+			cpx_polylog_sheet(z2, ess, zee, m-1, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+		}
+#endif
+#if 1
+		// cpx_polylog (zeta, ess, zee, prec);
+		cpx_set_ui (zeta, 0, 0);
+		int m = 1;
+		if (zim > 0)
+		{
+			cpx_polylog_sheet(z2, ess, zee, m, 2, prec);
+			// cpx_div (z2,z2,ph);
+			cpx_sub(zeta, zeta, z2);
+		} else {
+			/* N is less here */
+			cpx_polylog_sheet(z2, ess, zee, m-1, -2, prec);
 			cpx_sub(zeta, zeta, z2);
 		}
 #endif
