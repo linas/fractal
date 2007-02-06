@@ -33,7 +33,7 @@ An efficient algorithm for accelerating the convergence of oscillatory series,
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 4 February 2007
+12 October 2006, revised 5 February 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -2676,7 +2676,16 @@ The principal sheet of the polylogarithm has a branch point at
 \begin_inset Formula $\mathbb{Z}^{2}=\mathbb{Z}\oplus\mathbb{Z}$
 \end_inset 
 
- XXXerr please be carefull, see ahead XXXX.
+ XXXerr bouquet 
+\begin_inset Formula $S^{1}\vee S^{1}$
+\end_inset 
+
+, please be carefull, non-abelian, depends on 
+\begin_inset Formula $s$
+\end_inset 
+
+ integer or not, see ahead; this intro paragraph needs revision.
+ XXXX.
  The author is not aware of any simple published discussion of the monodromy
  for the polylogarithm; a much more abstract discussion is given in 
 \begin_inset LatexCommand \cite{Hain91}
@@ -2735,7 +2744,7 @@ The inversion formula
 .
  The difference accross the cut is thus 
 \begin_inset Formula \[
-\Delta=\mbox{Li}_{s}\left(x+i\epsilon\right)-\mbox{Li}_{s}\left(x-i\epsilon\right)=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\log x+i\epsilon}{2\pi i}\right)-\zeta\left(1-s,\frac{\log x-i\epsilon}{2\pi i}\right)\right]+\mathcal{O}(\epsilon)\]
+\Delta=\mbox{Li}_{s}\left(x+i\epsilon\right)-\mbox{Li}_{s}\left(x-i\epsilon\right)=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\ln x+i\epsilon}{2\pi i}\right)-\zeta\left(1-s,\frac{\ln x-i\epsilon}{2\pi i}\right)\right]+\mathcal{O}(\epsilon)\]
 
 \end_inset 
 
@@ -2780,7 +2789,7 @@ The inversion formula
 \end_inset 
 
  with 
-\begin_inset Formula $q=\log(x)/2\pi i$
+\begin_inset Formula $q=\ln(x)/2\pi i$
 \end_inset 
 
 .
@@ -2872,7 +2881,7 @@ Taking
 
  sheet is 
 \begin_inset Formula \begin{equation}
-\Delta_{1}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(\frac{\log z}{2\pi i}\right)^{s-1}\label{eq: N=+1 monodromy}\end{equation}
+\Delta_{1}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(\frac{\ln z}{2\pi i}\right)^{s-1}\label{eq: N=+1 monodromy}\end{equation}
 
 \end_inset 
 
@@ -2910,7 +2919,7 @@ Taking
 
  cut is 
 \begin_inset Formula \[
-\Delta_{N}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(N-1+\frac{\log z}{2\pi i}\right)^{s-1}\]
+\Delta_{N}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(N-1+\frac{\ln z}{2\pi i}\right)^{s-1}\]
 
 \end_inset 
 
@@ -2936,7 +2945,7 @@ The discontinuity across the cut
 
 , or 
 \begin_inset Formula \[
-\Delta_{-1}=e^{-i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(1-\frac{\log z}{2\pi i}\right)^{s-1}\]
+\Delta_{-1}=e^{-i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(1-\frac{\ln z}{2\pi i}\right)^{s-1}\]
 
 \end_inset 
 
@@ -2969,6 +2978,161 @@ The discontinuity across the cut
 \layout Standard
 
 It is perhaps more clear to use explicit topological language.
+ Let 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+ represent the homotopy class of all loops based at some point 
+\begin_inset Formula $z$
+\end_inset 
+
+ on the complex plane, that wind once around the branch-point 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ in the positive direction.
+ The action of 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+ on the polylogarithm has the effect of carrying the polylog from one sheet
+ to the next.
+ In the above discussion, it was determined that 
+\begin_inset Formula \[
+g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
+
+\end_inset 
+
+ The logarithm in 
+\begin_inset Formula $\Delta_{1}$
+\end_inset 
+
+ has a branch point at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+.
+ That is, after acting with 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+, one is now on a sheet with a cut extending from 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ to the right.
+ Let let 
+\begin_inset Formula $g_{0}$
+\end_inset 
+
+ represent the homotopy class of loops that wind once around the branch
+ point 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ in a right-handed fashion.
+ Acting on the logarithm, one has 
+\begin_inset Formula \[
+g_{0}\cdot\ln z=\ln z+2\pi i\]
+
+\end_inset 
+
+ Recalling the definition of 
+\begin_inset Formula $q=\ln z/2\pi i$
+\end_inset 
+
+, one thus has 
+\begin_inset Formula $g_{0}\cdot q=q+1$
+\end_inset 
+
+, and so 
+\begin_inset Formula \[
+g_{0}\cdot\Delta_{N}=\Delta_{N+1}\]
+
+\end_inset 
+
+The principal sheet of the polylogarithm has no branch point at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+, and so one has 
+\begin_inset Formula \[
+g_{0}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)\]
+
+\end_inset 
+
+ Similarly, the logarithm has no branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and so 
+\begin_inset Formula \[
+g_{1}\cdot\ln z=\ln z\]
+
+\end_inset 
+
+
+\layout Standard
+
+Consider now the task of pasting sheets together, such that the result is
+ continuous as one crosses the cut 
+\begin_inset Formula $z>1$
+\end_inset 
+
+.
+ Some confusion may result here: one must paste together the cut of the
+ polylog, and (if any), the cut of the logarithm as well.
+ Thus, for example, suppose one is on the 
+\begin_inset Formula $g_{1}\cdot\mbox{Li}_{s}\left(z\right)$
+\end_inset 
+
+ sheet.
+ To get to a sheet by means of a continuous, differentiable glueing across
+ the 
+\begin_inset Formula $z>1$
+\end_inset 
+
+ cut, one must move as 
+\begin_inset Formula \[
+g_{1}g_{0}g_{1}\cdot\mbox{Li}_{s}\left(z\right)=g_{1}g_{0}\cdot\left[\mbox{Li}_{s}\left(z\right)-\Delta_{1}\right]=\mbox{Li}_{s}\left(z\right)-\Delta_{1}-\Delta_{2}\]
+
+\end_inset 
+
+ Repeating this gluing 
+\begin_inset Formula $n$
+\end_inset 
+
+ times, so that each time, one pastes the sheets so that crossing the 
+\begin_inset Formula $z>1$
+\end_inset 
+
+ cut is smooth and differentiable, gives 
+\begin_inset Formula \begin{eqnarray*}
+\left(g_{1}g_{0}\right)^{n-1}g_{1}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)-\sum_{k=1}^{n}\Delta_{k}\\
+ & = & \mbox{Li}_{s}\left(z\right)-e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\sum_{k=1}^{n}\frac{1}{\left(k-1+q\right)^{1-s}}\\
+ & = & \mbox{Li}_{s}\left(z\right)-e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\ln z}{2\pi i}\right)-\zeta\left(1-s,n+\frac{\ln z}{2\pi i}\right)\right]\end{eqnarray*}
+
+\end_inset 
+
+ which is recognizable from the initial considerations.
+ 
+\layout Standard
+
+Winding in the opposite direction, one has 
+\begin_inset Formula \[
+g_{1}^{-1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{-1}\]
+
+\end_inset 
+
+ and to repeat this process, as above, one considers the action of 
+\begin_inset Formula $\left(g_{1}^{-1}g_{0}^{-1}\right)^{n}g_{1}^{-1}$
+\end_inset 
+
+ on 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset 
+
+.
  
 \layout Standard
 
@@ -2976,7 +3140,7 @@ In the development above, in the joining of sheets across
 \begin_inset Formula $\Re z>1$
 \end_inset 
 
-, a cut was introduced that runs between 
+, the cut that runs between 
 \begin_inset Formula $z=0$
 \end_inset 
 
@@ -2984,14 +3148,15 @@ In the development above, in the joining of sheets across
 \begin_inset Formula $z=1$
 \end_inset 
 
-.
+ was mostly ignored.
  Visually, the cut can be clearly seen in figure 
 \begin_inset LatexCommand \ref{cap:N=-1 Lower-sheet}
 
 \end_inset 
 
 .
- The origin of this cut can be understood as follows: for a point 
+ Consider now the task of glueing sheets across this cut.
+ For a point 
 \begin_inset Formula $z$
 \end_inset 
 
@@ -3025,20 +3190,10 @@ In the development above, in the joining of sheets across
 \begin_inset Formula $q$
 \end_inset 
 
- differs by 1, and this may be seen to be the same cut originating from
- 
-\begin_inset Formula $\ln z$
-\end_inset 
-
- that was discussed before.
- The difference is that, when 
-\begin_inset Formula $\Re z<1$
-\end_inset 
-
-, there is nowhere on the principal sheet to attach to.
- Instead, one skips over the principal sheet, and joins to the previous
- sheet going in the other direction.
- Thus, for 
+ differs by 1, of course.
+ This cut cannot be glued to the polylog, of course; it must be glued to
+ another sheet of the logarithm.
+ The correct gluing, for 
 \begin_inset Formula $z=x$
 \end_inset 
 
@@ -3046,41 +3201,81 @@ In the development above, in the joining of sheets across
 \begin_inset Formula $0<x<1$
 \end_inset 
 
-, one has 
+, is given by 
 \begin_inset Formula \[
-\lim_{\epsilon\to0}\left[\Delta_{0,1}(x+i\epsilon)+e^{i2\pi s}\Delta_{-1,0}(x-i\epsilon)\right]=0\]
+\lim_{\epsilon\to0}\left[\Delta_{1}(x+i\epsilon)+e^{i2\pi s}\Delta_{-1}(x-i\epsilon)\right]=0\]
 
 \end_inset 
 
- This is the multi-sheeted behaviour labelled by 
-\begin_inset Formula $M$
-\end_inset 
-
- in equation 
-\begin_inset LatexCommand \ref{eq:M-sheet}
+ That is, 
+\begin_inset Formula \[
+g_{0}\cdot\Delta_{-1}=-e^{-i2\pi s}\Delta_{1}\]
 
 \end_inset 
 
-, and represents the monodromy action of casting a loop around 
-\begin_inset Formula $z=0$
+ This somewhat strange form is nothing more than an accounting trick; it
+ is the result of providing a definition of 
+\begin_inset Formula $\Delta_{-N}$
+\end_inset 
+
+ that had a 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ normalization, avoiding a minus sign.
+ The price of that definition is this glitch.
+ In all other respects, the homotpy proceeds as expected, so that, for example,
+ 
+\begin_inset Formula \[
+g_{0}\cdot\Delta_{-N}=\Delta_{-N+1}\]
+
+\end_inset 
+
+ for 
+\begin_inset Formula $N>1$
 \end_inset 
 
 .
  
 \layout Standard
 
-XXX finish me 
+XXX finish me -- discussion of the monodromy group for the 
+\begin_inset Formula $s=2$
+\end_inset 
+
+ dilogarithm, how its a three-dimensional uni-potent discrete-Heisenberg
+ like thing-a-ma-bob, the 
+\begin_inset Formula $s=3$
+\end_inset 
+
+ space, etc.
+ etc.
+ 
 \layout Standard
 
-To summarize, the monodromy of winding around 
-\begin_inset Formula $z=1$
+For 
+\begin_inset Formula $s$
 \end_inset 
 
-, with positive 
-\begin_inset Formula $N$
+ not an integer, the action of the 
+\begin_inset Formula $g_{0}$
 \end_inset 
 
- corresponding to winding around in a right-handed fashion, is given by
+ monodromy can be understood to be the shift operator on an infinite-dimensional
+ vector space, whose basis vectors are 
+\begin_inset Formula $\Delta_{N}$
+\end_inset 
+
+.
+ For 
+\begin_inset Formula $s$
+\end_inset 
+
+ an integer, something interesting happens ....
 \layout Section
 
 Validation
@@ -4547,14 +4742,15 @@ More Polylogarithm sheets
 
 \begin_inset Graphics
 	filename polylog,1,-2-sheet.png
-	scale 33
+	width 33text%
 
 \end_inset 
 
 
 \begin_inset Graphics
 	filename polylog,1,-3-sheet.png
-	scale 33
+	lyxscale 25
+	width 33text%
 
 \end_inset 
 
