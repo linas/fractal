@@ -33,7 +33,7 @@ An efficient algorithm for accelerating the convergence of oscillatory series,
 Linas Vepstas
 \layout Date
 
-12 October 2006, revised 6 February 2007
+12 October 2006, revised 7 February 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -115,9 +115,6 @@ An efficient algorithm for computing the Riemann zeta function
  The primary, concrete result of this paper is an algorithm allows the explorati
 on of the Hurwitz zeta in the critical strip, where fast algorithms are
  otherwise unavailable.
-\layout Abstract
-
-XXX Nearing final draft
 \layout Section
 
 Introduction
@@ -185,7 +182,7 @@ k\end{array}\right)(q+k)^{1-s}\label{eq:Hasse series}\end{equation}
 
 \end_inset 
 
- (but this techniques seems to be limited in scope ????).
+ (the author has been unable to obtain a copy of this manuscript).
  
 \layout Standard
 
@@ -423,7 +420,19 @@ e acceleration of general oscillatory series.
  This is followed by a brief review of the duplication formula for the Hurwitz
  zeta, and a short discussion of ways in which this numerical algorithm
  may be tested for correctness.
- The algorithm has been implemented by the author using the Gnu Multiple
+ This is followed by a detailed derivation of the monodromy group, and a
+ discussion of Apostol's 
+\begin_inset Quotes eld
+\end_inset 
+
+periodic zeta function
+\begin_inset Quotes erd
+\end_inset 
+
+.
+\layout Standard
+
+The algorithm has been implemented by the author using the Gnu Multiple
  Precision arithmetic library
 \begin_inset LatexCommand \cite{GMP}
 
@@ -2643,7 +2652,62 @@ It is of some curiosity to note that the sheet that is forced takes the
 
 \end_inset 
 
- A discussion of the monodromy follows.
+ A general discussion of the monodromy is given in a later section.
+\layout Section
+
+Testing and Validation
+\layout Standard
+
+The correctness of a given numerical implementation can be validated in
+ a number of ways.
+ For non-positive integer 
+\begin_inset Formula $s$
+\end_inset 
+
+, one has the exact rational functions previously mentioned.
+ For positive integer 
+\begin_inset Formula $n$
+\end_inset 
+
+, one has the relationship 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{n}\left(e^{2\pi iq}\right)+\left(-1\right)^{n}\mbox{Li}_{n}\left(e^{-2\pi iq}\right)=-\frac{\left(2\pi i\right)^{n}}{n!}B_{n}(q)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the 
+\begin_inset Formula $B_{n}(x)$
+\end_inset 
+
+ are the Bernoulli polynomials.
+ For 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, one regains the Riemann zeta function 
+\begin_inset Formula $\zeta(s)$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}\left(-1\right)=\frac{1}{2^{1-s}-1}\,\zeta(s)\label{eq:}\end{equation}
+
+\end_inset 
+
+ For 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset 
+
+, the defining series 
+\begin_inset LatexCommand \ref{eq:polylog definition}
+
+\end_inset 
+
+ is explicitly convergent, and may be directly summed, thus offering a fourth
+ check of the correctness of an implementation.
+ Finally, the multiplication theorem can be used to check for consistency.
+ Each of these quantities can be computed by independent algorithms, and
+ thus be used to validate the correctness of a polylogarithm implementation.
 \layout Section
 
 Branch Points and Monodromy
@@ -3281,7 +3345,8 @@ The free combinations of powers of the two operators
 \begin_inset Formula $s=2$
 \end_inset 
 
-, where the representation forms the discrete Heisenberg group.
+, the dilogarithm, where the representation forms the discrete Heisenberg
+ group.
  This may be seen as follows.
  For 
 \begin_inset Formula $s=2,$
@@ -3369,11 +3434,12 @@ g_{0}=\left[\begin{array}{ccc}
 \begin_inset Formula $g_{1}$
 \end_inset 
 
-, and defines 
+, and defines a new element 
 \begin_inset Formula $z$
 \end_inset 
 
- as the commutator 
+ (having no relation at all to the argument of the dilogarithm) as the commutato
+r 
 \begin_inset Formula $z=xyx^{-1}y^{-1}$
 \end_inset 
 
@@ -3442,11 +3508,11 @@ g_{0}=\left[\begin{array}{cccc}
  The generated group is no longer the Heisenberg group, as there simply
  aren't enough generators for that.
  The commutator 
-\begin_inset Formula $z=g_{0}g_{1}g_{0}^{-1}g_{1}^{-1}$
+\begin_inset Formula $w=g_{0}g_{1}g_{0}^{-1}g_{1}^{-1}$
 \end_inset 
 
  is not in the center, since 
-\begin_inset Formula $zg_{0}\ne g_{0}z$
+\begin_inset Formula $wg_{0}\ne g_{0}w$
 \end_inset 
 
 .
@@ -3457,7 +3523,7 @@ For general integer
 \begin_inset Formula $s=m$
 \end_inset 
 
-, the monodromy group is always unipotent.
+, the monodromy group is always unipotent, and thus a nilpotent group.
  The generators take the form 
 \begin_inset Formula \[
 g_{0}=\left[\begin{array}{cc}
@@ -3488,14 +3554,22 @@ g_{0}=\left[\begin{array}{cc}
 \end_inset 
 
 .
- 
+ This discrete group does not seem to be named or well-known.
+ Note that the existence of polylogarithm ladders seems to be equivalent
+ to the statement that products of monodromy groups can be factored in interesti
+ng and unusual ways.
 \layout Standard
 
 For 
 \begin_inset Formula $s$
 \end_inset 
 
- not an integer, the vector-space representation is infinite dimensional.
+ not an integer, the action of 
+\begin_inset Formula $g_{0}$
+\end_inset 
+
+ does not close, and the general vector-space representation is infinite
+ dimensional.
  The action of the 
 \begin_inset Formula $g_{0}$
 \end_inset 
@@ -3510,62 +3584,12 @@ For
 \end_inset 
 
  acts to inject into this shift space.
- 
-\layout Section
-
-Testing and Validation
-\layout Standard
-
-The correctness of a given numerical implementation can be validated in
- a number of ways.
- For non-positive integer 
-\begin_inset Formula $s$
+ It is not clear whether there may also be smaller, finite-dimensional represent
+ations for particular values of 
+\begin_inset Formula $z$
 \end_inset 
 
-, one has the exact rational functions previously mentioned.
- For positive integer 
-\begin_inset Formula $n$
-\end_inset 
-
-, one has the relationship 
-\begin_inset Formula \begin{equation}
-\mbox{Li}_{n}\left(e^{2\pi iq}\right)+\left(-1\right)^{n}\mbox{Li}_{n}\left(e^{-2\pi iq}\right)=-\frac{\left(2\pi i\right)^{n}}{n!}B_{n}(q)\label{eq:}\end{equation}
-
-\end_inset 
-
- where the 
-\begin_inset Formula $B_{n}(x)$
-\end_inset 
-
- are the Bernoulli polynomials.
- For 
-\begin_inset Formula $z=-1$
-\end_inset 
-
-, one regains the Riemann zeta function 
-\begin_inset Formula $\zeta(s)$
-\end_inset 
-
-: 
-\begin_inset Formula \begin{equation}
-\mbox{Li}_{s}\left(-1\right)=\frac{1}{2^{1-s}-1}\,\zeta(s)\label{eq:}\end{equation}
-
-\end_inset 
-
- For 
-\begin_inset Formula $\left|z\right|<1$
-\end_inset 
-
-, the defining series 
-\begin_inset LatexCommand \ref{eq:polylog definition}
-
-\end_inset 
-
- is explicitly convergent, and may be directly summed, thus offering a fourth
- check of the correctness of an implementation.
- Finally, the multiplication theorem can be used to check for consistency.
- Each of these quantities can be computed by independent algorithms, and
- thus be used to validate the correctness of a polylogarithm implementation.
+.
 \layout Section
 
 The 
@@ -3577,10 +3601,6 @@ Periodic
 \end_inset 
 
  Zeta Function 
-\layout Standard
-
-XXX this section needs to be re-written.
- XXX
 \layout Standard
 
 The ability to compute the polylogarithm allows one to visualize some of
@@ -4004,12 +4024,27 @@ F(q,1-s)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{i\pi s/2}\zeta(s,q)+e^{-i\pi s/2}\
 \end_inset 
 
 .
- The precise form of the discontinuity across the branch point, that would
- be valid for small positive or negative 
-\begin_inset Formula $\tau$
+ 
+\layout Standard
+
+The constraint of keeping 
+\begin_inset Formula $q$
 \end_inset 
 
-, is not at all clear.
+ real causes integer values of 
+\begin_inset Formula $q$
+\end_inset 
+
+ to correspond precisely to the branch point of the polylogarithm.
+ This makes reasoning about the continuity of the periodic zeta at integral
+ values of 
+\begin_inset Formula $q$
+\end_inset 
+
+ rather turbid.
+ Since the Riemann zeta function lies precisely at the branch point, this
+ seems to also make it difficult to gain new insight into the Riemann zeta
+ in this way.
 \layout Section
 
 Conclusion
@@ -4088,12 +4123,9 @@ The polylogarithm and Hurwitz zeta functions are both special cases of the
  
 \layout Standard
 
-Another peculiar corner of of the theory of special functions is the characteriz
-ation of the periodic zeta function.
- The discontinuity across the branch cut of the periodic zeta is unclear;
- it should be carefully characterized in relation to the branch cuts of
- the polylogarithm and the Hurwitz zeta.
- XXXX bzzt, not unclear any longer.
+A further exploration of monodromy group seems to be merited; this does
+ not appear to be terribly challenging, but it would be nice to be aware
+ of the details.
 \layout Standard
 
 This paper concludes with the application of the algorithm to render some
@@ -4498,6 +4530,8 @@ fingers
  the limit of convergence for the combination of the Borwein algorithm and
  the duplication formula; one can enlarge the region of convergence slightly,
  but not much, but using polynomial approximations of higher order.
+ The boundary is easily crossed by applying the inversion formula, as the
+ later images show.
  The image is offset somehat, rather than being centered on 
 \begin_inset Formula $z=0$
 \end_inset 
@@ -4506,7 +4540,7 @@ fingers
  axis.
 \layout Standard
 
-Note the lone zero floating along inside of the 
+Note the other lone zero floating along inside of the 
 \begin_inset Formula $\left|z\right|<1$
 \end_inset 
 
@@ -4772,7 +4806,7 @@ Upper sheet of the polylogarithm
 \layout Standard
 
 This figure shows the 
-\begin_inset Formula $N=1$
+\begin_inset Formula $g_{1}\mbox{Li}_{s}(z)=\mbox{Li}_{s}(z)-\Delta_{1}$
 \end_inset 
 
  sheet of the polylogarithm on the complex 
@@ -4885,7 +4919,7 @@ Lower sheet of the polylogarithm
 \layout Standard
 
 This figure shows the 
-\begin_inset Formula $N=-1$
+\begin_inset Formula $g_{1}^{-1}\mbox{Li}_{s}(z)=\mbox{Li}_{s}(z)-\Delta_{-1}$
 \end_inset 
 
  sheet of the polylogarithm on the complex 
@@ -4903,6 +4937,11 @@ This figure shows the
 
 , and whose form is essentially that of 
 \begin_inset Formula $(1-q)^{1-s}$
+\end_inset 
+
+.
+ The vertex of the black triangle approaches 
+\begin_inset Formula $z=0$
 \end_inset 
 
 .
@@ -5052,7 +5091,7 @@ Second row: Result of winding left-handed around
 \end_inset 
 
  sheets.
- XXX is that right?? Check again.
+ 
 \end_inset 
 
 
