@@ -10,12 +10,13 @@
 #
 # 
 #
-IMGS= poly-perf-cold-cache.ps \
+GRPHS= poly-perf-cold-cache.ps \
       poly-perf-warm-cache.ps \
       hurwitz-perf-cold.ps \
       hurwitz-perf-warm.ps \
-      periodic-xsection.ps \
-      periodic-50.ps \
+      periodic-xsection.ps 
+
+IMGS= periodic-50.ps \
       hurwitz-non-leading.ps \
       hurwitz-extended.ps \
       poly-phase.ps \
@@ -27,14 +28,23 @@ IMGS= poly-perf-cold-cache.ps \
       polylog,-0,-3-sheet.ps \
       polylog,1,1-sheet.ps
 
-all:
+all: $(IMGS)
 	cp hurwitz-arxiv.tex hurwitz.latex
 	/usr/bin/latex hurwitz.latex
 	/usr/bin/bibtex hurwitz.aux
 
-dist:
-	tar -zcvf hurwitz.tar.gz hurwitz.latex hurwitz.aux hurwitz.bbl $(IMGS)
+dist: $(IMGS)
+	tar -zcvf hurwitz.tar.gz hurwitz.latex hurwitz.aux hurwitz.bbl $(GRPHS) $(IMGS)
 	ls -la hurwitz.tar.gz
 
 clean:
 	rm -f *.log *.blg *.dvi
+
+imgclean:
+	rm -f $(IMGS)
+
+.SUFFIXES: .ps .png
+
+.png.ps:
+	cat $^ |  pngtopnm | pnmscale 0.65 -nomix | pnmtopng -compression 9 > tmp.png
+	convert tmp.png $*.ps
