@@ -906,6 +906,139 @@ cpx_polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int z0_dromy, i
 	cpx_clear (q);
 	cpx_clear (tmp);
 	cpx_clear (ph);
+	cpx_clear (norm);
+	mpf_clear (twopi);
+}
+
+void 
+cpx_polylog_sheet_g0_action(cpx_t ph, const cpx_t ess, int direction, int prec)
+{
+	if (0 == direction)
+	{
+		cpx_set_ui (ph, 0,0);
+		return;
+	}
+
+	mpf_t twopi;
+	mpf_init (twopi);
+	fp_two_pi (twopi, prec);
+
+	cpx_mul_mpf (ph, ess, twopi);
+	cpx_times_i (ph, ph);
+	cpx_neg (ph, ph);
+	if (direction > 0)
+	{
+		cpx_mul_ui (ph, ph, direction);
+	}
+	else
+	{
+		cpx_mul_ui (ph, ph, -direction);
+		cpx_neg (ph, ph);
+	}
+	cpx_exp (ph, ph, prec);
+	if (direction%2) 
+	{
+		cpx_neg (ph, ph);
+	}
+	mpf_clear (twopi);
+}
+
+void 
+cpx_polylog_sheet_g1_action(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int direction, int prec)
+{
+	if (0 == direction)
+	{
+		cpx_set_ui (delta, 0,0);
+		return;
+	}
+
+	mpf_t twopi;
+	mpf_init (twopi);
+	fp_two_pi (twopi, prec);
+
+	cpx_t s, tmp, ph, q;
+	cpx_init (s);
+	cpx_init (tmp);
+	cpx_init (ph);
+	cpx_init (q);
+	cpx_set (s, ess);
+
+	/* Compute q = ln z/(2pi i) */
+	cpx_log (q, zee, prec);
+	cpx_div_mpf (q, q, twopi);
+	cpx_times_i (q, q);
+	cpx_neg (q,q);
+	
+	/* Place branch cut of the polylog so that it extends to the 
+	 * right from z=1. This is the same as adding 2pi i to the value 
+	 * of the log, if the value is in the lower half plane, so that
+	 * we move the cut of the log to lie along the positive, not 
+	 * negative axis. */
+	if (mpf_sgn(q[0].re) < 0)
+	{
+		mpf_add_ui (q[0].re, q[0].re, 1);
+	}
+
+	/* Move to the n'th sheet; sheets of the log and the polylog
+	 * are now one and the same thing. */
+	// XXX this is wrong, if zero is crossed. 
+	// That is, this works correctly only if direction is +1 or -1 
+	// or if z1_dromy is same sign as sheet.  But for now, this
+	// restriction is enough. 
+	int z1_dromy = sheet + direction;
+	if (0 < z1_dromy)
+	{
+		mpf_add_ui (q[0].re, q[0].re, z1_dromy);
+	}
+	else
+	{
+		cpx_neg (q, q);
+		mpf_add_ui (q[0].re, q[0].re, -z1_dromy);
+
+		/* and one more, for the loop */
+		mpf_add_ui (q[0].re, q[0].re, 1);
+	}
+
+	/* Compute sum over 1/q^s = (ln z/(2pi i))^{s-1} */
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_set_ui (delta, 0, 0);
+
+	if (0 > direction) direction = -direction;
+	while (direction > 0)
+	{
+		mpf_sub_ui (q[0].re, q[0].re, 1);
+		cpx_pow (tmp, q, s, prec);
+		cpx_add (delta, delta, tmp);
+		direction --;
+	}
+
+	cpx_add_ui (s, s, 1, 0);
+
+	/* compute normalization */
+	// XXX this code can be more optimized than this
+	// current form is easier to validate vs. theory
+	/* Compute ph = e^{i pi s / 2} = i^s */
+	cpx_mul_mpf (tmp, s, twopi);
+	cpx_div_ui (tmp, tmp, 4);
+	cpx_times_i (tmp, tmp);
+
+	if (0> z1_dromy)
+	{
+		cpx_neg (tmp, tmp);
+	}
+	cpx_exp (ph, tmp, prec);
+
+	/* (2pi)^s i^s (sum) /gamma (s) */
+	cpx_mul (delta, delta, ph);
+	cpx_mpf_pow (tmp, twopi, s, prec);
+	cpx_mul (delta, delta, tmp);
+	cpx_gamma_cache (tmp, s, prec);
+	cpx_div (delta, delta, tmp);
+
+	cpx_clear (s);
+	cpx_clear (q);
+	cpx_clear (tmp);
+	cpx_clear (ph);
 	mpf_clear (twopi);
 }
 

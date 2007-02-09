@@ -58,6 +58,9 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
  * For N!=0, the monodromy is given with respect to the N=1 sheet.
  */
 void cpx_polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int z0_dromy, int z1_dromy, int prec);
+void cpx_polylog_sheet_g0_action(cpx_t delta, const cpx_t ess, int direction, int prec);
+void cpx_polylog_sheet_g1_action(cpx_t delta, const cpx_t ess, const cpx_t zee, int sheet, int direction, int prec);
+
 
 /**
  * cpx_periodic_zeta -- Periodic zeta function 

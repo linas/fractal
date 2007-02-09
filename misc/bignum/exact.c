@@ -263,6 +263,7 @@ main (int argc, char * argv[])
 	cpx_times_i (ph, ph);
 	cpx_neg (ph,ph);
 	cpx_exp (ph, ph, prec);
+	cpx_neg (ph,ph);
 
 #if 0
 	char * zero;
@@ -388,18 +389,57 @@ main (int argc, char * argv[])
 			cpx_sub(zeta, zeta, z2);
 		}
 #endif
-#if 1
+#if 0
 		// cpx_polylog (zeta, ess, zee, prec);
 		cpx_set_ui (zeta, 0, 0);
-		int m = 1;
 		if (zim > 0)
 		{
-			cpx_polylog_sheet(z2, ess, zee, m, 2, prec);
-			// cpx_div (z2,z2,ph);
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, 1, prec);
+			cpx_mul (z2,z2,ph);
 			cpx_sub(zeta, zeta, z2);
 		} else {
 			/* N is less here */
-			cpx_polylog_sheet(z2, ess, zee, m-1, -2, prec);
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+		}
+#endif
+#if 0
+		// cpx_polylog (zeta, ess, zee, prec);
+		cpx_set_ui (zeta, 0, 0);
+		if (zim > 0)
+		{
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, 1, prec);
+			cpx_mul (z2,z2,ph);
+			cpx_sub(zeta, zeta, z2);
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+		} else {
+			/* below the cut -- this is the two g_1's down */
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+			cpx_polylog_sheet_g1_action(z2, ess, zee, -1, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+		}
+#endif
+#if 1
+		cpx_polylog (zeta, ess, zee, prec);
+		cpx_set_ui (zeta, 0, 0);
+		if (zim > 0)
+		{
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, 1, prec);
+			cpx_mul (z2,z2,ph);
+			cpx_sub(zeta, zeta, z2);
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+			cpx_polylog_sheet_g1_action(z2, ess, zee, -1, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+		} else {
+			/* below the cut -- this is the two g_1's down */
+			cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+			cpx_polylog_sheet_g1_action(z2, ess, zee, -1, -1, prec);
+			cpx_sub(zeta, zeta, z2);
+			cpx_polylog_sheet_g1_action(z2, ess, zee, -2, -1, prec);
 			cpx_sub(zeta, zeta, z2);
 		}
 #endif
@@ -407,12 +447,12 @@ main (int argc, char * argv[])
 		cpx_polylog (zeta, ess, zee, prec);
 		if (q < 0)
 		{
-			polylog_sheet_a(z2, ess, zee, -2, prec);
+			cpx_polylog_sheet(z2, ess, zee, -2, prec);
 			cpx_sub(zeta, zeta, z2);
 		}
 		else
 		{
-			polylog_sheet_a(z2, ess, zee, -1, prec);
+			cpx_polylog_sheet(z2, ess, zee, -1, prec);
 			cpx_sub(zeta, zeta, z2);
 		}
 #endif
