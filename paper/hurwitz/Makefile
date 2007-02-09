@@ -10,10 +10,10 @@
 #
 # 
 #
-IMGS= poly-perf-cold-cache.png \
-      poly-perf-warm-cache.png \
-      hurwitz-perf-cold.png \
-      hurwitz-perf-warm.png \
+IMGS= poly-perf-cold-cache.ps \
+      poly-perf-warm-cache.ps \
+      hurwitz-perf-cold.ps \
+      hurwitz-perf-warm.ps \
       periodic-xsection.png \
       periodic-50.png \
       hurwitz-non-leading.png \
