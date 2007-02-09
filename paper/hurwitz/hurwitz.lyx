@@ -455,7 +455,7 @@ The polylogarithm has a non-trivial analytic structure.
 \begin_inset Formula $s$
 \end_inset 
 
-, it has a branch cut on the positive real axis, for 
+, the principal sheet has a branch cut on the positive real axis, for 
 \begin_inset Formula $1<z<+\infty$
 \end_inset 
 
@@ -464,7 +464,7 @@ The polylogarithm has a non-trivial analytic structure.
 \begin_inset Formula $z=1$
 \end_inset 
 
- is, as is always the case with branch points, the cause of limited convergence
+, as is always the case with branch points, is the cause of limited convergence
  of analytic series in the complex 
 \begin_inset Formula $z$
 \end_inset 
@@ -472,8 +472,8 @@ The polylogarithm has a non-trivial analytic structure.
 -plane.
  This is noted here, as this branch point has a direct impact on the algorithm,
  preventing convergence in its vicinity.
- The polylogarithm has many interesting properties, which are not reviewed
- here.
+ Besides this, the polylogarithm has many other interesting properties,
+ which are not reviewed here.
 \layout Standard
 
 The development of the algorithm requires the following integral representation.
@@ -543,7 +543,7 @@ The Borwein trick uses the integral form to find a simple, finite sum that
 .
  The right hand side may be easily evaluated, by employing the following
  theorem.
-\layout Theorem
+\layout Lemma
 
 Given a polynomial 
 \begin_inset Formula $p_{n}(y)$
@@ -567,15 +567,36 @@ r_{n}(y)=\frac{p_{n}(y)-p_{n}(1/z)}{1-yz}\label{eq:r_n definition}\end{equation}
 \begin_inset Formula $n-1$
 \end_inset 
 
+, for any constant 
+\begin_inset Formula $z$
+\end_inset 
+
 , provided that 
-\begin_inset Formula $p_{n}(1/z)\ne0$
+\begin_inset Formula $z\ne0$
 \end_inset 
 
 .
  
 \layout Proof
 
-Write the polynomial as 
+This may be easily proved, term by term, by noting that 
+\begin_inset Formula $(x^{n}-a^{n})/(x-a)$
+\end_inset 
+
+, with 
+\begin_inset Formula $a=1/z$
+\end_inset 
+
+, has the desired properties.
+ 
+\layout Standard
+
+An explicit expression for 
+\begin_inset Formula $r_{n}(y)$
+\end_inset 
+
+iss needed.
+ Write the polynomial as 
 \begin_inset Formula \begin{equation}
 p_{n}(y)=\sum_{k=0}^{n}a_{k}y^{k}\label{eq:}\end{equation}
 
@@ -650,7 +671,7 @@ c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}
 \end_inset 
 
 .
- This concludes the proof that 
+ This confirms the claim that 
 \begin_inset Formula $r_{n}(y)$
 \end_inset 
 
@@ -666,7 +687,7 @@ c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}
  
 \layout Standard
 
-This result may be immediately employed in equation 
+This is immediately employed in equation 
 \begin_inset LatexCommand \ref{eq:Borwein trick}
 
 \end_inset 
