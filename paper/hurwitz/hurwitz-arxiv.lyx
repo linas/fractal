@@ -1,0 +1,5118 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass amsart
+\language english
+\inputencoding auto
+\fontscheme pslatex
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle plain
+
+\layout Title
+
+An efficient algorithm for accelerating the convergence of oscillatory series,
+ useful for computing the polylogarithm and Hurwitz zeta functions
+\layout Author
+
+Linas Vepstas
+\layout Date
+
+12 October 2006, revised 7 February 2007
+\layout Abstract
+
+This paper sketches a technique for improving the rate of convergence of
+ a general oscillatory sequence, and then applies this series acceleration
+ algorithm to the polylogarithm and the Hurwitz zeta function.
+ As such, it may be taken as  an extension of the techniques given by Borwein's
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+An efficient algorithm for computing the Riemann zeta function
+\begin_inset Quotes erd
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Bor95,Bor00-A}
+
+\end_inset 
+
+, to more general series.
+ The algorithm provides a rapid means of evaluating 
+\begin_inset Formula $\mbox{Li}_{s}(z)$
+\end_inset 
+
+ for general values of complex 
+\begin_inset Formula $s$
+\end_inset 
+
+ and the region of complex 
+\begin_inset Formula $z$
+\end_inset 
+
+ values given by 
+\begin_inset Formula $\left|z^{2}/(z-1)\right|<4$
+\end_inset 
+
+.
+ This region includes the the Hurwitz zeta 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
+
+ for general complex 
+\begin_inset Formula $s$
+\end_inset 
+
+ and real 
+\begin_inset Formula $1/4\le q\le3/4$
+\end_inset 
+
+.
+ By using the duplication formula and the inversion formula, the range of
+ convergence for the polylogarithm may be extended to the entire complex
+ 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, and so the algorithms described here allow for the evaluation of
+ the polylogarithm for all complex 
+\begin_inset Formula $s$
+\end_inset 
+
+ and 
+\begin_inset Formula $z$
+\end_inset 
+
+ values.
+ Similarly, the Hurwitz zeta can be extended to the whole real interval
+ 
+\begin_inset Formula $0<q<1$
+\end_inset 
+
+.
+ The speed of the algorithm is significantly superior to a Taylor's series
+ for the evaluation of the Hurwitz zeta; quadratically so when a large number
+ of digits of precision is required.
+ The primary, concrete result of this paper is an algorithm allows the explorati
+on of the Hurwitz zeta in the critical strip, where fast algorithms are
+ otherwise unavailable.
+ A discussion of the monodromy group is included.
+\layout Subjectclass
+
+11M35, 11Y35, 33F05, 65B10, 68W25
+\layout Section
+
+Introduction
+\layout Standard
+
+This note sketches a technique for improving the rate of convergence of
+ a general oscillatory series, and then applies this technique to the computatio
+n of the polylogarithm, and, in particular, to the Hurwitz zeta function.
+ It essentially generalizes an algorithm given by Peter Borwein for computing
+ the Riemann zeta function.
+ The principle result is an algorithm that efficiently obtains values of
+ the Hurwitz zeta in the critical strip 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset 
+
+ with 
+\begin_inset Formula $0\le\sigma\le1$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The Hurwitz zeta function may be defined as 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\zeta(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}\label{eq:Hurwitz zeta}\end{equation}
+
+\end_inset 
+
+ This series may be directly summed for 
+\begin_inset Formula $\sigma>1$
+\end_inset 
+
+, although, for high-precision work, convergence is annoyingly slow unless
+ one has at least 
+\begin_inset Formula $\sigma\gtrsim2$
+\end_inset 
+
+.
+ A globally convergent series was given by Helmut Hasse in 1930
+\begin_inset LatexCommand \cite{Has30}
+
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+\zeta(s,q)=\frac{1}{s-1}\sum_{n=0}^{\infty}\frac{1}{n+1}\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)(q+k)^{1-s}\label{eq:Hasse series}\end{equation}
+
+\end_inset 
+
+ Although this series is technically convergent in the critical strip, in
+ practice, the convergence is abysmally slow on the critical strip.
+ Since the Generalized Riemann Hypothesis can be phrased in terms of the
+ values of the Hurwitz zeta function on the critical strip, it is of some
+ interest to have a fast algorithm for computing high-precision values of
+ this function in this region.
+ There seems to be a paucity of work in this area.
+ There is a discussion of fast algorithms for Dirichlet L-functions in 
+\begin_inset LatexCommand \cite{Sle04}
+
+\end_inset 
+
+ (the author has been unable to obtain a copy of this manuscript).
+ 
+\layout Standard
+
+A not unreasonable algorithm may be given by considering a Taylor's series
+ in 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+ Expanding about 
+\begin_inset Formula $q=0$
+\end_inset 
+
+, one obtains 
+\begin_inset Formula \begin{equation}
+\zeta(s,q)=\frac{1}{q^{s}}+\sum_{n=0}^{\infty}\left(-q\right)^{n}\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)\zeta(s+n)\label{eq:Hurwitz taylor}\end{equation}
+
+\end_inset 
+
+ It is not hard to show that the sum on the right is convergent for 
+\begin_inset Formula $\left|q\right|<1$
+\end_inset 
+
+.
+ Alternately, an expansion may be made about 
+\begin_inset Formula $q=1/2$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+\zeta\left(s,q+\frac{1}{2}\right)=\sum_{n=0}^{\infty}\left(-q\right)^{n}\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
+
+\end_inset 
+
+ It may be shown that the above has a region of convergence 
+\begin_inset Formula $\left|q\right|<1/2$
+\end_inset 
+
+.
+ Either of these expansions provide a computable expression for the Hurwitz
+ zeta function that is convergent on the entire complex 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane (minus, of course, 
+\begin_inset Formula $s=1$
+\end_inset 
+
+, and taking the appropriate limit, via l'Hopital's rule, when 
+\begin_inset Formula $s$
+\end_inset 
+
+ is a non-positive integer).
+ The principal drawback to the use of these sums for high-precision calculations
+ is the need for many high-precision evaluations of the Riemann zeta; the
+ compute time can grow exponentially as the number of required digits is
+ increased, especially when 
+\begin_inset Formula $q$
+\end_inset 
+
+ approaches the radius of convergence of the sums.
+ It is the poor performance of these sums that motivates the development
+ of this paper.
+\layout Standard
+
+The Hurwitz zeta may be expressed in terms of the polylogarithm
+\begin_inset LatexCommand \cite{Lew81}
+
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\label{eq:polylog definition}\end{equation}
+
+\end_inset 
+
+ by means of Jonquière's identity
+\begin_inset LatexCommand \cite[Section 7.12.2]{Lew81}
+
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Jon1889}
+
+\end_inset 
+
+ 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}\left(e^{2\pi iq}\right)+\left(-1\right)^{s}\mbox{Li}_{s}\left(e^{-2\pi iq}\right)=\frac{\left(2\pi i\right)^{s}}{\Gamma(s)}\zeta(1-s,q)\label{eq:poly-hur relation}\end{equation}
+
+\end_inset 
+
+ and so one might search for good algorithms for polylogarithms.
+ Wood
+\begin_inset LatexCommand \cite{Wood92}
+
+\end_inset 
+
+ provides a extensive review of the means of computing the polylogarithm,
+ but limits himself to real values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ Crandall
+\begin_inset LatexCommand \cite{Cra06}
+
+\end_inset 
+
+ discusses evaluating the polylogarithm on the entire complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, but limits himself to integer values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ Thus, there appears to be a similar paucity of general algorithms for the
+ polylogarithm as well.
+ The series defining the polylogarithm may be directly evaluated when 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset 
+
+, although direct evaluation becomes quite slow when 
+\begin_inset Formula $\left|z\right|\gtrsim0.95$
+\end_inset 
+
+ and 
+\begin_inset Formula $\sigma\lesssim2$
+\end_inset 
+
+.
+ There do not seem to be any published algorithms that may be applied on
+ the critical strip.
+\layout Standard
+
+The primary effort of this paper is to take the algorithm given by Borwein
+\begin_inset LatexCommand \cite{Bor95,Bor00-A}
+
+\end_inset 
+
+, which is a simple Padé-approximant type algorithm, and generalize it to
+ the polylogarithm.
+ The result is a relatively small finite sum that approximates the polylogarithm
+, and whose error, or difference from the exact value, can be precisely
+ characterized and bounded.
+ Increased precision is easily obtainable by evaluating a slightly larger
+ sum; one may obtain roughly 
+\begin_inset Formula $2N$
+\end_inset 
+
+ to 
+\begin_inset Formula $4N$
+\end_inset 
+
+ bits of precision by evaluating a sum of 
+\begin_inset Formula $N$
+\end_inset 
+
+ terms.
+ The sum may be readily evaluated for just about any value 
+\begin_inset Formula $s$
+\end_inset 
+
+ on the complex 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane.
+ However, it is convergent only in a limited region of the 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, and specifically, is only convergent when 
+\begin_inset Formula \[
+\left|\frac{z^{2}}{z-1}\right|<4\]
+
+\end_inset 
+
+ This is sufficient for evaluating the Hurwitz zeta for general complex
+ 
+\begin_inset Formula $s$
+\end_inset 
+
+ and real 
+\begin_inset Formula $0<q<1$
+\end_inset 
+
+.
+ Unfortunately, there does not appear to be any simple and efficient way
+ of extending this result to the general complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, at least not for general values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ Using duplication and reflection formulas, one may extend the algorithm
+ to the entire complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane; however, this requires the independent evaluation of equation 
+\begin_inset LatexCommand \ref{eq:Hurwitz taylor}
+
+\end_inset 
+
+.
+\layout Standard
+
+The development of this paper proceeds as follows.
+ First, a certain specific integral representation is given for the polylogarith
+m.
+ This representation is such that a certain trick, here called 
+\begin_inset Quotes eld
+\end_inset 
+
+the Borwein trick
+\begin_inset Quotes erd
+\end_inset 
+
+, may be applied, to expressed the integral as a polynomial plus a small
+ error term.
+ This is followed by a sketch of a generalization of the trick to the convergenc
+e acceleration of general oscillatory series.
+ The next section selects a specific polynomial, and the error term of the
+ resulting approximation is precisely bounded.
+ This is followed by a brief review of the duplication formula for the Hurwitz
+ zeta, and a short discussion of ways in which this numerical algorithm
+ may be tested for correctness.
+ This is followed by a detailed derivation of the monodromy group, and a
+ discussion of Apostol's 
+\begin_inset Quotes eld
+\end_inset 
+
+periodic zeta function
+\begin_inset Quotes erd
+\end_inset 
+
+.
+\layout Standard
+
+The algorithm has been implemented by the author using the Gnu Multiple
+ Precision arithmetic library
+\begin_inset LatexCommand \cite{GMP}
+
+\end_inset 
+
+, and is available on request, under the terms of the LGPL license.
+ The paper concludes with some intriguing images of the polylogarithm and
+ the Hurwitz zeta function on the critical strip.
+ 
+\layout Section
+
+The Polylogarithm
+\layout Standard
+
+The polylogarithm has a non-trivial analytic structure.
+ For fixed 
+\begin_inset Formula $s$
+\end_inset 
+
+, it has a branch cut on the positive real axis, for 
+\begin_inset Formula $1<z<+\infty$
+\end_inset 
+
+.
+ The location of the branch-point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ is, as is always the case with branch points, the cause of limited convergence
+ of analytic series in the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane.
+ This is noted here, as this branch point has a direct impact on the algorithm,
+ preventing convergence in its vicinity.
+ The polylogarithm has many interesting properties, which are not reviewed
+ here.
+\layout Standard
+
+The development of the algorithm requires the following integral representation.
+\layout Lemma
+
+The polylogarithm has the integral representation 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}\left(z\right)=\frac{z}{\Gamma(s)}\int_{0}^{1}\frac{\left|\log y\right|^{s-1}}{1-yz}\, dy\label{eq:}\end{equation}
+
+\end_inset 
+
+
+\layout Proof
+
+This identity is easily obtained by inserting the integral representation
+ of the Gamma function:
+\begin_inset Formula \begin{eqnarray*}
+\mbox{Li}_{s}(z) & = & \frac{1}{\Gamma(s)}\,\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\int_{0}^{\infty}e^{-u}u^{s-1}du\\
+ & = & \frac{1}{\Gamma(s)}\,\sum_{n=1}^{\infty}z^{n}\int_{0}^{\infty}e^{-nt}t^{s-1}dt\\
+ & = & \frac{1}{\Gamma(s)}\,\int_{0}^{\infty}t^{s-1}\sum_{n=1}^{\infty}\left(ze^{-t}\right)^{n}\, dt\\
+ & = & \frac{1}{\Gamma(s)}\,\int_{0}^{\infty}t^{s-1}\left[\frac{ze^{-t}}{1-ze^{-t}}\right]\, dt\end{eqnarray*}
+
+\end_inset 
+
+ and then finally substituting 
+\begin_inset Formula $t=-\log y$
+\end_inset 
+
+ in the last integral.
+ Although this derivation casually interchanges the order of integration
+ and summation, one may appeal to general arguments about analytic continuation
+ to argue that the final result is generally valid, provided one is careful
+ to navigate about the branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+\layout Section
+
+The Borwein trick
+\layout Standard
+
+The Borwein trick uses the integral form to find a simple, finite sum that
+ approximates the desired value arbitrarily well.
+ The trick consists of two steps.
+ The first is to write the above integral in the form 
+\begin_inset Formula \begin{eqnarray}
+\xi(s,z) & = & \frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\nonumber \\
+ & = & \mbox{Li}_{s}\left(z\right)+\frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)-f(1/z)}{1-yz}\,\left|\log y\right|^{s-1}dy\label{eq:Borwein trick}\end{eqnarray}
+
+\end_inset 
+
+ The second step is to find a sequence of polynomials 
+\begin_inset Formula $p_{n}(z)$
+\end_inset 
+
+ to be used for 
+\begin_inset Formula $f(z)$
+\end_inset 
+
+, such that the integral on the right hand side can be evaluated as a simple,
+ finite sum, while the left hand side can be shown to bounded arbitrarily
+ close to zero as 
+\begin_inset Formula $n\to\infty$
+\end_inset 
+
+.
+ The right hand side may be easily evaluated, by employing the following
+ theorem.
+\layout Theorem
+
+Given a polynomial 
+\begin_inset Formula $p_{n}(y)$
+\end_inset 
+
+ of degree 
+\begin_inset Formula $n$
+\end_inset 
+
+, it can be shown that 
+\begin_inset Formula \begin{equation}
+r_{n}(y)=\frac{p_{n}(y)-p_{n}(1/z)}{1-yz}\label{eq:r_n definition}\end{equation}
+
+\end_inset 
+
+ is again a polynomial in 
+\begin_inset Formula $y$
+\end_inset 
+
+, of degree 
+\begin_inset Formula $n-1$
+\end_inset 
+
+, provided that 
+\begin_inset Formula $p_{n}(1/z)\ne0$
+\end_inset 
+
+.
+ 
+\layout Proof
+
+Write the polynomial as 
+\begin_inset Formula \begin{equation}
+p_{n}(y)=\sum_{k=0}^{n}a_{k}y^{k}\label{eq:}\end{equation}
+
+\end_inset 
+
+ while for 
+\begin_inset Formula $r_{n}$
+\end_inset 
+
+ assume only a general series: 
+\begin_inset Formula \begin{equation}
+r_{n}(y)=\sum_{k=0}^{\infty}c_{k}y^{k}\label{eq:r_n series}\end{equation}
+
+\end_inset 
+
+ Setting 
+\begin_inset Formula $y=0$
+\end_inset 
+
+, one immediately obtains 
+\begin_inset Formula $c_{0}=a_{0}-p_{n}(1/z)$
+\end_inset 
+
+.
+ Higher coefficients are obtained by equating derivatives: 
+\begin_inset Formula \begin{equation}
+r_{n}^{(k)}(y)=\frac{1}{1-yz}\left[p_{n}^{(k)}(y)+kzr_{n}^{(k-1)}(y)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $r_{n}^{(k)}(y)$
+\end_inset 
+
+ is the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th derivative of 
+\begin_inset Formula $r_{n}$
+\end_inset 
+
+ with respect to 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ Setting 
+\begin_inset Formula $y=0$
+\end_inset 
+
+ in the above, one obtains the recurrence relation 
+\begin_inset Formula $c_{k}=a_{k}+zc_{k-1}$
+\end_inset 
+
+ which is trivially solvable as 
+\begin_inset Formula \begin{equation}
+c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ From this, it is easily seen that 
+\begin_inset Formula $c_{n}=0$
+\end_inset 
+
+ and more precisely 
+\begin_inset Formula $c_{n+m}=0$
+\end_inset 
+
+ for all 
+\begin_inset Formula $m\ge0$
+\end_inset 
+
+.
+ This concludes the proof that 
+\begin_inset Formula $r_{n}(y)$
+\end_inset 
+
+ is a polynomial of degree 
+\begin_inset Formula $n-1$
+\end_inset 
+
+ in 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+This result may be immediately employed in equation 
+\begin_inset LatexCommand \ref{eq:Borwein trick}
+
+\end_inset 
+
+ to obtain 
+\begin_inset Formula \begin{equation}
+\xi(s,z)=\mbox{Li}_{s}\left(z\right)+\frac{z}{p_{n}(1/z)}\sum_{k=0}^{n-1}\frac{c_{k}}{(k+1)^{s}}\label{eq:Polylog general estimate}\end{equation}
+
+\end_inset 
+
+ To obtain a good approximation for 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset 
+
+, one needs to find a polynomial sequence such that 
+\begin_inset Formula $\xi$
+\end_inset 
+
+ goes to zero as 
+\begin_inset Formula $n\to\infty$
+\end_inset 
+
+ for the domain 
+\begin_inset Formula $(s,z)$
+\end_inset 
+
+ of interest.
+ That is, one seeks to make 
+\begin_inset Formula \begin{equation}
+\xi(s,z)=\frac{1}{p_{n}(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{p_{n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\label{eq:xi integral}\end{equation}
+
+\end_inset 
+
+ as small as possible.
+ One possible sequence, based on the Bernoulli process or Gaussian distribution,
+ is explored in a subsequent section.
+ 
+\layout Section
+
+Convergence Acceleration of Oscillatory Series 
+\layout Standard
+
+For the case of 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{n}(y)=y^{n}$
+\end_inset 
+
+, the technique corresponds to Euler's method for the convergence acceleration
+ of an alternating series
+\begin_inset LatexCommand \cite[eqn 3.6.27]{A&S}
+
+\end_inset 
+
+; a particularly efficient algorithm for Euler's method is given by van
+ Wijngaarden
+\begin_inset LatexCommand \cite{Pre88}
+
+\end_inset 
+
+.
+ Polynomials that provide much more powerful series acceleration are discussed
+ by Cohen 
+\emph on 
+etal
+\emph default 
+
+\begin_inset LatexCommand \cite{Coh00}
+
+\end_inset 
+
+, but again in the context of 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+; these include the Tchebysheff orthogonal polynomials considered by Borwein,
+ which do a rather good job of minimizing the integrand of equation 
+\begin_inset LatexCommand \ref{eq:xi integral}
+
+\end_inset 
+
+ when 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ In a certain sense, an alternating series can be considered to be a series
+ from which an explicit factor of 
+\begin_inset Formula $z^{n}$
+\end_inset 
+
+ has been factored out, for the very special case of 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ Thus, one is lead to ask if one can find series acceleration methods for
+ more general oscillatory series, where the oscillatory component can be
+ thought of as going as 
+\begin_inset Formula $z^{n}$
+\end_inset 
+
+ for some root of unity 
+\begin_inset Formula $z$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The Euler method applied to the Hurwitz zeta function essentially leads
+ to the Hasse series 
+\begin_inset LatexCommand \ref{eq:Hasse series}
+
+\end_inset 
+
+.
+ This may be seen by noting that the inner sum is just a forward difference:
+\begin_inset Formula \[
+\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)(q+k)^{1-s}=\triangle^{n}q^{1-s}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\triangle$
+\end_inset 
+
+ is the forward difference operator.
+ The Hasse series has improved convergence in that the result is globally
+ convergent, whereas the traditional series representation of equation 
+\begin_inset LatexCommand \ref{eq:Hurwitz zeta}
+
+\end_inset 
+
+ is not.
+ However, a quick numerical experiment will show that the Hasse series does
+ not converge rapidly, especially in the critical strip.
+\layout Standard
+
+The poor convergence of these traditional techniques motivates the development
+ of this paper.
+ Strictly speaking, the slow convergence can be attributed to the fact that
+ the naive series representations 
+\begin_inset LatexCommand \ref{eq:Hurwitz zeta}
+
+\end_inset 
+
+ or 
+\begin_inset LatexCommand \ref{eq:polylog definition}
+
+\end_inset 
+
+ are not strictly alternating series, as would be required to justify the
+ application of the Euler method.
+ Instead, the series are a superposition of oscillatory terms; for the polylogar
+ithm, an explicit oscillation coming from 
+\begin_inset Formula $z^{n}=\left|z\right|^{n}e^{in\arg z}$
+\end_inset 
+
+ and a slower oscillation coming from 
+\begin_inset Formula $n^{-s}=n^{-\sigma}e^{-i\tau\log n}$
+\end_inset 
+
+.
+ Thus, what one needs is a theory of sequence acceleration not for alternating
+ series, but for oscillatory series.
+ The polylogarithm approximation represents the 
+\emph on 
+ad-hoc
+\emph default 
+ development of a special case for such a general theory.
+\layout Standard
+
+A loose sketch of a possible general theory is presented below.
+ Suppose that 
+\begin_inset Formula $c_{n}$
+\end_inset 
+
+ is some more or less arbitrary sequence of numbers, oscillatory in 
+\begin_inset Formula $n$
+\end_inset 
+
+, and that one wishes to compute the sum 
+\begin_inset Formula \[
+S=\sum_{n=0}^{\infty}c_{n}\]
+
+\end_inset 
+
+ but that one wants to apply convergence acceleration techniques to its
+ evaluation.
+ If the leading component of oscillation is 
+\begin_inset Formula $c_{n}\sim\cos n\theta$
+\end_inset 
+
+, then one makes the ansatz that there must exist some dual series 
+\begin_inset Formula $s_{n}$
+\end_inset 
+
+ oscillating as 
+\begin_inset Formula $s_{n}\sim\sin n\theta$
+\end_inset 
+
+ to give 
+\begin_inset Formula $e_{n}=c_{n}+is_{n}\sim e^{in\theta}$
+\end_inset 
+
+.
+ One may then consider a sum of 
+\begin_inset Formula $a_{n}=e^{in(\pi-\theta)}e_{n}$
+\end_inset 
+
+ and consider the  summation of an alternating series 
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}\left(-1\right)^{n}a_{n}\]
+
+\end_inset 
+
+ By construction, the 
+\begin_inset Formula $a_{n}$
+\end_inset 
+
+ are now presumed to be relatively tame, so that series acceleration techniques
+ can be applied.
+ This trick may be applied to any oscillatory sequence; one need not know
+ a precise or 
+\emph on 
+a priori
+\emph default 
+ value for 
+\begin_inset Formula $\theta$
+\end_inset 
+
+; one need only guess at a reasonable value, based on the data at hand.
+ 
+\layout Standard
+
+Alternately, one may consider replacing the forward difference operator
+ 
+\begin_inset Formula $\triangle b_{n}=b_{n+1}-b_{n}$
+\end_inset 
+
+ by 
+\begin_inset Formula $\triangle_{q}b_{n}=b_{n+1}-qb_{n}$
+\end_inset 
+
+.
+ Straightforward manipulations lead to 
+\begin_inset Formula \[
+\sum_{m=0}^{\infty}\left(\frac{z}{1-qz}\right)^{m+1}\triangle_{q}^{m}b_{0}=\sum_{n=0}^{\infty}z^{n}b_{n}\]
+
+\end_inset 
+
+ with the traditional Euler's series regained by taking 
+\begin_inset Formula $q=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ Assuming that the oscillatory part 
+\begin_inset Formula $z$
+\end_inset 
+
+ is known, or can be approximately guessed at from the period of the oscillation
+, then choosing 
+\begin_inset Formula $q=-1/z$
+\end_inset 
+
+ should make the left hand side an accelerated series for the right hand
+ side.
+ However, there are more powerful techniques.
+\layout Standard
+
+Suppose one is interested in the sum
+\begin_inset Formula \begin{equation}
+S(z)=\sum_{n=0}^{\infty}z^{n}b_{n}\label{eq: geo series}\end{equation}
+
+\end_inset 
+
+ In general, one is interested in general sequences 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+.
+ Suppose, however, that the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ are expressible as moments, so that 
+\begin_inset Formula \[
+b_{n}=\int_{0}^{1}y^{n}g(y)dy\]
+
+\end_inset 
+
+ for some function 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+.
+ Since 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+ is still fairly general (subject to constraints discussed below), this
+ assumption does not overly restrict the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+.
+ If the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ are expressible as moments, then one has
+\begin_inset Formula \[
+S(z)=\int_{0}^{1}\frac{g(y)}{1-yz}\, dy\]
+
+\end_inset 
+
+ Applying the Borwein trick, one obtains 
+\begin_inset Formula \[
+S(z)=S_{n}(z)+\xi(z)\]
+
+\end_inset 
+
+ with 
+\begin_inset Formula \[
+S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\int_{0}^{1}\frac{p_{n}(y)-p_{n}\left(\frac{1}{z}\right)}{1-yz}g(y)\, dy\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\xi_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\int_{0}^{1}\frac{p_{n}(y)g(y)}{1-yz}\, dy\]
+
+\end_inset 
+
+ The goal is to show that the 
+\begin_inset Formula $S_{n}(z)$
+\end_inset 
+
+ are easily evaluated, while also showing that the 
+\begin_inset Formula $\xi_{n}(z)$
+\end_inset 
+
+ are arbitrarily small.
+ The first is easy enough: using equations 
+\begin_inset LatexCommand \ref{eq:r_n definition}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq:r_n series}
+
+\end_inset 
+
+ one has 
+\begin_inset Formula \[
+S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}b_{k}\]
+
+\end_inset 
+
+ With a suitable choice of 
+\begin_inset Formula $p_{n}(z)$
+\end_inset 
+
+, the coefficients 
+\begin_inset Formula $c_{k}$
+\end_inset 
+
+ are presumably easy to evaluate.
+ To show that the 
+\begin_inset Formula $S_{n}(z)$
+\end_inset 
+
+ is really a series acceleration for the geometric series 
+\begin_inset LatexCommand \ref{eq: geo series}
+
+\end_inset 
+
+, one must show that 
+\begin_inset Formula $\left|\xi_{n}(z)\right|$
+\end_inset 
+
+ is bounded.
+ If 
+\begin_inset Formula $g(y)\ge0$
+\end_inset 
+
+, then 
+\begin_inset Formula \[
+\left|\xi_{n}(z)\right|\le\left|\frac{p_{n}\left(y_{0}\right)}{p_{n}\left(\frac{1}{z}\right)}\right|\left|S(z)\right|\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $y_{0}$
+\end_inset 
+
+ is the point on the unit interval where 
+\begin_inset Formula $p_{n}(y)$
+\end_inset 
+
+ assumes its maximum.
+ Provided that one can find a polynomial sequence such that 
+\begin_inset Formula \[
+\left|\frac{p_{n}\left(y_{0}\right)}{p_{n}\left(\frac{1}{z}\right)}\right|\sim A^{-n}\]
+
+\end_inset 
+
+ for some number 
+\begin_inset Formula $A>\left|1/z\right|$
+\end_inset 
+
+, then one has that the series 
+\begin_inset Formula $S_{n}(z)$
+\end_inset 
+
+ converges to 
+\begin_inset Formula $S(z)$
+\end_inset 
+
+ more rapidly than the simple partial sums 
+\begin_inset Formula $\sum_{k=0}^{n}z^{k}b_{k}$
+\end_inset 
+
+ of equation 
+\begin_inset LatexCommand \ref{eq: geo series}
+
+\end_inset 
+
+.
+\layout Standard
+
+Note that the above is a proof of a series acceleration method for a more-or-les
+s general sequence of 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+, and is in no way particular to the polylogarithm or the Hurwitz zeta.
+ The only ingredients of the proof were that the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ are 
+\begin_inset Quotes eld
+\end_inset 
+
+well-behaved
+\begin_inset Quotes erd
+\end_inset 
+
+ -- in this case, being expressible as moments of a rather general function
+ 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+.
+ For the proof to hold, 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+ needs to be (mostly) positive, and integrable; it need not be analytic,
+ differentiable or even continuous.
+ It needs to be 
+\begin_inset Quotes eld
+\end_inset 
+
+mostly
+\begin_inset Quotes erd
+\end_inset 
+
+ positive only so that the bound on the integrand, 
+\begin_inset Formula $p_{n}(y)g(y)\le\left|p_{n}\left(y_{0}\right)\right|g(y)$
+\end_inset 
+
+ can be established.
+ Thus, one might hope that the acceleration method might work, even for
+ those general cases where 
+\begin_inset Formula $g(y)$
+\end_inset 
+
+ is not explicitly known, but the 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ are somehow 
+\begin_inset Quotes eld
+\end_inset 
+
+reasonable
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ 
+\layout Standard
+
+For the special case of 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, 
+\emph on 
+i.e.
+
+\emph default 
+ for the case of an alternating series, Cohen 
+\emph on 
+et al.
+\emph default 
+
+\begin_inset LatexCommand \cite{Coh00}
+
+\end_inset 
+
+ suggest some remarkably strongly converging polynomials, with values of
+ 
+\begin_inset Formula $A$
+\end_inset 
+
+ from 5.8 to as much as 17.9.
+ The generalization of those results to arbitrary 
+\begin_inset Formula $z$
+\end_inset 
+
+ is not immediately apparent, but is surely possible.
+ 
+\layout Standard
+
+There is another, possibly fruitful direction one might take.
+ This hinges on noting that the integrands above take the general form of
+ a Padé approximation, and one proceeds from there.
+\layout Section
+
+The Gaussian Distribution 
+\layout Standard
+
+Returning to the polylogarithm, the task at hand is to find a polynomial
+ sequence that is suitable for establishing a tight bound on the error term
+ 
+\begin_inset Formula $\xi$
+\end_inset 
+
+.
+ A good bound minimizes the integrand, while also maximizing the value of
+ 
+\begin_inset Formula $\left|p_{n}(1/z)\right|$
+\end_inset 
+
+.
+ In order to suppress the logarithmic branch point at 
+\begin_inset Formula $y=0$
+\end_inset 
+
+ in the integrand of 
+\begin_inset LatexCommand \ref{eq:xi integral}
+
+\end_inset 
+
+, this section will consider the polynomial sequence 
+\begin_inset Formula $p_{n}(y)=y^{a}(1-y)^{n-a}$
+\end_inset 
+
+, a sequence which goes over to the Gaussian distribution for large 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Consider first the polynomial sequence 
+\begin_inset Formula $p_{2n}(y)=y^{n}(1-y)^{n}$
+\end_inset 
+
+.
+ It becomes sharply peaked at 
+\begin_inset Formula $y=1/2$
+\end_inset 
+
+, and subtends a diminishingly small area.
+ For large values of 
+\begin_inset Formula $n$
+\end_inset 
+
+, this polynomial sequence approximates a Gaussian:
+\begin_inset Formula \begin{equation}
+p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{2}+\mathcal{O}\left(\left(y-\frac{1}{2}\right)^{4}\right)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Using this in the integral 
+\begin_inset LatexCommand \ref{eq:xi integral}
+
+\end_inset 
+
+, and assuming that the real part of 
+\begin_inset Formula $z$
+\end_inset 
+
+ is not positive, it is not hard to deduce the very crude estimate
+\begin_inset Formula \begin{equation}
+\xi(s,z)\sim\left(\frac{z^{2}}{4(z-1)}\right)^{n}\frac{z}{\Gamma(s)}\label{eq:}\end{equation}
+
+\end_inset 
+
+ which confirms that 
+\begin_inset Formula $\xi(s,z)$
+\end_inset 
+
+ does indeed get suitably small for a certain region in the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane.
+ However, in order for equation 
+\begin_inset LatexCommand \ref{eq:Polylog general estimate}
+
+\end_inset 
+
+ to be useful computationally, an upper bound on the value of 
+\begin_inset Formula $\xi$
+\end_inset 
+
+ needs to be given, as a function of 
+\begin_inset Formula $z$
+\end_inset 
+
+ and 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ This bound is derived in the next section.
+ 
+\layout Standard
+
+The polynomial coefficients are easily obtained, and are 
+\begin_inset Formula \begin{eqnarray*}
+a_{0} & = & a_{1}=\cdots=a_{n-1}=0\\
+a_{n+k} & = & \left(-1\right)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\quad\mbox{ for }0\le k\le n\end{eqnarray*}
+
+\end_inset 
+
+ This leads to 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}(z)=-\frac{z^{2n+1}}{\left(z-1\right)^{n}}\sum_{k=0}^{2n-1}\frac{c_{k}}{\left(k+1\right)^{s}}+\xi(s,z)\label{eq:}\end{equation}
+
+\end_inset 
+
+where the 
+\begin_inset Formula $c_{k}$
+\end_inset 
+
+ are given by 
+\begin_inset Formula \begin{equation}
+c_{k}=z^{k}\left[-\left(\frac{z-1}{z^{2}}\right)^{n}+\frac{1}{z^{n}}\sum_{j=0}^{k-n}\left(-1\right)^{j}\left(\begin{array}{c}
+n\\
+j\end{array}\right)\frac{1}{z^{j}}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the summation above is to be understood to be zero when 
+\begin_inset Formula $k<n$
+\end_inset 
+
+.
+ The above summations can be re-organized into the more suggestive form
+ 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}(z)=\sum_{k=1}^{n}\frac{z^{k}}{k^{s}}\;+\frac{1}{\left(1-z\right)^{n}}\;\sum_{k=n+1}^{2n}\frac{z^{k}}{k^{s}}\;\sum_{j=0}^{2n-k}\left(-z\right)^{j}\left(\begin{array}{c}
+n\\
+j\end{array}\right)+\xi(s,z)\label{eq:polylog specific estimate}\end{equation}
+
+\end_inset 
+
+ The error term 
+\begin_inset Formula $\xi(s,z)$
+\end_inset 
+
+ is negligible for only a very specific area of the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane.
+ The region where 
+\begin_inset Formula $\xi$
+\end_inset 
+
+ may be ignored as a small error is derived in the next section.
+ Substituting 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+ in the above formulas agrees with expressions previously given by Borwein
+\begin_inset LatexCommand \cite{Bor95}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The above formula has been implemented using the Gnu Multiple Precision
+ arithmetic library (GMP)
+\begin_inset LatexCommand \cite{GMP}
+
+\end_inset 
+
+, and has been numerically validated for correctness in several different
+ ways.
+ The source code, under the license terms of the LGPL, may be obtained by
+ contacting the author.
+ 
+\layout Section
+
+Bound on the Error Term
+\layout Standard
+
+In order for equation 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ to be useful computationally, an upper bound on the value of 
+\begin_inset Formula $\xi$
+\end_inset 
+
+ as a function of 
+\begin_inset Formula $n$
+\end_inset 
+
+ needs to be given.
+ To compute the polylogarithm to some desired precision, one infers a suitable
+ value of 
+\begin_inset Formula $n$
+\end_inset 
+
+ based on this bound.
+ However, to achieve this desired precision, one must not only choose 
+\begin_inset Formula $n$
+\end_inset 
+
+ large enough, but one must also maintain a somewhat larger number of digits
+ in the intermediate terms, as the appearance of the binomial coefficient
+ in the equation 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ implies that intermediate terms can become quite large, even while mostly
+ cancelling.
+ This section derives an upper bound on the size of 
+\begin_inset Formula $\xi$
+\end_inset 
+
+, and briefly discusses the issue of the required precision in intermediate
+ terms.
+ 
+\layout Standard
+
+The general behavior of the integrand appearing in equation 
+\begin_inset LatexCommand \ref{eq:xi integral}
+
+\end_inset 
+
+ depends on the whether 
+\begin_inset Formula $\Re s\ge1$
+\end_inset 
+
+ or not; estimates are presented for these two cases.
+ Writing 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset 
+
+ for real 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ and 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, and assuming 
+\begin_inset Formula $\sigma\ge1$
+\end_inset 
+
+ and choosing 
+\begin_inset Formula $n$
+\end_inset 
+
+ so that 
+\begin_inset Formula $\sigma\le n$
+\end_inset 
+
+, one has
+\begin_inset Formula \begin{eqnarray}
+\left|p_{2n}(y)\left|\log y\right|^{s-1}\right| & \le & p_{2n}(y)\left|\log y\right|^{\sigma-1}\label{eq:}\\
+ & = & \left|y(1-y)\log y\right|^{\sigma-1}\left(y(1-y)\right)^{n-\sigma+1}\end{eqnarray}
+
+\end_inset 
+
+ Each part of the right hand side is bounded by a Gaussian, and since the
+ product of Gaussians is a Gaussian, so is the entire expression.
+ From the Stirling approximation, one has the well-known identity 
+\begin_inset Formula \[
+\left(y(1-y)\right)^{a}\le\frac{1}{4^{a}}\exp-4a\left(y-\frac{1}{2}\right)^{2}\]
+
+\end_inset 
+
+ The other part is also bounded by a Gaussian 
+\begin_inset Formula \[
+\left|y(1-y)\log y\right|^{a}\le\left|y_{0}\left(1-y_{0}\right)\log y_{0}\right|^{a}\exp\left(-\frac{a\left(y-y_{0}\right)^{2}}{2y_{0}\left(1-2y_{0}\right)}\right)\]
+
+\end_inset 
+
+ which is centered on the maximum of 
+\begin_inset Formula $\left|y_{0}\left(1-y_{0}\right)\log y_{0}\right|$
+\end_inset 
+
+, that is, at 
+\begin_inset Formula $y_{0}=0.23561058253\ldots$
+\end_inset 
+
+, where 
+\begin_inset Formula $y_{0}$
+\end_inset 
+
+ is the solution to 
+\begin_inset Formula \[
+0=\frac{d}{dy}\; y(1-y)\left|\log y\right|\]
+
+\end_inset 
+
+ Curiously, the numerical value of the factor in the Gaussian is 
+\begin_inset Formula $1/2y_{0}(1-2y_{0})=4.013295587\ldots$
+\end_inset 
+
+
+\layout Standard
+
+To evaluate the integral in 
+\begin_inset LatexCommand \ref{eq:xi integral}
+
+\end_inset 
+
+, one also needs a bound on the denominator.
+ This is furnished by 
+\begin_inset Formula \[
+\left|\frac{1}{1-yz}\right|\le C(z)=\begin{cases}
+1 & \mbox{ if }\Re z\le0\\
+\frac{1}{\left|1-z\right|} & \mbox{ if }0<\Re z\;\mbox{ and }\left|z\right|<1\\
+\left|\frac{z}{\Im z}\right| & \mbox{ if }0<\Re z\;\mbox{ and }\left|z\right|>1\end{cases}\]
+
+\end_inset 
+
+ Thus, the integrand is bounded by a Gaussian.
+ Multiplying the two Gaussians, completing the square, and evaluating the
+ resulting integral is a bit tedious.
+ The result is that 
+\begin_inset Formula \[
+\left|\int_{0}^{1}\,\frac{p_{2n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\right|\le C(z)\frac{\left|4y_{0}\left(1-y_{0}\right)\log y_{0}\right|^{\sigma-1}}{4^{n}}\, G(s)\]
+
+\end_inset 
+
+ The constant may be taken as 
+\begin_inset Formula $\left|4y_{0}\left(1-y_{0}\right)\log y_{0}\right|=1.041381965\ldots$
+\end_inset 
+
+.
+ The factor 
+\begin_inset Formula $G(s)$
+\end_inset 
+
+ is bounded by 
+\begin_inset Formula \begin{eqnarray*}
+G(s) & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\left(\sigma-1\right)\frac{8y_{0}\left(1-2y_{0}\right)}{8y_{0}\left(1-2y_{0}\right)+\frac{\sigma-1}{n-\sigma+1}}\\
+ & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\frac{\sigma-1}{\sigma}\\
+ & \le & 1\end{eqnarray*}
+
+\end_inset 
+
+ when 
+\begin_inset Formula $1\le\sigma$
+\end_inset 
+
+.
+ Useful for estimation is that 
+\begin_inset Formula $8y_{0}(1-2y_{0})=0.996687115\ldots$
+\end_inset 
+
+.
+ Combining these results, one obtains 
+\begin_inset Formula \begin{equation}
+\left|\xi(s,z)\right|\le\frac{1}{4^{n}}\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|C(z)G(s)\left(1.0414\ldots\right)^{\sigma-1}\label{eq:error-bound-positive}\end{equation}
+
+\end_inset 
+
+ for the case where 
+\begin_inset Formula $1\le\sigma$
+\end_inset 
+
+ and 
+\begin_inset Formula $n$
+\end_inset 
+
+ chosen so that 
+\begin_inset Formula $\sigma\le n$
+\end_inset 
+
+.
+\layout Standard
+
+The case where 
+\begin_inset Formula $\sigma\le1$
+\end_inset 
+
+ may be evaluated as follows.
+ One writes 
+\begin_inset Formula \begin{eqnarray*}
+\left|p_{2n}(y)\left|\log y\right|^{s-1}\right| & \le & p_{2n}(y)\left|\log y\right|^{\sigma-1}\\
+ & = & \left|\frac{1-y}{\log y}\right|^{1-\sigma}y^{n}(1-y)^{n+\sigma-1}\\
+ & \le & y^{n}(1-y)^{n+\sigma-1}\end{eqnarray*}
+
+\end_inset 
+
+ The integrand may now be recognized as the Beta function, so that
+\begin_inset Formula \[
+\left|\int_{0}^{1}\,\frac{p_{2n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\right|\le C(z)\frac{\Gamma(n+1)\Gamma(n+\sigma)}{\Gamma(2n+\sigma+1)}\]
+
+\end_inset 
+
+ In the region where 
+\begin_inset Formula $\left|\sigma\right|\ll n$
+\end_inset 
+
+, one may approximate 
+\begin_inset Formula \[
+\frac{\Gamma(n+1)\Gamma(n+\sigma)}{\Gamma(2n+\sigma+1)}\le\frac{2^{1-\sigma}}{4^{n}}\]
+
+\end_inset 
+
+ Combining the various pieces, one obtains a result remarkably similar to
+ the previous one; namely, when 
+\begin_inset Formula $\sigma\le1$
+\end_inset 
+
+ but 
+\begin_inset Formula $n$
+\end_inset 
+
+ is such that 
+\begin_inset Formula $\left|\sigma\right|\ll n$
+\end_inset 
+
+, one has 
+\begin_inset Formula \begin{equation}
+\left|\xi(s,z)\right|\le\frac{1}{4^{n}}\left|\frac{z^{2}}{z-1}\right|^{n}\left|\frac{z}{\Gamma(s)}\right|2^{1-\sigma}C(z)\label{eq:error-bound-negative}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+For evaluations on the critical line 
+\begin_inset Formula $\sigma=1/2$
+\end_inset 
+
+, one needs a good estimate for 
+\begin_inset Formula $\left|\Gamma(s)\right|^{-1}$
+\end_inset 
+
+, which can become quite large as the imaginary part of 
+\begin_inset Formula $s$
+\end_inset 
+
+ increases.
+ A useful estimate for 
+\begin_inset Formula $\left|\Gamma(s)\right|^{-1}$
+\end_inset 
+
+ is given by Borwein 
+\begin_inset LatexCommand \cite{Bor00-A,Bor95}
+
+\end_inset 
+
+, for the case where 
+\begin_inset Formula $\sigma\ge-m+1/2$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{eqnarray*}
+\frac{1}{\left|\Gamma(s)\right|} & = & \frac{1}{\left|\Gamma(\sigma)\right|}\sqrt{\prod_{k=0}^{\infty}\left(1+\frac{\tau^{2}}{\left(\sigma+k\right)^{2}}\right)}\\
+ & \le & \frac{1}{\left|\Gamma(\sigma)\right|}\sqrt{\frac{\sinh\tau\pi}{\tau\pi}\,\prod_{k=0}^{m}\left(1+\frac{\tau^{2}}{\left(\frac{1}{2}+k\right)^{2}}\right)}\end{eqnarray*}
+
+\end_inset 
+
+ 
+\layout Standard
+
+A remarkable side-effect of the estimation is that, for 
+\begin_inset Formula $s$
+\end_inset 
+
+ equal to negative integers, one has that 
+\begin_inset Formula $\Gamma(s)$
+\end_inset 
+
+ is infinite, thus implying that the error term is zero.
+ This somewhat surprising result corresponds to the fact that 
+\begin_inset Formula $\mbox{Li}_{-n}(z)$
+\end_inset 
+
+ has an exact expression as a ratio of two polynomials, the denominator
+ being of degree 
+\begin_inset Formula $n+1$
+\end_inset 
+
+.
+ Indeed, setting 
+\begin_inset Formula $s=0$
+\end_inset 
+
+ and so 
+\begin_inset Formula $n=1$
+\end_inset 
+
+ into equation 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ gives the exact result 
+\begin_inset Formula \[
+\mbox{Li}_{0}(z)=\frac{z}{1-z}\]
+
+\end_inset 
+
+ while for 
+\begin_inset Formula $s=-1$
+\end_inset 
+
+, one must use 
+\begin_inset Formula $n=2$
+\end_inset 
+
+, to obtain the exact result
+\begin_inset Formula \[
+\mbox{Li}_{-1}(z)=\frac{z}{\left(1-z\right)^{2}}\]
+
+\end_inset 
+
+ The generic form for the polylogarithm at the negative integers is 
+\begin_inset Formula \[
+\mbox{Li}_{-n}(z)=\left(-1\right)^{n}\,\sum_{k=0}^{n}\left(-1\right)^{k}\frac{k!}{\left(1-z\right)^{k+1}}\left\{ \begin{array}{c}
+n+1\\
+k+1\end{array}\right\} \]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\left\{ \begin{array}{c}
+n\\
+k\end{array}\right\} $
+\end_inset 
+
+ denotes the Stirling numbers of the second kind.
+\layout Standard
+
+In general, the formula 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ seems to have the curious property of always evaluating to exactly the
+ same rational function whenever 
+\begin_inset Formula $s$
+\end_inset 
+
+ is a non-positive integer, and 
+\begin_inset Formula $-s<n$
+\end_inset 
+
+.
+ That is, for fixed non-positive integer 
+\begin_inset Formula $s$
+\end_inset 
+
+, the sum is independent of 
+\begin_inset Formula $n$
+\end_inset 
+
+, provided that 
+\begin_inset Formula $n$
+\end_inset 
+
+ is large enough.
+ Thus, this polynomial approximation has the pleasing result of giving exact
+ answers in the case when an exact polynomial answer is possible.
+\layout Standard
+
+For the general case, one may conclude that the estimate 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ can be effectively applied whenever
+\begin_inset Formula \[
+\left|\frac{z^{2}}{z-1}\right|<4\]
+
+\end_inset 
+
+ To obtain a value of the polylogarithm to within some given numerical precision
+, one must invert the formulas 
+\begin_inset LatexCommand \ref{eq:error-bound-positive}
+
+\end_inset 
+
+ or 
+\begin_inset LatexCommand \ref{eq:error-bound-negative}
+
+\end_inset 
+
+, solving for the value of 
+\begin_inset Formula $n$
+\end_inset 
+
+ which is to be used in equation 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+.
+ To obtain a fixed number of digits of precision, one must carry out intermediat
+e calculations with at least that many digits of precision.
+ In fact, one must have more.
+ The appearance of the binomial coefficient in equation 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ is the problem.
+ Since 
+\begin_inset Formula $2^{n}>\left(\begin{array}{c}
+n\\
+j\end{array}\right)$
+\end_inset 
+
+, one concludes that 
+\begin_inset Formula $n$
+\end_inset 
+
+ additional binary bits of precision are needed with which to carry out
+ the calculations.
+ As a result, it becomes difficult to implement the algorithm robustly using
+ only double-precision arithmetic.
+ For values of 
+\begin_inset Formula $z$
+\end_inset 
+
+ near 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, the algorithm is well-enough behaved; however, round-off errors significantly
+ disturb the calculations as 
+\begin_inset Formula $z$
+\end_inset 
+
+ approaches 
+\begin_inset Formula $+1$
+\end_inset 
+
+.
+ This trouble with precision can be at least partly alleviated by making
+ use of the duplication formula, as discussed in the next section.
+\layout Section
+
+Performance
+\layout Standard
+
+The performance of the Borwein algorithm appears to be very good.
+ In fact, it appears to have better performance than the direct summation
+ formula 
+\begin_inset LatexCommand \ref{eq:polylog definition}
+
+\end_inset 
+
+ in all cases, even when direct summation might seem to have an advantage.
+ The figures 
+\begin_inset LatexCommand \ref{cap:Polylogarithm-cold-cache}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{cap:Polylogarithm-warm-cache}
+
+\end_inset 
+
+ compare the performance of actual implementations.
+ 
+\layout Standard
+
+
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+graphs created with misc/bignum/poly-perf.gplot, raw data generated by poly-perf.c
+ in same directory.
+ Raw data in the poly-perf.dat file, or the hurwitz-perf.dat file
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Polylogarithm-cold-cache}
+
+\end_inset 
+
+Polylogarithm cold cache performance
+\layout Standard
+
+
+\begin_inset Graphics
+	filename poly-perf-cold-cache.png
+	width 100text%
+	special bb=0 0 640 480
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the time, in seconds, needed to compute the polylogarithm
+ to the indicated number of decimal places of precision.
+ The values chosen for evaluation are 
+\begin_inset Formula $s=0.5+i14.13$
+\end_inset 
+
+, which is very near to one of the Riemann zeroes, and 
+\begin_inset Formula $z=0.4+i0.3$
+\end_inset 
+
+, which is relatively near to the origin: thus, one might have hoped that,
+ for such a small value (
+\begin_inset Formula $\left|z\right|=0.5$
+\end_inset 
+
+), direct summation might compete favorably against the Borwein algorithm,
+ as the point is closer to +1 than to -1.
+ Nevertheless, 
+\begin_inset Formula $\left|z^{2}/(z-1)\right|\approx0.373$
+\end_inset 
+
+ for this point, and the Borwein algorithm wins.
+ 
+\layout Standard
+
+The primary contribution to the calculation of the either value is the evaluatio
+n of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ in the summations.
+ If these are pre-computed, the Borwein algorithm still wins, as shown in
+ the next figure.
+ All calculations were performed on a contemporary desktop computer, using
+ the GMP library; the algorithms were implemented in the C programming language.
+\layout Standard
+
+The power-law that seems to apply to the slopes is 
+\begin_inset Formula $T\approx\mathcal{O}\left(D^{1.8}\right)$
+\end_inset 
+
+ and 
+\begin_inset Formula $T\approx\mathcal{O}\left(D^{2.8}\right)$
+\end_inset 
+
+, respectively, for the elapsed time 
+\begin_inset Formula $T$
+\end_inset 
+
+ to compute 
+\begin_inset Formula $D$
+\end_inset 
+
+ digits.
+ Note that the actual performance depends on the underlying implementation
+ of log, exp, sin, atan, sqrt, gamma and the like; the actual implementation
+ used here is fairly naive and untuned.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Polylogarithm-warm-cache}
+
+\end_inset 
+
+Polylogarithm warm cache
+\layout Standard
+
+
+\begin_inset Graphics
+	filename poly-perf-warm-cache.png
+	width 100text%
+	special bb=0 0 640 480
+
+\end_inset 
+
+
+\layout Standard
+
+This graph compares the compute times for the Borwein algorithm and the
+ direct summation of the polylogarithm, for a 
+\begin_inset Quotes eld
+\end_inset 
+
+warm cache
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ That is, an array of values of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ were pre-computed, prior to beginning the timing measurements.
+ These pre-computed values were used in the Borwein and direct sums.
+ Despite the use of such cached, pre-computed values, the Borwein algorithm
+ still wins.
+ This graph uses the same 
+\begin_inset Formula $s$
+\end_inset 
+
+ and 
+\begin_inset Formula $z$
+\end_inset 
+
+ values as in the previous graph.
+ 
+\layout Standard
+
+The power-law performance appears to be about 
+\begin_inset Formula $T\approx\mathcal{O}\left(D^{1.4}\right)$
+\end_inset 
+
+ and 
+\begin_inset Formula $T\approx\mathcal{O}\left(D^{2.1}\right)$
+\end_inset 
+
+ respectively, to compute 
+\begin_inset Formula $D$
+\end_inset 
+
+decimal digits in time 
+\begin_inset Formula $T$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Hurwitz zeta cold cache performance
+\layout Standard
+
+
+\begin_inset Graphics
+	filename hurwitz-perf-cold.png
+	width 100text%
+	special bb=0 0 640 480
+
+\end_inset 
+
+
+\layout Standard
+
+This figure compares the performance of the Borwein algorithm to the evaluation
+ of the Taylor expansion for the Hurwitz zeta.
+ The vales computed are for 
+\begin_inset Formula $s=0.5+i14.13$
+\end_inset 
+
+ and 
+\begin_inset Formula $q=0.2$
+\end_inset 
+
+.
+ For such a small value of 
+\begin_inset Formula $q$
+\end_inset 
+
+, one might have hoped that the Taylor expansion might converge quickly.
+ This appears to not be the case, as the binomial coefficients can grow
+ to be quite large, and thus force many terms to be summed.
+ 
+\layout Standard
+
+The figure is for a 
+\begin_inset Quotes eld
+\end_inset 
+
+cold cache
+\begin_inset Quotes erd
+\end_inset 
+
+, assuming that no constants have been pre-computed.
+ The lines are not parallel, with the Taylor expansion getting progressively
+ worse.
+ The Borwein algorithm can be seen to be more than an order of magnitude
+ faster for lower precisions, and more than two orders of magnitude faster
+ for the higher precisions.
+\layout Standard
+
+The power-law performance appears to be about 
+\begin_inset Formula $T\approx\mathcal{O}\left(D^{2.5}\right)$
+\end_inset 
+
+ and 
+\begin_inset Formula $T\approx\mathcal{O}\left(D^{3.5}\right)$
+\end_inset 
+
+ respectively, to compute 
+\begin_inset Formula $D$
+\end_inset 
+
+decimal digits in time 
+\begin_inset Formula $T$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+Hurwitz zeta warm cache performance
+\layout Standard
+
+
+\begin_inset Graphics
+	filename hurwitz-perf-warm.png
+	width 100text%
+	special bb=0 0 640 480
+
+\end_inset 
+
+
+\layout Standard
+
+This figure compares the evaluation times for the Borwein algorithm, and
+ the Hurwitz zeta Taylor's expansion, for the 
+\begin_inset Quotes eld
+\end_inset 
+
+warm cache
+\begin_inset Quotes erd
+\end_inset 
+
+ scenario.
+ In this case, it is recognized that if 
+\begin_inset Formula $s$
+\end_inset 
+
+ is assumed to be held fixed, then the values of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ appearing in the Borwein algorithm may be pre-computed.
+ Similarly, the values of 
+\begin_inset Formula $\zeta(s+n)$
+\end_inset 
+
+ and the binomial coefficients 
+\begin_inset Formula $\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)$
+\end_inset 
+
+ appearing in the Taylor's series may be pre-computed.
+ In this case, the Taylor's series evaluation appears to be about eight
+ times faster.
+ 
+\layout Standard
+
+The power-law performance appears to be about 
+\begin_inset Formula $T\approx\mathcal{O}\left(D^{1.7}\right)$
+\end_inset 
+
+ and 
+\begin_inset Formula $T\approx\mathcal{O}\left(D^{1.6}\right)$
+\end_inset 
+
+ respectively, to compute 
+\begin_inset Formula $D$
+\end_inset 
+
+decimal digits in time 
+\begin_inset Formula $T$
+\end_inset 
+
+.
+\layout Standard
+
+Performing the pre-computations can be terribly expensive.
+ For example, for 300 decimal places of precision, the pre-computations
+ take 13 minutes.
+ The break-even point, where both algorithms are equally fast at fixed 
+\begin_inset Formula $s$
+\end_inset 
+
+, when including the pre-computation overhead, occurs at about 600 evaluations
+ of 300 decimal places.
+ Unless one is making a very large number of evaluations at fixed 
+\begin_inset Formula $s$
+\end_inset 
+
+, the pre-computation needed for the Taylor's expansion becomes prohibitively
+ expensive as the number of desired decimal places goes up.
+\end_inset 
+
+
+\layout Standard
+
+The first figure shows 
+\begin_inset Quotes eld
+\end_inset 
+
+cold cache
+\begin_inset Quotes erd
+\end_inset 
+
+ performance, measured in seconds, as compared to the number of desired
+ decimal places of precision.
+ The figure is termed 
+\begin_inset Quotes eld
+\end_inset 
+
+cold cache
+\begin_inset Quotes erd
+\end_inset 
+
+, in recognition of the fact that some constants may be pre-computed.
+ For example, if 
+\begin_inset Formula $s$
+\end_inset 
+
+ is held fixed, while 
+\begin_inset Formula $z$
+\end_inset 
+
+ is varied, then the values of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ appearing in both the direct sum and the Borwein algorithm may be computed
+ once, and then re-used for subsequent calculations.
+ As the figures indicate, computing 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ can be very expensive for general complex-valued 
+\begin_inset Formula $s$
+\end_inset 
+
+, and so the caching strategy offers a big gain when 
+\begin_inset Formula $s$
+\end_inset 
+
+ is held constant.
+ 
+\layout Standard
+
+As the 
+\begin_inset Quotes eld
+\end_inset 
+
+cold cache
+\begin_inset Quotes erd
+\end_inset 
+
+ figure demonstrates, the Borwein algorithm is faster than direct summation.
+ The problem with direct summation is that it requires more values of 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ to be computed to achieve comparable precision.
+ 
+\layout Standard
+
+As the 
+\begin_inset Quotes eld
+\end_inset 
+
+warm cache
+\begin_inset Quotes erd
+\end_inset 
+
+ figure shows, the Borwein algorithm will still win against direct summation,
+ even when the values of the 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ are pre-computed.
+ Even when these are pre-computed, and can be pulled from the cache, direct
+ summation still requires more operations.
+\layout Standard
+
+A different but equally dramatic set of results obtain, when one compares
+ the performance of the Borwein algorithm applied to the Hurwitz zeta function,
+ as compared to the use of the Taylor's expansion 
+\begin_inset LatexCommand \ref{eq:Hurwitz taylor}
+
+\end_inset 
+
+ for the Hurwitz zeta.
+ In this case, as the figures show, the Taylor's series outperforms the
+ Borwein algorithm by a constant factor of three, when both algorithms use
+ pre-computed constants.
+ However, the cost of pre-computing these constants skyrockets for the Taylor's
+ series, making it unattractive as the number of required decimal places
+ increases.
+\layout Section
+
+Duplication formula
+\layout Standard
+
+The region of applicability of the algorithm may be extended by making use
+ of the duplication formula for the polylogarithm or periodic zeta.
+ The duplication formula, or more generally, the multiplication theorem,
+ is an extension of the well-known Legendre duplication formula for the
+ Gamma function
+\begin_inset LatexCommand \cite[(6.1.18),(6.3.8)(23.1.10)]{A&S}
+
+\end_inset 
+
+, into the domain of the polylogarithm.
+\layout Standard
+
+Thus, for example, the formula 
+\begin_inset LatexCommand \ref{eq:polylog specific estimate}
+
+\end_inset 
+
+ together with the error bounds 
+\begin_inset LatexCommand \ref{eq:error-bound-positive}
+
+\end_inset 
+
+,
+\begin_inset LatexCommand \ref{eq:error-bound-negative}
+
+\end_inset 
+
+ allow 
+\begin_inset Formula $F(q;s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
+\end_inset 
+
+ to be computed for real 
+\begin_inset Formula $q$
+\end_inset 
+
+ in region 
+\begin_inset Formula $1/4\le q\le3/4$
+\end_inset 
+
+.
+ To obtain values on the region 
+\begin_inset Formula $0<q<1/4$
+\end_inset 
+
+, one applies the duplication formula 
+\begin_inset Formula \[
+F\left(q;s\right)=2^{1-s}F\left(2q;s\right)-F\left(q+\frac{1}{2};s\right)\]
+
+\end_inset 
+
+ recursively until one obtains values of 
+\begin_inset Formula $q\ge1/4$
+\end_inset 
+
+.
+ Rearranging terms, one obtains a similar formula for iterating values of
+ 
+\begin_inset Formula $q>3/4$
+\end_inset 
+
+ until they are less than or equal to 
+\begin_inset Formula $3/4$
+\end_inset 
+
+.
+ Thus, as 
+\begin_inset Formula $q$
+\end_inset 
+
+ approaches 0 or 1, the algorithm requires more time, but only logarithmically
+ so, as 
+\begin_inset Formula $-\log_{2}q$
+\end_inset 
+
+ or 
+\begin_inset Formula $-\log_{2}(1-q)$
+\end_inset 
+
+ as the case may be.
+\layout Standard
+
+The duplication formula follows from a general 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic identity 
+\begin_inset Formula \[
+\sum_{m=0}^{p-1}F\left(\frac{m+q}{p};s\right)=p^{1-s}F\left(q;s\right)\]
+
+\end_inset 
+
+ which is valid for any positive integer 
+\begin_inset Formula $p$
+\end_inset 
+
+.
+ This formula may be obtained by noting that the function 
+\begin_inset Formula $F\left(s;q\right)$
+\end_inset 
+
+ is an eigenvalue of the 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic Bernoulli transfer operator associated with eigenvalue 
+\begin_inset Formula $p^{1-s}$
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Ve-B04}
+
+\end_inset 
+
+.
+\layout Standard
+
+The equivalent formulas
+\begin_inset LatexCommand \cite[Sections 7.3.1, 7.12.1]{Lew81}
+
+\end_inset 
+
+ for the polylogarithm are 
+\begin_inset Formula \[
+\mbox{Li}_{s}(z)+\mbox{Li}_{s}(-z)=2^{1-s}\mbox{Li}_{s}\left(z^{2}\right)\]
+
+\end_inset 
+
+ and the 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic version has the appearance of a Gauss sum:
+\begin_inset Formula \[
+\sum_{m=0}^{p-1}\mbox{Li}_{s}\left(ze^{2\pi im/p}\right)=p^{1-s}\mbox{Li}_{s}\left(z^{p}\right)\]
+
+\end_inset 
+
+
+\layout Standard
+
+The application of the duplication formula, together with the inversion
+ relation 
+\begin_inset LatexCommand \ref{eq:poly-hur relation}
+
+\end_inset 
+
+ can be used to extend the evaluation of the polylogarithm to the entire
+ complex plane.
+ For numerical work, both formulas must be applied, one alone is not enough.
+ Consider first the application of the duplication formula only.
+ It may be used to take points that are near to 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and map them further away from 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, into the convergent region for the Borwein polynomial.
+ Repeated application allows arbitrarily close approach to 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ from the left-hand side.
+ The resulting region of convergence is kidney-shaped, with the cusp of
+ the kidney at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and the kidney containing the unit disk 
+\begin_inset Formula $\left|z\right|\le1$
+\end_inset 
+
+.
+ The precise shape of the kidney depends on the number of terms one wishes
+ to use in the polynomial approximation, the shape that can be achieved
+ while still maintaining good running time is shown in figure 
+\begin_inset LatexCommand \ref{cap:Polylogarithm-phase-plot}
+
+\end_inset 
+
+.
+ However, as can be seen, this strategy barely penetrates the 
+\begin_inset Formula $\Re z>1$
+\end_inset 
+
+ region.
+\layout Standard
+
+To extend the algorithm to the entire complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, one must make use of the Jonquière's inversion formula
+\begin_inset LatexCommand \cite[pp 27-32]{Bate53}
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+e^{-i\pi s/2}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}{z}\right)=\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\zeta\left(1-s,\frac{\log z}{2\pi i}\right)\label{eq:Inversion formula}\end{equation}
+
+\end_inset 
+
+ together with some sort of independent means of evaluating the Hurwitz
+ zeta function.
+ The Taylor expansion 
+\begin_inset LatexCommand \ref{eq:Hurwitz taylor}
+
+\end_inset 
+
+ is particularly well-suited, as it is rapidly convergent in the vicinity
+ of 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Specifically, it is convergent when 
+\begin_inset Formula $\left|\log z\right|<2\pi$
+\end_inset 
+
+, although the region of acceptable numerical convergence is smaller, roughly
+ 
+\begin_inset Formula $\left|\log z\right|<\pi$
+\end_inset 
+
+.
+ Either way, this encompasses a rather large region in the vicinity of 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, which is exactly the region where the Borwein algorithm has trouble.
+ The inversion formula is used to move points 
+\begin_inset Formula $\left|z\right|>1$
+\end_inset 
+
+ outside of the unit circle, to the inside.
+ Not all points inside the unit circle are directly accessible to the Borwein
+ algorithm; the duplication formula must still be used to handle points
+ in the disk interior that are near 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Similarly, points with very large 
+\begin_inset Formula $z$
+\end_inset 
+
+, such as those for which 
+\begin_inset Formula $\left|z\right|>e^{2\pi}$
+\end_inset 
+
+, require the use of the duplication formula to be moved into the region
+ of convergence for the Hurwitz Taylor series.
+ A typical view of the polylogarithm on the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane is shown in figure 
+\begin_inset LatexCommand \ref{cap:Polylog-whole-plane}
+
+\end_inset 
+
+.
+\layout Standard
+
+As a practical computational matter, rather than using 
+\begin_inset LatexCommand \ref{eq:Inversion formula}
+
+\end_inset 
+
+, it seems to be more convenient to use the formula
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{1-s}\left(z\right)=\frac{\Gamma(s)}{\left(2\pi\right)^{s}}\left[e^{i\pi s/2}\zeta\left(s,\frac{\log z}{2\pi i}\right)+e^{-i\pi s/2}\zeta\left(s,1-\frac{\log z}{2\pi i}\right)\right]\label{eq:polylog as pure hurwitz}\end{equation}
+
+\end_inset 
+
+ Although this is equivalent to the equation 
+\begin_inset LatexCommand \ref{eq:Inversion formula}
+
+\end_inset 
+
+ immediately above, it correctly captures the appropriate branch of the
+ logarithm that should be used: equation 
+\begin_inset LatexCommand \ref{eq:polylog as pure hurwitz}
+
+\end_inset 
+
+ works well for values of 
+\begin_inset Formula $s$
+\end_inset 
+
+ in both the upper and lower half-planes, whereas equation 
+\begin_inset LatexCommand \ref{eq:Inversion formula}
+
+\end_inset 
+
+ is more difficult to correctly evaluate in the lower half 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane.
+ In either case, one must use the logarithm with an unusual branch cut,
+ taking it to run from 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ to the right along the positive real axis, as opposed to the usual cut
+ taken for the logarithm.
+ 
+\layout Standard
+
+It is of some curiosity to note that the sheet that is forced takes the
+ form 
+\begin_inset Formula \[
+\zeta\left(s,q\right)+e^{-i\pi s}\zeta\left(s,1-q\right)=\sum_{n=-\infty}^{+\infty}\frac{1}{(n+q)^{s}}\]
+
+\end_inset 
+
+ A general discussion of the monodromy is given in a later section.
+\layout Section
+
+Testing and Validation
+\layout Standard
+
+The correctness of a given numerical implementation can be validated in
+ a number of ways.
+ For non-positive integer 
+\begin_inset Formula $s$
+\end_inset 
+
+, one has the exact rational functions previously mentioned.
+ For positive integer 
+\begin_inset Formula $n$
+\end_inset 
+
+, one has the relationship 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{n}\left(e^{2\pi iq}\right)+\left(-1\right)^{n}\mbox{Li}_{n}\left(e^{-2\pi iq}\right)=-\frac{\left(2\pi i\right)^{n}}{n!}B_{n}(q)\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the 
+\begin_inset Formula $B_{n}(x)$
+\end_inset 
+
+ are the Bernoulli polynomials.
+ For 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, one regains the Riemann zeta function 
+\begin_inset Formula $\zeta(s)$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}\left(-1\right)=\frac{1}{2^{1-s}-1}\,\zeta(s)\label{eq:}\end{equation}
+
+\end_inset 
+
+ For 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset 
+
+, the defining series 
+\begin_inset LatexCommand \ref{eq:polylog definition}
+
+\end_inset 
+
+ is explicitly convergent, and may be directly summed, thus offering a fourth
+ check of the correctness of an implementation.
+ Finally, the multiplication theorem can be used to check for consistency.
+ Each of these quantities can be computed by independent algorithms, and
+ thus be used to validate the correctness of a polylogarithm implementation.
+\layout Section
+
+Branch Points and Monodromy
+\layout Standard
+
+The principal sheet of the polylogarithm has a branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and by convention, a branch cut is placed along the positive real 
+\begin_inset Formula $z$
+\end_inset 
+
+-axis, extending to the right.
+ As one moves off of the principal sheet, one discovers that there is another
+ branch point at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+.
+ The resulting monodromy group is generated by two elements, acting on the
+ covering space of the bouquet 
+\begin_inset Formula $S^{1}\vee S^{1}$
+\end_inset 
+
+ of homotopy classes of loops in 
+\begin_inset Formula $\mathbb{C}\setminus\left\{ 0,1\right\} $
+\end_inset 
+
+ passing around the branch points 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ or 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ The author is not aware of any simple published discussion of the monodromy
+ for the polylogarithm; a much more abstract discussion is given in 
+\begin_inset LatexCommand \cite{Hain91}
+
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Bloch91}
+
+\end_inset 
+
+.
+ Thus, this section provides a discussion; note that the correct manipulations
+ to move from one sheet to another can be somewhat treacherous and confusing.
+ 
+\layout Standard
+
+The inversion formula 
+\begin_inset LatexCommand \ref{eq:Inversion formula}
+
+\end_inset 
+
+ suggests a way to move around the branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Suppose one starts at the point 
+\begin_inset Formula $z=x+i\epsilon$
+\end_inset 
+
+ with 
+\begin_inset Formula $x$
+\end_inset 
+
+ real, positive, and greater than one, and 
+\begin_inset Formula $\epsilon$
+\end_inset 
+
+ some arbitrarily small positive real number; thus 
+\begin_inset Formula $z$
+\end_inset 
+
+ is very near the branch cut of the principal sheet.
+ One wishes to compare this to the straddling value at 
+\begin_inset Formula $x-i\epsilon$
+\end_inset 
+
+.
+ Applying the inversion formula, one can bounce these two points inside
+ the unit circle, where there is no cut, and thus the polylog differs by
+ 
+\begin_inset Formula $\mathcal{O}(\epsilon)$
+\end_inset 
+
+.
+ The difference across the cut is thus 
+\begin_inset Formula \[
+\Delta=\mbox{Li}_{s}\left(x+i\epsilon\right)-\mbox{Li}_{s}\left(x-i\epsilon\right)=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\ln x+i\epsilon}{2\pi i}\right)-\zeta\left(1-s,\frac{\ln x-i\epsilon}{2\pi i}\right)\right]+\mathcal{O}(\epsilon)\]
+
+\end_inset 
+
+ Now, since 
+\begin_inset Formula $x>1$
+\end_inset 
+
+, a naive application of this formula yields 
+\begin_inset Formula $\Delta=0$
+\end_inset 
+
+ since 
+\begin_inset Formula $\log(x+i\epsilon)-\log(x-i\epsilon)=\mathcal{O}(\epsilon)$
+\end_inset 
+
+; but clearly 
+\begin_inset Formula $\Delta$
+\end_inset 
+
+ cannot be zero.
+ To resolve this situation, one must make the Ansatz that the cut of the
+ logarithm should be crossed.
+ This may be done by taking the cut of the logarithm to extend to the right,
+ instead of to the left, as it is by convention.
+ One then gets 
+\begin_inset Formula $\log(x+i\epsilon)-\log(x-i\epsilon)=2\pi iN+\mathcal{O}(\epsilon)$
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $N$
+\end_inset 
+
+.
+ The difference across the cut, for positive 
+\begin_inset Formula $N$
+\end_inset 
+
+, is then 
+\begin_inset Formula \[
+\zeta\left(s,q\right)-\zeta\left(s,N+q\right)=\sum_{k=0}^{N-1}\frac{1}{\left(k+q\right)^{s}}\]
+
+\end_inset 
+
+ with 
+\begin_inset Formula $q=\ln(x)/2\pi i$
+\end_inset 
+
+.
+ By swinging the cut of the logarithm so that it extends to the right, one
+ obtains that the real part of 
+\begin_inset Formula $q$
+\end_inset 
+
+ is positive; the real part of 
+\begin_inset Formula $q$
+\end_inset 
+
+ runs between 
+\begin_inset Formula $0$
+\end_inset 
+
+ and 
+\begin_inset Formula $1$
+\end_inset 
+
+.
+ As a result, the value of 
+\begin_inset Formula $\left(k+q\right)^{s}$
+\end_inset 
+
+ is unambiguous; as otherwise taking something to the power 
+\begin_inset Formula $s$
+\end_inset 
+
+ also begs the question of which sheet the power must be taken on.
+ That is, for general complex 
+\begin_inset Formula $w$
+\end_inset 
+
+, the power function is multi-sheeted:
+\begin_inset Formula \begin{equation}
+w^{s}=e^{s\ln w}\to e^{s(\ln w+2\pi iM)}=e^{2\pi isM}w^{s}\label{eq:M-sheet}\end{equation}
+
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $M$
+\end_inset 
+
+ representing the sheet of the power function.
+ Since the real part of 
+\begin_inset Formula $q$
+\end_inset 
+
+ is taken as positive, one can temporarily operate with the assumption that
+ 
+\begin_inset Formula $M=0$
+\end_inset 
+
+.
+\layout Standard
+
+Taking 
+\begin_inset Formula $N=1$
+\end_inset 
+
+, the above reasoning provides an excellent description, which may be verified
+ numerically.
+ The concentric semi-circles visible in the image 
+\begin_inset LatexCommand \ref{cap:Polylog-whole-plane}
+
+\end_inset 
+
+ can be entirely explained by the behavior of 
+\begin_inset Formula $q^{s}$
+\end_inset 
+
+ as 
+\begin_inset Formula $q\to0$
+\end_inset 
+
+, that is, as 
+\begin_inset Formula $z\to1$
+\end_inset 
+
+.
+ Thus, the difference between the 
+\begin_inset Formula $N=1$
+\end_inset 
+
+ sheet and the 
+\begin_inset Formula $N=0$
+\end_inset 
+
+ sheet is 
+\begin_inset Formula \begin{equation}
+\Delta_{1}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(\frac{\ln z}{2\pi i}\right)^{s-1}\label{eq: N=+1 monodromy}\end{equation}
+
+\end_inset 
+
+ Properly speaking, 
+\begin_inset Formula $\Delta_{1}$
+\end_inset 
+
+ is a function of 
+\begin_inset Formula $s$
+\end_inset 
+
+ and 
+\begin_inset Formula $z$
+\end_inset 
+
+, and so one should write 
+\begin_inset Formula $\Delta_{1}(s;z)$
+\end_inset 
+
+ to signify this.
+ However, for ease of notation, this marking is dropped, and is taken implicitly
+ in what follows.
+ The difference 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta_{1}$
+\end_inset 
+
+ is illustrated in figure
+\begin_inset LatexCommand \ref{cap:N=+1 Upper-sheet}
+
+\end_inset 
+
+; the concentric rings are seen to be cancelled out precisely, leaving behind
+ a smoothly varying function, having the expected smooth structure.
+ Moving across the cut, for 
+\begin_inset Formula $\Re z>1$
+\end_inset 
+
+, the joint appears to be smooth.
+ For general positive 
+\begin_inset Formula $N$
+\end_inset 
+
+, it is easy to confirm numerically that the discontinuity between the 
+\begin_inset Formula $N$
+\end_inset 
+
+'th sheet, and the 
+\begin_inset Formula $N-1$
+\end_inset 
+
+'th sheet, across the 
+\begin_inset Formula $\Re z>1$
+\end_inset 
+
+ cut is 
+\begin_inset Formula \[
+\Delta_{N}=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(N-1+\frac{\ln z}{2\pi i}\right)^{s-1}\]
+
+\end_inset 
+
+
+\layout Standard
+
+The discontinuity across the cut 
+\begin_inset Formula $\Re z>1$
+\end_inset 
+
+, for negative 
+\begin_inset Formula $N$
+\end_inset 
+
+, follows similarly.
+ For 
+\begin_inset Formula $N=-1$
+\end_inset 
+
+, the difference is given by -
+\begin_inset Formula $1/(-1+q)^{1-s}=e^{-i\pi s}/(1-q)^{1-s}$
+\end_inset 
+
+, or 
+\begin_inset Formula \[
+\Delta_{-1}=e^{-i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(1-\frac{\ln z}{2\pi i}\right)^{s-1}\]
+
+\end_inset 
+
+ The figure 
+\begin_inset LatexCommand \ref{cap:N=-1 Lower-sheet}
+
+\end_inset 
+
+ illustrates the difference 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta_{-1}$
+\end_inset 
+
+.
+ For general negative 
+\begin_inset Formula $N$
+\end_inset 
+
+, the difference between adjacent sheets is then 
+\begin_inset Formula \[
+\Delta_{-N}=e^{-i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left(N-q\right)^{s-1}\]
+
+\end_inset 
+
+ Again, it can be numerically verified that that the transition from sheet
+ to sheet is smooth as one crosses the cut 
+\begin_inset Formula $\Re z>1$
+\end_inset 
+
+.
+\layout Standard
+
+It is perhaps more clear to use explicit topological language.
+ Let 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+ represent the homotopy class of all loops based at some point 
+\begin_inset Formula $z$
+\end_inset 
+
+ on the complex plane, that wind once around the branch-point 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ in the positive direction.
+ The action of 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+ on the polylogarithm has the effect of carrying the polylog from one sheet
+ to the next.
+ In the above discussion, it was determined that 
+\begin_inset Formula \[
+g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
+
+\end_inset 
+
+ The logarithm in 
+\begin_inset Formula $\Delta_{1}$
+\end_inset 
+
+ has a branch point at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+.
+ That is, after acting with 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+, one is now on a sheet with a cut extending from 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ to the right.
+ Let let 
+\begin_inset Formula $g_{0}$
+\end_inset 
+
+ represent the homotopy class of loops that wind once around the branch
+ point 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ in a right-handed fashion.
+ Acting on the logarithm, one has 
+\begin_inset Formula \[
+g_{0}\cdot\ln z=\ln z+2\pi i\]
+
+\end_inset 
+
+ Recalling the definition of 
+\begin_inset Formula $q=\ln z/2\pi i$
+\end_inset 
+
+, one thus has 
+\begin_inset Formula $g_{0}\cdot q=q+1$
+\end_inset 
+
+, and so 
+\begin_inset Formula \[
+g_{0}\cdot\Delta_{N}=\Delta_{N+1}\]
+
+\end_inset 
+
+The principal sheet of the polylogarithm has no branch point at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+, and so one has 
+\begin_inset Formula \[
+g_{0}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)\]
+
+\end_inset 
+
+ Similarly, the logarithm has no branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and so 
+\begin_inset Formula \[
+g_{1}\cdot\ln z=\ln z\]
+
+\end_inset 
+
+
+\layout Standard
+
+Consider now the task of pasting sheets together, such that the result is
+ continuous as one crosses the cut 
+\begin_inset Formula $z>1$
+\end_inset 
+
+.
+ Some confusion may result here: one must paste together the cut of the
+ polylog, and (if any), the cut of the logarithm as well.
+ Thus, for example, suppose one is on the 
+\begin_inset Formula $g_{1}\cdot\mbox{Li}_{s}\left(z\right)$
+\end_inset 
+
+ sheet.
+ To get to a sheet by means of a continuous, differentiable glueing across
+ the 
+\begin_inset Formula $z>1$
+\end_inset 
+
+ cut, one must move as 
+\begin_inset Formula \[
+g_{1}g_{0}g_{1}\cdot\mbox{Li}_{s}\left(z\right)=g_{1}g_{0}\cdot\left[\mbox{Li}_{s}\left(z\right)-\Delta_{1}\right]=\mbox{Li}_{s}\left(z\right)-\Delta_{1}-\Delta_{2}\]
+
+\end_inset 
+
+ Repeating this gluing 
+\begin_inset Formula $n$
+\end_inset 
+
+ times, so that each time, one pastes the sheets so that crossing the 
+\begin_inset Formula $z>1$
+\end_inset 
+
+ cut is smooth and differentiable, gives 
+\begin_inset Formula \begin{eqnarray*}
+\left(g_{1}g_{0}\right)^{n-1}g_{1}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)-\sum_{k=1}^{n}\Delta_{k}\\
+ & = & \mbox{Li}_{s}\left(z\right)-e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\sum_{k=1}^{n}\frac{1}{\left(k-1+q\right)^{1-s}}\\
+ & = & \mbox{Li}_{s}\left(z\right)-e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\ln z}{2\pi i}\right)-\zeta\left(1-s,n+\frac{\ln z}{2\pi i}\right)\right]\end{eqnarray*}
+
+\end_inset 
+
+ which is recognizable from the initial considerations.
+ 
+\layout Standard
+
+Winding in the opposite direction, one has 
+\begin_inset Formula \[
+g_{1}^{-1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{-1}\]
+
+\end_inset 
+
+ and to repeat this process, as above, one considers the action of 
+\begin_inset Formula $\left(g_{1}^{-1}g_{0}^{-1}\right)^{n}g_{1}^{-1}$
+\end_inset 
+
+ on 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+In the development above, in the joining of sheets across 
+\begin_inset Formula $\Re z>1$
+\end_inset 
+
+, the cut that runs between 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ was mostly ignored.
+ Visually, the cut can be clearly seen in figure 
+\begin_inset LatexCommand \ref{cap:N=-1 Lower-sheet}
+
+\end_inset 
+
+.
+ Consider now the task of glueing sheets across this cut.
+ For a point 
+\begin_inset Formula $z$
+\end_inset 
+
+ just above the line connecting 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, one has 
+\begin_inset Formula $q=\epsilon+iv$
+\end_inset 
+
+ for some small, positive 
+\begin_inset Formula $\epsilon$
+\end_inset 
+
+ and some general, positive 
+\begin_inset Formula $v$
+\end_inset 
+
+.
+ Just below this line, one has 
+\begin_inset Formula $q=1-\epsilon+iv$
+\end_inset 
+
+.
+ That is, 
+\begin_inset Formula $q$
+\end_inset 
+
+ differs by 1, of course.
+ This cut cannot be glued to the polylog, of course; it must be glued to
+ another sheet of the logarithm.
+ The correct gluing, for 
+\begin_inset Formula $z=x$
+\end_inset 
+
+ real, 
+\begin_inset Formula $0<x<1$
+\end_inset 
+
+, is given by 
+\begin_inset Formula \[
+\lim_{\epsilon\to0}\left[\Delta_{1}(x+i\epsilon)+e^{i2\pi s}\Delta_{-1}(x-i\epsilon)\right]=0\]
+
+\end_inset 
+
+ That is, 
+\begin_inset Formula \[
+g_{0}\cdot\Delta_{-1}=-e^{-i2\pi s}\Delta_{1}\]
+
+\end_inset 
+
+ This somewhat strange form is nothing more than an accounting trick; it
+ is the result of providing a definition of 
+\begin_inset Formula $\Delta_{-N}$
+\end_inset 
+
+ that had a 
+\begin_inset Quotes eld
+\end_inset 
+
+natural
+\begin_inset Quotes erd
+\end_inset 
+
+ normalization, avoiding a minus sign.
+ The price of that definition is this glitch.
+ In all other respects, the homotopy proceeds as expected, so that, for
+ example, 
+\begin_inset Formula \[
+g_{0}\cdot\Delta_{-N}=\Delta_{-N+1}\]
+
+\end_inset 
+
+ for 
+\begin_inset Formula $N>1$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The free combinations of powers of the two operators 
+\begin_inset Formula $g_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+ generate a group, the monodromy group of the polylogarithm.
+ For 
+\begin_inset Formula $s=m$
+\end_inset 
+
+ a positive integer, the monodromy group has a finite-dimensional representation
+ of dimension 
+\begin_inset Formula $m+1$
+\end_inset 
+
+.
+ Well-known is the case for 
+\begin_inset Formula $s=2$
+\end_inset 
+
+, the dilogarithm, where the representation forms the discrete Heisenberg
+ group.
+ This may be seen as follows.
+ For 
+\begin_inset Formula $s=2,$
+\end_inset 
+
+ one has 
+\begin_inset Formula \[
+\Delta_{n}=2\pi i\left(\ln z+(n-1)2\pi i\right)\]
+
+\end_inset 
+
+ Repeated applications of 
+\begin_inset Formula $g_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+ result in a linear combinations of 
+\begin_inset Formula $\mbox{Li}_{2}\left(z\right)$
+\end_inset 
+
+, 
+\begin_inset Formula $\ln z$
+\end_inset 
+
+ and 1; no terms of any other type appear.
+ One may take these three elements as the basis of a three-dimensional vector
+ space.
+ Writing the basis as a column vector,
+\begin_inset Formula \[
+\left[\begin{array}{c}
+\mbox{Li}_{2}\left(z\right)\\
+-2\pi i\ln z\\
+4\pi^{2}\end{array}\right]\]
+
+\end_inset 
+
+ one then has the action 
+\begin_inset Formula \[
+g_{0}=\left[\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 1 & 1\\
+0 & 0 & 1\end{array}\right]\quad\mbox{ and }\quad g_{1}=\left[\begin{array}{ccc}
+1 & 1 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\end{array}\right]\]
+
+\end_inset 
+
+ which may be seen to be the generators of the discrete Heisenberg group
+ 
+\begin_inset Formula $\mathcal{H}_{3}(\mathbb{Z})$
+\end_inset 
+
+.
+ The general group element is 
+\begin_inset Formula \[
+\left[\begin{array}{ccc}
+1 & a & b\\
+0 & 1 & c\\
+0 & 0 & 1\end{array}\right]\]
+
+\end_inset 
+
+ for integers 
+\begin_inset Formula $a,b,c$
+\end_inset 
+
+.
+ By convention, one writes 
+\begin_inset Formula $x$
+\end_inset 
+
+ for 
+\begin_inset Formula $g_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $y$
+\end_inset 
+
+ for 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+, and defines a new element 
+\begin_inset Formula $z$
+\end_inset 
+
+ (having no relation at all to the argument of the dilogarithm) as the commutato
+r 
+\begin_inset Formula $z=xyx^{-1}y^{-1}$
+\end_inset 
+
+, so that 
+\begin_inset Formula \[
+z=\left[\begin{array}{ccc}
+1 & 0 & 1\\
+0 & 1 & 0\\
+0 & 0 & 1\end{array}\right]\]
+
+\end_inset 
+
+ The element 
+\begin_inset Formula $z$
+\end_inset 
+
+ is in the center, so that it commutes with 
+\begin_inset Formula $x$
+\end_inset 
+
+ and 
+\begin_inset Formula $y$
+\end_inset 
+
+, so 
+\begin_inset Formula $zx=xz$
+\end_inset 
+
+ and 
+\begin_inset Formula $zy=yz$
+\end_inset 
+
+.
+ These relations may be taken as giving the group presentation, so that
+ 
+\begin_inset Formula \[
+\mathcal{H}_{3}(\mathbb{Z})=\left\{ (x,y):\; z=xyx^{-1}y^{-1},\; zx=xz,\; zx=xz\right\} \]
+
+\end_inset 
+
+ 
+\layout Standard
+
+For 
+\begin_inset Formula $s=3$
+\end_inset 
+
+, one may write 
+\begin_inset Formula \[
+g_{0}=\left[\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+0 & 1 & 2 & 1\\
+0 & 0 & 1 & 1\\
+0 & 0 & 0 & 1\end{array}\right]\quad g_{1}=\left[\begin{array}{cccc}
+1 & 1 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\end{array}\right]\quad\mbox{for basis }\left[\begin{array}{c}
+\mbox{Li}_{3}\left(z\right)\\
+-\pi i\left(\ln z\right)^{2}\\
+2\pi^{2}\ln z\\
+4\pi^{3}i\end{array}\right]\]
+
+\end_inset 
+
+ The generated group is no longer the Heisenberg group, as there simply
+ aren't enough generators for that.
+ The commutator 
+\begin_inset Formula $w=g_{0}g_{1}g_{0}^{-1}g_{1}^{-1}$
+\end_inset 
+
+ is not in the center, since 
+\begin_inset Formula $wg_{0}\ne g_{0}w$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+For general integer 
+\begin_inset Formula $s=m$
+\end_inset 
+
+, the monodromy group is always unipotent, and thus a nilpotent group.
+ The generators take the form 
+\begin_inset Formula \[
+g_{0}=\left[\begin{array}{cc}
+1 & 0\;\cdots\;0\\
+\begin{array}{c}
+0\\
+\vdots\\
+0\end{array} & C\end{array}\right]\quad g_{1}=\left[\begin{array}{cccc}
+1 & 1 & 0\;\cdots & 0\\
+0 & 1 &  & \vdots\\
+\vdots &  & \ddots & 0\\
+0 & \cdots & 0 & 1\end{array}\right]\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $C$
+\end_inset 
+
+ are the binomial coefficients written in an upper-triangular fashion.
+ This form is determined by taking as the basis vectors the monomials appearing
+ in the expansion of
+\begin_inset Formula $\left(\ln z+2\pi i\right)^{m}$
+\end_inset 
+
+, and normalizing with a factor of 
+\begin_inset Formula $2\pi i/\Gamma(m)$
+\end_inset 
+
+.
+ This discrete group does not seem to be named or well-known.
+ Note that the existence of polylogarithm ladders seems to be equivalent
+ to the statement that products of monodromy groups can be factored in interesti
+ng and unusual ways.
+\layout Standard
+
+For 
+\begin_inset Formula $s$
+\end_inset 
+
+ not an integer, the action of 
+\begin_inset Formula $g_{0}$
+\end_inset 
+
+ does not close, and the general vector-space representation is infinite
+ dimensional.
+ The action of the 
+\begin_inset Formula $g_{0}$
+\end_inset 
+
+ monodromy can be understood to be the shift operator on an infinite-dimensional
+ vector space, whose basis vectors may be taken to be 
+\begin_inset Formula $\Delta_{N}$
+\end_inset 
+
+; the operator 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+ acts to inject into this shift space.
+ It is not clear whether there may also be smaller, finite-dimensional represent
+ations for particular values of 
+\begin_inset Formula $z$
+\end_inset 
+
+.
+\layout Section
+
+The 
+\begin_inset Quotes eld
+\end_inset 
+
+Periodic
+\begin_inset Quotes erd
+\end_inset 
+
+ Zeta Function 
+\layout Standard
+
+The ability to compute the polylogarithm allows one to visualize some of
+ the interesting sums that occur in number theory.
+ One such example is the so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+periodic zeta function
+\begin_inset Quotes erd
+\end_inset 
+
+, defined by Apostol
+\begin_inset LatexCommand \cite[Thm 12.6]{Apo76}
+
+\end_inset 
+
+ as 
+\begin_inset Formula \begin{equation}
+F(q;s)=\sum_{n=1}^{\infty}\frac{e^{i2\pi nq}}{n^{s}}\label{eq:periodic zeta}\end{equation}
+
+\end_inset 
+
+ Clearly, one has 
+\begin_inset Formula $F(q,s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
+\end_inset 
+
+.
+ The periodic zeta function occurs when one attempts to state a reflection
+ formula for the Hurwitz zeta function, as 
+\begin_inset Formula \begin{equation}
+\zeta(1-s,q)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{-i\pi s/2}F(q;s)+e^{i\pi s/2}F(1-q;s)\right]\label{eq:Hurwitz reflection}\end{equation}
+
+\end_inset 
+
+ What makes the periodic zeta function interesting is that 
+\emph on 
+it is not actually periodic
+\emph default 
+.
+ That one might think it is seems obvious from the definition 
+\begin_inset LatexCommand \ref{eq:periodic zeta}
+
+\end_inset 
+
+: the direct substitution of 
+\begin_inset Formula $q\to q+1$
+\end_inset 
+
+ gives the false suggestion of periodicity in 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+ This is false because, in fact, 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset 
+
+ has a branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ The 
+\begin_inset Quotes eld
+\end_inset 
+
+periodic
+\begin_inset Quotes erd
+\end_inset 
+
+ zeta function is multi-sheeted, and, attempting to trace a continuous path
+ from 
+\begin_inset Formula $q\to q+1$
+\end_inset 
+
+, while keeping 
+\begin_inset Formula $q$
+\end_inset 
+
+ real carries one through the branch-point, and from one sheet to the next.
+ This may be illustrated in several ways; first, graphically, in figures
+ 
+\begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
+
+\end_inset 
+
+ and x.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Periodic-zeta-function}
+
+\end_inset 
+
+Periodic zeta function
+\layout Standard
+
+
+\begin_inset Graphics
+	filename periodic-xsection.png
+	width 100text%
+	special bb=0 0 640 480
+
+\end_inset 
+
+
+\layout Standard
+
+This graph shows the real and imaginary parts of the periodic zeta function
+ 
+\begin_inset Formula \[
+F(q,s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)\]
+
+\end_inset 
+
+ for 
+\begin_inset Formula $s=\frac{1}{2}+i25$
+\end_inset 
+
+.
+ This value of 
+\begin_inset Formula $s$
+\end_inset 
+
+ is close to a zero of the Riemann zeta function, at 
+\begin_inset Formula $s=\frac{1}{2}+i25.01085758014\ldots$
+\end_inset 
+
+ Thus, both the real and imaginary parts approach zero at 
+\begin_inset Formula $q=1$
+\end_inset 
+
+, as well as at 
+\begin_inset Formula $q=\frac{1}{2}$
+\end_inset 
+
+.
+ The increasing oscillations as 
+\begin_inset Formula $q\to0$
+\end_inset 
+
+ are due to the contribution of the very first term of the Hurwitz zeta:
+ that is, these oscillations are nothing other than that of 
+\begin_inset Formula $q^{-s}=e^{i25\log q}/\sqrt{q}$
+\end_inset 
+
+.
+ Subtracting these away is the same as analytically continuing to the region
+ 
+\begin_inset Formula $q>1$
+\end_inset 
+
+, and matches the coarser set of oscillations, which are given by 
+\begin_inset Formula $(1+q)^{-s}=e^{i25\log(1+q)}/\sqrt{1+q}$
+\end_inset 
+
+
+\layout Standard
+
+Noteworthy is that the presumed 
+\begin_inset Quotes eld
+\end_inset 
+
+periodicity
+\begin_inset Quotes erd
+\end_inset 
+
+ in 
+\begin_inset Formula $q$
+\end_inset 
+
+ is very misleading: the image suggests an essential singularity at 
+\begin_inset Formula $q=0$
+\end_inset 
+
+, and continuing, logarithmically slower oscillatory behavior for the analytic
+ continuation to the region where 
+\begin_inset Formula $q>1$
+\end_inset 
+
+.
+\end_inset 
+
+ 
+\layout Standard
+
+The first figure, 
+\begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
+
+\end_inset 
+
+, shows an oscillatory behavior that clearly diverges as 
+\begin_inset Formula $q\to0$
+\end_inset 
+
+.
+ This oscillation is can be simply explained.
+ Substituting 
+\begin_inset Formula $s=\frac{1}{2}+i\tau$
+\end_inset 
+
+ into equation 
+\begin_inset LatexCommand \ref{eq:Hurwitz reflection}
+
+\end_inset 
+
+ gives 
+\begin_inset Formula \[
+\zeta\left(\frac{1}{2}-i\tau,\, q\right)=\frac{e^{-i\pi/4}e^{-i\tau\log2\pi}e^{i\phi}}{\sqrt{2\cosh\tau\pi}}\left[e^{\pi\tau/2}F(q;s)+ie^{-\pi\tau/2}F(1-q;s)\right]\]
+
+\end_inset 
+
+ after the substitution of 
+\begin_inset Formula \[
+\Gamma\left(\frac{1}{2}+i\tau\right)=\frac{\sqrt{\pi}e^{i\phi}}{\sqrt{\cosh\tau\pi}}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\phi$
+\end_inset 
+
+ is a purely real phase that can be expressed as a somewhat complicated
+ sum
+\begin_inset LatexCommand \cite[eqn 6.1.27]{A&S}
+
+\end_inset 
+
+.
+ For reasonably large, positive 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, such as 
+\begin_inset Formula $\tau=25$
+\end_inset 
+
+ in the picture, one may ignore the second term, so that the whole expression
+ simplifies to 
+\begin_inset Formula \[
+F\left(q;\frac{1}{2}+i\tau\right)=\exp\, i\left(\frac{\pi}{4}-\phi+\tau\log2\pi\right)\;\zeta\left(\frac{1}{2}-i\tau,\, q\right)+\mathcal{O}\left(C^{-\tau}\right)\]
+
+\end_inset 
+
+ for some real constant 
+\begin_inset Formula $C>0$
+\end_inset 
+
+.
+ Then, as 
+\begin_inset Formula $q\to0$
+\end_inset 
+
+, the leading contribution to the Hurwitz zeta comes from the 
+\begin_inset Formula $n=0$
+\end_inset 
+
+ term in equation 
+\begin_inset LatexCommand \ref{eq:Hurwitz zeta}
+
+\end_inset 
+
+: that is, 
+\begin_inset Formula $q^{-s}=e^{i\tau\log q}/\sqrt{q}$
+\end_inset 
+
+, so that 
+\begin_inset Formula \begin{equation}
+F\left(q;\frac{1}{2}+i\tau\right)\approx\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}}\;\mbox{ as }q\to0\label{eq:F-approx}\end{equation}
+
+\end_inset 
+
+ for some fixed, real phase 
+\begin_inset Formula $\psi$
+\end_inset 
+
+ that is independent of 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+ As is eminently clear from both the picture 
+\begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
+
+\end_inset 
+
+, and from the approximation 
+\begin_inset LatexCommand \ref{eq:F-approx}
+
+\end_inset 
+
+, the limit of 
+\begin_inset Formula $q\to0$
+\end_inset 
+
+ of 
+\begin_inset Formula $F(q,s)$
+\end_inset 
+
+ cannot be taken: this is the branch-point of 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset 
+
+ at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+\layout Standard
+
+Curiously, the limit 
+\begin_inset Formula $q\to1$
+\end_inset 
+
+ does exist, and one has 
+\begin_inset Formula $F(1,s)=\zeta(s)$
+\end_inset 
+
+ the Riemann zeta.
+ The approximation 
+\begin_inset LatexCommand \ref{eq:F-approx}
+
+\end_inset 
+
+ hints at how to move through the branch point, from one sheet to the next:
+ 
+\begin_inset LatexCommand \ref{eq:F-approx}
+
+\end_inset 
+
+ is the discontinuity between sheets.
+ That is, one has, for large, positive 
+\begin_inset Formula $\tau$
+\end_inset 
+
+
+\begin_inset Formula \[
+F\left(q+1;\,\frac{1}{2}+i\tau\right)\approx F\left(q,\,\frac{1}{2}+i\tau\right)-\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}}\]
+
+\end_inset 
+
+ as the formula that approximates the movement from one sheet to the next.
+ In essence, this shows that the 
+\begin_inset Quotes eld
+\end_inset 
+
+periodic
+\begin_inset Quotes erd
+\end_inset 
+
+ zeta function is not at all periodic: 
+\begin_inset Formula $F(q+1;s)\ne F(q;s)$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $\Re s\le1$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The complete relationship between the Hurwitz zeta and the periodic zeta
+ is rather subtle.
+ For example, if instead one considers large 
+\emph on 
+negative
+\emph default 
+ 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, and graphs the periodic zeta, one obtains what is essentially the left-right
+ reversed image of 
+\begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
+
+\end_inset 
+
+, with oscillations approaching a singularity at 
+\begin_inset Formula $q\to1$
+\end_inset 
+
+.
+ One may easily 
+\emph on 
+numerically
+\emph default 
+ verify that these oscillations are precisely of the form 
+\begin_inset Formula $(1-q)^{-s}$
+\end_inset 
+
+.
+ From this, one may deduce that the correct form of the reflection formula
+ is 
+\begin_inset Formula \begin{equation}
+F(q,1-s)=\frac{\Gamma(s)}{(2\pi)^{s}}\left[e^{i\pi s/2}\zeta(s,q)+e^{-i\pi s/2}\zeta(s,1-q)\right]\label{eq:periodic reflection}\end{equation}
+
+\end_inset 
+
+ which captures the oscillatory behavior at 
+\begin_inset Formula $q\to0$
+\end_inset 
+
+ for large positive 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ and the oscillations at 
+\begin_inset Formula $q\to1$
+\end_inset 
+
+ for large negative 
+\begin_inset Formula $\tau$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The constraint of keeping 
+\begin_inset Formula $q$
+\end_inset 
+
+ real causes integer values of 
+\begin_inset Formula $q$
+\end_inset 
+
+ to correspond precisely to the branch point of the polylogarithm.
+ This makes reasoning about the continuity of the periodic zeta at integral
+ values of 
+\begin_inset Formula $q$
+\end_inset 
+
+ rather turbid.
+ Since the Riemann zeta function lies precisely at the branch point, this
+ seems to also make it difficult to gain new insight into the Riemann zeta
+ in this way.
+\layout Section
+
+Conclusion
+\layout Standard
+
+The updated algorithm appears to offer a stable and fast way of computing
+ the Hurwitz zeta function for general complex 
+\begin_inset Formula $s$
+\end_inset 
+
+ and real 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+ It allows the polylogarithm to be computed over an extended range as well.
+ An actual implementation using a variable-precision library shows that
+ the algorithm is quite tractable.
+ 
+\layout Standard
+
+An unexplored area is the optimal implementation of the algorithm using
+ standard IEEE double-precision floating-point mathematics.
+ Preliminary work shows that some of the intermediate terms are just large
+ enough so that rounding error may be of concern; the region of high-precision
+ convergence has not been characterized.
+ The propagation of rounding errors through the algorithm has not been character
+ized; it may be possible to re-arrange terms to minimize the propagation
+ of errors.
+ Such a characterization is necessary before reliable double-precision code
+ can be created.
+ By contrast, such considerations can be swept under the carpet when employing
+ arbitrary-precision arithmetic.
+\layout Standard
+
+Evaluating the bounds 
+\begin_inset LatexCommand \ref{eq:error-bound-positive}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq:error-bound-negative}
+
+\end_inset 
+
+, so as to obtain an order estimate, is non-trivial, and can account for
+ a significant amount of compute time.
+ A speedier heuristic is desirable.
+\layout Standard
+
+It may be possible to find even more rapidly converging algorithms, by generaliz
+ing some of the results from Cohen 
+\emph on 
+et al
+\emph default 
+
+\begin_inset LatexCommand \cite{Coh00}
+
+\end_inset 
+
+, or by appealing to the general theory of Padé approximants.
+ Both approaches seem promising, although that of Padé approximants may
+ yield a more general theory.
+\layout Standard
+
+The polylogarithm and Hurwitz zeta functions are both special cases of the
+ Lerch transcendental 
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}\frac{z^{n}}{(n+q)^{s}}\]
+
+\end_inset 
+
+ It should be possible to extend the techniques in this paper to provide
+ a rapid, globally convergent algorithm for the Lerch transcendental, thus
+ enabling a deeper numerical exploration of its peculiarities.
+ 
+\layout Standard
+
+A further exploration of monodromy group seems to be merited; this does
+ not appear to be terribly challenging, but it would be nice to be aware
+ of the details.
+\layout Standard
+
+This paper concludes with the application of the algorithm to render some
+ pretty images.
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[amsplain]{/home/linas/src/fractal/paper/fractal}
+
+\end_inset 
+
+
+\layout Section*
+\start_of_appendix 
+Appendix: Some Pretty Pictures
+\layout Standard
+
+Below follow some interesting pictures of the polylogarithm and the Hurwitz
+ zeta function for values of 
+\begin_inset Formula $s$
+\end_inset 
+
+ on the critical line 
+\begin_inset Formula $s=1/2+i\tau$
+\end_inset 
+
+.
+ They are shown here, as they are not commonly known.
+ Each figure represents hours of computation on modern computers.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Periodic Zeta
+\layout Standard
+
+
+\begin_inset Graphics
+	filename periodic-50.png
+	width 100text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\layout Standard
+
+This image illustrates the so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+periodic zeta function
+\begin_inset Quotes erd
+\end_inset 
+
+ 
+\begin_inset Formula \[
+F(q;s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)=\sum_{n=1}^{\infty}\frac{\exp(2i\pi nq)}{n^{s}}\]
+
+\end_inset 
+
+ Graphed is the magnitude of 
+\begin_inset Formula $F(q;s)$
+\end_inset 
+
+, with a color scale such that black represents zero, greenish-blue being
+ values on the order of one, yellow on the order of two, with increasingly
+ large values shown as orange-red.
+ Along the horizontal axis runs 
+\begin_inset Formula $q$
+\end_inset 
+
+, taken to be real, from 
+\begin_inset Formula $q=0$
+\end_inset 
+
+ on the left to 
+\begin_inset Formula $q=1$
+\end_inset 
+
+ on the right.
+ Then, writing 
+\begin_inset Formula $s=\frac{1}{2}+i\tau$
+\end_inset 
+
+, the value of 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ is varied along the vertical axis, running from 
+\begin_inset Formula $\tau=0$
+\end_inset 
+
+ at the bottom of the image, to 
+\begin_inset Formula $\tau=50$
+\end_inset 
+
+ at the top of the image.
+ Zeroes of the Riemann zeta function 
+\begin_inset Formula $\zeta(s)=F(1,s)$
+\end_inset 
+
+ are located where the blue lines intersect the right edge of the image.
+ From the bottom, the first three zeroes are at 
+\begin_inset Formula $s=0.5+i14.13,\,0.5+i20.02,\,0.5+i25.01$
+\end_inset 
+
+.
+ Due to the relation to the Dirichlet eta function, the zeros also materialize
+ at the same values of 
+\begin_inset Formula $s$
+\end_inset 
+
+, but on the 
+\begin_inset Formula $q=1/2$
+\end_inset 
+
+ line.
+\layout Standard
+
+Remarkably, the blue streaks seem to be roughly parabolic, but are interrupted
+ by nearly straight 
+\begin_inset Quotes eld
+\end_inset 
+
+erasures
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ The pattern is reminiscent of graphs of the strong-field Stark effect (need
+ ref).
+ In the Stark effect, eigenvalues are given by the characteristic values
+ of the Mathieu functions.
+ These cross over one another in a curious fashion; see for example, figure
+ 20.1 in Abramowitz & Stegun.
+ 
+\layout Standard
+
+The precise form of the parabolic blue streaks are due to a term of the
+ form 
+\begin_inset Formula $q^{-s}$
+\end_inset 
+
+, as given by equation 
+\begin_inset LatexCommand \ref{eq:F-approx}
+
+\end_inset 
+
+.
+ These may be subtracted, as illustrated in the next image.
+\layout Standard
+
+
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+generated with generate/hurwitz.C conversion with takelog, renorm 0.24 2
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Hurwitz zeta, with leading term subtracted
+\layout Standard
+
+
+\begin_inset Graphics
+	filename hurwitz-non-leading.png
+	width 100text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\layout Standard
+
+This image shows the magnitude of 
+\begin_inset Formula \[
+\zeta(s,q+1)=\zeta(s,q)-q^{-s}\]
+
+\end_inset 
+
+ for the range of 
+\begin_inset Formula $0\le q\le1$
+\end_inset 
+
+along the horizontal axis, and 
+\begin_inset Formula $0\le\tau\le50$
+\end_inset 
+
+ along the vertical axis, just as in the previous image; the same coloration
+ scheme is used as well.
+ This essentially corresponds to the previous picture, with the leading
+ divergence subtracted; for large positive 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, the magnitude of the periodic zeta and the Hurwitz zeta differ by an exponenti
+ally small amount.
+ A careful comparison of this picture to the previous now shows that the
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+erasures
+\begin_inset Quotes erd
+\end_inset 
+
+ or 
+\begin_inset Quotes eld
+\end_inset 
+
+streaks
+\begin_inset Quotes erd
+\end_inset 
+
+ in the previous image correspond exactly to the dark parts of this image.
+ Again, a cross-cross lattice pattern can be seen.
+ The dominant streaks in this picture are presumably due to the 
+\begin_inset Formula $(1+q)^{-s}$
+\end_inset 
+
+ term.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Extended view of Hurwitz zeta
+\layout Standard
+
+
+\begin_inset Graphics
+	filename hurwitz-extended-hires.png
+	width 100text%
+	special bb= 0 0  600 600
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows a view of the magnitude of the Hurwitz zeta 
+\begin_inset Formula $\left|\zeta(s,q)\right|$
+\end_inset 
+
+ over an extended range, together with a rescaling of coordinates in an
+ attempt to straighten out the striations.
+ The value of 
+\begin_inset Formula $q$
+\end_inset 
+
+ ranges from 0 to 
+\begin_inset Formula $2\sqrt{2}\approx2.8$
+\end_inset 
+
+ along the horizontal axis, although it is scaled as 
+\begin_inset Formula $q^{3/2}$
+\end_inset 
+
+ along this axis.
+ This rescaling essentially turns the parabolic striations into straight,
+ radial lines emanating from the origin at the lower left.
+ This image also re-scales the 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ coordinate, in an attempt to turn the radial striations into horizontals.
+\layout Standard
+
+The value of 
+\begin_inset Formula $q=1$
+\end_inset 
+
+ is a vertical line running exactly down the middle of the image; the non-trivia
+l Riemann zeroes are visibly stacked up on this line.
+ The value of 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ runs from 0 to 100 on this vertical line.
+ On other verticals, 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ has been rescaled by 
+\begin_inset Formula $q^{1/2}$
+\end_inset 
+
+, so that 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ runs from 0 to 141 on the right hand side of the image, while being essentially
+ held at zero along the left edge of the image.
+\layout Standard
+
+The increasing complexity of the chain-link pattern is apparent as one moves
+ up the imaginary axis.
+ Equally apparent is that the maximum range of excursion of the magnitude
+ changes only slowly over the range of the image: as the pattern increases
+ in complexity, it does not wash out, but has a distinct binary on/off character.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Polylogarithm-phase-plot}
+
+\end_inset 
+
+Polylogarithm phase plot
+\layout Standard
+
+
+\begin_inset Graphics
+	filename poly-phase.png
+	width 100text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\layout Standard
+
+This image shows a phase plot for the polylogarithm, on the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, for 
+\begin_inset Formula $s=0.5+i80$
+\end_inset 
+
+.
+ The color scheme is such that black represents the phase 
+\begin_inset Formula $\arg\mbox{Li}_{s}\left(z\right)=-\pi$
+\end_inset 
+
+, red represents the value of 
+\begin_inset Formula $+\pi$
+\end_inset 
+
+, and green a phase of zero.
+ Points where the phase wraps around the full color range are zeros.
+ Thus, each of the 
+\begin_inset Quotes eld
+\end_inset 
+
+fingers
+\begin_inset Quotes erd
+\end_inset 
+
+ in this image terminates on a zero.
+ Most of these zeros are close to, but usually not quite on the circle 
+\begin_inset Formula $\left|z\right|=1$
+\end_inset 
+
+.
+ The lone zero near the center of the image corresponds to the zero at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+.
+ The slight cusp at the right side of the image corresponds to 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ The outer boundary of the image, adjoining to the solid green area, represents
+ the limit of convergence for the combination of the Borwein algorithm and
+ the duplication formula; one can enlarge the region of convergence slightly,
+ but not much, but using polynomial approximations of higher order.
+ The boundary is easily crossed by applying the inversion formula, as the
+ later images show.
+ The image is offset somewhat, rather than being centered on 
+\begin_inset Formula $z=0$
+\end_inset 
+
+, because most of the convergent region is to the left of the imaginary
+ axis.
+\layout Standard
+
+Note the other lone zero floating along inside of the 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset 
+
+ disk.
+ If this picture were animated as 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ increased from 0 in the positive direction, then the zero fingers can be
+ see be seen as marching across in a counter-clockwise fashion, starting
+ at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+and proceeding around.
+ Most zeros die out at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ after making a full revolution; others spiral around a second time, such
+ as the lone zero up top.
+ An animated movie of this image, showing the spiraling, can be seen at
+ http://www.linas.org/art-gallery/polylog/polylog.html
+\layout Standard
+
+
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+generated with fractal/generate/polylog.C
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Polylog-whole-plane}
+
+\end_inset 
+
+Polylog whole plane
+\layout Standard
+
+
+\begin_inset Graphics
+	filename polylog-0-sheet.png
+	width 100text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+ 
+\layout Standard
+
+This image illustrates the results of combining the Borwein algorithm together
+ with the inversion and duplication formulas.
+ The image shows the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, is centered on 
+\begin_inset Formula $z=0,$
+\end_inset 
+
+ and runs from -3.5 to +3.5, left to right, top to bottom.
+ The value of 
+\begin_inset Formula $s$
+\end_inset 
+
+ is fixed at 
+\begin_inset Formula $s=0.5+15i$
+\end_inset 
+
+ for the whole picture.
+ The color scheme is the same as for the previous picture.
+ 
+\layout Standard
+
+Besides the zero at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ at the center of the picture, another zero is visible to the left, and
+ slightly down.
+ This zero is an 
+\begin_inset Quotes eld
+\end_inset 
+
+ex-Riemann zero
+\begin_inset Quotes erd
+\end_inset 
+
+, in that, if instead one had created the image for 
+\begin_inset Formula $s=0.5+i14.1347\ldots$
+\end_inset 
+
+, then this point would have been located exactly at 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ As it happens, this point has now rotated to slightly below 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ The zeroes above and to the right of the origin are Riemann zeroes to be:
+ as 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ increases, each will in turn rotate counterclockwise to assume the position
+ at 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The concentric shells are centered on the point 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ The branch cut can be seen extending to the right from from 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, on the positive real axis.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+Polylogarithm off the critical axis
+\layout Standard
+
+
+\begin_inset Graphics
+	filename polylog-1.2-14.png
+	width 100text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the polylogarithm in the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, at fixed 
+\begin_inset Formula $s=\sigma+i\tau=1.2+i14$
+\end_inset 
+
+.
+ It is superficially similar to the previous image, with two notable differences.
+ Visible just under the cut, on the right is a zero.
+ If 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ were smaller, this zero would move to the left; at 
+\begin_inset Formula $\sigma=0.5$
+\end_inset 
+
+, it would be very near to the branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ As 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ gets larger, this point moves up, crossing the branch cut and moving onto
+ the next sheet.
+ Of course, if instead one had 
+\begin_inset Formula $\sigma+i\tau=0.5+i14.13\ldots$
+\end_inset 
+
+, this zero would be located precisely at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ Thus, this figure illustrates what a Riemann zero looks like when it is
+ not on the critical strip.
+\layout Standard
+
+As 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ increases, the remaining zeroes circle around in a widening spiral: thus,
+ the zero at the far left of the image is not near 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+, but is to the left of there (and thus is not going to be a zero of the
+ Dirichlet eta function).
+ If instead one had 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ with a value of less than 0.5, the zeroes would spiral around in an ever-tighten
+ing spiral, and would never hit the branch cut or cross over.
+ The Riemann hypothesis is essentially that these zeroes are impacting exactly
+ at the branch point; a violation of RH would be a pair of zeroes that failed
+ to hit the branch point, instead passing to the left and right of the branch
+ point.
+ This figure suggests that RH holds: the zeroes are clearly lined up in
+ single file; it is hard to imagine how this single file might break ranks
+ into a pair of zeros that simultaneously passed near the branch point.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:N=+1 Upper-sheet}
+
+\end_inset 
+
+Upper sheet of the polylogarithm
+\layout Standard
+
+
+\begin_inset Graphics
+	filename polylog-p1-sheet.png
+	width 100text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the 
+\begin_inset Formula $g_{1}\mbox{Li}_{s}(z)=\mbox{Li}_{s}(z)-\Delta_{1}$
+\end_inset 
+
+ sheet of the polylogarithm on the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, obtained by circling the branch-point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ in the right-handed direction.
+ Two zeroes are visible: one at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+, and the other an 
+\begin_inset Quotes eld
+\end_inset 
+
+ex-Riemann zero
+\begin_inset Quotes erd
+\end_inset 
+
+, located not far from 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, a bit above the real axis.
+ For this image, 
+\begin_inset Formula $s$
+\end_inset 
+
+ is held constant, at 
+\begin_inset Formula $s=0.5+i15$
+\end_inset 
+
+; the Riemann zeta function has its first non-trivial zero at 
+\begin_inset Formula $s=0.5+i14.13\ldots$
+\end_inset 
+
+.
+ At that value, the above zero would have been located precisely at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, on the branch point of the polylogarithm.
+ As 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ increases, the Riemann zeroes pass precisely through this branch point,
+ leaving the first sheet and moving to this.
+ 
+\layout Standard
+
+Indeed, the Riemann hypothesis can be taken as being equivalent to the statement
+ that the Riemann zeroes always pass through the branch point in moving
+ from one sheet to another.
+ Taking 
+\begin_inset Formula $s=\sigma+i\tau$
+\end_inset 
+
+, if 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ is held constant at 
+\begin_inset Formula $\sigma<1/2$
+\end_inset 
+
+ while 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ is increased, the polylogarithm zeroes never pass through the branch cut,
+ and stay on the main sheet; whereas for 
+\begin_inset Formula $\sigma>1/2$
+\end_inset 
+
+, they do pass through the branch cut, but not at the branch point.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:N=-1 Lower-sheet}
+
+\end_inset 
+
+Lower sheet of the polylogarithm
+\layout Standard
+
+
+\begin_inset Graphics
+	filename polylog-m1-sheet.png
+	width 100text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the 
+\begin_inset Formula $g_{1}^{-1}\mbox{Li}_{s}(z)=\mbox{Li}_{s}(z)-\Delta_{-1}$
+\end_inset 
+
+ sheet of the polylogarithm on the complex 
+\begin_inset Formula $z$
+\end_inset 
+
+-plane, obtained by going around the branch-point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ in the left-handed (clockwise) direction.
+ The concentric curves are centered on 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and whose form is essentially that of 
+\begin_inset Formula $(1-q)^{1-s}$
+\end_inset 
+
+.
+ The vertex of the black triangle approaches 
+\begin_inset Formula $z=0$
+\end_inset 
+
+.
+ By visual inspection, it is clear how to glue this sheet to the principal
+ sheet shown in figure 
+\begin_inset LatexCommand \ref{cap:Polylog-whole-plane}
+
+\end_inset 
+
+.
+ After this gluing, a cut remains between the points 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ and 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ This cut may be glued to the sheet that results by winding around the branch
+ at 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ in a clockwise manner.
+ The result is shown in the next figure.
+ 
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+More Polylogarithm sheets
+\layout Standard
+
+
+\begin_inset Graphics
+	filename polylog-m1-sheet.png
+	lyxscale 25
+	width 33text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\begin_inset Graphics
+	filename polylog,-0,-2-sheet.png
+	lyxscale 25
+	width 33text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\begin_inset Graphics
+	filename polylog,-0,-3-sheet.png
+	lyxscale 25
+	width 33text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename polylog,1,1-sheet.png
+	lyxscale 25
+	width 33text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\begin_inset Graphics
+	filename polylog,1,-2-sheet.png
+	lyxscale 25
+	width 33text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\begin_inset Graphics
+	filename polylog,1,-3-sheet.png
+	lyxscale 25
+	width 33text%
+	special bb=0 0 600 600
+
+\end_inset 
+
+
+\layout Standard
+
+Top row: shows the result of winding around 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, one, two and three times in a left-handed fashion.
+ The cuts to the right of 
+\begin_inset Formula $z=$
+\end_inset 
+
+1 join together smoothly from image to image.
+ Using the monodromy group notation, these are the 
+\begin_inset Formula $g_{1}^{-1}$
+\end_inset 
+
+, the 
+\begin_inset Formula $g_{1}^{-1}g_{0}^{-1}g_{1}^{-1}$
+\end_inset 
+
+, and the 
+\begin_inset Formula $g_{1}^{-1}g_{0}^{-1}g_{1}^{-1}g_{0}^{-1}g_{1}^{-1}$
+\end_inset 
+
+ sheets.
+\layout Standard
+
+Second row: Result of winding left-handed around 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, followed by winding around 
+\begin_inset Formula $z=0$
+\end_inset 
+
+ once.The cut 
+\begin_inset Formula $0<z<1$
+\end_inset 
+
+ joins smoothly to the images in the row above.
+ The three images appear to be visually indistinguishable; but in fact they
+ are not the same.
+ Using the monodromy group notation, these are the 
+\begin_inset Formula $g_{0}g_{1}^{-1}$
+\end_inset 
+
+, the 
+\begin_inset Formula $g_{0}g_{1}^{-1}g_{0}^{-1}g_{1}^{-1}$
+\end_inset 
+
+, and the 
+\begin_inset Formula $g_{0}g_{1}^{-1}g_{0}^{-1}g_{1}^{-1}g_{0}^{-1}g_{1}^{-1}$
+\end_inset 
+
+ sheets.
+ 
+\end_inset 
+
+
+\the_end
