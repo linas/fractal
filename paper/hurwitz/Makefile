@@ -34,7 +34,9 @@ all: $(IMGS)
 	/usr/bin/bibtex hurwitz.aux
 
 dist: $(IMGS)
-	tar -zcvf hurwitz.tar.gz hurwitz.latex hurwitz.aux hurwitz.bbl $(GRPHS) $(IMGS)
+	tar -cvf hurwitz.tar hurwitz.latex hurwitz.aux hurwitz.bbl $(GRPHS) $(IMGS)
+	ls -la hurwitz.tar
+	gzip hurwitz.tar
 	ls -la hurwitz.tar.gz
 
 clean:
