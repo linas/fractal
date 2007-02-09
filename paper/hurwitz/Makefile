@@ -25,9 +25,7 @@ IMGS= poly-perf-cold-cache.png \
       polylog-m1-sheet.png \
       polylog,-0,-2-sheet.png \
       polylog,-0,-3-sheet.png \
-      polylog,1,1-sheet.png \
-      polylog,1,-2-sheet.png \
-      polylog,1,-3-sheet.png
+      polylog,1,1-sheet.png
 
 all:
 	cp hurwitz.tex hurwitz.latex
