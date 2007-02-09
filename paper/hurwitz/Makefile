@@ -14,26 +14,27 @@ IMGS= poly-perf-cold-cache.ps \
       poly-perf-warm-cache.ps \
       hurwitz-perf-cold.ps \
       hurwitz-perf-warm.ps \
-      periodic-xsection.png \
-      periodic-50.png \
-      hurwitz-non-leading.png \
-      hurwitz-extended.png \
-      poly-phase.png \
-      polylog-0-sheet.png \
-      polylog-1.2-14.png \
-      polylog-p1-sheet.png \
-      polylog-m1-sheet.png \
-      polylog,-0,-2-sheet.png \
-      polylog,-0,-3-sheet.png \
-      polylog,1,1-sheet.png
+      periodic-xsection.ps \
+      periodic-50.ps \
+      hurwitz-non-leading.ps \
+      hurwitz-extended.ps \
+      poly-phase.ps \
+      polylog-0-sheet.ps \
+      polylog-1.2-14.ps \
+      polylog-p1-sheet.ps \
+      polylog-m1-sheet.ps \
+      polylog,-0,-2-sheet.ps \
+      polylog,-0,-3-sheet.ps \
+      polylog,1,1-sheet.ps
 
 all:
-	cp hurwitz.tex hurwitz.latex
+	cp hurwitz-arxiv.tex hurwitz.latex
 	/usr/bin/latex hurwitz.latex
 	/usr/bin/bibtex hurwitz.aux
 
 dist:
 	tar -zcvf hurwitz.tar.gz hurwitz.latex hurwitz.aux hurwitz.bbl $(IMGS)
+	ls -la hurwitz.tar.gz
 
 clean:
 	rm -f *.log *.blg *.dvi
