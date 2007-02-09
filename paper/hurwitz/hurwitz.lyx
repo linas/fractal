@@ -116,7 +116,7 @@ on of the Hurwitz zeta in the critical strip, where fast algorithms are
  A discussion of the monodromy group is included.
 \layout Subjectclass
 
-11M35, 11Y35, 33F05, 65B10, 68W25
+65B10 (primary), 11M35, 11Y35, 33F05, 68W25
 \layout Section
 
 Introduction
@@ -172,23 +172,9 @@ k\end{array}\right)(q+k)^{1-s}\label{eq:Hasse series}\end{equation}
 
 \end_inset 
 
- Although this series is technically convergent in the critical strip, in
- practice, the convergence is abysmally slow on the critical strip.
- Since the Generalized Riemann Hypothesis can be phrased in terms of the
- values of the Hurwitz zeta function on the critical strip, it is of some
- interest to have a fast algorithm for computing high-precision values of
- this function in this region.
- There seems to be a paucity of work in this area.
- There is a discussion of fast algorithms for Dirichlet L-functions in 
-\begin_inset LatexCommand \cite{Sle04}
-
-\end_inset 
-
- (the author has been unable to obtain a copy of this manuscript).
- 
-\layout Standard
-
-A not unreasonable algorithm may be given by considering a Taylor's series
+ Although this series is technically convergent everywhere, in practice,
+ the convergence is abysmally slow on the critical strip.
+ A not unreasonable algorithm may be given by considering a Taylor's series
  in 
 \begin_inset Formula $q$
 \end_inset 
@@ -250,8 +236,23 @@ n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
 \end_inset 
 
  approaches the radius of convergence of the sums.
- It is the poor performance of these sums that motivates the development
+ 
+\layout Standard
+
+It is the poor performance of these sums that motivates the development
  of this paper.
+ Since the Generalized Riemann Hypothesis can be phrased in terms of the
+ values of the Hurwitz zeta function on the critical strip, it is of some
+ interest to have a fast algorithm for computing high-precision values of
+ this function in this region.
+ There seems to be a paucity of work in this area.
+ There is a discussion of fast algorithms for Dirichlet L-functions in 
+\begin_inset LatexCommand \cite{Sle04}
+
+\end_inset 
+
+ (the author has been unable to obtain a copy of this manuscript).
+ 
 \layout Standard
 
 The Hurwitz zeta may be expressed in terms of the polylogarithm
@@ -389,7 +390,7 @@ The primary effort of this paper is to take the algorithm given by Borwein
 \end_inset 
 
 .
- Using duplication and reflection formulas, one may extend the algorithm
+ By using duplication and reflection formulas, one may extend the algorithm
  to the entire complex 
 \begin_inset Formula $z$
 \end_inset 
@@ -413,8 +414,8 @@ the Borwein trick
 \begin_inset Quotes erd
 \end_inset 
 
-, may be applied, to expressed the integral as a polynomial plus a small
- error term.
+, may be applied, to express the integral as a polynomial plus a small error
+ term.
  This is followed by a sketch of a generalization of the trick to the convergenc
 e acceleration of general oscillatory series.
  The next section selects a specific polynomial, and the error term of the
