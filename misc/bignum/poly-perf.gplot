@@ -9,7 +9,8 @@ set key left
 # -------------------------------------------------------------
 # Settings used to create warm cache figure in text
 # 
-# set out 'poly-perf-warm-cache.png'
+# set term postscript eps color
+# set out 'poly-perf-warm-cache.ps'
 # set title "Compute time for Li_{0.5+i14.13} (0.4+i0.3) for warm cache"
 # set xlabel "Decimal digits of precision"
 # set ylabel "Milliseconds"
@@ -22,7 +23,8 @@ set key left
 # -------------------------------------------------------------
 # Settings used to create cold cache figure in text
 # 
-# set out 'poly-perf-cold-cache.png'
+# set term postscript eps color
+# set out 'poly-perf-cold-cache.ps'
 # set title "Compute time for Li_{0.5+i14.13} (0.4+i0.3) for cold cache"
 # set xlabel "Decimal digits of precision"
 # set ylabel "Seconds"
@@ -49,7 +51,8 @@ set key left
 # -------------------------------------------------------------
 # Settings used to create Hurwitz warm cache figure in text
 # 
-# set out 'hurwitz-perf-warm.png'
+# set term postscript eps color
+# set out 'hurwitz-perf-warm.ps'
 # set title "Compute time for zeta (0.5+i14.13, 0.2) for a warm cache"
 # set xlabel "Decimal digits of precision"
 # set ylabel "Milliseconds"
@@ -70,14 +73,15 @@ set key left
 #      "poly-perf.dat" using 1:(($6*10)) title "Taylor expansion" linewidth 3
 
 # -------------------------------------------------------------
-set out 'hurwitz-perf-cold.png'
-set title "Compute time for zeta (0.5+i14.13, 0.2) for a cold cache"
-set xlabel "Decimal digits of precision"
-set ylabel "Seconds"
-set logscale
-set logscale x 2
-set xrange [25:300]
-
-plot "hurwitz-perf.dat" using 1:(($3/100)) title "Borwein algorithm" linewidth 3, \
-     "hurwitz-perf.dat" using 1:(($4/100)) title "Taylor expansion" linewidth 3
+# set term postscript eps color
+# set out 'hurwitz-perf-cold.ps'
+# set title "Compute time for zeta (0.5+i14.13, 0.2) for a cold cache"
+# set xlabel "Decimal digits of precision"
+# set ylabel "Seconds"
+# set logscale
+# set logscale x 2
+# set xrange [25:300]
+# 
+# plot "hurwitz-perf.dat" using 1:(($3/100)) title "Borwein algorithm" linewidth 3, \
+#      "hurwitz-perf.dat" using 1:(($4/100)) title "Taylor expansion" linewidth 3
 
