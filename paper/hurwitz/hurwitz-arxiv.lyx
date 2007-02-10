@@ -3578,7 +3578,7 @@ g_{0}=\left[\begin{array}{cc}
 \begin_inset Formula $\left(\ln z+2\pi i\right)^{m}$
 \end_inset 
 
-, and normalizing with a factor of 
+ (whence the binomialcoefficients), and normalizing with a factor of 
 \begin_inset Formula $2\pi i/\Gamma(m)$
 \end_inset 
 
@@ -3619,6 +3619,37 @@ ations for particular values of
 \end_inset 
 
 .
+\layout Standard
+
+The analog of the Dirichlet 
+\begin_inset Formula $L$
+\end_inset 
+
+-functions are functions of the form 
+\begin_inset Formula \[
+p^{-s}\sum_{m=1}^{p-1}\chi(m)\,\mbox{Li}_{s}\left(ze^{2\pi im/p}\right)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\chi(m)$
+\end_inset 
+
+ is a primitive character modulo 
+\begin_inset Formula $p$
+\end_inset 
+
+.
+ These functions have the strange property of having branch points at 
+\begin_inset Formula $e^{2\pi im/p}$
+\end_inset 
+
+ whenever 
+\begin_inset Formula $\chi(m)$
+\end_inset 
+
+ is not zero.
+ The resulting monodromy groups have a more complex structure as well.
 \layout Section
 
 The 
@@ -3711,13 +3742,12 @@ periodic
 \end_inset 
 
  real carries one through the branch-point, and from one sheet to the next.
- This may be illustrated in several ways; first, graphically, in figures
- 
+ This is illustrated graphically, in figure 
 \begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
 
 \end_inset 
 
- and x.
+.
 \layout Standard
 
 
@@ -3823,12 +3853,12 @@ periodicity
  
 \layout Standard
 
-The first figure, 
+The figure 
 \begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
 
 \end_inset 
 
-, shows an oscillatory behavior that clearly diverges as 
+ shows an oscillatory behavior that clearly diverges as 
 \begin_inset Formula $q\to0$
 \end_inset 
 
@@ -4088,8 +4118,15 @@ The updated algorithm appears to offer a stable and fast way of computing
 \begin_inset Formula $q$
 \end_inset 
 
+, and the polylogarithm for general complex 
+\begin_inset Formula $s$
+\end_inset 
+
+ and 
+\begin_inset Formula $z$
+\end_inset 
+
 .
- It allows the polylogarithm to be computed over an extended range as well.
  An actual implementation using a variable-precision library shows that
  the algorithm is quite tractable.
  
@@ -4105,7 +4142,7 @@ ized; it may be possible to re-arrange terms to minimize the propagation
  of errors.
  Such a characterization is necessary before reliable double-precision code
  can be created.
- By contrast, such considerations can be swept under the carpet when employing
+ By contrast, such considerations can be swept under the rug when employing
  arbitrary-precision arithmetic.
 \layout Standard
 
@@ -4152,9 +4189,9 @@ The polylogarithm and Hurwitz zeta functions are both special cases of the
  
 \layout Standard
 
-A further exploration of monodromy group seems to be merited; this does
- not appear to be terribly challenging, but it would be nice to be aware
- of the details.
+A further exploration of the monodromy group of the polylogarithm seems
+ to be merited; although this does not appear to be terribly challenging,
+ it would be nice to have the details at hand.
 \layout Standard
 
 This paper concludes with the application of the algorithm to render some
@@ -4194,7 +4231,7 @@ collapsed true
 
 \layout Caption
 
-Periodic Zeta
+The Periodic Zeta
 \layout Standard
 
 
@@ -4389,7 +4426,7 @@ streaks
 \end_inset 
 
  in the previous image correspond exactly to the dark parts of this image.
- Again, a cross-cross lattice pattern can be seen.
+ Again, a criss-cross lattice pattern can be seen.
  The dominant streaks in this picture are presumably due to the 
 \begin_inset Formula $(1+q)^{-s}$
 \end_inset 
@@ -4585,12 +4622,12 @@ Note the other lone zero floating along inside of the
 \end_inset 
 
 and proceeding around.
- Most zeros die out at 
+ Most zeros pass to another sheet upon crossing 
 \begin_inset Formula $z=1$
 \end_inset 
 
- after making a full revolution; others spiral around a second time, such
- as the lone zero up top.
+, after making a full revolution; others spiral around a second time on
+ this sheet, such as the lone zero up top.
  An animated movie of this image, showing the spiraling, can be seen at
  http://www.linas.org/art-gallery/polylog/polylog.html
 \layout Standard
@@ -4747,7 +4784,7 @@ This figure shows the polylogarithm in the complex
 
 .
  It is superficially similar to the previous image, with two notable differences.
- Visible just under the cut, on the right is a zero.
+ Visible just under the cut, on the right, is a zero.
  If 
 \begin_inset Formula $\sigma$
 \end_inset 
@@ -4887,7 +4924,7 @@ ex-Riemann zero
 \end_inset 
 
  increases, the Riemann zeroes pass precisely through this branch point,
- leaving the first sheet and moving to this.
+ leaving the first sheet and moving to this one.
  
 \layout Standard
 
@@ -5006,11 +5043,11 @@ This figure shows the
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
-More Polylogarithm sheets
+More polylogarithm sheets
 \layout Standard
 
 
@@ -5100,7 +5137,8 @@ Second row: Result of winding left-handed around
 \begin_inset Formula $z=0$
 \end_inset 
 
- once.The cut 
+ once.
+ The cut 
 \begin_inset Formula $0<z<1$
 \end_inset 
 
