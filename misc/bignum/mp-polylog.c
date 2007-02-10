@@ -553,7 +553,7 @@ polylog_invert_works(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int
 	cpx_recip (oz, zee);
 
 	/* compute ph = e^{i pi s / 2} = i^s */
-	cpx_mul_mpf (tmp, s, twopi);
+	cpx_times_mpf (tmp, s, twopi);
 	cpx_div_ui (tmp,tmp, 4);
 	cpx_times_i (tmp, tmp);
 	cpx_exp (ph, tmp, prec);
@@ -661,7 +661,7 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 		cpx_ui_sub (s, 1, 0, ess);
 
 		/* compute ph = e^{-i pi s / 2} = (-i)^s */
-		cpx_mul_mpf (tmp, s, twopi);
+		cpx_times_mpf (tmp, s, twopi);
 		cpx_div_ui (tmp, tmp, 4);
 		cpx_times_i (tmp, tmp);
 		cpx_neg (tmp, tmp);
@@ -670,7 +670,7 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 
 		/* gamma(s) (i)^s / (2pi)^s */
 		cpx_gamma_cache (scale, s, prec);
-		cpx_mul_mpf (tmp, s, log_twopi);
+		cpx_times_mpf (tmp, s, log_twopi);
 		cpx_neg (tmp, tmp);
 		cpx_exp (tmp, tmp, prec);
 		cpx_mul (scale, scale, tmp);
@@ -680,7 +680,7 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	/* compute ln z/(2pi i) */
 	cpx_set (oz, zee);
 	cpx_log (logz, oz, prec);
-	cpx_mul_mpf (logz, logz, otp);
+	cpx_times_mpf (logz, logz, otp);
 	cpx_times_i (logz, logz);
 
 	/* Place branch cut so that it extends to the right from z=1 */
@@ -736,7 +736,7 @@ polylog_invert_broken_for_lower_half_plane(cpx_t plog, const cpx_t ess, const cp
 	cpx_recip (oz, zee);
 
 	/* compute ph = e^{i pi s / 2} = i^s */
-	cpx_mul_mpf (tmp, s, twopi);
+	cpx_times_mpf (tmp, s, twopi);
 	cpx_div_ui (tmp,tmp, 4);
 	cpx_times_i (tmp, tmp);
 	cpx_exp (ph, tmp, prec);
@@ -816,16 +816,16 @@ cpx_polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int z0_dromy, i
 	/* Do the z0_dromy */
 	if (z0_dromy) 
 	{
-		cpx_mul_mpf (tmp, s, twopi);
+		cpx_times_mpf (tmp, s, twopi);
 		cpx_times_i (tmp, tmp);
 		cpx_neg (tmp, tmp);
 		if (z0_dromy > 0)
 		{
-			cpx_mul_ui (tmp, tmp, z0_dromy);
+			cpx_times_ui (tmp, tmp, z0_dromy);
 		}
 		else
 		{
-			cpx_mul_ui (tmp, tmp, -z0_dromy);
+			cpx_times_ui (tmp, tmp, -z0_dromy);
 			cpx_neg (tmp,tmp);
 		}
 		cpx_exp (norm, tmp, prec);
@@ -883,7 +883,7 @@ cpx_polylog_sheet(cpx_t delta, const cpx_t ess, const cpx_t zee, int z0_dromy, i
 	// XXX this code can be more optimized than this
 	// current form is easier to validate vs. theory
 	/* Compute ph = e^{i pi s / 2} = i^s */
-	cpx_mul_mpf (tmp, s, twopi);
+	cpx_times_mpf (tmp, s, twopi);
 	cpx_div_ui (tmp, tmp, 4);
 	cpx_times_i (tmp, tmp);
 
@@ -923,16 +923,16 @@ cpx_polylog_sheet_g0_action(cpx_t ph, const cpx_t ess, int direction, int prec)
 	mpf_init (twopi);
 	fp_two_pi (twopi, prec);
 
-	cpx_mul_mpf (ph, ess, twopi);
+	cpx_times_mpf (ph, ess, twopi);
 	cpx_times_i (ph, ph);
 	cpx_neg (ph, ph);
 	if (direction > 0)
 	{
-		cpx_mul_ui (ph, ph, direction);
+		cpx_times_ui (ph, ph, direction);
 	}
 	else
 	{
-		cpx_mul_ui (ph, ph, -direction);
+		cpx_times_ui (ph, ph, -direction);
 		cpx_neg (ph, ph);
 	}
 	cpx_exp (ph, ph, prec);
@@ -1018,7 +1018,7 @@ cpx_polylog_sheet_g1_action(cpx_t delta, const cpx_t ess, const cpx_t zee, int s
 	// XXX this code can be more optimized than this
 	// current form is easier to validate vs. theory
 	/* Compute ph = e^{i pi s / 2} = i^s */
-	cpx_mul_mpf (tmp, s, twopi);
+	cpx_times_mpf (tmp, s, twopi);
 	cpx_div_ui (tmp, tmp, 4);
 	cpx_times_i (tmp, tmp);
 
@@ -1228,7 +1228,7 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
 
 		/* ts = 2^{1-s} */
 		fp_log2 (qf, prec);
-		cpx_mul_mpf (sm, sm, qf);
+		cpx_times_mpf (sm, sm, qf);
 		cpx_exp (ts, sm, prec);
 		
 		/* bt = pzeta (2q) * 2^{1-s} */
@@ -1259,7 +1259,7 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
 
 		/* ts = 2^{1-s} */
 		fp_log2 (qf, prec);
-		cpx_mul_mpf (sm, sm, qf);
+		cpx_times_mpf (sm, sm, qf);
 		cpx_exp (ts, sm, prec);
 		
 		/* bt = pzeta (2q-1) * 2^{1-s} */
@@ -1352,7 +1352,7 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 		cpx_mul (scale, scale, tps);
 
 		/* times two */
-		cpx_mul_ui (scale, scale, 2);
+		cpx_times_ui (scale, scale, 2);
 		cpx_clear (tps);
 		cpx_clear (s);
 		mpf_clear (two_pi);
@@ -1405,7 +1405,7 @@ static void hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 
 		/* exp (i pi s/2) */
 		fp_pi_half (t, prec);
-		cpx_mul_mpf (piss, s, t);
+		cpx_times_mpf (piss, s, t);
 		cpx_times_i (piss, piss);
 		cpx_exp (piss, piss, prec);
 		cpx_recip (niss, piss);
@@ -1743,7 +1743,7 @@ void cpx_pade_hurwitz_zeta (cpx_t hur, const cpx_t ess, const mpf_t que, int pre
 	{
 		mpf_sub (c, b, c);
 		fp_pow_rc (term, k, q, s, prec);
-		cpx_mul_mpf (term, term, c);
+		cpx_times_mpf (term, term, c);
 		cpx_add (hur, hur, term);
 
 		mpf_mul_ui (b,b, 2*(k+nterms)*(k-nterms));

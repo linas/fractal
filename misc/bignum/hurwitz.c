@@ -43,7 +43,7 @@ static void forward_diff_diri (cpx_t fin, int n, mpf_t q, cpx_t ess, int prec)
 
 		fp_pow_rc (diri, k, q, ess, prec);
 
-		cpx_mul_mpf (diri, diri, bin);
+		cpx_times_mpf (diri, diri, bin);
 
 		if (0 == k%2)
 		{
@@ -102,7 +102,7 @@ void hurwitz_zeta(cpx_t zeta, cpx_t ess, mpf_t q, int prec)
 		mpf_set_ui (on, 1);
 		mpf_div_ui (on, on, n+1);
 		
-		cpx_mul_mpf (fd, fd, on);
+		cpx_times_mpf (fd, fd, on);
 printf ("duude %d ", n);
 fp_prt (" ", fd[0].re);
 		cpx_add (zeta, zeta, fd);

@@ -53,7 +53,7 @@ void cpx_zeta_series (cpx_t result, const cpx_t ess, const mpf_t que, int prec)
 
 	mpf_mul (arg, que, twopi);
 	cpx_set_ui (mu, 0, 1);
-	cpx_mul_mpf (mu, mu, arg);
+	cpx_times_mpf (mu, mu, arg);
 	cpx_set_ui (pmu, 1, 0);
 
 	cpx_set_ui (result, 0, 0);
@@ -67,7 +67,7 @@ printf ("duude k=%d\t", k);
 cpx_prt ("zeta=", term);
 printf ("\n");
 		cpx_mul (term, term, pmu);
-		cpx_mul_mpf (term, term, fact);
+		cpx_times_mpf (term, term, fact);
 		
 cpx_prt ("term=", term);
 printf ("\n");
@@ -87,7 +87,7 @@ printf ("\n");
 	cpx_sub_ui (sk, s, 1, 0);
 	cpx_mpf_pow (term, arg, sk, prec);
 
-	cpx_mul_mpf (sk, sk, twopi);
+	cpx_times_mpf (sk, sk, twopi);
 	cpx_div_ui (sk, sk, 4);
 	cpx_neg (sk, sk);
 	cpx_exp (sk,sk,prec);
@@ -131,7 +131,7 @@ void sumpos (cpx_t coho, const cpx_t lambda, const cpx_t zee)
 	{
 		cpx_sub_ui (term, lambda, n, 0);
 		cpx_div (term, zp, term);
-		cpx_mul_ui (term, term, n);
+		cpx_times_ui (term, term, n);
 		cpx_add (sum, sum, term);
 		cpx_mul (zp, zp, zee); 
 	}
@@ -197,7 +197,7 @@ void disco (cpx_t disco, const cpx_t ess, int dir, int prec)
 
 	/* times exp(i pi (1-s)/2) */
 	fp_pi_half (p, prec);
-	cpx_mul_mpf (term, s, p);
+	cpx_times_mpf (term, s, p);
 	cpx_times_i (term, term);
 	if (dir) cpx_neg (term, term);
 	cpx_exp (term, term, prec);
@@ -259,7 +259,7 @@ main (int argc, char * argv[])
 	mpf_init (twopi);
 	fp_two_pi (twopi, prec);
 
-	cpx_mul_mpf (ph, ess, twopi);
+	cpx_times_mpf (ph, ess, twopi);
 	cpx_times_i (ph, ph);
 	cpx_neg (ph,ph);
 	cpx_exp (ph, ph, prec);
@@ -333,7 +333,7 @@ main (int argc, char * argv[])
 
 #if 0
 		fp_two_pi (que, prec);
-		cpx_mul_mpf (z3, ms, que);
+		cpx_times_mpf (z3, ms, que);
 		cpx_times_i (z3, z3);
 		cpx_neg (z3, z3);
 		cpx_exp (z3, z3, prec);

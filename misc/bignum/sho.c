@@ -109,14 +109,14 @@ void eta_1 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
 
 	/* phase term, exp (i pi lambda/2) */
 	fp_pi (tmp, prec);
-	cpx_mul_mpf (pha, l2, tmp);
+	cpx_times_mpf (pha, l2, tmp);
 	cpx_times_i (pha, pha);
 	cpx_exp (pha, pha, prec);
 	cpx_mul (eta, eta, pha);
 
 	/* times sqrt(2pi) */
 	fp_sqrt_two_pi (tmp, prec);
-	cpx_mul_mpf(eta, eta, tmp);
+	cpx_times_mpf(eta, eta, tmp);
 	
 	/* power of two term */
 	mpf_set_ui (tmp, 1);
@@ -159,21 +159,21 @@ void eta_2 (cpx_t eta, cpx_t lam, cpx_t y, int prec)
 	mpf_div_ui (tmp, tmp, 2);
 	cpx_sub_mpf (pha, l2, tmp);
 	fp_pi (tmp, prec);
-	cpx_mul_mpf (pha, pha, tmp);
+	cpx_times_mpf (pha, pha, tmp);
 	cpx_times_i (pha, pha);
 	cpx_exp (pha, pha, prec);
 	cpx_mul (eta, eta, pha);
 
 	/* times sqrt(2pi) */
 	fp_sqrt_two_pi (tmp, prec);
-	cpx_mul_mpf(eta, eta, tmp);
+	cpx_times_mpf(eta, eta, tmp);
 	
 	/* power of two term */
 	mpf_set_ui (tmp, 1);
 	mpf_div_ui (tmp, tmp, 2);
 	cpx_mpf_pow (pha, tmp, l2, prec);
 	cpx_mul (eta, eta, pha);
-	cpx_mul_ui (eta, eta, 2);
+	cpx_times_ui (eta, eta, 2);
 	
 	/* Gamma (1/4+lambda/2) */
 	mpf_set_ui (tmp, 1);
@@ -295,7 +295,7 @@ void validate_ratio (cpx_t lambda, cpx_t y, int prec)
 		
 		/* compute tan(lambda/2 + 1/4) */
 		fp_pi (pi, prec);
-		cpx_mul_mpf (tang, tang, pi);
+		cpx_times_mpf (tang, tang, pi);
 		cpx_tangent (tang, tang, prec);
 		cpx_times_i (tang, tang);
 		
@@ -373,7 +373,7 @@ void get_ratio (cpx_t tang, cpx_t lambda, int prec)
 	cpx_div_ui (tang, tang, 2);
 		
 	/* compute tan(pi (lambda/2 + 1/4)) */
-	cpx_mul_mpf (tang, tang, pi);
+	cpx_times_mpf (tang, tang, pi);
 	cpx_tangent (tang, tang, prec);
 	cpx_times_i (tang, tang);
 
@@ -482,7 +482,7 @@ void recurse (cpx_t lambda, cpx_t mu)
 	cpx_init (tmp);
 
 	/* toomu = 2*mu+1 */
-	cpx_mul_ui (toomu, mu, 2);
+	cpx_times_ui (toomu, mu, 2);
 	cpx_add_ui (toomu, toomu, 1, 0);
 	
 	/* lam=lambda+1/2; lamp = lambda+3/2 */

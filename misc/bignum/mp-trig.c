@@ -979,7 +979,7 @@ void cpx_sqrt (cpx_t rt, const cpx_t z, int prec)
 #endif
 
 	mpf_sqrt (modulus, modulus);
-	cpx_mul_mpf (rt, rt, modulus);
+	cpx_times_mpf (rt, rt, modulus);
 
 	mpf_clear (modulus);
 }

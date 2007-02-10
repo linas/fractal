@@ -119,19 +119,6 @@ static inline void cpx_conj (cpx_t neg, const cpx_t a)
 }
 
 /**
- * cpx_times_i -- z = a*i
- */
-static inline void cpx_times_i (cpx_t z, const cpx_t a)
-{
-	mpf_t tmp;
-	mpf_init (tmp);
-	mpf_set (tmp, a[0].re);
-	mpf_neg (z[0].re, a[0].im);
-	mpf_set (z[0].im, tmp);
-	mpf_clear (tmp);
-}
-
-/**
  * cpx_mul -- prod = a * b
  */
 static inline void cpx_mul (cpx_t prod, const cpx_t a, const cpx_t b)
@@ -158,18 +145,31 @@ static inline void cpx_mul (cpx_t prod, const cpx_t a, const cpx_t b)
 }
 
 /**
- * cpx_mul_mpf -- prod = a * b
+ * cpx_times_i -- z = a*i
  */
-static inline void cpx_mul_mpf (cpx_t prod, const cpx_t a, const mpf_t b)
+static inline void cpx_times_i (cpx_t z, const cpx_t a)
+{
+	mpf_t tmp;
+	mpf_init (tmp);
+	mpf_set (tmp, a[0].re);
+	mpf_neg (z[0].re, a[0].im);
+	mpf_set (z[0].im, tmp);
+	mpf_clear (tmp);
+}
+
+/**
+ * cpx_times_mpf -- prod = a * b
+ */
+static inline void cpx_times_mpf (cpx_t prod, const cpx_t a, const mpf_t b)
 {
 	mpf_mul (prod[0].re, a[0].re, b);
 	mpf_mul (prod[0].im, a[0].im, b);
 }
 
 /**
- * cpx_mul_mpf -- prod = a * b
+ * cpx_times_ui -- prod = a * b
  */
-static inline void cpx_mul_ui (cpx_t prod, const cpx_t a, unsigned int b)
+static inline void cpx_times_ui (cpx_t prod, const cpx_t a, unsigned int b)
 {
 	mpf_mul_ui (prod[0].re, a[0].re, b);
 	mpf_mul_ui (prod[0].im, a[0].im, b);

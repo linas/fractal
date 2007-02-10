@@ -920,7 +920,7 @@ int test_complex_gamma (int nterms, int prec)
 		cpx_mul (gam, gam, rgam);
 		
 		/* divide by Gamma (2z) */
-		cpx_mul_ui (zb, za, 2);
+		cpx_times_ui (zb, za, 2);
 		cpx_gamma (rgam, zb, prec);
 		cpx_div (gam, gam, rgam);
 
@@ -961,7 +961,7 @@ int test_complex_gamma (int nterms, int prec)
 
 		/* Product of gammas, times sine */
 		cpx_div_mpf (gam, gam, pi);
-		cpx_mul_mpf (za, za, pi);
+		cpx_times_mpf (za, za, pi);
 		cpx_sine (rgam, za, prec);
 		cpx_mul (gam, gam, rgam);
 
@@ -993,7 +993,7 @@ int test_complex_gamma (int nterms, int prec)
 
 		/* Product of gammas, times sine */
 		cpx_div_mpf (gam, gam, pi);
-		cpx_mul_mpf (za, za, pi);
+		cpx_times_mpf (za, za, pi);
 		cpx_sine (rgam, za, prec);
 		cpx_mul (gam, gam, rgam);
 
@@ -1289,7 +1289,7 @@ printf ("start periodic zeta test at %g +i%g\n", sre, sim);
 			cpx_add_ui (sm, sm, 1, 0);
 	
 			/* ts = 2^{1-s} */
-			cpx_mul_mpf (sm, sm, l2);
+			cpx_times_mpf (sm, sm, l2);
 			cpx_exp (ts, sm, prec);
 			
 			/* ts = -(1-2^(1-s)) */
@@ -1395,7 +1395,7 @@ printf ("start hurwitz zeta test %g +i%g\n", sre, sim);
 			cpx_hurwitz_zeta (zl, s, q, prec);
 			
 			/* ts = 2^s - 1 */
-			cpx_mul_mpf (ts, s, l2);
+			cpx_times_mpf (ts, s, l2);
 			cpx_exp (ts, ts, prec);
 			cpx_sub_ui (ts, ts, 1,0);
 
@@ -1752,7 +1752,7 @@ int main (int argc, char * argv[])
 	{
 		/* identity 13.4.1. from A&S */
 		cpx_sub (c1,b,a);
-		cpx_mul_ui (c2, a, 2);
+		cpx_times_ui (c2, a, 2);
 		cpx_sub (c2, c2, b);
 		cpx_add (c2, c2, z);
 		cpx_neg(c3,a);
