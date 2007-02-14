@@ -28,7 +28,7 @@ static void psi_init (void)
 	// prec = 60;
 	// prec = 40;
 	prec = 15;
-	prec = 22;
+	// prec = 22;
 
 	/* compute number of binary bits this corresponds to. */
 	double v = ((double) prec) *log(10.0) / log(2.0);
@@ -52,9 +52,9 @@ static double hurl (double re_q, double im_q, int itermax, double param)
 	if (!init) {psi_init(); init=1; }
 
 	re_q += 2.0e-3;
-	re_q *= 1.996;
-im_q *= sqrt(re_q);
-	re_q *= sqrt (re_q);
+//	re_q *= 1.996;
+// im_q *= sqrt(re_q);
+//	re_q *= sqrt (re_q);
 
 	// printf ("duude compute %g  %g \n", re_q, im_q);
 #ifdef QUADRATIC_RESCALE
@@ -62,12 +62,12 @@ im_q *= sqrt(re_q);
 #endif /* QUADRATIC_RESCALE */
 	mpf_set_d (que, re_q);
 
-	// double ims = 50.0*im_q;
-	double ims = 100.0*im_q;
+	double ims = 50.0*im_q;
+	// double ims = 100.0*im_q;
 	mpf_set_d (ess[0].im, ims);
 
-	// cpx_periodic_zeta (zeta, ess, que, prec);
-	cpx_hurwitz_zeta (zeta, ess, que, prec);
+	cpx_periodic_zeta (zeta, ess, que, prec);
+	// cpx_hurwitz_zeta (zeta, ess, que, prec);
 
 	double frea = mpf_get_d (zeta[0].re);
 	double fima = - mpf_get_d (zeta[0].im);

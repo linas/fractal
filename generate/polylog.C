@@ -17,7 +17,7 @@
 
 /* ============================================================================= */
 
-static cpx_t zeta, ess, zee,z2;
+static cpx_t zeta, ess, zee,z2, ph;
 static int prec;
 
 static void psi_init (int cmd_prec, double ims)
@@ -45,12 +45,16 @@ static void psi_init (int cmd_prec, double ims)
 	cpx_init (ess);
 	cpx_init (zee);
 	cpx_init (z2);
+	cpx_init (ph);
 
 	// cpx_set_d (ess, 0.5, 14.134725141734);
 	// cpx_set_d (ess, 0.5, 21.022039638771);
 	// cpx_set_d (ess, 0.5, 37.5861781588256712);
 	// cpx_set_d (ess, 0.5, 240.0);
 	cpx_set_d (ess, 0.5, ims);
+
+	cpx_set_d (zee, 0.0, 0.1);
+	cpx_polylog_sheet_g0_action (ph, ess, 1, prec);
 }
 
 static double plogger (double re_q, double im_q, int itermax, double param)
@@ -60,10 +64,89 @@ static double plogger (double re_q, double im_q, int itermax, double param)
 		  
 	//printf ("duude compute %g  %g \n", re_q, im_q);
 
+#ifdef S_PLANE
+	cpx_set_d (ess, re_q, im_q);
+	cpx_polylog (zeta, ess, zee, prec);
+#endif
+
+#define TRIPLICATION
+#ifdef TRIPLICATION
 	cpx_set_d (zee, re_q, im_q);
 	cpx_polylog (zeta, ess, zee, prec);
+
+	cpx_set_d (ph, -0.5, 0.866025404);
+	cpx_mul (zee,zee,ph);
+	cpx_polylog (z2, ess, zee, prec);
+	cpx_add (zeta, zeta, z2);
+
+	cpx_mul (zee,zee,ph);
+	cpx_polylog (z2, ess, zee, prec);
+	cpx_add (zeta, zeta, z2);
+#endif
+
+#ifdef DIRICHLET_CHARACTER_3_2
+	cpx_set_d (zee, re_q, im_q);
+	cpx_set_d (ph, -0.5, 0.866025404);
+	cpx_mul (zee,zee,ph);
+	cpx_polylog (zeta, ess, zee, prec);
+
+	cpx_mul (zee,zee,ph);
+	cpx_polylog (z2, ess, zee, prec);
+	cpx_sub (zeta, zeta, z2);
+#endif
+
+#ifdef DIRICHLET_CHARACTER_4_2
+	cpx_set_d (zee, re_q, im_q);
+	cpx_times_i (zee,zee);
+	cpx_polylog (zeta, ess, zee, prec);
+
+	cpx_neg (zee,zee);
+	cpx_polylog (z2, ess, zee, prec);
+	cpx_sub (zeta, zeta, z2);
+#endif
+
+#ifdef DIRICHLET_CHARACTER_5_2
+	cpx_set_d (zee, re_q, im_q);
+	cpx_set_d (ph, cos(M_PI*0.4), sin (M_PI*0.4));
+	cpx_mul (zee,zee,ph);
+	cpx_polylog (zeta, ess, zee, prec);
+
+	cpx_mul (zee,zee,ph);
+	cpx_polylog (z2, ess, zee, prec);
+	cpx_sub (zeta, zeta, z2);
+
+	cpx_mul (zee,zee,ph);
+	cpx_polylog (z2, ess, zee, prec);
+	cpx_sub (zeta, zeta, z2);
+
+	cpx_mul (zee,zee,ph);
+	cpx_polylog (z2, ess, zee, prec);
+	cpx_add (zeta, zeta, z2);
+#endif
+
+#ifdef SAME_AS_THREE_NEG_G1S
 	cpx_polylog_sheet (z2, ess, zee, 0, -3, prec);
 	cpx_sub (zeta, zeta, z2);
+#endif
+
+#ifdef THREE_NEG_G1S
+	cpx_polylog_sheet_g1_action (z2, ess, zee, 0, -1, prec);
+	cpx_sub (zeta, zeta, z2);
+	cpx_polylog_sheet_g1_action (z2, ess, zee, -1, -1, prec);
+	cpx_sub (zeta, zeta, z2);
+	cpx_polylog_sheet_g1_action (z2, ess, zee, -2, -1, prec);
+	cpx_sub (zeta, zeta, z2);
+#endif
+
+#if OTHER
+	cpx_polylog_sheet_g1_action(z2, ess, zee, 0, 1, prec);
+	cpx_mul (z2,z2,ph);
+	cpx_sub(zeta, zeta, z2);
+	cpx_polylog_sheet_g1_action(z2, ess, zee, 0, -1, prec);
+	cpx_sub(zeta, zeta, z2);
+	// cpx_polylog_sheet_g1_action(z2, ess, zee, -1, -1, prec);
+	// cpx_sub(zeta, zeta, z2);
+#endif
 
 	double frea = mpf_get_d (zeta[0].re);
 	double fima = mpf_get_d (zeta[0].im);
