@@ -2655,9 +2655,6 @@ The periodic zeta function
  which may be deomnstrated easily enough.
 \layout Standard
 
-XXX Move bulk of this to appendix.
-\layout Standard
-
 These eigenfunctions are essentially a form of the Hurwitz zeta function
  
 \begin_inset Formula \begin{equation}
@@ -2671,120 +2668,29 @@ These eigenfunctions are essentially a form of the Hurwitz zeta function
 \end_inset 
 
 .
- One may confirm this by following a very old-fashioned recipe for obtaining
- the functional relation for a zeta-like sum.
- Start by expressing the gamma function as 
-\begin_inset Formula \begin{equation}
-\int_{0}^{\infty}dy\, e^{-2\pi ny}y^{s-1}=\frac{\Gamma(s)}{(2\pi n)^{s}}\label{eq:}\end{equation}
-
-\end_inset 
-
- Substituting into the expression for 
+ The Hurwitz zeta is related to 
 \begin_inset Formula $\beta$
 \end_inset 
 
- and performing the sum, one may write 
-\begin_inset Formula \begin{equation}
-\beta(x;s)=2s\int_{0}^{\infty}dy\,\frac{y^{s-1}}{\exp\left(-2\pi i(x+iy)\right)-1}\label{eq:}\end{equation}
-
-\end_inset 
-
- Then, following a traditional trick 
-\begin_inset LatexCommand \cite[pp 13 ff]{Edw74}
-
-\end_inset 
-
-, re-write this as a contour integral 
-\begin_inset Formula \begin{equation}
-\beta(x;s)=\frac{-is}{\sin\pi s}\oint\frac{(-y)^{s}}{\exp\left(-2\pi i(x+iy)\right)-1}\;\frac{dy}{y}\label{eq:}\end{equation}
-
-\end_inset 
-
- where the contour is taken to extend from 
-\begin_inset Formula $+\infty+i\epsilon$
-\end_inset 
-
-, running just above the positive real axis, to the origin, circling the
- origin in a clockwise fashion, and returning to 
-\begin_inset Formula $+\infty-i\epsilon$
-\end_inset 
-
- just under the real axis.
- The contour essentially encloses the cut of the logarithm in the expression
- 
-\begin_inset Formula $(-y)^{s}=\exp s\,\log(-y)$
-\end_inset 
-
-.
- The old fashioned recipe calls for closing the contour at infinity (in
- a counter-clockwise direction) and then taking the dubious step of asserting
- Cauchy's Theorem to equate the integral around the cut to the sum of the
- poles, where we note that we have a pole whenever 
-\begin_inset Formula $x+iy=n$
-\end_inset 
-
- for some integer 
-\begin_inset Formula $n$
-\end_inset 
-
-.
- By doing this we get the formal summation 
-\begin_inset Formula \begin{equation}
-\frac{i\sin\pi s}{s}\beta(x;s)=\exp\left(\frac{i\pi s}{2}\right)\sum_{n=-\infty}^{\infty}(n-x)^{s-1}\label{eq:}\end{equation}
-
-\end_inset 
-
- This is a 
-\begin_inset Quotes eld
-\end_inset 
-
-formal sum
-\begin_inset Quotes erd
-\end_inset 
-
-, since the preceding steps required taking 
-\begin_inset Formula $\Re s>1$
-\end_inset 
-
- whereas now one needs to take 
-\begin_inset Formula $\Re s<0$
-\end_inset 
-
-.
- This is a bit of jiggery-pokery that is common for this type of presentation;
- a different set of tools is required to do better.
- So we proceed, ignoring these difficulties.
- Re-write this sum as 
-\begin_inset Formula \begin{equation}
-\frac{i\sin\pi s}{s}\beta(x;s)=\exp\left(\frac{i\pi s}{2}\right)\left[\sum_{n=0}^{\infty}(n+(1-x))^{s-1}+e^{-i\pi(s-1)}\sum_{n=0}^{\infty}(n+x)^{s-1}\right]\label{eq:}\end{equation}
-
-\end_inset 
-
- where we were mindful to rotate counter-clockwise for 
-\begin_inset Formula $n<0$
-\end_inset 
-
- when replacing 
-\begin_inset Formula $(-)^{n}$
-\end_inset 
-
- by 
-\begin_inset Formula $e^{-i\pi n}$
-\end_inset 
-
- instead of the sloppy and incorrect 
-\begin_inset Formula $e^{i\pi n}$
-\end_inset 
-
-.
- Recognizing the sums as the Hurwitz Zeta, this then gives the desired result:
- 
+ as 
 \begin_inset Formula \begin{equation}
 \beta(x;s)=\frac{is}{\sin\pi s}\left[e^{-i\pi s/2}\zeta(1-s,x)-e^{i\pi s/2}\zeta(1-s,1-x)\right]\label{eq:}\end{equation}
 
 \end_inset 
 
- It is straightforward to invert this and solve for 
+ This relationship is known as Jonquière's identity
+\begin_inset LatexCommand \cite[Section 7.12.2]{Lew81}
+
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Jon1889}
+
+\end_inset 
+
+ when expressed in terms of polylogarithms; its derivation is reviewed in
+ Appendix B.
+ It is straightforward to invert the above and solve for 
 \begin_inset Formula $\zeta$
 \end_inset 
 
@@ -2797,23 +2703,6 @@ formal sum
  thus proving the assertion that the Hurwitz zeta is an eigenfunction of
  the Bernoulli operator, with eigenvalue 
 \begin_inset Formula $2^{s-1}$
-\end_inset 
-
-.
- To verify the correctness of the above steps, expand the exponentials in
- terms of their real and imaginary parts, to find that 
-\layout Standard
-
-
-\begin_inset Formula \begin{equation}
-\zeta(z,x)=\frac{2\Gamma(1-z)}{\left(2\pi\right)^{1-z}}\left[\sin\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\cos(2\pi nx)}{n^{1-z}}+\cos\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\sin(2\pi nx)}{n^{1-z}}\right]\label{eq:}\end{equation}
-
-\end_inset 
-
- which agrees with standard textbook presentations of the Hurwitz zeta;
- see for example 
-\begin_inset LatexCommand \cite[Thm 12.6, Ex 12.2]{Apo76}
-
 \end_inset 
 
 .
@@ -6469,6 +6358,192 @@ The standard definition of the Artin-Mazur Zeta function requires that the
  Yet the zeta will still be well defined, although the coefficients of the
  Maclaurin expansion will not be integers.
  Can these be reinterpreted as a density or measure? 
+\layout Section
+
+Appendix B: Zeta Identities
+\layout Standard
+
+This appendix establishes the relationship between the functions 
+\begin_inset Formula $\beta(x,s)$
+\end_inset 
+
+ and the Hurwitz zeta function 
+\begin_inset Formula \begin{equation}
+\zeta(s,x)=\sum_{n=0}^{\infty}\frac{1}{\left(n+x\right)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ This relationship is well-known; for example, it is reviewed in the Bateman
+ manuscripts in the guise of an identity on the Lerch transcendental
+\begin_inset LatexCommand \cite{Bate53}
+
+\end_inset 
+
+; see also Wikipedia on Polylogarithms
+\begin_inset LatexCommand \cite{WP-PL}
+
+\end_inset 
+
+.
+ As a relation on polylogarithms, it is known as Jonquière's identity
+\begin_inset LatexCommand \cite[Section 7.12.2]{Lew81}
+
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Jon1889}
+
+\end_inset 
+
+.
+\layout Standard
+
+One may confirm this by following a very old-fashioned recipe for obtaining
+ the functional relation for a zeta-like sum.
+ Start by expressing the gamma function as 
+\begin_inset Formula \begin{equation}
+\int_{0}^{\infty}dy\, e^{-2\pi ny}y^{s-1}=\frac{\Gamma(s)}{(2\pi n)^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Substituting into the expression for 
+\begin_inset Formula $\beta$
+\end_inset 
+
+ and performing the sum, one may write 
+\begin_inset Formula \begin{equation}
+\beta(x;s)=2s\int_{0}^{\infty}dy\,\frac{y^{s-1}}{\exp\left(-2\pi i(x+iy)\right)-1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ Then, following a traditional trick 
+\begin_inset LatexCommand \cite[pp 13 ff]{Edw74}
+
+\end_inset 
+
+, re-write this as a contour integral 
+\begin_inset Formula \begin{equation}
+\beta(x;s)=\frac{-is}{\sin\pi s}\oint\frac{(-y)^{s}}{\exp\left(-2\pi i(x+iy)\right)-1}\;\frac{dy}{y}\label{eq:}\end{equation}
+
+\end_inset 
+
+ where the contour is taken to extend from 
+\begin_inset Formula $+\infty+i\epsilon$
+\end_inset 
+
+, running just above the positive real axis, to the origin, circling the
+ origin in a clockwise fashion, and returning to 
+\begin_inset Formula $+\infty-i\epsilon$
+\end_inset 
+
+ just under the real axis.
+ The contour essentially encloses the cut of the logarithm in the expression
+ 
+\begin_inset Formula $(-y)^{s}=\exp s\,\log(-y)$
+\end_inset 
+
+.
+ The old fashioned recipe calls for closing the contour at infinity (in
+ a counter-clockwise direction) and then taking the dubious step of asserting
+ Cauchy's Theorem to equate the integral around the cut to the sum of the
+ poles, where we note that we have a pole whenever 
+\begin_inset Formula $x+iy=n$
+\end_inset 
+
+ for some integer 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ By doing this we get the formal summation 
+\begin_inset Formula \begin{equation}
+\frac{i\sin\pi s}{s}\beta(x;s)=\exp\left(\frac{i\pi s}{2}\right)\sum_{n=-\infty}^{\infty}(n-x)^{s-1}\label{eq:}\end{equation}
+
+\end_inset 
+
+ This is a 
+\begin_inset Quotes eld
+\end_inset 
+
+formal sum
+\begin_inset Quotes erd
+\end_inset 
+
+, since the preceding steps required taking 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+ whereas now one needs to take 
+\begin_inset Formula $\Re s<0$
+\end_inset 
+
+.
+ This is a bit of jiggery-pokery that is common for this type of presentation;
+ a different set of tools is required to do better.
+ So we proceed, ignoring these difficulties.
+ Re-write this sum as 
+\begin_inset Formula \begin{equation}
+\frac{i\sin\pi s}{s}\beta(x;s)=\exp\left(\frac{i\pi s}{2}\right)\left[\sum_{n=0}^{\infty}(n+(1-x))^{s-1}+e^{-i\pi(s-1)}\sum_{n=0}^{\infty}(n+x)^{s-1}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ where we were mindful to rotate counter-clockwise for 
+\begin_inset Formula $n<0$
+\end_inset 
+
+ when replacing 
+\begin_inset Formula $(-)^{n}$
+\end_inset 
+
+ by 
+\begin_inset Formula $e^{-i\pi n}$
+\end_inset 
+
+ instead of the sloppy and incorrect 
+\begin_inset Formula $e^{i\pi n}$
+\end_inset 
+
+.
+ Recognizing the sums as the Hurwitz Zeta, this then gives the desired result:
+ 
+\begin_inset Formula \begin{equation}
+\beta(x;s)=\frac{is}{\sin\pi s}\left[e^{-i\pi s/2}\zeta(1-s,x)-e^{i\pi s/2}\zeta(1-s,1-x)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ It is straightforward to invert this and solve for 
+\begin_inset Formula $\zeta$
+\end_inset 
+
+; one gets 
+\begin_inset Formula \begin{equation}
+\zeta(1-s,x)=\frac{1}{2s}\left[e^{-i\pi s/2}\beta(x;s)+e^{i\pi s/2}\beta(1-x;s)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ thus proving the assertion that the Hurwitz zeta is an eigenfunction of
+ the Bernoulli operator, with eigenvalue 
+\begin_inset Formula $2^{s-1}$
+\end_inset 
+
+.
+ To verify the correctness of the above steps, expand the exponentials in
+ terms of their real and imaginary parts, to find that 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\zeta(z,x)=\frac{2\Gamma(1-z)}{\left(2\pi\right)^{1-z}}\left[\sin\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\cos(2\pi nx)}{n^{1-z}}+\cos\left(\frac{\pi z}{2}\right)\sum_{n=1}^{\infty}\frac{\sin(2\pi nx)}{n^{1-z}}\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ which agrees with standard textbook presentations of the Hurwitz zeta;
+ see for example 
+\begin_inset LatexCommand \cite[Thm 12.6, Ex 12.2]{Apo76}
+
+\end_inset 
+
+.
 \layout Section
 
 Appendix: To-Do List
