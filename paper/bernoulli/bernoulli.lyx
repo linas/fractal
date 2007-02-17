@@ -32,7 +32,7 @@ The Bernoulli Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 19 October 2006)
+2 January 2004 (revised 17 February 2007)
 \layout Abstract
 
 This paper reviews a raft of related ideas surrounding the Bernoulli operator.
@@ -2799,7 +2799,7 @@ There is a countably infinite degeneracy of eigenfunctions for a give eigenvalue
 \end_inset 
 
 .
- The next five figures show some of these, graphed in various ways.
+ The next three figures show some of these, graphed in various ways.
  
 \layout Standard
 
@@ -2812,139 +2812,7 @@ collapsed true
 The following graphics were plotted using misc/gap/zeta.gplot with data generated
  by misc/gap/zeta.C by performing explicit summation of the periodic zeta
  function.
-\end_inset 
-
-
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed true
-
-\layout Caption
-
-Real Part of Symmetric Beta
-\layout Standard
-
-
-\begin_inset Graphics
-	filename zeta-2.2345-04.png
-	width 100text%
-
-\end_inset 
-
-
-\layout Standard
-
-This figure illustrates a family of eigenvectors 
-\begin_inset Formula $\beta(x;s)$
-\end_inset 
-
- having the same eigenvalue.
- To be precise, the illustration shows 
-\begin_inset Formula \[
-\Re\left[\beta(x;s)+\beta(-x;s)\right]/2\left|\Gamma(1+s)\right|\]
-
-\end_inset 
-
- for values of 
-\begin_inset Formula $s=\sigma+2\pi in/\ln2$
-\end_inset 
-
- for 
-\begin_inset Formula $\sigma=2.345$
-\end_inset 
-
- and n=0,1,2,3,4.
- Note that 
-\begin_inset Formula $\left|\Gamma(1+s)\right|$
-\end_inset 
-
-gets very small as n gets large, and so the normalization brings them to
- visually comparable values.
- Other real values of 
-\begin_inset Formula $\sigma$
-\end_inset 
-
- can be understood by recalling that 
-\begin_inset Formula $\beta$
-\end_inset 
-
- essentially interpolates between Bernoulli polynomials at integer values
- of 
-\begin_inset Formula $\sigma$
-\end_inset 
-
-.
- In short, they'll all look more or less like this.
- 
-\layout Standard
-
-XXX redo this graph to show 
-\begin_inset Formula $\Re\left[\beta(x;s)+\beta(1-x;s)\right]/2\left|\Gamma(1+s)\right|$
-\end_inset 
-
- instead XXX
-\end_inset 
-
-
-\layout Standard
-
-
-\begin_inset Float figure
-wide false
-collapsed true
-
-\layout Caption
-
-Magnitude of Symmetric Beta
-\layout Standard
-
-
-\begin_inset Graphics
-	filename zeta-abs-2.2345-04.png
-	width 100text%
-
-\end_inset 
-
-
-\layout Standard
-
-This figure illustrates a family of eigenvectors 
-\begin_inset Formula $\beta(x;s)$
-\end_inset 
-
- having the same eigenvalue.
- To be precise, the illustration shows 
-\begin_inset Formula \[
-\left|\beta(x;s)+\beta(-x;s)\right|/2\left|\Gamma(1+s)\right|\]
-
-\end_inset 
-
- for values of 
-\begin_inset Formula $s=\sigma+2\pi in/\ln2$
-\end_inset 
-
- for 
-\begin_inset Formula $\sigma=2.345$
-\end_inset 
-
- and n=0,1,2,3,4.
- Note that 
-\begin_inset Formula $\left|\Gamma(1+s)\right|$
-\end_inset 
-
-gets very small as n gets large, and so the normalization brings them to
- visually comparable values.
- 
-\layout Standard
-
-XXX redo this graph to show 
-\begin_inset Formula $\left|\beta(x;s)+\beta(1-x;s)\right|/2\left|\Gamma(1+s)\right|$
-\end_inset 
-
- instead XXX
+ Recreated at misc/bignum/bernoulli.c using bignum algos for the polylog.
 \end_inset 
 
 
@@ -2962,7 +2830,8 @@ Real part of Beta
 
 
 \begin_inset Graphics
-	filename zeta-exp-2.2345-04.png
+	filename zeta-exp-2.2345-04.eps
+	lyxscale 180
 	width 100text%
 
 \end_inset 
@@ -2977,7 +2846,7 @@ This figure illustrates a family of eigenvectors
  having the same eigenvalue.
  To be precise, the illustration shows 
 \begin_inset Formula \[
-\Re\beta(x;s)/2\left|\Gamma(1+s)\right|\]
+\Re\left(\frac{\beta(x;s)}{2\Gamma(1+s)}\right)=\Re\left(\left(2\pi\right)^{-s}\mbox{Li}_{s}\left(e^{2\pi ix}\right)\right)\]
 
 \end_inset 
 
@@ -2989,56 +2858,55 @@ This figure illustrates a family of eigenvectors
 \begin_inset Formula $\sigma=2.345$
 \end_inset 
 
- and n=0,1,2,3,4.
- Although these curves clearly look very lumpy, they are 
+ and 
+\begin_inset Formula $n=0,1,2,3,4$
+\end_inset 
+
+.
+ Note that 
+\begin_inset Formula $\Gamma(1+s)$
+\end_inset 
+
+ gets very small as 
+\begin_inset Formula $n$
+\end_inset 
+
+ gets large, and so the normalization brings them to visually comparable
+ values.
+ 
+\layout Standard
+
+Although these curves clearly look very lumpy, they are 
 \begin_inset Formula $C^{\infty}$
 \end_inset 
 
  for all 
-\begin_inset Formula $x\in(0,1)$
+\begin_inset Formula $x\in(0,1]$
 \end_inset 
 
- but not at the endpoints 
-\begin_inset Formula $x=0,1$
+ but not at the endpoint 
+\begin_inset Formula $x=0$
 \end_inset 
 
 .
- At the endpoints, the derivative becomes divergent after just a few derivatives
-, where the curves are behaving essentially as 
+ At the endpoint, the derivative becomes divergent after just a few derivatives,
+ where the curves are behaving essentially as 
 \begin_inset Formula $x^{s-1}$
 \end_inset 
 
- and 
-\begin_inset Formula $(1-x)^{s-1}$
-\end_inset 
-
 .
- It is impossible to see this pending divergence in the graphs above, because,
- to the naked eye, a graph of, for example, 
-\begin_inset Formula $x^{1.5}$
-\end_inset 
-
- is nearly indistinguishable from a graph of 
-\begin_inset Formula $x^{2}$
-\end_inset 
-
-.
- 
+ This pending divergence and the true nature of the lumpiness is made clear
+ in the next graphic.
 \layout Standard
 
 Although these curves appear to be sine-wave-like, it is perhaps more correct
  to think of them as being Bernoulli-polynomial-like.
- That is, to better understand what eigenvectors near some arbitrary value
- of 
-\begin_inset Formula $s$
-\end_inset 
-
- look like, its useful to think of what the polynomial 
+ That is, the general case will look similar to the polynomial 
 \begin_inset Formula $B_{\left\lfloor \Re s\right\rfloor }(x)$
 \end_inset 
 
- looks like.
- Recall, however, that, of course, 
+.
+ Of course, 
 \begin_inset Formula $B_{k}(x)$
 \end_inset 
 
@@ -3046,8 +2914,13 @@ Although these curves appear to be sine-wave-like, it is perhaps more correct
 \begin_inset Formula $k\geq3$
 \end_inset 
 
- is very sine-wave like! Note also that the first curve shown above, for
- 
+ is very sine-wave like, so the general wave-like nature holds for most
+ values of 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ The first curve shown above, for 
 \begin_inset Formula $n=0$
 \end_inset 
 
@@ -3055,7 +2928,7 @@ Although these curves appear to be sine-wave-like, it is perhaps more correct
 \begin_inset Formula $B_{2}(x)$
 \end_inset 
 
- which is a parabola.
+, which is a parabola.
 \end_inset 
 
 
@@ -3068,12 +2941,13 @@ collapsed true
 
 \layout Caption
 
-Magnitude of Beta 
+Real part of Beta
 \layout Standard
 
 
 \begin_inset Graphics
-	filename zeta-emag-2.2345-04.png
+	filename zeta-exp-1.2345-04.eps
+	lyxscale 180
 	width 100text%
 
 \end_inset 
@@ -3088,7 +2962,7 @@ This figure illustrates a family of eigenvectors
  having the same eigenvalue.
  To be precise, the illustration shows 
 \begin_inset Formula \[
-\left|\beta(x;s)\right|/2\left|\Gamma(1+s)\right|\]
+\Re\left(\frac{\beta(x;s)}{2\Gamma(1+s)}\right)=\Re\left(\left(2\pi\right)^{-s}\mbox{Li}_{s}\left(e^{2\pi ix}\right)\right)\]
 
 \end_inset 
 
@@ -3097,35 +2971,20 @@ This figure illustrates a family of eigenvectors
 \end_inset 
 
  for 
-\begin_inset Formula $\sigma=2.345$
+\begin_inset Formula $\sigma=1.345$
 \end_inset 
 
- and n=0,1,2,3,4.
- Note that curiously, these functions seem to be smoother for larger x and
- seem to have vanishing ripples as x approaches zero.
- Curiously, the ripples seem to have a period of oscillation of approximately
- 
-\begin_inset Formula $nx$
+ and 
+\begin_inset Formula $n=0,1,2,3,4$
 \end_inset 
 
- in the interval 
-\begin_inset Formula $x\in\left[1/2,1\right]$
+.
+ The contribution of 
+\begin_inset Formula $\Re x^{s-1}=\cos((\sigma-1)\ln x)$
 \end_inset 
 
-, and then repeating again between 1, 1/2, 1/4, 1/8, ...
- We'll gain some insight into these ripples in a later section, where we
- will analyze a sawtooth map having the same oscillatory behavior, for which
- the Hurwitz Zeta also plays a role as an eigenvector.
- That is, there is a certain sense in which the above curves are self-similar,
- with the curve in the interval 
-\begin_inset Formula $x\in\left[2^{-k-1},2^{-k}\right]$
-\end_inset 
-
- reprises the curve in the interval 
-\begin_inset Formula $x\in\left[1/2,1\right]$
-\end_inset 
-
-
+ is more clearly visible in this image; at smaller amplitudes, this ringing
+ makes the curves look lumpy.
 \end_inset 
 
 
@@ -3134,7 +2993,7 @@ This figure illustrates a family of eigenvectors
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -6360,7 +6219,7 @@ The standard definition of the Artin-Mazur Zeta function requires that the
  Can these be reinterpreted as a density or measure? 
 \layout Section
 
-Appendix B: Zeta Identities
+Appendix B: Jonquière's identity
 \layout Standard
 
 This appendix establishes the relationship between the functions 
