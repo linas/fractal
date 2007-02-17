@@ -5,7 +5,7 @@
 CC = cc
 
 
-EXES= bound bs bsubn cache-fill cont_frac db-merge db-prt \
+EXES= bernoulli bound bs bsubn cache-fill cont_frac db-merge db-prt \
       dsubn exact hurwitz minima mp_zeta_test picturez \
       poly-perf sho stieltjes trunc zero-cross
 
@@ -16,6 +16,7 @@ all:  $(MPLIB) $(EXES)
 MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o \
 	mp-gamma.o mp-hyper.o mp-misc.o mp-polylog.o mp-trig.o mp-zeta.o
 
+bernoulli:	bernoulli.o $(MPLIB)
 bound:	bound.o
 cache-fill:	cache-fill.o $(MPLIB)
 db-merge:	db-merge.o $(MPLIB)
@@ -45,6 +46,7 @@ mp-trig.o: mp-trig.h mp-binomial.h mp-cache.h mp-complex.h mp-misc.h
 mp-zeta.o: mp-zeta.h db-cache.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-trig.h
 
 # binaries
+bernoulli.o: mp-polylog.h mp-misc.h
 bs.o: mp-zeta.h mp-misc.h
 bsubn.o: mp-zeta.h mp-binomial.h
 cache-fill.o: db-cache.h mp-zeta.h mp-misc.h
