@@ -30,7 +30,7 @@ main (int argc, char * argv[])
 	int nbits = 3.3*prec+100;
 	mpf_set_default_prec (nbits);
 
-	if (argc != 4)
+	if (argc != 3)
 	{
 		fprintf (stderr, "Usage: %s <sre> <sim>\n", argv[0]);
 		exit (1);
@@ -38,17 +38,24 @@ main (int argc, char * argv[])
 	double sre = atof (argv[1]);
 	double sim = atof (argv[2]);
 	
-	cpx_t ess, zeta, zee, plog;
+	cpx_t ess, zeta, zee, plog, gm;
 	cpx_init (ess);
 	cpx_init (zeta);
 	cpx_init (zee);
 	cpx_init (plog);
+	cpx_init (gm);
 
 	mpf_t que, tp;
 	mpf_init (que);
 	mpf_init (tp);
 			  
 	cpx_set_d (ess, sre, sim);
+
+	cpx_add_ui (ess, ess, 1, 0);
+	cpx_gamma (gm, ess, prec);
+	cpx_times_ui (gm, gm, 2);
+	cpx_recip (gm, gm);
+	cpx_sub_ui (ess, ess, 1, 0);
 
 	mpf_t twopi;
 	mpf_init (twopi);
@@ -60,15 +67,22 @@ main (int argc, char * argv[])
 	fflush (stdout);
 	for (q=0.001; q<0.999; q+=0.008)
 	{
+		printf ("%g\t", q);
 		mpf_set_d (que, q);
 
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_periodic_zeta (zeta, ess, que, prec);
 
 		cpx_periodic_beta (zeta, ess, que, prec);
+
+		mpf_set_d (que, 1.0-q);
+		cpx_periodic_beta (zee, ess, que, prec);
+		cpx_add (zeta, zeta, zee);
+
 		double zetare = mpf_get_d(zeta[0].re);
-		double zetaim = mpf_get_d(zeta[0].im);
-		printf ("%g\t%g\t", zetare, zetaim);
+		// double zetaim = mpf_get_d(zeta[0].im);
+		// printf ("%g\t%g\t", zetare, zetaim);
+		printf ("%g\t", zetare);
 
 		printf ("\n");
 		fflush (stdout);

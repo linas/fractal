@@ -1,0 +1,69 @@
+
+
+# set term png small color
+set term png small
+set out 'zeta.png'
+# set term postscript
+# set out 'zeta.ps'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Zeta on"
+set xlabel "x"
+set ylabel "bet2"
+plot "zeta.dat" using 2:3 title "Re beta"
+
+# set title "Zeta Eigenfunction"
+# set xlabel "x"
+# set ylabel "beta(x;s) for s = 0.02"
+# plot "zeta.dat" using 2:3 title "Re beta", \
+#      "zeta.dat" using 2:4 title "Im beta" 
+
+# set title "Zeta Eigenfunctions"
+# set xlabel "x"
+# set ylabel "eta(x;s) for s = -3.3"
+# plot "zeta.dat" using 2:3 title "even", \
+#      "zeta.dat" using 2:4 title "odd"
+
+# set yrange [0:]
+
+#set ylabel "Re (beta(x; 2.345+it) + beta(-x; 2.345+it))/|Gamma(1+s)|"
+#set ylabel "Re beta(x; 2.345+it)/|Gamma(1+s)|"
+#plot "zeta.dat" using 2:3 title "t=0", \
+#     "zeta.dat" using 2:5 title "t=2pi/ln2", \
+#     "zeta.dat" using 2:7 title "t=4pi/ln2", \
+#     "zeta.dat" using 2:9 title "t=6pi/ln2", \
+#     "zeta.dat" using 2:11 title "t=8pi/ln2"
+
+# plot "zeta.dat" using 2:4 title "t=0", \
+#     "zeta.dat" using 2:6 title "t=2pi/ln2", \
+#     "zeta.dat" using 2:8 title "t=4pi/ln2", \
+#     "zeta.dat" using 2:10 title "t=6pi/ln2", \
+#     "zeta.dat" using 2:12 title "t=8pi/ln2"
+
+#set ylabel "|beta(x; 2.345+it) + beta(-x; 2.345+it)|/|Gamma(1+s)|"
+#set ylabel "|beta(x; 2.345+it)|/|Gamma(1+s)|"
+#plot "zeta.dat" using 2:(sqrt($3*$3+$4*$4)) title "t=0", \
+#     "zeta.dat" using 2:(sqrt($5*$5+$6*$6)) title "t=2pi/ln2", \
+#     "zeta.dat" using 2:(sqrt($7*$7+$8*$8)) title "t=4pi/ln2", \
+#     "zeta.dat" using 2:(sqrt($9*$9+$10*$10)) title "t=6pi/ln2", \
+#     "zeta.dat" using 2:(sqrt($11*$11+$12*$12)) title "t=8pi/ln2"
+
+
+
+# set ylabel "Arg(beta(x; 2.345+it))/|Gamma(1+s)|"
+#plot "zeta.dat" using 2:(atan2($4,$3)) title "t=0", \
+#     "zeta.dat" using 2:(atan2($6,$5)) title "t=2pi/ln2", \
+#     "zeta.dat" using 2:(atan2($8,$7)) title "t=4pi/ln2", \
+#     "zeta.dat" using 2:(atan2($10,$9)) title "t=6pi/ln2", \
+#     "zeta.dat" using 2:(atan2($12,$11)) title "t=8pi/ln2"
+#
+
+
+#     "zeta.dat" using 2:($2*$2-$2+0.1666666) title "bernoulli"
+#     "zeta.dat" using 2:($2*$2*$2-1.5*$2*$2+0.5*$2) title "bernoulli"
+
+# pause 100
+
