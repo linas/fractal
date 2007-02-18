@@ -27,7 +27,7 @@ dist:
 	$(CC) -c -O2 $<
 
 .o:
-	$(CC) -o $* $< $(LIB)/modular.o $(LIB)/gcf.o $(LIB)/Farey.o $(LIB)/FareyTree.o -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++ 
+	$(CC) -o $* $< -L$(LIB) -lfunc -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++ 
 
 
 c-takagi.o:	c-takagi.c
@@ -35,36 +35,36 @@ takagi-n.o:	takagi-n.C
 cantor-dist.o:	cantor-dist.C
 conj.o:	conj.c
 dyadic.o:	dyadic.C
-entropy.o:  entropy.C $(LIB)/Farey.o $(INC)/Farey.h
-exacto.o:  exacto.C $(LIB)/Farey.o $(INC)/Farey.h
-f-wavelet.o:  f-wavelet.C $(LIB)/FareyTree.o $(INC)/FareyTree.h
-fdist.o:  fdist.C $(LIB)/FareyTree.o $(INC)/FareyTree.h
-feigen.o: feigen.C $(LIB)/Farey.o $(INC)/Farey.h
-fiddle.o:  fiddle.C $(LIB)/Farey.o $(INC)/Farey.h
-fliptree.o:  fliptree.C $(LIB)/Farey.o $(INC)/Farey.h
-gappy.o:  gappy.C $(LIB)/Farey.o $(INC)/Farey.h
-gkw.o:  gkw.C $(LIB)/Farey.o $(INC)/Farey.h
-ising.o:  ising.C $(LIB)/Farey.o $(INC)/Farey.h
-mod.o:  mod.C $(LIB)/modular.o $(INC)/modular.h
+entropy.o:  entropy.C $(LIB)/libfunc.a $(INC)/Farey.h
+exacto.o:  exacto.C $(LIB)/libfunc.a $(INC)/Farey.h
+f-wavelet.o:  f-wavelet.C $(LIB)/libfunc.a $(INC)/FareyTree.h
+fdist.o:  fdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
+feigen.o: feigen.C $(LIB)/libfunc.a $(INC)/Farey.h
+fiddle.o:  fiddle.C $(LIB)/libfunc.a $(INC)/Farey.h
+fliptree.o:  fliptree.C $(LIB)/libfunc.a $(INC)/Farey.h
+gappy.o:  gappy.C $(LIB)/libfunc.a $(INC)/Farey.h
+gkw.o:  gkw.C $(LIB)/libfunc.a $(INC)/Farey.h
+ising.o:  ising.C $(LIB)/libfunc.a $(INC)/Farey.h
+mod.o:  mod.C $(LIB)/libfunc.a $(INC)/modular.h
 moebius.o:	moebius.C
-mute.o:  mute.C $(LIB)/Farey.o $(INC)/Farey.h
+mute.o:  mute.C $(LIB)/libfunc.a $(INC)/Farey.h
 orbit.o:	orbit.C
 orbit-s.o:	orbit-s.C
 padic.o:	padic.C
-pegs.o:  pegs.C $(LIB)/gcf.o $(INC)/gcf.h
-pair.o:  pair.C $(LIB)/Farey.o $(INC)/Farey.h
-quest.o:  quest.C $(LIB)/Farey.o $(INC)/Farey.h
-rand-measure.o:	rand-measure.C $(LIB)/gcf.o $(INC)/gcf.h
-rdist.o:  rdist.C $(LIB)/Farey.o $(INC)/Farey.h
+pegs.o:  pegs.C $(LIB)/libfunc.a $(INC)/gcf.h
+pair.o:  pair.C $(LIB)/libfunc.a $(INC)/Farey.h
+quest.o:  quest.C $(LIB)/libfunc.a $(INC)/Farey.h
+rand-measure.o:	rand-measure.C $(LIB)/libfunc.a $(INC)/gcf.h
+rdist.o:  rdist.C $(LIB)/libfunc.a $(INC)/Farey.h
 rotations.o:  rotations.c
-summy.o: summy.C $(LIB)/Farey.o $(INC)/Farey.h
-swap.o:  swap.C $(LIB)/Farey.o $(INC)/Farey.h
-sway.o:  sway.C $(LIB)/Farey.o $(INC)/Farey.h
-sym.o: sym.C $(LIB)/Farey.o $(INC)/Farey.h
-sym-fun.o: sym-fun.C $(LIB)/Farey.o $(INC)/Farey.h
+summy.o: summy.C $(LIB)/libfunc.a $(INC)/Farey.h
+swap.o:  swap.C $(LIB)/libfunc.a $(INC)/Farey.h
+sway.o:  sway.C $(LIB)/libfunc.a $(INC)/Farey.h
+sym.o: sym.C $(LIB)/libfunc.a $(INC)/Farey.h
+sym-fun.o: sym-fun.C $(LIB)/libfunc.a $(INC)/Farey.h
 takagi.o:	takagi.C
 tent-map.o:	tent-map.C
 theta.o:	theta.C
-tree.o: tree.C $(LIB)/Farey.o $(INC)/Farey.h
+tree.o: tree.C $(LIB)/libfunc.a $(INC)/Farey.h
 vanish.o:	vanish.C
 zeta.o:	zeta.C
