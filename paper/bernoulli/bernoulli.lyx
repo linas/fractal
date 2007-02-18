@@ -3371,7 +3371,7 @@ The critcal result here is that
  converges.
 \layout Subsection
 
-Explicit form of the eigenfunctions
+Fractal eigenfunctions
 \layout Standard
 
 The above derivation of the eigenfunctions assumed a lattice model topology
@@ -3612,13 +3612,25 @@ These eigenfunctions are highly degenerate, and span an infinite-dimensional
 
 .
  Any linear combination of these is also an eigenvector with the same eigenvalue.
+ These clearly form a continuous spectrum for the Bernoulli operator, although,
+ strictly speaking, this spectrum is defined only on the unit disk 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset 
+
+.
+ This is in contrast to the zeta egenfunctions, which are defined for the
+ entire complex 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+-plane.
  
 \layout Subsection
 
 Analytic properties
 \layout Standard
 
-Unlike the Zeta function eigenvectors, these eigenvectors are not infinitely
+Unlike the zeta function eigenvectors, these eigenvectors are not infinitely
  differentiable.
  Taking the first derivative, one has 
 \begin_inset Formula \[
@@ -3651,7 +3663,7 @@ Unlike the Zeta function eigenvectors, these eigenvectors are not infinitely
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -3695,137 +3707,22 @@ This figure shows the real and imaginary parts of the eigenfunction
 
 \layout Standard
 
-It can be shown that these functions span exactly the same space as the
- Hurwitz zeta functions; this will be shown in later sections.
+Clearly, any linear combination of only a finite number of these fractal
+ eigenfunctions will posses similar analytic properties (these get mixed
+ if different values of 
+\begin_inset Formula $p$
+\end_inset 
+
+ are combined).
+ However, thee is an infinite series combination of these that reproduce
+ the zeta function eigenfunctions.
+ The explicit relationship between these two is developed in the next section.
  
-\layout Section
-
-Ladder operators
-\layout Standard
-
-SHO review.
-\layout Standard
-
-hints that 
-\begin_inset Formula $\mathcal{L}_{p}$
-\end_inset 
-
- has the general form of a bosonic annhilation operator.
- The corresponding Koopman operator 
-\begin_inset Formula $\mathcal{K}_{p}$
-\end_inset 
-
- is the creation operator.
- 
-\layout Standard
-
-As noted in equation 
-\begin_inset LatexCommand \ref{eq:trig-matrix}
-
-\end_inset 
-
-, it is the adjoint of 
-\begin_inset Formula $\mathcal{L}_{p}$
-\end_inset 
-
-, but is not its inverse.
- Indeed one has
-\layout Standard
-
-XXX Talk about how ladder operators that truncate are bosonic.
- Ladder operators that do not are fermionic, in the sense that there is
- a Dirac sea.
- But in the latter model, the Dirac sea is the left half of a lattice stretching
- off in both directions.
- Thus, the Baker's map describes the fermionic ladder operators.
- 
-\layout Section
-
-Number theoretic connections
-\layout Standard
-
-XXX The definition 
-\begin_inset LatexCommand \ref{eq:Lattice Bernoulli}
-
-\end_inset 
-
- is suggestive of the kinds of sums occurring in the definition of the Hecke
- operator.
- One may also consider a Gauss-sum-like extension 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}^{(m)}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}e^{2\pi ikm/p}f\left(S_{k}(\sigma)\right)\label{eq:Lattice Bernoulli}\end{equation}
-
-\end_inset 
-
- regaining 
-\begin_inset Formula $\mathcal{L}_{B}=\mathcal{L}_{B}^{(0)}$
-\end_inset 
-
-.
 \layout Section
 
 The Continuous Fractal Spectrum
 \layout Standard
 
-An alternate set of eigenvectors with a continuous spectrum are given by
- 
-\begin_inset Formula \begin{equation}
-\phi_{z,k}^{B}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2k+1\right)x\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- and have eigenvalue 
-\begin_inset Formula $z$
-\end_inset 
-
-: that is 
-\begin_inset Formula $[\mathcal{L}_{B}\phi_{z,k}^{B}](x)=z\phi_{z,k}^{B}(x)$
-\end_inset 
-
-.
- Again, for a given fixed eigenvalue, they have a countably infinite degeneracy,
- labelled by the parameter 
-\begin_inset Formula $k\in\mathbb{Z}$
-\end_inset 
-
-.
- These eigenfunctions are fractal, as can be readily seen from the graph[xxx
- need figure].
- Since they are a generalization of the Takagi-Landsberg curve, they have
- an 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
- symmetry, as discussed in an earlier chapter.
- As is typical for Takagi-type curves, these eigenfunctions are differentiable
- a finite number of times before they become differentiable nowhere.
- For example, for 
-\begin_inset Formula $1/2<\left|z\right|<1$
-\end_inset 
-
-, these are continuous with respect to 
-\begin_inset Formula $x$
-\end_inset 
-
- but nowhere differentiable.
- For 
-\begin_inset Formula $1/2^{m+1}<\left|z\right|<1/2^{m}$
-\end_inset 
-
-, these are everywhere 
-\begin_inset Formula $m$
-\end_inset 
-
- times differentiable with respect to 
-\begin_inset Formula $x$
-\end_inset 
-
-, but nowhere 
-\begin_inset Formula $m+1$
-\end_inset 
-
- times differentiable.
- 
 \layout Standard
 
 We can express these in terms of the Hurwitz Zeta eigenfunctions by considering
@@ -3988,6 +3885,70 @@ g\beta(x;s)=\beta\left(\frac{x}{2};s\right)=\frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_
 \end_inset 
 
  and so one gets a trivial relationship and no insight in particular.
+\layout Section
+
+Ladder operators
+\layout Standard
+
+SHO review.
+\layout Standard
+
+hints that 
+\begin_inset Formula $\mathcal{L}_{p}$
+\end_inset 
+
+ has the general form of a bosonic annhilation operator.
+ The corresponding Koopman operator 
+\begin_inset Formula $\mathcal{K}_{p}$
+\end_inset 
+
+ is the creation operator.
+ 
+\layout Standard
+
+As noted in equation 
+\begin_inset LatexCommand \ref{eq:trig-matrix}
+
+\end_inset 
+
+, it is the adjoint of 
+\begin_inset Formula $\mathcal{L}_{p}$
+\end_inset 
+
+, but is not its inverse.
+ Indeed one has
+\layout Standard
+
+XXX Talk about how ladder operators that truncate are bosonic.
+ Ladder operators that do not are fermionic, in the sense that there is
+ a Dirac sea.
+ But in the latter model, the Dirac sea is the left half of a lattice stretching
+ off in both directions.
+ Thus, the Baker's map describes the fermionic ladder operators.
+ 
+\layout Section
+
+Number theoretic connections
+\layout Standard
+
+XXX The definition 
+\begin_inset LatexCommand \ref{eq:Lattice Bernoulli}
+
+\end_inset 
+
+ is suggestive of the kinds of sums occurring in the definition of the Hecke
+ operator.
+ One may also consider a Gauss-sum-like extension 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{B}^{(m)}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}e^{2\pi ikm/p}f\left(S_{k}(\sigma)\right)\label{eq:Lattice Bernoulli}\end{equation}
+
+\end_inset 
+
+ regaining 
+\begin_inset Formula $\mathcal{L}_{B}=\mathcal{L}_{B}^{(0)}$
+\end_inset 
+
+.
 \layout Section
 
 Modular Group Symmetry and the Takagi Representation 
