@@ -3,7 +3,7 @@
  *
  * Draw non-dyadic variant of the Takagi curve
  *
- * Linas Decembner 2005
+ * Linas December 2005
  */
 
 #include <complex.h>

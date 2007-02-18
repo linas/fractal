@@ -1,9 +1,8 @@
 
-
 /*
  * vanish.C
  *
- * functions that fanish on binary numbers
+ * functions that vanish on binary numbers
  */
 
 #include <math.h>
