@@ -3051,8 +3051,8 @@ x(\sigma)=\sum_{n=1}^{\infty}\sigma_{n}p^{-n}\label{eq:Cantor mapping}\end{equat
 \begin_inset Formula $[0,1]$
 \end_inset 
 
-, although not vice-versa: the usual topologies on the spin lattice is finer
- than that on the reals, in that 
+, although not vice-versa: the natural topology on the spin lattice is finer
+ than the natural topology on the reals, in that 
 \begin_inset Formula $\sigma=(0,1,1,\cdots)$
 \end_inset 
 
@@ -3073,10 +3073,18 @@ x(\sigma)=\sum_{n=1}^{\infty}\sigma_{n}p^{-n}\label{eq:Cantor mapping}\end{equat
  not.
  This double-pointed topology can be understood to be one and the same as
  the Cantor set topology, in that the Cantor set topology makes exactly
- the same distinction between endpoints of intervals.
- XXX See my other ref on fat cantor sets for details, if this is not clear.
- XXX Note also that lattices have another natural topology as well, the
- 
+ the same distinction between endpoints of intervals
+\begin_inset LatexCommand \cite{Ve-Can05}
+
+\end_inset 
+
+.
+ For 
+\begin_inset Formula $p=2$
+\end_inset 
+
+, the Stone representation theorem applies.
+ Note also that lattices have another natural topology as well, the 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -3342,7 +3350,7 @@ The critcal result here is that
 \end_inset 
 
 .
- Curiously, functions in the kernel of 
+ Curiously, this implies that functions in the kernel of 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset 
 
@@ -3351,17 +3359,11 @@ The critcal result here is that
 \end_inset 
 
 .
- The above construction is not limited the the Bernoulli operator, but in
- fact generalizes to other transfer operators in general.
- In particular, it can be used to define general eigenfunctions of the Gauss-Kuz
-min-Wirsing (GKW) operator XXX ref my other paper.
- XXX perhaps show how this is done in general.
- In the next section ???XX
-\layout Standard
-
-The above construction shows how to construct a large number of general
- eigenfunctions, provided that on can find non-trivial objects in the kernel,
- and provided that the sum of equation 
+ The above construction is not limited the the Bernoulli operator, but clearly
+ is a general result.
+ One may construct a large number of general eigenfunctions, provided that
+ on can find non-trivial objects in the kernel, and provided that one is
+ working in a topology where the sum of equation 
 \begin_inset LatexCommand \ref{eq:Lattice Hamlitonian}
 
 \end_inset 
@@ -3449,7 +3451,7 @@ H(x)=\sum_{n=0}^{\infty}\lambda^{n}\sin\left(2\pi\left(2k+1\right)\tau^{n}x\righ
 \begin_inset Formula $F$
 \end_inset 
 
- over the reals; taking 
+; taking 
 \begin_inset Formula $F$
 \end_inset 
 
@@ -3610,7 +3612,90 @@ These eigenfunctions are highly degenerate, and span an infinite-dimensional
 
 .
  Any linear combination of these is also an eigenvector with the same eigenvalue.
- It can be shown that these functions span exactly the same space as the
+ 
+\layout Subsection
+
+Analytic properties
+\layout Standard
+
+Unlike the Zeta function eigenvectors, these eigenvectors are not infinitely
+ differentiable.
+ Taking the first derivative, one has 
+\begin_inset Formula \[
+\frac{d}{dx}\phi_{\lambda,k,r}^{(p)}(x)=2\pi i\left(pk+r\right)\sum_{n=0}^{\infty}p^{n}\lambda^{n}\exp\left(2\pi ix\;\left(pk+r\right)p^{n}\right)\]
+
+\end_inset 
+
+ and so the right hand side converges absolutely only if 
+\begin_inset Formula $\left|\lambda\right|<1/p$
+\end_inset 
+
+.
+ That is, for 
+\begin_inset Formula $\left|\lambda\right|>1/p$
+\end_inset 
+
+, the eigenfunction is continuous but not differentiable.
+ This is visualized in figure xxx.
+ Smaller eigenvectors are differentiable 
+\begin_inset Formula $n$
+\end_inset 
+
+ times only if 
+\begin_inset Formula $\left|\lambda\right|<1/p^{n+1}$
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Fractal-Eigenfunction}
+
+\end_inset 
+
+Fractal Eigenfunction
+\layout Standard
+
+
+\begin_inset Graphics
+	filename bernoulli-5-2.ps
+	lyxscale 170
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+This figure shows the real and imaginary parts of the eigenfunction 
+\begin_inset Formula $\phi_{\lambda,k,r}^{(p)}(x)=\phi_{0.45,0,2}^{(5)}(x)$
+\end_inset 
+
+.
+ The non-differentiability is clear visible.
+ This function would be differentiable only for 
+\begin_inset Formula $\lambda<0.2$
+\end_inset 
+
+; in that case, visually, the spikes would be completely smoothed away.
+ The twice-repeated sine-wave nature is entirely due to 
+\begin_inset Formula $k=2$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+It can be shown that these functions span exactly the same space as the
  Hurwitz zeta functions; this will be shown in later sections.
  
 \layout Section
