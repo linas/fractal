@@ -6,7 +6,7 @@ CC = cc
 
 
 EXES= bernoulli bound bs bsubn cache-fill cont_frac db-merge db-prt \
-      dsubn exact hurwitz minima mp_zeta_test picturez \
+      dsubn exact hurwitz hurwitz-euler minima mp_zeta_test picturez \
       poly-perf sho stieltjes trunc zero-cross
 
 MPLIB=libzmp.a
@@ -25,6 +25,7 @@ cont_frac:	cont_frac.o
 dsubn:	dsubn.o $(MPLIB)
 exact:	exact.o $(MPLIB)
 hurwitz:	hurwitz.o $(MPLIB)
+hurwitz-euler:	hurwitz-euler.o $(MPLIB)
 mp_zeta_test:	mp_zeta_test.o $(MPLIB)
 picturez:	picturez.o $(MPLIB)
 poly-perf:	poly-perf.o $(MPLIB)
@@ -46,7 +47,7 @@ mp-trig.o: mp-trig.h mp-binomial.h mp-cache.h mp-complex.h mp-misc.h
 mp-zeta.o: mp-zeta.h db-cache.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-trig.h
 
 # binaries
-bernoulli.o: mp-polylog.h mp-misc.h
+bernoulli.o: mp-complex.h mp-polylog.h mp-misc.h
 bs.o: mp-zeta.h mp-misc.h
 bsubn.o: mp-zeta.h mp-binomial.h
 cache-fill.o: db-cache.h mp-zeta.h mp-misc.h
@@ -54,6 +55,7 @@ db-merge.o: db-cache.h mp-misc.h
 dsubn.o: mp-zeta.h mp-binomial.h mp-misc.h
 exact.o: mp-complex.h mp-misc.h mp-polylog.h
 hurwitz.o: mp-complex.h mp-misc.h
+hurwitz-euler.o: mp-complex.h mp-misc.h mp-trig.h
 mp_zeta_test.o: mp-zeta.h mp-binomial.h mp-complex.h mp-consts.h mp-gamma.h mp-misc.h mp-polylog.h mp-trig.h
 picturez.o: mp-zeta.h
 sho.o: mp-complex.h mp-hyper.h mp-trig.h

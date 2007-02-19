@@ -122,3 +122,14 @@ void cpx_hurwitz_zeta (cpx_t hzeta, const cpx_t ess, const mpf_t que, int prec);
  */
 void cpx_hurwitz_taylor (cpx_t hzeta, const cpx_t ess, const cpx_t que, int prec);
 
+/**
+ * cpx_hurwitz_euler -- Hurwitz zeta function via Euler-Maclaurin algo
+ *
+ * This function computes the value of the Hurwitz zeta function
+ * using an Euler-Maclaurin summation to obtain an estimate.
+ *
+ * The algorithm appears to work in principle (well, it gets 4 or 5
+ * digits right), but we are doing a really really bad error estimate.
+ * So it doesn't work at higher precision, at least on the critical strip.
+ */
+void cpx_hurwitz_euler(cpx_t hzeta, cpx_t ess, mpf_t que, int prec);

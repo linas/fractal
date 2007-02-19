@@ -5,6 +5,7 @@
  * Implement Borwein-style polylogarithm.
  * Also implement the "periodic zeta" and 
  * the Hurwitz zeta function.
+ * Also implements te Euler-Maclaurin expansion as well.
  *
  * As of 22 December 2006, seems to be fully functional
  * and correct, and passes tests. The range of convergence
@@ -1707,6 +1708,99 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
 	cpx_clear (term);
 	mpz_clear (stir);
 	mpz_clear (fac);
+}
+
+/* =========================================================== */
+/* cpx_hurwitz_euler -- Hurwitz zeta function via Euler-Maclaurin algo
+ *
+ * This function computes the value of the Hurwitz zeta function
+ * using an Euler-Maclaurin summation to obtain an estimate.
+ *
+ * The algorithm appears to work in principle (well, it gets 4 or 5
+ * digits right), but we are doing a really really bad error estimate.
+ * So it doesn't work at higher precision.
+ */
+
+static void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
+{
+	int k;
+	cpx_t s, term, deriv;
+	cpx_init (s);
+	cpx_init (term);
+	cpx_init (deriv);
+
+	cpx_neg (s, ess);
+
+	cpx_set_ui (zeta, 0, 0);
+	/* sum over 1/(k+q)^s  from k=0 to k=M-1 */
+	for (k=0; k<em; k++)
+	{
+		fp_pow_rc (term, k, q, s, prec);
+		cpx_add (zeta, zeta, term);
+	}
+
+	/* deriv = 1/(M+q)^s */
+	fp_pow_rc (deriv, em, q, s, prec);
+	
+	/* Add another (1/2) of 1 /(M+q)^s */
+	cpx_div_ui (term, deriv, 2);
+	cpx_add (zeta, zeta, term);
+
+	mpf_t fact, emq, ft;
+	mpf_init (fact);
+	mpf_init (emq);
+	mpf_init (ft);
+
+	mpq_t bern;
+	mpq_init (bern);
+	
+	/* emq = M+q */
+	mpf_add_ui (emq, q, em);
+
+	/* term = 1/(s-1)*(q+M)^{s-1} */
+	cpx_times_mpf (term, deriv, emq);
+	cpx_add_ui (s, s, 1, 0);
+	cpx_div (term, term, s);
+	cpx_sub (zeta, zeta, term);
+
+	/* emq = 1/(M+q) */
+	mpf_ui_div (emq, 1, emq);
+	cpx_times_mpf (deriv, deriv, emq);
+
+	/* emq = 1/(M+q)^2 */
+	mpf_mul (emq, emq, emq);
+	
+	mpf_set_ui (fact, 2);
+	for (k=1; k<=pee; k++)
+	{
+		/* ft = B_2k / (2k)! */
+		q_bernoulli (bern, 2*k);
+		mpf_set_q (ft, bern);
+		mpf_mul (ft, ft, fact);
+		
+		cpx_times_mpf (term, deriv, ft);
+		cpx_sub (zeta, zeta, term);
+
+		mpf_div_ui (fact, fact, (2*k+1)*(2*k+2));
+		cpx_times_mpf (deriv, deriv, emq);
+	}
+	
+	mpq_clear (bern);
+	mpf_clear (fact);
+	mpf_clear (emq);
+	mpf_clear (ft);
+	cpx_clear (s);
+	cpx_clear (term);
+	cpx_clear (deriv);
+} 
+
+void cpx_hurwitz_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec)
+{
+	/* really really really bad estimates to the bounds */
+	int pee = prec * 3.322 + 15;
+	int em = 2.0*pee + 12;
+
+	zeta_euler (zeta, ess, q, prec, em, pee);
 }
 
 /* ============================================================= */
