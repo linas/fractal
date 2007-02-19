@@ -3718,11 +3718,95 @@ Clearly, any linear combination of only a finite number of these fractal
  the zeta function eigenfunctions.
  The explicit relationship between these two is developed in the next section.
  
-\layout Section
+\layout Subsection
 
-The Continuous Fractal Spectrum
+The Fractal Spectrum
 \layout Standard
 
+The fractal spectrum can be re-expressed in terms of the zeta eigenfunctions,
+ and vice-versa.
+ That is, the one set of eigenfunctions can be expressed as linear combinations
+ of the other.
+ This section gives the explicit linear relations connecting the one to
+ the other.
+ 
+\layout Standard
+
+The establishment of this result is the observation that every integer has
+ a unique factorization in the form of 
+\begin_inset Formula $(pk+r)p^{n}$
+\end_inset 
+
+, with 
+\begin_inset Formula $k,r$
+\end_inset 
+
+ and 
+\begin_inset Formula $n$
+\end_inset 
+
+ uniquely determined when 
+\begin_inset Formula $p$
+\end_inset 
+
+ is fixed.
+ This leads to a summation identity: for a fixed integer 
+\begin_inset Formula $p$
+\end_inset 
+
+, and some arbitrary summable function 
+\begin_inset Formula $f(n)$
+\end_inset 
+
+, one has 
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}f(n)=\sum_{k=0}^{\infty}\;\sum_{r=1}^{p-1}\;\sum_{m=0}^{\infty}\; f\left((pk+r)p^{m}\right)\]
+
+\end_inset 
+
+ The summand of the triple sum on the right is precisely of the form appearing
+ in the fractal eigenfunctions, whereas the left-hand side is of the simpler
+ form of the zeta eigenfunctions.
+ The desired linear relationship is obtained merely by matching terms in
+ the series.
+ That is, one sets 
+\begin_inset Formula $f(n)=2\Gamma(s+1)\,(2\pi n)^{-s}\exp(2\pi ixn)$
+\end_inset 
+
+ to immediately obtain 
+\begin_inset Formula \begin{eqnarray*}
+\beta(x;s) & = & \frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\infty}\;\sum_{r=1}^{p-1}\frac{1}{(pk+r)^{s}}\sum_{m=0}^{\infty}\frac{\exp2\pi ix(pk+r)p^{m}}{p^{ms}}\\
+ & = & \frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\infty}\;\sum_{r=1}^{p-1}\frac{1}{(pk+r)^{s}}\,\phi_{\lambda,k,r}^{(p)}(x)\end{eqnarray*}
+
+\end_inset 
+
+ where one identifies 
+\begin_inset Formula $\lambda=p^{-s}$
+\end_inset 
+
+.
+\layout Standard
+
+XXX Rewrite rest of section to conform with above notation.
+\layout Standard
+
+An alternate set of eigenvectors with a continuous spectrum are given by
+ 
+\begin_inset Formula \begin{equation}
+\phi_{z,k}^{B}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2k+1\right)x\right)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and have eigenvalue 
+\begin_inset Formula $z$
+\end_inset 
+
+: that is 
+\begin_inset Formula $[\mathcal{L}_{B}\phi_{z,k}^{B}](x)=z\phi_{z,k}^{B}(x)$
+\end_inset 
+
+.
+ 
 \layout Standard
 
 We can express these in terms of the Hurwitz Zeta eigenfunctions by considering
