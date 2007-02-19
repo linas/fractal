@@ -3787,126 +3787,41 @@ The establishment of this result is the observation that every integer has
 .
 \layout Standard
 
-XXX Rewrite rest of section to conform with above notation.
-\layout Standard
-
-An alternate set of eigenvectors with a continuous spectrum are given by
- 
-\begin_inset Formula \begin{equation}
-\phi_{z,k}^{B}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2k+1\right)x\right)\label{eq:}\end{equation}
+The full set of zeta eigenfunctions, accounting for degeneracy, is given
+ by 
+\begin_inset Formula \[
+\beta_{n}(x;s)\equiv\beta(x;s+2\pi ni/\ln2)\]
 
 \end_inset 
 
- and have eigenvalue 
-\begin_inset Formula $z$
+ with 
+\begin_inset Formula $n\in\mathbb{Z}.$
 \end_inset 
 
-: that is 
-\begin_inset Formula $[\mathcal{L}_{B}\phi_{z,k}^{B}](x)=z\phi_{z,k}^{B}(x)$
+ These share the same eigenvalue: 
+\begin_inset Formula $\mathcal{L}_{p}\beta_{n}=p^{-s}\beta_{n}$
 \end_inset 
 
 .
- 
-\layout Standard
-
-We can express these in terms of the Hurwitz Zeta eigenfunctions by considering
- the sum 
-\begin_inset Formula \begin{eqnarray}
-\sum_{k=0}^{\infty}z^{\ln_{2}(2k+1)}\phi_{z,k}(x) & = & \sum_{n=1}^{\infty}z^{\ln_{2}n}\exp\left(2\pi inx\right)\nonumber \\
- & = & \sum_{n=1}^{\infty}n^{\ln_{2}z}\exp\left(2\pi inx\right)\label{eq:}\end{eqnarray}
-
-\end_inset 
-
- Thus, we see that we should equate 
-\begin_inset Formula $s=-\ln_{2}z$
-\end_inset 
-
- so that the eigenvalues are 
-\begin_inset Formula $z=2^{-s}$
-\end_inset 
-
-.
- Multiplying by the appropriate factors, we get the desired relationship
- 
-\begin_inset Formula \begin{equation}
-\beta(x;s)=2\Gamma(s+1)\left(2\pi\right)^{-s}\sum_{k=0}^{\infty}\left(2k+1\right)^{-s}\phi_{z,k}(x)\label{eq:}\end{equation}
-
-\end_inset 
-
- That is, the Hurwitz zeta eigenfunctions are expressible as a linear combinatio
-n of the fractal eigenfunctions.
- Essentially, either set of eigenfunctions can be used to form a set of
- basis states for the Bernoulli map transfer operator.
- The Hurwitz zeta eigenfunctions span a larger space than the fractal eigenfunct
-ions, as the Hurwitz zeta is well-defined for eigenvalues with 
-\begin_inset Formula $\left|z\right|>1$
-\end_inset 
-
-, whereas the fractal eigenfunctions are not.
- Of course, as we saw above, the Hurwitz zeta eigenfunctions are not square-inte
-grable when 
-\begin_inset Formula $\left|z\right|>1$
-\end_inset 
-
-, which invalidates their consideration for most 
-\begin_inset Quotes eld
-\end_inset 
-
-physical
-\begin_inset Quotes erd
-\end_inset 
-
- uses.
- Note also that through careful work, the fractal eigenfunctions can probably
- be extended to 
-\begin_inset Formula $\left|z\right|>1$
-\end_inset 
-
- continuous-nowhere functions by considering their transformation properties
- under 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
-.
- This would be in analogy to the exploration of the derivative of the Takagi
- curve, which, as we saw in an earlier chapter, can be defined as the Cantor
- polynomial, built out of the digits of the binary expansion of 
-\begin_inset Formula $x$
-\end_inset 
-
-.
- 
-\layout Standard
-
-We can explicitly demonstrate the change of basis by defining 
-\begin_inset Formula \begin{equation}
-\beta_{n}(x;s)\equiv\beta(x;s+2\pi ni/\ln2)\label{eq:}\end{equation}
-
-\end_inset 
-
- which all share the same eigenvalue: 
-\begin_inset Formula $U_{B}\beta_{n}=2^{-s}\beta_{n}$
-\end_inset 
-
-.
- We can then restrict 
+ The relevant values of 
 \begin_inset Formula $s$
 \end_inset 
 
- to a principle domain 
+ should be restricted to a principal domain 
 \begin_inset Formula $-\pi<\Im s\,\ln2=\arg\, z<\pi$
 \end_inset 
 
  .
- The change of basis can now be written explicitly as 
-\begin_inset Formula \begin{equation}
-\beta_{n}(x;s)=\sum_{k=0}^{\infty}F_{nk}\phi_{z,k}(x)\label{eq:}\end{equation}
+ Repeating the above manipulations, the goal is to write the zetas as a
+ linear combination of the fractal eigenfunctions, so: 
+\begin_inset Formula \[
+\beta_{n}(x;s)=\sum_{k=0}^{\infty}\;\sum_{r=1}^{p-1}F_{nkr}\,\phi_{\lambda,k,r}^{(p)}(x)\]
 
 \end_inset 
 
- where the matrix elements are 
-\begin_inset Formula \begin{equation}
-F_{nk}=2\Gamma\left(s+1+\frac{2\pi ni}{\ln2}\right)\left(2\pi(2k+1)\right)^{-s}\exp\left[-2n\pi i\frac{\ln\pi(2k+1)}{\ln2}\right]\label{eq:}\end{equation}
+ These matrix elements are
+\begin_inset Formula \[
+F_{nkr}=2\Gamma\left(s+1+\frac{2\pi ni}{\ln2}\right)\left(2\pi(pk+r)\right)^{-s}\exp\left[-2n\pi i\frac{\ln\pi(pk+r)}{\ln2}\right]\]
 
 \end_inset 
 
@@ -3914,62 +3829,45 @@ F_{nk}=2\Gamma\left(s+1+\frac{2\pi ni}{\ln2}\right)\left(2\pi(2k+1)\right)^{-s}\
 \begin_inset Formula $F$
 \end_inset 
 
- is invertible; either set of eigenstates span the space.
- Given that one set of basis functions are clearly fractal, while the other
- is clearly analytic, it would be interesting to describe the space of functions
- spanned by these basis states.
- That is, given an arbitrary sequence 
-\begin_inset Formula $\{ b_{n}|b_{n}\in\mathbb{C}\}$
-\end_inset 
-
-, describe the nature of the functions 
-\begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}b_{n}\beta_{n}(x;s)\label{eq:}\end{equation}
-
-\end_inset 
-
- considered as functions of 
-\begin_inset Formula $x$
-\end_inset 
-
- or alternately of 
-\begin_inset Formula $s$
-\end_inset 
-
-.
- 
+ is invertible.
 \layout Standard
 
-The modular group symmetries of the fractal eigenfunctions do not seem to
- provide any interesting insight into the zeta, since they do not mix or
- permute eigenstates.
- For example, applying the generator 
-\begin_inset Formula $g$
+The analytic situation is curious: the zeta eigenfuntions are well-defined
+ for 
+\begin_inset Formula $\left|\lambda\right|>1$
 \end_inset 
 
- on the fractal eigenstates gives
-\begin_inset Formula \begin{equation}
-g\phi_{zk}(x)=\phi_{zk}\left(\frac{x}{2}\right)=\exp((2k+1)\pi ix)+z\phi_{zk}(x)\label{eq:}\end{equation}
-
+, even as the fractal eigenfunctions are not.
+ The change-of-basis summations clearly appear to be divergent as 
+\begin_inset Formula $\left|\lambda\right|$
 \end_inset 
 
- and so one might hope that since the zetas are a linear combination of
- the fractal eigenfunctions, one might get some new insight.
- However, doing this gives the sum 
+ approaches 1.
+ It would appear that the zeta eigenfunctions span a larger space than the
+ fractal eigenfunctions.
+\layout Subsection
+
+Wavelets
 \layout Standard
 
+XXX Discuss wavelet solutions -- e.g.
+ square wave -- inherently discontinuous, avoids gibbs phenomenon, more
+ compatible with topology.
+\layout Subsection
 
-\begin_inset Formula \begin{equation}
-g\beta(x;s)=\beta\left(\frac{x}{2};s\right)=\frac{2\Gamma(s+1)}{(2\pi)^{s}}\sum_{k=0}^{\infty}\frac{\exp2\pi ix(2k+1)}{(2k+1)^{s}}+2^{-s}\beta(x;s)\label{eq:}\end{equation}
+Symmetries
+\layout Standard
+
+Note the self-similarity of the fractal eigenfunctions is the same notion
+ as the shift operation (and is given by the shift operation e.g.
+ for p=2,
+\begin_inset Formula \[
+g\phi_{zk}^{(2)}(x)=\phi_{zk}^{(2)}\left(\frac{x}{2}\right)=\exp((2k+1)\pi ix)+z\phi_{zk}^{(2)}(x)\]
 
 \end_inset 
 
- as a symmetry, but the evaluation of the sum in the middle yields 
-\begin_inset Formula $\beta(x/2;s)-2^{-s}\beta(x;s)$
-\end_inset 
-
- and so one gets a trivial relationship and no insight in particular.
-\layout Section
+ is just the left-shift.
+\layout Subsection
 
 Ladder operators
 \layout Standard
@@ -4010,7 +3908,7 @@ XXX Talk about how ladder operators that truncate are bosonic.
  off in both directions.
  Thus, the Baker's map describes the fermionic ladder operators.
  
-\layout Section
+\layout Subsection
 
 Number theoretic connections
 \layout Standard
@@ -4036,6 +3934,10 @@ XXX The definition
 \layout Section
 
 Modular Group Symmetry and the Takagi Representation 
+\layout Standard
+
+XXX Section needs a total re-write, including a defnintion of the notation.
+ XXX
 \layout Standard
 
 Yet another way to understand the solution of the Bernoulli Map is to note
@@ -5228,7 +5130,7 @@ island of stability
 \end_inset 
 
  to another.
- This now opens the dorr to the application of concepts from homogenous
+ This now opens the door to the application of concepts from homogenous
  spaces to dyanmical systems: What is the 
 \begin_inset Quotes eld
 \end_inset 
