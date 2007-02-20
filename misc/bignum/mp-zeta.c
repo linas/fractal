@@ -916,13 +916,18 @@ void cpx_borwein_zeta (cpx_t zeta, const cpx_t s, int prec)
 void cpx_borwein_zeta_cache (cpx_t zeta, const cpx_t s, unsigned int n, int prec)
 {
 	DECLARE_CPX_CACHE (cache);
-	static int cinit = 0;
+	static int precision = 0;
 	static cpx_t cache_s;
-	if (!cinit)
+	if (!precision)
 	{
-		cinit = 1;
 		cpx_init (cache_s);
 		cpx_set_ui (cache_s, 1, 0);
+	}
+
+	if (precision < prec)
+	{
+		cpx_set_prec (cache_s, 3.22*prec+50);
+		precision = prec;
 	}
 
 	/* First, check if this is the same s value as before */
