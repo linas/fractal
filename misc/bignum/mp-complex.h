@@ -269,7 +269,7 @@ static inline int cpx_eq (const cpx_t a, const cpx_t b, unsigned int nbits)
 	return (mpf_eq(a[0].re, b[0].re, nbits)) && (mpf_eq(a[0].im, b[0].im, nbits));
 }
 
-static inline void mpf_set_pec (cpx_t a, unsigned int nbits)
+static inline void cpx_set_prec (cpx_t a, unsigned int nbits)
 {
 	mpf_set_prec (a[0].re, nbits);
 	mpf_set_prec (a[0].im, nbits);
