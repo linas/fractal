@@ -164,6 +164,7 @@ static inline void fp_one_d_cache_fetch (fp_cache *c, mpf_t val, unsigned int n)
  */
 static inline void fp_one_d_cache_store (fp_cache *c, const mpf_t val, unsigned int n, int prec)
 {
+	mpf_set_prec (c->cache[n], 3.22*prec+50);
 	mpf_set (c->cache[n], val);
 	c->precision[n] = prec;
 }
@@ -195,6 +196,7 @@ static inline void fp_triangle_cache_store (fp_cache *c, const mpf_t val,
 					 unsigned int n, unsigned int k, int prec)
 {
 	unsigned int idx = n * (n+1) /2 ;
+	mpf_set_prec (c->cache[idx+k], 3.22*prec+50);
 	mpf_set (c->cache[idx+k], val);
 	c->precision[idx+k] = prec;
 }
@@ -233,6 +235,7 @@ static inline void cpx_one_d_cache_fetch (cpx_cache *c, cpx_t val, unsigned int 
  */
 static inline void cpx_one_d_cache_store (cpx_cache *c, const cpx_t val, unsigned int n, int prec)
 {
+	cpx_set_prec (c->cache[n], 3.22*prec+50);
 	cpx_set (c->cache[n], val);
 	c->precision[n] = prec;
 }
