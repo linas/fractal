@@ -1781,6 +1781,10 @@ void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
 		cpx_times_mpf (term, deriv, ft);
 		cpx_sub (zeta, zeta, term);
 
+		// cpx_abs (ft, term);
+		// double t = mpf_get_d (ft);
+		// printf ("duude bernoulli term k=%d t=%g\n", k, t);
+
 		mpf_div_ui (fact, fact, (2*k+1)*(2*k+2));
 		cpx_times_mpf (deriv, deriv, emq);
 	}
