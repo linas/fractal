@@ -1498,7 +1498,7 @@ void cpx_hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 
 /* ============================================================= */
 /**
- * cpx_hurwitz_taylor -- Hurwitz zeta function taylor series
+ * cpx_hurwitz_taylor -- Hurwitz zeta function Taylor series
  *
  * Implement the Hurwitz zeta as a taylor expansion about q=0
  * (pulling out the leading 1/q^s term to handle uniquely)
@@ -1721,7 +1721,7 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
  * So it doesn't work at higher precision.
  */
 
-static void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
+void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
 {
 	int k;
 	cpx_t s, term, deriv;
