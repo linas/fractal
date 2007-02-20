@@ -84,6 +84,8 @@ void fp_e (mpf_t e, unsigned int prec)
 		mpf_init (cached_e);
 	}
 
+	mpf_set_prec (cached_e, 3.322*prec +50);
+
 	mpf_t one;
 	mpf_init (one);
 	mpf_set_ui (one, 1);
@@ -116,6 +118,7 @@ void fp_pi (mpf_t pi, unsigned int prec)
 	{
 		mpf_init (cached_pi);
 	}
+	mpf_set_prec (cached_pi, 3.322*prec +50);
 
 	/* Simple-minded Machin formula */
 	mpf_t tmp;
@@ -160,6 +163,7 @@ void fp_two_pi (mpf_t two_pi, unsigned int prec)
 	{
 		mpf_init (cached_two_pi);
 	}
+	mpf_set_prec (cached_two_pi, 3.322*prec +50);
 
 	fp_pi (two_pi, prec);
 	mpf_mul_ui (two_pi, two_pi, 2);
@@ -189,6 +193,7 @@ void fp_two_over_pi (mpf_t two_over_pi, unsigned int prec)
 	{
 		mpf_init (cached_two_over_pi);
 	}
+	mpf_set_prec (cached_two_over_pi, 3.322*prec +50);
 
 	fp_pi (two_over_pi, prec);
 	mpf_ui_div (two_over_pi, 2, two_over_pi);
@@ -218,6 +223,7 @@ void fp_pi_half (mpf_t pih, unsigned int prec)
 	{
 		mpf_init (cached_pih);
 	}
+	mpf_set_prec (cached_pih, 3.322*prec +50);
 
 	fp_pi (pih, prec);
 	mpf_div_ui (pih, pih, 2);
@@ -247,6 +253,7 @@ void fp_sqrt_two_pi (mpf_t sqtpi, unsigned int prec)
 	{
 		mpf_init (cached_sqtpi);
 	}
+	mpf_set_prec (cached_sqtpi, 3.322*prec +50);
 
 	fp_two_pi (sqtpi, prec);
 	mpf_sqrt (sqtpi, sqtpi);
@@ -276,6 +283,7 @@ void fp_log_two_pi (mpf_t ltp, unsigned int prec)
 	{
 		mpf_init (cached_ltp);
 	}
+	mpf_set_prec (cached_ltp, 3.322*prec +50);
 
 	fp_two_pi (ltp, prec);
 	fp_log (ltp, ltp, prec);
@@ -306,6 +314,7 @@ void fp_log2 (mpf_t l2, unsigned int prec)
 	{
 		mpf_init (cached_log2);
 	}
+	mpf_set_prec (cached_log2, 3.322*prec +50);
 
 	mpf_t two;
 	mpf_init (two);
@@ -339,6 +348,7 @@ void fp_e_pi (mpf_t e_pi, unsigned int prec)
 	{
 		mpf_init (cached_e_pi);
 	}
+	mpf_set_prec (cached_e_pi, 3.322*prec +50);
 
 	fp_pi (e_pi, prec);
 	fp_exp (e_pi, e_pi, prec);
@@ -430,6 +440,7 @@ void fp_euler_mascheroni (mpf_t gam, unsigned int prec)
 	{
 		mpf_init (cached_gam);
 	}
+	mpf_set_prec (cached_gam, 3.322*prec +50);
 
 	fp_euler_mascheroni_compute (gam, prec);
 	mpf_set (cached_gam, gam);
@@ -473,6 +484,7 @@ void fp_zeta_half (mpf_t gam, unsigned int prec)
 	{
 		mpf_init (cached_gam);
 	}
+	mpf_set_prec (cached_gam, 3.322*prec +50);
 
 	fp_zeta_half_compute (gam, prec);
 	mpf_set (cached_gam, gam);
