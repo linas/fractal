@@ -179,13 +179,45 @@ void hiprec(cpx_t zeta, int prec)
 	cpx_clear (prevzeta);
 }
 
+double err_est (cpx_t ess, int em, int pee)
+{
+	/* (2pi)^{-2p} ((s+2p)! / (s-1)!)  (M+a)^{-2p}*/
+	cpx_t poch;
+	cpx_init (poch);
+
+	cpx_poch_rising (poch, ess, 2*pee);
+
+	mpf_t pabs, den;
+	mpf_init (pabs);
+	mpf_init (den);
+
+	cpx_abs (pabs, poch);
+
+	double fden = 2*3.1416*em;
+	mpf_set_d (den, fden);
+	fp_log (den, den, 40);
+	mpf_mul_ui (den,den, 2*pee);
+	mpf_neg (den,den);
+	fp_exp(den,den,40);
+	
+	mpf_mul (pabs,pabs, den);
+
+	double po = mpf_get_d (pabs);
+
+	cpx_clear (poch);
+	mpf_clear (pabs);
+	mpf_clear (den);
+	return po;
+}
+
 int main ()
 {
 	int prec = 40;
+	int i;
 
 	/* Set the precision (number of binary bits) */
 	mpf_set_default_prec (3.3*prec+140);
-	mpf_set_default_prec (3000);
+	mpf_set_default_prec (1000);
 
 	cpx_t ess, zeta, z2, z3;
 	cpx_init (ess);
@@ -196,6 +228,8 @@ int main ()
 	cpx_set_d (ess, 0.5, 4.0);
 	cpx_set_d (ess, 2.0, 0.1);
 	cpx_set_d (ess, 0.5, 14.134725);
+	cpx_set_d (ess, 3.0, 0.1);
+	cpx_set_d (ess, 0.5, 4.0);
 	
 	mpf_t que;
 	mpf_init (que);
@@ -206,14 +240,15 @@ int main ()
 	mpf_set (cq[0].re, que);
 	mpf_set_ui (cq[0].im, 0);
 	
-	int i;
+#if 0
 	for (i=20; i < 10000; i*=1.5)
 	// for (i=100; i > 10; i/=1.3)
 	{
 		hiprec (zeta, i);
 	}
+#endif
 	
-#if 0
+#if 1
 	cpx_hurwitz_zeta (z2, ess, que, prec);
 	fp_prt ("poly   ", z2[0].re);
 	printf ("\n");
@@ -223,15 +258,18 @@ int main ()
 	printf ("\n");
 
 	cpx_hurwitz_euler (zeta, ess, que, prec);
-	fp_prt ("its    ", zeta[0].re);
+	fp_prt ("euler  ", zeta[0].re);
 	printf ("\n");
 #endif
 
-#if 0
+#if 1
 	int pee, em;
-	for (pee=20; pee<900; pee+=40)
+	for (i=20; i<900; i+=40)
 	{
-		em = 2*pee +12;
+		pee = i;
+		em = 0.33*pee +12;
+		double err = err_est (ess, em, pee);
+		printf ("err=%g\n", err);
 		zeta_euler (zeta, ess, que, prec, em, pee);
 		printf ("p=%d m=%d ", pee, em);
 		fp_prt ("its ", zeta[0].re);
