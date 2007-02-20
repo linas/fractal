@@ -766,15 +766,20 @@ void cpx_binomial (cpx_t bin, const cpx_t ess, unsigned int k)
 void cpx_binomial_sum_cache (cpx_t bin, const cpx_t ess, unsigned int k)
 {
 	DECLARE_CPX_CACHE (cache);
-	static int cinit = 0;
+	static int cache_bits = 0;
 	static cpx_t cache_s;
-	if (!cinit)
+	
+	if (!cache_bits)
 	{
-		cinit = 1;
 		cpx_init (cache_s);
 		cpx_set_ui (cache_s, 1, 0);
 	}
 	int prec = mpf_get_default_prec();
+	if (cache_bits < prec)
+	{
+		cpx_set_prec (cache_s, prec);
+		cache_bits = prec;
+	}
 
 	/* First, check if this is the same s value as before */
 	if (!cpx_eq (cache_s, ess, prec))
