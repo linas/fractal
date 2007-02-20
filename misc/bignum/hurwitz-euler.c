@@ -228,8 +228,6 @@ int main ()
 	cpx_set_d (ess, 0.5, 4.0);
 	cpx_set_d (ess, 2.0, 0.1);
 	cpx_set_d (ess, 0.5, 14.134725);
-	cpx_set_d (ess, 3.0, 0.1);
-	cpx_set_d (ess, 0.5, 4.0);
 	
 	mpf_t que;
 	mpf_init (que);
@@ -264,12 +262,12 @@ int main ()
 
 #if 1
 	int pee, em;
-	for (i=20; i<900; i+=40)
+	for (i=20; i<3900; i+=140)
 	{
-		pee = i;
-		em = 0.33*pee +12;
-		double err = err_est (ess, em, pee);
-		printf ("err=%g\n", err);
+		pee = 300;
+		em = i;
+		//double err = err_est (ess, em, pee);
+		//printf ("err=%g\n", err);
 		zeta_euler (zeta, ess, que, prec, em, pee);
 		printf ("p=%d m=%d ", pee, em);
 		fp_prt ("its ", zeta[0].re);

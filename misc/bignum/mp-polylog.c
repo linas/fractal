@@ -1711,14 +1711,25 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
 }
 
 /* =========================================================== */
-/* cpx_hurwitz_euler -- Hurwitz zeta function via Euler-Maclaurin algo
+/**
+ * cpx_hurwitz_euler -- Hurwitz zeta function via Euler-Maclaurin algo
  *
  * This function computes the value of the Hurwitz zeta function
  * using an Euler-Maclaurin summation to obtain an estimate.
  *
- * The algorithm appears to work in principle (well, it gets 4 or 5
- * digits right), but we are doing a really really bad error estimate.
- * So it doesn't work at higher precision.
+ * The algorithm appears to work in principle -- it gets 10 or 20
+ * digits right when 's' is large and positive, and it gets 4 or 5
+ * digits right for small values of 's' in the critical strip.
+ * However, that's the best that it can do, and there seems to
+ * be no way of fixing it that I know of.
+ * 
+ * In particular, it seems that p=200 is plenty large enough to
+ * get strong convergence for the asymptotic series that is the 
+ * Bernoulli sum (and p=30 is more practical in most cases).
+ * 
+ * The problem is 'm'-depepdence: the result is highly dependent
+ * on the value of 'm' choosen, is highly oscillatory, and fails
+ * to converge at any reasonable rate.
  */
 
 void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
@@ -1801,8 +1812,8 @@ void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
 void cpx_hurwitz_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec)
 {
 	/* really really really bad estimates to the bounds */
-	int pee = prec * 3.322 + 15;
-	int em = 2.0*pee + 12;
+	int pee = 200;
+	int em = 2.0*prec + 12;
 
 	zeta_euler (zeta, ess, q, prec, em, pee);
 }
