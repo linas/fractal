@@ -1152,7 +1152,7 @@ void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
 	if (precision < prec)
 	{
 		precision = prec;
-		cpx_set_prec (cache_s, 3.22*prec+50);
+		cpx_set_prec (cache_s, 3.322*prec+50);
 	}
 
 	if (!cpx_eq (ess, cache_s, prec*3.322))
@@ -1197,7 +1197,7 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 	if (precision < prec)
 	{
 		precision = prec;
-		mpf_set_prec (cache_q, 3.22*prec+50);
+		mpf_set_prec (cache_q, 3.322*prec+50);
 	}
 
 	if (!mpf_eq(q,cache_q, prec*3.322))
@@ -1235,7 +1235,7 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 	if (precision < prec)
 	{
 		precision = prec;
-		cpx_set_prec (cache_q, 3.22*prec+50);
+		cpx_set_prec (cache_q, 3.322*prec+50);
 	}
 
 	if (!cpx_eq(q,cache_q, prec*3.322))

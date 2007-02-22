@@ -244,6 +244,7 @@ void mpf_gamma_cache (mpf_t gam, const mpf_t z, int prec)
 {
 	static mpf_t cache_z, cache_gam;
 	static int precision = 0;
+	int redo = 0;
 
 	if (!precision)
 	{
@@ -252,12 +253,13 @@ void mpf_gamma_cache (mpf_t gam, const mpf_t z, int prec)
 	}
 	if (precision < prec)
 	{
-		mpf_set_prec (cache_z, 3.22*prec+50);
-		mpf_set_prec (cache_gam, 3.22*prec+50);
+		mpf_set_prec (cache_z, 3.322*prec+50);
+		mpf_set_prec (cache_gam, 3.322*prec+50);
 		precision = prec;
+		redo = 1;
 	}
 
-	if (!mpf_eq (z, cache_z, prec*3.322))
+	if (redo || !mpf_eq (z, cache_z, prec*3.322))
 	{
 		mpf_set (cache_z, z);
 		fp_gamma (gam, z, prec);
@@ -417,8 +419,8 @@ void cpx_gamma_cache (cpx_t gam, const cpx_t z, int prec)
 	
 	if (precision < prec)
 	{
-		cpx_set_prec (cache_z, 3.22*prec+50);
-		cpx_set_prec (cache_gam, 3.22*prec+50);
+		cpx_set_prec (cache_z, 3.322*prec+50);
+		cpx_set_prec (cache_gam, 3.322*prec+50);
 		precision = prec;
 		redo = 1;
 	}
