@@ -1231,5 +1231,49 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 	fp_one_d_cache_store (&im_powc, powc[0].im, k, prec);
 }
 
+void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
+{
+	DECLARE_FP_CACHE (re_powc);
+	DECLARE_FP_CACHE (im_powc);
+	static cpx_t cache_q;
+	static int precision = 0;
+
+	if (!precision)
+	{
+		cpx_init (cache_q);
+	}
+
+	if (precision < prec)
+	{
+		precision = prec;
+		cpx_set_prec (cache_q, 3.22*prec+50);
+	}
+
+	if (!cpx_eq(q,cache_q, prec*3.322))
+	{
+		fp_one_d_cache_clear (&re_powc);
+		fp_one_d_cache_clear (&im_powc);
+		cpx_set(cache_q,q);
+	}
+
+	if (prec <= fp_one_d_cache_check (&re_powc, k))
+	{
+		fp_one_d_cache_fetch (&re_powc, powc->re, k);
+		fp_one_d_cache_fetch (&im_powc, powc->im, k);
+		return;
+	}
+	
+	cpx_t kq;
+	cpx_init (kq);
+	mpf_add_ui (kq[0].re, q[0].re, k);
+	mpf_set (kq[0].im, q[0].im);
+	cpx_pow (powc, kq, ess, prec);
+	cpx_clear (kq);
+
+	fp_one_d_cache_check (&im_powc, k);
+	fp_one_d_cache_store (&re_powc, powc[0].re, k, prec);
+	fp_one_d_cache_store (&im_powc, powc[0].im, k, prec);
+}
+
 /* =============================== END OF FILE =========================== */
 

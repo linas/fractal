@@ -137,6 +137,7 @@ void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec);
  */
 
 void fp_pow_rc (cpx_t diri, int k, const mpf_t q, const cpx_t ess, int prec);
+void cpx_pow_rc (cpx_t diri, int k, const cpx_t q, const cpx_t ess, int prec);
 
 /* =============================== END OF FILE =========================== */
 
