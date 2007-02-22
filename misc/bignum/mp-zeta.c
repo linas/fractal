@@ -706,7 +706,7 @@ void fp_zeta_brute (mpf_t zeta, unsigned int s, int prec)
  * "An Efficient Algorithm for Computing ... etc.
  */
 
-static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
+static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k, unsigned int prec)
 {
 	DECLARE_FP_CACHE (cache);
 
@@ -722,8 +722,8 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 		mpf_set_ui (d_k, 1); 
 		return;
 	}
-	int hit = fp_one_d_cache_check (&cache, k);
-	if (hit)
+	int cision = fp_one_d_cache_check (&cache, k);
+	if (prec <= cision)
 	{
 		fp_one_d_cache_fetch (&cache, d_k, k);
 		return;
@@ -758,7 +758,7 @@ static void fp_borwein_tchebysheff (mpf_t d_k, int n, int k)
 
 		mpf_add (d_k, d_k, term);
 
-		fp_one_d_cache_store (&cache, d_k, i, 1);
+		fp_one_d_cache_store (&cache, d_k, i, prec);
 
 		mpf_mul_ui (four, four, 4);
 	}
@@ -788,13 +788,13 @@ void fp_borwein_zeta (mpf_t zeta, unsigned int s, int prec)
 	mpf_init (term);
 	mpf_init (twon);
 
-	fp_borwein_tchebysheff (d_n, n, n);
+	fp_borwein_tchebysheff (d_n, n, n, prec);
 
 	mpf_set_ui (zeta, 0);
 	int k;
 	for (k=0; k<n; k++)
 	{
-		fp_borwein_tchebysheff (term, n, k);
+		fp_borwein_tchebysheff (term, n, k, prec);
 		mpf_sub (term, term, d_n); 
 
 		// i_pow (ip, k+1, s);
@@ -861,18 +861,15 @@ void cpx_borwein_zeta (cpx_t zeta, const cpx_t s, int prec)
 	cpx_init (ess);
 
 	/* make copy of input now ! */
-	mpf_set (ess[0].re, s[0].re);
-	mpf_set (ess[0].im, s[0].im);
+	cpx_set (ess, s);
+	cpx_set_ui (zeta, 0, 0);
 
-	mpf_set_ui(zeta[0].re, 0);
-	mpf_set_ui(zeta[0].im, 0);
-	
-	fp_borwein_tchebysheff (d_n, n, n);
+	fp_borwein_tchebysheff (d_n, n, n, prec);
 	int k;
 	for (k=0; k<n; k++)
 	{
 		mpf_set_ui (term[0].im, 0);
-		fp_borwein_tchebysheff (term[0].re, n, k);
+		fp_borwein_tchebysheff (term[0].re, n, k, prec);
 		mpf_sub (term[0].re, term[0].re, d_n); 
 
 		// po = pow (k+1, s);
