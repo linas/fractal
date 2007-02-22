@@ -1717,26 +1717,15 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
  * This function computes the value of the Hurwitz zeta function
  * using an Euler-Maclaurin summation to obtain an estimate.
  *
- * The algorithm appears to work in principle -- it gets 10 or 20
- * digits right when 's' is large and positive, and it gets 4 or 5
- * digits right for small values of 's' in the critical strip.
- * However, that's the best that it can do, and there seems to
- * be no way of fixing it that I know of.
- * 
- * In particular, it seems that p=200 is plenty large enough to
- * get strong convergence for the asymptotic series that is the 
- * Bernoulli sum (and p=30 is more practical in most cases).
- * 
- * The problem is 'm'-depepdence: the result is highly dependent
- * on the value of 'm' choosen, is highly oscillatory, and fails
- * to converge at any reasonable rate.
+ * The algorithm appears to work.
  */
 
-void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
+void zeta_euler_fp(cpx_t zeta, cpx_t ess, mpf_t q, int em, int prec)
 {
 	int k;
-	cpx_t s, term, deriv;
+	cpx_t s, spoch, term, deriv;
 	cpx_init (s);
+	cpx_init (spoch);
 	cpx_init (term);
 	cpx_init (deriv);
 
@@ -1757,7 +1746,8 @@ void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
 	cpx_div_ui (term, deriv, 2);
 	cpx_add (zeta, zeta, term);
 
-	mpf_t fact, emq, ft;
+	mpf_t eps, fact, emq, ft;
+	mpf_init (eps);
 	mpf_init (fact);
 	mpf_init (emq);
 	mpf_init (ft);
@@ -1781,8 +1771,17 @@ void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
 	/* emq = 1/(M+q)^2 */
 	mpf_mul (emq, emq, emq);
 	
-	mpf_set_ui (fact, 2);
-	for (k=1; k<=pee; k++)
+	mpf_set_ui (fact, 1);
+	mpf_div_ui (fact, fact, 2);
+	
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_neg (s, s);
+	cpx_set (spoch, s);
+
+	fp_epsilon (eps, 2*prec);
+	
+	k = 1;
+	while (1)
 	{
 		/* ft = B_2k / (2k)! */
 		q_bernoulli (bern, 2*k);
@@ -1790,14 +1789,24 @@ void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
 		mpf_mul (ft, ft, fact);
 		
 		cpx_times_mpf (term, deriv, ft);
-		cpx_sub (zeta, zeta, term);
+		cpx_mul (term, term, spoch);
+		cpx_add (zeta, zeta, term);
 
-		// cpx_abs (ft, term);
-		// double t = mpf_get_d (ft);
-		// printf ("duude bernoulli term k=%d t=%g\n", k, t);
+		cpx_mod_sq (ft, term);
+		if (mpf_cmp (ft, eps) < 0) break;
+#if 0
+		double t = mpf_get_d (ft);
+		printf ("M=%d Q=%d bern=%g ", em, k, t);
+#endif
 
-		mpf_div_ui (fact, fact, (2*k+1)*(2*k+2));
+		k++;
+		
+		mpf_div_ui (fact, fact, (2*k-1)*2*k);
 		cpx_times_mpf (deriv, deriv, emq);
+		mpf_add_ui (s[0].re, s[0].re, 1);
+		cpx_mul (spoch, spoch, s);
+		mpf_add_ui (s[0].re, s[0].re, 1);
+		cpx_mul (spoch, spoch, s);
 	}
 	
 	mpq_clear (bern);
@@ -1805,17 +1814,124 @@ void zeta_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec, int em, int pee)
 	mpf_clear (emq);
 	mpf_clear (ft);
 	cpx_clear (s);
+	cpx_clear (spoch);
 	cpx_clear (term);
 	cpx_clear (deriv);
 } 
 
-void cpx_hurwitz_euler(cpx_t zeta, cpx_t ess, mpf_t q, int prec)
+void zeta_euler(cpx_t zeta, cpx_t ess, cpx_t q, int em, int prec)
+{
+	int k;
+	cpx_t s, emq, spoch, term, deriv;
+	cpx_init (s);
+	cpx_init (emq);
+	cpx_init (spoch);
+	cpx_init (term);
+	cpx_init (deriv);
+
+	cpx_neg (s, ess);
+	cpx_set (emq, q);
+
+	cpx_set_ui (zeta, 0, 0);
+	/* sum over 1/(k+q)^s  from k=0 to k=M-1 */
+	for (k=0; k<em; k++)
+	{
+		cpx_pow_rc (term, k, emq, s, prec);
+		cpx_add (zeta, zeta, term);
+	}
+
+	/* deriv = 1/(M+q)^s */
+	cpx_pow_rc (deriv, em, emq, s, prec);
+	
+	/* Add another (1/2) of 1 /(M+q)^s */
+	cpx_div_ui (term, deriv, 2);
+	cpx_add (zeta, zeta, term);
+
+	mpf_t eps, fact, ft;
+	mpf_init (eps);
+	mpf_init (fact);
+	mpf_init (ft);
+
+	mpq_t bern;
+	mpq_init (bern);
+	
+	/* emq = M+q */
+	mpf_add_ui (emq[0].re, emq[0].re, em);
+
+	/* term = 1/(s-1)*(q+M)^{s-1} */
+	cpx_mul (term, deriv, emq);
+	cpx_add_ui (s, s, 1, 0);
+	cpx_div (term, term, s);
+	cpx_sub (zeta, zeta, term);
+
+	/* emq = 1/(M+q) */
+	cpx_recip (emq, emq);
+	cpx_mul (deriv, deriv, emq);
+
+	/* emq = 1/(M+q)^2 */
+	cpx_mul (emq, emq, emq);
+	
+	mpf_set_ui (fact, 1);
+	mpf_div_ui (fact, fact, 2);
+	
+	cpx_sub_ui (s, s, 1, 0);
+	cpx_neg (s, s);
+	cpx_set (spoch, s);
+
+	fp_epsilon (eps, 2*prec);
+	
+	k = 1;
+	while (1)
+	{
+		/* ft = B_2k / (2k)! */
+		q_bernoulli (bern, 2*k);
+		mpf_set_q (ft, bern);
+		mpf_mul (ft, ft, fact);
+		
+		cpx_times_mpf (term, deriv, ft);
+		cpx_mul (term, term, spoch);
+		cpx_add (zeta, zeta, term);
+
+		cpx_mod_sq (ft, term);
+		if (mpf_cmp (ft, eps) < 0) break;
+#if 0
+		double t = mpf_get_d (ft);
+		printf ("M=%d Q=%d bern=%g ", em, k, t);
+#endif
+
+		k++;
+		
+		mpf_div_ui (fact, fact, (2*k-1)*2*k);
+		cpx_mul (deriv, deriv, emq);
+		mpf_add_ui (s[0].re, s[0].re, 1);
+		cpx_mul (spoch, spoch, s);
+		mpf_add_ui (s[0].re, s[0].re, 1);
+		cpx_mul (spoch, spoch, s);
+	}
+	
+	mpq_clear (bern);
+	mpf_clear (fact);
+	mpf_clear (ft);
+	cpx_clear (s);
+	cpx_clear (spoch);
+	cpx_clear (term);
+	cpx_clear (deriv);
+} 
+
+void cpx_hurwitz_euler_fp(cpx_t zeta, cpx_t ess, mpf_t q, int prec)
 {
 	/* really really really bad estimates to the bounds */
-	int pee = 200;
-	int em = 2.0*prec + 12;
+	int em = prec + 12;
 
-	zeta_euler (zeta, ess, q, prec, em, pee);
+	zeta_euler_fp (zeta, ess, q, em, prec);
+}
+
+void cpx_hurwitz_euler(cpx_t zeta, cpx_t ess, cpx_t q, int prec)
+{
+	/* really really really bad estimates to the bounds */
+	int em = prec + 12;
+
+	zeta_euler (zeta, ess, q, em, prec);
 }
 
 /* ============================================================= */
