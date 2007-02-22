@@ -1347,6 +1347,7 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 {
 	static cpx_t cache_s, scale;
 	static int precision = 0;
+	int redo = 0;
 
 	if (!precision)
 	{
@@ -1358,11 +1359,12 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 	if (precision < prec)
 	{
 		precision = prec;
+		redo = 1;
 		cpx_set_prec (cache_s, 3.322*prec+50);
 		cpx_set_prec (scale, 3.322*prec+50);
 	}
 
-	if (!cpx_eq (ess, cache_s, prec*3.322))
+	if (redo || !cpx_eq (ess, cache_s, prec*3.322))
 	{
 		cpx_set (cache_s, ess);
 
@@ -1407,6 +1409,7 @@ static void hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 {
 	static cpx_t cache_s, piss, niss, scale;
 	static int precision = 0;
+	int redo = 0;
 
 	if (!precision)
 	{
@@ -1419,6 +1422,7 @@ static void hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 	if (precision < prec)
 	{
 		precision = prec;
+		redo = 1;
 		cpx_set_prec (cache_s, 3.322*prec+50);
 		cpx_set_prec (piss, 3.322*prec+50);
 		cpx_set_prec (niss, 3.322*prec+50);
@@ -1436,7 +1440,7 @@ static void hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 	cpx_neg (s, ess);
 	cpx_add_ui (s, s, 1, 0);
 
-	if (!cpx_eq (s, cache_s, prec*3.322))
+	if (redo || !cpx_eq (s, cache_s, prec*3.322))
 	{
 		cpx_set (cache_s, s);
 

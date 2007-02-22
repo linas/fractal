@@ -407,6 +407,7 @@ void cpx_gamma_cache (cpx_t gam, const cpx_t z, int prec)
 {
 	static cpx_t cache_z, cache_gam;
 	static int precision = 0;
+	int redo = 0;
 
 	if (!precision)
 	{
@@ -419,9 +420,10 @@ void cpx_gamma_cache (cpx_t gam, const cpx_t z, int prec)
 		cpx_set_prec (cache_z, 3.22*prec+50);
 		cpx_set_prec (cache_gam, 3.22*prec+50);
 		precision = prec;
+		redo = 1;
 	}
 
-	if (!cpx_eq (z, cache_z, prec*3.322))
+	if (redo || !cpx_eq (z, cache_z, prec*3.322))
 	{
 		cpx_set (cache_z, z);
 		cpx_gamma (gam, z, prec);
