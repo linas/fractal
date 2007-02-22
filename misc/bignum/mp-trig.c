@@ -1140,8 +1140,7 @@ void cpx_ui_pow (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
  */
 void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
 {
-	DECLARE_FP_CACHE (re_powc);
-	DECLARE_FP_CACHE (im_powc);
+	DECLARE_CPX_CACHE (powcache);
 	static cpx_t cache_s;
 	static int precision = 0;
 
@@ -1158,23 +1157,19 @@ void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
 
 	if (!cpx_eq (ess, cache_s, prec*3.322))
 	{
-		fp_one_d_cache_clear (&re_powc);
-		fp_one_d_cache_clear (&im_powc);
+		cpx_one_d_cache_clear (&powcache);
 		cpx_set (cache_s, ess);
 	}
 
-	if (prec <= fp_one_d_cache_check (&re_powc, k))
+	if (prec <= cpx_one_d_cache_check (&powcache, k))
 	{
-		fp_one_d_cache_fetch (&re_powc, powc->re, k);
-		fp_one_d_cache_fetch (&im_powc, powc->im, k);
+		cpx_one_d_cache_fetch (&powcache, powc, k);
 		return;
 	}
 	
 	cpx_ui_pow (powc, k, ess, prec);
 
-	fp_one_d_cache_check (&im_powc, k);
-	fp_one_d_cache_store (&re_powc, powc[0].re, k, prec);
-	fp_one_d_cache_store (&im_powc, powc[0].im, k, prec);
+	cpx_one_d_cache_store (&powcache, powc, k, prec);
 }
 
 /* ======================================================================= */
@@ -1190,8 +1185,7 @@ void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
  */
 void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 {
-	DECLARE_FP_CACHE (re_powc);
-	DECLARE_FP_CACHE (im_powc);
+	DECLARE_CPX_CACHE (powcache);
 	static mpf_t cache_q;
 	static int precision = 0;
 
@@ -1208,15 +1202,13 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 
 	if (!mpf_eq(q,cache_q, prec*3.322))
 	{
-		fp_one_d_cache_clear (&re_powc);
-		fp_one_d_cache_clear (&im_powc);
+		cpx_one_d_cache_clear (&powcache);
 		mpf_set(cache_q,q);
 	}
 
-	if (prec <= fp_one_d_cache_check (&re_powc, k))
+	if (prec <= cpx_one_d_cache_check (&powcache, k))
 	{
-		fp_one_d_cache_fetch (&re_powc, powc->re, k);
-		fp_one_d_cache_fetch (&im_powc, powc->im, k);
+		cpx_one_d_cache_fetch (&powcache, powc, k);
 		return;
 	}
 	
@@ -1226,15 +1218,12 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 	cpx_mpf_pow (powc, kq, ess, prec);
 	mpf_clear (kq);
 
-	fp_one_d_cache_check (&im_powc, k);
-	fp_one_d_cache_store (&re_powc, powc[0].re, k, prec);
-	fp_one_d_cache_store (&im_powc, powc[0].im, k, prec);
+	cpx_one_d_cache_store (&powcache, powc, k, prec);
 }
 
 void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 {
-	DECLARE_FP_CACHE (re_powc);
-	DECLARE_FP_CACHE (im_powc);
+	DECLARE_CPX_CACHE (powcache);
 	static cpx_t cache_q;
 	static int precision = 0;
 
@@ -1251,15 +1240,13 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 
 	if (!cpx_eq(q,cache_q, prec*3.322))
 	{
-		fp_one_d_cache_clear (&re_powc);
-		fp_one_d_cache_clear (&im_powc);
+		cpx_one_d_cache_clear (&powcache);
 		cpx_set(cache_q,q);
 	}
 
-	if (prec <= fp_one_d_cache_check (&re_powc, k))
+	if (prec <= cpx_one_d_cache_check (&powcache, k))
 	{
-		fp_one_d_cache_fetch (&re_powc, powc->re, k);
-		fp_one_d_cache_fetch (&im_powc, powc->im, k);
+		cpx_one_d_cache_fetch (&powcache, powc, k);
 		return;
 	}
 	
@@ -1270,9 +1257,7 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 	cpx_pow (powc, kq, ess, prec);
 	cpx_clear (kq);
 
-	fp_one_d_cache_check (&im_powc, k);
-	fp_one_d_cache_store (&re_powc, powc[0].re, k, prec);
-	fp_one_d_cache_store (&im_powc, powc[0].im, k, prec);
+	cpx_one_d_cache_store (&powcache, powc, k, prec);
 }
 
 /* =============================== END OF FILE =========================== */
