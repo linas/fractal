@@ -655,6 +655,15 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	if (cache_prec != prec)
 	{
 		cache_prec = prec;
+		mpf_set_prec (twopi, 3.322*prec +50);
+		mpf_set_prec (otp, 3.322*prec +50);
+		mpf_set_prec (log_twopi, 3.322*prec +50);
+
+		cpx_set_prec (phase, 3.322*prec +50);
+		cpx_set_prec (scale, 3.322*prec +50);
+		cpx_set_prec (s, 3.322*prec +50);
+		cpx_set_prec (cache_ess, 3.322*prec +50);
+
 		fp_two_pi (twopi, prec);
 
 		/* otp = -1/2pi */
@@ -1337,13 +1346,20 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
 void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 {
 	static cpx_t cache_s, scale;
-	static int init = 0;
+	static int precision = 0;
 
-	if (!init)
+	if (!precision)
 	{
-		init = 1;
+		precision = prec;
 		cpx_init (cache_s);
 		cpx_init (scale);
+	}
+
+	if (precision < prec)
+	{
+		precision = prec;
+		cpx_set_prec (cache_s, 3.322*prec+50);
+		cpx_set_prec (scale, 3.322*prec+50);
 	}
 
 	if (!cpx_eq (ess, cache_s, prec*3.322))
@@ -1390,15 +1406,23 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 static void hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
 {
 	static cpx_t cache_s, piss, niss, scale;
-	static int init = 0;
+	static int precision = 0;
 
-	if (!init)
+	if (!precision)
 	{
-		init = 1;
+		precision = prec;
 		cpx_init (cache_s);
 		cpx_init (piss);
 		cpx_init (niss);
 		cpx_init (scale);
+	}
+	if (precision < prec)
+	{
+		precision = prec;
+		cpx_set_prec (cache_s, 3.322*prec+50);
+		cpx_set_prec (piss, 3.322*prec+50);
+		cpx_set_prec (niss, 3.322*prec+50);
+		cpx_set_prec (scale, 3.322*prec+50);
 	}
 
 	mpf_t t;
