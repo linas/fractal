@@ -492,4 +492,101 @@ injects
 
  into the shift.
  Hmmm.
+\layout Section
+
+Singular in some way
+\layout Standard
+
+The Rieman zeta is tangled up with a singularity in several ways.
+ Two examples follow.
+ 
+\layout Subsection
+
+Polylog branch point
+\layout Standard
+
+For the polylogarithm 
+\begin_inset Formula $\mbox{Li}_{s}(z)$
+\end_inset 
+
+, one has 
+\begin_inset Formula $\mbox{Li}_{s}(1)=\zeta(s)$
+\end_inset 
+
+.
+ But the polylogarithm has a branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, so this relation asks for the value at a branch point! Performing the
+ same analysis for the Dirichlet 
+\begin_inset Formula $L$
+\end_inset 
+
+-functions shows that these are also at the branch point of the polylogarithm.
+ One the other hand, it can't be that bad, since, from the Dirichlet eta
+ function, one has 
+\begin_inset Formula \[
+\zeta(s)=-\frac{1}{1-2^{1-s}}\;\mbox{Li}_{s}(-1)\]
+
+\end_inset 
+
+ and the polylog has no branch point at 
+\begin_inset Formula $z=-1$
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+Theta function
+\layout Standard
+
+Starting with the classical theta function 
+\begin_inset Formula $\vartheta(z;\tau)$
+\end_inset 
+
+, defined as 
+\begin_inset Formula \[
+\vartheta(z;\tau)=\sum_{n=-\infty}^{\infty}e^{i\pi\tau n^{2}+2\pi inz}\]
+
+\end_inset 
+
+ one has the Mellin transform 
+\begin_inset Formula \[
+\int_{0}^{\infty}\left[\vartheta(z,it)-1\right]t^{s/2}\frac{dt}{t}=\pi^{(s-1)/2}\Gamma\left(\frac{1-s}{2}\right)\left[\zeta(1-s;z)+\zeta(1-s;1-z)\right]\]
+
+\end_inset 
+
+ for 
+\begin_inset Formula $z$
+\end_inset 
+
+ not an integer.
+ For 
+\begin_inset Formula $z=n$
+\end_inset 
+
+ an integer, the relation takes a different form: 
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{\infty}\left[\vartheta(n,it)-1\right]t^{s/2}\frac{dt}{t}=2\pi^{(s-1)/2}\Gamma\left(\frac{1-s}{2}\right)\zeta(s)\]
+
+\end_inset 
+
+ the trick here is that th 
+\begin_inset Formula $z\to n$
+\end_inset 
+
+ limit is non-trivial, because the theta function has a non-trivial limit
+ 
+\begin_inset Formula \[
+\lim_{t\to0}\vartheta(z;it)=\sum_{n=-\infty}^{\infty}\delta(z-n)\]
+
+\end_inset 
+
+ So it seems the Riemann zeta is associated with the singular points.
+ 
 \the_end
