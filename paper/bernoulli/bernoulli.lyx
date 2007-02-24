@@ -32,7 +32,7 @@ The Bernoulli Operator
 Linas Vepstas <linas@linas.org>
 \layout Date
 
-2 January 2004 (revised 17 February 2007)
+2 January 2004 (revised 24 February 2007)
 \layout Abstract
 
 This paper reviews a raft of related ideas surrounding the Bernoulli operator.
@@ -3333,7 +3333,7 @@ The action of
 
  is takes the form
 \begin_inset Formula \begin{equation}
-\mathcal{L}_{p}H=\mathcal{L}_{p}V+\lambda H\label{eq:}\end{equation}
+\mathcal{L}_{p}H=\mathcal{L}_{p}V+\lambda H\label{eq:Lattice shift eigenfunction}\end{equation}
 
 \end_inset 
 
@@ -3850,9 +3850,111 @@ The analytic situation is curious: the zeta eigenfuntions are well-defined
 Wavelets
 \layout Standard
 
-XXX Discuss wavelet solutions -- e.g.
- square wave -- inherently discontinuous, avoids gibbs phenomenon, more
- compatible with topology.
+The 
+\begin_inset Formula $\phi_{\lambda,k,r}^{(p)}(x)$
+\end_inset 
+
+ were built up explicitly from sine waves, but there is no particular reason
+ to start with a sine-wave basis.
+ Consider, for example, the square wave or Haar wavelet 
+\begin_inset Formula \[
+h(x)=\begin{cases}
++1 & \mbox{ for }0\le x<1/2\\
+-1 & \mbox{ for }1/2\le x<1\end{cases}\]
+
+\end_inset 
+
+ exteneded to the entire real-number line as a periodic function 
+\begin_inset Formula $h(x+n)=h(x)$
+\end_inset 
+
+ for integer 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ The Haar wavelet is in the kernel of the Bernoulli operator: 
+\begin_inset Formula $\mathcal{L}_{2}h(x)=0$
+\end_inset 
+
+, and thus can be used to create a fractal eigenfunction by means of the
+ lattice shift equation 
+\begin_inset LatexCommand \ref{eq:Lattice shift eigenfunction}
+
+\end_inset 
+
+: 
+\begin_inset Formula \[
+\psi_{k}(x)=\sum_{n=0}^{\infty}\lambda^{n}h\left((2k+1)2^{n}x\right)\]
+
+\end_inset 
+
+ so that 
+\begin_inset Formula $\mathcal{L}_{2}\psi_{k}=\lambda\psi_{k}$
+\end_inset 
+
+ for any 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset 
+
+ in the unit disk.
+ 
+\layout Standard
+
+There are several aspects of this eigenfunction that are notable.
+ Taken as a function on the real number line with the sual topology, it
+ is discontinuous on a set dense in the reals: it is discontinuous at the
+ dyadic rationals (that is, at multiples of 
+\begin_inset Formula $2^{-n}$
+\end_inset 
+
+).
+ By starting with the Haar wavelet, it also avoids the Gibbs phenomenon
+ of 
+\begin_inset Quotes eld
+\end_inset 
+
+ringing
+\begin_inset Quotes erd
+\end_inset 
+
+ that one gets by working in a Fourier basis.
+ Finally, the Haar wavelet is more compatible with the discrete, Cantor
+ topology of the lattice; it has a particularly simple form when considered
+ as a function on the lattice.
+\layout Subsection
+
+Fractal functions, in general
+\layout Standard
+
+Consider for a moment the set of all possible functions from the unit interval
+ into the complex plane; this set of functions is very large.
+ Important subsets are the set of continuous functions, the set of differentiabl
+e functions, the set of square-integrable functions, etc.
+ The above construction makes explicit another curious subset: the fractal
+ functions.
+ 
+\layout Standard
+
+The fractal functions are remarkable in that they may be constructed from
+ one of the other subsets, but that thier construction explicitly requires
+ a parameter 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset 
+
+ within the unit disk.
+ Imagining the space of all functions as a kind of infinite-analytic space,
+ there appears to be a branch point at 
+\begin_inset Formula $\left|\lambda\right|=1$
+\end_inset 
+
+ in the construction, with no clear way of how to work around it.
+ This seems to be an important aspect of the structure of this function
+ space.
+ At the moment, this statement is made without reference to the topology
+ of the function space, nor without any clear defninition of infininte-analytic.
+ XXX this should be tightened, of course.
+ 
 \layout Subsection
 
 Symmetries
@@ -3867,6 +3969,9 @@ g\phi_{zk}^{(2)}(x)=\phi_{zk}^{(2)}\left(\frac{x}{2}\right)=\exp((2k+1)\pi ix)+z
 \end_inset 
 
  is just the left-shift.
+\layout Standard
+
+Integrals of the Haar wavelet x-form as finite dimensional reps.
 \layout Subsection
 
 Ladder operators
