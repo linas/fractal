@@ -4048,12 +4048,12 @@ e_{0}=\left(\begin{array}{c}
 \end_inset 
 
  one has 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 S_{0}=\left(\begin{array}{cc}
 1 & -1\\
 0 & \lambda\end{array}\right)\quad\mbox{ and }\quad S_{1}=\left(\begin{array}{cc}
 1 & 1\\
-0 & \lambda\end{array}\right)\]
+0 & \lambda\end{array}\right)\label{eq:Dyadic generators}\end{equation}
 
 \end_inset 
 
@@ -4142,7 +4142,7 @@ The dyadic monoid has many interesting properties; these are discussed in
 The integral of the Haar wavelet or square wave is the tent map or triangle
  wave
 \begin_inset Formula \[
-t(x)=\int_{0}^{x}h(y)dy=\left\{ \begin{array}{ccc}
+t(x)=\int_{0}^{x}h(y)\, dy=\left\{ \begin{array}{ccc}
 \frac{1}{2}-2x & \;\textrm{ when }\; & 0\leq x\leq1/2\\
 -\frac{3}{2}+2x & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\]
 
@@ -4214,7 +4214,81 @@ b_{\lambda}(x)=\sum_{n=0}^{\infty}\lambda^{n}t(2^{n}x)\]
 .
 \layout Standard
 
-The blancmange curve transforms as a three-dimensional representation:
+The blancmange curve transforms under the same two-dimensional representation
+ as the Haar-wavelet curve, in that 
+\begin_inset Formula \[
+S_{0}b_{\lambda}=-\left(x-\frac{1}{2}\right)+\lambda b_{\lambda}\quad\mbox{ and }\quad S_{1}b_{\lambda}=\left(x-\frac{1}{2}\right)+\lambda b_{\lambda}\]
+
+\end_inset 
+
+ so that the same dyadic generators of 
+\begin_inset LatexCommand \ref{eq:Dyadic generators}
+
+\end_inset 
+
+ apply, but the basis vectors are 
+\begin_inset Formula \[
+e_{0}=\left(\begin{array}{c}
+x-\frac{1}{2}\\
+0\end{array}\right)\quad\mbox{ and }\quad e_{1}=\left(\begin{array}{c}
+0\\
+b_{\lambda}\end{array}\right)\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Note that 
+\begin_inset Formula $B_{1}(x)=x-1/2$
+\end_inset 
+
+ is the first Bernoulli polynomial.
+ This is then the first step of a pattern that emerges from repeated integration.
+ Define the periodic parabolic wave as 
+\begin_inset Formula \[
+p(x)=\frac{1}{24}h(x)+\int_{0}^{x}t(y)\, dy==\left\{ \begin{array}{ccc}
+-\frac{1}{24}+\frac{x}{2}-x^{2} & \;\textrm{ when }\; & 0\leq x<1/2\\
+\frac{13}{24}-\frac{3}{2}x+x^{2} & \;\textrm{ when }\; & 1/2\leq x<1\end{array}\right.\]
+
+\end_inset 
+
+ This structure seems somwhat unintuitive, but the fractal wave built from
+ it: 
+\layout Standard
+
+
+\begin_inset Formula \[
+c_{\lambda}(x)=\sum_{n=0}^{\infty}\lambda^{n}p(2^{n}x)\]
+
+\end_inset 
+
+ again has the property of transforming as the two-dimensional representation
+ of the dyadic monoid, specifically as 
+\layout Standard
+
+
+\begin_inset Formula \[
+S_{0}c_{\lambda}=-B_{2}\left(x\right)+\lambda c_{\lambda}\quad\mbox{ and }\quad S_{1}c_{\lambda}=B_{2}\left(x\right)+\lambda c_{\lambda}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $B_{2}(x)=x^{2}-x+1/6$
+\end_inset 
+
+ is the second Bernoulli polynomial.
+ That is, the basis vectors are given by 
+\begin_inset Formula \[
+e_{0}=\left(\begin{array}{c}
+B_{2}(x)\\
+0\end{array}\right)\quad\mbox{ and }\quad e_{1}=\left(\begin{array}{c}
+0\\
+c_{\lambda}\end{array}\right)\]
+
+\end_inset 
+
+
 \layout Standard
 
 XXXX
