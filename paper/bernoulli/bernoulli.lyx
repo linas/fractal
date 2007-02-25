@@ -4169,18 +4169,18 @@ t(x)=\int_{0}^{x}h(y)\, dy=\left\{ \begin{array}{ccc}
 .
  The iterated tent map behaves as a shift state, in that the Bernoulli operator
  acts as an annihilation operator: 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}t^{k}\right](x)=t^{k-1}(x)\end{equation}
+\begin_inset Formula \[
+\left[\mathcal{L}_{B}t^{k}\right](x)=t^{k-1}(x)\]
 
 \end_inset 
 
- and properly terminating at 
+ with the shift terminating at 
 \begin_inset Formula $k=1$
 \end_inset 
 
 : 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}t\right](x)=0\end{equation}
+\begin_inset Formula \[
+\left[\mathcal{L}_{B}t\right](x)=0\]
 
 \end_inset 
 
@@ -4239,73 +4239,52 @@ b_{\lambda}\end{array}\right)\]
  
 \layout Standard
 
-Note that 
-\begin_inset Formula $B_{1}(x)=x-1/2$
+This process can be extended arbitrarily.
+ One may choose to integrate the triangle wave, or to make a more general
+ ansatz.
+ Given some arbitary function 
+\begin_inset Formula $p(x)$
 \end_inset 
 
- is the first Bernoulli polynomial.
- This is then the first step of a pattern that emerges from repeated integration.
- Define the periodic parabolic wave as 
+, one may fashion a piece-wise periodic wave 
 \begin_inset Formula \[
-p(x)=\frac{1}{24}h(x)+\int_{0}^{x}t(y)\, dy==\left\{ \begin{array}{ccc}
--\frac{1}{24}+\frac{x}{2}-x^{2} & \;\textrm{ when }\; & 0\leq x<1/2\\
-\frac{13}{24}-\frac{3}{2}x+x^{2} & \;\textrm{ when }\; & 1/2\leq x<1\end{array}\right.\]
+q(x)=\left\{ \begin{array}{ccc}
+-p(x) & \;\textrm{ when }\; & 0\leq x<1/2\\
+p\left(x-\frac{1}{2}\right) & \;\textrm{ when }\; & 1/2\leq x<1\end{array}\right.\]
 
 \end_inset 
 
- This structure seems somwhat unintuitive, but the fractal wave built from
- it: 
-\layout Standard
-
-
+ From this, one constructs the fractal wave 
 \begin_inset Formula \[
-c_{\lambda}(x)=\sum_{n=0}^{\infty}\lambda^{n}p(2^{n}x)\]
+f_{\lambda}(x)=\sum_{n=0}^{\infty}\lambda^{n}q(2^{n}x)\]
 
 \end_inset 
 
- again has the property of transforming as the two-dimensional representation
- of the dyadic monoid, specifically as 
-\layout Standard
-
-
+ which transforms as 
 \begin_inset Formula \[
-S_{0}c_{\lambda}=-\frac{1}{4}B_{2}\left(x\right)+\lambda c_{\lambda}\quad\mbox{ and }\quad S_{1}c_{\lambda}=\frac{1}{4}B_{2}\left(x\right)+\lambda c_{\lambda}\]
+S_{0}f_{\lambda}=-p\left(\frac{x}{2}\right)+\lambda f_{\lambda}\quad\mbox{ and }\quad S_{1}f_{\lambda}=p\left(\frac{x}{2}\right)+\lambda f_{\lambda}\]
 
 \end_inset 
 
- where 
-\begin_inset Formula $B_{2}(x)=x^{2}-x+1/6$
+ so that the generators are given by equation 
+\begin_inset LatexCommand \ref{eq:Dyadic generators}
+
 \end_inset 
 
- is the second Bernoulli polynomial.
- That is, the basis vectors are given by 
+, with basis vectors 
 \begin_inset Formula \[
 e_{0}=\left(\begin{array}{c}
-B_{2}(x)/4\\
+p\left(x/2\right)\\
 0\end{array}\right)\quad\mbox{ and }\quad e_{1}=\left(\begin{array}{c}
 0\\
-c_{\lambda}\end{array}\right)\]
+f_{\lambda}\end{array}\right)\]
 
 \end_inset 
 
 
 \layout Standard
 
-XXXX
-\layout Standard
-
-Note the self-similarity of the fractal eigenfunctions is the same notion
- as the shift operation (and is given by the shift operation e.g.
- for p=2,
-\begin_inset Formula \[
-g\phi_{zk}^{(2)}(x)=\phi_{zk}^{(2)}\left(\frac{x}{2}\right)=\exp((2k+1)\pi ix)+z\phi_{zk}^{(2)}(x)\]
-
-\end_inset 
-
- is just the left-shift.
-\layout Standard
-
-Integrals of the Haar wavelet x-form as finite dimensional reps.
+XXXX Would deeper properties of the dyadic monoid be worth reviewing here???
 \layout Subsection
 
 Ladder operators
@@ -4367,138 +4346,6 @@ XXX The definition
 
  regaining 
 \begin_inset Formula $\mathcal{L}_{B}=\mathcal{L}_{B}^{(0)}$
-\end_inset 
-
-.
-\layout Section
-
-Modular Group Symmetry and the Takagi Representation 
-\layout Standard
-
-XXX Section needs a total re-write, including a defnintion of the notation.
- XXX
-\layout Standard
-
-Yet another way to understand the solution of the Bernoulli Map is to note
- that it can be written as 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}f\right](x)=\frac{1}{2}\left(f(g_{D}(x))+f(r_{D}g_{D}r_{D}(x)\right)\label{eq: bern modular}\end{equation}
-
-\end_inset 
-
- where 
-\begin_inset Formula $g_{D}(x)=x/2$
-\end_inset 
-
- and 
-\begin_inset Formula $r_{D}(x)=1-x$
-\end_inset 
-
- are the generators of the dyadic representation of the Modular group 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
-.
- Thus, we expect that we should be able to build eigenfunctions out of any
- functions 
-\begin_inset Formula $f(x)$
-\end_inset 
-
- that posses a Modular group symmetry.
-\layout Standard
-
-We can also obtain other eigenvectors by starting with the Takagi curves
- that transform under the higher-dimensional representations of 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
-.
- The equation 
-\begin_inset LatexCommand \ref{eq: bern modular}
-
-\end_inset 
-
- implies that any curve that transforms under a linear representation of
- the Modular Group can be used to build an eigenfunction of the Bernoulli
- Map.
- We exclude the non-linear representations, since we don't know how to build
- a vector space out of a non-linear operator.
- Thus, if 
-\begin_inset Formula $t_{w}^{(n)}((2j+1)x)$
-\end_inset 
-
- is a Takagi curve that transforms under an 
-\begin_inset Formula $n$
-\end_inset 
-
--dimensional representation, then 
-\begin_inset Formula $\mathcal{L}_{B}$
-\end_inset 
-
- is represented by 
-\begin_inset Formula $(g_{n}+r_{n}g_{n}r_{n})/2$
-\end_inset 
-
- where 
-\begin_inset Formula $r_{n},g_{n}\in GL(n,\mathbb{R})$
-\end_inset 
-
- are the generators of that 
-\begin_inset Formula $n$
-\end_inset 
-
--dimensional representation of 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
-.
- Solving the eigenvalue equation then amounts to diagonalizing the (finite-dimen
-sional) matrix 
-\begin_inset Formula $(g_{n}+r_{n}g_{n}r_{n})/2$
-\end_inset 
-
-.
-\layout Standard
-
-For a fixed eigenvalue 
-\begin_inset Formula $w$
-\end_inset 
-
-, we expect a countably infinite degeneracy built out of the curves 
-\begin_inset Formula $t_{w}^{(n)}((2j+1)x)$
-\end_inset 
-
-.
- Again, if these form a complete set of eigenstates, then we expect to be
- able to write out 
-\begin_inset Formula $\beta_{n}(x;s)$
-\end_inset 
-
- as a linear combination of these, and v.v.
-\layout Standard
-
-XXX finish me ..
- Give explicit expression for the higher-dim reps and in particular,the
- matrix from 
-\begin_inset Formula $b_{w,j}$
-\end_inset 
-
- and 
-\begin_inset Formula $\beta_{n}$
-\end_inset 
-
- in explicit detail.
- Also develop the lower-dim reps (move in opposite direction).
- This material should probably go into the chapter on the Takagi Curves,
- instead of here,right ...
- ???
-\layout Standard
-
-Note this is a ladder of isomorphisms between the different dimensional
- reps.
- Note also the ability to choose different set of basis funcs for the higher-dim
- Takagi Curves, viz, any polynomial of degree 
-\begin_inset Formula $n-2$
 \end_inset 
 
 .
