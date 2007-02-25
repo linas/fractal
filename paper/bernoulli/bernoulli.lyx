@@ -3245,7 +3245,7 @@ If
 
 :
 \begin_inset Formula \begin{equation}
-S_{k}(\sigma_{1},\sigma_{2},\cdots)=(k,\sigma_{1},\sigma_{2},\cdots)\label{eq:}\end{equation}
+S_{k}(\sigma_{1},\sigma_{2},\cdots)=(k,\sigma_{1},\sigma_{2},\cdots)\label{eq:Lattice right-shift}\end{equation}
 
 \end_inset 
 
@@ -3900,8 +3900,8 @@ h(x)=\begin{cases}
 \end_inset 
 
 : 
-\begin_inset Formula \[
-\psi_{k}(x)=\sum_{n=0}^{\infty}\lambda^{n}h\left((2k+1)2^{n}x\right)\]
+\begin_inset Formula \begin{equation}
+\psi_{k}(x)=\sum_{n=0}^{\infty}\lambda^{n}h\left((2k+1)2^{n}x\right)\label{eq:Haar wavelet eigenfunction}\end{equation}
 
 \end_inset 
 
@@ -3940,7 +3940,7 @@ ringing
  as a function on the lattice.
 \layout Subsection
 
-Symmetries
+Fractal Symmetry and the Dyadic Monoid
 \layout Standard
 
 The fractal eigenfunctions are self-similar.
@@ -3954,7 +3954,267 @@ The fractal eigenfunctions are self-similar.
 .
  Loosely speaking, one might say that translation-invariant Hamiltonians
  must necessarily have fractal eigenfunctions.
+ The self-similarities have a non-trivial structure, which is exposed in
+ this section.
+\layout Standard
+
+For concreteness, consider first the action of the right-sift operators
  
+\begin_inset Formula $S_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $S_{1}$
+\end_inset 
+
+, defined by equation 
+\begin_inset LatexCommand \ref{eq:Lattice right-shift}
+
+\end_inset 
+
+, acting on the 
+\begin_inset Formula $k=0$
+\end_inset 
+
+ dyadic eigenfunction 
+\begin_inset LatexCommand \ref{eq:Haar wavelet eigenfunction}
+
+\end_inset 
+
+ built from the Haar wavelet.
+ One has (dropping the subscript 
+\begin_inset Formula $k$
+\end_inset 
+
+ from
+\begin_inset Formula $\psi$
+\end_inset 
+
+): 
+\begin_inset Formula \begin{eqnarray*}
+\left[S_{0}\cdot\psi\right](x) & = & \psi\left(\frac{x}{2}\right)\\
+ & = & \sum_{n=0}^{\infty}\lambda^{n}h\left(2^{n-1}x\right)\\
+ & = & h\left(\frac{x}{2}\right)+\lambda\sum_{n=1}^{\infty}\lambda^{n-1}h\left(2^{n-1}x\right)\\
+ & = & h\left(\frac{x}{2}\right)+\lambda\psi(x)\\
+ & = & -1+\lambda\psi(x)\end{eqnarray*}
+
+\end_inset 
+
+ with the last step following because the Haar wavelet is identically -1
+ on the interval 
+\begin_inset Formula $0\le x<1/2$
+\end_inset 
+
+.
+ To emphasize this, write it more simply as 
+\begin_inset Formula \[
+\psi\left(\frac{x}{2}\right)=-1+\lambda\psi(x)\]
+
+\end_inset 
+
+ That is, one very explicitly has that the eigenfunction on the whole unit
+ interval looks exactly like the eigenfunction on the half-interval, except
+ that its scaled and offset: this is classic fractal self-similarity.
+ 
+\layout Standard
+
+For the other shift operator 
+\begin_inset Formula $S_{1}$
+\end_inset 
+
+, one readily obtains that 
+\begin_inset Formula $S_{1}\psi=1+\lambda\psi$
+\end_inset 
+
+.
+ The action of these two shift operators has a representation in terms of
+ 2x2 matrices acting on two-dimensional vectors.
+ The basis vectors 
+\begin_inset Formula $e_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $e_{1}$
+\end_inset 
+
+ for this vector space are 
+\begin_inset Formula \[
+e_{0}=\left(\begin{array}{c}
+1\\
+0\end{array}\right)\quad\mbox{ and }\quad e_{1}=\left(\begin{array}{c}
+0\\
+\psi\end{array}\right)\]
+
+\end_inset 
+
+ one has 
+\begin_inset Formula \[
+S_{0}=\left(\begin{array}{cc}
+1 & -1\\
+0 & \lambda\end{array}\right)\quad\mbox{ and }\quad S_{1}=\left(\begin{array}{cc}
+1 & 1\\
+0 & \lambda\end{array}\right)\]
+
+\end_inset 
+
+ so that one has, for example 
+\begin_inset Formula $S_{0}e_{1}=-e_{0}+\lambda e_{1}$
+\end_inset 
+
+ as the action of the right shift on this vector space.
+ The two matricies 
+\begin_inset Formula $S_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $S_{1}$
+\end_inset 
+
+ generate a monoid, the 
+\emph on 
+dyadic monoid
+\emph default 
+.
+ A general element 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ of the monoid is then 
+\begin_inset Formula \[
+\gamma=S_{0}^{n_{0}}S_{1}^{n_{1}}S_{0}^{n_{2}}S_{1}^{n_{3}}\cdots\]
+
+\end_inset 
+
+ for non-negative integers 
+\begin_inset Formula $n_{0},n_{1},n_{2},\cdots$
+\end_inset 
+
+ .
+ For the purpose of this text, a 
+\emph on 
+monoid
+\emph default 
+ is defined much as a group, except that inverses are not considered.
+ This is for two reasons: first, the inverses of 
+\begin_inset Formula $S_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $S_{1}$
+\end_inset 
+
+ are not uniquely defined: the left and right inverse differ.
+ Secondly, 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ is to be understood to be the action of a monoid element acting on the
+ unit interval.
+ As long as the action maps the whole interval into a sub-interval, the
+ action is well-defined; however, there are technical difficulties with
+ going in the reverse direction.
+ 
+\layout Standard
+
+The dyadic monoid has many interesting properties; these are discussed in
+ greater detail in 
+\begin_inset LatexCommand \cite{Ve-T04}
+
+\end_inset 
+
+.
+ Among the notable properties is that the dyadic monoid is isomorphic to
+ a certain subset of the Modular Group; this connection alone being important
+ as the modular group plays an important role in number theory, specifically
+ in the area of modular forms and automorphic forms.
+ Not inconsequential is that the theory of modular forms again borders on
+ the theory of the Riiemann zeta.
+ In a similar vein, one notes that the string of integers 
+\begin_inset Formula $[n_{0},n_{1},n_{2},\cdots]$
+\end_inset 
+
+ is isomorphic to a continued fraction.
+ Continued fractions are important both to the theory of Diophantine equations
+ (Pellian equations), and in turn are seen to tie back into general phenomena
+ seen in ergodic dynamics.
+\layout Standard
+
+The integral of the Haar wavelet or square wave is the tent map or triangle
+ wave
+\begin_inset Formula \[
+t(x)=\int_{0}^{x}h(y)dy=\left\{ \begin{array}{ccc}
+\frac{1}{2}-2x & \;\textrm{ when }\; & 0\leq x\leq1/2\\
+-\frac{3}{2}+2x & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\]
+
+\end_inset 
+
+ This is extended to the entire real line by defining 
+\begin_inset Formula $t(x+n)=t(x)$
+\end_inset 
+
+ for integer 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ The triangle wave has the curious property of period-doubling upon iteration:
+ that is, 
+\begin_inset Formula $t^{k}(x)=-t(2^{k-1}x)$
+\end_inset 
+
+ for 
+\begin_inset Formula $k>1$
+\end_inset 
+
+.
+ The iterated tent map behaves as a shift state, in that the Bernoulli operator
+ acts as an annihilation operator: 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{B}t^{k}\right](x)=t^{k-1}(x)\label{eq:}\end{equation}
+
+\end_inset 
+
+ and properly terminating at 
+\begin_inset Formula $k=1$
+\end_inset 
+
+: 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{B}t\right](x)=0\label{eq:}\end{equation}
+
+\end_inset 
+
+ The fractal eigenfunction constructed from the triangle wave is the Takagi
+ or blancmange curve: 
+\begin_inset Formula \[
+b_{\lambda}(x)=\sum_{n=0}^{\infty}\lambda^{n}t(2^{n}x)\]
+
+\end_inset 
+
+ and so of course, 
+\begin_inset Formula $\mathcal{L}_{B}b_{\lambda}=\lambda b_{\lambda}$
+\end_inset 
+
+.
+ There is a curious special case: the Takagi curve 
+\begin_inset Formula $b_{1/4}(x)$
+\end_inset 
+
+ is a parabola, corresponding to the Bernoulli polynomial 
+\begin_inset Formula $B_{2}(x)$
+\end_inset 
+
+.
+ Appearently, the construction of the parabola by self-similar subdivision
+ was known to Archimedes
+\begin_inset LatexCommand \cite{Man88}
+
+\end_inset 
+
+.
+\layout Standard
+
+The blancmange curve transforms as a three-dimensional representation:
 \layout Standard
 
 XXXX
@@ -4071,119 +4331,6 @@ Yet another way to understand the solution of the Bernoulli Map is to note
 \end_inset 
 
  that posses a Modular group symmetry.
-\layout Standard
-
-As we saw in a previous chapter, the Takagi curve fits this bill.
- Start with the triangle wave/tent map: 
-\begin_inset Formula \begin{equation}
-\tau(x)=\left\{ \begin{array}{ccc}
-2(x-\left\lfloor x\right\rfloor ) & \;\textrm{ when }\; & 0\leq x-\left\lfloor x\right\rfloor \leq1/2\\
-2(1-x+\left\lfloor x\right\rfloor ) & \;\textrm{ when }\; & 1/2\leq x-\left\lfloor x\right\rfloor \leq1\end{array}\right.\label{eq:}\end{equation}
-
-\end_inset 
-
- which has the property that it doubles under iteration: 
-\begin_inset Formula $\tau^{k}(x)=\tau(2^{k-1}x)$
-\end_inset 
-
-.
- The iterated tent map behaves sort-of like a shift state, in that 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}\tau^{k}\right](x)=\tau^{k-1}(x)\label{eq:}\end{equation}
-
-\end_inset 
-
- although it does not terminate properly for a shift state: 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}\tau\right](x)=\frac{1}{2}\label{eq:}\end{equation}
-
-\end_inset 
-
- (a true shift state would vanish on the final iteration).
- Thus we see that the Takagi curve transforms as 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}t_{w}\right](x)=\frac{1}{2}+wt_{w}(x)\label{eq:}\end{equation}
-
-\end_inset 
-
- under the Bernoulli operator.
- We can use this to build an eigenfunction 
-\begin_inset Formula \begin{equation}
-b_{w}(x)=\frac{-1}{2(1-w)}+t_{w}(x)\label{eq:}\end{equation}
-
-\end_inset 
-
- so that 
-\begin_inset Formula $\mathcal{L}_{B}b_{w}=wb_{w}$
-\end_inset 
-
-.
- On closer examination, we can see that this eigenvalue has the same countable
- degeneracy we've seen previously.
- That is, we can replace 
-\begin_inset Formula $x$
-\end_inset 
-
- on the right-hand-side of the equations above by 
-\begin_inset Formula $(2j+1)x$
-\end_inset 
-
- for 
-\begin_inset Formula $j\in\mathbb{N}$
-\end_inset 
-
- to obtain the set of eigenfunctions
-\begin_inset Formula \begin{equation}
-b_{w,j}(x)=\frac{-1}{2(1-w)}+t_{w}((2j+1)x)\label{eq:}\end{equation}
-
-\end_inset 
-
- all sharing the eigenvalue 
-\begin_inset Formula $w.$
-\end_inset 
-
- It follows immediately that, just as above, we should be able to express
- the Hurwitz Zeta eigenfunctions 
-\begin_inset Formula $\beta_{n}(x;s)$
-\end_inset 
-
- for fixed 
-\begin_inset Formula $s=-\ln_{2}w$
-\end_inset 
-
- as a linear combination of the 
-\begin_inset Formula $b_{w,j}$
-\end_inset 
-
- if the 
-\begin_inset Formula $b_{w,j}$
-\end_inset 
-
- are a complete set of eigenstates for the eigenvalue 
-\begin_inset Formula $w$
-\end_inset 
-
-.
- One special case is immediately apparent: the Takagi Curve 
-\begin_inset Formula $t_{1/4}(x)$
-\end_inset 
-
- is a parabola, corresponding to the Bernoulli polynomial 
-\begin_inset Formula $B_{2}(x)$
-\end_inset 
-
-.
-\layout Standard
-
-XXX finish me; give the explicit expressions between 
-\begin_inset Formula $b_{w,j}$
-\end_inset 
-
- and 
-\begin_inset Formula $\beta_{n}$
-\end_inset 
-
-.
 \layout Standard
 
 We can also obtain other eigenvectors by starting with the Takagi curves
