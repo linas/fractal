@@ -4,7 +4,7 @@
  * High-precison misc functions, using the 
  * Gnu Multiple-precision library.
  *
- * Copyright (C) 2005 Linas Vepstas
+ * Copyright (C) 2005,2006,2007 Linas Vepstas
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -41,3 +41,10 @@ void fp_epsilon (mpf_t eps, int prec);
 /* prec is the decimal precison (number of decimal places) */
 /* nterms is the number of an's to compute */
 void set_bits (int prec, int nterms);
+
+/**
+ * Print number of digits by which value differs from 
+ * previous call to this routine.
+ */
+
+int last_change(const cpx_t curr, unsigned int prec);

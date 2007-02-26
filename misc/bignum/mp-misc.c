@@ -4,7 +4,7 @@
  * High-precison misc functions, using the 
  * Gnu Multiple-precision library.
  *
- * Copyright (C) 2005 Linas Vepstas
+ * Copyright (C) 2005,2006,2007 Linas Vepstas
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -107,6 +107,43 @@ void set_bits (int prec, int nterms)
 
 	/* Set the precision (number of binary bits) */
 	mpf_set_default_prec (bits);
+}
+
+/* ===================================================== */
+
+/* Print number of digits by which value differes from 
+ * previous call to this routine.
+ */
+
+int last_change(const cpx_t curr, unsigned int prec)
+{
+	static cpx_t prev;
+	static int init = 0;
+
+	if (!init)
+	{
+		init = 1;
+		cpx_init (prev);
+	}
+
+	/* Set the precision (number of binary bits) */
+	int nbits = 3.322*prec+5;
+	cpx_set_prec (prev, nbits);
+
+	cpx_sub (prev, prev, curr);
+
+	printf ("prec=%d ", prec);
+
+	long rex, imx;
+	mpf_get_d_2exp (&rex, prev[0].re);
+	mpf_get_d_2exp (&imx, prev[0].im);
+	rex = -0.30103 *rex;
+	imx = -0.30103 *imx;
+	if (imx < rex) rex = imx;
+	printf ("change=%ld\n", rex);
+
+	cpx_set (prev, curr);
+	return rex;
 }
 
 /* =============================== END OF FILE =========================== */
