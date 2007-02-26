@@ -142,7 +142,8 @@ int last_change(const cpx_t curr, unsigned int prec)
 	mpf_get_d_2exp (&imx, prev[0].im);
 	rex = -0.30103 *rex;
 	imx = -0.30103 *imx;
-	if (imx < rex) rex = imx;
+	if ((imx != 0) && (imx < rex)) rex = imx;
+	if (rex == 0) rex = imx;
 	printf ("change=%ld\n", rex);
 
 	cpx_set (prev, curr);
