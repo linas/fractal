@@ -77,7 +77,10 @@ void fp_epsilon (mpf_t eps, int prec)
 		mpf_set (eps, cache_eps);
 		return;
 	}
-	mpf_set_prec (cache_eps, 3.322*prec+50);
+	if (cache_prec < prec)
+	{
+		mpf_set_prec (cache_eps, 3.322*prec+50);
+	}
 
 	/* double mex = ((double) prec) * log (10.0) / log(2.0); */
 	double mex = ((double) prec) * 3.321928095;
