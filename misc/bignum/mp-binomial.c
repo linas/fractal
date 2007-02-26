@@ -659,18 +659,24 @@ void cpx_poch_rising_d (cpx_t poch, double re_s, double im_s, unsigned int n)
 
 void cpx_poch_rising (cpx_t poch, const cpx_t ess, unsigned int n)
 {
+	/* Unlikely special case */
+	if (0 == n)
+	{
+		cpx_set_ui (poch, 1, 0);
+		return;
+	}
+	
 	cpx_t term, acc;
 	cpx_init (term);
 	cpx_init (acc);
 
-	cpx_set_ui (acc, 1, 0);
+	cpx_set (acc, ess);
+	cpx_set (term, ess);
 
 	unsigned int i;
-	for (i=0; i<n; i++)
+	for (i=1; i<n; i++)
 	{
-		cpx_set (term, ess);
-		mpf_add_ui (term[0].re, term[0].re, i);
-
+		mpf_add_ui (term[0].re, term[0].re, 1);
 		cpx_mul (acc, acc, term);
 	}
 
