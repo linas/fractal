@@ -34,7 +34,7 @@ Linas Vep\i \v{s}
 tas
 \layout Date
 
-12 October 2006, revised 10 February 2007
+12 October 2006, revised 25 February 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -3431,34 +3431,42 @@ The free combinations of powers of the two operators
  and 1; no terms of any other type appear.
  One may take these three elements as the basis of a three-dimensional vector
  space.
- Writing the basis as a column vector,
-\begin_inset Formula \[
-\left[\begin{array}{c}
-\mbox{Li}_{2}\left(z\right)\\
--2\pi i\ln z\\
-4\pi^{2}\end{array}\right]\]
+ Writing the basis as column vectors, the representation is 
+\begin_inset Formula \begin{eqnarray*}
+e_{1} & =4\pi^{2}= & \left[\begin{array}{c}
+1\\
+0\\
+0\end{array}\right]\\
+e_{2} & =-2\pi i\ln z= & \left[\begin{array}{c}
+0\\
+1\\
+0\end{array}\right]\\
+e_{3} & =\mbox{Li}_{2}\left(z\right)= & \left[\begin{array}{c}
+0\\
+0\\
+1\end{array}\right]\end{eqnarray*}
 
 \end_inset 
 
- one then has the action 
+ so that the action may be represented as 
 \begin_inset Formula \[
-g_{0}=\left[\begin{array}{ccc}
+g_{1}=\left[\begin{array}{ccc}
 1 & 0 & 0\\
 0 & 1 & 1\\
-0 & 0 & 1\end{array}\right]\quad\mbox{ and }\quad g_{1}=\left[\begin{array}{ccc}
+0 & 0 & 1\end{array}\right]\quad\mbox{ and }\quad g_{0}=\left[\begin{array}{ccc}
 1 & 1 & 0\\
 0 & 1 & 0\\
 0 & 0 & 1\end{array}\right]\]
 
 \end_inset 
 
- which may be seen to be the generators of the discrete Heisenberg group
- 
+ These two matricies may be seen to be the generators of the discrete Heisenberg
+ group 
 \begin_inset Formula $\mathcal{H}_{3}(\mathbb{Z})$
 \end_inset 
 
 .
- The general group element is 
+ The general group element of the discrete Heisenberg group is 
 \begin_inset Formula \[
 \left[\begin{array}{ccc}
 1 & a & b\\
@@ -3477,7 +3485,7 @@ g_{0}=\left[\begin{array}{ccc}
 \end_inset 
 
  for 
-\begin_inset Formula $g_{0}$
+\begin_inset Formula $g_{1}$
 \end_inset 
 
  and 
@@ -3485,7 +3493,7 @@ g_{0}=\left[\begin{array}{ccc}
 \end_inset 
 
  for 
-\begin_inset Formula $g_{1}$
+\begin_inset Formula $g_{0}$
 \end_inset 
 
 , and defines a new element 
@@ -3544,23 +3552,44 @@ For
 , one may write 
 \begin_inset Formula \[
 g_{0}=\left[\begin{array}{cccc}
-1 & 0 & 0 & 0\\
-0 & 1 & 2 & 1\\
-0 & 0 & 1 & 1\\
-0 & 0 & 0 & 1\end{array}\right]\quad g_{1}=\left[\begin{array}{cccc}
-1 & 1 & 0 & 0\\
-0 & 1 & 0 & 0\\
+1 & 1 & 1 & 0\\
+0 & 1 & 2 & 0\\
 0 & 0 & 1 & 0\\
-0 & 0 & 0 & 1\end{array}\right]\quad\mbox{for basis }\left[\begin{array}{c}
-\mbox{Li}_{3}\left(z\right)\\
--\pi i\left(\ln z\right)^{2}\\
-2\pi^{2}\ln z\\
-4\pi^{3}i\end{array}\right]\]
+0 & 0 & 0 & 1\end{array}\right]\quad\mbox{ and }\quad g_{1}=\left[\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 1\\
+0 & 0 & 0 & 1\end{array}\right]\]
 
 \end_inset 
 
- The generated group is no longer the Heisenberg group, as there simply
- aren't enough generators for that.
+ for the basis 
+\begin_inset Formula \begin{eqnarray*}
+e_{1} & =4\pi^{3}i= & \left[\begin{array}{c}
+1\\
+0\\
+0\\
+0\end{array}\right]\\
+e_{2} & =2\pi^{2}\ln z= & \left[\begin{array}{c}
+0\\
+1\\
+0\\
+0\end{array}\right]\\
+e_{3} & =-\pi i\left(\ln z\right)^{2}= & \left[\begin{array}{c}
+0\\
+0\\
+1\\
+0\end{array}\right]\\
+e_{4} & =\mbox{Li}_{3}\left(z\right)= & \left[\begin{array}{c}
+0\\
+0\\
+0\\
+1\end{array}\right]\end{eqnarray*}
+
+\end_inset 
+
+The generated group is no longer the Heisenberg group, as there simply aren't
+ enough generators for that.
  The commutator 
 \begin_inset Formula $w=g_{0}g_{1}g_{0}^{-1}g_{1}^{-1}$
 \end_inset 
@@ -3581,15 +3610,16 @@ For general integer
  The generators take the form 
 \begin_inset Formula \[
 g_{0}=\left[\begin{array}{cc}
-1 & 0\;\cdots\;0\\
-\begin{array}{c}
+C & \begin{array}{c}
 0\\
 \vdots\\
-0\end{array} & C\end{array}\right]\quad g_{1}=\left[\begin{array}{cccc}
-1 & 1 & 0\;\cdots & 0\\
-0 & 1 &  & \vdots\\
-\vdots &  & \ddots & 0\\
-0 & \cdots & 0 & 1\end{array}\right]\]
+0\end{array}\\
+0\;\cdots\;0 & 1\end{array}\right]\quad\mbox{ and }\quad g_{1}=\left[\begin{array}{ccccc}
+1 & 0 & \cdots &  & 0\\
+0 & 1 &  &  & \vdots\\
+\vdots &  & \ddots & 0 & 0\\
+ &  & 0 & 1 & 1\\
+0 & \cdots & 0 & 0 & 1\end{array}\right]\]
 
 \end_inset 
 
