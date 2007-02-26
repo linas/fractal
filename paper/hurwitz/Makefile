@@ -33,6 +33,10 @@ all: $(IMGS)
 	/usr/bin/latex hurwitz.latex
 	/usr/bin/bibtex hurwitz.aux
 
+arxiv:
+	patch -p0 < arxiv.diff
+	mv hurwitz.lyx hurwitz-arxiv.lyx
+
 dist: $(IMGS)
 	tar -cvf hurwitz.tar hurwitz.latex hurwitz.aux hurwitz.bbl $(GRPHS) $(IMGS)
 	ls -la hurwitz.tar
