@@ -1229,7 +1229,7 @@ void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec)
 		fp_euler_mascheroni (gam, prec);
 		mpf_sub(b_n, b_n, gam);
 		mpf_clear (gam);
-		fp_one_d_cache_store (&cache, b_n, n, 10111222);
+		fp_one_d_cache_store (&cache, b_n, n, prec);
 		return;
 	}
 	
