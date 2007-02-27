@@ -30,6 +30,7 @@
 #include "mp-binomial.h"
 #include "mp-complex.h"
 #include "mp-consts.h"
+#include "mp-misc.h"
 #include "mp-trig.h"
 #include "mp-zeta.h"
 
@@ -364,14 +365,8 @@ void fp_e_pi (mpf_t e_pi, unsigned int prec)
  * @prec - number of decimal places of precision
  *
  */
-static void fp_euler_mascheroni_compute (mpf_t gam, unsigned int prec)
+static void fp_euler_mascheroni_limit (mpf_t gam, unsigned int n, unsigned int prec)
 {
-	/* power value, goes as log log n */
-	// double en = log (prec) / log (2.0);
-	double en = log (prec);
-	en = 1.442695041 * (en + log (en));
-	int n = (int) en;
-	
 	mpf_t maxterm;
 	mpf_init (maxterm);
 	mpf_set_ui (maxterm, 1);
@@ -384,21 +379,25 @@ static void fp_euler_mascheroni_compute (mpf_t gam, unsigned int prec)
 	mpf_init (fact);
 	mpf_set_ui (twon, 1);
 	mpf_mul_2exp(twon, twon, n);
-	mpf_set (z_n, twon);
+	mpf_mul (z_n, twon, twon);
 	mpf_set_ui (fact, 1);
 	mpf_div_ui (fact, fact, 2);
-	mpf_set_ui (gam, 1);
+	mpf_set (gam, twon);
 
+	/* The k=1 term is handled above in init */
 	unsigned int k=2;
 	while(1)
 	{
-		fp_harmonic (tmp, k);
+		fp_harmonic (tmp, k, prec);
 		mpf_mul (term, z_n, tmp);
 		mpf_mul (term, term, fact);
 
 		mpf_add (gam, gam, term);
 
-		/* don't go no farther than this */
+		/* XXX in fact, we can terminate this sum a lot earlier,
+		 * if we wanted to, by comparing the sum to the number of
+		 * desired digits ... */
+		/* Don't go no farther than this */
 		if (mpf_cmp (term, maxterm) < 0) break;
 
 		k ++;
@@ -406,13 +405,10 @@ static void fp_euler_mascheroni_compute (mpf_t gam, unsigned int prec)
 		mpf_div_ui (fact, fact, k);
 	}
 
-	mpf_mul (gam, gam, twon);
-
 	fp_exp (tmp, twon, prec);
 	mpf_div (gam, gam, tmp);
 
-	mpf_set_ui (tmp, 2);
-	fp_log(tmp, tmp, prec);
+	fp_log2 (tmp, prec);
 	mpf_mul_ui (tmp, tmp, n);
 	mpf_sub (gam, gam, tmp);
 	
@@ -423,6 +419,17 @@ static void fp_euler_mascheroni_compute (mpf_t gam, unsigned int prec)
 	mpf_clear (fact);
 
 	mpf_clear (maxterm);
+}
+
+static void fp_euler_mascheroni_compute (mpf_t gam, unsigned int prec)
+{
+	/* power value, goes as log log n */
+	// double en = log (prec*log(10)) / log (2.0);
+	double en = log (prec*3.322);
+	// en = 1.442695041 * (en - log (en));
+	en = 1.442695041 * en;
+	int n = (int) (en+1.0);
+	fp_euler_mascheroni_limit (gam, n, prec);
 }
 
 void fp_euler_mascheroni (mpf_t gam, unsigned int prec)
