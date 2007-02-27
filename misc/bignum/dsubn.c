@@ -145,7 +145,7 @@ void d_totient_n (mpf_t acc, int en, unsigned int prec)
 	mpf_set (term, bin);
 
 	/* subtract psi */
-	fp_harmonic (bin, en-2);
+	fp_harmonic (bin, en-2, prec);
 	mpf_sub (term, term, bin);
 
 	/* add log (2pi) */

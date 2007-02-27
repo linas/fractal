@@ -540,7 +540,7 @@ void fp_bin_xform_pow (mpf_t bxp, unsigned int n, unsigned int s)
 /** 
  * fp_harmonic -- The harmonic number
  */
-void fp_harmonic (mpf_t harm, unsigned int n)
+void fp_harmonic (mpf_t harm, unsigned int n, unsigned int prec)
 {
 	DECLARE_FP_CACHE (cache);
 
@@ -549,23 +549,23 @@ void fp_harmonic (mpf_t harm, unsigned int n)
 		mpf_set_ui (harm, 1);
 		return;
 	}
-	int hit = fp_one_d_cache_check (&cache, n);
-	if (hit)
+	int have_prec = fp_one_d_cache_check (&cache, n);
+	if (prec <= have_prec)
 	{
 		fp_one_d_cache_fetch (&cache, harm, n);
 		return;
 	}
 	
 	unsigned int istart = n-1;
-	hit = fp_one_d_cache_check (&cache, istart);
-	while (0 == hit && istart>1)
+	have_prec = fp_one_d_cache_check (&cache, istart);
+	while ((have_prec < prec) && (1 < istart))
 	{
 		istart--;
-		hit = fp_one_d_cache_check (&cache, istart);
+		have_prec = fp_one_d_cache_check (&cache, istart);
 	}
 
 	unsigned int i;
-	fp_harmonic (harm, istart);
+	fp_harmonic (harm, istart, prec);
 
 	mpf_t term;
 	mpf_init (term);
@@ -574,7 +574,7 @@ void fp_harmonic (mpf_t harm, unsigned int n)
 		mpf_set_ui (term, 1);
 		mpf_div_ui (term, term, i);
 		mpf_add (harm, harm, term);
-		fp_one_d_cache_store (&cache, harm, i, 1);
+		fp_one_d_cache_store (&cache, harm, i, prec);
 	}
 	mpf_clear (term);
 }

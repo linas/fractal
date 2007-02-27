@@ -90,7 +90,7 @@ void fp_bin_xform_pow (mpf_t bxp, unsigned int n, unsigned int s);
 /** 
  * fp_harmonic -- The harmonic number
  */
-void fp_harmonic (mpf_t harm, unsigned int n);
+void fp_harmonic (mpf_t harm, unsigned int n, unsigned int prec);
 
 /** 
  * fp_poch_rising

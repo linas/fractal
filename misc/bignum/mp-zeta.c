@@ -1264,7 +1264,7 @@ void b_sub_n (mpf_t b_n, unsigned int n, unsigned int prec)
 	fp_euler_mascheroni (bin, prec);
 	mpf_set_ui (zeta, 1);
 	mpf_sub (zeta, zeta, bin);
-	fp_harmonic (bin, n-1);
+	fp_harmonic (bin, n-1, prec);
 	mpf_sub (zeta, zeta, bin);
 	mpf_mul_ui (zeta, zeta, n);
 	mpf_add (b_n, b_n, zeta);
