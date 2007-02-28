@@ -59,6 +59,7 @@ Vertex * tetrahedron_new (void)
 		}
 	}
 
+#ifdef EXAMPLE_SETUP
 	t[0].edge[0].left  = &t[1].edge[0];
 	t[0].edge[0].right = &t[2].edge[0];
 	t[0].edge[0].from  = &t[3];
@@ -70,34 +71,36 @@ Vertex * tetrahedron_new (void)
 	t[0].edge[2].to    = &t[2];
 	t[0].edge[2].left  = &t[2].edge[1];
 	t[0].edge[2].right = &t[2].edge[2];
+#endif
 
-	/* hard */
+	/* hard-coded connectivity */
 	t[0].edge[0].from  = &t[3];
 	t[0].edge[1].to    = &t[1];
 	t[0].edge[2].to    = &t[2];
 
+	t[1].edge[0].from  = &t[0];
+	t[1].edge[1].to    = &t[3];
+	t[1].edge[2].to    = &t[2];
+
+	t[2].edge[0].from  = &t[1];
+	t[2].edge[1].to    = &t[3];
+	t[2].edge[2].to    = &t[0];
+
+	t[3].edge[0].from  = &t[2];
+	t[3].edge[1].to    = &t[1];
+	t[3].edge[2].to    = &t[0];
+
 	for (i=0; i<4; i++)
 	{
-		t[i].edge[0].left  = &t[i].edge[1].to ->edge[0];  // t[0].edge[0].left  = &t[1].edge[0];
-		t[i].edge[0].left  = &t[i].edge[2].to ->edge[0];  //  t[i].edge[0].right = &t[2].edge[0];
+		t[i].edge[0].left  = &t[i].edge[1].to -> edge[0];  // t[0].edge[0].left  = &t[1].edge[0];
+		t[i].edge[0].right = &t[i].edge[2].to -> edge[0];  // t[0].edge[0].right = &t[2].edge[0];
 	
-		t[i].edge[1].left  = &t[1].edge[1];
-		t[i].edge[1].right = &t[1].edge[2];
+		t[i].edge[1].left  = &t[i].edge[1].to -> edge[1];  // t[0].edge[1].left  = &t[1].edge[1];
+		t[i].edge[1].right = &t[i].edge[1].to -> edge[2];  // t[0].edge[1].right = &t[1].edge[2];
 	
-		t[i].edge[2].left  = &t[2].edge[1];
-		t[i].edge[2].right = &t[2].edge[2];
+		t[i].edge[2].left  = &t[i].edge[2].to -> edge[1];  // t[0].edge[2].left  = &t[2].edge[1];
+		t[i].edge[2].right = &t[i].edge[2].to -> edge[2];  // t[0].edge[2].right = &t[2].edge[2];
 	}
-	/*
-
-	t[1].left  = &t[3];
-	t[1].right = &t[2];
-
-	t[2].left  = &t[3];
-	t[2].right = &t[0];
-
-	t[3].left  = &t[1];
-	t[3].right = &t[0];
-*/
 
 }
 
