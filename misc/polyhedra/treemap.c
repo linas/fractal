@@ -61,7 +61,7 @@ Vertex * tetrahedron_new (void)
 
 #ifdef EXAMPLE_SETUP
 	t[0].edge[0].left  = &t[1].edge[0];
-	t[0].edge[0].right = &t[2].edge[0];
+	t[0].edge[0].right = &t[2].edge[2];
 	t[0].edge[0].from  = &t[3];
 
 	t[0].edge[1].to    = &t[1];
@@ -90,6 +90,11 @@ Vertex * tetrahedron_new (void)
 	t[3].edge[1].to    = &t[1];
 	t[3].edge[2].to    = &t[0];
 
+	for (i=0; i<4; i++)
+	{
+	}
+
+	/* this is wrong somehow */
 	for (i=0; i<4; i++)
 	{
 		t[i].edge[0].left  = &t[i].edge[1].to -> edge[0];  // t[0].edge[0].left  = &t[1].edge[0];
@@ -121,7 +126,7 @@ void show_stats (Vertex *t)
 	int i, j;
 	for (i=0; i<4; i++)
 	{
-		for (j=0; j<4; j++)
+		for (j=0; j<3; j++)
 		{
 			Edge *e = &t[i].edge[j];
 			printf ("edge from %d to %d visited %d times\n", e->from->id, e->to->id, e->stats.cnt);
@@ -134,7 +139,7 @@ main ()
 	Vertex *t = tetrahedron_new();
 	Edge *e = &t->edge[0];
 
-	talk_a_walk (e, 6);
+	talk_a_walk (e, 10);
 
 	show_stats (t);
 }
