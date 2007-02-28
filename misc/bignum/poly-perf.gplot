@@ -7,7 +7,7 @@ set data style linespoints
 set key left
 
 # -------------------------------------------------------------
-# (Obsolete) Settings used to create warm cache figure in text
+# Settings used to create polylog warm cache figure in text
 # 
 # set term postscript eps color
 # set out 'poly-perf-warm-cache.ps'
@@ -21,7 +21,7 @@ set key left
 #      "poly-perf.dat" using 1:($6/10) title "Direct summation" linewidth 3
 # 
 # -------------------------------------------------------------
-# Settings used to create cold cache figure in text
+# Settings used to create polylog cold cache figure in text
 # 
 # set term postscript eps color
 # set out 'poly-perf-cold-cache.ps'
@@ -35,7 +35,7 @@ set key left
 #      "poly-perf.dat" using 1:($4/100) title "Direct summation" linewidth 3
 # 
 # -------------------------------------------------------------
-# Settings used to create Hurwitz cold cache figure in text
+# (Obsolete) Settings used to create Hurwitz cold cache figure in text
 #
 # set out 'hurwitz-perf-cold.png'
 # set title "Compute time for zeta (0.5+i14.13, 0.2) for a cold cache"
@@ -73,17 +73,6 @@ set key left
 #      "poly-perf.dat" using 1:(($6*10)) title "Taylor expansion" linewidth 3
 
 # -------------------------------------------------------------
-# set term postscript eps color
-# set out 'hurwitz-perf-cold.ps'
-# set title "Compute time for zeta (0.5+i14.13, 0.2) for a cold cache"
-# set xlabel "Decimal digits of precision"
-# set ylabel "Seconds"
-# set logscale
-# set logscale x 2
-# set xrange [25:300]
-# 
-# plot "hurwitz-perf.dat" using 1:(($3/100)) title "Borwein algorithm" linewidth 3, \
-#      "hurwitz-perf.dat" using 1:(($4/100)) title "Taylor expansion" linewidth 3
 
 # -------------------------------------------------------------
 # -------------------------------------------------------------
@@ -92,13 +81,29 @@ set key left
 # 
 # set term postscript eps color
 # set out 'hurwitz-perf-warm.ps'
-set title "Compute time for zeta (0.5+i14.13, 0.2) for a warm cache"
-set xlabel "Decimal digits of precision"
-set ylabel "Milliseconds"
-set logscale
-set xrange [10:2000]
-
-plot "h-borwein-perf.dat" using 3:($5/100) title "Borwein algorithm" linewidth 3, \
-     "h-taylor-perf.dat" using 3:($5/100) title "Direct summation" linewidth 3, \
-     "h-euler-perf.dat" using 3:($5/100) title "Euler-Maclaurin" linewidth 3
+# set title "Compute time for zeta (0.5+i14.13, 0.2) for a warm cache"
+# set xlabel "Decimal digits of precision"
+# set ylabel "Milliseconds"
+# set logscale
+# set xrange [10:1000]
 # 
+# plot "h-borwein-perf.dat" using 3:($5/100) title "Borwein algorithm" linewidth 3, \
+#      "h-taylor-perf.dat" using 3:($5/100) title "Taylor expansion" linewidth 3, \
+#      "h-euler-perf.dat" using 3:($5/100) title "Euler-Maclaurin" linewidth 3
+# 
+# -------------------------------------------------------------
+# Settings used to create Hurwitz cold cache figure in text
+#
+# set out 'hurwitz-perf-cold.png'
+set term postscript eps color
+set out 'hurwitz-perf-cold.ps'
+set title "Compute time for zeta (0.5+i14.13, 0.2) for a cold cache"
+set xlabel "Decimal digits of precision"
+set ylabel "Seconds"
+set logscale
+set xrange [10:1000]
+
+plot "h-borwein-perf.dat" using 3:($4/100) title "Borwein algorithm" linewidth 3, \
+     "h-taylor-perf.dat"  using 3:($4/100) title "Taylor expansion" linewidth 3, \
+     "h-euler-perf.dat"   using 3:($4/100) title "Euler-Maclaurin" linewidth 3
+
