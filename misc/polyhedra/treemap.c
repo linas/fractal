@@ -4,6 +4,8 @@
  *
  * Map a binary tree onto a polyhedron
  *
+ * More or less equivalent to a Markov chain.
+ *
  * Linas February 2007
  */
 
@@ -124,9 +126,9 @@ Vertex * tetrahedron_new (void)
 			}
 			t[i].edge[k].left = &t[j].edge[m];
 
-printf ("from %d to %d conected by =%d (%d->%d) want left  %d (%d->%d)\n", i,j, k, 
-t[i].edge[k].from->id, t[i].edge[k].to->id, tv,
-t[j].edge[m].from->id, t[j].edge[m].to->id);
+// printf ("from %d to %d conected by =%d (%d->%d) want left  %d (%d->%d)\n", i,j, k, 
+// t[i].edge[k].from->id, t[i].edge[k].to->id, tv,
+// t[j].edge[m].from->id, t[j].edge[m].to->id);
 
 			tv = con[i][j].right;
 			for (m=0;m<3; m++)
@@ -135,9 +137,9 @@ t[j].edge[m].from->id, t[j].edge[m].to->id);
 			}
 			t[i].edge[k].right = &t[j].edge[m];
 
-printf ("from %d to %d conected by =%d (%d->%d) want right %d (%d->%d)\n\n", i,j, k, 
-t[i].edge[k].from->id, t[i].edge[k].to->id, tv,
-t[j].edge[m].from->id, t[j].edge[m].to->id);
+// printf ("from %d to %d conected by =%d (%d->%d) want right %d (%d->%d)\n\n", i,j, k, 
+// t[i].edge[k].from->id, t[i].edge[k].to->id, tv,
+// t[j].edge[m].from->id, t[j].edge[m].to->id);
 
 		}
 	}
@@ -145,44 +147,92 @@ t[j].edge[m].from->id, t[j].edge[m].to->id);
 	return t;
 }
 
-void talk_a_walk (Edge *e, int depth)
+void talk_a_midpoint_walk (Edge *e, int depth, double left, double right)
+{
+	if (0 >= depth) return;
+	depth --;
+
+	double mid = 0.5*(left+right);
+
+	e->stats.cnt ++;
+
+	Vertex * v = e->to;
+	v->stats.cnt ++;
+	v->stats.sum += mid;
+	v->stats.sumsq += mid*mid;
+
+	// printf ("depth=%d came to %d\n", depth, e->to->id);
+
+	talk_a_midpoint_walk (e->left, depth, left, mid);
+	talk_a_midpoint_walk (e->right, depth, mid, right);
+}
+
+void talk_a_walk (Edge *e, int depth, double prob, double val)
 {
 	if (0 >= depth) return;
 	depth --;
 
 	e->stats.cnt ++;
-	e->to->stats.cnt ++;
-printf ("depth=%d came to %d\n", depth, e->to->id);
-printf ("l=%p r=%p\n", e->left, e->right);
 
-	talk_a_walk (e->left, depth);
-	talk_a_walk (e->right, depth);
+	Vertex * v = e->to;
+	v->stats.cnt ++;
+	v->stats.sum += val;
+	v->stats.sumsq += val*val;
+
+	talk_a_walk (e->left, depth, prob, prob*val);
+	talk_a_walk (e->right, depth, prob, (1.0-prob)*val);
 }
 
-void show_stats (Vertex *t)
+void show_stats (Vertex *t, int depth)
 {
+	int cnt = 1<<depth;
+	printf ("depth=%d cnt=%d\n", depth, cnt);
+
+	double frac = 1.0 / ((double) cnt);
+	double flen = 1.0/ ((double) depth);
+	
 	int i, j;
+	int prev = 0;
 	for (i=0; i<4; i++)
 	{
 		Vertex *v = &t[i];
-		printf ("vertex %d visited %d times\n", v->id, v->stats.cnt);
+		printf ("vertex %d visited %d times ", v->id, v->stats.cnt-prev);
+		if (i==0) prev = v->stats.cnt;
+
+		printf ("sum=%g ", flen * v->stats.sum);
+		printf ("avg=%g ", frac * v->stats.sum);
+		printf ("\n");
 	}
+	prev = 0;
 	for (i=0; i<4; i++)
 	{
 		for (j=0; j<3; j++)
 		{
 			Edge *e = &t[i].edge[j];
-			printf ("edge from %d to %d visited %d times\n", e->from->id, e->to->id, e->stats.cnt);
+			// printf ("edge from %d to %d visited %d times\n", e->from->id, e->to->id, e->stats.cnt-prev);
+			if ((i==0) && (j==0)) prev = e->stats.cnt;
 		}
 	}
+	printf ("\n");
 }
 
-main ()
+int
+main (int argc, char * argv[])
 {
+	if (argc<2)
+	{
+		fprintf (stderr, "Usage: %s <depth>\n", argv[0]);
+		exit (1);
+	}
+
+	int depth = atoi (argv[1]);
+
 	Vertex *t = tetrahedron_new();
 	Edge *e = &t[3].edge[0];
 
-	talk_a_walk (e, 2);
+	double left = 0.1;
+	double right = 1.0;
 
-	show_stats (t);
+	talk_a_walk (e, depth, left, right);
+	show_stats (t, depth);
 }
