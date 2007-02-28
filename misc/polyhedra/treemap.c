@@ -102,9 +102,39 @@ Vertex * tetrahedron_new (void)
 		t[i].edge[2].right = &t[i].edge[2].to -> edge[2];  // t[0].edge[2].right = &t[2].edge[2];
 	}
 
+	return t;
+}
+
+void talk_a_walk (Edge *e, int depth)
+{
+	if (0 >= depth) return;
+	depth --;
+
+	e->stats.cnt ++;
+
+	talk_a_walk (e->left, depth);
+	talk_a_walk (e->right, depth);
+}
+
+void show_stats (Vertex *t)
+{
+	int i, j;
+	for (i=0; i<4; i++)
+	{
+		for (j=0; j<4; j++)
+		{
+			Edge *e = &t[i].edge[j];
+			printf ("edge from %d to %d visited %d times\n", e->from->id, e->to->id, e->stats.cnt);
+		}
+	}
 }
 
 main ()
 {
-	tetrahedron_new();
+	Vertex *t = tetrahedron_new();
+	Edge *e = &t->edge[0];
+
+	talk_a_walk (e, 6);
+
+	show_stats (t);
 }
