@@ -14,7 +14,7 @@ treemap:	treemap.o
 treemap.o:	treemap.c
 
 .c.o:
-	cc -c -O2 -I $(INC) $<
+	cc -c -g -O2 -I $(INC) $<
 
 .o:
 	cc -o $@ $^ -lm

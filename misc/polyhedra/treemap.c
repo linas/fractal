@@ -48,47 +48,24 @@ Vertex * tetrahedron_new (void)
 		t[i].stats.sum = 0.0;
 		t[i].stats.sumsq = 0.0;
 
-		for (j=0; j<2; j++)
+		for (j=0; j<3; j++)
 		{
 			t[i].edge[j].stats.cnt = 0;
 			t[i].edge[j].stats.sum = 0.0;
 			t[i].edge[j].stats.sumsq = 0.0;
-			t[i].edge[0].to = &t[i];
+			t[i].edge[0].from = &t[i];
 			t[i].edge[1].from = &t[i];
 			t[i].edge[2].from = &t[i];
 		}
+
+		k = 0;
+		for (j=0; j<4; j++)
+		{
+			if (j == i) continue;
+			t[i].edge[k].to = &t[j];
+			k++;
+		}
 	}
-
-#ifdef EXAMPLE_SETUP
-	t[0].edge[0].left  = &t[1].edge[0];
-	t[0].edge[0].right = &t[2].edge[2];
-	t[0].edge[0].from  = &t[3];
-
-	t[0].edge[1].to    = &t[1];
-	t[0].edge[1].left  = &t[1].edge[1];
-	t[0].edge[1].right = &t[1].edge[2];
-
-	t[0].edge[2].to    = &t[2];
-	t[0].edge[2].left  = &t[2].edge[1];
-	t[0].edge[2].right = &t[2].edge[2];
-#endif
-
-	/* hard-coded connectivity */
-	t[0].edge[0].from  = &t[3];
-	t[0].edge[1].to    = &t[1];
-	t[0].edge[2].to    = &t[2];
-
-	t[1].edge[0].from  = &t[0];
-	t[1].edge[1].to    = &t[3];
-	t[1].edge[2].to    = &t[2];
-
-	t[2].edge[0].from  = &t[1];
-	t[2].edge[1].to    = &t[3];
-	t[2].edge[2].to    = &t[0];
-
-	t[3].edge[0].from  = &t[2];
-	t[3].edge[1].to    = &t[1];
-	t[3].edge[2].to    = &t[0];
 
 	struct {int left; int right;} con[4][4];
 
@@ -134,28 +111,34 @@ Vertex * tetrahedron_new (void)
 		for (j=0; j<4; j++)
 		{
 			if (i==j) continue;
-			for (k=0; k<2; k++)
+			for (k=0; k<3; k++)
 			{
-				if (t[j].edge[k].from != &t[i]) continue;
-				if (t[j].edge[k].to != &t[j]) 
-				{
-					printf ("Error! bad edge setup!\n");
-				}
-
-				int tv = con[i][j].left;
-				for (m=0;m<2; m++)
-				{
-					if (t[tv].edge[m].from == &t[j]) break;
-				}
-				t[j].edge[k].left = &t[tv].edge[m];
-
-				tv = con[i][j].right;
-				for (m=0;m<2; m++)
-				{
-					if (t[tv].edge[m].from == &t[j]) break;
-				}
-				t[j].edge[k].right = &t[tv].edge[m];
+	// printf ("from %d to %d maybe by =%d->%d\n", i, j, t[i].edge[k].from->id, t[i].edge[k].to->id); 
+				if (t[i].edge[k].to == &t[j]) break;
 			}
+
+			int tv = con[i][j].left;
+			for (m=0;m<3; m++)
+			{
+				if (t[j].edge[m].to == &t[tv]) break;
+			}
+			t[i].edge[k].left = &t[j].edge[m];
+
+printf ("from %d to %d conected by =%d (%d->%d) want left  %d (%d->%d)\n", i,j, k, 
+t[i].edge[k].from->id, t[i].edge[k].to->id, tv,
+t[j].edge[m].from->id, t[j].edge[m].to->id);
+
+			tv = con[i][j].right;
+			for (m=0;m<3; m++)
+			{
+				if (t[j].edge[m].to == &t[tv]) break;
+			}
+			t[i].edge[k].right = &t[j].edge[m];
+
+printf ("from %d to %d conected by =%d (%d->%d) want right %d (%d->%d)\n\n", i,j, k, 
+t[i].edge[k].from->id, t[i].edge[k].to->id, tv,
+t[j].edge[m].from->id, t[j].edge[m].to->id);
+
 		}
 	}
 
@@ -168,6 +151,9 @@ void talk_a_walk (Edge *e, int depth)
 	depth --;
 
 	e->stats.cnt ++;
+	e->to->stats.cnt ++;
+printf ("depth=%d came to %d\n", depth, e->to->id);
+printf ("l=%p r=%p\n", e->left, e->right);
 
 	talk_a_walk (e->left, depth);
 	talk_a_walk (e->right, depth);
@@ -176,6 +162,11 @@ void talk_a_walk (Edge *e, int depth)
 void show_stats (Vertex *t)
 {
 	int i, j;
+	for (i=0; i<4; i++)
+	{
+		Vertex *v = &t[i];
+		printf ("vertex %d visited %d times\n", v->id, v->stats.cnt);
+	}
 	for (i=0; i<4; i++)
 	{
 		for (j=0; j<3; j++)
@@ -189,9 +180,9 @@ void show_stats (Vertex *t)
 main ()
 {
 	Vertex *t = tetrahedron_new();
-	Edge *e = &t->edge[0];
+	Edge *e = &t[3].edge[0];
 
-	talk_a_walk (e, 10);
+	talk_a_walk (e, 2);
 
 	show_stats (t);
 }
