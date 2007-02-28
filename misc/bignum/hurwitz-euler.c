@@ -83,7 +83,7 @@ void do_perf (int prec)
 		cpx_set_d (zee, 0.2, 0.0);
 		mpf_set_d (que, 0.2);
 
-#define BORWEIN_ALGO
+// #define BORWEIN_ALGO
 #ifdef BORWEIN_ALGO
 		/* First we warm the cache */
 		times (&start);
@@ -138,7 +138,7 @@ void do_perf (int prec)
 
 #endif
 		
-// #define EULER_MACLAURIN_ALGO
+#define EULER_MACLAURIN_ALGO
 #ifdef EULER_MACLAURIN_ALGO
 		/* First we warm the cache */
 		times (&start);
@@ -270,14 +270,20 @@ double err_est (cpx_t ess, int em, int pee)
 	return po;
 }
 
-int main ()
+int main (int argc, char * argv[])
 {
-	int prec = 40;
+	int prec =50;
 	int i;
 
+	if (argc < 2)
+	{
+		fprintf (stderr, "Usage: %s <prec>\n", argv[0]);
+		exit (1);
+	}
+	prec = atoi(argv[1]);
+
 	/* Set the precision (number of binary bits) */
-	mpf_set_default_prec (3.3*prec+140);
-	mpf_set_default_prec (1000);
+	mpf_set_default_prec (3.322*prec+40);
 
 	cpx_t ess, zeta, z2, z3;
 	cpx_init (ess);
@@ -327,25 +333,21 @@ int main ()
 	mpf_set_str (expected[0].im, imstr, 10);
 	
 	int em;
-	for (i=20; i<50; i+=10)
+	for (i=0; i<500; i++)
 	{
-		em = i;
+		em = prec + 12 -i;
 		// double err = err_est (ess, em, pee);
 		// printf ("err=%g ", err);
 		zeta_euler (zeta, ess, cq, em, prec);
 		cpx_sub (zeta, zeta, expected);
 
-		long rex, imx;
-		mpf_get_d_2exp (&rex, zeta[0].re);
-		mpf_get_d_2exp (&imx, zeta[0].im);
-		rex = -0.30103 *rex;
-		imx = -0.30103 *imx;
-		if (imx < rex) rex = imx;
+		int rex = get_prec (zeta, prec);
 		
 		printf ("m=%d ", em);
-		printf ("prec=%ld ", rex);
-		fp_prt ("eu-mac=", zeta[0].im);
+		printf ("prec=%d ", rex);
+		// fp_prt ("eu-mac=", zeta[0].im);
 		printf ("\n");
+		fflush (stdout);
 	}
 #endif
 	do_perf (prec);
