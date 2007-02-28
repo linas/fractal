@@ -38,7 +38,7 @@ struct _vertex {
 
 Vertex * tetrahedron_new (void)
 {
-	int i, j;
+	int i, j, k,m;
 	Vertex * t = (Vertex *) malloc (4*sizeof (Vertex));
 
 	for (i=0; i<4; i++)
@@ -90,21 +90,73 @@ Vertex * tetrahedron_new (void)
 	t[3].edge[1].to    = &t[1];
 	t[3].edge[2].to    = &t[0];
 
-	for (i=0; i<4; i++)
-	{
-	}
+	struct {int left; int right;} con[4][4];
 
-	/* this is wrong somehow */
+	con [0][1].left  = 3;
+	con [0][1].right = 2;
+
+	con [0][2].left  = 1;
+	con [0][2].right = 3;
+
+	con [0][3].left  = 2;
+	con [0][3].right = 1;
+
+	con [1][0].left  = 2;
+	con [1][0].right = 3;
+
+	con [1][2].left  = 3;
+	con [1][2].right = 0;
+
+	con [1][3].left  = 0;
+	con [1][3].right = 2;
+
+	con [2][0].left  = 3;
+	con [2][0].right = 1;
+
+	con [2][1].left  = 0;
+	con [2][1].right = 3;
+
+	con [2][3].left  = 1;
+	con [2][3].right = 0;
+
+	con [3][0].left  = 1;
+	con [3][0].right = 2;
+
+	con [3][1].left  = 2;
+	con [3][1].right = 0;
+
+	con [3][2].left  = 0;
+	con [3][2].right = 1;
+
+
 	for (i=0; i<4; i++)
 	{
-		t[i].edge[0].left  = &t[i].edge[1].to -> edge[0];  // t[0].edge[0].left  = &t[1].edge[0];
-		t[i].edge[0].right = &t[i].edge[2].to -> edge[0];  // t[0].edge[0].right = &t[2].edge[0];
-	
-		t[i].edge[1].left  = &t[i].edge[1].to -> edge[1];  // t[0].edge[1].left  = &t[1].edge[1];
-		t[i].edge[1].right = &t[i].edge[1].to -> edge[2];  // t[0].edge[1].right = &t[1].edge[2];
-	
-		t[i].edge[2].left  = &t[i].edge[2].to -> edge[1];  // t[0].edge[2].left  = &t[2].edge[1];
-		t[i].edge[2].right = &t[i].edge[2].to -> edge[2];  // t[0].edge[2].right = &t[2].edge[2];
+		for (j=0; j<4; j++)
+		{
+			if (i==j) continue;
+			for (k=0; k<2; k++)
+			{
+				if (t[j].edge[k].from != &t[i]) continue;
+				if (t[j].edge[k].to != &t[j]) 
+				{
+					printf ("Error! bad edge setup!\n");
+				}
+
+				int tv = con[i][j].left;
+				for (m=0;m<2; m++)
+				{
+					if (t[tv].edge[m].from == &t[j]) break;
+				}
+				t[j].edge[k].left = &t[tv].edge[m];
+
+				tv = con[i][j].right;
+				for (m=0;m<2; m++)
+				{
+					if (t[tv].edge[m].from == &t[j]) break;
+				}
+				t[j].edge[k].right = &t[tv].edge[m];
+			}
+		}
 	}
 
 	return t;
