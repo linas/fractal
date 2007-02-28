@@ -53,16 +53,40 @@ Vertex * tetrahedron_new (void)
 			t[i].edge[j].stats.cnt = 0;
 			t[i].edge[j].stats.sum = 0.0;
 			t[i].edge[j].stats.sumsq = 0.0;
-
-			t[i].edge[j].from = &t[i];
+			t[i].edge[0].to = &t[i];
+			t[i].edge[1].from = &t[i];
+			t[i].edge[2].from = &t[i];
 		}
 	}
 
-	t[0].edge[1].to = &t[1];
-	t[0].edge[2].to = &t[2];
 	t[0].edge[0].left  = &t[1].edge[0];
 	t[0].edge[0].right = &t[2].edge[0];
+	t[0].edge[0].from  = &t[3];
 
+	t[0].edge[1].to    = &t[1];
+	t[0].edge[1].left  = &t[1].edge[1];
+	t[0].edge[1].right = &t[1].edge[2];
+
+	t[0].edge[2].to    = &t[2];
+	t[0].edge[2].left  = &t[2].edge[1];
+	t[0].edge[2].right = &t[2].edge[2];
+
+	/* hard */
+	t[0].edge[0].from  = &t[3];
+	t[0].edge[1].to    = &t[1];
+	t[0].edge[2].to    = &t[2];
+
+	for (i=0; i<4; i++)
+	{
+		t[i].edge[0].left  = &t[i].edge[1].to ->edge[0];  // t[0].edge[0].left  = &t[1].edge[0];
+		t[i].edge[0].left  = &t[i].edge[2].to ->edge[0];  //  t[i].edge[0].right = &t[2].edge[0];
+	
+		t[i].edge[1].left  = &t[1].edge[1];
+		t[i].edge[1].right = &t[1].edge[2];
+	
+		t[i].edge[2].left  = &t[2].edge[1];
+		t[i].edge[2].right = &t[2].edge[2];
+	}
 	/*
 
 	t[1].left  = &t[3];
