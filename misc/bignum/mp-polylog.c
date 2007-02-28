@@ -1949,7 +1949,8 @@ void zeta_euler(cpx_t zeta, cpx_t ess, cpx_t q, int em, int prec)
 void cpx_hurwitz_euler_fp(cpx_t zeta, cpx_t ess, mpf_t q, int prec)
 {
 	/* really really really bad estimates to the bounds */
-	int em = prec + 12;
+	// int em = prec + 12;
+	int em = prec/2 + 5;
 
 	zeta_euler_fp (zeta, ess, q, em, prec);
 }
