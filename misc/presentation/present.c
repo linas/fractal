@@ -145,6 +145,42 @@ struct _slist {
 	char * str;
 };
 
+StrList * slist_prepend (StrList *sl, char * str)
+{
+	StrList *head = (StrList *)malloc (sizeof(StrList));
+	head->str = str;
+	head->next = sl;
+	return head;
+}
+
+/* Turn a matching pair into a single word string equal to the identity */
+char * make_str (MatList *word)
+{
+	int la = strlen (word->str);
+	int lb = strlen (word->match->str);
+
+	char *e = malloc (la+lb+1);
+	strcpy (e, word->str);
+	while (lb)
+	{
+		e[la] = 0x20 ^ word->match->str[lb];
+		la++;
+		lb--;
+	}
+	e[la] = 0x0;
+	return e;
+}
+
+/* If the word appears in the list of known words, then return true, else false */
+int slist_in_list (StrList *sl, char * word)
+{
+	while (sl)
+	{
+		sl= sl->next;
+	}
+	return 0;
+}
+
 /* ---------------------------------------------------- */
 /* master struct */
 
@@ -181,7 +217,7 @@ static inline isinv (char a, char b)
 	return 0;
 }
 
-void walk_tree (Present *pr, MatList *node, int depth)
+void present_walk_tree (Present *pr, MatList *node, int depth)
 {
 	if (0 == depth) return;
 	depth --;
@@ -218,10 +254,28 @@ void walk_tree (Present *pr, MatList *node, int depth)
 		{
 			/* unknown. keep going */
 			pr->words = matlist_prepend (pr->words, mat, node->str, gen->str[0]);	
-			walk_tree (pr, pr->words, depth);
+			present_walk_tree (pr, pr->words, depth);
 		}
 
 		gen = gen->next;
+	}
+}
+
+void present_cleanup (Present *pr)
+{
+	MatList *word = pr->presentation;
+	while (word)
+	{
+		char * sword = make_str (word);
+		if (0 == slist_in_list(pr->unique, sword))
+		{
+			pr->unique = slist_prepend (pr->unique, sword);
+		}
+		else
+		{
+			free(sword);
+		}
+		word = word->next;
 	}
 }
 
@@ -488,7 +542,8 @@ main ()
 		pr = setup_trilog();
 		// pr = setup_quadlog();
 		// pr = setup_pentalog();
-		walk_tree (pr, pr->words, depth);
+		present_walk_tree (pr, pr->words, depth);
+		present_cleanup (pr);
 		if (pr->found) break;
 	}
 
