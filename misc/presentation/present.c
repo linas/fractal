@@ -184,8 +184,9 @@ void walk_tree (Present *pr, MatList *node, int depth)
 }
 
 /* ---------------------------------------------------- */
+/* set up braid group 3 */
 
-Present * setup_b3 (void)
+Present * setup_braid3 (void)
 {
 	Present *pr = (Present *) malloc (sizeof (Present));
 	pr->generators = NULL;
@@ -239,10 +240,102 @@ Present * setup_b3 (void)
 	return pr;
 }
 
+/* ---------------------------------------------------- */
+/* set up 3D Heisenberg group */
+
+Present * setup_heisenberg (void)
+{
+	Present *pr = (Present *) malloc (sizeof (Present));
+	pr->generators = NULL;
+	pr->words = NULL;
+	pr->presentation = NULL;
+	pr->cnt =0;
+	pr->found = 0;
+
+
+	/* identity matrix */
+	Matrix *e = matrix_new (3);
+	MELT(e, 0,0) = 1;
+	MELT(e, 0,1) = 0;
+	MELT(e, 0,2) = 0;
+	MELT(e, 1,0) = 0;
+	MELT(e, 1,1) = 1;
+	MELT(e, 1,2) = 0;
+	MELT(e, 2,0) = 0;
+	MELT(e, 2,1) = 0;
+	MELT(e, 2,2) = 1;
+	pr->words = matlist_prepend (NULL, e, "", 'E');
+	
+	MatList *ml = NULL;
+
+	/* Set up x and y of Heisenberg group */
+	Matrix *x = matrix_new (3);
+	MELT(x, 0,0) = 1;
+	MELT(x, 0,1) = 1;
+	MELT(x, 0,2) = 0;
+	MELT(x, 1,0) = 0;
+	MELT(x, 1,1) = 1;
+	MELT(x, 1,2) = 0;
+	MELT(x, 2,0) = 0;
+	MELT(x, 2,1) = 0;
+	MELT(x, 2,2) = 1;
+	ml = matlist_prepend (ml, x, "", 'X');
+
+	Matrix *y = matrix_new (3);
+	MELT(y, 0,0) = 1;
+	MELT(y, 0,1) = 0;
+	MELT(y, 0,2) = 0;
+	MELT(y, 1,0) = 0;
+	MELT(y, 1,1) = 1;
+	MELT(y, 1,2) = 1;
+	MELT(y, 2,0) = 0;
+	MELT(y, 2,1) = 0;
+	MELT(y, 2,2) = 1;
+	ml = matlist_prepend (ml, y, "", 'Y');
+
+	x = matrix_new (3);
+	MELT(x, 0,0) = 1;
+	MELT(x, 0,1) = -1;
+	MELT(x, 0,2) = 0;
+	MELT(x, 1,0) = 0;
+	MELT(x, 1,1) = 1;
+	MELT(x, 1,2) = 0;
+	MELT(x, 2,0) = 0;
+	MELT(x, 2,1) = 0;
+	MELT(x, 2,2) = 1;
+	ml = matlist_prepend (ml, x, "", 'x');
+
+	y = matrix_new (3);
+	MELT(y, 0,0) = 1;
+	MELT(y, 0,1) = 0;
+	MELT(y, 0,2) = 0;
+	MELT(y, 1,0) = 0;
+	MELT(y, 1,1) = 1;
+	MELT(y, 1,2) = -1;
+	MELT(y, 2,0) = 0;
+	MELT(y, 2,1) = 0;
+	MELT(y, 2,2) = 1;
+	ml = matlist_prepend (ml, y, "", 'y');
+
+	pr->generators = ml;
+	return pr;
+}
+	
+/* ---------------------------------------------------- */
+
 main ()
 {
-	Present *pr = setup_b3();
-	walk_tree (pr, pr->words, 5);
+	int depth;
+	Present *pr;
+
+	for (depth=2; ; depth++)
+	{
+		printf ("start depth=%d\n", depth);
+		// pr = setup_braid3();
+		pr = setup_heisenberg();
+		walk_tree (pr, pr->words, depth);
+		if (pr->found) break;
+	}
 
 	printf ("tested %d words\n", pr->cnt);
 }
