@@ -51,6 +51,19 @@ Matrix * matrix_dup (Matrix *from)
 	return mat;
 }
 
+void matrix_unit (Matrix *mat)
+{
+	int m,n;
+	for (m=0; m<mat->dim; m++)
+	{
+		for (n=0; n<mat->dim; n++)
+		{
+			MELT(mat,m,n) = 0;
+		}
+		MELT(mat,m,m) = 1;
+	}
+}
+
 void matrix_mult (Matrix *prod, Matrix *a, Matrix *b)
 {
 	int m,n,p;
@@ -322,6 +335,53 @@ Present * setup_heisenberg (void)
 }
 	
 /* ---------------------------------------------------- */
+/* set up trilog (polylog n=3) */
+
+Present * setup_trilog (void)
+{
+	Present *pr = (Present *) malloc (sizeof (Present));
+	pr->generators = NULL;
+	pr->words = NULL;
+	pr->presentation = NULL;
+	pr->cnt =0;
+	pr->found = 0;
+
+
+	/* identity matrix */
+	Matrix *e = matrix_new (4);
+	matrix_unit (e);
+	pr->words = matlist_prepend (NULL, e, "", 'E');
+	
+	MatList *ml = NULL;
+	Matrix *g0 = matrix_new (4);
+	matrix_unit (g0);
+	MELT(g0,0,1) = 1;
+	MELT(g0,0,2) = 1;
+	MELT(g0,1,2) = 2;
+	ml = matlist_prepend (ml, g0, "", 'A');
+	
+	Matrix *g1 = matrix_new (4);
+	matrix_unit (g1);
+	MELT(g1,2,3) = 1;
+	ml = matlist_prepend (ml, g1, "", 'B');
+	
+	g0 = matrix_new (4);
+	matrix_unit (g0);
+	MELT(g0,0,1) = -1;
+	MELT(g0,0,2) = 1;
+	MELT(g0,1,2) = -2;
+	ml = matlist_prepend (ml, g0, "", 'a');
+	
+	g1 = matrix_new (4);
+	matrix_unit (g1);
+	MELT(g1,2,3) = -1;
+	ml = matlist_prepend (ml, g1, "", 'b');
+	
+	pr->generators = ml;
+	return pr;
+}
+
+/* ---------------------------------------------------- */
 
 main ()
 {
@@ -332,7 +392,8 @@ main ()
 	{
 		printf ("start depth=%d\n", depth);
 		// pr = setup_braid3();
-		pr = setup_heisenberg();
+		// pr = setup_heisenberg();
+		pr = setup_trilog();
 		walk_tree (pr, pr->words, depth);
 		if (pr->found) break;
 	}
