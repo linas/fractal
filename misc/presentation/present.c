@@ -136,6 +136,16 @@ MatList *matlist_find (MatList *ptr, Matrix *mat)
 }
 
 /* ---------------------------------------------------- */
+/* list of strings */
+
+typedef struct _slist StrList;
+
+struct _slist {
+	StrList *next;
+	char * str;
+};
+
+/* ---------------------------------------------------- */
 /* master struct */
 
 typedef struct _present {
@@ -144,8 +154,27 @@ typedef struct _present {
 	MatList *presentation;  // presentation of group so far.
 	int found;
 	int cnt;
+	StrList *unique;
 } Present;
 
+Present * present_new (int dim)
+{
+	Present *pr = (Present *) malloc (sizeof (Present));
+	pr->generators = NULL;
+	pr->words = NULL;
+	pr->presentation = NULL;
+	pr->cnt =0;
+	pr->found = 0;
+	pr->unique = NULL;
+
+	/* identity matrix */
+	Matrix *e = matrix_new (dim);
+	matrix_unit (e);
+	pr->words = matlist_prepend (NULL, e, "", 'E');
+
+	return pr;
+}
+	
 static inline isinv (char a, char b)
 {
 	if ((a^0x20) == b) return 1;
@@ -201,21 +230,7 @@ void walk_tree (Present *pr, MatList *node, int depth)
 
 Present * setup_braid3 (void)
 {
-	Present *pr = (Present *) malloc (sizeof (Present));
-	pr->generators = NULL;
-	pr->words = NULL;
-	pr->presentation = NULL;
-	pr->cnt =0;
-	pr->found = 0;
-
-
-	/* identity matrix */
-	Matrix *e = matrix_new (2);
-	MELT(e, 0,0) = 1;
-	MELT(e, 0,1) = 0;
-	MELT(e, 1,0) = 0;
-	MELT(e, 1,1) = 1;
-	pr->words = matlist_prepend (NULL, e, "", 'E');
+	Present *pr = present_new(2);
 	
 	MatList *ml = NULL;
 
@@ -258,26 +273,7 @@ Present * setup_braid3 (void)
 
 Present * setup_heisenberg (void)
 {
-	Present *pr = (Present *) malloc (sizeof (Present));
-	pr->generators = NULL;
-	pr->words = NULL;
-	pr->presentation = NULL;
-	pr->cnt =0;
-	pr->found = 0;
-
-
-	/* identity matrix */
-	Matrix *e = matrix_new (3);
-	MELT(e, 0,0) = 1;
-	MELT(e, 0,1) = 0;
-	MELT(e, 0,2) = 0;
-	MELT(e, 1,0) = 0;
-	MELT(e, 1,1) = 1;
-	MELT(e, 1,2) = 0;
-	MELT(e, 2,0) = 0;
-	MELT(e, 2,1) = 0;
-	MELT(e, 2,2) = 1;
-	pr->words = matlist_prepend (NULL, e, "", 'E');
+	Present *pr = present_new(3);
 	
 	MatList *ml = NULL;
 
@@ -339,18 +335,7 @@ Present * setup_heisenberg (void)
 
 Present * setup_trilog (void)
 {
-	Present *pr = (Present *) malloc (sizeof (Present));
-	pr->generators = NULL;
-	pr->words = NULL;
-	pr->presentation = NULL;
-	pr->cnt =0;
-	pr->found = 0;
-
-
-	/* identity matrix */
-	Matrix *e = matrix_new (4);
-	matrix_unit (e);
-	pr->words = matlist_prepend (NULL, e, "", 'E');
+	Present *pr = present_new(4);
 	
 	MatList *ml = NULL;
 	Matrix *g0 = matrix_new (4);
@@ -386,18 +371,7 @@ Present * setup_trilog (void)
 
 Present * setup_quadlog (void)
 {
-	Present *pr = (Present *) malloc (sizeof (Present));
-	pr->generators = NULL;
-	pr->words = NULL;
-	pr->presentation = NULL;
-	pr->cnt =0;
-	pr->found = 0;
-
-
-	/* identity matrix */
-	Matrix *e = matrix_new (5);
-	matrix_unit (e);
-	pr->words = matlist_prepend (NULL, e, "", 'E');
+	Present *pr = present_new(5);
 	
 	MatList *ml = NULL;
 	Matrix *g0 = matrix_new (5);
@@ -506,12 +480,12 @@ main ()
 	int depth;
 	Present *pr;
 
-	for (depth=2; ; depth++)
+	for (depth=5; ; depth++)
 	{
 		printf ("start depth=%d\n", depth);
 		// pr = setup_braid3();
-		pr = setup_heisenberg();
-		// pr = setup_trilog();
+		// pr = setup_heisenberg();
+		pr = setup_trilog();
 		// pr = setup_quadlog();
 		// pr = setup_pentalog();
 		walk_tree (pr, pr->words, depth);
