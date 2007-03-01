@@ -404,8 +404,8 @@ Present * setup_quadlog (void)
 	matrix_unit (g0);
 	MELT(g0,0,1) = 1;
 	MELT(g0,0,2) = 1;
-	MELT(g0,0,3) = 1;
 	MELT(g0,1,2) = 2;
+	MELT(g0,0,3) = 1;
 	MELT(g0,1,3) = 3;
 	MELT(g0,2,3) = 3;
 	ml = matlist_prepend (ml, g0, "", 'A');
@@ -419,15 +419,80 @@ Present * setup_quadlog (void)
 	matrix_unit (g0);
 	MELT(g0,0,1) = -1;
 	MELT(g0,0,2) = 1;
-	MELT(g0,0,3) = -1;
 	MELT(g0,1,2) = -2;
+
+	MELT(g0,0,3) = -1;
 	MELT(g0,1,3) = 3;
 	MELT(g0,2,3) = -3;
 	ml = matlist_prepend (ml, g0, "", 'a');
 	
 	g1 = matrix_new (5);
 	matrix_unit (g1);
-	MELT(g1,2,3) = -1;
+	MELT(g1,3,4) = -1;
+	ml = matlist_prepend (ml, g1, "", 'b');
+	
+	pr->generators = ml;
+	return pr;
+}
+
+/* ---------------------------------------------------- */
+/* set up polylog (polylog n=5) */
+
+Present * setup_pentalog (void)
+{
+	Present *pr = (Present *) malloc (sizeof (Present));
+	pr->generators = NULL;
+	pr->words = NULL;
+	pr->presentation = NULL;
+	pr->cnt =0;
+	pr->found = 0;
+
+
+	/* identity matrix */
+	Matrix *e = matrix_new (6);
+	matrix_unit (e);
+	pr->words = matlist_prepend (NULL, e, "", 'E');
+	
+	MatList *ml = NULL;
+	Matrix *g0 = matrix_new (6);
+	matrix_unit (g0);
+	MELT(g0,0,1) = 1;
+	MELT(g0,0,2) = 1;
+	MELT(g0,0,3) = 1;
+	MELT(g0,0,4) = 1;
+	MELT(g0,1,2) = 2;
+	MELT(g0,1,3) = 3;
+	MELT(g0,2,3) = 3;
+	MELT(g0,1,4) = 4;
+	MELT(g0,2,4) = 6;
+	MELT(g0,3,4) = 4;
+	ml = matlist_prepend (ml, g0, "", 'A');
+	
+	Matrix *g1 = matrix_new (6);
+	matrix_unit (g1);
+	MELT(g1,4,5) = 1;
+	ml = matlist_prepend (ml, g1, "", 'B');
+	
+	g0 = matrix_new (6);
+	matrix_unit (g0);
+	MELT(g0,0,1) = -1;
+
+	MELT(g0,0,2) = 1;
+	MELT(g0,1,2) = -2;
+
+	MELT(g0,0,3) = -1;
+	MELT(g0,1,3) = 3;
+	MELT(g0,2,3) = -3;
+
+	MELT(g0,0,4) = 1;
+	MELT(g0,1,4) = -4;
+	MELT(g0,2,4) = 6;
+	MELT(g0,3,4) = -4;
+	ml = matlist_prepend (ml, g0, "", 'a');
+	
+	g1 = matrix_new (6);
+	matrix_unit (g1);
+	MELT(g1,4,5) = -1;
 	ml = matlist_prepend (ml, g1, "", 'b');
 	
 	pr->generators = ml;
@@ -445,9 +510,10 @@ main ()
 	{
 		printf ("start depth=%d\n", depth);
 		// pr = setup_braid3();
-		// pr = setup_heisenberg();
+		pr = setup_heisenberg();
 		// pr = setup_trilog();
-		pr = setup_quadlog();
+		// pr = setup_quadlog();
+		// pr = setup_pentalog();
 		walk_tree (pr, pr->words, depth);
 		if (pr->found) break;
 	}
