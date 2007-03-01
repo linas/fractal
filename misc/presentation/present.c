@@ -86,9 +86,11 @@ int matrix_equal (Matrix *a, Matrix *b)
 typedef struct _mlist MatList;
 
 struct _mlist {
-	MatList *next;
-	Matrix *mat;
-	char *str;
+	MatList *next;  //next in list
+	Matrix *mat;    // this group element
+	char *str;      // word describing this group element
+	char *last;     // last letter of the word
+	MatList *match; // equivalent word
 };
 
 MatList *matlist_prepend (MatList *ml, Matrix *mat, char *str, char letter)
@@ -96,12 +98,16 @@ MatList *matlist_prepend (MatList *ml, Matrix *mat, char *str, char letter)
 	MatList *node = (MatList *)malloc(sizeof (MatList));
 	node->mat = mat;
 	node->next = ml;
+
+	/* append letter to string, store string */
 	int len = strlen(str);
 	node->str = malloc (len+2);
 	strcpy(node->str, str);
 	node->str[len] = letter;
 	node->str[len+1] = 0x0;
+	node->last = &node->str[len];
 
+	node->match = NULL;
 	return node;
 }
 
@@ -120,22 +126,59 @@ MatList *matlist_find (MatList *ptr, Matrix *mat)
 /* master struct */
 
 typedef struct _present {
-	MatList *generators;
-	MatList *words;
+	MatList *generators;    // list of group generators (and thier inverses)
+	MatList *words;         // list of words tested so far 
+	MatList *presentation;  // presentation of group so far.
+	int found;
+	int cnt;
 } Present;
+
+static inline isinv (char a, char b)
+{
+	if ((a^0x20) == b) return 1;
+	return 0;
+}
 
 void walk_tree (Present *pr, MatList *node, int depth)
 {
 	if (0 == depth) return;
 	depth --;
+	pr->cnt ++;
 
 	MatList *gen = pr->generators;
 	while (gen)
 	{
+		/* Do not concatent matrix to its inverse -- skip these words */
+		if (isinv (node->last[0], gen->str[0]))
+		{
+			gen = gen->next;
+			continue;
+		}
+
+		/* concatenate matrixes, make a new word */
 		Matrix *mat = matrix_new (node->mat->dim);
 		matrix_mult (mat, node->mat, gen->mat);
 
-		pr->words = matlist_prepend (pr->words, mat, node->str, gen->str[0]);	
+		/* Have we seen this word before ? */
+		MatList *match = matlist_find (pr->words, mat);
+		if (match)
+		{
+			pr->presentation = matlist_prepend (pr->presentation, mat, node->str, gen->str[0]);	
+
+			/* add forward and backward links */
+			match->match = pr->presentation;
+			pr->presentation->match = match;
+			pr->found ++;
+
+			printf ("got one! %d %s == (%s %c)\n", pr->found, match->str, node->str, gen->str[0]);
+		}
+		else
+		{
+			/* unknown. keep going */
+			pr->words = matlist_prepend (pr->words, mat, node->str, gen->str[0]);	
+			walk_tree (pr, pr->words, depth);
+		}
+
 		gen = gen->next;
 	}
 }
@@ -147,6 +190,9 @@ Present * setup_b3 (void)
 	Present *pr = (Present *) malloc (sizeof (Present));
 	pr->generators = NULL;
 	pr->words = NULL;
+	pr->presentation = NULL;
+	pr->cnt =0;
+	pr->found = 0;
 
 
 	/* identity matrix */
@@ -196,5 +242,7 @@ Present * setup_b3 (void)
 main ()
 {
 	Present *pr = setup_b3();
-	walk_tree (pr, pr->words, 3);
+	walk_tree (pr, pr->words, 5);
+
+	printf ("tested %d words\n", pr->cnt);
 }
