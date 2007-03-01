@@ -160,9 +160,11 @@ char * make_str (MatList *word)
 {
 	int la = strlen (word->str);
 	int lb = strlen (word->match->str);
+	lb --; // strip off leading E
+	la --;
 
 	char *e = malloc (la+lb+1);
-	strcpy (e, word->str);
+	strcpy (e, &word->str[1]);   // be sure to srip off leading E
 	while (lb)
 	{
 		e[la] = 0x20 ^ word->match->str[lb];
@@ -187,14 +189,29 @@ static int is_cyclic_off (char *a, char * b, size_t offset)
 	return 1;
 }
 
+/* check to see if its a cyclic reversed reordering */
+static int is_cyclic_rev (char *a, char * b, size_t offset)
+{
+	char * p = b+offset;
+	while (*a)
+	{
+		if (*a != (0x20^(*p))) return 0;
+		a++;
+		if (b == p) p = b+strlen(b);
+		p--;
+	}
+	return 1;
+}
+
 int is_cyclic (char *a, char * b, size_t len)
 {
 	size_t i;
 	for (i=0; i<len; i++)
 	{
-		if (0 == is_cyclic_off (a,b,i)) return 0;
+		if (1 == is_cyclic_off (a,b,i)) return 1;
+		if (1 == is_cyclic_rev (a,b,i)) return 1;
 	}
-	return 1;
+	return 0;
 }
 
 /* If the word appears in the list of known words, then return true, else false */
@@ -566,7 +583,7 @@ main ()
 	int depth;
 	Present *pr;
 
-	for (depth=5; ; depth++)
+	for (depth=4; ; depth++)
 	{
 		printf ("start depth=%d\n", depth);
 		// pr = setup_braid3();
