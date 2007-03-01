@@ -32,6 +32,25 @@ void matrix_set (Matrix *mat, int m, int n, int val)
 	MELT(mat,m,n) = val;
 }
 
+void matrix_copy (Matrix *to, Matrix *from)
+{
+	int m,n;
+	for (m=0; m<from->dim; m++)
+	{
+		for (n=0; n<from->dim; n++)
+		{
+			MELT(to,m,n) = MELT(from, m,n);
+		}
+	}
+}
+
+Matrix * matrix_dup (Matrix *from)
+{
+	Matrix *mat = matrix_new (from->dim);
+	matrix_copy (mat, from);
+	return mat;
+}
+
 void matrix_mult (Matrix *prod, Matrix *a, Matrix *b)
 {
 	int m,n,p;
@@ -72,12 +91,16 @@ struct _mlist {
 	char *str;
 };
 
-MatList *matlist_prepend (MatList *ml, Matrix *mat, char *str)
+MatList *matlist_prepend (MatList *ml, Matrix *mat, char *str, char letter)
 {
 	MatList *node = (MatList *)malloc(sizeof (MatList));
 	node->mat = mat;
 	node->next = ml;
-	node->str = strdup(str);
+	int len = strlen(str);
+	node->str = malloc (len+2);
+	strcpy(node->str, str);
+	node->str[len] = letter;
+	node->str[len+1] = 0x0;
 
 	return node;
 }
@@ -101,11 +124,26 @@ typedef struct _present {
 	MatList *words;
 } Present;
 
+void walk_tree (Present *pr, MatList *node, int depth)
+{
+	if (0 == depth) return;
+	depth --;
+
+	MatList *gen = pr->generators;
+	while (gen)
+	{
+		Matrix *mat = matrix_new (node->mat->dim);
+		matrix_mult (mat, node->mat, gen->mat);
+
+		pr->words = matlist_prepend (pr->words, mat, node->str, gen->str[0]);	
+		gen = gen->next;
+	}
+}
+
 /* ---------------------------------------------------- */
 
 Present * setup_b3 (void)
 {
-
 	Present *pr = (Present *) malloc (sizeof (Present));
 	pr->generators = NULL;
 	pr->words = NULL;
@@ -117,7 +155,7 @@ Present * setup_b3 (void)
 	MELT(e, 0,1) = 0;
 	MELT(e, 1,0) = 0;
 	MELT(e, 1,1) = 1;
-	pr->words = matlist_prepend (NULL, e, "E");
+	pr->words = matlist_prepend (NULL, e, "", 'E');
 	
 	MatList *ml = NULL;
 
@@ -127,14 +165,14 @@ Present * setup_b3 (void)
 	MELT(s1, 0,1) = 1;
 	MELT(s1, 1,0) = 0;
 	MELT(s1, 1,1) = 1;
-	ml = matlist_prepend (ml, s1, "A");
+	ml = matlist_prepend (ml, s1, "", 'A');
 	
 	Matrix *s2 = matrix_new (2);
 	MELT(s2, 0,0) = 1;
 	MELT(s2, 0,1) = 0;
 	MELT(s2, 1,0) = -1;
 	MELT(s2, 1,1) = 1;
-	ml = matlist_prepend (ml, s2, "B");
+	ml = matlist_prepend (ml, s2, "", 'B');
 	
 	/* and now thier inverses (by hand) */
 	s1 = matrix_new (2);
@@ -142,14 +180,14 @@ Present * setup_b3 (void)
 	MELT(s1, 0,1) = -1;
 	MELT(s1, 1,0) = 0;
 	MELT(s1, 1,1) = 1;
-	ml = matlist_prepend (ml, s1, "a");
+	ml = matlist_prepend (ml, s1, "", 'a');
 	
 	s2 = matrix_new (2);
 	MELT(s2, 0,0) = 1;
 	MELT(s2, 0,1) = 0;
 	MELT(s2, 1,0) = 1;
 	MELT(s2, 1,1) = 1;
-	ml = matlist_prepend (ml, s2, "b");
+	ml = matlist_prepend (ml, s2, "", 'b');
 
 	pr->generators = ml;
 	return pr;
@@ -157,5 +195,6 @@ Present * setup_b3 (void)
 
 main ()
 {
-	setup_b3();
+	Present *pr = setup_b3();
+	walk_tree (pr, pr->words, 3);
 }
