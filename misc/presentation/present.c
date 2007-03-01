@@ -143,12 +143,14 @@ typedef struct _slist StrList;
 struct _slist {
 	StrList *next;
 	char * str;
+	size_t len;
 };
 
 StrList * slist_prepend (StrList *sl, char * str)
 {
 	StrList *head = (StrList *)malloc (sizeof(StrList));
 	head->str = str;
+	head->len = strlen (str);
 	head->next = sl;
 	return head;
 }
@@ -171,11 +173,40 @@ char * make_str (MatList *word)
 	return e;
 }
 
+/* check to see if its a cyclic reordering */
+static int is_cyclic_off (char *a, char * b, size_t offset)
+{
+	char * p = b+offset;
+	while (*a)
+	{
+		if (*a != *p) return 0;
+		a++;
+		p++;
+		if (0x0 == *p) p = b;
+	}
+	return 1;
+}
+
+int is_cyclic (char *a, char * b, size_t len)
+{
+	size_t i;
+	for (i=0; i<len; i++)
+	{
+		if (0 == is_cyclic_off (a,b,i)) return 0;
+	}
+	return 1;
+}
+
 /* If the word appears in the list of known words, then return true, else false */
 int slist_in_list (StrList *sl, char * word)
 {
+	int len = strlen (word);
 	while (sl)
 	{
+		if (len == sl->len)
+		{
+			if (is_cyclic (sl->str, word, len)) return 1;
+		}
 		sl= sl->next;
 	}
 	return 0;
@@ -270,6 +301,7 @@ void present_cleanup (Present *pr)
 		if (0 == slist_in_list(pr->unique, sword))
 		{
 			pr->unique = slist_prepend (pr->unique, sword);
+printf ("found unique %s\n", sword);
 		}
 		else
 		{
