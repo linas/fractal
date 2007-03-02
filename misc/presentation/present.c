@@ -175,7 +175,8 @@ char * make_str (MatList *word)
 	return e;
 }
 
-/* check to see if its a cyclic reordering */
+/* Check to see if string a is a subset of string b starting at offset 
+ * Cyclic embedding is assumed. Assume that b is equal or longer than a */
 static int is_cyclic_off (char *a, char * b, size_t offset)
 {
 	char * p = b+offset;
@@ -189,7 +190,8 @@ static int is_cyclic_off (char *a, char * b, size_t offset)
 	return 1;
 }
 
-/* check to see if its a cyclic reversed reordering */
+/* Check to see if string a shows up as an inverted substring of string b. 
+ * Cyclic embedding is assumed. Assume b is equal or longer than a */
 static int is_cyclic_rev (char *a, char * b, size_t offset)
 {
 	char * p = b+offset;
@@ -203,6 +205,9 @@ static int is_cyclic_rev (char *a, char * b, size_t offset)
 	return 1;
 }
 
+/* Check to see if string a or its revers is ebedded in string b.
+ * len should the the length of b, which should be equal to or longer than a.
+ */
 int is_cyclic (char *a, char * b, size_t len)
 {
 	size_t i;
@@ -227,6 +232,76 @@ int slist_in_list (StrList *sl, char * word)
 		sl= sl->next;
 	}
 	return 0;
+}
+
+/* ---------------------------------------------------- */
+/* trim -- return new string, equal to a, with letters starting at 
+ * off removed, running for length len */
+char * trim_off (char * a, size_t off, size_t len)
+{
+	size_t olen = strlen(a);
+	char * cp = malloc (olen-len+1);
+	if (off+len <= olen)
+	{
+		strncpy(cp,a,off);
+		cp[off] = 0x0;
+		a += off+len;
+		strcat (cp, a);
+		return cp;
+	}	
+	else
+	{
+printf ("not implemmented\n");
+	}
+	return NULL;
+}
+
+/* if string a appears inside of string b, then a new string is returned, 
+ * where a has been cut out from b. The len argument should be length of b.
+ */
+char * do_trim (char *a, char * b, size_t len)
+{
+	size_t i;
+	for (i=0; i<len; i++)
+	{
+		if (1 == is_cyclic_off (a,b,i))
+		{
+			return trim_off (b, i, strlen (a)); 
+		}
+	}
+	return NULL;
+}
+
+/* If the word contains a substring that already appears in the list of known words, 
+ * then the word is trimmed. */
+char * do_trim_to_slist (StrList *sl, char * word)
+{
+	int len = strlen (word);
+	while (sl)
+	{
+		if (len > sl->len)
+		{
+			char * shorte = do_trim (sl->str, word, len);
+			if (shorte) return shorte;
+		}
+		sl= sl->next;
+	}
+	return NULL;
+}
+
+char * trim_to_slist (StrList *sl, char * word)
+{
+	char * shorte = NULL;
+	while (1)
+	{
+		char *even_shorter = do_trim_to_slist(sl,word);
+		if (NULL == even_shorter) return shorte;
+
+		if (shorte) free(shorte);
+		shorte = even_shorter;
+		word = shorte;
+	}
+	return shorte;
 }
 
 /* ---------------------------------------------------- */
@@ -317,13 +392,19 @@ void present_cleanup (Present *pr)
 		char * sword = make_str (word);
 		if (0 == slist_in_list(pr->unique, sword))
 		{
-			pr->unique = slist_prepend (pr->unique, sword);
 printf ("found unique %s\n", sword);
+			pr->unique = slist_prepend (pr->unique, sword);
 		}
 		else
 		{
+			char * shorte = trim_to_slist (pr->unique, sword);
+			if (shorte)
+			{
+printf ("found short=%s\n", shorte);
+			}
 			free(sword);
 		}
+
 		word = word->next;
 	}
 }
@@ -583,7 +664,7 @@ main ()
 	int depth;
 	Present *pr;
 
-	for (depth=4; ; depth++)
+	for (depth=5; ; depth++)
 	{
 		printf ("start depth=%d\n", depth);
 		// pr = setup_braid3();
