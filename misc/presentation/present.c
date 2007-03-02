@@ -219,16 +219,14 @@ int is_cyclic (char *a, char * b, size_t len)
 	return 0;
 }
 
-/* If the word appears in the list of known words, then return true, else false */
+/* If the word contains a substring that is in the list of known words, 
+ * then return true, else false */
 int slist_in_list (StrList *sl, char * word)
 {
 	int len = strlen (word);
 	while (sl)
 	{
-		if (len == sl->len)
-		{
-			if (is_cyclic (sl->str, word, len)) return 1;
-		}
+		if (is_cyclic (sl->str, word, len)) return 1;
 		sl= sl->next;
 	}
 	return 0;
@@ -281,6 +279,7 @@ char * do_trim_to_slist (StrList *sl, char * word)
 	{
 		if (len > sl->len)
 		{
+printf ("duude try this %s in %s ??\n", sl->str, word);
 			char * shorte = do_trim (sl->str, word, len);
 			if (shorte) return shorte;
 		}
@@ -308,6 +307,7 @@ char * trim_to_slist (StrList *sl, char * word)
 /* master struct */
 
 typedef struct _present {
+	int dim;
 	MatList *generators;    // list of group generators (and thier inverses)
 	MatList *words;         // list of words tested so far 
 	MatList *presentation;  // presentation of group so far.
@@ -330,6 +330,7 @@ Present * present_new (int dim)
 	Matrix *e = matrix_new (dim);
 	matrix_unit (e);
 	pr->words = matlist_prepend (NULL, e, "", 'E');
+	pr->dim = dim;
 
 	return pr;
 }
@@ -371,7 +372,7 @@ void present_walk_tree (Present *pr, MatList *node, int depth)
 			pr->presentation->match = match;
 			pr->found ++;
 
-			printf ("got one! %d %s == (%s %c)\n", pr->found, match->str, node->str, gen->str[0]);
+			// printf ("got one! %d %s == (%s %c)\n", pr->found, match->str, node->str, gen->str[0]);
 		}
 		else
 		{
@@ -664,17 +665,26 @@ main ()
 	int depth;
 	Present *pr;
 
-	for (depth=5; ; depth++)
+	// pr = setup_braid3();
+	// pr = setup_heisenberg();
+	pr = setup_trilog();
+	// pr = setup_quadlog();
+	// pr = setup_pentalog();
+
+	for (depth=2; depth <6 ; depth++)
 	{
 		printf ("start depth=%d\n", depth);
-		// pr = setup_braid3();
-		// pr = setup_heisenberg();
-		pr = setup_trilog();
-		// pr = setup_quadlog();
-		// pr = setup_pentalog();
 		present_walk_tree (pr, pr->words, depth);
 		present_cleanup (pr);
-		if (pr->found) break;
+
+		/* now do another go-around */
+		pr->presentation = NULL;  // XXX should be a free 
+		pr->words = NULL; // XXX should be free
+
+		/* identity matrix */
+		Matrix *e = matrix_new (pr->dim);
+		matrix_unit (e);
+		pr->words = matlist_prepend (NULL, e, "", 'E');
 	}
 
 	printf ("tested %d words\n", pr->cnt);
