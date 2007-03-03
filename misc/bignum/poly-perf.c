@@ -63,12 +63,12 @@ main (int argc, char * argv[])
 
 		struct tms start, end;
 
-// #define MEASURE_POLYLOG_PERFORMANCE 1
+#define MEASURE_POLYLOG_PERFORMANCE 1
 #ifdef MEASURE_POLYLOG_PERFORMANCE
 		cpx_set_d (ess, 0.5, 14.134725);
 		cpx_set_d (zee, 0.4, 0.3);
 
-#if 1
+#if 0
 		/* First we warm the cache */
 		times (&start);
 		cpx_polylog (zeta, ess, zee, prec);
@@ -79,6 +79,21 @@ main (int argc, char * argv[])
 		times (&start);
 		for (i=0; i<1000; i++)
 			cpx_polylog (zeta, ess, zee, prec);
+		times (&end);
+		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
+#endif
+
+#if 1
+		/* First we warm the cache */
+		times (&start);
+		cpx_polylog_euler (zeta, ess, zee, prec);
+		times (&end);
+		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
+		
+		/* Then with a hot cache */
+		times (&start);
+		for (i=0; i<1000; i++)
+			cpx_polylog_euler (zeta, ess, zee, prec);
 		times (&end);
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
 #endif
@@ -101,7 +116,7 @@ main (int argc, char * argv[])
 		printf ("\n");
 #endif
 
-#define MEASURE_HURWITZ_PERFORMANCE
+// #define MEASURE_HURWITZ_PERFORMANCE
 #ifdef MEASURE_HURWITZ_PERFORMANCE
 		cpx_set_d (ess, 0.5, 14.134725);
 		cpx_set_d (zee, 0.2, 0.0);
