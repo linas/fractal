@@ -1239,6 +1239,7 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 	{
 		powcache = next_cache;
 		cpx_one_d_cache_clear (powcache);
+		cpx_one_d_cache_check (powcache, 4);
 		mpf_set(*next_q, q);
 	}
 
@@ -1253,32 +1254,63 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 
 void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 {
-	DECLARE_CPX_CACHE (powcache);
-	static cpx_t cache_q;
+	DECLARE_CPX_CACHE (powcache_one);
+	DECLARE_CPX_CACHE (powcache_two);
+	static cpx_t cache_q_one, cache_q_two;
 	static int precision = 0;
+	static cpx_cache *next_cache;
+	static cpx_t *next_q;
 
 	if (!precision)
 	{
-		cpx_init (cache_q);
+		cpx_init (cache_q_one);
+		cpx_init (cache_q_two);
+		next_cache = &powcache_one;
+		next_q = &cache_q_one;
 	}
 
 	if (precision < prec)
 	{
 		precision = prec;
-		cpx_set_prec (cache_q, 3.322*prec+50);
+		cpx_set_prec (cache_q_one, 3.322*prec+50);
+		cpx_set_prec (cache_q_two, 3.322*prec+50);
+		cpx_one_d_cache_clear (&powcache_one);
+		cpx_one_d_cache_clear (&powcache_two);
 	}
 
-	if (!cpx_eq(q,cache_q, prec*3.322))
+	cpx_cache *powcache = NULL;
+	if (cpx_eq(q,cache_q_one, prec*3.322))
 	{
-		cpx_one_d_cache_clear (&powcache);
-		cpx_set(cache_q,q);
+		powcache = &powcache_one;
+		if (prec <= cpx_one_d_cache_check (powcache, k))
+		{
+			cpx_one_d_cache_fetch (powcache, powc, k);
+			return;
+		}
+		next_cache = &powcache_two;
+		next_q = &cache_q_two;
+	}
+	
+	if (cpx_eq(q,cache_q_two, prec*3.322))
+	{
+		powcache = &powcache_two;
+		if (prec <= cpx_one_d_cache_check (powcache, k))
+		{
+			cpx_one_d_cache_fetch (powcache, powc, k);
+			return;
+		}
+		next_cache = &powcache_one;
+		next_q = &cache_q_one;
+	}
+	
+	if (NULL == powcache)
+	{
+		powcache = next_cache;
+		cpx_one_d_cache_clear (powcache);
+		cpx_one_d_cache_check (powcache, 4);
+		cpx_set(*next_q, q);
 	}
 
-	if (prec <= cpx_one_d_cache_check (&powcache, k))
-	{
-		cpx_one_d_cache_fetch (&powcache, powc, k);
-		return;
-	}
 	
 	cpx_t kq;
 	cpx_init (kq);
@@ -1287,7 +1319,7 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 	cpx_pow (powc, kq, ess, prec);
 	cpx_clear (kq);
 
-	cpx_one_d_cache_store (&powcache, powc, k, prec);
+	cpx_one_d_cache_store (powcache, powc, k, prec);
 }
 
 /* =============================== END OF FILE =========================== */
