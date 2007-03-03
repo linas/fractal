@@ -1203,6 +1203,174 @@ int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
 
 /* ============================================================= */
 /**
+ * cpx_polylog_sum -- compute the polylogarithm by direct summation
+ *
+ * Caches intermediate results, so that overall performance is
+ * considerably better if z is varied while s is held fixed.
+ *
+ * The magnitude of z must be less than one.
+ */
+
+void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
+{
+	int n;
+
+	cpx_t s, z, zp, term;
+	cpx_init (s);
+	cpx_init (z);
+	cpx_init (zp);
+	cpx_init (term);
+
+	cpx_set (s, ess);
+	cpx_set (z, zee);
+	cpx_set (zp, zee);
+	cpx_set_ui (plog, 0, 0);
+
+	/* Estimate the number of terms needed to sum over */
+	double mag = polylog_modsq (zee);
+	
+	/* Domain error, should be less than one */
+	if (1.0 <= mag)
+	{
+		fprintf (stderr, "cpx_polylog_sum(): Domain error, |z|=%g\n", sqrt(mag)); 
+		return;
+	}
+	
+	int nterms = -2.0 * prec *2.302585093 / log(mag);
+	for (n=1; n<nterms; n++)
+	{
+		cpx_ui_pow_cache (term, n, s, prec);
+		cpx_div (term, zp, term);
+
+		cpx_add (plog, plog, term);
+		cpx_mul (zp, zp, z);
+	}
+
+	cpx_clear (s);
+	cpx_clear (z);
+	cpx_clear (zp);
+	cpx_clear (term);
+}
+
+/* ============================================================= */
+/**
+ * cpx_polylog_nint -- compute the polylogarithm at negetive integers
+ *
+ * At the negative integers, the polylog is a rational function,
+ * meromorphic everywhere except for multiple poles at z=1.
+ */
+
+void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
+{
+	int k;
+
+	mpz_t stir, fac;
+	mpz_init (stir);
+	mpz_init (fac);
+
+	cpx_t z, zp, term;
+	cpx_init (z);
+	cpx_init (zp);
+	cpx_init (term);
+
+	cpx_set (z, zee);
+	cpx_sub_ui (zp, zee, 1, 0);
+	cpx_recip (zp, zp);
+
+	if (0 == negn)
+	{
+		cpx_mul (plog, z, zp);
+		cpx_neg (plog, plog);
+	}
+	else
+	{
+		cpx_set_ui (plog, 0, 0);
+		mpz_set_ui (fac, 1);
+		cpx_set (z, zp);
+		for (k=1; k<= negn+1; k++)
+		{
+			i_stirling_second (stir, negn+1, k);
+			mpz_mul (stir, stir, fac);
+			mpf_set_z (term[0].re, stir);
+			mpf_set_ui (term[0].im, 0);
+
+			cpx_mul (term, term, zp);
+	
+			cpx_add (plog, plog, term);
+			cpx_mul (zp, zp, z);
+			mpz_mul_ui (fac, fac, k);
+		}
+
+		if (0==negn%2)
+		{
+			cpx_neg (plog, plog);
+		}
+	}
+
+	cpx_clear (z);
+	cpx_clear (zp);
+	cpx_clear (term);
+	mpz_clear (stir);
+	mpz_clear (fac);
+}
+
+/* ============================================================= */
+/**
+ * cpx_polylog_euler -- compute the polylogarithm from Hurwiitz Euler.
+ *
+ * Combine two Hurwitz Euler-Maclaurin evaluations to obtain the polylogarithm.
+ */
+
+void cpx_polylog_euler (cpx_t zeta, const cpx_t ess, const cpx_t zee, int prec)
+{
+	mpf_t twopi;
+	mpf_init (twopi);
+	fp_two_pi (twopi, prec);
+
+	cpx_t s, q, tmp, ph;
+	cpx_init (s);
+	cpx_init (q);
+	cpx_init (tmp);
+	cpx_init (ph);
+	cpx_ui_sub (s, 1, 0, ess);
+
+	/* Compute q = ln z/(2pi i) */
+	cpx_log (q, zee, prec);
+	cpx_div_mpf (q, q, twopi);
+	cpx_times_i (q, q);
+	cpx_neg (q,q);
+
+	/* compute exp (i pi s/2) */
+	cpx_times_mpf (tmp, s, twopi);
+	cpx_times_i (tmp, tmp);
+	cpx_div_ui (tmp, tmp, 4);
+	cpx_exp (ph, tmp, prec);
+
+	/* exp (i pi s/2) * zeta (s,q) */
+	cpx_hurwitz_euler (zeta, s, q, prec);
+	cpx_mul (tmp, zeta, ph);
+
+	/* exp (-i pi s/2) * zeta (s,1-q) */
+	cpx_ui_sub (q, 1, 0, q);
+	cpx_hurwitz_euler (zeta, s, q, prec);
+	cpx_div (zeta, zeta, ph);
+	cpx_add (zeta, zeta, tmp);
+
+	/* gamma(s) / (2pi)^s */
+	cpx_gamma_cache (tmp, s, prec);
+	cpx_mul (zeta, zeta, tmp);
+	cpx_mpf_pow (tmp, twopi, s, prec);
+	cpx_div (zeta, zeta, tmp);
+
+	cpx_clear (q);
+	cpx_clear (s);
+	cpx_clear (tmp);
+	cpx_clear (ph);
+	mpf_clear (twopi);
+}
+
+/* ============================================================= */
+/**
  * cpx_periodic_zeta -- Periodic zeta function 
  *
  * F(s,q) = sum_{n=1}^infty exp(2pi iqn)/ n^s
@@ -1623,119 +1791,6 @@ punt:
 	cpx_clear (term);
 	mpf_clear (aterm);
 	mpf_clear (maxterm);
-}
-
-/* ============================================================= */
-/**
- * cpx_polylog_sum -- compute the polylogarithm by direct summation
- *
- * Caches intermediate results, so that overall performance is
- * considerably better if z is varied while s is held fixed.
- *
- * The magnitude of z must be less than one.
- */
-
-void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec)
-{
-	int n;
-
-	cpx_t s, z, zp, term;
-	cpx_init (s);
-	cpx_init (z);
-	cpx_init (zp);
-	cpx_init (term);
-
-	cpx_set (s, ess);
-	cpx_set (z, zee);
-	cpx_set (zp, zee);
-	cpx_set_ui (plog, 0, 0);
-
-	/* Estimate the number of terms needed to sum over */
-	double mag = polylog_modsq (zee);
-	
-	/* Domain error, should be less than one */
-	if (1.0 <= mag)
-	{
-		fprintf (stderr, "cpx_polylog_sum(): Domain error, |z|=%g\n", sqrt(mag)); 
-		return;
-	}
-	
-	int nterms = -2.0 * prec *2.302585093 / log(mag);
-	for (n=1; n<nterms; n++)
-	{
-		cpx_ui_pow_cache (term, n, s, prec);
-		cpx_div (term, zp, term);
-
-		cpx_add (plog, plog, term);
-		cpx_mul (zp, zp, z);
-	}
-
-	cpx_clear (s);
-	cpx_clear (z);
-	cpx_clear (zp);
-	cpx_clear (term);
-}
-
-/* ============================================================= */
-/**
- * cpx_polylog_nint -- compute the polylogarithm at negetive integers
- *
- * At the negative integers, the polylog is a rational function,
- * meromorphic everywhere except for multiple poles at z=1.
- */
-
-void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
-{
-	int k;
-
-	mpz_t stir, fac;
-	mpz_init (stir);
-	mpz_init (fac);
-
-	cpx_t z, zp, term;
-	cpx_init (z);
-	cpx_init (zp);
-	cpx_init (term);
-
-	cpx_set (z, zee);
-	cpx_sub_ui (zp, zee, 1, 0);
-	cpx_recip (zp, zp);
-
-	if (0 == negn)
-	{
-		cpx_mul (plog, z, zp);
-		cpx_neg (plog, plog);
-	}
-	else
-	{
-		cpx_set_ui (plog, 0, 0);
-		mpz_set_ui (fac, 1);
-		cpx_set (z, zp);
-		for (k=1; k<= negn+1; k++)
-		{
-			i_stirling_second (stir, negn+1, k);
-			mpz_mul (stir, stir, fac);
-			mpf_set_z (term[0].re, stir);
-			mpf_set_ui (term[0].im, 0);
-
-			cpx_mul (term, term, zp);
-	
-			cpx_add (plog, plog, term);
-			cpx_mul (zp, zp, z);
-			mpz_mul_ui (fac, fac, k);
-		}
-
-		if (0==negn%2)
-		{
-			cpx_neg (plog, plog);
-		}
-	}
-
-	cpx_clear (z);
-	cpx_clear (zp);
-	cpx_clear (term);
-	mpz_clear (stir);
-	mpz_clear (fac);
 }
 
 /* =========================================================== */

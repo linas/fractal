@@ -60,6 +60,13 @@ void cpx_polylog_sum (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
 int cpx_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, int prec);
 
 /**
+ * cpx_polylog_euler -- compute the polylogarithm from Hurwiitz Euler.
+ *
+ * Combine two Hurwitz Euler-Maclaurin evaluations to obtain the polylogarithm.
+ */
+void cpx_polylog_euler (cpx_t zeta, const cpx_t ess, const cpx_t zee, int prec);
+
+/**
  * cpx_polylog_sheet -- give the branch difference for the polylog
  * M is the monodromy number of going around z=0
  * N is the monodromy number of going around z=1
