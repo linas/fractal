@@ -34,7 +34,7 @@ Linas Vep\i \v{s}
 tas
 \layout Date
 
-12 October 2006, revised 25 February 2007
+12 October 2006, revised 3 March 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -110,10 +110,18 @@ An efficient algorithm for computing the Riemann zeta function
  The speed of the algorithm is significantly superior to a Taylor's series
  for the evaluation of the Hurwitz zeta; quadratically so when a large number
  of digits of precision is required.
+\layout Abstract
+
+These functions may also be evaluated by means of an Euler-Maclaurin sum.
+ It appears that the Euler-Maclaurin sum offers a particularly simple and
+ speedy algorithm, and seems to be the best choice for computations.
  The primary, concrete result of this paper is an algorithm allows the explorati
 on of the Hurwitz zeta in the critical strip, where fast algorithms are
  otherwise unavailable.
- A discussion of the monodromy group of the polylogarithm is included.
+ 
+\layout Abstract
+
+A discussion of the monodromy group of the polylogarithm is included.
 \layout Subjectclass
 
 65B10 (primary), 11M35, 11Y35, 33F05, 68W25
@@ -420,6 +428,17 @@ The primary effort of this paper is to take the algorithm given by Borwein
 \end_inset 
 
 .
+\layout Standard
+
+An alternate approach to evaluating the Hurwitz zeta is to perform an Euler-Macl
+aurn summation.
+ 
+\layout Standard
+
+XXX Its fast, very fast, faster than the Borwein aglo.
+\layout Standard
+
+XXX Finish writing this part XXX Thanks to XXX for pointing this out XXX
 \layout Standard
 
 The development of this paper proceeds as follows.
@@ -1902,6 +1921,19 @@ j\end{array}\right)$
  use of the duplication formula, as discussed in the next section.
 \layout Section
 
+Euler-MacLaurin Summation
+\layout Standard
+
+The Euler-Maclaurin series provides a an alternative algorithm for evaluating
+ the Hurwitz zeta that proves to be very rapid.
+\layout Standard
+
+XXX
+\layout Standard
+
+write this section
+\layout Section
+
 Performance
 \layout Standard
 
@@ -2125,8 +2157,8 @@ Hurwitz zeta cold cache performance
 
 \layout Standard
 
-This figure compares the performance of the Borwein algorithm to the evaluation
- of the Taylor expansion for the Hurwitz zeta.
+This figure compares the performance of Euler-Maclaurin summation, the Borwein
+ algorithm, and the evaluation of the Taylor expansion for the Hurwitz zeta.
  The vales computed are for 
 \begin_inset Formula $s=0.5+i14.13$
 \end_inset 
@@ -2160,25 +2192,6 @@ cold cache
  The Borwein algorithm can be seen to be more than an order of magnitude
  faster for lower precisions, and more than two orders of magnitude faster
  for the higher precisions.
-\layout Standard
-
-The power-law performance appears to be about 
-\begin_inset Formula $T\approx\mathcal{O}\left(D^{2.5}\right)$
-\end_inset 
-
- and 
-\begin_inset Formula $T\approx\mathcal{O}\left(D^{3.5}\right)$
-\end_inset 
-
- respectively, to compute 
-\begin_inset Formula $D$
-\end_inset 
-
- decimal digits in time 
-\begin_inset Formula $T$
-\end_inset 
-
-.
 \end_inset 
 
 
@@ -2204,8 +2217,9 @@ Hurwitz zeta warm cache performance
 
 \layout Standard
 
-This figure compares the evaluation times for the Borwein algorithm, and
- the Hurwitz zeta Taylor's expansion, for the 
+This figure compares the evaluation times for Euler-Maclaurin summation,
+ the Borwein algorithm, and the Hurwitz zeta Taylor's expansion, for the
+ 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -2234,20 +2248,27 @@ n\end{array}\right)$
 \end_inset 
 
  appearing in the Taylor's series may be pre-computed.
- In this case, the Taylor's series evaluation appears to be about eight
- times faster.
- 
+\layout Standard
+
+For this value of 
+\begin_inset Formula $q$
+\end_inset 
+
+, the Borwein algorithm requires two evaluations of the polylogarithm; values
+ of 
+\begin_inset Formula $q$
+\end_inset 
+
+ closer to 0.5 would require only one.
+ The Taylor's series evaluation appears to be about eight times faster than
+ these two evaluations, or four times faster than one.
 \layout Standard
 
 The power-law performance appears to be about 
 \begin_inset Formula $T\approx\mathcal{O}\left(D^{1.7}\right)$
 \end_inset 
 
- and 
-\begin_inset Formula $T\approx\mathcal{O}\left(D^{1.6}\right)$
-\end_inset 
-
- respectively, to compute 
+ to compute 
 \begin_inset Formula $D$
 \end_inset 
 
@@ -2259,20 +2280,12 @@ The power-law performance appears to be about
 \layout Standard
 
 Performing the pre-computations can be terribly expensive.
- For example, for 300 decimal places of precision, the pre-computations
- take 13 minutes.
- The break-even point, where both algorithms are equally fast at fixed 
+ The first evaluation of the function can take 100 or 1000 times longer
+ than subsequent evaluations at the same value of 
 \begin_inset Formula $s$
 \end_inset 
 
-, when including the pre-computation overhead, occurs at about 600 evaluations
- of 300 decimal places.
- Unless one is making a very large number of evaluations at fixed 
-\begin_inset Formula $s$
-\end_inset 
-
-, the pre-computation needed for the Taylor's expansion becomes prohibitively
- expensive as the number of desired decimal places goes up.
+.
 \end_inset 
 
 
