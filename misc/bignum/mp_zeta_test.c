@@ -1250,6 +1250,74 @@ int test_polylog_series (int nterms, int prec)
 
 /* ==================================================================== */
 /** 
+ * test_polylog_euler() -- compare the two difference polylog algos.
+ *
+ * Works great. Just note that the Borwein-style sums fail near z=1,
+ * and so we avoid this area. Note also the summation gets meg slow
+ * when z gets too close to the unit circle.
+ */
+int test_polylog_euler (int nterms, int prec)
+{
+	int rc;
+	int nfaults = 0;
+
+	/* Set up max allowed error */
+	mpf_t epsi;
+	mpf_init (epsi);
+	fp_epsilon (epsi, prec-5);
+
+	cpx_t plog, psum, term, zee, ess;
+	cpx_init (plog);
+	cpx_init (psum);
+	cpx_init (zee);
+	cpx_init (ess);
+	cpx_init (term);
+
+	cpx_set_ui (ess, 0.9124444431, 12.1234077777);
+
+	double erms = 1.0/sqrt (nterms);
+	
+	double r;
+	for (r=0.0623746562; r<0.9; r+=0.9*erms +0.01052892347222)
+	{
+		double q;
+		for (q=0.21111176486599; q<0.8; q+= 0.6*erms+0.00999856581)
+		{
+			double rez = r * cos (2.0*M_PI*q);
+			double imz = r * sin (2.0*M_PI*q);
+			cpx_set_d (zee, rez, imz);
+			
+			cpx_polylog_euler (psum, ess, zee, prec);
+			rc = cpx_polylog (plog, ess, zee, prec);
+			cpx_sub (plog, plog, psum);
+		
+			/* returned value is good iff rc == 0 */
+			if (0 == rc)
+				nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, r, q);
+		}
+	}
+
+	cpx_clear (plog);
+	cpx_clear (psum);
+	cpx_clear (zee);
+	cpx_clear (ess);
+	cpx_clear (term);
+
+	mpf_clear (epsi);
+
+	if (0 == nfaults)
+	{
+		fprintf(stderr, "Polylog Euler-Maclaurin test passed!\n");
+	}
+	else 
+	{
+		fprintf(stderr, "Polylog Euler-Maclaurin test FAILED!\n");
+	}
+	return nfaults;
+}
+
+/* ==================================================================== */
+/** 
  * test_periodic_zeta() -- compare periodic zeta to Riemann zeta
  * 
  * As of 22 December 2006, this test is passing, with flying colors
@@ -1826,6 +1894,7 @@ int main (int argc, char * argv[])
 	nfaults += test_polylog (nterms, prec, 0);
 	nfaults += test_polylog (nterms, prec, 1);
 	nfaults += test_polylog_series (nterms, prec);
+	nfaults += test_polylog_euler (nterms, prec);
  	nfaults += test_periodic_zeta (nterms, prec);
 	nfaults += test_complex_pow (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
