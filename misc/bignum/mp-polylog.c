@@ -1323,50 +1323,90 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
 
 void cpx_polylog_euler (cpx_t zeta, const cpx_t ess, const cpx_t zee, int prec)
 {
-	mpf_t twopi;
-	mpf_init (twopi);
-	fp_two_pi (twopi, prec);
-
-	cpx_t s, q, tmp, ph;
-	cpx_init (s);
+	cpx_t q, tmp;
 	cpx_init (q);
 	cpx_init (tmp);
-	cpx_init (ph);
-	cpx_ui_sub (s, 1, 0, ess);
+
+	/* Create a cache of commonly re-used values */
+	static int cache_prec = -1;
+
+	static mpf_t twopi, otp, log_twopi;
+	static cpx_t phase, scale, cache_ess, s;
+
+	if (-1 == cache_prec)
+	{
+		mpf_init (twopi);
+		mpf_init (otp);
+		mpf_init (log_twopi);
+
+		cpx_init (phase);
+		cpx_init (scale);
+		cpx_init (s);
+		cpx_init (cache_ess);
+		cpx_set_ui(cache_ess, 123123123, 321321321);
+	}
+
+	if (cache_prec != prec)
+	{
+		cache_prec = prec;
+		mpf_set_prec (twopi, 3.322*prec +50);
+		mpf_set_prec (otp, 3.322*prec +50);
+		mpf_set_prec (log_twopi, 3.322*prec +50);
+
+		cpx_set_prec (phase, 3.322*prec +50);
+		cpx_set_prec (scale, 3.322*prec +50);
+		cpx_set_prec (s, 3.322*prec +50);
+		cpx_set_prec (cache_ess, 3.322*prec +50);
+
+		fp_two_pi (twopi, prec);
+
+		/* otp = -1/2pi */
+		mpf_set_ui (otp, 1);
+		mpf_neg (otp, otp);
+		mpf_div (otp, otp, twopi);
+
+		fp_log (log_twopi, twopi, prec);
+	}
+
+	/* Recompute these values only if s differs from last time. */
+	if(!cpx_eq (ess, cache_ess, prec*3.322))
+	{
+		cpx_set (cache_ess, ess);
+		cpx_ui_sub (s, 1, 0, ess);
+
+		/* compute phase = e^{i pi s / 2} = (i)^s */
+		cpx_times_mpf (tmp, s, twopi);
+		cpx_div_ui (tmp, tmp, 4);
+		cpx_times_i (tmp, tmp);
+		cpx_exp (phase, tmp, prec);
+
+		/* scale = gamma(s) / (2pi)^s */
+		cpx_gamma_cache (scale, s, prec);
+		cpx_times_mpf (tmp, s, log_twopi);
+		cpx_neg (tmp, tmp);
+		cpx_exp (tmp, tmp, prec);
+		cpx_mul (scale, scale, tmp);
+	}
 
 	/* Compute q = ln z/(2pi i) */
 	cpx_log (q, zee, prec);
-	cpx_div_mpf (q, q, twopi);
+	cpx_times_mpf (q, q, otp);
 	cpx_times_i (q, q);
-	cpx_neg (q,q);
-
-	/* compute exp (i pi s/2) */
-	cpx_times_mpf (tmp, s, twopi);
-	cpx_times_i (tmp, tmp);
-	cpx_div_ui (tmp, tmp, 4);
-	cpx_exp (ph, tmp, prec);
 
 	/* exp (i pi s/2) * zeta (s,q) */
 	cpx_hurwitz_euler (zeta, s, q, prec);
-	cpx_mul (tmp, zeta, ph);
+	cpx_mul (tmp, zeta, phase);
 
 	/* exp (-i pi s/2) * zeta (s,1-q) */
 	cpx_ui_sub (q, 1, 0, q);
 	cpx_hurwitz_euler (zeta, s, q, prec);
-	cpx_div (zeta, zeta, ph);
+	cpx_div (zeta, zeta, phase);
 	cpx_add (zeta, zeta, tmp);
 
-	/* gamma(s) / (2pi)^s */
-	cpx_gamma_cache (tmp, s, prec);
-	cpx_mul (zeta, zeta, tmp);
-	cpx_mpf_pow (tmp, twopi, s, prec);
-	cpx_div (zeta, zeta, tmp);
+	cpx_mul (zeta, zeta, scale);
 
 	cpx_clear (q);
-	cpx_clear (s);
 	cpx_clear (tmp);
-	cpx_clear (ph);
-	mpf_clear (twopi);
 }
 
 /* ============================================================= */
