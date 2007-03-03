@@ -1080,10 +1080,12 @@ int test_polylog (int nterms, int prec, int which)
 			cpx_polylog_nint (plog, 0, zee);
 		} else {
 			rc = cpx_polylog (plog, ess, zee, prec);
+#if 0
 cpx_prt ("duude plog=", plog);
 printf ("\n");
 cpx_prt ("duude exac=", exact);
 printf ("\n");
+#endif
 		}
 		cpx_sub (plog, plog, exact);
 	
@@ -1258,7 +1260,6 @@ int test_polylog_series (int nterms, int prec)
  */
 int test_polylog_euler (int nterms, int prec)
 {
-	int rc;
 	int nfaults = 0;
 
 	/* Set up max allowed error */
@@ -1287,13 +1288,11 @@ int test_polylog_euler (int nterms, int prec)
 			double imz = r * sin (2.0*M_PI*q);
 			cpx_set_d (zee, rez, imz);
 			
-			cpx_polylog_euler (psum, ess, zee, prec);
-			rc = cpx_polylog (plog, ess, zee, prec);
+			cpx_polylog_sum (psum, ess, zee, prec);
+			cpx_polylog_euler (plog, ess, zee, prec);
 			cpx_sub (plog, plog, psum);
 		
-			/* returned value is good iff rc == 0 */
-			if (0 == rc)
-				nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog", 0, r, q);
+			nfaults = cpx_check_for_zero (nfaults, plog, epsi, "polylog-euler", 0, r, q);
 		}
 	}
 
@@ -1449,7 +1448,7 @@ int test_hurwitz_zeta (int nterms, int prec)
 		cpx_set_d (s, sre, 0);
 		for (que = qlo; que < qhi; que += (qhi-qlo+0.01835567)/nterms)
 		{
-printf ("start gsl hurwitz zeta test s=%g q=%g\n", sre, que);
+// printf ("start gsl hurwitz zeta test s=%g q=%g\n", sre, que);
 			mpf_set_d (q, que);
 			cpx_hurwitz_zeta (zl, s, q, prec);
 			double gz = gsl_sf_hzeta (sre, que);
@@ -1473,7 +1472,7 @@ printf ("start gsl hurwitz zeta test s=%g q=%g\n", sre, que);
 	{
 		for (sim = silo; sim < sihi; sim += (sihi-silo+0.01835567)/nterms)
 		{
-printf ("start hurwitz zeta test %g +i%g\n", sre, sim);
+// printf ("start hurwitz zeta test %g +i%g\n", sre, sim);
 			cpx_set_d (s, sre, sim);
 			cpx_hurwitz_zeta (zl, s, q, prec);
 			
@@ -1893,8 +1892,8 @@ int main (int argc, char * argv[])
 	nfaults += test_complex_riemann_zeta (nterms, prec);
 	nfaults += test_polylog (nterms, prec, 0);
 	nfaults += test_polylog (nterms, prec, 1);
-	nfaults += test_polylog_series (nterms, prec);
 	nfaults += test_polylog_euler (nterms, prec);
+	nfaults += test_polylog_series (nterms, prec);
  	nfaults += test_periodic_zeta (nterms, prec);
 	nfaults += test_complex_pow (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
