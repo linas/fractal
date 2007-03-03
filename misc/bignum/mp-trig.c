@@ -1177,7 +1177,8 @@ void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
  * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
  *
  * If q is held fixed, and k varied, then the values are cached,
- * allowing improved algorithm speeds.
+ * allowing improved algorithm speeds. Up to two distinct values
+ * of q are cached.
  *
  * Overall, though, this thing is pretty slow, as it requires
  * a logarithm, an exp, sin and cos to be computed, each of which
@@ -1185,40 +1186,69 @@ void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
  */
 void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 {
-	DECLARE_CPX_CACHE (powcache);
-	static mpf_t cache_q;
+	DECLARE_CPX_CACHE (powcache_one);
+	DECLARE_CPX_CACHE (powcache_two);
+	static mpf_t cache_q_one, cache_q_two;
 	static int precision = 0;
+	static cpx_cache *next_cache;
+	static mpf_t *next_q;
 
 	if (!precision)
 	{
-		mpf_init (cache_q);
+		mpf_init (cache_q_one);
+		mpf_init (cache_q_two);
+		next_cache = &powcache_one;
+		next_q = &cache_q_one;
 	}
 
 	if (precision < prec)
 	{
 		precision = prec;
-		mpf_set_prec (cache_q, 3.322*prec+50);
+		mpf_set_prec (cache_q_one, 3.322*prec+50);
+		mpf_set_prec (cache_q_two, 3.322*prec+50);
+		cpx_one_d_cache_clear (&powcache_one);
+		cpx_one_d_cache_clear (&powcache_two);
 	}
 
-	if (!mpf_eq(q,cache_q, prec*3.322))
+	cpx_cache *powcache = NULL;
+	if (mpf_eq(q,cache_q_one, prec*3.322))
 	{
-		cpx_one_d_cache_clear (&powcache);
-		mpf_set(cache_q,q);
-	}
-
-	if (prec <= cpx_one_d_cache_check (&powcache, k))
-	{
-		cpx_one_d_cache_fetch (&powcache, powc, k);
-		return;
+		powcache = &powcache_one;
+		if (prec <= cpx_one_d_cache_check (powcache, k))
+		{
+			cpx_one_d_cache_fetch (powcache, powc, k);
+			return;
+		}
+		next_cache = &powcache_two;
+		next_q = &cache_q_two;
 	}
 	
+	if (mpf_eq(q,cache_q_two, prec*3.322))
+	{
+		powcache = &powcache_two;
+		if (prec <= cpx_one_d_cache_check (powcache, k))
+		{
+			cpx_one_d_cache_fetch (powcache, powc, k);
+			return;
+		}
+		next_cache = &powcache_one;
+		next_q = &cache_q_one;
+	}
+	
+	if (NULL == powcache)
+	{
+		powcache = next_cache;
+		cpx_one_d_cache_clear (powcache);
+		mpf_set(*next_q, q);
+	}
+
 	mpf_t kq;
 	mpf_init (kq);
 	mpf_add_ui (kq, q, k);
 	cpx_mpf_pow (powc, kq, ess, prec);
 	mpf_clear (kq);
 
-	cpx_one_d_cache_store (&powcache, powc, k, prec);
+	cpx_one_d_cache_store (powcache, powc, k, prec);
 }
 
 void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
