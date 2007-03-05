@@ -395,7 +395,7 @@ static int recurse_away_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, i
 	 */
 	if (9 < depth)
 	{
-		// fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
+		fprintf (stderr, "excessive recursion (away) at z=%g+ i%g\n", zre, zim);
 		return 1;
 	}
 	depth ++;
@@ -446,7 +446,7 @@ static int recurse_away_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, i
 	int nbits = mpf_get_default_prec();
 	int maxterms = nbits - (int) (3.321928095 *prec); /* log(10) / log(2) */
 
-// printf ("invoke, z=%g +i %g  den=%g nterms=%d, maxterms=%d\n", zre, zim, den, nterms, maxterms);
+	// printf ("invoke-away, z=%g +i %g  den=%g nterms=%d, maxterms=%d\n", zre, zim, den, nterms, maxterms);
 	/* if (4> nterms) (i.e. nterms is negative), then the thing will
 	 * never converge, and so subdivision is the only option.
 	 * Uhh, this should be equivalent to den>15, and we already subdivide
@@ -457,7 +457,7 @@ static int recurse_away_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee, i
 	 */
 	if ((den > 1.5) || (maxterms < nterms))
 	{
-		// printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
+		// printf ("splitsville-away, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
 		rc = polylog_recurse_duple (plog, ess, zee, prec, depth);
 		/* 
 		 * The angle-tripling recursion equation is not as effective 
@@ -1092,7 +1092,7 @@ static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee
 	 */
 	if (5 < depth)
 	{
-		fprintf (stderr, "excessive recursion at z=%g+ i%g\n", zre, zim);
+		fprintf (stderr, "excessive recursion (tow) at z=%g+ i%g\n", zre, zim);
 		return 1;
 	}
 	depth ++;
@@ -1143,7 +1143,7 @@ static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee
 	int nbits = mpf_get_default_prec();
 	int maxterms = nbits - (int) (3.321928095 *prec); /* log(10) / log(2) */
 
-// printf ("invoke, z=%g +i %g  den=%g nterms=%d, maxterms=%d\n", zre, zim, den, nterms, maxterms);
+	// printf ("invoke-twrds, z=%g +i %g  den=%g nterms=%d, maxterms=%d\n", zre, zim, den, nterms, maxterms);
 
 	/* If the z value is sufficently close to z=-1, then the Borwein 
 	 * algorithm can be applied directly. So apply it. Oh, make sure
@@ -1184,8 +1184,11 @@ static int recurse_towards_polylog (cpx_t plog, const cpx_t ess, const cpx_t zee
 	/* If we are here, we are not close to either z=-1 or z=+1, and
 	 * so the only option is to use the duplication formula to try 
 	 * to get into one of these regions.
+	 *
+	 * Actually, with current algo, this statement should never be
+	 * reached.
 	 */
-	printf ("splitsville, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
+	printf ("splitsville-sqrt, z=%g +i %g  den=%g nterms=%d\n", zre, zim, den, nterms);
 
 	rc = polylog_recurse_sqrt (plog, ess, zee, prec, depth);
 	return rc;
