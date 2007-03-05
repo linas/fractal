@@ -22,14 +22,16 @@
 #include "mp-trig.h"
 
 /* ================================================================= */
-char * restr = "0.1";
-char * imstr = "0.1";
+/* precomputed values polylog for z=0.4+i0.3 and s=0.5+i14.134725 */
+char * restr = "0.326516966291876896433618265259101451722041136878152099560492025517077618557903180478688811071948546295693090191028911114259876637634778060670829611140267045513017286663552331e0";
+char * imstr = "0.119260261009310006540112866720212139819431019039786908382255430102296212766396347662996986085634677464531083763655415382083665035225497313637374547938071618857835995796915644e0";
 /* ================================================================= */
 
 void do_perf(void)
 {
 	int i;
 	int prec = 40;
+	int rex;
 
 	printf ("#\n# graph of periodic zeta as function of precision \n#\n");
 	int hz = sysconf (_SC_CLK_TCK);
@@ -71,7 +73,7 @@ void do_perf(void)
 		times (&end);
 
 		cpx_sub (zeta, zeta, expected);
-		int rex = get_prec (zeta, prec);
+		rex = get_prec (zeta, prec);
 		printf ("%d\t", rex);
 
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
@@ -93,6 +95,11 @@ void do_perf(void)
 		times (&start);
 		cpx_polylog_euler (zeta, ess, zee, prec);
 		times (&end);
+
+		cpx_sub (zeta, zeta, expected);
+		rex = get_prec (zeta, prec);
+		printf ("%d\t", rex);
+
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
 		
 		/* Then with a hot cache */
@@ -101,21 +108,34 @@ void do_perf(void)
 			cpx_polylog_euler (zeta, ess, zee, prec);
 		times (&end);
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
+
+		cpx_sub (zeta, zeta, expected);
+		rex = get_prec (zeta, prec);
+		printf ("%d\t", rex);
 #endif
 
 #if 0
 		/* First we warm the cache */
 		times (&start);
-		cpx_polylog_sum (plog, ess, zee, prec);
+		cpx_polylog_sum (zeta, ess, zee, prec);
 		times (&end);
+
+		cpx_sub (zeta, zeta, expected);
+		rex = get_prec (zeta, prec);
+		printf ("%d\t", rex);
+
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
 
 		/* Then with a hot cache */
 		times (&start);
 		for (i=0; i<100; i++)
-			cpx_polylog_sum (plog, ess, zee, prec);
+			cpx_polylog_sum (zeta, ess, zee, prec);
 		times (&end);
 		printf ("%jd\t", (intmax_t) (end.tms_utime - start.tms_utime));
+
+		cpx_sub (zeta, zeta, expected);
+		rex = get_prec (zeta, prec);
+		printf ("%d\t", rex);
 #endif
 
 		printf ("\n");
@@ -193,7 +213,8 @@ void hiprec(cpx_t zeta, int prec)
 	cpx_set_d (ess, 0.5, 14.134725);
 	cpx_set_d (cq, 0.4, 0.3);
 	
-	cpx_polylog_euler (zeta, ess, cq, prec);
+	// cpx_polylog_euler (zeta, ess, cq, prec);
+	cpx_polylog (zeta, ess, cq, prec);
 	cpx_sub (ess, zeta, prevzeta);
 
 	printf ("prec=%d ", prec);
@@ -201,10 +222,10 @@ void hiprec(cpx_t zeta, int prec)
 	long rex = get_prec (ess, prec);
 	printf ("prev=%ld ", rex);
 
+#if 0
 	double vre = mpf_get_d (ess[0].re);
 	printf ("vre = %g ", vre);
 
-#if 0
 	double vim = mpf_get_d (ess[0].im);
 	printf ("vim = %g ", vim);
 #endif
@@ -230,8 +251,6 @@ void hiprec(cpx_t zeta, int prec)
 int
 main (int argc, char * argv[])
 {
-	int prec = 40;
-
 #if 0
 	if (argc != 2)
 	{
@@ -241,12 +260,15 @@ main (int argc, char * argv[])
 	double sim = atof (argv[1]);
 #endif
 
+#if 1
 	cpx_t zeta;
 	cpx_init (zeta);
+	int prec;
 	for (prec=10; prec<15001; prec *= 1.4)
 	{
 		hiprec(zeta, prec);
 	}
+#endif
 	
 	// do_perf();
 	
