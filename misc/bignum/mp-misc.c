@@ -114,6 +114,25 @@ void set_bits (int prec, int nterms)
 
 /* ===================================================== */
 
+int get_prec (cpx_t epsi, unsigned int prec)
+{
+	long rex, imx;
+	mpf_get_d_2exp (&rex, epsi[0].re);
+	mpf_get_d_2exp (&imx, epsi[0].im);
+	rex = -0.30103 *rex;
+	imx = -0.30103 *imx;
+	if (imx && imx < rex) rex = imx;
+	if (0 == rex) rex = imx;
+	if (0 == rex) rex = prec; 
+	if (mpf_cmp_d (epsi[0].re, 0.1) > 0) rex = 0;
+	if (mpf_cmp_d (epsi[0].re, -0.1) < 0) rex = 0;
+	
+	if (mpf_cmp_d (epsi[0].im, 0.1) > 0) rex = 0;
+	if (mpf_cmp_d (epsi[0].im, -0.1) < 0) rex = 0;
+	
+	return rex;
+}
+
 /* Print number of digits by which value differes from 
  * previous call to this routine.
  */
@@ -137,13 +156,7 @@ int last_change(const cpx_t curr, unsigned int prec)
 
 	printf ("prec=%d ", prec);
 
-	long rex, imx;
-	mpf_get_d_2exp (&rex, prev[0].re);
-	mpf_get_d_2exp (&imx, prev[0].im);
-	rex = -0.30103 *rex;
-	imx = -0.30103 *imx;
-	if ((imx != 0) && (imx < rex)) rex = imx;
-	if (rex == 0) rex = imx;
+	long rex = get_prec (prev, prec);
 	printf ("change=%ld\n", rex);
 
 	cpx_set (prev, curr);

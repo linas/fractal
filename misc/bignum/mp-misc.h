@@ -48,3 +48,8 @@ void set_bits (int prec, int nterms);
  */
 
 int last_change(const cpx_t curr, unsigned int prec);
+
+/**
+ * get_prec -- return log_10 (epsi) approximately rounded
+ */
+int get_prec (cpx_t epsi, unsigned int prec);
