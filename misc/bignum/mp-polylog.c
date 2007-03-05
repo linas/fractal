@@ -633,14 +633,14 @@ polylog_invert_works(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int
 static int 
 polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth)
 {
+	int redo = 0;
+
 	/* create a cache of commonly re-used values */
-	static int not_inited = 1;
 	static int cache_prec = -1;
 	static mpf_t twopi, otp, log_twopi;
 	static cpx_t phase, scale, cache_ess, s;
-	if (not_inited)
+	if (-1 == cache_prec)
 	{
-		not_inited = 0;
 		mpf_init (twopi);
 		mpf_init (otp);
 		mpf_init (log_twopi);
@@ -654,6 +654,7 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 
 	if (cache_prec != prec)
 	{
+		redo = 1;
 		cache_prec = prec;
 		mpf_set_prec (twopi, 3.322*prec +50);
 		mpf_set_prec (otp, 3.322*prec +50);
@@ -680,7 +681,7 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	cpx_init (logz);
 
 	/* Recompute these values only if s differs from last time. */
-	if(!cpx_eq (ess, cache_ess, prec*3.322))
+	if(redo || !cpx_eq (ess, cache_ess, prec*3.322))
 	{
 		cpx_set (cache_ess, ess);
 		cpx_ui_sub (s, 1, 0, ess);
@@ -1323,6 +1324,7 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
 
 void cpx_polylog_euler (cpx_t zeta, const cpx_t ess, const cpx_t zee, int prec)
 {
+	int redo = 0;
 	cpx_t q, tmp;
 	cpx_init (q);
 	cpx_init (tmp);
@@ -1348,6 +1350,7 @@ void cpx_polylog_euler (cpx_t zeta, const cpx_t ess, const cpx_t zee, int prec)
 
 	if (cache_prec != prec)
 	{
+		redo = 1;
 		cache_prec = prec;
 		mpf_set_prec (twopi, 3.322*prec +50);
 		mpf_set_prec (otp, 3.322*prec +50);
@@ -1369,7 +1372,7 @@ void cpx_polylog_euler (cpx_t zeta, const cpx_t ess, const cpx_t zee, int prec)
 	}
 
 	/* Recompute these values only if s differs from last time. */
-	if(!cpx_eq (ess, cache_ess, prec*3.322))
+	if(redo || !cpx_eq (ess, cache_ess, prec*3.322))
 	{
 		cpx_set (cache_ess, ess);
 		cpx_ui_sub (s, 1, 0, ess);
