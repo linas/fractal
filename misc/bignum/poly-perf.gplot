@@ -127,13 +127,43 @@ set key left
 # 
 # set term postscript eps color
 # set out 'poly-perf-warm-cache.ps'
-set title "Compute time for Li_{0.5+i14.13} (0.4+i0.3) for warm cache"
-set xlabel "Decimal digits of precision"
-set ylabel "Milliseconds"
-set logscale
-set xrange [10:2000]
+# set title "Compute time for Li_{0.5+i14.13} (0.4+i0.3) for warm cache"
+# set xlabel "Decimal digits of precision"
+# set ylabel "Milliseconds"
+# set logscale
+# set xrange [10:2000]
+# 
+# plot "p-borwein-perf.dat" using 3:($5/100) title "Borwein algorithm" linewidth 3, \
+#      "p-taylor-perf.dat" using 3:(10*$5/100) title "Direct summation" linewidth 3, \
+#      "p-euler-perf.dat" using 3:($5/100) title "Euler-Maclaurin" linewidth 3
 
-plot "p-borwein-perf.dat" using 3:($5/100) title "Borwein algorithm" linewidth 3, \
-     "p-taylor-perf.dat" using 3:(10*$5/100) title "Direct summation" linewidth 3, \
-     "p-euler-perf.dat" using 3:($5/100) title "Euler-Maclaurin" linewidth 3
+# -------------------------------------------------------------
+# 
+# Experiments ---
+#  
+set title "Compute time for Li_{0.5+i14.13} (0.95+i0.05) for cold cache"
+set xlabel "Decimal digits of precision"
+set ylabel "Seconds"
+set logscale
+set xrange [20:2000]
+
+plot "p-borwein-perf.dat" using 3:($4/100) title "Borwein algorithm (old)" linewidth 3, \
+     "p-borwein-perf-9.dat" using 3:($4/100) title "Borwein algorithm" linewidth 3, \
+     "p-taylor-perf.dat" using 3:($4/100) title "Direct summation(old)" linewidth 3, \
+     "p-taylor-perf-9.dat" using 3:($4/100) title "Direct summation" linewidth 3, \
+     "p-euler-perf.dat" using 3:($4/100) title "Euler-Maclaurin (old)" linewidth 3, \
+     "p-euler-perf-9.dat" using 3:($4/100) title "Euler-Maclaurin" linewidth 3
+
+# set title "Compute time for Li_{0.5+i14.13} (0.95+i0.05) for warm cache"
+# set xlabel "Decimal digits of precision"
+# set ylabel "Milliseconds"
+# set logscale
+# set xrange [10:2000]
+# 
+# plot "p-borwein-perf.dat" using 3:($5/100) title "Borwein algorithm (old)" linewidth 3, \
+#      "p-borwein-perf-9.dat" using 3:($5/100) title "Borwein algorithm" linewidth 3, \
+#      "p-taylor-perf.dat" using 3:(10*$5/100) title "Direct summation(old)" linewidth 3, \
+#      "p-taylor-perf-9.dat" using 3:(10*$5/100) title "Direct summation" linewidth 3, \
+#      "p-euler-perf.dat" using 3:($5/100) title "Euler-Maclaurin (old)" linewidth 3,\
+#      "p-euler-perf-9.dat" using 3:($5/100) title "Euler-Maclaurin" linewidth 3
 
