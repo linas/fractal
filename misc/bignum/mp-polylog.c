@@ -587,12 +587,14 @@ polylog_invert_works(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int
 
 	/* zeta (1-s, ln z/(2pi i)) */
 	cpx_ui_sub (tmp, 1, 0, s);
-	cpx_hurwitz_taylor (term, tmp, logz, prec);
+	// cpx_hurwitz_taylor (term, tmp, logz, prec);
+	cpx_hurwitz_euler (term, tmp, logz, prec);
 	
 	/* plus e^{ipi s} zeta (1-s, 1-ln z/(2pi i)) */
 	cpx_neg (logz, logz);
 	cpx_add_ui (logz, logz, 1, 0);
-	cpx_hurwitz_taylor (tmp, tmp, logz, prec);
+	// cpx_hurwitz_taylor (tmp, tmp, logz, prec);
+	cpx_hurwitz_euler (tmp, tmp, logz, prec);
 	cpx_mul (tmp, tmp, ph);
 	cpx_mul (tmp, tmp, ph);
 	cpx_sub (term, term, tmp);
@@ -716,11 +718,13 @@ polylog_invert(cpx_t plog, const cpx_t ess, const cpx_t zee, int prec, int depth
 	}
 
 	/* zeta (s, ln z/(2pi i)) */
-	cpx_hurwitz_taylor (plog, s, logz, prec);
+	// cpx_hurwitz_taylor (plog, s, logz, prec);
+	cpx_hurwitz_euler (plog, s, logz, prec);
 	
 	/* plus e^{-ipi s} zeta (s, 1-ln z/(2pi i)) */
 	cpx_ui_sub (logz, 1, 0, logz);
-	cpx_hurwitz_taylor (tmp, s, logz, prec);
+	// cpx_hurwitz_taylor (tmp, s, logz, prec);
+	cpx_hurwitz_euler (tmp, s, logz, prec);
 	cpx_mul (tmp, tmp, phase);
 	cpx_add (plog, plog, tmp);
 
