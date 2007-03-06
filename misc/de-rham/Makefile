@@ -26,7 +26,7 @@ dist:
 	$(CC) -c -O2 $<
 
 .o:
-	$(CC) -o $* $< $(LIB)/gcf.o $(LIB)/Farey.o -lm -lstdc++
+	$(CC) -o $* $< -L$(LIB) -lfunc -lm -lstdc++
 
 affine.o:  affine.c
 curve.o:  curve.C
