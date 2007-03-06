@@ -1,24 +1,40 @@
 
-# set term x11
-# set term gif size 640,480
-# set out 'read.gif'
+# ---------------------------------------------------
+# settings used to create svg used on wikipedia
+# set term svg
+# set out 'quest.svg'
 
-set term svg
-set out 'quest.svg'
+# set data style lines
+# set key right
+# set xzeroaxis linetype -1 linewidth 0.5
+# set yzeroaxis linetype -1 linewidth 0.5
+# set xtics axis
+# set ytics axis
+# 
+# set bmargin 5
+# set lmargin 5
+# 
+# set title "Minkowski ?(x)"
+# set xlabel "x"  0, -1
+# set ylabel "?(x)" -0.6, 0
+# plot "quest.dat" using 2:3 title "" with lines linewidth 2
 
-# set data style linespoints
+# ---------------------------------------------------
+set term postscript eps color
+set out 'quest.ps'
+
 set data style lines
 set key right
-set xzeroaxis linetype -1 linewidth 0.5
-set yzeroaxis linetype -1 linewidth 0.5
+# set xzeroaxis linetype -1 linewidth 0.5
+# set yzeroaxis linetype -1 linewidth 0.5
 set xtics axis
 set ytics axis
 
 set bmargin 5
 set lmargin 5
 
-set title "Minkowski ?(x)"
-set xlabel "x"  0, -1
-set ylabel "?(x)" -0.6, 0
-plot "quest.dat" using 2:3 title "" with lines linewidth 2
+set title "Minkowski ? Function"
+set xlabel "x"  0, -2
+set ylabel "?(x)" -1.6, 0
+plot "quest.dat" using 2:3 title "" with lines linewidth 3
 

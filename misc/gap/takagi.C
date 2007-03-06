@@ -199,7 +199,7 @@ long double takagi_l (long double w, int l, long double x)
 	return acc;
 }
 
-/* crude conjagte attempt */
+/* crude conjugate attempt */
 double sin_takagi (double w, double x)
 {
 	int k;
@@ -214,6 +214,48 @@ double sin_takagi (double w, double x)
 		tp *= 2.0;
 		tw *= w;
 		if (1.0e-14 > tw) break;
+	}
+
+	return acc;
+}
+
+/* p-adic eigenfunction of Bernoulli oper */
+double re_padic_takagi (double w, double x)
+{
+	int n;
+	int k = 0;
+	int p = 5;
+	int r = 2;
+	double acc = 0.0;
+	double tw = 1.0;
+	double tp = 1.0;
+	for (n=0; n<10000000; n++)
+	{
+		acc += tw* cos(tp*(p*k+r)*x*2.0*M_PI);
+		tp *= p;
+		tw *= w;
+		if (1.0e-16 > tw) break;
+	}
+
+	return acc;
+}
+
+/* p-adic eigenfunction of Bernoulli oper */
+double im_padic_takagi (double w, double x)
+{
+	int n;
+	int k = 0;
+	int p = 5;
+	int r = 2;
+	double acc = 0.0;
+	double tw = 1.0;
+	double tp = 1.0;
+	for (n=0; n<10000000; n++)
+	{
+		acc += tw* sin(tp*(p*k+r)*x*2.0*M_PI);
+		tp *= p;
+		tw *= w;
+		if (1.0e-16 > tw) break;
 	}
 
 	return acc;
@@ -552,7 +594,8 @@ main (int argc, char *argv[])
 	// int nmax = 512;
 	// int nmax = 432;
 	// int nmax = 1717;
-	int nmax = 2048;
+	// int nmax = 2048;
+	int nmax = 2047;
 
 	if (argc <2)
 	{
@@ -570,7 +613,7 @@ main (int argc, char *argv[])
 		// x += ((double) rand()) / (RAND_MAX*((double)nmax));
 		
 		// double ts = isola (w, x);
-		double tw = takagi (w, x);
+		// double tw = takagi (w, x);
 		// double ts = tw;
 		// tw  = exp (-tw);
 		// acc += tw;
@@ -581,7 +624,9 @@ main (int argc, char *argv[])
 		// double tw = plicative_takagi (w, x);
 		// double ts = 2.0*gsl_sf_zeta (w) / 3.0 -0.5 - pow(2.0, -w)/3.0;
 
-		double ts = sin_takagi (w, x);
+		double tw = re_padic_takagi (w, x);
+		double ts = im_padic_takagi (w, x);
+		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
 		// double tw = log (takagi(w,x));
 		// double tw = ttakagi(w,x);

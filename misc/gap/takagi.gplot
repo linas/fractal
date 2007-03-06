@@ -14,11 +14,22 @@ set out 'takagi.png'
 set data style lines
 set key right
 
-set title "Itera Curve"
+# =================================================
+set term postscript eps color
+set out 'bernoulli-5-2.ps'
+set title "Bernoulli eigenfunction, p=5, k=0, r=2"
 set xlabel "x"
-set ylabel "F(x)"
-plot "takagi.dat" using 2:3 title "tak", \
-     "takagi.dat" using 2:4 title "sin"
+set ylabel "phi(x)"
+plot "takagi.dat" using 2:3 title "real part", \
+     "takagi.dat" using 2:4 title "imaginary part"
+
+# =================================================
+
+# set title "Itera Curve"
+# set xlabel "x"
+# set ylabel "F(x)"
+# plot "takagi.dat" using 2:3 title "tak", \
+#      "takagi.dat" using 2:4 title "sin"
 
 # set title "Iterated Isola Curve"
 # set xlabel "x"
