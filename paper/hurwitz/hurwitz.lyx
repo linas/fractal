@@ -63,25 +63,12 @@ An efficient algorithm for computing the Riemann zeta function
 \begin_inset Formula $s$
 \end_inset 
 
- and the region of complex 
+ and a kidney-shaped region of complex 
 \begin_inset Formula $z$
 \end_inset 
 
  values given by 
 \begin_inset Formula $\left|z^{2}/(z-1)\right|<4$
-\end_inset 
-
-.
- This region includes the the Hurwitz zeta 
-\begin_inset Formula $\zeta(s,q)$
-\end_inset 
-
- for general complex 
-\begin_inset Formula $s$
-\end_inset 
-
- and real 
-\begin_inset Formula $1/4\le q\le3/4$
 \end_inset 
 
 .
@@ -101,23 +88,23 @@ An efficient algorithm for computing the Riemann zeta function
 \end_inset 
 
  values.
- Similarly, the Hurwitz zeta can be extended to the whole real interval
  
-\begin_inset Formula $0<q<1$
-\end_inset 
-
-.
- The speed of the algorithm is significantly superior to a Taylor's series
- for the evaluation of the Hurwitz zeta; quadratically so when a large number
- of digits of precision is required.
 \layout Abstract
 
-These functions may also be evaluated by means of an Euler-Maclaurin sum.
- It appears that the Euler-Maclaurin sum offers a particularly simple and
- speedy algorithm, and seems to be the best choice for computations.
- The primary, concrete result of this paper is an algorithm allows the explorati
-on of the Hurwitz zeta in the critical strip, where fast algorithms are
- otherwise unavailable.
+Alternatively, the Hurwitz zeta can be very rapidly evaluated by means of
+ an Euler-Maclaurin series.
+ The polylogarithm and the Hurwitz zeta are related, in that two evaluations
+ of the one can be used to obtain a value of the other; thus, either algorithm
+ can be used to evaluate either function.
+ The Euler-Maclaurin series is a clear performance winner for the Hurwitz
+ zeta, while the Borwein algorithm is superior for evaluating the polylogarithm
+ in the kidney-shaped region.
+ Both algorithms are superior to the simple Taylor's series or direct summation.
+\layout Abstract
+
+The primary, concrete result of this paper is an algorithm allows the exploratio
+n of the Hurwitz zeta in the critical strip, where fast algorithms are otherwise
+ unavailable.
  
 \layout Abstract
 
@@ -2379,12 +2366,13 @@ For this value of
 
  closer to 0.5 would require only two.
  The Taylor's series evaluation appears to be about eight times faster than
- these four evaluations, or four times faster than two.
+ these four evaluations (or four times faster than the minimum of two evaluation
+s).
 \layout Standard
 
 Note that the time axis here is in milliseconds, not seconds.
- Comparing to the previous raph, it is clear that performing the pre-computation
-s can be terribly expensive.
+ Comparing to the previous graph, it is clear that performing the pre-computatio
+ns can be terribly expensive.
  The first evaluation of the function can take 100 or 1000 times longer
  than subsequent evaluations at the same value of 
 \begin_inset Formula $s$
