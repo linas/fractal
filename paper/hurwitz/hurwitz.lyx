@@ -2038,6 +2038,9 @@ There remains the question of what value of
  is the desired number of decimal digits of precision.
  The performance of this algorithm is compared to that of the Borwein algorithm
  in the next section.
+\layout Standard
+
+XXX to do: characterize the region of convergence for this algo.
 \layout Section
 
 Performance
@@ -2160,12 +2163,13 @@ This figure shows the time, in seconds, needed to compute the polylogarithm
 \end_inset 
 
  for this point, and the Borwein algorithm wins.
- The Euler-Maclauring algorithm is relatively disavantaged, as it needs
- to be evaluated twice, and a value for 
+ The Euler-Maclaurin algorithm is relatively disavantaged, as it needs to
+ be evaluated twice, and a value for 
 \begin_inset Formula $\Gamma(s)$
 \end_inset 
 
  must be computed as well.
+ 
 \layout Standard
 
 The primary contribution to the calculations is the evaluation of 
@@ -2368,14 +2372,14 @@ For this value of
 \begin_inset Formula $q$
 \end_inset 
 
-, the Borwein algorithm requires two evaluations of the polylogarithm; values
- of 
+, the Borwein algorithm requires four evaluations of the polylogarithm;
+ values of 
 \begin_inset Formula $q$
 \end_inset 
 
- closer to 0.5 would require only one.
+ closer to 0.5 would require only two.
  The Taylor's series evaluation appears to be about eight times faster than
- these two evaluations, or four times faster than one.
+ these four evaluations, or four times faster than two.
 \layout Standard
 
 Note that the time axis here is in milliseconds, not seconds.
@@ -2490,6 +2494,30 @@ A different but equally dramatic set of results obtain, when one compares
  However, the cost of pre-computing these constants skyrockets for the Taylor's
  series, making it unattractive as the number of required decimal places
  increases.
+\layout Standard
+
+Although the Borwein algorithm seems to show a slight advantage over the
+ Euler-Maclaurin series when it is used to evaluate the polylogarithm, much
+ of that advantage disappears when evaluating near the branch point 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ The Borwein algorithm breaks down near the branch point, and requires the
+ (possibly recursive) application of the duplication formula (given in the
+ next section) to obtains points sufficiently far away from 
+\begin_inset Formula $z=1$
+\end_inset 
+
+.
+ By contrast, the Euler-Maclaurin series seems to happily converge in this
+ area, and so no extra steps are required.
+ 
+\layout Standard
+
+In conclusion, it appears that the Euler-Maclaurin formula provides the
+ best algorithm for evaluating the Hurwitz zeta, and can often tie and sometimes
+ outperform the Borwein algorithm for the polylogarithm.
 \layout Section
 
 Duplication formula
