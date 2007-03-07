@@ -409,23 +409,61 @@ The primary effort of this paper is to take the algorithm given by Borwein
 \begin_inset Formula $z$
 \end_inset 
 
--plane; however, this requires the independent evaluation of equation 
+-plane; however, this requires the independent evaluation of Hurwitz zeta.
+\layout Standard
+
+Although the Hurwitz zeta function may be computed by evaluating the Taylor's
+ series 
 \begin_inset LatexCommand \ref{eq:Hurwitz taylor}
 
 \end_inset 
 
+ directly, a superior approach is to perform an Euler-Maclaurin summation
+ (thanks to Oleksandr Pavlyk for pointing this out
+\begin_inset LatexCommand \cite{Pav07}
+
+\end_inset 
+
+).
+ The summation uses the standard, textbook Euler-Maclaurin formula
+\begin_inset LatexCommand \cite[25,4,7]{A&S}
+
+\end_inset 
+
+, and is applied to the function 
+\begin_inset Formula $f(x)=(x+q)^{-s}$
+\end_inset 
+
 .
-\layout Standard
+ However, the application is 
+\begin_inset Quotes eld
+\end_inset 
 
-An alternate approach to evaluating the Hurwitz zeta is to perform an Euler-Macl
-aurn summation.
+backwards
+\begin_inset Quotes erd
+\end_inset 
+
+ from the usual sense: the integral of 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ is known (it is easily evaluated analytically), and it is the series, which
+ gives the Hurwitz zeta, which is unknown.
+ All of the other parts of Euler-Maclaurin formula are easily evaluated.
+ The result is an algorithm that is particularly rapid for the Hurwitz zeta
+ function.
+ It outperforms direct evaluation of the Taylor's series by orders of magnitude.
+ It is faster then evaluating 
+\begin_inset LatexCommand \ref{eq:poly-hur relation}
+
+\end_inset 
+
+ (which can be computed for real values of 
+\begin_inset Formula $q$
+\end_inset 
+
+).
  
-\layout Standard
-
-XXX Its fast, very fast, faster than the Borwein aglo.
-\layout Standard
-
-XXX Finish writing this part XXX Thanks to XXX for pointing this out XXX
 \layout Standard
 
 The development of this paper proceeds as follows.
@@ -445,9 +483,13 @@ the Borwein trick
 e acceleration of general oscillatory series.
  The next section selects a specific polynomial, and the error term of the
  resulting approximation is precisely bounded.
+ This is followed by a very short review of the application of the Euler
+ Maclaurin summation.
  This is followed by a brief review of the duplication formula for the Hurwitz
  zeta, and a short discussion of ways in which this numerical algorithm
  may be tested for correctness.
+ Measurements of the performance of actual implementations of the various
+ numerical algorithms is provided.
  This is followed by a detailed derivation of the monodromy group, and a
  discussion of Apostol's 
 \begin_inset Quotes eld
