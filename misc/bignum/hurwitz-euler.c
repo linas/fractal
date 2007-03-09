@@ -45,6 +45,22 @@ char * imstr= "-0.56954924189445586151072003869782179438209767380601667572433201
 #endif /* HIPREC_FOR_0_POINT_3 */
 
 /* =========================================================== */
+
+int getmemusage (void)
+{
+	static int prev=0;
+	system ("ps aux |grep hurwitz-euler | grep -v grep |cut -b 25-32 > /tmp/m");
+	FILE * fh = fopen ("/tmp/m", "r");
+	char buf[80];
+	fgets (buf, 80, fh); 
+	int mem = atoi (buf);
+	fclose (fh);
+	int delt = mem - prev;
+	prev = mem;
+	return delt;
+}
+
+/* =========================================================== */
 	
 void zeta_euler(cpx_t zeta, cpx_t ess, cpx_t q, int em, int prec);
 
@@ -88,9 +104,12 @@ void do_perf (int prec)
 #define BORWEIN_ALGO
 #ifdef BORWEIN_ALGO
 		/* First we warm the cache */
+		getmemusage();
 		times (&start);
 		cpx_hurwitz_zeta (zeta, ess, que, prec);
 		times (&end);
+		int mem = getmemusage();
+		printf ("duude memus=%d\n", mem);
 
 		cpx_sub (zeta, zeta, expected);
 		int rex = get_prec (zeta, prec);
@@ -103,6 +122,7 @@ void do_perf (int prec)
 		for (i=0; i<1000; i++)
 			cpx_hurwitz_zeta (zeta, ess, que, prec);
 		times (&end);
+
 		intmax_t delta = end.tms_utime - start.tms_utime;
 		// delta *= 10;
 		printf ("%jd\t", delta);
@@ -276,7 +296,6 @@ double err_est (cpx_t ess, int em, int pee)
 int main (int argc, char * argv[])
 {
 	int prec =50;
-	int i;
 
 	if (argc < 2)
 	{
@@ -308,6 +327,7 @@ int main (int argc, char * argv[])
 	mpf_set_ui (cq[0].im, 0);
 	
 #if 0
+	int i;
 	for (i=10; i < 10000; i*=1.5)
 	// for (i=100; i > 10; i/=1.3)
 	{
