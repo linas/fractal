@@ -34,7 +34,7 @@ Linas Vep\i \v{s}
 tas
 \layout Date
 
-12 October 2006, revised 9 March 2007
+12 October 2006, revised 10 March 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -2119,7 +2119,7 @@ The performance of both the Euler-Maclaurin summation and the Borwein algorithm
 
 
 \begin_inset Note
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -3029,8 +3029,9 @@ The inversion formula
 
 .
  The difference across the cut is thus 
-\begin_inset Formula \[
-\Delta=\mbox{Li}_{s}\left(x+i\epsilon\right)-\mbox{Li}_{s}\left(x-i\epsilon\right)=e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\ln x+i\epsilon}{2\pi i}\right)-\zeta\left(1-s,\frac{\ln x-i\epsilon}{2\pi i}\right)\right]+\mathcal{O}(\epsilon)\]
+\begin_inset Formula \begin{eqnarray*}
+\Delta & = & \mbox{Li}_{s}\left(x+i\epsilon\right)-\mbox{Li}_{s}\left(x-i\epsilon\right)\\
+ & = & e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\ln x+i\epsilon}{2\pi i}\right)-\zeta\left(1-s,\frac{\ln x-i\epsilon}{2\pi i}\right)\right]+\mathcal{O}(\epsilon)\end{eqnarray*}
 
 \end_inset 
 
@@ -3056,7 +3057,9 @@ The inversion formula
  This may be done by taking the cut of the logarithm to extend to the right,
  instead of to the left, as it is by convention.
  One then gets 
-\begin_inset Formula $\log(x+i\epsilon)-\log(x-i\epsilon)=2\pi iN+\mathcal{O}(\epsilon)$
+\begin_inset Formula \begin{equation}
+\log(x+i\epsilon)-\log(x-i\epsilon)=2\pi iN+\mathcal{O}(\epsilon)\label{eq:log-discontinuity}\end{equation}
+
 \end_inset 
 
  for some integer 
@@ -3240,11 +3243,21 @@ The discontinuity across the cut
 \end_inset 
 
 , follows similarly.
- For 
+ Next, taking 
 \begin_inset Formula $N=-1$
 \end_inset 
 
-, the difference is given by -
+ in equation 
+\begin_inset LatexCommand \ref{eq:log-discontinuity}
+
+\end_inset 
+
+, (or 
+\begin_inset Formula $N=0$
+\end_inset 
+
+ in the equation immediately above, which can serve as a point of confusion)
+ the difference is given by -
 \begin_inset Formula $1/(-1+q)^{1-s}=e^{-i\pi s}/(1-q)^{1-s}$
 \end_inset 
 
@@ -3254,7 +3267,10 @@ The discontinuity across the cut
 
 \end_inset 
 
- The figure 
+ 
+\layout Standard
+
+The figure 
 \begin_inset LatexCommand \ref{cap:N=-1 Lower-sheet}
 
 \end_inset 
@@ -3284,7 +3300,7 @@ The discontinuity across the cut
 
 It is perhaps more clear to use explicit topological language.
  Let 
-\begin_inset Formula $g_{1}$
+\begin_inset Formula $m_{1}$
 \end_inset 
 
  represent the homotopy class of all loops based at some point 
@@ -3297,14 +3313,14 @@ It is perhaps more clear to use explicit topological language.
 
  in the positive direction.
  The action of 
-\begin_inset Formula $g_{1}$
+\begin_inset Formula $m_{1}$
 \end_inset 
 
  on the polylogarithm has the effect of carrying the polylog from one sheet
  to the next.
  In the above discussion, it was determined that 
 \begin_inset Formula \[
-g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
+m_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
 
 \end_inset 
 
@@ -3318,7 +3334,7 @@ g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
 
 .
  That is, after acting with 
-\begin_inset Formula $g_{1}$
+\begin_inset Formula $m_{1}$
 \end_inset 
 
 , one is now on a sheet with a cut extending from 
@@ -3327,7 +3343,7 @@ g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
 
  to the right.
  Let let 
-\begin_inset Formula $g_{0}$
+\begin_inset Formula $m_{0}$
 \end_inset 
 
  represent the homotopy class of loops that wind once around the branch
@@ -3338,7 +3354,7 @@ g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
  in a right-handed fashion.
  Acting on the logarithm, one has 
 \begin_inset Formula \[
-g_{0}\cdot\ln z=\ln z+2\pi i\]
+m_{0}\cdot\ln z=\ln z+2\pi i\]
 
 \end_inset 
 
@@ -3347,12 +3363,12 @@ g_{0}\cdot\ln z=\ln z+2\pi i\]
 \end_inset 
 
 , one thus has 
-\begin_inset Formula $g_{0}\cdot q=q+1$
+\begin_inset Formula $m_{0}\cdot q=q+1$
 \end_inset 
 
 , and so 
 \begin_inset Formula \[
-g_{0}\cdot\Delta_{N}=\Delta_{N+1}\]
+m_{0}\cdot\Delta_{N}=\Delta_{N+1}\]
 
 \end_inset 
 
@@ -3362,44 +3378,97 @@ The principal sheet of the polylogarithm has no branch point at
 
 , and so one has 
 \begin_inset Formula \[
-g_{0}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)\]
+m_{0}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)\]
 
 \end_inset 
 
- Similarly, the logarithm has no branch point at 
-\begin_inset Formula $z=1$
-\end_inset 
-
-, and so 
+Winding in the opposite direction, one has 
 \begin_inset Formula \[
-g_{1}\cdot\ln z=\ln z\]
+m_{1}^{-1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{-1}\]
 
 \end_inset 
 
+ In order for 
+\begin_inset Formula $m_{1}$
+\end_inset 
 
-\layout Standard
+ to be properly considered as the group-theoretic inverse of 
+\begin_inset Formula $m_{1}$
+\end_inset 
 
-Consider now the task of pasting sheets together, such that the result is
- continuous as one crosses the cut 
-\begin_inset Formula $z>1$
+, one must have 
+\begin_inset Formula $m_{1}\cdot m_{1}^{-1}\cdot\mbox{Li}_{s}\left(z\right)=m_{1}^{-1}\cdot m_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)$
 \end_inset 
 
 .
- Some confusion may result here: one must paste together the cut of the
- polylog, and (if any), the cut of the logarithm as well.
- Thus, for example, suppose one is on the 
-\begin_inset Formula $g_{1}\cdot\mbox{Li}_{s}\left(z\right)$
+ The resolution of this implies 
+\begin_inset Formula $m_{1}\cdot\Delta_{-1}=-\Delta_{1}$
 \end_inset 
 
- sheet.
- To get to a sheet by means of a continuous, differentiable glueing across
- the 
-\begin_inset Formula $z>1$
+, which in turn implies that 
+\begin_inset Formula $m_{1}\cdot q=q+1$
 \end_inset 
 
- cut, one must move as 
+.
+ This seems strange, as the logarithm has no branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and so there is nothing to wind around.
+ By this arguement, one would have expected that 
+\begin_inset Formula $m_{1}$
+\end_inset 
+
+ had no effect on 
+\begin_inset Formula $q$
+\end_inset 
+
+ at all.
+ The point is subtle and is worth establishing clearly; it is the joining
+ of the polylogarithm to the logarithm cuts that causes the effect.
+ Consider only the logarithm (not the polylogarithm), arranged so that the
+ branch extends to the right.
+ Consider starting just below the real axis, and winding around in a right-hande
+d fashion around the point 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and finishing just above the real axis.
+ There is no obstruction at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and so this loop can be shrunk to a very short line segment.
+ None-the-less, the short line segement crosses the cut, and its effect
+ is to move to a different sheet.
+ It is for this reason that one has 
+\begin_inset Formula $m_{1}\cdot q=q+1$
+\end_inset 
+
+.
+ A different set of group generators will be defined below, that do capture
+ the idea that winding around 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ should have no effect on 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+\layout Standard
+
+One can now consider the task of more complex paths from sheet to sheet.
+ Passing twice around the 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ branch, one has 
+\layout Standard
+
+
 \begin_inset Formula \[
-g_{1}g_{0}g_{1}\cdot\mbox{Li}_{s}\left(z\right)=g_{1}g_{0}\cdot\left[\mbox{Li}_{s}\left(z\right)-\Delta_{1}\right]=\mbox{Li}_{s}\left(z\right)-\Delta_{1}-\Delta_{2}\]
+m_{1}^{2}\cdot\mbox{Li}_{s}\left(z\right)=m_{1}\cdot\left[\mbox{Li}_{s}\left(z\right)-\Delta_{1}\right]=\mbox{Li}_{s}\left(z\right)-\Delta_{1}-\Delta_{2}\]
 
 \end_inset 
 
@@ -3413,7 +3482,7 @@ g_{1}g_{0}g_{1}\cdot\mbox{Li}_{s}\left(z\right)=g_{1}g_{0}\cdot\left[\mbox{Li}_{
 
  cut is smooth and differentiable, gives 
 \begin_inset Formula \begin{eqnarray*}
-\left(g_{1}g_{0}\right)^{n-1}g_{1}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)-\sum_{k=1}^{n}\Delta_{k}\\
+m_{1}^{n}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)-\sum_{k=1}^{n}\Delta_{k}\\
  & = & \mbox{Li}_{s}\left(z\right)-e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\sum_{k=1}^{n}\frac{1}{\left(k-1+q\right)^{1-s}}\\
  & = & \mbox{Li}_{s}\left(z\right)-e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\ln z}{2\pi i}\right)-\zeta\left(1-s,n+\frac{\ln z}{2\pi i}\right)\right]\end{eqnarray*}
 
@@ -3423,37 +3492,75 @@ g_{1}g_{0}g_{1}\cdot\mbox{Li}_{s}\left(z\right)=g_{1}g_{0}\cdot\left[\mbox{Li}_{
  
 \layout Standard
 
-Winding in the opposite direction, one has 
-\begin_inset Formula \[
-g_{1}^{-1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{-1}\]
-
-\end_inset 
-
- and to repeat this process, as above, one considers the action of 
-\begin_inset Formula $\left(g_{1}^{-1}g_{0}^{-1}\right)^{n}g_{1}^{-1}$
-\end_inset 
-
- on 
-\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
-\end_inset 
-
-.
- 
-\layout Standard
-
-In the development above, in the joining of sheets across 
-\begin_inset Formula $\Re z>1$
-\end_inset 
-
-, the cut that runs between 
-\begin_inset Formula $z=0$
-\end_inset 
-
- and 
+To capture the idea of there being no obstruction at 
 \begin_inset Formula $z=1$
 \end_inset 
 
- was mostly ignored.
+ for the logarithm, one may define a group element 
+\begin_inset Formula $g_{1}=m_{1}m_{0}^{-1}$
+\end_inset 
+
+, so that one has 
+\begin_inset Formula $g_{1}\cdot\ln z=\ln z$
+\end_inset 
+
+.
+ Then, define 
+\begin_inset Formula $g_{0}=m_{0}$
+\end_inset 
+
+.
+ In terms of these generators, one has the relations 
+\begin_inset Formula \begin{eqnarray*}
+g_{0}\cdot q & = & q+1\\
+g_{1}\cdot q & = & q\\
+g_{0}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)\\
+g_{1}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)-\Delta_{1}\\
+g_{0}\cdot\Delta_{N} & = & \Delta_{N+1}\quad\mbox{ for }N>0\\
+g_{1}\cdot\Delta_{N} & = & \Delta_{N}\end{eqnarray*}
+
+\end_inset 
+
+ To complete the picture, one needs the action of 
+\begin_inset Formula $g_{0}$
+\end_inset 
+
+ on 
+\begin_inset Formula $\Delta_{-1}$
+\end_inset 
+
+, or equivalently 
+\begin_inset Formula $g_{0}^{-1}$
+\end_inset 
+
+ on 
+\begin_inset Formula $\Delta_{1}$
+\end_inset 
+
+.
+ There is some ambiguity, and thus, room for confusion, as the term 
+\begin_inset Formula $(-1)^{s}$
+\end_inset 
+
+ arises, which may be taken as 
+\begin_inset Formula $e^{i\pi s}$
+\end_inset 
+
+ or as 
+\begin_inset Formula $e^{-i\pi s}$
+\end_inset 
+
+, with the last two inequivalent for non-integer 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+ The resolution lies in considering the joining of sheets across the cut
+ that runs between 
+\begin_inset Formula $0<\Re z<1$
+\end_inset 
+
+.
  Visually, the cut can be clearly seen in figure 
 \begin_inset LatexCommand \ref{cap:N=-1 Lower-sheet}
 
@@ -3556,7 +3663,15 @@ The free combinations of powers of the two operators
 \begin_inset Formula $g_{1}$
 \end_inset 
 
- generate a group, the monodromy group of the polylogarithm.
+ (or 
+\begin_inset Formula $m_{0}$
+\end_inset 
+
+ and 
+\begin_inset Formula $m_{1}$
+\end_inset 
+
+) generate a group, the monodromy group of the polylogarithm.
  For 
 \begin_inset Formula $s=m$
 \end_inset 
@@ -3672,8 +3787,11 @@ g_{1}=\left[\begin{array}{ccc}
 \begin_inset Formula $z$
 \end_inset 
 
- (having no relation at all to the argument of the dilogarithm) as the commutato
-r 
+ (having no relation at all to the argument 
+\begin_inset Formula $z$
+\end_inset 
+
+ of the dilogarithm) as the commutator 
 \begin_inset Formula $z=xyx^{-1}y^{-1}$
 \end_inset 
 
@@ -3710,20 +3828,22 @@ z=\left[\begin{array}{ccc}
  These relations may be taken as giving the group presentation, so that
  
 \begin_inset Formula \[
-\mathcal{H}_{3}(\mathbb{Z})=\left\{ (x,y):\; z=xyx^{-1}y^{-1},\; zx=xz,\; zy=yz\right\} \]
+\mathcal{H}_{3}(\mathbb{Z})=\left\langle (x,y)\,\vert\; z=xyx^{-1}y^{-1},\; zx=xz,\; zy=yz\right\rangle \]
 
 \end_inset 
 
  Curiously, one should note that the discrete Heisenberg group has an alternate
  presentation that is reminiscent of the braid group.
  This is perhaps not a complete surprise, as a monodromy can be generally
- understood to be a subgroup of the braid group, that is, the mapping class
- group of the punctured disk.
+ understood to be a subgroup of the braid group or mapping class group of
+ the punctured disk.
+ The mapping class group permutes the punctures of the disk in a continuous
+ fashion, so that the result is an intertwining of strands.
  For a disk with two punctures, the braid group is 
 \begin_inset Formula $B_{3}$
 \end_inset 
 
- consisting of three strands.
+ consists of three strands.
  In this case, two of the strands can be visualized as two parallel lines,
  each representing one of the two branch points of the polylogarithm.
  The third strand is the monodromy path, which weaves about the two straight
@@ -3841,7 +3961,9 @@ The generated group is not the four-dimensional Heisenberg group, as there
 
 , and from this one may deduce that the monodromy group has the presentation
  
-\begin_inset Formula $M=\langle g_{0},g_{1}\,\vert\, g_{1}g_{0}g_{1}^{-1}g_{0}^{-1}=g_{0}g_{1}^{-1}g_{0}^{-1}g_{1}\rangle$
+\begin_inset Formula \begin{equation}
+M=\langle g_{0},g_{1}\,\vert\, g_{1}g_{0}g_{1}^{-1}g_{0}^{-1}=g_{0}g_{1}^{-1}g_{0}^{-1}g_{1}\rangle\label{eq:polylog monodromy}\end{equation}
+
 \end_inset 
 
 .
@@ -3849,7 +3971,7 @@ The generated group is not the four-dimensional Heisenberg group, as there
  
 \layout Standard
 
-The Heisenberg group appears as the quotient group 
+The Heisenberg group may be regained as the quotient group 
 \begin_inset Formula $\mathcal{H}_{3}(\mathbb{Z})=M/\left\langle w\right\rangle $
 \end_inset 
 
@@ -3908,8 +4030,8 @@ h=g_{0}^{-n}wg_{0}^{n}=\left[\begin{array}{cccc}
 
 \end_inset 
 
- for integers 
-\begin_inset Formula $m,n$
+ for integer 
+\begin_inset Formula $n$
 \end_inset 
 
 .
@@ -3919,27 +4041,6 @@ h=g_{0}^{-n}wg_{0}^{n}=\left[\begin{array}{cccc}
 
  is abelian, and that 
 \begin_inset Formula $\left\langle w\right\rangle \cong\mathbb{Z}$
-\end_inset 
-
-.
-\layout Standard
-
-The general form of an element 
-\begin_inset Formula $g\in M$
-\end_inset 
-
- may be written as XXXXX -- wroing ---
-\begin_inset Formula \[
-g=\left[\begin{array}{cccc}
-1 & x & x^{2} & m\\
-0 & 1 & 2x & n\\
-0 & 0 & 1 & y\\
-0 & 0 & 0 & 1\end{array}\right]\]
-
-\end_inset 
-
- for integers 
-\begin_inset Formula $x,y,m,n$
 \end_inset 
 
 .
@@ -3981,20 +4082,35 @@ C & \begin{array}{c}
 \end_inset 
 
 .
- 
-\layout Standard
-
-The conjugate closure is constructed as above, XXXXX
-\layout Standard
-
-??? This group seems to be isomorphic to the above 
+ The generated monodromy group is isomorphic to the above 
 \begin_inset Formula $s=3$
 \end_inset 
 
- case (???).
- Note that the existence of polylogarithm ladders seems to be equivalent
+ case, as it has the same presentation.
+ The element 
+\begin_inset Formula $w=g_{0}g_{1}g_{0}^{-1}g_{1}^{-1}$
+\end_inset 
+
+ commutes with 
+\begin_inset Formula $g_{1}$
+\end_inset 
+
+, just as before.
+ Thus, the conjugate closure 
+\begin_inset Formula $\left\langle w\right\rangle $
+\end_inset 
+
+ is again a one-dimensional abelian group, that is, 
+\begin_inset Formula $\left\langle w\right\rangle \cong\mathbb{Z}$
+\end_inset 
+
+, and the resulting quotient group is again the Heisenberg group.
+\layout Standard
+
+Note that the existence of polylogarithm ladders seems to be equivalent
  to the statement that products of monodromy groups can be factored in interesti
 ng and unusual ways.
+ XXX Expand on this remark.
 \layout Standard
 
 For 
@@ -4021,12 +4137,50 @@ For
 \end_inset 
 
  acts to inject into this shift space.
- It is not clear whether there may also be smaller, finite-dimensional represent
-ations for particular values of 
+ Defining 
+\begin_inset Formula $w$
+\end_inset 
+
+ as before, it is not hard to determine that 
+\begin_inset Formula $w\cdot\Delta_{N}=\Delta_{N}$
+\end_inset 
+
+ and that 
+\begin_inset Formula $w\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)+\Delta_{1}-\Delta_{2}$
+\end_inset 
+
+.
+ Remarkably, the same commutation relation holds as before, in that 
+\begin_inset Formula $g_{1}w\cdot\mbox{Li}_{s}\left(z\right)=wg_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{2}$
+\end_inset 
+
+.
+ This, together with the more trivial result 
+\begin_inset Formula $g_{1}w\cdot\Delta_{N}=wg_{1}\cdot\Delta_{N}=\Delta_{N}$
+\end_inset 
+
+ shows that the infinite-dimensional vector space representation of the
+ monodromy has the same presentation as the finite-dimensional case.
+ Thus, one concludes that, for all complex values of 
+\begin_inset Formula $s\ne2$
+\end_inset 
+
+, the monodromy of the polylogarithm is given by equation 
+\begin_inset LatexCommand \ref{eq:polylog monodromy}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+It is not clear whether there may also be smaller, finite-dimensional representa
+tions for particular values of 
 \begin_inset Formula $z$
 \end_inset 
 
 .
+ XXX Expand on this.
 \layout Standard
 
 The analog of the Dirichlet 
@@ -5060,7 +5214,7 @@ generated with fractal/generate/polylog.C
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
