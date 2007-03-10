@@ -2119,7 +2119,7 @@ The performance of both the Euler-Maclaurin summation and the Borwein algorithm
 
 
 \begin_inset Note
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -3056,7 +3056,9 @@ The inversion formula
  This may be done by taking the cut of the logarithm to extend to the right,
  instead of to the left, as it is by convention.
  One then gets 
-\begin_inset Formula $\log(x+i\epsilon)-\log(x-i\epsilon)=2\pi iN+\mathcal{O}(\epsilon)$
+\begin_inset Formula \begin{equation}
+\log(x+i\epsilon)-\log(x-i\epsilon)=2\pi iN+\mathcal{O}(\epsilon)\label{eq:log-discontinuity}\end{equation}
+
 \end_inset 
 
  for some integer 
@@ -3240,11 +3242,21 @@ The discontinuity across the cut
 \end_inset 
 
 , follows similarly.
- For 
+ Next, taking 
 \begin_inset Formula $N=-1$
 \end_inset 
 
-, the difference is given by -
+ in equation 
+\begin_inset LatexCommand \ref{eq:log-discontinuity}
+
+\end_inset 
+
+, (or 
+\begin_inset Formula $N=0$
+\end_inset 
+
+ in the equation immediately above, which can serve as a point of confusion)
+ the difference is given by -
 \begin_inset Formula $1/(-1+q)^{1-s}=e^{-i\pi s}/(1-q)^{1-s}$
 \end_inset 
 
@@ -3254,7 +3266,10 @@ The discontinuity across the cut
 
 \end_inset 
 
- The figure 
+ 
+\layout Standard
+
+The figure 
 \begin_inset LatexCommand \ref{cap:N=-1 Lower-sheet}
 
 \end_inset 
@@ -3284,7 +3299,7 @@ The discontinuity across the cut
 
 It is perhaps more clear to use explicit topological language.
  Let 
-\begin_inset Formula $g_{1}$
+\begin_inset Formula $m_{1}$
 \end_inset 
 
  represent the homotopy class of all loops based at some point 
@@ -3297,14 +3312,14 @@ It is perhaps more clear to use explicit topological language.
 
  in the positive direction.
  The action of 
-\begin_inset Formula $g_{1}$
+\begin_inset Formula $m_{1}$
 \end_inset 
 
  on the polylogarithm has the effect of carrying the polylog from one sheet
  to the next.
  In the above discussion, it was determined that 
 \begin_inset Formula \[
-g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
+m_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
 
 \end_inset 
 
@@ -3318,7 +3333,7 @@ g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
 
 .
  That is, after acting with 
-\begin_inset Formula $g_{1}$
+\begin_inset Formula $m_{1}$
 \end_inset 
 
 , one is now on a sheet with a cut extending from 
@@ -3327,7 +3342,7 @@ g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
 
  to the right.
  Let let 
-\begin_inset Formula $g_{0}$
+\begin_inset Formula $m_{0}$
 \end_inset 
 
  represent the homotopy class of loops that wind once around the branch
@@ -3338,7 +3353,7 @@ g_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{1}\]
  in a right-handed fashion.
  Acting on the logarithm, one has 
 \begin_inset Formula \[
-g_{0}\cdot\ln z=\ln z+2\pi i\]
+m_{0}\cdot\ln z=\ln z+2\pi i\]
 
 \end_inset 
 
@@ -3347,12 +3362,12 @@ g_{0}\cdot\ln z=\ln z+2\pi i\]
 \end_inset 
 
 , one thus has 
-\begin_inset Formula $g_{0}\cdot q=q+1$
+\begin_inset Formula $m_{0}\cdot q=q+1$
 \end_inset 
 
 , and so 
 \begin_inset Formula \[
-g_{0}\cdot\Delta_{N}=\Delta_{N+1}\]
+m_{0}\cdot\Delta_{N}=\Delta_{N+1}\]
 
 \end_inset 
 
@@ -3362,44 +3377,97 @@ The principal sheet of the polylogarithm has no branch point at
 
 , and so one has 
 \begin_inset Formula \[
-g_{0}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)\]
+m_{0}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)\]
 
 \end_inset 
 
- Similarly, the logarithm has no branch point at 
-\begin_inset Formula $z=1$
-\end_inset 
-
-, and so 
+Winding in the opposite direction, one has 
 \begin_inset Formula \[
-g_{1}\cdot\ln z=\ln z\]
+m_{1}^{-1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{-1}\]
 
 \end_inset 
 
+ In order for 
+\begin_inset Formula $m_{1}$
+\end_inset 
 
-\layout Standard
+ to be properly considered as the group-theoretic inverse of 
+\begin_inset Formula $m_{1}$
+\end_inset 
 
-Consider now the task of pasting sheets together, such that the result is
- continuous as one crosses the cut 
-\begin_inset Formula $z>1$
+, one must have 
+\begin_inset Formula $m_{1}\cdot m_{1}^{-1}\cdot\mbox{Li}_{s}\left(z\right)=m_{1}^{-1}\cdot m_{1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)$
 \end_inset 
 
 .
- Some confusion may result here: one must paste together the cut of the
- polylog, and (if any), the cut of the logarithm as well.
- Thus, for example, suppose one is on the 
-\begin_inset Formula $g_{1}\cdot\mbox{Li}_{s}\left(z\right)$
+ The resolution of this implies 
+\begin_inset Formula $m_{1}\cdot\Delta_{-1}=-\Delta_{1}$
 \end_inset 
 
- sheet.
- To get to a sheet by means of a continuous, differentiable glueing across
- the 
-\begin_inset Formula $z>1$
+, which in turn implies that 
+\begin_inset Formula $m_{1}\cdot q=q+1$
 \end_inset 
 
- cut, one must move as 
+.
+ This seems strange, as the logarithm has no branch point at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and so there is nothing to wind around.
+ By this arguement, one would have expected that 
+\begin_inset Formula $m_{1}$
+\end_inset 
+
+ had no effect on 
+\begin_inset Formula $q$
+\end_inset 
+
+ at all.
+ The point is subtle and is worth establishing clearly; it is the joining
+ of the polylogarithm to the logarithm cuts that causes the effect.
+ Consider only the logarithm (not the polylogarithm), arranged so that the
+ branch extends to the right.
+ Consider starting just below the real axis, and winding around in a right-hande
+d fashion around the point 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and finishing just above the real axis.
+ There is no obstruction at 
+\begin_inset Formula $z=1$
+\end_inset 
+
+, and so this loop can be shrunk to a very short line segment.
+ None-the-less, the short line segement crosses the cut, and its effect
+ is to move to a different sheet.
+ It is for this reason that one has 
+\begin_inset Formula $m_{1}\cdot q=q+1$
+\end_inset 
+
+.
+ A different set of group generators will be defined below, that do capture
+ the idea that winding around 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ should have no effect on 
+\begin_inset Formula $q$
+\end_inset 
+
+.
+\layout Standard
+
+One can now consider the task of more complex paths from sheet to sheet.
+ Passing twice around the 
+\begin_inset Formula $z=1$
+\end_inset 
+
+ branch, one has 
+\layout Standard
+
+
 \begin_inset Formula \[
-g_{1}g_{0}g_{1}\cdot\mbox{Li}_{s}\left(z\right)=g_{1}g_{0}\cdot\left[\mbox{Li}_{s}\left(z\right)-\Delta_{1}\right]=\mbox{Li}_{s}\left(z\right)-\Delta_{1}-\Delta_{2}\]
+m_{1}^{2}\cdot\mbox{Li}_{s}\left(z\right)=m_{1}\cdot\left[\mbox{Li}_{s}\left(z\right)-\Delta_{1}\right]=\mbox{Li}_{s}\left(z\right)-\Delta_{1}-\Delta_{2}\]
 
 \end_inset 
 
@@ -3413,7 +3481,7 @@ g_{1}g_{0}g_{1}\cdot\mbox{Li}_{s}\left(z\right)=g_{1}g_{0}\cdot\left[\mbox{Li}_{
 
  cut is smooth and differentiable, gives 
 \begin_inset Formula \begin{eqnarray*}
-\left(g_{1}g_{0}\right)^{n-1}g_{1}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)-\sum_{k=1}^{n}\Delta_{k}\\
+m_{1}^{n}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)-\sum_{k=1}^{n}\Delta_{k}\\
  & = & \mbox{Li}_{s}\left(z\right)-e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\sum_{k=1}^{n}\frac{1}{\left(k-1+q\right)^{1-s}}\\
  & = & \mbox{Li}_{s}\left(z\right)-e^{i\pi s/2}\frac{\left(2\pi\right)^{s}}{\Gamma(s)}\left[\zeta\left(1-s,\frac{\ln z}{2\pi i}\right)-\zeta\left(1-s,n+\frac{\ln z}{2\pi i}\right)\right]\end{eqnarray*}
 
@@ -3423,22 +3491,43 @@ g_{1}g_{0}g_{1}\cdot\mbox{Li}_{s}\left(z\right)=g_{1}g_{0}\cdot\left[\mbox{Li}_{
  
 \layout Standard
 
-Winding in the opposite direction, one has 
-\begin_inset Formula \[
-g_{1}^{-1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{-1}\]
-
+To capture the idea of there being no obstruction at 
+\begin_inset Formula $z=1$
 \end_inset 
 
- and to repeat this process, as above, one considers the action of 
-\begin_inset Formula $\left(g_{1}^{-1}g_{0}^{-1}\right)^{n}g_{1}^{-1}$
+ for the logarithm, one may define a group element 
+\begin_inset Formula $g_{1}=m_{1}m_{0}^{-1}$
 \end_inset 
 
- on 
-\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+, so that one has 
+\begin_inset Formula $g_{1}\cdot\ln z=\ln z$
 \end_inset 
 
 .
- 
+ Then, define 
+\begin_inset Formula $g_{0}=m_{0}$
+\end_inset 
+
+.
+ In terms of these generators, one has the relations 
+\begin_inset Formula \begin{eqnarray*}
+g_{0}\cdot q & = & q+1\\
+g_{1}\cdot q & = & q\\
+g_{0}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)\\
+g_{1}\cdot\mbox{Li}_{s}\left(z\right) & = & \mbox{Li}_{s}\left(z\right)-\Delta_{1}\end{eqnarray*}
+
+\end_inset 
+
+=
+\layout Standard
+
+and to repeat this process, 
+\layout Standard
+
+XXXX
+\layout Standard
+
+XXXXas abo
 \layout Standard
 
 In the development above, in the joining of sheets across 
@@ -5058,7 +5147,7 @@ generated with fractal/generate/polylog.C
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
