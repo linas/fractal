@@ -173,12 +173,15 @@ HashTab * hashtab_new (int size)
 	return htab;
 }
 
-void hashtab_add (HashTab *htab, Matrix *mat, char *str, char letter)
+MatList * hashtab_add (HashTab *htab, Matrix *mat, char *str, char letter)
 {
 	int hash = MELT (mat, 0, 0);
 	hash %= htab->size;
 
-	htab->matlist[hash] = matlist_prepend (htab->matlist[hash], mat, str, letter);
+	MatList *ptr = htab->matlist[hash];
+	ptr = matlist_prepend (ptr, mat, str, letter);
+	htab->matlist[hash] = ptr;
+	return ptr;
 }
 
 /* Find a matching matrix in the list */
@@ -308,7 +311,7 @@ char * trim_off (char * a, size_t off, size_t len)
 		a += off+len;
 		strcat (cp, a);
 		return cp;
-	}	
+	}
 	else
 	{
 printf ("not implemmented\n");
@@ -371,18 +374,20 @@ char * trim_to_slist (StrList *sl, char * word)
 typedef struct _present {
 	int dim;
 	MatList *generators;    // list of group generators (and thier inverses)
-	MatList *words;         // list of words tested so far 
+	// MatList *words;         // list of words tested so far 
+	HashTab *words;         // hash table of words tested so far 
 	MatList *presentation;  // presentation of group so far.
 	int found;
 	int cnt;
 	StrList *unique;
+	MatList *ident;         // bogus -- pointer to identity matrix
 } Present;
 
 Present * present_new (int dim)
 {
 	Present *pr = (Present *) malloc (sizeof (Present));
 	pr->generators = NULL;
-	pr->words = NULL;
+	pr->words = hashtab_new (13);
 	pr->presentation = NULL;
 	pr->cnt =0;
 	pr->found = 0;
@@ -391,7 +396,8 @@ Present * present_new (int dim)
 	/* identity matrix */
 	Matrix *e = matrix_new (dim);
 	matrix_unit (e);
-	pr->words = matlist_prepend (NULL, e, "", 'E');
+	// pr->words = matlist_prepend (NULL, e, "", 'E');
+	pr->ident = hashtab_add (pr->words, e, "", 'E');
 	pr->dim = dim;
 
 	return pr;
@@ -424,10 +430,11 @@ void present_walk_tree (Present *pr, MatList *node, int depth)
 		matrix_mult (mat, node->mat, gen->mat);
 
 		/* Have we seen this word before ? */
-		MatList *match = matlist_find (pr->words, mat);
+		// MatList *match = matlist_find (pr->words, mat);
+		MatList *match = hashtab_find (pr->words, mat);
 		if (match)
 		{
-			pr->presentation = matlist_prepend (pr->presentation, mat, node->str, gen->str[0]);	
+			pr->presentation = matlist_prepend (pr->presentation, mat, node->str, gen->str[0]);
 
 			/* add forward and backward links */
 			match->match = pr->presentation;
@@ -439,8 +446,9 @@ void present_walk_tree (Present *pr, MatList *node, int depth)
 		else
 		{
 			/* unknown. keep going */
-			pr->words = matlist_prepend (pr->words, mat, node->str, gen->str[0]);	
-			present_walk_tree (pr, pr->words, depth);
+			// pr->words = matlist_prepend (pr->words, mat, node->str, gen->str[0]);
+			MatList * unk = hashtab_add (pr->words, mat, node->str, gen->str[0]);
+			present_walk_tree (pr, unk, depth);
 		}
 
 		gen = gen->next;
@@ -704,19 +712,8 @@ Present * setup_quadlog (void)
 
 Present * setup_pentalog (void)
 {
-	Present *pr = (Present *) malloc (sizeof (Present));
-	pr->generators = NULL;
-	pr->words = NULL;
-	pr->presentation = NULL;
-	pr->cnt =0;
-	pr->found = 0;
+	Present *pr = present_new(6);
 
-
-	/* identity matrix */
-	Matrix *e = matrix_new (6);
-	matrix_unit (e);
-	pr->words = matlist_prepend (NULL, e, "", 'E');
-	
 	MatList *ml = NULL;
 	Matrix *g0 = matrix_new (6);
 	matrix_unit (g0);
@@ -779,7 +776,7 @@ main ()
 
 	for (depth=2; depth <9 ; depth++)
 	{
-		present_walk_tree (pr, pr->words, depth);
+		present_walk_tree (pr, pr->ident, depth);
 		present_cleanup (pr);
 
 		printf ("at depth %d tested %d words\n", depth, pr->cnt);
@@ -789,8 +786,9 @@ main ()
 		pr->words = NULL; // XXX should be free
 
 		/* identity matrix */
+		pr->words = hashtab_new(13);
 		Matrix *e = matrix_new (pr->dim);
 		matrix_unit (e);
-		pr->words = matlist_prepend (NULL, e, "", 'E');
+		pr->ident = hashtab_add (pr->words, e, "", 'E');
 	}
 }
