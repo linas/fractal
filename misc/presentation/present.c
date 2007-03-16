@@ -94,7 +94,7 @@ int matrix_equal (Matrix *a, Matrix *b)
 	return 1;
 }
 
-int matrix_projective_equal (Matrix *a, Matrix *b)
+static inline int matrix_projective_equal (Matrix *a, Matrix *b)
 {
 	int m,n;
 	for (m=0; m<a->dim; m++)
@@ -113,7 +113,7 @@ int matrix_projective_equal (Matrix *a, Matrix *b)
 typedef struct _mlist MatList;
 
 struct _mlist {
-	MatList *next;  //next in list
+	MatList *next;  // next in list
 	Matrix *mat;    // this group element
 	char *str;      // word describing this group element
 	char *last;     // last letter of the word
@@ -141,6 +141,53 @@ MatList *matlist_prepend (MatList *ml, Matrix *mat, char *str, char letter)
 /* Find a matching matrix in the list */
 MatList *matlist_find (MatList *ptr, Matrix *mat)
 {
+	while (ptr)
+	{
+		// if (matrix_equal (ptr->mat, mat)) return ptr;
+		if (matrix_projective_equal (ptr->mat, mat)) return ptr;
+		ptr = ptr->next;
+	}
+	return NULL;
+}
+
+/* ---------------------------------------------------- */
+/* one-level deep hash table of matrixes */
+typedef struct _htab HashTab;
+
+struct _htab {
+	int size;
+	MatList **matlist;  // hash table
+};
+
+HashTab * hashtab_new (int size)
+{
+	int i;
+	HashTab *htab;
+	htab = (HashTab *) sizeof (HashTab);
+	htab->size = size;
+	htab->matlist = (MatList **) sizeof (MatList *);
+	for (i=0; i<size;i++)
+	{
+		htab->matlist[i] = NULL;
+	}
+	return htab;
+}
+
+void hashtab_add (HashTab *htab, Matrix *mat, char *str, char letter)
+{
+	int hash = MELT (mat, 0, 0);
+	hash %= htab->size;
+
+	htab->matlist[hash] = matlist_prepend (htab->matlist[hash], mat, str, letter);
+}
+
+/* Find a matching matrix in the list */
+MatList *hashtab_find (HashTab *htab, Matrix *mat)
+{
+	int hash = MELT (mat, 0, 0);
+	hash %= htab->size;
+
+	MatList *ptr = htab->matlist[hash];
 	while (ptr)
 	{
 		// if (matrix_equal (ptr->mat, mat)) return ptr;
@@ -746,5 +793,4 @@ main ()
 		matrix_unit (e);
 		pr->words = matlist_prepend (NULL, e, "", 'E');
 	}
-
 }
