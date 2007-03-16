@@ -81,7 +81,7 @@ void matrix_mult (Matrix *prod, Matrix *a, Matrix *b)
 	}
 }
 
-int matrix_equal (Matrix *a, Matrix *b)
+static inline int matrix_equal (Matrix *a, Matrix *b)
 {
 	int m,n;
 	for (m=0; m<a->dim; m++)
@@ -96,13 +96,14 @@ int matrix_equal (Matrix *a, Matrix *b)
 
 static inline int matrix_projective_equal (Matrix *a, Matrix *b)
 {
+	if (matrix_equal(a,b)) return 1;
+
 	int m,n;
 	for (m=0; m<a->dim; m++)
 	{
 		for (n=0; n<a->dim; n++)
 		{
-			if ((MELT(a,m,n) !=  MELT(b, m,n)) &&
-			    (MELT(a,m,n) != -MELT(b, m,n))) return 0;
+			if (MELT(a,m,n) != -MELT(b, m,n)) return 0;
 		}
 	}
 	return 1;
@@ -193,13 +194,8 @@ MatList *hashtab_find (HashTab *htab, Matrix *mat)
 	if (0 > hash) hash = -hash;
 
 	MatList *ptr = htab->matlist[hash];
-	while (ptr)
-	{
-		// if (matrix_equal (ptr->mat, mat)) return ptr;
-		if (matrix_projective_equal (ptr->mat, mat)) return ptr;
-		ptr = ptr->next;
-	}
-	return NULL;
+	ptr = matlist_find (ptr, mat);
+	return ptr;
 }
 
 /* ---------------------------------------------------- */
@@ -443,7 +439,7 @@ void present_walk_tree (Present *pr, MatList *node, int depth)
 			pr->presentation->match = match;
 			pr->found ++;
 
-			// printf ("got one! %d %s == (%s %c)\n", pr->found, match->str, node->str, gen->str[0]);
+			printf ("got one! %d %s == (%s %c)\n", pr->found, match->str, node->str, gen->str[0]);
 		}
 		else
 		{
@@ -776,10 +772,10 @@ main ()
 	// pr = setup_quadlog();
 	// pr = setup_pentalog();
 
-	for (depth=2; depth <9 ; depth++)
+	for (depth=2; depth <17; depth++)
 	{
 		present_walk_tree (pr, pr->ident, depth);
-		present_cleanup (pr);
+		// present_cleanup (pr);
 
 		printf ("at depth %d tested %d words\n", depth, pr->cnt);
 
