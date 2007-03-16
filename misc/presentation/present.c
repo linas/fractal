@@ -151,6 +151,17 @@ MatList *matlist_find (MatList *ptr, Matrix *mat)
 	return NULL;
 }
 
+int matlist_len (MatList *ptr)
+{
+	int len = 0;
+	while (ptr)
+	{
+		len++;
+		ptr = ptr->next;
+	}
+	return len;
+}
+
 /* ---------------------------------------------------- */
 /* one-level deep hash table of matrixes */
 typedef struct _htab HashTab;
@@ -196,6 +207,16 @@ MatList *hashtab_find (HashTab *htab, Matrix *mat)
 	MatList *ptr = htab->matlist[hash];
 	ptr = matlist_find (ptr, mat);
 	return ptr;
+}
+
+void hashtab_report (HashTab *htab)
+{
+	int i;
+	for (i=0; i<htab->size;i++)
+	{
+		int len = matlist_len (htab->matlist[i]);
+		printf ("bucket %d len %d\n",i,len);
+	}
 }
 
 /* ---------------------------------------------------- */
@@ -780,11 +801,12 @@ main ()
 		printf ("at depth %d tested %d words\n", depth, pr->cnt);
 
 		/* now do another go-around */
+		hashtab_report (pr->words);
 		pr->presentation = NULL;  // XXX should be a free 
 		pr->words = NULL; // XXX should be free
 
 		/* identity matrix */
-		pr->words = hashtab_new(13);
+		pr->words = hashtab_new(133);
 		Matrix *e = matrix_new (pr->dim);
 		matrix_unit (e);
 		pr->ident = hashtab_add (pr->words, e, "", 'E');
