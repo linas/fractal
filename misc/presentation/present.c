@@ -454,6 +454,49 @@ Present * setup_braid3 (void)
 }
 
 /* ---------------------------------------------------- */
+/* set up free subgroup of braid group 3 */
+
+Present * setup_braid3free (void)
+{
+	Present *pr = present_new(2);
+	
+	MatList *ml = NULL;
+
+	/* Set up A = (sigma_1)^2 and B=(sigma_2)^2 of braid group B_3 */
+	Matrix *s1 = matrix_new (2);
+	MELT(s1, 0,0) = 1;
+	MELT(s1, 0,1) = 2;
+	MELT(s1, 1,0) = 0;
+	MELT(s1, 1,1) = 1;
+	ml = matlist_prepend (ml, s1, "", 'A');
+	
+	Matrix *s2 = matrix_new (2);
+	MELT(s2, 0,0) = 1;
+	MELT(s2, 0,1) = 0;
+	MELT(s2, 1,0) = -2;
+	MELT(s2, 1,1) = 1;
+	ml = matlist_prepend (ml, s2, "", 'B');
+	
+	/* and now thier inverses (by hand) */
+	s1 = matrix_new (2);
+	MELT(s1, 0,0) = 1;
+	MELT(s1, 0,1) = -2;
+	MELT(s1, 1,0) = 0;
+	MELT(s1, 1,1) = 1;
+	ml = matlist_prepend (ml, s1, "", 'a');
+	
+	s2 = matrix_new (2);
+	MELT(s2, 0,0) = 1;
+	MELT(s2, 0,1) = 0;
+	MELT(s2, 1,0) = 2;
+	MELT(s2, 1,1) = 1;
+	ml = matlist_prepend (ml, s2, "", 'b');
+
+	pr->generators = ml;
+	return pr;
+}
+
+/* ---------------------------------------------------- */
 /* set up 3D Heisenberg group */
 
 Present * setup_heisenberg (void)
@@ -666,16 +709,18 @@ main ()
 	Present *pr;
 
 	// pr = setup_braid3();
+	pr = setup_braid3free();
 	// pr = setup_heisenberg();
-	pr = setup_trilog();
+	// pr = setup_trilog();
 	// pr = setup_quadlog();
 	// pr = setup_pentalog();
 
-	for (depth=2; depth <6 ; depth++)
+	for (depth=2; depth <9 ; depth++)
 	{
-		printf ("start depth=%d\n", depth);
 		present_walk_tree (pr, pr->words, depth);
 		present_cleanup (pr);
+
+		printf ("at depth %d tested %d words\n", depth, pr->cnt);
 
 		/* now do another go-around */
 		pr->presentation = NULL;  // XXX should be a free 
@@ -687,5 +732,4 @@ main ()
 		pr->words = matlist_prepend (NULL, e, "", 'E');
 	}
 
-	printf ("tested %d words\n", pr->cnt);
 }
