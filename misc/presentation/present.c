@@ -94,6 +94,20 @@ int matrix_equal (Matrix *a, Matrix *b)
 	return 1;
 }
 
+int matrix_projective_equal (Matrix *a, Matrix *b)
+{
+	int m,n;
+	for (m=0; m<a->dim; m++)
+	{
+		for (n=0; n<a->dim; n++)
+		{
+			if ((MELT(a,m,n) !=  MELT(b, m,n)) &&
+			    (MELT(a,m,n) != -MELT(b, m,n))) return 0;
+		}
+	}
+	return 1;
+}
+
 /* ---------------------------------------------------- */
 /* linked list of matrixes */
 typedef struct _mlist MatList;
@@ -129,7 +143,8 @@ MatList *matlist_find (MatList *ptr, Matrix *mat)
 {
 	while (ptr)
 	{
-		if (matrix_equal (ptr->mat, mat)) return ptr;
+		// if (matrix_equal (ptr->mat, mat)) return ptr;
+		if (matrix_projective_equal (ptr->mat, mat)) return ptr;
 		ptr = ptr->next;
 	}
 	return NULL;
