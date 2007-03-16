@@ -14,10 +14,10 @@ present:	present.o
 present.o:	present.c
 
 .c.o:
-	cc -c -g -pg -O2 -I $(INC) $<
+	cc -c -g -O2 -I $(INC) $<
 
 .o:
-	cc -pg -o $@ $^ -lm 
+	cc -o $@ $^ -lm 
 
 
 clean:

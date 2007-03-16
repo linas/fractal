@@ -163,9 +163,9 @@ HashTab * hashtab_new (int size)
 {
 	int i;
 	HashTab *htab;
-	htab = (HashTab *) sizeof (HashTab);
+	htab = (HashTab *) malloc(sizeof (HashTab));
 	htab->size = size;
-	htab->matlist = (MatList **) sizeof (MatList *);
+	htab->matlist = (MatList **) malloc(sizeof (MatList *));
 	for (i=0; i<size;i++)
 	{
 		htab->matlist[i] = NULL;
@@ -177,6 +177,7 @@ MatList * hashtab_add (HashTab *htab, Matrix *mat, char *str, char letter)
 {
 	int hash = MELT (mat, 0, 0);
 	hash %= htab->size;
+	if (0 > hash) hash = -hash;
 
 	MatList *ptr = htab->matlist[hash];
 	ptr = matlist_prepend (ptr, mat, str, letter);
@@ -189,6 +190,7 @@ MatList *hashtab_find (HashTab *htab, Matrix *mat)
 {
 	int hash = MELT (mat, 0, 0);
 	hash %= htab->size;
+	if (0 > hash) hash = -hash;
 
 	MatList *ptr = htab->matlist[hash];
 	while (ptr)
