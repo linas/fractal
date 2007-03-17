@@ -1,7 +1,7 @@
 /*
  * present.c
  *
- * hunt out group presentations
+ * Hunt out group presentations
  *
  * Linas February 2007
  */
@@ -177,7 +177,7 @@ HashTab * hashtab_new (int size)
 	HashTab *htab;
 	htab = (HashTab *) malloc(sizeof (HashTab));
 	htab->size = size;
-	htab->matlist = (MatList **) malloc(sizeof (MatList *));
+	htab->matlist = (MatList **) malloc(size * sizeof (MatList *));
 	for (i=0; i<size;i++)
 	{
 		htab->matlist[i] = NULL;
@@ -801,12 +801,12 @@ main ()
 		printf ("at depth %d tested %d words\n", depth, pr->cnt);
 
 		/* now do another go-around */
-		hashtab_report (pr->words);
+		// hashtab_report (pr->words);
 		pr->presentation = NULL;  // XXX should be a free 
 		pr->words = NULL; // XXX should be free
 
 		/* identity matrix */
-		pr->words = hashtab_new(133);
+		pr->words = hashtab_new( 13+ (1<<(depth-1)));
 		Matrix *e = matrix_new (pr->dim);
 		matrix_unit (e);
 		pr->ident = hashtab_add (pr->words, e, "", 'E');
