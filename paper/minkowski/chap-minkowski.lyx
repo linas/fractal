@@ -68,14 +68,15 @@ dyadic lattice
 \end_inset 
 
 , is the natural symmetry of many fractals, including those associated with
- period-doubling maps, with phase-locking maps, and with numerous dynamical
+ period-doubling maps, with phase-locking maps, and with various dynamical
  systems in general.
- 
+ The aim of this text is to provide a simple exposition of the symmetry
+ and its articulation.
 \layout Abstract
 
-The core idea underlying this connection is that many fractals can be represente
-d as an infinite binary tree.
- Besides just fractals, binary numbers (or 
+The core underlying idea is that many fractals can be represented as an
+ infinite binary tree.
+ Aside from fractals, binary numbers (or 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -85,20 +86,14 @@ dyadic numbers
 
 ) can also be represented as a binary tree.
  A string of 1's and 0's can be understood to be a choice of left and right
- movements through the branches of a tree; this is also the structure of
- the Cantor set.
+ movements through the branches of a tree; which gives it the structure
+ of the Cantor set.
  The rational numbers also may be arranged into a binary tree, which is
  variously called a Farey tree or a Stern-Brocot tree.
  The Minkowski question mark function arises as the isomorphism between
- the tree of dyadic numbers,and the tree of rational numbers.
+ the tree of dyadic numbers, and the tree of rational numbers.
  Fractal self-similarity arises naturally, with the observation that a subtree
  of a binary tree is isomorphic to the tree itself.
-\layout Abstract
-
-The goal of this paper is to provide a simple introduction and review of
- continued fractions, of the dyadic and Farey trees, the Minkowski question
- mark function, the dyadic monoid, and the relationship to the modular group.
- 
 \layout Abstract
 
 XXXX This paper is a rough, unfinished draft.
@@ -118,8 +113,8 @@ The Minkowski question mark function, shown in figure
 , has many strange and unusual properties.
  As is readily appearent, it is continuous everywhere, and monotonically
  increasing.
- Naive attempts to compute its derivative seems to show that it has a derivative
- that is zero 
+ A naive attempt to compute its derivative seems to show that it has a derivativ
+e that is zero 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -127,17 +122,14 @@ everywhere
 \begin_inset Quotes erd
 \end_inset 
 
-, or at least, zero on some set that is dense in the reals.
- Visually, it is also clearly self-similar, yet not linearly so, as some
- stretching and shrinking is needed to make the self-similarity work.
+, or at least, zero on the rational numbers.
+ A visual examination shows that it is clearly self-similar, yet the self-simila
+rity cannot be a simple re-scaling, as some stretching and shrinking is
+ needed to make the self-similarity work.
  The goal of this paper is to describe, in simple terms, its analytic and
  topological properties, and, most importantly, its self-similarity properties.
  These will be seen to be the self-similarities of the infinite binary tree.
- In conclusion, it will become clear that, in many ways, the question mark
- function is little more than just a manifestation of the innate structure
- of the infinite binary tree, expressed on the two-dimensional plane.
- However, it remains an important structure, due to its number-theoretic
- properties, its connections to the rational numbers and to continued fractions.
+ 
 \layout Standard
 
 
@@ -203,8 +195,25 @@ dyadic fractions
 
 .
  A dyadic fraction is simply a fracion whose denominator is a power of two.
- This text will distinguish between binary and dyadic, and the nodes of
- the binary tree need not be labelled with dyadic fractions.
+ This text will distinguish between binary and dyadic, with 
+\begin_inset Quotes eld
+\end_inset 
+
+binary
+\begin_inset Quotes erd
+\end_inset 
+
+ refering to the shape of the tree, and 
+\begin_inset Quotes eld
+\end_inset 
+
+dyadic
+\begin_inset Quotes erd
+\end_inset 
+
+ refering to powers of two.
+ For example, the nodes of the binary tree need not be labelled with dyadic
+ fractions.
  When they are, it may be called the 
 \begin_inset Quotes eld
 \end_inset 
@@ -257,7 +266,67 @@ The binary tree is readily navigated when descending down it, by making
 
 , every node can be uniquely labelled by the path taken to get to it from
  the root of the tree.
- 
+ A general node of the tree thus corresponds to some string of letters 
+\begin_inset Formula $L^{m}R^{n}L^{p}\cdots$
+\end_inset 
+
+ for some non-negative integer 
+\begin_inset Formula $m$
+\end_inset 
+
+ and positive integers 
+\begin_inset Formula $n$
+\end_inset 
+
+, 
+\begin_inset Formula $p$
+\end_inset 
+
+, \SpecialChar \ldots{}
+.
+ The superscript, as usual, simply means that a given letter is repeated
+ some number of times, so that 
+\begin_inset Formula \[
+L^{m}R^{n}L^{p}\cdots=\begin{array}{ccc}
+\underbrace{LLL\cdots L} & \underbrace{RR\cdots R} & \underbrace{LL\cdots L}\\
+m & n & p\end{array}\cdots\]
+
+\end_inset 
+
+For the dyadic tree, the path label can be directly converted to the dyadic
+ label: the string of 
+\begin_inset Formula $L$
+\end_inset 
+
+'s and 
+\begin_inset Formula $R$
+\end_inset 
+
+'s can be taken as a string of 
+\begin_inset Formula $0$
+\end_inset 
+
+'s and 
+\begin_inset Formula $1$
+\end_inset 
+
+'s, a binary expansion; one adds an extra 
+\begin_inset Formula $1$
+\end_inset 
+
+ at the end to get the dyadic value.
+ Thus, 
+\begin_inset Formula \[
+\begin{array}{ccccc}
+L & = & 0.01 & = & 1/4\\
+R & = & 0.11 & = & 3/4\\
+RL & = & 0.101 & = & 5/8\\
+L^{2} & = & 0.001 & = & 1/8\\
+L^{2}RL & = & 0.00101 & = & 5/32\end{array}\]
+
+\end_inset 
+
+
 \layout Standard
 
 Dy
