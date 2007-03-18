@@ -232,7 +232,7 @@ dyadic tree
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -246,7 +246,7 @@ The Dyadic Tree
 
 
 \begin_inset Graphics
-	filename dyadic.ps
+	filename dyadic.eps
 	width 100text%
 	clip
 
@@ -442,7 +442,7 @@ The Farey tree
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -456,7 +456,7 @@ The Farey Tree
 
 
 \begin_inset Graphics
-	filename farey.ps
+	filename farey.eps
 	width 100text%
 
 \end_inset 
@@ -916,29 +916,44 @@ leaf
 \begin_inset Formula $RLLLL\cdots$
 \end_inset 
 
- One 
+ One concludes that the dyadic tree, as a representation of the real numbers,
+ is triply degenerate at the 
+\begin_inset Formula $2$
+\end_inset 
+
+-adic fractions, in that 
+\begin_inset Formula $\frac{1}{2}=0.1000\cdots=0.01111\cdots$
+\end_inset 
+
+.
+ In fact, the leaves of the dyadic tree form the Cantor set, a property
+ that will be explored in a later section.
 \layout Standard
 
-triple-degenerate
-\layout Standard
+Given a continued-fraction expansion 
+\begin_inset Formula $x=[a_{1},a_{2},\cdots]$
+\end_inset 
 
-xxx
-\layout Standard
+ of a number real number 
+\begin_inset Formula $x$
+\end_inset 
 
-Nothing said above is particularly complicated; however, 
-\layout Standard
-
-xxxx
-\layout Standard
-
-, one writes 
+, one then has that 
 \begin_inset Formula \begin{equation}
-?(x)=2\sum_{k=1}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:}\end{equation}
+?\left(x\right)=2\sum_{k=1}^{N}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\end{equation}
 
 \end_inset 
 
- This sum can be visualized as a count of an alternating sequence of 0's
- and 1's in the binary expansion of 
+ where 
+\begin_inset Formula $N$
+\end_inset 
+
+ is the length of the continued fraction; 
+\begin_inset Formula $N=\infty$
+\end_inset 
+
+ for irrational numbers.This sum can be visualized as a count of an alternating
+ sequence of 0's and 1's in the binary expansion of 
 \begin_inset Formula $?(x)$
 \end_inset 
 
@@ -946,15 +961,44 @@ xxxx
 \begin_inset Formula \begin{equation}
 ?(x)=\begin{array}{ccccc}
 0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
-a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\label{eq:}\end{equation}
+a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\end{equation}
 
 \end_inset 
 
-In this expansion, it is useful to remember that 
-\begin_inset Formula $0.111111...=1.0000...$
+ When 
+\begin_inset Formula $N$
 \end_inset 
 
-, in case one has an odd number of terms in the continued fraction expansion.
+ is finite, then the expansion is completed by an infinite repetition of
+ the opposite of the last digit, so that, for 
+\begin_inset Formula $N$
+\end_inset 
+
+ even, the binary expansion trails off with all 0's, while for 
+\begin_inset Formula $N$
+\end_inset 
+
+ odd, it ends with all 1's.
+ This definition enables a simple algorithm for the direct evaluation of
+ both the qestion mark function, and its inverse: in one direction, one
+ simply computes the continued fraction expansion of a real number, and
+ converts it to a sum.
+ In the opposite direction, one simply counts digits in the dyadic expansion,
+ using these to reconstruct the continued fraction.
+\layout Standard
+
+To show that this definition is equivalent to the recursive definition for
+ the question mark function, it is sufficient to show that the two agree
+ on finite subsets of the binary tree.
+ 
+\layout Section
+
+xxxxxx
+\layout Standard
+
+Notes, these are wrong, elborate, delete.
+ Everything below is wrong.
+ Everything below this point needs to be corrected and re-written from scratch.
 \layout Standard
 
 There is also a well-known representation of the Stern-Brocot Tree on the
