@@ -232,7 +232,7 @@ dyadic tree
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -442,7 +442,7 @@ The Farey tree
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -582,7 +582,7 @@ n of the question mark function
 
 , one equates the Farey mediant to the arithmetic average:
 \begin_inset Formula \begin{equation}
-?\left(\frac{p+r}{q+s}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{r}{s}\right)\right]\label{eq:}\end{equation}
+?\left(\frac{p+r}{q+s}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{r}{s}\right)\right]\label{eq:recursive ? fun defn}\end{equation}
 
 \end_inset 
 
@@ -717,22 +717,19 @@ The rationals
  on the real numbes, and furthermore, that it is monotonically increasing.
 \layout Subsection
 
-Representations of Real Numbers
+Representations of Real Numbers 
 \layout Standard
 
-For many purposes, including numerical exploration, a non-recursive defintion
- of the question mark function is convenient to have.
- That is, given any rational or real 
-\begin_inset Formula $x$
-\end_inset 
+An alternate definition of the question mark function may be given that
+ is more suitable for many practical computations, than the recursive definition
+ of equation 
+\begin_inset LatexCommand \ref{eq:recursive ? fun defn}
 
-, one wants to be able to directly evaluate 
-\begin_inset Formula $?(x)$
 \end_inset 
 
 .
- This may be easily done by the use of continued fractions.
- 
+ The alternate defintion is given in terms of continued fractions, and requires
+ a breif diversion into the representation of real numbers.
 \layout Standard
 
 Let 
@@ -928,6 +925,24 @@ leaf
 .
  In fact, the leaves of the dyadic tree form the Cantor set, a property
  that will be explored in a later section.
+\layout Subsection
+
+A Direct Form for the Question Mark Function
+\layout Standard
+
+For many purposes, including numerical exploration, a non-recursive defintion
+ of the question mark function is convenient to have.
+ That is, given any rational or real 
+\begin_inset Formula $x$
+\end_inset 
+
+, one wants to be able to directly evaluate 
+\begin_inset Formula $?(x)$
+\end_inset 
+
+.
+ This may be easily done by the use of continued fractions.
+ 
 \layout Standard
 
 Given a continued-fraction expansion 
@@ -940,7 +955,7 @@ Given a continued-fraction expansion
 
 , one then has that 
 \begin_inset Formula \begin{equation}
-?\left(x\right)=2\sum_{k=1}^{N}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\end{equation}
+?\left(x\right)=2\sum_{k=1}^{N}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:direct ? fun defn}\end{equation}
 
 \end_inset 
 
@@ -985,11 +1000,145 @@ a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\end{equation}
  converts it to a sum.
  In the opposite direction, one simply counts digits in the dyadic expansion,
  using these to reconstruct the continued fraction.
-\layout Standard
+\layout Theorem*
 
-To show that this definition is equivalent to the recursive definition for
- the question mark function, it is sufficient to show that the two agree
- on finite subsets of the binary tree.
+The recursive definition of the Minkowski question mark function, given
+ in equation 
+\begin_inset LatexCommand \ref{eq:recursive ? fun defn}
+
+\end_inset 
+
+, is equivalent to the direct definition of equation 
+\begin_inset LatexCommand \ref{eq:direct ? fun defn}
+
+\end_inset 
+
+.
+ 
+\layout Proof
+
+To show equivalence, one needs to show that, after a sequence of left and
+ right moves on the binary tree, the direct definition, in terms of continued
+ fractions, gives a node on Farey tree labelled with the correct value of
+ the Farey fraction.
+ This equivalence may be made by induction.
+ 
+\layout Proof
+
+The proof requires the use of partial convergents of continued fractions.
+ Given a continued fraction 
+\begin_inset Formula $[a_{1},a_{2},\cdots]$
+\end_inset 
+
+, one defines the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th convergent as 
+\begin_inset Formula \[
+\frac{p_{k}}{q_{k}}=[a_{1},a_{2},\cdots,a_{k}]\]
+
+\end_inset 
+
+ that is, as the result of terminating the continued fraction at the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th term.
+ These are called convergents or approximants because these converge to
+ the final value of the continued fraction: 
+\begin_inset Formula \[
+[a_{1},a_{2},\cdots]=\lim_{k\to\infty}\frac{p_{k}}{q_{k}}\]
+
+\end_inset 
+
+ The numerator and denominator of the convergent obey well-known recursion
+ relations
+\begin_inset LatexCommand \cite{Khin35}
+
+\end_inset 
+
+: 
+\begin_inset Formula \begin{eqnarray*}
+p_{k} & = & a_{k}p_{k-1}+p_{k-2}\\
+q_{k} & = & a_{k}q_{k-1}+q_{k-2}\end{eqnarray*}
+
+\end_inset 
+
+ 
+\layout Proof
+
+A walk to the left or to the right on the dyadic tree is equivalent to appending
+ a 0 or a 1 to the dyadic expansion of a number.
+ Using the direct definition, the operation of left and right moves on continued
+ fractions may be discerened.
+ A left move is given by 
+\begin_inset Formula \[
+L\left([a_{1},a_{2},\cdots,a_{N}]\right)=\begin{cases}
+[a_{1},a_{2},\cdots,a_{N}+1] & \mbox{ for }N\mbox{ odd}\\{}
+[a_{1},a_{2},\cdots,a_{N}-1,2] & \mbox{ for }N\mbox{ even }\end{cases}\]
+
+\end_inset 
+
+ whereas the right move is defined similarly, with the role of even and
+ odd reversed.
+ That is, a left move either increases the trailing entry in the continued
+ fraction by one, or it inserts a comma, to start a new entry for the continued
+ fraction.
+ The seemingly strange appearence of the 
+\begin_inset Quotes eld
+\end_inset 
+
+-1,2
+\begin_inset Quotes erd
+\end_inset 
+
+ in the last is simply a byproduct of the identity 
+\begin_inset Formula $[a_{1},a_{2},\cdots,a_{N}]=[a_{1},a_{2},\cdots,a_{N}-1,1]$
+\end_inset 
+
+.
+ That is, the left move adds a one to the last entry, but only after normalizing
+ the continued fraction so that it has an odd length.
+ The right move does the same, after first normalizing to an even length.
+ Thus, to understand the general case, its sufficient to contemplate the
+ value of 
+\begin_inset Formula $[a_{1},a_{2},\cdots,a_{N}+1]$
+\end_inset 
+
+.
+\layout Proof
+
+Let 
+\begin_inset Formula \[
+\frac{r_{N}}{s_{N}}=[a_{1},a_{2},\cdots,a_{N}+1]\]
+
+\end_inset 
+
+ be the convergent of the (left or right) subnode.
+ One easily finds that 
+\begin_inset Formula $r_{N}=p_{N}+p_{N-1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $s_{N}=q_{N}+q_{N-1}$
+\end_inset 
+
+.
+ That is, the continued fraction 
+\begin_inset Formula $[a_{1},a_{2},\cdots,a_{N}+1]$
+\end_inset 
+
+ is the mediant of its two last convergents, 
+\begin_inset Formula $p_{N}/q_{N}$
+\end_inset 
+
+ and 
+\begin_inset Formula $p_{N-1}/q_{N-1}$
+\end_inset 
+
+.
+ This provides the inductive step.
  
 \layout Section
 
@@ -997,7 +1146,7 @@ xxxxxx
 \layout Standard
 
 Notes, these are wrong, elborate, delete.
- Everything below is wrong.
+ Everything below is misleadingly stated and possibly wrong.
  Everything below this point needs to be corrected and re-written from scratch.
 \layout Standard
 
