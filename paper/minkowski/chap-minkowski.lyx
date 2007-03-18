@@ -364,7 +364,12 @@ sup
 The Farey Tree
 \layout Standard
 
-The Farey tree, sometimes called the Stern-Brocot tree
+The Farey tree
+\begin_inset LatexCommand \cite{Har38}
+
+\end_inset 
+
+, sometimes called the Stern-Brocot tree
 \begin_inset LatexCommand \cite{Bog96}
 
 \end_inset 
@@ -392,7 +397,8 @@ The Farey tree, sometimes called the Stern-Brocot tree
 \end_inset 
 
 : one adds numerator and denominator, as if making a school-child mistake.
- Labelling the end-points of the unit interval as 
+ One begins the constuction by labelling the end-points of the unit interval
+ as 
 \begin_inset Formula $0/1$
 \end_inset 
 
@@ -400,24 +406,35 @@ The Farey tree, sometimes called the Stern-Brocot tree
 \begin_inset Formula $1/1$
 \end_inset 
 
-, the first mediant is 
-\begin_inset Formula $(0+1)/(1+1)=1/2$
+, and arranging them into a row, the zeroth row: 
+\begin_inset Formula $\left\{ \frac{0}{1},\frac{1}{1}\right\} $
 \end_inset 
 
 .
- Under this are two more mediants: 
+ The first mediant is 
+\begin_inset Formula $(0+1)/(1+1)=1/2$
+\end_inset 
+
+, which is placed in the middle to create the first row: 
+\begin_inset Formula $\left\{ \frac{0}{1},\frac{1}{2},\frac{1}{1}\right\} $
+\end_inset 
+
+.
+ At the next iteration, one may construct two more mediants,
 \begin_inset Formula \begin{eqnarray*}
 \frac{(0+1)}{(1+2)} & = & \frac{1}{3}\\
 \frac{(1+1)}{(2+1)} & = & \frac{2}{3}\end{eqnarray*}
 
 \end_inset 
 
- for the left and right nodes underneath 
-\begin_inset Formula $1/2$
+ which are placed in between thier progenitors, so: 
+\begin_inset Formula $\left\{ \frac{0}{1},\frac{1}{3},\frac{1}{2},\frac{2}{3},\frac{1}{1}\right\} $
 \end_inset 
 
 .
- The construction procceds onwards in this manner.
+ The construction proceeds onwards in this manner, with the mediant being
+ taken of neighboring fractions.
+ 
 \layout Standard
 
 
@@ -448,58 +465,84 @@ The Farey Tree
 
 \layout Standard
 
-Notes:
-\layout Standard
+Neighboring fractions in each row have the curious property of being 
+\begin_inset Quotes eld
+\end_inset 
 
-This section explores a peculiar mapping involving Farey numbers
+unimodular
+\begin_inset Quotes erd
+\end_inset 
+
+: by this, it is meant that if 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ and 
+\begin_inset Formula $r/s$
+\end_inset 
+
+ are neighboring fractions, then 
+\begin_inset Formula $rq-ps=1$
+\end_inset 
+
+.
+ This is easily proved by induction: clearly, the relation holds for 
+\begin_inset Formula $0/1$
+\end_inset 
+
+ and 
+\begin_inset Formula $1/1$
+\end_inset 
+
+.
+ One then shows that if the relationship holds for the pair 
+\begin_inset Formula $\left(\frac{p}{q},\frac{r}{s}\right)$
+\end_inset 
+
+, then it also holds for the two pairs 
+\begin_inset Formula $\left(\frac{p}{q},\frac{p+r}{q+s}\right)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\left(\frac{p+r}{q+s},\frac{r}{s}\right)$
+\end_inset 
+
+.
+ The term 
+\begin_inset Quotes eld
+\end_inset 
+
+unimodular
+\begin_inset Quotes erd
+\end_inset 
+
+, while seemingly opaque here, is no accident; the relation resembles the
+ taking of the determinant of a 2x2 matrix; the reason behind this will
+ become clearer in the following sections.
+ The unimodular property then allows one to prove that
+\begin_inset Formula \[
+\frac{p}{q}<\frac{p+r}{q+s}<\frac{r}{s}\]
+
+\end_inset 
+
+ and so mediants always lie strictly in between thier progenitors.
+ This implies that every row of Farey fractions are in strict ascending
+ order.
+ From this it follows that any given fraction can appear only once in a
+ given row, and that the progenitors of a given fraction are unique.
+ In fact, it may be shown that every fraction appears somewhere in the tree;
+ several simple proofs are provided in 
 \begin_inset LatexCommand \cite{Bog96}
 
 \end_inset 
 
 .
- The fact that it involves the Farey numbers is essentially the 
-\begin_inset Quotes eld
-\end_inset 
-
-explanation
-\begin_inset Quotes erd
-\end_inset 
-
- for why Farey Numbers occur in period-doubling maps.
- 
-\layout Standard
-
-The set of self-similarities are intimately tied with the modular group
- 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
-.
 \layout Subsection
 
-Definition of the Question Mark Function
+The Question Mark Function
 \layout Standard
 
 The Minkowski Question Mark map can be constructed in several ways.
-\layout Standard
-
-Note that every rational occurs precisely once in the Stern-Brocot Tree,
- and that the arrangement of the rationals is strictly order preserving:
- if 
-\begin_inset Formula $p/q<r/s$
-\end_inset 
-
- then 
-\begin_inset Formula $p/q$
-\end_inset 
-
- will appear to the left of 
-\begin_inset Formula $r/s$
-\end_inset 
-
- in the tree.
-\layout Standard
-
 \layout Standard
 
 We denote the values of the Minkowski Question Mark function as as 
