@@ -593,7 +593,7 @@ c average taking the place of the mediant.
 
 The recursive construction provides a map from the rationals to the dyadic
  rationals.
- Given a prime number 
+ Given a square-free number 
 \begin_inset Formula $p,$
 \end_inset 
 
@@ -618,6 +618,23 @@ The recursive construction provides a map from the rationals to the dyadic
 \end_inset 
 
  denotes the set of natural numbers.
+ The term 
+\begin_inset Quotes eld
+\end_inset 
+
+square-free
+\begin_inset Quotes erd
+\end_inset 
+
+ simply means that all of the prime factors of 
+\begin_inset Formula $p$
+\end_inset 
+
+ occur only once; 
+\begin_inset Formula $p$
+\end_inset 
+
+ contains no squares.
  With this notation, the question mark function is then a map 
 \begin_inset Formula \[
 ?:\mathbb{Q}\to\mathbb{Q}_{2}\]
@@ -632,7 +649,20 @@ The recursive construction provides a map from the rationals to the dyadic
  The restriction to the unit interval avoids the question of how to extend
  the question mark function to larger positive or negative arguments; several
  different, inequivalent extensions are possible.
- 
+ In all of what follows, whenever the symbols 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ or 
+\begin_inset Formula $\mathbb{Q}_{2}$
+\end_inset 
+
+ or even 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ are used, these should be understood to be limited to the unit interval;
+ this avoids the need for a more cumbersome notation.
 \layout Standard
 
 The rationals 
@@ -684,45 +714,222 @@ The rationals
  in the tree), and that all possible dyadics appear in the dyadic tree,
  and all possible rationals appear in the Farey tree.
  Thus, one may conclude that the question mark function is well-defined
- on the real numbes, and furthermore, tha it is monotonically increasing.
+ on the real numbes, and furthermore, that it is monotonically increasing.
+\layout Subsection
+
+Representations of Real Numbers
 \layout Standard
 
-XXXX ======== rewrite everything below here =======
-\layout Standard
+For many purposes, including numerical exploration, a non-recursive defintion
+ of the question mark function is convenient to have.
+ That is, given any rational or real 
+\begin_inset Formula $x$
+\end_inset 
 
-\layout Standard
-
-one quickly sees 
-\begin_inset Formula $?\left(1/n\right)=2^{-n+1}$
+, one wants to be able to directly evaluate 
+\begin_inset Formula $?(x)$
 \end_inset 
 
 .
- Similarly, 2/3 maps to 3/4, and 
-\begin_inset Formula $?(n/(2n-1))=2^{-1}+2^{-n}$
-\end_inset 
-
-.
- In general, a rational 
-\begin_inset Formula $p/q$
-\end_inset 
-
- maps to 
-\begin_inset Formula $?(p/q)=m\cdot2^{-n}$
-\end_inset 
-
- for some integers 
-\begin_inset Formula $m,n$
-\end_inset 
-
-.
+ This may be easily done by the use of continued fractions.
  
 \layout Standard
 
-An alternate, non-recursive definition for the Question Mark is based on
- continued fractions.
- Starting with the continued fraction representation for a number 
+Let 
 \begin_inset Formula $x=[a_{1},a_{2},...]$
 \end_inset 
+
+ be the continued fraction representation
+\begin_inset LatexCommand \cite{Khin35}
+
+\end_inset 
+
+ for a real number 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ In this representation, one has 
+\begin_inset Formula \[
+x=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\cdots}}}\]
+
+\end_inset 
+
+ for positive integers 
+\begin_inset Formula $a_{1},a_{2},a_{3},\cdots$
+\end_inset 
+
+ .
+ The word 
+\begin_inset Quotes eld
+\end_inset 
+
+representation
+\begin_inset Quotes erd
+\end_inset 
+
+ here is not lightly choosen, but is meant to evoke a deeper idea: that
+ the real numbers exist as an abstract set, whereas the continued fraction
+ is one way of writing down the value of a real number in a manipulable
+ way.
+ Other representations are possible: of course, everyone is taught the decimal
+ expansion (the base-10 or 10-adic representation).
+ Formally, one writes 
+\begin_inset Formula \[
+[]:\mathbb{R}\to\mathbb{N}^{\omega}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $[]$
+\end_inset 
+
+ is understood to be the operation of creating the continued fraction expansion
+ of a real number, and 
+\begin_inset Formula $\mathbb{N}^{\omega}=\mathbb{N}\times\mathbb{N}\times\cdots$
+\end_inset 
+
+ is understood to be the Cartesian product of a countable infinity of copies
+ of the natural numbers 
+\begin_inset Formula $\mathbb{N}$
+\end_inset 
+
+.
+ By contrast, the 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic or base-
+\begin_inset Formula $p$
+\end_inset 
+
+ representation of a real number is given by 
+\begin_inset Formula \[
+()_{p}:\mathbb{R}\to\mathbb{Z}_{p}^{\omega}\]
+
+\end_inset 
+
+ Here, 
+\begin_inset Formula $\mathbb{Z}_{p}=\left\{ n\vert n\in\mathbb{Z},\,0\le n<p\right\} $
+\end_inset 
+
+ is the set of integers from 0 to 
+\begin_inset Formula $p-1$
+\end_inset 
+
+, and so 
+\begin_inset Formula $\mathbb{Z}_{p}^{\omega}=\mathbb{Z}_{p}\times\mathbb{Z}_{p}\times\cdots$
+\end_inset 
+
+ is the product of a countable infinity of copies of 
+\begin_inset Formula $\mathbb{Z}_{p}$
+\end_inset 
+
+.
+ Here, the symbol 
+\begin_inset Formula $(x)_{p}$
+\end_inset 
+
+ just means, very simply, 
+\begin_inset Quotes eld
+\end_inset 
+
+take the base-
+\begin_inset Formula $p$
+\end_inset 
+
+ expansion of the real number 
+\begin_inset Formula $x$
+\end_inset 
+
+
+\begin_inset Quotes erd
+\end_inset 
+
+, so that, for example, 
+\begin_inset Formula $(\pi)_{10}=3.141592653\cdots$
+\end_inset 
+
+.
+\layout Standard
+
+A remarkable and sometimes-forgotten property of the 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic representation is that it is not isomorphic to the real numbers.
+ A common school demonstration is that 
+\begin_inset Formula $0.9999\cdots=1.000\cdots$
+\end_inset 
+
+: there are two different base-10 expansions that are equal to the same
+ real number.
+ In fact, this ambiguity exists for any 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic fraction when written out in base-
+\begin_inset Formula $p$
+\end_inset 
+
+.
+ This happens for 
+\emph on 
+every
+\emph default 
+ 
+\begin_inset Formula $p$
+\end_inset 
+
+-adic representation.
+ There is a very simple way of visualizing this problem in terms of trees.
+ Consider, for example, 
+\begin_inset Formula $p=2$
+\end_inset 
+
+.
+ A 
+\begin_inset Formula $2$
+\end_inset 
+
+-adic fraction corresponds to a node in the dyadic tree:the dyadic tree
+ provides a representation for the 2-adic fractions.
+ Consider now the real number obtained by starting at a given node, taking
+ the left branch, and then a succession of right branches, as so: 
+\begin_inset Formula $LRRRR\cdots$
+\end_inset 
+
+.
+ after an infinite number of steps, one arrives at a 
+\begin_inset Quotes eld
+\end_inset 
+
+leaf
+\begin_inset Quotes erd
+\end_inset 
+
+ of the tree.
+ The numerical value of the leaf, expressed as a real number, is identical
+ to the starting node.
+ Similarly, one may take the right branch, followed by a succession of left
+ branches, like so: 
+\begin_inset Formula $RLLLL\cdots$
+\end_inset 
+
+ One 
+\layout Standard
+
+triple-degenerate
+\layout Standard
+
+xxx
+\layout Standard
+
+Nothing said above is particularly complicated; however, 
+\layout Standard
+
+xxxx
+\layout Standard
 
 , one writes 
 \begin_inset Formula \begin{equation}
@@ -748,23 +955,6 @@ In this expansion, it is useful to remember that
 \end_inset 
 
 , in case one has an odd number of terms in the continued fraction expansion.
-\layout Standard
-
-This sequence of 1's and 0's can be understood to be the set of directions
- for navigating a tree: on encountering a 0, take the left branch, else
- take the right branch.
- Thus, we can write 
-\begin_inset Formula $0.011=LRR$
-\end_inset 
-
-.
- Navigating to this spot on the Stern-Brocot Tree, we find 2/5'ths.
- Navigating to this same position on the Dyadic Tree wee get 3/8'ths.
- Thus, 
-\begin_inset Formula $?(2/5)=3/8$
-\end_inset 
-
-.
 \layout Standard
 
 There is also a well-known representation of the Stern-Brocot Tree on the
