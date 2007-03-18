@@ -167,6 +167,9 @@ This figure was generated with the code at misc/gap/quest.gplot
 \end_inset 
 
 
+\layout Subsection
+
+The Binary Tree
 \layout Standard
 
 The infinite binary tree is depicted in figure 
@@ -315,7 +318,11 @@ For the dyadic tree, the path label can be directly converted to the dyadic
 \end_inset 
 
  at the end to get the dyadic value.
- Thus, 
+ Thus, starting at the root of the tree, taken to be 
+\begin_inset Formula $1/2$
+\end_inset 
+
+, a series of left and right moves takes one to the following nodes:
 \begin_inset Formula \[
 \begin{array}{ccccc}
 L & = & 0.01 & = & 1/4\\
@@ -326,10 +333,91 @@ L^{2}RL & = & 0.00101 & = & 5/32\end{array}\]
 
 \end_inset 
 
-
+ 
 \layout Standard
 
-Dy
+Selecting a node in the tree is the same as selecting a subtree, in that
+ the node is the root of the entire subtree underneath it.
+ Any subtree is clearly isomorphic to the whole tree, and it is from this
+ property that self-similarity follows for any system that can be mapped
+ onto the binary tree.
+ If the nodes of the tree are labelled in strictly ascending order, as they
+ are in the dyadic tree, then selecting a node in the tree is the same as
+ specifying an interval: the interval runs from the lim 
+\emph on 
+inf
+\emph default 
+ to the lim 
+\emph on 
+sup
+\emph default 
+ of the subtree.
+ The converse is not true: a general interval will not correspond to a single
+ subtree.
+ One may choose the lower limit of an interval arbitrarily, but the upper
+ limit of the interval will be constrained by the possible subtrees with
+ the given lower limit.
+ These ideas, of the equivalence of intervals and trees and nodes, will
+ be made more precise in later sections.
+\layout Subsection
+
+The Farey Tree
+\layout Standard
+
+The Farey tree, sometimes called the Stern-Brocot tree
+\begin_inset LatexCommand \cite{Bog96}
+
+\end_inset 
+
+, is depicted in figure 
+\begin_inset LatexCommand \ref{cap:The-Farey-Tree}
+
+\end_inset 
+
+.
+ It is a binary tree labelled with rational numbers in the most peculiar
+ fashion, and the tree has many unusual and interesting number-theoretic
+ properties.
+ It is constructed by means of mediants.
+ The mediant of two fractions 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ and 
+\begin_inset Formula $r/s$
+\end_inset 
+
+ is defined as 
+\begin_inset Formula $(p+r)/(q+s)$
+\end_inset 
+
+: one adds numerator and denominator, as if making a school-child mistake.
+ Labelling the end-points of the unit interval as 
+\begin_inset Formula $0/1$
+\end_inset 
+
+ to 
+\begin_inset Formula $1/1$
+\end_inset 
+
+, the first mediant is 
+\begin_inset Formula $(0+1)/(1+1)=1/2$
+\end_inset 
+
+.
+ Under this are two more mediants: 
+\begin_inset Formula \begin{eqnarray*}
+\frac{(0+1)}{(1+2)} & = & \frac{1}{3}\\
+\frac{(1+1)}{(2+1)} & = & \frac{2}{3}\end{eqnarray*}
+
+\end_inset 
+
+ for the left and right nodes underneath 
+\begin_inset Formula $1/2$
+\end_inset 
+
+.
+ The construction procceds onwards in this manner.
 \layout Standard
 
 
@@ -381,10 +469,7 @@ explanation
  
 \layout Standard
 
-.
- In this chapter, we will also demonstrate that it is fractally self-similar,
- in that certain sub-intervals have exactly the same shape as the whole.
- The set of self-similarities are intimately tied with the modular group
+The set of self-similarities are intimately tied with the modular group
  
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset 
@@ -396,49 +481,6 @@ Definition of the Question Mark Function
 \layout Standard
 
 The Minkowski Question Mark map can be constructed in several ways.
- In all of these constructions, it can be understood to be the mapping between
- the Stern-Brocot Tree (sometimes called the Farey Tree) and the tree of
- real numbers expressed as binary, base-2, dyadic fractions.
- The Stern-Brocot Tree is the tree on which the Farey mediants are naturally
- organized, and is most easily explained with a picture; please refer to
- the figure 
-\begin_inset LatexCommand \ref{cap:The-Farey-Tree}
-
-\end_inset 
-
-.
-\layout Standard
-
-The Farey Tree is constructed by taking an interval and placing the Farey
- mediant in the middle, subdividing the interval into two.
- The middles of the intervals are thus sorted into a tree form.
- The mediant of the fractions 
-\begin_inset Formula $p/q$
-\end_inset 
-
- and 
-\begin_inset Formula $r/s$
-\end_inset 
-
- is defined as 
-\begin_inset Formula $(p+r)/(q+s)$
-\end_inset 
-
- and thus resembles a school-child mistake.
- Starting with the interval 
-\begin_inset Formula $0/1$
-\end_inset 
-
- to 
-\begin_inset Formula $1/1$
-\end_inset 
-
- the first mediant is thus 
-\begin_inset Formula $(0+1)/(1+1)=1/2$
-\end_inset 
-
-; one then continues onwards from there.
- 
 \layout Standard
 
 Note that every rational occurs precisely once in the Stern-Brocot Tree,
@@ -458,28 +500,6 @@ Note that every rational occurs precisely once in the Stern-Brocot Tree,
  in the tree.
 \layout Standard
 
-See the presentation at on 
-\begin_inset LatexCommand \htmlurl[Stern Brocot Trees]{http://www.cut-the-knot.org/blue/Stern.shtml}
-
-\end_inset 
-
- at Alexander Bogomolny's Cut-the-Knot for a detailed exposition.
-\layout Standard
-
-The dyadic tree has the same shape, as the Stern-Brocot Tree, except the
- subdivision of intervals is a strict arithmetic subdivision: 1/2 lies between
- 0 and 1, and 1/4 lies between 0 and 1/2, and so on.
- Thus,the second row of the tree holds the values 1/4 and 3/4, and the next
- row the values 1/8, 3/8, 5/8 and 7/8, and so on.
- The dyadic tree holds values that are the arithmetic average, rather than
- the mediant, of the parent values.
- Both trees are 'binary' in the sense that each branch splits into two;
- we use the term 'dyadic tree' for the one that holds the 'dyadic' numbers
- 
-\begin_inset Formula $p/2^{k}$
-\end_inset 
-
-.
 \layout Standard
 
 We denote the values of the Minkowski Question Mark function as as 
