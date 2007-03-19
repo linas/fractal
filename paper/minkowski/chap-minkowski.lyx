@@ -362,16 +362,16 @@ sup
  be made more precise in later sections.
 \layout Subsection
 
-The Farey Tree
+The Stern-Brocot Tree
 \layout Standard
 
-The Farey tree
-\begin_inset LatexCommand \cite{Har38}
+The Stern-Brocot tree
+\begin_inset LatexCommand \cite{Bog96}
 
 \end_inset 
 
-, sometimes called the Stern-Brocot tree
-\begin_inset LatexCommand \cite{Bog96}
+, at whose nodes sit the Farey fractions
+\begin_inset LatexCommand \cite{Har38}
 
 \end_inset 
 
@@ -442,7 +442,7 @@ The Farey tree
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -451,7 +451,7 @@ collapsed true
 
 \end_inset 
 
-The Farey Tree
+The Stern-Brocot Tree
 \layout Standard
 
 
@@ -518,9 +518,26 @@ unimodular
 \begin_inset Quotes erd
 \end_inset 
 
-, while seemingly opaque here, is no accident; the relation resembles the
- taking of the determinant of a 2x2 matrix; the reason behind this will
- become clearer in the following sections.
+, while seemingly opaque here, is no accident.
+ The pair of fractions, written as a 2x2 matrix 
+\begin_inset Formula \[
+A=\left[\begin{array}{cc}
+r & p\\
+s & q\end{array}\right]\]
+
+\end_inset 
+
+ has a unit determinant, and so 
+\begin_inset Formula $A\in SL(2,\mathbb{Z})$
+\end_inset 
+
+, where 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ is the group of 2x2 matricies with unit determinant.
+ Although its appearence here seems arbitrary, this group of matricies will
+ recur more deeply throughout the theory of binary trees.
  The unimodular property then allows one to prove that
 \begin_inset Formula \[
 \frac{p}{q}<\frac{p+r}{q+s}<\frac{r}{s}\]
@@ -544,14 +561,14 @@ unimodular
 The Question Mark Function
 \layout Standard
 
-By identifying the dyadic tree and the Farey tree, one obtains the Minkowski
- question mark function as the map between the two trees.
+By identifying the dyadic tree and the Stern-Brocot tree, one obtains the
+ Minkowski question mark function as the map between the two trees.
  The question mark function is denoted by 
 \begin_inset Formula $?(x)$
 \end_inset 
 
-, and is the map of labels from the Farey tree to the dyadic tree, so that,
- for example, 
+, and is the map of labels from the Stern-Brocot tree to the dyadic tree,
+ so that, for example, 
 \begin_inset Formula $?(1/3)=1/4$
 \end_inset 
 
@@ -587,8 +604,8 @@ n of the question mark function
 \end_inset 
 
 That this gives a node on the dyadic tree follows easily, as the dyadic
- tree may be constructed in the same way that the Farey tree was, with arithmeti
-c average taking the place of the mediant.
+ tree may be constructed in the same way that the Stern-Brocot tree was,
+ with arithmetic average taking the place of the mediant.
 \layout Standard
 
 The recursive construction provides a map from the rationals to the dyadic
@@ -612,7 +629,7 @@ The recursive construction provides a map from the rationals to the dyadic
 \begin_inset Formula $p$
 \end_inset 
 
- in the denominator.
+ inp_{N-1}/q_{N-1} the denominator.
  Here, 
 \begin_inset Formula $\mathbb{N}$
 \end_inset 
@@ -699,7 +716,7 @@ The rationals
 
  is also an open set.
  The proof of continuity follows from the fact that both the dyadic and
- the Farey trees were strictly ordered (if 
+ the Stern-Brocot trees were strictly ordered (if 
 \begin_inset Formula $p/q<r/s$
 \end_inset 
 
@@ -712,7 +729,7 @@ The rationals
 \end_inset 
 
  in the tree), and that all possible dyadics appear in the dyadic tree,
- and all possible rationals appear in the Farey tree.
+ and all possible rationals appear in the Stern-Brocot tree.
  Thus, one may conclude that the question mark function is well-defined
  on the real numbes, and furthermore, that it is monotonically increasing.
 \layout Subsection
@@ -1019,8 +1036,8 @@ The recursive definition of the Minkowski question mark function, given
 
 To show equivalence, one needs to show that, after a sequence of left and
  right moves on the binary tree, the direct definition, in terms of continued
- fractions, gives a node on Farey tree labelled with the correct value of
- the Farey fraction.
+ fractions, gives a node on Stern-Brocot tree labelled with the correct
+ value of the Farey fraction.
  This equivalence may be made by induction.
  
 \layout Proof
@@ -1139,14 +1156,157 @@ Let
 
 .
  This provides the inductive step.
+ The convergent 
+\begin_inset Formula $p_{N}/q_{N}$
+\end_inset 
+
+ corresponds to the immediate predecessor of 
+\begin_inset Formula $r_{N}/s_{N}$
+\end_inset 
+
+ in the Stern-Brocot tree, while the convergent 
+\begin_inset Formula $p_{N-1}/q_{N-1}$
+\end_inset 
+
+ represents the last 
+\begin_inset Quotes eld
+\end_inset 
+
+change of direction
+\begin_inset Quotes erd
+\end_inset 
+
+ in the left-right traversal.
+\layout Standard
+
+Just as the mediants of the Farey fractions were unimodular, so are the
+ convergents of a continued fraction: 
+\begin_inset Formula $q_{k}p_{k-1}-p_{k}q_{k-1}=(-1)^{k}$
+\end_inset 
+
+, so that, as before, these may be arranged into a 2x2 matrix with unit
+ determinant.
+\layout Subsection
+
+Pellian Equations
+\layout Standard
+
+The question mark function has the curious property that it maps quadratic
+ irrationals to rational numbers, and thus arises indirectly in the theory
+ of Pellian equations.
+ The connection can be demonstrated as follows.
+ It has already been noted that the question mark maps rational numbers
+ to dyadics.
+ Dyadic rationals have, by definition, a finite length binary expansion;
+ just as rational numbers have a finite number of terms in thier continued
+ fraction expansion: the question mark maps finite sequences to finite sequences.
+ But what about periodic sequences? The fraction 1/9 has a repeating 2-adic
+ expansion: 
+\begin_inset Formula $1/9=0.000111011101110\cdots$
+\end_inset 
+
+ Thus, the corresponding continued fraction must be periodic as well: 
+\begin_inset Formula $?([4,3,1,3,1,3,1,\cdots])=1/9$
+\end_inset 
+
+.
+ What is the value of the continued fraction? Writing 
+\begin_inset Formula $[4,3,1,3,1,3,1,\cdots]=[4,x]$
+\end_inset 
+
+, the value of 
+\begin_inset Formula $x$
+\end_inset 
+
+ must satisfy 
+\begin_inset Formula $x=[3,1,x]$
+\end_inset 
+
+ or 
+\begin_inset Formula $x=-1/2+\sqrt{7/12}$
+\end_inset 
+
+, so that 
+\begin_inset Formula $[4,3,1,3,1,3,1,\cdots]=1/(4+x)=\left(21-\sqrt{21}\right)/77$
+\end_inset 
+
+.
+ In other words, one has 
+\begin_inset Formula $?\left(\left(21-\sqrt{21}\right)/77\right)=1/9$
+\end_inset 
+
+.
  
+\layout Standard
+
+The solution took the form 
+\begin_inset Formula $\left(j+k\sqrt{D}\right)/m$
+\end_inset 
+
+ for some integers 
+\begin_inset Formula $j,k$
+\end_inset 
+
+ and positive integers 
+\begin_inset Formula $D,m$
+\end_inset 
+
+.
+ A number of this form is called a quadratic irrational; every such number
+ is a solution to a quadratic equation.
+ Gauss had demonstrated that every continued fraction that eventually becomes
+ periodic takes a value that is a quadratic irrational, and conversely,
+ that every quadratic irrational has a continued fraction expansion that
+ eventually becomes periodic.
+ Gauss also demonstrated that the partial convergents of the continued fraction
+ are solutions to an equation 
+\layout Standard
+
+
+\begin_inset Formula \[
+p^{2}-nq^{2}=1\]
+
+\end_inset 
+
+ for integer 
+\begin_inset Formula $p,q$
+\end_inset 
+
+ and square-free integer 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ This equation is the Pellian equation; clearly the rational 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ becomes a good approximation to 
+\begin_inset Formula $\sqrt{n}$
+\end_inset 
+
+.
+ The appearence of the 1 on the right-hand side is again a manifestation
+ of the unimodular relationship between partial convergents of the continued
+ fraction: again, 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ enters the picture.
+ Curiously, the classification of the solutions to the Pellain equation
+ has a connection to the Riemann hypothesis.
+\layout Standard
+
+A side effect of the question mark mapping is that it provides a simple
+ proof that the set of quadratic irrationals is countable: each one is associate
+d to a unique rational, and the rationals are countable.
 \layout Section
 
 xxxxxx
 \layout Standard
 
-Notes, these are wrong, elborate, delete.
- Everything below is misleadingly stated and possibly wrong.
+Notes.
+ Everything below is misleadingly or confusingly stated and possibly wrong.
  Everything below this point needs to be corrected and re-written from scratch.
 \layout Standard
 
@@ -1206,37 +1366,6 @@ bard landing rays.
 Some Curious Properties of the Question Mark 
 \layout Standard
 
-The Question Mark has the curious property that it maps quadratic irrationals
- to rational numbers.
- A quadratic irrational is a number of the form m 
-\begin_inset Formula $p/q+m\sqrt{D}/n$
-\end_inset 
-
- for integers 
-\begin_inset Formula $p,q,m,D,n$
-\end_inset 
-
-.
- Continued fractions whose expansions become eventually periodic are mapped
- to binary strings that become eventually periodic.
- The later are clearly just the binary expansions of rationals whose denominator
- is not a power of 2.
- The former are quadratic irrationals, which is known from the theory of
- Pellian equations: It turns out that every quadratic irrational has a continued
- fraction expansion that becomes eventually periodic.
- Note that, as a side effect, this proves that quadratic irrationals are
- countable in the same way that rationals are.
-\layout Standard
-
-The Minkowski Question Mark has some very curious analytic properties: the
- mapping is continuous everywhere.
- It is also infinitely differentiable on every rational, and all derivatives
- vanish at every rational; yet the mapping is strictly monotonically increasing.
- Clearly, the function is singular on irrationals.
- Its hard to define just how.
- (xxxx Blah blah need to define how).
-\layout Standard
-
 If there is a 3-adic or p-adic generalization of the Minkowski Question
  Mark, it is not obvious; one 'obvious' generalization is 
 \layout Standard
@@ -1262,16 +1391,6 @@ but its highly discontinuous.
 \layout Subsection
 
 Symmetries of the Question Mark
-\layout Standard
-
-XXX write the intro again:...
- the symmetry is the group that maps trees to subtrees so the symmetry group
- of mapping a binary tree onto itself in the modular group.
- XXX rewrite me.
- XXX also notice that the tree spans an inf-sup interval which is why this
- is an interval map and notice that trees don't span any arbitrary interval,
- but very specific intervals.
- XXX
 \layout Standard
 
 It should be immediately apparent from the picture of the Question Mark
