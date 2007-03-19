@@ -442,7 +442,7 @@ The Stern-Brocot tree
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -990,10 +990,10 @@ Given a continued-fraction expansion
 \end_inset 
 
 : 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula \[
 ?(x)=\begin{array}{ccccc}
 0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
-a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\end{equation}
+a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\]
 
 \end_inset 
 
@@ -1302,180 +1302,122 @@ A side effect of the question mark mapping is that it provides a simple
 d to a unique rational, and the rationals are countable.
 \layout Section
 
-xxxxxx
-\layout Standard
-
-Notes.
- Everything below is misleadingly or confusingly stated and possibly wrong.
- Everything below this point needs to be corrected and re-written from scratch.
-\layout Standard
-
-There is also a well-known representation of the Stern-Brocot Tree on the
- lattice 
-\begin_inset Formula $\mathbb{Z\mathbb{\times Z}}$
-\end_inset 
-
-, where a fraction 
-\begin_inset Formula $p/q$
-\end_inset 
-
- is denoted as the ordered pair 
-\begin_inset Formula $(p,q)$
-\end_inset 
-
-.
- In this representation, the left-right navigation operators 
-\begin_inset Formula $L$
-\end_inset 
-
- and 
-\begin_inset Formula $R$
-\end_inset 
-
- have the values 
-\begin_inset Formula $L=\left(\begin{array}{cc}
-1 & 0\\
-1 & 1\end{array}\right)$
-\end_inset 
-
- and 
-\begin_inset Formula $R=\left(\begin{array}{cc}
-1 & 1\\
-0 & 1\end{array}\right)$
-\end_inset 
-
- and thus positions are given as elements of 
-\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
-\end_inset 
-
-.
- Maybe we'll elaborate on this later xxxx.
- To do...
- elaborate.
-\layout Standard
-
-To summarize, it is this expansion in binary digits that provides the underlying
- connection between period-doubling maps, such as the Mandelbrot Set, and
- Farey Numbers.
- Binary expansions, or code-words, occur naturally in the analysis of Duoady-Hub
-bard landing rays.
- We'll demonstrate an explicit mapping in a later section.
- XXX cut/reword this last paragraph.
-\layout Subsection
-
-Some Curious Properties of the Question Mark 
-\layout Standard
-
-If there is a 3-adic or p-adic generalization of the Minkowski Question
- Mark, it is not obvious; one 'obvious' generalization is 
-\layout Standard
-
-
-\begin_inset Formula \begin{equation}
-\sum_{k=1}\left(-1\right)^{k}\;3^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:}\end{equation}
-
-\end_inset 
-
-but its highly discontinuous.
- Other generalizations based on roots of unity in the complex plane also
- don't seem to work.
- One might be able to get traction by looking at groups that have 
-\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
-\end_inset 
-
- as a subgroup but also have some 
-\begin_inset Formula $p$
-\end_inset 
-
--fold symmetry.
-\layout Subsection
-
 Symmetries of the Question Mark
 \layout Standard
 
-It should be immediately apparent from the picture of the Question Mark
- that it is highly self-similar, and thus should have a group of symmetries.
- Below, we give an explicit presentation of this group, which turns out
- to be the Modular Group Gamma.
- Strictly speaking, the set of self-similarities is really a subset of the
- modular group, a semi-group of sorts.
- This is due to the nature of the construction; the correct extension to
- the full group is a bit confusing.
-\layout Standard
-
-After briefly presenting the modular group a bit, we point out that the
- 'interesting' subset of the group, that is, 'interesting' as far as fractals
- are concerned, can be best enumerated as 
-\begin_inset Formula $\mathbb{Q}\otimes\mathbb{N}\otimes\mathbb{Z}_{2}$
+The question mark function is self-similar, and the generators of the similarity
+ transformations can be written down explicitly.
+ These generate a subset of a group (they do not generate a whole group,
+ as will be made clear); a subset of the modular group 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
 \end_inset 
 
 .
- This enumeration will help cement that the modular group is the symmetry
- group of a broad range of fractal curves (the de Rham curve and its various
- expressions).
- I'm enamored of this development, because the popular literature on fractals
- always talks about self-similarity without ever actually giving the group
- structure that's involved.
- The goal here is to rectify this omission.
- The development for general fractal curves occurs in the next chapter;
- here we limit ourselves to the Question Mark (which is a de Rham curve).
+ We'll give it a name: the 
+\emph on 
+dyadic monoid
+\emph default 
+, although in many ways it is more of a lattice than a monoid.
+ The concept of a monoid, and a lattice, will be defined below; the reason
+ for naming the dyadic monoid now is to support a hypothesis: the dyadic
+ monoid gives the symmetry of all period-doubling fractal and chaotic phenomena;
+ and can more or less be promoted to a category.
+ 
 \layout Standard
 
-We start by noticing that for any real number 
+Given a real number 
 \begin_inset Formula $x$
 \end_inset 
 
  having the continued fraction expansion 
-\begin_inset Formula $x=[a_{1},a_{2},...]$
+\begin_inset Formula $x=[a_{1},a_{2},\cdots]$
 \end_inset 
 
-, that 
-\begin_inset Formula $g(x)=x/(1+x)=[a_{1}+1,a_{2},...]$
+, define the function 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+ to be 
+\begin_inset Formula $g(x)=[a_{1}+1,a_{2},\cdots]$
 \end_inset 
 
  .
- By the definition of 
-\begin_inset Formula $?(x)$
+ A straightforward manipulation shows that 
+\begin_inset Formula $g(x)$
 \end_inset 
 
- one sees immediately that 
-\begin_inset Formula $g$
-\end_inset 
-
- is a homomorphism of the Question Mark: 
-\begin_inset Formula $(?\circ g)(x)=?(g(x))=?(x)/2$
+ has an explicit, concrete form: 
+\begin_inset Formula $g(x)=x/(1+x)$
 \end_inset 
 
 .
- Thus, 
+ Making use of the 
+\begin_inset Quotes eld
+\end_inset 
+
+direct
+\begin_inset Quotes erd
+\end_inset 
+
+ defintion of the question mark 
+\begin_inset LatexCommand \ref{eq:direct ? fun defn}
+
+\end_inset 
+
+, one has that 
 \begin_inset Formula $g$
 \end_inset 
 
- represents one of the generators of the symmetry group.
- Denoting repeated iterations of 
+ is a homomorphism of the question mark: 
+\layout Standard
+
+
+\begin_inset Formula \[
+(?\circ g)(x)=?(g(x))=?\left(\frac{x}{1+x}\right)=\frac{?(x)}{2}\]
+
+\end_inset 
+
+Here, 
+\begin_inset Formula $\circ$
+\end_inset 
+
+ denotes function composition.
+ The above identity follows, as adding one to 
+\begin_inset Formula $a_{1}$
+\end_inset 
+
+is the same as dividing by two in 
+\begin_inset LatexCommand \ref{eq:direct ? fun defn}
+
+\end_inset 
+
+.
+ The repeated application of the function 
 \begin_inset Formula $g$
 \end_inset 
 
- by 
+ generates a symmetry of the question mark.
+ Denoting repeated iterations by 
 \begin_inset Formula $g^{n}$
 \end_inset 
 
- we have 
+, one readily obtains 
 \begin_inset Formula $g^{n}(x)=x/(1+nx)$
 \end_inset 
 
 .
- Equivalently, for a continued fraction, we have 
-\begin_inset Formula \begin{equation}
-g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]\label{eq:}\end{equation}
+ Equivalently, for a continued fraction, 
+\begin_inset Formula \[
+g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]\]
 
 \end_inset 
 
  Iterating under the question mark gives 
-\begin_inset Formula $?(x/(1+nx))=?(x)/2^{n}$
+\begin_inset Formula \[
+\left(?\circ g^{n}\right)(x)=?\left(\frac{1}{nx+1}\right)=\frac{?(x)}{2^{n}}\]
+
 \end_inset 
 
-.
  The generator 
 \begin_inset Formula $g$
 \end_inset 
@@ -1484,38 +1426,53 @@ g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]\label{eq:}\end{equation}
 \begin_inset Formula $g^{n}:[[0,1]]\rightarrow[[0,\frac{1}{n+1}]]$
 \end_inset 
 
- where we use the non-standard notation 
-\begin_inset Formula $[[]]$
+.
+ Here the non-standard notation 
+\begin_inset Formula $x\in[[a,b]]$
 \end_inset 
 
- to denote an interval, to avoid confusion with 
+ is introduced to denote an interval 
+\begin_inset Formula $a\le x\le b$
+\end_inset 
+
+; the double bracket form is used only to avoid confusion with 
 \begin_inset Formula $[]$
 \end_inset 
 
  for continued fraction expansions.
  On the dyadic side, we have 
-\begin_inset Formula $(?g^{n}):[[0,1]]\rightarrow[[0,1/2^{n}]]$
+\begin_inset Formula $(?\circ g^{n}):[[0,1]]\rightarrow[[0,1/2^{n}]]$
 \end_inset 
 
 .
  
 \layout Standard
 
-One gets the general symmetry group 
-\begin_inset Formula $\Gamma$
+The other symmetry of the question mark is more trivial: the question mark
+ is symmetric under a left-right reflection:
+\begin_inset Formula \[
+?(1-x)=1-?(x)\]
+
 \end_inset 
 
- by combining with the reflection operator embodied in the left-right symmetry:
- 
-\begin_inset Formula $?(1-x)=1-?(x)$
+Denoting this by 
+\begin_inset Formula $r$
 \end_inset 
 
- which we denote with 
+ for 
+\begin_inset Quotes eld
+\end_inset 
+
+reflection
+\begin_inset Quotes erd
+\end_inset 
+
+, a reflection operator may be defined as 
 \begin_inset Formula $r(x)=1-x$
 \end_inset 
 
 .
- Note that 
+ As an operator, 
 \begin_inset Formula $r$
 \end_inset 
 
@@ -1523,14 +1480,32 @@ One gets the general symmetry group
 \begin_inset Formula $?$
 \end_inset 
 
- as we have 
+, since 
 \begin_inset Formula $(?\circ r)(x)=(r\circ?)(x)$
 \end_inset 
 
 .
+ Clearly, 
+\begin_inset Formula $r$
+\end_inset 
+
+ cannot be applied more than once, since 
+\begin_inset Formula $r^{2}$
+\end_inset 
+
+ is the identity.
+ The reflection operator 
+\begin_inset Formula $r$
+\end_inset 
+
+, composed with 
+\begin_inset Formula $g$
+\end_inset 
+
+, generates more self-symmetries.
  Thus, for example, 
-\begin_inset Formula \begin{equation}
-(?rg^{n})(x)=(r?g^{n})(x)=r\left(\frac{1}{2^{n}}?\right)(x)=1-?(x)/2^{n}=?\left(r\left(\frac{x}{1+nx}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)\label{eq:}\end{equation}
+\begin_inset Formula \[
+\left(?rg^{n}\right)(x)=\left(r?g^{n}\right)(x)=r\left(\frac{?(x)}{2^{n}}\right)=1-\frac{?(x)}{2^{n}}=?\left(r\left(\frac{x}{nx+1}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)\]
 
 \end_inset 
 
@@ -1538,7 +1513,7 @@ One gets the general symmetry group
 \begin_inset Formula $rg^{n}$
 \end_inset 
 
- is the group element that, under 
+ is the operation that, under 
 \begin_inset Formula $?$
 \end_inset 
 
@@ -1547,51 +1522,116 @@ One gets the general symmetry group
 \end_inset 
 
 .
- We can now write a general similarity transform as 
+ A general self-similarity transform may be written as 
 \begin_inset Formula $\gamma\equiv g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
 \end_inset 
 
 .
  Applying the above process, it is relatively straightforward to see that
  
-\begin_inset Formula \begin{equation}
-(?\gamma)(x)=(?g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:}\end{equation}
+\begin_inset Formula \[
+(?\circ\gamma)(x)=\left(?\circ g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\right)(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
 
 \end_inset 
 
- To see the other leg of the homomorphism commutative diagram, we start
- by observing that we can write 
+ To see the other leg of the commutative diagram of the homomorphism, observe
+ that 
 \begin_inset Formula $g^{n}(x)$
 \end_inset 
 
- itself as a continued fraction: 
-\begin_inset Formula \begin{equation}
-g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]\label{eq:}\end{equation}
+ may be itself written as a continued fraction: 
+\begin_inset Formula \[
+g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]\]
 
 \end_inset 
 
- In the same vein, we have 
+ In the same vein, one has 
 \begin_inset Formula $(rg^{n})(x)=[1,n-1,x]$
 \end_inset 
 
- and, with a slight abuse:
-\begin_inset Formula \begin{equation}
-r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\label{eq:}\end{equation}
+ and, with the slight abuse of allowing continued fractions with negative
+ integers:
+\begin_inset Formula \[
+r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\]
 
 \end_inset 
 
  Continuing this exercise, one finds that
-\begin_inset Formula \begin{equation}
-\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:}\end{equation}
+\begin_inset Formula \[
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
 
 \end_inset 
 
- which should be recognizable as an element of the group 
-\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+ 
+\layout Standard
+
+To obtain the explicit form of this as a fraction, one need only remark
+ that both 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ take the form of a 
+\begin_inset Quotes eld
+\end_inset 
+
+fractional linear transform
+\begin_inset Quotes erd
+\end_inset 
+
+ or a 
+\begin_inset Quotes eld
+\end_inset 
+
+Möbius transform
+\begin_inset Quotes erd
 \end_inset 
 
 .
- We present this group next.
+ That is, given a general 2x2 matrix, one defines the action 
+\begin_inset Formula \begin{equation}
+\left[\begin{array}{cc}
+a & b\\
+c & d\end{array}\right]:x\to\frac{ax+b}{cx+d}\label{eq:Mobius xform}\end{equation}
+
+\end_inset 
+
+ The utility of the fractional linear transform is that it commutes with
+ matrix multiplication; one may multiply matrices on the left-hand side
+ to get the correct expression on the right-hand side.
+ In terms of Möbius transformations, one then has that 
+\begin_inset Formula \begin{eqnarray*}
+g & = & \left[\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right]\\
+r & = & \left[\begin{array}{cc}
+-1 & 1\\
+0 & 1\end{array}\right]\end{eqnarray*}
+
+\end_inset 
+
+ and so 
+\begin_inset Formula $g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+ may be evaluated by matrix multiplication, followed by an application of
+ the Möbius transformation 
+\begin_inset LatexCommand \ref{eq:Mobius xform}
+
+\end_inset 
+
+ to obtain the fractional form.
+ 
+\layout Section
+
+xxxxxx
+\layout Standard
+
+Everything below is misleadingly or confusingly stated and possibly wrong.
+ Everything below this point needs to be corrected and re-written from scratch.
 \layout Section
 
 The Modular Group Gamma or 
@@ -3727,6 +3767,90 @@ bigger
  to the status of a real group, containing inverses.
  However, it is not clear that any additonal insight into fractal self-similarit
 y is gained by doing so.
+\layout Section
+
+Notes.
+ 
+\layout Standard
+
+There is also a well-known representation of the Stern-Brocot Tree on the
+ lattice 
+\begin_inset Formula $\mathbb{Z\mathbb{\times Z}}$
+\end_inset 
+
+, where a fraction 
+\begin_inset Formula $p/q$
+\end_inset 
+
+ is denoted as the ordered pair 
+\begin_inset Formula $(p,q)$
+\end_inset 
+
+.
+ In this representation, the left-right navigation operators 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ have the values 
+\begin_inset Formula $L=\left(\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right)$
+\end_inset 
+
+ and 
+\begin_inset Formula $R=\left(\begin{array}{cc}
+1 & 1\\
+0 & 1\end{array}\right)$
+\end_inset 
+
+ and thus positions are given as elements of 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+.
+ Maybe we'll elaborate on this later xxxx.
+ To do...
+ elaborate.
+\layout Standard
+
+To summarize, it is this expansion in binary digits that provides the underlying
+ connection between period-doubling maps, such as the Mandelbrot Set, and
+ Farey Numbers.
+ Binary expansions, or code-words, occur naturally in the analysis of Duoady-Hub
+bard landing rays.
+ We'll demonstrate an explicit mapping in a later section.
+ XXX cut/reword this last paragraph.
+\layout Subsection
+
+Some Curious Properties of the Question Mark 
+\layout Standard
+
+If there is a 3-adic or p-adic generalization of the Minkowski Question
+ Mark, it is not obvious; one 'obvious' generalization is 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+\sum_{k=1}\left(-1\right)^{k}\;3^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:}\end{equation}
+
+\end_inset 
+
+but its highly discontinuous.
+ Other generalizations based on roots of unity in the complex plane also
+ don't seem to work.
+ One might be able to get traction by looking at groups that have 
+\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
+\end_inset 
+
+ as a subgroup but also have some 
+\begin_inset Formula $p$
+\end_inset 
+
+-fold symmetry.
 \layout Section
 
 Conclusions
