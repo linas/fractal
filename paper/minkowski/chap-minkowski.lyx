@@ -1556,9 +1556,9 @@ r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\]
 
 \end_inset 
 
- Continuing this exercise, one finds that
-\begin_inset Formula \[
-\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+Continuing this exercise, one finds that
+\begin_inset Formula \begin{equation}
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:gamma acting on cont frac}\end{equation}
 
 \end_inset 
 
@@ -1624,6 +1624,113 @@ r & = & \left[\begin{array}{cc}
 \end_inset 
 
  to obtain the fractional form.
+ 
+\layout Subsection
+
+Useful Identities
+\layout Standard
+
+Some curious combinations of these operators are tabulated here.
+ The action of 
+\begin_inset Formula $r$
+\end_inset 
+
+ on a continued fraaction is given by 
+\layout Standard
+
+
+\begin_inset Formula \[
+r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
+\;[1,a_{1}-1,a_{2},..] & \;\textrm{\; for \;} & a_{1}\neq1\\
+\;[a_{2}+1,a_{3},...] & \textrm{\;\; for \;} & a_{1}=1\end{array}\right.\]
+
+\end_inset 
+
+Using the above, the operator to insert a digit 
+\begin_inset Formula $n\geq1$
+\end_inset 
+
+ at the front of the continued fraction expansion is 
+\begin_inset Formula \[
+(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]\]
+
+\end_inset 
+
+which can be verified by using the Möbius transformation 
+\begin_inset Formula \[
+(g^{n-1}rg)(x)=\left(\left[\begin{array}{cc}
+1 & 0\\
+n-1\, & 1\end{array}\right]\left[\begin{array}{cc}
+-1\, & 1\\
+0 & 1\end{array}\right]\left[\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right]\right):(x)=\left(\begin{array}{cc}
+0 & 1\\
+1 & n\end{array}\right):(x)=\frac{1}{n+x}\]
+
+\end_inset 
+
+ The repeated application of the insertion operator leads to 
+\begin_inset Formula \[
+(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
+
+\end_inset 
+
+ which provides a simple proof of equation 
+\begin_inset LatexCommand \ref{eq:gamma acting on cont frac}
+
+\end_inset 
+
+.
+\layout Standard
+
+The append operator follows by combining 
+\begin_inset Formula \[
+[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]\]
+
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]\]
+
+\end_inset 
+
+ The appending operator is 
+\begin_inset Formula \[
+\left(g^{-1}rg^{k+1}\right)(x)=\frac{kx+1}{x}\]
+
+\end_inset 
+
+ which, for 
+\begin_inset Formula $k\geq1$
+\end_inset 
+
+, acts as 
+\begin_inset Formula \begin{equation}
+[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]\label{eq:}\end{equation}
+
+\end_inset 
+
+ Continued fractions can be built up by appending at the back, starting
+ from 
+\begin_inset Formula $(g^{-1}rg)(x)=1/x=[x]$
+\end_inset 
+
+ as 
+\begin_inset Formula \[
+(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
+
+\end_inset 
+
+ and so arriving at the same result as before.
+\layout Section
+
+The Modular Group
+\layout Standard
+
+Throughout the development above, 2x2 matricies seem to occur for no particular
+ reason.
  
 \layout Section
 
@@ -1714,113 +1821,9 @@ e group
  of matrices with determinant 1, divided by plus or minus the identity.
  In the following we will for the most part ignore these distinctions, emphasizi
 ng them only where necessary.
-\layout Standard
+\layout Subsection
 
-This matrix representation of the generators can be used to manipulate and
- evaluate continued fractions; indeed, the modular group is known as being
- one way to conveniently work with continued fractions.
- So, for example, we've already noted above that
-\begin_inset Formula \begin{equation}
-g([a_{1},a_{2},...])=[a_{1}+1,a_{2},...]\label{eq:}\end{equation}
-
-\end_inset 
-
- Similarly, the action of 
-\begin_inset Formula $r$
-\end_inset 
-
- is can be written as 
-\begin_inset Formula \begin{equation}
-r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
-\;[1,a_{1}-1,a_{2},..] & \;\textrm{\; for \;} & a_{1}\neq1\\
-\;[a_{2}+1,a_{3},...] & \textrm{\;\; for \;} & a_{1}=1\end{array}\right.\label{eq:}\end{equation}
-
-\end_inset 
-
-The operator to insert a digit 
-\begin_inset Formula $n\geq1$
-\end_inset 
-
- at the front of the continued fraction expansion is thus 
-\begin_inset Formula \begin{equation}
-(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]\label{eq:}\end{equation}
-
-\end_inset 
-
-which we can immediately verify as
-\begin_inset Formula \begin{equation}
-(g^{n-1}rg)(x)=\left(\left(\begin{array}{cc}
-1 & 0\\
-n-1 & 1\end{array}\right)\left(\begin{array}{cc}
--1 & 1\\
-0 & 1\end{array}\right)\left(\begin{array}{cc}
-1 & 0\\
-1 & 1\end{array}\right)\right):(x)=\left(\begin{array}{cc}
-0 & 1\\
-1 & n\end{array}\right):(x)=\frac{1}{n+x}\label{eq:}\end{equation}
-
-\end_inset 
-
- Here we introduced 
-\begin_inset Formula $:$
-\end_inset 
-
- to denote the apply operator for the matrices; that is, 
-\begin_inset Formula \begin{equation}
-\left(\begin{array}{cc}
-a & b\\
-c & d\end{array}\right):(x)=\frac{ax+b}{cx+d}\label{eq:}\end{equation}
-
-\end_inset 
-
- It should be clear that we can now build up the continued fraction as desired
- with this insertion operator acting on zero: 
-\begin_inset Formula \begin{equation}
-(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\label{eq:}\end{equation}
-
-\end_inset 
-
-
-\layout Standard
-
-One can also find the append operator, which we find by examining
-\begin_inset Formula \begin{equation}
-[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]\label{eq:}\end{equation}
-
-\end_inset 
-
- and 
-\begin_inset Formula \begin{equation}
-[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]\label{eq:}\end{equation}
-
-\end_inset 
-
- We use these to construct the appending operator 
-\begin_inset Formula $(g^{-1}rg^{k+1})(x)=(kx+1)/x$
-\end_inset 
-
- which, for 
-\begin_inset Formula $k\geq1$
-\end_inset 
-
-, acts as 
-\begin_inset Formula \begin{equation}
-[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]\label{eq:}\end{equation}
-
-\end_inset 
-
- We can thus build up continued fractions by appending at the back, starting
- from 
-\begin_inset Formula $(g^{-1}rg)(x)=1/x=[x]$
-\end_inset 
-
- as follows: 
-\begin_inset Formula \begin{equation}
-(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\label{eq:}\end{equation}
-
-\end_inset 
-
- arriving at the same answer as before.
+xxxxxx
 \layout Standard
 
 Note that in the above, in order to work with a consistent definition of
