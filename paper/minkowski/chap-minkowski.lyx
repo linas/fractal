@@ -96,10 +96,11 @@ dyadic numbers
  of a binary tree is isomorphic to the tree itself.
 \layout Abstract
 
-XXXX This paper is a rough, unfinished draft.
+XXXX This paper is unfinished.
  Although this version corrects a number of serious errors in the previous
  drafts, it is still misleading and confusing in many ways.
- It surely still contains errors! Caveat emptor! XXXX
+ The second half, in particular must surely contain errors and mis-statements!
+ Caveat emptor! XXXX
 \layout Section
 
 Introduction
@@ -1726,11 +1727,198 @@ The append operator follows by combining
  and so arriving at the same result as before.
 \layout Section
 
+Linear Groups and the Modular Group
+\layout Standard
+
+Throughout the development above, various two by two matricies appeared
+ and were employed in curious ways.
+ At this point, it is appropriate to review some of the properties of such
+ matrices; they play many important roles in physics and mathematics, and
+ so serve to tie the Minkowski question mark into the broader outlines.
+ 
+\layout Standard
+
+The most general case is the 
+\emph on 
+general linear group
+\emph default 
+ 
+\begin_inset Formula $GL(2,\mathbb{C})$
+\end_inset 
+
+.
+ This is the set of 2x2 matricies 
+\begin_inset Formula \[
+A=\left[\begin{array}{cc}
+a & b\\
+c & d\end{array}\right]\]
+
+\end_inset 
+
+with entries 
+\begin_inset Formula $a,b,c,d\in\mathbb{C}$
+\end_inset 
+
+ from the complex numbers, whose determinant 
+\begin_inset Formula $ad-bc\ne0$
+\end_inset 
+
+ is not zero.
+ The non-vanishing determinant means that a given matrix may be inverted;
+ as groups must always contain thier inverse.
+ 
+\layout Standard
+
+Thanks to the Möbius transformation 
+\begin_inset LatexCommand \ref{eq:Mobius xform}
+
+\end_inset 
+
+, this group can be seen to act on the complex plane, taking a value 
+\begin_inset Formula $z\in\mathbb{C}$
+\end_inset 
+
+ to a value 
+\begin_inset Formula $(az+b)/(cz+d)$
+\end_inset 
+
+.
+ In fact, it acts on the upper half-plane, as it can be shown that Möbius
+ transformations always take complex numbers with a positive imaginary part
+ to another complex number with postive imaginary part.
+ The Möbius transformation introduces a bit of redundancy, however, as both
+ 
+\begin_inset Formula $A$
+\end_inset 
+
+ and 
+\begin_inset Formula $-A$
+\end_inset 
+
+ result in the same transformation.
+ Thus, it is common to introduce 
+\begin_inset Formula $PGL(2,\mathbb{C})$
+\end_inset 
+
+, the 
+\emph on 
+projective linear group
+\emph default 
+.
+ It is obtained by moding out by plus and minus the identity matrix 
+\begin_inset Formula $I$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+PGL(2,\mathbb{C})=GL(2,\mathbb{C})/\left\{ +I,-I\right\} \]
+
+\end_inset 
+
+ The cosets of 
+\begin_inset Formula $PGL(2,\mathbb{C})$
+\end_inset 
+
+ are 
+\begin_inset Formula $\left\{ +A,-A\right\} $
+\end_inset 
+
+ of matricies together with thier negative.
+ The group 
+\begin_inset Formula $PGL(2,\mathbb{C})$
+\end_inset 
+
+ finds a remarkable application in the theory of 3-manifolds, as it is able
+ to represent the set of conformal (angle-preserving) maps of a three-dimensiona
+l ball into three-dimensional space.
+ 
+\layout Standard
+
+The determinant is an overall scaling factor that can be scaled away, and
+ so the 
+\emph on 
+special linear group
+\emph default 
+ 
+\begin_inset Formula $SL(2,\mathbb{C})$
+\end_inset 
+
+ consists of matricies with unit determinant.
+ This again forms a group, since, for any two matricies 
+\begin_inset Formula $A,B$
+\end_inset 
+
+, one has 
+\begin_inset Formula $\det AB=\det A\,\det B$
+\end_inset 
+
+.
+ The speical linear group is remarkable for two distinct reasons.
+ First, in physics, specifically in special relativity, it describes the
+ transformation properties of a spinor under relativistic changes of coordinates.
+ The product of 
+\begin_inset Formula $SL(2,\mathbb{C})$
+\end_inset 
+
+ and its complex conjugate forms the adjoint representation of 
+\begin_inset Formula $SO(3,1)$
+\end_inset 
+
+, which is the Lorentz group, which describes the transformation of vectors
+ in special relativity.
+ 
+\layout Standard
+
+It is often convenient to work with the group 
+\begin_inset Formula $S^{*}L(2,\mathbb{C})$
+\end_inset 
+
+, which is defined as the group of 2x2 matrices whose dterminant is +1 
+\emph on 
+or
+\emph default 
+ -1.
+ It was already noted above that the partial convergents of a continued
+ fraction, when arranged into a 2x2 matrix, will have a determinant of +1
+ or -1.
+ Finally, 
+\begin_inset Formula $PS^{*}L(2,\mathbb{C})$
+\end_inset 
+
+ is the projective version.
+ Since the determinant of both plus and minus the identity is +1, the projective
+ case does not mix the signs of the determinants.
+ 
+\layout Standard
+
+Restricting the matrix entries to real numbers, one obtains 
+\begin_inset Formula $SL(2,\mathbb{R})$
+\end_inset 
+
+, the 
+\emph on 
+special linear group over the reals
+\emph default 
+.
+ The projective linear group over the reals 
+\begin_inset Formula $PSL(2,\mathbb{R})$
+\end_inset 
+
+ plays an important role in the theory of Riemann surfaces, as it is the
+ group of all orientation-preserving isometries of the upper half-plane.
+ 
+\layout Subsection
+
 The Modular Group
 \layout Standard
 
-Throughout the development above, 2x2 matricies seem to occur for no particular
- reason.
+The set of two by two matricies with integer coefficients is 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ This group plays an over-arching role in number theory, and has many fasacinati
+ng properties.
  
 \layout Section
 
@@ -1741,52 +1929,10 @@ Everything below is misleadingly or confusingly stated and possibly wrong.
  Everything below this point needs to be corrected and re-written from scratch.
 \layout Section
 
-The Modular Group Gamma or 
-\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
-\end_inset 
-
-
+More Stuff
 \layout Standard
 
-In this section, we briefly review the modular group and its relationship
- to continued fractions.
-\layout Standard
-
-The modular group gamma is normally defined by its canonical representation
- 
-\begin_inset Formula $SL\left(2,\mathbb{Z}\right)$
-\end_inset 
-
-.
- In this standard representation, a general group element is represented
- by 
-\begin_inset Formula \begin{equation}
-\gamma=\left(\begin{array}{cc}
-a & b\\
-c & d\end{array}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- with 
-\begin_inset Formula $a,b,c,d$
-\end_inset 
-
- being integers, and 
-\begin_inset Formula $\det\gamma=ad-bc=1$
-\end_inset 
-
-.
- Elements of this group are isomorphic to a certain set of Mobius transforms
- on the upper-half complex plane; the isomorphism is given by 
-\begin_inset Formula $\gamma(x)=(ax+b)/(cx+d)$
-\end_inset 
-
-.
- This group can be presented as a free group of a pair of generators, and
- there are many different possible choices of generators.
- The equivalence of choices isn't always obvious.
- Here we will pick a pair of generators that is consistent with the previous
- section.
+a pair of generators that is consistent with the previous section.
  This choice, however, does 
 \emph on 
 not
@@ -1813,22 +1959,15 @@ g=\left(\begin{array}{cc}
 \end_inset 
 
 , the group of matrices with determinant +1 or -1.
- Note also that the modular group is almost universally defined as the projectiv
-e group 
-\begin_inset Formula $PSL(2,\mathbb{Z})=SL(2,\mathbb{Z})/\{\pm\mathbb{I}\}$
-\end_inset 
-
- of matrices with determinant 1, divided by plus or minus the identity.
- In the following we will for the most part ignore these distinctions, emphasizi
-ng them only where necessary.
+ 
 \layout Subsection
 
 xxxxxx
 \layout Standard
 
-Note that in the above, in order to work with a consistent definition of
- the continued fraction, we are more-or-less force to limit ourselves to
- considering only those group elements with positive 
+in the above, in order to work with a consistent definition of the continued
+ fraction, we are more-or-less force to limit ourselves to considering only
+ those group elements with positive 
 \begin_inset Formula $j,k,m,...$
 \end_inset 
 
