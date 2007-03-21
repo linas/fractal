@@ -4,13 +4,14 @@ INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
 
-EXES= binom trinary prt-farey
+EXES= binom trinary prt-farey st-xform
 
 all: $(EXES)
 
-binom:	binom.o $(LIB)/gcf.o $(LIB)/binomial.o
+binom:	binom.o 
 density:	density.o
-prt-farey:	prt-farey.o $(LIB)/Farey.o $(LIB)/gcf.o
+prt-farey:	prt-farey.o 
+st-xform:	st-xform.o
 trinary:	trinary.o
 
 
@@ -18,7 +19,7 @@ trinary:	trinary.o
 	gcc -c $^ -I $(INC)
 
 .o:
-	g++ -o $* $^ -L $(LIB) -lm
+	gcc -o $* $^ -L $(LIB) -lfunc -lm -lstdc++
 
 
 .c.o:
