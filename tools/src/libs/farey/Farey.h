@@ -36,6 +36,7 @@ class ContinuedFraction
 		int GetConvNum (int n);
 		int GetConvDenom (int n);
 		int GetTerm (int n);
+		void SetTerm (int term, int val);
 		
       double ToReal (void);
       double ToXPlus (double w);

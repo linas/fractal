@@ -238,6 +238,18 @@ ContinuedFraction::GetTerm (int n)
 	return tinued_frac[n];
 }
 
+void 
+ContinuedFraction::SetTerm (int term, int val)
+{
+	if (0 > term) return;
+	if (0 == term) { intpart = val; return; }
+	if (term >= CONTINUED_FRAC_MAX_TERMS) return;
+
+	int n = term -1;
+	tinued_frac[n] = val;
+	if (n> nterms) nterms = n;
+}
+
 /* ------------------------------------------------------------ */
 
 void 
