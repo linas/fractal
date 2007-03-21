@@ -33,6 +33,8 @@ and the Modular Group
 \end_inset 
 
 
+\newline 
+(Expository)
 \layout Author
 
 Linas Vepstas
@@ -96,11 +98,15 @@ dyadic numbers
  of a binary tree is isomorphic to the tree itself.
 \layout Abstract
 
+This paper is written at an expository level, and should be readily accessible
+ to advanced undergraduates and all graduate students.
+\layout Abstract
+
 XXXX This paper is unfinished.
  Although this version corrects a number of serious errors in the previous
  drafts, it is still misleading and confusing in many ways.
  The second half, in particular must surely contain errors and mis-statements!
- Caveat emptor! XXXX
+ Caveat emptor! XXXX Expository
 \layout Section
 
 Introduction
@@ -2124,9 +2130,9 @@ Another pair of generators
 
  may be obtained by defining 
 \begin_inset Formula \[
-L=V^{-1}P=-VP=\left[\begin{array}{cc}
+L=V^{-1}P^{2}=-VP^{2}=\left[\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right]\quad\mbox{ and }\quad R=V^{-1}P^{2}=-VP^{2}=\left[\begin{array}{cc}
+1 & 1\end{array}\right]\quad\mbox{ and }\quad R=V^{-1}P=-VP=\left[\begin{array}{cc}
 1 & 1\\
 0 & 1\end{array}\right]\]
 
@@ -2139,7 +2145,7 @@ L=V^{-1}P=-VP=\left[\begin{array}{cc}
 
  can be written uniquely as 
 \begin_inset Formula \[
-A=\left(-I\right)^{s}\left(R^{-1}L\right)^{p_{0}}L^{a_{1}}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}\]
+A=\left(-I\right)^{s}\left(R^{-1}L\right)^{p_{0}}L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}\]
 
 \end_inset 
 
@@ -2167,14 +2173,10 @@ A=\left(-I\right)^{s}\left(R^{-1}L\right)^{p_{0}}L^{a_{1}}R^{a_{2}}L^{a_{3}}\cdo
 \end_inset 
 
  are all positive integers, except for 
-\begin_inset Formula $a_{0}$
-\end_inset 
-
-which may be zero and 
 \begin_inset Formula $a_{n}$
 \end_inset 
 
- which may be zero, so as to describe the general case.
+which may be zero, so as to describe the general case.
  Clearly, the integers 
 \begin_inset Formula $a_{k}$
 \end_inset 
@@ -2183,10 +2185,69 @@ which may be zero and
 \begin_inset Formula $p_{j}$
 \end_inset 
 
- is one or two:
+ is one or two: 
+\begin_inset Formula \[
+\begin{array}{cccccc}
+A=\left(-I\right)^{r+a_{1}+\cdots+a_{n}}P^{p_{0}} & \underbrace{VP^{2}VP^{2}\cdots VP^{2}} & \underbrace{VPVP\cdots VP} & \underbrace{VP^{2}VP^{2}\cdots VP^{2}} & \cdots & \underbrace{VPVP\cdots VP}\\
+ & a_{1}-1 & a_{2} & a_{3} &  & a_{n}\end{array}\]
+
+\end_inset 
+
+ Clearly, the elements of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ can be enumerated either with a finite-length continued fraction, or by
+ a dyadic rational.
+ Since 
+\begin_inset Formula $s$
+\end_inset 
+
+ can take one of two values, and 
+\begin_inset Formula $p_{0}$
+\end_inset 
+
+ one of three, this effectively demonstrates how the elements of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ can be enumerated by 
+\begin_inset Formula $\mathbb{Z}_{6}\times\mathbb{Q}$
+\end_inset 
+
+.
+ This is not the only possible enumeration; others will be given below.
 \layout Standard
 
-xxx
+The 
+\begin_inset Formula $L,R$
+\end_inset 
+
+ form of the group elements begs the question, what happens if some of the
+ 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ are negative? Although legitimate group elements result, the resulting
+ enumeration is no longer unique.
+ In particular, 
+\begin_inset Formula $L^{-1}=-PV$
+\end_inset 
+
+ and 
+\begin_inset Formula $R^{-1}=-PV^{2}$
+\end_inset 
+
+ and so strings containing negative powers of 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ can be converted to strings containing only positive powers, after re-grouping
+ terms.
 \layout Standard
 
 Another commonly used pair of generators are 
@@ -2198,14 +2259,11 @@ Another commonly used pair of generators are
 \end_inset 
 
  and 
-\begin_inset Formula \[
-T=\left[\begin{array}{cc}
-1 & 1\\
-0 & 1\end{array}\right]\]
-
+\begin_inset Formula $T=R$
 \end_inset 
 
- which correspond to the Möbius transformations 
+.
+ These are of interest primarily because the Möbius transformations 
 \begin_inset Formula $S\tau=-1/\tau$
 \end_inset 
 
@@ -2213,27 +2271,46 @@ T=\left[\begin{array}{cc}
 \begin_inset Formula $T\tau=\tau+1$
 \end_inset 
 
+ give a paritcularly simple form to the invariance properties of modular
+ forms
+\begin_inset LatexCommand \cite{Apo90}
+
+\end_inset 
+
 .
- It can be shown that every element 
+ The general group element 
 \begin_inset Formula $A\in SL(2,\mathbb{Z})$
 \end_inset 
 
- can be written in the form 
+ may be written as 
 \begin_inset Formula \[
-A=T^{a_{1}}ST^{a_{2}}ST^{a_{3}}S\cdots ST^{a_{n}}\]
+A=T^{m_{1}}ST^{m_{2}}ST^{m_{3}}S\cdots ST^{m_{n}}\]
 
 \end_inset 
 
- for finite 
-\begin_inset Formula $n$
+ for some integers 
+\begin_inset Formula $m_{k}$
 \end_inset 
 
-.
- The values of the 
-\begin_inset Formula $a_{k}$
+, which may be taken to be positive or negative integers.
+ The representation is not unique.
+ 
+\layout Standard
+
+The in terms of the left-right generators, one has 
+\begin_inset Formula $L=-TST$
 \end_inset 
 
- are integers, postive or negative.
+ and so 
+\layout Standard
+
+
+\begin_inset Formula \[
+L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}=T\left(ST^{2}\right)^{a_{1}-1}T^{a_{2}}\left(ST^{2}\right)^{a_{3}}\cdots T^{a_{n}-1}\]
+
+\end_inset 
+
+ for yada yada yada.
 \layout Section
 
 xxxxxx
