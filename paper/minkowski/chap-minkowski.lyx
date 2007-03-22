@@ -1610,13 +1610,12 @@ c & d\end{array}\right]:x\to\frac{ax+b}{cx+d}\label{eq:Mobius xform}\end{equatio
  matrix multiplication; one may multiply matrices on the left-hand side
  to get the correct expression on the right-hand side.
  In terms of Möbius transformations, one then has that 
-\begin_inset Formula \begin{eqnarray*}
-g & = & \left[\begin{array}{cc}
+\begin_inset Formula \begin{equation}
+g=\left[\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right]\\
-r & = & \left[\begin{array}{cc}
+1 & 1\end{array}\right]\quad\mbox{ and }\quad r=\left[\begin{array}{cc}
 -1 & 1\\
-0 & 1\end{array}\right]\end{eqnarray*}
+0 & 1\end{array}\right]\label{eq:gr elts}\end{equation}
 
 \end_inset 
 
@@ -2144,8 +2143,8 @@ L=V^{-1}P^{2}=-VP^{2}=\left[\begin{array}{cc}
 \end_inset 
 
  can be written uniquely as 
-\begin_inset Formula \[
-A=\left(-I\right)^{s}\left(R^{-1}L\right)^{p_{0}}L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}\]
+\begin_inset Formula \begin{equation}
+A=\left(-I\right)^{s}\left(R^{-1}L\right)^{p_{0}}L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}\label{eq:RL elt}\end{equation}
 
 \end_inset 
 
@@ -2366,15 +2365,15 @@ Rather remarkably, the free group in two letters appears as a subgroup of
 
  in two letters.
  That is, letting 
-\begin_inset Formula $A$
+\begin_inset Formula $X$
 \end_inset 
 
  denote a loop that winds around one point, and 
-\begin_inset Formula $B$
+\begin_inset Formula $Y$
 \end_inset 
 
  a loop around the other point, a general element of the free group is 
-\begin_inset Formula $A^{k}B^{m}A^{n}B^{p}\cdots$
+\begin_inset Formula $X^{k}Y^{m}X^{n}Y^{p}\cdots$
 \end_inset 
 
 , where 
@@ -2397,11 +2396,11 @@ Rather remarkably, the free group in two letters appears as a subgroup of
  Clearly, the third strand can wind around in every which way, thus forming
  the free group.
  In terms of the group generators, these moves correspond to 
-\begin_inset Formula $A=b_{0}^{2}=L^{2}$
+\begin_inset Formula $X=b_{0}^{2}=L^{2}$
 \end_inset 
 
  and 
-\begin_inset Formula $B=b_{1}^{2}=R^{-2}$
+\begin_inset Formula $Y=b_{1}^{2}=R^{-2}$
 \end_inset 
 
 .
@@ -2410,11 +2409,11 @@ Rather remarkably, the free group in two letters appears as a subgroup of
 \end_inset 
 
  cannot be applied to limit which combinations of 
-\begin_inset Formula $A$
+\begin_inset Formula $X$
 \end_inset 
 
  and 
-\begin_inset Formula $B$
+\begin_inset Formula $Y$
 \end_inset 
 
  are unique.
@@ -2441,7 +2440,7 @@ Another commonly used pair of generators are
 \begin_inset Formula $T\tau=\tau+1$
 \end_inset 
 
- give a paritcularly simple form to the invariance properties of modular
+ give a particularly simple form to the invariance properties of modular
  forms
 \begin_inset LatexCommand \cite{Apo90}
 
@@ -2449,12 +2448,12 @@ Another commonly used pair of generators are
 
 .
  The general group element 
-\begin_inset Formula $A\in SL(2,\mathbb{Z})$
+\begin_inset Formula $B\in SL(2,\mathbb{Z})$
 \end_inset 
 
  may be written as 
-\begin_inset Formula \[
-A=T^{m_{1}}ST^{m_{2}}ST^{m_{3}}S\cdots ST^{m_{n}}\]
+\begin_inset Formula \begin{equation}
+B=T^{m_{1}}ST^{m_{2}}ST^{m_{3}}S\cdots ST^{m_{n}}\label{eq:ST elts}\end{equation}
 
 \end_inset 
 
@@ -2462,9 +2461,9 @@ A=T^{m_{1}}ST^{m_{2}}ST^{m_{3}}S\cdots ST^{m_{n}}\]
 \begin_inset Formula $m_{k}$
 \end_inset 
 
-, which may be taken to be positive or negative integers.
- For the general case, the representation is not unique, as again, negative
- powers may be converted to positive powers.
+, which may be taken to be positive or negative.
+ In this case, the representation is not unique, as again, negative powers
+ may be converted to positive powers.
  Comparing to the left-right generators, one has 
 \begin_inset Formula $L=-TST$
 \end_inset 
@@ -2474,15 +2473,76 @@ A=T^{m_{1}}ST^{m_{2}}ST^{m_{3}}S\cdots ST^{m_{n}}\]
 
 
 \begin_inset Formula \[
-L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}=T\left(ST^{2}\right)^{a_{1}-1}T^{a_{2}}\left(ST^{2}\right)^{a_{3}}\cdots T^{a_{n}-1}\]
+L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}=\left(-I\right)^{a_{1}+a_{3}+\cdots-1}T\left(ST^{2}\right)^{a_{1}-1}T^{a_{2}}\left(ST^{2}\right)^{a_{3}}\cdots T^{a_{n}-1}\]
 
 \end_inset 
 
- for yada yada yada.
+ The requirement for the enumeration 
+\begin_inset LatexCommand \ref{eq:RL elt}
+
+\end_inset 
+
+ to be unique was that all of the 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ be positive integers.
+ The equivalent requirement for uniqueness on the 
+\begin_inset Formula $ST$
+\end_inset 
+
+ enumeration then requires that, in general 
+\begin_inset Formula $m_{k}\ge2$
+\end_inset 
+
+.
+ An intuitive way for understanding this is to note that 
+\begin_inset Formula $P=ST$
+\end_inset 
+
+, and so there are string identities such as 
+\begin_inset Formula $STSTST=-I$
+\end_inset 
+
+.
+ 
 \layout Standard
 
-Also mention symplectic group.
- Also mention that free group (as mapping class group) appears as a subgroup.
+XXX Also mention symplectic group.
+ 
+\layout Section
+
+Symmetry Representations
+\layout Standard
+
+The generators 
+\begin_inset Formula $g,r$
+\end_inset 
+
+ of the symmetries of the question mark, given in equation 
+\begin_inset LatexCommand \ref{eq:gr elts}
+
+\end_inset 
+
+, do 
+\emph on 
+not
+\emph default 
+ belong to 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+, since 
+\begin_inset Formula $\det r=-1$
+\end_inset 
+
+.
+ The generated group is 
+\begin_inset Formula $S^{*}L(2,\mathbb{Z})$
+\end_inset 
+
+, the group of matrices with determinant +1 or -1.
+ 
 \layout Section
 
 xxxxxx
@@ -2490,39 +2550,6 @@ xxxxxx
 
 Everything below is misleadingly or confusingly stated and possibly wrong.
  Everything below this point needs to be corrected and re-written from scratch.
-\layout Section
-
-More Stuff
-\layout Standard
-
-a pair of generators that is consistent with the previous section.
- This choice, however, does 
-\emph on 
-not
-\emph default 
- correspond to one of the canonical choices commonly seen in the literature;
- we focus instead on the utility of the generators to the task at hand.
- Thus, we pick 
-\begin_inset Formula \begin{equation}
-g=\left(\begin{array}{cc}
-1 & 0\\
-1 & 1\end{array}\right)\;\textrm{ and }\; r=\left(\begin{array}{cc}
--1 & 1\\
-0 & 1\end{array}\right)\label{eq:}\end{equation}
-
-\end_inset 
-
- Note that 
-\begin_inset Formula $\det r=-1$
-\end_inset 
-
- and so the group that will be generated is more precisely the unimodular
- group 
-\begin_inset Formula $S^{*}L(2,\mathbb{Z})$
-\end_inset 
-
-, the group of matrices with determinant +1 or -1.
- 
 \layout Subsection
 
 xxxxxx
@@ -2536,11 +2563,7 @@ in the above, in order to work with a consistent definition of the continued
 
  By contrast, the true general group element can have positive or negative
  values for these exponents.
- Thus, it should be clear that the rational numbers, expressed as continued
- fractions, can represent a subset of the modular group, but cannot represent
- the full group.
- In fact, as well see later, the rational numbers correspond to the cusps.
- We'll return to this set-theoretic representation shortly.
+ 
 \layout Subsection
 
 A Theorem about an Isomorphism
