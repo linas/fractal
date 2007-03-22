@@ -14,7 +14,8 @@ GRPHS= poly-perf-cold-cache.ps \
       poly-perf-warm-cache.ps \
       hurwitz-perf-cold.ps \
       hurwitz-perf-warm.ps \
-      periodic-xsection.ps 
+      periodic-xsection.ps \
+      monodromy.eps
 
 IMGS= periodic-50.ps \
       hurwitz-non-leading.ps \
@@ -28,7 +29,7 @@ IMGS= periodic-50.ps \
       polylog,-0,-3-sheet.ps \
       polylog,1,1-sheet.ps
 
-all: $(IMGS)
+all: $(GRPHS) $(IMGS)
 	cp hurwitz-arxiv.tex hurwitz.latex
 	/usr/bin/latex hurwitz.latex
 	/usr/bin/bibtex hurwitz.aux
@@ -37,7 +38,7 @@ arxiv:
 	patch -p0 < arxiv.diff
 	mv hurwitz.lyx hurwitz-arxiv.lyx
 
-dist: $(IMGS)
+dist: $(GRPHS) $(IMGS)
 	tar -cvf hurwitz.tar hurwitz.latex hurwitz.aux hurwitz.bbl $(GRPHS) $(IMGS)
 	ls -la hurwitz.tar
 	gzip hurwitz.tar
