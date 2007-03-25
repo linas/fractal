@@ -26,13 +26,13 @@
 
 \layout Title
 
-The Minkowski Question Mark 
+The Minkowski Question Mark,
 \newline 
-and the Modular Group 
-\begin_inset Formula $SL(2,\mathbb{Z})$
+
+\begin_inset Formula $GL(2,\mathbb{Z})$
 \end_inset 
 
-
+ and the Modular Group
 \newline 
 (Expository)
 \layout Author
@@ -43,7 +43,7 @@ Linas Vepstas
 <linas@linas.org>
 \layout Date
 
-12 October 2004 (updated 10 March 2007)
+12 October 2004 (updated 17 March 2007)
 \layout Abstract
 
 Fractals and continued fractions seem to be deeply related in many ways.
@@ -1530,11 +1530,12 @@ reflection
 
 .
  A general self-similarity transform may be written as 
-\begin_inset Formula $\gamma\equiv g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\begin_inset Formula \begin{equation}
+\gamma\equiv g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\label{eq:general gr monoid elt}\end{equation}
+
 \end_inset 
 
-.
- Applying the above process, it is relatively straightforward to see that
+Applying the above process, it is relatively straightforward to see that
  
 \begin_inset Formula \[
 (?\circ\gamma)(x)=\left(?\circ g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\right)(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
@@ -1548,7 +1549,7 @@ reflection
 
  may be itself written as a continued fraction: 
 \begin_inset Formula \[
-g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,x]\]
+g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,\frac{1}{x}]\]
 
 \end_inset 
 
@@ -1923,12 +1924,36 @@ special linear group over the reals
  plays an important role in the theory of Riemann surfaces, as it is the
  group of all orientation-preserving isometries of the upper half-plane.
  
+\layout Standard
+
+The remainder of this article concerns itself with 
+\begin_inset Formula $GL(2,\mathbb{Z})$
+\end_inset 
+
+, the group of invertible 2x2 matricies with integer coefficients, and its
+ subgroups 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+ and 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ Note that 
+\begin_inset Formula $S^{*}L(2,\mathbb{Z})=GL(2,\mathbb{Z})$
+\end_inset 
+
+, since if a 2x2 matrix has integer entries and is invertible, it must necessari
+ly have a determinant equal to +1 or -1.
+ 
 \layout Subsection
 
 The Modular Group
 \layout Standard
 
-The set of two by two matricies with integer coefficients is 
+The projective linear group of two by two matricies with integer coefficients
+ is 
 \begin_inset Formula $PSL(2,\mathbb{Z})$
 \end_inset 
 
@@ -2132,7 +2157,7 @@ Another pair of generators
 \begin_inset Formula $L,R$
 \end_inset 
 
- (
+ (for 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -2158,8 +2183,17 @@ L=V^{-1}P^{2}=-VP^{2}=\left[\begin{array}{cc}
 
 \end_inset 
 
- Comparing this to the previous expression, it is clear that every element
- 
+ The next section will show that these correspond to left and right moves
+ on the binary tree, from which they earn thier name.
+ Using the definitions of 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ in the previous expression, it is clear that every element 
 \begin_inset Formula $A$
 \end_inset 
 
@@ -2557,12 +2591,25 @@ The generators
 \begin_inset Formula $g,r$
 \end_inset 
 
- of the symmetries of the question mark, given in equation 
+ of the symmetries of the question mark, which were given in equation 
 \begin_inset LatexCommand \ref{eq:gr elts}
 
 \end_inset 
 
-, do 
+
+\layout Standard
+
+
+\begin_inset Formula \[
+g=\left[\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right]\quad\mbox{ and }\quad r=\left[\begin{array}{cc}
+-1 & 1\\
+0 & 1\end{array}\right]\]
+
+\end_inset 
+
+do 
 \emph on 
 not
 \emph default 
@@ -2580,20 +2627,127 @@ not
 \end_inset 
 
 , the group of matrices with determinant +1 or -1.
- 
-\layout Standard
+ It can be built from 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
 
-
+ simply by adjoining a matrix 
 \begin_inset Formula \[
-g=\left[\begin{array}{cc}
+N=\left[\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right]\quad\mbox{ and }\quad r=\left[\begin{array}{cc}
--1 & 1\\
-0 & 1\end{array}\right]\]
+0 & -1\end{array}\right]\]
 
 \end_inset 
 
+ with the property that 
+\begin_inset Formula $N^{2}=1$
+\end_inset 
 
+ and 
+\begin_inset Formula $\det N=-1$
+\end_inset 
+
+.
+ This matrix, when used as a commutator, has the remarkable property of
+ inverting 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+, so that 
+\begin_inset Formula $NRN=R^{-1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $NLN=L^{-1}$
+\end_inset 
+
+.
+ Then, using 
+\begin_inset Formula $g=L$
+\end_inset 
+
+ and 
+\begin_inset Formula $r=-RN$
+\end_inset 
+
+, the general self-similarity transform 
+\begin_inset LatexCommand \ref{eq:general gr monoid elt}
+
+\end_inset 
+
+ may be written as 
+\begin_inset Formula \[
+\gamma=g^{a_{1}}rg^{a_{2}}r\cdots rg^{a_{n}}=\begin{cases}
+L^{a_{1}+1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n-1}}L^{a_{n}-1} & \;\mbox{ for }n\mbox{ odd}\\
+F\, R^{a_{1}+1}L^{a_{2}}\cdots R^{a_{n-1}}L^{a_{n}-1} & \;\mbox{ for }n\mbox{ even}\end{cases}\]
+
+\end_inset 
+
+ Here, for 
+\begin_inset Formula $n$
+\end_inset 
+
+ even, the letter 
+\begin_inset Formula $F$
+\end_inset 
+
+ was introduced to stand for a 
+\begin_inset Quotes eld
+\end_inset 
+
+flip
+\begin_inset Quotes erd
+\end_inset 
+
+, 
+\begin_inset Formula \[
+F=g^{-1}rg=\left[\begin{array}{cc}
+0 & 1\\
+1 & 0\end{array}\right]\]
+
+\end_inset 
+
+in that it converts 
+\begin_inset Formula $L$
+\end_inset 
+
+'s to 
+\begin_inset Formula $R$
+\end_inset 
+
+'s when it commutes: 
+\begin_inset Formula $LF=FR$
+\end_inset 
+
+ and 
+\begin_inset Formula $RF=FR$
+\end_inset 
+
+.
+ As a Möbius transform, 
+\begin_inset Formula $F:x=1/x$
+\end_inset 
+
+, while, for continued fractions, 
+\begin_inset Formula $F:[a_{1},a_{2},\cdots]=[0,a_{1},a_{2},\cdots]$
+\end_inset 
+
+.
+ Taking 
+\begin_inset Formula $a_{n}=0$
+\end_inset 
+
+ gives the general expression for a similarity transformation ending in
+ 
+\begin_inset Formula $r$
+\end_inset 
+
+.
+ 
 \layout Section
 
 xxxxxx
