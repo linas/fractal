@@ -3014,9 +3014,14 @@ rities acting on intervals.
 
 , is explored in a later section.
  
-\layout Description
+\layout Standard
 
-Theorem: The Minkowski Question Mark provides an isomorphism between 
+The role of the question mark function in connecting these two representations
+ of the reals was just noted.
+ This may be turned into a more formal theorem:
+\layout Theorem*
+
+The Minkowski question mark provides an homomorphism between 
 \begin_inset Formula $\mathbb{R}_{C}$
 \end_inset 
 
@@ -3025,21 +3030,23 @@ Theorem: The Minkowski Question Mark provides an isomorphism between
 \end_inset 
 
 .
- That is, we have the commuting diagram
-\layout Standard
-
-
-\begin_inset Formula \begin{equation}
-\begin{array}{ccccc}
- &  & \;\;\gamma_{C}\;\;\\
- & \mathbb{R}_{C} & \longrightarrow & \mathbb{R}_{C}\\
-? & \downarrow & \bigcirc & \downarrow & ?\\
- & \mathbb{R}_{D} & \longrightarrow & \mathbb{R}_{D}\\
- &  & \gamma_{D}\end{array}\label{eq:}\end{equation}
+ That is, there is a commuting diagram
+\begin_inset Formula \[
+\begin{array}{ccc}
+\mathbb{R}_{C} & \begin{array}{c}
+\gamma_{C}\\
+\longrightarrow\\
+\end{array} & \mathbb{R}_{C}\\
+\begin{array}{ccc}
+? & \downarrow\end{array} & \bigcirc & \begin{array}{ccc}
+ & \downarrow & ?\end{array}\\
+\mathbb{R}_{D} & \begin{array}{c}
+\\\longrightarrow\\
+\gamma_{D}\end{array} & \mathbb{R}_{D}\end{array}\]
 
 \end_inset 
 
- such that 
+such that 
 \begin_inset Formula $?\circ\gamma_{C}=\gamma_{D}\circ?$
 \end_inset 
 
@@ -3048,15 +3055,15 @@ Theorem: The Minkowski Question Mark provides an isomorphism between
 \end_inset 
 
 .
- To be more precise, we really should say that 
-\begin_inset Formula $(?\circ\gamma_{C})(x_{C})=(\gamma_{D}\circ?)(x_{D})\;\;\forall\gamma\in M$
+ To be more precise, the homomorphism is 
+\begin_inset Formula $\left(?\circ\gamma_{C}\right)(x_{C})=\left(\gamma_{D}\circ?\right)(x_{D})\;\;\forall\gamma\in M$
 \end_inset 
 
  and 
 \begin_inset Formula $\forall x\in\mathbb{R}$
 \end_inset 
 
- where 
+, where 
 \begin_inset Formula $x_{D}\in\mathbb{R}_{D}$
 \end_inset 
 
@@ -3070,15 +3077,15 @@ Theorem: The Minkowski Question Mark provides an isomorphism between
 
 .
  
-\layout Description
+\layout Proof
 
-Proof: We've already given the standard representations of 
+The two representations of 
 \begin_inset Formula $\gamma$
 \end_inset 
 
- in these two spaces in previous sections, but we repeat these here just
- so that this is all crystal-clear.
- We first decompose an abstract group element 
+ in the two spaces was given in the previous section above, but it will
+ be repeated here just so to make this particularly clear.
+ First, decompose the abstract group element 
 \begin_inset Formula $\gamma\in M$
 \end_inset 
 
@@ -3090,9 +3097,9 @@ Proof: We've already given the standard representations of
 \begin_inset Formula $r$
 \end_inset 
 
-, as usual: 
-\begin_inset Formula \begin{equation}
-\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\label{eq:}\end{equation}
+: 
+\begin_inset Formula \[
+\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\]
 
 \end_inset 
 
@@ -3104,19 +3111,19 @@ Proof: We've already given the standard representations of
 \begin_inset Formula $\gamma_{D}$
 \end_inset 
 
- which is 
-\begin_inset Formula \begin{equation}
-\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:}\end{equation}
+, which is 
+\begin_inset Formula \[
+\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
 
 \end_inset 
 
- and it also has the representation 
+ It also has the representation 
 \begin_inset Formula $\gamma_{C}$
 \end_inset 
 
- which is 
-\begin_inset Formula \begin{equation}
-\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:}\end{equation}
+, which is 
+\begin_inset Formula \[
+\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
 
 \end_inset 
 
@@ -3124,9 +3131,12 @@ Proof: We've already given the standard representations of
 \begin_inset Formula $?(\gamma_{C}(x))=\gamma_{D}(?(x))$
 \end_inset 
 
- as the isomorphism.
- To properly complete this proof, we would need to apply induction, that
- is, to show that if this equivalence holds for any one given 
+ as the homomorphism.
+ 
+\layout Proof
+
+XXXXX To properly complete this proof, we would need to apply induction,
+ that is, to show that if this equivalence holds for any one given 
 \begin_inset Formula $\gamma$
 \end_inset 
 
@@ -3159,17 +3169,16 @@ Proof: We've already given the standard representations of
  by the reals, and, if we are not careful, might also invoke the Axiom of
  Choice.
  See also the remarks below.
- QED.
  
 \layout Standard
 
-To summarize, we have exhibited an isomorphism of the real numbers onto
- themselves that demonstrates that there are really two distinct and inequivalen
-t representations of the real numbers.
+XXXXX To summarize, we have exhibited an homomorphism of the real numbers
+ onto themselves that demonstrates that there are really two distinct and
+ inequivalent representations of the real numbers.
  When we say distinct and inequivalent, we really mean it: these two representat
-ions transform radically differently under the Modular Group, although they
- are both isomorphic to that abstract set we call the reals, and are, through
- the Question Mark, isomorphic to each other.
+ions transform radically differently under the dyadic monoid, although they
+ are both homomorphic to that abstract set we call the reals, and are, through
+ the question mark, homomorphic to each other.
 \layout Standard
 
 If we were better mathematicians, we would insist on a more watertight proof
