@@ -3222,166 +3222,6 @@ in that it converts
 
 .
  
-\layout Section
-
-xxxxxx
-\layout Standard
-
-Everything below is misleadingly or confusingly stated and possibly wrong.
- Everything below this point needs to be corrected and re-written from scratch.
-\layout Subsection
-
-xxxxxx
-\layout Standard
-
-in the above, in order to work with a consistent definition of the continued
- fraction, we are more-or-less force to limit ourselves to considering only
- those group elements with positive 
-\begin_inset Formula $j,k,m,...$
-\end_inset 
-
- By contrast, the true general group element can have positive or negative
- values for these exponents.
- 
-\layout Subsection
-
-More about representations of real numbers
-\layout Standard
-
-If we were better mathematicians, we would insist on a more watertight proof
- of this isomorphism, rather than the assertion that this is so.
- Unfortunately, we do not have the tools handy to provide this stronger
- proof.
- It is widely believed that both the dyadics and the continued fractions
- are isomorphic to the reals, but this shouldn't entirely be taken for granted.
- In fact, we have already committed several grave errors.
- For one, the set 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
- is larger than the set 
-\begin_inset Formula $\mathbb{R}$
-\end_inset 
-
-: as every student is told, the set 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
- contains the elements 0.11111...
- and 1.0000...
- which are clearly distinct in 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
- but represent the same number in 
-\begin_inset Formula $\mathbb{R}$
-\end_inset 
-
-.
- We have something similar happening in 
-\begin_inset Formula $\mathbb{R}_{C}$
-\end_inset 
-
- in that a rational has the multiple representations 
-\begin_inset Formula $\sqcap\times\ominus\amalg\bigtriangleup$
-\end_inset 
-
-
-\begin_inset Formula $[a_{0};a_{1},a_{2},...,a_{n},\infty,a_{n+2},a_{n+3},...]$
-\end_inset 
-
- where it does not matter what we pick for 
-\begin_inset Formula $a_{n+2}$
-\end_inset 
-
-, etc.
- Thus, one of our mistakes was to say 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
- is isomorphic to 
-\begin_inset Formula $\mathbb{R}$
-\end_inset 
-
-.
- Instead, it is only homomorphic, and there exists a homomorphism 
-\begin_inset Formula $e:\mathbb{R}_{D}\rightarrow\mathbb{R}$
-\end_inset 
-
- such that 
-\begin_inset Formula $e(0.1111...)=e(1.000...)$
-\end_inset 
-
-, thus implying that 
-\begin_inset Formula $Ker\; e$
-\end_inset 
-
- is non-trivial.
- We can then use 
-\begin_inset Formula $Ker\; e$
-\end_inset 
-
- to induce the desired isomorphism between 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
- and 
-\begin_inset Formula $\mathbb{R}$
-\end_inset 
-
-.
- The existence of this homomorphism is widely accepted, but I don't know
- how to get there from first principles.
- Similar remarks apply to the set 
-\begin_inset Formula $\mathbb{R}_{C}$
-\end_inset 
-
-.
- Thus, having to work with quotient spaces introduces complexity into the
- correct proof.
- To this volatile mix, we have to add considerations of about the completion
- of the rationals by the reals.
- Clearly, the dyadic tree and the Stern-Brocot tree are order-preserving
- enumerations of the rationals.
- The correct completion of the dyadic tree appears to be 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
- whereas the correct completion of the Stern-Brocot Tree appears to be 
-\begin_inset Formula $\mathbb{R}_{C}$
-\end_inset 
-
-, and these two completions are not 
-\emph on 
-prima facae
-\emph default 
- equivalent.
- If we can prove that there is only one, unique completion of the rationals
- by the reals, then we have proved the existence of the Minkowski Question
- Mark, and we thus arrive at the proof of the homomorphism of 
-\begin_inset Formula $\mathbb{R}_{C}$
-\end_inset 
-
- and 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
-.
- But this is far from obvious from this vantage point.
- One problem is that proofs of completion might surreptitiously invoke the
- Axiom of Choice; what one really wants are proofs of completion that start
- from a clean base, such as Zermelo-Fraenkel, and arrive at the homomorphism
- of 
-\begin_inset Formula $\mathbb{R}_{C}$
-\end_inset 
-
- and 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
-, without invoking the Axiom of Choice.
- We start laying some of the groundwork for a proof of this type in a later
- section.
 \layout Subsection
 
 The Dyadic Representation as Affine Transformations
@@ -3408,29 +3248,29 @@ a+bx\end{array}\right)\label{eq: affine represention}\end{equation}
 
 .
  In this representation, we have 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula \[
 g_{D}=\left(\begin{array}{cc}
 1 & 0\\
-0 & \frac{1}{2}\end{array}\right)\label{eq:}\end{equation}
+0 & \frac{1}{2}\end{array}\right)\]
 
 \end_inset 
 
  and 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula \[
 r_{D}=\left(\begin{array}{cc}
 1 & 0\\
-1 & -1\end{array}\right)\label{eq:}\end{equation}
+1 & -1\end{array}\right)\]
 
 \end_inset 
 
  and so once again, we can use matrix multiplication to quickly compute
  
-\begin_inset Formula \begin{equation}
+\begin_inset Formula \[
 \gamma_{D}(x)\;:=\gamma_{D}\left(\begin{array}{c}
 1\\
 x\end{array}\right)=g_{D}^{a_{1}}r_{D}g_{D}^{a_{2}}r_{D}...r_{D}g_{D}^{a_{N}}\left(\begin{array}{c}
 1\\
-x\end{array}\right)\label{eq:}\end{equation}
+x\end{array}\right)\]
 
 \end_inset 
 
@@ -3460,6 +3300,134 @@ is not 1.
 
  are lower-tirangular, and thus are reminiscent of a Borel (semi-)subgroup.
  
+\layout Section
+
+xxxxxx
+\layout Standard
+
+Everything below is misleadingly or confusingly stated and possibly wrong.
+ Everything below this point needs to be corrected and re-written from scratch.
+\layout Subsection
+
+xxxxxx
+\layout Standard
+
+in the above, in order to work with a consistent definition of the continued
+ fraction, we are more-or-less force to limit ourselves to considering only
+ those group elements with positive 
+\begin_inset Formula $j,k,m,...$
+\end_inset 
+
+ By contrast, the true general group element can have positive or negative
+ values for these exponents.
+ 
+\layout Subsection
+
+More about representations of real numbers
+\layout Standard
+
+For one, the set 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ is larger than the set 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+: the set 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ contains the elements 0.11111...
+ and 1.0000...
+ which are clearly distinct in 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ but represent the same number in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ We have something similar happening in 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ in that a rational has the multiple representations 
+\begin_inset Formula $[a_{0};a_{1},a_{2},...,a_{n},\infty,a_{n+2},a_{n+3},...]$
+\end_inset 
+
+ where it does not matter what we pick for 
+\begin_inset Formula $a_{n+2}$
+\end_inset 
+
+, etc.
+ Thus, both 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ are coverings of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+.
+ So, for example, there exists a homomorphism, a projection, 
+\begin_inset Formula $\pi:\mathbb{R}_{D}\rightarrow\mathbb{R}$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\pi(0.1111...)=\pi(1.000...)$
+\end_inset 
+
+, thus implying that 
+\begin_inset Formula $\mbox{Ker}\;\pi$
+\end_inset 
+
+ is non-trivial.
+ The real numbers are then defined as a quotient space of 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ by the equivalence relation induced by 
+\begin_inset Formula $\pi$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Show 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ as being isomorphic to 
+\begin_inset Formula $\mathbb{Z}_{2}\times\mathbb{Z}_{2}\times\cdots=\mathbb{Z}_{2}^{\omega}$
+\end_inset 
+
+but some care to be taken.
+ Multiple possible topologies on 
+\begin_inset Formula $\mathbb{Z}_{2}^{\omega}$
+\end_inset 
+
+, including the product topology (which is what is wanted) and the box topology,
+ (which is finer than the reals).
+ Is there a need to discuss functions of a continuous variable, and so the
+ dual spaces, the weak topology, etc? 
+\layout Standard
+
+Show that 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ is isomorphic to 
+\begin_inset Formula $\mathbb{Z}\times\mathbb{Z}\times\cdots=\mathbb{Z}^{\omega}$
+\end_inset 
+
+ and etc.
 \layout Subsection
 
 Enumerating Fractal Self-Similarities as 
