@@ -1731,6 +1731,416 @@ The append operator follows by combining
 \end_inset 
 
  and so arriving at the same result as before.
+\layout Subsection
+
+Representations of Real Numbers
+\layout Standard
+
+The dyadic numbers and continued fractions are often taken as 
+\begin_inset Quotes eld
+\end_inset 
+
+being the same thing
+\begin_inset Quotes erd
+\end_inset 
+
+ as the real numbers; more precisely, they are 
+\emph on 
+representations
+\emph default 
+ of the reals.
+ That is, both systems offer a way of writing down, and computing with the
+ real numbers; however, they are not quite the same thing as real numbers
+ themselves.
+ In particular, tehy have some strange properties of thier own, not shared
+ by the reals in general.
+ Thus, for example, in the dyadic representation, one has two different
+ representations, 
+\begin_inset Formula $1.000\cdots$
+\end_inset 
+
+ and 
+\begin_inset Formula $0.111\cdots$
+\end_inset 
+
+, both of which represent the real number one.
+ Thus, the dyadic representation is not even isomorphic to the reals; it
+ is at best homomorphic.
+ In a later section, we'll see the that the dyadics are isomorphic to the
+ Cantor set.
+ In this section, the relationship of these two representations is spelled
+ out in greater detail and in more formal terms.
+ 
+\layout Standard
+
+Denote by 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+ the dyadic representation of the real numbers 
+\begin_inset Formula $\mathbb{R}$
+\end_inset 
+
+ in the dyadic expansions; that is, 
+\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{D}\in\mathbb{R}_{D}$
+\end_inset 
+
+ which represents the real number 
+\begin_inset Formula $x$
+\end_inset 
+
+ as the dyadic expansion 
+\begin_inset Formula $x_{D}$
+\end_inset 
+
+ with 
+\begin_inset Formula \[
+x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} \;\forall k\in\mathbb{Z}$
+\end_inset 
+
+.
+ Let 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ denote the representation of the real numbers as continued fractions, that
+ is, 
+\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{C}\in\mathbb{R}_{C}$
+\end_inset 
+
+ such that 
+\begin_inset Formula \[
+x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $a_{k}\in\mathbb{N}\;\forall k\in\mathbb{N}$
+\end_inset 
+
+, with the exception that 
+\begin_inset Formula $a_{0}\in\mathbb{Z}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Both of these representations are acted upon by the self-similarity transformati
+on 
+\begin_inset LatexCommand \ref{eq:general gr monoid elt}
+
+\end_inset 
+
+, but each in a different way.
+ On the dyadic representation, the generator 
+\begin_inset Formula $g$
+\end_inset 
+
+ has the representation 
+\begin_inset Formula \begin{eqnarray*}
+g_{D} & :\mathbb{R}_{D} & \,\longrightarrow\mathbb{R}_{D}\\
+ & x & \longmapsto x/2\end{eqnarray*}
+
+\end_inset 
+
+ when acting on the set of dyadic numbers, whereas as this same element
+ has the representation 
+\begin_inset Formula \begin{eqnarray*}
+g_{C} & :\mathbb{R}_{C} & \,\longrightarrow\mathbb{R}_{C}\\
+ & x & \longmapsto x/(x+1)\end{eqnarray*}
+
+\end_inset 
+
+ when acting on the set of continued fractions.
+ The other generator, 
+\begin_inset Formula $r$
+\end_inset 
+
+, has the same representation on both sets: 
+\begin_inset Formula $r(x)=1-x$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Define the set 
+\begin_inset Formula \[
+M=\{\gamma\,\vert\,\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\;\mbox{ and }a_{1},a_{N}\ge0\}\]
+
+\end_inset 
+
+ That is, each 
+\begin_inset Formula $a_{k}$
+\end_inset 
+
+ to be a positive integer, with the exception of 
+\begin_inset Formula $a_{1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+ which may be zero.
+ The set 
+\begin_inset Formula $M$
+\end_inset 
+
+ is a 
+\emph on 
+monoid
+\emph default 
+, and, more formally, is the 
+\emph on 
+dyadic monoid
+\emph default 
+.
+ A monoid is defined as a set with an associative operation, in this case
+ multiplication; that is closed under the operation, in the sense that if
+ 
+\begin_inset Formula $\gamma_{1}\in M$
+\end_inset 
+
+ and 
+\begin_inset Formula $\gamma_{2}\in M$
+\end_inset 
+
+ then 
+\begin_inset Formula $\gamma_{1}\gamma_{2}\in M$
+\end_inset 
+
+.
+ Monoids are sometimes called 
+\emph on 
+semigroups
+\emph default 
+, although the term semigroup is sometimes reserved for the idea of a monoid,
+ but without an identity element.
+ In this case, 
+\begin_inset Formula $M$
+\end_inset 
+
+ has an identity element 
+\begin_inset Formula $e$
+\end_inset 
+
+, so that 
+\begin_inset Formula $e\gamma=\gamma e=\gamma$
+\end_inset 
+
+ for all 
+\begin_inset Formula $\gamma\in M$
+\end_inset 
+
+.
+ This definition of a monoid is similar to that for a group, with an important
+ difference: the monoid does not contain inverses.
+ For a given 
+\begin_inset Formula $\gamma\in M$
+\end_inset 
+
+, there is no 
+\begin_inset Formula $\beta\in M$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\gamma\beta=e$
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $M$
+\end_inset 
+
+ is not a group.
+ Now, associative monoids, such as this, do have the universal property
+ of being extendable to a full-fledged group, and one certainly could do
+ this for 
+\begin_inset Formula $M$
+\end_inset 
+
+.
+ However, such an extension can no longer be interpreted as a set of self-simila
+rities acting on intervals.
+ The extend to which some additional elements, that would act as inverses,
+ can be added to 
+\begin_inset Formula $M$
+\end_inset 
+
+, is explored in a later section.
+ 
+\layout Standard
+
+The role of the question mark function in connecting these two representations
+ of the reals was just noted.
+ This may be turned into a more formal theorem:
+\layout Theorem*
+
+The Minkowski question mark provides an homomorphism between 
+\begin_inset Formula $\mathbb{R}_{C}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mathbb{R}_{D}$
+\end_inset 
+
+.
+ That is, there is a commuting diagram
+\begin_inset Formula \[
+\begin{array}{ccc}
+\mathbb{R}_{C} & \begin{array}{c}
+\gamma_{C}\\
+\longrightarrow\\
+\end{array} & \mathbb{R}_{C}\\
+\begin{array}{ccc}
+? & \downarrow\end{array} & \bigcirc & \begin{array}{ccc}
+ & \downarrow & ?\end{array}\\
+\mathbb{R}_{D} & \begin{array}{c}
+\\\longrightarrow\\
+\gamma_{D}\end{array} & \mathbb{R}_{D}\end{array}\]
+
+\end_inset 
+
+such that 
+\begin_inset Formula $?\circ\gamma_{C}=\gamma_{D}\circ?$
+\end_inset 
+
+ holds 
+\begin_inset Formula $\forall\gamma\in M$
+\end_inset 
+
+.
+ To be more precise, the homomorphism is 
+\begin_inset Formula $\left(?\circ\gamma_{C}\right)(x_{C})=\left(\gamma_{D}\circ?\right)(x_{D})\;\;\forall\gamma\in M$
+\end_inset 
+
+ and 
+\begin_inset Formula $\forall x\in\mathbb{R}$
+\end_inset 
+
+, where 
+\begin_inset Formula $x_{D}\in\mathbb{R}_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $x_{C}\in\mathbb{R}_{C}$
+\end_inset 
+
+ are both representations of the same 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ 
+\layout Proof
+
+The two representations of 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ in the two spaces was given in the previous section above, but it will
+ be repeated here just so to make this particularly clear.
+ First, decompose the abstract group element 
+\begin_inset Formula $\gamma\in M$
+\end_inset 
+
+ in terms of the generators 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+: 
+\begin_inset Formula \[
+\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\]
+
+\end_inset 
+
+ Then, this 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ has the representation 
+\begin_inset Formula $\gamma_{D}$
+\end_inset 
+
+, which is 
+\begin_inset Formula \[
+\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+
+\end_inset 
+
+ It also has the representation 
+\begin_inset Formula $\gamma_{C}$
+\end_inset 
+
+, which is 
+\begin_inset Formula \[
+\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+
+\end_inset 
+
+ and thus we are able to write 
+\begin_inset Formula $?(\gamma_{C}(x))=\gamma_{D}(?(x))$
+\end_inset 
+
+ as the homomorphism.
+ 
+\layout Proof
+
+XXXXX To properly complete this proof, we would need to apply induction,
+ that is, to show that if this equivalence holds for any one given 
+\begin_inset Formula $\gamma$
+\end_inset 
+
+ and 
+\begin_inset Formula $x$
+\end_inset 
+
+, then it also holds for 
+\begin_inset Formula $\gamma\gamma'$
+\end_inset 
+
+ for another 
+\begin_inset Formula $\gamma'\in M$
+\end_inset 
+
+ and that it also holds for 
+\begin_inset Formula $x+y$
+\end_inset 
+
+ where 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset 
+
+.
+ We then would need to exhibit one group element for which this holds, and
+ thus, by induction, conclude that it holds for all group elements and reals.
+ One could try to give a very precise proof along these lines, but this
+ is outside the scope of this text.
+ It requires, among other things, talking about the completion of the rationals
+ by the reals, and, if we are not careful, might also invoke the Axiom of
+ Choice.
+ See also the remarks below.
+ 
+\layout Standard
+
+XXXXX To summarize, we have exhibited an homomorphism of the real numbers
+ onto themselves that demonstrates that there are really two distinct and
+ inequivalent representations of the real numbers.
+ When we say distinct and inequivalent, we really mean it: these two representat
+ions transform radically differently under the dyadic monoid, although they
+ are both homomorphic to that abstract set we call the reals, and are, through
+ the question mark, homomorphic to each other.
 \layout Section
 
 Linear Groups and the Modular Group
@@ -2771,414 +3181,7 @@ in the above, in order to work with a consistent definition of the continued
  
 \layout Subsection
 
-Representations of Real Numbers
-\layout Standard
-
-The dyadic numbers and continued fractions are often taken as 
-\begin_inset Quotes eld
-\end_inset 
-
-being the same thing
-\begin_inset Quotes erd
-\end_inset 
-
- as the real numbers; more precisely, they are 
-\emph on 
-representations
-\emph default 
- of the reals.
- That is, both systems offer a way of writing down, and computing with the
- real numbers; however, they are not quite the same thing as real numbers
- themselves.
- In particular, tehy have some strange properties of thier own, not shared
- by the reals in general.
- Thus, for example, in the dyadic representation, one has two different
- representations, 
-\begin_inset Formula $1.000\cdots$
-\end_inset 
-
- and 
-\begin_inset Formula $0.111\cdots$
-\end_inset 
-
-, both of which represent the real number one.
- Thus, the dyadic representation is not even isomorphic to the reals; it
- is at best homomorphic.
- In a later section, we'll see the that the dyadics are isomorphic to the
- Cantor set.
- In this section, the relationship of these two representations is spelled
- out in greater detail and in more formal terms.
- 
-\layout Standard
-
-Denote by 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
- the dyadic representation of the real numbers 
-\begin_inset Formula $\mathbb{R}$
-\end_inset 
-
- in the dyadic expansions; that is, 
-\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{D}\in\mathbb{R}_{D}$
-\end_inset 
-
- which represents the real number 
-\begin_inset Formula $x$
-\end_inset 
-
- as the dyadic expansion 
-\begin_inset Formula $x_{D}$
-\end_inset 
-
- with 
-\begin_inset Formula \[
-x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\]
-
-\end_inset 
-
- where 
-\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} \;\forall k\in\mathbb{Z}$
-\end_inset 
-
-.
- Let 
-\begin_inset Formula $\mathbb{R}_{C}$
-\end_inset 
-
- denote the representation of the real numbers as continued fractions, that
- is, 
-\begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{C}\in\mathbb{R}_{C}$
-\end_inset 
-
- such that 
-\begin_inset Formula \[
-x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\]
-
-\end_inset 
-
-where 
-\begin_inset Formula $a_{k}\in\mathbb{N}\;\forall k\in\mathbb{N}$
-\end_inset 
-
-, with the exception that 
-\begin_inset Formula $a_{0}\in\mathbb{Z}$
-\end_inset 
-
-.
- 
-\layout Standard
-
-Both of these representations are acted upon by the self-similarity transformati
-on 
-\begin_inset LatexCommand \ref{eq:general gr monoid elt}
-
-\end_inset 
-
-, but each in a different way.
- On the dyadic representation, the generator 
-\begin_inset Formula $g$
-\end_inset 
-
- has the representation 
-\begin_inset Formula \begin{eqnarray*}
-g_{D} & :\mathbb{R}_{D} & \,\longrightarrow\mathbb{R}_{D}\\
- & x & \longmapsto x/2\end{eqnarray*}
-
-\end_inset 
-
- when acting on the set of dyadic numbers, whereas as this same element
- has the representation 
-\begin_inset Formula \begin{eqnarray*}
-g_{C} & :\mathbb{R}_{C} & \,\longrightarrow\mathbb{R}_{C}\\
- & x & \longmapsto x/(x+1)\end{eqnarray*}
-
-\end_inset 
-
- when acting on the set of continued fractions.
- The other generator, 
-\begin_inset Formula $r$
-\end_inset 
-
-, has the same representation on both sets: 
-\begin_inset Formula $r(x)=1-x$
-\end_inset 
-
-.
- 
-\layout Standard
-
-Define the set 
-\begin_inset Formula \begin{equation}
-M=\{\gamma\,\vert\,\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\;\mbox{ and }a_{1},a_{N}\ge0\}\label{eq:}\end{equation}
-
-\end_inset 
-
- That is, each 
-\begin_inset Formula $a_{k}$
-\end_inset 
-
- to be a positive integer, with the exception of 
-\begin_inset Formula $a_{1}$
-\end_inset 
-
- and 
-\begin_inset Formula $a_{N}$
-\end_inset 
-
- which may be zero.
- The set 
-\begin_inset Formula $M$
-\end_inset 
-
- is a 
-\emph on 
-monoid
-\emph default 
-, and, more formally, is the 
-\emph on 
-dyadic monoid
-\emph default 
-.
- A monoid is defined as a set with an associative operation, in this case
- multiplication; that is closed under the operation, in the sense that if
- 
-\begin_inset Formula $\gamma_{1}\in M$
-\end_inset 
-
- and 
-\begin_inset Formula $\gamma_{2}\in M$
-\end_inset 
-
- then 
-\begin_inset Formula $\gamma_{1}\gamma_{2}\in M$
-\end_inset 
-
-.
- Monoids are sometimes called 
-\emph on 
-semigroups
-\emph default 
-, although the term semigroup is sometimes reserved for the idea of a monoid,
- but without an identity element.
- In this case, 
-\begin_inset Formula $M$
-\end_inset 
-
- has an identity element 
-\begin_inset Formula $e$
-\end_inset 
-
-, so that 
-\begin_inset Formula $e\gamma=\gamma e=\gamma$
-\end_inset 
-
- for all 
-\begin_inset Formula $\gamma\in M$
-\end_inset 
-
-.
- This definition of a monoid is similar to that for a group, with an important
- difference: the monoid does not contain inverses.
- For a given 
-\begin_inset Formula $\gamma\in M$
-\end_inset 
-
-, there is no 
-\begin_inset Formula $\beta\in M$
-\end_inset 
-
- such that 
-\begin_inset Formula $\gamma\beta=e$
-\end_inset 
-
-.
- Thus, 
-\begin_inset Formula $M$
-\end_inset 
-
- is not a group.
- Now, associative monoids, such as this, do have the universal property
- of being extendable to a full-fledged group, and one certainly could do
- this for 
-\begin_inset Formula $M$
-\end_inset 
-
-.
- However, such an extension can no longer be interpreted as a set of self-simila
-rities acting on intervals.
- The extend to which some additional elements, that would act as inverses,
- can be added to 
-\begin_inset Formula $M$
-\end_inset 
-
-, is explored in a later section.
- 
-\layout Standard
-
-The role of the question mark function in connecting these two representations
- of the reals was just noted.
- This may be turned into a more formal theorem:
-\layout Theorem*
-
-The Minkowski question mark provides an homomorphism between 
-\begin_inset Formula $\mathbb{R}_{C}$
-\end_inset 
-
- and 
-\begin_inset Formula $\mathbb{R}_{D}$
-\end_inset 
-
-.
- That is, there is a commuting diagram
-\begin_inset Formula \[
-\begin{array}{ccc}
-\mathbb{R}_{C} & \begin{array}{c}
-\gamma_{C}\\
-\longrightarrow\\
-\end{array} & \mathbb{R}_{C}\\
-\begin{array}{ccc}
-? & \downarrow\end{array} & \bigcirc & \begin{array}{ccc}
- & \downarrow & ?\end{array}\\
-\mathbb{R}_{D} & \begin{array}{c}
-\\\longrightarrow\\
-\gamma_{D}\end{array} & \mathbb{R}_{D}\end{array}\]
-
-\end_inset 
-
-such that 
-\begin_inset Formula $?\circ\gamma_{C}=\gamma_{D}\circ?$
-\end_inset 
-
- holds 
-\begin_inset Formula $\forall\gamma\in M$
-\end_inset 
-
-.
- To be more precise, the homomorphism is 
-\begin_inset Formula $\left(?\circ\gamma_{C}\right)(x_{C})=\left(\gamma_{D}\circ?\right)(x_{D})\;\;\forall\gamma\in M$
-\end_inset 
-
- and 
-\begin_inset Formula $\forall x\in\mathbb{R}$
-\end_inset 
-
-, where 
-\begin_inset Formula $x_{D}\in\mathbb{R}_{D}$
-\end_inset 
-
- and 
-\begin_inset Formula $x_{C}\in\mathbb{R}_{C}$
-\end_inset 
-
- are both representations of the same 
-\begin_inset Formula $x$
-\end_inset 
-
-.
- 
-\layout Proof
-
-The two representations of 
-\begin_inset Formula $\gamma$
-\end_inset 
-
- in the two spaces was given in the previous section above, but it will
- be repeated here just so to make this particularly clear.
- First, decompose the abstract group element 
-\begin_inset Formula $\gamma\in M$
-\end_inset 
-
- in terms of the generators 
-\begin_inset Formula $g$
-\end_inset 
-
- and 
-\begin_inset Formula $r$
-\end_inset 
-
-: 
-\begin_inset Formula \[
-\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\]
-
-\end_inset 
-
- Then, this 
-\begin_inset Formula $\gamma$
-\end_inset 
-
- has the representation 
-\begin_inset Formula $\gamma_{D}$
-\end_inset 
-
-, which is 
-\begin_inset Formula \[
-\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
-
-\end_inset 
-
- It also has the representation 
-\begin_inset Formula $\gamma_{C}$
-\end_inset 
-
-, which is 
-\begin_inset Formula \[
-\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
-
-\end_inset 
-
- and thus we are able to write 
-\begin_inset Formula $?(\gamma_{C}(x))=\gamma_{D}(?(x))$
-\end_inset 
-
- as the homomorphism.
- 
-\layout Proof
-
-XXXXX To properly complete this proof, we would need to apply induction,
- that is, to show that if this equivalence holds for any one given 
-\begin_inset Formula $\gamma$
-\end_inset 
-
- and 
-\begin_inset Formula $x$
-\end_inset 
-
-, then it also holds for 
-\begin_inset Formula $\gamma\gamma'$
-\end_inset 
-
- for another 
-\begin_inset Formula $\gamma'\in M$
-\end_inset 
-
- and that it also holds for 
-\begin_inset Formula $x+y$
-\end_inset 
-
- where 
-\begin_inset Formula $y\in\mathbb{R}$
-\end_inset 
-
-.
- We then would need to exhibit one group element for which this holds, and
- thus, by induction, conclude that it holds for all group elements and reals.
- One could try to give a very precise proof along these lines, but this
- is outside the scope of this text.
- It requires, among other things, talking about the completion of the rationals
- by the reals, and, if we are not careful, might also invoke the Axiom of
- Choice.
- See also the remarks below.
- 
-\layout Standard
-
-XXXXX To summarize, we have exhibited an homomorphism of the real numbers
- onto themselves that demonstrates that there are really two distinct and
- inequivalent representations of the real numbers.
- When we say distinct and inequivalent, we really mean it: these two representat
-ions transform radically differently under the dyadic monoid, although they
- are both homomorphic to that abstract set we call the reals, and are, through
- the question mark, homomorphic to each other.
+More about representations of real numbers
 \layout Standard
 
 If we were better mathematicians, we would insist on a more watertight proof
