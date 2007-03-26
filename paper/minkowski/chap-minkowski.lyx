@@ -1315,8 +1315,8 @@ Symmetries of the Question Mark
 The question mark function is self-similar, and the generators of the similarity
  transformations can be written down explicitly.
  These generate a subset of a group (they do not generate a whole group,
- as will be made clear); a subset of the modular group 
-\begin_inset Formula $PSL(2,\mathbb{Z})$
+ as will be made clear); a subset of the group 
+\begin_inset Formula $GL(2,\mathbb{Z})$
 \end_inset 
 
 .
@@ -2724,7 +2724,7 @@ in that it converts
 \end_inset 
 
  and 
-\begin_inset Formula $RF=FR$
+\begin_inset Formula $RF=FL$
 \end_inset 
 
 .
@@ -2771,24 +2771,55 @@ in the above, in order to work with a consistent definition of the continued
  
 \layout Subsection
 
-A Theorem about an Isomorphism
+Representations of Real Numbers
 \layout Standard
 
-In this section, we explicitly present a set of self-similarities of the
- Minkowski Question Mark, and show that this set is a semi-group subset
- of the Modular group.
+The dyadic numbers and continued fractions are often taken as 
+\begin_inset Quotes eld
+\end_inset 
+
+being the same thing
+\begin_inset Quotes erd
+\end_inset 
+
+ as the real numbers; more precisely, they are 
+\emph on 
+representations
+\emph default 
+ of the reals.
+ That is, both systems offer a way of writing down, and computing with the
+ real numbers; however, they are not quite the same thing as real numbers
+ themselves.
+ In particular, tehy have some strange properties of thier own, not shared
+ by the reals in general.
+ Thus, for example, in the dyadic representation, one has two different
+ representations, 
+\begin_inset Formula $1.000\cdots$
+\end_inset 
+
+ and 
+\begin_inset Formula $0.111\cdots$
+\end_inset 
+
+, both of which represent the real number one.
+ Thus, the dyadic representation is not even isomorphic to the reals; it
+ is at best homomorphic.
+ In a later section, we'll see the that the dyadics are isomorphic to the
+ Cantor set.
+ In this section, the relationship of these two representations is spelled
+ out in greater detail and in more formal terms.
+ 
 \layout Standard
 
-Lets restate the above results using modern mathematical notation and language.
- Let us denote with 
+Denote by 
 \begin_inset Formula $\mathbb{R}_{D}$
 \end_inset 
 
- the set of real numbers 
+ the dyadic representation of the real numbers 
 \begin_inset Formula $\mathbb{R}$
 \end_inset 
 
- that are represented by dyadic expansions; that is, 
+ in the dyadic expansions; that is, 
 \begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{D}\in\mathbb{R}_{D}$
 \end_inset 
 
@@ -2801,8 +2832,8 @@ Lets restate the above results using modern mathematical notation and language.
 \end_inset 
 
  with 
-\begin_inset Formula \begin{equation}
-x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\label{eq:}\end{equation}
+\begin_inset Formula \[
+x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\]
 
 \end_inset 
 
@@ -2811,18 +2842,18 @@ x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\label{eq:}\end{equation}
 \end_inset 
 
 .
- Let us use the notation 
+ Let 
 \begin_inset Formula $\mathbb{R}_{C}$
 \end_inset 
 
- to denote the representation of the real numbers as continued fractions,
- that is, 
+ denote the representation of the real numbers as continued fractions, that
+ is, 
 \begin_inset Formula $\forall x\in\mathbb{R}\;\exists x_{C}\in\mathbb{R}_{C}$
 \end_inset 
 
  such that 
-\begin_inset Formula \begin{equation}
-x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\label{eq:}\end{equation}
+\begin_inset Formula \[
+x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\]
 
 \end_inset 
 
@@ -2835,41 +2866,41 @@ where
 \end_inset 
 
 .
- Both of these sets are commonly treated as being isomorphic to the real
- numbers; they are just different representations of the real numbers.
- However, we can see that these two are not completely the same, because
- the group 
-\begin_inset Formula $SL(2,\mathbb{Z})$
+ 
+\layout Standard
+
+Both of these representations are acted upon by the self-similarity transformati
+on 
+\begin_inset LatexCommand \ref{eq:general gr monoid elt}
+
 \end_inset 
 
- has a different action on each.
- In particular, the group generator 
+, but each in a different way.
+ On the dyadic representation, the generator 
 \begin_inset Formula $g$
 \end_inset 
 
  has the representation 
-\begin_inset Formula \begin{equation}
-\begin{array}{c}
-g_{D}:\mathbb{R}_{D}\longrightarrow\mathbb{R}_{D}\\
-g_{D}:x\longmapsto x/2\end{array}\label{eq:}\end{equation}
+\begin_inset Formula \begin{eqnarray*}
+g_{D} & :\mathbb{R}_{D} & \,\longrightarrow\mathbb{R}_{D}\\
+ & x & \longmapsto x/2\end{eqnarray*}
 
 \end_inset 
 
- when acting on the set of dyadic numbers, whereas as this same group element
+ when acting on the set of dyadic numbers, whereas as this same element
  has the representation 
-\begin_inset Formula \begin{equation}
-\begin{array}{c}
-g_{C}:\mathbb{R}_{C}\longrightarrow\mathbb{R}_{C}\\
-g_{C}:x\longmapsto x/(x+1)\end{array}\label{eq:}\end{equation}
+\begin_inset Formula \begin{eqnarray*}
+g_{C} & :\mathbb{R}_{C} & \,\longrightarrow\mathbb{R}_{C}\\
+ & x & \longmapsto x/(x+1)\end{eqnarray*}
 
 \end_inset 
 
  when acting on the set of continued fractions.
- The other generator 
+ The other generator, 
 \begin_inset Formula $r$
 \end_inset 
 
- has the same representation on both sets: 
+, has the same representation on both sets: 
 \begin_inset Formula $r(x)=1-x$
 \end_inset 
 
@@ -2877,13 +2908,13 @@ g_{C}:x\longmapsto x/(x+1)\end{array}\label{eq:}\end{equation}
  
 \layout Standard
 
-Define 
+Define the set 
 \begin_inset Formula \begin{equation}
-M=\{\gamma\in SL(2,\mathbb{Z})\;|\;\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\;\mbox{ and }a_{1},a_{N}\ge0\}\label{eq:}\end{equation}
+M=\{\gamma\,\vert\,\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\;\mbox{ and }a_{1},a_{N}\ge0\}\label{eq:}\end{equation}
 
 \end_inset 
 
- That is, we require each 
+ That is, each 
 \begin_inset Formula $a_{k}$
 \end_inset 
 
@@ -2896,12 +2927,22 @@ M=\{\gamma\in SL(2,\mathbb{Z})\;|\;\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mb
 \end_inset 
 
  which may be zero.
- Note that 
-\begin_inset Formula $M\subset S^{*}L(2,\mathbb{Z})$
+ The set 
+\begin_inset Formula $M$
 \end_inset 
 
- is a proper subset: it is a semigroup, in that it contains the identity
- element, and is closed in the sense that if 
+ is a 
+\emph on 
+monoid
+\emph default 
+, and, more formally, is the 
+\emph on 
+dyadic monoid
+\emph default 
+.
+ A monoid is defined as a set with an associative operation, in this case
+ multiplication; that is closed under the operation, in the sense that if
+ 
 \begin_inset Formula $\gamma_{1}\in M$
 \end_inset 
 
@@ -2914,16 +2955,65 @@ M=\{\gamma\in SL(2,\mathbb{Z})\;|\;\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mb
 \end_inset 
 
 .
- However, 
+ Monoids are sometimes called 
+\emph on 
+semigroups
+\emph default 
+, although the term semigroup is sometimes reserved for the idea of a monoid,
+ but without an identity element.
+ In this case, 
 \begin_inset Formula $M$
 \end_inset 
 
- is not a proper group because it does not contain inverses (which would
- require elements with the 
-\begin_inset Formula $a_{k}$
+ has an identity element 
+\begin_inset Formula $e$
 \end_inset 
 
- being negative).
+, so that 
+\begin_inset Formula $e\gamma=\gamma e=\gamma$
+\end_inset 
+
+ for all 
+\begin_inset Formula $\gamma\in M$
+\end_inset 
+
+.
+ This definition of a monoid is similar to that for a group, with an important
+ difference: the monoid does not contain inverses.
+ For a given 
+\begin_inset Formula $\gamma\in M$
+\end_inset 
+
+, there is no 
+\begin_inset Formula $\beta\in M$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\gamma\beta=e$
+\end_inset 
+
+.
+ Thus, 
+\begin_inset Formula $M$
+\end_inset 
+
+ is not a group.
+ Now, associative monoids, such as this, do have the universal property
+ of being extendable to a full-fledged group, and one certainly could do
+ this for 
+\begin_inset Formula $M$
+\end_inset 
+
+.
+ However, such an extension can no longer be interpreted as a set of self-simila
+rities acting on intervals.
+ The extend to which some additional elements, that would act as inverses,
+ can be added to 
+\begin_inset Formula $M$
+\end_inset 
+
+, is explored in a later section.
+ 
 \layout Description
 
 Theorem: The Minkowski Question Mark provides an isomorphism between 
