@@ -1537,8 +1537,8 @@ reflection
 
 Applying the above process, it is relatively straightforward to see that
  
-\begin_inset Formula \[
-(?\circ\gamma)(x)=\left(?\circ g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\right)(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+\begin_inset Formula \begin{equation}
+(?\circ\gamma)(x)=\left(?\circ g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\right)(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:q-mark isomorph}\end{equation}
 
 \end_inset 
 
@@ -2093,8 +2093,8 @@ The two representations of
 \end_inset 
 
 , which is 
-\begin_inset Formula \[
-\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\]
+\begin_inset Formula \begin{equation}
+\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:modular gamma}\end{equation}
 
 \end_inset 
 
@@ -3379,7 +3379,7 @@ Borel group
  
 \layout Subsection
 
-The Rational Representation
+The Interval Map Representation
 \layout Standard
 
 Every element of the dyadic monoid corresponds uniquely to a node in the
@@ -3423,24 +3423,119 @@ Every element of the dyadic monoid corresponds uniquely to a node in the
  then uniquely identifies a node in the binary tree.
  It doesn't matter which navigation system is used; either can be converted
  to the other.
- The path taken to get to a node can serve as its label; but there are many
- other ways of unique labelling a node.
- They can be labelled by rational numbers, as in the Stern-Brocot tree,
- or by dyadic numbers, as in the dyadic tree.
- Thus, every element of the dyadic monoid can be uniquely labelled by a
- rational number, or alternately, by a dydic number, if one wishes.
-\layout Standard
-
-xx but this is not actually a representatin, since its ...
- xx be careful here.
  
-\layout Subsection
-
-The Interval Map Representation
 \layout Standard
 
-set theoretic representation.
- XXX
+The subtree under a node on the tree represents an interval: the subtree
+ encompasses everything from the left-most to the right-most sides of the
+ subtree.
+ Thus, the action of the dyadic monoid on the tree can be understood to
+ be the action of a set of maps that map intervals to sub-intervals.
+ Each interval is the co-domain of a self-similarity map.
+ To different interval maps were already given; these are 
+\begin_inset LatexCommand \ref{eq:dyadic gamma}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{eq:modular gamma}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+It can be interesting to consider the endpoints of the intervals given by
+ the codmoain of these functions; these endpoints are given by 
+\begin_inset Formula $\gamma(0)$
+\end_inset 
+
+ and 
+\begin_inset Formula $\gamma(1)$
+\end_inset 
+
+.
+ For the modular map 
+\begin_inset LatexCommand \ref{eq:modular gamma}
+
+\end_inset 
+
+, one endpoint is given by the rational number 
+\begin_inset Formula $\gamma_{C}(0)=[a_{1}+1,a_{2},a_{3},...,a_{N-1}]$
+\end_inset 
+
+ (note the missing 
+\begin_inset Formula $a_{N}$
+\end_inset 
+
+).
+ The other endpoint is 
+\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}\geq1$
+\end_inset 
+
+, although it must be written as 
+\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N-2}]$
+\end_inset 
+
+ when 
+\begin_inset Formula $a_{N}=0$
+\end_inset 
+
+; this last special case is really just a reversal of the two endpoints.
+ By coonsidering interval endpoints, the question mark isomorphism 
+\begin_inset LatexCommand \ref{eq:q-mark isomorph}
+
+\end_inset 
+
+ can be written in the shorter form
+\begin_inset Formula \[
+?(\gamma_{C}(x))=?(\gamma_{C}(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
+
+\end_inset 
+
+
+\layout Standard
+
+The endpoints of an interval are not completely arbitrary, but are correlated.
+ Although one endpoint can be picked freely, so, one can pick an arbitrary
+ 
+\begin_inset Formula $\gamma_{C}(0)=p/q\in\mathbb{Q}$
+\end_inset 
+
+, the choice for the other enpoint is limited: the other end of the interval
+ is given by 
+\begin_inset Formula $a_{N}\in\mathbb{N}$
+\end_inset 
+
+ a positive integer.
+ Since intervals correspond to elements of the dyadic monoid 
+\begin_inset Formula $M$
+\end_inset 
+
+, elements of 
+\begin_inset Formula $M$
+\end_inset 
+
+ may be enumerated by 
+\begin_inset Formula $\mathbb{Q}\times\mathbb{N}$
+\end_inset 
+
+.
+ This, of course, is hardly the only possible enumeration: of course, the
+ intervals could have been enumerated by the node at the root of the tree;
+ for the Stern-Brocot tree, this node is a unique rational number, and so
+ the intervals could be equally well enumerated just by 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+ alone.
+ The difference between these two schemes is, of course, just Hilbert's
+ infinite hotel.
 \layout Section
 
 xxxxxx
@@ -3578,215 +3673,12 @@ Enumerating Fractal Self-Similarities as
  
 \layout Standard
 
-In this section, we note that the set of self-similarities 
-\begin_inset Formula $M$
-\end_inset 
-
- of the Question Mark consists of a set of closed intervals of the real-number
- line.
- Each interval is just the codomain of the previously defined self-similarity
- maps.
- This set of intervals is easily enumerated.
- 
-\layout Standard
-
-Every group element of 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
-
- can be decomposed into a combination of the 
-\begin_inset Formula $g$
-\end_inset 
-
- and 
-\begin_inset Formula $r$
-\end_inset 
-
- generators, of the form 
-\begin_inset Formula $g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
-\end_inset 
-
- for integers 
-\begin_inset Formula $a_{k}\in\mathbb{Z}$
-\end_inset 
-
-.
- We've already discovered the relationship between the modular group and
- continued fractions, which we gave above as 
-\begin_inset Formula \begin{equation}
-\gamma_{C}(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:}\end{equation}
-
-\end_inset 
-
- We saw that this relation gives us the isomorphisms of the Minkowski Question
- Mark; at least when the 
-\begin_inset Formula $a_{k}$
-\end_inset 
-
- are positive integers.
- Let us now look at this a little more carefully and precisely, since, among
- other things, we need to define the domain and codomain of 
-\begin_inset Formula $x$
-\end_inset 
-
- over which the isomorphism is valid.
-\layout Standard
-
-First, let us consider the group elements with 
-\begin_inset Formula $a_{1}\geq0$
-\end_inset 
-
-, 
-\begin_inset Formula $a_{2}\geq1$
-\end_inset 
-
-, ...
- 
-\begin_inset Formula $a_{N-1}\geq1$
-\end_inset 
-
-, 
-\begin_inset Formula $a_{N}\geq0$
-\end_inset 
-
-, that is, the elements of the semigroup 
-\begin_inset Formula $M$
-\end_inset 
-
-.
- When the coefficients are zero or positive like this, we find that 
-\begin_inset Formula $\gamma_{C}(x)$
-\end_inset 
-
- maps the unit interval into strictly smaller intervals; 
-\shape italic 
-i.e.
-
-\shape default 
- that 
-\begin_inset Formula $0\le\gamma_{C}(0),\gamma_{C}(1)<1$
-\end_inset 
-
- or 
-\begin_inset Formula $0<\gamma_{C}(0),\gamma_{C}(1)\le1$
-\end_inset 
-
- .
- One endpoint of the interval is given by the rational number 
-\begin_inset Formula $\gamma_{C}(0)=[a_{1}+1,a_{2},a_{3},...,a_{N-1}]$
-\end_inset 
-
- (note the missing 
-\begin_inset Formula $a_{N}$
-\end_inset 
-
-).
- The other endpoint is 
-\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N}]$
-\end_inset 
-
- when 
-\begin_inset Formula $a_{N}\geq1$
-\end_inset 
-
-, although it must be written as 
-\begin_inset Formula $\gamma_{C}(1)=[a_{1}+1,a_{2},a_{3},...,a_{N-2}]$
-\end_inset 
-
- when 
-\begin_inset Formula $a_{N}=0$
-\end_inset 
-
-.
- This last special case is really just a reversal of the two endpoints.
- For such a 'shrinking' 
-\begin_inset Formula $\gamma$
-\end_inset 
-
-, we can now write the isomorphism of the Question Mark as 
-\begin_inset Formula \begin{equation}
-?(\gamma_{C}(x))=?(\gamma_{C}(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\label{eq:}\end{equation}
-
-\end_inset 
-
-
-\layout Standard
-
-One way of understanding this isomorphism is to think of it as an isomorphism
- of intervals, where we can freely pick one end of the interval to be an
- arbitrary rational number, but are a bit more constrained in picking the
- other end.
- That is, we can pick an arbitrary 
-\begin_inset Formula $\gamma_{C}(0)=p/q\in\mathbb{Q}$
-\end_inset 
-
-.
- We get the other end of the interval by picking 
-\begin_inset Formula $a_{N}\in\mathbb{N}$
-\end_inset 
-
- a positive integer.
- Having thus specified the interval, we can, for good measure, choose to
- exchange the endpoints, that is, pick one of 
-\begin_inset Formula $\left\{ 1,r\right\} =C_{2}\equiv\mathbb{Z}/2\mathbb{Z}$
-\end_inset 
-
-.
- Thus we can (exhaustively) enumerate all the elements of 
-\begin_inset Formula $M$
-\end_inset 
-
- by 
-\begin_inset Formula $\mathbb{Q}\times\mathbb{N}\times C_{2}$
-\end_inset 
-
-.
- The enumeration is that of intervals.
-\layout Standard
-
 The semi-group 
 \begin_inset Formula $M$
 \end_inset 
 
  contains many, but not all, of the self-similarities of the Question Mark.
- This representation of 
-\begin_inset Formula $M$
-\end_inset 
-
- in terms of intervals on the real number line gives the first hints of
- a topological structure associated with fractals.
-\layout Standard
-
-Another way of understanding this isomorphism is as a mapping of binary
- trees.
- That is, we can pick a node, any node, in the Farey tree, and equate it
- to the root node of the dyadic tree.
- Since infinite binary trees are inherently isomorphic, we are done: this
- is the isomorphism desired.
- That is, the elements of 
-\begin_inset Formula $M$
-\end_inset 
-
- are tree-walk operators: any element 
-\begin_inset Formula $\gamma\in M$
-\end_inset 
-
- specifies a unique path from the root node to some subnode (and thus some
- subtree).
- The element 
-\begin_inset Formula $g\in M$
-\end_inset 
-
- takes the left branch, moving down exactly one node.
- The element 
-\begin_inset Formula $rgr\in M$
-\end_inset 
-
- takes the right branch, moving down exactly one node.
- Concatenating a series of left and right moves eventually brings one uniquely
- to a specific subtree.
- But the subtrees of both the dyadic and Farey trees are always ordered:
- that is, they always represent sub-intervals of the unit interval.
+ 
 \layout Standard
 
 It would seem that we can enumerate all such tree isomorphisms with a single
