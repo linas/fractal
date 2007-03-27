@@ -1379,8 +1379,8 @@ direct
 \layout Standard
 
 
-\begin_inset Formula \[
-(?\circ g)(x)=?(g(x))=?\left(\frac{x}{1+x}\right)=\frac{?(x)}{2}\]
+\begin_inset Formula \begin{equation}
+(?\circ g)(x)=?(g(x))=?\left(\frac{x}{1+x}\right)=\frac{?(x)}{2}\label{eq:dyadic g}\end{equation}
 
 \end_inset 
 
@@ -1733,6 +1733,11 @@ The append operator follows by combining
  and so arriving at the same result as before.
 \layout Subsection
 
+
+\begin_inset LatexCommand \label{sub:Representations-of-Real}
+
+\end_inset 
+
 Representations of Real Numbers
 \layout Standard
 
@@ -2078,8 +2083,8 @@ The two representations of
 \end_inset 
 
 , which is 
-\begin_inset Formula \[
-\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\]
+\begin_inset Formula \begin{equation}
+\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:dyadic gamma}\end{equation}
 
 \end_inset 
 
@@ -3089,15 +3094,26 @@ The generators
 
 
 \begin_inset Formula \[
-g=\left[\begin{array}{cc}
+g_{C}=\left[\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right]\quad\mbox{ and }\quad r=\left[\begin{array}{cc}
+1 & 1\end{array}\right]\quad\mbox{ and }\quad r_{C}=\left[\begin{array}{cc}
 -1 & 1\\
 0 & 1\end{array}\right]\]
 
 \end_inset 
 
-These do 
+The subscript 
+\begin_inset Formula $C$
+\end_inset 
+
+ is used to indicate that these are the transformations discussed in section
+ 
+\begin_inset LatexCommand \ref{sub:Representations-of-Real}
+
+\end_inset 
+
+.
+ These matrices do 
 \emph on 
 not
 \emph default 
@@ -3106,7 +3122,7 @@ not
 \end_inset 
 
 , since the determinant of 
-\begin_inset Formula $r$
+\begin_inset Formula $r_{C}$
 \end_inset 
 
  is -1.
@@ -3159,11 +3175,11 @@ N=\left[\begin{array}{cc}
 
 .
  Then, using 
-\begin_inset Formula $g=L$
+\begin_inset Formula $g_{C}=L$
 \end_inset 
 
  and 
-\begin_inset Formula $r=-RN$
+\begin_inset Formula $r_{C}=-RN$
 \end_inset 
 
 , the general self-similarity transform 
@@ -3173,7 +3189,7 @@ N=\left[\begin{array}{cc}
 
  may be written as 
 \begin_inset Formula \[
-\gamma=g^{a_{1}}rg^{a_{2}}r\cdots rg^{a_{n}}=\begin{cases}
+\gamma_{C}=g_{C}^{a_{1}}r_{C}g_{C}^{a_{2}}r_{C}\cdots r_{C}g_{C}^{a_{n}}=\begin{cases}
 L^{a_{1}+1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n-1}}L^{a_{n}-1} & \;\mbox{ for }n\mbox{ odd}\\
 F\, R^{a_{1}+1}L^{a_{2}}\cdots R^{a_{n-1}}L^{a_{n}-1} & \;\mbox{ for }n\mbox{ even}\end{cases}\]
 
@@ -3198,7 +3214,7 @@ flip
 
 , 
 \begin_inset Formula \[
-F=g^{-1}rg=\left[\begin{array}{cc}
+F=VN=g_{C}^{-1}r_{C}g_{C}=\left[\begin{array}{cc}
 0 & 1\\
 1 & 0\end{array}\right]\]
 
@@ -3231,72 +3247,105 @@ in that it converts
 
 .
  
-\layout Standard
-
-XX subset of ...
 \layout Subsection
 
 The Dyadic Representation as Affine Transformations
 \layout Standard
 
-Note that the dyadic representation can be written in terms of affine transforma
-tions, which also use two-by-two matrices.
- These should not be confused with the canonical representation.
- In the affine representation, we write 
-\begin_inset Formula \begin{equation}
-\gamma_{D}(x)\;:=\left(\begin{array}{cc}
-1 & 0\\
-a & b\end{array}\right)\left(\begin{array}{c}
-1\\
-x\end{array}\right)=\left(\begin{array}{c}
-1\\
-a+bx\end{array}\right)\label{eq: affine represention}\end{equation}
+The action of 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ on the dyadic numbers, given in eqn 
+\begin_inset LatexCommand \ref{eq:dyadic g}
 
 \end_inset 
 
- for some values 
-\begin_inset Formula $a,b$
+, can also be expressed in terms of 2x2 matrices.
+ However, quite unlike the modular representation, these matrices are not
+ at all a subset of 
+\begin_inset Formula $GL(2,\mathbb{Z})$
 \end_inset 
 
 .
- In this representation, we have 
+ The action is that of a linear affine transformation.
+ A general affine transformation is a map 
 \begin_inset Formula \[
-g_{D}=\left(\begin{array}{cc}
+x\mapsto ax+b\]
+
+\end_inset 
+
+ Affine transformations can always be written as a matrix equation by taking
+ 
+\begin_inset Formula $x$
+\end_inset 
+
+ to be a vector, and bumping up the dimension of the vector by one.
+ Thus, for example, one writes 
+\layout Standard
+
+
+\begin_inset Formula \[
+\left[\begin{array}{c}
+1\\
+x\end{array}\right]\mapsto\left[\begin{array}{cc}
 1 & 0\\
-0 & \frac{1}{2}\end{array}\right)\]
+b & a\end{array}\right]\left[\begin{array}{c}
+1\\
+x\end{array}\right]=\left[\begin{array}{c}
+1\\
+ax+b\end{array}\right]\]
+
+\end_inset 
+
+ The affine represention is then 
+\begin_inset Formula \[
+\left[\begin{array}{c}
+1\\
+\gamma_{D}(x)\end{array}\right]=\gamma_{D}\cdot\left[\begin{array}{c}
+1\\
+x\end{array}\right]=g_{D}^{a_{1}}r_{D}g_{D}^{a_{2}}r_{D}\cdots r_{D}g_{D}^{a_{N}}\cdot\left[\begin{array}{c}
+1\\
+x\end{array}\right]\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula \[
+g_{D}=\left[\begin{array}{cc}
+1 & 0\\
+0 & \frac{1}{2}\end{array}\right]\]
 
 \end_inset 
 
  and 
 \begin_inset Formula \[
-r_{D}=\left(\begin{array}{cc}
+r_{D}=\left[\begin{array}{cc}
 1 & 0\\
-1 & -1\end{array}\right)\]
+1 & -1\end{array}\right]\]
 
 \end_inset 
 
- and so once again, we can use matrix multiplication to quickly compute
- 
-\begin_inset Formula \[
-\gamma_{D}(x)\;:=\gamma_{D}\left(\begin{array}{c}
-1\\
-x\end{array}\right)=g_{D}^{a_{1}}r_{D}g_{D}^{a_{2}}r_{D}...r_{D}g_{D}^{a_{N}}\left(\begin{array}{c}
-1\\
-x\end{array}\right)\]
+ It is straighforward to verify that this gives the expression 
+\begin_inset LatexCommand \ref{eq:dyadic gamma}
 
 \end_inset 
 
- which is exactly equal to the 
-\begin_inset Formula $\gamma_{D}(x)$
+ for the action of a general monoid element on 
+\begin_inset Formula $x$
 \end_inset 
 
- presented before.
+.
  Although 
 \begin_inset Formula $\gamma_{D}$
 \end_inset 
 
- is thus also representable as a two-by-two matrix, don't confuse it with
- the matrix 
+ is thus representable as a two-by-two matrix, it is utterly different from
+ 
 \begin_inset Formula $\gamma_{C}$
 \end_inset 
 
@@ -3306,7 +3355,7 @@ x\end{array}\right)\]
 \end_inset 
 
 is not 1.
- Note that the 
+ The 
 \begin_inset Formula $\gamma_{D}$
 \end_inset 
 
@@ -3318,7 +3367,15 @@ Borel monoid
 \begin_inset Quotes erd
 \end_inset 
 
- (in analogy to the Borel group of upper-triangular matrices).
+ , in analogy to the name 
+\begin_inset Quotes eld
+\end_inset 
+
+Borel group
+\begin_inset Quotes erd
+\end_inset 
+
+ given to the group of upper-triangular matricies.
  
 \layout Section
 
