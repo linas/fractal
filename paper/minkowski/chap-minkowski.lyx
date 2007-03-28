@@ -1537,8 +1537,9 @@ reflection
 
 Applying the above process, it is relatively straightforward to see that
  
-\begin_inset Formula \begin{equation}
-(?\circ\gamma)(x)=\left(?\circ g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\right)(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:q-mark isomorph}\end{equation}
+\begin_inset Formula \begin{eqnarray}
+(?\circ\gamma)(x) & = & \left(?\circ g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\right)(x)\label{eq:q-mark isomorph}\\
+ & = & \frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\end{eqnarray}
 
 \end_inset 
 
@@ -3446,8 +3447,12 @@ The subtree under a node on the tree represents an interval: the subtree
  
 \layout Standard
 
-It can be interesting to consider the endpoints of the intervals given by
- the codmoain of these functions; these endpoints are given by 
+The endpoints of an interval are the sup and inf of all the values on the
+ corresponding subtree.
+ For the Stern-Brocot tree, the enpoints are always rational; for the dyadic
+ tree, they are dyadics.
+ That they are rational is most easily demonstrated by noting that the interval
+ is the co-domain of an interval map, so the endpoints are given by 
 \begin_inset Formula $\gamma(0)$
 \end_inset 
 
@@ -3536,6 +3541,31 @@ The endpoints of an interval are not completely arbitrary, but are correlated.
  alone.
  The difference between these two schemes is, of course, just Hilbert's
  infinite hotel.
+\layout Standard
+
+The idea of self-similar maps that map intervals to sub-intervals is appealing
+ because of its simple intuitive connection to many common fractals.
+ When looking at the Koch snowflake curve, for example, one feels that one
+ can point anywhere to find a self-similar copy: this is the freedom of
+ choosing one endpoint to belong to 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset 
+
+.
+ But to find the entire run of the self-similar part, one's choices are
+ far more limited: only certain strict sub-intervals appear; this is the
+ more limited choice of 
+\begin_inset Formula $\mathbb{N}$
+\end_inset 
+
+ for the other endpoint.
+ Thus, the 
+\begin_inset Formula $\mathbb{Q}\times\mathbb{N}$
+\end_inset 
+
+ enumeration of intervals is in this sense one of the more intuitive ways
+ of specifying elements of the dyadic monoid.
+ 
 \layout Section
 
 xxxxxx
@@ -3664,41 +3694,6 @@ Show that
 \end_inset 
 
  and etc.
-\layout Subsection
-
-Enumerating Self-Similarities 
-\layout Standard
-
-The semi-group 
-\begin_inset Formula $M$
-\end_inset 
-
- contains many, but not all, of the self-similarities of the Question Mark.
- 
-\layout Standard
-
-Given any node in the Farey tree, the subtree will have an infinum which
- will be a rational number, and a suprenum which will also be a rational
- number.
- This is a somewhat subtle point: the inf and sup of a subtree of the Farey
- tree will never be irrational.
- 
-\layout Standard
-
-Note that this property of being able to freely pick one endpoint, but being
- a bit more constrained with the other is a very important property of this
- symmetry.
- 
-\series bold 
-\emph on 
-This property is the fundamental property of self-similar objects and fractals
- in general: one can freely pick which copy one is to be self-similar with,
- but then after that, one has little further freedom.
-
-\series default 
-\emph default 
- This is what makes fractals be what they are.
- 
 \layout Subsection
 
 Set-Theoretic Representations of the Modular Group
@@ -4212,6 +4207,14 @@ on of the Bernoulli map, where we'll also note that it can be expressed
 \layout Subsubsection
 
 Binary Tree Rotations
+\layout Standard
+
+The semi-group 
+\begin_inset Formula $M$
+\end_inset 
+
+ contains many, but not all, of the self-similarities of the Question Mark.
+ 
 \layout Standard
 
 Most of this chapter has focused on a interval representation; however,
