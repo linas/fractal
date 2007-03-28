@@ -3432,7 +3432,7 @@ The subtree under a node on the tree represents an interval: the subtree
  subtree.
  Thus, the action of the dyadic monoid on the tree can be understood to
  be the action of a set of maps that map intervals to sub-intervals.
- Each interval is the co-domain of a self-similarity map.
+ Each interval is the range of a self-similarity map.
  To different interval maps were already given; these are 
 \begin_inset LatexCommand \ref{eq:dyadic gamma}
 
@@ -3452,7 +3452,7 @@ The endpoints of an interval are the sup and inf of all the values on the
  For the Stern-Brocot tree, the enpoints are always rational; for the dyadic
  tree, they are dyadics.
  That they are rational is most easily demonstrated by noting that the interval
- is the co-domain of an interval map, so the endpoints are given by 
+ is the range of an interval map, so the endpoints are given by 
 \begin_inset Formula $\gamma(0)$
 \end_inset 
 
@@ -3566,6 +3566,271 @@ The idea of self-similar maps that map intervals to sub-intervals is appealing
  enumeration of intervals is in this sense one of the more intuitive ways
  of specifying elements of the dyadic monoid.
  
+\layout Section
+
+The Boolean Dyadic Lattice
+\layout Standard
+
+The introduction of the dyadic monoid sidestepped some important questions:
+ why can't the monoid be extended to be a full group? Is the monoid the
+ most appropriate algebraic structure, or is there some other structure
+ that more closely captures the structure of this thing? There is another,
+ perhaps evan a more appropriate, structure with which the set of self-symetries
+ can be understood.
+ This is the (Boolean) lattice that is often used in general topology and
+ is the focus of study in order theory.
+\layout Subsection
+
+Inadequacy of the Dyadic Monoid
+\layout Standard
+
+Calling the set of self-similarities a monoid is inadequate, and fails to
+ capture the full structure of the thing.
+ There are several ways to see this.
+ Corresponding to move to sub-trees, there are inverse moves that take one
+ back up the tree.
+ If one moves the the left branch with 
+\begin_inset Formula $L$
+\end_inset 
+
+, there is an inverse move 
+\begin_inset Formula $L^{-1}$
+\end_inset 
+
+that takes one back to where one started.
+ Similarly, there is an 
+\begin_inset Formula $R^{-1}$
+\end_inset 
+
+ to undo a move 
+\begin_inset Formula $R$
+\end_inset 
+
+ to the right branch.
+ But 
+\begin_inset Formula $L^{-1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $R^{-1}$
+\end_inset 
+
+are the same thing: there is only one way to move back on the tree, and
+ it does not depend on where one came from.
+ Call it 
+\begin_inset Formula $B$
+\end_inset 
+
+, for 
+\begin_inset Quotes eld
+\end_inset 
+
+back
+\begin_inset Quotes erd
+\end_inset 
+
+, so that 
+\begin_inset Formula $B=L^{-1}=R^{-1}$
+\end_inset 
+
+, with the non-move given by 
+\begin_inset Formula $BL=LB=BR=RB=e$
+\end_inset 
+
+.
+ A number of 
+\begin_inset Formula $B$
+\end_inset 
+
+'s can be concatenated together to indicate a number of upward moves.
+ Thus, naively, one might want to extend the dyadic monoid by adjoining
+ the letter 
+\begin_inset Formula $B$
+\end_inset 
+
+.
+ Several uncomfortable problems arise with such an idea.
+ First, the adjunction of 
+\begin_inset Formula $B$
+\end_inset 
+
+ does not magically turn the monoid into a group: there is no element 
+\begin_inset Formula $B^{-1}$
+\end_inset 
+
+.
+ Next, the presence of 
+\begin_inset Formula $B$
+\end_inset 
+
+ in any string of letters 
+\begin_inset Formula $R,L$
+\end_inset 
+
+ automatically 
+\begin_inset Quotes eld
+\end_inset 
+
+erases
+\begin_inset Quotes erd
+\end_inset 
+
+ those letters: thus, there are no strings that mix together 
+\begin_inset Formula $L,R$
+\end_inset 
+
+ and 
+\begin_inset Formula $B$
+\end_inset 
+
+.
+ A third problem is that the operation of 
+\begin_inset Formula $B$
+\end_inset 
+
+ is position-dependent.
+ If one is at the the root of the tree, there is no way to back up any further.
+ Thus, any given string 
+\begin_inset Formula $B^{n}$
+\end_inset 
+
+ of 
+\begin_inset Formula $n$
+\end_inset 
+
+ backwards moves may or may not be idempotent, depending on whether the
+ starting point is at leas 
+\begin_inset Formula $n$
+\end_inset 
+
+ levels deep in the tree, or not.
+ One concludes that there is a legitimate need to be able to formally discuss
+ a back-up move, but that simply adding 
+\begin_inset Formula $B$
+\end_inset 
+
+ to the monoid is insufficient.
+\layout Standard
+
+There might be a temptation to try a different tack: to define a formal
+ inverse.
+ Every free monoid has a universal cover that is a group; the covering group
+ is obtained by formally adjoining inverse elements to the monoid.
+ The construction is straightforward, and is known as a 
+\begin_inset Quotes eld
+\end_inset 
+
+universal property
+\begin_inset Quotes erd
+\end_inset 
+
+, as it can be applied to the category of free monoids.
+ In more concrete terms, this just simply means that one adds two elements
+ 
+\begin_inset Formula $R^{-1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $L^{-1}$
+\end_inset 
+
+ which are, by definition, inverses:
+\begin_inset Formula $L^{-1}L=LL^{-1}=R^{-1}R=RR^{-1}=e$
+\end_inset 
+
+.
+ However, in this universal extension, no further conditions are imposed;
+ in particular, 
+\begin_inset Formula $L^{-1}$
+\end_inset 
+
+ does not commute with 
+\begin_inset Formula $R$
+\end_inset 
+
+, and similarly 
+\begin_inset Formula $R^{-1}$
+\end_inset 
+
+ does not commute with 
+\begin_inset Formula $L$
+\end_inset 
+
+.
+ Thus, this formal extension does not match up with the idea of backwards
+ moves on the binary tree.
+ 
+\layout Standard
+
+If one considers the interval map representation, the formal extension also
+ results in undefined moves.
+ Consider, for example, 
+\begin_inset Formula $L(x)$
+\end_inset 
+
+ to be the function 
+\begin_inset Formula $L(x)=x/2$
+\end_inset 
+
+ that maps the whole unit interval to its left sub-half.
+ Then 
+\begin_inset Formula $L^{-1}(x)$
+\end_inset 
+
+ is an inverse, whose domain is the half-interval [0,1/2].
+ Similarly, let 
+\begin_inset Formula $R(x)=(x+1)/2$
+\end_inset 
+
+ map the whole interval to the right half.
+ What then should one make of 
+\begin_inset Formula $(L^{-1}\circ R)(x)$
+\end_inset 
+
+? The range of 
+\begin_inset Formula $R$
+\end_inset 
+
+ simply does not intersect the domain of 
+\begin_inset Formula $L^{-1}$
+\end_inset 
+
+; so 
+\begin_inset Formula $L^{-1}\circ R$
+\end_inset 
+
+ is undefined.
+ The universal extension of the free monoid to a free group simply does
+ not act on the binary tree in a meaningful way.
+ One might try to rescue the situation by defining 
+\begin_inset Formula $L^{-1}(x)=2x\mbox{ mod}1$
+\end_inset 
+
+, so that 
+\begin_inset Formula $L^{-1}(x)$
+\end_inset 
+
+ is well-defined on the entire unit interval.
+ But then, 
+\begin_inset Formula $L^{-1}(x)=R^{-1}(x)=B(x)$
+\end_inset 
+
+, and one is back to having a 
+\begin_inset Quotes eld
+\end_inset 
+
+group element
+\begin_inset Quotes erd
+\end_inset 
+
+ that commutes, which is not what the universal extension did.
+ 
+\layout Subsection
+
+Boolean lattice
+\layout Standard
+
+Write me.
 \layout Section
 
 xxxxxx
@@ -3696,21 +3961,10 @@ Show that
  and etc.
 \layout Subsection
 
-Set-Theoretic Representations of the Modular Group
-\layout Subsubsection
-
-The Lattice Representation
+The Boolean Lattice 
 \layout Standard
 
-Previously, we defined a subset 
-\begin_inset Formula $M$
-\end_inset 
-
- of the modular group, and showed that it was a semigroup, and that it had
- a representation as a set of intervals.
- Let us now go back to this interval mapping definition and attempt to expand
- it.
- That is, lets try to build a superset of the set 
+lets try to build a superset of the set 
 \begin_inset Formula $M$
 \end_inset 
 
@@ -4115,7 +4369,7 @@ The net result of these considerations is that one does not gain anything
 \end_inset 
 
 .
-\layout Subsubsection
+\layout Subsection
 
 Higher-order Interval Representations
 \layout Standard
@@ -4204,7 +4458,7 @@ We will develop this function in more detail in later chapters, as a eigenfuncti
 on of the Bernoulli map, where we'll also note that it can be expressed
  as a linear combination of Hurwitz zeta functions.
  
-\layout Subsubsection
+\layout Subsection
 
 Binary Tree Rotations
 \layout Standard
@@ -4225,7 +4479,7 @@ Most of this chapter has focused on a interval representation; however,
  These hyperbolic maps are injective and surjective: that is, they are valid
  on the entire unit interval.
  They will be developed in detail in a later chapter.
-\layout Subsubsection
+\layout Subsection
 
 The Modular Group, In General
 \layout Standard
