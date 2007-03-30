@@ -37,6 +37,11 @@ all: $(GRPHS) $(IMGS)
 arxiv:
 	patch -p0 < arxiv.diff
 	mv hurwitz.lyx hurwitz-arxiv.lyx
+	cvs update
+	lyx-qt hurwitz-arxiv.lyx -e latex
+	mv hurwitz-arxiv.tex hurwitz.latex
+	/usr/bin/latex hurwitz.latex
+	/usr/bin/bibtex hurwitz.aux
 
 dist: $(GRPHS) $(IMGS)
 	tar -cvf hurwitz.tar hurwitz.latex hurwitz.aux hurwitz.bbl $(GRPHS) $(IMGS)
