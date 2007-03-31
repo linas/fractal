@@ -35,21 +35,21 @@ Linas Vepstas <linas@linas.org>
 20 August 2006
 \layout Abstract
 
-de Rham curves a set of fairly generic fractal curves exhibiting dyadic
- symmetry.
+The de Rham curves are a set of fairly generic fractal curves exhibiting
+ dyadic symmetry.
  Described by Georges de Rham in 1957
 \begin_inset LatexCommand \cite{DeR57}
 
 \end_inset 
 
 , this set includes a number of the famous classical fractals, including
- the Koch snowflage, the Peano space-filling curve, the Cesaro-Faber curves,
+ the Koch snowflake, the Peano space-filling curve, the Cesàro-Faber curves,
  the Takagi-Landsberg
 \begin_inset LatexCommand \cite{Man88}
 
 \end_inset 
 
- or blancmange curve, and the Levy C-curve.
+ or blancmange curve, and the Lévy C-curve.
  This paper gives a breif review of the construction of these curves, demonstrat
 es that the complete collection of linear affine deRham curves is a five-dimensi
 onal space, and then presents a collection of four dozen images exploring
@@ -58,14 +58,22 @@ onal space, and then presents a collection of four dozen images exploring
 \layout Abstract
 
 These curves are interesting because they exhibit dyadic symmetry, with
- the dyadic symmetry semigroup being an interesting subset of the modular
- group 
-\begin_inset Formula $SL(2,\mathbb{Z})$
+ the dyadic symmetry monoidbeing an interesting subset of the group 
+\begin_inset Formula $GL(2,\mathbb{Z})$
 \end_inset 
 
 .
- This is a companion article to another exploring the nature of this semigroup
- in greater detail.
+ This is a companion article to several others
+\begin_inset LatexCommand \cite{Ve-M04}
+
+\end_inset 
+
+
+\begin_inset LatexCommand \cite{Ve-T04}
+
+\end_inset 
+
+ exploring the nature of this monoid in greater detail.
 \layout Section
 
 Introduction
@@ -106,14 +114,14 @@ Consider a pair of contracting maps of the plane
 
 .
  Assume that each fixed point lies in the basin of attraction of the other
- map, and furthermore, that the one applied to the fixed point of the other
- yields the same point, that is, 
+ map, and furthermore, that the one map applied to the fixed point of the
+ other yields the same point, that is, 
 \begin_inset Formula \begin{equation}
 d_{1}(p_{0})=d_{0}(p_{1})\label{eq:continuity condition}\end{equation}
 
 \end_inset 
 
- Then these maps can be used to construct a certain continuous curve between
+ These maps can then be used to construct a certain continuous curve between
  
 \begin_inset Formula $p_{0}$
 \end_inset 
@@ -123,38 +131,48 @@ and
 \end_inset 
 
 .
- Consider next the expansion in binary digits of a real number 
-\begin_inset Formula $x$
+ This is done by repeatedly composing together the maps 
+\begin_inset Formula $d_{0}$
 \end_inset 
 
-, as given previously in eqn.
- 
-\begin_inset LatexCommand \ref{eq: binary expansion}
+ and 
+\begin_inset Formula $d_{1}$
+\end_inset 
 
+ according to the paths of an infinite binary tree, or, equivalently, according
+ to the elements of a Cantor set.
+ This may be done in a very concrete fashion, by refering to the expansion
+ in binary digits of a real number 
+\begin_inset Formula $x$
 \end_inset 
 
 :
 \layout Standard
 
 
-\begin_inset Formula \begin{equation}
-x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq:}\end{equation}
+\begin_inset Formula \[
+x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\]
 
 \end_inset 
 
+ where each of the binary digits 
+\begin_inset Formula $b_{k}$
+\end_inset 
+
+ is 0 or 1.
  The de Rham curve is then a map characterized by the continuous parameter
  
 \begin_inset Formula $x$
 \end_inset 
 
 : 
-\begin_inset Formula \begin{equation}
-d_{x}=d_{b_{1}}\circ\; d_{b_{2}}\circ\,\ldots\:\circ\, d_{b_{k}}\circ\,\ldots\label{eq:}\end{equation}
+\begin_inset Formula \[
+d_{x}=d_{b_{1}}\circ\; d_{b_{2}}\circ\,\ldots\:\circ\, d_{b_{k}}\circ\,\ldots\]
 
 \end_inset 
 
  The above map will take points in the common basin of attraction of the
- two maps to a single point.
+ two maps, down to a single point.
  De Rham provides a simple proof that the resulting set of points form a
  continuous curve as a function of 
 \begin_inset Formula $x$
@@ -177,23 +195,23 @@ De Rham provides several examples.
 \end_inset 
 
  be a constant such that 
-\begin_inset Formula $|a|<1$
+\begin_inset Formula $\vert a\vert<1$
 \end_inset 
 
  and 
-\begin_inset Formula $|a-1|<1$
+\begin_inset Formula $\vert a-1\vert<1$
 \end_inset 
 
 .
  Then consider the maps 
-\begin_inset Formula \begin{equation}
-d_{0}(z)=az\label{eq:}\end{equation}
+\begin_inset Formula \[
+d_{0}(z)=az\]
 
 \end_inset 
 
  and 
-\begin_inset Formula \begin{equation}
-d_{1}(z)=a+(1-a)z\label{eq:}\end{equation}
+\begin_inset Formula \[
+d_{1}(z)=a+(1-a)z\]
 
 \end_inset 
 
@@ -206,27 +224,8 @@ d_{1}(z)=a+(1-a)z\label{eq:}\end{equation}
 \end_inset 
 
 , respectively.
- The generated curve is is the non-differentiable curve of 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-Ces
-\backslash 
-`{a}ro
-\end_inset 
-
- and Faber, now known more generally as the 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-L
-\backslash 
-'{e}vy
-\end_inset 
-
- C-curve, especially when 
+ The generated curve is is the non-differentiable curve of Cesàro and Faber,
+ now known more generally as the Lévy C-curve, especially when 
 \begin_inset Formula $a=0.5+i0.5$
 \end_inset 
 
@@ -257,17 +256,7 @@ collapsed false
 
 \end_inset 
 
-
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-Ces
-\backslash 
-`{a}ro
-\end_inset 
-
- Curve
+Cesàro Curve
 \layout Standard
 
 
@@ -280,32 +269,12 @@ Ces
 
 \layout Standard
 
-The 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-Ces
-\backslash 
-`{a}ro
-\end_inset 
-
- curve, graphed for the value of 
+The Cesàro curve, graphed for the value of 
 \begin_inset Formula $a=(1+i)/2$
 \end_inset 
 
 .
- Note that this figure is more commonly known as the 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-L
-\backslash 
-'{e}vy
-\end_inset 
-
- C-curve.
+ Note that this figure is more commonly known as the Lévy C-curve.
 \layout Standard
 
 
@@ -318,34 +287,14 @@ L
 
 \layout Standard
 
-The 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-Ces
-\backslash 
-`{a}ro
-\end_inset 
-
- curve, graphed for the value of 
+The Cesàro curve, graphed for the value of 
 \begin_inset Formula $a=0.3+i0.3$
 \end_inset 
 
 .
  The real parameter shifts the symmetry point: thus the biggest loop is
  located at 0.3 in this picture, instead of being located at 0.5 as in the
- 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-L
-\backslash 
-'{e}vy
-\end_inset 
-
- curve.
+ Lévy curve.
  The imaginary parameter provides a 
 \begin_inset Quotes eld
 \end_inset 
@@ -367,7 +316,7 @@ strength
 
 Written as affine transformations, the two transforms can be expressed as
  
-\begin_inset Formula \begin{equation}
+\begin_inset Formula \[
 d_{0}(u,v)=\left(\begin{array}{c}
 1\\
 u'\\
@@ -377,12 +326,12 @@ v'\end{array}\right)=\left(\begin{array}{ccc}
 0 & \beta & \alpha\end{array}\right)\left(\begin{array}{c}
 1\\
 u\\
-v\end{array}\right)\label{eq:}\end{equation}
+v\end{array}\right)\]
 
 \end_inset 
 
  and 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula \[
 d_{1}(u,v)=\left(\begin{array}{c}
 1\\
 u'\\
@@ -392,7 +341,7 @@ v'\end{array}\right)=\left(\begin{array}{ccc}
 \beta & -\beta & 1-\alpha\end{array}\right)\left(\begin{array}{c}
 1\\
 u\\
-v\end{array}\right)\label{eq:}\end{equation}
+v\end{array}\right)\]
 
 \end_inset 
 
@@ -408,65 +357,7 @@ v\end{array}\right)\label{eq:}\end{equation}
  
 \layout Standard
 
-The 
-\begin_inset Formula $d_{0}$
-\end_inset 
 
- and the 
-\begin_inset Formula $d_{1}$
-\end_inset 
-
- transformations are essentially the 
-\begin_inset Formula $L$
-\end_inset 
-
- and 
-\begin_inset Formula $R$
-\end_inset 
-
- operators from the introduction of this paper.
- Although these are represented by three-dimensional linear transformations,
- there is no equivalent to the transformations 
-\begin_inset Formula $g$
-\end_inset 
-
- and 
-\begin_inset Formula $r$
-\end_inset 
-
-.
- This is because for every case, with the exception of 
-\begin_inset Formula $\alpha=1/2$
-\end_inset 
-
-, the curves are not left-right symmetric, and so there is no matrix 
-\begin_inset Formula $r$
-\end_inset 
-
- such that 
-\begin_inset Formula $r^{2}=1$
-\end_inset 
-
- and 
-\begin_inset Formula $L=rRr$
-\end_inset 
-
-.
- However, one can find a matrix 
-\begin_inset Formula $s$
-\end_inset 
-
- such that 
-\begin_inset Formula $L=s^{-1}Rs$
-\end_inset 
-
-.
- XXX to do show 
-\begin_inset Formula $s$
-\end_inset 
-
-.
- 
 \begin_inset Float figure
 wide false
 collapsed false
@@ -501,16 +392,20 @@ The Takagi or blancmange curve, corresponding to a value of
 
 \layout Standard
 
-The Takagi curve analyzed in the companion paper can be generated in the
- same way, using 
-\begin_inset Formula \begin{equation}
+The Takagi curve analyzed in the companion paper
+\begin_inset LatexCommand \cite{Ve-T04}
+
+\end_inset 
+
+ can be generated in the same way, using 
+\begin_inset Formula \[
 d_{0}=L_{3}=g_{3}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 0 & \frac{1}{2} & 0\\
 0 & 1 & w\end{array}\right)\;\textrm{ and \;}d_{1}=R_{3}=r_{3}g_{3}r_{3}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 \frac{1}{2} & \frac{1`}{2} & 0\\
-1 & -1 & w\end{array}\right)\label{eq:}\end{equation}
+1 & -1 & w\end{array}\right)\]
 
 \end_inset 
 
@@ -524,14 +419,14 @@ d_{0}=L_{3}=g_{3}=\left(\begin{array}{ccc}
 
 The Koch and Peano curves are similarly obtained, by introducing a mirror
  reflection through the complex conjugate: 
-\begin_inset Formula \begin{equation}
-d_{0}(z)=a\overline{z}\label{eq:}\end{equation}
+\begin_inset Formula \[
+d_{0}(z)=a\overline{z}\]
 
 \end_inset 
 
  and 
-\begin_inset Formula \begin{equation}
-d_{1}(z)=a+(1-a)\overline{z}\label{eq:}\end{equation}
+\begin_inset Formula \[
+d_{1}(z)=a+(1-a)\overline{z}\]
 
 \end_inset 
 
@@ -539,14 +434,14 @@ d_{1}(z)=a+(1-a)\overline{z}\label{eq:}\end{equation}
 \layout Standard
 
 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula \[
 d_{0}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 0 & \alpha & \beta\\
 0 & \beta & -\alpha\end{array}\right)\;\textrm{ and \;}d_{1}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 \alpha & 1-\alpha & -\beta\\
-\beta & -\beta & \alpha-1\end{array}\right)\label{eq:}\end{equation}
+\beta & -\beta & \alpha-1\end{array}\right)\]
 
 \end_inset 
 
@@ -639,20 +534,24 @@ The Koch curve, for
 \layout Standard
 
 Yet another example of a curve generated by means of the de Rham construction
- is the Minkowski Question Mark function, which is given by the Mobius functions
- 
-\begin_inset Formula \begin{equation}
-d_{0}(z)=z/(z+1)\label{eq:}\end{equation}
+ is the Minkowski question mark function
+\begin_inset LatexCommand \cite{Ve-M04}
+
+\end_inset 
+
+, which is given by the Möbius functions 
+\begin_inset Formula \[
+d_{0}(z)=z/(z+1)\]
 
 \end_inset 
 
  and 
-\begin_inset Formula \begin{equation}
-d_{1}(z)=1/(z+1)\label{eq:}\end{equation}
+\begin_inset Formula \[
+d_{1}(z)=1/(z+1)\]
 
 \end_inset 
 
- Expressed as the usual 2x2 matrix representations for Mobius transforms,
+ Expressed as the usual 2x2 matrix representations for Möbius transforms,
  these correspond to the generators 
 \begin_inset Formula $L$
 \end_inset 
@@ -661,8 +560,8 @@ d_{1}(z)=1/(z+1)\label{eq:}\end{equation}
 \begin_inset Formula $R$
 \end_inset 
 
- given in 
-\begin_inset LatexCommand \ref{eq:L and R}
+ of the Stern-Brocot tree
+\begin_inset LatexCommand \cite{Ve-M04,Bog96}
 
 \end_inset 
 
@@ -680,19 +579,19 @@ From the construction properties, it should now be clear that this generalized
  this essentially follows from the self-similarity properties of the Cantor
  polynomials.
  That is, given a contracting group element 
-\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}\in PSL(2,\mathbb{Z})$
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}\in GL(2,\mathbb{Z})$
 \end_inset 
 
 , one defines its action in the canonical way, on the parameter space, as
  an action on dyadic intervals: thus 
-\begin_inset Formula \begin{equation}
-gd_{x}=d_{x/2}\label{eq:}\end{equation}
+\begin_inset Formula \[
+gd_{x}=d_{x/2}\]
 
 \end_inset 
 
  and 
-\begin_inset Formula \begin{equation}
-sd_{0}=d_{1}\qquad d_{0}=s^{-1}d_{1}\label{eq:}\end{equation}
+\begin_inset Formula \[
+sd_{0}=d_{1}\qquad d_{0}=s^{-1}d_{1}\]
 
 \end_inset 
 
@@ -707,17 +606,7 @@ sd_{0}=d_{1}\qquad d_{0}=s^{-1}d_{1}\label{eq:}\end{equation}
 \end_inset 
 
 ; it is a statement of the self-similarity properties of the curve.
- In the case of the Koch and 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-L
-\backslash 
-'{e}vy
-\end_inset 
-
- curves, both 
+ In the case of the Koch and Lévy curves, both 
 \begin_inset Formula $g$
 \end_inset 
 
@@ -731,8 +620,14 @@ L
 
  are expressible as linear affine transformations on the two-dimensional
  plane.
- This is essentially an expression of a known result from IFS: these figures
- are obtainable by iterating on a pair of specific affine transforms.
+ This is essentially an expression of a known result from the theory of
+ iterated function systems (IFS)
+\begin_inset LatexCommand \cite{Bar88}
+
+\end_inset 
+
+: these figures are obtainable by iterating on a pair of specific affine
+ transforms.
  
 \layout Description
 
@@ -740,17 +635,7 @@ Homework: Write down an explicit expression for a general
 \begin_inset Formula $\gamma$
 \end_inset 
 
- for the Koch and 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-L
-\backslash 
-'{e}vy
-\end_inset 
-
- curves.
+ for the Koch and Lévy curves.
 \layout Standard
 
 The lesson to be learned here bears stating clearly: 
@@ -760,10 +645,14 @@ every point on the above-mentioned curves can be uniquely labelled by a
  real number.
  The labelling is not abstract, but concrete.
  The fractal self-similarity of the curves are in unique correspondence
- to the contracting semi-group of the modular group.
- To every element of the contracting semi-group, a unique non-degenerate
- mapping of the plane can be given that exactly maps the curve into a a
- self-similar subset of itself.
+ to the contracting monoid of 
+\begin_inset Formula $GL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ To every element of the contracting monoid, a unique non-degenerate mapping
+ of the plane can be given that exactly maps the curve into a self-similar
+ subset of itself.
  The mapping is continuous, and can be expressed in concrete form.
  
 \layout Subsection
@@ -776,14 +665,14 @@ tions, indicates that it is possible to count the total number of uniquely
  distinct dyadic planar fractal curves, and to classify them into families.
  The general linear, dyadic planar fractal curve is given by iterating on
  
-\begin_inset Formula \begin{equation}
+\begin_inset Formula \[
 d_{0}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 a & b & c\\
 d & e & f\end{array}\right)\;\textrm{ and \;}d_{1}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 h & j & k\\
-l & m & n\end{array}\right)\label{eq:}\end{equation}
+l & m & n\end{array}\right)\]
 
 \end_inset 
 
@@ -810,17 +699,8 @@ l & m & n\end{array}\right)\label{eq:}\end{equation}
 
 Of this four-dimensional space, one dimension has been explored with the
  Takagi curves.
- A second dimension is explored with the 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-Ces
-\backslash 
-`{a}ro
-\end_inset 
-
- curves, and a third with the Koch/Peano curves.
+ A second dimension is explored with the Cesàro curves, and a third with
+ the Koch/Peano curves.
  
 \layout Standard
 
@@ -885,14 +765,14 @@ The general form may be narrowed as follows.
 \layout Standard
 
 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula \[
 d_{0}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 0 & \alpha & \delta\\
 0 & \beta & \epsilon\end{array}\right)\;\textrm{ and \;}d_{1}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
 \alpha & 1-\alpha & \zeta\\
-\beta & -\beta & \eta\end{array}\right)\label{eq:}\end{equation}
+\beta & -\beta & \eta\end{array}\right)\]
 
 \end_inset 
 
