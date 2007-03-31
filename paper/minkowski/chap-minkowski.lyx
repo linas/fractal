@@ -43,7 +43,7 @@ Linas Vepstas
 <linas@linas.org>
 \layout Date
 
-12 October 2004 (updated 17 March 2007)
+12 October 2004 (updated 24 March 2007)
 \layout Abstract
 
 Fractals and continued fractions seem to be deeply related in many ways.
@@ -3579,10 +3579,281 @@ The idea of self-similar maps that map intervals to sub-intervals is appealing
 The Cantor Set
 \layout Standard
 
-Write me.
+The interval maps given by equations 
+\begin_inset LatexCommand \ref{eq:dyadic gamma}
+
+\end_inset 
+
+ or 
+\begin_inset LatexCommand \ref{eq:modular gamma}
+
+\end_inset 
+
+ can be generalized in several different ways.
+ These maps had several properties:
+\layout Enumerate
+
+The maps 
+\begin_inset Formula $L(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula $R(x)$
+\end_inset 
+
+ are maps from the unit interval to the unit interval.
+\layout Enumerate
+
+The maps 
+\begin_inset Formula $L(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula $R(x)$
+\end_inset 
+
+ together are surjective onto the unit inverval.
+ That is, the union of the range of 
+\begin_inset Formula $L$
+\end_inset 
+
+ and the range of 
+\begin_inset Formula $R$
+\end_inset 
+
+ together cover the whole interval.
+ There are no gaps.
+\layout Enumerate
+
+The range of 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ intersect at exactly one point: 
+\begin_inset Formula $L(1)=R(0)$
+\end_inset 
+
+.
+ 
+\layout Enumerate
+
+The maps 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ meet exactly in the middle; that is, 
+\begin_inset Formula $L(1)=R(0)=1/2$
+\end_inset 
+
+.
 \layout Standard
 
-Totally disconnected, compact Hausdorff space is an example of a Stone space.
+One possible generalization is to relax the first condition, to let 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ be endomorphisms of some general space 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ The result of this generalization is the de Rham curve
+\begin_inset LatexCommand \cite{DeR57}
+
+\end_inset 
+
+, a continuous curve in the space 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ The construction of this curve is breifly reviewd in the next section.
+\layout Standard
+
+Another possiblity is to relax the second condition (and so also the third
+ and fourth).
+ The result of doing so is the Cantor set.
+ So, for example, the standard construction of the Cantor set may be given
+ as follows.
+ Let 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ be the maps 
+\begin_inset Formula \begin{eqnarray*}
+L(x) & = & x/3\\
+R(x) & = & (2+x)/3\end{eqnarray*}
+
+\end_inset 
+
+ so that 
+\begin_inset Formula $L$
+\end_inset 
+
+ maps the closed unit interval 
+\begin_inset Formula $[0,1]$
+\end_inset 
+
+ to the closed interval 
+\begin_inset Formula $[0,1/3]$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ maps it to 
+\begin_inset Formula $[2/3,1]$
+\end_inset 
+
+.
+ Effectively, the open interval 
+\begin_inset Formula $(1/3,2/3)$
+\end_inset 
+
+ in the middle has been excluded.
+ But this is just the first step of the standard construction of the Cantor
+ set: the removal of the middle third.
+ This first step corresponds to the first level of the binary tree: there
+ are two branches, and the middle has been excluded.
+ Repeating this process, it should be clear that what remains, after an
+ infinite number of steps, is the Cantor set.
+ Furthermore, it should be clear that every remaining element of the Cantor
+ set can be assigned a unique label, an infinite string of 
+\begin_inset Formula $L$
+\end_inset 
+
+'s and 
+\begin_inset Formula $R$
+\end_inset 
+
+'s applied in succession.
+ The Cantor set can be visualized as the limit of the infinite binary tree:
+ it is the set of 
+\begin_inset Quotes eld
+\end_inset 
+
+leaves
+\begin_inset Quotes erd
+\end_inset 
+
+ of the infinite binary tree.
+ 
+\layout Standard
+
+All of the properties of the Cantor set are evident in the construction.
+ The Cantor set is totally disconnected, in that, given one string of letters
+ 
+\begin_inset Formula $L$
+\end_inset 
+
+, 
+\begin_inset Formula $R$
+\end_inset 
+
+ specifying one path on the binary tree, every other string will take one
+ to another point that is a finite distance away.
+ The Cantor set is also a compact Hausdorff space.
+ This may be argued by noting that the unit interval is a compact Haussdorff
+ space, that both 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ are continuous maps, and that the continuous map of a Hausdorff space is
+ a Hausdorff space.
+ A totally disconnected, compact Hausdorff space is an example of a Stone
+ space, a them that will be returned to when reconsidering the dyadic monoid
+ as a lattice.
+\layout Standard
+
+There are several notworthy corollaries of this excercise.
+ First is that the dyadic representation of a real number is isomorphic
+ to the Cantor set, in that if 
+\begin_inset Formula $x=\sum_{n}b_{n}2^{-n}$
+\end_inset 
+
+, the binary digits 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+ can be taken to be the moves 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ on the binary tree.
+ Next, the maps 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ can be quite general.
+ One need not remove the middle third; one can remove less.
+ One can arragne to remove even geometrically less at each step, so that
+ the resulting set is no longer a Cantor set of measure zero, but the so-called
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+fat Cantor set
+\begin_inset Quotes erd
+\end_inset 
+
+, a Cantor set with finite measure.
+ Noteably, there are Cantor sets with measure one.
+ In particular, if one removes the dyadic rationals from the real number
+ line, what is left is a Cantor set, but it is a Cantor set with measure
+ one (since the dyadic rationals are a set of measure zero).
+ If instead one considers the Stern-Brocot tree, it is then clear that the
+ reals with all rationals removed is likewise the Cantor set.
+ In essence, this is then a proof of something usually taken for granted:
+ every irrational number 
+\begin_inset Formula $x$
+\end_inset 
+
+ has a unique expansion 
+\begin_inset Formula $x=\sum_{n}b_{n}2^{-n}$
+\end_inset 
+
+ in terms of binary digits 
+\begin_inset Formula $b_{n}$
+\end_inset 
+
+.
+ It is the disconnectedness of the Cantor set that makes such an expansion
+ unique.
+\layout Subsection
+
+De Rham Curves
+\layout Standard
+
+F
 \layout Section
 
 The Dyadic Lattice
