@@ -3316,18 +3316,12 @@ x\end{array}\right]\]
 \end_inset 
 
  where 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 g_{D}=\left[\begin{array}{cc}
 1 & 0\\
-0 & \frac{1}{2}\end{array}\right]\]
-
-\end_inset 
-
- and 
-\begin_inset Formula \[
-r_{D}=\left[\begin{array}{cc}
+0 & \frac{1}{2}\end{array}\right]\quad\mbox{ and }\quad r_{D}=\left[\begin{array}{cc}
 1 & 0\\
-1 & -1\end{array}\right]\]
+1 & -1\end{array}\right]\label{eq:g_D matrix}\end{equation}
 
 \end_inset 
 
@@ -3383,9 +3377,283 @@ Borel group
 Higher Dimensional Affine Representations
 \layout Standard
 
-XXX write me.
- Mention very breifly the Takagi curve, and general de Rham curves.
- Importance of fixed points for the construction.
+The dyadic representation can be generalized by using more general, 
+\begin_inset Formula $N\times N$
+\end_inset 
+
+ matrices in place of 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+.
+ The full generalization is known as a 
+\emph on 
+de Rham curve
+\emph default 
+, and is discussed in a later section, below.
+ A particularly noteworthy example, however, is the three-dimensional representa
+tion, as it clearly embeds the dyadic representation.
+ It occurs naturally in the description of the self symmetries of the Takagi
+ curve.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{cap:The-Takagi-Curve}
+
+\end_inset 
+
+The Takagi Curve
+\layout Standard
+
+
+\begin_inset Graphics
+	filename takagi.png
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+The Takagi or Blancmange Curve.
+\end_inset 
+
+
+\layout Standard
+
+The Takagi curve is shown in figure 
+\begin_inset LatexCommand \ref{cap:The-Takagi-Curve}
+
+\end_inset 
+
+.
+ It is named after Teiji Takagi, who described it in 1901, proving that
+ it was differentiable nowhere
+\begin_inset LatexCommand \cite{Tak1903,Man88}
+
+\end_inset 
+
+.
+ The curve may be constructed as a superposition of triangle waves
+\begin_inset Formula \[
+t_{w}(x)=\sum_{n=0}^{\infty}w^{n}\tau^{n+1}(x)=\sum_{n=0}^{\infty}w^{n}\tau\left(2^{n}x\right)\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\tau(x)$
+\end_inset 
+
+ is the triangle wave 
+\begin_inset Formula \[
+\tau(x)=\begin{cases}
+2x & \quad\mbox{ for }0\le x\le\frac{1}{2}\\
+2(1-x) & \quad\mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
+
+\end_inset 
+
+ Here, 
+\begin_inset Formula $\tau^{k}$
+\end_inset 
+
+ simply denotes the 
+\begin_inset Formula $k$
+\end_inset 
+
+-times composition of 
+\begin_inset Formula $\tau$
+\end_inset 
+
+ with itself: 
+\begin_inset Formula $\tau^{k}=\tau\circ\tau\circ\cdots\circ\tau$
+\end_inset 
+
+.
+ The variable 
+\begin_inset Formula $w$
+\end_inset 
+
+ is simply a parameter describing the curve; it may be taken as a real or
+ complex value, but must have a magnitude of less than one in order for
+ the series to converge.
+ The figure 
+\begin_inset LatexCommand \ref{cap:The-Takagi-Curve}
+
+\end_inset 
+
+ shows the curve for a paramter of 
+\begin_inset Formula $w=0.618$
+\end_inset 
+
+.
+\layout Standard
+
+Visually, the Takagi curve has a clear self-similarity.
+ The action of 
+\begin_inset Formula $g$
+\end_inset 
+
+ on 
+\begin_inset Formula $t_{w}$
+\end_inset 
+
+, understood to cut the interval in half, is to produce a scaled, sheared
+ copy of itself:
+\begin_inset Formula \[
+\left[gt_{w}\right](x)=t_{w}\left(\frac{x}{2}\right)=x+wt_{w}(x)\]
+
+\end_inset 
+
+ By contrast, its left-right symmetry just means that 
+\begin_inset Formula $rt_{w}=t_{w}$
+\end_inset 
+
+.
+ It is not hard to deduce that the action of a general element 
+\begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
+\end_inset 
+
+ on 
+\begin_inset Formula $t_{w}$
+\end_inset 
+
+ will be of the form 
+\begin_inset Formula $a+bx+ct_{w}$
+\end_inset 
+
+ for some constants 
+\begin_inset Formula $a,b,c$
+\end_inset 
+
+.
+ This may be recognized immediately as a three-dimensional vector, and so
+ the action of 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ can be given as operators acting on a three-dimensional space.
+ Its also not hard to see that the action is linear, and so 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ are given by 3x3 matricies.
+ Thier explicit form may be given by making the identification of 
+\begin_inset Formula $1$
+\end_inset 
+
+, 
+\begin_inset Formula $x$
+\end_inset 
+
+ and 
+\begin_inset Formula $t_{w}$
+\end_inset 
+
+ as the basis vectors of the three dimensional space:
+\begin_inset Formula \begin{eqnarray*}
+1\;\longmapsto\; e_{1} & = & \left[\begin{array}{c}
+1\\
+0\\
+0\end{array}\right]\\
+x\;\longmapsto\; e_{2} & = & \left[\begin{array}{c}
+0\\
+1\\
+0\end{array}\right]\\
+t_{w}(x)\;\longmapsto\; e_{3} & = & \left[\begin{array}{c}
+0\\
+0\\
+1\end{array}\right]\end{eqnarray*}
+
+\end_inset 
+
+ The transformation of each of these under 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ are given by
+\begin_inset Formula \[
+g_{3}=\left[\begin{array}{ccc}
+1 & 0 & 0\\
+0 & \frac{1}{2} & 0\\
+0 & 1 & w\end{array}\right]\quad\mbox{ and }\quad r_{3}=\left[\begin{array}{ccc}
+1 & 0 & 0\\
+1 & -1 & 0\\
+0 & 0 & 1\end{array}\right]\]
+
+\end_inset 
+
+Note that the upper-right 2x2 subparts of these matricies are just exactly
+ 
+\begin_inset Formula $g_{D}$
+\end_inset 
+
+ and 
+\begin_inset Formula $r_{D}$
+\end_inset 
+
+ given above, in equation 
+\begin_inset LatexCommand \ref{eq:g_D matrix}
+
+\end_inset 
+
+, which describe the action on the subspace spanned by 
+\begin_inset Formula $(e_{1},e_{2})=(1,x)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+A similar curve, transforming as a four-dimensional representation, may
+ be constructed from sections of a parabola; a five-dimensional representation
+ can be built from sections of a cubic, and so on; this is explored in greater
+ detail in 
+\begin_inset LatexCommand \cite{Ve-T04}
+
+\end_inset 
+
+.
+ The development begs several questions: what happens when 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ are replaced by general matricies, and even more generally, what happens
+ when 
+\begin_inset Formula $g$
+\end_inset 
+
+ and 
+\begin_inset Formula $r$
+\end_inset 
+
+ are replaced by general maps? This is explored in the next section.
 \layout Subsection
 
 The Interval Map Representation
