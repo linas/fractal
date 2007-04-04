@@ -65,7 +65,7 @@ dyadic monoid
 \begin_inset Quotes eld
 \end_inset 
 
-dyadic lattice
+dyadic semilattice
 \begin_inset Quotes erd
 \end_inset 
 
@@ -142,7 +142,7 @@ rity cannot be a simple re-scaling, as some stretching and shrinking is
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -163,7 +163,7 @@ The Minkowski Question Mark Function
 
 
 \begin_inset Note
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -240,7 +240,7 @@ dyadic tree
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -450,7 +450,7 @@ The Stern-Brocot tree
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -1324,7 +1324,7 @@ The question mark function is self-similar, and the generators of the similarity
 \emph on 
 dyadic monoid
 \emph default 
-, although in many ways it is more of a lattice than a monoid.
+, although in many ways it is more of a semilattice than a monoid.
  The concept of a monoid, and a lattice, will be defined below; the reason
  for naming the dyadic monoid now is to support a hypothesis: the dyadic
  monoid gives the symmetry of all period-doubling fractal and chaotic phenomena;
@@ -1908,9 +1908,9 @@ monoid
 dyadic monoid
 \emph default 
 .
- A monoid is defined as a set with an associative operation, in this case
- multiplication; that is closed under the operation, in the sense that if
- 
+ A monoid, in all generality, is defined as a set with an associative operation
+ (in this case multiplication); that is closed under the operation, in the
+ sense that if 
 \begin_inset Formula $\gamma_{1}\in M$
 \end_inset 
 
@@ -1923,17 +1923,11 @@ dyadic monoid
 \end_inset 
 
 .
- Monoids are sometimes called 
-\emph on 
-semigroups
-\emph default 
-, although the term semigroup is sometimes reserved for the idea of a monoid,
- but without an identity element.
- In this case, 
+ To complete the definition of a monoid, 
 \begin_inset Formula $M$
 \end_inset 
 
- has an identity element 
+ must also have an identity element 
 \begin_inset Formula $e$
 \end_inset 
 
@@ -1946,13 +1940,22 @@ semigroups
 \end_inset 
 
 .
- This definition of a monoid is similar to that for a group, with an important
- difference: the monoid does not contain inverses.
+ There are no further constraints on the definition of a monoid.
+\layout Standard
+
+Monoids are sometimes called 
+\emph on 
+semigroups
+\emph default 
+, although the term semigroup is usually reserved for the idea of a monoid,
+ but without an identity element.
+ The definition of a monoid is similar to that for a group, with an important
+ difference: a monoid does not, in general, contain inverses.
  For a given 
 \begin_inset Formula $\gamma\in M$
 \end_inset 
 
-, there is no 
+, there typically is no 
 \begin_inset Formula $\beta\in M$
 \end_inset 
 
@@ -1961,11 +1964,11 @@ semigroups
 \end_inset 
 
 .
- Thus, 
+ Because of this, 
 \begin_inset Formula $M$
 \end_inset 
 
- is not a group.
+ cannot a group.
  Now, associative monoids, such as this, do have the universal property
  of being extendable to a full-fledged group, and one certainly could do
  this for 
@@ -3404,7 +3407,7 @@ tion, as it clearly embeds the dyadic representation.
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -4051,7 +4054,7 @@ All of the properties of the Cantor set are evident in the construction.
  a Hausdorff space.
  A totally disconnected, compact Hausdorff space is an example of a Stone
  space, a them that will be returned to when reconsidering the dyadic monoid
- as a lattice.
+ as a semilattice.
 \layout Standard
 
 There are several noteworthy corollaries of this exercise.
@@ -4274,7 +4277,7 @@ typical
  curve, the Peano curve and the Lévy C curve.
 \layout Section
 
-The Dyadic Lattice
+The Dyadic Semilattice
 \layout Standard
 
 The introduction of the dyadic monoid sidestepped some important questions:
@@ -4538,15 +4541,252 @@ group element
  
 \layout Subsection
 
-Lattice
+Semilattices
 \layout Standard
 
-Write me.
+A richer structue for the dyadic monoid can be found by observing that the
+ thing that it acts on, the collection of intervals or infinite binary trees,
+ has the structure of a semilattice on a partially ordered set.
+ Actually, there are two possible semilattice structures; one, a distributive
+ lattice inherited from the natural topology on the reals, and another,
+ non-distributive semilattice that is more appropriate for working with
+ the binary tree.
+ But first, some definitions to anchor the topic are appropriate.
+\layout Standard
+
+A 
+\emph on 
+partial order
+\emph default 
+ on a set 
+\begin_inset Formula $A$
+\end_inset 
+
+ is a binary relation 
+\begin_inset Formula $\le$
+\end_inset 
+
+ with three properties: 1) it is 
+\emph on 
+reflexive
+\emph default 
+, so that 
+\begin_inset Formula $a\le a$
+\end_inset 
+
+ for all 
+\begin_inset Formula $a\in A$
+\end_inset 
+
+; 2) it is 
+\emph on 
+transitive
+\emph default 
+, so that if 
+\begin_inset Formula $a\le b$
+\end_inset 
+
+ and 
+\begin_inset Formula $b\le c$
+\end_inset 
+
+ then 
+\begin_inset Formula $a\le c$
+\end_inset 
+
+, and; 3) it is 
+\emph on 
+antisymmetric
+\emph default 
+, so that if 
+\begin_inset Formula $a\le b$
+\end_inset 
+
+ and 
+\begin_inset Formula $b\le a$
+\end_inset 
+
+, then 
+\begin_inset Formula $a=b$
+\end_inset 
+
+.
+ A 
+\emph on 
+partially ordered set
+\emph default 
+, or 
+\emph on 
+poset
+\emph default 
+, is a set equiped with a parital order.
+ Clearly, the set of all (complete, infinite) subtrees of the infinite binary
+ tree is a poset, where 
+\begin_inset Formula $a\le b$
+\end_inset 
+
+ means that 
+\begin_inset Formula $a$
+\end_inset 
+
+ is a subtree of 
+\begin_inset Formula $b$
+\end_inset 
+
+.
+ Here, as elsewhere in this article, a subtree is understood to be the entire
+ infinite subtree anchored at a given node, rather than some other incomplete
+ fraction.
+\layout Standard
+
+Given any collection of subtrees, there is a unique smallest tree that contains
+ the collection.
+ This unique smallest containing tree, or least upper bound, is commonly
+ called the 
+\emph on 
+join
+\emph default 
+ of all the subtrees, and is denoted by 
+\begin_inset Formula $\bigvee$
+\end_inset 
+
+.
+ The concept of a join is generally defined for any poset 
+\begin_inset Formula $A$
+\end_inset 
+
+.
+ Given a subset 
+\begin_inset Formula $S$
+\end_inset 
+
+ of the poset 
+\begin_inset Formula $A$
+\end_inset 
+
+, the join 
+\begin_inset Formula $a=\bigvee S$
+\end_inset 
+
+ is defined as an element 
+\begin_inset Formula $a\in A$
+\end_inset 
+
+ which is an upper bound to all elements in 
+\begin_inset Formula $S$
+\end_inset 
+
+, so that 
+\begin_inset Formula $a\ge s$
+\end_inset 
+
+ for all 
+\begin_inset Formula $s\in S$
+\end_inset 
+
+, but is also the least upper bound, so that, for any other upper bound
+ 
+\begin_inset Formula $b$
+\end_inset 
+
+ on 
+\begin_inset Formula $S$
+\end_inset 
+
+, one has 
+\begin_inset Formula $b\ge a$
+\end_inset 
+
+.
+ If 
+\begin_inset Formula $S$
+\end_inset 
+
+ is a two-element set 
+\begin_inset Formula $S=\{ s,t\}$
+\end_inset 
+
+, one writes 
+\begin_inset Formula $s\vee t=\bigvee\{ s,t\}$
+\end_inset 
+
+, the join of 
+\begin_inset Formula $s$
+\end_inset 
+
+and 
+\begin_inset Formula $t$
+\end_inset 
+
+, thus defining a binary operator 
+\begin_inset Formula $\vee$
+\end_inset 
+
+ between elements of 
+\begin_inset Formula $A$
+\end_inset 
+
+.
+ It is not hard to see that all elements 
+\begin_inset Formula $a\in A$
+\end_inset 
+
+ are idempotent under the join operator: 
+\begin_inset Formula $a\vee a=a$
+\end_inset 
+
+, and that the join operator is symmetric 
+\begin_inset Formula $a\vee b=b\vee a$
+\end_inset 
+
+, and that the operation is associative: 
+\begin_inset Formula $a\vee(b\vee c)=(a\vee b)\vee c$
+\end_inset 
+
+ for all 
+\begin_inset Formula $a,b,c$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+In general, the join of an arbitrary subset 
+\begin_inset Formula $S$
+\end_inset 
+
+ of 
+\begin_inset Formula $A$
+\end_inset 
+
+ need not exist; but when every finite subset of 
+\begin_inset Formula $A$
+\end_inset 
+
+ has a join, then one says that 
+\begin_inset Formula $A$
+\end_inset 
+
+ has the structure of a 
+\emph on 
+semilattice
+\emph default 
+ or a 
+\emph on 
+join-semilattice
+\emph default 
+.
+ Clearly, the binary tree is a join-semilattice, as any collection (even
+ an infinite collection) of subtrees has a single unique join that contains
+ them all.
+\layout Standard
+
+Finish writing me.
 \layout Itemize
 
-there are two inequivalent ways to turn the binary tree into a lattice,
- one way is is not a distributive lattice, the other is.
- The natural one is not distributive.
+its not a meet-semilattice, since some intersections are the empty set;
+ in meet-semilattice, all finite meets must exist.
+ Ergo, its not a lattice.
 \layout Itemize
 
 dyadic lattice has no complements, thus not distributive.
