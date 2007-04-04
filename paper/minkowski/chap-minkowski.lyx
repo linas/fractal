@@ -65,7 +65,7 @@ dyadic monoid
 \begin_inset Quotes eld
 \end_inset 
 
-dyadic semilattice
+dyadic lattice
 \begin_inset Quotes erd
 \end_inset 
 
@@ -4277,7 +4277,7 @@ typical
  curve, the Peano curve and the Lévy C curve.
 \layout Section
 
-The Dyadic Semilattice
+The Dyadic lattice
 \layout Standard
 
 The introduction of the dyadic monoid sidestepped some important questions:
@@ -4541,7 +4541,7 @@ group element
  
 \layout Subsection
 
-Semilattices
+Lattices and Semilattices
 \layout Standard
 
 A richer structue for the dyadic monoid can be found by observing that the
@@ -4620,6 +4620,33 @@ partially ordered set
 poset
 \emph default 
 , is a set equiped with a parital order.
+ The term 
+\begin_inset Quotes eld
+\end_inset 
+
+
+\emph on 
+partial order
+\emph default 
+
+\begin_inset Quotes erd
+\end_inset 
+
+ refers to the idea that not ever pair of elements in the set can be related
+ with 
+\begin_inset Formula $\le$
+\end_inset 
+
+; for some pairs, one just can't say.
+ A 
+\emph on 
+totally ordered set
+\emph default 
+ is a poset for which the binary relation 
+\begin_inset Formula $\le$
+\end_inset 
+
+ is defined between all pairs.
  Clearly, the set of all (complete, infinite) subtrees of the infinite binary
  tree is a poset, where 
 \begin_inset Formula $a\le b$
@@ -4779,14 +4806,126 @@ join-semilattice
  Clearly, the binary tree is a join-semilattice, as any collection (even
  an infinite collection) of subtrees has a single unique join that contains
  them all.
+ Some authors also include the empty set as a possible subset, and define
+ an the least upper bound of the empty set to be 
+\begin_inset Formula $0=\bigvee\varnothing$
+\end_inset 
+
+.
+ This new element 
+\begin_inset Formula $0$
+\end_inset 
+
+ has the property that 
+\begin_inset Formula $0\vee a=a\vee0=a$
+\end_inset 
+
+.
+ In the context of the binary tree join-semilattice, there does not appear
+ to be any need for this extra element.
+ However, for the construction of the meet-semilattice from the binary tree,
+ it will be needed.
+\layout Standard
+
+The dual concept to the join is the meet, or greatest lower bound, which
+ is obtained by reversing the direction of all of the inequalities in the
+ definition above.
+ Thus, the meet of a subset is 
+\begin_inset Formula $\bigwedge S$
+\end_inset 
+
+ and the meet of two elements is 
+\begin_inset Formula $a\wedge b$
+\end_inset 
+
+.
+ Meets on the poset of subtrees take one of two distinct forms.
+ Either one has 
+\begin_inset Formula $a\le b$
+\end_inset 
+
+, in which case 
+\begin_inset Formula $a\wedge b=a$
+\end_inset 
+
+ or neither 
+\begin_inset Formula $a$
+\end_inset 
+
+ or 
+\begin_inset Formula $b$
+\end_inset 
+
+ are a subtree of one another, in which case 
+\begin_inset Formula $a\wedge b=\varnothing$
+\end_inset 
+
+.
+ This is a very different situation than that for the jopin on the binary
+ tree: the join was always defined, for any pair 
+\begin_inset Formula $a,b$
+\end_inset 
+
+.
+ By contrast, the meet of a pair of disjoint trees is not defined; it is
+ the empty set.
+ Thus, the (poset of subtrees of the) binary tree is not a meet-semilattice.
+ This may be trivially fixed: adjoin the empty set 
+\begin_inset Formula $\varnothing$
+\end_inset 
+
+ to the poset of subtrees, so that the meet does become defined (it is the
+ empty set!).
+ This may seem trivial, but is belabored here, since it corresponds to a
+ one-point compactification of the underlying structures that binary tree
+ represents.
+ As was pointed out above, the removal of the rational numbers from the
+ real number line results in a totally disconnected set, the Cantor set,
+ which is modelled by the binary tree.
+ Allowing something 
+\begin_inset Quotes eld
+\end_inset 
+
+in between
+\begin_inset Quotes erd
+\end_inset 
+
+ the gaps, even if that something is 
+\begin_inset Quotes eld
+\end_inset 
+
+the empty set
+\begin_inset Quotes erd
+\end_inset 
+
+, changes the structure of the 
+\begin_inset Quotes eld
+\end_inset 
+
+leaves
+\begin_inset Quotes erd
+\end_inset 
+
+ of the binary tree from being totally disconnected, to something connected.
+ At this point, this may seem to be confusing word-play; it is only offered
+ up as a caution for when concepts such as 
+\begin_inset Quotes eld
+\end_inset 
+
+closure
+\begin_inset Quotes erd
+\end_inset 
+
+ are considered.
+ 
+\layout Standard
+
+If a poset is both a join-semilattice, and a meet-semilattice, then it is
+ called a lattice.
+ Clearly, the poset of subtrees, adjoined with the empty set, is a lattice.
 \layout Standard
 
 Finish writing me.
-\layout Itemize
-
-its not a meet-semilattice, since some intersections are the empty set;
- in meet-semilattice, all finite meets must exist.
- Ergo, its not a lattice.
 \layout Itemize
 
 dyadic lattice has no complements, thus not distributive.
