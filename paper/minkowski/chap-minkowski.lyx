@@ -4778,19 +4778,15 @@ and
  
 \layout Standard
 
-In general, the join of an arbitrary subset 
-\begin_inset Formula $S$
-\end_inset 
-
- of 
-\begin_inset Formula $A$
-\end_inset 
-
- need not exist; but when every finite subset of 
-\begin_inset Formula $A$
-\end_inset 
-
- has a join, then one says that 
+For a general poset, joins need not always exist.
+ Even when a subset has upper bounds, there may not be a least upper bound
+ (such posets are called 
+\emph on 
+directed sets
+\emph default 
+).
+ However, when every finite subset of a poset does have a join, then one
+ says that 
 \begin_inset Formula $A$
 \end_inset 
 
@@ -4803,10 +4799,18 @@ semilattice
 join-semilattice
 \emph default 
 .
- Clearly, the binary tree is a join-semilattice, as any collection (even
- an infinite collection) of subtrees has a single unique join that contains
- them all.
- Some authors also include the empty set as a possible subset, and define
+ Clearly, the (poset of subtrees of the) binary tree is a join-semilattice,
+ as any collection (even an infinite collection) of subtrees has a single
+ unique join that contains them all.
+ When a semilattice has joins even for infinite subsets, it is called 
+\emph on 
+complete
+\emph default 
+; the binary tree thus forms a complete join semilattice.
+ 
+\layout Standard
+
+Some authors also include the empty set as a possible subset, and define
  an the least upper bound of the empty set to be 
 \begin_inset Formula $0=\bigvee\varnothing$
 \end_inset 
@@ -4922,7 +4926,31 @@ closure
 
 If a poset is both a join-semilattice, and a meet-semilattice, then it is
  called a lattice.
- Clearly, the poset of subtrees, adjoined with the empty set, is a lattice.
+ Clearly, the poset of subtrees, adjoined with the empty set, is a lattice;
+ it shall be called the 
+\begin_inset Quotes eld
+\end_inset 
+
+
+\emph on 
+dyadic lattice
+\emph default 
+
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ This lattice has a number of properties; but foremost, perhaps, what it
+ is not: it is not a Boolean lattice, it is not a distributive lattice,
+ and it is not even a modular lattice.
+ The dyadic lattice has no complements, and the distributive law does not
+ hold on the dyadic lattice.
+ The distributive law is the identity 
+\begin_inset Formula $a\wedge(b\vee c)=(a\wedge b)\vee(a\wedge c)$
+\end_inset 
+
+.
+ 
 \layout Standard
 
 Finish writing me.
