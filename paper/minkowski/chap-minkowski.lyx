@@ -43,7 +43,7 @@ Linas Vepstas
 <linas@linas.org>
 \layout Date
 
-12 October 2004 (updated 24 March 2007)
+12 October 2004 (updated 31 March 2007)
 \layout Abstract
 
 Fractals and continued fractions seem to be deeply related in many ways.
@@ -4843,6 +4843,12 @@ The dual concept to the join is the meet, or greatest lower bound, which
 \end_inset 
 
 .
+ Dual to the concept of zero is 
+\begin_inset Formula $1=\bigwedge A$
+\end_inset 
+
+, which can be thought of as the greatest element in the poset.
+ For the poset of subtrees, this element would be the entire tree.
  Meets on the poset of subtrees take one of two distinct forms.
  Given two subtrees, one is either a subtree of the other, or they are non-inter
 secting.
@@ -4875,7 +4881,8 @@ secting.
 .
  By contrast, the meet of a pair of disjoint trees is not defined; it is
  the empty set.
- Thus, the (poset of subtrees of the) binary tree is not a meet-semilattice.
+ Thus, the (poset of subtrees of the) binary tree is, in this sense, not
+ a meet-semilattice.
  This may be trivially fixed: adjoin the empty set 
 \begin_inset Formula $\varnothing$
 \end_inset 
@@ -4883,8 +4890,8 @@ secting.
  to the poset of subtrees, so that the meet does become defined (it is the
  empty set!).
  This may seem trivial, but is belabored here, since it corresponds to a
- one-point compactification of the underlying structures that binary tree
- represents.
+ one-point compactification of the underlying structures that the binary
+ tree represents.
  As was pointed out above, the removal of the rational numbers from the
  real number line results in a totally disconnected set, the Cantor set,
  which is modelled by the binary tree.
@@ -4914,15 +4921,7 @@ leaves
 
  of the binary tree from being totally disconnected, to something connected.
  At this point, this may seem to be confusing word-play; it is only offered
- up as a caution for when concepts such as 
-\begin_inset Quotes eld
-\end_inset 
-
-closure
-\begin_inset Quotes erd
-\end_inset 
-
- are considered.
+ up as an introductory caution for the subsequent discussion of closure.
  
 \layout Standard
 
@@ -4943,16 +4942,67 @@ dyadic lattice
 
 .
  This lattice has a number of properties; but foremost, perhaps, what it
- is not: it is not a Boolean lattice, it is not a distributive lattice,
- and it is not even a modular lattice.
- The dyadic lattice has no complements, and the distributive law does not
- hold on the dyadic lattice.
- The distributive law is the identity 
+ is not: it is not a Boolean lattice, it has no complements, it is not a
+ distributive lattice, and it is not even a modular lattice.
+ Lets look at these in turn.
+ A Boolean lattice is a distributive lattice with complements; since the
+ dyadic lattice will have neither property, it won't be Boolean.
+ 
+\layout Standard
+
+A 
+\emph on 
+complement
+\emph default 
+ on a lattice is defined as a unary operation 
+\begin_inset Formula $\neg:A\to A$
+\end_inset 
+
+ such that 
+\begin_inset Formula $\neg a$
+\end_inset 
+
+, the complement of 
+\begin_inset Formula $a$
+\end_inset 
+
+, obeys 
+\begin_inset Formula $\neg a\vee a=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $\neg a\wedge a=0$
+\end_inset 
+
+.
+ In the poset of subtrees, given some subtree 
+\begin_inset Formula $a$
+\end_inset 
+
+, there is clearly no other tree that could play the role of 
+\begin_inset Formula $\neg a$
+\end_inset 
+
+.
+ One could construct a complement of sorts, but it would have to consist
+ of many trees, rather than a single tree.
+ This point will be explored in greater detail in a later section.
+ 
+\layout Standard
+
+The distributive law is the identity 
 \begin_inset Formula $a\wedge(b\vee c)=(a\wedge b)\vee(a\wedge c)$
 \end_inset 
 
 .
  
+\layout Theorem
+
+The poset of subtrees does not obey the distributive law.
+\layout Proof
+
+This may be shown by examining the various cases.
+ xxx finish 
 \layout Standard
 
 Finish writing me.
@@ -4979,6 +5029,9 @@ Every ideal is the kernel of a semi-lattice homomorphism.
  The cosets of the resulting equivalence relation are the trees that are
  the direct parents of the ideal in question.
  Thus the quotient is always finite, and is always totally ordered.
+\layout Itemize
+
+construct the complement via completed dual.
 \layout Subsection
 
 Maximal Extension of the Dyadic Monoid
@@ -5393,6 +5446,25 @@ tion are those maps that belong to
 \end_inset 
 
 .
+\layout Standard
+
+Intuitively, the elements of 
+\begin_inset Formula $\widetilde{M}$
+\end_inset 
+
+ are those maps that map a subtree back up into the whole tree, and then
+ map the whole tree back down to some other subtree.
+ Because the general element of 
+\begin_inset Formula $\widetilde{M}$
+\end_inset 
+
+ is not defined on the whole unit interval, the elements of 
+\begin_inset Formula $\widetilde{M}$
+\end_inset 
+
+ can be understood to for a sort-of sheaf or pre-sheaf.
+ XXX.
+ Expand on this idea.
 \layout Section
 
 xxxxxx
@@ -5530,7 +5602,7 @@ The semi-group
 \begin_inset Formula $M$
 \end_inset 
 
- contains many, but not all, of the self-similarities of the Question Mark.
+ contains many, but not all, of the self-similarities of the question mark.
  
 \layout Standard
 
