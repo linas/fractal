@@ -61,7 +61,15 @@ dyadic monoid
 \begin_inset Quotes erd
 \end_inset 
 
- or 
+, 
+\begin_inset Quotes eld
+\end_inset 
+
+dyadic groupoid
+\begin_inset Quotes erd
+\end_inset 
+
+, or 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -4325,7 +4333,7 @@ The dyadic monoid
 \end_inset 
 
  to form a group.
- The answer is no.
+ The answer clearly is no.
  Although the monoid 
 \begin_inset Formula $M$
 \end_inset 
@@ -4348,7 +4356,15 @@ The dyadic monoid
 \end_inset 
 
  can still be interpreted as maps of intervals? The rest of this section
- is devoted to exposing this extension.
+ is devoted to exposing this extension; it will be shown that 
+\begin_inset Formula $\widetilde{M}$
+\end_inset 
+
+ is a groupoid, to be called the 
+\emph on 
+dyadic groupoid
+\emph default 
+.
 \layout Standard
 
 Every element 
@@ -4697,28 +4713,120 @@ Intuitively, the elements of
 
  are those maps that map a subtree back up into the whole tree, and then
  map the whole tree back down to some other subtree.
- Because the general element of 
+ For every map that takes the whole tree to a subtree, the inverse map exists.
+ These can be multiplied together, and, for many cases, maps in the forward
+ and reverse directions can be composed together.
+ However, the general compostion of maps and thier inverses does not exist,
+ which is why 
 \begin_inset Formula $\widetilde{M}$
 \end_inset 
 
- is not defined on the whole unit interval, the elements of 
+ cannot be a full-fledged group.
+ However, this intuitive description does show that 
+\begin_inset Formula $\widetilde{M}$
+\end_inset 
+
+ obeys all of the axioms of a groupoid, given below.
+\layout Standard
+
+A 
+\emph on 
+groupoid
+\emph default 
+ is defined as a set 
+\begin_inset Formula $G$
+\end_inset 
+
+ with an associative, partially defined multiplicative operator, and an
+ involution that is the multiplicative inverse, which is defined for all
+ elements.
+ A 
+\begin_inset Quotes eld
+\end_inset 
+
+partially defined multiplicative operator
+\begin_inset Quotes erd
+\end_inset 
+
+ simply means that if 
+\begin_inset Formula $g,h\in G$
+\end_inset 
+
+, then thier product 
+\begin_inset Formula $g*h$
+\end_inset 
+
+ may or may not be defined; if it is defined, then it belongs to 
+\begin_inset Formula $G$
+\end_inset 
+
+.
+ An 
+\begin_inset Quotes eld
+\end_inset 
+
+associative partially defined multiplicative operator
+\begin_inset Quotes erd
+\end_inset 
+
+ means that, for 
+\begin_inset Formula $f,g,h\in G$
+\end_inset 
+
+, if 
+\begin_inset Formula $f*g$
+\end_inset 
+
+ is defined, and if 
+\begin_inset Formula $g*h$
+\end_inset 
+
+ is defined, then 
+\begin_inset Formula $(f*g)*h=f*(g*h)$
+\end_inset 
+
+.
+ A groupoid also has a multiplicative inverse defined for every element,
+ so that if 
+\begin_inset Formula $g\in G$
+\end_inset 
+
+, there exists a 
+\begin_inset Formula $g^{-1}\in G$
+\end_inset 
+
+ such that 
+\begin_inset Formula $g*g^{-1}=g^{-1}*g=e$
+\end_inset 
+
+.
+ Here, 
+\begin_inset Formula $e$
+\end_inset 
+
+ is the identity element; a groupoid by definition contains an identity
+ element.
+\layout Standard
+
+The general element of 
+\begin_inset Formula $\widetilde{M}$
+\end_inset 
+
+ is not defined on the whole unit interval, and the elements of 
 \begin_inset Formula $\widetilde{M}$
 \end_inset 
 
  can be understood to for a sort-of sheaf or pre-sheaf.
  XXX.
  Expand on this idea.
-\layout Standard
-
-This maximal extension is a groupoid.
 \layout Section
 
 The Dyadic lattice
 \layout Standard
 
-The introduction of the dyadic monoid sidestepped some important questions:
- why can't the monoid be extended to be a full group? Is the monoid the
- most appropriate algebraic structure, or is there some other structure
+The introduction of the dyadic groupoid sidestepped some important questions:
+ why can't the groupoid be extended to be a full group? Is the groupoid
+ the most appropriate algebraic structure, or is there some other structure
  that more closely captures the structure of this thing? There is another,
  perhaps even a more appropriate, structure with which the set of self-symmetrie
 s can be understood.
