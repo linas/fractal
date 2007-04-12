@@ -3083,11 +3083,14 @@ XXX ToDo, write this section.
  tree.
 \layout Itemize
 
+Define a free object.
+\layout Itemize
+
 Define a free monoid.
  
 \layout Itemize
 
-Define a presentation
+Define a presentation 
 \layout Itemize
 
 Discuss presentaions with torsion, vs.
@@ -5639,13 +5642,27 @@ The distributive law is the identity
 \end_inset 
 
 .
- 
+ If the distributive law holds for all 
+\begin_inset Formula $a,b$
+\end_inset 
+
+ and 
+\begin_inset Formula $c$
+\end_inset 
+
+ in a lattice, then the lattice is a 
+\emph on 
+distributive lattice
+\emph default 
+.
+ The theorem below shows that the dyadic lattice is not a distributive lattice.
 \layout Theorem
 
-The poset of subtrees does not obey the distributive law.
+The dyadic lattice is not a distributive lattice.
 \layout Proof
 
-This may be shown by examining the various cases.
+To show this, one need only find a counter-example.
+ This may be found by examining the various cases.
  There are nine distinct arrangements of the posets 
 \begin_inset Formula $a,b,c$
 \end_inset 
@@ -5759,7 +5776,18 @@ For arrangment 6, one has
 \begin_inset Formula $(a\wedge b)\vee(a\wedge c)=b\ne a\wedge(b\vee c)$
 \end_inset 
 
-, and so the poset of subtrees does not obey the distributive law.
+, and so the dyadic lattice does not obey the distributive law.
+\layout Standard
+
+Curiously, arrangement 6 is the only one that violates this distributive
+ law.
+ If instead, one considers the dual distributive law 
+\begin_inset Formula $a\vee(b\wedge c)=(a\vee b)\wedge(a\vee c)$
+\end_inset 
+
+, one finds that the dual is voilated by arrangement 7, and by arrangement
+ 9.
+ The dual distributive law holds for all of the other arrangements.
 \layout Standard
 
 A strictly weaker notion than distributivity is modularity.
@@ -5767,10 +5795,34 @@ A strictly weaker notion than distributivity is modularity.
 \emph on 
 modular
 \emph default 
- if xxx
+ if 
+\begin_inset Formula $a\vee(b\wedge(a\vee c))=(a\vee b)\wedge(a\vee c)$
+\end_inset 
+
+ holds for all 
+\begin_inset Formula $a,b,c$
+\end_inset 
+
+ in the lattice.
+ It is easily seen that every distributive lattice is a modular lattice.
+\layout Theorem
+
+The dyadic lattice is not modular.
+\layout Proof
+
+To verify modularity, one must examine 18 cases: the nine arrangements shown
+ in the figure, and nine more with 
+\begin_inset Formula $b$
+\end_inset 
+
+ and 
+\begin_inset Formula $c$
+\end_inset 
+
+ reversed.
 \layout Standard
 
-all distributive lattices are modular...
+.
 \layout Standard
 
 Finish writing me.
