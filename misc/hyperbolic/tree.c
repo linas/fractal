@@ -106,14 +106,6 @@ void eps_draw_circle(void)
 	printf (" s\n");
 }
 
-/* draw three-pointed stick figure */
-void draw_tristar (void)
-{
-	printf ("n 0.0 0.0 m -0.5 0.0 l s\n");
-	printf ("n 0.0 0.0 m 0.25 0.433012702 l s\n");
-	printf ("n 0.0 0.0 m 0.25 -0.433012702 l s\n");
-}
-
 /* ==================================================== */
 
 /* fractional linear transform */
@@ -183,6 +175,41 @@ void show_mobius(mobius_t m)
 	printf ("c=%f +i%f    d=%f+i%f\n", m.c.re, m.c.im, m.d.re, m.d.im);
 }
 
+/* ==================================================== */
+
+/* draw three-pointed stick figure */
+void draw_tristar (mobius_t m)
+{
+	cplex za,zb;
+
+	za = cplex_set (0.0, 0.0);
+	za = mobius_xform (m,za);
+
+	// printf ("n 0.0 0.0 m 0.25 0.433012702 l s\n");
+	zb = cplex_set (0.25, 0.433012702);
+	zb = mobius_xform (m,zb);
+	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
+
+	// printf ("n 0.0 0.0 m 0.25 -0.433012702 l s\n");
+	zb = cplex_set (0.25, -0.433012702);
+	zb = mobius_xform (m,zb);
+	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
+
+	// printf ("n 0.0 0.0 m -0.5 0.0 l s\n");
+	zb = cplex_set (-0.5, 0.0);
+	zb = mobius_xform (m,zb);
+	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
+
+	// draw a splat 
+	printf ("0.0600000 slw\n");
+	za = cplex_set (-0.23, 0.0);
+	za = mobius_xform (m,za);
+	zb = cplex_set (-0.27, 0.0);
+	zb = mobius_xform (m,zb);
+	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
+	printf ("0.0100000 slw\n");
+}
+
 mobius_t go_to_fork_tip(double sign)
 {
 	cplex c = cplex_set (-0.5, 0.0);
@@ -225,16 +252,24 @@ void draw(void)
 	mobius_t m;
 	int level=11;
 
+	cplex c = cplex_set (0.0, -0.25);
+	mobius_t off = disk_center (c);
+
+	draw_tristar(off);
+
 eps_set_color_red();
 	m = go_to_fork_tip(+1.0);
+	m = mobius_mul(off,m);
 	draw_fork (m, level);
 
 eps_set_color_green();
 	m = go_to_fork_tip(-1.0);
+	m = mobius_mul(off,m);
 	draw_fork (m, level);
 
 eps_set_color_blue();
 	m = go_to_fork_tip(-3.0);
+	m = mobius_mul(off,m);
 	draw_fork (m, level);
 }
 
@@ -245,7 +280,6 @@ main ()
 	eps_print_prolog();
 	eps_setup_misc();
 	eps_draw_circle();
-	draw_tristar();
 
 	draw();
 
