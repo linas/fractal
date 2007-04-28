@@ -83,7 +83,7 @@ double klein_j (double re_q, double im_q)
 	double rep, imp;
 	klein_j_invariant_c (re_q, im_q, &rep, &imp);
 
-#define POWER_OF
+// #define POWER_OF
 #ifdef POWER_OF
 	double xponent = 2.0;
 	double mag = sqrt (rep*rep + imp*imp);
@@ -182,13 +182,15 @@ density (double re_c, double im_c, int itermax, double param)
 	im_c = mag * sin (0.5*arg);
 #endif
 
-// #define Q_SERIES_MOBIUS
+#define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
 
 	double tau_re, tau_im;
 	poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
 
-	mobius_xform (1, 0, 6, 1, tau_re, tau_im, &tau_re, &tau_im);
+	tau_re += param;
+	// tau_im += param;
+	// mobius_xform (1, 0, 6, 1, tau_re, tau_im, &tau_re, &tau_im);
 	// mobius_xform (1, 7, 0, 1, tau_re, tau_im, &tau_re, &tau_im);
 	// mobius_xform (0, -1, 1, 0, tau_re, tau_im, &tau_re, &tau_im);
 #if 0
@@ -203,9 +205,9 @@ if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
 
 	// double phi = erdos_series (re_c, im_c);
 	// double phi = gee_2 (re_c, im_c);
-	double phi = gee_3 (re_c, im_c);
+	// double phi = gee_3 (re_c, im_c);
 	// double phi = discriminant (re_c, im_c);
-	// double phi = klein_j (re_c, im_c);
+	double phi = klein_j (re_c, im_c);
 	// double phi = domain (re_c, im_c);
 
 	return phi;
