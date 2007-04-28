@@ -130,8 +130,16 @@ mobius_t mobius_scale(mobius_t m, const cplex z)
 }
 
 /* prooduct of mobius transforms */
-mobius_t mobius_prod(mobius_t m, const cplex z)
+mobius_t mobius_mul(const mobius_t l, const mobius_t r)
 {
+	mobius_t m;
+
+	m.a = cplex_add (cplex_mul (l.a, r.a), cplex_mul(l.b, r.c));
+	m.c = cplex_add (cplex_mul (l.c, r.a), cplex_mul(l.d, r.c));
+	m.b = cplex_add (cplex_mul (l.a, r.b), cplex_mul(l.b, r.d));
+	m.d = cplex_add (cplex_mul (l.c, r.b), cplex_mul(l.d, r.d));
+
+	return m;
 }
 
 /* apply mobius xform to z */
@@ -197,6 +205,7 @@ void draw_fork(mobius_t m, int level)
 	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
 
 	mobius_t tip = do_mob(+1.0);
+	tip = mobius_mul (tip, m);
 eps_set_color_green();
 	draw_fork (tip, level);
 
@@ -204,21 +213,20 @@ eps_set_color_green();
 	zb = mobius_xform (m,zb);
 	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
 
-#if 0
-	tip = disk_center(zb);
+	tip = do_mob(-1.0);
+	tip = mobius_mul (tip, m);
 eps_set_color_blue();
 	draw_fork (tip, level);
-#endif
 }
 
 
 void draw(void)
 {
 	mobius_t m = do_mob(+1.0);
-	draw_fork (m,2);
+	draw_fork (m,3);
 
 	m = do_mob(-1.0);
-	draw_fork (m,2);
+	draw_fork (m,3);
 }
 
 /* ==================================================== */
