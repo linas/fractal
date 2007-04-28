@@ -5,6 +5,9 @@
  * Linas Vepstas April 2007
  */
 
+#include <math.h>
+#include <stdio.h>
+
 void eps_print_prolog (void)
 {
 	printf ("%!PS-Adobe-3.0 EPSF-3.0\n");
@@ -50,14 +53,49 @@ void eps_print_prolog (void)
 	printf ("\n");
 }
 
-%%28.346000 -28.346000 scale
-%%-4.280348 -14.619652 translate
+void eps_setup_misc (void)
+{
+	printf ("1.00000 slw\n");
+	printf ("[] 0 sd\n");
+	printf ("[] 0 sd\n");
+	printf ("0 slc\n");
+	printf ("0.000000 0.000000 0.000000 srgb\n");
+	printf ("100.0 -100.0 scale\n");
+	// -4.280348 -14.619652 translate
+
+}
 
 
-0.100000 slw
-[] 0 sd
-[] 0 sd
-0 slc
-0.000000 0.000000 0.000000 srgb
-n 4.350000 5.150000 m 10.950000 14.550000 l s
-showpage
+/* draw a circle of unit radius about the origin */
+void eps_draw_circle(void)
+{
+	int i;
+	double si, co, dsi, dco;
+	double theta = 2.0*M_PI/360.0;
+	dsi = sin (theta);
+	dco = cos (theta);
+	si = dsi;
+	co = dco;
+
+	// for example,draw one line:
+	// n 4.350000 5.150000 m 10.950000 14.550000 l s
+	printf ("n 0.0 1.0 m ");
+	for (i=0; i<=360; i++)
+	{
+		printf("%f %f l", si,co);
+		double tmp = si*dco + co*dsi;
+		co = co*dco - si*dsi;
+		si = tmp;
+	}
+	printf (" s\n");
+}
+
+
+main () 
+{
+	eps_print_prolog();
+	eps_setup_misc();
+	eps_draw_circle();
+
+	printf ("showpage\n");
+}
