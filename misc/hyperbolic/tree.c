@@ -11,14 +11,14 @@
 void eps_print_prolog (void)
 {
 	printf ("%!PS-Adobe-3.0 EPSF-3.0\n");
-	printf ("%!PS-Adobe-2.0 EPSF-2.0\n");
+	// printf ("%!PS-Adobe-2.0 EPSF-2.0\n");
 	printf ("%%Title: blah blah\n");
 	printf ("%%Creator: fractal/misc/hyperbolic/tree.c\n");
 	printf ("%%CreationDate: Fri Apr 27 22:11:59 2007\n");
 	printf ("%%For: linas\n");
 	printf ("%%Orientation: Portrait\n");
 	printf ("%%Magnification: 1.0000\n");
-	printf ("%%BoundingBox: 0 0 192 271\n");
+	printf ("%%BoundingBox: 0 0 200 200\n");
 	printf ("%%EndComments\n");
 	printf ("%%BeginProlog\n");
 	printf ("/cp {closepath} bind def\n");
@@ -55,14 +55,13 @@ void eps_print_prolog (void)
 
 void eps_setup_misc (void)
 {
-	printf ("1.00000 slw\n");
+	printf ("0.0100000 slw\n");
 	printf ("[] 0 sd\n");
 	printf ("[] 0 sd\n");
 	printf ("0 slc\n");
 	printf ("0.000000 0.000000 0.000000 srgb\n");
+	printf ("150.0 150.0 translate\n");
 	printf ("100.0 -100.0 scale\n");
-	// -4.280348 -14.619652 translate
-
 }
 
 
@@ -82,12 +81,20 @@ void eps_draw_circle(void)
 	printf ("n 0.0 1.0 m ");
 	for (i=0; i<=360; i++)
 	{
-		printf("%f %f l", si,co);
+		printf("%f %f l \n", si,co);
 		double tmp = si*dco + co*dsi;
 		co = co*dco - si*dsi;
 		si = tmp;
 	}
 	printf (" s\n");
+}
+
+/* draw three-pointed stick figure */
+void draw_tristar (void)
+{
+	printf ("n 0.0 0.0 m -0.5 0.0 l s\n");
+	printf ("n 0.0 0.0 m 0.25 0.433012702 l s\n");
+	printf ("n 0.0 0.0 m 0.25 -0.433012702 l s\n");
 }
 
 
@@ -96,6 +103,7 @@ main ()
 	eps_print_prolog();
 	eps_setup_misc();
 	eps_draw_circle();
+	draw_tristar();
 
 	printf ("showpage\n");
 }
