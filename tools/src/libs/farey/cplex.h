@@ -9,6 +9,7 @@
  */
 
 #include <math.h>
+#include <stdio.h>
 
 typedef struct {
 	double re;
@@ -22,6 +23,15 @@ static inline cplex cplex_zero (void)
 static inline cplex cplex_one (void)
 {
 	cplex z; z.re=1.0; z.im=0.0; return z;
+}
+static inline cplex cplex_set (double x, double y)
+{
+	cplex z; z.re=x; z.im=y; return z;
+}
+
+static inline cplex cplex_conj (const cplex z)
+{
+	cplex zb; zb.re=z.re; zb.im=-z.im; return zb;
 }
 
 static inline cplex cplex_times_i (const cplex z)
