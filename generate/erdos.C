@@ -169,59 +169,28 @@ double domain (double re_q, double im_q)
  * Euler erdos in a simple way 
  */
 
-
-void 
-MakeHisto (
-   float  	*glob,
-   int 		sizex,
-   int 		sizey,
-   double	re_center,
-   double	im_center,
-   double	width,
-   double	height,
-   int		itermax,
-   double 	renorm)
+static double
+density (double re_c, double im_c, int itermax, double param)
 {
-   int		i,j, globlen;
-   double	re_start, im_start, delta;
-   double	re_position, im_position;
-   
-   delta = width / (double) sizex;
-   re_start = re_center - width / 2.0;
-   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
-   
-   globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.0;
-
 	modular_max_terms = itermax;
    
-   im_position = im_start;
-   for (i=0; i<sizey; i++) 
-	{
-      if (i%10==0) printf(" start row %d\n", i);
-      re_position = re_start;
-      for (j=0; j<sizex; j++) 
-		{
-			double re_c = re_position;
-			double im_c = im_position;
-
 #ifdef POWER_SQRT
-			double mag = sqrt (re_c*re_c + im_c*im_c);
-			double arg = atan2 (im_c, re_c);
-			mag = sqrt (mag);
-			re_c = mag * cos (0.5*arg);
-			im_c = mag * sin (0.5*arg);
+	double mag = sqrt (re_c*re_c + im_c*im_c);
+	double arg = atan2 (im_c, re_c);
+	mag = sqrt (mag);
+	re_c = mag * cos (0.5*arg);
+	im_c = mag * sin (0.5*arg);
 #endif
 
 // #define Q_SERIES_MOBIUS
 #ifdef Q_SERIES_MOBIUS
 
-			double tau_re, tau_im;
-			poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
+	double tau_re, tau_im;
+	poincare_disk_to_plane_coords (re_c, im_c, &tau_re, &tau_im);
 
-			mobius_xform (1, 0, 6, 1, tau_re, tau_im, &tau_re, &tau_im);
-			// mobius_xform (1, 7, 0, 1, tau_re, tau_im, &tau_re, &tau_im);
-			// mobius_xform (0, -1, 1, 0, tau_re, tau_im, &tau_re, &tau_im);
+	mobius_xform (1, 0, 6, 1, tau_re, tau_im, &tau_re, &tau_im);
+	// mobius_xform (1, 7, 0, 1, tau_re, tau_im, &tau_re, &tau_im);
+	// mobius_xform (0, -1, 1, 0, tau_re, tau_im, &tau_re, &tau_im);
 #if 0
 double phi=1.0;
 if (tau_re < -0.5) phi = 0.0;
@@ -229,21 +198,19 @@ if (tau_re > 0.5) phi = 0.0;
 if (tau_re*tau_re+tau_im*tau_im < 1.0) phi=0.0;
 #endif
 
-			plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
+	plane_to_q_disk_coords (tau_re, tau_im, &re_c, &im_c);
 #endif /* Q_SERIES_MOBIUS */
 
-			// double phi = erdos_series (re_c, im_c);
-			// double phi = gee_2 (re_c, im_c);
-			// double phi = gee_3 (re_c, im_c);
-			// double phi = discriminant (re_c, im_c);
-			double phi = klein_j (re_c, im_c);
-			// double phi = domain (re_c, im_c);
-         glob [i*sizex +j] = phi;
+	// double phi = erdos_series (re_c, im_c);
+	// double phi = gee_2 (re_c, im_c);
+	double phi = gee_3 (re_c, im_c);
+	// double phi = discriminant (re_c, im_c);
+	// double phi = klein_j (re_c, im_c);
+	// double phi = domain (re_c, im_c);
 
-         re_position += delta;
-      }
-      im_position -= delta;  /*top to bottom, not bottom to top */
-   }
+	return phi;
 }
+
+DECL_MAKE_HEIGHT(density);
 
 /* --------------------------- END OF LIFE ------------------------- */
