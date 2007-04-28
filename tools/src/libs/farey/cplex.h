@@ -109,6 +109,14 @@ static inline double cplex_phase (cplex z)
 	return atan2 (z.im, z.re);
 }
 
+static inline cplex cplex_exp_itheta (double theta)
+{
+	cplex z;
+	z.re = cos(theta);
+	z.im = sin(theta);
+	return z;
+}
+
 /** return z^n */
 static inline cplex cplex_pow_ui (const cplex z, unsigned int n)
 {
