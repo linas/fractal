@@ -5,6 +5,7 @@
  * Linas Vepstas April 2007
  */
 
+#include "cplex.h"
 #include <math.h>
 #include <stdio.h>
 
@@ -64,6 +65,12 @@ void eps_setup_misc (void)
 	printf ("100.0 -100.0 scale\n");
 }
 
+void eps_set_color_red (void)
+{
+	printf ("1.000000 0.000000 0.000000 srgb\n");
+}
+
+/* =============================================== */
 
 /* draw a circle of unit radius about the origin */
 void eps_draw_circle(void)
@@ -97,6 +104,54 @@ void draw_tristar (void)
 	printf ("n 0.0 0.0 m 0.25 -0.433012702 l s\n");
 }
 
+/* ==================================================== */
+
+/* fractional linear transform */
+typedef struct {
+	cplex a,b,c,d;
+} mobius_t;
+
+/* apply mobius xform to z */
+cplex mobiux_xform (const mobius_t m, const cplex z)
+{
+	cplex numer = cplex_mul(m.a, z);
+	numer = cplex_add (numer, m.b);
+	cplex deno = cplex_mul(m.c, z);
+	deno = cplex_add (deno, m.d);
+	cplex w = cplex_div (numer,deno);
+	return w;
+}
+
+/* return mobius xform that recenters the disk at z */
+mobius_t disk_center (cplex z)
+{
+	cplex zb, mi;
+
+	zb = cplex_conj (z);
+	mi = cplex_set(0.0,-1.0);
+
+	mobius_t m;
+	m.a = cplex_sub (mi, z);
+	m.b = cplex_add (mi, z);
+	m.c = cplex_sub (mi, zb);
+	m.d = cplex_add (mi, zb);
+	return m;
+}
+
+void draw(void)
+{
+	cplex c = cplex_set (0.5, 0.0);
+	mobius_t m = disk_center (c);
+
+	cplex za = cplex_set (0.0, 0.0);
+	cplex zb = cplex_set (0.25, 0.433012702);
+
+	za = mobiux_xform (m,za);
+	zb = mobiux_xform (m,zb);
+	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
+}
+
+/* ==================================================== */
 
 main () 
 {
@@ -104,6 +159,9 @@ main ()
 	eps_setup_misc();
 	eps_draw_circle();
 	draw_tristar();
+
+	eps_set_color_red();
+	draw();
 
 	printf ("showpage\n");
 }
