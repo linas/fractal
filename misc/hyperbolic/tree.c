@@ -19,7 +19,7 @@ void eps_print_prolog (void)
 	printf ("%%For: linas\n");
 	printf ("%%Orientation: Portrait\n");
 	printf ("%%Magnification: 1.0000\n");
-	printf ("%%BoundingBox: 0 0 200 200\n");
+	printf ("%%BoundingBox: 0 0 220 220\n");
 	printf ("%%EndComments\n");
 	printf ("%%BeginProlog\n");
 	printf ("/cp {closepath} bind def\n");
@@ -61,7 +61,7 @@ void eps_setup_misc (void)
 	printf ("[] 0 sd\n");
 	printf ("0 slc\n");
 	printf ("0.000000 0.000000 0.000000 srgb\n");
-	printf ("150.0 150.0 translate\n");
+	printf ("110.0 110.0 translate\n");
 	printf ("100.0 -100.0 scale\n");
 }
 
@@ -183,7 +183,7 @@ void show_mobius(mobius_t m)
 	printf ("c=%f +i%f    d=%f+i%f\n", m.c.re, m.c.im, m.d.re, m.d.im);
 }
 
-mobius_t do_mob(double sign)
+mobius_t go_to_fork_tip(double sign)
 {
 	cplex c = cplex_set (-0.5, 0.0);
 	mobius_t m = disk_center (c);
@@ -197,36 +197,45 @@ void draw_fork(mobius_t m, int level)
 	if (level == 0) return;
 	level--;
 
-	cplex za = cplex_set (0.0, 0.0);
-	cplex zb = cplex_set (0.25, 0.433012702);
+	cplex za, zb;
 
+	za = cplex_set (0.0, 0.0);
 	za = mobius_xform (m,za);
+
+	zb = cplex_set (0.25, 0.433012702);
 	zb = mobius_xform (m,zb);
 	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
-
-	mobius_t tip = do_mob(+1.0);
-	tip = mobius_mul (tip, m);
-eps_set_color_green();
-	draw_fork (tip, level);
 
 	zb = cplex_set (0.25, -0.433012702);
 	zb = mobius_xform (m,zb);
 	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
 
-	tip = do_mob(-1.0);
-	tip = mobius_mul (tip, m);
-eps_set_color_blue();
+	mobius_t tip = go_to_fork_tip(+1.0);
+	tip = mobius_mul (m, tip);
+	draw_fork (tip, level);
+
+	tip = go_to_fork_tip(-1.0);
+	tip = mobius_mul (m, tip);
 	draw_fork (tip, level);
 }
 
 
 void draw(void)
 {
-	mobius_t m = do_mob(+1.0);
-	draw_fork (m,3);
+	mobius_t m;
+	int level=11;
 
-	m = do_mob(-1.0);
-	draw_fork (m,3);
+eps_set_color_red();
+	m = go_to_fork_tip(+1.0);
+	draw_fork (m, level);
+
+eps_set_color_green();
+	m = go_to_fork_tip(-1.0);
+	draw_fork (m, level);
+
+eps_set_color_blue();
+	m = go_to_fork_tip(-3.0);
+	draw_fork (m, level);
 }
 
 /* ==================================================== */
@@ -238,7 +247,6 @@ main ()
 	eps_draw_circle();
 	draw_tristar();
 
-	eps_set_color_red();
 	draw();
 
 	printf ("showpage\n");
