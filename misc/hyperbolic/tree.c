@@ -111,8 +111,16 @@ typedef struct {
 	cplex a,b,c,d;
 } mobius_t;
 
+/* perform a multiplicative scaling of the thing */
+mobius_t mobius_scale(mobius_t m, const cplex z)
+{
+	m.a = cplex_mul (m.a, z);
+	m.b = cplex_mul (m.b, z);
+	return m;
+}
+
 /* apply mobius xform to z */
-cplex mobiux_xform (const mobius_t m, const cplex z)
+cplex mobius_xform (const mobius_t m, const cplex z)
 {
 	cplex numer = cplex_mul(m.a, z);
 	numer = cplex_add (numer, m.b);
@@ -122,13 +130,21 @@ cplex mobiux_xform (const mobius_t m, const cplex z)
 	return w;
 }
 
-/* return mobius xform that recenters the disk at z */
-mobius_t disk_center (cplex z)
+/* return mobius xform that recenters the disk at w */
+mobius_t disk_center (cplex w)
 {
-	cplex zb, mi;
 
-	zb = cplex_conj (z);
-	mi = cplex_set(0.0,-1.0);
+	cplex nu = w;
+	nu.re += 1.0;
+	cplex de = w;
+	de.re -= 1.0;
+
+	cplex z = cplex_div (nu,de);
+	z = cplex_neg (z);
+	z = cplex_times_i (z);
+	cplex zb = cplex_conj (z);
+
+	cplex mi = cplex_set(0.0,-1.0);
 
 	mobius_t m;
 	m.a = cplex_sub (mi, z);
@@ -138,16 +154,28 @@ mobius_t disk_center (cplex z)
 	return m;
 }
 
+void show_mobius(mobius_t m)
+{
+	printf ("a=%f +i%f    b=%f+i%f\n", m.a.re, m.a.im, m.b.re, m.b.im);
+	printf ("c=%f +i%f    d=%f+i%f\n", m.c.re, m.c.im, m.d.re, m.d.im);
+}
+
 void draw(void)
 {
-	cplex c = cplex_set (0.5, 0.0);
+	cplex c = cplex_set (-0.5, 0.0);
 	mobius_t m = disk_center (c);
+	cplex rot = cplex_exp_itheta (2.0*M_PI/6.0);
+	m = mobius_scale (m,rot);
 
 	cplex za = cplex_set (0.0, 0.0);
 	cplex zb = cplex_set (0.25, 0.433012702);
 
-	za = mobiux_xform (m,za);
-	zb = mobiux_xform (m,zb);
+	za = mobius_xform (m,za);
+	zb = mobius_xform (m,zb);
+	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
+
+	zb = cplex_set (0.25, -0.433012702);
+	zb = mobius_xform (m,zb);
 	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
 }
 
