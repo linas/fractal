@@ -121,7 +121,7 @@ mobius_t mobius_scale(mobius_t m, const cplex z)
 	return m;
 }
 
-/* prooduct of mobius transforms */
+/* prooduct of mobius transforms (just a matrix multiply) */
 mobius_t mobius_mul(const mobius_t l, const mobius_t r)
 {
 	mobius_t m;
@@ -134,7 +134,7 @@ mobius_t mobius_mul(const mobius_t l, const mobius_t r)
 	return m;
 }
 
-/* apply mobius xform to z */
+/* apply mobius xform to z, return (az+b)/(cz+d) */
 cplex mobius_xform (const mobius_t m, const cplex z)
 {
 	cplex numer = cplex_mul(m.a, z);
@@ -252,7 +252,8 @@ void draw(void)
 	mobius_t m;
 	int level=11;
 
-	cplex c = cplex_set (0.0, -0.25);
+	// cplex c = cplex_set (0.0, -0.25);
+	cplex c = cplex_set (-0.25, 0.0);
 	mobius_t off = disk_center (c);
 
 	draw_tristar(off);
