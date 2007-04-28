@@ -11,17 +11,17 @@
 
 void eps_print_prolog (void)
 {
-	printf ("%!PS-Adobe-3.0 EPSF-3.0\n");
+	printf ("%%!PS-Adobe-3.0 EPSF-3.0\n");
 	// printf ("%!PS-Adobe-2.0 EPSF-2.0\n");
-	printf ("%%%Title: blah blah\n");
-	printf ("%%%Creator: fractal/misc/hyperbolic/tree.c\n");
-	printf ("%%%CreationDate: Fri Apr 27 22:11:59 2007\n");
-	printf ("%%%For: linas\n");
-	printf ("%%%Orientation: Portrait\n");
-	printf ("%%%Magnification: 1.0000\n");
-	printf ("%%%BoundingBox: 0 0 220 220\n");
-	printf ("%%%EndComments\n");
-	printf ("%%%BeginProlog\n");
+	printf ("%%%%Title: blah blah\n");
+	printf ("%%%%Creator: fractal/misc/hyperbolic/tree.c\n");
+	printf ("%%%%CreationDate: Fri Apr 27 22:11:59 2007\n");
+	printf ("%%%%For: linas\n");
+	printf ("%%%%Orientation: Portrait\n");
+	printf ("%%%%Magnification: 1.0000\n");
+	printf ("%%%%BoundingBox: 0 0 220 220\n");
+	printf ("%%%%EndComments\n");
+	printf ("%%%%BeginProlog\n");
 	printf ("/cp {closepath} bind def\n");
 	printf ("/c {curveto} bind def\n");
 	printf ("/f {fill} bind def\n");
@@ -50,7 +50,7 @@ void eps_print_prolog (void)
 	printf ("/scf {scalefont} bind def\n");
 	printf ("/sw {stringwidth pop} bind def\n");
 	printf ("/tr {translate} bind def\n");
-	printf ("%%%EndProlog\n");
+	printf ("%%%%EndProlog\n");
 	printf ("\n");
 }
 
@@ -113,6 +113,18 @@ typedef struct {
 	cplex a,b,c,d;
 } mobius_t;
 
+/* create an element of sl(2,z). Its up to user to ensure
+ * that ad-bc=1 */
+mobius_t mobius_set(int a, int b, int c, int d)
+{
+	mobius_t m;
+	m.a = cplex_set (a, 0);
+	m.b = cplex_set (b, 0);
+	m.c = cplex_set (c, 0);
+	m.d = cplex_set (d, 0);
+	return m;
+}
+
 /* perform a multiplicative scaling of the thing */
 mobius_t mobius_scale(mobius_t m, const cplex z)
 {
@@ -121,7 +133,7 @@ mobius_t mobius_scale(mobius_t m, const cplex z)
 	return m;
 }
 
-/* prooduct of mobius transforms (just a matrix multiply) */
+/* product of mobius transforms (just a matrix multiply) */
 mobius_t mobius_mul(const mobius_t l, const mobius_t r)
 {
 	mobius_t m;
@@ -148,7 +160,6 @@ cplex mobius_xform (const mobius_t m, const cplex z)
 /* return mobius xform that recenters the disk at w */
 mobius_t disk_center (cplex w)
 {
-
 	cplex nu = w;
 	nu.re += 1.0;
 	cplex de = w;
@@ -168,6 +179,23 @@ mobius_t disk_center (cplex w)
 	m.d = cplex_add (mi, zb);
 	return m;
 }
+
+mobius_t to_disk(mobius_t m)
+{
+	cplex apd = cplex_add (m.a, m.d);
+	cplex amd = cplex_sub (m.a, m.d);
+	cplex bpc = cplex_times_i (cplex_add (m.b, m.c));
+	cplex bmc = cplex_times_i (cplex_sub (m.b, m.c));
+
+	mobius_t n;
+	n.a = cplex_add (apd, bmc);
+	n.b = cplex_sub (amd, bpc);
+	n.c = cplex_add (amd, bpc);
+	n.d = cplex_sub (apd, bmc);
+	
+	return n;
+}
+
 
 void show_mobius(mobius_t m)
 {
@@ -247,14 +275,21 @@ void draw_fork(mobius_t m, int level)
 }
 
 
-void draw(void)
+void draw(int n)
 {
 	mobius_t m;
 	int level=11;
 
 	// cplex c = cplex_set (0.0, -0.25);
-	cplex c = cplex_set (-0.25, 0.0);
-	mobius_t off = disk_center (c);
+	// cplex c = cplex_set (-0.25, 0.0);
+	// mobius_t off = disk_center (c);
+	int a,b,c,d;
+	a=1;
+	b=n;
+	c=0;
+	d=1;
+	mobius_t off = mobius_set (a,b,c,d);
+	off = to_disk (off);
 
 	draw_tristar(off);
 
@@ -276,13 +311,16 @@ eps_set_color_blue();
 
 /* ==================================================== */
 
-main () 
+int
+main (int argc, char * argv[]) 
 {
+	int n = atoi (argv[1]);
+
 	eps_print_prolog();
 	eps_setup_misc();
 	eps_draw_circle();
 
-	draw();
+	draw(n);
 
 	printf ("showpage\n");
 }
