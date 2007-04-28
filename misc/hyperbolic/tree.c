@@ -13,15 +13,15 @@ void eps_print_prolog (void)
 {
 	printf ("%!PS-Adobe-3.0 EPSF-3.0\n");
 	// printf ("%!PS-Adobe-2.0 EPSF-2.0\n");
-	printf ("%%Title: blah blah\n");
-	printf ("%%Creator: fractal/misc/hyperbolic/tree.c\n");
-	printf ("%%CreationDate: Fri Apr 27 22:11:59 2007\n");
-	printf ("%%For: linas\n");
-	printf ("%%Orientation: Portrait\n");
-	printf ("%%Magnification: 1.0000\n");
-	printf ("%%BoundingBox: 0 0 220 220\n");
-	printf ("%%EndComments\n");
-	printf ("%%BeginProlog\n");
+	printf ("%%%Title: blah blah\n");
+	printf ("%%%Creator: fractal/misc/hyperbolic/tree.c\n");
+	printf ("%%%CreationDate: Fri Apr 27 22:11:59 2007\n");
+	printf ("%%%For: linas\n");
+	printf ("%%%Orientation: Portrait\n");
+	printf ("%%%Magnification: 1.0000\n");
+	printf ("%%%BoundingBox: 0 0 220 220\n");
+	printf ("%%%EndComments\n");
+	printf ("%%%BeginProlog\n");
 	printf ("/cp {closepath} bind def\n");
 	printf ("/c {curveto} bind def\n");
 	printf ("/f {fill} bind def\n");
@@ -50,7 +50,7 @@ void eps_print_prolog (void)
 	printf ("/scf {scalefont} bind def\n");
 	printf ("/sw {stringwidth pop} bind def\n");
 	printf ("/tr {translate} bind def\n");
-	printf ("%%EndProlog\n");
+	printf ("%%%EndProlog\n");
 	printf ("\n");
 }
 
