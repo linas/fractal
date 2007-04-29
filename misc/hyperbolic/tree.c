@@ -272,7 +272,8 @@ void draw_seg(mobius_t m, cplex zf, cplex zt)
 void draw_arc(mobius_t m, cplex zf, cplex zt)
 {
 	int i;
-	int nseg=20;
+	// int nseg=20;
+	int nseg=5;
 
 	cplex zstart = zf;
 	cplex zdelta = cplex_scale((1.0/(double)nseg), cplex_sub (zt,zf));
@@ -370,16 +371,17 @@ void draw_fork(mobius_t m, int level)
 void draw(int n)
 {
 	mobius_t m;
-	int level=8;
+	int level=9;
 
-	// cplex z = cplex_set (0.0, -0.25);
-	cplex z = cplex_set (-0.266, 0.0);
+	cplex z = cplex_set (-0.268, 0.0);
+	// cplex z = cplex_set (0.0, 0.0);
 	mobius_t off = disk_center (z);
 
 	mobius_t rot = mobius_rotate (-0.5*M_PI);
 	off = mobius_mul (rot, off);
 
-#if XLATE
+#define XLATE
+#ifdef XLATE
 	int a,b,c,d;
 	a=1;
 	b=n;
@@ -388,11 +390,12 @@ void draw(int n)
 	mobius_t xfm = mobius_set (a,b,c,d);
 	xfm = to_disk (xfm);
 	off = mobius_mul (xfm, off);
-	off = xfm;
 #endif
 
+#ifdef HALF_PLANE
 	mobius_t xfm = to_half_plane_xform();
 	off = mobius_mul (xfm, off);
+#endif
 
 	draw_tristar(off);
 
@@ -419,11 +422,11 @@ main (int argc, char * argv[])
 {
 	int n = atoi (argv[1]);
 
-	// eps_print_prolog(220,220);
-	eps_print_prolog(400,100);
-	// eps_setup_disk();
-	eps_setup_plane();
-	// eps_draw_circle();
+	eps_print_prolog(220,220);
+	// eps_print_prolog(400,100);
+	eps_setup_disk();
+	// eps_setup_plane();
+	eps_draw_circle();
 
 	draw(n);
 
