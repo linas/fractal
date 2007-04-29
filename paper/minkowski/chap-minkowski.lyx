@@ -5994,18 +5994,150 @@ stone spaces
 Geometry
 \layout Standard
 
-Here we explore the rotation of the tree, i.e.
- the conversion of the tree into a fully symmetrical figure, on which a
- full group action can be defined.
- The result of this excercise are the 
+The binary tree has a very nice, symmetric embeding into the hyperbolic
+ plane, which will be explored in this section.
+ The embedding is completely symmetric, in that, by marginalizing the importance
+ of the root of the tree, one finds that the structure is completely symmetric
+ and uniform.
+ Next, as a completely symmetric structure, it now has a full symmetry group,
+ rather than a subset of a symmetry group, acting on it.
+ The full symmetry groups is the modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset 
+
+.
+ The action of the modular group on the hyperbolic plane can then be reformulate
+d as an action on the unit interval, by means of the usual embedding of
+ the binary tree into the unit interval.
+ These functions are sometimes called 
 \begin_inset Quotes eld
 \end_inset 
 
-hyperbolic rotations of trees
+hyperbolic rotations of the unit interval
+\begin_inset Quotes erd
+\end_inset 
+
+, and have some interesting properties of thier own.
+\layout Standard
+
+The hyperbolic plane is a two-dimensional surface, having a constant, uniform
+ negative curvature of -1.
+ As such, it is the hyperbolic partner to the usual to the usual two-dimensional
+ sphere, having an everywhere constant curvature of +1, and the ordinary,
+ flat Euclidean plane, having everywhere a curvature of 0.
+ The hyperbolic plane can be conveniently represented as a subset of the
+ complex plane (with a non-Euclidean metric) in two different ways: as the
+ so-called 
+\begin_inset Quotes eld
+\end_inset 
+
+upper half-plane
+\begin_inset Quotes erd
+\end_inset 
+
+, and as the 
+\begin_inset Quotes eld
+\end_inset 
+
+Poincaré disk
 \begin_inset Quotes erd
 \end_inset 
 
 .
+ The geometry of the hyperbolic plane is explored in a large number of classic
+ texts
+\begin_inset LatexCommand \cite{Far80,Jost02}
+
+\end_inset 
+
+[xxx need refs]; this section will assume some basic familiarity, and recap
+ only a few basic definitions needed for the presentation.
+ 
+\layout Standard
+
+The upper half-plane is given by the subset of the complex plane having
+ positive imaginary values:
+\begin_inset Formula \[
+\mathbb{H}=\left\{ x+iy=z\in\mathbb{C}\,\vert\;\Im z=y>0\right\} \]
+
+\end_inset 
+
+ The hyperbolic metric on the upper-half-plane is given by 
+\begin_inset Formula \[
+ds^{2}=\frac{dx^{2}+dy^{2}}{y^{2}}\]
+
+\end_inset 
+
+ This metric is often called the Poincaré metric.
+ It is invariant under the action of the fractional linear transformations
+ of 
+\begin_inset Formula $SL(2,\mathbb{R})$
+\end_inset 
+
+.
+ That is, suppose that 
+\begin_inset Formula $z$
+\end_inset 
+
+ and 
+\begin_inset Formula $z^{\prime}$
+\end_inset 
+
+ are two different points in the upper half-plane, separated by some distance.
+ Then, transforming 
+\begin_inset Formula \[
+z\mapsto\frac{az+b}{cz+d}\quad\mbox{ and }\quad z^{\prime}\mapsto\frac{az^{\prime}+b}{cz^{\prime}+d}\]
+
+\end_inset 
+
+ leaves the distance between 
+\begin_inset Formula $z$
+\end_inset 
+
+ and 
+\begin_inset Formula $z^{\prime}$
+\end_inset 
+
+ unchanged, whenever 
+\begin_inset Formula $a,b,c$
+\end_inset 
+
+ and 
+\begin_inset Formula $d$
+\end_inset 
+
+ are real-valued, and 
+\begin_inset Formula $ad-bc=1$
+\end_inset 
+
+.
+ The upper half-plane may be mapped to the unit disk by means of the transformat
+ion 
+\begin_inset Formula \[
+w=\frac{z-z_{0}}{z-\overline{z}_{0}}\]
+
+\end_inset 
+
+ This mapping takes a point 
+\begin_inset Formula $z_{0}\in\mathbb{H}$
+\end_inset 
+
+ and maps it to the center of the unit disk.
+ It is not hard to see that the whole upper half-plane 
+\begin_inset Formula $\mathbb{H}$
+\end_inset 
+
+ is mapped to the disk 
+\begin_inset Formula \[
+\mathbb{D}=\left\{ x+iy=z\in\mathbb{C}\,\vert\;|z|^{2}=x^{2}+y^{2}<1\right\} \]
+
+\end_inset 
+
+ The disk 
+\begin_inset Formula $\mathbb{D}$
+\end_inset 
+
+ is sometimes called the Poincaré disk.
 \layout Standard
 
 
@@ -6015,7 +6147,12 @@ collapsed false
 
 \layout Caption
 
-The Poincare disk
+
+\begin_inset LatexCommand \label{cap:The-Embedded-Tree}
+
+\end_inset 
+
+The Embedded Tree
 \layout Standard
 
 
@@ -6067,13 +6204,43 @@ The rooted binary tree may be converted into a more symmetrical graph by
  The process is shown here, graphically.
  In the upper image, the root at 1/2 is removed and replaced with a single
  arc joining the left and right subtrees.
- mapped to the Poincare disk.
- bttom image: the hyperbolic upper half-plane.
- (for bottom image, black square is located at z=i, the tree tips are on
- the imz=0 line.
+ This may be mapped to the Poincaré disk 
+\begin_inset Formula $\mathbb{D}$
+\end_inset 
+
+, as shown in the three middle images.
+ The location of the original root is marked by a small black square.
+ The Poincaré disk may be mapped to the upper half-plane 
+\begin_inset Formula $\mathbb{H}$
+\end_inset 
+
+; one such mapping is shown in the bottom image.
+ The small black square is located at 
+\begin_inset Formula $z=i$
+\end_inset 
+
+; the leaves of the tree run to the real axis 
+\begin_inset Formula $\Im z=0$
+\end_inset 
+
+.
+ The arced segments are circle arcs, so that, for instance, the arcs along
+ the top are parts of circles of radius 1, centered at 
+\begin_inset Formula $z=n$
+\end_inset 
+
+.
+ They meet at the intersections 
+\begin_inset Formula $z=n+\frac{1}{2}+i\frac{\sqrt{3}}{2}$
+\end_inset 
+
+.
 \end_inset 
 
 
+\layout Standard
+
+ToDo: eigenstates of the composition operator.
 \layout Section
 
 xxxxxx
