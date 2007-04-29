@@ -9,7 +9,7 @@
 #include <math.h>
 #include <stdio.h>
 
-void eps_print_prolog (void)
+void eps_print_prolog (int width, int height)
 {
 	printf ("%%!PS-Adobe-3.0 EPSF-3.0\n");
 	// printf ("%!PS-Adobe-2.0 EPSF-2.0\n");
@@ -19,7 +19,8 @@ void eps_print_prolog (void)
 	printf ("%%%%For: linas\n");
 	printf ("%%%%Orientation: Portrait\n");
 	printf ("%%%%Magnification: 1.0000\n");
-	printf ("%%%%BoundingBox: 0 0 220 220\n");
+	// printf ("%%%%BoundingBox: 0 0 220 220\n");
+	printf ("%%%%BoundingBox: 0 0 %d %d\n", width, height);
 	printf ("%%%%EndComments\n");
 	printf ("%%%%BeginProlog\n");
 	printf ("/cp {closepath} bind def\n");
@@ -52,17 +53,27 @@ void eps_print_prolog (void)
 	printf ("/tr {translate} bind def\n");
 	printf ("%%%%EndProlog\n");
 	printf ("\n");
+	printf ("%d %d translate\n", width/2, height/2);
+	printf ("%d %d scale\n", (45*width)/100, (45*height)/100);
 }
 
-void eps_setup_misc (void)
+void eps_setup_disk (void)
 {
 	printf ("0.0100000 slw\n");
 	printf ("[] 0 sd\n");
 	printf ("[] 0 sd\n");
 	printf ("0 slc\n");
 	printf ("0.000000 0.000000 0.000000 srgb\n");
-	printf ("110.0 110.0 translate\n");
-	printf ("100.0 -100.0 scale\n");
+}
+void eps_setup_plane (void)
+{
+	printf ("0.0300000 slw\n");
+	printf ("[] 0 sd\n");
+	printf ("[] 0 sd\n");
+	printf ("0 slc\n");
+	printf ("0.000000 0.000000 0.000000 srgb\n");
+	printf ("0.0 -0.8 translate\n");
+	printf ("0.2 0.8 scale\n");
 }
 
 void eps_set_color_red (void)
@@ -125,6 +136,17 @@ mobius_t mobius_set(int a, int b, int c, int d)
 	return m;
 }
 
+/* return a transformation that simply rotates by theta radians */
+mobius_t mobius_rotate (double theta)
+{
+	mobius_t m;
+	m.a = cplex_exp_itheta (theta);
+	m.b = cplex_zero();
+	m.c = cplex_zero();
+	m.d = cplex_one();
+	return m;
+}
+
 /* perform a multiplicative scaling of the thing */
 mobius_t mobius_scale(mobius_t m, const cplex z)
 {
@@ -157,7 +179,7 @@ cplex mobius_xform (const mobius_t m, const cplex z)
 	return w;
 }
 
-/* return mobius xform that recenters the disk at w */
+/* Return mobius xform that recenters the disk at w */
 mobius_t disk_center (cplex w)
 {
 	cplex nu = w;
@@ -180,6 +202,19 @@ mobius_t disk_center (cplex w)
 	return m;
 }
 
+/* Return a mobius transform that maps the point z=+1 to the 
+ * center of the Poincare disk */
+mobius_t to_half_plane_xform(void)
+{
+	mobius_t m;
+	m.a = cplex_set (0.0, -1.0);
+	m.b = cplex_set (0.0, -1.0);
+	m.c = cplex_set (1.0, 0.0);
+	m.d = cplex_set (-1.0, 0.0);
+	return m;
+}
+
+/* convert a half-plane xform to a disk xform */
 mobius_t to_disk(mobius_t m)
 {
 	cplex apd = cplex_add (m.a, m.d);
@@ -188,14 +223,31 @@ mobius_t to_disk(mobius_t m)
 	cplex bmc = cplex_times_i (cplex_sub (m.b, m.c));
 
 	mobius_t n;
-	n.a = cplex_add (apd, bmc);
-	n.b = cplex_sub (amd, bpc);
-	n.c = cplex_add (amd, bpc);
-	n.d = cplex_sub (apd, bmc);
+	n.a = cplex_scale (0.5, cplex_add (apd, bmc));
+	n.b = cplex_scale (0.5, cplex_sub (amd, bpc));
+	n.c = cplex_scale (0.5, cplex_add (amd, bpc));
+	n.d = cplex_scale (0.5, cplex_sub (apd, bmc));
 	
 	return n;
 }
 
+/* convert a disk xform to a plane xform */
+mobius_t to_half_plane(mobius_t m)
+{
+	cplex apd = cplex_add (m.a, m.d);
+	cplex amd = cplex_sub (m.a, m.d);
+	cplex bpc = cplex_add (m.b, m.c);
+	cplex bmc = cplex_sub (m.b, m.c);
+
+	mobius_t n;
+	n.a = cplex_scale (0.5, cplex_add (apd, bpc));
+	n.b = cplex_scale (0.5, cplex_times_i (cplex_sub (amd, bmc)));
+	n.b = cplex_neg (n.b);
+	n.c = cplex_scale (0.5, cplex_times_i (cplex_add (amd, bmc)));
+	n.d = cplex_scale (0.5, cplex_sub (apd, bpc));
+	
+	return n;
+}
 
 void show_mobius(mobius_t m)
 {
@@ -229,13 +281,15 @@ void draw_tristar (mobius_t m)
 	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
 
 	// draw a splat 
-	printf ("0.0600000 slw\n");
+	// printf ("0.0600000 slw\n");
+	printf ("0.1600000 slw\n");
 	za = cplex_set (-0.23, 0.0);
 	za = mobius_xform (m,za);
 	zb = cplex_set (-0.27, 0.0);
 	zb = mobius_xform (m,zb);
 	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
-	printf ("0.0100000 slw\n");
+	// printf ("0.0100000 slw\n");
+	printf ("0.0300000 slw\n");
 }
 
 mobius_t go_to_fork_tip(double sign)
@@ -281,15 +335,26 @@ void draw(int n)
 	int level=11;
 
 	// cplex c = cplex_set (0.0, -0.25);
-	// cplex c = cplex_set (-0.25, 0.0);
-	// mobius_t off = disk_center (c);
+	cplex z = cplex_set (-0.25, 0.0);
+	mobius_t off = disk_center (z);
+
+	mobius_t rot = mobius_rotate (0.5*M_PI);
+	off = mobius_mul (rot, off);
+
+#if XLATE
 	int a,b,c,d;
 	a=1;
 	b=n;
 	c=0;
 	d=1;
-	mobius_t off = mobius_set (a,b,c,d);
-	off = to_disk (off);
+	mobius_t xfm = mobius_set (a,b,c,d);
+	xfm = to_disk (xfm);
+	off = mobius_mul (xfm, off);
+	off = xfm;
+#endif
+
+	mobius_t xfm = to_half_plane_xform();
+	off = mobius_mul (xfm, off);
 
 	draw_tristar(off);
 
@@ -316,8 +381,10 @@ main (int argc, char * argv[])
 {
 	int n = atoi (argv[1]);
 
-	eps_print_prolog();
-	eps_setup_misc();
+	// eps_print_prolog(220,220);
+	eps_print_prolog(400,100);
+	// eps_setup_disk();
+	eps_setup_plane();
 	eps_draw_circle();
 
 	draw(n);
