@@ -55,11 +55,6 @@ static inline double cplex_mag (const cplex z)
 	return sqrt (z.re*z.re + z.im*z.im);
 }
 
-static inline double cplex_dist (const cplex a, const cplex b)
-{
-	return cplex_mag (cplex_sub(a,b));
-}
-
 static inline cplex cplex_add (const cplex a, const cplex b)
 {
 	cplex rv;
@@ -74,6 +69,11 @@ static inline cplex cplex_sub (const cplex a, const cplex b)
 	rv.re = a.re - b.re;
 	rv.im = a.im - b.im;
 	return rv;
+}
+
+static inline double cplex_dist (const cplex a, const cplex b)
+{
+	return cplex_mag (cplex_sub(a,b));
 }
 
 static inline cplex cplex_scale (double x, const cplex z)
