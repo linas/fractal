@@ -97,8 +97,9 @@ void eps_set_color_blue (void)
 void eps_draw_circle(void)
 {
 	int i;
+	int nseg = 120;
 	double si, co, dsi, dco;
-	double theta = 2.0*M_PI/360.0;
+	double theta = 2.0*M_PI/((double) nseg);
 	dsi = sin (theta);
 	dco = cos (theta);
 	si = dsi;
@@ -107,7 +108,7 @@ void eps_draw_circle(void)
 	// for example,draw one line:
 	// n 4.350000 5.150000 m 10.950000 14.550000 l s
 	printf ("n 0.0 1.0 m ");
-	for (i=0; i<=360; i++)
+	for (i=0; i<=nseg; i++)
 	{
 		printf("%f %f l \n", si,co);
 		double tmp = si*dco + co*dsi;
@@ -262,6 +263,7 @@ void show_mobius(mobius_t m)
 
 /* ==================================================== */
 
+/* Draw straight line segment */
 void draw_seg(mobius_t m, cplex zf, cplex zt)
 {
 	cplex za = mobius_xform (m, zf);
@@ -269,7 +271,21 @@ void draw_seg(mobius_t m, cplex zf, cplex zt)
 	eps_draw_lineseg (za.re, za.im, zb.re, zb.im);
 }
 
-void draw_arc(mobius_t m, cplex zf, cplex zt)
+/* draw line segment in the klein model */
+void draw_klein_seg(mobius_t m, cplex zf, cplex zt)
+{
+	cplex za = mobius_xform (m, zf);
+	cplex zb = mobius_xform (m, zt);
+
+	double ma = 2.0/(1.0 + za.re * za.re + za.im * za.im);
+	double mb = 2.0/(1.0 + zb.re * zb.re + zb.im * zb.im);
+	za = cplex_scale (ma,za);
+	zb = cplex_scale (mb,zb);
+	eps_draw_lineseg (za.re, za.im, zb.re, zb.im);
+}
+
+/* draw statically-tesselated arc */
+void draw_tesselated_arc(mobius_t m, cplex zf, cplex zt)
 {
 	int i;
 	// int nseg=20;
@@ -287,6 +303,42 @@ void draw_arc(mobius_t m, cplex zf, cplex zt)
 		zstart = zend;
 		za = zb;
 	}
+}
+
+/* draw dynamically-tesselated arc */
+void draw_arc(mobius_t m, cplex zf, cplex zt)
+{
+	draw_klein_seg(m,zf,zt);
+}
+
+void draw_arc_(mobius_t m, cplex zf, cplex zt)
+{
+	int i;
+	int nseg=20;
+
+	cplex zstart = zf;
+	cplex zdelta = cplex_scale((1.0/(double)nseg), cplex_sub (zt,zf));
+	cplex za = mobius_xform (m, zstart);
+	cplex zb;
+
+	cplex zs = za;
+
+	for (i=0; i<nseg; i++)
+	{
+		cplex zend = cplex_add (zstart, zdelta);
+		zb = mobius_xform (m, zend);
+		double dist = cplex_dist (zs, zb);
+		if (dist > 0.03) {
+			eps_draw_lineseg (zs.re, zs.im, zb.re, zb.im);
+			zs = zb;
+		}
+		zstart = zend;
+		za = zb;
+	}
+
+	double dist = cplex_dist (zs, zb);
+	if (dist > 0.001) 
+		eps_draw_lineseg (zs.re, zs.im, zb.re, zb.im);
 }
 
 /* draw three-pointed stick figure */
@@ -371,13 +423,14 @@ void draw_fork(mobius_t m, int level)
 void draw(int n)
 {
 	mobius_t m;
-	int level=9;
+	int level=11;
 
 	cplex z = cplex_set (-0.268, 0.0);
 	// cplex z = cplex_set (0.0, 0.0);
 	mobius_t off = disk_center (z);
 
-	mobius_t rot = mobius_rotate (-0.5*M_PI);
+	// mobius_t rot = mobius_rotate (-0.5*M_PI);
+	mobius_t rot = mobius_rotate ((-0.5-0.166666)*M_PI);
 	off = mobius_mul (rot, off);
 
 #define XLATE
@@ -392,8 +445,9 @@ void draw(int n)
 	off = mobius_mul (xfm, off);
 #endif
 
+// #define HALF_PLANE
 #ifdef HALF_PLANE
-	mobius_t xfm = to_half_plane_xform();
+	xfm = to_half_plane_xform();
 	off = mobius_mul (xfm, off);
 #endif
 
