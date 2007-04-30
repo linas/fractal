@@ -7,7 +7,7 @@ EXES= tree
 
 all: $(EXES)
 
-tree:tree.o
+tree: tree.o eps.o
 
 .c.o:
 	cc -c -g -O2 -I $(INC) $<
