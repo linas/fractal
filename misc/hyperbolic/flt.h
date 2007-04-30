@@ -1,5 +1,5 @@
 /*
- * flt.c 
+ * flt.h 
  * Generic Fractinal Linear Transform (Mobius transform) 
  * definition and handling routines
  *
@@ -7,9 +7,6 @@
  */
 
 #include "cplex.h"
-#include "flt.h"
-#include <math.h>
-#include <stdio.h>
 
 /* fractional linear transform */
 typedef struct {
@@ -18,7 +15,7 @@ typedef struct {
 
 /* create an element of sl(2,z). Its up to user to ensure
  * that ad-bc=1 */
-mobius_t mobius_set(int a, int b, int c, int d)
+static inline mobius_t mobius_set(int a, int b, int c, int d)
 {
 	mobius_t m;
 	m.a = cplex_set (a, 0);
@@ -29,7 +26,7 @@ mobius_t mobius_set(int a, int b, int c, int d)
 }
 
 /* return a transformation that simply rotates by theta radians */
-mobius_t mobius_rotate (double theta)
+static inline mobius_t mobius_rotate (double theta)
 {
 	mobius_t m;
 	m.a = cplex_exp_itheta (theta);
@@ -40,7 +37,7 @@ mobius_t mobius_rotate (double theta)
 }
 
 /* perform a multiplicative scaling of the thing */
-mobius_t mobius_scale(mobius_t m, const cplex z)
+static inline mobius_t mobius_scale(mobius_t m, const cplex z)
 {
 	m.a = cplex_mul (m.a, z);
 	m.b = cplex_mul (m.b, z);
@@ -48,7 +45,7 @@ mobius_t mobius_scale(mobius_t m, const cplex z)
 }
 
 /* product of mobius transforms (just a matrix multiply) */
-mobius_t mobius_mul(const mobius_t l, const mobius_t r)
+static inline mobius_t mobius_mul(const mobius_t l, const mobius_t r)
 {
 	mobius_t m;
 
@@ -61,7 +58,7 @@ mobius_t mobius_mul(const mobius_t l, const mobius_t r)
 }
 
 /* apply mobius xform to z, return (az+b)/(cz+d) */
-cplex mobius_xform (const mobius_t m, const cplex z)
+static inline cplex mobius_xform (const mobius_t m, const cplex z)
 {
 	cplex numer = cplex_mul(m.a, z);
 	numer = cplex_add (numer, m.b);
@@ -72,7 +69,7 @@ cplex mobius_xform (const mobius_t m, const cplex z)
 }
 
 /* Return mobius xform that recenters the disk at w */
-mobius_t disk_center (cplex w)
+static inline mobius_t disk_center (cplex w)
 {
 	cplex nu = w;
 	nu.re += 1.0;
@@ -96,7 +93,7 @@ mobius_t disk_center (cplex w)
 
 /* Return a mobius transform that maps the point z=+1 to the 
  * center of the Poincare disk */
-mobius_t to_half_plane_xform(void)
+static inline mobius_t to_half_plane_xform(void)
 {
 	mobius_t m;
 	m.a = cplex_set (0.0, -1.0);
@@ -107,7 +104,7 @@ mobius_t to_half_plane_xform(void)
 }
 
 /* convert a half-plane xform to a disk xform */
-mobius_t to_disk(mobius_t m)
+static inline mobius_t to_disk(mobius_t m)
 {
 	cplex apd = cplex_add (m.a, m.d);
 	cplex amd = cplex_sub (m.a, m.d);
@@ -124,7 +121,7 @@ mobius_t to_disk(mobius_t m)
 }
 
 /* convert a disk xform to a plane xform */
-mobius_t to_half_plane(mobius_t m)
+static inline mobius_t to_half_plane(mobius_t m)
 {
 	cplex apd = cplex_add (m.a, m.d);
 	cplex amd = cplex_sub (m.a, m.d);
@@ -141,7 +138,7 @@ mobius_t to_half_plane(mobius_t m)
 	return n;
 }
 
-void show_mobius(mobius_t m)
+static inline void show_mobius(mobius_t m)
 {
 	printf ("a=%f +i%f    b=%f+i%f\n", m.a.re, m.a.im, m.b.re, m.b.im);
 	printf ("c=%f +i%f    d=%f+i%f\n", m.c.re, m.c.im, m.d.re, m.d.im);
