@@ -3,10 +3,11 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES= tree
+EXES= mod-tree tree
 
 all: $(EXES)
 
+mod-tree: mod-tree.o eps.o flt-eps.o
 tree: tree.o eps.o flt-eps.o
 
 .c.o:
