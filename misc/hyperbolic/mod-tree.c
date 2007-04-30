@@ -12,6 +12,7 @@
 #include "flt-eps.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void eps_setup_plane (void)
 {
@@ -20,16 +21,30 @@ void eps_setup_plane (void)
 	printf ("0.4 1.6 scale\n");
 }
 
-void draw (int n)
+void recursive_draw (int depth, mobius_t m)
 {
-	mobius_t ident = mobius_ident();
-	mobius_t tee = mobius_set (1,1,0,1);
+	if (0 >= depth)
+		return;
+	depth --;
 
 	cplex eye = cplex_set(0,1);
 
+	mobius_t tee = mobius_set (1,1,0,1);
 	cplex zb = mobius_xform (tee, eye);
+	draw_seg (m, eye, zb);
 
-	draw_seg (ident, eye, zb);
+	mobius_t mt = mobius_mul (m,tee);
+	recursive_draw (depth, mt);
+}
+
+void draw (int n)
+{
+	mobius_t ident = mobius_ident();
+
+
+
+
+	recursive_draw (3,ident);
 }
 
 /* ==================================================== */
@@ -37,6 +52,12 @@ void draw (int n)
 int
 main (int argc, char * argv[]) 
 {
+	if (argc < 1)
+	{
+		fprintf (stderr, "Usage: %s <shift>\n", argv[0]);
+		exit(1);
+	}
+
 	int n = atoi (argv[1]);
 
 	eps_print_prolog(400,100);
