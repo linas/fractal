@@ -6,6 +6,9 @@
  * Linas Vepstas April 2007
  */
 
+#ifndef __LFUNC_FLT_H__
+#define __LFUNC_FLT_H__
+
 #include <math.h>
 #include <stdio.h>
 #include "cplex.h"
@@ -145,6 +148,8 @@ static inline void show_mobius(mobius_t m)
 	printf ("a=%f +i%f    b=%f+i%f\n", m.a.re, m.a.im, m.b.re, m.b.im);
 	printf ("c=%f +i%f    d=%f+i%f\n", m.c.re, m.c.im, m.d.re, m.d.im);
 }
+
+#endif /* __LFUNC_FLT_H__ */
 
 /* ======================= END OF FILE ============================= */
 

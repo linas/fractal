@@ -7,7 +7,7 @@ EXES= tree
 
 all: $(EXES)
 
-tree: tree.o eps.o
+tree: tree.o eps.o flt-eps.o
 
 .c.o:
 	cc -c -g -O2 -I $(INC) $<
@@ -23,4 +23,4 @@ realclean: clean
 	rm -f $(EXES)  *.png
 
 
-tree.o:	tree.c eps.h flt.h
+tree.o:	tree.c eps.h flt.h flt-eps.h
