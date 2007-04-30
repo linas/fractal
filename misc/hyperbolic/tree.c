@@ -11,6 +11,7 @@
 #include "flt-eps.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 void eps_setup_disk (void)
@@ -160,6 +161,13 @@ eps_set_color_blue();
 int
 main (int argc, char * argv[]) 
 {
+
+	if (argc < 1)
+	{
+		fprintf (stderr, "Usage: %s <shift>\n", argv[0]);
+		exit(1);
+	}
+
 	int n = atoi (argv[1]);
 
 	eps_print_prolog(220,220);
