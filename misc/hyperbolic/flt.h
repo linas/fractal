@@ -6,6 +6,8 @@
  * Linas Vepstas April 2007
  */
 
+#include <math.h>
+#include <stdio.h>
 #include "cplex.h"
 
 /* fractional linear transform */

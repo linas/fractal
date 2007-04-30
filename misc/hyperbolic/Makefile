@@ -22,3 +22,5 @@ clean:
 realclean: clean
 	rm -f $(EXES)  *.png
 
+
+tree.o:	tree.c eps.h flt.h
