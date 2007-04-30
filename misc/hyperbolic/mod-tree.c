@@ -27,24 +27,30 @@ void recursive_draw (int depth, mobius_t m)
 		return;
 	depth --;
 
-	cplex eye = cplex_set(0,1);
+	cplex tip = cplex_set(0.5,0.5*sqrt(3.0));
 
+eps_set_color_red();
 	mobius_t tee = mobius_set (1,1,0,1);
-	cplex zb = mobius_xform (tee, eye);
-	draw_seg (m, eye, zb);
+	cplex zb = mobius_xform (tee, tip);
+	draw_seg (m, tip, zb);
 
 	mobius_t mt = mobius_mul (m,tee);
 	recursive_draw (depth, mt);
+
+eps_set_color_green();
+	mobius_t ess = mobius_set (0,-1,1,0);
+	zb = mobius_xform (ess, tip);
+	draw_seg (m, tip, zb);
+
+	mobius_t ms = mobius_mul (m,ess);
+	recursive_draw (depth, ms);
 }
 
 void draw (int n)
 {
 	mobius_t ident = mobius_ident();
 
-
-
-
-	recursive_draw (3,ident);
+	recursive_draw (16,ident);
 }
 
 /* ==================================================== */
@@ -60,7 +66,7 @@ main (int argc, char * argv[])
 
 	int n = atoi (argv[1]);
 
-	eps_print_prolog(400,100);
+	eps_print_prolog(800,200);
 	eps_setup_plane();
 
 	draw(n);
