@@ -8,6 +8,9 @@
  * Linas November 2006
  */
 
+#ifndef __LFUNC_CPLEX_H_
+#define __LFUNC_CPLEX_H_
+
 #include <math.h>
 #include <stdio.h>
 
@@ -174,3 +177,4 @@ static inline cplex cplex_d_pow (double q, cplex s)
 	return cplex_exp (s);
 }
 
+#endif /* __LFUNC_CPLEX_H_ */
