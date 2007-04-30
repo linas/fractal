@@ -22,6 +22,14 @@ void eps_setup_plane (void)
 
 void draw (int n)
 {
+	mobius_t ident = mobius_ident();
+	mobius_t tee = mobius_set (1,1,0,1);
+
+	cplex eye = cplex_set(0,1);
+
+	cplex zb = mobius_xform (tee, eye);
+
+	draw_seg (ident, eye, zb);
 }
 
 /* ==================================================== */

@@ -18,7 +18,7 @@ typedef struct {
 	cplex a,b,c,d;
 } mobius_t;
 
-/* create an element of sl(2,z). Its up to user to ensure
+/* Create an element of SL(2,z). Its up to user to ensure
  * that ad-bc=1 */
 static inline mobius_t mobius_set(int a, int b, int c, int d)
 {
@@ -28,6 +28,12 @@ static inline mobius_t mobius_set(int a, int b, int c, int d)
 	m.c = cplex_set (c, 0);
 	m.d = cplex_set (d, 0);
 	return m;
+}
+
+/* Return the identity matrix */
+static inline mobius_t mobius_ident(void)
+{
+	return mobius_set (1,0,0,1);
 }
 
 /* return a transformation that simply rotates by theta radians */
