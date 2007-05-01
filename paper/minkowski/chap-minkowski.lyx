@@ -3093,6 +3093,9 @@ Define a free monoid.
 Define a presentation 
 \layout Itemize
 
+Define an act of monoid on set.
+\layout Itemize
+
 Discuss presentaions with torsion, vs.
  those with that remain free.
 \layout Standard
@@ -3134,7 +3137,7 @@ collapsed false
 
 \layout Caption
 
-polyhedra
+Polyhedra
 \layout Standard
 
 
@@ -3152,9 +3155,21 @@ This figure shows a binary tree wrapped onto a polyhedron, a cube in this
  Note that this implies that its a group, since inverse elements are now
  clear.
  Note that unlike the p-adic tree, this has only pure torsion.
+ The general case is a labelled graph, aka a semiautomaton.
 \end_inset 
 
 
+\layout Standard
+
+The general case is a semiautomaton.
+ Consider a finite set of states (aka graph vertices).
+ Consider state transitions driven by L,R; these are labelled arrows from
+ one state to another.
+ Starting from any given node, these show how to project the binary tree
+ onto the graph.
+ A special case of this are polyhedra.
+ The general case are the regular languages.
+ 
 \layout Standard
 
 Note that alternating algebras i.e.
@@ -3242,18 +3257,19 @@ Consider, for example, the binary tree as the set of all possible strings
 .
 \layout Standard
 
-XXX ToDo: finsih writing out the rest of this section.
+XXX ToDo: finish writing out the rest of this section.
 \layout Standard
 
 The polyhedra correspond to automorphic forms.
+ See geometry section below.
 \layout Standard
 
 The general subsets correspond to regular languages that is, are isomorphic
  to finite state machines.
  This has two corrolaries: 1) the number of finite state machines are countable.
  2) for every rational number, there is a finite state machine.
- There is an explicit coding-- convert rational number to continued fraction.Conv
-ert continued fraction into binary rep.
+ There is an explicit coding-- convert rational number to continued fraction.
+ Convert continued fraction into binary rep.
  The repeated elements are the Kleene star elements of the regular language.
  An alternate way of thinking about this is that the Kleene-star elements
  correspond to the algebraic numbers (as per traditional Gauss continued
@@ -6269,36 +6285,87 @@ A visual demonstration of the embedding is shown in the figure
 
 .
  The embedding that is illustrated puts vertices at 
-\begin_inset Formula $a=i/2$
+\begin_inset Formula $a=(1+i\sqrt{3})/4$
 \end_inset 
 
 , 
-\begin_inset Formula $b=(-i+\sqrt{3})/4$
+\begin_inset Formula $b=-1$
 \end_inset 
 
  and 
-\begin_inset Formula $c=(i+\sqrt{3})/4$
+\begin_inset Formula $c=(1+i\sqrt{3})/4$
 \end_inset 
 
 , connecting to the blue, red and green subtrees, respectively.
+ The rest of the binary tree may be generated recursively, by repositioning
+ each of these endpoints to the center of the disk, rotating the disk so
+ that the incoming line segment extends from the center to 
+\begin_inset Formula $b=-1$
+\end_inset 
+
+, and then drawing two new line segments to 
+\begin_inset Formula $a$
+\end_inset 
+
+ and 
+\begin_inset Formula $c$
+\end_inset 
+
+.
+ This provides a geometric construction of the embedding.
+\layout Standard
+
+An algebraic construction provided by the generators 
+\begin_inset Formula $L$
+\end_inset 
+
+ and 
+\begin_inset Formula $R$
+\end_inset 
+
+ given previously, namely: 
+\begin_inset Formula \[
+L=\left[\begin{array}{cc}
+1 & 0\\
+1 & 1\end{array}\right]\quad\mbox{ and }\quad R=\left[\begin{array}{cc}
+1 & 1\\
+0 & 1\end{array}\right]\]
+
+\end_inset 
+
+ Choose the point 
+\begin_inset Formula $p=(1+i\sqrt{3})/2$
+\end_inset 
+
+ in the upper half-plane.
+ Apply L,R connect the dots ...
  
 \layout Standard
 
 ToDo: 
 \layout Itemize
 
-explain why this mapping was choosen
-\layout Itemize
-
-show the action of SL(2,Z) on this, esp.
- S,T and so on.
+show invariance under the action of SL(2,Z).
  Compare to L,R,B.
 \layout Itemize
 
-hyperbolic graphs of unit interval
+show relationship of fundamental domain to the tree.
+\layout Itemize
+
+classical automorphic forms on binary tree.
+ 
+\layout Itemize
+
+moduli space of the automorphic forms corresponding to a given finite state
+ machine.
+\layout Itemize
+
+hyperbolic graphs of unit interval.
+ (as separate chapter)
 \layout Itemize
 
 eigenstates of the composition operator.
+ (as separate chapter?)
 \layout Section
 
 xxxxxx
