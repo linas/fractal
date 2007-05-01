@@ -30,27 +30,29 @@ void recursive_draw (int depth, mobius_t m)
 	cplex tip = cplex_set(0.5,0.5*sqrt(3.0));
 
 eps_set_color_red();
-	mobius_t tee = mobius_set (1,1,0,1);
-	cplex zb = mobius_xform (tee, tip);
+	// mobius_t are = mobius_set (1,1,0,1);
+	mobius_t are = mobius_set (1,-1,0,1);
+	cplex zb = mobius_xform (are, tip);
 	draw_seg (m, tip, zb);
 
-	mobius_t mt = mobius_mul (m,tee);
-	recursive_draw (depth, mt);
+	mobius_t mr = mobius_mul (m,are);
+	recursive_draw (depth, mr);
 
 eps_set_color_green();
-	mobius_t ess = mobius_set (0,-1,1,0);
-	zb = mobius_xform (ess, tip);
+	// mobius_t ell = mobius_set (1,0,1,1);
+	mobius_t ell = mobius_set (1,0,-1,1);
+	zb = mobius_xform (ell, tip);
 	draw_seg (m, tip, zb);
 
-	mobius_t ms = mobius_mul (m,ess);
-	recursive_draw (depth, ms);
+	mobius_t ml = mobius_mul (m,ell);
+	recursive_draw (depth, ml);
 }
 
 void draw (int n)
 {
 	mobius_t ident = mobius_ident();
 
-	recursive_draw (16,ident);
+	recursive_draw (7,ident);
 }
 
 /* ==================================================== */
