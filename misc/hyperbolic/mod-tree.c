@@ -27,7 +27,8 @@ void recursive_draw (int depth, mobius_t m)
 		return;
 	depth --;
 
-	cplex tip = cplex_set(0.5,0.5*sqrt(3.0));
+	// cplex tip = cplex_set(0.5,0.5*sqrt(3.0));
+	cplex tip = cplex_set(-0.5,0.5*sqrt(3.0));
 
 eps_set_color_red();
 	// mobius_t are = mobius_set (1,1,0,1);
@@ -52,7 +53,7 @@ void draw (int n)
 {
 	mobius_t ident = mobius_ident();
 
-	recursive_draw (7,ident);
+	recursive_draw (n,ident);
 }
 
 /* ==================================================== */
