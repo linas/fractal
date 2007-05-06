@@ -3,7 +3,7 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES= mod-tree tree
+EXES= mod-tree perimeter tree
 
 all: $(EXES)
 
