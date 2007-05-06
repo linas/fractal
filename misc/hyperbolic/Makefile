@@ -24,4 +24,5 @@ realclean: clean
 	rm -f $(EXES)  *.png
 
 
+perimeter.o:	perimeter.c flt.h
 tree.o:	tree.c eps.h flt.h flt-eps.h
