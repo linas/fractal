@@ -18,9 +18,19 @@ typedef struct {
 	cplex a,b,c,d;
 } mobius_t;
 
-/* Create an element of SL(2,z). Its up to user to ensure
+/* Create an element of SL(2,Z). Its up to user to ensure
  * that ad-bc=1 */
 static inline mobius_t mobius_set(int a, int b, int c, int d)
+{
+	mobius_t m;
+	m.a = cplex_set (a, 0);
+	m.b = cplex_set (b, 0);
+	m.c = cplex_set (c, 0);
+	m.d = cplex_set (d, 0);
+	return m;
+}
+
+static inline mobius_t mobius_set_d(double a, double b, double c, double d)
 {
 	mobius_t m;
 	m.a = cplex_set (a, 0);
@@ -151,8 +161,8 @@ static inline mobius_t to_half_plane(mobius_t m)
 
 static inline void show_mobius(mobius_t m)
 {
-	printf ("a=%f +i%f    b=%f+i%f\n", m.a.re, m.a.im, m.b.re, m.b.im);
-	printf ("c=%f +i%f    d=%f+i%f\n", m.c.re, m.c.im, m.d.re, m.d.im);
+	printf ("a=%g +i%g    b=%g+i%g\n", m.a.re, m.a.im, m.b.re, m.b.im);
+	printf ("c=%g +i%g    d=%g+i%g\n", m.c.re, m.c.im, m.d.re, m.d.im);
 }
 
 #endif /* __LFUNC_FLT_H__ */
