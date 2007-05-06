@@ -16,7 +16,7 @@
 
 void eps_setup_plane (void)
 {
-   eps_setup_basic_linstyles();
+	eps_setup_basic_linstyles();
 	printf ("0.0 -0.8 translate\n");
 	printf ("0.4 1.6 scale\n");
 }
