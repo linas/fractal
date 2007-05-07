@@ -15,13 +15,19 @@
 #include "question.h"
 
 /**
- * unit_interval_to_mobius -- convertt real number to mobius xform
+ * dyadic_to_stern_brocot -- convert real number to stern-brocot
  *
- * Innput is real number x, assume 0<x<1.  Perform binary 
- * expansion of x. Use L,R for binary digits 0,1.  Return 
- * the result.
+ * This function maps the unit interval, expressed as a dyadic
+ * tree, to the full stern brocot tree.  The input is 0<x<1.
+ * Perform binary expansion of x. Use L,R for binary digits 0,1. 
+ * Concatenate the L and R to form a matrix. Padd on the right with
+ * zeros. The resulting fractinal linear transform will map the 
+ * entire complex plane to b/d. This function returns b/d.
+ *
+ * Basically, this function maps the dyadic tree to the 
+ * Stern-Brocot tree.
  */
-mobius_t unit_interval_to_mobius (double x)
+double dyadic_to_stern_brocot (double x)
 {
 	if (0.0>x) x -= (int) x - 1;
 	if (1.0<x) x -= (int) x;
@@ -44,17 +50,18 @@ mobius_t unit_interval_to_mobius (double x)
 		}
 		x *= 2.0;
 	}
-
-	/* assume terminated by infinite string of zeros */
-	mobius_t lim = mobius_set_d (1,0,1.0e200,1);
-	acc = mobius_mul (acc, lim);
-
-	return acc;
+	return acc.b.re / acc.d.re;
 }
 
-double mobius_to_limit (mobius_t m)
+/**
+ * qinverse - return the inverse of the question mark function
+ *
+ * This impments a rapid algorithm to compute the inverse of 
+ * the question mark function.
+ */
+double qinverse (double x)
 {
-	return m.b.re/m.d.re;
+	return dyadic_to_stern_brocot (0.5*x);
 }
 
 main()
@@ -66,8 +73,7 @@ main()
 	{
 		double x = ((double) i)/((double) deno);
 
-		mobius_t m = unit_interval_to_mobius (x);
-		double t = mobius_to_limit(m);
+		double t = dyadic_to_stern_brocot(x);
 
 		double u = atan2 (-2.0*t, t*t-1.0);
 		// double u = atan2 (-4.0*t, t*t-4.0);
@@ -83,6 +89,7 @@ main()
 		// q = 0.5 + 0.5*q;
 		// x = 0.5 + 0.5*x;
 
+#if 0
 		double h = t;
 		if (h > 1.0) h = 1.0/h;
 		h = question_mark (h*1000000,1000000);
@@ -91,8 +98,10 @@ main()
 		{
 			h = 1.0-h;
 		}
+#endif
 	
-		double q;
+		double q=0;
+#if 0
 		if (x<0.5)
 		{
 			q = question_inverse (2.0*x);
@@ -101,7 +110,13 @@ main()
 		{
 			q = 1.0/question_inverse (2.0*(1.0-x));
 		}
+		q = question_inverse (x);
+#endif
+		t = qinverse (x);
 
-		//printf ("%d	%f	%f	%f	%f\n", i, x, t, u, q);
+		t = question_mark (t*1000000,1000000);
+		t -= x;
+
+		printf ("%d	%f	%g	%f	%f\n", i, x, t, u, q);
 	}
 }
