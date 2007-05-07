@@ -25,6 +25,6 @@ realclean: clean
 	rm -f $(EXES)  *.png
 
 
-perimeter.o:	perimeter.c flt.h
-mod-tree.o:	mod-tree.c eps.h flt.h flt-eps.h
-tree.o:	tree.c eps.h flt.h flt-eps.h
+perimeter.o:	perimeter.c 
+mod-tree.o:	mod-tree.c eps.h flt-eps.h
+tree.o:	tree.c eps.h flt-eps.h
