@@ -26,9 +26,4 @@ double fquestion_mark (double x)
 	return work.ToFarey ();
 }
 
-double question_inverse (double x)
-{
-	return InvFarey (x);
-}
-
 };

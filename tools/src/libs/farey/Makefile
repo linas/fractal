@@ -16,7 +16,7 @@ CC = cc -Wall -g -O2 -I $(INC) -DANSI_C -DLINUX
 RM= rm -f
 
 OBJS=bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o harmonic.o \
-	  modular.o moebius.o Prime.o question.o totient.o
+	  modular.o moebius.o Prime.o question.o question-new.o totient.o
 
 INCS=bernoulli.h binomial.h cplex.h Farey.h FareyTree.h flt.h gcf.h \
      harmonic.h \
@@ -39,6 +39,7 @@ modular.o:	modular.c modular.h
 moebius.o:	moebius.c moebius.h cache.h
 Prime.o:	Prime.c Prime.h
 question.o:	question.C question.h Farey.h
+question-new.o:	question-new.c question.h
 totient.o:	totient.c totient.h
 
 .c.o:
