@@ -632,10 +632,10 @@ ive real number line
 \end_inset 
 
  with 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 h(x)=\begin{cases}
 2x & \mbox{ for }0\le x\le\frac{1}{2}\\
-\frac{1}{2(1-x)} & \mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
+\frac{1}{2(1-x)} & \mbox{ for }\frac{1}{2}\le x\le1\end{cases}\label{eq:Farey to Stern-Brocot}\end{equation}
 
 \end_inset 
 
@@ -6550,6 +6550,129 @@ leaves
  of the binary tree.
  There are a series of closely-related mappings; they will be needed in
  a later section and are thus spelled out here.
+\layout Standard
+
+Consider first the mapping induced by taking the dyadic expansion of a real
+ number in the unit inverval, and replacing every occurance of 0 by the
+ matrix 
+\begin_inset Formula $L$
+\end_inset 
+
+ and every occurance of 1 by 
+\begin_inset Formula $R$
+\end_inset 
+
+.
+ If the number is a dyadic rational, the expansion stops (ignoring the infinite
+ trailing string of zeros).
+ Suppose that the resulting matrix has matrix entries 
+\begin_inset Formula $a,b,c,d$
+\end_inset 
+
+, as in equation 
+\begin_inset LatexCommand \ref{eq:Mobius xform}
+
+\end_inset 
+
+.
+ The infinite trailing string of zeros corresponds to the matrix 
+\begin_inset Formula \[
+L^{\omega}=\left[\begin{array}{cc}
+1 & 0\\
+\omega & 1\end{array}\right]\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\omega=\infty$
+\end_inset 
+
+.
+ Its not hard to see that the resulting product
+\begin_inset Formula \[
+\left[\begin{array}{cc}
+a & b\\
+c & d\end{array}\right]\left[\begin{array}{cc}
+1 & 0\\
+\omega & 1\end{array}\right]=\left[\begin{array}{cc}
+a+b\omega & b\\
+c+d\omega & d\end{array}\right]\]
+
+\end_inset 
+
+ will map points 
+\begin_inset Formula $z\in\mathbb{C}$
+\end_inset 
+
+ of the complex plane to 
+\begin_inset Formula \[
+z\mapsto\left[\begin{array}{cc}
+a+b\omega & b\\
+c+d\omega & d\end{array}\right]:z=\frac{(a+b\omega)z+b}{(c+d\omega)z+d}=\frac{b}{d}\]
+
+\end_inset 
+
+ Thus, this proceedure associates to every dyadic rational 
+\begin_inset Formula $0\le x\le1$
+\end_inset 
+
+ a positive real number 
+\begin_inset Formula $b/d$
+\end_inset 
+
+ constructed from the dyadic expansion of 
+\begin_inset Formula $x$
+\end_inset 
+
+.
+ Recognizing that this is a form of the de Rham curve, its clear that the
+ function is continous.
+ Examing the construction process, it can be seen that the map is simply
+ a pairing of the dyadic tree to the Stern-Brocot tree.
+ Let 
+\begin_inset Formula $b:[0,1]\to\mathbb{R}^{+}$
+\end_inset 
+
+ denote this mapping of the dyadic tree to the Stern-Brocot tree.
+ Then, applying the analysis developed in previous sections, it is straightforwa
+rd to determine that 
+\begin_inset Formula \[
+b(x)=\begin{cases}
+?^{-1}\left(2x\right) & \quad\mbox{ for }0\le x\le\frac{1}{2}\\
+\frac{1}{?^{-1}\left(2\left(1-x\right)\right)} & \quad\mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
+
+\end_inset 
+
+ This result is essentially a variant of the mapping between the Farey tree
+ and the Stern-Brocot tree, given in eqn.
+ 
+\begin_inset LatexCommand \ref{eq:Farey to Stern-Brocot}
+
+\end_inset 
+
+.
+ It is noteworthy, in that it provides a rapid algorithm to compute the
+ inverse of the question mark function.
+\layout Standard
+
+xxx this is subtly wrong, its not a mapping of trees its the usual  off-by-one,
+ as usual.
+ XXX fix me.
+ 
+\layout Standard
+
+Consider next the embedding of the unrooted binary tree into to upper half-plane
+, as described in the previous section.
+ This mapping takes the left half of the binary tree, and maps it into the
+ left quadrant of the complex plane, and the right half of the tree to the
+ right quadrant.
+ If the binary tree is labelled
+\layout Standard
+
+xxx
+\layout Standard
+
+xxxxxxxxxxxxxxxxxxxxx
 \layout Standard
 
 Consider first the embedding of the tree into the upper half-plane presented
