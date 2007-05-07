@@ -6630,14 +6630,14 @@ c+d\omega & d\end{array}\right]:z=\frac{(a+b\omega)z+b}{(c+d\omega)z+d}=\frac{b}
  Examing the construction process, it can be seen that the map is simply
  a pairing of the dyadic tree to the Stern-Brocot tree.
  Let 
-\begin_inset Formula $b:[0,1]\to\mathbb{R}^{+}$
+\begin_inset Formula $\beta:[0,1]\to\mathbb{R}^{+}$
 \end_inset 
 
  denote this mapping of the dyadic tree to the Stern-Brocot tree.
  Then, applying the analysis developed in previous sections, it is straightforwa
 rd to determine that 
 \begin_inset Formula \[
-b(x)=\begin{cases}
+\beta(x)=\begin{cases}
 ?^{-1}\left(2x\right) & \quad\mbox{ for }0\le x\le\frac{1}{2}\\
 \frac{1}{?^{-1}\left(2\left(1-x\right)\right)} & \quad\mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
 
@@ -6655,45 +6655,37 @@ b(x)=\begin{cases}
  inverse of the question mark function.
 \layout Standard
 
-xxx this is subtly wrong, its not a mapping of trees its the usual  off-by-one,
- as usual.
- XXX fix me.
- 
-\layout Standard
+Consider next the embedding of the unrooted dyadic tree into to upper half-plane
+, as depicted in figure 
+\begin_inset LatexCommand \ref{cap:The-Embedded-Tree}
 
-Consider next the embedding of the unrooted binary tree into to upper half-plane
-, as described in the previous section.
- This mapping takes the left half of the binary tree, and maps it into the
- left quadrant of the complex plane, and the right half of the tree to the
- right quadrant.
- If the binary tree is labelled
-\layout Standard
-
-xxx
-\layout Standard
-
-xxxxxxxxxxxxxxxxxxxxx
-\layout Standard
-
-Consider first the embedding of the tree into the upper half-plane presented
- in the previous section.
- Take the tree labelling to be that of the dyadic tree, and take the point
- 
-\begin_inset Formula $z=i$
-\end_inset 
-
- to be the root of the tree.
- With this labelling, all nodes with positive real part correspond to labels
- with 
-\begin_inset Formula $1/2<p/q\le1/1$
-\end_inset 
-
-, while those with negative real part correspond to 
-\begin_inset Formula $0/1\le p/q<1/2$
 \end_inset 
 
 .
- This tree may be mapped to the Poincaré disk with
+ This mapping takes the left half of the binary tree, and maps it into the
+ left quadrant of the complex plane, and the right half of the tree to the
+ right quadrant.
+ If the dyadic tree is labelled as in figure 
+\begin_inset LatexCommand \ref{cap:The-Embedded-Tree}
+
+\end_inset 
+
+, then one has a map 
+\begin_inset Formula $\delta:[0,1]\to\mathbb{R}$
+\end_inset 
+
+given by 
+\begin_inset Formula \[
+\delta(x)=\begin{cases}
+\frac{-1}{?^{-1}\left(4x\right)} & \quad\mbox{ for }0\le x\le\frac{1}{4}\\
+-?^{-1}(2-4x) & \quad\mbox{ for }\frac{1}{4}\le x\le\frac{1}{2}\\
+?^{-1}\left(4x-2\right) & \quad\mbox{ for }\frac{1}{2}\le x\le\frac{3}{4}\\
+\frac{1}{?^{-1}\left(4-4x\right)} & \quad\mbox{ for }\frac{3}{4}\le x\le1\end{cases}\]
+
+\end_inset 
+
+ This unrooted dyadic tree may be embedded into the Poincaré disk using
+ the mapping 
 \begin_inset Formula \[
 w=\frac{z-i}{z+i}\]
 
@@ -6704,29 +6696,40 @@ w=\frac{z-i}{z+i}\]
 \end_inset 
 
  at the center of the disk.
- The mapping wraps the unit interval around the perimeter of the disk, such
- that 
-\begin_inset Formula $p/q=0$
+ Here, 
+\begin_inset Formula $z\in\mathbb{H}$
 \end_inset 
 
- gets mapped to the right-most edge of the circle, 
-\begin_inset Formula $p/q=1/4$
+ is a point in the upper-half-plane, and 
+\begin_inset Formula $w\in\mathbb{D}$
 \end_inset 
 
- gets mapped to the top of the circle, 
-\begin_inset Formula $p/q=1/2$
+ is the corresponding point in the Poincaré disk.
+ This mapping wraps the unit interval around the perimeter of the disk in
+ a counter-clockwise fashion, starting with 
+\begin_inset Formula $x=0$
 \end_inset 
 
- gets mapped to the leftmost part, and 
-\begin_inset Formula $p/q=3/4$
+ at the right-most edge of the circle.
+ Again, this is illustrated in figure 
+\begin_inset LatexCommand \ref{cap:The-Embedded-Tree}
+
 \end_inset 
 
- to the bottom, with 
-\begin_inset Formula $p/q=1/1$
+.
+ The mapping is not linear.
+ A little bit of work shows that it is given by
+\begin_inset Formula \[
+\arctan\frac{2\delta}{\delta^{2}-4}\]
+
 \end_inset 
 
-at the right again.
- 
+
+\layout Standard
+
+xx ahem.
+ not quite right.
+ xxx finish me.
 \layout Subsection
 
 Hyperbolic Rotations
