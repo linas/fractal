@@ -18,7 +18,8 @@ RM= rm -f
 OBJS=bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o harmonic.o \
 	  modular.o moebius.o Prime.o question.o totient.o
 
-INCS=bernoulli.h binomial.h cplex.h Farey.h FareyTree.h gcf.h harmonic.h \
+INCS=bernoulli.h binomial.h cplex.h Farey.h FareyTree.h flt.h gcf.h \
+     harmonic.h \
      modular.h moebius.h Prime.h question.h totient.h
 
 all: inc $(OBJS)
