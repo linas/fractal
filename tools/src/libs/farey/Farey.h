@@ -115,8 +115,6 @@ class ContinuedFraction
 
 
 extern double Inverse (void *, double (*)(void *, double), double);
-
-extern double InvFarey (double);
 extern double InvZReal (double, double);
 
 

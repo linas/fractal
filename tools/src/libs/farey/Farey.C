@@ -1413,43 +1413,6 @@ double Inverse (void *cxt, double (*func)(void *, double), double val)
 }
 
 /* ------------------------------------------------------------ */
-/* Computes inverse of Farey (Minkowski) mapping.
- * Algorithm used here is a finding of inverse by binary subdivision
- * which is slowwww but much more accurate than naive bit-counting.
- */
-static ContinuedFraction workspace;
-
-static double inv_cb (void * stru, double val) 
-{
-	ContinuedFraction *fp;
-
-   fp = (ContinuedFraction *) stru;
-    
-   fp->SetReal (val);
-   double retval = fp->ToFarey ();
-
-   return retval;
-}
-
-double InvFarey (double val) 
-{
-   double retval;
-   int intpart;
-
-	workspace.SetEvenize();
-
-   intpart = (int) val;
-   if (0.0 > val) intpart --;
-   val -= (double) intpart;
-
-   retval = Inverse (((void *) &workspace), inv_cb, val);
-
-   retval += (double) intpart;
-
-   return retval;
-}
-
-/* ------------------------------------------------------------ */
 /* computes inverse of Zreal mapping */
 
 struct InvZReal_s {
