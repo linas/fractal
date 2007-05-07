@@ -13,6 +13,7 @@
 #include <stdlib.h>
 
 #include "Farey.h"
+#include "question.h"
 ContinuedFraction far;
 
 long double triangle (long double x)
@@ -218,7 +219,7 @@ if(x>0.5) {
 }
 
 		if (x> xlast + step) {
-			fa = InvFarey(x);
+			fa = question_inverse(x);
 			xlast += step;
 			// printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, tw, accr, acci, fa);
 			xa[ia] = x;

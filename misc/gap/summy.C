@@ -9,6 +9,7 @@
 #include <math.h>
 
 #include "Farey.h"
+#include "question.h"
 
 double 
 summy (double x)
@@ -125,7 +126,7 @@ double eigen (ContinuedFraction *f, double x)
 	double xb = f->ToFarey();
 	// double yb = 1.0 - 0.5 *xb;
 	double yb = 1.0 - xb/3.0;
-	double y = InvFarey (yb);
+	double y = question_inverse (yb);
 	return y;
 }
 

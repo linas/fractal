@@ -11,6 +11,7 @@
 #include <malloc.h>
 
 #include "Farey.h"
+#include "question.h"
 
 double gee[2][2];
 double are[2][2];
@@ -123,8 +124,8 @@ int main (int argc, char * argv[])
 	for (i=0; i<ic; i++)
 	{
 #if 0
-		double xf = InvFarey (xv[i]);
-		double yf = InvFarey (yv[i]);
+		double xf = question_inverse (xv[i]);
+		double yf = question_inverse (yv[i]);
 		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", xv[i], 0.0, xf, 0.0);
 		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", xv[i], yv[i], xf, yf);
 		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", xv[i], 0.0, xf, 0.0);

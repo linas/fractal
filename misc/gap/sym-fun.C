@@ -10,6 +10,7 @@
 #include <stdio.h>
 
 #include "Farey.h"
+#include "question.h"
 
 main (int argc, char *argv[])
 {
@@ -27,7 +28,7 @@ main (int argc, char *argv[])
 #ifdef SAWTOOTH
 		// this is what continued-fraction truncation looks like 
 		// in binary-digit space
-		double z = InvFarey(x);
+		double z = question_inverse(x);
 		double y = 1.0/z;
 		y -= floor (y);
 		f.SetReal (y);
@@ -42,12 +43,12 @@ main (int argc, char *argv[])
 		double yb = f.ToFarey();
 		yb *= 2.0;
 		yb -= floor (yb);
-		double y = InvFarey (yb);
+		double y = question_inverse (yb);
 #endif
 
 #if EIGENVALUE_ZERO
 		// This is the zeroth eigenvalue, in binary-space
-		double xc = InvFarey(x);
+		double xc = question_inverse(x);
 		double yc = 1.0/(1.0+xc);
 		f.SetReal (yc);
 		double y = f.ToFarey();
@@ -56,7 +57,7 @@ main (int argc, char *argv[])
 
 #ifdef WHATEVER
 		// This is the 1st approx eigenvalue, in binary-space
-		double xc = InvFarey(x);
+		double xc = question_inverse(x);
 		// double yc = 1.0 / ((1.0+xc)*(1.0+xc)*sqrt(1.0+xc));
 		double yc = (2.0*xc-1.0)/(2.0*xc+1.0);
 		f.SetReal (yc);

@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 #include "Farey.h"
+#include "question.h"
 
 main (int argc, char *argv[])
 {
@@ -36,7 +37,7 @@ main (int argc, char *argv[])
 		for (j=0; j<NP; j++)
 		{
 			yb *= 0.5;
-			double y = InvFarey (yb);
+			double y = question_inverse (yb);
 			arr[j] = y;
 		}
 		printf ("%5d	%8.6g", i, x);
