@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 #include "flt.h"
+#include "question.h"
 
 /**
  * unit_interval_to_mobius -- convertt real number to mobius xform
@@ -53,28 +54,54 @@ mobius_t unit_interval_to_mobius (double x)
 
 double mobius_to_limit (mobius_t m)
 {
-	cplex rho = cplex_set (0.5, 0.5*sqrt(3.0));
-	cplex lim = mobius_xform (m,rho);	
-
-	return lim.re;
+	return m.b.re/m.d.re;
 }
 
 main()
 {
 	int i;
 
-	int deno=443;
+	int deno=32;
 	for (i=0; i<deno;i++)
 	{
 		double x = ((double) i)/((double) deno);
 
 		mobius_t m = unit_interval_to_mobius (x);
 		double t = mobius_to_limit(m);
-		double u = atan2 (t*t-1.0, 2.0*t);
-		u /= M_PI;
-		u += 0.5;
-		
 
-		printf ("%d	%f	%f	%f\n", i, x, t, u);
+		double u = atan2 (-2.0*t, t*t-1.0);
+		// double u = atan2 (-4.0*t, t*t-4.0);
+		// double u = atan2 (-t, t*t-0.25);
+
+		// if (0.0> u) u += 2.0*M_PI;
+		// u /= 2.0*M_PI;
+		u /= M_PI;
+		u += 1.0;
+		
+		// double q = question_mark (i,deno);
+		// double q = question_inverse (2.0*x);
+		// q = 0.5 + 0.5*q;
+		// x = 0.5 + 0.5*x;
+
+		double h = t;
+		if (h > 1.0) h = 1.0/h;
+		h = question_mark (h*1000000,1000000);
+		h *= 0.5; 
+		if (t>1.0)
+		{
+			h = 1.0-h;
+		}
+	
+		double q;
+		if (x<0.5)
+		{
+			q = question_inverse (2.0*x);
+		}
+		else
+		{
+			q = 1.0/question_inverse (2.0*(1.0-x));
+		}
+
+		//printf ("%d	%f	%f	%f	%f\n", i, x, t, u, q);
 	}
 }

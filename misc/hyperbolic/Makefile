@@ -8,13 +8,14 @@ EXES= mod-tree perimeter tree
 all: $(EXES)
 
 mod-tree: mod-tree.o eps.o flt-eps.o
+perimeter: perimeter.o 
 tree: tree.o eps.o flt-eps.o
 
 .c.o:
 	cc -c -g -O2 -I $(INC) $<
 
 .o:
-	cc -g -o $@ $^ -L$(LIB) -lm 
+	cc -g -o $@ $^ -L$(LIB) -lfunc -lstdc++ -lm 
 
 
 clean:
