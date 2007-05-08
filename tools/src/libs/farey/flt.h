@@ -161,8 +161,8 @@ static inline mobius_t to_half_plane(mobius_t m)
 
 static inline void show_mobius(mobius_t m)
 {
-	printf ("a=%g +i%g    b=%g+i%g\n", m.a.re, m.a.im, m.b.re, m.b.im);
-	printf ("c=%g +i%g    d=%g+i%g\n", m.c.re, m.c.im, m.d.re, m.d.im);
+	printf ("a=%g %+gi    b=%g %+gi\n", m.a.re, m.a.im, m.b.re, m.b.im);
+	printf ("c=%g %+gi    d=%g %+gi\n", m.c.re, m.c.im, m.d.re, m.d.im);
 }
 
 #endif /* __LFUNC_FLT_H__ */

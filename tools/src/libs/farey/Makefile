@@ -26,7 +26,8 @@ all: inc $(OBJS)
 
 inc:	$(INCS)
 	touch inc
-	cp $? $(INC)/$?
+	echo -n "$? " | xargs -d " " -I '{}'  echo cp '{}' $(INC)/'{}'
+	echo -n "$? " | xargs -d " " -I '{}'  cp '{}' $(INC)/'{}'
 
 bernoulli.o:	bernoulli.c bernoulli.h
 binomial.o:	binomial.c binomial.h
@@ -39,7 +40,7 @@ modular.o:	modular.c modular.h
 moebius.o:	moebius.c moebius.h cache.h
 Prime.o:	Prime.c Prime.h
 question.o:	question.C question.h Farey.h
-question-new.o:	question-new.c question.h
+question-new.o:	question-new.c flt.h question.h
 totient.o:	totient.c totient.h
 
 .c.o:
