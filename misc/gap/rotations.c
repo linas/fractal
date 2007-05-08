@@ -41,23 +41,23 @@ double scurve (double x)
 	return 0.5 + 0.5 * rot_right (2.0*x-1.0);
 }
 
-/* s-curve repeated n time */
+/* ss-curve repeated n times */
 double ncurve (double x, int n)
 {
 
 	x *= n;
 	double step = floor (x);
 	x -= step;
-	x = scurve (x);
+	x = sscurve (x);
 	x = (step +x) / ((double) n);
 
 	return x;
 }
 
-/* recursive dyadic s-curve -- on power of two */
+/* Dyadic ss-curve -- same as ncurve (x,2**cnt) */
 double rcurve (double x, int cnt)
 {
-	if (0 == cnt) return scurve (x);
+	if (0 == cnt) return sscurve (x);
 
 	if (x<0.5) {
 		x = 0.5 * rcurve (2.0*x, cnt-1);
@@ -68,13 +68,13 @@ double rcurve (double x, int cnt)
 	return x;
 }
 
-/* like the question mark but too strong, and dyadic only */
+/* Like the question mark but too strong, and dyadic only */
 double wcurve (double x, int imax)
 {
 	int i;
 	for (i=0; i<imax; i++)
 	{
-		// x = rcurve (x, imax - i -1);  //  a wacky curve
+		// x = rcurve (x, imax - i -1);  //  interesting wacky curve
 		x = rcurve (x, i);      // like quesiton mark, but too strong
 		// x = ncurve (x, i+1);    // hmm wrong ... 
 		// x = ncurve (x, imax-i); // wrong .. .
@@ -93,6 +93,9 @@ main (int argc, char *argv[])
 	for (i=0; i<imax; i++)
 	{
 		double x = i / ((double) imax);
+		// double y = sscurve(x);
+		// double y = ncurve(x, ir);
+		// double y = rcurve(x, ir);
 		double y = wcurve(x, ir);
 		printf ("%d	%g	%g\n", i, x, y);
 	}
