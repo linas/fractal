@@ -1,7 +1,9 @@
 /*
- * tree.c 
+ * mod-tree.c 
  * draw a binary tree on the hyperbolic upper half-plane
- * cosntructed from modular xforms
+ * (or on poincare disk)
+ * Built algebraically from modular xforms
+ * as opposed to the geometric construction in tree.c
  *
  * Linas Vepstas April 2007
  */

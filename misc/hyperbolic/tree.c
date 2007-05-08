@@ -1,6 +1,9 @@
 /*
  * tree.c 
  * draw a binary tree on the hyperbolic disk, using postscript
+ * This is an explictly geometric construction. For an algebraic
+ * construction of the same thing (which is atad simpler), see
+ * mod-tree.c
  *
  * Linas Vepstas April 2007
  */
