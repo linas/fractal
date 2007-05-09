@@ -45,8 +45,13 @@ double farey_rot_right (double x)
 /* right joined to left */
 double sscurve (double x)
 {
+#if 1
 	if (x<0.5) return 0.5 * dyadic_rot_right (2.0*x);
 	return 0.5 + 0.5 * dyadic_rot_left (2.0*x-1.0);
+#else
+	if (x<0.5) return 0.5 * farey_rot_right (2.0*x);
+	return 0.5 + 0.5 * farey_rot_left (2.0*x-1.0);
+#endif
 }
 
 /* right joined to left */
@@ -109,7 +114,7 @@ main (int argc, char *argv[])
 	}
 	int ir = atoi (argv[1]);
 
-// #define TRY_TO_BUILD_MINKOWSKI
+#define TRY_TO_BUILD_MINKOWSKI
 #ifdef TRY_TO_BUILD_MINKOWSKI
 	int imax = 400;
 	for (i=0; i<imax; i++)
@@ -122,6 +127,8 @@ main (int argc, char *argv[])
 		printf ("%d	%g	%g\n", i, x, y);
 	}
 #endif
+
+#if GRAPH_SIMPLE_ROTATIONS
 	int imax = 400;
 	for (i=0; i<imax; i++)
 	{
@@ -133,5 +140,6 @@ main (int argc, char *argv[])
 		double e = farey_rot_left(d);
 		printf ("%d	%g	%g	%g	%g	%g	%g\n", i, x, a,b,c,d,e);
 	}
+#endif
 
 }
