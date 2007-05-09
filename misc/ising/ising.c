@@ -145,10 +145,14 @@ double energy (double (*interaction)(double), double s, int n)
 {
 	int i;
 
+	double lambda = 0.6;
+	double geo  = 1.0;
+	
 	double en = 0.0;
 	for (i=0; i<n; i++)
 	{
-		en += interaction (s);
+		en += geo* interaction (s);
+		geo *= lambda;
 
 		/* Shift one bit */
 		if (s>= 0.5) s -= 0.5;
@@ -177,14 +181,13 @@ double partition (double (*interaction)(double), int n)
 	for (i=1; i<m; i++)
 	{
 		double x = om * ((double) i);
-		// double y = question_mark (i,m);
-
-		double y = wave (x/M_PI);
+		double y  = x;
+		// y = question_mark (i,m);
+		// y = wave (x/M_PI);
 		
 		double en = energy (interaction, y, n);
-		// double en = energy (interaction, x, n);
 		
-		en = exp (-en);
+		// en = exp (-en);
 		z += delta * en;
 
 		if (i%prt == 0) {
@@ -210,9 +213,9 @@ main (int argc, char * argv[])
 	n = atoi (argv[1]);
 
 	printf ("#\n# n=%d\n#\n",n);
-	partition (nearest_neighbor, n);
+	// partition (nearest_neighbor, n);
 	// partition (pabola, n);
-	// partition (tent, n);
+	partition (tent, n);
 	// partition (vq, n);
 	// partition (qtent, n);
 	// partition (kac, n);
