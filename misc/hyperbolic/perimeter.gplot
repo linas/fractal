@@ -4,8 +4,6 @@
 set term png giant size 800,600
 set out 'perimeter.png'
 
-set term postscript eps color
-set out 'perimeter.eps'
 set title "Question Mark vs. Poincare Disk Maps"
 set xlabel ""
 set ylabel ""
@@ -21,7 +19,27 @@ set key left
 # set yrange [-1:1]
 
 plot "perimeter.dat" using 4:2 title "(theta(x)/2pi)^-1" with lines linewidth 3, \
-	"perimeter.dat" using 5:2 title "(phi(x)/2pi)^-1" with lines linewidth 3, \
+	"perimeter.dat" using ($5):($2) title "x" with lines linewidth 3, \
 	"perimeter.dat" using 6:2 title "?(x)" with lines linewidth 3
+
+# 	"perimeter.dat" using (0.5*$5):(0.5* $2) title "x" with lines linewidth 3, \
+
+####################################################################
+# This was used to generate the graphics in the paper
+# 
+# set term postscript eps color
+# set out 'perimeter.eps'
+# set title "Question Mark vs. Poincare Disk Maps"
+# set xlabel ""
+# set ylabel ""
+# 
+# set style line 3
+# 
+# set style data line 
+# set key left
+# 
+# plot "perimeter.dat" using 4:2 title "(theta(x)/2pi)^-1" with lines linewidth 3, \
+# 	"perimeter.dat" using 5:2 title "(phi(x)/2pi)^-1" with lines linewidth 3, \
+# 	"perimeter.dat" using 6:2 title "?(x)" with lines linewidth 3
 
 

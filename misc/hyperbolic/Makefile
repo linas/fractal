@@ -15,7 +15,7 @@ tree: tree.o eps.o flt-eps.o
 	cc -c -g -O2 -I $(INC) $<
 
 .o:
-	cc -g -o $@ $^ -L$(LIB) -lfunc -lstdc++ -lm 
+	cc -g -o $@ $^ -L$(LIB) -lfunc -lm 
 
 
 clean:

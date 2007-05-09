@@ -68,6 +68,13 @@ void draw (int n)
 	mobius_t tee = mobius_set (1,1,0,1);
 	mobius_t ess = mobius_set (0,1,-1,0);
 
+	mobius_t vee = mobius_set (0,-1,1,0);
+	mobius_t pee = mobius_set (0,-1,1,1);
+
+	mobius_t ell = mobius_set (1,0,1,1);
+	mobius_t are = mobius_set (1,1,0,1);
+
+
 	mobius_t xfm = ident;
 	// xfm = to_disk (xfm);
 	// xfm = disk_center (cplex_set (0,1));
@@ -76,10 +83,15 @@ void draw (int n)
 	xfm.c = cplex_set (1,0);
 	xfm.d = cplex_set (0,1);
 
+	xfm = mobius_mul (xfm, ell);
+	xfm = mobius_mul (xfm, are);
+#if 0
+	xfm = mobius_mul (xfm, are);
+	xfm = mobius_mul (xfm, pee);
+	xfm = mobius_mul (xfm, pee);
 	xfm = mobius_mul (xfm, ess);
 	xfm = mobius_mul (xfm, tee);
 	xfm = mobius_mul (xfm, ess);
-#if 0
 	xfm = mobius_mul (tee,xfm);
 	xfm = mobius_mul (ess,xfm);
 	xfm = mobius_mul (tee,xfm);
@@ -104,7 +116,7 @@ eps_set_color_blue();
 int
 main (int argc, char * argv[]) 
 {
-	if (argc < 1)
+	if (argc < 2)
 	{
 		fprintf (stderr, "Usage: %s <shift>\n", argv[0]);
 		exit(1);

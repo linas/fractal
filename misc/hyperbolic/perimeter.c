@@ -23,6 +23,21 @@ double delta(double x)
 	return 1.0/question_inverse (4.0-4.0*x);
 }
 
+/* hyperbolic rotations to the left and to the right */
+double rot_left (double x)
+{
+	if (x<0.25) return 2.0*x;
+	if (x<0.5) return x+0.25;
+	return 0.5*x+0.5;
+}
+
+double rot_right (double x)
+{
+	if (x<0.5) return 0.5*x;
+	if (x<0.75) return x-0.25;
+	return 2.0*(x-0.5);
+}
+
 main()
 {
 	int i;
@@ -35,16 +50,21 @@ main()
 		// double t = dyadic_to_stern_brocot(x);
 		double t = delta(x);
 
-		double theta = atan2 (-2.0*t, t*t-1.0);
-		double phi = atan2 (-4.0*t, t*t-4.0);
 		// double u = atan2 (-t, t*t-0.25);
-
+		double theta = atan2 (-2.0*t, t*t-1.0);
 		if (0.0> theta) theta += 2.0*M_PI;
 		theta /= 2.0*M_PI;
 		
+		double phi = atan2 (-4.0*t, t*t-4.0);
 		if (0.0> phi) phi += 2.0*M_PI;
 		phi /= 2.0*M_PI;
-		
+
+		t = delta(rot_left (x));		
+		phi = atan2 (-2.0*t, t*t-1.0);
+		if (0.0> phi) phi += 2.0*M_PI;
+		phi /= 2.0*M_PI;
+		phi = rot_right (phi);
+
 		// double q = question_mark (i,deno);
 		double q = question_inverse (x);
 
