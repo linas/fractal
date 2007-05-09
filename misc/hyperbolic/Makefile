@@ -3,12 +3,13 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES= mod-tree perimeter tree
+EXES= mod-tree perimeter rotations tree
 
 all: $(EXES)
 
 mod-tree: mod-tree.o eps.o flt-eps.o
 perimeter: perimeter.o 
+rotations: rotations.o 
 tree: tree.o eps.o flt-eps.o
 
 .c.o:
@@ -25,6 +26,7 @@ realclean: clean
 	rm -f $(EXES)  *.png
 
 
+rotations.o:	rotations.c
 perimeter.o:	perimeter.c 
 mod-tree.o:	mod-tree.c eps.h flt-eps.h
 tree.o:	tree.c eps.h flt-eps.h
