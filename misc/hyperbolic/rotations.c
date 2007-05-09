@@ -13,14 +13,14 @@
 #include <stdlib.h>
 
 /* hyperbolic rotations to the left and to the right */
-double rot_left (double x)
+double dyadic_rot_left (double x)
 {
 	if (x<0.25) return 2.0*x;
 	if (x<0.5) return x+0.25;
 	return 0.5*x+0.5;
 }
 
-double rot_right (double x)
+double dyadic_rot_right (double x)
 {
 	if (x<0.5) return 0.5*x;
 	if (x<0.75) return x-0.25;
@@ -30,15 +30,15 @@ double rot_right (double x)
 /* right joined to left */
 double sscurve (double x)
 {
-	if (x<0.5) return 0.5 * rot_right (2.0*x);
-	return 0.5 + 0.5 * rot_left (2.0*x-1.0);
+	if (x<0.5) return 0.5 * dyadic_rot_right (2.0*x);
+	return 0.5 + 0.5 * dyadic_rot_left (2.0*x-1.0);
 }
 
 /* right joined to left */
 double scurve (double x)
 {
-	if (x<0.5) return 0.5 * rot_left (2.0*x);
-	return 0.5 + 0.5 * rot_right (2.0*x-1.0);
+	if (x<0.5) return 0.5 * dyadic_rot_left (2.0*x);
+	return 0.5 + 0.5 * dyadic_rot_right (2.0*x-1.0);
 }
 
 /* ss-curve repeated n times */
@@ -87,8 +87,15 @@ main (int argc, char *argv[])
 {
 	int i;
 
+	if (argc<2)
+	{
+		fprintf (stderr, "Usage: %s <recursion-level>\n", argv[0]);
+		exit (1);
+	}
 	int ir = atoi (argv[1]);
 
+// #define TRY_TO_BUILD_MINKOWSKI
+#ifdef TRY_TO_BUILD_MINKOWSKI
 	int imax = 400;
 	for (i=0; i<imax; i++)
 	{
@@ -99,4 +106,17 @@ main (int argc, char *argv[])
 		double y = wcurve(x, ir);
 		printf ("%d	%g	%g\n", i, x, y);
 	}
+#endif
+	int imax = 400;
+	for (i=0; i<imax; i++)
+	{
+		double x = i / ((double) imax);
+		double a = dyadic_rot_right(x);
+		double b = dyadic_rot_left(x);
+		double c = dyadic_rot_left(b);
+		double d = dyadic_rot_left(c);
+		double e = dyadic_rot_left(d);
+		printf ("%d	%g	%g	%g	%g	%g	%g\n", i, x, a,b,c,d,e);
+	}
+
 }
