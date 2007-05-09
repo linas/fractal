@@ -27,6 +27,21 @@ double dyadic_rot_right (double x)
 	return 2.0*(x-0.5);
 }
 
+/* hyperbolic rotations to the left and to the right */
+double farey_rot_left (double x)
+{
+	if (3*x<1) return x/(1.0-x);
+	if (x<0.5) return (4*x-1)/(5*x-1);
+	return 1.0/(2.0-x);
+}
+
+double farey_rot_right (double x)
+{
+	if (x<0.5) return x/(1.0+x);
+	if (3*x<2) return (1-x)/(4-5*x);
+	return (2*x-1)/x;
+}
+
 /* right joined to left */
 double sscurve (double x)
 {
@@ -111,11 +126,11 @@ main (int argc, char *argv[])
 	for (i=0; i<imax; i++)
 	{
 		double x = i / ((double) imax);
-		double a = dyadic_rot_right(x);
-		double b = dyadic_rot_left(x);
-		double c = dyadic_rot_left(b);
-		double d = dyadic_rot_left(c);
-		double e = dyadic_rot_left(d);
+		double a = farey_rot_right(x);
+		double b = farey_rot_left(x);
+		double c = farey_rot_left(b);
+		double d = farey_rot_left(c);
+		double e = farey_rot_left(d);
 		printf ("%d	%g	%g	%g	%g	%g	%g\n", i, x, a,b,c,d,e);
 	}
 
