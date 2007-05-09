@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* hyperbolic rotatins to the left and to the right */
+/* hyperbolic rotations to the left and to the right */
 double rot_left (double x)
 {
 	if (x<0.25) return 2.0*x;
