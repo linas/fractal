@@ -24,6 +24,7 @@ void eps_setup_basic_linstyles (void);
 void eps_set_color_red (void);
 void eps_set_color_green (void);
 void eps_set_color_blue (void);
+void eps_set_color (int r, int g, int b);
 
 /* =============================================== */
 
