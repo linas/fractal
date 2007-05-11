@@ -41,8 +41,9 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 	depth --;
 
 	cplex tip;
-	if (lr) tip = cplex_set(0.5,0.5*sqrt(3.0));
-	else tip = cplex_set(-0.5,0.5*sqrt(3.0));
+	// if (lr) tip = cplex_set(0.5,0.5*sqrt(3.0));
+	// else tip = cplex_set(-0.5,0.5*sqrt(3.0));
+	tip  = cplex_set (0.0,1.0);
 
 eps_set_color_red();
 	mobius_t are;
@@ -103,19 +104,18 @@ void draw (int n)
 	mobius_t ell = mobius_set (1,0,1,1);
 	mobius_t are = mobius_set (1,1,0,1);
 
-
 	mobius_t xfm = ident;
 
-#if DISK_COORDS
-	/* The following are inappropriate for disk coords */
-	// xfm = to_disk (xfm);
-	// xfm = disk_center (cplex_set (0,1));
+	double theta = M_PI*2.0/3.0;
+	double co = cos (theta);
+	double si = sin (theta);
+	xfm = mobius_set (co,-si,si,co);
 
+
+// #define DISK_COORDS
+#ifdef DISK_COORDS
 	/* The following sets up a transform to disk coords */
-	xfm.a = cplex_set (1,0);
-	xfm.b = cplex_set (0,-1);
-	xfm.c = cplex_set (1,0);
-	xfm.d = cplex_set (0,1);
+	xfm = to_disk_xform (xfm);
 #endif
 
 #if 0
