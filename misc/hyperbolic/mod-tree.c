@@ -44,39 +44,49 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 	if (lr) tip = cplex_set(0.5,0.5*sqrt(3.0));
 	else tip = cplex_set(-0.5,0.5*sqrt(3.0));
 
-// eps_set_color_red();
+eps_set_color_red();
 	mobius_t are;
 	if (lr) are = mobius_set (1,1,0,1);
 	else are = mobius_set (1,-1,0,1);
 
+	mobius_t mr = mobius_mul (m,are);
+
 	cplex zb = mobius_xform (are, tip);
-	draw_seg (m, tip, zb);
+	draw_arc (m, tip, zb);
+
+	recursive_draw_binary_tree (depth, lr, draw_fund, mr);
+
+	// seems to have the right curves
+eps_set_color_green();
+	mobius_t ell;
+	if (lr) ell = mobius_set (1,0,1,1);
+	else ell = mobius_set (1,0,-1,1);
+
+	zb = mobius_xform (ell, tip);
+	draw_arc (m, tip, zb);
+
+	mobius_t ml = mobius_mul (m,ell);
+	recursive_draw_binary_tree (depth, lr, draw_fund, ml);
 
 	if (draw_fund)
 	{
 		eps_set_color(240,130,0);
 		printf ("[0.02 0.01 0.005 0.01] 1 setdash\n");
 
-		cplex top = cplex_set(-1,0);
-		draw_seg (m, top, tip);
+		// good
+		cplex tap = cplex_set(0.5,0.5*sqrt(3.0));
+		cplex top = cplex_set(0,0);
+		draw_arc (m, top, tap);
+
+#if 0
+		top = cplex_set(0,1160);
+		cplex tep = cplex_set(-0.5,0.5*sqrt(3.0));
+		draw_arc (m, top, tep);
+#endif
 
 		eps_set_color(0,70,220);
 		printf ("[] 0 setdash\n");
 	}
-
-	mobius_t mr = mobius_mul (m,are);
-	recursive_draw_binary_tree (depth, lr, draw_fund, mr);
-
-// eps_set_color_green();
-	mobius_t ell;
-	if (lr) ell = mobius_set (1,0,1,1);
-	else ell = mobius_set (1,0,-1,1);
-
-	zb = mobius_xform (ell, tip);
-	draw_seg (m, tip, zb);
-
-	mobius_t ml = mobius_mul (m,ell);
-	recursive_draw_binary_tree (depth, lr, draw_fund, ml);
 }
 
 /* ========================================================= */
@@ -135,7 +145,7 @@ eps_set_color_blue();
 	cplex rtip = cplex_set(-0.5,0.5*sqrt(3.0));
 
 // eps_set_color_blue();
-	draw_seg (xfm, ltip, rtip);
+	draw_arc (xfm, ltip, rtip);
 }
 
 /* ==================================================== */

@@ -18,10 +18,27 @@ void draw_seg(mobius_t m, cplex zf, cplex zt)
 {
 	cplex za = mobius_xform (m, zf);
 	cplex zb = mobius_xform (m, zt);
+
+	// clip anything taller than yclip
+	double yclip = 5;
+	if (yclip <za.im)
+	{
+		double m = (zb.im-za.im)/(zb.re-za.re);
+		double xclip = zb.re +(yclip-zb.im)/m;
+		za.re = xclip;
+		za.im = yclip;
+	}
+	if (yclip <zb.im)
+	{
+		double m = (zb.im-za.im)/(zb.re-za.re);
+		double xclip = za.re +(yclip-za.im)/m;
+		zb.re = xclip;
+		zb.im = yclip;
+	}
 	eps_draw_lineseg (za.re, za.im, zb.re, zb.im);
 }
 
-/* draw line segment in the klein model */
+/* Draw line segment in the klein model */
 void draw_klein_seg(mobius_t m, cplex zf, cplex zt)
 {
 	cplex za = mobius_xform (m, zf);
@@ -34,7 +51,7 @@ void draw_klein_seg(mobius_t m, cplex zf, cplex zt)
 	eps_draw_lineseg (za.re, za.im, zb.re, zb.im);
 }
 
-/* draw statically-tesselated arc */
+/* Draw statically-tesselated arc */
 void draw_tesselated_arc(mobius_t m, cplex zf, cplex zt)
 {
 	int i;
@@ -68,6 +85,23 @@ void draw_arc(mobius_t m, cplex zf, cplex zt)
 {
 	int i;
 	int nseg=20;
+
+	// clip anything taller than yclip
+	double yclip = 5;
+	if (yclip <zf.im)
+	{
+		double m = (zt.im-zf.im)/(zt.re-zf.re);
+		double xclip = zt.re +(yclip-zt.im)/m;
+		zf.re = xclip;
+		zf.im = yclip;
+	}
+	if (yclip <zt.im)
+	{
+		double m = (zt.im-zf.im)/(zt.re-zf.re);
+		double xclip = zf.re +(yclip-zf.im)/m;
+		zt.re = xclip;
+		zt.im = yclip;
+	}
 
 	cplex zstart = zf;
 	cplex zdelta = cplex_scale((1.0/(double)nseg), cplex_sub (zt,zf));
