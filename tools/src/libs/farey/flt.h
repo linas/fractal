@@ -18,19 +18,9 @@ typedef struct {
 	cplex a,b,c,d;
 } mobius_t;
 
-/* Create an element of SL(2,Z). Its up to user to ensure
+/* Create an element of SL(2,R). Its up to user to ensure
  * that ad-bc=1 */
-static inline mobius_t mobius_set(int a, int b, int c, int d)
-{
-	mobius_t m;
-	m.a = cplex_set (a, 0);
-	m.b = cplex_set (b, 0);
-	m.c = cplex_set (c, 0);
-	m.d = cplex_set (d, 0);
-	return m;
-}
-
-static inline mobius_t mobius_set_d(double a, double b, double c, double d)
+static inline mobius_t mobius_set(double a, double b, double c, double d)
 {
 	mobius_t m;
 	m.a = cplex_set (a, 0);
