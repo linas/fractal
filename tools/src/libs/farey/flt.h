@@ -112,8 +112,12 @@ static inline mobius_t disk_center (cplex w)
 	return m;
 }
 
-/* Return a mobius transform that maps the point z=+1 to the 
- * center of the Poincare disk */
+/**
+ * Return a mobius transform that maps the point z=0 (the 
+ * center of the Poincare disk) to z=i of the half-plane.
+ * More generally, the frac lin xform will take any
+ * point of the disk and map it to a point in the half-plane.
+ */
 static inline mobius_t to_half_plane_xform(void)
 {
 	mobius_t m;
@@ -124,7 +128,31 @@ static inline mobius_t to_half_plane_xform(void)
 	return m;
 }
 
-/* convert a half-plane xform to a disk xform */
+/**
+ * Return a mobius transform that maps the point z=+i to the 
+ * center of the Poincare disk */
+static inline mobius_t to_disk_xform(void)
+{
+	mobius_t m;
+#if XX
+	m.a = cplex_set (1.0, 0.0);
+	m.b = cplex_set (0.0, -1.0);
+	m.c = cplex_set (1.0, 0.0);
+	m.d = cplex_set (0.0, 1.0);
+#endif
+
+	m.a = cplex_set (0.0, 0.5);
+	m.b = cplex_set (0.5, 0.0);
+	m.c = cplex_set (0.0, 0.5);
+	m.d = cplex_set (-0.5, 0.0);
+	return m;
+}
+
+/**
+ * Convert a half-plane xform to a disk xform 
+ * This is just a similarity xform given by
+ * return mobius_mul( mobius_mul (to_disk_xform(), m), to_half_plane_xform())
+ */
 static inline mobius_t to_disk(mobius_t m)
 {
 	cplex apd = cplex_add (m.a, m.d);
@@ -141,7 +169,11 @@ static inline mobius_t to_disk(mobius_t m)
 	return n;
 }
 
-/* convert a disk xform to a plane xform */
+/**
+ * Convert a disk xform to a plane xform 
+ * This is just a similarity xform given by
+ * return mobius_mul( mobius_mul (to_half_plane_xform(), m), to_disk_xform())
+ */
 static inline mobius_t to_half_plane(mobius_t m)
 {
 	cplex apd = cplex_add (m.a, m.d);
