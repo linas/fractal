@@ -27,6 +27,39 @@ void eps_setup_plane (void)
 	printf ("0.4 1.6 scale\n");
 }
 
+void draw_geo (mobius_t m, cplex a, cplex b)
+{
+	cplex z0 = mobius_xform (m,a);
+	cplex z1 = mobius_xform (m,b);
+	cplex zm = cplex_add (z0,z1);
+	zm = cplex_scale (0.5, zm);
+	double slope = (z1.im-z0.im)/(z1.re-z0.re);
+	double xcenter = slope*zm.im+zm.re;
+printf ("duude xc=%g\n", xcenter);
+	
+	double t0 = atan2 (z0.im, z0.re);
+	double t1 = atan2 (z1.im, z1.re);
+	int npts =20;
+	double delta = (t1-t0)/npts;
+
+	double dc = cos(delta);
+	double ds = sin(delta);
+
+	double xa = z0.re-xcenter;
+	double ya = z0.im;
+
+	int i;
+	for (i=0; i<npts; i++)
+	{
+		double xb = xa*dc - ya*ds;
+		double yb = xa*ds + ya*dc;
+		eps_draw_lineseg (xa+xcenter, ya, xb+xcenter,yb);
+		xa = xb;
+		ya = yb;
+
+	}
+}
+
 /* ========================================================= */
 
 /**
@@ -41,9 +74,9 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 	depth --;
 
 	cplex tip;
-	// if (lr) tip = cplex_set(0.5,0.5*sqrt(3.0));
-	// else tip = cplex_set(-0.5,0.5*sqrt(3.0));
-	tip  = cplex_set (0.0,1.0);
+	if (lr) tip = cplex_set(0.5,0.5*sqrt(3.0));
+	else tip = cplex_set(-0.5,0.5*sqrt(3.0));
+	// tip  = cplex_set (0.0,1.0);
 
 eps_set_color_red();
 	mobius_t are;
@@ -106,12 +139,6 @@ void draw (int n)
 
 	mobius_t xfm = ident;
 
-	double theta = M_PI*2.0/3.0;
-	double co = cos (theta);
-	double si = sin (theta);
-	xfm = mobius_set (co,-si,si,co);
-
-
 // #define DISK_COORDS
 #ifdef DISK_COORDS
 	/* The following sets up a transform to disk coords */
@@ -136,6 +163,7 @@ void draw (int n)
 #endif 
 
 eps_set_color_blue();
+#if 0
 // eps_set_color_green();
 	recursive_draw_binary_tree (n,1, 1, xfm);
 // eps_set_color_red();
@@ -143,9 +171,21 @@ eps_set_color_blue();
 
 	cplex ltip = cplex_set(0.5,0.5*sqrt(3.0));
 	cplex rtip = cplex_set(-0.5,0.5*sqrt(3.0));
+#endif
 
+	cplex ltip = cplex_set(0.5,0.5*sqrt(3.0));
+	cplex rtip = cplex_set(-0.5,0.5*sqrt(3.0));
 // eps_set_color_blue();
-	draw_arc (xfm, ltip, rtip);
+	draw_geo (xfm, rtip, ltip);
+
+
+	// draw a splat 
+	printf ("0.0600000 slw\n");
+eps_set_color_red();
+	printf ("n %f %f m %f %f l s\n", -0.04, 1.0, 0.04, 1.0);
+eps_set_color_green();
+	printf ("n %f %f m %f %f l s\n", 0.96, 0.0, 1.04, 0.0);
+	printf ("0.010000 slw\n");
 }
 
 /* ==================================================== */
