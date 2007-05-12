@@ -27,11 +27,23 @@ void eps_setup_plane (void)
 	printf ("0.4 1.6 scale\n");
 }
 
+static int drawdash=0;
+
 /* draw a formal geodesic */
 void draw_geo (mobius_t m, cplex a, cplex b)
 {
 	cplex z0 = mobius_xform (m,a);
 	cplex z1 = mobius_xform (m,b);
+
+	/* vertical clip */
+	if (100.0 < z0.im) {
+		z0.im = 100;
+		z0.re = z1.re;
+	}
+	if (100.0 < z1.im) {
+		z1.im = 100;
+		z1.re = z0.re;
+	}
 
 	/* if the points are above one-another... */
 	double dx = z1.re - z0.re;
@@ -49,7 +61,25 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	
 	double t0 = atan2 (z0.im, z0.re - xcenter);
 	double t1 = atan2 (z1.im, z1.re - xcenter);
+
+#ifdef POSTSCRIPT_ARC
+	double radius = sqrt((z0.re - xcenter)*(z0.re - xcenter)+z0.im*z0.im);
 	
+	if (t0>t1) {
+		cplex tmp = z0;
+		z0 = z1;
+		z1 = tmp;
+
+		double t = t0;
+		t0 = t1;
+		t1 = t;
+	}
+	printf ("n %f %f m %f %f %f %f %f a s\n",
+		z0.re, z0.im, xcenter, 0.0,  radius, t0*180/M_PI, t1*180/M_PI);
+#endif
+
+#define HOMEMADE_ARC
+#ifdef HOMEMADE_ARC
 	int npts = 20*fabs(t1-t0);
 	double delta = (t1-t0)/npts;
 
@@ -60,15 +90,21 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	double ya = z0.im;
 
 	int i;
+	double len = 0;
 	for (i=0; i<npts; i++)
 	{
 		double xb = xa*dc - ya*ds;
 		double yb = xa*ds + ya*dc;
+		if (drawdash) {
+			printf ("[0.02 0.01 0.005 0.01] %f setdash\n", len);
+			len += sqrt ((yb-ya)*(yb-ya) + (xb-xa)*(xb-xa));
+		}
 		eps_draw_lineseg (xa+xcenter, ya, xb+xcenter,yb);
 		xa = xb;
 		ya = yb;
 
 	}
+#endif
 }
 
 /* ========================================================= */
@@ -112,20 +148,28 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 
 	if (draw_fund)
 	{
+		cplex top;
 		eps_set_color(240,130,0);
-		printf ("[0.02 0.01 0.005 0.01] 1 setdash\n");
+		printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
+		drawdash=1;
 
-		// good
-		cplex tap = cplex_set(0.5,0.5*sqrt(3.0));
-		cplex top = cplex_set(0,0);
+		// the ones on the right side ... 
+		cplex tap;
+		if (lr) tap = cplex_set(0.5,0.5*sqrt(3.0));
+		else tap = cplex_set(-0.5,0.5*sqrt(3.0));
+		top = cplex_set(0,0);
 		draw_geo (m, top, tap);
 
-		top = cplex_set(0,1e20);
-		cplex tep = cplex_set(-0.5,0.5*sqrt(3.0));
-		draw_arc (m, top, tep);
+		// the cusps on the left side ... 
+		top = cplex_set(0,1e8);
+		cplex tep;
+		if (lr) tep = cplex_set(-0.5,0.5*sqrt(3.0));
+		else tep = cplex_set(0.5,0.5*sqrt(3.0));
+		draw_geo (m, top, tep);
 
 		eps_set_color(0,70,220);
 		printf ("[] 0 setdash\n");
+		drawdash=0;
 	}
 }
 
@@ -169,6 +213,7 @@ void draw (int n)
 #endif 
 
 eps_set_color_blue();
+eps_set_color(0,70,220);
 // eps_set_color_green();
 	recursive_draw_binary_tree (n,1, 1, xfm);
 // eps_set_color_red();
@@ -176,13 +221,6 @@ eps_set_color_blue();
 
 	cplex ltip = cplex_set(-0.5,0.5*sqrt(3.0));
 	cplex rtip = cplex_set(0.5,0.5*sqrt(3.0));
-
-// eps_set_color_blue();
-	draw_geo (xfm, ltip, rtip);
-
-	ltip = cplex_set(0.5,0.5*sqrt(3.0));
-	rtip = cplex_set(1.5,0.5*sqrt(3.0));
-
 	draw_geo (xfm, ltip, rtip);
 
 
@@ -190,9 +228,11 @@ eps_set_color_blue();
 	printf ("0.0600000 slw\n");
 eps_set_color_red();
 	printf ("n %f %f m %f %f l s\n", -0.04, 1.0, 0.04, 1.0);
+#if 0
 eps_set_color_green();
 	printf ("n %f %f m %f %f l s\n", 0.96, 0.0, 1.04, 0.0);
 	printf ("0.010000 slw\n");
+#endif
 }
 
 /* ==================================================== */
