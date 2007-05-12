@@ -27,6 +27,7 @@ void eps_setup_plane (void)
 	printf ("0.4 1.6 scale\n");
 }
 
+/* draw a formal geodesic */
 void draw_geo (mobius_t m, cplex a, cplex b)
 {
 	cplex z0 = mobius_xform (m,a);
@@ -48,7 +49,8 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	
 	double t0 = atan2 (z0.im, z0.re - xcenter);
 	double t1 = atan2 (z1.im, z1.re - xcenter);
-	int npts =20;
+	
+	int npts = 20*fabs(t1-t0);
 	double delta = (t1-t0)/npts;
 
 	double dc = cos(delta);
@@ -86,7 +88,6 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 	if (lr) tip = cplex_set(0.5,0.5*sqrt(3.0));
 	else tip = cplex_set(-0.5,0.5*sqrt(3.0));
 
-eps_set_color_red();
 	mobius_t are;
 	if (lr) are = mobius_set (1,1,0,1);
 	else are = mobius_set (1,-1,0,1);
@@ -99,7 +100,6 @@ eps_set_color_red();
 	recursive_draw_binary_tree (depth, lr, draw_fund, mr);
 
 	// seems to have the right curves
-eps_set_color_green();
 	mobius_t ell;
 	if (lr) ell = mobius_set (1,0,1,1);
 	else ell = mobius_set (1,0,-1,1);
@@ -120,11 +120,9 @@ eps_set_color_green();
 		cplex top = cplex_set(0,0);
 		draw_geo (m, top, tap);
 
-#if 0
-		top = cplex_set(0,1160);
+		top = cplex_set(0,1e20);
 		cplex tep = cplex_set(-0.5,0.5*sqrt(3.0));
 		draw_arc (m, top, tep);
-#endif
 
 		eps_set_color(0,70,220);
 		printf ("[] 0 setdash\n");
@@ -173,10 +171,8 @@ void draw (int n)
 eps_set_color_blue();
 // eps_set_color_green();
 	recursive_draw_binary_tree (n,1, 1, xfm);
-#if 0
 // eps_set_color_red();
 	recursive_draw_binary_tree (n,0, 1, xfm);
-#endif
 
 	cplex ltip = cplex_set(-0.5,0.5*sqrt(3.0));
 	cplex rtip = cplex_set(0.5,0.5*sqrt(3.0));
