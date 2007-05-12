@@ -31,14 +31,23 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 {
 	cplex z0 = mobius_xform (m,a);
 	cplex z1 = mobius_xform (m,b);
+
+	/* if the points are above one-another... */
+	double dx = z1.re - z0.re;
+	if ((1e-4>dx) && (-1e-4 < dx))
+	{
+		eps_draw_lineseg (z0.re, z0.im, z1.re, z1.im);
+		return;
+	}
+	
+	/* else draw geodesic */
 	cplex zm = cplex_add (z0,z1);
 	zm = cplex_scale (0.5, zm);
 	double slope = (z1.im-z0.im)/(z1.re-z0.re);
 	double xcenter = slope*zm.im+zm.re;
-printf ("duude xc=%g\n", xcenter);
 	
-	double t0 = atan2 (z0.im, z0.re);
-	double t1 = atan2 (z1.im, z1.re);
+	double t0 = atan2 (z0.im, z0.re - xcenter);
+	double t1 = atan2 (z1.im, z1.re - xcenter);
 	int npts =20;
 	double delta = (t1-t0)/npts;
 
@@ -76,7 +85,6 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 	cplex tip;
 	if (lr) tip = cplex_set(0.5,0.5*sqrt(3.0));
 	else tip = cplex_set(-0.5,0.5*sqrt(3.0));
-	// tip  = cplex_set (0.0,1.0);
 
 eps_set_color_red();
 	mobius_t are;
@@ -86,7 +94,7 @@ eps_set_color_red();
 	mobius_t mr = mobius_mul (m,are);
 
 	cplex zb = mobius_xform (are, tip);
-	draw_arc (m, tip, zb);
+	draw_geo (m, tip, zb);
 
 	recursive_draw_binary_tree (depth, lr, draw_fund, mr);
 
@@ -97,7 +105,7 @@ eps_set_color_green();
 	else ell = mobius_set (1,0,-1,1);
 
 	zb = mobius_xform (ell, tip);
-	draw_arc (m, tip, zb);
+	draw_geo (m, tip, zb);
 
 	mobius_t ml = mobius_mul (m,ell);
 	recursive_draw_binary_tree (depth, lr, draw_fund, ml);
@@ -110,7 +118,7 @@ eps_set_color_green();
 		// good
 		cplex tap = cplex_set(0.5,0.5*sqrt(3.0));
 		cplex top = cplex_set(0,0);
-		draw_arc (m, top, tap);
+		draw_geo (m, top, tap);
 
 #if 0
 		top = cplex_set(0,1160);
@@ -163,20 +171,23 @@ void draw (int n)
 #endif 
 
 eps_set_color_blue();
-#if 0
 // eps_set_color_green();
 	recursive_draw_binary_tree (n,1, 1, xfm);
+#if 0
 // eps_set_color_red();
 	recursive_draw_binary_tree (n,0, 1, xfm);
-
-	cplex ltip = cplex_set(0.5,0.5*sqrt(3.0));
-	cplex rtip = cplex_set(-0.5,0.5*sqrt(3.0));
 #endif
 
-	cplex ltip = cplex_set(0.5,0.5*sqrt(3.0));
-	cplex rtip = cplex_set(-0.5,0.5*sqrt(3.0));
+	cplex ltip = cplex_set(-0.5,0.5*sqrt(3.0));
+	cplex rtip = cplex_set(0.5,0.5*sqrt(3.0));
+
 // eps_set_color_blue();
-	draw_geo (xfm, rtip, ltip);
+	draw_geo (xfm, ltip, rtip);
+
+	ltip = cplex_set(0.5,0.5*sqrt(3.0));
+	rtip = cplex_set(1.5,0.5*sqrt(3.0));
+
+	draw_geo (xfm, ltip, rtip);
 
 
 	// draw a splat 
