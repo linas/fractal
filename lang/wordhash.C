@@ -8,6 +8,7 @@
 // January 1997 Linas Vepstas
 
 #include <stdio.h>
+#include <string.h>
 
 #include "top.h"
 #include "wordhash.h"

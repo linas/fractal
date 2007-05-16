@@ -27,7 +27,7 @@
 #ifndef __LAG_PAIR_TABLE_H__
 #define __LAG_PAIR_TABLE_H__
 
-#include <typedefs.h>
+#include <ctype.h>
 #include "config.h"
 
 #ifndef LAG_WORD_TUPLE
