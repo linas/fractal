@@ -558,12 +558,10 @@ main (int argc, char * argv[]) {
 
    texan -> Dump();
 
-/*
    for (int i=0; i<LAG_TOP_TEN; i++) {
       printf ("\n\n =========== sentance %d =========== \n", i);
       texan -> Chain (i);
    }
-*/
 
 }
 
