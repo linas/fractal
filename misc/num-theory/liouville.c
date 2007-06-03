@@ -51,6 +51,8 @@ int main ()
 			// lead = sum;
 			// lead -= 0.5*i*logl(i);
 			// printf ("%d	%d	%26.18Lg\n", i, d, lead);
+
+			/* print locations where conjecture is false */
 			printf ("%d	%d	%26.18Lg	%d\n", i, d, inf, (0<lead));
 			printf ("%d	%d	%26.18Lg	%d\n", i, d, sup, (0<lead));
 			fflush (stdout);
