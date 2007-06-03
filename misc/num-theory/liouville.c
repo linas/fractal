@@ -2,7 +2,7 @@
 /*
  * liouville.c
  *
- * Graphs of series involving lioville function.
+ * Graphs of series involving Liouville function.
  * These are ordinary x-y plots; output is 
  * ascii list of x-y values
  *
@@ -18,8 +18,16 @@ int main ()
 {
 	int i;
 
-	int nmax = 10000;
-	int scale = 20;
+	/* polya conjecture broken at n=906150257 also n=906180359 */
+	// int nmax = 10000;
+	unsigned long nmax = 1<<31;
+	double logscale = 2.0;
+	int scale = logscale;
+
+	/* npoints = number of points in the graph */
+	int npoints = 500;
+	double scale_delta = exp (log((double)nmax) / npoints);
+	printf ("#\n# step scale factor = %g\n#\n", scale_delta);
 
 	int sum = 0;
 	long double lead=0.0L;
@@ -33,7 +41,7 @@ int main ()
 		int d = liouville_lambda (i);
 		// int d = liouville_omega (i);
 		sum += d;
-		lead += d / ((long double) i);
+		// lead += d / ((long double) i);
 		lead = sum;
 
 		if (inf>lead) inf=lead;
@@ -47,6 +55,9 @@ int main ()
 			printf ("%d	%d	%26.18Lg\n", i, d, sup);
 			inf = 1.0e100;
 			sup = -1.0e100;
+
+			logscale *= scale_delta;
+			scale = logscale;
 		}
 	}
 }
