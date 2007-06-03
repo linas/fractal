@@ -53,6 +53,7 @@ int main ()
 			// printf ("%d	%d	%26.18Lg\n", i, d, lead);
 			printf ("%d	%d	%26.18Lg\n", i, d, inf);
 			printf ("%d	%d	%26.18Lg\n", i, d, sup);
+			fflush (stdout);
 			inf = 1.0e100;
 			sup = -1.0e100;
 
