@@ -22,21 +22,21 @@ dist:
 	tar -zcvf num.tgz *.c *.gplot Makefile .cvsignore
 
 .c.o:
-	$(CC) -c -O2 $<
+	$(CC) -c -O2 -I$(INC) $<
 
 .o:
-	$(CC) -o $* $^ -lm
+	$(CC) -o $* $^ -L$(LIB) -lfunc -lm
 
 
-angular:	angular.o $(LIB)/cache.o $(LIB)/gcf.o $(LIB)/modular.o $(LIB)/moebius.o $(LIB)/totient.o
+angular:	angular.o 
 buddy:	buddy.o
-divisor:	divisor.o $(LIB)/cache.o $(LIB)/moebius.o
-hyperg:	hyperg.o $(LIB)/modular.o
-liouville:	liouville.o $(LIB)/cache.o $(LIB)/gcf.o $(LIB)/moebius.o
-mertens:	mertens.o $(LIB)/cache.o $(LIB)/gcf.o $(LIB)/moebius.o
-ndist:	ndist.o $(LIB)/gcf.o $(LIB)/totient.o
-series:	series.o $(LIB)/cache.o $(LIB)/gcf.o $(LIB)/modular.o $(LIB)/moebius.o $(LIB)/totient.o 
-von_mangoldt:	von_mangoldt.o $(LIB)/cache.o $(LIB)/gcf.o $(LIB)/moebius.o
+divisor:	divisor.o
+hyperg:	hyperg.o
+liouville:	liouville.o
+mertens:	mertens.o 
+ndist:	ndist.o
+series:	series.o  
+von_mangoldt:	von_mangoldt.o
 
 ndist.o:	ndist.c $(INC)/gcf.h $(INC)/totient.h 
 
