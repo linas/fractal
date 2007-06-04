@@ -20,12 +20,15 @@ int main ()
 
 	/* polya conjecture broken at n=906150257 also n=906180359 */
 	// int nmax = 10000;
+	// unsigned long long nmax = (1<<31) + (1<<30) + (1<<29);
+	// nmax <<= 3;
 	unsigned long nmax = (1<<31) + (1<<30) + (1<<29);
 	double logscale = 2.0;
 	int scale = logscale;
 
 	/* npoints = number of points in the graph */
 	int npoints = 900;
+	// int npoints = 4000;
 	double scale_delta = exp (log((double)nmax) / npoints);
 	printf ("#\n# step scale factor = %g\n#\n", scale_delta);
 
@@ -46,7 +49,7 @@ int main ()
 
 		if (inf>lead) inf=lead;
 		if (sup<lead) sup=lead;
-		if (0 == i%scale)
+		if (0 == i%scale || ((906100000<i)&&(i<906500000)&&(i%400==0)))
 		{
 			// lead = sum;
 			// lead -= 0.5*i*logl(i);
@@ -54,7 +57,7 @@ int main ()
 
 			/* print locations where conjecture is false */
 			printf ("%d	%d	%26.18Lg\n", i, d, inf);
-			if (0 < sup)
+			if ((0 < sup) && (inf < 0))
 			{
 				printf ("%d	%d	-1\n", i, d);
 				printf ("%d	%d	1\n", i, d);

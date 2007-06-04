@@ -31,12 +31,12 @@ int main ()
 {
 	int i;
 
-	int nmax = 1000000;
+	int nmax = 100000000;
 	
 	long double sum = 0.0;
 	long double mert = 0.0;
 	long double smooth = 0.0;
-	int scale = 100;
+	int scale = 10000;
 
 	long double offset = log(M_PI);
 	// long double offset = 0.0;
