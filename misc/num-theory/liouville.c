@@ -46,15 +46,20 @@ int main ()
 
 		if (inf>lead) inf=lead;
 		if (sup<lead) sup=lead;
-		if ((0 < lead) || (0 == i%scale))
+		if (0 == i%scale)
 		{
 			// lead = sum;
 			// lead -= 0.5*i*logl(i);
 			// printf ("%d	%d	%26.18Lg\n", i, d, lead);
 
 			/* print locations where conjecture is false */
-			printf ("%d	%d	%26.18Lg	%d\n", i, d, inf, (0<lead));
-			printf ("%d	%d	%26.18Lg	%d\n", i, d, sup, (0<lead));
+			printf ("%d	%d	%26.18Lg\n", i, d, inf);
+			if (0 < sup)
+			{
+				printf ("%d	%d	-1\n", i, d);
+				printf ("%d	%d	1\n", i, d);
+			}
+			printf ("%d	%d	%26.18Lg\n", i, d, sup);
 			fflush (stdout);
 			inf = 1.0e100;
 			sup = -1.0e100;
