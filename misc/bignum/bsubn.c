@@ -16,6 +16,9 @@
 #include <gsl/gsl_sf_psi.h>
 
 #include "mp-binomial.h"
+#include "mp-consts.h"
+#include "mp-misc.h"
+#include "mp-trig.h"
 #include "mp-zeta.h"
 
 double harmonic (double z, unsigned int prec, unsigned int norder)
@@ -315,8 +318,8 @@ int main (int argc, char * argv[])
 	printf ("# computed up to order of %d \n", norder);
 	printf ("# computed with %d bits of default mpf \n", bits);
 	fflush (stdout);
-	for (n=2590; n<2600; n++)
-	// for (n=0; n<norder; n++)
+	// for (n=2590; n<2600; n++)
+	for (n=0; n<norder; n++)
 	{
 		a_sub_n (a_n, w, n, prec);
 
@@ -352,17 +355,18 @@ int main (int argc, char * argv[])
 		mpf_sqrt (sq, en);
 		mpf_sqrt (sq, sq);
 		mpf_div (prod, prod, sq);
-#endif
+#endif /* B_N_SCALE */
 		
 		printf ("%d\t",n+1);
 		fp_prt ("", prod);
 		// fp_prt ("", a_n);
 		// fp_prt ("", b_n);
+		printf("\n");
 		fflush (stdout);
 	}
-#endif
+#endif /* A_SUB_N */
 	
-// #define B_SUB_N
+#define B_SUB_N
 #ifdef B_SUB_N
 
 	mpf_t b_n, en, pi, sq, term, p_n, prod;
@@ -404,9 +408,10 @@ int main (int argc, char * argv[])
 		fp_prt ("", prod);
 		// fp_prt ("", a_n);
 		// fp_prt ("", b_n);
+		printf("\n");
 		fflush (stdout);
 	}
-#endif
+#endif /* B_SUB_N */
 	
 // #define A_SUB_S
 #ifdef A_SUB_S
