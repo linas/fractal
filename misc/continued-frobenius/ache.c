@@ -103,6 +103,37 @@ b_sub_n (int n)
 	return ((long double) n) * a_sub_n (n-1);
 }
 
+long double 
+b_sub_n_direct (int n)
+{
+	int k;
+	long double val = 0.0L;
+	
+	// minimize roundoff errors by doing this sum first
+	for (k=1; k<n; k++)
+	{
+		val -= 1.0L/((long double) k);
+	}
+	val += 1.0L - M_GAMMA;
+	val *= n;
+	val -= 0.5L;
+
+	// the following sum is still badly behaved
+	long double acc = 0.0L;
+	long double sign = 1.0L;
+	for (k=2; k<=n; k++)
+	{
+		long double term = zetam1(k) +1.0L;
+		term *= binomial (n,k);
+		term *= sign;
+		acc += term;
+		// printf ("duuude a_sub_n k=%d term=%Lg, acc=%Lg\n", k, term, acc);
+		sign = -sign;
+	}
+	// printf ("finally asub_n=%Lg+%Lg\n",val, -acc);
+	return val+acc;
+}
+
 // ==========================================================
 // return the p'th element of the zeroth eigenvector.
 // this is the eigenvector with eigenvalue 1

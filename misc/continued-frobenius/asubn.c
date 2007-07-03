@@ -2,7 +2,7 @@
  * asubn.c
  *
  * Graph of a_sub_n -- for manuscript
- * but also explore the gneral case better
+ * but also explore the general case better
  *
  * Linas Vepstas 2005
  */
@@ -105,11 +105,19 @@ x=z;
 		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, y, z);
 #endif
 
-// #define RIEMANN_B_SUB_N
+// #define CHECK_B_SUB_N
+#ifdef CHECK_B_SUB_N
+		double y = b_sub_n (i);
+		double z = b_sub_n_direct (i);
+		printf ("%d	%8.6g   %8.6g	%8.6g\n", i, y,z, y-z);
+#endif
+
+#define RIEMANN_B_SUB_N
 #ifdef RIEMANN_B_SUB_N
 		double y = b_sub_n (i);
 		y *= exp (sqrt(4*M_PI*i));
-		double z = -cos (sqrt(4*M_PI*i)+0.375*M_PI);
+		// double z = -cos (sqrt(4*M_PI*i)+0.375*M_PI);
+		double z = cos (sqrt(4*M_PI*i)-0.625*M_PI);
 		z *= sqrt(sqrt(2*i/M_PI));
 		// z = hurwitz_b_sub_n (i,1,1);
 		// z *= exp (sqrt(4*M_PI*i));
@@ -156,7 +164,7 @@ x=z;
 		printf ("%d	%8.6g   %8.6g\n", i, y,z);
 #endif
 
-#define DIGAMMA_CHECK
+// #define DIGAMMA_CHECK
 #ifdef DIGAMMA_CHECK
 		double y = 0.0;
 		k = i;

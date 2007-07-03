@@ -35,34 +35,34 @@ zeta-sum.o: zetafn.h
 zeta-zero.o: zetafn.h
 zyx.o:	zetafn.h
 
-alpha: alpha.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
-asubn: asubn.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
-bern: bern.o $(LIB)/binomial.o $(LIB)/harmonic.o $(LIB)/bernoulli.o
-bern_h: bern_h.o $(LIB)/binomial.o $(LIB)/bernoulli.o
+alpha: alpha.o ache.o
+asubn: asubn.o ache.o
+bern: bern.o
+bern_h: bern_h.o
 beta: beta.o ache.o 
-binom-graph: binom-graph.o  $(LIB)/binomial.o
+binom-graph: binom-graph.o
 character: character.o 
-diagon: diagon.o  $(LIB)/binomial.o $(LIB)/harmonic.o
+diagon: diagon.o
 diverge: diverge.o
-eicheck: eicheck.o ache.o  $(LIB)/binomial.o $(LIB)/harmonic.o
-frobenius: frobenius.o $(LIB)/binomial.o $(LIB)/harmonic.o
-gsl-diag: gsl-diag.o $(LIB)/binomial.o $(LIB)/harmonic.o
+eicheck: eicheck.o ache.o
+frobenius: frobenius.o
+gsl-diag: gsl-diag.o
 harmonic: harmonic.o
-riemann: riemann.o $(LIB)/binomial.o $(LIB)/harmonic.o
-stirling: stirling.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
-sum: sum.o ache.o  $(LIB)/binomial.o $(LIB)/harmonic.o
+riemann: riemann.o
+stirling: stirling.o ache.o
+sum: sum.o ache.o
 swap: swap.o
-tryall: tryall.o ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
+tryall: tryall.o ache.o
 valuate: valuate.o
-zeta-sum: zeta-sum.o $(LIB)/binomial.o
-zeta-takagi: zeta-takagi.o  $(LIB)/binomial.o $(LIB)/harmonic.o
-zeta-zero: zeta-zero.o  $(LIB)/binomial.o $(LIB)/harmonic.o
+zeta-sum: zeta-sum.o
+zeta-takagi: zeta-takagi.o
+zeta-zero: zeta-zero.o
 zero: zero.o
-zyx: zyx.o  $(LIB)/binomial.o $(LIB)/harmonic.o
+zyx: zyx.o
 
 
 .o:
-	$(CC) -o $@ $^ -lgsl -lgslcblas -lm
+	$(CC) -o $@ $^ -L$(LIB) -lfunc -lgsl -lgslcblas -lm
 
 .c.o:
 	$(CC) -c $(CFLAGS) -I $(INC) $<

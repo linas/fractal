@@ -183,7 +183,7 @@ main (int argc, char *argv[])
 {
 	int n, k;
 
-#if 0
+#if 1
 	for (n=0; n<258; n++)
 	{
 		long double orm=1.0;
@@ -197,7 +197,7 @@ main (int argc, char *argv[])
 			// if (n%2) s=-s;
 			long double g = gee_nk (n,k);
 			if (1==k) orm = g;
-			g /= orm;
+			// g /= orm;
 			// s /= factorial (n);
 			// s *= factorial (k);
 			printf ("duude (%d %d)  = %Lg  \n", n, k, g);
@@ -214,7 +214,7 @@ main (int argc, char *argv[])
 	int order = atoi (argv[1]);
 
 	n=order;
-#if 1
+#if 0
 	printf ("# \n# Gee sums to order n=%d \n# \n", n);
 	for (k=0; k<=n; k++)
 	{
@@ -223,6 +223,17 @@ main (int argc, char *argv[])
 		s /= factorial (n-2);
 		double x = ((double) k)/ ((double) n);
 		printf ("%d	%g	%Lg\n", k, x, s);
+	}
+#endif
+
+#if 0
+	printf ("# \n# Gee sums starting at n=%d \n# \n", n);
+	for (k=n; k<=n+440; k++)
+	{
+		long double g = gee_nk (k,n);
+		long double s = g / factorial (k-2);
+		double x = ((double) k)/ ((double) n);
+		printf ("%d	%g	%Lg	%Lg\n", k, x, s, g);
 	}
 #endif
 
