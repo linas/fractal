@@ -512,7 +512,7 @@ S_{s}(x) & = & \sum_{n=1}^{\infty}\sum_{m=0}^{\infty}\frac{e^{-xn(m+1)}}{n^{s}}\
 
 \end_inset 
 
- and the definition of the polylogarithm:
+ and the series definition of the polylogarithm:
 \begin_inset Formula \[
 {\rm Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\]
 
@@ -520,16 +520,16 @@ S_{s}(x) & = & \sum_{n=1}^{\infty}\sum_{m=0}^{\infty}\frac{e^{-xn(m+1)}}{n^{s}}\
 
  The polylogarithm may be expressed in terms of an integral as
 \begin_inset Formula \[
-{\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)u^{-z}dz\]
+{\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)u^{-z}\, dz\]
 
 \end_inset 
 
- (See Appendix for derivation).
+ A derivation of this is given in the appendix.
  Here, 
-\begin_inset Formula $\Gamma(z)$
+\begin_inset Formula $\Gamma(z)=(z-1)!$
 \end_inset 
 
- is the Gamma function.
+ is the classical Gamma function.
  The line of integration is taken to be to the right of all of the poles
  in the integrand, namely, 
 \begin_inset Formula $c>1$
@@ -538,8 +538,8 @@ S_{s}(x) & = & \sum_{n=1}^{\infty}\sum_{m=0}^{\infty}\frac{e^{-xn(m+1)}}{n^{s}}\
 .
  Using this in the summation, one obtains
 \begin_inset Formula \begin{eqnarray*}
-S_{s}(x) & = & \frac{1}{2\pi i}\sum_{m=1}^{\infty}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)\left(xm\right)^{-z}dz\\
- & = & \frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)dz\end{eqnarray*}
+S_{s}(x) & = & \frac{1}{2\pi i}\sum_{m=1}^{\infty}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)\left(xm\right)^{-z}\, dz\\
+ & = & \frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)\, dz\end{eqnarray*}
 
 \end_inset 
 
@@ -559,7 +559,12 @@ S_{s}(x) & = & \frac{1}{2\pi i}\sum_{m=1}^{\infty}\int_{c-i\infty}^{c+i\infty}\G
 
  coming from the zeta functions and poles at all of the non-positive integers
  coming from the Gamma function.
- 
+ The last integral shows that the series is the inverse Mellin transform
+ of 
+\begin_inset Formula $\Gamma(z)\zeta(z+s)\zeta(z)$
+\end_inset 
+
+.
 \layout Standard
 
 If the integral can somehow be converted into a closed contour on the left,
@@ -702,10 +707,10 @@ I_{s}(x)={\rm Res}(z=1-s)+\frac{\zeta(s+1)}{x}+\sum_{n=0}^{\infty}\frac{(-x)^{n}
 
 
 \begin_inset Formula \begin{eqnarray*}
-I_{k}(x) & = & \frac{\zeta(k+1)}{x}+\sum_{\begin{array}{c}
+I_{k}(x) & = & \frac{\zeta(k+1)}{x}+\!\sum_{\begin{array}{c}
 n=0\\
-n\ne k-1\end{array}}^{\infty}\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)\\
- &  & +\frac{(-x)^{k-1}}{(k-1)!}\left[\zeta^{\prime}(1-k)+\left(H_{k-1}-\ln2\pi\right)\zeta(1-k)\right]\end{eqnarray*}
+n\ne k-1\end{array}}^{\infty}\!\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)\\
+ &  & +\,\frac{(-x)^{k-1}}{(k-1)!}\left[\zeta^{\prime}(1-k)+\left(H_{k-1}-\ln2\pi\right)\zeta(1-k)\right]\end{eqnarray*}
 
 \end_inset 
 
@@ -742,9 +747,9 @@ n\ne k-1\end{array}}^{\infty}\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)\\
 
  an odd integer, one has 
 \begin_inset Formula \[
-I_{k}(x)=\frac{\zeta(k+1)}{x}+\sum_{\begin{array}{c}
+I_{k}(x)=\frac{\zeta(k+1)}{x}+\!\sum_{\begin{array}{c}
 n=0\\
-n\ne k-1\end{array}}^{k}\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)+\frac{(-x)^{k-1}}{(k-1)!}\zeta^{\prime}(1-k)\]
+n\ne k-1\end{array}}^{k}\!\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)+\frac{(-x)^{k-1}}{(k-1)!}\zeta^{\prime}(1-k)\]
 
 \end_inset 
 
@@ -840,17 +845,17 @@ First, however, to drive the point home, one must observe that most of the
 , and rearranging terms a bit, one gets 
 \begin_inset Formula \begin{eqnarray*}
 -2I_{k}(x) & = & \zeta(k)\left[1-\left(\frac{x}{2\pi i}\right)^{k-1}\right]\\
- & + & \frac{1}{x\;(k+1)!}\;\sum_{j=0}^{(k+1)/2}\left(\begin{array}{c}
+ & + & \frac{1}{x\;(k+1)!}\;\sum_{j=0}^{(k+1)/2}\left(\!\begin{array}{c}
 k+1\\
-2j\end{array}\right)x^{2j}\left(2\pi i\right)^{k+1-2j}B_{2j}B_{k+1-2j}\end{eqnarray*}
+2j\end{array}\!\right)x^{2j}\left(2\pi i\right)^{k+1-2j}B_{2j}B_{k+1-2j}\end{eqnarray*}
 
 \end_inset 
 
  The above introduces the binomial coefficient
 \begin_inset Formula \[
-\left(\begin{array}{c}
+\left(\!\begin{array}{c}
 n\\
-k\end{array}\right)=\frac{n!}{k!(n-k)!}\]
+k\end{array}\!\right)=\frac{n!}{k!(n-k)!}\]
 
 \end_inset 
 
@@ -1186,7 +1191,7 @@ D & = & -\frac{1}{2\pi i}\int_{-ih-s-\epsilon}^{ih-s-\epsilon}\frac{\Gamma(z)}{x
 
  to obtain 
 \begin_inset Formula \begin{eqnarray*}
-D & =\frac{1}{2\pi^{2}i}\left(\frac{x}{2\pi}\right)^{s+\epsilon}\left(\frac{1}{2\pi}\right)^{\epsilon}\int_{-ih}^{ih} & \left(\frac{x}{4\pi^{2}}\right)^{u}\frac{\sin\frac{u+\epsilon}{2}\pi\;\sin\frac{u+s+\epsilon}{2}\pi}{\sin(u+s+\epsilon)\pi}\;\times\\
+D & =\frac{1}{2\pi^{2}i}\left(\frac{x}{2\pi}\right)^{s+\epsilon}\left(\frac{1}{2\pi}\right)^{\epsilon}\int_{-ih}^{ih}\left(\frac{x}{4\pi^{2}}\right)^{u} & \frac{\sin\frac{u+\epsilon}{2}\pi\;\sin\frac{u+s+\epsilon}{2}\pi}{\sin(u+s+\epsilon)\pi}\;\times\\
  &  & \Gamma(1+u+\epsilon)\zeta(1+u+\epsilon)\zeta(1+s+u+\epsilon)\, du\end{eqnarray*}
 
 \end_inset 
