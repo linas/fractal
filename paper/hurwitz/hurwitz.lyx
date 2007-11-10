@@ -467,8 +467,7 @@ backwards
 \layout Standard
 
 The development of this paper proceeds as follows.
- First, a certain specific integral representation is given for the polylogarith
-m.
+ First, an integral representation is given for the polylogarithm.
  This representation is such that a certain trick, here called 
 \begin_inset Quotes eld
 \end_inset 
@@ -477,21 +476,21 @@ the Borwein trick
 \begin_inset Quotes erd
 \end_inset 
 
-, may be applied, to express the integral as a polynomial plus a small error
+, may be applied to express the integral as a polynomial plus a small error
  term.
  This is followed by a sketch of a generalization of the trick to the convergenc
 e acceleration of general oscillatory series.
- The next section selects a specific polynomial, and the error term of the
- resulting approximation is precisely bounded.
+ A polynomial series for the polylogarithm is given, and the error term
+ of the resulting approximation is precisely bounded.
  This is followed by a very short review of the application of the Euler
  Maclaurin summation.
- This is followed by a brief review of the duplication formula for the Hurwitz
- zeta, and a short discussion of ways in which this numerical algorithm
- may be tested for correctness.
+ There is a brief review of the duplication formula for the Hurwitz zeta,
+ and a short discussion of ways in which this numerical algorithm may be
+ tested for correctness.
  Measurements of the performance of actual implementations of the various
  numerical algorithms is provided.
- This is followed by a detailed derivation of the monodromy group, and a
- discussion of Apostol's 
+ The paper concludes with a detailed derivation of the monodromy group,
+ and a discussion of Apostol's 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -539,8 +538,7 @@ The polylogarithm has a non-trivial analytic structure.
 -plane.
  This is noted here, as this branch point has a direct impact on the algorithm,
  preventing convergence in its vicinity.
- Besides this, the polylogarithm has many other interesting properties,
- which are not reviewed here.
+ 
 \layout Standard
 
 The development of the algorithm requires the following integral representation.
@@ -594,7 +592,7 @@ The Borwein trick
 The Borwein trick uses the integral form to find a simple, finite sum that
  approximates the desired value arbitrarily well.
  The trick consists of two steps.
- The first is to write the above integral in the form 
+ The first is to write the above integral formula as follows 
 \begin_inset Formula \begin{eqnarray}
 \xi(s,z) & = & \frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\nonumber \\
  & = & \mbox{Li}_{s}\left(z\right)+\frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)-f(1/z)}{1-yz}\,\left|\log y\right|^{s-1}dy\label{eq:Borwein trick}\end{eqnarray}
@@ -610,7 +608,7 @@ The Borwein trick uses the integral form to find a simple, finite sum that
 \end_inset 
 
 , such that the integral on the right hand side can be evaluated as a simple,
- finite sum, while the left hand side can be shown to bounded arbitrarily
+ finite sum, while the left hand side can be shown to be bounded arbitrarily
  close to zero as 
 \begin_inset Formula $n\to\infty$
 \end_inset 
