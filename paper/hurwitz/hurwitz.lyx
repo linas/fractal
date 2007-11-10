@@ -873,40 +873,116 @@ etal
  
 \layout Standard
 
-The Euler method applied to the Hurwitz zeta function essentially leads
- to the Hasse series 
+Euler's transformation of alternating series is a convergence acceleration
+ technique, and is most clearly expressed by making use of the forward differenc
+e operator.
+ This operator, 
+\begin_inset Formula $\triangle$
+\end_inset 
+
+, is defined to act on elements of a sequence 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+ as 
+\begin_inset Formula $\triangle a_{n}=a_{n+1}-a_{n}$
+\end_inset 
+
+.
+ By abuse of notation, it acts on a general function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ as 
+\begin_inset Formula $\triangle f(x)=f(x+1)-f(x)$
+\end_inset 
+
+.
+ Repeated iteration is used to define 
+\begin_inset Formula $\triangle^{n}$
+\end_inset 
+
+, so that 
+\begin_inset Formula $\triangle^{2}f(x)=f(x+2)-2f(x+1)+f(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\triangle^{n}f(x)=\sum_{k=0}^{n}(-1)^{n-k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)f(x+k)\]
+
+\end_inset 
+
+ Given a convergent alternating series
+\layout Standard
+
+
+\begin_inset Formula \[
+s=\sum_{n=0}^{\infty}\left(-1\right)^{n}a_{n}\]
+
+\end_inset 
+
+ Euler then re-wrote this sum as 
+\begin_inset Formula \begin{equation}
+s=\sum_{n=0}^{\infty}\frac{\left(-1\right)^{n}\triangle^{n}a_{0}}{2^{n+1}}\label{eq:Euler's series}\end{equation}
+
+\end_inset 
+
+ Aside from the power of two in the denominator aiding in convergence, it
+ is often the case that the forward differences themselves rapidly become
+ small.
+\layout Standard
+
+A good example of the strength of Euler's transformation of alternating
+ series is its application to the Hurwitz zeta function.
+ Euler's technique essentially leads to the Hasse series 
 \begin_inset LatexCommand \ref{eq:Hasse series}
 
 \end_inset 
 
 .
- This may be seen by noting that the inner sum is just a forward difference:
+ Taking 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ to be 
+\begin_inset Formula $q^{1-s}$
+\end_inset 
+
+, the inner sum of the Hasse series 
+\begin_inset LatexCommand \ref{eq:Hasse series}
+
+\end_inset 
+
+ is then 
 \begin_inset Formula \[
-\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+\sum_{k=0}^{n}(-1)^{n-k}\left(\begin{array}{c}
 n\\
 k\end{array}\right)(q+k)^{1-s}=\triangle^{n}q^{1-s}\]
 
 \end_inset 
 
- where 
-\begin_inset Formula $\triangle$
+The benefit of the Hasse series is that it has improved convergence to the
+ point of being globally convergent on the complex 
+\begin_inset Formula $s$
 \end_inset 
 
- is the forward difference operator.
- The Hasse series has improved convergence in that the result is globally
- convergent, whereas the traditional series representation of equation 
+-plane, whereas the traditional series representation of equation 
 \begin_inset LatexCommand \ref{eq:Hurwitz zeta}
 
 \end_inset 
 
  is not.
- However, a quick numerical experiment will show that the Hasse series does
- not converge rapidly, especially in the critical strip.
+ Yet, perhaps, things can be improved further still.
+ A quick numerical experiment will show that the Hasse series does not converge
+ rapidly, especially in the critical strip.
+ The attempt to improve convergence even further, beyond this traditional
+ technique, motivates the development of this paper.
+ 
 \layout Standard
 
-The poor convergence of these traditional techniques motivates the development
- of this paper.
- Strictly speaking, the slow convergence can be attributed to the fact that
+Strictly speaking, the slow convergence can be attributed to the fact that
  the naive series representations 
 \begin_inset LatexCommand \ref{eq:Hurwitz zeta}
 
@@ -917,8 +993,8 @@ The poor convergence of these traditional techniques motivates the development
 
 \end_inset 
 
- are not strictly alternating series, as would be required to justify the
- application of the Euler method.
+ are not strictly alternating series, as would be properly required to justify
+ the application of the Euler method.
  Instead, the series are a superposition of oscillatory terms; for the polylogar
 ithm, an explicit oscillation coming from 
 \begin_inset Formula $z^{n}=\left|z\right|^{n}e^{in\arg z}$
@@ -929,9 +1005,10 @@ ithm, an explicit oscillation coming from
 \end_inset 
 
 .
- Thus, what one needs is a theory of sequence acceleration not for alternating
- series, but for oscillatory series.
- The polylogarithm approximation represents the 
+ Thus, one would like to have a theory of sequence acceleration not for
+ alternating series, but for oscillatory series.
+ The polylogarithm approximation given in the last section represents the
+ 
 \emph on 
 ad-hoc
 \emph default 
@@ -986,8 +1063,8 @@ S=\sum_{n=0}^{\infty}c_{n}\]
 \begin_inset Formula $a_{n}$
 \end_inset 
 
- are now presumed to be relatively tame, so that series acceleration techniques
- can be applied.
+ are now presumed to be relatively tame, so that the traditional series
+ acceleration techniques can be applied.
  This trick may be applied to any oscillatory sequence; one need not know
  a precise or 
 \emph on 
@@ -1017,7 +1094,12 @@ Alternately, one may consider replacing the forward difference operator
 
 \end_inset 
 
- with the traditional Euler's series regained by taking 
+ with the traditional Euler's series
+\begin_inset LatexCommand \ref{eq:Euler's series}
+
+\end_inset 
+
+ regained by taking 
 \begin_inset Formula $q=1$
 \end_inset 
 
