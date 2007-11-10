@@ -39,9 +39,12 @@ arxiv:
 	mv hurwitz.lyx hurwitz-arxiv.lyx
 	cvs update
 	lyx-qt hurwitz-arxiv.lyx -e latex
-	mv hurwitz-arxiv.tex hurwitz.latex
+	cp hurwitz-arxiv.tex hurwitz.latex
 	/usr/bin/latex hurwitz.latex
 	/usr/bin/bibtex hurwitz.aux
+
+pdf: arxiv
+	lyx-qt hurwitz-arxiv.lyx -e pdf
 
 dist: $(GRPHS) $(IMGS)
 	tar -cvf hurwitz.tar hurwitz.latex hurwitz.aux hurwitz.bbl $(GRPHS) $(IMGS)
