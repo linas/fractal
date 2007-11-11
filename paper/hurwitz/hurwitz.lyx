@@ -880,7 +880,7 @@ e operator.
 \begin_inset Formula $\triangle$
 \end_inset 
 
-, is defined to act on elements of a sequence 
+, is defined to act on a sequence 
 \begin_inset Formula $\{ a_{n}\}$
 \end_inset 
 
@@ -907,14 +907,14 @@ e operator.
 \end_inset 
 
  and 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \triangle^{n}f(x)=\sum_{k=0}^{n}(-1)^{n-k}\left(\begin{array}{c}
 n\\
-k\end{array}\right)f(x+k)\]
+k\end{array}\right)f(x+k)\label{eq:nth difference}\end{equation}
 
 \end_inset 
 
- Given a convergent alternating series
+ Euler then considers a convergent alternating series
 \layout Standard
 
 
@@ -923,7 +923,7 @@ s=\sum_{n=0}^{\infty}\left(-1\right)^{n}a_{n}\]
 
 \end_inset 
 
- Euler then re-wrote this sum as 
+ and finds that it can be re-written as 
 \begin_inset Formula \begin{equation}
 s=\sum_{n=0}^{\infty}\frac{\left(-1\right)^{n}\triangle^{n}a_{0}}{2^{n+1}}\label{eq:Euler's series}\end{equation}
 
@@ -948,6 +948,11 @@ A good example of the strength of Euler's transformation of alternating
 
  to be 
 \begin_inset Formula $q^{1-s}$
+\end_inset 
+
+ in equation 
+\begin_inset LatexCommand \ref{eq:nth difference}
+
 \end_inset 
 
 , the inner sum of the Hasse series 
@@ -1090,7 +1095,7 @@ Alternately, one may consider replacing the forward difference operator
 .
  Straightforward manipulations lead to 
 \begin_inset Formula \[
-\sum_{m=0}^{\infty}\left(\frac{z}{1-qz}\right)^{m+1}\triangle_{q}^{m}b_{0}=\sum_{n=0}^{\infty}z^{n}b_{n}\]
+\frac{1}{1-qz}\;\sum_{m=0}^{\infty}\left(\frac{z}{1-qz}\right)^{m}\triangle_{q}^{m}b_{0}=\sum_{n=0}^{\infty}z^{n}b_{n}\]
 
 \end_inset 
 
@@ -1152,7 +1157,7 @@ b_{n}=\int_{0}^{1}y^{n}g(y)dy\]
 \begin_inset Formula $b_{n}$
 \end_inset 
 
-.
+, and should not bar most practical applications.
  It follows that
 \begin_inset Formula \[
 S(z)=\int_{0}^{1}\frac{g(y)}{1-yz}\, dy\]
@@ -1292,8 +1297,7 @@ well-behaved
 \begin_inset Quotes erd
 \end_inset 
 
- -- in this case, being expressible as moments of a rather general function
- 
+ -- in this case, being expressible as moments of a general function 
 \begin_inset Formula $g(y)$
 \end_inset 
 
@@ -1356,8 +1360,11 @@ et al.
 
 \end_inset 
 
- suggest some remarkably strongly converging polynomials, with values of
- 
+ suggest some remarkably strongly converging polynomials 
+\begin_inset Formula $p_{n}(y)$
+\end_inset 
+
+, with values of 
 \begin_inset Formula $A$
 \end_inset 
 
