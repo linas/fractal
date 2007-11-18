@@ -278,12 +278,7 @@ It is the poor performance of these sums in numerical calculations that
  
 \layout Standard
 
-The Hurwitz zeta may be expressed in terms of the polylogarithm
-\begin_inset LatexCommand \cite{Lew81}
-
-\end_inset 
-
- (sometimes called the 
+The polylogarithm, sometimes called the 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -299,9 +294,30 @@ fractional polylogarithm
 \begin_inset Formula $s$
 \end_inset 
 
- is not an integer): 
+ need not be an integer, is given by the sum 
 \begin_inset Formula \begin{equation}
 \mbox{Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\label{eq:polylog definition}\end{equation}
+
+\end_inset 
+
+ This sum is absolutely convergent on the complex half-plane 
+\begin_inset Formula $\Re s>0$
+\end_inset 
+
+ when 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset 
+
+, and in 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+ when 
+\begin_inset Formula $\left|z\right|\le1$
+\end_inset 
+
+ The Hurwitz zeta may be expressed in terms of the polylogarithm
+\begin_inset LatexCommand \cite{Lew81}
 
 \end_inset 
 
@@ -321,7 +337,21 @@ fractional polylogarithm
 
 \end_inset 
 
- and so one might search for good algorithms for polylogarithms.
+ which holds for the region 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+, 
+\begin_inset Formula $0\le\Re q<1$
+\end_inset 
+
+, and 
+\begin_inset Formula $\Im q>0$
+\end_inset 
+
+.
+ Thus, fast algorithms for the polylogarithm can be converted to fast algorithms
+ for the Hurwitz zeta.
  Wood
 \begin_inset LatexCommand \cite{Wood92}
 
@@ -353,15 +383,15 @@ fractional polylogarithm
 \begin_inset Formula $\left|z\right|<1$
 \end_inset 
 
-, although direct evaluation becomes quite slow when 
-\begin_inset Formula $\left|z\right|\gtrsim0.95$
+, although direct evaluation becomes quite slow as 
+\begin_inset Formula $\left|z\right|$
 \end_inset 
 
- and 
-\begin_inset Formula $\sigma\lesssim2$
+ approaches 1 and 
+\begin_inset Formula $\sigma$
 \end_inset 
 
-.
+ is smaller than about 2.
  There do not seem to be any published algorithms that may be applied on
  the critical strip.
 \layout Standard
