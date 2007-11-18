@@ -122,7 +122,8 @@ Introduction
 
 This note sketches a technique for improving the rate of convergence of
  a general oscillatory series, and then applies this technique to the computatio
-n of the polylogarithm, and, in particular, to the Hurwitz zeta function.
+n of the polylogarithm, and to related functions, such as the Hurwitz zeta
+ function.
  It essentially generalizes an algorithm given by Peter Borwein for computing
  the Riemann zeta function.
  The principle result is an algorithm that efficiently obtains values of
@@ -147,7 +148,16 @@ The Hurwitz zeta function may be defined as
 
 \end_inset 
 
- This series may be directly summed for 
+ This series is absolutely convergent for 
+\begin_inset Formula $\sigma>1$
+\end_inset 
+
+ and any complex 
+\begin_inset Formula $q$
+\end_inset 
+
+ that is not zero or a negative integer.
+ For numerical calculations, this series may be directly summed for 
 \begin_inset Formula $\sigma>1$
 \end_inset 
 
@@ -157,7 +167,20 @@ The Hurwitz zeta function may be defined as
 \end_inset 
 
 .
- A globally convergent series was given by Helmut Hasse in 1930
+ The series may be analyticaly continued to the entire complex 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane, excepting a simple pole at 
+\begin_inset Formula $s=1$
+\end_inset 
+
+.
+ The continuation, convergent on the entire complex 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane except at the pole, was given by Helmut Hasse in 1930
 \begin_inset LatexCommand \cite{Has30}
 
 \end_inset 
@@ -170,10 +193,11 @@ k\end{array}\right)(q+k)^{1-s}\label{eq:Hasse series}\end{equation}
 
 \end_inset 
 
- Although this series is technically convergent everywhere, in practice,
- the convergence is abysmally slow on the critical strip.
- A not unreasonable algorithm may be given by considering a Taylor's series
- in 
+ Although the Hasse series is convergent, the convergence is far too slow
+ for practical numerical evaluation in the critical strip.
+ There are other simple series that are more strongly convergent in limited
+ domains, and so may be considered for numerical work.
+ One such is a Taylor's series in 
 \begin_inset Formula $q$
 \end_inset 
 
@@ -212,8 +236,9 @@ n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
 \end_inset 
 
 .
- Either of these expansions provide a computable expression for the Hurwitz
- zeta function that is convergent on the entire complex 
+ Either of these expansions provide a numerically reasonable expression
+ for the Hurwitz zeta function that is convergent on the entire complex
+ 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -221,7 +246,7 @@ n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
 \begin_inset Formula $s=1$
 \end_inset 
 
-, and taking the appropriate limit, via l'Hopital's rule, when 
+, and taking the appropriate limit, via l'Hôpital's rule, when 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -237,19 +262,19 @@ n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
  
 \layout Standard
 
-It is the poor performance of these sums that motivates the development
- of this paper.
+It is the poor performance of these sums in numerical calculations that
+ motivates the development of this paper.
  Since the Generalized Riemann Hypothesis can be phrased in terms of the
  values of the Hurwitz zeta function on the critical strip, it is of some
  interest to have a fast algorithm for computing high-precision values of
  this function in this region.
- There seems to be a paucity of work in this area.
- There is a discussion of fast algorithms for Dirichlet L-functions in 
+ There seems to be a paucity of work in this area, excepting a discussion
+ of fast algorithms for Dirichlet L-functions in 
 \begin_inset LatexCommand \cite{Sle04}
 
 \end_inset 
 
- (the author has been unable to obtain a copy of this manuscript).
+.
  
 \layout Standard
 
