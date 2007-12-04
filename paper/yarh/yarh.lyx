@@ -60,13 +60,22 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
 \end_inset 
 
- is sometimes called the Gauss map: it lops of a digit in the continued
- fraction expansion of 
+ is sometimes called the Gauss map.
+ Here, 
+\begin_inset Formula $\left\lfloor y\right\rfloor $
+\end_inset 
+
+ is the largest integer less than or equal to 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ The Gauss map lops of a digit in the continued fraction expansion of 
 \begin_inset Formula $x$
 \end_inset 
 
 .
- That is, if we write the continued fraction expansion of 
+ If one writes the continued fraction expansion of 
 \begin_inset Formula $x$
 \end_inset 
 
@@ -96,7 +105,7 @@ In this note, we observe that the Gauss map can also be thought of as one
  Thus, we are lead to contemplate other elements of the permutation group.
  Specifically, consider the permutation operator 
 \begin_inset Formula \begin{equation}
-S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdots,a_{p},\cdots]\label{eq:}\end{equation}
+S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdots,a_{p},\cdots]\label{eq:Permutation Elts}\end{equation}
 
 \end_inset 
 
@@ -231,78 +240,46 @@ essential singularity
 \end_inset 
 
 , so that the operator 
-\begin_inset Formula $[\,]$
+\begin_inset Formula $[\,]:\mathbb{S}\to\mathbb{R}$
 \end_inset 
 
  is 1-1 and onto in this quotient space.
- ToDo: describe some sensible topologies that could be applied to this space.
- 
-\layout Standard
+ In particular, this implies that the inverse map 
+\begin_inset Formula $[\,]^{-1}:\mathbb{R}\to\mathbb{S}$
+\end_inset 
 
-Note that  any map 
-\begin_inset Formula $\mu:\mathbb{N}^{\infty}\rightarrow\mathbb{R}$
+ exists and is well-defined.
+ 
+\emph on 
+ToDo: describe some sensible topologies that could be applied to this space
+\emph default 
+.
+ Note that any map 
+\begin_inset Formula $\mu:\mathbb{S}\rightarrow\mathbb{S}$
 \end_inset 
 
  induces a map 
 \begin_inset Formula $\tilde{\mu}:\mathbb{R}\rightarrow\mathbb{R}$
 \end_inset 
 
-, through the isomorphic operator 
-\begin_inset Formula $[]$
+, through the similarity transform 
+\begin_inset Formula $\tilde{\mu}=[\,]\circ\mu\circ[\,]^{-1}$
+\end_inset 
+
+; likewise, a function of the reals can be restated as a function on 
+\begin_inset Formula $\mathbb{S}$
 \end_inset 
 
 .
- The normal definition of a generalized function is that its a map 
-\begin_inset Formula $\tilde{f}:\mathcal{F}\mathbb{\rightarrow R}$
-\end_inset 
-
- where 
-\begin_inset Formula $\mathcal{F}$
-\end_inset 
-
- is the space of ordinary functions 
-\begin_inset Formula $\left\{ f\,|\, f:\mathbb{\mathbb{R}\rightarrow R}\right\} $
-\end_inset 
-
-.
- The canonical example is  the Dirac delta oprator 
-\begin_inset Formula $\delta(x)$
-\end_inset 
-
- which is zero everywhere, except at 
-\begin_inset Formula $x=0$
-\end_inset 
-
- where it is infinite.
- 
 \layout Standard
 
-It seems intuitive that all other mappings from 
-\begin_inset Formula $\mathbb{N}$
+The permutation group elements acting on 
+\begin_inset Formula $\mathbb{S}$
 \end_inset 
 
- to 
-\begin_inset Formula $\mathbb{Z}$
-\end_inset 
+ are given by equation 
+\begin_inset LatexCommand \ref{eq:Permutation Elts}
 
- that satisfy this invertability property are obtainable through the action
- of the permutation group, although one should always be careful with such
- statements..
- The permutation group elements are the shift operator 
-\begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
-\end_inset 
-
- which acts as 
-\begin_inset Formula $h:[a_{1},a_{2},a_{3},...]\mapsto[a_{2},a_{3},...]$
-\end_inset 
-
- and the permuation operator 
-\begin_inset Formula $S_{p,q}:[a_{1},...,a_{p},...,a_{q},...]\mapsto[a_{1},...,a_{q},...a_{p},...]$
-\end_inset 
-
-.
- Homework: give the analytic form for 
-\begin_inset Formula $S$
 \end_inset 
 
 .
@@ -310,10 +287,22 @@ It seems intuitive that all other mappings from
 \begin_inset Formula $S_{p,q}(x)$
 \end_inset 
 
- is discontinuous, but I think only on a countable set of points, and thus
- can be used to form well-defined integrals using classic techniques.
+ is discontinuous, but only on a countable set of points.
+ That is, 
+\begin_inset Formula $S_{p,q}(x)$
+\end_inset 
+
+ is discontinuous on the proverbial 
+\begin_inset Quotes eld
+\end_inset 
+
+set of measure zero
+\begin_inset Quotes erd
+\end_inset 
+
+, and so one can easily form well-defined integrals using classical techniques.
  
-\layout Subsection
+\layout Section
 
 Graphs
 \layout Standard
@@ -334,6 +323,7 @@ Continued Fraction Permutations
 
 \begin_inset Graphics
 	filename swap-s12.png
+	width 100text%
 
 \end_inset 
 
@@ -343,6 +333,7 @@ Continued Fraction Permutations
 
 \begin_inset Graphics
 	filename swap-s13.png
+	width 100text%
 
 \end_inset 
 
@@ -352,6 +343,7 @@ Continued Fraction Permutations
 
 \begin_inset Graphics
 	filename swap-s14.png
+	width 100text%
 
 \end_inset 
 
@@ -361,6 +353,7 @@ Continued Fraction Permutations
 
 \begin_inset Graphics
 	filename swap-s23.png
+	width 100text%
 
 \end_inset 
 
@@ -373,7 +366,7 @@ ns
 \end_inset 
 
  for the swap operator 
-\begin_inset Formula $S_{p,q}:[a_{1},...,a_{p},...,a_{q},...]\mapsto[a_{1},...,a_{q},...a_{p},...]$
+\begin_inset Formula $S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdots,a_{p},\cdots]$
 \end_inset 
 
 .
@@ -411,7 +404,7 @@ Define the Rieman sum as
 \begin_inset Formula $N$
 \end_inset 
 
-, this sum converges very slowly to the Riemann zeta.
+, this sum converges very slowly to the Riemann zeta function.
  A hint of the convergence properties is shown in the figure 
 \begin_inset LatexCommand \ref{cap:Riemann-Sums}
 
@@ -438,30 +431,40 @@ Riemann Sums
 
 \begin_inset Graphics
 	filename rzero-15.png
+	lyxscale 60
+	width 20text%
 
 \end_inset 
 
 
 \begin_inset Graphics
 	filename rzero-151.png
+	lyxscale 60
+	width 20text%
 
 \end_inset 
 
 
 \begin_inset Graphics
 	filename rzero-1051.png
+	lyxscale 60
+	width 20text%
 
 \end_inset 
 
 
 \begin_inset Graphics
 	filename rzero-11051.png
+	lyxscale 60
+	width 20text%
 
 \end_inset 
 
 
 \begin_inset Graphics
 	filename rzero-121051.png
+	lyxscale 60
+	width 20text%
 
 \end_inset 
 
@@ -489,8 +492,8 @@ The above strip charts show
 =34 at the top.
  The coloration is such that red represents values greater than two, green
  for values about equal to one, and blue/black for values near/at zero.
- In this particular strip, we expect the exact Riemann zet to have five
- zeros, at 14.13, 21.02, 25.01, 30.42, and 32.93.
+ In this particular strip, we expect the exact Riemann zeta to have five
+ zeros, near 14.13, 21.02, 25.01, 30.42, and 32.93.
  Several remarkable properties are visible: First, there are far more than
  five zeros visible, some lying outside the critical strip.
  Next, as the value of 
@@ -503,12 +506,14 @@ The above strip charts show
 
  line; however, the number of zeros seems to multiply logarithmically as
  well.
- As 
+ Most of these zeroes seem to have a tiny residue, which diminishes as 
 \begin_inset Formula $N$
 \end_inset 
 
- increases, though, most of these zeros will completely disappear; the mechanism
- is elucided in another set of charts.
+ increases; presumably, they will completely disappearin the limit.
+ What's left are five zeros which are not fading away; these become the
+ Riemann zeroes.
+ 
 \end_inset 
 
  
@@ -530,6 +535,7 @@ Riemann sum phase plots
 
 \begin_inset Graphics
 	filename r-sum-1051.png
+	width 100text%
 
 \end_inset 
 
@@ -539,6 +545,7 @@ Riemann sum phase plots
 
 \begin_inset Graphics
 	filename r-sum-11051.png
+	width 100text%
 
 \end_inset 
 
@@ -548,6 +555,7 @@ Riemann sum phase plots
 
 \begin_inset Graphics
 	filename r-sum-121051.png
+	width 100text%
 
 \end_inset 
 
@@ -600,13 +608,5 @@ The above three figures are paramateric phase plots of
 Conclusions
 \layout Standard
 
-Apologies for the format of this paper; 
-\layout Bibliography
-\bibitem [deR57]{key-4}
-
-Georges de Rham, On Some Curves Defined by Functional Equations (1957),
- reprinted in Classics on Fractals, ed.
- Gerald A.
- Edgar, (Addison-Wesley, 1993) pp.
- 285-298
+Apologies for the format of this paper.
 \the_end
