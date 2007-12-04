@@ -131,7 +131,8 @@ void grand (long double x, long double sre, long double sim,
 #else
 	// long double sw = swap12 (x);
 	// long double sw = swap13 (x);
-	long double sw = swap23 (x);
+	// long double sw = swap23 (x);
+	long double sw = x;
 #endif
 
 	long double lnx = logl (x);
@@ -192,6 +193,15 @@ void gral(int nsteps, long double sre, long double sim,
 	sum_re *= step;
 	sum_im *= step;
 
+#if 0
+	// the trivial case
+	sum_re = sre+1.0;
+	sum_im = sim;
+	long double t = sum_re*sum_re + sum_im*sum_im;
+	sum_re /= t;
+	sum_im = -sum_im / t;
+#endif
+
 	/* mult by s */
 	long double tmp = sum_re * sre - sum_im*sim;
 	sum_im = sum_im *sre + sum_re *sim;
@@ -207,7 +217,7 @@ void gral(int nsteps, long double sre, long double sim,
 	sum_re = sre - sum_re;
 	sum_im = sim - sum_im;
 
-	/* s/(s-1) so add 1 now */
+	/* s/(s-1) = 1/(s-1) + 1 so add 1 now */
 	sum_re += 1.0L;
 
 	*pre = sum_re;
