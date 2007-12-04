@@ -35,22 +35,14 @@ Linas Vepstas <linas@linas.org>
 12 October 2004
 \layout Abstract
 
-This paper presents a certain peculiar generalization of the Riemann hypothesis,
+This short note presents a peculiar generalization of the Riemann hypothesis,
  as the action of the permutation group on the elements of continued fractions.
  The problem is difficult to attack through traditional analytic techniques,
- and thus this paper focuses on providing a numerical survey.
+ and thus this note focuses on providing a numerical survey.
  
-\layout Abstract
-
-This paper is part of a set of chapters that explore the relationship between
- the real numbers, the modular group, and fractals.
 \layout Section
 
-Intro
-\layout Standard
-
-THIS IS A DRAFT WORK IN PROGRESS.
- The intro hasn't been written yet, but if it was, it might say this:
+Introduction
 \layout Standard
 
 The Riemann zeta can be expressed as an integral in the following form:
@@ -79,15 +71,17 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 \end_inset 
 
  as 
-\begin_inset Formula $x=[a_{1},a_{2},a_{3},...]$
+\begin_inset Formula \begin{equation}
+x=[a_{1},a_{2},a_{3},\cdots]=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\ldots}}}\label{eq:}\end{equation}
+
 \end_inset 
 
  then 
-\begin_inset Formula $h(x)=[a_{2},a_{3},...]$
+\begin_inset Formula $h(x)=[a_{2},a_{3},\cdots]$
 \end_inset 
 
 .
- It is a reverse shift operator on the continued fraction expansion.
+ It is a (reverse) shift operator on the continued fraction expansion.
  The study of continued fractions is interesting because of the close proximity
  of a number of problems of fractals and dynamical systems, including Farey
  fractions and modular group symmetries.
@@ -96,12 +90,14 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
  of its own.
 \layout Standard
 
-In this paper, we note that the Gauss map can also be thought of as one
- particular element of the permuation group acting on a Hilbert space representa
-tion of the real numbers.
+In this note, we observe that the Gauss map can also be thought of as one
+ particular element of the permuation group acting on an infinite dimensional
+ representation of the real numbers.
  Thus, we are lead to contemplate other elements of the permutation group.
  Specifically, consider the permutation operator 
-\begin_inset Formula $S_{p,q}:[a_{1},...,a_{p},...,a_{q},...]\mapsto[a_{1},...,a_{q},...a_{p},...]$
+\begin_inset Formula \begin{equation}
+S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdots,a_{p},\cdots]\label{eq:}\end{equation}
+
 \end_inset 
 
  which exchanges the 
@@ -150,33 +146,37 @@ tion of the real numbers.
 \layout Standard
 
 .
-\layout Subsection
+\layout Section
 
-Hilbert Lattice and Permuation Groups
+Continued Fractions; Permuation Groups
 \layout Standard
 
-Note that continued fractions have a representation as a lattice in the
- infinitie-dimensional Hilbert space 
-\begin_inset Formula $\mathbb{N}^{\infty}=\mathbb{N\times N\times}...$
+Note that continued fractions provide a representation of the real numbers
+ in the infinitie-dimensional space 
+\begin_inset Formula $\mathbb{N}^{\omega}=\mathbb{N\times N\times}...$
 \end_inset 
 
  where 
 \begin_inset Formula $\mathbb{N}=\mathbb{Z}^{+}$
 \end_inset 
 
- the set of positive integers.
- Note that this implies that each point on this lattice can be given a unique
- value using the continued fraction mapping, and that each value appears
- only once on the lattice.
+ is the set of positive integers.
+ Note that this implies that each point in this space can be given a unique
+ real value using the continued fraction mapping, and that each (non-rational)
+ real number appears only once in this space.
  In other words, the continued fraction brackets are an operator that maps
- this Hilbert space to the real numbers, i.e.
+ this space to the real numbers, 
+\emph on 
+i.e.
+
+\emph default 
  
-\begin_inset Formula $[]:\mathbb{N}^{\infty}\mathbb{\rightarrow R}$
+\begin_inset Formula $[\,]:\mathbb{N}^{\omega}\mathbb{\rightarrow R}$
 \end_inset 
 
 .
  What makes the 
-\begin_inset Formula $[]$
+\begin_inset Formula $[\,]$
 \end_inset 
 
  operator so interesting is that it is 1-1 and onto, and is thus invertible,
@@ -214,42 +214,32 @@ essential singularity
 \end_inset 
 
 .
- We can work around this difficulty by taking the kernel of [] and defining
- a quotient space 
-\begin_inset Formula $\mathbb{N}^{\infty}/\ker[]$
+ We can paper around this difficulty by considering instead 
+\begin_inset Formula $\mathbb{M}=\mathbb{N}\cup\{\infty\}$
 \end_inset 
 
-, and insisting that the operator 
-\begin_inset Formula $[]$
+, defining continued fractions as sequences in 
+\begin_inset Formula $\mathbb{M}^{\omega}$
+\end_inset 
+
+, and finally taking the kernel of 
+\begin_inset Formula $[\,]$
+\end_inset 
+
+ and defining a quotient space 
+\begin_inset Formula $\mathbb{S}=\mathbb{M}^{\omega}/\ker[\,]$
+\end_inset 
+
+, so that the operator 
+\begin_inset Formula $[\,]$
 \end_inset 
 
  is 1-1 and onto in this quotient space.
- Homework: prove that this quotient space is validly defined and has the
- needed vector-space properties.
- In the subsequent discussion, we'll intentionally confuse 
-\begin_inset Formula $\mathbb{N}^{\infty}$
-\end_inset 
-
- with this quotient space, wherever its convenient.
- In the following, we also make a convenient little confusion between the
- continued fraction map defined on the unit interval, and the map defined
- for non-negative reals: viz.
+ ToDo: describe some sensible topologies that could be applied to this space.
  
-\begin_inset Formula $[a_{0};a_{1},a_{2},...]\equiv a_{0}+[a_{1},a_{2},...]$
-\end_inset 
-
- where we use the semicolon to distinguish this zero'th element.
 \layout Standard
 
-Note that this lattice is a subspace of the Hilbert space of 
-\begin_inset Quotes eld
-\end_inset 
-
-generalized functions
-\begin_inset Quotes erd
-\end_inset 
-
-, in that any map 
+Note that  any map 
 \begin_inset Formula $\mu:\mathbb{N}^{\infty}\rightarrow\mathbb{R}$
 \end_inset 
 
