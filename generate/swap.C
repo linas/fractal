@@ -3,9 +3,11 @@
  *
  * FUNCTION:
  * Integral the permuation group of continued fractions
- * Expect to get riemann zeta in the gauss map case
+ * Expect to get Riemann zeta in the Gauss map case
  * and that is what we seem to get ... need high integration 
  * order though to get anything on the r=1/2 axis ... 
+ *
+ * Results written up in yarh.lyx
  *
  * Linas Feb 2005
  */ 
@@ -122,7 +124,8 @@ inline long double swap14 (long double x)
 void grand (long double x, long double sre, long double sim, 
 					 long double *pre, long double *pim)
 {
-#if 1
+#if 0
+	// This is the basic case, which gives Riemann exactly
 	long double ox = 1.0L/x;
 	long double sw = ox - floorl(ox);
 #else
@@ -221,10 +224,9 @@ rswap (long double sre, long double sim, int itermax)
 	return vv;
 }
 
-
+// DECL_MAKE_HEIGHT(rswap)
 /*-------------------------------------------------------------------*/
 /* This routine fills in the interior of the the convergent area of the 
- * Euler erdos in a simple way 
  */
 
 
@@ -266,6 +268,7 @@ MakeHisto (
 			double phi = rswap (re_position, im_position, itermax);
          glob [i*sizex +j] = phi;
 
+			// draw vertical lines showing crit strip 
 			if ((re_position <= 0.0) && (0.0<re_position+delta))
          	glob [i*sizex +j] = -1.0;
 			if ((re_position <= 0.5) && (0.5<re_position+delta))
