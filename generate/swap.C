@@ -129,8 +129,9 @@ void grand (long double x, long double sre, long double sim,
 	long double ox = 1.0L/x;
 	long double sw = ox - floorl(ox);
 #else
-	long double sw = swap12 (x);
+	// long double sw = swap12 (x);
 	// long double sw = swap13 (x);
+	long double sw = swap23 (x);
 #endif
 
 	long double lnx = logl (x);
@@ -260,7 +261,7 @@ MakeHisto (
    im_position = im_start;
    for (i=0; i<sizey; i++) 
 	{
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%10==0) { printf(" start row %d\n", i); fflush (stdout); }
       re_position = re_start;
       for (j=0; j<sizex; j++) 
 		{
