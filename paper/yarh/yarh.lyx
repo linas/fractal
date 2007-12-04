@@ -47,7 +47,12 @@ This short note presents a peculiar generalization of the Riemann hypothesis,
 Introduction
 \layout Standard
 
-The Riemann zeta can be expressed as an integral in the following form:
+The Riemann zeta can be expressed as an integral in the following form
+\begin_inset LatexCommand \cite{Edw74}
+
+\end_inset 
+
+:
 \layout Standard
 
 
@@ -77,7 +82,12 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 \end_inset 
 
 .
- If one writes the continued fraction expansion of 
+ If one writes the continued fraction expansion
+\begin_inset LatexCommand \cite{Khin35}
+
+\end_inset 
+
+ of 
 \begin_inset Formula $x$
 \end_inset 
 
@@ -102,7 +112,7 @@ x=[a_{1},a_{2},a_{3},\cdots]=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\ldots
 \layout Standard
 
 In this note, we observe that the Gauss map can also be thought of as one
- particular element of the permuation group acting on an infinite dimensional
+ particular element of the permutation group acting on an infinite dimensional
  representation of the real numbers.
  Thus, we are lead to contemplate other elements of the permutation group.
  Specifically, consider the permutation operator 
@@ -129,7 +139,7 @@ S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdot
 \end_inset 
 
  maps the unit interval onto the unit interval, and is discontinuous at
- a countably infintite number of points.
+ a countably infinite number of points.
  We present graphs below visualizing 
 \begin_inset Formula $S_{p,q}(x)$
 \end_inset 
@@ -143,10 +153,10 @@ S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdot
 \end_inset 
 
  Although this integral can in principle be evaluated analytically, the
- result is a messy set of nested sums that don't seem to be easily summable,
+ result is a messy set of nested sums that don't seem to be easily sumable,
  nor provide any particular insight.
  Thus, we instead choose to explore this integral numerically.
- More precisly, we consider the sum which arises from treating the integral
+ More precisely, we consider the sum which arises from treating the integral
  as a very simple Newtonian sum with equally spaced abscissas:
 \begin_inset Formula \begin{equation}
 \zeta_{N;p,q}(s)=\frac{s}{s-1}-\frac{s}{N}\;\sum_{n=0}^{N-1}S_{p,q}\left(\frac{2n+1}{2N}\right)\;\left(\frac{2n+1}{2N}\right)^{s-1}\label{eq:zeta-pq-sum}\end{equation}
@@ -154,16 +164,13 @@ S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdot
 \end_inset 
 
 
-\layout Standard
-
-.
 \layout Section
 
-Continued Fractions; Permuation Groups
+Continued Fractions; Permutation Groups
 \layout Standard
 
 Note that continued fractions provide a representation of the real numbers
- in the infinitie-dimensional space 
+ in the infinite-dimensional space 
 \begin_inset Formula $\mathbb{N}^{\omega}=\mathbb{N\times N\times}...$
 \end_inset 
 
@@ -214,7 +221,7 @@ essential singularity
 \end_inset 
 
 .
- Indeed, all rationals suffer in this way: a finite contined fraction is
+ Indeed, all rationals suffer in this way: a finite continued fraction is
  just one where 
 \begin_inset Formula $\infty$
 \end_inset 
@@ -309,13 +316,13 @@ set of measure zero
 Graphs
 \layout Standard
 
-Here are some graphs.
+A graphical presentation of these functions and sums are shown below.
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -393,7 +400,7 @@ ty; this self-similarity is key to obtaining workable analytic expressions.
 
 \layout Standard
 
-Define the Rieman sum as 
+Define the Riemann sum as 
 \layout Standard
 
 
@@ -464,7 +471,7 @@ Riemann Sums
 
 
 \begin_inset Graphics
-	filename rzero-121051.png
+	filename rzero-151051.png
 	lyxscale 60
 	width 20text%
 
@@ -477,7 +484,7 @@ The above strip charts show
 \begin_inset Formula $\left|\zeta_{N}(s)\right|$
 \end_inset 
 
- for N=15, 151, 1051, 11051 and 121051 respectively.
+ for N=15, 151, 1051, 11051 and 151051 respectively.
  The three vertical black lines are located at 
 \begin_inset Formula $\Re s$
 \end_inset 
@@ -512,7 +519,7 @@ The above strip charts show
 \begin_inset Formula $N$
 \end_inset 
 
- increases; presumably, they will completely disappearin the limit.
+ increases; presumably, they will completely disappear in the limit.
  What's left are five zeros which are not fading away; these become the
  Riemann zeroes.
  
@@ -520,7 +527,7 @@ The above strip charts show
 
 
 \begin_inset Note
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -539,7 +546,7 @@ created with src/fractal/generate/swap.C and was called with args
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -576,7 +583,7 @@ Riemann sum phase plots
 
 \layout Standard
 
-The above three figures are paramateric phase plots of 
+The above three figures are parametric phase plots of 
 \begin_inset Formula $\zeta_{N}(s)$
 \end_inset 
 
@@ -584,7 +591,7 @@ The above three figures are paramateric phase plots of
 \begin_inset Formula $s$
 \end_inset 
 
- as a paramter, varying from 
+ as a parameter, varying from 
 \begin_inset Formula $\Im s$
 \end_inset 
 
@@ -612,7 +619,7 @@ The above three figures are paramateric phase plots of
 \begin_inset Formula $N$
 \end_inset 
 
- increases, the loops shrink, passing through cusps; the last figure begining
+ increases, the loops shrink, passing through cusps; the last figure beginning
  to resemble the true phase portrait of the Riemann zeta.
 \end_inset 
 
@@ -622,7 +629,7 @@ The above three figures are paramateric phase plots of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -635,7 +642,7 @@ Zeros of
 
 
 \begin_inset Graphics
-	filename rzero-121051.png
+	filename rzero-151051.png
 	width 50text%
 
 \end_inset 
@@ -669,7 +676,12 @@ This figure shows a side-by-side comparison of
 
 .
  The sizes, heights and color scheme are as in the previous figures.
- Note the near-correspondance of the dominant zeros.
+ Note the near-correspondence of the dominant zeros; yet, the zeros for
+ 
+\begin_inset Formula $\left|\zeta_{N;1,2}(s)\right|$
+\end_inset 
+
+ do appear to be at shifted locations.
 \end_inset 
 
 
@@ -678,7 +690,7 @@ This figure shows a side-by-side comparison of
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -767,7 +779,7 @@ The numerical evaluation of sums requires a certain amount of cross-checking
 
 \end_inset 
 
- which does no permuation at all.
+ which does no permutation at all.
  That is, one effectively has 
 \begin_inset Formula $\eta_{N}(s)=\zeta_{N;p,p}(s)$
 \end_inset 
@@ -792,16 +804,26 @@ The numerical evaluation of sums requires a certain amount of cross-checking
 \layout Standard
 
 But that is false.
- A review of the figure below shows that this simple stair-step sum retains
- traces of the locations of the non-trivial Riemann zeros!
+ A review of the figure 
+\begin_inset LatexCommand \ref{cap:A-Shadow-of}
+
+\end_inset 
+
+ shows that this simple stair-step sum retains traces of the locations of
+ the non-trivial Riemann zeros!
 \layout Standard
 
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:A-Shadow-of}
+
+\end_inset 
 
 A Shadow of Zeta
 \layout Standard
@@ -865,11 +887,129 @@ cusps
 
 \layout Standard
 
-The presence of this shadow is not hard to explain 
+The presence of this shadow is not hard to explain.
+ Define 
+\begin_inset Formula \begin{equation}
+Z_{N}(s)=\sum_{n=1}^{N}\frac{1}{n^{s}}\label{eq:}\end{equation}
+
+\end_inset 
+
+Then it is clear that, for large 
+\begin_inset Formula $N$
+\end_inset 
+
+, 
+\begin_inset Formula $Z_{N}(s)$
+\end_inset 
+
+will approximate the Riemann zeta function: 
+\begin_inset Formula \begin{equation}
+\lim_{N\to\infty}Z_{N}(s)=\zeta(s)\label{eq:}\end{equation}
+
+\end_inset 
+
+ at least for the case of 
+\begin_inset Formula $\Re s>1$
+\end_inset 
+
+, where the sum is convergent.
+ With some simple manipulations, one may rewrite the numeric sum as 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{N-1}\left(\frac{2n+1}{2N}\right)^{s}=\frac{1}{(2N)^{s}}\left[Z_{2N-1}(-s)-2^{s}Z_{N-1}(-s)\right]\label{eq:}\end{equation}
+
+\end_inset 
+
+ The fact that the seemingly 
+\begin_inset Quotes eld
+\end_inset 
+
+trivial
+\begin_inset Quotes erd
+\end_inset 
+
+ 
+\begin_inset Formula $\eta_{N}(s)$
+\end_inset 
+
+ sum contains this approximation to the zeta would seem to explain the numeric
+ features shown in figure 
+\begin_inset LatexCommand \ref{cap:A-Shadow-of}
+
+\end_inset 
+
+.
+ Furthermore, the presence of the 
+\begin_inset Formula $-s$
+\end_inset 
+
+ in the arguments appears to explain why the horns are located not far from
+ the 
+\begin_inset Formula $\Re s=-1/2$
+\end_inset 
+
+ line.
+ 
+\layout Standard
+
+On the other hand, there is another important lesson to be drawn here: this
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+trivial
+\begin_inset Quotes erd
+\end_inset 
+
+ sum is insufficient to explain the features seen in the 
+\begin_inset Formula $\zeta_{N;p,q}(s)$
+\end_inset 
+
+ sums.
+ That is, although the numerical evaluation itself is prone to introducing
+ the Riemann zeta as an artifact, the strength of this artifact does not
+ immediately appear to be dominant enough to account for the entire behavior
+ of the 
+\begin_inset Formula $\zeta_{N;p,q}(s)$
+\end_inset 
+
+ sums.
+ 
 \layout Section
 
 Conclusions
 \layout Standard
 
-Apologies for the format of this paper.
+Numerical evidence suggests that the permutation-inspired zeta 
+\begin_inset Formula \[
+\zeta_{p,q}(s)=\lim_{N\to\infty}\zeta_{N;p,q}(s)\]
+
+\end_inset 
+
+ obeys a Riemann hypothesis, in that it's zeros lie in the critical strip,
+ and particularly on the 
+\begin_inset Formula $\Re s=1/2$
+\end_inset 
+
+ line.
+ Although the numerical evaluation itself 
+\begin_inset Quotes eld
+\end_inset 
+
+accidentally
+\begin_inset Quotes erd
+\end_inset 
+
+ introduces some zeta-like artifacts, these artifacts do not seem to be
+ sufficiently strong to explain the overall structure.
+ Alternate means of numerical evaluation, not suffering from this wart,
+ are desired, as well as an analysis in terms of traditional holomorphic
+ function techniques.
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
+
+\end_inset 
+
+
 \the_end
