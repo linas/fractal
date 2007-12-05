@@ -161,12 +161,12 @@ The Hurwitz zeta function may be defined as
 \begin_inset Formula $\sigma>1$
 \end_inset 
 
-, although, for high-precision work, convergence is annoyingly slow unless
- one has at least 
-\begin_inset Formula $\sigma\gtrsim2$
+, although, for high-precision work, convergence becomes annoyingly slow
+ when 
+\begin_inset Formula $\sigma$
 \end_inset 
 
-.
+ is less than about 2.
  The series may be analyticaly continued to the entire complex 
 \begin_inset Formula $s$
 \end_inset 
@@ -330,7 +330,7 @@ fractional polylogarithm
 \end_inset 
 
  This sum is absolutely convergent on the complex half-plane 
-\begin_inset Formula $\Re s>0$
+\begin_inset Formula $\sigma>0$
 \end_inset 
 
  when 
@@ -338,7 +338,7 @@ fractional polylogarithm
 \end_inset 
 
 , and in 
-\begin_inset Formula $\Re s>1$
+\begin_inset Formula $\sigma>1$
 \end_inset 
 
  when 
@@ -367,7 +367,7 @@ fractional polylogarithm
 \end_inset 
 
  which holds for the region 
-\begin_inset Formula $\Re s>1$
+\begin_inset Formula $\sigma>1$
 \end_inset 
 
 , 
@@ -620,22 +620,49 @@ The polylogarithm has a non-trivial analytic structure.
 \end_inset 
 
 -plane.
- This is noted here, as this branch point has a direct impact on the algorithm,
- preventing convergence in its vicinity.
+ This branch point has a direct impact on the algorithm to be presented,
+ as well, preventing convergence in its vicinity.
  
 \layout Standard
 
-The development of the algorithm requires the following integral representation.
-\layout Lemma
+The development of the algorithm requires the following integral representation
+ for the polylogarithm:
+\layout Standard
 
-The polylogarithm has the integral representation 
+
 \begin_inset Formula \[
 \mbox{Li}_{s}\left(z\right)=\frac{z}{\Gamma(s)}\int_{0}^{1}\frac{\left|\log y\right|^{s-1}}{1-yz}\, dy\]
 
 \end_inset 
 
+This is easily obtained by using the integral representation for 
+\begin_inset Formula $\Gamma(s)$
+\end_inset 
 
-\layout Proof
+ to replace 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ in the series representation for 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset 
+
+, and then exchanging the order of summation and integration.
+ A comprehensive development of this integral representation is given by
+ Costin
+\begin_inset LatexCommand \cite[Thm. 1]{Cos07}
+
+\end_inset 
+
+.
+ 
+\begin_inset Note
+collapsed true
+
+\layout Standard
+
+Proof was:
+\layout Standard
 
 This identity is easily obtained by inserting the integral representation
  of the Gamma function:
@@ -660,14 +687,9 @@ This identity is easily obtained by inserting the integral representation
 \end_inset 
 
 .
-\layout Standard
-
-A more sophisticated presentation of this theorem is given by Costin
-\begin_inset LatexCommand \cite[Thm. 1]{Cos07}
-
 \end_inset 
 
-.
+
 \layout Section
 
 The Borwein trick
@@ -754,8 +776,8 @@ An explicit expression for
 
  is needed.
  Write the polynomial as 
-\begin_inset Formula \[
-p_{n}(y)=\sum_{k=0}^{n}a_{k}y^{k}\]
+\begin_inset Formula \begin{equation}
+p_{n}(y)=\sum_{k=0}^{n}a_{k}y^{k}\label{eq:basic poly in a_k}\end{equation}
 
 \end_inset 
 
@@ -810,8 +832,8 @@ r_{n}^{(k)}(y)=\frac{1}{1-yz}\left[p_{n}^{(k)}(y)+kzr_{n}^{(k-1)}(y)\right]\]
 \end_inset 
 
  which is trivially solvable as 
-\begin_inset Formula \[
-c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}}\right]\]
+\begin_inset Formula \begin{equation}
+c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}}\right]\label{eq:c_k coefficients}\end{equation}
 
 \end_inset 
 
@@ -1529,7 +1551,11 @@ Returning to the polylogarithm, the task at hand is to find a polynomial
  
 \layout Standard
 
-Consider first the polynomial sequence 
+It suffices to consider 
+\begin_inset Formula $a=n/2$
+\end_inset 
+
+, and so, with slight abuse of notation, write this sequence as 
 \begin_inset Formula $p_{2n}(y)=y^{n}(1-y)^{n}$
 \end_inset 
 
@@ -1560,7 +1586,7 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
 
  is not positive, it is not hard to deduce the very crude estimate
 \begin_inset Formula \[
-\left|\xi(s,z)\right|\sim\left(\frac{z^{2}}{4(z-1)}\right)^{n}\frac{z}{\Gamma(s)}\]
+\left|\xi(s,z)\right|\sim\left|\left(\frac{z^{2}}{4(z-1)}\right)^{n}\frac{z}{\Gamma(s)}\right|\]
 
 \end_inset 
 
@@ -1595,7 +1621,12 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
  
 \layout Standard
 
-The polynomial coefficients are easily obtained, and are 
+The polynomial coefficients of equation 
+\begin_inset LatexCommand \ref{eq:basic poly in a_k}
+
+\end_inset 
+
+ are easily obtained, and are 
 \begin_inset Formula \begin{eqnarray*}
 a_{0} & = & a_{1}=\cdots=a_{n-1}=0\\
 a_{n+k} & = & \left(-1\right)^{k}\left(\begin{array}{c}
@@ -1614,7 +1645,12 @@ where the
 \begin_inset Formula $c_{k}$
 \end_inset 
 
- are given by 
+, the same as in equation 
+\begin_inset LatexCommand \ref{eq:c_k coefficients}
+
+\end_inset 
+
+, are given by 
 \begin_inset Formula \[
 c_{k}=z^{k}\left[-\left(\frac{z-1}{z^{2}}\right)^{n}+\frac{1}{z^{n}}\sum_{j=0}^{k-n}\left(-1\right)^{j}\left(\begin{array}{c}
 n\\
@@ -1622,7 +1658,7 @@ j\end{array}\right)\frac{1}{z^{j}}\right]\]
 
 \end_inset 
 
- where the summation above is to be understood to be zero when 
+ The summation above is to be understood to be zero when 
 \begin_inset Formula $k<n$
 \end_inset 
 
@@ -1809,7 +1845,7 @@ To evaluate the integral in
 , one also needs a bound on the denominator.
  This is furnished by 
 \begin_inset Formula \[
-\left|\frac{1}{1-yz}\right|\le C(z)\,:=\begin{cases}
+\left|\frac{1}{1-yz}\right|\le C(z)\,\equiv\begin{cases}
 1 & \mbox{ if }\Re z\le0\\
 \frac{1}{\left|1-z\right|} & \mbox{ if }0<\Re z\;\mbox{ and }\left|z\right|<1\\
 \left|\frac{z}{\Im z}\right| & \mbox{ if }0<\Re z\;\mbox{ and }\left|z\right|>1\end{cases}\]
@@ -1834,7 +1870,7 @@ To evaluate the integral in
 \begin_inset Formula $G(s)$
 \end_inset 
 
- is bounded by 
+ containing the completed square of the Gaussians is bounded by 
 \begin_inset Formula \begin{eqnarray*}
 G(s) & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\left(\sigma-1\right)\frac{8y_{0}\left(1-2y_{0}\right)}{8y_{0}\left(1-2y_{0}\right)+\frac{\sigma-1}{n-\sigma+1}}\\
  & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\frac{\sigma-1}{\sigma}\\
@@ -2255,9 +2291,16 @@ There remains the question of what value of
  is the desired number of decimal digits of precision.
  The performance of this algorithm is compared to that of the Borwein algorithm
  in the next section.
+ 
+\begin_inset Note
+collapsed true
+
 \layout Standard
 
 XXX to do: characterize the region of convergence for this algo.
+\end_inset 
+
+
 \layout Section
 
 Performance
@@ -2273,12 +2316,36 @@ The performance of both the Euler-Maclaurin summation and the Borwein algorithm
 
 , although this depends on whether the polylogarithm or the Hurwitz zeta
  is the desired quantity.
- It also depends on whether repeated evaluations are being done for fixed
  
+\layout Standard
+
+A proper performance analysis of an algorithm would provide a detailed accountin
+g of the number of multiplications required to implement the algorithm.
+ This would allow the comparison of different algorithms for optimality.
+ Such a detailed accounting is beyond the scope of this paper.
+ In part this is because the algorithms require the exponentiation of complex
+ numbers, the calculation of Bernoulli numbers and binomial coefficients,
+ and, if Jonquière's identity (equation 
+\begin_inset LatexCommand \ref{eq:poly-hur relation}
+
+\end_inset 
+
+) is used, the evaluation of 
+\begin_inset Formula $\Gamma(s)$
+\end_inset 
+
+ for complex 
 \begin_inset Formula $s$
 \end_inset 
 
- but varying 
+.
+ The performance evaluation of each of these steps presents its own difficulties.
+ In addition, various subexpressions can be cached, if it is known that
+ either 
+\begin_inset Formula $s$
+\end_inset 
+
+ or 
 \begin_inset Formula $q$
 \end_inset 
 
@@ -2286,12 +2353,14 @@ The performance of both the Euler-Maclaurin summation and the Borwein algorithm
 \begin_inset Formula $z$
 \end_inset 
 
-, as holding 
-\begin_inset Formula $s$
-\end_inset 
+ will be held fixed from one evaluation to the next.
+ Thus, this section will present an experimental study of the performance,
+ based on a reasonably well-developed implementation of the various quantities,
+ anchored upon the basic functions provided by GMP.
+ 
+\layout Standard
 
- fixed allows the results of intermediate calculations to be cached.
- The figures 
+These experimental results are shown in figures 
 \begin_inset LatexCommand \ref{cap:Polylogarithm-cold-cache}
 
 \end_inset 
@@ -2301,13 +2370,24 @@ The performance of both the Euler-Maclaurin summation and the Borwein algorithm
 
 \end_inset 
 
- compare the performance of actual implementations.
+ for the polylogarithm, and 
+\begin_inset LatexCommand \ref{cap:Hurwitz-zeta-cold}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{cap:Hurwitz-zeta-warm}
+
+\end_inset 
+
+, for the Hurwitz zeta function, which compare the performance of actual
+ implementations.
  
 \layout Standard
 
 
 \begin_inset Note
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -2322,7 +2402,7 @@ graphs created with misc/bignum/poly-perf.gplot, raw data generated by poly-perf
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -2409,7 +2489,7 @@ The primary contribution to the calculations is the evaluation of
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -2448,10 +2528,10 @@ warm cache
  were pre-computed, prior to beginning the timing measurements.
  These pre-computed values were used in the Borwein and direct sums.
  For the Euler-Maclaurin sum, the value of 
-\begin_inset Formula $\Gamma(s)/(2\pi)^{s}$
+\begin_inset Formula $\Gamma(s)/(2\pi i)^{s}$
 \end_inset 
 
- is pre-computed and cached as well.
+, needed for Jonquière's identity, is pre-computed and cached as well.
  Despite the use of such cached, pre-computed values, the Borwein algorithm
  still wins over direct summation, and appears to be tied with the Euler-Maclaur
 in sum.
@@ -2473,9 +2553,14 @@ in sum.
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Hurwitz-zeta-cold}
+
+\end_inset 
 
 Hurwitz zeta cold cache performance
 \layout Standard
@@ -2534,9 +2619,14 @@ cold cache
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Hurwitz-zeta-warm}
+
+\end_inset 
 
 Hurwitz zeta warm cache performance
 \layout Standard
