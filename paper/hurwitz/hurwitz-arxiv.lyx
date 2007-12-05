@@ -34,7 +34,7 @@ Linas Vep\i \v{s}
 tas
 \layout Date
 
-12 October 2006, revised 18 March 2007
+12 October 2006, revised 18 November 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -122,7 +122,8 @@ Introduction
 
 This note sketches a technique for improving the rate of convergence of
  a general oscillatory series, and then applies this technique to the computatio
-n of the polylogarithm, and, in particular, to the Hurwitz zeta function.
+n of the polylogarithm, and to related functions, such as the Hurwitz zeta
+ function.
  It essentially generalizes an algorithm given by Peter Borwein for computing
  the Riemann zeta function.
  The principle result is an algorithm that efficiently obtains values of
@@ -147,17 +148,39 @@ The Hurwitz zeta function may be defined as
 
 \end_inset 
 
- This series may be directly summed for 
+ This series is absolutely convergent for 
 \begin_inset Formula $\sigma>1$
 \end_inset 
 
-, although, for high-precision work, convergence is annoyingly slow unless
- one has at least 
-\begin_inset Formula $\sigma\gtrsim2$
+ and any complex 
+\begin_inset Formula $q$
+\end_inset 
+
+ that is not zero or a negative integer.
+ For numerical calculations, this series may be directly summed for 
+\begin_inset Formula $\sigma>1$
+\end_inset 
+
+, although, for high-precision work, convergence becomes annoyingly slow
+ when 
+\begin_inset Formula $\sigma$
+\end_inset 
+
+ is less than about 2.
+ The series may be analytically continued to the entire complex 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane, excepting a simple pole at 
+\begin_inset Formula $s=1$
 \end_inset 
 
 .
- A globally convergent series was given by Helmut Hasse in 1930
+ The continuation, convergent on the entire complex 
+\begin_inset Formula $s$
+\end_inset 
+
+-plane except at the pole, was given by Helmut Hasse in 1930
 \begin_inset LatexCommand \cite{Has30}
 
 \end_inset 
@@ -170,10 +193,11 @@ k\end{array}\right)(q+k)^{1-s}\label{eq:Hasse series}\end{equation}
 
 \end_inset 
 
- Although this series is technically convergent everywhere, in practice,
- the convergence is abysmally slow on the critical strip.
- A not unreasonable algorithm may be given by considering a Taylor's series
- in 
+ Although the Hasse series is convergent, the convergence is far too slow
+ for practical numerical evaluation in the critical strip.
+ There are other simple series that are more strongly convergent in limited
+ domains, and so may be considered for numerical work.
+ One such is a Taylor's series in 
 \begin_inset Formula $q$
 \end_inset 
 
@@ -212,8 +236,9 @@ n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
 \end_inset 
 
 .
- Either of these expansions provide a computable expression for the Hurwitz
- zeta function that is convergent on the entire complex 
+ Either of these expansions provide a numerically reasonable expression
+ for the Hurwitz zeta function that is convergent on the entire complex
+ 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -221,7 +246,7 @@ n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
 \begin_inset Formula $s=1$
 \end_inset 
 
-, and taking the appropriate limit, via l'Hopital's rule, when 
+, and taking the appropriate limit, via l'Hôpital's rule, when 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -237,28 +262,52 @@ n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
  
 \layout Standard
 
-It is the poor performance of these sums that motivates the development
- of this paper.
+It is the poor performance of these sums in numerical calculations that
+ motivates the development of this paper.
  Since the Generalized Riemann Hypothesis can be phrased in terms of the
  values of the Hurwitz zeta function on the critical strip, it is of some
  interest to have a fast algorithm for computing high-precision values of
  this function in this region.
- There seems to be a paucity of work in this area.
- There is a discussion of fast algorithms for Dirichlet L-functions in 
+ There has been little work in this area.
+ \i \v{S}
+le\i \v{z}
+evi\i \v{c}
+iene provides a discussion of fast algorithms for Dirichlet L-functions
+ in 
 \begin_inset LatexCommand \cite{Sle04}
 
 \end_inset 
 
- (the author has been unable to obtain a copy of this manuscript).
- 
-\layout Standard
+.
+ Balanzario presents an extension of the Euler-Maclaurin formula, such that
+ it can be used to evaluate 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
 
-The Hurwitz zeta may be expressed in terms of the polylogarithm
-\begin_inset LatexCommand \cite{Lew81}
+ in the critical strip 
+\begin_inset LatexCommand \cite{Bal06}
 
 \end_inset 
 
- (sometimes called the 
+.
+ A particularly interesting possibility is the application of the FEE method
+ to the evaluation of 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
+
+ for integer 
+\begin_inset Formula $s$
+\end_inset 
+
+, given by Karatsuba
+\begin_inset LatexCommand \cite{Kar98}
+
+\end_inset 
+
+.
+\layout Standard
+
+The polylogarithm, sometimes called the 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -274,9 +323,30 @@ fractional polylogarithm
 \begin_inset Formula $s$
 \end_inset 
 
- is not an integer): 
+ need not be an integer, is given by the sum 
 \begin_inset Formula \begin{equation}
 \mbox{Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\label{eq:polylog definition}\end{equation}
+
+\end_inset 
+
+ This sum is absolutely convergent on the complex half-plane 
+\begin_inset Formula $\sigma>0$
+\end_inset 
+
+ when 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset 
+
+, and in 
+\begin_inset Formula $\sigma>1$
+\end_inset 
+
+ when 
+\begin_inset Formula $\left|z\right|\le1$
+\end_inset 
+
+ The Hurwitz zeta may be expressed in terms of the polylogarithm
+\begin_inset LatexCommand \cite{Lew81}
 
 \end_inset 
 
@@ -296,7 +366,21 @@ fractional polylogarithm
 
 \end_inset 
 
- and so one might search for good algorithms for polylogarithms.
+ which holds for the region 
+\begin_inset Formula $\sigma>1$
+\end_inset 
+
+, 
+\begin_inset Formula $0\le\Re q<1$
+\end_inset 
+
+, and 
+\begin_inset Formula $\Im q>0$
+\end_inset 
+
+.
+ Thus, fast algorithms for the polylogarithm can be converted to fast algorithms
+ for the Hurwitz zeta.
  Wood
 \begin_inset LatexCommand \cite{Wood92}
 
@@ -328,15 +412,15 @@ fractional polylogarithm
 \begin_inset Formula $\left|z\right|<1$
 \end_inset 
 
-, although direct evaluation becomes quite slow when 
-\begin_inset Formula $\left|z\right|\gtrsim0.95$
+, although direct evaluation becomes quite slow as 
+\begin_inset Formula $\left|z\right|$
 \end_inset 
 
- and 
-\begin_inset Formula $\sigma\lesssim2$
+ approaches 1 and 
+\begin_inset Formula $\sigma$
 \end_inset 
 
-.
+ is smaller than about 2.
  There do not seem to be any published algorithms that may be applied on
  the critical strip.
 \layout Standard
@@ -467,8 +551,7 @@ backwards
 \layout Standard
 
 The development of this paper proceeds as follows.
- First, a certain specific integral representation is given for the polylogarith
-m.
+ First, an integral representation is given for the polylogarithm.
  This representation is such that a certain trick, here called 
 \begin_inset Quotes eld
 \end_inset 
@@ -477,21 +560,21 @@ the Borwein trick
 \begin_inset Quotes erd
 \end_inset 
 
-, may be applied, to express the integral as a polynomial plus a small error
+, may be applied to express the integral as a polynomial plus a small error
  term.
  This is followed by a sketch of a generalization of the trick to the convergenc
 e acceleration of general oscillatory series.
- The next section selects a specific polynomial, and the error term of the
- resulting approximation is precisely bounded.
+ A polynomial series for the polylogarithm is given, and the error term
+ of the resulting approximation is precisely bounded.
  This is followed by a very short review of the application of the Euler
  Maclaurin summation.
- This is followed by a brief review of the duplication formula for the Hurwitz
- zeta, and a short discussion of ways in which this numerical algorithm
- may be tested for correctness.
+ There is a brief review of the duplication formula for the Hurwitz zeta,
+ and a short discussion of ways in which this numerical algorithm may be
+ tested for correctness.
  Measurements of the performance of actual implementations of the various
  numerical algorithms is provided.
- This is followed by a detailed derivation of the monodromy group, and a
- discussion of Apostol's 
+ The paper concludes with a detailed derivation of the monodromy group,
+ and a discussion of Apostol's 
 \begin_inset Quotes eld
 \end_inset 
 
@@ -537,23 +620,49 @@ The polylogarithm has a non-trivial analytic structure.
 \end_inset 
 
 -plane.
- This is noted here, as this branch point has a direct impact on the algorithm,
- preventing convergence in its vicinity.
- Besides this, the polylogarithm has many other interesting properties,
- which are not reviewed here.
+ This branch point has a direct impact on the algorithm to be presented,
+ as well, preventing convergence in its vicinity.
+ 
 \layout Standard
 
-The development of the algorithm requires the following integral representation.
-\layout Lemma
+The development of the algorithm requires the following integral representation
+ for the polylogarithm:
+\layout Standard
 
-The polylogarithm has the integral representation 
+
 \begin_inset Formula \[
 \mbox{Li}_{s}\left(z\right)=\frac{z}{\Gamma(s)}\int_{0}^{1}\frac{\left|\log y\right|^{s-1}}{1-yz}\, dy\]
 
 \end_inset 
 
+This is easily obtained by using the integral representation for 
+\begin_inset Formula $\Gamma(s)$
+\end_inset 
 
-\layout Proof
+ to replace 
+\begin_inset Formula $n^{-s}$
+\end_inset 
+
+ in the series representation for 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset 
+
+, and then exchanging the order of summation and integration.
+ A comprehensive development of this integral representation is given by
+ Costin
+\begin_inset LatexCommand \cite[Thm. 1]{Cos07}
+
+\end_inset 
+
+.
+ 
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+Proof was:
+\layout Standard
 
 This identity is easily obtained by inserting the integral representation
  of the Gamma function:
@@ -578,14 +687,9 @@ This identity is easily obtained by inserting the integral representation
 \end_inset 
 
 .
-\layout Standard
-
-A more sophisticated presentation of this theorem is given by Costin
-\begin_inset LatexCommand \cite[Thm. 1]{Cos07}
-
 \end_inset 
 
-.
+
 \layout Section
 
 The Borwein trick
@@ -594,7 +698,7 @@ The Borwein trick
 The Borwein trick uses the integral form to find a simple, finite sum that
  approximates the desired value arbitrarily well.
  The trick consists of two steps.
- The first is to write the above integral in the form 
+ The first is to write the above integral formula as follows 
 \begin_inset Formula \begin{eqnarray}
 \xi(s,z) & = & \frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\nonumber \\
  & = & \mbox{Li}_{s}\left(z\right)+\frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)-f(1/z)}{1-yz}\,\left|\log y\right|^{s-1}dy\label{eq:Borwein trick}\end{eqnarray}
@@ -610,7 +714,7 @@ The Borwein trick uses the integral form to find a simple, finite sum that
 \end_inset 
 
 , such that the integral on the right hand side can be evaluated as a simple,
- finite sum, while the left hand side can be shown to bounded arbitrarily
+ finite sum, while the left hand side can be shown to be bounded arbitrarily
  close to zero as 
 \begin_inset Formula $n\to\infty$
 \end_inset 
@@ -671,17 +775,21 @@ An explicit expression for
 \end_inset 
 
  is needed.
- Write the polynomial as 
-\begin_inset Formula \[
-p_{n}(y)=\sum_{k=0}^{n}a_{k}y^{k}\]
+ Write the polynomial 
+\begin_inset Formula $p_{n}(y)$
+\end_inset 
+
+ as 
+\begin_inset Formula \begin{equation}
+p_{n}(y)=\sum_{k=0}^{n}a_{k}y^{k}\label{eq:basic poly in a_k}\end{equation}
 
 \end_inset 
 
- while for 
+ while, for 
 \begin_inset Formula $r_{n}$
 \end_inset 
 
- assume only a general series: 
+, assume only a general series: 
 \begin_inset Formula \begin{equation}
 r_{n}(y)=\sum_{k=0}^{\infty}c_{k}y^{k}\label{eq:r_n series}\end{equation}
 
@@ -728,8 +836,8 @@ r_{n}^{(k)}(y)=\frac{1}{1-yz}\left[p_{n}^{(k)}(y)+kzr_{n}^{(k-1)}(y)\right]\]
 \end_inset 
 
  which is trivially solvable as 
-\begin_inset Formula \[
-c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}}\right]\]
+\begin_inset Formula \begin{equation}
+c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}}\right]\label{eq:c_k coefficients}\end{equation}
 
 \end_inset 
 
@@ -829,7 +937,7 @@ e acceleration of an alternating series
  Polynomials that provide much more powerful series acceleration are discussed
  by Cohen 
 \emph on 
-etal
+et al
 \emph default 
 
 \begin_inset LatexCommand \cite{Coh00}
@@ -875,40 +983,148 @@ etal
  
 \layout Standard
 
-The Euler method applied to the Hurwitz zeta function essentially leads
- to the Hasse series 
+Euler's transformation of alternating series is a convergence acceleration
+ technique, and is most clearly expressed by making use of the forward differenc
+e operator.
+ This operator, 
+\begin_inset Formula $\triangle$
+\end_inset 
+
+, is defined to act on a sequence 
+\begin_inset Formula $\{ a_{n}\}$
+\end_inset 
+
+ as 
+\begin_inset Formula $\triangle a_{n}=a_{n+1}-a_{n}$
+\end_inset 
+
+.
+ By abuse of notation, it acts on a general function 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ as 
+\begin_inset Formula $\triangle f(x)=f(x+1)-f(x)$
+\end_inset 
+
+.
+ Repeated iteration is used to define 
+\begin_inset Formula $\triangle^{n}$
+\end_inset 
+
+, so that 
+\begin_inset Formula $\triangle^{2}f(x)=f(x+2)-2f(x+1)+f(x)$
+\end_inset 
+
+ and 
+\begin_inset Formula \begin{equation}
+\triangle^{n}f(x)=\sum_{k=0}^{n}(-1)^{n-k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)f(x+k)\label{eq:nth difference}\end{equation}
+
+\end_inset 
+
+ Euler then considers a convergent alternating series
+\layout Standard
+
+
+\begin_inset Formula \[
+s=\sum_{n=0}^{\infty}\left(-1\right)^{n}a_{n}\]
+
+\end_inset 
+
+ and finds that it can be re-written as 
+\begin_inset Formula \begin{equation}
+s=\sum_{n=0}^{\infty}\frac{\left(-1\right)^{n}\triangle^{n}a_{0}}{2^{n+1}}\label{eq:Euler's series}\end{equation}
+
+\end_inset 
+
+ Aside from the power of two in the denominator aiding in convergence, it
+ is often the case that the forward differences themselves rapidly become
+ small.
+\layout Standard
+
+The Euler transformation has a more general form.
+ It is 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}a_{n}b_{n}x^{n}=\sum_{k=0}^{\infty}\,\frac{x^{k}}{k!}\, g^{(k)}(x)\,\triangle^{k}a_{0}\label{eq:Euler's general}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $g(x)=\sum_{n=0}^{\infty}b_{n}x^{n}$
+\end_inset 
+
+ and 
+\begin_inset Formula $g^{(k)}(x)$
+\end_inset 
+
+ denotes the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th derivative of 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+A good example of the strength of Euler's transformation of alternating
+ series is its application to the Hurwitz zeta function.
+ Euler's technique essentially leads to the Hasse series 
 \begin_inset LatexCommand \ref{eq:Hasse series}
 
 \end_inset 
 
 .
- This may be seen by noting that the inner sum is just a forward difference:
+ Taking 
+\begin_inset Formula $f(x)$
+\end_inset 
+
+ to be 
+\begin_inset Formula $q^{1-s}$
+\end_inset 
+
+ in equation 
+\begin_inset LatexCommand \ref{eq:nth difference}
+
+\end_inset 
+
+, the inner sum of the Hasse series 
+\begin_inset LatexCommand \ref{eq:Hasse series}
+
+\end_inset 
+
+ is then 
 \begin_inset Formula \[
-\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+\sum_{k=0}^{n}(-1)^{n-k}\left(\begin{array}{c}
 n\\
 k\end{array}\right)(q+k)^{1-s}=\triangle^{n}q^{1-s}\]
 
 \end_inset 
 
- where 
-\begin_inset Formula $\triangle$
+The benefit of the Hasse series is that it has improved convergence to the
+ point of being globally convergent on the complex 
+\begin_inset Formula $s$
 \end_inset 
 
- is the forward difference operator.
- The Hasse series has improved convergence in that the result is globally
- convergent, whereas the traditional series representation of equation 
+-plane, whereas the traditional series representation of equation 
 \begin_inset LatexCommand \ref{eq:Hurwitz zeta}
 
 \end_inset 
 
  is not.
- However, a quick numerical experiment will show that the Hasse series does
- not converge rapidly, especially in the critical strip.
+ Yet, perhaps, things can be improved further still.
+ A quick numerical experiment will show that the Hasse series does not converge
+ rapidly, especially in the critical strip.
+ The attempt to improve convergence even further, beyond this traditional
+ technique, motivates the development of this paper.
+ 
 \layout Standard
 
-The poor convergence of these traditional techniques motivates the development
- of this paper.
- Strictly speaking, the slow convergence can be attributed to the fact that
+Strictly speaking, the slow convergence can be attributed to the fact that
  the naive series representations 
 \begin_inset LatexCommand \ref{eq:Hurwitz zeta}
 
@@ -919,8 +1135,8 @@ The poor convergence of these traditional techniques motivates the development
 
 \end_inset 
 
- are not strictly alternating series, as would be required to justify the
- application of the Euler method.
+ are not strictly alternating series, as would be properly required to justify
+ the application of the Euler method.
  Instead, the series are a superposition of oscillatory terms; for the polylogar
 ithm, an explicit oscillation coming from 
 \begin_inset Formula $z^{n}=\left|z\right|^{n}e^{in\arg z}$
@@ -931,9 +1147,10 @@ ithm, an explicit oscillation coming from
 \end_inset 
 
 .
- Thus, what one needs is a theory of sequence acceleration not for alternating
- series, but for oscillatory series.
- The polylogarithm approximation represents the 
+ Thus, one would like to have a theory of sequence acceleration not for
+ alternating series, but for oscillatory series.
+ The polylogarithm approximation given in the last section represents the
+ 
 \emph on 
 ad-hoc
 \emph default 
@@ -975,12 +1192,12 @@ S=\sum_{n=0}^{\infty}c_{n}\]
 
 .
  One may then consider a sum of 
-\begin_inset Formula $a_{n}=e^{in(\pi-\theta)}e_{n}$
+\begin_inset Formula $a_{n}=e^{-in\theta}e_{n}$
 \end_inset 
 
- and consider the  summation of an alternating series 
+ and consider the  summation of a series 
 \begin_inset Formula \[
-\sum_{n=0}^{\infty}\left(-1\right)^{n}a_{n}\]
+\sum_{n=0}^{\infty}e^{in\theta}a_{n}\]
 
 \end_inset 
 
@@ -988,7 +1205,11 @@ S=\sum_{n=0}^{\infty}c_{n}\]
 \begin_inset Formula $a_{n}$
 \end_inset 
 
- are now presumed to be relatively tame, so that series acceleration techniques
+ are now presumed to be relatively tame, so that equation 
+\begin_inset LatexCommand \ref{eq:Euler's general}
+
+\end_inset 
+
  can be applied.
  This trick may be applied to any oscillatory sequence; one need not know
  a precise or 
@@ -1015,11 +1236,16 @@ Alternately, one may consider replacing the forward difference operator
 .
  Straightforward manipulations lead to 
 \begin_inset Formula \[
-\sum_{m=0}^{\infty}\left(\frac{z}{1-qz}\right)^{m+1}\triangle_{q}^{m}b_{0}=\sum_{n=0}^{\infty}z^{n}b_{n}\]
+\frac{1}{1-qz}\;\sum_{m=0}^{\infty}\left(\frac{z}{1-qz}\right)^{m}\triangle_{q}^{m}b_{0}=\sum_{n=0}^{\infty}z^{n}b_{n}\]
 
 \end_inset 
 
- with the traditional Euler's series regained by taking 
+ with the traditional Euler's series
+\begin_inset LatexCommand \ref{eq:Euler's series}
+
+\end_inset 
+
+ regained by taking 
 \begin_inset Formula $q=1$
 \end_inset 
 
@@ -1042,18 +1268,13 @@ Alternately, one may consider replacing the forward difference operator
  However, there are more powerful techniques.
 \layout Standard
 
-Suppose one is interested in the sum
+Consider the sum
 \begin_inset Formula \begin{equation}
 S(z)=\sum_{n=0}^{\infty}z^{n}b_{n}\label{eq: geo series}\end{equation}
 
 \end_inset 
 
- In general, one is interested in general sequences 
-\begin_inset Formula $b_{n}$
-\end_inset 
-
-.
- Suppose, however, that the 
+ where the 
 \begin_inset Formula $b_{n}$
 \end_inset 
 
@@ -1077,12 +1298,8 @@ b_{n}=\int_{0}^{1}y^{n}g(y)dy\]
 \begin_inset Formula $b_{n}$
 \end_inset 
 
-.
- If the 
-\begin_inset Formula $b_{n}$
-\end_inset 
-
- are expressible as moments, then one has
+, and should not bar most practical applications.
+ It follows that
 \begin_inset Formula \[
 S(z)=\int_{0}^{1}\frac{g(y)}{1-yz}\, dy\]
 
@@ -1221,8 +1438,7 @@ well-behaved
 \begin_inset Quotes erd
 \end_inset 
 
- -- in this case, being expressible as moments of a rather general function
- 
+ -- in this case, being expressible as moments of a general function 
 \begin_inset Formula $g(y)$
 \end_inset 
 
@@ -1285,8 +1501,11 @@ et al.
 
 \end_inset 
 
- suggest some remarkably strongly converging polynomials, with values of
- 
+ suggest some remarkably strongly converging polynomials 
+\begin_inset Formula $p_{n}(y)$
+\end_inset 
+
+, with values of 
 \begin_inset Formula $A$
 \end_inset 
 
@@ -1297,11 +1516,6 @@ et al.
 
  is not immediately apparent, but is surely possible.
  
-\layout Standard
-
-There is another, possibly fruitful direction one might take.
- This hinges on noting that the integrands above take the general form of
- a Padé approximation, and one proceeds from there.
 \layout Section
 
 The Gaussian Distribution 
@@ -1341,7 +1555,11 @@ Returning to the polylogarithm, the task at hand is to find a polynomial
  
 \layout Standard
 
-Consider first the polynomial sequence 
+It suffices to consider 
+\begin_inset Formula $a=n/2$
+\end_inset 
+
+, and so, with slight abuse of notation, write this sequence as 
 \begin_inset Formula $p_{2n}(y)=y^{n}(1-y)^{n}$
 \end_inset 
 
@@ -1372,7 +1590,7 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
 
  is not positive, it is not hard to deduce the very crude estimate
 \begin_inset Formula \[
-\xi(s,z)\sim\left(\frac{z^{2}}{4(z-1)}\right)^{n}\frac{z}{\Gamma(s)}\]
+\left|\xi(s,z)\right|\sim\left|\left(\frac{z^{2}}{4(z-1)}\right)^{n}\frac{z}{\Gamma(s)}\right|\]
 
 \end_inset 
 
@@ -1407,7 +1625,12 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
  
 \layout Standard
 
-The polynomial coefficients are easily obtained, and are 
+The polynomial coefficients of equation 
+\begin_inset LatexCommand \ref{eq:basic poly in a_k}
+
+\end_inset 
+
+ are easily obtained, and are 
 \begin_inset Formula \begin{eqnarray*}
 a_{0} & = & a_{1}=\cdots=a_{n-1}=0\\
 a_{n+k} & = & \left(-1\right)^{k}\left(\begin{array}{c}
@@ -1426,7 +1649,12 @@ where the
 \begin_inset Formula $c_{k}$
 \end_inset 
 
- are given by 
+, the same as in equation 
+\begin_inset LatexCommand \ref{eq:c_k coefficients}
+
+\end_inset 
+
+, are given by 
 \begin_inset Formula \[
 c_{k}=z^{k}\left[-\left(\frac{z-1}{z^{2}}\right)^{n}+\frac{1}{z^{n}}\sum_{j=0}^{k-n}\left(-1\right)^{j}\left(\begin{array}{c}
 n\\
@@ -1434,7 +1662,7 @@ j\end{array}\right)\frac{1}{z^{j}}\right]\]
 
 \end_inset 
 
- where the summation above is to be understood to be zero when 
+ The summation above is to be understood to be zero when 
 \begin_inset Formula $k<n$
 \end_inset 
 
@@ -1497,7 +1725,7 @@ In order for equation
 \end_inset 
 
  to be useful computationally, an upper bound on the value of 
-\begin_inset Formula $\xi$
+\begin_inset Formula $\left|\xi\right|$
 \end_inset 
 
  as a function of 
@@ -1578,7 +1806,7 @@ The general behavior of the integrand appearing in equation
  product of Gaussians is a Gaussian, so is the entire expression.
  From the Stirling approximation, one has the well-known identity 
 \begin_inset Formula \[
-\left(y(1-y)\right)^{a}\le\frac{1}{4^{a}}\exp-4a\left(y-\frac{1}{2}\right)^{2}\]
+\left|y(1-y)\right|^{a}\le\frac{1}{4^{a}}\exp-4a\left(y-\frac{1}{2}\right)^{2}\]
 
 \end_inset 
 
@@ -1593,7 +1821,7 @@ The general behavior of the integrand appearing in equation
 \end_inset 
 
 , that is, at 
-\begin_inset Formula $y_{0}=0.23561058253\ldots$
+\begin_inset Formula $y_{0}=0.23561058253\cdots$
 \end_inset 
 
 , where 
@@ -1607,7 +1835,7 @@ The general behavior of the integrand appearing in equation
 \end_inset 
 
  Curiously, the numerical value of the factor in the Gaussian is 
-\begin_inset Formula $1/2y_{0}(1-2y_{0})=4.013295587\ldots$
+\begin_inset Formula $1/2y_{0}(1-2y_{0})=4.013295587\cdots$
 \end_inset 
 
 
@@ -1621,7 +1849,7 @@ To evaluate the integral in
 , one also needs a bound on the denominator.
  This is furnished by 
 \begin_inset Formula \[
-\left|\frac{1}{1-yz}\right|\le C(z)=\begin{cases}
+\left|\frac{1}{1-yz}\right|\le C(z)\,\equiv\begin{cases}
 1 & \mbox{ if }\Re z\le0\\
 \frac{1}{\left|1-z\right|} & \mbox{ if }0<\Re z\;\mbox{ and }\left|z\right|<1\\
 \left|\frac{z}{\Im z}\right| & \mbox{ if }0<\Re z\;\mbox{ and }\left|z\right|>1\end{cases}\]
@@ -1646,7 +1874,7 @@ To evaluate the integral in
 \begin_inset Formula $G(s)$
 \end_inset 
 
- is bounded by 
+ containing the completed square of the Gaussians is bounded by 
 \begin_inset Formula \begin{eqnarray*}
 G(s) & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\left(\sigma-1\right)\frac{8y_{0}\left(1-2y_{0}\right)}{8y_{0}\left(1-2y_{0}\right)+\frac{\sigma-1}{n-\sigma+1}}\\
  & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\frac{\sigma-1}{\sigma}\\
@@ -2067,9 +2295,16 @@ There remains the question of what value of
  is the desired number of decimal digits of precision.
  The performance of this algorithm is compared to that of the Borwein algorithm
  in the next section.
+ 
+\begin_inset Note
+collapsed false
+
 \layout Standard
 
 XXX to do: characterize the region of convergence for this algo.
+\end_inset 
+
+
 \layout Section
 
 Performance
@@ -2085,12 +2320,36 @@ The performance of both the Euler-Maclaurin summation and the Borwein algorithm
 
 , although this depends on whether the polylogarithm or the Hurwitz zeta
  is the desired quantity.
- It also depends on whether repeated evaluations are being done for fixed
  
+\layout Standard
+
+A proper performance analysis of an algorithm would provide a detailed accountin
+g of the number of multiplications required to implement the algorithm.
+ This would allow the comparison of different algorithms for optimality.
+ Such a detailed accounting is beyond the scope of this paper.
+ In part this is because the algorithms require the exponentiation of complex
+ numbers, the calculation of Bernoulli numbers and binomial coefficients,
+ and, if Jonquière's identity (equation 
+\begin_inset LatexCommand \ref{eq:poly-hur relation}
+
+\end_inset 
+
+) is used, the evaluation of 
+\begin_inset Formula $\Gamma(s)$
+\end_inset 
+
+ for complex 
 \begin_inset Formula $s$
 \end_inset 
 
- but varying 
+.
+ The performance evaluation of each of these steps presents its own difficulties.
+ In addition, various subexpressions can be cached, if it is known that
+ either 
+\begin_inset Formula $s$
+\end_inset 
+
+ or 
 \begin_inset Formula $q$
 \end_inset 
 
@@ -2098,12 +2357,14 @@ The performance of both the Euler-Maclaurin summation and the Borwein algorithm
 \begin_inset Formula $z$
 \end_inset 
 
-, as holding 
-\begin_inset Formula $s$
-\end_inset 
+ will be held fixed from one evaluation to the next.
+ Thus, this section will present an experimental study of the performance,
+ based on a reasonably well-developed implementation of the various quantities,
+ anchored upon the basic functions provided by GMP.
+ 
+\layout Standard
 
- fixed allows the results of intermediate calculations to be cached.
- The figures 
+These experimental results are shown in figures 
 \begin_inset LatexCommand \ref{cap:Polylogarithm-cold-cache}
 
 \end_inset 
@@ -2113,13 +2374,24 @@ The performance of both the Euler-Maclaurin summation and the Borwein algorithm
 
 \end_inset 
 
- compare the performance of actual implementations.
+ for the polylogarithm, and 
+\begin_inset LatexCommand \ref{cap:Hurwitz-zeta-cold}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \ref{cap:Hurwitz-zeta-warm}
+
+\end_inset 
+
+, for the Hurwitz zeta function, which compare the performance of actual
+ implementations.
  
 \layout Standard
 
 
 \begin_inset Note
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -2260,10 +2532,10 @@ warm cache
  were pre-computed, prior to beginning the timing measurements.
  These pre-computed values were used in the Borwein and direct sums.
  For the Euler-Maclaurin sum, the value of 
-\begin_inset Formula $\Gamma(s)/(2\pi)^{s}$
+\begin_inset Formula $\Gamma(s)/(2\pi i)^{s}$
 \end_inset 
 
- is pre-computed and cached as well.
+, needed for Jonquière's identity, is pre-computed and cached as well.
  Despite the use of such cached, pre-computed values, the Borwein algorithm
  still wins over direct summation, and appears to be tied with the Euler-Maclaur
 in sum.
@@ -2288,6 +2560,11 @@ wide false
 collapsed false
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Hurwitz-zeta-cold}
+
+\end_inset 
 
 Hurwitz zeta cold cache performance
 \layout Standard
@@ -2349,6 +2626,11 @@ wide false
 collapsed false
 
 \layout Caption
+
+
+\begin_inset LatexCommand \label{cap:Hurwitz-zeta-warm}
+
+\end_inset 
 
 Hurwitz zeta warm cache performance
 \layout Standard
@@ -2632,42 +2914,6 @@ F\left(q;s\right)=2^{1-s}F\left(2q;s\right)-F\left(q+\frac{1}{2};s\right)\]
 \end_inset 
 
  as the case may be.
-\layout Standard
-
-The duplication formula follows from a general 
-\begin_inset Formula $p$
-\end_inset 
-
--adic identity 
-\begin_inset Formula \[
-\sum_{m=0}^{p-1}F\left(\frac{m+q}{p};s\right)=p^{1-s}F\left(q;s\right)\]
-
-\end_inset 
-
- which is valid for any positive integer 
-\begin_inset Formula $p$
-\end_inset 
-
-.
- One of many ways of obtaining this formula is by noting that the function
- 
-\begin_inset Formula $F\left(s;q\right)$
-\end_inset 
-
- is an eigenvalue of the 
-\begin_inset Formula $p$
-\end_inset 
-
--adic Bernoulli transfer operator associated with eigenvalue 
-\begin_inset Formula $p^{1-s}$
-\end_inset 
-
-
-\begin_inset LatexCommand \cite{Ve-B04}
-
-\end_inset 
-
-.
 \layout Standard
 
 The equivalent formulas
@@ -2986,7 +3232,7 @@ The principal sheet of the polylogarithm has a branch point at
 .
  Thus, this section provides a discussion; note that the correct manipulations
  to move from one sheet to another can be somewhat treacherous and confusing.
- The 
+ 
 \layout Standard
 
 
@@ -3301,7 +3547,7 @@ The discontinuity across the cut
  
 \layout Standard
 
-The figure 
+Figure 
 \begin_inset LatexCommand \ref{cap:N=-1 Lower-sheet}
 
 \end_inset 
@@ -3446,7 +3692,7 @@ m_{1}^{-1}\cdot\mbox{Li}_{s}\left(z\right)=\mbox{Li}_{s}\left(z\right)-\Delta_{-
 \end_inset 
 
 , and so there is nothing to wind around.
- By this arguement, one would have expected that 
+ By this argument, one would have expected that 
 \begin_inset Formula $m_{1}$
 \end_inset 
 
@@ -3470,8 +3716,8 @@ d fashion around the point
 \end_inset 
 
 , and so this loop can be shrunk to a very short line segment.
- None-the-less, the short line segement crosses the cut, and its effect
- is to move to a different sheet.
+ None-the-less, the short line segment crosses the cut, and its effect is
+ to move to a different sheet.
  It is for this reason that one has 
 \begin_inset Formula $m_{1}\cdot q=q+1$
 \end_inset 
@@ -4124,7 +4370,7 @@ etc
 \emph default 
 .).
  This form is determined by taking as the basis vectors the monomials appearing
- in the expansion of
+ in the expansion of 
 \begin_inset Formula $\left(\ln z+2\pi i\right)^{m}$
 \end_inset 
 
@@ -4160,12 +4406,18 @@ etc
 \end_inset 
 
 , and the resulting quotient group is again the Heisenberg group.
+\begin_inset Note
+collapsed false
+
 \layout Standard
 
 Note that the existence of polylogarithm ladders seems to be equivalent
  to the statement that products of monodromy groups can be factored in interesti
 ng and unusual ways.
  XXX Expand on this remark.
+\end_inset 
+
+
 \layout Standard
 
 For 
@@ -4227,15 +4479,6 @@ For
 
 .
  
-\layout Standard
-
-It is not clear whether there may also be smaller, finite-dimensional representa
-tions for particular values of 
-\begin_inset Formula $z$
-\end_inset 
-
-.
- XXX Expand on this.
 \layout Standard
 
 The analog of the Dirichlet 
@@ -4881,9 +5124,8 @@ F(q;s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)=\sum_{n=1}^{\infty}\frac{\exp(2i\pi
 \begin_inset Formula $F(q;s)$
 \end_inset 
 
-, with a color scale such that black represents zero, greenish-blue being
- values on the order of one, yellow on the order of two, with increasingly
- large values shown as orange-red.
+, with a color scale such that zero is shown as black, one is a shade of
+ greenish-blue, and two is yellow, and larger values as orange-red.
  Along the horizontal axis runs 
 \begin_inset Formula $q$
 \end_inset 
@@ -4914,13 +5156,13 @@ F(q;s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)=\sum_{n=1}^{\infty}\frac{\exp(2i\pi
 \end_inset 
 
  at the top of the image.
- Zeroes of the Riemann zeta function 
+ The non-trivial zeroes of the Riemann zeta function 
 \begin_inset Formula $\zeta(s)=F(1,s)$
 \end_inset 
 
  are located where the blue lines intersect the right edge of the image.
  From the bottom, the first three zeroes are at 
-\begin_inset Formula $s=0.5+i14.13,\,0.5+i20.02,\,0.5+i25.01$
+\begin_inset Formula $s=0.5+i14.13\cdots,\,0.5+i21.02\cdots,\,0.5+i25.01\cdots$
 \end_inset 
 
 .
@@ -4971,7 +5213,7 @@ The precise form of the parabolic blue streaks are due to a term of the
 
 
 \begin_inset Note
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -5077,12 +5319,12 @@ Extended view of Hurwitz zeta
 
 \layout Standard
 
-This figure shows a view of the magnitude of the Hurwitz zeta 
+This figure shows a view of the magnitude 
 \begin_inset Formula $\left|\zeta(s,q)\right|$
 \end_inset 
 
- over an extended range, together with a rescaling of coordinates in an
- attempt to straighten out the striations.
+ of the Hurwitz zeta over an extended range, together with a rescaling of
+ coordinates in an attempt to straighten out the striations.
  The value of 
 \begin_inset Formula $q$
 \end_inset 
@@ -5269,7 +5511,7 @@ generated with fractal/generate/polylog.C
 
 \begin_inset Float figure
 wide false
-collapsed false
+collapsed true
 
 \layout Caption
 
@@ -5330,7 +5572,7 @@ ex-Riemann zero
 \end_inset 
 
 , in that, if instead one had created the image for 
-\begin_inset Formula $s=0.5+i14.1347\ldots$
+\begin_inset Formula $s=0.5+i14.1347\cdots$
 \end_inset 
 
 , then this point would have been located exactly at 
