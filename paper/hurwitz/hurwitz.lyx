@@ -34,7 +34,7 @@ Linas Vep\i \v{s}
 tas
 \layout Date
 
-12 October 2006, revised 18 March 2007
+12 October 2006, revised 18 November 2007
 \layout Abstract
 
 This paper sketches a technique for improving the rate of convergence of
@@ -268,14 +268,43 @@ It is the poor performance of these sums in numerical calculations that
  values of the Hurwitz zeta function on the critical strip, it is of some
  interest to have a fast algorithm for computing high-precision values of
  this function in this region.
- There seems to be a paucity of work in this area, excepting a discussion
- of fast algorithms for Dirichlet L-functions in 
+ There has been little work in this area.
+ \i \v{S}
+le\i \v{z}
+evi\i \v{c}
+iene provides a discussion of fast algorithms for Dirichlet L-functions
+ in 
 \begin_inset LatexCommand \cite{Sle04}
 
 \end_inset 
 
 .
- 
+ Balanzario presents an extension of the Euler-Maclaurin formula, such that
+ it can be used to evalutes 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
+
+ in the critical strip 
+\begin_inset LatexCommand \cite{Bal06}
+
+\end_inset 
+
+.
+ A particularly interesting posssibility is the application of the FEE method
+ to the evaluation of 
+\begin_inset Formula $\zeta(s,q)$
+\end_inset 
+
+ for integer 
+\begin_inset Formula $s$
+\end_inset 
+
+, given by Karatsuba
+\begin_inset LatexCommand \cite{Kar98}
+
+\end_inset 
+
+.
 \layout Standard
 
 The polylogarithm, sometimes called the 
@@ -989,6 +1018,33 @@ s=\sum_{n=0}^{\infty}\frac{\left(-1\right)^{n}\triangle^{n}a_{0}}{2^{n+1}}\label
  small.
 \layout Standard
 
+The Euler transformation has a more general form.
+ It is 
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}a_{n}b_{n}x^{n}=\sum_{k=0}^{\infty}\,\frac{x^{k}}{k!}\, g^{(k)}(x)\,\triangle^{k}a_{0}\label{eq:Euler's general}\end{equation}
+
+\end_inset 
+
+ where 
+\begin_inset Formula $g(x)=\sum_{n=0}^{\infty}b_{n}x^{n}$
+\end_inset 
+
+ and 
+\begin_inset Formula $g^{(k)}(x)$
+\end_inset 
+
+ denotes the 
+\begin_inset Formula $k$
+\end_inset 
+
+'th derivative of 
+\begin_inset Formula $g(x)$
+\end_inset 
+
+.
+ 
+\layout Standard
+
 A good example of the strength of Euler's transformation of alternating
  series is its application to the Hurwitz zeta function.
  Euler's technique essentially leads to the Hasse series 
@@ -1110,12 +1166,12 @@ S=\sum_{n=0}^{\infty}c_{n}\]
 
 .
  One may then consider a sum of 
-\begin_inset Formula $a_{n}=e^{in(\pi-\theta)}e_{n}$
+\begin_inset Formula $a_{n}=e^{-in\theta}e_{n}$
 \end_inset 
 
- and consider the  summation of an alternating series 
+ and consider the  summation of a series 
 \begin_inset Formula \[
-\sum_{n=0}^{\infty}\left(-1\right)^{n}a_{n}\]
+\sum_{n=0}^{\infty}e^{in\theta}a_{n}\]
 
 \end_inset 
 
@@ -1123,8 +1179,12 @@ S=\sum_{n=0}^{\infty}c_{n}\]
 \begin_inset Formula $a_{n}$
 \end_inset 
 
- are now presumed to be relatively tame, so that the traditional series
- acceleration techniques can be applied.
+ are now presumed to be relatively tame, so that equation 
+\begin_inset LatexCommand \ref{eq:Euler's general}
+
+\end_inset 
+
+ can be applied.
  This trick may be applied to any oscillatory sequence; one need not know
  a precise or 
 \emph on 
@@ -1625,7 +1685,7 @@ In order for equation
 \end_inset 
 
  to be useful computationally, an upper bound on the value of 
-\begin_inset Formula $\xi$
+\begin_inset Formula $\left|\xi\right|$
 \end_inset 
 
  as a function of 
@@ -1706,7 +1766,7 @@ The general behavior of the integrand appearing in equation
  product of Gaussians is a Gaussian, so is the entire expression.
  From the Stirling approximation, one has the well-known identity 
 \begin_inset Formula \[
-\left(y(1-y)\right)^{a}\le\frac{1}{4^{a}}\exp-4a\left(y-\frac{1}{2}\right)^{2}\]
+\left|y(1-y)\right|^{a}\le\frac{1}{4^{a}}\exp-4a\left(y-\frac{1}{2}\right)^{2}\]
 
 \end_inset 
 
@@ -1721,7 +1781,7 @@ The general behavior of the integrand appearing in equation
 \end_inset 
 
 , that is, at 
-\begin_inset Formula $y_{0}=0.23561058253\ldots$
+\begin_inset Formula $y_{0}=0.23561058253\cdots$
 \end_inset 
 
 , where 
@@ -1735,7 +1795,7 @@ The general behavior of the integrand appearing in equation
 \end_inset 
 
  Curiously, the numerical value of the factor in the Gaussian is 
-\begin_inset Formula $1/2y_{0}(1-2y_{0})=4.013295587\ldots$
+\begin_inset Formula $1/2y_{0}(1-2y_{0})=4.013295587\cdots$
 \end_inset 
 
 
@@ -1749,7 +1809,7 @@ To evaluate the integral in
 , one also needs a bound on the denominator.
  This is furnished by 
 \begin_inset Formula \[
-\left|\frac{1}{1-yz}\right|\le C(z)=\begin{cases}
+\left|\frac{1}{1-yz}\right|\le C(z)\,:=\begin{cases}
 1 & \mbox{ if }\Re z\le0\\
 \frac{1}{\left|1-z\right|} & \mbox{ if }0<\Re z\;\mbox{ and }\left|z\right|<1\\
 \left|\frac{z}{\Im z}\right| & \mbox{ if }0<\Re z\;\mbox{ and }\left|z\right|>1\end{cases}\]
@@ -2760,42 +2820,6 @@ F\left(q;s\right)=2^{1-s}F\left(2q;s\right)-F\left(q+\frac{1}{2};s\right)\]
 \end_inset 
 
  as the case may be.
-\layout Standard
-
-The duplication formula follows from a general 
-\begin_inset Formula $p$
-\end_inset 
-
--adic identity 
-\begin_inset Formula \[
-\sum_{m=0}^{p-1}F\left(\frac{m+q}{p};s\right)=p^{1-s}F\left(q;s\right)\]
-
-\end_inset 
-
- which is valid for any positive integer 
-\begin_inset Formula $p$
-\end_inset 
-
-.
- One of many ways of obtaining this formula is by noting that the function
- 
-\begin_inset Formula $F\left(s;q\right)$
-\end_inset 
-
- is an eigenvalue of the 
-\begin_inset Formula $p$
-\end_inset 
-
--adic Bernoulli transfer operator associated with eigenvalue 
-\begin_inset Formula $p^{1-s}$
-\end_inset 
-
-
-\begin_inset LatexCommand \cite{Ve-B04}
-
-\end_inset 
-
-.
 \layout Standard
 
 The equivalent formulas
