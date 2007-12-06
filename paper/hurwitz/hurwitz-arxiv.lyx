@@ -497,12 +497,12 @@ The primary effort of this paper is to take the algorithm given by Borwein
 \layout Standard
 
 Although the Hurwitz zeta function may be computed by evaluating the Taylor's
- series 
+ series (
 \begin_inset LatexCommand \ref{eq:Hurwitz taylor}
 
 \end_inset 
 
- directly, a superior approach is to perform an Euler-Maclaurin summation
+) directly, a superior approach is to perform an Euler-Maclaurin summation
  (thanks to Oleksandr Pavlyk for pointing this out
 \begin_inset LatexCommand \cite{Pav07}
 
@@ -537,12 +537,12 @@ backwards
  The result is an algorithm that is particularly rapid for the Hurwitz zeta
  function.
  It outperforms direct evaluation of the Taylor's series by orders of magnitude.
- It is faster then evaluating 
+ It is faster then evaluating (
 \begin_inset LatexCommand \ref{eq:poly-hur relation}
 
 \end_inset 
 
- (which can be computed for real values of 
+) (which can be computed for real values of 
 \begin_inset Formula $q$
 \end_inset 
 
@@ -657,7 +657,7 @@ This is easily obtained by using the integral representation for
 .
  
 \begin_inset Note
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -870,12 +870,12 @@ c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}
  
 \layout Standard
 
-This is immediately employed in equation 
+This is immediately employed in equation (
 \begin_inset LatexCommand \ref{eq:Borwein trick}
 
 \end_inset 
 
- to obtain 
+) to obtain 
 \begin_inset Formula \begin{equation}
 \xi(s,z)=\mbox{Li}_{s}\left(z\right)+\frac{z}{p_{n}(1/z)}\sum_{k=0}^{n-1}\frac{c_{k}}{(k+1)^{s}}\label{eq:Polylog general estimate}\end{equation}
 
@@ -949,12 +949,12 @@ et al
 \end_inset 
 
 ; these include the Tchebysheff orthogonal polynomials considered by Borwein,
- which do a rather good job of minimizing the integrand of equation 
+ which do a rather good job of minimizing the integrand of equation (
 \begin_inset LatexCommand \ref{eq:xi integral}
 
 \end_inset 
 
- when 
+) when 
 \begin_inset Formula $z=-1$
 \end_inset 
 
@@ -1073,12 +1073,12 @@ The Euler transformation has a more general form.
 
 A good example of the strength of Euler's transformation of alternating
  series is its application to the Hurwitz zeta function.
- Euler's technique essentially leads to the Hasse series 
+ Euler's technique essentially leads to the Hasse series (
 \begin_inset LatexCommand \ref{eq:Hasse series}
 
 \end_inset 
 
-.
+).
  Taking 
 \begin_inset Formula $f(x)$
 \end_inset 
@@ -1087,17 +1087,17 @@ A good example of the strength of Euler's transformation of alternating
 \begin_inset Formula $q^{1-s}$
 \end_inset 
 
- in equation 
+ in equation (
 \begin_inset LatexCommand \ref{eq:nth difference}
 
 \end_inset 
 
-, the inner sum of the Hasse series 
+), the inner sum of the Hasse series (
 \begin_inset LatexCommand \ref{eq:Hasse series}
 
 \end_inset 
 
- is then 
+) is then 
 \begin_inset Formula \[
 \sum_{k=0}^{n}(-1)^{n-k}\left(\begin{array}{c}
 n\\
@@ -1110,12 +1110,12 @@ The benefit of the Hasse series is that it has improved convergence to the
 \begin_inset Formula $s$
 \end_inset 
 
--plane, whereas the traditional series representation of equation 
+-plane, whereas the traditional series representation of equation (
 \begin_inset LatexCommand \ref{eq:Hurwitz zeta}
 
 \end_inset 
 
- is not.
+) is not.
  Yet, perhaps, things can be improved further still.
  A quick numerical experiment will show that the Hasse series does not converge
  rapidly, especially in the critical strip.
@@ -1125,18 +1125,18 @@ The benefit of the Hasse series is that it has improved convergence to the
 \layout Standard
 
 Strictly speaking, the slow convergence can be attributed to the fact that
- the naive series representations 
+ the naive series representations (
 \begin_inset LatexCommand \ref{eq:Hurwitz zeta}
 
 \end_inset 
 
- or 
+) or (
 \begin_inset LatexCommand \ref{eq:polylog definition}
 
 \end_inset 
 
- are not strictly alternating series, as would be properly required to justify
- the application of the Euler method.
+) are not strictly alternating series, as would be properly required to
+ justify the application of the Euler method.
  Instead, the series are a superposition of oscillatory terms; for the polylogar
 ithm, an explicit oscillation coming from 
 \begin_inset Formula $z^{n}=\left|z\right|^{n}e^{in\arg z}$
@@ -1205,12 +1205,12 @@ S=\sum_{n=0}^{\infty}c_{n}\]
 \begin_inset Formula $a_{n}$
 \end_inset 
 
- are now presumed to be relatively tame, so that equation 
+ are now presumed to be relatively tame, so that equation (
 \begin_inset LatexCommand \ref{eq:Euler's general}
 
 \end_inset 
 
- can be applied.
+) can be applied.
  This trick may be applied to any oscillatory sequence; one need not know
  a precise or 
 \emph on 
@@ -1240,12 +1240,12 @@ Alternately, one may consider replacing the forward difference operator
 
 \end_inset 
 
- with the traditional Euler's series
+ with the traditional Euler's series (
 \begin_inset LatexCommand \ref{eq:Euler's series}
 
 \end_inset 
 
- regained by taking 
+) regained by taking 
 \begin_inset Formula $q=1$
 \end_inset 
 
@@ -1332,17 +1332,17 @@ S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\int_{0}^{1}\frac{p_{n}(y)-p_{n}
 \end_inset 
 
  are arbitrarily small.
- The first is easy enough: using equations 
+ The first is easy enough: using equations (
 \begin_inset LatexCommand \ref{eq:r_n definition}
 
 \end_inset 
 
- and 
+) and (
 \begin_inset LatexCommand \ref{eq:r_n series}
 
 \end_inset 
 
- one has 
+) one has 
 \begin_inset Formula \[
 S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}b_{k}\]
 
@@ -1361,12 +1361,12 @@ S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}b_{k}\]
 \begin_inset Formula $S_{n}(z)$
 \end_inset 
 
- is really a series acceleration for the geometric series 
+ is really a series acceleration for the geometric series (
 \begin_inset LatexCommand \ref{eq: geo series}
 
 \end_inset 
 
-, one must show that 
+), one must show that 
 \begin_inset Formula $\left|\xi_{n}(z)\right|$
 \end_inset 
 
@@ -1412,12 +1412,12 @@ S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}b_{k}\]
 \begin_inset Formula $\sum_{k=0}^{n}z^{k}b_{k}$
 \end_inset 
 
- of equation 
+ of equation (
 \begin_inset LatexCommand \ref{eq: geo series}
 
 \end_inset 
 
-.
+).
 \layout Standard
 
 Note that the above is a proof of a series acceleration method for a more-or-les
@@ -1538,12 +1538,12 @@ Returning to the polylogarithm, the task at hand is to find a polynomial
 \begin_inset Formula $y=0$
 \end_inset 
 
- in the integrand of 
+ in the integrand of (
 \begin_inset LatexCommand \ref{eq:xi integral}
 
 \end_inset 
 
-, this section will consider the polynomial sequence 
+), this section will consider the polynomial sequence 
 \begin_inset Formula $p_{n}(y)=y^{a}(1-y)^{n-a}$
 \end_inset 
 
@@ -1579,12 +1579,12 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
 
 \end_inset 
 
- Using this in the integral 
+ Using this in the integral (
 \begin_inset LatexCommand \ref{eq:xi integral}
 
 \end_inset 
 
-, and assuming that the real part of 
+), and assuming that the real part of 
 \begin_inset Formula $z$
 \end_inset 
 
@@ -1603,12 +1603,12 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
 \end_inset 
 
 -plane.
- However, in order for equation 
+ However, in order for equation (
 \begin_inset LatexCommand \ref{eq:Polylog general estimate}
 
 \end_inset 
 
- to be useful computationally, an upper bound on the value of 
+) to be useful computationally, an upper bound on the value of 
 \begin_inset Formula $\xi$
 \end_inset 
 
@@ -1625,12 +1625,12 @@ p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{
  
 \layout Standard
 
-The polynomial coefficients of equation 
+The polynomial coefficients of equation (
 \begin_inset LatexCommand \ref{eq:basic poly in a_k}
 
 \end_inset 
 
- are easily obtained, and are 
+) are easily obtained, and are 
 \begin_inset Formula \begin{eqnarray*}
 a_{0} & = & a_{1}=\cdots=a_{n-1}=0\\
 a_{n+k} & = & \left(-1\right)^{k}\left(\begin{array}{c}
@@ -1649,12 +1649,12 @@ where the
 \begin_inset Formula $c_{k}$
 \end_inset 
 
-, the same as in equation 
+, the same as in equation (
 \begin_inset LatexCommand \ref{eq:c_k coefficients}
 
 \end_inset 
 
-, are given by 
+), are given by 
 \begin_inset Formula \[
 c_{k}=z^{k}\left[-\left(\frac{z-1}{z^{2}}\right)^{n}+\frac{1}{z^{n}}\sum_{j=0}^{k-n}\left(-1\right)^{j}\left(\begin{array}{c}
 n\\
@@ -1719,12 +1719,12 @@ The above formula has been implemented using the Gnu Multiple Precision
 Bound on the Error Term
 \layout Standard
 
-In order for equation 
+In order for equation (
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
- to be useful computationally, an upper bound on the value of 
+) to be useful computationally, an upper bound on the value of 
 \begin_inset Formula $\left|\xi\right|$
 \end_inset 
 
@@ -1745,12 +1745,12 @@ In order for equation
 
  large enough, but one must also maintain a somewhat larger number of digits
  in the intermediate terms, as the appearance of the binomial coefficient
- in the equation 
+ in the equation (
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
- implies that intermediate terms can become quite large, even while mostly
+) implies that intermediate terms can become quite large, even while mostly
  cancelling.
  This section derives an upper bound on the size of 
 \begin_inset Formula $\xi$
@@ -1761,12 +1761,12 @@ In order for equation
  
 \layout Standard
 
-The general behavior of the integrand appearing in equation 
+The general behavior of the integrand appearing in equation (
 \begin_inset LatexCommand \ref{eq:xi integral}
 
 \end_inset 
 
- depends on the whether 
+) depends on the whether 
 \begin_inset Formula $\Re s\ge1$
 \end_inset 
 
@@ -1841,12 +1841,12 @@ The general behavior of the integrand appearing in equation
 
 \layout Standard
 
-To evaluate the integral in 
+To evaluate the integral in (
 \begin_inset LatexCommand \ref{eq:xi integral}
 
 \end_inset 
 
-, one also needs a bound on the denominator.
+), one also needs a bound on the denominator.
  This is furnished by 
 \begin_inset Formula \[
 \left|\frac{1}{1-yz}\right|\le C(z)\,\equiv\begin{cases}
@@ -2027,12 +2027,12 @@ A remarkable side-effect of the estimation is that, for
 \begin_inset Formula $n=1$
 \end_inset 
 
- into equation 
+ into equation (
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
- gives the exact result 
+) gives the exact result 
 \begin_inset Formula \[
 \mbox{Li}_{0}(z)=\frac{z}{1-z}\]
 
@@ -2069,12 +2069,12 @@ k\end{array}\right\} $
  denotes the Stirling numbers of the second kind.
 \layout Standard
 
-In general, the formula 
+In general, the formula (
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
- seems to have the curious property of always evaluating to exactly the
+) seems to have the curious property of always evaluating to exactly the
  same rational function whenever 
 \begin_inset Formula $s$
 \end_inset 
@@ -2101,47 +2101,47 @@ In general, the formula
  answers in the case when an exact polynomial answer is possible.
 \layout Standard
 
-For the general case, one may conclude that the estimate 
+For the general case, one may conclude that the estimate (
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
- can be effectively applied whenever
+) can be effectively applied whenever
 \begin_inset Formula \[
 \left|\frac{z^{2}}{z-1}\right|<4\]
 
 \end_inset 
 
  To obtain a value of the polylogarithm to within some given numerical precision
-, one must invert the formulas 
+, one must invert the formulas (
 \begin_inset LatexCommand \ref{eq:error-bound-positive}
 
 \end_inset 
 
- or 
+) or (
 \begin_inset LatexCommand \ref{eq:error-bound-negative}
 
 \end_inset 
 
-, solving for the value of 
+), solving for the value of 
 \begin_inset Formula $n$
 \end_inset 
 
- which is to be used in equation 
+ which is to be used in equation (
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
-.
+).
  To obtain a fixed number of digits of precision, one must carry out intermediat
 e calculations with at least that many digits of precision.
  In fact, one must have more.
- The appearance of the binomial coefficient in equation 
+ The appearance of the binomial coefficient in equation (
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
- is the problem.
+) is the problem.
  Since 
 \begin_inset Formula $2^{n}>\left(\begin{array}{c}
 n\\
@@ -2242,12 +2242,12 @@ R\le\frac{2}{(2\pi)^{2p}}\frac{\left|s(s+1)\cdots(s+2p)\right|}{\Re s+2p}\,\frac
 
 \end_inset 
 
- Thus, the evaluation of the sum 
+ Thus, the evaluation of the sum (
 \begin_inset LatexCommand \ref{eq:Euler-Maclaurin}
 
 \end_inset 
 
- merely requires a suitable choice of 
+) merely requires a suitable choice of 
 \begin_inset Formula $N$
 \end_inset 
 
@@ -2257,12 +2257,12 @@ R\le\frac{2}{(2\pi)^{2p}}\frac{\left|s(s+1)\cdots(s+2p)\right|}{\Re s+2p}\,\frac
 
  to be used.
  As it happens, the situation is even simpler than this.
- The sum 
+ The sum (
 \begin_inset LatexCommand \ref{eq:Euler-Maclaurin}
 
 \end_inset 
 
- is an asymptotic series, and it is well-known that the best approximation
+) is an asymptotic series, and it is well-known that the best approximation
  for an asymptotic series occurs when one stops the summation at the smallest
  term in the series.
  Thus, it is sufficient to choose a value of 
@@ -2297,7 +2297,7 @@ There remains the question of what value of
  in the next section.
  
 \begin_inset Note
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -2313,12 +2313,12 @@ Performance
 The performance of both the Euler-Maclaurin summation and the Borwein algorithm
  appears to be very good.
  As a general rule, both have better performance than the direct summation
- formula 
+ formula (
 \begin_inset LatexCommand \ref{eq:polylog definition}
 
 \end_inset 
 
-, although this depends on whether the polylogarithm or the Hurwitz zeta
+), although this depends on whether the polylogarithm or the Hurwitz zeta
  is the desired quantity.
  
 \layout Standard
@@ -2329,12 +2329,12 @@ g of the number of multiplications required to implement the algorithm.
  Such a detailed accounting is beyond the scope of this paper.
  In part this is because the algorithms require the exponentiation of complex
  numbers, the calculation of Bernoulli numbers and binomial coefficients,
- and, if Jonquière's identity (equation 
+ and, if Jonquière's identity (equation (
 \begin_inset LatexCommand \ref{eq:poly-hur relation}
 
 \end_inset 
 
-) is used, the evaluation of 
+)) is used, the evaluation of 
 \begin_inset Formula $\Gamma(s)$
 \end_inset 
 
@@ -2364,34 +2364,34 @@ g of the number of multiplications required to implement the algorithm.
  
 \layout Standard
 
-These experimental results are shown in figures 
+These experimental results are shown in figures (
 \begin_inset LatexCommand \ref{cap:Polylogarithm-cold-cache}
 
 \end_inset 
 
- and 
+) and (
 \begin_inset LatexCommand \ref{cap:Polylogarithm-warm-cache}
 
 \end_inset 
 
- for the polylogarithm, and 
+) for the polylogarithm, and (
 \begin_inset LatexCommand \ref{cap:Hurwitz-zeta-cold}
 
 \end_inset 
 
- and 
+) and (
 \begin_inset LatexCommand \ref{cap:Hurwitz-zeta-warm}
 
 \end_inset 
 
-, for the Hurwitz zeta function, which compare the performance of actual
+), for the Hurwitz zeta function, which compare the performance of actual
  implementations.
  
 \layout Standard
 
 
 \begin_inset Note
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -2794,12 +2794,12 @@ warm cache
 
 A different but equally dramatic set of results obtain, when one compares
  the performance of the Borwein algorithm applied to the Hurwitz zeta function,
- as compared to the use of the Taylor's expansion 
+ as compared to the use of the Taylor's expansion (
 \begin_inset LatexCommand \ref{eq:Hurwitz taylor}
 
 \end_inset 
 
- for the Hurwitz zeta.
+) for the Hurwitz zeta.
  In this case, as the figures show, the Taylor's series outperforms the
  Borwein algorithm by a constant factor of three, when both algorithms use
  pre-computed constants.
@@ -2847,22 +2847,22 @@ The region of applicability of the algorithm may be extended by making use
 , into the domain of the polylogarithm.
 \layout Standard
 
-Thus, for example, the formula 
+Thus, for example, the formula (
 \begin_inset LatexCommand \ref{eq:polylog specific estimate}
 
 \end_inset 
 
- together with the error bounds 
+) together with the error bounds (
 \begin_inset LatexCommand \ref{eq:error-bound-positive}
 
 \end_inset 
 
-,
+), (
 \begin_inset LatexCommand \ref{eq:error-bound-negative}
 
 \end_inset 
 
- allow 
+) allow 
 \begin_inset Formula $F(q;s)=\mbox{Li}_{s}\left(e^{2\pi iq}\right)$
 \end_inset 
 
@@ -2941,12 +2941,12 @@ The equivalent formulas
 \layout Standard
 
 The application of the duplication formula, together with the inversion
- relation 
+ relation (
 \begin_inset LatexCommand \ref{eq:poly-hur relation}
 
 \end_inset 
 
- can be used to extend the evaluation of the polylogarithm to the entire
+) can be used to extend the evaluation of the polylogarithm to the entire
  complex plane.
  For numerical work, both formulas must be applied, one alone is not enough.
  Consider first the application of the duplication formula only.
@@ -2977,12 +2977,12 @@ The application of the duplication formula, together with the inversion
  The precise shape of the kidney depends on the number of terms one wishes
  to use in the polynomial approximation.
  The shape that can be achieved while still maintaining good running time
- is shown in figure 
+ is shown in figure (
 \begin_inset LatexCommand \ref{cap:Polylogarithm-phase-plot}
 
 \end_inset 
 
-.
+).
  However, as can be seen, this strategy barely penetrates the 
 \begin_inset Formula $\Re z>1$
 \end_inset 
@@ -3010,12 +3010,12 @@ e^{-i\pi s/2}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}
 
  together with some sort of independent means of evaluating the Hurwitz
  zeta function.
- The Taylor expansion 
+ The Taylor expansion (
 \begin_inset LatexCommand \ref{eq:Hurwitz taylor}
 
 \end_inset 
 
- is particularly well-suited, as it is rapidly convergent in the vicinity
+) is particularly well-suited, as it is rapidly convergent in the vicinity
  of 
 \begin_inset Formula $z=1$
 \end_inset 
@@ -3062,46 +3062,46 @@ e^{-i\pi s/2}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}
 \begin_inset Formula $z$
 \end_inset 
 
--plane is shown in figure 
+-plane is shown in figure (
 \begin_inset LatexCommand \ref{cap:Polylog-whole-plane}
 
 \end_inset 
 
-.
+).
 \layout Standard
 
-As a practical computational matter, rather than using 
+As a practical computational matter, rather than using (
 \begin_inset LatexCommand \ref{eq:Inversion formula}
 
 \end_inset 
 
-, it seems to be more convenient to use the formula
+), it seems to be more convenient to use the formula
 \begin_inset Formula \begin{equation}
 \mbox{Li}_{1-s}\left(z\right)=\frac{\Gamma(s)}{\left(2\pi\right)^{s}}\left[e^{i\pi s/2}\zeta\left(s,\frac{\log z}{2\pi i}\right)+e^{-i\pi s/2}\zeta\left(s,1-\frac{\log z}{2\pi i}\right)\right]\label{eq:polylog as pure hurwitz}\end{equation}
 
 \end_inset 
 
- Although this is equivalent to the equation 
+ Although this is equivalent to the equation (
 \begin_inset LatexCommand \ref{eq:Inversion formula}
 
 \end_inset 
 
- immediately above, it correctly captures the appropriate branch of the
- logarithm that should be used: equation 
+) immediately above, it correctly captures the appropriate branch of the
+ logarithm that should be used: equation (
 \begin_inset LatexCommand \ref{eq:polylog as pure hurwitz}
 
 \end_inset 
 
- works well for values of 
+) works well for values of 
 \begin_inset Formula $s$
 \end_inset 
 
- in both the upper and lower half-planes, whereas equation 
+ in both the upper and lower half-planes, whereas equation (
 \begin_inset LatexCommand \ref{eq:Inversion formula}
 
 \end_inset 
 
- is more difficult to correctly evaluate in the lower half 
+) is more difficult to correctly evaluate in the lower half 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -3175,13 +3175,13 @@ The correctness of a given numerical implementation can be validated in
 \begin_inset Formula $\left|z\right|<1$
 \end_inset 
 
-, the defining series 
+, the defining series (
 \begin_inset LatexCommand \ref{eq:polylog definition}
 
 \end_inset 
 
- is explicitly convergent, and may be directly summed, thus offering a fourth
- check of the correctness of an implementation.
+) is explicitly convergent, and may be directly summed, thus offering a
+ fourth check of the correctness of an implementation.
  Finally, the multiplication theorem can be used to check for consistency.
  Each of these quantities can be computed by independent algorithms, and
  thus be used to validate the correctness of a polylogarithm implementation.
@@ -3255,23 +3255,23 @@ Polylogarithm Monodromy
 
 \layout Standard
 
-A graph of the polylogarithm monodromy, given by equation 
+A graph of the polylogarithm monodromy, given by equation (
 \begin_inset LatexCommand \ref{eq:polylog monodromy}
 
 \end_inset 
 
-.
+).
 \end_inset 
 
 
 \layout Standard
 
-The inversion formula 
+The inversion formula (
 \begin_inset LatexCommand \ref{eq:Inversion formula}
 
 \end_inset 
 
- suggests a way to move around the branch point at 
+) suggests a way to move around the branch point at 
 \begin_inset Formula $z=1$
 \end_inset 
 
@@ -3419,12 +3419,12 @@ Taking
 
 , the above reasoning provides an excellent description, which may be verified
  numerically.
- The concentric semi-circles visible in the image 
+ The concentric semi-circles visible in the image (
 \begin_inset LatexCommand \ref{cap:Polylog-whole-plane}
 
 \end_inset 
 
- can be entirely explained by the behavior of 
+) can be entirely explained by the behavior of 
 \begin_inset Formula $q^{s}$
 \end_inset 
 
@@ -3474,13 +3474,13 @@ Taking
 \begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta_{1}$
 \end_inset 
 
- is illustrated in figure 
+ is illustrated in figure (
 \begin_inset LatexCommand \ref{cap:N=+1 Upper-sheet}
 
 \end_inset 
 
-; the concentric rings are seen to be cancelled out precisely, leaving behind
- a smoothly varying function, having the expected smooth structure.
+); the concentric rings are seen to be cancelled out precisely, leaving
+ behind a smoothly varying function, having the expected smooth structure.
  Moving across the cut, for 
 \begin_inset Formula $\Re z>1$
 \end_inset 
@@ -3524,12 +3524,12 @@ The discontinuity across the cut
 \begin_inset Formula $N=-1$
 \end_inset 
 
- in equation 
+ in equation (
 \begin_inset LatexCommand \ref{eq:log-discontinuity}
 
 \end_inset 
 
-, (or 
+), (or 
 \begin_inset Formula $N=0$
 \end_inset 
 
@@ -3547,12 +3547,12 @@ The discontinuity across the cut
  
 \layout Standard
 
-Figure 
+Figure (
 \begin_inset LatexCommand \ref{cap:N=-1 Lower-sheet}
 
 \end_inset 
 
- illustrates the difference 
+) illustrates the difference 
 \begin_inset Formula $\mbox{Li}_{s}\left(z\right)-\Delta_{-1}$
 \end_inset 
 
@@ -3838,12 +3838,12 @@ g_{1}\cdot\Delta_{N} & = & \Delta_{N}\end{eqnarray*}
 \end_inset 
 
 .
- Visually, the cut can be clearly seen in figure 
+ Visually, the cut can be clearly seen in figure (
 \begin_inset LatexCommand \ref{cap:N=-1 Lower-sheet}
 
 \end_inset 
 
-.
+).
  Consider now the task of glueing sheets across this cut.
  For a point 
 \begin_inset Formula $z$
@@ -4407,7 +4407,7 @@ etc
 
 , and the resulting quotient group is again the Heisenberg group.
 \begin_inset Note
-collapsed false
+collapsed true
 
 \layout Standard
 
@@ -4472,12 +4472,12 @@ For
 \begin_inset Formula $s\ne2$
 \end_inset 
 
-, the monodromy of the polylogarithm is given by equation 
+, the monodromy of the polylogarithm is given by equation (
 \begin_inset LatexCommand \ref{eq:polylog monodromy}
 
 \end_inset 
 
-.
+).
  
 \layout Standard
 
@@ -4561,12 +4561,12 @@ F(q;s)=\sum_{n=1}^{\infty}\frac{e^{i2\pi nq}}{n^{s}}\label{eq:periodic zeta}\end
 it is not actually periodic
 \emph default 
 .
- That one might think it is seems obvious from the definition 
+ That one might think it is seems obvious from the definition (
 \begin_inset LatexCommand \ref{eq:periodic zeta}
 
 \end_inset 
 
-: the direct substitution of 
+): the direct substitution of 
 \begin_inset Formula $q\to q+1$
 \end_inset 
 
@@ -4602,12 +4602,12 @@ periodic
 \end_inset 
 
  real carries one through the branch-point, and from one sheet to the next.
- This is illustrated graphically, in figure 
+ This is illustrated graphically, in figure (
 \begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
 
 \end_inset 
 
-.
+).
 \layout Standard
 
 
@@ -4713,12 +4713,12 @@ periodicity
  
 \layout Standard
 
-The figure 
+The figure (
 \begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
 
 \end_inset 
 
- shows an oscillatory behavior that clearly diverges as 
+) shows an oscillatory behavior that clearly diverges as 
 \begin_inset Formula $q\to0$
 \end_inset 
 
@@ -4728,12 +4728,12 @@ The figure
 \begin_inset Formula $s=\frac{1}{2}+i\tau$
 \end_inset 
 
- into equation 
+ into equation (
 \begin_inset LatexCommand \ref{eq:Hurwitz reflection}
 
 \end_inset 
 
- gives 
+) gives 
 \begin_inset Formula \[
 \zeta\left(\frac{1}{2}-i\tau,\, q\right)=\frac{e^{-i\pi/4}e^{-i\tau\log2\pi}e^{i\phi}}{\sqrt{2\cosh\tau\pi}}\left[e^{\pi\tau/2}F(q;s)+ie^{-\pi\tau/2}F(1-q;s)\right]\]
 
@@ -4784,12 +4784,12 @@ F\left(q;\frac{1}{2}+i\tau\right)=\exp\, i\left(\frac{\pi}{4}-\phi+\tau\log2\pi\
 \begin_inset Formula $n=0$
 \end_inset 
 
- term in equation 
+ term in equation (
 \begin_inset LatexCommand \ref{eq:Hurwitz zeta}
 
 \end_inset 
 
-: that is, 
+): that is, 
 \begin_inset Formula $q^{-s}=e^{i\tau\log q}/\sqrt{q}$
 \end_inset 
 
@@ -4808,17 +4808,17 @@ F\left(q;\frac{1}{2}+i\tau\right)\approx\frac{e^{i\tau\log q}e^{i\psi}}{\sqrt{q}
 \end_inset 
 
 .
- As is eminently clear from both the picture 
+ As is eminently clear from both the picture (
 \begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
 
 \end_inset 
 
-, and from the approximation 
+), and from the approximation (
 \begin_inset LatexCommand \ref{eq:F-approx}
 
 \end_inset 
 
-, the limit of 
+), the limit of 
 \begin_inset Formula $q\to0$
 \end_inset 
 
@@ -4846,18 +4846,18 @@ Curiously, the limit
 \end_inset 
 
  the Riemann zeta.
- The approximation 
+ The approximation (
 \begin_inset LatexCommand \ref{eq:F-approx}
 
 \end_inset 
 
- hints at how to move through the branch point, from one sheet to the next:
- 
+) hints at how to move through the branch point, from one sheet to the next:
+ (
 \begin_inset LatexCommand \ref{eq:F-approx}
 
 \end_inset 
 
- is the discontinuity between sheets.
+) is the discontinuity between sheets.
  That is, one has, for large, positive 
 \begin_inset Formula $\tau$
 \end_inset 
@@ -4900,12 +4900,12 @@ negative
 \end_inset 
 
 , and graphs the periodic zeta, one obtains what is essentially the left-right
- reversed image of 
+ reversed image of (
 \begin_inset LatexCommand \ref{cap:Periodic-zeta-function}
 
 \end_inset 
 
-, with oscillations approaching a singularity at 
+), with oscillations approaching a singularity at 
 \begin_inset Formula $q\to1$
 \end_inset 
 
@@ -5009,17 +5009,17 @@ ized; it may be possible to re-arrange terms to minimize the propagation
  arbitrary-precision arithmetic.
 \layout Standard
 
-For the Borwein algorithm, evaluating the bounds 
+For the Borwein algorithm, evaluating the bounds (
 \begin_inset LatexCommand \ref{eq:error-bound-positive}
 
 \end_inset 
 
- and 
+) and (
 \begin_inset LatexCommand \ref{eq:error-bound-negative}
 
 \end_inset 
 
-, so as to obtain an order estimate, is non-trivial, and can account for
+), so as to obtain an order estimate, is non-trivial, and can account for
  a significant amount of compute time.
  A speedier heuristic is desirable.
  By contrast, the Euler-Maclaurin algorithm seems to have a very simple
@@ -5089,7 +5089,7 @@ Below follow some interesting pictures of the polylogarithm and the Hurwitz
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -5202,12 +5202,12 @@ The precise form of the parabolic blue streaks are due to a term of the
 \begin_inset Formula $q^{-s}$
 \end_inset 
 
-, as given by equation 
+, as given by equation (
 \begin_inset LatexCommand \ref{eq:F-approx}
 
 \end_inset 
 
-.
+).
  These may be subtracted, as illustrated in the next image.
 \layout Standard
 
@@ -5229,7 +5229,7 @@ generated with generate/hurwitz.C conversion with takelog, renorm 0.24 2
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -5302,7 +5302,7 @@ streaks
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -5388,7 +5388,7 @@ The increasing complexity of the chain-link pattern is apparent as one moves
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -5511,7 +5511,7 @@ generated with fractal/generate/polylog.C
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -5618,7 +5618,7 @@ The concentric shells are centered on the point
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -5710,7 +5710,7 @@ ing spiral, and would never hit the branch cut or cross over.
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -5823,7 +5823,7 @@ Indeed, the Riemann hypothesis can be taken as being equivalent to the statement
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
@@ -5873,12 +5873,12 @@ This figure shows the
 
 .
  By visual inspection, it is clear how to glue this sheet to the principal
- sheet shown in figure 
+ sheet shown in figure (
 \begin_inset LatexCommand \ref{cap:Polylog-whole-plane}
 
 \end_inset 
 
-.
+).
  After this gluing, a cut remains between the points 
 \begin_inset Formula $z=0$
 \end_inset 
@@ -5904,7 +5904,7 @@ This figure shows the
 
 \begin_inset Float figure
 wide false
-collapsed true
+collapsed false
 
 \layout Caption
 
