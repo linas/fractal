@@ -120,13 +120,13 @@ Polylogarithm, Hurwitz zeta function, algorithm, monodromy, series acceleration
 Introduction
 \layout Standard
 
-This note sketches a technique for improving the rate of convergence of
- a general oscillatory series, and then applies this technique to the computatio
-n of the polylogarithm, and to related functions, such as the Hurwitz zeta
- function.
+This article sketches a technique for improving the rate of convergence
+ of a general oscillatory series, and then applies this technique to the
+ computation of the polylogarithm, and to related functions, such as the
+ Hurwitz zeta function.
  It essentially generalizes an algorithm given by Peter Borwein for computing
  the Riemann zeta function.
- The principle result is an algorithm that efficiently obtains values of
+ The principal result is an algorithm that efficiently obtains values of
  the Hurwitz zeta in the critical strip 
 \begin_inset Formula $s=\sigma+i\tau$
 \end_inset 
@@ -157,6 +157,52 @@ The Hurwitz zeta function may be defined as
 \end_inset 
 
  that is not zero or a negative integer.
+ There are branch points at 
+\begin_inset Formula $q=0,-1,-2,\cdots$
+\end_inset 
+
+, rather than simple poles: this is best understood by noting that 
+\begin_inset Formula $q^{s}=e^{s\log q}$
+\end_inset 
+
+ and that 
+\begin_inset Formula $q=0$
+\end_inset 
+
+ is a branch point for the logarithm, anchoring one end of a branch cut.
+ Although the branch cut of the logarithm is conventionally taken to extend
+ to the left, along the negative real axis, one may, in fact, run the branch
+ cut in any direction.
+ The Hurwitz zeta function presents a more daunting scenario: with a branch
+ cut originating at 
+\begin_inset Formula $q=0$
+\end_inset 
+
+ and at every negative integer, there are many different ways to navigate
+ from sheet to sheet.
+ The set of possible paths from sheet to sheet form a group, known as the
+ '
+\emph on 
+monodromy group
+\emph default 
+' of the function.
+ Alternately, the monodromy group can be understood as the '
+\emph on 
+mapping class group
+\emph default 
+' of a punctured disk; these ideas are reviewed in a later section.
+\layout Standard
+
+The series (
+\begin_inset LatexCommand \ref{eq:Hurwitz zeta}
+
+\end_inset 
+
+) is not directly usable in the critical strip 
+\begin_inset Formula $0\le\sigma\le1$
+\end_inset 
+
+, as it does not converge.
  For numerical calculations, this series may be directly summed for 
 \begin_inset Formula $\sigma>1$
 \end_inset 
@@ -195,15 +241,103 @@ k\end{array}\right)(q+k)^{1-s}\label{eq:Hasse series}\end{equation}
 
  Although the Hasse series is convergent, the convergence is far too slow
  for practical numerical evaluation in the critical strip.
- There are other simple series that are more strongly convergent in limited
+ 
+\layout Standard
+
+There are other simple series that are more strongly convergent in limited
  domains, and so may be considered for numerical work.
  One such is a Taylor's series in 
 \begin_inset Formula $q$
 \end_inset 
 
 .
- Expanding about 
+ To obtain this, one makes use of the derivative 
+\begin_inset Formula \[
+\frac{d}{dq}\zeta(s,q)=-s\zeta(s+1,q)\]
+
+\end_inset 
+
+ to write a Taylor's series about 
+\begin_inset Formula $q_{0}$
+\end_inset 
+
+:
+\begin_inset Formula \begin{equation}
+\zeta(s,q)=\sum_{n=0}^{\infty}\left(q_{0}-q\right)^{n}\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)\zeta(s+n,q_{0})\label{eq:Hurw general Taylor}\end{equation}
+
+\end_inset 
+
+ The binomial coefficient for a general complex-valued 
+\begin_inset Formula $s$
+\end_inset 
+
+ can be understood to be 
+\begin_inset Formula \[
+\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)=\frac{s(s+1)(s+2)\cdots(s+n-1)}{n!}\]
+
+\end_inset 
+
+ To avoid the circular problem of having to compute 
+\begin_inset Formula $\zeta(s+n,q_{0})$
+\end_inset 
+
+ for some arbitrary 
+\begin_inset Formula $q_{0}$
+\end_inset 
+
+, one makes use of the fact that, for 
+\begin_inset Formula $q_{0}=1$
+\end_inset 
+
+, one has 
+\begin_inset Formula $\zeta(s,1)=\zeta(s)$
+\end_inset 
+
+, with 
+\begin_inset Formula $\zeta(s)$
+\end_inset 
+
+ being Riemann's zeta function.
+ Since Riemann's zeta does have several well-known algorithms (XXX need
+ refs), the Taylor's series at 
+\begin_inset Formula $q_{0}=1$
+\end_inset 
+
+ is tractable.
+ The 
+\begin_inset Formula $q_{0}=1$
+\end_inset 
+
+ series is convergent for 
+\begin_inset Formula $\left|q\right|<1$
+\end_inset 
+
+.
+ More abstractly, the general radius of convergence for the series (
+\begin_inset LatexCommand \ref{eq:Hurw general Taylor}
+
+\end_inset 
+
+) is the least distance between 
+\begin_inset Formula $q_{0}$
+\end_inset 
+
+ and any of the branch points 
+\begin_inset Formula $q=0,-1,-2,\cdots.$
+\end_inset 
+
+ To enlarge the radius of convergence, one may explicitly handle the nearest
+ branch-point on its own.
+ Thus, for example, explicitly setting aside the branch point at 
 \begin_inset Formula $q=0$
+\end_inset 
+
+ by writing 
+\begin_inset Formula $\zeta(s,q)=q^{-s}+\zeta(s,1+q)$
 \end_inset 
 
 , one obtains 
@@ -214,31 +348,68 @@ n\end{array}\right)\zeta(s+n)\label{eq:Hurwitz taylor}\end{equation}
 
 \end_inset 
 
- It is not hard to show that the sum on the right is convergent for 
+ where the right-hand side employed the Taylor's expansion at 
+\begin_inset Formula $q_{0}=1$
+\end_inset 
+
+.
+ This sum is convergent for 
 \begin_inset Formula $\left|q\right|<1$
 \end_inset 
 
-.
- Alternately, an expansion may be made about 
-\begin_inset Formula $q=1/2$
-\end_inset 
-
-: 
-\begin_inset Formula \[
-\zeta\left(s,q+\frac{1}{2}\right)=\sum_{n=0}^{\infty}\left(-q\right)^{n}\left(\begin{array}{c}
-s+n-1\\
-n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
-
-\end_inset 
-
- It may be shown that the above has a region of convergence 
-\begin_inset Formula $\left|q\right|<1/2$
+, with the radius of convergence dictated by the branch point at 
+\begin_inset Formula $q=-1$
 \end_inset 
 
 .
- Either of these expansions provide a numerically reasonable expression
- for the Hurwitz zeta function that is convergent on the entire complex
  
+\layout Standard
+
+This process may be repeated, so that, setting aside the branch points at
+ 
+\begin_inset Formula $q=0,-1$
+\end_inset 
+
+ by writing 
+\begin_inset Formula \[
+\zeta(s,q)=\frac{1}{q^{s}}+\frac{1}{\left(q+1\right)^{s}}+\zeta(s,2+q)\]
+
+\end_inset 
+
+ and then expanding about 
+\begin_inset Formula $q_{0}=2$
+\end_inset 
+
+, one has 
+\begin_inset Formula \[
+\zeta(s,q)=\frac{1}{q^{s}}+\frac{1}{\left(q+1\right)^{s}}+\sum_{n=0}^{\infty}\left(-q\right)^{n}\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)\left[\zeta(s+n)-1\right]\]
+
+\end_inset 
+
+ with the sum on the right being convergent for 
+\begin_inset Formula $\left|q\right|<2$
+\end_inset 
+
+.
+ This process may be repeated, so that the general form is 
+\begin_inset Formula \[
+\zeta(s,q)=\sum_{k=0}^{m}\frac{1}{\left(k+q\right)^{s}}+\sum_{n=0}^{\infty}\left(-q\right)^{n}\left(\begin{array}{c}
+s+n-1\\
+n\end{array}\right)\left[\zeta(s+n)-\sum_{k=1}^{m}\frac{1}{k^{s}}\right]\]
+
+\end_inset 
+
+ with the sum on the right being convergent for 
+\begin_inset Formula $\left|q\right|<m+1$
+\end_inset 
+
+.
+\layout Standard
+
+Any of these expansions provide a numerically reasonable expression for
+ the Hurwitz zeta function that is convergent on the entire complex 
 \begin_inset Formula $s$
 \end_inset 
 
@@ -253,12 +424,7 @@ n\end{array}\right)\left(2^{s+n}-1\right)\zeta(s+n)\]
  is a non-positive integer).
  The principal drawback to the use of these sums for high-precision calculations
  is the need for many high-precision evaluations of the Riemann zeta; the
- compute time can grow exponentially as the number of required digits is
- increased, especially when 
-\begin_inset Formula $q$
-\end_inset 
-
- approaches the radius of convergence of the sums.
+ compute time can grow rapidly as the number of required digits is increased.
  
 \layout Standard
 
