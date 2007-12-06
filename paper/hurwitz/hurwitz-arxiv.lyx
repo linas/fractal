@@ -302,8 +302,8 @@ n\end{array}\right)=\frac{s(s+1)(s+2)\cdots(s+n-1)}{n!}\]
 \end_inset 
 
  being Riemann's zeta function.
- Since Riemann's zeta does have several well-known algorithms (XXX need
- refs), the Taylor's series at 
+ Since Riemann's zeta function does have several well-known algorithms (XXX
+ need refs), the Taylor's series at 
 \begin_inset Formula $q_{0}=1$
 \end_inset 
 
@@ -423,8 +423,9 @@ Any of these expansions provide a numerically reasonable expression for
 
  is a non-positive integer).
  The principal drawback to the use of these sums for high-precision calculations
- is the need for many high-precision evaluations of the Riemann zeta; the
- compute time can grow rapidly as the number of required digits is increased.
+ is the need for many high-precision evaluations of the Riemann zeta function;
+ the computing time can grow rapidly as the number of required digits is
+ increased.
  
 \layout Standard
 
@@ -702,14 +703,15 @@ backwards
  All of the other parts of Euler-Maclaurin formula are easily evaluated.
  The result is an algorithm that is particularly rapid for the Hurwitz zeta
  function.
- It outperforms direct evaluation of the Taylor's series by orders of magnitude.
- It is faster then evaluating (
+ This, and some of the other algorithms discussed above, have been implemented,
+ and a measurement of thier relative performance was taken.
+ This data is reviewed in a later section.
+ It indicates that Euler-Maclaurin summation outperforms the direct evaluation
+ of the Taylor's series by orders of magnitude.
+ It also indicates that Euler-Maclaurin summation is faster than evaluating
+ the polylogarithm twice, and using Jonquière's identity (
 \begin_inset LatexCommand \ref{eq:poly-hur relation}
 
-\end_inset 
-
-) (which can be computed for real values of 
-\begin_inset Formula $q$
 \end_inset 
 
 ).
@@ -732,8 +734,8 @@ the Borwein trick
 e acceleration of general oscillatory series.
  A polynomial series for the polylogarithm is given, and the error term
  of the resulting approximation is precisely bounded.
- This is followed by a very short review of the application of the Euler
- Maclaurin summation.
+ This is followed by a very short review of the application of Euler Maclaurin
+ summation.
  There is a brief review of the duplication formula for the Hurwitz zeta,
  and a short discussion of ways in which this numerical algorithm may be
  tested for correctness.
@@ -796,8 +798,8 @@ The development of the algorithm requires the following integral representation
 \layout Standard
 
 
-\begin_inset Formula \[
-\mbox{Li}_{s}\left(z\right)=\frac{z}{\Gamma(s)}\int_{0}^{1}\frac{\left|\log y\right|^{s-1}}{1-yz}\, dy\]
+\begin_inset Formula \begin{equation}
+\mbox{Li}_{s}\left(z\right)=\frac{z}{\Gamma(s)}\int_{0}^{1}\frac{\left|\log y\right|^{s-1}}{1-yz}\, dy\label{eq:polylog integral}\end{equation}
 
 \end_inset 
 
@@ -815,7 +817,7 @@ This is easily obtained by using the integral representation for
 
 , and then exchanging the order of summation and integration.
  A comprehensive development of this integral representation is given by
- Costin
+ Costin and Garoufalidis
 \begin_inset LatexCommand \cite[Thm. 1]{Cos07}
 
 \end_inset 
@@ -861,10 +863,25 @@ This identity is easily obtained by inserting the integral representation
 The Borwein trick
 \layout Standard
 
-The Borwein trick uses the integral form to find a simple, finite sum that
- approximates the desired value arbitrarily well.
+This section reviews a certain summation technique, due to Borwein
+\begin_inset LatexCommand \cite{Bor95,Bor00-A}
+
+\end_inset 
+
+, here called the `
+\emph on 
+Borwein trick
+\emph default 
+'.
+ It uses an integral form to find a simple, finite sum that approximates
+ the desired value arbitrarily well.
  The trick consists of two steps.
- The first is to write the above integral formula as follows 
+ The first is to write the above integral formula (
+\begin_inset LatexCommand \ref{eq:polylog integral}
+
+\end_inset 
+
+) as follows 
 \begin_inset Formula \begin{eqnarray}
 \xi(s,z) & = & \frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\nonumber \\
  & = & \mbox{Li}_{s}\left(z\right)+\frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)-f(1/z)}{1-yz}\,\left|\log y\right|^{s-1}dy\label{eq:Borwein trick}\end{eqnarray}
@@ -2476,7 +2493,7 @@ XXX to do: characterize the region of convergence for this algo.
 Performance
 \layout Standard
 
-The performance of both the Euler-Maclaurin summation and the Borwein algorithm
+The performance of both Euler-Maclaurin summation and the Borwein algorithm
  appears to be very good.
  As a general rule, both have better performance than the direct summation
  formula (
@@ -2524,6 +2541,8 @@ g of the number of multiplications required to implement the algorithm.
 \end_inset 
 
  will be held fixed from one evaluation to the next.
+ Additional performance improvements can be obtained if any of the parameters
+ are real-valued instead of being complex-valued.
  Thus, this section will present an experimental study of the performance,
  based on a reasonably well-developed implementation of the various quantities,
  anchored upon the basic functions provided by GMP.
@@ -3289,7 +3308,7 @@ It is of some curiosity to note that the sheet that is forced takes the
 
 \end_inset 
 
- which is also noted by Costin
+ which is also noted by Costin and Garoufalidis
 \begin_inset LatexCommand \cite[eqn 14]{Cos07}
 
 \end_inset 
@@ -5011,7 +5030,7 @@ Curiously, the limit
 \begin_inset Formula $F(1,s)=\zeta(s)$
 \end_inset 
 
- the Riemann zeta.
+ the Riemann zeta function.
  The approximation (
 \begin_inset LatexCommand \ref{eq:F-approx}
 
