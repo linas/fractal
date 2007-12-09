@@ -66,7 +66,7 @@ An efficient algorithm for computing the Riemann zeta function
 
 
 \begin_inset LatexCommand cite
-key "Bor95,Bor00-A"
+key "Bor00-A"
 
 \end_inset
 
@@ -148,7 +148,13 @@ This article sketches a technique for improving the rate of convergence
  computation of the polylogarithm, and to related functions, such as the
  Hurwitz zeta function.
  It essentially generalizes an algorithm given by Peter Borwein for computing
- the Riemann zeta function.
+ the Riemann zeta function (
+\begin_inset LatexCommand cite
+key "Bor00-A"
+
+\end_inset
+
+).
  The principal result is an algorithm that efficiently obtains values of
  the Hurwitz zeta in the critical strip 
 \begin_inset Formula $s=\sigma+i\tau$
@@ -330,8 +336,13 @@ n\end{array}\right)=\frac{s(s+1)(s+2)\cdots(s+n-1)}{n!}\]
 \end_inset
 
  being Riemann's zeta function.
- Since Riemann's zeta function does have several well-known algorithms (XXX
- need refs), the Taylor's series at 
+ Since Riemann's zeta function does have several well-known algorithms (
+\begin_inset LatexCommand cite
+key "Bor00"
+
+\end_inset
+
+), the Taylor's series at 
 \begin_inset Formula $q_{0}=1$
 \end_inset
 
@@ -633,12 +644,13 @@ key "Cra06"
 
 \begin_layout Standard
 The primary effort of this paper is to take the algorithm given by Borwein
+ (
 \begin_inset LatexCommand cite
-key "Bor95,Bor00-A"
+key "Bor00-A"
 
 \end_inset
 
-, which is a simple XXX fix Padé-approximant type algorithm, and generalize
+), which is a simple XXX fix Padé-approximant type algorithm, and generalize
  it to the polylogarithm.
  The result is a relatively small finite sum that approximates the polylogarithm
 , and whose error, or difference from the exact value, can be precisely
@@ -702,6 +714,95 @@ key "Bor95,Bor00-A"
 \end_inset
 
 -plane; however, this requires the independent evaluation of Hurwitz zeta.
+\end_layout
+
+\begin_layout Standard
+The extended Borwein algorithm described here can be considered to be a
+ yet another form of series acceleration, applied in a particular context.
+ As there already exists a large body of work on series acceleration (
+\begin_inset LatexCommand cite
+key "Wen89"
+
+\end_inset
+
+), a few words are in order for the choice made here.
+ First, much of the existing literature is focused on real-valued series.
+ When a formal series, such as 
+\begin_inset Formula $\sum_{n}a_{n}x^{n}$
+\end_inset
+
+ is considered, it is usually implicitly assumed that 
+\begin_inset Formula $x$
+\end_inset
+
+ is real, and positive.
+ Alternately, some of the finest and most powerful series acceleration algorithm
+s take 
+\begin_inset Formula $x=-1$
+\end_inset
+
+, so that the sequence being summed is a real-valued, alternating sequence.
+ By contrast, the problem at hand takes 
+\begin_inset Formula $x$
+\end_inset
+
+ to be complex-valued, and so, in this sense, '
+\emph on
+oscillatory
+\emph default
+', as 
+\begin_inset Formula $x=re^{i\theta}$
+\end_inset
+
+ with 
+\begin_inset Formula $\theta$
+\end_inset
+
+ non-zero.
+ In addition, the 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ show a weak, complex-valued oscillation, with the 
+\begin_inset Formula $\left|a_{n}\right|$
+\end_inset
+
+ being only logarithmically convergent.
+ Thus, most of the well-known series acceleration techniques do not appear
+ to be 
+\emph on
+prima facie
+\emph default
+ applicable to the problem at hand.
+ As to numerical performance, the best techniques, and in particular, the
+ non-linear techniques, seem to offer approximately 
+\begin_inset Formula $2N$
+\end_inset
+
+ to 
+\begin_inset Formula $4N$
+\end_inset
+
+ bits of precision for a logarithmically convergent series of 
+\begin_inset Formula $N$
+\end_inset
+
+ terms, which is comparable to the results obtained here.
+ This is supported by Jentschura, 
+\emph on
+et al
+\emph default
+ (
+\begin_inset LatexCommand cite
+key "Jen98"
+
+\end_inset
+
+), who apply several different non-linear sequence transformations to the
+ Riemann zeta function and the Lerch transcendent.
+ Whether any of the other well-known techniques can be adapted to this problem,
+ and whether they offer equivalent or superior numerical space/time performance,
+ remains an open question.
 \end_layout
 
 \begin_layout Standard
@@ -1215,7 +1316,11 @@ reference "eq:xi integral"
 \end_inset
 
 .
- In a certain sense, an alternating series can be considered to be a series
+ 
+\end_layout
+
+\begin_layout Standard
+In a certain sense, an alternating series can be considered to be a series
  from which an explicit factor of 
 \begin_inset Formula $z^{n}$
 \end_inset
@@ -1817,7 +1922,7 @@ key "Bor95,Bor00-A"
 
 \end_inset
 
-) using the Tchebysheff polynomials, corresponds to 
+), using the Tchebysheff polynomials, corresponds to 
 \begin_inset Formula $A=3+\sqrt{8}\approx5.828$
 \end_inset
 
