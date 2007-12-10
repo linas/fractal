@@ -34,6 +34,7 @@
 \tracking_changes false
 \output_changes false
 \author "" 
+\author "" 
 \end_header
 
 \begin_body
@@ -721,29 +722,29 @@ The extended Borwein algorithm described here can be considered to be a
  yet another form of series acceleration, applied in a particular context.
  As there already exists a large body of work on series acceleration 
 \begin_inset LatexCommand cite
-key "Wen89,Brez91"
+key "Wen89,Brez91,Bak96"
 
 \end_inset
 
 , a few words are in order for the choice made here.
  First, much of the existing literature is focused on real-valued series.
  When a formal series, such as 
-\begin_inset Formula $\sum_{n}a_{n}x^{n}$
+\begin_inset Formula $\sum_{n}a_{n}z^{n}$
 \end_inset
 
  is considered, it is usually implicitly assumed that 
-\begin_inset Formula $x$
+\begin_inset Formula $z$
 \end_inset
 
  is real, and positive.
  Alternately, some of the finest and most powerful series acceleration algorithm
 s take 
-\begin_inset Formula $x=-1$
+\begin_inset Formula $z=-1$
 \end_inset
 
 , so that the sequence being summed is a real-valued, alternating sequence.
  By contrast, the problem at hand takes 
-\begin_inset Formula $x$
+\begin_inset Formula $z$
 \end_inset
 
  to be complex-valued, and so, in this sense, '
@@ -751,7 +752,7 @@ s take
 oscillatory
 \emph default
 ', as 
-\begin_inset Formula $x=re^{i\theta}$
+\begin_inset Formula $z=re^{i\theta}$
 \end_inset
 
  with 
@@ -874,7 +875,11 @@ reference "eq:poly-hur relation"
 
 \begin_layout Standard
 The development of this paper proceeds as follows.
- First, an integral representation is given for the polylogarithm.
+ XXXX -- all wrong.
+\end_layout
+
+\begin_layout Standard
+First, an integral representation is given for the polylogarithm.
  This representation is such that a certain trick, here called 
 \begin_inset Quotes eld
 \end_inset
@@ -923,102 +928,80 @@ key "GMP"
 \end_layout
 
 \begin_layout Section
-The Borwein trick
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\begin_layout Section
 Convergence Acceleration of Oscillatory Series 
 \end_layout
 
 \begin_layout Standard
-For the case of 
-\begin_inset Formula $z=-1$
+This section considers series acceleration techniques for the formal series
+ 
+\begin_inset Formula \begin{equation}
+S(z)=\sum_{n=0}^{\infty}a_{n}z^{n}\label{eq:formal series}\end{equation}
+
 \end_inset
 
- and 
-\begin_inset Formula $p_{n}(y)=y^{n}$
+where 
+\begin_inset Formula $z$
 \end_inset
 
-, the technique developed above corresponds to Euler's method for the convergenc
-e acceleration of an alternating series
+ is understood to be complex-valued and 
+\emph on
+a priori
+\emph default
+ unrestricted.
+ Informally, this series will be termed '
+\emph on
+oscillatory
+\emph default
+', in the sense that when 
+\begin_inset Formula $z$
+\end_inset
+
+ lies on the unit circle 
+\begin_inset Formula $\left|z\right|=1$
+\end_inset
+
+, the powers 
+\begin_inset Formula $z^{n}$
+\end_inset
+
+are seen to circle around the origin.
+ The goal is to present techniques that converge more rapidly than the simple
+ partial sums of (
+\begin_inset LatexCommand ref
+reference "eq:formal series"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+One of the oldest techniques for the acceleration of convergence is Euler's
+ transformation of an alternating series 
 \begin_inset LatexCommand cite
 after "eqn 3.6.27"
 key "A&S"
 
 \end_inset
 
-; a particularly efficient algorithm for Euler's method is given by van
- Wijngaarden
-\begin_inset LatexCommand cite
-key "Pre88"
-
-\end_inset
-
 .
- Polynomials that provide much more powerful series acceleration are discussed
- by Cohen 
-\emph on
-et al.
-
-\emph default
- 
-\begin_inset LatexCommand cite
-key "Coh00"
-
-\end_inset
-
-, but again in the context of 
-\begin_inset Formula $z=-1$
-\end_inset
-
-; these include the Tchebysheff orthogonal polynomials considered by Borwein,
- which do a rather good job of minimizing the integrand of equation (
+ An alternating series can be considered to be a special case of (
 \begin_inset LatexCommand ref
-reference "eq:xi integral"
+reference "eq:formal series"
 
 \end_inset
 
-) when 
-\begin_inset Formula $z=-1$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-In a certain sense, an alternating series can be considered to be a series
- from which an explicit factor of 
-\begin_inset Formula $z^{n}$
-\end_inset
-
- has been factored out, for the very special case of 
-\begin_inset Formula $z=-1$
-\end_inset
-
-.
- Thus, one is lead to ask if one can find series acceleration methods for
- more general oscillatory series, where the oscillatory component can be
- thought of as going as 
-\begin_inset Formula $z^{n}$
-\end_inset
-
- for some root of unity 
+), with 
 \begin_inset Formula $z$
 \end_inset
 
-.
- 
-\end_layout
+ set to 
+\begin_inset Formula $z=-1$
+\end_inset
 
-\begin_layout Standard
-Euler's transformation of alternating series is a convergence acceleration
- technique, and is most clearly expressed by making use of the forward differenc
-e operator.
+.
+ Euler's transformation is most clearly expressed by making use of the forward
+ difference operator.
  This operator, 
 \begin_inset Formula $\triangle$
 \end_inset
@@ -1062,24 +1045,35 @@ k\end{array}\right)f(x+k)\label{eq:nth difference}\end{equation}
 
 \begin_layout Standard
 \begin_inset Formula \[
-s=\sum_{n=0}^{\infty}\left(-1\right)^{n}a_{n}\]
+S=\sum_{n=0}^{\infty}\left(-1\right)^{n}a_{n}\]
 
 \end_inset
 
  and finds that it can be re-written as 
 \begin_inset Formula \begin{equation}
-s=\sum_{n=0}^{\infty}\frac{\left(-1\right)^{n}\triangle^{n}a_{0}}{2^{n+1}}\label{eq:Euler's series}\end{equation}
+S=\sum_{n=0}^{\infty}\frac{\left(-1\right)^{n}\triangle^{n}a_{0}}{2^{n+1}}\label{eq:Euler's series}\end{equation}
 
 \end_inset
 
 Aside from the power of two in the denominator aiding in convergence, it
  is often the case that the forward differences themselves rapidly become
  small.
+ Euler's method effective, although not very strong, and it has long been
+ employed numeric calculations.
+ A particularly efficient algorithm for Euler's method is given by van Wijngaard
+en
+\begin_inset LatexCommand cite
+key "Goo61,Pre88"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
 Euler's transformation of series has several general forms.
- One particularly enlightening form
+ One particularly enlightening form 
 \begin_inset LatexCommand cite
 after "page 311"
 key "Mil33"
@@ -1110,7 +1104,8 @@ where the right hand side converges for
 \begin_inset Formula $z=1/t$
 \end_inset
 
-, the above takes a form that will be used in later sections: 
+, the above takes a form that suggests the later developments in this section:
+ 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}a_{n}z^{n}=\frac{1}{1-z}\sum_{k=0}^{\infty}\left(\frac{z}{1-z}\right)^{k}\triangle^{k}a_{0}\label{eq:Euler's gen in z}\end{equation}
 
@@ -1121,8 +1116,8 @@ where the right hand side converges for
 
 \begin_layout Standard
 A good example of the strength (and weakness) of Euler's transformation
- of alternating series is its application to the Hurwitz zeta function,
- where it essentially leads to the Hasse series (
+ is its application to the Hurwitz zeta function, where it essentially leads
+ to the Hasse series (
 \begin_inset LatexCommand ref
 reference "eq:Hasse series"
 
@@ -1205,16 +1200,11 @@ ithm, an explicit oscillation coming from
 .
  Thus, one would like to have a theory of sequence acceleration not for
  alternating series, but for oscillatory series.
- The polylogarithm approximation given in the last section represents the
  
-\emph on
-ad-hoc
-\emph default
- development of a special case for such a general theory.
 \end_layout
 
 \begin_layout Standard
-A loose sketch of a possible general theory is presented below.
+Consider first a few very simple techniques.
  Suppose that 
 \begin_inset Formula $c_{n}$
 \end_inset
@@ -1224,13 +1214,10 @@ A loose sketch of a possible general theory is presented below.
 \end_inset
 
 , and that one wishes to compute the sum 
-\begin_inset Formula \[
-S=\sum_{n=0}^{\infty}c_{n}\]
-
+\begin_inset Formula $\sum_{n=0}^{\infty}c_{n}$
 \end_inset
 
- but that one wants to apply convergence acceleration techniques to its
- evaluation.
+.
  If the leading component of oscillation is 
 \begin_inset Formula $c_{n}\sim\cos n\theta$
 \end_inset
@@ -1248,27 +1235,17 @@ S=\sum_{n=0}^{\infty}c_{n}\]
 \end_inset
 
 .
- One may then consider a sum of 
-\begin_inset Formula $a_{n}=e^{-in\theta}e_{n}$
+ One may then consider suming 
+\begin_inset Formula $a_{n}=e^{in(\pi-\theta)}e_{n}$
 \end_inset
 
- and consider the  summation of a series 
-\begin_inset Formula \[
-\sum_{n=0}^{\infty}e^{in\theta}a_{n}\]
-
-\end_inset
-
-By construction, the 
+.
+ By construction, the 
 \begin_inset Formula $a_{n}$
 \end_inset
 
- are now presumed to be monotonic or nearly so, so that equation (
-\begin_inset LatexCommand ref
-reference "eq:Euler's general"
-
-\end_inset
-
-) can be applied.
+ are now presumed to be alternating, or nearly so, so that any method for
+ accelerating alternating series can be applied.
  This trick may be applied to any oscillatory sequence; one need not know
  a precise or 
 \emph on
