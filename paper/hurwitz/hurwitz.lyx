@@ -1324,12 +1324,12 @@ for some function
 
 , and should not bar most practical applications.
  It follows that
-\begin_inset Formula \[
-S(z)=\int_{0}^{1}\frac{g(y)}{1-yz}\, dy\]
+\begin_inset Formula \begin{equation}
+S(z)=\int_{0}^{1}\frac{g(y)}{1-yz}\, dy\label{eq:S quadrature}\end{equation}
 
 \end_inset
 
- The goal of the series acceleration is to write 
+The goal of the series acceleration is to write 
 \begin_inset Formula \[
 S(z)=S_{n}(z)+\varepsilon_{n}(z)\]
 
@@ -1368,8 +1368,8 @@ key "Coh00"
 
 \begin_layout Standard
 First, one makes an Ansatz and writes 
-\begin_inset Formula \[
-S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\int_{0}^{1}\frac{p_{n}\left(\frac{1}{z}\right)-p_{n}(y)}{1-yz}g(y)\, dy\]
+\begin_inset Formula \begin{equation}
+S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\int_{0}^{1}\frac{p_{n}\left(\frac{1}{z}\right)-p_{n}(y)}{1-yz}g(y)\, dy\label{eq:S_n definition}\end{equation}
 
 \end_inset
 
@@ -1405,25 +1405,12 @@ so that
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}a_{k}\]
+\begin_inset Formula \begin{equation}
+S_{n}(z)=\frac{-1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}a_{k}\label{eq:accelerated sum}\end{equation}
 
 \end_inset
 
-specifically, via equations (
-\begin_inset LatexCommand ref
-reference "eq:r_n definition"
-
-\end_inset
-
-) and (
-\begin_inset LatexCommand ref
-reference "eq:r_n series"
-
-\end_inset
-
-).
- With a suitable choice of 
+With a suitable choice of 
 \begin_inset Formula $p_{n}(z)$
 \end_inset
 
@@ -1614,68 +1601,18 @@ key "Bor00-A"
 \end_layout
 
 \begin_layout Section
-New section
+Polynomial sequences
 \end_layout
 
 \begin_layout Standard
-xxx
-\end_layout
-
-\begin_layout Standard
-This section reviews a certain summation technique, due to Borwein 
-\begin_inset LatexCommand cite
-key "Bor00-A"
-
-\end_inset
-
- (see also 
-\begin_inset LatexCommand cite
-key "Coh00"
-
-\end_inset
-
-), here called the `
-\emph on
-Borwein trick
-\emph default
-'.
- It uses an integral form to find a simple, finite sum that approximates
- the desired value arbitrarily well.
- The trick consists of two steps.
- 
-\end_layout
-
-\begin_layout Standard
-The first is to write the above integral formula (
+xxxThis section provides a series of short lemmas to establish the result
+ (
 \begin_inset LatexCommand ref
-reference "eq:polylog integral"
+reference "eq:accelerated sum"
 
 \end_inset
 
-) as follows 
-\begin_inset Formula \begin{eqnarray}
-\varepsilon(s,z) & = & \frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\nonumber \\
- & = & \mbox{Li}_{s}\left(z\right)+\frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)-f(1/z)}{1-yz}\,\left|\log y\right|^{s-1}dy\label{eq:Borwein trick}\end{eqnarray}
-
-\end_inset
-
- The second step is to find a sequence of polynomials 
-\begin_inset Formula $p_{n}(z)$
-\end_inset
-
- to be used for 
-\begin_inset Formula $f(z)$
-\end_inset
-
-, such that the integral on the right hand side can be evaluated as a simple,
- finite sum, while the left hand side can be shown to be bounded arbitrarily
- close to zero as 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-.
- The right hand side may be easily evaluated, by employing the following
- theorem.
+).
 \end_layout
 
 \begin_layout Lemma
@@ -1738,7 +1675,7 @@ An explicit expression for
 
  as 
 \begin_inset Formula \begin{equation}
-p_{n}(y)=\sum_{k=0}^{n}a_{k}y^{k}\label{eq:basic poly in a_k}\end{equation}
+p_{n}(y)=\sum_{k=0}^{n}b_{k}y^{k}\label{eq:basic poly in b_k}\end{equation}
 
 \end_inset
 
@@ -1752,12 +1689,12 @@ r_{n}(y)=\sum_{k=0}^{\infty}c_{k}y^{k}\label{eq:r_n series}\end{equation}
 
 \end_inset
 
- Setting 
+Setting 
 \begin_inset Formula $y=0$
 \end_inset
 
 , one immediately obtains 
-\begin_inset Formula $c_{0}=a_{0}-p_{n}(1/z)$
+\begin_inset Formula $c_{0}=b_{0}-p_{n}(1/z)$
 \end_inset
 
 .
@@ -1789,16 +1726,16 @@ r_{n}^{(k)}(y)=\frac{1}{1-yz}\left[p_{n}^{(k)}(y)+kzr_{n}^{(k-1)}(y)\right]\]
 \end_inset
 
  in the above, one obtains the recurrence relation 
-\begin_inset Formula $c_{k}=a_{k}+zc_{k-1}$
+\begin_inset Formula $c_{k}=b_{k}+zc_{k-1}$
 \end_inset
 
  which is trivially solvable as 
 \begin_inset Formula \begin{equation}
-c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}}\right]\label{eq:c_k coefficients}\end{equation}
+c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{b_{j}}{z^{j}}\right]\label{eq:c_k coefficients}\end{equation}
 
 \end_inset
 
- From this, it is easily seen that 
+From this, it is easily seen that 
 \begin_inset Formula $c_{n}=0$
 \end_inset
 
@@ -1828,45 +1765,43 @@ c_{k}=z^{k}\left[-p_{n}\left(\frac{1}{z}\right)+\sum_{j=0}^{k}\frac{a_{j}}{z^{j}
 \end_layout
 
 \begin_layout Standard
-This is immediately employed in equation (
+To prove equation (
 \begin_inset LatexCommand ref
-reference "eq:Borwein trick"
+reference "eq:accelerated sum"
 
 \end_inset
 
-) to obtain 
-\begin_inset Formula \begin{equation}
-\varepsilon(s,z)=\mbox{Li}_{s}\left(z\right)+\frac{z}{p_{n}(1/z)}\sum_{k=0}^{n-1}\frac{c_{k}}{(k+1)^{s}}\label{eq:Polylog general estimate}\end{equation}
+), one notes simply that (
+\begin_inset LatexCommand ref
+reference "eq:r_n definition"
 
 \end_inset
 
- To obtain a good approximation for 
-\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
-\end_inset
-
-, one needs to find a polynomial sequence such that 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
- goes to zero as 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
- for the domain 
-\begin_inset Formula $(s,z)$
-\end_inset
-
- of interest.
- That is, one seeks to make 
-\begin_inset Formula \begin{equation}
-\varepsilon(s,z)=\frac{1}{p_{n}(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{p_{n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\label{eq:xi integral}\end{equation}
+) is the integrand to (
+\begin_inset LatexCommand ref
+reference "eq:S_n definition"
 
 \end_inset
 
- as small as possible.
- One possible sequence, based on the Bernoulli process or Gaussian distribution,
- is explored in a subsequent section.
+).
+ Then, substituting (
+\begin_inset LatexCommand ref
+reference "eq:r_n series"
+
+\end_inset
+
+) for the integrand, keeping in mind that this last series terminates at
  
+\begin_inset Formula $n-1$
+\end_inset
+
+, one finally arrives at (
+\begin_inset LatexCommand ref
+reference "eq:accelerated sum"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Section
@@ -1980,6 +1915,71 @@ This identity is easily obtained by inserting the integral representation
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+This integral representation is precisely of the form of the quadrature
+ (
+\begin_inset LatexCommand ref
+reference "eq:S quadrature"
+
+\end_inset
+
+).
+ Following the development above, one has 
+\begin_inset Formula \begin{eqnarray}
+\varepsilon(s,z) & = & \frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\nonumber \\
+ & = & \mbox{Li}_{s}\left(z\right)+\frac{1}{f(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{f(y)-f(1/z)}{1-yz}\,\left|\log y\right|^{s-1}dy\label{eq:Borwein trick}\end{eqnarray}
+
+\end_inset
+
+Replacing 
+\begin_inset Formula $f(y)$
+\end_inset
+
+ with a polynomial 
+\begin_inset Formula $p_{n}(y)$
+\end_inset
+
+, and making use of the explicit form (
+\begin_inset LatexCommand ref
+reference "eq:c_k coefficients"
+
+\end_inset
+
+), one obtains 
+\begin_inset Formula \begin{equation}
+\varepsilon_{n}(s,z)=\mbox{Li}_{s}\left(z\right)+\frac{z}{p_{n}(1/z)}\sum_{k=0}^{n-1}\frac{c_{k}}{(k+1)^{s}}\label{eq:Polylog general estimate}\end{equation}
+
+\end_inset
+
+ Thus, to obtain a good approximation for 
+\begin_inset Formula $\mbox{Li}_{s}\left(z\right)$
+\end_inset
+
+, one needs to find a polynomial sequence such that 
+\begin_inset Formula $\varepsilon_{n}$
+\end_inset
+
+ goes to zero as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ for the domain 
+\begin_inset Formula $(s,z)$
+\end_inset
+
+ of interest.
+ That is, one seeks to make 
+\begin_inset Formula \begin{equation}
+\varepsilon_{n}(s,z)=\frac{1}{p_{n}(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{p_{n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\label{eq:xi integral}\end{equation}
+
+\end_inset
+
+as small as possible.
+ One possible sequence, based on the Bernoulli process or Gaussian distribution,
+ is explored in a subsequent section.
+ 
 \end_layout
 
 \begin_layout Section
@@ -2098,7 +2098,7 @@ reference "eq:Polylog general estimate"
 \begin_layout Standard
 The polynomial coefficients of equation (
 \begin_inset LatexCommand ref
-reference "eq:basic poly in a_k"
+reference "eq:basic poly in b_k"
 
 \end_inset
 
