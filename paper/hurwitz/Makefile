@@ -53,7 +53,7 @@ dist: $(GRPHS) $(IMGS)
 	ls -la hurwitz.tar.gz
 
 numa948: $(GRPHS) $(IMGS)
-	tar -zcvf numa948.tar.gz hurwitz.latex hurwitz.aux hurwitz.bbl
+	tar -zcvf numa948.tar.gz hurwitz.tex hurwitz.bbl
 	ls -la numa948.tar.gz
 
 clean:
