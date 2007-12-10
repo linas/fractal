@@ -30,8 +30,8 @@ IMGS= periodic-50.ps \
       polylog,1,1-sheet.ps
 
 all: $(GRPHS) $(IMGS)
-	cp hurwitz-arxiv.tex hurwitz.latex
-	/usr/bin/latex hurwitz.latex
+	lyx hurwitz.lyx -e latex
+	/usr/bin/latex hurwitz.tex
 	/usr/bin/bibtex hurwitz.aux
 
 arxiv:
