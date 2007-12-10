@@ -2533,6 +2533,22 @@ key "Bor00-A"
 
 \end_inset
 
+ The first equality is known from 
+\begin_inset LatexCommand cite
+after "eqn. 6.1.25"
+key "A&S"
+
+\end_inset
+
+, while the inequality follows from the theory of elementary transcendental
+ functions, and 
+\begin_inset LatexCommand cite
+after "eqn. 4.5.68"
+key "A&S"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -2590,7 +2606,13 @@ reference "eq:polylog specific estimate"
 
 \end_inset
 
- The generic form for the polylogarithm at the negative integers is 
+ The generic form for the polylogarithm at the negative integers 
+\begin_inset LatexCommand cite
+key "Lew81"
+
+\end_inset
+
+ is 
 \begin_inset Formula \[
 \mbox{Li}_{-n}(z)=\left(-1\right)^{n}\,\sum_{k=0}^{n}\left(-1\right)^{k}\frac{k!}{\left(1-z\right)^{k+1}}\left\{ \begin{array}{c}
 n+1\\
@@ -2604,7 +2626,30 @@ n\\
 k\end{array}\right\} $
 \end_inset
 
- denotes the Stirling numbers of the second kind.
+ denotes the Stirling numbers of the second kind, which are given by the
+ 
+\begin_inset Formula $k$
+\end_inset
+
+'th forward difference of 
+\begin_inset Formula $x^{n}$
+\end_inset
+
+ evaluated at 
+\begin_inset Formula $x=0$
+\end_inset
+
+: 
+\begin_inset Formula \[
+\left\{ \begin{array}{c}
+n\\
+k\end{array}\right\} =\left.\frac{\triangle^{k}x^{n}}{k!}\right|_{x=0}=\frac{1}{k!}\sum_{j=0}^{k}(-1)^{k-j}\left(\begin{array}{c}
+k\\
+j\end{array}\right)j^{n}\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2738,7 +2783,14 @@ key "Pav07"
 \end_inset
 
 .
- The Euler-Maclaurin series may be written as
+ The Euler-Maclaurin series may be written as 
+\begin_inset LatexCommand cite
+after "eqn. 23.12.30"
+key "A&S"
+
+\end_inset
+
+
 \begin_inset Formula \begin{eqnarray}
 \sum_{k=0}^{\infty}f(k) & = & \sum_{k=0}^{N-1}f(k)+\frac{f(N)}{2}+\int_{N}^{\infty}f(x)dx\nonumber \\
  &  & -\sum_{k=1}^{p}\left.\frac{B_{2k}}{(2k)!}\,\frac{d^{2k+1}}{dx^{2k+1}}f(x)\right|_{x=N}+R\label{eq:Euler-Maclaurin}\end{eqnarray}
@@ -2762,12 +2814,19 @@ key "Pav07"
 
 \end_inset
 
- The error made by this expansion is embodied in the term 
+The error made by this expansion is embodied in the term 
 \begin_inset Formula $R$
 \end_inset
 
 .
  It is directly given by 
+\begin_inset LatexCommand cite
+after "eqn. 23.1.32"
+key "A&S"
+
+\end_inset
+
+ 
 \begin_inset Formula \[
 R=\frac{2}{(2\pi)^{2p}}\int_{N}^{\infty}f^{(p+1)}(x)\frac{B_{p+1}\left(x-\left\lfloor x\right\rfloor \right)}{(p+1)!}dx\]
 
@@ -2777,8 +2836,38 @@ where the
 \begin_inset Formula $B_{k}(x)$
 \end_inset
 
- are the Bernoulli polynomials.
- There are various formulas in the literature which may be readily applied
+ are the Bernoulli polynomials 
+\begin_inset LatexCommand cite
+after "chap. 23.1"
+key "A&S"
+
+\end_inset
+
+.
+ These are defined by the generating function 
+\begin_inset Formula \[
+\frac{te^{xt}}{e^{t}-1}=\sum_{n=0}^{\infty}B_{n}(x)\frac{t^{n}}{n!}\]
+
+\end_inset
+
+The notation 
+\begin_inset Formula $\left\lfloor x\right\rfloor $
+\end_inset
+
+ denotes the floor of 
+\begin_inset Formula $x,$
+\end_inset
+
+ that is, the largest integer less than 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+There are various formulas in the literature which may be readily applied
  to bound the size of this term
 \begin_inset LatexCommand cite
 key "A&S"
@@ -3030,7 +3119,7 @@ This figure shows the time, in seconds, needed to compute the polylogarithm
 \begin_inset Formula $z=+1$
 \end_inset
 
- than algorithmically optimum 
+ than algorithmically optimal argument 
 \begin_inset Formula $z=-1$
 \end_inset
 
@@ -3570,7 +3659,15 @@ key "Lew81"
 
 \end_inset
 
-
+This last identity is most easily understood to be one form of the so-called
+ '
+\emph on
+multiplication theorem
+\emph default
+', having analogues in the polygamma function, Hurwitz zeta function and
+ the Bernoulli polynomials, all being derivable from Gauss' multiplication
+ theorem for the Gamma function, and having applications in both number
+ theory and dynamical systems.
 \end_layout
 
 \begin_layout Standard
@@ -3647,8 +3744,8 @@ e^{-i\pi s/2}\mbox{Li}_{s}\left(z\right)+e^{i\pi s/2}\mbox{Li}_{s}\left(\frac{1}
 
 \end_inset
 
- together with some sort of independent means of evaluating the Hurwitz
- zeta function.
+together with some sort of independent means of evaluating the Hurwitz zeta
+ function.
  The Taylor expansion (
 \begin_inset LatexCommand ref
 reference "eq:Hurwitz taylor"
@@ -3724,14 +3821,15 @@ reference "eq:Inversion formula"
 
 \end_inset
 
- Although this is equivalent to the equation (
+Although this is equivalent to eqn.
+ (
 \begin_inset LatexCommand ref
 reference "eq:Inversion formula"
 
 \end_inset
 
-) immediately above, it correctly captures the appropriate branch of the
- logarithm that should be used: equation (
+), it correctly captures the appropriate branch of the logarithm that should
+ be used: equation (
 \begin_inset LatexCommand ref
 reference "eq:polylog as pure hurwitz"
 
@@ -3770,7 +3868,7 @@ It is of some curiosity to note that the sheet that is forced takes the
 
 \end_inset
 
- which is also noted by Costin and Garoufalidis
+which is also noted by Costin and Garoufalidis
 \begin_inset LatexCommand cite
 after "eqn 14"
 key "Cos07"
