@@ -2783,7 +2783,27 @@ key "Pav07"
 \end_inset
 
 .
- The Euler-Maclaurin series may be written as 
+ A detailed discussion of the application of the Euler-Maclaurin formula
+ to the Riemann zeta function is given by Weniger and Kirtman 
+\begin_inset LatexCommand cite
+after "section 2"
+key "Wen03"
+
+\end_inset
+
+.
+ In particular, the methods discussed by Weniger in 
+\begin_inset LatexCommand cite
+key "Wen07"
+
+\end_inset
+
+ should be directly extendable to the Hurwitz zeta function.
+ This section provides only a basic sketch.
+\end_layout
+
+\begin_layout Standard
+The Euler-Maclaurin series may be written as 
 \begin_inset LatexCommand cite
 after "eqn. 23.12.30"
 key "A&S"
@@ -2797,7 +2817,7 @@ key "A&S"
 
 \end_inset
 
- This formula is simply applied to the function 
+This formula is simply applied to the function 
 \begin_inset Formula $f(x)=(x+q)^{-s}$
 \end_inset
 
@@ -3604,7 +3624,7 @@ F\left(q;s\right)=2^{1-s}F\left(2q;s\right)-F\left(q+\frac{1}{2};s\right)\]
 
 \end_inset
 
- recursively until one obtains values of 
+recursively until one obtains values of 
 \begin_inset Formula $q\ge1/4$
 \end_inset
 
@@ -3861,8 +3881,11 @@ reference "eq:Inversion formula"
 \end_layout
 
 \begin_layout Standard
-It is of some curiosity to note that the sheet that is forced takes the
- form 
+It is of some curiosity to note that, when 
+\begin_inset Formula $q$
+\end_inset
+
+is not an integer, the sheet that is forced takes the form 
 \begin_inset Formula \[
 \zeta\left(s,q\right)+e^{-i\pi s}\zeta\left(s,1-q\right)=\sum_{n=-\infty}^{+\infty}\frac{1}{(n+q)^{s}}\]
 
@@ -3875,7 +3898,13 @@ key "Cos07"
 
 \end_inset
 
- as a Mittag-Leffler type decomposition.
+ as a Mittag-Leffler type decomposition
+\begin_inset LatexCommand cite
+key "Boa64"
+
+\end_inset
+
+.
  A general discussion of the monodromy is given in a later section.
 \end_layout
 
@@ -3896,12 +3925,18 @@ The correctness of a given numerical implementation can be validated in
 \end_inset
 
 , one has the relationship 
+\begin_inset LatexCommand cite
+key "Lew81,Wood92"
+
+\end_inset
+
+ 
 \begin_inset Formula \[
 \mbox{Li}_{n}\left(e^{2\pi iq}\right)+\left(-1\right)^{n}\mbox{Li}_{n}\left(e^{-2\pi iq}\right)=-\frac{\left(2\pi i\right)^{n}}{n!}B_{n}(q)\]
 
 \end_inset
 
- where the 
+where the 
 \begin_inset Formula $B_{n}(x)$
 \end_inset
 
@@ -3989,49 +4024,6 @@ key "Cos07,Hain92,Hain91,Bloch91"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Standard
-\begin_inset Caption
-
-\begin_layout Standard
-Polylogarithm Monodromy
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename monodromy.eps
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A graph of the polylogarithm monodromy, given by equation (
-\begin_inset LatexCommand ref
-reference "eq:polylog monodromy"
-
-\end_inset
-
-).
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The inversion formula (
 \begin_inset LatexCommand ref
 reference "eq:Inversion formula"
@@ -4060,7 +4052,8 @@ reference "eq:Inversion formula"
 \end_inset
 
  is very near the branch cut of the principal sheet.
- One wishes to compare this to the straddling value at 
+ One wishes to compare this to the neighboring value on the other side of
+ the cut, at 
 \begin_inset Formula $x-i\epsilon$
 \end_inset
 
@@ -5025,6 +5018,49 @@ M=\langle g_{0},g_{1}\,\vert\, g_{1}g_{0}g_{1}^{-1}g_{0}^{-1}=g_{0}g_{1}^{-1}g_{
 
  In any case, the group is solvable and thus thin.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Polylogarithm Monodromy
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename monodromy.eps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A graph of the polylogarithm monodromy, given by equation (
+\begin_inset LatexCommand ref
+reference "eq:polylog monodromy"
+
+\end_inset
+
+).
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
