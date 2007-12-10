@@ -211,17 +211,9 @@ The Hurwitz zeta function may be defined as
 
  and at every negative integer, there are many different ways to navigate
  from sheet to sheet.
- The set of possible paths from sheet to sheet form a group, known as the
- '
-\emph on
-monodromy group
-\emph default
-' of the function.
- Alternately, the monodromy group can be understood as the '
-\emph on
-mapping class group
-\emph default
-' of a punctured disk; these ideas are reviewed in a later section.
+ Conventionally, these are all taken to lie one-atop another, along the
+ negative real axis; this helps obscure the fact that there are a countable
+ infinity of cuts.
 \end_layout
 
 \begin_layout Standard
@@ -557,7 +549,54 @@ fractional polylogarithm
 \begin_inset Formula $\left|z\right|\le1$
 \end_inset
 
- The Hurwitz zeta may be expressed in terms of the polylogarithm
+.
+ The polylogarithm has a non-trivial analytic structure.
+ For fixed 
+\begin_inset Formula $s$
+\end_inset
+
+, the principal sheet has a branch point at 
+\begin_inset Formula $z=1$
+\end_inset
+
+, with a branch cut conventionally taken on the positive real axis, for
+ 
+\begin_inset Formula $1<z<+\infty$
+\end_inset
+
+.
+ The location of the branch-point at 
+\begin_inset Formula $z=1$
+\end_inset
+
+, as is always the case with branch points, is the cause of limited convergence
+ of the analytic series in the complex 
+\begin_inset Formula $z$
+\end_inset
+
+-plane.
+ The other sheets of the polylogarithm also have a branch point at 
+\begin_inset Formula $z=0$
+\end_inset
+
+, which is not naively obvious from the form (
+\begin_inset LatexCommand ref
+reference "eq:polylog definition"
+
+\end_inset
+
+).
+ The set of possible paths that navigate from sheet to sheet form a group,
+ known as the '
+\emph on
+monodromy group
+\emph default
+' of the function; a detailed exposition of the monodromy will be given
+ in this paper.
+\end_layout
+
+\begin_layout Standard
+The Hurwitz zeta may be expressed in terms of the polylogarithm
 \begin_inset LatexCommand cite
 key "Lew81"
 
@@ -1605,8 +1644,7 @@ Polynomial sequences
 \end_layout
 
 \begin_layout Standard
-xxxThis section provides a series of short lemmas to establish the result
- (
+This section provides a series of short lemmas to establish the result (
 \begin_inset LatexCommand ref
 reference "eq:accelerated sum"
 
@@ -1809,37 +1847,6 @@ The Polylogarithm
 \end_layout
 
 \begin_layout Standard
-The polylogarithm has a non-trivial analytic structure.
- For fixed 
-\begin_inset Formula $s$
-\end_inset
-
-, the principal sheet has a branch point at 
-\begin_inset Formula $z=1$
-\end_inset
-
-, with a branch cut conventionally taken on the positive real axis, for
- 
-\begin_inset Formula $1<z<+\infty$
-\end_inset
-
-.
- The location of the branch-point at 
-\begin_inset Formula $z=1$
-\end_inset
-
-, as is always the case with branch points, is the cause of limited convergence
- of the analytic series in the complex 
-\begin_inset Formula $z$
-\end_inset
-
--plane.
- This branch point has a direct impact on the algorithm to be presented,
- as well, preventing convergence in its vicinity.
- 
-\end_layout
-
-\begin_layout Standard
 The development of the algorithm requires the following integral representation
  for the polylogarithm:
 \end_layout
@@ -1972,13 +1979,25 @@ reference "eq:c_k coefficients"
  of interest.
  That is, one seeks to make 
 \begin_inset Formula \begin{equation}
-\varepsilon_{n}(s,z)=\frac{1}{p_{n}(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{p_{n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\label{eq:xi integral}\end{equation}
+\varepsilon_{n}(s,z)=\frac{1}{p_{n}(1/z)}\,\frac{z}{\Gamma(s)}\,\int_{0}^{1}\,\frac{p_{n}(y)\left|\log y\right|^{s-1}}{1-yz}\, dy\label{eq:epsilon integral}\end{equation}
 
 \end_inset
 
 as small as possible.
+ Many different polynomial sequences can be contemplated.
+ They need to have two properties: they should minimize the integrand, while
+ also maximizing the value of 
+\begin_inset Formula $\left|p_{n}(1/z)\right|$
+\end_inset
+
+.
+ There is some advantage to keeping these simple, so that the 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+are easily computed.
  One possible sequence, based on the Bernoulli process or Gaussian distribution,
- is explored in a subsequent section.
+ is explored in the next section.
  
 \end_layout
 
@@ -1987,69 +2006,71 @@ The Gaussian Distribution
 \end_layout
 
 \begin_layout Standard
-Returning to the polylogarithm, the task at hand is to find a polynomial
- sequence that is suitable for establishing a tight bound on the error term
- 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
-.
- A good bound minimizes the integrand, while also maximizing the value of
- 
-\begin_inset Formula $\left|p_{n}(1/z)\right|$
-\end_inset
-
-.
- In order to suppress the logarithmic branch point at 
+In order to suppress the logarithmic branch point at 
 \begin_inset Formula $y=0$
 \end_inset
 
  in the integrand of (
 \begin_inset LatexCommand ref
-reference "eq:xi integral"
+reference "eq:epsilon integral"
 
 \end_inset
 
-), this section will consider the polynomial sequence 
-\begin_inset Formula $p_{n}(y)=y^{a}(1-y)^{n-a}$
+), one wishes the small 
+\begin_inset Formula $y$
 \end_inset
 
-, a sequence which goes over to the Gaussian distribution for large 
+ behaviour of 
+\begin_inset Formula $p_{n}(y)$
+\end_inset
+
+ to be 
+\begin_inset Formula $p_{n}(y)\sim y^{a}$
+\end_inset
+
+ for 
+\begin_inset Formula $a>\Re s-1$
+\end_inset
+
+.
+ In this section, the sequence 
+\begin_inset Formula $p_{2n}(y)=y^{n}(1-y)^{n}$
+\end_inset
+
+ is considered.
+ As is well known from probability theory, where 
+\begin_inset Formula $y$
+\end_inset
+
+ can be interpreted as the probability of flipping '
+\emph on
+heads
+\emph default
+' on a fair coin toss, this sequence goes over to the Gaussian distribution
+ for large 
 \begin_inset Formula $n$
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-It suffices to consider 
-\begin_inset Formula $a=n/2$
-\end_inset
-
-, and so, with slight abuse of notation, write this sequence as 
-\begin_inset Formula $p_{2n}(y)=y^{n}(1-y)^{n}$
-\end_inset
-
-.
- It becomes sharply peaked at 
-\begin_inset Formula $y=1/2$
-\end_inset
-
-, and subtends a diminishingly small area.
+ It is useful here because it becomes sharply peaked, subtending a diminishingly
+ small area, thus minimizing the integrand.
  For large values of 
 \begin_inset Formula $n$
 \end_inset
 
-, this polynomial sequence approximates a Gaussian:
+, it is peaked at 
+\begin_inset Formula $y=1/2$
+\end_inset
+
+, falling off rapidly away from that point, as it approximates a Gaussian:
 \begin_inset Formula \[
 p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{2}+\mathcal{O}\left(\left(y-\frac{1}{2}\right)^{4}\right)\right]\]
 
 \end_inset
 
- Using this in the integral (
+Using this in the integral (
 \begin_inset LatexCommand ref
-reference "eq:xi integral"
+reference "eq:epsilon integral"
 
 \end_inset
 
@@ -2059,12 +2080,12 @@ reference "eq:xi integral"
 
  is not positive, it is not hard to deduce the very crude estimate
 \begin_inset Formula \[
-\left|\varepsilon(s,z)\right|\sim\left|\left(\frac{z^{2}}{4(z-1)}\right)^{n}\frac{z}{\Gamma(s)}\right|\]
+\left|\varepsilon_{n}(s,z)\right|\sim\left|\left(\frac{z^{2}}{4(z-1)}\right)^{n}\frac{z}{\Gamma(s)}\right|\]
 
 \end_inset
 
  which confirms that 
-\begin_inset Formula $\varepsilon(s,z)$
+\begin_inset Formula $\varepsilon_{n}(s,z)$
 \end_inset
 
  does indeed get suitably small for a certain region in the complex 
@@ -2079,7 +2100,7 @@ reference "eq:Polylog general estimate"
 \end_inset
 
 ) to be useful computationally, an upper bound on the value of 
-\begin_inset Formula $\varepsilon$
+\begin_inset Formula $\varepsilon_{n}$
 \end_inset
 
  needs to be given, as a function of 
@@ -2104,8 +2125,8 @@ reference "eq:basic poly in b_k"
 
 ) are easily obtained, and are 
 \begin_inset Formula \begin{eqnarray*}
-a_{0} & = & a_{1}=\cdots=a_{n-1}=0\\
-a_{n+k} & = & \left(-1\right)^{k}\left(\begin{array}{c}
+b_{0} & = & b_{1}=\cdots=b_{n-1}=0\\
+b_{n+k} & = & \left(-1\right)^{k}\left(\begin{array}{c}
 n\\
 k\end{array}\right)\quad\mbox{ for }0\le k\le n\end{eqnarray*}
 
@@ -2145,12 +2166,12 @@ j\end{array}\right)\frac{1}{z^{j}}\right]\]
 \begin_inset Formula \begin{equation}
 \mbox{Li}_{s}(z)=\sum_{k=1}^{n}\frac{z^{k}}{k^{s}}\;+\frac{1}{\left(1-z\right)^{n}}\;\sum_{k=n+1}^{2n}\frac{z^{k}}{k^{s}}\;\sum_{j=0}^{2n-k}\left(-z\right)^{j}\left(\begin{array}{c}
 n\\
-j\end{array}\right)+\varepsilon(s,z)\label{eq:polylog specific estimate}\end{equation}
+j\end{array}\right)+\varepsilon_{n}(s,z)\label{eq:polylog specific estimate}\end{equation}
 
 \end_inset
 
  The error term 
-\begin_inset Formula $\varepsilon(s,z)$
+\begin_inset Formula $\varepsilon_{n}(s,z)$
 \end_inset
 
  is negligible for only a very specific area of the complex 
@@ -2159,7 +2180,7 @@ j\end{array}\right)+\varepsilon(s,z)\label{eq:polylog specific estimate}\end{equ
 
 -plane.
  The region where 
-\begin_inset Formula $\varepsilon$
+\begin_inset Formula $\varepsilon_{n}$
 \end_inset
 
  may be ignored as a small error is derived in the next section.
@@ -2168,6 +2189,7 @@ j\end{array}\right)+\varepsilon(s,z)\label{eq:polylog specific estimate}\end{equ
 \end_inset
 
  in the above formulas agrees with expressions previously given by Borwein
+ 
 \begin_inset LatexCommand cite
 key "Bor00-A"
 
@@ -2244,7 +2266,7 @@ reference "eq:polylog specific estimate"
 \begin_layout Standard
 The general behavior of the integrand appearing in equation (
 \begin_inset LatexCommand ref
-reference "eq:xi integral"
+reference "eq:epsilon integral"
 
 \end_inset
 
@@ -2326,7 +2348,7 @@ reference "eq:xi integral"
 \begin_layout Standard
 To evaluate the integral in (
 \begin_inset LatexCommand ref
-reference "eq:xi integral"
+reference "eq:epsilon integral"
 
 \end_inset
 
