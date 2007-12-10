@@ -651,8 +651,13 @@ key "Bor00-A"
 
 \end_inset
 
-, which is a simple XXX fix Padé-approximant type algorithm, and generalize
- it to the polylogarithm.
+, which is a simple Padé-type approximant algorithm 
+\begin_inset LatexCommand cite
+key "Bre79"
+
+\end_inset
+
+, and generalize it to the polylogarithm.
  The result is a relatively small finite sum that approximates the polylogarithm
 , and whose error, or difference from the exact value, can be precisely
  characterized and bounded.
@@ -1204,75 +1209,50 @@ ithm, an explicit oscillation coming from
 \end_layout
 
 \begin_layout Standard
-Consider first a few very simple techniques.
- Suppose that 
-\begin_inset Formula $c_{n}$
+One problem with the equation (
+\begin_inset LatexCommand ref
+reference "eq:Euler's gen in z"
+
 \end_inset
 
- is some more or less arbitrary sequence of numbers, oscillatory in 
-\begin_inset Formula $n$
+) is that, for 
+\begin_inset Formula $\left|z\right|=1$
 \end_inset
 
-, and that one wishes to compute the sum 
-\begin_inset Formula $\sum_{n=0}^{\infty}c_{n}$
+, it is optimal only when 
+\begin_inset Formula $z=-1$
 \end_inset
 
-.
- If the leading component of oscillation is 
-\begin_inset Formula $c_{n}\sim\cos n\theta$
+, and becomes a de-acceleration technique as 
+\begin_inset Formula $z$
 \end_inset
 
-, then one makes the Ansatz that there must exist some dual series 
-\begin_inset Formula $s_{n}$
+ approaches 1.
+ One would like to somehow 
+\begin_inset Quotes eld
 \end_inset
 
- oscillating as 
-\begin_inset Formula $s_{n}\sim\sin n\theta$
+twist
+\begin_inset Quotes erd
 \end_inset
 
- to give 
-\begin_inset Formula $e_{n}=c_{n}+is_{n}\sim e^{in\theta}$
-\end_inset
-
-.
- One may then consider suming 
-\begin_inset Formula $a_{n}=e^{in(\pi-\theta)}e_{n}$
+ this series, so that it is optimally convergent for any particular 
+\begin_inset Formula $z$
 \end_inset
 
 .
- By construction, the 
-\begin_inset Formula $a_{n}$
-\end_inset
-
- are now presumed to be alternating, or nearly so, so that any method for
- accelerating alternating series can be applied.
- This trick may be applied to any oscillatory sequence; one need not know
- a precise or 
-\emph on
-a priori
-\emph default
- value for 
-\begin_inset Formula $\theta$
-\end_inset
-
-; one need only guess at a reasonable value, based on the data at hand.
- 
-\end_layout
-
-\begin_layout Standard
-Alternately, one may consider replacing the forward difference operator
- 
-\begin_inset Formula $\triangle b_{n}=b_{n+1}-b_{n}$
+ This may be done by replacing the forward difference operator 
+\begin_inset Formula $\triangle a_{n}=a_{n+1}-a_{n}$
 \end_inset
 
  by 
-\begin_inset Formula $\triangle_{q}b_{n}=b_{n+1}-qb_{n}$
+\begin_inset Formula $\triangle_{q}a_{n}=a_{n+1}-qa_{n}$
 \end_inset
 
 .
  Straightforward manipulations lead to 
 \begin_inset Formula \[
-\frac{1}{1-qz}\;\sum_{m=0}^{\infty}\left(\frac{z}{1-qz}\right)^{m}\triangle_{q}^{m}b_{0}=\sum_{n=0}^{\infty}z^{n}b_{n}\]
+\frac{1}{1-qz}\;\sum_{m=0}^{\infty}\left(\frac{z}{1-qz}\right)^{m}\triangle_{q}^{m}a_{0}=\sum_{n=0}^{\infty}z^{n}a_{n}\]
 
 \end_inset
 
@@ -1306,23 +1286,25 @@ key "Bre79"
 
  should make the left hand side an accelerated series for the right hand
  side.
- However, there are more powerful techniques.
+ 
 \end_layout
 
 \begin_layout Standard
-Consider the sum
-\begin_inset Formula \begin{equation}
-S(z)=\sum_{n=0}^{\infty}z^{n}b_{n}\label{eq: geo series}\end{equation}
+There is a more powerful acceleration technique; it is at the center of
+ this paper and is described now.
+ Suppose that it is possible to express the 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ of equation (
+\begin_inset LatexCommand ref
+reference "eq:formal series"
 
 \end_inset
 
- where the 
-\begin_inset Formula $b_{n}$
-\end_inset
-
- are expressible as moments, so that 
+) as moments, so that 
 \begin_inset Formula \[
-b_{n}=\int_{0}^{1}y^{n}g(y)dy\]
+a_{n}=\int_{0}^{1}y^{n}g(y)dy\]
 
 \end_inset
 
@@ -1337,7 +1319,7 @@ for some function
 
  is still fairly general (subject to constraints discussed below), this
  assumption does not overly restrict the 
-\begin_inset Formula $b_{n}$
+\begin_inset Formula $a_{n}$
 \end_inset
 
 , and should not bar most practical applications.
@@ -1415,7 +1397,20 @@ so that
 \end_inset
 
  are bounded and geometrically decreasing.
- The first is easy enough: using equations (
+ The next section will show that 
+\begin_inset Formula $S_{n}(z)$
+\end_inset
+
+ can be written as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}a_{k}\]
+
+\end_inset
+
+specifically, via equations (
 \begin_inset LatexCommand ref
 reference "eq:r_n definition"
 
@@ -1427,13 +1422,8 @@ reference "eq:r_n series"
 
 \end_inset
 
-) one has 
-\begin_inset Formula \[
-S_{n}(z)=\frac{1}{p_{n}\left(\frac{1}{z}\right)}\sum_{k=0}^{n-1}c_{k}b_{k}\]
-
-\end_inset
-
-With a suitable choice of 
+).
+ With a suitable choice of 
 \begin_inset Formula $p_{n}(z)$
 \end_inset
 
@@ -1446,9 +1436,9 @@ With a suitable choice of
 \begin_inset Formula $S_{n}(z)$
 \end_inset
 
- is really a series acceleration for the geometric series (
+ is really a series acceleration for the formal series (
 \begin_inset LatexCommand ref
-reference "eq: geo series"
+reference "eq:formal series"
 
 \end_inset
 
@@ -1482,7 +1472,7 @@ where
 
 \end_inset
 
- for some number 
+for some real number 
 \begin_inset Formula $A>\left|1/z\right|$
 \end_inset
 
@@ -1495,12 +1485,12 @@ where
 \end_inset
 
  more rapidly than the simple partial sums 
-\begin_inset Formula $\sum_{k=0}^{n}z^{k}b_{k}$
+\begin_inset Formula $\sum_{k=0}^{n}z^{k}a_{k}$
 \end_inset
 
  of equation (
 \begin_inset LatexCommand ref
-reference "eq: geo series"
+reference "eq:formal series"
 
 \end_inset
 
@@ -1508,14 +1498,14 @@ reference "eq: geo series"
 \end_layout
 
 \begin_layout Standard
-Note that the above is a proof of a series acceleration method for a more-or-les
-s general sequence of 
-\begin_inset Formula $b_{n}$
+The above is a demonstration of a series acceleration method for a more-or-less
+ general sequence of 
+\begin_inset Formula $a_{n}$
 \end_inset
 
 , and is in no way particular to the polylogarithm or the Hurwitz zeta.
- The only ingredients of the proof were that the 
-\begin_inset Formula $b_{n}$
+ The only ingredients of the demonstration were that the 
+\begin_inset Formula $a_{n}$
 \end_inset
 
  are 
@@ -1531,7 +1521,7 @@ well-behaved
 \end_inset
 
 .
- For the proof to hold, 
+ For the conclusion to hold, 
 \begin_inset Formula $g(y)$
 \end_inset
 
@@ -1556,7 +1546,7 @@ mostly
 \end_inset
 
  is not explicitly known, but the 
-\begin_inset Formula $b_{n}$
+\begin_inset Formula $a_{n}$
 \end_inset
 
  are somehow 
@@ -1616,7 +1606,7 @@ key "Bor00-A"
 \begin_inset Formula $A=3+\sqrt{8}\approx5.828$
 \end_inset
 
- and algorithm 3, generalized in the next section, has 
+ and algorithm 3, generalized in a later section, has 
 \begin_inset Formula $A=8$
 \end_inset
 
