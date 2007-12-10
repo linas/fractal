@@ -1551,21 +1551,8 @@ well-behaved
 \begin_inset Formula $g(y)$
 \end_inset
 
- needs to be (mostly) positive, and integrable; it need not be analytic,
- differentiable or even continuous.
- It needs to be 
-\begin_inset Quotes eld
-\end_inset
-
-mostly
-\begin_inset Quotes erd
-\end_inset
-
- positive only so that the bound on the integrand, 
-\begin_inset Formula $p_{n}(y)g(y)\le\left|p_{n}\left(y_{0}\right)\right|g(y)$
-\end_inset
-
- can be established.
+ needs to be integrable; it need not be analytic, differentiable or even
+ continuous.
  Thus, one might hope that the acceleration method might work, even for
  those general cases where 
 \begin_inset Formula $g(y)$
@@ -2046,8 +2033,11 @@ reference "eq:epsilon integral"
 \emph on
 heads
 \emph default
-' on a fair coin toss, this sequence goes over to the Gaussian distribution
- for large 
+' on a fair coin toss (a '
+\emph on
+Bernoulli process
+\emph default
+'), this sequence goes over to the Gaussian distribution for large 
 \begin_inset Formula $n$
 \end_inset
 
@@ -2062,12 +2052,32 @@ heads
 \begin_inset Formula $y=1/2$
 \end_inset
 
-, falling off rapidly away from that point, as it approximates a Gaussian:
+, falling off rapidly away from that point, as it strongly approximates
+ a Gaussian:
 \begin_inset Formula \[
 p_{2n}(y)=\frac{1}{4^{n}}e^{-4n(y-1/2)^{2}}\left[1+2\left(y-\frac{1}{2}\right)^{2}+\mathcal{O}\left(\left(y-\frac{1}{2}\right)^{4}\right)\right]\]
 
 \end_inset
 
+Here, the order-of notation 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ simply signifies the order of the corrections as one moves away from the
+ peak at 
+\begin_inset Formula $y=1/2$
+\end_inset
+
+.
+ From basic probability theory, it is known that this approximation gets
+ increasingly good as 
+\begin_inset Formula $n$
+\end_inset
+
+ increases.
+\end_layout
+
+\begin_layout Standard
 Using this in the integral (
 \begin_inset LatexCommand ref
 reference "eq:epsilon integral"
@@ -2226,7 +2236,7 @@ reference "eq:polylog specific estimate"
 \end_inset
 
 ) to be useful computationally, an upper bound on the value of 
-\begin_inset Formula $\left|\varepsilon\right|$
+\begin_inset Formula $\left|\varepsilon_{n}\right|$
 \end_inset
 
  as a function of 
@@ -2255,11 +2265,11 @@ reference "eq:polylog specific estimate"
 ) implies that intermediate terms can become quite large, even while mostly
  cancelling.
  This section derives an upper bound on the size of 
-\begin_inset Formula $\varepsilon$
+\begin_inset Formula $\varepsilon_{n}$
 \end_inset
 
-, and briefly discusses the issue of the required precision in intermediate
- terms.
+, for the Gaussian distribution, and briefly discusses the issue of the
+ required precision in intermediate terms.
  
 \end_layout
 
@@ -2320,7 +2330,7 @@ reference "eq:epsilon integral"
 
 \end_inset
 
- which is centered on the maximum of 
+which is centered on the maximum of 
 \begin_inset Formula $\left|y_{0}\left(1-y_{0}\right)\log y_{0}\right|$
 \end_inset
 
@@ -2362,7 +2372,7 @@ reference "eq:epsilon integral"
 
 \end_inset
 
- Thus, the integrand is bounded by a Gaussian.
+Thus, the integrand is bounded by a Gaussian.
  Multiplying the two Gaussians, completing the square, and evaluating the
  resulting integral is a bit tedious.
  The result is that 
@@ -2371,7 +2381,7 @@ reference "eq:epsilon integral"
 
 \end_inset
 
- The constant may be taken as 
+The constant may be taken as 
 \begin_inset Formula $\left|4y_{0}\left(1-y_{0}\right)\log y_{0}\right|=1.041381965\ldots$
 \end_inset
 
@@ -2388,7 +2398,7 @@ G(s) & \le & \sqrt{\frac{\pi}{4n}}\exp-\left(1-2y_{0}\right)^{2}\left(\sigma-1\r
 
 \end_inset
 
- when 
+when 
 \begin_inset Formula $1\le\sigma$
 \end_inset
 
@@ -2439,7 +2449,7 @@ The case where
 
 \end_inset
 
- In the region where 
+In the region where 
 \begin_inset Formula $\left|\sigma\right|\ll n$
 \end_inset
 
@@ -2449,7 +2459,24 @@ The case where
 
 \end_inset
 
- Combining the various pieces, one obtains a result remarkably similar to
+The above follows readily from the Stirling approximation 
+\begin_inset Formula \[
+\Gamma(x)\sim\sqrt{\frac{2\pi}{x}}\left(\frac{x}{e}\right)^{x}\]
+
+\end_inset
+
+which is the first term of a well-known asymptotic expansion 
+\begin_inset LatexCommand cite
+after "eqn 6.1.37"
+key "A&S"
+
+\end_inset
+
+ for the Gamma function.
+\end_layout
+
+\begin_layout Standard
+Combining the various pieces, one obtains a result remarkably similar to
  the previous one; namely, when 
 \begin_inset Formula $\sigma\le1$
 \end_inset
@@ -2627,8 +2654,8 @@ reference "eq:polylog specific estimate"
 
 \end_inset
 
- To obtain a value of the polylogarithm to within some given numerical precision
-, one must invert the formulas (
+To obtain a value of the polylogarithm to within some given numerical precision,
+ one must invert the formulas (
 \begin_inset LatexCommand ref
 reference "eq:error-bound-positive"
 
