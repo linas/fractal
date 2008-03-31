@@ -10,7 +10,7 @@ LIB = $(TOP)/lib
 
 all: hyper eigen comb hyper
 
-OBJS=../ache.o $(LIB)/binomial.o $(LIB)/harmonic.o
+# OBJS=../ache.o
 
 comb: comb.o $(OBJS)
 eigen: eigen.o $(OBJS)
@@ -18,7 +18,7 @@ eigen: eigen.o $(OBJS)
 hyper: hyper.o 
 
 .o:
-	cc -o $@ $^ -L $(LIB) -llapack -lf77blas -latlas -lg2c -lm
+	cc -o $@ $^ -L $(LIB) -lfunc -llapack -lf77blas -latlas -lg2c -lm
 
 .c.o:
 	cc -g -O2 -c $< -I.. -I$(INC)

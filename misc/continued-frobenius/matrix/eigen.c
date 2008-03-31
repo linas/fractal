@@ -1,5 +1,5 @@
-
-/*
+/**
+ *
  * Eigenvalue and eigenvector finding
  * Call lapack from C code.
  *
@@ -84,6 +84,23 @@ double sst (int i, int j)
 	return bin /lam;
 }
 
+/* Singular Value Decomposition M^transpose M
+ * where M is the binomial transform
+ */
+double mtm_svd (int m, int k)
+{
+	if (k == m)
+	{
+		double mtm = binomial (2*m,m);
+		mtm += -1.0 + 1.0/pow(4.0, m);
+		return mtm;
+	}
+	if (k>m) {int j = m; m=k; k=j; }
+	double mtm = binomial (m+k, k);
+	mtm -= binomial (m,k) * (1.0 - 1.0/ pow(2.0, m+k+1));
+	return mtm;
+}
+
 void prtbin (double x)
 {
 	if (0.0 > x) x = -x;
@@ -142,9 +159,11 @@ main (int argc, char * argv[])
 			/* Note transposed matrix'ing for FORTRAN */
 			// mat[i+j*dim] = ache_mp(i,j);
 			// mat[i+j*dim] = sst(i,j);
-			mat[i+j*dim] = binomial(i,j) * exp (-(i+j)*0.2/dim);
-			// printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
+			// mat[i+j*dim] = binomial(i,j) * exp (-(i+j)*0.2/dim);
+			mat[i+j*dim] = mtm_svd(i,j);
+			printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
 		}
+		printf("\n");
 	}
 
 #if POORLY_CONDITIONED_BOMB_OUT_KINETIC
@@ -203,13 +222,14 @@ main (int argc, char * argv[])
 			printf ("# right %d'th eigenvector[%d]=%g (term log ratio=%g)\n", 
 			           i,j, rev[j+i*dim], r);
 #endif
+#if WHO_KNOWS_WHAT
 			double r = rev[j+i*dim] / (rev[30+i*dim] * (1<<30));
 			r *= tn;
 			r -= 1.0;
 			r *= thrn;
 			printf ("# right %d'th eigenvector[%d]=%g (guh %g\n", 
 			            i,j, rev[j+i*dim], r);
-			            
+#endif
 #if BINARY
 			printf ("# right %d'th eigenvector[%d]=%g (binary ", 
 			            i,j, rev[j+i*dim]);
@@ -218,6 +238,9 @@ main (int argc, char * argv[])
 			prtbin (r);
 			printf (" )\n");
 #endif 
+			printf ("# right %d'th eigenvector[%d]=%g \n", 
+			            i,j, rev[j+i*dim]);
+			            
 			tn *= 2.0;
 			thrn *= sqrt (3.0);
 		}
@@ -247,12 +270,13 @@ main (int argc, char * argv[])
 			double sum = 0.0;
 			for (k=0; k<dim; k++)
 			{
-				sum += ache_mp(j,k) * rev[k+i*dim];
+				// sum += ache_mp(j,k) * rev[k+i*dim];
+				sum += mtm_svd(j,k) * rev[k+i*dim];
 			}
 			sum /= rev[j+i*dim];
 			sum /= ere[i];
 			sum -= 1.0;
-			printf ("# %d'th eigenvec validation [%d]=%g\n", i, j, sum);
+			printf ("# %d'th eigenvec validation (should be zero)  [%d]=%g\n", i, j, sum);
 		}
 		printf ("#\n");
 	}
@@ -260,9 +284,11 @@ main (int argc, char * argv[])
 	/* ---------------------------------------------- */
 	/* Print graphable data */
 	double y;
-	for (y=1.0; y>=0.0; y-=0.005)
+	// for (y=1.0; y>=0.0; y-=0.005)
+	for (y=0.0; y<=1.0001; y+=0.05)
 	{
-		double x = 1.0-y;
+		// double x = 1.0-y;
+		double x = y;
 		printf ("%g", x);
 		// validate that the zeroth eignevec is 1/(1+x)
 		// printf ("\t%g", 1.73205/(1.0+x));
@@ -309,7 +335,7 @@ main (int argc, char * argv[])
 			norm[i] += rev[j+i*dim];
 		}
 		// norm[i] = 31.0 * lev[30+i*dim];
-		norm[i] = (1<<25) *rev[25+i*dim];
+		// norm[i] = (1<<25) *rev[25+i*dim];
 	}
 
 	for (j=0; j<prtdim; j++)
