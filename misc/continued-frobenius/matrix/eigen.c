@@ -101,6 +101,29 @@ double mtm_svd (int m, int k)
 	return mtm;
 }
 
+/** Bernoulli process, doubling */
+double bern (int m, int k)
+{
+	if (k<m) return 0.0;
+	if (k == m) return pow(2.0, -k);
+	return binomial(k,m) * pow(2.0, -k-1);
+}
+
+double mmt_svd (int m, int k)
+{
+	int p=0;
+	double acc=0.0;
+	double term;
+	do
+	{
+		term = bern(m,p) * bern(k,p);
+		acc += term;
+		// printf ("yo m=%d k=%d p=%d term=%g acc=%g\n", m,k,p,term,acc);
+		p++;
+	} while ((1.0e-14 < term) || (acc == 0.0));
+	return acc;
+}
+
 void prtbin (double x)
 {
 	if (0.0 > x) x = -x;
@@ -140,6 +163,7 @@ main (int argc, char * argv[])
 
 	printf ("#\n#\n");
 	printf ("# Eigenvectors of the GKW (Gauss Kuz'min Wirsing) Operator\n");
+	printf ("# or maybe something else, depending on the version of this code\n");
 	printf ("# Numerically solved to rank=%d\n", dim);
 	printf ("#\n#\n");
 
@@ -160,7 +184,8 @@ main (int argc, char * argv[])
 			// mat[i+j*dim] = ache_mp(i,j);
 			// mat[i+j*dim] = sst(i,j);
 			// mat[i+j*dim] = binomial(i,j) * exp (-(i+j)*0.2/dim);
-			mat[i+j*dim] = mtm_svd(i,j);
+			// mat[i+j*dim] = mtm_svd(i,j);
+			mat[i+j*dim] = mmt_svd(i,j);
 			printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
 		}
 		printf("\n");
@@ -187,6 +212,7 @@ main (int argc, char * argv[])
 
 	/* ---------------------------------------------- */
 	/* print the eigenvalues */
+	printf("# Eigenvalues are:\n");
 	for (i=0; i<dim; i++)
 	{
 		printf ("# eigen[%d]=%20.15g +i %g  ratio=%20.15g\n", i, ere[i], eim[i], ere[i]/ere[i+1]);
@@ -262,6 +288,7 @@ main (int argc, char * argv[])
 	/* ---------------------------------------------- */
 	/* Verify i'th eigenvector -- multiply by the matrix, see that 
 	 * we get the eigenvector back. */
+	int validation_failed = 0;
 	for (i=0; i<prtdim; i++)
 	{
 		/* The j'th element of the i'th eigenvector */
@@ -271,21 +298,28 @@ main (int argc, char * argv[])
 			for (k=0; k<dim; k++)
 			{
 				// sum += ache_mp(j,k) * rev[k+i*dim];
-				sum += mtm_svd(j,k) * rev[k+i*dim];
+				// sum += mtm_svd(j,k) * rev[k+i*dim];
+				sum += mmt_svd(j,k) * rev[k+i*dim];
 			}
 			sum /= rev[j+i*dim];
 			sum /= ere[i];
 			sum -= 1.0;
-			printf ("# %d'th eigenvec validation (should be zero)  [%d]=%g\n", i, j, sum);
+			if (1.0e-12 < fabs(sum))
+			{
+				validation_failed = 1;
+				printf ("# Error: %d'th eigenvec validation failed (should be zero)  [%d]=%g\n", i, j, sum);
+			}
 		}
 		printf ("#\n");
 	}
+	if (!validation_failed)
+		printf("# eigenvec valdidation success\n");
 
 	/* ---------------------------------------------- */
 	/* Print graphable data */
 	double y;
 	// for (y=1.0; y>=0.0; y-=0.005)
-	for (y=0.0; y<=1.0001; y+=0.05)
+	for (y=0.0; y<=1.0001; y+=0.005)
 	{
 		// double x = 1.0-y;
 		double x = y;
@@ -324,6 +358,7 @@ main (int argc, char * argv[])
 	/* This time, they are printed so that the i'th eigenvector is in the
 	   i'th column, and each row is a component of the eigenvector */
 
+exit(0);
 	printf ("# ------------------------------------------- \n");
 	double norm[50];
 	for (i=0; i<prtdim; i++)
