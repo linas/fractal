@@ -53,18 +53,7 @@ June 2008
 \begin_layout Abstract
 This short paper provides a numerical exploration of the entropy of the
  Gauss-Kuzmin distribution.
- In particular, it examines the question of whether the continued fraction
- expansions of rational numbers are 
-\begin_inset Quotes eld
-\end_inset
-
-typical
-\begin_inset Quotes erd
-\end_inset
-
-, in the information-theoretic sense, of all continued fractions.
- This is an important question, since most numerical explorations of continued
- fractions must necessarily work with rationals.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -125,8 +114,13 @@ The continued fraction expansion can be viewed as a discrete random variable,
 \begin_inset Formula $N$
 \end_inset
 
- possible discrete states, the (information-theoretic) entropy is defined
- as
+ possible discrete states, the (information-theoretic) entropy
+\begin_inset LatexCommand cite
+key "Ash1965"
+
+\end_inset
+
+ is defined as
 \begin_inset Formula \[
 H=-\sum_{k=1}^{N}p_{k}\log p_{k}\]
 
@@ -176,23 +170,74 @@ Gauss-Kuzmin entropy
 
  is then 
 \begin_inset Formula \[
-H=2.37924666\cdots\]
+H=2.379246764\cdots\]
 
 \end_inset
 
 and 
 \begin_inset Formula \[
-\frac{H}{\log2}=3.43252736\cdots\]
+\frac{H}{\log2}=3.432527507\cdots\]
 
 \end_inset
 
-The above values were computed with the GNU MP multi-precision library,
- and should be accurate to approximately the given number of digits.
- They were obtained by means of brute-force summation, up to values of 
+The above values were computed with the GNU MP multiple precision library
+\begin_inset LatexCommand cite
+key "GMP"
+
+\end_inset
+
+, and should be accurate to approximately the given number of digits.
+ They were obtained by means of brute-force summation, together with quadratic
+ extrapolation, up to values of 
 \begin_inset Formula $k=...$
 \end_inset
 
+The quadratic extrapolation may be performed as follows: let 
+\begin_inset Formula \[
+t=1-\sum_{k=1}^{N}p_{k}\]
 
+\end_inset
+
+and 
+\begin_inset Formula \[
+H(t)=-\sum_{k=1}^{N}p_{k}\log p_{k}\]
+
+\end_inset
+
+It can be readily seen that 
+\begin_inset Formula $\lim_{N\to\infty}t=0$
+\end_inset
+
+.
+ It is also straightforward to observe that 
+\begin_inset Formula $H(t)$
+\end_inset
+
+ is very nearly a linear function of 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Thus, one can readily estimate the value of 
+\begin_inset Formula $H=\lim_{t\to0}H(t)$
+\end_inset
+
+ by means of a quadratic extrapolation in 
+\begin_inset Formula $t$
+\end_inset
+
+ to the limit 
+\begin_inset Formula $t=0$
+\end_inset
+
+.
+ Such extrapolation offers several additional decimal digits of precision
+ over the raw value of the sum, terminated at a finite 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -214,7 +259,13 @@ typical
 \end_inset
 
  close to that of the Gauss-Kuzmin distribution; the precise definition
- follows.
+ follows
+\begin_inset LatexCommand cite
+key "Ash1965"
+
+\end_inset
+
+.
  A standard interpretation of entropy is that, given a length 
 \begin_inset Formula $n$
 \end_inset
@@ -286,7 +337,8 @@ typical
 \end_layout
 
 \begin_layout Standard
-w
+wthis won't work ...
+ 
 \end_layout
 
 \begin_layout Standard
@@ -296,6 +348,16 @@ The following figures illustrate
 
  for selected subsets of the rationals.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand bibtex
+options "plain"
+bibfiles "/home/linas/src/fractal/paper/fractal"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
