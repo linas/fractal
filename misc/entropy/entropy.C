@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "gcf.h"
 #include "Farey.h"
 
 main (int argc, char *argv[])
@@ -27,50 +28,49 @@ main (int argc, char *argv[])
 	zre = atof (argv[1]);
 #endif
 	
-	int nmax = 5531;
-	int i;
-	for (i=0; i<nmax; i++)
+	int p, q;
+	for (q=2; q < 257; q++)
 	{
-
-		int p = i;
-		int q = nmax;
-		double x = ((double) p)/ ((double) q);
-	
-		f.SetRatio (p, q);
-
-		int term[100];
-		int cnt[100];
-		int maxterm = 0;
-		int nterms = f.GetNumTerms();
-		int k;
-		for (k=1; k<=nterms; k++)
+		for (p=1; p<q; p++)
 		{
-			int j = f.GetTerm(k);
-			int notfound = 1;
-			int p;
-			for (p=0; p<maxterm; p++)
+			if (1 != gcf32(p,q)) continue;	
+			f.SetRatio (p, q);
+
+			int term[100];
+			int cnt[100];
+			int maxterm = 0;
+			int nterms = f.GetNumTerms();
+			int k;
+			for (k=1; k<=nterms; k++)
 			{
-				if (j == term[p]) {cnt[p] ++; notfound = 0; break; }
-			}
-			if (notfound)
-			{
-				term[maxterm] = j;
-				cnt[maxterm] = 1;
-				maxterm ++;
+				int j = f.GetTerm(k);
+				int notfound = 1;
+				int p;
+				for (p=0; p<maxterm; p++)
+				{
+					if (j == term[p]) {cnt[p] ++; notfound = 0; break; }
+				}
+				if (notfound)
+				{
+					term[maxterm] = j;
+					cnt[maxterm] = 1;
+					maxterm ++;
+				}
+
 			}
 
-		}
-
-		double entropy = 0.0;
-		for (k=0; k < maxterm; k++)
-		{
-			double p_k = ((double) cnt[k])/((double) nterms);
-			entropy += p_k * log(p_k);
-		}
+			double entropy = 0.0;
+			for (k=0; k < maxterm; k++)
+			{
+				double p_k = ((double) cnt[k])/((double) nterms);
+				entropy += p_k * log(p_k);
+			}
 		
-		double y = -entropy;
-		printf("%5d	%8.6g	%8.6g\n", i,x,y);
-
+			double x = ((double) p)/ ((double) q);
+			double y = -entropy;
+			// printf("%5d	%8.6g	%8.6g\n", p,x,y);
+			printf("%8.6f	%5d	%5d	%8.6g\n", x, p,q,y);
+		}
 	}
 }
 
