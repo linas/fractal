@@ -38,14 +38,37 @@ main (int argc, char *argv[])
 	
 		f.SetRatio (p, q);
 
+		int term[100];
+		int cnt[100];
+		int maxterm = 0;
+		int nterms = f.GetNumTerms();
 		int k;
-		for (k=1; k<=f.GetNumTerms(); k++)
+		for (k=1; k<=nterms; k++)
 		{
 			int j = f.GetTerm(k);
-printf("duude k=%d j=%d\n", k, j);
+			int notfound = 1;
+			int p;
+			for (p=0; p<maxterm; p++)
+			{
+				if (j == term[p]) {cnt[p] ++; notfound = 0; break; }
+			}
+			if (notfound)
+			{
+				term[maxterm] = j;
+				cnt[maxterm] = 1;
+				maxterm ++;
+			}
+
+		}
+
+		double entropy = 0.0;
+		for (k=0; k < maxterm; k++)
+		{
+			double p_k = ((double) cnt[k])/((double) nterms);
+			entropy += p_k * log(p_k);
 		}
 		
-		double y;
+		double y = -entropy;
 		printf("%5d	%8.6g	%8.6g\n", i,x,y);
 
 	}
