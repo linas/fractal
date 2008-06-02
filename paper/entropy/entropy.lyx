@@ -42,10 +42,29 @@
 Entropy of Continued Fractions (Gauss-Kuzmin Entropy)
 \end_layout
 
+\begin_layout Author
+Linas Vepstas <linasvepstas@gmail.com>
+\end_layout
+
+\begin_layout Date
+June 2008
+\end_layout
+
 \begin_layout Abstract
-This short paper provides a short numerical exploration of the entropy of
- the Gauss-Kuzmin distribution.
- 
+This short paper provides a numerical exploration of the entropy of the
+ Gauss-Kuzmin distribution.
+ In particular, it examines the question of whether the continued fraction
+ expansions of rational numbers are 
+\begin_inset Quotes eld
+\end_inset
+
+typical
+\begin_inset Quotes erd
+\end_inset
+
+, in the information-theoretic sense, of all continued fractions.
+ This is an important question, since most numerical explorations of continued
+ fractions must necessarily work with rationals.
 \end_layout
 
 \begin_layout Standard
@@ -167,56 +186,107 @@ and
 
 \end_inset
 
-The above value was computed with the GNU MP multi-precision library, and
- should be accurate to approximately the given number of digits.
+The above values were computed with the GNU MP multi-precision library,
+ and should be accurate to approximately the given number of digits.
+ They were obtained by means of brute-force summation, up to values of 
+\begin_inset Formula $k=...$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-A pseudo-entropy measure can be given for any one individual fixed value
- of 
+Given any particular value of 
 \begin_inset Formula $x=[a_{1},a_{2},a_{3},\cdots]$
 \end_inset
 
- by defining 
-\begin_inset Formula \[
-H(x)=-\sum_{k=1}^{\infty}f_{k}\log f_{k}\]
-
+, one may ask just how representative the sequence is of a 
+\begin_inset Quotes eld
 \end_inset
 
-where the frequency 
-\begin_inset Formula $f_{k}$
+typical
+\begin_inset Quotes erd
 \end_inset
 
- is the likelyhood that the integer 
-\begin_inset Formula $k$
+ sequence.
+ Typical sequences are defined as those which have a distribution of 
+\begin_inset Formula $a_{n}$
 \end_inset
 
- occurs in the continued fractino expansion of 
-\begin_inset Formula $x$
+ close to that of the Gauss-Kuzmin distribution; the precise definition
+ follows.
+ A standard interpretation of entropy is that, given a length 
+\begin_inset Formula $n$
 \end_inset
 
-.
- For rational x, this is particularly easy to calculate, as the continued
- fraction terminates, and so determining 
-\begin_inset Formula $f_{k}$
+, there are 
+\begin_inset Formula $2^{nH}$
 \end_inset
 
- is simply a matter of counting.
- For quadratic irrationals, the continued fraction is eventually periodic,
- and so the 
-\begin_inset Formula $f_{k}$
+ 
+\begin_inset Quotes eld
 \end_inset
 
- are again very easy to compute; note, however, that the non-periodic leading
- portion of the expansion does not contribute at all.
- Although the rationals and the quadratic irrationals are dense in the reals,
- they are sets of measure zero.
- The entropy 
-\begin_inset Formula $H(x)$
+typical
+\begin_inset Quotes erd
 \end_inset
 
- for general real-valued numbers is not known, except for those specific
- transcendentals for which the continued fraction expansion is known.
+ sequences of length 
+\begin_inset Formula $n$
+\end_inset
+
+; other sequences are possible, but highly unlikely.
+ It is of some interest to see whether the rational numbers are 
+\begin_inset Quotes eld
+\end_inset
+
+typical
+\begin_inset Quotes erd
+\end_inset
+
+ continued factions, or not.
+ The question is important, as many numerical explorations of continued
+ fractions must, by necessity, work with either finite-length, or periodic
+ continued fraction expansions.
+ Also of some curiosity is whether well-known transcendental constants,
+ such as 
+\begin_inset Formula $\pi$
+\end_inset
+
+ of the Euler-Mascheroni constant 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+typical
+\begin_inset Quotes erd
+\end_inset
+
+ or not.
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Quotes eld
+\end_inset
+
+typical
+\begin_inset Quotes erd
+\end_inset
+
+ sequence may be defined as follows.
+ Given an 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+w
 \end_layout
 
 \begin_layout Standard
