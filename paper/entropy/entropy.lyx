@@ -96,7 +96,7 @@ H=-\sum_{k=1}^{\infty}p_{k}\log p_{k}\]
 
 \end_inset
 
- The probability 
+The probability 
 \begin_inset Formula $p_{k}$
 \end_inset
 
@@ -106,66 +106,69 @@ p_{k}=-\log_{2}\left[1-\frac{1}{\left(k+1\right)^{2}}\right]\]
 
 \end_inset
 
- The numerical value of 
+The numerical value of 
 \begin_inset Formula $H$
 \end_inset
 
- is then
+ is then 
+\begin_inset Formula \[
+H=2.379246\cdots\]
+
+\end_inset
+
+and 
+\begin_inset Formula \[
+\frac{H}{\log2}=3.4325\cdots\]
+
+\end_inset
+
+The above value was computed with the GNU MP multi-precision library, and
+ should be accurate to approximately the given number of digits.
 \end_layout
 
 \begin_layout Standard
-There are several different entropries one can define for continued fractions.
- Given some arbitrary but fixed 
-\begin_inset Formula $x$
+A pseudo-entropy measure can be given for any one individual fixed value
+ of 
+\begin_inset Formula $x=[a_{1},a_{2},a_{3},\cdots]$
 \end_inset
 
-, one can explicitly count the frequency 
-\begin_inset Formula $p_{i}$
+ by defining 
+\begin_inset Formula \[
+H(x)=-\sum_{k=1}^{\infty}f_{k}\log f_{k}\]
+
 \end_inset
 
- that the integer 
-\begin_inset Formula $i$
+where the frequency 
+\begin_inset Formula $f_{k}$
 \end_inset
 
- will occur somewhere in the continued fraction expansion of 
+ is the likelyhood that the integer 
+\begin_inset Formula $k$
+\end_inset
+
+ occurs in the continued fractino expansion of 
 \begin_inset Formula $x$
 \end_inset
 
 .
- For rational 
-\begin_inset Formula $x$
+ For rational x, this is particularly easy to calculate, as the continued
+ fraction terminates, and so determining 
+\begin_inset Formula $f_{k}$
 \end_inset
 
-, this is particularly easy to calculate.
- Assume that the continued fraction is of longth 
-\begin_inset Formula $M$
+ is simply a matter of counting.
+ For quadratic irrationals, the continued fraction is eventually periodic,
+ and so the 
+\begin_inset Formula $f_{k}$
 \end_inset
 
-
+ are again very easy to compute; note, however, that the non-periodic leading
+ portion of the expansion does not contribute at all.
+ 
 \end_layout
 
 \begin_layout Standard
-Next, one may consider the average entropy 
-\end_layout
-
-\begin_layout Standard
-there is a likil 
-\begin_inset Formula $p_{i}$
-\end_inset
-
- that the integer 
-\begin_inset Formula $i$
-\end_inset
-
- will occur 
-\end_layout
-
-\begin_layout Standard
-integer 
-\begin_inset Formula $i$
-\end_inset
-
- occurring in the continued fraction expansion 
+The
 \end_layout
 
 \end_body
