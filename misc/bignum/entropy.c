@@ -56,6 +56,7 @@ main (int argc, char * argv[])
 	// quadratic extrapolation
 	mpf_t tee, ent, x_0, x_1, x_2, y_0, y_1, y_2, d01, d02, d12;
 	mpf_init(tee);
+	mpf_init(ent);
 	mpf_init(x_0);
 	mpf_init(x_1);
 	mpf_init(x_2);
@@ -67,7 +68,6 @@ main (int argc, char * argv[])
 	mpf_init(d12);
 	mpf_set_ui(x_1, 1);
 	mpf_set_ui(x_2, 2);
-
 
 	unsigned long int pcnt = 1;
 	
@@ -107,9 +107,10 @@ main (int argc, char * argv[])
 
 			// Aitken method
 			// s = s_nm2 + (s_nm2-s_nm1)^2 / (s_n + s_nm2 - 2*s_nm1)
+			// (sucks, for this particular problem)
 			mpf_set (s_nm2, s_nm1);
 			mpf_set (s_nm1, s_n);
-			mpf_set (s_n, term);
+			mpf_set (s_n, ent);
 			mpf_set (dprev, delta);
 			mpf_sub (delta, s_n, s_nm1);
 
@@ -129,6 +130,10 @@ main (int argc, char * argv[])
 			printf ("\n");
 
 			// quadratic exprapolation
+			// quadratic extrapolation as a function of probability 
+			// extrapolated to probability 1 should work very very well.
+			// The graph appears to be very nearly linear. I guess its
+			// xlogx in shape...
 			mpf_set(x_2, x_1);
 			mpf_set(x_1, x_0);
 			mpf_set(x_0, tee);
