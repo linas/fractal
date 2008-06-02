@@ -1,6 +1,7 @@
 
-all: entropy gauss-kuzmin
+all: defacto entropy gauss-kuzmin
 
+defacto: defacto.o
 entropy: entropy.o
 gauss-kuzmin: gauss-kuzmin.o
 

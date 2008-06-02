@@ -27,9 +27,12 @@ main (int argc, char *argv[])
 
 	zre = atof (argv[1]);
 #endif
+
+	int total = 0;
+	int totlen = 0;
 	
 	int p, q;
-	for (q=2; q < 257; q++)
+	for (q=2; q < 129; q++)
 	{
 		for (p=1; p<q; p++)
 		{
@@ -40,6 +43,7 @@ main (int argc, char *argv[])
 			int cnt[100];
 			int maxterm = 0;
 			int nterms = f.GetNumTerms();
+			totlen += nterms;
 			int k;
 			for (k=1; k<=nterms; k++)
 			{
@@ -62,15 +66,24 @@ main (int argc, char *argv[])
 			double entropy = 0.0;
 			for (k=0; k < maxterm; k++)
 			{
-				double p_k = ((double) cnt[k])/((double) nterms);
-				entropy += p_k * log(p_k);
+				double f_k = ((double) cnt[k])/((double) nterms);
+				double p_k = term[k] + 1.0;
+				p_k = -log(1.0 - 1.0 /(p_k * p_k));
+				p_k /= M_LN2;
+				entropy -= (f_k - p_k) * log(p_k);
 			}
 		
 			double x = ((double) p)/ ((double) q);
-			double y = -entropy;
+			double y = entropy;
 			// printf("%5d	%8.6g	%8.6g\n", p,x,y);
 			printf("%8.6f	%5d	%5d	%8.6g\n", x, p,q,y);
+			total ++;
 		}
+
+		double avglen = totlen / total;
+		double ent = log(total) / M_LN2;
+		ent /= avglen;
+		printf("# total=%d avglen=%g ent=%g\n", total, avglen, ent);
 	}
 }
 

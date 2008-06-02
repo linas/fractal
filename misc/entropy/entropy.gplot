@@ -1,7 +1,9 @@
 
+# set term png small
+# set out 'entropy.png'
 
-set term png small
-set out 'entropy.png'
+set term postscript eps color
+set out 'entropy.ps'
 
 # set data style linespoints
 set data style lines
@@ -9,6 +11,6 @@ set key right
 
 set title "Gauss-Kuzmin entropy of small rationals"
 set xlabel "x=p/q"
-set ylabel "H(x)"
-plot "entropy.dat" using 1:4 title "tak"
+set ylabel "Delta H(p/q)"
+plot "entropy.dat" using 1:4 title ""
 
