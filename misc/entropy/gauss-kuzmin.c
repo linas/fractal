@@ -1,6 +1,6 @@
-
 /*
  * Gauss-Kuzmin entropy
+ * i.e. the entropy over the real number line.
  *
  * Linas Vepstas June 2008
  */

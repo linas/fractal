@@ -1,11 +1,15 @@
 
-all: gauss-kuzmin
+all: entropy gauss-kuzmin
 
+entropy: entropy.o
 gauss-kuzmin: gauss-kuzmin.o
 
 .o:
-	cc -o $@ $^ -lm
+	g++ -o $@ $^ -L ../../tools/lib -lfunc -lm -lstdc++
 
 .c.o:
 	cc -O2 -c $<
+
+.C.o:
+	g++ -O2 -I ../../tools/inc -c $<
 
