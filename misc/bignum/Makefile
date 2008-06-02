@@ -6,7 +6,7 @@ CC = cc
 
 
 EXES= bernoulli bound bs bsubn cache-fill cont_frac db-merge db-prt \
-      dsubn exact hurwitz hurwitz-euler minima mp_zeta_test picturez \
+      dsubn entropy exact hurwitz hurwitz-euler minima mp_zeta_test picturez \
       poly-perf sho stieltjes trunc zero-cross
 
 MPLIB=libzmp.a
@@ -23,6 +23,7 @@ db-merge:	db-merge.o $(MPLIB)
 db-prt:	db-prt.o $(MPLIB)
 cont_frac:	cont_frac.o
 dsubn:	dsubn.o $(MPLIB)
+entropy:	entropy.o $(MPLIB)
 exact:	exact.o $(MPLIB)
 hurwitz:	hurwitz.o $(MPLIB)
 hurwitz-euler:	hurwitz-euler.o $(MPLIB)
