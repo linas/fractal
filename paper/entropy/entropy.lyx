@@ -122,7 +122,7 @@ key "Ash1965"
 
  is defined as
 \begin_inset Formula \[
-H=-\sum_{k=1}^{N}p_{k}\log p_{k}\]
+H=-\sum_{k=1}^{N}p_{k}\log_{2}p_{k}\]
 
 \end_inset
 
@@ -135,6 +135,11 @@ where
 \end_inset
 
 'th state occuring in a measurement of the random variable.
+ The entropy is measured in bits; and so 
+\begin_inset Formula $\log_{2}p=\log p/\log2$
+\end_inset
+
+ is the base-2 logarithm.
  For continued fractions, one has an infinite number of possible states,
  and so 
 \begin_inset Formula $N=\infty$
@@ -142,7 +147,7 @@ where
 
  and so 
 \begin_inset Formula \[
-H=-\sum_{k=1}^{\infty}p_{k}\log p_{k}\]
+H=-\sum_{k=1}^{\infty}p_{k}\log_{2}p_{k}\]
 
 \end_inset
 
@@ -170,13 +175,16 @@ Gauss-Kuzmin entropy
 
  is then 
 \begin_inset Formula \[
-H=2.379246764\cdots\]
+H=3.432527507\cdots\]
 
 \end_inset
 
-and 
+ or alternately, in terms of the natural logarithm,
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula \[
-\frac{H}{\log2}=3.432527507\cdots\]
+H\log2=2.379246764\cdots\]
 
 \end_inset
 
@@ -253,28 +261,7 @@ typical
 \begin_inset Quotes erd
 \end_inset
 
- sequence.
- Typical sequences are defined as those which have a distribution of 
-\begin_inset Formula $a_{n}$
-\end_inset
-
- close to that of the Gauss-Kuzmin distribution; the precise definition
- follows
-\begin_inset LatexCommand cite
-key "Ash1965"
-
-\end_inset
-
-.
- A standard interpretation of entropy is that, given a length 
-\begin_inset Formula $n$
-\end_inset
-
-, there are 
-\begin_inset Formula $2^{nH}$
-\end_inset
-
- 
+ sequence, where a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -282,11 +269,11 @@ typical
 \begin_inset Quotes erd
 \end_inset
 
- sequences of length 
-\begin_inset Formula $n$
+ sequences is one which has a distribution of 
+\begin_inset Formula $a_{n}$
 \end_inset
 
-; other sequences are possible, but highly unlikely.
+ close to that of the Gauss-Kuzmin distribution.
  It is of some interest to see whether the rational numbers are 
 \begin_inset Quotes eld
 \end_inset
@@ -317,6 +304,191 @@ typical
 \end_inset
 
  or not.
+\end_layout
+
+\begin_layout Standard
+The standard techniques of discussing typical sequences
+\begin_inset LatexCommand cite
+key "Ash1965"
+
+\end_inset
+
+ are not directly applicable, as the Gauss-Kuzmin distribution has infinite
+ mean and mean-square variance.
+ Let 
+\begin_inset Formula $p/q$
+\end_inset
+
+ be a rational, with a continued-fraction representation of length 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+ be the number of times that the integer 
+\begin_inset Formula $k$
+\end_inset
+
+ occurs in the continued fraction expansion of 
+\begin_inset Formula $p/q$
+\end_inset
+
+.
+ Normalizing, one has a frequency of occurance: 
+\begin_inset Formula \[
+f_{k}=\frac{m_{k}}{M}\]
+
+\end_inset
+
+and clearly, 
+\begin_inset Formula $\sum_{k}f_{k}=1$
+\end_inset
+
+.
+ One may define a relative entropy as 
+\begin_inset Formula \begin{equation}
+\Delta H\left(\frac{p}{q}\right)=-\sum_{k=1}^{\infty}\left(f_{k}-p_{k}\right)\log_{2}p_{k}\label{eq:relative-ent}\end{equation}
+
+\end_inset
+
+ This relative entropy is shown in figure 
+\begin_inset LatexCommand ref
+reference "fig:relent"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Relative Entropy
+\end_layout
+
+\end_inset
+
+
+\begin_inset LatexCommand label
+name "fig:relent"
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename relative-entropy.ps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This graph shows the relative entropy, given by eqn.
+ 
+\begin_inset LatexCommand ref
+reference "eq:relative-ent"
+
+\end_inset
+
+, for all of the rationals 
+\begin_inset Formula $p/q$
+\end_inset
+
+ for 
+\begin_inset Formula $q\le128$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+This graph was made with data from src/fractal/misc/entropy.C and plotted
+ with entropy.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Another standard interpretation of entropy is that, given a length 
+\begin_inset Formula $\ell$
+\end_inset
+
+, there are 
+\begin_inset Formula $2^{\ell H}$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+typical
+\begin_inset Quotes erd
+\end_inset
+
+ sequences of length 
+\begin_inset Formula $\ell$
+\end_inset
+
+; other sequences are possible, but unlikely.
+ For small rationals, this can be reversed.
+ Consider, intead, the set of all rationals 
+\begin_inset Formula $p/q$
+\end_inset
+
+ up to a maximum denominator 
+\begin_inset Formula $q\le Q$
+\end_inset
+
+.
+ There are 
+\begin_inset Formula $N(Q)$
+\end_inset
+
+ such rationals, which have an average length 
+\begin_inset Formula $\ell(Q)$
+\end_inset
+
+.
+ One then defines a 
+\emph on
+de facto
+\emph default
+ entropy as 
+\begin_inset Formula \[
+H\left(Q\right)=\frac{\log_{2}N\left(Q\right)}{\ell\left(Q\right)}\]
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
