@@ -39,7 +39,13 @@
 \begin_body
 
 \begin_layout Title
-Entropy of Continued Fractions
+Entropy of Continued Fractions (Gauss-Kuzmin Entropy)
+\end_layout
+
+\begin_layout Abstract
+This short paper provides a short numerical exploration of the entropy of
+ the Gauss-Kuzmin distribution.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -58,15 +64,50 @@ x=[a_{1},a_{2},a_{3},\cdots]=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\cdots
 
 \end_inset
 
- be the continued fraction expansion of 
+be the continued fraction expansion of 
 \begin_inset Formula $x.$
 \end_inset
 
+ Given the uniform distribution of the reals on the unit interval, the Gauss-Kuz
+min distribution gives the probability 
+\begin_inset Formula $\mbox{Pr}(a_{n}=k)$
+\end_inset
+
+ of an integer 
+\begin_inset Formula $k$
+\end_inset
+
+ appearing in any given place 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ of the expansion.
+ This probability is known classically, and is given by 
+\begin_inset Formula \[
+\mbox{Pr}(a_{n}=k)=p_{k}=-\log_{2}\left[1-\frac{1}{\left(k+1\right)^{2}}\right]\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The continued fraction expansion can be viewed as a discrete random variable,
+ which may be sampled; the 
+\begin_inset Formula $n$
+\end_inset
+
+'th sampling giving the value 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+.
  Given a discrete random variable with 
 \begin_inset Formula $N$
 \end_inset
 
- possible discrete states, the entropy is defined as
+ possible discrete states, the (information-theoretic) entropy is defined
+ as
 \begin_inset Formula \[
 H=-\sum_{k=1}^{N}p_{k}\log p_{k}\]
 
@@ -81,12 +122,8 @@ where
 \end_inset
 
 'th state occuring in a measurement of the random variable.
- For continued fractions, consider the likelihood of the integer 
-\begin_inset Formula $k$
-\end_inset
-
- occurring somewhere in the expansion; since any integer is possible, one
- then has 
+ For continued fractions, one has an infinite number of possible states,
+ and so 
 \begin_inset Formula $N=\infty$
 \end_inset
 
@@ -96,29 +133,37 @@ H=-\sum_{k=1}^{\infty}p_{k}\log p_{k}\]
 
 \end_inset
 
-The probability 
+Here, the probability 
 \begin_inset Formula $p_{k}$
 \end_inset
 
- is given by the Gauss-Kuzmin distribution, and is 
-\begin_inset Formula \[
-p_{k}=-\log_{2}\left[1-\frac{1}{\left(k+1\right)^{2}}\right]\]
-
+ is given by the Gauss-Kuzmin distribution.
+ This entropy shall be termed the 
+\begin_inset Quotes eld
 \end_inset
 
-The numerical value of 
+
+\emph on
+Gauss-Kuzmin entropy
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+, as it is uniquely fixed by the Gauss-Kuzmin distribution.
+ The numerical value of 
 \begin_inset Formula $H$
 \end_inset
 
  is then 
 \begin_inset Formula \[
-H=2.379246\cdots\]
+H=2.37924666\cdots\]
 
 \end_inset
 
 and 
 \begin_inset Formula \[
-\frac{H}{\log2}=3.4325\cdots\]
+\frac{H}{\log2}=3.43252736\cdots\]
 
 \end_inset
 
@@ -164,11 +209,23 @@ where the frequency
 
  are again very easy to compute; note, however, that the non-periodic leading
  portion of the expansion does not contribute at all.
- 
+ Although the rationals and the quadratic irrationals are dense in the reals,
+ they are sets of measure zero.
+ The entropy 
+\begin_inset Formula $H(x)$
+\end_inset
+
+ for general real-valued numbers is not known, except for those specific
+ transcendentals for which the continued fraction expansion is known.
 \end_layout
 
 \begin_layout Standard
-The
+The following figures illustrate 
+\begin_inset Formula $H(x)$
+\end_inset
+
+ for selected subsets of the rationals.
+ 
 \end_layout
 
 \end_body
