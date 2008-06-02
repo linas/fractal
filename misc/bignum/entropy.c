@@ -21,17 +21,20 @@
 int
 main (int argc, char * argv[])
 {
-	int prec = 60;
+	int prec = 120;
 
 	/* Set the precision (number of binary bits) */
-	int nbits = 3.3*prec+100;
+	int nbits = 3.3*prec+30;
 	mpf_set_default_prec (nbits);
 
-	mpf_t lg2;
+	mpf_t lg2, lglg2;
 	mpf_init (lg2);  // log 2
+	mpf_init (lglg2);  // log log 2
 	fp_log2 (lg2, prec);
+	fp_log(lglg2, lg2, prec);
 
-	mpf_t k, acc, prob, term, p_k;
+	mpf_t k, acc, prob, term, prev, p_k;
+	mpf_init (prev);
 	mpf_init (prob);
 	mpf_init (acc);
 	mpf_init (p_k);
@@ -57,13 +60,38 @@ main (int argc, char * argv[])
 		mpf_mul(term, p_k, term);
 		mpf_add (acc, acc, term);
 
-		if (pcnt != 0)
+		if (pcnt == 0)
 		{
 			fp_prt("k = ", k);
+			printf ("\n");
+
+			// total probability is tending to 1.0,
+			// so print difference from 1.0
 			mpf_div(term, prob, lg2);
 			mpf_ui_sub (term, 1, term);
 			fp_prt("prob = ", term);
 			printf ("\n");
+
+			// print the regular entropy
+			mpf_div(term, acc, lg2);
+			mpf_sub(term, lglg2, term);
+			fp_prt("H = ", term);
+			printf ("\n");
+
+			// print change since last time
+			mpf_sub (p_k, term, prev);
+			mpf_set (prev, term);
+			fp_prt("delta = ", p_k);
+			printf ("\n");
+
+			// print the information-theoretic entropy
+			// which differs byu a log2.
+			mpf_div(term, term, lg2);
+			fp_prt("H_2 = ", term);
+			printf ("\n");
+
+			printf ("\n");
+			fflush (stdout);
 		}
 		pcnt ++;
 
