@@ -21,25 +21,37 @@
 int
 main (int argc, char * argv[])
 {
-	int prec = 120;
+	int prec = 40;
 
 	/* Set the precision (number of binary bits) */
 	int nbits = 3.3*prec+30;
 	mpf_set_default_prec (nbits);
 
+	printf ("percision(base-10)=%d nbits=%d\n", prec, nbits);
+
+	// log2 and log log 2
 	mpf_t lg2, lglg2;
 	mpf_init (lg2);  // log 2
 	mpf_init (lglg2);  // log log 2
 	fp_log2 (lg2, prec);
 	fp_log(lglg2, lg2, prec);
 
-	mpf_t k, acc, prob, term, prev, p_k;
-	mpf_init (prev);
-	mpf_init (prob);
-	mpf_init (acc);
-	mpf_init (p_k);
-	mpf_init (term);
+	// terms in the series.
+	mpf_t k, acc, prob, term, p_k;
 	mpf_init (k);
+	mpf_init (p_k);
+	mpf_init (acc);
+	mpf_init (term);
+	mpf_init (prob);
+
+	// Aitken delta-squared method for series acceleration.
+	mpf_t s_n, s_nm1, s_nm2, delta, dprev, tmp;
+	mpf_init (s_n);
+	mpf_init (s_nm1);
+	mpf_init (s_nm2);
+	mpf_init (delta);
+	mpf_init (dprev);
+	mpf_init (tmp);
 
 
 	unsigned short pcnt = 1;
@@ -78,16 +90,27 @@ main (int argc, char * argv[])
 			fp_prt("H = ", term);
 			printf ("\n");
 
-			// print change since last time
-			mpf_sub (p_k, term, prev);
-			mpf_set (prev, term);
-			fp_prt("delta = ", p_k);
+			// Aitken method
+			// s = s_nm2 + (s_nm2-s_nm1)^2 / (s_n + s_nm2 - 2*s_nm1)
+			mpf_set (s_nm2, s_nm1);
+			mpf_set (s_nm1, s_n);
+			mpf_set (s_n, term);
+			mpf_set (dprev, delta);
+			mpf_sub (delta, s_n, s_nm1);
+
+			mpf_mul(term, dprev, dprev);
+			mpf_sub(tmp, delta, dprev);
+			mpf_div(term, term, tmp);
+			fp_prt("delta = ", term);
+			printf ("\n");
+			mpf_add(term, term, s_nm2);
+			fp_prt("H aitken = ", term);
 			printf ("\n");
 
 			// print the information-theoretic entropy
-			// which differs byu a log2.
+			// which differs by a log2.
 			mpf_div(term, term, lg2);
-			fp_prt("H_2 = ", term);
+			fp_prt("H_2 (aitken) = ", term);
 			printf ("\n");
 
 			printf ("\n");
