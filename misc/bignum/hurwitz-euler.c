@@ -1,8 +1,9 @@
 /* 
  * hurwitz-euler.c
  *
- * Compute the Hurwitz zeta function for arbitrary complex argument
- * Use the Euler-Maclaurin formla to do so.
+ * Measure the performance of computing the Hurwitz zeta function 
+ * for arbitrary complex argument. Compare to known-good values
+ * so as to make sure we aren't mis-computing.
  *
  * Linas Vepstas Feb 2007
  */

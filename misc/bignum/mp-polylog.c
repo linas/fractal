@@ -1324,7 +1324,7 @@ void cpx_polylog_nint (cpx_t plog, unsigned int negn, const cpx_t zee)
 
 /* ============================================================= */
 /**
- * cpx_polylog_euler -- compute the polylogarithm from Hurwiitz Euler.
+ * cpx_polylog_euler -- compute the polylogarithm from Hurwitz Euler.
  *
  * Combine two Hurwitz Euler-Maclaurin evaluations to obtain the polylogarithm.
  */
@@ -1853,7 +1853,7 @@ punt:
  * The algorithm appears to work.
  */
 
-void zeta_euler_fp(cpx_t zeta, cpx_t ess, mpf_t q, int em, int prec)
+static void zeta_euler_fp(cpx_t zeta, cpx_t ess, mpf_t q, int em, int prec)
 {
 	int k;
 	cpx_t s, spoch, term, deriv;
@@ -1952,7 +1952,7 @@ void zeta_euler_fp(cpx_t zeta, cpx_t ess, mpf_t q, int em, int prec)
 	cpx_clear (deriv);
 } 
 
-void zeta_euler(cpx_t zeta, cpx_t ess, cpx_t q, int em, int prec)
+static void zeta_euler(cpx_t zeta, cpx_t ess, cpx_t q, int em, int prec)
 {
 	int k;
 	cpx_t s, emq, spoch, term, deriv;
