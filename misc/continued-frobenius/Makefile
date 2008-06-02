@@ -1,5 +1,5 @@
 
-CC=gcc-4.0
+CC=gcc
 CFLAGS= -g -O2 -Wall
 
 TOP = ../../tools
@@ -8,7 +8,7 @@ LIB = $(TOP)/lib
 
 EXES = alpha asubn bern bern_h binom-graph character \
 	diagon diverge eicheck frobenius gsl-diag \
-	harmonic riemann stirling sum swap tryall valuate \
+	harmonic rational-sum riemann stirling sum swap tryall valuate \
 	zeta-sum zeta-takagi zeta-zero zero zyx
 
 all: $(EXES)
@@ -48,6 +48,7 @@ eicheck: eicheck.o ache.o
 frobenius: frobenius.o
 gsl-diag: gsl-diag.o
 harmonic: harmonic.o
+rational-sum: rational-sum.o
 riemann: riemann.o
 stirling: stirling.o ache.o
 sum: sum.o ache.o
