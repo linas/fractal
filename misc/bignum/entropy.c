@@ -103,7 +103,7 @@ main (int argc, char * argv[])
 			mpf_div(term, term, tmp);
 			fp_prt("delta = ", term);
 			printf ("\n");
-			mpf_add(term, term, s_nm2);
+			mpf_sub(term, s_n, term);
 			fp_prt("H aitken = ", term);
 			printf ("\n");
 
