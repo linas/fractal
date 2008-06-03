@@ -94,7 +94,14 @@ min distribution gives the probability
 \end_inset
 
  of the expansion.
- This probability is known classically, and is given by 
+ This probability has been famously studied by Kuz'min, Levy, Khinchin and
+ Wirsing; it is given by
+\begin_inset LatexCommand cite
+key "Khin35"
+
+\end_inset
+
+ 
 \begin_inset Formula \[
 \mbox{Pr}(a_{n}=k)=p_{k}=-\log_{2}\left[1-\frac{1}{\left(k+1\right)^{2}}\right]\]
 
@@ -138,7 +145,7 @@ where
 \begin_inset Formula $k$
 \end_inset
 
-'th state occuring in a measurement of the random variable.
+'th state occurring in a measurement of the random variable.
  The entropy is measured in bits; and so 
 \begin_inset Formula $\log_{2}p=\log p/\log2$
 \end_inset
@@ -188,7 +195,7 @@ key "Blach84"
 
  may be obtained by computation; it is 
 \begin_inset Formula \[
-H=3.4325275139\cdots\]
+H=3.4325275140\cdots\]
 
 \end_inset
 
@@ -197,7 +204,7 @@ H=3.4325275139\cdots\]
 
 \begin_layout Standard
 \begin_inset Formula \[
-H\log2=2.37924676850\cdots\]
+H\log2=2.37924676853\cdots\]
 
 \end_inset
 
@@ -271,12 +278,17 @@ It can be readily seen that
  
 \end_layout
 
+\begin_layout Standard
+There does not appear to be any simple or straightforward way to rewrite
+ the sums to allow high-precision (more than 10 decimal places) calculation.
+\end_layout
+
 \begin_layout Section
 Analytic results
 \end_layout
 
 \begin_layout Standard
-The partial sum 
+The cumulative distribution function, that is, the partial sum 
 \begin_inset Formula \[
 C(N)=-\sum_{k=1}^{N}p_{k}\]
 
@@ -393,7 +405,7 @@ key "Ash1965"
 \end_inset
 
 .
- Normalizing, one has a frequency of occurance: 
+ Normalizing, one has a frequency of occurrence: 
 \begin_inset Formula \[
 f_{k}=\frac{m_{k}}{M}\]
 
@@ -511,8 +523,8 @@ typical
 \end_inset
 
 ; other sequences are possible, but unlikely.
- For small rationals, this can be reversed.
- Consider, intead, the set of all (irreducible) rationals 
+ For small rationals, this interpretation can be reversed.
+ Consider, instead, the set of all (irreducible) rationals 
 \begin_inset Formula $p/q$
 \end_inset
 
@@ -525,7 +537,8 @@ typical
 \begin_inset Formula $N(Q)$
 \end_inset
 
- such rationals, which have an average length 
+ such rationals, which, expressed as continued fractions, have an average
+ number of terms 
 \begin_inset Formula $\ell(Q)$
 \end_inset
 
@@ -540,8 +553,8 @@ H\left(Q\right)=\frac{\log_{2}N\left(Q\right)}{\ell\left(Q\right)}\label{eq:defa
 
 \end_inset
 
- For small rationals, the defacto entropy is considerably smaller than the
- Gass-Kuzmin entropy.
+ For small rationals, the de facto entropy is considerably smaller than
+ the Gauss-Kuzmin entropy.
  This is illustrated in figure 
 \begin_inset LatexCommand ref
 reference "fig:defacto"
@@ -569,7 +582,7 @@ name "fig:defacto"
 \begin_inset Caption
 
 \begin_layout Standard
-Defacto entropy for small rationals
+De facto entropy for small rationals
 \end_layout
 
 \end_inset
@@ -584,13 +597,27 @@ Defacto entropy for small rationals
 \end_layout
 
 \begin_layout Standard
-This figure shows the defacto entropy, given by eqn 
+This figure shows the de facto entropy, given by eqn.
+ 
 \begin_inset LatexCommand ref
 reference "eq:defacto"
 
 \end_inset
 
 .
+ The graph extends to all rationals with denominators 
+\begin_inset Formula $q\le Q=4\times10^{5}$
+\end_inset
+
+.
+ As can be seen, the convergence is very slow.
+ The limiting value might seem to be H=3.43..., but this is not clear (
+\emph on
+i.e.
+
+\emph default
+ is without proof).
+ 
 \begin_inset Note Note
 status open
 
