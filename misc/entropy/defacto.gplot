@@ -1,9 +1,9 @@
 
-set term png small
-set out 'defacto.png'
+# set term png small
+# set out 'defacto.png'
 
-# set term postscript eps color
-# set out 'defacto.ps'
+set term postscript eps color
+set out 'defacto.ps'
 
 # set data style linespoints
 set data style lines
@@ -12,5 +12,8 @@ set key right
 set title "Defacto entropy of small rationals"
 set xlabel "Q"
 set ylabel "H(Q)"
+set logscale x
 plot "defacto.dat" using 1:4 title ""
+
+#     "defacto.dat" using 1:(3.43*(1-exp(-0.4*log($1))))
 

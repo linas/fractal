@@ -28,31 +28,31 @@ main (int argc, char *argv[])
 	zre = atof (argv[1]);
 #endif
 
-	int qmax;
-	for (qmax = 2; qmax < 129; qmax++)
-	{
-		int total = 0;
-		int totlen = 0;
+	unsigned long long total = 0LL;
+	unsigned long long totlen = 0LL;
 	
-		int p, q;
-		for (q=1; q <= qmax; q++)
+	int p, q;
+	for (q=1; q <= 329000; q++)
+	{
+		for (p=0; p<q; p++)
 		{
-			for (p=0; p<q; p++)
-			{
-				if (1 != gcf32(p,q)) continue;	
-				f.SetRatio (p, q);
+			if (1 != gcf32(p,q)) continue;	
+			f.SetRatio (p, q);
 
-				int nterms = f.GetNumTerms();
-				totlen += nterms;
-				total ++;
-			}
+			int nterms = f.GetNumTerms();
+			totlen += nterms;
+			total ++;
 		}
 	
-		double avglen = ((double) totlen) / ((double) total);
-		double ent = log(total) / M_LN2;
-		ent /= avglen;
-		// printf("%a total=%d avglen=%g ent=%g\n", total, avglen, ent);
-		printf("%d	%d	%g	%g\n", qmax, total, avglen, ent);
+		if ((q%100 == 0) || (q < 1000))
+		{
+			double avglen = ((double) totlen) / ((double) total);
+			double ent = log((double)total) / M_LN2;
+			ent /= avglen;
+			// printf("%a total=%d avglen=%g ent=%g\n", total, avglen, ent);
+			printf("%d	%lld	%g	%g\n", q, total, avglen, ent);
+			fflush (stdout);
+		}
 	}
 }
 
