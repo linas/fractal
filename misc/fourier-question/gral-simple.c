@@ -12,14 +12,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+static long double delta;
+static int npts;
 
 void make_elt(int m, int n, long double *pre, long double *pim)
 {
-	long double start, end, th, off, g;
+	long double x;
 	long double re = 0.0L;
 	long double im = 0.0L;
-	int i, j;
+	int i;
 
+	for (i=0; i<npts; i++)
+	{
+		x = ((long double) i)*delta;
+		x = n*x/(1.0L+x) - m*x;
+		x *= 2.0L * M_PIl;
+		re += cosl(x);
+		im += sinl(x);
+	}
+
+	re *= delta;
+	im *= delta;
 
 	*pre = re;
 	*pim = im;
@@ -45,5 +58,8 @@ void fill_matrix(int sz)
 
 main()
 {
-	fill_matrix(3);
+	npts = 123123;
+	delta = 1.0L / (long double) npts;
+
+	fill_matrix(10);
 }
