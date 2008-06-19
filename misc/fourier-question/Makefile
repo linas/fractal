@@ -1,10 +1,11 @@
 
-EXES= gral-matrix
+EXES= gral-matrix gral-simple
 
 all: $(EXES)
 
 
 gral-matrix: gral-matrix.o
+gral-simple: gral-simple.o
 
 .c.o:
 	cc -c -g -O2 $<

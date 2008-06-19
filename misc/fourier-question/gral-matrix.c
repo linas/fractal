@@ -3,6 +3,8 @@
  * by means of brute-force integration. This seems to be a viable
  * quick-n-dirty way of getting these.
  *
+ * Ughh. Abandon, as it requires just enough algebra to be painful.
+ *
  * Linas June 2008
  */
 
@@ -43,6 +45,8 @@ void make_elt(int m, int n, long double *pre, long double *pim)
 	long double im = 0.0L;
 	int i, j;
 
+	if (m == 0) return;
+
 	off = 16.0L * M_PIl*M_PIl * m * n;
 	start = 2.0L*M_PIl * (m+n);
 	end = M_PIl * (n+4*m);
@@ -76,13 +80,27 @@ void make_elt(int m, int n, long double *pre, long double *pim)
 	*pim = im;
 }
 
+void fill_matrix(int sz)
+{
+	int i, j;
+
+	for (i=-sz; i<=sz; i++)
+	{
+		for (j=-sz; j<=sz; j++)
+		{
+			long double re = 0.0L;
+			long double im = 0.0L;
+
+			make_elt(i,j, &re, &im);
+			printf("W[%d, %d] = %Lg +i %Lg\n", i, j, re, im);
+		}
+		printf ("\n");
+	}
+}
+
 main()
 {
 	init_sine_cosine_arrays(4123123);
 
-	long double re = 0.0L;
-	long double im = 0.0L;
-	make_elt(2,5, &re, &im);
-
-	printf("its %Lg +i Lg\n", re, im);
+	fill_matrix(3);
 }
