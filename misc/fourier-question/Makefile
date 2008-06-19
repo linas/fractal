@@ -7,7 +7,7 @@ all: $(EXES)
 gral-matrix: gral-matrix.o
 
 .c.o:
-	cc -c -g -O2 -I $(INC) $<
+	cc -c -g -O2 $<
 
 .o:
 	cc -g -o $@ $^ -lm 
