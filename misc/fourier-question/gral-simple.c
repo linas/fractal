@@ -56,10 +56,25 @@ void fill_matrix(int sz)
 	}
 }
 
-main()
+void slice(int row, int colmin, int colmax)
+{
+	int j;
+
+	for (j=colmin; j<colmax; j++)
+	{
+		long double re = 0.0L;
+		long double im = 0.0L;
+
+		make_elt(row, j, &re, &im);
+		printf("%d	%d	%Lg	%Lg\n", row, j, re, im);
+	}
+}
+
+main(int argc, char * argv[])
 {
 	npts = 123123;
 	delta = 1.0L / (long double) npts;
 
-	fill_matrix(10);
+	int row = atoi(argv[1]);
+	slice(row, -20, 60);
 }

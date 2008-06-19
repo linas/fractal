@@ -1,0 +1,18 @@
+
+set term png small
+set out 'slice.png'
+
+# set term postscript eps color
+# set out 'slice.ps'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Ds"
+set xlabel "Q"
+set ylabel "H(Q)"
+plot "slice.dat" using 2:3 title "re", \
+     "slice.dat" using 2:4 title "im"
+
+
