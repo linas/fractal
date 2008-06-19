@@ -49,7 +49,7 @@ int main ()
 
 		if (inf>lead) inf=lead;
 		if (sup<lead) sup=lead;
-		if (0 == i%scale || ((906100000<i)&&(i<906500000)&&(i%400==0)))
+		if (0 == i%scale || ((906000000<=i)&&(i<=906500000)&&(i%400==0)))
 		{
 			// lead = sum;
 			// lead -= 0.5*i*logl(i);
@@ -68,7 +68,7 @@ int main ()
 			sup = -1.0e100;
 
 			logscale *= scale_delta;
-			scale = logscale;
+			scale = (int) floor(logscale);
 		}
 	}
 }
