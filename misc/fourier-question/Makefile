@@ -1,11 +1,12 @@
 
-EXES= gral-matrix gral-simple
+EXES= eigen gral-matrix gral-explore
 
 all: $(EXES)
 
 
+eigen: eigen.o gral-simple.o
 gral-matrix: gral-matrix.o
-gral-simple: gral-simple.o
+gral-explore: gral-explore.o gral-simple.o
 
 .c.o:
 	cc -c -g -O2 $<
