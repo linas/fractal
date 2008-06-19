@@ -56,7 +56,7 @@ void fill_matrix(int sz)
 	}
 }
 
-void slice(int row, int colmin, int colmax)
+void slice_row(int row, int colmin, int colmax)
 {
 	int j;
 
@@ -70,11 +70,28 @@ void slice(int row, int colmin, int colmax)
 	}
 }
 
+void slice_col(int rowmin, int rowmax, int col)
+{
+	int i;
+
+	for (i=rowmin; i<rowmax; i++)
+	{
+		long double re = 0.0L;
+		long double im = 0.0L;
+
+		make_elt(i, col, &re, &im);
+		printf("%d	%d	%Lg	%Lg\n", i, col, re, im);
+	}
+}
+
 main(int argc, char * argv[])
 {
 	npts = 123123;
 	delta = 1.0L / (long double) npts;
 
 	int row = atoi(argv[1]);
-	slice(row, -20, 60);
+	slice_row(row, -20, 360);
+	//
+	int col = row;
+	// slice_col(-20, 160, col);
 }
