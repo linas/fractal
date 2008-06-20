@@ -1,0 +1,28 @@
+
+set term png small
+set out 'wave.png'
+
+# set term postscript eps color
+# set out 'wave.ps'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Eigenvectors"
+set xlabel "x"
+set ylabel "wave func"
+
+plot "wave.dat" using 1:2 title "re", \
+     "wave.dat" using 1:3 title "im"
+
+set xlabel "real part"
+set ylabel "imaginary part"
+set xrange [-1.0:1.0]
+set yrange [-1.0:1.0]
+set size square
+#     sqrt(1-x*x) title "", \
+#     -sqrt(1-x*x) title ""
+#      "wave.dat" using 61:62 title "20"
+
+
