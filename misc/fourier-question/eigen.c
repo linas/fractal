@@ -101,7 +101,7 @@ main (int argc, char * argv[])
 	rev = (complex double *) malloc (dim*dim*sizeof (complex double));
 	workdim = 4*dim*dim;
 	work = (complex double *) malloc (workdim*sizeof (complex double));
-	w2 = (double *) malloc (dim*sizeof (double));
+	w2 = (double *) malloc (2*dim*sizeof (double));
 
 	/* Insert values for the operator */
 	for (i=0; i<dim; i++)

@@ -8,8 +8,8 @@
  * T is triangular.
  *
  * Use LAPACK xGEEV routine
- * specifically, real double precision:
- * DGEEV
+ * specifically, complex double precision:
+ * ZGEEV
  *
  * Apply to find eigenvalues of the Fourier-of-Minkowski-question
  * operator
@@ -27,10 +27,10 @@
 
 /* dry run -- get the working dimension */
 int 
-getworkdim (int dim, double *matrix,
-        double *eigenvalues_re, double *eigenvalues_im, 
-		  double *left_eigen, double *right_eigen,
-		  double *workspace)
+cgetworkdim (int dim, complex double *matrix, 
+        complex double *eigenvalues, 
+		  complex double *left_eigen, complex double *right_eigen,
+		  complex double *workspace, double *w2)
 {
 
 	char jobvl = 'V';
@@ -40,48 +40,47 @@ getworkdim (int dim, double *matrix,
 
 	workdim = -1;
 
-	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
-	       eigenvalues_re, eigenvalues_im, 
+	zgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
+	       eigenvalues, 
 			 left_eigen, &dim, right_eigen, &dim, 
-			 workspace, &workdim, &info);
+			 workspace, &workdim, w2, &info);
 
 	return (int) (workspace[0]+0.5);
 }
 
 int 
-geteigen (int dim, double *matrix, 
-        double *eigenvalues_re, double *eigenvalues_im, 
-		  double *left_eigen, double *right_eigen,
-		  int workdim, double *workspace)
+cgeteigen (int dim, complex double *matrix, 
+        complex double *eigenvalues, 
+		  complex double *left_eigen, complex double *right_eigen,
+		  int workdim, complex double *workspace, double *w2)
 {
-
 	char jobvl = 'V';
 	char jobvr = 'V';
 	int info;
 
-	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
-	       eigenvalues_re, eigenvalues_im, 
+	zgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
+	       eigenvalues, 
 			 left_eigen, &dim, right_eigen, &dim, 
-			 workspace, &workdim, &info);
+			 workspace, &workdim, w2, &info);
 
 }
 
 
 main (int argc, char * argv[]) 
 {
-	double *mat;
-	double *regmat;
-	double *ere;
-	double *eim;
-	double *lev;
-	double *rev;
-	double *work;
+	complex double *mat;
+	complex double *regmat;
+	complex double *eval;
+	complex double *lev;
+	complex double *rev;
+	complex double *work;
+	double *w2;
 	int dim;
 	int workdim;
 	int i,j, k;
 	
 	dim = 28;
-	set_npts(2123123);
+	set_npts(123123);
 
 	if (argc < 2)
 	{
@@ -96,16 +95,16 @@ main (int argc, char * argv[])
 	printf ("# Numerically solved to rank=%d\n", dim);
 	printf ("#\n#\n");
 
-	mat = (double *) malloc (dim*dim*sizeof (double));
-	regmat = (double *) malloc (dim*dim*sizeof (double));
-	ere = (double *) malloc (dim*sizeof (double));
-	eim = (double *) malloc (dim*sizeof (double));
-	lev = (double *) malloc (dim*dim*sizeof (double));
-	rev = (double *) malloc (dim*dim*sizeof (double));
+	mat = (complex double *) malloc (dim*dim*sizeof (complex double));
+	regmat = (complex double *) malloc (dim*dim*sizeof (complex double));
+	eval = (complex double *) malloc (dim*sizeof (complex double));
+	lev = (complex double *) malloc (dim*dim*sizeof (complex double));
+	rev = (complex double *) malloc (dim*dim*sizeof (complex double));
 	workdim = 4*dim*dim;
-	work = (double *) malloc (workdim*sizeof (double));
+	work = (complex double *) malloc (workdim*sizeof (complex double));
+	w2 = (double *) malloc (2*dim*sizeof (double));
 
-	/* Compute values for the operator */
+	/* Insert values for the operator */
 	for (i=0; i<dim; i++)
 	{
 		for (j=0; j<dim; j++)
@@ -120,19 +119,21 @@ main (int argc, char * argv[])
 			int n = j - dim/2;
 			make_elt (m,n, &re, &im);
 
-			mat[i+j*dim] = re;
+			complex double z = re + I * im;
+			z *= exp(-0.1*(m*m+n*n)/(dim*dim));
+
+			mat[i+j*dim] = z;
 			// printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
 		}
 		// printf("\n");
-		printf("# done row %d of %d\n", i, dim);
-		fflush(stdout);
 	}
 
-	int wd = getworkdim (dim, mat, ere, eim, lev, rev, work);
+	
+	int wd = cgetworkdim (dim, mat, eval, lev, rev, work, w2);
 	printf ("# recommended dim=%d actual dim=%d\n#\n", wd, workdim);
 	// workdim = wd;
 	
-	work = (double *) realloc (work, workdim*sizeof (double));
+	work = (complex double *) realloc (work, workdim*sizeof (complex double));
 
 	// Now, start regulating
 	double t;
@@ -153,22 +154,21 @@ main (int argc, char * argv[])
 		double edgemax = 0.0;
 		for (i=0; i<dim; i++)
 		{
-			if (edgemax < fabs(regmat[i])) edgemax = fabs(regmat[i]);
-			if (edgemax < fabs(regmat[i+(dim-1)*dim])) edgemax = fabs(regmat[i+(dim-1)*dim]);
-			if (edgemax < fabs(regmat[i*dim])) edgemax = fabs(regmat[i*dim]);
-			if (edgemax < fabs(regmat[dim-1+i*dim])) edgemax = fabs(regmat[dim-1+i*dim]);
+			if (edgemax < cabs(regmat[i])) edgemax = cabs(regmat[i]);
+			if (edgemax < cabs(regmat[i+(dim-1)*dim])) edgemax = cabs(regmat[i+(dim-1)*dim]);
+			if (edgemax < cabs(regmat[i*dim])) edgemax = cabs(regmat[i*dim]);
+			if (edgemax < cabs(regmat[dim-1+i*dim])) edgemax = cabs(regmat[dim-1+i*dim]);
 		}
 
-		geteigen (dim, regmat, ere, eim, lev, rev, workdim, work);
+		cgeteigen (dim, mat, eval, lev, rev, workdim, work, w2);
 
 		/* print the eigenvalues */
 		printf("%g\t%g", t, edgemax);
 
 		for (i=0; i<15; i++)
 		{
-			printf ("\t%g\t%g", ere[i], eim[i]);
+			printf ("\t%g\t%g", creal(eval[i]), cimag(eval[i]));
 		}
 		printf ("\n");
 	}
-	
 }
