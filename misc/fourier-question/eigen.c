@@ -119,7 +119,7 @@ main (int argc, char * argv[])
 			make_elt (m,n, &re, &im);
 
 			complex double z = re + I * im;
-			z *= exp(-0.1*(m*m+n*n)/(dim*dim));
+			z *= exp(-(m*m+n*n)/(dim*dim));
 
 			mat[i+j*dim] = z;
 			// printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);

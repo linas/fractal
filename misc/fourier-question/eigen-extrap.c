@@ -80,7 +80,7 @@ main (int argc, char * argv[])
 	int i,j, k;
 	
 	dim = 28;
-	set_npts(123123);
+	set_npts(923123);
 
 	if (argc < 2)
 	{
@@ -137,7 +137,7 @@ main (int argc, char * argv[])
 
 	// Now, start regulating
 	double t;
-	for (t=0.5; t>1.0e-10; t /= sqrt(sqrt(sqrt(2))))
+	for (t=32.0; t>1.0e-4; t /= sqrt(sqrt(sqrt(2))))
 	{
 		for (i=0; i<dim; i++)
 		{
@@ -160,14 +160,14 @@ main (int argc, char * argv[])
 			if (edgemax < cabs(regmat[dim-1+i*dim])) edgemax = cabs(regmat[dim-1+i*dim]);
 		}
 
-		cgeteigen (dim, mat, eval, lev, rev, workdim, work, w2);
+		cgeteigen (dim, regmat, eval, lev, rev, workdim, work, w2);
 
 		/* print the eigenvalues */
 		printf("%g\t%g", t, edgemax);
 
-		for (i=0; i<15; i++)
+		for (i=0; i<25; i++)
 		{
-			printf ("\t%g\t%g", creal(eval[i]), cimag(eval[i]));
+			printf ("\t%g\t%g\t%g", cabs(eval[i]), creal(eval[i]), cimag(eval[i]));
 		}
 		printf ("\n");
 	}
