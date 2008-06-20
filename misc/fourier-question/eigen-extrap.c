@@ -81,7 +81,7 @@ main (int argc, char * argv[])
 	int i,j, k;
 	
 	dim = 28;
-	set_npts(4123123);
+	set_npts(2123123);
 
 	if (argc < 2)
 	{
@@ -112,10 +112,7 @@ main (int argc, char * argv[])
 		{
 			/* Note transposed matrix'ing for FORTRAN */
 			// mat[i+j*dim] = ache_mp(i,j);
-			// mat[i+j*dim] = sst(i,j);
-			// mat[i+j*dim] = binomial(i,j) * exp (-(i+j)*0.2/dim);
 			// mat[i+j*dim] = mtm_svd(i,j);
-			// mat[i+j*dim] = mmt_svd(i,j);
 
 			long double re;
 			long double im;
@@ -127,6 +124,8 @@ main (int argc, char * argv[])
 			// printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
 		}
 		// printf("\n");
+		printf("# done row %d of %d\n", i, dim);
+		fflush(stdout);
 	}
 
 	int wd = getworkdim (dim, mat, ere, eim, lev, rev, work);
@@ -136,7 +135,8 @@ main (int argc, char * argv[])
 	work = (double *) realloc (work, workdim*sizeof (double));
 
 	// Now, start regulating
-	for (t=0.5; t>0.0001; t /= sqrt(sqrt(sqrt(2))))
+	double t;
+	for (t=0.5; t>1.0e-10; t /= sqrt(sqrt(sqrt(2))))
 	{
 		for (i=0; i<dim; i++)
 		{
@@ -144,7 +144,7 @@ main (int argc, char * argv[])
 			{
 				int m = i-dim/2;
 				int n = j - dim/2;
-				double reg = exp(-t*(2*m-n)*(2*m-n)/dim*dim);
+				double reg = exp(-t*(m*m+n*n)/dim*dim);
 				regmat[i+j*dim] = reg * mat[i+j*dim];
 			}
 		}
@@ -164,9 +164,9 @@ main (int argc, char * argv[])
 		/* print the eigenvalues */
 		printf("%g\t%g", t, edgemax);
 
-		for (i=0; i<11; i++)
+		for (i=0; i<15; i++)
 		{
-			printf ("\t%20.15g\t%g", ere[i], eim[i]);
+			printf ("\t%g\t%g", ere[i], eim[i]);
 		}
 		printf ("\n");
 	}

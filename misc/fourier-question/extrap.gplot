@@ -1,0 +1,26 @@
+
+set term png small
+set out 'extrap.png'
+
+# set term postscript eps color
+# set out 'extrap.ps'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Eigenvalues"
+set xlabel "t"
+set ylabel "eigen"
+set logscale x
+set yrange [0:0.5]
+
+plot "extrap.dat" using 1:5 title "1", \
+     "extrap.dat" using 1:7 title "2", \
+     "extrap.dat" using 1:9 title "3", \
+     "extrap.dat" using 1:11 title "4", \
+     "extrap.dat" using 1:13 title "5", \
+     "extrap.dat" using 1:15 title "6", \
+     "extrap.dat" using 1:17 title "7"
+
+
