@@ -144,7 +144,7 @@ main (int argc, char * argv[])
 			{
 				int m = i-dim/2;
 				int n = j - dim/2;
-				double reg = exp(-t*(m*m+n*n)/dim*dim);
+				double reg = exp(-t*(m*m+n*n)/(dim*dim));
 				regmat[i+j*dim] = reg * mat[i+j*dim];
 			}
 		}

@@ -8,8 +8,8 @@
  * T is triangular.
  *
  * Use LAPACK xGEEV routine
- * specifically, real double precision:
- * DGEEV
+ * specifically, complex double precision:
+ * ZGEEV
  *
  * Apply to find eigenvalues of the Fourier-of-Minkowski-question
  * operator
@@ -17,6 +17,7 @@
  * Linas Vepstas September 2004
  */
 
+#include <complex.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,10 +28,10 @@
 
 /* dry run -- get the working dimension */
 int 
-getworkdim (int dim, double *matrix,
-        double *eigenvalues_re, double *eigenvalues_im, 
-		  double *left_eigen, double *right_eigen,
-		  double *workspace)
+cgetworkdim (int dim, complex double *matrix, 
+        complex double *eigenvalues, 
+		  complex double *left_eigen, complex double *right_eigen,
+		  complex double *workspace, double *w2)
 {
 
 	char jobvl = 'V';
@@ -40,41 +41,40 @@ getworkdim (int dim, double *matrix,
 
 	workdim = -1;
 
-	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
-	       eigenvalues_re, eigenvalues_im, 
+	zgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
+	       eigenvalues, 
 			 left_eigen, &dim, right_eigen, &dim, 
-			 workspace, &workdim, &info);
+			 workspace, &workdim, w2, &info);
 
 	return (int) (workspace[0]+0.5);
 }
 
 int 
-geteigen (int dim, double *matrix, 
-        double *eigenvalues_re, double *eigenvalues_im, 
-		  double *left_eigen, double *right_eigen,
-		  int workdim, double *workspace)
+cgeteigen (int dim, complex double *matrix, 
+        complex double *eigenvalues, 
+		  complex double *left_eigen, complex double *right_eigen,
+		  int workdim, complex double *workspace, double *w2)
 {
-
 	char jobvl = 'V';
 	char jobvr = 'V';
 	int info;
 
-	dgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
-	       eigenvalues_re, eigenvalues_im, 
+	zgeev_ (&jobvl, &jobvr, &dim, matrix, &dim, 
+	       eigenvalues, 
 			 left_eigen, &dim, right_eigen, &dim, 
-			 workspace, &workdim, &info);
+			 workspace, &workdim, w2, &info);
 
 }
 
 
 main (int argc, char * argv[]) 
 {
-	double *mat;
-	double *ere;
-	double *eim;
-	double *lev;
-	double *rev;
-	double *work;
+	complex double *mat;
+	complex double *eval;
+	complex double *lev;
+	complex double *rev;
+	complex double *work;
+	double *w2;
 	int dim;
 	int workdim;
 	int i,j, k;
@@ -95,25 +95,22 @@ main (int argc, char * argv[])
 	printf ("# Numerically solved to rank=%d\n", dim);
 	printf ("#\n#\n");
 
-	mat = (double *) malloc (dim*dim*sizeof (double));
-	ere = (double *) malloc (dim*sizeof (double));
-	eim = (double *) malloc (dim*sizeof (double));
-	lev = (double *) malloc (dim*dim*sizeof (double));
-	rev = (double *) malloc (dim*dim*sizeof (double));
+	mat = (complex double *) malloc (dim*dim*sizeof (complex double));
+	eval = (complex double *) malloc (dim*sizeof (complex double));
+	lev = (complex double *) malloc (dim*dim*sizeof (complex double));
+	rev = (complex double *) malloc (dim*dim*sizeof (complex double));
 	workdim = 4*dim*dim;
-	work = (double *) malloc (workdim*sizeof (double));
+	work = (complex double *) malloc (workdim*sizeof (complex double));
+	w2 = (double *) malloc (dim*sizeof (double));
 
-	/* Insert values for the GKW operator at x=1 (y=1-x) */
+	/* Insert values for the operator */
 	for (i=0; i<dim; i++)
 	{
 		for (j=0; j<dim; j++)
 		{
 			/* Note transposed matrix'ing for FORTRAN */
 			// mat[i+j*dim] = ache_mp(i,j);
-			// mat[i+j*dim] = sst(i,j);
-			// mat[i+j*dim] = binomial(i,j) * exp (-(i+j)*0.2/dim);
 			// mat[i+j*dim] = mtm_svd(i,j);
-			// mat[i+j*dim] = mmt_svd(i,j);
 
 			long double re;
 			long double im;
@@ -121,28 +118,29 @@ main (int argc, char * argv[])
 			int n = j - dim/2;
 			make_elt (m,n, &re, &im);
 
-			re *= exp(-0.02*(2*m-n)*(2*m-n)/dim*dim);
+			complex double z = re + I * im;
+			z *= exp(-0.1*(m*m+n*n)/(dim*dim));
 
-			mat[i+j*dim] = re;
-			printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
+			mat[i+j*dim] = z;
+			// printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
 		}
-		printf("\n");
+		// printf("\n");
 	}
 
 	
-	int wd = getworkdim (dim, mat, ere, eim, lev, rev, work);
+	int wd = cgetworkdim (dim, mat, eval, lev, rev, work, w2);
 	printf ("# recommended dim=%d actual dim=%d\n#\n", wd, workdim);
 	// workdim = wd;
 	
-	work = (double *) realloc (work, workdim*sizeof (double));
-	geteigen (dim, mat, ere, eim, lev, rev, workdim, work);
+	work = (complex double *) realloc (work, workdim*sizeof (complex double));
+	cgeteigen (dim, mat, eval, lev, rev, workdim, work, w2);
 
 	/* ---------------------------------------------- */
 	/* print the eigenvalues */
 	printf("# Eigenvalues are:\n");
 	for (i=0; i<dim; i++)
 	{
-		printf ("# eigen[%d]=%20.15g +i %g  ratio=%20.15g\n", i, ere[i], eim[i], ere[i]/ere[i+1]);
+		printf ("# eigen[%d]=%g +i %g\n", i, creal(eval[i]), cimag(eval[i]));
 	}
 	printf ("\n\n");
 	
@@ -150,8 +148,6 @@ main (int argc, char * argv[])
 	if (dim < prtdim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
 	{
-		double tn = 1.0;
-		double thrn = 1.0;
 		for (j=0; j<prtdim; j++)
 		{
 			// printf ("# right %d'th eigenvector[%d]=%g (normalized=%g)\n", 
@@ -161,41 +157,8 @@ main (int argc, char * argv[])
 			// printf ("# right %d'th eigenvector[%d]=%g (vec ratio=%g)\n", 
 			//            i,j, rev[j+i*dim],  tn*rev[j+i*dim] );
 			//
-			// double r1 = 2.0 * rev[j+1+i*dim]/rev[j+i*dim] - 1.0;
-			// double r2 = 2.0 * rev[j+2+i*dim]/rev[j+1+i*dim] - 1.0;
-			// double r = r1/r2;
-			// r *= j*j*j*j*log(log (log (log (j+1))));
-			// r *= j;
-#if RECURRSION_RELATION
-			double r = rev[j+1+i*dim]- 0.5*rev[j+i*dim];
-			r /= rev[j-1+i*dim];
-			// r *= j*j*j* log(j+1) * log(j+1) * log(j+1);
-			r = log (r);
-			r /= j;
-			printf ("# right %d'th eigenvector[%d]=%g (term log ratio=%g)\n", 
-			           i,j, rev[j+i*dim], r);
-#endif
-#if WHO_KNOWS_WHAT
-			double r = rev[j+i*dim] / (rev[30+i*dim] * (1<<30));
-			r *= tn;
-			r -= 1.0;
-			r *= thrn;
-			printf ("# right %d'th eigenvector[%d]=%g (guh %g\n", 
-			            i,j, rev[j+i*dim], r);
-#endif
-#if BINARY
-			printf ("# right %d'th eigenvector[%d]=%g (binary ", 
-			            i,j, rev[j+i*dim]);
-			r = rev[j+i*dim] / (rev[25+i*dim] * (1<<25));
-			r *= tn;
-			prtbin (r);
-			printf (" )\n");
-#endif 
-			printf ("# right %d'th eigenvector[%d]=%g \n", 
-			            i,j, rev[j+i*dim]);
-			            
-			tn *= 2.0;
-			thrn *= sqrt (3.0);
+			printf ("# right %d'th eigenvector[%d]=%g +i %g\n", 
+			            i,j, creal(rev[j+i*dim]), cimag(rev[j+i*dim]));
 		}
 		printf ("#\n");
 	}
@@ -206,8 +169,8 @@ main (int argc, char * argv[])
 		{
 			// printf ("# left %d'th eigenvector[%d]=%g (normalized=%g)\n", 
 			//            i,j, lev[j+i*dim], lev[j+i*dim]/lev[i*dim]);
-			printf ("# left %d'th eigenvector[%d]=%g (ratio=%g)\n", 
-			            i,j, lev[j+i*dim], ((j+1)*lev[j+i*dim])/((j+2)*lev[j+1+i*dim]));
+			printf ("# left %d'th eigenvector[%d]=%g +i %g)\n", 
+			            i,j, creal(lev[j+i*dim]), cimag(lev[j+i*dim]));
 		}
 		printf ("#\n");
 	}
