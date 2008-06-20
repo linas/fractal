@@ -126,6 +126,7 @@ main (int argc, char * argv[])
 			// printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
 		}
 		// printf("\n");
+		printf("# Done with row %d of %d\n", i, dim);
 	}
 
 	
@@ -165,7 +166,7 @@ main (int argc, char * argv[])
 		/* print the eigenvalues */
 		printf("%g\t%g", t, edgemax);
 
-		for (i=0; i<25; i++)
+		for (i=0; i<65; i++)
 		{
 			printf ("\t%g\t%g\t%g", cabs(eval[i]), creal(eval[i]), cimag(eval[i]));
 		}
