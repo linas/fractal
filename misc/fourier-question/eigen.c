@@ -22,6 +22,7 @@
 #include <stdlib.h>
 
 #include "lapack.h"
+#include "gral-simple.h"
 
 
 /* dry run -- get the working dimension */
@@ -79,6 +80,7 @@ main (int argc, char * argv[])
 	int i,j, k;
 	
 	dim = 28;
+	set_npts(123123);
 
 	if (argc < 2)
 	{
@@ -111,7 +113,17 @@ main (int argc, char * argv[])
 			// mat[i+j*dim] = sst(i,j);
 			// mat[i+j*dim] = binomial(i,j) * exp (-(i+j)*0.2/dim);
 			// mat[i+j*dim] = mtm_svd(i,j);
-			mat[i+j*dim] = mmt_svd(i,j);
+			// mat[i+j*dim] = mmt_svd(i,j);
+
+			long double re;
+			long double im;
+			int m = i-dim/2;
+			int n = j - dim/2;
+			make_elt (m,n, &re, &im);
+
+			re *= exp(-0.02*(2*m-n)*(2*m-n)/dim*dim);
+
+			mat[i+j*dim] = re;
 			printf ("mat(%d, %d) = %g\n", i,j,mat[i+j*dim]);
 		}
 		printf("\n");
@@ -134,7 +146,7 @@ main (int argc, char * argv[])
 	}
 	printf ("\n\n");
 	
-	int prtdim = 36;
+	int prtdim = 10;
 	if (dim < prtdim) prtdim = dim;
 	for (i=0; i<prtdim; i++)
 	{
@@ -200,6 +212,7 @@ main (int argc, char * argv[])
 		printf ("#\n");
 	}
 	
+#if VALIDATE
 	/* ---------------------------------------------- */
 	/* Verify i'th eigenvector -- multiply by the matrix, see that 
 	 * we get the eigenvector back. */
@@ -229,7 +242,9 @@ main (int argc, char * argv[])
 	}
 	if (!validation_failed)
 		printf("# eigenvec valdidation success\n");
+#endif
 
+exit(0);
 	/* ---------------------------------------------- */
 	/* Print graphable data */
 	double y;
