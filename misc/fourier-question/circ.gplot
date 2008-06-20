@@ -1,0 +1,42 @@
+
+set term png small
+set out 'circ.png'
+
+# set term postscript eps color
+# set out 'circ.ps'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Eigenvalues"
+set xlabel "real part"
+set ylabel "imaginary part"
+set xrange [-1.0:1.0]
+set yrange [-1.0:1.0]
+set size square
+
+plot "extrap.dat" using 4:5 title "1", \
+     "extrap.dat" using 7:8 title "2", \
+     "extrap.dat" using 10:11 title "3", \
+     "extrap.dat" using 13:14 title "4", \
+     "extrap.dat" using 16:17 title "5", \
+     "extrap.dat" using 19:20 title "6", \
+     "extrap.dat" using 22:23 title "7", \
+     "extrap.dat" using 25:26 title "8", \
+     "extrap.dat" using 28:29 title "9", \
+     "extrap.dat" using 31:32 title "10", \
+     "extrap.dat" using 34:35 title "11", \
+     "extrap.dat" using 37:38 title "12", \
+     "extrap.dat" using 40:41 title "13", \
+     "extrap.dat" using 43:44 title "14", \
+     "extrap.dat" using 46:47 title "15", \
+     "extrap.dat" using 49:50 title "16", \
+     "extrap.dat" using 52:53 title "17", \
+     "extrap.dat" using 55:56 title "18", \
+     "extrap.dat" using 58:59 title "19", \
+     sqrt(1-x*x) title "", \
+     -sqrt(1-x*x) title ""
+#      "extrap.dat" using 61:62 title "20"
+
+

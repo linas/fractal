@@ -141,6 +141,7 @@ main (int argc, char * argv[])
 	
 	work = (complex double *) realloc (work, workdim*sizeof (complex double));
 
+#define PRINT_EIGENVALUES 0
 #if PRINT_EIGENVALUES
 	// Now, start regulating
 	double t;
@@ -206,6 +207,8 @@ main (int argc, char * argv[])
 	}
 #endif
 
+#define PRINT_EIGENVECS 1
+#if PRINT_EIGENVECS
 	// Compute the eigenvalues and eigenvectors
 	cgeteigen (dim, mat, eval, lev, rev, workdim, work, w2);
 
@@ -237,7 +240,7 @@ main (int argc, char * argv[])
 	{
 		printf("%g", x);
 
-		for (i=0; i<25; i++)
+		for (i=0; i<20; i++)
 		{
 			int iv = idx[i];
 
@@ -256,4 +259,5 @@ main (int argc, char * argv[])
 
 		printf ("\n");
 	}
+#endif
 }
