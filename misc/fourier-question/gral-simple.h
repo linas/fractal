@@ -7,4 +7,5 @@
  */
 
 void set_npts(int);
-void make_elt(int m, int n, long double *pre, long double *pim);
+void make_g_plain_elt(int m, int n, long double *pre, long double *pim);
+void make_full_elt(int m, int n, long double *pre, long double *pim);

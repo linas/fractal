@@ -75,12 +75,13 @@ main (int argc, char * argv[])
 	complex double *rev;
 	complex double *work;
 	double *w2;
+	int *idx;
 	int dim;
 	int workdim;
 	int i,j, k;
 	
 	dim = 28;
-	set_npts(923123);
+	set_npts(123123);
 
 	if (argc < 2)
 	{
@@ -94,6 +95,7 @@ main (int argc, char * argv[])
 	printf ("# or maybe something else, depending on the version of this code\n");
 	printf ("# Numerically solved to rank=%d\n", dim);
 	printf ("#\n#\n");
+	fflush(stdout);
 
 	mat = (complex double *) malloc (dim*dim*sizeof (complex double));
 	regmat = (complex double *) malloc (dim*dim*sizeof (complex double));
@@ -103,6 +105,7 @@ main (int argc, char * argv[])
 	workdim = 4*dim*dim;
 	work = (complex double *) malloc (workdim*sizeof (complex double));
 	w2 = (double *) malloc (2*dim*sizeof (double));
+	idx = (int *) malloc (dim*sizeof (int));
 
 	/* Insert values for the operator */
 	for (i=0; i<dim; i++)
@@ -117,7 +120,8 @@ main (int argc, char * argv[])
 			long double im;
 			int m = i-dim/2;
 			int n = j - dim/2;
-			make_elt (m,n, &re, &im);
+			// make_g_plain_elt (m,n, &re, &im);
+			make_full_elt (m,n, &re, &im);
 
 			complex double z = re + I * im;
 			z *= exp(-0.1*(m*m+n*n)/(dim*dim));
@@ -127,6 +131,7 @@ main (int argc, char * argv[])
 		}
 		// printf("\n");
 		printf("# Done with row %d of %d\n", i, dim);
+		fflush(stdout);
 	}
 
 	
@@ -136,6 +141,7 @@ main (int argc, char * argv[])
 	
 	work = (complex double *) realloc (work, workdim*sizeof (complex double));
 
+#if PRINT_EIGENVALUES
 	// Now, start regulating
 	double t;
 	for (t=32.0; t>1.0e-4; t /= sqrt(sqrt(sqrt(2))))
@@ -161,15 +167,93 @@ main (int argc, char * argv[])
 			if (edgemax < cabs(regmat[dim-1+i*dim])) edgemax = cabs(regmat[dim-1+i*dim]);
 		}
 
+		// Compute the eigenvalues and eigenvectors
 		cgeteigen (dim, regmat, eval, lev, rev, workdim, work, w2);
+
+		// Sort by magnitude
+		for (i=0; i<dim; i++)
+		{
+			idx[i] = i;
+			w2[i] = cabs(eval[i]);
+		}
+		for (i=0; i<dim; i++)
+		{
+			for (j=i+i; j<dim; j++)
+			{
+				if (w2[j] > w2[i])
+				{
+					int k = idx[i];
+					idx[i] = idx[j];
+					idx[j] = k;
+					double tmp = w2[i];
+					w2[i] = w2[j];
+					w2[j] = tmp;
+				}
+			}
+		}
 
 		/* print the eigenvalues */
 		printf("%g\t%g", t, edgemax);
 
-		for (i=0; i<65; i++)
+		int prtdim = dim;
+		if (prtdim > 25) prtdim = 25;
+		for (i=0; i<prtdim; i++)
 		{
-			printf ("\t%g\t%g\t%g", cabs(eval[i]), creal(eval[i]), cimag(eval[i]));
+			complex double e = eval[idx[i]];
+			printf ("\t%g\t%g\t%g", cabs(e), creal(e), cimag(e));
 		}
+		printf ("\n");
+	}
+#endif
+
+	// Compute the eigenvalues and eigenvectors
+	cgeteigen (dim, mat, eval, lev, rev, workdim, work, w2);
+
+	// Sort by magnitude
+	for (i=0; i<dim; i++)
+	{
+		idx[i] = i;
+		w2[i] = cabs(eval[i]);
+	}
+	for (i=0; i<dim; i++)
+	{
+		for (j=i+i; j<dim; j++)
+		{
+			if (w2[j] > w2[i])
+			{
+				int k = idx[i];
+				idx[i] = idx[j];
+				idx[j] = k;
+				double tmp = w2[i];
+				w2[i] = w2[j];
+				w2[j] = tmp;
+			}
+		}
+	}
+
+	// print the eigenvectors
+	double x;
+	for (x=0.0; x<=1.0; x+=0.0002)
+	{
+		printf("%g", x);
+
+		for (i=0; i<25; i++)
+		{
+			int iv = idx[i];
+
+			complex double acc = 0.0;
+			int n;
+			for (n=0; n<dim; n++)
+			{
+				complex double nx = 2.0 * M_PI * (n-dim/2)*x * I;
+				complex double z = cexp(nx);
+				acc += z * rev[n+iv*dim];
+				// acc += z * lev[n+iv*dim];
+			}
+
+			printf("\t%g\t%g", creal(acc), cimag(acc));
+		}
+
 		printf ("\n");
 	}
 }

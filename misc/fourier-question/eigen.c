@@ -80,7 +80,7 @@ main (int argc, char * argv[])
 	int i,j, k;
 	
 	dim = 28;
-	set_npts(123123);
+	set_npts(423123);
 
 	if (argc < 2)
 	{
@@ -116,7 +116,7 @@ main (int argc, char * argv[])
 			long double im;
 			int m = i-dim/2;
 			int n = j - dim/2;
-			make_elt (m,n, &re, &im);
+			make_g_plain_elt (m,n, &re, &im);
 
 			complex double z = re + I * im;
 			z *= exp(-(m*m+n*n)/(dim*dim));

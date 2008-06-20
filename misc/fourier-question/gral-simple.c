@@ -23,7 +23,7 @@ void set_npts(int n)
 	delta = 1.0L / ((long double) n);
 }
 
-void make_elt(int m, int n, long double *pre, long double *pim)
+void make_g_plain_elt(int m, int n, long double *pre, long double *pim)
 {
 	long double x;
 	long double re = 0.0L;
@@ -46,21 +46,32 @@ void make_elt(int m, int n, long double *pre, long double *pim)
 	*pim = im;
 }
 
-void fill_matrix(int sz)
+void make_full_elt(int m, int n, long double *pre, long double *pim)
 {
-	int i, j;
+	long double x;
+	long double re = 0.0L;
+	long double im = 0.0L;
+	int i;
 
-	for (i=-sz; i<=sz; i++)
+	for (i=0; i<npts; i++)
 	{
-		for (j=-sz; j<=sz; j++)
-		{
-			long double re = 0.0L;
-			long double im = 0.0L;
+		x = ((long double) i)*delta;
+		x = n/(2.0L-x) - m*x;
+		x *= 2.0L * M_PIl;
+		re += cosl(x);
+		im += sinl(x);
 
-			make_elt(i,j, &re, &im);
-			printf("W[%d, %d] = %Lg +i %Lg\n", i, j, re, im);
-		}
-		printf ("\n");
+		x = ((long double) i)*delta;
+		x = n*(1.0L-x)/(2.0L-x) - m*x;
+		x *= 2.0L * M_PIl;
+		re -= cosl(x);
+		im -= sinl(x);
 	}
+
+	re *= delta;
+	im *= delta;
+
+	*pre = re;
+	*pim = im;
 }
 

@@ -20,7 +20,7 @@ void slice_row(int row, int colmin, int colmax)
 		long double re = 0.0L;
 		long double im = 0.0L;
 
-		make_elt(row, j, &re, &im);
+		make_g_plain_elt(row, j, &re, &im);
 		printf("%d	%d	%Lg	%Lg\n", row, j, re, im);
 	}
 }
@@ -34,7 +34,7 @@ void slice_col(int rowmin, int rowmax, int col)
 		long double re = 0.0L;
 		long double im = 0.0L;
 
-		make_elt(i, col, &re, &im);
+		make_g_plain_elt(i, col, &re, &im);
 		printf("%d	%d	%Lg	%Lg\n", i, col, re, im);
 	}
 }
