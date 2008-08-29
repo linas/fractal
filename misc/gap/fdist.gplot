@@ -7,14 +7,26 @@ set out 'fdist.png'
 set data style lines
 set key left
 
-# used to generate the graaph in the text
-# set title "Distribution of Farey Numbers"
+#################################################
+# Used to generate the graph in the text
+# set title "Cumulative Distribution of Farey Numbers"
 # set xlabel "?(p/q)"
 # set ylabel "Probability (Normalized Bin Count)"
 # plot "fdist.dat" using 2:4 title "sum", \
 #      "fdist.dat" using 2:5 title "exact"
 
-# used to generate the graaph in the text
+#################################################
+# Used to generate the graph in the text
+#
+set term postscript
+set out 'fdist-65K.ps'
+set title "Distribution of Farey Numbers"
+set xlabel "?(p/q)"
+set ylabel "Probability (Normalized Bin Count)"
+plot "fdist.dat" using 2:3 title ""
+
+#################################################
+# Used to generate the graph in the text
 # set title "Integral of ?'(?^-1 (x))"
 # set xlabel ""
 # set ylabel "Integral"
@@ -29,8 +41,8 @@ set key left
 # plot "fdist.dat" using 2:3 title ""
 # plot "fdist.dat" using 5:3 title ""
 
-plot "fdist.dat" using 2:($6/0.582685) title "pow", \
-     "fdist.dat" using 2:5 title "exact"
+# plot "fdist.dat" using 2:($6/0.582685) title "pow", \
+#     "fdist.dat" using 2:5 title "exact"
 
 # plot "fdist.dat" using 4:3 title ""
 # plot "fdist.dat" using 2:4 title "sum", \

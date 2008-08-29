@@ -1,4 +1,3 @@
-
 /*
  * fdist.C
  *
@@ -31,7 +30,7 @@ void GetNextDyadic (unsigned int *n, unsigned int *d)
 }
 
 
-void bincount(int nbins, int depth, double exponent)
+void bincount(int nbins, int depth)
 {
 	int i;
 
@@ -79,9 +78,12 @@ void bincount(int nbins, int depth, double exponent)
 		double rect = bin[i] / ((double) cnt);
 		gral += rect;
 
+
 		/* raise the function to some power ... */
 		double bcnt = rect * nbins;
-		egral += pow (bcnt, exponent) / ((double) nbins);
+		double ent = bcnt * log(bcnt);
+
+		// egral += pow (bcnt, exponent) / ((double) nbins);
 		
 		/* square */
 		sqgral += rect*bcnt;
@@ -96,7 +98,7 @@ void bincount(int nbins, int depth, double exponent)
 
 		if (1.0e-8 < delt) dgral += rect / delt;
 
-		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bcnt, gral, far, egral, dgral, sqgral);
+		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bcnt, gral, far, ent, dgral, sqgral);
 		fflush (stdout);
 		fprev = far;
 	}
@@ -169,14 +171,14 @@ main(int argc, char *argv[])
 
 	if (argc <3)
 	{
-		fprintf (stderr, "Usage: %s <nbins> <tree-depth> <pow>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <nbins> <tree-depth> <arg>\n", argv[0]);
 		exit (1);
 	}
 	int nbins = atoi (argv[1]);
 	int depth = atoi (argv[2]);
-	double exponent = atof (argv[3]);
+	double misc_arg = atof (argv[3]);
 
-	bincount (nbins, depth, exponent);
+	bincount (nbins, depth);
 	// gmp_bincount (nbins, depth);
 }
 
