@@ -18,12 +18,12 @@ set key left
 #################################################
 # Used to generate the graph in the text
 #
-set term postscript
-set out 'fdist-65K.ps'
-set title "Distribution of Farey Numbers"
-set xlabel "?(p/q)"
-set ylabel "Probability (Normalized Bin Count)"
-plot "fdist.dat" using 2:3 title ""
+# set term postscript
+# set out 'fdist-65K.ps'
+# set title "Distribution of Farey Numbers"
+# set xlabel "?(p/q)"
+# set ylabel "Probability (Normalized Bin Count)"
+# plot "fdist.dat" using 2:3 title ""
 
 #################################################
 # Used to generate the graph in the text
@@ -38,7 +38,10 @@ plot "fdist.dat" using 2:3 title ""
 
 # set yrange [0:]
 
-# plot "fdist.dat" using 2:3 title ""
+set title "Entropy"
+set ylabel "entropy"
+set xlabel "p/q"
+plot "fdist.dat" using 2:6 title ""
 # plot "fdist.dat" using 5:3 title ""
 
 # plot "fdist.dat" using 2:($6/0.582685) title "pow", \

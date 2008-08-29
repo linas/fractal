@@ -70,7 +70,6 @@ void bincount(int nbins, int depth)
 	double gral = 0.0;
 	double egral = 0.0;
 	double dgral = 0.0;
-	double sqgral = 0.0;
 	double fprev = 0.0;
 	for (i=0; i<nbins; i++)
 	{
@@ -78,15 +77,16 @@ void bincount(int nbins, int depth)
 		double rect = bin[i] / ((double) cnt);
 		gral += rect;
 
+		/* Be careful to bin-count the entropy 
+		 * (use discrete not continuous formula) */
+		double entropy = - rect * log(rect);
+		if (bin[i] == 0) entropy = 0;
+		egral += entropy;
 
 		/* raise the function to some power ... */
 		double bcnt = rect * nbins;
-		double ent = bcnt * log(bcnt);
 
 		// egral += pow (bcnt, exponent) / ((double) nbins);
-		
-		/* square */
-		sqgral += rect*bcnt;
 		
 		double x = ((double) i) / ((double) nbins);
 
@@ -98,10 +98,15 @@ void bincount(int nbins, int depth)
 
 		if (1.0e-8 < delt) dgral += rect / delt;
 
-		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bcnt, gral, far, ent, dgral, sqgral);
+#if 1
+		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", 
+			i, x, bcnt, gral, far, entropy, dgral, egral);
 		fflush (stdout);
+#endif
 		fprev = far;
 	}
+
+	printf ("#Total entropy =  %18.16g\n", egral);
 }
 
 void 
