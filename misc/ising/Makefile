@@ -8,8 +8,8 @@ EXES= ising kac lr-tree partition takagi-gral
 all: $(EXES)
 
 
-ising:	ising.o $(LIB)/question.o $(LIB)/Farey.o $(LIB)/gcf.o
-kac:	kac.o $(LIB)/question.o $(LIB)/Farey.o $(LIB)/gcf.o
+ising:	ising.o
+kac:	kac.o 
 lr-tree:	lr-tree.o
 partition:	partition.o
 takagi-gral:	takagi-gral.o
@@ -18,7 +18,7 @@ takagi-gral:	takagi-gral.o
 	cc -c -g -O2 -I $(INC) $<
 
 .o:
-	cc -g -o $@ $^ -lstdc++ -lm 
+	cc -g -o $@ $^ -lfunc -lstdc++ -lm 
 
 
 clean:
