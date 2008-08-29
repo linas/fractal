@@ -18,7 +18,7 @@ takagi-gral:	takagi-gral.o
 	cc -c -g -O2 -I $(INC) $<
 
 .o:
-	cc -g -o $@ $^ -lfunc -lstdc++ -lm 
+	cc -g -o $@ $^ -L $(LIB) -lfunc -lstdc++ -lm 
 
 
 clean:
