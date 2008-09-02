@@ -71,7 +71,6 @@ void bincount(int nbins, int depth)
 	double egral = 0.0;
 	double ejgral = 0.0;
 	double dgral = 0.0;
-	double fgral = 0.0;
 	double fprev = 0.0;
 	for (i=0; i<nbins; i++)
 	{
@@ -94,16 +93,15 @@ void bincount(int nbins, int depth)
    	double far = f.ToFarey (); 
 
 		/* Integral of the jacobian */
-		double delt = (far - fprev)* nbins * nbins;
+		double delt = (far - fprev) * nbins;
 		// if (0.0 != delt)
 		if (1.0e-8 < delt)
 		{
-			fgral += 1.0 / delt;
 			dgral += rect / delt;
 			ejgral += entropy / delt;
 		}
 
-#if 0
+#if 1
 		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g %8.6g\n", 
 			i, x, bcnt, gral, far, entropy, dgral, egral, ejgral);
 		fflush (stdout);
