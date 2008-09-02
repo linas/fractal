@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= f-wavelet fdist rdist
+EXES= f-wavelet fdist fourier rdist
 
 all: 	$(EXES)
 
@@ -28,4 +28,5 @@ dist:
 
 f-wavelet.o:  f-wavelet.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 fdist.o:  fdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
+fourier.o:  fourier.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 rdist.o:  rdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h

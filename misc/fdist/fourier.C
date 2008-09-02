@@ -14,6 +14,8 @@
 #include "Farey.h"
 #include "FareyTree.h"
 
+double * bin;
+
 void bincount(int nbins, int depth)
 {
 	int i;
@@ -26,16 +28,16 @@ void bincount(int nbins, int depth)
 
 	FareyIterator fi;
 
-	bin = (int *) malloc (nbins * sizeof (int));
+	double * bin = (double *) malloc (nbins * sizeof (double));
 	for (i=0; i<nbins; i++)
 	{
-		bin[i] = 0;
+		bin[i] = 0.0;
 	}
-	bin[0] = 1;
-	bin[nbins-1] = 1;
+	bin[0] = 1.0;
+	bin[nbins-1] = 1.0;
 
 	/* Compute the distribution by bining */
-	int cnt =2;
+	int cnt = 2;
 	for (i=0; i<max; i++)
 	{
 		int n,d;
@@ -45,62 +47,72 @@ void bincount(int nbins, int depth)
 		double x = ((double) n)/ ((double) d);
 		x *= nbins;
 		int ib = (int) x;
-		bin [ib] ++;
+		bin [ib] += 1.0;
 		cnt ++;
+	}
+
+	/* renormalize */
+	for (i=0; i<nbins; i++)
+	{
+		bin[i] /= (double) cnt;
+	}
+
+}
+
+void fourier (int nbins, int freq_max)
+{
+	int i, n;
+
+	double *fre = (double *) malloc (freq_max*sizeof(double));
+	double *fim = (double *) malloc (freq_max*sizeof(double));
+
+	for (n=0; n<freq_max; n++)
+	{
+		fre[n] = 0.0;
+		fim[n] = 0.0;
 	}
 
 	/* Compute the integral of the distribution */
    ContinuedFraction f;
-	double gral = 0.0;
-	double egral = 0.0;
-	double dgral = 0.0;
-	double fprev = 0.0;
+
 	for (i=0; i<nbins; i++)
 	{
-		/* gral is the ordinary integral of the bin count */
-		double rect = bin[i] / ((double) cnt);
-		gral += rect;
+		/* x is the midpoint of the bin */
+		double x = ((double) 2*i+1) / ((double) 2*nbins);
 
-		/* Be careful to bin-count the entropy 
-		 * (use discrete not continuous formula) */
-		double entropy = - rect * log(rect);
-		if (bin[i] == 0) entropy = 0;
-		egral += entropy;
-
-		double x = ((double) i) / ((double) nbins);
-
+		/* Likewise, the midpoint */
    	f.SetRatio (2*i+1, 2*nbins);
    	double far = f.ToFarey (); 
 
-		/* Integral of the jacobian */
-		double delt = (far - fprev)*nbins;
-
-		if (1.0e-8 < delt) dgral += rect / delt;
-
-#if 1
-		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", 
-			i, x, bcnt, gral, far, entropy, dgral, egral);
-		fflush (stdout);
-#endif
-		fprev = far;
+		for (n=0; n<freq_max; n++)
+		{
+			double re = cos(2.0*M_PI*n*far);
+			double im = sin(2.0*M_PI*n*far);
+			fre[n] += re;
+			fim[n] += im;
+		}
 	}
 
-	printf ("#Total entropy =  %18.16g\n", egral);
+	for (n=0; n<freq_max; n++)
+	{
+		printf ("%d	%8.6g	%8.6g\n", n, fre[n], fim[n]);
+	}
 }
 
 main(int argc, char *argv[])
 {
 	int i;
 
-	if (argc <3)
+	if (argc < 4)
 	{
-		fprintf (stderr, "Usage: %s <nbins> <tree-depth> <arg>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <nbins> <tree-depth> <freq>\n", argv[0]);
 		exit (1);
 	}
 	int nbins = atoi (argv[1]);
 	int depth = atoi (argv[2]);
-	double misc_arg = atof (argv[3]);
+	int max_freq = atoi (argv[3]);
 
-	bincount (nbins, depth);
+	// bincount (nbins, depth);
+	fourier (nbins, max_freq);
 }
 
