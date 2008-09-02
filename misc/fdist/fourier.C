@@ -1,34 +1,18 @@
 /*
- * fdist.C
- *
+ * fourier.C
+ * 
+ * Fourier transform of
  * Distribution of the Farey Numbers on the unit interval
  *
  * Linas October 2004
+ * Linas Sept 2008
  */
-#include <gmp.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "Farey.h"
 #include "FareyTree.h"
-
-void GetNextDyadic (unsigned int *n, unsigned int *d)
-{
-	static unsigned int last_d = 1;
-	static unsigned int last_n = 1;
-
-	last_n += 2;
-	if (last_n > last_d)
-	{
-		last_d *= 2;
-		last_n = 1;
-	}
-
-	*n = last_n;
-	*d = last_d;
-}
-
 
 void bincount(int nbins, int depth)
 {
@@ -42,7 +26,7 @@ void bincount(int nbins, int depth)
 
 	FareyIterator fi;
 
-	int *bin = (int *) malloc (nbins * sizeof (int));
+	bin = (int *) malloc (nbins * sizeof (int));
 	for (i=0; i<nbins; i++)
 	{
 		bin[i] = 0;
@@ -83,11 +67,6 @@ void bincount(int nbins, int depth)
 		if (bin[i] == 0) entropy = 0;
 		egral += entropy;
 
-		/* raise the function to some power ... */
-		double bcnt = rect * nbins;
-
-		// egral += pow (bcnt, exponent) / ((double) nbins);
-		
 		double x = ((double) i) / ((double) nbins);
 
    	f.SetRatio (2*i+1, 2*nbins);
@@ -109,67 +88,6 @@ void bincount(int nbins, int depth)
 	printf ("#Total entropy =  %18.16g\n", egral);
 }
 
-void 
-gmp_bincount(int nbins, int depth)
-{
-	int i;
-
-	int max = 1 << depth;
-	printf ("#\n# nbins=%d   tree depth=%d\n#\n",nbins,depth);
-
-	int *bin = (int *) malloc (nbins * sizeof (int));
-	for (i=0; i<nbins; i++)
-	{
-		bin[i] = 0;
-	}
-	bin[0] = 1;
-	bin[nbins-1] = 1;
-
-	mpz_t gib, gn, gnbins;
-	mpz_init (gib);
-	mpz_init (gn);
-	mpz_init (gnbins);
-	mpz_set_ui (gnbins, nbins);
-
-	/* Compute the distribution by bining */
-	unsigned int cnt =2;
-	for (i=0; i<max; i++)
-	{
-		unsigned int n,d;
-		GetNextDyadic (&n, &d);
-
-		// implement the following bining in gmp:
-		// double x = ((double) n)/ ((double) d);
-		// x *= nbins;
-		// int ib = (int) x;
-
-		mpz_mul_ui (gn, gnbins, n);
-		mpz_fdiv_q_ui (gib, gn, d);
-
-		unsigned int ib = mpz_get_ui (gib);
-
-		bin [ib] ++;
-		cnt ++;
-	}
-
-	/* Compute the integral of the distribution */
-   ContinuedFraction f;
-	double gral = 0.0;
-	for (i=0; i<nbins; i++)
-	{
-		double bcnt = bin[i];
-		bcnt /= (double) cnt;
-		gral += bcnt;
-		bcnt *= nbins;
-		double x = ((double) i) / ((double) nbins);
-
-   	f.SetRatio (2*i+1, 2*nbins);
-   	double far = f.ToFarey (); 
-
-		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bcnt, gral, far);
-	}
-}
-
 main(int argc, char *argv[])
 {
 	int i;
@@ -184,6 +102,5 @@ main(int argc, char *argv[])
 	double misc_arg = atof (argv[3]);
 
 	bincount (nbins, depth);
-	// gmp_bincount (nbins, depth);
 }
 

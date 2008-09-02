@@ -20,7 +20,7 @@ dist:
 	tar -zcvf fdist.tgz *.c *.C *.gplot Makefile .cvsignore
 
 .C.o:
-	$(CC) -c -O2 $<
+	$(CC) -c -g -O2 $<
 
 .o:
 	$(CC) -o $* $< -L$(LIB) -lfunc -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++ 
