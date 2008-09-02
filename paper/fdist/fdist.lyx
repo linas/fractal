@@ -858,7 +858,7 @@ c_{n}=\int_{0}^{1}\exp\left(2\pi in?\left(u\right)\right)\,\left[?^{\prime}\left
 
 \end_inset
 
- and then evaluating the above by means of bin-counting, the point being
+and then evaluating the above by means of bin-counting, the point being
  that it is straight-forward to bin-count 
 \begin_inset Formula $?^{\prime}\left(u\right)$
 \end_inset
@@ -882,7 +882,7 @@ reference "fig:DFT-of-Inverse"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \begin_inset Caption
@@ -904,7 +904,6 @@ DFT of Inverse Jacobian
 \begin_layout Standard
 \begin_inset Graphics
 	filename fprime.ps
-	lyxscale 50
 	width 100col%
 
 \end_inset
@@ -927,12 +926,124 @@ for the range
 \begin_inset Formula $1\le n\le2500$
 \end_inset
 
- obtained by bin-counting the first 16 million Farey fractions into 1.6 million
+ obtained by bin-counting the first 32 million Farey fractions into 4.6 million
  bins.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+noise
+\begin_inset Quotes erd
+\end_inset
+
+ in the figure is best eliminated by moving to an ever-greater number of
+ bins.
+ Visible are sharp spikes, of equal height, that occur at 
+\begin_inset Formula $n=2^{m}$
+\end_inset
+
+ for integer 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Also clearly visible is a sawtooth of spikes that 
+\begin_inset Quotes eld
+\end_inset
+
+chirp
+\begin_inset Quotes erd
+\end_inset
+
+ as they approach the primary spikes.
+ There also appears to be additional structure, although it is difficult
+ of make out visually at this scale.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Standard
+just as the previous figures, this was prepared with fdist/fourier.C and
+ with fcoff.gplot but with the .C file compiled with different inner loops
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
+By contrast, the Fourier coefficients of just plain 
+\begin_inset Formula $?^{\prime}\left(x\right)$
+\end_inset
 
+ do not exhibit any such regular pattern, and instead give the general appearenc
+e of noise.
+ These are shown in figure 
+\begin_inset LatexCommand ref
+reference "fig:DFT-of-deriv"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:DFT-of-deriv"
+
+\end_inset
+
+DFT of the Derivative
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename fq-prime.ps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This figure shows the fourier coefficients given by 
+\begin_inset Formula \[
+d_{n}=\int_{0}^{1}\exp\left(2\pi inx\right)\,?^{\prime}\left(x\right)\, dx\]
+
+\end_inset
+
+ obtained for 
+\begin_inset Formula $0\le n\le600$
+\end_inset
+
+ by bin-counting the first 16 million Farey fractions into 1.6 million bins.
+ Unlike the previous figures, this shows no obvious fractal or self-similar
+ structure.
 \end_layout
 
 \end_inset
