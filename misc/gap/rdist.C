@@ -3,6 +3,7 @@
  *
  * Distribution of the rationals
  * converted to use gnu multiple precision libs
+ * Derived from fdist.C originally
  *
  * Linas October 2004
  */

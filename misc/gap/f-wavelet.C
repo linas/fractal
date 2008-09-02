@@ -2,13 +2,14 @@
 /*
  * f-wavelet.C
  *
- * Obtain binaryu coefficieints corresponding to 
+ * Obtain binary coefficieints corresponding to 
  * Distribution of the Farey Numbers on the unit interval
  * This may or may not require wavelet-like analysis.
  *
+ * derived from fdist.C orginally
+ *
  * Linas October 2004
  */
-#include <gmp.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
