@@ -7,7 +7,25 @@
  * Linas September 2008
  */
 
+#include <math.h>
+#include <stdio.h>
+
 double *zeros;
+
+void read_zeros (int nzeros)
+{
+	int i;
+	zeros = (double *) malloc (nzeros * sizeof(double));
+	FILE * fh = fopen ("zeros1");
+	for (i=0; i<nzeros; i++)
+	{
+		char buff[100];
+		fgets(buff, 100, fh);
+		zeros[i] = atof(buff);
+printf ("its %g\n", zeros[i]);
+	}
+	fclose (fh);
+}
 
 void coeffs(int nmax)
 {
@@ -32,5 +50,6 @@ void coeffs(int nmax)
 main()
 {
 
+	read_zeros(30);
 	coeffs();
 }
