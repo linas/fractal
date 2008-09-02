@@ -100,10 +100,26 @@ void fourier (int nbins, int freq_max)
 		fim[n] /= (double) nbins;
 	}
 
+#if 0
 	for (n=0; n<freq_max; n++)
 	{
 		printf ("%d	%8.6g	%8.6g\n", n, fre[n], fim[n]);
 	}
+#endif
+
+	/* rebin */
+	int npts = 600;
+	for(i=0; i<npts; i++)
+	{
+		double x = ((double) i) / ((double) npts);
+		double fx = 0.0;
+		for (n=0; n<freq_max; n++)
+		{
+			fx += fre[n] * cos(2.0*M_PI*n*x);
+		}
+		printf ("%8.6g	%8.6g\n", x, fx);
+	}
+
 }
 
 main(int argc, char *argv[])
