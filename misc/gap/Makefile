@@ -37,7 +37,6 @@ conj.o:	conj.c
 dyadic.o:	dyadic.C
 entropy.o:  entropy.C $(LIB)/libfunc.a $(INC)/Farey.h
 exacto.o:  exacto.C $(LIB)/libfunc.a $(INC)/Farey.h
-f-wavelet.o:  f-wavelet.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 feigen.o: feigen.C $(LIB)/libfunc.a $(INC)/Farey.h
 fiddle.o:  fiddle.C $(LIB)/libfunc.a $(INC)/Farey.h
 fliptree.o:  fliptree.C $(LIB)/libfunc.a $(INC)/Farey.h
@@ -54,7 +53,6 @@ pegs.o:  pegs.C $(LIB)/libfunc.a $(INC)/gcf.h
 pair.o:  pair.C $(LIB)/libfunc.a $(INC)/Farey.h
 quest.o:  quest.C $(LIB)/libfunc.a $(INC)/Farey.h
 rand-measure.o:	rand-measure.C $(LIB)/libfunc.a $(INC)/gcf.h
-rdist.o:  rdist.C $(LIB)/libfunc.a $(INC)/Farey.h
 summy.o: summy.C $(LIB)/libfunc.a $(INC)/Farey.h
 swap.o:  swap.C $(LIB)/libfunc.a $(INC)/Farey.h
 sway.o:  sway.C $(LIB)/libfunc.a $(INC)/Farey.h
