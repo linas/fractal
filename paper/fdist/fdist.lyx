@@ -1,59 +1,75 @@
-#LyX 1.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 221
+#LyX 1.5.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
 \textclass article
 \language english
 \inputencoding auto
-\fontscheme pslatex
+\font_roman times
+\font_sans helvet
+\font_typewriter courier
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
 \graphics default
 \paperfontsize default
-\spacing single 
-\papersize Default
-\paperpackage a4
-\use_geometry 0
-\use_amsmath 1
-\use_natbib 0
-\use_numerical_citations 0
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \defskip medskip
 \quotes_language english
-\quotes_times 2
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\end_header
 
-\layout Title
+\begin_body
 
+\begin_layout Title
 Modular Fractal Measures
-\layout Author
+\end_layout
 
+\begin_layout Author
 Linas Vepstas <linas@linas.org>
-\layout Date
+\end_layout
 
-12 October 2004 (updated 25 September 2006)
-\layout Abstract
+\begin_layout Date
+12 October 2004 (updated 2 September 2008)
+\end_layout
 
+\begin_layout Abstract
 A notable example of a discontinuouis-everywhere function that is not traditiona
 lly integrable, yet, when properly defined, can be integrated, is derivative
  of the Minkowski question mark function.
  It, and its generalizations are known as 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 multi-fractal measures
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
  Thus, this paper explores what it means to 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 take the derivative of the question mark function
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
  As a side-effect, all of the various functions that occur have a particular
@@ -61,50 +77,58 @@ take the derivative of the question mark function
  symmetry of the dyadic monoid, that is, the period-doubling subset of the
  modular group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 .
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 This document started as a research diary noting various results, and is
  haphazardly structured.
  
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 This paper is part of a set of chapters that explore the relationship between
  the real numbers, the modular group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 , and fractals.
-\layout Section
+\end_layout
 
+\begin_layout Section
 Intro
-\layout Standard
+\end_layout
 
-THIS IS A DRAFT WORK IN PROGRESS.
+\begin_layout Standard
+THIS IS A CLIP-BOOK or DIARY of PARTIALLY-EXPLORED RESULTS.
  The intro hasn't been written yet, but if it was, it would work like this:
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Distribution of the Rational numbers in the Farey tree
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 One way to enumerate all of the rationals is by placing them on the Farey
  tree (or the Stern-Brocot tree).
  It can be shown that the Farey tree enumerates all of the rationals in
  the unit interval exactly once
-\begin_inset LatexCommand \cite{Bog96}
+\begin_inset LatexCommand cite
+key "Bog96"
 
-\end_inset 
+\end_inset
 
 .
  However, the distribution of the rationals on the Farey tree is highly
  non-uniform, if the tree is walked breadth-first.
  The figure 
-\begin_inset LatexCommand \ref{cap:Distribution-of-Farey}
+\begin_inset LatexCommand ref
+reference "cap:Distribution-of-Farey"
 
-\end_inset 
+\end_inset
 
  shows that distribution.
  This distribution is highly non-uniform, and by fooling with the number
@@ -114,177 +138,213 @@ ous.
  has a peculiar structure: it always has a humped form, even though the
  individual spikes vary strongly according to the number of bins.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status open
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "cap:Distribution-of-Farey"
 
-\begin_inset LatexCommand \label{cap:Distribution-of-Farey}
-
-\end_inset 
+\end_inset
 
 Distribution of Farey Fractions
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
-	filename fdist-65K.png
+	filename fdist-65K.ps
 	width 100col%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This figure shows a histogram of the first M=65536 Farey fractions according
  to their location on the unit interval.
  To create this figure, the unit interval is divided up into N=600 bins,
  and the bin count 
 \begin_inset Formula $c_{n}$
-\end_inset 
+\end_inset
 
  for each bin 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  is incremented whenever a fraction 
 \begin_inset Formula $p/q$
-\end_inset 
+\end_inset
 
  falls within the bin: 
 \begin_inset Formula $(n-1)/N\leq p/q<n/N$
-\end_inset 
+\end_inset
 
 .
  At the end of binning, the count is normalized by multiplying each bin
  count 
 \begin_inset Formula $c_{n}$
-\end_inset 
+\end_inset
 
  by 
 \begin_inset Formula $N/M$
-\end_inset 
+\end_inset
 
 .
  The normalization ensures that the histogram is of measure one on the unit
  interval: that 
 \begin_inset Formula $\sum_{n=0}^{N}c_{n}=1$
-\end_inset 
+\end_inset
 
 .
  In a certain sense, the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 shape
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  of this histogram is independent of the number of bins and number of fractions
  counted, although on a highly detailed level, the graph clearly varies
  with the number of bins 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
 .
  In a proper formal treatment, we would need to show that the limit 
 \begin_inset Formula $\lim_{M\rightarrow\infty}c_{n}$
-\end_inset 
+\end_inset
 
  exists and is finite, for all 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
 .
-\end_inset 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Standard
+picture generated by misc/fdist/fdist.C, and fdist.gplot
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The shape is suggestive, and the numerical evidence makes it clear that
  it is somehow the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 derivative
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  of the Minkowski question mark function 
 \begin_inset Formula $?'(x)=d?(x)/dx$
-\end_inset 
+\end_inset
 
 .
  Performing a simple numeric integral of the above, and comparing it to
  the exact expression shows a perfect match, as witnessed in the figure
  
-\begin_inset LatexCommand \ref{cap:Sum-of-Farey}
+\begin_inset LatexCommand ref
+reference "cap:Sum-of-Farey"
 
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "cap:Sum-of-Farey"
 
-\begin_inset LatexCommand \label{cap:Sum-of-Farey}
-
-\end_inset 
+\end_inset
 
 Sum of Farey Histogram
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename farey-integral.png
 	width 100col%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This figure shows the sum of the bin counts of the Farey fractions, together
  with a graph of the Minkowski question mark function.
  The two graphs can hardly be told apart.
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The derivative of the Minkowski question mark function cannot be defined
  using the classical analytic techniques.
  More precisely, traditional analytic tools applied to the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 natural
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  topology of open sets on the real number line are insufficient to construct
  and describe the shape of this curve.
  This motivates the study of alternative topologies for the real number
  line, which constitutes one of the research programs of this paper.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 When one does attempt to use classical techniques applied to the classical
  topology, the result is a number of perposterous-sounding statements, a
  sampling of which are given below.
@@ -294,36 +354,37 @@ When one does attempt to use classical techniques applied to the classical
  Just examining the graph visually suggests that the derivatives must be
  non-zero 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 somewhere
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , although how to define how to value these derivatives is utterly unclear.
  Naively, they seem to be 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 infinite
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  at every irrational; but this fails to explain how to integrate.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Clearly, the classical approach is sorely lacking and inapplicable; something
  different is needed.
  Two possibilities arise: throw away traditional ideas of integration and
  differentiation, and replace them with something new, something sutiable
  for fractals, or keep these tools, but throw away the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 natural
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  topology on the real number line.
  The latter approach seems to be far more promising.
@@ -333,104 +394,119 @@ natural
  (discussed elsewhere in this cycle of papers).
  Less obvious, but more appropriate, is the topology of 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 cylinder sets
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  that is the natural topology for studying shifts, symbolic dynamics, and
  one-dimensional lattice models (discussed later).
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The figure 
-\begin_inset LatexCommand \ref{cap:Jacobian}
+\begin_inset LatexCommand ref
+reference "cap:Jacobian"
 
-\end_inset 
+\end_inset
 
  shows what could be called the Jacobian 
 \begin_inset Formula $(?'\circ?^{-1})(x)$
-\end_inset 
+\end_inset
 
  of the question mark function.
  This figure simple relabels the x-axis by passing it through 
 \begin_inset Formula $?(x)$
-\end_inset 
+\end_inset
 
 .
  This function appears to vanish only at the dyadics.
  Note the superficial resemblance of the profile to the Takagi curve.
  By visually comparing this function and the Takagi curve (also called the
  
-\emph on 
+\emph on
 blancmange curve
-\emph default 
+\emph default
 ), one can intuitively sense that there must be a more formal relation between
  the two, as if the values of the one function could somehow be exponentiated
  to give the other.
  The trick is to write down this relation.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "cap:Jacobian"
 
-\begin_inset LatexCommand \label{cap:Jacobian}
-
-\end_inset 
+\end_inset
 
 Jacobian
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename fdist-jaco.png
 	width 100col%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This figure shows the same Farey fraction distribution as in a previous
  figure, except that the x-axis is relabelled by passing it through the
  Minkowski question mark.
  In a certain sense, this can be taken to be the Jacobian 
 \begin_inset Formula $(?^{\prime}\circ?^{-1})(x)$
-\end_inset 
+\end_inset
 
  of the question mark.
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Graphics
 	filename jac-int.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This figures shows the integral 
 \begin_inset Formula $\int_{0}^{x}(?^{\prime}\circ?^{-1})(y)\, dy$
-\end_inset 
+\end_inset
 
 , and, by comparison, the value of 
 \begin_inset Formula $?^{-1}(x)$
-\end_inset 
+\end_inset
 
  which it resembles.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This is really a very curious circumstance.
  The above graphs show only the distribution of a finite number of points
  (they were, after all, computer generated).
@@ -440,39 +516,48 @@ This is really a very curious circumstance.
  with information about the limit.
  Its as if we were working with an anti-Cantor-set construction: we start
  with a dust, and average over intervals to discover analytic properties.
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 Takagi Curve
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename takagi.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A graph of the Takagi-Landsberg curve 
 \begin_inset Formula $t_{w}(x)$
-\end_inset 
+\end_inset
 
  as a function of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  for a fixed value of 
 \begin_inset Formula $w=0.618$
-\end_inset 
+\end_inset
 
 .
  Note the curious visual resemblance to the Jacobian of the Question mark
@@ -481,11 +566,11 @@ A graph of the Takagi-Landsberg curve
 \begin_inset Formula \begin{equation}
 t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 where 
 \begin_inset Formula $\tau(x)$
-\end_inset 
+\end_inset
 
  is the triangle function:
 \begin_inset Formula \begin{equation}
@@ -493,109 +578,211 @@ where
 2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
 2-2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The fractal symmetries of the Takagi curve are given by a three-dimensional
  representation of a sub semi-group of the modular group (see other chapter).
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Notes 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Some slightly formal but not very fruitful remarks follow.
  To prove that the measure vanishes on rationals, one must show two things:
  first, that the measure vanishes near 0 (or 1), in that the the bin count
  for bin 
 \begin_inset Formula $c_{0}$
-\end_inset 
+\end_inset
 
  (and 
 \begin_inset Formula $c_{1}$
-\end_inset 
+\end_inset
 
  and a few neighbors) is always bounded above by 
 \begin_inset Formula $N^{-\alpha}$
-\end_inset 
+\end_inset
 
  for some 
 \begin_inset Formula $\alpha>1$
-\end_inset 
+\end_inset
 
 .
  In fact, 
 \begin_inset Formula $\alpha$
-\end_inset 
+\end_inset
 
  is probably quite large, and the bound can be made very strong.
  Next, one needs to show a modular group symmetry for the histogram: thus
  for example, that 
 \begin_inset Formula $c_{pN/q}$
-\end_inset 
+\end_inset
 
  obeys a similar bound, but de-rated by a factor given by the modular group
  element that carries 
 \begin_inset Formula $0/1$
-\end_inset 
+\end_inset
 
  to 
 \begin_inset Formula $p/q$
-\end_inset 
+\end_inset
 
 .
-\layout Section
+\end_layout
 
+\begin_layout Section
+Jacobian and its Fourier transform
+\end_layout
+
+\begin_layout Standard
+Consider the integral 
+\begin_inset Formula \[
+b_{n}=\int_{0}^{1}\exp\left(2\pi inx\right)\frac{dx}{?^{\prime}\left(?^{-1}\left(x\right)\right)}\]
+
+\end_inset
+
+Because the denominator is discontinuous everywhere, the above is not well-defin
+ed without additional work.
+ Noting the denominator is in the form of a Jacobian, naively performing
+ the change of variable 
+\begin_inset Formula $u=?^{-1}(x)$
+\end_inset
+
+ leads to 
+\begin_inset Formula \begin{equation}
+b_{n}=\int_{0}^{1}\exp\left(2\pi in?\left(u\right)\right)du\label{eq:fourier coffs}\end{equation}
+
+\end_inset
+
+This last expression is easily evaluated by numerical means.
+ By symmetry of the question-mark function, the coefficients are purely
+ real.
+ A graph of these coefficients are shown in figure xx.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Fourier-of-Jacobian"
+
+\end_inset
+
+Fourier of Jacobian
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename fcoff.ps
+	width 100page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This figure shows the values of the discrete fourier transform coefficeints
+ 
+\begin_inset Formula \[
+b_{n}=\int_{0}^{1}\exp\left(2\pi in?\left(u\right)\right)du\]
+
+\end_inset
+
+ as a function of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ These were computed by numerical integration, by dividing the unit interval
+ into 60,000 uniform-width bins.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Intro to remainder
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The remainder of this paper should be split off to be its own thing, as
  it no longer hangs with the above.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Modular forms are analytic functions that are closely related to elliptic
  functions, and have a particular kind of modular group symmetry.
  Modular forms are defined on the upper-half plane 
 \begin_inset Formula $\mathbb{H}$
-\end_inset 
+\end_inset
 
  of the complex plane 
 \begin_inset Formula $\mathbb{C}$
-\end_inset 
+\end_inset
 
 , that is, for complex numbers 
 \begin_inset Formula $\tau=x+iy$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $y>0$
-\end_inset 
+\end_inset
 
 
-\begin_inset LatexCommand \cite{Apo90}
+\begin_inset LatexCommand cite
+key "Apo90"
 
-\end_inset 
+\end_inset
 
 .
  Here, we are concerned with the limiting behavior of 
 \begin_inset Formula $y\rightarrow0$
-\end_inset 
+\end_inset
 
 , which yields highly singular functions defined on the real number line,
  yet inheriting a modular group symmetry of the form of which they are the
  limit.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Most fractals presented in the popular literature have a form that suggests
  that they live on the closure of the hyperbolic plane: that is, they live
  on the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 edge
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  of that plane.
  Of course, the hyperbolic metric never allows you to get to that edge,
@@ -606,19 +793,19 @@ edge
  In particular, we argue below that when considering the limiting behavior
  of of functions at the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 edge
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  of hyperbolic space, the correct topology is a kind of 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 binary tree topology
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , similar in form to the Cantor set, but a bit richer.
  In particular, this topology is finer than the usual topology on the real
@@ -626,49 +813,53 @@ binary tree topology
  to be given precise meaning.
  It is only when functions on this topology are mapped back onto the real
  number line that confusions result.
-\layout Section
+\end_layout
 
+\begin_layout Section
 A Binary Tree Topology
-\layout Standard
+\end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
 
-\begin_inset Note
-collapsed true
-
-\layout Standard
-
+\begin_layout Standard
 This section added in dec 2005, and was conceived in the summer of 2005.
  This section should be split out into its own doc eventually, and dated
  to the summer of 2005.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Consider the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 dyadic topology
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 : every rational of the form 
 \begin_inset Formula $p/2^{n}$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
  odd and integer 
 \begin_inset Formula $n>0$
-\end_inset 
+\end_inset
 
  is taken to be an open set.
  All points in between such dyadic rationals are taken to form an open set.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 One way to visualize this topology is as a binary tree.
  At the root of the tree is the point 1/2.
  At the next level, there is 1/4 and 3/4, and so on.
@@ -676,21 +867,24 @@ One way to visualize this topology is as a binary tree.
  At the leafs of the tree lie the irrationals, and the rationals not of
  the form 
 \begin_inset Formula $p/2^{n}$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The topology differs from that of the canonical Cantor set: in that case,
  the intermediate nodes are not even considered to be a part of the topology.
  The leaf nodes are taken to be closed sets, which is how the Cantor set
  becomes a perfect set.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The point of introducing this binary tree topology is ....
  Task: construct measures on this topology.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Several remarks are in order.
  First, in the canonical Cantor set, each leaf was assigned a measure of
  zero.
@@ -702,37 +896,38 @@ Several remarks are in order.
  Because of this, it is not unreasonable to believe that one may be able
  to construct measures that 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 make sense
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  in the context of the real number line.
  In particular, such measures can make well-defined integrals and the like.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Of interest are measures that are functions of, and possibly holomorphic
  functions, of the dyadic expansion.
  That is, consider the series 
-\begin_inset Formula $\{ b_{k}:b_{k}\in\{0,1\},\, k\in\mathbb{N}\}$
-\end_inset 
+\begin_inset Formula $\{b_{k}:b_{k}\in\{0,1\},\, k\in\mathbb{N}\}$
+\end_inset
 
 of binary digits given by the dyadic expansion of a real number 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 : 
 \begin_inset Formula \begin{equation}
 x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equation}
 
-\end_inset 
+\end_inset
 
  This expansion is not unique, because for every dyadic number, there are
  two inequivalent expansions.
  For example, 
 \begin_inset Formula $1/2=0.1000..=0.0111...$
-\end_inset 
+\end_inset
 
 .
  Therefore, we conclude that the dyadic topology is finer than the the usual
@@ -741,8 +936,9 @@ x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equatio
  1/2 is a not in the middle of the tree (the root as it happens here), whereas
  the two inequivalent expansions belong to two different leafs at the end
  of the binary tree.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Because this topology is finer than the usual topology on the real number
  line, one can define functions on this topology that would be ill-defined
  when considered on the real number line: in particular, the three points
@@ -752,8 +948,9 @@ Because this topology is finer than the usual topology on the real number
  It should also be clear that this topology is compatible with discussions
  of the closure of the upper half-plane when considering the limiting behavior
  of modular forms, Fuchsian groups, and ergodic processes.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 As an example, consider the Takagi curve.
  When considered on the real-number line, it has a derivative that seems
  to be defined nowhere.
@@ -763,35 +960,38 @@ As an example, consider the Takagi curve.
  Furthermore, the interior nodes of the tree are a countable set, whereas
  the leaves are uncountable.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 XXX Discuss 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 fat cantor set
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , i.e.
  a measure which puts all of the measure on the leaves of the tree.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This implies that the derivative of the Takagi curve is in fact defined
  
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 almost everywhere
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , with the exception of only a countable set of points.
  The goal here is to bootstrap this realization into providing a wholesome
  topological definition for all fractal measures.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Next, because the topology is that of a binary tree, it should be clear
  that any binary structure inherits this topology in a natural way.
  In particular, the Stern-Brocot tree has this topology.
@@ -808,24 +1008,25 @@ Next, because the topology is that of a binary tree, it should be clear
  this measure can be integrated in a well-founded way.
  The problem then is no longer 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 how can the derivative of the question mark be put on a good foundation
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , rather it becomes 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 what sort of easy to manipulate, easy to handle expressions for this measure
  can be found?
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 XXXX ToDo: review standard topological notions for the binary tree topology
  in greater detail, such as separation axioms, bases, metrics, continuity,
  differentiability.
@@ -834,204 +1035,219 @@ XXXX ToDo: review standard topological notions for the binary tree topology
  than coarse topologies.
  Since this is finer than the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 natural
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  topology on the reals, who are the losers?
-\layout Section
+\end_layout
 
+\begin_layout Section
 Modular Forms
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A meromorphic function 
 \begin_inset Formula $f(\tau)$
-\end_inset 
+\end_inset
 
  is said to be a modular form of weight 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  if it has the modular group symmetry 
 \begin_inset Formula \begin{equation}
 f\left(\frac{a\tau+b}{c\tau+d}\right)=\left(c\tau+d\right)^{k}f\left(\tau\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  for integers 
 \begin_inset Formula $a$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $b$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $c$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $d$
-\end_inset 
+\end_inset
 
  such that 
 \begin_inset Formula $ad-bc=1$
-\end_inset 
+\end_inset
 
 .
  Here, 
 \begin_inset Formula $\tau$
-\end_inset 
+\end_inset
 
  is a complex number, restricted to the upper-half plane: 
 \begin_inset Formula $\Im\tau>0$
-\end_inset 
+\end_inset
 
 .
  Modular forms can also be expressed as a function of the nome 
 \begin_inset Formula $q=\exp i\pi\tau$
-\end_inset 
+\end_inset
 
 .
  In this form, many have the interesting property of having poles and zeros
  closely interspersed at the limit of 
 \begin_inset Formula $|q|\rightarrow1$
-\end_inset 
+\end_inset
 
 , with poles (or zeros) occurring at rational angles, and the other at irrationa
 l angles.
  A particular example of this is the twenty-fourth root of the modular discrimin
 ant, known as the Dedekind eta.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "cap:Dedekind-Eta"
 
-\begin_inset LatexCommand \label{cap:Dedekind-Eta}
-
-\end_inset 
+\end_inset
 
 Dedekind Eta
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename eta-radial.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This figure shows a particular slice through the Dedekind eta function 
 \begin_inset Formula $\eta=q^{1/24}\Pi_{n=1}^{\infty}(1-q^{2n})$
-\end_inset 
+\end_inset
 
 .
  This figure graphs 
 \begin_inset Formula $|\eta|$
-\end_inset 
+\end_inset
 
  along a particular curve: we take 
 \begin_inset Formula $q=|q|e^{i\theta}$
-\end_inset 
+\end_inset
 
  and hold 
 \begin_inset Formula $|q|=0.96$
-\end_inset 
+\end_inset
 
  fixed, while sweeping through values of 
 \begin_inset Formula $\theta$
-\end_inset 
+\end_inset
 
  from 0 to 
 \begin_inset Formula $2\pi$
-\end_inset 
+\end_inset
 
 .
  Several features of this figure should be noted.
  First, this function is continuous and infinitely differentiable for any
  value of 
 \begin_inset Formula $|q|<1$
-\end_inset 
+\end_inset
 
 .
  Next, the Dedekind eta has a kind of modular group symmetry: if we write
  the nome 
 \begin_inset Formula $q=\exp(i\pi\tau)$
-\end_inset 
+\end_inset
 
 , then 
 \begin_inset Formula $|\eta((a\tau+b)/(c\tau+d))|=|\sqrt{c\tau+d}\;\eta(\tau)|$
-\end_inset 
+\end_inset
 
  for integers 
 \begin_inset Formula $a$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $b$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $c$
-\end_inset 
+\end_inset
 
 , and 
 \begin_inset Formula $d$
-\end_inset 
+\end_inset
 
  such that 
 \begin_inset Formula $ad-bc=1$
-\end_inset 
+\end_inset
 
 .
  Finally, in the limit of 
 \begin_inset Formula $|q|\rightarrow1$
-\end_inset 
+\end_inset
 
 , this function has a zero for all rational angles 
 \begin_inset Formula $\theta=\pi m/n$
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  are integers, but otherwise this function diverges for all non-rational
  angles 
 \begin_inset Formula $\theta$
-\end_inset 
+\end_inset
 
 .
  As such, it has a superficial resemblance to 
 \begin_inset Formula $d?(x)/dx$
-\end_inset 
+\end_inset
 
 .
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The figure 
-\begin_inset LatexCommand \ref{cap:Dedekind-Eta}
+\begin_inset LatexCommand ref
+reference "cap:Dedekind-Eta"
 
-\end_inset 
+\end_inset
 
  shows a particular cross-section through the Dedekind eta.
  Note the suggestive shape of this curve, and how it crudely resembles the
@@ -1039,7 +1255,7 @@ The figure
  Although it is clear that this curve will not converge to the derivative
  of the question mark in the limit 
 \begin_inset Formula $|q|\rightarrow1$
-\end_inset 
+\end_inset
 
 , it none-the-less is suggestive.
  Notably, modular forms already have the modular group symmetry, and so
@@ -1050,66 +1266,78 @@ The figure
  The other remarkable property is that modular forms are infinitely differentiab
 le, and thus posses well-behaved analytic properties, again allowing a kind
  of study that is ill-afforded by the histograms.
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 Sigma angular cross section
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename div2-ang-inv.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This figure shows an angular cross section of a series build from the number-the
 oretic divisor function.
  Specifically, it is a graph of
 \begin_inset Formula \[
 \left|\sum_{n=1}^{\infty}\sigma_{2}(n)r^{n}e^{in\theta}\right|^{-1}\]
 
-\end_inset 
+\end_inset
 
  for a fixed value of r=0.95 and 
 \begin_inset Formula $\theta$
-\end_inset 
+\end_inset
 
  running from 0 to 
 \begin_inset Formula $2\pi$
-\end_inset 
+\end_inset
 
 .
  Each tall spike represents a close approach to a zero of the divisor series.
  Here, 
 \begin_inset Formula $\sigma_{2}(n)$
-\end_inset 
+\end_inset
 
  is an arithmetic series, specifically, the multiplicative series 
 \begin_inset Formula \[
 \sigma_{a}(n)=\sum_{d|n}d^{a}\]
 
-\end_inset 
+\end_inset
 
  where the sum extends over the integer divisors of 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
 .
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The presumption made here is that the derivative of the Minkowski question
  mark function will be found to be the limit of some modular form, although
  which modular form that might be is not clear.
@@ -1118,28 +1346,37 @@ The presumption made here is that the derivative of the Minkowski question
  A very synoptic overview can be found in the article on elliptic functions
  in Wikipedia.
  There are many deep expositions on the topic
-\begin_inset LatexCommand \cite{Apo90}
+\begin_inset LatexCommand cite
+key "Apo90"
 
-\end_inset 
+\end_inset
 
 
-\begin_inset LatexCommand \cite{Ran77}
+\begin_inset LatexCommand cite
+key "Ran77"
 
-\end_inset 
+\end_inset
 
 .
-\layout Section
+\end_layout
 
+\begin_layout Section
 Conclusion
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 In conclusion, we conclude ???
-\layout Standard
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand bibtex
+options "plain"
+bibfiles "/home/linas/linas/fractal/paper/fractal"
+
+\end_inset
 
 
-\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
+\end_layout
 
-\end_inset 
-
-
-\the_end
+\end_body
+\end_document
