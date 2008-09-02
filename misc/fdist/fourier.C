@@ -23,12 +23,12 @@ void bincount(int nbins, int depth)
 	int max = 1 << depth;
 	printf ("#\n# nbins=%d   tree depth=%d\n#\n",nbins,depth);
 	printf ("# Legend:\n");
-	printf ("# i, x, bin_cnt, bin_cnt_sum, exact_farey\n");
+	printf ("# ........ \n");
 	fflush (stdout);
 
 	FareyIterator fi;
 
-	double * bin = (double *) malloc (nbins * sizeof (double));
+	bin = (double *) malloc (nbins * sizeof (double));
 	for (i=0; i<nbins; i++)
 	{
 		bin[i] = 0.0;
@@ -54,7 +54,7 @@ void bincount(int nbins, int depth)
 	/* renormalize */
 	for (i=0; i<nbins; i++)
 	{
-		bin[i] /= (double) cnt;
+		bin[i] *= ((double) nbins) / ((double) cnt);
 	}
 
 }
@@ -88,8 +88,13 @@ void fourier (int nbins, int freq_max)
 		{
 			double re = cos(2.0*M_PI*n*far);
 			double im = sin(2.0*M_PI*n*far);
+#ifdef JACOB
 			fre[n] += re;
 			fim[n] += im;
+#else
+			fre[n] += bin[i] * bin[i] * re;
+			fim[n] += bin[i] * bin[i] * im;
+#endif
 		}
 	}
 
@@ -100,14 +105,14 @@ void fourier (int nbins, int freq_max)
 		fim[n] /= (double) nbins;
 	}
 
-#if 1
+#if 0
 	for (n=0; n<freq_max; n++)
 	{
 		printf ("%d	%8.6g	%8.6g\n", n, fre[n], fim[n]);
 	}
 #endif
 
-#if 0
+#if 1
 	/* rebin */
 	int npts = 1200;
 	for(i=0; i<npts; i++)
@@ -137,7 +142,7 @@ main(int argc, char *argv[])
 	int depth = atoi (argv[2]);
 	int max_freq = atoi (argv[3]);
 
-	// bincount (nbins, depth);
+	bincount (nbins, depth);
 	fourier (nbins, max_freq);
 }
 
