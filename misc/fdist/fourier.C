@@ -93,6 +93,13 @@ void fourier (int nbins, int freq_max)
 		}
 	}
 
+	/* renormalize */
+	for (n=0; n<freq_max; n++)
+	{
+		fre[n] /= (double) nbins;
+		fim[n] /= (double) nbins;
+	}
+
 	for (n=0; n<freq_max; n++)
 	{
 		printf ("%d	%8.6g	%8.6g\n", n, fre[n], fim[n]);
