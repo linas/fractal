@@ -34,6 +34,7 @@
 \tracking_changes false
 \output_changes false
 \author "" 
+\author "" 
 \end_header
 
 \begin_body
@@ -677,7 +678,7 @@ reference "fig:Fourier-of-Jacobian"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \begin_inset Caption
@@ -752,23 +753,30 @@ Numerical access to these coefficients begs a question: what would the inverse
 \end_inset
 
  This function is, again, easily accessibly by numerical means; it is shown
- in the figure xx
+ in the figure 
+\begin_inset LatexCommand ref
+reference "fig:The-Jacobian"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Standard
-
-\end_layout
+status collapsed
 
 \begin_layout Standard
 \begin_inset Caption
 
 \begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:The-Jacobian"
+
+\end_inset
+
 The Jacobian by Inverse Discrete Transform
 \end_layout
 
@@ -826,6 +834,101 @@ The data was obtained by misc/fdist/fourier.C and plotted by jacob.gplot
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Proceeding in a similar manner, one can obtain 
+\begin_inset Formula \[
+c_{n}=\int_{0}^{1}\exp\left(2\pi inx\right)\,?^{\prime}\left(?^{-1}\left(x\right)\right)\, dx\]
+
+\end_inset
+
+ by performing a change of variable: 
+\begin_inset Formula \[
+c_{n}=\int_{0}^{1}\exp\left(2\pi in?\left(u\right)\right)\,\left[?^{\prime}\left(u\right)\right]^{2}\, du\]
+
+\end_inset
+
+ and then evaluating the above by means of bin-counting, the point being
+ that it is straight-forward to bin-count 
+\begin_inset Formula $?^{\prime}\left(u\right)$
+\end_inset
+
+, whereas there are grave numerical difficulties with numerically arranging
+ bin-counts of 
+\begin_inset Formula $?^{\prime}\left(?^{-1}\left(x\right)\right)$
+\end_inset
+
+.
+ The results of such counting are shown in figure 
+\begin_inset LatexCommand ref
+reference "fig:DFT-of-Inverse"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:DFT-of-Inverse"
+
+\end_inset
+
+DFT of Inverse Jacobian
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename fprime.ps
+	lyxscale 50
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This figure shows the coefficients 
+\begin_inset Formula \[
+c_{n}=\int_{0}^{1}\exp\left(2\pi in?\left(u\right)\right)\,\left[?^{\prime}\left(u\right)\right]^{2}\, du\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for the range 
+\begin_inset Formula $1\le n\le2500$
+\end_inset
+
+ obtained by bin-counting the first 16 million Farey fractions into 1.6 million
+ bins.
 \end_layout
 
 \begin_layout Standard
