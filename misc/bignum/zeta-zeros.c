@@ -9,30 +9,44 @@
  */
 
 #include <gmp.h>
+#include <stdio.h>
 
 #include "mp-complex.h"
+#include "mp-misc.h"
 #include "mp-zeta.h"
 
 void get_zeros()
 {
 	int prec = 30;
 
-	mpf_t tee;
+	mpf_t tee, half;
 	mpf_init (tee);
+	mpf_init (half);
+
+	mpf_set_ui(half, 1);
+	mpf_div_ui(half, half, 2);
+
 	mpf_set_ui(tee, 14);
 
-	cpx_t ess;
+	cpx_t zeta, ess;
 	cpx_init (ess);
-	cpx_set (ess, 
+	cpx_init (zeta);
+	cpx_set_mpf (ess, half, tee);
 
 	while(1)
 	{
+		cpx_borwein_zeta(zeta, ess, prec);
+
+		mpf_add (ess[0].im, ess[0].im, half);
+
+		fp_prt ("its ", zeta[0].re);
+		printf ("\n");
 	}
 	
-	cpx_borwein_zeta(cpx_t zeta, const cpx_t ess, int prec);
 }
 
-main()
+int main(int argc, char * argv[])
 {
 	get_zeros();
+	return 0;
 }

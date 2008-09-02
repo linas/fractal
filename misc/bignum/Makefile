@@ -7,7 +7,7 @@ CC = cc
 
 EXES= bernoulli bound bs bsubn cache-fill cont_frac db-merge db-prt \
       dsubn entropy exact hurwitz hurwitz-euler minima mp_zeta_test picturez \
-      poly-perf sho stieltjes trunc zero-cross
+      poly-perf sho stieltjes trunc zero-cross zeta-zeros
 
 MPLIB=libzmp.a
 
@@ -34,6 +34,7 @@ sho:	sho.o $(MPLIB)
 stieltjes:	stieltjes.o $(MPLIB)
 trunc:	trunc.o
 zero-cross:	zero-cross.o
+zeta-zeros:	zeta-zeros.o $(MPLIB)
 
 # libarary objects
 db-cache.o: db-cache.h
