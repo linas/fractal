@@ -12,7 +12,6 @@
 #include <stdlib.h>
 
 #include "Farey.h"
-#include "FareyTree.h"
 
 void fourier (int npts, int freq_max)
 {
@@ -20,18 +19,26 @@ void fourier (int npts, int freq_max)
 
 	double gral = 0.0;
 
+	/* Compute the integral of the distribution */
+   ContinuedFraction f;
+
 	for(i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
-		double fx = 8.0;
+
+		/* Likewise, the midpoint */
+   	f.SetRatio (2*i+1, 2*npts);
+   	double far = f.ToFarey (); 
+
+		double fx = 18.0;
 		double tp = 1.0;
 		for (n=1; n<freq_max; n++)
 		{
-			fx -= 2.0*cos(2.0*M_PI*tp*x);
+			fx -= 2.0*cos(2.0*M_PI*tp*far);
 			tp *= 2.0;
 		}
 		gral += fx / ((double) npts);
-		printf ("%8.6g	%8.6g	%8.6g\n", x, fx, gral);
+		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", x, fx, gral, far);
 	}
 
 }

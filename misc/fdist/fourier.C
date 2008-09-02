@@ -86,15 +86,22 @@ void fourier (int nbins, int freq_max)
 
 		for (n=0; n<freq_max; n++)
 		{
+#ifdef JACOB
 			double re = cos(2.0*M_PI*n*far);
 			double im = sin(2.0*M_PI*n*far);
-#ifdef JACOB
 			fre[n] += re;
 			fim[n] += im;
-#else
+#endif
+#ifdef INVJACOB
+			double re = cos(2.0*M_PI*n*far);
+			double im = sin(2.0*M_PI*n*far);
 			fre[n] += bin[i] * bin[i] * re;
 			fim[n] += bin[i] * bin[i] * im;
 #endif
+			double re = cos(2.0*M_PI*n*x);
+			double im = sin(2.0*M_PI*n*x);
+			fre[n] += bin[i] * re;
+			fim[n] += bin[i] * im;
 		}
 	}
 
@@ -105,25 +112,35 @@ void fourier (int nbins, int freq_max)
 		fim[n] /= (double) nbins;
 	}
 
-#if 0
+#if 1
 	for (n=0; n<freq_max; n++)
 	{
 		printf ("%d	%8.6g	%8.6g\n", n, fre[n], fim[n]);
 	}
 #endif
 
-#if 1
+#if 0
 	/* rebin */
 	int npts = 1200;
+	double gral = 0.0;
 	for(i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
-		double fx = 0.0;
+
+   	f.SetRatio (2*i+1, 2*npts);
+   	double far = f.ToFarey (); 
+
+		double fx = fre[0];
 		for (n=1; n<freq_max; n++)
 		{
-			fx += 2.0* fre[n] * cos(2.0*M_PI*n*x);
+			// fx += 2.0* fre[n] * cos(2.0*M_PI*n*x);
+			fx += 2.0* fre[n] * cos(2.0*M_PI*n*far);
 		}
-		printf ("%8.6g	%8.6g\n", x, fx);
+
+		// hack alert .. !!??
+		// fx /= fre[0];
+		gral += fx / ((double) npts);
+		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", x, fx, gral, far);
 	}
 #endif
 
