@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= c-takagi cantor-dist conj dyadic entropy exacto f-wavelet fdist feigen \
+EXES= c-takagi cantor-dist conj dyadic entropy exacto f-wavelet feigen \
       fiddle fliptree gappy gkw ising mod moebius \
       mute orbit orbit-s padic \
       pair pegs quest rand-measure rdist summy swap sway sym \
@@ -38,7 +38,6 @@ dyadic.o:	dyadic.C
 entropy.o:  entropy.C $(LIB)/libfunc.a $(INC)/Farey.h
 exacto.o:  exacto.C $(LIB)/libfunc.a $(INC)/Farey.h
 f-wavelet.o:  f-wavelet.C $(LIB)/libfunc.a $(INC)/FareyTree.h
-fdist.o:  fdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 feigen.o: feigen.C $(LIB)/libfunc.a $(INC)/Farey.h
 fiddle.o:  fiddle.C $(LIB)/libfunc.a $(INC)/Farey.h
 fliptree.o:  fliptree.C $(LIB)/libfunc.a $(INC)/Farey.h
