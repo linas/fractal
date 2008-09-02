@@ -7,3 +7,14 @@ set term png small
 set out 'fcoff.png'
 
 plot "fcoff.dat" using 1:2
+
+#################################################
+# Used to generate the graph in the text
+#
+set term postscript
+set out 'fcoff.ps'
+set title "Discrete Fourier Transform of Jacobian"
+set xlabel "n"
+set ylabel "b_n"
+plot "fcoff.dat" using 1:2
+

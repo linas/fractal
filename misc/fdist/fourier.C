@@ -108,14 +108,14 @@ void fourier (int nbins, int freq_max)
 #endif
 
 	/* rebin */
-	int npts = 600;
+	int npts = 1200;
 	for(i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
 		double fx = 0.0;
-		for (n=0; n<freq_max; n++)
+		for (n=1; n<freq_max; n++)
 		{
-			fx += fre[n] * cos(2.0*M_PI*n*x);
+			fx += 2.0* fre[n] * cos(2.0*M_PI*n*x);
 		}
 		printf ("%8.6g	%8.6g\n", x, fx);
 	}
