@@ -18,17 +18,20 @@ void fourier (int npts, int freq_max)
 {
 	int i, n;
 
+	double gral = 0.0;
+
 	for(i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
-		double fx = 0.0;
+		double fx = 8.0;
 		double tp = 1.0;
 		for (n=1; n<freq_max; n++)
 		{
-			fx += 2.0*cos(2.0*M_PI*tp*x);
+			fx -= 2.0*cos(2.0*M_PI*tp*x);
 			tp *= 2.0;
 		}
-		printf ("%8.6g	%8.6g\n", x, fx);
+		gral += fx / ((double) npts);
+		printf ("%8.6g	%8.6g	%8.6g\n", x, fx, gral);
 	}
 
 }
