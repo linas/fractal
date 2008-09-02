@@ -44,12 +44,32 @@ void coeffs(int nzeros, int nmax)
 		for (i = 0; i<nzeros; i++)
 		{
 			b[n] += 1.0 / (n*n - zeros[i]*zeros[i]);
+			// b[n] += 1.0 / (n*n - zeros[i]*zeros[i]/ ((double)n*n));
 		}
 
 		b[n] *= 2.0*n;
+		// b[n] *= 2.0;
 
+#if 1
 		printf ("%d\t%8.6g\n", n, b[n]);
+#endif
 	}
+
+#if 0
+	int imax = 1200;
+	for (i=0; i<imax; i++)
+	{
+		double x = ((double) i) / ((double) imax);
+		double re = 0.0;
+		double im = 0.0;
+		for (n=0; n<nmax; n++)
+		{
+			re += b[n] * cos(2.0*M_PI*n*x);
+			im += b[n] * sin(2.0*M_PI*n*x);
+		}
+		printf ("%8.6g\t%8.6g\t%8.6g\n", x, re, im);
+	}
+#endif
 }
 
 
