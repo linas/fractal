@@ -69,7 +69,9 @@ void bincount(int nbins, int depth)
    ContinuedFraction f;
 	double gral = 0.0;
 	double egral = 0.0;
+	double ejgral = 0.0;
 	double dgral = 0.0;
+	double fgral = 0.0;
 	double fprev = 0.0;
 	for (i=0; i<nbins; i++)
 	{
@@ -78,35 +80,39 @@ void bincount(int nbins, int depth)
 		gral += rect;
 
 		/* Be careful to bin-count the entropy 
-		 * (use discrete not continuous formula) */
+		 * (use discrete not continuous formula) 
+		 * This is the entropy of just ?'(x) and not of the jacobian */
 		double entropy = - rect * log(rect);
 		if (bin[i] == 0) entropy = 0;
 		egral += entropy;
 
-		/* raise the function to some power ... */
 		double bcnt = rect * nbins;
 
-		// egral += pow (bcnt, exponent) / ((double) nbins);
-		
 		double x = ((double) i) / ((double) nbins);
 
-   	f.SetRatio (2*i+1, 2*nbins);
+   	f.SetRatio (i+1, nbins);
    	double far = f.ToFarey (); 
 
 		/* Integral of the jacobian */
-		double delt = (far - fprev)*nbins;
+		double delt = (far - fprev)* nbins * nbins;
+		// if (0.0 != delt)
+		if (1.0e-8 < delt)
+		{
+			fgral += 1.0 / delt;
+			dgral += rect / delt;
+			ejgral += entropy / delt;
+		}
 
-		if (1.0e-8 < delt) dgral += rect / delt;
-
-#if 1
-		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", 
-			i, x, bcnt, gral, far, entropy, dgral, egral);
+#if 0
+		printf ("%6d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g %8.6g\n", 
+			i, x, bcnt, gral, far, entropy, dgral, egral, ejgral);
 		fflush (stdout);
 #endif
 		fprev = far;
 	}
 
-	printf ("#Total entropy =  %18.16g\n", egral);
+	printf ("#Total entropy for ?' =  %18.16g\n", egral);
+	printf ("#Total entropy for ?'(?^{-1}) =  %18.16g\n", ejgral);
 }
 
 void 
@@ -176,12 +182,15 @@ main(int argc, char *argv[])
 
 	if (argc <3)
 	{
-		fprintf (stderr, "Usage: %s <nbins> <tree-depth> <arg>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <nbins> <tree-depth> [<arg>]\n", argv[0]);
 		exit (1);
 	}
 	int nbins = atoi (argv[1]);
 	int depth = atoi (argv[2]);
-	double misc_arg = atof (argv[3]);
+	if (4 == argc)
+	{
+		double misc_arg = atof (argv[3]);
+	}
 
 	bincount (nbins, depth);
 	// gmp_bincount (nbins, depth);
