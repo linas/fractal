@@ -1,8 +1,9 @@
 /*
- * fanal.C
+ * janal.C
  * 
  * Fourier transform of
  * Distribution of the Farey Numbers on the unit interval
+ * From hypothesized first principles.
  *
  * Linas October 2004
  * Linas Sept 2008
@@ -11,34 +12,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Farey.h"
-
-void fourier (int npts, int freq_max)
+void coeffs (int freq_max)
 {
-	int i, n;
+	int k, n, m;
 
-	double gral = 0.0;
-
-	/* Compute the integral of the distribution */
-   ContinuedFraction f;
-
-	for(i=0; i<npts; i++)
+	for (m=0; m< freq_max; m++)
 	{
-		double x = ((double) i) / ((double) npts);
-
-		/* Likewise, the midpoint */
-   	f.SetRatio (2*i+1, 2*npts);
-   	double far = f.ToFarey (); 
-
-		double fx = 18.0;
+		double jm = 0.0;
 		double tp = 1.0;
-		for (n=1; n<freq_max; n++)
+		int tn = 1.0;
+		for(n=0; n<30; n++)
 		{
-			fx -= 2.0*cos(2.0*M_PI*tp*far);
-			tp *= 2.0;
+			double term = 0.0;
+			for(k=0; k<tn; k++)
+			{
+				term += cos(M_PI*m*(2*k+1) * tp);
+			}
+			jm += tp * term;
+			tn *=- 2;
+			tp *= 0.5;
 		}
-		gral += fx / ((double) npts);
-		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", x, fx, gral, far);
+
+		printf ("%d	%8.6g\n", m, jm);
 	}
 
 }
@@ -47,14 +42,13 @@ main(int argc, char *argv[])
 {
 	int i;
 
-	if (argc < 3)
+	if (argc < 2)
 	{
-		fprintf (stderr, "Usage: %s <nbins> <freq>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <freq>\n", argv[0]);
 		exit (1);
 	}
-	int nbins = atoi (argv[1]);
-	int max_freq = atoi (argv[2]);
+	int max_freq = atoi (argv[1]);
 
-	fourier (nbins, max_freq);
+	coeffs (max_freq);
 }
 
