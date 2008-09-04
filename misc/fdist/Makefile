@@ -30,7 +30,7 @@ f-wavelet.o:  f-wavelet.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 fanal.o:  fanal.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 fdist.o:  fdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 fourier.o:  fourier.C $(LIB)/libfunc.a $(INC)/FareyTree.h
-ftag.o:  ftag.c 
+ftag.o:  ftag.C $(LIB)/libfunc.a
 janal.o:  janal.C 
 jdist.o:  jdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 rdist.o:  rdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h

@@ -20,6 +20,7 @@ double stupa (double x)
 	x -= floor(x);
 	if (0.5 < x) x = 1.0-x;
 	if (0.0 == x) return 1.0e16;
+	if (0.5 == x) return 1.0e16;
 	
 	n = 0;
 	while(1)
@@ -73,9 +74,14 @@ void prt_graph(int npts, double veight, double weight)
 	for (i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
-		double p = product (x, veight, weight);
-		gral += p * delta;
-		bin[i] = p;
+
+		for (int j=0; j<120; j++)
+		{
+			double off = delta * rand() / ((double) RAND_MAX);
+			double p = product (x+off, veight, weight);
+			gral += p * delta;
+			bin[i] += p;
+		}
 	}
 
 	/* Compute the integral of the distribution */
@@ -89,7 +95,7 @@ void prt_graph(int npts, double veight, double weight)
 		double p = bin[i];
 		gral += p * delta;
 
-   	f.SetRatio (i+1, nbins);
+   	f.SetRatio (i, npts);
    	double far = f.ToFarey (); 
 
 		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, p, gral, far);
