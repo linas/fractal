@@ -20,7 +20,7 @@
 \use_geometry false
 \use_amsmath 2
 \use_esint 0
-\cite_engine basic
+\cite_engine natbib_authoryear
 \use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
@@ -1628,8 +1628,8 @@ Q_{v,w}\left(x\right)=\int_{0}^{x}\mu_{v,w}\left(?\left(y\right)\right)\, dy\]
 \end_inset
 
 That is the equivalent numerical hypothesis is that 
-\begin_inset Formula \[
-?\left(x\right)\sim Q_{0.73,0.78}\left(x\right)\]
+\begin_inset Formula \begin{equation}
+?\left(x\right)\sim Q_{0.73,0.78}\left(x\right)\label{eq:q-hypothesis}\end{equation}
 
 \end_inset
 
@@ -1708,13 +1708,16 @@ key "Can1884"
 c\left(x\right)=\begin{cases}
 1 & \mbox{ for }0\le x\le\frac{1}{3}\\
 0 & \mbox{ for }\frac{1}{3}<x<\frac{2}{3}\\
-1 & \mbox{\mbox{ for }\frac{2}{3}\le x\le1}\end{cases}\]
+1 & \mbox{ for }\frac{2}{3}\le x\le1\end{cases}\]
 
 \end_inset
 
- The indicator function for the Cantor set is then given as 
-\begin_inset Formula \[
-\mu_{C}\left(x\right)=\prod_{k=0}^{\infty}\tilde{c}\left(3^{k}x\right)\]
+The indicator function for the Cantor set is then given as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\mu_{C}\left(x\right)=\prod_{k=0}^{\infty}\tilde{c}\left(3^{k}x\right)\label{eq:cant-set-meas}\end{equation}
 
 \end_inset
 
@@ -1742,22 +1745,106 @@ that is, the measure of the Cantor set is zero.
 The indicator function above can be generalized in a variaty of ways; the
  most important generalization for the present purposes is to define a measure
  that is not vanishing on the unit interval.
- This may be done as follows.
- Consider 
+ This may be done by considering an indicator function of the form 
 \begin_inset Formula \[
 c_{w}\left(x\right)=\begin{cases}
 1 & \mbox{ for }0\le x\le w\\
 0 & \mbox{ for }w<x<1-w\\
-1 & \mbox{\mbox{ for }1-w\le x\le1}\end{cases}\]
+1 & \mbox{ for }1-w\le x\le1\end{cases}\]
 
 \end_inset
 
- indicating a pair of closed intrvals of width 
+indicating a pair of closed intervals of width 
 \begin_inset Formula $w$
 \end_inset
 
-.
+, which is then recursively compounded by the middle-thirds construction.
+ But geometrically increasing the widths, so as not to get zero measure.
+ -- it must get 
+\begin_inset Quotes eld
+\end_inset
+
+fat
+\begin_inset Quotes erd
+\end_inset
+
+, Etc.
  
+\end_layout
+
+\begin_layout Standard
+But the above is not the most convenient form for this construction.
+ Sigh.
+ The rest of this section needs to continue the expository review, culminating
+ in the realization that eqn 
+\begin_inset LatexCommand ref
+reference "eq:Cantor-measure"
+
+\end_inset
+
+ really is a proper measure on a Cator set.
+\end_layout
+
+\begin_layout Section
+Lattice models
+\end_layout
+
+\begin_layout Standard
+This section needs to be a very breif, shortened version of section 3 of
+ 
+\begin_inset LatexCommand cite
+key "Ve-L06"
+
+\end_inset
+
+, basically, introducing the cylinder sets on binary strings, and then explainin
+g how the Takagi sum construction is consistent with (is identical to) a
+ translation-invariant measure on the set of binary strings.
+ Specifically, taking the logarithm of a translation invariant measure on
+ the lattice is the Takagi construction.
+ Then, one notes that the summed function has the form of a Kac-model potential;
+ thus one concludes that the set of Kac-type models on the one-sided lattice
+ is identical to the family of measures defined by eqn 
+\begin_inset LatexCommand ref
+reference "eq:Cantor-measure"
+
+\end_inset
+
+.
+ This concludes the expository writing connecting, in a very concrete way,
+ the lattice models to the Question-Mark function.
+ 
+\end_layout
+
+\begin_layout Standard
+The remaining work is to explain the cock-eyed numerical constants appearing
+ the in the relation 
+\begin_inset LatexCommand ref
+reference "eq:q-hypothesis"
+
+\end_inset
+
+.
+ Perhaps these can be related to the Gauss-Kuzmin entropy, i.e.
+ they are of the form of an inverse temperature (lagrange multiplier) which
+ is solved for by setting the average energy to 1/2 (i.e.
+ the expectation value of seeing a 0 or 1 in some arbitrary position in
+ a binary string), and then using 
+\begin_inset Formula \[
+S=\beta\left\langle E\right\rangle +\log Z\]
+
+\end_inset
+
+ with 
+\begin_inset Formula $S=3.432527514\dots=2.379246769\dots/\log2$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\langle E\right\rangle =1/2$
+\end_inset
+
+ and etc.
+ or something like, should serve to give the desired constants.
 \end_layout
 
 \begin_layout Section
