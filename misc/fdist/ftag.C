@@ -4,6 +4,8 @@
  *
  * Rebuild the Farey dist as a Cantor set
  * This time, as a log of Takagi thing.
+ * Use a stupa energy potential, compare and contrast to
+ * the Kac potential
  */
 
 #include <math.h>
@@ -32,6 +34,14 @@ double stupa (double x)
 	return (double) n;
 }
 
+/* The Kac potential */
+double kac (double x)
+{
+	x -= floor(x);
+	if (x < 0.5) return 2.0*x-0.5;
+	return 1.5 - 2.0*x;
+}
+
 double taga(double x, double veight)
 {
 	int k;
@@ -39,9 +49,10 @@ double taga(double x, double veight)
 	double acc = 0.0;
 	double tk = 1.0;
 	double tw = 1.0;
-	for (k=0; k<20; k++)
+	for (k=0; k<30; k++)
 	{
-		double f = stupa(tk*x);
+		// double f = stupa(tk*x);
+		double f = kac(tk*x);
 		acc += tw * f;
 		tw *= veight;
 		tk *= 2.0;
@@ -101,17 +112,20 @@ void prt_graph(int npts, double veight, double weight)
 
 	delta /= gral;
 	gral = 0.0;
+	double entropy = 0.0;
 	for (i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
 		double p = bin[i];
 		gral += p * delta;
+		if (p != 0.0) entropy -= p * delta * log(p);
 
    	f.SetRatio (i, npts);
    	double far = f.ToFarey (); 
 
-		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, p, gral, far);
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, p, gral, far, entropy);
 	}
+	printf ("# Total entropy = %g (log2=%g)\n", entropy, log(2.0)*entropy);
 }
 
 int main (int argc, char * argv[])

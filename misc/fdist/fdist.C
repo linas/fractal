@@ -109,8 +109,8 @@ void bincount(int nbins, int depth)
 		fprev = far;
 	}
 
-	printf ("#Total entropy for ?' =  %18.16g\n", egral);
-	printf ("#Total entropy for ?'(?^{-1}) =  %18.16g\n", ejgral);
+	printf ("#Total entropy for ?' =  %18.16g (log2 = %18.16g)\n", egral, egral * log(2.0));
+	printf ("#Total entropy for ?'(?^{-1}) =  %18.16g (log2=%18.16g)\n", ejgral, ejgral*log(2.0));
 }
 
 void 
