@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= f-wavelet fanal fdist fourier janal jdist rdist
+EXES= f-wavelet fanal fdist fourier ftag janal jdist rdist
 
 all: 	$(EXES)
 
@@ -30,6 +30,7 @@ f-wavelet.o:  f-wavelet.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 fanal.o:  fanal.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 fdist.o:  fdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 fourier.o:  fourier.C $(LIB)/libfunc.a $(INC)/FareyTree.h
+ftag.o:  ftag.c 
 janal.o:  janal.C 
 jdist.o:  jdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 rdist.o:  rdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
