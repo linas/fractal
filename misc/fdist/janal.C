@@ -12,33 +12,63 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void coeffs (int freq_max)
+double *bins = NULL;
+int nbins = 0;
+
+void alloc_bins(int nb)
 {
-	int k, n, m;
-
-	for (m=0; m< freq_max; m++)
+	nbins = nb;
+	bins = (double *) malloc(nb * sizeof(double));
+	for (int i=0; i<nb; i++)
 	{
-		double jm = 1.0;
-		double tp = 1.0;
-		int tn = 1.0;
-		for(n=0; n<10; n++)
-		{
-			double term = 0.0;
-			for(k=0; k<tn; k++)
-			{
-				term += cos(M_PI*m*(2*k+1) * tp);
-			}
-printf ("duude m=%d n=%d term=%g\n", m, n, term);
-			jm += tp * term;
-			tn *= 2;
-			tp *= 0.5;
-		}
-
-		printf ("%d	%8.6g\n", m, jm);
-		fflush (stdout);
+		bins[i] = 0.0;
 	}
-
 }
+
+void prt_bins(void)
+{
+	for (int i=0; i<nbins; i++)
+	{
+		double x = ((double) i) / ((double) nbins);
+		printf ("%8.6g	%8.6g\n", x, bins[i]);
+	}
+}
+
+void add_to_bin(double position, double amount)
+{
+	// First subtact int value of x
+	position -= floor (position);
+
+	// position*nbins then truncate and bincount.
+	position *= nbins;
+	int i = (int) position;
+	bin[i] += amount;
+}
+
+void hseq (double range, double weight, double scale)
+{
+	// XXX not 20, but 1/(1-w) etc etc.
+	for (i=0; i< 20; i++)
+	{
+		add_to_bin (range, scale);
+		range *= 0.5;
+		scale *= weight;
+	}
+}
+
+void taki(double weight, double veight)
+{
+	int k;
+	double scale = 1.0;
+	double tk = 1.0;
+	for (k=0; k<10; k++)
+	{
+		hseq (tk, weight, scale);
+		scale *= veight;
+		tk *= 2.0;
+	}
+}
+
 
 main(int argc, char *argv[])
 {
@@ -46,11 +76,13 @@ main(int argc, char *argv[])
 
 	if (argc < 2)
 	{
-		fprintf (stderr, "Usage: %s <freq>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <nbins>\n", argv[0]);
 		exit (1);
 	}
-	int max_freq = atoi (argv[1]);
+	int nb = atoi (argv[1]);
 
-	coeffs (max_freq);
+	alloc_bins (nb);
+	taki (0.5, 0.5);
+	prt_bins();
 }
 
