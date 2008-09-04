@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Farey.h"
+
 /* A stupa is a step pyramid */
 double stupa (double x)
 {
@@ -59,6 +61,13 @@ void prt_graph(int npts, double veight, double weight)
 {
 	int i;
 
+	double *bin = (double *) malloc(npts*sizeof(double));
+	for (i=0; i<npts; i++)
+	{
+		bin[i] = 0.0;
+	}
+
+	/* run loop once, to get the total normalization */
 	double gral = 0.0;
 	double delta = 1.0 / ((double) npts);
 	for (i=0; i<npts; i++)
@@ -66,8 +75,24 @@ void prt_graph(int npts, double veight, double weight)
 		double x = ((double) i) / ((double) npts);
 		double p = product (x, veight, weight);
 		gral += p * delta;
+		bin[i] = p;
+	}
 
-		printf ("%d	%8.6g	%8.6g	%8.6g\n", i, x, p, gral);
+	/* Compute the integral of the distribution */
+   ContinuedFraction f;
+
+	delta /= gral;
+	gral = 0.0;
+	for (i=0; i<npts; i++)
+	{
+		double x = ((double) i) / ((double) npts);
+		double p = bin[i];
+		gral += p * delta;
+
+   	f.SetRatio (i+1, nbins);
+   	double far = f.ToFarey (); 
+
+		printf ("%d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, p, gral, far);
 	}
 }
 
