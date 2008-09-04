@@ -324,7 +324,7 @@ This figure shows the sum of the bin counts of the Farey fractions, together
 \begin_layout Standard
 The derivative of the Minkowski question mark function cannot be defined
  using the classical analytic techniques.
- More precisely, traditional analytic tools applied to the 
+ More precisely, classical analytic tools applied to the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -758,7 +758,7 @@ Numerical access to these coefficients begs a question: what would the inverse
 
 \end_inset
 
- This function is, again, easily accessibly by numerical means; it is shown
+This function is, again, easily accessibly by numerical means; it is shown
  in the figure 
 \begin_inset LatexCommand ref
 reference "fig:The-Jacobian"
@@ -852,6 +852,146 @@ The data was obtained by misc/fdist/fourier.C and plotted by jacob.gplot
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+By differentiating the identity 
+\begin_inset Formula $x=?\left(?^{-1}\left(x\right)\right)$
+\end_inset
+
+ one obtains the simple identity 
+\begin_inset Formula \[
+\left(?^{-1}\left(x\right)\right)^{\prime}=\frac{1}{?^{\prime}\left(?^{-1}\left(x\right)\right)}\]
+
+\end_inset
+
+and so the figure 
+\begin_inset LatexCommand ref
+reference "fig:The-Jacobian"
+
+\end_inset
+
+ can be thought of as illustrating the derivative of 
+\begin_inset Formula $?^{-1}\left(x\right)$
+\end_inset
+
+.
+ The figure confirms the intuition of what this derivative should look like:
+ the derivative becomes infinite (Dirac delta-function spikes) at the dyadic
+ rationals.
+ This figure could be prepared directly, without the intervening Fourier
+ transform: one could simply bin-count uniformly-generated values of 
+\begin_inset Formula $x$
+\end_inset
+
+, passing them through 
+\begin_inset Formula $?^{-1}\left(x\right)$
+\end_inset
+
+ and thence into bins.
+ Numerically, bin-counting in this direct fashion is both easier and less
+ prone to noise from rounding and cutoff effects.
+  The result of direct counting confirms the accuracy of 
+\begin_inset LatexCommand ref
+reference "fig:The-Jacobian"
+
+\end_inset
+
+, as well as suggesting another curious detail.
+ On close examination of this figure, it appears that there are small areas
+ of non-vanishing support at the dyadics.
+ These are largest, and thus most clearly visible, under the peaks at 0
+ and 1, and again, but smaller, at 1/2.
+ Whether these are numerical artifacts, or are real condensation points
+ is hard to say.
+ These are magnified and shown in figure xx.
+ The overt structure of figure 
+\begin_inset LatexCommand ref
+reference "fig:The-Jacobian"
+
+\end_inset
+
+ suggests that this function consists solely of Dirac delta functions located
+ at the dyadic rationals.
+ The magnified figure xx suggests that the function 
+\begin_inset Formula $d?^{-1}\left(x\right)/dx$
+\end_inset
+
+ might take on non-zero values at the other rationals, or even at the irrational
+s -- this is what is meant by 
+\begin_inset Quotes eld
+\end_inset
+
+real condensation points
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Without a formal, 
+\begin_inset Quotes eld
+\end_inset
+
+analytic
+\begin_inset Quotes erd
+\end_inset
+
+ expression for 
+\begin_inset Formula $d?^{-1}\left(x\right)/dx$
+\end_inset
+
+, it is impossible to decide whther this feature is 
+\begin_inset Quotes eld
+\end_inset
+
+real
+\begin_inset Quotes erd
+\end_inset
+
+ or an artifact.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Closeup-of-Derivative"
+
+\end_inset
+
+Closeup of Derivative
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The idea that these might be real condensation points is gugested by the
+ fact that in each sequence of delta functions, the magnitude of the delta
+ function does not decrease to zero at the limiting point of the sequence,
+ but remains non-zero.
+ Each dyadic rational is the limit point of many such sequences.
 \end_layout
 
 \begin_layout Standard
