@@ -36,9 +36,9 @@ void bincount(int nbins, int depth)
 	int cnt = 0;
 	for (i=0; i<max; i++)
 	{
-		int n = rand();
+		unsigned long n = rand();
 
-   	f.SetRatio (n, RAND_MAX + 1);
+   	f.SetRatio (n, (unsigned long) RAND_MAX);
    	double x = f.ToFarey (); 
 		x *= nbins;
 		int ib = (int) x;
@@ -58,8 +58,11 @@ void bincount(int nbins, int depth)
 		/* Be careful to bin-count the entropy 
 		 * (use discrete not continuous formula) 
 		 */
-		double entropy = - rect * log(rect);
-		if (bin[i] == 0) entropy = 0;
+		double entropy = 0.0;
+		if (bin[i] != 0)
+		{
+			entropy = - rect * log(rect);
+		}
 		egral += entropy;
 
 		double x = ((double) i) / ((double) nbins);
