@@ -86,6 +86,7 @@ void fourier (int nbins, int freq_max)
 
 		for (n=0; n<freq_max; n++)
 		{
+// #define JACOB
 #ifdef JACOB
 			double re = cos(2.0*M_PI*n*far);
 			double im = sin(2.0*M_PI*n*far);
@@ -98,10 +99,19 @@ void fourier (int nbins, int freq_max)
 			fre[n] += bin[i] * bin[i] * re;
 			fim[n] += bin[i] * bin[i] * im;
 #endif
+#ifdef STRIAGHT
 			double re = cos(2.0*M_PI*n*x);
 			double im = sin(2.0*M_PI*n*x);
 			fre[n] += bin[i] * re;
 			fim[n] += bin[i] * im;
+#endif
+			if (bin[i] != 0.0)
+			{
+				double re = cos(2.0*M_PI*n*x);
+				double im = sin(2.0*M_PI*n*x);
+				fre[n] += re / bin[i];
+				fim[n] += im / bin[i];
+			}
 		}
 	}
 
@@ -112,16 +122,16 @@ void fourier (int nbins, int freq_max)
 		fim[n] /= (double) nbins;
 	}
 
-#if 1
+#if 0
 	for (n=0; n<freq_max; n++)
 	{
 		printf ("%d	%8.6g	%8.6g\n", n, fre[n], fim[n]);
 	}
 #endif
 
-#if 0
+#if 1
 	/* rebin */
-	int npts = 1200;
+	int npts = 2048;
 	double gral = 0.0;
 	for(i=0; i<npts; i++)
 	{
@@ -133,8 +143,8 @@ void fourier (int nbins, int freq_max)
 		double fx = fre[0];
 		for (n=1; n<freq_max; n++)
 		{
-			// fx += 2.0* fre[n] * cos(2.0*M_PI*n*x);
-			fx += 2.0* fre[n] * cos(2.0*M_PI*n*far);
+			fx += 2.0* fre[n] * cos(2.0*M_PI*n*x);
+			// fx += 2.0* fre[n] * cos(2.0*M_PI*n*far);
 		}
 
 		// hack alert .. !!??

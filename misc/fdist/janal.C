@@ -18,22 +18,24 @@ void coeffs (int freq_max)
 
 	for (m=0; m< freq_max; m++)
 	{
-		double jm = 0.0;
+		double jm = 1.0;
 		double tp = 1.0;
 		int tn = 1.0;
-		for(n=0; n<30; n++)
+		for(n=0; n<10; n++)
 		{
 			double term = 0.0;
 			for(k=0; k<tn; k++)
 			{
 				term += cos(M_PI*m*(2*k+1) * tp);
 			}
+printf ("duude m=%d n=%d term=%g\n", m, n, term);
 			jm += tp * term;
-			tn *=- 2;
+			tn *= 2;
 			tp *= 0.5;
 		}
 
 		printf ("%d	%8.6g\n", m, jm);
+		fflush (stdout);
 	}
 
 }

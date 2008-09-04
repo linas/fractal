@@ -26,18 +26,19 @@ set key left
 #################################################
 # Used to generate the graph in the text
 #
-set term postscript
-set out 'fq-prime.ps'
-set title "DFT of the Derivative of the Question Mark"
-set yrange [-0.2:0.2]
-set xlabel "n"
-set ylabel "d_n"
-plot "f.dat" using 1:2 title ""
+# set term postscript
+# set out 'fq-prime.ps'
+# set title "DFT of the Derivative of the Question Mark"
+# set yrange [-0.2:0.2]
+# set xlabel "n"
+# set ylabel "d_n"
+# plot "f.dat" using 1:2 title ""
 
 
 set term png small
 set out 'fcoff.png'
 
 set yrange [-0.2:0.2]
-plot "f.dat" using 1:2
+set yrange [-0.05:0.05]
+plot "fcoff.dat" using 1:2
 
