@@ -68,13 +68,22 @@ void prt_graph(int npts, double veight, double weight)
 		bin[i] = 0.0;
 	}
 
+   ContinuedFraction f;
+
+	/* Compute the integral of the distribution, in "gral" */
 	/* run loop once, to get the total normalization */
 	double gral = 0.0;
 	double delta = 1.0 / ((double) npts);
 	for (i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
+   	f.SetRatio (i, npts);
+   	double far = f.ToFarey (); 
 
+		double p = product (far, veight, weight);
+		gral += p * delta;
+		bin[i] += p;
+#if JITTER
 		for (int j=0; j<120; j++)
 		{
 			double off = delta * rand() / ((double) RAND_MAX);
@@ -82,10 +91,8 @@ void prt_graph(int npts, double veight, double weight)
 			gral += p * delta;
 			bin[i] += p;
 		}
+#endif
 	}
-
-	/* Compute the integral of the distribution */
-   ContinuedFraction f;
 
 	delta /= gral;
 	gral = 0.0;
@@ -114,4 +121,6 @@ int main (int argc, char * argv[])
 	double weight = atof (argv[3]);
 
 	prt_graph (nbins, veight, weight);
+
+	return 0;
 }
