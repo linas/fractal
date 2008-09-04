@@ -44,6 +44,7 @@ void add_to_bin(double position, double amount)
 	int i = (int) x;
 	bin[i] += amount;
 
+// #define MIRROR
 #ifdef MIRROR
 	// mirror image
 	position = 1.0 - position;
@@ -55,24 +56,29 @@ void add_to_bin(double position, double amount)
 
 void hseq (double rlo, double rhi, double weight, double scale)
 {
+	double orig_scale = scale;
 	double range = rhi - rlo;
 
 	// XXX not 20, but 1/(1-w) etc etc.
-	for (int i=0; i< 25; i++)
+	for (int i=0; i< 27; i++)
 	{
 		add_to_bin (rlo + range, scale);
 		range *= 0.5;
 		scale *= weight;
 	}
 
+#define REFLECTO
+#ifdef REFLECTO
+	scale = orig_scale;
 	range = rhi - rlo;
 	range *= 0.25;
-	for (int i=0; i< 23; i++)
+	for (int i=0; i< 25; i++)
 	{
 		add_to_bin (rhi - range, scale);
 		range *= 0.5;
 		scale *= weight;
 	}
+#endif
 }
 
 void range (double range, double weight, double scale)
@@ -90,7 +96,7 @@ void taki(double veight, double weight)
 	int k;
 	double scale = 1.0;
 	double tk = 1.0;
-	for (k=0; k<16; k++)
+	for (k=0; k<18; k++)
 	{
 		range (tk, weight, scale);
 		scale *= veight;
