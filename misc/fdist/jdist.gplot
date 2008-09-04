@@ -2,9 +2,20 @@
 set data style lines
 set key left
 
+#################################################
+# Used to generate the graph in the text
+# set term postscript
+# set out 'jdist-closeup.ps'
+# set title "Closeup of d?^-1 / dx"
+# set yrange [0:0.001]
+# set xlabel "x"
+# set ylabel ""
+# unset ytics
+# plot "jdist.dat" using 2:3 title ""
+
 
 set term png small
 set out 'jdist.png'
 
-set yrange [0:0.001]
+set yrange [0:0.05]
 plot "jdist.dat" using 2:3
