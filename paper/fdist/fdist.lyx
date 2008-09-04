@@ -1663,6 +1663,104 @@ reference "eq:Takagi-measure"
 \end_layout
 
 \begin_layout Section
+Cantor Measures
+\end_layout
+
+\begin_layout Standard
+This section takes a breif moment to justify the label of 
+\begin_inset Quotes eld
+\end_inset
+
+Cantor set measure
+\begin_inset Quotes erd
+\end_inset
+
+ used in the paragraphs above.
+ It proceeds by the definition of the canonical Cantor set, then a class
+ of Cantor sets with non-zero measure, and finally, a class of generalized
+ Cantor sets with arbitrary measures.
+\end_layout
+
+\begin_layout Standard
+The traditional Cantor set is constructed by considering first the closed
+ unit interval, and then removing the open set that is the middle third:
+ by removing the set 
+\begin_inset Formula $\left(1/3\,,\,2/3\right)$
+\end_inset
+
+.
+ One then removes the middle thirds from the remaining two closed intervals,
+ and then recursively proceeding 
+\emph on
+ad infinitum
+\emph default
+.
+ It was Cantor's acheivement to show that the remaining set is uncountable
+\begin_inset LatexCommand cite
+key "Can1884"
+
+\end_inset
+
+.
+ This proceedure can be performed multiplicatively; namely, by considering
+ the function 
+\begin_inset Formula \[
+c\left(x\right)=\begin{cases}
+1 & \mbox{ for }0\le x\le\frac{1}{3}\\
+0 & \mbox{ for }\frac{1}{3}<x<\frac{2}{3}\\
+1 & \mbox{\mbox{ for }\frac{2}{3}\le x\le1}\end{cases}\]
+
+\end_inset
+
+ The indicator function for the Cantor set is then given as 
+\begin_inset Formula \[
+\mu_{C}\left(x\right)=\prod_{k=0}^{\infty}\tilde{c}\left(3^{k}x\right)\]
+
+\end_inset
+
+with the tilde defined as before.
+ This indicator function is equal to 1 for any point 
+\begin_inset Formula $x$
+\end_inset
+
+ beloning to the Cantor set, and zero otherwise.
+ A formal measure, defined in standard measure-theoretic terms, can be defined
+ for this function.
+ In plainer language, it is integrable: one finds that 
+\begin_inset Formula \[
+0=\int_{0}^{1}\mu_{C}\left(x\right)dx\]
+
+\end_inset
+
+that is, the measure of the Cantor set is zero.
+ The principal difficulty of constructing the formal measure is the realization
+ that the standard open-interval topology for real interval won't do.
+ 
+\end_layout
+
+\begin_layout Standard
+The indicator function above can be generalized in a variaty of ways; the
+ most important generalization for the present purposes is to define a measure
+ that is not vanishing on the unit interval.
+ This may be done as follows.
+ Consider 
+\begin_inset Formula \[
+c_{w}\left(x\right)=\begin{cases}
+1 & \mbox{ for }0\le x\le w\\
+0 & \mbox{ for }w<x<1-w\\
+1 & \mbox{\mbox{ for }1-w\le x\le1}\end{cases}\]
+
+\end_inset
+
+ indicating a pair of closed intrvals of width 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
 Intro to remainder
 \end_layout
 
