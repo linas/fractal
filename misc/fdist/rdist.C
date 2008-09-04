@@ -13,8 +13,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Farey.h"
-
 void
 bincount (int nbins, int max)
 {
