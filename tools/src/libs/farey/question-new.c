@@ -1,7 +1,7 @@
 /*
  * question-new.c
  *
- * Straight-C routines for computing the quesiton mark function.
+ * Straight-C routines for computing the Minkowski question mark function.
  *
  * Linas Vepstas May 2007
  */
