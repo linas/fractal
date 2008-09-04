@@ -45,14 +45,26 @@ void add_to_bin(double position, double amount)
 	bin[i] += amount;
 }
 
-void hseq (double range, double weight, double scale)
+void hseq (double rlo, double rhi, double weight, double scale)
 {
+	double range = rhi - rlo;
+
 	// XXX not 20, but 1/(1-w) etc etc.
 	for (int i=0; i< 20; i++)
 	{
-		add_to_bin (range, scale);
+		add_to_bin (rlo + range, scale);
 		range *= 0.5;
 		scale *= weight;
+	}
+}
+
+void range (double range, double weight, double scale)
+{
+	double rlo;
+	double delt = 1.0 / range;
+	for (rlo = 0.0; rlo < 1.0; rlo += delt)
+	{
+		hseq (rlo, rlo+delt, weight, scale);
 	}
 }
 
@@ -63,7 +75,7 @@ void taki(double weight, double veight)
 	double tk = 1.0;
 	for (k=0; k<10; k++)
 	{
-		hseq (tk, weight, scale);
+		range (tk, weight, scale);
 		scale *= veight;
 		tk *= 2.0;
 	}
