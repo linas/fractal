@@ -12,16 +12,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double *bins = NULL;
+double *bin = NULL;
 int nbins = 0;
 
 void alloc_bins(int nb)
 {
 	nbins = nb;
-	bins = (double *) malloc(nb * sizeof(double));
+	bin = (double *) malloc(nb * sizeof(double));
 	for (int i=0; i<nb; i++)
 	{
-		bins[i] = 0.0;
+		bin[i] = 0.0;
 	}
 }
 
@@ -30,7 +30,7 @@ void prt_bins(void)
 	for (int i=0; i<nbins; i++)
 	{
 		double x = ((double) i) / ((double) nbins);
-		printf ("%8.6g	%8.6g\n", x, bins[i]);
+		printf ("%8.6g	%8.6g\n", x, bin[i]);
 	}
 }
 
@@ -48,7 +48,7 @@ void add_to_bin(double position, double amount)
 void hseq (double range, double weight, double scale)
 {
 	// XXX not 20, but 1/(1-w) etc etc.
-	for (i=0; i< 20; i++)
+	for (int i=0; i< 20; i++)
 	{
 		add_to_bin (range, scale);
 		range *= 0.5;
