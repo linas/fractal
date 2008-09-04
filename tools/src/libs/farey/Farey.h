@@ -32,6 +32,8 @@ class ContinuedFraction
       void Print (void);
       int GetNumTerms (void);
 		void SwapTerms (int p, int q);
+		void LeftShift (int k);
+		void BinaryLeftShift (int k);
 
 		int GetConvNum (int n);
 		int GetConvDenom (int n);

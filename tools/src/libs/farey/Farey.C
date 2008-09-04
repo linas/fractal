@@ -252,6 +252,35 @@ ContinuedFraction::SetTerm (int term, int val)
 
 /* ------------------------------------------------------------ */
 
+void
+ContinuedFraction::LeftShift (int k)
+{
+	if (k < 1) return;
+	if (nterms <= k)
+	{
+		nterms = 0;
+		return;
+	}
+	nterms -= k;
+	for (int i=0; i<nterms; i++) tinued_frac[i] = tinued_frac[i+k];
+}
+
+void
+ContinuedFraction::BinaryLeftShift (int k)
+{
+	while (nterms != 0)
+	{
+		if (k < tinued_frac[0])
+		{
+			tinued_frac[0] -= k;
+			return;
+		} 
+		LeftShift(1);
+	}
+}
+
+/* ------------------------------------------------------------ */
+
 void 
 ContinuedFraction::SwapTerms (int p, int q)
 {
