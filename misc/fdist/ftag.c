@@ -17,7 +17,7 @@ double stupa (double x)
 
 	x -= floor(x);
 	if (0.5 < x) x = 1.0-x;
-	if (0.0 == x) return 0.0;
+	if (0.0 == x) return 1.0e16;
 	
 	n = 0;
 	while(1)
@@ -26,7 +26,7 @@ double stupa (double x)
 		n++;
 		x *= 2.0;
 	}
-	return n;
+	return (double) n;
 }
 
 double taga(double x, double veight)
@@ -38,7 +38,7 @@ double taga(double x, double veight)
 	double tw = 1.0;
 	for (k=0; k<20; k++)
 	{
-		double f = stupa(tw*x);
+		double f = stupa(tk*x);
 		acc += tw * f;
 		tw *= veight;
 		tk *= 2.0;
