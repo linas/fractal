@@ -1889,7 +1889,7 @@ Gibbs measure
 .
  This probability is given by 
 \begin_inset Formula \begin{equation}
-P(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\beta H\left(\sigma\right)\right)\label{eq:probability distribution}\end{equation}
+P(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\beta H\left(\sigma\right)\right)\label{eq:Gibbs measure}\end{equation}
 
 \end_inset
 
@@ -1933,7 +1933,7 @@ The probability
 
  of eqn 
 \begin_inset LatexCommand ref
-reference "eq:probability distribution"
+reference "eq:Gibbs measure"
 
 \end_inset
 
@@ -2054,7 +2054,7 @@ reference "eq:hamilton-potential"
 
  and eqn 
 \begin_inset LatexCommand ref
-reference "eq:probability distribution"
+reference "eq:Gibbs measure"
 
 \end_inset
 
@@ -2085,6 +2085,127 @@ reference "eq:q-hypothesis"
 \end_inset
 
 ? Why do all three of these forms have such similar probability distributions?
+\end_layout
+
+\begin_layout Section
+As a Product of Piece-wise Functions
+\end_layout
+
+\begin_layout Standard
+Pluging the exact solution 
+\begin_inset LatexCommand ref
+reference "eq:exact soln"
+
+\end_inset
+
+ into the Hamiltonian 
+\begin_inset LatexCommand ref
+reference "eq:hamilton-potential"
+
+\end_inset
+
+ and this in turn into the Gibbs measure 
+\begin_inset LatexCommand ref
+reference "eq:Gibbs measure"
+
+\end_inset
+
+ allows the derivative to be written as a produuct of piece-wise continuous
+ functions.
+ Explicitly, one obtains 
+\begin_inset Formula \[
+?^{\prime}\left(x\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}\frac{2}{\left(1-A_{k+1}\left(x\right)\right)^{2}}\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ is a relatively simple peice-wise continuous function, consisting of 
+\begin_inset Formula $2^{k+1}$
+\end_inset
+
+ pieces that are simple fractions.
+ It is symmetric, so that 
+\begin_inset Formula $A_{k}\left(x\right)=A_{k}\left(1-x\right)$
+\end_inset
+
+.
+ It is bounded, so that 
+\begin_inset Formula $0\le A_{k}\left(x\right)\le1/2$
+\end_inset
+
+, and the 
+\begin_inset Formula $y$
+\end_inset
+
+-axis endpoints of each continuous piece lie on the one or the other bound.
+ The 
+\begin_inset Formula $x$
+\end_inset
+
+-axis endpoints occur at Farey numbers, as shown below.
+ The first few 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ are as follows:
+\begin_inset Formula \[
+A_{0}\left(x\right)=\begin{cases}
+x & \mbox{ for }0\le x\le\frac{1}{2}\end{cases}\]
+
+\end_inset
+
+
+\begin_inset Formula \[
+A_{1}\left(x\right)=\begin{cases}
+\frac{x}{1-x} & \mbox{ for }0\le x\le\frac{1}{3}\\
+\frac{1-2x}{1-x} & \mbox{ for }\frac{1}{3}\le x\le\frac{1}{2}\end{cases}\]
+
+\end_inset
+
+
+\begin_inset Formula \[
+A_{2}\left(x\right)=\begin{cases}
+\frac{x}{1-2x} & \mbox{ for }0\le x\le\frac{1}{4}\\
+\frac{1-3x}{1-2x} & \mbox{ for }\frac{1}{4}\le x\le\frac{1}{3}\\
+\frac{3x-1}{x} & \mbox{ for }\frac{1}{3}\le x\le\frac{2}{5}\\
+\frac{1-2x}{x} & \mbox{ for }\frac{2}{5}\le x\le\frac{1}{2}\end{cases}\]
+
+\end_inset
+
+
+\begin_inset Formula \[
+A_{3}\left(x\right)=\begin{cases}
+\frac{x}{1-3x} & \mbox{ for }0\le x\le\frac{1}{5}\\
+\frac{1-4x}{1-3x} & \mbox{ for }\frac{1}{5}\le x\le\frac{1}{4}\\
+\frac{4x-1}{x} & \mbox{ for }\frac{1}{4}\le x\le\frac{2}{7}\\
+\frac{1-3x}{x} & \mbox{ for }\frac{2}{7}\le x\le\frac{1}{3}\\
+\frac{3x-1}{1-2x} & \mbox{ for }\frac{1}{3}\le x\le\frac{3}{8}\\
+\frac{2-5x}{1-2x} & \mbox{ for }\frac{3}{8}\le x\le\frac{2}{5}\\
+\frac{5x-2}{3x-1} & \mbox{ for }\frac{2}{5}\le x\le\frac{3}{7}\\
+\frac{1-2x}{3x-1} & \mbox{ for }\frac{3}{7}\le x\le\frac{1}{2}\end{cases}\]
+
+\end_inset
+
+One can see the general case emerging through mediant-type addition of the
+ ratios.
+ Each of these can be obtained from the general case, which is given by
+ the rather verbose expression 
+\begin_inset Formula \[
+A_{k}\left(x\right)=\begin{cases}
+?^{-1}\left(\mbox{frac}\left(2^{k}?\left(x\right)\right)\right) & \mbox{ for }0\le\mbox{frac}\left(2^{k}?\left(x\right)\right)\le\frac{1}{2}\\
+?^{-1}\left(\mbox{1-frac}\left(2^{k}?\left(x\right)\right)\right) & \mbox{ for }\frac{1}{2}<\mbox{frac}\left(2^{k}?\left(x\right)\right)\le1\end{cases}\]
+
+\end_inset
+
+Here, 'frac' is the fractional part of a number, that is, 
+\begin_inset Formula $\mbox{frac}\left(x\right)=x-\left\lfloor x\right\rfloor $
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Section
