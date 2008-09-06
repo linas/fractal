@@ -55,13 +55,14 @@ The Minkowski Question Mark function relates the continued-fraction representati
 on of the real numbers, to thier binary expansion.
  Although it is difficult to reason about its derivative, one can show by
  classical techniques that its derivative must vanish on all rationals.
+ Since the Question Mark itself is continuous, one concludes that the deriviatvi
+e must be non-zero on the irrationals, and is thus a discontinuous-everywhere
+ measure.
 \end_layout
 
 \begin_layout Abstract
-A notable example of a discontinuous-everywhere function that is not traditional
-ly integrable, yet, when properly defined, can be integrated, is derivative
- of the Minkowski question mark function.
- It, and its generalizations are known as 
+Two results are presented here: First, a graphical image of this measure,
+ clearly showing that it resembles what are commonly called 
 \begin_inset Quotes eld
 \end_inset
 
@@ -70,47 +71,110 @@ multi-fractal measures
 \end_inset
 
 .
- Some subject matter overlaps that of 
-\begin_inset LatexCommand citet
-key "Ve-L06"
-
-\end_inset
-
-.
- This paper includes numerical results for the Fourier transform of the
- measure.
- It also provides an exact result, expressing the measure as an infinite
- product of piece-wise continuous functions, specifically, as a product
- of Mobius transforms of the form 
+ Next, an exact result, expressing the measure as an infinite product of
+ piece-wise continuous functions, specifically, as a product of Mobius transform
+s of the form 
 \begin_inset Formula $(ax+b)/(cx+d)$
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Abstract
-This document started as a research diary noting various results, and is
- haphazardly structured.
- 
-\end_layout
-
-\begin_layout Abstract
-This note is a part of a set of papers that explore the relationship between
- the real numbers, the Cantor set, the dyadic monoid (a sub-monoid of the
- modular group 
-\begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset
-
-), and fractals.
-\end_layout
-
 \begin_layout Section
-Intro
+Introduction
 \end_layout
 
 \begin_layout Standard
-THIS IS A CLIP-BOOK or DIARY of PARTIALLY-EXPLORED RESULTS.
- The intro hasn't been written yet, but if it was, it would work like this:
+The Minkowski Question Mark function was introduced by Minkowski in 1904
+ as an example of ...
+ (XXX why did he do this?)
+\begin_inset LatexCommand cite
+key "Mink04"
+
+\end_inset
+
+; it is shown in figure 
+\begin_inset LatexCommand ref
+reference "cap:Sum-of-Farey"
+
+\end_inset
+
+.
+ A simple recursive definition was given by Denjoy in 1938
+\begin_inset LatexCommand cite
+key "Den38"
+
+\end_inset
+
+.
+ For rational numbers, it can simply be expressed the summation 
+\begin_inset Formula \begin{equation}
+?\left(x\right)=2\sum_{k=1}^{N}\left(-1\right)^{k+1}\;2^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:direct ? fun defn}\end{equation}
+
+\end_inset
+
+where the 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ are the integers appearing in the continued fraction
+\begin_inset LatexCommand cite
+key "Khin35"
+
+\end_inset
+
+ expansion of 
+\begin_inset Formula $x$
+\end_inset
+
+: 
+\begin_inset Formula \[
+x=[a_{0};a_{1},a_{2},\cdots,a_{N}]=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\cdots}}}\]
+
+\end_inset
+
+ For the case of general, irrational 
+\begin_inset Formula $x$
+\end_inset
+
+, one simply takes the limit 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+; it is not hard to show that the resulting function is well-defined and
+ continuous in the classical sense of delta-epsilon limits.
+\end_layout
+
+\begin_layout Standard
+The function is symmetric in that 
+\begin_inset Formula $?\left(1-x\right)=1-?\left(x\right)$
+\end_inset
+
+, and it has a fractal self-similarity
+\begin_inset LatexCommand cite
+key "Ve-M04"
+
+\end_inset
+
+ given by 
+\begin_inset Formula \[
+\frac{1}{2}?\left(x\right)=?\left(\frac{x}{1+x}\right)\]
+
+\end_inset
+
+An equivalent, alternative definition of the function can be given by stating
+ that it is a correspondence between rationals appearing in the Stern-Brocot,
+ or Farey tree, shown in figure x, and the binary tree of dyadic rationals,
+ in figure x.
+ 
+\end_layout
+
+\begin_layout Standard
+Many insights into the nature and structure of the function, including self-simi
+larity and transformation properties, can be obtained by contemplating the
+ reprecussions of this inifinite-tree representation.
+ Most important is perhaps the insight into topology: the presence of the
+ tree indicates that the Cantor set will manifest itself in various ways.
  
 \end_layout
 
@@ -151,7 +215,7 @@ ous.
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Standard
 \begin_inset Caption
@@ -293,7 +357,7 @@ reference "cap:Sum-of-Farey"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Standard
 \begin_inset Caption
@@ -448,7 +512,7 @@ blancmange curve
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Standard
 \begin_inset Caption
@@ -531,7 +595,7 @@ This is really a very curious circumstance.
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Standard
 \begin_inset Caption
@@ -628,6 +692,16 @@ The remainder of this paper proceeds by first examining the Fourier transform
  This is followed by a discussion of how these curves can be viewed either
  as a measure on a Cantor set, or, equivalently, as statistical lattice
  model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand bibtex
+options "plain"
+bibfiles "/home/linas/src/fractal/paper/fractal"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
