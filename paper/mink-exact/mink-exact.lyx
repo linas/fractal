@@ -651,8 +651,8 @@ Consider the set of all possible (infinite length) strings in two letters.
 \end_inset
 
  given by 
-\begin_inset Formula \[
-x\left(\sigma\right)=\sum_{k=0}^{\infty}b_{k}2^{-\left(k+1\right)}\]
+\begin_inset Formula \begin{equation}
+x\left(\sigma\right)=\sum_{k=0}^{\infty}b_{k}2^{-\left(k+1\right)}\label{eq:binary-number}\end{equation}
 
 \end_inset
 
@@ -775,18 +775,30 @@ The second principle is that of translation invariance: that, because the
 
  obeying the identity 
 \begin_inset Formula \[
+H\left(\sigma\right)=H\left(\tau\sigma\right)\]
+
+\end_inset
+
+Unfortunately, for the present model, this cannot quite hold in the naive
+ sense: the lattice is not double sided (with strings extending to infinity
+ in both directions), but one-sided.
+ The best one can hope for is to isolate the part that acts just on the
+ first 'atom' in the left-most lattice location; call this part 
+\begin_inset Formula $V\left(\sigma\right)$
+\end_inset
+
+, and subtract it from total: thus, instead, translational invariance suggests
+ that, for the one-sided lattice, one should write 
+\begin_inset Formula \[
 H\left(\sigma\right)=V\left(\sigma\right)+H\left(\tau\sigma\right)\]
 
 \end_inset
 
-It is a standard presentation in physics textbooks that any such symmetry
- implies that 
+From this, it is is straight-forward to decompose 
 \begin_inset Formula $H\left(\sigma\right)$
 \end_inset
 
- can be decomposed into a sum.
- In this particular case (because we have an infinite, one-sided lattice),
- the sum becomes an infinite sum: 
+ into a sum: 
 \begin_inset Formula \begin{equation}
 H\left(\sigma\right)=\sum_{k=0}^{\infty}V\left(\tau^{k}\sigma\right)\label{eq:hamilton-potential}\end{equation}
 
@@ -806,36 +818,119 @@ What remains is the 'potential'
 .
 \end_layout
 
-\begin_layout Section
-Self-Similarity 
-\end_layout
-
 \begin_layout Standard
-Why should one even consider at
-\end_layout
+Before doing so, there is one vital point to be made: the shift operator
+ 
+\begin_inset Formula $\tau,$
+\end_inset
 
-\begin_layout Standard
-now has no further constraints, as 
-\end_layout
-
-\begin_layout Standard
-xxxxxxxxxxxxxxxxx
-\end_layout
-
-\begin_layout Standard
-This leads to the relation 
+ when looked at from the point of view as a function on real numbers, looks
+ like division-by-two.
+ To be precise, one has the identity 
 \begin_inset Formula \[
 2^{k}x\left(\sigma\right)-\left\lfloor 2^{k}x\left(\sigma\right)\right\rfloor =x\left(\tau^{k}\sigma\right)\]
 
 \end_inset
 
- It has been observed by Dieter Mayer 
+ where 
+\begin_inset Formula $\left\lfloor y\right\rfloor $
+\end_inset
+
+ denotes the floor of 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ The left-hand side of the above is a central ingredient of the construction
+ of the Takagi or 'blancmange' curve; such a curve may be written as 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}\lambda^{k}f\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\]
+
+\end_inset
+
+for various functions 
+\begin_inset Formula $f$
+\end_inset
+
+ of the unit interval.
+ Such functions have many curious fractal self-similarity properties, and
+ are explored in greater detail in 
+\begin_inset LatexCommand cite
+key "Ve-T04,Ve-M04"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Self-Similarity 
+\end_layout
+
+\begin_layout Standard
+Why should one even consider the application of lattice models to the Minkowski
+ measure? The core justification is that the shift operator 
+\begin_inset Formula $\tau$
+\end_inset
+
+ essentially acts as a division-by-two, when considered on binary the numbers
+ 
+\begin_inset Formula $x\left(\sigma\right)$
+\end_inset
+
+ of eqn 
+\begin_inset LatexCommand ref
+reference "eq:binary-number"
+
+\end_inset
+
+, together with the divide-by-two self-similary relation in eqn 
+\begin_inset LatexCommand ref
+reference "eq:self-similarity"
+
+\end_inset
+
+.
+ Thus, one posits that there is a probability distribution 
+\begin_inset Formula \begin{equation}
+\Pr\left(\sigma\right)=\left(?^{\prime}\circ?^{-1}\right)\left(x\left(\sigma\right)\right)\label{eq:Jacobian}\end{equation}
+
+\end_inset
+
+that is described by the Gibbs measure.
+ The appearance here of the inverse 
+\begin_inset Formula $?^{-1}\left(x\right)$
+\end_inset
+
+ is so as to be able to work 'in the same space' as where one started: that
+ is, 
+\begin_inset Formula $?^{-1}\left(x\right)$
+\end_inset
+
+ maps one from the space of dyadics to the space of Farey fractions, where
+ an operation is performed that coincidentally takes one back to the dyadics.
+ In this case, eqn 
+\begin_inset LatexCommand ref
+reference "eq:Jacobian"
+
+\end_inset
+
+ is essentially a Jacobian.
+\end_layout
+
+\begin_layout Standard
+In 1991, Dieter Mayer hypothesized
 \begin_inset LatexCommand citet
 key "May91"
 
 \end_inset
 
- that the potential function 
+ that the distribution 
+\begin_inset Formula $\ref{eq:Jacobian}$
+\end_inset
+
+ was given by the Kac model[XXX need ref], and specifically, by the Kac
+ potential
 \begin_inset Formula \begin{equation}
 V(x)=\begin{cases}
 2x-1/2 & \quad\mbox{ for }0\le x\le1/2\\
@@ -843,7 +938,29 @@ V(x)=\begin{cases}
 
 \end_inset
 
-taken together with 
+ while taking 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxxxxxx
+\end_layout
+
+\begin_layout Standard
+Explicitly, one has 
+\end_layout
+
+\begin_layout Standard
+nn It has been observed by Dieter Mayer 
+\begin_inset LatexCommand citet
+key "May91"
+
+\end_inset
+
+ that the potential function taken together with 
 \begin_inset Formula $\beta=1$
 \end_inset
 
@@ -852,14 +969,8 @@ taken together with
 \end_inset
 
  become a very good approximation to the derivative of the question mark;
- that is, 
-\begin_inset Formula \[
-P\left(\sigma\right)\approx\left(?^{\prime}\circ?^{-1}\right)\left(x\left(\sigma\right)\right)\]
-
-\end_inset
-
- It is easy to confirm by numerical methods that this approximation holds,
- and that it at least bit as good as the approximations given above.
+ that is, It is easy to confirm by numerical methods that this approximation
+ holds, and that it at least bit as good as the approximations given above.
  The potential energy given by eqn 
 \begin_inset LatexCommand ref
 reference "eq:Kac potential"
