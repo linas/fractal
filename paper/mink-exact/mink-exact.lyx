@@ -789,8 +789,8 @@ Unfortunately, for the present model, this cannot quite hold in the naive
 
 , and subtract it from total: thus, instead, translational invariance suggests
  that, for the one-sided lattice, one should write 
-\begin_inset Formula \[
-H\left(\sigma\right)=V\left(\sigma\right)+H\left(\tau\sigma\right)\]
+\begin_inset Formula \begin{equation}
+H\left(\sigma\right)=V\left(\sigma\right)+H\left(\tau\sigma\right)\label{eq:translational symmetry}\end{equation}
 
 \end_inset
 
@@ -938,185 +938,100 @@ V(x)=\begin{cases}
 
 \end_inset
 
- while taking 
+while taking 
 \begin_inset Formula $\beta=1$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-xxxxxxx
-\end_layout
-
-\begin_layout Standard
-Explicitly, one has 
-\end_layout
-
-\begin_layout Standard
-nn It has been observed by Dieter Mayer 
-\begin_inset LatexCommand citet
-key "May91"
-
-\end_inset
-
- that the potential function taken together with 
-\begin_inset Formula $\beta=1$
-\end_inset
-
- seems to make 
-\begin_inset Formula $P\left(\sigma\right)$
-\end_inset
-
- become a very good approximation to the derivative of the question mark;
- that is, It is easy to confirm by numerical methods that this approximation
- holds, and that it at least bit as good as the approximations given above.
- The potential energy given by eqn 
-\begin_inset LatexCommand ref
-reference "eq:Kac potential"
-
-\end_inset
-
- leads to a model from statistical mechanics known as the Kac model.
-\end_layout
-
-\begin_layout Standard
-Given the language of lattice models, one can actually work backwards, and
- obtain an 
-\emph on
-exact
-\emph default
- expression for the potential
-\begin_inset LatexCommand citet
-key "Ve-L06"
-
+ The conjecture appears entirely reasonable, at least at the numerical level:
+ inserting this into the Gibbs measure yeilds a graph that appears to be
+ more-or-less equal the Question Mark, up to the level of numerical detail
+ that can be easily acheived.
+ However, Mayer does not provide a proof; the main result of this section
+ is to obtain the correct, exact expression for 
+\begin_inset Formula $V$
 \end_inset
 
 .
- It is given by 
-\begin_inset Formula \begin{equation}
-V(y)=\log2-2\log\left(1+?^{-1}(2y)\right)\qquad\mbox{for }0\le y\le\frac{1}{2}\label{eq:exact soln}\end{equation}
+ However, it should be noted that numerical efforts suggest that there are
+ many functions 
+\begin_inset Formula $V$
+\end_inset
+
+ that 'come close'; while loosening the restriction of translational invariance,
+ to allow Hamiltonians of the form 
+\begin_inset Formula $H\left(\sigma\right)=\sum_{k=0}^{\infty}\lambda^{k}V\left(\tau^{k}\sigma\right)$
+\end_inset
+
+ seems to allow an ever richer collection of functions V that seem to yeild
+ good numerical approximations to the Question Mark.
+ Why this should be so is not immediately appearent; it is possibly a statement
+ about topologies.
+\end_layout
+
+\begin_layout Standard
+To obtain the exact solution, one 'follows one's nose'.
+ Sarting with
+\begin_inset Formula \[
+\Pr(x)=\left(?^{\prime}\circ?^{-1}\right)(x)\]
 
 \end_inset
 
-and 
-\begin_inset Formula $V(y)=V(1-y)$
-\end_inset
-
- for 
-\begin_inset Formula $1/2<x\le1$
+one clearly has 
+\begin_inset Formula $\Pr(?(x))=?^{\prime}(x)$
 \end_inset
 
 .
- This potential, taken together with eqn 
+ Applying the symmetry from eqn 
 \begin_inset LatexCommand ref
-reference "eq:hamilton-potential"
+reference "eq:self-similarity"
 
 \end_inset
 
- and eqn 
+, one has that 
+\begin_inset Formula \[
+\Pr\left(\frac{?(x)}{2}\right)=\Pr\left(?\left(\frac{x}{1+x}\right)\right)=?^{\prime}\left(\frac{x}{1+x}\right)\]
+
+\end_inset
+
+The division-by-two is to be recognized as the shift operator.
+ That is, using translational symmetry 
+\begin_inset LatexCommand ref
+reference "eq:translational symmetry"
+
+\end_inset
+
+ in the Gibbs measure 
 \begin_inset LatexCommand ref
 reference "eq:Gibbs measure"
 
 \end_inset
 
-, now gives an exact equality to the measure: one can write exactly that
- 
+ yeilds 
 \begin_inset Formula \[
-P\left(\sigma\right)=\left(?^{\prime}\circ?^{-1}\right)\left(x\left(\sigma\right)\right)\]
+\Pr\left(\tau\sigma\right)=\exp\left(-V\left(\tau\sigma\right)\right)\Pr\left(\sigma\right)\]
 
 \end_inset
 
-The question arises, what is the relationship between the exact solution
- 
-\begin_inset LatexCommand ref
-reference "eq:exact soln"
+or equivalently, 
+\begin_inset Formula \[
+\Pr\left(\frac{?(x)}{2}\right)=\exp\left(-V\left(\frac{?(x)}{2}\right)\right)\Pr\left(?(x)\right)\]
 
 \end_inset
 
-, the Kac potential 
-\begin_inset LatexCommand ref
-reference "eq:Kac potential"
+Back-substituting, one deduces
+\begin_inset Formula \[
+?^{\prime}\left(\frac{x}{1+x}\right)=?^{\prime}(x)\;\exp\left(-V\left(\frac{?(x)}{2}\right)\right)\]
 
 \end_inset
 
-, and the approximate results 
-\begin_inset LatexCommand ref
-reference "eq:q-hypothesis"
+ On the other hand, one has
+\begin_inset Formula \[
+\frac{?^{\prime}(x)}{2}=\frac{1}{(1+x)^{2}}?^{\prime}\left(\frac{x}{1+x}\right)\]
 
 \end_inset
 
-? Why do all three of these forms have such similar probability distributions?
-\end_layout
-
-\begin_layout Subsubsection
-An exact solution
-\end_layout
-
-\begin_layout Standard
-Figure 
-\begin_inset LatexCommand ref
-reference "cap:Ising-Model-Cumulative"
-
-\end_inset
-
- is suggestive, hinting that there may be some interaction that gives a
- cumulative probability distribution that is exactly the question mark function.
- There is not just one, but several interactions that give such a cumulative
- distribution.
- One may obtained by a simple, explicit manipulation.
- The other is hinted at numerically, under the name of the Kac model, given
- below.
-\end_layout
-
-\begin_layout Standard
-Suppose one wants to have 
-\begin_inset Formula \begin{equation}
-P(x)=\left(?^{\prime}\circ?^{-1}\right)(x)\label{eq:}\end{equation}
-
-\end_inset
-
-exactly.
- One may then work backwards to find the potential, as follows.
- One must have 
-\begin_inset Formula $P(?(x))=?^{\prime}(x)$
-\end_inset
-
-, and, applying the symmetries of the question mark function,
-\begin_inset Formula \begin{equation}
-\frac{?(x)}{2}=?\left(\frac{x}{1+x}\right)\label{eq:question-self}\end{equation}
-
-\end_inset
-
-one has simply that 
-\begin_inset Formula \begin{equation}
-P\left(\frac{?(x)}{2}\right)=P\left(?\left(\frac{x}{1+x}\right)\right)=?^{\prime}\left(\frac{x}{1+x}\right)\label{eq:}\end{equation}
-
-\end_inset
-
-Applying the symmetry of the lattice model under the action of 
-\begin_inset Formula $g$
-\end_inset
-
- as discussed above, one gets an expression involving the potential 
-\begin_inset Formula \begin{equation}
-P\left(\frac{?(x)}{2}\right)=\exp\left(-V\left(\frac{?(x)}{2}\right)\right)P\left(?(x)\right)\label{eq:}\end{equation}
-
-\end_inset
-
-from which one deduces 
-\begin_inset Formula \begin{equation}
-?^{\prime}\left(\frac{x}{1+x}\right)=?^{\prime}(x)\;\exp\left(-V\left(\frac{?(x)}{2}\right)\right)\label{eq:}\end{equation}
-
-\end_inset
-
-On the other hand, one has 
-\begin_inset Formula \begin{equation}
-\frac{?^{\prime}(x)}{2}=\frac{1}{(1+x)^{2}}?^{\prime}\left(\frac{x}{1+x}\right)\label{eq:}\end{equation}
-
-\end_inset
-
-which may be obtained by naively differentiating the relation 
+ which may be obtained by naively differentiating the relation 
 \begin_inset LatexCommand ref
 reference "eq:question-self"
 
@@ -1151,6 +1066,69 @@ and
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+xxxxxxx
+\end_layout
+
+\begin_layout Standard
+Explicitly, one has 
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+Given the language of lattice models, one can actually work backwards, and
+ obtain an 
+\emph on
+exact
+\emph default
+ expression for the potential
+\begin_inset LatexCommand citet
+key "Ve-L06"
+
+\end_inset
+
+.
+ It is given by 
+\begin_inset Formula \begin{equation}
+V(y)=\log2-2\log\left(1+?^{-1}(2y)\right)\qquad\mbox{for }0\le y\le\frac{1}{2}\label{eq:exact soln}\end{equation}
+
+\end_inset
+
+and 
+\begin_inset Formula $V(y)=V(1-y)$
+\end_inset
+
+ for 
+\begin_inset Formula $1/2<x\le1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+An exact solution
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset LatexCommand ref
+reference "cap:Ising-Model-Cumulative"
+
+\end_inset
+
+ is suggestive, hinting that there may be some interaction that gives a
+ cumulative probability distribution that is exactly the question mark function.
+ There is not just one, but several interactions that give such a cumulative
+ distribution.
+ One may obtained by a simple, explicit manipulation.
+ The other is hinted at numerically, under the name of the Kac model, given
+ below.
 \end_layout
 
 \begin_layout Standard
