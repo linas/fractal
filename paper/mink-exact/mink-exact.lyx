@@ -563,8 +563,14 @@ The use of the deriviative notation in the above is rather misleading: properly
 \begin_layout Standard
 The proof of the equivalence was given in terms of random variables, and
  the usual topology of random variables is a product topology (see, for
- example x), which is a very different topology than the standard topology
- on the real number line.
+ example 
+\begin_inset LatexCommand cite
+key "Kle08"
+
+\end_inset
+
+), which is a very different topology than the standard topology on the
+ real number line.
  For a discrete random variable taking on values from some set 
 \begin_inset Formula $S$
 \end_inset
@@ -594,24 +600,16 @@ The proof of the equivalence was given in terms of random variables, and
  This intentional confusion leads very naturally to the Cantor set, and
  related phenomena, as well as to the language of lattice models.
  The next section explicitly develops the idea of a lattice model, which
- allows for a non-trivial exact result.
+ allows the measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ to be expressed in an exact way.
  
 \end_layout
 
 \begin_layout Section
 Lattice models
-\end_layout
-
-\begin_layout Standard
-It is constructive to restate the above results in the language of lattice
- models
-\begin_inset LatexCommand cite
-key "Ve-L06"
-
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Standard
@@ -639,7 +637,7 @@ Consider the set of all possible (infinite length) strings in two letters.
 \end_inset
 
  one has the real number 
-\begin_inset Formula $x$
+\begin_inset Formula $0\le x\le1$
 \end_inset
 
  given by 
@@ -648,29 +646,31 @@ x\left(\sigma\right)=\sum_{k=0}^{\infty}b_{k}2^{-\left(k+1\right)}\]
 
 \end_inset
 
-One assigns a real valued number 
-\begin_inset Formula $H\left(\sigma\right)$
+In physics, such strings are the setting for one-dimensional lattice models,
+ the most famous of which is the Ising model.
+ One considers each number 
+\begin_inset Formula $k$
 \end_inset
 
-, conventionally called the 
-\begin_inset Quotes eld
-\end_inset
+ to represent a position in space, a lattice point.
+ At each lattice point, one imagines that there is an atom, interacting
+ with its neighbors, forming a perfect crystal.
+ The goal of physics is to describe the macroscopic properites of this crystal
+ given only microscopic details.
+ There are two critical details that enter into all such models: the principle
+ of maximum entropy, and translational invariance.
+ These two principles, taken together, allow the Minkowski measure to be
+ specified in an exact way.
+ 
+\end_layout
 
-
-\emph on
-energy
-\emph default
-
-\begin_inset Quotes erd
-\end_inset
-
- in physics, to each lattice configuration 
-\begin_inset Formula $\sigma$
-\end_inset
-
-.
- This number is used to determine the probability, or measure, of a given
- lattice configuration, by means of the 
+\begin_layout Standard
+The principle of maximum entropy states that all possible states of the
+ model should be equally likely, subject to obeying any constraints that
+ some or another average value or expectation value of a function of the
+ lattice be fixed.
+ There is a unique probability distribution that satisfies the principle
+ of maximum entropy, it is known as the 
 \emph on
 Boltzmann distribution
 \emph default
@@ -679,17 +679,21 @@ Boltzmann distribution
 Gibbs measure
 \emph default
 .
- This probability is given by 
+ It is given by 
 \begin_inset Formula \begin{equation}
-P(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\beta H\left(\sigma\right)\right)\label{eq:Gibbs measure}\end{equation}
+\Pr(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\beta H\left(\sigma\right)\right)\label{eq:Gibbs measure}\end{equation}
 
 \end_inset
 
-Here, 
-\begin_inset Formula $\beta$
+where 
+\begin_inset Formula $\Pr\left(\sigma\right)$
 \end_inset
 
- is an adjustable parameter of the theory.
+ denotes the probability of seeing the configuration 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
  The normalizing factor 
 \begin_inset Formula $Z\left(\Omega\right)$
 \end_inset
@@ -714,35 +718,39 @@ where
 \end_inset
 
 .
- The Gibbs measure is remarkable in that it is the unique measure that maximizes
- the entropy over all possible configurations.
+ The function 
+\begin_inset Formula $H\left(\sigma\right)$
+\end_inset
+
+ is a real-valued function, conventionally called the 'energy' or 'Hamiltonian'
+ in physics.
+ The principle of maximum entropy interprets the energy as something whose
+ expectation value is to be kept constant; that is, one adjusts the free
+ parameter 
+\begin_inset Formula $\beta$
+\end_inset
+
+ in order to obtain a desired value for the exepectation value 
+\begin_inset Formula \[
+\left\langle H\right\rangle =\frac{1}{Z\left(\Omega\right)}\sum_{\sigma\in\Omega}H\left(\sigma\right)\exp\left(-\beta H\left(\sigma\right)\right)\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The probability 
-\begin_inset Formula $P\left(\sigma\right)$
+The second principle is that of translation invariance: that, because the
+ crystalline lattice 'looks the same everywhere', all results should be
+ independent of any specific position or location in the lattice.
+ In particular, translation invariance implies that 
+\begin_inset Formula $H\left(\sigma\right)$
 \end_inset
 
- of eqn 
-\begin_inset LatexCommand ref
-reference "eq:Gibbs measure"
-
-\end_inset
-
- can be directly equated with the measure in eqn 
-\begin_inset LatexCommand ref
-reference "eq:Cantor-measure"
-
-\end_inset
-
-.
- Doing so leads to 
-\begin_inset Formula \[
-\beta H\left(\sigma\right)=\sum_{k=0}^{\infty}v^{k}\log\,\tilde{s}_{w}\left(2^{k}x\left(\sigma\right)\right)\]
-
-\end_inset
-
- The correspondence can be furthered by introducing the shift operator 
+ should have the same form as one slides around left or right on the lattice.
+ (In the present case, the lattice is one-sided, and so one can slide in
+ only one diretion.
+ Defining the shift operator 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -750,27 +758,53 @@ reference "eq:Cantor-measure"
 \begin_inset Formula $\tau(\sigma_{0},\sigma_{1},\sigma_{2},\ldots)=(\sigma_{1},\sigma_{2},\sigma_{3},\ldots)$
 \end_inset
 
-.
- This leads to the relation 
+, the principle of translation invariance states that we should only consider
+ functions 
+\begin_inset Formula $H\left(\sigma\right)$
+\end_inset
+
+ obeying the identity 
 \begin_inset Formula \[
-2^{k}x\left(\sigma\right)-\left\lfloor 2^{k}x\left(\sigma\right)\right\rfloor =x\left(\tau^{k}\sigma\right)\]
+H\left(\sigma\right)=H\left(\tau\sigma\right)\]
 
 \end_inset
 
- and so one has 
-\begin_inset Formula \[
-\beta H\left(\sigma\right)=\sum_{k=0}^{\infty}v^{k}\log\, s_{w}\left(x\left(\tau^{k}\sigma\right)\right)\]
-
+It is a standard presentation in physics textbooks that any such symmetry
+ implies that 
+\begin_inset Formula $H\left(\sigma\right)$
 \end_inset
 
- This can be compared to translation-invariant Hamiltonians, which take
- the form of 
+ can be decomposed into a sum.
+ In this particular case (because we have an infinite, one-sided lattice),
+ the sum becomes an infinite sum: 
 \begin_inset Formula \begin{equation}
 H\left(\sigma\right)=\sum_{k=0}^{\infty}V\left(\tau^{k}\sigma\right)\label{eq:hamilton-potential}\end{equation}
 
 \end_inset
 
-It has been observed by Dieter Mayer 
+What remains is the 'potential' 
+\begin_inset Formula $V\left(\sigma\right)$
+\end_inset
+
+, which embodies the specifics of the problem at hand.
+\end_layout
+
+\begin_layout Standard
+now has no further constraints, as 
+\end_layout
+
+\begin_layout Standard
+xxxxxxxxxxxxxxxxx
+\end_layout
+
+\begin_layout Standard
+This leads to the relation 
+\begin_inset Formula \[
+2^{k}x\left(\sigma\right)-\left\lfloor 2^{k}x\left(\sigma\right)\right\rfloor =x\left(\tau^{k}\sigma\right)\]
+
+\end_inset
+
+ It has been observed by Dieter Mayer 
 \begin_inset LatexCommand citet
 key "May91"
 
@@ -877,6 +911,137 @@ reference "eq:q-hypothesis"
 \end_inset
 
 ? Why do all three of these forms have such similar probability distributions?
+\end_layout
+
+\begin_layout Subsubsection
+An exact solution
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset LatexCommand ref
+reference "cap:Ising-Model-Cumulative"
+
+\end_inset
+
+ is suggestive, hinting that there may be some interaction that gives a
+ cumulative probability distribution that is exactly the question mark function.
+ There is not just one, but several interactions that give such a cumulative
+ distribution.
+ One may obtained by a simple, explicit manipulation.
+ The other is hinted at numerically, under the name of the Kac model, given
+ below.
+\end_layout
+
+\begin_layout Standard
+Suppose one wants to have 
+\begin_inset Formula \begin{equation}
+P(x)=\left(?^{\prime}\circ?^{-1}\right)(x)\label{eq:}\end{equation}
+
+\end_inset
+
+exactly.
+ One may then work backwards to find the potential, as follows.
+ One must have 
+\begin_inset Formula $P(?(x))=?^{\prime}(x)$
+\end_inset
+
+, and, applying the symmetries of the question mark function,
+\begin_inset Formula \begin{equation}
+\frac{?(x)}{2}=?\left(\frac{x}{1+x}\right)\label{eq:question-self}\end{equation}
+
+\end_inset
+
+one has simply that 
+\begin_inset Formula \begin{equation}
+P\left(\frac{?(x)}{2}\right)=P\left(?\left(\frac{x}{1+x}\right)\right)=?^{\prime}\left(\frac{x}{1+x}\right)\label{eq:}\end{equation}
+
+\end_inset
+
+Applying the symmetry of the lattice model under the action of 
+\begin_inset Formula $g$
+\end_inset
+
+ as discussed above, one gets an expression involving the potential 
+\begin_inset Formula \begin{equation}
+P\left(\frac{?(x)}{2}\right)=\exp\left(-V\left(\frac{?(x)}{2}\right)\right)P\left(?(x)\right)\label{eq:}\end{equation}
+
+\end_inset
+
+from which one deduces 
+\begin_inset Formula \begin{equation}
+?^{\prime}\left(\frac{x}{1+x}\right)=?^{\prime}(x)\;\exp\left(-V\left(\frac{?(x)}{2}\right)\right)\label{eq:}\end{equation}
+
+\end_inset
+
+On the other hand, one has 
+\begin_inset Formula \begin{equation}
+\frac{?^{\prime}(x)}{2}=\frac{1}{(1+x)^{2}}?^{\prime}\left(\frac{x}{1+x}\right)\label{eq:}\end{equation}
+
+\end_inset
+
+which may be obtained by naively differentiating the relation 
+\begin_inset LatexCommand ref
+reference "eq:question-self"
+
+\end_inset
+
+.
+ From this one deduces that 
+\begin_inset Formula \begin{equation}
+\frac{(1+x)^{2}}{2}=\exp\left(-V\left(\frac{?(x)}{2}\right)\right)\label{eq:}\end{equation}
+
+\end_inset
+
+which is easily solved for 
+\begin_inset Formula $V$
+\end_inset
+
+ to obtain
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+V(y)=\log2-2\log\left(1+?^{-1}(2y)\right)\qquad\mbox{for }0\le y\le\frac{1}{2}\label{eq:}\end{equation}
+
+\end_inset
+
+and 
+\begin_inset Formula $V(y)=V(1-y)$
+\end_inset
+
+ for 
+\begin_inset Formula $1/2<x\le1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This result disproves a conjecture by Dieter Meyer, suggesting that the
+ Kac model potential leads to the Question Mark function
+\begin_inset LatexCommand cite
+key "May91"
+
+\end_inset
+
+.
+ While the general shape of this potential is close to that of the Kac model,
+ it is not equal to it.
+\end_layout
+
+\begin_layout Standard
+This has several reprecussions.
+ First, it appears that the exact result is not a pair-wise interaction
+ between spins, but that rather, it involves clusters of all spins.
+ It is not at all clear how, or if, this potential can be written in terms
+ of sums over clusters: the combination of a logarithm with a continued
+ fraction is daunting.
+ In particular, this seems to doom the idea of using lattice models, or
+ at least, translation-invariant potential functions on lattice models,
+ as a technique for gaining insight into the Question Mark function.
+ The result does not invalidate the view of the real number line as a lattice;
+ rather, it just limits its utility for direct, symbolic calculations.
 \end_layout
 
 \begin_layout Standard
