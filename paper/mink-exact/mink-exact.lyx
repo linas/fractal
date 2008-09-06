@@ -1,0 +1,634 @@
+#LyX 1.5.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass article
+\language english
+\inputencoding auto
+\font_roman times
+\font_sans helvet
+\font_typewriter courier
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+An Exact Expression for the Derivative of the Minkowski Question Mark
+\end_layout
+
+\begin_layout Author
+Linas Vepstas <linasvepstas@gmail.com>
+\end_layout
+
+\begin_layout Date
+4 September 2008
+\end_layout
+
+\begin_layout Abstract
+The Minkowski Question Mark function relates the continued-fraction representati
+on of the real numbers, to thier binary expansion.
+ Although it is difficult to reason about its derivative, one can show by
+ classical techniques that its derivative must vanish on all rationals.
+\end_layout
+
+\begin_layout Abstract
+A notable example of a discontinuous-everywhere function that is not traditional
+ly integrable, yet, when properly defined, can be integrated, is derivative
+ of the Minkowski question mark function.
+ It, and its generalizations are known as 
+\begin_inset Quotes eld
+\end_inset
+
+multi-fractal measures
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Some subject matter overlaps that of 
+\begin_inset LatexCommand citet
+key "Ve-L06"
+
+\end_inset
+
+.
+ This paper includes numerical results for the Fourier transform of the
+ measure.
+ It also provides an exact result, expressing the measure as an infinite
+ product of piece-wise continuous functions, specifically, as a product
+ of Mobius transforms of the form 
+\begin_inset Formula $(ax+b)/(cx+d)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Abstract
+This document started as a research diary noting various results, and is
+ haphazardly structured.
+ 
+\end_layout
+
+\begin_layout Abstract
+This note is a part of a set of papers that explore the relationship between
+ the real numbers, the Cantor set, the dyadic monoid (a sub-monoid of the
+ modular group 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset
+
+), and fractals.
+\end_layout
+
+\begin_layout Section
+Intro
+\end_layout
+
+\begin_layout Standard
+THIS IS A CLIP-BOOK or DIARY of PARTIALLY-EXPLORED RESULTS.
+ The intro hasn't been written yet, but if it was, it would work like this:
+ 
+\end_layout
+
+\begin_layout Section
+Distribution of the Rational numbers in the Farey tree
+\end_layout
+
+\begin_layout Standard
+One way to enumerate all of the rationals is by placing them on the Farey
+ tree (or the Stern-Brocot tree).
+ It can be shown that the Farey tree enumerates all of the rationals in
+ the unit interval exactly once
+\begin_inset LatexCommand cite
+key "Bog96"
+
+\end_inset
+
+.
+ However, the distribution of the rationals on the Farey tree is highly
+ non-uniform, if the tree is walked breadth-first.
+ The figure 
+\begin_inset LatexCommand ref
+reference "cap:Distribution-of-Farey"
+
+\end_inset
+
+ shows that distribution.
+ This distribution is highly non-uniform, and by fooling with the number
+ of bins in the histogram, it becomes clear that the figure is highly discontinu
+ous.
+ As the number of bins is increased, it becomes clear that the distribution
+ has a peculiar structure: it always has a humped form, even though the
+ individual spikes vary strongly according to the number of bins.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "cap:Distribution-of-Farey"
+
+\end_inset
+
+Distribution of Farey Fractions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ../../../../linas/fractal/paper/fdist/fdist-65K.ps
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This figure shows a histogram of the first M=65536 Farey fractions according
+ to their location on the unit interval.
+ To create this figure, the unit interval is divided up into N=600 bins,
+ and the bin count 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ for each bin 
+\begin_inset Formula $n$
+\end_inset
+
+ is incremented whenever a fraction 
+\begin_inset Formula $p/q$
+\end_inset
+
+ falls within the bin: 
+\begin_inset Formula $(n-1)/N\leq p/q<n/N$
+\end_inset
+
+.
+ At the end of binning, the count is normalized by multiplying each bin
+ count 
+\begin_inset Formula $c_{n}$
+\end_inset
+
+ by 
+\begin_inset Formula $N/M$
+\end_inset
+
+.
+ The normalization ensures that the histogram is of measure one on the unit
+ interval: that 
+\begin_inset Formula $\sum_{n=0}^{N}c_{n}=1$
+\end_inset
+
+.
+ In a certain sense, the 
+\begin_inset Quotes eld
+\end_inset
+
+shape
+\begin_inset Quotes erd
+\end_inset
+
+ of this histogram is independent of the number of bins and number of fractions
+ counted, although on a highly detailed level, the graph clearly varies
+ with the number of bins 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ In a proper formal treatment, we would need to show that the limit 
+\begin_inset Formula $\lim_{M\rightarrow\infty}c_{n}$
+\end_inset
+
+ exists and is finite, for all 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $N$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Standard
+picture generated by misc/fdist/fdist.C, and fdist.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The shape is suggestive, and the numerical evidence makes it clear that
+ it is somehow the 
+\begin_inset Quotes eld
+\end_inset
+
+derivative
+\begin_inset Quotes erd
+\end_inset
+
+ of the Minkowski question mark function 
+\begin_inset Formula $?'(x)=d?(x)/dx$
+\end_inset
+
+.
+ Performing a simple numeric integral of the above, and comparing it to
+ the exact expression shows a perfect match, as witnessed in the figure
+ 
+\begin_inset LatexCommand ref
+reference "cap:Sum-of-Farey"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "cap:Sum-of-Farey"
+
+\end_inset
+
+Sum of Farey Histogram
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ../../../../linas/fractal/paper/fdist/farey-integral.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This figure shows the sum of the bin counts of the Farey fractions, together
+ with a graph of the Minkowski question mark function.
+ The two graphs can hardly be told apart.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The derivative of the Minkowski question mark function cannot be defined
+ using the classical analytic techniques.
+ More precisely, classical analytic tools applied to the 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ topology of open sets on the real number line are insufficient to construct
+ and describe the shape of this curve.
+ This motivates the study of alternative topologies for the real number
+ line, which constitutes one of the research programs of this paper.
+\end_layout
+
+\begin_layout Standard
+When one does attempt to use classical techniques applied to the classical
+ topology, the result is a number of preposterous-sounding statements, a
+ sampling of which are given below.
+ The question mark is highly singular.
+ It is infinitely differentiable at every rational, and all derivatives
+ vanish at every rational; yet the mapping is strictly monotonically increasing.
+ Just examining the graph visually suggests that the derivatives must be
+ non-zero 
+\begin_inset Quotes eld
+\end_inset
+
+somewhere
+\begin_inset Quotes erd
+\end_inset
+
+, although how to define how to value these derivatives is utterly unclear.
+ Naively, they seem to be 
+\begin_inset Quotes eld
+\end_inset
+
+infinite
+\begin_inset Quotes erd
+\end_inset
+
+ at every irrational; but this fails to explain how to integrate.
+ 
+\end_layout
+
+\begin_layout Standard
+Clearly, the classical approach is sorely lacking and inapplicable; something
+ different is needed.
+ Two possibilities arise: throw away traditional ideas of integration and
+ differentiation, and replace them with something new, something suitable
+ for fractals, or keep these tools, but throw away the 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ topology on the real number line.
+ The latter approach seems to be far more promising.
+ There are several possible alternative topologies.
+ Most immediately obvious is the topology of the Cantor set, which is readily
+ mapped to the real number line.
+ Less obvious, but more appropriate, is the topology of 
+\begin_inset Quotes eld
+\end_inset
+
+cylinder sets
+\begin_inset Quotes erd
+\end_inset
+
+ that is the natural topology for studying shifts, symbolic dynamics, and
+ one-dimensional lattice models.
+ A certain limiting case of the Cantor set topology coincides with the language
+ of cylinder sets; this appears to be adequate for constructing measures
+ which can capture the general structure of this distribution.
+\end_layout
+
+\begin_layout Standard
+The figure 
+\begin_inset LatexCommand ref
+reference "cap:Jacobian"
+
+\end_inset
+
+ shows what could be called the Jacobian 
+\begin_inset Formula $(?'\circ?^{-1})(x)$
+\end_inset
+
+ of the question mark function.
+ This figure simple relabels the x-axis by passing it through 
+\begin_inset Formula $?(x)$
+\end_inset
+
+.
+ This function appears to vanish only at the dyadics.
+ Note the superficial resemblance of the profile to the Takagi curve.
+ By visually comparing this function and the Takagi curve (also called the
+ 
+\emph on
+blancmange curve
+\emph default
+), one can intuitively sense that there must be a more formal relation between
+ the two, as if the values of the one function could somehow be exponentiated
+ to give the other.
+ The trick is to write down this relation.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "cap:Jacobian"
+
+\end_inset
+
+Jacobian
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ../../../../linas/fractal/paper/fdist/fdist-jaco.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This figure shows the same Farey fraction distribution as in a previous
+ figure, except that the x-axis is relabeled by passing it through the Minkowski
+ question mark.
+ In a certain sense, this can be taken to be the Jacobian 
+\begin_inset Formula $(?^{\prime}\circ?^{-1})(x)$
+\end_inset
+
+ of the question mark.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ../../../../linas/fractal/paper/fdist/jac-int.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This figures shows the integral 
+\begin_inset Formula $\int_{0}^{x}(?^{\prime}\circ?^{-1})(y)\, dy$
+\end_inset
+
+, and, by comparison, the value of 
+\begin_inset Formula $?^{-1}(x)$
+\end_inset
+
+ which it resembles.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is really a very curious circumstance.
+ The above graphs show only the distribution of a finite number of points
+ (they were, after all, computer generated).
+ A finite set of points on the real number line is zero; yet we are using
+ it to induce a measure that can be used for integration.
+ How is this? The statistical properties of a finite sampling provide us
+ with information about the limit.
+ Its as if we were working with an anti-Cantor-set construction: we start
+ with a dust, and average over intervals to discover analytic properties.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Takagi Curve
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ../../../../linas/fractal/paper/fdist/takagi.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A graph of the Takagi-Landsberg curve 
+\begin_inset Formula $t_{w}(x)$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $x$
+\end_inset
+
+ for a fixed value of 
+\begin_inset Formula $w=0.618$
+\end_inset
+
+.
+ Note the curious visual resemblance to the Jacobian of the Question Mark
+ function.
+ The Takagi curve, explored in 
+\begin_inset LatexCommand cite
+key "Ve-T04"
+
+\end_inset
+
+, is given by
+\begin_inset Formula \begin{equation}
+t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\label{eq:}\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\tau(x)$
+\end_inset
+
+ is the triangle function:
+\begin_inset Formula \begin{equation}
+\tau(x)=\left\{ \begin{array}{ccc}
+2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
+2-2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\label{eq:}\end{equation}
+
+\end_inset
+
+ The fractal self-symilarity of the Takagi curve is given by a three-dimensional
+ representation of a certain monoid, the 
+\begin_inset Quotes eld
+\end_inset
+
+dyadic monoid
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The remainder of this paper proceeds by first examining the Fourier transform
+ of the quantity 
+\begin_inset Formula $(?'\circ?^{-1})(x)$
+\end_inset
+
+, followed by the presentation of a class of fractal curves which appear
+ to capture the structure of 
+\begin_inset Formula $(?'\circ?^{-1})(x)$
+\end_inset
+
+.
+ This is followed by a discussion of how these curves can be viewed either
+ as a measure on a Cantor set, or, equivalently, as statistical lattice
+ model.
+\end_layout
+
+\end_body
+\end_document
