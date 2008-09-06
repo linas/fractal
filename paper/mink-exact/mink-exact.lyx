@@ -484,8 +484,8 @@ The measure
 
  is known as the 'Minkowski measure'; its relationship to the Question Mark
  function is straight-forward: it is simply 
-\begin_inset Formula \[
-?\left(b\right)-?\left(a\right)=\int_{a}^{b}d\mu\]
+\begin_inset Formula \begin{equation}
+?\left(b\right)-?\left(a\right)=\int_{a}^{b}d\mu\label{eq:integral}\end{equation}
 
 \end_inset
 
@@ -532,316 +532,355 @@ That this is so is easily seen by the duality of the ordinary dyadic tree
 \end_inset
 
 essentially, concluding the proof of the assertion.
-\end_layout
-
-\begin_layout Standard
-may write: 
-\begin_inset Formula \[
-\frac{d?\left(x\right)}{dx}=\mu\left(x\right)\]
-
-\end_inset
-
- This last equation
-\end_layout
-
-\begin_layout Standard
-xxxxxxxxxxxxx
-\end_layout
-
-\begin_layout Standard
-The derivative of the Minkowski question mark function cannot be defined
- using the classical analytic techniques.
- More precisely, classical analytic tools applied to the 
-\begin_inset Quotes eld
-\end_inset
-
-natural
-\begin_inset Quotes erd
-\end_inset
-
- topology of open sets on the real number line are insufficient to construct
- and describe the shape of this curve.
- This motivates the study of alternative topologies for the real number
- line, which constitutes one of the research programs of this paper.
-\end_layout
-
-\begin_layout Standard
-When one does attempt to use classical techniques applied to the classical
- topology, the result is a number of preposterous-sounding statements, a
- sampling of which are given below.
- The question mark is highly singular.
- It is infinitely differentiable at every rational, and all derivatives
- vanish at every rational; yet the mapping is strictly monotonically increasing.
- Just examining the graph visually suggests that the derivatives must be
- non-zero 
-\begin_inset Quotes eld
-\end_inset
-
-somewhere
-\begin_inset Quotes erd
-\end_inset
-
-, although how to define how to value these derivatives is utterly unclear.
- Naively, they seem to be 
-\begin_inset Quotes eld
-\end_inset
-
-infinite
-\begin_inset Quotes erd
-\end_inset
-
- at every irrational; but this fails to explain how to integrate.
  
 \end_layout
 
 \begin_layout Standard
-Clearly, the classical approach is sorely lacking and inapplicable; something
- different is needed.
- Two possibilities arise: throw away traditional ideas of integration and
- differentiation, and replace them with something new, something suitable
- for fractals, or keep these tools, but throw away the 
-\begin_inset Quotes eld
+Because the equation 
+\begin_inset LatexCommand ref
+reference "eq:integral"
+
 \end_inset
 
-natural
-\begin_inset Quotes erd
+ resembles a classical integral, one is sorely tempted to succumb to this
+ temptation, and use classical notation to write: 
+\begin_inset Formula \[
+\frac{d?\left(x\right)}{dx}=?^{\prime}\left(x\right)=\mu\left(x\right)\]
+
 \end_inset
 
- topology on the real number line.
- The latter approach seems to be far more promising.
- There are several possible alternative topologies.
- Most immediately obvious is the topology of the Cantor set, which is readily
- mapped to the real number line.
- Less obvious, but more appropriate, is the topology of 
-\begin_inset Quotes eld
-\end_inset
 
-cylinder sets
-\begin_inset Quotes erd
-\end_inset
-
- that is the natural topology for studying shifts, symbolic dynamics, and
- one-dimensional lattice models.
- A certain limiting case of the Cantor set topology coincides with the language
- of cylinder sets; this appears to be adequate for constructing measures
- which can capture the general structure of this distribution.
 \end_layout
 
 \begin_layout Standard
-The figure 
-\begin_inset LatexCommand ref
-reference "cap:Jacobian"
+The use of the deriviative notation in the above is rather misleading: properly
+ speaking, the derivative of the Question Mark is not defined when using
+ the standard topology on the real number line.
+ Yet this notation is not exactly wrong; it's simply that a gloss has happened
+ along the way.
+\end_layout
 
+\begin_layout Standard
+The proof of the equivalence was given in terms of random variables, and
+ the usual topology of random variables is a product topology (see, for
+ example x), which is a very different topology than the standard topology
+ on the real number line.
+ For a discrete random variable taking on values from some set 
+\begin_inset Formula $S$
 \end_inset
 
- shows what could be called the Jacobian 
-\begin_inset Formula $(?'\circ?^{-1})(x)$
+, the appropriate space for studying 
+\begin_inset Formula $M$
 \end_inset
 
- of the question mark function.
- This figure simple relabels the x-axis by passing it through 
-\begin_inset Formula $?(x)$
+ successive measurements is the product space 
+\begin_inset Formula $S^{M}=S\times\dots\times S$
 \end_inset
 
 .
- This function appears to vanish only at the dyadics.
- Note the superficial resemblance of the profile to the Takagi curve.
- By visually comparing this function and the Takagi curve (also called the
+ The open sets of a product topology are the cylinder sets.
+ Points in the product topology are simply strings of symbols, chosen from
+ the set 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ However, by considering the set 
+\begin_inset Formula $S=\left\{ 0,1\right\} $
+\end_inset
+
+ of the binary digits 0,1, one can intentionally confuse strings of binary
+ digits with binary numbers.
+ This intentional confusion leads very naturally to the Cantor set, and
+ related phenomena, as well as to the language of lattice models.
+ The next section explicitly develops the idea of a lattice model, which
+ allows for a non-trivial exact result.
  
-\emph on
-blancmange curve
-\emph default
-), one can intuitively sense that there must be a more formal relation between
- the two, as if the values of the one function could somehow be exponentiated
- to give the other.
- The trick is to write down this relation.
+\end_layout
+
+\begin_layout Section
+Lattice models
+\end_layout
+
+\begin_layout Standard
+It is constructive to restate the above results in the language of lattice
+ models
+\begin_inset LatexCommand cite
+key "Ve-L06"
+
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Standard
-\begin_inset Caption
-
-\begin_layout Standard
-\begin_inset LatexCommand label
-name "cap:Jacobian"
-
+Consider the set of all possible (infinite length) strings in two letters.
+ Each such string can be represented as 
+\begin_inset Formula $\sigma=(\sigma_{0},\sigma_{1},\sigma_{2},\ldots)$
 \end_inset
 
-Jacobian
-\end_layout
-
+ where 
+\begin_inset Formula $\sigma_{k}\in\{-1,+1\}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../../../../linas/fractal/paper/fdist/fdist-jaco.png
-	width 100col%
-
+.
+ These strings can be trivially equated to binary numbers, by writing the
+ 
+\begin_inset Formula $k$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-This figure shows the same Farey fraction distribution as in a previous
- figure, except that the x-axis is relabeled by passing it through the Minkowski
- question mark.
- In a certain sense, this can be taken to be the Jacobian 
-\begin_inset Formula $(?^{\prime}\circ?^{-1})(x)$
+'th binary digit as 
+\begin_inset Formula $b_{k}=(\sigma_{k}+1)/2$
 \end_inset
 
- of the question mark.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../../../../linas/fractal/paper/fdist/jac-int.png
-	width 100text%
-
+, so that for each configuration 
+\begin_inset Formula $\sigma,$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-This figures shows the integral 
-\begin_inset Formula $\int_{0}^{x}(?^{\prime}\circ?^{-1})(y)\, dy$
-\end_inset
-
-, and, by comparison, the value of 
-\begin_inset Formula $?^{-1}(x)$
-\end_inset
-
- which it resembles.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This is really a very curious circumstance.
- The above graphs show only the distribution of a finite number of points
- (they were, after all, computer generated).
- A finite set of points on the real number line is zero; yet we are using
- it to induce a measure that can be used for integration.
- How is this? The statistical properties of a finite sampling provide us
- with information about the limit.
- Its as if we were working with an anti-Cantor-set construction: we start
- with a dust, and average over intervals to discover analytic properties.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Standard
-\begin_inset Caption
-
-\begin_layout Standard
-Takagi Curve
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename ../../../../linas/fractal/paper/fdist/takagi.png
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A graph of the Takagi-Landsberg curve 
-\begin_inset Formula $t_{w}(x)$
-\end_inset
-
- as a function of 
+ one has the real number 
 \begin_inset Formula $x$
 \end_inset
 
- for a fixed value of 
-\begin_inset Formula $w=0.618$
+ given by 
+\begin_inset Formula \[
+x\left(\sigma\right)=\sum_{k=0}^{\infty}b_{k}2^{-\left(k+1\right)}\]
+
+\end_inset
+
+One assigns a real valued number 
+\begin_inset Formula $H\left(\sigma\right)$
+\end_inset
+
+, conventionally called the 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+energy
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ in physics, to each lattice configuration 
+\begin_inset Formula $\sigma$
 \end_inset
 
 .
- Note the curious visual resemblance to the Jacobian of the Question Mark
- function.
- The Takagi curve, explored in 
-\begin_inset LatexCommand cite
-key "Ve-T04"
+ This number is used to determine the probability, or measure, of a given
+ lattice configuration, by means of the 
+\emph on
+Boltzmann distribution
+\emph default
+ or 
+\emph on
+Gibbs measure
+\emph default
+.
+ This probability is given by 
+\begin_inset Formula \begin{equation}
+P(\sigma)=\frac{1}{Z(\Omega)}\;\exp\left(-\beta H\left(\sigma\right)\right)\label{eq:Gibbs measure}\end{equation}
 
 \end_inset
 
-, is given by
-\begin_inset Formula \begin{equation}
-t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\label{eq:}\end{equation}
+Here, 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is an adjustable parameter of the theory.
+ The normalizing factor 
+\begin_inset Formula $Z\left(\Omega\right)$
+\end_inset
+
+ is known as the 
+\emph on
+partition function
+\emph default
+, it exists to ensure that the sum of all probabilities totals unity.
+ That is, one has 
+\begin_inset Formula \[
+Z\left(\Omega\right)=\sum_{\sigma\in\Omega}\exp\left(-\beta H\left(\sigma\right)\right)\]
 
 \end_inset
 
 where 
-\begin_inset Formula $\tau(x)$
+\begin_inset Formula $\Omega$
 \end_inset
 
- is the triangle function:
-\begin_inset Formula \begin{equation}
-\tau(x)=\left\{ \begin{array}{ccc}
-2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
-2-2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\label{eq:}\end{equation}
-
-\end_inset
-
- The fractal self-symilarity of the Takagi curve is given by a three-dimensional
- representation of a certain monoid, the 
-\begin_inset Quotes eld
-\end_inset
-
-dyadic monoid
-\begin_inset Quotes erd
+ is the set of all possible configurations 
+\begin_inset Formula $\sigma$
 \end_inset
 
 .
- 
-\end_layout
-
-\end_inset
-
-
+ The Gibbs measure is remarkable in that it is the unique measure that maximizes
+ the entropy over all possible configurations.
 \end_layout
 
 \begin_layout Standard
-The remainder of this paper proceeds by first examining the Fourier transform
- of the quantity 
-\begin_inset Formula $(?'\circ?^{-1})(x)$
+The probability 
+\begin_inset Formula $P\left(\sigma\right)$
 \end_inset
 
-, followed by the presentation of a class of fractal curves which appear
- to capture the structure of 
-\begin_inset Formula $(?'\circ?^{-1})(x)$
+ of eqn 
+\begin_inset LatexCommand ref
+reference "eq:Gibbs measure"
+
+\end_inset
+
+ can be directly equated with the measure in eqn 
+\begin_inset LatexCommand ref
+reference "eq:Cantor-measure"
+
 \end_inset
 
 .
- This is followed by a discussion of how these curves can be viewed either
- as a measure on a Cantor set, or, equivalently, as statistical lattice
- model.
+ Doing so leads to 
+\begin_inset Formula \[
+\beta H\left(\sigma\right)=\sum_{k=0}^{\infty}v^{k}\log\,\tilde{s}_{w}\left(2^{k}x\left(\sigma\right)\right)\]
+
+\end_inset
+
+ The correspondence can be furthered by introducing the shift operator 
+\begin_inset Formula $\tau$
+\end_inset
+
+ which acts on strings as 
+\begin_inset Formula $\tau(\sigma_{0},\sigma_{1},\sigma_{2},\ldots)=(\sigma_{1},\sigma_{2},\sigma_{3},\ldots)$
+\end_inset
+
+.
+ This leads to the relation 
+\begin_inset Formula \[
+2^{k}x\left(\sigma\right)-\left\lfloor 2^{k}x\left(\sigma\right)\right\rfloor =x\left(\tau^{k}\sigma\right)\]
+
+\end_inset
+
+ and so one has 
+\begin_inset Formula \[
+\beta H\left(\sigma\right)=\sum_{k=0}^{\infty}v^{k}\log\, s_{w}\left(x\left(\tau^{k}\sigma\right)\right)\]
+
+\end_inset
+
+ This can be compared to translation-invariant Hamiltonians, which take
+ the form of 
+\begin_inset Formula \begin{equation}
+H\left(\sigma\right)=\sum_{k=0}^{\infty}V\left(\tau^{k}\sigma\right)\label{eq:hamilton-potential}\end{equation}
+
+\end_inset
+
+It has been observed by Dieter Mayer 
+\begin_inset LatexCommand citet
+key "May91"
+
+\end_inset
+
+ that the potential function 
+\begin_inset Formula \begin{equation}
+V(x)=\begin{cases}
+2x-1/2 & \quad\mbox{ for }0\le x\le1/2\\
+-2x+3/2 & \quad\mbox{ for }1/2\le x\le1\end{cases}\label{eq:Kac potential}\end{equation}
+
+\end_inset
+
+taken together with 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+ seems to make 
+\begin_inset Formula $P\left(\sigma\right)$
+\end_inset
+
+ become a very good approximation to the derivative of the question mark;
+ that is, 
+\begin_inset Formula \[
+P\left(\sigma\right)\approx\left(?^{\prime}\circ?^{-1}\right)\left(x\left(\sigma\right)\right)\]
+
+\end_inset
+
+ It is easy to confirm by numerical methods that this approximation holds,
+ and that it at least bit as good as the approximations given above.
+ The potential energy given by eqn 
+\begin_inset LatexCommand ref
+reference "eq:Kac potential"
+
+\end_inset
+
+ leads to a model from statistical mechanics known as the Kac model.
+\end_layout
+
+\begin_layout Standard
+Given the language of lattice models, one can actually work backwards, and
+ obtain an 
+\emph on
+exact
+\emph default
+ expression for the potential
+\begin_inset LatexCommand citet
+key "Ve-L06"
+
+\end_inset
+
+.
+ It is given by 
+\begin_inset Formula \begin{equation}
+V(y)=\log2-2\log\left(1+?^{-1}(2y)\right)\qquad\mbox{for }0\le y\le\frac{1}{2}\label{eq:exact soln}\end{equation}
+
+\end_inset
+
+and 
+\begin_inset Formula $V(y)=V(1-y)$
+\end_inset
+
+ for 
+\begin_inset Formula $1/2<x\le1$
+\end_inset
+
+.
+ This potential, taken together with eqn 
+\begin_inset LatexCommand ref
+reference "eq:hamilton-potential"
+
+\end_inset
+
+ and eqn 
+\begin_inset LatexCommand ref
+reference "eq:Gibbs measure"
+
+\end_inset
+
+, now gives an exact equality to the measure: one can write exactly that
+ 
+\begin_inset Formula \[
+P\left(\sigma\right)=\left(?^{\prime}\circ?^{-1}\right)\left(x\left(\sigma\right)\right)\]
+
+\end_inset
+
+The question arises, what is the relationship between the exact solution
+ 
+\begin_inset LatexCommand ref
+reference "eq:exact soln"
+
+\end_inset
+
+, the Kac potential 
+\begin_inset LatexCommand ref
+reference "eq:Kac potential"
+
+\end_inset
+
+, and the approximate results 
+\begin_inset LatexCommand ref
+reference "eq:q-hypothesis"
+
+\end_inset
+
+? Why do all three of these forms have such similar probability distributions?
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Standard
