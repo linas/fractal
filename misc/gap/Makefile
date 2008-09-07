@@ -6,10 +6,10 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= c-takagi cantor-dist conj dyadic entropy exacto f-wavelet feigen \
+EXES= c-takagi cantor-dist conj dyadic entropy exacto feigen \
       fiddle fliptree gappy gkw ising mod moebius \
       mute orbit orbit-s padic \
-      pair pegs quest rand-measure rdist summy swap sway sym \
+      pair pegs quest rand-measure summy swap sway sym \
       sym-fun takagi takagi-n tent-map theta tree vanish zeta
 
 all: 	$(EXES)
