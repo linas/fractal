@@ -34,6 +34,7 @@
 \tracking_changes false
 \output_changes false
 \author "" 
+\author "" 
 \end_header
 
 \begin_body
@@ -52,11 +53,11 @@ Linas Vepstas <linasvepstas@gmail.com>
 
 \begin_layout Abstract
 The Minkowski Question Mark function relates the continued-fraction representati
-on of the real numbers, to thier binary expansion.
+on of the real numbers, to their binary expansion.
  Although it is difficult to reason about its derivative, one can show by
  classical techniques that its derivative must vanish on all rationals.
- Since the Question Mark itself is continuous, one concludes that the deriviatvi
-e must be non-zero on the irrationals, and is thus a discontinuous-everywhere
+ Since the Question Mark itself is continuous, one concludes that the derivative
+ must be non-zero on the irrationals, and is thus a discontinuous-everywhere
  function.
  The derivative of the Minkowski Question Mark function is interpretable
  as a measure, and is often called the 'Minkowski measure'.
@@ -64,7 +65,7 @@ e must be non-zero on the irrationals, and is thus a discontinuous-everywhere
 
 \begin_layout Abstract
 Two results are presented here: First, a simple measure-theoretic construction
- of the derivative, which can be precisely modelled on the real number line
+ of the derivative, which can be precisely modeled on the real number line
  as a statistical distribution.
  This allows the distribution to be graphed, and clearly shows that it resembles
  what are sometimes called 
@@ -152,9 +153,10 @@ x=[a_{0};a_{1},a_{2},\cdots,a_{N}]=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Standard
 \begin_inset Caption
@@ -171,18 +173,16 @@ The Minkowski Question Mark Function
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Graphics
 	filename ../minkowski/quest.ps
-	width 60text%
+	width 100col%
+	clip
 
 \end_inset
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Standard
 This figure was generated with the code at misc/gap/quest.gplot
@@ -222,18 +222,42 @@ An equivalent, alternative definition of the function can be given by stating
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Dyadic and Stern Brocot Trees
+\end_layout
+
+\end_inset
+
+
 \begin_inset Graphics
 	filename dyadic.eps
-	lyxscale 45
-	width 45text%
+	lyxscale 50
+	width 49text%
 
 \end_inset
 
 
 \begin_inset Graphics
 	filename farey.eps
-	lyxscale 45
-	width 45text%
+	lyxscale 50
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
 
 \end_inset
 
@@ -243,7 +267,7 @@ An equivalent, alternative definition of the function can be given by stating
 \begin_layout Standard
 Many insights into the nature and structure of the function, including self-simi
 larity and transformation properties, can be obtained by contemplating the
- reprecussions of this inifinite-tree representation.
+ repercussions of this infinite-tree representation.
  Most important is perhaps the insight into topology: the presence of the
  tree indicates that the Cantor set will manifest itself in various ways.
  
@@ -269,7 +293,7 @@ key "May91"
 \begin_inset Formula $C^{\infty}$
 \end_inset
 
- functions, with each peice taking the form of a Mobius transform 
+ functions, with each piece taking the form of a Mobius transform 
 \begin_inset Formula $\left(ax+b\right)/\left(cx+d\right)$
 \end_inset
 
@@ -462,6 +486,23 @@ The shape of this histogram is dependent on the choice of
 \end_inset
 
  and tallying the results into evenly-spaced bins.
+ The result is 'exact' in the sense of eqn 
+\begin_inset LatexCommand ref
+reference "eq:integral"
+
+\end_inset
+
+: the height of each bin is precisely given by the differences of the value
+ of ? at its edges, up to the granularity imposed by 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ As 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+, the errors are uniformly bounded and vanishing.
  
 \begin_inset Note Note
 status collapsed
@@ -494,8 +535,8 @@ The measure
 
 That this is so is easily seen by the duality of the ordinary dyadic tree
  and the Stern-Brocot tree.
- Consider instead a different statistical experiment, performed much as
- before, but where this time, one picks fractions from the dyadic tree.
+ Consider a different statistical experiment, performed much as before,
+ but where this time, one picks fractions from the dyadic tree.
  Call the resulting random variable 
 \begin_inset Formula $Y$
 \end_inset
@@ -511,6 +552,11 @@ That this is so is easily seen by the duality of the ordinary dyadic tree
 .
  Since the dyadic rationals are uniformly distributed on the unit interval,
  the corresponding measure is trivial: its just the uniform distribution.
+ Yet this 'trivial' experiment differs from that giving 
+\begin_inset Formula $X$
+\end_inset
+
+ only by the labels on the tree.
  Performing the same experiment, in the same way, but just with different
  labellings of the values, is simply a mapping from one set to another;
  the map is given by 
@@ -518,7 +564,8 @@ That this is so is easily seen by the duality of the ordinary dyadic tree
 \end_inset
 
 .
- The relationship between the random variables is simply that 
+ The effect of such a map is a basic result in probability theory; the relations
+hip between the random variables is simply that 
 \begin_inset Formula $Y_{N}=?\left(X_{N}\right)$
 \end_inset
 
@@ -534,8 +581,13 @@ That this is so is easily seen by the duality of the ordinary dyadic tree
 
 \end_inset
 
-essentially, concluding the proof of the assertion.
- 
+essentially, concluding the proof of the assertion 
+\begin_inset LatexCommand ref
+reference "eq:integral"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -556,7 +608,7 @@ reference "eq:integral"
 \end_layout
 
 \begin_layout Standard
-The use of the deriviative notation in the above is rather misleading: properly
+The use of the derivative notation in the above is rather misleading: properly
  speaking, the derivative of the Question Mark is not defined when using
  the standard topology on the real number line.
  Yet this notation is not exactly wrong; it's simply that a gloss has happened
@@ -618,9 +670,9 @@ Lattice models
 \begin_layout Standard
 This section provides a review of the language of lattice models, setting
  up a minimal vocabulary needed for the remaining development.
- The use of lattice models is partly suggested by the developements above:
+ The use of lattice models is partly suggested by the developments above:
  the natural setting for probability theory is the product topology, and
- the natural settting for the product topology is the lattice model.
+ the natural setting for the product topology is the lattice model.
  The specific applicability of lattice models to the Minkowski measure is
  made clear in a later section.
 \end_layout
@@ -668,7 +720,7 @@ In physics, such strings are the setting for one-dimensional lattice models,
  to represent a position in space, a lattice point.
  At each lattice point, one imagines that there is an atom, interacting
  with its neighbors, forming a perfect crystal.
- The goal of physics is to describe the macroscopic properites of this crystal
+ The goal of physics is to describe the macroscopic properties of this crystal
  given only microscopic details.
  There are two critical details that enter into all such models: the principle
  of maximum entropy, and translational invariance.
@@ -743,7 +795,7 @@ where
 \begin_inset Formula $\beta$
 \end_inset
 
- in order to obtain a desired value for the exepectation value 
+ in order to obtain a desired value for the expectation value 
 \begin_inset Formula \[
 \left\langle H\right\rangle =\frac{1}{Z\left(\Omega\right)}\sum_{\sigma\in\Omega}H\left(\sigma\right)\exp\left(-\beta H\left(\sigma\right)\right)\]
 
@@ -762,7 +814,7 @@ The second principle is that of translation invariance: that, because the
 
  should have the same form as one slides around left or right on the lattice.
  (In the present case, the lattice is one-sided, and so one can slide in
- only one diretion.
+ only one direction.
  Defining the shift operator 
 \begin_inset Formula $\tau$
 \end_inset
@@ -887,7 +939,7 @@ reference "eq:binary-number"
 
 \end_inset
 
-, together with the divide-by-two self-similary relation in eqn 
+, together with the divide-by-two self-similarity relation in eqn 
 \begin_inset LatexCommand ref
 reference "eq:self-similarity"
 
@@ -947,9 +999,9 @@ while taking
 
 .
  The conjecture appears entirely reasonable, at least at the numerical level:
- inserting this into the Gibbs measure yeilds a graph that appears to be
+ inserting this into the Gibbs measure yields a graph that appears to be
  more-or-less equal the Question Mark, up to the level of numerical detail
- that can be easily acheived.
+ that can be easily achieved.
  However, Mayer does not provide a proof; the main result of this section
  is to obtain the correct, exact expression for 
 \begin_inset Formula $V$
@@ -966,15 +1018,15 @@ while taking
 \begin_inset Formula $H\left(\sigma\right)=\sum_{k=0}^{\infty}\lambda^{k}V\left(\tau^{k}\sigma\right)$
 \end_inset
 
- seems to allow an ever richer collection of functions V that seem to yeild
+ seems to allow an ever richer collection of functions V that seem to yield
  good numerical approximations to the Question Mark.
- Why this should be so is not immediately appearent; it is possibly a statement
+ Why this should be so is not immediately apparent; it is possibly a statement
  about topologies.
 \end_layout
 
 \begin_layout Standard
 To obtain the exact solution, one 'follows one's nose'.
- Sarting with
+ Starting with
 \begin_inset Formula \[
 \Pr(x)=\left(?^{\prime}\circ?^{-1}\right)(x)\]
 
@@ -1010,7 +1062,7 @@ reference "eq:Gibbs measure"
 
 \end_inset
 
- yeilds 
+ yields 
 \begin_inset Formula \[
 \Pr\left(\sigma\right)=\exp\left(-V\left(\sigma\right)\right)\Pr\left(\tau\sigma\right)\]
 
@@ -1041,7 +1093,7 @@ reference "eq:self-similarity"
 \end_inset
 
 .
- Pluging in, this leads to
+ Plugging in, this leads to
 \begin_inset Formula \[
 \frac{(1+x)^{2}}{2}=\exp\left(-V\left(\frac{?(x)}{2}\right)\right)\]
 
@@ -1205,7 +1257,7 @@ The piece-wise form for the
 \begin_inset Formula $A_{k}$
 \end_inset
 
- can be obtained from a recusrive algorithm.
+ can be obtained from a recursive algorithm.
  One begins by noting that 
 \begin_inset Formula \[
 ?^{-1}\left(2?\left(x\right)\right)=\frac{x}{1-x}\]
@@ -1231,7 +1283,7 @@ R\left(x\right)=1-L\left(x\right)=\frac{1-2x}{1-x}\]
 
 \end_inset
 
-The two peices of 
+The two pieces of 
 \begin_inset Formula $A_{1}$
 \end_inset
 
@@ -1315,8 +1367,8 @@ Treat
 \begin_inset Formula $R$
 \end_inset
 
- as functions, and thier juxtaposition as function concatenation.
- This will yeild the left-most 
+ as functions, and their juxtaposition as function concatenation.
+ This will yield the left-most 
 \begin_inset Formula $2^{k}$
 \end_inset
 
