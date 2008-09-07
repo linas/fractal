@@ -63,8 +63,11 @@ e must be non-zero on the irrationals, and is thus a discontinuous-everywhere
 \end_layout
 
 \begin_layout Abstract
-Two results are presented here: First, a graphical image of this measure,
- clearly showing that it resembles what are commonly called 
+Two results are presented here: First, a simple measure-theoretic construction
+ of the derivative, which can be precisely modelled on the real number line
+ as a statistical distribution.
+ This allows the distribution to be graphed, and clearly shows that it resembles
+ what are sometimes called 
 \begin_inset Quotes eld
 \end_inset
 
@@ -73,13 +76,13 @@ multi-fractal measures
 \end_inset
 
 .
- Next, an exact result, expressing the measure as an infinite product of
- piece-wise continuous functions, with each piece being a Mobius transform
+ Second, an exact result, expressing the measure as an infinite product
+ of piece-wise continuous functions, with each piece being a Mobius transform
  of the form 
 \begin_inset Formula $(ax+b)/(cx+d)$
 \end_inset
 
-.
+, is presented.
 \end_layout
 
 \begin_layout Section
@@ -302,7 +305,7 @@ The experiment may be run as follows: consider the first
 \end_inset
 
  rationals.
- The random variable 
+ A random variable 
 \begin_inset Formula $X_{N}$
 \end_inset
 
@@ -1009,7 +1012,7 @@ reference "eq:Gibbs measure"
 
  yeilds 
 \begin_inset Formula \[
-\Pr\left(\tau\sigma\right)=\exp\left(-V\left(\tau\sigma\right)\right)\Pr\left(\sigma\right)\]
+\Pr\left(\sigma\right)=\exp\left(-V\left(\sigma\right)\right)\Pr\left(\tau\sigma\right)\]
 
 \end_inset
 
@@ -1102,8 +1105,8 @@ reference "eq:Gibbs measure"
  allows the derivative to be written as a product of piece-wise continuous
  functions.
  Explicitly, one obtains 
-\begin_inset Formula \[
-?^{\prime}\left(x\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}\frac{2}{\left(1-A_{k+1}\left(x\right)\right)^{2}}\]
+\begin_inset Formula \begin{equation}
+?^{\prime}\left(x\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}\frac{\left(1+A_{k+1}\left(x\right)\right)^{2}}{2}\label{eq:piece-product}\end{equation}
 
 \end_inset
 
@@ -1198,7 +1201,157 @@ Here, 'frac' is the fractional part of a number, that is,
 \end_layout
 
 \begin_layout Standard
+The piece-wise form for the 
+\begin_inset Formula $A_{k}$
+\end_inset
 
+ can be obtained from a recusrive algorithm.
+ One begins by noting that 
+\begin_inset Formula \[
+?^{-1}\left(2?\left(x\right)\right)=\frac{x}{1-x}\]
+
+\end_inset
+
+which follows directly from the self-similarity relation 
+\begin_inset LatexCommand ref
+reference "eq:self-similarity"
+
+\end_inset
+
+.
+ Define 
+\begin_inset Formula \[
+L\left(x\right)=\frac{x}{1-x}\]
+
+\end_inset
+
+and 
+\begin_inset Formula \[
+R\left(x\right)=1-L\left(x\right)=\frac{1-2x}{1-x}\]
+
+\end_inset
+
+The two peices of 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ can be immediately recognized as 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ The four pieces of 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ are, in order 
+\begin_inset Formula $LL,RL,RR,LR$
+\end_inset
+
+.
+ The odd-ball ordering comes from the action of the 'frac' in the definition.
+ The general 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ can be computed as follows:
+\end_layout
+
+\begin_layout Enumerate
+Write down the 
+\begin_inset Formula $2^{k}$
+\end_inset
+
+ binary numbers of length 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Reverse the order of the digits, and replace 0 by 
+\begin_inset Formula $L$
+\end_inset
+
+ and 1 by 
+\begin_inset Formula $R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For every 
+\begin_inset Formula $R$
+\end_inset
+
+ in the string, substitute the symbol to its left by its opposite (that
+ is, substitute 
+\begin_inset Formula $R$
+\end_inset
+
+ for 
+\begin_inset Formula $L$
+\end_inset
+
+, 
+\emph on
+etc
+\emph default
+.).
+\end_layout
+
+\begin_layout Enumerate
+Treat 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ as functions, and thier juxtaposition as function concatenation.
+ This will yeild the left-most 
+\begin_inset Formula $2^{k}$
+\end_inset
+
+ piece-wise components of 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+, in order.
+\end_layout
+
+\begin_layout Standard
+The boundaries of the piece-wise parts can be read off directly from the
+ 
+\begin_inset Formula $k$
+\end_inset
+
+'th row of the Stern-Brocot tree.
+ 
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+The principal result of this note is equation 
+\begin_inset LatexCommand ref
+reference "eq:piece-product"
+
+\end_inset
+
+, which shows that the seemingly intractable Minkowski measure can be built
+ up out of analytic functions in a regular way.
+ It is hoped that perhaps these techniques can be extended to make other
+ aspects tractable.
 \end_layout
 
 \begin_layout Standard
