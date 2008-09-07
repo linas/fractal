@@ -1,4 +1,3 @@
-
 /* entropy.C
  *
  * computation of the entropy, per shanon-type question 

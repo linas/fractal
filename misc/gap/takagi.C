@@ -1,4 +1,3 @@
-
 /* 
  * takagi.C
  *
@@ -92,6 +91,15 @@ long double pointy (long double x)
 	return t/(1.0L-t);
 }
 
+/* lop of leading term in continued frac */
+long double chopper(long double x)
+{
+	if (x < 1.0e-11) return 0.0;
+	x = 1.0 / x;
+	x -= floor(x);
+	return x;
+}
+
 
 /* The main, core basic takagi curve */
 long double takagi (long double w, long double x)
@@ -140,12 +148,13 @@ long double iter_tak (long double w, long double x)
 	long double acc = 0.0L;
 	long double tw = 1.0L;
 	long double xit = x;
-	for (k=0; k<50; k++)
+	for (k=0; k<20; k++)
 	{
 		// xit = triangle (xit);
 		// xit = parabola_up (xit);
-		xit = sq (xit);
+		// xit = sq (xit);
 		// xit = parabola_down (xit);
+		xit = chopper (xit);
 		long double term = tw * xit;
 		acc += term;
 		tw *= w;
@@ -618,14 +627,15 @@ main (int argc, char *argv[])
 		// tw  = exp (-tw);
 		// acc += tw;
 		// ts = acc;
-		// double tw = iter_tak (w, x);
+		double tw = iter_tak (w, x);
+		double ts = 0;
 
 		// double tw = dirichlet_takagi (w, x);
 		// double tw = plicative_takagi (w, x);
 		// double ts = 2.0*gsl_sf_zeta (w) / 3.0 -0.5 - pow(2.0, -w)/3.0;
 
-		double tw = re_padic_takagi (w, x);
-		double ts = im_padic_takagi (w, x);
+		// double tw = re_padic_takagi (w, x);
+		// double ts = im_padic_takagi (w, x);
 		// double ts = sin_takagi (w, x);
 		// double tw = dtakagi (w, x);
 		// double tw = log (takagi(w,x));
