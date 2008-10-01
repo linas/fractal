@@ -1,0 +1,35 @@
+
+set data style lines
+set key left
+
+
+set term png small
+set out 'shift.png'
+
+set yrange[0:1]
+
+# This fits A_3
+plot "shift.dat" using 2:3, \
+      "shift.dat" using 2:($2/(1-3*$2)), \
+      "shift.dat" using 2:((1-4*$2)/(1-3*$2)), \
+      "shift.dat" using 2:(-(1-4*$2)/($2)), \
+      "shift.dat" using 2:((1-3*$2)/($2)), \
+      "shift.dat" using 2:((3*$2-1)/(1-2*$2)), \
+      "shift.dat" using 2:((2-5*$2)/(1-2*$2)), \
+      "shift.dat" using 2:((5*$2-2)/(3*$2-1)), \
+      "shift.dat" using 2:((1-2*$2)/(3*$2-1))
+
+
+# This shows A_2
+# plot "shift.dat" using 2:3, \
+#      "shift.dat" using 2:($2/(1-2*$2)), \
+#      "shift.dat" using 2:((1-3*$2)/(1-2*$2)), \
+#      "shift.dat" using 2:((-1+3*$2)/$2), \
+#      "shift.dat" using 2:((1-2*$2)/$2)
+
+
+# This shows A_1
+# plot "shift.dat" using 2:3, \
+#      "shift.dat" using 2:(-1+1/(1-$2)), \
+#      "shift.dat" using 2:(2-1/(1-$2))
+
