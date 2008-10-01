@@ -6,7 +6,8 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= f-wavelet fanal fdist fourier ftag janal jdist rdist shift
+EXES= f-wavelet fanal fdist fourier ftag janal jdist rdist shift \
+      takagi-dist
 
 all: 	$(EXES)
 
