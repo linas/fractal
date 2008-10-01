@@ -22,8 +22,10 @@ double prod (double x)
 	for (n=0; n< 20; n++)
 	{
 		prod *= 0.5 * (1.0 + triangle(tk*x));
-		tk *=- 2.0;
+		tk *= 2.0;
 	}
+
+	return prod;
 }
 
 void graph(int npts)

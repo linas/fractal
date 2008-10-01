@@ -2,6 +2,7 @@
  * fdist.C
  *
  * Distribution of the Farey Numbers on the unit interval
+ * AKA the Minkowski measure or multi-fractal measure.
  *
  * Linas October 2004
  */
