@@ -2,7 +2,7 @@
 \lyxformat 276
 \begin_document
 \begin_header
-\textclass article
+\textclass amsart
 \language english
 \inputencoding auto
 \font_roman times
@@ -545,15 +545,20 @@ The measure
  function is straight-forward, and may be stated as a formally:
 \end_layout
 
-\begin_layout Standard
-Teit is simply 
+\begin_layout Theorem*
+The integral of the Stern-Brocot distribution is the Minkowski Question
+ Mark function; that is, 
 \begin_inset Formula \begin{equation}
 ?\left(b\right)-?\left(a\right)=\int_{a}^{b}d\mu\label{eq:integral}\end{equation}
 
 \end_inset
 
-That this is so is easily seen by the duality of the ordinary dyadic tree
- and the Stern-Brocot tree.
+
+\end_layout
+
+\begin_layout Proof
+The result follows from the duality of the ordinary dyadic tree and the
+ Stern-Brocot tree.
  Consider a different statistical experiment, performed much as before,
  but where this time, one picks fractions from the dyadic tree.
  Call the resulting random variable 
@@ -578,13 +583,20 @@ That this is so is easily seen by the duality of the ordinary dyadic tree
  only by the labels on the tree.
  Performing the same experiment, in the same way, but just with different
  labellings of the values, is simply a mapping from one set to another;
- the map is given by 
+ the mapping is already given by eqn 
+\begin_inset LatexCommand ref
+reference "eq:direct ? fun defn"
+
+\end_inset
+
+, it is 
 \begin_inset Formula $?\left(x\right)$
 \end_inset
 
 .
- The effect of such a map is a basic result in probability theory; the relations
-hip between the random variables is simply that 
+ The transformation of measures under the action of maps is a basic result
+ from probability theory; the relationship between the random variables
+ is simply that 
 \begin_inset Formula $Y_{N}=?\left(X_{N}\right)$
 \end_inset
 
@@ -616,22 +628,22 @@ reference "eq:integral"
 
 \end_inset
 
- resembles a classical integral, one is sorely tempted to succumb to this
- temptation, and use classical notation to write: 
+ resembles a classical integral, one is sorely tempted to 'abuse the notation',
+ and use the classical notation to write: 
 \begin_inset Formula \[
 \frac{d?\left(x\right)}{dx}=?^{\prime}\left(x\right)=\mu\left(x\right)\]
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 The use of the derivative notation in the above is rather misleading: properly
  speaking, the derivative of the Question Mark is not defined when using
  the standard topology on the real number line.
- Yet this notation is not exactly wrong; it's simply that a gloss has happened
- along the way.
+ Yet this notation is not exactly wrong; the modern definition of a derviative
+ must occur with respect to a topology, and if one uses the appropriate
+ toplogy, the derivative notation is accurate.
+ In essence, the 'abuse of notation' is the failure to distinguish the standard
+ topology of the real number line, from the product topology in which the
+ statistical experiments are performed.
 \end_layout
 
 \begin_layout Standard
@@ -669,17 +681,25 @@ key "Kle08"
 \begin_inset Formula $S=\left\{ 0,1\right\} $
 \end_inset
 
- of the binary digits 0,1, one can intentionally confuse strings of binary
- digits with binary numbers.
- This intentional confusion leads very naturally to the Cantor set, and
- related phenomena, as well as to the language of lattice models.
- The next section explicitly develops the idea of a lattice model, which
- allows the measure 
+ of the binary digits 0,1, one can map strings of binary digits to real
+ numbers expanded in base-two.
+ This mapping effectively leads to the notion of the Cantor set, and, as
+ a result, can provide a grounding for understanding a wide spectrum of
+ fractal phenomena.
+\end_layout
+
+\begin_layout Standard
+The product topology is also the setting for the so-called 'lattice models'
+ of statistical physics.
+ The next section explicitly develops the basic vocabulary of lattice models.
+ The notion of fractal self-similarity can then be explicitly equated to
+ shifts (translations) of the lattice.
+ Equiped with this new vocabulary, it becomes possible to give an exact
+ expression for the Minkowski measure 
 \begin_inset Formula $\mu$
 \end_inset
 
- to be expressed in an exact way.
- 
+ to be expressed as an infinite product of Mobius functions.
 \end_layout
 
 \begin_layout Section
