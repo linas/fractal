@@ -6,12 +6,10 @@
  *
  * Linas October 2004
  */
-#include <gmp.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Farey.h"
 #include "FareyTree.h"
 #include "brat.h"
 
@@ -31,10 +29,10 @@ void GetNextDyadic (unsigned int *n, unsigned int *d)
 	*d = last_d;
 }
 
-int nbins = 0;
-double * bin = NULL;
+static int nbins = 0;
+static double * bin = NULL;
 
-void make_bins(int _nbins, int depth)
+static void make_bins(int _nbins, int depth)
 {
 	int i;
 
@@ -81,34 +79,34 @@ void make_bins(int _nbins, int depth)
 
 static void bincount_c (double re_q, double im_q, double *prep, double *pimp)
 {
-	double tmp;
-
-	double rcz = cos (re_q) * cosh (im_q);
-	double icz = sin (re_q) * sinh (im_q);
-
 	/* Compute the integral of the distribution */
-	double gral = 0.0;
-	for (i=0; i<nbins; i++)
+	double re_gral = 0.0;
+	double im_gral = 0.0;
+	for (int i=1; i<nbins; i++)
 	{
-		/* gral is the ordinary integral of the bin count */
-		gral += bin[i];
-
 		double x = ((double) i) / ((double) nbins);
+		double lgx = log(x);
+		double r = exp (re_q * lgx);
+		double re = r * cos(im_q * lgx);
+		double im = r * sin(im_q * lgx);
 
+		re_gral += re * bin[i];
+		im_gral += im * bin[i];
 	}
-}
 
-	*prep = rcz;
-	*pimp = icz;
+	*prep = re_gral;
+	*pimp = im_gral;
 }
 
 static double bincount_series (double re_q, double im_q, int itermax, double param)
 {
+	if (0 == nbins) make_bins (5111, 16);
+
 	double rep, imp;
 	bincount_c (re_q, im_q, &rep, &imp);
-	// return sqrt (rep*rep+imp*imp);
+	return sqrt (rep*rep+imp*imp);
 	// return rep;
-	return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
+	// return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
 }
 
 DECL_MAKE_HEIGHT(bincount_series);
