@@ -844,15 +844,16 @@ where
 \end_layout
 
 \begin_layout Standard
-The second principle is that of translation invariance: that, because the
- crystalline lattice 'looks the same everywhere', all results should be
- independent of any specific position or location in the lattice.
- In particular, translation invariance implies that 
+The second principle commonly demanded in physics is that of translational
+ invariance: that, because the crystalline lattice 'looks the same everywhere',
+ all results should be independent of any specific position or location
+ in the lattice.
+ In particular, translational invariance implies that 
 \begin_inset Formula $H\left(\sigma\right)$
 \end_inset
 
  should have the same form as one slides around left or right on the lattice.
- (In the present case, the lattice is one-sided, and so one can slide in
+ In the present case, the lattice is one-sided, and so one can slide in
  only one direction.
  Defining the shift operator 
 \begin_inset Formula $\tau$
@@ -874,8 +875,8 @@ H\left(\sigma\right)=H\left(\tau\sigma\right)\]
 \end_inset
 
 Unfortunately, for the present model, this cannot quite hold in the naive
- sense: the lattice is not double sided (with strings extending to infinity
- in both directions), but one-sided.
+ sense: the lattice is not double sided (with strings of symbols extending
+ to infinity in both directions), but one-sided.
  The best one can hope for is to isolate the part that acts just on the
  first 'atom' in the left-most lattice location; call this part 
 \begin_inset Formula $V\left(\sigma\right)$
@@ -888,6 +889,17 @@ H\left(\sigma\right)=V\left(\sigma\right)+H\left(\tau\sigma\right)\label{eq:tran
 
 \end_inset
 
+That is, the total 'energy' contained in the lattice is equal to the energy
+ contained in the first lattice position, plus the energy contained in the
+ remainder of the lattice.
+ That the energy should be additive (as opposed to being multiplicative,
+ or combined in some other way) is consistent with its use as a log-linear
+ probability in the Gibbs measure; that is, the use of the Gibbs measure,
+ together with insistence that the model be translationally invariant, implies
+ that the energy must be additive.
+\end_layout
+
+\begin_layout Standard
 From this, it is is straight-forward to decompose 
 \begin_inset Formula $H\left(\sigma\right)$
 \end_inset
@@ -903,9 +915,9 @@ What remains is the 'potential'
 \end_inset
 
 , which embodies the specifics of the problem at hand.
- The problem at hand is then to apply the above mechanics to the Minkowski
- measure: that is, to assume that the Minkowski measure is a Gibbs measure,
- and to solve for the potential 
+ The primary result of this note follows from the application of the above
+ mechanics to the Minkowski measure: that is, to assume that the Minkowski
+ measure is a Gibbs measure, and to solve for the potential 
 \begin_inset Formula $V\left(\sigma\right)$
 \end_inset
 
@@ -913,8 +925,8 @@ What remains is the 'potential'
 \end_layout
 
 \begin_layout Standard
-Before doing so, there is one vital point to be made: the shift operator
- 
+Before doing so, there is one more relationship to make note of: the shift
+ operator 
 \begin_inset Formula $\tau,$
 \end_inset
 
@@ -926,7 +938,7 @@ Before doing so, there is one vital point to be made: the shift operator
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $\left\lfloor y\right\rfloor $
 \end_inset
 
@@ -954,7 +966,30 @@ key "Ve-T04,Ve-M04"
 
 \end_inset
 
+.
+ Writing 
+\begin_inset Formula $W=f\circ x$
+\end_inset
 
+ shows that the Blancmange curve has the form 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}\lambda^{k}W\left(\tau^{k}\sigma\right)\]
+
+\end_inset
+
+when considered on the lattice.
+ The mapping given by eqn 
+\begin_inset LatexCommand ref
+reference "eq:binary-number"
+
+\end_inset
+
+ is not just a mapping between strings and real numbers, it is a mapping
+ from the product topology to the natural topology of the real number line.
+ Thus, suddenly, many fractal and self-similarity phenomena are seen to
+ be manifestations of simple structures in the product topology, which are
+ then mapped to the natural topology.
+ 
 \end_layout
 
 \begin_layout Section
@@ -1001,9 +1036,10 @@ that is described by the Gibbs measure.
 \begin_inset Formula $?^{-1}\left(x\right)$
 \end_inset
 
- maps one from the space of dyadics to the space of Farey fractions, where
- an operation is performed that coincidentally takes one back to the dyadics.
- In this case, eqn 
+ is a map that takes one from the space of dyadics to the space of Farey
+ fractions, where an operation is performed that coincidentally takes one
+ back to the space of dyadics.
+ Seen in this way, eqn 
 \begin_inset LatexCommand ref
 reference "eq:Jacobian"
 
@@ -1041,30 +1077,34 @@ while taking
  inserting this into the Gibbs measure yields a graph that appears to be
  more-or-less equal the Question Mark, up to the level of numerical detail
  that can be easily achieved.
- However, Mayer does not provide a proof; the main result of this section
- is to obtain the correct, exact expression for 
+ However, Mayer does not provide a proof; rather, he intimates that it must
+ be so.
+ 
+\end_layout
+
+\begin_layout Standard
+In fact, numerical efforts suggest that there are many functions 
 \begin_inset Formula $V$
 \end_inset
 
-.
- However, it should be noted that numerical efforts suggest that there are
- many functions 
-\begin_inset Formula $V$
-\end_inset
-
- that 'come close'; while loosening the restriction of translational invariance,
- to allow Hamiltonians of the form 
+ that 'come close', and can serve as the basis for similar conjectures.
+ Loosening the restriction of translational invariance, to allow Hamiltonians
+ of the form 
 \begin_inset Formula $H\left(\sigma\right)=\sum_{k=0}^{\infty}\lambda^{k}V\left(\tau^{k}\sigma\right)$
 \end_inset
 
  seems to allow an ever richer collection of functions V that seem to yield
  good numerical approximations to the Question Mark.
- Why this should be so is not immediately apparent; it is possibly a statement
- about topologies.
+ Why this should be so is not immediately apparent; perhaps it is a statement
+ that functions that seem 'close to' one another with respect to the natural
+ topology have dramatically different form when considered in the product
+ topology.
+ 
 \end_layout
 
 \begin_layout Standard
-To obtain the exact solution, one 'follows one's nose'.
+An exact solution has been promised; it is time to present it.
+ To obtain the solution, one 'follows one's nose'.
  Starting with
 \begin_inset Formula \[
 \Pr(x)=\left(?^{\prime}\circ?^{-1}\right)(x)\]
@@ -1119,7 +1159,7 @@ Back-substituting, one deduces
 
 \end_inset
 
- On the other hand, one has
+On the other hand, one has
 \begin_inset Formula \[
 \frac{?^{\prime}(x)}{2}=\frac{1}{(1+x)^{2}}?^{\prime}\left(\frac{x}{1+x}\right)\]
 
@@ -1166,8 +1206,35 @@ and
 \end_layout
 
 \begin_layout Standard
-The last section of this note deals with the form of the measure when this
- potential function is plugged back into the Gibbs measure.
+To summarize the nature of this result: the potential 
+\begin_inset LatexCommand ref
+reference "eq:exact-potential"
+
+\end_inset
+
+, let us call it the 'Minkowski potential', when used to formulate a lattice
+ energy 
+\begin_inset LatexCommand ref
+reference "eq:hamilton-potential"
+
+\end_inset
+
+, gives the Minkowski measure 
+\begin_inset LatexCommand ref
+reference "eq:Jacobian"
+
+\end_inset
+
+ as a Gibbs measure 
+\begin_inset LatexCommand ref
+reference "eq:Gibbs measure"
+
+\end_inset
+
+.
+ The last section of this note deals with the form that this measure when
+ it is plugged back into this sequence of equations, culminating in the
+ Gibbs measure.
 \end_layout
 
 \begin_layout Section
