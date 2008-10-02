@@ -31,6 +31,7 @@ void GetNextDyadic (unsigned int *n, unsigned int *d)
 
 static int nbins = 0;
 static double * bin = NULL;
+static double * logs = NULL;
 
 static void make_bins(int _nbins, int depth)
 {
@@ -39,14 +40,10 @@ static void make_bins(int _nbins, int depth)
 	nbins = _nbins;
 
 	int max = 1 << depth;
-	printf ("#\n# nbins=%d   tree depth=%d\n#\n",nbins,depth);
-	printf ("# Legend:\n");
-	printf ("# i, x, bin_cnt, bin_cnt_sum, exact_farey\n");
-	fflush (stdout);
 
 	FareyIterator fi;
 
-	double *bin = (double *) malloc (nbins * sizeof (double));
+	bin = (double *) malloc (nbins * sizeof (double));
 	for (i=0; i<nbins; i++)
 	{
 		bin[i] = 0.0;
@@ -74,6 +71,14 @@ static void make_bins(int _nbins, int depth)
 	{
 		bin[i] /= ((double) cnt);
 	}
+
+	/* cache or precomputed values */
+	logs = (double *) malloc (nbins * sizeof (double));
+	for (int i=1; i<nbins; i++)
+	{
+		double x = ((double) i) / ((double) nbins);
+		logs[i] = log(x);
+	}
 }
 
 
@@ -84,8 +89,9 @@ static void bincount_c (double re_q, double im_q, double *prep, double *pimp)
 	double im_gral = 0.0;
 	for (int i=1; i<nbins; i++)
 	{
-		double x = ((double) i) / ((double) nbins);
-		double lgx = log(x);
+		// double x = ((double) i) / ((double) nbins);
+		// double lgx = log(x);
+		double lgx = logs[i];
 		double r = exp (re_q * lgx);
 		double re = r * cos(im_q * lgx);
 		double im = r * sin(im_q * lgx);
@@ -100,13 +106,13 @@ static void bincount_c (double re_q, double im_q, double *prep, double *pimp)
 
 static double bincount_series (double re_q, double im_q, int itermax, double param)
 {
-	if (0 == nbins) make_bins (5111, 16);
+	if (0 == nbins) make_bins (9111, 24);
 
 	double rep, imp;
 	bincount_c (re_q, im_q, &rep, &imp);
-	return sqrt (rep*rep+imp*imp);
+	// return sqrt (rep*rep+imp*imp);
 	// return rep;
-	// return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
+	return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
 }
 
 DECL_MAKE_HEIGHT(bincount_series);
