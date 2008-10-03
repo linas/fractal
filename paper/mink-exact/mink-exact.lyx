@@ -435,7 +435,7 @@ key "Man95"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Standard
 \begin_inset Caption
@@ -1226,7 +1226,7 @@ which is then easily solved for
 
 \begin_layout Standard
 \begin_inset Formula \begin{equation}
-V(y)=\log2-2\log\left(1+?^{-1}(2y)\right)\qquad\mbox{for }0\le y\le\frac{1}{2}\label{eq:exact-potential}\end{equation}
+V(y)=\log2+2\log\left(1-?^{-1}(y)\right)\qquad\mbox{for }0\le y\le\frac{1}{2}\label{eq:exact-potential}\end{equation}
 
 \end_inset
 
@@ -1301,9 +1301,91 @@ reference "eq:Gibbs measure"
 
  allows the derivative to be written as a product of piece-wise continuous
  functions.
- Explicitly, one obtains 
+ Putting the latter two together yeilds
+\begin_inset Formula \[
+\Pr(\sigma)=\frac{1}{Z(\Omega)}\prod_{k=0}^{\infty}\exp\left(-V\left(\tau^{k}\sigma\right)\right)\]
+
+\end_inset
+
+To obtain explicit expressions, it is conventient to perform the change-of-varia
+ble 
+\begin_inset Formula $x\left(\sigma\right)=?\left(y\right)$
+\end_inset
+
+ so that eqn 
+\begin_inset LatexCommand ref
+reference "eq:Jacobian"
+
+\end_inset
+
+ becomes 
+\begin_inset Formula \[
+\Pr(\sigma)=?^{\prime}\left(y\right)\]
+
+\end_inset
+
+while eqn 
+\begin_inset LatexCommand ref
+reference "eq:exact-potential"
+
+\end_inset
+
+ becomes 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\exp-V\left(\sigma\right)=\exp-V\left(?\left(y\right)\right)=\begin{cases}
+\frac{1}{2\left(1-y\right)^{2}} & \mbox{ for }0\le y\le\frac{1}{2}\\
+\frac{1}{2y^{2}} & \mbox{ for }\frac{1}{2}\le y\le1\end{cases}\]
+
+\end_inset
+
+The general case is then 
+\begin_inset Formula \[
+\exp-V\left(\tau^{k}\sigma\right)=\exp-V\left(\mbox{frac}\left(2^{k}?\left(y\right)\right)\right)\]
+
+\end_inset
+
+where 'frac' is the fractional part of a number, that is, 
+\begin_inset Formula $\mbox{frac}\left(x\right)=x-\left\lfloor x\right\rfloor $
+\end_inset
+
+.
+ The general case is obtained by iterating on the function
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+A_{1}\left(y\right)=?^{-1}\left(\mbox{frac}\left(2?\left(y\right)\right)\right)=\begin{cases}
+\frac{y}{1-y} & \mbox{ for }0\le y\le\frac{1}{2}\\
+\frac{2y-1}{y} & \mbox{ for }\frac{1}{2}\le y\le1\end{cases}\]
+
+\end_inset
+
+so that 
+\begin_inset Formula \[
+A_{k+1}\left(y\right)=A_{k}\circ A_{1}\left(y\right)=?^{-1}\left(\mbox{frac}\left(2^{k}?\left(y\right)\right)\right)\]
+
+\end_inset
+
+The next few of these are
+\begin_inset Formula \[
+A_{2}\left(y\right)=\begin{cases}
+\frac{y}{1-2y} & \mbox{ for }0\le y<\frac{1}{3}\\
+\frac{3y-1}{y} & \mbox{ for }\frac{1}{3}\le x<\frac{1}{2}\\
+\frac{2y-1}{1-y} & \mbox{ for }\frac{1}{2}\le x<\frac{2}{3}\\
+\frac{3y-2}{2y-1} & \mbox{ for }\frac{2}{3}\le x\le1\end{cases}\]
+
+\end_inset
+
+ xxxxxxxxxxxxxxx
+\end_layout
+
+\begin_layout Standard
+Explicitly, one obtains 
 \begin_inset Formula \begin{equation}
-?^{\prime}\left(x\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}\frac{\left(1+A_{k+1}\left(x\right)\right)^{2}}{2}\label{eq:piece-product}\end{equation}
+?^{\prime}\left(x\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}\frac{1}{2A_{k}^{2}\left(x\right)}\label{eq:piece-product}\end{equation}
 
 \end_inset
 
@@ -1322,7 +1404,7 @@ where
 
 .
  It is bounded, so that 
-\begin_inset Formula $0\le A_{k}\left(x\right)\le1/2$
+\begin_inset Formula $0\le A_{k}\left(x\right)\le1$
 \end_inset
 
 , and the 
@@ -1340,44 +1422,13 @@ where
 \end_inset
 
  are as follows:
-\begin_inset Formula \[
-A_{0}\left(x\right)=\begin{cases}
-x & \mbox{ for }0\le x\le\frac{1}{2}\end{cases}\]
+\end_layout
 
-\end_inset
+\begin_layout Standard
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+\end_layout
 
-
-\begin_inset Formula \[
-A_{1}\left(x\right)=\begin{cases}
-\frac{x}{1-x} & \mbox{ for }0\le x\le\frac{1}{3}\\
-\frac{1-2x}{1-x} & \mbox{ for }\frac{1}{3}\le x\le\frac{1}{2}\end{cases}\]
-
-\end_inset
-
-
-\begin_inset Formula \[
-A_{2}\left(x\right)=\begin{cases}
-\frac{x}{1-2x} & \mbox{ for }0\le x\le\frac{1}{4}\\
-\frac{1-3x}{1-2x} & \mbox{ for }\frac{1}{4}\le x\le\frac{1}{3}\\
-\frac{3x-1}{x} & \mbox{ for }\frac{1}{3}\le x\le\frac{2}{5}\\
-\frac{1-2x}{x} & \mbox{ for }\frac{2}{5}\le x\le\frac{1}{2}\end{cases}\]
-
-\end_inset
-
-
-\begin_inset Formula \[
-A_{3}\left(x\right)=\begin{cases}
-\frac{x}{1-3x} & \mbox{ for }0\le x\le\frac{1}{5}\\
-\frac{1-4x}{1-3x} & \mbox{ for }\frac{1}{5}\le x\le\frac{1}{4}\\
-\frac{4x-1}{x} & \mbox{ for }\frac{1}{4}\le x\le\frac{2}{7}\\
-\frac{1-3x}{x} & \mbox{ for }\frac{2}{7}\le x\le\frac{1}{3}\\
-\frac{3x-1}{1-2x} & \mbox{ for }\frac{1}{3}\le x\le\frac{3}{8}\\
-\frac{2-5x}{1-2x} & \mbox{ for }\frac{3}{8}\le x\le\frac{2}{5}\\
-\frac{5x-2}{3x-1} & \mbox{ for }\frac{2}{5}\le x\le\frac{3}{7}\\
-\frac{1-2x}{3x-1} & \mbox{ for }\frac{3}{7}\le x\le\frac{1}{2}\end{cases}\]
-
-\end_inset
-
+\begin_layout Standard
 These are graphed in figure 
 \begin_inset LatexCommand ref
 reference "fig:A-graph"
