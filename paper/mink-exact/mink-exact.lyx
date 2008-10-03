@@ -269,7 +269,7 @@ name "fig:trees"
 \begin_inset Caption
 
 \begin_layout Standard
-Dyadic and Stern Brocot Trees
+Dyadic and Stern-Brocot Trees
 \end_layout
 
 \end_inset
@@ -1458,10 +1458,13 @@ created by the script src/fdist/mobius.gplot
 \end_layout
 
 \begin_layout Standard
-One can see the general case emerging through mediant-type addition of the
- ratios.
- Each of these can be obtained from the general case, which is given by
- the rather verbose expression 
+The general case is given by inverting eqn 
+\begin_inset LatexCommand ref
+reference "eq:exact-potential"
+
+\end_inset
+
+ and is given by 
 \begin_inset Formula \[
 A_{k}\left(x\right)=\begin{cases}
 ?^{-1}\left(\mbox{frac}\left(2^{k}?\left(x\right)\right)\right) & \mbox{ for }0\le\mbox{frac}\left(2^{k}?\left(x\right)\right)\le\frac{1}{2}\\
@@ -1474,18 +1477,17 @@ Here, 'frac' is the fractional part of a number, that is,
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-The piece-wise form for the 
+ A simple recursive defintion for the 
 \begin_inset Formula $A_{k}$
 \end_inset
 
- can be obtained from a recursive algorithm.
- One begins by noting that 
+ can be obtained by defining a 
+\begin_inset Formula $g(x)$
+\end_inset
+
+, noting that 
 \begin_inset Formula \[
-?^{-1}\left(2?\left(x\right)\right)=\frac{x}{1-x}\]
+?^{-1}\left(2?\left(x\right)\right)=\frac{x}{1-x}\equiv g\left(x\right)\]
 
 \end_inset
 
@@ -1496,23 +1498,38 @@ reference "eq:self-similarity"
 \end_inset
 
 .
- Define 
+ Thus, successive powers of two are obtained by iterating on 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $r(x)=1-x$
+\end_inset
+
+, as symmetry implies that 
+\begin_inset Formula $A_{k}\left(x\right)=A_{k}\left(r(x)\right)$
+\end_inset
+
+.
+ One then has
 \begin_inset Formula \[
-L\left(x\right)=\frac{x}{1-x}\]
+A_{k+1}\left(x\right)=\begin{cases}
+\left(A_{k}\circ g\right)\left(x\right)=A_{k}\left(\frac{x}{1-x}\right) & \mbox{\; for }0\le x\le\frac{1}{2}\\
+\left(A_{k}\circ r\circ g\circ r\right)\left(x\right)=A_{k}\left(\frac{2x-1}{x}\right) & \;\mbox{ for }\frac{1}{2}<x\le1\end{cases}\]
 
 \end_inset
 
-and 
-\begin_inset Formula \[
-R\left(x\right)=1-L\left(x\right)=\frac{1-2x}{1-x}\]
-
+That this is just a manifestation of the binary tree can be emphasized by
+ thinking in terms of the left 
+\begin_inset Formula $L=g$
 \end_inset
 
-The two pieces of 
-\begin_inset Formula $A_{1}$
+ and right 
+\begin_inset Formula $R=r\circ g\circ r$
 \end_inset
 
- can be immediately recognized as 
+ transformations, with successive rows of the binary tree given by composing
+ 
 \begin_inset Formula $L$
 \end_inset
 
@@ -1521,97 +1538,67 @@ The two pieces of
 \end_inset
 
 .
- The four pieces of 
-\begin_inset Formula $A_{2}$
-\end_inset
-
- are, in order 
-\begin_inset Formula $LL,RL,RR,LR$
-\end_inset
-
-.
- The odd-ball ordering comes from the action of the 'frac' in the definition.
- The general 
-\begin_inset Formula $A_{k}$
-\end_inset
-
- can be computed as follows:
-\end_layout
-
-\begin_layout Enumerate
-Write down the 
-\begin_inset Formula $2^{k}$
-\end_inset
-
- binary numbers of length 
-\begin_inset Formula $k$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-Reverse the order of the digits, and replace 0 by 
-\begin_inset Formula $L$
-\end_inset
-
- and 1 by 
-\begin_inset Formula $R$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-For every 
-\begin_inset Formula $R$
-\end_inset
-
- in the string, substitute the symbol to its left by its opposite (that
- is, substitute 
-\begin_inset Formula $R$
-\end_inset
-
- for 
-\begin_inset Formula $L$
-\end_inset
-
-, 
-\emph on
-etc
-\emph default
-.).
-\end_layout
-
-\begin_layout Enumerate
-Treat 
-\begin_inset Formula $L$
-\end_inset
-
- and 
-\begin_inset Formula $R$
-\end_inset
-
- as functions, and their juxtaposition as function composition.
- This will yield the left-most 
-\begin_inset Formula $2^{k}$
-\end_inset
-
- piece-wise components of 
-\begin_inset Formula $A_{k}$
-\end_inset
-
-, in order.
+ 
 \end_layout
 
 \begin_layout Standard
-The boundaries of the piece-wise parts can be read off directly from the
- 
-\begin_inset Formula $k$
+The endpoints of the intervals can be obtained by following the movement
+ of the endpoints 0,1 through successive iterations of 
+\begin_inset Formula $L^{-1}$
 \end_inset
 
-'th row of the Stern-Brocot tree.
- 
+ and 
+\begin_inset Formula $R^{-1}$
+\end_inset
+
+; these simply map to fractions on each row of the Stern-Brocot tree.
+ A point of occasional confusion can be avoided by keeping in mind that
+ taking the inverse reverses the order of symbols, i.e.
+ so that 
+\begin_inset Formula $\left(f\circ h\right)^{-1}=h^{-1}\circ f^{-1}$
+\end_inset
+
+.
+ This is illustrated, for example, by the third row of the Stern-Brocot
+ tree, which is given by 
+\begin_inset Formula $\frac{1}{5}=L^{-1}\circ L^{-1`}\circ L^{-1}\left(\frac{1}{2}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\;\frac{2}{7}=L^{-1}\circ L^{-1`}\circ R^{-1}\left(\frac{1}{2}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\;\frac{3}{8}=L^{-1}\circ R^{-1`}\circ L^{-1}\left(\frac{1}{2}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\;\frac{3}{7}=L^{-1}\circ R^{-1`}\circ R^{-1}\left(\frac{1}{2}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\;\frac{4}{7}=R^{-1}\circ L^{-1`}\circ L^{-1}\left(\frac{1}{2}\right)$
+\end_inset
+
+, and so on.
+ Confusingly, this is 
+\begin_inset Quotes eld
+\end_inset
+
+reversed
+\begin_inset Quotes erd
+\end_inset
+
+ from the natural order in which one might be tempted to apply the transformatio
+ns 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
