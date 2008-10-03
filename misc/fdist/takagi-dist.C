@@ -5,6 +5,7 @@
  * Linas Vepstas October 2008
  */
 
+#include <math.h>
 #include <stdio.h>
 
 double triangle (double x)
@@ -14,6 +15,18 @@ double triangle (double x)
 	return 1.0-x;
 }
 
+double a_k (double x, int k)
+{
+	int i;
+	for (i=0; i<k; i++)
+	{
+		if (x < 0.5) x = x/(1.0-x);
+		else x = (2.0*x-1)/x; 
+		// else x = (1.0-x)/x; 
+	}
+	return triangle (x);
+}
+
 double prod (double x)
 {
 	int n;
@@ -21,8 +34,12 @@ double prod (double x)
 	double tk = 1.0;
 	for (n=0; n< 20; n++)
 	{
-		prod *= 0.5 * (1.0 + triangle(tk*x));
-		tk *= 2.0;
+		// tk *= 2.0;
+		// double mand = 1.0 + triangle(tk*x);
+		// double mand =  1.25 + 0.25*sin(M_PI*tk*x);
+		double mand = 1.0 + a_k(x,n+1);
+		// prod *= 0.5 * mand*mand;
+		prod /= 0.5 * mand*mand;
 	}
 
 	return prod;
@@ -45,5 +62,5 @@ void graph(int npts)
 
 main ()
 {
-	graph (567);
+	graph (1567);
 }
