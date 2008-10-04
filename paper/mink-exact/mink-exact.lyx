@@ -1455,104 +1455,22 @@ The structure of the
 \begin_inset Formula $r(y)=1-y$
 \end_inset
 
- which together serve as generators
+ which together serve as generators of a free monoid, the dyadic monoid
+\begin_inset LatexCommand cite
+key "Ve-M04,Ve-T04"
+
+\end_inset
+
+.
+ Thier role here is seen as
 \begin_inset Formula \[
 A_{k+1}\left(y\right)=\begin{cases}
-\left(A_{k}\circ g\right)\left(y\right)=A_{k}\left(\frac{y}{1-y}\right) & \mbox{\; for }0\le y\le\frac{1}{2}\\
-\left(A_{k}\circ r\circ g\circ r\right)\left(y\right)=A_{k}\left(\frac{2y-1}{y}\right) & \;\mbox{ for }\frac{1}{2}<y\le1\end{cases}\]
+\left(A_{k}\circ g\right)\left(y\right)=A_{k}\left(\frac{y}{1-y}\right) & \mbox{\; for }0\le y<\frac{1}{2}\\
+\left(A_{k}\circ r\circ g\circ r\right)\left(y\right)=A_{k}\left(\frac{2y-1}{y}\right) & \;\mbox{ for }\frac{1}{2}\le y\le1\end{cases}\]
 
 \end_inset
 
- 
-\begin_inset Formula \[
-\frac{x}{1-x}\equiv g\left(x\right)\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Putting all of these parts together, one finally has 
-\begin_inset Formula \begin{equation}
-?^{\prime}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}F\circ A_{k}\left(y\right)\label{eq:piece-product}\end{equation}
-
-\end_inset
-
- where 
-\begin_inset Formula $F$
-\end_inset
-
- is just shorthand for 
-\begin_inset Formula $F\left(y\right)=\exp-V\left(?\left(y\right)\right)$
-\end_inset
-
- from eqn 
-\begin_inset LatexCommand ref
-reference "eq:exp-V"
-
-\end_inset
-
-.
- Numerically, one quickly discovers that the partition function 
-\begin_inset Formula $Z\left(\Omega\right)=1$
-\end_inset
-
-, although a proof of this seems elusive.
- 
-\end_layout
-
-\begin_layout Standard
-xxxxxxxxxxxxxx
-\end_layout
-
-\begin_layout Standard
-The 
-\begin_inset Formula $x$
-\end_inset
-
--axis endpoints occur at Farey numbers, as shown below.
- The first few 
-\begin_inset Formula $A_{k}$
-\end_inset
-
- are as follows:
-\end_layout
-
-\begin_layout Standard
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-\end_layout
-
-\begin_layout Standard
-A simple recursive defintion for the 
-\begin_inset Formula $A_{k}$
-\end_inset
-
- can be obtained by defining a 
-\begin_inset Formula $g(x)$
-\end_inset
-
-, noting that which follows directly from the self-similarity relation 
-\begin_inset LatexCommand ref
-reference "eq:self-similarity"
-
-\end_inset
-
-.
- Thus, successive powers of two are obtained by iterating on 
-\begin_inset Formula $g(x)$
-\end_inset
-
- and 
-\begin_inset Formula $r(x)=1-x$
-\end_inset
-
-, as symmetry implies that 
-\begin_inset Formula $A_{k}\left(x\right)=A_{k}\left(r(x)\right)$
-\end_inset
-
-.
- One then hasThat this is just a manifestation of the binary tree can be
+That the binary tree is just a manifestation of the dyadic monoid can be
  emphasized by thinking in terms of the left 
 \begin_inset Formula $L=g$
 \end_inset
@@ -1575,8 +1493,18 @@ reference "eq:self-similarity"
 \end_layout
 
 \begin_layout Standard
-The endpoints of the intervals can be obtained by following the movement
- of the endpoints 0,1 through successive iterations of 
+The functions 
+\begin_inset Formula $A_{k}(y)$
+\end_inset
+
+ reach thier extremal values 0, 1 at exactly the Farey fractions from the
+ 
+\begin_inset Formula $k$
+\end_inset
+
+'th row of the Stern-Brocot tree.
+ These may be obtained by following the movement of the endpoints 0,1 through
+ successive iterations of 
 \begin_inset Formula $L^{-1}$
 \end_inset
 
@@ -1584,7 +1512,7 @@ The endpoints of the intervals can be obtained by following the movement
 \begin_inset Formula $R^{-1}$
 \end_inset
 
-; these simply map to fractions on each row of the Stern-Brocot tree.
+.
  A point of occasional confusion can be avoided by keeping in mind that
  taking the inverse reverses the order of symbols, i.e.
  so that 
@@ -1632,6 +1560,177 @@ ns
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Standard
+Putting all of these parts together, one finally has 
+\begin_inset Formula \begin{equation}
+?^{\prime}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}F\circ A_{k}\left(y\right)\label{eq:piece-product}\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $F$
+\end_inset
+
+ is just shorthand for 
+\begin_inset Formula $F\left(y\right)=\exp-V\left(?\left(y\right)\right)$
+\end_inset
+
+ from eqn 
+\begin_inset LatexCommand ref
+reference "eq:exp-V"
+
+\end_inset
+
+.
+ Numerically, one quickly discovers that the partition function 
+\begin_inset Formula $Z\left(\Omega\right)=1$
+\end_inset
+
+, although a proof of this seems elusive.
+ 
+\end_layout
+
+\begin_layout Standard
+Curiously, one has the identity 
+\begin_inset Formula \[
+F(y)=\frac{1}{2}\,\frac{dA_{1}}{dy}\]
+
+\end_inset
+
+which allows the integral of 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ to be evaluated.
+ Doing so recovers the usual self-similarity relations.
+ 
+\end_layout
+
+\begin_layout Section
+The Gauss-Kuzmin-Wirsing Operator
+\end_layout
+
+\begin_layout Standard
+The Gauss-Kuzmin-Wirsing operator is the transfer operator (also called
+ the Perron-Frobenius-Ruelle operator) of the Gauss map 
+\begin_inset Formula $h(x)=1/x-\left\lfloor 1/x\right\rfloor $
+\end_inset
+
+.
+ Denoting this operator as 
+\begin_inset Formula $\mathcal{L}_{G}$
+\end_inset
+
+, it acts on a function 
+\begin_inset Formula $f$
+\end_inset
+
+ as 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{G}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{\left(x+n\right)^{2}}\, f\left(\frac{1}{x+n}\right)\label{eq:gkw}\end{equation}
+
+\end_inset
+
+It has a well-known eigenfunction, corresponding to eigenvalue one, given
+ by 
+\begin_inset Formula $1/(1+y)$
+\end_inset
+
+.
+ It is also relatively straightforward to observe that the Minkowski measure
+ is also an eigenfunction, also corresponding to eigenvalue one.
+ This is readily seen by differentiating the Question Mark: one has 
+\begin_inset Formula \[
+?\left(\frac{1}{n+x}\right)=\frac{1}{2^{n-1}}-\frac{?\left(x\right)}{2^{n}}\]
+
+\end_inset
+
+to obtain 
+\begin_inset Formula \[
+?^{\prime}\left(\frac{1}{n+x}\right)=\frac{\left(x+n\right)^{2}}{2^{n}}?^{\prime}\left(x\right)\]
+
+\end_inset
+
+This can be directly inserted into eqn 
+\begin_inset LatexCommand ref
+reference "eq:gkw"
+
+\end_inset
+
+ to very easily find that 
+\begin_inset Formula \[
+\mathcal{L}_{G}?^{\prime}=?^{\prime}\]
+
+\end_inset
+
+This result immediately suggests that the lattice model methods can be applied
+ to find other eigenfunctions corresponding to different eigenvalues.
+ 
+\end_layout
+
+\begin_layout Standard
+Before doing so, it is worth taking a moment to introduce another operator,
+ a sort of twisted Bernoulli shift: this would be the transfer operator
+ corresponding to the function 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+.
+ It is straight-forward to write this down; it is 
+\begin_inset Formula \[
+\left[\mathcal{L}_{A}f\right]\left(y\right)=\frac{1}{\left(1+y\right)^{2}}f\left(\frac{y}{1+y}\right)+\frac{1}{\left(2-y\right)^{2}}f\left(\frac{1}{2-y}\right)\]
+
+\end_inset
+
+Transfer operators, as formulated by David Ruelle[xxx need ref] are a commonly-u
+sed tool for studying dynamical systems.
+ The origin of the name 
+\begin_inset Quotes eld
+\end_inset
+
+transfer
+\begin_inset Quotes erd
+\end_inset
+
+ comes from lattice-model physics, where state information is 
+\begin_inset Quotes eld
+\end_inset
+
+transfered
+\begin_inset Quotes erd
+\end_inset
+
+ between neighboring sites on a lattice.
+ A particularly simple and well-studied operator is the Bernoulli shift
+\begin_inset LatexCommand cite
+key "Dri99,Gas92,Has92"
+
+\end_inset
+
+; it is the transfer operator corresponding to multiplicatin by two.
+ The operator 
+\begin_inset Formula $\mathcal{L}_{A}$
+\end_inset
+
+ is a peculiar continued-fraction analog of the Bernoulli shift; it participates
+ in various identities with the GKW operator
+\begin_inset LatexCommand cite
+key "Iso03"
+
+\end_inset
+
+.
+ The Minkowski measure is also an eigenfunction of the twisted Bernoulli
+ shift; that is, one has 
+\begin_inset Formula \[
+\mathcal{L}_{A}?^{\prime}=?^{\prime}\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
