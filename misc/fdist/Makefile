@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= f-wavelet fanal fdist fourier ftag janal jdist rdist shift \
+EXES= akk f-wavelet fanal fdist fourier ftag janal jdist rdist shift \
       takagi-dist
 
 all: 	$(EXES)
@@ -27,6 +27,7 @@ dist:
 	$(CC) -o $* $< -L$(LIB) -lfunc -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++ 
 
 
+akk.o:  akk.C 
 f-wavelet.o:  f-wavelet.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 fanal.o:  fanal.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 fdist.o:  fdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
@@ -36,3 +37,4 @@ janal.o:  janal.C
 jdist.o:  jdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 rdist.o:  rdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 shift.o:  shift.C $(LIB)/libfunc.a
+takagi-dist.o:  takagi-dist.C $(LIB)/libfunc.a

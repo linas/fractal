@@ -1,0 +1,20 @@
+set term png small
+set out 'akk.png'
+
+#######################################################
+# This generates the figure for the mink-exact paper
+
+set term postscript
+set out 'akk.ps'
+
+
+set data style lines
+set key left
+
+
+plot "akk.dat" using 1:2 title "A_0", \
+     "akk.dat" using 1:3 title "A_1", \
+     "akk.dat" using 1:4 title "A_2", \
+     "akk.dat" using 1:5 title "A_3"
+
+
