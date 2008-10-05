@@ -1789,6 +1789,189 @@ reference "eq:piece-product"
 \end_layout
 
 \begin_layout Section
+Generalizations
+\end_layout
+
+\begin_layout Standard
+The product form 
+\begin_inset LatexCommand ref
+reference "eq:piece-product"
+
+\end_inset
+
+ immediately lends itself to generalizations.
+ One need only to consider any differentiable, piece-wise function 
+\begin_inset Formula $A$
+\end_inset
+
+ and use it in the construction.
+ For example, one may consider a 3-adic generalization of the Question Mark,
+ which may be constructed from 
+\begin_inset Formula \[
+B\left(y\right)=\begin{cases}
+\frac{2y}{1-y} & \mbox{ for }0\le y<\frac{1}{3}\\
+3y-1 & \mbox{ for }\frac{1}{3}\le y<\frac{2}{3}\\
+\frac{3y-2}{y} & \mbox{ for }\frac{2}{3}\le y\le1\end{cases}\]
+
+\end_inset
+
+and using 
+\begin_inset Formula $B^{\prime}/3$
+\end_inset
+
+ in the product, in place of 
+\begin_inset Formula $A^{\prime}/2$
+\end_inset
+
+.
+ The resulting function, let's call it 
+\begin_inset Formula $?_{3}^{\prime}$
+\end_inset
+
+, can be integrated to define a 3-adic Question Mark 
+\begin_inset Formula $?_{3}$
+\end_inset
+
+, which is shown in figure 
+\begin_inset LatexCommand ref
+reference "fig:3-adic"
+
+\end_inset
+
+.
+ Note that it requires no further normalization; one has 
+\begin_inset Formula $?_{3}(1)=1$
+\end_inset
+
+ simply by having divided 
+\begin_inset Formula $B^{\prime}$
+\end_inset
+
+ by the number of branches of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Visually, it is considerably less dramatic than the 2-adic Question Mark;
+ hints of its self-similarity are visible but less appearent.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:3-adic"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+The 3-adic Question Mark Function
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename three-adic.ps
+	lyxscale 50
+	width 100col%
+	rotateAngle 270
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Standard
+created by src/fractal/misc/fdist/mink-meas.gplot, and mink-meas.C
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By construction, it has self-similarity, which can be immediately read off
+ by considering 
+\begin_inset Formula $B^{-1}$
+\end_inset
+
+, so, for example: 
+\begin_inset Formula \[
+?_{3}\left(\frac{x}{2+x}\right)=\frac{?\left(x\right)}{3}\]
+
+\end_inset
+
+ and 
+\begin_inset Formula \[
+?_{3}\left(\frac{x+1}{3}\right)=\frac{1}{3}+\frac{?\left(x\right)}{3}\]
+
+\end_inset
+
+and 
+\begin_inset Formula \[
+?_{3}\left(\frac{2}{3-x}\right)=\frac{2}{3}+\frac{?\left(x\right)}{3}\]
+
+\end_inset
+
+These self-similarity properties allow an explicit equation for 
+\begin_inset Formula $?_{3}$
+\end_inset
+
+ to be written out, entirely analogous to Denjoy's explicit summation given
+ in eqn 
+\begin_inset LatexCommand ref
+reference "eq:direct ? fun defn"
+
+\end_inset
+
+, although now one must consider even and odd values of the terms 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ of the continued fraction distinctly.
+ Whether, or how, the 3-adic, or, more generally, a 
+\begin_inset Formula $p$
+\end_inset
+
+-adic Question Mark, inter-relate to results from Pellian equations, is
+ not clear.
+ Of some curiosity is whether the feature that caused Minkowski to present
+ the Question Mark, namely, Lagrange's result relating periodic continued
+ fractions to quadratic irrationals, might somehow be reflected, 
+\emph on
+e.g
+\emph default
+.
+ with cubic irrationals, and an appropriate 3-adic redefinition of periodicity
+ in the continued fraction.
+\end_layout
+
+\begin_layout Section
 The Gauss-Kuzmin-Wirsing Operator
 \end_layout
 
@@ -1813,8 +1996,8 @@ The Gauss-Kuzmin-Wirsing operator is the transfer operator (also called
 
 \end_inset
 
-It has a well-known eigenfunction, corresponding to eigenvalue one, given
- by 
+It has a well-known eigenfunction, noted by Gauss, corresponding to eigenvalue
+ one, given by 
 \begin_inset Formula $1/(1+y)$
 \end_inset
 
@@ -1827,7 +2010,7 @@ It has a well-known eigenfunction, corresponding to eigenvalue one, given
 
 \end_inset
 
-to obtain 
+and so also 
 \begin_inset Formula \[
 ?^{\prime}\left(\frac{1}{n+x}\right)=\frac{\left(x+n\right)^{2}}{2^{n}}?^{\prime}\left(x\right)\]
 
@@ -1847,14 +2030,16 @@ reference "eq:gkw"
 
 This result immediately suggests that the lattice model methods can be applied
  to find other eigenfunctions corresponding to different eigenvalues.
- 
+ (The 3-adic Question mark, at least as defined above, does not have this
+ property, suggesting, perhaps, that a different 3-adic Question Mark should
+ be formulated).
 \end_layout
 
 \begin_layout Standard
 Before doing so, it is worth taking a moment to introduce another operator,
  a sort of twisted Bernoulli shift: this would be the transfer operator
  corresponding to the function 
-\begin_inset Formula $A_{1}$
+\begin_inset Formula $A$
 \end_inset
 
 .
@@ -1889,7 +2074,7 @@ key "Dri99,Gas92,Has92"
 
 \end_inset
 
-; it is the transfer operator corresponding to multiplicatin by two.
+; it is the transfer operator corresponding to multiplication by two.
  The operator 
 \begin_inset Formula $\mathcal{L}_{A}$
 \end_inset
@@ -1970,19 +2155,139 @@ Other eigenfunctions for the operators
 \begin_inset Formula $\mathcal{L}_{A}$
 \end_inset
 
- can be readily obtained by defining 
+ can be readily obtained by re-examining the general case 
 \begin_inset Formula \[
-Q\Pr(\sigma)=\frac{1}{Z(\Omega)}\prod_{k=0}^{\infty}\exp\left(-V\left(\tau^{k}\sigma\right)\right)\]
+\Pr_{V}(\sigma)=\frac{1}{Z(\Omega)}\prod_{k=0}^{\infty}\exp\left(-V\left(\tau^{k}\sigma\right)\right)\]
 
 \end_inset
 
+together with the explicit identification of lattice arrangments 
+\begin_inset Formula $\sigma$
+\end_inset
 
+ with real numbers 
+\begin_inset Formula $y$
+\end_inset
+
+ in the unit interval, given by 
+\begin_inset Formula $\sigma=x^{-1}\left(?\left(y\right)\right)$
+\end_inset
+
+.
+ As seen previously, this leads to the form 
+\begin_inset Formula \[
+P_{f}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}f\circ A_{k}\left(y\right)\]
+
+\end_inset
+
+A review of the ingredients is appropriate.
+ The appearence of 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ is explicitly governed by the mapping 
+\begin_inset Formula $\sigma=x^{-1}\left(?\left(y\right)\right)$
+\end_inset
+
+; that is, 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ is a representation of the shift operator 
+\begin_inset Formula $\tau^{k}$
+\end_inset
+
+, for this particular mapping of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ to real values.
+ The function 
+\begin_inset Formula $f$
+\end_inset
+
+ is simply 
+\begin_inset Formula $\exp-V$
+\end_inset
+
+, that is, 
+\begin_inset Formula \[
+f\left(y\right)=\exp-V\left(x^{-1}\left(?\left(y\right)\right)\right)\]
+
+\end_inset
+
+The partition function 
+\begin_inset Formula $Z\left(\Omega\right)$
+\end_inset
+
+ is re-introduced as a reminder that the product definition only makes sense
+ when 
+\begin_inset Formula $f$
+\end_inset
+
+ has been scaled appropriately; that is, 
+\begin_inset Formula $f$
+\end_inset
+
+ is arbitrary only up to a total scale factor; 
+\begin_inset Formula $f$
+\end_inset
+
+ exists only as an element of a projective space.
+ The constraint is even stronger: inappropriately normalized 
+\begin_inset Formula $f$
+\end_inset
+
+ lead to the formal divergence 
+\begin_inset Formula $Z\left(\Omega\right)=\infty$
+\end_inset
+
+; there is only one normalization for which 
+\begin_inset Formula $Z\left(\Omega\right)$
+\end_inset
+
+ is finite, and that furthermore, by construction, one then has 
+\begin_inset Formula $Z\left(\Omega\right)=1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-eqn 
-\begin_inset LatexCommand ref
-reference "eq:prod"
+The action of the twisted Bernoulli shift on 
+\begin_inset Formula $P_{f}$
+\end_inset
+
+ is readily computed, and is given by 
+\begin_inset Formula \[
+\mathcal{L}_{A}P_{f}=P_{f}\cdot\mathcal{L}_{A}f\]
+
+\end_inset
+
+We've already observed that when 
+\begin_inset Formula $f=A^{\prime}/2$
+\end_inset
+
+, that one has 
+\begin_inset Formula \[
+\mathcal{L}_{A}\frac{A^{\prime}}{2}=1\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $P_{A^{\prime}/2}=?^{\prime}$
+\end_inset
+
+.
+ Another, linearly independent function that satisfies 
+\begin_inset Formula $\mathcal{L}_{A}f=1$
+\end_inset
+
+ is given by 
+\begin_inset Formula \[
+C\left(y\right)=\begin{cases}
+\frac{1}{3\left(1-x\right)^{3}} & \mbox{ for }0\le x\le\frac{1}{2}\\
+\frac{1}{3x^{3}} & \mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
 
 \end_inset
 

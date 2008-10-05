@@ -5,7 +5,12 @@ set key left
 set term png small
 set out 'mink-meas.png'
 
-plot "takagi-dist.dat" using 2:3
+#######################################################
+# This generates the figure for the mink-exact paper
 
+set term postscript
+set out 'three-adic.ps'
+
+plot "mink-meas.dat" using 2:4 title ""
 
 

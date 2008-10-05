@@ -1,6 +1,5 @@
-
 /*
- * Build a takaagi-style distribution
+ * Build the Minkowski Measure (the derivative of the Question Mark)
  *
  * Linas Vepstas October 2008
  */
@@ -44,7 +43,7 @@ double almost_dedekind_zeta (double x)
 	return prod;
 }
 
-double a_k (double x, int k, double lambda)
+double a_k (double x, int k)
 {
 	int i;
 	for (i=0; i<k; i++)
@@ -52,24 +51,54 @@ double a_k (double x, int k, double lambda)
 		if (x < 0.5) x = x/(1.0-x);
 		else x = (2.0*x-1)/x; 
 		// else x = (1.0-x)/x; 
-		x *= lambda;
 	}
 	return x;
 }
 
-double eff(double x, double lm)
+double a3_k (double x, int k)
+{
+	int i;
+	for (i=0; i<k; i++)
+	{
+		if (x < 1.0/3.0) x = 2.0*x/(1.0-x);
+		else if (x < 2.0/3.0) x = 3.0*x - 1.0;
+		else x = (3.0*x-2.0)/x; 
+	}
+	return x;
+}
+
+double da(double x)
 {
 	double f;
 	if (x < 0.5) f = 1.0-x;
 	else f = x;
 	f = 1.0/f;
    f *= f;
-	// f = exp (lm * log(f));
 	f *=0.5;
 	return f;
 }
 
-double prod (double x, int depth, double lambda)
+double da3(double x)
+{
+	double f;
+	if (x < 1.0/3.0)
+	{
+		f = (1.0-x);
+   	f *= f;
+		f = 2.0/f;
+	}
+	else if (x < 2.0/3.0) f = 3.0;
+	else
+	{
+		f = x;
+   	f *= f;
+		f = 2.0/f;
+	}
+	f /= 3.0;
+	return f;
+}
+
+double prod (double x, int depth)
 {
 	int n;
 	double prod = 1.0;
@@ -81,8 +110,13 @@ double prod (double x, int depth, double lambda)
 		// double mand = 1.0 + triangle(tk*x);
 		// double mand =  1.25 + 0.25*sin(M_PI*tk*x);
 		// double mand = 1.0/eff(a_k(x,n), lambda);
-		double mand = a_k(x,n, lambda);
-		prod *= eff(mand, 1.0);
+		//
+#ifdef TWO_ADIC
+		double mand = a_k(x,n);
+		prod *= da(mand);
+#endif
+		double mand = a3_k(x,n);
+		prod *= da3(mand);
 	}
 
 	return prod;
@@ -100,7 +134,7 @@ void graph(int npts, int depth, double lambda)
 	for (i=0; i<npts; i++)
 	{
 		double x = (double) i / ((double) npts);
-		double y = prod(x, depth, lambda);
+		double y = prod(x, depth);
 		acc += y*delta;
 
    	f.SetRatio(i, npts);
