@@ -435,7 +435,7 @@ key "Man95"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \begin_inset Caption
@@ -670,10 +670,15 @@ The use of the derivative notation in the above is rather misleading: properly
  In essence, the 'abuse of notation' is the failure to distinguish the standard
  topology of the real number line, from the product topology in which the
  statistical experiments are performed.
+ 
 \end_layout
 
 \begin_layout Standard
-The proof of the equivalence was given in terms of random variables, and
+This point, and the proof, will be revisited in later sections, where it
+ is rephrased in more abstract language, justifying some of the 'abuse of
+ notation' that is made here.
+ We continue with an informal fore-shadowing of this development.
+ The proof of the equivalence was given in terms of random variables, and
  the usual topology of random variables is a product topology (see, for
  example 
 \begin_inset LatexCommand cite
@@ -2404,7 +2409,7 @@ Both of the above defintions are mired in a language that implicitly assumes
 \end_layout
 
 \begin_layout Section
-As a Push-Forward
+The Push-Forward
 \end_layout
 
 \begin_layout Standard
@@ -3410,7 +3415,15 @@ key "Dunford1957"
 \begin_inset Formula $g$
 \end_inset
 
- is ergodic, there are no other such fixed points.
+ is ergodic, there are no other functions 
+\begin_inset Formula $h$
+\end_inset
+
+ that commute with 
+\begin_inset Formula $g$
+\end_inset
+
+.
  But this follows from the definition of ergodicity: when 
 \begin_inset Formula $g$
 \end_inset
@@ -3475,6 +3488,143 @@ ground state
  When it is unique, then the ground state is not degenerate; when it is
  not unique, then the ground state is said to be degenerate.
  
+\end_layout
+
+\begin_layout Section
+Reprecussions
+\end_layout
+
+\begin_layout Standard
+Leaving behind the technicalities of the previous section, lets review the
+ implications in simpler terms.
+ We started with a map 
+\begin_inset Formula $g:X\to X$
+\end_inset
+
+, and then consider the result of iterating upon this map.
+ Formally, the iteration can be thought of as a the (semi-)infinite chain
+ 
+\begin_inset Formula \[
+X\begin{array}[b]{c}
+g\\
+\longrightarrow\end{array}X\begin{array}[b]{c}
+g\\
+\longrightarrow\end{array}X\begin{array}[b]{c}
+g\\
+\longrightarrow\end{array}X\begin{array}[b]{c}
+g\\
+\longrightarrow\end{array}\cdots\]
+
+\end_inset
+
+and so 
+\begin_inset Formula $g$
+\end_inset
+
+ is now seen to be a shift operator acting on the (semi-)infinite product
+ space 
+\begin_inset Formula $X\times X\times X\times\cdots$
+\end_inset
+
+.
+ The product space may be interpreted as a one-dimensional lattice of neighborin
+g points; a 
+\begin_inset Quotes eld
+\end_inset
+
+field
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\sigma=(\sigma_{0},\sigma_{1},\cdots)$
+\end_inset
+
+ over the lattice has each lattice point taking values from 
+\begin_inset Formula $X$
+\end_inset
+
+, that is, 
+\begin_inset Formula $\sigma_{i}\in X$
+\end_inset
+
+.
+ As a lattice, the natural topology for the product space is the product
+ topology.
+ However, once one considers the product topology, the language of probability
+ theory automatically comes into play: in this language, 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is formally known as a 
+\begin_inset Quotes eld
+\end_inset
+
+random variable
+\begin_inset Quotes erd
+\end_inset
+
+, and each successive value 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+ is called a 
+\begin_inset Quotes eld
+\end_inset
+
+measurement
+\begin_inset Quotes erd
+\end_inset
+
+ of the random variable.
+ 
+\end_layout
+
+\begin_layout Standard
+For the most part, we've considered a space 
+\begin_inset Formula $X$
+\end_inset
+
+ which has two possible values: +1 or -1, 
+\begin_inset Quotes eld
+\end_inset
+
+heads
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+tails
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The structure of this space is seen to naturally be a tree: starting from
+ 
+\begin_inset Formula $\sigma_{0}$
+\end_inset
+
+, one can move to the left or to the right, one can flip heads or tails.
+ When the coin-flips are independent, the random variable is called a 
+\begin_inset Quotes eld
+\end_inset
+
+Bernoulli process
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It was this language of random variables that allows the theorem equating
+ the Stern-Brocot tree to the dyadic tree to yeild the Minkowski measure.
+ However, the more abstract development given above makes this theorem more
+ rigorous.
+\end_layout
+
+\begin_layout Standard
+takes As a product space 
 \end_layout
 
 \begin_layout Section
