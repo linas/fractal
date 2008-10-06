@@ -2165,8 +2165,38 @@ The Transfer Operator
 \end_layout
 
 \begin_layout Standard
-Transfer operators, as formulated by David Ruelle[xxx need ref] are a commonly-u
-sed tool for studying dynamical systems.
+The mapping from the lattice to the unit interval results in a collision
+ of effects coming from different topologies: the product topology of the
+ lattice, and the natural topology of the real number line.
+ A standard way of studying this collision is by means of the transfer operator.
+ The goal of this section is to introduce the transfer operator; the next
+ section will show, in general terms, that the transfer operator is the
+ push-forward of the shift operator.
+ 
+\end_layout
+
+\begin_layout Standard
+Transfer operators, also commonly called Perron-Frobenius operators or Perron-Fr
+obenius-Ruelle operators, as formulated by David Ruelle[xxx need ref] are
+ a commonly-used tool for studying dynamical systems
+\begin_inset LatexCommand cite
+key "Dri99"
+
+\end_inset
+
+.
+ As the name 
+\begin_inset Quotes eld
+\end_inset
+
+Perron-Frobenius
+\begin_inset Quotes erd
+\end_inset
+
+ suggests, these are bounded operators, whose largest eigenvalue is equal
+ to one; the existence of this eigenvalue is commonly justified by appealling
+ to the Frobenius theorem, which states that bounded operators have a maximal
+ eigenvalue.
  The origin of the name 
 \begin_inset Quotes eld
 \end_inset
@@ -2175,20 +2205,208 @@ transfer
 \begin_inset Quotes erd
 \end_inset
 
- comes from lattice-model physics, where state information is 
+ comes from lattice-model physics, where the 
 \begin_inset Quotes eld
 \end_inset
 
-transfered
+transfer interaction
 \begin_inset Quotes erd
 \end_inset
 
- between neighboring sites on a lattice.
+ or the 
+\begin_inset Quotes eld
+\end_inset
+
+transfer matrix
+\begin_inset Quotes erd
+\end_inset
+
+ is studied
+\begin_inset LatexCommand cite
+key "Gutzwiller1990,Glimm1981,Kittel1976"
+
+\end_inset
+
+.
+ In this context, the 
+\begin_inset Quotes eld
+\end_inset
+
+transfer interaction
+\begin_inset Quotes erd
+\end_inset
+
+ describes the effect of neighboring lattice sites on one-another; it can
+ be seen to be a matrix when the number of interacting lattice sites, and
+ the number states a single lattice point can be in, is finite.
+ It becomes an operator when the interaction is infinite range, or when
+ the set of states at a lattice site is no longer finite.
  
 \end_layout
 
+\begin_layout Standard
+It is easiest to begin with a concrete definition.
+ Consider a function 
+\begin_inset Formula $g:[0,1]\to[0,1]$
+\end_inset
+
+, that is, a function mapping the unit interval of the real number line
+ to itself.
+ Upon iteration, the function may have fixed points or orbits of points.
+ These orbits may be attractors or repellors, or may be neutral saddle points.
+ The action of 
+\begin_inset Formula $g$
+\end_inset
+
+ may be ergodic or chaotic, strong-mixing or merely topologically mixing.
+ In any case, the language used to discuss 
+\begin_inset Formula $g$
+\end_inset
+
+ is inherently based on either the point-set topology of the unit interval,
+ or the 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ topology on the unit interval, the topology of open sets.
+ 
+\end_layout
+
+\begin_layout Standard
+A shift in perspective may be gained not by considering how 
+\begin_inset Formula $g$
+\end_inset
+
+ acts on points or open sets, but instead by considering how 
+\begin_inset Formula $g$
+\end_inset
+
+ acts on distributions on the unit interval.
+ Intuitively, one might consider a dusting of points on the unit interval,
+ with the local density given by 
+\begin_inset Formula $\rho(x)$
+\end_inset
+
+ at point 
+\begin_inset Formula $x\in[0,1]$
+\end_inset
+
+, and then consider how this dusting or density evolves upon iteration by
+ 
+\begin_inset Formula $g$
+\end_inset
+
+.
+ This verbal description may be given form as 
+\begin_inset Formula \begin{equation}
+\rho^{\prime}(y)=\int_{0}^{1}\,\delta\left(y-g(x)\right)\rho(x)\; dx\label{eq:transfer-dirac}\end{equation}
+
+\end_inset
+
+ where 
+\begin_inset Formula $\rho^{\prime}(y)$
+\end_inset
+
+ is the new density at point 
+\begin_inset Formula $y=g(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is the Dirac delta function.
+ 
+\end_layout
+
+\begin_layout Standard
+In this viewpoint, 
+\begin_inset Formula $g$
+\end_inset
+
+ becomes an operator that maps densities 
+\begin_inset Formula $\rho$
+\end_inset
+
+ to other densities 
+\begin_inset Formula $\rho^{\prime}$
+\end_inset
+
+, or notationally, 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{g}\rho=\rho^{\prime}\label{eq:}\end{equation}
+
+\end_inset
+
+The operator 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+ is the transfer operator or the Ruelle-Frobenius-Perron operator.
+ It is not hard to see that it is a linear operator, in that 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{g}(a\rho_{1}+b\rho_{2})=a\mathcal{L}_{g}\rho_{1}+b\mathcal{L}_{g}\rho_{2}\label{eq:}\end{equation}
+
+\end_inset
+
+ for constants 
+\begin_inset Formula $a,b$
+\end_inset
+
+ and densities 
+\begin_inset Formula $\rho_{1},\rho_{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+When the function 
+\begin_inset Formula $g$
+\end_inset
+
+ is differentiable, and doesn't have a vanishing derivative, the integral
+ formulation of the transfer operator 
+\begin_inset LatexCommand ref
+reference "eq:transfer-dirac"
+
+\end_inset
+
+ can be rephrased in a more convenient form, as 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{g}\rho\right]\left(y\right)=\sum_{x:y=g(x)}\frac{\rho(x)}{\left|dg(x)/dx\right|}\label{eq: transfer-jacobi}\end{equation}
+
+\end_inset
+
+where the sum is presumed to extend over at most a countable number of points.
+ That is, when 
+\begin_inset Formula $g$
+\end_inset
+
+ is many-to-one, the sum is over the pre-images of the point 
+\begin_inset Formula $y$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
-The Gauss-Kuzmin-Wirsing Operator
+As a Push-Forward
+\end_layout
+
+\begin_layout Standard
+The In this section, it will be shown that the transfer operator is the
+ push-forward of the shift operator; a theorem and a sequence of lemmas
+ will be posed, that hold in general form.
+\end_layout
+
+\begin_layout Section
+Gauss-Kuzmin-Wirsing Operator
 \end_layout
 
 \begin_layout Standard
