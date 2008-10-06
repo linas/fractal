@@ -1860,7 +1860,7 @@ reference "fig:3-adic"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \begin_inset LatexCommand label
@@ -2029,7 +2029,7 @@ reference "eq:gkw"
 \end_inset
 
 This result immediately suggests that the lattice model methods can be applied
- to find other eigenfunctions corresponding to different eigenvalues.
+ to find other eigenfunctions.
  (The 3-adic Question mark, at least as defined above, does not have this
  property, suggesting, perhaps, that a different 3-adic Question Mark should
  be formulated).
@@ -2279,19 +2279,202 @@ so that
 \end_inset
 
 .
- Another, linearly independent function that satisfies 
+ Another, linearly independent function which satistfies 
 \begin_inset Formula $\mathcal{L}_{A}f=1$
 \end_inset
 
- is given by 
+ is 
 \begin_inset Formula \[
 C\left(y\right)=\begin{cases}
-\frac{1}{3\left(1-x\right)^{3}} & \mbox{ for }0\le x\le\frac{1}{2}\\
-\frac{1}{3x^{3}} & \mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
+\frac{1}{3\left(1-y\right)^{3}} & \mbox{ for }0\le y\le\frac{1}{2}\\
+\frac{1}{3y^{3}} & \mbox{ for }\frac{1}{2}\le y\le1\end{cases}\]
 
 \end_inset
 
+ that is, 
+\begin_inset Formula $\mathcal{L}_{A}C=1$
+\end_inset
 
+.
+ The collection of all 
+\begin_inset Formula $f$
+\end_inset
+
+ which satisfy 
+\begin_inset Formula $\mathcal{L}_{A}f=1$
+\end_inset
+
+ is large, but is easily specified.
+ Let
+\begin_inset Formula \[
+f\left(y\right)=\begin{cases}
+f_{0}\left(y\right) & \mbox{ for }0\le y\le\frac{1}{2}\\
+f_{1}\left(y\right) & \mbox{ for }\frac{1}{2}\le y\le1\end{cases}\]
+
+\end_inset
+
+then, given any, arbitrary 
+\begin_inset Formula $f_{0}$
+\end_inset
+
+, solving for 
+\begin_inset Formula $\mathcal{L}_{A}f=1$
+\end_inset
+
+ results in 
+\begin_inset Formula \[
+f_{1}\left(y\right)=\frac{1}{y^{2}}-\frac{1}{\left(3y-1\right)^{2}}f_{0}\left(\frac{2x-1}{3x-1}\right)\]
+
+\end_inset
+
+Such 
+\begin_inset Formula $f$
+\end_inset
+
+ are properly scaled; that is, 
+\begin_inset Formula $Z\left(\Omega\right)=1$
+\end_inset
+
+.
+ Because of the projective relationship between the functions 
+\begin_inset Formula $f$
+\end_inset
+
+ and the normalization 
+\begin_inset Formula $Z\left(\Omega\right)$
+\end_inset
+
+, it appears that this technique will result in eigenfunctions 
+\begin_inset Formula $P_{f}$
+\end_inset
+
+ with eigenvalue 1.
+ 
+\end_layout
+
+\begin_layout Standard
+The action of the GKW operator 
+\begin_inset Formula $\mathcal{L}_{G}$
+\end_inset
+
+ on 
+\begin_inset Formula $P_{f}$
+\end_inset
+
+ is not at all tidy; the result that 
+\begin_inset Formula $\mathcal{L}_{G}?^{\prime}=?^{\prime}$
+\end_inset
+
+ appears to be entirely due to the special form of 
+\begin_inset Formula $f=A^{\prime}/2$
+\end_inset
+
+.
+ However, results analogous to the above can be constructed by similar technique
+s; only has to use a different lattice model.
+ For this model, construct 
+\begin_inset Formula \[
+R_{f}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}f\circ D_{k}\left(y\right)\]
+
+\end_inset
+
+where 
+\begin_inset Formula $D_{k+1}=D_{k}\circ D$
+\end_inset
+
+ is function iteration, and
+\begin_inset Formula \[
+D\left(y\right)=\begin{cases}
+\frac{1-y}{y} & \mbox{ for }\frac{1}{2}<y\le1\\
+\cdots & \cdots\\
+\frac{1-ny}{y} & \mbox{ for }\frac{1}{n+1}<y\le\frac{1}{n}\\
+\cdots & \cdots\end{cases}\]
+
+\end_inset
+
+for positive integers 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ This multi-branched 
+\begin_inset Formula $D$
+\end_inset
+
+ has the property that 
+\begin_inset Formula \[
+D\left(\frac{1}{x+n}\right)=x\]
+
+\end_inset
+
+for all integer values of 
+\begin_inset Formula $n\ge1$
+\end_inset
+
+.
+ Applying the GKW operator to 
+\begin_inset Formula $R_{f}$
+\end_inset
+
+ results in 
+\begin_inset Formula \[
+\mathcal{L}_{G}R_{f}=R_{f}\mathcal{L}_{G}f\]
+
+\end_inset
+
+in analogy to the twisted Bernoulli operator.
+ The means for finding solutions to 
+\begin_inset Formula $\mathcal{L}_{G}f=1$
+\end_inset
+
+ proceeds analogously.
+ Thus, let 
+\begin_inset Formula \[
+f\left(y\right)=\begin{cases}
+f_{1}\left(y\right) & \mbox{ for }\frac{1}{2}<y\le1\\
+\cdots & \cdots\\
+f_{n}\left(y\right) & \mbox{ for }\frac{1}{n+1}<y\le\frac{1}{n}\\
+\cdots & \cdots\end{cases}\]
+
+\end_inset
+
+Then the equation 
+\begin_inset Formula $\mathcal{L}_{G}f=1$
+\end_inset
+
+ established only a single constraint between these 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+'s: all but one may be freely choosen.
+ As an example, consider 
+\begin_inset Formula \[
+f_{n}\left(y\right)=\frac{a_{n}}{y^{2}}\]
+
+\end_inset
+
+Then the resulting 
+\begin_inset Formula $f$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\mathcal{L}_{G}f=1$
+\end_inset
+
+ provided that the constants 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ satisfy 
+\begin_inset Formula \[
+\sum_{n=1}^{\infty}a_{n}=1\]
+
+\end_inset
+
+This construction shows that the space of fractal eigenfunctions of the
+ GKW operator is very large; but, as before, all of these eigenfuntions
+ appear to be non-decaying, corresponding to eigenvalue 1.
+ 
 \end_layout
 
 \begin_layout Section
