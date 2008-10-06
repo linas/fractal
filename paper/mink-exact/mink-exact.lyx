@@ -1094,8 +1094,8 @@ key "Kac1959"
 , and specifically, by the Kac potential
 \begin_inset Formula \begin{equation}
 V(x)=\begin{cases}
-2x-1/2 & \quad\mbox{ for }0\le x\le1/2\\
--2x+3/2 & \quad\mbox{ for }1/2\le x\le1\end{cases}\label{eq:Kac potential}\end{equation}
+-2x+1/2 & \quad\mbox{ for }0\le x\le1/2\\
+2x-3/2 & \quad\mbox{ for }1/2\le x\le1\end{cases}\label{eq:Kac potential}\end{equation}
 
 \end_inset
 
@@ -1789,7 +1789,184 @@ reference "eq:piece-product"
 \end_layout
 
 \begin_layout Section
-Generalizations
+Generalized Shifts
+\end_layout
+
+\begin_layout Standard
+Several generalizations of the Question Mark are possible.
+ To properly define these, it is imperative to regain a clearer view of
+ the lattice model methods.
+ The ingredients to the above constuction made use of a lattice 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, whose states are encoded by 
+\begin_inset Formula $\sigma$
+\end_inset
+
+, a lattice shift operator 
+\begin_inset Formula $\tau$
+\end_inset
+
+, and a function 
+\begin_inset Formula $V$
+\end_inset
+
+ on the lattice, to define a probability: 
+\begin_inset Formula \[
+\Pr_{V}(\sigma)=\frac{1}{Z(\Omega)}\prod_{k=0}^{\infty}\exp\left(-V\left(\tau^{k}\sigma\right)\right)\]
+
+\end_inset
+
+A second important ingredient was to provide an explicit identification
+ of lattice arrangments 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ with real numbers 
+\begin_inset Formula $y$
+\end_inset
+
+ in the unit interval, given by 
+\begin_inset Formula $\sigma=x^{-1}\left(?\left(y\right)\right)$
+\end_inset
+
+.
+ Putting these together lead to the form 
+\begin_inset Formula \[
+P_{f}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}f\circ A_{k}\left(y\right)\]
+
+\end_inset
+
+The appearence of 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ is explicitly governed by the mapping 
+\begin_inset Formula $\sigma=x^{-1}\left(?\left(y\right)\right)$
+\end_inset
+
+; that is, 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ is a representation of the shift operator 
+\begin_inset Formula $\tau^{k}$
+\end_inset
+
+, for this particular mapping of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ to real values.
+ The function 
+\begin_inset Formula $f$
+\end_inset
+
+ is simply 
+\begin_inset Formula $\exp-V$
+\end_inset
+
+, that is, 
+\begin_inset Formula \[
+f\left(y\right)=\exp-V\left(x^{-1}\left(?\left(y\right)\right)\right)\]
+
+\end_inset
+
+The partition function 
+\begin_inset Formula $Z\left(\Omega\right)$
+\end_inset
+
+ is re-introduced as a reminder that the product definition only makes sense
+ when 
+\begin_inset Formula $f$
+\end_inset
+
+ has been scaled appropriately; that is, 
+\begin_inset Formula $f$
+\end_inset
+
+ is arbitrary only up to a total scale factor; 
+\begin_inset Formula $f$
+\end_inset
+
+ exists only as an element of a projective space.
+ The constraint is even stronger: inappropriately normalized 
+\begin_inset Formula $f$
+\end_inset
+
+ lead to the formal divergence 
+\begin_inset Formula $Z\left(\Omega\right)=\infty$
+\end_inset
+
+; there is only one normalization for which 
+\begin_inset Formula $Z\left(\Omega\right)$
+\end_inset
+
+ is finite, and that furthermore, by construction, one then has 
+\begin_inset Formula $Z\left(\Omega\right)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Two directions along which to generalize are now clear: one may consider
+ general functions 
+\begin_inset Formula $V$
+\end_inset
+
+, and one may consider different mappings from the lattice space 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ to the unit interval (which is compact, or to the positive real number
+ line, which is not).
+ The former is reviewed in a later section; lets treat the later case first.
+\end_layout
+
+\begin_layout Standard
+The most widely used mapping is usually the much simpler one: 
+\begin_inset Formula $x=x\left(\sigma\right)$
+\end_inset
+
+ from eqn 
+\begin_inset LatexCommand ref
+reference "eq:binary-number"
+
+\end_inset
+
+, instead of the 
+\begin_inset Quotes eld
+\end_inset
+
+twisted
+\begin_inset Quotes erd
+\end_inset
+
+ mapping 
+\begin_inset Formula $\sigma=x^{-1}\left(?\left(y\right)\right)$
+\end_inset
+
+.
+ The simpler mapping is commonly used to study the Bernoulli shift
+\begin_inset LatexCommand cite
+key "Dri99,Gas92,Has92"
+
+\end_inset
+
+, an entry-point into the study of exactly solvable models in symbolic dynamics.
+ By contrast, the 
+\begin_inset Quotes eld
+\end_inset
+
+twisted
+\begin_inset Quotes erd
+\end_inset
+
+ mapping allowed the Question mark to be properly formulated, thus suggesting
+ that other maps can lead to other interesting objects.
+ A twisted version of the Bernoulli Map will be presented in a later section.
 \end_layout
 
 \begin_layout Standard
@@ -1799,7 +1976,7 @@ reference "eq:piece-product"
 
 \end_inset
 
- immediately lends itself to generalizations.
+ provides the most concrete avenue immediately for generalizations.
  One need only to consider any differentiable, piece-wise function 
 \begin_inset Formula $A$
 \end_inset
@@ -1816,14 +1993,22 @@ B\left(y\right)=\begin{cases}
 \end_inset
 
 and using 
+\begin_inset Formula $B$
+\end_inset
+
+ instead of 
+\begin_inset Formula $A$
+\end_inset
+
+ to generate the iterated function in the product, and 
 \begin_inset Formula $B^{\prime}/3$
 \end_inset
 
- in the product, in place of 
+ in place of 
 \begin_inset Formula $A^{\prime}/2$
 \end_inset
 
-.
+ as the intial term.
  The resulting function, let's call it 
 \begin_inset Formula $?_{3}^{\prime}$
 \end_inset
@@ -1969,6 +2154,37 @@ e.g
 .
  with cubic irrationals, and an appropriate 3-adic redefinition of periodicity
  in the continued fraction.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section
+The Transfer Operator
+\end_layout
+
+\begin_layout Standard
+Transfer operators, as formulated by David Ruelle[xxx need ref] are a commonly-u
+sed tool for studying dynamical systems.
+ The origin of the name 
+\begin_inset Quotes eld
+\end_inset
+
+transfer
+\begin_inset Quotes erd
+\end_inset
+
+ comes from lattice-model physics, where state information is 
+\begin_inset Quotes eld
+\end_inset
+
+transfered
+\begin_inset Quotes erd
+\end_inset
+
+ between neighboring sites on a lattice.
+ 
 \end_layout
 
 \begin_layout Section
@@ -2155,102 +2371,7 @@ Other eigenfunctions for the operators
 \begin_inset Formula $\mathcal{L}_{A}$
 \end_inset
 
- can be readily obtained by re-examining the general case 
-\begin_inset Formula \[
-\Pr_{V}(\sigma)=\frac{1}{Z(\Omega)}\prod_{k=0}^{\infty}\exp\left(-V\left(\tau^{k}\sigma\right)\right)\]
-
-\end_inset
-
-together with the explicit identification of lattice arrangments 
-\begin_inset Formula $\sigma$
-\end_inset
-
- with real numbers 
-\begin_inset Formula $y$
-\end_inset
-
- in the unit interval, given by 
-\begin_inset Formula $\sigma=x^{-1}\left(?\left(y\right)\right)$
-\end_inset
-
-.
- As seen previously, this leads to the form 
-\begin_inset Formula \[
-P_{f}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}f\circ A_{k}\left(y\right)\]
-
-\end_inset
-
-A review of the ingredients is appropriate.
- The appearence of 
-\begin_inset Formula $A_{k}$
-\end_inset
-
- is explicitly governed by the mapping 
-\begin_inset Formula $\sigma=x^{-1}\left(?\left(y\right)\right)$
-\end_inset
-
-; that is, 
-\begin_inset Formula $A_{k}$
-\end_inset
-
- is a representation of the shift operator 
-\begin_inset Formula $\tau^{k}$
-\end_inset
-
-, for this particular mapping of 
-\begin_inset Formula $\sigma$
-\end_inset
-
- to real values.
- The function 
-\begin_inset Formula $f$
-\end_inset
-
- is simply 
-\begin_inset Formula $\exp-V$
-\end_inset
-
-, that is, 
-\begin_inset Formula \[
-f\left(y\right)=\exp-V\left(x^{-1}\left(?\left(y\right)\right)\right)\]
-
-\end_inset
-
-The partition function 
-\begin_inset Formula $Z\left(\Omega\right)$
-\end_inset
-
- is re-introduced as a reminder that the product definition only makes sense
- when 
-\begin_inset Formula $f$
-\end_inset
-
- has been scaled appropriately; that is, 
-\begin_inset Formula $f$
-\end_inset
-
- is arbitrary only up to a total scale factor; 
-\begin_inset Formula $f$
-\end_inset
-
- exists only as an element of a projective space.
- The constraint is even stronger: inappropriately normalized 
-\begin_inset Formula $f$
-\end_inset
-
- lead to the formal divergence 
-\begin_inset Formula $Z\left(\Omega\right)=\infty$
-\end_inset
-
-; there is only one normalization for which 
-\begin_inset Formula $Z\left(\Omega\right)$
-\end_inset
-
- is finite, and that furthermore, by construction, one then has 
-\begin_inset Formula $Z\left(\Omega\right)=1$
-\end_inset
-
-.
+ can be readily obtained by re-examining
 \end_layout
 
 \begin_layout Standard
