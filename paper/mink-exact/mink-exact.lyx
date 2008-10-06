@@ -674,11 +674,7 @@ The use of the derivative notation in the above is rather misleading: properly
 \end_layout
 
 \begin_layout Standard
-This point, and the proof, will be revisited in later sections, where it
- is rephrased in more abstract language, justifying some of the 'abuse of
- notation' that is made here.
- We continue with an informal fore-shadowing of this development.
- The proof of the equivalence was given in terms of random variables, and
+The proof of the equivalence was given in terms of random variables, and
  the usual topology of random variables is a product topology (see, for
  example 
 \begin_inset LatexCommand cite
@@ -1368,8 +1364,8 @@ reference "eq:Jacobian"
 \end_inset
 
  becomes 
-\begin_inset Formula \[
-\Pr(\sigma)=?^{\prime}\left(y\right)\]
+\begin_inset Formula \begin{equation}
+\Pr(\sigma)=?^{\prime}\left(y\right)\label{eq:measure-A}\end{equation}
 
 \end_inset
 
@@ -1411,10 +1407,10 @@ where 'frac' is the fractional part of a number, that is,
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 A\left(y\right)=?^{-1}\left(\mbox{frac}\left(2?\left(y\right)\right)\right)=\begin{cases}
 \frac{y}{1-y} & \mbox{ for }0\le y\le\frac{1}{2}\\
-\frac{2y-1}{y} & \mbox{ for }\frac{1}{2}\le y\le1\end{cases}\]
+\frac{2y-1}{y} & \mbox{ for }\frac{1}{2}\le y\le1\end{cases}\label{eq:defn-A}\end{equation}
 
 \end_inset
 
@@ -1989,11 +1985,11 @@ reference "eq:piece-product"
  and use it in the construction.
  For example, one may consider a 3-adic generalization of the Question Mark,
  which may be constructed from 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 B\left(y\right)=\begin{cases}
 \frac{2y}{1-y} & \mbox{ for }0\le y<\frac{1}{3}\\
 3y-1 & \mbox{ for }\frac{1}{3}\le y<\frac{2}{3}\\
-\frac{3y-2}{y} & \mbox{ for }\frac{2}{3}\le y\le1\end{cases}\]
+\frac{3y-2}{y} & \mbox{ for }\frac{2}{3}\le y\le1\end{cases}\label{eq:defn-B}\end{equation}
 
 \end_inset
 
@@ -3472,6 +3468,24 @@ A peculiar special case is worth mentioning: if
 \end_layout
 
 \begin_layout Standard
+In the language of dynamical systems, the push-forward 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ is commonly written as 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+, so that one has 
+\begin_inset Formula \[
+g_{*}=\mathcal{L}_{g}:\mathcal{F}\left(X\right)\to\mathcal{F}\left(X\right)\]
+
+\end_inset
+
+now being called the transfer operator or the Ruelle-Frobenius-Perron operator.
+\end_layout
+
+\begin_layout Standard
 Reverting back to the language of physics, the fixed point 
 \begin_inset Formula $\mu$
 \end_inset
@@ -3487,16 +3501,372 @@ ground state
  of a system.
  When it is unique, then the ground state is not degenerate; when it is
  not unique, then the ground state is said to be degenerate.
+ The operator 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ is the time-evolution operator of the system; it shows how physical fields
  
+\begin_inset Formula $f\in\mathcal{F}(X)$
+\end_inset
+
+ over a space 
+\begin_inset Formula $X$
+\end_inset
+
+ evolve over time.
+ When 
+\begin_inset Formula $F$
+\end_inset
+
+ is the complex numbers 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+, the fact that 
+\begin_inset Formula $\left\Vert g_{*}\right\Vert =1$
+\end_inset
+
+ is esssentially a way of stating that time-evolution is unitary; the Frobenius-
+Perron operator is the unitary time-evolution operator of the system.
 \end_layout
 
 \begin_layout Section
-Reprecussions
+Grounding
 \end_layout
 
 \begin_layout Standard
-Leaving behind the technicalities of the previous section, lets review the
- implications in simpler terms.
+To make sense of the discussion above, it is best to ground the symbols
+ in concrete terms.
+ For the most part, this paper is concerned either with the space 
+\begin_inset Formula $X=\Omega$
+\end_inset
+
+, the space of strings in two letters, or the spaces 
+\begin_inset Formula $X$
+\end_inset
+
+ that are somehow isomorphic to 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ This space is a (semi-)infinite product of 
+\begin_inset Formula $\mathbb{Z}_{2}=\{0,1\}$
+\end_inset
+
+; elements 
+\begin_inset Formula $\sigma\in\Omega$
+\end_inset
+
+ of this space were values 
+\begin_inset Formula $\sigma=(\sigma_{0},\sigma_{1},\cdots)$
+\end_inset
+
+ with each 
+\begin_inset Formula $\sigma_{k}\in\mathbb{Z}_{2}$
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $g$
+\end_inset
+
+ is to be equated with the shift operator 
+\begin_inset Formula $\tau$
+\end_inset
+
+; that is, when 
+\begin_inset Formula $X=\Omega$
+\end_inset
+
+, then 
+\begin_inset Formula $g=\tau$
+\end_inset
+
+ and 
+\begin_inset Formula $g:X\to X$
+\end_inset
+
+ is just 
+\begin_inset Formula $\tau:\Omega\to\Omega$
+\end_inset
+
+ acting such that 
+\begin_inset Formula $\tau(\sigma_{0},\sigma_{1},\sigma_{2},\cdots)=(\sigma_{1},\sigma_{2},\cdots)$
+\end_inset
+
+.
+ Curiously, the structure of the space 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ can be understood to be a binary tree: starting at 
+\begin_inset Formula $\sigma_{0}$
+\end_inset
+
+ one can branch to the left or to the right, to get to 
+\begin_inset Formula $\sigma_{1}$
+\end_inset
+
+, and so on.
+ 
+\end_layout
+
+\begin_layout Standard
+However, a product space such as this also allows the language of probability
+ theory come into play, and this is where things get interesting.
+ Product spaces are the natural setting for probability: the element 
+\begin_inset Formula $\sigma\in\Omega$
+\end_inset
+
+ is called a 
+\begin_inset Quotes eld
+\end_inset
+
+random variable
+\begin_inset Quotes erd
+\end_inset
+
+, and successive values 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+ of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+measurements
+\begin_inset Quotes erd
+\end_inset
+
+ of the random variable.
+ This is also the manner in which measure theory gets its foot in the door.
+\end_layout
+
+\begin_layout Standard
+The mappings 
+\begin_inset Formula $x:\Omega\to\mathbb{R}$
+\end_inset
+
+ given by eqn 
+\begin_inset LatexCommand ref
+reference "eq:binary-number"
+
+\end_inset
+
+ is now seen to be an example of an element of the algebra 
+\begin_inset Formula $\mathcal{F}\left(\Omega\right)$
+\end_inset
+
+ introduced in the previous section.
+ The mapping 
+\begin_inset Formula $y:\Omega\to\mathbb{R}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\sigma\mapsto y=?^{-1}\left(x\left(\sigma\right)\right)$
+\end_inset
+
+ is another example of an element of 
+\begin_inset Formula $\mathcal{F}\left(\Omega\right)$
+\end_inset
+
+.
+ Both the maps 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ are invertible on the closed unit interval, establishing a 
+\begin_inset Formula $1-1$
+\end_inset
+
+ mapping between 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ and the closed unit interval.
+ Consider, then, the function 
+\begin_inset Formula \[
+b=x\circ\tau\circ x^{-1}\]
+
+\end_inset
+
+which maps the unit interval into itself.
+ Let 
+\begin_inset Formula $w\in[0,1]$
+\end_inset
+
+ be a point in the unit interval; then it is not hard to see that 
+\begin_inset Formula $b(w)=2w\mbox{ mod}1$
+\end_inset
+
+.
+ In the literature, this function is commonly called the Bernoulli shift;
+ its corresponding random process is known as the Bernoulli process.
+ It is well-known to be ergodic.
+ The other function that was considered here was 
+\begin_inset Formula \[
+A=y\circ\tau\circ y^{-1}\]
+
+\end_inset
+
+Its action on the unit interval has already been given by eqn 
+\begin_inset LatexCommand ref
+reference "eq:defn-A"
+
+\end_inset
+
+.
+ In a previous section, we have already considered generalizations of 
+\begin_inset Formula $A$
+\end_inset
+
+, that is, other functions 
+\begin_inset Formula $B:[0,1]\to[0,1]$
+\end_inset
+
+, such as, for example, eqn 
+\begin_inset LatexCommand ref
+reference "eq:defn-B"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Each of these maps 
+\begin_inset Formula $b$
+\end_inset
+
+, 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+ can be taken as an example of a map 
+\begin_inset Formula $g:X\to X$
+\end_inset
+
+, now taking 
+\begin_inset Formula $X$
+\end_inset
+
+ to the unit interval.
+ By the previous theorem, each such map 
+\begin_inset Formula $g$
+\end_inset
+
+ induces a push-forward 
+\begin_inset Formula $g_{*}=\mathcal{L}_{g}$
+\end_inset
+
+, and this push-forward then induces an invariant measure 
+\begin_inset Formula $\mu_{g}$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ For the Bernoulli map 
+\begin_inset Formula $b$
+\end_inset
+
+, the push-forward 
+\begin_inset Formula $\mathcal{L}_{b}$
+\end_inset
+
+ is introduced in 
+\begin_inset LatexCommand cite
+key "Gas92,Has92"
+
+\end_inset
+
+, and a detailed study of its eigenvectors is given in 
+\begin_inset LatexCommand cite
+key "Dri99"
+
+\end_inset
+
+.
+ The invariant measure 
+\begin_inset Formula $\mu_{b}$
+\end_inset
+
+ is well-known to be the identity on the unit interval.
+ This just means that 
+\begin_inset Formula $b$
+\end_inset
+
+ considered as an ergodic process, is uniformly distributed on the unit
+ interval.
+ 
+\end_layout
+
+\begin_layout Standard
+The invariant measure 
+\begin_inset Formula $\mu_{A}$
+\end_inset
+
+ has already been established in eqn 
+\begin_inset LatexCommand ref
+reference "eq:measure-A"
+
+\end_inset
+
+ as being the Minkowski measure; that is, 
+\begin_inset Formula $\mu_{A}=?^{\prime}$
+\end_inset
+
+.
+ A previous section already gave specific mechanics for how to take a general,
+ differentiable onto-map 
+\begin_inset Formula $B$
+\end_inset
+
+ and define its associated measure 
+\begin_inset Formula $\mu_{B}$
+\end_inset
+
+ as the generalization of eqn 
+\begin_inset LatexCommand ref
+reference "eq:piece-product"
+
+\end_inset
+
+.
+ The next section introduces the transfer operator 
+\begin_inset Formula $\mathcal{L}_{A}$
+\end_inset
+
+ corresponding to 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+xxxxxxxxxxxxxxxx
+\end_layout
+
+\begin_layout Standard
+As a final curiostiy.
  We started with a map 
 \begin_inset Formula $g:X\to X$
 \end_inset
@@ -3523,7 +3893,7 @@ and so
 
  is now seen to be a shift operator acting on the (semi-)infinite product
  space 
-\begin_inset Formula $X\times X\times X\times\cdots$
+\begin_inset Formula $\Omega=X\times X\times X\times\cdots$
 \end_inset
 
 .
@@ -3581,46 +3951,19 @@ measurement
 \end_layout
 
 \begin_layout Standard
-For the most part, we've considered a space 
-\begin_inset Formula $X$
+From the viewpoint of lattice physics, the function 
+\begin_inset Formula $g$
 \end_inset
 
- which has two possible values: +1 or -1, 
-\begin_inset Quotes eld
-\end_inset
+ can be is shift
+\end_layout
 
-heads
-\begin_inset Quotes erd
-\end_inset
+\begin_layout Standard
+is timne-evolution oper
+\end_layout
 
- or 
-\begin_inset Quotes eld
-\end_inset
-
-tails
-\begin_inset Quotes erd
-\end_inset
-
-.
- The structure of this space is seen to naturally be a tree: starting from
- 
-\begin_inset Formula $\sigma_{0}$
-\end_inset
-
-, one can move to the left or to the right, one can flip heads or tails.
- When the coin-flips are independent, the random variable is called a 
-\begin_inset Quotes eld
-\end_inset
-
-Bernoulli process
-\begin_inset Quotes erd
-\end_inset
-
-.
- It was this language of random variables that allows the theorem equating
- the Stern-Brocot tree to the dyadic tree to yeild the Minkowski measure.
- However, the more abstract development given above makes this theorem more
- rigorous.
+\begin_layout Standard
+many-worlds
 \end_layout
 
 \begin_layout Standard
