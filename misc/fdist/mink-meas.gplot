@@ -7,10 +7,14 @@ set out 'mink-meas.png'
 
 #######################################################
 # This generates the figure for the mink-exact paper
+# 
+# set term postscript
+# set out 'three-adic.ps'
+# 
+# plot "mink-meas.dat" using 2:4 title ""
+#######################################################
 
-set term postscript
-set out 'three-adic.ps'
-
-plot "mink-meas.dat" using 2:4 title ""
+plot "mink-meas.dat" using 2:4 title "hrmph", \
+     "mink-meas.dat" using 2:5 title "?"
 
 
