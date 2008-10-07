@@ -19,10 +19,10 @@ dist: mink-exact.tex mink-exact.aux mink-exact.bbl $(GRPHS)
 	ls -la mink-exact.tar.gz
 
 clean:
-	rm -f *.log *.blg *.dvi
+	rm -f *.log *.blg *.dvi *.aux *.tar.gz
 
 realclean: clean
-   rm -f *.log *.tex *.pdf *.dvi *.lyx~
+	rm -f *.log *.tex *.pdf *.dvi *.lyx~
 
 .SUFFIXES: .ps .png
 
