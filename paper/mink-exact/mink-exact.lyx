@@ -3339,14 +3339,17 @@ reference "eq: transfer-jacobi"
 \end_layout
 
 \begin_layout Standard
-Some curious lemmas show up along the way.
+In simplistic terms, the push-forward can be thought of as a kind of change-of-v
+ariable.
+ Thus, one should not be surprised by the following lemma, which should
+ be recognizable as the Jacobian, from basic calculus.
  
 \end_layout
 
 \begin_layout Lemma
-One has 
+(Jacobian) One has 
 \begin_inset Formula \[
-\sum_{j=1}^{k}\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}=1\]
+\sum_{x_{j}\in g^{-1}(y)}\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}=1\]
 
 \end_inset
 
@@ -3377,8 +3380,13 @@ name "cor:unit-eigenvec"
 
 \end_inset
 
-The constant function is an eigenvector of the transfer operator, associated
- with the eigenvalue one.
+The uniform distribution (
+\emph on
+i.e.
+
+\emph default
+ the measure) is an eigenvector of the transfer operator, associated with
+ the eigenvalue one.
  
 \end_layout
 
@@ -3395,17 +3403,16 @@ reference "eq:Transfer-point"
 \end_inset
 
 , and applies the lemma above.
- From the viewpoint of the sigma-algebra, this is nothing more than the
- seemingly vacuous statement that 
+ From the viewpoint of the sigma-algebra, this is nothing more than a rephrasing
+ of the starting point, that 
 \begin_inset Formula $\nu=g_{*}\mu$
 \end_inset
 
-.
- This becomes slightly less vacuous if one takes the space 
+, and then taking the space 
 \begin_inset Formula $Y=X$
 \end_inset
 
-, so that 
+, so that the push-forward induced by 
 \begin_inset Formula $g:X\to X$
 \end_inset
 
@@ -3418,8 +3425,8 @@ reference "eq:Transfer-point"
 \end_layout
 
 \begin_layout Standard
-The last corollary suggests two interesting conjectures.
- 
+The last corollary is more enlightening when it is turned on its side; it
+ implies two well-known theorems, which follow easily in this framework.
 \end_layout
 
 \begin_layout Corollary
@@ -3702,7 +3709,7 @@ A peculiar special case is worth mentioning: if
 \begin_inset Formula $\mu$
 \end_inset
 
- in each leaf, and that there is a symmetry group that takes 
+ in each leaf, and that there is a mapping that takes 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -3721,7 +3728,7 @@ In the language of dynamical systems, the push-forward
 
 , so that one has 
 \begin_inset Formula \[
-g_{*}=\mathcal{L}_{g}:\mathcal{F}\left(X\right)\to\mathcal{F}\left(X\right)\]
+g_{*}=\mathcal{L}_{g}\,:\,\mathcal{F}\left(X\right)\to\mathcal{F}\left(X\right)\]
 
 \end_inset
 
