@@ -3,18 +3,19 @@
 #
 # 
 #
-GRPHS= dyadic.eps \
+GRPHS= quest.ps \
+       dyadic.eps \
        farey.eps \
-       quest.ps \
-       three-adic.ps \
-       akk.ps
+       fdist-65K.ps \
+       akk.ps \
+       three-adic.ps
 
 all: mink-exact.lyx $(GRPHS)
 	lyx mink-exact.lyx -e latex
 	/usr/bin/latex mink-exact.tex
 	/usr/bin/bibtex mink-exact.aux
 
-dist: mink-exact.tex mink-exact.aux mink-exact.bbl $(GRPHS) 
+dist: mink-exact.tex mink-exact.bbl $(GRPHS) 
 	tar -zcvf mink-exact.tar.gz $^
 	ls -la mink-exact.tar.gz
 
