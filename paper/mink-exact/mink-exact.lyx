@@ -40,7 +40,7 @@
 \begin_body
 
 \begin_layout Title
-An Exact Expression for the Minkowski Measure
+On the Minkowski Measure
 \end_layout
 
 \begin_layout Author
@@ -54,36 +54,36 @@ Linas Vepstas <linasvepstas@gmail.com>
 \begin_layout Abstract
 The Minkowski Question Mark function relates the continued-fraction representati
 on of the real numbers, to their binary expansion.
- Although it is difficult to reason about its derivative, one can show by
- classical techniques that its derivative must vanish on all rationals.
+ This function is peculiar in many ways; one is that its derivative is 'singular
+'.
+ One can show by classical techniques that its derivative must vanish on
+ all rationals.
  Since the Question Mark itself is continuous, one concludes that the derivative
  must be non-zero on the irrationals, and is thus a discontinuous-everywhere
  function.
- The derivative of the Minkowski Question Mark function is interpretable
- as a measure, and is often called the 'Minkowski measure'.
+ This derivative is the subject of this essay.
 \end_layout
 
 \begin_layout Abstract
-Two results are presented here: First, a simple measure-theoretic construction
- of the derivative, which can be precisely modeled on the real number line
- as a statistical distribution.
- This allows the distribution to be graphed, and clearly shows that it resembles
- what are sometimes called 
-\begin_inset Quotes eld
-\end_inset
-
-multi-fractal measures
-\begin_inset Quotes erd
-\end_inset
-
-.
- Second, an exact result, expressing the measure as an infinite product
+Various results are presented here: First, a simple but formal measure-theoretic
+ construction of the derivative is given, making it clear that it has a
+ very concrete existence as a Lebesgue-Stieltjes measure, and thus is safe
+ to manipulate in various familiar ways.
+ Next, an exact result is given, expressing the measure as an infinite product
  of piece-wise continuous functions, with each piece being a Möbius transform
  of the form 
 \begin_inset Formula $(ax+b)/(cx+d)$
 \end_inset
 
-, is presented.
+.
+ This construction is then shown to be the Haar measure of a certain transfer
+ operator.
+ A general proof is given that any transfer operator can be understood to
+ be nothing more nor less than a push-forward on a Banach space; such push-forwa
+rds induce an invariant measure, the Haar measure, of which the Minkowski
+ measure can serve as a prototypical example.
+ Some minor notes pertaining to it's relation to the Gauss-Kuzmin-Wirsing
+ operator, are made.
 \end_layout
 
 \begin_layout Section
@@ -306,6 +306,32 @@ larity and transformation properties, can be obtained by contemplating the
  tree indicates a product toplogy, and guarentees that the Cantor set will
  manifest itself in various ways.
  
+\end_layout
+
+\begin_layout Standard
+The Question Mark has many peculiarites, and one is that it's derivative
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+singular
+\begin_inset Quotes erd
+\end_inset
+
+ in an unexpected way.
+ One can show, by classical techniques, that its derivative must vanish
+ on all rationals: it is a very very flat function, as it approaches any
+ rational.
+ Since the Question Mark itself is continuous, one concludes that the derivative
+ must be non-zero on the irrationals, and is thus a discontinuous-everywhere
+ function.
+ The derivative of the Minkowski Question Mark function is interpretable
+ as a measure, and is often called the 'Minkowski measure'.
+ It is this measure that is the subject of this essay.
+\end_layout
+
+\begin_layout Standard
+xxxxx
 \end_layout
 
 \begin_layout Standard
@@ -4435,8 +4461,8 @@ The Gauss-Kuzmin-Wirsing Operator
 \end_layout
 
 \begin_layout Standard
-The Gauss-Kuzmin-Wirsing operator is the transfer operator of the Gauss
- map 
+The Gauss-Kuzmin-Wirsing (GKW) operator is the transfer operator of the
+ Gauss map 
 \begin_inset Formula $h(x)=1/x-\left\lfloor 1/x\right\rfloor $
 \end_inset
 
@@ -4495,30 +4521,28 @@ This result immediately suggests that the lattice model methods can be applied
 \end_layout
 
 \begin_layout Standard
-The operator 
+The GKW operator is tied by various identities to the twisted Bernoulli
+ operator 
 \begin_inset Formula $\mathcal{L}_{A}$
 \end_inset
 
- is a peculiar continued-fraction analog of the Bernoulli shift; it participates
- in various identities with the GKW operator
+.
+ These are explicitly given by 
 \begin_inset LatexCommand cite
 key "Iso03"
 
 \end_inset
 
+; they can be crudely summarized by saying that these identites are the
+ operator analogues of Denjoy's explicit summation 
+\begin_inset LatexCommand ref
+reference "eq:direct ? fun defn"
+
+\end_inset
+
 .
-\end_layout
-
-\begin_layout Standard
-Other eigenfunctions for the operators 
-\begin_inset Formula $\mathcal{L}_{G}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathcal{L}_{A}$
-\end_inset
-
- can be readily obtained by re-examining
+ In these rough terms, the Bernoulli shift chops off one digit of a binary
+ number at a time; these may be in turn re-assembled to form the GKW operator.
 \end_layout
 
 \begin_layout Standard
@@ -4539,8 +4563,16 @@ The action of the GKW operator
 \end_inset
 
 .
- However, results analogous to the above can be constructed by similar technique
-s; only has to use a different lattice model.
+ This is perhaps no surpirse.
+\end_layout
+
+\begin_layout Standard
+Other fractal eigenvectors for the GKW can be constructed by a technique
+ entirely parallel to the construction of the 
+\begin_inset Formula $P_{f}$
+\end_inset
+
+; one only has to use a different lattice model.
  For this model, construct 
 \begin_inset Formula \[
 R_{f}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}f\circ D_{k}\left(y\right)\]
