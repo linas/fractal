@@ -15,7 +15,7 @@ all: mink-exact.lyx $(GRPHS)
 	/usr/bin/bibtex mink-exact.aux
 
 dist: mink-exact.tex mink-exact.aux mink-exact.bbl $(GRPHS) 
-	tar -zcvf mink-exact.tar $^
+	tar -zcvf mink-exact.tar.gz $^
 	ls -la mink-exact.tar.gz
 
 clean:
