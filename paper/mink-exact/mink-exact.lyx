@@ -664,55 +664,191 @@ reference "eq:integral"
 The use of the derivative notation in the above is rather misleading: properly
  speaking, the derivative of the Question Mark is not defined when using
  the standard topology on the real number line.
- Yet this notation is not exactly wrong; the modern definition of a derviative
- must occur with respect to a topology, and if one uses the appropriate
- toplogy, the derivative notation is accurate.
- In essence, the 'abuse of notation' is the failure to distinguish the standard
- topology of the real number line, from the product topology in which the
- statistical experiments are performed.
- 
-\end_layout
+ However, the treatment of 
+\begin_inset Formula $\mu$
+\end_inset
 
-\begin_layout Standard
-The proof of the equivalence was given in terms of random variables, and
- the usual topology of random variables is a product topology (see, for
- example 
+ as a measure can be very rigorously founded.
+ Specifically, 
+\begin_inset Formula $\mu$
+\end_inset
+
+ can be seen to be an example of an outer measure; by the measure extension
+ theorem (see, for example 
 \begin_inset LatexCommand cite
 key "Kle08"
 
 \end_inset
 
-), which is a very different topology than the standard topology on the
+), an outer measure can be extended to a unique measure on the unit interval
+ of the real number line.
+\end_layout
+
+\begin_layout Standard
+This is done as follows.
+ Let 
+\begin_inset Formula $2=\{0,1\}$
+\end_inset
+
+ be the set containing two elements; let 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ be the (semi-)infinite product space 
+\begin_inset Formula $2\times2\times2\times\cdots$
+\end_inset
+
+.
+ This space consists of all (infinitely-long) strings in two letters.
+ An outer measure is a set function 
+\begin_inset Formula $\nu\,:\,2^{\omega}\to[0,\infty]$
+\end_inset
+
+ that is monotone (
+\emph on
+i.e
+\emph default
+.
+ 
+\begin_inset Formula $\nu\left(A\right)<\nu\left(B\right)$
+\end_inset
+
+ whenever 
+\begin_inset Formula $A\subset B\subset2^{\omega}$
+\end_inset
+
+), that is sigma-subadditive (
+\emph on
+i.e.
+
+\emph default
+ given any countable set 
+\begin_inset Formula $A_{1},\, A_{2},\,\ldots$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $A\subset\bigcup_{k=0}^{\infty}A_{k}$
+\end_inset
+
+, then 
+\begin_inset Formula $\nu\left(A\right)\le\sum_{k=0}^{\infty}\nu\left(A_{k}\right)$
+\end_inset
+
+ ) and that 
+\begin_inset Formula $\nu$
+\end_inset
+
+ of the empty set is zero.
+ It is straight-forward to show that 
+\begin_inset Formula $\nu=?^{\prime}\circ?^{-1}$
+\end_inset
+
+ satisfies each of these properties for an outer measure; this essentially
+ follows from the total ordering of the fractions on the Stern-Brocot tree
+ (as well as the total ordering of the dyadic rationals on the dyadic tree).
+ The remaining step is to notice that the 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ topology on 
+\begin_inset Formula $2^{\omega}$
+\end_inset
+
+ is the so-called 
+\begin_inset Quotes eld
+\end_inset
+
+weak topology
+\begin_inset Quotes erd
+\end_inset
+
+ (sometimes called the 
+\begin_inset Quotes eld
+\end_inset
+
+cylinder set topology
+\begin_inset Quotes erd
+\end_inset
+
+), and that the weak topology is finer than the natural topology on the
  real number line.
- For a discrete random variable taking on values from some set 
-\begin_inset Formula $S$
-\end_inset
-
-, the appropriate space for studying 
-\begin_inset Formula $M$
-\end_inset
-
- successive measurements is the product space 
-\begin_inset Formula $S^{M}=S\times\dots\times S$
+ That is, every subset of the unit interval of the real number line is also
+ a subset of 
+\begin_inset Formula $2^{\omega}$
 \end_inset
 
 .
- The open sets of a product topology are the cylinder sets.
- Points in the product topology are simply strings of symbols, chosen from
- the set 
-\begin_inset Formula $S$
+ The measure extension theorem then states that there is a single, unique
+ measure 
+\begin_inset Formula $\tilde{\nu}$
+\end_inset
+
+ on the unit interval of the real number line that is identical to 
+\begin_inset Formula $\nu$
+\end_inset
+
+ on all subsets of the unit interval.
+ 
+\end_layout
+
+\begin_layout Standard
+It is in this way that 
+\begin_inset Formula $?^{\prime}\circ?^{-1}$
+\end_inset
+
+ should be understood as a measure on the unit interval, and, more precisely,
+ a Lebesgue-Stieltjes measure.
+ Since 
+\begin_inset Formula $?$
+\end_inset
+
+ is continuous and invertible (one-to-one and onto), then 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ is a Lebesgue-Stieltjes measure as well.
+ It is in this way that the use of the word 
+\begin_inset Quotes eld
+\end_inset
+
+derivative
+\begin_inset Quotes erd
+\end_inset
+
+ is not entirely inappropriate: Lebesgue-Stieltjes measures capture the
+ essence of integration, and insofar as the integral is an anti-derivitive,
+ one can fairly casually talk about derivatives.
+ In particular, later sections below will make use of the chain rule for
+ derivatives 
+\begin_inset Formula $\left(?\circ f\right)^{\prime}=\left(?^{\prime}\circ f\right)\cdot f^{\prime}$
+\end_inset
+
+; the validity of the chain rule in this context works, because it can be
+ seen to be a change-of-variable of a Lebesgue-Stieltjes integral.
+ 
+\end_layout
+
+\begin_layout Standard
+The construction of 
+\begin_inset Formula $?^{\prime}\circ?^{-1}$
+\end_inset
+
+ is such that it is also a measure (an outer measure!) on the even finer
+ topology of 
+\begin_inset Formula $2^{\omega}$
 \end_inset
 
 .
- However, by considering the set 
-\begin_inset Formula $S=\left\{ 0,1\right\} $
-\end_inset
-
- of the binary digits 0,1, one can map strings of binary digits to real
- numbers expanded in base-two.
- This mapping effectively leads to the notion of the Cantor set, and, as
- a result, can provide a grounding for understanding a wide spectrum of
- fractal phenomena.
+ All these various points will be implicit in what follows, where a more
+ casual language will be adopted.
 \end_layout
 
 \begin_layout Standard
@@ -744,7 +880,8 @@ This section provides a review of the language of lattice models, setting
 \end_layout
 
 \begin_layout Standard
-Consider the set of all possible (infinite length) strings in two letters.
+Consider again the set of all possible (infinite length) strings in two
+ letters.
  Each such string can be represented as 
 \begin_inset Formula $\sigma=(\sigma_{0},\sigma_{1},\sigma_{2},\ldots)$
 \end_inset
