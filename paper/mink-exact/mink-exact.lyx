@@ -1337,8 +1337,8 @@ Back-substituting, one deduces
 \end_inset
 
 On the other hand, one has
-\begin_inset Formula \[
-\frac{?^{\prime}(x)}{2}=\frac{1}{(1+x)^{2}}?^{\prime}\left(\frac{x}{1+x}\right)\]
+\begin_inset Formula \begin{equation}
+\frac{?^{\prime}(x)}{2}=\frac{1}{(1+x)^{2}}?^{\prime}\left(\frac{x}{1+x}\right)\label{eq:meas-self-sim}\end{equation}
 
 \end_inset
 
@@ -1971,8 +1971,8 @@ A second important ingredient was to provide an explicit identification
 
 .
  Putting these together lead to the form 
-\begin_inset Formula \[
-P_{f}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}f\circ A_{k}\left(y\right)\]
+\begin_inset Formula \begin{equation}
+P_{f}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}f\circ A_{k}\left(y\right)\label{eq:defn-P_f}\end{equation}
 
 \end_inset
 
@@ -3470,6 +3470,11 @@ reference "cor:unit-eigenvec"
 \end_layout
 
 \begin_layout Theorem
+\begin_inset LatexCommand label
+name "thm:Haar-measure"
+
+\end_inset
+
 (Haar measure) For any homomorphism 
 \begin_inset Formula $g:X\to X$
 \end_inset
@@ -4151,194 +4156,92 @@ on, and no other sets do.
 \end_layout
 
 \begin_layout Section
-Gauss-Kuzmin-Wirsing Operator
+The Twisted Bernoulli Operator
 \end_layout
 
 \begin_layout Standard
-The Gauss-Kuzmin-Wirsing operator is the transfer operator (also called
- the Perron-Frobenius-Ruelle operator) of the Gauss map 
-\begin_inset Formula $h(x)=1/x-\left\lfloor 1/x\right\rfloor $
-\end_inset
-
-.
- Denoting this operator as 
-\begin_inset Formula $\mathcal{L}_{G}$
-\end_inset
-
-, it acts on a function 
-\begin_inset Formula $f$
-\end_inset
-
- as 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{G}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{\left(x+n\right)^{2}}\, f\left(\frac{1}{x+n}\right)\label{eq:gkw}\end{equation}
-
-\end_inset
-
-It has a well-known eigenfunction, noted by Gauss, corresponding to eigenvalue
- one, given by 
-\begin_inset Formula $1/(1+y)$
-\end_inset
-
-.
- It is also relatively straightforward to observe that the Minkowski measure
- is also an eigenfunction, also corresponding to eigenvalue one.
- This is readily seen by differentiating the Question Mark: one has 
-\begin_inset Formula \[
-?\left(\frac{1}{n+x}\right)=\frac{1}{2^{n-1}}-\frac{?\left(x\right)}{2^{n}}\]
-
-\end_inset
-
-and so also 
-\begin_inset Formula \[
-?^{\prime}\left(\frac{1}{n+x}\right)=\frac{\left(x+n\right)^{2}}{2^{n}}?^{\prime}\left(x\right)\]
-
-\end_inset
-
-This can be directly inserted into eqn 
-\begin_inset LatexCommand ref
-reference "eq:gkw"
-
-\end_inset
-
- to very easily find that 
-\begin_inset Formula \[
-\mathcal{L}_{G}?^{\prime}=?^{\prime}\]
-
-\end_inset
-
-This result immediately suggests that the lattice model methods can be applied
- to find other eigenfunctions.
- (The 3-adic Question mark, at least as defined above, does not have this
- property, suggesting, perhaps, that a different 3-adic Question Mark should
- be formulated).
-\end_layout
-
-\begin_layout Standard
-Before doing so, it is worth taking a moment to introduce another operator,
- a sort of twisted Bernoulli shift: this would be the transfer operator
- corresponding to the function 
+We know consider the transfer operator or push-forward of the mapping 
 \begin_inset Formula $A$
 \end_inset
 
 .
- It is straight-forward to write this down; it is 
+ It resembles the Bernoulli shift, but is twisted in a curious way; it is
+ a continued-fraction analog of the Bernoulli shift.
+ It is straight-forward to write it down; it is very simply 
 \begin_inset Formula \[
 \left[\mathcal{L}_{A}f\right]\left(y\right)=\frac{1}{\left(1+y\right)^{2}}f\left(\frac{y}{1+y}\right)+\frac{1}{\left(2-y\right)^{2}}f\left(\frac{1}{2-y}\right)\]
 
 \end_inset
 
-Transfer operators, as formulated by David Ruelle[xxx need ref] are a commonly-u
-sed tool for studying dynamical systems.
- The origin of the name 
-\begin_inset Quotes eld
-\end_inset
-
-transfer
-\begin_inset Quotes erd
-\end_inset
-
- comes from lattice-model physics, where state information is 
-\begin_inset Quotes eld
-\end_inset
-
-transfered
-\begin_inset Quotes erd
-\end_inset
-
- between neighboring sites on a lattice.
- A particularly simple and well-studied operator is the Bernoulli shift
-\begin_inset LatexCommand cite
-key "Dri99,Gas92,Has92"
+This expression is easily obtained by starting with eqn 
+\begin_inset LatexCommand ref
+reference "eq: transfer-jacobi"
 
 \end_inset
 
-; it is the transfer operator corresponding to multiplication by two.
- The operator 
-\begin_inset Formula $\mathcal{L}_{A}$
+ and substituting in 
+\begin_inset Formula $A$
 \end_inset
 
- is a peculiar continued-fraction analog of the Bernoulli shift; it participates
- in various identities with the GKW operator
-\begin_inset LatexCommand cite
-key "Iso03"
+ from eqn 
+\begin_inset LatexCommand ref
+reference "eq:defn-A"
 
 \end_inset
 
 .
- The Minkowski measure is also an eigenfunction of the twisted Bernoulli
+\end_layout
+
+\begin_layout Standard
+Of course, the Minkowski measure is an eigenfunction of the twisted Bernoulli
  shift; that is, one has 
 \begin_inset Formula \[
 \mathcal{L}_{A}?^{\prime}=?^{\prime}\]
 
 \end_inset
 
-It is also worth noting that the self-similarity transforation of the Minkwoski
- measure resembles that of modular form
-\begin_inset LatexCommand cite
-key "Apo90"
+This can be seen in several ways: The Minkowski measure was constructed
+ as the Haar measure induced by 
+\begin_inset Formula $A$
+\end_inset
+
+, and so by theorem 
+\begin_inset LatexCommand ref
+reference "thm:Haar-measure"
 
 \end_inset
 
-.
- That is, given a general Möbius transform of the form 
-\begin_inset Formula $(ax+b)/(cx+d)$
-\end_inset
-
-, with integers 
-\begin_inset Formula $a,b,c,d$
-\end_inset
-
- and 
-\begin_inset Formula $ad-bc=1$
-\end_inset
-
-, the self-similarity of the Question Mark takes the form 
-\begin_inset Formula \[
-?\left(\frac{ax+b}{cx+d}\right)=\frac{M}{2^{N}}+\left(-1\right)^{Q}\;\frac{?\left(x\right)}{2^{K}}\]
+, of course this identity must hold.
+ But it can also be validated by more pedestrian methods: simply plug in
+ the measure, and turn the crank, making use of the self-similarity relation
+ 
+\begin_inset LatexCommand ref
+reference "eq:meas-self-sim"
 
 \end_inset
 
-for some integers 
-\begin_inset Formula $M,N,Q,K$
-\end_inset
-
-, depending on the specific values of 
-\begin_inset Formula $a,b,c,d$
-\end_inset
-
-.
- Differentianting the above, one readily obtains 
-\begin_inset Formula \[
-?^{\prime}\left(\frac{ax+b}{cx+d}\right)=\left(cx+d\right)^{2}\;\frac{?^{\prime}\left(x\right)}{2^{K}}\]
-
-\end_inset
-
-which is almost exactly the transformation rule for a modular form of weight
- 2, and is spoiled only by the factor of 
-\begin_inset Formula $2^{K}$
-\end_inset
-
-.
- It would be of some interest to find other measures, transforming with
- different weights.
+ as needed.
  
 \end_layout
 
 \begin_layout Standard
-Other eigenfunctions for the operators 
-\begin_inset Formula $\mathcal{L}_{G}$
-\end_inset
-
- and 
+Other eigenvalues of 
 \begin_inset Formula $\mathcal{L}_{A}$
 \end_inset
 
- can be readily obtained by re-examining
-\end_layout
+ are readily found.
+ Consider the functions 
+\begin_inset Formula $P_{f}$
+\end_inset
 
-\begin_layout Standard
-The action of the twisted Bernoulli shift on 
+ as previously defined in 
+\begin_inset LatexCommand ref
+reference "eq:defn-P_f"
+
+\end_inset
+
+.
+ The action of the twisted Bernoulli shift on 
 \begin_inset Formula $P_{f}$
 \end_inset
 
@@ -4428,12 +4331,156 @@ Such
 \begin_inset Formula $Z\left(\Omega\right)$
 \end_inset
 
-, it appears that this technique will result in eigenfunctions 
+, it appears that this technique will result in only in eigenfunctions 
 \begin_inset Formula $P_{f}$
 \end_inset
 
  with eigenvalue 1.
  
+\end_layout
+
+\begin_layout Section
+Gauss-Kuzmin-Wirsing Operator
+\end_layout
+
+\begin_layout Standard
+The Gauss-Kuzmin-Wirsing operator is the transfer operator (also called
+ the Perron-Frobenius-Ruelle operator) of the Gauss map 
+\begin_inset Formula $h(x)=1/x-\left\lfloor 1/x\right\rfloor $
+\end_inset
+
+.
+ Denoting this operator as 
+\begin_inset Formula $\mathcal{L}_{G}$
+\end_inset
+
+, it acts on a function 
+\begin_inset Formula $f$
+\end_inset
+
+ as 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{G}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{\left(x+n\right)^{2}}\, f\left(\frac{1}{x+n}\right)\label{eq:gkw}\end{equation}
+
+\end_inset
+
+It has a well-known eigenfunction, noted by Gauss, corresponding to eigenvalue
+ one, given by 
+\begin_inset Formula $1/(1+y)$
+\end_inset
+
+.
+ It is also relatively straightforward to observe that the Minkowski measure
+ is also an eigenfunction, also corresponding to eigenvalue one.
+ This is readily seen by differentiating the Question Mark: one has 
+\begin_inset Formula \[
+?\left(\frac{1}{n+x}\right)=\frac{1}{2^{n-1}}-\frac{?\left(x\right)}{2^{n}}\]
+
+\end_inset
+
+and so also 
+\begin_inset Formula \[
+?^{\prime}\left(\frac{1}{n+x}\right)=\frac{\left(x+n\right)^{2}}{2^{n}}?^{\prime}\left(x\right)\]
+
+\end_inset
+
+This can be directly inserted into eqn 
+\begin_inset LatexCommand ref
+reference "eq:gkw"
+
+\end_inset
+
+ to very easily find that 
+\begin_inset Formula \[
+\mathcal{L}_{G}?^{\prime}=?^{\prime}\]
+
+\end_inset
+
+This result immediately suggests that the lattice model methods can be applied
+ to find other eigenfunctions.
+ (The 3-adic Question mark, at least as defined above, does not have this
+ property, suggesting, perhaps, that a different 3-adic Question Mark should
+ be formulated).
+\end_layout
+
+\begin_layout Standard
+The operator 
+\begin_inset Formula $\mathcal{L}_{A}$
+\end_inset
+
+ is a peculiar continued-fraction analog of the Bernoulli shift; it participates
+ in various identities with the GKW operator
+\begin_inset LatexCommand cite
+key "Iso03"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It is also worth noting that the self-similarity transforation of the Minkwoski
+ measure resembles that of modular form
+\begin_inset LatexCommand cite
+key "Apo90"
+
+\end_inset
+
+.
+ That is, given a general Möbius transform of the form 
+\begin_inset Formula $(ax+b)/(cx+d)$
+\end_inset
+
+, with integers 
+\begin_inset Formula $a,b,c,d$
+\end_inset
+
+ and 
+\begin_inset Formula $ad-bc=1$
+\end_inset
+
+, the self-similarity of the Question Mark takes the form 
+\begin_inset Formula \[
+?\left(\frac{ax+b}{cx+d}\right)=\frac{M}{2^{N}}+\left(-1\right)^{Q}\;\frac{?\left(x\right)}{2^{K}}\]
+
+\end_inset
+
+for some integers 
+\begin_inset Formula $M,N,Q,K$
+\end_inset
+
+, depending on the specific values of 
+\begin_inset Formula $a,b,c,d$
+\end_inset
+
+.
+ Differentianting the above, one readily obtains 
+\begin_inset Formula \[
+?^{\prime}\left(\frac{ax+b}{cx+d}\right)=\left(cx+d\right)^{2}\;\frac{?^{\prime}\left(x\right)}{2^{K}}\]
+
+\end_inset
+
+which is almost exactly the transformation rule for a modular form of weight
+ 2, and is spoiled only by the factor of 
+\begin_inset Formula $2^{K}$
+\end_inset
+
+.
+ It would be of some interest to find other measures, transforming with
+ different weights.
+ 
+\end_layout
+
+\begin_layout Standard
+Other eigenfunctions for the operators 
+\begin_inset Formula $\mathcal{L}_{G}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}_{A}$
+\end_inset
+
+ can be readily obtained by re-examining
 \end_layout
 
 \begin_layout Standard
