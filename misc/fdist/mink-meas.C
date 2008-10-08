@@ -67,6 +67,17 @@ double a3_k (double x, int k)
 	return x;
 }
 
+double h_k (double x, int k)
+{
+	int i;
+	for (i=0; i<k; i++)
+	{
+		x = 1.0/x;
+		x -= floor(x);
+	}
+	return x;
+}
+
 double da(double x)
 {
 	double f;
@@ -126,6 +137,12 @@ double da3(double x)
 	return f;
 }
 
+double dh(double x)
+{
+	double n = floor(1.0/x);
+	return pow(0.5, n)/(x*x);
+}
+
 double prod (double x, int depth)
 {
 	int n;
@@ -140,19 +157,24 @@ double prod (double x, int depth)
 		// double mand =  1.25 + 0.25*sin(M_PI*tk*x);
 		// double mand = 1.0/eff(a_k(x,n), lambda);
 		//
-#define TWO_ADIC
+// #define TWO_ADIC
 #ifdef TWO_ADIC
 		double mand = a_k(x,n);
 		// prod *= da(mand);
 		// prod *= ca(mand);
 		// prod *= combo(mand, 0.5);
-		// prod *= generic(mand, plain_a);
-		prod /= generic(mand, plain_a);
+		prod *= generic(mand, plain_a);
+		// prod /= generic(mand, plain_a);
 		// prod *= generic(mand, sin);
 #endif
 #ifdef THREE_ADIC
 		double mand = a3_k(x,n);
 		prod *= da3(mand);
+#endif
+#define GKW
+#ifdef GKW
+		double mand = h_k(x,n);
+		prod *= dh(mand);
 #endif
 	}
 
@@ -199,7 +221,7 @@ void graph(int npts, int depth, double lambda)
 	/* Compute the integral of the distribution */
 	double acc = 0.0;
 	double delta = 1.0 / (double (npts));
-	for (i=0; i<npts; i++)
+	for (i=1; i<npts; i++)
 	{
 		double x = (double) i / ((double) npts);
 		double y = prod(x, depth);
