@@ -409,8 +409,8 @@ key "Kac1959"
 
 .
  The sixth section provides a short note on modularity; the seventh reviews
- some generalizations.
- The eight section introduces the transfer operator, the nineth section
+ an application, the eighth some generalizations.
+ The nineth section introduces the transfer operator, the tenth section
  provides an abstract theoretical framework, demonstrating that the transfer
  operator should be regarded as a pushforward.
  This is found to induce an invariant measure, the Haar measure.
@@ -1542,7 +1542,7 @@ reference "eq:Gibbs measure"
  functions.
  The result may be written as 
 \begin_inset Formula \begin{equation}
-?^{\prime}\left(y\right)=\prod_{k=0}^{\infty}\frac{A^{\prime}\circ A_{k}\left(x\right)}{2}\label{eq:piece-product}\end{equation}
+?^{\prime}\left(y\right)=\prod_{k=0}^{\infty}\frac{A^{\prime}\circ A_{k}\left(y\right)}{2}\label{eq:piece-product}\end{equation}
 
 \end_inset
 
@@ -2004,6 +2004,163 @@ reference "eq:piece-product"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Section
+An Application
+\end_layout
+
+\begin_layout Standard
+Perhaps the most immediate utility of the expression 
+\begin_inset LatexCommand ref
+reference "eq:piece-product"
+
+\end_inset
+
+ is to provide insight into the question of 
+\begin_inset Quotes eld
+\end_inset
+
+for what values of 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\begin_inset Formula $?^{\prime}\left(x\right)$
+\end_inset
+
+ zero, and for what values is it infinite?
+\begin_inset Quotes erd
+\end_inset
+
+; such a question is explored in 
+\begin_inset LatexCommand cite
+key "Dushistova2007,Paridis2001"
+
+\end_inset
+
+.
+ So, for example: the 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+'s can be seen to peel off binary digits, since 
+\begin_inset Formula $A_{k}\left(y\right)=?^{-1}\left(\mbox{frac}\left(2^{k}?\left(y\right)\right)\right)$
+\end_inset
+
+.
+ Thus, for any rational 
+\begin_inset Formula $p/q$
+\end_inset
+
+, one has that 
+\begin_inset Formula $?\left(p/q\right)$
+\end_inset
+
+ has a finite length 
+\begin_inset Formula $N$
+\end_inset
+
+ when expressed as a string of binary digits, and so one immediately has
+ that 
+\begin_inset Formula $A_{k}(p/q)=0$
+\end_inset
+
+ when 
+\begin_inset Formula $k>N$
+\end_inset
+
+: the infinite product terminates, and so of course, 
+\begin_inset Formula $?(p/q)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+More interesting is the case of 
+\begin_inset Formula $y$
+\end_inset
+
+ a quadratic irrational.
+ In this case, 
+\begin_inset Formula $?\left(y\right)$
+\end_inset
+
+ is a rational number, and 
+\begin_inset Formula $A_{k}\left(y\right)$
+\end_inset
+
+, after a fintie number 
+\begin_inset Formula $M$
+\end_inset
+
+ iterations, settles into a periodic orbit, of length 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ In this case, eqn 
+\begin_inset LatexCommand ref
+reference "eq:piece-product"
+
+\end_inset
+
+ may be written as 
+\begin_inset Formula \[
+?^{\prime}\left(y\right)=\prod_{j=0}^{M-1}\frac{A^{\prime}\circ A_{k}\left(y\right)}{2}\left[\prod_{k=0}^{N-1}\frac{A^{\prime}\circ A_{k+M}\left(y\right)}{2}\right]^{\omega}\]
+
+\end_inset
+
+Clearly, the periodic part dominates.
+ Writing 
+\begin_inset Formula \[
+P\left(y\right)=\prod_{k=0}^{N-1}\frac{A^{\prime}\circ A_{k+M}\left(y\right)}{2}\]
+
+\end_inset
+
+as the contribution from the periodic part, one clearly has that 
+\begin_inset Formula $?^{\prime}\left(y\right)=0$
+\end_inset
+
+ whenever 
+\begin_inset Formula $P\left(y\right)<1$
+\end_inset
+
+, and 
+\begin_inset Formula $?^{\prime}\left(y\right)=\infty$
+\end_inset
+
+ when 
+\begin_inset Formula $P\left(y\right)>1$
+\end_inset
+
+.
+ The accomplishment of 
+\begin_inset LatexCommand cite
+key "Dushistova2007"
+
+\end_inset
+
+ is to provide a precise description of these two cases, in terms of the
+ continued fraction expansion of 
+\begin_inset Formula $y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Another curious case emerges here: this is the case of 
+\begin_inset Formula $P\left(y\right)=1$
+\end_inset
+
+.
+ This would imply that, using the 
+\end_layout
+
+\begin_layout Standard
+, or an alternate approach to the results from 
 \end_layout
 
 \begin_layout Section
@@ -4659,36 +4816,26 @@ Other fractal eigenvectors for the GKW can be constructed by a technique
 ; one only has to use a different lattice model.
  For this model, construct 
 \begin_inset Formula \[
-R_{f}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}f\circ D_{k}\left(y\right)\]
+R_{f}\left(y\right)=\frac{1}{Z\left(\Omega\right)}\prod_{k=0}^{\infty}f\circ h_{k}\left(y\right)\]
 
 \end_inset
 
 where 
-\begin_inset Formula $D_{k+1}=D_{k}\circ D$
+\begin_inset Formula $h_{k+1}=h_{k}\circ h$
 \end_inset
 
- is function iteration, and
-\begin_inset Formula \[
-D\left(y\right)=\begin{cases}
-\frac{1-y}{y} & \mbox{ for }\frac{1}{2}<y\le1\\
-\cdots & \cdots\\
-\frac{1-ny}{y} & \mbox{ for }\frac{1}{n+1}<y\le\frac{1}{n}\\
-\cdots & \cdots\end{cases}\]
-
+ is function iteration, and 
+\begin_inset Formula $h(y)=\mbox{frac}\left(1/y\right)$
 \end_inset
 
-for positive integers 
-\begin_inset Formula $n$
-\end_inset
-
-.
+ is the Gauss map, as before.
  This multi-branched 
-\begin_inset Formula $D$
+\begin_inset Formula $h$
 \end_inset
 
  has the property that 
 \begin_inset Formula \[
-D\left(\frac{1}{x+n}\right)=x\]
+h\left(\frac{1}{x+n}\right)=x\]
 
 \end_inset
 
@@ -4708,11 +4855,24 @@ for all integer values of
 \end_inset
 
 in analogy to the twisted Bernoulli operator.
+ As before, functions 
+\begin_inset Formula $f$
+\end_inset
+
+ for which 
+\begin_inset Formula $\mathcal{L}_{G}f=1$
+\end_inset
+
+ also implies that 
+\begin_inset Formula $Z\left(\Omega\right)=1$
+\end_inset
+
+.
  The means for finding solutions to 
 \begin_inset Formula $\mathcal{L}_{G}f=1$
 \end_inset
 
- proceeds analogously.
+ proceeds analogously to the twisted-Bernoulli case.
  Thus, let 
 \begin_inset Formula \[
 f\left(y\right)=\begin{cases}
@@ -4723,11 +4883,11 @@ f_{n}\left(y\right) & \mbox{ for }\frac{1}{n+1}<y\le\frac{1}{n}\\
 
 \end_inset
 
-Then the equation 
+The equation 
 \begin_inset Formula $\mathcal{L}_{G}f=1$
 \end_inset
 
- established only a single constraint between these 
+ establishes only a single constraint between these 
 \begin_inset Formula $f_{n}$
 \end_inset
 
@@ -4756,6 +4916,32 @@ Then the resulting
 
 \end_inset
 
+By taking 
+\begin_inset Formula $a_{n}=2^{-n}$
+\end_inset
+
+, one regains the Question Mark function; that is, 
+\begin_inset Formula $R_{f}=?^{\prime}$
+\end_inset
+
+ for this case.
+ Quick numerical work shows that other geometric series return commonly-seen
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Question-Mark-like
+\begin_inset Quotes erd
+\end_inset
+
+ distributions, while arithmetic series, such as 
+\begin_inset Formula $a_{n}=6/\left(\pi n\right)^{2}$
+\end_inset
+
+, yeild more unusual shapes.
+\end_layout
+
+\begin_layout Standard
 This construction shows that the space of fractal eigenfunctions of the
  GKW operator is very large; but, as before, all of these eigenfunctions
  appear to be non-decaying, corresponding to eigenvalue 1.
