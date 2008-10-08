@@ -93,13 +93,14 @@ double combo (double x, double alpha)
 	return alpha*da(x) + (1.0-alpha)*ca(x);
 }
 
+double lambda;
+
 double generic(double x, double (*f)(double))
 {
 	if (x < 0.5) return f(x);
 	double y = (2.0*x-1.0)/(3.0*x-1.0);
 	y = f(y);
-	y = 1.0 - x*x*y/((3.0*x-1.0)*(3.0*x-1.0));
-	y /= x*x;
+	y = 1.0/(x*x) - y/((3.0*x-1.0)*(3.0*x-1.0));
 	return y;
 }
 
@@ -134,6 +135,7 @@ double prod (double x, int depth)
 	{
 		// tk *= 2.0;
 		// double mand = 1.0 + olde_a_k (x, n+1);
+		// prod /= mand;
 		// double mand = 1.0 + triangle(tk*x);
 		// double mand =  1.25 + 0.25*sin(M_PI*tk*x);
 		// double mand = 1.0/eff(a_k(x,n), lambda);
@@ -145,7 +147,8 @@ double prod (double x, int depth)
 		// prod *= ca(mand);
 		// prod *= combo(mand, 0.5);
 		// prod *= generic(mand, plain_a);
-		prod *= generic(mand, exp);
+		prod /= generic(mand, plain_a);
+		// prod *= generic(mand, sin);
 #endif
 #ifdef THREE_ADIC
 		double mand = a3_k(x,n);
@@ -154,6 +157,37 @@ double prod (double x, int depth)
 	}
 
 	return prod;
+}
+
+void array(int npts, int depth)
+{
+	int i;
+
+	double * arr = (double *) malloc (npts*sizeof(double));
+
+	/* Compute the integral of the distribution */
+	double acc = 0.0;
+	double delta = 1.0 / (double (npts));
+	for (i=0; i<npts; i++)
+	{
+		double x = (double) i / ((double) npts);
+		double y = prod(x, depth);
+		acc += y*delta;
+		arr[i] = acc;
+	}
+	for (i=0; i<npts; i++)
+	{
+		double y = (double) i / ((double) npts);
+		int ix = (int) ((double) npts*y/(1.0+y));
+		double f = arr[ix] / ((1.0+y)*(1.0+y));
+		int jx = (int) ((double) npts/(2.0-y));
+		f += arr[jx] / ((2.0-y)*(2.0-y));
+		f /= arr[i];
+
+		printf ("%d	%g	%g	%g\n", i, y, arr[i], f);
+	}
+
+	free (arr);
 }
 
 void graph(int npts, int depth, double lambda)
@@ -191,7 +225,8 @@ main(int argc, char *argv[])
 	}
 	int nbins = atoi (argv[1]);
 	int depth = atoi (argv[2]);
-	double lambda = atof (argv[3]);
+	lambda = atof (argv[3]);
 
 	graph (nbins, depth, lambda);
+	// array (nbins, depth);
 }
