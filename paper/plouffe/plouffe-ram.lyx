@@ -1,43 +1,60 @@
-#LyX 1.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 221
+#LyX 1.5.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
 \textclass amsart
 \language english
 \inputencoding auto
-\fontscheme times
+\font_roman times
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
 \graphics default
 \paperfontsize default
-\spacing single 
-\papersize Default
-\paperpackage a4
-\use_geometry 0
-\use_amsmath 1
-\use_natbib 0
-\use_numerical_citations 0
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \defskip medskip
 \quotes_language english
-\quotes_times 2
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\end_header
 
-\layout Title
+\begin_body
 
+\begin_layout Title
 On Plouffe's Ramanujan Identities
-\layout Author
+\end_layout
 
+\begin_layout Author
 Linas Vepstas 
-\layout Email
+\end_layout
 
-<linas@linas.org>
-\layout Date
+\begin_layout Email
+<linasvepstas@gmail.com>
+\end_layout
 
+\begin_layout Date
 14 May 2006 Revised 14 November 2006
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 Recently, Simon Plouffe has discovered a number of identities for the Riemann
  zeta function at odd integer values.
  These identities are obtained numerically and are inspired by a prototypical
@@ -45,7 +62,7 @@ Recently, Simon Plouffe has discovered a number of identities for the Riemann
 \begin_inset Formula \[
 \zeta(3)=\frac{7\pi^{3}}{180}-2\sum_{n=1}^{\infty}\frac{1}{n^{3}\left(e^{2\pi n}-1\right)}\]
 
-\end_inset 
+\end_inset
 
  Such sums follow from a general relation given by Ramanujan, which is rediscove
 red and proved here using complex analytic techniques.
@@ -53,81 +70,89 @@ red and proved here using complex analytic techniques.
  corollaries.
  The resemblance of the general relation to the structure of theta functions
  and modular forms is briefly sketched.
-\layout Subjectclass
+\end_layout
 
+\begin_layout Subjectclass
 11M06
-\layout Section
+\end_layout
 
+\begin_layout Section
 Introduction
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Inspired by an identity for 
 \begin_inset Formula $\zeta(3)$
-\end_inset 
+\end_inset
 
  given in Ramanujan's notebooks 
-\begin_inset LatexCommand \cite[chapter 14, formulas 25.1 and 25.3]{Ber-II}
+\begin_inset LatexCommand cite
+after "chapter 14, formulas 25.1 and 25.3"
+key "Ber-II"
 
-\end_inset 
+\end_inset
 
 ,
 \begin_inset Formula \[
 \zeta(3)=\frac{7\pi^{3}}{180}-2\sum_{n=1}^{\infty}\frac{1}{n^{3}\left(e^{2\pi n}-1\right)}\]
 
-\end_inset 
+\end_inset
 
  Plouffe describes a set of similar identities
-\begin_inset LatexCommand \cite{Plo98}
+\begin_inset LatexCommand cite
+key "Plo98"
 
-\end_inset 
+\end_inset
 
 ,
-\begin_inset LatexCommand \cite{Plo06}
+\begin_inset LatexCommand cite
+key "Plo06"
 
-\end_inset 
+\end_inset
 
  that were discovered numerically using arbitrary-precision software.
  For example, Plouffe gives an identity for 
 \begin_inset Formula $\zeta(7)$
-\end_inset 
+\end_inset
 
 : 
 \begin_inset Formula \[
 \zeta(7)=\frac{19\pi^{7}}{56700}-2\sum_{n=1}^{\infty}\frac{1}{n^{7}\left(e^{2\pi n}-1\right)}\]
 
-\end_inset 
+\end_inset
 
  This text provides an analytically derived formula for expressions of this
  type.
  The resulting general formula, valid for integer 
 \begin_inset Formula $m\ge1$
-\end_inset 
+\end_inset
 
 , is 
 \begin_inset Formula \begin{eqnarray*}
 \zeta(4m-1) & = & -2\sum_{n=1}^{\infty}\frac{1}{n^{4m-1}\left(e^{2\pi n}-1\right)}\\
  & - & \frac{1}{2}\;(2\pi)^{4m-1}\;\sum_{j=0}^{2m}\left(-1\right)^{j}\frac{B_{2j}}{(2j)!}\frac{B_{4m-2j}}{(4m-2j)!}\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $B_{k}$
-\end_inset 
+\end_inset
 
  is the 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 'th Bernoulli number.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Plouffe also notes similar relations for the other odd integers; for example,
  
 \begin_inset Formula \[
 \zeta(5)=\frac{\pi^{5}}{294}-\frac{72}{35}\sum_{n=1}^{\infty}\frac{1}{n^{5}\left(e^{2\pi n}-1\right)}-\frac{2}{35}\sum_{n=1}^{\infty}\frac{1}{n^{5}\left(e^{2\pi n}+1\right)}\]
 
-\end_inset 
+\end_inset
 
  The general form for this type of expression may be shown to be 
 \begin_inset Formula \begin{gather*}
@@ -137,37 +162,40 @@ Plouffe also notes similar relations for the other odd integers; for example,
 \qquad\qquad+(2\pi)^{4m+1}\sum_{j=0}^{m}(-4)^{m+j}\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}\\
 \qquad\qquad\qquad+\frac{1}{2}(2\pi)^{4m+1}\;\sum_{j=0}^{2m+1}(-4)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\end{gather*}
 
-\end_inset 
+\end_inset
 
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The methods described in this text also allow for a large generalization
  of these types of sums.
  Defining 
 \begin_inset Formula \[
 P_{k}(\tau)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi in\tau}-1\right)}\]
 
-\end_inset 
+\end_inset
 
  these generalizations follow from a modular equation relating 
 \begin_inset Formula $P_{k}(\tau)$
-\end_inset 
+\end_inset
 
  to 
 \begin_inset Formula $P_{k}(-1/\tau)$
-\end_inset 
+\end_inset
 
  for odd integers 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 , the derivation and proof of which is the one of the main topics of this
  note.
  The modular relation is not new; it appears in Ramanujan's Notebooks 
-\begin_inset LatexCommand \cite[Chapter 14 Entry 21]{Ber-II}
+\begin_inset LatexCommand cite
+after "Chapter 14 Entry 21"
+key "Ber-II"
 
-\end_inset 
+\end_inset
 
  as 
 \begin_inset Formula \begin{multline*}
@@ -175,23 +203,23 @@ P_{k}(\tau)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi in\tau}-1\right)}\]
 \qquad=(-\beta)^{-n}\left\{ \frac{1}{2}\zeta\left(2n+1\right)+\sum_{k=1}^{\infty}\frac{k^{2n-1}}{e^{2\beta k}-1}\right\} \\
 \qquad\qquad-2^{2n}\sum_{k=0}^{n+1}(-1)^{k}\frac{B_{2k}}{(2k)!}\frac{B_{2n+2-2k}}{(2n+2-2k)!}\alpha^{n+1-k}\beta^{k}\end{multline*}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\alpha>0$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\beta>0$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $\alpha\beta=\pi^{2}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  any positive integer.
  Berndt implies that this formula is the most studied of all the notebooks;
@@ -199,21 +227,23 @@ P_{k}(\tau)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi in\tau}-1\right)}\]
  twice as often.
  It has been generalized to 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
 -functions, and to rational values of 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 ; Berndt provides a long list
-\begin_inset LatexCommand \cite{Ber-II}
+\begin_inset LatexCommand cite
+key "Ber-II"
 
-\end_inset 
+\end_inset
 
  of the various proofs and generalizations made.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Much of this paper is devoted to (yet another! independently discovered)
  proof of this relation, followed by a series of lemmas that provide the
  connection to Plouffe's results.
@@ -221,13 +251,14 @@ Much of this paper is devoted to (yet another! independently discovered)
  one senses that only the tip of the iceberg has been seen.
  Unexplored possibilities include, for example, considering 
 \begin_inset Formula $\tau\in\mathbb{Q}[i]$
-\end_inset 
+\end_inset
 
 , the field of Gaussian rationals, or from considering Diophantine roots
  of quadratics.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The rest of this paper is roughly laid out as follows: The second section
  provides a review of previous related results.
  The third section gives a relationship between the sums and the polylogarithm,
@@ -238,7 +269,7 @@ The rest of this paper is roughly laid out as follows: The second section
  The fifth section relates the contour integral to the polylogarithm integral,
  thus resulting in a functional equation for 
 \begin_inset Formula $P_{k}(\tau)$
-\end_inset 
+\end_inset
 
 .
  The sixth section applies the functional equation, providing a variety
@@ -247,152 +278,167 @@ The rest of this paper is roughly laid out as follows: The second section
  that arise naturally in this context.
  The eighth section explores the modular nature of the relations on 
 \begin_inset Formula $P_{k}(\tau)$
-\end_inset 
+\end_inset
 
 , followed by a conclusion.
  An appendix gives a derivation of an integral representation of the polylogarit
 hm, that is central to the analysis.
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Related sums
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A large number of similar sums have been explored before; this section reviews
  some of these.
  Perhaps the most forthright is a sum given by Ramanujan in a famous letter
  to Hardy
-\begin_inset LatexCommand \cite{Har21}
+\begin_inset LatexCommand cite
+key "Har21"
 
-\end_inset 
+\end_inset
 
 , stating that 
 \begin_inset Formula \[
 \frac{1^{13}}{e^{2\pi-1}}+\frac{2^{13}}{e^{4\pi-1}}+\frac{3^{13}}{e^{6\pi-1}}+\cdots=\frac{1}{24}\]
 
-\end_inset 
+\end_inset
 
  A generalization of this sum, 
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{n^{4k+1}}{e^{2\pi n}-1}=\frac{B_{4k+2}}{4(2k+1)}\]
 
-\end_inset 
+\end_inset
 
  is proved by Berndt
-\begin_inset LatexCommand \cite{Ber77}
+\begin_inset LatexCommand cite
+key "Ber77"
 
-\end_inset 
+\end_inset
 
 , and attributed to Glaisher
-\begin_inset LatexCommand \cite{Gla1889}
+\begin_inset LatexCommand cite
+key "Gla1889"
 
-\end_inset 
+\end_inset
 
 .
  This and many related results are derived by Zucker
-\begin_inset LatexCommand \cite{Zuc79}
+\begin_inset LatexCommand cite
+key "Zuc79"
 
-\end_inset 
+\end_inset
 
 , based on the theory of Jacobian elliptic functions.
  A similar result is stated by Apostol in the form of an exercise
-\begin_inset LatexCommand \cite[see exercise 15 at end of chapter 1.]{Apo90}
+\begin_inset LatexCommand cite
+after "see exercise 15 at end of chapter 1."
+key "Apo90"
 
-\end_inset 
+\end_inset
 
 :
 \begin_inset Formula \[
 \sum_{n=1;n\mbox{ odd}}^{\infty}\frac{n^{4k+1}}{1+e^{n\pi}}=\frac{2^{4k+1}-1}{8k+4}B_{4k+2}\]
 
-\end_inset 
+\end_inset
 
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Many sums resembling those in this note are given by Zucker
-\begin_inset LatexCommand \cite{Zuc84}
+\begin_inset LatexCommand cite
+key "Zuc84"
 
-\end_inset 
+\end_inset
 
 .
  Some of these are 
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{1}{n\left(e^{2\pi nx}-1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}\frac{\coth(\pi mx)-1}{m}\]
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{(-1)^{n}}{n\left(e^{2\pi nx}-1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}(-1)^{m}\,\frac{\coth(\pi mx)-1}{m}\]
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{1}{n\left(e^{2\pi nx}+1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}\frac{1-\tanh(\pi mx)}{m}\]
 
-\end_inset 
+\end_inset
 
 
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{(-1)^{n}}{n\left(e^{2\pi nx}+1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}(-1)^{m}\;\frac{1-\tanh(\pi mx)}{m}\]
 
-\end_inset 
+\end_inset
 
  The fount of inspiration for such sums is Ramanujan.
  Sums given in Chapter 14 of Part II of the Ramanujan's Notebooks
-\begin_inset LatexCommand \cite{Ber-II}
+\begin_inset LatexCommand cite
+key "Ber-II"
 
-\end_inset 
+\end_inset
 
  include entry 8:
 \begin_inset Formula \[
 \alpha\sum_{n=1}^{\infty}\frac{\sinh(2\alpha nk)}{e^{2\alpha^{2}n}-1}+\beta\sum_{n=1}^{\infty}\frac{\sin(2\beta nk)}{e^{2\beta^{2}n}-1}=\frac{\alpha}{4}\coth(\alpha k)-\frac{\beta}{4}\cot(\beta k)-\frac{k}{2}\]
 
-\end_inset 
+\end_inset
 
  and another similar one relating cos and cosh.
  Above, 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  is any positive integer, 
 \begin_inset Formula $\alpha\beta=\pi$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $0<\beta k<\pi$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Entry 13 generalizes the sums mentioned previously, 
 \begin_inset Formula \[
 \alpha^{k}\sum_{n=1}^{\infty}\frac{n^{2k-1}}{e^{2\alpha n}-1}-(-\beta)^{k}\sum_{n=1}^{\infty}\frac{n^{2k-1}}{e^{2\beta n}-1}=\left[\alpha^{k}-(-\beta)^{k}\right]\frac{B_{2k}}{4k}\]
 
-\end_inset 
+\end_inset
 
  This time, one takes 
 \begin_inset Formula $\alpha\beta=\pi^{2}$
-\end_inset 
+\end_inset
 
 and 
 \begin_inset Formula $k>1$
-\end_inset 
+\end_inset
 
  an integer.
  The above follows from sums on the divisor function, as is frequently noted.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Sums involving pairs of Bernoulli numbers also appear in the analysis of
  the Dedekind eta function.
  Thus, Sho Iseki's transformation formula, as described by Apostol
-\begin_inset LatexCommand \cite[see theorem 3.5]{Apo90}
+\begin_inset LatexCommand cite
+after "see theorem 3.5"
+key "Apo90"
 
-\end_inset 
+\end_inset
 
 , is 
 \begin_inset Formula \[
@@ -400,88 +446,94 @@ Sums involving pairs of Bernoulli numbers also appear in the analysis of
 2\\
 n\end{array}\right)\frac{B_{2-n}(\alpha)B_{n}(\beta)}{(iz)^{n}}\]
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\Lambda$
-\end_inset 
+\end_inset
 
  is given by 
 \begin_inset Formula \[
 \Lambda(\alpha,\beta,z)=\sum_{r=0}^{\infty}\left[\lambda(z(r+\alpha)-i\beta)+\lambda(z(r+1-\alpha)+i\beta)\right]\]
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \[
 \lambda(x)=\sum_{m=1}^{\infty}\frac{e^{-2\pi mx}}{m}\]
 
-\end_inset 
+\end_inset
 
  A sum linking the Bernoulli and Euler numbers is given by Berndt
-\begin_inset LatexCommand \cite{Ber78}
+\begin_inset LatexCommand cite
+key "Ber78"
 
-\end_inset 
+\end_inset
 
 : 
 \begin_inset Formula \begin{multline*}
 \sum_{n=1}^{\infty}(-1)^{n+1}\frac{\mbox{sech}\left[(2n-1)\pi\sqrt{3}/2\right]}{(2n-1)^{6k+1}}\\
 \qquad=\frac{1}{2}(-1)^{k+1}\pi^{6k+1}\sum_{m=0}^{3k}\frac{E_{2m+1}}{(2m+1)!}\,\frac{B_{6k-2m}}{(6k-2m)!}\cos\left[(2m+1)\frac{\pi}{3}\right]\end{multline*}
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Perhaps the results that are closest to those presented in this paper are
  those noted by Borwein, 
-\emph on 
+\emph on
 et al
-\emph default 
+\emph default
  
-\begin_inset LatexCommand \cite[Section 5]{Bor00}
+\begin_inset LatexCommand cite
+after "Section 5"
+key "Bor00"
 
-\end_inset 
+\end_inset
 
 , and in particular, given a very similar result involving 
 \begin_inset Formula $\zeta(4m-1)$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\zeta(4m+1)$
-\end_inset 
+\end_inset
 
 .
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Polylogarithm
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The recurring theme in Plouffe's identities is the sum 
 \begin_inset Formula \[
 S_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}-1\right)}\]
 
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
  usually an odd positive integer and 
 \begin_inset Formula $x=\pi$
-\end_inset 
+\end_inset
 
  or 
 \begin_inset Formula $x=2\pi$
-\end_inset 
+\end_inset
 
  or possibly other interesting values, such as 
 \begin_inset Formula $x=\pi\sqrt{m}$
-\end_inset 
+\end_inset
 
  for some integer 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
 .
  This sum may be converted into a sum over polylogarithms, and subsequently
@@ -492,48 +544,49 @@ S_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}-1\right)}\]
  and Ramanujan's identities.
  This section develops the first part of this analysis.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 To find the polylogarithm, one expands
 \begin_inset Formula \begin{eqnarray*}
 S_{s}(x) & = & \sum_{n=1}^{\infty}\sum_{m=0}^{\infty}\frac{e^{-xn(m+1)}}{n^{s}}\\
  & = & \sum_{m=1}^{\infty}{\rm Li}_{s}\left(e^{-xm}\right)\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  which is generally valid for 
 \begin_inset Formula $\Re x>0$
-\end_inset 
+\end_inset
 
 .
  The above is easily obtained by applying the expansion 
 \begin_inset Formula \[
 \frac{1}{1-z}=\sum_{m=0}^{\infty}z^{m}\]
 
-\end_inset 
+\end_inset
 
  and the series definition of the polylogarithm:
 \begin_inset Formula \[
 {\rm Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\]
 
-\end_inset 
+\end_inset
 
  The polylogarithm may be expressed in terms of an integral as
 \begin_inset Formula \[
 {\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)u^{-z}\, dz\]
 
-\end_inset 
+\end_inset
 
  A derivation of this is given in the appendix.
  Here, 
 \begin_inset Formula $\Gamma(z)=(z-1)!$
-\end_inset 
+\end_inset
 
  is the classical Gamma function.
  The line of integration is taken to be to the right of all of the poles
  in the integrand, namely, 
 \begin_inset Formula $c>1$
-\end_inset 
+\end_inset
 
 .
  Using this in the summation, one obtains
@@ -541,32 +594,33 @@ S_{s}(x) & = & \sum_{n=1}^{\infty}\sum_{m=0}^{\infty}\frac{e^{-xn(m+1)}}{n^{s}}\
 S_{s}(x) & = & \frac{1}{2\pi i}\sum_{m=1}^{\infty}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)\left(xm\right)^{-z}\, dz\\
  & = & \frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)\, dz\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  The exchange of the order of summation and integration is justified precisely
  when one has 
 \begin_inset Formula $c>1$
-\end_inset 
+\end_inset
 
 .
  The last integral has poles at 
 \begin_inset Formula $z=1$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $z+s=1$
-\end_inset 
+\end_inset
 
  coming from the zeta functions and poles at all of the non-positive integers
  coming from the Gamma function.
  The last integral shows that the series is the inverse Mellin transform
  of 
 \begin_inset Formula $\Gamma(z)\zeta(z+s)\zeta(z)$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 If the integral can somehow be converted into a closed contour on the left,
  then it may be evaluated in a straight-forward way by means of Cauchy's
  residue theorem.
@@ -576,86 +630,88 @@ If the integral can somehow be converted into a closed contour on the left,
  can be closed.
  The section after that computes the contributions from closing the contour
  integral.
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Contour Integral
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Define the contour integral as 
 \begin_inset Formula \[
 I_{s}(x)=\frac{1}{2\pi i}\oint_{\gamma}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)dz\]
 
-\end_inset 
+\end_inset
 
  where the contour 
 \begin_inset Formula $\gamma$
-\end_inset 
+\end_inset
 
  encircles the poles at 
 \begin_inset Formula $z=1$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $z+s=1$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $z=0,-1,-2,\ldots$
-\end_inset 
+\end_inset
 
  in the usual, right-handed fashion.
  Then, one uses Cauchy's theorem, which states that 
 \begin_inset Formula \[
 f(a)=\frac{1}{2\pi i}\oint\,\frac{f(z)}{z-a}\, dz\]
 
-\end_inset 
+\end_inset
 
  for simple poles, and that
 \begin_inset Formula \[
 f^{\,\prime}(a)=\frac{1}{2\pi i}\oint\,\frac{f(z)}{\left(z-a\right)^{2}}\, dz\]
 
-\end_inset 
+\end_inset
 
  for double poles.
  For the pole at 
 \begin_inset Formula $z=1$
-\end_inset 
+\end_inset
 
 , one obtains the residue
 \begin_inset Formula \[
 {\rm Res}(z=1)=\frac{\zeta(s+1)}{x}\]
 
-\end_inset 
+\end_inset
 
  For the poles at 
 \begin_inset Formula $z=-n$
-\end_inset 
+\end_inset
 
 , one obtains the residue
 \begin_inset Formula \[
 {\rm Res}(z=-n)=\frac{(-x)^{n}}{n!}\zeta(s-n)\zeta(-n)\]
 
-\end_inset 
+\end_inset
 
  and so one has
 \begin_inset Formula \[
 I_{s}(x)={\rm Res}(z=1-s)+\frac{\zeta(s+1)}{x}+\sum_{n=0}^{\infty}\frac{(-x)^{n}}{n!}\zeta(s-n)\zeta(-n)\]
 
-\end_inset 
+\end_inset
 
  For 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
  not an integer, one has 
 \begin_inset Formula \[
 {\rm Res}(z=1-s)=\frac{\Gamma(1-s)}{x^{1-s}}\zeta(1-s)\]
 
-\end_inset 
+\end_inset
 
  However, the interesting case is for 
 \begin_inset Formula $s=k$
-\end_inset 
+\end_inset
 
  a positive integer.
  In this case, the pole overlays another pole from the Gamma, and one has
@@ -665,85 +721,85 @@ I_{s}(x)={\rm Res}(z=1-s)+\frac{\zeta(s+1)}{x}+\sum_{n=0}^{\infty}\frac{(-x)^{n}
 \frac{1}{2\pi i}\oint_{z=1-k}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)dz & = & \frac{1}{2\pi i}\oint_{z=1-k}\frac{f(z)}{(z+k-1)^{2}}dz\\
  & = & \left.\frac{d}{dz}\left[(z+k-1)^{2}\Gamma(z)\;\zeta(z+k)\frac{\zeta(z)}{x^{z}}\right]\right|_{z=1-k}\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  To perform the derivative, one will need to use the identities
 \begin_inset Formula \[
 \left.\frac{d}{ds}(s-1)\zeta(s)\right|_{s=1}=\gamma\]
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\gamma=0.577\ldots$
-\end_inset 
+\end_inset
 
  is the Euler-Mascheroni constant, and 
 \begin_inset Formula \[
 \left.\frac{d}{dz}(z+n)\Gamma(z)\right|_{z=-n}=(-1)^{n}\,\frac{\psi(n+1)}{\Gamma(n+1)}=(-1)^{n}\,\frac{H_{n}-\gamma}{n!}\]
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\psi(z)$
-\end_inset 
+\end_inset
 
  is the digamma function, and 
 \begin_inset Formula $H_{n}$
-\end_inset 
+\end_inset
 
  is the 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
 'th harmonic number.
  Putting these together, one obtains 
 \begin_inset Formula \[
 \frac{1}{2\pi i}\oint_{z=1-k}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)dz=\frac{(-x)^{k-1}}{(k-1)!}\left[\zeta^{\prime}(1-k)+\left(H_{k-1}-\ln2\pi\right)\zeta(1-k)\right]\]
 
-\end_inset 
+\end_inset
 
  Adding this to the other contributions, one gets
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{eqnarray*}
 I_{k}(x) & = & \frac{\zeta(k+1)}{x}+\!\sum_{\begin{array}{c}
 n=0\\
 n\ne k-1\end{array}}^{\infty}\!\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)\\
  &  & +\,\frac{(-x)^{k-1}}{(k-1)!}\left[\zeta^{\prime}(1-k)+\left(H_{k-1}-\ln2\pi\right)\zeta(1-k)\right]\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  When 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  is an odd integer, the above simplifies in two ways.
  First, 
 \begin_inset Formula $\zeta(1-k)$
-\end_inset 
+\end_inset
 
  vanishes, because the zeta function vanishes at all negative even integers.
  Similarly, the infinite sum becomes finite: when 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  is an odd integer, one has either 
 \begin_inset Formula $\zeta(k-n)=0$
-\end_inset 
+\end_inset
 
  or 
 \begin_inset Formula $\zeta(-n)=0$
-\end_inset 
+\end_inset
 
  for all 
 \begin_inset Formula $n>k$
-\end_inset 
+\end_inset
 
 .
  Thus, for 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  an odd integer, one has 
 \begin_inset Formula \[
@@ -751,96 +807,97 @@ I_{k}(x)=\frac{\zeta(k+1)}{x}+\!\sum_{\begin{array}{c}
 n=0\\
 n\ne k-1\end{array}}^{k}\!\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)+\frac{(-x)^{k-1}}{(k-1)!}\zeta^{\prime}(1-k)\]
 
-\end_inset 
+\end_inset
 
  For the remainder of the paper, it is assumed that, in this context, 
 \begin_inset Formula $k>1$
-\end_inset 
+\end_inset
 
  is an odd integer, unless explicitly stated otherwise.
  The above evaluation of the contour integral is the main result of this
  section.
  To see that this is a key result, one may substitute 
 \begin_inset Formula $k=3$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $x=2\pi$
-\end_inset 
+\end_inset
 
  to obtain 
 \begin_inset Formula \[
 I_{3}(2\pi)=-\zeta(3)+\frac{7\pi^{3}}{180}\]
 
-\end_inset 
+\end_inset
 
  which should be recognizable as a portion of Ramanujan's identity.
  For 
 \begin_inset Formula $k=7$
-\end_inset 
+\end_inset
 
 , one has 
 \begin_inset Formula \[
 I_{7}(2\pi)=-\zeta(7)+\frac{19\pi^{7}}{56700}\]
 
-\end_inset 
+\end_inset
 
  which resembles one of the results given by Plouffe.
  To complete the connection, one must relate the contour integral 
 \begin_inset Formula $I_{k}(x)$
-\end_inset 
+\end_inset
 
  to the sum 
 \begin_inset Formula $S_{k}(x)$
-\end_inset 
+\end_inset
 
 .
  This is done in the next section.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 First, however, to drive the point home, one must observe that most of the
  terms in the above expression are rational multiples of powers of 
 \begin_inset Formula $\pi$
-\end_inset 
+\end_inset
 
 .
  This follows from the zeta function being related to the Bernoulli numbers
  
 \begin_inset Formula $B_{n}$
-\end_inset 
+\end_inset
 
  at even integers:
 \begin_inset Formula \[
 \zeta(2n)=(-1)^{n+1}\frac{(2\pi)^{2n}B_{2n}}{2(2n)!}\]
 
-\end_inset 
+\end_inset
 
  for integer 
 \begin_inset Formula $n\ge0$
-\end_inset 
+\end_inset
 
 .
  At the negative values, one has
 \begin_inset Formula \[
 \zeta(-n)=-\frac{B_{n+1}}{n+1}\]
 
-\end_inset 
+\end_inset
 
  while the derivative is 
 \begin_inset Formula \[
 \zeta^{\prime}(-2n)=(-1)^{n}\frac{(2n)!}{2(2\pi)^{2n}}\zeta(2n+1)\]
 
-\end_inset 
+\end_inset
 
  for integer 
 \begin_inset Formula $n>1$
-\end_inset 
+\end_inset
 
 .
  Using these in the above expression for 
 \begin_inset Formula $I_{k}(x)$
-\end_inset 
+\end_inset
 
 , and rearranging terms a bit, one gets 
 \begin_inset Formula \begin{eqnarray*}
@@ -849,7 +906,7 @@ First, however, to drive the point home, one must observe that most of the
 k+1\\
 2j\end{array}\!\right)x^{2j}\left(2\pi i\right)^{k+1-2j}B_{2j}B_{k+1-2j}\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  The above introduces the binomial coefficient
 \begin_inset Formula \[
@@ -857,265 +914,273 @@ k+1\\
 n\\
 k\end{array}\!\right)=\frac{n!}{k!(n-k)!}\]
 
-\end_inset 
+\end_inset
 
  Although the imaginary number 
 \begin_inset Formula $i=\sqrt{-1}$
-\end_inset 
+\end_inset
 
  appears in the above, it is always squared, and thus is just a sign-keeping
  device.
  Every term in the sum is purely real.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 When the contour integral is written in this form, it may now be seen that
  for 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  being any rational multiple of 
 \begin_inset Formula $\pi$
-\end_inset 
+\end_inset
 
 , that is, 
 \begin_inset Formula $x=p\pi/q$
-\end_inset 
+\end_inset
 
  for any integers 
 \begin_inset Formula $p,q$
-\end_inset 
+\end_inset
 
 , that the coefficient of 
 \begin_inset Formula $\zeta(k)$
-\end_inset 
+\end_inset
 
  is a rational number, and that the second term is another rational times
  
 \begin_inset Formula $\pi^{k}$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A further curiosity in this regard is noted by Plouffe: if one takes 
 \begin_inset Formula $x=\pi\sqrt{p/q}$
-\end_inset 
+\end_inset
 
  for integers 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $q$
-\end_inset 
+\end_inset
 
 , one also gets simple expressions: because 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  is odd, the coefficient of 
 \begin_inset Formula $\zeta(k)$
-\end_inset 
+\end_inset
 
  is still a rational, and the coefficient of 
 \begin_inset Formula $\pi^{k}$
-\end_inset 
+\end_inset
 
  is 
 \begin_inset Formula $\sqrt{p/q}$
-\end_inset 
+\end_inset
 
  times some rational.
  For rational 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , one still has that the sum is a rational polynomial in 
 \begin_inset Formula $\pi^{2}$
-\end_inset 
+\end_inset
 
 , and for 
 \begin_inset Formula $x=\sqrt{\pi p/q}$
-\end_inset 
+\end_inset
 
 , one still has that the sum is a rational polynomial in 
 \begin_inset Formula $\pi$
-\end_inset 
+\end_inset
 
 .
  The ocean-full of rationals here suggest that some sort of 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 -adic analysis might be interesting.
  The appearance of the square root suggests that there is a relation to
  complex multiplication, or that one may have interesting results on the
  field of Gaussian integers.
-\layout Section
+\end_layout
 
+\begin_layout Section
 Evaluating the Contour Integral
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The goal of this section is to relate the sum 
 \begin_inset Formula $S_{k}(x)$
-\end_inset 
+\end_inset
 
  to the contour integral 
 \begin_inset Formula $I_{k}(x)$
-\end_inset 
+\end_inset
 
 .
  
-\layout Theorem
+\end_layout
 
+\begin_layout Theorem
 For odd integers 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 , one has that 
 \begin_inset Formula \[
 S_{k}(x)=I_{k}(x)+(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)\]
 
-\end_inset 
+\end_inset
 
  For the remainder of this text, this will be referred to as the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 functional equation for 
 \begin_inset Formula $S_{k}$
-\end_inset 
+\end_inset
 
 
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 To prove this result, consider evaluating the contour integral 
 \begin_inset Formula $I_{s}(x)$
-\end_inset 
+\end_inset
 
  for a tall rectangular contour surrounding the poles at 
 \begin_inset Formula $z=1,0,-1,\ldots,1-s$
-\end_inset 
+\end_inset
 
 .
  Thus, write 
 \begin_inset Formula $I_{s}(x)=A+B+C+D$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $A$
-\end_inset 
+\end_inset
 
  being the integral from 
 \begin_inset Formula $c-ih$
-\end_inset 
+\end_inset
 
  to 
 \begin_inset Formula $c+ih$
-\end_inset 
+\end_inset
 
  for a constant 
 \begin_inset Formula $c>1$
-\end_inset 
+\end_inset
 
  and the height 
 \begin_inset Formula $h$
-\end_inset 
+\end_inset
 
  large, eventually taking the limit 
 \begin_inset Formula $h\to\infty$
-\end_inset 
+\end_inset
 
 .
  That is, 
 \begin_inset Formula $A$
-\end_inset 
+\end_inset
 
  forms the right hand side of the rectangular contour.
  In the limit of 
 \begin_inset Formula $h\to\infty$
-\end_inset 
+\end_inset
 
 , one has by definition 
 \begin_inset Formula \[
 A=S_{s}(x)\]
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 Let 
 \begin_inset Formula $B$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $C$
-\end_inset 
+\end_inset
 
  be the top and bottom of the contour, so that for 
 \begin_inset Formula $B$
-\end_inset 
+\end_inset
 
 , the integral runs from 
 \begin_inset Formula $c+ih$
-\end_inset 
+\end_inset
 
  to 
 \begin_inset Formula $ih-s-\epsilon$
-\end_inset 
+\end_inset
 
  leftwards.
  For 
 \begin_inset Formula $C$
-\end_inset 
+\end_inset
 
 , the integral runs rightwards from 
 \begin_inset Formula $-ih-s-\epsilon$
-\end_inset 
+\end_inset
 
  to 
 \begin_inset Formula $c-ih$
-\end_inset 
+\end_inset
 
 ; here we take 
 \begin_inset Formula $\epsilon>0$
-\end_inset 
+\end_inset
 
 .
  The integral 
 \begin_inset Formula $D$
-\end_inset 
+\end_inset
 
  on the left hand side of the rectangle closes the contour, running downwards,
  from 
 \begin_inset Formula $ih-s-\epsilon$
-\end_inset 
+\end_inset
 
  to 
 \begin_inset Formula $-ih-s-\epsilon$
-\end_inset 
+\end_inset
 
 .
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 The integrals 
 \begin_inset Formula $B$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $C$
-\end_inset 
+\end_inset
 
  will vanish in the limit of the height 
 \begin_inset Formula $h\to\infty$
-\end_inset 
+\end_inset
 
 .
  This can be easily seen after a simple change of variable: 
@@ -1123,15 +1188,15 @@ The integrals
 B & = & \frac{1}{2\pi i}\int_{ih+c}^{ih-s-\epsilon}\frac{\Gamma(z)}{x^{z}}\zeta(s+z)\zeta(z)\, dz\\
  & = & \frac{1}{2\pi i}\int_{c}^{-s-\epsilon}\frac{\Gamma(u+ih)}{x^{u+ih}}\zeta(s+u+ih)\zeta(u+ih)\, du\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  Much of the integrand is 
 \begin_inset Formula $\mathcal{O}(1)$
-\end_inset 
+\end_inset
 
  in 
 \begin_inset Formula $h$
-\end_inset 
+\end_inset
 
 , or polynomially thereabouts.
  The integrand is dominated by the Gamma function, which, from Stirling's
@@ -1139,150 +1204,157 @@ B & = & \frac{1}{2\pi i}\int_{ih+c}^{ih-s-\epsilon}\frac{\Gamma(z)}{x^{z}}\zeta(
 \begin_inset Formula \[
 \Gamma(u+ih)=\mathcal{O}\left(e^{-\pi h/2}\right)\]
 
-\end_inset 
+\end_inset
 
  The complex conjugate argument applies to 
 \begin_inset Formula $C$
-\end_inset 
+\end_inset
 
 , and thus 
 \begin_inset Formula $B$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $C$
-\end_inset 
+\end_inset
 
  vanish in the limit of 
 \begin_inset Formula $h\to\infty$
-\end_inset 
+\end_inset
 
 .
  
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 To evaluate 
 \begin_inset Formula $D$
-\end_inset 
+\end_inset
 
 , begin by writing
 \begin_inset Formula \begin{eqnarray*}
 D & = & -\frac{1}{2\pi i}\int_{-ih-s-\epsilon}^{ih-s-\epsilon}\frac{\Gamma(z)}{x^{z}}\zeta(s+z)\zeta(z)\, dz\\
  & = & -\frac{1}{2\pi i}x^{s+\epsilon}\int_{-ih}^{ih}x^{u}\Gamma(-u-s-\epsilon)\zeta(-u-\epsilon)\zeta(-u-s-\epsilon)\, du\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  after a change of variable 
 \begin_inset Formula $z=-u-s-\epsilon$
-\end_inset 
+\end_inset
 
 .
  One then applies the functional equations for Gamma:
 \begin_inset Formula \[
 \Gamma(1-z)\Gamma(z)=\frac{\pi}{\sin\pi z}\]
 
-\end_inset 
+\end_inset
 
  and for zeta:
 \begin_inset Formula \[
 \zeta(s)=2^{s}\pi^{s-1}\sin\frac{\pi s}{2}\Gamma(1-s)\zeta(1-s)\]
 
-\end_inset 
+\end_inset
 
  to obtain 
 \begin_inset Formula \begin{eqnarray*}
 D & =\frac{1}{2\pi^{2}i}\left(\frac{x}{2\pi}\right)^{s+\epsilon}\left(\frac{1}{2\pi}\right)^{\epsilon}\int_{-ih}^{ih}\left(\frac{x}{4\pi^{2}}\right)^{u} & \frac{\sin\frac{u+\epsilon}{2}\pi\;\sin\frac{u+s+\epsilon}{2}\pi}{\sin(u+s+\epsilon)\pi}\;\times\\
  &  & \Gamma(1+u+\epsilon)\zeta(1+u+\epsilon)\zeta(1+s+u+\epsilon)\, du\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  Another change of variable, this time as 
 \begin_inset Formula $w=1+u+\epsilon$
-\end_inset 
+\end_inset
 
 , takes the integral to a slightly more recognizable form: 
 \begin_inset Formula \[
 D=-\frac{1}{\pi i}\left(\frac{x}{2\pi}\right)^{s-1}\int_{1+\epsilon-ih}^{1+\epsilon+ih}\left(\frac{x}{4\pi^{2}}\right)^{w}\frac{\cos\frac{w}{2}\pi\;\cos\frac{w+s}{2}\pi}{\sin(w+s)\pi}\Gamma(w)\zeta(w)\zeta(w+s)\, dw\]
 
-\end_inset 
+\end_inset
 
  Next, by taking 
 \begin_inset Formula $s=k$
-\end_inset 
+\end_inset
 
  to be an odd integer, the trigonometric piece simplifies and looses its
  
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  dependence: 
 \begin_inset Formula \[
 \frac{\cos\frac{w}{2}\pi\;\cos\frac{w+k}{2}\pi}{\sin(w+k)\pi}=\frac{1}{2}(-1)^{(k+1)/2}\]
 
-\end_inset 
+\end_inset
 
  Pulling out this piece, one regains a recognizable integral, so that, in
  the limit 
 \begin_inset Formula $h\to\infty$
-\end_inset 
+\end_inset
 
 , one finally reaches the claimed result:
 \begin_inset Formula \[
 D=(-1)^{(k+1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)\]
 
-\end_inset 
+\end_inset
 
  that is, 
 \begin_inset Formula \[
 I_{k}(x)=A+D=S_{k}(x)-(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)\]
 
-\end_inset 
+\end_inset
 
  for odd integer 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The next section will review the application of this and the preceding sections
  to specific, simple values of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , thus regaining many of Plouffe's sums.
-\layout Section
+\end_layout
 
+\begin_layout Section
 Lemmas and Applications
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The first corollary demonstrates Plouffe's simplest sums for 
 \begin_inset Formula $\zeta(4m-1)$
-\end_inset 
+\end_inset
 
 .
-\layout Corollary
+\end_layout
 
+\begin_layout Corollary
 For 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
  integer, one has 
 \begin_inset Formula \[
 I_{4m-1}(2\pi)=2S_{4m-1}(2\pi).\]
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 Substitute 
 \begin_inset Formula $x=2\pi$
-\end_inset 
+\end_inset
 
  in the functional equation.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This corollary provides the first concrete result of this exposition, namely
  that 
 \begin_inset Formula \[
@@ -1290,341 +1362,360 @@ This corollary provides the first concrete result of this exposition, namely
 4m\\
 2j\end{array}\right)\left(-1\right)^{j}B_{2j}B_{4m-2j}\]
 
-\end_inset 
+\end_inset
 
  which completely resolves one set of relationships given by Plouffe.
  The functional equation opens additional possibilities.
  By substituting 
 \begin_inset Formula $x=2\pi p/q$
-\end_inset 
+\end_inset
 
 , one obtains, for 
 \begin_inset Formula $k=4m-1$
-\end_inset 
+\end_inset
 
 , that 
 \begin_inset Formula \[
 q^{k-1}\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi pn/q}-1\right)}+p^{k-1}\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi qn/p}-1\right)}=q^{k-1}I_{k}\left(\frac{2\pi p}{q}\right)\]
 
-\end_inset 
+\end_inset
 
  Thus, for example, by choosing 
 \begin_inset Formula $p=2$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $q=1$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $k=3$
-\end_inset 
+\end_inset
 
 , on obtains 
 \begin_inset Formula \[
 \zeta(3)=\frac{29\pi^{3}}{900}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{3}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]\]
 
-\end_inset 
+\end_inset
 
  and similarly, for 
 \begin_inset Formula $k=7$
-\end_inset 
+\end_inset
 
 ,
 \begin_inset Formula \[
 \zeta(7)=\frac{409\pi^{7}}{94500}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{7}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]\]
 
-\end_inset 
+\end_inset
 
  and one may proceed in a similar manner.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The next corollary shows that something more is needed for 
 \begin_inset Formula $\zeta(5)$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\zeta(9)$
-\end_inset 
+\end_inset
 
 , and so on, since the most direct approach does not give any information
  for such sums.
-\layout Corollary
+\end_layout
 
+\begin_layout Corollary
 For 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  an odd integer, one has 
 \begin_inset Formula \[
 I_{k}(x)=(-1)^{(k+1)/2}\left(\frac{4\pi^{2}}{x}\right)^{k-1}I_{k}\left(\frac{4\pi^{2}}{x}\right)\]
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 This may be proved by applying the functional equation twice in a row.
  That is, it may be proved by substituting 
 \begin_inset Formula $x\to4\pi^{2}/x$
-\end_inset 
+\end_inset
 
  in the functional equation and then employing the result.
  
-\layout Corollary
+\end_layout
 
+\begin_layout Corollary
 For 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
  a positive integer, one has
 \begin_inset Formula \[
 I_{4m+1}(2\pi)=0.\]
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 Substitute 
 \begin_inset Formula $x=2\pi$
-\end_inset 
+\end_inset
 
  in the preceding corollary.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Following directly from the above is another corollary:
-\layout Corollary
+\end_layout
 
+\begin_layout Corollary
 For 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
  a positive integer, one has 
 \begin_inset Formula \[
 0=\sum_{j=0}^{2m+1}(-1)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\]
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 Write out the value of 
 \begin_inset Formula $I_{4m+1}(2\pi)$
-\end_inset 
+\end_inset
 
  in detail.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 From the above, it should be clear that the functional equation for 
 \begin_inset Formula $S_{k}$
-\end_inset 
+\end_inset
 
  does not provide any statements about 
 \begin_inset Formula $S_{k}$
-\end_inset 
+\end_inset
 
  when 
 \begin_inset Formula $k=4m+1$
-\end_inset 
+\end_inset
 
 .
  To obtain results on sums involving 
 \begin_inset Formula $k=4m+1$
-\end_inset 
+\end_inset
 
 , one must introduce
 \begin_inset Formula \[
 T_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}+1\right)}\]
 
-\end_inset 
+\end_inset
 
 
-\layout Theorem
+\end_layout
 
+\begin_layout Theorem
 One has
 \begin_inset Formula \[
 T_{s}(x)=S_{s}(x)-2S_{s}(2x)\]
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 This may be proved by re-writing in terms of the polylogarithm, along the
  lines of the earlier development: 
 \begin_inset Formula \[
 T_{s}(x)=-\sum_{m=1}^{\infty}(-1)^{m}{\rm Li}_{s}\left(e^{-xm}\right)\]
 
-\end_inset 
+\end_inset
 
  The even and odd terms are regrouped, as 
 \begin_inset Formula \[
 T_{s}(x)=\sum_{m=1}^{\infty}{\rm Li}_{s}\left(e^{-xm}\right)-2{\rm Li}_{s}\left(e^{-2xm}\right)\]
 
-\end_inset 
+\end_inset
 
  which is seen to be a sum of 
 \begin_inset Formula $S_{s}$
-\end_inset 
+\end_inset
 
 's.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The results for 
 \begin_inset Formula $\zeta(5)$
-\end_inset 
+\end_inset
 
 , etc.
  follow from a critical observation: that 
 \begin_inset Formula \[
 S_{s}(x+2\pi i)=S_{s}(x)\]
 
-\end_inset 
+\end_inset
 
  is a periodic function.
  This periodicity is employed directly in the next theorem.
-\layout Theorem
+\end_layout
 
+\begin_layout Theorem
 For positive integer 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
 , one has 
 \begin_inset Formula \begin{eqnarray*}
 S_{4m+1}(2\pi) & = & I_{4m+1}(2\pi(1+i))\\
  &  & +(-1)^{m}\left[\frac{T_{4m+1}(2\pi)}{4^{m}}+2\cdot4^{m}S_{4m+1}(2\pi)-4^{m}I_{4m+1}(\pi)\right]\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 Using periodicity, one writes, for 
 \begin_inset Formula $k=4m+1$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula \[
 S_{k}(2\pi+2\pi i)=S_{k}(2\pi)=I_{k}(2\pi(1+i))+2^{(k-1)/2}e^{3i\pi(k-1)/4}S_{k}(\pi(1-i))\]
 
-\end_inset 
+\end_inset
 
  The series 
 \begin_inset Formula $S_{k}(\pi(1-i))$
-\end_inset 
+\end_inset
 
  doesn't have an imaginary part; rather, it is an alternating series, which
  may be expanded and written as 
 \begin_inset Formula \[
 S_{k}(\pi(1-i))=-T_{k}(\pi)+\frac{T_{k}(2\pi)+S_{k}(2\pi)}{2^{k}}\]
 
-\end_inset 
+\end_inset
 
  The 
 \begin_inset Formula $T_{k}(\pi)$
-\end_inset 
+\end_inset
 
  term may be eliminated by writing 
 \begin_inset Formula \[
 T_{k}(\pi)=S_{k}(\pi)-2S_{k}(2\pi)\]
 
-\end_inset 
+\end_inset
 
  and the 
 \begin_inset Formula $S_{k}(\pi)$
-\end_inset 
+\end_inset
 
  term may be eliminated by 
 \begin_inset Formula \begin{eqnarray*}
 S_{k}(\pi) & = & I_{k}(\pi)+2^{1-k}S_{k}(4\pi)\\
  & = & I_{k}(\pi)+2^{-k}\left[S_{k}(2\pi)-T_{k}(2\pi)\right]\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  Performing the various substitutions suggested above proves the theorem.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 As an example of the application of the above theorem, take 
 \begin_inset Formula $m=1$
-\end_inset 
+\end_inset
 
 , that is, 
 \begin_inset Formula $k=5$
-\end_inset 
+\end_inset
 
 .
  One easily finds that 
 \begin_inset Formula \[
 I_{5}(\pi)=-\frac{15}{32}\zeta(5)+\frac{\pi^{5}}{9\cdot64}\]
 
-\end_inset 
+\end_inset
 
  and that 
 \begin_inset Formula \[
 I_{5}(2\pi(1+i))=-\frac{5}{2}\zeta(5)+\frac{\pi^{5}}{9\cdot15}\]
 
-\end_inset 
+\end_inset
 
  Combining these, one gets
 \begin_inset Formula \[
 \zeta(5)=\frac{\pi^{5}}{294}-\frac{2}{35}\left[T_{5}(2\pi)+36S_{5}(2\pi)\right]\]
 
-\end_inset 
+\end_inset
 
  which is given by Plouffe.
  The theorem may be used to generate similar expressions for all 
 \begin_inset Formula $\zeta(4m+1)$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Curiously, the theorem yields results for 
 \begin_inset Formula $m=0$
-\end_inset 
+\end_inset
 
  as well.
  In this case, one finds 
 \begin_inset Formula \[
 S_{1}(2\pi)+T_{1}(2\pi)=\frac{\pi}{6}-\frac{3}{4}\log2\]
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Many identities for 
 \begin_inset Formula $\pi$
-\end_inset 
+\end_inset
 
  are possible by taking two different expressions for a given zeta, and
  subtracting them, leaving behind a rational combination of the sums and
  
 \begin_inset Formula $\pi$
-\end_inset 
+\end_inset
 
 .
  Thus, for example, the following theorem for Apery's constant:
-\layout Theorem
+\end_layout
 
+\begin_layout Theorem
 A series expression for 
 \begin_inset Formula $\pi^{3}$
-\end_inset 
+\end_inset
 
 is given by 
 \begin_inset Formula \[
 \pi^{3}=720\cdot S_{3}(\pi)-900\cdot S_{3}(2\pi)+180\cdot S_{3}(4\pi)\]
 
-\end_inset 
+\end_inset
 
  
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 This follows by taking the general expression for 
 \begin_inset Formula $k=4m-1$
-\end_inset 
+\end_inset
 
 :
 \begin_inset Formula \begin{eqnarray*}
@@ -1632,48 +1723,51 @@ This follows by taking the general expression for
  & = & -\frac{1}{2}\zeta(4m-1)\left[16^{m}+4\right]\\
  &  & -(2\pi)^{4m-1}\sum_{j=0}^{2m}(-4)^{j}\frac{B_{4m-2j}}{(4m-2j)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  solving for 
 \begin_inset Formula $\zeta(4m-1)$
-\end_inset 
+\end_inset
 
  and then using 
 \begin_inset Formula \[
 2S_{4m-1}(2\pi)=I_{4m-1}(2\pi)=-\zeta(4m-1)+(2\pi)^{4m-1}\;\sum_{j=0}^{2m}\left(-1\right)^{j}\frac{B_{4m-2j}}{(4m-2j)!}\frac{B_{2j}}{(2j)!}\]
 
-\end_inset 
+\end_inset
 
  to eliminate the appearance of the zeta.
  The resulting expression may then be solved for 
 \begin_inset Formula $\pi^{4m-1}$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Relationships involving square roots also arise naturally.
  
-\layout Theorem
+\end_layout
 
+\begin_layout Theorem
 One has 
 \begin_inset Formula \[
 \zeta(3)=\frac{5\pi^{3}}{72}-\frac{1}{2}\, S_{3}\left(2\pi\sqrt{3}\right)-\frac{3}{2}\, S_{3}\left(\frac{2\pi\sqrt{3}}{3}\right)\]
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 This follows from the general expression given earlier, that 
 \begin_inset Formula \[
 S_{k}\left(\frac{2\pi p}{q}\right)+\left(\frac{p}{q}\right)^{k-1}S_{k}\left(\frac{2\pi q}{p}\right)=I_{k}\left(\frac{2\pi p}{q}\right)\]
 
-\end_inset 
+\end_inset
 
  Here, making the substitution 
 \begin_inset Formula $q=\sqrt{p}$
-\end_inset 
+\end_inset
 
  one obtains 
 \begin_inset Formula \begin{eqnarray*}
@@ -1681,328 +1775,359 @@ S_{k}\left(2\pi\sqrt{p}\right)+p^{(k-1)/2}S_{k}\left(\frac{2\pi\sqrt{p}}{p}\righ
  &  & +\frac{(-1)^{(k-1)/2}}{2\sqrt{p}}(2\pi)^{k}\;\\
  &  & \;\;\sum_{j=0}^{(k+1)/2}\left(-p\right)^{j}\frac{B_{k+1-2j}}{(k+1-2j)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
 The specific result follows after choosing 
 \begin_inset Formula $k=3$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $p=3$
-\end_inset 
+\end_inset
 
 .
-\layout Section
+\end_layout
 
+\begin_layout Section
 Some Bernoulli number identities
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 In addition to the previously noted identity 
 \begin_inset Formula \[
 0=\sum_{j=0}^{2m+1}(-1)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\]
 
-\end_inset 
+\end_inset
 
 there are several other identities on sums of Bernoulli numbers that result
  from the previous developments.
  These are briefly stated here.
  
-\layout Theorem
+\end_layout
 
+\begin_layout Theorem
 For integer 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
 , one has
 \begin_inset Formula \[
 0=\sum_{j=0}^{m}(-4)^{j}\left[\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}+2\frac{B_{4m-4j}}{(4m-4j)!}\frac{B_{4j+2}}{(4j+2)!}\right]\]
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 Consider the sums resulting from 
 \begin_inset Formula $0=I_{4m+1}(2\pi(1+i))-I_{4m+1}(2\pi(1-i))$
-\end_inset 
+\end_inset
 
 .
-\layout Theorem
+\end_layout
 
+\begin_layout Theorem
 For integer 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
 , one has 
 \begin_inset Formula \begin{eqnarray*}
 \sum_{k=0}^{2m}(-1)^{k}\frac{B_{4m-2k}}{(4m-2k)!}\frac{B_{2k}}{(2k)!} & = & \sum_{j=0}^{m}(-4)^{j}\frac{B_{4m-4j}}{(4m-4j)!}\frac{B_{4j}}{(4j)!}\\
  &  & -2\sum_{j=0}^{m-1}(-4)^{j}\frac{B_{4m-4j-2}}{(4m-4j-2)!}\frac{B_{4j+2}}{(4j+2)!}\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 Consider the sums resulting from the identity 
 \begin_inset Formula \[
 I_{4m-1}(2\pi)=I_{4m-1}(2\pi(1+i))+I_{4m-1}(2\pi(1-i))\]
 
-\end_inset 
+\end_inset
 
 
-\layout Section
+\end_layout
 
+\begin_layout Section
 Modular Relations
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The various sums and quantities above can be seen to be quasi-modular by
  making a simple change of variable, namely by making the substitution 
 \begin_inset Formula $x=2\pi i\tau$
-\end_inset 
+\end_inset
 
 .
  By 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 quasi-modular
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , it is meant that the various terms almost have simple behaviors under
  the Mobius transformation 
 \begin_inset Formula $\tau\to(a\tau+b)/(c\tau+d)$
-\end_inset 
+\end_inset
 
  for integer 
 \begin_inset Formula $a,b,c$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $d$
-\end_inset 
+\end_inset
 
 .
  In this respect, the sums bear close resemblance to theta functions, which
  obey similar relations.
  These relationships are brought to focus here.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 First, define 
 \begin_inset Formula $K_{k}(\tau)=I_{k}(2\pi i\tau)$
-\end_inset 
+\end_inset
 
 .
  This change of variable results in a definition which seems simpler than
  that for 
 \begin_inset Formula $I_{k}$
-\end_inset 
+\end_inset
 
 .
  An expansion in 
 \begin_inset Formula $\tau$
-\end_inset 
+\end_inset
 
  is often referred to as a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 Fourier series
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  in the context of hyperbolic geometry: 
 \begin_inset Formula \[
 K_{k}(\tau)=\frac{\tau^{k-1}-1}{2}\zeta(k)-\frac{(2\pi i)^{k}}{2\tau}\;\sum_{j=0}^{(k+1)/2}\tau^{2j}\frac{B_{2j}}{(2j)!}\frac{B_{k+1-2j}}{(k+1-2j)!}\]
 
-\end_inset 
+\end_inset
 
 This quantity is almost a modular form of weight 
 \begin_inset Formula $k-1$
-\end_inset 
+\end_inset
 
 , in that 
 \begin_inset Formula \[
 K_{k}\left(\frac{-1}{\tau}\right)=-\tau^{1-k}K_{k}(\tau)\]
 
-\end_inset 
+\end_inset
 
  Its only 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 almost
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  a modular form, because it is not periodic in 
 \begin_inset Formula $\tau$
-\end_inset 
+\end_inset
 
 , that is 
 \begin_inset Formula \[
 K_{k}(\tau+1)\ne K_{k}(\tau)\]
 
-\end_inset 
+\end_inset
 
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 By contrast, 
 \begin_inset Formula $P_{k}(\tau)=S_{k}(2\pi i\tau)$
-\end_inset 
+\end_inset
 
  is periodic: 
 \begin_inset Formula \[
 P_{k}(\tau+1)=P_{k}(\tau)\]
 
-\end_inset 
+\end_inset
 
  but is not quite modular under inversion: 
 \begin_inset Formula \[
 P_{k}\left(\frac{-1}{\tau}\right)=\tau^{1-k}P_{k}(\tau)+K_{k}\left(\frac{-1}{\tau}\right)\]
 
-\end_inset 
+\end_inset
 
  One may define a simple variant of the sums that does have a simple transformat
 ion under inversion, namely 
 \begin_inset Formula \[
 M_{k}(\tau)=P_{k}(\tau)-\frac{1}{2}K_{k}(\tau)\]
 
-\end_inset 
+\end_inset
 
  which transforms as 
 \begin_inset Formula \[
 M_{k}\left(\frac{-1}{\tau}\right)=-\tau^{1-k}M_{k}(\tau)\]
 
-\end_inset 
+\end_inset
 
  However, 
 \begin_inset Formula $M_{k}$
-\end_inset 
+\end_inset
 
  is then not periodic.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 Phase of 
 \begin_inset Formula $P_{-1}(q)$
-\end_inset 
+\end_inset
 
  on the unit disk
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename plouffe-1.png
 	scale 60
 	keepAspectRatio
 	special bb=0in 0in 601pt 601pt
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This graphic shows the phase
 \begin_inset Formula \[
 \arg P_{-1}(q)=\arg\sum_{n=1}^{\infty}\frac{n}{q^{n}-1}\]
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\arg f(z)=\Im\log f(z)$
-\end_inset 
+\end_inset
 
  is the usual arg of a function.
  The color scheme is such that black represents areas where 
 \begin_inset Formula $\arg>0$
-\end_inset 
+\end_inset
 
  and red represents areas where 
 \begin_inset Formula $\arg<$
-\end_inset 
+\end_inset
 
 0.
  The absence of other colors indicates that the phase is rather closely
  confined to the vicinity of 
 \begin_inset Formula $0$
-\end_inset 
+\end_inset
 
  for most all of the disk.
  Numerically, the absolute value of the phase is smaller than 
 \begin_inset Formula $10^{-3}$
-\end_inset 
+\end_inset
 
  for much of the disk.
  In particular, this indicates that there are no zeros at all in the interior
  of the disk, as a zero would be surrounded by a region where the phase
  wraps around by 
 \begin_inset Formula $2\pi$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The function 
 \begin_inset Formula $P_{s}(q)$
-\end_inset 
+\end_inset
 
  does have poles at 
 \begin_inset Formula $q=e^{2\pi im/n}$
-\end_inset 
+\end_inset
 
  for all rationals 
 \begin_inset Formula $m/n$
-\end_inset 
+\end_inset
 
 ; these are visible at the edges of the disk.
  The fractal nature of this image is the characteristic signature of a modular
  form of weight 2; the self-similar regions are just copies of the fundamental
  region of the modular group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 .
  
-\begin_inset Note
-collapsed true
+\begin_inset Note Note
+status collapsed
 
-\layout Standard
-
+\begin_layout Standard
 graphic created with src/fractal/generate/plouffe.C 600 600 2000 0 0 2 -1
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 Phase of 
 \begin_inset Formula $P_{-5}(q)$
-\end_inset 
+\end_inset
 
  on the unit disk
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename plouffe-5.png
 	lyxscale 60
@@ -2011,219 +2136,242 @@ Phase of
 	clip
 	special bb=0in 0in 601pt 601pt
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This graphic shows the phase
 \begin_inset Formula \[
 \arg P_{-5}(q)=\arg\sum_{n=1}^{\infty}\frac{n^{5}}{q^{n}-1}\]
 
-\end_inset 
+\end_inset
 
 The color scheme is as in the previous image, and similar conclusions apply:
  there are no zeros at all in the interior of the disk.
  The absolute value of the phase is tiny: numerically, it is within 
 \begin_inset Formula $10^{-9}$
-\end_inset 
+\end_inset
 
  of zero for much of the disk.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The fractal nature of this image is the characteristic signature of a modular
  form of weight 6; it should be compared to the image of the modular invariant
  
 \begin_inset Formula $g_{3}$
-\end_inset 
+\end_inset
 
  shown in the next image.
  
-\begin_inset Note
-collapsed true
+\begin_inset Note Note
+status collapsed
 
-\layout Standard
-
+\begin_layout Standard
 graphic created with src/fractal/generate/plouffe.C 600 600 6000 0 0 2 -5
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 Graph of the modular invariant 
 \begin_inset Formula $g_{3}$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename gee_three_imaginary.png
 	scale 60
 	special bb=0in 0in 701pt 701pt
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This figure shows the imaginary part of the modular invariant 
 \begin_inset Formula $g_{3}$
-\end_inset 
+\end_inset
 
 , one of the invariants of an elliptic curve.
  Specifically, it shows the imaginary part of 
 \begin_inset Formula \[
 g_{3}(q)=\frac{8\pi^{6}}{27}\left[1-504\sum_{n=1}^{\infty}\frac{n^{5}q^{n}}{1-q^{n}}\right]\]
 
-\end_inset 
+\end_inset
 
  which is a modular form of weight 6.
  The colors are chosen such that black represents areas that are negative,
  blue and green represent areas with smaller values, and red those areas
  with the largest values.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The analytic structure of 
 \begin_inset Formula $P_{k}$
-\end_inset 
+\end_inset
 
  is curious: it has a pole at 
 \begin_inset Formula $\tau=i\infty$
-\end_inset 
+\end_inset
 
  and.
  by the inversion formula and periodicity, at every rational value of 
 \begin_inset Formula $\tau$
-\end_inset 
+\end_inset
 
 .
  This is clearly visible in the graphic below, which shows 
 \begin_inset Formula $P_{3}$
-\end_inset 
+\end_inset
 
  on the 
 \begin_inset Formula $q$
-\end_inset 
+\end_inset
 
 -series or 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 punctured disk
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  coordinates 
 \begin_inset Formula $q=e^{2\pi i\tau}$
-\end_inset 
+\end_inset
 
 :
 \begin_inset Formula \[
 P_{s}(q)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(q^{n}-1\right)}\]
 
-\end_inset 
+\end_inset
 
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 In this form, the relation to modular forms becomes the most immediate.
  Consider the Lambert series:
 \begin_inset Formula \[
 \sum_{n=1}^{\infty}\frac{1}{n^{s}}\frac{q^{n}}{1-q^{n}}=-\zeta(s)-P_{s}(q)=\sum_{m=1}^{\infty}\sigma_{-s}(m)q^{m}\]
 
-\end_inset 
+\end_inset
 
  Here, 
 \begin_inset Formula $\sigma_{s}(m)$
-\end_inset 
+\end_inset
 
  is the divisor function: 
 \begin_inset Formula \[
 \sigma_{s}(m)=\sum_{n|m}\; n^{s}\]
 
-\end_inset 
+\end_inset
 
  with the notation 
 \begin_inset Formula $n|m$
-\end_inset 
+\end_inset
 
  denoting that the sum extends over all divisors 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  of 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
 .
  This should be compared to the Eisenstein series 
-\begin_inset LatexCommand \cite[see section 3.10]{Apo90}
+\begin_inset LatexCommand cite
+after "see section 3.10"
+key "Apo90"
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \[
 G_{2k}(q)=2\zeta(2k)+\frac{2(2\pi i)^{2k}}{(2k-1)!}\sum_{m=1}^{\infty}\sigma_{2k-1}(m)q^{m}\]
 
-\end_inset 
+\end_inset
 
  etc.
  In essence, we are dealing with an extension of the Eisenstein series to
  general complex argument.
  XXX unfinished; this should be elaborated on a bit more.
  XXXX
-\layout Section
+\end_layout
 
+\begin_layout Section
 Conclusions
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Given any particular rational and set of sums, there is a rich variety of
  possible relationships that can be formed.
  It would be interesting to characterize the number of these relationships
  as a function of the number of sums involved.
  Thus, for example, given only 
 \begin_inset Formula $S_{3}(2\pi)$
-\end_inset 
+\end_inset
 
 , there seems to be only one relationship that can be formed to give 
 \begin_inset Formula $\zeta(3)$
-\end_inset 
+\end_inset
 
 .
  However, given 
 \begin_inset Formula $S_{3}(\pi)$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $S_{3}(2\pi)$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $S_{3}(4\pi)$
-\end_inset 
+\end_inset
 
 , there seem to be two distinct relationships, of which a linear combination
  can be taken: thus there is a one-dimensional linear space of solutions.
  It would be interesting to know what the higher order combinatorial possibiliti
 es may be, the dimensionality of the spaces they form, and how these depend
  on the selected series.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Another interesting avenue of research would be to strengthen the connections
  to modular forms, to see if additional insights can be gained by following
  that route.
@@ -2237,102 +2385,115 @@ Another interesting avenue of research would be to strengthen the connections
  In particular, it seems possible to re-express the functional equation
  for 
 \begin_inset Formula $S_{k}$
-\end_inset 
+\end_inset
 
 , as given in section 4, in terms of (logarithms of) eigenfunctions of the
  Baker's map.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Thanks to Simon Plouffe for generating interest in such sums.
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Appendix: Polylog Integral
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This appendix proves the following theorem:
-\layout Theorem
+\end_layout
 
+\begin_layout Theorem
 The polylogarithm may be written as the integral 
 \begin_inset Formula \[
 {\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(r)\zeta(r+s)u^{-r}dr\]
 
-\end_inset 
+\end_inset
 
 
-\layout Proof
+\end_layout
 
+\begin_layout Proof
 The proof below is cribbed from the Wikipedia article on polylogarithms
-\begin_inset LatexCommand \cite{WP-PL}
+\begin_inset LatexCommand cite
+key "WP-PL"
 
-\end_inset 
+\end_inset
 
 .
  One begins by writing the the Mellin transform of the polylog, as 
 \begin_inset Formula \[
 M_{s}(r)=\int_{0}^{\infty}{\rm Li}_{s}\left(ye^{-u}\right)u^{r}\frac{du}{u}\]
 
-\end_inset 
+\end_inset
 
  Using an integral representation of the polylogarithm, 
 \begin_inset Formula \[
 {\rm Li}_{s}\left(w\right)=\frac{1}{\Gamma(s)}\int_{0}^{\infty}\frac{t^{s-1}}{w^{-1}e^{t}-1}dt\]
 
-\end_inset 
+\end_inset
 
  and substituting, one obtains 
 \begin_inset Formula \[
 M_{s}(r)=\frac{1}{\Gamma(s)}\int_{0}^{\infty}\int_{0}^{\infty}\frac{u^{r-1}t^{s-1}}{y^{-1}e^{t+u}-1}dt\, du\]
 
-\end_inset 
+\end_inset
 
  A change of variable 
 \begin_inset Formula $t=ab$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $u=a(1-b)$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $dt\, du=a\, da\, db$
-\end_inset 
+\end_inset
 
  gives 
 \begin_inset Formula \begin{eqnarray*}
 M_{s}(r) & = & \frac{1}{\Gamma(s)}\int_{0}^{1}b^{s-1}(1-b)^{r-1}db\int_{0}^{\infty}\frac{a^{r+s-1}}{y^{-1}e^{a}-1}\, da\\
  & = & \Gamma(r)\,{\rm Li}_{r+s}(y)\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  The inverse Mellin transform may now be employed to write 
 \begin_inset Formula \[
 {\rm Li}_{s}\left(ye^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}u^{-r}\Gamma(r)\,{\rm Li}_{r+s}(y)\, dr\]
 
-\end_inset 
+\end_inset
 
  By setting 
 \begin_inset Formula $y=1$
-\end_inset 
+\end_inset
 
 , one then uses 
 \begin_inset Formula ${\rm Li}_{s+r}(1)=\zeta(s+r)$
-\end_inset 
+\end_inset
 
  to obtain the desired result.
-\layout Standard
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand bibtex
+options "plain"
+bibfiles "/home/linas/linas/fractal/paper/fractal"
+
+\end_inset
 
 
-\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
+\end_layout
 
-\end_inset 
-
-
-\layout Standard
-
+\begin_layout Standard
 --
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 --
-\the_end
+\end_layout
+
+\end_body
+\end_document
