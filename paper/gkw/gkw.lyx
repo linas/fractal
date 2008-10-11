@@ -1,73 +1,93 @@
-#LyX 1.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 221
+#LyX 1.5.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
 \textclass article
 \language english
 \inputencoding auto
-\fontscheme pslatex
+\font_roman times
+\font_sans helvet
+\font_typewriter courier
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
 \graphics default
 \paperfontsize default
-\spacing single 
-\papersize Default
-\paperpackage a4
-\use_geometry 0
-\use_amsmath 1
-\use_natbib 0
-\use_numerical_citations 0
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \defskip medskip
 \quotes_language english
-\quotes_times 2
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\end_header
 
-\layout Title
+\begin_body
 
+\begin_layout Title
 The Gauss-Kuzmin-Wirsing Operator
-\layout Author
+\end_layout
 
+\begin_layout Author
 Linas Vepstas <linas@linas.org>
-\layout Date
+\end_layout
 
-2 January 2004 (revised 4 January 2005)
-\layout Abstract
+\begin_layout Date
+2 January 2004 (revised Oct 2008)
+\end_layout
 
+\begin_layout Abstract
 This chapter presents an incomplete review of the Gauss-Kuzmin-Wirsing (GKW)
  operator.
  The GKW operator is the transfer operator of the Gauss map, and thus has
  connections to the theory of continued fractions.
-\layout Abstract
+\end_layout
 
-The operator appears to be quite complex itself, and difficult to solve.
- Eigenfunctions can be obtained numerically, but little else is known in
- the mathematical literature.
+\begin_layout Abstract
+The operator has a complicated structure, and has not been fully solved
+ yet.
+ Eigenvalues and eigenfunctions can be obtained numerically, but little
+ else is known in the mathematical literature.
  
-\layout Abstract
+\end_layout
 
-The review given here is rather incomplete.
-\layout Abstract
+\begin_layout Abstract
+The review given here is incomplete; it is a diary of research results.
+\end_layout
 
+\begin_layout Abstract
 A few connections to the Minkowski Question Mark Function are probed.
  In particular, the Question Mark is used to define a transfer operator
  which is 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 topologically equivalent
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  to the GKW.
  This 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 equivalent
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  operator is solvable, and can be shown to have fractal eigenfunctions.
  However, the spectrum of this operator is not at all the same as that of
@@ -75,214 +95,250 @@ equivalent
  This is because the Jacobian of the transformation relating the two is
  given by 
 \begin_inset Formula $(?^{\prime}\circ?^{-1})$
-\end_inset 
+\end_inset
 
 (x) , which is well-known as the prototypical 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 multi-fractal measure
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
  
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 The general presentation attempts to assume very little math background.
  This paper is part of a set of chapters that explore the relationship between
  the real numbers, the modular group, and fractals.
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Gauss-Kuzmin-Wirsing Operator
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 THIS IS A DRAFT WORK IN PROGRESS.
  The intro hasn't been written yet.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The general layout is:
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 -- present the Gauss-Kuzmin-Wirsing operator
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 -- show that the Minkowksi Question Mark converts the GKW into a sawtooth.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 -- Solve the two sawtooth transfer operators (these are exactly solvable).
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 -- Review Farey/Isola Map
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Gauss-Kuzmin-Wirsing Operator
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The map that truncates continued fractions is 
 \begin_inset Formula \begin{equation}
 h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
- and is sometimes called the Gauss Map.
+and is sometimes called the Gauss Map.
  It is connected to the Riemann Zeta by a Mellin Transform:
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 The Frobenius-Perron operator for this map is known as the Gauss-Kuzmin-Wirsing
  (GKW) Operator, and is represented by.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 \left[U_{h}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{(n+x)^{2}}f\left(\frac{1}{n+x}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
- Thus, the Riemann zeta can be written under a change of variable as
+Thus, the Riemann zeta can be written under a change of variable as
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[U_{h}x^{s-1}\right]\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
- and thus it seems that a better understanding of GKW may shed light on
- the Riemann Hypothesis.
- There is one known eigenvector, 
+and thus it seems that a better understanding of GKW may shed light on the
+ Riemann Hypothesis.
+ Most immediately, simple manipulations lead to a representation for the
+ Riemann zeta in terms of binomial coefficeints.
+ This relation is explored in detail in 
+\begin_inset LatexCommand cite
+key "Vep-zeta2004,Fla06"
+
+\end_inset
+
+.
+ The same development can be used to obtain Dirichlet L-functions, and generaliz
+ations to other number-theoretic series, such as the totient series, or
+ the Liouville series 
+\begin_inset LatexCommand cite
+key "Vep-norlund-2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+There is one known eigenvector, 
 \begin_inset Formula $f(x)=1/(1+x)$
-\end_inset 
+\end_inset
 
  which corresponds to the unit eigenvalue.
- The others do not seem to be (by combinatorial search) any simple combination
+ 
+\end_layout
+
+\begin_layout Standard
+The others do not seem to be (by combinatorial search) any simple combination
  or summation of simple functions, including the digamma, and etc.
  XXX Provide the details.
  
-\layout Standard
+\end_layout
 
-Todo:Blah Blah.
- Give the collection of interesting summations.
- Give the Riemann Hypothesis as a vector equation.
+\begin_layout Standard
+Todo: Give the Riemann Hypothesis as a vector equation.
  
-\layout Standard
+\end_layout
 
-Details of the relationship w/ Riemann zeta are explored in a different
- paper on this website.
-\layout Subsection
-
+\begin_layout Subsection
 Assorted Algebraic Identities
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This section lists an assortment of random algebraic results, none particularly
  deep or interesting.
  These are listed here mostly for the sake of completeness.
  First, we notice that adjacent terms in the series can be made to cancel
  by shifting the series by one:
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 \left[U_{h}f\right](x)-\left[U_{h}f\right](x+1)=\frac{1}{(1+x)^{2}}f\left(\frac{1}{1+x}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which holds for any function 
 \begin_inset Formula $f(x).$
-\end_inset 
+\end_inset
 
  Thus, if 
 \begin_inset Formula $\rho(x)$
-\end_inset 
+\end_inset
 
  is an eigenvector, so that 
 \begin_inset Formula $U_{h}\rho=\lambda\rho$
-\end_inset 
+\end_inset
 
 , then it would also solve 
 \begin_inset Formula \begin{equation}
 \frac{1}{(1+x)^{2}}\rho\left(\frac{1}{1+x}\right)=\lambda\left(\rho(x)-\rho(x+1)\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 This can be solved easily to get the zeroth eigenvector 
 \begin_inset Formula \begin{equation}
 \rho_{0}(x)=\frac{1}{\ln2}\;\frac{1}{1+x}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which satisfies 
 \begin_inset Formula $[U_{h}\rho_{0}](x)=\rho_{0}(x)$
-\end_inset 
+\end_inset
 
  and the normalization is given by requiring 
 \begin_inset Formula \begin{equation}
 \int_{0}^{1}\rho_{0}(x)\, dx=1\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  We can see one hint of the relationship between period-doubling and the
  GKW in the identity 
 \begin_inset Formula \begin{equation}
 \frac{1}{1+x}=\sum_{n=1}^{\infty}\,\frac{1}{2^{n}}\left[\frac{2}{x+n}-\frac{1}{x+n+1}\right]\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A reflection identity: 
 \begin_inset Formula $f(x)=1-(1+x)^{-2}$
-\end_inset 
+\end_inset
 
  satisfies 
 \begin_inset Formula $U_{h}f=1-f$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Another: 
 \begin_inset Formula $U_{h}[(1+?(x))/(1+x)^{2}]=1-?(x)$
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $?(x)$
-\end_inset 
+\end_inset
 
  is the Minkowski Question Mark function.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Another: 
 \begin_inset Formula $U_{h}[?(x)\, x^{-2}]=2-?(x)$
-\end_inset 
+\end_inset
 
  .
  One can construct a variety of identities of this sort, for example: 
 \begin_inset Formula \begin{equation}
 U_{h}\left[?(x)\left(\frac{1}{(1+x)^{2}}-2\right)\right]=\frac{?(x)-2}{(1+x)^{2}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  but these types of exercises do not seem to lead to any sort of worthwhile
  recurrence relations.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Acting on the monomial, one gets 
 \begin_inset Formula \begin{equation}
 \left[U_{h}x^{k}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{k+2}}=\frac{(-)^{k+2}}{(k+1)!}\psi^{(k+1)}(1+x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\psi^{(k)}(x)$
-\end_inset 
+\end_inset
 
  is the 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 'th derivative of the Gamma function.
  The true difficulty of finding the solution to GKW becomes clear when the
@@ -290,153 +346,158 @@ Acting on the monomial, one gets
 \begin_inset Formula \begin{equation}
 \sum_{m=1}^{\infty}\,\frac{1}{m^{2}}\psi^{(1)}\left(1+\frac{1}{m}+x\right)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{2}}\psi^{(1)}\left(\frac{1}{n+x}+1\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  or curiosities such as 
 \begin_inset Formula $f(x)=(1+ax)^{2}$
-\end_inset 
+\end_inset
 
  gives 
 \begin_inset Formula $U_{h}f=\psi^{(1)}(1+x+a)$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 For 
 \begin_inset Formula $f(x)=(1+nx)^{-2}-1$
-\end_inset 
+\end_inset
 
  one gets 
 \begin_inset Formula $U_{h}f=-\sum_{k=1}^{n}(x+k)^{-2}$
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Acting on a general power, the map gives the Hurwitz Zeta: 
 \begin_inset Formula \begin{equation}
 \left[U_{h}x^{s}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{s+2}}=\zeta(s+2,x+1)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and this transformation gives us another hint of a deep relationship to
  the Bernoulli Map.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 We have some conditionally convergent series: 
 \begin_inset Formula \begin{equation}
 \sum_{k=0}^{\infty}\,(-)^{k}\,\left(\begin{array}{c}
 k+m+1\\
 m\end{array}\right)\zeta(k+m+2)=1\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which holds for any integer 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
 .
  We also have series such as 
 \begin_inset Formula \begin{equation}
 \lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}e^{-tk}=\frac{1}{2}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \begin{equation}
 \lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)e^{-tk}=\frac{3}{4}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \begin{equation}
 \lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)(k+3)e^{-tk}=\frac{7}{4}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \begin{equation}
 \lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)(k+3)(k+4)e^{-tk}=\frac{45}{8}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \begin{equation}
 \lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}(k+2)(k+3)(k+4)(k+5)e^{-tk}=\frac{93}{4}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Its not clear what the general expression for forms of the above type is.
  Similarly, if we let 
 \begin_inset Formula \begin{equation}
 S_{m}\equiv\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}\frac{(k+m+1)!}{(k+1)!}\left[\zeta(k+m+2)-1\right]e^{-tk}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  then we find 
 \begin_inset Formula $S_{0}=1/2$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $S_{1}=1/4$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $S_{2}=1/4$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $S_{3}=3/8$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $S_{4}=3/4$
-\end_inset 
+\end_inset
 
  but its again not clear what the general expression might be.
  The above sums are generated by considering 
 \begin_inset Formula \begin{equation}
 \psi(1+z)=\frac{-1}{1+z}+1-\gamma+\sum_{m=0}^{\infty}(-)^{m}\left[\zeta(m+2)-1\right]z^{m+1}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and then writing 
 \begin_inset Formula $z^{m+1}=(z+1-1)^{m+1}=\sum_{k=0}^{m}(-)^{m-k}\left(\begin{array}{c}
 m\\
 k\end{array}\right)(z+1)^{k}$
-\end_inset 
+\end_inset
 
 
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Polynomial Representation
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 One can attempt to solve GKW by working in the polynomial representation.
  One possible choice is to make one's Taylor expansion about 
 \begin_inset Formula $x=0$
-\end_inset 
+\end_inset
 
 , but this turns out to be a very poor choice, as we shall soon see.
  Thus, if we write 
 \begin_inset Formula $U_{h}f=g$
-\end_inset 
+\end_inset
 
  and substitute a Taylor's expansion for 
 \begin_inset Formula $f$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
 , we get 
 \begin_inset Formula \begin{equation}
 \frac{g^{(m)}(0)}{m!}=\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}\,(-)^{m}\;\frac{(k+m+1)!}{m!\,(k+1)!}\,\zeta(k+m+2)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  or, adopting the bra-ket notation introduced earlier, we have 
 \begin_inset Formula \begin{equation}
@@ -444,7 +505,7 @@ One can attempt to solve GKW by working in the polynomial representation.
 k+m+1\\
 m\end{array}\right)\,\zeta(k+m+2)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where we've replaced the factorials by the binomial coefficient that they
  form.
@@ -458,7 +519,7 @@ m\end{array}\right)\,\zeta(k+m+2)\label{eq:}\end{equation}
  Thus, we are lead to consider the matrix elements for a polynomial expansion
  about 
 \begin_inset Formula $x=1$
-\end_inset 
+\end_inset
 
 .
  These are far more complex, but give a very well-conditioned matrix.
@@ -470,191 +531,197 @@ k\end{array}\right)\left(\begin{array}{c}
 k+m+1\\
 m\end{array}\right)\,\left[\zeta(k+m+2)-1\right]\label{eq:GKW-matrix-elts}\end{equation}
 
-\end_inset 
+\end_inset
 
  satisfying 
 \begin_inset Formula \begin{equation}
 (-)^{m}\frac{g^{(m)}(1)}{m!}=\sum_{n=0}^{\infty}G_{mn}(-)^{n}\frac{f^{(n)}(1)}{n!}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Other authors have chosen to expand about 
 \begin_inset Formula $x=1/2$
-\end_inset 
+\end_inset
 
  [need ref here] but as can be seen the above is a more tractable expression.
  (copy the x=1/2 expansion here).
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The first eigenvalue is known as the GKW constant, and is about 0.3036.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The eigenvector equation to be solved is then 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}G_{mn}v_{n}=\lambda v_{m}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
-\begin_inset Formula $v=\{ v_{n}\}$
-\end_inset 
+\begin_inset Formula $v=\{v_{n}\}$
+\end_inset
 
  is an eigenvector with components 
 \begin_inset Formula $v_{n}$
-\end_inset 
+\end_inset
 
 .
  This beast has a discrete spectrum (need reference for proof), and so we
  may label the eigenvalues and eigenvectors with a label 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 , so that the 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 'th eigen equation is 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}G_{mn}v_{nk}=\lambda_{k}v_{mk}\label{eq:Eigenvalue eqn}\end{equation}
 
-\end_inset 
+\end_inset
 
  The 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 'th polynomial eigenfunction of the GKW operator is then given by 
 \begin_inset Formula \begin{equation}
 \rho_{k}(x)=\sum_{n=0}^{\infty}v_{nk}(1-x)^{k}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The zeroth eigenfunction was given by Gauss as 
 \begin_inset Formula \begin{equation}
 \rho_{0}(x)=\frac{1}{1+x}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and corresponds to the eigenvector 
 \begin_inset Formula $v_{n0}=2^{-n}$
-\end_inset 
+\end_inset
 
 .
  Again, we note the curious appearance of powers of two.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Based on numerical explorations (reported below), the series appears to
  be easily convergent even for 
 \begin_inset Formula $x=0$
-\end_inset 
+\end_inset
 
 .
  In particular, it appears that 
 \begin_inset Formula $\lim_{n\to\infty}v_{nk}=0$
-\end_inset 
+\end_inset
 
 , and that furthermore, that 
 \begin_inset Formula $\lim_{n\to\infty}v_{nk}/v_{n+1,k}=2$
-\end_inset 
+\end_inset
 
 .
  One must not conclude that this implies that 
 \begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n})$
-\end_inset 
+\end_inset
 
 , as this sort of asymptotic behaviour conflicts with the zeroth eigenfunction.
  Thus, one might guess at 
 \begin_inset Formula $v_{nk}~\mathcal{O}(n^{s}2^{-n})$
-\end_inset 
+\end_inset
 
  but numeric data suggests that 
 \begin_inset Formula $s=0$
-\end_inset 
+\end_inset
 
 .
  Numeric data also excludes the form 
 \begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n}\log n)$
-\end_inset 
+\end_inset
 
  although it is possible that the softer 
 \begin_inset Formula $v_{nk}~\mathcal{O}(2^{-n}\log\log n)$
-\end_inset 
+\end_inset
 
  might hold.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The coefficients are oscillatory, with 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  half-oscillations in the 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 'th eigenvector.
  That is, for 
 \begin_inset Formula $k=0$
-\end_inset 
+\end_inset
 
 , all of the 
 \begin_inset Formula $v_{n0}$
-\end_inset 
+\end_inset
 
  can be taken to be of the same sign.
  For 
 \begin_inset Formula $k=1$
-\end_inset 
+\end_inset
 
 , the 
 \begin_inset Formula $v_{n1}$
-\end_inset 
+\end_inset
 
  change sign, once, between 
 \begin_inset Formula $n=0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $n=1$
-\end_inset 
+\end_inset
 
 .
  For 
 \begin_inset Formula $k=2$
-\end_inset 
+\end_inset
 
 , the coefficients change sign twice, and so on.
  This is shown in the graph below.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The left eigenvectors are given by 
 \begin_inset Formula \begin{equation}
 \sum_{m=0}^{\infty}w_{km}G_{mn}=\lambda_{k}w_{kn}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and correspond to left eigenfunctions 
 \begin_inset Formula \begin{equation}
 \ell_{k}(x)=\sum_{n=0}^{\infty}w_{kn}(-1)^{n}\delta^{(n)}(1-x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\delta^{(n)}(x)$
-\end_inset 
+\end_inset
 
  is the 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
 'th derivative of the Dirac delta function.
  The zeroth left eigenvector is given by 
 \begin_inset Formula $w_{0n}=1/(n+1)$
-\end_inset 
+\end_inset
 
 .
  Very curiously, this is the harmonic series.
@@ -662,159 +729,178 @@ The left eigenvectors are given by
  another manifestation of the duality between the dyadic rationals and rationals
 , the duality between the Stern-Brocot tree and the dyadic tree, the duality
  captured in the Minkowski Question Mark function.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 In analogy to the right eigenvectors, the series again appears to be not
  only convergent in that 
 \begin_inset Formula $\lim_{n\to\infty}w_{kn}=0$
-\end_inset 
+\end_inset
 
 , but also that a strict ratio is maintained in the limit: 
 \begin_inset Formula $\lim_{n\to\infty}(n+2)\, w_{kn}/(n+1)\, w_{k,n+1}=1$
-\end_inset 
+\end_inset
 
 , with strict equality holding for all 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
 , and not just in the limit, when 
 \begin_inset Formula $k=0$
-\end_inset 
+\end_inset
 
 .
  A similar oscillatory behaviour is shown as well.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Identity
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 We have the identity
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}G_{mn}p^{-n}=p\left[\zeta(m+1)-1-\zeta\left(m+1,2+\frac{1}{p-1}\right)\right]\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  In particular, for 
 \begin_inset Formula $p=2$
-\end_inset 
+\end_inset
 
 , the right hand side equals 
 \begin_inset Formula $p^{-m}$
-\end_inset 
+\end_inset
 
 ; this corresponds to the known eigenvector.
  Note that for any value of 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 , the leading term on the right is 
 \begin_inset Formula $2^{-(m+1)}$
-\end_inset 
+\end_inset
 
 .
  A simple way to arrive at this is to note that 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{\infty}p^{-n}(1-x)^{n}=\frac{p}{p-1+x}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and then evaluate this simple expression under the action of the GKW operator.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 The Kernel
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 We would like to know what the kernel of the GKW operator is.
  Consider 
 \begin_inset Formula \begin{equation}
 k(x)=\frac{1}{x^{2}}\exp(2k+1)\frac{\pi}{x}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Then 
 \begin_inset Formula \begin{eqnarray}
 \left[U_{h}k\right](x) & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}\cos(2k+1)n\pi\nonumber \\
  & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}(-)^{n}\label{eq:}\end{eqnarray}
 
-\end_inset 
+\end_inset
 
  The value of the sum is ambiguous.
  One is tempted to cancel terms pairwise, and thus declare 
 \begin_inset Formula $k(x)$
-\end_inset 
+\end_inset
 
  to belong to the kernel.
  On the other hand, we've seen that the regularized sum is not zero: 
 \begin_inset Formula \begin{equation}
 \lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}e^{-tk}=\frac{1}{2}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and so one is left in a bit of a quandary.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Some progress might be made by applying the theory of the Henstock-Kurzweil
  integral.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Numeric Attacks
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 One can mount numeric attacks on GKW.
  One can find, for instance, that 
 \begin_inset Formula \begin{equation}
 \rho_{1}(x)\approx\frac{-3}{4}+\frac{7}{4}\frac{1}{(1+x)^{5/2}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  is accurate to about one or two percent over the domain 
 \begin_inset Formula $x\in[0,1]$
-\end_inset 
+\end_inset
 
 .
  It is associated with an eigenvalue 
 \begin_inset Formula $\lambda_{1}\approx0.303663$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
 
-\begin_inset Note
-collapsed true
-
-\layout Standard
-
+\begin_layout Standard
 programs are in fractal/misc/continued-frobenius/matrix/eigen.c
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The matrix elements in 
-\begin_inset LatexCommand \ref{eq:GKW-matrix-elts}
+\begin_inset LatexCommand ref
+reference "eq:GKW-matrix-elts"
 
-\end_inset 
+\end_inset
 
  are easily numerically ...
  etc.
  Using the LAPACK DGEEV eigenvalue-finding routine.
  Can be numerically compared to previously published values (need ref).
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float table
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 GKW Eigenvalues
-\layout Standard
+\end_layout
+
+\end_inset
 
 
-\begin_inset  Tabular
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
 <lyxtabular version="3" rows="15" columns="3">
 <features>
 <column alignment="center" valignment="top" leftline="true" width="0">
@@ -824,833 +910,919 @@ GKW Eigenvalues
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 N
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 Eigenvalue 
 \begin_inset Formula $\lambda_{n}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 Ratio 
 \begin_inset Formula $\lambda_{n}/\lambda_{n+1}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 0
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 1
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -3.29312425436788
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 1
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -0.303663002898733
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -3.0100062440358
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 2
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 0.100884509293104
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -2.842124671335
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 3
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -0.0354961590
-\family default 
-\series default 
-\shape default 
-\size default 
-\emph default 
-\bar default 
-\noun default 
-\color default
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
 4
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 -
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 2.763682528286
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 4
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 0.01284379036244
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -2.7224239233
-\family default 
-\series default 
-\shape default 
-\size default 
-\emph default 
-\bar default 
-\noun default 
-\color default
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
 2
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 5
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -0.00471777751158
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -2.69791537939
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 6
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 0.0017486751243
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -2.681931264
-\family default 
-\series default 
-\shape default 
-\size default 
-\emph default 
-\bar default 
-\noun default 
-\color default
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
 5
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 7
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -0.0006520208580
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -2.67077775
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 8
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 0.00024413145
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -2.662606
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 9
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -9.16889
-\family default 
-\series default 
-\shape default 
-\size default 
-\emph default 
-\bar default 
-\noun default 
-\color default
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
 
 \begin_inset Formula $\times10^{-5}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -2.65651
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 10
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 3.45147
-\family default 
-\series default 
-\shape default 
-\size default 
-\emph default 
-\bar default 
-\noun default 
-\color default
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
 
 \begin_inset Formula $\times10^{-5}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -2.653
-\family default 
-\series default 
-\shape default 
-\size default 
-\emph default 
-\bar default 
-\noun default 
-\color default
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
 9
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 11
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-
-\family roman 
-\series medium 
-\shape up 
-\size normal 
-\emph off 
-\bar no 
-\noun off 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
 \color none
 -1.3005
-\family default 
-\series default 
-\shape default 
-\size default 
-\emph default 
-\bar default 
-\noun default 
-\color default
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
 
 \begin_inset Formula $\times10^{-5}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 12
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 4.860
 \begin_inset Formula $\times10^{-6}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 13
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 -1.7
 \begin_inset Formula $\times10^{-6}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 </lyxtabular>
 
-\end_inset 
+\end_inset
 
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This table lists te first dozen eigenvalues of the polynomial representation
  GKW operator.
  The numbers are certain to about about the last figure or two quoted.
  They were obtained by nmerically inverting a 55 by 55 matrix.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 GKW Right Eigenfunctions
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename revec.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This graph shows the right eigenfunctions of the GKW operator.
  These were computed numerically, by truncating the GKW operator to a 50
  by 50 matrix and then solving for the eigenvectors of the matrix.
  The elements of the eigenvectors appear to be well-behaved, being oscillatory
  for small values, and then converging to zero rapidly.
  That is, if 
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 Right Eigenvector Coefficients
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename eigen-coeffs.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This figure shows a graph of the coefficients of the first eight right-eigenvect
 ors of the GKW operator.
  The red line corresponds to the zeroth eigenvector with components 
 \begin_inset Formula $v_{n0}=2^{-(n+1)}$
-\end_inset 
+\end_inset
 
 .
  All of these were obtained numerically.
  The normalization used here is to require that 
 \begin_inset Formula $\sum_{n=0}^{\infty}v_{nk}=1$
-\end_inset 
+\end_inset
 
 .
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 Left Eigenvector Coefficients
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename left-coeffs.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This figure shows a graph of the coefficients of the first eight left-eigenvecto
 rs of the GKW operator.
  The red line corresponds to the zeroth eigenvector with components 
 \begin_inset Formula $w_{n0}=1/(n+1)$
-\end_inset 
+\end_inset
 
 .
  All of these were obtained numerically.
  The normalization used here is to require that 
 \begin_inset Formula $w_{nk}~1/(n+1)$
-\end_inset 
+\end_inset
 
  for large values of 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
 .
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Singular Sawtooth of the First Kind
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Gauss Map 
 \begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
-\end_inset 
+\end_inset
 
  is used in the construction of continued fractions.
  In this section, we will study a model for this function, where we replace
  the curve by a set of straight lines arranged between values of 
 \begin_inset Formula $1/n$
-\end_inset 
+\end_inset
 
  for integer 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
 .
  This forms a singular sawtooth, with a singularity at 
 \begin_inset Formula $x=0.$
-\end_inset 
+\end_inset
 
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 w(x)=\left\{ \begin{array}{ccc}
 2-2x & \;\textrm{ for \;} & \frac{1}{2}<x\leq1\\
@@ -1658,107 +1830,121 @@ w(x)=\left\{ \begin{array}{ccc}
 4-12x & \;\textrm{ for \;} & \frac{1}{4}<x\leq\frac{1}{3}\\
 n+1-n(n+1)x & \;\textrm{ for \;} & \frac{1}{n+1}<x\leq\frac{1}{n}\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  This function is pictured in figure 
-\begin_inset LatexCommand \ref{cap:The-Singular-Sawtooth}
+\begin_inset LatexCommand ref
+reference "cap:The-Singular-Sawtooth"
 
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "cap:The-Singular-Sawtooth"
 
-\begin_inset LatexCommand \label{cap:The-Singular-Sawtooth}
-
-\end_inset 
+\end_inset
 
 The Singular Sawtooth of the First Kind
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename saw-first.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This sawtooth function joins values of 
 \begin_inset Formula $1/n$
-\end_inset 
+\end_inset
 
  with straight lines.
-\end_inset 
+\end_layout
+
+\end_inset
 
  The Frobenius-Perron operator for this function is exactly solvable, and
  provides a toy model of the Gauss-Kuzmin-Wirsing operator.
  The Frobenius-Perron operator of this sawtooth, acting on a general function
  
 \begin_inset Formula $f(x)$
-\end_inset 
+\end_inset
 
 , is given by
 \begin_inset Formula \begin{equation}
 \left[U_{w}f\right](x)=\sum_{x':w(x')=x}\frac{f(x')}{\left|dw(x')/dx'\right|}=\sum_{n=1}^{\infty}\frac{1}{n(n+1)}f\left(\frac{n+1-x}{n(n+1)}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 We develop a representation of this operator in the monomial-basis Hilbert
  space below.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 The Polynomial Eigenfunctions
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 We will want to consider the action of this operator on polynomials of 
 \begin_inset Formula $y=1-x$
-\end_inset 
+\end_inset
 
 , so that we can express 
 \begin_inset Formula $f(x)$
-\end_inset 
+\end_inset
 
  as a Taylor's expansion about 
 \begin_inset Formula $y=0$
-\end_inset 
+\end_inset
 
 .
  Lets make this change-of-variable now, and write 
 \begin_inset Formula \begin{equation}
 f(y)=\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}y^{k}\equiv\sum_{k=0}^{\infty}a_{k}y^{k}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  so that 
 \begin_inset Formula \begin{equation}
 \left[U_{w}f\right](y)=\sum_{k=0}^{\infty}b_{k}y^{k}=\sum_{n=1}^{\infty}\frac{1}{n(n+1)}\sum_{k=0}^{\infty}a_{k}\left(\frac{n+y}{n(n+1)}\right)^{k}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Rearranging the sums, and equating terms with the same power of 
 \begin_inset Formula $y$
-\end_inset 
+\end_inset
 
 , we define the matrix elements 
 \begin_inset Formula $W_{mk}$
-\end_inset 
+\end_inset
 
  so that 
 \begin_inset Formula \begin{equation}
 b_{m}=\sum_{k=0}^{\infty}W_{mk}a_{k}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and find that 
 \begin_inset Formula \begin{equation}
@@ -1768,13 +1954,13 @@ k\\
 m\end{array}\right)\sum_{n=1}^{\infty}n^{-m-1}(n+1)^{-k-1} & \;\textrm{ for \;} & k\geq m\\
 0 & \;\textrm{ for \;} & k<m\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where we use 
 \begin_inset Formula $\left(\begin{array}{c}
 k\\
 m\end{array}\right)$
-\end_inset 
+\end_inset
 
  to denote the binomial coefficient.
  This matrix is upper-triangular, and thus has its eigenvalues along the
@@ -1783,185 +1969,190 @@ m\end{array}\right)$
 \begin_inset Formula \begin{equation}
 \lambda_{k}=\sum_{n=1}^{\infty}\frac{1}{n^{k+1}(n+1)^{k+1}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  so that 
 \begin_inset Formula $\lambda_{0}=1$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\lambda_{1}=2\zeta(2)-3$
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\zeta(x)$
-\end_inset 
+\end_inset
 
  is the Riemann zeta.
  Numerically, we can see that the first few eigenvalues are 
 \begin_inset Formula $\lambda_{1}=0.289868...$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\lambda_{2}=0.130396...$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\lambda_{3}=0.0633278...$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\lambda_{4}=0.031383...$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\lambda_{5}=0.0156468...$
-\end_inset 
+\end_inset
 
  We can trivially see that the ratio of eigenvalues settles down to 
 \begin_inset Formula $\lambda_{k}/\lambda_{k+1}=2$
-\end_inset 
+\end_inset
 
  for large 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 , since the first term of the sum will dominate for large 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 We can solve the operator through recursion on the matrix elements of a
  related operator, by observing that 
 \begin_inset Formula \begin{equation}
 Z_{mk}\equiv\sum_{n=1}^{\infty}\frac{1}{n^{m}(n+1)^{k}}\left[\frac{1}{n}-\frac{1}{n+1}\right]=Z_{m,k-1}-Z_{m-1,k}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  These recurrence relations are bounded on the edges by 
 \begin_inset Formula $Z_{00}=1$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $Z_{01}=2-\zeta(2)$
-\end_inset 
+\end_inset
 
  and thus 
 \begin_inset Formula \begin{eqnarray}
 Z_{0k} &  & =Z_{0,k-1}-\left(\zeta(k+1)-1\right)=1-\sum_{j=1}^{k}\left[\zeta(j+1)-1\right]\label{eq:}\end{eqnarray}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $Z_{10}=\zeta(2)-1$
-\end_inset 
+\end_inset
 
  so that 
 \begin_inset Formula \begin{equation}
 Z_{m0}=\zeta(m+1)-Z_{m-1,0}=(-)^{m}\left[1+\sum_{j=1}^{m}(-)^{j}\zeta(j+1)\right]\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and we have 
 \begin_inset Formula $Z_{mk}=W_{mk}$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $m\leq k$
-\end_inset 
+\end_inset
 
  .
  The first few eigenfunctions are 
 \begin_inset Formula \[
 e_{0}(y)=1\]
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \[
 e_{1}(y)=1-2y\]
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \begin{eqnarray}
 e_{2}(y) & = & \frac{15-13\zeta(2)-9\zeta(3)+2\zeta(2)[\zeta(2)+3\zeta(3)]}{3(13\zeta(2)-8\zeta(3))(3-2\zeta(2))}+\nonumber \\
  &  & +\frac{6\zeta(2)+2\zeta(3)-12}{13-8\zeta(2)}\, y+y^{2}\label{eq:}\end{eqnarray}
 
-\end_inset 
+\end_inset
 
  We see that although the eigenfunctions are polynomials and are exactly
  solvable, they quickly spiral out of control.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 XXX To Do: Double-check 
 \begin_inset Formula $e_{2}$
-\end_inset 
+\end_inset
 
  Provide the closed-form finite-sum matrix elements.
  Provide graphs of the first dozen polynomials.
  Discuss the similarity transform that takes 
 \begin_inset Formula $w(x)$
-\end_inset 
+\end_inset
 
  to 
 \begin_inset Formula $h(x)$
-\end_inset 
+\end_inset
 
  and discuss why this fails to preserve the eigenvalues.
  What are the shift-states of this operator? What are the continuous-eigenvalue
  (square-integrable) eigenfunctions? Graph these eigenfunctions, see what
  kind of fractals they look like.
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Singular Sawtooth of the Second Kind
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The singular sawtooth of the second kind is given by the dyadic-space conjugate
  of the continued-fraction shift function 
 \begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
-\end_inset 
+\end_inset
 
 , that is, 
 \begin_inset Formula \begin{equation}
 c(x)=?\left(\frac{1}{?^{-1}(x)}-\left\lfloor \frac{1}{?^{-1}(x)}\right\rfloor \right)=(?\circ h\circ?^{-1})(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $?(x)$
-\end_inset 
+\end_inset
 
  is the Minkowski Question Mark, presented in earlier chapters.
  This map consists of straight-line segments between values of 
 \begin_inset Formula $1/2^{k}$
-\end_inset 
+\end_inset
 
 , as pictured in figure 
-\begin_inset LatexCommand \ref{cap:Singular-Sawtooth,-Second}
+\begin_inset LatexCommand ref
+reference "cap:Singular-Sawtooth,-Second"
 
-\end_inset 
+\end_inset
 
 , and can be written as 
 \begin_inset Formula \begin{equation}
 c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Just as the Gauss Map is able to lop off the leading term of the continued
  fraction expansion for 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , so this map is able to lop off all of the leading zeros of the binary
  expansion for 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 .
  The downward slope of the sawtooth just reflects the binary expansion,
@@ -1971,16 +2162,17 @@ c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\label{eq:
  the orbits of points under the Gauss Map.
  This is indeed the very idea of a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 conjugate map
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Frobenius-Perron operator of this function provides a second model of
  the Gauss-Kuzmin-Wirsing operator.
  It can be solved exactly; unfortunately, while one might think that there
@@ -1988,69 +2180,82 @@ The Frobenius-Perron operator of this function provides a second model of
  transform is dastardly singular, being just the Jacobian of the Minkowski
  Question Mark 
 \begin_inset Formula $(?'\circ?^{-1})(x)$
-\end_inset 
+\end_inset
 
 , which we examine in detail in a related paper of this series.
  Thus, although the point dynamics of this sawtooth map are completely isomorphi
 c to the point dynamics of the Gauss Map, the spectra of the associated
  transfer operators are 
-\emph on 
+\emph on
 not
-\emph default 
+\emph default
  identical.
  This is perhaps the most surprising result of this paper.
  The FP operator is 
 \begin_inset Formula \begin{equation}
 \left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-x}{2^{n}}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The following sections develop this operator in different function spaces.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "cap:Singular-Sawtooth,-Second"
 
-\begin_inset LatexCommand \label{cap:Singular-Sawtooth,-Second}
-
-\end_inset 
+\end_inset
 
 Singular Sawtooth, Second Kind
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename saw-second.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Picture of the second kind of sawtooth.
  
-\end_inset 
+\end_layout
+
+\end_inset
 
  
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 The Polynomial Basis Eigenfunctions
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 As before, we change variables to 
 \begin_inset Formula $y=1-x$
-\end_inset 
+\end_inset
 
 , expand both sides in terms of 
 \begin_inset Formula $y$
-\end_inset 
+\end_inset
 
 , and match terms to find the matrix elements 
 \begin_inset Formula \begin{equation}
@@ -2058,63 +2263,63 @@ C_{mk}=\left(\begin{array}{c}
 k\\
 m\end{array}\right)\frac{1}{2^{k+1}-1}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which is upper triangular (we take the binomial coefficients to be vanishing
  when 
 \begin_inset Formula $k<m$
-\end_inset 
+\end_inset
 
 ).
  The eigenvalues lie along the diagonal.
  The first few are 
 \begin_inset Formula $\lambda_{0}=1$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\lambda_{1}=1/3$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\lambda_{2}=1/7$
-\end_inset 
+\end_inset
 
 , 
-\emph on 
+\emph on
 etc
-\emph default 
+\emph default
 .
  with the ratio of successive eigenvalues tending to 2.
  The first few eigenvectors are 
 \begin_inset Formula \[
 e_{0}=1\]
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \[
 e_{1}=1-2y=2x-1\]
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \[
 e_{2}=1-\frac{18}{5}y+\frac{12}{5}y^{2}=\frac{-1}{5}\left(1+6x-12x^{2}\right)\]
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula \[
 e_{3}=1-\frac{66}{13}y+\frac{84}{13}y^{2}-\frac{32}{13}y^{3}=\frac{-1}{13}\left(1+6x+12x^{2}-32x^{3}\right)\]
 
-\end_inset 
+\end_inset
 
 
 \begin_inset Formula \begin{eqnarray}
 e_{4} & = & 1-\frac{36450}{5597}y+\frac{67620}{5597}y^{2}-\frac{50400}{5597}y^{3}+\frac{13440}{5597}y^{4}\nonumber \\
  & = & \frac{-1}{29\cdot193}\left(193+1350x+2940x^{2}+3360x^{3}-13440x^{4}\right)\label{eq:}\end{eqnarray}
 
-\end_inset 
+\end_inset
 
  As we can see, the complexity of individual eigenvectors spirals out of
  control; there's no obvious simple closed form expression for higher eigenvecto
@@ -2123,83 +2328,96 @@ rs.
  matrix.
  This is curious, because the matrix itself is so curiously simple, and
  superficially similar to that for the Bernoulli map.
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Standard
+\begin_inset Caption
 
+\begin_layout Standard
 Second Sawtooth Polynomials
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename saw-eigen.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Eigenvectors of the second sawtooth.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 The Failure of the Similarity Transform for the Polynomial Basis
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Under normal circumstances, whenever one has a pair of maps 
 \begin_inset Formula $\alpha(x)$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\beta(x)$
-\end_inset 
+\end_inset
 
  that are conjugate to each other through an invertible function 
 \begin_inset Formula $\phi(x)$
-\end_inset 
+\end_inset
 
  such that 
 \begin_inset Formula $\alpha(x)=(\phi\circ\beta\circ\phi^{-1})(x)$
-\end_inset 
+\end_inset
 
 , then there exists a similarity transform 
 \begin_inset Formula $S_{\phi}$
-\end_inset 
+\end_inset
 
  such that the Frobenius-Perron operators are also conjugate; that is, 
 \begin_inset Formula $U_{\alpha}=S_{\phi}U_{\beta}S_{\phi}^{-1}$
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $S_{\phi}^{-1}=S_{\phi^{-1}}$
-\end_inset 
+\end_inset
 
 .
  Formally, one finds that 
 \begin_inset Formula $S_{\phi}=1/(\phi'\circ\phi^{-1})$
-\end_inset 
+\end_inset
 
  where the prime denotes differentiation: 
 \begin_inset Formula $\phi'(x)=d\phi(x)/dx$
-\end_inset 
+\end_inset
 
  .
  Since the continued-fraction shift function is conjugate to the sawtooth,
  one might hope that GKW would be conjugate to 
 \begin_inset Formula $U_{C}$
-\end_inset 
+\end_inset
 
 , that is, 
 \begin_inset Formula $U_{h}=S_{?}U_{C}S_{?}^{-1}$
-\end_inset 
+\end_inset
 
 .
  Unfortunately, the Minkowski Question Mark is highly singular and is not
@@ -2207,67 +2425,71 @@ Under normal circumstances, whenever one has a pair of maps
  transform using the polynomial function basis.
  Another way to deduce this is to note that the similarity transform 
 \begin_inset Formula $S_{\phi}$
-\end_inset 
+\end_inset
 
 , working as a traditional, ordinary operator, normally preserves the eigenvalue
 s; that is, the eigenvalues of 
 \begin_inset Formula $U_{\alpha}$
-\end_inset 
+\end_inset
 
  equal those of 
 \begin_inset Formula $U_{\beta}$
-\end_inset 
+\end_inset
 
 .
  In the current case, we see trouble in that the eigenvalues of 
 \begin_inset Formula $U_{C}$
-\end_inset 
+\end_inset
 
  are not those of GKW.
  They are not even 'close', in that the ratio of tends to 
 \begin_inset Formula $\lambda_{k}/\lambda_{k+1}=2$
-\end_inset 
+\end_inset
 
  whereas for the GKW the ratio is 2.61803...
- (square of golden mean (see Phillipe Flajolet and Brigitte Vallée, On the
+ (square of golden mean (see Phillipe Flajolet and Brigitte VallÃ©e, On the
  Gauss-Kuzmin-Wirsing Constant (1995).)) 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 However, there are suggestive elements.
  For example, the function argument 
 \begin_inset Formula $(2-x)/2^{n}$
-\end_inset 
+\end_inset
 
  is just the dyadic polynomial 
 \begin_inset Formula $(g_{D}^{n-1}r_{D}g_{D})(x)$
-\end_inset 
+\end_inset
 
 .
  Tantalizingly, the corresponding Moebius transform is 
 \begin_inset Formula $(g_{C}^{n-1}r_{C}g_{C})(x)=1/(n+x)$
-\end_inset 
+\end_inset
 
  which is the function argument to the GKW operator.
  This suggests the tantalizing re-write of the terms of GKW as 
 \begin_inset Formula \begin{equation}
 f\left(\frac{1}{n+x}\right)=f\circ?^{-1}\left(\frac{2-?(x)}{2^{n}}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Also, one can do strange things such as xxx but why do we want to do that?
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The point is to not give up hope on the operator relationships, even though
  the polynomial basis breaks the relationship.
  Thus, we are motivated to explore other bases, and not just the polynomial
  basis.
  Fortunately, we can find some of these.
  
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Fractal Eigenfunctions of the Second Sawtooth
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Takagi curve can be used to build an alternate set of eigenfunctions
  for the second sawtooth, possessing continuous-spectrum eigenvalues.
  These eigenfunctions are not differentiable, and thus cannot be obtained
@@ -2276,48 +2498,50 @@ The Takagi curve can be used to build an alternate set of eigenfunctions
  They can be used to build an alternate function space, in which the Second
  Sawtooth remains exactly solvable.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 We recognize from the studying of the dyadic representation of the Modular
  Group 
 \begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
  that the second sawtooth is expressed in terms of the group element 
 \begin_inset Formula \begin{equation}
 \left[g_{D}^{k-1}r_{D}g_{D}\right](x)=\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  that is, 
 \begin_inset Formula \begin{equation}
 \left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\left[g_{D}^{n-1}r_{D}g_{D}\right](x)\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 and thus functions 
 \begin_inset Formula $f(x)$
-\end_inset 
+\end_inset
 
  possessing the modular group symmetry are candidates for solving the operator
  
 \begin_inset Formula $U_{C}$
-\end_inset 
+\end_inset
 
 .
  The candidates we have in mind are of course the family of Takagi Curves.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 We begin by defining the Takagi Curve as 
 \begin_inset Formula \begin{equation}
 t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\tau(x)$
-\end_inset 
+\end_inset
 
  is the triangle wave: 
 \begin_inset Formula \begin{equation}
@@ -2325,7 +2549,7 @@ t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x-\left\lfloor 2^{k}x\right\rflo
 2x & \;\textrm{ when }\; & 0\leq x\leq1/2\\
 2(1-x) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  This form of the Takagi curve transforms under the three-dimensional representa
 tion of the Modular Group.
@@ -2336,107 +2560,113 @@ g_{3}^{n}=\left(\begin{array}{ccc}
 0 & 1/2^{n} & 0\\
 0 & q_{n}(w) & w\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $q_{n}(w)$
-\end_inset 
+\end_inset
 
  is the polynomial 
 \begin_inset Formula \begin{equation}
 q_{n}(w)=\frac{1}{2^{n-1}}\sum_{k-0}^{n-1}(2w)^{k}=\frac{1}{2^{n-1}}\left(\frac{1-(2w)^{n}}{1-2w}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  We write out the full matrix form for 
 \begin_inset Formula $g_{3}^{k-1}r_{3}g_{3}$
-\end_inset 
+\end_inset
 
  and apply the group action isomorphism 
 \begin_inset Formula $t_{w}g_{D}^{k-1}r_{D}g_{D}=g_{3}^{k-1}r_{3}g_{3}t_{w}$
-\end_inset 
+\end_inset
 
  to obtain 
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\right)=q_{k-1}(w)+x\left(w^{k-1}-q_{k-1}(w)/2\right)+w^{k}t_{w}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Inserting the above back into the definition for the sawtooth operator,
  and performing the sum, we get
 \begin_inset Formula \begin{equation}
 \left[U_{C}t_{w}\right](x)=\frac{4}{3(2-w)}+\frac{x}{3(2-w)}+\frac{wt_{w}(x)}{2-w}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  From this, we can immediately read off the eigenvalue as 
 \begin_inset Formula $w/(2-w)$
-\end_inset 
+\end_inset
 
 .
  To get the eigenfunction, we need to complete the diagonalization by using
  
 \begin_inset Formula $\left[U_{C}1\right](x)=1$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\left[U_{C}x\right](x)=(2-x)/3$
-\end_inset 
+\end_inset
 
  to get the eigenfunction 
 \begin_inset Formula \begin{equation}
 E_{2}(x)=\frac{2-w}{2(w+1)(w-1)}+\frac{x}{2(w+1)}+t_{w}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  It should be clear from this presentation that the higher and lower dimensional
  Takagi curves, of both even and odd parity, give eigenvectors and eigenvalues
  as well.
  We present a few more here:
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 XXX to do, present 
 \begin_inset Formula $E_{1}$
-\end_inset 
+\end_inset
 
 and the odd-parity 
 \begin_inset Formula $E_{2}$
-\end_inset 
+\end_inset
 
 and both parities for 
 \begin_inset Formula $E_{3}$
-\end_inset 
+\end_inset
 
  as well.
  Show graphs as well.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 XXX Note a shallow relationship to the Gaussian Binomial: viz.
 \begin_inset Formula \[
 \left(\begin{array}{c}
 n\\
 1\end{array}\right)_{x}\equiv\frac{1-x^{n}}{1-x}\]
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Previously, we saw that the Takagi Curves served as basis vectors for a
  space of degenerate eigenfunctions of the Bernoulli Map, associated with
  arbitrary eigenvalue.
  We saw that this space could also be spanned by the Hurwitz Zeta, through
  a change of basis.
  Thus, we expect that we can extend these results to this map as well.
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Isola Map 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Stefano Isola proposes studying a map of deceptive simplicity
-\begin_inset LatexCommand \cite{key-12}
+\begin_inset LatexCommand cite
+key "key-12"
 
-\end_inset 
+\end_inset
 
 .
  Given by 
@@ -2445,28 +2675,28 @@ F(x)=\left\{ \begin{array}{c}
 x/(1-x)\;\textrm{ if }\;0\leq x\leq1/2\\
 (1-x)/x\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  it is symmetric about 
 \begin_inset Formula $x=1/2$
-\end_inset 
+\end_inset
 
 : that is, 
 \begin_inset Formula $F(x)=F(1-x)$
-\end_inset 
+\end_inset
 
 , and has a very simple tent-like shape, and this is the source of the deception.
  One wants to hastily conclude that it is topologically equivalent to the
  standard tent map 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 \tau(x)=\left\{ \begin{array}{c}
 2x\;\textrm{ if }\;0\leq x\leq1/2\\
 2-2x\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and thus that the spectrum of its Frobenius-Perron Operator is identical
  to that of the Bernoulli Map, and that this map can be trivially brushed
@@ -2477,20 +2707,20 @@ x/(1-x)\;\textrm{ if }\;0\leq x\leq1/2\\
 \begin_inset Formula \begin{equation}
 F(x)=(?^{-1}\circ\tau\circ?)(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and so the relationship is anything but trivial.
  The easiest way to see this is to note that we can write 
 \begin_inset Formula $F$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\tau$
-\end_inset 
+\end_inset
 
  are combinations of the modular group element 
 \begin_inset Formula $g^{-1}$
-\end_inset 
+\end_inset
 
 :
 \begin_inset Formula \begin{equation}
@@ -2498,7 +2728,7 @@ F(x)=\left\{ \begin{array}{c}
 g_{C}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
 (g_{C}^{-1}\circ r)(x)\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  following the notation of earlier chapters, and
 \begin_inset Formula \begin{equation}
@@ -2506,7 +2736,7 @@ g_{C}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
 g_{D}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
 (g_{D}^{-1}\circ r)(x)\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Just as we saw with the second sawtooth, the point dynamics of the Isola
  Map and the Tent Map are isomorphic to each other, but the eigenvalue spectra
@@ -2515,32 +2745,34 @@ g_{D}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
 \begin_inset Formula \begin{equation}
 \left[\mathcal{P}f\right](x)=\frac{1}{\left(1+x\right)^{2}}\left[f\left(\frac{x}{x+1}\right)+f\left(\frac{1}{x+1}\right)\right]\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The Gauss-Kuzmin-Wirsing operator can be constructed through some simple
  operator relationships on 
 \begin_inset Formula $\mathcal{P}$
-\end_inset 
+\end_inset
 
  and so it is a worthwhile goal to attempt to solve 
 \begin_inset Formula $\mathcal{P}$
-\end_inset 
+\end_inset
 
 .
  As we will see below, this seems to be an even harder task.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 The (Lack of a) Polynomial Basis
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Based on our previous luck, we attempt to define the operator 
 \begin_inset Formula $\mathcal{P}$
-\end_inset 
+\end_inset
 
  in the polynomial basis.
  First, we attempt an expansion at 
 \begin_inset Formula $x=0$
-\end_inset 
+\end_inset
 
 .
  This leads to 
@@ -2552,14 +2784,14 @@ k+1\end{array}\right)+\Theta_{k\leq n}(-)^{k}\left(\begin{array}{c}
 n+1\\
 k+1\end{array}\right)\right]\label{eq:}\end{eqnarray}
 
-\end_inset 
+\end_inset
 
  This matrix is not triangular, and is thus not directly solvable.
  It is also very ill-conditioned, making it not numerically tractable, at
  least, not in any simple fashion.
  As 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  gets large, the matrix elements grow exponentially on the diagonal.
  This is easily seen by applying Stirling's asymptotic formula for the factorial
@@ -2569,38 +2801,38 @@ k+1\end{array}\right)\right]\label{eq:}\end{eqnarray}
 n\\
 k\end{array}\right)\approx\frac{2^{n+1}}{\sqrt{2\pi n}}\exp\left(\frac{-(2k-n)^{2}}{2n}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  when 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  get large.
  Thus, along the diagonal, 
 \begin_inset Formula $\mathcal{P}_{nn}\approx4^{n+1}/2\sqrt{\pi n}$
-\end_inset 
+\end_inset
 
 , and the matrix is not tractable numerically, and would be painful to work
  with analytically, without defining some sort of regulator.
  Thus, we are motivated to look at the expansion at 
 \begin_inset Formula $x=1/2$
-\end_inset 
+\end_inset
 
 .
  Here, however, the situation is not much better.
  Defining 
 \begin_inset Formula $y=x-1/2$
-\end_inset 
+\end_inset
 
  so that 
 \begin_inset Formula \begin{equation}
 \left[\mathcal{Q}f\right](x)=\frac{1}{\left(y+3/2\right)^{2}}\left[f\left(\frac{y+1/2}{y+3/2}\right)+f\left(\frac{1}{y+3/2}\right)\right]\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  we work through the same set of steps to obtain 
 \begin_inset Formula \begin{eqnarray}
@@ -2613,111 +2845,185 @@ k+1\end{array}\right)\left(\begin{array}{c}
 k\\
 p\end{array}\right)\right]\label{eq:}\end{eqnarray}
 
-\end_inset 
+\end_inset
 
  which is far more complex, and only marginally less divergent: 
 \begin_inset Formula $\mathcal{Q}_{nn}\sim(16/9)^{n+1}$
-\end_inset 
+\end_inset
 
 .
  There is hardly any hope that a Taylor's expansion around any other value
  of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  will give a tractable result; the trick of using the Taylor's expansion
  to obtain polynomial eigenstates fails in this case.
  Indeed, it seems likely that the eigenstates will not be analytic, although
  it is not clear to me what theorem would establish or disprove this conjecture.
-\layout Section
+\end_layout
 
+\begin_layout Section
 Conclusions
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Apologies for the format of this paper.
  It's a veritable candy store of goodies; there are all these yummy toys
  to play with, which one first?
-\layout Bibliography
-\bibitem [asdf]{key-1}
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand bibtex
+options "plain"
+bibfiles "/home/linas/linas/fractal/paper/fractal"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+label "asdf"
+key "key-1"
+
+\end_inset
 
 Here is a very similarly titled paper with a very different subject matter:
  
-\begin_inset LatexCommand \htmlurl[Continued Fractions and Chaos]{http://www.cecm.sfu.ca/organics/papers/corless/confrac/html/confrac.html}
+\begin_inset LatexCommand htmlurl
+name "Continued Fractions and Chaos"
+target "http://www.cecm.sfu.ca/organics/papers/corless/confrac/html/confrac.html"
 
-\end_inset 
+\end_inset
 
  by Robert M.
  Corless
-\layout Bibliography
-\bibitem [Dri99]{key-2}
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+label "Dri99"
+key "key-2"
+
+\end_inset
 
 Dean Driebe, 
-\emph on 
+\emph on
 Fully Chaotic Maps and Broken Time Symmetry, 1999,
-\emph default 
+\emph default
  Kluwer Academic Publishers
-\layout Bibliography
-\bibitem [Man88]{key-3}
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+label "Man88"
+key "key-3"
+
+\end_inset
 
 Benoit Mandelbrot, in 
-\emph on 
+\emph on
 The Science of Fractal Images, ed.
  Heinz-Otto Peitgen, Dietmar Saupe,
-\emph default 
+\emph default
  (Springer-Verlag, 1988) p.
  246
-\layout Bibliography
-\bibitem [deR57]{key-4}
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+label "deR57"
+key "key-4"
+
+\end_inset
 
 Georges de Rham, 
-\emph on 
+\emph on
 On Some Curves Defined by Functional Equations
-\emph default 
- (1957), reprinted in
-\emph on 
- Classics on Fractals, ed.
+\emph default
+ (1957), reprinted in 
+\emph on
+Classics on Fractals, ed.
  Gerald A.
  Edgar
-\emph default 
+\emph default
 , (Addison-Wesley, 1993) pp.
  285-298
-\layout Bibliography
-\bibitem [Gas92]{key-10}
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+label "Gas92"
+key "key-10"
+
+\end_inset
 
 P.
  Gaspard, 
-\emph on 
+\emph on
 r-adic one-dimensional maps and the Euler summation formula
-\emph default 
+\emph default
 , 1992, Journal of Physics A: Mathematical and General, vol.
  25, L483-485.
  
-\layout Bibliography
-\bibitem [Ed74]{key-11}
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+label "Ed74"
+key "key-11"
+
+\end_inset
 
 H.
  M.
  Edwards, 
-\emph on 
+\emph on
 Riemann's Zeta Function,
-\emph default 
+\emph default
  1972, (Dover Publications, New York) pp.
  13ff 
-\layout Bibliography
-\bibitem [Iso03]{key-12}
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+label "Iso03"
+key "key-12"
+
+\end_inset
 
 Stefano Isola, 
-\emph on 
+\emph on
 On the Spectrum of Farey and Gauss Maps
-\emph default 
+\emph default
 , preprint, undated (2004 or earlier)
-\layout Bibliography
-\bibitem [Apo76]{key-13}
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+label "Apo76"
+key "key-13"
+
+\end_inset
 
 Tom M.
  Apostol, 
-\emph on 
+\emph on
 Introduction to Analytic Number Theory
-\emph default 
+\emph default
 , 1976, (Springer-Verlag, New York)
-\the_end
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "key-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
