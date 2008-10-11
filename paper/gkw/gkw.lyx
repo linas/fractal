@@ -44,7 +44,7 @@ The Gauss-Kuzmin-Wirsing Operator
 \end_layout
 
 \begin_layout Author
-Linas Vepstas <linas@linas.org>
+Linas Vepstas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
@@ -160,7 +160,13 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
 and is often called the Gauss Map.
  The Ruelle-Frobenius-Perron operator associated with the Gauss map is known
- as the Gauss-Kuzmin-Wirsing (GKW) operator 
+ as the Gauss-Kuzmin-Wirsing (GKW)
+\begin_inset LatexCommand cite
+key "Kuzmin1928,Wirsing1974"
+
+\end_inset
+
+ operator 
 \begin_inset Formula $\mathcal{L}_{h}$
 \end_inset
 
@@ -685,6 +691,48 @@ k\end{array}\right)(z+1)^{k}\]
 
 \end_layout
 
+\begin_layout Standard
+The generating function for the moments of the Minkowski Question Mark
+\begin_inset LatexCommand cite
+key "Alkauskas2007,Alkauskas2007a,Alkauskas2008"
+
+\end_inset
+
+ participates in an curious identity.
+ This generating function obeys the relation 
+\begin_inset Formula \[
+\frac{1}{z^{2}}G\left(\frac{1}{z}\right)+\frac{1}{\left(z+1\right)^{2}}G\left(\frac{1}{z+1}\right)=\frac{1}{z\left(z+1\right)}\]
+
+\end_inset
+
+which holds for complex-valued 
+\begin_inset Formula $z$
+\end_inset
+
+ (such as, for example, 
+\begin_inset Formula $z\mapsto z+n$
+\end_inset
+
+), and also 
+\begin_inset Formula \[
+\frac{1}{z}+\frac{1}{z^{2}}G\left(\frac{1}{z}\right)=G\left(z\right)-2G\left(z+1\right)\]
+
+\end_inset
+
+From this, one has the curious shift-over-by-one relationship 
+\begin_inset Formula \[
+\left[\mathcal{L}_{h}G\right]\left(z\right)=G\left(1+z\right)+\left[\mathcal{L}_{h}K\right]\left(z\right)\]
+
+\end_inset
+
+ where we've defined 
+\begin_inset Formula $K\left(z\right)=G\left(1+z\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
 \begin_layout Subsection
 Polynomial Representation
 \end_layout
@@ -697,7 +745,7 @@ One can attempt to solve GKW by working in the polynomial representation.
 
 , but this turns out to be a very poor choice, as we shall soon see.
  Thus, if we write 
-\begin_inset Formula $U_{h}f=g$
+\begin_inset Formula $\mathcal{L}_{h}f=g$
 \end_inset
 
  and substitute a Taylor's expansion for 
@@ -714,15 +762,15 @@ One can attempt to solve GKW by working in the polynomial representation.
 
 \end_inset
 
- or, adopting the bra-ket notation introduced earlier, we have 
+or, adopting the bra-ket notation introduced earlier, we have 
 \begin_inset Formula \begin{equation}
-\left\langle m\left|U_{h}\right|k\right\rangle =(-)^{m}\;\left(\begin{array}{c}
+\left\langle m\left|\mathcal{L}_{h}\right|k\right\rangle =(-)^{m}\;\left(\begin{array}{c}
 k+m+1\\
 m\end{array}\right)\,\zeta(k+m+2)\label{eq:}\end{equation}
 
 \end_inset
 
- where we've replaced the factorials by the binomial coefficient that they
+where we've replaced the factorials by the binomial coefficient that they
  form.
  Unfortunately, this is clearly a very poorly conditioned matrix.
  One can make some progress, if one wishes, by applying a regulator and
@@ -754,13 +802,22 @@ m\end{array}\right)\,\left[\zeta(k+m+2)-1\right]\label{eq:GKW-matrix-elts}\end{e
 
 \end_inset
 
- Other authors have chosen to expand about 
+Other authors have chosen to expand about 
 \begin_inset Formula $x=1/2$
 \end_inset
 
- [need ref here] but as can be seen the above is a more tractable expression.
- (copy the x=1/2 expansion here).
  
+\begin_inset LatexCommand cite
+key "Briggs2003"
+
+\end_inset
+
+ but it would appear that expansion about 
+\begin_inset Formula $x=1$
+\end_inset
+
+ leads to the simplest tractable expansion.
+ The general case is explored in the appendix.
 \end_layout
 
 \begin_layout Standard
@@ -774,7 +831,7 @@ The eigenvector equation to be solved is then
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $v=\{v_{n}\}$
 \end_inset
 
@@ -798,7 +855,7 @@ The eigenvector equation to be solved is then
 
 \end_inset
 
- The 
+The 
 \begin_inset Formula $k$
 \end_inset
 
@@ -818,7 +875,7 @@ The zeroth eigenfunction was given by Gauss as
 
 \end_inset
 
- and corresponds to the eigenvector 
+and corresponds to the eigenvector 
 \begin_inset Formula $v_{n0}=2^{-n}$
 \end_inset
 
@@ -919,13 +976,13 @@ The left eigenvectors are given by
 
 \end_inset
 
- and correspond to left eigenfunctions 
+and correspond to left eigenfunctions 
 \begin_inset Formula \begin{equation}
 \ell_{k}(x)=\sum_{n=0}^{\infty}w_{kn}(-1)^{n}\delta^{(n)}(1-x)\label{eq:}\end{equation}
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $\delta^{(n)}(x)$
 \end_inset
 
@@ -1037,7 +1094,7 @@ The value of the sum is ambiguous.
 
 \end_inset
 
- and so one is left in a bit of a quandary.
+and so one is left in a bit of a quandary.
  
 \end_layout
 
@@ -1058,7 +1115,7 @@ One can mount numeric attacks on GKW.
 
 \end_inset
 
- is accurate to about one or two percent over the domain 
+is accurate to about one or two percent over the domain 
 \begin_inset Formula $x\in[0,1]$
 \end_inset
 
@@ -2100,7 +2157,7 @@ This sawtooth function joins values of
 
 \end_inset
 
- The Frobenius-Perron operator for this function is exactly solvable, and
+The Frobenius-Perron operator for this function is exactly solvable, and
  provides a toy model of the Gauss-Kuzmin-Wirsing operator.
  The Frobenius-Perron operator of this sawtooth, acting on a general function
  
@@ -2956,14 +3013,14 @@ g_{D}^{-1}(x)\;\textrm{ if }\;0\leq x\leq1/2\\
 Just as we saw with the second sawtooth, the point dynamics of the Isola
  Map and the Tent Map are isomorphic to each other, but the eigenvalue spectra
  are inequivalent.
- The Frobenius-Perron (Transfer) Operator for the Isola Map is 
+ The Ruelle-Frobenius-Perron operator for the Isola Map is 
 \begin_inset Formula \begin{equation}
 \left[\mathcal{P}f\right](x)=\frac{1}{\left(1+x\right)^{2}}\left[f\left(\frac{x}{x+1}\right)+f\left(\frac{1}{x+1}\right)\right]\label{eq:}\end{equation}
 
 \end_inset
 
-The Gauss-Kuzmin-Wirsing operator can be constructed through some simple
- operator relationships on 
+Isola shows how the Gauss-Kuzmin-Wirsing operator can be constructed through
+ some simple operator relationships on 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
@@ -2973,6 +3030,37 @@ The Gauss-Kuzmin-Wirsing operator can be constructed through some simple
 
 .
  As we will see below, this seems to be an even harder task.
+\end_layout
+
+\begin_layout Standard
+Closely related is a modular variant of the Bernoulli shift, given by 
+\begin_inset Formula \begin{equation}
+A\left(y\right)=?^{-1}\left(\mbox{frac}\left(2?\left(y\right)\right)\right)=\begin{cases}
+\frac{y}{1-y} & \mbox{ for }0\le y\le\frac{1}{2}\\
+\frac{2y-1}{y} & \mbox{ for }\frac{1}{2}\le y\le1\end{cases}\label{eq:defn-A}\end{equation}
+
+\end_inset
+
+The assoicated transfer operator is 
+\begin_inset Formula \[
+\left[\mathcal{L}_{A}f\right]\left(y\right)=\frac{1}{\left(1+y\right)^{2}}f\left(\frac{y}{1+y}\right)+\frac{1}{\left(2-y\right)^{2}}f\left(\frac{1}{2-y}\right)\]
+
+\end_inset
+
+which again has the curious relationship 
+\begin_inset Formula \[
+\mathcal{L}_{A}?^{\prime}=?^{\prime}\]
+
+\end_inset
+
+as given in 
+\begin_inset LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -3078,6 +3166,32 @@ which is far more complex, and only marginally less divergent:
  it is not clear to me what theorem would establish or disprove this conjecture.
 \end_layout
 
+\begin_layout Standard
+The polynomial-basis matrix elements for this operator are much better behaved.
+ They are given by 
+\begin_inset Formula \[
+M_{nk}\equiv\left\langle n\left|\mathcal{L}_{A}\right|k\right\rangle =\frac{1}{2^{2+n+k}}{n+k+1 \choose k+1}+\Theta_{n\ge k}\left(-1\right)^{k+n}{n+1 \choose k+1}\]
+
+\end_inset
+
+(Notice the direction of teh Heaviside function is reversed, is this correct,
+ or an error? XXX Needs double-checking).
+ 
+\end_layout
+
+\begin_layout Standard
+The leading factor of two in the above makes all the difference in the world
+ for this operator.
+ This time, applying Stirlings formula to evaluate the matrix elements on
+ the diagonal gives 
+\begin_inset Formula \[
+M_{nn}\approx1+\frac{0.76}{\sqrt{n}}\]
+
+\end_inset
+
+thus implying that this operator, at least, is not hopelessly badly behaved.
+\end_layout
+
 \begin_layout Section
 Conclusions
 \end_layout
@@ -3088,6 +3202,247 @@ Apologies for the format of this paper.
  to play with, which one first?
 \end_layout
 
+\begin_layout Section
+Appendix
+\end_layout
+
+\begin_layout Standard
+This appendix discusses, in greater detail, the polynomial matrix elements
+ that may be obtained by expanding around other points within the unit interval.
+\end_layout
+
+\begin_layout Standard
+Consider 
+\begin_inset Formula $f(x)=\sum_{n=0}^{\infty}f^{(n)}(a)\,(x-a)^{n}/n!$
+\end_inset
+
+ and 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ likewise expanded about 
+\begin_inset Formula $x=b$
+\end_inset
+
+.
+ With this expansion, the operator relation 
+\begin_inset Formula $\mathcal{L}_{h}f=g$
+\end_inset
+
+ becomes 
+\begin_inset Formula \begin{equation}
+\frac{g^{(m)}(b)}{m!}=\sum_{n=0}^{\infty}\mathcal{L}_{mn}^{(b,a)}\;\frac{f^{(n)}(a)}{n!}\label{eq:}\end{equation}
+
+\end_inset
+
+Without much difficulty, one discovers that the matrix elements are given
+ by 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{mn}^{(b,a)}=(-1)^{m}\sum_{k=0}^{n}(-a)^{n-k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\,\zeta_{H}(k+m+2,1+b)\label{eq:general elts}\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\zeta_{H}(s,q)$
+\end_inset
+
+ is the Hurwitz zeta function:
+\begin_inset Formula \begin{equation}
+\zeta_{H}(s,q)=\sum_{n=0}^{\infty}\frac{1}{(n+q)^{s}}\label{eq:}\end{equation}
+
+\end_inset
+
+Substituting 
+\begin_inset Formula $a=b=1/2$
+\end_inset
+
+, one obtains the expansion of 
+\begin_inset LatexCommand cite
+key "Briggs2003"
+
+\end_inset
+
+, which is 
+\begin_inset Formula \begin{align}
+\mathcal{L}_{mn}^{(1/2,1/2)}= & (-1)^{m}\sum_{k=0}^{n}\left(\frac{-1}{2}\right)^{n-k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)\,\times\label{eq:}\\
+ & \left[2^{m+k+2}\left(\zeta(k+m+2)-1\right)-\zeta(k+m+2)\right]\end{align}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+All of these expressions for the matrix elements for the GKW operator have
+ a common form.
+ It consists of two summations: the outer summation, and the summation defining
+ the Hurwitz zeta function.
+ Pulling out this second summation, one finds terms consisting of a series
+ of polynomials, which are most simply expressed in terms of Gauss' hypergeometr
+ic series: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\Gamma_{mn}(x)\equiv(m+1)\,_{2}F_{1}\left[\begin{array}{c}
+\begin{array}{cc}
+-n\; & \; m+2\end{array}\\
+2\end{array}\;;\; x\right]=\sum_{k=0}^{n}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+m+1\\
+m\end{array}\right)(-x)^{k}\label{eq:}\end{equation}
+
+\end_inset
+
+These have a curious superficial resemblance to the shifted Legendre polynomial
+ 
+\begin_inset Formula \begin{equation}
+\widetilde{P}_{n}(x)\equiv\sum_{k=0}^{n}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+k+n\\
+n\end{array}\right)(-x)^{k}\label{eq:}\end{equation}
+
+\end_inset
+
+Switching the order of summation in equation 
+\begin_inset LatexCommand ref
+reference "eq:general elts"
+
+\end_inset
+
+ gives the following: 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{mn}^{(b,a)}=(-1)^{m+n}a^{n}\sum_{j=0}^{\infty}\frac{1}{(j+1+b)^{m+2}}\,_{2}F_{1}\left[\begin{array}{c}
+\begin{array}{cc}
+-n\; & \; m+2\end{array}\\
+2\end{array}\;;\;\frac{-1}{a(j+1+b)}\right]\label{eq:}\end{equation}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Oddly, this appears to be in the form of a slightly generalized form of
+ the GKW operator, an operator given by Dieter Mayer
+\begin_inset LatexCommand cite
+key "May91"
+
+\end_inset
+
+, 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}^{(s)}f\right](x)\equiv\sum_{n=1}^{\infty}\frac{1}{(n+x)^{s}}f\left(\frac{1}{n+x}\right)\label{eq:}\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $s$
+\end_inset
+
+ is taken to be 
+\begin_inset Formula $s=m+2$
+\end_inset
+
+ and 
+\begin_inset Formula $f=_{2}F_{1}$
+\end_inset
+
+.
+ The general appearance and the matrix elements of this generalized operator
+ are only a slight variation of those for the GKW; for completeness, these
+ are stated here: 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}^{(s)}\right]_{mn}^{(b,a)}=(-1)^{m}\sum_{k=0}^{n}(-a)^{n-k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+m+k+s-1\\
+m\end{array}\right)\,\zeta_{H}(m+k+s,1+b)\label{eq:RM-general elts}\end{equation}
+
+\end_inset
+
+The corresponding hypergeometric identity that comes into play is 
+\begin_inset Formula \begin{equation}
+\sum_{k=0}^{n}\left(-x\right)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+m+k+s-1\\
+m\end{array}\right)=\left(\begin{array}{c}
+m+s-1\\
+m\end{array}\right)\;_{2}F_{1}\left[\begin{array}{c}
+\begin{array}{cc}
+-n\; & \; m+s\end{array}\\
+s\end{array}\;;\; x\right]\label{eq:}\end{equation}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+As a final note, recall that the Hurwitz zeta may be expressed as the polygamma
+ function for integer arguments, where the polygamma functions are the chain
+ of logarithmic derivatives of the gamma function.
+ Thus, one may also expresses the matrix elements of 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ in the curious form 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{mn}^{(b,a)}=\frac{(-a)^{n+1}}{m!}\sum_{k=0}^{n}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\frac{1}{a}\right)^{k+1}\frac{1}{(k+1)!}\,\frac{d^{k+1}}{dx^{k+1}}\psi^{(m)}(1+b)\label{eq:}\end{equation}
+
+\end_inset
+
+Here, the curious operator making an appearance is
+\begin_inset Formula \begin{equation}
+\left[P_{n,y}f\right](x)=\sum_{k=0}^{n}\left(-y\right)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\,\frac{f^{(k)}(x)}{k!}\label{eq:}\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $f^{(k)}(x)$
+\end_inset
+
+ is the 
+\begin_inset Formula $k$
+\end_inset
+
+'th derivative of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The operator 
+\begin_inset Formula $P_{n,y}$
+\end_inset
+
+is upper-triangular, with all eigenvalues equal to 1, and all eigenvectors
+ being polynomials (or analytic series for 
+\begin_inset Formula $n$
+\end_inset
+
+ not an integer).
+ 
+\end_layout
+
 \begin_layout Standard
 \begin_inset LatexCommand bibtex
 options "plain"
@@ -3095,10 +3450,6 @@ bibfiles "/home/linas/linas/fractal/paper/fractal"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 
 \end_layout
 
