@@ -1077,7 +1077,7 @@ k(x)=\frac{1}{x^{2}}\exp(2k+1)\frac{\pi}{x}\label{eq:}\end{equation}
 
 Then 
 \begin_inset Formula \begin{eqnarray}
-\left[U_{h}k\right](x) & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}\cos(2k+1)n\pi\nonumber \\
+\left[\mathcal{L}_{h}k\right](x) & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}\cos(2k+1)n\pi\nonumber \\
  & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}(-)^{n}\label{eq:}\end{eqnarray}
 
 \end_inset
@@ -1088,7 +1088,7 @@ The value of the sum is ambiguous.
 \end_inset
 
  to belong to the kernel.
- On the other hand, we've seen that the regularized sum is not zero: 
+ On the other hand, the regularized sum is not zero: 
 \begin_inset Formula \begin{equation}
 \lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}e^{-tk}=\frac{1}{2}\label{eq:}\end{equation}
 
@@ -2166,7 +2166,7 @@ The Frobenius-Perron operator for this function is exactly solvable, and
 
 , is given by
 \begin_inset Formula \begin{equation}
-\left[U_{w}f\right](x)=\sum_{x':w(x')=x}\frac{f(x')}{\left|dw(x')/dx'\right|}=\sum_{n=1}^{\infty}\frac{1}{n(n+1)}f\left(\frac{n+1-x}{n(n+1)}\right)\label{eq:}\end{equation}
+\left[\mathcal{L}_{w}f\right](x)=\sum_{x':w(x')=x}\frac{f(x')}{\left|dw(x')/dx'\right|}=\sum_{n=1}^{\infty}\frac{1}{n(n+1)}f\left(\frac{n+1-x}{n(n+1)}\right)\label{eq:}\end{equation}
 
 \end_inset
 
@@ -2200,7 +2200,7 @@ f(y)=\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}y^{k}\equiv\sum_{k=0}^{\infty}a_{k}
 
  so that 
 \begin_inset Formula \begin{equation}
-\left[U_{w}f\right](y)=\sum_{k=0}^{\infty}b_{k}y^{k}=\sum_{n=1}^{\infty}\frac{1}{n(n+1)}\sum_{k=0}^{\infty}a_{k}\left(\frac{n+y}{n(n+1)}\right)^{k}\label{eq:}\end{equation}
+\left[\mathcal{L}_{w}f\right](y)=\sum_{k=0}^{\infty}b_{k}y^{k}=\sum_{n=1}^{\infty}\frac{1}{n(n+1)}\sum_{k=0}^{\infty}a_{k}\left(\frac{n+y}{n(n+1)}\right)^{k}\label{eq:}\end{equation}
 
 \end_inset
 
@@ -2463,9 +2463,9 @@ not
 \emph default
  identical.
  This is perhaps the most surprising result of this paper.
- The FP operator is 
+ The transfer operator is 
 \begin_inset Formula \begin{equation}
-\left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-x}{2^{n}}\right)\label{eq:}\end{equation}
+\left[\mathcal{L}_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-x}{2^{n}}\right)\label{eq:}\end{equation}
 
 \end_inset
 
@@ -2665,7 +2665,7 @@ Under normal circumstances, whenever one has a pair of maps
 \end_inset
 
  such that the Frobenius-Perron operators are also conjugate; that is, 
-\begin_inset Formula $U_{\alpha}=S_{\phi}U_{\beta}S_{\phi}^{-1}$
+\begin_inset Formula $\mathcal{L}_{\alpha}=S_{\phi}\mathcal{L}_{\beta}S_{\phi}^{-1}$
 \end_inset
 
  where 
@@ -2684,11 +2684,11 @@ Under normal circumstances, whenever one has a pair of maps
  .
  Since the continued-fraction shift function is conjugate to the sawtooth,
  one might hope that GKW would be conjugate to 
-\begin_inset Formula $U_{C}$
+\begin_inset Formula $\mathcal{L}_{C}$
 \end_inset
 
 , that is, 
-\begin_inset Formula $U_{h}=S_{?}U_{C}S_{?}^{-1}$
+\begin_inset Formula $\mathcal{L}_{h}=S_{?}\mathcal{L}_{C}S_{?}^{-1}$
 \end_inset
 
 .
@@ -2701,16 +2701,16 @@ Under normal circumstances, whenever one has a pair of maps
 
 , working as a traditional, ordinary operator, normally preserves the eigenvalue
 s; that is, the eigenvalues of 
-\begin_inset Formula $U_{\alpha}$
+\begin_inset Formula $\mathcal{L}_{\alpha}$
 \end_inset
 
  equal those of 
-\begin_inset Formula $U_{\beta}$
+\begin_inset Formula $\mathcal{L}_{\beta}$
 \end_inset
 
 .
  In the current case, we see trouble in that the eigenvalues of 
-\begin_inset Formula $U_{C}$
+\begin_inset Formula $\mathcal{L}_{C}$
 \end_inset
 
  are not those of GKW.
@@ -2719,8 +2719,14 @@ s; that is, the eigenvalues of
 \end_inset
 
  whereas for the GKW the ratio is 2.61803...
- (square of golden mean (see Phillipe Flajolet and Brigitte Vallée, On the
- Gauss-Kuzmin-Wirsing Constant (1995).)) 
+ (the square of golden mean, see 
+\begin_inset LatexCommand cite
+key "Flajolet1995"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2786,7 +2792,7 @@ We recognize from the studying of the dyadic representation of the Modular
 
 that is, 
 \begin_inset Formula \begin{equation}
-\left[U_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\left[g_{D}^{n-1}r_{D}g_{D}\right](x)\right)\label{eq:}\end{equation}
+\left[\mathcal{L}_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\left[g_{D}^{n-1}r_{D}g_{D}\right](x)\right)\label{eq:}\end{equation}
 
 \end_inset
 
@@ -2796,7 +2802,7 @@ and thus functions
 
  possessing the modular group symmetry are candidates for solving the operator
  
-\begin_inset Formula $U_{C}$
+\begin_inset Formula $\mathcal{L}_{C}$
 \end_inset
 
 .
@@ -2834,7 +2840,7 @@ g_{3}^{n}=\left(\begin{array}{ccc}
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $q_{n}(w)$
 \end_inset
 
@@ -2861,7 +2867,7 @@ t_{w}\left(\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\right)=q_{k-1}(w)+x\left(w^{k-1}-q_
 Inserting the above back into the definition for the sawtooth operator,
  and performing the sum, we get
 \begin_inset Formula \begin{equation}
-\left[U_{C}t_{w}\right](x)=\frac{4}{3(2-w)}+\frac{x}{3(2-w)}+\frac{wt_{w}(x)}{2-w}\label{eq:}\end{equation}
+\left[\mathcal{L}_{C}t_{w}\right](x)=\frac{4}{3(2-w)}+\frac{x}{3(2-w)}+\frac{wt_{w}(x)}{2-w}\label{eq:}\end{equation}
 
 \end_inset
 
@@ -2872,11 +2878,11 @@ From this, we can immediately read off the eigenvalue as
 .
  To get the eigenfunction, we need to complete the diagonalization by using
  
-\begin_inset Formula $\left[U_{C}1\right](x)=1$
+\begin_inset Formula $\left[\mathcal{L}_{C}1\right](x)=1$
 \end_inset
 
  and 
-\begin_inset Formula $\left[U_{C}x\right](x)=(2-x)/3$
+\begin_inset Formula $\left[\mathcal{L}_{C}x\right](x)=(2-x)/3$
 \end_inset
 
  to get the eigenfunction 
