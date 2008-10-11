@@ -2,7 +2,7 @@
 \lyxformat 276
 \begin_document
 \begin_header
-\textclass article
+\textclass amsart
 \language english
 \inputencoding auto
 \font_roman times
@@ -33,6 +33,7 @@
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
+\author "" 
 \author "" 
 \end_header
 
@@ -333,6 +334,87 @@ s of rational functions and various classical functions, such as the exponential
  No eigenvalues were found in this way, although, of course, various close
  approximations can be so obtained.
  
+\end_layout
+
+\begin_layout Standard
+The naivest approach to solving the GKW operator is blocked by the next
+ theorem.
+\end_layout
+
+\begin_layout Theorem
+There are no polynomial solutions to the equation 
+\begin_inset Formula \[
+f\left(\frac{1}{\tau+n}\right)=\lambda_{n}\left(\tau+n\right)^{2}f\left(\tau\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Assume that there does exist such a solution.
+ Write 
+\begin_inset Formula \[
+f\left(\tau\right)=\sum_{k=0}^{\infty}a_{k}\tau^{k}\]
+
+\end_inset
+
+Inserting this into the hypothetical form leads to the equation 
+\begin_inset Formula \begin{align*}
+\lambda_{n}\sum_{k=0}^{\infty}\tau^{k}\left[a_{k-2}+2na_{k-1}+n^{2}a_{k}\right] & =\\
+\sum_{k=0}^{\infty}\tau^{k}\frac{\left(-1\right)^{k}}{n^{k}}\sum_{j=0}^{\infty}a_{j}{j+k-1 \choose j-1}\frac{1}{n^{j}}\end{align*}
+
+\end_inset
+
+Setting 
+\begin_inset Formula $\tau=1$
+\end_inset
+
+ in the above allows it to be re-written as
+\begin_inset Formula \[
+\lambda_{n}\left(n-1\right)^{2}\sum_{k=0}^{\infty}\left(-1\right)^{k}a_{k}=a_{0}+\sum_{k=1}^{\infty}n^{-k}\sum_{j=0}^{k}{k \choose j}\, a_{j+1}\]
+
+\end_inset
+
+Since the 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ are independent of 
+\begin_inset Formula $n$
+\end_inset
+
+ by assumption, one must then have 
+\begin_inset Formula $a_{0}=0$
+\end_inset
+
+, and for each term in the series on the right hand side, one must have,
+ individually, that 
+\begin_inset Formula \[
+0=\sum_{j=0}^{k}{k \choose j}\, a_{j+1}\]
+
+\end_inset
+
+or 
+\begin_inset Formula $a_{k}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Thus the theorem is proved.
+ 
+\end_layout
+
+\begin_layout Standard
+Were it not for this theorem, a solution would have been provided by looking
+ for quasi-modular-form-like functions 
+\begin_inset Formula $f$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
