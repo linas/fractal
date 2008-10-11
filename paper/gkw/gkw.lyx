@@ -120,28 +120,30 @@ The Gauss-Kuzmin-Wirsing Operator
 \end_layout
 
 \begin_layout Standard
-THIS IS A DRAFT WORK IN PROGRESS.
- The intro hasn't been written yet.
+This text is a diary of ongoing research results.
+ As such, it is disorganized.
+ It is only sporadically updated.
 \end_layout
 
 \begin_layout Standard
 The general layout is:
 \end_layout
 
-\begin_layout Standard
--- present the Gauss-Kuzmin-Wirsing operator
+\begin_layout Itemize
+Present the Gauss-Kuzmin-Wirsing operator, including bvasic,facts, theorems,
+ raltionships.
 \end_layout
 
-\begin_layout Standard
--- show that the Minkowksi Question Mark converts the GKW into a sawtooth.
+\begin_layout Itemize
+Show that the Minkowksi Question Mark converts the GKW into a sawtooth.
 \end_layout
 
-\begin_layout Standard
--- Solve the two sawtooth transfer operators (these are exactly solvable).
+\begin_layout Itemize
+Solve the two sawtooth transfer operators (these are exactly solvable).
 \end_layout
 
-\begin_layout Standard
--- Review Farey/Isola Map
+\begin_layout Itemize
+Review the Farey Map
 \end_layout
 
 \begin_layout Section
@@ -155,27 +157,115 @@ h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
 \end_inset
 
-and is sometimes called the Gauss Map.
- It is connected to the Riemann Zeta by a Mellin Transform:
+and is often called the Gauss Map.
+ The Ruelle-Frobenius-Perron operator associated with the Gauss map is known
+ as the Gauss-Kuzmin-Wirsing (GKW) operator 
+\begin_inset Formula $\mathcal{L}_{h}$
+\end_inset
+
+.
+ It is the pushback of 
+\begin_inset Formula $h$
+\end_inset
+
+, and as such, is a linear map between spaces of functions on the unit interval
+ (Banach spaces).
+ That is, given the vector space of functions from the closed unit interval
+ to the real numbers 
+\begin_inset Formula \[
+\mathcal{F}=\left\{ f\,|\, f:\left[0,1\right]\to\mathbb{R}\right\} \]
+
+\end_inset
+
+then 
+\begin_inset Formula $\mathcal{L}_{h}$
+\end_inset
+
+ is a linear operator mapping 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ .
+ Given 
+\begin_inset Formula $f\in\mathcal{F}$
+\end_inset
+
+, it is represented by 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{h}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{(n+x)^{2}}f\left(\frac{1}{n+x}\right)\label{eq:sum-form}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This operator has not been 
+\begin_inset Quotes eld
+\end_inset
+
+solved
+\begin_inset Quotes erd
+\end_inset
+
+, in the sense that there is no known closed-form solution expressing its
+ all of its eigenfunctions and eigenvectors.
+ There is one classically known eigenvector, 
+\begin_inset Formula $f(x)=1/(1+x)$
+\end_inset
+
+, which corresponds to the unit eigenvalue; this solution was given by Gauss.
+\end_layout
+
+\begin_layout Standard
+Aside from this, there is a large class of fractal, discontinuous-everywhere
+ functions associated with eiegenvalue 1.
+ The prototypical such solution is the derivative of the Minkowski Question
+ Mark function 
+\begin_inset Formula $?(x)$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula \[
+\left[\mathcal{L}_{h}?^{\prime}\right](x)=?^{\prime}(x)\]
+
+\end_inset
+
+A proper construction for the everywhere-discontinuous function 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+, and the derivation of the above idetity, is given in 
+\begin_inset LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+, together with a construction of a class of other similar solutions.
+\end_layout
+
+\begin_layout Subsection
+Relation to the Riemann Zeta
+\end_layout
+
+\begin_layout Standard
+The Gauss map is connected to the Riemann Zeta by a Mellin Transform:
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\label{eq:}\end{equation}
 
 \end_inset
 
-The Frobenius-Perron operator for this map is known as the Gauss-Kuzmin-Wirsing
- (GKW) Operator, and is represented by.
- 
-\end_layout
-
-\begin_layout Standard
+The Riemann zeta can be written under a change of variable as
 \begin_inset Formula \begin{equation}
-\left[U_{h}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{(n+x)^{2}}f\left(\frac{1}{n+x}\right)\label{eq:}\end{equation}
-
-\end_inset
-
-Thus, the Riemann zeta can be written under a change of variable as
-\begin_inset Formula \begin{equation}
-\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[U_{h}x^{s-1}\right]\label{eq:}\end{equation}
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[\mathcal{L}_{h}x^{s-1}\right]\label{eq:}\end{equation}
 
 \end_inset
 
@@ -189,7 +279,7 @@ key "Vep-zeta2004,Fla06"
 
 \end_inset
 
-.
+; it leads to criteria that are shown to be equivalent to the Riemann Hypothesis.
  The same development can be used to obtain Dirichlet L-functions, and generaliz
 ations to other number-theoretic series, such as the totient series, or
  the Liouville series 
@@ -202,23 +292,46 @@ key "Vep-norlund-2006"
 \end_layout
 
 \begin_layout Standard
-There is one known eigenvector, 
-\begin_inset Formula $f(x)=1/(1+x)$
+Todo: Give the Riemann Hypothesis can be understood as a vector equation
+ (using the polunomial form for the GKW, below).
+\end_layout
+
+\begin_layout Subsection
+Lack of simple solutions
+\end_layout
+
+\begin_layout Standard
+Aside from the classical solution, 
+\begin_inset Formula $1/(1+x)$
 \end_inset
 
- which corresponds to the unit eigenvalue.
+, there do not seem to be any 
+\begin_inset Quotes eld
+\end_inset
+
+easy
+\begin_inset Quotes erd
+\end_inset
+
+ polynomial series solutions to the operator, where a 
+\begin_inset Quotes eld
+\end_inset
+
+solution
+\begin_inset Quotes erd
+\end_inset
+
+ would be a closed-form spcification of the eigenvectors.
  
 \end_layout
 
 \begin_layout Standard
-The others do not seem to be (by combinatorial search) any simple combination
- or summation of simple functions, including the digamma, and etc.
- XXX Provide the details.
- 
-\end_layout
-
-\begin_layout Standard
-Todo: Give the Riemann Hypothesis as a vector equation.
+The author performed a combinatorial search of simple combinations and summation
+s of rational functions and various classical functions, such as the exponential
+, the gamma, the digamma, the dilogarithm, Bessel functions and the exponential
+ integral.
+ No eigenvalues were found in this way, although, of course, various close
+ approximations can be so obtained.
  
 \end_layout
 
