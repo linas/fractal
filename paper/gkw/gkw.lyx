@@ -266,7 +266,7 @@ The Gauss map is connected to the Riemann Zeta by a Mellin Transform:
 
 The Riemann zeta can be written under a change of variable as
 \begin_inset Formula \begin{equation}
-\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[\mathcal{L}_{h}x^{s-1}\right]\label{eq:}\end{equation}
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\left[\mathcal{L}_{h}x^{s-1}\right]\label{eq:zeta-gkw}\end{equation}
 
 \end_inset
 
@@ -337,8 +337,14 @@ s of rational functions and various classical functions, such as the exponential
 \end_layout
 
 \begin_layout Standard
-The naivest approach to solving the GKW operator is blocked by the next
- theorem.
+The naivest approach to solving the GKW operator, which is suggested by
+ the eqn 
+\begin_inset LatexCommand ref
+reference "eq:sum-form"
+
+\end_inset
+
+, is blocked by the next theorem.
 \end_layout
 
 \begin_layout Theorem
@@ -423,7 +429,7 @@ Assorted Algebraic Identities
 
 \begin_layout Standard
 This section lists an assortment of random algebraic results, none particularly
- deep or interesting.
+ deep; some are vaguely suggestive of deeper relations.
  These are listed here mostly for the sake of completeness.
  First, we notice that adjacent terms in the series can be made to cancel
  by shifting the series by one:
@@ -431,11 +437,11 @@ This section lists an assortment of random algebraic results, none particularly
 
 \begin_layout Standard
 \begin_inset Formula \begin{equation}
-\left[U_{h}f\right](x)-\left[U_{h}f\right](x+1)=\frac{1}{(1+x)^{2}}f\left(\frac{1}{1+x}\right)\label{eq:}\end{equation}
+\left[\mathcal{L}_{h}f\right](x)-\left[\mathcal{L}_{h}f\right](x+1)=\frac{1}{(1+x)^{2}}f\left(\frac{1}{1+x}\right)\label{eq:}\end{equation}
 
 \end_inset
 
- which holds for any function 
+which holds for any function 
 \begin_inset Formula $f(x).$
 \end_inset
 
@@ -444,7 +450,7 @@ This section lists an assortment of random algebraic results, none particularly
 \end_inset
 
  is an eigenvector, so that 
-\begin_inset Formula $U_{h}\rho=\lambda\rho$
+\begin_inset Formula $\mathcal{L}_{h}\rho=\lambda\rho$
 \end_inset
 
 , then it would also solve 
@@ -459,8 +465,8 @@ This can be solved easily to get the zeroth eigenvector
 
 \end_inset
 
- which satisfies 
-\begin_inset Formula $[U_{h}\rho_{0}](x)=\rho_{0}(x)$
+which satisfies 
+\begin_inset Formula $[\mathcal{L}_{h}\rho_{0}](x)=\rho_{0}(x)$
 \end_inset
 
  and the normalization is given by requiring 
@@ -469,7 +475,7 @@ This can be solved easily to get the zeroth eigenvector
 
 \end_inset
 
- We can see one hint of the relationship between period-doubling and the
+One can see one hint of the relationship between period-doubling and the
  GKW in the identity 
 \begin_inset Formula \begin{equation}
 \frac{1}{1+x}=\sum_{n=1}^{\infty}\,\frac{1}{2^{n}}\left[\frac{2}{x+n}-\frac{1}{x+n+1}\right]\label{eq:}\end{equation}
@@ -485,7 +491,7 @@ A reflection identity:
 \end_inset
 
  satisfies 
-\begin_inset Formula $U_{h}f=1-f$
+\begin_inset Formula $\mathcal{L}_{h}f=1-f$
 \end_inset
 
 .
@@ -493,7 +499,7 @@ A reflection identity:
 
 \begin_layout Standard
 Another: 
-\begin_inset Formula $U_{h}[(1+?(x))/(1+x)^{2}]=1-?(x)$
+\begin_inset Formula $\mathcal{L}_{h}[(1+?(x))/(1+x)^{2}]=1-?(x)$
 \end_inset
 
  where 
@@ -505,17 +511,17 @@ Another:
 
 \begin_layout Standard
 Another: 
-\begin_inset Formula $U_{h}[?(x)\, x^{-2}]=2-?(x)$
+\begin_inset Formula $\mathcal{L}_{h}[?(x)\, x^{-2}]=2-?(x)$
 \end_inset
 
  .
  One can construct a variety of identities of this sort, for example: 
 \begin_inset Formula \begin{equation}
-U_{h}\left[?(x)\left(\frac{1}{(1+x)^{2}}-2\right)\right]=\frac{?(x)-2}{(1+x)^{2}}\label{eq:}\end{equation}
+\mathcal{L}_{h}\left[?(x)\left(\frac{1}{(1+x)^{2}}-2\right)\right]=\frac{?(x)-2}{(1+x)^{2}}\label{eq:}\end{equation}
 
 \end_inset
 
- but these types of exercises do not seem to lead to any sort of worthwhile
+but these types of exercises do not seem to lead to any sort of worthwhile
  recurrence relations.
  
 \end_layout
@@ -523,11 +529,11 @@ U_{h}\left[?(x)\left(\frac{1}{(1+x)^{2}}-2\right)\right]=\frac{?(x)-2}{(1+x)^{2}
 \begin_layout Standard
 Acting on the monomial, one gets 
 \begin_inset Formula \begin{equation}
-\left[U_{h}x^{k}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{k+2}}=\frac{(-)^{k+2}}{(k+1)!}\psi^{(k+1)}(1+x)\label{eq:}\end{equation}
+\left[\mathcal{L}_{h}x^{k}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{k+2}}=\frac{(-)^{k+2}}{(k+1)!}\psi^{(k+1)}(1+x)\label{eq:}\end{equation}
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $\psi^{(k)}(x)$
 \end_inset
 
@@ -543,12 +549,12 @@ Acting on the monomial, one gets
 
 \end_inset
 
- or curiosities such as 
+or to finding curiosities such as 
 \begin_inset Formula $f(x)=(1+ax)^{2}$
 \end_inset
 
  gives 
-\begin_inset Formula $U_{h}f=\psi^{(1)}(1+x+a)$
+\begin_inset Formula $\mathcal{L}_{h}f=\psi^{(1)}(1+x+a)$
 \end_inset
 
 .
@@ -561,7 +567,7 @@ For
 \end_inset
 
  one gets 
-\begin_inset Formula $U_{h}f=-\sum_{k=1}^{n}(x+k)^{-2}$
+\begin_inset Formula $\mathcal{L}_{h}f=-\sum_{k=1}^{n}(x+k)^{-2}$
 \end_inset
 
 
@@ -570,16 +576,28 @@ For
 \begin_layout Standard
 Acting on a general power, the map gives the Hurwitz Zeta: 
 \begin_inset Formula \begin{equation}
-\left[U_{h}x^{s}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{s+2}}=\zeta(s+2,x+1)\label{eq:}\end{equation}
+\left[\mathcal{L}_{h}x^{s}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{s+2}}=\zeta(s+2,x+1)\label{eq:}\end{equation}
 
 \end_inset
 
- and this transformation gives us another hint of a deep relationship to
- the Bernoulli Map.
+This allows eqn 
+\begin_inset LatexCommand ref
+reference "eq:zeta-gkw"
+
+\end_inset
+
+ to be written as
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\zeta\left(s+1,x+1\right)\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-We have some conditionally convergent series: 
+Further consideration leads to various conditionally convergent series:
+ 
 \begin_inset Formula \begin{equation}
 \sum_{k=0}^{\infty}\,(-)^{k}\,\left(\begin{array}{c}
 k+m+1\\
@@ -622,14 +640,14 @@ m\end{array}\right)\zeta(k+m+2)=1\label{eq:}\end{equation}
 
 \end_inset
 
- Its not clear what the general expression for forms of the above type is.
+Its not clear what the general expression for forms of the above type is.
  Similarly, if we let 
 \begin_inset Formula \begin{equation}
 S_{m}\equiv\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}\frac{(k+m+1)!}{(k+1)!}\left[\zeta(k+m+2)-1\right]e^{-tk}\label{eq:}\end{equation}
 
 \end_inset
 
- then we find 
+then we find 
 \begin_inset Formula $S_{0}=1/2$
 \end_inset
 
@@ -657,9 +675,11 @@ S_{m}\equiv\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}\frac{(k+m+1)!}{(k+1)
 \end_inset
 
  and then writing 
-\begin_inset Formula $z^{m+1}=(z+1-1)^{m+1}=\sum_{k=0}^{m}(-)^{m-k}\left(\begin{array}{c}
+\begin_inset Formula \[
+z^{m+1}=(z+1-1)^{m+1}=\sum_{k=0}^{m}(-)^{m-k}\left(\begin{array}{c}
 m\\
-k\end{array}\right)(z+1)^{k}$
+k\end{array}\right)(z+1)^{k}\]
+
 \end_inset
 
 
