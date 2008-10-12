@@ -4679,53 +4679,6 @@ XXXX more info on the p-adic free monoids, please.
 \end_layout
 
 \begin_layout Subsection
-Ladder operators
-\end_layout
-
-\begin_layout Standard
-SHO review.
-\end_layout
-
-\begin_layout Standard
-hints that 
-\begin_inset Formula $\mathcal{L}_{p}$
-\end_inset
-
- has the general form of a bosonic annhilation operator.
- The corresponding Koopman operator 
-\begin_inset Formula $\mathcal{K}_{p}$
-\end_inset
-
- is the creation operator.
- 
-\end_layout
-
-\begin_layout Standard
-As noted in equation 
-\begin_inset LatexCommand ref
-reference "eq:trig-matrix"
-
-\end_inset
-
-, it is the adjoint of 
-\begin_inset Formula $\mathcal{L}_{p}$
-\end_inset
-
-, but is not its inverse.
- Indeed one has
-\end_layout
-
-\begin_layout Standard
-XXX Talk about how ladder operators that truncate are bosonic.
- Ladder operators that do not are fermionic, in the sense that there is
- a Dirac sea.
- But in the latter model, the Dirac sea is the left half of a lattice stretching
- off in both directions.
- Thus, the Baker's map describes the fermionic ladder operators.
- 
-\end_layout
-
-\begin_layout Subsection
 Number theoretic connections
 \end_layout
 
@@ -4815,7 +4768,7 @@ Ising Tartan
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename ../lattice/ising-tartan.png
+	filename ising-tartan.png
 	width 100text%
 
 \end_inset
@@ -4933,7 +4886,7 @@ Baker's map
 
 \end_inset
 
- The Baker's map can be studied in its own right as a discrete-time dynamical
+The Baker's map can be studied in its own right as a discrete-time dynamical
  system, in that 
 \begin_inset Formula $\tau$
 \end_inset
@@ -5065,17 +5018,17 @@ dust
 \end_inset
 
  or density is given by the transfer operator 
-\begin_inset Formula $\mathcal{L}$
+\begin_inset Formula $\mathcal{L}_{T}$
 \end_inset
 
  as
 \begin_inset Formula \begin{equation}
-\left[\mathcal{L}\rho\right](x,y)=\left(\rho\circ\tau^{-1}\right)(x,y)=\rho\left(2x-\left\lfloor 2x\right\rfloor \,,\,\frac{y+\left\lfloor 2x\right\rfloor }{2}\right)\label{eq:}\end{equation}
+\left[\mathcal{L}_{T}\rho\right](x,y)=\left(\rho\circ\tau^{-1}\right)(x,y)=\rho\left(2x-\left\lfloor 2x\right\rfloor \,,\,\frac{y+\left\lfloor 2x\right\rfloor }{2}\right)\label{eq:}\end{equation}
 
 \end_inset
 
- The transfer operator is thus a map 
-\begin_inset Formula $\mathcal{L}:\mathcal{F}\to\mathcal{F}$
+The transfer operator is thus a map 
+\begin_inset Formula $\mathcal{L}_{T}:\mathcal{F}\to\mathcal{F}$
 \end_inset
 
  where 
@@ -5084,17 +5037,39 @@ dust
 
  is the set of functions on the unit square.
  Clearly 
-\begin_inset Formula $\mathcal{L}$
+\begin_inset Formula $\mathcal{L}_{T}$
 \end_inset
 
  is a linear operator.
+ Here, the subscript 
+\begin_inset Formula $T$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{L}_{T}$
+\end_inset
+
+ is used to remind us that this is now the transfer operator on the two-sided
+ lattice; it can be writtten as a combination of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ and the Koopman operator 
+\begin_inset Formula $\mathcal{K}_{B}$
+\end_inset
+
+ for the single-sided lattice.
  One is interested in characterizing the eigenfunctions and eigenvalues
  of 
-\begin_inset Formula $\mathcal{L}$
+\begin_inset Formula $\mathcal{L}_{T}$
 \end_inset
 
 .
- The general idea behind equation 
+ 
+\end_layout
+
+\begin_layout Standard
+The general idea behind equation 
 \begin_inset LatexCommand ref
 reference "eq:Classical Hamiltonian"
 
@@ -5102,7 +5077,7 @@ reference "eq:Classical Hamiltonian"
 
  can be immediately appealed to, to construct some of the eigenstates of
  
-\begin_inset Formula $\mathcal{L}$
+\begin_inset Formula $\mathcal{L}_{T}$
 \end_inset
 
 .
@@ -5112,11 +5087,11 @@ reference "eq:Classical Hamiltonian"
 
  of the form 
 \begin_inset Formula \begin{equation}
-f=\sum_{k=-\infty}^{\infty}\lambda^{k}g\circ\tau^{k}\label{eq:}\end{equation}
+f=\sum_{n=-\infty}^{\infty}\lambda^{n}g\circ\tau^{n}\label{eq:Baker's eigenstates}\end{equation}
 
 \end_inset
 
- given some function 
+given some function 
 \begin_inset Formula $g(x,y)$
 \end_inset
 
@@ -5130,7 +5105,7 @@ f=\sum_{k=-\infty}^{\infty}\lambda^{k}g\circ\tau^{k}\label{eq:}\end{equation}
 \end_inset
 
  is an eigenstate of 
-\begin_inset Formula $\mathcal{L}$
+\begin_inset Formula $\mathcal{L}_{T}$
 \end_inset
 
  with eigenvalue 
@@ -5138,7 +5113,7 @@ f=\sum_{k=-\infty}^{\infty}\lambda^{k}g\circ\tau^{k}\label{eq:}\end{equation}
 \end_inset
 
 : that is, 
-\begin_inset Formula $\mathcal{L}f=\lambda f$
+\begin_inset Formula $\mathcal{L}_{T}f=\lambda f$
 \end_inset
 
 .
@@ -5156,12 +5131,12 @@ f=\sum_{k=-\infty}^{\infty}\lambda^{k}g\circ\tau^{k}\label{eq:}\end{equation}
 
  of the complex plane might lead to a convergent sum.
  Thus immediately, one deduces that 
-\begin_inset Formula $\mathcal{L}$
+\begin_inset Formula $\mathcal{L}_{T}$
 \end_inset
 
  must surely be a unitary operator.
  The unitarity of 
-\begin_inset Formula $\mathcal{L}$
+\begin_inset Formula $\mathcal{L}_{T}$
 \end_inset
 
  makes intuitive sense in a certain way: the map 
@@ -5195,7 +5170,7 @@ reference "cap:Ising-Tartan"
 
 \begin_layout Standard
 The proper analysis of the transfer operator 
-\begin_inset Formula $\mathcal{L}$
+\begin_inset Formula $\mathcal{L}_{T}$
 \end_inset
 
  requires that the function space 
@@ -5210,7 +5185,7 @@ key "Has92,Fox96,Dri99"
 \end_inset
 
  indicate that whether or not 
-\begin_inset Formula $\mathcal{L}$
+\begin_inset Formula $\mathcal{L}_{T}$
 \end_inset
 
  is unitary depends on the function space 
@@ -5220,25 +5195,222 @@ key "Has92,Fox96,Dri99"
 .
 \end_layout
 
+\begin_layout Subsection
+Position and momentum operators
+\end_layout
+
 \begin_layout Standard
-XXX develop more fully.
- Talk about Gibbs states, which are the stationary states of the transfer
- operator.
- Also talk about the decaying states 
-\emph on
-i.e.
+An alternative view is to look at 
+\begin_inset Formula $\tau$
+\end_inset
 
-\emph default
- the eigenfunctions of the transfer operator that have an eigenvalue of
- less than one.
- Possibly review time-symmetry breaking in the spectrum of the decaying
- states (
-\emph on
-i.e.
+ as merely a spatial shift operator.
+ In this case, eigenstates of 
+\begin_inset Formula $\mathcal{L}_{T}$
+\end_inset
 
-\emph default
- the time-reversed decaying state is a growing state).
+ can be thought of as momentum eigenstates.
+ That is, one writes 
+\begin_inset Formula \[
+\lambda=e^{ik}\]
+
+\end_inset
+
+for the eigenvalues taken from eqn 
+\begin_inset LatexCommand ref
+reference "eq:Baker's eigenstates"
+
+\end_inset
+
+, and identifies 
+\begin_inset Formula $k$
+\end_inset
+
+ with the momentum.
+ The momentum operator is then formally written as 
+\begin_inset Formula \begin{equation}
+\mathcal{P}_{T}=-i\log\mathcal{L}_{T}\label{eq:momentum operator}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If this is the momentum, what is the position operator, and what are its
+ eigenstates? First, consider the single-sided lattice.
+ Given a lattice configuration 
+\begin_inset Formula $\sigma=\left[\sigma_{0},\sigma_{1},\sigma_{2},\ldots\right]$
+\end_inset
+
+, the position operator 
+\begin_inset Formula $\mathcal{X}_{B}$
+\end_inset
+
+ needs to associate a value of 
+\begin_inset Formula $n$
+\end_inset
+
+ to the 
+\begin_inset Formula $n$
+\end_inset
+
+'th lattice position.
+ Consider the function 
+\begin_inset Formula $q:\Omega\to\mathbb{Z}$
+\end_inset
+
+ given by 
+\begin_inset Formula \[
+q\left(\left[\sigma_{0},\ldots,\sigma_{n},0,\ldots\right]\right)=n\]
+
+\end_inset
+
+that is, given a finite-length string of symbols 
+\begin_inset Formula $\sigma$
+\end_inset
+
+, terminated by an infinite string of 
+\begin_inset Formula $0$
+\end_inset
+
+'s, the function 
+\begin_inset Formula $q$
+\end_inset
+
+ returns the length of the string.
+ That 
+\begin_inset Formula $q$
+\end_inset
+
+ deserves to be thought of as a position can be seen by observing that,
+ if 
+\begin_inset Formula $\sigma=s_{n}$
+\end_inset
+
+ is a string of length 
+\begin_inset Formula $n$
+\end_inset
+
+ (so that 
+\begin_inset Formula $q\left(s_{n}\right)=n$
+\end_inset
+
+), then 
+\begin_inset Formula \[
+q\left(\tau^{k}s_{n}\right)=n-k\]
+
+\end_inset
+
+Similarly, the Bernoulli operator 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ has the effect that
+\begin_inset Formula \[
+\mathcal{L}_{B}q=q+1\]
+
+\end_inset
+
+A position operator 
+\begin_inset Formula $\mathcal{X}_{B}$
+\end_inset
+
+ may now be defined as a map 
+\begin_inset Formula $\mathcal{X}_{B}:\Omega\to\mathbb{R}$
+\end_inset
+
+ having the value
+\begin_inset Formula \[
+\mathcal{X}_{B}f=qf\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The commutator of 
+\begin_inset Formula $\mathcal{X}_{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ can be obtained by noting that 
+\begin_inset Formula \[
+\mathcal{L}_{B}\mathcal{X}_{B}f=\left(q+1\right)\mathcal{L}_{B}f\]
+
+\end_inset
+
+ which can be proved by falling to the unit-interval representation: 
+\begin_inset Formula \begin{align*}
+\left[\mathcal{L}_{B}\mathcal{X}_{B}f\right]\left(x\right)= & \frac{1}{2}\left[q\left(\frac{x}{2}\right)f\left(\frac{x}{2}\right)+q\left(\frac{1+x}{2}\right)f\left(\frac{1+x}{2}\right)\right]\\
+= & \frac{1}{2}\left[\left(q\left(x\right)+1\right)f\left(\frac{x}{2}\right)+\left(q\left(x\right)+1\right)f\left(\frac{1+x}{2}\right)\right]\\
+= & \left(q\left(x\right)+1\right)\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{1+x}{2}\right)\right]\\
+= & \left(q\left(x\right)+1\right)\left[\mathcal{L}_{B}f\right]\left(x\right)\end{align*}
+
+\end_inset
+
+The other part of the commutator is easier:
+\begin_inset Formula \[
+\mathcal{X}_{B}\mathcal{L}_{B}f=q\mathcal{L}_{B}f\]
+
+\end_inset
+
+and so, from this, one may deduce the operator commutator
+\begin_inset Formula \[
+\mathcal{L}_{B}\mathcal{X}_{B}-\mathcal{X}_{B}\mathcal{L}_{B}=\mathcal{L}_{B}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Going over to equivalent definitions for the two-sided position operator
  
+\begin_inset Formula $\mathcal{X}_{T}$
+\end_inset
+
+, one has an equivalent comutator.
+ Next, using the momentum operator 
+\begin_inset LatexCommand ref
+reference "eq:momentum operator"
+
+\end_inset
+
+, one may deduce that 
+\begin_inset Formula \[
+\mathcal{P}_{T}\mathcal{X}_{T}-\mathcal{X}_{T}\mathcal{P}_{T}=-i\]
+
+\end_inset
+
+which is the usual quantum mechanical commutator.
+ At this point, it should be obvious that the eigenvalues of 
+\begin_inset Formula $\mathcal{X}_{T}\mathcal{P}_{T}$
+\end_inset
+
+ are of considerable interest, and even more so when the analogous equations
+ are constructed from within the context of the Gauss-Kuzmin-Wirsing operator;
+ this of course has direct pertinence to a famous conjecture.
+\end_layout
+
+\begin_layout Subsection
+Ladder operators
+\end_layout
+
+\begin_layout Standard
+Simple Harmonic Oscillator review.
+ 
+\end_layout
+
+\begin_layout Standard
+There are several related, intertwined confusions, here.
+ There lattice allows two different interpretations of what it means to
+ be a ladder operator.
+ XXX finish me.
 \end_layout
 
 \begin_layout Section
