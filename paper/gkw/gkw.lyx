@@ -343,14 +343,14 @@ s of rational functions and various classical functions, such as the exponential
 \end_layout
 
 \begin_layout Standard
-The naivest approach to solving the GKW operator, which is suggested by
+The naivest approaches to solving the GKW operator, which is suggested by
  the eqn 
 \begin_inset LatexCommand ref
 reference "eq:sum-form"
 
 \end_inset
 
-, is blocked by the next theorem.
+, is blocked by the next two theorems.
 \end_layout
 
 \begin_layout Theorem
@@ -427,6 +427,65 @@ Were it not for this theorem, a solution would have been provided by looking
 \end_inset
 
 .
+ Another naive avenue is also blocked: 
+\end_layout
+
+\begin_layout Theorem
+There is only one series solution to 
+\begin_inset Formula \[
+f\left(\frac{1}{\tau+n}\right)=\frac{\left(\tau+n\right)\left(\tau+1\right)}{\left(\tau+n+1\right)}\lambda f\left(\tau\right)\]
+
+\end_inset
+
+and it is 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(\tau\right)=a_{0}/\left(1+\tau\right)$
+\end_inset
+
+ for any constant 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+As in the previous proof, assuume a series solution.
+ Substituting this into the above, and performing a straightforward but
+ tedious expansion in powers of 
+\begin_inset Formula $\tau$
+\end_inset
+
+, 
+\begin_inset Formula $n$
+\end_inset
+
+, and then comparing terms, reveals that 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+, and that 
+\begin_inset Formula $a_{k}=\left(-1\right)^{k}a_{0}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+If the above had allowed solutions for something other than 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+, then one would have also had that 
+\begin_inset Formula $\mathcal{L}_{h}f=\lambda f$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -437,7 +496,19 @@ Assorted Algebraic Identities
 This section lists an assortment of random algebraic results, none particularly
  deep; some are vaguely suggestive of deeper relations.
  These are listed here mostly for the sake of completeness.
- First, we notice that adjacent terms in the series can be made to cancel
+ These are the sorts of identities one obtains by means of knuckle-headed
+ persistence in the hope that that maybe one little algebraic twist will
+ yeild a closed-form solution.
+ These were obtained by the author long before he knew that 
+\begin_inset Formula $\mathcal{L}_{h}$
+\end_inset
+
+ had a name or had been previously studied.
+ 
+\end_layout
+
+\begin_layout Standard
+First, we notice that adjacent terms in the series can be made to cancel
  by shifting the series by one:
 \end_layout
 
@@ -481,6 +552,10 @@ which satisfies
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 One can see one hint of the relationship between period-doubling and the
  GKW in the identity 
 \begin_inset Formula \begin{equation}
