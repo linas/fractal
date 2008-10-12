@@ -4754,13 +4754,12 @@ Measure-theoretic description
 \end_layout
 
 \begin_layout Standard
-The clearest and most precise, although also the most abstract formulation
- of the transfer operator is in the language of measure theory, where it
- is seen to be same thing as the push-forward.
- In this language, it gains a topological setting, which helps clarify how
- the transfer function behaves on spaces of functions.
- This definition is formulated, from first principles, below.
- 
+In this section, it will be shown that the transfer operator is the push-forward
+ of the shift operator; a theorem and a sequence of lemmas will be posed,
+ that hold in general form.
+ The point of this theorem is to disentangle the role of topology, and specifica
+lly, the role of measure theory, from the use of the shift operator.
+ We begin with a general setting.
 \end_layout
 
 \begin_layout Standard
@@ -4798,10 +4797,8 @@ Consider a topological space
 \begin_inset Formula $F$
 \end_inset
 
- being a field over the reals is necessitated by the measure-theoretic manipulat
-ions below, where functions will need to be multiplied by the real-valued
- measure.
- 
+ to being a field over the reals is is required, so that it can be used
+ in conjunction with a measure; measures are always real-valued.
 \end_layout
 
 \begin_layout Standard
@@ -4822,8 +4819,12 @@ One may then define the algebra of functions
 \end_inset
 
 .
- The algebra of functions is a vector space, in that given two functions
- 
+ An algebra is a vector space endowed with multiplication between vectors.
+ The space 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset
+
+ is a vector space, in that given two functions 
 \begin_inset Formula $f_{1},f_{2}\in\mathcal{F}(X)$
 \end_inset
 
@@ -4844,13 +4845,7 @@ One may then define the algebra of functions
 \end_inset
 
  may be interpreted to be the vectors of a vector space.
- An algebra is a vector space for which the multiplication of vectors is
- defined.
- In the case of 
-\begin_inset Formula $\mathcal{F}(X)$
-\end_inset
-
-, the multiplication is the pair-wise multiplication of functions; that
+ Multiplication is the point-wise multiplication of function values; that
  is, the product 
 \begin_inset Formula $f_{1}f_{2}$
 \end_inset
@@ -4868,7 +4863,7 @@ One may then define the algebra of functions
 \end_inset
 
 .
- Sine one clearly has 
+ Since one clearly has 
 \begin_inset Formula $f_{1}f_{2}=f_{2}f_{1}$
 \end_inset
 
@@ -4897,7 +4892,7 @@ weak topology
 \begin_inset Formula $\mathcal{F}(X)$
 \end_inset
 
- to be the space that is dual to 
+ to be the space that is topological dual to 
 \begin_inset Formula $X$
 \end_inset
 
@@ -4916,12 +4911,12 @@ weak topology
 \end_inset
 
 -norm 
-\begin_inset Formula \begin{equation}
-\left\Vert f\right\Vert _{p}=\left(\int\left|f(x)\right|^{p}dx\right)^{1/p}\end{equation}
+\begin_inset Formula \[
+\left\Vert f\right\Vert _{p}=\left(\int\left|f(x)\right|^{p}dx\right)^{1/p}\]
 
 \end_inset
 
- For 
+For 
 \begin_inset Formula $p=2$
 \end_inset
 
@@ -4961,12 +4956,12 @@ Consider now a homomorphism of topological spaces
 
 .
  The pullback is a linear operator, in that 
-\begin_inset Formula \begin{equation}
-g^{*}(af_{1}+bf_{2})=ag^{*}(f_{1})+bg^{*}(f_{2})\end{equation}
+\begin_inset Formula \[
+g^{*}(af_{1}+bf_{2})=ag^{*}(f_{1})+bg^{*}(f_{2})\]
 
 \end_inset
 
- This is very easily demonstrated by considering how 
+That the pullback is linear is easily demonstrated by considering how 
 \begin_inset Formula $g^{*}f$
 \end_inset
 
@@ -5013,7 +5008,8 @@ reference "eq: transfer-jacobi"
 \end_inset
 
 .
- By contrast, the measure-theoretic push-forward captures this aspect.
+ By contrast, the measure-theoretic push-forward captures this desirable
+ aspect.
  It may be defined as follows.
 \end_layout
 
@@ -5083,10 +5079,11 @@ measurable
 
 .
  The push-forward is a linear operator, in that 
-\begin_inset Formula $g_{*}(af_{1}+bf_{2})=ag_{*}(f_{1})+bg_{*}(f_{2})$
+\begin_inset Formula \[
+g_{*}(af_{1}+bf_{2})=ag_{*}(f_{1})+bg_{*}(f_{2})\]
+
 \end_inset
 
-.
  
 \end_layout
 
@@ -5109,7 +5106,7 @@ The transfer operator is the point-set topology limit of the measure-theoretic
 \end_layout
 
 \begin_layout Proof
-The proof that follows is rather informal, so as to keep it simple.
+The proof that follows is informal, so as to keep it simple.
  It is aimed mostly at articulating the language and terminology of measure
  theory.
  The result is none-the-less rigorous, if taken within the confines of the
@@ -5122,7 +5119,7 @@ Introduce a measure
 \end_inset
 
  and analogously 
-\begin_inset Formula $\nu:\mathcal{B}\to Y$
+\begin_inset Formula $\nu:\mathcal{B}\to\mathbb{R}^{+}$
 \end_inset
 
 .
@@ -5165,12 +5162,12 @@ Introduce a measure
 \end_inset
 
  may be understood as 
-\begin_inset Formula \begin{equation}
-f(A)=\int_{A}\tilde{f}(z)d\mu(z)=\int_{A}\tilde{f}(z)\left|\mu^{\prime}(z)\right|dz\end{equation}
+\begin_inset Formula \[
+f(A)=\int_{A}\tilde{f}(z)d\mu(z)=\int_{A}\tilde{f}(z)\left|\mu^{\prime}(z)\right|dz\]
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $\left|\mu^{\prime}(x)\right|$
 \end_inset
 
@@ -5212,12 +5209,12 @@ f(A)=\int_{A}\tilde{f}(z)d\mu(z)=\int_{A}\tilde{f}(z)\left|\mu^{\prime}(z)\right
 
 .
  One then has 
-\begin_inset Formula \begin{equation}
-\lim_{\overrightarrow{A\ni x}}\,\frac{f(A)}{\mu(A)}=\tilde{f}(x)\end{equation}
+\begin_inset Formula \[
+\lim_{\overrightarrow{A\ni x}}\,\frac{f(A)}{\mu(A)}=\tilde{f}(x)\]
 
 \end_inset
 
- which can be intuitively proved by considering 
+which can be intuitively proved by considering 
 \begin_inset Formula $A$
 \end_inset
 
@@ -5230,13 +5227,13 @@ f(A)=\int_{A}\tilde{f}(z)d\mu(z)=\int_{A}\tilde{f}(z)\left|\mu^{\prime}(z)\right
 \end_inset
 
 : 
-\begin_inset Formula \begin{equation}
-f(A)=\int_{A}\tilde{f}(z)d\mu(z)\approx\tilde{f}(x)\int_{A}d\mu=\tilde{f}(x)\mu(A)\end{equation}
+\begin_inset Formula \[
+f(A)=\int_{A}\tilde{f}(z)d\mu(z)\approx\tilde{f}(x)\int_{A}d\mu=\tilde{f}(x)\mu(A)\]
 
 \end_inset
 
- To perform the analogous limit for the push-forward, one must consider
- a point 
+To perform the analogous limit for the push-forward, one must consider a
+ point 
 \begin_inset Formula $y\in Y$
 \end_inset
 
@@ -5281,12 +5278,12 @@ f(A)=\int_{A}\tilde{f}(z)d\mu(z)\approx\tilde{f}(x)\int_{A}d\mu=\tilde{f}(x)\mu(
 \end_inset
 
  sufficiently small, one may write 
-\begin_inset Formula \begin{equation}
-g^{-1}(B)=A_{1}\cup A_{2}\cup\cdots=\bigcup_{j=1}^{k}A_{j}\end{equation}
+\begin_inset Formula \[
+g^{-1}(B)=A_{1}\cup A_{2}\cup\cdots=\bigcup_{j=1}^{k}A_{j}\]
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $k$
 \end_inset
 
@@ -5303,16 +5300,16 @@ g^{-1}(B)=A_{1}\cup A_{2}\cup\cdots=\bigcup_{j=1}^{k}A_{j}\end{equation}
 \end_inset
 
 .
- A branch points, such a decomposition may not be possible.
+ At branch points, such a decomposition may not be possible.
  The axiom of sigma-additivity guarantees that such multi-sheeted covers
  behave just the way one expects integrals to behave: in other words, one
  has 
-\begin_inset Formula \begin{equation}
-\mu\left(g^{-1}(B)\right)=\mu\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}\mu\left(A_{j}\right)\end{equation}
+\begin_inset Formula \[
+\mu\left(g^{-1}(B)\right)=\mu\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}\mu\left(A_{j}\right)\]
 
 \end_inset
 
- whenever the collection of 
+whenever the collection of 
 \begin_inset Formula $A_{j}$
 \end_inset
 
@@ -5326,12 +5323,12 @@ g^{-1}(B)=A_{1}\cup A_{2}\cup\cdots=\bigcup_{j=1}^{k}A_{j}\end{equation}
 \end_inset
 
  to contain only sigma-additive functions as well, so that 
-\begin_inset Formula \begin{equation}
-f\left(g^{-1}(B)\right)=f\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}f\left(A_{j}\right)\end{equation}
+\begin_inset Formula \[
+f\left(g^{-1}(B)\right)=f\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}f\left(A_{j}\right)\]
 
 \end_inset
 
- As the set 
+As the set 
 \begin_inset Formula $B$
 \end_inset
 
@@ -5371,7 +5368,7 @@ f\left(g^{-1}(B)\right)=f\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}f\lef
 
 \end_inset
 
- The limit in the last line of this sequence of manipulations may be interpreted
+The limit in the last line of this sequence of manipulations may be interpreted
  in two ways, depending on whether one wants to define the measure 
 \begin_inset Formula $\nu$
 \end_inset
@@ -5390,12 +5387,12 @@ f\left(g^{-1}(B)\right)=f\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}f\lef
 \end_inset
 
 , then one has 
-\begin_inset Formula \begin{equation}
-\lim_{\overrightarrow{A_{j}\ni x_{j}}}\,\frac{\mu\left(A_{j}\right)}{g_{*}\mu(B)}=\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}\end{equation}
+\begin_inset Formula \[
+\lim_{\overrightarrow{A_{j}\ni x_{j}}}\,\frac{\mu\left(A_{j}\right)}{g_{*}\mu(B)}=\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}\]
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $\left|g^{\prime}\left(x_{j}\right)\right|$
 \end_inset
 
@@ -5414,8 +5411,8 @@ f\left(g^{-1}(B)\right)=f\left(\bigcup_{j=1}^{k}A_{j}\right)=\sum_{j=1}^{k}f\lef
 \end_inset
 
 , so that 
-\begin_inset Formula \begin{equation}
-\nu\left(B\right)=\int_{A_{j}}g^{\prime}(z)\, d\mu(z)\approx g^{\prime}\left(x_{j}\right)\mu\left(A_{j}\right)\end{equation}
+\begin_inset Formula \[
+\nu\left(B\right)=\int_{A_{j}}g^{\prime}(z)\, d\mu(z)\approx g^{\prime}\left(x_{j}\right)\mu\left(A_{j}\right)\]
 
 \end_inset
 
@@ -5438,7 +5435,7 @@ small enough
 
 \end_inset
 
- which may be easily recognized as equation 
+which may be easily recognized as equation 
 \begin_inset LatexCommand ref
 reference "eq: transfer-jacobi"
 
@@ -5451,14 +5448,17 @@ reference "eq: transfer-jacobi"
 \end_layout
 
 \begin_layout Standard
-Some curious lemmas show up along the way.
+In simplistic terms, the push-forward can be thought of as a kind of change-of-v
+ariable.
+ Thus, one should not be surprised by the following lemma, which should
+ be recognizable as the Jacobian, from basic calculus.
  
 \end_layout
 
 \begin_layout Lemma
-One has 
-\begin_inset Formula \begin{equation}
-\sum_{j=1}^{k}\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}=1\end{equation}
+(Jacobian) One has 
+\begin_inset Formula \[
+\sum_{x_{j}\in g^{-1}(y)}\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}=1\]
 
 \end_inset
 
@@ -5484,8 +5484,18 @@ This follows by taking the limit
 \end_layout
 
 \begin_layout Corollary
-The constant function is an eigenvector of the transfer operator, associated
- with the eigenvalue one.
+\begin_inset LatexCommand label
+name "cor:unit-eigenvec"
+
+\end_inset
+
+The uniform distribution (
+\emph on
+i.e.
+
+\emph default
+ the measure) is an eigenvector of the transfer operator, associated with
+ the eigenvalue one.
  
 \end_layout
 
@@ -5502,17 +5512,16 @@ reference "eq:Transfer-point"
 \end_inset
 
 , and applies the lemma above.
- From the viewpoint of the sigma-algebra, this is nothing more than the
- seemingly vacuous statement that 
+ From the viewpoint of the sigma-algebra, this is nothing more than a rephrasing
+ of the starting point, that 
 \begin_inset Formula $\nu=g_{*}\mu$
 \end_inset
 
-.
- This becomes slightly less vacuous if one takes the space 
+, and then taking the space 
 \begin_inset Formula $Y=X$
 \end_inset
 
-, so that 
+, so that the push-forward induced by 
 \begin_inset Formula $g:X\to X$
 \end_inset
 
@@ -5525,27 +5534,164 @@ reference "eq:Transfer-point"
 \end_layout
 
 \begin_layout Standard
-The last corollary suggests two interesting conjectures.
- 
-\end_layout
-
-\begin_layout Conjecture
-(Ruelle-Perron-Frobenius theorem).
- All transfer operators are compact, bounded operators.
-\end_layout
-
-\begin_layout Standard
-This conjecture is of course just the Frobenius-Perron theorem, recast in
- the context of measure theory.
- I suppose it has a simple-enough proof that the author hasn't yet seen
- or re-discovered.
- XXX Don't let this sit there.
- XXX, Ref:Dunford and Schwartz.
- A corollary to the Perron-Frobenius theorem is then:
+The last corollary is more enlightening when it is turned on its side; it
+ implies two well-known theorems, which follow easily in this framework.
 \end_layout
 
 \begin_layout Corollary
-(Haar measure) For any homomorphisms 
+(Ruelle-Perron-Frobenius theorem).
+ All transfer operators are continuous, compact, bounded operators; furthermore,
+ they are isometries of Banach spaces.
+\end_layout
+
+\begin_layout Proof
+This theorem is of course just the Frobenius-Perron theorem, recast in the
+ context of measure theory.
+ By definition, the measures have unit norm: that is, 
+\begin_inset Formula $\left\Vert \mu\right\Vert _{1}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\Vert \nu\right\Vert _{1}=1$
+\end_inset
+
+.
+ This is nothing more than the statement that the spaces 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ are measurable: the total volume of 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ is, by definition, one.
+ Since 
+\begin_inset Formula $\nu=g_{*}\mu$
+\end_inset
+
+, we have 
+\begin_inset Formula $\left\Vert g_{*}\mu\right\Vert _{1}=1$
+\end_inset
+
+, and this holds for all possible measures 
+\begin_inset Formula $\mu\in\mathcal{F}(X)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Recall the definition of a bounded operator.
+ Given a linear map 
+\begin_inset Formula $T:U\to V$
+\end_inset
+
+ between Banach spaces 
+\begin_inset Formula $U$
+\end_inset
+
+and 
+\begin_inset Formula $V$
+\end_inset
+
+, then 
+\begin_inset Formula $T$
+\end_inset
+
+ is bounded if there exists a constant 
+\begin_inset Formula $C<\infty$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\Vert Tu\right\Vert _{V}\le C\left\Vert u\right\Vert _{U}$
+\end_inset
+
+for all 
+\begin_inset Formula $u\in U$
+\end_inset
+
+.
+ But this is exactly the case above, with 
+\begin_inset Formula $T=g_{*}$
+\end_inset
+
+, and 
+\begin_inset Formula $U=\mathcal{F}(X)$
+\end_inset
+
+, 
+\begin_inset Formula $V=\mathcal{F}(Y)$
+\end_inset
+
+, and 
+\begin_inset Formula $C=1$
+\end_inset
+
+.
+ The norm of a bounded operator is conventionally defined as
+\begin_inset Formula \[
+\left\Vert T\right\Vert =\sup_{u\ne0}\frac{\left\Vert Tu\right\Vert _{V}}{\left\Vert u\right\Vert _{U}}=\sup_{\left\Vert u\right\Vert _{U}\le1}\left\Vert Tu\right\Vert _{V}\]
+
+\end_inset
+
+and so we have the norm of 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ being 
+\begin_inset Formula $\left\Vert g_{*}\right\Vert =1$
+\end_inset
+
+.
+ That 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ is an isometry follows trivially from 
+\begin_inset Formula $\left\Vert g_{*}\mu\right\Vert _{1}=\left\Vert \nu\right\Vert _{1}$
+\end_inset
+
+ and that 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ is linear.
+\end_layout
+
+\begin_layout Standard
+The corollary 
+\begin_inset LatexCommand ref
+reference "cor:unit-eigenvec"
+
+\end_inset
+
+ can also be treated as a corollary to the Perron-Frobenius theorem: namely,
+ that there is at least one vector that corresponds to the maximum eigenvalue
+ of 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+.
+ This eigenvector is in fact the Haar measure, as the next theorem shows.
+ 
+\end_layout
+
+\begin_layout Theorem
+\begin_inset LatexCommand label
+name "thm:Haar-measure"
+
+\end_inset
+
+(Haar measure) For any homomorphism 
 \begin_inset Formula $g:X\to X$
 \end_inset
 
@@ -5586,11 +5732,8 @@ This conjecture is of course just the Frobenius-Perron theorem, recast in
  
 \end_layout
 
-\begin_layout Standard
-By the Frobenius-Perron theorem, this measure is unique.
- It is, of course the Haar measure, although this seems to be an unusual
- way of finding the Haar measure.
- Sketch of semi-proof: 
+\begin_layout Proof
+By definition, 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -5605,32 +5748,77 @@ By the Frobenius-Perron theorem, this measure is unique.
 
 is a bounded operator, and the space of measures is compact, and so a bounded
  operator on a compact space will have a fixed point.
- Ref.
- some appropriate fixed-point thm (Ref Dunford and Schwartz).
- To prove uniqueness, we have to show that 
+ The existence of the fixed point is given by the Markov-Kakutani theorem
+\begin_inset LatexCommand cite
+after "p 456"
+key "Dunford1957"
+
+\end_inset
+
+.
+ The Markov-Kakutani theorem also provides the uniqueness condition: if
+ there are other push-forwards 
+\begin_inset Formula $h_{*}$
+\end_inset
+
+ that commute with 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+, then each such push-forward will also have a fixed point.
+ The goal is then to show that when 
 \begin_inset Formula $g$
 \end_inset
 
- is ergodic, i.e.
- that there are no invariant subspaces, that orbit of 
+ is ergodic, there are no other functions 
+\begin_inset Formula $h$
+\end_inset
+
+ that commute with 
+\begin_inset Formula $g$
+\end_inset
+
+.
+ But this follows from the definition of ergodicity: when 
+\begin_inset Formula $g$
+\end_inset
+
+ is ergodic, there are no invariant subspaces, and the orbit of 
 \begin_inset Formula $g$
 \end_inset
 
  is the whole space.
- Else, if 
+ As there are no invariant subspaces, there are no operators that can map
+ between these subspaces, 
+\emph on
+i.e.
+
+\emph default
+ there are no other commuting operators.
+\end_layout
+
+\begin_layout Standard
+A peculiar special case is worth mentioning: if 
 \begin_inset Formula $g$
 \end_inset
 
- is not ergodic on the whole space, then show that orbit of 
+ is not ergodic on the whole space, then typically one has that the orbit
+ of 
 \begin_inset Formula $g$
 \end_inset
 
  splits or foliates the measure space into a bunch of pairwise disjoint
- leaves, and its ergodic on each leaf, there's a distinct fixed point 
+ leaves, with 
+\begin_inset Formula $g$
+\end_inset
+
+ being ergodic on each leaf.
+ The Markov-Kakutani theorem then implies that there is a distinct fixed
+ point 
 \begin_inset Formula $\mu$
 \end_inset
 
- in each leaf, and there's a symmetry group that takes 
+ in each leaf, and that there is a mapping that takes 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -5639,133 +5827,84 @@ is a bounded operator, and the space of measures is compact, and so a bounded
 \end_layout
 
 \begin_layout Standard
-XXX Make note that there is a certain sense of duality floating here: if
- there are 
-\begin_inset Quotes eld
+In the language of dynamical systems, the push-forward 
+\begin_inset Formula $g_{*}$
 \end_inset
 
-discrete
-\begin_inset Quotes erd
+ is commonly written as 
+\begin_inset Formula $\mathcal{L}_{g}$
 \end_inset
 
- symmetries of 
-\begin_inset Formula $g$
+, so that one has 
+\begin_inset Formula \[
+g_{*}=\mathcal{L}_{g}\,:\,\mathcal{F}\left(X\right)\to\mathcal{F}\left(X\right)\]
+
 \end_inset
 
-, then the space is foliated into ergodic leaves.
- One can then presumably state the KAM theorem in this language.
- The KAM theorem appears to state that small perturbations cause the leaves
- to touch with one another at certain points, while also leaving large 
-\begin_inset Quotes eld
-\end_inset
-
-islands of stability
-\begin_inset Quotes erd
-\end_inset
-
-, i.e.
- non-zero-measure, compact, simply-connected regions of a leaf which do
- not touch any other leaf.
- That is, an 
-\begin_inset Quotes eld
-\end_inset
-
-island of stability
-\begin_inset Quotes erd
-\end_inset
-
- is what would be called a 
-\begin_inset Quotes eld
-\end_inset
-
-nice neighborhood
-\begin_inset Quotes erd
-\end_inset
-
- when discussing the action of a discrete group, e.g.
- the Fuchsian group.
- From this viewpoint, an 
-\begin_inset Quotes eld
-\end_inset
-
-island of stability
-\begin_inset Quotes erd
-\end_inset
-
- is just a 
-\begin_inset Quotes eld
-\end_inset
-
-homogenous space
-\begin_inset Quotes erd
-\end_inset
-
-.
- An 
-\begin_inset Quotes eld
-\end_inset
-
-island of stability
-\begin_inset Quotes erd
-\end_inset
-
- is a 
-\begin_inset Quotes eld
-\end_inset
-
-fundamental domain
-\begin_inset Quotes erd
-\end_inset
-
-; just as the action of a discrete group carries one fundamental domain
- into another, so here, we have thanks to the KAM theorem, the appeareance
- of a discrete group, which carries one 
-\begin_inset Quotes eld
-\end_inset
-
-island of stability
-\begin_inset Quotes erd
-\end_inset
-
- to another.
- This now opens the door to the application of concepts from homogenous
- spaces to dyanmical systems: What is the 
-\begin_inset Quotes eld
-\end_inset
-
-j-invariant
-\begin_inset Quotes erd
-\end_inset
-
- of the island of stability? Just as the hypergeometric functions are a
- kind of 
-\begin_inset Quotes eld
-\end_inset
-
-quantization
-\begin_inset Quotes erd
-\end_inset
-
- of homogenous spaces, so it would seem that the analog of a hypergeometric
- function on an island of stability would provide a certain quantization
- of a KAM system.
- Just as there are rigidity theorems for homogenous spaces, are there correspond
-ing rigidity theorems for dynamical systems?
+now being called the transfer operator or the Ruelle-Frobenius-Perron operator.
 \end_layout
 
 \begin_layout Standard
-XXX argue that push-forward and pullback are opposites, that pullback is
- the Koopman operator.
-\end_layout
-
-\begin_layout Standard
-XXX Make the note that 
-\begin_inset Formula $\rho$
+In the language of physics, the fixed point 
+\begin_inset Formula $\mu$
 \end_inset
 
- is an element of the dual topology.
- That is, given a topology, and a function on topology that blah dual...
+ is called the 
+\begin_inset Quotes eld
+\end_inset
+
+ground state
+\begin_inset Quotes erd
+\end_inset
+
+ of a system.
+ When it is unique, then the ground state is not degenerate; when it is
+ not unique, then the ground state is said to be degenerate.
+ The operator 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ is the time-evolution operator of the system; it shows how physical fields
  
+\begin_inset Formula $f\in\mathcal{F}(X)$
+\end_inset
+
+ over a space 
+\begin_inset Formula $X$
+\end_inset
+
+ evolve over time.
+ When 
+\begin_inset Formula $F$
+\end_inset
+
+ is the complex numbers 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+, the fact that 
+\begin_inset Formula $\left\Vert g_{*}\right\Vert =1$
+\end_inset
+
+ is essentially a way of stating that time-evolution is unitary; the Frobenius-P
+erron operator is the unitary time-evolution operator of the system.
+ What is called 
+\begin_inset Quotes eld
+\end_inset
+
+second quantization
+\begin_inset Quotes erd
+\end_inset
+
+ in physics should be interpreted as the fitting of the space 
+\begin_inset Formula $\mathcal{F}(X)$
+\end_inset
+
+ with a set of basis vectors, together with a formulation of 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ in terms of that basis.
 \end_layout
 
 \begin_layout Section
