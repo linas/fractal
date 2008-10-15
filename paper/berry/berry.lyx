@@ -64,9 +64,41 @@ Intro
 \end_layout
 
 \begin_layout Standard
-Introduction.
- TBD.
- Based on lattice work.
+The attack on the Riemann Hypothesis via the Berry conjecture requires the
+ definition of position and momentum operators obeying the Heisenberg uncertaint
+y principle 
+\begin_inset Formula $\left[p,x\right]=px-xp=\hbar$
+\end_inset
+
+.
+ In quantum mechanics, when formulated as an exercise in Fourier analysis,
+ the standard identification of the momentum operator is that 
+\begin_inset Formula $p\to-id/dx$
+\end_inset
+
+ (there are, of course, many other formulations as well).
+ The Berry conjecture is the observation that 
+\begin_inset Formula $x^{s}$
+\end_inset
+
+ is an eignestate of 
+\begin_inset Formula $xp$
+\end_inset
+
+, that is, 
+\begin_inset Formula \[
+x\frac{d}{dx}x^{s}=\left(s-1\right)x^{s}\]
+
+\end_inset
+
+and that, perhaps there exists some instantiation of the abstract operator
+ 
+\begin_inset Formula $xp$
+\end_inset
+
+ that gives the zeroes of the Riemann zeta function as its eigenvalues.
+ The primary conceit of this paper is that the author has found this operator.
+ What can be made of this remains open.
 \end_layout
 
 \begin_layout Section
@@ -186,6 +218,24 @@ for all
 \end_inset
 
 .
+ In what follows, we will regularly make an 
+\begin_inset Quotes eld
+\end_inset
+
+abuse of notation
+\begin_inset Quotes erd
+\end_inset
+
+, and let 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ stand for both the space of strings, and for the product topology on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, and also, for the Borel sigma-algebra induced by the topology.
+ Which is intended will hopefully be clear from the context.
 \end_layout
 
 \begin_layout Standard
@@ -403,8 +453,127 @@ reference "eq:measure-additive"
  can be safely applied a countable number of times.
 \end_layout
 
+\begin_layout Subsection
+The Shift Operator
+\end_layout
+
 \begin_layout Standard
-A fina
+A final, critical device will be the shift operator 
+\begin_inset Formula $\tau:\Omega\to\Omega$
+\end_inset
+
+, which truncates one digit off of an infinite string: 
+\begin_inset Formula \[
+\tau:\left[\sigma_{0},\sigma_{1},\sigma_{2},\cdots\right]\mapsto\left[\sigma_{1},\sigma_{2},\cdots\right]\]
+
+\end_inset
+
+Considered as a map of cylinder sets, it acts as 
+\begin_inset Formula $\tau:\pi_{k+1}^{-1}\left(a\right)\mapsto\pi_{k}^{-1}\left(a\right)$
+\end_inset
+
+ while 
+\begin_inset Formula $\tau\left(\pi_{0}^{-1}\left(a\right)\right)=\Omega$
+\end_inset
+
+.
+ Of course, 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is not one-to-one; to remove the ambiguity, we will 
+\emph on
+define
+\emph default
+ 
+\begin_inset Formula $\tau^{-1}$
+\end_inset
+
+ as 
+\begin_inset Formula $\tau^{-1}\left(\pi_{k}^{-1}\left(a\right)\right)=\pi_{k+1}^{-1}\left(a\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The shift operator induces a map 
+\begin_inset Formula $\tau_{*}:\mathcal{F}\left(\Omega\right)\to\mathcal{F}\left(\Omega\right)$
+\end_inset
+
+, the push-forward, defined as 
+\begin_inset Formula $\tau_{*}f=f\circ\tau^{-1}$
+\end_inset
+
+.
+ The push-forward is a bounded linear operator, and it can be identified
+ with the Ruelle-Frobenius-Perron operator
+\begin_inset LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+; this correspondance will be be much explored in this article.
+ In anticipation of this, the notation 
+\begin_inset Formula $\mathcal{L}f=\tau_{*}f=f\circ\tau^{-1}$
+\end_inset
+
+ will be used for the push-forward of 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ The choice of 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ emphasizes that the operator is linear: 
+\begin_inset Formula \[
+\mathcal{L}\left(af+bg\right)=a\mathcal{L}f+b\mathcal{L}g\]
+
+\end_inset
+
+for 
+\begin_inset Formula $a,b\in\mathbb{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $f,g\in\mathcal{F}\left(\Omega\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+The Position Operator
+\end_layout
+
+\begin_layout Standard
+We focus now on obtaining a workable expression for the position operator.
+ Given an arbitrary sequence of real or complex numbers 
+\begin_inset Formula $\left\{ a_{k}\right\} $
+\end_inset
+
+, consider the linear operator 
+\begin_inset Formula $\mathcal{A}:\mathcal{F}\left(\Omega\right)\to\mathcal{F}\left(\Omega\right)$
+\end_inset
+
+ defined by 
+\begin_inset Formula \[
+\left[\mathcal{A}f\right]\left(A\right)=\sum_{k=0}^{\infty}a_{k}\]
+
+\end_inset
+
+where, of course, 
+\begin_inset Formula $f\in\mathcal{F}\left(\Omega\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $A\subset\Omega$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
