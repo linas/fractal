@@ -398,18 +398,50 @@ For convenience, write
 \end_inset
 
  and so on.
- Combining this with the eqn 
+ The 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ are clearly pairwise-disjoint: 
+\begin_inset Formula $d_{j}\cap d_{k}=\varnothing$
+\end_inset
+
+ for 
+\begin_inset Formula $j\ne k$
+\end_inset
+
+ and the previous shows that, by construction, they span the entire space:
+ 
+\begin_inset Formula \begin{equation}
+\Omega=\bigcup_{k=0}^{\infty}d_{k}\label{eq:dk-span}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Combining this with the eqn 
 \begin_inset LatexCommand ref
 reference "eq:measure-additive"
 
 \end_inset
 
- leads to a lemma that fill be needed:
+ leads to a lemma that demonstrates that, in order to completely define
+ a function 
+\begin_inset Formula $f$
+\end_inset
+
+, it is sufficient to define it on in terms of the 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Lemma
 \begin_inset LatexCommand label
-name "lem:sum-measure"
+name "lem:measure-extension"
 
 \end_inset
 
@@ -456,6 +488,27 @@ reference "eq:measure-additive"
 \end_inset
 
  can be safely applied a countable number of times.
+\end_layout
+
+\begin_layout Standard
+This lemma may be thought of as an 
+\begin_inset Quotes eld
+\end_inset
+
+extension theorem
+\begin_inset Quotes erd
+\end_inset
+
+: it shows how to define a function 
+\begin_inset Formula $f$
+\end_inset
+
+ on the whole space, given its values only on a set of parts 
+\begin_inset Formula $A\cap d_{k}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -829,7 +882,7 @@ The theorem is completed by substituting
 
  into the above, and then observing that, in accordance with lemma 
 \begin_inset LatexCommand ref
-reference "lem:sum-measure"
+reference "lem:measure-extension"
 
 \end_inset
 
@@ -845,6 +898,92 @@ As this holds for all sets
 
 , the theorem is proven.
  
+\end_layout
+
+\begin_layout Standard
+The position operator is not a bounded operator; its eigenvalues may be
+ arbitrarily large.
+ A discrete set of eigenfunctions showing this behaviour can be immediately
+ demonstrated.
+ Consider a set of maps 
+\begin_inset Formula $\theta_{k}:\Omega\to\mathbb{R}$
+\end_inset
+
+ given by 
+\begin_inset Formula \[
+\theta_{k}\left(A\cap d_{j}\right)=\begin{cases}
+0 & \mbox{ for }j\ne k\\
+0 & \mbox{ for }j=k\mbox{ and }A\cap d_{k}=\varnothing\\
+\frac{\mu_{B}\left(A\right)}{\mu_{B}\left(A\cap d_{k}\right)} & \mbox{ for }j=k\mbox{ and }A\cap d_{k}\ne\varnothing\end{cases}\]
+
+\end_inset
+
+From this definition, it is clear that 
+\begin_inset Formula \[
+\varphi_{B}\theta_{k}=k\theta_{k}\]
+
+\end_inset
+
+that is, the 
+\begin_inset Formula $\theta_{k}$
+\end_inset
+
+ are eigenvectors with eigenvalue 
+\begin_inset Formula $k$
+\end_inset
+
+, and thus, 
+\begin_inset Formula $\varphi_{B}$
+\end_inset
+
+ is unbounded (and, thus, is not a continuous operator).
+ 
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\theta_{k}$
+\end_inset
+
+ can be thought of as set-membership functions on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ Since the 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ span the entire space (eqn 
+\begin_inset LatexCommand ref
+reference "eq:dk-span"
+
+\end_inset
+
+), the lemma 
+\begin_inset LatexCommand ref
+reference "lem:measure-extension"
+
+\end_inset
+
+ shows that the above is sufficient to define the 
+\begin_inset Formula $\theta_{k}$
+\end_inset
+
+ for all sets in the product topology on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ Plugging in, one has the much simpler definition:
+\begin_inset Formula \[
+\theta_{k}\left(A\right)=\begin{cases}
+0 & \mbox{ for }A\cap d_{k}=\varnothing\\
+1 & \mbox{ for }A\cap d_{k}\ne\varnothing\end{cases}\]
+
+\end_inset
+
+wh
 \end_layout
 
 \begin_layout Standard
