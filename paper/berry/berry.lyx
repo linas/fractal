@@ -408,6 +408,11 @@ reference "eq:measure-additive"
 \end_layout
 
 \begin_layout Lemma
+\begin_inset LatexCommand label
+name "lem:sum-measure"
+
+\end_inset
+
 One has that, for any 
 \begin_inset Formula $f\in\mathcal{F}\left(\Omega\right)$
 \end_inset
@@ -495,6 +500,61 @@ define
 
 .
  
+\end_layout
+
+\begin_layout Standard
+The shift operator is distributive over set union and intersection, so that,
+ for any sets 
+\begin_inset Formula $A,B\subset\Omega$
+\end_inset
+
+, one has 
+\begin_inset Formula \[
+\tau\left(A\cap B\right)=\tau\left(A\right)\cap\tau\left(B\right)\]
+
+\end_inset
+
+and also 
+\begin_inset Formula \[
+\tau\left(A\cup B\right)=\tau\left(A\right)\cup\tau\left(B\right)\]
+
+\end_inset
+
+ and similarly for 
+\begin_inset Formula $\tau^{-1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The Bernoulli measure 
+\begin_inset Formula $\mu_{B}$
+\end_inset
+
+ is invariant under the inverse shift; that is,
+\begin_inset Formula \[
+\mu_{B}\left(\tau^{-1}\left(A\right)\right)=\mu_{B}\left(A\right)\]
+
+\end_inset
+
+this invariance being a defining property of a class of measures to which
+ the Bernoulli measure belongs (the subscript 
+\begin_inset Formula $B$
+\end_inset
+
+ here stands for 
+\begin_inset Quotes eld
+\end_inset
+
+Bernoulli
+\begin_inset Quotes erd
+\end_inset
+
+ and not something else).
+ In general, most other measures will not have this shift-invariance property;
+ in particular, the Minkowski measure does not.
 \end_layout
 
 \begin_layout Standard
@@ -622,7 +682,119 @@ for any two sets
 \begin_inset Formula $\mathcal{A}$
 \end_inset
 
+ and the application of 
+\begin_inset LatexCommand ref
+reference "eq:measure-additive"
+
+\end_inset
+
+ under the sum.
+ 
+\end_layout
+
+\begin_layout Standard
+The operator 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ will now be used to construct the position operator for the Bernoulli measure.
+ 
+\end_layout
+
+\begin_layout Standard
+Consider the operator 
+\begin_inset Formula $\mathcal{A}=\varphi$
+\end_inset
+
+ defined by the series 
+\begin_inset Formula $a_{k}=k$
+\end_inset
+
 .
+\end_layout
+
+\begin_layout Theorem
+For the Bernoulli measure, one has that 
+\begin_inset Formula \[
+\mathcal{L}_{B}\varphi_{B}-\varphi_{B}\mathcal{L}_{B}=\mathcal{L}_{B}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Recall that the generic definition for the pushforward 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ is 
+\begin_inset Formula \[
+\left[\mathcal{L}f\right]\left(A\right)=\left(f\circ\tau^{-1}\right)\left(A\right)\]
+
+\end_inset
+
+One then has that 
+\begin_inset Formula \[
+\left[\mathcal{AL}f\right]\left(A\right)=\frac{1}{\mu\left(A\right)}\;\sum_{k=0}^{\infty}a_{k}\mu\left(A\cap d_{k}\right)\;\left(f\circ\tau^{-1}\right)\left(A\cap d_{k}\right)\]
+
+\end_inset
+
+while 
+\begin_inset Formula \begin{align*}
+\left[\mathcal{LA}f\right]\left(A\right)= & \frac{1}{\mu\left(\tau^{-1}\left(A\right)\right)}\;\sum_{k=0}^{\infty}a_{k}\mu\left(\tau^{-1}\left(A\right)\cap d_{k}\right)\; f\left(\tau^{-1}\left(A\right)\cap d_{k}\right)\\
+= & \frac{a_{0}}{\mu\left(\tau^{-1}\left(A\right)\right)}\mu\left(\tau^{-1}\left(A\right)\cap d_{0}\right)\; f\left(\tau^{-1}\left(A\right)\cap d_{0}\right)\\
+ & +\frac{1}{\mu\left(\tau^{-1}\left(A\right)\right)}\;\sum_{k=1}^{\infty}a_{k}\mu\left(\tau^{-1}\left(A\cap d_{k-1}\right)\right)\; f\left(\tau^{-1}\left(A\cap d_{k-1}\right)\right)\end{align*}
+
+\end_inset
+
+For the second part of the above equation, the identity 
+\begin_inset Formula $\tau\left(d_{k}\right)=d_{k-1}$
+\end_inset
+
+ was made use of, together with the distributivity of 
+\begin_inset Formula $\tau^{-1}$
+\end_inset
+
+ over set intersection.
+ By employing the shift invariance of the Bernoulli measure 
+\begin_inset Formula $\mu_{B}$
+\end_inset
+
+, namely that 
+\begin_inset Formula \[
+\mu_{B}\left(\tau^{-1}\left(A\right)\right)=\mu_{B}\left(A\right)\]
+
+\end_inset
+
+one them immediately obtains that 
+\begin_inset Formula \begin{align*}
+\left[\left(\mathcal{L}_{B}\mathcal{A_{B}}-\mathcal{A}_{B}\mathcal{L}_{B}\right)f\right]\left(A\right)= & \frac{a_{0}}{\mu_{B}\left(A\right)}\mu_{B}\left(\tau^{-1}\left(A\right)\cap d_{0}\right)\; f\left(\tau^{-1}\left(A\right)\cap d_{0}\right)\\
+ & +\frac{1}{\mu_{B}\left(A\right)}\;\sum_{k=0}^{\infty}\left(a_{k+1}-a_{k}\right)\mu_{B}\left(A\cap d_{k}\right)\;\left(f\circ\tau^{-1}\right)\left(A\cap d_{k}\right)\end{align*}
+
+\end_inset
+
+The theorem is completed by substituting 
+\begin_inset Formula $a_{k}=k$
+\end_inset
+
+ into the above, and then observing that, in accordance with lemma 
+\begin_inset LatexCommand ref
+reference "lem:sum-measure"
+
+\end_inset
+
+, one has that 
+\begin_inset Formula \[
+\frac{1}{\mu_{B}\left(A\right)}\;\sum_{k=0}^{\infty}\mu_{B}\left(A\cap d_{k}\right)\;\left(f\circ\tau^{-1}\right)\left(A\cap d_{k}\right)=\left[\mathcal{L}_{B}f\right]\left(A\right)\]
+
+\end_inset
+
+As this holds for all sets 
+\begin_inset Formula $A\subset\Omega$
+\end_inset
+
+, the theorem is proven.
  
 \end_layout
 
