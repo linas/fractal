@@ -70,11 +70,12 @@ Introduction.
 \end_layout
 
 \begin_layout Section
-Definitions
+Basic Definitions
 \end_layout
 
 \begin_layout Standard
-Product topology stuff.
+What follows are some basic notation and definitions required to explore
+ the space of measurable fuctions on an infinite product topology.
 \end_layout
 
 \begin_layout Standard
@@ -112,7 +113,23 @@ with
 \end_inset
 
 .
- 
+ On certain rare occasions, we'll have the need to talk about the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic generalization of this space, where 
+\begin_inset Formula $2$
+\end_inset
+
+ is replaced by the set of 
+\begin_inset Formula $p$
+\end_inset
+
+ items; it will be made clear when this generalization will need to be made.
+ On other occasions, we'll have the need to discuss the two-sided version
+ of the above, i.e.
+ the set of strings which trail off to infinity on either the left or right.
+ This will be explicitly constructed and discussed at a later stage.
 \end_layout
 
 \begin_layout Standard
@@ -200,11 +217,194 @@ key "Kle08"
 ; it assigns a measure of 1/2 to each of the basic cylinder sets; that is,
  
 \begin_inset Formula \[
-\mu_{B}\]
+\mu_{B}\left(\pi_{k}^{-1}\left(0\right)\right)=\mu_{B}\left(\pi_{k}^{-1}\left(1\right)\right)=\frac{1}{2}\]
 
 \end_inset
 
- 
+The Minkowski measure is far more subtle; it is defined in 
+\begin_inset LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+; its properties will be reviewed in a later section, as needed.
+ All measures assign 1 to the whole space: 
+\begin_inset Formula $\mu\left(\Omega\right)=\mu_{B}\left(\Omega\right)=\mu_{M}\left(\Omega\right)=1$
+\end_inset
+
+ .
+ In what follows, the subscript 
+\begin_inset Formula $B$
+\end_inset
+
+ or 
+\begin_inset Formula $M$
+\end_inset
+
+ will be used to denote the Bernoulli or the Minkowski measures, and any
+ related quantities as they occur.
+ A lack of subscript is meant to denote relations that hold in general,
+ for all measures.
+\end_layout
+
+\begin_layout Standard
+The space of measureable functions on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ will be denoted as 
+\begin_inset Formula $\mathcal{F}\left(\Omega\right)$
+\end_inset
+
+.
+ Its elements are maps 
+\begin_inset Formula $f:\Omega\to\mathbb{R}$
+\end_inset
+
+ to the real numbers, or sometimes to the complex numbers: 
+\begin_inset Formula $f:\Omega\to\mathbb{C}$
+\end_inset
+
+; which of these cases apply at any moment should be clear from context.
+ These functions are (almost) always taken to be measurable, by which it
+ is meant that the following identity 
+\emph on
+always
+\emph default
+ holds, for any two open sets 
+\begin_inset Formula $A,B$
+\end_inset
+
+ such that 
+\begin_inset Formula $A\cap B=\varnothing$
+\end_inset
+
+:
+\begin_inset Formula \begin{equation}
+\mu\left(A\cup B\right)f\left(A\cup B\right)=\mu\left(A\right)f\left(A\right)+\mu\left(B\right)f\left(B\right)\label{eq:measure-additive}\end{equation}
+
+\end_inset
+
+This identity will be frequently invoked.(XXX And therefore, perhaps, it
+ should be justified in greater detail, by touching on more standard presentatio
+ns of measure theory?)
+\end_layout
+
+\begin_layout Standard
+The following notation for cylinder sets will be convenient.
+ Let 
+\begin_inset Formula $C_{0}=\pi_{0}^{-1}\left(0\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{1}=\pi_{0}^{-1}\left(1\right)$
+\end_inset
+
+.
+ For a general string of binary digits 
+\begin_inset Formula $a,b,c,\ldots$
+\end_inset
+
+ define 
+\begin_inset Formula \[
+C_{abc\ldots}=\pi_{0}^{-1}\left(a\right)\cap\pi_{1}^{-1}\left(a\right)\cap\pi_{2}^{-1}\left(c\right)\cap\cdots\]
+
+\end_inset
+
+Notice that 
+\begin_inset Formula \begin{align*}
+\Omega= & C_{1}\cup C_{0}=C_{1}\cup C_{01}\cup C_{00}\\
+= & C_{1}\cup C_{01}\cup C_{001}\cup C_{000}\\
+= & C_{1}\cup C_{01}\cup C_{001}\cup C_{0001}\cup\cdots\end{align*}
+
+\end_inset
+
+For convenience, write 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ for the 
+\begin_inset Formula $C_{0\cdots01}$
+\end_inset
+
+ where the 
+\begin_inset Formula $1$
+\end_inset
+
+ occurs in the 
+\begin_inset Formula $k$
+\end_inset
+
+'th position; and so 
+\begin_inset Formula $d_{0}=C_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $d_{1}=C_{01}$
+\end_inset
+
+ and 
+\begin_inset Formula $d_{2}=C_{001}$
+\end_inset
+
+ and so on.
+ Combining this with the eqn 
+\begin_inset LatexCommand ref
+reference "eq:measure-additive"
+
+\end_inset
+
+ leads to a lemma that fill be needed:
+\end_layout
+
+\begin_layout Lemma
+One has that, for any 
+\begin_inset Formula $f\in\mathcal{F}\left(\Omega\right)$
+\end_inset
+
+, that 
+\begin_inset Formula \[
+f\left(\Omega\right)=\sum_{k=0}^{\infty}\mu\left(d_{k}\right)f\left(d_{k}\right)\]
+
+\end_inset
+
+and that, more generally, for an open set 
+\begin_inset Formula $A\subset\Omega$
+\end_inset
+
+, that 
+\begin_inset Formula \[
+\mu\left(A\right)f\left(A\right)=\sum_{k=0}^{\infty}\mu\left(A\cap d_{k}\right)f\left(A\cap d_{k}\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+This follows from the observation that 
+\begin_inset Formula $d_{j}\cap d_{k}=\varnothing$
+\end_inset
+
+ for any 
+\begin_inset Formula $j\ne k$
+\end_inset
+
+, and from the fact that the measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is meant to be sigma-additive; that is, the relation 
+\begin_inset LatexCommand ref
+reference "eq:measure-additive"
+
+\end_inset
+
+ can be safely applied a countable number of times.
+\end_layout
+
+\begin_layout Standard
+A fina
 \end_layout
 
 \begin_layout Standard
