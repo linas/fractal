@@ -3,17 +3,26 @@
 set term png small
 set out 'measure.png'
 
+# ---------------------------------------------------
+# The settings below used to create the postscript for the paper
+set term postscript eps color
+set out 'measure.ps'
+
 # set data style linespoints
 set data style lines
 set key right
 
-set title "e"
+set title "Devil's Staircase"
 set xlabel "x"
-set ylabel "F(x)"
+set ylabel "c(x)"
+
+# set xtics axis
+# set ytics axis
+
+# set bmargin 5
+# set lmargin 5
 
 set xrange [0:1]
 
-plot "measure.dat" using 1:2
-
-
+plot "measure.dat" using 1:2 title "" with lines linewidth 2
 
