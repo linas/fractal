@@ -35,8 +35,8 @@ long double balanced_triangle (long double x)
 double square (double x)
 {
 	x -= floor (x);
-	if (1.0 > x*2.0) return -2.0;
-	return 2.0;
+	if (1.0 > x*2.0) return -1.0;
+	return 1.0;
 }
 
 long double parabola_down (long double x)
@@ -108,9 +108,11 @@ long double takagi (long double w, long double x)
 	long double acc = 0.0L;
 	long double tw = 1.0L;
 	long double tp = 1.0L;
+	tp = 3.0;
 	for (k=0; k<50; k++)
 	{
-		long double term = tw* triangle (tp*x);
+		long double term = tw* square (tp*x);
+		// long double term = tw* triangle (tp*x);
 		// long double term = tw* balanced_triangle (tp*x);
 		// long double term = tw* parabola_down (tp*x);
 		// long double term = tw* parabola_up (tp*x);
@@ -164,7 +166,7 @@ long double iter_tak (long double w, long double x)
 	return acc;
 }
 
-/* The main, core basic takagi curve */
+/* The dirsichlet-lik takagi curve */
 // XXX the triangle is accureate only to 50 bits or so,
 // so any further and we need arbit-precision.
 // which means that this func is not accurate below s=1.5 or so.
@@ -310,7 +312,7 @@ printf ("# duude w=%g\n", w);
 	return acc*exps;
 }
 
-/* gauusian regulated takagi */
+/* Gaussian regulated takagi */
 double div_takagi (double cut, double x)
 {
 	int k;
@@ -622,12 +624,12 @@ main (int argc, char *argv[])
 		// x += ((double) rand()) / (RAND_MAX*((double)nmax));
 		
 		// double ts = isola (w, x);
-		// double tw = takagi (w, x);
+		double tw = takagi (w, x);
 		// double ts = tw;
 		// tw  = exp (-tw);
 		// acc += tw;
 		// ts = acc;
-		double tw = iter_tak (w, x);
+		// double tw = iter_tak (w, x);
 		double ts = 0;
 
 		// double tw = dirichlet_takagi (w, x);

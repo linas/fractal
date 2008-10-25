@@ -60,5 +60,5 @@ int main(int argc, char * argv[])
 
 	printf ("#\n# lambda=%g\n#\n", lambda);
 
-	beig(14, lambda);
+	beig(12, lambda);
 }
