@@ -3,34 +3,39 @@
  *
  * This produces at least some of the *discontinuous* eigenfunctions
  * of the Bernoulli operator. I've probably written this code somewhere
- * before.
+ * before, but don't knw where.
+ *
+ * The aproach taken is that of working with the measure-theoretic
+ * definition of the thing, using the product topology.
  *
  * Linas Oct 2008
  */
+#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-double sum(double lambda, int i, int dim)
+double sum(double lambda, unsigned int i, int dim)
 {
 	double lp = 1.0;
 	int k=0;
 
+	unsigned int filt = 1<<(dim-1);
+
 	double sum = 0.0;
 	for (k=0; k<dim; k++)
 	{
-		if (i & 0x1)
+		if (i & filt)
 		{
-			sum += 1.0/lp;
+			sum += lp;
 		}
 		else
 		{
-			sum -= 1.0/lp;
+			sum -= lp;
 		}
-		i >>= 1;
+		filt >>= 1;
 		lp *= lambda;
 	}
 
-	sum *= lp;
-	sum /= lambda;
 	sum *= (1.0-lambda);
 	return sum;
 }
@@ -48,8 +53,13 @@ void beig(int np, double lambda)
 	}
 }
 
-main()
+int main(int argc, char * argv[])
 {
-	beig(10, 0.35);
+
+	double lambda = atof(argv[1]);
+
+	printf ("#\n# lambda=%g\n#\n", lambda);
+
+	beig(10, lambda);
 
 }
