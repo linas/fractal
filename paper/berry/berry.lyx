@@ -1,4 +1,4 @@
-#LyX 1.5.3 created this file. For more info see http://www.lyx.org/
+#LyX 1.5.5 created this file. For more info see http://www.lyx.org/
 \lyxformat 276
 \begin_document
 \begin_header
@@ -64,9 +64,9 @@ Intro
 \end_layout
 
 \begin_layout Standard
-The attack on the Riemann Hypothesis via the Berry conjecture requires the
- definition of position and momentum operators obeying the Heisenberg uncertaint
-y principle 
+The attack on the Riemann Hypothesis via the Berry refinement of the Hilbert-Pol
+ya conjecture requires the definition of position and momentum operators
+ obeying the Heisenberg uncertainty principle 
 \begin_inset Formula $\left[p,x\right]=px-xp=\hbar$
 \end_inset
 
@@ -697,7 +697,537 @@ The Bernoulli measure is, by its nature, a product measure, and so one has,
 
 \end_inset
 
+ 
+\end_layout
 
+\begin_layout Section
+Some Hints About Position
+\end_layout
+
+\begin_layout Standard
+The following is a rambling, pre-formal, pre-draft set of commints suggesting
+ at the position operator.
+ Needs to be redone.
+\end_layout
+
+\begin_layout Subsection
+Position and momentum operators
+\end_layout
+
+\begin_layout Standard
+An alternative view is to look at 
+\begin_inset Formula $\tau$
+\end_inset
+
+ as merely a spatial shift operator.
+ In this case, eigenstates of 
+\begin_inset Formula $\mathcal{L}_{T}$
+\end_inset
+
+ can be thought of as momentum eigenstates.
+ That is, one writes 
+\begin_inset Formula \[
+\lambda=e^{ik}\]
+
+\end_inset
+
+for the eigenvalues taken from eqn 
+\begin_inset LatexCommand ref
+reference "eq:Baker's eigenstates"
+
+\end_inset
+
+, and identifies 
+\begin_inset Formula $k$
+\end_inset
+
+ with the momentum.
+ The momentum operator is then formally written as 
+\begin_inset Formula \begin{equation}
+\mathcal{P}_{T}=-i\log\mathcal{L}_{T}\label{eq:momentum operator}\end{equation}
+
+\end_inset
+
+and all eigenfunctions of 
+\begin_inset Formula $\mathcal{L}_{T}$
+\end_inset
+
+ are then formally eigenfunctions of 
+\begin_inset Formula $\mathcal{P}_{T}$
+\end_inset
+
+ as well.
+ We say 
+\begin_inset Quotes eld
+\end_inset
+
+formally
+\begin_inset Quotes erd
+\end_inset
+
+ here, as these are symbolic operations, with no regard as to thier being
+ 
+\begin_inset Quotes eld
+\end_inset
+
+well-defined
+\begin_inset Quotes erd
+\end_inset
+
+; a more grounded treatment will be required to see how these can hold in
+ particular function spaces.
+\end_layout
+
+\begin_layout Standard
+If this is the momentum, what is the position operator, and what are its
+ eigenstates? First, consider the single-sided lattice.
+ Given a lattice configuration 
+\begin_inset Formula $\sigma=\left[\sigma_{0},\sigma_{1},\sigma_{2},\ldots\right]$
+\end_inset
+
+, the position operator 
+\begin_inset Formula $\mathcal{X}_{B}$
+\end_inset
+
+ needs to associate a value of 
+\begin_inset Formula $n$
+\end_inset
+
+ to the 
+\begin_inset Formula $n$
+\end_inset
+
+'th lattice position.
+ Consider the function 
+\begin_inset Formula $q:\Omega\to\mathbb{Z}$
+\end_inset
+
+ given by 
+\begin_inset Formula \[
+q\left(\left[\sigma_{0},\ldots,\sigma_{n},0,\ldots\right]\right)=n\]
+
+\end_inset
+
+that is, given a finite-length string of symbols 
+\begin_inset Formula $\sigma$
+\end_inset
+
+, terminated by an infinite string of 
+\begin_inset Formula $0$
+\end_inset
+
+'s, the function 
+\begin_inset Formula $q$
+\end_inset
+
+ returns the length of the string.
+ That 
+\begin_inset Formula $q$
+\end_inset
+
+ deserves to be thought of as a position can be seen by observing that,
+ if 
+\begin_inset Formula $\sigma=s_{n}$
+\end_inset
+
+ is a string of length 
+\begin_inset Formula $n$
+\end_inset
+
+ (so that 
+\begin_inset Formula $q\left(s_{n}\right)=n$
+\end_inset
+
+), then the shift operator 
+\begin_inset Formula $\tau$
+\end_inset
+
+ displaces the origin by one to the right, so that 
+\begin_inset Formula \[
+q\left(\tau^{k}s_{n}\right)=n-k\]
+
+\end_inset
+
+Similarly, the Bernoulli operator 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+, being just the pushback of 
+\begin_inset Formula $\tau$
+\end_inset
+
+, has the effect that
+\begin_inset Formula \[
+\mathcal{L}_{B}q=q+1\]
+
+\end_inset
+
+while from this, it follows that 
+\begin_inset Formula \[
+\left[\log\mathcal{L}_{B}\right]q=1\]
+
+\end_inset
+
+thus justifying the notion that 
+\begin_inset Formula $\log\mathcal{L}$
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+kind of like
+\begin_inset Quotes erd
+\end_inset
+
+ a derivative (with respect to 
+\begin_inset Formula $q$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+A position operator 
+\begin_inset Formula $\mathcal{X}_{B}$
+\end_inset
+
+ may now be defined as the map 
+\begin_inset Formula $\mathcal{X}_{B}:\mathcal{F}\left(\Omega\right)\to\mathcal{F}\left(\Omega\right)$
+\end_inset
+
+ having the value
+\begin_inset Formula \[
+\mathcal{X}_{B}f=qf\]
+
+\end_inset
+
+The commutator of 
+\begin_inset Formula $\mathcal{X}_{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ can be obtained by noting that 
+\begin_inset Formula \[
+\mathcal{L}_{B}\mathcal{X}_{B}f=\left(q+1\right)\mathcal{L}_{B}f\]
+
+\end_inset
+
+which can be informally proved by falling back to the unit-interval representati
+on: 
+\begin_inset Formula \begin{align*}
+\left[\mathcal{L}_{B}\mathcal{X}_{B}f\right]\left(x\right)= & \frac{1}{2}\left[q\left(\frac{x}{2}\right)f\left(\frac{x}{2}\right)+q\left(\frac{1+x}{2}\right)f\left(\frac{1+x}{2}\right)\right]\\
+= & \frac{1}{2}\left[\left(q\left(x\right)+1\right)f\left(\frac{x}{2}\right)+\left(q\left(x\right)+1\right)f\left(\frac{1+x}{2}\right)\right]\\
+= & \left(q\left(x\right)+1\right)\frac{1}{2}\left[f\left(\frac{x}{2}\right)+f\left(\frac{1+x}{2}\right)\right]\\
+= & \left(q\left(x\right)+1\right)\left[\mathcal{L}_{B}f\right]\left(x\right)\end{align*}
+
+\end_inset
+
+The other part of the commutator is easier:
+\begin_inset Formula \[
+\mathcal{X}_{B}\mathcal{L}_{B}f=q\mathcal{L}_{B}f\]
+
+\end_inset
+
+and so, from this, one may deduce the operator commutator
+\begin_inset Formula \[
+\mathcal{L}_{B}\mathcal{X}_{B}-\mathcal{X}_{B}\mathcal{L}_{B}=\mathcal{L}_{B}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Going over to equivalent definitions for the two-sided position operator
+ 
+\begin_inset Formula $\mathcal{X}_{T}$
+\end_inset
+
+, one has an equivalent comutator.
+ Next, using the momentum operator 
+\begin_inset LatexCommand ref
+reference "eq:momentum operator"
+
+\end_inset
+
+, one may deduce that 
+\begin_inset Formula \[
+\mathcal{P}_{T}\mathcal{X}_{T}-\mathcal{X}_{T}\mathcal{P}_{T}=-i\]
+
+\end_inset
+
+which is the usual quantum mechanical commutator.
+ At this point, it should be obvious that the eigenvalues of 
+\begin_inset Formula $\mathcal{X}_{T}\mathcal{P}_{T}$
+\end_inset
+
+ are of considerable interest, and even more so when the analogous equations
+ are constructed from within the context of the Gauss-Kuzmin-Wirsing operator;
+ this of course has direct pertinence to a famous long-standing hypothesis
+ about the location of the zeros of a famous function.
+\end_layout
+
+\begin_layout Subsection
+The Product Topology
+\end_layout
+
+\begin_layout Standard
+The most indimidating aspect of the position operator is that it's position
+ function 
+\begin_inset Formula $q$
+\end_inset
+
+ does not appear to have a definition in the product topology; strings consistin
+g of a finite number of non-zero symbols are just points, and are not open
+ sets in the product topology.
+ By contrast, 
+\emph on
+every
+\emph default
+ open set in the product topology will be associated with a infinite values
+ of 
+\begin_inset Formula $q$
+\end_inset
+
+, as all such open sets in general contain strings of infinite length.
+ A proper definition of 
+\begin_inset Formula $q$
+\end_inset
+
+ would require the use of the box topology, which is a much finer topology
+ than the product topology.
+ However, the ultimate goal is not the defintion of 
+\begin_inset Formula $q$
+\end_inset
+
+, but rather, a workable definition for the operators 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ and for 
+\begin_inset Formula $\mathcal{XP}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Lets begin with a very abbreviated review of the product topology.
+ Let 
+\begin_inset Formula $\Omega=2^{\omega}$
+\end_inset
+
+ be the set of all (infinite-length) strings in two letters; it is the product
+ of an infinite number of copies of 
+\begin_inset Formula $2=\left\{ 0,1\right\} $
+\end_inset
+
+.
+ The open sets of the product topology are given by by the inverse images
+ of the projection operators from the product, to the components.
+ That is, let 
+\begin_inset Formula $\Omega=2^{\omega}$
+\end_inset
+
+ by the single-sided lattice.
+ Given an element 
+\begin_inset Formula $\sigma\in\Omega$
+\end_inset
+
+, the projection operators 
+\begin_inset Formula $\pi_{i}:\Omega\to2$
+\end_inset
+
+ act as 
+\begin_inset Formula $\pi_{i}\left(\sigma\right)=\sigma_{i}$
+\end_inset
+
+.
+ The open sets are given by the finite intersections and countable unions
+ of the images of the inverse 
+\begin_inset Formula $\pi_{i}^{-1}$
+\end_inset
+
+; these sets are commonly called 
+\begin_inset Quotes eld
+\end_inset
+
+cylinder sets
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Thus, for example, the cylinder set 
+\begin_inset Formula $\pi_{5}^{-1}\left(1\right)$
+\end_inset
+
+ consists of all strings 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ that have a 1 in the fifth position.
+ 
+\end_layout
+
+\begin_layout Standard
+Since one obviously has 
+\begin_inset Formula $\Omega=\pi_{i}^{-1}\left(0\right)\cup\pi_{i}^{-1}\left(1\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\varnothing=\pi_{i}^{-1}\left(0\right)\cap\pi_{i}^{-1}\left(1\right)$
+\end_inset
+
+, it is reasonable to also use the cylinder sets to generate a sigma algebra
+ on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+; this sigma algebra is easily equiped with a measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ By convention, this measure is taken to be such that 
+\begin_inset Formula \[
+\mu\left(\pi_{i}^{-1}\left(0\right)\right)=\mu\left(\pi_{i}^{-1}\left(1\right)\right)=\frac{1}{2}\]
+
+\end_inset
+
+although, of course one could play with taking the size of these two sets
+ as being uneven.
+ Measures of smaller sets are then taken in a product-wise fashion; the
+ measure of any given cylinder set will always be an inverse power of two.
+ This measure is conventionally called the 
+\emph on
+product measure
+\emph default
+, or the 
+\emph on
+Bernoulli measure
+\emph default
+
+\begin_inset LatexCommand cite
+key "Kle08"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In order to avoid the use of the box topology, it is instead convenient
+ to define strings of finite length in terms of filters.
+ That is, for any given finite length string 
+\begin_inset Formula $s_{n}$
+\end_inset
+
+ (as before: a string with a 
+\begin_inset Formula $1$
+\end_inset
+
+ in the 
+\begin_inset Formula $n$
+\end_inset
+
+'th position, followed by all zeros) can be used to define the set 
+\begin_inset Formula $F\left(s_{n}\right)$
+\end_inset
+
+ of all cylinder sets that contain 
+\begin_inset Formula $s_{n}$
+\end_inset
+
+.
+ It is straight-forward to verify that 
+\begin_inset Formula $F\left(s_{n}\right)$
+\end_inset
+
+ satisfies all of the axioms of a topological filter.
+ To go along with this filter, there is also the filter membersip function:
+ 
+\begin_inset Formula $\delta_{s_{n}}:\Omega\to\left\{ 0,1\right\} $
+\end_inset
+
+ such that 
+\begin_inset Formula $\delta_{s_{n}}\left(A\right)=1$
+\end_inset
+
+ iff 
+\begin_inset Formula $A\in F\left(s_{n}\right)$
+\end_inset
+
+.
+ Alternately, one may write 
+\begin_inset Formula \[
+\delta_{s_{n}}\left(A\right)=1_{A}\left(s_{n}\right)\]
+
+\end_inset
+
+where 
+\begin_inset Formula $1_{A}\left(s_{n}\right)=1$
+\end_inset
+
+ iff 
+\begin_inset Formula $s_{n}\in A$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $1_{A}$
+\end_inset
+
+ is conventionally called the set membership function; it simply identifies
+ those points which belong to the set 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Since all sets 
+\begin_inset Formula $A$
+\end_inset
+
+ are measureable, this framework provides a practical mechanism for working
+ with finite-length strings.
+ The map 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is conventionally known as the 
+\emph on
+Dirac measure
+\emph default
+; it is simply the proper, formal defintion of the Dirac delta function
+ in the general setting of function spaces.
+ 
+\end_layout
+
+\begin_layout Standard
+The Dirac measure 
+\begin_inset Formula $\delta_{s_{n}}$
+\end_inset
+
+ may now be clearly seen to be the eigenvector of the position operator
+ 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+.
+ That is, one has that 
+\begin_inset Formula \[
+\mathcal{X}_{B}\delta_{s_{n}}=n\,\delta_{s_{n}}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+XXX Now lets talk of ideals.
 \end_layout
 
 \begin_layout Section
