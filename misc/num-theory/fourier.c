@@ -13,6 +13,7 @@
 #include <stdlib.h>
 
 #include "moebius.h"
+#include "totient.h"
 
 int mertens (int n)
 {
@@ -39,22 +40,33 @@ int main (int argc, char * argv[])
 	int nbins = atoi (argv[1]);
 	int kmax = atoi(argv[2]);
 
+	double resum = 0.0;
+	double imsum = 0.0;
 	for (i=0; i<nbins; i++)
 	{
 		double x = ((double) 2*i+1) / ((double) 2*nbins);
 
-		double reacc = 0.0;
-		double imacc = 0.0;
+		double rev = 0.0;
+		double imv = 0.0;
 		for (k=0; k<kmax; k++)
 		{
-			double si = sin(2.0*M_PI*x*k);
-			double co = cos(2.0*M_PI*x*k);
+			double theta = 2.0*M_PI*x*k;
+			double si = sin(theta);
+			double co = cos(theta);
 
-			// mert = mertens (i);
-			reacc += co * moebius_mu(i);
-			imacc += si * moebius_mu(i);
+			// double fk = mangoldt_lambda (k);
+			double fk = totient_phi(k);
+			// double fk = liouville_lambda (k);
+			// double fk = liouville_omega (k);
+			// double fk = mertens (k);
+			// double fk = moebius_mu(k);
+			rev += co * fk;
+			imv += si * fk;
 		}
 
-		printf ("%d	%g	%g	%g\n", i, x, reacc, imacc);
+		resum += rev;
+		imsum += imv;
+
+		printf ("%d	%g	%g	%g	%g	%g\n", i, x, rev, imv, resum, imsum);
 	}
 }
