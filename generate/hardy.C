@@ -15,10 +15,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "brat.h"
+
 #include "Farey.h"
 #include "FareyTree.h"
 
-double *bin, *si, *co;
+static int nbins = 0;
+static double *bin, *si, *co;
 
 void bincount(int nbins, int depth)
 {
@@ -57,15 +60,20 @@ void bincount(int nbins, int depth)
 	}
 }
 
-void init(int nbins)
+static void init(int nb)
 {
+	int i;
+	nbins = nb;
+
 	si = (double *) malloc (nbins * sizeof (double));
 	co = (double *) malloc (nbins * sizeof (double));
+
+	ContinuedFraction f;
 
 	for (i=0; i<nbins; i++)
 	{
 		/* x is the midpoint of the bin */
-		double x = ((double) 2*i+1) / ((double) 2*nbins);
+		// double x = ((double) 2*i+1) / ((double) 2*nbins);
 
 		/* Likewise, the midpoint */
    	f.SetRatio (2*i+1, 2*nbins);
@@ -78,7 +86,7 @@ void init(int nbins)
 
 void hardy(double re, double im, double *reh, double *imh)
 {
-	int i, n;
+	int i;
 
 	/* Compute the integral of the distribution */
 
@@ -117,6 +125,9 @@ static double hardy_series (double re_q, double im_q, int itermax, double param)
 	double rep, imp;
 	rep = re_q;
 	imp = im_q;
+
+	if (0 == nbins) init(itermax);
+
 	hardy (re_q, im_q, &rep, &imp);
 	
 	return sqrt (rep*rep+imp*imp);
