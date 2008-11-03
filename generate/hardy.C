@@ -65,7 +65,7 @@ static void init(int nb)
 	int i;
 	nbins = nb;
 
-	bincount(nb, 16); // XXX hardcoded depth
+	bincount(nb, 20); // XXX hardcoded depth
 
 	si = (double *) malloc (nbins * sizeof (double));
 	co = (double *) malloc (nbins * sizeof (double));
@@ -80,6 +80,7 @@ static void init(int nb)
 		/* Likewise, the midpoint */
    	f.SetRatio (2*i+1, 2*nbins);
    	double far = f.ToFarey (); 
+// far = x;
 
 		si[i] = sin(2.0*M_PI*far);
 		co[i] = cos(2.0*M_PI*far);
@@ -132,9 +133,10 @@ static double hardy_series (double re_q, double im_q, int itermax, double param)
 
 	hardy (re_q, im_q, &rep, &imp);
 	
-	return sqrt (rep*rep+imp*imp);
+printf("duude q=%g f(q)= (%g %g)\n", re_q*re_q+im_q*im_q, rep, imp);
+	// return sqrt (rep*rep+imp*imp);
 	// return rep;
-	// return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
+	return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
 }
 
 DECL_MAKE_HEIGHT(hardy_series);

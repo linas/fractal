@@ -4,30 +4,18 @@
  * Distribution of the Farey Numbers on the unit interval
  * AKA the Minkowski measure or multi-fractal measure.
  *
+ * Show the Mellin transform.
+ * See also hardy.C for the singular Poisson kernel.
+ *
  * Linas October 2004
  */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Farey.h"
 #include "FareyTree.h"
 #include "brat.h"
-
-void GetNextDyadic (unsigned int *n, unsigned int *d)
-{
-	static unsigned int last_d = 1;
-	static unsigned int last_n = 1;
-
-	last_n += 2;
-	if (last_n > last_d)
-	{
-		last_d *= 2;
-		last_n = 1;
-	}
-
-	*n = last_n;
-	*d = last_d;
-}
 
 static int nbins = 0;
 static double * bin = NULL;
@@ -72,17 +60,25 @@ static void make_bins(int _nbins, int depth)
 		bin[i] /= ((double) cnt);
 	}
 
-	/* cache or precomputed values */
+	ContinuedFraction f;
+
+	/* Cache of precomputed values */
 	logs = (double *) malloc (nbins * sizeof (double));
-	for (int i=1; i<nbins; i++)
+	for (int i=0; i<nbins; i++)
 	{
-		double x = ((double) i) / ((double) nbins);
-		logs[i] = log(x);
+		/* x is the midpoint of the bin */
+		// double x = ((double) 2*i+1) / ((double) 2*nbins);
+
+		/* Likewise, the midpoint */
+   	f.SetRatio (2*i+1, 2*nbins);
+   	double far = f.ToFarey (); 
+
+		logs[i] = log(far);
 	}
 }
 
-
-static void bincount_c (double re_q, double im_q, double *prep, double *pimp)
+// Compute the Mellin transform
+static void mellin_c (double re_q, double im_q, double *prep, double *pimp)
 {
 	/* Compute the integral of the distribution */
 	double re_gral = 0.0;
@@ -109,7 +105,7 @@ static double bincount_series (double re_q, double im_q, int itermax, double par
 	if (0 == nbins) make_bins (9111, 24);
 
 	double rep, imp;
-	bincount_c (re_q, im_q, &rep, &imp);
+	mellin_c (re_q, im_q, &rep, &imp);
 	// return sqrt (rep*rep+imp*imp);
 	// return rep;
 	return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
