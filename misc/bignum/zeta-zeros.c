@@ -19,14 +19,18 @@ void get_zeros()
 {
 	int prec = 30;
 
-	mpf_t tee, half;
+	mpf_t tee, half, step;
 	mpf_init (tee);
+	mpf_init (step);
 	mpf_init (half);
 
 	mpf_set_ui(half, 1);
 	mpf_div_ui(half, half, 2);
 
-	mpf_set_ui(tee, 14);
+	mpf_set_ui(step, 1);
+	mpf_div_ui(step, step, 10);
+
+	mpf_set_ui(tee, 13);
 
 	cpx_t zeta, ess;
 	cpx_init (ess);
@@ -37,9 +41,11 @@ void get_zeros()
 	{
 		cpx_borwein_zeta(zeta, ess, prec);
 
-		mpf_add (ess[0].im, ess[0].im, half);
+		mpf_add (ess[0].im, ess[0].im, step);
 
-		fp_prt ("its ", zeta[0].re);
+		fp_prt ("its ", ess[0].im);
+		fp_prt ("\t", zeta[0].re);
+		fp_prt ("\t", zeta[0].im);
 		printf ("\n");
 	}
 	
