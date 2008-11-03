@@ -23,7 +23,7 @@
 static int nbins = 0;
 static double *bin, *si, *co;
 
-void bincount(int nbins, int depth)
+void bincount(int nb, int depth)
 {
 	int i;
 	int max = 1 << depth;
@@ -64,6 +64,8 @@ static void init(int nb)
 {
 	int i;
 	nbins = nb;
+
+	bincount(nb, 16); // XXX hardcoded depth
 
 	si = (double *) malloc (nbins * sizeof (double));
 	co = (double *) malloc (nbins * sizeof (double));

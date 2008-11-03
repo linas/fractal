@@ -98,6 +98,7 @@ euler-q: brat.o euler-q.o coord-xforms.o util.o $(FUNC)
 fdist: brat.o fdist.o util.o $(FUNC)
 gamma: brat.o gamma.o util.o coord-xforms.o $(MP) $(GMP) -ldb
 gkd: brat.o gkd.o util.o 
+hardy: brat.o hardy.o util.o $(FUNC)
 hermite: brat.o hermite.o util.o 
 hurwitz: brat.o hurwitz.o util.o $(MP) $(GMP) -ldb
 ising: brat.o ising.o util.o $(FUNC)
