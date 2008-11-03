@@ -16,7 +16,7 @@
 #include "Farey.h"
 #include "FareyTree.h"
 
-double * bin;
+double *bin, *si, *co;
 
 void bincount(int nbins, int depth)
 {
@@ -53,24 +53,12 @@ void bincount(int nbins, int depth)
 	{
 		bin[i] *= ((double) nbins) / ((double) cnt);
 	}
-
 }
 
-void fourier (int nbins, int freq_max)
+void init(int nbins)
 {
-	int i, n;
-
-	double *fre = (double *) malloc (freq_max*sizeof(double));
-	double *fim = (double *) malloc (freq_max*sizeof(double));
-
-	for (n=0; n<freq_max; n++)
-	{
-		fre[n] = 0.0;
-		fim[n] = 0.0;
-	}
-
-	/* Compute the integral of the distribution */
-   ContinuedFraction f;
+	si = (double *) malloc (nbins * sizeof (double));
+	co = (double *) malloc (nbins * sizeof (double));
 
 	for (i=0; i<nbins; i++)
 	{
@@ -81,75 +69,27 @@ void fourier (int nbins, int freq_max)
    	f.SetRatio (2*i+1, 2*nbins);
    	double far = f.ToFarey (); 
 
-		for (n=0; n<freq_max; n++)
-		{
-// #define JACOB
-#ifdef JACOB
-			double re = cos(2.0*M_PI*n*far);
-			double im = sin(2.0*M_PI*n*far);
-			fre[n] += re;
-			fim[n] += im;
-#endif
-#ifdef INVJACOB
-			double re = cos(2.0*M_PI*n*far);
-			double im = sin(2.0*M_PI*n*far);
-			fre[n] += bin[i] * bin[i] * re;
-			fim[n] += bin[i] * bin[i] * im;
-#endif
-#ifdef STRIAGHT
-			double re = cos(2.0*M_PI*n*x);
-			double im = sin(2.0*M_PI*n*x);
-			fre[n] += bin[i] * re;
-			fim[n] += bin[i] * im;
-#endif
-			if (bin[i] != 0.0)
-			{
-				double re = cos(2.0*M_PI*n*x);
-				double im = sin(2.0*M_PI*n*x);
-				fre[n] += re / bin[i];
-				fim[n] += im / bin[i];
-			}
-		}
+		si[i] = sin(2.0*M_PI*far);
+		co[i] = cos(2.0*M_PI*far);
+	}
+}
+
+void hardy(double re, double im)
+{
+	int i, n;
+
+	/* Compute the integral of the distribution */
+
+	for (i=0; i<nbins; i++)
+	{
+		/* x is the midpoint of the bin */
+		double x = ((double) 2*i+1) / ((double) 2*nbins);
+
 	}
 
 	/* renormalize */
-	for (n=0; n<freq_max; n++)
-	{
-		fre[n] /= (double) nbins;
-		fim[n] /= (double) nbins;
-	}
-
-#if 0
-	for (n=0; n<freq_max; n++)
-	{
-		printf ("%d	%8.6g	%8.6g\n", n, fre[n], fim[n]);
-	}
-#endif
-
-#if 1
-	/* rebin */
-	int npts = 2048;
-	double gral = 0.0;
-	for(i=0; i<npts; i++)
-	{
-		double x = ((double) i) / ((double) npts);
-
-   	f.SetRatio (2*i+1, 2*npts);
-   	double far = f.ToFarey (); 
-
-		double fx = fre[0];
-		for (n=1; n<freq_max; n++)
-		{
-			fx += 2.0* fre[n] * cos(2.0*M_PI*n*x);
-			// fx += 2.0* fre[n] * cos(2.0*M_PI*n*far);
-		}
-
-		// hack alert .. !!??
-		// fx /= fre[0];
-		gral += fx / ((double) npts);
-		printf ("%8.6g	%8.6g	%8.6g	%8.6g\n", x, fx, gral, far);
-	}
-#endif
+	fre[n] /= (double) nbins;
+	fim[n] /= (double) nbins;
 
 }
 
