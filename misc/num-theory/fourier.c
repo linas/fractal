@@ -45,7 +45,7 @@ void rebin (int nbins, int kmax)
 
 		double rev = 0.0;
 		double imv = 0.0;
-		for (k=0; k<kmax; k++)
+		for (k=1; k<kmax; k++)
 		{
 			double theta = 2.0*M_PI*x*k;
 			double si = sin(theta);
@@ -71,7 +71,7 @@ void rebin (int nbins, int kmax)
 	}
 
 	// Next, undo the Fourier.
-	for (k=0; k<kmax; k++)
+	for (k=1; k<kmax; k++)
 	{
 		double res = 0.0;
 		double ims = 0.0;
@@ -86,8 +86,17 @@ void rebin (int nbins, int kmax)
 			res += co * rebin[i];
 			ims += si * rebin[i];
 		}
+
+		res /= 0.5 * ((double) nbins);
+		ims /= 0.5 * ((double) nbins);
+
+		if (fabs(res) < 1.0e-10) res = 0.0;
+		if (fabs(ims) < 1.0e-10) ims = 0.0;
+
 		double sane = moebius_mu(k);
-		printf ("%d	%g	%g	%g\n", k, res, ims, sane);
+		double oops = sane - res;
+		if (fabs(oops) < 1.0e-10) oops = 0.0;
+		printf ("%d	%g	%g	%g	%g\n", k, res, ims, sane, oops);
 	}
 }
 
