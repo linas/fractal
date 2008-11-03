@@ -139,8 +139,27 @@ double da3(double x)
 
 double dh(double x)
 {
+	double a_n;
 	double n = floor(1.0/x);
-	return pow(0.5, n)/(x*x);
+#ifdef GEOM_SERIES
+	double a = 1.0/1.4;
+	a_n = ((1.0-a)/a)*pow(a, n);
+#endif
+#define ZETA_2_SERIES
+#ifdef ZETA_2_SERIES
+	n *= M_PI;
+	a_n = 6.0 / (n*n);
+#endif
+// #define ZETA_3_SERIES
+#ifdef ZETA_3_SERIES
+	a_n = (1.0/1.20205690315959) / (n*n*n);
+#endif
+// #define ZETA_4_SERIES
+#ifdef ZETA_4_SERIES
+	n *= M_PI;
+	a_n = 90.0 / (n*n*n*n);
+#endif
+	return a_n/(x*x);
 }
 
 double prod (double x, int depth)
