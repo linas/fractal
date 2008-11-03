@@ -1,0 +1,15 @@
+
+# set term png small color
+# set term png small
+set out 'fourier.png'
+
+# set data style linespoints
+set data style lines
+# set data style points
+
+set title "Mob Fourier"
+set xlabel "n" 1,0
+set ylabel "M(n)" 1, 0
+plot "fourier.dat" using 2:3 title "re", \
+     "fourier.dat" using 2:4 title "im"
+

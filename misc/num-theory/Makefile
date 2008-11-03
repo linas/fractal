@@ -8,7 +8,8 @@ LIB = $(TOP)/lib
 CC = /usr/bin/cc -O2 -I $(INC)
 
 
-EXES= angular buddy divisor hyperg liouville mertens ndist series von_mangoldt
+EXES= angular buddy divisor fourier hyperg liouville \
+	mertens ndist series von_mangoldt
 
 all: 	$(EXES)
 
@@ -31,6 +32,7 @@ dist:
 angular:	angular.o 
 buddy:	buddy.o
 divisor:	divisor.o
+fourier:	fourier.o
 hyperg:	hyperg.o
 liouville:	liouville.o
 mertens:	mertens.o 
