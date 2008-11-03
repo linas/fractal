@@ -1,4 +1,4 @@
-#LyX 1.5.3 created this file. For more info see http://www.lyx.org/
+#LyX 1.5.5 created this file. For more info see http://www.lyx.org/
 \lyxformat 276
 \begin_document
 \begin_header
@@ -1372,7 +1372,7 @@ reference "fig:DFT-of-Inverse"
 \end_layout
 
 \begin_layout Section
-Holomorphic structure
+Mellin transform
 \end_layout
 
 \begin_layout Standard
@@ -1421,7 +1421,7 @@ plain-old
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Standard
 \begin_inset LatexCommand label
@@ -1500,10 +1500,95 @@ fingers
 \end_inset
 
 , (where the phase wraps around completely).
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+generated with src/fractal/fdist.C
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Poisson kernel
+\end_layout
+
+\begin_layout Standard
+The Poisson kernel commonly occurs in the study of Hardy spaces, and occurs
+ there in several contexts.
+ The most notable is in a theorem of F.
+ Reisz, the decomposition of bounded holomorphic functions into inner, outer,
+ and singular functions.
+ Given the singular nature of the Question Mark, the question of its extension
+ to the complex plane is interesting.
+ 
+\end_layout
+
+\begin_layout Standard
+Given a singular measure 
+\begin_inset Formula $d\mu$
+\end_inset
+
+, the Possion kernel yeilds a holomorphic extension: 
+\begin_inset Formula \[
+g(z)=\int_{0}^{1}\frac{e^{i2\pi t}-z}{e^{i2\pi t}+z}d\mu(t)\]
+
+\end_inset
+
+Here, 
+\begin_inset Formula $t$
+\end_inset
+
+ is understood to be real, so that 
+\begin_inset Formula $d\mu(t)$
+\end_inset
+
+ is a measure on the unit interval; whereas 
+\begin_inset Formula $z$
+\end_inset
+
+ is any value on the complex plane (although it is typically taken to be
+ inside the unit disk.
+ 
+\end_layout
+
+\begin_layout Standard
+For the case of the Question Mark, taking 
+\begin_inset Formula \[
+d\mu(t)=\left(?^{\prime}\circ?^{-1}\right)(t)\, dt\]
+
+\end_inset
+
+a numerical exploration indicates that 
+\begin_inset Formula \[
+g\left(z\right)=\begin{cases}
++1 & \mbox{ for }\left|z\right|<1\\
+-1 & \mbox{ for }\left|z\right|>1\end{cases}\]
+
+\end_inset
+
+This is quite curious, as functions that are constant play a very unique
+ and important role in complex analysis (typically occuring in proofs of
+ uniqueness or non-existence), whereas functions that are discontinuous
+ in this way play no role.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Standard
+Numerical results explored with src/fractal/generate/hardy.C
 \end_layout
 
 \end_inset
