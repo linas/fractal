@@ -80,33 +80,31 @@ void hardy(double re, double im)
 
 	/* Compute the integral of the distribution */
 
+	double resum = 0.0;
+	double imsum = 0.0;
 	for (i=0; i<nbins; i++)
 	{
-		/* x is the midpoint of the bin */
-		double x = ((double) 2*i+1) / ((double) 2*nbins);
+		double red =  co[i] - re;
+		double imd =  si[i] - im;
 
+		double deno = red*red + imd*imd;
+
+		double ren = co[i] + re;
+		double imn = si[i] + im;
+
+		double regr = ren*red + imn*imd;
+		double imgr = imn*red - imd*ren;
+
+		regr /= deno;
+		imgr /= deno;
+
+		resum += regr * bin[i];
+		imsum += imgr * bin[i];
 	}
 
 	/* renormalize */
-	fre[n] /= (double) nbins;
-	fim[n] /= (double) nbins;
+	resum /= (double) nbins;
+	imsum /= (double) nbins;
 
-}
-
-main(int argc, char *argv[])
-{
-	int i;
-
-	if (argc < 4)
-	{
-		fprintf (stderr, "Usage: %s <nbins> <tree-depth> <freq>\n", argv[0]);
-		exit (1);
-	}
-	int nbins = atoi (argv[1]);
-	int depth = atoi (argv[2]);
-	int max_freq = atoi (argv[3]);
-
-	bincount (nbins, depth);
-	fourier (nbins, max_freq);
 }
 
