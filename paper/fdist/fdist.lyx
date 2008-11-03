@@ -48,22 +48,13 @@ Linas Vepstas <linas@linas.org>
 \end_layout
 
 \begin_layout Date
-12 October 2004 (updated 4 September 2008)
+12 October 2004 (updated 2 November 2008)
 \end_layout
 
 \begin_layout Abstract
 A notable example of a discontinuous-everywhere function that is not traditional
 ly integrable, yet, when properly defined, can be integrated, is derivative
- of the Minkowski question mark function.
- It, and its generalizations are known as 
-\begin_inset Quotes eld
-\end_inset
-
-multi-fractal measures
-\begin_inset Quotes erd
-\end_inset
-
-.
+ of the Minkowski Question Mark function.
  Some subject matter overlaps that of 
 \begin_inset LatexCommand citet
 key "Ve-L06"
@@ -72,19 +63,15 @@ key "Ve-L06"
 
 .
  This paper includes numerical results for the Fourier transform of the
- measure.
- It also provides an exact result, expressing the measure as an infinite
- product of piece-wise continuous functions, specifically, as a product
- of Mobius transforms of the form 
-\begin_inset Formula $(ax+b)/(cx+d)$
-\end_inset
-
-.
+ measure, its Mellin transform, and a surprising result for its Poisson
+ kernel: the kernel appears to be +1 everywhere inside the unit disk, and
+ -1 outside of it.
+ This is unexpected and interesting...
 \end_layout
 
 \begin_layout Abstract
-This document started as a research diary noting various results, and is
- haphazardly structured.
+This document is a research diary noting various results, and is haphazardly
+ structured.
  
 \end_layout
 
@@ -1377,7 +1364,7 @@ Mellin transform
 
 \begin_layout Standard
 Of some curiosity is the analytic structure of the Mellin transform of the
- Minkowski measure.
+ Minkowski derivative and measure.
  Figure 
 \begin_inset LatexCommand ref
 reference "fig:Mellin xform"
@@ -1394,8 +1381,23 @@ for general complex-valued
 \begin_inset Formula $s$
 \end_inset
 
-.
- It is of some curiosity to note that the analytic structure exhibits no
+, whil 
+\begin_inset LatexCommand ref
+reference "fig:Mellin measure"
+
+\end_inset
+
+ shows 
+\begin_inset Formula \[
+\int_{0}^{1}x^{s}?^{\prime}\left(?^{-1}\left(x\right)\right)dx\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is of some curiosity to note that the analytic structure exhibits no
  obvious crazy fractal patern; it seems to be well-mannered overall, and
  appears to be 
 \begin_inset Quotes eld
@@ -1421,7 +1423,7 @@ plain-old
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \begin_inset LatexCommand label
@@ -1436,7 +1438,7 @@ name "fig:Mellin xform"
 \begin_inset Caption
 
 \begin_layout Standard
-Mellin transform of the Minkowski measure
+Mellin transform of the Minkowski derivative
 \end_layout
 
 \end_inset
@@ -1455,14 +1457,14 @@ Mellin transform of the Minkowski measure
 \end_layout
 
 \begin_layout Standard
-This figure illustrates the Mellin transform for the Minkowski measure.
+This figure illustrates the Mellin transform for the Minkowski derivative.
  That is, it shows the phase of the integral 
 \begin_inset Formula \[
 \int_{0}^{1}x^{s}?^{\prime}\left(x\right)dx\]
 
 \end_inset
 
- for general, complex-valued 
+for general, complex-valued 
 \begin_inset Formula $s$
 \end_inset
 
@@ -1504,7 +1506,100 @@ fingers
 status open
 
 \begin_layout Standard
-generated with src/fractal/fdist.C
+Generated with src/fractal/fdist.C
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Mellin measure"
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Standard
+Mellin Measure
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename mellinm.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This figure illustrates the Mellin transform for the Minkowski measure.
+ That is, it shows the phase of the integral 
+\begin_inset Formula \[
+\int_{0}^{1}x^{s}?^{\prime}\left(?^{-1}\left(x\right)\right)dx\]
+
+\end_inset
+
+for general, complex-valued 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ Specifically, it shows the region 
+\begin_inset Formula $0\le\Re s\le160$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le\Im s\le160$
+\end_inset
+
+.
+ The coloration is the same as in figure 
+\begin_inset LatexCommand ref
+reference "fig:Mellin xform"
+
+\end_inset
+
+.
+ As before, simple poles are clearly seen at the terminus of the 
+\begin_inset Quotes eld
+\end_inset
+
+fingers
+\begin_inset Quotes erd
+\end_inset
+
+, (where the phase wraps around completely).
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Generated with src/fractal/fdist.C
 \end_layout
 
 \end_inset
