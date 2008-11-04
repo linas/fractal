@@ -67,13 +67,14 @@ static void make_bins(int _nbins, int depth)
 	for (int i=0; i<nbins; i++)
 	{
 		/* x is the midpoint of the bin */
-		// double x = ((double) 2*i+1) / ((double) 2*nbins);
+		double x = ((double) 2*i+1) / ((double) 2*nbins);
 
 		/* Likewise, the midpoint */
    	f.SetRatio (2*i+1, 2*nbins);
    	double far = f.ToFarey (); 
 
 		logs[i] = log(far);
+		if (far < 1.0e10) logs[i] = log(0.5) / x;
 	}
 }
 
@@ -102,7 +103,7 @@ static void mellin_c (double re_q, double im_q, double *prep, double *pimp)
 
 static double bincount_series (double re_q, double im_q, int itermax, double param)
 {
-	if (0 == nbins) make_bins (9111, 24);
+	if (0 == nbins) make_bins (itermax, 20);
 
 	double rep, imp;
 	mellin_c (re_q, im_q, &rep, &imp);

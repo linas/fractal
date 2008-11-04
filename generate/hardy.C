@@ -1,9 +1,9 @@
 /*
  * hardy.C
  *
- * Poison integral of the Minkowski measure (i.e. of the
+ * Poisson integral of the Minkowski measure (i.e. of the
  * distribution of the Farey Numbers on the unit interval)
- * The Poison ingtegral takes the form of a so-called 
+ * The Poisson ingtegral takes the form of a so-called 
  * "singular inner function" in the theory of Hardy spaces.
  *
  * See directory fractal/misc/fdist for more details.
@@ -65,7 +65,7 @@ static void init(int nb)
 	int i;
 	nbins = nb;
 
-	bincount(nb, 20); // XXX hardcoded depth
+	bincount(nb, 18); // XXX hardcoded depth
 
 	si = (double *) malloc (nbins * sizeof (double));
 	co = (double *) malloc (nbins * sizeof (double));
@@ -75,15 +75,16 @@ static void init(int nb)
 	for (i=0; i<nbins; i++)
 	{
 		/* x is the midpoint of the bin */
-		// double x = ((double) 2*i+1) / ((double) 2*nbins);
+		double x = ((double) 2*i+1) / ((double) 2*nbins);
 
 		/* Likewise, the midpoint */
    	f.SetRatio (2*i+1, 2*nbins);
    	double far = f.ToFarey (); 
-// far = x;
+ far = x;
 
 		si[i] = sin(2.0*M_PI*far);
 		co[i] = cos(2.0*M_PI*far);
+if(i%2==0) bin[i]=2000.0; else bin[i] = -2000.0;
 	}
 }
 
@@ -111,8 +112,11 @@ void hardy(double re, double im, double *reh, double *imh)
 		regr /= deno;
 		imgr /= deno;
 
-		resum += regr * bin[i];
-		imsum += imgr * bin[i];
+		double distrib = bin[i];
+		// distrib = 1.0;
+
+		resum += regr * distrib;
+		imsum += imgr * distrib;
 	}
 
 	/* renormalize */
@@ -132,8 +136,11 @@ static double hardy_series (double re_q, double im_q, int itermax, double param)
 	if (0 == nbins) init(itermax);
 
 	hardy (re_q, im_q, &rep, &imp);
+
+	// if (1.0 < re_q*re_q+im_q*im_q) rep += 1.0;
+	// else rep -= 1.0;
 	
-printf("duude q=%g f(q)= (%g %g)\n", re_q*re_q+im_q*im_q, rep, imp);
+  // printf("duude q=%g f(q)= (%g %g)\n", re_q*re_q+im_q*im_q, rep, imp);
 	// return sqrt (rep*rep+imp*imp);
 	// return rep;
 	return (atan2 (imp,rep)+M_PI)/(2.0*M_PI);
