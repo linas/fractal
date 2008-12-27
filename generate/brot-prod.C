@@ -36,11 +36,23 @@ static double brot_prod (double re_q, double im_q, int itermax, double param)
 		imp = rep * imz + imp * rez;
 		rep = tmp;
 
+		rep *= param;
+		imp *= param;
+
 		// if (1.0e35 < rep*rep + imp*imp) break;
-		if (1.0e35 < rez*rez + imz*imz) break;
+		if (1.0e3 < rez*rez + imz*imz) break;
 	}
 
-	return (double) k;
+	// return (double) k;
+#if 0
+	double phase = atan2 (imp, rep);
+	phase += M_PI;
+	phase /= 2.0*M_PI;
+	return phase;
+#endif
+
+	double mod = sqrt (rep*rep + imp*imp);
+	return mod;
 }
 
 DECL_MAKE_HEIGHT(brot_prod);
