@@ -7,17 +7,17 @@ all: $(EXES)
 
 
 classic:	classic.o ray.o
-	cc -o classic classic.o ray.o -lm
+	cc -o classic classic.o ray.o -lm -lstdc++
 
 
 wave:	wave.o ray.o
-	cc -o wave wave.o ray.o -lm
+	cc -o wave wave.o ray.o -lm -lstdc++
 
 stats:	stats.o ray.o
-	cc -o stats stats.o ray.o -lm
+	cc -o stats stats.o ray.o -lm -lstdc++
 
 .C.o:
-	g++ -g -O2 -c $<
+	cc -g -O2 -c $<
 
 clean:
 	rm -f *.o

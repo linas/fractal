@@ -334,10 +334,10 @@ void
 Pixels::WriteMTV (const char * filename)
 {
    // first, pack the pixels byte by byte
-   unsigned int *p = pack;
+   unsigned char *p = (unsigned char *) pack;
    for (int i=0; i<nx*ny; i++) {
-      *p = abgr[i] & 0xffffff;
-      ((char *) p) += 3;
+      *((unsigned int *) p) = abgr[i] & 0xffffff;
+      p += 3;
    }
 
    // write out MTV format pixmap.
