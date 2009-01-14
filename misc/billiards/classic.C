@@ -56,6 +56,14 @@ class SinaiView
 
 /* ==================================== */
 
+/**
+ * Constructor.
+ * Defines a cube, of unit half-width.
+ *
+ * Sets eyepoint at 5 units from the box.
+ *
+ * Creates a set of initial rays, leaving from the eyepoint.
+ */
 SinaiView::SinaiView (int px, int py)
    : Pixels (px, py)
 {
@@ -73,7 +81,7 @@ SinaiView::SinaiView (int px, int py)
 
    sr = new SinaiRay [nx*ny];
 
-   // project rays from eyepoint 
+   // Project rays from eyepoint 
    for (i=0; i<nx; i++) {
       for (j=0; j<ny; j++) {
          double pixel[3];
@@ -134,6 +142,10 @@ SinaiView::ToPixels (void)
       if (5 == sr[i].last_wall) { red = 255.0; green = 255.0; }
 
 #if 0
+		// Uniform fog effect; the fog is exponentially decaying,
+		// it is independent of the direction travelled, and depends
+		// only the distance travelled.  
+		// Disabled for now, doesn't see interesting.
       int ib = 0;
       for (int iw=0; iw<6; iw++) ib += sr[i].bounces[iw];
 
@@ -223,8 +235,8 @@ main (int argc, char * argv[])
    v.niterations = niter;
    v.max_manhattan = manhat;
 
-   // v.Trace();
-   v.TraceToroid();
+   v.Trace();
+   // v.TraceToroid();
    // v.ColoredMirrors();
    v.ToPixels ();
    v.WriteMTV ("junk.mtv");
