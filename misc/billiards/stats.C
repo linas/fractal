@@ -100,7 +100,7 @@ SinaiStats::Trace(void)
    int i;
    for (i=0; i<nx*ny; i++) 
    {
-      SinaiBox::Trace (sr[i]);
+      SinaiBox::TraceBox (sr[i]);
    }
 }
 

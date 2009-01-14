@@ -12,8 +12,8 @@
 // sphere has radius < 1.0
 //
 // HISTORY:
-// Linas Vepstas
-// November 2001
+// Copyright (C) 2001 Linas Vepstas
+// created November 2001
 
 
 #include <math.h>
@@ -178,14 +178,19 @@ SinaiBox::SinaiBox (void)
 #define NNN (-1.0 + 100.0*DEGENERATE_TOLERANCE)
 #define PPP (1.0 - 100.0*DEGENERATE_TOLERANCE)
 
+/**
+ * Ray trace with ordinary, reflective boundary conditions. That is,
+ * when a ray encounters a wall of the cube, it is reflected (specular
+ * reflection) by that wall. 
+ */
 void 
-SinaiBox::Trace (SinaiRay &sr)
+SinaiBox::TraceBox (SinaiRay &sr)
 {
    for (int n=0; n<niterations; n++)
    {
       double dist = 0.0;
 
-      // first, see if ray bounces off sphere
+      // First, see if ray bounces off sphere
       dist = sr.Sphere (radius);
       if (0.0 < dist) 
       {
@@ -194,7 +199,7 @@ SinaiBox::Trace (SinaiRay &sr)
          sr.last_wall = -1;
       }
 
-      // next, trace ray to wall.
+      // Next, trace ray to wall.
       int next_wall = -1;
       double nearest = 1000000.0;
       for (int iwall=0; iwall<6; iwall ++)
@@ -246,6 +251,14 @@ SinaiBox::Trace (SinaiRay &sr)
 
 /* ==================================== */
 
+/**
+ * Ray trace with toroidial boundary conditions. When the ray encounters
+ * a wall of the cube, it is auto-magically transported to the opposite
+ * wall, but otherwise continues in a straight line. Torodial boundary
+ * conditions are the "correct" model for an ordinary lattice -- its as
+ * if there are no actuall "walls", but rather, the modulo-cube-size is
+ * merely a device to simplify calculations.
+ */
 void 
 SinaiBox::TraceToroid (SinaiRay &sr)
 {

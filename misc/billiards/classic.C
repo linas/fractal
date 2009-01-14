@@ -35,10 +35,10 @@ class SinaiView
 {
    public:
       SinaiView (int, int);
-      void Trace (void);
+      void TraceBox (void);
       void TraceToroid (void);
       void ColoredMirrors (void);
-      void ToPixels (void);
+      void LastWallColor (void);
 
    public:
       int nx;  // dimension of pixel grid
@@ -100,12 +100,12 @@ SinaiView::SinaiView (int px, int py)
 /* ==================================== */
 
 void
-SinaiView::Trace(void)
+SinaiView::TraceBox(void)
 {
    int i;
    for (i=0; i<nx*ny; i++) 
    {
-      SinaiBox::Trace (sr[i]);
+      SinaiBox::TraceBox (sr[i]);
    }
 }
 
@@ -123,11 +123,20 @@ SinaiView::TraceToroid(void)
 
 /* ==================================== */
 
+/**
+ * Assign colors to the ray-traced system. At this point, each ray is
+ * endowed with all sorts of bounce information: how many times it
+ * bounced off of each wall, how many times it bounced off the central
+ * sphere, how far the ray travelled, as a distance.  This information
+ * needs to be visualized somehow; this is the place where colors are
+ * assigned to pixels, based on the ray-tracing info.
+ */
 void 
-SinaiView::ToPixels (void)
+SinaiView::LastWallColor (void)
 {
    double absorbtivity = 1.0 - reflectivity;
 
+	// The index i iterates over each pixel in the image.
    for (int i=0; i<nx*ny; i++)
    {
       double red = 0.0;
@@ -144,7 +153,8 @@ SinaiView::ToPixels (void)
 #if 0
 		// Uniform fog effect; the fog is exponentially decaying,
 		// it is independent of the direction travelled, and depends
-		// only the distance travelled.  
+		// only the distance travelled. "ib" counts the total number
+		// of bounces from all six walls.
 		// Disabled for now, doesn't see interesting.
       int ib = 0;
       for (int iw=0; iw<6; iw++) ib += sr[i].bounces[iw];
@@ -235,10 +245,15 @@ main (int argc, char * argv[])
    v.niterations = niter;
    v.max_manhattan = manhat;
 
-   v.Trace();
+	// Twop different boundary conditions:
+	// Trace bounces in cubes, toroid is toroidial periodic B.C.
+   v.TraceBox();
    // v.TraceToroid();
-   // v.ColoredMirrors();
-   v.ToPixels ();
+   
+	// Two different coloring schemes:
+	// color of the last wall hit, or color by absorbing mirrors.
+   // v.LastWallColor ();
+   v.ColoredMirrors();
    v.WriteMTV ("junk.mtv");
 }
 

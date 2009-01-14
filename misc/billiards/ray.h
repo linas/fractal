@@ -12,8 +12,8 @@
 // sphere has radius < 1.0
 //
 // HISTORY:
-// Linas Vepstas
-// November 2001
+// Copyright (C) 2001, 2002 Linas Vepstas
+// created on November 2001
 
 #ifndef SINAI_RAY_H
 #define SINAI_RAY_H
@@ -71,7 +71,7 @@ class SinaiRay
 // The class SinaiBox defines the boundry conditions, the max
 // iterations, the shape of the actual box.
 //
-// The Trace() method performs ray-tracing using the classic Sinai
+// The TraceBox() method performs ray-tracing using the classic Sinai
 // reflective boundary conditions.
 //
 // The TraceToroid() method performs ray-tracing using periodic
@@ -81,7 +81,7 @@ class SinaiBox
 {
    public:
       SinaiBox (void);
-      void Trace (SinaiRay &);
+      void TraceBox (SinaiRay &);
       void TraceToroid (SinaiRay &);
    public:
 
