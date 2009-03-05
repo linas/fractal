@@ -2,6 +2,9 @@
 Associating Meaning to Form:
 Pairing Link Grammar Disjuncts to WordNet Senses
 
+Linas Vepstas
+March 2009
+
 Abstract:
 This paper provides a breif report on an experiment pairing WordNet
 senses[ref] to the atomic syntactical forms used by the Link Grammar
@@ -30,7 +33,27 @@ particular gramatical usage, can its meaning be induced?
 
 Introduction
 
-A core idea of linguistics is that structure carries meaning
+A core idea of linguistics is that structure carries meaning.  A broad
+focus of much modern work in linguistics is to determine how structure
+encodes meaning.  The present article explores a narrow corner of this
+pairing: the pairing of WordNet word senses to Link Grammar disjuncts.
+The pairing is performed in the context of automated statistical corpus
+analysis, making use of an all-words sense disambiguation algorithm 
+developed by Rada Mihalcea and others[refs]. Word senses assigned by a
+Mihalcea-like algorithm are statistically correlated to the output of
+the Link Grammar parser, to obtain pairs (word-sense, disjunct) having a
+high value of mutual information.  
+
+A key finding, perhaps "obvious" and expected, is that, of course, 
+certain disjuncts are highly correllated with certain word senses. 
+This allows for a practical means of (rapidly) assigning meaning
+(by table lookup) to some (but not all) words of a sentence, based 
+strictly on the result of a parse.  Because the Link Grammar disjuncts
+are very low-level, nearly "atomic" or indivisible parts of syntax, 
+it is hoped that such sense-pairing can provide a foundation for 
+higher-level, hierarchical work pairing more complex structural forms
+to meaning.
+
 
 The Link Grammar perser, when parsing this
 sentence, uses a particular rule, or disjunct
