@@ -2,8 +2,11 @@
 \lyxformat 345
 \begin_document
 \begin_header
-\textclass article
+\textclass amsart
 \use_default_options false
+\begin_modules
+theorems-ams
+\end_modules
 \language english
 \inputencoding auto
 \font_roman times
@@ -44,11 +47,15 @@
 \begin_body
 
 \begin_layout Title
-The Distribution of Word Pairs
+The Distribution of English Language Word Pairs
 \end_layout
 
 \begin_layout Author
 Linas Vepstas
+\end_layout
+
+\begin_layout Email
+linasvepstas@gmail.com
 \end_layout
 
 \begin_layout Date
@@ -56,8 +63,8 @@ Linas Vepstas
 \end_layout
 
 \begin_layout Abstract
-The short note presents some empircal data on the distribution of word pairs
- obtained from English text.
+This short note presents some empircal data on the distribution of word
+ pairs obtained from English text.
  Particular attention is paid to the distribution of mutual information.
 \end_layout
 
@@ -185,8 +192,8 @@ The mutual information
 \end_inset
 
  is defined as 
-\begin_inset Formula \[
-M(x,y)=log_{2}\frac{P(x,y)}{P(x,*)P(*,y)}\]
+\begin_inset Formula \begin{equation}
+M(x,y)=log_{2}\frac{P(x,y)}{P(x,*)P(*,y)}\label{eq:mutual info}\end{equation}
 
 \end_inset
 
@@ -347,12 +354,17 @@ P(k)=k^{-1.1}/\zeta(1.1)\]
 \begin_inset Formula $P(k)$
 \end_inset
 
- is the freuency at which the 
+ is the frequency at which the 
 \begin_inset Formula $k$
 \end_inset
 
 'th word is observed.
- 
+ Notice that after the first thousand words, the probability starts dropping
+ at a greater rate than at first.
+ This is bend is commonly seen such word frequency graphs; it is not covered
+ by Zipf's distribution.
+ To the author's best knowledge, there has not been any published analysis
+ of this bend.
 \end_layout
 
 \begin_layout Plain Layout
@@ -366,10 +378,6 @@ t and single.pl
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -532,7 +540,24 @@ fat
 \begin_layout Standard
 Triangular distributions are the hallmark of the sum of two uniformly distribute
 d random variables: the convolution of two rectangles is a triangle.
- XXX pursue this idea.
+ Taking equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mutual info"
+
+\end_inset
+
+ and propagating the logarithm through, one obtains 
+\begin_inset Formula \[
+M(x,y)=\log_{2}P(x,y)-\log_{2}P(x,*)-\log_{2}P(*,y)\]
+
+\end_inset
+
+which can be seen to be a sum of three random variables.
+\end_layout
+
+\begin_layout Standard
+XXX pursue this idea.
 \end_layout
 
 \begin_layout Standard
@@ -680,8 +705,15 @@ reference "fig:Linked-Word-Pairs"
 
 \end_inset
 
- and x reproduce the previous two graphs, except that this time, the set
- of word pairs is limited to those that have been identified by Link Grammar.
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Weighted-Linked-Words"
+
+\end_inset
+
+ reproduce the previous two graphs, except that this time, the set of word
+ pairs is limited to those that have been identified by Link Grammar.
  This set consists of 2.37 million distinct word pairs.
 \end_layout
 
@@ -829,12 +861,43 @@ name "fig:Weighted-Linked-Words"
 \end_layout
 
 \begin_layout Plain Layout
-thje
+This figure shows weighted linked word pairs; it is the analogue to figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Weighted-Mutual-Information"
+
+\end_inset
+
+, but for linked word pairs.
+ That is, the historgram bin counts are weighted by the probability 
+\begin_inset Formula $P(x,y)$
+\end_inset
+
+ of seeing the linked word pair 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+.
+ Again, several sloped regions are visible; the linear fits are given by
+ 
+\begin_inset Formula $e^{1.1M}$
+\end_inset
+
+, 
+\begin_inset Formula $e^{-0.3M}$
+\end_inset
+
+ and 
+\begin_inset Formula $e^{-0.85M}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Created by ./mi-pair-weighted.gplot
@@ -851,15 +914,7 @@ Created by ./mi-pair-weighted.gplot
 
 \end_inset
 
-2375296
-\end_layout
-
-\begin_layout Standard
-One may also consider
-\end_layout
-
-\begin_layout Standard
-A similar set of graphs result if one considers 
+ 
 \end_layout
 
 \begin_layout Section
@@ -867,19 +922,117 @@ Mutual Information Scatterplots
 \end_layout
 
 \begin_layout Standard
-How does the mutual information
+The previous sections explored the histogram distribution of the mutual
+ information of word pairs.
+ Alternately, one might wish to understand how mutual information correlates
+ with the probability of observing word pairs.
+ A scatterplot showing such a correlation is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Word-Pair-Scatterplot"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-(show graph)
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Word Pair Scatterplot
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Word-Pair-Scatterplot"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mi-scatter-nearby-200K.ps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows a scatterplot of the probability of occurance 
+\begin_inset Formula $P(x,y)$
+\end_inset
+
+ versus the mutual information 
+\begin_inset Formula $M(x,y)$
+\end_inset
+
+ for word pairs 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+.
+ Shown are 200 thousand pairs (out of the sample set of 10.4 million pairs).
+ Rather than plotting the probability 
+\begin_inset Formula $P(x,y)$
+\end_inset
+
+ on a logarithmic axis, this plot uses a linear axis, labelled with 
+\begin_inset Formula $-log_{2}P(x,y)$
+\end_inset
+
+.
+ This axis labelling gives a better feeling for the relative sizes of the
+ horizontal and vertical scales.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Created with mi-scatter-nearby-200K.gplot and mi-scatter.pl
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-925K sentences 13.4M words
-\end_layout
+bib
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/home/linas/src/fractal/paper/lang"
+options "plain"
 
-\begin_layout Standard
-Here it is
+\end_inset
+
+
 \end_layout
 
 \end_body
