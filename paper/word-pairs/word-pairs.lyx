@@ -226,14 +226,60 @@ Unigram counts, Zipf's law
 Individual words, ranked by thier frequency of occurrance, are known to
  be distributed according to the Zipf power law; this was noted by Zipf
  in the 1930's, and possibly by others even earlier.
- The power law is illustrated in figure
+ The Zipf distribution takes the form, for large 
+\begin_inset Formula $N$
+\end_inset
+
+ (that is, for a large number 
+\begin_inset Formula $N$
+\end_inset
+
+ of words) 
+\begin_inset Formula \[
+P_{s}(k)=\frac{1}{\zeta(s)}k^{-s}\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $s$
+\end_inset
+
+ is the characteristic power defining the distribution.
+ Here, 
+\begin_inset Formula $k$
+\end_inset
+
+ is the 
+\begin_inset Formula $k$
+\end_inset
+
+'th ranked word, and 
+\begin_inset Formula $P(k)$
+\end_inset
+
+ is the probability of observing that word.
+ For large 
+\begin_inset Formula $N$
+\end_inset
+
+, the overall normalization can be approximated by the Riemann zeta function
+ 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The power law is illustrated in figure
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "Flo:single-word-dist"
 
 \end_inset
 
-, and is genereated from the current corpus.
+, and is generated from the current corpus.
+ As may be seen, power laws become straight lines in a log-log graph.
 \end_layout
 
 \begin_layout Standard
@@ -345,8 +391,8 @@ reference "fig:MI nearby pairs"
 
 \end_inset
 
- shows the (unweighted) distribution of mutual information, while the graph
- 
+ shows the (unweighted) distribution histogram of mutual information, while
+ the graph 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Weighted-Mutual-Information"
@@ -366,7 +412,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Distribution of Mutual Information
+Histogram of Mutual Information
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:MI nearby pairs"
@@ -392,8 +438,8 @@ name "fig:MI nearby pairs"
 \end_layout
 
 \begin_layout Plain Layout
-This graph shows the distribution of the mutual information of word pairs
- taken from the text corpus.
+This graph shows the distribution histogram of the mutual information of
+ word pairs taken from the text corpus.
  The figure shows approximately 10.4 million distinct word pairs observed,
  with each distinct word pair counted exactly once.
 \end_layout
@@ -418,8 +464,43 @@ created with~/src/novamente/src/cerego/lexical-attr/src/count/graph/mi-nearby.ps
 \end_layout
 
 \begin_layout Standard
-Notable in the figure is a distinct triangular shape, with a blunted, lop-sidede
-d nose, and 
+The figures are constructed by means of 
+\begin_inset Quotes eld
+\end_inset
+
+binning
+\begin_inset Quotes erd
+\end_inset
+
+ or histograming.
+ For a given value of mutual information 
+\begin_inset Formula $M$
+\end_inset
+
+ and bin width 
+\begin_inset Formula $\Delta M$
+\end_inset
+
+, the (unweighted) bin count is the total number of pairs 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ with 
+\begin_inset Formula $M<M(x,y)\le M+\Delta M$
+\end_inset
+
+.
+ The weighted bin count is defined similarly, except that each pair contributes
+ 
+\begin_inset Formula $P(x,y)$
+\end_inset
+
+ to the bin count.
+\end_layout
+
+\begin_layout Standard
+Notable in the first figure is a distinct triangular shape, with a blunted,
+ lop-sideded nose, and 
 \begin_inset Quotes eld
 \end_inset
 
@@ -446,14 +527,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Weighted Mutual Information
+Weighted Histogram of Mutual Information 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Weighted-Mutual-Information"
