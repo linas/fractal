@@ -68,6 +68,10 @@ This short note presents some empircal data on the distribution of word
  Particular attention is paid to the distribution of mutual information.
 \end_layout
 
+\begin_layout Keywords
+statistical linguistics, Zipf’s law, power-law distribution
+\end_layout
+
 \begin_layout Section
 Introduction
 \end_layout
@@ -232,22 +236,21 @@ Unigram counts, Zipf's law
 \begin_layout Standard
 Individual words, ranked by thier frequency of occurrance, are known to
  be distributed according to the Zipf power law; this was noted by Zipf
- in the 1930's, and possibly by others even earlier.
- The Zipf distribution takes the form, for large 
-\begin_inset Formula $N$
+ in the 1930's
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zipf35,Zipf32,Kuc67"
+
 \end_inset
 
- (that is, for a large number 
-\begin_inset Formula $N$
-\end_inset
-
- of words) 
+, and possibly by others even earlier.
+ The Zipf distribution takes the form 
 \begin_inset Formula \[
-P_{s}(k)=\frac{1}{\zeta(s)}k^{-s}\]
+P_{s}(k)\sim k^{-s}\]
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $s$
 \end_inset
 
@@ -265,20 +268,7 @@ P_{s}(k)=\frac{1}{\zeta(s)}k^{-s}\]
 \end_inset
 
  is the probability of observing that word.
- For large 
-\begin_inset Formula $N$
-\end_inset
-
-, the overall normalization can be approximated by the Riemann zeta function
- 
-\begin_inset Formula $\zeta(s)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The power law is illustrated in figure
+ The power law is illustrated in figure
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "Flo:single-word-dist"
@@ -342,11 +332,11 @@ the, of, in to, and
  The thicker red line represents the data, whereas the thinner green line
  represents the power law: 
 \begin_inset Formula \[
-P(k)=k^{-1.1}/\zeta(1.1)\]
+P(k)=10k^{-1.01}\]
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $k$
 \end_inset
 
@@ -383,7 +373,52 @@ t and single.pl
 
 \end_inset
 
+The Zipfian distribution for texts appears to be entirely due to a side
+ effect of the ranking of words
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Li92"
 
+\end_inset
+
+.
+ That is, if one generates random texts, one can observe the very same Zipf
+ law, with the same parameters.
+ The way that this may be demonstrated is straight-forward: one begins with
+ an alphabet of 
+\begin_inset Formula $N$
+\end_inset
+
+ letters, one of which represents a space (thus, 
+\begin_inset Formula $N=26+1=27$
+\end_inset
+
+ for English, not counting letter cases).
+ One then picks letters randomly from this set, with a uniform distribution,
+ to generate random strings.
+ If the space character is picked, then one has a complete word.
+ After ranking and plotting such randomly generated words, one obtains a
+ Zipfian distribution with the same power law exponent as above.
+ More precisely, it may be shown that the exponent is 
+\begin_inset Formula \[
+s=\frac{\log(N+1)}{\log N}\]
+
+\end_inset
+
+ for an alphabet of 
+\begin_inset Formula $N$
+\end_inset
+
+ letters
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Li92"
+
+\end_inset
+
+.
+ This begs a question: what is the mutual information content of a random
+ text?
 \end_layout
 
 \begin_layout Section
@@ -750,7 +785,6 @@ name "fig:Linked-Word-Pairs"
 \begin_inset Graphics
 	filename mi-pair.ps
 	width 100text%
-	BoundingBox 50bp 50bp 554bp 770bp
 
 \end_inset
 
@@ -1023,8 +1057,15 @@ Created with mi-scatter-nearby-200K.gplot and mi-scatter.pl
 
 \end_layout
 
+\begin_layout Section
+Conclusion
+\end_layout
+
 \begin_layout Standard
-bib
+Some conclusion to be written.
+\end_layout
+
+\begin_layout Section
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "/home/linas/src/fractal/paper/lang"
