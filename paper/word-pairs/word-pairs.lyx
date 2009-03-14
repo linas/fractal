@@ -16,6 +16,7 @@
 \font_tt_scale 100
 
 \graphics default
+\float_placement h
 \paperfontsize default
 \spacing single
 \use_hyperref false
@@ -36,6 +37,7 @@
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
+\author "" 
 \author "" 
 \end_header
 
@@ -61,6 +63,134 @@ The short note presents some empircal data on the distribution of word pairs
 
 \begin_layout Section
 Introduction
+\end_layout
+
+\begin_layout Standard
+The mutual information of word pairs observed in text is commonly used in
+ statistical corpus linguistics for a variety of reasons: to help identify
+ idioms and collocations, to create dependency parsers, such as minimum
+ spanning tree parsers, and many other uses.
+ This is because the mutual information of a word-pair co-occurance is a
+ good indicator of how often two words 'go together'.
+ However, little seems to have been written on the distribution of word
+ pairs, or the distribution of mutual information.
+ The current work is a short note reporting on the empirical distribution
+ of word pairs seen in English text.
+\end_layout
+
+\begin_layout Standard
+In the following, a selection of 925 thousand sentences consisting of 13.4
+ million words were observed, from a corpus consisting of Voice of Ameria
+ shows, Simple English Wikipedia, and a selction of books from Project Gutenberg
+, including Tolstoy's 'War and Peace'.
+\end_layout
+
+\begin_layout Standard
+Individual words are known to be distributed according to the Zipf law.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:single-word-dist"
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Single Word Distribution
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename single.ps
+	width 100text%
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+The graph above shows the frequency distribution of the most commony occuring
+ words in the sample corpus, ranked by thier frequency of occurance.
+ The first point corresponds to the beginning-of-sentence maker; the average
+ sentence length of about 14.4 words corresponds to a frequency of 1/14.4=0.07.
+ This is followed by the words 
+\begin_inset Quotes eld
+\end_inset
+
+the, of, in to, and
+\begin_inset Quotes erd
+\end_inset
+
+, and so on.
+ The distribution follows Zipf's power law.
+ The thicker red line represents the data, whereas the thinner green line
+ represents the power law: 
+\begin_inset Formula \[
+P(k)=k^{-1.1}/\zeta(1.1)\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the rank or the word, and 
+\begin_inset Formula $P(k)$
+\end_inset
+
+ is the freuency at which the 
+\begin_inset Formula $k$
+\end_inset
+
+'th word is observed.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+generated with~/src/novamente/src/cerego/lexical-attr/src/count/graph/single.gplo
+t and single.pl 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(show graph)
+\end_layout
+
+\begin_layout Standard
+925K sentences 13.4M words
 \end_layout
 
 \begin_layout Standard
