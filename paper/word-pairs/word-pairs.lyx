@@ -338,7 +338,172 @@ Distribution of Mutual Information
 
 \begin_layout Standard
 How is mutual information distributed in the English language? The graph
- x shows 
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MI nearby pairs"
+
+\end_inset
+
+ shows the (unweighted) distribution of mutual information, while the graph
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Weighted-Mutual-Information"
+
+\end_inset
+
+ shows the weighted distribution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Distribution of Mutual Information
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MI nearby pairs"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mi-nearby.ps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This graph shows the distribution of the mutual information of word pairs
+ taken from the text corpus.
+ The figure shows approximately 10.4 million distinct word pairs observed,
+ with each distinct word pair counted exactly once.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+created with~/src/novamente/src/cerego/lexical-attr/src/count/graph/mi-nearby.ps
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notable in the figure is a distinct triangular shape, with a blunted, lop-sidede
+d nose, and 
+\begin_inset Quotes eld
+\end_inset
+
+fat
+\begin_inset Quotes erd
+\end_inset
+
+ tails extending to either side.
+ The triangular sides appear to be log-linear over many orders of magnitude,
+ and seem to have nearly equal but opposite slopes.
+ 
+\end_layout
+
+\begin_layout Standard
+Triangular distributions are the hallmark of the sum of two uniformly distribute
+d random variables: the convolution of two rectangles is a triangle.
+ XXX pursue this idea.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Weighted Mutual Information
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Weighted-Mutual-Information"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mi-nearby-weighted.ps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This graph shows the weighted frequency of mutual information.
+ Unlike the previous figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MI nearby pairs"
+
+\end_inset
+
+, where each pair was counted with a weight of 1.0, here, each pair is counted
+ with a weight of 
+\begin_inset Formula $P(x,y)$
+\end_inset
+
+.
+ That is, for a fixed value of mutual information, frequent pairs with that
+ value of mutual information contribute more strongly than infrequent ones.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
