@@ -79,14 +79,161 @@ The mutual information of word pairs observed in text is commonly used in
 \end_layout
 
 \begin_layout Standard
+Mutual information is a measure of the relatedness of two words.
+ For example “Northern Ireland” will have high mutual information, since
+ the words “Northern” and “Ireland” are commonly used together.
+ By contrast, “Ireland is” will have negative mutual information, mostly
+ because the word “is” is used with many, many other words besides “Ireland”;
+ there is no special relationship between these two words.
+ High mutual information word pairs are typically noun phrases, often idioms
+ and collocations, and almost always embody some concept (so, for example,
+ “Northern Ireland” is the name of a place — the name of the conception
+ of a particular country).
+\end_layout
+
+\begin_layout Section
+Definitions
+\end_layout
+
+\begin_layout Standard
+In what follows, a 
+\begin_inset Quotes eld
+\end_inset
+
+pair
+\begin_inset Quotes erd
+\end_inset
+
+ will always mean an 
+\begin_inset Quotes eld
+\end_inset
+
+ordered word pair
+\begin_inset Quotes erd
+\end_inset
+
+; an ordered pair is simply a pair 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ where both words 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ occur in the same sentence, and the word 
+\begin_inset Formula $x$
+\end_inset
+
+ occurs to the left of the word 
+\begin_inset Formula $y$
+\end_inset
+
+ in that sentence.
+ The pairs are taken to be ordered because, in English, word order mattters.
+ Some of the graphs below show pairs of neighboring words; others show graphs
+ of pairs simply taken from the same sentence (so that other words may intervene
+ in the middle of the pair).
+ 
+\end_layout
+
+\begin_layout Standard
+The frequency of an ordered word pair 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ is defined as 
+\begin_inset Formula \[
+P(x,y)=\frac{N(x,y)}{N(*,*)}\]
+
+\end_inset
+
+where 
+\begin_inset Formula $N(x,y)$
+\end_inset
+
+ is the number of times that the pair 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ was observed, with word 
+\begin_inset Formula $x$
+\end_inset
+
+ to the left of word 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ The * represents 'any', so that 
+\begin_inset Formula $N(*,*)$
+\end_inset
+
+ is the total number of word pairs observed.
+\end_layout
+
+\begin_layout Standard
+The mutual information 
+\begin_inset Formula $M(x,y)$
+\end_inset
+
+ associated with a word pair 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ is defined as 
+\begin_inset Formula \[
+M(x,y)=log_{2}\frac{P(x,y)}{P(x,*)P(*,y)}\]
+
+\end_inset
+
+Here, 
+\begin_inset Formula $P(x,*)$
+\end_inset
+
+ is the marginal probablity of observing a pair where the left word is 
+\begin_inset Formula $x$
+\end_inset
+
+; similarly, 
+\begin_inset Formula $P(*,y)$
+\end_inset
+
+ is the marginal probability of observing a pair where the right word is
+ 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
 In the following, a selection of 925 thousand sentences consisting of 13.4
  million words were observed, from a corpus consisting of Voice of Ameria
  shows, Simple English Wikipedia, and a selction of books from Project Gutenberg
 , including Tolstoy's 'War and Peace'.
 \end_layout
 
+\begin_layout Section
+Unigram counts, Zipf's law
+\end_layout
+
 \begin_layout Standard
-Individual words are known to be distributed according to the Zipf law.
+Individual words, ranked by thier frequency of occurrance, are known to
+ be distributed according to the Zipf power law; this was noted by Zipf
+ in the 1930's, and possibly by others even earlier.
+ The power law is illustrated in figure
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:single-word-dist"
+
+\end_inset
+
+, and is genereated from the current corpus.
 \end_layout
 
 \begin_layout Standard
@@ -183,6 +330,23 @@ t and single.pl
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Distribution of Mutual Information
+\end_layout
+
+\begin_layout Standard
+How is mutual information distributed in the English language? The graph
+ x shows 
+\end_layout
+
+\begin_layout Section
+Mutual Information Scatterplots
+\end_layout
+
+\begin_layout Standard
+How does the mutual information
 \end_layout
 
 \begin_layout Standard
