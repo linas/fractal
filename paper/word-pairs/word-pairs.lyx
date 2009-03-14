@@ -442,6 +442,21 @@ This graph shows the distribution histogram of the mutual information of
  word pairs taken from the text corpus.
  The figure shows approximately 10.4 million distinct word pairs observed,
  with each distinct word pair counted exactly once.
+ The sides of the distribution are clearly log-linear, and are easily fit
+ by straight lines.
+ Shown are two such fits, one proportional to 
+\begin_inset Formula $e^{-0.28M}$
+\end_inset
+
+ and the other to 
+\begin_inset Formula $e^{0.26M}$
+\end_inset
+
+ where 
+\begin_inset Formula $M$
+\end_inset
+
+ is the mutual information.
 \end_layout
 
 \begin_layout Plain Layout
@@ -575,12 +590,276 @@ reference "fig:MI nearby pairs"
 \end_layout
 
 \begin_layout Plain Layout
+Several different log-linear behaviours are visible; these have been hand-fit
+ with the straight lines illustrated; these are given by 
+\begin_inset Formula $e^{-0.5M}$
+\end_inset
+
+, 
+\begin_inset Formula $e^{-0.75M}$
+\end_inset
+
+ and 
+\begin_inset Formula $e^{M}$
+\end_inset
+
+.
+ The two slopes on the right hand side require no further scaling: they
+ interecept 
+\begin_inset Formula $P=1$
+\end_inset
+
+ at 
+\begin_inset Formula $M=0$
+\end_inset
+
+.
+ The appearence of such simple fractions in the fit is curious: changing
+ the slopes by as little as 5% leads to a noticably poorer fit.
+ Whether this is a pure coincidence, or the sign of something deeper, is
+ unclear.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Generated with mi-nearby-weighted.gplot 
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Linked Words
+\end_layout
+
+\begin_layout Standard
+Instead of considering all possible word pairs in a sentence, one might
+ instead limit consideration to words that are in some way related to one-anothe
+r.
+ To that end, the same corpus was parsed by means of the Link Grammar parser
+ (need ref), to obtain pairs of words linked by Link Grammar linkages.
+ 
+\end_layout
+
+\begin_layout Standard
+The basic insight of Link Grammar is that every word can be treated as a
+ puzzle-piece, in that a word can only connect to other words that have
+ matching connectors.
+ The connector types are labelled; the natural output of parsing is a set
+ of connected word pairs.
+ It is an important coincidence to notice that, usually, the word pairs
+ that the parser generates also have positive, and usually a large positive
+ value of mutual information.
+ This observation provides insight into why the Link Grammar 
+\begin_inset Quotes eld
+\end_inset
+
+works
+\begin_inset Quotes erd
+\end_inset
+
+ or is a linguistiacally successful theory of parsing: its rule set captures
+ word associations.
+\end_layout
+
+\begin_layout Standard
+The figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Linked-Word-Pairs"
+
+\end_inset
+
+ and x reproduce the previous two graphs, except that this time, the set
+ of word pairs is limited to those that have been identified by Link Grammar.
+ This set consists of 2.37 million distinct word pairs.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Histogram of Linked Word Pairs
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Linked-Word-Pairs"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mi-pair.ps
+	width 100text%
+	BoundingBox 50bp 50bp 554bp 770bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows a historgram of word pairs that have been linked to one-anothe
+r by means of the Link Grammar parser.
+ The dataset contains approximately 2.37 million such word pairs; each is
+ counted precisely once (thus, this is the 
+\begin_inset Quotes eld
+\end_inset
+
+unweighted
+\begin_inset Quotes erd
+\end_inset
+
+ distribution).
+ Several log-linear regimes are visible.
+ That on the left has exactly the same slope as in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:single-word-dist"
+
+\end_inset
+
+, namely 
+\begin_inset Formula $e^{0.26M}$
+\end_inset
+
+.
+ The average slope on the right is as before, 
+\begin_inset Formula $e^{-0.28M}$
+\end_inset
+
+, but seems to be composed of two distinct regions, first with a shallower,
+ and then a steeper slope of 
+\begin_inset Formula $e^{-0.195M}$
+\end_inset
+
+ and 
+\begin_inset Formula $e^{-0.48M}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+built by mi-pair.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Weighted Linked Words
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Weighted-Linked-Words"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mi-pair-weighted.ps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+thje
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Created by ./mi-pair-weighted.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+2375296
+\end_layout
+
+\begin_layout Standard
+One may also consider
+\end_layout
+
+\begin_layout Standard
+A similar set of graphs result if one considers 
 \end_layout
 
 \begin_layout Section
