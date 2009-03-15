@@ -5,15 +5,10 @@
 # Copyright (C) 2009 Linas Vepstas <linasvepstas@gmail.com>
 
 use DBI;
-my $dbh = DBI->connect('DBI:Pg:dbname=lexat', 'linas', 'asdf')
+my $dbh = DBI->connect('DBI:Pg:dbname=rexat', 'linas', 'asdf')
    or die "Couldn't connect to database: " . DBI->errstr;
 
-my $mi_table = "NearbyPairs";
-my $start = 90;
-my $end = -60;
-my $delta = 0.1;
-
-my $mi_table = "Pairs";
+my $mi_table = "RandWordPairs";
 my $start = 60;
 my $end = -60;
 my $delta = 0.5;

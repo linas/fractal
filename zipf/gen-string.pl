@@ -48,7 +48,7 @@ sub make_random_word
 	$word;
 }
 
-while ($num_sentences < 303123)
+while ($num_sentences < 53123)
 {
 	my $i;
 
