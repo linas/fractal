@@ -48,7 +48,7 @@ sub make_random_word
 	$word;
 }
 
-while ($num_sentences < 501123)
+while ($num_sentences < 101123)
 {
 	my $i;
 
@@ -89,3 +89,25 @@ print "Final num word = $num_words\n";
 print "Final num pairs = $num_pairs\n";
 
 
+# ================================================================
+#
+# Now, store the results in an SQL database.
+
+use lib '/home/linas/src/novamente/src/cerego/lexical-attr/src/count';
+
+use DBI;
+use StoreLemma;
+
+my $dbh = DBI->connect('DBI:Pg:dbname=rexat', 'linas', 'asdf')
+	or die "Couldn't connect to database: " . DBI->errstr;
+
+StoreCount::set_table_names(
+	"RandWordCount", "RandWordPairCount", "RandWords", 
+	"RightRandWords", "LeftRandWords", "RandWordPairs");
+
+# store lemma counts
+print "Start storing ...\n";
+StoreCount::store_counts($dbh, $num_words, \%word_freq,
+	 $num_pairs, \%left_word_freq, \%right_word_freq, \%word_pair_freq);
+
+print "... done storing\n";
