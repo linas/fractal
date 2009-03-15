@@ -1,0 +1,24 @@
+#! /usr/bin/gnuplot
+#
+# Create a graph of the number of items vs. mutual information.
+# Assumes that there's a input file containing data. This just 
+# plots the data.
+#
+# Copyright (C) 2009 Linas Vepstas <linasvepstas@gmail.com>
+#
+
+set term png
+set out 'mi-graph.png'
+
+set data style lines
+set title "Words that occur next to one-another"
+set key right
+set xlabel "Mutual Information"
+set ylabel "Frequency"
+set yrange [5e-7:0.1]
+
+set logscale y
+
+plot "mi-pair.dat" using 2:($3/2375296) title "data", \
+     "mi-pair.dat" using 2:(8.0e5 * exp(-0.28*$2)/2375296) title "exp (-0.28 * MI)", \
+     "mi-pair.dat" using 2:(2.0e4 * exp(0.26*$2)/2375296) title "exp (0.26 * MI)"

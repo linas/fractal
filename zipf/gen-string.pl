@@ -48,7 +48,7 @@ sub make_random_word
 	$word;
 }
 
-while ($num_sentences < 101123)
+while ($num_sentences < 303123)
 {
 	my $i;
 
@@ -96,7 +96,7 @@ print "Final num pairs = $num_pairs\n";
 use lib '/home/linas/src/novamente/src/cerego/lexical-attr/src/count';
 
 use DBI;
-use StoreLemma;
+use StoreCount;
 
 my $dbh = DBI->connect('DBI:Pg:dbname=rexat', 'linas', 'asdf')
 	or die "Couldn't connect to database: " . DBI->errstr;
