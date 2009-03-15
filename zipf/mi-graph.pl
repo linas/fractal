@@ -9,9 +9,9 @@ my $dbh = DBI->connect('DBI:Pg:dbname=rexat', 'linas', 'asdf')
    or die "Couldn't connect to database: " . DBI->errstr;
 
 my $mi_table = "RandWordPairs";
-my $start = 60;
-my $end = -60;
-my $delta = 0.5;
+my $start = 25;
+my $end = -5;
+my $delta = 0.1;
 
 # =============================================================
 #

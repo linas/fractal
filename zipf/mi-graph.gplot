@@ -7,19 +7,19 @@
 # Copyright (C) 2009 Linas Vepstas <linasvepstas@gmail.com>
 #
 
-set term png
-set out 'mi-graph.png'
+# set term png
+# set out 'mi-graph.png'
+set term postscript color
+set out 'mi-graph.ps'
 
 set data style lines
-set title "Random Word Pairs"
+set title "Randomly Generated Word Pairs"
 set key right
 set xlabel "Mutual Information"
 set ylabel "Frequency"
-# set yrange [5e-7:0.1]
+set yrange [1e-6:1]
 
 set logscale y
 
-plot "mi-graph.dat" using 2:($3) title "data"
+plot "mi-graph.dat" using 2:($3/20572345) title "" linewidth 2
 
-#      "mi-pair.dat" using 2:(8.0e5 * exp(-0.28*$2)/2375296) title "exp (-0.28 * MI)", \
-#      "mi-pair.dat" using 2:(2.0e4 * exp(0.26*$2)/2375296) title "exp (0.26 * MI)"
