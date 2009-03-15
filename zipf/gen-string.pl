@@ -8,8 +8,15 @@
 
 use strict;
 
-my $Nletters = 13;
-my @letters = ('e', 't', 'o', 'a', 'i', 'n', 's', 'h', 'r', 'd', 'l', 'u');
+
+my $Nletters = 29;
+my @letters = ('e', 'e', 'e', 'e', 
+'t', 't', 't', 
+'o', 'o', 'o',
+'a', 'a', 'a',
+'i', 'i', 'i',
+'n', 'n', 's', 's', 'h', 'h', 'r', 'r', 
+'d', 'd', 'l', 'l', 'u');
 
 sub make_random_word
 {
@@ -18,9 +25,9 @@ sub make_random_word
 	for ($i=0; $i<12; $i++)
 	{
 		my $rn = rand();
-		$rn *= $Nletters;
-		if ($rn < 1) { last;}
-		$rn -= 1;
+		$rn *= $Nletters + 3;
+		if (($rn < 3) && ($i > 0)) { last;}
+		$rn -= 3;
 		my $l = $letters[$rn];
 		
 		$word = $word . $l;
