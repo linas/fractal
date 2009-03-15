@@ -1,58 +1,48 @@
 
 -- This file describes SQL tables as appropriate for postgres.
 
--- Table defining word-pair (bigram) counts and statistics.
+-- Table defining random word-pair (bigram) counts and statistics.
 -- The structure of these tables is (*should be*) identical
--- to that of the LemmaPair, etc. tables. However, the source
--- of data used to populate these tables is different: rather
--- than counting word pairs that are linked to one another by
--- link-grammar, these merely count word pairs that happen to
--- occur in the same sentence.  Thus, this table is more 
--- appropriate for use with Mihalcea Markov-chain type algos.
+-- to that of the Pair, etc. tables. However, the source
+-- of data used to populate these tables is different: 
+-- the words have been randomly created. All word pairs in
+-- a sentence are considered.
 -- =========================================================
 
-CREATE TABLE NearbyCount (
+CREATE TABLE RandWordCount (
 	count FLOAT
 );
-INSERT INTO NearbyCount VALUES (0);
+INSERT INTO RandWordCount VALUES (0);
 
-CREATE TABLE NearbyPairCount (
+CREATE TABLE RandWordPairCount (
 	count FLOAT
 );
-INSERT INTO NearbyPairCount VALUES (0);
+INSERT INTO RandWordPairCount VALUES (0);
 
-CREATE TABLE Nearbys (
-	lemma TEXT NOT NULL,
-	pos TEXT NOT NULL,
+CREATE TABLE RandWords (
+	word TEXT PRIMARY KEY,
 	count FLOAT,
-	probability FLOAT,
-	PRIMARY KEY (lemma, pos)
+	probability FLOAT
 );
 
-CREATE TABLE LeftNearbys (
-	left_lemma TEXT NOT NULL,
-	left_pos TEXT NOT NULL,
+CREATE TABLE LeftRandWords (
+	left_word TEXT PRIMARY KEY,
 	count FLOAT,
-	probability FLOAT,
-	PRIMARY KEY (left_lemma, left_pos)
+	probability FLOAT
 );
 
-CREATE TABLE RightNearbys (
-	right_lemma TEXT NOT NULL,
-	right_pos TEXT NOT NULL,
+CREATE TABLE RightRandWords (
+	right_word TEXT PRIMARY KEY,
 	count FLOAT,
-	probability FLOAT,
-	PRIMARY KEY (right_lemma, right_pos)
+	probability FLOAT
 );
 
-CREATE TABLE NearbyPairs (
-	left_lemma TEXT NOT NULL,
-	left_pos TEXT NOT NULL,
-	right_lemma TEXT NOT NULL,
-	right_pos TEXT NOT NULL,
+CREATE TABLE RandWordPairs (
+	left_word TEXT NOT NULL,
+	right_word TEXT NOT NULL,
 	count FLOAT,
 	probability FLOAT,
 	mutual_info FLOAT,
- 	PRIMARY KEY (left_lemma, left_pos, right_lemma, right_pos)
+ 	PRIMARY KEY (left_word, right_word)
 );
 
