@@ -756,10 +756,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
@@ -817,6 +813,126 @@ reference "fig:Weighted-Mutual-Information"
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One problem immediately evident from these statistics is that the random
+ generator produced far too many unique, distinct words.
+ This is despite several efforts that were taken to limit word size: the
+ likelyhood of choosing a space was dramatically increased, so as to generate
+ relatively short strings.
+ Also, a hard-cutoff was forced to limit all strings to a length of 8 characters
+ or less.
+ Nonetheless, this means that there are, in principle, 
+\begin_inset Formula $12^{8}+12^{7}+\cdots\approx4.7\times10^{8}$
+\end_inset
+
+ distinct 
+\begin_inset Quotes eld
+\end_inset
+
+words
+\begin_inset Quotes erd
+\end_inset
+
+ in the language, and 
+\begin_inset Formula $10^{17}$
+\end_inset
+
+ observable word pairs.
+ Thus, the 20 million observed word pairs are just a miniscule portion of
+ all possible words pairs.
+ Each observed word (and only a tiny fraction of all possible words were
+ observed) participates in only a relatively small number of possible word
+ pairs.
+ Thus, simply due to sampling effects, one finds that almost all pairs have
+ a high mutual information content: there have not been enough pairs observed
+ to realize that the words are 
+\begin_inset Quotes eld
+\end_inset
+
+maximally promiscuous
+\begin_inset Quotes erd
+\end_inset
+
+ in thier pairing.
+\end_layout
+
+\begin_layout Standard
+To overcome this problem, the experiment is repeated, with a word length
+ limit of 4 characters.
+ The total vocabulary then consists of 
+\begin_inset Formula $12^{4}+12^{3}+12^{2}+12=22620$
+\end_inset
+
+ words.
+ Given a vocabulary of this size, there are about 512 million word pairs
+ possible.
+ After observing 11.5 million of these pairs (or about 2.2% of all possible
+ pairs), the mutual information is graphed in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Small-Random-Vocabulary"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Small Random Vocabulary
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Small-Random-Vocabulary"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mi-random-small-11M.ps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the distribution of mutual information, obtained by sampling
+ randomly created sentences.
+ Unlike the graph shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MI rand text"
+
+\end_inset
+
+, this figure shows a much smaller vocabulary: that consisting of 11.5 million
+ observed word pairs, or about 2.2% of all possible random word pairs.
+ This graph retains the strong offset to positive MI, but is far more gently
+ humped; the flat top has all but disappeared.
 \end_layout
 
 \end_inset
