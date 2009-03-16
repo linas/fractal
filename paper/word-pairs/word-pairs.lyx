@@ -63,7 +63,7 @@ linasvepstas@gmail.com
 \end_layout
 
 \begin_layout Abstract
-This short note presents some empircal data on the distribution of word
+This short note presents some empirical data on the distribution of word
  pairs obtained from English text.
  Particular attention is paid to the distribution of mutual information.
 \end_layout
@@ -81,8 +81,8 @@ The mutual information of word pairs observed in text is commonly used in
  statistical corpus linguistics for a variety of reasons: to help identify
  idioms and collocations, to create dependency parsers, such as minimum
  spanning tree parsers, and many other uses.
- This is because the mutual information of a word-pair co-occurance is a
- good indicator of how often two words 'go together'.
+ This is because the mutual information of a word-pair co-occurrence is
+ a good indicator of how often two words 'go together'.
  However, little seems to have been written on the distribution of word
  pairs, or the distribution of mutual information.
  The current work is a short note reporting on the empirical distribution
@@ -144,7 +144,7 @@ ordered word pair
 \end_inset
 
  in that sentence.
- The pairs are taken to be ordered because, in English, word order mattters.
+ The pairs are taken to be ordered because, in English, word order matters.
  Some of the graphs below show pairs of neighboring words; others show graphs
  of pairs simply taken from the same sentence (so that other words may intervene
  in the middle of the pair).
@@ -205,7 +205,8 @@ Here,
 \begin_inset Formula $P(x,*)$
 \end_inset
 
- is the marginal probablity of observing a pair where the left word is 
+ is the marginal probability of observing a pair where the left word is
+ 
 \begin_inset Formula $x$
 \end_inset
 
@@ -224,9 +225,9 @@ Here,
 
 \begin_layout Standard
 In the following, a selection of 925 thousand sentences consisting of 13.4
- million words were observed, from a corpus consisting of Voice of Ameria
- shows, Simple English Wikipedia, and a selction of books from Project Gutenberg
-, including Tolstoy's 'War and Peace'.
+ million words were observed, from a corpus consisting of Voice of America
+ shows, Simple English Wikipedia, and a selection of books from Project
+ Gutenberg, including Tolstoy's 'War and Peace'.
 \end_layout
 
 \begin_layout Section
@@ -234,7 +235,7 @@ Unigram counts, Zipf's law
 \end_layout
 
 \begin_layout Standard
-Individual words, ranked by thier frequency of occurrance, are known to
+Individual words, ranked by their frequency of occurrence, are known to
  be distributed according to the Zipf power law; this was noted by Zipf
  in the 1930's
 \begin_inset CommandInset citation
@@ -315,8 +316,8 @@ Single Word Distribution
 \end_layout
 
 \begin_layout Plain Layout
-The graph above shows the frequency distribution of the most commony occuring
- words in the sample corpus, ranked by thier frequency of occurance.
+The graph above shows the frequency distribution of the most commonly occurring
+ words in the sample corpus, ranked by their frequency of occurrence.
  The first point corresponds to the beginning-of-sentence maker; the average
  sentence length of about 14.4 words corresponds to a frequency of 1/14.4=0.07.
  This is followed by the words 
@@ -332,7 +333,7 @@ the, of, in to, and
  The thicker red line represents the data, whereas the thinner green line
  represents the power law: 
 \begin_inset Formula \[
-P(k)=10k^{-1.01}\]
+P(k)=0.1k^{-1.01}\]
 
 \end_inset
 
@@ -374,7 +375,7 @@ ot and single.pl
 \end_inset
 
 The Zipfian distribution for texts appears to be entirely due to a side
- effect of the ranking of words
+ effect of the ranking of words 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Li92"
@@ -405,11 +406,11 @@ s=\frac{\log(N+1)}{\log N}\]
 
 \end_inset
 
- for an alphabet of 
+for an alphabet of 
 \begin_inset Formula $N$
 \end_inset
 
- letters
+ letters 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Li92"
@@ -558,7 +559,7 @@ binning
 
 \begin_layout Standard
 Notable in the first figure is a distinct triangular shape, with a blunted,
- lop-sideded nose, and 
+ lop-sided  nose, and 
 \begin_inset Quotes eld
 \end_inset
 
@@ -650,7 +651,7 @@ reference "fig:MI nearby pairs"
 \end_layout
 
 \begin_layout Plain Layout
-Several different log-linear behaviours are visible; these have been hand-fit
+Several different log-linear behaviors are visible; these have been hand-fit
  with the straight lines illustrated; these are given by 
 \begin_inset Formula $e^{-0.5M}$
 \end_inset
@@ -665,7 +666,7 @@ Several different log-linear behaviours are visible; these have been hand-fit
 
 .
  The two slopes on the right hand side require no further scaling: they
- interecept 
+ intercept 
 \begin_inset Formula $P=1$
 \end_inset
 
@@ -674,8 +675,8 @@ Several different log-linear behaviours are visible; these have been hand-fit
 \end_inset
 
 .
- The appearence of such simple fractions in the fit is curious: changing
- the slopes by as little as 5% leads to a noticably poorer fit.
+ The appearance of such simple fractions in the fit is curious: changing
+ the slopes by as little as 5% leads to a noticeably poorer fit.
  Whether this is a pure coincidence, or the sign of something deeper, is
  unclear.
 \end_layout
@@ -704,7 +705,7 @@ Random Texts
 
 \begin_layout Standard
 As has been noted, the Zipfian distribution appears to be entirely explainable
- as a side-effect of chosing word rank as an index.
+ as a side-effect of choosing word rank as an index.
  The question naturally arises: which of the features of the distribution
  of mutual information are associated with the structure of language, and
  which are characteristic of random text? This question is explored with
@@ -739,7 +740,7 @@ complete word
  to the word-pair counting subsystem.
  This process was repeated to obtain a total of 4.1 million words and 20.5
  million word pairs.
- The distribution of mutual infromation is shown in figure 
+ The distribution of mutual information is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:MI rand text"
@@ -814,7 +815,7 @@ reference "fig:Weighted-Mutual-Information"
 \begin_layout Plain Layout
 Whether or not the left or right sides of the figure are best fit by Gaussian
  or plain exponentials is not clear.
- That perhaps the fall-off behaviour is Gaussian is suggested by the following
+ That perhaps the fall-off behavior is Gaussian is suggested by the following
  two graphs.
 \end_layout
 
@@ -827,7 +828,7 @@ Whether or not the left or right sides of the figure are best fit by Gaussian
 One problem immediately evident from these statistics is that the random
  generator produced far too many unique, distinct words.
  This is despite several efforts that were taken to limit word size: the
- likelyhood of choosing a space was dramatically increased, so as to generate
+ likelihood of choosing a space was dramatically increased, so as to generate
  relatively short strings.
  Also, a hard-cutoff was forced to limit all strings to a length of 8 characters
  or less.
@@ -848,7 +849,7 @@ words
 \end_inset
 
  observable word pairs.
- Thus, the 20 million observed word pairs are just a miniscule portion of
+ Thus, the 20 million observed word pairs are just a minuscule portion of
  all possible words pairs.
  Each observed word (and only a tiny fraction of all possible words were
  observed) participates in only a relatively small number of possible word
@@ -863,7 +864,7 @@ maximally promiscuous
 \begin_inset Quotes erd
 \end_inset
 
- in thier pairing.
+ in their pairing.
 \end_layout
 
 \begin_layout Standard
@@ -978,7 +979,7 @@ Generated with mi-graph.gplot
 
 \begin_layout Standard
 Taking the small-vocabulary idea to an extreme, a third experiment is conducted,
- where the vocabulary consists of all words of length 3 or less, cosntructed
+ where the vocabulary consists of all words of length 3 or less, constructed
  from 12 letters: a total vocabulary of 
 \begin_inset Formula $12^{3}+12^{2}+12=1884$
 \end_inset
@@ -1038,13 +1039,13 @@ name "fig:Tiny vocab"
 
 \begin_layout Plain Layout
 This figure shows the distribution of mutual information for a tiny vocabulary,
- consisting of 1884 possible words, and 3.5 milllion word pairs.
+ consisting of 1884 possible words, and 3.5 million word pairs.
  Enough sentences were generated to count a total of 16.6 million word pairs,
  of which 3.07 million were unique.
  The graph is still clearly shifted: some word pairs were observed far more
  frequently than others.
  This time, the right-hand side of the curve is well-fitted by a Gaussian:
- the dasshed blue line, labelled as 
+ the dashed blue line, labeled as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1110,7 +1111,7 @@ Zipf for tiny vocab
 \end_layout
 
 \begin_layout Plain Layout
-Distribution of words in the tiny dataset.
+Distribution of words in the tiny data set.
  For comparison, the straight dashed green line represents the Zipf law
  distribution 
 \begin_inset Formula $0.1k^{1.01}$
@@ -1158,7 +1159,7 @@ r.
 The basic insight of Link Grammar is that every word can be treated as a
  puzzle-piece, in that a word can only connect to other words that have
  matching connectors.
- The connector types are labelled; the natural output of parsing is a set
+ The connector types are labeled; the natural output of parsing is a set
  of connected word pairs.
  It is an important coincidence to notice that, usually, the word pairs
  that the parser generates also have positive, and usually a large positive
@@ -1171,7 +1172,7 @@ works
 \begin_inset Quotes erd
 \end_inset
 
- or is a linguistiacally successful theory of parsing: its rule set captures
+ or is a linguistically successful theory of parsing: its rule set captures
  word associations.
 \end_layout
 
@@ -1235,9 +1236,9 @@ name "fig:Linked-Word-Pairs"
 \end_layout
 
 \begin_layout Plain Layout
-This figure shows a historgram of word pairs that have been linked to one-anothe
-r by means of the Link Grammar parser.
- The dataset contains approximately 2.37 million such word pairs; each is
+This figure shows a histogram of word pairs that have been linked to one-another
+ by means of the Link Grammar parser.
+ The data set contains approximately 2.37 million such word pairs; each is
  counted precisely once (thus, this is the 
 \begin_inset Quotes eld
 \end_inset
@@ -1347,7 +1348,7 @@ reference "fig:Weighted-Mutual-Information"
 \end_inset
 
 , but for linked word pairs.
- That is, the historgram bin counts are weighted by the probability 
+ That is, the histogram bin counts are weighted by the probability 
 \begin_inset Formula $P(x,y)$
 \end_inset
 
@@ -1461,7 +1462,7 @@ name "fig:Word-Pair-Scatterplot"
 \end_layout
 
 \begin_layout Plain Layout
-This figure shows a scatterplot of the probability of occurance 
+This figure shows a scatterplot of the probability of occurrence 
 \begin_inset Formula $P(x,y)$
 \end_inset
 
@@ -1479,19 +1480,19 @@ This figure shows a scatterplot of the probability of occurance
 \begin_inset Formula $P(x,y)$
 \end_inset
 
- on a logarithmic axis, this plot uses a linear axis, labelled with 
+ on a logarithmic axis, this plot uses a linear axis, labeled with 
 \begin_inset Formula $-log_{2}P(x,y)$
 \end_inset
 
 .
- This axis labelling gives a better feeling for the relative sizes of the
+ This axis labeling gives a better feeling for the relative sizes of the
  horizontal and vertical scales.
  
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Created with mi-scatter-nearby-200K.gplot and mi-scatter.pl
@@ -1570,10 +1571,10 @@ Conclusion
 Some conclusion to be written.
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "/home/linas/src/fractal/paper/lang"
+bibfiles "/home/linas/linas/fractal/paper/lang"
 options "plain"
 
 \end_inset
