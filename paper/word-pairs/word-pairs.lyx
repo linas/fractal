@@ -1572,6 +1572,39 @@ Some conclusion to be written.
 \end_layout
 
 \begin_layout Standard
+One thing that I've learned from these experiments is that the rightward
+ skew is not at all something that is "capturing actual associative structure
+ in the language", but is arguably yet another statistical artifact.
+ 
+\end_layout
+
+\begin_layout Standard
+Simply by drawing random pairs out of a bag, one will, for smaller sample
+ sizes, see a rightward shift in the MI distribution, simply because one
+ has not yet seen *all* possible random word pairs.
+ Thus, the small sample size make it look like some words are associated
+ with others, even though the association is purely accidental.
+\end_layout
+
+\begin_layout Standard
+How big a sample size is this? I tried a "tiny" vocabulary of 1884 words,
+ for a total of 3.5M possible word pairs.
+ After randomly drawing 16M pairs (and thus observing 3.07M unique pairs),
+ I still saw a strong rightward shift in the MI.
+ 
+\end_layout
+
+\begin_layout Standard
+I'm now guessing that, in order to have this sample-size effect wash out,
+ one needs to observe at least N^3 pairs for a vocabulary of N words.
+ How big is this number? for English, its huge: assuming an "average" speaker
+ vocabulary of 30K words, one would have to sample (30K)^3=27 trillion word
+ pairs before one could argue that a right-ward shift in the MI graph is
+ due to the "associative structure of language".
+ Yikes! 
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "/home/linas/linas/fractal/paper/lang"
