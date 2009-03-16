@@ -1,0 +1,29 @@
+#! /usr/bin/gnuplot
+#
+# Show single-word distribution
+#
+# Copyright (C) 2009 Linas Vepstas <linasvepstas@gmail.com>
+#
+
+# set term png
+# set out 'single.png'
+# set term epslatex
+# set out 'single.eps'
+set term postscript color
+set out 'single.ps'
+
+
+set data style lines
+set title "Frequency distribution, Tiny Random dataset"
+set key right
+set xlabel "Rank of word"
+set ylabel "Probability"
+set logscale x
+set logscale y
+
+set term postscript color
+set out 'zipf-tiny.ps'
+set yrange [1e-4:0.02]
+
+plot "zipf-tiny.dat" using 1:2 title "data" linewidth 2, \
+     "zipf-tiny.dat" using 1:(1.0/(10*$1**1.01)) title "rank^-1.01"
