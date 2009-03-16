@@ -21,5 +21,30 @@ set yrange [1e-6:1]
 
 set logscale y
 
-plot "mi-graph.dat" using 2:($3/20572345) title "" linewidth 2
+# These settings were used to graph the 8-character-long word pairs
+# set title "Randomly Generated Word Pairs"
+# plot "mi-graph.dat" using 2:($3/20572345) title "MI" linewidth 2, \
+#      "mi-graph.dat" using 2:($4/2.2158419) title "weighted MI" linewidth 1
+
+# These settings were used to generate the mi-random-small-11M.ps
+# graph, i.e. vocab of 22 K words, sample of 11.5 M pairs.
+set term postscript color
+set out 'mi-random-small-11M.ps'
+set title "Randomly Generated Word Pairs (Small Vocab, 11M Pairs)"
+plot "mi-rand-small-11M.dat" using 2:($3/11550891) title "MI" linewidth 2, \
+     "mi-rand-small-11M.dat" using 2:($4/1.730096) title "weighted MI" linewidth 1, \
+     "mi-rand-small-11M.dat" using 2:(0.19*exp(-0.2*($2-8.3)**2)) title "Gaussian fit" 
+#      "mi-rand-small-11M.dat" using 2:(4e8*exp(-2*$2)) title "exp(-2*MI)" 
+
+
+# These settings were used to generate mi-tiny.ps
+# set term postscript color
+# set out 'mi-tiny.ps'
+# 
+# set xrange [-2:8]
+# set yrange [1e-5:1]
+# set title "Randomly Generated Word Pairs (Tiny Vocabulary)"
+# plot "mi-graph-tiny.dat" using 2:($3/3072240) title "MI" linewidth 2, \
+#      "mi-graph-tiny.dat" using 2:($4/1.13415) title "weighted MI" linewidth 1, \
+#      "mi-graph-tiny.dat" using 2:(0.48*exp(-0.92*($2-3.9)**2)) title "parabola"
 

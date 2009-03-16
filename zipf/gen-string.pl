@@ -9,9 +9,7 @@
 use strict;
 use warnings;
 
-sleep 21600;
-
-my $MAXwordlen = 8;
+my $MAXwordlen = 3;
 my $Nletters = 29;
 my @letters = ('e', 'e', 'e', 'e', 
 't', 't', 't', 
@@ -41,9 +39,9 @@ sub make_random_word
 	for ($i=0; $i<$MAXwordlen; $i++)
 	{
 		my $rn = rand();
-		$rn *= $Nletters + 5;
+		$rn *= $Nletters + 7;
 		if (($rn < 5) && ($i > 0)) { last;}
-		$rn -= 5;
+		$rn -= 7;
 		my $l = $letters[$rn];
 		
 		$word = $word . $l;
