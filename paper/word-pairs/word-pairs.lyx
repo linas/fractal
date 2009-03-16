@@ -873,7 +873,7 @@ To overcome this problem, the experiment is repeated, with a word length
  words.
  Given a vocabulary of this size, there are about 512 million word pairs
  possible.
- After observing 11.5 million of these pairs (or about 2.2% of all possible
+ After observing 11.5 million distinct pairs (or about 2.2% of all possible
  pairs), the mutual information is graphed in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -882,6 +882,18 @@ reference "fig:Small-Random-Vocabulary"
 \end_inset
 
 .
+ Note that the emphasis is on 
+\begin_inset Quotes eld
+\end_inset
+
+distinct
+\begin_inset Quotes erd
+\end_inset
+
+ pairs: at least 25% of the pairs were observed at least twice.
+ Because many of the generated words are short (two or three letters long),
+ and are generated fairly often, many of the pairs were observed dozens,
+ hundreds or thousands of times.
 \end_layout
 
 \begin_layout Standard
@@ -930,9 +942,91 @@ reference "fig:MI rand text"
 \end_inset
 
 , this figure shows a much smaller vocabulary: that consisting of 11.5 million
- observed word pairs, or about 2.2% of all possible random word pairs.
+ distinct observed word pairs, or about 2.2% of all possible random word
+ pairs.
  This graph retains the strong offset to positive MI, but is far more gently
  humped; the flat top has all but disappeared.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Taking the small-vocabulary idea to an extreme, a third experiment is conducted,
+ where the vocabulary consists of all words of length 3 or less, cosntructed
+ from 12 letters: a total vocabulary of 
+\begin_inset Formula $12^{3}+12^{2}+12=1884$
+\end_inset
+
+ words.
+ There are a total number of 3.5 million possible word pairs.
+ Generating random sentences, as described previously, a total of 16.6 million
+ word pairs were generated, with a total of xx unique pairs observed.
+ The distribution of mutual information is graphed in figure xx.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Mutual Information for a Tiny Vocabulary 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Tiny vocab"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mi-tiny.ps
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the distribution of mutual information for a tiny vocabulary,
+ consisting of 1884 possible words, and 3.5 milllion word pairs.
+ Enough sentences were generated to count a total of 16.6 million word pairs,
+ of which 3.07 million were unique.
+ The graph is still clearly shifted: some word pairs were observed far more
+ frequently than others.
+ This time, the right-hand side of the curve is well-fitted by a Gaussian:
+ the dasshed blue line, labelled as 
+\begin_inset Quotes eld
+\end_inset
+
+parabola
+\begin_inset Quotes erd
+\end_inset
+
+ in the image, is given by 
+\begin_inset Formula $0.48\exp-0.92(MI-3.9)^{2}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
