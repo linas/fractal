@@ -64,6 +64,28 @@ double walsh (double x, int n)
 	return prod;
 }
 
+/*
+ * Assorted series summation functions
+ * of the form sum_n a_n r_n(x) where 
+ * a_n are geometric series, etc. 
+ */
+
+double geo_series(double x, double g)
+{
+	int n;
+
+	double acc = 0.0;
+	double gn = 1.0;
+	for (n=0; n<33; n++)
+	{
+		acc += gn * walsh(x, n);
+		gn *= g;
+	}
+
+	return acc;
+}
+
+
 main (int argc, char * argv[])
 {
 	if (2 > argc)
@@ -72,16 +94,18 @@ main (int argc, char * argv[])
 		exit(1);
 	}
 
-	int n = atoi(argv[1]);
+	// int n = atoi(argv[1]);
+	double g = atof(argv[1]);
 	
-	printf("#\n# Rademacher/Waalsh functions\n#\n");
+	printf("#\n# Rademacher/Walsh functions\n#\n");
 	int nsteps = 300;
 	int i;
 	for (i=0; i < nsteps; i++)
 	{
 		double x = i / ((double) nsteps);
 		// double y = rademacher (x, 2);
-		double y = walsh (x, n);
+		// double y = walsh (x, n);
+		double y = geo_series (x, g);
 		
 		printf("%d	%f	%f\n", i, x, y);
 	}
