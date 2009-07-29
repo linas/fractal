@@ -40,6 +40,20 @@ double rademacher (double x, int n)
 }
 
 /**
+ * sine-wave version of above
+ */
+double sine_rademacher (double x, int n)
+{
+	if (0 == n) return 1.0;
+	
+	int shift = 1 << (n-1);
+	x *= shift;
+	x -= floor(x);
+	x *= 2.0 * M_PI;
+	return sin(-x);
+}
+
+/**
  * Generate the walsh basis functions w_n(x)
  * The index is proceeds by binary counting. 
  * w_0(x) = r_0(x) = 1
@@ -58,6 +72,7 @@ double walsh (double x, int n)
 	while(n != 0)
 	{
 		if (n & 0x1) prod *= rademacher(x, shift);
+		// if (n & 0x1) prod *= sine_rademacher(x, shift);
 		n >>= 1;
 		shift += 1;
 	}
@@ -76,10 +91,25 @@ double geo_series(double x, double g)
 
 	double acc = 0.0;
 	double gn = 1.0;
-	for (n=0; n<33; n++)
+	for (n=0; n<=4096; n++)
 	{
 		acc += gn * walsh(x, n);
 		gn *= g;
+	}
+
+	return acc;
+}
+
+double pow_series(double x, double s)
+{
+	int n;
+
+	double acc = 0.0;
+	double sn = 1.0;
+	for (n=1; n<1025; n++)
+	{
+		acc += sn * walsh(x, n);
+		sn = pow(n, -s);
 	}
 
 	return acc;
@@ -98,7 +128,7 @@ main (int argc, char * argv[])
 	double g = atof(argv[1]);
 	
 	printf("#\n# Rademacher/Walsh functions\n#\n");
-	int nsteps = 300;
+	int nsteps = 1440;
 	int i;
 	for (i=0; i < nsteps; i++)
 	{
@@ -106,6 +136,7 @@ main (int argc, char * argv[])
 		// double y = rademacher (x, 2);
 		// double y = walsh (x, n);
 		double y = geo_series (x, g);
+		// double y = pow_series (x, g);
 		
 		printf("%d	%f	%f\n", i, x, y);
 	}
