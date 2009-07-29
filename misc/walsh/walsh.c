@@ -38,16 +38,42 @@ double rademacher (double x, int n)
 	return rademacher(x, 1);
 }
 
+/**
+ * Generate the walsh basis functions w_n(x)
+ * The index is proceeds by binary counting. 
+ * w_0(x) = r_0(x) = 1
+ * w_1(x) = r_1(x)
+ * w_2(x) = r_2(x)
+ * w_3(x) = r_1(x) r_2(x)
+ * w_4(x) = r_3(x)
+ * w_5(x) = r_3(x) r_1(x)
+ */
+double walsh (double x, int n)
+{
+	if (0 == n) return 1.0;
+	double prod = 1.0;
+	int shift = 1;
+	
+	while(n != 0)
+	{
+		if (n & 0x1) prod *= rademacher(x, shift);
+		n >>= 1;
+		shift += 1;
+	}
+	return prod;
+}
+
 main (int argc, char * argv[])
 {
 	
 	printf("#\n# Rademacher/Waalsh functions\n#\n");
 	int nsteps = 300;
 	int i;
-	for (i=0; i< nsteps; i++)
+	for (i=0; i < nsteps; i++)
 	{
 		double x = i / ((double) nsteps);
-		double y = rademacher (x, 2);
+		// double y = rademacher (x, 2);
+		double y = walsh (x, 2);
 		
 		printf("%d	%f	%f\n", i, x, y);
 	}
