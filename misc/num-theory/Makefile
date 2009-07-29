@@ -25,8 +25,11 @@ dist:
 .c.o:
 	$(CC) -c -O2 -I$(INC) $<
 
+.C.o:
+	$(CC) -c -O2 -I$(INC) $<
+
 .o:
-	$(CC) -o $* $^ -L$(LIB) -lfunc -lm
+	$(CC) -o $* $^ -L$(LIB) -lfunc -lm -lstdc++
 
 
 angular:	angular.o 
