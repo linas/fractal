@@ -16,6 +16,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * Generate the Rademacher functions r_n(x).
@@ -65,6 +66,13 @@ double walsh (double x, int n)
 
 main (int argc, char * argv[])
 {
+	if (2 > argc)
+	{
+		printf ("Useage: %s n\n", argv[0]);
+		exit(1);
+	}
+
+	int n = atoi(argv[1]);
 	
 	printf("#\n# Rademacher/Waalsh functions\n#\n");
 	int nsteps = 300;
@@ -73,7 +81,7 @@ main (int argc, char * argv[])
 	{
 		double x = i / ((double) nsteps);
 		// double y = rademacher (x, 2);
-		double y = walsh (x, 2);
+		double y = walsh (x, n);
 		
 		printf("%d	%f	%f\n", i, x, y);
 	}
