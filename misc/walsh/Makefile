@@ -8,7 +8,7 @@ LIB = $(TOP)/lib
 CC = /usr/bin/cc -O2 -I $(INC)
 
 
-EXES= walsh
+EXES= mob-count walsh
 
 all: 	$(EXES)
 
@@ -31,6 +31,7 @@ dist:
 	$(CC) -o $* $^ -L$(LIB) -lfunc -lm -lstdc++
 
 
+mob-count:	mob-count.o
 walsh:	walsh.o
 
 
