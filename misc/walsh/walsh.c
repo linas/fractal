@@ -54,6 +54,23 @@ double sine_rademacher (double x, int n)
 }
 
 /**
+ * sawtooth version of above
+ */
+double saw_rademacher (double x, int n)
+{
+	if (0 == n) return 1.0;
+	if (1 == n)
+	{
+		return x-0.5;
+	}
+	
+	int shift = 1 << (n-1);
+	x *= shift;
+	x -= floor(x);
+	return saw_rademacher(x, 1);
+}
+
+/**
  * Generate the walsh basis functions w_n(x)
  * The index is proceeds by binary counting. 
  * w_0(x) = r_0(x) = 1
@@ -73,6 +90,7 @@ double walsh (double x, int n)
 	{
 		if (n & 0x1) prod *= rademacher(x, shift);
 		// if (n & 0x1) prod *= sine_rademacher(x, shift);
+		// if (n & 0x1) prod *= saw_rademacher(x, shift);
 		n >>= 1;
 		shift += 1;
 	}
@@ -135,8 +153,8 @@ main (int argc, char * argv[])
 		double x = i / ((double) nsteps);
 		// double y = rademacher (x, 2);
 		// double y = walsh (x, n);
-		double y = geo_series (x, g);
-		// double y = pow_series (x, g);
+		// double y = geo_series (x, g);
+		double y = pow_series (x, g);
 		
 		printf("%d	%f	%f\n", i, x, y);
 	}
