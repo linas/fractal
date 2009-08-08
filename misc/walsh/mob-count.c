@@ -8,11 +8,11 @@
 
 #include <stdio.h>
 
-int primes[] = {1,2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,51,53,61,67,71,73,79,83,89,91,97};
+unsigned long primes[] = {1,2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,51,53,61,67,71,73,79,83,89,91,97};
 
-int mob_n(int n)
+unsigned long long mob_n(int n)
 {
-	int acc = 1;
+	unsigned long long acc = 1;
 	int shift = 1;
 	while (n != 0)
 	{
@@ -25,10 +25,13 @@ int mob_n(int n)
 
 main (int argc, char * argv[])
 {
+
+	int max = atoi (argv[1]);
+
 	int i;
-	for (i=1; i<50123; i++)
+	for (i=1; i<max; i++)
 	{
-		int m = mob_n (i);
-		printf("%d	%d\n", i, m);
+		unsigned long long m = mob_n (i);
+		printf("%d	%Ld\n", i, m);
 	}
 }
