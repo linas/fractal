@@ -5,8 +5,7 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-CC = /usr/bin/cc -O2 -I $(INC)
-
+CC = /usr/bin/cc -O2 -Wall -I$(INC)
 
 EXES= mob-count walsh walsh-mink
 
@@ -22,10 +21,10 @@ dist:
 	tar -zcvf walsh.tgz *.c *.gplot Makefile .cvsignore
 
 .c.o:
-	$(CC) -c -O2 -Wall -I$(INC) $<
+	$(CC) -c $<
 
 .C.o:
-	$(CC) -c -O2 -Wall -I$(INC) $<
+	$(CC) -c $<
 
 .o:
 	$(CC) -o $* $^ -L$(LIB) -lfunc -lm -lstdc++

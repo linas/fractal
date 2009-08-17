@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Farey.h"
+
 /* Reverse the bit order of i, assuming its of length n. */
 int reverse(int p, int n)
 {
@@ -43,7 +45,6 @@ int odd(int p, int n)
  */
 double walsh (int i, int p, int n)
 {
-	int m = 1<<n;
 	int r = reverse (p, n);
 
 	int mask = r & i;
@@ -54,27 +55,39 @@ double walsh (int i, int p, int n)
 }
 
 /*
- * argument is interpreted as p/2^n
+ * Return integral of p'th walsh function with question mark
+ *
  */
-double eval (int p, int n)
+double integral (int p, int n)
 {
+	static ContinuedFraction f;
+	f.SetEvenize();
+
 	int m = 1<<n;
 	int r = reverse (p, n);
-	int o = odd(p, n);
+
+	double acc = 0.0;
 
 	// printf("duude p=%x  r=%x o=%d\n", p,r, o);
-	for (int i=0; i<m; i++)
+	double yprev = 0.0;
+	for (int i=1; i<=m; i++)
 	{
 		int mask = r & i;
 		int mo = odd (mask, n);
 		
-		double x = ((double) i) / ((double) m);
-		double y = mo ? 1.0: -1.0;
+		// double x = ((double) i) / ((double) m);
+		// double y = mo ? 1.0: -1.0;
 
-		printf("%d	%f	%f\n", i, x, y);
+		f.SetRatio(i, m);
+		double y = f.ToFarey();
+		
+		if (mo) acc += y-yprev;
+		else acc += yprev-y;
+
+		yprev = y;
 	}
 	
-	return 0.0;
+	return acc;
 }
 
 int main(int argc, char * argv[])
@@ -86,16 +99,14 @@ int main(int argc, char * argv[])
 	}
 	int p = atoi (argv[1]);
 
-	int n = 4;
+	int n = p;
 	int m = 1<<n;
 
-	eval(p, n);
-#if 0
-	for (int p=0; p<m; p++)
+	for (p=0; p<m; p++)
 	{
 		double x = ((double) p) / ((double) m);
-		double y = eval(p, n);
-		// printf("%d	%f	%f\n", p, x, y);
+		// double y = walsh(p, p, n);
+		double y = integral(p, n);
+		printf("%d	%f	%f\n", p, x, y);
 	} 
-#endif
 }
