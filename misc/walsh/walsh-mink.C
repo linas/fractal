@@ -13,6 +13,49 @@
 
 #include "Farey.h"
 
+double question(int p, int q)
+{
+	static ContinuedFraction f;
+	f.SetEvenize();
+
+	f.SetRatio(p, q);
+	double y = f.ToFarey();
+	if (p==q) y = 1.0;
+
+	return y;
+}
+
+double triangle (double x)
+{
+	x -= floor(x);
+	if (x < 0.5) return x;
+	return 1.0-x;
+}
+
+double takagi(int p, int q)
+{
+	double w = 0.6;
+	double x = ((double) p) / ((double) q);
+	double acc = 0.0;
+	double tw = 1.0;
+	double wn = 1.0;
+	while(1)
+	{
+		acc += wn * triangle(tw*x);
+		wn *= w;
+		tw *= 2.0;
+		if (wn < 1.0e-12) break;
+	}
+	return acc;
+}
+
+double line(int p, int q)
+{
+	double x = ((double) p) / ((double) q);
+	return x;
+}
+
+
 /* Reverse the bit order of i, assuming its of length n. */
 int reverse(int p, int n)
 {
@@ -58,11 +101,8 @@ double walsh (int i, int p, int n)
  * Return integral of p'th walsh function with question mark
  *
  */
-double integral (int p, int n)
+double integral (int p, int n, double (*f)(int, int))
 {
-	static ContinuedFraction f;
-	f.SetEvenize();
-
 	int m = 1<<n;
 	int r = reverse(p, n);
 	int o = odd(p, n);
@@ -70,7 +110,7 @@ double integral (int p, int n)
 	double acc = 0.0;
 
 	// printf("duude p=%x  r=%x o=%d\n", p,r, o);
-	double yprev = 0.0;
+	double yprev = f(0,m);
 	for (int i=1; i<=m; i++)
 	{
 		int mask = r & (i-1);
@@ -79,10 +119,8 @@ double integral (int p, int n)
 		// double x = ((double) i) / ((double) m);
 		// double w = mo ? 1.0: -1.0;
 
-		f.SetRatio(i, m);
-		double y = f.ToFarey();
-		if (i==m) y = 1.0;
-		
+		double y = f(i, m);
+
 		if (mo) acc += y-yprev;
 		else acc += yprev-y;
 
@@ -107,8 +145,12 @@ int main(int argc, char * argv[])
 
 	// integral (3, 4);
 
-// #define UNIT_INTERVAL 1
+#define UNIT_INTERVAL 1
 #if UNIT_INTERVAL
+	// double (*f)(int, int) = question;
+	// double (*f)(int, int) = line;
+	double (*f)(int, int) = takagi;
+
 	double acc = 0.0;
 	for (p=1; p<m; p++)
 	{
@@ -116,13 +158,14 @@ int main(int argc, char * argv[])
 		// double y = walsh(p, p, n);
 		// r is the r'th Walsh function.
 		int r = reverse (p, n);
-		double y = integral(r, n);
+		double y = integral(r, n, f);
 		acc += y;
-		printf("%d	%f	%f	%f\n", p, x, y, acc);
+		double fx = f(p,m);
+		printf("%d	%f	%f	%f	%f\n", p, x, y, acc, fx);
 	} 
 #endif
 
-#define SERIES 1
+// #define SERIES 1
 #ifdef SERIES
 	double acc = 0.0;
 	for (p=1; p<m; p++)
