@@ -64,8 +64,8 @@ double integral (int p, int n)
 	f.SetEvenize();
 
 	int m = 1<<n;
-	int r = reverse (p, n);
-	// int r = p;
+	int r = reverse(p, n);
+	int o = odd(p, n);
 
 	double acc = 0.0;
 
@@ -74,7 +74,7 @@ double integral (int p, int n)
 	for (int i=1; i<=m; i++)
 	{
 		int mask = r & (i-1);
-		int mo = odd (mask, n);
+		int mo = o ^ odd (mask, n);  // I think this is right ... 
 		
 		// double x = ((double) i) / ((double) m);
 		// double w = mo ? 1.0: -1.0;
@@ -90,7 +90,7 @@ double integral (int p, int n)
 		yprev = y;
 	}
 	
-	return acc;
+	return -acc;
 }
 
 int main(int argc, char * argv[])
@@ -107,21 +107,30 @@ int main(int argc, char * argv[])
 
 	// integral (3, 4);
 
+// #define UNIT_INTERVAL 1
 #if UNIT_INTERVAL
-	for (p=0; p<m; p++)
+	double acc = 0.0;
+	for (p=1; p<m; p++)
 	{
 		double x = ((double) p) / ((double) m);
 		// double y = walsh(p, p, n);
 		// r is the r'th Walsh function.
 		int r = reverse (p, n);
 		double y = integral(r, n);
-		printf("%d	%f	%f	%x\n", p, x, y, r);
+		acc += y;
+		printf("%d	%f	%f	%f\n", p, x, y, acc);
 	} 
 #endif
+
+#define SERIES 1
+#ifdef SERIES
+	double acc = 0.0;
 	for (p=1; p<m; p++)
 	{
 		double x = p;
 		double y = integral(p, n);
-		printf("%d	%f	%f\n", p, x, y);
+		acc += y;
+		printf("%d	%f	%f	%f\n", p, x, y, acc);
 	} 
+#endif
 }
