@@ -5,10 +5,10 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-CC = /usr/bin/cc -O2 -I $(INC)
+CC = /usr/bin/cc -O2 -Wall -I $(INC)
 
 
-EXES= angular buddy divisor fourier hyperg liouville \
+EXES= angular buddy divisor fourier hyperg interval liouville \
 	mertens ndist series von_mangoldt
 
 all: 	$(EXES)
@@ -37,6 +37,7 @@ buddy:	buddy.o
 divisor:	divisor.o
 fourier:	fourier.o
 hyperg:	hyperg.o
+interval:	interval.o
 liouville:	liouville.o
 mertens:	mertens.o 
 ndist:	ndist.o

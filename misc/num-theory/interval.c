@@ -10,16 +10,17 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "modular.h"
+#include "moebius.h"
 
-main()
+int main()
 {
+	int p, k;
 	int pm = 8;
 	int n = 1;
-	for (int p=1; p<pm; p++)
+	for (p=1; p<pm; p++)
 	{
-		m = 1<<p;
-		for (int k=1; k<m; k+=2)
+		int m = 1<<p;
+		for (k=1; k<m; k+=2)
 		{
 			double x = ((double) k) / ((double) m);
 			double y = divisor(n);
@@ -28,4 +29,6 @@ main()
 			n++;
 		}
 	} 
+
+	return 0;
 }
