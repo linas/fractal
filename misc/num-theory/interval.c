@@ -15,7 +15,7 @@
 int main()
 {
 	int p, k;
-	int pm = 8;
+	int pm = 11;
 	int n = 1;
 	for (p=1; p<pm; p++)
 	{
@@ -24,8 +24,12 @@ int main()
 		{
 			double x = ((double) k) / ((double) m);
 			double y = divisor(n);
+			// double y = moebius_mu(n);
+			// double y = liouville_omega(n);
+			// double y = liouville_lambda(n);
+			// double y = mangoldt_lambda(n);
 
-			printf("%d	%f	%f\n", n, x, y);
+			printf("%f	%f\n", x, y);
 			n++;
 		}
 	} 
