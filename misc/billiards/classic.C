@@ -79,6 +79,10 @@ SinaiView::SinaiView (int px, int py)
    eye[1] = 0.0;
    eye[2] = 5.0;
 
+   eye[0] = -0.63;
+   eye[1] = 0.5;
+   eye[2] = 3.7;
+
    sr = new SinaiRay [nx*ny];
 
    // Project rays from eyepoint 
@@ -210,7 +214,8 @@ SinaiView::ColoredMirrors (void)
 
 main (int argc, char * argv[])
 {
-   SinaiView v (400,400);
+   // SinaiView v (400,400);
+   SinaiView v (3200,3200);
 
    v.density = 0.005;
    v.density = 0.0;
