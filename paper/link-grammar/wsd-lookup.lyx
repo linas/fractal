@@ -345,7 +345,7 @@ disjuncts
 \end_inset
 
  that explicitly express how a word is connected to its vicinity.
- It's output is essentially a series of statements such as 
+ Each disjunct is essentially a linkage statement, such as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -367,10 +367,68 @@ Ss- Os+ MVp+
 \end_inset
 
  for this example).
+ These disjuncts are taken as the 
+\begin_inset Quotes eld
+\end_inset
+
+fine-grained POS tags
+\begin_inset Quotes erd
+\end_inset
+
+ refered to above.
  Word-sense tagging was performed using an implementation of the Mihalcea
  all-words word-sense disambiguation algorithm [xx need ref].
- This algorithm is reasonably accurate and straightforward to implement.
+ This algorithm is reasonably accurate and is straightforward to implement.
+ It requires the use of a word-sense similarity measure; several such measures
+ available for WordNet.
+ The output of the Mihalcea WSD is a ranked list of word-sense assignments
+ (WordNet senses) for each word in a text.
+ The final dicitionary created is then a tabulation of the frequency with
+ which a given Link-Grammar disjunct was observed with a given WordNet sense
+ key.
+\end_layout
+
+\begin_layout Standard
+It is important to recognize that table-driven patten recognition is a biologica
+lly plausible model for human cognition.
+ Pattern recognition is a central precept of the connectionist philosophy
+ of human cognition [xxx need ref].
+ It seems unlikely that the human brain implements proceedural computational
+ algorithms; rather, neural-net style architectures are suggested.
+ A table-lookup based pattern recognizer fits neatly into this picture:
+ one might imagine a single neuron with a set of connections sensitive to
+ a particular syntactic pattern; when that pattern is detected on input,
+ the neuron fires.
+ In this sense, the model proposed here resembles a single-layer discriminatory
+ neural net or perceptron; for a given input, only a small number of outputs
+ (word senses) are suggested.
+ This analogy indicates the power as well as the weakness of the tehnique.
+ Table lookup can be made massively parallel: those neurons that know of
+ a specific pattern respond, and all others are silent.
+ This echoes the massively-parallel structure of the brain.
+ But single-layer perceptrons are also notoriously limited: they can classify
  
+\begin_inset Quotes eld
+\end_inset
+
+linerarly seperable
+\begin_inset Quotes erd
+\end_inset
+
+ patterns, but no more.
+ There is no doubt that language is far more complex than that.
+ There is no reason to beleive that table-driven WSD could ever function
+ more accurately than a single-layer perceptron: its strength is speed,
+ and a certain degree of 
+\begin_inset Quotes eld
+\end_inset
+
+biological naturalness
+\begin_inset Quotes erd
+\end_inset
+
+.
+ One does not expect exquisite accuracy.
 \end_layout
 
 \begin_layout Standard
@@ -387,7 +445,7 @@ Previous Work
 \end_layout
 
 \begin_layout Standard
--- argue that this is kind-of-parallel, human-brain-like in processing ...
+-- .
  
 \end_layout
 
