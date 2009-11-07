@@ -62,30 +62,34 @@ Linas is with Novamente
 \end_layout
 
 \begin_layout Abstract
-Word-sense disambiguation (WSD) algorithms are fairly CPU-intensive, requiring
- many seconds or even minutes to run on modern hardware, making WSD impractical
- in a web-services setting.
- This paper presents results for performing word-sense assignments based
- on a table lookup of syntactic parser output.
- Table lookup is extremely fast, and parsing can be reasonably fast, thus
- providing practical, fast WSD.
- The table was previously constructed by correlating parse structures with
- word-sense selection using traditonal WSD algorithms.
+The age-old observation that sense and syntax are correlated is used to
+ build a table-driven word-sense disambiguation algorithm.
+ Because the sense is determined by a table lookup, it is extremely fast,
+ making it suitable for practical, real-time semantic-web applications.
+ By contrast, existing word-sense disambiguation (WSD) algorithms are fairly
+ CPU-intensive, requiring many seconds or even minutes to run on modern
+ hardware.
  
 \end_layout
 
 \begin_layout Abstract
-Specifically, the CMU Link Grammer parser is used.
- The output of this parser tags individual words with the syntactic form
- of how the word was used in a sentence.
- This tag can be thought of as a very fine-grained part-of-speech tag, making
- syntactic distinctions much finer than the usual noun/verb/adj/adv distinctions.
- These fine-grained tags are shown to correlate reasonably well with word
- senses.
+The lookup table is constructed by correlating natural language parse structures
+ with word-sense assignments.
+ The key observation is that certain parse structures resemble very fine-grained
+ part-of-speech (POS) tags, and that this fine-grained tag can be used to
+ construct a more fine-grained (but otherwise traditional) word-sense dictionary.
+ Manually creating such a dictionary is overwhelming, and so the dictionary
+ is constructed using automated techniques: a large body of text is tagged
+ with senses using a standard WSD algorithm, and then tabulated with the
+ result of NLP parses of the same text.
+ The POS distinctions are much finer than the usual noun/verb/adj/adv distinctio
+ns or even the Penn Treebank POS tags.
+ These fine-grained tags allow the correlation between sense and syntax
+ to be examined at a more detailed level than usual.
 \end_layout
 
 \begin_layout Keywords
-NLP, parsing, WSD, Link Grammar
+Dicitonary, NLP, parsing, word-sense disambiguation, WSD, Link Grammar
 \end_layout
 
 \begin_layout Section
@@ -95,15 +99,21 @@ Introduction
 \begin_layout Standard
 That there is a correlation between English-language syntax, and word senses,
  is obvious, and underlies the presentation of dictionaries: word senses
- are grouped according to part-of-speech (POS): noun, verb, adjective, adverb.
+ are traditionally grouped according to part-of-speech (POS): noun, verb,
+ adjective, adverb.
  Parts of speech are crude indicators of the allowed syntactic use of a
  word: so, in general, one cannot use a noun in place of a verb.
- There are exceptions: English grammar does allow the use of nouns as noun
- modifiers, the verbing of nouns by means of gerunds, and one can, to a
- limited extent, verbize one's nouns directly.
+ Of course, there are exceptions: English grammar does allow the use of
+ nouns as noun modifiers, the verbing of nouns by use of gerunds, and one
+ can, to a limited extent, verbize one's nouns directly.
  But each of these grammatical operations alters the sense of a word as
- well as changing is POS category.
- Some dictionaries attempt a more fine-grained distinction of word senses:
+ well as changing its POS category; the word sense is no longer the same,
+ and most dictionaries supply distinct entries for each usage: senses and
+ POS tags correlate.
+\end_layout
+
+\begin_layout Standard
+Some dictionaries attempt a more fine-grained distinction of word senses:
  thus, for example, The American Heritage® Dictionary of the English Language
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -111,7 +121,7 @@ key "AmHeritage2000"
 
 \end_inset
 
-, frequently uses section headings of 
+ frequently uses section headings of 
 \emph on
 v.tr.
 
@@ -130,9 +140,10 @@ v.intr.
 \begin_layout Standard
 It is is natural to presume that the correlation between word senses and
  word usage might continue to a finer, more detailed level, if only one
- had a finer, more detailed dictionary, and could make finer, more detailed
- syntactic observations.
- This is the primary thesis of this paper.
+ could make finer, more detailed syntactic observations, and had a finer,
+ more detailed dictionary to work with.
+ This is the primary thesis of this paper: such finer distinctions are possible
+ and useful.
  To illustrate this, consider, for example, the verb 
 \begin_inset Quotes eld
 \end_inset
@@ -147,7 +158,7 @@ to suffer
 
 .
  The American Heritage Dictionary lists seven senses for this; other dictionarie
-s list 5 to 11 senses.
+s list from 5 to 11 senses.
  The Princeton WordNet dictionary[xxxref] lists 11 meanings.
  Now consider the sentence:
 \end_layout
@@ -178,8 +189,8 @@ suffer
 \begin_inset Quotes erd
 \end_inset
 
- is in the past tense, takes a singular subject, a singular direct object,
- and a modifying prepositional phrase.
+ is in the past tense, takes a singular pronomial subject, a singular direct
+ object, and a modifying prepositional phrase.
  The corresponding WordNet sense key is 
 \emph on
 suffer%2:29:01::, (undergo (as of injuries and illnesses))
@@ -242,37 +253,43 @@ suffer%2:39:01::, (undergo or be subjected to)
 
 \begin_layout Standard
 Most of this correlation can be erased by altering the example sentences,
- and creting new, grammatically correct sentences by altering the tense,
+ and creating new, grammatically correct sentences, by altering the tense,
  the count of the subject or object, the presence or absence of the object,
- or a modifying perpositional phrase.
+ or adding/removing a modifying perpositional phrase.
  But do native English speakers generate all possible sentence constructions
- with equal probability? Clearly not: idioms, a strict coupling of a few
- words, are in wide-spread circulation.
- The Mel'cuk Meaning-Text Theory[xxx] posits that the intended meaning of
- an expression strongly influences the structure of the sentence that expresses
- that meaning; conversely, that certain sentence patterns are used only
- with limited, well-defined subsets of nouns, verbs.
- Thus, the study of the correlation between sense and syntax becomes an
- exercise in corpus linguistics: the tabulation of the frequency of word
- usage as used by actual writers, as compared to the intended sense of the
- author.
- To the extent that such a correlation exists, it can be inverted to quickly
- guess at the intended meaning, given only the syntactic usage.
+ with equal probability? Clearly not: idioms, the strict coupling of a few
+ words, are a well-known liguistic phenomenon.
+ This observation can be taken much farther: the Mel'cuk Meaning-Text Theory[xxx
+] posits that the intended meaning of an expression strongly influences
+ the structure of the sentence that expresses that meaning; conversely,
+ that certain sentence patterns are used only with limited, well-defined
+ subsets of nouns, verbs.
+ Thus, the proper study of the correlation between sense and syntax, in
+ order to be valid and correct, must become an exercise in corpus linguistics:
+ the tabulation of the frequency of word usage as used by actual writers,
+ as compared to the intended sense of the author.
+ To the extent that such a correlation exists, it can be tabulated into
+ a dictionary, and this dictionary can, in turn, be used to quickly guess
+ at the intended meaning, given only the syntactic usage.
 \end_layout
 
 \begin_layout Standard
-Discovering this correlation relies heavily on large-scale automated computer
- learning techniques.
+Discovering this correlation relies on large-scale computational linguistics
+ techniques.
  Although one might be able to analyze, by hand, a few verbs or nouns, in
  the manner illustrated above, this is hardly practical to get a true sense
  of the prevelance of this correlation.
  In doing a small-scale analysis, one might discover only a few words that
  appear to be highly correlated, without being able to say much about the
  language, in general.
- Thus, the approach used here is parse a large quantity of text, to obtain
- syntactic structure, and to tag the same text with word-senses, and then
- generate statistics correlating the two tag sets.
- The 
+ Thus, the approach used here is to parse a large quantity of text, obtaining
+ syntactic structure, and to tag the same text with word-senses, and so
+ as to generate statistics correlating the two tag sets.
+ 
+\end_layout
+
+\begin_layout Standard
+The 
 \begin_inset Quotes eld
 \end_inset
 
@@ -280,10 +297,10 @@ weak link
 \begin_inset Quotes erd
 \end_inset
 
- to this approach is sense tagging.
- The quantity of text tagged by experts with word senses is not large enough
- to collect a reasonable amount of statistics; thus sense-tagging must be
- performed automatically.
+ to this automated approach is sense tagging.
+ The quantity of text hand-tagged by experts with word senses is not large
+ enough to usefule for collecting a reasonable amount of statistics; thus
+ sense-tagging must be performed automatically.
  Although automated sense tagging or 
 \begin_inset Quotes eld
 \end_inset
@@ -305,8 +322,8 @@ cancel out
 \end_inset
 
 , while correct tags will reinforce? That is, is it possible that a lookup-table
- based WSD algorithm might have better accuracy than the underlying WSD
- system from which it was constructed?
+ based WSD algorithm might have euqal or better accuracy than the underlying
+ WSD system from which it was constructed? 
 \end_layout
 
 \begin_layout Standard
@@ -357,19 +374,12 @@ Ss- Os+ MVp+
 \end_layout
 
 \begin_layout Standard
-It provides
+Breif results summary ...
+ 
 \end_layout
 
 \begin_layout Standard
-The degree to which it is true is explored
-\end_layout
-
-\begin_layout Standard
-and it is explored thanks to 
-\end_layout
-
-\begin_layout Standard
-describe link-grammar disjuncts
+Outline of paper....
 \end_layout
 
 \begin_layout Section
@@ -398,31 +408,8 @@ on.
 Methodology
 \end_layout
 
-\begin_layout Theorem
-\begin_inset OptArg
-status collapsed
-
-\begin_layout Plain Layout
-Theorem name
-\end_layout
-
-\end_inset
-
-For a named theorem or theorem-like environment you need to insert the name
- through 
-\family sans
-Insert\SpecialChar \menuseparator
-Short Title
-\family default
-, as done here.
-\end_layout
-
-\begin_layout Lemma
-If you don't want a theorem or lemma name don't add one.
-\end_layout
-
-\begin_layout Proof
-And here's the proof!
+\begin_layout Standard
+describe link-grammar disjuncts.
 \end_layout
 
 \begin_layout Section
