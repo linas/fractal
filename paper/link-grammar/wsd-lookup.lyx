@@ -248,7 +248,7 @@ Most of this correlation can be erased by altering the example sentences,
  But do native English speakers generate all possible sentence constructions
  with equal probability? Clearly not: idioms, a strict coupling of a few
  words, are in wide-spread circulation.
- The Melcuk Meaning-Text theory[xxx] posits that the intended meaning of
+ The Mel'cuk Meaning-Text Theory[xxx] posits that the intended meaning of
  an expression strongly influences the structure of the sentence that expresses
  that meaning; conversely, that certain sentence patterns are used only
  with limited, well-defined subsets of nouns, verbs.
@@ -266,8 +266,98 @@ Discovering this correlation relies heavily on large-scale automated computer
  Although one might be able to analyze, by hand, a few verbs or nouns, in
  the manner illustrated above, this is hardly practical to get a true sense
  of the prevelance of this correlation.
- One might instead discover only a few words that appear to be highly correlated
-, without being able to say much about the language, in general.
+ In doing a small-scale analysis, one might discover only a few words that
+ appear to be highly correlated, without being able to say much about the
+ language, in general.
+ Thus, the approach used here is parse a large quantity of text, to obtain
+ syntactic structure, and to tag the same text with word-senses, and then
+ generate statistics correlating the two tag sets.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+weak link
+\begin_inset Quotes erd
+\end_inset
+
+ to this approach is sense tagging.
+ The quantity of text tagged by experts with word senses is not large enough
+ to collect a reasonable amount of statistics; thus sense-tagging must be
+ performed automatically.
+ Although automated sense tagging or 
+\begin_inset Quotes eld
+\end_inset
+
+word sense disambiguation
+\begin_inset Quotes erd
+\end_inset
+
+ (WSD) algorithms have been improving, the best simple, straight-forward
+ systems remain marginal in precision and recall.
+ This raises an interesting question: is it possible that, by correlating
+ sense tags with syntactic usage, that the incorrect tags will statistically
+ 
+\begin_inset Quotes eld
+\end_inset
+
+cancel out
+\begin_inset Quotes erd
+\end_inset
+
+, while correct tags will reinforce? That is, is it possible that a lookup-table
+ based WSD algorithm might have better accuracy than the underlying WSD
+ system from which it was constructed?
+\end_layout
+
+\begin_layout Standard
+For parsing, the Link Grammar parser [xxx ref] is used.
+ The output of the Link Grammar parser are 
+\begin_inset Quotes eld
+\end_inset
+
+linkages
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+disjuncts
+\begin_inset Quotes erd
+\end_inset
+
+ that explicitly express how a word is connected to its vicinity.
+ It's output is essentially a series of statements such as 
+\begin_inset Quotes eld
+\end_inset
+
+this is a verb with a singular subject on the left, a singular direct object
+ on the right, and a modifying prepositional phrase
+\begin_inset Quotes erd
+\end_inset
+
+, expressed in a compact notation (
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Ss- Os+ MVp+
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ for this example).
+ Word-sense tagging was performed using an implementation of the Mihalcea
+ all-words word-sense disambiguation algorithm [xx need ref].
+ This algorithm is reasonably accurate and straightforward to implement.
+ 
+\end_layout
+
+\begin_layout Standard
+It provides
 \end_layout
 
 \begin_layout Standard
@@ -287,10 +377,6 @@ Previous Work
 \end_layout
 
 \begin_layout Standard
-This is only a template remember.
-\end_layout
-
-\begin_layout Standard
 -- argue that this is kind-of-parallel, human-brain-like in processing ...
  
 \end_layout
@@ -298,6 +384,14 @@ This is only a template remember.
 \begin_layout Standard
 -- Note that creating the table is kind of like automating dictionary constructi
 on.
+\end_layout
+
+\begin_layout Standard
+-- more about meaning-text theory
+\end_layout
+
+\begin_layout Standard
+-- more about markov logic for semantic blah.
 \end_layout
 
 \begin_layout Section
