@@ -656,12 +656,130 @@ Explanatory Combinatory Dictionary
 \end_layout
 
 \begin_layout Standard
-unsupervised.
- 
+There are other approaches for the unsupervised learning of syntactic/semantic
+ correlations.
+ These include Dekang Lin's work on automatic synonym discovery
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lin1998,Lin2001"
+
+\end_inset
+
+, xx work on applying Markov Logic Networks to semantics[xx ref], and, more
+ generally, the use of hierarchical mutual information to automatically
+ deduce dependency parsers[xxx need ref and correct name].
+ Each of these approaches also have one strength that the current approach
+ does not: they potentially discover much narrower classes of words that
+ can appear in juxtaposition to each other.
+ That is, the current Link Grammar word classes are, for the most part,
+ broad, syntactic categories, and not narrow, semantic classes.
+ So, for example, the Link Grammar link 
+\emph on
+Os+
+\emph default
+, which is short-hand for the statement 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+this word takes a singular direct object on the right
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+, places no particular restriction on what that object might be -- it can
+ be any noun.
+ This is in contrast to the 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+give X a look
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ example, where X is syntactically free, but semantically constrained.
 \end_layout
 
 \begin_layout Standard
-s.
+Lin describes how to automatically build a thesaurus in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lin1998"
+
+\end_inset
+
+, by examing the frequency with which words are used in similar dependency
+ relations.
+ Specifically, he creates a dependency parse, having relations of the form
+ 
+\begin_inset Formula $r(w_{1},w_{2})$
+\end_inset
+
+ with 
+\begin_inset Formula $r$
+\end_inset
+
+ a relation (such as 
+\emph on
+subj
+\emph default
+, 
+\emph on
+obj
+\emph default
+, 
+\emph on
+etc
+\emph default
+.), and 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ are words.
+ By examing co-occurance statistics for such relations in a large corpus,
+ he provides a number of similarity measures which are able to successfully
+ identify synonymous words.
+ This result is quite remarkable.
+ It can be criticized in two ways: by collecting statistics on just individual
+ relations, it does not look at the broader syntactic context of a word.
+ That is, for example, the meaning of a word may depend on its having both
+ a direct object, and a prepositional relation, both within the same sentence.
+ This is partly corrected in a later work
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lin2001"
+
+\end_inset
+
+, which groups together dependency paths to discover synonymmous phrases.
+ A similar solution is explored in the Markov logic work described below.
+ Either approach provides for the automatic discovery of significant parts
+ of an entry of the ECD dictionary of MTT theory.
+ A second criticism is that the work does not suggest how to discover that
+ a given word may have multiple meanings: it does not specify how to group
+ synonyms into synonym sets.
+ As such, there is no direct way to extend this work to perform sense labelling
+ on individual words in a sentence: there is no way to look at a word in
+ a sentence and discover the intended lexeme.
+\end_layout
+
+\begin_layout Standard
+xxx...
+\end_layout
+
+\begin_layout Standard
+unsupervised.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -682,16 +800,15 @@ on.
 \end_layout
 
 \begin_layout Standard
--- also, auto synonym discovery by ...
- 
+-- also, auto synonym discovery by Dekang Lin
 \end_layout
 
 \begin_layout Standard
--- semantic/syntactic valence
+-- semantic/syntactic valence in MTT
 \end_layout
 
 \begin_layout Standard
--- lexical fiunction
+-- lexical fiunction in MTT
 \end_layout
 
 \begin_layout Standard
