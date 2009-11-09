@@ -77,8 +77,8 @@ The lookup table is constructed by correlating natural language parse structures
  with word-sense assignments.
  The key observation is that certain parse structures resemble very fine-grained
  part-of-speech (POS) tags, and that this fine-grained tag can be used to
- construct a more fine-grained (but otherwise traditional) word-sense dictionary.
- Manually creating such a dictionary is overwhelming, and so the dictionary
+ construct a more fine-grained (but otherwise traditional) word-sense lexicon.
+ Manually creating such a dictionary is overwhelming, and so the lexicon
  is constructed using automated techniques: a large body of text is tagged
  with senses using a standard WSD algorithm, and then tabulated with the
  result of NLP parses of the same text.
@@ -89,7 +89,7 @@ ns or even the Penn Treebank POS tags.
 \end_layout
 
 \begin_layout Keywords
-Dicitonary, NLP, parsing, word-sense disambiguation, WSD, Link Grammar
+Lexicon, NLP, parsing, word-sense disambiguation, WSD, Link Grammar
 \end_layout
 
 \begin_layout Section
@@ -141,7 +141,7 @@ v.intr.
 It is is natural to presume that the correlation between word senses and
  word usage might continue to a finer, more detailed level, if only one
  could make finer, more detailed syntactic observations, and had a finer,
- more detailed dictionary to work with.
+ more detailed lexicon to work with.
  This is the primary thesis of this paper: such finer distinctions are possible
  and useful.
  To illustrate this, consider, for example, the verb 
@@ -282,7 +282,10 @@ Discovering this correlation relies on large-scale computational linguistics
  In doing a small-scale analysis, one might discover only a few words that
  appear to be highly correlated, without being able to say much about the
  language, in general.
- Thus, the approach used here is to parse a large quantity of text, obtaining
+ What is wanted is a full lexicon that makes fine-grained POS distinctions.
+ Its not practical to build such a lexicon by hand; it must be constructed
+ in some automated way.
+ The approach used here is to parse a large quantity of text, obtaining
  syntactic structure, and to tag the same text with word-senses, and so
  as to generate statistics correlating the two tag sets.
  
@@ -376,8 +379,56 @@ fine-grained POS tags
 \end_inset
 
  refered to above.
- Word-sense tagging was performed using an implementation of the Mihalcea
- all-words word-sense disambiguation algorithm [xx need ref].
+ In certain ways, Link Grammar resembles dependency parsing, and indeed,
+ it is straight-forward to convert a Link Grammar parse into a dependency
+ parse
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The RelEx semantic relationship extractor[[XXX need ref] accepts Link-Grammar
+ parses as input, and, among other outputs, can generate dependency parses
+ fully compatible with the well-known Stanford dependency parser.
+\end_layout
+
+\end_inset
+
+.
+ Unlike a dependency parse, Link Grammar does not explicitly indicate head
+ words; but this is not required for the notion of fine-grained POS tags.
+ Conversely, it is straight-forward to create a 
+\begin_inset Quotes eld
+\end_inset
+
+fine-grained POS tag
+\begin_inset Quotes erd
+\end_inset
+
+ from a dependency parse; thus, the results in this paper should be reproducible
+ by employing other parsers with dependency output.
+ In contrast, it is far less clear how to extract a 
+\begin_inset Quotes eld
+\end_inset
+
+fine-grained POS
+\begin_inset Quotes erd
+\end_inset
+
+ from a phrasal or phrase-structure parse: phrasal parses do not indicate
+ the relationships and constraints between words; rather, the production
+ rules of such parsers contain many non-terminal (non-word) symbols.
+\end_layout
+
+\begin_layout Standard
+Word-sense tagging was performed using an implementation of the Mihalcea
+ all-words word-sense disambiguation algorithm
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mihalcea2004,Mihalcea2005,Mihalcea2007"
+
+\end_inset
+
+.
  This algorithm is reasonably accurate and is straightforward to implement.
  It requires the use of a word-sense similarity measure; several such measures
  available for WordNet.
@@ -394,14 +445,15 @@ lly plausible model for human cognition.
  Pattern recognition is a central precept of the connectionist philosophy
  of human cognition [xxx need ref].
  It seems unlikely that the human brain implements proceedural computational
- algorithms; rather, neural-net style architectures are suggested.
+ algorithms; rather, connectionism states that symbol manipulation is performed
+ with neural-net style architectures.
  A table-lookup based pattern recognizer fits neatly into this picture:
  one might imagine a single neuron with a set of connections sensitive to
- a particular syntactic pattern; when that pattern is detected on input,
+ a particular syntactic pattern; when that pattern is presented on the input,
  the neuron fires.
- In this sense, the model proposed here resembles a single-layer discriminatory
- neural net or perceptron; for a given input, only a small number of outputs
- (word senses) are suggested.
+ In this sense, the table lookup of a pattern resembles a single-layer discrimin
+atory neural net or perceptron; for a given input, only a small number of
+ outputs (word senses) are suggested.
  This analogy indicates the power as well as the weakness of the tehnique.
  Table lookup can be made massively parallel: those neurons that know of
  a specific pattern respond, and all others are silent.
@@ -417,7 +469,7 @@ linerarly seperable
 
  patterns, but no more.
  There is no doubt that language is far more complex than that.
- There is no reason to beleive that table-driven WSD could ever function
+ There is no reason to believe that table-driven WSD could ever function
  more accurately than a single-layer perceptron: its strength is speed,
  and a certain degree of 
 \begin_inset Quotes eld
@@ -429,6 +481,27 @@ biological naturalness
 
 .
  One does not expect exquisite accuracy.
+ In the connectionist philosophy, greater sophistication requires that the
+ output of one layer be fed to the input of another: thus, for example,
+ table-driven WSD might provide a-priori weighted word-sense suggestions
+ for other, more refined semantic algorithms.
+\end_layout
+
+\begin_layout Standard
+The mechanism used to construct the lexicon is also fairly connectionist
+ in nature.
+ The Mihalcea all-words WSD graph algorithm resembles a Markov chain, and
+ is thus fairly explicitly connectionist in and of itself.
+ The Link-Grammar parser itself is currently implemented using a computational,
+ not connectionist algorithm.
+ However, the author beleives that it should be possible to re-implement
+ the parser using the Viterbi algorithm.
+ This could provide a significant speedup, especially for long sentences,
+ as well as making the parser more biologically natural: the Viterbi algorithm
+ is explicitly connectionist, maintaining only a finite history, with a
+ finite number of connections to recent input (i.e.
+ enouraging and maintaining mosly just short-distance connections between
+ words).
 \end_layout
 
 \begin_layout Standard
@@ -445,8 +518,85 @@ Previous Work
 \end_layout
 
 \begin_layout Standard
--- .
- 
+Perhaps the most developed of linguistic theories that attempt to describe
+ how syntax gives rise to semantics is Igor Mel’čuk's 
+\begin_inset Quotes eld
+\end_inset
+
+Meaning-Text Theory
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Steele1990,Mel'cuk1987"
+
+\end_inset
+
+ [xxx ref].
+ The underlying unit is the 
+\begin_inset Quotes eld
+\end_inset
+
+set phrase
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+phraseme
+\begin_inset Quotes erd
+\end_inset
+
+, analogous to, but more broadly defined than an idiom.
+ An example of a phraseme would be: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+to do X a favor
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ For this example, the slot 
+\emph on
+X
+\emph default
+ can be filled by a pronoun, or a proper name.
+ A more subtle example is 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+to give X a look
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+: here, 
+\emph on
+X
+\emph default
+ typically names a process, a product, an idea or proposal.
+ That is, the context in which 
+\emph on
+X
+\emph default
+ appears conveys semantic information about the nature of 
+\emph on
+X
+\emph default
+: it cannot be just any noun; it has to name or refer to something worth
+ pondering, reviewing, looking over.
 \end_layout
 
 \begin_layout Standard
@@ -455,11 +605,32 @@ on.
 \end_layout
 
 \begin_layout Standard
--- more about meaning-text theory
+-- more about meaning-text theory -- lexicion is everything
 \end_layout
 
 \begin_layout Standard
 -- more about markov logic for semantic blah.
+\end_layout
+
+\begin_layout Standard
+-- also, auto synonym discovery by ...
+ 
+\end_layout
+
+\begin_layout Standard
+-- semantic/syntactic valence
+\end_layout
+
+\begin_layout Standard
+-- lexical fiunction
+\end_layout
+
+\begin_layout Standard
+-- explantory combinatorial dictionary, entry, super-entry
+\end_layout
+
+\begin_layout Standard
+--collocation
 \end_layout
 
 \begin_layout Section
