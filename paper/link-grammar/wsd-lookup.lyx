@@ -426,7 +426,7 @@ fine-grained POS tag
 
  from a dependency parse; thus, the results in this paper should be reproducible
  by employing other parsers with dependency output.
- In contrast, it is far less clear how to extract a 
+ It is less clear how to extract a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -436,9 +436,21 @@ fine-grained POS
 
  from a phrasal or phrase-structure parse: phrasal parses do not indicate
  the relationships and constraints between words; rather, the production
- rules of such parsers contain many non-terminal (non-word) symbols.xxxxxxxxxxxxw
-rong -- can do this ...
- 
+ rules of such parsers contain many non-terminal (non-word) symbols.
+ Perhaps the sequence of production rules taken to arrive at a given word
+ could serve to act as a 
+\begin_inset Quotes eld
+\end_inset
+
+fine-grained POS tag
+\begin_inset Quotes erd
+\end_inset
+
+ for that word.
+ Understanding how different parsers change the the correlation between
+ POS and sense tags may shed light into the nature of the syntactic/semantic
+ connection.
+ This question is not explored in this paper.
 \end_layout
 
 \begin_layout Standard
@@ -558,15 +570,10 @@ key "Steele1990,Mel'cuk1987"
 \end_inset
 
 .
- The underlying unit is the 
-\begin_inset Quotes eld
-\end_inset
-
-set phrase
-\begin_inset Quotes erd
-\end_inset
-
- or 
+ The theory describes a network of relationships between semantic lexemes
+ and a set of functions and proceedures that relate this network to correspondin
+g grammatically correct utterances.
+ In particular, the theory attempts to explain why a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -574,26 +581,15 @@ phraseme
 \begin_inset Quotes erd
 \end_inset
 
-, analogous to, but more broadly defined than an idiom.
- An example of a phraseme would be: 
+ or 
 \begin_inset Quotes eld
 \end_inset
 
-
-\emph on
-to do X a favor
-\emph default
-
+set phrase
 \begin_inset Quotes erd
 \end_inset
 
-.
- For this example, the slot 
-\emph on
-X
-\emph default
- can be filled by a pronoun, or a proper name.
- A more subtle example is 
+, such as the phrase 
 \begin_inset Quotes eld
 \end_inset
 
@@ -605,26 +601,76 @@ to give X a look
 \begin_inset Quotes erd
 \end_inset
 
-: here, 
+, constricts the kind of things that can occupy the slot 
+\emph on
+X
+\emph default
+.
+ In this example, 
 \emph on
 X
 \emph default
  typically names a process, a product, an idea or proposal.
- That is, the context in which 
+ A key observation in MTT is that, semantically, 
 \emph on
 X
 \emph default
- appears conveys semantic information about the nature of 
-\emph on
-X
-\emph default
-: it cannot be just any noun; it has to name or refer to something worth
- pondering, reviewing, looking over.
+ cannot be just 
+\begin_inset Quotes eld
+\end_inset
+
+any old noun
+\begin_inset Quotes erd
+\end_inset
+
+; even though pure syntactic analysis would allow this.
+ To fill this slot in a semantically meaningful way, a noun would have to
+ name or denote something worth pondering, reviewing, looking over.
+ One of the acheivements of the theory is to precisely specify how such
+ a restriction comes about and how it can be maintained in a computational
+ way.
+ 
+\end_layout
+
+\begin_layout Standard
+The structure of an MTT 
+\begin_inset Quotes erd
+\end_inset
+
+Explanatory Combinatory Dictionary
+\begin_inset Quotes erd
+\end_inset
+
+ is quite different than an ordinary dictinary: it gives precise and detailed
+ instructions on how to convert lexical meaning into syntactic expression.
+ In this sense, it correlates syntax and semantics.
+ By contrast, the work described in this paper shows how to automatically
+ create a short-cut or abridged form of such an ECD: for any given word-sense,
+ one has a table of allowed syntactic structures in which that word sense
+ has been observed (and a frequency count of how often that word-sense was
+ used in this particular way).
+ The MTT ECD is hand-constructed by linguists after hard, patient work.
+ The approach described here obtains relationships automatically, with an
+ unsupervised learning algorithm.
+ 
+\end_layout
+
+\begin_layout Standard
+unsupervised.
+ 
+\end_layout
+
+\begin_layout Standard
+s.
 \end_layout
 
 \begin_layout Standard
 -- Note that creating the table is kind of like automating dictionary constructi
 on.
+\end_layout
+
+\begin_layout Standard
+-- MI -- what is the neighbotr vbalue
 \end_layout
 
 \begin_layout Standard
