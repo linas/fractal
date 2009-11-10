@@ -1616,7 +1616,113 @@ fine-grained part of speech
 \end_layout
 
 \begin_layout Standard
-Word-sense tagging was performed by a
+Word-sense tagging was performed by a simple implementation of the Mihalcea
+ WSD algorithm
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mihalcea2005,Mihalcea2007"
+
+\end_inset
+
+.
+ In this implementation, every word in a sentence is tagged with all possible
+ word-senses appropriate for the assigned coarse part-of-speech, taken from
+ the WordNet 3.0 dictionary (WordNet defines only four parts of speech: noun,
+ verb, adjective and adverb).
+ A clique graph is created, by taking each sense to be a vertex, and with
+ edges running between all possible sense pairs.
+ The edges are assigned numeric weights, based on the similarity of the
+ word-senses at each end of the edge.
+ Word-sense similarity was computed using the perl Sense::Similarity package
+ [xxx need ref], and using the xx similarity measure between verbs, and
+ the xx measure between nouns, as suggested in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mihalcea2007"
+
+\end_inset
+
+ to obtain the best scores.
+ Because these two similarity measures run over a different set of numeric
+ ranges, they must be rescaled to be directly comparable.
+ The weights were renormalized so as to xxx.
+ The clique can be thought of as a matrix, which can be renormalized to
+ define a Markov chain.
+ One common way to find an approximate solution to such a Markov chain is
+ the employ the PageRank algorithm.
+ The result of doing so is a vector of probabilities, assigning a score
+ to each possible word sense.
+ The algorithm works due to a simple observation: word-senses used in a
+ sentence tend to be closely related; the use of a Markov chain spreads
+ around this notion of 
+\begin_inset Quotes eld
+\end_inset
+
+relatedness
+\begin_inset Quotes erd
+\end_inset
+
+ in an equitable manner.
+ The end result is a ranked, weigthed list of WordNet 3.0 senses for each
+ word.
+ 
+\end_layout
+
+\begin_layout Standard
+The result 
+\end_layout
+
+\begin_layout Standard
+Taken together with the disjunct tag obtained from parsing the sentence,
+ one can now tabulate statistics.
+\end_layout
+
+\begin_layout Standard
+Tabulation was performed by simple counting, accumulating results into an
+ SQL database storing (word, word-sense, disjunct) triples, weighting the
+ count by parse confidence and by the assigned word-sense confidence.
+ The Link Grammar parser will produce multiple parses for a sentence when
+ it finds the grammatical structure of the sentence to be ambiguous.
+ It will rank these parses according to a confidence measure considting
+ of four integers: linkage-length, disjunct-cost, and-cost, unsed-word cost.
+ The linkage-length simply counts the total length of the links in a parse.
+ The disjunct-cost is incurred when a 
+\begin_inset Quotes eld
+\end_inset
+
+costly
+\begin_inset Quotes erd
+\end_inset
+
+ disjunct is used to obtain a parse.
+ The and-cost refers to imbalanced branches of sentences in conjunctions;
+ unused words can occur when the parser cannot comprehend a sentence.
+ These four numeric scores are combined into a single floating-point parse-ranki
+ng score for the sentence with the 
+\emph on
+ad-hoc
+\emph default
+ formula:
+\begin_inset Formula \[
+\mathrm{SCORE}=\exp-\left(0.012*\mathrm{LEN}+0.06*\mathrm{DIS}+0.2*\mathrm{AND}+0.4*\mathrm{UNUSED}\right)\]
+
+\end_inset
+
+This formula always gives a value of less than 1.0; it typically assigns
+ scores in the range of 0.9 for the confident parses of shorter sentences,
+ and can give scores as low as 0.1 or less for parses that were problematic.
+ If there was more than one parse for a sentence, all of the highest-ranked
+ parses were considered, up to a total of four.
+ For each alternative parse, this parse score was used as a multiplier to
+ weight the word-sense score.
+\end_layout
+
+\begin_layout Standard
+T
+\end_layout
+
+\begin_layout Standard
+a is multiplied by the word-sense score
 \end_layout
 
 \begin_layout Standard
@@ -1628,7 +1734,15 @@ which corpus ??
 \end_layout
 
 \begin_layout Standard
-s.
+s.Notice several ad-hoc assumptions:
+\end_layout
+
+\begin_layout Standard
+-- parse ranking formula
+\end_layout
+
+\begin_layout Standard
+-- re-ranking of word-sense scores.
 \end_layout
 
 \begin_layout Section
