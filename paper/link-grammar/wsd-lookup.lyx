@@ -435,9 +435,17 @@ fine-grained POS
 \begin_inset Quotes erd
 \end_inset
 
- from a phrasal or phrase-structure parse: phrasal parses do not indicate
- the relationships and constraints between words; rather, the production
- rules of such parsers contain many non-terminal (non-word) symbols.
+ from a phrasal (constituency, or 
+\begin_inset Quotes eld
+\end_inset
+
+phrase structure
+\begin_inset Quotes erd
+\end_inset
+
+) parse: phrasal parses do not indicate the relationships and constraints
+ between words; rather, the production rules of such parsers contain many
+ non-terminal (non-word) symbols.
  Perhaps the sequence of production rules taken to arrive at a given word
  could serve to act as a 
 \begin_inset Quotes eld
@@ -886,7 +894,247 @@ Methodology
 \end_layout
 
 \begin_layout Standard
-describe link-grammar disjuncts.
+This section provides a breif review of how Link Grammar 
+\begin_inset Quotes eld
+\end_inset
+
+disjuncts
+\begin_inset Quotes erd
+\end_inset
+
+ can be used as a sort of 
+\begin_inset Quotes eld
+\end_inset
+
+fine-grained POS tag
+\begin_inset Quotes erd
+\end_inset
+
+, and how the Mihalcea WSD algorithm provides word-sense tags.
+\end_layout
+
+\begin_layout Standard
+The theory of Link Grammar
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sleator1991,Sleator1993"
+
+\end_inset
+
+ is built upon the concept that allowed 
+\begin_inset Quotes eld
+\end_inset
+
+connections
+\begin_inset Quotes erd
+\end_inset
+
+ between words are determined by a set of 
+\begin_inset Quotes eld
+\end_inset
+
+connectors
+\begin_inset Quotes erd
+\end_inset
+
+ attached to the words.
+ Words with connectors on them can be thought of being like puzzle pieces:
+ they can only be correctly assembled when mating pieces match.
+ The link-grammar lexicon contains lists of words together with the connectors
+ that they carry.
+ Consider then the sentence 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Mary loves beer
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The Link Grammar dictionary might contain (for example) entires such as
+ these:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+   beer: O-
+\end_layout
+
+\begin_layout Plain Layout
+
+   loves: S- & O+
+\end_layout
+
+\begin_layout Plain Layout
+
+   Mary: S+
+\end_layout
+
+\end_inset
+
+Here, 
+\family typewriter
+O-
+\family default
+ and 
+\family typewriter
+S+
+\family default
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+connectors
+\begin_inset Quotes erd
+\end_inset
+
+, and 
+\family typewriter
+S
+\family default
+ and 
+\family typewriter
+O
+\family default
+ are the 
+\begin_inset Quotes eld
+\end_inset
+
+link types
+\begin_inset Quotes erd
+\end_inset
+
+ of the connectors.
+ The above is simplified for illustration: in practice, words can carry
+ a large variety of different connectors.
+ The example sentence, as parsed by the Link Grammar parser, it is rendered
+ as 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+     
+\lang english
+  +--S--+--O--+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+     
+\lang english
+  |     |     | 
+\end_layout
+
+\begin_layout Plain Layout
+
+     
+\lang english
+Mary  loves
+ 
+\lang english
+ beer  
+\end_layout
+
+\end_inset
+
+This parse is obtained by noting that 
+\family typewriter
+S
+\family default
+ connectors can connect only to other 
+\family typewriter
+S
+\family default
+ connectors, and, specifically 
+\family typewriter
++
+\family default
+ denotes a connection to the right, and 
+\family typewriter
+-
+\family default
+ a connection to the left.
+ Thus, 
+\family typewriter
+S+
+\family default
+ can only connect to 
+\family typewriter
+S-
+\family default
+ to form an 
+\family typewriter
+S
+\family default
+ link; likewise for 
+\family typewriter
+O+
+\family default
+ and 
+\family typewriter
+O-
+\family default
+.
+ An expression such as 
+\family typewriter
+S+ & O-
+\family default
+ will be called a 
+\begin_inset Quotes eld
+\end_inset
+
+disjunct
+\begin_inset Quotes erd
+\end_inset
+
+ in the remainder of the text; this is because such an expression is usually
+ disjoined with many others that a word can have.
+ The expression 
+\family typewriter
+S+ & O-
+\family default
+ implicitly encodes a verb-like connection pattern for the word 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+loves
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ -- it demands a subject on the left, and an object on the right.
+\end_layout
+
+\begin_layout Standard
+The actual Link Grammar dictionary is only slightly more complicated than
+ what the above suggests.
+ In practice, there are nearly 100 different link types.
+ Many link-types also have subtypes, which are optionally matched using
+ a form of wild-card matching.
+ Some connectors, such as those to modifiers, are optional.
+ Most words typically have dozens of disjuncts, which are used in different
+ cases.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Section
@@ -1017,7 +1265,7 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
-cconclusions
+conclusions
 \end_layout
 
 \begin_layout Standard
@@ -1042,7 +1290,7 @@ status collapsed
 
 \end_inset
 
-Your Name
+Linas Vepstas
 \begin_inset ERT
 status collapsed
 
