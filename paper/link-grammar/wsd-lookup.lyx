@@ -53,7 +53,7 @@ Linas Vepstas
 status open
 
 \begin_layout Plain Layout
-Linas is with Novamente
+Linas Vepstas is with Novamente LLC
 \end_layout
 
 \end_inset
@@ -66,9 +66,9 @@ The age-old observation that sense and syntax are correlated is used to
  build a table-driven word-sense disambiguation algorithm.
  Because the sense is determined by a table lookup, it is extremely fast,
  making it suitable for practical, real-time semantic-web applications.
- By contrast, existing word-sense disambiguation (WSD) algorithms are fairly
- CPU-intensive, requiring many seconds or even minutes to run on modern
- hardware.
+ By contrast, existing word-sense disambiguation (WSD) or semantic role
+ labelling (SRL) algorithms are fairly CPU-intensive, requiring many seconds
+ or even minutes to run on modern hardware.
  
 \end_layout
 
@@ -89,7 +89,8 @@ ns or even the Penn Treebank POS tags.
 \end_layout
 
 \begin_layout Keywords
-Lexicon, NLP, parsing, word-sense disambiguation, WSD, Link Grammar
+Lexicon, NLP, parsing, word-sense disambiguation, WSD, SRL, Semantic role
+ labelling, Link Grammar
 \end_layout
 
 \begin_layout Section
@@ -548,6 +549,18 @@ Breif results summary ...
 Outline of paper....
 \end_layout
 
+\begin_layout Standard
+use 
+\begin_inset Quotes eld
+\end_inset
+
+semantic roel lbelling
+\begin_inset Quotes erd
+\end_inset
+
+ in a few more paras.
+\end_layout
+
 \begin_layout Section
 Previous Work
 \end_layout
@@ -665,9 +678,22 @@ key "Lin1998,Lin2001"
 
 \end_inset
 
-, xx work on applying Markov Logic Networks to semantics[xx ref], and, more
- generally, the use of hierarchical mutual information to automatically
- deduce dependency parsers[xxx need ref and correct name].
+, the work of Domingos and others on applying Markov Logic Networks (MLN)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Domingos2006"
+
+\end_inset
+
+ to semantics
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Poon2009,Meza-Ruiz2009"
+
+\end_inset
+
+, and, more generally, the use of hierarchical mutual information to automatical
+ly deduce dependency parsers[xxx need ref and correct name charniak ?? ].
  Each of these approaches also have one strength that the current approach
  does not: they potentially discover much narrower classes of words that
  can appear in juxtaposition to each other.
@@ -774,6 +800,64 @@ key "Lin2001"
 \end_layout
 
 \begin_layout Standard
+A global approach to automatic synonymous phrase discovery is offered by
+ applying the theory of Markov logic networks to the extraction of semantic
+ content from a dependency parse
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Poon2009"
+
+\end_inset
+
+.
+ The approach used extracts, tabulates and clusters sentence patterns according
+ to common substructures, thus automatically discovering synonymous expressions
+ by performing a global sentence analysis.
+ In certain ways, it can be thought of as a generalization of Lin's DIRT
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lin2001"
+
+\end_inset
+
+.
+ The system is remarkable in that it is completely unsupervised (does not
+ require a training corpus), and requires very few 
+\emph on
+a priori 
+\emph default
+built in rules.
+ Although it significantly outperforms other question answering systems,
+ this result can also be taken as a critique: it does not explicitly provide
+ markup or tagged output; but rather performs question answering by pattern
+ matching.
+\end_layout
+
+\begin_layout Standard
+A contrasting application of Markov logic nets is that of Meza-Ruiz, 
+\emph on
+et al
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Meza-Ruiz2009"
+
+\end_inset
+
+.
+ This system uses MLN to simultaneously provide a variety of tags, and,
+ in particular, to identify the head-word of a sentence, disambiguate the
+ semantic frame that it participates in, and provide a semantic role tag
+ (essentially, a word-sense) for the head-word.
+ Unfortunately, the system uses a large number of hand-crafted relations,
+ frames and rules to specify the logic network.
+ However, once trained, the weighted network can be quickly evaluated to
+ obtain tags for any given sentence, typically in fractions of a second
+ for contemporary computers.
+\end_layout
+
+\begin_layout Standard
 xxx...
 \end_layout
 
@@ -800,10 +884,6 @@ on.
 \end_layout
 
 \begin_layout Standard
--- also, auto synonym discovery by Dekang Lin
-\end_layout
-
-\begin_layout Standard
 -- semantic/syntactic valence in MTT
 \end_layout
 
@@ -817,6 +897,10 @@ on.
 
 \begin_layout Standard
 --collocation
+\end_layout
+
+\begin_layout Standard
+-- semantic frame
 \end_layout
 
 \begin_layout Section
@@ -959,69 +1043,10 @@ cconclusions
 \end_layout
 
 \begin_layout Standard
-bibliograph
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "/home/linas/src/fractal/paper/lang"
 options "plain"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-blah blah
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Change this paragraphs style to 'Standard' to enable
-\end_layout
-
-\begin_layout Plain Layout
-BibTeX bibliography generation.
-\end_layout
-
-\begin_layout Plain Layout
-Remember though that your final submission is supposed to have
-\end_layout
-
-\begin_layout Plain Layout
-all the bibliography entries embedded in the latex file.
- This means
-\end_layout
-
-\begin_layout Plain Layout
-you eventually have to copy the .bbl file into the latex file and
-\end_layout
-
-\begin_layout Plain Layout
-remove the bibtex lines.
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-bibfiles "your_biblio_file"
-options "IEEEbib"
-
-\end_inset
-
-
-\end_layout
 
 \end_inset
 
@@ -1057,31 +1082,6 @@ status collapsed
 
 \begin_layout --Separator--
 
-\end_layout
-
-\begin_layout Biography
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\end_inset
-
-Coauthor
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-} 
-\end_layout
-
-\end_inset
-
-Same again for the co-author.
 \end_layout
 
 \end_body
