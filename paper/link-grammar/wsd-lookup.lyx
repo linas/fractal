@@ -1129,12 +1129,230 @@ The actual Link Grammar dictionary is only slightly more complicated than
  Many link-types also have subtypes, which are optionally matched using
  a form of wild-card matching.
  Some connectors, such as those to modifiers, are optional.
- Most words typically have dozens of disjuncts, which are used in different
- cases.
+ Thus, a realistic example from the current version of the parser:
 \end_layout
 
 \begin_layout Standard
+\begin_inset listings
+inline false
+status open
 
+\begin_layout Plain Layout
+
+                    +------------Ou-----------+
+\end_layout
+
+\begin_layout Plain Layout
+
+      +------Ss-----+       +--------A--------+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+      |      +--Em--+       +-Xc+    +----A---+  
+\end_layout
+
+\begin_layout Plain Layout
+
+      |      |      |       |   |    |        | 
+\end_layout
+
+\begin_layout Plain Layout
+
+   Mary.b really loves.v dark.a , heavy.a beer.n-u  
+\end_layout
+
+\end_inset
+
+Here, the 
+\begin_inset Quotes eld
+\end_inset
+
+subscripts
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\family typewriter
+.f
+\family default
+, 
+\family typewriter
+.v
+\family default
+, 
+\family typewriter
+.a
+\family default
+, 
+\family typewriter
+.n-u
+\family default
+ are non-functional tags that help simplify the organization of the dictionary,
+ although they also hint at the word function: 
+\family typewriter
+.v
+\family default
+ for verbs, 
+\family typewriter
+.n-u
+\family default
+ for uncountable (mass) nouns, 
+\emph on
+etc
+\emph default
+.
+ The link type 
+\family typewriter
+Ss
+\family default
+ indicates that the subject is singular, and 
+\family typewriter
+Ou
+\family default
+ that the object is uncountable.
+ The dictionary entry 
+\family typewriter
+loves.v
+\family default
+ consists of 40 different disjuncts, some of which are:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  ({@E-} & Ss- & O+) or
+\end_layout
+
+\begin_layout Plain Layout
+
+  ({@E-} & Ss- & TO+) or
+\end_layout
+
+\begin_layout Plain Layout
+
+  ({@E-} & Ss- & Pg+)
+\end_layout
+
+\end_inset
+
+Here, 
+\family typewriter
+{@E-}
+\family default
+ indicates that 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+loves
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ can take one or more optional emphasis modifiers, while 
+\family typewriter
+TO+
+\family default
+ would link to the word 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+to
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Mary loves to dance
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+), and 
+\family typewriter
+Pg+
+\family default
+ would link to gerunds (
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Mary loves dancing
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+).
+ The disjunction 
+\family typewriter
+or
+\family default
+ indicates that only one of these disjuncts will be used in a parse.
+ 
+\end_layout
+
+\begin_layout Standard
+Upon completion of parsing, we see that the word 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+loves
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ was de facto assigned only one disjunct: namely 
+\family typewriter
+Em- Ss- Ou+
+\family default
+.
+ Here, we drop the ampersand, for brevity; it is implicit.
+ This disjunct is is what will play the role of the 
+\begin_inset Quotes eld
+\end_inset
+
+fine-grained part of speech
+\begin_inset Quotes erd
+\end_inset
+
+ in the statistical tabulations of parsed text.
+\end_layout
+
+\begin_layout Standard
+Word-sense tagging was performed by a
+\end_layout
+
+\begin_layout Standard
+which corpus ?? 
+\end_layout
+
+\begin_layout Standard
+:
+\end_layout
+
+\begin_layout Standard
+s.
 \end_layout
 
 \begin_layout Section
