@@ -894,23 +894,10 @@ Methodology
 \end_layout
 
 \begin_layout Standard
-This section provides a breif review of how Link Grammar 
-\begin_inset Quotes eld
-\end_inset
-
-disjuncts
-\begin_inset Quotes erd
-\end_inset
-
- can be used as a sort of 
-\begin_inset Quotes eld
-\end_inset
-
-fine-grained POS tag
-\begin_inset Quotes erd
-\end_inset
-
-, and how the Mihalcea WSD algorithm provides word-sense tags.
+This section provides a breif review of the ingredients for creating the
+ table of POS-sense tags: the Link Grammar parser, the Mihalcea WSD algorithm,
+ and the choice of corpus.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -959,28 +946,25 @@ Mary loves beer
  these:
 \end_layout
 
+\begin_layout Quotation
+
+\family typewriter
+beer: O-
+\end_layout
+
+\begin_layout Quotation
+
+\family typewriter
+loves: S- & O+
+\end_layout
+
+\begin_layout Quotation
+
+\family typewriter
+Mary: S+
+\end_layout
+
 \begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-   beer: O-
-\end_layout
-
-\begin_layout Plain Layout
-
-   loves: S- & O+
-\end_layout
-
-\begin_layout Plain Layout
-
-   Mary: S+
-\end_layout
-
-\end_inset
-
 Here, 
 \family typewriter
 O-
@@ -1020,37 +1004,53 @@ link types
  as 
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset listings
-inline false
-status open
+\begin_layout Quotation
 
-\begin_layout Plain Layout
-
-     
-\lang english
-  +--S--+--O--+ 
+\family typewriter
++--S--+--O--+ 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Quotation
 
-     
-\lang english
-  |     |     | 
-\end_layout
-
-\begin_layout Plain Layout
-
-     
-\lang english
-Mary  loves
- 
-\lang english
- beer  
-\end_layout
-
+\family typewriter
+| 
+\begin_inset space ~
 \end_inset
 
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+ |
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+ | 
+\end_layout
+
+\begin_layout Quotation
+
+\family typewriter
+Mary  loves  beer  
+\end_layout
+
+\begin_layout Plain Layout
 This parse is obtained by noting that 
 \family typewriter
 S
@@ -1130,38 +1130,317 @@ The actual Link Grammar dictionary is only slightly more complicated than
  a form of wild-card matching.
  Some connectors, such as those to modifiers, are optional.
  Thus, a realistic example from the current version of the parser:
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-\begin_inset listings
-inline false
-status open
 
-\begin_layout Plain Layout
+\family typewriter
+\size small
+\begin_inset space ~
+\end_inset
 
-                    +------------Ou-----------+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
++------------Ou------------+
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 
-      +------Ss-----+       +--------A--------+ 
+\family typewriter
+\size small
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
++-----Ss----+ 
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
++--------A---------+ 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 
-      |      +--Em--+       +-Xc+    +----A---+  
+\family typewriter
+\size small
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+|
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+ +--Em--+ 
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
++-Xc-+ 
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
++----A---+ 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 
-      |      |      |       |   |    |        | 
+\family typewriter
+\size small
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+|
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+|
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+ | 
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+| 
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+|
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+| 
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+| 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 
-   Mary.b really loves.v dark.a , heavy.a beer.n-u  
-\end_layout
+\family typewriter
+\size small
+Mary really loves.v dark.a , heavy.a beer.n 
+\family default
+\size default
 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 Here, the 
@@ -1218,28 +1497,25 @@ loves.v
  consists of 40 different disjuncts, some of which are:
 \end_layout
 
+\begin_layout Quotation
+
+\family typewriter
+({@E-} & Ss- & O+) or
+\end_layout
+
+\begin_layout Quotation
+
+\family typewriter
+({@E-} & Ss- & TO+) or
+\end_layout
+
+\begin_layout Quotation
+
+\family typewriter
+({@E-} & Ss- & Pg+)
+\end_layout
+
 \begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-  ({@E-} & Ss- & O+) or
-\end_layout
-
-\begin_layout Plain Layout
-
-  ({@E-} & Ss- & TO+) or
-\end_layout
-
-\begin_layout Plain Layout
-
-  ({@E-} & Ss- & Pg+)
-\end_layout
-
-\end_inset
-
 Here, 
 \family typewriter
 {@E-}
