@@ -1465,7 +1465,7 @@ subscripts
 \family default
 , 
 \family typewriter
-.n-u
+.n
 \family default
  are non-functional tags that help simplify the organization of the dictionary,
  although they also hint at the word function: 
@@ -1474,9 +1474,9 @@ subscripts
 \family default
  for verbs, 
 \family typewriter
-.n-u
+.n
 \family default
- for uncountable (mass) nouns, 
+ for nouns, 
 \emph on
 etc
 \emph default
@@ -1663,17 +1663,9 @@ relatedness
 \end_inset
 
  in an equitable manner.
- The end result is a ranked, weigthed list of WordNet 3.0 senses for each
+ The end result is a ranked, weighted list of WordNet 3.0 senses for each
  word.
- 
-\end_layout
-
-\begin_layout Standard
-The result 
-\end_layout
-
-\begin_layout Standard
-Taken together with the disjunct tag obtained from parsing the sentence,
+ Taken together with the disjunct tag obtained from parsing the sentence,
  one can now tabulate statistics.
 \end_layout
 
@@ -1703,8 +1695,9 @@ ng score for the sentence with the
 ad-hoc
 \emph default
  formula:
-\begin_inset Formula \[
-\mathrm{SCORE}=\exp-\left(0.012*\mathrm{LEN}+0.06*\mathrm{DIS}+0.2*\mathrm{AND}+0.4*\mathrm{UNUSED}\right)\]
+\begin_inset Formula \begin{eqnarray*}
+\mathrm{SCORE}= & \exp & -(0.012*\mathrm{LEN}+0.06*\mathrm{DIS}+\\
+ &  & \quad\quad0.2*\mathrm{AND}+0.4*\mathrm{UNUSED})\end{eqnarray*}
 
 \end_inset
 
@@ -1715,26 +1708,12 @@ This formula always gives a value of less than 1.0; it typically assigns
  parses were considered, up to a total of four.
  For each alternative parse, this parse score was used as a multiplier to
  weight the word-sense score.
+ These weighted scores were accumulated into the (word, word-sense, disjunct)
+ triples table.
 \end_layout
 
 \begin_layout Standard
-T
-\end_layout
-
-\begin_layout Standard
-a is multiplied by the word-sense score
-\end_layout
-
-\begin_layout Standard
-which corpus ?? 
-\end_layout
-
-\begin_layout Standard
-:
-\end_layout
-
-\begin_layout Standard
-s.Notice several ad-hoc assumptions:
+Notice several ad-hoc assumptions -- these adhocs should be explored:
 \end_layout
 
 \begin_layout Standard
@@ -1750,8 +1729,124 @@ Results
 \end_layout
 
 \begin_layout Standard
-what about results by POS category?? e.g.
- does this work better for verbs, or for nouns? wahat about adj/adv?
+XX need intro here.
+\end_layout
+
+\begin_layout Standard
+The corpus that was analyzed for this work consists of about 41 thousand
+ (41K) articles starting with the letters A-E from a May 2008 dump of the
+ English-language Wikipedia.
+ On average, there were 22 sentences per article, 22 words per sentence,
+ and 2.8 distinct parses per sentence.
+ Including multiplicities for the multiple parses, a total of 58 million
+ words were observed.
+ A total of 230K distinct words were observed, of which 117K were observed
+ at least four times.
+ This number is large for several reasons: the English language Wikipedia
+ includes many foreign words, as well as a large number of names of entities
+ (people, places, 
+\emph on
+etc
+\emph default
+.).
+ In addition, the parser identifies numbers (times, dates, measurements)
+ as unique words, thus further inflating the raw word count.
+ By comparison, the Link Grammar parse dictionaries contain 76K words, counting
+ inflected forms (plurals, tenses, 
+\emph on
+etc
+\emph default
+.).
+ After lemmatization, which is required in order for a word to be found
+ in WordNet, only 15K distinct word lemmas were observed.
+ By comparison, WordNet contains 155K entries, of which 117K are nouns,
+ many of these being entity names or noun phrases.
+\end_layout
+
+\begin_layout Standard
+These words were tagged with 46.5K unique, distinct disjuncts.
+ These are combinations of 
+\end_layout
+
+\begin_layout Standard
+.
+ There were 465 unique link types observed, not counting idiom links.
+ These 465 links are subtypes of the 106 primary link types; as explained
+ above, subtypes are typically used to enforce number or tense agreement,
+ or other types of agreement restrictions.
+ There were 912 idiom links observed.
+ In other words, the Link Grammar dictionaries contain approximately 912
+ idiomatic phrases.
+ Idiom links are unique, automatically-generated link types to used to connect
+ the words in an idiomatic phrase; they have no particular significance,
+ other than to maintain a consistent approach to the implementation of the
+ parser.
+ A disjunct is then some combination of these 465+912=1373 different link
+ types, together with a +/- direction indicator on each, to form a connector.
+ Disjuncts may contain repeated connectors; thus, for example, if a noun
+ had appeared with two adjective modifiers to its left, it will include
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
+\family typewriter
+A- A-
+\family default
+
+\begin_inset Quotes erd
+\end_inset
+
+ in its disjunct to signify these two connections.
+ So for example, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\family typewriter
+A- A- Ss+
+\family default
+
+\begin_inset Quotes erd
+\end_inset
+
+ indicates a noun with two adjectival modifiers, used as the subject of
+ a sentence.
+ Ignoring disjuncts containing idiom connectors, a total of xxK unique disjuncts
+ were observed -- a tad less than before, but indicating that idiomatic
+ phrases do not make much of an impact on the total number of possible word
+ connections.
+\end_layout
+
+\begin_layout Standard
+----xxxx----1373
+\end_layout
+
+\begin_layout Standard
+The probability of interest is p(s|d,w).
+ If this is close to 1, this indicates that a a certain word sense is being
+ used almost uniquly/exclusively in a certain context.
+ By contrast, if this is close to zero, this indicates that the given sense
+ is almost never used with the disjunct.
+\end_layout
+
+\begin_layout Standard
+Also interesting is the entropy of a disjunct-word pair, summed over senses:
+ H(d,w) = - 
+\backslash
+sum_s p(s|d,w) log_2 p(s|d,w)
+\end_layout
+
+\begin_layout Standard
+The basic idea is that low-entropy word-disjunct pairs imply a strong clustering
+ of disjuncts-to-senses.
+ 
+\end_layout
+
+\begin_layout Standard
+--what about results by POS category?? e.g.
+ does this work better for verbs, or for nouns? wahat about adj/adv? (i.e.
+ accuracy?)
 \end_layout
 
 \begin_layout Standard
@@ -1870,6 +1965,15 @@ table
 
 \begin_layout Section
 Conclusions
+\end_layout
+
+\begin_layout Standard
+One of the primary applications of the WSD effort is to provide the Link
+ Grammar parser with a set of dictionaries theat provide parse-ranking,
+ and provide parse-time syntactical word-sense disambiguation.
+ See the file renorm-stats/README for instructions on how to prepare these
+ files.
+ 
 \end_layout
 
 \begin_layout Standard
