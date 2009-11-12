@@ -895,8 +895,7 @@ Methodology
 
 \begin_layout Standard
 This section provides a breif review of the ingredients for creating the
- table of POS-sense tags: the Link Grammar parser, the Mihalcea WSD algorithm,
- and the choice of corpus.
+ table of POS-sense tags: the Link Grammar parser, the Mihalcea WSD algorithm.
  
 \end_layout
 
@@ -1725,11 +1724,7 @@ Notice several ad-hoc assumptions -- these adhocs should be explored:
 \end_layout
 
 \begin_layout Section
-Results
-\end_layout
-
-\begin_layout Standard
-XX need intro here.
+Corpus
 \end_layout
 
 \begin_layout Standard
@@ -1840,29 +1835,92 @@ i.e
  observed more than five times.
 \end_layout
 
-\begin_layout Standard
-----xxxx----
+\begin_layout Section
+Results
 \end_layout
 
 \begin_layout Standard
-The probability of interest is p(s|d,w).
+XX Need intro?
+\end_layout
+
+\begin_layout Standard
+A basic premise of this paper is that correlations between syntactic use
+ and word-sense exist.
+ This section quickly presents a few examples that were discovered that
+ sustain this view.
+\end_layout
+
+\begin_layout Standard
+Given a table of (word, disjunct, sense) triples, with frequency counts,
+ there are several quantities of interest.
+ Define 
+\begin_inset Formula $P(w,d,s)$
+\end_inset
+
+ to be the probability of observing the (word, disjunct, sense) triple 
+\begin_inset Formula $(w,d,s)$
+\end_inset
+
+.
+ The conditional probability 
+\begin_inset Formula \[
+P(s|w,d)=\frac{P(w,d,s)}{P(w,d,*)}\]
+
+\end_inset
+
+gives the probility of seeing the sense 
+\begin_inset Formula $s$
+\end_inset
+
+ given a fixed 
+\begin_inset Formula $w,d$
+\end_inset
+
+.
  If this is close to 1, this indicates that a a certain word sense is being
- used almost uniquly/exclusively in a certain context.
+ used almost uniquly/exclusively in a certain syntactic context.
  By contrast, if this is close to zero, this indicates that the given sense
  is almost never used with the disjunct.
 \end_layout
 
 \begin_layout Standard
-Also interesting is the entropy of a disjunct-word pair, summed over senses:
- H(d,w) = - 
-\backslash
-sum_s p(s|d,w) log_2 p(s|d,w)
+An alternative way of observing relationships between sense and syntax is
+ by means of the entropy 
+\begin_inset Formula \[
+H(w,d)=-\sum_{s}\, P(s|w,d)\;\log_{2}P(s|w,d)\]
+
+\end_inset
+
+For the case where there is only one sense 
+\begin_inset Formula $s$
+\end_inset
+
+ observed associated with 
+\begin_inset Formula $w,d$
+\end_inset
+
+, one has 
+\begin_inset Formula $P(s|w,d)=1$
+\end_inset
+
+ and so 
+\begin_inset Formula $H(w,d)=0$
+\end_inset
+
+.
+ In general, if there are only a small number of senses that are used with
+ given disjunct-word pair, or if one sense dominates over all others, then
+ the value of 
+\begin_inset Formula $H(w,d)$
+\end_inset
+
+ will be small.
+ Low-entropy disjunct-word pairs indicate a strong association of sense
+ and syntax.
 \end_layout
 
 \begin_layout Standard
-The basic idea is that low-entropy word-disjunct pairs imply a strong clustering
- of disjuncts-to-senses.
- 
+-- what is the total entropy? what would max ent be?
 \end_layout
 
 \begin_layout Standard
