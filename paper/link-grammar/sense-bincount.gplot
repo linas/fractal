@@ -1,0 +1,19 @@
+
+# set term png small color
+set term png small
+set out 'sense-bincount.png'
+
+# set data style linespoints
+set data style lines
+set key left
+
+#################################################
+# Used to generate the graph in the text
+#
+#set term postscript
+#set out 'sense-bincount.ps'
+set title "Bincount of Assigned Senses"
+set xlabel "Number of Senses"
+set ylabel "Number of (word,disjunct) Pairs"
+plot "sense-bincount.dat" using 1:2 title ""
+
