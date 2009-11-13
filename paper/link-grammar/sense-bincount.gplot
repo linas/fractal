@@ -10,10 +10,11 @@ set key left
 #################################################
 # Used to generate the graph in the text
 #
-#set term postscript
-#set out 'sense-bincount.ps'
+set term postscript
+set out 'sense-bincount.ps'
 set title "Bincount of Assigned Senses"
 set xlabel "Number of Senses"
 set ylabel "Number of (word,disjunct) Pairs"
-plot "sense-bincount.dat" using 1:2 title ""
+set logscale y
+plot "sense-bincount.dat" using 1:2 title ""  with lines linewidth 3
 
