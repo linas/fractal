@@ -98,6 +98,95 @@ Introduction
 \end_layout
 
 \begin_layout Standard
+ATTENTION: READ THIS NOTE FIRST:
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This paper is hard to finish due to extensive flaws in the tagged dataset.
+ There are two major problems:
+\end_layout
+
+\begin_layout Plain Layout
+* No record was kept of how many files were processed with sense tags, and
+ how many processed for other things.
+\end_layout
+
+\begin_layout Plain Layout
+* The page-rank algo that was implemented did not include the suggested
+ 
+\begin_inset Quotes eld
+\end_inset
+
+most-frequent-sense
+\begin_inset Quotes erd
+\end_inset
+
+ weighting that Mihalcea suggests.
+ This significantly lowers the tagging accuracy of the input.
+\end_layout
+
+\begin_layout Plain Layout
+* Most significantly, the data includes artifacts from 
+\begin_inset Quotes eld
+\end_inset
+
+islands
+\begin_inset Quotes erd
+\end_inset
+
+ -- network graphs that were disconnected and thus didn't get the page-rank
+ treatment.
+ These islands lead to multiple senses being tagged with equal weights,
+ which shows up as ugly, un-natural peaks in the entropy vs.
+ word-disjunct pair distribution.
+ Yikes! This is the most serious problem, see below.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Minor-ish problems include:
+\end_layout
+
+\begin_layout Plain Layout
+* (word,dj,sense) triples were collected even for sentences with unused
+ words in the parse.
+ This probably potentially adds noise to the data.
+\end_layout
+
+\begin_layout Plain Layout
+* subscript tags have changed in the newest versions of link-grammar.
+ This messes up database lookup.
+\end_layout
+
+\begin_layout Plain Layout
+* link-grammar lists the - direction disjuncts in backward order, as compared
+ to thier corresponding dict entries.
+ Disjuncts need to be consistent between database contents, and link-grammar.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+A plan for how to fix this stuff, and proceed, is given in the lexat package
+ README, in src/lexat/senseval/README
+\end_layout
+
+\begin_layout Plain Layout
+Be sure to review other yellows sticky NOTES in this text.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 That there is a correlation between English-language syntax, and word senses,
  is obvious, and underlies the presentation of dictionaries: word senses
  are traditionally grouped according to part-of-speech (POS): noun, verb,
@@ -1728,6 +1817,24 @@ Corpus
 \end_layout
 
 \begin_layout Standard
+IMPORTANT: READ THIS NOTE: 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The overall article/word count below is wrong.
+ Of the 41K articles mentioned, not all were sense-tagged.
+ I am no longer sure what fraction really was sense-tagged.
+ Other numbers reported below seem odd or inconsistent across the different
+ database sets.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
 The corpus that was analyzed for this work consists of about 41 thousand
  (41K) articles starting with the letters A-E from a May 2008 dump of the
  English-language Wikipedia.
@@ -2006,7 +2113,75 @@ name "fig:Distribution-of-word-sense"
 \end_layout
 
 \begin_layout Standard
-The 
+The distribution of entropy vs.
+ 
+\begin_inset Formula $(w,d)$
+\end_inset
+
+ is shown in the figure below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Distribution of Entropy
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Distribution-of-Entropy"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename entropy-bincount.ps
+	width 100col%
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+Note the prominent peaks in the graph above.
+ This is due to a bug in the tagging algo: where there were islands in the
+ page rank algo (i.e.
+ regions disconnected from the main graph) these islands weren't properly
+ tagged, and instead, senses were given equal probability assignments: i.e.
+ 1/2, 1/2, or 1/3,1/3,1/3 etc.
+ which gives rise to large, prominent peaks in the entropy graph.
+ The sharp drop to one side, and decay to the other, is easily explained:
+ in many of these cases, there are small tie-breaker votes from other sources.
+ These tie-brakers skew the totals to be e.g.
+ 51%-49%, which has a slightly lower entropy than 50-50.
+ Argh !!!!!
+\end_layout
+
+\begin_layout Plain Layout
+The above suggests that the entire dataset should be completely redone.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
