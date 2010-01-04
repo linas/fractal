@@ -86,20 +86,62 @@ naive Markov chain might allow nonsense word combinations, a higher
 order structure discriminator would note that certain
 frequently-generated patterns are rarely or never observed in an
 actual corpus, and prohibit their generation (alternatively, balk at 
-creting a parse when presented with such ungrammatical input).
+creating a parse when presented with such ungrammatical input).
 
-What sort of stcutere might one expect to find mentalistic theoryeis
-provie
+Another important point is that the observation of structures in
+corpora can be used to validate "mentalistic" theories of grammar.
+The whole point of traditional, hand-built parsers was to demonstrate
+that one could model certain high-frequency word occurances with a
+relatively small set of rules -- that these rules can differentiate
+between grammatical and ungrammatical text. Thus, for example, high 
+mutual information word pairs help validate the "mentalistic" notion
+of a "dependency parser".  But this is a two way street: theories 
+based on practical experience can serve as a guide for the kinds of
+structures and patterns that one might be able to automaitcally mine,
+using unsupervised techniques, from a text corpus. Thus, for example, 
+the "Meaning-Text Theory" developed by Igor Mel'cuk and others[12, 13]
+provides a description of "set phrases", deep semantic structures, and 
+of the interesting notion of "lexical functions". Perhaps one might be
+able to discover these by automated means, and conversely, use these 
+automatically discovered structures to perform more accurate parsing
+and even analysis of semantic content.
 
-unsupervised
+Such attempts at automated, unsupervised learning of deeper structure is
+already being done, albeit without any theoretical baggage in tow.
+Prominent examples include Dekang Lin's work on the automatic discovery
+of synonymous phrases ("Discovery of Inference Rules from Text" [14]), 
+and Poon & Domingos extension of these ideas to the automated discovery
+of synonymous relations of higher arity ("Unsupervised Semantic Parsing"[15]).
+The earlier work by Lin applies a fairly straight-forward statistical
+analysis to discover co-occuring phrases and thus deduce their synonymy.
+However, it is important to note that Lin's analysis is
+"straight-forward" only because a certain amount of heavy lifting was
+already performed by parsing the input corpus.  That is, rather than
+applying statistical techniques on raw N-grams, the text is first
+analized with a dependency parser; it is the output of the parser that
+is subject to statistical analysis.  This provides an example of the
+kind of "layered" approach that seems to be necessary to tease out the
+deeper structures in text -- it is not possible to define a single,
+simple statistical measure that will magically reveal hidden structure
+in text. Indeed, the complexity of techniques can quickly escalate:
+although the work of Poon & Domingos can be seen as a kind of
+generalization of that of Lin, it employs a considerably more dense and
+intellectually challenging mathematical framework to do so.
+Nonetheless, it takes as its core the idea of "trust the text" --
+there are no ad-hoc English-language-specific tweaks in the code, and,
+indeed, almost no linguistic theory whatsoever, beyond the core
+requirement that dependency parsing be done first.
 
-set phrases MTT
+
+
+
+
+also the google lady
 
 conclude:
 connectionism
 
 
-So what does it mean to automatically discover new 
 
 [1] http://mailman.uib.no/public/corpora/2008-August/007102.html
 [2] http://mailman.uib.no/public/corpora/2008-August/007112.html
@@ -119,3 +161,43 @@ So what does it mean to automatically discover new
 [11] R. McDonald, F. Pereira, etal, "Minimum-Spanning Tree Parser"
      2005
      http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html
+[12] @article{Mel'cuk1987,
+   author = {Igor A. Mel'cuk and Alain Polguere},
+   title = {A Formal Lexicon in Meaning-Text Theory},
+   journal = {Computational Linguistics},
+   year = 1987,
+   volume = {13},
+   pages = {261-275},
+}
+[13] @proceedings{Steele1990,
+   title = {Meaning-Text Theory: Linguistics, Lexicography, and Implications},
+   year = 1990,
+   editor = {James Steele},
+   publisher = {University of Ottowa Press},
+}
+[14] @inproceedings{Lin2001,
+   author = {Lin, Dekang and Pantel, Patrick},
+   title = {DIRT: Discovery of Inference Rules from Text},
+   booktitle = {Proceedings of the Seventh ACM SIGKDD International
+Conference on Knowledge Discovery and Data Mining (KDD'01)},
+   pages = {323--328},
+   year = 2001,
+   publisher = {ACM Press},
+   doi = {10.1145/502512.502559},
+}
+[15] @inproceedings{Poon2009,
+   author = {Poon, Hoifung and Domingos, Pedro},
+   title = {Unsupervised Semantic Parsing},
+   booktitle = {Proceedings of the 2009 Conference on Empirical Methods
+in Natural Language Processing},
+   pages = {1--10},
+   year = 2009,
+   address = {Singapore},
+   month = {August},
+   publisher = {Association for Computational Linguistics},
+   url = {http://www.aclweb.org/anthology/D/D09/D09-1001},
+}
+
+
+
+
