@@ -132,11 +132,44 @@ there are no ad-hoc English-language-specific tweaks in the code, and,
 indeed, almost no linguistic theory whatsoever, beyond the core
 requirement that dependency parsing be done first.
 
+Although the above tries to paint a continuous chain of analysis,
+starting with a corpus, passing through mutual information to a
+dependency parser, from which further relationships are teased out,
+there are certanly other paths.  Phrase-structure-driven parsers can
+also be learned by statistical techniques, although the *unsupervised*
+discovery of such grammars is more mathematically challenging (i.e.
+requiring a deeper understanding of topics in computer science). That
+"large scale knowledge extraction" is possible from such grammars is
+demonstrated by Micheal and Valiant[16].
 
+A major blot on the above arguments is that the nature of the driving
+force behind the results is the urge to discover some practical, usable,
+functional technique for automatically discovering and manipulating
+"knowledge". This is a laudable goal, for doing so will presumably shed
+light on the nature of "meaning" and "concepts". Yet, in the mad rush
+towards automated knowledge extraction and manipulation, finer and more 
+subtle linguistic phenomena are left on the wayside. The overall attack
+is still brute-force: the knowledge to be extracted is often no deeper
+than an analysis of the sentence "Aristotle is a man", and often
+requires little more linguistic analysis than that needed to parse 
+that sentence. The genres frequently analyzed are financial or biomedical 
+texts; fine literature and peotry are roundly ignored.  I only hope that 
+perhaps some of these techniques can be refocused on more subtle phenomena.
 
+The trend towards ever-more complex analysis seems inexorable. But
+this does not mean that every simple, fast, easy way of analyzing text 
+has been discovered. Recent work from Google and NEC labs titled
+"Polynomial Semantic Indexing"[17] demonstrates how a fairly simple, 
+shallow mathematical technique, which assumes no syntactic structure in
+the text whatsoever, can none-the-less discover considerable amounts of
+semantic content. While the technique is hardly any deeper than that of
+computing co-occurance probabilities or mutual nformation, it is notable
+in that it requires a miniscule amount of CPU time, as compared to the
+act of parsing text.
 
+Conclusion
+----------
 
-also the google lady
 
 conclude:
 connectionism
@@ -197,7 +230,11 @@ in Natural Language Processing},
    publisher = {Association for Computational Linguistics},
    url = {http://www.aclweb.org/anthology/D/D09/D09-1001},
 }
-
-
-
+[16] Loizos Michael and Leslie G. Valiant, "A First Experimental 
+     Demonstration of Massive Knowledge Infusion" Proc. 11th
+     International Conference on Principles of Knowledge Representation 
+     and Reasoning, Sept. 16-20, 2008, Sydney, Australia, 378-389.
+[17] Bing Bai, Jason Weston, et al, "Polynomial Semantic Indexing"
+     ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS 22
+     Proceedings of the 2009 Conference
 
