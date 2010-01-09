@@ -1,0 +1,32 @@
+
+set term png small
+set out 'hurwitz.png'
+
+# set term svg
+# set out 'polylog.svg'
+
+# set xzeroaxis linetype -1 linewidth 0.5
+# set yzeroaxis linetype -1 linewidth 0.5
+unset zeroaxis
+set xtics border
+# set ytics axis
+set ytics border
+
+set bmargin 5
+set lmargin 7
+
+# set data style linespoints
+set data style lines
+set key right
+
+# set xrange [150:]
+
+set ylabel "5" 0,0
+set xlabel "q" 1,0
+
+set title "Peta"
+
+plot "hurwitz.dat" using 1:2 title "im", \
+     "hurwitz.dat" using 1:3 title "re", \
+     "hurwitz.dat" using 1:(-0.75 + 1.75/(1+$1)**2.5) title "fit"
+

@@ -159,7 +159,7 @@ main (int argc, char * argv[])
 	}
 #endif
 
-#if 1
+#if PERIODIC_ZETA
 	cplex s;
 	s.re = 1.5;
 	s.im = en;
@@ -176,4 +176,20 @@ main (int argc, char * argv[])
 		fflush (stdout);
 	}
 #endif
+
+#if 1
+	cplex s;
+	s.re = 2.0;
+	s.im = en;
+	double q=0.5;
+	for (q = 1.0; q < 2.0; q += 0.003)
+	{
+		cplex hz= hurwitz_zeta (s, q);
+		
+		double zeta = gsl_sf_hzeta (s.re, q);
+		
+		printf ("%g	%g	%g\n", q, hz.re, zeta);
+	}
+#endif
+
 }
