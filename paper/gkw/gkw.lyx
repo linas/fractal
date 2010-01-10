@@ -54,26 +54,19 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised Oct 2008)
+2 January 2004 (revised Oct 2008, Jan 2010) 
 \end_layout
 
 \begin_layout Abstract
-This chapter presents an incomplete review of the Gauss-Kuzmin-Wirsing (GKW)
- operator.
+This paper presents an breif review of the Gauss-Kuzmin-Wirsing (GKW) operator.
  The GKW operator is the transfer operator of the Gauss map, and thus has
- connections to the theory of continued fractions.
-\end_layout
-
-\begin_layout Abstract
-The operator has a complicated structure, and has not been fully solved
- yet.
+ connections to the theory of continued fractions -- specifically, it is
+ the shift operator for continued fractions.
+ The operator appears to have a reasonably smooth, well-behaved structure,
+ however, no analytic solutions are known, and do not seem easy to obtain.
  Eigenvalues and eigenfunctions can be obtained numerically, but little
  else is known in the mathematical literature.
- 
-\end_layout
-
-\begin_layout Abstract
-The review given here is incomplete; it is a diary of research results.
+ The review given here is incomplete; it is a diary of research results.
 \end_layout
 
 \begin_layout Abstract
@@ -117,7 +110,8 @@ multi-fractal measure
 \end_layout
 
 \begin_layout Abstract
-The general presentation attempts to assume very little math background.
+The presentation given here assumes no math background beyond basic analytic
+ function theory.
  This paper is part of a set of chapters that explore the relationship between
  the real numbers, the modular group, and fractals.
 \end_layout
@@ -158,14 +152,60 @@ The Gauss-Kuzmin-Wirsing Operator
 \end_layout
 
 \begin_layout Standard
-The map that truncates continued fractions is 
+The map that that acts as the shift operator for continued fractions is
+ 
 \begin_inset Formula \begin{equation}
 h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
 \end_inset
 
-and is often called the Gauss Map.
- The Ruelle-Frobenius-Perron operator associated with the Gauss map is known
+That is, if one writes out the continued-fraction expansion for 
+\begin_inset Formula $x\in[0,1]$
+\end_inset
+
+: 
+\begin_inset Formula \[
+x=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\cdots}}}\equiv\left[a_{1},a_{2},a_{3},\cdots\right]\]
+
+\end_inset
+
+then one has that 
+\begin_inset Formula \[
+h(x)=\left[a_{2},a_{3},\cdots\right]\]
+
+\end_inset
+
+whence the name 
+\begin_inset Quotes eld
+\end_inset
+
+shift operator
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This map is often called the Gauss Map.
+ Note that shift operators, as linear operators, are studied as a subtopic
+ of Banach theory, and often appear in applied mathematics texts devoted
+ to the engineering topics of control theory, stability theory and filter
+ design
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Part2004"
+
+\end_inset
+
+.
+ However, in these texts, shift operators are typically applied to sequences
+ of functions defined on Hardy spaces.
+ It appears that the shift as applied to continued fractions is very nearly
+ unstudied -- and no wonder -- it appears nearly intractable when approached
+ with standard analytic tools.
+ 
+\end_layout
+
+\begin_layout Standard
+The Ruelle-Frobenius-Perron operator associated with the Gauss map is known
  as the Gauss-Kuzmin-Wirsing (GKW)
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -183,7 +223,7 @@ key "Kuzmin1928,Wirsing1974"
 \end_inset
 
 , and as such, is a linear map between spaces of functions on the unit interval
- (Banach spaces).
+ (topological vector spaces).
  That is, given the vector space of functions from the closed unit interval
  to the real numbers 
 \begin_inset Formula \[
@@ -229,8 +269,8 @@ solved
 \begin_inset Quotes erd
 \end_inset
 
-, in the sense that there is no known closed-form solution expressing its
- all of its eigenfunctions and eigenvectors.
+, in the sense that there is no known closed-form analytic solution expressing
+ its all of its eigenfunctions and eigenvectors.
  There is one classically known eigenvector, 
 \begin_inset Formula $f(x)=1/(1+x)$
 \end_inset
@@ -268,11 +308,11 @@ key "Vep-mink2008"
 \end_layout
 
 \begin_layout Subsection
-Relation to the Riemann Zeta
+Relation to the Riemann Zeta Function
 \end_layout
 
 \begin_layout Standard
-The Gauss map is connected to the Riemann Zeta by a Mellin Transform:
+The Gauss map is connected to the Riemann zeta function by a Mellin Transform:
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{1}{s-1}-s\int_{0}^{1}h(x)\, x^{s-1}dx\label{eq:}\end{equation}
 
@@ -285,7 +325,7 @@ The Riemann zeta can be written under a change of variable as
 \end_inset
 
 and thus it seems that a better understanding of GKW may shed light on the
- Riemann Hypothesis.
+ Riemann Hypothesis and/or the Berry conjecture.
  Most immediately, simple manipulations lead to a representation for the
  Riemann zeta in terms of binomial coefficeints.
  This relation is explored in detail in 
@@ -365,24 +405,45 @@ reference "eq:sum-form"
 \end_layout
 
 \begin_layout Theorem
-There are no polynomial solutions to the equation 
+There is no (non-trivial) polynomial 
+\begin_inset Formula $f(\tau)$
+\end_inset
+
+ such that the equation 
 \begin_inset Formula \[
 f\left(\frac{1}{\tau+n}\right)=\lambda_{n}\left(\tau+n\right)^{2}f\left(\tau\right)\]
 
 \end_inset
 
+ holds for all integer values of 
+\begin_inset Formula $n$
+\end_inset
 
+ and abitrary values of 
+\begin_inset Formula $\lambda_{n}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Proof
 Assume that there does exist such a solution.
- Write 
+ Then it could be written as 
 \begin_inset Formula \[
 f\left(\tau\right)=\sum_{k=0}^{\infty}a_{k}\tau^{k}\]
 
 \end_inset
 
-Inserting this into the hypothetical form leads to the equation 
+for some unknown values of 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ (which are independent of 
+\begin_inset Formula $n$
+\end_inset
+
+).
+ Inserting this into the hypothetical form leads to the equation 
 \begin_inset Formula \begin{align*}
 \lambda_{n}\sum_{k=0}^{\infty}\tau^{k}\left[a_{k-2}+2na_{k-1}+n^{2}a_{k}\right] & =\\
 \sum_{k=0}^{\infty}\tau^{k}\frac{\left(-1\right)^{k}}{n^{k}}\sum_{j=0}^{\infty}a_{j}{j+k-1 \choose j-1}\frac{1}{n^{j}}\end{align*}
@@ -668,7 +729,7 @@ For
 \begin_layout Standard
 Acting on a general power, the map gives the Hurwitz Zeta: 
 \begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{h}x^{s}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{s+2}}=\zeta(s+2,x+1)\label{eq:}\end{equation}
+\left[\mathcal{L}_{h}x^{s}\right](x)=\sum_{n=1}^{\infty}\,\frac{1}{(n+x)^{s+2}}=\zeta_{H}(s+2,x+1)\label{eq:}\end{equation}
 
 \end_inset
 
@@ -681,7 +742,7 @@ reference "eq:zeta-gkw"
 
  to be written as
 \begin_inset Formula \[
-\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\zeta\left(s+1,x+1\right)\]
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}dx\; x\zeta_{H}\left(s+1,x+1\right)\]
 
 \end_inset
 
@@ -1121,7 +1182,7 @@ Identity
 \begin_layout Standard
 We have the identity
 \begin_inset Formula \begin{equation}
-\sum_{n=0}^{\infty}G_{mn}p^{-n}=p\left[\zeta(m+1)-1-\zeta\left(m+1,2+\frac{1}{p-1}\right)\right]\label{eq:}\end{equation}
+\sum_{n=0}^{\infty}G_{mn}p^{-n}=p\left[\zeta(m+1)-1-\zeta_{H}\left(m+1,2+\frac{1}{p-1}\right)\right]\label{eq:}\end{equation}
 
 \end_inset
 
@@ -2013,7 +2074,8 @@ programs are in fractal/misc/continued-frobenius/matrix/eigen.c
 
 \begin_layout Standard
 Eigenvectors can be guessed at in various ways.
- One can find, for instance, that the first eigenvector 
+ One can find, for instance, that the first right-hand-side eigenvector
+ 
 \begin_inset Formula $\rho_{1}$
 \end_inset
 
@@ -2029,7 +2091,7 @@ with the approximation accurate to about one or two percent over the domain
 \end_inset
 
 .
- It is associated with an eigenvalue 
+ This is the eigenvector associated with the eigenvalue 
 \begin_inset Formula $\lambda_{1}\approx0.303663$
 \end_inset
 
@@ -2058,7 +2120,31 @@ with the approximation accurate to about one or two percent over the domain
 
 \end_inset
 
+ Graphs of the first seven right-hand-side eigenvectors are shown in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:GKW-Right-Eigenfunctions"
 
+\end_inset
+
+.
+ The genreal oscillatory nature of the eigenfunctions is echoed in the numeric
+ values of the eigenvecotr coefficients themselves, shown in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Right-Eigenvector-Coefficients"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Left-Eigenvector-Coefficients"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2072,6 +2158,13 @@ status open
 
 \begin_layout Plain Layout
 GKW Right Eigenfunctions
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:GKW-Right-Eigenfunctions"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2114,6 +2207,13 @@ status open
 
 \begin_layout Plain Layout
 Right Eigenvector Coefficients
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Right-Eigenvector-Coefficients"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2164,6 +2264,13 @@ status open
 
 \begin_layout Plain Layout
 Left Eigenvector Coefficients
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Left-Eigenvector-Coefficients"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
