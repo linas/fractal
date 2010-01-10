@@ -68,7 +68,7 @@ double revec(double x)
 	sum = 0.0;
 	norm = 0.0;
 	yn = 1.0;
-	for (n=0; n<16; n++)
+	for (n=0; n<21; n++)
 	{
 		sum += eigenvector[n] * yn;
 		norm += eigenvector[n];
@@ -95,12 +95,13 @@ main (int argc, char * argv[])
 
 	// double norm = 1.0 / (n2 - s * n3);
 	// double norm = 1.0 / (n2 - s * n4);
-	double norm = 1.0 / (n25 - s);
+	double norm = 1.0 / (n2 - s);
+	// double norm = 1.0 / (n25 - s);
 	for (i=0; i< npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
-		// double y2 = gsl_sf_hzeta(2.0, 1.0+x);
-		double y25 = gsl_sf_hzeta(2.5, 1.0+x);
+		double y2 = gsl_sf_hzeta(2.0, 1.0+x);
+		// double y25 = gsl_sf_hzeta(2.5, 1.0+x);
 		// double y3 = gsl_sf_hzeta(3.0, 1.0+x);
 		// double y4 = gsl_sf_hzeta(4.0, 1.0+x);
 
@@ -117,13 +118,24 @@ main (int argc, char * argv[])
 		// double y = norm * (y2 - s/(1.0+x));
 
 		// quite good for s=1.2
+		// but a little too flat
 		// double y = norm * (y2 - s/sqrt(1.0+x));
 
+		// really very good for s=1.28
+		// just a shade too flat, though
+		// double y = norm * (y2 - s/pow(1.0+x, 0.666666666));
+
+		// Wow, really very good, for s=1.32
+		// maybe a shade too curved .. hard to say ...
+		double y = norm * (y2 - s/pow(1.0+x, 0.75));
+
 		// quite good for s=0.66
+		// but just a little too flat.
 		// double y = norm * (y25 - s);
 
       // really quite good for s=0.8
-		double y = norm * (y25 - s/sqrt(1.0+x));
+		// but just a little too curved ...
+		// double y = norm * (y25 - s/sqrt(1.0+x));
 
 		double r = revec(x);
 		printf("%d	%g	%g	%g\n", i, x, y, r);
