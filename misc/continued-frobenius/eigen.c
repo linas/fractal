@@ -4,7 +4,7 @@
  *
  * Find the eigenvalues (zeros of the characteriztic polynomial i.e.
  * zeros of the determinant) of H.  H is the taylor-expanded matrix for 
- * the continued fraction map, expanded at y=1.
+ * the continued fraction map (aka GKW operator), expanded at y=1.
  *
  * Linas Jan 2004
  */
