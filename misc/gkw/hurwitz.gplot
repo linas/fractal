@@ -26,5 +26,6 @@ set xlabel "q" 1,0
 
 set title "Peta"
 
-plot "hurwitz.dat" using 2:3 title "e" with lines linewidth 3
+plot "hurwitz.dat" using 2:3 title "e2", \
+     "hurwitz.dat" using 2:(-0.75 + 1.75/(1+$2)**2.5) title "fit"
 
