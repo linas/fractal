@@ -140,4 +140,6 @@ main (int argc, char * argv[])
 		double r = revec(x);
 		printf("%d	%g	%g	%g\n", i, x, y, r);
 	}
+
+	printf ("# norm = %g\n", norm);
 }
