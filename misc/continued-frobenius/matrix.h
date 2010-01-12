@@ -10,22 +10,25 @@
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
 
-void
-multmatrix (int dim, matrix *prod, matrix *ml, matrix *mr);
+typedef long double matrix[MS][MS];
+typedef long double vector[MS];
 
 void
-identmatrix (int dim, matrix *e, long double val);
+multmatrix (matrix *prod, matrix *ml, matrix *mr);
 
 void
-copymatrix (int dim, matrix *to, matrix *from);
+identmatrix (matrix *e, long double val);
 
 void
-addmatrix (int dim, matrix *to, matrix *afrom, matrix *bfrom);
+copymatrix (matrix *to, matrix *from);
 
 void
-lammatrix (int dim, matrix *to, long double lambda);
+addmatrix (matrix *to, matrix *afrom, matrix *bfrom);
 
 void
-scalematrix (int dim, matrix *to, long double scale);
+lammatrix (matrix *to, long double lambda);
+
+void
+scalematrix (matrix *to, long double scale);
 
 #endif /* __MATRIX_H__ */
