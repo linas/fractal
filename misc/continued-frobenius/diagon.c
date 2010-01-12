@@ -50,8 +50,8 @@ void initialize (void)
 		matrix *mrl = &rl[k];
 		matrix *mrr = &rr[k];
 		
-		identmatrix (mrl);
-		identmatrix (mrr);
+		identmatrix (mrl, 1.0);
+		identmatrix (mrr, 1.0);
 	}
 	
 	// initialize the frobenius-perron operator
@@ -164,7 +164,7 @@ diag (matrix *mg, matrix *mrl, matrix *mrr, int p, int n)
 	double rr11 = aminus * xminus;
 
 	matrix r, tmp;
-	identmatrix (&r);
+	identmatrix (&r, 1.0);
 	r[p][p] = rr00;
 	r[p][n] = rr01;
 	r[n][p] = rr10;
@@ -179,7 +179,7 @@ diag (matrix *mg, matrix *mrl, matrix *mrr, int p, int n)
 	double rl10 = (-s*aplus + c*aminus) * g01;
 	double rl11 = -s *aplus*xplus + c*aminus*xminus;
 
-	identmatrix (&r);
+	identmatrix (&r, 1.0);
 	r[p][p] = rl00;
 	r[p][n] = rl01;
 	r[n][p] = rl10;
@@ -306,7 +306,7 @@ void solve (void)
 				}
 			}
 		}
-		printf ("k=%d tee=%f nrow=%d first eigen=%f\n", k, tee, nrow[k], (double) gfp[k][0][0]);
+		printf ("k=%d tee=%f nrow=%d first eigen=%f\n", k, (double) tee, nrow[k], (double) gfp[k][0][0]);
 		for (p=0; p<nrow[k]; p++)
 		{
 			printf ("\t%d	%g\n", p, (double) gfp[k][p][p]);
@@ -375,9 +375,11 @@ void trial (void)
 
 // =================================================================
 
+int
 main ()
 {
 	initialize();
 	// solve();
 	trial ();
+	return 0;
 }

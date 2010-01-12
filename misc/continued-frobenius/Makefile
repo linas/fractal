@@ -27,7 +27,6 @@ diagon.o: zetafn.h
 eicheck.o: ache.h zetafn.h
 frobenius.o: zetafn.h
 gsl-diag.o:	zetafn.h
-matrix.o: matrix.h
 riemann.o:	zetafn.h
 striling.o:	$(INC)/binomial.h
 sum.o:	ache.h zetafn.h
@@ -43,7 +42,7 @@ bern_h: bern_h.o
 beta: beta.o ache.o 
 binom-graph: binom-graph.o
 character: character.o 
-diagon: diagon.o matrix.o
+diagon: diagon.o 
 diverge: diverge.o
 eicheck: eicheck.o ache.o
 frobenius: frobenius.o
