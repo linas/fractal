@@ -11,7 +11,7 @@
  * specifically, real double precision:
  * DGEEV
  *
- * Apply to find eigenvalues of the Gauss-Kuz'min-Wirsing operator
+ * Apply to find eigenvalues of the Gauss-Kuz'min-Wirsing (GKW) operator 
  *
  * Linas Vepstas September 2004
  */
