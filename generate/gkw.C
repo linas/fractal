@@ -12,7 +12,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ache.h"
+#include "../misc/continued-frobenius/ache.h"
+#include "brat.h"
+
 
 static double gkw_operator (double x, double y, int itermax, double param)
 {

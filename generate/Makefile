@@ -79,7 +79,7 @@ zeta.o: zeta.C brat.h
 FUNC=../tools/lib/libfunc.a
 MP=../misc/bignum/libzmp.a
 GMP=-lgmp
-GSL=-lgsl -lcblas
+GSL=-lgsl -lgslcblas
 
 ################## Dependencies and compile/link #########
 #
@@ -98,6 +98,7 @@ euler-q: brat.o euler-q.o coord-xforms.o util.o $(FUNC)
 fdist: brat.o fdist.o util.o $(FUNC)
 gamma: brat.o gamma.o util.o coord-xforms.o $(MP) $(GMP) -ldb
 gkd: brat.o gkd.o util.o 
+gkw: gkw.o ../misc/continued-frobenius/ache.o $(FUNC) $(GSL)
 hardy: brat.o hardy.o util.o $(FUNC)
 hermite: brat.o hermite.o util.o 
 hurwitz: brat.o hurwitz.o util.o $(MP) $(GMP) -ldb
