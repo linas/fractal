@@ -8,6 +8,10 @@
  * December 2003
  */
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 // return the matrix element for H_mp
 long double ache_mp(int m, int p);
 
@@ -38,3 +42,8 @@ long double hurwitz_b_sub_n (int n, int m, int k);
 long double small_b_sub_n (int n, int m, int k);
 long double eta_a_sub_n (int n);
 long double x_sub_n (int n);
+
+#ifdef  __cplusplus
+};
+#endif
+
