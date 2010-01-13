@@ -26,6 +26,10 @@
 #ifndef __MP_COMPLEX_H__
 #define __MP_COMPLEX_H__
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
 	mpf_t re;
 	mpf_t im;
@@ -274,5 +278,9 @@ static inline void cpx_set_prec (cpx_t a, unsigned int nbits)
 	mpf_set_prec (a[0].re, nbits);
 	mpf_set_prec (a[0].im, nbits);
 }
+
+#ifdef  __cplusplus
+};
+#endif
 
 #endif /* __MP_COMPLEX_H__ */

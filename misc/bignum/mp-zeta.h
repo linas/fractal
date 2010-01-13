@@ -27,6 +27,10 @@
 #include <gmp.h>
 #include "mp-complex.h"
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /* Fixed-point bernoulli number */
 void q_bernoulli (mpq_t bern, int n);
 
@@ -93,4 +97,8 @@ void b_sub_s_d (mpf_t re_a, mpf_t im_a, double re_s, double im_s,
               unsigned int prec, int nterms, double eps);
 void b_sub_s (mpf_t re_a, mpf_t im_a, mpf_t re_s, mpf_t im_s, 
               unsigned int prec, int nterms, double eps);
+
+#ifdef  __cplusplus
+};
+#endif
 
