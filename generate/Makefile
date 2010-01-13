@@ -77,8 +77,8 @@ totient.o: totient.C brat.h
 zeta.o: zeta.C brat.h
 
 FUNC=../tools/lib/libfunc.a
-MP=../misc/bignum/libzmp.a
-GMP=-lgmp
+MP=../misc/bignum/libzmp.a -ldb
+GMP=-lgmp 
 GSL=-lgsl -lgslcblas
 
 ################## Dependencies and compile/link #########
@@ -96,22 +96,22 @@ elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o coord-xforms.o util.o $(FUNC)
 euler-q: brat.o euler-q.o coord-xforms.o util.o $(FUNC)
 fdist: brat.o fdist.o util.o $(FUNC)
-gamma: brat.o gamma.o util.o coord-xforms.o $(MP) $(GMP) -ldb
+gamma: brat.o gamma.o util.o coord-xforms.o $(MP) $(GMP)
 gkd: brat.o gkd.o util.o 
 gkw: brat.o gkw.o util.o $(FUNC) $(MP) $(GMP)
 hardy: brat.o hardy.o util.o $(FUNC)
 hermite: brat.o hermite.o util.o 
-hurwitz: brat.o hurwitz.o util.o $(MP) $(GMP) -ldb
+hurwitz: brat.o hurwitz.o util.o $(MP) $(GMP) 
 ising: brat.o ising.o util.o $(FUNC)
 ising-moment: brat.o ising-moment.o util.o $(FUNC)
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(FUNC)
-mp_zeta: brat.o mp_zeta.o util.o $(MP) $(GMP) -ldb
+mp_zeta: brat.o mp_zeta.o util.o $(MP) $(GMP) 
 plouffe: brat.o plouffe.o util.o
-polylog: brat.o polylog.o util.o $(MP) $(GMP) -ldb
+polylog: brat.o polylog.o util.o $(MP) $(GMP) 
 q-exp: brat.o q-exp.o util.o
 swap: brat.o swap.o util.o
-sho: brat.o sho.o util.o coord-xforms.o $(MP) $(GMP) -ldb
+sho: brat.o sho.o util.o coord-xforms.o $(MP) $(GMP) 
 takagi: brat.o takagi.o util.o
 totient: brat.o totient.o util.o $(FUNC)
 zeta: brat.o zeta.o util.o $(GSL)

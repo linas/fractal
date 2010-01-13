@@ -45,7 +45,9 @@ ache_mp_mp(int m, int p)
 {
 	int k;
 
-	int prec = 100;
+	int prec = 400;
+	/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
+	mpf_set_default_prec (3.3*prec);
 
 	mpf_t acc, one, term, fbin;
 	mpf_init (term);
