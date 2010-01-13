@@ -41,9 +41,15 @@ ache_mp(int m, int p)
 
 static double gkw_operator (double x, double y, int itermax, double param)
 {
-	int m = 100.0 * x;
-	int p = 100.0 * y;
+	int p = 100.0 * x + 0.5;
+	int m = 100.0 * y + 0.5;
+	m = 100 - m;
 	double gkw = ache_mp(m,p);
+	gkw = fabs(gkw);
+	gkw = log(gkw);
+	gkw += 15.0;
+	gkw /= 1.0;
+// printf ("%d %d %f\n", m, p, gkw);
 	return gkw;
 }
 
