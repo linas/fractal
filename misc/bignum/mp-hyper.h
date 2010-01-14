@@ -25,6 +25,10 @@
 #include <gmp.h>
 #include "mp-complex.h"
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /**
  * cpx_confluent -- Confluent hypergeometric function
  * Implemented using a brute-force, very simple algo, with 
@@ -33,3 +37,8 @@
  */
 
 void cpx_confluent (cpx_t em, cpx_t a, cpx_t b, cpx_t z, unsigned int prec);
+
+#ifdef  __cplusplus
+};
+#endif
+

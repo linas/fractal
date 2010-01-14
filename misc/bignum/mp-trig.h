@@ -26,6 +26,10 @@
 #include <gmp.h>
 #include "mp-complex.h"
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /**
  * i_pow - raise n to the m power
  */
@@ -138,6 +142,10 @@ void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec);
 
 void fp_pow_rc (cpx_t diri, int k, const mpf_t q, const cpx_t ess, int prec);
 void cpx_pow_rc (cpx_t diri, int k, const cpx_t q, const cpx_t ess, int prec);
+
+#ifdef  __cplusplus
+};
+#endif
 
 /* =============================== END OF FILE =========================== */
 

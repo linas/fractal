@@ -24,6 +24,10 @@
 #include <gmp.h>
 #include "mp-complex.h"
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /**
  * fp_gamma -- compute Gamma(x)=factorial(x-1) for real argument
  *
@@ -45,3 +49,7 @@ void fp_gamma_cache (mpf_t gam, const mpf_t ex, int prec);
  */
 void cpx_gamma (cpx_t gam, const cpx_t ex, int prec);
 void cpx_gamma_cache (cpx_t gam, const cpx_t ex, int prec);
+
+#ifdef  __cplusplus
+};
+#endif

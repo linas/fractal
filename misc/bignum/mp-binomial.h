@@ -25,6 +25,10 @@
 #include <gmp.h>
 #include "mp-complex.h"
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /* i_poch_rising
  * rising pochhammer symbol, for integer values.
  *
@@ -136,4 +140,7 @@ void cpx_binomial (cpx_t bin, const cpx_t s, unsigned int k);
  */
 void cpx_binomial_sum_cache (cpx_t bin, const cpx_t s, unsigned int k);
 
+#ifdef  __cplusplus
+};
+#endif
 

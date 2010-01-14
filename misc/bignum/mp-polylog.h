@@ -24,6 +24,10 @@
  */
 #include "mp-complex.h"
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /**
  * cpx_polylog_nint -- compute the polylogarithm at negetive integers
  *
@@ -141,3 +145,8 @@ void cpx_hurwitz_taylor (cpx_t hzeta, const cpx_t ess, const cpx_t que, int prec
  */
 void cpx_hurwitz_euler_fp(cpx_t hzeta, cpx_t ess, mpf_t que, int prec);
 void cpx_hurwitz_euler(cpx_t hzeta, cpx_t ess, cpx_t que, int prec);
+
+#ifdef  __cplusplus
+};
+#endif
+

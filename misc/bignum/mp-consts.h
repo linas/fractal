@@ -25,6 +25,10 @@
 
 #include <gmp.h>
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /**
  * fp_half_sqrt_three - return sqrt(3)/2 = 0.86602...
  */
@@ -81,4 +85,8 @@ void fp_euler_mascheroni (mpf_t gam, unsigned int prec);
  * Current algorithm is terribly slow.
  */
 void fp_zeta_half (mpf_t zeta, unsigned int prec);
+
+#ifdef  __cplusplus
+};
+#endif
 

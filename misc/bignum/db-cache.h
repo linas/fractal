@@ -25,6 +25,10 @@
 
 #include <gmp.h>
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /**
  * fp_cache_put -- put mpf_t value into the database.
  * @prec: number of decimal places of precision to store.
@@ -39,3 +43,8 @@ void fp_cache_put (const char * dbname, const mpf_t val, int idx, int nprec);
  * requirement.
  */ 
 int fp_cache_get (const char * dbname, mpf_t val, int idx, int nprec);
+
+#ifdef  __cplusplus
+};
+#endif
+

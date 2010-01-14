@@ -25,6 +25,10 @@
 #include <gmp.h>
 #include "mp-complex.h"
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 void i_prt (char * str, mpz_t val);
 void fp_prt (char * str, mpf_t val);
 void cpx_prt (char * str, const cpx_t val);
@@ -53,3 +57,8 @@ int last_change(const cpx_t curr, unsigned int prec);
  * get_prec -- return log_10 (epsi) approximately rounded
  */
 int get_prec (cpx_t epsi, unsigned int prec);
+
+#ifdef  __cplusplus
+};
+#endif
+
