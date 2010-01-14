@@ -16,11 +16,12 @@
 #include "brat.h"
 #include "binomial.h"
 #include "harmonic.h"
-#include "../misc/bignum/mp-zeta.h"
 #include "../misc/bignum/mp-binomial.h"
+#include "../misc/bignum/mp-misc.h"
+#include "../misc/bignum/mp-zeta.h"
 
 // Return the matrix element for H_mp aka the matrix element of GKW.
-//
+// This implementation uses double-precision floats
 long double
 ache_mp_double(int m, int p)
 {
@@ -40,6 +41,8 @@ ache_mp_double(int m, int p)
 	return acc;
 }
 
+// Return the matrix element for H_mp aka the matrix element of GKW.
+// This implementation uses GMP multi-precision
 long double
 ache_mp_mp(int m, int p)
 {
@@ -86,14 +89,74 @@ ache_mp_mp(int m, int p)
 }
 
 
+// Return the continuous-valued version of the GKW operator.
+// (the matrix elts occur at integer values)
+// This implementation uses GMP multi-precision
+long double
+ache_smooth_mp(double m, double p)
+{
+	int k;
+
+	int prec = 400;
+	/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
+	mpf_set_default_prec (3.3*prec);
+
+	mpf_t acc, one, term, bin;
+	mpf_init (term);
+	mpf_init (acc);
+	mpf_init (one);
+	mpf_init (bin);
+
+	cpx_t ess, zeta;
+	cpx_init(ess);
+	cpx_init(zeta);
+
+	// long double acc = 0.0L;
+	mpf_set_ui (acc, 0);
+	mpf_set_ui (one, 1);
+
+	int ip = (int) floor(p);
+	for (k=0; k<= ip; k++)
+	{
+		// long double term = zetam1 (k+m+2);
+		// fp_zeta (term, k+m+2, prec);
+		double km2 = k + m + 2.0L;
+		cpx_set_d (ess, km2, 0.0);
+		cpx_borwein_zeta(zeta, ess, prec);
+		mpf_sub(term, zeta[0].re, one);
+printf ("duuude k+m+2=%f\n", km2);
+fp_prt("zeta -1 = ", term)
+
+		// term *= binomial (m+k+1,m);
+		double km1 = m+k+1.0L;
+		fp_binomial_d (bin, km1, k+1);
+		mpf_mul (term, term, bin);
+
+		// term *= binomial (p,k);
+		fp_binomial_d (bin, p, k);
+		mpf_mul (term, term, bin);
+
+		if (k%2 == 0) mpf_add (acc, acc, term);
+		else mpf_sub (acc, acc, term);
+	}
+
+	return mpf_get_d (acc);
+}
+
+
 static double gkw_operator (double x, double y, int itermax, double param)
 {
+#ifdef MATRIX_ELTS
 	int p = 100.0 * x + 0.5;
 	int m = 100.0 * y + 0.5;
 	m = 100 - m;
 	double gkw = ache_mp_mp(m,p);
 	// gkw = fabs(gkw);
-// printf ("%d %d %f\n", m, p, gkw);
+// printf ("%d %d %g\n", m, p, gkw);
+#endif
+
+	double gkw = ache_smooth_mp(x, -y);
+printf ("%f %f %g\n", x, -y, gkw);
 	return gkw;
 }
 
