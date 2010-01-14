@@ -19,15 +19,14 @@
 
 // Return the matrix element for the matrix element G_mp of the GKW
 // operator, expanded at the x=1 location.
-mpf_t
-gkw(int m, int p)
+void
+gkw(mpf_t acc, int m, int p, unsigned int prec)
 {
-	mpf_t acc, one, term, fbin;
+	mpf_t one, term, fbin;
 	mpz_t bin;
 	int k;
 
 	mpf_init (term);
-	mpf_init (acc);
 	mpf_init (one);
 	mpf_init (fbin);
 
@@ -56,22 +55,19 @@ gkw(int m, int p)
 		if (k%2 == 0) mpf_add (acc, acc, term);
 		else mpf_sub (acc, acc, term);
 	}
-
-	return acc;
 }
 
 
 // Return the continuous-valued version of the GKW operator.
 // (the matrix elts occur at integer values)
 // This implementation uses GMP multi-precision
-mpf_t
-ache_smooth_mp(double m, double p)
+void
+ache_smooth_mp(mpf_t acc, double m, double p, unsigned int prec)
 {
-	mpf_t acc, one, term, bin;
+	mpf_t one, term, bin;
 	int k;
 
 	mpf_init (term);
-	mpf_init (acc);
 	mpf_init (one);
 	mpf_init (bin);
 
@@ -113,8 +109,6 @@ printf("\n");
 		if (k%2 == 0) mpf_add (acc, acc, term);
 		else mpf_sub (acc, acc, term);
 	}
-
-	return acc;
 }
 
 /* --------------------------- END OF LIFE ------------------------- */
