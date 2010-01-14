@@ -6,7 +6,8 @@ CC = cc
 
 
 EXES= bernoulli bound bs bsubn cache-fill cont_frac db-merge db-prt \
-      dsubn entropy exact hurwitz hurwitz-euler minima mp_zeta_test picturez \
+      dsubn entropy exact gkw-diag hurwitz hurwitz-euler \
+		minima mp_zeta_test picturez \
       poly-perf sho stieltjes trunc zero-cross zeta-zeros
 
 MPLIB=libzmp.a
@@ -25,6 +26,7 @@ cont_frac:	cont_frac.o
 dsubn:	dsubn.o $(MPLIB)
 entropy:	entropy.o $(MPLIB)
 exact:	exact.o $(MPLIB)
+gkw-diag:	gkw-diag.o $(MPLIB)
 hurwitz:	hurwitz.o $(MPLIB)
 hurwitz-euler:	hurwitz-euler.o $(MPLIB)
 mp_zeta_test:	mp_zeta_test.o $(MPLIB)
@@ -57,6 +59,7 @@ cache-fill.o: db-cache.h mp-zeta.h mp-misc.h
 db-merge.o: db-cache.h mp-misc.h
 dsubn.o: mp-zeta.h mp-binomial.h mp-misc.h
 exact.o: mp-complex.h mp-misc.h mp-polylog.h
+gkw-diag.o: mp-gkw.h
 hurwitz.o: mp-complex.h mp-misc.h
 hurwitz-euler.o: mp-complex.h mp-misc.h mp-trig.h
 mp_zeta_test.o: mp-zeta.h mp-binomial.h mp-complex.h mp-consts.h mp-gamma.h mp-misc.h mp-polylog.h mp-trig.h
