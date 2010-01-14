@@ -24,12 +24,12 @@ set key right
 # set xrange [10:300]
 # set xrange [300:1600]
 
-set title "Graph of gkw"
+set title "Graph of G_nn matrix elts of GKW along diagonal"
 set xlabel "n"
 # set ylabel "b_n * (2n/pi)^{-1/4} * exp(sqrt(4 pi n))"
-set ylabel "G_nn"
+set ylabel "G_nn * exp(sqrt(2) * n)"
 
-osc(x)=cos(0.7*x)
+osc(x)=0.1*cos(0.5*3.141592653*x - 0.125*3.141592653)
 enlarge(x)=exp(0.70710678118*x)
 
  #this compares the graphs directly
@@ -38,8 +38,8 @@ enlarge(x)=exp(0.70710678118*x)
 # plot "gkw-diag.dat" using 1:(log($2)) title "data", \
 #     "gkw-diag.dat" using 1:(-3.14-0.70710678*$1) title "fit"
 
-plot "gkw-diag.dat" using 1:($2*enlarge($1)) title "data", \
-     "gkw-diag.dat" using 1:(osc($1)) title "fit"
+plot "gkw-diag.dat" using 1:($2*enlarge($1)) title "GKW", \
+     "gkw-diag.dat" using 1:(osc($1)) title "0.1*cos(pi*n/2 - pi/8)"
 
 #     "gkw-diag.dat" using 1:(osc($1)) title "fit"
 # plot  "gkw-diag.dat" using 1:(osc($1)) title "fit"
