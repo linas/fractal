@@ -30,29 +30,29 @@
 #include "mp-complex.h"
 #include "mp-misc.h"
 
-void i_prt (char * str, mpz_t val)
+void i_prt (const char * str, mpz_t val)
 {
-	printf (str);
+	printf ("%s", str);
 	mpz_out_str (stdout, 10, val);
 }
 
-void fp_prt (char * str, mpf_t val)
+void fp_prt (const char * str, mpf_t val)
 {
-	printf (str);
+	printf ("%s", str);
 	mpf_out_str (stdout, 10, 60, val);
 }
 
-void cpx_prt (char * str, const cpx_t val)
+void cpx_prt (const char * str, const cpx_t val)
 {
-	printf (str);
+	printf ("%s", str);
 	mpf_out_str (stdout, 10, 30, val[0].re);
 	printf (" + i ");
 	mpf_out_str (stdout, 10, 30, val[0].im);
 }
 
-void ecpx_prt (char * str, const cpx_t val)
+void ecpx_prt (const char * str, const cpx_t val)
 {
-	fprintf (stderr, str);
+	fprintf (stderr, "%s", str);
 	mpf_out_str (stderr, 10, 30, val[0].re);
 	fprintf (stderr, " + i ");
 	mpf_out_str (stderr, 10, 30, val[0].im);

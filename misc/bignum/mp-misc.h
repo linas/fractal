@@ -29,10 +29,10 @@
 extern "C" {
 #endif
 
-void i_prt (char * str, mpz_t val);
-void fp_prt (char * str, mpf_t val);
-void cpx_prt (char * str, const cpx_t val);
-void ecpx_prt (char * str, const cpx_t val);
+void i_prt (const char * str, mpz_t val);
+void fp_prt (const char * str, mpf_t val);
+void cpx_prt (const char * str, const cpx_t val);
+void ecpx_prt (const char * str, const cpx_t val);
 
 /**
  * fp_epsilon - return 10^{-prec} 
