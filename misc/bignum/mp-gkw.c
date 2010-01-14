@@ -62,7 +62,7 @@ gkw(mpf_t acc, int m, int p, unsigned int prec)
 // (the matrix elts occur at integer values)
 // This implementation uses GMP multi-precision
 void
-ache_smooth_mp(mpf_t acc, double m, double p, unsigned int prec)
+gkw_smooth(mpf_t acc, double m, double p, unsigned int prec)
 {
 	mpf_t one, term, bin;
 	int k;

@@ -21,7 +21,7 @@ void gkw(mpf_t elt, int m, int p, unsigned int prec);
 // Return the continuous-valued version of the GKW operator.
 // (the matrix elts occur at integer values)
 // This implementation uses GMP multi-precision
-void ache_smooth_mp(mpf_t elt, double m, double p, unsigned int prec);
+void gkw_smooth(mpf_t elt, double m, double p, unsigned int prec);
 
 #ifdef  __cplusplus
 };
