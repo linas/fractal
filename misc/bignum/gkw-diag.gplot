@@ -1,0 +1,46 @@
+
+# set term x11
+# set term gif size 640,480
+# set out 'read.gif'
+
+set term png small
+set out 'bsubn.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# -------------------------------------------------------
+# This set was used to generate the bsubn.png graph in 
+# the flajolet-linas paper
+
+# set xrange [0:300]
+
+# set title "Graph of the coefficeints b_n * n^{-1/4} * exp(sqrt(4 pi n))"
+# set xlabel "n"
+# set ylabel "b_n * n^{-1/4} * exp(sqrt(4 pi n))"
+# 
+# plot "bsubn.dat" using 1:2 title "" 
+
+# -------------------------------------------------------
+# Verify the actual fit
+
+# set xrange [10:300]
+# set xrange [300:1600]
+
+set title "Graph of the coefficeints b_n * (2n/pi)^{-1/4} * exp(sqrt(4 pi n))"
+set xlabel "n"
+set ylabel "b_n * (2n/pi)^{-1/4} * exp(sqrt(4 pi n))"
+
+osc(x)=cos(2*sqrt(3.141592653*x)-0.625*3.141592653)
+
+# this compares the graphs directly
+plot "bsubn.dat" using 1:($2/sqrt(sqrt(2/3.1415926))) title "data", \
+     "bsubn.dat" using 1:(osc($1)) title "fit"
+
+# plot "bsubn.dat" using 1:($2/sqrt(sqrt(2/3.1415926))/osc($1)) title "ratio"
+# plot "bsubn.dat" using 1:($2/sqrt(sqrt(2/3.1415926))-osc($1)) title "diff"
+
+
+# pause 100
+
