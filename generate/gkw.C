@@ -118,6 +118,7 @@ ache_smooth_mp(double m, double p)
 	int ip = (int) floor(p);
 	for (k=0; k<= ip; k++)
 	{
+printf ("duuude k=%d---------------------------------\n", k);
 		// long double term = zetam1 (k+m+2);
 		// fp_zeta (term, k+m+2, prec);
 		double km2 = k + m + 2.0L;
@@ -125,7 +126,10 @@ ache_smooth_mp(double m, double p)
 		cpx_borwein_zeta(zeta, ess, prec);
 		mpf_sub(term, zeta[0].re, one);
 printf ("duuude k+m+2=%f\n", km2);
-fp_prt("zeta -1 = ", term)
+cpx_prt("cpx zeta = ", zeta);
+printf("\n");
+fp_prt("zeta -1 = ", term);
+printf("\n");
 
 		// term *= binomial (m+k+1,m);
 		double km1 = m+k+1.0L;
