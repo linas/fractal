@@ -78,6 +78,7 @@ ache_smooth_mp(double m, double p)
 
 static double gkw_operator (double x, double y, int itermax, double param)
 {
+#define MATRIX_ELTS
 #ifdef MATRIX_ELTS
 	int p = 100.0 * x + 0.5;
 	int m = 100.0 * y + 0.5;
@@ -85,10 +86,23 @@ static double gkw_operator (double x, double y, int itermax, double param)
 	double gkw = ache_mp_mp(m,p);
 	// gkw = fabs(gkw);
 // printf ("%d %d %g\n", m, p, gkw);
+
+	// double bola = p*m;
+	// if ((bola > 2500) && (bola < 2700)) gkw = 1e30;
+	// bola *= m;
+	// if ((bola > 12500) && (bola < 13700)) gkw = 1e30;
+	// double bola = p*m*m + p*p*m;
+	// if ((bola > 12500) && (bola < 14300)) gkw = 1e30;
+	// double bola = sqrt(m*m -6.0 *m*p + p*p);
+	double bola = sqrt(m*p +m*m*p*p);
+	if ((bola > 2500) && (bola < 2852)) gkw = 1e30;
+
+	double gola = sqrt(m+ m*p + p);
+	if ((gola > 50) && (gola < 52)) gkw = -1e30;
 #endif
 
-	double gkw = ache_smooth_mp(x, -y);
-printf ("%f %f %g\n", x, -y, gkw);
+// 	double gkw = ache_smooth_mp(x, -y);
+// printf ("%f %f %g\n", x, -y, gkw);
 	return gkw;
 }
 
