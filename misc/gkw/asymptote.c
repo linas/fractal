@@ -17,7 +17,7 @@ int main()
 
 	h = M_LN2 - I * M_PI;
 
-	for (k=0.01; k<2.0; k+= 0.1)
+	for (k=0.02; k<5.0; k+= 0.02)
 	{
    	a = 1.0;
    	b = (k-1.0) * (1.0 - h) / h;
@@ -28,6 +28,9 @@ int main()
 
 		xp = 0.5 * (-b + d);
 		xn = 0.5 * (-b - d);
-		printf("its k=%f %f %f\n", k, creal(xp), creal(xn));
+		// printf("its k=%f %f+i%f %f+i%f\n", k, 
+		//	creal(xp), cimag(xp), 
+		//	creal(xn), cimag(xn));
+		printf("%f	%f	%f\n", k, creal(xp), cimag(xp));
 	}
 }
