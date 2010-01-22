@@ -12,9 +12,22 @@
 
 int main()
 {
-	double complex c;
-	c 
-	x = 2.2 + I * 3.3;
+	double complex a,b,c,d,h, xp, xn;
+	double k;
 
-	printf("its %f %f \n", creal(x), cimag(x));
+	h = M_LN2 - I * M_PI;
+
+	for (k=0.01; k<2.0; k+= 0.1)
+	{
+   	a = 1.0;
+   	b = (k-1.0) * (1.0 - h) / h;
+   	c = k * (2.0 - h) / h;
+
+		d = b*b - 4.0 * a * c;
+		d = csqrt(d);
+
+		xp = 0.5 * (-b + d);
+		xn = 0.5 * (-b - d);
+		printf("its k=%f %f %f\n", k, creal(xp), creal(xn));
+	}
 }
