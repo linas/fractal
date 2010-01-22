@@ -26,7 +26,13 @@ set xlabel "k" 1,0
 
 set title "Peta"
 
-plot "asymptote.dat" using 1:2 title "re", \
-     "asymptote.dat" using 1:3 title "im"
+# plot "asymptote.dat" using 1:2 title "re", \
+#     "asymptote.dat" using 1:3 title "im"
+
+# plot "asymptote.dat" using 1:($1 - $2) title "diff", \
+#     "asymptote.dat" using 1:(0.06*$1-0.05) title "re estimate"
+
+plot "asymptote.dat" using 1:($3+0.3056*$1) title "im part - 0.3*k", \
+     "asymptote.dat" using 1:(0.0*$1) title "im estimate"
 
 
