@@ -3,11 +3,12 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES= asymptote hurwitz 
+EXES= asymptote diag hurwitz 
 
 all: $(EXES)
 
 asymptote:	asymptote.o 
+diag: diag.o
 hurwitz:	hurwitz.o 
 
 .c.o:

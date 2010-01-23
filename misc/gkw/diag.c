@@ -1,7 +1,7 @@
 
 /*
- * asymptote.c
- * Find saddle point of asympttic expansion
+ * diag.c
+ * check saddle point
  *
  * Linas Vepstas January 2010
  */
@@ -12,25 +12,17 @@
 
 int main()
 {
-	double complex a,b,c,d,h, xp, xn;
-	double k;
+	double complex h, x02, x0, t, a;
 
 	h = M_LN2 - I * M_PI;
+	x02 = 1 - 2.0/h;
+	x0 = csqrt(x02);
 
-	for (k=0.02; k<5.0; k+= 0.02)
-	{
-   	a = 1.0;
-   	b = (k-1.0) * (1.0 - h) / h;
-   	c = k * (2.0 - h) / h;
+	printf("x_0 = %f +i %f\n", creal(x0), cimag(x0));
 
-		d = b*b - 4.0 * a * c;
-		d = csqrt(d);
+	t = (1.0-x0) / (1.0+x0);
+	printf("1+x/1-x = %f +i %f\n", creal(t), cimag(t));
 
-		xp = 0.5 * (-b + d);
-		xn = 0.5 * (-b - d);
-		// printf("its k=%f %f+i%f %f+i%f\n", k, 
-		//	creal(xp), cimag(xp), 
-		//	creal(xn), cimag(xn));
-		printf("%f	%f	%f\n", k, creal(xp), cimag(xp));
-	}
+	a = h * x0 + clog(t);
+	printf("a = %f +i %f\n", creal(a), cimag(a));
 }
