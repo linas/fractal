@@ -80,10 +80,12 @@ static double gkw_operator (double x, double y, int itermax, double param)
 {
 #define MATRIX_ELTS
 #ifdef MATRIX_ELTS
-	int p = 100.0 * x + 0.5;
-	int m = 100.0 * y + 0.5;
-	m = 100 - m;
+	int p = 300.0 * x + 0.5;
+	int m = 300.0 * y + 0.5;
+	m = 300 - m;
 	double gkw = ache_mp_mp(m,p);
+
+	gkw *= exp(sqrt(m*p));
 	// gkw = fabs(gkw);
 // printf ("%d %d %g\n", m, p, gkw);
 
@@ -94,11 +96,19 @@ static double gkw_operator (double x, double y, int itermax, double param)
 	// double bola = p*m*m + p*p*m;
 	// if ((bola > 12500) && (bola < 14300)) gkw = 1e30;
 	// double bola = sqrt(m*m -6.0 *m*p + p*p);
-	double bola = sqrt(m*p +m*m*p*p);
-	if ((bola > 2500) && (bola < 2852)) gkw = 1e30;
 
-	double gola = sqrt(m+ m*p + p);
-	if ((gola > 50) && (gola < 52)) gkw = -1e30;
+	// double bola = -pow(fabs(m-p), 1.5) + pow(m+p, 1.5);
+	double bola = -pow(fabs(m-p), 1.75) + pow(m+p, 1.75);
+	if ((bola > 1550) && (bola < 1622)) gkw = 1e30;
+	if ((bola > 15550) && (bola < 15692)) gkw = 1e30;
+
+	// double gola = sqrt(m+ m*p + p);
+	double gola = -pow(fabs(m-p), 1.7) + pow(m+p, 1.7);
+	if ((gola > 1850) && (gola < 1932)) gkw = 1e30;
+	if ((gola > 7850) && (gola < 7982)) gkw = 1e30;
+
+   if (p*5 == m) gkw = 1.0e30;
+   if (m*4 == p) gkw = 1.0e30;
 #endif
 
 // 	double gkw = ache_smooth_mp(x, -y);
