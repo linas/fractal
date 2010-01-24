@@ -15,19 +15,20 @@ int main ()
 	mpf_t acc;
 	double g;
 
-	int prec = 400;
+	int prec = 4000;
 
 	/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
 	mpf_set_default_prec (3.3*prec);
 
 	mpf_init (acc);
 
-	for (n=0; n<100; n++)
+	for (n=0; n<1000; n++)
 	{
 		gkw(acc, n, n, prec);
 
 		g = mpf_get_d (acc);
 		printf("%d	%g\n", n, g);
+		fprintf(stderr, "%d	%g\n", n, g);
 	}
 
 	return 0;
