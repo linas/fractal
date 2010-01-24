@@ -739,6 +739,7 @@ int test_complex_riemann_zeta (int nterms, int prec)
 	int i;
 	int pr = prec;
 
+#if 0
 	/*  Verify that its zero where it should be */
 	int nz = 13;
 	if (nterms < nz) nz = nterms;
@@ -752,6 +753,7 @@ int test_complex_riemann_zeta (int nterms, int prec)
 		nfaults = cpx_check_for_zero (nfaults, zeta, epsi, "complex riemann at non-triv zeroes", i, sre, sim);
 	}
 
+#endif
 	/* compare values to integer zeta routine */
 	for (i=3; i<2*nterms; i++ )
 	{
@@ -1894,10 +1896,12 @@ int main (int argc, char * argv[])
 #endif /* CONFLUENT_HYPERGEOMETRIC */
 
 	int nfaults = 0;
+/****
 	nfaults += test_real_sine (nterms, prec);
 	nfaults += test_cpx_sqrt (nterms, prec);
 	nfaults += test_complex_gamma (nterms, prec);
-// 	nfaults += test_hurwitz_zeta (nterms, prec);
+ 	nfaults += test_hurwitz_zeta (nterms, prec);
+****/
 	nfaults += test_complex_riemann_zeta (nterms, prec);
 /*****
 	nfaults += test_polylog (nterms, prec, 0);
@@ -1905,9 +1909,9 @@ int main (int argc, char * argv[])
 	nfaults += test_polylog_euler (nterms, prec);
 	nfaults += test_polylog_series (nterms, prec);
  	nfaults += test_periodic_zeta (nterms, prec);
-****/
 	nfaults += test_complex_pow (nterms, prec);
 	nfaults += test_real_gamma (nterms, prec);
+****/
 
 	if (0 == nfaults)
 	{

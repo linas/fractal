@@ -850,6 +850,11 @@ void cpx_borwein_zeta (cpx_t zeta, const cpx_t s, int prec)
 {
 	int n = bor_zeta_terms_est (s, prec);
 
+{ double sre, sim;
+sre = mpf_get_d(s[0].re);
+sim = mpf_get_d(s[0].im);
+printf("duuude s= %g %g term estimaotr=%d\n", sre, sim, n);
+}
 	mpf_t d_n, zero;
 	mpf_init (d_n);
 	mpf_init (zero);
@@ -884,12 +889,22 @@ void cpx_borwein_zeta (cpx_t zeta, const cpx_t s, int prec)
 		{
 			cpx_add(zeta, zeta, term);
 		}
+{ double zre, zim;
+zre = mpf_get_d(zeta[0].re);
+zim = mpf_get_d(zeta[0].im);
+printf("term at k=%d %g %g\n", k, zre, zim);
+}
 	}
 	mpf_div (zeta[0].re, zeta[0].re, d_n);
 	mpf_div (zeta[0].im, zeta[0].im, d_n);
 
 	cpx_neg (zeta, zeta);
 
+{ double zre, zim;
+zre = mpf_get_d(zeta[0].re);
+zim = mpf_get_d(zeta[0].im);
+printf("en fin %g %g\n", zre, zim);
+}
 	/* po = 1 - 2^{1-s} */
 	mpf_sub_ui (ess[0].re, ess[0].re, 1);
 
