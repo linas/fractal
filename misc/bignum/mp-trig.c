@@ -1001,11 +1001,12 @@ void cpx_sqrt (cpx_t rt, const cpx_t z, int prec)
 
 /* ======================================================================= */
 /*
- * cpx_mpf_pow-- return q^s for complex s, real q.
+ * cpx_mpf_pow -- return q^s for complex s, real q.
  *
  * Brute-force algo, this thing is pretty slow, as it requires
  * a logarithm, an exp, sin and cos to be computed, each of which
- * are kinda slow ... 
+ * are kinda slow ... Consider using fp_pow_rc instead, which will 
+ * cache values if q and s are heald const, while k is varied.
  */
 void cpx_mpf_pow (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
 {
@@ -1045,7 +1046,7 @@ void cpx_mpf_pow (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
 
 /* ======================================================================= */
 /*
- * cpx_pow-- return q^s for complex q, s.
+ * cpx_pow -- return q^s for complex q, s.
  *
  * Brute-force algo, this thing is pretty slow, as it requires
  * a logarithm, an exp, sin and cos to be computed, each of which
@@ -1189,24 +1190,21 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 	DECLARE_CPX_CACHE (powcache_one);
 	DECLARE_CPX_CACHE (powcache_two);
 	static mpf_t cache_q_one, cache_q_two;
-	static mpf_t cache_sre_one, cache_sre_two;
-	static mpf_t cache_sim_one, cache_sim_two;
+	static cpx_t cache_s_one, cache_s_two;
 	static int precision = 0;
 	static cpx_cache *next_cache;
-	static mpf_t *next_q, *next_sre, *next_sim;
+	static mpf_t *next_q;
+	static cpx_t *next_s;
 
 	if (!precision)
 	{
 		mpf_init (cache_q_one);
 		mpf_init (cache_q_two);
-		mpf_init (cache_sre_one);
-		mpf_init (cache_sre_two);
-		mpf_init (cache_sim_one);
-		mpf_init (cache_sim_two);
+		cpx_init (cache_s_one);
+		cpx_init (cache_s_two);
 		next_cache = &powcache_one;
 		next_q = &cache_q_one;
-		next_sre = &cache_sre_one;
-		next_sim = &cache_sim_one;
+		next_s = &cache_s_one;
 	}
 
 	if (precision < prec)
@@ -1220,8 +1218,7 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 
 	cpx_cache *powcache = NULL;
 	if (0 == mpf_eq(q, cache_q_one, prec*3.322) &&
-	    0 == mpf_eq(ess[0].re, cache_sre_one, prec*3.322) &&
-	    0 == mpf_eq(ess[0].im, cache_sim_one, prec*3.322))
+	    0 == cpx_eq(ess, cache_s_one, prec*3.322))
 	{
 		powcache = &powcache_one;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
@@ -1231,13 +1228,11 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 		}
 		next_cache = &powcache_two;
 		next_q = &cache_q_two;
-		next_sre = &cache_sre_two;
-		next_sim = &cache_sim_two;
+		next_s = &cache_s_two;
 	}
 	
 	if (0 == mpf_eq(q, cache_q_two, prec*3.322) &&
-	    0 == mpf_eq(ess[0].re, cache_sre_two, prec*3.322) &&
-	    0 == mpf_eq(ess[0].im, cache_sim_two, prec*3.322))
+	    0 == cpx_eq(ess, cache_s_two, prec*3.322))
 	{
 		powcache = &powcache_two;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
@@ -1247,8 +1242,7 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 		}
 		next_cache = &powcache_one;
 		next_q = &cache_q_one;
-		next_sre = &cache_sre_one;
-		next_sim = &cache_sim_one;
+		next_s = &cache_s_one;
 	}
 	
 	if (NULL == powcache)
@@ -1257,8 +1251,7 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 		cpx_one_d_cache_clear (powcache);
 		cpx_one_d_cache_check (powcache, 4);
 		mpf_set(*next_q, q);
-		mpf_set(*next_sre, ess[0].re);
-		mpf_set(*next_sim, ess[0].im);
+		cpx_set(*next_s, ess);
 	}
 
 	mpf_t kq;
