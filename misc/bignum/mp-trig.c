@@ -1214,6 +1214,8 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 		precision = prec;
 		mpf_set_prec (cache_q_one, 3.322*prec+50);
 		mpf_set_prec (cache_q_two, 3.322*prec+50);
+		cpx_set_prec (cache_s_one, 3.322*prec+50);
+		cpx_set_prec (cache_s_two, 3.322*prec+50);
 		cpx_one_d_cache_clear (&powcache_one);
 		cpx_one_d_cache_clear (&powcache_two);
 	}
@@ -1291,6 +1293,8 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 		precision = prec;
 		cpx_set_prec (cache_q_one, 3.322*prec+50);
 		cpx_set_prec (cache_q_two, 3.322*prec+50);
+		cpx_set_prec (cache_s_one, 3.322*prec+50);
+		cpx_set_prec (cache_s_two, 3.322*prec+50);
 		cpx_one_d_cache_clear (&powcache_one);
 		cpx_one_d_cache_clear (&powcache_two);
 	}
