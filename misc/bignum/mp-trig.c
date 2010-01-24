@@ -4,7 +4,7 @@
  * High-precison Elementary functions, using the 
  * Gnu Multiple-precision library.
  *
- * Copyright (C) 2005, 2006 Linas Vepstas
+ * Copyright (C) 2005, 2006, 2010 Linas Vepstas
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -1019,7 +1019,7 @@ void cpx_mpf_pow (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
 	 * We could define this to be exp (i pi s) times result, but I'm lazy */
 	if (mpf_cmp_ui (kq, 0) < 0)
 	{
-		fprintf (stderr, "cpx_pow_mpf() domain error, q<0\n");
+		fprintf (stderr, "cpx_mpf_pow() domain error, q<0\n");
 		return;
 	}
 
@@ -1050,7 +1050,9 @@ void cpx_mpf_pow (cpx_t powc, const mpf_t kq, const cpx_t ess, int prec)
  *
  * Brute-force algo, this thing is pretty slow, as it requires
  * a logarithm, an exp, sin and cos to be computed, each of which
- * are kinda slow ... 
+ * are kinda slow ... If q and s can be held const, while k is varied,
+ * then consider using cpx_pow_rc instead, which will cache values 
+ * for performance.
  */
 void cpx_pow (cpx_t powc, const cpx_t que, const cpx_t ess, int prec)
 {
@@ -1268,16 +1270,20 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 	DECLARE_CPX_CACHE (powcache_one);
 	DECLARE_CPX_CACHE (powcache_two);
 	static cpx_t cache_q_one, cache_q_two;
+	static cpx_t cache_s_one, cache_s_two;
 	static int precision = 0;
 	static cpx_cache *next_cache;
-	static cpx_t *next_q;
+	static cpx_t *next_q, *next_s;
 
 	if (!precision)
 	{
 		cpx_init (cache_q_one);
 		cpx_init (cache_q_two);
+		cpx_init (cache_s_one);
+		cpx_init (cache_s_two);
 		next_cache = &powcache_one;
 		next_q = &cache_q_one;
+		next_s = &cache_s_one;
 	}
 
 	if (precision < prec)
@@ -1290,7 +1296,8 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 	}
 
 	cpx_cache *powcache = NULL;
-	if (cpx_eq(q,cache_q_one, prec*3.322))
+	if (0 == cpx_eq(q, cache_q_one, prec*3.322) &&
+	    0 == cpx_eq(ess, cache_s_one, prec*3.322))
 	{
 		powcache = &powcache_one;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
@@ -1300,9 +1307,11 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 		}
 		next_cache = &powcache_two;
 		next_q = &cache_q_two;
+		next_s = &cache_s_two;
 	}
 	
-	if (cpx_eq(q,cache_q_two, prec*3.322))
+	if (0 == cpx_eq(q, cache_q_two, prec*3.322) &&
+	    0 == cpx_eq(ess, cache_s_two, prec*3.322))
 	{
 		powcache = &powcache_two;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
@@ -1312,6 +1321,7 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 		}
 		next_cache = &powcache_one;
 		next_q = &cache_q_one;
+		next_s = &cache_s_one;
 	}
 	
 	if (NULL == powcache)
@@ -1320,6 +1330,7 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 		cpx_one_d_cache_clear (powcache);
 		cpx_one_d_cache_check (powcache, 4);
 		cpx_set(*next_q, q);
+		cpx_set(*next_s, ess);
 	}
 
 	
