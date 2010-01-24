@@ -1176,7 +1176,7 @@ void cpx_ui_pow_cache (cpx_t powc, unsigned int k, const cpx_t ess, int prec)
 /**
  * fp_pow_rc-- return (k+q)^s for complex s, integer k, real q.
  *
- * If q is held fixed, and k varied, then the values are cached,
+ * If q and s is held fixed, and k varied, then the values are cached,
  * allowing improved algorithm speeds. Up to two distinct values
  * of q are cached.
  *
@@ -1211,7 +1211,7 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 	}
 
 	cpx_cache *powcache = NULL;
-	if (mpf_eq(q,cache_q_one, prec*3.322))
+	if (mpf_eq(q, cache_q_one, prec*3.322))
 	{
 		powcache = &powcache_one;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
@@ -1223,7 +1223,7 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 		next_q = &cache_q_two;
 	}
 	
-	if (mpf_eq(q,cache_q_two, prec*3.322))
+	if (mpf_eq(q, cache_q_two, prec*3.322))
 	{
 		powcache = &powcache_two;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
