@@ -45,8 +45,13 @@ long double
 ache_mp_mp(int m, int p)
 {
 	int prec = 400;
-	/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
-	mpf_set_default_prec (3.3*prec);
+	static int init = 0;
+	if (0 == init)
+	{
+		/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
+		mpf_set_default_prec (3.3*prec);
+		init = 1;
+	}
 
 	mpf_t matelt;
 	mpf_init (matelt);

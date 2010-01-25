@@ -15,7 +15,8 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         manvert cutoff brat draw dx image
 
 NEW_EXES = affine alpha baker circle cutoff divisor elliptic \
-        erdos euler-q fdist gamma gkd gkw hardy hermite hurwitz ising \
+        erdos euler-q fdist gamma gkd gkw gkw-integrand \
+        hardy hermite hurwitz ising \
         ising-moment mand-flow \
         mp_zeta mobius plouffe polylog q-exp sho swap takagi totient zeta \
         ray automatic radius
@@ -99,6 +100,7 @@ fdist: brat.o fdist.o util.o $(FUNC)
 gamma: brat.o gamma.o util.o coord-xforms.o $(MP) $(GMP)
 gkd: brat.o gkd.o util.o 
 gkw: brat.o gkw.o util.o $(FUNC) $(MP) $(GMP)
+gkw-integrand: brat.o gkw-integrand.o util.o $(FUNC) $(MP) $(GMP)
 hardy: brat.o hardy.o util.o $(FUNC)
 hermite: brat.o hermite.o util.o 
 hurwitz: brat.o hurwitz.o util.o $(MP) $(GMP) 

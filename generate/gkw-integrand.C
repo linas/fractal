@@ -10,6 +10,7 @@
  */
 
 
+#include <gmp.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,46 +18,41 @@
 #include "brat.h"
 #include "binomial.h"
 #include "harmonic.h"
-#include "mp-zeta.h"
+#include "zmp.h"
 
 
-// Return the continuous-valued version of the GKW operator.
-// (the matrix matelts occur at integer values)
-// This implementation uses GMP multi-precision
+// Return the integrand 
 long double
-ache_smooth_mp(double m, double p)
+grand(int m, int n, cpx_t s)
 {
-	int prec = 400;
-	/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
-	mpf_set_default_prec (3.3*prec);
-
 	mpf_t acc;
 	mpf_init (acc);
-
-	gkw_smooth(acc, m, p, prec);
 
 	return mpf_get_d (acc);
 }
 
 
-static double gkw_operator (double x, double y, int itermax, double param)
+static double gkw_integrand (double x, double y, int itermax, double param)
 {
-#define MATRIX_ELTS
-#ifdef MATRIX_ELTS
-	int p = 300.0 * x + 0.5;
-	int m = 300.0 * y + 0.5;
-	m = 300 - m;
-	double gkw = ache_mp_mp(m,p);
+	static int init = 0;
+	if (0 == init)
+	{
+		int prec = 400;
+		/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
+		mpf_set_default_prec (3.3*prec);
+		init = 1;
+	}
 
-	gkw *= exp(sqrt(m*p));
-	// gkw = fabs(gkw);
-// printf ("%d %d %g\n", m, p, gkw);
+	cpx_t s;
+	cpx_init(s);
+	cpx_set_d(s, x, y);
 
-// 	double gkw = ache_smooth_mp(x, -y);
-// printf ("%f %f %g\n", x, -y, gkw);
+	int n = 30;
+	double gkw = grand(n,n,s);
+
 	return gkw;
 }
 
-DECL_MAKE_HEIGHT(gkw_operator);
+DECL_MAKE_HEIGHT(gkw_integrand);
 
 /* --------------------------- END OF LIFE ------------------------- */
