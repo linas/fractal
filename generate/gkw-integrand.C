@@ -23,21 +23,56 @@
 
 // Return the integrand 
 long double
-grand(int m, int n, cpx_t s)
+grand(int m, int n, cpx_t s, int prec)
 {
-	mpf_t acc;
-	mpf_init (acc);
+	cpx_t m2s, tms, sn1;
 
-	return mpf_get_d (acc);
+	cpx_init (m2s);
+	cpx_init (tms);
+	cpx_init (sn1);
+
+	// sn1 = s+n+1
+	cpx_add_ui (sn1, s, n+1, 0);
+
+	// tms = 2-s
+	cpx_neg (tms, s);
+	cpx_add_ui (tms, tms, 2, 0);
+
+	// m2s = m+2-s
+	cpx_add_ui (m2s, tms, m, 0);
+
+	cpx_t gm2s, gtms, gsn1, gs;
+	cpx_init (gs);
+	cpx_init (gm2s);
+	cpx_init (gtms);
+	cpx_init (gsn1);
+
+	cpx_gamma(gs, s, prec);
+	cpx_gamma(gm2s, m2s, prec);
+	cpx_gamma(gtms, tms, prec);
+	cpx_gamma(gsn1, sn1, prec);
+
+	cpx_t zeta;
+	cpx_init (zeta);
+	cpx_borwein_zeta(zeta, m2s, prec);
+
+	cpx_t prod;
+	cpx_init prod;
+
+	mpf_t modulus;
+	mpf_init (modulus);
+	cpx_abs(modulus, prod);
+
+	return mpf_get_d (modulus);
 }
 
 
 static double gkw_integrand (double x, double y, int itermax, double param)
 {
 	static int init = 0;
+	int prec = 400;
 	if (0 == init)
 	{
-		int prec = 400;
 		/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
 		mpf_set_default_prec (3.3*prec);
 		init = 1;
@@ -48,7 +83,7 @@ static double gkw_integrand (double x, double y, int itermax, double param)
 	cpx_set_d(s, x, y);
 
 	int n = 30;
-	double gkw = grand(n,n,s);
+	double gkw = grand(n,n,s, prec);
 
 	return gkw;
 }
