@@ -1221,8 +1221,8 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 	}
 
 	cpx_cache *powcache = NULL;
-	if (0 == mpf_eq(q, cache_q_one, prec*3.322) &&
-	    0 == cpx_eq(ess, cache_s_one, prec*3.322))
+	if (mpf_eq(q, cache_q_one, prec*3.322) &&
+	    cpx_eq(ess, cache_s_one, prec*3.322))
 	{
 		powcache = &powcache_one;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
@@ -1235,8 +1235,8 @@ void fp_pow_rc (cpx_t powc, int k, const mpf_t q, const cpx_t ess, int prec)
 		next_s = &cache_s_two;
 	}
 	
-	if (0 == mpf_eq(q, cache_q_two, prec*3.322) &&
-	    0 == cpx_eq(ess, cache_s_two, prec*3.322))
+	if (mpf_eq(q, cache_q_two, prec*3.322) &&
+	    cpx_eq(ess, cache_s_two, prec*3.322))
 	{
 		powcache = &powcache_two;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
@@ -1300,8 +1300,8 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 	}
 
 	cpx_cache *powcache = NULL;
-	if (0 == cpx_eq(q, cache_q_one, prec*3.322) &&
-	    0 == cpx_eq(ess, cache_s_one, prec*3.322))
+	if (cpx_eq(q, cache_q_one, prec*3.322) &&
+	    cpx_eq(ess, cache_s_one, prec*3.322))
 	{
 		powcache = &powcache_one;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
@@ -1314,8 +1314,8 @@ void cpx_pow_rc (cpx_t powc, int k, const cpx_t q, const cpx_t ess, int prec)
 		next_s = &cache_s_two;
 	}
 	
-	if (0 == cpx_eq(q, cache_q_two, prec*3.322) &&
-	    0 == cpx_eq(ess, cache_s_two, prec*3.322))
+	if (cpx_eq(q, cache_q_two, prec*3.322) &&
+	    cpx_eq(ess, cache_s_two, prec*3.322))
 	{
 		powcache = &powcache_two;
 		if (prec <= cpx_one_d_cache_check (powcache, k))
