@@ -57,8 +57,14 @@ grand(int m, int n, cpx_t s, int prec)
 	cpx_borwein_zeta(zeta, m2s, prec);
 
 	cpx_t prod;
-	cpx_init prod;
+	cpx_init (prod);
 
+	cpx_sub_ui(prod, zeta, 1, 0);
+	cpx_mul(prod, prod, gm2s);
+	cpx_mul(prod, prod, gs);
+	cpx_div(prod, prod, gtms);
+	cpx_div(prod, prod, gsn1);
+	
 	mpf_t modulus;
 	mpf_init (modulus);
 	cpx_abs(modulus, prod);
@@ -70,7 +76,7 @@ grand(int m, int n, cpx_t s, int prec)
 static double gkw_integrand (double x, double y, int itermax, double param)
 {
 	static int init = 0;
-	int prec = 400;
+	int prec = 150;
 	if (0 == init)
 	{
 		/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
