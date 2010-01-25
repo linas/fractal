@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 #include "brat.h"
-#include "../misc/bignum/zmp.h"
+#include "zmp.h"
 
 /* ============================================================================= */
 

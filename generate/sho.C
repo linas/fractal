@@ -16,7 +16,7 @@
 
 #include "brat.h"
 #include "coord-xforms.h"
-#include "../misc/bignum/zmp.h"
+#include "zmp.h"
 
 /* ======================================================================= */
 /* compute psi_one eigenfunction for complex-valued s

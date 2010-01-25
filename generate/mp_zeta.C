@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 #include "brat.h"
-#include "../misc/bignum/zmp.h"
+#include "zmp.h"
 
 /* ======================================================================= */
 /* compute entire_sub_s for complex-valued s

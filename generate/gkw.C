@@ -16,7 +16,7 @@
 #include "brat.h"
 #include "binomial.h"
 #include "harmonic.h"
-#include "../misc/bignum/mp-gkw.h"
+#include "mp-gkw.h"
 
 // Return the matrix element for H_mp aka the matrix element of GKW.
 // This implementation uses double-precision floats

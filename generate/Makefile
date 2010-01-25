@@ -1,6 +1,6 @@
 ############### Symbol Definitions ###################### 
 
-INCLUDES =	-I../tools/inc
+INCLUDES =	-I../tools/inc -I../misc/bignum
 LIBS =		/usr/lib
 
 CC = cc -Wall -g -O2 $(INCLUDES)

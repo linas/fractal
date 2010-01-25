@@ -17,7 +17,7 @@
 #include "brat.h"
 #include "binomial.h"
 #include "harmonic.h"
-#include "../misc/bignum/mp-gkw.h"
+#include "mp-zeta.h"
 
 
 // Return the continuous-valued version of the GKW operator.
