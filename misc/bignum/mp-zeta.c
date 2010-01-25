@@ -850,15 +850,10 @@ void cpx_borwein_zeta (cpx_t zeta, const cpx_t s, int prec)
 {
 	int n = bor_zeta_terms_est (s, prec);
 
-{ double sre, sim;
-sre = mpf_get_d(s[0].re);
-sim = mpf_get_d(s[0].im);
-printf("duuude s= %g %g term estimaotr=%d\n", sre, sim, n);
-}
-	mpf_t d_n, zero;
+	mpf_t d_n, one;
 	mpf_init (d_n);
-	mpf_init (zero);
-	mpf_set_ui (zero, 0);
+	mpf_init (one);
+	mpf_set_ui (one, 1);
 
 	cpx_t po, term, ess;
 	cpx_init (po);
@@ -878,7 +873,7 @@ printf("duuude s= %g %g term estimaotr=%d\n", sre, sim, n);
 		mpf_sub (term[0].re, term[0].re, d_n); 
 
 		// po = pow (k+1, s);
-		fp_pow_rc (po, k+1, zero, ess, prec);
+		fp_pow_rc (po, k, one, ess, prec);
 		cpx_div (term, term, po);
 
 		if (k%2)
@@ -889,28 +884,15 @@ printf("duuude s= %g %g term estimaotr=%d\n", sre, sim, n);
 		{
 			cpx_add(zeta, zeta, term);
 		}
-{ double zre, zim;
-zre = mpf_get_d(zeta[0].re);
-zim = mpf_get_d(zeta[0].im);
-printf("term at k=%d %g %g\n", k, zre, zim);
-}
 	}
 	mpf_div (zeta[0].re, zeta[0].re, d_n);
 	mpf_div (zeta[0].im, zeta[0].im, d_n);
 
 	cpx_neg (zeta, zeta);
 
-{ double zre, zim;
-zre = mpf_get_d(zeta[0].re);
-zim = mpf_get_d(zeta[0].im);
-printf("en fin %g %g\n", zre, zim);
-}
 	/* po = 1 - 2^{1-s} */
 	mpf_sub_ui (ess[0].re, ess[0].re, 1);
-
-	/* force flush needed to get fp_pow_rc to clear cache */
-	mpf_set_ui (zero, 1);
-	fp_pow_rc (po, 1, zero, ess, prec);
+	fp_pow_rc (po, 1, one, ess, prec);
 	cpx_recip (po, po);
 	cpx_neg (po, po);
 	mpf_add_ui (po[0].re, po[0].re, 1);
@@ -918,7 +900,7 @@ printf("en fin %g %g\n", zre, zim);
 	cpx_div (zeta, zeta, po);
 
 	mpf_clear (d_n);
-	mpf_clear (zero);
+	mpf_clear (one);
 	
 	cpx_clear (po);
 	cpx_clear (term);
