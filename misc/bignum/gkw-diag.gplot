@@ -1,4 +1,29 @@
 
+# -------------------------------------------------------
+# This set was used to generate the gkw-diag.png graph in 
+# the GKW paper
+# 
+# set term postscript eps color
+# set out 'gkw-diag.eps'
+# 
+# set data style lines
+# set key right
+# 
+# set xrange [0:60]
+# 
+# set title "Matrix elts G_nn of GKW along diagonal"
+# set xlabel "n"
+# set ylabel "G_nn  2^n  sqrt n "
+# 
+# osc(x)=0.25*cos(0.5*3.141592653*x - 0.25*3.141592653)
+# enlarge(x)=exp(0.6931471805*x)*sqrt(x)
+# 
+# plot "gkw-diag.dat" using 1:($2*enlarge($1)) title "GKW", \
+#      "gkw-diag.dat" using 1:(osc($1)) title "0.25 cos(pi n/2 - pi/4)"
+# 
+# -------------------------------------------------------
+# Verify the actual fit
+
 set term png small
 set out 'gkw-diag.png'
 
@@ -6,44 +31,21 @@ set out 'gkw-diag.png'
 set data style lines
 set key right
 
-# -------------------------------------------------------
-# This set was used to generate the gkw-diag.png graph in 
-# the GKW paper
-
-# set term postscript eps color
-# set out 'gkw-diag.eps'
-# 
-# set data style lines
-# set key right
-# 
-# set yrange [-0.15:0.15]
-# 
-# set title "Matrix elts G_nn of GKW along diagonal"
-# set xlabel "n"
-# set ylabel "G_nn exp (n sqrt 2)"
-# 
-# osc(x)=0.1*cos(0.5*3.141592653*x - 0.25*3.141592653)
-# enlarge(x)=exp(0.70710678118*x)
-# 
-# plot "gkw-diag.dat" using 1:($2*enlarge($1)) title "GKW", \
-#      "gkw-diag.dat" using 1:(osc($1)) title "0.1 cos(pi n/2 - pi/4)"
-
-# -------------------------------------------------------
-# Verify the actual fit
-
 set title "Matrix elts G_nn of GKW along diagonal"
 set xlabel "n"
-set ylabel "G_nn exp (n sqrt 2)"
+set ylabel "G_nn 2^n sqrt n"
 # set yrange [-0.15:0.15]
-set xrange [980:1000]
+# set xrange [980:1000]
+set xrange [950:1000]
+set yrange [0.195:0.205]
  
-# osc(x)=0.1*cos(0.5*3.141592653*x - 0.25*3.141592653)
-osc(x)=0.03* sqrt(sqrt(x))*cos(0.5*3.141592653*x - 0.25*3.141592653)
+# osc(x)=0.25*cos(0.5*3.141592653*x - 0.25*3.141592653)
+osc(x)=(0.2/0.7071067812)*cos(0.5*3.141592653*x - 0.25*3.141592653)
 # enlarge(x)=exp(0.70710678118*x)
-enlarge(x)=exp(0.696*x)
+enlarge(x)=exp(0.6931471805*x)*sqrt(x)
 
 plot "gkw-diag.dat" using 1:($2*enlarge($1)) title "GKW", \
-     "gkw-diag.dat" using 1:(osc($1)) title "0.1*cos(pi*n/2 - pi/4)"
+     "gkw-diag.dat" using 1:(osc($1)) title "0.25*cos(pi*n/2 - pi/4)"
 #
 ##     "gkw-diag.dat" using 1:(osc($1)) title "fit"
 ## plot  "gkw-diag.dat" using 1:(osc($1)) title "fit"
