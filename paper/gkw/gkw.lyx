@@ -2909,14 +2909,13 @@ reference "fig:Saddle-Points-of"
 
 .
  
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -3004,7 +3003,120 @@ reference "eq:gkw-integrand"
 \end_layout
 
 \begin_layout Standard
-a
+The integral may be estimated for 
+\begin_inset Formula $m,n\to\infty$
+\end_inset
+
+ by applying the method of steepest descent.
+ That is, one deforms the integration contour so that it passes through
+ the saddle-point, following the steepest path through it.
+ There, on applies Laplaces method to approximate the integral as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\int e^{Nf\left(x\right)}dx=e^{Nf\left(x_{0}\right)}\sqrt{\frac{2\pi}{N\left|f^{\prime\prime}\left(x_{0}\right)\right|}}\left(1+\mathcal{O}\left(\frac{1}{N}\right)\right)\]
+
+\end_inset
+
+with the integration contour running through the saddle point 
+\begin_inset Formula $f^{\prime}\left(x_{0}\right)=0$
+\end_inset
+
+.
+ To be able to apply this, the logarithm of the integrand, expanded in powers
+ of 
+\begin_inset Formula $N$
+\end_inset
+
+, is required.
+ As mentioned, the saddle points will be discovered at 
+\begin_inset Formula $s\approx\pm in$
+\end_inset
+
+, thus suggesting the change of variable 
+\begin_inset Formula $s=nx$
+\end_inset
+
+ and an expansion in powers of 
+\begin_inset Formula $N=n$
+\end_inset
+
+, while holding 
+\begin_inset Formula $x$
+\end_inset
+
+ fixed.
+ To avoid a concurrent expansion in powers of 
+\begin_inset Formula $m$
+\end_inset
+
+, write 
+\begin_inset Formula $m=Kn$
+\end_inset
+
+ for some fixed constant 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ One may then proceed with the expansion.
+ The zeta function terms expands as 
+\begin_inset Formula \[
+\log\left[\zeta\left(s+m+2\right)-1\right]=-\left[n\left(x+K\right)+2\right]\log2+\mathcal{O}\left(\left(\frac{2}{3}\right)^{n\left(x+K\right)}\right)\]
+
+\end_inset
+
+ The gamma functions are expanded by applying Stirling's formula, in leading
+ powers of 
+\begin_inset Formula $n$
+\end_inset
+
+, 
+\begin_inset Formula \[
+\log\Gamma\left(ny\right)=ny\log\left(ny\right)-ny-\frac{1}{2}\log\left(ny\right)+\frac{1}{2}\log\left(2\pi\right)+\frac{1}{12ny}+\mathcal{O}\left(\frac{1}{n^{3}}\right)\]
+
+\end_inset
+
+which is applicable for 
+\begin_inset Formula $\Re y>0$
+\end_inset
+
+.
+ This can be applied in a straightforward way, although one must first write
+ 
+\begin_inset Formula \[
+\Gamma\left(s-n\right)=\frac{\pi\left(-1\right)^{n}}{\sin\left(\pi s\right)\Gamma\left(n-s+1\right)}\]
+
+\end_inset
+
+which follows from the reflection formula 
+\begin_inset Formula $\Gamma\left(z\right)\Gamma\left(1-z\right)=\pi/\sin\pi z$
+\end_inset
+
+.
+ For the saddle point in the upper half-plane, tht is, for 
+\begin_inset Formula $\Im x>0$
+\end_inset
+
+, one expands 
+\begin_inset Formula \begin{align*}
+\log\sin\pi xn= & \log\left(\frac{-e^{-i\pi nx}}{2i}+\mathcal{O}\left(e^{-\pi n\Im x}\right)\right)\\
+= & -i\pi nx+\frac{i\pi}{2}-\log2+\mathcal{O}\left(e^{-2\pi n\Im x}\right)\end{align*}
+
+\end_inset
+
+ Combining all of these elements, one then obtains 
+\begin_inset Formula \[
+Nf\left(x\right)=\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+o appl
 \end_layout
 
 \begin_layout Section
