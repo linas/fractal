@@ -2790,14 +2790,15 @@ reference "eq:GKW-matrix-elts"
 \begin_inset Formula $m,n$
 \end_inset
 
- behaviour, as shown in 
+ behaviour.
+ A detailed exposition of this proceedure is given in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Fla06"
 
 \end_inset
 
-.
+; what follows is an abbreviated applicatin of those techniques.
 \end_layout
 
 \begin_layout Standard
@@ -2809,8 +2810,153 @@ There are several key steps to this process.
 
 \end_inset
 
- where c and anayltic phi and exponential type phi which means bounded ...
+ where the contour 
+\begin_inset Formula $c$
+\end_inset
+
+ surrounds the poles at 
+\begin_inset Formula $\left\{ n_{0},\cdots,n\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\phi\left(s\right)$
+\end_inset
+
+ is holomorphic in the region 
+\begin_inset Formula $\Re s>n_{0}-\frac{1}{2}$
+\end_inset
+
+.
+ Substitution of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:GKW-matrix-elts"
+
+\end_inset
+
+ into the above yeilds
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+G_{mn}=\frac{\left(-1\right)^{n}}{2\pi i}\frac{n!}{m!}\oint_{C}\frac{\left(s+m+1\right)\left(s+m\right)\cdots\left(s+2\right)}{s\left(s-1\right)\cdots\left(s-n\right)}\left[\zeta\left(s+m+2\right)-1\right]ds\]
+
+\end_inset
+
+ Written in this form, the zeros and poles of the integrand are clearly
+ evident.
+ It also becomes clear that the right-hand closure of the contour integral
+ contributes nothing, since, for 
+\begin_inset Formula $\Re s\to\infty$
+\end_inset
+
+, one has that the integrand decays exponentially, 
+\emph on
+viz
+\emph default
+.
  
+\begin_inset Formula $\zeta\left(s+m+2\right)-1\to2^{-s}+\mathcal{O}\left(3^{-s}\right)$
+\end_inset
+
+ which over-powers the polynomial numerator and drives the integrand to
+ zero.
+ Thus, the closed contour can be replaced by a line integral running from
+ 
+\begin_inset Formula $c-i\infty$
+\end_inset
+
+ to 
+\begin_inset Formula $c+i\infty$
+\end_inset
+
+ with 
+\begin_inset Formula $\Re c$
+\end_inset
+
+ to the left of the poles:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+G_{mn}=\frac{\left(-1\right)^{n+1}}{2\pi i}\frac{\Gamma\left(n+1\right)}{\Gamma\left(m+1\right)}\int_{c-i\infty}^{c+i\infty}\frac{\Gamma\left(s+m+2\right)\Gamma\left(s-n\right)}{\Gamma\left(s+2\right)\Gamma\left(s+1\right)}\left[\zeta\left(s+m+2\right)-1\right]ds\]
+
+\end_inset
+
+The integrand becomes exponentially large for 
+\begin_inset Formula $\Re s\to-\infty$
+\end_inset
+
+ and this leads to a pair of saddle points above and below the real axis:
+ each saddle is situated between the exponential rise to the left and the
+ poles, and straddles a hump between the zeros and the exponentially decay
+ to the right.
+ For 
+\begin_inset Formula $m=n$
+\end_inset
+
+, it will be shown that the saddle points occur at 
+\begin_inset Formula $s=\pm i+\mathcal{O}\left(1/n\right)$
+\end_inset
+
+.
+ The integrand and its saddle points is illustrated in the figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Saddle-Points-of"
+
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Saddle Points of the Integrand
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Saddle-Points-of"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename gkw-integrand-10-10-20x20-flipoff.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+a
 \end_layout
 
 \begin_layout Section
