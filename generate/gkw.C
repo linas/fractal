@@ -94,6 +94,7 @@ static double gkw_operator (double x, double y, int itermax, double param)
 	// gkw = fabs(gkw);
 // printf ("%d %d %g\n", m, p, gkw);
 
+#if HYPERBOLA_FIT
 	// double bola = p*m;
 	// if ((bola > 2500) && (bola < 2700)) gkw = 1e30;
 	// bola *= m;
@@ -111,9 +112,14 @@ static double gkw_operator (double x, double y, int itermax, double param)
 	double gola = -pow(fabs(m-p), 1.7) + pow(m+p, 1.7);
 	if ((gola > 1850) && (gola < 1932)) gkw = 1e30;
 	if ((gola > 7850) && (gola < 7982)) gkw = 1e30;
+#endif // HYPERBOLA_FIT
 
-   if (p*5 == m) gkw = 1.0e30;
-   if (m*4 == p) gkw = 1.0e30;
+   // if (p*5 == m) gkw = 1.0e30;
+   // if (m*4 == p) gkw = 1.0e30;
+	int mm = 1.8284 * m;
+   if (mm == p) gkw = 1.0e30;
+   if (mm == p+1) gkw = 1.0e30;
+   if (mm+1 == p) gkw = 1.0e30;
 #endif
 
 // 	double gkw = ache_smooth_mp(x, -y);

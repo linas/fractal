@@ -22,8 +22,8 @@
 
 
 // Return the integrand 
-long double
-grand(int m, int n, cpx_t s, int prec)
+void
+grand(cpx_t prod, int m, int n, cpx_t s, int prec)
 {
 	cpx_t m2s, tms, sn1;
 
@@ -56,15 +56,21 @@ grand(int m, int n, cpx_t s, int prec)
 	cpx_init (zeta);
 	cpx_borwein_zeta(zeta, m2s, prec);
 
-	cpx_t prod;
-	cpx_init (prod);
-
 	cpx_sub_ui(prod, zeta, 1, 0);
 	cpx_mul(prod, prod, gm2s);
 	cpx_mul(prod, prod, gs);
 	cpx_div(prod, prod, gtms);
 	cpx_div(prod, prod, gsn1);
-	
+}
+
+long double
+grand_modulus(int m, int n, cpx_t s, int prec)
+{
+	cpx_t prod;
+	cpx_init (prod);
+
+	grand(prod, m, n, s, prec);
+
 	mpf_t modulus;
 	mpf_init (modulus);
 	cpx_abs(modulus, prod);
@@ -72,11 +78,29 @@ grand(int m, int n, cpx_t s, int prec)
 	return mpf_get_d (modulus);
 }
 
+long double
+grand_phase(int m, int n, cpx_t s, int prec)
+{
+	cpx_t prod;
+	cpx_init (prod);
+
+	grand(prod, m, n, s, prec);
+
+	mpf_t phase;
+	mpf_init (phase);
+	fp_arctan2 (phase, prod[0].im, prod[0].re, prec);
+
+	double f = mpf_get_d (phase);
+	f += M_PI;
+	f /= 2.0*M_PI;
+	return f;
+}
+
 
 static double gkw_integrand (double x, double y, int itermax, double param)
 {
 	static int init = 0;
-	int prec = 150;
+	int prec = 60;
 	if (0 == init)
 	{
 		/* Set the precision (number of binary bits) = prec*log(10)/log(2) */
@@ -88,8 +112,12 @@ static double gkw_integrand (double x, double y, int itermax, double param)
 	cpx_init(s);
 	cpx_set_d(s, x, y);
 
-	int n = 30;
-	double gkw = grand(n,n,s, prec);
+	int n = 10;
+	int m = 10;
+	// double gkw = grand_modulus(m,n,s, prec);
+	double gkw = grand_phase(m,n,s, prec);
+
+	printf("gr(%f +i %f) = %g\n", x, y, gkw);
 
 	return gkw;
 }
