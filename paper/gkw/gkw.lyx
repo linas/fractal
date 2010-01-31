@@ -2726,26 +2726,25 @@ Shown are the matrix elements
  of the GKW operator along the diagonal.
  As these are exponentially vanishing, the figure rescales these: thus,
  the red line shows the values of 
-\begin_inset Formula $G_{nn}2^{-n}\sqrt{n}$
+\begin_inset Formula $G_{nn}2^{-n-1}\sqrt{\pi n}$
 \end_inset
 
 .
  The matrix elements are also oscillatory: the overall structure is easily
  accounted for, as shown by the green line, which graphs 
-\begin_inset Formula $0.25\cos\left(\pi n/2-\pi/4\right)$
+\begin_inset Formula $\sin\left(\pi n/2+\pi/4\right)$
 \end_inset
 
 .
- The period and phase of the oscillations appears to be exact: a numerical
- exploration out to 
+ The period, phase and amplitude of the oscillations appears to be exact:
+ a numerical exploration out to 
 \begin_inset Formula $n=1000$
 \end_inset
 
  indicates that this oscillation hold very precisely.
- The amplitude also appears to be correct up to a constant: the final, asymptoti
-c limit for the amplitude appears to be unchanged from what is already evident
- in this figure.
- 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Note Note
 status open
 
@@ -3014,8 +3013,8 @@ The integral may be estimated for
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\int e^{Nf\left(x\right)}dx=e^{Nf\left(x_{0}\right)}\sqrt{\frac{2\pi}{N\left|f^{\prime\prime}\left(x_{0}\right)\right|}}\left(1+\mathcal{O}\left(\frac{1}{N}\right)\right)\]
+\begin_inset Formula \begin{equation}
+\int e^{Nf\left(x\right)}dx=e^{Nf\left(x_{0}\right)}\sqrt{\frac{2\pi}{Nf^{\prime\prime}\left(x_{0}\right)}}\left(1+\mathcal{O}\left(\frac{1}{N}\right)\right)\label{eq:steepest descent}\end{equation}
 
 \end_inset
 
@@ -3067,7 +3066,7 @@ with the integration contour running through the saddle point
 
 \end_inset
 
- The gamma functions are expanded by applying Stirling's formula, in leading
+The gamma functions are expanded by applying Stirling's formula, in leading
  powers of 
 \begin_inset Formula $n$
 \end_inset
@@ -3106,7 +3105,7 @@ which follows from the reflection formula
 
 \end_inset
 
- Combining all of these elements, one then obtains the following asymptotic
+Combining all of these elements, one then obtains the following asymptotic
  expansion in 
 \begin_inset Formula $n$
 \end_inset
@@ -3135,17 +3134,17 @@ Nf^{\prime\prime}\left(x\right)= & n\left[\frac{1}{K+x}-\frac{1}{1-x}-\frac{2}{x
 
 \end_inset
 
- Solving for the saddle points 
+Solving for the saddle points 
 \begin_inset Formula $f^{\prime}\left(x_{0}\right)=0$
 \end_inset
 
  gives 
-\begin_inset Formula \[
-x_{0}=\frac{K-1}{2}\pm\frac{1}{2}\sqrt{1-6K+K^{2}}+\frac{1}{n}\left(\frac{7Kx_{0}-3x_{0}-6K}{2\left(K-x_{0}^{2}\right)}\right)+\mathcal{O}\left(\frac{1}{n^{2}}\right)\]
+\begin_inset Formula \begin{equation}
+x_{0}=\frac{K-1}{2}\pm\frac{1}{2}\sqrt{1-6K+K^{2}}+\frac{1}{n}\left(\frac{7Kx_{0}-3x_{0}-6K}{2\left(K-x_{0}^{2}\right)}\right)+\mathcal{O}\left(\frac{1}{n^{2}}\right)\label{eq:saddle pt}\end{equation}
 
 \end_inset
 
- For the special case of 
+For the special case of 
 \begin_inset Formula $m=n$
 \end_inset
 
@@ -3159,7 +3158,37 @@ x_{0,m=n}=\pm i+\frac{1}{n}\left(\frac{-3}{2}\pm i\right)+\mathcal{O}\left(\frac
 
 \end_inset
 
+To obtain asymptotic expansion for 
+\begin_inset Formula $G_{mn}$
+\end_inset
 
+, it is now enough to insert the saddle point 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:saddle pt"
+
+\end_inset
+
+ into 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:steepest descent"
+
+\end_inset
+
+.
+ The algebra is considerably simplified by setting 
+\begin_inset Formula $K=1$
+\end_inset
+
+.
+ The final result is precisely that already discovered numerically: 
+\begin_inset Formula \[
+G_{nn}=\frac{1}{2^{n+1}\sqrt{\pi n}}\sin\frac{\pi}{2}\left(n+\frac{1}{2}\right)\left[1+\mathcal{O}\left(\frac{1}{n}\right)\right]\]
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
