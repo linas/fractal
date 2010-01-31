@@ -35,16 +35,25 @@ set title "Matrix elts G_nn of GKW along diagonal"
 set xlabel "n"
 set ylabel "G_nn 2^n sqrt n"
 # set yrange [-0.15:0.15]
-set xrange [980:1000]
-# set xrange [0:100]
-set yrange [0.195:0.205]
+# set xrange [980:1000]
+# set xrange [990:1000]
+set xrange [0:50]
+# set yrange [0.195:0.205]
+# set yrange [0.13:0.15]
  
 # osc(x)=0.25*cos(0.5*3.141592653*x - 0.25*3.141592653)
 osc(x)=(0.5/sqrt(3.14159265358979))*sin(0.5*3.141592653*x + 0.25*3.141592653)
 enlarge(x)=exp(0.6931471805*x)*sqrt(x)
 
-plot "gkw-diag.dat" using 1:($2*enlarge($1)) title "GKW", \
-     "gkw-diag.dat" using 1:(osc($1)) title "0.25*cos(pi*n/2 - pi/4)"
+# plot "gkw-diag.dat" using 1:($2*enlarge($1)) title "GKW", \
+#     "gkw-diag.dat" using 1:(osc($1)) title "0.25*cos(pi*n/2 - pi/4)"
+
+diff(x,y) = y*enlarge(x) - osc(x)
+# osc2(x) = -0.1525 * sin(0.5*3.141592653*($1+0.1875))
+osc2(x) = -0.151 * sin(0.5*3.141592653*($1+0.25))
+plot "gkw-diag.dat" using 1:(diff($1, $2) * $1- osc2($1)) title "diffGKW"
+#      "gkw-diag.dat" using 1:(osc2($1)) title "-0.15 sin(pi*n/2)"
+
 #
 ##     "gkw-diag.dat" using 1:(osc($1)) title "fit"
 ## plot  "gkw-diag.dat" using 1:(osc($1)) title "fit"
