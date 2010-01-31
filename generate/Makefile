@@ -99,6 +99,7 @@ erdos: brat.o erdos.o coord-xforms.o util.o $(FUNC)
 euler-q: brat.o euler-q.o coord-xforms.o util.o $(FUNC)
 fdist: brat.o fdist.o util.o $(FUNC)
 gamma: brat.o gamma.o util.o coord-xforms.o $(MP) $(GMP)
+gauss-red: brat.o gauss-red.o util.o 
 gkd: brat.o gkd.o util.o 
 gkw: brat.o gkw.o util.o $(FUNC) $(MP) $(GMP)
 gkw-integrand: brat.o gkw-integrand.o util.o $(FUNC) $(MP) $(GMP)
