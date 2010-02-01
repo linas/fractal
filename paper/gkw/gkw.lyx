@@ -1109,7 +1109,7 @@ One can attempt to solve GKW by working in the polynomial representation.
 \begin_inset Formula $x=0$
 \end_inset
 
-, but this turns out to be a very poor choice, as we shall soon see.
+, but this turns out to be a very poor choice.
  Writing 
 \begin_inset Formula $\mathcal{L}_{h}f=g$
 \end_inset
@@ -1202,7 +1202,7 @@ key "Briggs2003"
 
  leads to the simplest tractable expansion.
  The general case, of a Taylor's expansion about some fixed point, is explored
- in the appendix.
+ in appendix A.
 \end_layout
 
 \begin_layout Standard
@@ -1648,7 +1648,7 @@ In particular, for
 
 \end_inset
 
-and then evaluate this simple expression under the action of the GKW operator.
+and then evaluate this expression under the action of the GKW operator.
 \end_layout
 
 \begin_layout Subsection
@@ -4493,8 +4493,11 @@ Expansion about arbitrary location
 \end_layout
 
 \begin_layout Standard
-This appendix discusses, in greater detail, the polynomial matrix elements
- that may be obtained by expanding around other points within the unit interval.
+This appendix provides expressions for the polynomial-basis matrix elements
+ for the GKW and Mayer-Ruelle operators.
+ Specifically, they provide expressions for the Taylor's expansions about
+ points other than 0 or 1.
+ Several relations to the hypergeometric series are also provided.
 \end_layout
 
 \begin_layout Standard
@@ -4521,7 +4524,12 @@ Consider
 
 \end_inset
 
-Without much difficulty, one discovers that the matrix elements are given
+which is taken to define the meaning of 
+\begin_inset Formula $\mathcal{L}_{mn}^{(b,a)}$
+\end_inset
+
+.
+ Without much difficulty, one discovers that the matrix elements are given
  by 
 \begin_inset Formula \begin{equation}
 \mathcal{L}_{mn}^{(b,a)}=(-1)^{m}\sum_{k=0}^{n}(-a)^{n-k}\left(\begin{array}{c}
@@ -4572,7 +4580,7 @@ All of these expressions for the matrix elements for the GKW operator have
  a common form.
  It consists of two summations: the outer summation, and the summation defining
  the Hurwitz zeta function.
- Pulling out this second summation, one finds terms consisting of a series
+ Exchanging the order of summation, one finds terms consisting of a series
  of polynomials, which are most simply expressed in terms of Gauss's hypergeomet
 ric series: 
 \end_layout
@@ -4610,10 +4618,10 @@ reference "eq:general elts"
 
  gives the following: 
 \begin_inset Formula \begin{equation}
-\mathcal{L}_{mn}^{(b,a)}=(-1)^{m+n}a^{n}\sum_{j=0}^{\infty}\frac{1}{(j+1+b)^{m+2}}\,_{2}F_{1}\left[\begin{array}{c}
+\mathcal{L}_{mn}^{(b,a)}=(-1)^{m+n}a^{n}\sum_{j=1}^{\infty}\frac{1}{(j+b)^{m+2}}\,_{2}F_{1}\left[\begin{array}{c}
 \begin{array}{cc}
 -n\; & \; m+2\end{array}\\
-2\end{array}\;;\;\frac{-1}{a(j+1+b)}\right]\label{eq:}\end{equation}
+2\end{array}\;;\;\frac{-1}{a(j+b)}\right]\label{eq:}\end{equation}
 
 \end_inset
 
@@ -4621,8 +4629,9 @@ reference "eq:general elts"
 \end_layout
 
 \begin_layout Standard
-Oddly, this appears to be in the form of a slightly generalized form of
- the GKW operator, an operator given by Dieter Mayer
+Curiously, the above is in the form of the Mayer-Ruelle operator.
+ This operator is a slightly generalized form of the GKW operator given
+ by Dieter Mayer
 \begin_inset CommandInset citation
 LatexCommand cite
 key "May91"
@@ -4631,32 +4640,94 @@ key "May91"
 
 , 
 \begin_inset Formula \begin{equation}
-\left[\mathcal{L}^{(s)}f\right](x)\equiv\sum_{n=1}^{\infty}\frac{1}{(n+x)^{s}}f\left(\frac{1}{n+x}\right)\label{eq:}\end{equation}
+\left[\mathcal{M}^{(s)}f\right](x)\equiv\sum_{n=1}^{\infty}\frac{1}{(n+x)^{s}}f\left(\frac{1}{n+x}\right)\label{eq:}\end{equation}
 
 \end_inset
 
-where 
-\begin_inset Formula $s$
-\end_inset
-
- is taken to be 
+Then, taking 
 \begin_inset Formula $s=m+2$
 \end_inset
 
+, 
+\begin_inset Formula $x=b$
+\end_inset
+
  and 
-\begin_inset Formula $f=_{2}F_{1}$
+\begin_inset Formula $f(x)=_{2}F_{1}\left[\begin{array}{c}
+\begin{array}{cc}
+-n\; & \; m+2\end{array}\\
+2\end{array}\;;\;\frac{-x}{a}\right]$
+\end_inset
+
+, one has that the GKW matrix elements are just specific values resulting
+ from the application of the Mayer-Ruelle operator to the hypergeometric
+ series: 
+\begin_inset Formula \[
+\mathcal{L}_{mn}^{(b,a)}=(-1)^{m+n}a^{n}\left[\mathcal{M}^{(m+2)}f\right](b)\]
+
+\end_inset
+
+ The simplicity of this form can be further reinforces by setting 
+\begin_inset Formula $a=b=1$
+\end_inset
+
+ so that 
+\begin_inset Formula \[
+G_{mn}=\left[\mathcal{M}^{(m+2)}f\right](1)\]
+
+\end_inset
+
+where, of course, 
+\begin_inset Formula $G_{mn}$
+\end_inset
+
+ are the matrix elements of the GKW operator as defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:GKW-matrix-elts"
+
 \end_inset
 
 .
- The general appearance and the matrix elements of this generalized operator
- are only a slight variation of those for the GKW; for completeness, these
- are stated here: 
+ 
+\end_layout
+
+\begin_layout Standard
+Following the same proceedures as above, the matrix elements of the Ruelle-Mayer
+ operator may be written as
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
-\left[\mathcal{L}^{(s)}\right]_{mn}^{(b,a)}=(-1)^{m}\sum_{k=0}^{n}(-a)^{n-k}\left(\begin{array}{c}
+\left[\mathcal{M}^{(s)}\right]_{mn}^{(b,a)}=(-1)^{m}\sum_{k=0}^{n}(-a)^{n-k}\left(\begin{array}{c}
 n\\
 k\end{array}\right)\left(\begin{array}{c}
 m+k+s-1\\
 m\end{array}\right)\,\zeta_{H}(m+k+s,1+b)\label{eq:RM-general elts}\end{equation}
+
+\end_inset
+
+The above gets a bit easier to read if one sets 
+\begin_inset Formula $a=b=1$
+\end_inset
+
+ to obtain
+\begin_inset Formula \[
+\left[\mathcal{M}^{(s)}\right]_{mn}=(-1)^{m+n}\sum_{k=0}^{n}(-1)^{k}\left(\begin{array}{c}
+n\\
+k\end{array}\right)\left(\begin{array}{c}
+m+k+s-1\\
+m\end{array}\right)\,\left[\zeta(m+k+s)-1\right]\]
+
+\end_inset
+
+which obviously reduces to the GKW operator for 
+\begin_inset Formula $s=2$
+\end_inset
+
+:
+\begin_inset Formula \[
+G_{mn}=(-1)^{m+n}\left[\mathcal{M}^{(2)}\right]_{mn}\]
 
 \end_inset
 
