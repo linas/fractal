@@ -54,8 +54,21 @@ February 2010
 \end_layout
 
 \begin_layout Abstract
-The basic idea is to explore the lattice-model version of gkw, etc.
- This is a diary of partial results.
+The Minkowski Question Mark function is a highly singular function that
+ has, among other properties, is able to completely alter the spectrum of
+ an operator when it is used as a similarity transform.
+ The goal of this paper is to formulate the tools to understand how this
+ is possible.
+ Specifically, it requires passing from operators defined on the Hardy space
+ of functions defined on the real unit interval, to a space of functions
+ defined on the Cantor set.
+ This paper explores this formulation for the Gauss-Kuzmin-Wirsing (GKW)
+ operator, which is the transfer operator (Ruelle operator) for the shift
+ operator on continued fractions.
+\end_layout
+
+\begin_layout Abstract
+This is a diary of partial results.
 \end_layout
 
 \begin_layout Section
@@ -81,6 +94,89 @@ The next observation is that the machinery of operators defined on Banach
  Thus, the basic chore here is to examine both the GKW operator, and related
  operators, acting on the set of functions defined on the Cantor set, and
  clarifying how this space is related to the usual Hardy space setting.
+\end_layout
+
+\begin_layout Standard
+To be concrete, the motivation stems from the following.
+ Consider the Gauss Map, which is defined as the function 
+\begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
+\end_inset
+
+ acting on the unit interval.
+ It drew Gauss's attention because it is the shift operator in the space
+ of continued fractions: if one writes out the continued-fraction expansion
+ for 
+\begin_inset Formula $x\in[0,1]$
+\end_inset
+
+ as 
+\begin_inset Formula \[
+x=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\cdots}}}\equiv\left[a_{1},a_{2},a_{3},\cdots\right]\]
+
+\end_inset
+
+then one has that 
+\begin_inset Formula \[
+h(x)=\left[a_{2},a_{3},\cdots\right]\]
+
+\end_inset
+
+whence the name 
+\begin_inset Quotes eld
+\end_inset
+
+shift operator
+\begin_inset Quotes erd
+\end_inset
+
+.
+ One may then consider the transfer operator formed from the Gauss Map;
+ this is called the Gauss-Kuzmin-Wirsing or GKW operator, and is given by
+ 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{h}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{(n+x)^{2}}f\left(\frac{1}{n+x}\right)\label{eq:sum-form}\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $f$
+\end_inset
+
+ is just an ordinary function on the unit interval: 
+\begin_inset Formula $f:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+.
+ This operator has not been solved in closed form, although Gauss did provide
+ the eigenvector for the largest eigenvalue (which is 1).
+ The next eigenvalue is known as the GKW constant, and is roughly 
+\begin_inset Formula $\lambda=0.30366300\cdots$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Consider now a closely-related function, the Gauss Map transformed by a
+ similarity transformation, with the Minkowski Question Mark providing the
+ similarity transformation: 
+\begin_inset Formula \begin{equation}
+c(x)=?\left(\frac{1}{?^{-1}(x)}-\left\lfloor \frac{1}{?^{-1}(x)}\right\rfloor \right)=(?\circ h\circ?^{-1})(x)\label{eq:}\end{equation}
+
+\end_inset
+
+This map is very simple: it consists of straight-line segments between values
+ of 
+\begin_inset Formula $1/2^{k}$
+\end_inset
+
+, and can be written as 
+\begin_inset Formula \begin{equation}
+c(x)=2-2^{n}x\;\textrm{ for \; }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\label{eq:}\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \end_body
