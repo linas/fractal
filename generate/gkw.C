@@ -85,11 +85,15 @@ static double gkw_operator (double x, double y, int itermax, double param)
 {
 #define MATRIX_ELTS
 #ifdef MATRIX_ELTS
-	int p = 300.0 * x + 0.5;
-	int m = 300.0 * y + 0.5;
-	m = 300 - m;
+	int p = 100.0 * x + 0.5;
+	int m = 100.0 * y + 0.5;
+	m = 100 - m;
 	double gkw = ache_mp_mp(m,p);
 
+#if 0
+	if (m%2 == 1) gkw = -gkw;
+	if (p%2 == 1) gkw = -gkw;
+#endif
 	gkw *= exp(sqrt(m*p));
 	// gkw = fabs(gkw);
 // printf ("%d %d %g\n", m, p, gkw);
@@ -114,12 +118,15 @@ static double gkw_operator (double x, double y, int itermax, double param)
 	if ((gola > 7850) && (gola < 7982)) gkw = 1e30;
 #endif // HYPERBOLA_FIT
 
+#if 0
    // if (p*5 == m) gkw = 1.0e30;
    // if (m*4 == p) gkw = 1.0e30;
 	int mm = 1.8284 * m;
    if (mm == p) gkw = 1.0e30;
    if (mm == p+1) gkw = 1.0e30;
    if (mm+1 == p) gkw = 1.0e30;
+#endif
+
 #endif
 
 // 	double gkw = ache_smooth_mp(x, -y);
