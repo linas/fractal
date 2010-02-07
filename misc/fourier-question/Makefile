@@ -1,8 +1,11 @@
 
-EXES= eigen eigen-extrap gral-matrix gral-explore
+TOP = ../../tools
+INC = $(TOP)/inc
+LIB = $(TOP)/lib
+
+EXES= eigen eigen-extrap gral-matrix gral-explore sym
 
 all: $(EXES)
-
 
 eigen: eigen.o gral-simple.o
 eigen-extrap: eigen-extrap.o gral-simple.o
@@ -11,10 +14,11 @@ gral-explore: gral-explore.o gral-simple.o
 sym: sym.o
 
 .c.o:
-	cc -c -g -O2 $<
+	cc -c -g -O2 $< -I $(INC)
 
 .o:
-	cc -g -o $@ $^ -llapack -lf77blas -latlas -lg2c -lm
+	cc -g -o $@ $^ -L $(LIB) -lfunc -lstdc++ -lm
+# 	cc -g -o $@ $^ -L $(LIB) -lfunc -llapack -lf77blas -latlas -lg2c -lm
 
 
 clean:
