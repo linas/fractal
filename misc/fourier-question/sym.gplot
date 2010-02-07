@@ -9,11 +9,13 @@ set out 'sym.png'
 set data style lines
 set key right
 
-set xrange[0:0.5]
+# set xrange[0:0.0625]
+set xrange[0.375:0.625]
 
 set title "Integral of question mark"
 set xlabel "x"
 set ylabel "Int ?(x)"
 plot "sym.dat" using 2:4 title "int"
+# plot "sym.dat" using 2:(log($4)) title "int"
 
 

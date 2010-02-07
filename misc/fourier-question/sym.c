@@ -22,7 +22,7 @@ main()
 		double x = k * delta;
 		double term  = question_mark(k,nmax);
 		acc += delta*term;
-		printf("%d	%f %f	%g\n", k, x, term, acc);
+		printf("%d	%f %g	%g\n", k, x, term, acc);
 	}
 }
 
