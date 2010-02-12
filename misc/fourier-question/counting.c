@@ -12,45 +12,47 @@
 
 main()
 {
-	double x, term;
-	int k;
+	long double x, term;
+	long long k;
 	// int logstep = 10;
 	int logstep = 7;
 	// int prtstep = logstep - 3;
 	int prtstep = logstep+5;
-	int nmax = 10*1000*1000;
+	long long nmax = 10*1000*1000;
 
-	int nsteps = 1 << logstep;
-	int psteps = 1 << prtstep;
+	long long nsteps = 1LL << logstep;
+	long long psteps = 1LL << prtstep;
 
-	double lg2 = 1.0 / log(2.0);
+	long double lg2 = 1.0L / logl(2.0L);
 
-	double acc = 0.0;
-	double li = 0.0;
-	double delta = 1.0 / ((double) nsteps);
+	long double acc = 0.0L;
+	long double li = 0.0L;
+	long double delta = 1.0L / ((long double) nsteps);
+#if 0
 	for (k=1; k < nsteps; k++)
 	{
 		x = k * delta;
-		term  = lg2 * 1.0  / question_inverse(x);
-		term = 0.0;
+		term  = lg2 * 1.0L  / question_inverse(x);
+		term = 0.0L;
 		acc += delta*term;
-		li += delta / log(x);
-		if (k%psteps == 0) printf("%d	%f %g	%g	%g\n", k, x, term, acc, li);
+		li += delta / logl(x);
+		if (k%psteps == 0) printf("%Ld	%Lf	%Lg	%Lg	%Lg\n", k, x, term, acc, li);
 	}
-	acc = -1.0;
-	for (k=nsteps+1; k <= nmax*nsteps; k++)
+#endif 
+	acc = -1.0L;
+	for (k=nsteps+1LL; k <= nmax*nsteps; k++)
 	{
 		x = k * delta;
-		double ox = 1.0 / x;
-		term  = 1.0 / question_inverse(ox);
-		term -= 1.0;
+		long double ox = 1.0L / x;
+		term  = 1.0L / question_inverse(ox);
+		term -= 1.0L;
 		term = lg2 / term;
 		acc += delta*term;
-		li += delta / log(x);
-		if (k%psteps == 0) printf("%d	%f %g	%g	%g\n", k, x, term, acc, li);
+		// li += delta / logl(x);
+		if (k%psteps == 0) printf("%Ld	%Lf	%Lg	%Lg	%Lg\n", k, x, term, acc, li);
 	}
 
 	/* Print the last one no matter what */
-	printf("%d	%f %g	%g	%g\n", k, x, term, acc, li);
+	printf("%Ld	%Lf	%Lg	%Lg	%Lg\n", k, x, term, acc, li);
 }
 
