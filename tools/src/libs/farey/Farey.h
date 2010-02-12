@@ -16,7 +16,8 @@
 // #define Complex double __complex__
 // template<typename _Tp> class complex;
 // template<> class complex<double>;
-#define Complex complex<double>
+// #define Complex complex<double>
+#define Complex complex double
 
 #define CONTINUED_FRAC_MAX_TERMS 36
 
