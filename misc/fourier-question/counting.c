@@ -1,6 +1,6 @@
 /* 
- * sym.c
- * Attempt to discover symmetries of integral of question mark
+ * counting.c
+ * Crude quick-n-dirty prime-couting attempt.
  * 
  * Linas Vepstas February 2010
  */
@@ -11,16 +11,17 @@
 main()
 {
 	int nmax, k;
-	int n = 10;
+	int logstep = 10;
+	int nmax = 100;
 
-	nmax = 1 <<n;
+	nsteps = 1 << logstep;
 
 	double acc = 0.0;
-	double delta = 1.0 / ((double) nmax);
-	for (k=0; k<=nmax; k++)
+	double delta = 1.0 / ((double) nsteps);
+	for (k=nsteps; k <= nmax*nsteps; k++)
 	{
 		double x = k * delta;
-		double term  = question_mark(k,nmax);
+		double term  = question_mark(nsteps, k);
 		acc += delta*term;
 		printf("%d	%f %g	%g\n", k, x, term, acc);
 	}
