@@ -15,7 +15,7 @@ main()
 	long double x, term;
 	long long k;
 	// int logstep = 10;
-	int logstep = 7;
+	int logstep = 12;
 	// int prtstep = logstep - 3;
 	int prtstep = logstep+5;
 	long long nmax = 10*1000*1000;
