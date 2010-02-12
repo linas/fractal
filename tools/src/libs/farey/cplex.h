@@ -15,19 +15,19 @@
 #include <stdio.h>
 
 typedef struct {
-	double re;
-	double im;
+	long double re;
+	long double im;
 } cplex;
 
 static inline cplex cplex_zero (void)
 {
-	cplex z; z.re=0.0; z.im=0.0; return z;
+	cplex z; z.re=0.0L; z.im=0.0L; return z;
 }
 static inline cplex cplex_one (void)
 {
-	cplex z; z.re=1.0; z.im=0.0; return z;
+	cplex z; z.re=1.0L; z.im=0.0L; return z;
 }
-static inline cplex cplex_set (double x, double y)
+static inline cplex cplex_set (long double x, long double y)
 {
 	cplex z; z.re=x; z.im=y; return z;
 }
@@ -53,9 +53,9 @@ static inline cplex cplex_neg (const cplex z)
 	return rv;
 }
 
-static inline double cplex_mag (const cplex z)
+static inline long double cplex_mag (const cplex z)
 {
-	return sqrt (z.re*z.re + z.im*z.im);
+	return sqrtl (z.re*z.re + z.im*z.im);
 }
 
 static inline cplex cplex_add (const cplex a, const cplex b)
@@ -74,12 +74,12 @@ static inline cplex cplex_sub (const cplex a, const cplex b)
 	return rv;
 }
 
-static inline double cplex_dist (const cplex a, const cplex b)
+static inline long double cplex_dist (const cplex a, const cplex b)
 {
 	return cplex_mag (cplex_sub(a,b));
 }
 
-static inline cplex cplex_scale (double x, const cplex z)
+static inline cplex cplex_scale (long double x, const cplex z)
 {
 	cplex rv;
 	rv.re = x * z.re;
@@ -98,7 +98,7 @@ static inline cplex cplex_mul (const cplex a, const cplex b)
 static inline cplex cplex_recip (const cplex z)
 {
 	cplex rv;
-	double mag = 1.0/ (z.re*z.re + z.im*z.im);
+	long double mag = 1.0L / (z.re*z.re + z.im*z.im);
 	rv.re = z.re * mag;
 	rv.im = -z.im * mag;
 	return rv;
@@ -112,21 +112,21 @@ static inline cplex cplex_div (const cplex a, const cplex b)
 	return rv;
 }
 
-static inline double cplex_modulus (const cplex z)
+static inline long double cplex_modulus (const cplex z)
 {
-	return sqrt (z.re*z.re + z.im*z.im);
+	return sqrtl (z.re*z.re + z.im*z.im);
 }
 
-static inline double cplex_phase (cplex z)
+static inline long double cplex_phase (cplex z)
 {
-	return atan2 (z.im, z.re);
+	return atan2l (z.im, z.re);
 }
 
-static inline cplex cplex_exp_itheta (double theta)
+static inline cplex cplex_exp_itheta (long double theta)
 {
 	cplex z;
-	z.re = cos(theta);
-	z.im = sin(theta);
+	z.re = cosl(theta);
+	z.im = sinl(theta);
 	return z;
 }
 
@@ -153,25 +153,25 @@ static inline cplex cplex_pow_ui (const cplex z, unsigned int n)
 static inline cplex cplex_exp (const cplex z)
 {
 	cplex rv;
-	rv.re = rv.im = exp (z.re);
-	rv.re *= cos (z.im);
-	rv.im *= sin (z.im);
+	rv.re = rv.im = expl (z.re);
+	rv.re *= cosl (z.im);
+	rv.im *= sinl (z.im);
 	return rv;
 }
 
 /** return n^s */
 static inline cplex cplex_ui_pow (unsigned int n, cplex s)
 {
-	double lnn = log (n);
+	long double lnn = logl (n);
 	s.re *= lnn;
 	s.im *= lnn;
 	return cplex_exp (s);
 }
 
 /** return q^s */
-static inline cplex cplex_d_pow (double q, cplex s)
+static inline cplex cplex_d_pow (long double q, cplex s)
 {
-	double lnn = log (q);
+	long double lnn = logl (q);
 	s.re *= lnn;
 	s.im *= lnn;
 	return cplex_exp (s);
