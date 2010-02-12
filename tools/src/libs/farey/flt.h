@@ -20,24 +20,25 @@ typedef struct {
 
 /* Create an element of SL(2,R). Its up to user to ensure
  * that ad-bc=1 */
-static inline mobius_t mobius_set(double a, double b, double c, double d)
+static inline mobius_t mobius_set(long double a, long double b, 
+                                  long double c, long double d)
 {
 	mobius_t m;
-	m.a = cplex_set (a, 0);
-	m.b = cplex_set (b, 0);
-	m.c = cplex_set (c, 0);
-	m.d = cplex_set (d, 0);
+	m.a = cplex_set (a, 0.0L);
+	m.b = cplex_set (b, 0.0L);
+	m.c = cplex_set (c, 0.0L);
+	m.d = cplex_set (d, 0.0L);
 	return m;
 }
 
 /* Return the identity matrix */
 static inline mobius_t mobius_ident(void)
 {
-	return mobius_set (1,0,0,1);
+	return mobius_set (1.0L,0.0L,0.0L,1.0L);
 }
 
 /* Return a transformation that simply rotates by theta radians */
-static inline mobius_t mobius_rotate (double theta)
+static inline mobius_t mobius_rotate (long double theta)
 {
 	mobius_t m;
 	m.a = cplex_exp_itheta (theta);
@@ -83,16 +84,16 @@ static inline cplex mobius_xform (const mobius_t m, const cplex z)
 static inline mobius_t disk_center (cplex w)
 {
 	cplex nu = w;
-	nu.re += 1.0;
+	nu.re += 1.0L;
 	cplex de = w;
-	de.re -= 1.0;
+	de.re -= 1.0L;
 
 	cplex z = cplex_div (nu,de);
 	z = cplex_neg (z);
 	z = cplex_times_i (z);
 	cplex zb = cplex_conj (z);
 
-	cplex mi = cplex_set(0.0,-1.0);
+	cplex mi = cplex_set(0.0L,-1.0L);
 
 	mobius_t m;
 	m.a = cplex_sub (mi, z);
@@ -111,10 +112,10 @@ static inline mobius_t disk_center (cplex w)
 static inline mobius_t to_half_plane_xform(void)
 {
 	mobius_t m;
-	m.a = cplex_set (0.0, -1.0);
-	m.b = cplex_set (0.0, -1.0);
-	m.c = cplex_set (1.0, 0.0);
-	m.d = cplex_set (-1.0, 0.0);
+	m.a = cplex_set (0.0L, -1.0L);
+	m.b = cplex_set (0.0L, -1.0L);
+	m.c = cplex_set (1.0L, 0.0L);
+	m.d = cplex_set (-1.0L, 0.0L);
 	return m;
 }
 
@@ -125,16 +126,16 @@ static inline mobius_t to_disk_xform(void)
 {
 	mobius_t m;
 #if XX
-	m.a = cplex_set (1.0, 0.0);
-	m.b = cplex_set (0.0, -1.0);
-	m.c = cplex_set (1.0, 0.0);
-	m.d = cplex_set (0.0, 1.0);
+	m.a = cplex_set (1.0L, 0.0L);
+	m.b = cplex_set (0.0L, -1.0L);
+	m.c = cplex_set (1.0L, 0.0L);
+	m.d = cplex_set (0.0L, 1.0L);
 #endif
 
-	m.a = cplex_set (0.0, 0.5);
-	m.b = cplex_set (0.5, 0.0);
-	m.c = cplex_set (0.0, 0.5);
-	m.d = cplex_set (-0.5, 0.0);
+	m.a = cplex_set (0.0L, 0.5L);
+	m.b = cplex_set (0.5L, 0.0L);
+	m.c = cplex_set (0.0L, 0.5L);
+	m.d = cplex_set (-0.5L, 0.0L);
 	return m;
 }
 
@@ -151,10 +152,10 @@ static inline mobius_t to_disk(mobius_t m)
 	cplex bmc = cplex_times_i (cplex_sub (m.b, m.c));
 
 	mobius_t n;
-	n.a = cplex_scale (0.5, cplex_add (apd, bmc));
-	n.b = cplex_scale (0.5, cplex_sub (amd, bpc));
-	n.c = cplex_scale (0.5, cplex_add (amd, bpc));
-	n.d = cplex_scale (0.5, cplex_sub (apd, bmc));
+	n.a = cplex_scale (0.5L, cplex_add (apd, bmc));
+	n.b = cplex_scale (0.5L, cplex_sub (amd, bpc));
+	n.c = cplex_scale (0.5L, cplex_add (amd, bpc));
+	n.d = cplex_scale (0.5L, cplex_sub (apd, bmc));
 	
 	return n;
 }
@@ -172,19 +173,19 @@ static inline mobius_t to_half_plane(mobius_t m)
 	cplex bmc = cplex_sub (m.b, m.c);
 
 	mobius_t n;
-	n.a = cplex_scale (0.5, cplex_add (apd, bpc));
-	n.b = cplex_scale (0.5, cplex_times_i (cplex_sub (amd, bmc)));
+	n.a = cplex_scale (0.5L, cplex_add (apd, bpc));
+	n.b = cplex_scale (0.5L, cplex_times_i (cplex_sub (amd, bmc)));
 	n.b = cplex_neg (n.b);
-	n.c = cplex_scale (0.5, cplex_times_i (cplex_add (amd, bmc)));
-	n.d = cplex_scale (0.5, cplex_sub (apd, bpc));
+	n.c = cplex_scale (0.5L, cplex_times_i (cplex_add (amd, bmc)));
+	n.d = cplex_scale (0.5L, cplex_sub (apd, bpc));
 	
 	return n;
 }
 
 static inline void show_mobius(mobius_t m)
 {
-	printf ("a=%g %+gi    b=%g %+gi\n", m.a.re, m.a.im, m.b.re, m.b.im);
-	printf ("c=%g %+gi    d=%g %+gi\n", m.c.re, m.c.im, m.d.re, m.d.im);
+	printf ("a=%Lg %+Lgi    b=%Lg %+Lgi\n", m.a.re, m.a.im, m.b.re, m.b.im);
+	printf ("c=%Lg %+Lgi    d=%Lg %+Lgi\n", m.c.re, m.c.im, m.d.re, m.d.im);
 }
 
 #endif /* __LFUNC_FLT_H__ */
