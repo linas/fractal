@@ -10,18 +10,19 @@
 
 main()
 {
-	int nmax, k;
+	int k;
 	int logstep = 10;
 	int nmax = 100;
 
-	nsteps = 1 << logstep;
+	int nsteps = 1 << logstep;
 
 	double acc = 0.0;
 	double delta = 1.0 / ((double) nsteps);
-	for (k=nsteps; k <= nmax*nsteps; k++)
+	for (k=nsteps+1; k <= nmax*nsteps; k++)
 	{
 		double x = k * delta;
-		double term  = question_mark(nsteps, k);
+		double ox = 1.0 / x;
+		double term  = 1.0 / question_mark(nsteps, k);
 		acc += delta*term;
 		printf("%d	%f %g	%g\n", k, x, term, acc);
 	}

@@ -3,10 +3,11 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES= eigen eigen-extrap gral-matrix gral-explore sym
+EXES= counting eigen eigen-extrap gral-matrix gral-explore sym
 
 all: $(EXES)
 
+counting: counting.o
 eigen: eigen.o gral-simple.o
 eigen-extrap: eigen-extrap.o gral-simple.o
 gral-matrix: gral-matrix.o
