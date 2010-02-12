@@ -49,7 +49,11 @@ main()
 		term = lg2 / term;
 		acc += delta*term;
 		// li += delta / logl(x);
-		if (k%psteps == 0) printf("%Ld	%Lf	%Lg	%Lg	%Lg\n", k, x, term, acc, li);
+		if (k%psteps == 0)
+		{
+			printf("%Ld	%Lf	%Lg	%Lg	%Lg\n", k, x, term, acc, li);
+			fflush (stdout);
+		}
 	}
 
 	/* Print the last one no matter what */
