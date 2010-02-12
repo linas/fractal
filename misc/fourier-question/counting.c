@@ -12,9 +12,10 @@
 main()
 {
 	int k;
-	int logstep = 8;
-	int prtstep = logstep - 3;
-	int nmax = 100000;
+	int logstep = 10;
+	// int prtstep = logstep - 3;
+	int prtstep = logstep;
+	int nmax = 1000*1000;
 
 	int nsteps = 1 << logstep;
 	int psteps = 1 << prtstep;
