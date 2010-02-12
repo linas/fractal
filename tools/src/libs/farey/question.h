@@ -30,7 +30,7 @@ double fquestion_mark (double);
  * Basically, this function maps the dyadic tree to the 
  * Stern-Brocot tree.
  */
-double dyadic_to_stern_brocot (double x);
+long double dyadic_to_stern_brocot (long double x);
 
 /**
  * question_inverse - return the inverse of the question mark function
@@ -38,7 +38,7 @@ double dyadic_to_stern_brocot (double x);
  * This implements a rapid algorithm to compute the inverse of 
  * the question mark function.
  */
-double question_inverse (double x);
+long double question_inverse (long double x);
 
 #ifdef   __cplusplus
 };

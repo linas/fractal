@@ -24,28 +24,31 @@
  * Basically, this function maps the dyadic tree to the 
  * Stern-Brocot tree.
  */
-double dyadic_to_stern_brocot (double x)
+long double dyadic_to_stern_brocot (long double x)
 {
-	if (0.0>x) x -= (int) x - 1;
-	if (1.0<x) x -= (int) x;
+	if (0.0L>x) x -= floorl(x) - 1.0L;
+	if (1.0L<x) x -= floorl(x);
 
-	mobius_t ell = mobius_set (1,0,1,1);
-	mobius_t are = mobius_set (1,1,0,1);
+	mobius_t ell = mobius_set (1.0L, 0.0L, 1.0L, 1.0L);
+	mobius_t are = mobius_set (1.0L, 1.0L, 0.0L, 1.0L);
 
-	mobius_t acc = mobius_set (1,0,0,1);
+	mobius_t acc = mobius_set (1.0L, 0.0L, 0.0L, 1.0L);
 	int i;
-	for (i=0; i<45; i++)
+
+	/* plain double has a 45-bit mantissa */
+	/* long double has 64 bits in mantissa (in gcc, right now) */
+	for (i=0; i<64; i++)
 	{
-		if (0.5 <= x)
+		if (0.5L <= x)
 		{
 			acc = mobius_mul (acc, are);
-			x -= 0.5;
+			x -= 0.5L;
 		}
 		else
 		{
 			acc = mobius_mul (acc, ell);
 		}
-		x *= 2.0;
+		x *= 2.0L;
 	}
 	return acc.b.re / acc.d.re;
 }
@@ -56,8 +59,8 @@ double dyadic_to_stern_brocot (double x)
  * This implements a rapid algorithm to compute the inverse of 
  * the question mark function.
  */
-double question_inverse (double x)
+long double question_inverse (long double x)
 {
-	return dyadic_to_stern_brocot (0.5*x);
+	return dyadic_to_stern_brocot (0.5L*x);
 }
 
