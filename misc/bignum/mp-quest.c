@@ -33,7 +33,7 @@
 
 void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
 {
-	int i, n, offset;
+	int i, istart, n;
 	unsigned long idx, last_idx;
 	mpf_t mantissa;
 	mpz_t bits;
@@ -55,7 +55,7 @@ void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
 	idx = 0;
 	last_idx = 0;
 	n = 0;
-printf("duude nbits=%d\n", nbits);
+	// printf("duude nbits=%d\n", nbits);
 	while (n < nbits)
 	{
 		if (n%2 == 0)
@@ -78,43 +78,60 @@ printf("duude nbits=%d\n", nbits);
 		n++;
 	}
 
-	mpf_set_ui(qinv, 0);
-
 	/* Compute the corresponding continued fraction */
-	// offset = bitcnt[1] - 1;
-// printf("duude offset=%d\n", offset);
-	i = 0;
-	if (0 == bitcnt[0]) i = 1;
-	for ( ; i<n; i++)
+	mpf_set_ui(qinv, 0);
+	istart = 2;  /* skip over trailing zeroes */
+	if (0 != bitcnt[0])
 	{
-		mpf_add_ui(qinv, qinv, bitcnt[i]);
-		mpf_ui_div(qinv, 1, qinv);
-printf("duude i=%d bitcnt=%d\n", i, bitcnt[i]);
+		istart = 1;
+		mpf_set_ui(qinv, 1);
 	}
-	
+	for (i = istart ; i<n; i++)
+	{
+		if ((n-1 == i) && (1 == (n-istart)%2))
+			mpf_add_ui(qinv, qinv, bitcnt[i] + 1);
+		else
+			mpf_add_ui(qinv, qinv, bitcnt[i]);
+		mpf_ui_div(qinv, 1, qinv);
+		// printf("duude i=%d bitcnt=%d\n", i, bitcnt[i]);
+	}
+
    free (bitcnt);
 }
 
 /* ================================================================ */
 
-int main ()
+int main (int argc, char * argv[])
 {
+	int n, d;
+	double qid;
 	mpf_t qi, x;
+	int prec, nbits;
 
-	int prec = 50;
+	d = atoi(argv[1]);
+
+	prec = 50;
 
 	/* Set the precision (number of binary bits) */
-	int nbits = 3.3*prec;
+	nbits = 3.3*prec;
 	mpf_set_default_prec (nbits);
 
 	mpf_init(qi);
 	mpf_init(x);
 
-	mpf_set_ui (x, 1);
-	mpf_div_ui (x, x, 32);
+//n = 2*171;
+//d = 3*171;
+	for (n=0; n<=d; n++)
+	{
+		double xd = ((double) n) / ((double) d);
+		mpf_set_ui (x, n);
+		mpf_div_ui (x, x, d);
 
-	question_inverse(qi, x, prec);
-
+		question_inverse(qi, x, prec);
+		qid = mpf_get_d(qi);
+		printf("%d	%f	%f\n", n, xd, qid);
+	}
+	
 	return 0;
 }
 
