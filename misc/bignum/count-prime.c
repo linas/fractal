@@ -30,10 +30,10 @@
 
 int main (int argc, char * argv[])
 {
-	long long n;
 	mpf_t qi, x, acc, km1, tpk;
 	int i, prec, nbits, step, prt;
 	int m, mmax;
+	double pm;
 
 	mpf_t *qinv;
 
@@ -80,17 +80,16 @@ int main (int argc, char * argv[])
 
 	mpf_init (km1);
 	mpf_set_ui (km1, 0);
-	mpf_sub_ui (km1, km1, 1);
 
 	mpf_init (tpk);
-	mpf_set_ui (tpk, 1);
+	mpf_set_ui (tpk, 2);
 
 	mpf_init(acc);
 	mpf_set_ui(acc, 0);
 
 	prt = step / 10;
-	n = 0;
 	m = 0;
+	pm = 2.0;
 	while(m < mmax)
 	{
 		for(i=0; i<step; i++)
@@ -100,25 +99,24 @@ int main (int argc, char * argv[])
 			mpf_mul(qi, qi, tpk);
 			mpf_add (acc, acc, qi);
 
-			if (n%prt == 0)
+			if (i%prt == 0)
 			{
-				double xd = ((double) n)/((double) step);
+				double xd = ((double) i)/((double) step);
 				xd += 1.0;
+				xd *= pm;
 				double facc = mpf_get_d(acc);
 				facc /= (double) step;
 				facc /= log(2.0);
-				printf("%Ld	%f	%f\n", n, xd, facc);
+				printf("%d	%f	%f\n", i, xd, facc);
 				fflush(stdout);
-	
-				if (n > 10*prt) prt *= 10;
 			}
-			n++;
 		}
 
 		mpf_add_ui (km1, km1, 1);
 		mpf_mul_ui (tpk, tpk, 2);
 
 		m ++;
+		pm *= 2.0;
 	}
 	
 	return 0;
