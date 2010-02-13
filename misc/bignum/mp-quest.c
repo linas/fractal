@@ -98,6 +98,7 @@ void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
 
 /* ================================================================ */
 
+#ifdef RUN_TEST
 int main (int argc, char * argv[])
 {
 	int n, d;
@@ -131,5 +132,6 @@ int main (int argc, char * argv[])
 	
 	return 0;
 }
+#endif
 
 /* =============================== END OF FILE =========================== */

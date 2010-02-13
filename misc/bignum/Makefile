@@ -8,14 +8,15 @@ CC = cc
 EXES= bernoulli bound bs bsubn cache-fill cont_frac db-merge db-prt \
       dsubn entropy exact gkw-diag hurwitz hurwitz-euler \
 		minima misc-test mp_zeta_test picturez \
-      poly-perf sho stieltjes trunc zero-cross zeta-zeros mp-quest
+      poly-perf sho stieltjes trunc zero-cross zeta-zeros
 
 MPLIB=libzmp.a
 
 all:  $(MPLIB) $(EXES)
 
 MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o \
-	mp-gamma.o mp-gkw.o mp-hyper.o mp-misc.o mp-polylog.o mp-trig.o mp-zeta.o
+	mp-gamma.o mp-gkw.o mp-hyper.o mp-misc.o mp-polylog.o \
+	mp-quest.o mp-trig.o mp-zeta.o
 
 bernoulli:	bernoulli.o $(MPLIB)
 bound:	bound.o
