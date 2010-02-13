@@ -75,7 +75,7 @@ int main (int argc, char * argv[])
 			xd = 2.0 / xd;
 			double facc = mpf_get_d(acc);
 			facc /= (double) step;
-			facc *= log(2.0);
+			facc /= log(2.0);
 			printf("%lu	%f	%f\n", n, xd, facc);
 			fflush(stdout);
 
