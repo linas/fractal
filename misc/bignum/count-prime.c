@@ -58,8 +58,8 @@ int main (int argc, char * argv[])
 
 	mpf_set_ui(acc, 0);
 
-	n = step;
 	twostep = 2*step;
+	n = twostep;
 	prt = step / 10;
 	while(1)
 	{
