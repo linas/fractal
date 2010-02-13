@@ -44,7 +44,7 @@ void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
 	/* Get the number of binary bits from prec = log_2 10 * prec */
 	int nbits = (int) floor (3.321 * prec);
 	nbits -= 3;
-	
+
    int *bitcnt = (int *) malloc ((nbits+1) * sizeof(int));
 	memset (bitcnt, 0, (nbits+1) * sizeof(int));
 
@@ -56,7 +56,7 @@ void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
 	last_idx = 0;
 	n = 0;
 	// printf("duude nbits=%d\n", nbits);
-	while (n < nbits)
+	while (n <= nbits)
 	{
 		if (n%2 == 0)
 		{
@@ -74,10 +74,8 @@ void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
 		}
 		bitcnt[n] = idx - last_idx;
 		last_idx = idx;
-		idx ++;
 		n++;
 	}
-printf("duude last =%d\n", bitcnt[n-1]);
 
 	/* Compute the corresponding continued fraction */
 	mpf_set_ui(qinv, 0);
@@ -88,14 +86,11 @@ printf("duude last =%d\n", bitcnt[n-1]);
 	}
 	for (i = istart ; i<n; i++)
 	{
-		// if ((n-1 == i) && 
-		// 	((1 != bitcnt[i]) || (0 == (n-istart)%2)))
 		if (n-1 == i)
 			mpf_add_ui(qinv, qinv, bitcnt[i] + 1);
 		else
 			mpf_add_ui(qinv, qinv, bitcnt[i]);
 		mpf_ui_div(qinv, 1, qinv);
-		// printf("duude i=%d bitcnt=%d\n", i, bitcnt[i]);
 	}
 
    free (bitcnt);
@@ -121,8 +116,8 @@ int main (int argc, char * argv[])
 	mpf_init(qi);
 	mpf_init(x);
 
-//n = 2*171;
-//d = 3*171;
+	// n = 2*171;
+	// d = 3*171;
 	for (n=0; n<=d; n++)
 	{
 		double xd = ((double) n) / ((double) d);
