@@ -31,22 +31,22 @@
 int main (int argc, char * argv[])
 {
 	unsigned long int n;
-	double qid;
 	mpf_t qi, x, acc;
 	int prec, nbits, step, twostep, prt;
 
 	if (3 > argc)
 	{
-	`	fprintf(stderr, "Usage: %s <decimal-precision> <1/step>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <decimal-precision> <1/step>\n", argv[0]);
 		exit(1);
 	}
 
 	prec = 50;
 	prec = atoi(argv[1]);
-	step = atoi(argv[1]);
+	step = atoi(argv[2]);
 
 	printf("#\n# Prime-counting-conjecture via question mark\n#\n");
-	printf("#\n# Decimal precision = %d\n", prec);
+	printf("#\n# Decimal precision = %d\n#\n", prec);
+	printf("#\n# step size = 1 / %d\n#\n", step);
 
 	/* Set the precision (number of binary bits) */
 	nbits = 3.3*prec;
@@ -67,13 +67,17 @@ int main (int argc, char * argv[])
 		mpf_div_ui (x, x, n);
 
 		question_inverse(qi, x, prec);
-		mpf_add (acc, qi, qi);
+		mpf_add (acc, acc, qi);
 
 		if (n%prt == 0)
 		{
 			double xd = mpf_get_d(x);
+			xd = 2.0 / xd;
 			double facc = mpf_get_d(acc);
-			printf("%ud	%f	%f\n", n, xd, facc);
+			facc /= (double) step;
+			facc *= log(2.0);
+			printf("%lu	%f	%f\n", n, xd, facc);
+			fflush(stdout);
 
 			if (n > 10*prt) prt *= 10;
 		}

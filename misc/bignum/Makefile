@@ -5,7 +5,8 @@
 CC = cc
 
 
-EXES= bernoulli bound bs bsubn cache-fill cont_frac db-merge db-prt \
+EXES= bernoulli bound bs bsubn cache-fill cont_frac \
+		count-prime db-merge db-prt \
       dsubn entropy exact gkw-diag hurwitz hurwitz-euler \
 		minima misc-test mp_zeta_test picturez \
       poly-perf sho stieltjes trunc zero-cross zeta-zeros
@@ -59,6 +60,7 @@ bernoulli.o: mp-complex.h mp-polylog.h mp-misc.h
 bs.o: mp-zeta.h mp-misc.h
 bsubn.o: mp-zeta.h mp-binomial.h
 cache-fill.o: db-cache.h mp-zeta.h mp-misc.h
+count-prime.o: mp-quest.h
 db-merge.o: db-cache.h mp-misc.h
 dsubn.o: mp-zeta.h mp-binomial.h mp-misc.h
 exact.o: mp-complex.h mp-misc.h mp-polylog.h
@@ -98,4 +100,4 @@ dist:
 	$(CC) -c -g -O2 -Wall $<
 
 .o:
-	$(CC) -g -o $* $^ -lgmp -ldb -lm
+	$(CC) -g -o $* $^ $(MPLIB) -lgmp -ldb -lm
