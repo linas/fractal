@@ -32,7 +32,10 @@ int main (int argc, char * argv[])
 {
 	unsigned long int n;
 	mpf_t qi, x, acc;
-	int prec, nbits, step, twostep, prt;
+	int i, prec, nbits, step, twostep, prt;
+	int mmax;
+
+	mpf_t *qinv;
 
 	if (3 > argc)
 	{
@@ -40,9 +43,15 @@ int main (int argc, char * argv[])
 		exit(1);
 	}
 
+	/* prec is decimal-places of precision */
+	/* step is the integral step size */
 	prec = 50;
 	prec = atoi(argv[1]);
 	step = atoi(argv[2]);
+
+	/* mmax is how far we weill go */
+	/* 2^10 = 10^3 approx fo 2^80 = 10^24 */
+	mmax = 80;
 
 	printf("#\n# Prime-counting-conjecture via question mark\n#\n");
 	printf("#\n# Decimal precision = %d\n#\n", prec);
@@ -52,8 +61,24 @@ int main (int argc, char * argv[])
 	nbits = 3.3*prec;
 	mpf_set_default_prec (nbits);
 
+	/* Alloc array that will hold questioin-mark values */
+	qinv = (mpf_t *) malloc (step * sizeof(mpf_t));
+
 	mpf_init(x);
 	mpf_init(qi);
+
+	/* compute 1 / ( ?^{-1}(1/x) ) for 1 =< x < 2 */
+	for(i=0; i<step; i++)
+	{
+		mpf_init(qinv[i]);
+
+		mpf_set_ui (x, step);
+		mpf_div_ui (x, x, step+i);
+		question_inverse(qi, x, prec);
+		mpf_ui_div (qinv[i], 1, qi);
+	}
+
+
 	mpf_init(acc);
 
 	mpf_set_ui(acc, 0);
