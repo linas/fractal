@@ -77,18 +77,20 @@ void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
 		idx ++;
 		n++;
 	}
+printf("duude last =%d\n", bitcnt[n-1]);
 
 	/* Compute the corresponding continued fraction */
 	mpf_set_ui(qinv, 0);
 	istart = 2;  /* skip over trailing zeroes */
 	if (0 != bitcnt[0])
 	{
-		istart = 1;
-		mpf_set_ui(qinv, 1);
+		istart = 0;
 	}
 	for (i = istart ; i<n; i++)
 	{
-		if ((n-1 == i) && (1 == (n-istart)%2))
+		// if ((n-1 == i) && 
+		// 	((1 != bitcnt[i]) || (0 == (n-istart)%2)))
+		if (n-1 == i)
 			mpf_add_ui(qinv, qinv, bitcnt[i] + 1);
 		else
 			mpf_add_ui(qinv, qinv, bitcnt[i]);
