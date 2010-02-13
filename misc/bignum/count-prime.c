@@ -31,9 +31,10 @@
 int main (int argc, char * argv[])
 {
 	mpf_t qi, x, acc, km1, tpk;
-	int i, prec, nbits, step, prt;
+	int i, prec, nbits, step;
 	int m, mmax;
-	double pm;
+	double pm, xd, xscale;
+	int ix, ixlast;
 
 	mpf_t *qinv;
 
@@ -87,28 +88,36 @@ int main (int argc, char * argv[])
 	mpf_init(acc);
 	mpf_set_ui(acc, 0);
 
-	prt = step / 10;
 	m = 0;
 	pm = 2.0;
+	xscale = 1.0;
+	ixlast = 0;
 	while(m < mmax)
 	{
 		for(i=0; i<step; i++)
 		{
+			/* perform the actual integration */
 			mpf_add(qi, qinv[i], km1);
 			mpf_ui_div (qi, 1, qi);
 			mpf_mul(qi, qi, tpk);
 			mpf_add (acc, acc, qi);
 
-			if (i%prt == 0)
+			/* decide when to print */
+			xd = ((double) i)/((double) step);
+			xd += 1.0;
+			xd *= pm;
+			ix = (int) floor(xd / xscale);
+			if (ix != ixlast)
 			{
-				double xd = ((double) i)/((double) step);
-				xd += 1.0;
-				xd *= pm;
+				ixlast = ix;
+
 				double facc = mpf_get_d(acc);
 				facc /= (double) step;
 				facc /= log(2.0);
 				printf("%d	%f	%f\n", i, xd, facc);
 				fflush(stdout);
+
+				if (xd > 10.0*xscale) xscale *= 10.0;
 			}
 		}
 
