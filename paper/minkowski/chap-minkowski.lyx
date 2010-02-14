@@ -330,7 +330,7 @@ The Dyadic Tree
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 created with inkscape see dyadic.svg for the source.
@@ -1428,6 +1428,171 @@ Just as the mediants of the Farey fractions were unimodular, so are the
 \end_layout
 
 \begin_layout Subsection
+Extending to the Real Number Line
+\end_layout
+
+\begin_layout Standard
+The question mark function, as constructed above, is defined only on the
+ unit interval.
+ There are several different ways of extending the function to entire positive
+ real axis.
+ Ideally, this extension should have some sort of 
+\begin_inset Quotes eld
+\end_inset
+
+natrual
+\begin_inset Quotes erd
+\end_inset
+
+ interpretation of a map from one tree to another.
+ The Stern-Brocot tree, shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:The-Stern-Brocot-Tree"
+
+\end_inset
+
+, ranges over the entire positive real axis 
+\begin_inset Formula $(0,\infty)$
+\end_inset
+
+.
+ How should the dyadic tree 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:The-Dyadic-Tree"
+
+\end_inset
+
+ be extended to the same range? One such extension is known as the 
+\begin_inset Quotes eld
+\end_inset
+
+Birthday Tree
+\begin_inset Quotes erd
+\end_inset
+
+, and is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-Birthday-Tree"
+
+\end_inset
+
+.
+ Note that the birthday tree has the dyadic tree as the left subtree, and
+ that the dyadic tree is repeated, shifted by one, under each postive integer.
+ The postive integers appear along the right side of the tree.
+ The birthday tree occurs as a very natural construction of the real numbers,
+ given by J.
+ H Conway, as an extension of the construction of the Peano arithmetic
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Con76"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The Birthday Tree
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-Birthday-Tree"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename birthday.eps
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aligning the birthday tree with the Stern-Brocot tree results in the extension
+ 
+\begin_inset Formula \[
+?\left(x\right)=\left\lfloor x\right\rfloor +?\left(x-\left\lfloor x\right\rfloor \right)\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left\lfloor x\right\rfloor $
+\end_inset
+
+ is the largest integer less than or equal to 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The left-heand side is defined for the entire positive number line, making
+ use only of the definition of 
+\begin_inset Formula $?\left(x\right)$
+\end_inset
+
+ on the unit interval.
+ For comparison, the map between the dyadic tree and the birthday tree is
+ given by 
+\begin_inset Formula \[
+b\left(x\right)=\begin{cases}
+2x & \mbox{ for }0\leq x\le\frac{1}{2}\\
+4x-1 & \mbox{ for }\frac{1}{2}\le x\le\frac{3}{4}\\
+\cdots & \cdots\\
+2^{n+1}x+n+2-2^{n+1} & \mbox{ for }\frac{2^{n}-1}{2^{n}}\le x\le\frac{2^{n+1}-1}{2^{n+1}}\end{cases}\]
+
+\end_inset
+
+and likewise, the map from the Farey tree to the Stern-Brocot tree is given
+ by 
+\begin_inset Formula \[
+c\left(x\right)=\begin{cases}
+\frac{x}{1-x} & \mbox{ for }0\le x\le\frac{1}{2}\\
+ & \mbox{ for }\frac{1}{2}\le x\le\frac{1}{3}\\
+\cdots & \cdots\\
+ & \mbox{ for }\frac{1}{n}\le x\le\frac{1}{n+1}\end{cases}\]
+
+\end_inset
+
+ Note that 
+\begin_inset Formula $c=?^{-1}\circ b\circ?$
+\end_inset
+
+ although the tools to prove this won't be available until the next section,
+ when self-similarity is discussed.
+ 
+\end_layout
+
+\begin_layout Subsection
 Pellian Equations
 \end_layout
 
@@ -1662,13 +1827,13 @@ g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]\]
 
 \end_inset
 
- Iterating under the question mark gives 
+Iterating under the question mark gives 
 \begin_inset Formula \[
 \left(?\circ g^{n}\right)(x)=?\left(\frac{x}{nx+1}\right)=\frac{?(x)}{2^{n}}\]
 
 \end_inset
 
- The generator 
+The generator 
 \begin_inset Formula $g$
 \end_inset
 
@@ -1760,7 +1925,7 @@ reflection
 
 \end_inset
 
- shows that 
+shows that 
 \begin_inset Formula $rg^{n}$
 \end_inset
 
@@ -1791,7 +1956,7 @@ Applying the above process, it is relatively straightforward to see that,
 
 \end_inset
 
- To see the other leg of the commutative diagram of the homomorphism, observe
+To see the other leg of the commutative diagram of the homomorphism, observe
  that 
 \begin_inset Formula $g^{n}(x)$
 \end_inset
@@ -1802,7 +1967,7 @@ g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,\frac{1}{x}]\]
 
 \end_inset
 
- In the same vein, one has 
+In the same vein, one has 
 \begin_inset Formula $(rg^{n})(x)=[1,n-1,x]$
 \end_inset
 
@@ -1857,7 +2022,7 @@ c & d\end{array}\right]:x\to\frac{ax+b}{cx+d}\label{eq:Mobius xform}\end{equatio
 
 \end_inset
 
- The utility of the fractional linear transform is that it commutes with
+The utility of the fractional linear transform is that it commutes with
  matrix multiplication; one may multiply matrices on the left-hand side
  to get the correct expression on the right-hand side.
  In terms of Möbius transformations, one then has that 
@@ -1870,7 +2035,7 @@ g=\left[\begin{array}{cc}
 
 \end_inset
 
- and so 
+and so 
 \begin_inset Formula $g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}$
 \end_inset
 
@@ -1931,13 +2096,13 @@ n-1\, & 1\end{array}\right]\left[\begin{array}{cc}
 
 \end_inset
 
- The repeated application of the insertion operator leads to 
+The repeated application of the insertion operator leads to 
 \begin_inset Formula \[
 (g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
 
 \end_inset
 
- which provides a simple proof of equation 
+which provides a simple proof of equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:gamma acting on cont frac"
@@ -1954,19 +2119,19 @@ The append operator follows by combining
 
 \end_inset
 
- and 
+and 
 \begin_inset Formula \[
 [a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]\]
 
 \end_inset
 
- The appending operator is 
+The appending operator is 
 \begin_inset Formula \[
 \left(g^{-1}rg^{k+1}\right)(x)=\frac{kx+1}{x}\]
 
 \end_inset
 
- which, for 
+which, for 
 \begin_inset Formula $k\geq1$
 \end_inset
 
@@ -1987,7 +2152,7 @@ The append operator follows by combining
 
 \end_inset
 
- and so arriving at the same result as before.
+and so arriving at the same result as before.
 \end_layout
 
 \begin_layout Subsection
@@ -3536,6 +3701,12 @@ Figure above shows a tree with p branches, made from a binary tree by identifyin
 g nodes.
 \end_layout
 
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
 \end_inset
 
 
@@ -3620,6 +3791,12 @@ semi-commutative monoids
 \end_inset
 
 , and correspond to systms of communicating finite state machines.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
 \end_layout
 
 \end_inset
@@ -4159,6 +4336,12 @@ The Takagi Curve
 
 \begin_layout Plain Layout
 The Takagi or Blancmange Curve.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
 \end_layout
 
 \end_inset
@@ -6949,7 +7132,9 @@ created with misc/hyperbolic/tree.c and mod-tree.c
 \end_layout
 
 \begin_layout Plain Layout
-------
+
+\lyxline
+
 \end_layout
 
 \end_inset
@@ -7350,7 +7535,7 @@ reference "cap:The-Embedded-Tree"
 
 \end_inset
 
- A remarkable feature of this mapping is that it roughly impersonates the
+A remarkable feature of this mapping is that it roughly impersonates the
  inverse of the question mark function.
  An even closer cognate is given by 
 \begin_inset Formula \[
@@ -7358,7 +7543,7 @@ reference "cap:The-Embedded-Tree"
 
 \end_inset
 
- which can be obtained as the projection of the real line to a circle.
+which can be obtained as the projection of the real line to a circle.
  Both of these are shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7433,7 +7618,9 @@ created with misc/hyperbolic/perimeter.c and perimeter.gplot
 \end_layout
 
 \begin_layout Plain Layout
-------
+
+\lyxline
+
 \end_layout
 
 \end_inset
@@ -7780,7 +7967,9 @@ Drawn with misc/hyperbolic/mod-tree.c as mod-tree 7 > m.eps; ggv m.eps &
 \end_layout
 
 \begin_layout Plain Layout
-------
+
+\lyxline
+
 \end_layout
 
 \end_inset
@@ -7830,7 +8019,9 @@ A homotpically equivalent representation of fundamental domains, mapped
 \end_layout
 
 \begin_layout Plain Layout
-------
+
+\lyxline
+
 \end_layout
 
 \end_inset
@@ -8005,7 +8196,9 @@ a
 \end_layout
 
 \begin_layout Plain Layout
-------
+
+\lyxline
+
 \end_layout
 
 \end_inset
