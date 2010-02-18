@@ -1731,6 +1731,23 @@ key "Flajolet1995,Briggs2003,Flajolet1997"
 \end_inset
 
 .
+ The ratio of successive eitgenvalues 
+\begin_inset Formula $\lambda_{n}/\lambda_{n+1}$
+\end_inset
+
+ tends to the square of golden mean 
+\begin_inset Formula $(3+\sqrt{5})/2=2.61083398875\cdots$
+\end_inset
+
+, as given by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Flajolet1995"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3719,7 +3736,14 @@ The Frobenius-Perron operator of this function provides a second model of
 \begin_inset Formula $(?'\circ?^{-1})(x)$
 \end_inset
 
-, which we examine in detail in a related paper of this series.
+, which we examine in detail in a related paper of this series
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+.
  Thus, although the point dynamics of this sawtooth map are completely isomorphi
 c to the point dynamics of the Gauss Map, the spectra of the associated
  transfer operators are 
@@ -3730,7 +3754,7 @@ not
  This is perhaps the most surprising result of this paper.
  The transfer operator is 
 \begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{C}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-x}{2^{n}}\right)\label{eq:}\end{equation}
+\left[\mathcal{L}_{c}f\right](x)=\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-x}{2^{n}}\right)\label{eq:}\end{equation}
 
 \end_inset
 
@@ -3793,15 +3817,20 @@ The Polynomial Basis Eigenfunctions
 \end_layout
 
 \begin_layout Standard
-As before, we change variables to 
+The sawtooth is singular at 
+\begin_inset Formula $x=0,$
+\end_inset
+
+and so, as before, it is better to make a change of variables to 
 \begin_inset Formula $y=1-x$
 \end_inset
 
-, expand both sides in terms of 
+ before performing a polynomial expansion in terms of 
 \begin_inset Formula $y$
 \end_inset
 
-, and match terms to find the matrix elements 
+.
+ Matching monomial terms gives the matrix elements 
 \begin_inset Formula \begin{equation}
 C_{mk}=\left(\begin{array}{c}
 k\\
@@ -3809,13 +3838,14 @@ m\end{array}\right)\frac{1}{2^{k+1}-1}\label{eq:}\end{equation}
 
 \end_inset
 
- which is upper triangular (we take the binomial coefficients to be vanishing
- when 
+The resulting matrix is seen to be upper-triangular and thus solvable; the
+ binomial coefficients are taken to be vanishing when 
 \begin_inset Formula $k<m$
 \end_inset
 
-).
- The eigenvalues lie along the diagonal.
+.
+ As is the case for upper-triangular matricies, the eigenvalues lie along
+ the diagonal.
  The first few are 
 \begin_inset Formula $\lambda_{0}=1$
 \end_inset
@@ -3861,11 +3891,11 @@ e_{3}=1-\frac{66}{13}y+\frac{84}{13}y^{2}-\frac{32}{13}y^{3}=\frac{-1}{13}\left(
 
 \begin_inset Formula \begin{eqnarray}
 e_{4} & = & 1-\frac{36450}{5597}y+\frac{67620}{5597}y^{2}-\frac{50400}{5597}y^{3}+\frac{13440}{5597}y^{4}\nonumber \\
- & = & \frac{-1}{29\cdot193}\left(193+1350x+2940x^{2}+3360x^{3}-13440x^{4}\right)\label{eq:}\end{eqnarray}
+ & = & \frac{-1}{29\cdot193}\left(193+1350x+2940x^{2}+3360x^{3}-13440x^{4}\right)\label{eq: 2nd saw eigvecs}\end{eqnarray}
 
 \end_inset
 
-As we can see, the complexity of individual eigenvectors spirals out of
+As can be seen, the complexity of individual eigenvectors spirals out of
  control; there's no obvious simple closed form expression for higher eigenvecto
 rs.
  Indeed, it seems that the simplest algorithm is to directly invert the
@@ -3903,7 +3933,15 @@ Second Sawtooth Polynomials
 \end_layout
 
 \begin_layout Plain Layout
-Eigenvectors of the second sawtooth.
+This figure shows the eigenvectors of the second sawtooth, as given by equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: 2nd saw eigvecs"
+
+\end_inset
+
+
 \lyxline
 
 \end_layout
@@ -3942,7 +3980,7 @@ Under normal circumstances, whenever one has a pair of maps
 \begin_inset Formula $\mathcal{L}_{\alpha}=S_{\phi}\mathcal{L}_{\beta}S_{\phi}^{-1}$
 \end_inset
 
- where 
+ with 
 \begin_inset Formula $S_{\phi}^{-1}=S_{\phi^{-1}}$
 \end_inset
 
@@ -3958,11 +3996,11 @@ Under normal circumstances, whenever one has a pair of maps
  .
  Since the continued-fraction shift function is conjugate to the sawtooth,
  one might hope that GKW would be conjugate to 
-\begin_inset Formula $\mathcal{L}_{C}$
+\begin_inset Formula $\mathcal{L}_{c}$
 \end_inset
 
 , that is, 
-\begin_inset Formula $\mathcal{L}_{h}=S_{?}\mathcal{L}_{C}S_{?}^{-1}$
+\begin_inset Formula $\mathcal{L}_{h}=S_{?}\mathcal{L}_{c}S_{?}^{-1}$
 \end_inset
 
 .
@@ -3984,7 +4022,7 @@ s; that is, the eigenvalues of
 
 .
  In the current case, we see trouble in that the eigenvalues of 
-\begin_inset Formula $\mathcal{L}_{C}$
+\begin_inset Formula $\mathcal{L}_{c}$
 \end_inset
 
  are not those of GKW.
@@ -4000,7 +4038,7 @@ key "Flajolet1995"
 
 \end_inset
 
-.
+).
  
 \end_layout
 
