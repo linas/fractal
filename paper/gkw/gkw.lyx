@@ -3969,7 +3969,7 @@ Under normal circumstances, whenever one has a pair of maps
 \end_inset
 
  such that 
-\begin_inset Formula $\alpha(x)=(\phi\circ\beta\circ\phi^{-1})(x)$
+\begin_inset Formula $\beta(x)=(\phi\circ\alpha\circ\phi^{-1})(x)$
 \end_inset
 
 , then there exists a similarity transform 
@@ -3977,7 +3977,7 @@ Under normal circumstances, whenever one has a pair of maps
 \end_inset
 
  such that the Frobenius-Perron operators are also conjugate; that is, 
-\begin_inset Formula $\mathcal{L}_{\alpha}=S_{\phi}\mathcal{L}_{\beta}S_{\phi}^{-1}$
+\begin_inset Formula $\mathcal{L}_{\beta}=S_{\phi}\mathcal{L}_{\alpha}S_{\phi}^{-1}$
 \end_inset
 
  with 
@@ -3985,22 +3985,34 @@ Under normal circumstances, whenever one has a pair of maps
 \end_inset
 
 .
- Formally, one finds that 
-\begin_inset Formula $S_{\phi}=1/(\phi'\circ\phi^{-1})$
+ The transform 
+\begin_inset Formula $S_{\phi}$
 \end_inset
 
- where the prime denotes differentiation: 
+ is given by 
+\begin_inset Formula $S_{\phi}f=\left(f\circ\phi^{-1}\right)/(\phi'\circ\phi^{-1})$
+\end_inset
+
+, where the prime denotes differentiation: 
 \begin_inset Formula $\phi'(x)=d\phi(x)/dx$
 \end_inset
 
- .
+.
+ A detailed derrivation of this is given in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Similarity-Transforms"
+
+\end_inset
+
+.
  Since the continued-fraction shift function is conjugate to the sawtooth,
  one might hope that GKW would be conjugate to 
 \begin_inset Formula $\mathcal{L}_{c}$
 \end_inset
 
 , that is, 
-\begin_inset Formula $\mathcal{L}_{h}=S_{?}\mathcal{L}_{c}S_{?}^{-1}$
+\begin_inset Formula $\mathcal{L}_{c}=S_{?}\mathcal{L}_{h}S_{?}^{-1}$
 \end_inset
 
 .
@@ -4011,8 +4023,8 @@ Under normal circumstances, whenever one has a pair of maps
 \begin_inset Formula $S_{\phi}$
 \end_inset
 
-, working as a traditional, ordinary operator, normally preserves the eigenvalue
-s; that is, the eigenvalues of 
+, working as an ordinary, bounded operator, normally preserves the eigenvalues
+ of a nuclear operator; that is, the eigenvalues of 
 \begin_inset Formula $\mathcal{L}_{\alpha}$
 \end_inset
 
@@ -4026,11 +4038,15 @@ s; that is, the eigenvalues of
 \end_inset
 
  are not those of GKW.
- They are not even 'close', in that the ratio of tends to 
-\begin_inset Formula $\lambda_{k}/\lambda_{k+1}=2$
+ They are not even 'close', in that for large 
+\begin_inset Formula $k$
 \end_inset
 
- whereas for the GKW the ratio is 2.61803...
+, the ratio of the eigenvalues 
+\begin_inset Formula $\lambda_{k}/\lambda_{k+1}$
+\end_inset
+
+ tends to 2, whereas for the GKW the ratio is 2.61803...
  (the square of golden mean, see 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -4845,6 +4861,193 @@ is upper-triangular, with all eigenvalues equal to 1, and all eigenvectors
 \end_inset
 
  not an integer).
+ 
+\end_layout
+
+\begin_layout Section
+Similarity Transforms
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Similarity-Transforms"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This appendix demonstrates the behaviour of the transfer operator under
+ the action of a similarity transformation.
+ The demonstration proceeds using the simplest, most basic manipulations
+ possible, so as to be easy to verify.
+\end_layout
+
+\begin_layout Standard
+Given a differentiable function 
+\begin_inset Formula $\alpha:X\to X$
+\end_inset
+
+, the transfer operator (Perron-Frobenius-Ruelle operator) 
+\begin_inset Formula $\mathcal{L}_{\alpha}:\mathcal{F}\left(X\right)\to\mathcal{F}\left(X\right)$
+\end_inset
+
+ is a bounded linear operator acting on a space of functions 
+\begin_inset Formula $\mathcal{F}\left(X\right)$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ It may be defined as 
+\begin_inset Formula \[
+\left[\mathcal{L}_{\alpha}f\right]\left(x\right)=\sum_{y\in\alpha^{-1}\left(x\right)}\frac{1}{\alpha^{\prime}\left(y\right)}f\left(y\right)\]
+
+\end_inset
+
+where 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ and 
+\begin_inset Formula $f\in\mathcal{F}\left(X\right)$
+\end_inset
+
+, while 
+\begin_inset Formula $\alpha^{\prime}$
+\end_inset
+
+ denotes the derivative of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ The derivation of the similarity transform procees by substituting the
+ similarity relation 
+\begin_inset Formula $\alpha=\phi^{-1}\circ\beta\circ\phi$
+\end_inset
+
+ with 
+\begin_inset Formula $\phi:X\to V$
+\end_inset
+
+ being one-to-one and onto (and so being uniquely invertible), and being
+ differentiable, so that 
+\begin_inset Formula $\phi^{\prime}$
+\end_inset
+
+can be defined.
+ Thus, 
+\begin_inset Formula $\beta:V\to V$
+\end_inset
+
+ is another function conjudate to 
+\begin_inset Formula $\alpha,$
+\end_inset
+
+ and differentiable as well.
+ One then has:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{align*}
+\left[\mathcal{L}_{\alpha}f\right]\left(x\right)= & \sum_{y\in\left(\phi^{-1}\circ\beta\circ\phi\right)^{-1}\left(x\right)}\frac{1}{\left(\phi^{-1}\circ\beta\circ\phi\right)^{\prime}\left(y\right)}f\left(y\right)\\
+= & \sum_{\phi\left(y\right)\in\left(\beta\circ\phi\right)^{-1}\left(x\right)}\frac{1}{\left(\phi^{-1}\circ\beta\circ\phi\right)^{\prime}\left(y\right)}f\left(y\right)\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $w=\phi(y)$
+\end_inset
+
+ and 
+\begin_inset Formula $v=\phi(x)$
+\end_inset
+
+ so that 
+\begin_inset Formula \begin{align*}
+\left[\mathcal{L}_{\alpha}f\right]\left(\phi^{-1}\left(v\right)\right)= & \sum_{w\in\beta^{-1}\left(v\right)}\frac{1}{\left(\phi^{-1}\circ\beta\circ\phi\right)^{\prime}\left(\phi^{-1}\left(w\right)\right)}f\left(\phi^{-1}\left(w\right)\right)\\
+= & \sum_{w\in\beta^{-1}\left(v\right)}\frac{f\left(\phi^{-1}\left(w\right)\right)}{\left(\phi^{-1\prime}\circ\beta\right)\left(w\right)\cdot\beta^{\prime}\left(w\right)\cdot\left(\phi^{\prime}\circ\phi^{-1}\right)\left(w\right)}\end{align*}
+
+\end_inset
+
+Observe that, for all values of 
+\begin_inset Formula $w\in\beta^{-1}\left(v\right)$
+\end_inset
+
+, one has that 
+\begin_inset Formula $\left(\phi^{-1\prime}\circ\beta\right)\left(w\right)=\phi^{-1\prime}\left(v\right)$
+\end_inset
+
+ and so this term can be brought out of the summation.
+ Next, one has that 
+\begin_inset Formula $1=\left(\phi\circ\phi^{-1}\right)^{\prime}=\left(\phi^{\prime}\circ\phi^{-1}\right)\cdot\phi^{-1\prime}$
+\end_inset
+
+ and so one has 
+\begin_inset Formula \[
+\frac{1}{\left(\phi^{\prime}\circ\phi^{-1}\right)\left(v\right)}\left[\mathcal{L}_{\alpha}f\right]\left(\phi^{-1}\left(v\right)\right)=\sum_{w\in\beta^{-1}\left(v\right)}\frac{1}{\beta^{\prime}\left(w\right)}\left(\frac{\left(f\circ\phi^{-1}\right)\left(w\right)}{\left(\phi^{\prime}\circ\phi^{-1}\right)\left(w\right)}\right)\]
+
+\end_inset
+
+Define an operator 
+\begin_inset Formula $S_{\phi}:\mathcal{F}\left(X\right)\to\mathcal{F}\left(V\right)$
+\end_inset
+
+ that acts on 
+\begin_inset Formula $f\in\mathcal{F}\left(X\right)$
+\end_inset
+
+ as 
+\begin_inset Formula \[
+\left[S_{\phi}f\right]\left(v\right)=\frac{\left(f\circ\phi^{-1}\right)\left(v\right)}{\left(\phi^{\prime}\circ\phi^{-1}\right)\left(v\right)}\]
+
+\end_inset
+
+The the previous equation can be written as 
+\begin_inset Formula \[
+\left[S_{\phi}\mathcal{L}_{\alpha}f\right]\left(v\right)=\left[\mathcal{L}_{\beta}S_{\phi}f\right]\left(v\right)\]
+
+\end_inset
+
+Since this holds for all 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+, one must have 
+\begin_inset Formula \[
+\mathcal{L}_{\beta}=S_{\phi}\mathcal{L}_{\alpha}S_{\phi}^{-1}\]
+
+\end_inset
+
+where clearly, 
+\begin_inset Formula $S_{\phi}^{-1}=S_{\phi^{-1}}$
+\end_inset
+
+.
+ Thus, the two transfer operators are conjugate to one-another when the
+ functions generating them are similar.
+ The primary ingredient for the above derivation was that the similarity
+ transform 
+\begin_inset Formula $\phi$
+\end_inset
+
+ needed to be differentiable, in order to make the manipulations legitimate.
+\end_layout
+
+\begin_layout Standard
+In fact, the conjugacy transformation leaves the spectrum of the operators
+ unchanges.
+ To see this, one must switch to slightly more abstract language: first,
+ one must establish that the transfer operator is bounded (as, indeed, it
+ is) and that it is expressible as a nuclear operator, so that it can be
+ written as a countable sum of (bounded, summable) eigenvalues and basis
+ vectors.
  
 \end_layout
 
