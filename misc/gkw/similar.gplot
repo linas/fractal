@@ -1,0 +1,22 @@
+
+set term png small
+set out 'similar.png'
+
+# set term svg
+# set out 'polylog.svg'
+
+# set data style linespoints
+set data style lines
+set key right
+
+# set xrange [150:]
+
+set ylabel "5" 0,0
+set xlabel "q" 1,0
+
+set title "Peta"
+
+plot "similar.dat" using 2:3 title "f", \
+     "similar.dat" using 2:4 title "g"
+
+
