@@ -21,7 +21,7 @@ int main()
 	printf("x_0 = %f +i %f\n", creal(x0), cimag(x0));
 
 	t = (1.0-x0) / (1.0+x0);
-	printf("1+x/1-x = %f +i %f\n", creal(t), cimag(t));
+	printf("1-x/1+x = %f +i %f\n", creal(t), cimag(t));
 
 	a = h * x0 + clog(t);
 	printf("a = %f +i %f\n", creal(a), cimag(a));
