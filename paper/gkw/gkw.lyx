@@ -4919,9 +4919,9 @@ Given a differentiable function
 \end_inset
 
 .
- It may be defined as 
+ One possible, simple definition for this operator is 
 \begin_inset Formula \[
-\left[\mathcal{L}_{\alpha}f\right]\left(x\right)=\sum_{y\in\alpha^{-1}\left(x\right)}\frac{1}{\alpha^{\prime}\left(y\right)}f\left(y\right)\]
+\left[\mathcal{L}_{\alpha}f\right]\left(x\right)=\sum_{y\in\alpha^{-1}\left(x\right)}\frac{1}{\left|\alpha^{\prime}\left(y\right)\right|}f\left(y\right)\]
 
 \end_inset
 
@@ -4942,12 +4942,12 @@ where
 \end_inset
 
 .
- The derivation of the similarity transform procees by substituting the
+ The derivation of the similarity transform proceeds by substituting the
  similarity relation 
 \begin_inset Formula $\alpha=\phi^{-1}\circ\beta\circ\phi$
 \end_inset
 
- with 
+, with 
 \begin_inset Formula $\phi:X\to V$
 \end_inset
 
@@ -4956,23 +4956,23 @@ where
 \begin_inset Formula $\phi^{\prime}$
 \end_inset
 
-can be defined.
+ can be defined.
  Thus, 
 \begin_inset Formula $\beta:V\to V$
 \end_inset
 
- is another function conjudate to 
+ is a function conjugate to 
 \begin_inset Formula $\alpha,$
 \end_inset
 
- and differentiable as well.
- One then has:
+ and is differentiable as well.
+ Substituting, one then has:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula \begin{align*}
-\left[\mathcal{L}_{\alpha}f\right]\left(x\right)= & \sum_{y\in\left(\phi^{-1}\circ\beta\circ\phi\right)^{-1}\left(x\right)}\frac{1}{\left(\phi^{-1}\circ\beta\circ\phi\right)^{\prime}\left(y\right)}f\left(y\right)\\
-= & \sum_{\phi\left(y\right)\in\left(\beta\circ\phi\right)^{-1}\left(x\right)}\frac{1}{\left(\phi^{-1}\circ\beta\circ\phi\right)^{\prime}\left(y\right)}f\left(y\right)\end{align*}
+\left[\mathcal{L}_{\alpha}f\right]\left(x\right)= & \sum_{y\in\left(\phi^{-1}\circ\beta\circ\phi\right)^{-1}\left(x\right)}\frac{1}{\left|\left(\phi^{-1}\circ\beta\circ\phi\right)^{\prime}\left(y\right)\right|}f\left(y\right)\\
+= & \sum_{\phi\left(y\right)\in\left(\beta\circ\phi\right)^{-1}\left(x\right)}\frac{1}{\left|\left(\phi^{-1}\circ\beta\circ\phi\right)^{\prime}\left(y\right)\right|}f\left(y\right)\end{align*}
 
 \end_inset
 
@@ -4986,8 +4986,8 @@ Let
 
  so that 
 \begin_inset Formula \begin{align*}
-\left[\mathcal{L}_{\alpha}f\right]\left(\phi^{-1}\left(v\right)\right)= & \sum_{w\in\beta^{-1}\left(v\right)}\frac{1}{\left(\phi^{-1}\circ\beta\circ\phi\right)^{\prime}\left(\phi^{-1}\left(w\right)\right)}f\left(\phi^{-1}\left(w\right)\right)\\
-= & \sum_{w\in\beta^{-1}\left(v\right)}\frac{f\left(\phi^{-1}\left(w\right)\right)}{\left(\phi^{-1\prime}\circ\beta\right)\left(w\right)\cdot\beta^{\prime}\left(w\right)\cdot\left(\phi^{\prime}\circ\phi^{-1}\right)\left(w\right)}\end{align*}
+\left[\mathcal{L}_{\alpha}f\right]\left(\phi^{-1}\left(v\right)\right)= & \sum_{w\in\beta^{-1}\left(v\right)}\frac{1}{\left|\left(\phi^{-1}\circ\beta\circ\phi\right)^{\prime}\left(\phi^{-1}\left(w\right)\right)\right|}f\left(\phi^{-1}\left(w\right)\right)\\
+= & \sum_{w\in\beta^{-1}\left(v\right)}\frac{f\left(\phi^{-1}\left(w\right)\right)}{\left|\left(\phi^{-1\prime}\circ\beta\right)\left(w\right)\cdot\beta^{\prime}\left(w\right)\cdot\left(\phi^{\prime}\circ\phi^{-1}\right)\left(w\right)\right|}\end{align*}
 
 \end_inset
 
@@ -5006,7 +5006,7 @@ Observe that, for all values of
 
  and so one has 
 \begin_inset Formula \[
-\frac{1}{\left(\phi^{\prime}\circ\phi^{-1}\right)\left(v\right)}\left[\mathcal{L}_{\alpha}f\right]\left(\phi^{-1}\left(v\right)\right)=\sum_{w\in\beta^{-1}\left(v\right)}\frac{1}{\beta^{\prime}\left(w\right)}\left(\frac{\left(f\circ\phi^{-1}\right)\left(w\right)}{\left(\phi^{\prime}\circ\phi^{-1}\right)\left(w\right)}\right)\]
+\frac{1}{\left|\left(\phi^{\prime}\circ\phi^{-1}\right)\left(v\right)\right|}\left[\mathcal{L}_{\alpha}f\right]\left(\phi^{-1}\left(v\right)\right)=\sum_{w\in\beta^{-1}\left(v\right)}\frac{1}{\left|\beta^{\prime}\left(w\right)\right|}\left(\frac{\left(f\circ\phi^{-1}\right)\left(w\right)}{\left|\left(\phi^{\prime}\circ\phi^{-1}\right)\left(w\right)\right|}\right)\]
 
 \end_inset
 
@@ -5020,11 +5020,11 @@ Define an operator
 
  as 
 \begin_inset Formula \[
-\left[S_{\phi}f\right]\left(v\right)=\frac{\left(f\circ\phi^{-1}\right)\left(v\right)}{\left(\phi^{\prime}\circ\phi^{-1}\right)\left(v\right)}\]
+\left[S_{\phi}f\right]\left(v\right)=\frac{\left(f\circ\phi^{-1}\right)\left(v\right)}{\left|\left(\phi^{\prime}\circ\phi^{-1}\right)\left(v\right)\right|}\]
 
 \end_inset
 
-The the previous equation can be written as 
+Then the previous equation can be written as 
 \begin_inset Formula \[
 \left[S_{\phi}\mathcal{L}_{\alpha}f\right]\left(v\right)=\left[\mathcal{L}_{\beta}S_{\phi}f\right]\left(v\right)\]
 
