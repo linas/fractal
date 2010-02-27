@@ -43,11 +43,14 @@ void eig(mpq_t result, int k, int n)
 		mpq_set_z(tmp, bin);
 		mpq_mul(term, term, tmp);
 	
-		mpq_add(acc, term, term);
+		mpq_add(acc, acc, term);
 	}
+#if 0
+	mpq_canonicalize(acc);
 	printf("accm(%d %d) = ", k,n);
 	mpq_out_str(stdout, 10, acc);
 	printf("\n");
+#endif
 
 	tn = 1<<(n+1);
 	tk = 1<<(k+1);
