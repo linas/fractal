@@ -8,13 +8,14 @@
 
 #include <gmp.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void eig(mpq_t result, int k, int n)
 {
 	int m;
 	int tk, tn, sk, sn;
 	int num, deno;
-	mpq_t term, tmp;
+	mpq_t acc, term, tmp;
 	mpz_t bin;
 
 	if (k == n)
@@ -25,9 +26,10 @@ void eig(mpq_t result, int k, int n)
 
 	mpq_init(term);
 	mpq_init(tmp);
+	mpq_init(acc);
 	mpz_init(bin);
 
-	mpq_set_ui(result,0,1);
+	mpq_set_ui(acc,0,1);
 	for (m=k+1; m<=n; m++)
 	{
 		int tm;
@@ -41,8 +43,11 @@ void eig(mpq_t result, int k, int n)
 		mpq_set_z(tmp, bin);
 		mpq_mul(term, term, tmp);
 	
-		mpq_add(result, term, term);
+		mpq_add(acc, term, term);
 	}
+	printf("accm(%d %d) = ", k,n);
+	mpq_out_str(stdout, 10, acc);
+	printf("\n");
 
 	tn = 1<<(n+1);
 	tk = 1<<(k+1);
@@ -53,14 +58,24 @@ void eig(mpq_t result, int k, int n)
 
 	num = 2*sn*(tn-1)*(tk-1);
 	deno = tk*(sk*(tk-1) - sn*(tn-1));
+	if (deno < 0) { deno = -deno; num=-num; }
 	// printf("duude k=%d num=%d den=%d\n", k, num, deno);
 	mpq_set_si(tmp, num, deno);
-	mpq_mul(result, result, tmp);
+	mpq_mul(acc, acc, tmp);
 
-	mpq_canonicalize(result);
-	
+	mpq_canonicalize(acc);
+
+#if 0
+	printf("eig(%d %d) = ", k,n);
+	mpq_out_str(stdout, 10, acc);
+	printf("\n");
+#endif
+
+	mpq_set(result, acc);
+
 	mpq_clear(term);
 	mpq_clear(tmp);
+	mpq_clear(acc);
 }
 
 int
@@ -71,10 +86,18 @@ main(int argc, char * argv[])
 	mpq_init(e);
 	n = 3;
 
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s <n>\n", argv[0]);
+		exit(1);
+	}
+
+	n = atoi(argv[1]);
+
 	for (k=0; k<=n; k++)
 	{
 		eig(e,k,n);
-		printf("duude %d %d = ", k,n);
+		printf("eigenvec(%d %d) = ", k,n);
 		mpq_out_str(stdout, 10, e);
 		printf("\n");
 	}
