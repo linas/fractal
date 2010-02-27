@@ -77,6 +77,8 @@ int main (int argc, char * argv[])
 		mpf_div_ui (x, x, step+i);
 		question_inverse(qi, x, prec);
 		mpf_ui_div (qinv[i], 1, qi);
+
+		if (i%1000000 == 0) { printf("# done %d\n", i); fflush (stdout); }
 	}
 
 	mpf_init (km1);
@@ -114,7 +116,7 @@ int main (int argc, char * argv[])
 				double facc = mpf_get_d(acc);
 				facc /= (double) step;
 				facc /= log(2.0);
-				printf("%d	%f	%f\n", i, xd, facc);
+				printf("%d	%d	%f	%f\n", m+1, i, xd, facc);
 				fflush(stdout);
 
 				if (xd > 10.0*xscale) xscale *= 10.0;
