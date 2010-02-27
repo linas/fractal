@@ -12,7 +12,8 @@
 void eig(mpq_t result, int k, int n)
 {
 	int m;
-	int tk, tn, sk, sn, 
+	int tk, tn, sk, sn;
+	int num, deno;
 	mpq_t term, tmp;
 	mpz_t bin;
 
@@ -50,8 +51,11 @@ void eig(mpq_t result, int k, int n)
 	sk = 1;
 	if (k%2 == 1) sk = -1;
 
-	mpq_set_ui(tmp, 2*sn*(tn-1)*(tk-1), tk*(sk*(tk-1) - sn*(tn-1)));
-	mpq_mul(resulkt, result, tmp);
+	num = 2*sn*(tn-1)*(tk-1);
+	deno = tk*(sk*(tk-1) - sn*(tn-1));
+	// printf("duude k=%d num=%d den=%d\n", k, num, deno);
+	mpq_set_si(tmp, num, deno);
+	mpq_mul(result, result, tmp);
 
 	mpq_canonicalize(result);
 	
