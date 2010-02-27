@@ -3948,26 +3948,17 @@ The Polynomial Basis Eigenfunctions
 \end_layout
 
 \begin_layout Standard
-The sawtooth is singular at 
-\begin_inset Formula $x=0$
+The polynomial eigenfunctions of 
+\begin_inset Formula $\mathcal{L}_{c}$
 \end_inset
 
-, and so, as before, it is better to make a change of variables to 
-\begin_inset Formula $y=1-x$
-\end_inset
+ may be found in the same way as before.
+ Write the Taylor's expansion as 
+\end_layout
 
- before performing a polynomial expansion in terms of 
-\begin_inset Formula $y$
-\end_inset
-
-.
- That is, write out the polynomial 
-\begin_inset Formula $f(x)$
-\end_inset
-
- as 
+\begin_layout Standard
 \begin_inset Formula \[
-f\left(x\right)=\sum_{k=0}^{\infty}\frac{f^{(k)}(1)}{k!}\left(x-1\right)^{k}=\sum_{k=0}^{\infty}\frac{f^{(k)}(1)}{k!}\left(-y\right)^{k}=f\left(1-y\right)\]
+f\left(x\right)=\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}\]
 
 \end_inset
 
@@ -3978,25 +3969,54 @@ f\left(x\right)=\sum_{k=0}^{\infty}\frac{f^{(k)}(1)}{k!}\left(x-1\right)^{k}=\su
 .
  Substituting and matching monomial terms gives 
 \begin_inset Formula \[
-\frac{g^{(m)}\left(1\right)}{m!}=\sum_{k=0}^{\infty}C_{mk}\frac{f^{(k)}\left(1\right)}{k!}\]
+\frac{g^{(m)}\left(0\right)}{m!}=\sum_{k=0}^{\infty}C_{mk}\frac{f^{(k)}\left(0\right)}{k!}\]
 
 \end_inset
 
  where the matrix elements are given by 
 \begin_inset Formula \begin{equation}
-C_{mk}=\left(\begin{array}{c}
-k\\
-m\end{array}\right)\frac{\left(-1\right)^{m}}{2^{k+1}-1}\label{eq:}\end{equation}
+C_{mk}=\left(-1\right)^{m}\left({k\atop m}\right)\frac{2^{k-m}}{\left(2^{k+1}-1\right)}\label{eq:}\end{equation}
 
 \end_inset
 
-This matrix is seen to be upper-triangular and thus solvable; the binomial
- coefficients are taken to be vanishing when 
-\begin_inset Formula $k<m$
+for 
+\begin_inset Formula $k\ge m$
+\end_inset
+
+ and zero otherwise.
+ This matrix is upper-triangular and thus solvable.
+ Because it is solvable, there is no advantage gained by performing the
+ polynomial expansion at points other than 
+\begin_inset Formula $x=0$
+\end_inset
+
+; the matrix cannot become 
+\begin_inset Quotes eld
+\end_inset
+
+more solvable
+\begin_inset Quotes erd
 \end_inset
 
 .
- 
+ A quick exploration at 
+\begin_inset Formula $x=1$
+\end_inset
+
+ does not suggest that the matrix becomes 
+\begin_inset Quotes eld
+\end_inset
+
+more diagonal
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\emph on
+i.e.
+
+\emph default
+ more heavily weighted near the diagonal).
 \end_layout
 
 \begin_layout Standard
@@ -4020,7 +4040,7 @@ etc
 \emph default
 .
  with the ratio of successive eigenvalues tending to -2.
- The first few eigenvectors are XXX this is wrong wtf 
+ The first few eigenvectors are  
 \begin_inset Formula \[
 e_{0}=1\]
 
@@ -4028,13 +4048,13 @@ e_{0}=1\]
 
  
 \begin_inset Formula \[
-e_{1}=1-2y=2x-1\]
+e_{1}=2x-1\]
 
 \end_inset
 
 
 \begin_inset Formula \[
-e_{2}=1-9y+15y^{2}\]
+e_{2}=1-\frac{9}{2}x+\frac{15}{4}x^{2}\]
 
 \end_inset
 
@@ -4043,12 +4063,6 @@ e_{2}=1-9y+15y^{2}\]
 
 \begin_layout Standard
 XXX The below are wrong, need to redo ...
- 
-\begin_inset Formula \[
-e_{2}=1-\frac{18}{5}y+\frac{12}{5}y^{2}=\frac{-1}{5}\left(1+6x-12x^{2}\right)\]
-
-\end_inset
-
  
 \begin_inset Formula \[
 e_{3}=1-\frac{66}{13}y+\frac{84}{13}y^{2}-\frac{32}{13}y^{3}=\frac{-1}{13}\left(1+6x+12x^{2}-32x^{3}\right)\]
