@@ -9,7 +9,7 @@ EXES= bernoulli bound bs bsubn cache-fill cont_frac \
 		count-prime db-merge db-prt \
       dsubn entropy exact gkw-diag hurwitz hurwitz-euler \
 		minima misc-test mp_zeta_test picturez \
-      poly-perf sho stieltjes trunc zero-cross zeta-zeros
+      poly-perf sawtooth sho stieltjes trunc zero-cross zeta-zeros
 
 MPLIB=libzmp.a
 
@@ -35,6 +35,7 @@ misc-test:	misc-test.o $(MPLIB)
 mp_zeta_test:	mp_zeta_test.o $(MPLIB)
 picturez:	picturez.o $(MPLIB)
 poly-perf:	poly-perf.o $(MPLIB)
+sawtooth:	sawtooth.o $(MPLIB)
 sho:	sho.o $(MPLIB)
 stieltjes:	stieltjes.o $(MPLIB)
 trunc:	trunc.o

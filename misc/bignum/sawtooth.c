@@ -7,12 +7,14 @@
  */
 
 #include <gmp.h>
+#include <stdio.h>
 
 void eig(mpq_t result, int k, int n)
 {
 	int m;
+	int tk, tn, sk, sn, 
 	mpq_t term, tmp;
-	mpz_t bin, one;
+	mpz_t bin;
 
 	if (k == n)
 	{
@@ -23,8 +25,6 @@ void eig(mpq_t result, int k, int n)
 	mpq_init(term);
 	mpq_init(tmp);
 	mpz_init(bin);
-	mpz_init(one);
-	mpz_set_ui(one, 1);
 
 	mpq_set_ui(result,0,1);
 	for (m=k+1; m<=n; m++)
@@ -37,14 +37,43 @@ void eig(mpq_t result, int k, int n)
 		mpq_mul(term, term, tmp);
 
 		mpz_bin_uiui (bin, m, k);
-		mpq_set_z(tmp, bin, one);
+		mpq_set_z(tmp, bin);
 		mpq_mul(term, term, tmp);
 	
 		mpq_add(result, term, term);
 	}
 
+	tn = 1<<(n+1);
+	tk = 1<<(k+1);
+	sn = 1;
+	if (n%2 == 1) sn = -1;
+	sk = 1;
+	if (k%2 == 1) sk = -1;
+
+	mpq_set_ui(tmp, 2*sn*(tn-1)*(tk-1), tk*(sk*(tk-1) - sn*(tn-1)));
+	mpq_mul(resulkt, result, tmp);
+
 	mpq_canonicalize(result);
 	
 	mpq_clear(term);
 	mpq_clear(tmp);
+}
+
+int
+main(int argc, char * argv[])
+{
+	int k,n;
+	mpq_t e;
+	mpq_init(e);
+	n = 3;
+
+	for (k=0; k<=n; k++)
+	{
+		eig(e,k,n);
+		printf("duude %d %d = ", k,n);
+		mpq_out_str(stdout, 10, e);
+		printf("\n");
+	}
+
+	return 0;
 }
