@@ -4040,7 +4040,17 @@ etc
 \emph default
 .
  with the ratio of successive eigenvalues tending to -2.
- The first few eigenvectors are 
+ The first few eigenvectors are
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+computed with misc/bignum/sawtooth.c
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset Formula \[
 e_{0}=1\]
 
@@ -4054,13 +4064,19 @@ e_{1}=2x-1\]
 
 
 \begin_inset Formula \[
-e_{2}=1-\frac{9}{2}x+\frac{15}{4}x^{2}\]
+e_{2}=4-18x+15x^{2}\]
 
 \end_inset
 
 
 \begin_inset Formula \[
-e_{3}=1-\frac{48}{7}x+12x^{2}-\frac{44}{7}x^{3}\]
+e_{3}=-7+48x-84x^{2}+44x^{3}\]
+
+\end_inset
+
+
+\begin_inset Formula \begin{equation}
+e_{4}=16-\frac{5400}{37}x+\frac{14280}{37}x^{2}-\frac{15300}{37}x^{3}+\frac{5865}{37}x^{4}\label{eq:2nd saw eigenvecs}\end{equation}
 
 \end_inset
 
@@ -4068,17 +4084,6 @@ e_{3}=1-\frac{48}{7}x+12x^{2}-\frac{44}{7}x^{3}\]
 \end_layout
 
 \begin_layout Standard
-XXX The below are wrong, need to redo ...
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula \begin{eqnarray}
-e_{4} & = & 1-\frac{36450}{5597}y+\frac{67620}{5597}y^{2}-\frac{50400}{5597}y^{3}+\frac{13440}{5597}y^{4}\nonumber \\
- & = & \frac{-1}{29\cdot193}\left(193+1350x+2940x^{2}+3360x^{3}-13440x^{4}\right)\label{eq: 2nd saw eigvecs}\end{eqnarray}
-
-\end_inset
-
 As can be seen, the complexity of individual eigenvectors spirals out of
  control; there's no obvious simple closed form expression for higher eigenvecto
 rs.
@@ -4121,7 +4126,7 @@ This figure shows the eigenvectors of the second sawtooth, as given by equation
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq: 2nd saw eigvecs"
+reference "eq:2nd saw eigenvecs"
 
 \end_inset
 

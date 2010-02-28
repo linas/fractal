@@ -3,14 +3,14 @@
 # This was used to generate the saw-eigen.png graph in 
 # the GKW paper
 # 
-# set term postscript eps color
-# set out 'saw-eigen.eps'
+set term postscript eps color
+set out 'saw-eigen.eps'
 # 
-set term png small
-set out 'saw-eigen.png'
+# set term png small
+# set out 'saw-eigen.png'
 
 set data style lines
-set key left
+set key right
 
 set xrange [0:1]
 
@@ -22,11 +22,13 @@ e1(x)=2*x-1
 e2(x)=4-18*x+15*x*x
 e3(x)=-7+48*x-84*x*x+44*x*x*x
 e4(x)=(16*37-5400*x+14280*x*x-15300*x*x*x+5865*x*x*x*x)/37
+e5(x)=-31+352*x-1240*x*x+2000*x*x*x-1550*x*x*x*x+470*x*x*x*x*x
 
 plot e1(x)/e1(0) title "e_1", \
      e2(x)/e2(0) title "e_2", \
      e3(x)/e3(0) title "e_3", \
-     e4(x)/e4(0) title "e_4"
+     e4(x)/e4(0) title "e_4", \
+     e5(x)/e5(0) title "e_5"
 
 # -------------------------------------------------------
 
