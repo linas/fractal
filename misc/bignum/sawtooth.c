@@ -85,8 +85,9 @@ int
 main(int argc, char * argv[])
 {
 	int k,n;
-	mpq_t e;
+	mpq_t e, s;
 	mpq_init(e);
+	mpq_init(s);
 	n = 3;
 
 	if (argc < 2)
@@ -97,9 +98,24 @@ main(int argc, char * argv[])
 
 	n = atoi(argv[1]);
 
+	mpq_set_ui(s,0,1);
 	for (k=0; k<=n; k++)
 	{
 		eig(e,k,n);
+		printf("eigenvec(%d %d) = ", k,n);
+		mpq_out_str(stdout, 10, e);
+		printf("\n");
+
+		mpq_add(s,s,e);
+	}
+	mpq_canonicalize(s);
+	printf(" -------------------- \n");
+
+	for (k=0; k<=n; k++)
+	{
+		eig(e,k,n);
+		mpq_div(e,e,s);
+		mpq_canonicalize(e);
 		printf("eigenvec(%d %d) = ", k,n);
 		mpq_out_str(stdout, 10, e);
 		printf("\n");
