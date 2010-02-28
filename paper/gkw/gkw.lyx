@@ -3975,7 +3975,7 @@ f\left(x\right)=\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^{k}\]
 
  where the matrix elements are given by 
 \begin_inset Formula \begin{equation}
-C_{mk}=\left(-1\right)^{m}\left({k\atop m}\right)\frac{2^{k-m}}{\left(2^{k+1}-1\right)}\label{eq:}\end{equation}
+C_{mk}=\left(-1\right)^{m}\left({k\atop m}\right)\frac{2^{k-m}}{\left(2^{k+1}-1\right)}\label{eq:cmk 2nd saw}\end{equation}
 
 \end_inset
 
@@ -4042,7 +4042,7 @@ etc
  with the ratio of successive eigenvalues tending to -2.
  The first few eigenvectors are
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 computed with misc/bignum/sawtooth.c
@@ -4080,17 +4080,19 @@ e_{4}=16-\frac{5400}{37}x+\frac{14280}{37}x^{2}-\frac{15300}{37}x^{3}+\frac{5865
 
 \end_inset
 
+which solve the eigenvector equation 
+\begin_inset Formula $\mathcal{L}_{c}e_{n}=\lambda_{n}e_{n}$
+\end_inset
 
-\end_layout
+.
+ These are illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Second-Sawtooth-Polynomials"
 
-\begin_layout Standard
-As can be seen, the complexity of individual eigenvectors spirals out of
- control; there's no obvious simple closed form expression for higher eigenvecto
-rs.
- Indeed, it seems that the simplest algorithm is to directly invert the
- matrix.
- This is curious, because the matrix itself is so curiously simple, and
- superficially similar to that for the Bernoulli map.
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4104,6 +4106,13 @@ status open
 
 \begin_layout Plain Layout
 Second Sawtooth Polynomials
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Second-Sawtooth-Polynomials"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4113,7 +4122,7 @@ Second Sawtooth Polynomials
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename saw-eigen.png
+	filename saw-eigen.eps
 	width 100text%
 
 \end_inset
@@ -4130,11 +4139,41 @@ reference "eq:2nd saw eigenvecs"
 
 \end_inset
 
- XX wrong need replot ...
+.
+ The normalization is such that 
+\begin_inset Formula $e_{n}\left(x=0\right)=1$
+\end_inset
+
+.
  
 \lyxline
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because the matrix is upper-triangular, the eigenvectors can be solved for
+ directly, simply by making the ansatz 
+\begin_inset Formula \[
+e_{n}\left(x\right)=\sum_{k=0}^{n}e_{n}^{\left(k\right)}\frac{x^{k}}{k!}\]
+
+\end_inset
+
+substituting directly into eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cmk 2nd saw"
+
+\end_inset
+
+, and solving.
+ The result is a recursion relation 
+\begin_inset Formula \[
+\frac{e_{n}^{\left(k\right)}}{k!}=\frac{\left(-1\right)^{n}}{2^{k}}\frac{\left(2^{n+1}-1\right)\left(2^{k+1}-1\right)}{\left(\left(-1\right)^{k}\left(2^{k+1}-1\right)-\left(-1\right)^{n}\left(2^{n+1}-1\right)\right)}\sum_{p=k+1}^{n}{p \choose k}\frac{2^{p}}{2^{p+1}-1}\frac{e_{n}^{\left(p\right)}}{p!}\]
 
 \end_inset
 
