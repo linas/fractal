@@ -1,52 +1,72 @@
-#LyX 1.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 221
+#LyX 1.6.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
 \textclass article
+\use_default_options false
 \language english
 \inputencoding auto
-\fontscheme pslatex
+\font_roman times
+\font_sans helvet
+\font_typewriter courier
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
 \graphics default
 \paperfontsize default
-\spacing single 
-\papersize Default
-\paperpackage a4
-\use_geometry 0
-\use_amsmath 1
-\use_natbib 0
-\use_numerical_citations 0
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \defskip medskip
 \quotes_language english
-\quotes_times 2
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\end_header
 
-\layout Title
+\begin_body
 
+\begin_layout Title
 Symmetries of Period-Doubling Maps 
-\layout Author
+\end_layout
 
+\begin_layout Author
 Linas Vepstas <linas@linas.org>
-\layout Date
+\end_layout
 
+\begin_layout Date
 12 October 2004 (revised 1 September 2006)
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 The concept of self-similarity is central to the notion of a fractal, but
  the actual symmetry group that generates that self-similarity is rarely
  named, and it seems fractals are almost never studied according to their
  symmetries.
  Yet, in other branches of mathematics and physics, it is well understood
  that symmetry provides a powerful mechanism for understanding systems.
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 In this paper, we identify the symmetry group of period-doubling maps as
  being a monoid (semigroup) of the modular group 
 \begin_inset Formula $PSL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 .
  To anchor this assertion, we work out an explicit, exactly-solvable fractal
@@ -55,11 +75,11 @@ nal representation of the (monoid of the) modular group.
  By replacing the triangular shape that generates the Blancmange curve with
  a polynomial, we find that the resulting curve transforms under the 
 \begin_inset Formula $n+2$
-\end_inset 
+\end_inset
 
  dimensional representation of the monoid, where 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  is the degree of the polynomial.
  We also find that the (ill-defined) derivative of the Blancmange curve
@@ -70,8 +90,9 @@ onal representation.
  We then show how all period-doubling maps can demonstrate the monoid symmetry,
  which is essentially an outcome of the dyadic representation of the monoid.
  
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 This paper also includes a review of Georges deRham's 1958 construction
  of the Koch snowflake, the Levy C-curve, the Peano space-filling curve
  and the Minkowski Question Mark function as special cases of a curve with
@@ -79,70 +100,93 @@ This paper also includes a review of Georges deRham's 1958 construction
  The left-right symmetric Levy C-curve and the left-right symmetric Koch
  curve are shown each belong to another, inequivalent three dimensional
  representation.
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 This paper is part of a set of chapters that explore the relationship between
  the real numbers, the modular group, and fractals.
  Its also a somewhat poorly structured, written at least partly as a diary
  of research results.
-\layout Section
+\end_layout
 
+\begin_layout Section
 Symmetries of Period-Doubling Maps
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 It has been widely noticed that Farey numbers appear naturally in certain
  fractals, most famously in the Mandelbrot set.
  For example figure 
-\begin_inset LatexCommand \ref{cap:Mandelbrot-Farey-Numbering}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Mandelbrot-Farey-Numbering"
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Mandelbrot-Farey-Numbering"
 
-\begin_inset LatexCommand \label{cap:Mandelbrot-Farey-Numbering}
-
-\end_inset 
+\end_inset
 
 Mandelbrot Farey Numbering
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename farey-bud-numbers.gif
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 The above picture is stolen from Robert L.
- Devaney's website 
-\begin_inset LatexCommand \htmlurl[The Fractal Geometry of the Mandelbrot Set ]{http://math.bu.edu/DYSYS/FRACGEOM2/node5.html}
+ Devaney's website The Fractal Geometry of the Mandelbrot Set  
+\begin_inset Flex URL
+status collapsed
 
-\end_inset 
+\begin_layout Plain Layout
+
+http://math.bu.edu/DYSYS/FRACGEOM2/node5.html
+\end_layout
+
+\end_inset
 
 .
  It demonstrates how to label and count buds on the Mandelbrot set using
  the Farey fractions.
  That the term 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 counting
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  is appropriate follows from the observation that both the sizes and locations
  of the buds correspond to the location of the fractions on the Farey or
  Stern-Brocot tree.
-\end_inset 
+\end_layout
+
+\end_inset
 
  shows how to count the buds of the Mandelbrot set by the Farey numbers.
  The reason why the Farey numbers are appropriate for such counting is somewhat
@@ -152,47 +196,48 @@ counting
  naturally.
  By describing the nature of the self-symmetries of the binary tree, one
  can effectively describe the nature of the fractal in question.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The infinite binary tree is self-similar, in that one can look at the subtree
  lying under any given node, and see that is isomorphic to the tree as a
  whole.
  A given subtree is easily and uniquely located: one may take a walk down
  the tree, taking either the left 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  or the right 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
  branch.
  Thus, a given node on the tree may be specified by a sequence or string
  composed of the letters 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
 .
  When 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
  are taken to be a  certain pair of 
 \begin_inset Formula $2\times2$
-\end_inset 
+\end_inset
 
  matrices, then resulting set of strings turn out to be equivalent to a
  certain subset of the modular group 
 \begin_inset Formula $PSL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 .
  The modular group is critically important for a broad swath of number theory,
@@ -203,31 +248,32 @@ The infinite binary tree is self-similar, in that one can look at the subtree
  this connection.
  The notable exception seems to be the popular book 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 Indra's Pearls
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  by David Mumford and Caroline Series (need ref).
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 More narrowly, the relationship between number theory and hyperbolic geometry
  meets in an area of mathematics known as ergodic theory.
  The group 
 \begin_inset Formula $PSL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
  is seen to be a special case of a Fuchsian group, which are generally the
  discrete subgroups of 
 \begin_inset Formula $PSL(2,\mathbb{C})$
-\end_inset 
+\end_inset
 
 .
  These are implicated in a variety of chaotic dynamical systems, most notably
  in the ergodic or Anosov flow on the tangent space of 
 \begin_inset Formula $PSL(2,\mathbb{C})$
-\end_inset 
+\end_inset
 
 .
  Thus, the relationships between number theory and dynamical systems are
@@ -240,16 +286,17 @@ More narrowly, the relationship between number theory and hyperbolic geometry
  Thus, it seems appropriate to work out in greater detail some concrete
  connections between fractals, the infinite binary tree, and the modular
  group.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The focus of this paper is to elucidate how the infinite binary tree, the
  set of of all strings generated by two letters 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
 , and the set of period doubling fractals are related, and how their self-simila
 rities can be precisely described.
@@ -262,8 +309,9 @@ rities can be precisely described.
  It is then followed by a development of the three-dimensional matrix representa
 tion for a very specific fractal, the Takagi curve, and then by various
  generalizations to broader cases.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The first to be explored are the three-dimensional representations.
  It is shown that there are an uncountably infinite number of these, and
  that they may be labelled by a real or complex number.
@@ -271,16 +319,19 @@ The first to be explored are the three-dimensional representations.
  takes one into another.
  These occur naturally as the set of self-symmetries of the a family of
  fractal curves studied by Teiji Takagi in 1903
-\begin_inset LatexCommand \cite{Tak1903}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tak1903"
 
-\end_inset 
+\end_inset
 
 , and further developed by G.H.
  Hardy in 1916 and by others.
  These now bear the name Takagi curve or blancmange curve.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Takagi curve is constructed from the iterated tent map.
  The three-dimensional representation can thus be shown to apply to any
  iterated map that is topologically conjugate to the tent map.
@@ -295,49 +346,52 @@ The Takagi curve is constructed from the iterated tent map.
  the tent map, but the conjugating function is the Minkowski question mark
  function.
  Thus, finding the conjugating function is a non-trivial exercise.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The above introduction singled out some special matrices for 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
 .
  One may ask what happens if one picks some arbitrary matrices for 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
 , or even a pair of arbitrary functions, and then iterates on them by constructi
 ng all possible strings containing 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
 .
  This question was explored by Georges de Rham in 1957
-\begin_inset LatexCommand \cite{DeR57}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeR57"
 
-\end_inset 
+\end_inset
 
 .
  He demonstrates that under certain broad conditions for the fixed points
  of 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
 , any such generalized pair, when iterated, will produce a continuous but
  non-differentiable curve.
@@ -346,67 +400,84 @@ ng all possible strings containing
  The fact that all of these curves can be identified with the set of strings
  in two letters implies that the general considerations about the self-similarit
 y of binary trees can be applied to these cases
-\layout Section
+\end_layout
 
+\begin_layout Section
 Two-dimensional Representation Basics 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This section reviews the basics of the two-dimensional matrix representations
  of the self-similarities of the infinite binary tree.
  It is an abbreviated presentation of the material in xxx (ref my paper
  on Minkowski question mark), and is here only to provide context and notation
  for the rest of this document.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A critical property of the Farey numbers is that they can be arranged on
  a binary tree, known as the Farey tree or Stern-Brocot tree, as shown in
  figure
-\begin_inset LatexCommand \ref{cap:Farey-Tree}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Farey-Tree"
 
-\end_inset 
+\end_inset
 
 .
  
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Farey-Tree"
 
-\begin_inset LatexCommand \label{cap:Farey-Tree}
-
-\end_inset 
+\end_inset
 
 Farey Tree
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename fareytr.jpg
 	width 50text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 An illustration of the Farey tree or Stern-Brocot tree, showing the Farey
  numbers arranged on a binary tree.
-\end_inset 
+\end_layout
+
+\end_inset
 
  One may navigate to a particular location in the binary tree by starting
  at the root node (located at 
 \begin_inset Formula $1/1$
-\end_inset 
+\end_inset
 
 ), and making a sequence of left and right moves.
  The value of the Farey fraction labelling that node can be obtained by
  performing a simple matrix calculation.
  Let 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 L=\left(\begin{array}{cc}
 1 & 0\\
@@ -414,28 +485,28 @@ L=\left(\begin{array}{cc}
 1 & 1\\
 0 & 1\end{array}\right)\label{eq:L and R}\end{equation}
 
-\end_inset 
+\end_inset
 
  be the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 left
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 right
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  matrices.
  A sequence of moves, such as 
 \begin_inset Formula $RLLLRRL$
-\end_inset 
+\end_inset
 
 , results in a matrix 
 \begin_inset Formula \begin{equation}
@@ -443,71 +514,72 @@ right
 a & b\\
 c & d\end{array}\right)\label{eq:matrix}\end{equation}
 
-\end_inset 
+\end_inset
 
  with integer entries 
 \begin_inset Formula $a,b,c,d$
-\end_inset 
+\end_inset
 
 .
  The value of the Farey number located at the corresponding node is 
 \begin_inset Formula \[
 \frac{a+b}{c+d}\]
 
-\end_inset 
+\end_inset
 
  This is the simplest example of what I'll call a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 matrix representation
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  associated with a binary tree.
  This particular representation is two-dimensional (it deals with 
 \begin_inset Formula $2\times2$
-\end_inset 
+\end_inset
 
  matrices), and will be called the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 Farey
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  or 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 continued fraction
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  representation, to distinguish it from other possible two-dimensional represent
 ations.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The matrix given above is unimodular: that is, its determinant is one.
  This can be easily seen because the determinant of 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
  is one, and the determinant of a product of matrices is equal to the product
  of the determinants.
  The entries of the matrix are always integers, and thus its easily seen
  that the matrix belongs to the group of unimodular 
 \begin_inset Formula $2\times2$
-\end_inset 
+\end_inset
 
  matrices over the integers 
 \begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 .
  Given that the Farey fraction is given by the ratio, so that 
@@ -520,50 +592,51 @@ c & d\end{array}\right)\left(\begin{array}{cc}
 -1 & 0\\
 0 & -1\end{array}\right)\]
 
-\end_inset 
+\end_inset
 
  gives the same fraction, we can see that the relevant matrices in fact
  belong to the 
-\emph on 
+\emph on
 projective
-\emph default 
+\emph default
  group 
 \begin_inset Formula $PSL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 .
  This group is known as the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 Modular Group
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , and it is central to many areas of number theory and in particular the
  theory of elliptic integrals and modular forms.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 An alternate labelling of an infinite binary tree is with the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 dyadic rationals
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , rational numbers of the form 
 \begin_inset Formula $m/2^{n}$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $m$
-\end_inset 
+\end_inset
 
  an odd integer, and 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  a non-negative integer.
  This is very simply the tree with rows
@@ -573,7 +646,7 @@ dyadic rationals
 \frac{1}{4}\qquad &  & \qquad\frac{3}{4}\\
 \frac{1}{8}\qquad\frac{3}{8}\quad &  & \quad\frac{5}{8}\qquad\frac{7}{8}\end{eqnarray*}
 
-\end_inset 
+\end_inset
 
  This tree, the dyadic rational tree, also has a matrix representation for
  converting a sequence of left-right moves to the value of the dyadic fraction
@@ -586,38 +659,41 @@ L_{D}=\left(\begin{array}{cc}
 1 & 0\\
 \frac{1}{2} & \frac{1}{2}\end{array}\right)\label{eq:dyadic L and R}\end{equation}
 
-\end_inset 
+\end_inset
 
  and these generate what will be called the two-dimensional 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 dyadic representation
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  of moves on the binary tree.
  The value of the dyadic fraction after a sequence of moves is 
 \begin_inset Formula $2c+d$
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $c$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $d$
-\end_inset 
+\end_inset
 
  are the entries in the matrix shown in 
-\begin_inset LatexCommand \ref{eq:matrix}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:matrix"
 
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The dyadic matrix that results from a sequence of left and right moves is
  clearly not unimodular.
  However, insofar as it labels a set of moves on the binary tree, it is
@@ -626,70 +702,73 @@ The dyadic matrix that results from a sequence of left and right moves is
  these can be trivially identified with one another.
  The representations are not, however 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 equivalent
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 : there does 
-\emph on 
+\emph on
 not
-\emph default 
+\emph default
  exist a similarity matrix 
 \begin_inset Formula $S$
-\end_inset 
+\end_inset
 
  that caries the one to the other.
  That is, the equations
 \begin_inset Formula \[
 SL_{D}=L_{C}S\]
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \[
 SR_{D}=R_{C}S\]
 
-\end_inset 
+\end_inset
 
  are satisfied only by 
 \begin_inset Formula $S=0$
-\end_inset 
+\end_inset
 
 .
  Here, we wrote 
 \begin_inset Formula $L_{C}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R_{C}$
-\end_inset 
+\end_inset
 
  for the 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
  of equation 
-\begin_inset LatexCommand \ref{eq:L and R}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:L and R"
 
-\end_inset 
+\end_inset
 
 , in order to distinguish them from the dyadic 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 These two representations are developed and examined in greater detail in
  another paper (ref my paper on Minkowski question mark), and the details
  will not be reproduced here; the focus of this paper are the three-dimensional
@@ -697,51 +776,51 @@ These two representations are developed and examined in greater detail in
  However, there are several important points that must be noted, in order
  to avoid confusion.
  Most important is to understand that the moves on the binary tree are 
-\emph on 
+\emph on
 not
-\emph default 
+\emph default
  isomorphic to the modular group.
  Although it can be shown that 
 \begin_inset Formula $L_{C}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R_{C}$
-\end_inset 
+\end_inset
 
  generate all of 
 \begin_inset Formula $PSL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 , the 
-\emph on 
+\emph on
 non-negative
-\emph default 
+\emph default
  powers do not.
  The non-negative powers generate only what is called a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 monoid
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  or a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 semigroup
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , and not a full group, because the inverse elements are missing.
  The monoid does not contain the elements 
 \begin_inset Formula $L^{-1}$
-\end_inset 
+\end_inset
 
  or 
 \begin_inset Formula $R^{-1}$
-\end_inset 
+\end_inset
 
  or any strings containing these elements.
  Although it may at first seem seem that the negative powers correspond
@@ -754,8 +833,9 @@ semigroup
  That is, the monoid acts on the binary tree; but it is impossible to extend
  this action to an action of the full group.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Another critical aspect make note of is that the action of the monoid is
  an action on a certain set of intervals of the real number line.
  When the infinite binary tree is labelled either with the dyadic fractions
@@ -780,40 +860,42 @@ Another critical aspect make note of is that the action of the monoid is
  Roughly, though, it may be said that the allowed intervals may be enumerated
  as 
 \begin_inset Formula $\mathbb{Q\times\mathbb{N}}$
-\end_inset 
+\end_inset
 
 .
  It will become apparent, in the text of this paper, that the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 allowed
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  intervals are precisely those for which a period-doubling fractal is self-simil
 ar.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Numerical representations 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The set of strings in two letters is clearly isomorphic to the binary numbers,
  in that any given string in 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
  can be converted to a string on 
 \begin_inset Formula $0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $1$
-\end_inset 
+\end_inset
 
 , which may then be taken to be a binary number.
  Fractions such as 1/3, as well as irrational numbers correspond to strings
@@ -821,71 +903,71 @@ The set of strings in two letters is clearly isomorphic to the binary numbers,
  A convenient alternate notation is in terms of continued fractions.
  One searches for a matrix 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  with the properties 
 \begin_inset Formula $r^{2}=1$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R=rLr$
-\end_inset 
+\end_inset
 
 .
  The first property suggests that 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  is a 'reflection'.
  It follows from these properties that 
 \begin_inset Formula $R^{n}=rL^{n}r$
-\end_inset 
+\end_inset
 
  and so any string in 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  can be written as a string in 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
 .
  In what follows, the letter 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  is used for 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
 , so that the strings are in 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
 .
  A general string of the form 
 \begin_inset Formula \[
 \gamma=L^{a_{1}}R^{a_{2}}L^{a_{3}}\ldots\]
 
-\end_inset 
+\end_inset
 
  may therefore also be written as 
 \begin_inset Formula \[
 \gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...\]
 
-\end_inset 
+\end_inset
 
 While the first form has a natural representation in terms of a binary number,
  the second has a natural representation in terms of the continued fraction
@@ -893,23 +975,25 @@ While the first form has a natural representation in terms of a binary number,
 \begin_inset Formula \[
 [0;a_{1},a_{2},a_{3},\ldots]=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\ldots}}}\]
 
-\end_inset 
+\end_inset
 
  The numerical value of these two forms are not the same; the explicit map
  between these two numerical representations is given by the Minkowski question
  mark function.
  For the dyadic representation 
 \begin_inset Formula $L_{D}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R_{D}$
-\end_inset 
+\end_inset
 
  of equation 
-\begin_inset LatexCommand \ref{eq:dyadic L and R}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dyadic L and R"
 
-\end_inset 
+\end_inset
 
 , one has 
 \begin_inset Formula \begin{equation}
@@ -919,20 +1003,20 @@ g_{D}=\left(\begin{array}{cc}
 1 & 0\\
 1 & -1\end{array}\right)\label{eq:dyadic g and d}\end{equation}
 
-\end_inset 
+\end_inset
 
  while those corresponding to the Farey 
 \begin_inset Formula $L_{C}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R_{C}$
-\end_inset 
+\end_inset
 
 are
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 g_{C}=\left(\begin{array}{cc}
 1 & 0\\
@@ -940,114 +1024,132 @@ g_{C}=\left(\begin{array}{cc}
 0 & 1\\
 1 & 0\end{array}\right)\label{eq:farey g and d}\end{equation}
 
-\end_inset 
+\end_inset
 
  Interpreted as operators on the binary tree, 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  corresponds to taking the left branch, while 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  corresponds to a mirror-reflection of the tree.
  Expressed in terms of intervals, 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  maps an interval to the left-half of the interval, while 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  is a reflection of the interval about its center point.
  If 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is the label on a node of the dyadic tree (that is, if 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is a real number), then one has the explicit representation 
 \begin_inset Formula \[
 g_{D}(x)=\frac{x}{2}\quad\mbox{ and }\quad r_{D}(x)=1-x\]
 
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $x\in[0,1]$
-\end_inset 
+\end_inset
 
 .
  The above holds because the distribution of the dyadics is uniform with
  regards to the canonical topological measure on the real number line, and
  thus, any subtree will map back to the whole tree linearly.
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Takagi-Landsberg Curve
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Takagi-Landsberg curve 
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:The-Takagi-Landsberg-Curve"
 
-\begin_inset LatexCommand \label{cap:The-Takagi-Landsberg-Curve}
-
-\end_inset 
+\end_inset
 
 The Takagi-Landsberg Curve
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename takagi.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This graph shows the Takagi-Landsberg curve 
 \begin_inset Formula $t_{w}(x)$
-\end_inset 
+\end_inset
 
  as a function of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  for a fixed value of 
 \begin_inset Formula $w=0.618$
-\end_inset 
+\end_inset
 
 .
  The fractal self-similarity of this curve is readily apparent.
  Other real values of 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  have a qualitatively similar shape; however, this is not the case when
  
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  is complex-valued, as is shown in figure 
-\begin_inset LatexCommand \ref{cap:Takagi-Phase-Plot}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Takagi-Phase-Plot"
 
-\end_inset 
+\end_inset
 
 .
-\end_inset 
+\end_layout
+
+\end_inset
 
  was explored by Teiji Takagi, circa 1903 as an example of a continuous-everywhe
 re, differentiable-nowhere curve 
-\begin_inset LatexCommand \cite{Tak1903,Man88}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tak1903,Man88"
 
-\end_inset 
+\end_inset
 
 .
  It is constructed by positive mid-point displacements of straight line
@@ -1057,29 +1159,29 @@ re, differentiable-nowhere curve
  Equivalently, one assigns geometrically smaller displacements to each level
  of the dyadic tree; that is, one picks some 
 \begin_inset Formula $0\leq w<1$
-\end_inset 
+\end_inset
 
 , and assigns to each dyadic number 
 \begin_inset Formula $x=p/2^{n}$
-\end_inset 
+\end_inset
 
 , for 
 \begin_inset Formula $n>1$
-\end_inset 
+\end_inset
 
 , the value 
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 where we anchor the recurrence with 
 \begin_inset Formula $t_{w}(0)=t_{w}(1)=0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $t_{w}(1/2)=1$
-\end_inset 
+\end_inset
 
 .
  One extends this curve to all reals by 'linear interpolation' between the
@@ -1087,11 +1189,11 @@ where we anchor the recurrence with
 \begin_inset Formula \begin{equation}
 t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 where 
 \begin_inset Formula $\tau(x)$
-\end_inset 
+\end_inset
 
  is the triangle function:
 \begin_inset Formula \begin{equation}
@@ -1099,49 +1201,54 @@ where
 2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 0\leq x-\left\lfloor x\right\rfloor <1/2\\
 2-2(x-\left\lfloor x\right\rfloor ) & \textrm{\; for \;} & 1>x-\left\lfloor x\right\rfloor \geq1/2\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The curve is sometimes presented with 
 \begin_inset Formula $2^{-kH}$
-\end_inset 
+\end_inset
 
  taking the place of 
 \begin_inset Formula $w^{k}$
-\end_inset 
+\end_inset
 
  in the series summation, where 
 \begin_inset Formula $H=-\log_{2}w$
-\end_inset 
+\end_inset
 
  is called the Hurst parameter (need ref).
  The value 
 \begin_inset Formula $w=1/4$
-\end_inset 
+\end_inset
 
  is special, in that 
 \begin_inset Formula $t_{1/4}(x)=4x(1-x)$
-\end_inset 
+\end_inset
 
  is a parabola.
  This can perhaps best be seen with the mid-point displacement construction
  of a parabola, which is attributed to Archimedes
-\begin_inset LatexCommand \cite{Man88}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Man88"
 
-\end_inset 
+\end_inset
 
 .
  A prototypical Takagi-Landsberg curve is shown in figure 
-\begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:The-Takagi-Landsberg-Curve"
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 In a certain technical sense, the curve is not differentiable at any dyadic
  value 
 \begin_inset Formula $x=p/2^{n}$
-\end_inset 
+\end_inset
 
 , as such values correspond to the tip of the triangle wave, where the derivativ
 e is ill-defined.
@@ -1149,218 +1256,232 @@ e is ill-defined.
  which will be explored in greater detail below.
  For example, one may choose to define the derivative 
 \begin_inset Formula $dt_{w}/dx$
-\end_inset 
+\end_inset
 
  by passing the 
 \begin_inset Formula $d/dx$
-\end_inset 
+\end_inset
 
  past the summation, to act on the triangle-wave, replacing it with a square
  wave.
  The result is a curve that is discontinuous everywhere, but does have a
  number of derivative-like properties.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 One can generalize this curve in a variety of ways, for example, by replacing
  the tent 
 \begin_inset Formula $\tau(x)$
-\end_inset 
+\end_inset
 
  with any 
 \begin_inset Formula $f(x)$
-\end_inset 
+\end_inset
 
  on the unit interval.
  To get a continuous Takagi curve, one must have 
 \begin_inset Formula $f$
-\end_inset 
+\end_inset
 
  continuous and have 
 \begin_inset Formula $f(0)=f(1)$
-\end_inset 
+\end_inset
 
 .
  Discontinuous functions 
 \begin_inset Formula $f$
-\end_inset 
+\end_inset
 
  yield curves that are discontinuous everywhere: for example, the square
  wave 
 \begin_inset Formula $\sigma(x)=d\tau/dx=1-2\left\lfloor 2x\right\rfloor $
-\end_inset 
+\end_inset
 
  gives the self-similar shape shown in the figures
-\begin_inset LatexCommand \ref{cap:Cantor-Polynomial}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Cantor-Polynomial"
 
-\end_inset 
+\end_inset
 
  and 
-\begin_inset LatexCommand \ref{cap:cantor-sawtooth}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:cantor-sawtooth"
 
-\end_inset 
+\end_inset
 
  below.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Of the many possible different choices for 
 \begin_inset Formula $f(x)$
-\end_inset 
+\end_inset
 
 , the triangle wave is special in that it stays self-similar through iteration;
  that is, 
 \begin_inset Formula $(\tau\diamond\tau)(x)\equiv\tau^{2}(x)=\tau(2x)$
-\end_inset 
+\end_inset
 
  and generally, iterating on it 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
  times gives 
 \begin_inset Formula $\tau^{k}(x)=\tau(2^{k-1}x)$
-\end_inset 
+\end_inset
 
 .
  Thus, one may write 
 \begin_inset Formula \begin{equation}
 t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau^{k+1}(x)\label{eq:tee-w}\end{equation}
 
-\end_inset 
+\end_inset
 
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Open 
-\series bold 
+\series bold
 problem
-\series default 
+\series default
 : Develop the curious sum 
 \begin_inset Formula \begin{equation}
 e_{w}(x)=\sum_{k=0}^{\infty}\frac{w^{k}\tau^{k}(x)}{k!}\label{eq:strange-expo}\end{equation}
 
-\end_inset 
+\end_inset
 
  and describe its nascent self-similarity.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Open 
-\series bold 
+\series bold
 problem
-\series default 
+\series default
 : Describe the fractal structure of the Weierstrass curve 
-\begin_inset LatexCommand \cite{Wei1872}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wei1872"
 
-\end_inset 
+\end_inset
 
 : 
 \begin_inset Formula \begin{equation}
 \sum_{k=0}^{\infty}b^{k}\cos(a^{k}x\pi)\label{eq:weierstrass}\end{equation}
 
-\end_inset 
+\end_inset
 
  G.H.
  Hardy (need ref) showed that this function is differentiable nowhere provided
  that 
 \begin_inset Formula $0<b<1$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $a>1$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $ab\geq1$
-\end_inset 
+\end_inset
 
 .
  Despite 
 \begin_inset Formula $a$
-\end_inset 
+\end_inset
 
  not having the value of two, this function still appears to have basic
  fractal self-similarity, although it is not even about 
 \begin_inset Formula $x=1/2$
-\end_inset 
+\end_inset
 
  whenever 
 \begin_inset Formula $a$
-\end_inset 
+\end_inset
 
  is not an integer.
  
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Symmetries of the Takagi Curve
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This section demonstrates that the Takagi curve transforms as a three-dimensiona
 l representation of the tree-walking monoid.
  This provides an example where the action of the monoid can be precisely
  and completely specified.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The interval contraction generator 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  acts on the Takagi map as
 \begin_inset Formula \begin{equation}
 \left[gt_{w}\right](x)=\left(t_{w}\circ g_{D}\right)(x)=t_{w}\left(\frac{x}{2}\right)=x+wt_{w}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Iterating on this generator gives 
 \begin_inset Formula \begin{equation}
 \left[g^{n}t_{w}\right](x)=t_{w}\left(\frac{x}{2^{n}}\right)=\frac{x}{2^{n-1}}\left(\frac{1-2^{n}w^{n}}{1-2w}\right)+w^{n}t_{w}(x)\label{eq: power of two value}\end{equation}
 
-\end_inset 
+\end_inset
 
  The action of 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  is considerably more trivial: 
 \begin_inset Formula \[
 \left[rt_{w}\right](x)=\left(t_{w}\circ r_{D}\right)(x)=t_{w}\left(1-x\right)=t_{w}(x)\]
 
-\end_inset 
+\end_inset
 
  since the Takagi curve is left-right symmetric.
  Thus, it is easily seen that the actions of 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  on a general expression 
 \begin_inset Formula $a+bx+ct_{w}(x)$
-\end_inset 
+\end_inset
 
  always returns another expression of the same type; and that the actions
  are both linear and also closed.
  That is, a general expression 
 \begin_inset Formula $a+bx+ct_{w}(x)$
-\end_inset 
+\end_inset
 
  can be interpreted as a vector in a three-dimensional vector space, and
  the action 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  have representation as operators on that space.
  We have that the Takagi Curve transforms under a three-dimensional representati
 on of the monoid.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 This may be made explicit as follows.
  Write a general element of the vector space as the dot-product of a row
  of real numbers times a column of basis vectors 
@@ -1371,20 +1492,20 @@ a & \; b & \; c\end{array}\right)\left(\begin{array}{c}
 x\\
 t_{w}(x)\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Then 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  have the representations 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 g_{3}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
@@ -1394,7 +1515,7 @@ g_{3}=\left(\begin{array}{ccc}
 1 & -1\; & 0\\
 0 & 0 & 1\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where the subscript 3 is used to denote that this is a 3-D representation.
  Under the action of this representation, 3-vectors transform as, for example,
@@ -1409,26 +1530,26 @@ g_{3}=\left(\begin{array}{ccc}
 x\\
 t_{w}(x)\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  This should be compared to the transformation properties of dyadic numbers.
  By a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 dyadic number
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , we mean a real number represented as a string of binary digits
 \begin_inset Formula \begin{equation}
 x=\sum_{n=0}^{\infty}b_{n}2^{-n}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  with the binary digits 
 \begin_inset Formula $b_{n}$
-\end_inset 
+\end_inset
 
  being either 0 or 1.
  By replacing the number 2 with a different number, it is easily seen that
@@ -1440,7 +1561,7 @@ al representation.
  That is, the dyadic representation that acted on dyadic numbers arranged
  in a doublet 
 \begin_inset Formula $(1,x)$
-\end_inset 
+\end_inset
 
  as 
 \begin_inset Formula \begin{equation}
@@ -1450,40 +1571,42 @@ g_{D}=\left(\begin{array}{cc}
 1 & 0\\
 1 & -1\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Alternately, one may write 
 \begin_inset Formula $g_{D}(x)=x/2$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r_{D}(x)=1-x$
-\end_inset 
+\end_inset
 
  when acting on real numbers.
  The 3D representation is then seen to be a an extension of the 2D vector
  space.
  The Takagi Curve commutes with the generators as 
 \begin_inset Formula $\left[g_{3}t_{w}\right]\left(x\right)=\left(t_{w}\circ g_{D}\right)\left(x\right)$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\left[r_{3}t_{w}\right](x)=\left(t_{w}\circ r_{D}\right)\left(x\right)$
-\end_inset 
+\end_inset
 
  where the left hand side is taken as an operator equation, and the right
  hand side as function composition.
-\layout Standard
+ 
+\end_layout
 
+\begin_layout Standard
 This can be further belabored by examining the formulas for a general contractin
 g group element 
 \begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}\in PSL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 .
  By 'contracting' we mean that we want to take all 
 \begin_inset Formula $a_{k}>0$
-\end_inset 
+\end_inset
 
 .
  The contracting elements form the monoid, and we explicitly want to avoid
@@ -1491,44 +1614,45 @@ g group element
  Trying to incorporate the inverses significantly complicates the analysis,
  and a full inclusion of all inverses cannot be satisfactorily done.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 We have that 
 \begin_inset Formula $\gamma$
-\end_inset 
+\end_inset
 
  acts on the real number 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  with the dyadic representation: that is, 
 \begin_inset Formula \begin{equation}
 \gamma:x=\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which can be quickly computed by multiplying together the representation
  matrices 
 \begin_inset Formula $g_{D}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r_{D}$
-\end_inset 
+\end_inset
 
 .
  By contrast, on the Takagi curve, 
 \begin_inset Formula $\gamma$
-\end_inset 
+\end_inset
 
  acts as 
 \begin_inset Formula $\gamma_{3}$
-\end_inset 
+\end_inset
 
 , thus: 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 \left[\gamma_{3}t_{w}\right](x)=t_{w}(\gamma_{D}(x))=\left(\begin{array}{ccc}
 0 & \;0 & \;1\end{array}\right)g_{3}^{a_{1}}r_{3}g_{3}^{a_{2}}r_{3}g_{3}^{a_{3}}r_{3}...r_{3}g_{3}^{a_{N}}\left(\begin{array}{c}
@@ -1536,88 +1660,90 @@ We have that
 x\\
 t_{w}(x)\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which demonstrates the self-symmetry of the curve for arbitrary (contracting)
  element 
 \begin_inset Formula $\gamma\in PSL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 .
  That is, we have demonstrated an isomorphism between the set of contracting
  elements 
 \begin_inset Formula $\gamma\in PSL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
  and a subset of 
 \begin_inset Formula $GL(3,\mathbb{R})$
-\end_inset 
+\end_inset
 
  generated by 
 \begin_inset Formula $g_{3}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r_{3}$
-\end_inset 
+\end_inset
 
 .
  Note that this isomorphism is only between subsets, and not subgroups:
  the monoid does not contain its inverses.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Equivalently, this set of contracting elements is isomorphic to the set
  
 \begin_inset Formula $\mathbb{Q}\times\mathbb{N}\times\mathbb{Z}_{2}$
-\end_inset 
+\end_inset
 
 : pick any 
 \begin_inset Formula $p/q\in\mathbb{Q}$
-\end_inset 
+\end_inset
 
  and set 
 \begin_inset Formula $p/q=\gamma_{D}(0)$
-\end_inset 
+\end_inset
 
  which fixes the values of 
 \begin_inset Formula $a_{1},...,a_{N-1}$
-\end_inset 
+\end_inset
 
 .
  Then pick a positive integer 
 \begin_inset Formula $a_{N}\in\mathbb{N}$
-\end_inset 
+\end_inset
 
  which fixes 
 \begin_inset Formula $\gamma_{D}(1)$
-\end_inset 
+\end_inset
 
 .
  This fixes the two endpoints of the interval that contains the self-similar
  portion of the Takagi curve.
  Then pick from 
 \begin_inset Formula $\mathbb{Z}_{2}$
-\end_inset 
+\end_inset
 
  to decide if the mapping should invert the interval or not.
  Thus it is seen just how fine-grained, and also how constrained, the notion
  of self-similarity is.
  One may pick an interval one of whose endpoints may start on 
-\emph on 
+\emph on
 any
-\emph default 
+\emph default
  rational, but once one endpoint has been specified, one only has a limited
  (albeit countably infinite) choice for the other endpoint.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Caution: The above has only demonstrated an isomorphism for the contracting
  (and their inverses, the expanding) group elements.
  General group elements also map intervals to intervals, but these may or
  may not be intersecting.
  When a pair of intervals do intersect, then there is a 
 \begin_inset Formula $\gamma_{D}(x)$
-\end_inset 
+\end_inset
 
  that is valid and defined on the interval, and thus the Takagi curve, restricte
 d to that interval, demonstrates the desired isomorphism.
@@ -1629,71 +1755,75 @@ on, and so the above arguments fail.
  It is not clear if a consistent extension is possible, nor is it clear
  how to describe the obstruction if its not.
  This is beyond the level of the current presentation.
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Compute the matrix elements for 
 \begin_inset Formula $grg^{3}$
-\end_inset 
+\end_inset
 
  for both the dyadic and the three-dimensional representation.
  Show that this implies the symmetry 
 \begin_inset Formula $t_{w}(1/2-x/16)=1+x(-1/8+w/4+w^{2}/2+w^{3})+w^{4}t_{w}(x)$
-\end_inset 
+\end_inset
 
 .
  Repeat the process for 
 \begin_inset Formula $g^{3}rg$
-\end_inset 
+\end_inset
 
  and for 
 \begin_inset Formula $g^{2}rg^{7}rg^{3}$
-\end_inset 
+\end_inset
 
 .
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Provide a general, explicit proof of the commuting diagram by
  pulling out one generator at a time out from under the expressions.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 What has been done here? Two things have been accomplished.
  First, the explicit symmetry relationship of the Takagi Curve has been
  demonstrated.
  Next, its been shown that the curve, together with 1 and 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , belong to the set of basis vectors 
 \begin_inset Formula $\{1,x,t_{w}\}$
-\end_inset 
+\end_inset
 
  of a three-dimensional representation of the monoid.
  The matrix representations of 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  make it very easy to compute how the curve transforms under any given element
  of the monoid.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Corollary: The modular group monoid is a symmetry group of the parabola,
  where the parabola is given by 
 \begin_inset Formula $t_{1/4}(x)=4x(1-x)$
-\end_inset 
+\end_inset
 
  and we can trivially validate that 
 \begin_inset Formula $(t_{1/4}\circ g)(x)=t_{1/4}(x/2)$
-\end_inset 
+\end_inset
 
  is equal to 
 \begin_inset Formula $(g\circ t_{1/4})(x)=x+t_{1/4}(x)/4$
-\end_inset 
+\end_inset
 
 .
  The point here is that the monoid does not of necessity act only on fractal
@@ -1701,44 +1831,47 @@ Corollary: The modular group monoid is a symmetry group of the parabola,
  This action is seems considerably less exiting; however, it can be visualized
  as a mechanism for placing a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 fractal coordinate system
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  onto a smooth manifold.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The next theorem shows that these representations, while isomorphic, are
  not equivalent in the traditional sense.
-\layout Description
+\end_layout
 
+\begin_layout Description
 Theorem: Every real (or complex!) value of 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  generates a unique, inequivalent representation of the period-doubling
  monoid.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Proof: If two representations were equivalent, then one could find a matrix
  
 \begin_inset Formula $U$
-\end_inset 
+\end_inset
 
  such that 
 \begin_inset Formula $g_{v}=U^{-1}g_{w}U$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $v\neq w$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r=U^{-1}rU$
-\end_inset 
+\end_inset
 
 .
  Try to do this by brute force.
@@ -1749,95 +1882,98 @@ a & b & c\\
 d & e & f\\
 k & l & m\end{array}\right)\]
 
-\end_inset 
+\end_inset
 
  Equating 
 \begin_inset Formula $rU=Ur$
-\end_inset 
+\end_inset
 
  we find immediately that 
 \begin_inset Formula $l=b=0$
-\end_inset 
+\end_inset
 
 .
  Next, equating 
 \begin_inset Formula $Ug_{v}=g_{w}U$
-\end_inset 
+\end_inset
 
  one finds that 
 \begin_inset Formula $d=k=c=f=0$
-\end_inset 
+\end_inset
 
 , leaving 
 \begin_inset Formula $a=e=m$
-\end_inset 
+\end_inset
 
 .
  But when 
 \begin_inset Formula $v\neq w$
-\end_inset 
+\end_inset
 
  we find also that 
 \begin_inset Formula $m=0$
-\end_inset 
+\end_inset
 
 , and so all elements of 
 \begin_inset Formula $U$
-\end_inset 
+\end_inset
 
  vanish.
  There is no equivalency transformation between two different representations.
  
-\emph on 
+\emph on
 QED
-\emph default 
+\emph default
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The above shows that we can use the parameter 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  to label the different 3D representations.
  Note, however, that the parameter 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  also has a (one-to-one) correspondence to the fractal dimension of the
  Takagi curve (at least for 
 \begin_inset Formula $w>1/4$
-\end_inset 
+\end_inset
 
 ).
  Thus, in a certain sense, we can say that the different representations
  correspond to different fractal dimensions (although the correspondence
  is not one-to-one for 
 \begin_inset Formula $w<1/4$
-\end_inset 
+\end_inset
 
 ).
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Give the fractal dimension of the Takagi Curve, as a function
  of 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
 .
-\layout Description
+\end_layout
 
+\begin_layout Description
 Open-Question: We have demonstrated a one-dimensional manifold of representation
 s of the modular group.
  Below, we will show a representation on the complex plane.
  Are there other 3D representations, or is this it? The answer, given further
  below, is 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 yes, there are other 3D reps
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
  These include the left-right symmetric Levy curve, and the left-right symmetric
@@ -1845,112 +1981,118 @@ yes, there are other 3D reps
  While these also transform as 3D reps, they generate plane curves that,
  unlike the Takagi curve, cannot be written as a real-valued function of
  the real number line.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Multi-fractals
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The uniqueness of the Takagi curve for each distinct value of 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  implies that we can use it to define an (incomplete) set of basis vectors
  for functions on the unit interval.
  That is, there is a large class of functions on the unit interval 
 \begin_inset Formula $f(x)$
-\end_inset 
+\end_inset
 
  that can be expressed as 
 \begin_inset Formula \[
 f(x)=\int_{0}^{\infty}c(w)\, t_{w}(x)\; dw\]
 
-\end_inset 
+\end_inset
 
  for some function 
 \begin_inset Formula $c:\mathbb{R}^{+}\rightarrow\mathbb{R}$
-\end_inset 
+\end_inset
 
  or more generally 
 \begin_inset Formula $c:\mathbb{R}^{+}\rightarrow\mathbb{C}$
-\end_inset 
+\end_inset
 
 .
  Thus, for example, the function of equation 
-\begin_inset LatexCommand \ref{eq:strange-expo}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:strange-expo"
 
-\end_inset 
+\end_inset
 
  be expressed in this form.
  The resulting function 
 \begin_inset Formula $f(x)$
-\end_inset 
+\end_inset
 
  does not have any particular self-similarity properties, but its decomposition
  does.
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Cantor Polynomials 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The action of a group element 
 \begin_inset Formula $\gamma$
-\end_inset 
+\end_inset
 
  on the Takagi curve can be written as 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  for some polynomials 
 \begin_inset Formula $p_{\gamma}$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $q_{\gamma}$
-\end_inset 
+\end_inset
 
  and positive integer 
 \begin_inset Formula $M_{\gamma}$
-\end_inset 
+\end_inset
 
  where we use the subscript 
 \begin_inset Formula $\gamma$
-\end_inset 
+\end_inset
 
  to denote that they depend on the particular 
 \begin_inset Formula $\gamma$
-\end_inset 
+\end_inset
 
  chosen.
  A brief bit of scratching shows what the 
 \begin_inset Formula $q_{\gamma}$
-\end_inset 
+\end_inset
 
  polynomial is; but 
 \begin_inset Formula $p_{\gamma}$
-\end_inset 
+\end_inset
 
  is harder.
  For 
 \begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}$
-\end_inset 
+\end_inset
 
  as before, one has 
 \begin_inset Formula $M_{\gamma}=a_{1}+...+a_{N}$
-\end_inset 
+\end_inset
 
 .
  Writing out the binary expansion for 
 \begin_inset Formula $\gamma_{D}(1)$
-\end_inset 
+\end_inset
 
  in terms of binary digits 
 \begin_inset Formula $b_{k}\in\left\{ 0,1\right\} $
-\end_inset 
+\end_inset
 
 , one has 
 \begin_inset Formula \begin{eqnarray}
@@ -1959,12 +2101,12 @@ t_{w}(\gamma_{D}(x))=p_{\gamma}(w)+x\, q_{\gamma}(w)+w^{M_{\gamma}}t_{w}(x)\labe
 0. & \underbrace{000...000} & \underbrace{111...111} & \underbrace{000...000} & ...\\
 \, & a_{1} & a_{2} & a_{3} & \,\end{array}\label{eq:}\end{eqnarray}
 
-\end_inset 
+\end_inset
 
  where, as usual, one takes the expansion such that the final binary digits
  repeat forever, without upsetting the count 
 \begin_inset Formula $a_{N}$
-\end_inset 
+\end_inset
 
  of the previous digits; that is, 
 \begin_inset Formula \begin{equation}
@@ -1972,184 +2114,202 @@ b_{k}=\left\{ \begin{array}{ccc}
 1 & \;\textrm{ for N odd, }\; & \forall k>M\\
 0 & \;\textrm{ for N even, }\; & \forall k>M\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The polynomial 
 \begin_inset Formula $q_{\gamma}$
-\end_inset 
+\end_inset
 
  can then be expressed directly in terms of this binary expansion.
  
 \begin_inset Formula \begin{equation}
 q_{\gamma}(w)=\frac{(-)^{N}}{2^{M-1}}\sum_{k=1}^{M}(2b_{k}-1)\;(2w)^{k-1}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Note that 
 \begin_inset Formula $q_{\gamma}$
-\end_inset 
+\end_inset
 
  is more-or-less equal (up to a factor and a term of 
 \begin_inset Formula $1/(1-2w)$
-\end_inset 
+\end_inset
 
 ) to the derivative
 \begin_inset Formula \[
 \left.\frac{dt_{w}(x)}{dx}\right|_{x=\gamma_{D}(1)}\]
 
-\end_inset 
+\end_inset
 
  We say 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 more or less
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  because some care has to be taken to define which bit expansion defines
  the derivative.
  In a certain sense, 
 \begin_inset Formula $q_{\gamma}$
-\end_inset 
+\end_inset
 
  is the dis-ambiguated derivative.
  This is left as an exercise.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The 
 \begin_inset Formula $p_{\gamma}$
-\end_inset 
+\end_inset
 
  polynomial seems to result from some more complex folding that is hard
  to discern by studying the matrix elements under matrix multiplication.
  However, determining its value for any given 
 \begin_inset Formula $\gamma$
-\end_inset 
+\end_inset
 
  is straightforward enough: we merely need to set 
 \begin_inset Formula $x=0$
-\end_inset 
+\end_inset
 
  to find 
 \begin_inset Formula $p_{\gamma}(w)=t_{w}(\gamma_{D}(0))$
-\end_inset 
+\end_inset
 
 .
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Describe 
 \begin_inset Formula $p_{\gamma}(w)$
-\end_inset 
+\end_inset
 
 .
  Is it possible to give a direct expression for the polynomial? 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The polynomials being dealt with here are closely related to the inverse
  of the Cantor function.
  This is perhaps best presented visually.
  Write the binary expansion of a real number 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  as 
 \begin_inset Formula \begin{equation}
 x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq: binary expansion}\end{equation}
 
-\end_inset 
+\end_inset
 
  and then define its Cantorization as 
 \begin_inset Formula \begin{equation}
 c_{z}(x)=(1-z)\,\sum_{k=1}^{\infty}b_{k}z^{k}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Clearly, for 
 \begin_inset Formula $z=1/2$
-\end_inset 
+\end_inset
 
 , we have 
 \begin_inset Formula $c_{1/2}(x)=x$
-\end_inset 
+\end_inset
 
 .
  For 
 \begin_inset Formula $z=1/3$
-\end_inset 
+\end_inset
 
 , we have essentially the inverse of the classic Cantor function, as show
  in the figure 
-\begin_inset LatexCommand \ref{cap:Cantor-Polynomial}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Cantor-Polynomial"
 
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
 
-\begin_inset Note
-collapsed true
-
-\layout Standard
-
+\begin_layout Plain Layout
 The following graphs are generated by fractal/misc/gap/dyadic.C and dyadic.gplot
-\end_inset 
+\end_layout
+
+\end_inset
 
 
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Cantor-Polynomial"
 
-\begin_inset LatexCommand \label{cap:Cantor-Polynomial}
-
-\end_inset 
+\end_inset
 
 Cantor Polynomial
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename dyadic-1-3.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows a graph of the function 
 \begin_inset Formula $c_{z}(x)$
-\end_inset 
+\end_inset
 
  for a value of 
 \begin_inset Formula $z=1/3$
-\end_inset 
+\end_inset
 
 .
  This graph provides possibly the easiest visual proof that the cardinality
  of the Cantor Set is equal to the cardinality of the unit interval
-\begin_inset LatexCommand \cite{Can1884}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Can1884"
 
-\end_inset 
+\end_inset
 
 , a result which can sometimes be difficult to visualize.
  The function 
 \begin_inset Formula $c_{1/3}(x)$
-\end_inset 
+\end_inset
 
  maps the unit interval into the unit interval.
  It is strictly monotonically increasing, and if 
 \begin_inset Formula $x\neq y$
-\end_inset 
+\end_inset
 
  then 
 \begin_inset Formula $c_{1/3}(x)\neq c_{1/3}(y)$
-\end_inset 
+\end_inset
 
 .
  Thus, this function is one-to-one, and thus the cardinality of the image
@@ -2158,33 +2318,33 @@ This figure shows a graph of the function
  by recursively removing the open middle-third interval.
  The largest 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 middle-third
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  corresponds to 
 \begin_inset Formula $x=1/2$
-\end_inset 
+\end_inset
 
 ; the next two largest correspond to 
 \begin_inset Formula $x=1/4$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $x=3/4$
-\end_inset 
+\end_inset
 
 , and so on: each removed interval corresponds to a rational number, expressed
  as its binary expansion.
  It is not hard to see that that the sum of the lengths of the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 middle thirds
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  adds up to one, and thus, the measure of the image of this function is
  zero.
@@ -2193,75 +2353,79 @@ middle thirds
  zero.
  It is not hard to see that one gets a similar result using 
 \begin_inset Formula $c_{z}(x)$
-\end_inset 
+\end_inset
 
  for any value of 
 \begin_inset Formula $0<z<1/2$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 There were only two 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 tricky
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  parts to this demonstration.
  One is the assertion that 
 \begin_inset Formula $c_{z}(x)\neq c_{z}(y)$
-\end_inset 
+\end_inset
 
  whenever 
 \begin_inset Formula $x\neq y$
-\end_inset 
+\end_inset
 
 , but this can be deduced easily enough by contemplating the definition
  of 
 \begin_inset Formula $c_{z}(x)$
-\end_inset 
+\end_inset
 
 .
  The other trick we slid by here was that 
 \begin_inset Formula $c_{z}(x)$
-\end_inset 
+\end_inset
 
  is somewhat vaguely defined for the rationals: every dyadic rational number
  
 \begin_inset Formula $x=p/2^{n}$
-\end_inset 
+\end_inset
 
  has two inequivalent binary expansions.
  For example, x=1/2=0.1000...=0.0111...
  and the first binary expansion yields 
 \begin_inset Formula $c_{z}(1/2)=1-z$
-\end_inset 
+\end_inset
 
  while the second yields 
 \begin_inset Formula $c_{z}(1/2)=z$
-\end_inset 
+\end_inset
 
 .
  But this doesn't affect the proof: however we choose to tighten up the
  definition of 
 \begin_inset Formula $c_{z}(x)$
-\end_inset 
+\end_inset
 
 , it is still one-to-one and monotonic, and its image still has the cardinality
  of the unit interval.
  
-\end_inset 
+\end_layout
+
+\end_inset
 
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 For larger values of 
 \begin_inset Formula $z$
-\end_inset 
+\end_inset
 
 , one can more clearly see the visual resemblance of the Cantor polynomial
  to the derivative of the Takagi function.
@@ -2273,7 +2437,7 @@ For larger values of
  The essential point is that every rational number has two possible binary
  expansions: for example, it is well known that 
 \begin_inset Formula $1.000..=0.111...$
-\end_inset 
+\end_inset
 
  .
  But each such expansion yields two inequivalent Cantor polynomials.
@@ -2282,34 +2446,35 @@ For larger values of
  of a set of non-overlapping line segments.
  Converting the binary sequence into a polynomial series in 
 \begin_inset Formula $z$
-\end_inset 
+\end_inset
 
  make these two endpoints explicit by assigning a different polynomial to
  each.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Another language one can use to describe this is to say that there is a
  
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 gap
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  at every dyadic fraction i.e.
  at every rational of the form 
 \begin_inset Formula $p/2^{n}$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
  odd and integer 
 \begin_inset Formula $n>0$
-\end_inset 
+\end_inset
 
 .
  This gap is inherent in the representation of the reals by binary sequences.
@@ -2321,58 +2486,71 @@ gap
  Essentially, we can represent every rational as a continued fraction, and
  define gaps analogously.
  This idea is reviewed in the companion paper.
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:cantor-sawtooth"
 
-\begin_inset LatexCommand \label{cap:cantor-sawtooth}
-
-\end_inset 
+\end_inset
 
 Cantor Polynomial
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename dyadic-2-3.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows a graph of the function 
 \begin_inset Formula $c_{z}(x)$
-\end_inset 
+\end_inset
 
  for a value of 
 \begin_inset Formula $z=2/3$
-\end_inset 
+\end_inset
 
 .
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The main insight provided here is that the two endpoints of Cantor's interval
  construction can also be mapped to the left and right derivatives of the
  Takagi function.
  That is, for any dyadic rational 
 \begin_inset Formula $p/2^{n}$
-\end_inset 
+\end_inset
 
  for odd integer 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 , there are two inequivalent binary sequences that represent this rational.
  Each sequence can be used to build a distinct polynomial.
@@ -2383,20 +2561,21 @@ The main insight provided here is that the two endpoints of Cantor's interval
  One sequence maps to the derivative of the Takagi function on one side
  of this rational, and the other to the other side of this rational.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Make the above statements firm by providing all the correct factors
  needed to relate the Cantor polynomial 
 \begin_inset Formula $c_{z}(x)$
-\end_inset 
+\end_inset
 
  to 
 \begin_inset Formula $q_{\gamma}(w)$
-\end_inset 
+\end_inset
 
  and to the suitably firmed-up derivative 
 \begin_inset Formula $dt_{w}(x)/dx$
-\end_inset 
+\end_inset
 
 .
  Start by noticing that the traditional derivative is ill-defined only at
@@ -2406,8 +2585,9 @@ Homework: Make the above statements firm by providing all the correct factors
  is well-defined on a set of measure one.
  At the dyadic fractions, use the gap to assign left and right derivatives,
  and give an exact expression for each.
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: The classic example of a Cantor Set is built by means of a dyadic
  subdivision of the unit interval.
  Because of this, we can apply the monoid symmetry here as well.
@@ -2416,39 +2596,46 @@ Homework: The classic example of a Cantor Set is built by means of a dyadic
  Cantor set can be mapped to the real numbers (the cardinality of the Cantor
  set is the cardinality of the continuum), can we work backwards to deduce
  the action of the modular group monoid on the real number line?
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Presumably, it should be obvious by now that the Cantor Polynomials transform
  as the two-dimensional (dyadic) representation of the period-doubling monoid.
  This should be expected, based on the reasoning about the dimension of
  the representation presented in the next section.
  XXX These last few paragraphs are a less-than satisfying treatment.
-\layout Subsubsection
+\end_layout
 
+\begin_layout Subsubsection
 Cantor Measure
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The juxtaposition of the two figures 
-\begin_inset LatexCommand \ref{cap:Cantor-Polynomial}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Cantor-Polynomial"
 
-\end_inset 
+\end_inset
 
  and 
-\begin_inset LatexCommand \ref{cap:cantor-sawtooth}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:cantor-sawtooth"
 
-\end_inset 
+\end_inset
 
  suggests a mathod for defining a measure on Cantor sets.
  One starts with the ordinary Lebesgue measure on the real number line,
  and passes it through the Cantor polynomial, defined above, and ask how
  that measure accumulates on the 
 \begin_inset Formula $y$
-\end_inset 
+\end_inset
 
 -axis.
  For 
 \begin_inset Formula $z<1/2$
-\end_inset 
+\end_inset
 
 , this mapping defines a distribution that is discontinuous: the measure
  accumulates on the points in the Cantor set, and is vanishing elsewhere.
@@ -2457,290 +2644,336 @@ The juxtaposition of the two figures
  a set, and zero for points not in the set.
  For 
 \begin_inset Formula $z>1/2$
-\end_inset 
+\end_inset
 
 , however, the sawtooth graph makes clear that intervals on the 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 -axis will be projected to a multitude of overlapping intervals on the 
 \begin_inset Formula $y$
-\end_inset 
+\end_inset
 
 -axis.
  One may ask what the resulting distribution is on the 
 \begin_inset Formula $y$
-\end_inset 
+\end_inset
 
 -axis.
  The following figures illustrate the answer.
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Cantor Distributions
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename cantor-dust-0.618.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename cantor-dust-0.66666.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 These graphs shows the distribution that results from taking the uniform
  distribution on the real number line (the Lebesgue measure on the 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 -axis) and passing it through the polynomial 
 \begin_inset Formula $y=c_{z}(x)$
-\end_inset 
+\end_inset
 
  and projecting it on the 
 \begin_inset Formula $y$
-\end_inset 
+\end_inset
 
 -axis.
  The upper graph is for the case of 
 \begin_inset Formula $z=0.618$
-\end_inset 
+\end_inset
 
 , and the lower for 
 \begin_inset Formula $z=2/3$
-\end_inset 
+\end_inset
 
 .
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Cantor Distributions
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename cantor-dust-0.8.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename cantor-dust-0.95.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 These graphs shows the distribution that results from taking the uniform
  distribution on the real number line (the Lebesgue measure on the 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 -axis) and passing it through the polynomial 
 \begin_inset Formula $y=c_{z}(x)$
-\end_inset 
+\end_inset
 
  and projecting it on the 
 \begin_inset Formula $y$
-\end_inset 
+\end_inset
 
 -axis.
  The upper graph is for the case of 
 \begin_inset Formula $z=0.8$
-\end_inset 
+\end_inset
 
 , and the lower for 
 \begin_inset Formula $z=0.95$
-\end_inset 
+\end_inset
 
 .
  Both graphs appear smooth, but are presumably fractal at microscopic scales.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Complex-valued Takagi Curve
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Some rather remarkable curves result when one considers the Takagi curve
  for complex values of the parameter 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
 .
  The symmetry considerations given above apply equally well to real or complex
  values of 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
 .
  What is remarkable is how the self similarity can in fact be so carefully
  hidden.
  The phase plot shown in figure 
-\begin_inset LatexCommand \ref{cap:Takagi-Phase-Plot}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Takagi-Phase-Plot"
 
-\end_inset 
+\end_inset
 
  visually resembles nothing so much as a Brownian random walk.
  Some of the mystery of this plot is revealed by examining the real and
  imaginary parts independently, as shown in figure 
-\begin_inset LatexCommand \ref{cap:Takagi-Real-and}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Takagi-Real-and"
 
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Takagi-Phase-Plot"
 
-\begin_inset LatexCommand \label{cap:Takagi-Phase-Plot}
-
-\end_inset 
+\end_inset
 
 Takagi Phase Plot
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename takagi-phase.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows a phase plot of 
 \begin_inset Formula $t_{w}(x)$
-\end_inset 
+\end_inset
 
  as a function of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  for a fixed value of 
 \begin_inset Formula $w=0.618i$
-\end_inset 
+\end_inset
 
 .
  This curve has exactly the same fractal self-similarity as the curve shown
  in figure 
-\begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:The-Takagi-Landsberg-Curve"
 
-\end_inset 
+\end_inset
 
 , but here, the self-similarity of this curve is far from apparent.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename takagi-complex.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows the real and imaginary parts of 
 \begin_inset Formula $t_{w}(x)$
-\end_inset 
+\end_inset
 
  as a function of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  for a fixed value of 
 \begin_inset Formula $w=0.618i$
-\end_inset 
+\end_inset
 
 .
  The general symmetry is more readily appearent here.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Section
+\end_layout
 
+\begin_layout Section
 The Four-Dimensional Representation
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Replacing the sawtooth shape that defines the the Takagi function with a
  polynomial leads to a curve that transforms under a higher-dimensional
  representation, specifically, as the degree of the polynomial plus two.
  This section works out the four-dimensional representation and then presents
  the general finite-dimensional representation.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Lets replace the sawtooth by a quadratic shape
 \begin_inset Formula \begin{equation}
 \alpha(x)=\left\{ \begin{array}{ccc}
 4x^{2} & \;\textrm{ when }\; & 0\leq x\leq1/2\\
 4(1-x)^{2} & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  so that 
 \begin_inset Formula \begin{equation}
 a_{w}(x)=\sum_{k=0}^{\infty}w^{k}\alpha\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Its not hard to find that 
 \begin_inset Formula \begin{equation}
 \left[g_{4}a_{w}\right](x)\equiv\left(a_{w}\circ g_{D}\right)(x)=a_{w}\left(\frac{x}{2}\right)=x^{2}+wa_{w}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Combining this with the reflection 
 \begin_inset Formula $r(x)=1-x$
-\end_inset 
+\end_inset
 
 , it is seen again that the transformations are linear and closed, and thus
  again a vector space, this time four-dimensional.
  The generator 
 \begin_inset Formula $g_{4}$
-\end_inset 
+\end_inset
 
 can be represented as the matrix 
 \begin_inset Formula \begin{equation}
@@ -2750,11 +2983,11 @@ g_{4}=\left(\begin{array}{cccc}
 0 & 0 & \frac{1}{4} & 0\\
 0 & 0 & 1 & w\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and the reflection 
 \begin_inset Formula $r(x)=1-x$
-\end_inset 
+\end_inset
 
  as 
 \begin_inset Formula \begin{equation}
@@ -2764,39 +2997,40 @@ r_{4}=\left(\begin{array}{cccc}
 1 & -2 & 1 & 0\\
 0 & 0 & 0 & 1\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  with the constructions of the isomorphisms proceeding as before.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 In general, if 
 \begin_inset Formula $\alpha(x)$
-\end_inset 
+\end_inset
 
  is replaced with another quadratic construction that is even about 
 \begin_inset Formula $x=1/2$
-\end_inset 
+\end_inset
 
 , then the corresponding generator 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  will be conjugate to 
 \begin_inset Formula $g_{4}$
-\end_inset 
+\end_inset
 
 .
  For example, if we were to construct the curve from 
 \begin_inset Formula \begin{equation}
 \beta(x)=4x(1-x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  so that 
 \begin_inset Formula \begin{equation}
 b_{w}(x)=\sum_{k=0}^{\infty}w^{k}\beta\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  then we'd find that 
 \begin_inset Formula \begin{equation}
@@ -2806,19 +3040,19 @@ g_{b}=\left(\begin{array}{cccc}
 0 & 0 & \frac{1}{4} & 0\\
 0 & 2 & -1 & w\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  is conjugate to 
 \begin_inset Formula $g_{4}$
-\end_inset 
+\end_inset
 
  through 
 \begin_inset Formula $Ug_{4}=g_{b}U$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $U$
-\end_inset 
+\end_inset
 
  given by 
 \begin_inset Formula \begin{equation}
@@ -2828,29 +3062,30 @@ U=\left(\begin{array}{cccc}
 0 & 0 & 1 & 0\\
 0 & \frac{4}{1-2w} & \frac{-4}{1-2w} & \frac{-2w}{1-2w}\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Note that this conjugacy breaks down when 
 \begin_inset Formula $w=1/2$
-\end_inset 
+\end_inset
 
 .
  This is because the curve generated by 
 \begin_inset Formula $\alpha(x)$
-\end_inset 
+\end_inset
 
  becomes a parabola at this point; that is, 
 \begin_inset Formula $a_{1/2}(x)=4x(1-x)$
-\end_inset 
+\end_inset
 
 , which transforms under the three-dimensional, not the four-dimensional
  representation.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 We can also construct a function that is odd about 
 \begin_inset Formula $x=1/2$
-\end_inset 
+\end_inset
 
 : 
 \begin_inset Formula \begin{equation}
@@ -2858,31 +3093,31 @@ We can also construct a function that is odd about
 16x(1/2-x) & \;\textrm{ when }\; & 0\leq x\leq1/2\\
 16(1-x)(1/2-x) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which is a pair of oppositely oriented parabolas.
  We use the subscript 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 o
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  to denote odd parity.
  A graph looks like a rude, crude version of the sine function.
  We then have 
 \begin_inset Formula $\beta_{o}(1-x)=-\beta_{o}(x)$
-\end_inset 
+\end_inset
 
  and so 
 \begin_inset Formula $b_{o,w}(1-x)=-b_{o,w}(x)$
-\end_inset 
+\end_inset
 
 .
  The representation for 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  for this function has an extra minus sign: 
 \begin_inset Formula \begin{equation}
@@ -2892,28 +3127,28 @@ r_{4o}=\left(\begin{array}{cccc}
 1 & -2 & 1 & 0\\
 0 & 0 & 0 & -1\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and cannot be made conjugate to 
 \begin_inset Formula $r_{4}$
-\end_inset 
+\end_inset
 
 ; that is, there does not exist a 
 \begin_inset Formula $U$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $\det\, U\neq0$
-\end_inset 
+\end_inset
 
  such that 
 \begin_inset Formula $Ur_{4o}U^{-1}=r_{4}$
-\end_inset 
+\end_inset
 
 .
  The rep for 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  is 
 \begin_inset Formula \begin{equation}
@@ -2923,16 +3158,16 @@ g_{4o}=\left(\begin{array}{cccc}
 0 & 0 & \frac{1}{4} & 0\\
 0 & 4 & -4 & w\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  because 
 \begin_inset Formula $b_{o,w}(g(x))=4x(1-x)+wb_{o,w}(x)$
-\end_inset 
+\end_inset
 
 .
  So in fact, for a fixed 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
 , we have two 4D representations, of even and odd parity, that aren't conjugate.
  Working backwards, we realize that there is actually another 3D representation,
@@ -2944,62 +3179,63 @@ g_{4o}=\left(\begin{array}{cccc}
 2-4x & \;\textrm{ for }\; & 1/4\leq x\leq3/4\\
 4x-4 & \;\textrm{ for }\; & 3/4\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and give an odd-parity representation because 
 \begin_inset Formula $\sigma(1-x)=-\sigma(x)$
-\end_inset 
+\end_inset
 
 .
  Under 
 \begin_inset Formula $g,$
-\end_inset 
+\end_inset
 
  we have 
 \begin_inset Formula $\sigma(g(x))=\tau(x)+w\sigma(x)$
-\end_inset 
+\end_inset
 
 .
  However, if we try to work out the matrix representation 
 \begin_inset Formula $g_{3o}$
-\end_inset 
+\end_inset
 
  for this function, we find that the bottom row of the matrix has elements
  that aren't constants, but are rather piece-wise assemblies that depend
  on whether 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is greater or less than 1/2.
  Strictly speaking, then, this isn't a linear representation.
  We can try to save the day by building a different odd-parity sawtooth;
  but then we find that such a sawtooth will be discontinuous at 
 \begin_inset Formula $x=0$
-\end_inset 
+\end_inset
 
  and/or at 
 \begin_inset Formula $x=1/2$
-\end_inset 
+\end_inset
 
 .
  In other words, there doesn't seem to be a continuous odd-parity representation
  in 
 \begin_inset Formula $GL(3,\mathbb{R})$
-\end_inset 
+\end_inset
 
 .
  There is, however, an odd-parity representation in 
 \begin_inset Formula $GL(3,\mathbb{R})$
-\end_inset 
+\end_inset
 
  that is not continuous: it is the one built from 
 \begin_inset Formula $\sigma(x)=x-1/2$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 For the most part, we've tried to be careful to choose functions that yield
  a continuous Takagi curve.
  One can build discontinuous curves by working with the square-wave.
@@ -3013,38 +3249,40 @@ e, by following the same recipe:
 16(x-1/2)^{2}-1 & \;\textrm{ for }\; & 1/4\leq x\leq3/4\\
 1-16(1-x)^{2} & \;\textrm{ for }\; & 3/4\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  This is explicitly even: 
 \begin_inset Formula $\beta_{e}(1-x)=\beta_{e}(x)$
-\end_inset 
+\end_inset
 
 .
  A graph of this looks like a rude, crude version of the cosine.
  If we try to work out the matrix representation 
 \begin_inset Formula $g_{4e}$
-\end_inset 
+\end_inset
 
  for this function, we run into difficulty again: the bottom row of the
  matrix has elements that aren't constants, but are rather piece-wise assemblies
  that depend on whether 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is greater or less than 1/2.
  It seems that there isn't any even-parity quadratic function with continuous
  first derivatives that has a matrix representation in 
 \begin_inset Formula $GL(4,\mathbb{R})$
-\end_inset 
+\end_inset
 
 .
  This seems to mirror the odd-parity problem for the 3D rep.
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Higher-Dimensional Representations
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 It should now be apparent how to build arbitrary higher-dimensional representati
 ons.
  One can, for instance, start with 
@@ -3053,34 +3291,34 @@ ons.
 2^{n}x^{n} & \;\textrm{ when }\; & 0\leq x\leq1/2\\
 2^{n}(1-x)^{n} & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and discover that 
 \begin_inset Formula \begin{equation}
 \left[g_{n+2}a_{n,w}\right](x)\equiv\left(a_{n,w}\circ g_{D}\right)(x)=a_{n,w}\left(\frac{x}{2}\right)=x^{n}+wa_{n,w}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The matrix representation of 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  has inverse powers of 2 along the diagonal, except for the last row, and
  the reflection matrix is lower-triangular, with binomial coefficients making
  up the triangle (excluding the last row).
  If one attempts different constructions by replacing the monomial 
 \begin_inset Formula $2^{n}x^{n}$
-\end_inset 
+\end_inset
 
  with a polynomial, but keeping 
 \begin_inset Formula $\alpha_{n}$
-\end_inset 
+\end_inset
 
  even about 1/2, then one finds that all these representations are conjugate
  to each other.
  Alternately, we can construct 
 \begin_inset Formula $\alpha_{n}$
-\end_inset 
+\end_inset
 
  so that it is odd about 1/2; in this case, we again find that all the represent
 ations are equivalent up to conjugacy.
@@ -3088,22 +3326,23 @@ ations are equivalent up to conjugacy.
  representations, which we shall call even and odd, according to the symmetry
  of the Takagi curve that forms the basis vector.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The above 
 \begin_inset Formula $\alpha_{n}(x)$
-\end_inset 
+\end_inset
 
  is explicitly even-parity, but its first derivative is discontinuous at
  
 \begin_inset Formula $x=1/2$
-\end_inset 
+\end_inset
 
 .
  One can then try to build even and odd-parity functions of a given degree,
  with continuous 
 \begin_inset Formula $(n-1)$
-\end_inset 
+\end_inset
 
 'th derivatives.
  The corresponding representations then succeed or founder as in the 3D/4D
@@ -3112,11 +3351,11 @@ The above
  That is, one of the two representations will allow Takagi curves that are
  
 \begin_inset Formula $n-1$
-\end_inset 
+\end_inset
 
  times differentiable, while the other can work only up to 
 \begin_inset Formula $n-2$
-\end_inset 
+\end_inset
 
 .
  The obvious choice for the differentiable-curve construction are the Bernoulli
@@ -3126,38 +3365,38 @@ The above
  and cosine.
  That is, 
 \begin_inset Formula $B_{2n}(x)\rightarrow\pm A_{2n}\cos(2\pi x)$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $B_{2n+1}(x)\rightarrow\pm A_{2n+1}\sin(2\pi x)$
-\end_inset 
+\end_inset
 
  as 
 \begin_inset Formula $n\rightarrow\infty$
-\end_inset 
+\end_inset
 
  for some constants 
 \begin_inset Formula $A_{n}$
-\end_inset 
+\end_inset
 
 .
  That is, we assert that an appropriate and natural choice for the basis
  vectors for the higher-dimensional representations are given by Bernoulli
  polynomials.
  We thus define the basis vectors to be 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 T_{n+}(x;w)=\sum_{k=0}^{\infty}w^{k}B_{n}\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  for the one parity, and, for the opposite parity, 
 \begin_inset Formula \begin{equation}
 T_{n-}(x;w)=\sum_{k=0}^{\infty}w^{k}\check{B}_{n}\left(2^{k}x-\left\lfloor 2^{k}x\right\rfloor \right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where we define 
 \begin_inset Formula \begin{equation}
@@ -3165,167 +3404,197 @@ T_{n-}(x;w)=\sum_{k=0}^{\infty}w^{k}\check{B}_{n}\left(2^{k}x-\left\lfloor 2^{k}
 B_{n}(2x)-B_{n}(1) & \;\textrm{ when }\; & 0\leq x\leq1/2\\
 (-)^{n}\left(B_{n}(1)-B_{n}(2(1-x))\right) & \;\textrm{ when }\; & 1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The next chapter will explore these expressions in greater detail, xxxxxxxx
  fix the above to match basis used in other chapters.
  xxxxx 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Given that higher and higher degree polynomials require higher and higher-dimens
 ional representations, this implies that a Takagi curve built out of a general
  function will in some way transform as an 'infinite dimensional' representation.
  We find it curious, though, that alternating even and odd-parity representation
 s seem to allow sine and cosine to be built up in a natural fashion, thus
  opening the door for Fourier analysis
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The next section takes a quick look at one example of an 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 infinite-dimensional
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  curve, the fractal eigenfunctions of the Bernoulli map transfer operator.
-\layout Section
+\end_layout
 
+\begin_layout Section
 Bernoulli Map Symmetry
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The eigenfunctions of the Bernoulli map 
-\begin_inset LatexCommand \cite{Dri99}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dri99"
 
-\end_inset 
+\end_inset
 
  bear a close resemblance to the Takagi curve, and one might say they are
  generalization of the Takagi Curve to the complex plane.
  These are
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 \psi_{z,l}(x)=\sum_{n=0}^{\infty}z^{n}\exp\left(2\pi i\;2^{n}\left(2l+1\right)x\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Insofar as the exponential can be considered to be a polynomial of infinite
  degree, or to be constructed as the limit of a series of polynomials, then
  one might expect these functions to transform under some 'infinite-dimensional'
  representation, taken as a limit of the above development for polynomials.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The two figures show two of these curves, for different values of 
 \begin_inset Formula $z$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Bernoulli Map Eigenfunction
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename beigen-0.55-0.0.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 Above is shown a polar plot of the Bernoulli Map eigenfunction 
 \begin_inset Formula $\psi_{zl}(x)$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $l=0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $z=0.55$
-\end_inset 
+\end_inset
 
 .
  The x and y axis are respectively the real and imaginary parts of 
 \begin_inset Formula $\psi_{zl}(x)$
-\end_inset 
+\end_inset
 
 .
  For smaller 
 \begin_inset Formula $|z|$
-\end_inset 
+\end_inset
 
 , the loops shrink in size and quickly disappear.
  Adding imaginary components breaks the mirror symmetry of the curve.
  Larger values of 
 \begin_inset Formula $|z|$
-\end_inset 
+\end_inset
 
  makes the loops increasingly convoluted, as the next figure shows.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Bernoulli Map Eigenfunction
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename beigen-0.7-0.16.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 Above is shown a polar plot of the Bernoulli Map eigenfunction 
 \begin_inset Formula $\psi_{zl}(x)$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $l=0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $z=0.7+0.16i$
-\end_inset 
+\end_inset
 
 .
  The x and y axis are respectively the real and imaginary parts of 
 \begin_inset Formula $\psi_{zl}(x)$
-\end_inset 
+\end_inset
 
 .
  Because the curlicues of the figure overlap enough to make a big mess,
  we've colored the image so that green and yellow indicate areas where the
  curve overlaps many, many times, and the blue areas where the curve is
  visited only a few times.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 It can be readily worked out that the factor of 
 \begin_inset Formula $2l+1$
-\end_inset 
+\end_inset
 
 , which is needed to enumerate the eigenfunctions, does not add any new
  or interesting complications to the overall symmetry.
@@ -3333,36 +3602,36 @@ It can be readily worked out that the factor of
  in a fashion similar to the Takagi Curve.
  Starting with 
 \begin_inset Formula $g,$
-\end_inset 
+\end_inset
 
  we have 
 \begin_inset Formula \begin{equation}
 \left[g\psi_{z,l}\right](x)=\left[\psi_{z,l}g\right](x)=\psi_{z,l}(\frac{x}{2})=\exp\left((2l+1)\pi ix\right)+z\psi_{z,l}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and for reflection,
 \begin_inset Formula \begin{equation}
 \left[r\psi_{z,l}\right](x)=\left[\psi_{z,l}r\right](x)=\psi_{z,l}(1-x)=\psi_{z,l}(-x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Concatenating group elements proceeds in a fashion similar to before.
  For example, 
 \begin_inset Formula \begin{equation}
 g_{D}^{3}r_{D}g_{D}^{2}(x)=\frac{1}{8}-\frac{x}{32}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and so 
 \begin_inset Formula \begin{equation}
 \left[g^{3}rg^{2}\psi_{z}\right](x)=\psi_{z}\left(\frac{1}{8}-\frac{x}{32}\right)=\exp\left(i\pi\left(\frac{1}{4}-\frac{x}{16}\right)\right)+z\psi_{z}\left(\frac{1}{4}-\frac{x}{16}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where we've taken, for convenience, 
 \begin_inset Formula $l=0$
-\end_inset 
+\end_inset
 
 .
  Peeling off one group element at a time, we finally get 
@@ -3371,7 +3640,7 @@ g_{D}^{3}r_{D}g_{D}^{2}(x)=\frac{1}{8}-\frac{x}{32}\label{eq:}\end{equation}
  & + & z^{2}\exp\left(i\pi\left(1-\frac{x}{4}\right)\right)+z^{3}\exp\left(-i\pi\frac{x}{2}\right)+\nonumber \\
  & + & z^{4}\exp\left(-i\pi x\right)+z^{5}\psi_{z}\left(-x\right)\end{eqnarray}
 
-\end_inset 
+\end_inset
 
  However, this obscures the true form of the transformation, which is exhibited
  more clearly if we write the above as 
@@ -3379,200 +3648,206 @@ g_{D}^{3}r_{D}g_{D}^{2}(x)=\frac{1}{8}-\frac{x}{32}\label{eq:}\end{equation}
 g^{3}rg^{2}\psi_{z} & = & \psi_{z}g^{3}rg^{2}\nonumber \\
  & = & Eg^{3}rg^{2}+z\, Eg^{2}rg^{2}+z^{2}Egrg^{2}+z^{3}Erg^{2}+z^{4}Erg+z^{5}\psi_{z}r\end{eqnarray}
 
-\end_inset 
+\end_inset
 
  where we defined 
 \begin_inset Formula $E(x)\equiv\exp(2\pi ix)=\psi_{z=0}(x)$
-\end_inset 
+\end_inset
 
 .
  Just to be perfectly clear, in the above expression, we mean functional
  composition whenever two elements are next to each other, with the exception
  of 
 \begin_inset Formula $z$
-\end_inset 
+\end_inset
 
 , which is just plain multiplication.
  The operator 
 \begin_inset Formula $E$
-\end_inset 
+\end_inset
 
  has the effect of peeling off one group element at a time, and converting
  it to a 
 \begin_inset Formula $z.$
-\end_inset 
+\end_inset
 
  The result is a funny polynomial which captures the action of the group
  element.
  The funny polynomial is the orbit of 
 \begin_inset Formula $\psi_{z}$
-\end_inset 
+\end_inset
 
  under the action of a general group element.
  We abstain from trying to write the corresponding polynomial for the general
  element 
 \begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}$
-\end_inset 
+\end_inset
 
  mostly because it would be quite ungainly.
  We note only that the highest power of 
 \begin_inset Formula $z$
-\end_inset 
+\end_inset
 
  will be 
 \begin_inset Formula $a_{1}+a_{2}+...+a_{N}$
-\end_inset 
+\end_inset
 
  and also that 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  can take the place of a minus sign, in that 
 \begin_inset Formula $(Er)(x)=E(r(x))=E(1-x)=E(-x)$
-\end_inset 
+\end_inset
 
 , which remains in place, until the next 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  cancels it out.
  None-the-less, this polynomial is curious, and calls for further development.
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Topologically Conjugate Maps
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Modular Group Symmetry describes not just this peculiar handful of curves,
  but in fact a large class of curves.
  Any monotonically increasing function 
 \begin_inset Formula $\phi(x)$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $\phi(0)=0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\phi(1)=1$
-\end_inset 
+\end_inset
 
  can be used to build topologically conjugate maps.
  For the tent map, we write 
 \begin_inset Formula $\sigma(x)=(\phi\circ\tau\circ\phi^{-1})(x)$
-\end_inset 
+\end_inset
 
  so that 
 \begin_inset Formula \begin{equation}
 s_{w}(x)=\sum_{k=0}^{\infty}w^{k}(\phi\circ\tau^{k+1}\circ\phi^{-1})(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which transforms under the action of 
 \begin_inset Formula \begin{equation}
 g_{\phi}(x)=(\phi\circ g_{D}\circ\phi^{-1})(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  as 
 \begin_inset Formula \begin{equation}
 \left[gs_{w}\right](x)\equiv s_{w}(g_{\phi}(x))=x+ws_{w}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  This transformation law follows rather trivially, because we had 
 \begin_inset Formula $\tau^{n+1}g_{D}=\tau^{n}$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $n>0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $(\tau g_{D})(x)=(1)(x)=x$
-\end_inset 
+\end_inset
 
 .
  In the same vein, we define 
 \begin_inset Formula \begin{equation}
 r_{\phi}(x)=(\phi\circ r_{D}\circ\phi^{-1})(x)\end{equation}
 
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $r_{D}(x)=1-x$
-\end_inset 
+\end_inset
 
 .
  Working with these two generators, we can construct the generic element
  very easily, as 
 \begin_inset Formula $\gamma_{\phi}=\phi\circ\gamma_{D}\circ\phi^{-1}$
-\end_inset 
+\end_inset
 
 , and discover, of course, that 
 \begin_inset Formula $s_{w}$
-\end_inset 
+\end_inset
 
  transforms under exactly the same three-dimensional representation that
  
 \begin_inset Formula $t_{w}$
-\end_inset 
+\end_inset
 
  does.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Lets quickly examine a specific example, the Logistic map of unit height.
  This map is conjugate to the tent map, and the conjugating functions are
  given by 
 \begin_inset Formula \begin{equation}
 \phi(x)=\frac{1}{2}-\frac{1}{2}\cos\left(\pi x\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \begin{equation}
 \phi^{-1}(x)=\frac{1}{\pi}\arccos\left(1-2x\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  so that we get 
 \begin_inset Formula \begin{equation}
 \lambda(x)\equiv(\phi\circ\tau\circ\phi^{-1})(x)=4x(x-1)\end{equation}
 
-\end_inset 
+\end_inset
 
  Then, iterating on this map, we get 
 \begin_inset Formula \begin{equation}
 L_{w}(x)=\sum_{k=0}^{\infty}w^{k}\lambda^{k+1}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The generators of the symmetry group for this conjugating function are
  
 \begin_inset Formula \begin{equation}
 g_{\phi}(x)=\frac{1}{2}-\frac{1}{2}\sqrt{1-x}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r_{\phi}(x)=r_{D}(x)=1-x$
-\end_inset 
+\end_inset
 
 .
  The graph of this curve is not that interesting and generally resembles
  that of the Takagi Curve shown in 
-\begin_inset LatexCommand \ref{cap:The-Takagi-Landsberg-Curve}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:The-Takagi-Landsberg-Curve"
 
-\end_inset 
+\end_inset
 
 , and thus we do not graph it here.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Although constructed from a parabola, do not confuse this curve with the
  curve that transforms under the 4D rep: this is because 
 \begin_inset Formula $\lambda^{k+1}(x)\neq\lambda(2^{k}x)$
-\end_inset 
+\end_inset
 
 : in one case, we are iterating, in the other, we are making copies.
  In the above discussion, we've conflated two different concepts: the act
@@ -3580,16 +3855,16 @@ Although constructed from a parabola, do not confuse this curve with the
  We can do this because iterating the tent map just makes copies of the
  map: 
 \begin_inset Formula $\tau^{k+1}(x)=\tau(2^{k}x)$
-\end_inset 
+\end_inset
 
 .
  This is generally not the case for other maps, and the tent map is unique
  in this way (XXX??? right? or is there some other bizarre map that behaves
  like this?) Thus, we have an important corollary here: 
-\series bold 
+\series bold
 curves generated by iterated maps always transform under the three-dimensional
  representation, and not the higher-dimensional representations
-\series default 
+\series default
 .
  The higher-dimensional representations cannot be made conjugate to iterated
  maps, because if they could be, they'd transform under the three-dimensional
@@ -3600,51 +3875,57 @@ curves generated by iterated maps always transform under the three-dimensional
  be made conjugate to the tent map, and answering this question should provide
  insight into the nature of iteration.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The rest of this section is devoted to examining some more examples of iterated
  maps that can be made conjugate.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A tad more interesting is the Isola Map
-\begin_inset LatexCommand \cite{Iso03}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Iso03"
 
-\end_inset 
+\end_inset
 
 , which provides a connection to Farey Numbers and continued fractions:
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 F(x)=\left\{ \begin{array}{c}
 x/(1-x)\;\textrm{ if }\;0\leq x\leq1/2\\
 (1-x)/x\;\textrm{ if }\;1/2\leq x\leq1\end{array}\right.\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  This map is conjugate to the tent map, although the conjugating function
  is not analytic: it is the Minkowski Question Mark: 
 \begin_inset Formula \begin{equation}
 F(x)=(?^{-1}\circ\tau\circ?)(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Iterating on this map give curve shown in the figure 
-\begin_inset LatexCommand \ref{cap:Iterated-Isola-Map}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Iterated-Isola-Map"
 
-\end_inset 
+\end_inset
 
  below.
  The symmetry generators are 
 \begin_inset Formula \begin{equation}
 g_{?^{-1}}(x)=(?^{-1}\circ g_{D}\circ?)(x)=g_{C}(x)=\frac{x}{1+x}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r_{?^{-1}}(x)=r_{C}(x)=r_{D}(x)=1-x$
-\end_inset 
+\end_inset
 
 .
  These are the generators explored in a previous chapter.
@@ -3653,11 +3934,11 @@ g_{?^{-1}}(x)=(?^{-1}\circ g_{D}\circ?)(x)=g_{C}(x)=\frac{x}{1+x}\label{eq:}\end
  Of interest here is that these arise out of iteration: the Farey Fractions
  are the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 pre-images
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  of the fixed point at zero.
  Given any Farey Fraction, the Isola map will iterate them to zero after
@@ -3665,60 +3946,73 @@ pre-images
  Insofar as the Farey Fractions are dense on the unit interval, then the
  Julia Set of the iterated Isola Map is the whole unit interval.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Iterated-Isola-Map"
 
-\begin_inset LatexCommand \label{cap:Iterated-Isola-Map}
-
-\end_inset 
+\end_inset
 
 Iterated Isola Map
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename isola-curve.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows the result of constructing the Takagi Curve for the iterated
  Isola Map.
  That is, the graph shows 
 \begin_inset Formula \begin{equation}
 F_{w}(x)=\sum_{k=0}^{\infty}w^{k}F^{k+1}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $F=?^{-1}\circ\tau\circ?$
-\end_inset 
+\end_inset
 
  and w=0.6.
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 As the above example shows, it is remarkably difficult to construct a conjugatin
 g function even when it is 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 obvious
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  that a map should be conjugate to the Tent map.
  We were lucky to know that the Minkowski Question Mark was what was needed:
@@ -3728,15 +4022,19 @@ obvious
  In view of this difficulty, it is of some merit to create a dictionary
  of conjugating functions and describe the structure of the space of functions
  that are conjugate to the Tent Map.
-\layout Section
+\end_layout
 
+\begin_layout Section
 The de Rham Construction
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 In a classic 1957 paper
-\begin_inset LatexCommand \cite{DeR57}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeR57"
 
-\end_inset 
+\end_inset
 
 , Georges de Rham constructs a class of curves, and proves that these curves
  are everywhere continuous but are nowhere differentiable (more precisely,
@@ -3746,25 +4044,26 @@ In a classic 1957 paper
  The construction is simple.
  This section illustrates some of these curves.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Consider a pair of contracting maps of the plane 
 \begin_inset Formula $d_{0}:\mathbb{R}^{2}\to\mathbb{R}^{2}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $d_{1}:\mathbb{R}^{2}\to\mathbb{R}^{2}$
-\end_inset 
+\end_inset
 
 .
  By the Banach fixed point theorem, such contracting maps should have fixed
  points 
 \begin_inset Formula $p_{0}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $p_{1}$
-\end_inset 
+\end_inset
 
 .
  Assume that each fixed point lies in the basin of attraction of the other
@@ -3773,267 +4072,310 @@ Consider a pair of contracting maps of the plane
 \begin_inset Formula \begin{equation}
 d_{1}(p_{0})=d_{0}(p_{1})\label{eq:continuity condition}\end{equation}
 
-\end_inset 
+\end_inset
 
  Then these maps can be used to construct a certain continuous curve between
  
 \begin_inset Formula $p_{0}$
-\end_inset 
+\end_inset
 
 and 
 \begin_inset Formula $p_{1}$
-\end_inset 
+\end_inset
 
 .
  Consider next the expansion in binary digits of a real number 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , as given previously in eqn.
  
-\begin_inset LatexCommand \ref{eq: binary expansion}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: binary expansion"
 
-\end_inset 
+\end_inset
 
 :
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 x=\sum_{k=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The de Rham curve is then a map characterized by the continuous parameter
  
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 : 
 \begin_inset Formula \begin{equation}
 d_{x}=d_{b_{1}}\circ\; d_{b_{2}}\circ\,\ldots\:\circ\, d_{b_{k}}\circ\,\ldots\label{eq:de-Rham curve}\end{equation}
 
-\end_inset 
+\end_inset
 
  The above map will map points in the common basin of attraction of the
  two maps to a single point.
  De Rham provides a simple proof that the resulting set of points form a
  continuous curve as a function of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , and that furthermore, this function is not differentiable in any conventional
  sense.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 De Rham provides several examples.
  Let 
 \begin_inset Formula $z=u+iv$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $a\in\mathbb{C}$
-\end_inset 
+\end_inset
 
  be a constant such that 
 \begin_inset Formula $|a|<1$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $|a-1|<1$
-\end_inset 
+\end_inset
 
 .
  Then consider the maps 
 \begin_inset Formula \begin{equation}
 d_{0}(z)=az\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \begin{equation}
 d_{1}(z)=a+(1-a)z\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  These two maps clearly have fixed points at 
 \begin_inset Formula $z=0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $z=1$
-\end_inset 
+\end_inset
 
 , respectively.
  The generated curve is is the non-differentiable curve of 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 Ces
-\backslash 
+\backslash
 `{a}ro
-\end_inset 
+\end_layout
+
+\end_inset
 
  and Faber, now known more generally as the 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 L
-\backslash 
+\backslash
 '{e}vy
-\end_inset 
+\end_layout
+
+\end_inset
 
  C-curve, especially when 
 \begin_inset Formula $a=0.5+i0.5$
-\end_inset 
+\end_inset
 
 .
  See figures 
-\begin_inset LatexCommand \ref{cap:Levy-Curve}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Levy-Curve"
 
-\end_inset 
+\end_inset
 
  and 
-\begin_inset LatexCommand \ref{cap:Cesaro-Curve}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Cesaro-Curve"
 
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
 
-\begin_inset Note
-collapsed true
-
-\layout Standard
-
+\begin_layout Plain Layout
 All figures from this section come from fractal/misc/de-rham/de-rham.c, curve.pl
  and curve.gplot.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Levy-Curve"
 
-\begin_inset LatexCommand \label{cap:Levy-Curve}
-
-\end_inset 
+\end_inset
 
 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 Ces
-\backslash 
+\backslash
 `{a}ro
-\end_inset 
+\end_layout
+
+\end_inset
 
  Curve
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename levy-c-curve.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 The 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 Ces
-\backslash 
+\backslash
 `{a}ro
-\end_inset 
+\end_layout
+
+\end_inset
 
  curve, graphed for the value of 
 \begin_inset Formula $a=(1+i)/2$
-\end_inset 
+\end_inset
 
 .
  Note that this figure is more commonly known as the 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 L
-\backslash 
+\backslash
 '{e}vy
-\end_inset 
+\end_layout
+
+\end_inset
 
  C-curve.
-\layout Standard
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename cesaro.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 The 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 Ces
-\backslash 
+\backslash
 `{a}ro
-\end_inset 
+\end_layout
+
+\end_inset
 
  curve, graphed for the value of 
 \begin_inset Formula $a=0.3+i0.3$
-\end_inset 
+\end_inset
 
 .
  The real parameter shifts the symmetry point: thus the biggest loop is
  located at 0.3 in this picture, instead of being located at 0.5 as in the
  
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 L
-\backslash 
+\backslash
 '{e}vy
-\end_inset 
+\end_layout
+
+\end_inset
 
  curve.
  The imaginary parameter provides a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 strength
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  of the non-differentiability, playing a role similar to the 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  parameter in the Blancmange curve.
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Written as affine transformations, the two transforms can be expressed as
  
 \begin_inset Formula \begin{equation}
@@ -4048,7 +4390,7 @@ v'\end{array}\right)=\left(\begin{array}{ccc}
 u\\
 v\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \begin{equation}
@@ -4063,87 +4405,88 @@ v'\end{array}\right)=\left(\begin{array}{ccc}
 u\\
 v\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $z=u+iv$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $a=\alpha+i\beta$
-\end_inset 
+\end_inset
 
 .
  If these look odd, it is because they are written 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 upside-down
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  from the way that affine transforms are commonly written.
  The reason for this will become clear below: it is to connect with the
  previous sections on the symmetries of the Takagi curve.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The 
 \begin_inset Formula $d_{0}$
-\end_inset 
+\end_inset
 
  and the 
 \begin_inset Formula $d_{1}$
-\end_inset 
+\end_inset
 
  transformations are essentially the 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
  operators from the introduction of this paper.
  Although these are represented by three-dimensional linear transformations,
  there is no equivalent to the transformations 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
 .
  This is because for every case, with the exception of 
 \begin_inset Formula $\alpha=1/2$
-\end_inset 
+\end_inset
 
 , the curves are not left-right symmetric, and so there is no matrix 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  such that 
 \begin_inset Formula $r^{2}=1$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $L=rRr$
-\end_inset 
+\end_inset
 
 .
  Furthermore, there is not even an 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
  such that 
 \begin_inset Formula $L=s^{-1}Rs$
-\end_inset 
+\end_inset
 
 .
  This last result is perhaps a bit unexpected, and to be explored further.
  When 
 \begin_inset Formula $\alpha=1/2$
-\end_inset 
+\end_inset
 
 , the curves are left-right symmetric, and one has as a solution 
 \begin_inset Formula \begin{equation}
@@ -4152,44 +4495,49 @@ r_{LC}=\left(\begin{array}{ccc}
 1 & -1 & 0\\
 0 & 0 & 1\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  the subscript 
 \begin_inset Formula $LC$
-\end_inset 
+\end_inset
 
  denoting 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 L
-\backslash 
+\backslash
 '{e}vy
-\end_inset 
+\end_layout
+
+\end_inset
 
  C-curve
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
  Notice that it is identical to the 
 \begin_inset Formula $r_{3}$
-\end_inset 
+\end_inset
 
  of equation 
-\begin_inset LatexCommand \ref{eq:g3 and r3}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:g3 and r3"
 
-\end_inset 
+\end_inset
 
 .
  The corresponding 
 \begin_inset Formula $g_{LC}$
-\end_inset 
+\end_inset
 
  is of course 
 \begin_inset Formula \begin{equation}
@@ -4198,23 +4546,27 @@ g_{LC}=d_{0}=\left(\begin{array}{ccc}
 0 & \frac{1}{2} & -\beta\\
 0 & \beta & \frac{1}{2}\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Thus, there is a 1-parameter class of left-right symmetric 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 L
-\backslash 
+\backslash
 '{e}vy
-\end_inset 
+\end_layout
+
+\end_inset
 
  C-curves.
  This is another, distinct three-dimensional representation for the period-doubl
 ing monoid.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Takagi curve analyzed in the previous section can be generated in the
  same way, using 
 \begin_inset Formula \begin{equation}
@@ -4226,28 +4578,29 @@ d_{0}=L_{3}=g_{3}=\left(\begin{array}{ccc}
 \frac{1}{2} & \frac{1`}{2} & 0\\
 1 & -1 & w\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Koch and Peano curves are similarly obtained, by introducing a mirror
  reflection through the complex conjugate: 
 \begin_inset Formula \begin{equation}
 d_{0}(z)=a\overline{z}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \begin{equation}
 d_{1}(z)=a+(1-a)\overline{z}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Expressed in terms of affine left and right matrices, these are:
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 d_{0}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
@@ -4257,132 +4610,150 @@ d_{0}=\left(\begin{array}{ccc}
 \alpha & 1-\alpha & -\beta\\
 \beta & -\beta & \alpha-1\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 The classic Koch snowflake is regained for 
 \begin_inset Formula $a=\alpha+i\beta=1/2+i\sqrt{3}/6$
-\end_inset 
+\end_inset
 
  and the Peano curve for 
 \begin_inset Formula $a=(1+i)/2$
-\end_inset 
+\end_inset
 
 .
  Values intermediate between these two generate intermediate curves, as
  shown in figure 
-\begin_inset LatexCommand \ref{cap:Koch-Curve}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Koch-Curve"
 
-\end_inset 
+\end_inset
 
  and 
-\begin_inset LatexCommand \ref{cap:Peano-curve}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Peano-curve"
 
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Koch-Curve"
 
-\begin_inset LatexCommand \label{cap:Koch-Curve}
-
-\end_inset 
+\end_inset
 
 Koch Curve
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename koch.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 The Koch snowflake curve, constructed for 
 \begin_inset Formula $a=0.6+i0.37$
-\end_inset 
+\end_inset
 
 .
  The classic, hexagonal-symmetry curve is regained by setting 
 \begin_inset Formula $a=0.5+i\sqrt{3}/6$
-\end_inset 
+\end_inset
 
 , which centers the big point at 1/2, and opens the base of the point to
  run between 1/3 and 2/3'rds.
-\layout Standard
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename peano.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 The Koch curve, for 
 \begin_inset Formula $a=0.6+i0.45$
-\end_inset 
+\end_inset
 
 .
  The classic Peano space-filling curve is regained for 
 \begin_inset Formula $a=(1+i)/2$
-\end_inset 
+\end_inset
 
 .
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 As before, the curves are not left-right symmetric when 
 \begin_inset Formula $\alpha\ne1/2$
-\end_inset 
+\end_inset
 
 , and there is no non-trivial matrix 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
  such that 
 \begin_inset Formula $sL=Rs$
-\end_inset 
+\end_inset
 
 .
  However, when 
 \begin_inset Formula $\alpha=1/2$
-\end_inset 
+\end_inset
 
 , the curves are left-right symmetric, and we can find a matrix 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  such that 
 \begin_inset Formula $rL=Rr$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r^{2}=1$
-\end_inset 
+\end_inset
 
 : in fact, this 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
  takes the same form as 
 \begin_inset Formula $r_{3}$
-\end_inset 
+\end_inset
 
  before.
  Thus, the left-right symmetric Koch curve forms yet another 3D representation,
@@ -4393,142 +4764,154 @@ g_{K}=\left(\begin{array}{ccc}
 0 & \frac{1}{2} & \beta\\
 0 & \beta & -\frac{1}{2}\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where the subscript 
 \begin_inset Formula $K$
-\end_inset 
+\end_inset
 
  denotes 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 Koch
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Yet another example of a curve generated by means of the de Rham construction
  is the Minkowski Question Mark function, which is given by the Mobius functions
  
 \begin_inset Formula \begin{equation}
 d_{0}(z)=z/(z+1)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \begin{equation}
 d_{1}(z)=1/(z+1)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Expressed as the usual 2x2 matrix representations for Mobius transforms,
  these correspond to the generators 
 \begin_inset Formula $L$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $R$
-\end_inset 
+\end_inset
 
  given in 
-\begin_inset LatexCommand \ref{eq:L and R}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:L and R"
 
-\end_inset 
+\end_inset
 
 .
  More precisely, the generated function is actually half the inverse: 
 \begin_inset Formula $d_{x}=?^{-1}(2x)$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 From the construction properties, it should now be clear that this generalized
  de Rham curve construction has the same set of modular-group self-similarities;
  this essentially follows from the self-similarity properties of the Cantor
  polynomials.
  That is, given a contracting group element 
 \begin_inset Formula $\gamma=g^{a_{1}}rg^{a_{2}}rg^{a_{3}}r...rg^{a_{N}}\in PSL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 , one defines its action in the canonical way, on the parameter space, as
  an action on dyadic intervals: thus 
 \begin_inset Formula \begin{equation}
 gd_{x}=d_{x/2}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \begin{equation}
 sd_{0}=d_{1}\qquad d_{0}=s^{-1}d_{1}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Note that the above is not just a statement about some particular value
  of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , but is rather a statement that holds true for the entire range of parameters
  
 \begin_inset Formula $x\in[0,1]$
-\end_inset 
+\end_inset
 
 ; it is a statement of the self-similarity properties of the curve.
  In the case of the Koch and 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 L
-\backslash 
+\backslash
 '{e}vy
-\end_inset 
+\end_layout
+
+\end_inset
 
  curves, both 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
 , and thus any contracting elements 
 \begin_inset Formula $\gamma$
-\end_inset 
+\end_inset
 
  are expressible as linear affine transformations on the two-dimensional
  plane.
  This is essentially an expression of a known result from IFS: these figures
  are obtainable by iterating on a pair of specific affine transforms.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: write down an explicit expression for a general 
 \begin_inset Formula $\gamma$
-\end_inset 
+\end_inset
 
  for the Koch and 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 L
-\backslash 
+\backslash
 '{e}vy
-\end_inset 
+\end_layout
+
+\end_inset
 
  curves.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The lesson to be learned here bears stating clearly: 
-\series bold 
-\emph on 
+\series bold
+\emph on
 every point on the above-mentioned curves can be uniquely labelled by a
  real number.
  The labelling is not abstract, but concrete.
@@ -4539,17 +4922,20 @@ every point on the above-mentioned curves can be uniquely labelled by a
  self-similar subset of itself.
  The mapping is continuous, and can be expressed in concrete form.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The iteration of a pair of non-linear mappings to generate a de Rham curve
  seems to be an unexplored area of mathematics.
  There is a hint of richness.
  
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 The Total Number of Linear, Planar Dyadic Fractal Curves
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The above exposition, in terms of the action of left and right affine transforma
 tions, indicates that it is possible to count the total number of uniquely
  distinct dyadic planar fractal curves, and to classify them into families.
@@ -4564,11 +4950,11 @@ d & e & f\end{array}\right)\;\textrm{ and \;}d_{1}=\left(\begin{array}{ccc}
 h & j & k\\
 l & m & n\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $a,b,\ldots,n$
-\end_inset 
+\end_inset
 
  are taken as real numbers.
  From this general set, one wants to exclude the cases which are rotated,
@@ -4578,92 +4964,99 @@ l & m & n\end{array}\right)\label{eq:}\end{equation}
  + 1(for shearing) = 6 non-interesting parameter dimensions.
  Requiring that the curve be continuous, by using de Rham's continuity condition
  
-\begin_inset LatexCommand \ref{eq:continuity condition}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:continuity condition"
 
-\end_inset 
+\end_inset
 
 , eliminates two more degrees of freedom.
  This leaves behind a four-dimensional space of unique fractal curves.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Of this four-dimensional space, one dimension has been explored with the
  Takagi curves.
  A second dimension is explored with the 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 Ces
-\backslash 
+\backslash
 `{a}ro
-\end_inset 
+\end_layout
+
+\end_inset
 
  curves, and a third with the Koch/Peano curves.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The general form may be narrowed as follows.
  Let 
 \begin_inset Formula $d_{0}$
-\end_inset 
+\end_inset
 
  have the fixed point 
 \begin_inset Formula $p_{0}$
-\end_inset 
+\end_inset
 
  located at the origin 
 \begin_inset Formula $(u,v)=(0,0)$
-\end_inset 
+\end_inset
 
 .
  This implies that 
 \begin_inset Formula $a=d=0$
-\end_inset 
+\end_inset
 
 .
  Next let 
 \begin_inset Formula $d_{1}$
-\end_inset 
+\end_inset
 
  have the fixed point 
 \begin_inset Formula $p_{1}$
-\end_inset 
+\end_inset
 
  at 
 \begin_inset Formula $(u,v)=(1,0)$
-\end_inset 
+\end_inset
 
 .
  This implies that 
 \begin_inset Formula $j=1-h$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $m=-l$
-\end_inset 
+\end_inset
 
 .
  Finally, impose the de Rham condition for the continuity of the curve,
  namely that 
 \begin_inset Formula $d_{0}(p_{1})=d_{1}(p_{0})$
-\end_inset 
+\end_inset
 
 .
  This implies that 
 \begin_inset Formula $h=b$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $m=e$
-\end_inset 
+\end_inset
 
 .
  Changing symbols, the general form with the endpoints fixed may be written
  as 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 d_{0}=\left(\begin{array}{ccc}
 1\; & 0\; & 0\\
@@ -4673,174 +5066,188 @@ d_{0}=\left(\begin{array}{ccc}
 \alpha & 1-\alpha & \zeta\\
 \beta & -\beta & \eta\end{array}\right)\label{eq:general 3D de rham}\end{equation}
 
-\end_inset 
+\end_inset
 
  The half-way point of this curve is located at 
 \begin_inset Formula $1/2=0.100\ldots=0.011\ldots=d_{1}d_{0}d_{0}\ldots=d_{0}d_{1}d_{1}\ldots$
-\end_inset 
+\end_inset
 
  which can be seen to be 
 \begin_inset Formula $(u,v)=(\alpha,\beta)$
-\end_inset 
+\end_inset
 
 .
  Using this last result to fix the location of the half-way point, what
  remains is a four-parameter family of linear planar fractal curves.
  Of this space, only about one-fourth the curves are 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 interesting
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , as the other half are mirror reflections in the horizontal axis, and another
  half are reflections about the 
 \begin_inset Formula $u=1/2$
-\end_inset 
+\end_inset
 
  axis.
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Two generalized de Rham curves
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename curve_0.00_0.60_0.18_0.60.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 A generalized de Rham curve for 
 \begin_inset Formula $\alpha=0.5$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\beta=1$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\delta=0$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\epsilon=0.6$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\zeta=0.18$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\eta=0.6$
-\end_inset 
+\end_inset
 
  .
-\layout Standard
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename curve_0.33_-0.38_-0.18_-0.42.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 A generalized de Rham curve for 
 \begin_inset Formula $\alpha=0.5$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\beta=1$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\delta=0.33$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\epsilon=-0.38$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\zeta=-0.18$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\eta=-0.42$
-\end_inset 
+\end_inset
 
 .
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 The Family of Left-Right Symmetric Curves
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Of interest is the family of left-right symmetric curves.
  These are a subset of the above, and may be defined as follows: Given an
  expansion 
 \begin_inset Formula $d_{0}^{a}d_{1}^{b}d_{0}^{c}\ldots$
-\end_inset 
+\end_inset
 
  for the curve point 
 \begin_inset Formula $(u,v)$
-\end_inset 
+\end_inset
 
 , one wants the mirrored expansion 
 \begin_inset Formula $d_{1}^{a}d_{0}^{b}d_{1}^{c}\ldots$
-\end_inset 
+\end_inset
 
  to go to the curve point 
 \begin_inset Formula $(1-u,v)$
-\end_inset 
+\end_inset
 
 .
  Applying this to the half-way point of the curve, one may immediately deduce
  that 
 \begin_inset Formula $\alpha=1/2$
-\end_inset 
+\end_inset
 
 .
  Applying this to the 
 \begin_inset Formula $1/4$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $3/4$
-\end_inset 
+\end_inset
 
  points requires that 
 \begin_inset Formula $d_{0}d_{1}(p_{0})$
-\end_inset 
+\end_inset
 
  be mirrored to 
 \begin_inset Formula $d_{1}d_{0}(p_{1})$
-\end_inset 
+\end_inset
 
 , from whence one deduces that 
 \begin_inset Formula $\eta=\epsilon$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\zeta=-\delta$
-\end_inset 
+\end_inset
 
 .
  Requiring additional symmetry at other points imposes no new constraints.
@@ -4855,35 +5262,37 @@ d_{0}=\left(\begin{array}{ccc}
 \frac{1}{2} & \frac{1}{2} & -\delta\\
 \beta & -\beta & \epsilon\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The Cesaro, Takagi and Koch curves may all be seen to be special cases
  of this form.
  It can furthermore be readily verified that 
 \begin_inset Formula $d_{0}=rd_{1}r$
-\end_inset 
+\end_inset
 
 , and so this family of left-right symmetric curves has a representation
  in terms of 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
 .
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Convergence
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 It should be clear that particularly large values of the parameters may
  lead to divergence upon iteration.
  To get absolute convergence, one wants the final form of the affine matrix
  
 \begin_inset Formula $d_{x}=d_{b_{1}}\circ d_{b_{2}}\circ\cdots$
-\end_inset 
+\end_inset
 
  to be 
 \begin_inset Formula \begin{equation}
@@ -4892,11 +5301,11 @@ d_{x}=\left(\begin{array}{ccc}
 u & 0 & 0\\
 v & 0 & 0\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  so that the fixed point is 
 \begin_inset Formula $(u,v)$
-\end_inset 
+\end_inset
 
  independent of the starting point on the plane.
  In order to guarantee absolute convergence, it is clear that each of the
@@ -4909,100 +5318,114 @@ v & 0 & 0\end{array}\right)\label{eq:}\end{equation}
 1-\alpha & \zeta\\
 -\beta & \eta\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  are less than one.
  The eigenvalues are readily obtained, and the parameter space is bounded
  by eight quadratic surfaces.
  One may wonder if there is a region of 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 almost-everywhere
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  convergence, and numerical exploration indicates that there is, as illustrated
  in the figure 
-\begin_inset LatexCommand \ref{cap:Almost-everywhere-convergence}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Almost-everywhere-convergence"
 
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Almost-everywhere-convergence"
 
-\begin_inset LatexCommand \label{cap:Almost-everywhere-convergence}
-
-\end_inset 
+\end_inset
 
 Almost-everywhere convergence
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename almost-everywhere.jpeg
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows a region of almost-everywhere convergence, with the region
  of absolute convergence inscribed as a perfect rectangle.
  The parameter space explored here has 
 \begin_inset Formula $\alpha=0.5$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $\beta=1$
-\end_inset 
+\end_inset
 
 ,
 \begin_inset Formula $\delta=0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\eta=0.6$
-\end_inset 
+\end_inset
 
  held fixed, 
 \begin_inset Formula $\epsilon$
-\end_inset 
+\end_inset
 
  varied along the horizontal, from -2 to +2, and 
 \begin_inset Formula $\zeta$
-\end_inset 
+\end_inset
 
  from -2 to 2 along the vertical.
  The black area indicates the region of 
 \begin_inset Formula $(\epsilon,\zeta)$
-\end_inset 
+\end_inset
 
  for which equation 
-\begin_inset LatexCommand \ref{eq:de-Rham curve}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:de-Rham curve"
 
-\end_inset 
+\end_inset
 
  converged for all attempted 4621 trial values of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  (that is, for all values 
 \begin_inset Formula $x=k/4621$
-\end_inset 
+\end_inset
 
 with integer 
 \begin_inset Formula $0<k<4621$
-\end_inset 
+\end_inset
 
 ).
  The fuzziness around the edges and particularly the corners indicates that
@@ -5010,22 +5433,26 @@ with integer
  measure of the set of diverging values can be argued to be less than 1/4621.
  This slice through the four-dimensional space seems 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 generic
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , in that other slices are not dissimilar (and in fact, all slices seem
  five-sided, indicating possibly some regular polytope).
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Section
+\end_layout
 
+\begin_layout Section
 Markov chains 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Markov chains are commonly studied in the theory of probability.
  Of all possible Markov chains, the chains for a stationary process are
  most frequently discussed, because they have a simple, tractable theory.
@@ -5033,18 +5460,19 @@ Markov chains are commonly studied in the theory of probability.
  a set of non-stationary Markov chains that are none-the-less tractable.
  These are essentially a minor variant on the above construction, but are
  noted because of the importance of Markov chains in general.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A Markov chain may be defined in several ways.
  For the purposes here, a Markov chain may be defined as a sequence of 
 \begin_inset Formula $n\times n$
-\end_inset 
+\end_inset
 
  matrices, the probability transition matrices, having the property that
  they preserve the norm of probability vectors.
  A probability vector is very simply a vector 
 \begin_inset Formula $(p_{1},p_{2},\ldots,p_{n})$
-\end_inset 
+\end_inset
 
  where all of the entries are real and positive, and sum to one.
  One may then deduce that the transition matrix must have entries that are
@@ -5053,8 +5481,9 @@ A Markov chain may be defined in several ways.
  The sequence of matrices are multiplied together to form the chain.
  Properties of the chain that may be studied are expected value of the probabili
 ty vector (the fixed point), the means-square variance.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 It is readily seen that the general form of a two-dimensional dyadic chain
  will be 
 \begin_inset Formula \begin{equation}
@@ -5064,11 +5493,11 @@ a & b\\
 c & d\\
 1-c & 1-d\end{array}\right)\label{eq:Markov matrices}\end{equation}
 
-\end_inset 
+\end_inset
 
  The fixed point 
 \begin_inset Formula $p_{0}$
-\end_inset 
+\end_inset
 
 is given by 
 \begin_inset Formula \begin{equation}
@@ -5076,11 +5505,11 @@ p_{0}=\left(\begin{array}{c}
 \frac{b}{1-a+b}\\
 \frac{1-a}{1-a+b}\end{array}\right)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and likewise for 
 \begin_inset Formula $p_{1}$
-\end_inset 
+\end_inset
 
 .
  Although there is not overt requirement for the resulting de Rham curve
@@ -5089,141 +5518,163 @@ p_{0}=\left(\begin{array}{c}
 \begin_inset Formula \begin{equation}
 d=c-(1-a+b)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The requirement that 
 \begin_inset Formula $0\le d\le1$
-\end_inset 
+\end_inset
 
  translates into the condition 
 \begin_inset Formula \begin{equation}
 c+a\le1+b\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  A pair of typical figures are shown in figure 
-\begin_inset LatexCommand \ref{cap:Markov-chain-curves}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Markov-chain-curves"
 
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Markov-chain-curves"
 
-\begin_inset LatexCommand \label{cap:Markov-chain-curves}
-
-\end_inset 
+\end_inset
 
 Markov chain curves
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename markov_0.8_0_0.8_0.6.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 A continuous Markov chain de Rham curve.
  Plotted is the value of the first coordinate of the fixed point versus
  the curve coordinate 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 .
  This curve corresponds to values for equation 
-\begin_inset LatexCommand \ref{eq:Markov matrices}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Markov matrices"
 
-\end_inset 
+\end_inset
 
  of 
 \begin_inset Formula $a=0.8$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $b=0$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $c=0.8$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $d=0.6$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename markov_0.6_0.2_0.1_0.4.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 A discontinuous Markov chain de Rham curve.
  Plotted is the value of the first coordinate of the fixed point versus
  the curve coordinate 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 .
  This curve corresponds to values for equation 
-\begin_inset LatexCommand \ref{eq:Markov matrices}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Markov matrices"
 
-\end_inset 
+\end_inset
 
  of 
 \begin_inset Formula $a=0.6$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $b=0.2$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $c=0.1$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $d=0.4$
-\end_inset 
+\end_inset
 
 .
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Similar considerations may be given for 
 \begin_inset Formula $n\times n$
-\end_inset 
+\end_inset
 
  matrices instead of 
 \begin_inset Formula $2\times2$
-\end_inset 
+\end_inset
 
  matrices.
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Symbolic dynamics
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The construction and symmetry properties are not limited to continuous curves.
  Any system with a symbolic dynamics in two symbols is naturally parameterized
  through real numbers.
@@ -5232,101 +5683,114 @@ The construction and symmetry properties are not limited to continuous curves.
  get a sequence of values.
  For each iteration, write down the letter 
 \begin_inset Formula $A$
-\end_inset 
+\end_inset
 
  if the value is less than 1/2, and write the letter 
 \begin_inset Formula $B$
-\end_inset 
+\end_inset
 
  if the value is more than 1/2.
  The result of the iteration will be an infinitely long string composed
  of the letters 
 \begin_inset Formula $A$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $B$
-\end_inset 
+\end_inset
 
 , sometimes called the 
-\emph on 
+\emph on
 orbit
-\emph default 
+\emph default
  of the initial value.
  This string is the so-called symbolic dynamics of the iterated unit-height
  tent map.
  It can be shown that the symbolic dynamics of the iteration precisely and
  completely defines the iteration.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 What is notable here is that any string in two letters can be exactly mapped
  to a real number, by interpreting it as the dyadic expansion of that number.
  In this case, let 
 \begin_inset Formula $c_{k}$
-\end_inset 
+\end_inset
 
  be zero if the 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 'th letter is 
 \begin_inset Formula $A$
-\end_inset 
+\end_inset
 
 , and let it be one if the 
 \begin_inset Formula $k$
-\end_inset 
+\end_inset
 
 'th letter is 
 \begin_inset Formula $B$
-\end_inset 
+\end_inset
 
 .
  We then define the value of a symbolic string to be 
 \begin_inset Formula \begin{equation}
 s(x)=\sum_{n=1}^{\infty}c_{k}2^{-k}\label{eq:orbit value}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  was the initial value that was iterated.
  The figure 
-\begin_inset LatexCommand \ref{cap:Tent-Map}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Tent-Map"
 
-\end_inset 
+\end_inset
 
  shows the graph of the above, after iterating the tent map of unit height.
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Tent-Map"
 
-\begin_inset LatexCommand \label{cap:Tent-Map}
-
-\end_inset 
+\end_inset
 
 Tent Map
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename tent-map.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 The graph of the values corresponding the orbit if an initial point, under
  iteration of the tent map.
  In fact, the orbits in this system are exactly solvable.
@@ -5334,59 +5798,66 @@ The graph of the values corresponding the orbit if an initial point, under
 \begin_inset Formula \[
 x=\sum_{n=1}^{\infty}b_{n}2^{-n}\]
 
-\end_inset 
+\end_inset
 
  then the 
 \begin_inset Formula $c_{k}$
-\end_inset 
+\end_inset
 
  of equation 
-\begin_inset LatexCommand \ref{eq:orbit value}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:orbit value"
 
-\end_inset 
+\end_inset
 
  are given by 
 \begin_inset Formula \[
 c_{k+1}=b_{k}\mbox{ XOR }b_{k+1}\]
 
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $k\ne0$
-\end_inset 
+\end_inset
 
  and with 
 \begin_inset Formula $c_{1}=b_{1}$
-\end_inset 
+\end_inset
 
 .
  This result is easily obtained by noting that the unit-height tent map
  is just 
 \begin_inset Formula $\tau(x)$
-\end_inset 
+\end_inset
 
  of the previous sections, and that 
 \begin_inset Formula $\tau^{k+1}(x)=\tau(2^{k}x)$
-\end_inset 
+\end_inset
 
 , as previously noted.
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Section
+\end_layout
 
+\begin_layout Section
 Miscellany
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A compendium of miscellaneous related topics and to-do items that come to
  mind.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Curiously, the representations of 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  for the Takagi curve resemble the form that a translation would take in
  a linear projective space.
@@ -5395,103 +5866,114 @@ Homework: Curiously, the representations of
  in the given direction by a given amount.
  In other words, the matrices 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  look like affine transformations that encode a translation with a funny
  scale.
  By combining appropriately with 
 \begin_inset Formula $r$
-\end_inset 
+\end_inset
 
 , show how to encode a rotation, while minimizing the shear.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: The group elements generated by 
 \begin_inset Formula $g$
-\end_inset 
+\end_inset
 
  then look like an iterated affine transformation, reminiscent of the Barnsley
  IFS constructions
-\begin_inset LatexCommand \cite{Bar88}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bar88"
 
-\end_inset 
+\end_inset
 
 .
  One can then take a set of arbitrary (contractive) group elements 
 \begin_inset Formula $\gamma_{1},\gamma_{2},...\gamma_{k}\in SL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
  and iterate on these, noting that they generate a subset of 
 \begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
  that consists of contractive affine transformations.
  The homework problem is then to repeat the Barnsley analysis on affine
  transformations, and to restate his 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 Collage Theorem
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  for these affine maps, this time, not for 2D images, but rather for an
  arbitrary N-dimensional representation.
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Describe the measure of the generated Barnsley IFS fractal set,
  as a function of the generators 
 \begin_inset Formula $\gamma_{1},\gamma_{2},...\gamma_{k}$
-\end_inset 
+\end_inset
 
 .
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Affine transformations imply a projective space.
  That is, without the coupling to the Takagi Curve, we would be reasoning
  about matrix representations of polynomials, which is a very traditional
  subject.
  Can something be made out of this projective nature? 
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 IFS Construction
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The deRham construction is broadly applicable to pairs of iterated dyadic
  affine transformations, if one drops the requirement that the generated
  object be a continuous line.
  That is, given any pair of transforms 
 \begin_inset Formula $d_{0}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $d_{1}$
-\end_inset 
+\end_inset
 
 , one can label a string of iterations of these with a real number expressed
  in dyadic form.
  Such transformations, known as 
-\emph on 
+\emph on
 dimers
-\emph default 
+\emph default
 , include the 
 \begin_inset ERT
-status Collapsed
+status collapsed
 
-\layout Standard
+\begin_layout Plain Layout
+
 L
-\backslash 
+\backslash
 '{e}vy
-\end_inset 
+\end_layout
+
+\end_inset
 
  dragon, the Harter-Heighway dragon, and a number of others, all of which
  are known to tile the plane.
  In essence, one associates to each map a measure; the sum of the measures
  reproduces the plane.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The curiosity of this construction is that each measure can be broken down,
  in turn, but a labelling of the real number corresponding to the string
  of iterations.
@@ -5500,50 +5982,56 @@ The curiosity of this construction is that each measure can be broken down,
 p of the modular group.
  But, by its very construction, this demonstration is straightforward.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Specify the Hausdorff dimension of the generated measures, as
  a function of the affine parameters of the generating matrices, and the
  single linear dyadic parameter.
  This is a non-trivial exercise.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Weierstrass-Hardy Function
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Perform the same analysis on the Weierstrass-Hardy function, which has an
  obvious fractal self-similarity; can we analyze it in the same way, using
  the same mechanisms? This analysis appears to generalize to most holomorphic
  functions.
  In a certain sense, most holomorphic functions have an innate symmetry
  of this type.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Batrachions and Ladders of Symmetry
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A Batrachion is an integer sequence that hops from one integer to another
  using a simple recurrence relation.
  The Hofstadter-Conway 10,000-Dollar Sequence in particular is known to
  generate successive approximations to the Takagi Curve.
  That is, one has a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 ladder
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  of approximations to 
 \begin_inset Formula \[
 t_{w}(x)=\sum_{k=0}^{\infty}w^{k}\tau\left(2^{k}x\right)\]
 
-\end_inset 
+\end_inset
 
  by terminating the sum to a finite number of terms.
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Describe the set-theoretic implications of having a ladder of
  progressive symmetries on Batrachion sequences.
  That is, at each level, one can have more and more elements from the modular
@@ -5551,8 +6039,9 @@ Homework: Describe the set-theoretic implications of having a ladder of
  Develop a general theory of ladders of subsets of the modular group, if
  possible.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 XXX This finite-to-infinite-limit inter-relation is essentially the same
  phenomenon as the relationship between binomial coefficients (Pascal's
  Triangle) and the Sierpinski Gasket, shown by Pietgen etal.
@@ -5561,603 +6050,668 @@ XXX This finite-to-infinite-limit inter-relation is essentially the same
  In the limit, the projection of the Sierpinski Gasket onto the unit interval
  yields a multi-fractal measure whose integral is essentially the Takagi
  Curve.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 All of this discussion needs to be moved over to the chapter that covers
  the Sierpinski Gasket vs.
  Modular Group discussion.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 Derivatives of the Takagi Curve
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 One can also explore the derivative of the Takagi Curve, which is reasonably
  well defined for 
 \begin_inset Formula $w<1/2$
-\end_inset 
+\end_inset
 
 ; one takes the derivative under the summation, and notes the derivative
  of a triangle wave is a square wave.
  This is shown in figure 
-\begin_inset LatexCommand \ref{cap:Derivative-of-Takagi}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Derivative-of-Takagi"
 
-\end_inset 
+\end_inset
 
 .
  Derivatives for higher 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  require analytic continuation past 
 \begin_inset Formula $w=1/2$
-\end_inset 
+\end_inset
 
 , which is always possible if 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is held fixed.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Derivative-of-Takagi"
 
-\begin_inset LatexCommand \label{cap:Derivative-of-Takagi}
-
-\end_inset 
+\end_inset
 
 Derivative of the Takagi Curve
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename takagi-prime.png
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This graph shows 
 \begin_inset Formula $dt_{w}(x)/dx$
-\end_inset 
+\end_inset
 
  for a value of 
 \begin_inset Formula $w=0.4$
-\end_inset 
+\end_inset
 
 .
-\end_inset 
+\end_layout
+
+\end_inset
 
  
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Work out the transformation of the derivative curve under the
  modular group.
  This can be bit bit confusing, because there are two potential candidates
  to distinguish.
  Given a general element 
 \begin_inset Formula $\gamma\in SL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
  one can define 
 \begin_inset Formula $\gamma_{1}d\overrightarrow{v}/dx\equiv d\gamma\overrightarrow{v}/dx$
-\end_inset 
+\end_inset
 
  for the vector 
 \begin_inset Formula $\overrightarrow{v}=a+bx+ct_{w}(x)$
-\end_inset 
+\end_inset
 
  as the rule for how the 3-rep elements transform, and one can also define
  
 \begin_inset Formula $\gamma't'_{w}(x)\equiv t'_{w}(\gamma x)$
-\end_inset 
+\end_inset
 
  as the rule for how the derivative transforms.
  Note that 
 \begin_inset Formula $\gamma'\neq\gamma_{1}$
-\end_inset 
+\end_inset
 
 .
  Keep in mind that the derivative is ill-defined only on the dyadics, which
  is a set of measure zero.
  The derivative is well-defined on a set of measure one.
-\layout Subsection
+\end_layout
 
+\begin_layout Subsection
 3-period Mode Locking
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Note that some chaotic maps are seen to have period-doubling paths to chaos
  that include a factor of three: viz.
  3,6,12,24,...
  Perhaps this is a manifestation of the fact that the modular group can
  be written as the free product of the two and three cycles 
 \begin_inset Formula $\mathbb{Z}_{2}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\mathbb{Z}_{3}$
-\end_inset 
+\end_inset
 
 ?
-\layout Section
+\end_layout
 
+\begin_layout Section
 Analytic Continuation
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 So far, we have been looking at the Takagi curve as a function of 
 \begin_inset Formula $x,$
-\end_inset 
+\end_inset
 
  holding 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  fixed.
  One may also explore the dependency on 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  for fixed 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 .
  For any fixed 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , the Takagi curve is analytic in 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
 , by construction, with radius of convergence of 1.
  One task is to describe the the set of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  for which the function may be analytically continued to values of 
 \begin_inset Formula $\left|w\right|>1$
-\end_inset 
+\end_inset
 
 .
  There are many easy cases.
  For example, 
 \begin_inset Formula $t_{w}(0)=0$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $t_{w}(1/2)=1$
-\end_inset 
+\end_inset
 
  are trivial, and 
 \begin_inset Formula $t_{w}(1/4)=w+1/2$
-\end_inset 
+\end_inset
 
  is clearly entire.
  Continuing, we have
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{1}{2^{n}}\right)=\frac{1}{2^{n-1}}\;\frac{1-2^{n}w^{n}}{1-2w}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which is a polynomial of finite degree, without any poles (there is no
  pole at 
 \begin_inset Formula $w=1/2$
-\end_inset 
+\end_inset
 
 ), and thus entire.
  Its not hard to see, for any integer 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 , that 
 \begin_inset Formula $t_{w}(p/2^{n})$
-\end_inset 
+\end_inset
 
  will be a finite polynomial in 
 \begin_inset Formula $w.$
-\end_inset 
+\end_inset
 
  By contrast, 
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{1}{3}\right)=\frac{2}{3(1-w)}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  has a simple pole at 
 \begin_inset Formula $w=1$
-\end_inset 
+\end_inset
 
 .
  Other values include 
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{1}{5}\right)=\frac{2}{5}\cdot\frac{1+2w}{1-w^{2}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 and 
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{1}{7}\right)=\frac{2}{7}\cdot\frac{1+2w+3w^{2}}{1-w^{3}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{1}{9}\right)=\frac{2}{9}\cdot\frac{1+2w+4w^{2}}{1-w^{3}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{1}{11}\right)=\frac{2}{11}\cdot\frac{1+2w+4w^{2}+6w^{3}+5w^{4}}{1-w^{5}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  all of which appear to have simple poles at various roots of unity.
  Note that for all of these cases, the limiting asymptotic behavior for
  large 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  is finite.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 It could be interesting to provide a description in terms of the reduced
  characters.
  XXX do this.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Given any one such value, one may deduce the related function using formula
  
-\begin_inset LatexCommand \ref{eq: power of two value}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: power of two value"
 
-\end_inset 
+\end_inset
 
  given previously:
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 t_{w}\left(\frac{x}{2^{n}}\right)=\frac{x}{2^{n-1}}\left(\frac{1-2^{n}w^{n}}{1-2w}\right)+w^{n}t_{w}(x)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 Thus, at least for many rational values of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , it appears that the Takagi curve may be analytically extended to regions
  
 \begin_inset Formula $|w|>1$
-\end_inset 
+\end_inset
 
 , where it appears to be a rational function of 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
 .
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 However, the rational numbers are a set of measure zero in the reals; can
  anything be done for the irrationals? Some numerical explorations can provide
  insight.
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Phase portrait on the unit disk
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename w-disk-arg.jpeg
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows a phase portrait of 
 \begin_inset Formula $t_{w}\left(0.8959848989828067\right)$
-\end_inset 
+\end_inset
 
 on the unit disk 
 \begin_inset Formula $|w|<1$
-\end_inset 
+\end_inset
 
 .
  The color coding is such that black corresponds to 
 \begin_inset Formula ${\rm arg}\, t_{w}\approx0$
-\end_inset 
+\end_inset
 
 , green to 
 \begin_inset Formula ${\rm arg}\, t_{w}\approx\pi$
-\end_inset 
+\end_inset
 
  and red to 
 \begin_inset Formula ${\rm arg}\, t_{w}\approx2\pi$
-\end_inset 
+\end_inset
 
 .
  Simple zeros are clearly visible inside the disk, as endpoints of lines
  where the phase wraps from black to red.
  An arrangement of a large number of poles along the boundary 
 \begin_inset Formula $|w|=1$
-\end_inset 
+\end_inset
 
  is shown in the next figure.
  The sums are not convergent for 
 \begin_inset Formula $|w|>1$
-\end_inset 
+\end_inset
 
  and are not shown.
  This particular value of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is representative of what the disk likes for general, irrational 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , although each and every value of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  produces disks that have the zeros located in completely different places.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Magnitude portrait on the unit disk
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename w-disk-mag.jpeg
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows a magnitude portrait of 
 \begin_inset Formula $t_{w}\left(0.8959848989828067\right)$
-\end_inset 
+\end_inset
 
 on the unit disk 
 \begin_inset Formula $|w|<1$
-\end_inset 
+\end_inset
 
 .
  The color coding is logarithmic, with black denoting 
 \begin_inset Formula $\left|t_{w}\right|\approx0$
-\end_inset 
+\end_inset
 
  and red denoting poles.
  Zeros are clearly visible inside the disk, with an accumulation of poles
  on the boundary 
 \begin_inset Formula $|w|=1$
-\end_inset 
+\end_inset
 
 .
  The sums are not convergent for 
 \begin_inset Formula $|w|>1$
-\end_inset 
+\end_inset
 
  and are not shown.
  This particular value of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is representative of what the disk likes for general, irrational 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 , although each and every value of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  produces disks that have the zeros located in completely different places.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Phase cylinder
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename w-cylinder.jpeg
 	width 100text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows a combined 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  portrait.
  Along the horizontal, 
 \begin_inset Formula $w=\left|w\right|\exp i\theta$
-\end_inset 
+\end_inset
 
  with 
 \begin_inset Formula $\left|w\right|=0.94$
-\end_inset 
+\end_inset
 
  fixed, and 
 \begin_inset Formula $\theta$
-\end_inset 
+\end_inset
 
  runs from 0 to 
 \begin_inset Formula $2\pi$
-\end_inset 
+\end_inset
 
 .
  Along the vertical, 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  running from 0 to 1.
  The color coding shows the arg, with black corresponds to 
 \begin_inset Formula ${\rm arg}\, t_{w}\approx0$
-\end_inset 
+\end_inset
 
 , green to 
 \begin_inset Formula ${\rm arg}\, t_{w}\approx\pi$
-\end_inset 
+\end_inset
 
  and red to 
 \begin_inset Formula ${\rm arg}\, t_{w}\approx2\pi$
-\end_inset 
+\end_inset
 
 .
  The dependency on 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is not only discontinuous, but depends very much on how 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  is sampled: choosing a vertical height of a prime number of pixels yields
  a different image than one where the eight is a composite number of small
  primes.
  In this case, a height of 
 \begin_inset Formula $n=801$
-\end_inset 
+\end_inset
 
  pixels was chosen.
  This value was chosen because the resulting samples are more representative
  of having 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  lie on true irrationals.
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
 
-\begin_inset Note
-collapsed false
-
-\layout Standard
-
+\begin_layout Plain Layout
 Above figures were generated with src/generate/takagi.C.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Description
+\end_layout
 
+\begin_layout Description
 Homework: Describe the analytic properties of 
 \begin_inset Formula $dt_{w}(x)/dx$
-\end_inset 
+\end_inset
 
  considered as a function of 
 \begin_inset Formula $w$
-\end_inset 
+\end_inset
 
 , with 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  held fixed.
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Conclusions
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The seeming general applicability of this mode of analysis seems to beg
  the question, are there any self-similar curves that do NOT have the modular
  group symmetry?
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 At first, one is tempted to state that curves generated by 
-\emph on 
+\emph on
 random
-\emph default 
+\emph default
  subdivision clearly cannot have this symmetry, but in fact, it is far from
  clear that this is true.
  As we've considered in an earlier chapter, the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 gaps
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  of the continued fraction are 
-\emph on 
+\emph on
 randomly
-\emph default 
+\emph default
  distributed on the unit square, and thus one has a Cauchy sequence that
  converges arbitrarily close to any given random value.
  The limit point is representable by a rational.
  This implies that 
-\emph on 
+\emph on
 any
-\emph default 
+\emph default
  stochastic process on the unit interval can be represented by a strictly
  monotonically increasing sequence of rationals.
  This sequence of monotonically increasing rationals encodes the 'information'
  contained in the stochastic process, and through a standard 
 \begin_inset Formula $\delta,\epsilon$
-\end_inset 
+\end_inset
 
  type proof, can be shown to be made arbitrarily accurate.
  But because this sequence of rationals was constructed explicitly through
  the use of continued fractions, it has inherently built into it the symmetry
  of the Modular Group.
  That is, 
-\emph on 
+\emph on
 even random walks
-\emph default 
+\emph default
  have the modular group symmetry.
  This symmetry is clearly hidden (perfectly hidden, one might say) when
  looking at the stochastic process itself, but should manifest itself whenever
@@ -6173,27 +6727,28 @@ s will become manifest.
  is the modular group.
  The 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 gotcha
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  is that the symmetry difficult to manifest in practice, since it requires
  identifying the rational associated with a particular dendritic shape,
  which is a computationally difficult proposition.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A different example of this manifestation of symmetry in randomness is through
  the Barnsley IFS ideas.
  There, a suitably chosen set of 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 random
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  affine matrices can be used to generate a remarkably varied set of self-similar
  images, such as fern-leaf shapes, maple-leaf shapes, and cloud-shapes.
@@ -6206,45 +6761,46 @@ random
  There apparently do exist some reasonably efficient algorithms that can
  take a photograph, and given a desired degree of accuracy 
 \begin_inset Formula $\epsilon>0$
-\end_inset 
+\end_inset
 
 , extract the affine transformations that represent that photograph.
  By construction, the iterated affine transformations will be self-similar.
  But we saw above that any given set of 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 general, random
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  affine matrices correspond one-to-one to a set of of 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 general, random
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  (contractive) elements of 
 \begin_inset Formula $SL(2,\mathbb{Z})$
-\end_inset 
+\end_inset
 
 .
  Through this exercise, we conclude that the self-symmetry of the Barnsley
  IFS fractals are in fact a manifestation of modular group symmetry, expressed
  through a choice of 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 random
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  generators.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 From this exercise, one can now imagine that a suitably modified form of
  the Barnsley IFS image compression algorithm can be used to find the modular-gr
 oup generators of the DLA fractals.
@@ -6254,26 +6810,27 @@ oup generators of the DLA fractals.
  correspond to elements of the modular group.
  One can then (potentially) create new theorems about DLA by picking 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 randomly
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  from the modular group, and exploring the consequences.
  This wouldn't be easy, but it would be interesting.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Pursuing the idea of symmetry in randomness in a different direction, its
  already known that stochastic differential equations have various scaling
  properties.
  We can now suspect that these scaling properties are the result of a 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 hidden
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  self-similarity.
  Let us now chose some arbitrary but small set of generators from the modular
@@ -6286,20 +6843,33 @@ hidden
  be a rather difficult research program.
  However, I find that the potential for doing this sort of analysis surprising
  and intriguing.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Returning a bit closer to earth, we note the phase-locked regions of the
- Circle Map (see, for example, the pictures at the URL 
-\begin_inset LatexCommand \htmlurl[Circle Map]{http://www.linas.org/art-gallery/basic/basic.html}
+ Circle Map (see, for example, the pictures at the URL Circle Map 
+\begin_inset Flex URL
+status collapsed
 
-\end_inset 
+\begin_layout Plain Layout
+
+http://www.linas.org/art-gallery/basic/basic.html
+\end_layout
+
+\end_inset
 
 ) can be numbered with the Farey Numbers and are also qualitatively similar
  and suggestive of the gaps in continued fractions (see for example, the
- pictures at 
-\begin_inset LatexCommand \htmlurl[Farey Room Pictures]{http://www.linas.org/art-gallery/farey/fthumb.html}
+ pictures at Farey Room Pictures 
+\begin_inset Flex URL
+status collapsed
 
-\end_inset 
+\begin_layout Plain Layout
+
+http://www.linas.org/art-gallery/farey/fthumb.html
+\end_layout
+
+\end_inset
 
 ).
  Reaching, but not too far, this implies that the Modular Group is the symmetry
@@ -6309,19 +6879,19 @@ Returning a bit closer to earth, we note the phase-locked regions of the
  those regions that are *not* chaotic: in other words, these are the so-called
  
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 islands of order
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  that can be found in the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 sea of chaos
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 .
  One of course sees such islands in other iterated equations, such as the
@@ -6329,12 +6899,18 @@ sea of chaos
  group the symmetry group that maps islands into islands, for any period
  doubling map? What about the converse? Are there any maps, with islands,
  that do not have the Modular Group as its underlying symmetry? 
-\layout Standard
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/home/linas/linas/fractal/paper/fractal"
+options "plain"
+
+\end_inset
 
 
-\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
+\end_layout
 
-\end_inset 
-
-
-\the_end
+\end_body
+\end_document
