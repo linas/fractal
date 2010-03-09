@@ -1,6 +1,6 @@
 
 /*
- * Build a takaagi-style distribution
+ * Build a takagi-style distribution
  *
  * Linas Vepstas October 2008
  */
