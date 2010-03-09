@@ -1,6 +1,8 @@
 /*
  * Consider a product of takagi distributions
  *
+ * XXX this is a failed experiment.
+ *
  * Linas Vepstas March 2010
  */
 
@@ -13,8 +15,8 @@
 double triangle (double x)
 {
 	x -= (int) x;
-	if (x < 0.5) return x;
-	return 1.0-x;
+	if (x < 0.5) return 2.0*x;
+	return 2.0-2.0*x;
 }
 
 double takagi (double x, double lambda)
@@ -38,11 +40,13 @@ double prod (double x, int depth, double lambda)
 	int n;
 	double acc = 1.0;
 	double tlp1 = 1.0;
+	double lmp = lambda;
 	for (n=0; n<depth; n++)
 	{
-		double term = takagi(tlp1*x, lambda);
+		double term = takagi(tlp1*x, lmp);
 		acc *= term;
 		tlp1 += 2.0;
+		lmp *= lambda;
 	}
 
 	return acc;
@@ -67,7 +71,7 @@ void graph(int npts, int depth, double lambda)
    	// double far = f.ToFarey ();
 
 		// printf ("%d	%g	%g %g	%g	%g\n", i, x, y, acc, far, acc-far);
-		printf ("%d	%g	%g %g	%g	%g\n", i, x, y, acc);
+		printf ("%d	%10.6g	%10.6g	%10.6g\n", i, x, y, acc);
 		fflush (stdout);
 	}
 }
