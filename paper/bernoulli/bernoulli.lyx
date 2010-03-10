@@ -1,5 +1,5 @@
-#LyX 1.5.5 created this file. For more info see http://www.lyx.org/
-\lyxformat 276
+#LyX 1.6.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
 \begin_document
 \begin_header
 \textclass amsart
@@ -7,6 +7,10 @@
 \newcommand{\1}{{\rm 1\hspace*{-0.4ex}%
 \rule{0.1ex}{1.52ex}\hspace*{0.2ex}}}
 \end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+\end_modules
 \language english
 \inputencoding auto
 \font_roman times
@@ -17,9 +21,11 @@
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \paperfontsize default
 \spacing single
+\use_hyperref false
 \papersize default
 \use_geometry false
 \use_amsmath 2
@@ -112,7 +118,8 @@ The general layout is to move from a less formal, to a more rigorous, more
 Define the Bernoulli operator, demonstrate some of its eigenfunctions and
  eigenvalues.The presentation is a simplified variant of the material in
  
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Dri99"
 
 \end_inset
@@ -193,7 +200,8 @@ product topology
  In this topology, the transfer operator can be made to resemble the lattice
  models of theoretical physics, such as the Ising model, thus offering additiona
 l means of gaining insight.
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "May91"
 
 \end_inset
@@ -470,7 +478,8 @@ In most of what follows, the topological rings that will be considered will
  be very concrete: these will be the Banach spaces of polynomial functions,
  and of square-integrable functions.
  Some exploration of the lattice-model topology is explored in 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Ve-L06"
 
 \end_inset
@@ -503,7 +512,8 @@ Transfer Operator of the Bernoulli Map
 The Bernoulli map is an exactly solvable example of deterministic chaos.
  A presentation of this map, its associated transfer operator and its solution
  in terms of polynomial eigenfunctions is given by Driebe
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Dri99"
 
 \end_inset
@@ -594,7 +604,8 @@ The Ruelle-Frobenius-Perron operator or transfer operator of the Bernoulli
 \end_inset
 
  which follows directly from equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq: transfer-jacobi"
 
 \end_inset
@@ -803,7 +814,8 @@ The polynomial eigenvectors of the Bernoulli operator can be derived in
  One seemingly natural approach is to start with a Hilbert space of orthogonal
  polynomials on the unit interval.
  This approach is taken by Driebe
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Dri99"
 
 \end_inset
@@ -1007,7 +1019,8 @@ e_{j}^{*}\left(e_{k}\right)=\int_{0}^{1}x^{k}\;\frac{(-1)^{j}}{j!}\delta^{(j)}(x
  mechanism; its drawbacks in this particular context will be discussed in
  great detail below.
  The relation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:orthogonality"
 
 \end_inset
@@ -1092,7 +1105,8 @@ This notation allows the matrix elements
 
  of the transfer operator to be articulated as well.
  Starting with the classical notation of equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:taylor-f"
 
 \end_inset
@@ -1136,7 +1150,8 @@ where
 
  and so on.
  The formulation of the transfer operator given in equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:transfer-dirac"
 
 \end_inset
@@ -1221,7 +1236,8 @@ The eigenvalues may be promptly read off the diagonal; these eigenvalues
  Because the matrix is upper-triangular, it is easily solvable for both
  the left and right eigenvectors, which agree perfectly with those given
  by Driebe
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Dri99"
 
 \end_inset
@@ -1592,7 +1608,8 @@ Curiously, this identity operator
 \end_inset
 
  expanded in the Bernoulli basis as in formula 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Bern-ident"
 
 \end_inset
@@ -1620,19 +1637,22 @@ f(x) & = & \left\langle x|f\right\rangle \nonumber \\
 \end_inset
 
  By combining equations 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Bern-ident"
 
 \end_inset
 
 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:B-complete"
 
 \end_inset
 
  and 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:B-maclaurin"
 
 \end_inset
@@ -1646,7 +1666,8 @@ reference "eq:B-maclaurin"
 
  which superficially seems to be entirely reasonable.
  The problem with equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq: Bernoulli-faulty"
 
 \end_inset
@@ -1658,7 +1679,8 @@ reference "eq: Bernoulli-faulty"
 
  are in all cases understood to be polynomials, then there is no harm in
  using equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq: Bernoulli-faulty"
 
 \end_inset
@@ -1962,13 +1984,15 @@ B=\sum_{k,n=0}^{\infty}\left|n\right\rangle \left\langle n\left|B_{k}\right.\rig
  are inverses of one-another, they are in no way orthogonal.
  The matrix elements of the transpose of an orthogonal operator are equal
  to those of the inverse; a quick review of equations 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:B-right matrix elts"
 
 \end_inset
 
  and 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:B-left matrix elts"
 
 \end_inset
@@ -2082,7 +2106,8 @@ The operator
  that operator is taken in the coordinate-space.
  This may be seen very easily simply by direct substitution into equation
  
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Bernoulli operator"
 
 \end_inset
@@ -2114,7 +2139,8 @@ Coordinate
 
  is introduced to distinguish the operator in the coordinate basis, as given
  in equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Bernoulli operator"
 
 \end_inset
@@ -2151,7 +2177,8 @@ In the previous sections, it was established (XXX but perhaps not very clearly?
 \end_inset
 
  where the second step makes use of equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:B-tilde acting on f"
 
 \end_inset
@@ -2175,7 +2202,8 @@ reference "eq:B-tilde acting on f"
 \end_inset
 
  which is just a re-derivation of equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Taylors bra-kets"
 
 \end_inset
@@ -2225,7 +2253,8 @@ Can this conundrum be escaped without appealing to topology? Since
  seems to be somehow incomplete when considering sine functions, perhaps,
  one might think, this lack of completeness is due to the form of the left
  eigenstates given in equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:left bernoulli"
 
 \end_inset
@@ -2321,7 +2350,8 @@ gly, that
 \end_inset
 
  by repeating the same concerns and issues that lead to equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq: Bernoulli-faulty"
 
 \end_inset
@@ -2692,7 +2722,8 @@ periodic zeta function
 \end_inset
 
 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 after "Sect. 12.7"
 key "Apo76"
 
@@ -2704,7 +2735,8 @@ key "Apo76"
 \end_inset
 
 , it is not actually so
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Ve-Poly07"
 
 \end_inset
@@ -2744,7 +2776,8 @@ and so
 \end_inset
 
 , and a non-trivial monodromy group
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Ve-Poly07"
 
 \end_inset
@@ -2780,7 +2813,8 @@ B_{n}(x) & = & -\Gamma(n+1)\sum_{k=1}^{\infty}\frac{\exp(2\pi ikx)+(-1)^{n}\exp(
 \end_inset
 
 See, for example 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 after "Thm. 12.19"
 key "Apo76"
 
@@ -2800,7 +2834,8 @@ The periodic zeta function
 \end_inset
 
 -adic operator, given in equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:p-adic operator"
 
 \end_inset
@@ -2840,21 +2875,24 @@ These eigenfunctions are essentially a form of the Hurwitz zeta function
 \end_inset
 
  This relationship is known as Jonquière's identity
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 after "Section 7.12.2"
 key "Lew81"
 
 \end_inset
 
 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Jon1889"
 
 \end_inset
 
  when expressed in terms of polylogarithms; its derivation is reviewed in
  Appendix 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "sec:Appendix-B:-Jonquière's"
 
 \end_inset
@@ -2917,14 +2955,16 @@ The eigenfunctions are smooth (infinitely differentiable) for the open interval
 
 .
  The analytic properties are reviewed in Appendix 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "sec:Appendix-C:-Visualizing"
 
 \end_inset
 
 ; a deeper, more complete picture of the analytic properties can be obtained
  by studying the polylogarithm
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Ve-Poly07"
 
 \end_inset
@@ -3028,7 +3068,8 @@ Synthetic operators
 
 \begin_layout Standard
 The equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:p-adic beta eigeneqn"
 
 \end_inset
@@ -3049,7 +3090,8 @@ synthetic
 
  operators, in that they have been synthesized from the basic set in equation
  
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:p-adic beta eigeneqn"
 
 \end_inset
@@ -3158,7 +3200,8 @@ Lattice model topology
 It is well-known that one-dimensional lattice models, and more generally,
  subshifts of finite type, can provide useful tools and insights for the
  study of one-dimensional iterated maps
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "May91"
 
 \end_inset
@@ -3254,7 +3297,8 @@ x(\sigma)=\sum_{n=1}^{\infty}\sigma_{n}p^{-n}\label{eq:Cantor mapping}\end{equat
  This double-pointed topology can be understood to be one and the same as
  the Cantor set topology, in that the Cantor set topology makes exactly
  the same distinction between endpoints of intervals
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Ve-Can05"
 
 \end_inset
@@ -3551,7 +3595,8 @@ The critcal result here is that
  One may construct a large number of general eigenfunctions, provided that
  on can find non-trivial objects in the kernel, and provided that one is
  working in a topology where the sum of equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Lattice Hamlitonian"
 
 \end_inset
@@ -3567,7 +3612,8 @@ Fractal eigenfunctions
 The above derivation of the eigenfunctions assumed a lattice model topology
  for the unit interval.
  Using equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Cantor mapping"
 
 \end_inset
@@ -3580,7 +3626,8 @@ n to rediscover the full set of eigenfunctions of the Bernoulli operator.
 
 \begin_layout Standard
 From equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Coordinate kernel"
 
 \end_inset
@@ -3593,14 +3640,16 @@ reference "eq:Coordinate kernel"
 \end_inset
 
  These correspond precisely to the zero-columns of equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:trig-matrix"
 
 \end_inset
 
 .
  Inserting these into equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Lattice Hamlitonian"
 
 \end_inset
@@ -3773,7 +3822,8 @@ The above relationship is reminiscent of of the creation and annihilation
 \end_inset
 
 -adic shift states of equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq: p-adic Shift states"
 
 \end_inset
@@ -3885,8 +3935,9 @@ wide false
 sideways false
 status collapsed
 
-\begin_layout Standard
-\begin_inset LatexCommand label
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
 name "cap:Fractal-Eigenfunction"
 
 \end_inset
@@ -3894,7 +3945,7 @@ name "cap:Fractal-Eigenfunction"
 
 \begin_inset Caption
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Fractal Eigenfunction
 \end_layout
 
@@ -3903,7 +3954,7 @@ Fractal Eigenfunction
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename bernoulli-5-2.ps
 	width 100text%
@@ -3914,7 +3965,7 @@ Fractal Eigenfunction
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 This figure shows the real and imaginary parts of the eigenfunction 
 \begin_inset Formula $\phi_{\lambda,k,r}^{(p)}(x)=\phi_{0.45,0,2}^{(5)}(x)$
 \end_inset
@@ -4143,7 +4194,8 @@ is easily shown to be an eigenfunction of
 
 .
  The Devil's staircase function is shown in 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "fig:Devil's staircase"
 
 \end_inset
@@ -4157,8 +4209,9 @@ wide false
 sideways false
 status open
 
-\begin_layout Standard
-\begin_inset LatexCommand label
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
 name "fig:Devil's staircase"
 
 \end_inset
@@ -4166,7 +4219,7 @@ name "fig:Devil's staircase"
 
 \begin_inset Caption
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Devil's staircase
 \end_layout
 
@@ -4175,7 +4228,7 @@ Devil's staircase
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename measure.ps
 
@@ -4184,7 +4237,7 @@ Devil's staircase
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 This figure shows a graph of the eigenfunction 
 \begin_inset Formula $c_{\lambda}\left(x\right)$
 \end_inset
@@ -4199,7 +4252,7 @@ This figure shows a graph of the eigenfunction
 \begin_inset Note Note
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 This figure was created with misc/gap/measure.c and misc/gap/measure.gplot.
 \end_layout
 
@@ -4208,7 +4261,7 @@ This figure was created with misc/gap/measure.c and misc/gap/measure.gplot.
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -4248,7 +4301,8 @@ exteneded to the entire real-number line as a periodic function
 
 , and thus can be used to create a fractal eigenfunction by means of the
  lattice shift equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Lattice shift eigenfunction"
 
 \end_inset
@@ -4304,7 +4358,8 @@ The fractal eigenfunctions are self-similar.
  This self-similarity follows directly from the shift invariance of the
  lattice construction, that is, of the translation invariance of the lattice
  Hamlitonian embodied in equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Lattice left shift"
 
 \end_inset
@@ -4327,7 +4382,8 @@ For concreteness, consider first the action of the right-sift operators
 \end_inset
 
 , defined by equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Lattice right-shift"
 
 \end_inset
@@ -4337,7 +4393,8 @@ reference "eq:Lattice right-shift"
 \end_inset
 
  dyadic eigenfunction 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Haar wavelet eigenfunction"
 
 \end_inset
@@ -4494,7 +4551,8 @@ monoid
 \begin_layout Standard
 The dyadic monoid has many interesting properties; these are discussed in
  greater detail in 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Ve-T04"
 
 \end_inset
@@ -4585,7 +4643,8 @@ and so of course,
 .
  Appearently, the construction of the parabola by self-similar subdivision
  was known to Archimedes
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Man88"
 
 \end_inset
@@ -4725,7 +4784,8 @@ As should be clear from the above construction, when
 
  is not a polynomial, the representation cannot be finite-dimensional.
  In particular, the sine-wave based dyadic fractal 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:dyadic exp fractal"
 
 \end_inset
@@ -4832,7 +4892,8 @@ Number theoretic connections
 
 \begin_layout Standard
 XXX The definition 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Lattice Bernoulli"
 
 \end_inset
@@ -4868,7 +4929,8 @@ The two-sided lattice is the lattice that stretches off to both the left
 \end_inset
 
  given by equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:dyadic map"
 
 \end_inset
@@ -4897,11 +4959,12 @@ wide false
 sideways false
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Caption
 
-\begin_layout Standard
-\begin_inset LatexCommand label
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
 name "cap:Ising-Tartan"
 
 \end_inset
@@ -4914,7 +4977,7 @@ Ising Tartan
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename ising-tartan.png
 	width 100text%
@@ -4924,7 +4987,7 @@ Ising Tartan
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 This tartan-like graph shows the Ising model probability density 
 \begin_inset Formula $P(\sigma)$
 \end_inset
@@ -4955,7 +5018,8 @@ y(\sigma)=\sum_{k=0}^{N}\left(\frac{\sigma_{-k-1}+1}{2}\right)2^{-(k+1)}\]
 \end_inset
 
  is computed using 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Classical Hamiltonian"
 
 \end_inset
@@ -4974,7 +5038,8 @@ reference "eq:Classical Hamiltonian"
 \end_inset
 
  is given by equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:probability distribution"
 
 \end_inset
@@ -4983,7 +5048,7 @@ reference "eq:probability distribution"
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The graph here assumes the Ising potential, with 
 \begin_inset Formula $J=0.3$
 \end_inset
@@ -5113,7 +5178,8 @@ The two-sided lattice may be studied either as a lattice model, or as a
  the energy and the probability density are invariant under the action of
  the translation operator.
  That is, one is interested only in the classical Hamiltonians of eqn 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Classical Hamiltonian"
 
 \end_inset
@@ -5218,7 +5284,8 @@ The transfer operator is thus a map
 
 \begin_layout Standard
 The general idea behind equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Classical Hamiltonian"
 
 \end_inset
@@ -5294,7 +5361,8 @@ given some function
  is invertible, and one expects time-reversible evolution to be described
  by unitary operators.
  The figure 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "cap:Ising-Tartan"
 
 \end_inset
@@ -5327,7 +5395,8 @@ The proper analysis of the transfer operator
 
  be pinned down more precisely.
  Classic results on time-symmetry breaking 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Has92,Fox96,Dri99"
 
 \end_inset
@@ -5612,7 +5681,8 @@ One may construct an analogous mapping, but going in the opposite direction,
  of measurability, whereas this is important to the definition of the transfer
  operator, as witnessed by the appearance of the Jacobian determinant in
  equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq: transfer-jacobi"
 
 \end_inset
@@ -5699,7 +5769,8 @@ g_{*}(af_{1}+bf_{2})=ag_{*}(f_{1})+bg_{*}(f_{2})\]
 
 \begin_layout Standard
 One regains the transfer operator as defined in equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq: transfer-jacobi"
 
 \end_inset
@@ -6046,7 +6117,8 @@ small enough
 \end_inset
 
 which may be easily recognized as equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq: transfer-jacobi"
 
 \end_inset
@@ -6094,7 +6166,8 @@ This follows by taking the limit
 \end_layout
 
 \begin_layout Corollary
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "cor:unit-eigenvec"
 
 \end_inset
@@ -6116,7 +6189,8 @@ This may be proved in two ways.
 \end_inset
 
  in equation 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "eq:Transfer-point"
 
 \end_inset
@@ -6279,7 +6353,8 @@ and so we have the norm of
 
 \begin_layout Standard
 The corollary 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "cor:unit-eigenvec"
 
 \end_inset
@@ -6296,7 +6371,8 @@ reference "cor:unit-eigenvec"
 \end_layout
 
 \begin_layout Theorem
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "thm:Haar-measure"
 
 \end_inset
@@ -6359,7 +6435,8 @@ By definition,
 is a bounded operator, and the space of measures is compact, and so a bounded
  operator on a compact space will have a fixed point.
  The existence of the fixed point is given by the Markov-Kakutani theorem
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 after "p 456"
 key "Dunford1957"
 
@@ -7150,7 +7227,8 @@ The standard definition of the Artin-Mazur Zeta function requires that the
 \end_layout
 
 \begin_layout Section
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sec:Appendix-B:-Jonquière's"
 
 \end_inset
@@ -7171,27 +7249,31 @@ This appendix establishes the relationship between the functions
 
  This relationship is well-known; for example, it is reviewed in the Bateman
  manuscripts in the guise of an identity on the Lerch transcendental
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Bate53"
 
 \end_inset
 
 ; see also Wikipedia on Polylogarithms
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "WP-PL"
 
 \end_inset
 
 .
  As a relation on polylogarithms, it is known as Jonquière's identity
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 after "Section 7.12.2"
 key "Lew81"
 
 \end_inset
 
 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Jon1889"
 
 \end_inset
@@ -7219,7 +7301,8 @@ One may confirm this by following a very old-fashioned recipe for obtaining
 \end_inset
 
  Then, following a traditional trick 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 after "pp 13 ff"
 key "Edw74"
 
@@ -7343,7 +7426,8 @@ formal sum
 
  which agrees with standard textbook presentations of the Hurwitz zeta;
  see for example 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 after "Thm 12.6, Ex 12.2"
 key "Apo76"
 
@@ -7353,7 +7437,8 @@ key "Apo76"
 \end_layout
 
 \begin_layout Section
-\begin_inset LatexCommand label
+\begin_inset CommandInset label
+LatexCommand label
 name "sec:Appendix-C:-Visualizing"
 
 \end_inset
@@ -7404,7 +7489,7 @@ lumpy
 \begin_inset Note Note
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The following graphics were plotted using misc/gap/zeta.gplot with data generated
  by misc/gap/zeta.C by performing explicit summation of the periodic zeta
  function.
@@ -7422,10 +7507,10 @@ wide false
 sideways false
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Caption
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Real part of Beta
 \end_layout
 
@@ -7434,7 +7519,7 @@ Real part of Beta
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename zeta-exp-2.2345-04.eps
 	width 100text%
@@ -7445,7 +7530,7 @@ Real part of Beta
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 This figure illustrates a family of eigenvectors 
 \begin_inset Formula $\beta(x;s)$
 \end_inset
@@ -7483,7 +7568,7 @@ This figure illustrates a family of eigenvectors
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Although these curves clearly look very lumpy, they are 
 \begin_inset Formula $C^{\infty}$
 \end_inset
@@ -7507,7 +7592,7 @@ Although these curves clearly look very lumpy, they are
  in the next graphic.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Although these curves appear to be sine-wave-like, it is perhaps more correct
  to think of them as being Bernoulli-polynomial-like.
  That is, the general case will look similar to the polynomial 
@@ -7551,10 +7636,10 @@ wide false
 sideways false
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Caption
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Real part of Beta
 \end_layout
 
@@ -7563,7 +7648,7 @@ Real part of Beta
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename zeta-exp-1.2345-04.eps
 	width 100text%
@@ -7574,7 +7659,7 @@ Real part of Beta
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 This figure illustrates a family of eigenvectors 
 \begin_inset Formula $\beta(x;s)$
 \end_inset
@@ -7665,7 +7750,8 @@ There are eigenfunctions with eigenvalues greater than one, essentially
 
 .
  The remaining term is well-behaved and is shown in figure 
-\begin_inset LatexCommand ref
+\begin_inset CommandInset ref
+LatexCommand ref
 reference "cap:The-non-singular-part"
 
 \end_inset
@@ -7680,11 +7766,12 @@ wide false
 sideways false
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Caption
 
-\begin_layout Standard
-\begin_inset LatexCommand label
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
 name "cap:The-non-singular-part"
 
 \end_inset
@@ -7697,7 +7784,7 @@ The Non-Singular Part of the Divergent Eigenfunctions
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename zeta-diverge.png
 	width 100text%
@@ -7707,7 +7794,7 @@ The Non-Singular Part of the Divergent Eigenfunctions
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 This figure shows 
 \begin_inset Formula \[
 \eta_{even}(x;\sigma)=\frac{\cos\pi\sigma/2}{\sigma}\left[\beta(x;\sigma)+\beta(1-x;\sigma)\right]-x^{\sigma-1}-(1-x)^{\sigma-1}\]
@@ -7800,10 +7887,10 @@ wide false
 sideways false
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Caption
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Ringing
 \end_layout
 
@@ -7812,7 +7899,7 @@ Ringing
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename zeta-gibbs.png
 	width 100text%
@@ -7823,7 +7910,7 @@ Ringing
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 This figure shows ringing/Gibbs phenomenon as 
 \begin_inset Formula $s$
 \end_inset
@@ -7976,7 +8063,8 @@ tiable, non-integrable eigenfunctions that can be precisely defined in terms
  the topology of the real number line; this alternate topology allows for
  a much, much larger set of eigenfunctions.
  This is discussed in greater detail in 
-\begin_inset LatexCommand cite
+\begin_inset CommandInset citation
+LatexCommand cite
 key "Ve-I04"
 
 \end_inset
@@ -7985,9 +8073,10 @@ key "Ve-I04"
 \end_layout
 
 \begin_layout Standard
-\begin_inset LatexCommand bibtex
-options "plain"
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
 bibfiles "/home/linas/src/fractal/paper/fractal"
+options "plain"
 
 \end_inset
 
