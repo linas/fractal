@@ -1955,6 +1955,13 @@ The Kernel
 \end_layout
 
 \begin_layout Standard
+The spectrum of the polynomial eigenfunctions of the GKW operator is discrete,
+ and does not include zero.
+ However, if one considers a larger set of functions, say, the set of square-int
+egrable functions, then the spectrum becomes continuous, and includes zero.
+\end_layout
+
+\begin_layout Standard
 The kernel of the GKW operator is defined as the set of functions 
 \begin_inset Formula $f$
 \end_inset
@@ -1964,34 +1971,25 @@ The kernel of the GKW operator is defined as the set of functions
 \end_inset
 
 .
- It is not clear how to exhibit functions belonging to the kernel.
- For example, consider 
+ The kernel of te GKW is readily demonstrated: let 
 \begin_inset Formula \[
-k(x)=\frac{1}{x^{2}}\exp(2k+1)\frac{\pi}{x}\]
+k_{n}(x)=\begin{cases}
+0 & \;\mbox{ for }\;0\le x<\frac{1}{n+2}\\
+\frac{1}{x^{2}} & \;\mbox{ for }\;\frac{1}{n+2}\le x<\frac{1}{n+1}\\
+\frac{-1}{x^{2}} & \;\mbox{ for }\;\frac{1}{n+1}\le x<\frac{1}{n}\\
+0 & \;\mbox{ for }\;\frac{1}{n}\le x<1\end{cases}\]
 
 \end_inset
 
-Then
-\begin_inset Formula \begin{align*}
-\left[\mathcal{L}_{h}k\right](x)= & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}\cos(2k+1)n\pi\\
-= & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}(-)^{n}\end{align*}
-
+Then clearly, 
+\begin_inset Formula $\left[\mathcal{L}_{h}k_{n}\right](x)=0$
 \end_inset
 
-The value of the sum is ambiguous.
- One is tempted to cancel terms pairwise, and thus declare 
-\begin_inset Formula $k(x)$
+ for all integer 
+\begin_inset Formula $n\ge1$
 \end_inset
 
- to belong to the kernel.
- On the other hand, the regularized sum is not zero: 
-\begin_inset Formula \[
-\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,(-)^{k}e^{-tk}=\frac{1}{2}\]
-
-\end_inset
-
-and so one is left in a bit of a quandry as to how to interpret this.
- 
+.
 \end_layout
 
 \begin_layout Subsection
@@ -5115,7 +5113,7 @@ t_{w,l}\left(x\right)=t_{w}\left(\left(2l+1\right)x\right)\]
 Theorem: above provide a complete set spanning the space.
  Proof: XXX details to be done.
  Sketch of proof is that these can be re-expressed as unique linear combinations
- of sine and cosine; the specific linear combinations being given in 
+ of cosine waves; the specific linear combinations being given in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ve-B04"
@@ -5123,9 +5121,21 @@ key "Ve-B04"
 \end_inset
 
 .
- The transform is invertible: sine and cosine can be expressed as unique
- linear combinations of 
+ The transform is invertible: 
+\begin_inset Formula $\cos2\pi nx$
+\end_inset
+
+ can be expressed as a unique linear combination of 
 \begin_inset Formula $t_{w,l}$
+\end_inset
+
+.
+ By contrast, certain linear combinations of 
+\begin_inset Formula $\sin2\pi nx$
+\end_inset
+
+ are used to construct the kernel of 
+\begin_inset Formula $\mathcal{L}_{c}$
 \end_inset
 
 .
