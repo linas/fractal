@@ -1955,17 +1955,26 @@ The Kernel
 \end_layout
 
 \begin_layout Standard
-We would like to know what the kernel of the GKW operator is.
- Consider 
+The kernel of the GKW operator is defined as the set of functions 
+\begin_inset Formula $f$
+\end_inset
+
+ for which 
+\begin_inset Formula $\mathcal{L}_{h}f=0$
+\end_inset
+
+.
+ It is not clear how to exhibit functions belonging to the kernel.
+ For example, consider 
 \begin_inset Formula \[
 k(x)=\frac{1}{x^{2}}\exp(2k+1)\frac{\pi}{x}\]
 
 \end_inset
 
-Then 
-\begin_inset Formula \begin{eqnarray}
-\left[\mathcal{L}_{h}k\right](x) & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}\cos(2k+1)n\pi\nonumber \\
- & = & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}(-)^{n}\label{eq:}\end{eqnarray}
+Then
+\begin_inset Formula \begin{align*}
+\left[\mathcal{L}_{h}k\right](x)= & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}\cos(2k+1)n\pi\\
+= & \exp\left((2k+1)\pi x\right)\sum_{n=1}^{\infty}(-)^{n}\end{align*}
 
 \end_inset
 
@@ -1981,13 +1990,8 @@ The value of the sum is ambiguous.
 
 \end_inset
 
-and so one is left in a bit of a quandary.
+and so one is left in a bit of a quandry as to how to interpret this.
  
-\end_layout
-
-\begin_layout Standard
-Some progress might be made by applying the theory of the Henstock-Kurzweil
- integral.
 \end_layout
 
 \begin_layout Subsection
@@ -4739,6 +4743,73 @@ The point is to not give up hope on the operator relationships, even though
  basis.
  Fortunately, we can find some of these.
  
+\end_layout
+
+\begin_layout Subsection
+The Kernel of the Dyadic Sawtooth
+\end_layout
+
+\begin_layout Standard
+The kernel of the dyadic sawtooth is defined as the set of functions 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathcal{L}_{c}k=0$
+\end_inset
+
+.
+ It is clear that none of the polynomial eigenfunctions belong to the kernel;
+ the polynomial spectrum is discrete, and zero is not a part of the spectrum.
+ However, if one considers a larger set of functions, say the square-integrable
+ functions, then the kernel is readily demonstrated.
+ Let 
+\begin_inset Formula \[
+k_{n}\left(x\right)=\begin{cases}
+1 & \;\mbox{ for }\;0\le x<\frac{1}{2^{n+1}}\\
+-1 & \;\mbox{ for }\;\frac{1}{2^{n+1}}\le x<\frac{1}{2^{n}}\\
+0 & \;\mbox{ for }\;\frac{1}{2^{n}}\le x<\infty\end{cases}\]
+
+\end_inset
+
+then clearly one has that 
+\begin_inset Formula $\mathcal{L}_{c}k_{n}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\ge0$
+\end_inset
+
+.
+ Clearly, each 
+\begin_inset Formula $k_{n}$
+\end_inset
+
+ is linearly independent of the others.
+ Note that the 
+\begin_inset Formula $k_{n}$
+\end_inset
+
+ shift under a doubling of the argument: 
+\begin_inset Formula $k_{n}\left(2x\right)=k_{n+1}\left(x\right)$
+\end_inset
+
+, or alternately, 
+\begin_inset Formula $k_{n}\circ g_{D}=k_{n-1}$
+\end_inset
+
+ where 
+\begin_inset Formula $g_{D}$
+\end_inset
+
+ is as defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:monoid generator g"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
