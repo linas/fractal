@@ -75,33 +75,59 @@ int main( int argc, char * argv[])
 
 		double lcbwl = Lcbee(w,l,x);
 
-		// the l=0 case -- works
-		// double gbwl = (1.0 -w * bwl) / (2.0-w);
+		double gbwl = 0.0;
+		switch(l)
+		{
+		case 0:
+			// the l=0 case -- works
+			gbwl = (1.0 -w * bwl) / (2.0-w);
+			break;
 
-		// the l=1 case -- works for first 1/3
-		// double gbwl = (0.25*(5.0-w) -w * bwl) / (2.0-w);
+		case 1:
+			// the l=1 case
+			if (x < 1.0/3.0)
+				gbwl = (0.25*(5.0-w) -w * bwl) / (2.0-w);
+			else if (x < 2.0/3.0)
+				gbwl = (0.25*(1.0+3.0*w) -w * bwl) / (2.0-w);
+			else
+				gbwl = (0.25*(1.0-3.0*w) -w * bwl) / (2.0-w);
+			break;
 
-		// the  l=2 case -- works for first 1/5th
-		// double gbwl = (0.125*(9.0-w) -w * bwl) / (2.0-w);
+		case 2:
+			// the  l=2 case -- works for first 1/5th
+			gbwl = (0.125*(9.0-w) -w * bwl) / (2.0-w);
+			break;
 
-		// the l=3 case -- for first 1/7th
-		// double gbwl = (0.125*(11.0-3.0*w) -w * bwl) / (2.0-w);
+		case 3:
+			// the l=3 case -- for first 1/7th
+			gbwl = (0.125*(11.0-3.0*w) -w * bwl) / (2.0-w);
+			break;
 
-		// the l=4 case -- for first 1/9th
-		// double gbwl = (0.0625*(17.0-w) -w * bwl) / (2.0-w);
+		case 4:
+			// the l=4 case -- for first 1/9th
+			gbwl = (0.0625*(17.0-w) -w * bwl) / (2.0-w);
+			break;
 
-		// the l=5 case -- for first 1/11th
-		// double gbwl = (0.0625*(21.0-5.0*w) -w * bwl) / (2.0-w);
+		case 5:
+			// the l=5 case -- for first 1/11th
+			gbwl = (0.0625*(21.0-5.0*w) -w * bwl) / (2.0-w);
+			break;
 
-		// the l=6 case -- for first 1/13th
-		// double gbwl = (0.0625*(19.0-3.0*w) -w * bwl) / (2.0-w);
+		case 6:
+			// the l=6 case -- for first 1/13th
+			gbwl = (0.0625*(19.0-3.0*w) -w * bwl) / (2.0-w);
+			break;
 
-		// the l=7 case -- for first 1/15th
-		// double gbwl = (0.0625*(23.0-7.0*w) -w * bwl) / (2.0-w);
+		case 7:
+			// the l=7 case -- for first 1/15th
+			gbwl = (0.0625*(23.0-7.0*w) -w * bwl) / (2.0-w);
+			break;
 
-		// the l=8 case -- for first 1/15th
-		double gbwl = (0.03125*(33.0-w) -w * bwl) / (2.0-w);
-
+		case 8:
+			// the l=8 case -- for first 1/15th
+			gbwl = (0.03125*(33.0-w) -w * bwl) / (2.0-w);
+			break;
+		}
 
 		double diff = lcbwl - gbwl;
 
