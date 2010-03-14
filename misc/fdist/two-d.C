@@ -57,7 +57,11 @@ int main( int argc, char * argv[])
 	{
 		double x = ((double) i) / ((double) imax);
 		double bwl = beewl(w,l,x);
-		printf("%d	%g	%g\n", i, x, bwl);
+		// bwl *= 1.0-w;
+
+		double bgwl = beewl(w,l,0.5*x);
+		double gbwl = w * bwl;
+		printf("%d	%g	%g	%g	%g\n", i, x, bwl, bgwl, gbwl);
 	}
 
 	return 0;
