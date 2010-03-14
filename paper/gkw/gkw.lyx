@@ -54,7 +54,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised Oct 2008, 28 Feb 2010) 
+2 January 2004 (revised Oct 2008, 14 Mar 2010) 
 \end_layout
 
 \begin_layout Abstract
@@ -4072,9 +4072,9 @@ XXX double check
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \begin{eqnarray}
-e_{2}(y) & = & \frac{15-13\zeta(2)-9\zeta(3)+2\zeta(2)[\zeta(2)+3\zeta(3)]}{3(13\zeta(2)-8\zeta(3))(3-2\zeta(2))}+\nonumber \\
- &  & +\frac{6\zeta(2)+2\zeta(3)-12}{13-8\zeta(2)}\, y+y^{2}\label{eq:}\end{eqnarray}
+\begin_inset Formula \begin{align*}
+e_{2}(y)= & \frac{15-13\zeta(2)-9\zeta(3)+2\zeta(2)[\zeta(2)+3\zeta(3)]}{3(13\zeta(2)-8\zeta(3))(3-2\zeta(2))}+\\
+ & \qquad+\frac{6\zeta(2)+2\zeta(3)-12}{13-8\zeta(2)}\, y+y^{2}\end{align*}
 
 \end_inset
 
@@ -4886,8 +4886,8 @@ reference "eq:monoid generator g"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\left[g_{D}^{k-1}r_{D}g_{D}\right](x)=\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\]
+\begin_inset Formula \begin{equation}
+\left[g_{D}^{k-1}r_{D}g_{D}\right](x)=\frac{1}{2^{k-1}}-\frac{x}{2^{k}}\label{eq:argument-as-grg}\end{equation}
 
 \end_inset
 
@@ -5192,6 +5192,53 @@ key "Ve-B04"
 \end_layout
 
 \begin_layout Standard
+The next section develops the general framework for these solutions.
+\end_layout
+
+\begin_layout Subsection
+A Complete Set of Fractal Eigenfunctions
+\end_layout
+
+\begin_layout Standard
+Practical computations with the complete set of fratal eigenfunctions require
+ additional tools.
+ These are developed here.
+ Specifically, if 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is a function posessing dyadic self-similarity, then computations with
+ 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+ require the evaluation of expressions of the form 
+\begin_inset Formula $f\left(\left(2l+1\right)\left(2-x\right)2^{-n}\right)$
+\end_inset
+
+; the argument needs to be re-expressed in terms of the transforms 
+\begin_inset Formula $g_{D}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{D}$
+\end_inset
+
+, in analogy to eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:argument-as-grg"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Stuff
+\end_layout
+
+\begin_layout Standard
 Under the action of 
 \begin_inset Formula $\mathcal{L}_{c}$
 \end_inset
@@ -5308,6 +5355,10 @@ Previously, we saw that the Takagi Curves served as basis vectors for a
  We saw that this space could also be spanned by the Hurwitz Zeta, through
  a change of basis.
  Thus, we expect that we can extend these results to this map as well.
+\end_layout
+
+\begin_layout Subsection
+Fractal Eigenfunctions of the Two-Dimensional Representation
 \end_layout
 
 \begin_layout Section
@@ -5461,14 +5512,14 @@ Based on our previous luck, we attempt to define the operator
 \end_inset
 
 .
- This leads to 
-\begin_inset Formula \begin{eqnarray}
-\mathcal{P}_{nk} & \equiv & \left\langle n\left|\mathcal{P}\right|k\right\rangle \nonumber \\
- & = & (-)^{n}\left[\left(\begin{array}{c}
+ This leads to
+\begin_inset Formula \begin{align*}
+\mathcal{P}_{nk}\equiv & \left\langle n\left|\mathcal{P}\right|k\right\rangle \\
+= & (-)^{n}\left[\left(\begin{array}{c}
 k+n+1\\
 k+1\end{array}\right)+\Theta_{k\leq n}(-)^{k}\left(\begin{array}{c}
 n+1\\
-k+1\end{array}\right)\right]\label{eq:}\end{eqnarray}
+k+1\end{array}\right)\right]\end{align*}
 
 \end_inset
 
@@ -5521,15 +5572,15 @@ when
 \end_inset
 
 we work through the same set of steps to obtain 
-\begin_inset Formula \begin{eqnarray}
-\mathcal{Q}_{nk} & \equiv & \left\langle n\left|\mathcal{Q}\right|k\right\rangle \nonumber \\
- & = & \left(\frac{-2}{3}\right)^{n+2}\left[\left(\frac{2}{3}\right)^{k}\left(\begin{array}{c}
+\begin_inset Formula \begin{align*}
+\mathcal{Q}_{nk}\equiv & \left\langle n\left|\mathcal{Q}\right|k\right\rangle \\
+= & \left(\frac{-2}{3}\right)^{n+2}\left[\left(\frac{2}{3}\right)^{k}\left(\begin{array}{c}
 k+n+1\\
 k+1\end{array}\right)+\left(\frac{1}{3}\right)^{k}\;\sum_{p=0}^{\min(n,k)}\left(-3\right)^{p}\left(\begin{array}{c}
 n+k-p+1\\
 k+1\end{array}\right)\left(\begin{array}{c}
 k\\
-p\end{array}\right)\right]\label{eq:}\end{eqnarray}
+p\end{array}\right)\right]\end{align*}
 
 \end_inset
 
@@ -5665,13 +5716,13 @@ key "Briggs2003"
 \end_inset
 
 , which is 
-\begin_inset Formula \begin{align}
+\begin_inset Formula \begin{align*}
 \mathcal{L}_{mn}^{(1/2,1/2)}= & (-1)^{m}\sum_{k=0}^{n}\left(\frac{-1}{2}\right)^{n-k}\left(\begin{array}{c}
 n\\
 k\end{array}\right)\left(\begin{array}{c}
 k+m+1\\
-m\end{array}\right)\,\times\label{eq:}\\
- & \left[2^{m+k+2}\left(\zeta(k+m+2)-1\right)-\zeta(k+m+2)\right]\end{align}
+m\end{array}\right)\,\times\\
+ & \hspace{1em}\left[2^{m+k+2}\left(\zeta(k+m+2)-1\right)-\zeta(k+m+2)\right]\end{align*}
 
 \end_inset
 
