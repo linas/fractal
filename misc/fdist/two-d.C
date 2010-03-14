@@ -21,7 +21,7 @@ double beew(double w, double x)
 	int n;
 	double wn = 1.0;
 	double tn = 1.0;
-	int nmax = floor(25.0 / log(w));
+	int nmax = floor(-25.0 / log(w));
 	double acc = 0.0;
 	for (n=0; n<nmax; n++)
 	{
@@ -47,7 +47,9 @@ int main( int argc, char * argv[])
 		exit (1);
 	}
 	double w = atof(argv[1]);
-	int l = atof(argv[2]);
+	int l = atoi(argv[2]);
+
+	printf("#\n# w=%g l=%d\n#\n", w, l);
 
 	int i;
 	int imax = 300;
