@@ -94,8 +94,17 @@ int main( int argc, char * argv[])
 			break;
 
 		case 2:
-			// the  l=2 case -- works for first 1/5th
-			gbwl = (0.125*(9.0-w) -w * bwl) / (2.0-w);
+			// the  l=2 case 
+			if (x < 1.0/5.0)
+				gbwl = (0.125*(9.0-w) -w * bwl) / (2.0-w);
+			else if (x < 2.0/5.0)
+				gbwl = (0.125*(1.0+7.0*w) -w * bwl) / (2.0-w);
+			else if (x < 3.0/5.0)
+				gbwl = (0.25*(7.0-3.0*w) -w * bwl) / (2.0-w);
+			else if (x < 4.0/5.0)
+				gbwl = (0.25*(3.0+w) -w * bwl) / (2.0-w);
+			else 
+				gbwl = (0.25*(5.0-w) -w * bwl) / (2.0-w);
 			break;
 
 		case 3:
