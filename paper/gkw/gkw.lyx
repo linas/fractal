@@ -5224,14 +5224,318 @@ Practical computations with the complete set of fratal eigenfunctions require
 \begin_inset Formula $r_{D}$
 \end_inset
 
-, in analogy to eqn 
+, analogously to eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:argument-as-grg"
 
 \end_inset
 
+.
+ That is, if 
+\begin_inset Formula $\gamma_{D}$
+\end_inset
+
+ is some product of 
+\begin_inset Formula $g_{D}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{D}$
+\end_inset
+
+, and 
+\begin_inset Formula $f$
+\end_inset
+
+ is self-similar under the action of 
+\begin_inset Formula $g_{f}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{f}$
+\end_inset
+
+, then one has the commuting diagram 
+\begin_inset Formula $\gamma_{f}f=f\circ\gamma_{D}$
+\end_inset
+
+; this last equation provides the motivation for developing the machinery
+ here.
  
+\end_layout
+
+\begin_layout Standard
+To perform the above, it is sufficient to re-express 
+\begin_inset Formula $\left(M-y\right)2^{-n}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $g_{D}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{D}$
+\end_inset
+
+.
+ We begin by noting that 
+\begin_inset Formula $\left(M-y\right)2^{-n}=\left(M-1+r_{D}y\right)2^{-n}$
+\end_inset
+
+ since 
+\begin_inset Formula $r_{D}y=1-y$
+\end_inset
+
+.
+ Next, one needs the binary expansion for 
+\begin_inset Formula $M-1$
+\end_inset
+
+; so write 
+\begin_inset Formula \[
+M-1=\sum_{k=0}^{\infty}\beta_{k}2^{k}\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\beta_{k}\in\left\{ 0,1\right\} $
+\end_inset
+
+ the 
+\begin_inset Formula $k$
+\end_inset
+
+'th bit in the base-2 representation.
+ Of course, all 
+\begin_inset Formula $\beta_{k}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k>\log_{2}\left(M-1\right)$
+\end_inset
+
+.
+ The desired expression is 
+\begin_inset Formula \[
+\frac{M-y}{2^{n}}=B_{n}B_{n-1}\cdots B_{1}B_{0}r_{D}y\]
+
+\end_inset
+
+where 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ is given by 
+\begin_inset Formula \[
+B_{k}=\begin{cases}
+L & \;\mbox{ for }\beta_{k}=0\\
+R & \;\mbox{ for }\beta_{k}=1\end{cases}\]
+
+\end_inset
+
+and 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ are left and right sub-trees of the dyadic tree, respectively: 
+\begin_inset Formula \[
+L\left(x\right)=g_{D}\left(x\right)=\frac{x}{2}\hspace{1em}\mbox{ and }\hspace{1em}R\left(x\right)=\left(r_{D}g_{D}r_{D}\right)\left(x\right)=\frac{1+x}{2}\]
+
+\end_inset
+
+Functions written next to one-another are understood to mean function compositio
+n: 
+\begin_inset Formula $pqrx=\left(p\circ q\circ r\right)\left(x\right)=p\left(q\left(r\left(x\right)\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Several examples can clarify this.
+ Consider, for example 
+\begin_inset Formula $\left(6-y\right)/8$
+\end_inset
+
+.
+ The binary expansion for 
+\begin_inset Formula $6-1=5$
+\end_inset
+
+ is 
+\begin_inset Formula $101$
+\end_inset
+
+ and so one has
+\begin_inset Formula \[
+\frac{6-y}{8}=RLRry=rgr\; g\; rgr\; ry=\left(rg\right)^{3}y\]
+
+\end_inset
+
+The bits to the left are all zero, and so one has 
+\begin_inset Formula \[
+\frac{6-y}{2^{n+3}}=L^{n}RLRry=g^{n}\left(rg\right)^{3}y\]
+
+\end_inset
+
+ For convenience, the subscript 
+\begin_inset Formula $D$
+\end_inset
+
+ was dropped above.
+\end_layout
+
+\begin_layout Standard
+Consider then the action of 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+ on 
+\begin_inset Formula $f_{l}\left(x\right)=f\left(\left(2l+1\right)x\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $l=1$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le x\le1/3$
+\end_inset
+
+.
+ One then has 
+\begin_inset Formula \begin{align*}
+\left[\mathcal{L}_{c}f_{1}\right]\left(x\right)= & \frac{1}{2}f\left(\frac{6-3x}{2}\right)+\frac{1}{4}f\left(\frac{6-3x}{4}\right)+\frac{1}{8}f\left(\frac{6-3x}{8}\right)+\cdots\\
+= & \frac{1}{2}f\, Rr\,3x+\frac{1}{4}f\, LRr\,3x+\frac{1}{8}f\, RLRr\,3x+\cdots+\frac{1}{2^{n}}f\, L^{n-3}RLRr\,3x+\cdots\end{align*}
+
+\end_inset
+
+while for 
+\begin_inset Formula $l=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{1}{3}\le x\le\frac{2}{3}$
+\end_inset
+
+ one uses 
+\begin_inset Formula $RLL$
+\end_inset
+
+: 
+\begin_inset Formula \begin{align*}
+\left[\mathcal{L}_{c}f_{1}\right]\left(x\right)= & \frac{1}{2}f\left(\frac{5-3\left(x-\frac{1}{3}\right)}{2}\right)+\frac{1}{4}f\left(\frac{5-3\left(x-\frac{1}{3}\right)}{4}\right)+\frac{1}{8}f\left(\frac{5-3\left(x-\frac{1}{3}\right)}{8}\right)+\cdots\\
+= & \frac{1}{2}f\, Lr\,3\left(x-\frac{1}{3}\right)+\frac{1}{4}f\, LLr\,3\left(x-\frac{1}{3}\right)+\frac{1}{8}f\, RLLr\,3\left(x-\frac{1}{3}\right)+\cdots\\
+ & \qquad\cdots+\frac{1}{2^{n}}f\, L^{n-3}RLLr\,3\left(x-\frac{1}{3}\right)+\cdots\end{align*}
+
+\end_inset
+
+So, for example, if 
+\begin_inset Formula $f=t_{w,l}$
+\end_inset
+
+ the Takagi function defined in the previous section, one then has, for
+ 
+\begin_inset Formula $k\ge3$
+\end_inset
+
+, 
+\begin_inset Formula $l=1$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le x<1/3$
+\end_inset
+
+, that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+t_{w,1}\left(\frac{2-x}{2^{k}}\right)=t_{w}\left(3\left(\frac{2-x}{2^{k}}\right)\right)=g^{k-3}\left(rg\right)^{3}t_{w}\left(3x\right)=g^{k-3}\left(rg\right)^{3}t_{w,1}\left(x\right)\]
+
+\end_inset
+
+A more complete practical application is presented in the next section.
+ 
+\end_layout
+
+\begin_layout Standard
+The next section provides a practical application of the above.
+ 
+\end_layout
+
+\begin_layout Subsection
+The Two-Dimensional Representation
+\end_layout
+
+\begin_layout Standard
+The Cantor function transforms under a two-dimensional representation of
+ the dyadic monoid.
+ It is constructed from the step function 
+\begin_inset Formula \[
+b\left(x\right)=\begin{cases}
+0 & \ \mbox{ for }0\le x<\frac{1}{2}\\
+1 & \ \mbox{ for }\frac{1}{2}\le x<1\end{cases}\]
+
+\end_inset
+
+and a weight 
+\begin_inset Formula $w$
+\end_inset
+
+ (equal to 1/3 for the canonical Cantor function):
+\begin_inset Formula \[
+b_{w}\left(x\right)=\left(1-w\right)\sum_{n=0}^{\infty}w^{n}b\left(2^{n}x-\left\lfloor 2^{n}x\right\rfloor \right)\]
+
+\end_inset
+
+This function is shown in figure XX.
+ It is self-similar under the action of the dyadic monoid: the generators
+ are 
+\begin_inset Formula $b_{w}\left(x/2\right)=wb_{w}\left(x\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{w}\left(1-x\right)=1-b_{w}\left(x\right)$
+\end_inset
+
+.
+ As a matrix representation, one has 
+\begin_inset Formula \begin{align*}
+1\to e_{1}= & \left[\begin{array}{c}
+1\\
+0\end{array}\right]\\
+t_{w}\to e_{2}= & \left[\begin{array}{c}
+0\\
+1\end{array}\right]\end{align*}
+
+\end_inset
+
+so that 
+\begin_inset Formula \begin{align*}
+g_{b}= & \left[\begin{array}{cc}
+1 & 0\\
+0 & w\end{array}\right]\\
+r_{b}= & \left[\begin{array}{cc}
+1 & 0\\
+1 & -1\end{array}\right]\end{align*}
+
+\end_inset
+
+are the generators of the dyadic monoid in this representation.
+ Applying the previous developments, one then has that 
+\begin_inset Formula \[
+\mathcal{L}\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -5273,12 +5577,6 @@ where
  one has 
 \begin_inset Formula \[
 \alpha_{1}\left(w\right)=\frac{3}{4}\;\mbox{ and }\;\beta_{1}\left(w\right)=\frac{19}{24}\]
-
-\end_inset
-
- The above is obtained by noting that 
-\begin_inset Formula \[
-t_{w,1}\left(\frac{2-x}{2^{k}}\right)=t_{w}\left(3\left(\frac{2-x}{2^{k}}\right)\right)=g^{k-3}\left(rg\right)^{3}t_{w}\left(3x\right)=g^{k-3}\left(rg\right)^{3}t_{w,1}\left(x\right)\]
 
 \end_inset
 
