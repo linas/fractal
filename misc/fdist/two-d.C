@@ -6,6 +6,8 @@
  */
 
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 double bee(double x)
 {
@@ -23,10 +25,38 @@ double beew(double w, double x)
 	double acc = 0.0;
 	for (n=0; n<nmax; n++)
 	{
-		double term = wn * b(tn*x);
+		double term = wn * bee(tn*x);
 		acc +=term;
 		wn *= w;
 		tn *= 2.0;
 	}
 	return acc;
+}
+
+double beewl(double w, int l, double x)
+{
+	double tlp1 = 2.0*l+1.0;
+	return beew(w, tlp1*x);
+}
+
+int main( int argc, char * argv[])
+{
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s w l\n", argv[0]);
+		exit (1);
+	}
+	double w = atof(argv[1]);
+	int l = atof(argv[2]);
+
+	int i;
+	int imax = 300;
+	for (i=0; i<imax; i++)
+	{
+		double x = ((double) i) / ((double) imax);
+		double bwl = beewl(w,l,x);
+		printf("%d	%g	%g\n", i, x, bwl);
+	}
+
+	return 0;
 }

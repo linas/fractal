@@ -7,7 +7,7 @@ LIB = $(TOP)/lib
 CC = /usr/bin/cc -O2 -I $(INC) 
 
 EXES= akk f-wavelet fanal fdist fourier ftag janal jdist \
-      mink-meas rdist shift takagi-dist takagi-prod
+      mink-meas rdist shift takagi-dist takagi-prod two-d
 
 all: 	$(EXES)
 
@@ -40,3 +40,5 @@ rdist.o:  rdist.C $(LIB)/libfunc.a $(INC)/FareyTree.h
 shift.o:  shift.C $(LIB)/libfunc.a
 takagi-dist.o:  takagi-dist.C $(LIB)/libfunc.a
 takagi-prod.o:  takagi-prod.C $(LIB)/libfunc.a
+two-d.o:	two-d.C
+
