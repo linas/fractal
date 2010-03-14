@@ -74,7 +74,35 @@ int main( int argc, char * argv[])
 		// bwl *= 1.0-w;
 
 		double lcbwl = Lcbee(w,l,x);
-		double gbwl = (1.0 -w * bwl) / (2.0-w);
+
+		// the l=0 case -- works
+		// double gbwl = (1.0 -w * bwl) / (2.0-w);
+
+		// the l=1 case -- works for first 1/3
+		// double gbwl = (0.25*(5.0-w) -w * bwl) / (2.0-w);
+
+		// the  l=2 case -- works for first 1/5th
+		// double gbwl = (0.125*(9.0-w) -w * bwl) / (2.0-w);
+
+		// the l=3 case -- for first 1/7th
+		// double gbwl = (0.125*(11.0-3.0*w) -w * bwl) / (2.0-w);
+
+		// the l=4 case -- for first 1/9th
+		// double gbwl = (0.0625*(17.0-w) -w * bwl) / (2.0-w);
+
+		// the l=5 case -- for first 1/11th
+		// double gbwl = (0.0625*(21.0-5.0*w) -w * bwl) / (2.0-w);
+
+		// the l=6 case -- for first 1/13th
+		// double gbwl = (0.0625*(19.0-3.0*w) -w * bwl) / (2.0-w);
+
+		// the l=7 case -- for first 1/15th
+		// double gbwl = (0.0625*(23.0-7.0*w) -w * bwl) / (2.0-w);
+
+		// the l=8 case -- for first 1/15th
+		double gbwl = (0.03125*(33.0-w) -w * bwl) / (2.0-w);
+
+
 		double diff = lcbwl - gbwl;
 
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, bwl, lcbwl, gbwl, diff);
