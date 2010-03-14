@@ -39,6 +39,20 @@ double beewl(double w, int l, double x)
 	return beew(w, tlp1*x);
 }
 
+double Lcbee(double w, int l, double x)
+{
+	int n;
+	double acc = 0.0;
+	double tn = 0.5;
+	for (n=1; n<40; n++)
+	{
+		double term = tn * beewl(w,l, (2.0-x)*tn);
+		acc += term;
+		tn *= 0.5;
+	}
+	return acc;
+}
+
 int main( int argc, char * argv[])
 {
 	if (argc < 2)
@@ -59,9 +73,10 @@ int main( int argc, char * argv[])
 		double bwl = beewl(w,l,x);
 		// bwl *= 1.0-w;
 
-		double bgwl = beewl(w,l,0.5*x);
-		double gbwl = w * bwl;
-		printf("%d	%g	%g	%g	%g\n", i, x, bwl, bgwl, gbwl);
+		double lcbwl = Lcbee(w,l,x);
+		double gbwl = (1.0 -w * bwl) / (2.0-w);
+		double diff = lcbwl - gbwl;
+		printf("%d	%g	%g	%g	%g	%g\n", i, x, bwl, lcbwl, gbwl, diff);
 	}
 
 	return 0;
