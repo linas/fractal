@@ -21,7 +21,7 @@ double beew(double w, double x)
 	int n;
 	double wn = 1.0;
 	double tn = 1.0;
-	int nmax = floor(-25.0 / log(w));
+	int nmax = floor(-25.0 / log(fabs(w)));
 	double acc = 0.0;
 	for (n=0; n<nmax; n++)
 	{
@@ -90,7 +90,7 @@ int main( int argc, char * argv[])
 			else if (x < 2.0/3.0)
 				gbwl = (0.25*(1.0+3.0*w) -w * bwl) / (2.0-w);
 			else
-				gbwl = (0.25*(1.0-3.0*w) -w * bwl) / (2.0-w);
+				gbwl = (0.5*(3.0-w) -w * bwl) / (2.0-w);
 			break;
 
 		case 2:
@@ -131,7 +131,7 @@ int main( int argc, char * argv[])
 
 		double diff = lcbwl - gbwl;
 
-		printf("%d	%g	%g	%g	%g	%g\n", i, x, bwl, lcbwl, gbwl, diff);
+		printf("%d	%8.5g	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, bwl, lcbwl, gbwl, diff);
 	}
 
 	return 0;
