@@ -9,7 +9,7 @@ EXES= bernoulli bound bs bsubn cache-fill cont_frac \
 		count-prime db-merge db-prt \
       dsubn entropy exact gkw-diag hurwitz hurwitz-euler \
 		minima misc-test mp_zeta_test picturez \
-      poly-perf sawtooth sho stieltjes trunc zero-cross zeta-zeros
+      poly-perf qint sawtooth sho stieltjes trunc zero-cross zeta-zeros
 
 MPLIB=libzmp.a
 
@@ -35,6 +35,7 @@ misc-test:	misc-test.o $(MPLIB)
 mp_zeta_test:	mp_zeta_test.o $(MPLIB)
 picturez:	picturez.o $(MPLIB)
 poly-perf:	poly-perf.o $(MPLIB)
+qint:	qint.o $(MPLIB)
 sawtooth:	sawtooth.o $(MPLIB)
 sho:	sho.o $(MPLIB)
 stieltjes:	stieltjes.o $(MPLIB)
@@ -42,7 +43,7 @@ trunc:	trunc.o
 zero-cross:	zero-cross.o
 zeta-zeros:	zeta-zeros.o $(MPLIB)
 
-# libarary objects
+# library objects
 db-cache.o: db-cache.h
 mp-binomial.o: mp-binomial.h mp-cache.h mp-complex.h mp-misc.h mp-trig.h
 mp-cache.o: mp-cache.h mp-complex.h
@@ -70,6 +71,7 @@ hurwitz.o: mp-complex.h mp-misc.h
 hurwitz-euler.o: mp-complex.h mp-misc.h mp-trig.h
 mp_zeta_test.o: mp-zeta.h mp-binomial.h mp-complex.h mp-consts.h mp-gamma.h mp-misc.h mp-polylog.h mp-trig.h
 picturez.o: mp-zeta.h
+qint.o: mp-quest.h
 sho.o: mp-complex.h mp-hyper.h mp-trig.h
 stieltjes.o: mp-zeta.h mp-binomial.h mp-misc.h
 
