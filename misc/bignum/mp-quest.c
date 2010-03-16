@@ -31,6 +31,51 @@
 #include <string.h>
 #include "mp-quest.h"
 
+void question_mark (mpf_t qmark, const mpf_t x, unsigned int prec)
+{
+	mpf_t ox, h, bits, one;
+	long bitsdone, ibits;
+	int place;
+
+	mpf_init(ox);
+	mpf_init(h);
+	mpf_init(bits);
+	mpf_init(one);
+
+	mpf_set(h, x);
+	mpf_set_ui(one, 1);
+	mpf_set_ui(qmark, 0);
+
+	/* Get the number of binary bits from prec = log_2 10 * prec */
+	long nbits = (long) floor (3.321 * prec);
+
+	bitsdone = -1;
+	place = 1;
+	while (bitsdone < nbits)
+	{
+		mpf_ui_div(ox, 1, h);
+		mpf_floor(bits, ox);
+		mpf_sub(h, ox, bits);
+
+		ibits = mpf_get_si(bits);
+		bitsdone += ibits;
+
+		// shift right
+		mpf_div_2exp(ox, one, bitsdone);
+
+		if (place%2 == 1)
+		{
+			mpf_add(qmark, qmark, ox);
+		}
+		else
+		{
+			mpf_sub(qmark, qmark, ox);
+		}
+
+		place ++;
+	}
+}
+
 void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
 {
 	int i, istart, n;

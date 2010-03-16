@@ -29,7 +29,13 @@
 extern "C" {
 #endif
 
-/*
+/**
+ * Minkowski Question Mark function. Valid argument range
+ * is 0 =< x =< 1. 
+ */
+void question_mark (mpf_t qmark, const mpf_t x, unsigned int prec);
+
+/**
  * Inverse of the Minkowski Question Mark function. Valid argument range
  * is 0 =< x =< 1. Implemented with a simple, fast bit-counting
  * algorithm.
