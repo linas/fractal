@@ -71,7 +71,7 @@ void goldy(int prec)
 		flo *= r;
 		fhi *= r;
 		fdiff *= r;
-		printf("its %g	%g	%g	%g\n", feps, flo, fhi, fdiff);
+		printf("%d	%g	%g	%g	%g\n", i, feps, flo, fhi, fdiff);
 
 		mpf_mul(eps, eps, step);
 	}

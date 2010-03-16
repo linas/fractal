@@ -1,0 +1,20 @@
+
+set term png small
+set out 'qint.png'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set logscale x
+set logscale y
+
+set xrange [1e-10:1e-20]
+set title "Irk"
+# plot "slop.dat" using 1:2 title "Re" with lines linewidth 2
+
+plot "qint.dat" using 2:3 title "lo", \
+	"qint.dat" using 2:4 title "hi", \
+	"qint.dat" using 2:(($3+$4)/2) title "sum"
+
+
