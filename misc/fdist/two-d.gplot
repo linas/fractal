@@ -5,6 +5,22 @@ set key left
 set term png small
 set out 'two-d.png'
 
-plot "two-d.dat" using 2:4 title "Lcb", \
-	"two-d.dat" using 2:5 title "gb"
+# plot "two-d.dat" using 2:4 title "Lcb", \
+#	"two-d.dat" using 2:5 title "gb"
 
+##################################################
+# Used to generate figure for the gkw paper
+# set term postscript eps color
+# set out 'cantor-func.eps'
+# set title "Cantor Function"
+# set xlabel "x"
+# set ylabel "b_{1/3}(x)"
+
+plot "two-d.dat" using 2:3 title ""
+set term postscript eps color
+set out 'cantor-step.eps'
+set title "Cantor Function"
+set xlabel "x"
+set ylabel "b_{-0.6}(x)"
+
+plot "two-d.dat" using 2:3 title ""

@@ -66,7 +66,7 @@ int main( int argc, char * argv[])
 	printf("#\n# w=%g l=%d\n#\n", w, l);
 
 	int i;
-	int imax = 600;
+	int imax = 2400;
 	for (i=0; i<imax; i++)
 	{
 		double x = ((double) i) / ((double) imax);
