@@ -53,16 +53,19 @@ void question_mark (mpf_t qmark, const mpf_t x, unsigned int prec)
 	place = 1;
 	while (bitsdone < nbits)
 	{
+		// Compute h(x) = 1/x - floor(1/x);
 		mpf_ui_div(ox, 1, h);
 		mpf_floor(bits, ox);
 		mpf_sub(h, ox, bits);
 
+		// bit is just floor(1/x)
 		ibits = mpf_get_si(bits);
 		bitsdone += ibits;
 
-		// shift right
+		// shift right by bits
 		mpf_div_2exp(ox, one, bitsdone);
 
+		// Add or subtract dyadic parts
 		if (place%2 == 1)
 		{
 			mpf_add(qmark, qmark, ox);
@@ -71,6 +74,9 @@ void question_mark (mpf_t qmark, const mpf_t x, unsigned int prec)
 		{
 			mpf_sub(qmark, qmark, ox);
 		}
+
+		// If the remainder is zero, we are done.
+		if (0 == mpf_sgn(h)) break;
 
 		place ++;
 	}

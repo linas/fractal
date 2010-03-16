@@ -34,7 +34,7 @@ int main (int argc, char * argv[])
 	mpf_init(x);
 	mpf_init(q);
 	mpf_set_ui (x, 1);
-	mpf_div_ui (x, x, 3);
+	mpf_div_ui (x, x, 4);
 
 	question_mark(q, x, prec);
 
