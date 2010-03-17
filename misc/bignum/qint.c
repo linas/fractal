@@ -40,17 +40,19 @@ void goldy(int prec)
 	mpf_set_d(step, 1.41333);
 	mpf_sqrt(step, step);
 	mpf_sqrt(step, step);
+#if 1
 	mpf_sqrt(step, step);
 	mpf_sqrt(step, step);
 	mpf_sqrt(step, step);
 	mpf_sqrt(step, step);
 	mpf_sqrt(step, step);
 	mpf_sqrt(step, step);
+#endif
 	mpf_ui_div(step, 1, step);
 
 	mpf_set_ui(eps, 1);
 	mpf_div_ui(eps, eps, 100);
-	mpf_set_d(eps, 1.0e-100);
+	mpf_set_d(eps, 1.0e-200);
  
 	for (i=0; i<npts; i++)
 	{
@@ -75,12 +77,15 @@ void goldy(int prec)
 
 #if 1
 		/* Wow!  eps^0.28 provides an excellent fit. */
-		r = pow(feps, 0.28);
+		/* It is DEFINITELY NOT 2/7=0.2814 etc. */
+		// r = pow(feps, 0.28);
+		r = pow(feps, 0.2798);
 		flo *= r;
 		fhi *= r;
 		fdiff *= r;
 #endif
 		printf("%d	%g	%g	%g	%g\n", i, feps, flo, fhi, fdiff);
+		fflush(stdout);
 
 		mpf_mul(eps, eps, step);
 	}
