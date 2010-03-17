@@ -969,8 +969,8 @@ reference "eq:continued-frac"
 \end_inset
 
 , one has 
-\begin_inset Formula \[
-?\left(x\right)=2\sum_{k=1}^{\infty}\left(-1\right)^{k+1}\;2^{-(a_{1}+a_{2}+...+a_{k})}\]
+\begin_inset Formula \begin{equation}
+?\left(x\right)=2\sum_{k=1}^{\infty}\left(-1\right)^{k+1}\;2^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:defn-quest-mark}\end{equation}
 
 \end_inset
 
@@ -5903,6 +5903,187 @@ Previously, we saw that the Takagi Curves served as basis vectors for a
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Section
+Eigenfunctions of the GKW, redux
+\end_layout
+
+\begin_layout Standard
+The goal of this section is to examine the measure 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ in greater detail.
+ In order to avoid the difficulties associated with examining 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ at a point, it is far more convenient to study the integral 
+\begin_inset Formula \begin{equation}
+I\left(a,b\right)=\frac{1}{b-a}\int_{a}^{b}?^{\prime}\left(x\right)dx=\frac{?\left(b\right)-?\left(a\right)}{b-a}\label{eq:q-meas-integ}\end{equation}
+
+\end_inset
+
+ in the limit of 
+\begin_inset Formula $a\to b$
+\end_inset
+
+.
+ It is straightforward to verify that, when 
+\begin_inset Formula $b$
+\end_inset
+
+ is a rational number, that in this limit, 
+\begin_inset Formula $I$
+\end_inset
+
+ vanishes: the Minkowski question mark has zero derivative on the rationals.
+ In fact it is very, very flat, exponentially so, with all derivatives vanishing
+, on the rationals: this is easily seen by recalling the definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:defn-quest-mark"
+
+\end_inset
+
+ of the question mark: given a continued fraction expansion of a rational
+ number 
+\begin_inset Formula $\left[a_{1},a_{2},\cdots,a_{N}\right]$
+\end_inset
+
+, that one has that the flat part goes as 
+\begin_inset Formula $2^{-a_{N}}$
+\end_inset
+
+ as 
+\begin_inset Formula $a_{N}\to\infty$
+\end_inset
+
+.
+ By contrast, the derivative is 
+\begin_inset Quotes eld
+\end_inset
+
+infinite
+\begin_inset Quotes erd
+\end_inset
+
+ on the quadratic irrationals; this is explored in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Golden Mean"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Convergence at the Golden Mean
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Golden Mean"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename golden.eps
+	width 45col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename golden-200.eps
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The above figures show rescaled graphs of the integral 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:q-meas-integ"
+
+\end_inset
+
+ at the Golden Mean 
+\begin_inset Formula $\phi=\left(\sqrt{5}-1\right)/2$
+\end_inset
+
+, for which 
+\begin_inset Formula $?\left(\phi\right)=2/3$
+\end_inset
+
+.
+ Specifically, the graphs show 
+\begin_inset Formula \[
+\mbox{hi}\left(\epsilon\right)=\epsilon^{0.28}I\left(\phi,\phi+\epsilon\right)\qquad\mbox{and}\qquad\mbox{lo}\left(\epsilon\right)=\epsilon^{0.28}I\left(\phi-\epsilon,\phi\right)\]
+
+\end_inset
+
+for two different ranges: 
+\begin_inset Formula $10^{-5}<\epsilon<10^{-2}$
+\end_inset
+
+ and 
+\begin_inset Formula $10^{-203}<\epsilon<10^{-200}$
+\end_inset
+
+.
+ Note the logarithmic scale.
+ The oscillatory behaviour is given by 
+\begin_inset Formula $\cos\left(1.04\pi\log\epsilon\right)$
+\end_inset
+
+ to a good approximation.
+ That the oscillations are very regular should be appearent by comparing
+ the left and right figures; the slight change in amplitude is due to the
+ 0.28 being only an approxmiation to the true scaling behaviour.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+generrated by fractal/misc/bignum/qint.c and qint.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
