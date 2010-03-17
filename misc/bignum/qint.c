@@ -33,6 +33,10 @@ void goldy(int prec)
 	mpf_sub_ui(golden, golden, 1);
 	mpf_div_ui(golden, golden, 2);
 
+	// Silver mean
+	mpf_sqrt_ui(golden, 2);
+	mpf_div_ui(golden, golden, 2);
+	
 	question_mark(qmid, golden, prec);
 
 	npts = 5600;
@@ -52,7 +56,7 @@ void goldy(int prec)
 
 	mpf_set_ui(eps, 1);
 	mpf_div_ui(eps, eps, 100);
-	mpf_set_d(eps, 1.0e-200);
+	// mpf_set_d(eps, 1.0e-200);
  
 	for (i=0; i<npts; i++)
 	{
@@ -79,7 +83,8 @@ void goldy(int prec)
 		/* Wow!  eps^0.28 provides an excellent fit. */
 		/* It is DEFINITELY NOT 2/7=0.2814 etc. */
 		// r = pow(feps, 0.28);
-		r = pow(feps, 0.2798);
+		// r = pow(feps, 0.2798); // excellent for golden mean
+		r = pow(feps, 0.213);
 		flo *= r;
 		fhi *= r;
 		fdiff *= r;
