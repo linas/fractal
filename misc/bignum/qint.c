@@ -35,16 +35,23 @@ void goldy(int prec)
 
 	question_mark(qmid, golden, prec);
 
-	npts = 4600;
+	npts = 5600;
 	
 	mpf_set_d(step, 1.41333);
 	mpf_sqrt(step, step);
 	mpf_sqrt(step, step);
-	// mpf_sqrt(step, step);
+	mpf_sqrt(step, step);
+	mpf_sqrt(step, step);
+	mpf_sqrt(step, step);
+	mpf_sqrt(step, step);
+	mpf_sqrt(step, step);
+	mpf_sqrt(step, step);
 	mpf_ui_div(step, 1, step);
 
 	mpf_set_ui(eps, 1);
-	mpf_div_ui(eps, eps, 10);
+	mpf_div_ui(eps, eps, 100);
+	mpf_set_d(eps, 1.0e-100);
+ 
 	for (i=0; i<npts; i++)
 	{
 		double feps, flo, fhi, fdiff, r;
@@ -66,11 +73,13 @@ void goldy(int prec)
 		fhi = mpf_get_d(qhi);
 		fdiff = fhi-flo;
 
-		r = sqrt(feps);
-		r = sqrt(r);
+#if 1
+		/* Wow!  eps^0.28 provides an excellent fit. */
+		r = pow(feps, 0.28);
 		flo *= r;
 		fhi *= r;
 		fdiff *= r;
+#endif
 		printf("%d	%g	%g	%g	%g\n", i, feps, flo, fhi, fdiff);
 
 		mpf_mul(eps, eps, step);

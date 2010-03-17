@@ -1,20 +1,31 @@
 
 set term png small
-set out 'qint.png'
+set out 'qint2.png'
 
 # set data style linespoints
 set data style lines
 set key right
 
 set logscale x
-set logscale y
+# set logscale y
 
-set xrange [1e-10:1e-20]
+# set xrange [1e-10:1e-20]
+# set xrange [1e-10:1e-20]
 set title "Irk"
 # plot "slop.dat" using 1:2 title "Re" with lines linewidth 2
 
+
+# the below makes for a nice publishable graph
+# set xrange [1e-2:1e-5]
+# plot "qint.dat" using 2:3 title "lo", \
+# 	"qint.dat" using 2:4 title "hi"
+
 plot "qint.dat" using 2:3 title "lo", \
 	"qint.dat" using 2:4 title "hi", \
-	"qint.dat" using 2:(($3+$4)/2) title "sum"
+	"qint.dat" using 2:(0.77+0.17*sin(3.141592653589*1.04*log($2)+3.14159/2)) title "fit"
+
+# x^-0.28 provides an excellent fit.
+#	"qint.dat" using 2:(exp(-0.28*log($2))) title "fithi"
+#	"qint.dat" using 2:(($3+$4)/2) title "sum"
 
 
