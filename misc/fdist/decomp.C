@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Farey.h"
+
 double triangle(double x)
 {
 	x -= floor(x);
@@ -43,6 +45,7 @@ double decomp(double w, double x)
 	for (l=1; l<2000; l++)
 	{
 		double al = 1.0 / ((double) l);
+		// if (l%2 == 0) al = -al;
 		double tlp1 = 2*l+1;
 		acc += al * takagi(w, tlp1 * x);
 	}
@@ -60,13 +63,17 @@ int main(int argc, char * argv[])
 	}
 	double w = atof(argv[1]);
 
+	ContinuedFraction f;
+
 	int nsteps = 600;
 	int i;
 	for (i=0; i<nsteps; i++)
 	{
 		double x = ((double) i) / ((double) nsteps);
 
-		double y = decomp(w, x);
+		f.SetReal(x);
+		double qx = f.ToFarey();
+		double y = decomp(w, qx);
 
 		printf("%d	%g	%g\n", i, x, y);
 	}
