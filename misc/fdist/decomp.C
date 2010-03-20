@@ -18,7 +18,7 @@ double triangle(double x)
 	return 2.0-x;
 }
 
-double tagaki(double w, double x)
+double takagi(double w, double x)
 {
 	int i;
 	double tn = 1.0;
@@ -50,7 +50,7 @@ double decomp(double w, double x)
 	return acc;
 }
 
-int main(int agrc, char * argv[])
+int main(int argc, char * argv[])
 {
 
 	if (argc < 2)
@@ -62,11 +62,11 @@ int main(int agrc, char * argv[])
 
 	int nsteps = 600;
 	int i;
-	for (i=0; i<nsteps)
+	for (i=0; i<nsteps; i++)
 	{
 		double x = ((double) i) / ((double) nsteps);
 
-		double y = decomp(x);
+		double y = decomp(w, x);
 
 		printf("%d	%g	%g\n", i, x, y);
 	}
