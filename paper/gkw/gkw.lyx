@@ -5029,14 +5029,14 @@ t_{w}\left(x\right)\end{array}\right)\]
 
 one finds that the monoid acts on the vector with the matrix transformations
  
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 g_{3}=\left(\begin{array}{ccc}
 1 & 0 & 0\\
 0 & \frac{1}{2} & 0\\
 0 & 1 & w\end{array}\right)\quad\mbox{ and }\quad r_{3}=\left(\begin{array}{ccc}
 1 & 0 & 0\\
 1 & -1 & 0\\
-0 & 0 & 1\end{array}\right)\]
+0 & 0 & 1\end{array}\right)\label{eq:g_3 matrix}\end{equation}
 
 \end_inset
 
@@ -5214,10 +5214,10 @@ key "Ve-T04"
 \end_layout
 
 \begin_layout Subsection
-A Complete Set of Fractal Eigenfunctions
+Practical Tools
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:A-Complete-Set"
+name "sub:Practical Tools"
 
 \end_inset
 
@@ -5225,15 +5225,43 @@ name "sub:A-Complete-Set"
 \end_layout
 
 \begin_layout Standard
-Practical computations with the complete set of fratal eigenfunctions require
+Practical computations with the complete set of fractal eigenfunctions require
  additional tools.
  These are developed here.
- Specifically, if 
+ If 
 \begin_inset Formula $f\left(x\right)$
 \end_inset
 
- is a function posessing dyadic self-similarity, then computations with
- 
+ is a function posessing dyadic self-similarity, then given 
+\begin_inset Formula $\gamma_{D}$
+\end_inset
+
+ as some product of 
+\begin_inset Formula $g_{D}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{D}$
+\end_inset
+
+, and 
+\begin_inset Formula $f$
+\end_inset
+
+ self-similar under the action of 
+\begin_inset Formula $g_{f}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{f}$
+\end_inset
+
+, then one has the commuting diagram 
+\begin_inset Formula $\gamma_{f}f=f\circ\gamma_{D}$
+\end_inset
+
+.
+ Computations with 
 \begin_inset Formula $\mathcal{L}_{c}$
 \end_inset
 
@@ -5241,7 +5269,8 @@ Practical computations with the complete set of fratal eigenfunctions require
 \begin_inset Formula $f\left(\left(2l+1\right)\left(2-x\right)2^{-n}\right)$
 \end_inset
 
-; the argument needs to be re-expressed in terms of the transforms 
+.
+ If the argument is re-expressed in terms of the transforms 
 \begin_inset Formula $g_{D}$
 \end_inset
 
@@ -5256,42 +5285,20 @@ reference "eq:argument-as-grg"
 
 \end_inset
 
-.
- That is, if 
-\begin_inset Formula $\gamma_{D}$
-\end_inset
-
- is some product of 
-\begin_inset Formula $g_{D}$
-\end_inset
-
- and 
-\begin_inset Formula $r_{D}$
-\end_inset
-
-, and 
-\begin_inset Formula $f$
-\end_inset
-
- is self-similar under the action of 
-\begin_inset Formula $g_{f}$
-\end_inset
-
- and 
-\begin_inset Formula $r_{f}$
-\end_inset
-
-, then one has the commuting diagram 
+, then one may use the the commutation relation 
 \begin_inset Formula $\gamma_{f}f=f\circ\gamma_{D}$
 \end_inset
 
-; this last equation provides the motivation for developing the machinery
- here.
- 
+ to easily compute eigenvectors of 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+.
+ This motivates the development of the machinery below.
 \end_layout
 
 \begin_layout Standard
-To perform the above, it is sufficient to re-express 
+To perform this re-write, it is sufficient to re-express 
 \begin_inset Formula $\left(M-y\right)2^{-n}$
 \end_inset
 
@@ -5347,7 +5354,7 @@ with
 
 \end_inset
 
-where 
+where each 
 \begin_inset Formula $B_{k}$
 \end_inset
 
@@ -5409,6 +5416,29 @@ i.e.
  then the above provides a convenient, relatively simple way of explicitly
  computing the action of 
 \begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+.
+ 
+\emph on
+i.e.
+
+\emph default
+ one has
+\begin_inset Formula \[
+\mathcal{L}_{c}f=\left[\frac{1}{2}\, B_{0}r+\frac{1}{4}\, B_{1}B_{0}r+\frac{1}{8}\, B_{2}B_{1}B_{0}r+\cdots\right]f\]
+
+\end_inset
+
+which is straight-forward to evaluate when the 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ are square matricies, such as, for example, those of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:g_3 matrix"
+
 \end_inset
 
 .
@@ -5520,7 +5550,7 @@ t_{w,1}\left(\frac{2-x}{2^{k}}\right)=t_{w}\left(3\left(\frac{2-x}{2^{k}}\right)
 
 \end_inset
 
-A more complete practical application is presented in the next section.
+This method is applied in earnest in the next section.
  
 \end_layout
 
@@ -5812,7 +5842,7 @@ reference "eq:M-1-binary-expand"
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:A-Complete-Set"
+reference "sub:Practical Tools"
 
 \end_inset
 
