@@ -54,7 +54,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised Oct 2008, 14 Mar 2010) 
+2 January 2004 (revised Oct 2008, 20 Mar 2010) 
 \end_layout
 
 \begin_layout Abstract
@@ -5311,8 +5311,8 @@ To perform the above, it is sufficient to re-express
 \end_inset
 
 ; so write 
-\begin_inset Formula \[
-M-1=\sum_{k=0}^{\infty}\beta_{k}2^{k}\]
+\begin_inset Formula \begin{equation}
+M-1=\sum_{k=0}^{\infty}\beta_{k}2^{k}\label{eq:M-1-binary-expand}\end{equation}
 
 \end_inset
 
@@ -5745,25 +5745,54 @@ c_{w,2}\left(x\right)=\begin{cases}
 
 \end_inset
 
-It appears that the general expression for 
-\begin_inset Formula $c_{w,l}$
+The general expression is given by thie piece-wise flat function 
+\begin_inset Formula \[
+c_{w,l}\left(x\right)=w+\left(1-w\right)\sum_{k=0}^{\infty}\frac{\beta_{k}}{2^{k}}\quad\mbox{ for }\frac{4l+1-\left(M-1\right)}{2l+1}\le x<\frac{4l+2-\left(M-2\right)}{2l+1}\]
+
 \end_inset
 
- will be similar to the above, in that it will consist entirely of branches
- of the form 
-\begin_inset Formula $\alpha+\beta w$
+with 
+\begin_inset Formula $M-1$
 \end_inset
 
- and that furthermore, 
+ and the binary bits 
+\begin_inset Formula $\beta_{k}$
+\end_inset
+
+ related as given in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:M-1-binary-expand"
+
+\end_inset
+
+.
+ The above formula is most easily deerived by considering an expansion in
+ powers of 
+\begin_inset Formula $w$
+\end_inset
+
+, and tracking each power separately.
+ Note that the sum has the effect of 
+\begin_inset Quotes eld
+\end_inset
+
+reversing
+\begin_inset Quotes erd
+\end_inset
+
+ the order of the bits in the binary expansion for 
+\begin_inset Formula $M-1$
+\end_inset
+
+.
+ Note that 
 \begin_inset Formula $\int_{0}^{1}c_{w,l}\left(x\right)dx=2l+1$
 \end_inset
 
 .
- Proving the last two results appears to require a tedious calculation.
-\end_layout
-
-\begin_layout Standard
-In computing the above, it is useful to have a certain polynomial: let 
+ In computing the above, it is useful to have a certain polynomial: let
+ 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -5969,7 +5998,8 @@ infinite
 \begin_inset Quotes erd
 \end_inset
 
- on the quadratic irrationals; this is explored in figure 
+ on the quadratic irrationals; the rate of divergence is explored in figure
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Golden Mean"
@@ -6007,14 +6037,14 @@ name "fig:Golden Mean"
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename golden.eps
-	width 45col%
+	width 48col%
 
 \end_inset
 
 
 \begin_inset Graphics
 	filename golden-200.eps
-	width 45col%
+	width 48col%
 
 \end_inset
 
