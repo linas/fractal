@@ -37,17 +37,49 @@ double takagi(double w, double x)
 	return acc;
 }
 
+// sigma is the reversed-bit summation 
+double sigma(int l, double x)
+{
+	double tlp1 = 2*l+1;
+	double lo = floor(tlp1*x);
+	int mn1 = 4*l+1 - ((int)lo); 
+
+	double acc = 0.0;
+	double tn = 1.0;
+	while (mn1)
+	{
+		int bit = mn1 & 0x1;
+		if (bit) acc += tn;
+		tn *= 0.5;
+		mn1 >>= 1;
+	}
+	return acc;
+}
+
+// eigenvector of the dyadic sawtooth
+double vect(double w, int l, double x)
+{
+	double cee = w + (1.0-w) * sigma(l, x);
+
+	double tlp1 = 2*l+1;
+	double eig = -0.5*cee + takagi (w, tlp1*x);
+
+	return eig;
+}
+
+
 double decomp(double w, double x)
 {
 	int l;
 
 	double acc = 0.0;
-	for (l=1; l<2000; l++)
+	for (l=0; l<2000; l++)
 	{
-		double al = 1.0 / ((double) l);
+		double al = 1.0 / ((double) 2*l+1);
+		// double al = log(l) / ((double) l);
+		// double al = 1.0 / (log(2*l+1) * ((double) l));
 		// if (l%2 == 0) al = -al;
-		double tlp1 = 2*l+1;
-		acc += al * takagi(w, tlp1 * x);
+		acc += al * vect(w, l, x);
 	}
 
 	return acc;
@@ -63,19 +95,35 @@ int main(int argc, char * argv[])
 	}
 	double w = atof(argv[1]);
 
-	ContinuedFraction f;
-
+	
 	int nsteps = 600;
+	nsteps = 20;
+	double delta = 1.0 / ((double) nsteps);
 	int i;
 	for (i=0; i<nsteps; i++)
 	{
-		double x = ((double) i) / ((double) nsteps);
+		double x = ((double) i) * delta;
+		double y = sigma(3, x);
+		printf ("x=%g    y=%g\n", x, y);
+	}
+
+exit(0);
+
+	ContinuedFraction f;
+
+	double yprev = 0.0;
+	for (i=0; i<nsteps; i++)
+	{
+		double x = ((double) i) * delta;
 
 		f.SetReal(x);
 		double qx = f.ToFarey();
 		double y = decomp(w, qx);
 
-		printf("%d	%g	%g\n", i, x, y);
+		double s = delta * (y-yprev);
+		yprev = y;
+
+		printf("%d	%g	%g	%g\n", i, x, y, s);
 	}
 
 	return 0;
