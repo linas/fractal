@@ -93,21 +93,23 @@ int main(int argc, char * argv[])
 		fprintf(stderr, "Usage: %s <w>\n", argv[0]);
 		exit(1);
 	}
-	double w = atof(argv[1]);
+	double lambda = atof(argv[1]);
 
-	
-	int nsteps = 600;
-	nsteps = 20;
-	double delta = 1.0 / ((double) nsteps);
 	int i;
+	int nsteps = 600;
+	double delta = 1.0 / ((double) nsteps);
+#if 1
+	int  l = lambda;
 	for (i=0; i<nsteps; i++)
 	{
 		double x = ((double) i) * delta;
-		double y = sigma(3, x);
-		printf ("x=%g    y=%g\n", x, y);
+		double y = sigma(l, x);
+		printf ("%d	%g	%g	%g\n", i, x, y, y);
 	}
-
 exit(0);
+#endif
+
+	double w = 2.0*lambda/(lambda-1.0);
 
 	ContinuedFraction f;
 
