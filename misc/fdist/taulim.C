@@ -100,11 +100,12 @@ double w_sum(int n, double w)
 }
 #endif
 
-double tw(double w, int l, double x)
+double tw(double w, int l, int n)
 {
 	int k;
 	double tlp1 = 2*l+1;
-	double tn = x;
+	int tpn = 1<<n;
+	double tn = 1.0 / ((double) tpn);
 	double wh = 1.0;
 	double acc = 0.0;
 	for (k=0; k<n; k++)
@@ -120,10 +121,8 @@ double tw(double w, int l, double x)
 
 double dual(double w, int l, int n)
 {
-	int tpn = 1<<n;
-	double x = 1.0 / ((double) tpn);
 
-	double v = tw(w,l,x);
+	double v = tw(w,l,n);
 	v /= 2*l+1;
 	v *= n+1;
 	// v *= 0.25 * (w-1.0);
@@ -134,6 +133,12 @@ main(int argc, char * argv[])
 {
 	int n, l;
 	int k = 2;
+
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s blah\n", argv[0]);
+		exit(1);
+	}
 
 	// k = atoi(argv[1]);
 	// int lmax = atoi(argv[2]);
