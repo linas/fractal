@@ -17,14 +17,14 @@ double triangle(double x)
 	return 2.0-2.0*x;
 }
 
-double sum(int k, int n)
+double sum(int k, int n, int lmax)
 {
 	int l;
 
 	double tk = pow(2.0, k-n);
 	double acc = 0.0;
 #define LMAX 10123
-	for (l=0; l<LMAX; l++)
+	for (l=0; l<lmax; l++)
 	{
 		double tlp1 = 2*l+1;
 
@@ -39,11 +39,14 @@ double sum(int k, int n)
 main(int argc, char * argv[])
 {
 	int n;
-	int k = 12;
+	int k = 2;
+
+	k = atoi(argv[1]);
+	int lmax = atoi(argv[2]);
 
 	for (n=1; n<40; n++)
 	{
-		double y = sum(k,n);
+		double y = sum(k,n,lmax);
 
 		printf ("its %d sum=%g\n", n, y);
 
