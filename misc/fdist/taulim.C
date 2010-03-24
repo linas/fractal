@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Farey.h"
 
 double triangle(double x)
 {
@@ -119,6 +120,23 @@ double tw(double w, int l, int n)
 	return acc;
 }
 
+double takagi_w(double w, double x)
+{
+	int k;
+	double tn = 1.0;
+	double wh = 1.0;
+	double acc = 0.0;
+	for (k=0; k<30; k++)
+	{
+		acc += wh * triangle(tn * x);
+
+		tn *= 2.0;
+		wh *= w;
+	}
+
+	return acc;
+}
+
 double dual(double w, int l, int n)
 {
 
@@ -129,10 +147,29 @@ double dual(double w, int l, int n)
 	return v;
 }
 
+double dual_sum(double w, double x)
+{
+	int l, n;
+
+	double acc = 0.0;
+	for (n=2; n<20; n++)
+	{
+		l = 3 * (1<<(n-1));
+		double tlp1 = 2*l+1;
+
+		double alpha = 1.0 / dual(w,l,n);
+		acc += alpha * takagi_w (w, tlp1*x) / tlp1;
+	}
+
+	return acc;
+}
+
 main(int argc, char * argv[])
 {
-	int n, l;
+	int i, n, l;
+	int npts;
 	int k = 2;
+	double delta;
 
 	if (argc < 2)
 	{
@@ -144,6 +181,7 @@ main(int argc, char * argv[])
 	// int lmax = atoi(argv[2]);
 	double w = atof(argv[1]);
 
+#if COEFFS_GRAPH
 	// for (n=1; n<30; n++)
 	for (l=0; l<600; l++)
 	{
@@ -151,7 +189,7 @@ main(int argc, char * argv[])
 		// double y = w_sum(n,w);
 
 		printf ("%d", l);
-		for (n=2; n<10; n++)
+		for (n=2; n<16; n++)
 		{
 			double y = dual(w,l, n);
 			printf ("\t%g", y);
@@ -160,5 +198,22 @@ main(int argc, char * argv[])
 		fflush(stdout);
 		// printf ("its %d sum=%g\n", n, y);
 	}
+#endif
 
+	npts = 600;
+
+	ContinuedFraction f;
+
+	delta = 1.0 / ((double) npts);
+	double yprev = 0.0;
+	for (i=0; i<npts; i++)
+	{
+		double x = i*delta;
+		f.SetReal(x);
+		double qx = f.ToFarey();
+		double y = dual_sum(w, qx);
+		double dy = (y-yprev) /delta;
+		printf("%d	%g	%g	%g\n", i, x, y, dy);
+		yprev = y;
+	}
 }

@@ -122,7 +122,7 @@ exit(0);
 		double qx = f.ToFarey();
 		double y = decomp(w, qx);
 
-		double s = delta * (y-yprev);
+		double s = (y-yprev) / delta;
 		yprev = y;
 
 		printf("%d	%g	%g	%g\n", i, x, y, s);
