@@ -82,12 +82,15 @@ void mandelbrot_out (
          phi = 2.0*M_PI / re_position;
           
          /*
-         work pretty well
+         works pretty well
          r *= r;
          r = 1.0 + (r-1.0)*sin(0.5*phi)*sin(0.5*phi);
          */
          r -= 1.0;
-         r *= sin(0.5*phi)*sin(0.5*phi);
+         // website was done with sin^2(phi/2) but 1-cos(phi/2) is
+         // better, according to "Makc the great"
+         // r *= sin(0.5*phi)*sin(0.5*phi);
+         r *= 1.0 - cos(0.5*phi);
          // r *= (0.5*phi)*sin(0.5*phi);
          // r *= (0.5*phi)* (0.5*phi);
         
