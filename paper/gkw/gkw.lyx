@@ -276,7 +276,7 @@ then
 
 \end_inset
 
-
+This operator is bounded; its largest eigenvalue is 1.
 \end_layout
 
 \begin_layout Standard
@@ -515,10 +515,125 @@ The Riemann zeta can be written under a change of variable as
 \end_inset
 
 and thus it seems possible that a better understanding of GKW may shed light
- on the Riemann Hypothesis and/or the Berry conjecture[xx need ref].
- Most immediately, simple manipulations lead to a series expansion for the
- Riemann zeta in terms of binomial coefficients.
- This series expansion is explored in detail in 
+ on the Riemann Hypothesis and/or the Berry conjecture[xxx need ref].
+ 
+\end_layout
+
+\begin_layout Standard
+Curiously, the above equation can be understood to be a kind of linear equation
+ specifying the Riemann zeta, because the operator 
+\begin_inset Formula $\mathcal{L}_{h}$
+\end_inset
+
+ is a constant, independent of the integration variable, and can be pulled
+ out of the integral.
+ For a suitable basis, the integral can become easy to evaluate, leaving
+ a linear equation, albeit depending on a paramter 
+\begin_inset Formula $s$
+\end_inset
+
+ in a non-linear way.
+ Sketching this out breifly, suppose one has a basis 
+\begin_inset Formula $\left\{ e_{n}\right\} $
+\end_inset
+
+ for the unit interval, so that one can write 
+\begin_inset Formula $f\left(x\right)=\sum_{n}f_{n}e_{n}\left(x\right)$
+\end_inset
+
+.
+ In this basis, the operator 
+\begin_inset Formula $\mathcal{L}_{h}$
+\end_inset
+
+ will have matrix elements 
+\begin_inset Formula $L_{jk}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\left[\mathcal{L}_{h}f\right]\left(x\right)=\sum_{jk}L_{jk}f_{k}e_{j}\left(x\right)$
+\end_inset
+
+.
+ Supposing now that 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is just 
+\begin_inset Formula $x^{s-1}$
+\end_inset
+
+, and that the order of summation and integration can be exchanged, this
+ leaves only the integral 
+\begin_inset Formula $\int xe_{j}\left(x\right)dx$
+\end_inset
+
+ to evalute, which can then be replaced in the sum: 
+\begin_inset Formula $\int dx\; x\left[\mathcal{L}_{h}x^{s-1}\right]=\sum_{jk}L_{jk}f_{k}\int xe_{j}\left(x\right)dx$
+\end_inset
+
+.
+ This last is then a linear equation, althought the 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ depend on 
+\begin_inset Formula $s$
+\end_inset
+
+ in a non-linear way.
+ The collection 
+\begin_inset Formula $\left\{ f_{k}\right\} $
+\end_inset
+
+ can be thought of as a vector in an infinite-dimensional space; this vector
+ depends on a single parameter 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ As the value of 
+\begin_inset Formula $s$
+\end_inset
+
+ is varied, there are special values of 
+\begin_inset Formula $s$
+\end_inset
+
+ where its product times the linear operator is equal to 
+\begin_inset Formula $1/\left(s-1\right)$
+\end_inset
+
+: these special values of 
+\begin_inset Formula $s$
+\end_inset
+
+ are nothing but the zeroes of the Riemann zeta.
+ 
+\end_layout
+
+\begin_layout Standard
+The section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Polynomial-Representation"
+
+\end_inset
+
+ provides explicit expressions for the matrix elements 
+\begin_inset Formula $L_{jk}$
+\end_inset
+
+ for the polynomial basis 
+\begin_inset Formula $e_{n}\left(x\right)=x^{n}$
+\end_inset
+
+.
+ In this case, the integral becomes trivial to evaluate, and one discovers
+ a series expansion for the Riemann zeta in terms of the falling factorial
+ (equivalently, binomial coefficients).
+ This series has many interesting properties, and is explored in greater
+ detail in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Vep-zeta2004,Fla06"
@@ -526,9 +641,10 @@ key "Vep-zeta2004,Fla06"
 \end_inset
 
 .
- It can be used to formulate a class of criteria on various number-theortic
- series (such as those constructed from the Mobius function, or the totient
- function of the Liouville series) that are equivalent to the Riemann Hypothesis.
+ The series generalizes; it can be used to formulate a class of criteria
+ on various number-theortic series (such as those constructed from the Mobius
+ function, or the totient function of the Liouville series) that are equivalent
+ to the Riemann Hypothesis.
  This class of RH-equivalent hypothesis were already noted by Báez-Duarte
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -561,8 +677,9 @@ key "Vep-norlund-2006"
 \end_layout
 
 \begin_layout Standard
-Todo: Give the Riemann Hypothesis can be understood as a vector equation
- (using the polynomial form for the GKW, below).
+Far more promising, however, are basis functions derived from or structured
+ on the Cantor set.
+ These are explored below, and in other related papers [xxx need ref].
  
 \end_layout
 
@@ -1403,6 +1520,13 @@ k\end{array}\right)(z+1)^{k}\]
 
 \begin_layout Subsection
 Polynomial Representation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Polynomial-Representation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
