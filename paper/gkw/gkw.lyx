@@ -54,7 +54,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised Oct 2008, 20 Mar 2010) 
+2 January 2004 (revised Oct 2008, 2 April 2010) 
 \end_layout
 
 \begin_layout Abstract
@@ -74,24 +74,9 @@ This paper presents a review of the Gauss-Kuzmin-Wirsing (GKW) operator.
 \begin_layout Abstract
 Connections to the Minkowski Question Mark Function are probed.
  In particular, the Question Mark is used to define a transfer operator
- which is 
-\begin_inset Quotes eld
-\end_inset
-
-topologically equivalent
-\begin_inset Quotes erd
-\end_inset
-
- to the GKW.
- This 
-\begin_inset Quotes eld
-\end_inset
-
-equivalent
-\begin_inset Quotes erd
-\end_inset
-
- operator is solvable, and can be shown to have fractal eigenfunctions.
+ which is conjugate to the GKW.
+ This conjugate operator is solvable, and can be shown to have fractal eigenfunc
+tions.
  However, the spectrum of this operator is not at all the same as that of
  the GKW.
  This is because the Jacobian of the transformation relating the two is
@@ -108,7 +93,16 @@ multi-fractal measure
 \end_inset
 
 .
- 
+ Nonetheless, conjugacy allows the eigenfunctions of the one to be used
+ to construct eigenfunctions of the other; in this sense, a 
+\begin_inset Quotes eld
+\end_inset
+
+solution
+\begin_inset Quotes erd
+\end_inset
+
+ of the GKW operator is undertaken.
 \end_layout
 
 \begin_layout Abstract
@@ -140,6 +134,12 @@ Present the Gauss-Kuzmin-Wirsing operator, including basic facts, theorems,
 
 \begin_layout Itemize
 Show that the Minkowksi Question Mark converts the GKW into a sawtooth.
+\end_layout
+
+\begin_layout Itemize
+Discuss how the Cantor set is a model for the unit interval, and is the
+ appropriate setting for discussing the question mark, fractals, dyadic
+ monoid self similarity, and also for solving the GKW.
 \end_layout
 
 \begin_layout Itemize
@@ -4427,8 +4427,8 @@ This figure shows the derivative of the Minkowski Question Mark; or, more
 \begin_layout Standard
 The transfer operator of this function provides a second model of the Gauss-Kuzm
 in-Wirsing operator.
- It can be solved exactly; unfortunately, it is not conjugate to the GKW
- operator, as one might naively hope.
+ It can be solved exactly; unfortunately, it is not trivially conjugate
+ to the GKW operator, as one might naively hope.
  Normally, when there exists a 
 \emph on
 smooth
@@ -4502,6 +4502,24 @@ not
 \emph default
  identical.
  
+\end_layout
+
+\begin_layout Standard
+However, with suitable tools, it is possible to construct functions on the
+ Cantor set for which one can obtain similarity transforms which render
+ these operators conjugate.
+ Insofar as the Cantor set is 
+\begin_inset Quotes eld
+\end_inset
+
+very nearly
+\begin_inset Quotes erd
+\end_inset
+
+ the unit interval, these functions pass ovre to functions on the unit interval,
+ and thus allow solutions to the GKW operator to be obtained.
+ The development of these tools and thier application take up most of what
+ follows.
 \end_layout
 
 \begin_layout Standard
@@ -5247,49 +5265,6 @@ Suppose now that one has found not just one eigenfunction
  One may then ask if there are linear combinations of these that result
  in continuous or even differentiable eigenfunctions on the unit inteval.
  This question then spells out the program for the subsequent sections.
-\end_layout
-
-\begin_layout Subsection
-Misc Stuff
-\end_layout
-
-\begin_layout Standard
-For example, the function argument 
-\begin_inset Formula $(2-x)/2^{n}$
-\end_inset
-
- is just the dyadic polynomial 
-\begin_inset Formula $(g_{D}^{n-1}r_{D}g_{D})(x)$
-\end_inset
-
-; the generator 
-\begin_inset Formula $g_{D}$
-\end_inset
-
- was defined in equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:monoid generator g"
-
-\end_inset
-
-.
- Tantalizingly, the corresponding Moebius transform is 
-\begin_inset Formula $(g_{C}^{n-1}r_{C}g_{C})(x)=1/(n+x)$
-\end_inset
-
- which is the function argument to the GKW operator.
- This suggests the tantalizing re-write of the terms of GKW as 
-\begin_inset Formula \[
-f\left(\frac{1}{n+x}\right)=f\circ?^{-1}\left(\frac{2-?(x)}{2^{n}}\right)\]
-
-\end_inset
-
-Also, one can do strange things such as xxx but why do we want to do that?
-\end_layout
-
-\begin_layout Standard
-XXX todo explain above
 \end_layout
 
 \begin_layout Subsection
