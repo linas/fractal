@@ -5150,7 +5150,7 @@ which follows from
 
 \end_inset
 
- This may be directly employed with the GKW operator to great effect.
+This may be directly employed with the GKW operator to great effect.
  Suppose that 
 \begin_inset Formula $f$
 \end_inset
@@ -5241,8 +5241,177 @@ discontinuous everywhere
 \end_layout
 
 \begin_layout Standard
-With this in mind, one may then supply the proof that similarity transforms
- provide conjugate solutions:
+By using either a sigma algebra or a topology as the base space for a function
+ space, the notion of the transfer operator changes as well.
+ That is, when one focuses on point dynamics, then one might define a function
+ space as 
+\begin_inset Formula $\mathcal{F}=\left\{ f\,\vert\, f:\left[0,1\right]\to\mathbb{R}\right\} $
+\end_inset
+
+, that is, as the set of all functions on the unit interval.
+ Lets call this space 
+\begin_inset Formula $\mathcal{F}_{p}$
+\end_inset
+
+ with the subscript 
+\begin_inset Formula $p$
+\end_inset
+
+ emphasizing that the base space is a point-set.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+ordinary
+\begin_inset Quotes erd
+\end_inset
+
+ transfer operator is then a map between such spaces 
+\begin_inset Formula $\mathcal{F}_{p}$
+\end_inset
+
+, as previously defined.
+ However, the measure-theoretic approach instead requires that the function
+ space be defined as 
+\begin_inset Formula $\mathcal{F}_{\sigma}=\left\{ f\,\vert\, f:\mathcal{A}\to\mathbb{R}\right\} $
+\end_inset
+
+ where 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is a sigma algebra.
+ Here, the subscript 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is a reminder that the base space for this 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is a sigma algebra.
+ Note that, in a certain sense, the elements of 
+\begin_inset Formula $\mathcal{F}_{p}$
+\end_inset
+
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+derivatives
+\begin_inset Quotes erd
+\end_inset
+
+ of corresponding elements of 
+\begin_inset Formula $\mathcal{F}_{\sigma}$
+\end_inset
+
+, and that the space 
+\begin_inset Formula $\mathcal{F}_{\sigma}$
+\end_inset
+
+ is much 
+\begin_inset Quotes eld
+\end_inset
+
+larger
+\begin_inset Quotes erd
+\end_inset
+
+ than 
+\begin_inset Formula $\mathcal{F}_{p}$
+\end_inset
+
+.
+ In particular, the elements of 
+\begin_inset Formula $\mathcal{F}_{\sigma}$
+\end_inset
+
+ can be thought of as integrals, over some set 
+\begin_inset Formula $U\in\mathcal{A}$
+\end_inset
+
+, of the elements of 
+\begin_inset Formula $\mathcal{F}_{p}$
+\end_inset
+
+.
+ The elements of 
+\begin_inset Formula $\mathcal{F}_{\sigma}$
+\end_inset
+
+ are sometimes called 
+\begin_inset Quotes eld
+\end_inset
+
+generalized functions
+\begin_inset Quotes erd
+\end_inset
+
+, in that the Dirac delta function finds a comfortable home there: 
+\begin_inset Formula $\delta\left(x\right)$
+\end_inset
+
+ is simply the indicator function for all sets 
+\begin_inset Formula $U$
+\end_inset
+
+ that contain the point 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ To relate these two spaces, one then typically uses the language of topological
+ filters to establish a many-to-one mapping of elements of 
+\begin_inset Formula $\mathcal{F}_{\sigma}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathcal{F}_{p}$
+\end_inset
+
+.
+ One curious thing happens to the transfer operator when working with 
+\begin_inset Formula $\mathcal{F}_{\sigma}$
+\end_inset
+
+ instead of 
+\begin_inset Formula $\mathcal{F}_{p}$
+\end_inset
+
+: the transfer operator is now nothing more than a pushforward.
+ This interpretation gives a nice theoretical grounding; pushforwards are
+ fairly well understood category-theoretic objects.
+ This preceeding paragraph is again a whirlwind review of some concepts
+ from topology and measure theory; more concrete details can be found in
+ tectbooks such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kle08"
+
+\end_inset
+
+, while theorems that recast the transfer operator ass a pushforward are
+ given in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008,Ve-B04"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Keeping in mind that the proper setting for both the transfer operator and
+ for the Minkowski measure 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ is on sigma algebras, we none-the-less revert to classical point-set notation
+ to supply a proof that a similarity transform connects solutions of the
+ dyadic sawtooth and the GKW operator:
 \begin_inset Formula \begin{align*}
 \left[\mathcal{L}_{h}?^{\prime}\cdot f\circ?\right]\left(x\right)= & \sum_{n=1}^{\infty}\frac{1}{\left(x+n\right)^{2}}?^{\prime}\left(\frac{1}{x+n}\right)\left(f\circ?\right)\left(\frac{1}{x+n}\right)\\
 = & ?^{\prime}\left(x\right)\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-?\left(x\right)}{2^{n}}\right)\\
@@ -5252,7 +5421,19 @@ With this in mind, one may then supply the proof that similarity transforms
 
 \end_inset
 
-Suppose now that one has found not just one eigenfunction 
+The above point-set notation 
+\begin_inset Quotes eld
+\end_inset
+
+works
+\begin_inset Quotes erd
+\end_inset
+
+, in that, at each step, there is a corresponding measure-theoretic expression
+ for which the equality holds.
+ Notationally, this classical point-set notation is simply easier to read
+ for a wider audience, without loosing the overall fidelity of the argument.
+ Given an eigenfunction 
 \begin_inset Formula $f$
 \end_inset
 
@@ -5260,11 +5441,33 @@ Suppose now that one has found not just one eigenfunction
 \begin_inset Formula $\mathcal{L}_{c}$
 \end_inset
 
-, but in fact a complete set of them, presumably spanning a suitable function
- space.
- One may then ask if there are linear combinations of these that result
- in continuous or even differentiable eigenfunctions on the unit inteval.
- This question then spells out the program for the subsequent sections.
+, the practical way to work with this will be to work with the quantity
+ 
+\begin_inset Formula \[
+\int_{a}^{b}\left(?^{\prime}f\circ?\right)\left(x\right)dx=\int_{?\left(a\right)}^{?\left(b\right)}f\left(y\right)dy\]
+
+\end_inset
+
+The quantity on the left may be understood to denote an element of 
+\begin_inset Formula $\mathcal{F}_{\sigma}$
+\end_inset
+
+ valued on the set 
+\begin_inset Formula $U=\left[a,b\right]\in\mathcal{A}$
+\end_inset
+
+, while that on the right can be taken as an ordinary, college-calculus
+ integral, for which the usual manipulations are allowed.
+ Both sides of the above equality are understood to give an eigenfunction
+ of the GKW operator.
+ In general, this eigenfunction will, in practice, be found to be discontinuous
+ on the rationals.
+ However, suppose instead one now had not just a single eigenfunction, but
+ in fact a complete set of them, spanning a suitable function space.
+ One may then ask if there are linear combinations of these that are continuous,
+ or even differentiable, with regards to the natural topology on the unit
+ interval.
+ This last question then spells out the program for the subsequent sections.
 \end_layout
 
 \begin_layout Subsection
