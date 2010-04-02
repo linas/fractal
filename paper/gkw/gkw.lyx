@@ -4861,8 +4861,400 @@ key "Flajolet1995"
 \end_layout
 
 \begin_layout Standard
-However, there are suggestive elements.
- For example, the function argument 
+Althought the manipulations required to construct eigenfunctions by means
+ of similarity transforms break down when one insists on working in the
+ polynomial basis, this is not the case if one considers a larger basis
+ of functions.
+ By properly defining the derivative, one can validly obtain solutions to
+ the GKW eigenequation from solutions to the dyadic sawtooth.
+ This is developed in the next section.
+\end_layout
+
+\begin_layout Subsection
+Constructing GKW Eigenfunctions
+\end_layout
+
+\begin_layout Standard
+The manipulations required to define the conjugacy operator that makes GKW
+ and the dyadic sawtooth conjugate require manipulation of the derivative
+ of the Minkowski question mark function.
+ This derivative is not well-defined if one sticks to the natural topology
+ on the real number line, but it can be given a precise expression by working
+ on the Cantor set.
+ Insofar as the Cantor set is in many ways nearly equivalent to the real
+ number line, and that there are many operations that can be 
+\begin_inset Quotes eld
+\end_inset
+
+safely
+\begin_inset Quotes erd
+\end_inset
+
+ carried over from one to the other, one can thus have a workable set of
+ tools for operating on an object that, for all 
+\begin_inset Quotes eld
+\end_inset
+
+practical purposes
+\begin_inset Quotes erd
+\end_inset
+
+ can be identified with the deriviative of the question mark.
+ 
+\end_layout
+
+\begin_layout Standard
+The primary theorem and mechanics establishing this is given in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+, and breifly recapitulated here.
+ The Cantor set can be written as the infinite product 
+\begin_inset Formula $\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+ of the set 
+\begin_inset Formula $\left\{ 0,1\right\} $
+\end_inset
+
+ of two elements.
+ As such, points in this product space are naturally identified with real
+ numbers expanded in base-2 or binary -- a real number may be written as
+ an infinity long string of zeros and ones.
+ So:
+\begin_inset Formula \begin{equation}
+x=\sum_{n=1}^{\infty}\frac{b_{k}}{2^{k}}\label{eq:binary expansion}\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} $
+\end_inset
+
+ is the 
+\begin_inset Formula $k$
+\end_inset
+
+'th binary digit in the expansion of the real number 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The natural topology for a Cartesian product space is the so-called 
+\begin_inset Quotes eld
+\end_inset
+
+product topology
+\begin_inset Quotes erd
+\end_inset
+
+; it's open sets are called 
+\begin_inset Quotes eld
+\end_inset
+
+cylinder sets
+\begin_inset Quotes erd
+\end_inset
+
+.
+ For the Cantor set, a basis for the topology is just given by the standard
+ Haar functions of Banach theory.
+ That is, let 
+\begin_inset Formula $\sigma\in\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+be an infinite string of binary digits; let 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+, or, alternately, 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+ be the 
+\begin_inset Formula $k$
+\end_inset
+
+'th digit in this string.
+ Consider the set of all possible strings, but with one digit held constant.
+ There are two such sets, 
+\begin_inset Formula \[
+C_{k,0}=\left\{ \sigma\vert\sigma_{k}=0\right\} \quad\mbox{ and }\quad C_{k,1}=\left\{ \sigma\vert\sigma_{k}=1\right\} \]
+
+\end_inset
+
+These two sets are open in the product toplogy, and are complementary: 
+\begin_inset Formula $C_{k,0}\cap C_{k,1}=\varnothing$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{k,0}\cup C_{k,1}=\left\{ 0,1\right\} ^{\omega}$
+\end_inset
+
+.
+ The collection of these sets form a basis for the product topology; the
+ topology itself is the set of all finite intersections and arbitrary unions
+ of these sets.
+ It is not hard to see that the indicator functions for these sets are none
+ other than the Haar functions.
+ Thus, for example: 
+\begin_inset Formula \[
+\mbox{id}_{C_{k,0}}\left(x\right)=\begin{cases}
+0 & \;\mbox{ if }b_{k}=1\\
+1 & \mbox{\; if }b_{k}=0\end{cases}\]
+
+\end_inset
+
+is just a square wave.
+ 
+\end_layout
+
+\begin_layout Standard
+The open sets of the product topology on the Cantor set form a sigma algebra
+ on the real-number line; they are Borel sets, and are suitable for constructing
+ measures on the real-number line.
+ Let 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ denote this sigma algebra, and consider a set function 
+\begin_inset Formula $\mu:\mathcal{A}\to\left[0,\infty\right]$
+\end_inset
+
+.
+ When this function 
+\begin_inset Formula $\mu$
+\end_inset
+
+ obeys certain properties, such as sigma-additivity, it becomes a measure.
+ The above collection of definitions and maps allow the construction of
+ a measure 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ on the unit interval, that, for 
+\begin_inset Quotes eld
+\end_inset
+
+all practical purposes
+\begin_inset Quotes erd
+\end_inset
+
+, behaves as the deriviative of the Minkowski question mark.
+ This measure is constructed by considering the one-to-one correspondance
+ between the dyadic binary tree and the tree of Farey fractions.
+ These trees are identical in structure, and differ only in the labels assigned
+ to thier nodes: in the one case, dyadic fractions, and in the other, rationals.
+ As they differ only by labels, then the extension theorem for measures
+ applies.
+ The function that maps the labels from the one tree to the other is just
+ the Minkowski question mark; resulting measure is the definition of 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+.
+ It is illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Derivative-?"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+That this measure deserves to be identified with, or thought of as the 
+\begin_inset Quotes eld
+\end_inset
+
+derivative
+\begin_inset Quotes erd
+\end_inset
+
+ of the question mark becomes appearent when one switches over to classical
+ notation: one has that 
+\begin_inset Formula \[
+\int_{a}^{b}?^{\prime}\left(x\right)dx=?\left(b\right)-?\left(a\right)\]
+
+\end_inset
+
+The above skims over a fair amount of machinery from measure theory; the
+ upshot, however, is to defend the use of the simpler, classical notation.
+ Thus, in what follows, we will write 
+\begin_inset Formula $?^{\prime}\left(x\right)$
+\end_inset
+
+ as if it were well-defined for a real number 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ It is not.
+ However, by always reverting to the language of measure theory, and always
+ working with the cylider sets formed on the Cantor set, and then considering
+ a filter of cylinder sets converging to the point 
+\begin_inset Formula $x$
+\end_inset
+
+ given by equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:binary expansion"
+
+\end_inset
+
+, then one always has an object 
+\begin_inset Formula $?^{\prime}\left(x\right)$
+\end_inset
+
+ that behaves more or less as if it were a classical function, and can be
+ more or less safely manipulated as one.
+ 
+\end_layout
+
+\begin_layout Standard
+For what follows, the most important property of this measure is that it
+ too has a set of self-similarity properties, induced by the action of the
+ dyadic monoid on the question mark.
+ Of the various self-similarities, the most important one is 
+\begin_inset Formula \[
+?^{\prime}\left(\frac{1}{n+x}\right)=\frac{\left(x+n\right)^{2}}{2^{n}}?^{\prime}\left(x\right)\]
+
+\end_inset
+
+which follows from 
+\begin_inset Formula \[
+?\left(\frac{1}{n+x}\right)=\frac{2-?\left(x\right)}{2^{n}}\]
+
+\end_inset
+
+ This may be directly employed with the GKW operator to great effect.
+ Suppose that 
+\begin_inset Formula $f$
+\end_inset
+
+ is an eigenfuction of the transfer operator 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+ of the dyadic sawtooth with eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+; that is, 
+\begin_inset Formula $\mathcal{L}_{c}f=\lambda f$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $q=?^{\prime}\cdot f\circ?$
+\end_inset
+
+ is an eigenfunction of the GKW operator 
+\begin_inset Formula $\mathcal{L}_{h}$
+\end_inset
+
+, so that 
+\begin_inset Formula $\mathcal{L}_{h}q=\lambda q$
+\end_inset
+
+.
+ The functions 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $q$
+\end_inset
+
+ that can be manipulated in this way are in general functions on the Cantor
+ set, and not, strictly speaking, functions on the unit interval, except
+ insofar as equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:binary expansion"
+
+\end_inset
+
+ allows the Cantor set and the unit interval to be confused with one-another.
+ That is, rather than imagining that 
+\begin_inset Formula $f:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+, one should instead keep in mind 
+\begin_inset Formula $f:\left\{ 0,1\right\} ^{\omega}\to\mathbb{R}$
+\end_inset
+
+ or even possibly that 
+\begin_inset Formula $f$
+\end_inset
+
+ is a set function on the product topology (equivalently, a set function
+ on a sigma algebra), as needed.
+ Considered as functions on the unit interval, these will typically be non-diffe
+rentiable on the rationals or the dyadic fractions; or they may even be
+ discontinuous at these points.
+ Although one is tempted to say them, it is important to avoid phrases like
+ 
+\begin_inset Quotes eld
+\end_inset
+
+differentiable nowhere
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+discontinuous everywhere
+\begin_inset Quotes erd
+\end_inset
+
+, as these are misleading: the discontinuities happen only on the rationals,
+ and the rationals are simply not that big a set.
+ Many examples of such eigenfunctions are developed in the sections that
+ follow.
+ 
+\end_layout
+
+\begin_layout Standard
+With this in mind, one may then supply the proof that similarity transforms
+ provide conjugate solutions:
+\begin_inset Formula \begin{align*}
+\left[\mathcal{L}_{h}?^{\prime}\cdot f\circ?\right]\left(x\right)= & \sum_{n=1}^{\infty}\frac{1}{\left(x+n\right)^{2}}?^{\prime}\left(\frac{1}{x+n}\right)\left(f\circ?\right)\left(\frac{1}{x+n}\right)\\
+= & ?^{\prime}\left(x\right)\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-?\left(x\right)}{2^{n}}\right)\\
+= & ?^{\prime}\left(x\right)\cdot\left[\mathcal{L}_{c}f\right]\left(?\left(x\right)\right)\\
+= & \lambda?^{\prime}\left(x\right)f\left(?\left(x\right)\right)\\
+= & \lambda\left(?^{\prime}f\circ?\right)\left(x\right)\end{align*}
+
+\end_inset
+
+Suppose now that one has found not just one eigenfunction 
+\begin_inset Formula $f$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+, but in fact a complete set of them, presumably spanning a suitable function
+ space.
+ One may then ask if there are linear combinations of these that result
+ in continuous or even differentiable eigenfunctions on the unit inteval.
+ This question then spells out the program for the subsequent sections.
+\end_layout
+
+\begin_layout Subsection
+Misc Stuff
+\end_layout
+
+\begin_layout Standard
+For example, the function argument 
 \begin_inset Formula $(2-x)/2^{n}$
 \end_inset
 
@@ -4898,15 +5290,6 @@ Also, one can do strange things such as xxx but why do we want to do that?
 
 \begin_layout Standard
 XXX todo explain above
-\end_layout
-
-\begin_layout Standard
-The point is to not give up hope on the operator relationships, even though
- the polynomial basis breaks the relationship.
- Thus, we are motivated to explore other bases, and not just the polynomial
- basis.
- Fortunately, we can find some of these.
- 
 \end_layout
 
 \begin_layout Subsection
