@@ -54,7 +54,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised Oct 2008, 2 April 2010) 
+2 January 2004 (revised Oct 2008, 11 April 2010) 
 \end_layout
 
 \begin_layout Abstract
@@ -7203,13 +7203,13 @@ Here, the
 \begin_inset Formula $a_{k}$
 \end_inset
 
- are pure numbers, and are given by a recurrence relation: 
+ are just numbers, and are given by a recurrence relation: 
 \begin_inset Formula \[
 a_{N-k}=\frac{\sigma_{N}\sigma_{N-k+1}}{2^{k-1}w}\left[1+\left(2-w\right)\sum_{j=1}^{k-1}2^{j-1}a_{N-j}\right]\]
 
 \end_inset
 
-The first ew of these are 
+The first few of these are 
 \begin_inset Formula \begin{align*}
 a_{N-1} & =\frac{1}{w}\\
 a_{N-2} & =\frac{\sigma_{N}\sigma_{N-1}}{w^{2}}\\
@@ -7231,6 +7231,60 @@ v_{7}\left(x\right) & =\frac{-s_{1}\left(x\right)}{w^{2}}+\frac{s_{3}\left(x\rig
 
 Because all of these are constructed from step functions, they are easily
  integrated over: the integrals are composed of triangle waves.
+ 
+\end_layout
+
+\begin_layout Standard
+Several curious facts about these functions should be noted.
+ First, because the Walsh functions 
+\begin_inset Formula $s_{m}$
+\end_inset
+
+ formed a complete orthonormal set for 
+\begin_inset Formula $L_{2}\left[0,1\right]$
+\end_inset
+
+, it follows that the 
+\begin_inset Formula $\rho_{m}$
+\end_inset
+
+ must be linearly independent, and must span 
+\begin_inset Formula $L_{2}\left[0,1\right]$
+\end_inset
+
+ as well.
+ However, it is not true that the 
+\begin_inset Formula $v_{m}$
+\end_inset
+
+ are linearly independent.
+ Indeed, one readily verifies that 
+\begin_inset Formula $v_{2}=v_{1}/w$
+\end_inset
+
+, that 
+\begin_inset Formula $v_{4}=v_{1}/w^{2}$
+\end_inset
+
+, and so on.
+ Likewise, 
+\begin_inset Formula $v_{6}=v_{3}/w$
+\end_inset
+
+.
+ In general, one has that 
+\begin_inset Formula $v_{2^{k}m}=v_{m}/w^{k}$
+\end_inset
+
+ so that the 
+\begin_inset Formula $v_{m}$
+\end_inset
+
+ are linearly independent of one-another if and only if 
+\begin_inset Formula $m$
+\end_inset
+
+ is odd.
  
 \end_layout
 
