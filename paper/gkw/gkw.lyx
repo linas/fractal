@@ -6789,12 +6789,448 @@ Walsh functions
 \end_layout
 
 \begin_layout Standard
-Another orthonormal basis for 
-\begin_inset Formula $L_{2}$
+The Walsh functions provide an orthonormal basis for the Banach space 
+\begin_inset Formula $L_{2}\left[0,1\right]$
 \end_inset
 
- are the Walsh functions.
- These transform as ...
+ of square-integrable functions on tthe unit interval.
+ These can be used to construct eigensolutions to 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+.
+ This section defines the Walsh functions, and constructs a set of self-similar
+ functions from them, transforming under a finite-dimensional representation
+ of the dyadic monoid.
+ These are in turn used to construct the eigensolutions.
+ 
+\end_layout
+
+\begin_layout Standard
+The Walsh functions are built from the Rademacher functions.
+ Define the step function 
+\begin_inset Formula \[
+s_{1}\left(x\right)=\begin{cases}
++1 & \;\mbox{ for }0\le x<\frac{1}{2}\\
+-1 & \;\mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
+
+\end_inset
+
+The Rademacher functions 
+\begin_inset Formula $r_{n}\left(x\right)$
+\end_inset
+
+ are defined as 
+\begin_inset Formula $r_{n}\left(x\right)=s_{1}\left(2^{n}x\right)$
+\end_inset
+
+.
+ Given a finite sequence of integers 
+\begin_inset Formula $n_{1}<n_{2}<n_{3}<\cdots<n_{k}$
+\end_inset
+
+, the corresponding Walsh function is defined as the product of Rademacher
+ functions 
+\begin_inset Formula $r_{n_{1}}r_{n_{2}}r_{n_{3}}\cdots r_{n_{k}}$
+\end_inset
+
+.
+ It is not hard to see that these are orthonormal; indeed, the 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ themselves are orthonormal, in that 
+\begin_inset Formula \[
+\int_{0}^{1}r_{m}\left(x\right)r_{n}\left(x\right)dx=\delta_{nm}\]
+
+\end_inset
+
+These are most easily paramterized by means of an integer.
+ Let 
+\begin_inset Formula $m$
+\end_inset
+
+ be an integer with the binary expansion
+\begin_inset Formula \[
+m=\sum_{k=1}^{\infty}\beta_{k}2^{k-1}\]
+
+\end_inset
+
+with each 
+\begin_inset Formula $\beta_{k}\in\left\{ 0,1\right\} $
+\end_inset
+
+.
+ Implicit is that there is some upper bound 
+\begin_inset Formula $k$
+\end_inset
+
+ for which all the 
+\begin_inset Formula $\beta_{k}$
+\end_inset
+
+ are zero.
+ Then define the 
+\begin_inset Formula $m$
+\end_inset
+
+'th Walsh function 
+\begin_inset Formula $s_{m}$
+\end_inset
+
+ as 
+\begin_inset Formula \[
+s_{m}\left(x\right)=\prod_{k=0}^{\infty}r_{k}^{\beta_{k}}\left(x\right)\]
+
+\end_inset
+
+In essence, if 
+\begin_inset Formula $\beta_{k}=1$
+\end_inset
+
+, then 
+\begin_inset Formula $r_{k}$
+\end_inset
+
+ appears in the product; if 
+\begin_inset Formula $\beta_{k}=0$
+\end_inset
+
+, then 
+\begin_inset Formula $r_{k}$
+\end_inset
+
+ does not.
+ These are orthonormal, in that 
+\begin_inset Formula $s_{m}^{2}=1$
+\end_inset
+
+, and 
+\begin_inset Formula \[
+\int_{0}^{1}s_{m}\left(x\right)s_{n}\left(x\right)dx=\delta_{nm}\]
+
+\end_inset
+
+and these form a complete basis for the spce of square-integrable functions
+ on the unit interval
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Carothers2005"
+
+\end_inset
+
+.
+ Curiously, note that 
+\begin_inset Formula $s_{m}\left(2x\right)=s_{2m}\left(x\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A set of fractal functions, corresponding 1-1 to the Walsh functions, and
+ transforming under the dyadic monoid, are built as usual.
+ Let 
+\begin_inset Formula \[
+\rho_{m}\left(x\right)=\sum_{j=0}^{\infty}w^{j}s_{m}\left(2^{j}x\right)\]
+
+\end_inset
+
+It is not hard to see that 
+\begin_inset Formula \[
+\rho_{m}\left(\frac{x}{2}\right)=s_{\left\lfloor \frac{m}{2}\right\rfloor }\left(x\right)+w\rho_{m}\left(x\right)\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left\lfloor v\right\rfloor $
+\end_inset
+
+ denotes the floor of 
+\begin_inset Formula $v$
+\end_inset
+
+ (largest integer less than 
+\begin_inset Formula $v$
+\end_inset
+
+).
+ Under the action of reflection 
+\begin_inset Formula $r\left(x\right)=1-x$
+\end_inset
+
+, the 
+\begin_inset Formula $\rho_{m}$
+\end_inset
+
+ is even or odd, depending on whther the number of 
+\begin_inset Formula $1$
+\end_inset
+
+ bits in 
+\begin_inset Formula $m$
+\end_inset
+
+ is even or odd.
+ Let 
+\begin_inset Formula $N$
+\end_inset
+
+ be the smallest integer such that 
+\begin_inset Formula $m\le2^{N}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\rho_{m}$
+\end_inset
+
+ transforms under an 
+\begin_inset Formula $N+1$
+\end_inset
+
+ dimensional representation of the dyadic monoid, given by the basis
+\begin_inset Formula \begin{align*}
+1 & \to e_{1}\\
+s_{\left\lfloor \frac{m}{2^{N-1}}\right\rfloor } & \to e_{2}\\
+s_{\left\lfloor \frac{m}{2^{N-2}}\right\rfloor } & \to e_{3}\\
+ & \cdots\\
+s_{\left\lfloor \frac{m}{2}\right\rfloor } & \to e_{N}\\
+\rho_{m} & \to e_{N+1}\end{align*}
+
+\end_inset
+
+In this basis, the two monoid generators are 
+\begin_inset Formula \[
+g=\left[\begin{array}{cccccc}
+1 & 0 & 0 & \cdots & 0 & 0\\
+1 & 0 & 0 & \cdots & 0 & 0\\
+0 & 1 & 0 & \cdots & 0 & 0\\
+0 & 0 & 1 & \cdots & 0 & 0\\
+\vdots & \vdots & \vdots &  & \vdots & \vdots\\
+0 & 0 & 0 & \cdots & 1 & w\end{array}\right]\quad\mbox{ and }\quad r=\left[\begin{array}{cccccc}
+1 & 0 & 0 & 0 & \cdots & 0\\
+0 & \sigma_{1} & 0 & 0 & \cdots & 0\\
+0 & 0 & \sigma_{2} & 0 & \cdots & 0\\
+0 & 0 & 0 & \sigma_{3} & \cdots & 0\\
+\vdots & \vdots & \vdots & \vdots &  & \vdots\\
+0 & 0 & 0 & 0 & \cdots & \sigma_{N}\end{array}\right]\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma_{k}=\pm1$
+\end_inset
+
+ depending on the number of 1 bits in the binary expansion for 
+\begin_inset Formula $\left\lfloor m/2^{N-k}\right\rfloor $
+\end_inset
+
+.
+ To be precise, let 
+\begin_inset Formula $c_{k}=\sum_{j=N-k+1}^{N}\beta_{j}$
+\end_inset
+
+ count the number of 1 bits in 
+\begin_inset Formula $\left\lfloor m/2^{N-k}\right\rfloor $
+\end_inset
+
+; then 
+\begin_inset Formula $\sigma_{k}=\left(-1\right)^{c_{k}}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\sigma_{1}=-1$
+\end_inset
+
+ always.
+ 
+\end_layout
+
+\begin_layout Standard
+To obtain the action of 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+ on 
+\begin_inset Formula $\rho_{m}$
+\end_inset
+
+, one needs an expression for the matrix elements 
+\begin_inset Formula $g^{n-1}rg$
+\end_inset
+
+.
+ These are easily obtained, because of the simple, bi-diagonal, shift form
+ of 
+\begin_inset Formula $g$
+\end_inset
+
+.
+ The most relevant one, for 
+\begin_inset Formula $n\ge N$
+\end_inset
+
+ is 
+\begin_inset Formula \[
+g^{n-1}rg=\left[\begin{array}{ccccccc}
+1 & 0 &  &  & \vdots\\
+1 & 0 &  & \cdots & 0 & \cdots\\
+1 & 0 &  &  & \vdots\\
+\vdots & \vdots\\
+1 & 0 & 0 & \cdots & 0 & 0 & 0\\
+p_{n-N}\left(w\right) & \sigma_{2}w^{n-N+1} & \sigma_{3}w^{n-N+2} & \cdots & \sigma_{N-1}w^{n-2} & \sigma_{N}w^{n-1} & \sigma_{N}w^{n}\end{array}\right]\]
+
+\end_inset
+
+Here, 
+\begin_inset Formula $p_{k}$
+\end_inset
+
+ is a polynomial of degree 
+\begin_inset Formula $k$
+\end_inset
+
+, given by 
+\begin_inset Formula $p_{k}\left(w\right)=\left(1-2w^{k}+w^{k+1}\right)/\left(1-w\right)$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $p_{1}\left(w\right)=1-w$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{0}\left(w\right)=-1$
+\end_inset
+
+.
+ It is given by the recurrence relation 
+\begin_inset Formula $p_{k+1}=1+wp_{k}$
+\end_inset
+
+.
+ Making use of the property that 
+\begin_inset Formula \[
+\sum_{n=1}^{\infty}\frac{p_{n-N}\left(w\right)}{2^{n}}=0\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $N$
+\end_inset
+
+, one can find that 
+\begin_inset Formula \[
+\mathcal{L}_{c}\rho_{m}=\frac{1}{2-w}\left(\frac{\sigma_{2}s_{1}}{2^{N-2}}+\frac{\sigma_{3}s_{m_{2}}}{2^{N-3}}+\frac{\sigma_{4}s_{m_{3}}}{2^{N-4}}+\cdots+\frac{\sigma_{N-1}s_{m_{N-2}}}{2}+\sigma_{N}s_{m_{N-1}}+\sigma_{N}w\rho_{m}\right)\]
+
+\end_inset
+
+Here, we've made use of the notation 
+\begin_inset Formula \[
+m_{k}=\left\lfloor \frac{m}{2^{N-k}}\right\rfloor =\sum_{j=N-k+1}^{N}\beta_{j}2^{j-N+k-1}=m\gg\left(N-k\right)\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $\gg$
+\end_inset
+
+ denotes the bit shift-right operator.
+ Observe that 
+\begin_inset Formula $m_{N}=m$
+\end_inset
+
+ and that 
+\begin_inset Formula $m_{1}=1$
+\end_inset
+
+ always.
+ 
+\end_layout
+
+\begin_layout Standard
+From the above, it is immediately clear that eigenfunctions of 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+ can be constructed from linear combinations of 
+\begin_inset Formula $\rho_{m}$
+\end_inset
+
+ and the 
+\begin_inset Formula $s_{m_{k}}$
+\end_inset
+
+, and that the eigenvalues will be 
+\begin_inset Formula $\sigma_{N}w/\left(2-w\right)$
+\end_inset
+
+.
+ To obtain these, one needs the action of 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+ on 
+\begin_inset Formula $s_{m}$
+\end_inset
+
+.
+ This is given by 
+\begin_inset Formula \[
+\mathcal{L}_{c}s_{m}=\sigma_{N}\frac{s_{m_{N-1}}}{2}+\sigma_{N-1}\frac{s_{m_{N-2}}}{4}+\cdots+\sigma_{2}\frac{s_{m_{1}}}{2^{N-1}}=\sum_{k=1}^{N-1}\sigma_{k+1}\frac{s_{m_{k}}}{2^{N-k}}\]
+
+\end_inset
+
+The eigen-equation is then 
+\begin_inset Formula \[
+\mathcal{L}_{c}v_{m}=\lambda_{m}v_{m}\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\lambda_{m}=\sigma_{N}w/\left(2-w\right)$
+\end_inset
+
+ and 
+\begin_inset Formula \[
+v_{m}\left(x\right)=\rho_{m}\left(x\right)+\sum_{k=1}^{N-1}a_{k}s_{m_{k}}\left(x\right)\]
+
+\end_inset
+
+Here, the 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ are pure numbers, and are given by a recurrence relation: 
+\begin_inset Formula \[
+a_{N-k}=\frac{\sigma_{N}\sigma_{N-k+1}}{2^{k-1}w}\left[1+\left(2-w\right)\sum_{j=1}^{k-1}2^{j-1}a_{N-j}\right]\]
+
+\end_inset
+
+The first ew of these are 
+\begin_inset Formula \begin{align*}
+a_{N-1} & =\frac{1}{w}\\
+a_{N-2} & =\frac{\sigma_{N}\sigma_{N-1}}{w^{2}}\\
+a_{N-3} & =\frac{\sigma_{N-2}}{w^{3}}\left[\sigma_{N-1}+\frac{w}{2}\left(\sigma_{N}-\sigma_{N-1}\right)\right]\end{align*}
+
+\end_inset
+
+Putting this all together, the first few eigenfunctions are 
+\begin_inset Formula \begin{align*}
+v_{1}\left(x\right) & =\rho_{1}\left(x\right)\\
+v_{2}\left(x\right) & =\frac{s_{1}\left(x\right)}{w}+\rho_{2}\left(x\right)\\
+v_{3}\left(x\right) & =\frac{s_{1}\left(x\right)}{w}+\rho_{3}\left(x\right)\\
+v_{4}\left(x\right) & =\frac{s_{1}\left(x\right)}{w^{2}}+\frac{s_{2}\left(x\right)}{w}+\rho_{4}\left(x\right)\\
+v_{5}\left(x\right) & =\frac{-s_{1}\left(x\right)}{w^{2}}+\frac{s_{2}\left(x\right)}{w}+\rho_{5}\left(x\right)\\
+v_{6}\left(x\right) & =\frac{s_{1}\left(x\right)}{w^{2}}+\frac{s_{3}\left(x\right)}{w}+\rho_{6}\left(x\right)\\
+v_{7}\left(x\right) & =\frac{-s_{1}\left(x\right)}{w^{2}}+\frac{s_{3}\left(x\right)}{w}+\rho_{7}\left(x\right)\end{align*}
+
+\end_inset
+
+Because all of these are constructed from step functions, they are easily
+ integrated over: the integrals are composed of triangle waves.
  
 \end_layout
 
