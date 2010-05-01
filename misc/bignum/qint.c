@@ -14,6 +14,7 @@
 void goldy(int prec)
 {
 	int i, npts;
+	double fmean, qfmean;
 
 	mpf_t x, eps, step, qlo, qmid, qhi, golden;
 	mpf_init(x);
@@ -35,9 +36,13 @@ void goldy(int prec)
 
 	// Silver mean
 	mpf_sqrt_ui(golden, 2);
-	mpf_div_ui(golden, golden, 2);
+	mpf_sub_ui(golden, golden, 1);
 	
 	question_mark(qmid, golden, prec);
+
+	fmean = mpf_get_d(golden);
+	qfmean = mpf_get_d(qmid);
+	printf("#\n# Mean=%g ?(Mean)=%g\n", fmean, qfmean); 
 
 	npts = 5600;
 	
