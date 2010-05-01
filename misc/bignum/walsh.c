@@ -58,6 +58,29 @@ void step_n(mpf_t result, mpf_t x, int n)
 	step_1(result, result);
 }
 
+/**
+ * Implement the n'th walsh function
+ * n must be less that 2^32 or 2^64
+ */
+void walsh(mpf_t result, mpf_t x, unsigned long n)
+{
+	int i;
+	mpf_t term;
+	mpf_init(term);
+
+	mpf_set_ui(result, 1);
+	for (i=1; i<=32; i++)
+	{
+		if (n & 0x1)
+		{
+			step_n(term, x, i);
+			mpf_mul(result, result, term);
+		}
+
+		n >>= 1;
+	}
+}
+
 int main (int argc, char * argv[])
 {
 	mpf_t x, y, step;
@@ -90,7 +113,8 @@ int main (int argc, char * argv[])
 	mpf_set_ui(x, 0);
 	for (i=0; i<npts; i++)
 	{
-		step_n(y, x, 3);
+		// step_n(y, x, 3);
+		walsh(y, x, 7);
 
 		x_f = mpf_get_d(x);
 		y_f = mpf_get_d(y);
