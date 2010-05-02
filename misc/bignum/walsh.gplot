@@ -1,17 +1,25 @@
 
-# set term png small
-# set out 'walsh.png'
+#set term png small
+#set out 'walsh.png'
+#
+#set title "Walsh m"
+#set data style lines
+#set key right
+#
+#plot "walsh.dat" using 2:3 linewidth 1 title "" , \
+#     "walsh.dat" using 2:4 linewidth 1 title ""
 
+## =======================================
+## Settings below were used in the paper on gkw.
 set term postscript eps color
-set out 'walsh-7.eps'
+set out 'walsh-1.eps'
 
-# set data style linespoints
 set data style lines
 set key right
 
-set title "Walsh m=7"
+set title "Walsh m=1"
 
-plot "walsh.dat" using 2:3 linewidth 1 title "" , \
-     "walsh.dat" using 2:4 linewidth 1 title ""
-
+plot "walsh.dat" using 2:3 linewidth 3 title "" , \
+     "walsh.dat" using 2:4 linewidth 3 title ""
+## =======================================
 

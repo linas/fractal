@@ -10,6 +10,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define BITLEN 32
+
+typedef struct
+{
+	unsigned long m;
+	int bitlen;
+	unsigned long m_k[BITLEN];
+	int sigma_k[BITLEN]; 
+	double w;
+	double a_k[BITLEN];
+} Shifts;
+
+
 /**
  * Square wave function function, returns +1 if x< 1/2 and returns -1 if x> 1/2
  * Repeats with period 1.
@@ -83,7 +96,7 @@ void walsh(mpf_t result, mpf_t x, unsigned long n)
 	mpf_set(ex, x);
 
 	mpf_set_ui(result, 1);
-	for (i=1; i<=32; i++)
+	for (i=1; i<=BITLEN; i++)
 	{
 		if (n & 0x1)
 		{
@@ -96,7 +109,7 @@ void walsh(mpf_t result, mpf_t x, unsigned long n)
 }
 
 /**
- * Implement the n'th blnacmange based on the n'th walsh function
+ * Implement the n'th blancmange based on the n'th walsh function
  * n must be less that 2^32 or 2^64
  */
 void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
@@ -111,8 +124,8 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 	mpf_set_ui(tn, 1);
 	mpf_set_ui(result, 0);
 
-	// XXX should not be 32, but some variiable number of terms
-	for (i=1; i<=32; i++)
+	// XXX should be some variiable number of terms
+	for (i=1; i<=60; i++)
 	{
 		mpf_mul(term, tn, x);
 		walsh(term, term, n);
@@ -124,17 +137,47 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 	}
 }
 
+void get_shifts(Shifts *sh, unsigned long n)
+{
+	int i, m;
+	sh->m = n;
+
+	/* Count total number of bits in n */
+	i = 0;
+	m = n;
+	while (m)
+	{
+		i++;
+		m >>=1;
+	}
+	sh->bitlen = i;
+
+	/* Store shift states */
+	i = sh->bitlen;
+	m = n;
+	while (m)
+	{
+		sh->m_k[i] = m;
+		i--;
+		m >>=1;
+	}
+
+printf ("duuude n=%lu bitlen=%d shifts=%lu %lu %lu %lu\n", n, sh->bitlen,
+	sh->m_k[1], sh->m_k[2], sh->m_k[3], sh->m_k[4]);
+}
+
 int main (int argc, char * argv[])
 {
 	mpf_t x, y, step, w;
-	double x_f, y_f, f_f;
+	double x_f, y_f, f_f, w_f;
 	int n = 5;
 	int i, npts;
 	int prec, nbits;
+	Shifts shifts;
 
-	if (3 > argc)
+	if (4 > argc)
 	{
-		fprintf(stderr, "Usage: %s <decimal-precision> <n>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <decimal-precision> <n> <w>\n", argv[0]);
 		exit(1);
 	}
 
@@ -148,12 +191,15 @@ int main (int argc, char * argv[])
 
 	/* Other misc args */
 	n = atoi(argv[2]);
+	w_f = atof(argv[3]);
+
+	get_shifts(&shifts, n);
 
 	mpf_init(x);
 	mpf_init(y);
 	mpf_init(step);
 	mpf_init(w);
-	mpf_set_d(w, 0.6);
+	mpf_set_d(w, w_f);
 
 	npts = 1233;
 	mpf_set_ui(step, 1);
