@@ -9,6 +9,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
 
 #define BITLEN 32
 
@@ -137,9 +138,21 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 	}
 }
 
+static int bitcount(unsigned long n)
+{
+	int cnt = 0;
+	while (n)
+	{
+		if (n & 0x1) cnt ++;
+		n >>= 1;
+	}
+	return cnt;
+}
+
 void get_shifts(Shifts *sh, unsigned long n)
 {
 	int i, m;
+	bzero(sh, sizeof(Shifts));
 	sh->m = n;
 
 	/* Count total number of bits in n */
@@ -162,8 +175,22 @@ void get_shifts(Shifts *sh, unsigned long n)
 		m >>=1;
 	}
 
-printf ("duuude n=%lu bitlen=%d shifts=%lu %lu %lu %lu\n", n, sh->bitlen,
-	sh->m_k[1], sh->m_k[2], sh->m_k[3], sh->m_k[4]);
+	/* Compute the sign bits */
+	i = sh->bitlen;
+	m = n;
+	while (m)
+	{
+		int cnt = bitcount(m);
+		if (cnt%2 == 0) sh->sigma_k[i] = 1;
+		else sh->sigma_k[i] = -1;
+		i--;
+		m >>=1;
+	}
+
+printf ("duuude n=%lu bitlen=%d shifts=%lu %lu %lu %lu sigmas=%d %d %d %d\n", 
+	n, sh->bitlen,
+	sh->m_k[1], sh->m_k[2], sh->m_k[3], sh->m_k[4],
+	sh->sigma_k[1], sh->sigma_k[2], sh->sigma_k[3], sh->sigma_k[4]);
 }
 
 int main (int argc, char * argv[])
