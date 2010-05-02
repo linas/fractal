@@ -11,10 +11,13 @@
 #include <stdlib.h>
 
 /**
- * Step function, returns +1 if x< 1/2 and returns -1 if x> 1/2
+ * Square wave function function, returns +1 if x< 1/2 and returns -1 if x> 1/2
+ * Repeats with period 1.
  */
 void step_1(mpf_t result, mpf_t x)
 {
+	mpz_t intpart;
+	mpf_t ex;
 	static int is_init=0;
 	static mpf_t half;
 
@@ -22,11 +25,18 @@ void step_1(mpf_t result, mpf_t x)
 	{
 		is_init = 1;
 		mpf_init(half);
-		mpf_set_ui (half, 1);
-		mpf_div_ui (half, half, 2);
+		mpf_set_ui(half, 1);
+		mpf_div_ui(half, half, 2);
 	}
 
-	if (0 < mpf_cmp(half, x))
+	mpf_init(ex);
+	mpf_set(ex, x);
+	mpz_init(intpart);
+	mpz_set_f(intpart, ex);
+	mpf_set_z(result, intpart);
+	mpf_sub(result, ex, result);
+
+	if (0 < mpf_cmp(half, result))
 	{
 		mpf_set_ui(result, 1);
 		return;
@@ -53,8 +63,6 @@ void step_n(mpf_t result, mpf_t x, int n)
 	tp = 1<<(n-1);
 	mpf_set_ui(result, tp);
 	mpf_mul(result, result, x); 
-	tp = mpf_get_ui(result);
-	mpf_sub_ui(result, result, tp);
 	step_1(result, result);
 }
 
@@ -113,8 +121,9 @@ int main (int argc, char * argv[])
 	mpf_set_ui(x, 0);
 	for (i=0; i<npts; i++)
 	{
+		// step_1(y, x);
 		// step_n(y, x, 3);
-		walsh(y, x, 7);
+		walsh(y, x, 6);
 
 		x_f = mpf_get_d(x);
 		y_f = mpf_get_d(y);
