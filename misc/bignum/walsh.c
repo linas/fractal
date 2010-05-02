@@ -127,13 +127,14 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 int main (int argc, char * argv[])
 {
 	mpf_t x, y, step, w;
-	double x_f, y_f;
+	double x_f, y_f, f_f;
+	int n = 5;
 	int i, npts;
 	int prec, nbits;
 
-	if (2 > argc)
+	if (3 > argc)
 	{
-		fprintf(stderr, "Usage: %s <decimal-precision>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <decimal-precision> <n>\n", argv[0]);
 		exit(1);
 	}
 
@@ -145,13 +146,16 @@ int main (int argc, char * argv[])
 	nbits = 3.3*prec;
 	mpf_set_default_prec (nbits);
 
+	/* Other misc args */
+	n = atoi(argv[2]);
+
 	mpf_init(x);
 	mpf_init(y);
 	mpf_init(step);
 	mpf_init(w);
 	mpf_set_d(w, 0.6);
 
-	npts = 600;
+	npts = 1233;
 	mpf_set_ui(step, 1);
 	mpf_div_ui(step, step, npts);
 
@@ -160,13 +164,14 @@ int main (int argc, char * argv[])
 	{
 		// step_1(y, x);
 		// step_n(y, x, 3);
-		// walsh(y, x, 6);
-		blanc(y, w, x, 3);
 
 		x_f = mpf_get_d(x);
+		walsh(y, x, n);
 		y_f = mpf_get_d(y);
+		blanc(y, w, x, n);
+		f_f = mpf_get_d(y);
 
-		printf("%d	%f	%g\n", i, x_f, y_f);
+		printf("%d	%f	%g	%g\n", i, x_f, y_f, f_f);
 
 		mpf_add(x, x, step);
 	}
