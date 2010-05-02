@@ -43,6 +43,7 @@ void step_1(mpf_t result, mpf_t x)
 		mpf_div_ui(half, half, 2);
 	}
 
+	/* Compute the floor of x, and subtract it */
 	mpf_init(ex);
 	mpf_set(ex, x);
 	mpz_init(intpart);
@@ -60,9 +61,47 @@ void step_1(mpf_t result, mpf_t x)
 }
 
 /**
+ * Triangle wave function function, returns integral of the 
+ * square wave function (i.e. tent rising to 1/2 for x< 1/2 
+ * and dropping to zero for x> 1/2
+ * Repeats with period 1.
+ */
+void tent_1(mpf_t result, mpf_t x)
+{
+	mpz_t intpart;
+	mpf_t ex;
+	static int is_init=0;
+	static mpf_t half;
+
+	if (0 == is_init)
+	{
+		is_init = 1;
+		mpf_init(half);
+		mpf_set_ui(half, 1);
+		mpf_div_ui(half, half, 2);
+	}
+
+	/* Compute the floor of x, and subtract it */
+	mpf_init(ex);
+	mpf_set(ex, x);
+	mpz_init(intpart);
+	mpz_set_f(intpart, ex);
+	mpf_set_z(result, intpart);
+	mpf_sub(result, ex, result);
+
+	if (0 < mpf_cmp(half, result))
+	{
+		mpf_set(result, ex);
+		return;
+	}
+	
+	mpf_ui_sub(result, 1, ex);
+}
+
+/**
  * returns square wave of frequency 2^(n-1)
  * n must be less than 32/64
- * x must be in range of zero, one
+ * x must be positive
  */
 void step_n(mpf_t result, mpf_t x, int n)
 {
@@ -85,10 +124,63 @@ void step_n(mpf_t result, mpf_t x, int n)
 }
 
 /**
+ * Returns integral of the square wave of frequency 2^(n-1)
+ * The slope of the returned function is either +1 or -1.
+ * n must be less than 32/64
+ * x must be positive
+ */
+void igral_step_n(mpf_t result, mpf_t x, int n)
+{
+	mpf_t ex;
+	unsigned long tp;
+
+	if (1 == n)
+	{
+		tent_1(result, x);
+		return;
+	}
+
+	mpf_init(ex);
+	mpf_set(ex, x);
+
+	tp = 1<<(n-1);
+	mpf_set_ui(result, tp);
+	mpf_mul(result, result, ex); 
+	tent_1(result, result);
+	mpf_div_ui(result, result, tp);
+}
+
+/**
  * Implement the n'th walsh function
  * n must be less that 2^32 or 2^64
  */
 void walsh(mpf_t result, mpf_t x, unsigned long n)
+{
+	int i;
+	mpf_t term, ex;
+	mpf_init(term);
+	mpf_init(ex);
+	mpf_set(ex, x);
+
+	mpf_set_ui(result, 1);
+	for (i=1; i<=BITLEN; i++)
+	{
+		if (n & 0x1)
+		{
+			step_n(term, ex, i);
+			mpf_mul(result, result, term);
+		}
+
+		n >>= 1;
+	}
+}
+
+/**
+ * Implement the integral of the n'th walsh function
+ * n must be less that 2^32 or 2^64
+xxxx
+ */
+void igral_walsh(mpf_t result, mpf_t x, unsigned long n)
 {
 	int i;
 	mpf_t term, ex;
@@ -195,6 +287,7 @@ void get_shifts(Shifts *sh, unsigned long n)
 	}
 
 #if 0
+// A debugging printf
 printf ("duuude n=%lu bitlen=%d shifts=%lu %lu %lu %lu sigmas=%d %d %d %d\n", 
 	n, sh->bitlen,
 	sh->m_k[1], sh->m_k[2], sh->m_k[3], sh->m_k[4],
@@ -238,6 +331,8 @@ void get_coeffs(Shifts *sh, double w)
 		sh->a_k[n-k] = acc;
 		tk *= 2.0;
 	}
+#if 0
+// The below was used to graph the coefficients for the gkw paper.
 // printf ("duuude m=%lu bitlen=%d aks=%g %g %g %g\n", 
 printf ("%lu	%d	%g	%g	%g	%g\n", 
 	sh->m-1,
@@ -247,6 +342,7 @@ printf ("%lu	%d	%g	%g	%g	%g\n",
 	sh->m,
 	sh->bitlen,
 	sh->a_k[1], sh->a_k[2], sh->a_k[3], sh->a_k[4]);
+#endif
 }
 
 int main (int argc, char * argv[])
@@ -276,12 +372,8 @@ int main (int argc, char * argv[])
 	n = atoi(argv[2]);
 	w_f = atof(argv[3]);
 
-for (n=1; n<200; n++)
-{
 	get_shifts(&shifts, n);
 	get_coeffs(&shifts, w_f);
-}
-exit(0);
 
 	mpf_init(x);
 	mpf_init(y);
