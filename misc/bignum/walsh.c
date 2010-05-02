@@ -247,11 +247,40 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 	mpf_set_ui(tn, 1);
 	mpf_set_ui(result, 0);
 
-	// XXX should be some variiable number of terms
+	// XXX should be some variable number of terms
 	for (i=1; i<=60; i++)
 	{
 		mpf_mul(term, tn, x);
 		walsh(term, term, n);
+		mpf_mul(term, term, wn);
+		mpf_add(result, result, term);
+
+		mpf_mul(wn, wn, w);
+		mpf_mul_ui(tn, tn, 2);
+	}
+}
+
+/**
+ * Implement the integral of the n'th blancmange based on the n'th walsh function
+ * n must be less that 2^32 or 2^64
+ */
+void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
+{
+	int i;
+	mpf_t term, tn, wn;
+	mpf_init(term);
+	mpf_init(wn);
+	mpf_init(tn);
+
+	mpf_set_ui(wn, 1);
+	mpf_set_ui(tn, 1);
+	mpf_set_ui(result, 0);
+
+	// XXX should be some variable number of terms
+	for (i=1; i<=60; i++)
+	{
+		mpf_mul(term, tn, x);
+		igral_walsh(term, term, n);
 		mpf_mul(term, term, wn);
 		mpf_add(result, result, term);
 
@@ -404,7 +433,8 @@ int main (int argc, char * argv[])
 		walsh(y, x, n);
 		y_f = mpf_get_d(y);
 		// blanc(y, w, x, n);
-		igral_walsh(y, x, n);
+		// igral_walsh(y, x, n);
+		igral_blanc(y, w, x, n);
 		f_f = mpf_get_d(y);
 
 		printf("%d	%f	%g	%g\n", i, x_f, y_f, f_f);
