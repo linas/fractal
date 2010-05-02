@@ -119,11 +119,10 @@ void tent_1(mpf_t result, mpf_t x)
 
 	if (0 < mpf_cmp(half, result))
 	{
-		mpf_set(result, ex);
 		return;
 	}
 	
-	mpf_ui_sub(result, 1, ex);
+	mpf_ui_sub(result, 1, result);
 }
 
 /**
