@@ -238,7 +238,12 @@ void get_coeffs(Shifts *sh, double w)
 		sh->a_k[n-k] = acc;
 		tk *= 2.0;
 	}
-printf ("duuude m=%lu bitlen=%d aks=%g %g %g %g\n", 
+// printf ("duuude m=%lu bitlen=%d aks=%g %g %g %g\n", 
+printf ("%lu	%d	%g	%g	%g	%g\n", 
+	sh->m-1,
+	sh->bitlen,
+	sh->a_k[1], sh->a_k[2], sh->a_k[3], sh->a_k[4]);
+printf ("%lu	%d	%g	%g	%g	%g\n", 
 	sh->m,
 	sh->bitlen,
 	sh->a_k[1], sh->a_k[2], sh->a_k[3], sh->a_k[4]);
@@ -271,8 +276,12 @@ int main (int argc, char * argv[])
 	n = atoi(argv[2]);
 	w_f = atof(argv[3]);
 
+for (n=1; n<200; n++)
+{
 	get_shifts(&shifts, n);
 	get_coeffs(&shifts, w_f);
+}
+exit(0);
 
 	mpf_init(x);
 	mpf_init(y);
