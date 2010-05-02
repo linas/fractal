@@ -52,6 +52,7 @@ void step_1(mpf_t result, mpf_t x)
  */
 void step_n(mpf_t result, mpf_t x, int n)
 {
+	mpf_t ex;
 	unsigned long tp;
 
 	if (1 == n)
@@ -60,9 +61,12 @@ void step_n(mpf_t result, mpf_t x, int n)
 		return;
 	}
 
+	mpf_init(ex);
+	mpf_set(ex, x);
+
 	tp = 1<<(n-1);
 	mpf_set_ui(result, tp);
-	mpf_mul(result, result, x); 
+	mpf_mul(result, result, ex); 
 	step_1(result, result);
 }
 
@@ -73,15 +77,17 @@ void step_n(mpf_t result, mpf_t x, int n)
 void walsh(mpf_t result, mpf_t x, unsigned long n)
 {
 	int i;
-	mpf_t term;
+	mpf_t term, ex;
 	mpf_init(term);
+	mpf_init(ex);
+	mpf_set(ex, x);
 
 	mpf_set_ui(result, 1);
 	for (i=1; i<=32; i++)
 	{
 		if (n & 0x1)
 		{
-			step_n(term, x, i);
+			step_n(term, ex, i);
 			mpf_mul(result, result, term);
 		}
 
@@ -89,9 +95,38 @@ void walsh(mpf_t result, mpf_t x, unsigned long n)
 	}
 }
 
+/**
+ * Implement the n'th blnacmange based on the n'th walsh function
+ * n must be less that 2^32 or 2^64
+ */
+void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
+{
+	int i;
+	mpf_t term, tn, wn;
+	mpf_init(term);
+	mpf_init(wn);
+	mpf_init(tn);
+
+	mpf_set_ui(wn, 1);
+	mpf_set_ui(tn, 1);
+	mpf_set_ui(result, 0);
+
+	// XXX should not be 32, but some variiable number of terms
+	for (i=1; i<=32; i++)
+	{
+		mpf_mul(term, tn, x);
+		walsh(term, term, n);
+		mpf_mul(term, term, wn);
+		mpf_add(result, result, term);
+
+		mpf_mul(wn, wn, w);
+		mpf_mul_ui(tn, tn, 2);
+	}
+}
+
 int main (int argc, char * argv[])
 {
-	mpf_t x, y, step;
+	mpf_t x, y, step, w;
 	double x_f, y_f;
 	int i, npts;
 	int prec, nbits;
@@ -113,8 +148,10 @@ int main (int argc, char * argv[])
 	mpf_init(x);
 	mpf_init(y);
 	mpf_init(step);
+	mpf_init(w);
+	mpf_set_d(w, 0.6);
 
-	npts = 100;
+	npts = 600;
 	mpf_set_ui(step, 1);
 	mpf_div_ui(step, step, npts);
 
@@ -123,7 +160,8 @@ int main (int argc, char * argv[])
 	{
 		// step_1(y, x);
 		// step_n(y, x, 3);
-		walsh(y, x, 6);
+		// walsh(y, x, 6);
+		blanc(y, w, x, 3);
 
 		x_f = mpf_get_d(x);
 		y_f = mpf_get_d(y);
