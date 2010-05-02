@@ -138,6 +138,9 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 	}
 }
 
+/**
+ * Count the number of 1 bits in the  integer n
+ */
 static int bitcount(unsigned long n)
 {
 	int cnt = 0;
@@ -149,6 +152,10 @@ static int bitcount(unsigned long n)
 	return cnt;
 }
 
+/**
+ * Compute the assorted shift states needed for constructing
+ * the dyadic sowtooth eigenfunctions.
+ */
 void get_shifts(Shifts *sh, unsigned long n)
 {
 	int i, m;
@@ -187,10 +194,54 @@ void get_shifts(Shifts *sh, unsigned long n)
 		m >>=1;
 	}
 
+#if 0
 printf ("duuude n=%lu bitlen=%d shifts=%lu %lu %lu %lu sigmas=%d %d %d %d\n", 
 	n, sh->bitlen,
 	sh->m_k[1], sh->m_k[2], sh->m_k[3], sh->m_k[4],
 	sh->sigma_k[1], sh->sigma_k[2], sh->sigma_k[3], sh->sigma_k[4]);
+#endif
+}
+
+/**
+ * Compute the explicit coeffs needed for the dyadic sawtooth 
+ * eigenfuncs
+ */
+void get_coeffs(Shifts *sh, double w)
+{
+	int n, j, k;
+	double tk;
+
+	sh->w = w;
+	n = sh->bitlen;
+	k = 1;
+	sh->a_k[n-k] = 1.0 / w;
+
+	/* Fill in the rest of them */
+	tk = 2.0;
+	for (k=2; k<n; k++)
+	{
+		double acc = 0.0;
+		double tn = 1.0;
+
+		/* Make the j sum */
+		for (j=1; j<k; j++)
+		{
+			acc += tn * sh->a_k[n-j];
+			tn *= 2.0;
+		}
+
+		acc *= 2.0 - w;
+		acc += 1.0;
+		acc *= sh->sigma_k[n] * sh->sigma_k[n-k+1];
+		acc /= tk * w;
+
+		sh->a_k[n-k] = acc;
+		tk *= 2.0;
+	}
+printf ("duuude m=%lu bitlen=%d aks=%g %g %g %g\n", 
+	sh->m,
+	sh->bitlen,
+	sh->a_k[1], sh->a_k[2], sh->a_k[3], sh->a_k[4]);
 }
 
 int main (int argc, char * argv[])
@@ -221,6 +272,7 @@ int main (int argc, char * argv[])
 	w_f = atof(argv[3]);
 
 	get_shifts(&shifts, n);
+	get_coeffs(&shifts, w_f);
 
 	mpf_init(x);
 	mpf_init(y);
