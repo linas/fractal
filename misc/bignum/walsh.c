@@ -238,11 +238,13 @@ void igral_walsh(mpf_t result, mpf_t x, unsigned long n)
 void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 {
 	int i;
-	mpf_t term, tn, wn;
+	mpf_t ex, term, tn, wn;
+	mpf_init(ex);
 	mpf_init(term);
 	mpf_init(wn);
 	mpf_init(tn);
 
+	mpf_set(ex, x);
 	mpf_set_ui(wn, 1);
 	mpf_set_ui(tn, 1);
 	mpf_set_ui(result, 0);
@@ -250,7 +252,7 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 	// XXX should be some variable number of terms
 	for (i=1; i<=60; i++)
 	{
-		mpf_mul(term, tn, x);
+		mpf_mul(term, tn, ex);
 		walsh(term, term, n);
 		mpf_mul(term, term, wn);
 		mpf_add(result, result, term);
@@ -267,11 +269,13 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 {
 	int i;
-	mpf_t term, tn, wn;
+	mpf_t term, ex, tn, wn;
 	mpf_init(term);
+	mpf_init(ex);
 	mpf_init(wn);
 	mpf_init(tn);
 
+	mpf_set(ex, x);
 	mpf_set_ui(wn, 1);
 	mpf_set_ui(tn, 1);
 	mpf_set_ui(result, 0);
@@ -279,7 +283,7 @@ void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 	// XXX should be some variable number of terms
 	for (i=1; i<=60; i++)
 	{
-		mpf_mul(term, tn, x);
+		mpf_mul(term, tn, ex);
 		igral_walsh(term, term, n);
 		mpf_mul(term, term, wn);
 		mpf_add(result, result, term);
@@ -291,7 +295,7 @@ void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 
 /**
  * Compute the assorted shift states needed for constructing
- * the dyadic sowtooth eigenfunctions.
+ * the dyadic sawtooth eigenfunctions.
  */
 void get_shifts(Shifts *sh, unsigned long n)
 {
@@ -383,6 +387,29 @@ printf ("%lu	%d	%g	%g	%g	%g\n",
 #endif
 }
 
+/**
+ * Compute the eigenfunction of the dyadic sawtooth, associated with w
+ */
+void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
+{
+	int i;
+	mpf_t ex, term, ak;
+	mpf_init(ex);
+	mpf_init(term);
+	mpf_init(ak);
+
+	mpf_set(ex, x);
+	blanc(result, w, x, n);
+
+	for (i=1; i<sh->bitlen; i++)
+	{
+		walsh(term, x, sh->m_k[i]);
+		mpf_set_d(ak, sh->a_k[i]);
+		mpf_mul(term, term, ak);
+		mpf_add(result, result, term);
+	}
+}
+
 int main (int argc, char * argv[])
 {
 	mpf_t x, y, step, w;
@@ -434,7 +461,8 @@ int main (int argc, char * argv[])
 		y_f = mpf_get_d(y);
 		// blanc(y, w, x, n);
 		// igral_walsh(y, x, n);
-		igral_blanc(y, w, x, n);
+		// igral_blanc(y, w, x, n);
+		eigenfunc(y, w, &shifts, x, n);
 		f_f = mpf_get_d(y);
 
 		printf("%d	%f	%g	%g\n", i, x_f, y_f, f_f);
