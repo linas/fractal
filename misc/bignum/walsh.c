@@ -410,6 +410,29 @@ void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
 	}
 }
 
+/**
+ * Compute the integral of the eigenfunction of the dyadic sawtooth, associated with w
+ */
+void igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
+{
+	int i;
+	mpf_t ex, term, ak;
+	mpf_init(ex);
+	mpf_init(term);
+	mpf_init(ak);
+
+	mpf_set(ex, x);
+	igral_blanc(result, w, x, n);
+
+	for (i=1; i<sh->bitlen; i++)
+	{
+		igral_walsh(term, x, sh->m_k[i]);
+		mpf_set_d(ak, sh->a_k[i]);
+		mpf_mul(term, term, ak);
+		mpf_add(result, result, term);
+	}
+}
+
 int main (int argc, char * argv[])
 {
 	mpf_t x, y, step, w;
@@ -462,7 +485,8 @@ int main (int argc, char * argv[])
 		// blanc(y, w, x, n);
 		// igral_walsh(y, x, n);
 		// igral_blanc(y, w, x, n);
-		eigenfunc(y, w, &shifts, x, n);
+		// eigenfunc(y, w, &shifts, x, n);
+		igral_eigenfunc(y, w, &shifts, x, n);
 		f_f = mpf_get_d(y);
 
 		printf("%d	%f	%g	%g\n", i, x_f, y_f, f_f);
