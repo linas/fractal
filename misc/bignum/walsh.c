@@ -23,6 +23,34 @@ typedef struct
 	double a_k[BITLEN];
 } Shifts;
 
+/**
+ * Count the total number of bits in the  integer n
+ * (ignoring the infinite string of zeros padding to the left)
+ */
+static int bitlength(unsigned long n)
+{
+	int cnt = 0;
+	while (n)
+	{
+		cnt ++;
+		n >>= 1;
+	}
+	return cnt;
+}
+
+/**
+ * Count the number of 1 bits in the  integer n
+ */
+static int bitcount(unsigned long n)
+{
+	int cnt = 0;
+	while (n)
+	{
+		if (n & 0x1) cnt ++;
+		n >>= 1;
+	}
+	return cnt;
+}
 
 /**
  * Square wave function function, returns +1 if x< 1/2 and returns -1 if x> 1/2
@@ -178,27 +206,30 @@ void walsh(mpf_t result, mpf_t x, unsigned long n)
 /**
  * Implement the integral of the n'th walsh function
  * n must be less that 2^32 or 2^64
-xxxx
  */
 void igral_walsh(mpf_t result, mpf_t x, unsigned long n)
 {
-	int i;
+	int i, bitlen;
 	mpf_t term, ex;
 	mpf_init(term);
 	mpf_init(ex);
 	mpf_set(ex, x);
 
+	bitlen = bitlength(n);
+
 	mpf_set_ui(result, 1);
-	for (i=1; i<=BITLEN; i++)
+	for (i=1; i<bitlen; i++)
 	{
 		if (n & 0x1)
 		{
 			step_n(term, ex, i);
 			mpf_mul(result, result, term);
 		}
-
 		n >>= 1;
 	}
+
+	igral_step_n(term, ex, bitlen);
+	mpf_mul(result, result, term);
 }
 
 /**
@@ -231,20 +262,6 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 }
 
 /**
- * Count the number of 1 bits in the  integer n
- */
-static int bitcount(unsigned long n)
-{
-	int cnt = 0;
-	while (n)
-	{
-		if (n & 0x1) cnt ++;
-		n >>= 1;
-	}
-	return cnt;
-}
-
-/**
  * Compute the assorted shift states needed for constructing
  * the dyadic sowtooth eigenfunctions.
  */
@@ -255,14 +272,7 @@ void get_shifts(Shifts *sh, unsigned long n)
 	sh->m = n;
 
 	/* Count total number of bits in n */
-	i = 0;
-	m = n;
-	while (m)
-	{
-		i++;
-		m >>=1;
-	}
-	sh->bitlen = i;
+	sh->bitlen = bitlength(n);
 
 	/* Store shift states */
 	i = sh->bitlen;
@@ -394,7 +404,8 @@ int main (int argc, char * argv[])
 		x_f = mpf_get_d(x);
 		walsh(y, x, n);
 		y_f = mpf_get_d(y);
-		blanc(y, w, x, n);
+		// blanc(y, w, x, n);
+		igral_walsh(y, x, n);
 		f_f = mpf_get_d(y);
 
 		printf("%d	%f	%g	%g\n", i, x_f, y_f, f_f);
