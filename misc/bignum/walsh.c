@@ -469,6 +469,7 @@ int main (int argc, char * argv[])
 	mpf_init(w);
 	mpf_set_d(w, w_f);
 
+#if 0
 	npts = 1233;
 	mpf_set_ui(step, 1);
 	mpf_div_ui(step, step, npts);
@@ -492,6 +493,19 @@ int main (int argc, char * argv[])
 		printf("%d	%f	%g	%g\n", i, x_f, y_f, f_f);
 
 		mpf_add(x, x, step);
+	}
+#endif
+
+	mpf_set_ui(x, 1);
+	mpf_div_2exp(x, x, n);
+	npts=500;
+
+	for (i=1; i<npts; i++)
+	{
+		igral_eigenfunc(y, w, &shifts, x, i);
+		f_f = mpf_get_d(y);
+
+		printf("%d	%g\n", i, f_f);
 	}
 
 	return 0;
