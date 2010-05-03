@@ -6872,7 +6872,13 @@ s_{1}\left(x\right)=\begin{cases}
 
 \end_inset
 
-The Rademacher functions 
+and extend it to the whole real-number line by making it be periodic (
+\emph on
+i.e.
+
+\emph default
+ so that its a square wave).
+ The Rademacher functions 
 \begin_inset Formula $r_{n}\left(x\right)$
 \end_inset
 
@@ -6881,7 +6887,7 @@ The Rademacher functions
 \end_inset
 
 .
- Given a finite sequence of integers 
+ Given a finite sequence of positive integers 
 \begin_inset Formula $n_{1}<n_{2}<n_{3}<\cdots<n_{k}$
 \end_inset
 
@@ -6891,7 +6897,8 @@ The Rademacher functions
 \end_inset
 
 .
- It is not hard to see that these are orthonormal; indeed, the 
+ It is not hard to see that these are orthonormal on the unit interval;
+ indeed, the 
 \begin_inset Formula $r_{n}$
 \end_inset
 
@@ -6901,7 +6908,7 @@ The Rademacher functions
 
 \end_inset
 
-These are most easily paramterized by means of an integer.
+These may be paramterized by means of an integer.
  Let 
 \begin_inset Formula $m$
 \end_inset
@@ -6921,7 +6928,7 @@ with each
 \begin_inset Formula $k$
 \end_inset
 
- for which all the 
+ above which all the 
 \begin_inset Formula $\beta_{k}$
 \end_inset
 
@@ -6967,7 +6974,7 @@ In essence, if
 
 \end_inset
 
-and these form a complete basis for the spce of square-integrable functions
+and these form a complete basis for the space of square-integrable functions
  on the unit interval
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -6976,11 +6983,38 @@ key "Carothers2005"
 \end_inset
 
 .
- Curiously, note that 
+ The Walsh functions have many curious properties; among those relevant
+ here are that 
 \begin_inset Formula $s_{m}\left(2x\right)=s_{2m}\left(x\right)$
 \end_inset
 
+ and that 
+\begin_inset Formula $s_{m}s_{n}=s_{m\oplus n}$
+\end_inset
+
+ where 
+\begin_inset Formula $m\oplus n$
+\end_inset
+
+ denotes the bitwise XOR of the binary expansion of the two integers 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+, and 
+\begin_inset Formula $s_{0}(x)=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $x$
+\end_inset
+
 .
+ That is, the non-negative integers form an abelian group under bitwise
+ XOR, and the Walsh functions are isomorphic, as a group, under multiplication.
  A sampling of these functions are shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7529,7 +7563,7 @@ Because all of these are constructed from step functions, they are easily
 \end_layout
 
 \begin_layout Standard
-Several curious facts about these functions should be noted.
+Several properties of these functions should be noted.
  First, because the Walsh functions 
 \begin_inset Formula $s_{m}$
 \end_inset
@@ -7542,16 +7576,48 @@ Several curious facts about these functions should be noted.
 \begin_inset Formula $\rho_{m}$
 \end_inset
 
- must be linearly independent, and must span 
+ also span 
 \begin_inset Formula $L_{2}\left[0,1\right]$
 \end_inset
 
- as well.
- However, it is not true that the 
+ (because each 
+\begin_inset Formula $\rho_{m}$
+\end_inset
+
+ contains 
+\begin_inset Formula $s_{m}$
+\end_inset
+
+ as a term), and are linearly independent (no 
+\begin_inset Formula $\rho_{m}$
+\end_inset
+
+ can be written as a sum of the others, becuase each contains a term 
+\begin_inset Formula $s_{m}$
+\end_inset
+
+ that cannot be cancelled out).
+ They are not, however, orthogonal: in general, one has 
+\begin_inset Formula $\int_{0}^{1}\rho_{m}\left(x\right)\rho_{n}\left(x\right)dx\ne0$
+\end_inset
+
+ whenever 
+\begin_inset Formula $m=n2^{k}$
+\end_inset
+
+ for some (positive or negative) integer 
+\begin_inset Formula $k.$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+By contrast, the 
 \begin_inset Formula $v_{m}$
 \end_inset
 
- are linearly independent.
+ are not linearly independent.
  Indeed, one readily verifies that 
 \begin_inset Formula $v_{2}=v_{1}/w$
 \end_inset
@@ -7579,7 +7645,19 @@ Several curious facts about these functions should be noted.
 \end_inset
 
  is odd.
- 
+ Since 
+\begin_inset Formula $\mathcal{L}_{c}$
+\end_inset
+
+ has a non-trivial kernel, it follows that the 
+\begin_inset Formula $v_{m}$
+\end_inset
+
+ cannot span 
+\begin_inset Formula $L_{2}\left[0,1\right]$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
