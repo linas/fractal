@@ -496,16 +496,36 @@ int main (int argc, char * argv[])
 	}
 #endif
 
-	mpf_set_ui(x, 1);
-	mpf_div_2exp(x, x, n);
+	mpf_set_ui(x, 2);
+	mpf_div_ui(x, x, 3);
 	npts=500;
 
 	for (i=1; i<npts; i++)
 	{
-		igral_eigenfunc(y, w, &shifts, x, i);
-		f_f = mpf_get_d(y);
+		int j;
+		double prev = 1.0;
+		double cur;
+		printf("%d", i);
+		for (j=0; j<6; j++)
+		{
+			mpf_set(y, x);
+			igral_eigenfunc(y, w, &shifts, y, i);
+			f_f = mpf_get_d(y);
 
-		printf("%d	%g\n", i, f_f);
+			mpf_set_ui(y, 1);
+			mpf_div_2exp(y, y, n+j);
+			mpf_add(y,y,x);
+			igral_eigenfunc(y, w, &shifts, y, i);
+			f_f -= mpf_get_d(y);
+
+#if 0
+		cur = f_f;
+		f_f /= prev;
+		prev = cur;
+#endif
+			printf("	%g", f_f);
+		}
+		printf("\n");
 	}
 
 	return 0;
