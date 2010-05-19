@@ -100,10 +100,60 @@ Aside from these basic functions, it also generates somewhat more semantically
 \end_layout
 
 \begin_layout Standard
-In general, predictions about the future are also hypothetical.
- Thus, in the sentence "The dog will eat it.", the verb "eat" gets marked
- as being hypothetical -- the dog hasn't eaten it yet, and there are no
- assurances that it will happen -- only that it could happen.
+Hypothetical statements occur in several forms: in statements about the
+ future, in assertive questions, and as certain dependent clauses.
+ So, for example, predictions about the future are always hypothetical.
+ In the sentence "
+\emph on
+The dog will eat it
+\emph default
+", the verb "
+\emph on
+eat
+\emph default
+" gets marked as being hypothetical -- the dog hasn't eaten it yet, and
+ there are no assurances that it will happen -- only that it could happen.
+ RelEx designates hypothetical or speculative statements by means of a feature
+ tag -- a single bit of markup, HYP, that is used to tag the verb making
+ the hypothetical assertion.
+ The generated output is thus:
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	_subj(eat, dog) 
+\end_layout
+
+\begin_layout Plain Layout
+
+	_obj(eat, it)
+\end_layout
+
+\begin_layout Plain Layout
+
+	tense(eat, imperative) 
+\end_layout
+
+\begin_layout Plain Layout
+
+	HYP(eat, T)
+\end_layout
+
+\end_inset
+
+
+\family default
+This listing, and the ones to follow, does not show all of the RelEx output;
+ feature markup for part of speech, noun number, gender, and other tags
+ will be omitted except as relevant to the examples.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -116,7 +166,15 @@ Speculation may be explicit or implicit: so "It might rain." is explicitly
 \end_layout
 
 \begin_layout Standard
-_subj(rain, it) _to-do(might, rain) tense(rain, infinitive) HYP(rain, T)
+
+\family typewriter
+_subj(rain, it) 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+_to-do(might, rain) tense(rain, infinitive) HYP(rain, T)
 \end_layout
 
 \begin_layout Standard
