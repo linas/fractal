@@ -37,6 +37,7 @@
 \tracking_changes false
 \output_changes false
 \author "" 
+\author "" 
 \end_header
 
 \begin_body
@@ -99,7 +100,7 @@ Aside from these basic functions, it also generates somewhat more semantically
  semantic approaches.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Hypothetical statements occur in several forms: in statements about the
  future, in assertive questions, and as certain dependent clauses.
  So, for example, predictions about the future are always hypothetical.
@@ -117,105 +118,281 @@ eat
  tag -- a single bit of markup, HYP, that is used to tag the verb making
  the hypothetical assertion.
  The generated output is thus:
+\begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+	_subj(eat, dog) 
+\end_layout
+
+\begin_layout Plain Layout
+	_obj(eat, it)
+\end_layout
+
+\begin_layout Plain Layout
+	tense(eat, imperative) 
+\end_layout
+
+\begin_layout Plain Layout
+	HYP(eat, T)
+\end_layout
+
+\end_inset
+
+This listing, and the ones to follow, does not show all of the RelEx output;
+ feature markup for part of speech, noun number, gender, tense, and other
+ tags will be omitted except as relevant to the examples.
+\end_layout
+
+\begin_layout Standard
+Speculation may be explicit or implicit: so "
+\emph on
+It might rain
+\emph default
+" is explicitly speculative, while "
+\emph on
+It will rain
+\emph default
+" seems to be very certain of itself, but is speculation none-the-less.
+ All assertions about the future are inherently hypothetical until the future
+ has become the past.
+ Thus, "
+\emph on
+It might rain
+\emph default
+" generates:
 \end_layout
 
 \begin_layout Plain Layout
 
 \family typewriter
 \begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
 inline false
 status open
 
 \begin_layout Plain Layout
 
-	_subj(eat, dog) 
+\family typewriter
+	_subj(rain, it) 
 \end_layout
 
 \begin_layout Plain Layout
 
-	_obj(eat, it)
+\family typewriter
+	_to-do(might, rain) 
 \end_layout
 
 \begin_layout Plain Layout
 
-	tense(eat, imperative) 
+\family typewriter
+	tense(rain, infinitive) 
 \end_layout
 
 \begin_layout Plain Layout
 
-	HYP(eat, T)
+\family typewriter
+	HYP(rain, T)
 \end_layout
 
 \end_inset
 
 
 \family default
-This listing, and the ones to follow, does not show all of the RelEx output;
- feature markup for part of speech, noun number, gender, and other tags
- will be omitted except as relevant to the examples.
- 
+while "
+\emph on
+It will rain
+\emph default
+" generates:
 \end_layout
 
 \begin_layout Standard
-Speculation may be explicit or implicit: so "It might rain." is explicitly
- speculative, while "It will rain." seems to be very certain of itself, but
- is speculation none-the-less.
- All assertions about the future are inherently hypothetical until the future
- has become the past.
- Thus, "It might rain." generates:
+\begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+	_subj(rain, it) 
 \end_layout
 
-\begin_layout Standard
-
-\family typewriter
-_subj(rain, it) 
+\begin_layout Plain Layout
+	tense(rain, future) 
 \end_layout
 
-\begin_layout Standard
-
-\family typewriter
-_to-do(might, rain) tense(rain, infinitive) HYP(rain, T)
+\begin_layout Plain Layout
+	HYP(rain, T)
 \end_layout
 
-\begin_layout Standard
-while "It will rain." generates:
-\end_layout
+\end_inset
 
-\begin_layout Standard
-_subj(rain, it) tense(rain, future) HYP(rain, T)
+
 \end_layout
 
 \begin_layout Standard
 Assertive questions are hypothetical.
- For example, the question "Fred is dead?" is an assertive question, and
- Fred's being dead is hypothetical -- it may or may not be true.
- Thus, the following is generated:
+ For example, the question "
+\emph on
+Fred is dead?
+\emph default
+" is an assertive question, and Fred's being dead is hypothetical -- it
+ may or may not be true.
+ Thus:
 \end_layout
 
 \begin_layout Standard
-_predadj(Fred, dead) TRUTH-QUERY-FLAG(dead, T) HYP(dead, T)
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+	_predadj(Fred, dead)
 \end_layout
 
-\begin_layout Standard
-to indicate that "deadness" is uncertain -- if it was certain, there'd be
+\begin_layout Plain Layout
+	TRUTH-QUERY-FLAG(dead, T)
+\end_layout
+
+\begin_layout Plain Layout
+	HYP(dead, T)
+\end_layout
+
+\end_inset
+
+indicates that "deadness" is uncertain -- if it was certain, there'd be
  no point in asking a question.
+ The tag 
+\family typewriter
+\size small
+TRUTH-QUERY-FLAG
+\family default
+\size default
+ indicates not only that the sentence was a question, but that the truth
+ of the verb 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+dead
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ is being queried about.
+ (The relation 
+\family typewriter
+\size small
+_predadj
+\family default
+\size default
+, the predicative adjective, is used here only to distinguish copular statements
+ such as 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Mr.
+ Smith is late
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ from 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+The late Mr.
+ Smith
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
 Seemingly factual statements can be hypothetical as well.
- For example, in the sentence "John says you like swimming", the words "like"
- and "swimming" both get marked as hypothetical.
- "Like" is hypothetical, because John may be lying, or John may be in error
- about your likes and dislikes.
- "Swimming" is hypothetical, because you may indeed like something, just
- not swimming.
- Therefore, the claim that "you like swimming", appearing as a clause, is
- speculative.
+ For example, in the sentence "
+\emph on
+John says you like swimming
+\emph default
+", the words "
+\emph on
+like
+\emph default
+" and "
+\emph on
+swimming
+\emph default
+" both get marked as hypothetical.
+ "
+\emph on
+Like
+\emph default
+" is hypothetical, because John may be lying, or John may be in error about
+ your likes and dislikes.
+ "
+\emph on
+Swimming
+\emph default
+" is hypothetical, because you may indeed like something, just not swimming.
+ Therefore, the claim that "
+\emph on
+you like swimming
+\emph default
+", appearing as a clause, is speculative.
 \end_layout
 
 \begin_layout Standard
-_subj(swim, you) _to-do(like, swim) tense(swim, progressive) HYP(swim, T)
- HYP(like, T) 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+	_subj(swim, you) 
+\end_layout
+
+\begin_layout Plain Layout
+	_to-do(like, swim) 
+\end_layout
+
+\begin_layout Plain Layout
+	tense(swim, progressive) 
+\end_layout
+
+\begin_layout Plain Layout
+	HYP(swim, T) 
+\end_layout
+
+\begin_layout Plain Layout
+	HYP(like, T) 
+\end_layout
+
+\end_inset
+
+This example demonstrates the relation 
+\family typewriter
+\size small
+_to-do
+\family default
+\size default
+, which indicates a clausal complement.
+ In general, both clausal complements, and adjectival complements (
+\family typewriter
+\size small
+_to-be
+\family default
+\size default
+) indicate hypothetical statments; this will be seen explicitly in the rules.
 \end_layout
 
 \begin_layout Section
