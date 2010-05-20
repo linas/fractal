@@ -425,6 +425,16 @@ The Rule Engine
 \end_layout
 
 \begin_layout Standard
+RelEx is a rule engine that extracts semantic content from syntactic constructio
+ns.
+ Specifically, it represents syntactic relations as a graph, and then applies
+ a sequence of rules to enlarge, prune, or transform the graph.
+ This section reviews this mechanism, and then examines each of the rules
+ currently implemented for tagging of speculative/hypothetical statements.
+ There are twelve such rules in total, for treating six classes of sentences.
+\end_layout
+
+\begin_layout Standard
 RelEx generates feature and dependency grammar markup by applying a sequence
  of pattern-matching rules to a labelled directed graph.
  An example of labelled directed graphs can be found in the hierarchical
@@ -496,13 +506,30 @@ then
 ', where the antecedent and consequent are both (sub-)graphs themselves.
  The rule engine searches out matching subgraphs, and creates the consequent
  when a match is found.
- As of the current version (1.3.0), RelEx hase twelve rules for identifying
+ 
+\end_layout
+
+\begin_layout Standard
+As of the current version (1.3.0), RelEx hase twelve rules for identifying
  hypotheticals.
- One fairly simple rule is the following:
+ One of the rules for tagging assertive questions (
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Fred is dead?
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+) as hypothetical is the following:
 \end_layout
 
 \begin_layout Standard
 \begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
 inline false
 status open
 
@@ -569,7 +596,7 @@ Qd
  with both the truth-query and hypothetical flags.
  The head-word was previously identified by an earlier sequence of rules;
  typically, it is the primary verb in the sentence.
- The above would have been the rule that tagged the example sentence 
+ For the example 
 \begin_inset Quotes eld
 \end_inset
 
@@ -581,17 +608,47 @@ Fred is dead?
 \begin_inset Quotes erd
 \end_inset
 
-.
- RelEx uses a second, very similar rule to identify essentially the same
- situation, arising as a different Link Grammar parse.
+, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+dead
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ was previously identified as the head-word; the above rule merely confirms
+ that the sentence was a declarative question, and then tags 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+dead
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ appropriately.
+ A second rule, very similar to this, is used to tag a Link Grammar parse
+ variant for copular declarative questions.
 \end_layout
 
 \begin_layout Standard
-A more complex rule is 
+Questions that ask about quantity, or, more generally, inquire about a putative
+ property of an object or situation are deemed hypothetical.
+ The core semantic idea here is that if its putative, then its hypothetical.
+ These are handled by three closesly related rules.
+ One is 
 \end_layout
 
 \begin_layout Standard
 \begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
 inline false
 status open
 
@@ -651,6 +708,7 @@ d.
 
 \begin_layout Standard
 \begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
 inline false
 status open
 
@@ -687,8 +745,22 @@ The above rule keyed off of a Link Grammar
 Dm
 \family default
 \size default
- link, used to identify determiners.
- A similar rule is used for adverbial constructions, such as 
+ link, used to identify determiners, together with previous rules that were
+ used to identify the 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+how_much
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ polyword.
+ Not all questions in this class make use of a determiner; more generally,
+ these employ adverbial constructions, such as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -700,7 +772,7 @@ How quickly did you read the book?
 \begin_inset Quotes erd
 \end_inset
 
- or 
+, 
 \begin_inset Quotes eld
 \end_inset
 
@@ -712,7 +784,20 @@ How tall is that building?
 \begin_inset Quotes erd
 \end_inset
 
-, where 
+, or adjectives playing an adverbial role: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+How safe is that vehicle?
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Here, 
 \begin_inset Quotes eld
 \end_inset
 
@@ -736,26 +821,136 @@ tall
 \begin_inset Quotes erd
 \end_inset
 
- act as adverbial modifiers.
- A third rule is used to identify 
+ are the adverbial modifiers; 
 \begin_inset Quotes eld
 \end_inset
 
 
 \emph on
-who?
+safe
 \emph default
 
 \begin_inset Quotes erd
 \end_inset
 
- questions as hypothetical.
- 
+ is an adjective acting as an adverbial modifiers; these are connected with
+ Link Grammar 
+\family typewriter
+\size small
+EE
+\family default
+\size default
+ or 
+\family typewriter
+\size small
+EA
+\family default
+\size default
+ links.
+ The questions are inherently speculative or putative: the vehicle may not
+ be safe at all.
 \end_layout
 
 \begin_layout Standard
-Two more rules are used to tag adjectival and clausal complements as hypothetica
-l, so, for example: 
+Another class of speculative questions ask for a perpetrator: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Who ate my lunch?
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ As before, the accusative nature of the question renders it speculative:
+ was it really eaten? The rule is simple:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+	
+if
+\end_layout
+
+\begin_layout Plain Layout
+		<F_R ref QUERY-TYPE> = who
+\end_layout
+
+\begin_layout Plain Layout
+	
+then
+\end_layout
+
+\begin_layout Plain Layout
+		<F_R head-word ref HYP> = T 
+\end_layout
+
+\end_inset
+
+the hard work having been the previous identification of the form of the
+ question.
+ The output for 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Who ate my lunch?
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	_obj(eat, lunch)
+\end_layout
+
+\begin_layout Plain Layout
+
+	_poss(lunch, me)
+\end_layout
+
+\begin_layout Plain Layout
+
+	_subj(eat, _$qVar)
+\end_layout
+
+\begin_layout Plain Layout
+
+	QUERY-TYPE(_$qVar, who)
+\end_layout
+
+\begin_layout Plain Layout
+
+	HYP(eat, T)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Another class of sentences are those with adjectival or clausal complements;
+ these are tagged as hypothetical.
+ For example: 
 \begin_inset Quotes eld
 \end_inset
 
@@ -772,6 +967,7 @@ Mary says the rose smelled sweet
 
 \begin_layout Standard
 \begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
 inline false
 status open
 
@@ -814,14 +1010,15 @@ _to-be
 \family default
 \size default
  relation identifies the copular construction of the clause.
- RelEx treats all such clausal constructions as inhrently speculative: this
- seems semantically reasonable, as there is always a claimant who may not
- be accurately reporting the facts.
+ RelEx treats all such clausal constructions as inherently speculative:
+ this seems semantically reasonable, as there is always a claimant who may
+ not be accurately reporting the facts.
  The rule for this tagging is trivial:
 \end_layout
 
 \begin_layout Standard
 \begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
 inline false
 status open
 
@@ -886,8 +1083,9 @@ that
 \end_inset
 
  in such constructions; however, it remains implicitly present as a dependency
- relation between the main sentence and the clause.
- A distinct rule marks the clause following a subordinating 
+ relation between the main sentence and the dependent clause.
+ In a similar vein, a distinct rule marks the clause following an explicit
+ subordinating 
 \begin_inset Quotes eld
 \end_inset
 
@@ -905,13 +1103,19 @@ that
 \begin_inset Quotes eld
 \end_inset
 
-I assumed that we would go.
+I assumed that we would go
 \emph default
 
 \begin_inset Quotes erd
 \end_inset
 
- 
+ results in the markup 
+\family typewriter
+\size small
+HYP(go)
+\family default
+\size default
+.
 \end_layout
 
 \begin_layout Standard
@@ -942,7 +1146,7 @@ I will do it if you say so
 \end_inset
 
 .
- The head word is 
+ The head word of the main clause is 
 \begin_inset Quotes eld
 \end_inset
 
@@ -984,11 +1188,14 @@ doing
 \end_inset
 
  remains hypothetical precisely because it is a semantic dependent.
+ But, as before, this inverted usage is readily visible in the syntactic
+ structure of the sentence.
  The RelEx rule is nearly trivial:
 \end_layout
 
 \begin_layout Standard
 \begin_inset listings
+lstparams "basicstyle={\small\ttfamily}"
 inline false
 status open
 
@@ -1012,13 +1219,37 @@ then
 
 \end_inset
 
-since the clauses were extracted by previous rules.
+the semantically dependent 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+I will do it
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ having been identified as the target of 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+if
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ by previous rules.
  
 \end_layout
 
 \begin_layout Standard
-Currently, RelEx tags all negative assertions as hypothetical; for example:
- 
+That last class of expressions that are marked as hypothetical are negative
+ assertions; for example: 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1051,14 +1282,11 @@ that isn't the case
  such tagging is indeed semantically appropriate.
  More importantly, this case illustrates the limits of a purely syntactic
  approach to identification of speculative/hypothetical statements.
- The speculative nature of the sentence is no longer readily appearent from
- its grammatical construction; the context of the surrounding paragraphs
+ The speculative nature of a negative assertion is no longer readily appearent
+ from its grammatical construction; the context of the surrounding paragraphs
  or dialog provides a semantic backdrop that is necessary to properly interpret
  the remark.
-\end_layout
-
-\begin_layout Standard
-
+ Syntax alone is no longer sufficient to handle the most frequent case.
 \end_layout
 
 \begin_layout Section
