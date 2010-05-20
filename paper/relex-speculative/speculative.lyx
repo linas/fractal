@@ -425,7 +425,64 @@ The Rule Engine
 \end_layout
 
 \begin_layout Standard
-Relex
+RelEx generates feature and dependency grammar markup by applying a sequence
+ of pattern-matching rules to a labelled directed graph.
+ An example of labelled directed graphs can be found in the hierarchical
+ file systems used by most operating systems.
+ In a file system, a directory listing shows either files or directories,
+ both having names.
+ One may move to a subdirectory, again containing named files or named directori
+es.
+ The graph is 
+\emph on
+not
+\emph default
+ acyclic; most hierarchical file systems allow '
+\emph on
+links
+\emph default
+', which point to directories or files in other locations.
+ Thus, although one can choose to think of the structure as a hierarchical
+ tree with links connecting subtrees every which-way, the proper way of
+ conceptualizing is to think of a general graph, with individual edges being
+ labelled arrows.
+\end_layout
+
+\begin_layout Standard
+In retrospect, it appears that a better design point would have been to
+ use a hypergraph for the data structure, as many relations are more easily
+ expressed, and operations more easily performed, on hypergraphs.
+ The OpenCog project [xxx need ref], for which RelEx provides the NLP front-end,
+ uses, at its core, a full hypergraph representation for its data.
+\end_layout
+
+\begin_layout Standard
+The graph is initially populated with Link Grammar parse data.
+ Thus, for example, for any given word, the word to the left and the word
+ to the right each appear in 
+\begin_inset Quotes eld
+\end_inset
+
+subdirectories
+\begin_inset Quotes erd
+\end_inset
+
+ named PREV and NEXT.
+ When feature markup is identified, it is placed in appropriate directories;
+ for example, part-of-speech markup will be placed in a diretory called
+ POS.
+\end_layout
+
+\begin_layout Standard
+will be placed in a directory named 
+\end_layout
+
+\begin_layout Standard
+can be thought of as having the 
+\end_layout
+
+\begin_layout Standard
+The graph 
 \end_layout
 
 \begin_layout Standard
