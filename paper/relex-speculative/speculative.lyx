@@ -737,11 +737,328 @@ tall
 \end_inset
 
  act as adverbial modifiers.
+ A third rule is used to identify 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+who?
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ questions as hypothetical.
  
 \end_layout
 
 \begin_layout Standard
-Another rule for Who?
+Two more rules are used to tag adjectival and clausal complements as hypothetica
+l, so, for example: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Mary says the rose smelled sweet
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ results in
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	_subj(say, Mary)
+\end_layout
+
+\begin_layout Plain Layout
+
+	_that(say, smell)
+\end_layout
+
+\begin_layout Plain Layout
+
+	_subj(smell, rose)
+\end_layout
+
+\begin_layout Plain Layout
+
+	_to-be(smell, sweet) 
+\end_layout
+
+\begin_layout Plain Layout
+
+	HYP(smell, T)
+\end_layout
+
+\begin_layout Plain Layout
+
+	HYP(sweet, T)
+\end_layout
+
+\end_inset
+
+Here, the 
+\family typewriter
+\size small
+_to-be
+\family default
+\size default
+ relation identifies the copular construction of the clause.
+ RelEx treats all such clausal constructions as inhrently speculative: this
+ seems semantically reasonable, as there is always a claimant who may not
+ be accurately reporting the facts.
+ The rule for this tagging is trivial:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+	
+if
+\end_layout
+
+\begin_layout Plain Layout
+		<_to-be> != % 
+\end_layout
+
+\begin_layout Plain Layout
+	
+then
+\end_layout
+
+\begin_layout Plain Layout
+		<_to-be HYP> = T 
+\end_layout
+
+\end_inset
+
+which searches for a subgraph where the labelled directed edge 
+\family typewriter
+\size small
+_to-be
+\family default
+\size default
+ exists (is not empty); if this edge exists, then what it is pointing at
+ is tagged as hypothetical.
+ The heavy lifting was done by prior rules that identified the clause itself.
+ Observe also that previous rules identified an implicit 
+\family typewriter
+\size small
+_that
+\family default
+\size default
+ relation in the sentence: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Mary says <that> ...
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ In English, one may omit the word 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+that
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ in such constructions; however, it remains implicitly present as a dependency
+ relation between the main sentence and the clause.
+ A distinct rule marks the clause following a subordinating 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+that
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ as hypothetical: 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+I assumed that we would go.
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Semantic and syntactic dependencies do not always correspond; they may be
+ inverted.
+ A fourth rule is used to tag clauses subordinate to 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+if
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+I will do it if you say so
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The head word is 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+do
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+, it is tagged as hypothetical.
+ Unlike the previous examples, it is not the dependent clause that is hypothetic
+al; but instead, the primary clause is.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+I will do it
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ is a promise, but it depends on your saying so; the sematic dependency
+ runs in the opposite direction from the grammatical dependency.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+doing
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ remains hypothetical precisely because it is a semantic dependent.
+ The RelEx rule is nearly trivial:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+	
+if
+\end_layout
+
+\begin_layout Plain Layout
+		<if> != %
+\end_layout
+
+\begin_layout Plain Layout
+	
+then
+\end_layout
+
+\begin_layout Plain Layout
+		<if HYP> = T 
+\end_layout
+
+\end_inset
+
+since the clauses were extracted by previous rules.
+ 
+\end_layout
+
+\begin_layout Standard
+Currently, RelEx tags all negative assertions as hypothetical; for example:
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+John wasn't there
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+that isn't the case
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The linguistic reasoning to support this is not well-grounded, but is based
+ on the notion that such negative assertions are generated as replies to
+ speculative questions, and thus are inherently argumentative, inheriting
+ the speculative nature of the question.
+ A proper study, based on corpus linguistics principles, might clarify whether
+ such tagging is indeed semantically appropriate.
+ More importantly, this case illustrates the limits of a purely syntactic
+ approach to identification of speculative/hypothetical statements.
+ The speculative nature of the sentence is no longer readily appearent from
+ its grammatical construction; the context of the surrounding paragraphs
+ or dialog provides a semantic backdrop that is necessary to properly interpret
+ the remark.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Section
