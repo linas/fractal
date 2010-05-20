@@ -474,23 +474,274 @@ subdirectories
 \end_layout
 
 \begin_layout Standard
-will be placed in a directory named 
+The graph is transformed by applying a sequence of rules, pattern-matching
+ to the antecedent, and creating the consequent.
+ That is, each rule has the form of '
+\family typewriter
+\size small
+if
+\family default
+\size default
+\emph on
+(antecedent) 
+\family typewriter
+\size small
+\emph default
+then
+\family default
+\size default
+\emph on
+ consequent
+\emph default
+', where the antecedent and consequent are both (sub-)graphs themselves.
+ The rule engine searches out matching subgraphs, and creates the consequent
+ when a match is found.
+ As of the current version (1.3.0), RelEx hase twelve rules for identifying
+ hypotheticals.
+ One fairly simple rule is the following:
 \end_layout
 
 \begin_layout Standard
-can be thought of as having the 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+	
+if
+\end_layout
+
+\begin_layout Plain Layout
+		<LAB> = 
+\backslash
+Qd
+\backslash
+.* 
+\end_layout
+
+\begin_layout Plain Layout
+		<F_L str> = LEFT-WALL
+\end_layout
+
+\begin_layout Plain Layout
+	
+then
+\end_layout
+
+\begin_layout Plain Layout
+		<F_R head-word ref TRUTH-QUERY-FLAG> = T 
+\end_layout
+
+\begin_layout Plain Layout
+		<F_R head-word ref HYP> = T 
+\end_layout
+
+\end_inset
+
+This rule looks for Link Grammar 
+\family typewriter
+\size small
+Qd
+\family default
+\size default
+ links attached to the 
+\family typewriter
+\size small
+LEFT-WALL
+\family default
+\size default
+.
+ In the Link Grammar, the 
+\family typewriter
+\size small
+LEFT-WALL
+\family default
+\size default
+ is the pseudo-word preceeding the first word of the sentance; the 
+\family typewriter
+\size small
+Qd
+\family default
+\size default
+ link is one of several commonly used when identifying questions of a certain
+ form.
+ If this pattern is found, then the head-word of the sentence is tagged
+ with both the truth-query and hypothetical flags.
+ The head-word was previously identified by an earlier sequence of rules;
+ typically, it is the primary verb in the sentence.
+ The above would have been the rule that tagged the example sentence 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Fred is dead?
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ RelEx uses a second, very similar rule to identify essentially the same
+ situation, arising as a different Link Grammar parse.
 \end_layout
 
 \begin_layout Standard
-The graph 
+A more complex rule is 
 \end_layout
 
 \begin_layout Standard
-hypergraph
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+	
+if
+\end_layout
+
+\begin_layout Plain Layout
+		<LAB> = 
+\backslash
+Dm.* 
+\end_layout
+
+\begin_layout Plain Layout
+		<F_L str> = how_much|how_many
+\end_layout
+
+\begin_layout Plain Layout
+	
+then
+\end_layout
+
+\begin_layout Plain Layout
+		<F_L ref name> = _$qVar
+\end_layout
+
+\begin_layout Plain Layout
+		<F_L ref QUERY-TYPE> = how_much
+\end_layout
+
+\begin_layout Plain Layout
+		<F_R head-word ref HYP> = T
+\end_layout
+
+\end_inset
+
+which is used to tag the question 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+How much coffee did you drink?
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Here, the question is asking for a quantity, thus a query variable is identifie
+d.
+ The question is accusative, and thus implicitly speculative: you may not
+ have drank any coffee at all.
+ The resulting output is 
 \end_layout
 
 \begin_layout Standard
-opencog pattern recognition pattern matching
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	_subj(drink, you)
+\end_layout
+
+\begin_layout Plain Layout
+
+	_obj(drink, coffee)
+\end_layout
+
+\begin_layout Plain Layout
+
+	_quantity(coffee, _$qVar)
+\end_layout
+
+\begin_layout Plain Layout
+
+	QUERY-TYPE(_$qVar, how_much)
+\end_layout
+
+\begin_layout Plain Layout
+
+	HYP(drink, T) 
+\end_layout
+
+\end_inset
+
+The above rule keyed off of a Link Grammar 
+\family typewriter
+\size small
+Dm
+\family default
+\size default
+ link, used to identify determiners.
+ A similar rule is used for adverbial constructions, such as 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+How quickly did you read the book?
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+How tall is that building?
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+, where 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+quickly
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+tall
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ act as adverbial modifiers.
+ 
+\end_layout
+
+\begin_layout Standard
+Another rule for Who?
 \end_layout
 
 \begin_layout Section
