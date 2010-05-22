@@ -69,8 +69,9 @@ The RelEx semantic relation extractor is a dependency parser that generates
  and clauses.
  These are identified by means of fixed, linguist-generated rules applied
  to syntactically parsed sentences.
- By using purely syntactic information, this approach thus provides a baseline
- for extracting the semantic content of speculative sentences.
+ By using purely syntactic information, obtained from single sentences,
+ this approach provides a baseline for extracting the semantic content of
+ speculative sentences.
  This short note reviews the operation of the RelEx system, focusing on
  how it identifies of hypothetical and speculative statements.
 \end_layout
@@ -129,10 +130,11 @@ key "Lin1998minipar"
 Aside from these basic functions, it also generates somewhat more semantically
  oriented feature and relation markup, which is not found in other parsers.
  This includes basic entity extraction; identification of times, dates,
- distances and units; identification of the queried variable in a question;
- of the comparison variable in comparative statements and questions; and
- the identification of speculative and hypothetical statements and questions.
- All of this is done purely by means of a set of rules applied to a graphical
+ distances and units; identification of the query type, and the queried
+ variable in a question; of the comparison variable in comparative statements
+ and questions; and the identification of speculative and hypothetical statement
+s and questions.
+ All of this is done purely by means of a set of rules applied to a graph
  representation of the parsed sentence.
  Insofar as this information is obtained by purely syntactic methods, scoped
  to single, grammatically well-structured sentences, it should provide a
@@ -142,7 +144,7 @@ Aside from these basic functions, it also generates somewhat more semantically
 
 \begin_layout Standard
 Hypothetical statements occur in several forms: in statements about the
- future, in assertive questions, and as certain dependent clauses.
+ future, in assertive questions, and as many dependent clauses.
  So, for example, predictions about the future are always hypothetical.
  In the sentence "
 \emph on
@@ -154,6 +156,8 @@ eat
 \emph default
 " gets marked as being hypothetical -- the dog hasn't eaten it yet, and
  there are no assurances that it will happen -- only that it could happen.
+ In this case, an imperative or future tense verb is sufficient to indicate
+ the speculative nature of the statement.
  RelEx designates hypothetical or speculative statements by means of a feature
  tag -- a single bit of markup, HYP, that is used to tag the verb making
  the hypothetical assertion.
@@ -199,6 +203,27 @@ _obj
 \size default
  are standard subject and object dependencies; as usual, the head word is
  always listed first.
+ The 
+\family typewriter
+\size small
+tense
+\family default
+\size default
+ and 
+\family typewriter
+\size small
+HYP
+\family default
+\size default
+ are feature tags: they identify a property, naming the word as the first
+ argument, and the proprty value as second.
+ Here, 
+\family typewriter
+\size small
+T
+\family default
+\size default
+, for 'true', simply means that the property is present.
  This listing, and the ones to follow, does not show all of the RelEx output;
  feature markup for part of speech, noun number, gender, tense, and other
  tags will be omitted except as relevant to the examples.
@@ -340,8 +365,13 @@ TRUTH-QUERY
 _predadj
 \family default
 \size default
-, the predicative adjective, is used here only to distinguish copular statements
- such as 
+, the predicative adjective, is used here instead of 
+\family typewriter
+\size small
+_subj(dead, Fred)
+\family default
+\size default
+, to distinguish copular statements such as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -367,6 +397,12 @@ The late Mr.
 \begin_inset Quotes erd
 \end_inset
 
+, the later generating 
+\family typewriter
+\size small
+_adj(Smith, late)
+\family default
+\size default
 ).
 \end_layout
 
@@ -467,9 +503,9 @@ RelEx is a rule engine that extracts semantic content from syntactic constructio
 ns.
  Specifically, it represents syntactic relations as a graph, and then applies
  a sequence of rules to enlarge, prune, or transform the graph.
- This section reviews this mechanism, and then examines each of the rules
- currently implemented for tagging of speculative/hypothetical statements.
- There are twelve such rules in total, for treating six classes of sentences.
+ This section reviews this mechanism; the next examines the rules used to
+ identify speculative/hypothetical statements.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -513,7 +549,57 @@ key "Goertzel2008,Goertzel2009"
 
 \begin_layout Standard
 The graph is initially populated with Link Grammar parse data.
- Thus, for example, for any given word, the word to the left and the word
+ Link Grammar parses result in non-directional, labelled links between pairs
+ of words (which may or may not be immediate neighbors).
+ For example: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+ 	
+\lang english
++-Ds-+--Ss--+--I-+-Ox+
+\end_layout
+
+\begin_layout Plain Layout
+
+ 	
+\lang english
+|
+   
+\lang english
+ | 
+     
+\lang english
+| 
+   
+\lang english
+|
+  
+\lang english
+ |
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\lang english
+the dog.n will.v eat it
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, for example, for any given word, the word to the left and the word
  to the right each appear in 
 \begin_inset Quotes eld
 \end_inset
@@ -526,6 +612,74 @@ subdirectories
  When feature markup is identified, it is placed in appropriate directories;
  for example, part-of-speech markup will be placed in a directory called
  POS.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Relation Graph
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pre-edit.eps
+	width 65col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure illustrates a match for the rule antecedent 
+\family typewriter
+\size small
+F_R str = will
+\family default
+\size default
+.
+ Starting at the indicated match point, there is an arrow labellel 
+\family typewriter
+\size small
+F_R
+\family default
+\size default
+ pointing at a node with another arrow labelled 
+\family typewriter
+\size small
+str
+\family default
+\size default
+ which points at a leaf node holding the string 
+\emph on
+'will
+\emph default
+'.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -552,6 +706,16 @@ then
  The rule engine searches out matching subgraphs, and creates the consequent
  when a match is found.
  
+\end_layout
+
+\begin_layout Section
+Identifying Hypotheticals
+\end_layout
+
+\begin_layout Standard
+and then examines each of the rules currently implemented for tagging of
+ speculative/hypothetical statements.
+ There are twelve such rules in total, for treating six classes of sentences.
 \end_layout
 
 \begin_layout Standard
