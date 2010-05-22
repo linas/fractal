@@ -694,7 +694,15 @@ name "fig:Relation-Graph"
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Formula $\qquad$
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 3em
 \end_inset
 
 
@@ -748,7 +756,7 @@ str
 
 \begin_layout Standard
 The graph is transformed by applying a sequence of rules, pattern-matching
- to the antecedent, and creating the consequent.
+ to an antecedent, and creating the consequent.
  That is, each rule has the form of '
 \family typewriter
 \size small
@@ -769,7 +777,105 @@ then
 ', where the antecedent and consequent are both (sub-)graphs themselves.
  The rule engine searches out matching subgraphs, and creates the consequent
  when a match is found.
- 
+ An example of applying a rule consequent is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Edited-Graph"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Edited Graph
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Edited-Graph"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \quad{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename post-edit.eps
+	width 90col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure illustrates the result of applying the rule consequent 
+\family typewriter
+\size small
+F_R ref HYP = T
+\family default
+\size default
+ at the indicated match point.
+ Two arrows, labelled 
+\family typewriter
+\size small
+ref
+\family default
+\size default
+ and 
+\family typewriter
+\size small
+HYP
+\family default
+\size default
+ have been created, the last arrow pointing at the leaf node 
+\family typewriter
+\size small
+T
+\family default
+\size default
+.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -777,15 +883,15 @@ Identifying Hypotheticals
 \end_layout
 
 \begin_layout Standard
-and then examines each of the rules currently implemented for tagging of
- speculative/hypothetical statements.
- There are twelve such rules in total, for treating six classes of sentences.
+As of the current version (1.3.0), RelEx has twelve rules for identifying
+ hypothetical or speculative verbs in clauses; these rules treat six classes
+ of sentences.
+ This section reviews these rules.
+ 
 \end_layout
 
 \begin_layout Standard
-As of the current version (1.3.0), RelEx has twelve rules for identifying
- hypotheticals.
- One of the rules for tagging assertive questions (
+One of the rules for tagging assertive questions (
 \begin_inset Quotes eld
 \end_inset
 
@@ -842,13 +948,13 @@ Qd
 
 \end_inset
 
-This rule looks for Link Grammar 
+This rule looks for a Link Grammar 
 \family typewriter
 \size small
 Qd
 \family default
 \size default
- links attached to the 
+ link attached to the 
 \family typewriter
 \size small
 LEFT-WALL
@@ -913,6 +1019,30 @@ dead
  appropriately.
  A second rule, very similar to this, is used to tag a Link Grammar parse
  variant for copular declarative questions.
+ It should be clear here that Link Grammar performed the 
+\begin_inset Quotes eld
+\end_inset
+
+hard work
+\begin_inset Quotes erd
+\end_inset
+
+ of determining that a 
+\family typewriter
+\size small
+Qd
+\family default
+\size default
+ link is syntactically appropriate for the parse; this rule reveals the
+ semantic content associated with this link.
+ It works because the 
+\family typewriter
+\size small
+Qd
+\family default
+\size default
+ link, when attached to the left wall, is always associated with truth query
+ questions (which thus are hypothetical).
 \end_layout
 
 \begin_layout Standard
@@ -968,7 +1098,7 @@ Dm.*
 
 \end_inset
 
-which is used to tag the question 
+which is used to tag a question such as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -982,7 +1112,7 @@ How much coffee did you drink?
 
 .
  Here, the question is asking for a quantity, thus a query variable is identifie
-d.
+d, as well as the type of the query.
  The question is accusative, and thus implicitly speculative: you may not
  have drank any coffee at all.
  The resulting output is 
@@ -1027,21 +1157,23 @@ The above rule keyed off of a Link Grammar
 Dm
 \family default
 \size default
- link, used to identify determiners, together with previous rules that were
- used to identify the 
-\begin_inset Quotes eld
-\end_inset
-
-
+ link, used to identify determiners for uncountable (mass) nouns, together
+ with previous rules that were used to identify the 
 \emph on
-how_much
+'how_much
 \emph default
+' polyword.
+ Both the determiner, and one of the two polywords must be explictly present
+ in order for the head-word ('
+\emph on
+drink
+\emph default
+' in this example) to be labeled as hypothetical.
+ 
+\end_layout
 
-\begin_inset Quotes erd
-\end_inset
-
- polyword.
- Not all questions in this class make use of a determiner; more generally,
+\begin_layout Standard
+Not all questions in this class make use of a determiner; more generally,
  these employ adverbial constructions, such as 
 \begin_inset Quotes eld
 \end_inset
@@ -1134,6 +1266,31 @@ EA
 \end_layout
 
 \begin_layout Standard
+Note also that the above rule also determined a query variable, and the
+ type of the query.
+ A distinct rule determined that the query variable is for a quantity of
+ coffee.
+ In general, all questions in this class will not only have the head-verb
+ tagged as hypothetical, but will also result in a query variable being
+ identified.
+ These are all presented at the output in the form of dependencies; these
+ dependencies are not strictly syntactic in nature, because they introduce
+ nodes that are not present as words in the input sentence.
+ This should be contrasted to the output of purely syntactic parsers, such
+ as MiniPar or the Stanford parser, which generate no such output.
+ Roughly speaking, RelEx attempts to get at some of the deeper structures
+ behind the surface, such as those discussed in dependency frameworks like
+ Mel'cuk's Meaning-Text Theory 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mel'cuk1987,Steele1990"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 Another class of speculative questions ask for a perpetrator: 
 \begin_inset Quotes eld
 \end_inset
@@ -1147,7 +1304,7 @@ Who ate my lunch?
 \end_inset
 
  As before, the accusative nature of the question renders it speculative:
- was it really eaten? The rule is simple:
+ was it really eaten? The rule for identifying these is simple:
 \end_layout
 
 \begin_layout Standard
@@ -1445,6 +1602,19 @@ do
 \end_inset
 
 , it is tagged as hypothetical.
+ The syntactically dependent clause is 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+if you say so
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
  Unlike the previous examples, it is not the dependent clause that is hypothetic
 al; but instead, the primary clause is.
  
@@ -1574,7 +1744,38 @@ that isn't the case
  from its grammatical construction; the context of the surrounding paragraphs
  or dialog provides a semantic backdrop that is necessary to properly interpret
  the remark.
- Syntax alone is no longer sufficient to handle the most frequent case.
+ Syntatactic parsing works precisely because the most frequent, 
+\begin_inset Quotes eld
+\end_inset
+
+common-sense
+\begin_inset Quotes erd
+\end_inset
+
+ meaning is encoded in a fixed way in sentence structure.
+ Syntactic parsing breaks down whenever the speaker is 
+\begin_inset Quotes eld
+\end_inset
+
+playing games
+\begin_inset Quotes erd
+\end_inset
+
+ with the words, encoding a meaning that runs counter to the usual 
+\begin_inset Quotes eld
+\end_inset
+
+common-sense
+\begin_inset Quotes erd
+\end_inset
+
+ structure of a sentence.
+ In the vast majority of speech and writing, the direct, common-sense interpreta
+tion of sentence structure is used by the speaker, and is assumed by the
+ listeners.
+ For negative assertions, the syntax no longer suggests a relatively unambiguous
+ meaning; using simple rules operating on single sentences is no longer
+ a productive way of extracting the semantic content.
 \end_layout
 
 \begin_layout Section
@@ -1591,10 +1792,9 @@ A fair amount of speculative content can be identified purely from the syntactic
  As always, though, syntactic analysis succeeds only when sentences are
  well-formed, are constructed in a reasonably unambiguous fashion, with
  no sly, ironic or sarcastic intent on the part of the speaker.
- Outside of this domain, straightforward syntactic methods are doomed; one
- would need the semantic backdrop of the conversation, of the speaker's
- role, or at least a more robust understanding of slang, euphemisms or even
- of 
+ Outside of this domain, straightforward syntactic methods are doomed.
+ Perhaps some simpler approaches can provide a more robust understanding
+ of slang, euphemisms or even of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1603,11 +1803,26 @@ ungrammatical
 \end_inset
 
  or sloppy dialects.
+ More difficult are situations that require the semantic backdrop of the
+ conversation, knowledge of the speaker's role and intent, grasp of the
+ social posturing and social dynamics of the text.
+ Such dynamics can radically alter meaning, and strongly decouple the semantics
+ from the syntax -- the superficial 
+\begin_inset Quotes eld
+\end_inset
+
+common-sense
+\begin_inset Quotes erd
+\end_inset
+
+ interpretation obtained from the syntactic structure of a sentence may
+ no longer apply (but curiously, would still be required to fully appreciate
+ a witty twist of phrase).
 \end_layout
 
 \begin_layout Standard
-The rules described above were linguist-developed, painstakingly crafted
- by hand to capture semantic content.
+The rules described in this note were linguist-developed, painstakingly
+ crafted by hand to capture semantic content.
  The authors are involved in active research to automatically learn such
  rules, ideally using a form of unsupervised learning, such as that described
  in Dekang Lin's DIRT
