@@ -64,9 +64,15 @@ int main (int argc, char * argv[])
 	int npts = 300;
 	int i;
 
+	if (2>argc)
+	{
+		fprintf(stderr, "Usage: %s <npts\n", argv[0]);
+		exit(1);
+	}
+
 	npts = atoi(argv[1]);
 
-	for (i=0; i<npts; i++)
+	for (i=1; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
 #if 0
