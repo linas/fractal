@@ -373,7 +373,7 @@ void get_coeffs(Shifts *sh, double w)
 		sh->a_k[n-k] = acc;
 		tk *= 2.0;
 	}
-#if 0
+#ifdef PRINT_WALSH_COEFFS_A1
 // The below was used to graph the coefficients for the gkw paper.
 // printf ("duuude m=%lu bitlen=%d aks=%g %g %g %g\n", 
 printf ("%lu	%d	%g	%g	%g	%g\n", 
@@ -411,7 +411,8 @@ void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
 }
 
 /**
- * Compute the integral of the eigenfunction of the dyadic sawtooth, associated with w
+ * Compute the integral of the eigenfunction of the dyadic sawtooth,
+ * associated with w.
  */
 void igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
 {
@@ -432,6 +433,44 @@ void igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n
 		mpf_add(result, result, term);
 	}
 }
+
+#ifdef PRINT_WALSH_COEFFS_A1
+/**
+ * This was used to generate the graph of a_1 for the the GKW paper.
+ * the actual print statement is in the get_coeffs() function.
+ */
+int main (int argc, char * argv[])
+{
+	double  w_f;
+	int n = 5;
+	int prec, nbits;
+	Shifts shifts;
+
+	if (3 > argc)
+	{
+		fprintf(stderr, "Usage: %s <decimal-precision> <w>\n", argv[0]);
+		exit(1);
+	}
+
+	/* prec is decimal-places of precision */
+	prec = 50;
+	prec = atoi(argv[1]);
+
+	/* Set the precision (number of binary bits) */
+	nbits = 3.3*prec;
+	mpf_set_default_prec (nbits);
+
+	/* Other misc args */
+	w_f = atof(argv[2]);
+
+	for (n=1; n<=200; n++)
+	{
+		get_shifts(&shifts, n);
+		get_coeffs(&shifts, w_f);
+	}
+	return 0;
+}
+#endif
 
 int main (int argc, char * argv[])
 {
