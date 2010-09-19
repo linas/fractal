@@ -486,7 +486,7 @@ int main (int argc, char * argv[])
 int main (int argc, char * argv[])
 {
 	mpf_t r, x, y, step, w;
-	double r_f, x_f, y_f, f_f, w_f;
+	double r_f, x_f, y_f, f_f, w_f, yf_prev;
 	int n = 5;
 	int i, npts;
 	int prec, nbits;
@@ -527,6 +527,7 @@ int main (int argc, char * argv[])
 	mpf_div_ui(step, step, npts);
 
 	mpf_set_ui(r, 0);
+	yf_prev = 0.0;
 	for (i=0; i<npts; i++)
 	{
 		// step_1(y, x);
@@ -548,7 +549,10 @@ int main (int argc, char * argv[])
 		igral_eigenfunc(y, w, &shifts, x, n);
 		f_f = mpf_get_d(y);
 
-		printf("%d	%f	%f	%g	%g\n", i, r_f, x_f, y_f, f_f);
+		double delta = f_f - yf_prev;
+		yf_prev = f_f;
+		delta *= ((double) npts);
+		printf("%d	%f	%f	%g	%g	%g\n", i, r_f, x_f, y_f, f_f, delta);
 
 		mpf_add(r, r, step);
 	}
