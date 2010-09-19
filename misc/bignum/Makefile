@@ -41,7 +41,7 @@ sawtooth:	sawtooth.o $(MPLIB)
 sho:	sho.o $(MPLIB)
 stieltjes:	stieltjes.o $(MPLIB)
 trunc:	trunc.o
-walsh:	walsh.o
+walsh:	walsh.o $(MPLIB)
 zero-cross:	zero-cross.o
 zeta-zeros:	zeta-zeros.o $(MPLIB)
 
