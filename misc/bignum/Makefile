@@ -8,7 +8,7 @@ CC = cc
 EXES= bernoulli bound bs bsubn cache-fill cont_frac \
 		count-prime db-merge db-prt \
       dsubn entropy exact gkw-diag hurwitz hurwitz-euler \
-		minima misc-test mp_zeta_test picturez \
+		minima misc-test mp_quest_test mp_zeta_test picturez \
       poly-perf qint sawtooth sho stieltjes trunc \
 		walsh zero-cross zeta-zeros
 
@@ -33,6 +33,7 @@ gkw-diag:	gkw-diag.o $(MPLIB)
 hurwitz:	hurwitz.o $(MPLIB)
 hurwitz-euler:	hurwitz-euler.o $(MPLIB)
 misc-test:	misc-test.o $(MPLIB)
+mp_quest_test:	mp_quest_test.o $(MPLIB)
 mp_zeta_test:	mp_zeta_test.o $(MPLIB)
 picturez:	picturez.o $(MPLIB)
 poly-perf:	poly-perf.o $(MPLIB)
