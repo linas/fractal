@@ -542,15 +542,15 @@ int main (int argc, char * argv[])
 
 		mpf_set(x, r);
 		// Want integrals convoluted with question mark.
-		// question_mark(x, r, prec);
+		question_mark(x, r, prec);
 
 		x_f = mpf_get_d(x);
 		// walsh(y, x, n);
 		// blanc(y, w, x, n, prec);
 		// igral_walsh(y, x, n);
-		igral_blanc(y, w, x, n, prec);
+		// igral_blanc(y, w, x, n, prec);
+		eigenfunc(y, w, &shifts, x, n, prec);
 		y_f = mpf_get_d(y);
-		// eigenfunc(y, w, &shifts, x, n);
 		igral_eigenfunc(y, w, &shifts, x, n, prec);
 		f_f = mpf_get_d(y);
 
