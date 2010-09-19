@@ -7605,7 +7605,7 @@ Because all of these are constructed from step functions, they are easily
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -7831,80 +7831,10 @@ By contrast, the
 \end_layout
 
 \begin_layout Standard
-To recap: the motivation for all of the preceeding mechanics is to find
- solutions to the GKW operator, by means of the similarity transformation
- described in section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Constructing-GKW-Eigenfunctions"
-
-\end_inset
-
-.
- By construction, the 
-\begin_inset Formula $v_{k}$
-\end_inset
-
- are, by similarity transform, the desired eigenfunctions.
- Unfortunately, they are not even continuous under the natural topology
- on the reals (they are discontinuous at all dyadic rationals).
- However, since they do span (XXX span what, precisely?), one may assume
- that proper linear combinations of these may be continuous, or even differentia
-ble.
- That is, for any sequence of real numbers 
-\begin_inset Formula $c_{k}$
-\end_inset
-
-, the sum 
-\begin_inset Formula \[
-f\left(x\right)=\sum_{k=1}^{\infty}c_{k}v_{2k+1}\left(x\right)\]
-
-\end_inset
-
-is an eigenfunction of the dyadic sawtooth
-\begin_inset Formula $\mathcal{L}_{c}f=\lambda f$
-\end_inset
-
- and likewise, 
-\begin_inset Formula $\phi=?^{\prime}f\circ?$
-\end_inset
-
- is an eigenfunction of the GKW, 
-\begin_inset Formula $\mathcal{L}_{h}\phi=\lambda\phi$
-\end_inset
-
- with the same eigenvalue 
-\begin_inset Formula $\lambda$
-\end_inset
-
-.
- There must exist certain sequences of 
-\begin_inset Formula $\left\{ c_{k}\right\} $
-\end_inset
-
- for which 
-\begin_inset Formula $\phi$
-\end_inset
-
- is continuous, and, of these, some for which 
-\begin_inset Formula $\phi$
-\end_inset
-
- is differentiable, or even a polynomial series, although, clearly, the
- last is not possible for any value 
-\begin_inset Formula $\lambda$
-\end_inset
-
-, as the spectrum of the GKW is discrete when the eigenfuctions are infinitely
- differentiable.
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -8006,65 +7936,86 @@ m/walsh.gplot
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-The continuous ones are the ones for which the filters are bounded: 
-\begin_inset Formula \[
-\lim_{a\to b}\frac{1}{b-a}\int_{a}^{b}\phi\left(x\right)dx=\lim_{a\to b}\frac{1}{b-a}\int_{?\left(a\right)}^{?\left(b\right)}f\left(x\right)dx<\infty\]
-
-\end_inset
-
-This condition, derived in section 
+To recap: the motivation for all of the preceeding mechanics is to find
+ solutions to the GKW operator, by means of the similarity transformation
+ described in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Constructing-GKW-Eigenfunctions"
 
 \end_inset
 
-, is required of continuous solutions to the GKW, and is explored in the
- next sections.
- A sampling of some of the eigenfunctions, and thier integrals, is shown
- in figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Integrals-of-Eigenfunctions"
+.
+ By construction, the 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+ are, by similarity transform, the desired eigenfunctions.
+ Unfortunately, they are not even continuous under the natural topology
+ on the reals (they are discontinuous at all dyadic rationals).
+ However, since they do span (XXX span what, precisely?), one may assume
+ that proper linear combinations of these may be continuous, or even differentia
+ble.
+ That is, for any sequence of real numbers 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+, the sum 
+\begin_inset Formula \[
+f\left(x\right)=\sum_{k=1}^{\infty}c_{k}v_{2k+1}\left(x\right)\]
 
 \end_inset
 
-, 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Integrals-of-GKW"
-
+is an eigenfunction of the dyadic sawtooth
+\begin_inset Formula $\mathcal{L}_{c}f=\lambda f$
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Fractal-Eigenfunctions-of-GKW"
+ and likewise, 
+\begin_inset Formula $\phi=?^{\prime}f\circ?$
+\end_inset
 
+ is an eigenfunction of the GKW, 
+\begin_inset Formula $\mathcal{L}_{h}\phi=\lambda\phi$
+\end_inset
+
+ with the same eigenvalue 
+\begin_inset Formula $\lambda$
 \end_inset
 
 .
+ There must exist certain sequences of 
+\begin_inset Formula $\left\{ c_{k}\right\} $
+\end_inset
+
+ for which 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is continuous, and, of these, some for which 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is differentiable, or even a polynomial series, although, clearly, the
+ last is not possible for any value 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, as the spectrum of the GKW is discrete when the eigenfuctions are infinitely
+ differentiable.
+ 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -8152,13 +8103,50 @@ less easily approximated by taking numerical differences of
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The continuous ones are the ones for which the filters are bounded: 
+\begin_inset Formula \[
+\lim_{a\to b}\frac{1}{b-a}\int_{a}^{b}\phi\left(x\right)dx=\lim_{a\to b}\frac{1}{b-a}\int_{?\left(a\right)}^{?\left(b\right)}f\left(x\right)dx<\infty\]
+
+\end_inset
+
+This condition, derived in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Constructing-GKW-Eigenfunctions"
+
+\end_inset
+
+, is required of continuous solutions to the GKW, and is explored in the
+ next sections.
+ A sampling of some of the eigenfunctions, and thier integrals, is shown
+ in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Integrals-of-Eigenfunctions"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Integrals-of-GKW"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Fractal-Eigenfunctions-of-GKW"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
