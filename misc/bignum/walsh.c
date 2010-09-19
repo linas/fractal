@@ -257,10 +257,12 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
  * be in the unit interval.
  *
  * n must be less that 2^32 or 2^64
+ * prec is the number of decimal digits of desired precision.
  */
-void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
+void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
 {
-	int i;
+	double lw;
+	int i, nterms;
 	mpf_t term, ex, tn, wn;
 	mpf_init(term);
 	mpf_init(ex);
@@ -272,8 +274,12 @@ void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 	mpf_set_ui(tn, 1);
 	mpf_set_ui(result, 0);
 
-	// XXX should be some variable number of terms
-	for (i=1; i<=60; i++)
+	// Compute the required number of terms
+	lw = - log(mpf_get_d(w));
+	nterms = ((double) prec) * 2.3026 / lw;
+	nterms += 4; // for good luck.
+
+	for (i=1; i<=nterms; i++)
 	{
 		mpf_mul(term, tn, ex);
 		igral_walsh(term, term, n);
@@ -410,8 +416,12 @@ void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n, int 
  * of "corrections" to turn this into an eigenfunc.
  *
  * Integral is from zero to x.
+ *
+ * prec is the number of decimal places of desired precision.
  */
-void igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
+void
+igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x,
+                unsigned long n, int prec)
 {
 	int i;
 	mpf_t ex, term, ak;
@@ -420,7 +430,7 @@ void igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n
 	mpf_init(ak);
 
 	mpf_set(ex, x);
-	igral_blanc(result, w, x, n);
+	igral_blanc(result, w, x, n, prec);
 
 	for (i=1; i<sh->bitlen; i++)
 	{
@@ -529,11 +539,11 @@ int main (int argc, char * argv[])
 		x_f = mpf_get_d(x);
 		// walsh(y, x, n);
 		// blanc(y, w, x, n, prec);
-		igral_walsh(y, x, n);
+		// igral_walsh(y, x, n);
+		igral_blanc(y, w, x, n, prec);
 		y_f = mpf_get_d(y);
-		// igral_blanc(y, w, x, n);
 		// eigenfunc(y, w, &shifts, x, n);
-		igral_eigenfunc(y, w, &shifts, x, n);
+		igral_eigenfunc(y, w, &shifts, x, n, prec);
 		f_f = mpf_get_d(y);
 
 		double delta = f_f - yf_prev;
