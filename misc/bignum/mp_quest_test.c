@@ -2,6 +2,8 @@
 /*
  * Small unit-test module for the MP minkowski-question-mark function
  *
+ * Currently, testing is done by visual examination only.
+ *
  * Copyright (C) 2010 Linas Vepstas <linasvepstas@gmail.com>
  */
 

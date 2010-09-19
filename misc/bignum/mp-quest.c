@@ -37,6 +37,11 @@ void question_mark (mpf_t qmark, const mpf_t x, unsigned int prec)
 	long bitsdone, ibits;
 	int place;
 
+	mpf_set_ui(qmark, 0);
+
+	/* if x == 0 then we are done */
+	if (0 == mpf_sgn(x)) return;
+
 	mpf_init(ox);
 	mpf_init(h);
 	mpf_init(bits);
@@ -44,10 +49,6 @@ void question_mark (mpf_t qmark, const mpf_t x, unsigned int prec)
 
 	mpf_set(h, x);
 	mpf_set_ui(one, 1);
-	mpf_set_ui(qmark, 0);
-
-	/* if x == 0 then we are done */
-	if (0 == mpf_sgn(x)) return;
 
 	/* Get the number of binary bits from prec = log_2 10 * prec */
 	long nbits = (long) floor (3.321 * prec);
@@ -78,6 +79,17 @@ void question_mark (mpf_t qmark, const mpf_t x, unsigned int prec)
 			mpf_sub(qmark, qmark, ox);
 		}
 
+#define DEBUG 1
+#ifdef DEBUG
+		{
+			double h_f, q_f, b_f;
+			h_f = mpf_get_d(h);
+			q_f = mpf_get_d(qmark);
+			b_f = mpf_get_d(bits);
+			printf("duuude place=%d, bitsdone=%ld h=%g q=%g bits=%f s=%d\n",
+				place, bitsdone, h_f, q_f, b_f, mpf_sgn(h));
+		}
+#endif
 		// If the remainder is zero, we are done.
 		if (0 == mpf_sgn(h)) break;
 
