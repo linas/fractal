@@ -253,8 +253,8 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
  * Integral of the n'th blancmange based on the n'th walsh function.
  * By "blancmange" we mean the sum over powers of w i.e.
  * sum_k w^k f_n(2^k x)  where f_n is the n'th walsh func.
- * as usual, w should be less than 1 to converge, and should
- * be in the unit interval.
+ * as usual, w should be less than 1 to strictly converge.
+ * (converges conditinally for w less than 2).
  *
  * n must be less that 2^32 or 2^64
  * prec is the number of decimal digits of desired precision.
@@ -283,6 +283,8 @@ void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
 	{
 		mpf_mul(term, tn, ex);
 		igral_walsh(term, term, n);
+		mpf_div(term, term, tn);    // Remember to normalize! Dohh!
+
 		mpf_mul(term, term, wn);
 		mpf_add(result, result, term);
 
