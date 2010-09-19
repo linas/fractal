@@ -1,6 +1,6 @@
 /*
  * Eigenfunctions of the dyadic sawtooth, based on the 
- * Walsh functions.
+ * Walsh functions. And integrals thereof.
  *
  * Linas Vepstas May 2010
  */
@@ -263,7 +263,12 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 }
 
 /**
- * Implement the integral of the n'th blancmange based on the n'th walsh function
+ * Integral of the n'th blancmange based on the n'th walsh function.
+ * By "blancmange" we mean the sum over powers of w i.e.
+ * sum_k w^k f_n(2^k x)  where f_n is the n'th walsh func.
+ * as usual, w should be less than 1 to converge, and should
+ * be in the unit interval.
+ *
  * n must be less that 2^32 or 2^64
  */
 void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
@@ -412,7 +417,9 @@ void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
 
 /**
  * Compute the integral of the eigenfunction of the dyadic sawtooth,
- * associated with w.
+ * associated with w.  This is as given in the paper gkw.pdf with
+ * the primary part given by the blancmange, plus a finite series
+ * of "corrections" to turn this into an eigenfunc.
  */
 void igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
 {
