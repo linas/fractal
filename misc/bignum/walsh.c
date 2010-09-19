@@ -93,7 +93,6 @@ void step_1(mpf_t result, mpf_t x)
  */
 void tent_1(mpf_t result, mpf_t x)
 {
-	mpz_t intpart;
 	mpf_t ex;
 	static int is_init=0;
 	static mpf_t half;
@@ -108,11 +107,8 @@ void tent_1(mpf_t result, mpf_t x)
 
 	/* Compute the floor of x, and subtract it */
 	mpf_init(ex);
-	mpf_set(ex, x);
-	mpz_init(intpart);
-	mpz_set_f(intpart, ex);
-	mpf_set_z(result, intpart);
-	mpf_sub(result, ex, result);
+	mpf_floor(ex, x);
+	mpf_sub(result, x, ex);
 
 	if (0 < mpf_cmp(half, result))
 	{
@@ -144,28 +140,18 @@ void step_n(mpf_t result, mpf_t x, int n)
 /**
  * Returns integral of the square wave of frequency 2^(n-1)
  * The slope of the returned function is either +1 or -1.
- * n must be less than 32/64
- * x must be positive
  */
 void igral_step_n(mpf_t result, mpf_t x, int n)
 {
-	mpf_t ex;
-	unsigned long tp;
-
 	if (1 == n)
 	{
 		tent_1(result, x);
 		return;
 	}
 
-	mpf_init(ex);
-	mpf_set(ex, x);
-
-	tp = 1<<(n-1);
-	mpf_set_ui(result, tp);
-	mpf_mul(result, result, ex); 
+	mpf_mul_2exp(result, x, n-1); 
 	tent_1(result, result);
-	mpf_div_ui(result, result, tp);
+	mpf_div_2exp(result, result, n-1);
 }
 
 /**
@@ -542,9 +528,9 @@ int main (int argc, char * argv[])
 
 		x_f = mpf_get_d(x);
 		// walsh(y, x, n);
-		blanc(y, w, x, n, prec);
+		// blanc(y, w, x, n, prec);
+		igral_walsh(y, x, n);
 		y_f = mpf_get_d(y);
-		// igral_walsh(y, x, n);
 		// igral_blanc(y, w, x, n);
 		// eigenfunc(y, w, &shifts, x, n);
 		igral_eigenfunc(y, w, &shifts, x, n);
