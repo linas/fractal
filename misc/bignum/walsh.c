@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
+#include "mp-quest.h"
 
 #define BITLEN 32
 
@@ -379,7 +380,7 @@ void get_coeffs(Shifts *sh, double w)
 		tk *= 2.0;
 	}
 #ifdef PRINT_WALSH_COEFFS_A1
-// The below was used to graph the coefficients for the gkw paper.
+// The below was used to graph the coefficient A1 for the gkw paper.
 // printf ("duuude m=%lu bitlen=%d aks=%g %g %g %g\n", 
 printf ("%lu	%d	%g	%g	%g	%g\n", 
 	sh->m-1,
@@ -416,10 +417,12 @@ void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
 }
 
 /**
- * Compute the integral of the eigenfunction of the dyadic sawtooth,
+ * Compute the integral of the n'th eigenfunction of the dyadic sawtooth,
  * associated with w.  This is as given in the paper gkw.pdf with
  * the primary part given by the blancmange, plus a finite series
  * of "corrections" to turn this into an eigenfunc.
+ *
+ * Integral is from zero to x.
  */
 void igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
 {
@@ -445,6 +448,7 @@ void igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n
 /**
  * This was used to generate the graph of a_1 for the the GKW paper.
  * the actual print statement is in the get_coeffs() function.
+ * To get this to work, be sure to touch the #define in functioin above.
  */
 int main (int argc, char * argv[])
 {
@@ -481,7 +485,7 @@ int main (int argc, char * argv[])
 
 int main (int argc, char * argv[])
 {
-	mpf_t x, y, step, w;
+	mpf_t x, y, r, step, w;
 	double x_f, y_f, f_f, w_f;
 	int n = 5;
 	int i, npts;
@@ -511,20 +515,26 @@ int main (int argc, char * argv[])
 
 	mpf_init(x);
 	mpf_init(y);
+	mpf_init(r);
 	mpf_init(step);
 	mpf_init(w);
 	mpf_set_d(w, w_f);
 
-#if 0
+#if 1
+	// Create graphs of integral for a single n at a time.
 	npts = 1233;
 	mpf_set_ui(step, 1);
 	mpf_div_ui(step, step, npts);
 
-	mpf_set_ui(x, 0);
+	mpf_set_ui(r, 0);
 	for (i=0; i<npts; i++)
 	{
 		// step_1(y, x);
 		// step_n(y, x, 3);
+
+		// Want integrals convoluted with question mark.
+		// mpf_set(x, r);
+		question_mark(x, r, prec);
 
 		x_f = mpf_get_d(x);
 		walsh(y, x, n);
@@ -538,14 +548,21 @@ int main (int argc, char * argv[])
 
 		printf("%d	%f	%g	%g\n", i, x_f, y_f, f_f);
 
-		mpf_add(x, x, step);
+		mpf_add(r, r, step);
 	}
 #endif
 
+#ifdef SHOW_DIVERGENCE_OF_DERIVATIVE
+	/* The loop below explores a progressively narrower integration
+	 * interval centered about x=2/3. i.e. an interaval from x to 
+	 * x+ 2^(-n) which is exptect to .. whatever... the idea is graph and
+	 * find out.
+	 */
 	mpf_set_ui(x, 2);
 	mpf_div_ui(x, x, 3);
 	npts=500;
 
+	// graph of integral, 
 	for (i=1; i<npts; i++)
 	{
 		int j;
@@ -573,6 +590,7 @@ int main (int argc, char * argv[])
 		}
 		printf("\n");
 	}
+#endif
 
 	return 0;
 }
