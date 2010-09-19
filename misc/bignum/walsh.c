@@ -485,8 +485,8 @@ int main (int argc, char * argv[])
 
 int main (int argc, char * argv[])
 {
-	mpf_t x, y, r, step, w;
-	double x_f, y_f, f_f, w_f;
+	mpf_t r, x, y, step, w;
+	double r_f, x_f, y_f, f_f, w_f;
 	int n = 5;
 	int i, npts;
 	int prec, nbits;
@@ -532,6 +532,8 @@ int main (int argc, char * argv[])
 		// step_1(y, x);
 		// step_n(y, x, 3);
 
+		r_f = mpf_get_d(r);
+
 		// Want integrals convoluted with question mark.
 		// mpf_set(x, r);
 		question_mark(x, r, prec);
@@ -546,7 +548,7 @@ int main (int argc, char * argv[])
 		igral_eigenfunc(y, w, &shifts, x, n);
 		f_f = mpf_get_d(y);
 
-		printf("%d	%f	%g	%g\n", i, x_f, y_f, f_f);
+		printf("%d	%f	%f	%g	%g\n", i, r_f, x_f, y_f, f_f);
 
 		mpf_add(r, r, step);
 	}
