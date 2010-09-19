@@ -169,8 +169,9 @@ void igral_step_n(mpf_t result, mpf_t x, int n)
 }
 
 /**
- * Implement the n'th walsh function
- * n must be less that 2^32 or 2^64
+ * Implement the n'th walsh function.
+ * n must be less than 2^32 or 2^64, depending on the
+ * BITLEN setting.
  */
 void walsh(mpf_t result, mpf_t x, unsigned long n)
 {
@@ -178,6 +179,8 @@ void walsh(mpf_t result, mpf_t x, unsigned long n)
 	mpf_t term, ex;
 	mpf_init(term);
 	mpf_init(ex);
+
+	// Make copy of x, in case 'result' shares same storage location.
 	mpf_set(ex, x);
 
 	mpf_set_ui(result, 1);
@@ -224,11 +227,14 @@ void igral_walsh(mpf_t result, mpf_t x, unsigned long n)
 
 /**
  * Implement the n'th blancmange based on the n'th walsh function
+ * w must be greater than zero.
  * n must be less that 2^32 or 2^64
+ * prec is the desired number of decimal palces of precision.
  */
-void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
+void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
 {
-	int i;
+	double lw;
+	int i, nterms;
 	mpf_t ex, term, tn, wn;
 	mpf_init(ex);
 	mpf_init(term);
@@ -240,8 +246,12 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n)
 	mpf_set_ui(tn, 1);
 	mpf_set_ui(result, 0);
 
-	// XXX should be some variable number of terms
-	for (i=1; i<=60; i++)
+	// Compute the required number of terms
+	lw = - log(mpf_get_d(w));
+	nterms = ((double) prec) * 2.3026 / lw;
+	nterms += 4; // for good luck.
+
+	for (i=1; i<=nterms; i++)
 	{
 		mpf_mul(term, tn, ex);
 		walsh(term, term, n);
@@ -385,8 +395,9 @@ printf ("%lu	%d	%g	%g	%g	%g\n",
 
 /**
  * Compute the eigenfunction of the dyadic sawtooth, associated with w
+ * prec is the desired decimal precision.
  */
-void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
+void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n, int prec)
 {
 	int i;
 	mpf_t ex, term, ak;
@@ -395,7 +406,7 @@ void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n)
 	mpf_init(ak);
 
 	mpf_set(ex, x);
-	blanc(result, w, x, n);
+	blanc(result, w, x, n, prec);
 
 	for (i=1; i<sh->bitlen; i++)
 	{
@@ -531,7 +542,7 @@ int main (int argc, char * argv[])
 
 		x_f = mpf_get_d(x);
 		// walsh(y, x, n);
-		blanc(y, w, x, n);
+		blanc(y, w, x, n, prec);
 		y_f = mpf_get_d(y);
 		// igral_walsh(y, x, n);
 		// igral_blanc(y, w, x, n);
