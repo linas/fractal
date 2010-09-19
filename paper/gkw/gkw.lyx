@@ -6863,6 +6863,108 @@ The Walsh functions provide an orthonormal basis for the Banach space
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Walsh Functions
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Walsh-Functions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename walsh-1.eps
+	width 48col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename walsh-2.eps
+	width 48col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename walsh-3.eps
+	width 48col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename walsh-7.eps
+	width 48col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The above figures show the Walsh functions 
+\begin_inset Formula $s_{m}$
+\end_inset
+
+, in red, and the self-similar fractals 
+\begin_inset Formula $\rho_{m}$
+\end_inset
+
+, in green, for 
+\begin_inset Formula $m=1,2,3,7$
+\end_inset
+
+.
+ The value of 
+\begin_inset Formula $w=0.6$
+\end_inset
+
+ was used in the sum for the fractal curves.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+graphs created by src/fractal/misc/bignum/walsh.c and walsh.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The Walsh functions are built from the Rademacher functions.
  Define the step function 
 \begin_inset Formula \[
@@ -7032,17 +7134,13 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Walsh Functions
+Integrals of Eigenfunctions
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Walsh-Functions"
+name "fig:Integrals-of-Eigenfunctions"
 
 \end_inset
 
@@ -7056,14 +7154,14 @@ name "fig:Walsh-Functions"
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename walsh-1.eps
+	filename dysaw-eigen-integral-1.eps
 	width 48col%
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename walsh-2.eps
+	filename dysaw-eigen-integral-3.eps
 	width 48col%
 
 \end_inset
@@ -7073,14 +7171,14 @@ name "fig:Walsh-Functions"
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename walsh-3.eps
+	filename dysaw-eigen-integral-5.eps
 	width 48col%
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename walsh-7.eps
+	filename dysaw-eigen-integral-7.eps
 	width 48col%
 
 \end_inset
@@ -7089,30 +7187,58 @@ name "fig:Walsh-Functions"
 \end_layout
 
 \begin_layout Plain Layout
-The above figures show the Walsh functions 
-\begin_inset Formula $s_{m}$
+Figures showing integrals of the dyadic sawtooth eigenfunctions 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dyadic-walsh-eigenfunc"
+
 \end_inset
 
-, in red, and the self-similar fractals 
-\begin_inset Formula $\rho_{m}$
-\end_inset
-
-, in green, for 
-\begin_inset Formula $m=1,2,3,7$
-\end_inset
-
-.
- The value of 
+, for 
 \begin_inset Formula $w=0.6$
 \end_inset
 
- was used in the sum for the fractal curves.
- 
+.
+ Specifically, these figures show
+\begin_inset Formula $\int_{0}^{x}v_{k}\left(y\right)dy$
+\end_inset
+
+ for 
+\begin_inset Formula $k=1,3,5,7$
+\end_inset
+
+.
+ These integrals are easily computed, as the integrals of the Walsh functions
+ are simply a sequence of upward or downward-pointing triangles or tents.
+ Thus, the first figure is just an iterated triangle, leading to the blancmange
+ or Takagi curve (corresponding to that shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Takagi-Curve"
+
+\end_inset
+
+, but for 
+\begin_inset Formula $w=0.3$
+\end_inset
+
+; a factor of 1/2 resulting from integration).
+ In general one has 
+\begin_inset Formula $\int_{0}^{1}v_{k}\left(y\right)dy=0$
+\end_inset
+
+, which follows since the integral of any Walsh function is zero over the
+ unit interval, and the 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+ are simply linear combinations of the Walsh functions.
 \begin_inset Note Note
 status collapsed
 
 \begin_layout Plain Layout
-graphs created by src/fractal/misc/bignum/walsh.c and walsh.gplot
+this was created with misc/bignum/walsh.c and plotted with src/fractal/misc/bignu
+m/walsh.gplot
 \end_layout
 
 \end_inset
@@ -7123,10 +7249,6 @@ graphs created by src/fractal/misc/bignum/walsh.c and walsh.gplot
 \begin_layout Plain Layout
 
 \lyxline
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -7611,10 +7733,10 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Integrals of Eigenfunctions
+Integrals of GKW eigenfunctions
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Integrals-of-Eigenfunctions"
+name "fig:Integrals-of-GKW"
 
 \end_inset
 
@@ -7628,14 +7750,14 @@ name "fig:Integrals-of-Eigenfunctions"
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename dysaw-eigen-integral-1.eps
+	filename gkw-eigen-integral-1.eps
 	width 48col%
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename dysaw-eigen-integral-3.eps
+	filename gkw-eigen-integral-3.eps
 	width 48col%
 
 \end_inset
@@ -7645,36 +7767,33 @@ name "fig:Integrals-of-Eigenfunctions"
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename dysaw-eigen-integral-5.eps
+	filename gkw-eigen-integral-5.eps
 	width 48col%
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename dysaw-eigen-integral-7.eps
+	filename gkw-eigen-integral-7.eps
 	width 48col%
 
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_layout Plain Layout
-Figures showing integrals of the dyadic sawtooth eigenfunctions 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:dyadic-walsh-eigenfunc"
-
+These figures show the integrals of GKW eigenfunctions 
+\begin_inset Formula $\phi_{k}=?^{\prime}v_{k}\circ?$
 \end_inset
 
-, for 
+ for 
 \begin_inset Formula $w=0.6$
 \end_inset
 
 .
  Specifically, these figures show
-\begin_inset Formula $\int_{0}^{x}v_{k}\left(y\right)dy$
+\begin_inset Formula $\int_{0}^{x}\phi_{k}\left(y\right)dy=\int_{0}^{?(x)}v_{k}\left(z\right)dz$
 \end_inset
 
  for 
@@ -7682,31 +7801,15 @@ reference "eq:dyadic-walsh-eigenfunc"
 \end_inset
 
 .
- These integrals are easily computed, as the integrals of the Walsh functions
- are simply a sequence of upward or downward-pointing triangles or tents.
- Thus, the first figure is just an iterated triangle, leading to the blancmange
- or Takagi curve (corresponding to that shown in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Takagi-Curve"
-
-\end_inset
-
-, but for 
-\begin_inset Formula $w=0.3$
-\end_inset
-
-; a factor of 1/2 resulting from integration).
- In general one has 
-\begin_inset Formula $\int_{0}^{1}v_{k}\left(y\right)dy=0$
-\end_inset
-
-, which follows since the integral of any Walsh function is zero over the
- unit interval, and the 
+ These integrals are easily computed, as the integrals of the 
 \begin_inset Formula $v_{k}$
 \end_inset
 
- are simply linear combinations of the Walsh functions.
+ are easily computed, as noted in the caption to the previous set of graphs,
+ and the computation of the Question Mark is equally straight-forward.
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Note Note
 status collapsed
 
@@ -7844,187 +7947,6 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Integrals of GKW eigenfunctions
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Integrals-of-GKW"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename gkw-eigen-integral-1.eps
-	width 48col%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename gkw-eigen-integral-3.eps
-	width 48col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename gkw-eigen-integral-5.eps
-	width 48col%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename gkw-eigen-integral-7.eps
-	width 48col%
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Plain Layout
-These figures show the integrals of GKW eigenfunctions 
-\begin_inset Formula $\phi_{k}=?^{\prime}v_{k}\circ?$
-\end_inset
-
- for 
-\begin_inset Formula $w=0.6$
-\end_inset
-
-.
- Specifically, these figures show
-\begin_inset Formula $\int_{0}^{x}\phi_{k}\left(y\right)dy=\int_{0}^{?(x)}v_{k}\left(z\right)dz$
-\end_inset
-
- for 
-\begin_inset Formula $k=1,3,5,7$
-\end_inset
-
-.
- These integrals are easily computed, as the integrals of the 
-\begin_inset Formula $v_{k}$
-\end_inset
-
- are easily computed, as noted in the caption to the previous set of graphs,
- and the computation of the Question Mark is equally straight-forward.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-this was created with misc/bignum/walsh.c and plotted with src/fractal/misc/bignu
-m/walsh.gplot
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lyxline
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-To recap: the motivation for all of the preceeding mechanics is to find
- solutions to the GKW operator, by means of the similarity transformation
- described in section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Constructing-GKW-Eigenfunctions"
-
-\end_inset
-
-.
- By construction, the 
-\begin_inset Formula $v_{k}$
-\end_inset
-
- are, by similarity transform, the desired eigenfunctions.
- Unfortunately, they are not even continuous under the natural topology
- on the reals (they are discontinuous at all dyadic rationals).
- However, since they do span (XXX span what, precisely?), one may assume
- that proper linear combinations of these may be continuous, or even differentia
-ble.
- That is, for any sequence of real numbers 
-\begin_inset Formula $c_{k}$
-\end_inset
-
-, the sum 
-\begin_inset Formula \[
-f\left(x\right)=\sum_{k=1}^{\infty}c_{k}v_{2k+1}\left(x\right)\]
-
-\end_inset
-
-is an eigenfunction of the dyadic sawtooth
-\begin_inset Formula $\mathcal{L}_{c}f=\lambda f$
-\end_inset
-
- and likewise, 
-\begin_inset Formula $\phi=?^{\prime}f\circ?$
-\end_inset
-
- is an eigenfunction of the GKW, 
-\begin_inset Formula $\mathcal{L}_{h}\phi=\lambda\phi$
-\end_inset
-
- with the same eigenvalue 
-\begin_inset Formula $\lambda$
-\end_inset
-
-.
- There must exist certain sequences of 
-\begin_inset Formula $\left\{ c_{k}\right\} $
-\end_inset
-
- for which 
-\begin_inset Formula $\phi$
-\end_inset
-
- is continuous, and, of these, some for which 
-\begin_inset Formula $\phi$
-\end_inset
-
- is differentiable, or even a polynomial series, although, clearly, the
- last is not possible for any value 
-\begin_inset Formula $\lambda$
-\end_inset
-
-, as the spectrum of the GKW is discrete when the eigenfuctions are infinitely
- differentiable.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
 Fractal Eigenfunctions of GKW
 \begin_inset CommandInset label
 LatexCommand label
@@ -8110,6 +8032,76 @@ less easily approximated by taking numerical differences of
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+To recap: the motivation for all of the preceeding mechanics is to find
+ solutions to the GKW operator, by means of the similarity transformation
+ described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Constructing-GKW-Eigenfunctions"
+
+\end_inset
+
+.
+ By construction, the 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+ are, by similarity transform, the desired eigenfunctions.
+ Unfortunately, they are not even continuous under the natural topology
+ on the reals (they are discontinuous at all dyadic rationals).
+ However, since they do span (XXX span what, precisely?), one may assume
+ that proper linear combinations of these may be continuous, or even differentia
+ble.
+ That is, for any sequence of real numbers 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+, the sum 
+\begin_inset Formula \[
+f\left(x\right)=\sum_{k=1}^{\infty}c_{k}v_{2k+1}\left(x\right)\]
+
+\end_inset
+
+is an eigenfunction of the dyadic sawtooth
+\begin_inset Formula $\mathcal{L}_{c}f=\lambda f$
+\end_inset
+
+ and likewise, 
+\begin_inset Formula $\phi=?^{\prime}f\circ?$
+\end_inset
+
+ is an eigenfunction of the GKW, 
+\begin_inset Formula $\mathcal{L}_{h}\phi=\lambda\phi$
+\end_inset
+
+ with the same eigenvalue 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ There must exist certain sequences of 
+\begin_inset Formula $\left\{ c_{k}\right\} $
+\end_inset
+
+ for which 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is continuous, and, of these, some for which 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is differentiable, or even a polynomial series, although, clearly, the
+ last is not possible for any value 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, as the spectrum of the GKW is discrete when the eigenfuctions are infinitely
+ differentiable.
+ 
 \end_layout
 
 \begin_layout Standard
