@@ -59,14 +59,13 @@ static int bitcount(unsigned long n)
  */
 void step_1(mpf_t result, mpf_t x)
 {
-	mpz_t intpart;
 	mpf_t ex;
-	static int is_init=0;
+	static int is_initialized=0;
 	static mpf_t half;
 
-	if (0 == is_init)
+	if (0 == is_initialized)
 	{
-		is_init = 1;
+		is_initialized = 1;
 		mpf_init(half);
 		mpf_set_ui(half, 1);
 		mpf_div_ui(half, half, 2);
@@ -74,11 +73,8 @@ void step_1(mpf_t result, mpf_t x)
 
 	/* Compute the floor of x, and subtract it */
 	mpf_init(ex);
-	mpf_set(ex, x);
-	mpz_init(intpart);
-	mpz_set_f(intpart, ex);
-	mpf_set_z(result, intpart);
-	mpf_sub(result, ex, result);
+	mpf_floor(ex, x);
+	mpf_sub(result, x, ex);
 
 	if (0 < mpf_cmp(half, result))
 	{
@@ -127,14 +123,11 @@ void tent_1(mpf_t result, mpf_t x)
 }
 
 /**
- * returns square wave of frequency 2^(n-1)
- * n must be less than 32/64
- * x must be positive
+ * Returns square wave of frequency 2^(n-1)
  */
 void step_n(mpf_t result, mpf_t x, int n)
 {
 	mpf_t ex;
-	unsigned long tp;
 
 	if (1 == n)
 	{
@@ -142,13 +135,10 @@ void step_n(mpf_t result, mpf_t x, int n)
 		return;
 	}
 
+	// Make copy of x, in case 'result' is same storage location as x.
 	mpf_init(ex);
-	mpf_set(ex, x);
-
-	tp = 1<<(n-1);
-	mpf_set_ui(result, tp);
-	mpf_mul(result, result, ex); 
-	step_1(result, result);
+	mpf_mul_2exp(ex, x, n-1);
+	step_1(result, ex);
 }
 
 /**
@@ -535,14 +525,14 @@ int main (int argc, char * argv[])
 
 		r_f = mpf_get_d(r);
 
+		mpf_set(x, r);
 		// Want integrals convoluted with question mark.
-		// mpf_set(x, r);
-		question_mark(x, r, prec);
+		// question_mark(x, r, prec);
 
 		x_f = mpf_get_d(x);
-		walsh(y, x, n);
+		// walsh(y, x, n);
+		blanc(y, w, x, n);
 		y_f = mpf_get_d(y);
-		// blanc(y, w, x, n);
 		// igral_walsh(y, x, n);
 		// igral_blanc(y, w, x, n);
 		// eigenfunc(y, w, &shifts, x, n);
