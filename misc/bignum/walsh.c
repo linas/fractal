@@ -275,12 +275,18 @@ void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
 	mpf_set_ui(result, 0);
 
 	// Compute the required number of terms
-	lw = - log(mpf_get_d(w));
+	lw = - log(0.5 * mpf_get_d(w));
 	nterms = ((double) prec) * 2.3026 / lw;
 	nterms += 4; // for good luck.
 
 	for (i=1; i<=nterms; i++)
 	{
+		/* Compute the integral of the n'th walsh function, for
+		 * argument 2^(i-1)*x.  Remember to divide by 2^(i-1)*x
+		 * afterwards, as otherwise integral is off by this factor.
+		 * Altnerately, we could have multiplied n by 2, but this
+		 * would have overflowed more easily, since n is limited.
+		 */
 		mpf_mul(term, tn, ex);
 		igral_walsh(term, term, n);
 		mpf_div(term, term, tn);    // Remember to normalize! Dohh!
