@@ -81,7 +81,7 @@ void question_mark (mpf_t qmark, const mpf_t x, unsigned int prec)
 			mpf_sub(qmark, qmark, ox);
 		}
 
-#define DEBUG 0
+// #define DEBUG 1
 #ifdef DEBUG
 		{
 			double h_f, q_f, b_f;
