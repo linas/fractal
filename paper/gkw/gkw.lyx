@@ -7602,6 +7602,132 @@ Because all of these are constructed from step functions, they are easily
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Integrals of Eigenfunctions
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Integrals-of-Eigenfunctions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename dysaw-eigen-integral-1.eps
+	width 48col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename dysaw-eigen-integral-3.eps
+	width 48col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename dysaw-eigen-integral-5.eps
+	width 48col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename dysaw-eigen-integral-7.eps
+	width 48col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Figures showing integrals of the dyadic sawtooth eigenfunctions 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dyadic-walsh-eigenfunc"
+
+\end_inset
+
+, for 
+\begin_inset Formula $w=0.6$
+\end_inset
+
+.
+ Specifically, these figures show
+\begin_inset Formula $\int_{0}^{x}v_{k}\left(y\right)dy$
+\end_inset
+
+ for 
+\begin_inset Formula $k=1,3,5,7$
+\end_inset
+
+.
+ These integrals are easily computed, as the integrals of the Walsh functions
+ are simply a sequence of upward or downward-pointing triangles or tents.
+ Thus, the first figure is just an iterated triangle, leading to the blancmange
+ or Takagi curve, the same as that shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Takagi-Curve"
+
+\end_inset
+
+.
+ In general one has, 
+\begin_inset Formula $\int_{0}^{1}v_{k}\left(y\right)dy=0$
+\end_inset
+
+, which follows since the integral of any Walsh function is zero over the
+ unit interval, and the 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+ are simply linear combinations of the Walsh functions.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+this was created with misc/bignum/walsh.c and plotted with src/fractal/misc/bignu
+m/walsh.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Several properties of these functions should be noted.
  First, because the Walsh functions 
 \begin_inset Formula $s_{m}$
@@ -7711,17 +7837,14 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Integrals of Eigenfunctions
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Integrals-of-Eigenfunctions"
-
-\end_inset
-
-
+Eigenfunctions of the Dyadic Sawtooth
 \end_layout
 
 \end_inset
@@ -7731,14 +7854,14 @@ name "fig:Integrals-of-Eigenfunctions"
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename dysaw-eigen-integral-1.eps
+	filename dyadic-saw-fractal-eigen-1.eps
 	width 48col%
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename dysaw-eigen-integral-3.eps
+	filename dyadic-saw-fractal-eigen-3.eps
 	width 48col%
 
 \end_inset
@@ -7748,14 +7871,14 @@ name "fig:Integrals-of-Eigenfunctions"
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename dysaw-eigen-integral-5.eps
-	width 48col%
+	filename dyadic-saw-fractal-eigen-5.eps
+	width 48cm
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename dysaw-eigen-integral-7.eps
+	filename dyadic-saw-fractal-eigen-7.eps
 	width 48col%
 
 \end_inset
@@ -7764,7 +7887,11 @@ name "fig:Integrals-of-Eigenfunctions"
 \end_layout
 
 \begin_layout Plain Layout
-Figures showing integrals of the dyadic sawtooth eigenfunctions 
+These graphs show a sampling of the eigenfunctions 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+, given in eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:dyadic-walsh-eigenfunc"
@@ -7772,46 +7899,21 @@ reference "eq:dyadic-walsh-eigenfunc"
 \end_inset
 
 , for 
+\begin_inset Formula $k=1,3,5,7$
+\end_inset
+
+ and 
 \begin_inset Formula $w=0.6$
 \end_inset
 
 .
- Specifically, these figures show
-\begin_inset Formula $\int_{0}^{x}v_{k}\left(y\right)dy$
-\end_inset
-
- for 
-\begin_inset Formula $k=1,3,5,7$
-\end_inset
-
-.
- These integrals are easily computed, as the integrals of the Walsh functions
- are simply a sequence of upward or downward-pointing triangles or tents.
- Thus, the first figure is just an iterated triangle, leading to the blancmange
- or Takagi curve, the same as that shown in figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Takagi-Curve"
-
-\end_inset
-
-.
- In general one has, 
-\begin_inset Formula $\int_{0}^{1}v_{k}\left(y\right)dy=0$
-\end_inset
-
-, which follows since the integral of any Walsh function is zero over the
- unit interval, and the 
-\begin_inset Formula $v_{k}$
-\end_inset
-
- are simply linear combinations of the Walsh functions.
+ Although these are discontinuous at all dyadic rationals, they are readily
+ plotted by 
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
-this was created with misc/bignum/walsh.c and plotted with src/fractal/misc/bignu
-m/walsh.gplot
+Generated with fractal/misc/bignum/walsh.c and plotted with walsh.gplot
 \end_layout
 
 \end_inset
@@ -8031,8 +8133,8 @@ reference "sub:Constructing-GKW-Eigenfunctions"
 
 , is required of continuous solutions to the GKW, and is explored in the
  next sections.
- A sampling of integrals of some of the eigenfunctions is shown in figures
- 
+ A sampling of some of the eigenfunctions, and thier integrals, is shown
+ in figures 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Integrals-of-Eigenfunctions"
@@ -8141,6 +8243,15 @@ less easily approximated by taking numerical differences of
 .
  As discussed in the captions to the previous graphs, these integrals are
  easily computed, and taking numerical differences is straight-forward.
+ Presumably, one may find certain linear combinations of these that are
+ continuous everywhere, or even differentiable everywhere.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
 \end_layout
 
 \begin_layout Plain Layout
