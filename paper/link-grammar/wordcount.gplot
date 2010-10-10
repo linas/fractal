@@ -10,16 +10,18 @@ set key left
 #################################################
 # Used to generate the graph in the text
 #
-# set term postscript
-# set out 'wordcount.ps'
+set term postscript eps color
+set out 'wordcount.ps'
 set title "Word Frequency as function of Rank"
 set xlabel "Rank"
 set ylabel "Count"
 set logscale x
 set logscale y
+set xrange [1:202899]
 set yrange [1:]
 set key right
 plot "wordcount.dat" using 1:2 title "Confidence-weighted Count"  with lines linewidth 2, \
 	"wordcount.dat" using 1:3 title "Raw Observation Count" with lines linewidth 2, \
-	"wordcount.dat" using 1:(1e6*exp(-1.01*log($1))) title "Zipf's Law" with lines linewidth 2
+ 	"wordcount.dat" using 1:(1e6*exp(-1.0*log($1))) title "Zipf's Law" with lines linewidth 2
+# "wordcount.dat" using 1:(1e6/$1) title "Zipf's Law" with lines linewidth 2
 
