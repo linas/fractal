@@ -2591,8 +2591,7 @@ Zipf's law
  Note that this exponent is rather unusual for Zipf's law; it is more common
  to observe distributions that turn downward more sharply (i.e.
  have an exponent such as -1.05), rather than less so.
- It is not clear if this curious slope is an artifact of the parser (specificall
-y, of its limited comprehension of the structure of the English langauge),
+ It is not clear if this curious slope is an artifact of the parse dictionary,
  or whether this is somehow a reflection of the behaviour of the English
  language itself.
 \end_layout
@@ -2662,9 +2661,15 @@ The figure above is analogous to the previous two, showing the distribution
  were assigned a cumulative confidence score of 433711.
  The confidence score is a product of the parse-confidence score for the
  word-disjunct pair, and a score for the confidence of the word-sense assignment.
- The dataset contains xxx distinct words and yyy distinct word-disjunct
- pairs ...
- 
+ The dataset contains only 15771 distinct words, which were tagged by 15295
+ distinct senses, or slightly less than 1 sense per word.
+ This is possible, as many words can be synonyms of one-another, even when
+ they may have multiple senses.
+ The dataset has 186490 distinct word-disjunct pairs, thus an average of
+ 447672/186490=2.40 different word senses were assigned to each word-disjunct
+ pair.
+ This average, more than the last one, suggests that, indeed, gramatical
+ usage can differentiate between senses.
 \end_layout
 
 \begin_layout Plain Layout
@@ -2685,7 +2690,9 @@ Zipf's law
 \end_inset
 
  the rank.
- Note that this exponent is rather unusual for Zipf's law; it ....
+ This exponent is even flatter than the previous one; again, it is not clear
+ if this is an artifact of the parsing and sense-tagging algorithms, or
+ a feature of the English language itself.
 \end_layout
 
 \end_inset
