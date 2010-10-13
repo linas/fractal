@@ -15,7 +15,10 @@ set out 'sense-bincount.ps'
 set title "Bincount of Assigned Senses"
 set xlabel "Number of Senses"
 set ylabel "Number of (word,disjunct) Pairs"
-# set logscale x
+set logscale x
 set logscale y
-plot "sense-bincount.dat" using 1:2 title ""  with lines linewidth 3
-
+set xrange [1:40]
+set yrange [1:100000]
+set key right
+plot "sense-bincount.dat" using 1:2 title "Data"  with lines linewidth 3, \
+     "sense-bincount.dat" using 1:(1e7*exp(-5*log($1))) title "Log-log Fit"  with lines linewidth 3
