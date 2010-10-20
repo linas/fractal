@@ -7328,7 +7328,11 @@ where
 \begin_inset Formula $m$
 \end_inset
 
-, ignoring the infinite string of zero bits to the leftq).
+, ignoring the infinite string of zero bits to the left; 
+\begin_inset Formula $N=\left\lfloor \log_{2}m\right\rfloor +1$
+\end_inset
+
+).
  Then 
 \begin_inset Formula $\rho_{m}$
 \end_inset
@@ -7691,7 +7695,7 @@ a_{N-3} & =\frac{\sigma_{N-2}}{w^{3}}\left[\sigma_{N-1}+\frac{w}{2}\left(\sigma_
 
 \end_inset
 
-and, written inthis 
+and, written in this 
 \begin_inset Quotes eld
 \end_inset
 
@@ -8161,6 +8165,232 @@ reference "fig:Fractal-Eigenfunctions-of-GKW"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Section
+Functions on the Cantor Set
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ denote the Cantor set.
+ Consider the space of functions 
+\begin_inset Formula $\mathcal{F}\left(\Delta\to\mathbb{R}\right)$
+\end_inset
+
+ from the Cantor set to the real numbers.
+ Since the Cantor set 
+\begin_inset Formula $\Delta=2^{\omega}$
+\end_inset
+
+ has the cardinality of the continuum, this space is clearly very large,
+ and thus tricky to work with.
+ However, the sub-space of measurable (or, equivalently, integrable) functions
+ on the Cantor set is far more tractable, as one can now work with countable
+ sets! What's more, we may consider the subspace of integrable functions
+ that are continuous; this may be given as a projection operator! After
+ that, its natural to turn ones attention to the subspaces of differentiable
+ and infinitely-differentiable functions.
+ Here's how.
+\end_layout
+
+\begin_layout Standard
+Begin by definining a basis 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ for a topology on the Cantor set.
+ The basis can be visualized as being given by the infinite dyadic tree.
+ The topmost node in the tree stands for the the interval 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+.
+ The two child nodes on either side should be understood to stand for 
+\begin_inset Formula $\left[0,\frac{1}{2}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[\frac{1}{2},1\right]$
+\end_inset
+
+.
+ Continuing in this fashion, one has 
+\begin_inset Formula $\left[0,\frac{1}{4}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[\frac{1}{4},\frac{1}{2}\right]$
+\end_inset
+
+ and so on for the next row.
+ The basis is countable: the nodes in the infinite dyadic tree are countable.
+ It has a natural way of being numberd: the top node may be called 1, the
+ left and right children are 2 and 3, respectively, and so on.
+ The full topology 
+\begin_inset Formula $\mathcal{T}$
+\end_inset
+
+ on the Cantor set is given by the finite intersections and countable unions
+ of the elements of this basis.
+ This topology is one and the same as the standard product topology of cylinder
+ sets on Cartesian products.
+\end_layout
+
+\begin_layout Standard
+Consider the space of functions 
+\begin_inset Formula $\mathcal{F}\left(\mathcal{B}\to\mathbb{R}\right)$
+\end_inset
+
+ from this basis to the real numbers.
+ Because 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is countable, we can equate this with the space of sequences from 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Define now the subspace of integrable functions 
+\begin_inset Formula $\mathcal{I}\subset\mathcal{F}\left(\mathcal{B}\to\mathbb{R}\right)$
+\end_inset
+
+ as the set 
+\begin_inset Formula \[
+\mathcal{I}=\left\{ a_{k}\vert k\in\mathbb{N},a_{1}=a_{2}+a_{3},a_{2}=a_{4}+a_{5},\cdots,a_{n}=a_{2n}+a_{2n+1},\cdots\right\} \]
+
+\end_inset
+
+The interpretation here is meant to be natural: that is, the constraint
+ 
+\begin_inset Formula $a_{1}=a_{2}+a_{3}$
+\end_inset
+
+ is meant to be understood to mean that, for 
+\begin_inset Formula $f\in\mathcal{I}$
+\end_inset
+
+, on has 
+\begin_inset Formula \[
+\int_{0}^{1}f=\int_{0}^{\frac{1}{2}}f+\int_{\frac{1}{2}}^{1}f\]
+
+\end_inset
+
+and so on, for each of the basis elements in 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+.
+ The space of measureable functions 
+\begin_inset Formula $\mathcal{M}\subset\mathcal{I}$
+\end_inset
+
+ are just those sequences for which 
+\begin_inset Formula $a_{1}=$
+\end_inset
+
+1.
+ 
+\end_layout
+
+\begin_layout Standard
+Just to be clear and concrete, the reason for calling these 
+\begin_inset Quotes eld
+\end_inset
+
+integrable
+\begin_inset Quotes erd
+\end_inset
+
+ is because, given some ordinary integrable function 
+\begin_inset Formula $f:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+, and defining the definite integral 
+\begin_inset Formula $F(x)=\int_{0}^{x}f\left(y\right)dy$
+\end_inset
+
+, then the corresponding sequence is just 
+\begin_inset Formula \[
+a_{k}=F\left(\frac{k+1-2^{N}}{2^{N}}\right)-F\left(\frac{k-2^{N}}{2^{N}}\right)\]
+
+\end_inset
+
+ with 
+\begin_inset Formula $N=\left\lfloor \log_{2}k\right\rfloor $
+\end_inset
+
+, so that, for example, 
+\begin_inset Formula $a_{3}=\int_{\frac{1}{2}}^{1}f(y)dy$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now, the lemma that we need to establish here is that the space of such
+ sequences completely characterize the space of integrable functions on
+ the unit interval; that the two may be taken to be essentially one and
+ the same.
+ This follows primarily from the fact that the intersections and unions
+ of elements of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ are very nearly trivial, and from the fact that the dyadic rationals are
+ dense in the reals.
+\end_layout
+
+\begin_layout Standard
+Note that, as a sequence space, neither 
+\begin_inset Formula $\mathcal{I}$
+\end_inset
+
+ nor 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ are bounded: the values 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ may get arbitrarily large for large 
+\begin_inset Formula $k$
+\end_inset
+
+, as long as the constraint 
+\begin_inset Formula $a_{k}=a_{2k}+a_{2k+1}$
+\end_inset
+
+.
+ This means that neither 
+\begin_inset Formula $\mathcal{I}$
+\end_inset
+
+ nor 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ are subspaces of the classical Banach space 
+\begin_inset Formula $\mathit{l}_{\infty}$
+\end_inset
+
+ of bounded sequences.
+ None-the-less, many interesting sequences are bounded: the Minkowski question
+ mark certainly is.
+ 
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Section
