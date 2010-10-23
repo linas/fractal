@@ -6859,7 +6859,14 @@ The Walsh functions provide an orthonormal basis for the Banach space
 \begin_inset Formula $L_{2}\left[0,1\right]$
 \end_inset
 
- of square-integrable functions on tthe unit interval.
+ of square-integrable functions on the unit interval
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Carothers2005"
+
+\end_inset
+
+.
  These can be used to construct eigensolutions to 
 \begin_inset Formula $\mathcal{L}_{c}$
 \end_inset
@@ -8172,6 +8179,29 @@ Functions on the Cantor Set
 \end_layout
 
 \begin_layout Standard
+The above developments present an insight that leads to a question.
+ Basically, we've seen an operator that has a discrete spectrum when one
+ considers only functions that are infinitely differentiable.
+ It has a continuous spectrum when one considers functions on the Cantor
+ set.
+ Somewhere between these two extremes one imagines a transition or some
+ twist or constraint that forces the once spectrum into the other.
+ Where, exacttly, does this happen? Perhaps when one forces differentiability?
+ Can the transition from continuous to discrete be somehow 
+\begin_inset Quotes eld
+\end_inset
+
+smooth
+\begin_inset Quotes erd
+\end_inset
+
+? There are various phenomena on physics where continuous spectra break
+ up onto dicrete bands; might something similar happen here? The discussion
+ that follows aims to review a more general setting, and consider different
+ aproaches to findings answers to these questions.
+\end_layout
+
+\begin_layout Standard
 Let 
 \begin_inset Formula $\Delta$
 \end_inset
@@ -8187,14 +8217,19 @@ Let
 \end_inset
 
  has the cardinality of the continuum, this space is clearly very large,
- and thus tricky to work with.
- However, the sub-space of measurable (or, equivalently, integrable) functions
- on the Cantor set is far more tractable, as one can now work with countable
- sets! What's more, we may consider the subspace of integrable functions
- that are continuous; this may be given as a projection operator! After
- that, its natural to turn ones attention to the subspaces of differentiable
- and infinitely-differentiable functions.
- Here's how.
+ a bit too large to work with, and doesn't match the characteristics of
+ the systems studied above.
+ Most noteably, we've constructed 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ so that it is explicitly integrable; thus, we should consider the space
+ of integrable functions on the Cantor set.
+ The Cantor set has a topological basis that is countable.
+ One may consider real-valued functions on this basis; a subset of these
+ are integrable, as shown below.
+ Eventually, we want to limit these further, and consider the further subsets
+ of continuous and then differenntiable functions.
 \end_layout
 
 \begin_layout Standard
@@ -8204,32 +8239,38 @@ Begin by definining a basis
 
  for a topology on the Cantor set.
  The basis can be visualized as being given by the infinite dyadic tree.
- The topmost node in the tree stands for the the interval 
-\begin_inset Formula $\left[0,1\right]$
+ The topmost node in the tree stands for the the unit interval 
+\begin_inset Formula $I_{1}=\left[0,1\right]$
 \end_inset
 
 .
  The two child nodes on either side should be understood to stand for 
-\begin_inset Formula $\left[0,\frac{1}{2}\right]$
+\begin_inset Formula $I_{2}=\left[0,\frac{1}{2}\right]$
 \end_inset
 
  and 
-\begin_inset Formula $\left[\frac{1}{2},1\right]$
+\begin_inset Formula $I_{3}=\left[\frac{1}{2},1\right]$
 \end_inset
 
 .
  Continuing in this fashion, one has 
-\begin_inset Formula $\left[0,\frac{1}{4}\right]$
+\begin_inset Formula $I_{4}=\left[0,\frac{1}{4}\right]$
 \end_inset
 
  and 
-\begin_inset Formula $\left[\frac{1}{4},\frac{1}{2}\right]$
+\begin_inset Formula $I_{5}=\left[\frac{1}{4},\frac{1}{2}\right]$
 \end_inset
 
  and so on for the next row.
  The basis is countable: the nodes in the infinite dyadic tree are countable.
- It has a natural way of being numberd: the top node may be called 1, the
- left and right children are 2 and 3, respectively, and so on.
+ There is a natural way of numbering the nodes: the top node may be called
+ 1, the left and right children are 2 and 3, respectively, the next row
+ being 4,5,6,7, and so on.
+ The intervals are numbered likewise, and so one has 
+\begin_inset Formula $\mathcal{B}=\left\{ I_{k}\vert k\in\mathbb{N}\right\} $
+\end_inset
+
+.
  The full topology 
 \begin_inset Formula $\mathcal{T}$
 \end_inset
@@ -8237,11 +8278,16 @@ Begin by definining a basis
  on the Cantor set is given by the finite intersections and countable unions
  of the elements of this basis.
  This topology is one and the same as the standard product topology of cylinder
- sets on Cartesian products.
+ sets on Cartesian products; in this case, the Cartesian product is simply
+ 
+\begin_inset Formula $2\times2\times2\times\cdots=2^{\omega}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Consider the space of functions 
+Consider the vector space of functions 
 \begin_inset Formula $\mathcal{F}\left(\mathcal{B}\to\mathbb{R}\right)$
 \end_inset
 
@@ -8259,26 +8305,51 @@ Consider the space of functions
 \end_inset
 
 .
- Define now the subspace of integrable functions 
+ We are interested in a subspace of these functions that could be considered
+ to be 
+\begin_inset Quotes eld
+\end_inset
+
+integrable
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Loosely speaking, we are interested in those sequences 
+\begin_inset Formula $\left\{ a_{k}\right\} $
+\end_inset
+
+ which can be interpreted as integrals over the corresponding 
+\begin_inset Formula $\left\{ I_{k}\right\} $
+\end_inset
+
+, so that 
+\begin_inset Formula \[
+a_{k}=\int_{I_{k}}f\left(x\right)dx\]
+
+\end_inset
+
+for some real-valued function 
+\begin_inset Formula $f:\left[0,1\right]\to\mathbb{R}$
+\end_inset
+
+ on the unit interval.
+ Thus motivated, define the subspace of integrable functions 
 \begin_inset Formula $\mathcal{I}\subset\mathcal{F}\left(\mathcal{B}\to\mathbb{R}\right)$
 \end_inset
 
  as the set 
 \begin_inset Formula \[
-\mathcal{I}=\left\{ a_{k}\vert k\in\mathbb{N},a_{1}=a_{2}+a_{3},a_{2}=a_{4}+a_{5},\cdots,a_{n}=a_{2n}+a_{2n+1},\cdots\right\} \]
+\mathcal{I}=\left\{ a_{k}\in\mathbb{R}\vert k\in\mathbb{N},a_{1}=a_{2}+a_{3},a_{2}=a_{4}+a_{5},\cdots,a_{n}=a_{2n}+a_{2n+1},\cdots\right\} \]
 
 \end_inset
 
-The interpretation here is meant to be natural: that is, the constraint
- 
+The summation constraint is meant to be natural: so that, for example, the
+ constraint 
 \begin_inset Formula $a_{1}=a_{2}+a_{3}$
 \end_inset
 
- is meant to be understood to mean that, for 
-\begin_inset Formula $f\in\mathcal{I}$
-\end_inset
-
-, on has 
+ is meant to be understood to be 
 \begin_inset Formula \[
 \int_{0}^{1}f=\int_{0}^{\frac{1}{2}}f+\int_{\frac{1}{2}}^{1}f\]
 
@@ -8289,36 +8360,17 @@ and so on, for each of the basis elements in
 \end_inset
 
 .
- The space of measureable functions 
-\begin_inset Formula $\mathcal{M}\subset\mathcal{I}$
-\end_inset
-
- are just those sequences for which 
-\begin_inset Formula $a_{1}=$
-\end_inset
-
-1.
+ Any integrable function on the unit interval gives rise to a sequence in
  
-\end_layout
-
-\begin_layout Standard
-Just to be clear and concrete, the reason for calling these 
-\begin_inset Quotes eld
+\begin_inset Formula $\mathcal{I}$
 \end_inset
 
-integrable
-\begin_inset Quotes erd
-\end_inset
-
- is because, given some ordinary integrable function 
-\begin_inset Formula $f:\mathbb{R}\to\mathbb{R}$
-\end_inset
-
-, and defining the definite integral 
+.
+ This is easy to se: given the definite integral 
 \begin_inset Formula $F(x)=\int_{0}^{x}f\left(y\right)dy$
 \end_inset
 
-, then the corresponding sequence is just 
+, the corresponding sequence is just 
 \begin_inset Formula \[
 a_{k}=F\left(\frac{k+1-2^{N}}{2^{N}}\right)-F\left(\frac{k-2^{N}}{2^{N}}\right)\]
 
@@ -8336,38 +8388,54 @@ a_{k}=F\left(\frac{k+1-2^{N}}{2^{N}}\right)-F\left(\frac{k-2^{N}}{2^{N}}\right)\
 \end_layout
 
 \begin_layout Standard
-Now, the lemma that we need to establish here is that the space of such
- sequences completely characterize the space of integrable functions on
- the unit interval; that the two may be taken to be essentially one and
- the same.
- This follows primarily from the fact that the intersections and unions
+Now, the lemma to establish here is that the space of such sequences is
+ isomorphic to the space of integrable functions on the unit interval; that
+ the two may be taken to be the same thing.
+ We've already established one direction above.
+ For the other direction, given a sequence 
+\begin_inset Formula $\left\{ a_{k}\right\} $
+\end_inset
+
+, one must show that there exists a unique, corresponding 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ But this follows primarily from the fact that the intersections and unions
  of elements of 
 \begin_inset Formula $\mathcal{B}$
 \end_inset
 
  are very nearly trivial, and from the fact that the dyadic rationals are
  dense in the reals.
+ We make no effort to be more rigorous, as this is essentially an old theorem
+ from Banach Theory: the Walsh functions provide a basis for the Banach
+ space 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Carothers2005"
+
+\end_inset
+
+.
+ A bit of addition ans subtraction provides the lemma above.
+ 
 \end_layout
 
 \begin_layout Standard
-Err, Umm, discussion of Banach spaces needed here ...
- XXX
-\end_layout
-
-\begin_layout Standard
-Note that, as a sequence space, neither 
+Note that, as a sequence space, 
 \begin_inset Formula $\mathcal{I}$
 \end_inset
 
- nor 
-\begin_inset Formula $\mathcal{M}$
-\end_inset
-
- are bounded: the values 
+ is not bounded: the values 
 \begin_inset Formula $a_{k}$
 \end_inset
 
- may get arbitrarily large for large 
+ may get arbitrarily large (positive or negative) for large 
 \begin_inset Formula $k$
 \end_inset
 
@@ -8375,23 +8443,76 @@ Note that, as a sequence space, neither
 \begin_inset Formula $a_{k}=a_{2k}+a_{2k+1}$
 \end_inset
 
-.
- This means that neither 
+ is obeyed.
+ This means that 
 \begin_inset Formula $\mathcal{I}$
 \end_inset
 
- nor 
-\begin_inset Formula $\mathcal{M}$
-\end_inset
-
- are subspaces of the classical Banach space 
+ cannot be a subspace of the classical Banach space 
 \begin_inset Formula $\mathit{l}_{\infty}$
 \end_inset
 
  of bounded sequences.
- None-the-less, many interesting sequences are bounded: the Minkowski question
- mark certainly is.
+ A more interesting case is the subspace
+\begin_inset Formula $\mathcal{M}\subset\mathcal{I}$
+\end_inset
+
+ of measures.
+ This is given by those sequences 
+\begin_inset Formula $\left\{ a_{k}\right\} $
+\end_inset
+
+ for which 
+\begin_inset Formula $a_{k}>0$
+\end_inset
+
+, and 
+\begin_inset Formula $a_{1}=1$
+\end_inset
+
+.
+ Thus, it follows that 
+\begin_inset Formula $a_{k}<1$
+\end_inset
+
+ for all 
+\begin_inset Formula $k>1$
+\end_inset
+
+ and so 
+\begin_inset Formula $\mathcal{M}\subset l_{\infty}$
+\end_inset
+
+.
+ Note that the question mark is a measure; an explicit proof is given in
  
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+.
+ All of the eigenfunctions constructed above, such as those shown in figures
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Integrals-of-Eigenfunctions"
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Integrals-of-GKW"
+
+\end_inset
+
+, are bounded, and are thus elements of 
+\begin_inset Formula $\mathcal{I}\cap l_{\infty}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -8417,7 +8538,7 @@ M=\left[\begin{array}{ccccccccc}
 
 \end_inset
 
- or, equivalently, that the elements of 
+or, equivalently, that the elements of 
 \begin_inset Formula $\mathcal{I}$
 \end_inset
 
@@ -8426,6 +8547,11 @@ M=\left[\begin{array}{ccccccccc}
 \end_inset
 
 .
+ If we further restrict our attention to 
+\begin_inset Formula $\mathcal{I}\cap l_{\infty}$
+\end_inset
+
+, then this is ....hmm.
 \end_layout
 
 \begin_layout Section
