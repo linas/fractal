@@ -54,7 +54,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 22 Oct 2010) 
+2 January 2004 (revised 2008, 23 Oct 2010) 
 \end_layout
 
 \begin_layout Abstract
@@ -8232,6 +8232,10 @@ Let
  of continuous and then differenntiable functions.
 \end_layout
 
+\begin_layout Subsection
+Integrability
+\end_layout
+
 \begin_layout Standard
 Begin by definining a basis 
 \begin_inset Formula $\mathcal{B}$
@@ -8324,8 +8328,8 @@ integrable
 \end_inset
 
 , so that 
-\begin_inset Formula \[
-a_{k}=\int_{I_{k}}f\left(x\right)dx\]
+\begin_inset Formula \begin{equation}
+a_{k}=\int_{I_{k}}f\left(x\right)dx\label{eq:integ seq defn}\end{equation}
 
 \end_inset
 
@@ -8366,13 +8370,13 @@ and so on, for each of the basis elements in
 \end_inset
 
 .
- This is easy to se: given the definite integral 
+ This is easy to see: given the definite integral 
 \begin_inset Formula $F(x)=\int_{0}^{x}f\left(y\right)dy$
 \end_inset
 
 , the corresponding sequence is just 
-\begin_inset Formula \[
-a_{k}=F\left(\frac{k+1-2^{N}}{2^{N}}\right)-F\left(\frac{k-2^{N}}{2^{N}}\right)\]
+\begin_inset Formula \begin{equation}
+a_{k}=F\left(\frac{k+1-2^{N}}{2^{N}}\right)-F\left(\frac{k-2^{N}}{2^{N}}\right)\label{eq:integral sequence}\end{equation}
 
 \end_inset
 
@@ -8742,8 +8746,25 @@ or, equivalently, that the elements of
 \end_layout
 
 \begin_layout Standard
-In practice, all of the sequences we will deal with are in 
-\begin_inset Formula $\mathcal{I}\cap l_{2}$
+In practice, none of the sequences we will deal with are in 
+\begin_inset Formula $L_{\infty}$
+\end_inset
+
+, nor are they obviously in any 
+\begin_inset Formula $L_{p}$
+\end_inset
+
+ for any 
+\begin_inset Formula $p>1$
+\end_inset
+
+.
+ Yet they all appear to be in 
+\begin_inset Formula $\mathcal{I}\cap l_{p}$
+\end_inset
+
+ for 
+\begin_inset Formula $p>1$
 \end_inset
 
 .
@@ -8771,10 +8792,96 @@ reference "fig:Integrals-of-GKW"
 \end_inset
 
 , are bounded, and are thus elements of 
-\begin_inset Formula $\mathcal{I}\cap l_{2}$
+\begin_inset Formula $\mathcal{I}\cap l_{p}$
+\end_inset
+
+ for 
+\begin_inset Formula $p>1$
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsection
+Continuity
+\end_layout
+
+\begin_layout Standard
+Given the space 
+\begin_inset Formula $\mathcal{I}$
+\end_inset
+
+ of integrable functions (as defined above), how does one isolate the subspace
+ of continuous functions? In part because we've hoosen to work with a basis
+ for the Canor set topology, the mechanics of traditional limits and delta-epsil
+on proofs appear to be inappropriate and not (easily) modified for the current
+ vocabulary.
+ Thus, some alternative tools need to be developed.
+ This is done here.
+\end_layout
+
+\begin_layout Standard
+Given the interpretation of the 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ as integrals over the intevals 
+\begin_inset Formula $I_{k}$
+\end_inset
+
+, we are then motivated to find a function 
+\begin_inset Formula $F\left(x\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ are given by equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:integ seq defn"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:integral sequence"
+
+\end_inset
+
+.
+ Then, very roughly speaking, we wish to have 
+\begin_inset Formula \[
+f\left(x\right)=\lim_{\epsilon\to0}\frac{F\left(x+\epsilon\right)-F\left(x\right)}{\epsilon}\]
+
+\end_inset
+
+as the function being integrated.
+ We are interested in those functions 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ that are continuous in 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ However, the above limit is not really well-defined or practical in the
+ current situation; for as we saw, when 
+\begin_inset Formula $F=?$
+\end_inset
+
+ then this is not sufficient to rigorously define 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ on the real unit interval.
+ This is indeed the whole reason why the setting and manipulations are performed
+ on Cantor set, rather than the reals; why the tools use the language of
+ intervals and cylinder sets.
+ 
 \end_layout
 
 \begin_layout Section
