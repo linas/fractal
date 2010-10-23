@@ -8624,32 +8624,68 @@ The last line showing the desired result.
 \end_layout
 
 \begin_layout Standard
-Note that the question mark is a measure; an explicit proof is given in
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Vep-mink2008"
+The bound is strict:
+\end_layout
 
+\begin_layout Lemma*
+There do not exist any sequences 
+\begin_inset Formula $a\in\mathcal{I}$
+\end_inset
+
+ which are also in 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+, other than the trivial sequence 
+\begin_inset Formula $\left\{ a_{k}\vert a_{k}=0\right\} $
 \end_inset
 
 .
- All of the eigenfunctions constructed above, such as those shown in figures
  
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Integrals-of-Eigenfunctions"
+\end_layout
 
+\begin_layout Proof
+One has 
+\begin_inset Formula $a_{1}=\sum_{k=2^{N}}^{2^{N+1}-1}a_{k}$
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Integrals-of-GKW"
-
+ for all 
+\begin_inset Formula $N$
 \end_inset
 
-, are bounded, and are thus elements of 
-\begin_inset Formula $\mathcal{I}\cap l_{2}$
+.
+ If the sequence isn't trivial, then there must exist some 
+\begin_inset Formula $M$
+\end_inset
+
+ for which 
+\begin_inset Formula $\sum_{k=2^{M}}^{2^{M+1}-1}\left|a_{k}\right|=C>0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $a_{k}=a_{2k}+a_{2k+1}$
+\end_inset
+
+, one must have 
+\begin_inset Formula $\left|a_{k}\right|\le\left|a_{2k}\right|+\left|a_{2k+1}\right|$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\sum_{k=1}^{2^{N}-1}\left|a_{k}\right|\ge\left(N-M\right)C$
+\end_inset
+
+ and so the sequence is summable only if 
+\begin_inset Formula $C=0$
+\end_inset
+
+, that is, if 
+\begin_inset Formula $a_{k}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
 \end_inset
 
 .
@@ -8687,11 +8723,58 @@ or, equivalently, that the elements of
 \end_inset
 
 .
- If we further restrict our attention to 
+ Clearly 
+\begin_inset Formula $M$
+\end_inset
+
+ is bounded and thus continuous.
+ However, it is not a projection.
+ Neither 
+\begin_inset Formula $\mathcal{I}$
+\end_inset
+
+ nor 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ are complemented.
+ 
+\end_layout
+
+\begin_layout Standard
+In practice, all of the sequences we will deal with are in 
 \begin_inset Formula $\mathcal{I}\cap l_{2}$
 \end_inset
 
-, then this is ....hmm.
+.
+ The question mark is a measure; an explicit proof is given in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+.
+ All of the eigenfunctions constructed above, such as those shown in figures
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Integrals-of-Eigenfunctions"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Integrals-of-GKW"
+
+\end_inset
+
+, are bounded, and are thus elements of 
+\begin_inset Formula $\mathcal{I}\cap l_{2}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
