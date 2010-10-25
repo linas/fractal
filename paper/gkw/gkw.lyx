@@ -9076,15 +9076,152 @@ where
 \end_inset
 
 , it is sufficient to have 
-\begin_inset Formula $\left\Vert Ba\right\Vert =\left|\sum_{j=1}^{\infty}B_{kj}a_{j}\right|<\infty$
+\begin_inset Formula $\left|\sum_{j=1}^{\infty}B_{kj}a_{j}\right|<\infty$
 \end_inset
 
 .
- Alternately, consider the space 
+ Define 
+\begin_inset Formula \[
+\left\Vert Ba\right\Vert =\sum_{k=1}^{\infty}\left|\sum_{j=1}^{\infty}B_{kj}a_{j}\right|\]
+
+\end_inset
+
+Clearly, any 
+\begin_inset Formula $a$
+\end_inset
+
+ for which 
+\begin_inset Formula $\left\Vert Ba\right\Vert <\infty$
+\end_inset
+
+ represents a function that is continuous at the dyadic rationals.
+ In fact, this condition is sufficient to gaurantee that it is continuous
+ everywhere.
+\end_layout
+
+\begin_layout Theorem*
+If 
+\begin_inset Formula $a\in\mathcal{I}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\Vert Ba\right\Vert <\infty$
+\end_inset
+
+, then the function represented by 
+\begin_inset Formula $a$
+\end_inset
+
+ is continuous everywhere.
+\end_layout
+
+\begin_layout Proof
+To see this, consider a function 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ that is discontinuous at a point 
+\begin_inset Formula $x$
+\end_inset
+
+, and define 
+\begin_inset Formula $a_{k}=\int_{I_{k}}f(y)dy$
+\end_inset
+
+ as usual.
+ If 
+\begin_inset Formula $x$
+\end_inset
+
+ is equal to the dyadic rational 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+, then the arguments above have already shown that 
+\begin_inset Formula $\left|\sum_{j=1}^{\infty}B_{kj}a_{j}\right|$
+\end_inset
+
+ would be unbounded.
+ Consider 
+\begin_inset Formula $x$
+\end_inset
+
+ that is not a dyadic rational.
+ If 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+ is a midpoint that is near 
+\begin_inset Formula $x$
+\end_inset
+
+ (and 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ is continuous at 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+), then the sum 
+\begin_inset Formula $c_{k}=\left|\sum_{j=1}^{\infty}B_{kj}a_{j}\right|$
+\end_inset
+
+ is bounded.
+ However, for any finite constant 
+\begin_inset Formula $C$
+\end_inset
+
+, one can always find a value of 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $c_{k}>C$
+\end_inset
+
+.
+ One does so simply by considering values of 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $m_{k}$
+\end_inset
+
+ is ever closer to 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Thus, the sum 
+\begin_inset Formula $\sum_{k}c_{k}$
+\end_inset
+
+ cannot be finite.
+ Thus, it is impossible to find a discontinuous function 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ for which 
+\begin_inset Formula $\left\Vert Ba\right\Vert <\infty$
+\end_inset
+
+ and so the theorem is proved.
+ 
+\end_layout
+
+\begin_layout Standard
+Consider
+\end_layout
+
+\begin_layout Standard
+This motivates the defintion of a space 
 \begin_inset Formula $\mathcal{C}$
 \end_inset
 
- of sequences where 
+ of sequences that contiains only continuous functions.
+ This is the space where 
 \begin_inset Formula $B$
 \end_inset
 
@@ -9094,8 +9231,7 @@ where
 
 \end_inset
 
-Clearly, many, but perhaps not all, continuous functions are contained in
- 
+Many, but perhaps not all, continuous functions are contained in 
 \begin_inset Formula $\mathcal{C}$
 \end_inset
 
