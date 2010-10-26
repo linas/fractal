@@ -5647,7 +5647,7 @@ The kernel of the dyadic sawtooth is defined as the set of functions
 k_{n}\left(x\right)=\begin{cases}
 1 & \;\mbox{ for }\;0\le x<\frac{1}{2^{n+1}}\\
 -1 & \;\mbox{ for }\;\frac{1}{2^{n+1}}\le x<\frac{1}{2^{n}}\\
-0 & \;\mbox{ for }\;\frac{1}{2^{n}}\le x<\infty\end{cases}\]
+0 & \;\mbox{ for }\;\frac{1}{2^{n}}\le x\le1\end{cases}\]
 
 \end_inset
 
@@ -5989,8 +5989,12 @@ t_{w,l}\left(x\right)=t_{w}\left(\left(2l+1\right)x\right)\]
 
 Theorem: above provide a complete set spanning the space.
  Proof: XXX details to be done.
- Sketch of proof is that these can be re-expressed as unique linear combinations
- of cosine waves; the specific linear combinations being given in 
+ The proof is special case/variant from theory of shift operators: take
+ the kernel, apply the shift ad-infinitum, the union of the resulting spaces
+ is the full space (this holds true in general for shifts).
+ More narrowly: Sketch of proof is that these can be re-expressed as unique
+ linear combinations of cosine waves; the specific linear combinations being
+ given in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ve-B04"
@@ -6049,6 +6053,110 @@ key "Ve-T04"
 
 .
  The next section develops some the general framework for these solutions.
+\end_layout
+
+\begin_layout Subsubsection
+Universal Property
+\end_layout
+
+\begin_layout Standard
+Within the context of shift operators on Hilbert spaces, the above-described
+ 'fractal solutions' are well-known to generalize to a certain universal
+ property of shift operators.
+ Specifically, for any bounded linear operator 
+\begin_inset Formula $T$
+\end_inset
+
+ on a Hilbert space, there exists a shift operator which has an invariant
+ subspace that is unitarily equivalent to 
+\begin_inset Formula $T$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rosenblum1985"
+
+\end_inset
+
+.
+ In essence, a more general theory can be obtained where the parameter 
+\begin_inset Formula $w$
+\end_inset
+
+ used in the constructions above can be replaced by a bounded linear operator
+ 
+\begin_inset Formula $T$
+\end_inset
+
+, and the generator 
+\begin_inset Formula $g$
+\end_inset
+
+ can be interpreted as a general shift operator.
+ In particular, the full space on which 
+\begin_inset Formula $g$
+\end_inset
+
+ acts is obtained by repeatedly applying 
+\begin_inset Formula $g$
+\end_inset
+
+ to the kernel of the (Hermitian conjugate) of the shift.
+ 
+\end_layout
+
+\begin_layout Standard
+The general theory is not directly applicable here, for several reasons.
+ First, the spaces studied here are not Hilbert spaces, in general.
+ Second, the symmetries here are slightly richer: besides the shift 
+\begin_inset Formula $g$
+\end_inset
+
+, we also have a reflection 
+\begin_inset Formula $r$
+\end_inset
+
+; these two together generate the dyadic monoid subset of the modular group,
+ and thus invoke the Cantor set.
+ However, the author imagines that there may be vast new systems to study,
+ simply by generalizing 
+\begin_inset Formula $w$
+\end_inset
+
+ by bounded linear operator.
+ 
+\end_layout
+
+\begin_layout Standard
+While on the topic of 
+\begin_inset Quotes eld
+\end_inset
+
+generalizing
+\begin_inset Quotes erd
+\end_inset
+
+, it is worth noting that the generator set 
+\begin_inset Formula $(g,r)$
+\end_inset
+
+ can be generalized to a more complex, richer set of symmetries.
+ Insofar as 
+\begin_inset Formula $(g,r)$
+\end_inset
+
+ can be understood to generate a one-dimensional Ising lattice
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+, then more complex systems are already studied in physics; narrowly under
+ the name of Ising models or lattice models, and more broadly under the
+ name of Markov networks, and the like.
+ 
 \end_layout
 
 \begin_layout Subsection
