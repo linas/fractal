@@ -58,7 +58,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised October 2008)
+2 January 2004 (revised 2008, 3 November 2010)
 \end_layout
 
 \begin_layout Abstract
@@ -68,7 +68,7 @@ This paper reviews a raft of related ideas surrounding the Bernoulli operator.
  The Bernoulli map is a simple map of the unit interval onto itself, which
  has the effect of discarding the leading binary digit of the binary expansion
  of a number upon every iteration.
- This map has been well studied in the literature, and much, if not all,
+ This map has been well studied for over a century, and much, if not all,
  of what is presented here is well-known.
  
 \end_layout
@@ -83,7 +83,8 @@ If there is anything new here, then perhaps it is a representation of the
  I find this curious and important somehow: the Blancmange curve has an
  explicitly fractal self-similarity given by the dyadic monoid.
  The dyadic monoid is the monoid that describes the self-similarity of the
- infinite binary tree, and is a subset of the modular group 
+ infinite binary tree and Cantor set, and is a subset of the modular group
+ 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset
 
@@ -92,7 +93,7 @@ If there is anything new here, then perhaps it is a representation of the
 
 \begin_layout Abstract
 This paper is part of a set of chapters that explore the relationship between
- the real numbers, the modular group, and fractals.
+ the real numbers, the Cantor set, the modular group, and fractals.
 \end_layout
 
 \begin_layout Section
@@ -102,7 +103,7 @@ The Bernoulli operator
 \begin_layout Standard
 THIS IS A SET OF WORKING NOTES.
  Its somewhat loosely structured, sometimes messy, often presents topics
- in backwards order, and occasionally assumes familiarity with Linas' other
+ in backwards order, and occasionally assumes familiarity with my other
  writings and/or a general knowledge of various unspecified branches of
  mathematics.
  The intro hasn't been written yet; but if it was, it would mention the
@@ -124,7 +125,7 @@ key "Dri99"
 
 \end_inset
 
-, although generalized to 
+, generalized to 
 \begin_inset Formula $p$
 \end_inset
 
@@ -143,11 +144,29 @@ Present the Hurwitz Zeta and fractal eigenfunctions; show that these are
 \begin_layout Itemize
 Present a more abstract, but more firm/well-founded foundation for the earlier
  results.
- The more abstract forumlation is in terms of the product space 
-\begin_inset Formula $\Omega=2^{\omega}$
+ The more abstract forumlation is in terms of the Cantor set.
+ Here, we take the Cantor set to be the Cartesian product 
+\begin_inset Formula $2^{\omega}=2\times2\times\cdots$
 \end_inset
 
- and the product topology on it.
+ of a countaby infinite number 
+\begin_inset Formula $\omega$
+\end_inset
+
+ of copies of the set 
+\begin_inset Formula $2=\left\{ 0,1\right\} $
+\end_inset
+
+.
+ That is, we take the Cantor set to be the set of all infinintely long strings
+ of binary digits, taken with the product topology.
+ Of course, strings of binaryu digits can represent the real numbers; but
+ the Cantor set differs from the real numbers in that, unlike the reals,
+ one has 
+\begin_inset Formula $0.111\cdots\ne1.000\cdots$
+\end_inset
+
+.
  This foundation can then lead to deeper results, as well as shed light
  on some of the more confusing/paradoxial results that arise in the informal
  treatment.
@@ -187,19 +206,12 @@ The method of the transfer operator was introduced by David Ruelle[need
 \begin_inset Formula $p$
 \end_inset
 
--adic numbers, endowed with unusual topologies: in particular, with the
- so called 
-\begin_inset Quotes eld
-\end_inset
-
-product topology
-\begin_inset Quotes erd
-\end_inset
-
- whose basis are the cylinder sets.
- In this topology, the transfer operator can be made to resemble the lattice
- models of theoretical physics, such as the Ising model, thus offering additiona
-l means of gaining insight.
+-adic numbers, endowed with the standard Cartesian product topology; the
+ 2-adic product topology is identified with the Cantor set.
+ Curiously, the Cartesian product is more or less the same thing as the
+ 1-D spin-lattice models of theoretical physics (such as the Ising model)
+ and so additional insight can be gained by usig the language and notation
+ from such models.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "May91"
@@ -224,12 +236,9 @@ It is easiest to begin with the concrete definition.
 \end_inset
 
  may be ergodic or chaotic, strong-mixing or merely topologically mixing.
- In any case, the language used to discuss 
-\begin_inset Formula $g$
-\end_inset
-
- is inherently based on either the point-set topology of the unit interval,
- or the 
+ In any case, whenever such iteration is discussed in the general literature
+ of mathematics or physics, the language used almost always assumes either
+ the point-set topology of the unit interval, or the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -251,8 +260,8 @@ A shift in perspective may be gained not by considering how
 \end_inset
 
  acts on distributions on the unit interval.
- Intuitively, one might consider a dusting of points on the unit interval,
- with a local density given by 
+ Intuitively, consider a dusting of points on the unit interval, with a
+ local density given by 
 \begin_inset Formula $\rho(x)$
 \end_inset
 
@@ -272,7 +281,7 @@ A shift in perspective may be gained not by considering how
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $\rho^{\prime}(y)$
 \end_inset
 
@@ -285,11 +294,7 @@ A shift in perspective may be gained not by considering how
 \end_inset
 
  is the Dirac delta function.
- 
-\end_layout
-
-\begin_layout Standard
-In this viewpoint, 
+ In this viewpoint, 
 \begin_inset Formula $g$
 \end_inset
 
@@ -307,7 +312,7 @@ In this viewpoint,
 
 \end_inset
 
- The operator 
+The operator 
 \begin_inset Formula $\mathcal{L}_{g}$
 \end_inset
 
@@ -318,7 +323,7 @@ In this viewpoint,
 
 \end_inset
 
- for constants 
+for constants 
 \begin_inset Formula $a,b$
 \end_inset
 
@@ -331,26 +336,7 @@ In this viewpoint,
 \end_layout
 
 \begin_layout Standard
-When the function 
-\begin_inset Formula $g$
-\end_inset
-
- is differentiable, and doesn't have a vanishing derivative, the integral
- formulation of the transfer operator above can be rephrased in a more convenien
-t form, as 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{g}\rho\right]\left(y\right)=\sum_{x:y=g(x)}\frac{\rho(x)}{\left|dg(x)/dx\right|}\label{eq: transfer-jacobi}\end{equation}
-
-\end_inset
-
- where the sum is presumed to extend over at most a countable number of
- points.
- If these conditions do not hold, a transfer operator can still be defined,
- although more care must be taken in its definition.
-\end_layout
-
-\begin_layout Standard
-One generalization should be immediately apparent: although the word 
+Although the word 
 \begin_inset Quotes eld
 \end_inset
 
@@ -362,8 +348,9 @@ density
 \begin_inset Formula $\rho$
 \end_inset
 
- is a smooth map from the unit interval to the non-negative reals, no such
- requirement need to be enforced: 
+ is a smooth map from the unit interval to the non-negative reals, there
+ is no particular need to enforce this.
+ The function 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -372,41 +359,123 @@ density
 \end_inset
 
 , and it need not be smooth, differentiable or even continuous.
- This generalization gives a very rich structure to 
-\begin_inset Formula $\mathcal{L}_{g}$
-\end_inset
-
-: the precise form of 
-\begin_inset Formula $\mathcal{L}_{g}$
-\end_inset
-
- will take will depend very strongly on 
+ Usually, we'll take the ring 
 \begin_inset Formula $R$
 \end_inset
 
-, whether its the reals 
+ to the reals 
 \begin_inset Formula $\mathbb{R}$
 \end_inset
 
-, the complex numbers 
-\begin_inset Formula $\mathbb{C}$
+, but in fact, it could be any ring or field.
+ Thus, 
+\begin_inset Formula $\mathcal{L}_{g}$
 \end_inset
 
-, or some other field or ring.
- It will also depend strongly on whether one restricts oneself to smooth
- functions, continuous functions, square-integrable functions, or some other
- function space.
- An adequate study requires reference to the specific topology that the
- function space is endowed with; many different topologies may be considered.
- That is, in general, one must consider 
-\begin_inset Formula $\mathcal{L}_{B}$
+ is an operator that maps functions on the unit interval to other functions
+ on the unit interval: 
+\begin_inset Formula \[
+\mathcal{L}_{g}:\mathcal{F}\left[0,1\right]\to\mathcal{F}\left[0,1\right]\]
+
 \end_inset
 
- to be an operator acting on a topological space endowed with multiplication
+with 
+\begin_inset Formula $\rho\in\mathcal{F}\left[0,1\right]$
+\end_inset
+
+.
+ The precise properties of 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+ depend strongly on what, exactly, is taken to be 
+\begin_inset Quotes eld
+\end_inset
+
+the set of functions 
+\begin_inset Formula $\mathcal{F}\left[0,1\right]$
+\end_inset
+
+ on the unit interval
+\begin_inset Quotes erd
+\end_inset
+
+.
+ An exploration of the different spaces makes up much of the content of
+ this paper.
+ There are many spaces to choose from: the space of polynomials, the space
+ of square-integrable functions, or possibly yet other spaces.
+ In general, the properties of 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+ depend on the topology given to 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+.
+ Most generally, 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+ is an operator acting on a topological space endowed with multiplication
  and addition, that is, a topological vector space.
- A precise definition of the transfer operator is given in the next section,
- as being the pushforward onset of measureable, sigma-additive functions.
- 
+ It can be given a precise definition: in a later section, we establish
+ it to be best thought of as the pushforward of 
+\begin_inset Formula $g$
+\end_inset
+
+ on the set of measureable, sigma-additive functions.
+ This can then encompass the definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:transfer-dirac"
+
+\end_inset
+
+ above as well as 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: transfer-jacobi"
+
+\end_inset
+
+ below.
+ So, for example, when the function 
+\begin_inset Formula $g$
+\end_inset
+
+ is differentiable, and doesn't have a vanishing derivative, the transfer
+ operator can be defined as 
+\begin_inset Formula \begin{equation}
+\left[\mathcal{L}_{g}\rho\right]\left(y\right)=\sum_{x:y=g(x)}\frac{\rho(x)}{\left|dg(x)/dx\right|}\label{eq: transfer-jacobi}\end{equation}
+
+\end_inset
+
+where the sum is presumed to extend over at most a countable number of points.
+ It is not at all hard to show that, for a 
+\begin_inset Quotes eld
+\end_inset
+
+reassonable
+\begin_inset Quotes erd
+\end_inset
+
+ class of differentiable functions, that 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:transfer-dirac"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: transfer-jacobi"
+
+\end_inset
+
+ are equivalent defintions.
 \end_layout
 
 \begin_layout Standard
@@ -432,7 +501,7 @@ The structure of
 
 \end_inset
 
- Intuitively, this set is simply the set of all the digits of a base-
+Intuitively, this set is simply the set of all the digits of a base-
 \begin_inset Formula $p$
 \end_inset
 
@@ -465,12 +534,12 @@ x=[0;\sigma_{1},\sigma_{2},\sigma_{3},\ldots]=\frac{1}{\sigma_{1}+\frac{1}{\sigm
 
 \end_inset
 
- where each 
+where each 
 \begin_inset Formula $\sigma_{k}$
 \end_inset
 
  is a positive integer; the entire sequence again be given a product topology,
- although the measure is constructed differently.
+ although the measure is constructed quite differently.
 \end_layout
 
 \begin_layout Standard
@@ -486,7 +555,7 @@ key "Ve-L06"
 
 .
  Since 
-\begin_inset Formula $\mathcal{L}_{B}$
+\begin_inset Formula $\mathcal{L}_{g}$
 \end_inset
 
  is a linear operator, the primary focus of study is to characterize it
