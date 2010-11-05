@@ -894,10 +894,31 @@ The Polynomial Representation
 \end_layout
 
 \begin_layout Standard
+The reason for working with polynomials is that it provides a convenient
+ way of working with infinitely-differentiable functions.
+ A polynomial, with a finite number of terms, is inherently bounded on the
+ unit interval.
+ This is not generally the case when working with a square-integrable Hilbert
+ space; square-integrable functions can be badly discontinuous, nor are
+ they, in general, bounded.
+ The hand-waving physics behind this is that 
+\begin_inset Quotes eld
+\end_inset
+
+nature is smooth
+\begin_inset Quotes erd
+\end_inset
+
+, and so, insofar as the operator is a model for some natural physical process,
+ one wants to stick to smooth functions.
+ As will be seen, this has a tremendous effect on the spectrum of the operator.
+\end_layout
+
+\begin_layout Standard
 The polynomial eigenvectors of the Bernoulli operator can be derived in
  several ways.
- One seemingly natural approach is to start with a Hilbert space of orthogonal
- polynomials on the unit interval.
+ One seemingly reasonable initial approach is to start with a Hilbert space
+ of orthogonal polynomials on the unit interval.
  This approach is taken by Driebe
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -906,7 +927,7 @@ key "Dri99"
 \end_inset
 
 , who starts with the Legendre polynomials, rescaled to the unit interval,
- and obtains the resulting Bernoulli polynomials.
+ and obtains the resulting Bernoulli eigenvectors.
  This allows for a derivation of the right eigenvectors, but is then discovered
  to generate difficulties when considering the left eigenvectors.
  This arises because the the Bernoulli operator is not invertible in this
@@ -926,23 +947,47 @@ key "Dri99"
  A set of left eigenvectors can be found, but these are not polynomials
  or even ordinary real-valued functions; rather, they are generalized functions,
  expressed as derivatives of the Dirac delta function.
- From this exercise, one concludes that the starting assumption of envisioning
- the transfer operator acting on a Hilbert space does not provide any particular
- benefit or insight, and thus can be dispensed with.
- 
+ In essence, a 
+\begin_inset Quotes eld
+\end_inset
+
+singular value decomposition
+\begin_inset Quotes erd
+\end_inset
+
+ is thus performed on the Bernoulli operator, but, as the operator is not
+ 'nice' or 'symmetric' in any common sense, the left and right factors don't
+ have any particular structure or relation to one-another.
+ From this exercise, one concludes that starting with a Hilbert space of
+ orthogonal polynomials offers no particular benefit.
 \end_layout
 
 \begin_layout Standard
-Generalized functions can be loosely defined as linear functionals from
- the space of functions to the reals.
- In this sense, generalized functions belong to the dual space of a function
- space.
- Given that the left eigenvectors of the Bernoulli operator can be shown
- to belong to such a dual space, it then makes sense to start in this way.
+Generalized functions are linear functionals from a space of functions to
+ the reals.
+ That is, generalized functions belong to the dual space of a function space.
+ Given that the left eigenvectors of the Bernoulli operator are 
+\begin_inset Quotes eld
+\end_inset
+
+naurally
+\begin_inset Quotes erd
+\end_inset
+
+ found to belong to such a dual space (but only after laborius calculation,
+ as in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dri99"
+
+\end_inset
+
+), it then makes sense to work with these, from the start.
  Thus, for the following, an infinite-dimensional vector space will be construct
 ed, with the basis elements being the monomials.
  The generalized functions appear naturally as elements of the dual space.
- The transfer operator then has a direct representation in this space.
+ The transfer operator then has a clear and simple representation in this
+ space.
  In principle, this infinite-dimensional vector space may be taken to be
  a Banach space; however, the development below does not make any particular
  use of the norm that Banach spaces are equipped with.
@@ -950,33 +995,7 @@ ed, with the basis elements being the monomials.
 \end_layout
 
 \begin_layout Standard
-This is perhaps a critical point, and deserves being belabored.
- In this section, the vocabulary for discussing an infinite-dimensional
- vector space will be developed.
- The sums appearing herein range formally over the countable infinity.
- However, the language of this section avoids questions of the convergence
- of these sums; the question of convergence can be deferred to later sections,
- when one is manipulating actual operators, and the sums take a concrete
- form.
- Thus, for the development of this section, a discussion of the vector norm,
- a discussion of a metric on the vector space, and a discussion of the topology
- of the vector space can be completely avoided.
- The manipulations are completely algebraic in nature.
- Curiously, this will continue to be the case when these algebraic manipulations
- are applied to the Bernoulli operator.
- That is, the resulting concrete sums will turn out to range over only a
- finite number of non-zero terms, and so the question of convergence will
- not come up.
- As a result, the foundations do not require a notion of norm, metric or
- topology on this vector space.
- When the exceptions to this rule crop up, they will be discussed explicitly.
-\end_layout
-
-\begin_layout Standard
-XXX the above is false, as there are plenty of places below where it is
- assumed that an infinite number of elts are non-zero.
- Again, need to refine the algebraic vs.
- topological discussion to handle these subtleties XXX.
+-----------
 \end_layout
 
 \begin_layout Standard
