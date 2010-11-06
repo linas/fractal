@@ -1704,13 +1704,15 @@ Given this duality, the operator
 \end_inset
 
 can then be recognized as a projection operator.
- In fact, it is complete in the monomial basis, in that 
+ In fact, it is algebraically complete in the monomial basis, in that 
 \begin_inset Formula \begin{equation}
 \left\langle j\left|\mathbb{I}_{B}\right|k\right\rangle =\left\langle j\right|\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|\left|k\right\rangle =\delta_{jk}\label{eq:B-complete}\end{equation}
 
 \end_inset
 
-can be shown, using essentially the same operations as in the proof above.
+holds.
+ This can be shown using essentially the same operations as in the proof
+ above.
  Also, as before, this demonstration involves sums with only a finite number
  of terms, and so completeness may be taken as an algebraic property.
  That is, 
@@ -1790,7 +1792,7 @@ reference "eq: Bernoulli-faulty"
 
 \end_inset
 
- is that it is misleading, as will be expanded upon in the following sections.
+ is that it is misleading.
  As long as the functions 
 \begin_inset Formula $f(x)$
 \end_inset
@@ -1827,15 +1829,23 @@ reference "eq: Bernoulli-faulty"
 \end_layout
 
 \begin_layout Standard
-However, as a space, the space of polynomials is not complete: the space
- does not contain all of its limit points.
+However, as a space, the space of polynomials is not itself complete: the
+ space does not contain all of its limit points.
  That is, there are sequences of polynomials that converge to infinite series;
  these infinite series are, by definition, not polynomials, and so are not
  a part of the space.
  So, for example, consider the series expansion for the sine wave.
  Truncated at any finite number of terms, the result is a polynomial.
- The sequence of ever-higher degree polynomials can be understood to converge
- to the sine wave.
+ This sequence of ever-higher degree polynomials can be understood to converge
+ to the sine wave (once an appropriate definition of 
+\begin_inset Quotes eld
+\end_inset
+
+convergence
+\begin_inset Quotes erd
+\end_inset
+
+ is given).
  However, the sine wave belongs to the kernel of 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset
@@ -1864,7 +1874,7 @@ reference "eq:Bernoulli operator"
 \begin_inset Formula $n$
 \end_inset
 
-; and so 
+; and so, in this completed space, 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset
 
@@ -1876,17 +1886,30 @@ reference "eq:Bernoulli operator"
 \end_inset
 
 .
+ Since 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset
+
+ is just a projection, the kernel of 
+\begin_inset Formula $\mathbb{I}_{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ are identical.
  Put another way: 
 \begin_inset Formula $\mathbb{I}_{B}$
 \end_inset
 
- has a large, non-trivial kernel on the completion, while, by contrast,
+ has a large, non-trivial kernel on the completed space, while, by contrast,
  the Dirac delta function 
 \begin_inset Formula $\delta(x-y)$
 \end_inset
 
  only has a trivial kernel.
- Thus, on the completion, 
+ Thus, on the completion of the space, 
 \begin_inset Formula $\mathbb{I}_{B}\ne\delta\left(x-y\right)$
 \end_inset
 
@@ -2000,8 +2023,8 @@ Koopman operator
 
 \end_inset
 
-By duality and completeness, one has that the Koopman operator is both a
- left and a right inverse, 
+By duality and algebraic completeness, one has that the Koopman operator
+ is both a left and a right inverse, 
 \begin_inset Formula \[
 \mathcal{L}_{B}\mathcal{K}_{B}=\mathcal{K}_{B}\mathcal{L}_{B}=\mathbb{I}_{B}\]
 
@@ -2018,16 +2041,9 @@ in the polynomial representation.
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset
 
- acting on other function spaces: it will be seen to have a large and non-trivia
-l kernel, and so it will not be invertible (as 
-\begin_inset Quotes eld
-\end_inset
-
-half
-\begin_inset Quotes erd
-\end_inset
-
- of its eigenvlaues will be seen to be zero).
+ acting on the approrpriately-defined completions of the space of polynomials,
+ or on other function spaces: it will be seen to have a large and non-trivial
+ kernel, and so it will not be invertible.
 \end_layout
 
 \begin_layout Subsection
@@ -2201,15 +2217,28 @@ Operator recap
 \end_layout
 
 \begin_layout Standard
-XXX Talk about the operator 
+XXX To-do: Talk about the operator 
 \begin_inset Formula \[
 \sum_{n}\lambda_{n}e_{n}\otimes e_{n}^{*}\]
 
 \end_inset
 
-in terms of bein a compact operator, a nuclear operator, etc.
+in terms of being a compact operator, a nuclear operator, etc.
  Talk about the order of the operator, Talk about the projective topological
  tensor product, in the language of Grothendieck.
+ The primary goal here is to justify the matrix-style notations of the previous
+ section.
+ i.e.
+ the matrix operations given above are valid because 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ is compact.
+ Its even trace-class: one has that 
+\begin_inset Formula $\sum_{n}\left|\lambda_{n}\right|<\infty$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
