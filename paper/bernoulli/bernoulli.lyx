@@ -58,7 +58,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 3 November 2010)
+2 January 2004 (revised 2008, 5 November 2010)
 \end_layout
 
 \begin_layout Abstract
@@ -1870,7 +1870,7 @@ reference "eq:Bernoulli operator"
 \begin_inset Formula $\mathcal{L}_{B}\sin2\pi nx=0$
 \end_inset
 
- for any interger 
+ for any odd interger 
 \begin_inset Formula $n$
 \end_inset
 
@@ -2249,8 +2249,8 @@ Topology, Completeness and Orthogonality
 The notions of completeness and orthogonality are treated above without
  any appeal to topology.
  That is, they are handled with what is essentially an algebraic approach,
- where all sums are essentially finite and well defined because all sums
- involve only a finite number of non-zero terms.
+ where all sums are finite and well defined because all sums involve only
+ a finite number of non-zero terms.
  This was possible in part by construction, and in part by luck: the Bernoulli
  operator was a solvable, upper-triangular matrix in the infinite vector
  space whose basis elements are the monomials.
@@ -2265,6 +2265,8 @@ The notions of completeness and orthogonality are treated above without
  A metric topology endows the infinite vector space with a norm, so that
  the length of a vector can be given, and the distance between vectors defined
  as the length of the vector difference.
+ Metrics or norms provide a particularly easy way of discussing the convergence
+ of limits.
 \end_layout
 
 \begin_layout Standard
@@ -2290,7 +2292,7 @@ The operator
 \begin_inset Formula $\mathbb{I}_{B}=\sum_{n=0}^{\infty}\left|B_{n}\right\rangle \left\langle \tilde{B}_{n}\right|$
 \end_inset
 
- was shown to be complete on the space of polynomials.
+ was shown to be algebraically complete on the space of polynomials.
  By this, it is meant that there is no polynomial that lies in the kernel
  of 
 \begin_inset Formula $\mathbb{I}_{B}$
@@ -2365,12 +2367,11 @@ reference "eq:Bernoulli operator"
 \end_layout
 
 \begin_layout Standard
-In the previous sections, it was established (XXX but perhaps not very clearly?
- XXX) that 
+In a previous section, it was established that 
 \begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}=\mathcal{L}_{B}^{\mbox{Monomial}}$
 \end_inset
 
- when considered as operators acting on the space of polynomials.
+, when these are considered as operators acting on the space of polynomials.
  However, these are not at all equivalent if one considers them as operators
  acting on sines and cosines.
  In particular, consider 
@@ -2382,12 +2383,12 @@ In the previous sections, it was established (XXX but perhaps not very clearly?
 \end_inset
 
 :
-\begin_inset Formula \begin{eqnarray}
-\left[\mathbb{I}_{B}f\right](x) & = & \left\langle x\left|\mathbb{I}_{B}\right|f\right\rangle \nonumber \\
- &  & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \left\langle \left.\tilde{B}_{n}\right|f\right\rangle \\
- & = & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\nonumber \\
- & = & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[(2\pi ik)^{n-1}e^{2\pi ik}-(2\pi ik)^{n-1}\right]\nonumber \\
- & = & 0\end{eqnarray}
+\begin_inset Formula \begin{align*}
+\left[\mathbb{I}_{B}f\right](x)= & \left\langle x\left|\mathbb{I}_{B}\right|f\right\rangle \\
+= & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \left\langle \left.\tilde{B}_{n}\right|f\right\rangle \\
+= & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\\
+= & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[(2\pi ik)^{n-1}e^{2\pi ik}-(2\pi ik)^{n-1}\right]\\
+= & 0\end{align*}
 
 \end_inset
 
@@ -2405,14 +2406,14 @@ reference "eq:B-tilde acting on f"
 \begin_inset Formula $\mathbb{I}_{M}$
 \end_inset
 
- does not behave this way: 
-\begin_inset Formula \begin{eqnarray}
-\left[\mathbb{I}_{M}f\right](x) & = & \left\langle x\left|\mathbb{I}_{M}\right|f\right\rangle \nonumber \\
- &  & \sum_{n=0}^{\infty}\left\langle x\left|n\right.\right\rangle \left\langle \left.n\right|f\right\rangle \\
- & = & \sum_{n=0}^{\infty}\left\langle x\left|n\right.\right\rangle \frac{1}{n!}f^{(n)}(0)\nonumber \\
- & = & \sum_{n=0}^{\infty}\left\langle x\left|n\right.\right\rangle \frac{1}{n!}(2\pi ik)^{n}\nonumber \\
- & = & \sum_{n=0}^{\infty}x^{n}\frac{1}{n!}(2\pi ik)^{n}\\
- & = & \exp2\pi ikx\end{eqnarray}
+ does not behave this way:
+\begin_inset Formula \begin{align*}
+\left[\mathbb{I}_{M}f\right](x)= & \left\langle x\left|\mathbb{I}_{M}\right|f\right\rangle \\
+= & \sum_{n=0}^{\infty}\left\langle x\left|n\right.\right\rangle \left\langle \left.n\right|f\right\rangle \\
+= & \sum_{n=0}^{\infty}\left\langle x\left|n\right.\right\rangle \frac{1}{n!}f^{(n)}(0)\\
+= & \sum_{n=0}^{\infty}\left\langle x\left|n\right.\right\rangle \frac{1}{n!}(2\pi ik)^{n}\\
+= & \sum_{n=0}^{\infty}x^{n}\frac{1}{n!}(2\pi ik)^{n}\\
+= & \exp2\pi ikx\end{align*}
 
 \end_inset
 
@@ -2581,8 +2582,8 @@ reference "eq: Bernoulli-faulty"
 \begin_inset Formula $\mathbb{I}_{S}=\sum_{n=0}^{\infty}\left|S_{n}\right\rangle \left\langle \tilde{S}_{n}\right|$
 \end_inset
 
- has a large kernel: this time, all functions that are evenly periodic are
- in the kernel.
+ also has a large kernel: this time, all functions that are evenly periodic
+ are in the kernel.
  That is, any function for which one has 
 \begin_inset Formula $f(y)=f(y+1/2)$
 \end_inset
@@ -2626,7 +2627,7 @@ Integrating, one gets
 
 \end_inset
 
-from which one deduces that 
+However, one finds that 
 \begin_inset Formula $\int_{0}^{1}\tilde{S}_{n}(x)\, B_{k}(x)\, dx=0$
 \end_inset
 
@@ -2647,10 +2648,14 @@ More generally, any such attempt to patch up the situation is doomed to
  fail.
  This is a well-known theorem of functional analysis, which states that
  the space 
-\begin_inset Formula $\mathbb{R}^{\omega}$
+\begin_inset Formula $\mathbb{R}^{\omega}=\mathbb{R}\times\mathbb{R}\times\cdots$
 \end_inset
 
-does not have a countable algebraic basis.
+ of a infinitly-countable number of copies of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ does not have a countable algebraic basis.
  That is, while one may be able to write down a countable number of linearly
  independent vectors 
 \begin_inset Formula $e_{k}$
@@ -2682,7 +2687,7 @@ does not have a countable algebraic basis.
 \end_inset
 
 .
- XXX Does this theorem have a name? Need to reference a ref for this.
+ XXX ToDo: Does this theorem have a name? Need to reference a ref for this.
  XXXX 
 \end_layout
 
