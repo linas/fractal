@@ -894,7 +894,7 @@ The Polynomial Representation
 \end_layout
 
 \begin_layout Standard
-The reason for working with polynomials is that it provides a convenient
+The reason for working with polynomials is that they provide a convenient
  way of working with infinitely-differentiable functions.
  A polynomial, with a finite number of terms, is inherently bounded on the
  unit interval.
@@ -995,10 +995,6 @@ ed, with the basis elements being the monomials.
 \end_layout
 
 \begin_layout Standard
------------
-\end_layout
-
-\begin_layout Standard
 Consider an infinite-dimensional vector space 
 \begin_inset Formula $V$
 \end_inset
@@ -1048,8 +1044,9 @@ For the space
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
- of real-analytic functions on the unit interval, the basis elements may
- be taken to be the monomials 
+ of real-analytic functions on the unit interval, there are many choices
+ one could make for the basis vectors.
+ Most obviously, basis elements may be taken to be the monomials 
 \begin_inset Formula $e_{k}=x^{k}$
 \end_inset
 
@@ -1069,14 +1066,18 @@ This may be trivially interpreted as nothing more than the Taylor's series
 \end_inset
 
 .
- The correct formalism for discussing the dual space is a bit trickier.
- There is a strong historical desire to represent the linear operators of
- the dual space by means of integrals, that is, to represent the linear
- functional 
+ Other possibilities for basis vectors will be considered later.
+\end_layout
+
+\begin_layout Standard
+The correct formalism for discussing the dual space is a bit trickier.
+ Following historical convention, the linear functionals of the dual space
+ may be represented as integrals.
+ The linear functional 
 \begin_inset Formula $L:\mathcal{P}\to\mathbb{R}$
 \end_inset
 
- by an integral 
+ may be written as the integral 
 \begin_inset Formula \[
 \int_{0}^{1}l(x)\, f(x)\, dx\]
 
@@ -1098,9 +1099,19 @@ generalized function
 \begin_inset Quotes erd
 \end_inset
 
-.
- Momentarily succumbing to this desire, one finds that the  dual vectors
- may be written as 
+, such as the Dirac delta function.
+ The difficulty with this is, of course, that 
+\begin_inset Quotes eld
+\end_inset
+
+generalized functions
+\begin_inset Quotes erd
+\end_inset
+
+ are not, in general, differentiable and can have other surprising properties.
+ However, with care, these can be handled in a consistent manner; a quick
+ review follows, as such use is not uncommon.
+ The  dual vectors may be written as 
 \begin_inset Formula \[
 e_{k}^{*}=\frac{(-1)^{k}}{k!}\delta^{(k)}(x)\]
 
@@ -1118,10 +1129,6 @@ e_{j}^{*}\left(e_{k}\right)=\int_{0}^{1}x^{k}\;\frac{(-1)^{j}}{j!}\delta^{(j)}(x
 \end_inset
 
 after integration by parts.
- Generalized functions are less than an ideal mechanism for representing
- elements of the dual space, but it is a mostly workable and consistent
- mechanism; its drawbacks in this particular context will be discussed in
- great detail below.
  The relation 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1131,15 +1138,20 @@ reference "eq:orthogonality"
 
  above demonstrates orthogonality; one may also show completeness: 
 \begin_inset Formula \[
-\sum_{n=0}^{\infty}e_{n}\otimes e_{n}^{*}=\sum_{n=0}^{\infty}x^{n}\,\frac{(-1)^{n}}{n!}\delta^{(n)}(x)=\delta(x-y)\]
+\sum_{n=0}^{\infty}e_{n}\otimes e_{n}^{*}=\sum_{n=0}^{\infty}x^{n}\,\frac{(-1)^{n}}{n!}\delta^{(n)}(y)=\delta(x-y)\]
 
 \end_inset
 
+ in that 
+\begin_inset Formula $f\left(x\right)=\int\delta\left(x-y\right)f\left(y\right)dy$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-The remainder of the text switches to the quantum mechanical bra-ket notation,
+Another common notation is that of quantum mechanical bra-ket notation,
  writing 
 \begin_inset Formula $\left|n\right\rangle =e_{n}$
 \end_inset
@@ -1208,7 +1220,7 @@ This notation allows the matrix elements
 \end_inset
 
  of the transfer operator to be articulated as well.
- Starting with the classical notation of equation 
+ Starting with the matrix notation of equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:taylor-f"
@@ -1240,7 +1252,7 @@ where
 \begin_inset Formula $x^{m}$
 \end_inset
 
- one finds, in the classical notation, that 
+ one finds, in the matrix notation, that 
 \begin_inset Formula \[
 \left.\frac{1}{m!}\;\frac{d^{m}\left[\mathcal{L}f\right](x)}{dx^{m}}\right|_{x=0}=\sum_{n=0}^{\infty}U_{mn}\left.\frac{1}{n!}\;\frac{d^{n}f(x)}{dx^{n}}\right|_{x=0}\]
 
@@ -1268,12 +1280,14 @@ reference "eq:transfer-dirac"
 
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_layout Standard
-Armed with this notation, the following section explores the matrix elements
- of the Bernoulli operator in this polynomial basis.
+So far, we've avoided discussions of convergence and completeness; these
+ will be returned to shortly.
+ Armed with these three different styles of notation, we can explore the
+ matrix elements of the Bernoulli operator in this polynomial basis.
  
 \end_layout
 
