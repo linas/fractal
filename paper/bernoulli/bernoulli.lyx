@@ -571,7 +571,8 @@ The eigenfunctions of
 \begin_inset Formula $\mathcal{L}_{g}$
 \end_inset
 
- are called Ruelle resonances [need citation], elaborate.
+ are called Ruelle resonances [need citation See Gaspard ref, I think that
+ will have it], elaborate.
 \end_layout
 
 \begin_layout Section
@@ -608,8 +609,8 @@ key "Rochberg1968"
 
 \begin_layout Standard
 The Bernoulli map is given by
-\begin_inset Formula \[
-b(x)=2x-\left\lfloor 2x\right\rfloor \]
+\begin_inset Formula \begin{equation}
+b(x)=2x-\left\lfloor 2x\right\rfloor \label{eq:Bernoulli map}\end{equation}
 
 \end_inset
 
@@ -797,7 +798,14 @@ and then equating the coefficients of the powers of
 \begin_inset Formula $p$
 \end_inset
 
--adic case:
+-adic case
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gas92"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Theorem
@@ -1734,7 +1742,14 @@ reference "eq:Bern-ident"
 
 \end_inset
 
- is the Euler-Maclaurin summation formula in disguise.
+ is the Euler-Maclaurin summation formula in disguise
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gas92,Dri99"
+
+\end_inset
+
+.
  This may be seen by expanding
 \end_layout
 
@@ -2646,12 +2661,11 @@ However, one finds that
 \begin_layout Standard
 More generally, any such attempt to patch up the situation is doomed to
  fail.
- This is a well-known theorem of functional analysis, which states that
- the space 
-\begin_inset Formula $l_{\infty}$
-\end_inset
-
- of bounded sequences does not have a countable algebraic (Hamel) basis
+ In essence, we are looking for a basis such that every point in the space
+ is a linear combination of a finite number of basis vectors.
+ Such a basis is called an algebraic or Hamel basis.
+ But the number of limit points in the space are uncountable, and so the
+ Hamel basis cannot be countable
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Carothers2005"
@@ -2659,55 +2673,166 @@ key "Carothers2005"
 \end_inset
 
 .
- That is, while one may be able to write down a countable number of linearly
- independent vectors 
-\begin_inset Formula $e_{k}$
-\end_inset
-
- with 
-\begin_inset Formula $k\in\mathbb{N}_{0}$
-\end_inset
-
-, the linear combinations 
-\begin_inset Formula $\sum_{k}a_{k}e_{k}$
-\end_inset
-
- with only a finite number of 
-\begin_inset Formula $a_{k}\in\mathbb{R}$
-\end_inset
-
- being non-zero fail to span all of 
-\begin_inset Formula $l_{\infty}$
-\end_inset
-
-.
- In particular, the vector 
-\begin_inset Formula $v=\sum_{k}e_{k}$
-\end_inset
-
- cannot be expressed as the sum over only a finite number of 
-\begin_inset Formula $e_{k}$
-\end_inset
-
-.
+ In such a suituation, the basis vectors can't be bi-orthogonal.
 \end_layout
 
 \begin_layout Section
-The Fourier Representation 
+The Fourier Representation
+\end_layout
+
+\begin_layout Standard
+As explored above, the Bernoulli operator is clearly quite different on
+ the completion of the space of polynomials than it is on the space of polynomia
+ls itself.
+ At this point, it would be nice to have a discussion how one might create
+ completions of the space of polynomials, how many of these are distinct,
+ and what thier different properties might be.
+ [XXX ToDo, do the above, at least in some appendix or something].
+ However, at this point, we make an ansatz, and jump to one reasonable space
+ that can fill the bill: the Hilbert space of square-integrable functions
+ on the unit interval.
+ This is a well-known, familiar space widely studied in textbooks, and so
+ is a suitable setting for further analysis of the Bernoulli operator.
+ 
+\end_layout
+
+\begin_layout Standard
+In what follows, many of the properties of this space will not be required
+ or appealed to.
+ The only important ingredient we'll make use of is that this space has
+ a basis spanned by the functions 
+\begin_inset Formula $\sin2\pi nx$
+\end_inset
+
+ and 
+\begin_inset Formula $\cos2\pi nx$
+\end_inset
+
+ for positive integers 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Also, keep in mind that, in general, an element of this space is not differenti
+able or even continuous (the square wave is a textbook example, although,
+ below, we'll construct the Cantor curve, which is an element of this space,
+ but is discontinuous at all dyadic rationals).
+ Eelements of this space are also not bounded, but may diverge to infinity.
+ From the physics viewpoint, this means thaat this space contains many 
+\begin_inset Quotes eld
+\end_inset
+
+non-physical
+\begin_inset Quotes erd
+\end_inset
+
+ functions.
+ So, for example, in physical systems, the kinetic energy commonly appears
+ as the square of the derivative; when a function is discontinuous, the
+ kinetic energy is effectively infinite.
+ So, in order to stick to 
+\begin_inset Quotes eld
+\end_inset
+
+physical
+\begin_inset Quotes erd
+\end_inset
+
+ systems.
+ one should properly have defined some sort of metric on the polynomials
+ that somehow took into account thier 
+\begin_inset Quotes eld
+\end_inset
+
+kinetic energy
+\begin_inset Quotes erd
+\end_inset
+
+, and then used this to define the completion of the space.
+ We save this task for some rainy day.
+\end_layout
+
+\begin_layout Standard
+The general element of the space of square-integrable functions on the unit
+ interval is given by 
+\begin_inset Formula \begin{equation}
+f(x)=a_{0}+\sum_{n=1}^{\infty}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\label{eq:Fourrier series}\end{equation}
+
+\end_inset
+
+Applying 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ as defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bernoulli operator"
+
+\end_inset
+
+ to this, one immediately finds that 
+\begin_inset Formula \begin{align*}
+\left[\mathcal{L}_{B}f\right]\left(x\right)=a_{0}+ & \sum_{n\mbox{ even }}a_{n}\cos\pi nx\;+b_{n}\sin\pi nx\\
+= & a_{0}+\sum_{n=1}^{\infty}a_{2n}\cos2\pi nx\;+b_{2n}\sin2\pi nx\end{align*}
+
+\end_inset
+
+The doubling of the Bernoulli map 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bernoulli map"
+
+\end_inset
+
+ manifests itself as a doubling of the coefficient indexes.
+ In bra-ket notation, one has 
+\begin_inset Formula $\left\langle em\left|\mathcal{L}_{B}\right|en\right\rangle =\delta_{m,2n}$
+\end_inset
+
+, where we use the abbreviated notation 
+\begin_inset Formula $\left|en\right\rangle $
+\end_inset
+
+ to stand for 
+\begin_inset Formula $\cos2\pi nx$
+\end_inset
+
+ or 
+\begin_inset Formula $\sin2\pi nx$
+\end_inset
+
+, as appropriate.
+ Writing this out in matrix form, the Bernoulli operator has the distinctive
+ form 
+\begin_inset Formula \begin{equation}
+\mathcal{L}_{B}=\left[\begin{array}{cccccc}
+1 & 0 & 0 & 0 & 0 & ...\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & ...\\
+...\end{array}\right]\label{eq:trig-matrix}\end{equation}
+
+\end_inset
+
+with every other column consisting entirely of zeros.
+ Clearly, this operator is quite singular, and has a large kernel.
+ 
 \end_layout
 
 \begin_layout Standard
 The Koopman operator of the Bernoulli Map has the property of taking a function
  and making two copies of it.
- That is, 
-\begin_inset Formula \begin{eqnarray}
-\left[\mathcal{K}_{B}f\right](y) & = & \int_{0}^{1}\delta\left(x-b(y)\right)f(x)\, dx\nonumber \\
- & = & f(b(y))\nonumber \\
- & = & f(2y)\theta(1-2y)+f(2y-1)\theta(2y-1)\end{eqnarray}
+ Working from it's definition, the Koopman operator is given by
+\begin_inset Formula \begin{align*}
+\left[\mathcal{K}_{B}f\right](y)= & \int_{0}^{1}\delta\left(x-b(y)\right)f(x)\, dx\\
+= & \sum_{\forall x:x=b\left(y\right)}f\left(x\right)\\
+= & f(2y)\theta(1-2y)+f(2y-1)\theta(2y-1)\end{align*}
 
 \end_inset
 
-where 
+Here, 
 \begin_inset Formula $\theta(x)$
 \end_inset
 
@@ -2720,32 +2845,28 @@ where
 \end_inset
 
 .
- The Koopman operator for the Bernoulli map is not faithfully representable
- in the polynomial basis; this can be seen in two ways.
- First, it introduces a discontinuity at 
-\begin_inset Formula $x=1/2$
+ Of course, 
+\begin_inset Formula $b\left(x\right)$
 \end_inset
 
- which the polynomials cannot move beyond; the radius of the circle of converge
- is limited by this singularity.
- Secondly, it takes a function and more-or-less makes it periodic; again,
- the polynomials cannot cope directly with this.
- Thus, one is motivated to explore the Fourier representation, if only to
- express the Koopman operator.
- 
-\end_layout
-
-\begin_layout Standard
-It is easy to find an explicit form for this operator in the Fourier basis.
- Writing 
-\begin_inset Formula \[
-f(x)=\sum_{n}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\]
+ is the map 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bernoulli map"
 
 \end_inset
 
-then 
+.
+ Acting on the Fourier series 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Fourrier series"
+
+\end_inset
+
+, one has that 
 \begin_inset Formula \[
-\left[\mathcal{K}_{B}f\right](x)=\sum_{n}a_{n}\cos4\pi nx\;+b_{n}\sin4\pi nx\]
+\left[\mathcal{K}_{B}f\right](x)=a_{0}+\sum_{n=1}^{\infty}a_{n}\cos4\pi nx\;+b_{n}\sin4\pi nx\]
 
 \end_inset
 
@@ -2754,8 +2875,7 @@ or, in Dirac notation,
 \end_inset
 
 .
- This is a very singular operator in this basis.
- Visually, it has the distinctive appearance of 
+ In matrix form, it has the visual appearance of 
 \begin_inset Formula \[
 \mathcal{K}_{B}=\left[\begin{array}{cccccc}
 1 & 0 & 0 & 0 & 0 & ...\\
@@ -2768,37 +2888,17 @@ or, in Dirac notation,
 \end_inset
 
 where every other row consists of zeros.
- The row-column numbering is such that the upper-left hand cell is numbered
- 
-\begin_inset Formula $(0,0)$
-\end_inset
-
-, so that the next nonzero cell 
-\begin_inset Formula $(2,1)$
-\end_inset
-
- is the third from the top, and second over.
- In this same basis, 
+ It is obvious that 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset
 
-is equally remarkable: it is literally the transpose: that is 
+ is literally the transpose: 
 \begin_inset Formula $\mathcal{K}_{B}=\mathcal{L}_{B}^{T}$
 \end_inset
 
- in this basis, and so 
-\begin_inset Formula \begin{equation}
-\mathcal{L}_{B}=\left[\begin{array}{cccccc}
-1 & 0 & 0 & 0 & 0 & ...\\
-0 & 0 & 1 & 0 & 0\\
-0 & 0 & 0 & 0 & 1\\
-0 & 0 & 0 & 0 & 0\\
-0 & 0 & 0 & 0 & ...\\
-...\end{array}\right]\label{eq:trig-matrix}\end{equation}
-
-\end_inset
-
-In this representation, it is easily seen that 
+ in this basis.
+ Also quite evident is that, just as in the coordinate-space representation,
+ one has that 
 \begin_inset Formula $\mathcal{L}_{B}\mathcal{K}_{B}=1$
 \end_inset
 
@@ -2806,8 +2906,10 @@ In this representation, it is easily seen that
 \begin_inset Formula $\mathcal{K}_{B}\mathcal{L}_{B}\neq1$
 \end_inset
 
-, just as in the coordinate-space representation.
- This can be used to show the following:
+.
+ The Koopman operator is the right-inverse for the Bernoulli operator, but
+ it is not the left-inverse.
+ In fact, 
 \end_layout
 
 \begin_layout Theorem
@@ -2843,6 +2945,15 @@ which is clearly false.
 \end_layout
 
 \begin_layout Standard
+But, of course, 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ is singular, so such an inverse cannot exist.
+ 
+\end_layout
+
+\begin_layout Standard
 It is instructive to verify that the Bernoulli polynomials are still eigenfuncti
 ons in this representation.
  For 
@@ -2855,8 +2966,24 @@ ons in this representation.
 
 \end_inset
 
-and it is straightforward to visually verify that 
-\begin_inset Formula $U_{B}B_{1}=\frac{1}{2}B_{1}$
+and it is straightforward to 
+\begin_inset Quotes eld
+\end_inset
+
+visually verify
+\begin_inset Quotes erd
+\end_inset
+
+ that 
+\begin_inset Formula $\mathcal{L}_{B}B_{1}=\frac{1}{2}B_{1}$
+\end_inset
+
+, i.e.
+ to take the above coefficients, and multiply them into the matrix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:trig-matrix"
+
 \end_inset
 
 .
