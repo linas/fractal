@@ -1326,7 +1326,7 @@ k\end{array}\right)=\frac{m!}{k!(m-k)!}$
 
 \end_inset
 
- is a traceless, pure upper-triangular matrix.
+is a traceless, pure upper-triangular matrix.
  These matrix elements are easily obtained by direct substitution, that
  is, by contemplating the coefficient to the 
 \begin_inset Formula $x^{m}$
@@ -1338,10 +1338,11 @@ k\end{array}\right)=\frac{m!}{k!(m-k)!}$
 
 \end_inset
 
- Both the diagonal elements, and the reason for the appearance of the binomial
+Both the diagonal elements, and the reason for the appearance of the binomial
  coefficients should be immediately clear.
  Note that the evaluation of these matrix elements does not require the
- evaluation of any sums with an infinite number of non-zero terms.
+ evaluation of any sums with an infinite number of non-zero terms; the sums
+ are all finite.
 \end_layout
 
 \begin_layout Standard
@@ -1397,7 +1398,7 @@ k\end{array}\right)B_{n-k} & \;\textrm{ for }\; & k\leq n\\
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $B_{k}$
 \end_inset
 
@@ -1425,7 +1426,7 @@ The
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Proof
@@ -1444,9 +1445,9 @@ m\end{array}\right)B_{n-m}+...non-trivial-taylor-expn\\
 
 \end_inset
 
- XXX fill in details.
+XXX To-do: fill in details.
  Note that this proof does not require the evaluation of any sums with an
- infinite number of non-zero elements; all sums are algebraically finite.
+ infinite number of non-zero elements; all sums are finite.
 \end_layout
 
 \begin_layout Standard
@@ -1462,10 +1463,10 @@ k\end{array}\right)B_{n-k}x^{k}=B_{n}(x)\]
 
 \end_inset
 
- These were previously shown to be eigenvectors, and so this is consistent
+These were previously shown to be eigenvectors, and so this is consistent
  with the above.
- Thus, at this level, one may conclude that the coordinate representation
- and the matrix representation for this transfer operator are consistent.
+ One may conclude that the coordinate representation and the matrix representati
+on for this transfer operator are consistent.
  
 \end_layout
 
@@ -1495,7 +1496,7 @@ n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:B-
 
 \end_inset
 
- The zeroth left eigenvector is a special-case; it has components 
+The zeroth left eigenvector is a special-case; it has components 
 \begin_inset Formula $\left\langle \left.\tilde{B}_{0}\right|k\right\rangle =1/(k+1)$
 \end_inset
 
@@ -1509,7 +1510,7 @@ n-1\end{array}\right)\frac{1}{n}\left(\delta_{nk}+\Theta_{nk}\right)\label{eq:B-
 
 \end_inset
 
-which may again be demonstrated by a brute-force evaluation of the sum.
+This may again be demonstrated by a brute-force evaluation of the sum.
  Despite the fact that an infinite number of the left eigenvector components
  are non-vanishing, this sum will only contain a finite number of non-zero
  terms, and thus its finiteness is guaranteed on algebraic grounds.
@@ -1547,13 +1548,13 @@ for the
 \begin_inset Formula $f(x)$
 \end_inset
 
-: 
-\begin_inset Formula \begin{eqnarray}
-\int_{0}^{1}dx\,\left\langle \left.\tilde{B}_{0}\right|x\right\rangle f(x) & = & \int_{0}^{1}dx\, f(x)\sum_{k=0}^{\infty}(-)^{k}\frac{\delta^{(k)}(x)}{(k+1)!}\nonumber \\
- & = & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{(k+1)!}\nonumber \\
- & = & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}\int_{0}^{1}x^{k}dx\nonumber \\
- & = & \int_{0}^{1}f(x)dx\nonumber \\
- & = & \left\langle \left.\tilde{B}_{0}\right|f\right\rangle \end{eqnarray}
+:
+\begin_inset Formula \begin{align*}
+\int_{0}^{1}dx\,\left\langle \left.\tilde{B}_{0}\right|x\right\rangle f(x)= & \int_{0}^{1}dx\, f(x)\sum_{k=0}^{\infty}(-)^{k}\frac{\delta^{(k)}(x)}{(k+1)!}\\
+= & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{(k+1)!}\\
+= & \sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}\int_{0}^{1}x^{k}dx\\
+= & \int_{0}^{1}f(x)dx\\
+= & \left\langle \left.\tilde{B}_{0}\right|f\right\rangle \end{align*}
 
 \end_inset
 
@@ -1794,8 +1795,13 @@ reference "eq: Bernoulli-faulty"
 \begin_inset Formula $f(x)$
 \end_inset
 
- are in all cases understood to be polynomials, then there is no harm in
- using equation 
+ are in all cases understood to be polynomials (
+\emph on
+i.e
+\emph default
+.
+ with a finite number of terms, and not infinite series), then there is
+ no harm in using equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq: Bernoulli-faulty"
@@ -1817,18 +1823,81 @@ reference "eq: Bernoulli-faulty"
 \end_inset
 
 .
- However, one may consider larger function spaces than those consisting
- of polynomials; on these spaces, 
+ 
+\end_layout
+
+\begin_layout Standard
+However, as a space, the space of polynomials is not complete: the space
+ does not contain all of its limit points.
+ That is, there are sequences of polynomials that converge to infinite series;
+ these infinite series are, by definition, not polynomials, and so are not
+ a part of the space.
+ So, for example, consider the series expansion for the sine wave.
+ Truncated at any finite number of terms, the result is a polynomial.
+ The sequence of ever-higher degree polynomials can be understood to converge
+ to the sine wave.
+ However, the sine wave belongs to the kernel of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+: taking 
+\begin_inset Formula $f\left(x\right)=\sin2\pi x$
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bernoulli operator"
+
+\end_inset
+
+, one finds that 
+\begin_inset Formula $\mathcal{L}_{B}\sin2\pi x=0$
+\end_inset
+
+.
+ In fact, one has 
+\begin_inset Formula $\mathcal{L}_{B}\sin2\pi nx=0$
+\end_inset
+
+ for any interger 
+\begin_inset Formula $n$
+\end_inset
+
+; and so 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ has a rather large kernel.
+ Its just that no polynomial belongs to that kernel; one requires the completion
+ of the space of polynomials by infinite series to find the non-trivial
+ kernel of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+.
+ Put another way: 
 \begin_inset Formula $\mathbb{I}_{B}$
 \end_inset
 
- will be found to have a large and non-trivial kernel, while by contrast,
+ has a large, non-trivial kernel on the completion, while, by contrast,
  the Dirac delta function 
 \begin_inset Formula $\delta(x-y)$
 \end_inset
 
- does not have a non-trivial kernel on these same spaces.
- This will be delved into in the next section.
+ only has a trivial kernel.
+ Thus, on the completion, 
+\begin_inset Formula $\mathbb{I}_{B}\ne\delta\left(x-y\right)$
+\end_inset
+
+, in contradiction to 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: Bernoulli-faulty"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
