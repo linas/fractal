@@ -58,7 +58,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 6 November 2010)
+2 January 2004 (revised 2008, 7 November 2010)
 \end_layout
 
 \begin_layout Abstract
@@ -1571,7 +1571,7 @@ One may write down a coordinate-space representation for the left eigenvectors,
  & = & \frac{1}{n}\sum_{k=n}^{\infty}\left(\begin{array}{c}
 k\\
 n-1\end{array}\right)(-)^{k}\frac{\delta^{(k)}(x)}{k!}\nonumber \\
- & = & \frac{(-)^{n+1}}{n!}\left[\delta^{(n-1)}(1-x)-\delta^{(n-1)}(x)\right]\label{eq:left bernoulli}\end{eqnarray}
+ & = & \frac{(-1)^{n+1}}{n!}\left[\delta^{(n-1)}(1-x)-\delta^{(n-1)}(x)\right]\label{eq:left bernoulli}\end{eqnarray}
 
 \end_inset
 
@@ -2441,8 +2441,8 @@ In a previous section, it was established that
 \begin_inset Formula \begin{align*}
 \left[\mathbb{I}_{B}f\right](x)= & \left\langle x\left|\mathbb{I}_{B}\right|f\right\rangle \\
 = & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \left\langle \left.\tilde{B}_{n}\right|f\right\rangle \\
-= & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]\\
-= & \sum_{n=0}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[(2\pi ik)^{n-1}e^{2\pi ik}-(2\pi ik)^{n-1}\right]\\
+= & \sum_{n=1}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[f^{(n-1)}(1)-f^{(n-1)}(0)\right]+\int_{0}^{1}f\left(x\right)dx\\
+= & \sum_{n=1}^{\infty}\left\langle x\left|B_{n}\right.\right\rangle \frac{1}{n!}\left[(2\pi ik)^{n-1}e^{2\pi ik}-(2\pi ik)^{n-1}\right]\\
 = & 0\end{align*}
 
 \end_inset
@@ -2505,8 +2505,8 @@ Since the sine function is the limit of a polynomial sequence, it seems
 \begin_inset Formula $\mathcal{L}_{B}^{\mbox{Bernoulli}}$
 \end_inset
 
- has only a trivial kernel on the space of polynomials, while utterly and
- completely killing all sine functions.
+ has only a trivial kernel on the space of polynomials, while killing odd-period
+ sine and cosine functions.
  In order to define limits, or more precisely, in order to define 
 \begin_inset Formula $\sin2\pi x$
 \end_inset
@@ -2514,6 +2514,14 @@ Since the sine function is the limit of a polynomial sequence, it seems
  as the limit of a sequence of polynomials, one must define the manner in
  which a polynomial sequence can converge to a function, and, for that,
  one must have a topology.
+ This conundrum is revisited, and soved, in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Kernel on L_2"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3076,6 +3084,13 @@ Applying the Fourier-representation
 
 \begin_layout Subsection
 The Kernel
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Kernel on L_2"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7710,14 +7725,13 @@ Apologies for the format of this paper.
 
 \begin_layout Section
 \start_of_appendix
-The clash of polynomial and square-integrable spaces.
+Review of Dirac Notation
 \end_layout
 
 \begin_layout Standard
-This appendix reviews the clashing nature of the polynomial and square-integrabl
-e spaces, by illustrating how reasonable, intuitive assuptions about completenes
-s and summability can lead to badly formed expressions for even the simplest
- operator, the identity operator.
+This appendix reviews the Dirac or bra-ket notation on the polynomial and
+ square-integrable spaces, and illustrates this by performing a calculation
+ that mixes the two.
 \end_layout
 
 \begin_layout Standard
@@ -7764,8 +7778,10 @@ reference "eq:analytic completeness"
 \end_inset
 
 .
- That the later holds is particularly justified by realizing that it is
- just a formalized notation for the Taylor's series in eqn 
+ The later may be understood as the identity operator on the space of polynomial
+s, or, more broadly, on the space of analytic functions.
+ This interpretation is justified by realizing that it is just a formalized
+ notation for the Taylor's series in eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:Taylors bra-kets"
@@ -7855,15 +7871,18 @@ These are also complete over coordinate space, in that, for any arbitrary
 
  , one has
 \begin_inset Formula \begin{align*}
-f(x)=\left\langle x|f\right\rangle = & \sum_{n=-\infty}^{\infty}\left\langle x|en\right\rangle \left\langle en|f\right\rangle \\
-= & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\left\langle en|y\right\rangle \left\langle y|f\right\rangle \\
+f\left(x\right)= & \int_{0}^{1}dy\,\delta(x-y)\, f(y)\\
 = & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\exp(-i2\pi ny)f(y)\\
-= & \int_{0}^{1}dy\,\delta(x-y)\, f(y)\end{align*}
+= & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\left\langle en|y\right\rangle \left\langle y|f\right\rangle \\
+= & \sum_{n=-\infty}^{\infty}\left\langle x|en\right\rangle \left\langle en|f\right\rangle \\
+= & \left\langle x\right|\sum_{n=-\infty}^{\infty}\left|en\right\rangle \left\langle en\right|\left|f\right\rangle \\
+= & \left\langle x\right|1_{F}\left|f\right\rangle \\
+= & \left\langle x|f\right\rangle \end{align*}
 
 \end_inset
 
-The above made use of the usual expanstion of the Dirac delta as a Fourier
- seires:
+The above made use of the usual expansion of the Dirac delta as a Fourier
+ series:
 \begin_inset Formula \[
 \delta\left(x-y\right)=\sum_{n=-\infty}^{\infty}\exp\left(i2\pi n\left(x-y\right)\right)\]
 
@@ -7903,25 +7922,14 @@ The completeness of tbe basis over
 \begin_layout Standard
 So far, all of the above definitions and developments are standard textbook
  fare.
- Now for a few surprises: the above formalisisms are incompatible.
- The interplay between teh two leads to non-trivial expressions, divergent
- sums, and badly violates one's sense of intuition, given the ordinary,
- placid, textbook development of the subject.
- In particular, one might assume, given the above, that the identity operator
- on 
-\begin_inset Formula $L_{2}$
-\end_inset
-
- can serve as the identity operator on the space of analytic functions;
- namely that 
+ We now embark on a slightly more challenging calculation: to show that
+ 
 \begin_inset Formula $\left\langle m\right|1_{F}\left|n\right\rangle =\delta_{nm}$
 \end_inset
 
 .
- This seems entirely reasonable, and indeed, by performing calculations
- in a certain order, one can certainly show this.
- However, reversing the order of the calculation shows how badly wrong this
- assumption is.
+ In the process, one encounters some divergent sums; these can, however,
+ be rescued by means of analytic continuation.
 \end_layout
 
 \begin_layout Standard
@@ -7949,9 +7957,38 @@ while
 
 .
  Essentially, this is nothing more than a plain-old Taylor's series expansion
- of the exponential function; reasonable, insofar as the exponnential function
+ of the exponential function; reasonable, insofar as the exponential function
  is an entire function on the complex plane.
- The conjugate vectors have a slightly trickier form.
+ The first step in the above was to insert the coordinate-space identity
+ operator:
+\begin_inset Formula \[
+1_{C}=\int_{0}^{1}dx\left|x\right\rangle \left\langle x\right|\]
+
+\end_inset
+
+That 
+\begin_inset Formula $1_{C}$
+\end_inset
+
+ deserves the status of an identity operator may be seen by noting that,
+ for any function 
+\begin_inset Formula $f$
+\end_inset
+
+, one has 
+\begin_inset Formula $f\left(y\right)=\left\langle y|f\right\rangle =\int_{0}^{1}dx\left\langle y|x\right\rangle \left\langle x|f\right\rangle =\int_{0}^{1}dx\delta\left(y-x\right)f\left(y\right)$
+\end_inset
+
+, where we made use of 
+\begin_inset Formula $\left\langle y|x\right\rangle =\delta\left(y-x\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The conjugate vectors have a slightly trickier form.
  They are the Fourier components of monomials.
  For 
 \begin_inset Formula $m\neq0$
@@ -7993,28 +8030,32 @@ while, for
 
 \end_inset
 
-Remember, we are hoping to find that 
-\begin_inset Formula $\left\langle p\right|1_{F}\left|n\right\rangle =\delta_{pn}$
-\end_inset
-
- but this is not at all the case.
- We need only to look at the relatively simple matrix element 
+Consider first the matrix element 
 \begin_inset Formula $n=1$
 \end_inset
 
 , 
+\begin_inset Formula $p\ne0$
+\end_inset
+
+, to see the misery of this expression: 
+\begin_inset Formula \[
+\left\langle p\ne0\right|1_{F}\left|n=1\right\rangle =-\frac{\left(2\pi i\right)^{p-1}}{p!}\sum_{m=1}^{\infty}\left[m^{p-1}-\left(-m\right)^{p-1}\right]\]
+
+\end_inset
+
+For 
 \begin_inset Formula $p$
 \end_inset
 
- odd, to see the misery of this expression: 
-\begin_inset Formula \[
-\left\langle p\mbox{ odd}\right|1_{F}\left|n=1\right\rangle =\frac{\left(2\pi i\right)^{p-1}}{p!}\sum_{m=1}^{\infty}m^{p-1}\]
-
+ even, the sum on the right vanishes.
+ For 
+\begin_inset Formula $p$
 \end_inset
 
-The sum on the right is divergent.
- One can try to rescue the situation by making the Ansatz that the summation
- should have been replaced by 
+ even, the sum on the right is formally divergent.
+ One may rescue the situation by making the Ansatz that the summation should
+ have been replaced by 
 \begin_inset Formula $\zeta(1-p)$
 \end_inset
 
@@ -8025,54 +8066,55 @@ i.e.
 \emph default
  that the summation should be replaced by it's analytic continuation, which
  is the Riemann zeta function.
- Doing so does not make things better, as, after all we were expecting 
-\begin_inset Formula $\left\langle p\mbox{ odd}\right|1_{F}\left|n=1\right\rangle =\delta_{p1}$
+ So:
+\begin_inset Formula \[
+\left\langle p\ne0\right|1_{F}\left|n=1\right\rangle =-\frac{2\left(2\pi i\right)^{p-1}}{p!}\zeta\left(1-p\right)\]
+
 \end_inset
 
- and the zeta has a pole at 
-\begin_inset Formula $p=1$
+For 
+\begin_inset Formula $p=1,$
+\end_inset
+
+we have 
+\begin_inset Formula $\zeta\left(0\right)=-1/2$
+\end_inset
+
+ and so 
+\begin_inset Formula $\left\langle p=1\right|1_{F}\left|n=1\right\rangle =1$
+\end_inset
+
+ as expected.
+ For 
+\begin_inset Formula $p$
+\end_inset
+
+ odd, one has that 
+\begin_inset Formula $\zeta\left(-2k\right)=0$
+\end_inset
+
+ for all positive integers 
+\begin_inset Formula $k>0$
+\end_inset
+
+, and so one has exactly what was expected: 
+\begin_inset Formula $\left\langle p\ne0\right|1_{F}\left|n=1\right\rangle =\delta_{p1}$
 \end_inset
 
 .
- Clearly, analytic functions and Fourier series don't play nice together,
- even when constrained to the unit interval.
-\end_layout
-
-\begin_layout Standard
-What is perhaps the more surprising is that one might have expected this
- kind of trouble from the polynomial completeness relationship 
-\begin_inset Formula $\mathbb{I}_{A}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
+ Calculations for other values of 
+\begin_inset Formula $n$
 \end_inset
 
- because it ranges only over analytic functions.
- This relationship embodies the core idea that analytic functions are one
- and the same as power series.
- The space 
-\begin_inset Formula $L_{2}$
-\end_inset
-
- is 'bigger' than the space of analytic functions; 
-\begin_inset Formula $L_{2}$
-\end_inset
-
- continains functions that are discontinuous, and so one might expect these
- functions to reveal something about the structure of 
-\begin_inset Formula $\mathbb{I}_{A}$
-\end_inset
-
-.
- However, we expect 
-\begin_inset Formula $1_{F}$
-\end_inset
-
- to be more faithful; its the identity on the bigger space.
- Thus, such a simple failing is surprising.
+ are somewhat more difficult, but ultimately provide the expected answer:
  
-\end_layout
+\begin_inset Formula $\left\langle p\right|1_{F}\left|n\right\rangle =\left\langle p|n\right\rangle =\delta_{pn}$
+\end_inset
 
-\begin_layout Standard
-The goal here was to present a signpost warning, as one trundles through
- various calculations.
+.
+ There is, however, a cautionary tale that becomes clear as one tries to
+ carry out this calculation: formally divergent sums are best avoided before-han
+d, by re-arranging terms before they become a problem.
 \end_layout
 
 \begin_layout Section
