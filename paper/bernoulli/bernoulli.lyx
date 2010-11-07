@@ -7710,17 +7710,14 @@ Apologies for the format of this paper.
 
 \begin_layout Section
 \start_of_appendix
-Appendix A
-\end_layout
-
-\begin_layout Subsection
 The clash of polynomial and square-integrable spaces.
 \end_layout
 
 \begin_layout Standard
 This appendix reviews the clashing nature of the polynomial and square-integrabl
-e spaces.
- 
+e spaces, by illustrating how reasonable, intuitive assuptions about completenes
+s and summability can lead to badly formed expressions for even the simplest
+ operator, the identity operator.
 \end_layout
 
 \begin_layout Standard
@@ -7904,96 +7901,119 @@ The completeness of tbe basis over
 \end_layout
 
 \begin_layout Standard
-So far, all of teh 
-\end_layout
+So far, all of the above definitions and developments are standard textbook
+ fare.
+ Now for a few surprises: the above formalisisms are incompatible.
+ The interplay between teh two leads to non-trivial expressions, divergent
+ sums, and badly violates one's sense of intuition, given the ordinary,
+ placid, textbook development of the subject.
+ In particular, one might assume, given the above, that the identity operator
+ on 
+\begin_inset Formula $L_{2}$
+\end_inset
 
-\begin_layout Standard
-Thus, in light of this perfectly ordinary standard textbook behavior, the
- following shall be surprising.
- The matrix elements of this operator, expressed in the polynomial basis,
- are not only non-trivial, but are divergent.
- That is, one can be lulled into believing that 
+ can serve as the identity operator on the space of analytic functions;
+ namely that 
 \begin_inset Formula $\left\langle m\right|1_{F}\left|n\right\rangle =\delta_{nm}$
 \end_inset
 
- for the polynomial basis, and indeed, by performing the operations in a
- certain order, one can certainly show this.
- However, reversing the order of operations shows that what might seem like
- simple operations can in fact be quite treacherous.
- 
+.
+ This seems entirely reasonable, and indeed, by performing calculations
+ in a certain order, one can certainly show this.
+ However, reversing the order of the calculation shows how badly wrong this
+ assumption is.
 \end_layout
 
 \begin_layout Standard
-We begin by writing the components of the vector 
+Begin by writing the components of the vector 
 \begin_inset Formula $\left|em\right\rangle $
 \end_inset
 
- in the polynomial-space representation:
-\end_layout
+ in the polynomial-space representation.
+ For 
+\begin_inset Formula $m\ne0$
+\end_inset
 
-\begin_layout Standard
-\begin_inset Formula \begin{eqnarray}
-\left\langle n|em\right\rangle  & = & \int_{0}^{1}dx\left\langle n|x\right\rangle \left\langle x|em\right\rangle \nonumber \\
- & = & \int_{0}^{1}dx\,\frac{(-1)^{n}}{n!}\delta^{(n)}(x)\, e^{i2\pi mx}\nonumber \\
- & = & \int_{0}^{1}dx\,\frac{\delta(x)}{n!}\,\frac{d^{n}}{dx^{n}}\, e^{i2\pi mx}\nonumber \\
- & = & \frac{(i2\pi m)^{n}}{n!}\end{eqnarray}
+, one has
+\begin_inset Formula \begin{align*}
+\left\langle n|em\right\rangle = & \int_{0}^{1}dx\left\langle n|x\right\rangle \left\langle x|em\right\rangle \\
+= & \int_{0}^{1}dx\,\frac{(-1)^{n}}{n!}\delta^{(n)}(x)\, e^{i2\pi mx}\\
+= & \int_{0}^{1}dx\,\frac{\delta(x)}{n!}\,\frac{d^{n}}{dx^{n}}\, e^{i2\pi mx}\\
+= & \frac{(i2\pi m)^{n}}{n!}\end{align*}
 
 \end_inset
 
-Essentially, this is nothing more than a plain-old Taylor's Series expansion
- of the exponential function.
+while 
+\begin_inset Formula $\left\langle n|e0\right\rangle =\delta_{n0}$
+\end_inset
+
+.
+ Essentially, this is nothing more than a plain-old Taylor's series expansion
+ of the exponential function; reasonable, insofar as the exponnential function
+ is an entire function on the complex plane.
  The conjugate vectors have a slightly trickier form.
  They are the Fourier components of monomials.
  For 
 \begin_inset Formula $m\neq0$
 \end_inset
 
- 
-\begin_inset Formula \begin{eqnarray}
-\left\langle em|n\right\rangle  & = & \int_{0}^{1}dy\left\langle em|y\right\rangle \left\langle y|n\right\rangle \nonumber \\
- & = & \int_{0}^{1}\exp(-2\pi imy)\, y^{n}\, dy\nonumber \\
- & = & \frac{-1}{2\pi im}+\frac{n}{2\pi im}\int_{0}^{1}\exp(-2\pi imy)\, y^{n-1}\, dy\nonumber \\
- & = & -\frac{1}{2\pi im}\sum_{k=0}^{n-1}\frac{n!}{(n-k)!}\left(\frac{1}{2\pi im}\right)^{k}\end{eqnarray}
+ one has
+\begin_inset Formula \begin{align*}
+\left\langle em|n\right\rangle = & \int_{0}^{1}dy\left\langle em|y\right\rangle \left\langle y|n\right\rangle \\
+= & \int_{0}^{1}\exp(-2\pi imy)\, y^{n}\, dy\\
+= & \frac{-1}{2\pi im}+\frac{n}{2\pi im}\int_{0}^{1}\exp(-2\pi imy)\, y^{n-1}\, dy\\
+= & -\frac{1}{2\pi im}\sum_{k=0}^{n-1}\frac{n!}{(n-k)!}\left(\frac{1}{2\pi im}\right)^{k}\end{align*}
 
 \end_inset
 
-and, for 
+while, for 
 \begin_inset Formula $m=0$
 \end_inset
 
-, 
+, one simply has 
 \begin_inset Formula $\left\langle e0|n\right\rangle =1/(n+1)$
 \end_inset
 
 .
  Let us now try to explicitly evaluate the matrix elements of the Fourier
- identity operator in the polynomial representation.
+ identity operator 
+\begin_inset Formula $1_{F}$
+\end_inset
+
+ in the polynomial representation.
  That is, we attempt to write the matrix elements of 
 \begin_inset Formula $1_{F}=\sum_{m=-\infty}^{\infty}\left|em\right\rangle \left\langle em\right|$
 \end_inset
 
- 
-\begin_inset Formula \begin{eqnarray}
-\left\langle p\right|1_{F}\left|n\right\rangle  & = & \sum_{m=-\infty}^{\infty}\left\langle p|em\right\rangle \left\langle em|n\right\rangle \nonumber \\
- & = & \sum_{m=-\infty}^{\infty}\left[\delta_{p0}+\left(1-\delta_{p0}\right)\frac{\left(2\pi im\right)^{p}}{p!}\right]\left[\frac{\delta_{m0}}{n+1}-\frac{\left(1-\delta_{m0}\right)}{2\pi im}\sum_{k=0}^{n-1}\frac{n!}{(n-k)!}\left(\frac{1}{2\pi im}\right)^{k}\right]\end{eqnarray}
+.
+ So, by direct substitution,
+\begin_inset Formula \begin{align*}
+\left\langle p\right|1_{F}\left|n\right\rangle = & \sum_{m=-\infty}^{\infty}\left\langle p|em\right\rangle \left\langle em|n\right\rangle \\
+= & \sum_{m=-\infty}^{\infty}\left[\delta_{p0}+\left(1-\delta_{p0}\right)\frac{\left(2\pi im\right)^{p}}{p!}\right]\left[\frac{\delta_{m0}}{n+1}-\frac{\left(1-\delta_{m0}\right)}{2\pi im}\sum_{k=0}^{n-1}\frac{n!}{(n-k)!}\left(\frac{1}{2\pi im}\right)^{k}\right]\end{align*}
 
 \end_inset
 
-We need only to look at the relatively simple matrix element 
+Remember, we are hoping to find that 
+\begin_inset Formula $\left\langle p\right|1_{F}\left|n\right\rangle =\delta_{pn}$
+\end_inset
+
+ but this is not at all the case.
+ We need only to look at the relatively simple matrix element 
 \begin_inset Formula $n=1$
 \end_inset
 
 , 
-\begin_inset Formula $p\neq0$
+\begin_inset Formula $p$
 \end_inset
 
- to see the misery of this expression: 
+ odd, to see the misery of this expression: 
 \begin_inset Formula \[
-\left\langle p\neq0\right|1_{F}\left|n=1\right\rangle =\frac{\left(2\pi i\right)^{p}}{p!}\sum_{m=1}^{\infty}\frac{m^{p}}{2\pi im}\]
+\left\langle p\mbox{ odd}\right|1_{F}\left|n=1\right\rangle =\frac{\left(2\pi i\right)^{p-1}}{p!}\sum_{m=1}^{\infty}m^{p-1}\]
 
 \end_inset
 
-One can try to rescue the situation by making the Ansatz that the summation
+The sum on the right is divergent.
+ One can try to rescue the situation by making the Ansatz that the summation
  should have been replaced by 
 \begin_inset Formula $\zeta(1-p)$
 \end_inset
@@ -8005,38 +8025,57 @@ i.e.
 \emph default
  that the summation should be replaced by it's analytic continuation, which
  is the Riemann zeta function.
- What is perhaps the more surprising is that one might have expected this
+ Doing so does not make things better, as, after all we were expecting 
+\begin_inset Formula $\left\langle p\mbox{ odd}\right|1_{F}\left|n=1\right\rangle =\delta_{p1}$
+\end_inset
+
+ and the zeta has a pole at 
+\begin_inset Formula $p=1$
+\end_inset
+
+.
+ Clearly, analytic functions and Fourier series don't play nice together,
+ even when constrained to the unit interval.
+\end_layout
+
+\begin_layout Standard
+What is perhaps the more surprising is that one might have expected this
  kind of trouble from the polynomial completeness relationship 
 \begin_inset Formula $\mathbb{I}_{A}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
 \end_inset
 
- because it ranges only over analytic functions: its essentially a statement
- of the idea that analytic functions are expressible through a series expansion
- in a variable.
- Functions that are not infinitely differentiable more-or-less lie in the
- kernel of 
+ because it ranges only over analytic functions.
+ This relationship embodies the core idea that analytic functions are one
+ and the same as power series.
+ The space 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ is 'bigger' than the space of analytic functions; 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ continains functions that are discontinuous, and so one might expect these
+ functions to reveal something about the structure of 
 \begin_inset Formula $\mathbb{I}_{A}$
 \end_inset
 
 .
- However, we'd expect 
+ However, we expect 
 \begin_inset Formula $1_{F}$
 \end_inset
 
- to be more faithful, as it would seem to venture over square-integrable
- functions.
+ to be more faithful; its the identity on the bigger space.
  Thus, such a simple failing is surprising.
  
 \end_layout
 
 \begin_layout Standard
-The goal here is to simply present a signpost warning, as we make heavy
- use of these techniques in the sections that follow, where we work with
- functions that are differentiable-nowhere or worse.
- 
+The goal here was to present a signpost warning, as one trundles through
+ various calculations.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 The Koopman Operator
 \end_layout
 
@@ -8131,7 +8170,7 @@ on.
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Topologically Conjugate Maps
 \end_layout
 
@@ -8244,7 +8283,7 @@ not
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 The Topological Zeta
 \end_layout
 
