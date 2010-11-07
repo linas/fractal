@@ -3238,12 +3238,316 @@ reference "eq:bn-sin-comp"
 \end_layout
 
 \begin_layout Subsection
+The Wold decomposition
+\end_layout
+
+\begin_layout Standard
+The Koopman operator can be understood to be a shift operator
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rochberg1968"
+
+\end_inset
+
+, while the general theory of shift operators allows the Hilbert space on
+ which a shift operator acts to be split into pieces, the Wold decomposition
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rosenblum1985"
+
+\end_inset
+
+.
+ We review the decomposition here, as it applies in the present case.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ be a Hilbert space, and 
+\begin_inset Formula $\mathcal{B\left(H\right)}$
+\end_inset
+
+ be the set of bounded linear operators on 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+.
+ An operator 
+\begin_inset Formula $S$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{B\left(H\right)}$
+\end_inset
+
+ is a shift operator if 
+\begin_inset Formula $S$
+\end_inset
+
+ is an isometry, and if 
+\begin_inset Formula $\left\Vert S^{*n}f\right\Vert \to0$
+\end_inset
+
+ for all 
+\begin_inset Formula $f\in\mathcal{H}$
+\end_inset
+
+.
+ The Koopman operator fills the bill: clearly it leaves the length of vectors
+ alone, as here, the norm 
+\begin_inset Formula $\left\Vert \cdot\right\Vert $
+\end_inset
+
+ is just the usual norm on 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+.
+ As we've seen, the Hermitian conjugate 
+\begin_inset Formula $S^{*}$
+\end_inset
+
+ is just the transpose, in this case, 
+\emph on
+i.e.
+
+\emph default
+ it is 
+\begin_inset Formula $\mathcal{L_{B}}$
+\end_inset
+
+.
+ We've yet to show that the spectrum of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ is less-than or equal to one; this is done in the coming sections.
+ However, 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ does have one (unique) eigenvector associated with eigenvalue 1; if we
+ exclude this from the Hilbert space 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+, then, indeed, 
+\begin_inset Formula $\left\Vert \mathcal{L}_{B}^{n}f\right\Vert \to0$
+\end_inset
+
+ for all 
+\begin_inset Formula $f\in\mathcal{H}$
+\end_inset
+
+.
+ That is, we take 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ to be the subspace of 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ with the constant term removed: 
+\emph on
+i.e.
+
+\emph default
+ all functions 
+\begin_inset Formula $f$
+\end_inset
+
+ with 
+\begin_inset Formula $a_{0}=0$
+\end_inset
+
+ in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Fourrier series"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Wold decomposition may be given as follows:
+\end_layout
+
+\begin_layout Theorem*
+(Wold decomposition) Given a shift operator 
+\begin_inset Formula $S\in\mathcal{B\left(H\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $K=\ker S^{*}$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathcal{H}=\bigoplus_{n=0}^{\infty}S^{n}K$
+\end_inset
+
+.
+ Each 
+\begin_inset Formula $f\in\mathcal{H}$
+\end_inset
+
+ may be written uniquely as 
+\begin_inset Formula \[
+f=\sum_{n=0}^{\infty}S^{n}k_{n}\]
+
+\end_inset
+
+where 
+\begin_inset Formula $k_{n}\in K$
+\end_inset
+
+ is given by 
+\begin_inset Formula \[
+k_{n}=PS^{*n}f\]
+
+\end_inset
+
+and 
+\begin_inset Formula $P=I-SS^{*}$
+\end_inset
+
+ is the projection of 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ onto 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Furthermore, one has 
+\begin_inset Formula $\left\Vert f\right\Vert ^{2}=\sum_{n=0}^{\infty}\left\Vert k_{n}\right\Vert ^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+See 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rosenblum1985"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above theorem holds in general for shift operators on Hilbert spaces.
+ In our case, it is instructive to see how it plays out.
+ We have, of course, 
+\begin_inset Formula $S=\mathcal{K_{B}}$
+\end_inset
+
+ and 
+\begin_inset Formula $S^{*}=\mathcal{K}_{B}^{T}=\mathcal{L}_{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $P=\mathbb{I}-\mathcal{K}_{B}\mathcal{L}_{B}$
+\end_inset
+
+ as before.
+ The projection operator 
+\begin_inset Formula $P$
+\end_inset
+
+ projects a function 
+\begin_inset Formula $f$
+\end_inset
+
+ onto the kernel 
+\begin_inset Formula $K$
+\end_inset
+
+ spanned by 
+\begin_inset Formula $\cos2\pi\left(2j+1\right)x$
+\end_inset
+
+ and 
+\begin_inset Formula $\sin2\pi\left(2j+1\right)x$
+\end_inset
+
+ for positive integer j.
+ The operator 
+\begin_inset Formula $P\mathcal{L}_{B}$
+\end_inset
+
+ projects onto the space spanned by 
+\begin_inset Formula $\cos4\pi\left(2j+1\right)x$
+\end_inset
+
+ and 
+\begin_inset Formula $\sin4\pi\left(2j+1\right)x$
+\end_inset
+
+, and, in general, 
+\begin_inset Formula $P\mathcal{L}_{B}^{n}$
+\end_inset
+
+ projects onto the space spanned by 
+\begin_inset Formula $\cos2^{n+1}\pi\left(2j+1\right)x$
+\end_inset
+
+ and 
+\begin_inset Formula $\sin2^{n+1}\pi\left(2j+1\right)x$
+\end_inset
+
+.
+ That this is the entire space, and that the decomposition is unique, follows
+ from the fact that any integer 
+\begin_inset Formula $N$
+\end_inset
+
+ can be written uniquely as 
+\begin_inset Formula $N=2^{n}\left(2j+1\right)$
+\end_inset
+
+ for some integers 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This same decomposition, but viewed from a different angle, recurs again,
+ in a later section, in the construction and analysis of the 'fractal' spectrum
+ of the Bernoulli operator.
+ This time, the powers of 2 will be understood to be moves on the dyadic
+ tree, with the Cantor set appearing as the limit of the dyadic tree, and
+ the fractal self-symmetry following there-from.
+ The take-away lesson here is, perhaps, that any system with a shift operator
+ and/or an infinite Cartesian product of spaces will exhibit eigenfunctions
+ with fractal-type symmetry.
+ The self-symmetry arises purely from the interplay between the shift and
+ the kernel.
+\end_layout
+
+\begin_layout Subsection
 The Hurwitz zeta eigenfunctions
 \end_layout
 
 \begin_layout Standard
-The Fourier representation also makes it clear that any vector with vector
- components 
+The Fourier representation makes it clear that any vector with vector components
+ 
 \begin_inset Formula $a_{n}=1/n^{s}$
 \end_inset
 
