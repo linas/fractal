@@ -58,7 +58,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 5 November 2010)
+2 January 2004 (revised 2008, 6 November 2010)
 \end_layout
 
 \begin_layout Abstract
@@ -181,7 +181,15 @@ Some of the sections, including the section on orthogonality and completeness,
  The notions of what is fractal, and what is differentiable, and what is
  an operator, and what is an eigenvalue, is muddied as a result.
  The journey, however faulty, is still educational, though.
- 
+ Background material, in the language of mathematical physics, can be found
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mackey1992"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -189,9 +197,16 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-The method of the transfer operator was introduced by David Ruelle[need
- ref] as a powerful mechanism for studying the nature of iterated maps.
- The transfer operator, sometimes called the Frobenius-Perron operator,
+The method of the transfer operator was introduced by David Ruelle
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ruelle1986"
+
+\end_inset
+
+[verify ref] as a powerful mechanism for studying the nature of iterated
+ maps.
+ The transfer operator, sometimes called the Perron-Frobenius operator,
  or the Ruelle-Frobenius-Perron operator, provides a means to escape the
  narrow confines of point-set topology when considering an iterated function,
  and instead explore the function using wildly different topologies.
@@ -571,8 +586,15 @@ The eigenfunctions of
 \begin_inset Formula $\mathcal{L}_{g}$
 \end_inset
 
- are called Ruelle resonances [need citation See Gaspard ref, I think that
- will have it], elaborate.
+ are called Ruelle resonances
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ruelle1986"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Section
@@ -2028,6 +2050,13 @@ None of the eigenvalues
 \emph on
 Koopman operator
 \emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Koopman1931"
+
+\end_inset
+
 , and is denoted by 
 \begin_inset Formula $\mathcal{K}_{B}$
 \end_inset
@@ -3002,18 +3031,18 @@ one can immediately find, for
 \end_inset
 
 , the Fourier components 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \int_{0}^{1}B_{n}(x)\,\cos(2\pi mx)\, dx=\left\{ \begin{array}{cc}
 0 & \;\textrm{ for n odd }\\
-\left(-\right)^{1+n/2}n!/\left(2\pi m\right)^{n} & \;\textrm{ for n even }\end{array}\right.\]
+\left(-\right)^{1+n/2}n!/\left(2\pi m\right)^{n} & \;\textrm{ for n even }\end{array}\right.\label{eq:bn-cos-comp}\end{equation}
 
 \end_inset
 
 and 
-\begin_inset Formula \[
+\begin_inset Formula \begin{equation}
 \int_{0}^{1}B_{n}(x)\,\sin(2\pi mx)\, dx=\left\{ \begin{array}{cc}
 0 & \;\textrm{ for n even }\\
-\left(-\right)^{(n+1)/2}n!/\left(2\pi m\right)^{n} & \;\textrm{ for n odd }\end{array}\right.\]
+\left(-\right)^{(n+1)/2}n!/\left(2\pi m\right)^{n} & \;\textrm{ for n odd }\end{array}\right.\label{eq:bn-sin-comp}\end{equation}
 
 \end_inset
 
@@ -3039,50 +3068,173 @@ The Kernel
 \end_layout
 
 \begin_layout Standard
-What is the kernel of 
+As noted earlier, the kernel of 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset
 
-? It is the set of functions that have only odd Fourier terms.
- 
-\end_layout
-
-\begin_layout Standard
-That is, for any integer 
-\begin_inset Formula $k\in\mathbb{Z}$
+ consists of all the odd periodic functions 
+\begin_inset Formula $f\left(x\right)=-f\left(x+\frac{1}{2}\right)$
 \end_inset
 
- we have 
-\begin_inset Formula $\mathcal{L}_{B}\cos2\pi(2k+1)x=0$
+ A basis for the kernel is given by 
+\begin_inset Formula $\cos2\pi(2n+1)x$
 \end_inset
 
- and so we write 
-\begin_inset Formula $\cos2\pi(2k+1)x\in K\left[\mathcal{L}_{B}\right]$
+ and 
+\begin_inset Formula $\sin2\pi(2n+1)x$
 \end_inset
 
- and likewise 
-\begin_inset Formula $\sin2\pi(2k+1)x\in K\left[\mathcal{L}_{B}\right]$
+ for positive integers 
+\begin_inset Formula $n$
 \end_inset
 
 .
+ The operator 
+\begin_inset Formula $P=\mathbb{I}-\mathcal{K}_{B}\mathcal{L}_{B}$
+\end_inset
+
+ acts as a projection operator onto the kernel; we may easily verify that
+ 
+\begin_inset Formula $P^{2}=P$
+\end_inset
+
+.
+ Writing 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ for the Hilbert space of square-integrable functions, the projection operator
+ 
+\begin_inset Formula $P$
+\end_inset
+
+ splits this space into a direct sum 
+\begin_inset Formula $L_{2}=B\oplus K$
+\end_inset
+
+ with 
+\begin_inset Formula $K$
+\end_inset
+
+ the kernel.
+ That is, every vector 
+\begin_inset Formula $v\in L_{2}$
+\end_inset
+
+ may be written uniquely as the sum 
+\begin_inset Formula $v=b+k$
+\end_inset
+
+ with 
+\begin_inset Formula $b=\left(\mathbb{I}-P\right)v\in B$
+\end_inset
+
+ and 
+\begin_inset Formula $k=Pv\in K$
+\end_inset
+
+.
+ The subspaces 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $K$
+\end_inset
+
+ are both closed.
  
 \end_layout
 
 \begin_layout Standard
-This implies that 'half' of all square-integrable functions are in the kernel.
- This is a huge space.
- The quotient space of the implied isomorphism thus has the Bernoulli polynomial
-s as the representative elements.
- This is I think the correct way to relate coordinate space to the Hilbert
- space, is by means of the quotient space generated by the kernel of the
- time-evolution operator.
- XXX needs clarification XXX.
- 
-\end_layout
+Although the space of polynomials embeds into 
+\begin_inset Formula $L_{2}$
+\end_inset
 
-\begin_layout Standard
-This begs more questions: is the quotient space simply connected, or not?
- Does this space have some non-trivial structure?
+ and is likewise split, none of the elements of either 
+\begin_inset Formula $B$
+\end_inset
+
+ or 
+\begin_inset Formula $K$
+\end_inset
+
+ are polynomials.
+ In particular, none of the Bernoulli polynomials 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+ live entirely within 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ This is perhaps surprising, given previous developments, but follows directly
+ from eqns 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bn-cos-comp"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bn-sin-comp"
+
+\end_inset
+
+.
+ Put in other words, 
+\begin_inset Formula $PB_{n}\ne0$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\mathbb{I}-P\right)B_{n}\ne B_{n}$
+\end_inset
+
+.
+ This seems surprising, because the 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+ are eigenvectors 
+\begin_inset Formula $\mathcal{L}_{B}B_{n}=\lambda_{n}B_{n}$
+\end_inset
+
+ and it is not uncommon that eigenvectors are orthogonal to the kernel.
+ However, this need not be the case.
+ Defining 
+\begin_inset Formula $k_{n}=PB_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{n}=\left(\mathbb{I}-P\right)B_{n}$
+\end_inset
+
+ so that 
+\begin_inset Formula $B_{n}=b_{n}+k_{n}$
+\end_inset
+
+, one then has that 
+\begin_inset Formula $\mathcal{L}_{B}k_{n}=0$
+\end_inset
+
+ while 
+\begin_inset Formula $\mathcal{L}_{B}b_{n}=\lambda_{n}\left(b_{n}+v_{n}\right)$
+\end_inset
+
+.
+ The Bernoulli operator acts in a skew fashion, twisting a portion of each
+ vector 
+\begin_inset Formula $b_{n}$
+\end_inset
+
+ into the kernel 
+\begin_inset Formula $K$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
