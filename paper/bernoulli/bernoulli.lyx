@@ -830,7 +830,7 @@ key "Gas92"
 :
 \end_layout
 
-\begin_layout Theorem
+\begin_layout Theorem*
 The eigenvalues of the 
 \begin_inset Formula $p$
 \end_inset
@@ -920,7 +920,14 @@ The following two sections provide an alternate and more abstract and labored
 \end_layout
 
 \begin_layout Section
-The Polynomial Representation 
+The Polynomial Representation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:The-Polynomial-Representation"
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1167,8 +1174,8 @@ reference "eq:orthogonality"
 \end_inset
 
  above demonstrates orthogonality; one may also show completeness: 
-\begin_inset Formula \[
-\sum_{n=0}^{\infty}e_{n}\otimes e_{n}^{*}=\sum_{n=0}^{\infty}x^{n}\,\frac{(-1)^{n}}{n!}\delta^{(n)}(y)=\delta(x-y)\]
+\begin_inset Formula \begin{equation}
+\sum_{n=0}^{\infty}e_{n}\otimes e_{n}^{*}=\sum_{n=0}^{\infty}x^{n}\,\frac{(-1)^{n}}{n!}\delta^{(n)}(y)=\delta(x-y)\label{eq:analytic completeness}\end{equation}
 
 \end_inset
 
@@ -1176,13 +1183,17 @@ reference "eq:orthogonality"
 \begin_inset Formula $f\left(x\right)=\int\delta\left(x-y\right)f\left(y\right)dy$
 \end_inset
 
-.
+ whenever 
+\begin_inset Formula $f$
+\end_inset
+
+ is expressible as an analytic function.
  
 \end_layout
 
 \begin_layout Standard
-Another common notation is that of quantum mechanical bra-ket notation,
- writing 
+Another common notation is that of quantum mechanical bra-ket or Dirac notation.
+ Here, we write 
 \begin_inset Formula $\left|n\right\rangle =e_{n}$
 \end_inset
 
@@ -1196,8 +1207,8 @@ Another common notation is that of quantum mechanical bra-ket notation,
 \end_inset
 
  while for completeness one writes 
-\begin_inset Formula \[
-\mathbb{I}=\sum_{n=0}^{\infty}e_{n}\otimes e_{n}^{*}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|\]
+\begin_inset Formula \begin{equation}
+\mathbb{I}=\sum_{n=0}^{\infty}e_{n}\otimes e_{n}^{*}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|\label{eq:analytic identity}\end{equation}
 
 \end_inset
 
@@ -1436,7 +1447,7 @@ where
  Note that only a finite number of these vector components are non-vanishing.
 \end_layout
 
-\begin_layout Theorem
+\begin_layout Theorem*
 The 
 \begin_inset Formula $\left|B_{n}\right\rangle $
 \end_inset
@@ -1612,7 +1623,7 @@ That the left eigenvectors are dual to the Bernoulli polynomials, which
  representation.
 \end_layout
 
-\begin_layout Theorem
+\begin_layout Theorem*
 The left and right eigenvectors are dual, in that
 \begin_inset Formula \[
 \left\langle \left.\tilde{B}_{n}\right|B_{m}\right\rangle =\sum_{k=0}^{\infty}\left\langle \left.\tilde{B}_{n}\right|k\right\rangle \left\langle k\left|B_{m}\right.\right\rangle =\delta_{nm}\]
@@ -2543,7 +2554,7 @@ so that sums and differences of the duals
  
 \end_layout
 
-\begin_layout Theorem
+\begin_layout Theorem*
 The duals to 
 \begin_inset Formula $\tilde{S}_{n}(x)$
 \end_inset
@@ -2941,7 +2952,7 @@ where every other row consists of zeros.
  In fact, 
 \end_layout
 
-\begin_layout Theorem
+\begin_layout Theorem*
 There does not exist a left inverse for 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset
@@ -3581,11 +3592,12 @@ and
 See 
 \begin_inset CommandInset citation
 LatexCommand cite
+after "Chapter 1"
 key "Rosenblum1985"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -7701,25 +7713,88 @@ Apologies for the format of this paper.
 Appendix A
 \end_layout
 
-\begin_layout Standard
-This section needs to be re-written, merged, abolished.
- I think what its saying its mostly correct, but its misleading; there's
- a more enlightening, better treatment possible, by focusing on topologies.
-\end_layout
-
 \begin_layout Subsection
-Fourier Representation
+The clash of polynomial and square-integrable spaces.
 \end_layout
 
 \begin_layout Standard
-Review of standard Fourier series techniques.
- In traditional notation, for some (periodic) function 
+This appendix reviews the clashing nature of the polynomial and square-integrabl
+e spaces.
+ 
+\end_layout
+
+\begin_layout Standard
+In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:The-Polynomial-Representation"
+
+\end_inset
+
+, we constructed the polynomial space, and its dual.
+ In Dirac notation, the basis vectors are the monomials: 
+\begin_inset Formula \[
+\left\langle x|n\right\rangle =x^{n}\]
+
+\end_inset
+
+ while the dual vectors are the linear functionals 
+\begin_inset Formula \[
+\left\langle n|x\right\rangle =\frac{(-1)^{n}}{n!}\delta^{(n)}(x)\]
+
+\end_inset
+
+That these are truly dual is expressed by equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:orthogonality"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:analytic completeness"
+
+\end_inset
+
+; namely, that 
+\begin_inset Formula $\left\langle n|m\right\rangle =\delta_{mn}$
+\end_inset
+
+ and that 
+\begin_inset Formula $\mathbb{I}_{A}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
+\end_inset
+
+.
+ That the later holds is particularly justified by realizing that it is
+ just a formalized notation for the Taylor's series in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Taylors bra-kets"
+
+\end_inset
+
+.
+ The monomials, and thier duals, truly provide a basis for the space of
+ analytic functions.
+\end_layout
+
+\begin_layout Standard
+Let us now review the analogous situation, this time for the Hilbert space
+ 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ of square-integrable functions.
+ The review is remedial but is needed to present the surprising results.
+ One writes, for some (periodic) function 
 \begin_inset Formula $f(x)$
 \end_inset
 
- one writes the Fourier Series as 
+, the Fourier Series as 
 \begin_inset Formula \[
-f(x)=\sum_{n=-\infty}^{\infty}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\]
+f(x)=a_{0}+\sum_{n=1}^{\infty}a_{n}\cos2\pi nx\;+b_{n}\sin2\pi nx\]
 
 \end_inset
 
@@ -7729,23 +7804,34 @@ where the conjugates of
 
  are given by 
 \begin_inset Formula \[
-a_{n}=\int_{0}^{1}f(x)\,\cos(2\pi nx)\, dx\]
+a_{n}=2\int_{0}^{1}f(x)\,\cos(2\pi nx)\, dx\]
 
 \end_inset
 
 and 
 \begin_inset Formula \[
-b_{n}=\int_{0}^{1}f(x)\,\sin(2\pi nx)\, dx\]
+b_{n}=2\int_{0}^{1}f(x)\,\sin(2\pi nx)\, dx\]
 
 \end_inset
 
-Moving over to bra-ket notation, we can define the Fourier-space basis vectors
- 
+The sine and cosine notation is somewhat awkward, and it will be easier
+ to use the complex exponential 
+\begin_inset Formula $\exp\left(i2\pi mx\right)=\cos\left(i2\pi mx\right)+i\sin\left(i2\pi mx\right)$
+\end_inset
+
+.
+ At the same time, let us move over to bra-ket notation.
+ The 
 \begin_inset Formula $\left|em\right\rangle $
 \end_inset
 
- in terms of their components in coordinate space.
- These components are 
+ will denote the basis vectors for 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+.
+ These may be defined in terms of their components in coordinate space,
+ namely 
 \begin_inset Formula $\left\langle x|em\right\rangle =\exp(i2\pi mx)$
 \end_inset
 
@@ -7759,35 +7845,53 @@ Moving over to bra-ket notation, we can define the Fourier-space basis vectors
 \end_inset
 
 .
- One has the usual sense of orthogonality over coordinate space in that
- 
+ These are orthogonal over coordinate space in the usual sense: 
 \begin_inset Formula \[
 \left\langle em|en\right\rangle =\int_{0}^{1}dx\,\left\langle em|x\right\rangle \left\langle x|en\right\rangle =\int_{0}^{1}dx\,\exp(2\pi i(n-m)x)=\delta_{nm}\]
 
 \end_inset
 
-and the traditional presentation of the Fourier Series is a statement of
- completeness over coordinate space, in that for an arbitrary square-integrable
- coordinate-space function 
+These are also complete over coordinate space, in that, for any arbitrary
+ square-integrable coordinate-space function 
 \begin_inset Formula $f(x)=\left\langle x|f\right\rangle $
 \end_inset
 
- one has 
-\begin_inset Formula \begin{eqnarray}
-f(x)=\left\langle x|f\right\rangle  & = & \sum_{n=-\infty}^{\infty}\left\langle x|en\right\rangle \left\langle en|f\right\rangle \nonumber \\
- & = & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\left\langle en|y\right\rangle \left\langle y|f\right\rangle \nonumber \\
- & = & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\exp(-i2\pi ny)f(y)\nonumber \\
- & = & \int_{0}^{1}dy\,\delta(x-y)\, f(y)\end{eqnarray}
+ , one has
+\begin_inset Formula \begin{align*}
+f(x)=\left\langle x|f\right\rangle = & \sum_{n=-\infty}^{\infty}\left\langle x|en\right\rangle \left\langle en|f\right\rangle \\
+= & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\left\langle en|y\right\rangle \left\langle y|f\right\rangle \\
+= & \sum_{n=-\infty}^{\infty}\exp(i2\pi nx)\int_{0}^{1}dy\,\exp(-i2\pi ny)f(y)\\
+= & \int_{0}^{1}dy\,\delta(x-y)\, f(y)\end{align*}
 
 \end_inset
 
- Thus, one is accustomed to the notion of having an identity operator of
- the form 
+The above made use of the usual expanstion of the Dirac delta as a Fourier
+ seires:
+\begin_inset Formula \[
+\delta\left(x-y\right)=\sum_{n=-\infty}^{\infty}\exp\left(i2\pi n\left(x-y\right)\right)\]
+
+\end_inset
+
+The completeness of tbe basis over 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ may be expressed as a decomposition of the identity operator on 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+, namely 
 \begin_inset Formula $1_{F}=\sum_{m=-\infty}^{\infty}\left|em\right\rangle \left\langle em\right|$
 \end_inset
 
- because it has the matrix elements that one expects in both the Fourier
- space and in coordinate space: that is, 
+.
+ Here, the subscript 
+\begin_inset Formula $F$
+\end_inset
+
+ reminds us of the Fourier-series nature of this identity operator.
+ The identity operator has the matrix elements that one expects in both
+ the Fourier space and in coordinate space: that is, 
 \begin_inset Formula $\left\langle em\right|1_{F}\left|en\right\rangle =\delta_{nm}$
 \end_inset
 
@@ -7797,6 +7901,10 @@ f(x)=\left\langle x|f\right\rangle  & = & \sum_{n=-\infty}^{\infty}\left\langle 
 
  .
  
+\end_layout
+
+\begin_layout Standard
+So far, all of teh 
 \end_layout
 
 \begin_layout Standard
@@ -7826,13 +7934,13 @@ We begin by writing the components of the vector
 \begin_layout Standard
 \begin_inset Formula \begin{eqnarray}
 \left\langle n|em\right\rangle  & = & \int_{0}^{1}dx\left\langle n|x\right\rangle \left\langle x|em\right\rangle \nonumber \\
- & = & \int_{0}^{1}dx\,\frac{(-)^{n}}{n!}\delta^{(n)}(x)\, e^{i2\pi mx}\nonumber \\
+ & = & \int_{0}^{1}dx\,\frac{(-1)^{n}}{n!}\delta^{(n)}(x)\, e^{i2\pi mx}\nonumber \\
  & = & \int_{0}^{1}dx\,\frac{\delta(x)}{n!}\,\frac{d^{n}}{dx^{n}}\, e^{i2\pi mx}\nonumber \\
  & = & \frac{(i2\pi m)^{n}}{n!}\end{eqnarray}
 
 \end_inset
 
- Essentially, this is nothing more than a plain-old Taylor's Series expansion
+Essentially, this is nothing more than a plain-old Taylor's Series expansion
  of the exponential function.
  The conjugate vectors have a slightly trickier form.
  They are the Fourier components of monomials.
@@ -7890,7 +7998,13 @@ One can try to rescue the situation by making the Ansatz that the summation
 \begin_inset Formula $\zeta(1-p)$
 \end_inset
 
- which is regular, but already this is dangerous.
+, 
+\emph on
+i.e.
+
+\emph default
+ that the summation should be replaced by it's analytic continuation, which
+ is the Riemann zeta function.
  What is perhaps the more surprising is that one might have expected this
  kind of trouble from the polynomial completeness relationship 
 \begin_inset Formula $\mathbb{I}_{A}=\sum_{n=0}^{\infty}\left|n\right\rangle \left\langle n\right|$
