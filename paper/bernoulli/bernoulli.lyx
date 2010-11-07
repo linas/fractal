@@ -3721,8 +3721,41 @@ The Hurwitz zeta eigenfunctions
 \end_layout
 
 \begin_layout Standard
-The Fourier representation makes it clear that any vector with vector components
+The Bernoulli operator has a continuous spectrum, when considered in the
+ space of square-integrable functions.
+ The eigenvectors are quite degenerate, in that there is a countable infinity
+ of eigenvectors associated with one eigenvalue.
+ The degeneracy allows the eigenvectors to be combined in any of a variety
+ of ways; different linear combinations have different properties, each
+ interesting in its own way.
+ In what follows, we will first present the Hurwitz zeta eigenfunctions.
+ These generalize the Bernoulli polynomials, and, like the polynomials,
+ are more or less 
+\begin_inset Quotes eld
+\end_inset
+
+nice
+\begin_inset Quotes erd
+\end_inset
+
+ and differentiable, at least away from the endpoints.
+ An alternate linear combintation will be presented in a later section:
+ The Hurwitz zeta eignefunctions can be resummed to yeild fractal curves,
+ which are differentiable nowhere (well, strictly speaking, non-differentiable
+ on the dyadic rationals).
+ Each basis offers it's own insights.
  
+\end_layout
+
+\begin_layout Standard
+Refering to the representation in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:trig-matrix"
+
+\end_inset
+
+, it becomes visually clear that any vector with vector components 
 \begin_inset Formula $a_{n}=1/n^{s}$
 \end_inset
 
@@ -3839,10 +3872,10 @@ This series recreates the Bernoulli polynomials for integer values of
 
 .
  Equivalently, the Fourier series for the Bernoulli polynomials can be written
- as 
-\begin_inset Formula \begin{eqnarray}
-B_{n}(x) & = & -\Gamma(n+1)\sum_{k=1}^{\infty}\frac{\exp(2\pi ikx)+(-1)^{n}\exp(2\pi ik(1-x))}{\left(2\pi ik\right)^{n}}\\
- & = & \frac{-(-i)^{n}}{2}\left(\beta(x;n)+(-1)^{n}\beta(1-x;n)\right)\nonumber \end{eqnarray}
+ as
+\begin_inset Formula \begin{align*}
+B_{n}(x)= & -\Gamma(n+1)\sum_{k=1}^{\infty}\frac{\exp(2\pi ikx)+(-1)^{n}\exp(2\pi ik(1-x))}{\left(2\pi ik\right)^{n}}\\
+= & \frac{-(-i)^{n}}{2}\left(\beta(x;n)+(-1)^{n}\beta(1-x;n)\right)\end{align*}
 
 \end_inset
 
@@ -3927,7 +3960,7 @@ key "Jon1889"
  Appendix 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Appendix-B:-Jonquière's"
+reference "sec:Appendix-Jonquière's"
 
 \end_inset
 
@@ -3991,7 +4024,7 @@ The eigenfunctions are smooth (infinitely differentiable) for the open interval
  The analytic properties are reviewed in Appendix 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Appendix-C:-Visualizing"
+reference "sec:Appendix-Visualizing"
 
 \end_inset
 
@@ -4029,7 +4062,8 @@ These eigenfunctions are countably infinite degenerate at a given eigenvalue.
 .
  One may take linear combinations of eigenvectors in this family.
  Clearly, any linear combination of only a finite number of such eigenvectors
- will also be smooth, and have the same general analytic properties.
+ will also be smooth, and have the same general analytic properties; this
+ is not the case for certain infinite combinations.
 \end_layout
 
 \begin_layout Standard
@@ -4118,7 +4152,7 @@ with the product now taken only over prime numbers
 \end_inset
 
 .
- With considerable more difficulty, one might envision operators constructed
+ With considerably more difficulty, one might envision operators constructed
  after a sequence of differential and integral moves; for example, something
  involving the Mellin transform.
 \end_layout
@@ -4173,6 +4207,49 @@ In principle, any such operator may be constructed.
 
 -adic transfer operators.
  
+\end_layout
+
+\begin_layout Subsection
+Hardy Classes
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $p$
+\end_inset
+
+-adic Bernoulli operator is a (conjugate of a) shift operator.
+ Given that equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:p-adic beta eigeneqn"
+
+\end_inset
+
+ indicated that these all commute, one has a family of commuting shift operators.
+ An operator that commutes with a shift operator may be called 
+\begin_inset Quotes eld
+\end_inset
+
+analytic
+\begin_inset Quotes erd
+\end_inset
+
+, in a certain precise sense, and, given appropriate properties, can often
+ be further factored into Hardy classes
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rosenblum1985"
+
+\end_inset
+
+, in analogy to the factorization into inner and outer functions of ordinary
+ Hardy space.
+ 
+\end_layout
+
+\begin_layout Standard
+XXX Do this.
 \end_layout
 
 \begin_layout Section
@@ -7994,6 +8071,10 @@ The conjugate vectors have a slightly trickier form.
 \begin_inset Formula $m\neq0$
 \end_inset
 
+, 
+\begin_inset Formula $n\ne0$
+\end_inset
+
  one has
 \begin_inset Formula \begin{align*}
 \left\langle em|n\right\rangle = & \int_{0}^{1}dy\left\langle em|y\right\rangle \left\langle y|n\right\rangle \\
@@ -8009,6 +8090,14 @@ while, for
 
 , one simply has 
 \begin_inset Formula $\left\langle e0|n\right\rangle =1/(n+1)$
+\end_inset
+
+, and, for 
+\begin_inset Formula $n=0$
+\end_inset
+
+, one has 
+\begin_inset Formula $\left\langle em|0\right\rangle =\delta_{m0}$
 \end_inset
 
 .
@@ -8113,8 +8202,9 @@ we have
 
 .
  There is, however, a cautionary tale that becomes clear as one tries to
- carry out this calculation: formally divergent sums are best avoided before-han
-d, by re-arranging terms before they become a problem.
+ carry out this calculation: the manipultations can become painful, and
+ formally divergent sums are best avoided before-hand, by re-arranging terms
+ before they become a problem.
 \end_layout
 
 \begin_layout Section
@@ -8392,7 +8482,7 @@ The standard definition of the Artin-Mazur Zeta function requires that the
 \begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Appendix-B:-Jonquière's"
+name "sec:Appendix-Jonquière's"
 
 \end_inset
 
@@ -8602,7 +8692,7 @@ key "Apo76"
 \begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Appendix-C:-Visualizing"
+name "sec:Appendix-Visualizing"
 
 \end_inset
 
