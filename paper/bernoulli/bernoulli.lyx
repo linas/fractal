@@ -3450,6 +3450,13 @@ The kernel for the
 
 \begin_layout Subsection
 The Wold decomposition
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Wold-decomposition"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4282,7 +4289,7 @@ In principle, any such operator may be constructed.
 
 \end_inset
 
- then the operator 
+The operator 
 \begin_inset Formula $\mathcal{O}$
 \end_inset
 
@@ -4364,6 +4371,17 @@ key "May91"
 .
  This section recaps the use of a one-dimensional spin lattice for the construct
 ion of a class of Bernoulli operator eigenfunctions.
+ In essence, the lattice models recapture the Wold decomposition of section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Wold-decomposition"
+
+\end_inset
+
+, but using a more articulated, richer vocabulary.
+ In particular, the shift operator gets a more concrete interpratation as
+ a translation on a lattice.
 \end_layout
 
 \begin_layout Standard
@@ -4377,7 +4395,7 @@ Consider a one-sided lattice of points, labelled by the positive integers,
 \begin_inset Formula $\sigma_{n}$
 \end_inset
 
-, sometimes called the 
+, called the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4385,7 +4403,7 @@ spin
 \begin_inset Quotes erd
 \end_inset
 
-, can take one of 
+ (a name derving from physics), can take one of 
 \begin_inset Formula $p$
 \end_inset
 
@@ -4394,6 +4412,15 @@ spin
 \end_inset
 
 .
+ The space of states of the lattice is then 
+\begin_inset Formula $\Omega=p\times p\times\cdots=p^{\omega}$
+\end_inset
+
+ where we write 
+\begin_inset Formula $p\equiv\left\{ 0,1,2,\cdots,p-1\right\} $
+\end_inset
+
+, letting the number stand for the set.
  A given lattice configuration 
 \begin_inset Formula $\sigma=(\sigma_{1},\sigma_{2},\cdots)\in\Omega$
 \end_inset
@@ -4407,7 +4434,7 @@ spin
 \end_inset
 
 , with the Cantor mapping 
-\begin_inset Formula $x:\Omega\to[0.1]$
+\begin_inset Formula $x:\Omega\to[0,1]$
 \end_inset
 
  from the set of all lattice configurations 
@@ -4424,13 +4451,13 @@ x(\sigma)=\sum_{n=1}^{\infty}\sigma_{n}p^{-n}\label{eq:Cantor mapping}\end{equat
 
 \end_inset
 
- The latter mapping allows every possible spin lattice configuration to
- be mapped into the unit interval 
+This mapping allows every possible spin lattice configuration to be mapped
+ into the unit interval 
 \begin_inset Formula $[0,1]$
 \end_inset
 
 , although not vice-versa: the natural topology on the spin lattice is finer
- than the natural topology on the reals, in that 
+ than the natural topology on the reals, in that, for example, 
 \begin_inset Formula $\sigma=(0,1,1,\cdots)$
 \end_inset
 
@@ -4447,40 +4474,66 @@ x(\sigma)=\sum_{n=1}^{\infty}\sigma_{n}p^{-n}\label{eq:Cantor mapping}\end{equat
 \end_inset
 
  both represent the rational 1/2.
- Only certain rationals are double-pointed like this, all irrationals are
- not.
- This double-pointed topology can be understood to be one and the same as
- the Cantor set topology, in that the Cantor set topology makes exactly
- the same distinction between endpoints of intervals
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Ve-Can05"
-
-\end_inset
-
-.
+ Only certain rationals are double-pointed like this, whereas all irrationals
+ correspond to a unique lattice configuration.
  For 
 \begin_inset Formula $p=2$
 \end_inset
 
 , the Stone representation theorem applies.
- Note also that lattices have another natural topology as well, the 
-\begin_inset Quotes eld
-\end_inset
-
-cylinder set topology
-\begin_inset Quotes erd
-\end_inset
-
-, which is just the product topology of the discrete set of values at each
- lattice point.
  
 \end_layout
 
 \begin_layout Standard
-This finer topology on the one-sided lattice allows a richer set of eigenfunctio
-ns to be constructed for the Bernoulli operator.
- One begins by noting that the shift operator 
+Any Cartesian product of spaces has a natural topology, called the 
+\begin_inset Quotes eld
+\end_inset
+
+product topology
+\begin_inset Quotes erd
+\end_inset
+
+; the basis of the topology are refered to as 
+\begin_inset Quotes eld
+\end_inset
+
+cylinder sets
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kle08,May91"
+
+\end_inset
+
+.
+ Since the one-dimensional lattice is the Cartesian product of an infinite
+ number of finite sets, the product topology applies.
+ In fact, the product topology will prove very nice to work with; it is
+ a reasonably coarse topology, yet, it is compatible with the natural topology
+ on the reals.
+ One particularly strong utility of the product topology is that it enables
+ the definition and discussion of measureable (integrable) functions that
+ are discontinuous at all rational numbers; by contrast, such constructions
+ are extremely awkward when using Fourier series, and, of course, impossible
+ in the language of analysis.
+ We'll construct many such functions here; in what follows, the product
+ topology will be made great use of.
+\end_layout
+
+\begin_layout Standard
+The product topology allows a set of fractal eigenfunctions to be constructed
+ for the Bernoulli operator.
+\end_layout
+
+\begin_layout Standard
+-----
+\end_layout
+
+\begin_layout Standard
+One begins by noting that the shift operator 
 \begin_inset Formula $\tau$
 \end_inset
 
