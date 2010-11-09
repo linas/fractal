@@ -102,23 +102,59 @@ The Bernoulli operator
 
 \begin_layout Standard
 THIS IS A SET OF WORKING NOTES.
- Its somewhat loosely structured, sometimes messy, often presents topics
- in backwards order, and occasionally assumes familiarity with my other
- writings and/or a general knowledge of various unspecified branches of
- mathematics.
- The intro hasn't been written yet; but if it was, it would mention the
- following:
+ It's somewhat loosely structured, and sometimes messy.
+ The presentation alternates between easy, and advanced: many parts of this
+ paper are readable by students with modest mathematical knowledge, while
+ other sections presume and require expert familiarity.
+ In general, the harder topics appear later in the text.
 \end_layout
 
 \begin_layout Standard
-The general layout is to move from a less formal, to a more rigorous, more
- formal presentation.
+The intro hasn't been written yet; but if it was, it would explain why this
+ is an interesting topic.
+ In short, having a clear understanding of transfer operators is vital to
+ the branches of physics concerned with dynamical systems and the arrow
+ of time.
+ The Bernoulli operator just happens to be a particularly simple, exactly-solvab
+le case.
+ General background material, laying a foundation using the language of
+ mathematical physics, can be found in Mackey
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mackey1992"
+
+\end_inset
+
+ and Gaspard [xxx book ref].
+ Some general results for Frobenius-Perron and Koopman operators are given
+ by Ding
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ding1998"
+
+\end_inset
+
+; see also references therein [xxx todo].
+ There are a variety of earlier results on the Bernoulli operator; see Gaspard[r
+-adic paper ref], Driebe
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dri99"
+
+\end_inset
+
+, and many others [todo: collect these].
+ 
+\end_layout
+
+\begin_layout Standard
+The layout is roughly as following (xxx this summary needs work)
 \end_layout
 
 \begin_layout Itemize
 Define the Bernoulli operator, demonstrate some of its eigenfunctions and
- eigenvalues.The presentation is a simplified variant of the material in
- 
+ eigenvalues.
+ The presentation is a simplified variant of the material in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Dri99"
@@ -172,32 +208,96 @@ Present a more abstract, but more firm/well-founded foundation for the earlier
  treatment.
 \end_layout
 
+\begin_layout Itemize
+Show that the Frobenius-Perron operator is the measure-theoretic pullback.
+ This is a nice, formal, category-theoretic way of defining the FP transfer
+ operator.
+\end_layout
+
 \begin_layout Standard
-Some of the sections, including the section on orthogonality and completeness,
- are awkwardly presented.
- The topic is subtle, the notation is not elegant.
- In a certain sense, this paper illustrates all the wrong ways in which
- to present the notions of completeness with regards to a Hilbert space.
- The notions of what is fractal, and what is differentiable, and what is
- an operator, and what is an eigenvalue, is muddied as a result.
- The journey, however faulty, is still educational, though.
- Background material, in the language of mathematical physics, can be found
- in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Mackey1992"
+Some of the sections, including the sections on orthogonality and completeness,
+ are insufficiently rigorous, and could be tighetened up a good bit.
+ 
+\end_layout
+
+\begin_layout Standard
+Some new results that are general (and not related to Bernoulli) are presented
+ here: 
+\end_layout
+
+\begin_layout Itemize
+The paragraph following 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Lattice shift eigenfunction"
 
 \end_inset
 
-.
- More recent general results are in 
+ which generalizes the Wold decomposition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Wold-decomposition"
+
+\end_inset
+
+, and shows how to build eigenfunctions, in general, for any transfer operator
+ on any Cartesian product space.
+ (It would be nice to reconcile this with the results of Ding
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ding1998"
 
 \end_inset
 
-.
+ as to the domain of the spectrum (a disk, for 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+spaces, which are the most frequently studied).
+ Now, one of the recurring themes in this set of papers is self-similarity
+ and scaling behaviour; such self-similarity will always hold, in general,
+ on uniform Cartesian products; and so many new, general facts could be
+ easily stated here as well.
+ 
+\end_layout
+
+\begin_layout Itemize
+The results of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Measure-theoretic-description"
+
+\end_inset
+
+ are entirely new, as far as I know, and provide a much clearer vocabulary
+ (to me, at least) with which to talk about transfer operators.
+\end_layout
+
+\begin_layout Standard
+Some new results that are specific to the Bernoulli operator:
+\end_layout
+
+\begin_layout Itemize
+The presentation of the Hurwitz zeta eigenfunctions, of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Hurwitz-zeta-eigenfns"
+
+\end_inset
+
+, I beleive are new and have never been reported before.
+\end_layout
+
+\begin_layout Itemize
+The presentation of the fractal eigenfunctions, of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Fractal-eigenfunctions"
+
+\end_inset
+
+, are new; the observation that these are self-similar and have a scaling
+ behaviour is new.
 \end_layout
 
 \begin_layout Section
@@ -3828,6 +3928,13 @@ This same decomposition, but viewed from a different angle, recurs again,
 
 \begin_layout Subsection
 The Hurwitz zeta eigenfunctions
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Hurwitz-zeta-eigenfns"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4534,14 +4641,7 @@ key "Kle08,May91"
 \begin_layout Standard
 The product topology allows a set of fractal eigenfunctions to be constructed
  for the Bernoulli operator.
-\end_layout
-
-\begin_layout Standard
------
-\end_layout
-
-\begin_layout Standard
-One begins by noting that the shift operator 
+ One begins by noting that the left-shift operator 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -4635,7 +4735,7 @@ where
 
  is not strictly translation invariant, as 
 \begin_inset Formula \begin{equation}
-H(\tau(\sigma))=\sum_{n=1}^{\infty}\lambda^{n}V(\tau^{n+1}\sigma)=\frac{H(\sigma)-V(\sigma)}{\lambda}\label{eq:Lattice left shift}\end{equation}
+H(\tau(\sigma))=\sum_{n=1}^{\infty}\lambda^{n}V(\tau^{n+1}\sigma)=\frac{H(\sigma)-V(\sigma)}{\lambda}\label{eq:Hamiltonian left shift}\end{equation}
 
 \end_inset
 
@@ -4668,7 +4768,14 @@ almost
  For the bi-infinite, two-sided lattice, a truly translation-invariant Hamiltoni
 an can be defined.
  The two-sided lattice model corresponds to the Bakers map, and is treated
- in greater detail in XXX.
+ in greater detail in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Two-Sided-Lattice"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -4683,7 +4790,7 @@ If
 \begin_inset Formula $p$
 \end_inset
 
- inequivalent right-shift operators 
+ in-equivalent right-shift operators 
 \begin_inset Formula $S_{k}$
 \end_inset
 
@@ -4719,10 +4826,10 @@ These right-shift operators are inverses to the left shift operator
 \begin_inset Formula $p=2$
 \end_inset
 
- case, the shift operators act on the Cantor mapping as 
-\begin_inset Formula \begin{eqnarray}
-x(S_{0}(\sigma)) & = & \frac{x(\sigma)}{2}\nonumber \\
-x(S_{1}(\sigma)) & = & \frac{1+x(\sigma)}{2}\end{eqnarray}
+ case, the shift operators act on the Cantor mapping as
+\begin_inset Formula \begin{align*}
+x(S_{0}(\sigma))= & \frac{x(\sigma)}{2}\\
+x(S_{1}(\sigma))= & \frac{1+x(\sigma)}{2}\end{align*}
 
 \end_inset
 
@@ -4750,8 +4857,8 @@ The
 \begin_inset Formula $p$
 \end_inset
 
--adic Bernoulli operator acting on the dual space of lattice configurations
- is given by 
+-adic Bernoulli operator acting on the space of functionals of lattice configura
+tions is given by 
 \begin_inset Formula \begin{equation}
 \left[\mathcal{L}_{p}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}f\left(S_{k}(\sigma)\right)\label{eq:Lattice Bernoulli}\end{equation}
 
@@ -4783,7 +4890,7 @@ The action of
 
 \end_inset
 
- This is easily shown by direct substitution.
+This is easily shown by direct substitution.
  
 \end_layout
 
@@ -4807,8 +4914,28 @@ The critcal result here is that
 
 .
  The above construction is not limited the the Bernoulli operator, but clearly
- is a general result.
- One may construct a large number of general eigenfunctions, provided that
+ is a general result: it is essentially the Wold decomposition of section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Wold-decomposition"
+
+\end_inset
+
+, but restated in a a more general form: rather than requiring a Hilbert
+ space, it holds for arbitrary Cartesian products over arbitrary spaces,
+ provided only that the summation in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Lattice Hamlitonian"
+
+\end_inset
+
+ is convergent (and/or meets any other criteria for the space being worked).
+\end_layout
+
+\begin_layout Standard
+One may construct a large number of general eigenfunctions, provided that
  on can find non-trivial objects in the kernel, and provided that one is
  working in a topology where the sum of equation 
 \begin_inset CommandInset ref
@@ -4822,11 +4949,18 @@ reference "eq:Lattice Hamlitonian"
 
 \begin_layout Subsection
 Fractal eigenfunctions
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Fractal-eigenfunctions"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The above derivation of the eigenfunctions assumed a lattice model topology
- for the unit interval.
+The above derivation of the eigenfunctions assumed a lattice model (Cartesian
+ product) topology for the unit interval.
  Using equation 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4849,20 +4983,32 @@ reference "eq:Coordinate kernel"
 \end_inset
 
 , it was seen that the kernel of the Bernoulli operator consists of the
- odd harmonics: 
-\begin_inset Formula \[
-\mathcal{L}_{B}\sin2\pi(2k+1)x=0\]
+ odd harmonics of sine and cosine: 
+\begin_inset Formula \begin{align*}
+\mathcal{L}_{B}\sin2\pi(2k+1)x & =0\\
+\mathcal{L}_{B}\cos2\pi(2k+1)x & =0\end{align*}
 
 \end_inset
 
-These correspond precisely to the zero-columns of equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:trig-matrix"
-
+Here, 
+\begin_inset Formula $k$
 \end_inset
 
-.
+ is a non-negative integer paramterizing the kernel; however, it will be
+ more convenient to write 
+\begin_inset Formula $\exp2\pi i\left(2k+1\right)x$
+\end_inset
+
+ and let 
+\begin_inset Formula $k$
+\end_inset
+
+ rang e over all intergers, positive and negative.
+ A simple linear combination over positive and negative 
+\begin_inset Formula $k$
+\end_inset
+
+ will regain the real form.
  Inserting these into equation 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4872,7 +5018,7 @@ reference "eq:Lattice Hamlitonian"
 
 , one has 
 \begin_inset Formula \[
-H(x)=\sum_{n=0}^{\infty}\lambda^{n}\sin\left(2\pi\left(2k+1\right)\tau^{n}x\right)\]
+H(x)=\sum_{n=0}^{\infty}\lambda^{n}\exp\left(2\pi\left(2k+1\right)\tau^{n}x\right)\]
 
 \end_inset
 
@@ -4881,7 +5027,11 @@ which is an eigenfunction:
 \end_inset
 
 .
- Under the sine, one may replace 
+ Because 
+\begin_inset Formula $\exp$
+\end_inset
+
+ is periodic, we may replace 
 \begin_inset Formula $\tau^{n}(x)$
 \end_inset
 
@@ -4890,9 +5040,7 @@ which is an eigenfunction:
 \end_inset
 
 .
- There are also a set of eigenfunctions for the cosine.
- Combining all of these elements together, and changing notation, one has
- a collection of eigenfunctions 
+ Switching notation, one has a collection of eigenfunctions 
 \begin_inset Formula \begin{equation}
 \phi_{\lambda,k}^{B}(x)=\sum_{n=0}^{\infty}\lambda^{n}\exp\left(2\pi i\;2^{n}\left(2k+1\right)x\right)\label{eq:dyadic exp fractal}\end{equation}
 
@@ -4903,7 +5051,7 @@ for any
 \end_inset
 
 .
- This derivation allowed 
+ This derivation allows 
 \begin_inset Formula $\lambda\in F$
 \end_inset
 
@@ -4915,7 +5063,7 @@ for any
 \begin_inset Formula $F$
 \end_inset
 
- to be the complex numbers, the sum converges absolutely for 
+ to be the complex numbers, the sum converges absolutely for the disk 
 \begin_inset Formula $\left|\lambda\right|<1$
 \end_inset
 
@@ -4948,7 +5096,7 @@ v_{n,k,r}^{(p)}(x)=\exp2\pi ix\left(pk+r\right)p^{n}\]
 
 \end_inset
 
- for 
+for 
 \begin_inset Formula $n\in\mathbb{N}_{0}$
 \end_inset
 
@@ -5016,8 +5164,14 @@ This is obtained by simple substitution:
 
 \end_inset
 
-The sum in the middle line above is a Gauss sum, and may be shown to equal
- 
+The sum in the middle line above is a Gauss sum
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Apo76"
+
+\end_inset
+
+, and may be shown to equal 
 \begin_inset Formula $p$
 \end_inset
 
@@ -5090,9 +5244,13 @@ These eigenfunctions are highly degenerate, and span an infinite-dimensional
 \begin_inset Formula $\lambda$
 \end_inset
 
--plane.
+-plane (although these are not integrable when 
+\begin_inset Formula $\left|\lambda\right|>1$
+\end_inset
+
+).
  This implies that the construction of eigenfunctions by means of lattice
- shifts is somehow inately limited: it allows some, but not all possible
+ shifts is somehow innately limited: it allows some, but not all possible
  eigenfunctions to be found.
  The true nature of this obstruction is unclear.
  The proximal cause of the obstruction is that 
@@ -5123,23 +5281,34 @@ Unlike the zeta function eigenvectors, these eigenvectors are not infinitely
 
 \end_inset
 
- and so the right hand side converges absolutely only if 
+and so the right hand side converges absolutely only if 
 \begin_inset Formula $\left|\lambda\right|<1/p$
 \end_inset
 
 .
- That is, for 
+ For 
 \begin_inset Formula $\left|\lambda\right|>1/p$
 \end_inset
 
 , the eigenfunction is continuous but not differentiable.
- This is visualized in figure xxx.
- Smaller eigenvectors are differentiable 
+ This is visualized in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Fractal-Eigenfunction"
+
+\end_inset
+
+.
+ Second derivatives may be taken only if 
+\begin_inset Formula $\left|\lambda\right|<1/p^{2}$
+\end_inset
+
+; more generally, 
 \begin_inset Formula $n$
 \end_inset
 
- times only if 
-\begin_inset Formula $\left|\lambda\right|<1/p^{n+1}$
+'th derivatives may be taken only when 
+\begin_inset Formula $\left|\lambda\right|<1/p^{n}$
 \end_inset
 
 .
@@ -5149,20 +5318,20 @@ Unlike the zeta function eigenvectors, these eigenvectors are not infinitely
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "cap:Fractal-Eigenfunction"
-
-\end_inset
-
-
 \begin_inset Caption
 
 \begin_layout Plain Layout
 Fractal Eigenfunction
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Fractal-Eigenfunction"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5212,20 +5381,19 @@ This figure shows the real and imaginary parts of the eigenfunction
 
 \begin_layout Standard
 Clearly, any linear combination of only a finite number of these fractal
- eigenfunctions will posses similar analytic properties (these get mixed
- if different values of 
-\begin_inset Formula $p$
-\end_inset
-
- are combined).
- However, there is an infinite series combination of these that reproduce
+ eigenfunctions will posses similar analytic properties.
+ However, there is an infinite series combination of these that does reproduce
  the zeta function eigenfunctions.
- The explicit relationship between these two is developed in the next section.
+ An explicit relationship between these two is developed in the next section.
  
 \end_layout
 
 \begin_layout Subsection
 The Fractal Spectrum
+\end_layout
+
+\begin_layout Standard
+xxxx-----xxxxx------
 \end_layout
 
 \begin_layout Standard
@@ -5583,7 +5751,7 @@ The fractal eigenfunctions are self-similar.
  Hamlitonian embodied in equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:Lattice left shift"
+reference "eq:Hamiltonian left shift"
 
 \end_inset
 
@@ -6123,13 +6291,13 @@ reference "eq:Lattice Bernoulli"
 
  is suggestive of the kinds of sums occurring in the definition of the Hecke
  operator.
- One may also consider a Gauss-sum-like extension 
-\begin_inset Formula \begin{equation}
-\left[\mathcal{L}_{B}^{(m)}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}e^{2\pi ikm/p}f\left(S_{k}(\sigma)\right)\label{eq:Lattice Bernoulli}\end{equation}
+ One may also consider a Gauss-sum-like extension
+\begin_inset Formula \[
+\left[\mathcal{L}_{B}^{(m)}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}e^{2\pi ikm/p}f\left(S_{k}(\sigma)\right)\]
 
 \end_inset
 
- regaining 
+regaining 
 \begin_inset Formula $\mathcal{L}_{B}=\mathcal{L}_{B}^{(0)}$
 \end_inset
 
@@ -6138,6 +6306,13 @@ reference "eq:Lattice Bernoulli"
 
 \begin_layout Section
 Two-Sided Lattice
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Two-Sided-Lattice"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6659,6 +6834,13 @@ There are several related, intertwined confusions, here.
 
 \begin_layout Section
 Measure-theoretic description
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Measure-theoretic-description"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
