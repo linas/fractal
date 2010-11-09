@@ -4259,6 +4259,55 @@ key "Ve-Poly07"
 \end_layout
 
 \begin_layout Standard
+An important concluding remark is in order: these eigenfunctions are defined
+ on the entire complex 
+\begin_inset Formula $s$
+\end_inset
+
+-plane.
+ The spectrum lying inside the unit disk 
+\begin_inset Formula $\left|\lambda\right|<1$
+\end_inset
+
+ corresponds to the right side of the complex plane: 
+\begin_inset Formula $\Re s>0$
+\end_inset
+
+.
+ Now, because these functions are well-defined, and even analytic, for the
+ entire plane, we effectively have a family of eigenfunctions for all 
+\begin_inset Formula $\left|\lambda\right|>1$
+\end_inset
+
+, although these will not be integrable, due to singularities at 
+\begin_inset Formula $x=0,1$
+\end_inset
+
+.
+ This is notable because most general treatments of transfer operators,
+ e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ding1998,Mackey1992"
+
+\end_inset
+
+ limit themselves to the space 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ of integrable functions, and thus discover a spectrum on the unit disk
+ 
+\begin_inset Formula $\left|\lambda\right|\le1$
+\end_inset
+
+.
+ The point here is that the spectrum need not stop at the unit disk; it
+ can be larger, provided one expands the space of allowable functions.
+\end_layout
+
+\begin_layout Standard
 These eigenfunctions are countably infinite degenerate at a given eigenvalue.
  Writing 
 \begin_inset Formula $s=\sigma+i\tau$
@@ -5395,10 +5444,6 @@ The Fractal Spectrum
 \end_layout
 
 \begin_layout Standard
-xxxx-----xxxxx------
-\end_layout
-
-\begin_layout Standard
 The fractal spectrum can be re-expressed in terms of the zeta eigenfunctions,
  and vice-versa.
  That is, the one set of eigenfunctions can be expressed as linear combinations
@@ -5507,7 +5552,15 @@ Presumably
 \begin_inset Formula $F$
 \end_inset
 
- is invertible.
+ is invertible; the 
+\begin_inset Formula $\phi_{\lambda,k,r}^{(p)}$
+\end_inset
+
+ should be expressible in terms of the 
+\begin_inset Formula $\beta_{n}(x;s)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -5527,13 +5580,12 @@ The analytic situation is curious: the zeta eigenfuntions are well-defined
 \end_layout
 
 \begin_layout Subsection
-Some discontinuous eigenfunctions
+Discontinuous eigenfunctions
 \end_layout
 
 \begin_layout Standard
-The product topology suggests some additional eigenfunctions of the Bernoulli
- operator, eigenfunctions with are not continuous in the natural topology
- of the reals.
+Some of the eigenfunctions are not continuous in the natural topology of
+ the reals.
  Thus, for example, given the expansion in binary digits 
 \begin_inset Formula $b_{n}\in\left\{ 0,1\right\} $
 \end_inset
@@ -5563,7 +5615,7 @@ c_{\lambda}\left(x\right)=\lambda\left(\lambda-1\right)\sum_{n=0}^{\infty}\left(
 \end_inset
 
 is easily shown to be an eigenfunction of 
-\begin_inset Formula $\mathcal{L}_{2}$
+\begin_inset Formula $\mathcal{L}_{B}$
 \end_inset
 
  with eigenvalue 
@@ -5592,6 +5644,7 @@ reference "fig:Devil's staircase"
 \end_inset
 
 .
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5664,13 +5717,15 @@ This figure was created with misc/gap/measure.c and misc/gap/measure.gplot.
 \end_layout
 
 \begin_layout Standard
-This construction can be generalized.
+This eigenfuntion is not 'new', but is rather a linear combination of those
+ already presented.
+ To see this, generalize the construction.
  The 
 \begin_inset Formula $\phi_{\lambda,k,r}^{(p)}(x)$
 \end_inset
 
  were built up explicitly from sine waves, but there is no particular reason
- to start with a sine-wave basis.
+ to start with a sine-wave basis for the kernel.
  Consider, for example, the square wave or Haar wavelet 
 \begin_inset Formula \[
 h(x)=\begin{cases}
@@ -5689,7 +5744,7 @@ exteneded to the entire real-number line as a periodic function
 
 .
  The Haar wavelet is in the kernel of the Bernoulli operator: 
-\begin_inset Formula $\mathcal{L}_{2}h(x)=0$
+\begin_inset Formula $\mathcal{L}_{B}h(x)=0$
 \end_inset
 
 , and thus can be used to create a fractal eigenfunction by means of the
@@ -5707,7 +5762,7 @@ reference "eq:Lattice shift eigenfunction"
 \end_inset
 
 so that 
-\begin_inset Formula $\mathcal{L}_{2}\psi_{k}=\lambda\psi_{k}$
+\begin_inset Formula $\mathcal{L}_{B}\psi_{k}=\lambda\psi_{k}$
 \end_inset
 
  for any 
@@ -5715,20 +5770,54 @@ so that
 \end_inset
 
  in the unit disk.
- 
+ Of course, 
+\begin_inset Formula $c_{\lambda}$
+\end_inset
+
+ is a special case: 
+\begin_inset Formula $c_{\lambda}\left(x\right)=\lambda\left(\lambda-1\right)\psi_{0}\left(x\right)$
+\end_inset
+
+, and so we see that 
+\begin_inset Formula $c_{\lambda}$
+\end_inset
+
+ is a linear combination of the functions 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dyadic exp fractal"
+
+\end_inset
+
+.
+ By the Fourier deomposition theorem, 
+\emph on
+any
+\emph default
+ periodic function odd about 1/2 will consist entirely of odd harmonics,
+ and can thus be used to define an eigenfunction in the manner of eqn
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Haar wavelet eigenfunction"
+
+\end_inset
+
+.
+ That it is a linear combination of the basis vectors 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dyadic exp fractal"
+
+\end_inset
+
+ follows trivially.
 \end_layout
 
 \begin_layout Standard
-There are several aspects of this eigenfunction that are notable.
- Taken as a function on the real number line with the natural topology,
- it is discontinuous on a set dense in the reals: it is discontinuous at
- the dyadic rationals (that is, at multiples of 
-\begin_inset Formula $2^{-n}$
-\end_inset
-
-).
- By starting with the Haar wavelet, it also avoids the Gibbs phenomenon
- of 
+There are a few practical reasons for choosing a basis other than the sine-wave
+ basis.
+ Most notably, convergence properties are altered: the Haar wavelet can
+ avoid the Gibbs phenomenon of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -5736,14 +5825,64 @@ ringing
 \begin_inset Quotes erd
 \end_inset
 
- that one gets by working in a Fourier basis.
- Finally, the Haar wavelet is more compatible with the discrete, Cantor
- topology of the lattice; it has a particularly simple form when considered
- as a function on the lattice.
+ that makes absolute bounds difficult to establish.
+ The Haar wavelet also seems more compatible with the product topology of
+ the lattice; it has a particularly simple form when considered as a function
+ on the lattice.
+\end_layout
+
+\begin_layout Standard
+Note, incidentally, that even more 'horrible' eignefunctions can be constructed
+ in this fashion.
+ Consider, for example, 
+\begin_inset Formula $\delta\left(x-\frac{1}{4}\right)-\delta\left(x-\frac{3}{4}\right)$
+\end_inset
+
+, extended to be periodic on the real line.
+ It may be expressed as a Fourier series; it lies in the kernel of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+.
+ It may be used to create a fractal eigenfunction: integrable but not square-int
+egrable and certainly not bounded, thus showing that there are eigenfunctions
+ of 
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ that are in 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ but not in 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ or 
+\begin_inset Formula $L_{\infty}$
+\end_inset
+
+.
+ This foreshadows some of the more challenging functions one encounters
+ when analyzing other transfer operators, such as the GKW operator
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-GKW"
+
+\end_inset
+
+.
+ It also vindicates the focus on measureable functions on the product topology:
+ the Dirac delta function is far easier to 'understand' as a measure on
+ a topology than as a Fourier series.
 \end_layout
 
 \begin_layout Subsection
 Fractal Symmetry and the Dyadic Monoid
+\end_layout
+
+\begin_layout Standard
+------------xxxxxxxxxxxx------------xxxxxxxx
 \end_layout
 
 \begin_layout Standard
