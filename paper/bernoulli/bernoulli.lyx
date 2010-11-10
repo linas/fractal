@@ -874,6 +874,31 @@ key "Vep-GKW,May91,Flajolet1995,Flajolet2000"
 \end_layout
 
 \begin_layout Standard
+The Bernoulli operators commute: 
+\begin_inset Formula $\mathcal{L}_{p}\mathcal{L}_{q}=\mathcal{L}_{q}\mathcal{L}_{p}$
+\end_inset
+
+ and are multiplicative: 
+\begin_inset Formula $\mathcal{L}_{p}\mathcal{L}_{q}=\mathcal{L}_{pq}$
+\end_inset
+
+.
+ Teh lat property suggests that it is 
+\begin_inset Quotes eld
+\end_inset
+
+sufficient
+\begin_inset Quotes erd
+\end_inset
+
+ to work with prime 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 As noted above, the properties of the operator 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset
@@ -1028,19 +1053,50 @@ B_{n}(px)=p^{n-1}\sum_{k=0}^{p-1}B_{n}\left(x+\frac{k}{p}\right)\]
 \end_inset
 
 but amounts to the same thing.
- What the language of the transfer operator provides is an abstraction that
- allows the multiplication theorem to be examined in a broader fashion.
- In particular, multiplication theorems exist not only for the Bernoulli
- polynomials, but more broadly, including the Gamma function and the Hurwitz
- zeta function.
- These are not unrelated, and are quite suggestive; they will be re-discovered
- in later sections.
- 
+ Couriously, multiplication theorems exist not only for the Bernoulli polynomial
+s, but more broadly, including the Gamma function and the Hurwitz zeta function.
+ A later section will give a more general set of eigenfunctions in terms
+ of the Hurwitz zeta.
+ Several other connections to number theory are worth pointing out.
+ Sums of the above kind are not atypical in the study of automorphic and
+ modular forms; indeed, the Hecke operator
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Apo90"
+
+\end_inset
+
+ of number theory is essentially the sum of the Bernoulli operator and its
+ transpose.
+ This is perhaps not accidental: later sections will construct fractal eigenfunc
+tions of 
+\begin_inset Formula $\mathcal{L}_{p}$
+\end_inset
+
+ that have self-similarity under the dyadic monoid, which is a certain subset
+ of the modular group.
+ The mathematician's word 
+\begin_inset Quotes eld
+\end_inset
+
+automorphic
+\begin_inset Quotes erd
+\end_inset
+
+ is a synonym for the physicist's 
+\begin_inset Quotes eld
+\end_inset
+
+self-similar
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The following two sections provide an alternate and more abstract and labored
- derivation of the above result.
+The following sections provide a more abstract and belabored derivation
+ of the above result.
  The goal of the abstraction is to develop the machinery needed to explore
  the Bernoulli operator in more general topological settings.
  Rather than starting with the Hilbert space of orthogonal polynomials on
@@ -6013,9 +6069,9 @@ For the other shift operator
 \begin_inset Formula \[
 1\mapsto e_{0}=\left[\begin{array}{c}
 1\\
-0\end{array}\right]\quad\mbox{ and }\quad\psi\mapsto e_{1}=\left(\left[\begin{array}{c}
+0\end{array}\right]\quad\mbox{ and }\quad\psi\mapsto e_{1}=\left[\begin{array}{c}
 0\\
-1\end{array}\right]\right)\]
+1\end{array}\right]\]
 
 \end_inset
 
@@ -6116,7 +6172,7 @@ key "Ve-T04"
  as the modular group plays an important role in number theory, specifically
  in the area of modular forms and automorphic forms.
  Not inconsequential is that the theory of modular forms again borders on
- the theory of the Riiemann zeta.
+ the theory of the Riemann zeta.
  In a similar vein, one notes that the string of integers 
 \begin_inset Formula $[n_{0},n_{1},n_{2},\cdots]$
 \end_inset
@@ -6444,23 +6500,61 @@ Number theoretic connections
 \end_layout
 
 \begin_layout Standard
-XXX The definition 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Lattice Bernoulli"
+For prime number 
+\begin_inset Formula $p$
+\end_inset
+
+, the number theoretic Hecke operator
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Apo90"
 
 \end_inset
 
- is suggestive of the kinds of sums occurring in the definition of the Hecke
- operator.
- One may also consider a Gauss-sum-like extension
+ may be written as
 \begin_inset Formula \[
-\left[\mathcal{L}_{B}^{(m)}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}e^{2\pi ikm/p}f\left(S_{k}(\sigma)\right)\]
+\left[T_{p}f\right]\left(\tau\right)=p^{m-1}f\left(p\tau\right)+\frac{1}{p}\sum_{k=0}^{p-1}f\left(\frac{\tau+k}{p}\right)\]
+
+\end_inset
+
+In number theory, the Hecke operator is used in the classification of modular
+ forms of order 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ Now, in number theory, the above is intended to act only on functions meromorph
+ic in the upper-half complex plane; 
+\emph on
+i.e.
+
+\emph default
+ for which 
+\begin_inset Formula $\tau$
+\end_inset
+
+ lies in the upper half of the complex plane.
+ However, we can immediately recognize the Hecke operator as the sum of
+ the Bernoulli operator and its transpose: 
+\begin_inset Formula \[
+T_{p}=p^{m-1}\mathcal{K}_{p}+\mathcal{L}_{p}\]
+
+\end_inset
+
+and so a certain form of the Hecke operator may be defined as acting on
+ the unit unterval and/or the Cantor set with the product topology.
+ 
+\end_layout
+
+\begin_layout Standard
+Another curious operator is the Gauss-sum-like extension
+\begin_inset Formula \[
+\left[\mathcal{L}_{p}^{(m)}f\right](\sigma)=\frac{1}{p}\sum_{k=0}^{p-1}e^{2\pi ikm/p}f\left(S_{k}(\sigma)\right)\]
 
 \end_inset
 
 regaining 
-\begin_inset Formula $\mathcal{L}_{B}=\mathcal{L}_{B}^{(0)}$
+\begin_inset Formula $\mathcal{L}_{p}=\mathcal{L}_{p}^{(0)}$
 \end_inset
 
 .
