@@ -58,7 +58,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 9 November 2010)
+2 January 2004 (revised 2008, 10 November 2010)
 \end_layout
 
 \begin_layout Abstract
@@ -883,7 +883,7 @@ The Bernoulli operators commute:
 \end_inset
 
 .
- Teh lat property suggests that it is 
+ The last property suggests that it is 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4429,20 +4429,38 @@ Synthetic operators
 \end_layout
 
 \begin_layout Standard
-The equation 
+Starting from the definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:p-adic operator"
+
+\end_inset
+
+, it is straight-forward to deduce that the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic operators commute: 
+\begin_inset Formula $\mathcal{L}_{p}\mathcal{L}_{q}=\mathcal{L}_{q}\mathcal{L}_{p}$
+\end_inset
+
+ and that they are multiplicative: 
+\begin_inset Formula $\mathcal{L}_{p}\mathcal{L}_{q}=\mathcal{L}_{pq}$
+\end_inset
+
+.
+ This is re-expressed in equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:p-adic beta eigeneqn"
 
 \end_inset
 
- shows that there are a countable set of commuting operators all possessing
- the same eigenfunctions.
- Since they are commuting, one is free to take arbitrary sums and products.
- By applying series expansions and applying standard arguments from Fredholm
- operator theory, one may, for practical purposes consider analytic functions
- of these operators.
- These are 
+, which just re-emphasizes these all posses the same eigenfunctions.
+ Since they are commuting, one is free to take arbitrary sums; since they
+ are multiplicative, an arbitary product will always simplify.
+ Thus, one may entertain the thought of various artificially-constructed
+ or 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4450,23 +4468,15 @@ synthetic
 \begin_inset Quotes erd
 \end_inset
 
- operators, in that they have been synthesized from the basic set in equation
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:p-adic beta eigeneqn"
-
-\end_inset
-
-.
+ operators which share eigenfunctions but have novel eigenvalues.
  A few examples follow below.
 \end_layout
 
 \begin_layout Standard
-Any Dirichlet series is straightforward: an operator with polylogarithm
+Any Dirichlet series is straightforward: so, an operator with polylogarithm
  eigenvalues: 
-\begin_inset Formula \[
-\left[\mathcal{LI}_{z}\right]\beta(x;s)=\left[\sum_{p=1}^{\infty}z^{p}\mathcal{L}_{p}\right]\beta(x;s)=\sum_{p=1}^{\infty}\frac{z^{p}}{p^{s}}\beta(x;s)=\mbox{Li}_{s}(z)\beta(x;s)\]
+\begin_inset Formula \begin{equation}
+\left[\sum_{p=1}^{\infty}z^{p}\mathcal{L}_{p}\right]\beta(x;s)=\sum_{p=1}^{\infty}\frac{z^{p}}{p^{s}}\beta(x;s)=\mbox{Li}_{s}(z)\beta(x;s)\label{eq:polylog-oper}\end{equation}
 
 \end_inset
 
@@ -4486,24 +4496,74 @@ A curious squaring:
 
 \end_inset
 
-The Euler products of Fredholm kernels may be taken; for example: 
-\begin_inset Formula \[
-\prod_{p}\frac{1}{1-\mathcal{L}_{p}}\beta(x;s)=\zeta(s)\beta(x;s)\]
+Because the operators are multiplicative, Euler products
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Apo76"
 
 \end_inset
 
-with the product now taken only over prime numbers 
+ may be taken.
+ Thus, for example, setting 
+\begin_inset Formula $z=1$
+\end_inset
+
+ in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:polylog-oper"
+
+\end_inset
+
+ gives 
+\begin_inset Formula $\mbox{Li}_{s}(1)=\zeta\left(s\right)$
+\end_inset
+
+, while factoring the summation into primes yields 
+\begin_inset Formula \[
+\prod_{p\mbox{ prime}}\frac{1}{1-\mathcal{L}_{p}}\beta(x;s)=\zeta(s)\beta(x;s)\]
+
+\end_inset
+
+The product is taken only over prime numbers 
 \begin_inset Formula $p$
 \end_inset
 
 .
- With considerably more difficulty, one might envision operators constructed
- after a sequence of differential and integral moves; for example, something
- involving the Mellin transform.
+ One may likewise consider any of the other typical Euler products encountered
+ in number theory.
+ Defining the operator 
+\begin_inset Formula \[
+\mathcal{Z}=\prod_{p\mbox{ prime}}\frac{1}{1-\mathcal{L}_{p}}\]
+
+\end_inset
+
+one then has the curious situation that the vectors in the kernel of 
+\begin_inset Formula $\mathcal{Z}$
+\end_inset
+
+ are in correspondance with the zeroes of the Riemann zeta function.
+ What's more, the vectors 
+\begin_inset Formula $\beta(x;s)$
+\end_inset
+
+ in the kernel are precisely the ones that vanish at the endpoints: 
+\begin_inset Formula $\beta(0;s)=\beta(1;s)=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\beta(x;s)\in\ker\mathcal{Z}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-In principle, any such operator may be constructed.
+With considerably more difficulty, one might envision operators constructed
+ after a sequence of differential and integral moves; for example, something
+ involving the Mellin transform.
+ In principle, any such operator may be constructed.
  Denote 
 \begin_inset Formula $\beta(x;s)$
 \end_inset
@@ -6543,6 +6603,7 @@ T_{p}=p^{m-1}\mathcal{K}_{p}+\mathcal{L}_{p}\]
 
 and so a certain form of the Hecke operator may be defined as acting on
  the unit unterval and/or the Cantor set with the product topology.
+ XXX expand, clarify.
  
 \end_layout
 
