@@ -2,10 +2,10 @@
 
 all: zeta-fractal
 
-zeta-fractal: zeta-fractal.o
-
-.c:
-	cc -O2 -c $^
+zeta-fractal.o: zeta-fractal.c
 
 .c.o:
-	cc -o $* $^
+	cc -O2 -c $<
+
+.o:
+	cc -o $* $^ -lm
