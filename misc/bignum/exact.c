@@ -301,7 +301,7 @@ main (int argc, char * argv[])
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.00002; q<0.000999; q+=0.000008)
-	for (q=1.0; 1e-8 <q; q*=0.98)
+	for (q=1.0; 1e-4 <q; q*=0.98)
 	// for (zre=0.02; zre<1.00; zre+=0.05)
 	// for (zim=-0.00999999; zim<0.00999999; zim+=0.0000811)
 	{
@@ -312,8 +312,8 @@ main (int argc, char * argv[])
 		// cpx_hurwitz_taylor (zeta, ess, cq, prec);
 		// cpx_pade_hurwitz_zeta (z2, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
-		cpx_periodic_zeta (zeta, ess, que, prec);
-		// cpx_hurwitz_euler_fp (zeta, ess, que, prec);
+		// cpx_periodic_zeta (zeta, ess, que, prec);
+		cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_polylog_sum (plog, ess, zee, prec);
 		// cpx_set_d (zee, q, 0.002);
 		// cpx_set_ui (zeta, 0, 0);

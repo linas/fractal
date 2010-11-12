@@ -1557,7 +1557,10 @@ void cpx_periodic_zeta (cpx_t z, const cpx_t ess, const mpf_t que, int prec)
  *
  * beta = 2 Gamma(s+1) (2\pi)^{-s} F(s,q)
  *
- * As of 22 December, seems to be passing the tests -- 
+ * The implemented algorithm is to compute periodic zeta, and 
+ * then renormalize and return the ressult.
+ *
+ * As of 22 December 2006, seems to be passing the tests -- 
  * that is, it gives the Bernoulli polynomials for integer s,
  * with all the right scale factors and signs, etc. Yay!
  */
@@ -1621,6 +1624,9 @@ void cpx_periodic_beta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
  * Built up from the periodic zeta. Caches intermediate terms, and so
  * performance is much better if s is held const, while q is varied.
  * Expects the input value of q to be between 0 and 1.
+ *
+ * "built up" means periodic zeta is computed (twice) and then summed
+ * with appropriate factors, to compute hurwitz zeta.
  */
 
 static void hurwitz_zeta (cpx_t zee, const cpx_t ess, const mpf_t que, int prec)
