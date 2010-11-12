@@ -251,8 +251,8 @@ main (int argc, char * argv[])
 	mpf_init (tp);
 			  
 	// cpx_set_d (ess, 1.5, 14.134725);
-	cpx_set_d (ess, -1.563331235, sim);
-	cpx_set_d (ess, 0.5, sim);
+	// cpx_set_d (ess, -1.563331235, sim);
+	// cpx_set_d (ess, 0.5, sim);
 	cpx_set_d (ess, sre, sim);
 
 	mpf_t twopi;
@@ -295,23 +295,25 @@ main (int argc, char * argv[])
 	disco (facdown, ess, 1, prec);
 	
 	// printf ("#\n# graph of Hurwitz zeta as function of q, at \n#\n");
-	printf ("#\n# graph of periodic zeta as function of q, at \n#\n");
+	printf ("#\n# graph of periodic zeta as function of q,\n#\n");
 	fp_prt ("# at s= ", ess[0].re);
 	fp_prt (" +i ", ess[0].im);
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
-	// for (q=0.02; q<0.991; q+=0.008)
-	// for (zre=-0.53; zre<1.00; zre+=0.05)
-	for (zim=-0.00999999; zim<0.00999999; zim+=0.0000811)
+	// for (q=0.00002; q<0.000999; q+=0.000008)
+	for (q=1.0; 1e-8 <q; q*=0.98)
+	// for (zre=0.02; zre<1.00; zre+=0.05)
+	// for (zim=-0.00999999; zim<0.00999999; zim+=0.0000811)
 	{
-		// mpf_set_d (que, q);
+		mpf_set_d (que, q);
 		// cpx_set_d (cq, q, 0.0);
 		// cpx_hurwitz_zeta (zeta, ess, que, prec);
 		// cpx_hurwitz_zeta (z3, ess, que, prec);
 		// cpx_hurwitz_taylor (zeta, ess, cq, prec);
 		// cpx_pade_hurwitz_zeta (z2, ess, que, prec);
 		// cpx_periodic_beta (zeta, ess, que, prec);
-		// cpx_periodic_zeta (zeta, ess, que, prec);
+		cpx_periodic_zeta (zeta, ess, que, prec);
+		// cpx_hurwitz_euler_fp (zeta, ess, que, prec);
 		// cpx_polylog_sum (plog, ess, zee, prec);
 		// cpx_set_d (zee, q, 0.002);
 		// cpx_set_ui (zeta, 0, 0);
@@ -370,7 +372,7 @@ main (int argc, char * argv[])
 		printf ("%g\t%g\t", zetare, zetaim);
 #endif
 
-#define CROSS_CUT 1
+// #define CROSS_CUT 1
 #ifdef CROSS_CUT
 		printf ("%g\t",zim);
 		cpx_set_d (ess, sre, sim);
@@ -421,7 +423,7 @@ main (int argc, char * argv[])
 			cpx_sub(zeta, zeta, z2);
 		}
 #endif
-#if 1
+#if 0
 		cpx_polylog (zeta, ess, zee, prec);
 		cpx_set_ui (zeta, 0, 0);
 		if (zim > 0)
@@ -456,10 +458,13 @@ main (int argc, char * argv[])
 			cpx_sub(zeta, zeta, z2);
 		}
 #endif
+#endif
+		printf ("%g\t", q);
 		double zetare = mpf_get_d(zeta[0].re);
 		double zetaim = mpf_get_d(zeta[0].im);
 		printf ("%g\t%g\t", zetare, zetaim);
-#endif
+		double zmod = sqrt(zetare*zetare + zetaim*zetaim);
+		printf ("%g\t", zmod);
 
 		// fp_prt ("\t", zeta[0].re);
 		// fp_prt ("\t", z2[0].re);
