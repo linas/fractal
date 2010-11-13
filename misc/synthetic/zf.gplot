@@ -12,5 +12,6 @@ set key right
 set ylabel "|F( 25" 0,0
 set xlabel "zim" 1,0
 plot "zf.dat" using 1:(($2)) title "Re", \
-     "zf.dat" using 1:(($3)) title "Im"
+     "zf.dat" using 1:(($3)) title "Im", \
+     "zf.dat" using 1:(sqrt($2*$2+$3*$3)) title "abs"
 
