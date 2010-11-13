@@ -1,4 +1,10 @@
-
+/*
+ * zeta-fractal.c
+ *
+ * Experimental sum. Not tractable, and creted due to 
+ * a mistake, in the first place. Dead end.
+ * Linas Vepstas november 2010
+ */
 #include <complex.h>
 #include <math.h>
 #include <stdio.h>
@@ -7,8 +13,8 @@
 complex phi(unsigned int p, int k, int r, complex lambda, double x)
 {
 	complex sum = 0.0;
-	complex lamn = 1.0;
-	unsigned int pn = 1;
+	complex lamn = lambda;
+	unsigned int pn = p;
 
 	while(1)
 	{
@@ -22,7 +28,7 @@ complex phi(unsigned int p, int k, int r, complex lambda, double x)
 	return sum;
 }
 
-#define NTERMS 1020
+#define NTERMS 2020
 
 complex remi (complex ess, double x)
 {
@@ -61,8 +67,6 @@ int main (int argc, char *argv[])
 	for (x=0; x<=1.0; x+= 0.0005)
 	{
 		complex ph = remi(ess, x);
-		complex psi = (NTERMS-2) * cexp(2.0*M_PI*x*I);
-		ph -= psi;
 
 		double re = creal(ph);
 		double im = cimag(ph);
