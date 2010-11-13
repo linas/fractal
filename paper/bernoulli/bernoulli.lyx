@@ -335,76 +335,83 @@ key "Ruelle1986"
 
 [verify ref] as a powerful mechanism for studying the nature of iterated
  maps.
+ Before this, iterated functions were typically studied by looking at the
+ trajectories of sets of points.
+ This approach, though obvious, has disadvantages for both the disciplines
+ of phsysics (
+\emph on
+e.g.
+
+\emph default
+ loss of differentiability) and mathematics (
+\emph on
+e.g.
+
+\emph default
+ non-measureable sets, axiom of choice).
  The transfer operator, sometimes called the Perron-Frobenius operator,
- or the Ruelle-Frobenius-Perron operator, provides a means to escape the
- narrow confines of point-set topology when considering an iterated function,
- and instead explore the function using wildly different topologies.
- In its most concrete form, it is a linear operator acting on a Banach space
- of functions.
- However, the structure and the properties of the operator depend very much
- on which space of functions one considers.
- In the following, the spaces of polynomial functions of the real numbers,
- as well as the space of square-integrable functions will be considered.
- More broadly, one may also consider the transfer operator acting on other
- spaces, such as the 
-\begin_inset Formula $p$
+ or the Ruelle-Frobenius-Perron operator, provides a different, stronger
+ setting, by making incorporating the topology of the space that the map
+ acts on.
+ This section provides a gentle introduction to the concept.
+\end_layout
+
+\begin_layout Standard
+In general, an iterated function 
+\begin_inset Formula $g:X\to X$
 \end_inset
 
--adic numbers, endowed with the standard Cartesian product topology; the
- 2-adic product topology is identified with the Cantor set.
- Curiously, the Cartesian product is more or less the same thing as the
- 1-D spin-lattice models of theoretical physics (such as the Ising model)
- and so additional insight can be gained by usig the language and notation
- from such models 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "May91"
+ maps a space 
+\begin_inset Formula $X$
+\end_inset
 
+ to itself.
+ When studying an iterated function, one often asks about the orbits of
+ points: Are there fixed points, attractors or repellors, or saddle points?
+ Is the action of 
+\begin_inset Formula $g$
+\end_inset
+
+ may be ergodic or chaotic? Endowing the set 
+\begin_inset Formula $X$
+\end_inset
+
+ with a toplogy (for the unit interval, the natural topology on the reals),
+ one typically asks if 
+\begin_inset Formula $g$
+\end_inset
+
+ is strong or weak mixing, or merely topologically mixing.
+ The above questions may all be grouped under a heading: 'the study of iterated
+ operators by means of point set topology'.
+ A change in perspective is gained by introducing a measure on the space
+ 
+\begin_inset Formula $X$
 \end_inset
 
 .
- 
+ This radically alters how 
+\begin_inset Formula $g$
+\end_inset
+
+ can be discussed.
 \end_layout
 
 \begin_layout Standard
-It is easiest to begin with the concrete definition.
- Consider a function 
-\begin_inset Formula $g:[0,1]\to[0,1]$
-\end_inset
-
-, that is, a function mapping the unit interval of the real number line
- to itself.
- Upon iteration, the function may have fixed points or orbits of points.
- These orbits may be attractors or repellors, or may be neutral saddle points.
- The action of 
+Consider how 
 \begin_inset Formula $g$
 \end_inset
 
- may be ergodic or chaotic, strong-mixing or merely topologically mixing.
- In any case, whenever such iteration is discussed in the general literature
- of mathematics or physics, the language used almost always assumes either
- the point-set topology of the unit interval, or the 
-\begin_inset Quotes eld
+ acts on distributions, rather than points.
+ Suppose the space 
+\begin_inset Formula $X$
 \end_inset
 
-natural
-\begin_inset Quotes erd
+ is the unit interval 
+\begin_inset Formula $\left[0,1\right]$
 \end_inset
 
- topology on the unit interval, the topology of open sets.
- 
-\end_layout
-
-\begin_layout Standard
-A shift in perspective may be gained not by considering how 
-\begin_inset Formula $g$
-\end_inset
-
- acts on points or open sets, but instead by considering how 
-\begin_inset Formula $g$
-\end_inset
-
- acts on distributions on the unit interval.
+.
  Intuitively, consider a dusting of points on the unit interval, with a
  local density given by 
 \begin_inset Formula $\rho(x)$
@@ -462,7 +469,7 @@ The operator
 \end_inset
 
  is called the transfer operator or the Ruelle-Frobenius-Perron operator.
- It is not hard to see that it is a linear operator, in that 
+ It is a linear operator, for clearly 
 \begin_inset Formula \[
 \mathcal{L}_{g}(a\rho_{1}+b\rho_{2})=a\mathcal{L}_{g}\rho_{1}+b\mathcal{L}_{g}\rho_{2}\]
 
@@ -565,28 +572,56 @@ the set of functions
 
  is an operator acting on a topological space endowed with multiplication
  and addition, that is, a topological vector space.
- It can be given a precise definition: in a later section, we establish
- it to be best thought of as the pushforward of 
-\begin_inset Formula $g$
-\end_inset
+ 
+\end_layout
 
- on the set of measureable, sigma-additive functions.
- This can then encompass the definition 
+\begin_layout Standard
+The definition of eqn 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:transfer-dirac"
 
 \end_inset
 
- above as well as 
+, for a general space 
+\begin_inset Formula $X$
+\end_inset
+
+, requires the definition of an intergral on 
+\begin_inset Formula $X$
+\end_inset
+
+, and the definition of the Dirac delta function.
+ This is in general possible only when 
+\begin_inset Formula $X$
+\end_inset
+
+ is endowed with a measure and the associated Borel sigma algebra.
+ The space 
+\begin_inset Formula $\mathcal{F}\left[X\right]$
+\end_inset
+
+ then must be a space of of measureable, sigma-additive functions, if eqn
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq: transfer-jacobi"
+reference "eq:transfer-dirac"
 
 \end_inset
 
- below.
- So, for example, when the function 
+ is to be meaningful.
+ Given this setting, the transfer operator turns out to be one and the same
+ as the pushforward of 
+\begin_inset Formula $g$
+\end_inset
+
+ on the set of measureable, sigma-additive functions.
+ A formalization and proof of this is given in a much later section.
+ For most of what follows, though, these formalities can be avoided.
+\end_layout
+
+\begin_layout Standard
+When the function 
 \begin_inset Formula $g$
 \end_inset
 
@@ -602,7 +637,7 @@ where the sum is presumed to extend over at most a countable number of points.
 \begin_inset Quotes eld
 \end_inset
 
-reassonable
+reasonable
 \begin_inset Quotes erd
 \end_inset
 
@@ -621,6 +656,10 @@ reference "eq: transfer-jacobi"
 \end_inset
 
  are equivalent defintions.
+\end_layout
+
+\begin_layout Standard
+-----
 \end_layout
 
 \begin_layout Standard
@@ -726,6 +765,15 @@ key "Ruelle1986"
 
 .
  
+\end_layout
+
+\begin_layout Standard
+Now, as a general theorem, the spectrum of a compact operator on a Banach
+ space is countable, and has an accumulation point only at zero [need ref].
+ From the Wold decomposition, its is known that the spectrum of a shift
+ is always the entire disk.
+ From this, we deduce ...
+ XXX huh...XXX...
 \end_layout
 
 \begin_layout Section
@@ -4258,8 +4306,8 @@ which may be demonstrated easily enough.
 \begin_layout Standard
 These eigenfunctions are essentially a form of the Hurwitz zeta function
  
-\begin_inset Formula \[
-\zeta(s,x)=\sum_{n=0}^{\infty}\frac{1}{\left(n+x\right)^{s}}\]
+\begin_inset Formula \begin{equation}
+\zeta(s,x)=\sum_{n=0}^{\infty}\frac{1}{\left(n+x\right)^{s}}\label{eq:Hurwitz zeta}\end{equation}
 
 \end_inset
 
@@ -4326,10 +4374,25 @@ thus proving the assertion that the Hurwitz zeta is an eigenfunction of
 \end_inset
 
 .
+ A much easier proof is obtained by directly inserting eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Hurwitz zeta"
+
+\end_inset
+
+ into 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:p-adic operator"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The eigenfunctions are smooth (infinitely differentiable) for the open interval
+The beta functions are smooth (infinitely differentiable) for the open interval
  
 \begin_inset Formula $0<x<1$
 \end_inset
@@ -4338,7 +4401,11 @@ The eigenfunctions are smooth (infinitely differentiable) for the open interval
 \begin_inset Formula $x=0$
 \end_inset
 
-, and more preciely, for all integer values of 
+, and more preciely, depending on 
+\begin_inset Formula $s$
+\end_inset
+
+, for all integer values of 
 \begin_inset Formula $x$
 \end_inset
 
@@ -4391,8 +4458,9 @@ key "Ve-Poly07"
 \end_inset
 
  are non-trivial, due to the branch-point of the polylogarithm, and so naive
- manipulations are dangerous to carry out.
- For any practical work, the Hurwitz zeta function is much better suited.
+ manipulations can be dangerous to carry out.
+ For practical work, the Hurwitz zeta function is better suited and easier
+ to understand.
  
 \end_layout
 
@@ -4411,7 +4479,11 @@ An important concluding remark is in order: these eigenfunctions are defined
 \begin_inset Formula $\Re s>0$
 \end_inset
 
-.
+ (for the Hurwitz zeta, 
+\begin_inset Formula $\Re s<1$
+\end_inset
+
+).
  Now, because these functions are well-defined, and even analytic, for the
  entire plane, we effectively have a family of eigenfunctions for all 
 \begin_inset Formula $\left|\lambda\right|>1$
