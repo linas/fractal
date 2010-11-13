@@ -58,7 +58,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 11 November 2010)
+2 January 2004 (revised 2008, 12 November 2010)
 \end_layout
 
 \begin_layout Abstract
@@ -659,23 +659,159 @@ reference "eq: transfer-jacobi"
 \end_layout
 
 \begin_layout Standard
------
-\end_layout
-
-\begin_layout Standard
-The structure of 
+Because 
 \begin_inset Formula $\mathcal{L}_{g}$
 \end_inset
 
- also depends on the topology applied to the unit interval.
- Besides the natural topology on the real number line, the unit interval
- can be given several other topologies.
- The most important of these is the Cantor set topology, or the 
-\begin_inset Formula $p$
+ is a linear operator, all of the usual language of operator theory may
+ be brought to bear on its study.
+ As a start, one looks for its representations and the eigenvectors and
+ eigenspaces associated with each representation.
+ It is typically pertinent to discuss any symmetries and isomorphisms these
+ spaces might have.
+ Thus, for example, if 
+\begin_inset Formula $\mathcal{L}_{g}$
 \end_inset
 
--adic topology.
- Here, one considers the unit interval 
+ is a compact operator, then it's spectrum is constrained by well-known
+ theorems[need ref]: the spectrum is discrete, countable, bounded, and,
+ if infinite, has an accumulation point at zero.
+ It is from here whence the transfer operator gets the name 'Perron-Frobenius':
+ insofar as compact operators are 'a lot like' finite matrixes, the Perron-Frobe
+nius theorem applies.
+ So, for example, if one chooses the space 
+\begin_inset Formula $\mathcal{F}\left[X\right]$
+\end_inset
+
+ to be the space of polynomials on 
+\begin_inset Formula $X$
+\end_inset
+
+, then, for many 'reasonable' 
+\begin_inset Formula $g$
+\end_inset
+
+, the operator 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+ is compact.
+ After we narrow the discussion to the Bernoulli operator, we will find
+ that this is exactly the case.
+ Alternately, one may choose 
+\begin_inset Formula $\mathcal{F}\left[X\right]$
+\end_inset
+
+ to be a Banach space, or possibly a Hilbert space of square-integrable
+ functions on 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ In this case, it turns out that, for many 'reasonable' 
+\begin_inset Formula $g$
+\end_inset
+
+, that the conjugate of 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+ is and isometry and specifically, a shift operator.
+ In this case, it is well-known from the Wold-von Neumann decomposition
+ that the spectrum of 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+ fills the entire unit disk on the complex plane.
+ We'll provide several constructions for the Bernoulli operator that exhibit
+ this (and more; a spectrum that fills the entire complex plane!).
+\end_layout
+
+\begin_layout Standard
+Insofar as 
+\begin_inset Formula $g$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+ have a physical interpretation, the eigenfunctions of 
+\begin_inset Formula $\mathcal{L}_{g}$
+\end_inset
+
+ are called Ruelle resonances
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ruelle1986"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The Cantor set, and more generally, the product topology on infinite Cartesian
+ products, plays a special role in what follows.
+ This is in part due to the nature of shift operators and the Wold decomposition
+, but can be considered a generalization.
+ To keep things simple, consider the unit inteval.
+ For any 
+\begin_inset Formula $x\in\left[0,1\right]$
+\end_inset
+
+, one may write the decimal expansion for 
+\begin_inset Formula $x$
+\end_inset
+
+:
+\begin_inset Formula \[
+x=0.d_{1}d_{2}d_{3}\cdots=\sum_{n=1}^{\infty}d_{n}10^{-n}\]
+
+\end_inset
+
+where 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ is the 
+\begin_inset Formula $n$
+\end_inset
+
+'th decimal digit of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The space of all such decimal expansions is the Cartesian product 
+\begin_inset Formula $D\times D\times D\times\cdots$
+\end_inset
+
+ where 
+\begin_inset Formula $D$
+\end_inset
+
+ is the finite set 
+\begin_inset Formula $D=\left\{ 0,1,2,3,\cdots,9\right\} $
+\end_inset
+
+.
+ Although this is 'obvious', it is not commonly appreciated that this infinite
+ Cartesian product is the Cantor set.
+ This has practical implications for the study of transfer operators: one
+ may choose to work with not only the 'natural' topology on the unit interval,
+ but also with the Cantor set topology (aka the product topology).
+ This can have a subtle effect on the space of measureable functions 
+\begin_inset Formula $\mathcal{F}\left[X\right]$
+\end_inset
+
+, and can, as well, open up new ways of thinking about the problem, thus
+ offering additional tools, techniques and theorems.
+\end_layout
+
+\begin_layout Standard
+To be more precise, one considers the unit interval 
 \begin_inset Formula $[0,1]$
 \end_inset
 
@@ -694,43 +830,78 @@ Intuitively, this set is simply the set of all the digits of a base-
 \end_inset
 
 .
- The connection with physics comes from the realization that this set can
- be understood to be the collection of all field configurations of a one-dimensi
-onal, one-sided lattice, where each lattice location can take on one of
- 
+ That one may consider a shift operator on this space is now intuitively
+ obvious; that this shift operator has anything at all to do with that of
+ the Wold decomposition is less so.
+ This connection will be explored in greater detail in this text.
+ This space is equivalent to the collection of all field configurations
+ of a one-dimensional, one-sided lattice, where each lattice location can
+ take on one of 
 \begin_inset Formula $p$
 \end_inset
 
  values.
- Such lattices are commonly given the product topology, where the open sets
- are the cylinder sets consisting of substrings of sequences of letters.
- The topology also has a natural measure, derived from the length of letter
- sequences.
- Aside from the 
+ In physics, such lattices are called 'spin lattices' or 'spin networks';
+ this cross-over of concepts provides another way of gaining insight.
+ 
+\end_layout
+
+\begin_layout Standard
+A few more remarks remain in order.
+ The space 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ may be endowed with one of two different metrics: the natural metric, the
+ closure of which leads to the natural topology on the real numbers, and
+ the 
 \begin_inset Formula $p$
 \end_inset
 
--adic expansion above, one also has the continued fraction expansion, where
- one considers the sequence of integers making up the continued fraction
- 
+-adic metric, whose closure gives the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic numbers.
+ These are important to the study of finite function fields and 
+\begin_inset Formula $p$
+\end_inset
+
+-adic analysis in general.
+ Although this can be quite interesting, this text does not currently deal
+ any further with the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic metric or the resulting closure.
+\end_layout
+
+\begin_layout Standard
+The real numbers also have yet another product representation.
+ By considering 
+\begin_inset Formula $\Omega=\mathbb{N}\times\mathbb{N}\times\cdots$
+\end_inset
+
+, one has sequences of positive integers that may be interpreted as a continued
+ fraction: 
 \begin_inset Formula \[
 x=[0;\sigma_{1},\sigma_{2},\sigma_{3},\ldots]=\frac{1}{\sigma_{1}+\frac{1}{\sigma_{2}+\frac{1}{\sigma_{3}+\ldots}}}\]
 
 \end_inset
 
-where each 
-\begin_inset Formula $\sigma_{k}$
+The measure on this product space is radically different than the usual
+ measure, and is considerably harder to study.
+ An introduction to lattice models, the product topology,and thier applications
+ to the study of transfer operators for continued fractions may be found
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "May91"
+
 \end_inset
 
- is a positive integer; the entire sequence again be given a product topology,
- although the measure is constructed quite differently.
-\end_layout
-
-\begin_layout Standard
-In most of what follows, the topological rings that will be considered will
- be very concrete: these will be the Banach spaces of polynomial functions,
- and of square-integrable functions.
- The lattice-model topology is explored a bit in 
+.
+ Another exploration with certain specific results can be found in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Vep-mink2008"
@@ -738,42 +909,15 @@ key "Vep-mink2008"
 \end_inset
 
 .
- Since 
-\begin_inset Formula $\mathcal{L}_{g}$
-\end_inset
-
- is a linear operator, the primary focus of study is to characterize it
- along traditional lines: find its representations, find the eigenvectors
- and eigenspaces associated with each representation, discuss any symmetries
- and pertinent isomorphisms these spaces might have.
- XXX re-write this para, the self-ref is inappropriate.
- In fact, reiwrite this entire section.
- XXX
-\end_layout
-
-\begin_layout Standard
-The eigenfunctions of 
-\begin_inset Formula $\mathcal{L}_{g}$
-\end_inset
-
- are called Ruelle resonances
+ The continued fraction will not be further adressed in this text; see instead
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Ruelle1986"
+key "Vep-GKW"
 
 \end_inset
 
-.
- 
-\end_layout
-
-\begin_layout Standard
-Now, as a general theorem, the spectrum of a compact operator on a Banach
- space is countable, and has an accumulation point only at zero [need ref].
- From the Wold decomposition, its is known that the spectrum of a shift
- is always the entire disk.
- From this, we deduce ...
- XXX huh...XXX...
+ for a detailed treatment.
 \end_layout
 
 \begin_layout Section
