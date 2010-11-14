@@ -20,66 +20,10 @@
 #include "brat.h"
 
 /*-------------------------------------------------------------------*/
-/* 
- * This routine computes average winding number taken by
- * circle map iterator.
+/*
+ * This routine computes a scatterplot of position vs momentum for
+ * the circle map
  */
-static double winding_number (double omega, double K, int itermax)
-{
-   double	x=0.0;
-   int		iter,j;
-	int cnt=0;
-	double start=0.0, end=0.0;
-   
-#define SAMP 150
-	for (j=0; j<itermax/SAMP; j++)
-	{
-		double t = rand();
-		t /= RAND_MAX;
-		t -= 0.5;
-		x = t;
-		start += x;
-  
-   	/* OK, now start iterating the circle map */
-   	for (iter=0; iter < SAMP; iter++) {
-      	x += omega - K * sin (2.0 * M_PI * x);
-			cnt ++;
-   	}
-		end += x;
-	}
-	
-   x = (end-start) / ((double) cnt);
-	return x;
-}
-
-/*-------------------------------------------------------------------*/
-/* 
- * This routine computes average winding number taken by
- * circle map iterator. -- subject to noise
- */
-static double noisy_winding_number (double omega, double K, int itermax, double noise)
-{
-   double	x=0.0;
-   int		iter;
-	int cnt=0;
-   
-  	/* OK, now start iterating the circle map */
-  	for (iter=0; iter < itermax; iter++) {
-     	x += omega - K * sin (2.0 * M_PI * x);
-		cnt ++;
-
-		/* white noise, equi-distributed, sharp cutoff */
-		double t = rand();
-		t /= RAND_MAX;
-		t -= 0.5;
-		x += noise*t;
-  	}
-	
-   x /= ((double) cnt);
-	return x;
-}
-
-/*-------------------------------------------------------------------*/
 
 void MakeHisto (
    float    *glob,
@@ -90,11 +34,41 @@ void MakeHisto (
    double   width,
    double   height,
    int      itermax,
-   double   renorm)
+   double   param)
 {
+	int      i,j, k, globlen;
 
+	globlen = sizex*sizey;
+	for (i=0; i<globlen; i++) glob [i] = 0.0;
+
+#define SAMP 100
+	for (k=0; k<SAMP; k++)
+	{
+		double omega = 0.333;
+		double K = param;
+
+  		/* OK, now start iterating the circle map */
+		int iter;
+		double x, xprev, moment;
+		x = rand();
+		x /= RAND_MAX;
+		xprev = 0.0;
+  		for (iter=0; iter < itermax; iter++)
+		{
+			xprev = x;
+     		x += omega - K * sin (2.0 * M_PI * x);
+			x -= floor(x);
+
+			moment = x - xprev;
+			moment -= floor(moment);
+
+			/* convert to pixel coords */
+			i = (sizex-1) * x;
+			j = (sizey-1) * moment;
+
+			glob [i + j*sizex] += 1.0;
+  		}
+	}
 }
 
 /* --------------------------- END OF LIFE ------------------------- */
-
-

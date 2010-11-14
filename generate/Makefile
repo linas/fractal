@@ -14,7 +14,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         moire automatic wind winds ray \
         manvert cutoff brat draw dx image
 
-NEW_EXES = affine alpha baker circle cutoff divisor elliptic \
+NEW_EXES = affine alpha baker circle circle-mom cutoff divisor elliptic \
         erdos euler-q fdist gamma gauss-red gkd gkw gkw-integrand \
         hardy hermite hurwitz ising \
         ising-moment mand-flow \
@@ -56,6 +56,7 @@ brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
 circle.o: circle.C brat.h
+circle-mom.o: circle-mom.C brat.h
 cutoff.o: cutoff.C
 divisor.o: divisor.C brat.h
 euler-q.o: euler-q.C
@@ -92,6 +93,7 @@ brat-beigen: brat.o brat-beigen.o util.o
 brat-gap-hair: brat.o brat-gap-hair.o util.o $(FUNC)
 brat-gapper: brat.o brat-gapper.o util.o $(FUNC)
 circle: brat.o circle.o util.o
+circle-mom: brat.o circle-mom.o util.o
 cutoff: brat.o cutoff.o coord-xforms.o util.o 
 divisor: brat.o divisor.o util.o $(FUNC)
 elliptic: brat.o elliptic.o util.o
