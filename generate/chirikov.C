@@ -38,34 +38,41 @@ void MakeHisto (
 
 	double K = param/ (2.0*M_PI);
 
-#define SAMP 1000
+// #define SAMP 1000
+#define SAMP 1
 	double norm = ((double) sizex*sizey) / ((double) SAMP*itermax);
+	norm /= width*height;
 	for (k=0; k<SAMP; k++)
 	{
 
   		/* OK, now start iterating the circle map */
 		int iter;
-		double x, xprev, moment;
-		x = rand();
-		x /= RAND_MAX;
+		double pos, posprev, moment;
+		pos = rand();
+		pos /= RAND_MAX;
 		moment = rand();
 		moment /= RAND_MAX;
-		xprev = 0.0;
+		posprev = 0.0;
   		for (iter=0; iter < itermax; iter++)
 		{
-			xprev = x;
-     		x += moment + K * sin (2.0 * M_PI * x);
-			x -= floor(x);
+			posprev = pos;
+     		pos += moment + K * sin (2.0 * M_PI * pos);
+			pos -= floor(pos);
 
-			moment = x - xprev;
+			moment = pos - posprev;
 			moment -= floor(moment);
 
-			/* convert to pixel coords */
-			i = (sizex-1) * x;
-			j = (sizey-1) * moment;
-			j = sizey-1 - j;
-
-			glob [i + j*sizex] += norm;
+			/* convert to piposel coords */
+			double sx = (pos - re_center) / width;
+			double sy = (moment - im_center) / height;
+			i = (sizex-1) * sx;
+			j = (sizey-1) * sy;
+			if ((0 <= sx) && (sx < sizex) &&
+			    (0 <= sy) && (sy < sizey))
+			{
+				j = sizey-1 - j;
+				glob [i + j*sizex] += norm;
+			}
   		}
 	}
 }
