@@ -39,7 +39,8 @@ void MakeHisto (
 #define SAMP 100
 	for (k=0; k<SAMP; k++)
 	{
-		double omega = 0.333;
+		// double omega = 0.333;
+		double omega = 0.1333;
 		double K = param;
 
   		/* OK, now start iterating the circle map */

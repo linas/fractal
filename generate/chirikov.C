@@ -1,8 +1,8 @@
 /*
- * circle-mom.C
+ * chirikov.C
  *
  * FUNCTION:
- * Circle map momentum.
+ * Chirikov-Taylor Standard Map
  *
  * HISTORY:
  * quick hack -- Linas Vepstas November 2010
@@ -17,7 +17,7 @@
 /*-------------------------------------------------------------------*/
 /*
  * This routine computes a scatterplot of position vs momentum for
- * the circle map
+ * the standard map.
  */
 
 void MakeHisto (
@@ -36,22 +36,25 @@ void MakeHisto (
 	globlen = sizex*sizey;
 	for (i=0; i<globlen; i++) glob [i] = 0.0;
 
-#define SAMP 100
+	double K = param/ (2.0*M_PI);
+
+#define SAMP 1000
+	double norm = ((double) sizex*sizey) / ((double) SAMP*itermax);
 	for (k=0; k<SAMP; k++)
 	{
-		double omega = 0.333;
-		double K = param;
 
   		/* OK, now start iterating the circle map */
 		int iter;
 		double x, xprev, moment;
 		x = rand();
 		x /= RAND_MAX;
+		moment = rand();
+		moment /= RAND_MAX;
 		xprev = 0.0;
   		for (iter=0; iter < itermax; iter++)
 		{
 			xprev = x;
-     		x += omega - K * sin (2.0 * M_PI * x);
+     		x += moment + K * sin (2.0 * M_PI * x);
 			x -= floor(x);
 
 			moment = x - xprev;
@@ -60,8 +63,9 @@ void MakeHisto (
 			/* convert to pixel coords */
 			i = (sizex-1) * x;
 			j = (sizey-1) * moment;
+			j = sizey-1 - j;
 
-			glob [i + j*sizex] += 1.0;
+			glob [i + j*sizex] += norm;
   		}
 	}
 }
