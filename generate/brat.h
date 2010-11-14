@@ -12,9 +12,11 @@
  * more stuff -- October 2004
  */
 
-/** callback for making a generic scatterplot.
- *  Just implement this callback to draw a generic
- *  scatterplot.
+/**
+ * MakeHisto -- callback for making a generic scatterplot.
+ *
+ * Implement this callback to draw a generic scatterplot. Upon return,
+ * the callback should fill in the 2D array with values.
  */
 void MakeHisto (
    float  	*glob,
@@ -27,10 +29,14 @@ void MakeHisto (
    int		itermax,
 	double 	renorm);
 
-/** callback for making a plain height-map. 
- *  To graph is simple height map i.e. a distinct real 
- *  for a point (x,y), implement this callback, 
- *  and then use DECL_MAKE_HEIGHT()
+/** 
+ * MakeHeightCB - callback for making a plain height-map. 
+ *
+ * To graph a simple height map, implement this callback, and then use
+ * DECL_MAKE_HEIGHT() to run it.
+ *
+ * The callback should return a single real number, given, as input,
+ * a fixed point (x,y) on the 2D plane.
  */
 typedef double MakeHeightCB 
 	(double x, double y, int itermax, double param);
@@ -65,9 +71,15 @@ void MakeHisto (        \
        width, height, itermax, renorm, cb);                  \
 }
 
-/* Bifurcation diagram callback, does one row at a time.
+/**
+ * MakeBifurCB- Bifurcation diagram callback, does one row at a time.
+ *
  * To draw a bifurcation diagram, implement this callback, 
- * and then declare DECL_MAKE_BIFUR */
+ * and then declare DECL_MAKE_BIFUR. The callback will be called
+ * with a steadily-incremented y_parameter each time. For each
+ * y_parameter, the callback should compute a 1D distribution, and
+ * return that distribution in "array".
+ */
 
 typedef void
 MakeBifurCB (
@@ -75,7 +87,7 @@ MakeBifurCB (
 	int array_size, 
 	double x_center,
 	double x_width,
-	double y_paramter, 
+	double y_parameter, 
 	int itermax,
 	double renorm);
 
