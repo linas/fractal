@@ -80,8 +80,8 @@ static double noisy_winding_number (double omega, double K, int itermax, double 
 
 /*-------------------------------------------------------------------*/
 /* 
- * This routine computes average winding number taken by
- * circle map iterator.
+ * This routine computes average root-mean-square winding number
+ * taken by circle map iterator.
  */
 static double rms_winding_number (double omega, double K, int itermax)
 {
