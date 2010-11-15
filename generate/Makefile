@@ -17,7 +17,7 @@ OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
 NEW_EXES = affine alpha baker chirikov \
         circle circle-mom cutoff divisor elliptic \
         erdos euler-q fdist gamma gauss-red gkd gkw gkw-integrand \
-        hardy hermite hurwitz ising \
+        haar hardy hermite hurwitz ising \
         ising-moment mand-flow \
         mp_zeta mobius plouffe polylog q-exp sho swap takagi totient zeta \
         ray automatic radius
@@ -66,6 +66,7 @@ fdist.o: fdist.C
 gamma.o: gamma.C
 gauss-red.o: gauss-red.C
 gkd.o: gkd.C
+haar.o: haar.C
 hardy.o: hardy.C
 hermite.o: hermite.C
 hurwitz.o: hurwitz.C brat.h
@@ -108,6 +109,7 @@ gauss-red: brat.o gauss-red.o util.o
 gkd: brat.o gkd.o util.o 
 gkw: brat.o gkw.o util.o $(FUNC) $(MP) $(GMP)
 gkw-integrand: brat.o gkw-integrand.o util.o $(FUNC) $(MP) $(GMP)
+haar: brat.o haar.o util.o 
 hardy: brat.o hardy.o util.o $(FUNC)
 hermite: brat.o hermite.o util.o 
 hurwitz: brat.o hurwitz.o util.o $(MP) $(GMP) 
