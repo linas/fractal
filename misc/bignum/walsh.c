@@ -406,11 +406,11 @@ void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n, int 
 	mpf_init(ak);
 
 	mpf_set(ex, x);
-	blanc(result, w, x, n, prec);
+	blanc(result, w, ex, n, prec);
 
 	for (i=1; i<sh->bitlen; i++)
 	{
-		walsh(term, x, sh->m_k[i]);
+		walsh(term, ex, sh->m_k[i]);
 		mpf_set_d(ak, sh->a_k[i]);
 		mpf_mul(term, term, ak);
 		mpf_add(result, result, term);
@@ -438,14 +438,45 @@ igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x,
 	mpf_init(ak);
 
 	mpf_set(ex, x);
-	igral_blanc(result, w, x, n, prec);
+	igral_blanc(result, w, ex, n, prec);
 
 	for (i=1; i<sh->bitlen; i++)
 	{
-		igral_walsh(term, x, sh->m_k[i]);
+		igral_walsh(term, ex, sh->m_k[i]);
 		mpf_set_d(ak, sh->a_k[i]);
 		mpf_mul(term, term, ak);
 		mpf_add(result, result, term);
+	}
+}
+
+/*
+ * Compute an experimental linear combo of eigenfuncs, just to 
+ * see what happens.  Under construction.
+XXXXXXXXXXXXXXX need to cache the shifts!
+ */
+void
+sum_of_igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, int prec)
+{
+	unsigned int i, n;
+	mpf_t ex, term, a_n;
+	mpf_init(ex);
+	mpf_init(term);
+	mpf_init(a_n);
+
+	mpf_set(ex, x);
+	mpf_set_ui(result, 0);
+	n = 1;
+
+	for (i=1; i<20; i++)
+	{
+		igral_eigenfunc(term, w, sh, ex, n+1, prec);
+
+		mpf_set_ui(a_n, n);
+		mpf_div_ui(a_n, a_n, i);
+		mpf_mul(term, term, a_n);
+
+		mpf_add(result, result, term);
+		n *= 2;
 	}
 }
 
@@ -551,7 +582,9 @@ int main (int argc, char * argv[])
 		// igral_blanc(y, w, x, n, prec);
 		eigenfunc(y, w, &shifts, x, n, prec);
 		y_f = mpf_get_d(y);
-		igral_eigenfunc(y, w, &shifts, x, n, prec);
+
+		// igral_eigenfunc(y, w, &shifts, x, n, prec);
+		sum_of_igral_eigenfunc(y, w, &shifts, x, prec);
 		f_f = mpf_get_d(y);
 
 		double delta = f_f - yf_prev;
