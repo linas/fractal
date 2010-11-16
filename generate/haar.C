@@ -22,8 +22,9 @@ static double haar (double re_q, double im_q, int itermax, double param)
 
 	double complex z = re_q + I*im_q;
 
+// printf("duuude z=%f+i%f\n", creal(z), cimag(z));
 	double complex acc = 0.0;
-	for (n=0; n<4000; n++)
+	for (n=0; n<itermax; n++)
 	{
 		double complex term = csin(2.0*M_PI*(2*n+1)*z);
 		term /= (double) (2*n+1);
@@ -34,6 +35,12 @@ static double haar (double re_q, double im_q, int itermax, double param)
 
 	phase += M_PI;
 	phase /= 2.0*M_PI;
+
+	double mag = cabs(acc);
+	mag *= 4.0 / M_PI;
+	mag += 1;
+	mag = log(mag);
+	return mag;
 	return phase;
 }
 
