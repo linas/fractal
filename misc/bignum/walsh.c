@@ -14,6 +14,7 @@
 
 #define BITLEN 32
 
+/* Stucture to hold bit-shift states, needed to compute eigenfunctions */
 typedef struct
 {
 	unsigned long m;
@@ -393,11 +394,47 @@ printf ("%lu	%d	%g	%g	%g	%g\n",
 #endif
 }
 
+/*
+ * Return a shift strcutre appropriate for this n, w. 
+ *
+ * The shifts are precomputed and cached, and can be re-used; 
+ * WARNING, however, w MUST NOT CHAGE, else old, incorrect cached
+ * values will be returned.
+ */
+Shifts * shift_cache(unsigned long n, mpf_t w)
+{
+	static unsigned int arraylen = 0;
+	static Shifts **shifts = NULL;
+
+	if ((n < arraylen) && shifts[n]) return shifts[n];
+
+	/* Expand the array size if needed */
+	if (arraylen <= n)
+	{
+		int more = n + n/8 + 1;
+		shifts = realloc(shifts, more*sizeof (Shifts *));
+		int i;
+		for (i = arraylen; i < more; i++) shifts[i] = NULL;
+		arraylen = more;
+	}
+
+	/* Alloc a new shift stuct and cache it */
+	shifts[n] = (Shifts *) malloc(sizeof(Shifts));
+
+	/* Initialize */
+	get_shifts(shifts[n], n);
+
+	double w_f = mpf_get_d(w);
+	get_coeffs(shifts[n], w_f);
+
+	return shifts[n];
+}
+
 /**
  * Compute the eigenfunction of the dyadic sawtooth, associated with w
  * prec is the desired decimal precision.
  */
-void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n, int prec)
+void eigenfunc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
 {
 	int i;
 	mpf_t ex, term, ak;
@@ -407,6 +444,8 @@ void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n, int 
 
 	mpf_set(ex, x);
 	blanc(result, w, ex, n, prec);
+
+	Shifts *sh = shift_cache(n, w);
 
 	for (i=1; i<sh->bitlen; i++)
 	{
@@ -428,7 +467,7 @@ void eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, unsigned long n, int 
  * prec is the number of decimal places of desired precision.
  */
 void
-igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x,
+igral_eigenfunc(mpf_t result, mpf_t w, mpf_t x,
                 unsigned long n, int prec)
 {
 	int i;
@@ -439,6 +478,8 @@ igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x,
 
 	mpf_set(ex, x);
 	igral_blanc(result, w, ex, n, prec);
+
+	Shifts *sh = shift_cache(n, w);
 
 	for (i=1; i<sh->bitlen; i++)
 	{
@@ -452,10 +493,9 @@ igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x,
 /*
  * Compute an experimental linear combo of eigenfuncs, just to 
  * see what happens.  Under construction.
-XXXXXXXXXXXXXXX need to cache the shifts!
  */
 void
-sum_of_igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, int prec)
+sum_of_igral_eigenfunc(mpf_t result, mpf_t w, mpf_t x, int prec)
 {
 	unsigned int i, n;
 	mpf_t ex, term, a_n;
@@ -469,14 +509,18 @@ sum_of_igral_eigenfunc(mpf_t result, mpf_t w, Shifts *sh, mpf_t x, int prec)
 
 	for (i=1; i<20; i++)
 	{
-		igral_eigenfunc(term, w, sh, ex, n+1, prec);
+		igral_eigenfunc(term, w, ex, n, prec);
 
 		mpf_set_ui(a_n, n);
 		mpf_div_ui(a_n, a_n, i);
 		mpf_mul(term, term, a_n);
 
 		mpf_add(result, result, term);
+
+		// n = (1<<i) + 1;
+		if (1<n) n--;
 		n *= 2;
+		n ++;
 	}
 }
 
@@ -526,7 +570,6 @@ int main (int argc, char * argv[])
 	int n = 5;
 	int i, npts;
 	int prec, nbits;
-	Shifts shifts;
 
 	if (4 > argc)
 	{
@@ -545,9 +588,6 @@ int main (int argc, char * argv[])
 	/* Other misc args */
 	n = atoi(argv[2]);
 	w_f = atof(argv[3]);
-
-	get_shifts(&shifts, n);
-	get_coeffs(&shifts, w_f);
 
 	mpf_init(x);
 	mpf_init(y);
@@ -569,32 +609,39 @@ int main (int argc, char * argv[])
 		// step_1(y, x);
 		// step_n(y, x, 3);
 
-		r_f = mpf_get_d(r);
+		r_f = mpf_get_d(r);  // dyadic place
 
 		mpf_set(x, r);
 		// Want integrals convoluted with question mark.
-		question_mark(x, r, prec);
+		question_mark(x, r, prec);  
 
 		x_f = mpf_get_d(x);
 		// walsh(y, x, n);
 		// blanc(y, w, x, n, prec);
 		// igral_walsh(y, x, n);
 		// igral_blanc(y, w, x, n, prec);
-		eigenfunc(y, w, &shifts, x, n, prec);
+		eigenfunc(y, w, x, n, prec);
 		y_f = mpf_get_d(y);
 
-		// igral_eigenfunc(y, w, &shifts, x, n, prec);
-		sum_of_igral_eigenfunc(y, w, &shifts, x, prec);
+		// igral_eigenfunc(y, w, x, n, prec);
+		sum_of_igral_eigenfunc(y, w, x, prec);
 		f_f = mpf_get_d(y);
 
 		double delta = f_f - yf_prev;
 		yf_prev = f_f;
 		delta *= ((double) npts);
+
+		// r == dyadic place
+      // x == rational place
+      // y == uhhh, crap, actually. Nonsense
+      // f == inegral of eigenfunc in rational place
+		// delta == hand-build derivative of integral == eigenfunc of gkw.
 		printf("%d	%f	%f	%g	%g	%g\n", i, r_f, x_f, y_f, f_f, delta);
 
 		mpf_add(r, r, step);
 	}
 #endif
+
 
 #ifdef SHOW_DIVERGENCE_OF_DERIVATIVE
 	/* The loop below explores a progressively narrower integration
@@ -616,13 +663,13 @@ int main (int argc, char * argv[])
 		for (j=0; j<6; j++)
 		{
 			mpf_set(y, x);
-			igral_eigenfunc(y, w, &shifts, y, i);
+			igral_eigenfunc(y, w, y, i);
 			f_f = mpf_get_d(y);
 
 			mpf_set_ui(y, 1);
 			mpf_div_2exp(y, y, n+j);
 			mpf_add(y,y,x);
-			igral_eigenfunc(y, w, &shifts, y, i);
+			igral_eigenfunc(y, w, y, i);
 			f_f -= mpf_get_d(y);
 
 #if 0
