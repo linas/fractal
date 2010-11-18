@@ -1086,7 +1086,11 @@ void cpx_pow_ui (cpx_t powc, const cpx_t q, unsigned int n)
 
 	for (k=0; k<32;k++)
 	{
-		if (0 == n) return;
+		if (0 == n)
+		{
+			cpx_clear (qsq);
+			return;
+		}
 
 		if (n & 0x1)
 		{
