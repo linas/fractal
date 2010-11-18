@@ -537,7 +537,7 @@ sum_of_igral_eigenfunc(mpf_t result, mpf_t w, mpf_t x, int prec)
 	mpf_set_ui(result, 0);
 	n = 1;
 
-	for (i=1; i<4; i+=2)
+	for (i=1; i<256*1024; i+=2)
 	{
 		n = i;
 		igral_eigenfunc(term, w, ex, n, prec);
