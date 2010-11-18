@@ -26,7 +26,7 @@ typedef struct
 } Shifts;
 
 /**
- * Count the total number of bits in the  integer n
+ * Count the total number of bits (zero or one) in the  integer n
  * (ignoring the infinite string of zeros padding to the left)
  */
 static int bitlength(unsigned long n)
@@ -80,10 +80,12 @@ void step_1(mpf_t result, mpf_t x)
 	if (0 < mpf_cmp(half, result))
 	{
 		mpf_set_ui(result, 1);
+		mpf_clear(ex);
 		return;
 	}
 	
 	mpf_set_si(result, -1);
+	mpf_clear(ex);
 }
 
 /**
@@ -117,6 +119,7 @@ void tent_1(mpf_t result, mpf_t x)
 	}
 	
 	mpf_ui_sub(result, 1, result);
+	mpf_clear(ex);
 }
 
 /**
@@ -136,6 +139,7 @@ void step_n(mpf_t result, mpf_t x, int n)
 	mpf_init(ex);
 	mpf_mul_2exp(ex, x, n-1);
 	step_1(result, ex);
+	mpf_clear(ex);
 }
 
 /**
@@ -181,6 +185,9 @@ void walsh(mpf_t result, mpf_t x, unsigned long n)
 
 		n >>= 1;
 	}
+
+	mpf_clear(term);
+	mpf_clear(ex);
 }
 
 /**
@@ -210,6 +217,9 @@ void igral_walsh(mpf_t result, mpf_t x, unsigned long n)
 
 	igral_step_n(term, ex, bitlen);
 	mpf_mul(result, result, term);
+
+	mpf_clear(term);
+	mpf_clear(ex);
 }
 
 /**
@@ -248,6 +258,12 @@ void blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
 		mpf_mul(wn, wn, w);
 		mpf_mul_ui(tn, tn, 2);
 	}
+
+	mpf_clear(ex);
+	mpf_clear(term);
+	mpf_clear(wn);
+	mpf_clear(tn);
+
 }
 
 /**
@@ -298,6 +314,11 @@ void igral_blanc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
 		mpf_mul(wn, wn, w);
 		mpf_mul_ui(tn, tn, 2);
 	}
+
+	mpf_clear(term);
+	mpf_clear(ex);
+	mpf_clear(wn);
+	mpf_clear(tn);
 }
 
 /**
@@ -454,6 +475,10 @@ void eigenfunc(mpf_t result, mpf_t w, mpf_t x, unsigned long n, int prec)
 		mpf_mul(term, term, ak);
 		mpf_add(result, result, term);
 	}
+
+	mpf_clear(ex);
+	mpf_clear(term);
+	mpf_clear(ak);
 }
 
 /**
@@ -488,6 +513,10 @@ igral_eigenfunc(mpf_t result, mpf_t w, mpf_t x,
 		mpf_mul(term, term, ak);
 		mpf_add(result, result, term);
 	}
+
+	mpf_clear(ex);
+	mpf_clear(term);
+	mpf_clear(ak);
 }
 
 /*
@@ -507,21 +536,26 @@ sum_of_igral_eigenfunc(mpf_t result, mpf_t w, mpf_t x, int prec)
 	mpf_set_ui(result, 0);
 	n = 1;
 
-	for (i=1; i<20; i++)
+	for (i=1; i<256; i+=2)
 	{
+		n = i;
 		igral_eigenfunc(term, w, ex, n, prec);
 
+		int ln = bitlength(n);
+		n = 1<<ln;
+
 		mpf_set_ui(a_n, n);
-		mpf_div_ui(a_n, a_n, i);
+		mpf_div_ui(a_n, a_n, ln);
 		mpf_mul(term, term, a_n);
 
 		mpf_add(result, result, term);
 
 		// n = (1<<i) + 1;
-		if (1<n) n--;
-		n *= 2;
-		n ++;
 	}
+
+	mpf_clear(ex);
+	mpf_clear(term);
+	mpf_clear(a_n);
 }
 
 #ifdef PRINT_WALSH_COEFFS_A1
@@ -620,7 +654,7 @@ int main (int argc, char * argv[])
 		// blanc(y, w, x, n, prec);
 		// igral_walsh(y, x, n);
 		// igral_blanc(y, w, x, n, prec);
-		eigenfunc(y, w, x, n, prec);
+		eigenfunc(y, w, r, n, prec);
 		y_f = mpf_get_d(y);
 
 		// igral_eigenfunc(y, w, x, n, prec);
