@@ -776,6 +776,10 @@ int test_complex_riemann_zeta (int nterms, int prec)
 	{
 		fprintf(stderr, "Complex Riemann zeta test FAILED!\n");
 	}
+	cpx_clear (zeta);
+	cpx_clear (ess);
+	mpf_clear (nzeta);
+	mpf_clear (epsi);
 	return nfaults;
 }
 
