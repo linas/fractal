@@ -100,6 +100,12 @@ void question_mark (mpf_t qmark, const mpf_t x, unsigned int prec)
 
 		place ++;
 	}
+
+	mpf_clear(ox);
+	mpf_clear(h);
+	mpf_clear(bits);
+	mpf_clear(one);
+	mpf_clear(low_bound);
 }
 
 void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
@@ -165,6 +171,8 @@ void question_inverse (mpf_t qinv, const mpf_t x, unsigned int prec)
 	}
 
    free (bitcnt);
+	mpf_clear(mantissa);
+	mpz_clear(bits);
 }
 
 /* ================================================================ */
