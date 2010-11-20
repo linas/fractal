@@ -58,7 +58,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 14 November 2010)
+2 January 2004 (revised 2008, 20 November 2010)
 \end_layout
 
 \begin_layout Abstract
@@ -68,9 +68,21 @@ This paper reviews a raft of related ideas surrounding the Bernoulli operator.
  The Bernoulli map is a simple map of the unit interval onto itself, which
  has the effect of discarding the leading binary digit of the binary expansion
  of a number upon every iteration.
- This map has been well studied for over a century, and much, if not all,
- of what is presented here is well-known.
- 
+ This map has been well studied in the context of functional analysis 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rochberg1968"
+
+\end_inset
+
+ and more recently as an exactly solvable model for chaotic dynamics
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ruelle1986,Gas92,Dri99"
+
+\end_inset
+
+; thus much of what is presented here is invariably review material.
 \end_layout
 
 \begin_layout Abstract
@@ -125,7 +137,14 @@ key "Mackey1992"
 
 \end_inset
 
- and Gaspard [xxx book ref].
+ and Gaspard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gaspard1998"
+
+\end_inset
+
+.
  Some general results for Frobenius-Perron and Koopman operators are given
  by Ding
 \begin_inset CommandInset citation
@@ -135,15 +154,42 @@ key "Ding1998"
 \end_inset
 
 ; see also references therein [xxx todo].
- There are a variety of earlier results on the Bernoulli operator; see Gaspard[r
--adic paper ref], Driebe
+ There are a variety of earlier results on the Bernoulli operator, and it
+ is known by many names.
+ Rochberg studies it as a particular kind of shift operator
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rochberg1968"
+
+\end_inset
+
+.
+ Ruelle studies it as a simple, solvable expanding map, prototypical of
+ Axiom A systems
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ruelle1986"
+
+\end_inset
+
+.
+ Gaspard provides the Bernoulli polynomial solutions
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gas92"
+
+\end_inset
+
+.
+ Driebe shows how it is conjugate to a broad class of maps, and pursues
+ generalizations
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Dri99"
 
 \end_inset
 
-, and many others [todo: collect these].
+.
  
 \end_layout
 
@@ -728,26 +774,70 @@ nius theorem applies.
 \end_layout
 
 \begin_layout Standard
-Insofar as 
-\begin_inset Formula $g$
+The composition operator 
+\begin_inset Formula $C_{g}:\mathcal{F}\left[X\right]\to\mathcal{F}\left[X\right]$
 \end_inset
 
- and 
+ acts on functions and is defined as 
+\begin_inset Formula $C_{g}f=f\circ g$
+\end_inset
+
+.
+ It is the right-inverse to 
 \begin_inset Formula $\mathcal{L}_{g}$
 \end_inset
 
- have a physical interpretation, the eigenfunctions of 
-\begin_inset Formula $\mathcal{L}_{g}$
+ but usually not the left inverse: 
+\begin_inset Formula $\mathcal{L}_{g}C_{g}$
 \end_inset
 
- are called Ruelle resonances
+ is the identity, but 
+\begin_inset Formula $C_{g}\mathcal{L}_{g}$
+\end_inset
+
+ is not, in general.
+ In physics, the composition operator is known as the Koopman operator
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Ruelle1986"
+key "Koopman1931"
 
 \end_inset
 
 .
+ In mathematics, the AMS category 47B33 is used to classify articles pertaining
+ to the study of composition operators.
+\end_layout
+
+\begin_layout Standard
+Both operators have physical significance, and occur frequently in the study
+ of dynamical systems and statistical mechanics.
+ For example, Ruelle has shown that the Fourrier transform of the correlation
+ function for Axiom A dynamical systems is meromorphic on a strip
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ruelle1986-PRL"
+
+\end_inset
+
+; the poles of the correlation function are now called Ruelle reosnances,
+ and can be shown to correspond to the logarithm of the eigenvalues of the
+ transfer operator.
+ In particular, this is where the term 
+\begin_inset Quotes eld
+\end_inset
+
+transfer operator
+\begin_inset Quotes erd
+\end_inset
+
+ comes from: in spin-lattice systems, the transfer matrix simply describes
+ how nearest-neighbor states are connected.
+ When the interaction is long-range, the matrix becomes infinite-dimensional,
+ and thus an operator.
+ That it also typically happens to satisfy the provisions of the Frobenius-Perro
+n theorem is where the name 'Frobenius-Perron operator comes from.
+ Other physically significant constructions follow, including the resolvant,
+ the Fredholm determinant and the dynamical zeta function.
  
 \end_layout
 
@@ -10236,23 +10326,44 @@ In order to give a proper and complete treatment of the subject, the topics
 \end_layout
 
 \begin_layout Itemize
-Closure of polynomials -- we can define several closures: first, sequences
- in 
-\begin_inset Formula $l_{1}$
+Closure of polynomials -- closure suggested by Gaspard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gas92"
+
 \end_inset
 
- so that closure of polynomials is functins that are analytic on unit disk.
- Alternately, try Hardy space i.e.
- analytic on unit disk and sufficiently smooth on boundary.
- Is Bernoulli oper compact on Hardy spaces? why? proof? 
+ is to use the Frechet space of entire holomorphic functions of expoential
+ type less than 
+\begin_inset Formula $2\pi$
+\end_inset
+
+.
+ The exponential type rules out the sine in the kernel.
+ Claim: the monomials are a basis for this space.
+ Claim: the space is complete.
+ Claim: Bernoulli oper is compact on this space.
+ None of this is totally obvious.
 \end_layout
 
 \begin_layout Itemize
-Trick: Haar basis to L_2, then project to Hardy.
+General question: what is the 
+\begin_inset Quotes eld
+\end_inset
+
+largest
+\begin_inset Quotes erd
+\end_inset
+
+ space in which Bernoulli oper is compact?
 \end_layout
 
 \begin_layout Itemize
-L_B is Nuclear (Grothendieck) and trace-class thus compact for the polynomials.
+\begin_inset Formula $\mathcal{L}_{B}$
+\end_inset
+
+ is nuclear (Grothendieck) and trace-class thus compact for the polynomials.
+ More generally, under what circumstances is it compact?
 \end_layout
 
 \begin_layout Itemize
