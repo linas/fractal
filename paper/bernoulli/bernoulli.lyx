@@ -1027,16 +1027,15 @@ Transfer Operator of the Bernoulli Map
 
 \begin_layout Standard
 The Bernoulli map is important in physics as an exactly solvable example
- of deterministic chaos.
- Its importance to physics is emphasized in 
+ of deterministic chaos, and, in particular, as a model of symbolic dynamics
+ on  Axiom A dynamical systems
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Dri99"
+key "Ruelle1986,Gas92,Dri99"
 
 \end_inset
 
-, where a presentation of this map, its associated transfer operator and
- its solution in terms of polynomial eigenfunctions is given.
+.
  A purely mathematical treatment of the operator, considered as a shift
  operator on Hilbert space, is given in 
 \begin_inset CommandInset citation
@@ -1588,9 +1587,10 @@ This may be trivially interpreted as nothing more than the Taylor's series
 
 \begin_layout Standard
 The correct formalism for discussing the dual space is a bit trickier.
+ Formally, elements of the dual space are called 1-forms or differentials.
  Following historical convention, the linear functionals of the dual space
  may be represented as integrals.
- The linear functional 
+ That is, the linear functional 
 \begin_inset Formula $L:\mathcal{P}\to\mathbb{R}$
 \end_inset
 
@@ -1613,6 +1613,14 @@ where
 \end_inset
 
 generalized function
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+Schwarz function
 \begin_inset Quotes erd
 \end_inset
 
@@ -2313,38 +2321,104 @@ reference "eq:B-maclaurin"
 \end_inset
 
 which superficially seems to be entirely reasonable.
- The problem with equation 
+ Written this way, however, the equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq: Bernoulli-faulty"
 
 \end_inset
 
- is that it is misleading.
- As long as the functions 
-\begin_inset Formula $f(x)$
+ is misleading; it is only valid for functions that are of exponetial type
+ less than 
+\begin_inset Formula $2\pi$
 \end_inset
 
- are in all cases understood to be polynomials (
-\emph on
-i.e
-\emph default
+; the polynomials belong to this class, and many meromorphic functions,
+ but not, for example, 
+\begin_inset Formula $\sin2\pi x$
+\end_inset
+
 .
- with a finite number of terms, and not infinite series), then there is
- no harm in using equation 
+ The same holds for the Euler-Maclaurin formula 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:B-maclaurin"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An analytic function 
+\begin_inset Formula $f$
+\end_inset
+
+ on the complex plane is said to be of exponential type 
+\begin_inset Formula $\tau$
+\end_inset
+
+ when there exist constants 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau$
+\end_inset
+
+ such that 
+\begin_inset Formula \[
+\left|f(re^{i\theta})\right|\le Me^{\tau r}\]
+
+\end_inset
+
+as 
+\begin_inset Formula $r\to\infty$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Boa64"
+
+\end_inset
+
+.
+ Thus, for example, 
+\begin_inset Formula $\sin x$
+\end_inset
+
+ is of exponential type 
+\begin_inset Formula $\pi$
+\end_inset
+
+, since it blows up exponentialy along the complex imaginary axis.
+ Any polynomial is of exponential type 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ for any 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+; thus, again the expansion 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq: Bernoulli-faulty"
 
 \end_inset
 
-.
- This follows in part because 
+ can be safely applied to polynomials.
+ Likewise, 
 \begin_inset Formula $\mathbb{I}_{B}$
 \end_inset
 
- really is the identity operator on the space of polynomials: there are
- no polynomials (other than 
+ is the identity operator on the space of polynomials, and, more generally
+ on functions of exponential type less than 
+\begin_inset Formula $2\pi$
+\end_inset
+
+: there are no polynomials (other than 
 \begin_inset Formula $f(x)=0$
 \end_inset
 
@@ -2449,6 +2523,24 @@ reference "eq: Bernoulli-faulty"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+XXX ToDo: tighten up; per Gaspard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gas92"
+
+\end_inset
+
+, one completion is the Frechet space of analytic functions of exponential
+ type 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ A Frechet space is a generalization of a Banach space, having a translation-inv
+ariant metric.
 \end_layout
 
 \begin_layout Subsection
@@ -2774,6 +2866,8 @@ in terms of being a compact operator, a nuclear operator, etc.
 \end_inset
 
 .
+ See also, notes about Frechet space, maybe that should be here ...
+ 
 \end_layout
 
 \begin_layout Section
