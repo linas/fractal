@@ -1,6 +1,6 @@
 
 /*
- * integral of question mark measure.
+ * Integral of question mark measure.
  *
  * Linas March 2010
  */
@@ -11,40 +11,26 @@
 #include <stdlib.h>
 #include "mp-quest.h"
 
-void goldy(int prec)
+void qint(mpf_t center, double scale, int prec)
 {
 	int i, npts;
 	double fmean, qfmean;
 
-	mpf_t x, eps, step, qlo, qmid, qhi, golden;
+	mpf_t x, eps, step, qlo, qmid, qhi;
 	mpf_init(x);
 	mpf_init(step);
 	mpf_init(eps);
 	mpf_init(qlo);
 	mpf_init(qmid);
 	mpf_init(qhi);
-	mpf_init(golden);
 
-	// mpf_set_ui (x, 1);
-	// mpf_div_ui (x, x, 4);
+	question_mark(qmid, center, prec);
 
-	// Golden ratio
-	// golden = 0.5*(sqrt(5.0) - 1.0);
-	mpf_sqrt_ui(golden, 5);
-	mpf_sub_ui(golden, golden, 1);
-	mpf_div_ui(golden, golden, 2);
-
-	// Silver mean
-	mpf_sqrt_ui(golden, 2);
-	mpf_sub_ui(golden, golden, 1);
-	
-	question_mark(qmid, golden, prec);
-
-	fmean = mpf_get_d(golden);
+	fmean = mpf_get_d(center);
 	qfmean = mpf_get_d(qmid);
 	printf("#\n# Mean=%g ?(Mean)=%g\n", fmean, qfmean); 
 
-	npts = 5600;
+	npts = 1600;
 	
 	mpf_set_d(step, 1.41333);
 	mpf_sqrt(step, step);
@@ -67,10 +53,10 @@ void goldy(int prec)
 	{
 		double feps, flo, fhi, fdiff, r;
 
-		mpf_sub(x, golden, eps);
+		mpf_sub(x, center, eps);
 		question_mark(qlo, x, prec);
 
-		mpf_add(x, golden, eps);
+		mpf_add(x, center, eps);
 		question_mark(qhi, x, prec);
 
 		mpf_sub(qlo, qmid, qlo);
@@ -85,11 +71,7 @@ void goldy(int prec)
 		fdiff = fhi-flo;
 
 #if 1
-		/* Wow!  eps^0.28 provides an excellent fit. */
-		/* It is DEFINITELY NOT 2/7=0.2814 etc. */
-		// r = pow(feps, 0.28);
-		// r = pow(feps, 0.2798); // excellent for golden mean
-		r = pow(feps, 0.213);
+		r = pow(feps, scale);
 		flo *= r;
 		fhi *= r;
 		fdiff *= r;
@@ -99,8 +81,30 @@ void goldy(int prec)
 
 		mpf_mul(eps, eps, step);
 	}
+}
 
-	// fp_prt("yaa ", q);
+void goldy(int prec)
+{
+	mpf_t golden;
+	mpf_init(golden);
+
+	// mpf_set_ui (x, 1);
+	// mpf_div_ui (x, x, 4);
+
+	// Golden ratio
+	// golden = 0.5*(sqrt(5.0) - 1.0);
+	mpf_sqrt_ui(golden, 5);
+	mpf_sub_ui(golden, golden, 1);
+	mpf_div_ui(golden, golden, 2);
+
+	/* Wow!  eps^0.28 provides an excellent fit. */
+	// pow(feps, 0.2798); even ebetter!
+	// qint(golden, 0.2798, prec);
+
+	// Silver mean
+	mpf_sqrt_ui(golden, 2);
+	mpf_sub_ui(golden, golden, 1);
+	qint(golden, 0.213, prec);
 }
 
 int main (int argc, char * argv[])
