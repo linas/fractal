@@ -24,7 +24,7 @@ print "Its $acc\n";
 $qn = $q;
 $qfn = $q*$q*$q*$q;
 
-$acc = 9*$pi*$pi*$pi / 900;
+$acc = 29*$pi*$pi*$pi / 900;
 
 for($n=1; $n<20; $n++)
 {
