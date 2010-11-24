@@ -39,3 +39,21 @@ print "Its $acc\n";
 
 
 
+# -------------------------------------
+$qn = $q*$q;
+
+$acc = $pi/6 - 0.75*log(2);
+$acc = -$acc;
+
+for($n=1; $n<20; $n++)
+{
+	$term = 1/($qn -1) + 1/($qn +1);
+	$term /= $n;
+	$acc += $term;
+	$qn *= $q *$q;
+}
+
+print "Its $acc\n";
+
+
+
