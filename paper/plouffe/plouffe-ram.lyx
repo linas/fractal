@@ -161,7 +161,7 @@ where
 
 \end_inset
 
-There are an (uncountable) infinity of such sums, each giving a different
+There are an (uncountable) infinity of similar sums, each giving a different
  series summation for 
 \begin_inset Formula $\zeta(4m-1)$
 \end_inset
@@ -2159,6 +2159,12 @@ graphic created with src/fractal/generate/plouffe.C 600 600 2000 0 0 2 -1
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
 \end_inset
 
 
@@ -2237,6 +2243,12 @@ graphic created with src/fractal/generate/plouffe.C 600 600 6000 0 0 2 -5
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
 \end_inset
 
 
@@ -2291,6 +2303,12 @@ g_{3}(q)=\frac{8\pi^{6}}{27}\left[1-504\sum_{n=1}^{\infty}\frac{n^{5}q^{n}}{1-q^
  The colors are chosen such that black represents areas that are negative,
  blue and green represent areas with smaller values, and red those areas
  with the largest values.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
 \end_layout
 
 \end_inset
@@ -2387,15 +2405,17 @@ G_{2k}(q)=2\zeta(2k)+\frac{2(2\pi i)^{2k}}{(2k-1)!}\sum_{m=1}^{\infty}\sigma_{2k
 
 \end_inset
 
+That is, the sums 
+\begin_inset Formula $P_{s}$
+\end_inset
 
-\emph on
-etc.
+ can be re-written in terms of the Eisenstein series 
+\begin_inset Formula $G_{1-s}$
+\end_inset
 
-\emph default
- In essence, we are dealing with an extension of the Eisenstein series to
- general complex argument.
- XXX unfinished; this should be elaborated on a bit more.
- XXXX
+, and the behaviour of one under the action of the modular group can be
+ igven in terms of the other.
+ 
 \end_layout
 
 \begin_layout Section
@@ -2403,57 +2423,67 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
-Given any particular rational and set of sums, there is a rich variety of
- possible relationships that can be formed.
- It would be interesting to characterize the number of these relationships
- as a function of the number of sums involved.
- Thus, for example, given only 
-\begin_inset Formula $S_{3}(2\pi)$
-\end_inset
-
-, there seems to be only one relationship that can be formed to give 
-\begin_inset Formula $\zeta(3)$
-\end_inset
-
-.
- However, given 
-\begin_inset Formula $S_{3}(\pi)$
-\end_inset
-
-, 
-\begin_inset Formula $S_{3}(2\pi)$
-\end_inset
-
- and 
-\begin_inset Formula $S_{3}(4\pi)$
-\end_inset
-
-, there seem to be two distinct relationships, of which a linear combination
- can be taken: thus there is a one-dimensional linear space of solutions.
- It would be interesting to know what the higher order combinatorial possibiliti
-es may be, the dimensionality of the spaces they form, and how these depend
- on the selected series.
-\end_layout
-
-\begin_layout Standard
-Another interesting avenue of research would be to strengthen the connections
- to modular forms, to see if additional insights can be gained by following
- that route.
- A different and fruitful avenue for understanding almost-modular structures
- is to pose them in terms of functions on a one-dimensional lattice (in
- the sense of the Ising or Potts model of physics), where translation is
- described by the shift operator.
- It is known that such lattice models are isomorphic to measure-preserving
- dynamical systems, such as the Baker's map or more generally subshifts
- of finite type.
- In particular, it seems possible to re-express the functional equation
- for 
+Most of the sums discussed here are suggestive of linear algebra.
+ So for example, one may write the sum 
 \begin_inset Formula $S_{k}$
 \end_inset
 
-, as given in section 4, in terms of (logarithms of) eigenfunctions of the
- Baker's map.
- 
+ as the dot-product between the (infinite-dimensional) vector 
+\begin_inset Formula $n^{-k}$
+\end_inset
+
+ and the vector 
+\begin_inset Formula $\left(e^{2\pi n}-1\right)^{-1}$
+\end_inset
+
+.
+ The evaluation of these sums forms a regular pattern in 
+\begin_inset Formula $k$
+\end_inset
+
+, suggesting that, for example, that 
+\begin_inset Formula $n^{-k}$
+\end_inset
+
+ could be taken to be the matrix elements of some linear operator.
+ However, the significance of this operator (aside from assorted shallow
+ results and relations) is completely unclear.
+ The sums over the Bernoulli numbers are even reminiscent of some crazy
+ Atiyah-Singer-like indexing; but the underlying operators are utterly unclear.
+ Put another way, it is well-known in physics and mathematics that regular
+ patterns are the result of symmetries; the sums discussed here form a regular
+ pattern, but the nature of the symmetry that generates it is unclear.
+ During manipulations, one gets the sense that there are plenty of other
+ relations to be discovered; certainly, the mere heft of Ramanujan's tomes
+ suggest as much.
+ Yet, there is no picture of a generator that can be operated to generate
+ the myriad of relations; some symmetry group presentation seems to be missing.
+ A similar problem exists in the theory of hypergeometric series, where
+ there is an embarrasment of riches in terms of relations and identities,
+ and yet a unifying theory is lacking.
+ The ingredients to the sums discussed here include the Gamma function and
+ the Bernoulli polynomials; among many other properties, these have a common
+ set of relations in the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic 
+\begin_inset Quotes eld
+\end_inset
+
+multiplication theorems
+\begin_inset Quotes erd
+\end_inset
+
+; the sums here vaguely resemble the multiplication theorems of characteristic
+ zero.
+ There are also similar phenomena and sums that occur in the theory of dynamical
+ systems, and in particular, in symbolic dynamics; there, a group structure,
+ or at least, a monoid structure, together with an explicit treatment in
+ terms of linear operators, is more common.
+ Any of these connections present intriguing avenues for future research;
+ however, the overall problem, of discovering the underlying symmetry that
+ leads to such relations, seems unatainably hard to solve.
 \end_layout
 
 \begin_layout Standard
