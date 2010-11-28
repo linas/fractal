@@ -48,10 +48,12 @@ void rebin (int nbins, int kmax)
 		/* Midpoint of the bin */
 		double x = ((double) 2*i+1) / ((double) 2*nbins);
 
-		/* Likewise, the midpoint */
+#ifdef UNDO
+		/* Question-mark, likewise, the midpoint */
 		f.SetRatio (2*i+1, 2*nbins);
 		double far = f.ToFarey ();
 		x = far;
+#endif
 
 		double rev = 0.0;
 		double imv = 0.0;
@@ -62,11 +64,11 @@ void rebin (int nbins, int kmax)
 			double co = cos(theta);
 
 			// double fk = mangoldt_lambda (k);
-			double fk = totient_phi(k);
+			// double fk = totient_phi(k);
 			// double fk = liouville_lambda (k);
 			// double fk = liouville_omega (k);
 			// double fk = mertens (k);
-			// double fk = moebius_mu(k);
+			double fk = moebius_mu(k);
 			rev += co * fk;
 			imv += si * fk;
 		}
@@ -74,12 +76,13 @@ void rebin (int nbins, int kmax)
 		resum += rev;
 		imsum += imv;
 
-		// printf ("%d	%g	%g	%g	%g	%g\n", i, x, rev, imv, resum, imsum);
+		printf ("%d	%g	%g	%g	%g	%g\n", i, x, rev, imv, resum, imsum);
 
 		rebin[i] = rev;
 		imbin[i] = imv;
 	}
 
+#ifdef UNDO
 	// Next, undo the Fourier.
 	for (k=1; k<kmax; k++)
 	{
@@ -112,22 +115,21 @@ void rebin (int nbins, int kmax)
 		if (fabs(res) < 1.0e-10) res = 0.0;
 		if (fabs(ims) < 1.0e-10) ims = 0.0;
 
-		// double sane = moebius_mu(k);
-		double sane = totient_phi(k);
+		double sane = moebius_mu(k);
+		// double sane = totient_phi(k);
 		// double sane = mangoldt_lambda(k);
 		double oops = sane - res;
 		if (fabs(oops) < 1.0e-10) oops = 0.0;
 		printf ("%d	%g	%g	%g	%g\n", k, res, ims, sane, oops);
 	}
+#endif /* UNDO */
 }
 
 int main (int argc, char * argv[])
 {
-	int i, k;
-
 	if (argc < 3)
 	{
-		fprintf (stdout, "Usage: %s <nbins> <fmax>\n", argv[0]);
+		fprintf (stdout, "Usage: %s <nbins> <kmax>\n", argv[0]);
 		exit(1);
 	}
 	int nbins = atoi (argv[1]);

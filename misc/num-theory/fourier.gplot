@@ -1,6 +1,6 @@
 
 # set term png small color
-# set term png small
+set term png small
 set out 'fourier.png'
 
 # set data style linespoints
@@ -11,15 +11,16 @@ set title "Mob Fourier"
 set xlabel "n" 1,0
 set ylabel "M(n)" 1, 0
 
-# plot "fourier.dat" using 2:3 title "re", \
-#      "fourier.dat" using 2:4 title "im"
+plot "fourier.dat" using 2:3 title "re"
+
+#     "fourier.dat" using 2:4 title "im"
 # 
 
 #      "fourier.dat" using 1:(cos(1.5*$1/3.14159) / sqrt($1)) title "fit"
-set xrange [0:200]
-plot "fourier.dat" using 1:2 title "recon", \
-     "fourier.dat" using 1:(cos($1*sqrt(log($1))/4) * sqrt(log($1)) / $1) title "fit"
-pause 2400
+# set xrange [0:200]
+# plot "fourier.dat" using 1:2 title "recon", \
+#      "fourier.dat" using 1:(cos($1*sqrt(log($1))/4) * sqrt(log($1)) / $1) title "fit"
+# pause 2400
 
 # plot "fourier.dat" using 2:5 title "re", \
 #      "fourier.dat" using 2:6 title "im"
