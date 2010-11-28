@@ -54,7 +54,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 24 Oct 2010) 
+2 January 2004 (revised 2008, 28 Nov 2010) 
 \end_layout
 
 \begin_layout Abstract
@@ -7848,7 +7848,7 @@ These figures show the integrals of GKW eigenfunctions
 
 \begin_layout Plain Layout
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 this was created with misc/bignum/walsh.c and plotted with src/fractal/misc/bignu
@@ -8717,6 +8717,73 @@ One has
 \end_layout
 
 \begin_layout Standard
+In practice, none of the sequences we will deal with are in 
+\begin_inset Formula $L_{\infty}$
+\end_inset
+
+, nor are they obviously in any 
+\begin_inset Formula $L_{p}$
+\end_inset
+
+ for any 
+\begin_inset Formula $p>1$
+\end_inset
+
+.
+ Yet they all appear to be in 
+\begin_inset Formula $\mathcal{I}\cap l_{p}$
+\end_inset
+
+ for 
+\begin_inset Formula $p>1$
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $?^{\prime}$
+\end_inset
+
+ is a measure; an explicit proof of this is given in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+.
+ All of the eigenfunctions constructed above are integrable; these are shown
+ in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Integrals-of-Eigenfunctions"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Integrals-of-GKW"
+
+\end_inset
+
+.
+ As these integrals are bounded, we may conclude the corresponding sequences
+ are elements of 
+\begin_inset Formula $\mathcal{I}\cap l_{p}$
+\end_inset
+
+ for 
+\begin_inset Formula $p>1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Incidence algebra
+\end_layout
+
+\begin_layout Standard
 The constraint of working only with integrable functions on 
 \begin_inset Formula $\mathcal{B}$
 \end_inset
@@ -8744,7 +8811,7 @@ or, equivalently, that the elements of
 \end_inset
 
  lie in the kernel of 
-\begin_inset Formula $W-I$
+\begin_inset Formula $I-W$
 \end_inset
 
 .
@@ -8753,7 +8820,11 @@ or, equivalently, that the elements of
 \end_inset
 
  is bounded and thus continuous.
- However, it is not a projection.
+ However, it is not a projection; 
+\begin_inset Formula $W^{2}\ne W$
+\end_inset
+
+.
  Neither 
 \begin_inset Formula $\mathcal{I}$
 \end_inset
@@ -8824,66 +8895,115 @@ almost all
 \end_layout
 
 \begin_layout Standard
-In practice, none of the sequences we will deal with are in 
-\begin_inset Formula $L_{\infty}$
+The operator 
+\begin_inset Formula $M=I-W$
 \end_inset
 
-, nor are they obviously in any 
-\begin_inset Formula $L_{p}$
+ corresponds to the Möbius function of the incidence algebra of the infinite
+ dyadic tree taken as a poset; the corresponding zeta function is 
+\begin_inset Formula $Z=1+W+W^{2}+W^{3}+\cdots$
 \end_inset
 
- for any 
-\begin_inset Formula $p>1$
-\end_inset
-
-.
- Yet they all appear to be in 
-\begin_inset Formula $\mathcal{I}\cap l_{p}$
-\end_inset
-
- for 
-\begin_inset Formula $p>1$
+ and these two are inverses: 
+\begin_inset Formula $MZ=ZM=I$
 \end_inset
 
 .
- The function 
-\begin_inset Formula $?^{\prime}$
+ To see this, one need only recall the definition of an incidence algebra
+ on a poset, and specifically, of the zeta and Möbius functions of the incidence
+ algebra.
+ Let 
+\begin_inset Formula $S$
 \end_inset
 
- is a measure; an explicit proof of this is given in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Vep-mink2008"
-
+ be a partially ordered set, and let 
+\begin_inset Formula $Z:S\times S\to\mathbb{N}$
 \end_inset
 
-.
- All of the eigenfunctions constructed above are integrable; these are shown
- in figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Integrals-of-Eigenfunctions"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Integrals-of-GKW"
+ be the function 
+\begin_inset Formula \[
+Z\left(a,b\right)=\begin{cases}
+1 & \mbox{ if }a\ge b\\
+0 & \mbox{ otherwise}\end{cases}\]
 
 \end_inset
 
-.
- As these integrals are bounded, we may conclude the corresponding sequences
- are elements of 
-\begin_inset Formula $\mathcal{I}\cap l_{p}$
+For convenience, one orders all of the elements of 
+\begin_inset Formula $S=\left\{ s_{1},s_{2},\cdots\right\} $
 \end_inset
 
- for 
-\begin_inset Formula $p>1$
+ such that if 
+\begin_inset Formula $s_{i}>s_{j}$
+\end_inset
+
+, then 
+\begin_inset Formula $i<j$
 \end_inset
 
 .
+ This ordering is easily done by choosing 
+\begin_inset Formula $s_{1}$
+\end_inset
+
+ to be a maximal element of 
+\begin_inset Formula $S$
+\end_inset
+
+, and 
+\begin_inset Formula $s_{2}$
+\end_inset
+
+ to be a maximal element of 
+\begin_inset Formula $S\backslash s_{1}$
+\end_inset
+
+, etc.
+ Then writing 
+\begin_inset Formula $Z_{ij}=Z\left(s_{i},s_{j}\right)$
+\end_inset
+
+, one sees that 
+\begin_inset Formula $Z_{ij}$
+\end_inset
+
+ is upper-triangular, with all 
+\begin_inset Formula $1's$
+\end_inset
+
+ on the diagonal.
+ Define 
+\begin_inset Formula $N=I-Z$
+\end_inset
+
+ and define 
+\begin_inset Formula $M=I+N+N^{2}+\cdots$
+\end_inset
+
+.
+ One then has 
+\begin_inset Formula $MZ=ZM=I$
+\end_inset
+
+ and this 
+\begin_inset Formula $M$
+\end_inset
+
+ is called the Möbius function of the incidence algebra of the poset.
+ To see that this is exactly the 
+\begin_inset Formula $M$
+\end_inset
+
+ as given above for the infinite dyadic tree, one needs only to make the
+ association that the 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ are just the intervals 
+\begin_inset Formula $I_{i}$
+\end_inset
+
+ given at teh begining of this section.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -9721,6 +9841,21 @@ Conclusions
 Apologies for the format of this paper.
  It's a veritable candy store of goodies; there are all these yummy toys
  to play with, which one first?
+\end_layout
+
+\begin_layout Standard
+ToDo list:
+\end_layout
+
+\begin_layout Itemize
+show why Kolmogorov entropy is in trouble, desired for the Ornstein isomorphism
+ theorem.
+ Need Koopman to do this.
+\end_layout
+
+\begin_layout Itemize
+show koopman operator, desired for Wold decomposition.
+ Clarify kernel
 \end_layout
 
 \begin_layout Section
