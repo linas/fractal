@@ -17,6 +17,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "mp-complex.h"
+
 /**
  * Swap the first and second digits of the continued fraction
  *
@@ -54,7 +56,7 @@ void swap12 (mpf_t y, mpf_t x, int nprec)
 	/* re-assemble the continued fraction */
 	mpf_add(ox, y, a1);
 	mpf_ui_div(y, 1, ox);
-	mpf_add (ox, y, a2)
+	mpf_add (ox, y, a2);
 	mpf_ui_div(y, 1, ox);
 
 done:
@@ -63,3 +65,9 @@ done:
 	mpf_clear (a2);
 }
 
+
+int main (int argc, char * argv[])
+{
+
+	return 0;
+}

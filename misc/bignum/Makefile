@@ -10,7 +10,7 @@ EXES= bernoulli bound bs bsubn cache-fill cont_frac \
       dsubn entropy exact gkw-diag hurwitz hurwitz-euler \
 		minima misc-test mp_quest_test mp_zeta_test picturez \
       poly-perf qint sawtooth sho stieltjes trunc \
-		walsh zero-cross zeta-zeros
+		walsh yarh zero-cross zeta-zeros
 
 MPLIB=libzmp.a
 
@@ -43,6 +43,7 @@ sho:	sho.o $(MPLIB)
 stieltjes:	stieltjes.o $(MPLIB)
 trunc:	trunc.o
 walsh:	walsh.o $(MPLIB)
+yarh:	yarh.o $(MPLIB)
 zero-cross:	zero-cross.o
 zeta-zeros:	zeta-zeros.o $(MPLIB)
 
