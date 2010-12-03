@@ -150,7 +150,15 @@ int main (int argc, char * argv[])
 	int prec, nbits;
 	cpx_t y, s;
 
+	if (argc < 3)
+	{
+		fprintf (stderr, "%s: <prec> <nsteps>\n", argv[0]);
+		return -1;
+	}
+
 	prec = 50;
+	prec = atoi(argv[1]);
+	nsteps = atoi(argv[2]);
 
    /* Set the precision (number of binary bits) */
    nbits = 3.3*prec;
@@ -159,15 +167,20 @@ int main (int argc, char * argv[])
 	cpx_init(y);
 	cpx_init(s);
 
-	cpx_set_d (s, 0.5, 16.0);
-	nsteps = 1501;
+	double t = 0.0;
+	int i = 1;
+	while (t < 100)
+	{
+		cpx_set_d (s, 0.5, t);
+		integral(y, nsteps, s, prec);
 
-	integral(y, nsteps, s, prec);
+		double re = cpx_get_re(y);
+		double im = cpx_get_im(y);
 
-	double re = cpx_get_re(y);
-	double im = cpx_get_im(y);
-
-	printf("duude code %g %g \n", re, im);
+		printf("%d\t%g\t%g\t%g\n", i, t, re, im);
+		t += 0.1;
+		i++;
+	}
 
 	return 0;
 }
