@@ -156,12 +156,14 @@ int main (int argc, char * argv[])
 		return -1;
 	}
 
-	prec = 50;
 	prec = atoi(argv[1]);
 	nsteps = atoi(argv[2]);
 
+	printf ("#\n# decimal precision = %d\n", prec);
+	printf ("#\n# num steps = %d\n#\n", nsteps);
+
    /* Set the precision (number of binary bits) */
-   nbits = 3.3*prec;
+   nbits = 3.3*prec + 30;
    mpf_set_default_prec (nbits);
 
 	cpx_init(y);
