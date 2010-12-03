@@ -91,10 +91,44 @@ void integrand(cpx_t y, mpf_t x, cpx_t s, int nprec)
  */
 void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 {
-	mpf_t step;
+	int i;
+
+	mpf_t step, x;
+	cpx_t term, ess, essm1;
+
 	mpf_init (step);
+	mpf_init (x);
+
+	cpx_init (term);
+	cpx_init (ess);
+	cpx_init (essm1);
+
+	cpx_set(ess, s);
+	cpx_sub_ui (essm1, ess, 1, 0);
+
+	/* Integration stepsize */
+	mpf_set_ui (step, nsteps);
+	mpf_ui_div (step, 1, step);
+
+	/* initial value */
+	mpf_div_ui (x, step, 2);
+	mpf_add_ui (x, x, 1);
+
+	/* integration loop */
+	cpx_set_ui (y, 0, 0);
+	for (i=0; i<nsteps; i++)
+	{
+		integrand (term, x, essm1, nprec);
+		cpx_add (y, y, term);
+
+		mpf_sub (x, x, step);
+	}
 
 	mpf_clear (step);
+	mpf_clear (x);
+	cpx_clear (term);
+	cpx_clear (ess);
+	cpx_clear (essm1);
 }
 
 int main (int argc, char * argv[])
