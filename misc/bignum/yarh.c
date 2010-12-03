@@ -18,13 +18,14 @@
 #include <stdlib.h>
 
 #include "mp-complex.h"
+#include "mp-trig.h"
 
 /**
  * Swap the first and second digits of the continued fraction
  *
  * nprec == number of deciman places of precision.
  */
-void swap12 (mpf_t y, mpf_t x, int nprec)
+void swap_1_2 (mpf_t y, mpf_t x, int nprec)
 {
 	static int init = 0;
 	static mpf_t zero;
@@ -65,6 +66,36 @@ done:
 	mpf_clear (a2);
 }
 
+/**
+ * The integrand, which is swap(x) * x^s 
+ */
+void integrand(cpx_t y, mpf_t x, cpx_t s, int nprec)
+{
+	mpf_t perm;
+	mpf_init (perm);
+
+	swap_1_2 (perm, x, nprec);
+
+	cpx_mpf_pow (y, x, s, nprec);
+	cpx_times_mpf (y, y, perm);
+
+	mpf_clear (perm);
+}
+
+/**
+ * Compute single integral of the integrand.
+ * actually compute 
+ * zeta = s/(s-1) - s \int_0^1 swap(x) x^{s-1} dx 
+ *
+ * Done using the simplest Newton sum possible.
+ */
+void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
+{
+	mpf_t step;
+	mpf_init (step);
+
+	mpf_clear (step);
+}
 
 int main (int argc, char * argv[])
 {
