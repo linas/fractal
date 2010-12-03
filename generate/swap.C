@@ -129,10 +129,12 @@ void grand (long double x, long double sre, long double sim,
 	long double ox = 1.0L/x;
 	long double sw = ox - floorl(ox);
 #else
-	// long double sw = swap12 (x);
+	long double sw = swap12 (x);
 	// long double sw = swap13 (x);
 	// long double sw = swap23 (x);
-	long double sw = x;
+
+	// This is used for the sanity-check, "shadow" graph
+	// long double sw = x;
 #endif
 
 	long double lnx = logl (x);
@@ -230,9 +232,13 @@ rswap (long double sre, long double sim, int itermax)
 	long double zre, zim;
 
 	gral (itermax, sre, sim, &zre, &zim);
-	long double vv = zre*zre+zim*zim;
-	vv = sqrt (vv);
-	return vv;
+	long double mag = zre*zre+zim*zim;
+	mag = sqrt (mag);
+	// return mag;
+	long double  phase = atan2l(zim, zre);
+	phase /= 2.0L * M_PI;
+	phase += 0.5L;
+	return phase;
 }
 
 // DECL_MAKE_HEIGHT(rswap)
