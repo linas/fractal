@@ -1,40 +1,59 @@
-#LyX 1.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 221
+#LyX 1.6.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
 \textclass article
+\use_default_options false
 \language english
 \inputencoding auto
-\fontscheme default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
 \graphics default
 \paperfontsize default
-\spacing single 
-\papersize Default
-\paperpackage a4
-\use_geometry 0
-\use_amsmath 1
-\use_natbib 0
-\use_numerical_citations 0
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \defskip medskip
 \quotes_language english
-\quotes_times 2
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\end_header
 
-\layout Title
+\begin_body
 
+\begin_layout Title
 Yet Another Riemann Hypothesis
-\layout Author
+\end_layout
 
+\begin_layout Author
 Linas Vepstas <linas@linas.org>
-\layout Date
+\end_layout
 
+\begin_layout Date
 12 October 2004
-\layout Abstract
+\end_layout
 
+\begin_layout Abstract
 This short note presents a peculiar generalization of the Riemann hypothesis,
  as the action of the permutation group on the elements of continued fractions.
  The problem is difficult to attack through traditional analytic techniques,
@@ -42,64 +61,70 @@ This short note presents a peculiar generalization of the Riemann hypothesis,
  These results indicate a broad class of previously undiscussed functions
  may obey the Riemann hypothesis in general, and even share the non-trivial
  zeros in particular.
-\layout Section
+\end_layout
 
+\begin_layout Section
 Introduction
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The Riemann zeta can be expressed as an integral in the following form
-\begin_inset LatexCommand \cite{Edw74}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Edw74"
 
-\end_inset 
+\end_inset
 
 :
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 \zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}h(x)x^{s-1}dx\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula \begin{equation}
 h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  is sometimes called the Gauss map.
  Here, 
 \begin_inset Formula $\left\lfloor y\right\rfloor $
-\end_inset 
+\end_inset
 
  is the largest integer less than or equal to 
 \begin_inset Formula $y$
-\end_inset 
+\end_inset
 
 .
  The Gauss map lops of a digit in the continued fraction expansion of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 .
  If one writes the continued fraction expansion
-\begin_inset LatexCommand \cite{Khin35}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Khin35"
 
-\end_inset 
+\end_inset
 
  of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
  as 
 \begin_inset Formula \begin{equation}
 x=[a_{1},a_{2},a_{3},\cdots]=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\ldots}}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  then 
 \begin_inset Formula $h(x)=[a_{2},a_{3},\cdots]$
-\end_inset 
+\end_inset
 
 .
  It is a (reverse) shift operator on the continued fraction expansion.
@@ -109,8 +134,9 @@ x=[a_{1},a_{2},a_{3},\cdots]=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\ldots
  More immediately, the transfer operator of the Gauss map is known as the
  Gauss-Kuzmin-Wirsing operator, which has a number of interesting properties
  of its own.
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 In this note, we observe that the Gauss map can also be thought of as one
  particular element of the permutation group acting on an infinite dimensional
  representation of the real numbers.
@@ -119,30 +145,30 @@ In this note, we observe that the Gauss map can also be thought of as one
 \begin_inset Formula \begin{equation}
 S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdots,a_{p},\cdots]\label{eq:Permutation Elts}\end{equation}
 
-\end_inset 
+\end_inset
 
  which exchanges the 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 'th and 
 \begin_inset Formula $q$
-\end_inset 
+\end_inset
 
 'th digits of the continued fraction expansion of 
 \begin_inset Formula $x$
-\end_inset 
+\end_inset
 
 .
  Note that 
 \begin_inset Formula $S_{p,q}$
-\end_inset 
+\end_inset
 
  maps the unit interval onto the unit interval, and is discontinuous at
  a countably infinite number of points.
  We present graphs below visualizing 
 \begin_inset Formula $S_{p,q}(x)$
-\end_inset 
+\end_inset
 
 .
  The generalized Riemann hypothesis that we choose to explore concerns the
@@ -150,7 +176,7 @@ S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdot
 \begin_inset Formula \begin{equation}
 \zeta_{p,q}(s)=\frac{s}{s-1}-s\int_{0}^{1}S_{p,q}(x)x^{s-1}dx\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Although this integral can in principle be evaluated analytically, the
  result is a messy set of nested sums that don't seem to be easily sumable,
@@ -161,22 +187,24 @@ S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdot
 \begin_inset Formula \begin{equation}
 \zeta_{N;p,q}(s)=\frac{s}{s-1}-\frac{s}{N}\;\sum_{n=0}^{N-1}S_{p,q}\left(\frac{2n+1}{2N}\right)\;\left(\frac{2n+1}{2N}\right)^{s-1}\label{eq:zeta-pq-sum}\end{equation}
 
-\end_inset 
+\end_inset
 
 
-\layout Section
+\end_layout
 
+\begin_layout Section
 Continued Fractions; Permutation Groups
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Note that continued fractions provide a representation of the real numbers
  in the infinite-dimensional space 
 \begin_inset Formula $\mathbb{N}^{\omega}=\mathbb{N\times N\times}...$
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\mathbb{N}=\mathbb{Z}^{+}$
-\end_inset 
+\end_inset
 
  is the set of positive integers.
  Note that this implies that each point in this space can be given a unique
@@ -184,203 +212,217 @@ Note that continued fractions provide a representation of the real numbers
  real number appears only once in this space.
  In other words, the continued fraction brackets are an operator that maps
  this space to the real numbers, 
-\emph on 
+\emph on
 i.e.
 
-\emph default 
+\emph default
  
 \begin_inset Formula $[\,]:\mathbb{N}^{\omega}\mathbb{\rightarrow R}$
-\end_inset 
+\end_inset
 
 .
  What makes the 
 \begin_inset Formula $[\,]$
-\end_inset 
+\end_inset
 
  operator so interesting is that it is 1-1 and onto, and is thus invertible,
  at least on the irrationals, if we brush aside a little problem with the
  rationals.
  Note that in this mapping, the number 0 is a kind-of 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 essential singularity
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  at 
 \begin_inset Formula $\infty$
-\end_inset 
+\end_inset
 
 , since the continued fraction expansion for 0 is 
 \begin_inset Formula $0=[\infty,a_{2},a_{3},...]$
-\end_inset 
+\end_inset
 
  for arbitrary integers 
 \begin_inset Formula $a_{k}$
-\end_inset 
+\end_inset
 
 .
  Indeed, all rationals suffer in this way: a finite continued fraction is
  just one where 
 \begin_inset Formula $\infty$
-\end_inset 
+\end_inset
 
  appears somewhere in the expansion, i.e.
  
 \begin_inset Formula $[a_{1},a_{2},...,a_{N}]=[a_{1},a_{2},...,a_{N},\infty,a_{N+2},...]$
-\end_inset 
+\end_inset
 
 .
  We can paper around this difficulty by considering instead 
 \begin_inset Formula $\mathbb{M}=\mathbb{N}\cup\{\infty\}$
-\end_inset 
+\end_inset
 
 , defining continued fractions as sequences in 
 \begin_inset Formula $\mathbb{M}^{\omega}$
-\end_inset 
+\end_inset
 
 , and finally taking the kernel of 
 \begin_inset Formula $[\,]$
-\end_inset 
+\end_inset
 
  and defining a quotient space 
 \begin_inset Formula $\mathbb{S}=\mathbb{M}^{\omega}/\ker[\,]$
-\end_inset 
+\end_inset
 
 , so that the operator 
 \begin_inset Formula $[\,]:\mathbb{S}\to\mathbb{R}$
-\end_inset 
+\end_inset
 
  is 1-1 and onto in this quotient space.
  In particular, this implies that the inverse map 
 \begin_inset Formula $[\,]^{-1}:\mathbb{R}\to\mathbb{S}$
-\end_inset 
+\end_inset
 
  exists and is well-defined.
  
-\emph on 
+\emph on
 ToDo: describe some sensible topologies that could be applied to this space
-\emph default 
+\emph default
 .
  Note that any map 
 \begin_inset Formula $\mu:\mathbb{S}\rightarrow\mathbb{S}$
-\end_inset 
+\end_inset
 
  induces a map 
 \begin_inset Formula $\tilde{\mu}:\mathbb{R}\rightarrow\mathbb{R}$
-\end_inset 
+\end_inset
 
 , through the similarity transform 
 \begin_inset Formula $\tilde{\mu}=[\,]\circ\mu\circ[\,]^{-1}$
-\end_inset 
+\end_inset
 
 ; likewise, a function of the reals can be restated as a function on 
 \begin_inset Formula $\mathbb{S}$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The permutation group elements acting on 
 \begin_inset Formula $\mathbb{S}$
-\end_inset 
+\end_inset
 
  are given by equation 
-\begin_inset LatexCommand \ref{eq:Permutation Elts}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Permutation Elts"
 
-\end_inset 
+\end_inset
 
 .
  Note that 
 \begin_inset Formula $S_{p,q}(x)$
-\end_inset 
+\end_inset
 
  is discontinuous, but only on a countable set of points.
  That is, 
 \begin_inset Formula $S_{p,q}(x)$
-\end_inset 
+\end_inset
 
  is discontinuous on the proverbial 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 set of measure zero
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
 , and so one can easily form well-defined integrals using classical techniques.
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Graphs
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 A graphical presentation of these functions and sums are shown below.
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Continued Fraction Permutations
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename swap-s12.png
 	width 50text%
 
-\end_inset 
+\end_inset
 
 
 \begin_inset Graphics
 	filename swap-s13.png
 	width 50text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename swap-s14.png
 	width 50text%
 
-\end_inset 
+\end_inset
 
 
 \begin_inset Graphics
 	filename swap-s23.png
 	width 50text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 The above figures show a set of graphs for various continued fraction permutatio
 ns 
 \begin_inset Formula $S_{p,q}(x)$
-\end_inset 
+\end_inset
 
  for the swap operator 
 \begin_inset Formula $S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdots,a_{p},\cdots]$
-\end_inset 
+\end_inset
 
 .
  In each figure, the green line 
 \begin_inset Formula $y=x$
-\end_inset 
+\end_inset
 
  is drawn for reference.
  In the last figure, the blue line shows 
 \begin_inset Formula $h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor $
-\end_inset 
+\end_inset
 
  also superimposed, for reference.
  As can be seen, there are a countable number of discontinuities.
@@ -389,55 +431,69 @@ ns
  Its also clear that these figures posses a considerable amount of self-similari
 ty; this self-similarity is key to obtaining workable analytic expressions.
  
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Define the Riemann sum as 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Formula \begin{equation}
 \zeta_{N}(s)=\frac{s}{s-1}-\frac{s}{N}\;\sum_{n=0}^{N-1}h\left(\frac{2n+1}{2N}\right)\;\left(\frac{2n+1}{2N}\right)^{s-1}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  As a function of 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
 , this sum converges very slowly to the Riemann zeta function.
  A hint of the convergence properties is shown in the figure 
-\begin_inset LatexCommand \ref{cap:Riemann-Sums}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:Riemann-Sums"
 
-\end_inset 
+\end_inset
 
 .
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:Riemann-Sums"
 
-\begin_inset LatexCommand \label{cap:Riemann-Sums}
-
-\end_inset 
+\end_inset
 
 Riemann Sums
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename rzero-15.png
 	lyxscale 60
 	width 19text%
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Graphics
@@ -445,7 +501,7 @@ Riemann Sums
 	lyxscale 60
 	width 19text%
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Graphics
@@ -453,7 +509,7 @@ Riemann Sums
 	lyxscale 60
 	width 19text%
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Graphics
@@ -461,7 +517,7 @@ Riemann Sums
 	lyxscale 60
 	width 19text%
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Graphics
@@ -469,28 +525,29 @@ Riemann Sums
 	lyxscale 60
 	width 19text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 The above strip charts show 
 \begin_inset Formula $\left|\zeta_{N}(s)\right|$
-\end_inset 
+\end_inset
 
  for N=15, 151, 1051, 11051 and 151051 respectively.
  The three vertical black lines are located at 
 \begin_inset Formula $\Re s$
-\end_inset 
+\end_inset
 
 =0, 1/2 and 1.
  The vertical range of these strips are all identical, ranging from 
 \begin_inset Formula $\Im s$
-\end_inset 
+\end_inset
 
 =13 at the bottom, to 
 \begin_inset Formula $\Im s$
-\end_inset 
+\end_inset
 
 =34 at the top.
  The coloration is such that red represents values greater than two, green
@@ -501,459 +558,521 @@ The above strip charts show
  five zeros visible, some lying outside the critical strip.
  Next, as the value of 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
  increases, the zeros migrate towards the 
 \begin_inset Formula $\Re s=1/2$
-\end_inset 
+\end_inset
 
  line; however, the number of zeros seems to multiply logarithmically as
  well.
  Most of these zeroes seem to have a tiny residue, which diminishes as 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
  increases; presumably, they will completely disappear in the limit.
  What's left are five zeros which are not fading away; these become the
  Riemann zeroes.
  
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
 
-\begin_inset Note
-collapsed false
-
-\layout Standard
-
+\begin_layout Plain Layout
 created with src/fractal/generate/swap.C and was called with args 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 ./swap j 200 600 1051 0.5 23.5 7 (I think) 
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 
  
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Riemann sum phase plots
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename r-sum-1051.png
 	width 50text%
 
-\end_inset 
+\end_inset
 
 
 \begin_inset Graphics
 	filename r-sum-11051.png
 	width 50text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename r-sum-121051.png
 	width 50text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 The above three figures are parametric phase plots of 
 \begin_inset Formula $\zeta_{N}(s)$
-\end_inset 
+\end_inset
 
  for N=1051, 11051 and 121051, treating 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
  as a parameter, varying from 
 \begin_inset Formula $\Im s$
-\end_inset 
+\end_inset
 
 =13 to 34 along the 
 \begin_inset Formula $\Re s=1/2$
-\end_inset 
+\end_inset
 
  line.
  That is, the graphs show 
 \begin_inset Formula $\Re\zeta_{N}$
-\end_inset 
+\end_inset
 
  on the x-axis, and 
 \begin_inset Formula $\Im\zeta_{N}$
-\end_inset 
+\end_inset
 
  along the y-axis as 
 \begin_inset Formula $s$
-\end_inset 
+\end_inset
 
  varies.
  The large number of zeros in the critical strip can be understood as being
  due to the looping seen in these graphs.
  As 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
  increases, the loops shrink, passing through cusps; the last figure beginning
  to resemble the true phase portrait of the Riemann zeta.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Zeros of 
 \begin_inset Formula $S_{1,2}$
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename rzero-151051.png
 	width 49text%
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Graphics
 	filename zero-s12-151051.png
 	width 49text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows a side-by-side comparison of 
 \begin_inset Formula $\left|\zeta_{N}(s)\right|$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\left|\zeta_{N;1,2}(s)\right|$
-\end_inset 
+\end_inset
 
 , with the later as defined in equation
-\begin_inset LatexCommand \ref{eq:zeta-pq-sum}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:zeta-pq-sum"
 
-\end_inset 
+\end_inset
 
 , and 
 \begin_inset Formula $N=151051$
-\end_inset 
+\end_inset
 
 .
  The sizes, heights and color scheme are as in the previous figures.
  Note the near-correspondence of the dominant zeros; yet, the zeros for
  
 \begin_inset Formula $\left|\zeta_{N;1,2}(s)\right|$
-\end_inset 
+\end_inset
 
  do appear to be at shifted locations.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed true
+sideways false
+status collapsed
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
 Zeros of 
 \begin_inset Formula $S_{1,3}$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $S_{2,3}$
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename zero-s13-151051.png
 	width 49text%
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Graphics
 	filename zero-s23-151051.png
 	width 49text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure shows a side-by-side comparison of 
 \begin_inset Formula $\left|\zeta_{N;1,3}(s)\right|$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\left|\zeta_{N;2,3}(s)\right|$
-\end_inset 
+\end_inset
 
 , with the later as defined in equation
-\begin_inset LatexCommand \ref{eq:zeta-pq-sum}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:zeta-pq-sum"
 
-\end_inset 
+\end_inset
 
 , and 
 \begin_inset Formula $N=151051$
-\end_inset 
+\end_inset
 
 .
  The sizes, heights and color scheme are as in the previous figures.
  The dominant zeros no longer resemble those of 
 \begin_inset Formula $\left|\zeta_{N}(s)\right|$
-\end_inset 
+\end_inset
 
 , and it is no longer clear whether they will end up in the critical strip.
  However, it is also the case that the structure of 
 \begin_inset Formula $S_{1,3}(x)$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $S_{2,3}(x)$
-\end_inset 
+\end_inset
 
  is much finer and detailed, and so this value of 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
  does not yet provide an adequate visual estimate of the 
 \begin_inset Formula $N\to\infty$
-\end_inset 
+\end_inset
 
  form of these figures.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Section
+\end_layout
 
+\begin_layout Section
 A Remarkable Shadow
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The numerical evaluation of sums requires a certain amount of cross-checking
  so as to catch errors.
  A particularly curious sum to evaluate is 
 \begin_inset Formula \begin{equation}
 \eta_{N}(s)=\frac{s}{s-1}-\frac{s}{N}\;\sum_{n=0}^{N-1}\left(\frac{2n+1}{2N}\right)^{s}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  which does no permutation at all.
  That is, one effectively has 
 \begin_inset Formula $\eta_{N}(s)=\zeta_{N;p,p}(s)$
-\end_inset 
+\end_inset
 
  for any integer 
 \begin_inset Formula $p$
-\end_inset 
+\end_inset
 
 .
  The limiting integral is trivial to calculate, since 
 \begin_inset Formula $S_{p,p}(x)=x$
-\end_inset 
+\end_inset
 
 , and so 
 \begin_inset Formula \begin{equation}
 \lim_{N\to\infty}\eta_{N}(s)=\frac{2s}{s^{2}-1}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  Thus, this sum shouldn't be interesting, except as a calibration of sorts.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 But that is false.
  A review of the figure 
-\begin_inset LatexCommand \ref{cap:A-Shadow-of}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:A-Shadow-of"
 
-\end_inset 
+\end_inset
 
  shows that this simple stair-step sum retains traces of the locations of
  the non-trivial Riemann zeros!
-\layout Standard
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
-collapsed false
+sideways false
+status open
 
-\layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
 
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "cap:A-Shadow-of"
 
-\begin_inset LatexCommand \label{cap:A-Shadow-of}
-
-\end_inset 
+\end_inset
 
 A Shadow of Zeta
-\layout Standard
+\end_layout
+
+\end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename rzero-11051.png
 	width 49text%
 
-\end_inset 
+\end_inset
 
  
 \begin_inset Graphics
 	filename shadow-11051.png
 	width 49text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Plain Layout
 This figure compares 
 \begin_inset Formula $\left|\zeta_{N}(s)\right|$
-\end_inset 
+\end_inset
 
  and 
 \begin_inset Formula $\left|\eta_{N}(s)\right|$
-\end_inset 
+\end_inset
 
  for 
 \begin_inset Formula $N=11051$
-\end_inset 
+\end_inset
 
 .
  Note the 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 horns
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  or 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 cusps
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  in 
 \begin_inset Formula $\left|\eta_{N}(s)\right|$
-\end_inset 
+\end_inset
 
 .
  While these are falling well outside the critical strip, it is particularly
  remarkable that they line up vertically with the locations of the non-trivial
  Riemann zeros.
-\end_inset 
+\end_layout
+
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 The presence of this shadow is not hard to explain.
  Define 
 \begin_inset Formula \begin{equation}
 Z_{N}(s)=\sum_{n=1}^{N}\frac{1}{n^{s}}\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
 Then it is clear that, for large 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
 , 
 \begin_inset Formula $Z_{N}(s)$
-\end_inset 
+\end_inset
 
 will approximate the Riemann zeta function: 
 \begin_inset Formula \begin{equation}
 \lim_{N\to\infty}Z_{N}(s)=\zeta(s)\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  at least for the case of 
 \begin_inset Formula $\Re s>1$
-\end_inset 
+\end_inset
 
 , where the sum is convergent.
  With some simple manipulations, one may rewrite the numeric sum as 
 \begin_inset Formula \begin{equation}
 \sum_{n=0}^{N-1}\left(\frac{2n+1}{2N}\right)^{s}=\frac{1}{(2N)^{s}}\left[Z_{2N-1}(-s)-2^{s}Z_{N-1}(-s)\right]\label{eq:}\end{equation}
 
-\end_inset 
+\end_inset
 
  The fact that the seemingly 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 trivial
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  
 \begin_inset Formula $\eta_{N}(s)$
-\end_inset 
+\end_inset
 
  sum contains this approximation to the zeta would seem to explain the numeric
  features shown in figure 
-\begin_inset LatexCommand \ref{cap:A-Shadow-of}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:A-Shadow-of"
 
-\end_inset 
+\end_inset
 
 .
  Furthermore, the presence of the 
 \begin_inset Formula $-s$
-\end_inset 
+\end_inset
 
  in the arguments appears to explain why the horns are located not far from
  the 
 \begin_inset Formula $\Re s=-1/2$
-\end_inset 
+\end_inset
 
  line.
  
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 On the other hand, there is another important lesson to be drawn here: this
  
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 trivial
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  sum is insufficient to explain the features seen in the 
 \begin_inset Formula $\zeta_{N;p,q}(s)$
-\end_inset 
+\end_inset
 
  sums.
  That is, although the numerical evaluation itself is prone to introducing
@@ -961,46 +1080,54 @@ trivial
  immediately appear to be dominant enough to account for the entire behavior
  of the 
 \begin_inset Formula $\zeta_{N;p,q}(s)$
-\end_inset 
+\end_inset
 
  sums.
  
-\layout Section
+\end_layout
 
+\begin_layout Section
 Conclusions
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Numerical evidence suggests that the permutation-inspired zeta 
 \begin_inset Formula \[
 \zeta_{p,q}(s)=\lim_{N\to\infty}\zeta_{N;p,q}(s)\]
 
-\end_inset 
+\end_inset
 
  obeys a Riemann hypothesis, in that it's zeros lie in the critical strip,
  and particularly on the 
 \begin_inset Formula $\Re s=1/2$
-\end_inset 
+\end_inset
 
  line.
  Although the numerical evaluation itself 
 \begin_inset Quotes eld
-\end_inset 
+\end_inset
 
 accidentally
 \begin_inset Quotes erd
-\end_inset 
+\end_inset
 
  introduces some zeta-like artifacts, these artifacts do not seem to be
  sufficiently strong to explain the overall structure.
  Alternate means of numerical evaluation, not suffering from this wart,
  are desired, as well as an analysis in terms of traditional holomorphic
  function techniques.
-\layout Standard
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/home/linas/linas/fractal/paper/fractal"
+options "plain"
+
+\end_inset
 
 
-\begin_inset LatexCommand \BibTeX[plain]{/home/linas/linas/fractal/paper/fractal}
+\end_layout
 
-\end_inset 
-
-
-\the_end
+\end_body
+\end_document
