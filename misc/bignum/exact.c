@@ -301,7 +301,7 @@ main (int argc, char * argv[])
 	printf ("\n#\n# prec=%d nbits=%d\n#\n", prec, nbits);
 	fflush (stdout);
 	// for (q=0.00002; q<0.000999; q+=0.000008)
-	for (q=1.0; 1e-4 <q; q*=0.98)
+	for (q=0.999; 1e-4 <q; q*=0.98)
 	// for (zre=0.02; zre<1.00; zre+=0.05)
 	// for (zim=-0.00999999; zim<0.00999999; zim+=0.0000811)
 	{

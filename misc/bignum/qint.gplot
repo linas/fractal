@@ -31,10 +31,11 @@ set logscale x
 
 # set xrange [1e-95:1e-105]
 
-#set logscale y
+set logscale y
 plot "qint.dat" using 2:3 title "lo", \
- 	"qint.dat" using 2:4 title "hi", \
-  	"qint.dat" using 2:(0.77+0.17*cos(3.141592653589*1.04*log($2))) title "fit"
+ 	"qint.dat" using 2:4 title "hi"
+
+#   	"qint.dat" using 2:(0.77+0.17*cos(3.141592653589*0.55*log($2))) title "fit"
 #	"qint.dat" using 2:(exp(-0.212*log($2))) title "fithi"
 
 # x^-0.2798 provides an excellent fit for Golden mean
