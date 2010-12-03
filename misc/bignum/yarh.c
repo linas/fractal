@@ -180,6 +180,7 @@ int main (int argc, char * argv[])
 		double im = cpx_get_im(y);
 
 		printf("%d\t%g\t%g\t%g\n", i, t, re, im);
+		fflush (stdout);
 		t += 0.1;
 		i++;
 	}
