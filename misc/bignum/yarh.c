@@ -124,6 +124,19 @@ void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 		mpf_sub (x, x, step);
 	}
 
+	/* Divide by the actual number of samples */
+	cpx_div_ui (y, y, nsteps-1);
+
+	/* integral times s */
+	cpx_mul (y, y, ess);
+
+	/* compute 1/(s-1) */
+	cpx_recip (ess, essm1);
+	cpx_sub (y, y, ess);
+
+	/* s/(s-1) = 1/(s-1) + 1 so add 1 now */
+	cpx_add_ui(y, y, 1, 0);
+
 	mpf_clear (step);
 	mpf_clear (x);
 	cpx_clear (term);
@@ -133,6 +146,28 @@ void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 
 int main (int argc, char * argv[])
 {
+	unsigned int nsteps;
+	int prec, nbits;
+	cpx_t y, s;
+
+	prec = 50;
+
+   /* Set the precision (number of binary bits) */
+   nbits = 3.3*prec;
+   mpf_set_default_prec (nbits);
+
+	cpx_init(y);
+	cpx_init(s);
+
+	cpx_set_d (s, 0.5, 16.0);
+	nsteps = 1501;
+
+	integral(y, nsteps, s, prec);
+
+	double re = cpx_get_re(y);
+	double im = cpx_get_im(y);
+
+	printf("duude code %g %g \n", re, im);
 
 	return 0;
 }
