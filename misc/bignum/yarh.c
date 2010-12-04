@@ -233,65 +233,75 @@ void find_zero(int nsteps, int prec)
 	mpf_init (loc);
 
 	int i;
-	for (i=0; i<3; i++)
+
+	/* This loop finds zero, adding one bit of accuracy
+	 * per loop iteration. */
+	for (i=0; i<40; i++)
 	{
 		/* First, do the imaginary */
 		quad_min (loc, sa[0].im, sb[0].im, sc[0].im,
               	fa, fb, fc);
-
-		double dloc = mpf_get_d(loc);
-		printf ("duude found im %g\n", dloc);
 	
 		mpf_sub(db, loc, sb[0].im);
 		mpf_sub(dc, loc, sc[0].im);
 		mpf_abs (db, db);
 		mpf_abs (dc, dc);
 
-		double ddb = mpf_get_d(db);
-		double ddc = mpf_get_d(dc);
-printf("duuude b=%g c=%g\n", ddb, ddc);
+		double zero_im = mpf_get_d(loc);
+		double epsi_im = mpf_get_d(db);
 
+		/* Throw away the farther point */
+		/* In practice these are equal far away */
 		if (0 < mpf_cmp(db, dc))
 		{
-			printf("duude farther from b\n");
+			// printf("duude farther from b\n");
 			cpx_set(sb, sa);
+			cpx_set(yb, ya);
 		}
 		else
 		{
-			printf("duude farther from c\n");
+			// printf("duude farther from c\n");
 			cpx_set(sc, sa);
+			cpx_set(yc, ya);
 		}
 
 		mpf_set(sa[0].im, loc);
+		integral (ya, nsteps, sa, prec);
 
 		/* Next the real */
 		quad_min (loc, sa[0].re, sb[0].re, sc[0].re,
               	fa, fb, fc);
 
-		dloc = mpf_get_d(loc);
-		printf ("duude found re %g\n", dloc);
-	
 		mpf_sub(db, loc, sb[0].re);
 		mpf_sub(dc, loc, sc[0].re);
 		mpf_abs (db, db);
 		mpf_abs (dc, dc);
 
-	ddb = mpf_get_d(db);
-	ddc = mpf_get_d(dc);
-printf("duuude re b=%g c=%g\n", ddb, ddc);
+		double zero_re = mpf_get_d(loc);
+		double epsi_re = mpf_get_d(db);
 
+		/* Throw away the farther point */
+		/* In practice these are equal far away */
 		if (0 < mpf_cmp(db, dc))
 		{
-			printf("duude farther from b\n");
+			// printf("duude farther from b\n");
 			cpx_set(sb, sa);
+			cpx_set(yb, ya);
 		}
 		else
 		{
-			printf("duude farther from c\n");
+			// printf("duude farther from c\n");
 			cpx_set(sc, sa);
+			cpx_set(yc, ya);
 		}
 
 		mpf_set(sa[0].re, loc);
+		integral (ya, nsteps, sa, prec);
+
+		cpx_abs(loc, ya);
+		double mini = mpf_get_d(loc);
+		printf("%d location= %g +i %g   epsi=(%g %g) min=%g\n", 
+			i, zero_re, zero_im, epsi_re, epsi_im, mini);
 	}
 
 	cpx_clear (sa);
