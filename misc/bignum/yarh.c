@@ -224,26 +224,30 @@ void find_zero(cpx_t result, int nsteps, int prec)
 	mpf_set_ui(epsi, 1);
 	mpf_div_2exp(epsi, epsi, (int)(3.3*prec));
 
-	cpx_t s0, s1, s2, sa, sb;
+	cpx_t s0, s1, s2, s3, sa, sb;
 	cpx_init (s0);
 	cpx_init (s1);
 	cpx_init (s2);
+	cpx_init (s3);
 	cpx_init (sa);
 	cpx_init (sb);
 
-	cpx_t na, nb;
+	cpx_t na, nb, nc;
 	cpx_init (na);
 	cpx_init (nb);
+	cpx_init (nc);
 
-	cpx_t y0, y1, y2;
+	cpx_t y0, y1, y2, y3;
 	cpx_init (y0);
 	cpx_init (y1);
 	cpx_init (y2);
+	cpx_init (y3);
 
-	mpf_t f0, f1, f2;
+	mpf_t f0, f1, f2, f3;
 	mpf_init (f0);
 	mpf_init (f1);
 	mpf_init (f2);
+	mpf_init (f3);
 
 	mpf_t loc, lam0, lam1, lam2;
 	mpf_init (loc);
@@ -262,6 +266,7 @@ void find_zero(cpx_t result, int nsteps, int prec)
 	cpx_set_d (na, 0.05, 0.0);
 	cpx_set_d (nb, 0.0, 0.1);
 
+	/* Iterate */
 	int i;
 	for (i=0; i<80; i++)
 	{
@@ -284,17 +289,43 @@ void find_zero(cpx_t result, int nsteps, int prec)
 		quad_min (loc, lam0, lam1, lam2, f0, f1, f2);
 
 		/* Move to that location */
-		mpf_abs (zero, loc);
-		if (0 < mpf_cmp(zero, epsi))
+		cpx_times_mpf (nc, na, loc);
+		cpx_add (s3, s0, nc);
+		integral (y3, nsteps, s3, prec);
+		cpx_abs(f3, y3);
+
+		/* Does f3 actually improve on f0 ? */
+		if (0 < mpf_cmp(f0, f3))
 		{
-			cpx_times_mpf (na, na, loc);
-			cpx_add (sa, s0, na);
-			cpx_times_d (na, na, 0.5);
+			/* Yes, the new point is an improvement. Go there. */
+			mpf_abs (zero, loc);
+			if (0 < mpf_cmp(zero, epsi))
+			{
+				cpx_times_mpf (na, na, loc);
+				cpx_add (sa, s0, na);
+				cpx_times_d (na, na, 0.5);
+			}
+			else
+			{
+				cpx_set(sa, s0);
+				done1 = 1;
+			}
 		}
 		else
 		{
-			cpx_set(sa, s0);
-			done1 = 1;
+			/* The new point is not an improvement on f0! */
+			if (0 < mpf_cmp(f0, f1))
+			{
+				/* ... But f1 is better */
+				cpx_set (sa, s1);
+				mpf_set (f0, f1);
+			}
+			if (0 < mpf_cmp(f0, f2))
+			{
+				/* ... But f2 is better */
+				cpx_set (sa, s2);
+			}
+			cpx_times_d (na, na, 0.5);
 		}
 
 		/* Repeat for direction b */
@@ -313,18 +344,43 @@ void find_zero(cpx_t result, int nsteps, int prec)
 		quad_min (loc, lam0, lam1, lam2, f0, f1, f2);
 
 		/* Move to that location */
-		/* Move to that location */
-		mpf_abs (zero, loc);
-		if (0 < mpf_cmp(zero, epsi))
+		cpx_times_mpf (nc, nb, loc);
+		cpx_add (s3, sa, nc);
+		integral (y3, nsteps, s3, prec);
+		cpx_abs(f3, y3);
+
+		/* Does f3 actually improve on f0 ? */
+		if (0 < mpf_cmp(f0, f3))
 		{
-			cpx_times_mpf (nb, nb, loc);
-			cpx_add (sb, sa, nb);
-			cpx_times_d (nb, nb, 0.5);
+			/* Yes, the new point is an improvement. Go there. */
+			mpf_abs (zero, loc);
+			if (0 < mpf_cmp(zero, epsi))
+			{
+				cpx_times_mpf (nb, nb, loc);
+				cpx_add (sb, sa, nb);
+				cpx_times_d (nb, nb, 0.5);
+			}
+			else
+			{
+				cpx_set(sb, sa);
+				done2 = 1;
+			}
 		}
 		else
 		{
-			cpx_set(sb, sa);
-			done2 = 1;
+			/* The new point is not an improvement on f0! */
+			if (0 < mpf_cmp(f0, f1))
+			{
+				/* ... But f1 is better */
+				cpx_set (sb, s1);
+				mpf_set (f0, f1);
+			}
+			if (0 < mpf_cmp(f0, f2))
+			{
+				/* ... But f2 is better */
+				cpx_set (sb, s2);
+			}
+			cpx_times_d (nb, nb, 0.5);
 		}
 
 		/* Shuffle down */
@@ -347,19 +403,23 @@ fp_prt("min= ", f0); printf("\n");
 	cpx_clear (s0);
 	cpx_clear (s1);
 	cpx_clear (s2);
+	cpx_clear (s3);
 	cpx_clear (sa);
 	cpx_clear (sb);
 
 	cpx_clear (na);
 	cpx_clear (nb);
+	cpx_clear (nc);
 
 	cpx_clear (y0);
 	cpx_clear (y1);
 	cpx_clear (y2);
+	cpx_clear (y3);
 
 	mpf_clear (f0);
 	mpf_clear (f1);
 	mpf_clear (f2);
+	mpf_clear (f3);
 
 	mpf_clear (loc);
 	mpf_clear (lam0);
