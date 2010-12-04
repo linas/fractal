@@ -146,7 +146,52 @@ void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 
 /* ---------------------------------------------- */
 
-// void descent (cpx_t loc, 
+/*
+ * Find bottom of parabola.  Given three points,
+ * fit a parabola to that, then find the minimum.
+ */
+void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
+              mpf_t fa, mpf_t fb, mpf_t fc)
+{
+	mpf_t ba, bc, fba, fbc, deno, numer;
+	mpf_init (ba);
+	mpf_init (bc);
+	mpf_init (fba);
+	mpf_init (fbc);
+	mpf_init (deno);
+	mpf_init (numer);
+
+	/* differences */
+	mpf_sub (ba, b, a);
+	mpf_sub (bc, b, c);
+	mpf_sub (fba, fb, fa);
+	mpf_sub (fbc, fb, fc);
+
+	/* cross product */
+	mpf_mul(fbc, fbc, ba);
+	mpf_mul(fba, fba, bc);
+
+	/* denominator */
+	mpf_sub(deno, fbc, fba);
+
+	/* cross again */
+	mpf_mul(fbc, fbc, ba);
+	mpf_mul(fba, fba, bc);
+
+	/* numerator */
+	mpf_sub(numer, fbc, fba);
+	mpf_div (numer, numer, deno);
+	mpf_div_ui(numer, numer, 2);
+
+	mpf_sub(loc, b, numer);
+
+	mpf_clear (ba);
+	mpf_clear (bc);
+	mpf_clear (fba);
+	mpf_clear (fbc);
+	mpf_clear (deno);
+	mpf_clear (numer);
+}
 
 int main (int argc, char * argv[])
 {
