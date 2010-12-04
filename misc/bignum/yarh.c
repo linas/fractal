@@ -269,6 +269,8 @@ void find_zero(cpx_t result, int nsteps, int prec)
 
 	/* Initial guess */
 	cpx_set_d (s0, 0.5, 18.3);
+	integral (y0, nsteps, s0, prec);
+	cpx_abs(f0, y0);
 
 	/* Initial directions */
 	cpx_set_d (na, 0.05, 0.0);
@@ -293,11 +295,11 @@ void find_zero(cpx_t result, int nsteps, int prec)
 			cpx_add(s1, s0, na);
 			cpx_sub(s2, s0, na);
 
-			integral (y0, nsteps, s0, prec);
+			// integral (y0, nsteps, s0, prec);
 			integral (y1, nsteps, s1, prec);
 			integral (y2, nsteps, s2, prec);
 
-			cpx_abs(f0, y0);
+			// cpx_abs(f0, y0);
 			cpx_abs(f1, y1);
 			cpx_abs(f2, y2);
 
@@ -326,6 +328,9 @@ void find_zero(cpx_t result, int nsteps, int prec)
 					cpx_set(sa, s0);
 					done1 = 1;
 				}
+
+				/* Save last result for the next step */
+				mpf_set(f0, f3);
 			}
 			else
 			{
@@ -340,6 +345,7 @@ void find_zero(cpx_t result, int nsteps, int prec)
 				{
 					/* ... But f2 is better */
 					cpx_set (sa, s2);
+					mpf_set (f0, f2);
 				}
 				cpx_times_d (na, na, 1.618);
 			}
@@ -357,11 +363,11 @@ void find_zero(cpx_t result, int nsteps, int prec)
 			cpx_add(s1, sa, nb);
 			cpx_sub(s2, sa, nb);
 
-			integral (y0, nsteps, sa, prec);
+			// integral (y0, nsteps, sa, prec);
 			integral (y1, nsteps, s1, prec);
 			integral (y2, nsteps, s2, prec);
 
-			cpx_abs(f0, y0);
+			// cpx_abs(f0, y0);
 			cpx_abs(f1, y1);
 			cpx_abs(f2, y2);
 
@@ -390,6 +396,9 @@ void find_zero(cpx_t result, int nsteps, int prec)
 					cpx_set(sb, sa);
 					done2 = 1;
 				}
+
+				/* Save last result for the next step */
+				mpf_set(f0, f3);
 			}
 			else
 			{
@@ -404,6 +413,7 @@ void find_zero(cpx_t result, int nsteps, int prec)
 				{
 					/* ... But f2 is better */
 					cpx_set (sb, s2);
+					mpf_set (f0, f2);
 				}
 				cpx_times_d (nb, nb, 1.618);
 			}
