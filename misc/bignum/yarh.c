@@ -208,16 +208,31 @@ void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
 	mpf_clear (numer);
 }
 
+void interp(mpf_t yoc, mpf_t xoc, mpf_t a, mpf_t b, mpf_t ya, mpf_t yb)
+{
+	mpf_t ba, yba;
+
+	mpf_init(ba);
+	mpf_init(yba);
+
+	mpf_sub (ba, b, a);
+	mpf_sub (yba, yb, ya);
+	mpf_div (yba, yba, ba);
+	
+	mpf_sub (ba, b, xoc);
+	mpf_mul (yba, yba, ba);
+	mpf_add (yoc, yba, ya);
+
+	mpf_clear(ba);
+	mpf_clear(yba);
+}
+
 void find_zero(int nsteps, int prec)
 {
 	mpf_t fa, fb, fc;
 	mpf_init (fa);
 	mpf_init (fb);
 	mpf_init (fc);
-
-	mpf_t db, dc;
-	mpf_init (db);
-	mpf_init (dc);
 
 	cpx_t sa, sb, sc;
 	cpx_t ya, yb, yc;
@@ -242,8 +257,13 @@ void find_zero(int nsteps, int prec)
 	cpx_abs(fb, yb);
 	cpx_abs(fc, yc);
 
-	mpf_t loc;
-	mpf_init (loc);
+cpx_prt("ya = ", ya); printf("\n");
+cpx_prt("yb = ", yb); printf("\n");
+cpx_prt("yc = ", yc); printf("\n");
+
+	mpf_t ioc, roc;
+	mpf_init (ioc);
+	mpf_init (roc);
 
 	int i;
 
@@ -252,75 +272,68 @@ void find_zero(int nsteps, int prec)
 	for (i=0; i<20; i++)
 	{
 		/* First, do the imaginary */
-		quad_min (loc, sa[0].im, sb[0].im, sc[0].im,
+		quad_min (ioc, sa[0].im, sb[0].im, sc[0].im,
               	fa, fb, fc);
 	
-		mpf_sub(db, loc, sb[0].im);
-		mpf_sub(dc, loc, sc[0].im);
-		mpf_abs (db, db);
-		mpf_abs (dc, dc);
-
-		double zero_im = mpf_get_d(loc);
-		double epsi_im = mpf_get_d(db);
+		interp (roc, ioc, sa[0].im, sb[0].im, sa[0].re, sb[0].re);
+		double zero_im = mpf_get_d(ioc);
 
 		/* Throw away the farther point */
-		/* In practice these are equal far away */
-		if (0 < mpf_cmp(db, dc))
+		if (0 < mpf_cmp(fb, fc))
 		{
-			// printf("duude farther from b\n");
+			printf("duude b biggest\n");
 			cpx_set(sb, sa);
 			cpx_set(yb, ya);
 			mpf_set(fb, fa);
 		}
 		else
 		{
-			// printf("duude farther from c\n");
+			printf("duude c biggest\n");
 			cpx_set(sc, sa);
 			cpx_set(yc, ya);
 			mpf_set(fc, fa);
 		}
 
-		mpf_set(sa[0].im, loc);
+		cpx_set_mpf(sa, roc, ioc);
 		integral (ya, nsteps, sa, prec);
 		cpx_abs(fa, ya);
+#if 0
+cpx_prt("new ya = ", ya); printf("\n");
+cpx_prt("new yb = ", yb); printf("\n");
+cpx_prt("new yc = ", yc); printf("\n");
+#endif
 
 		/* Next the real */
-		quad_min (loc, sa[0].re, sb[0].re, sc[0].re,
+		quad_min (roc, sa[0].re, sb[0].re, sc[0].re,
               	fa, fb, fc);
 
-		mpf_sub(db, loc, sb[0].re);
-		mpf_sub(dc, loc, sc[0].re);
-		mpf_abs (db, db);
-		mpf_abs (dc, dc);
-
-		double zero_re = mpf_get_d(loc);
-		double epsi_re = mpf_get_d(db);
+		interp (ioc, roc, sa[0].re, sb[0].re, sa[0].im, sb[0].im);
+		double zero_re = mpf_get_d(roc);
 
 		/* Throw away the farther point */
-		/* In practice these are equal far away */
-		if (0 < mpf_cmp(db, dc))
+		if (0 < mpf_cmp(fb, fc))
 		{
-			// printf("duude farther from b\n");
+			// printf("duude b biggest\n");
 			cpx_set(sb, sa);
 			cpx_set(yb, ya);
 			mpf_set(fb, fa);
 		}
 		else
 		{
-			// printf("duude farther from c\n");
+			// printf("duude c biggest\n");
 			cpx_set(sc, sa);
 			cpx_set(yc, ya);
 			mpf_set(fc, fa);
 		}
 
-		mpf_set(sa[0].re, loc);
+		cpx_set_mpf(sa, roc, ioc);
 		integral (ya, nsteps, sa, prec);
 		cpx_abs(fa, ya);
 
-		cpx_abs(loc, ya);
-		double mini = mpf_get_d(loc);
-		printf("%d location= %g +i %g   epsi=(%g %g) min=%g\n", 
-			i, zero_re, zero_im, epsi_re, epsi_im, mini);
+		cpx_abs(roc, ya);
+		double mini = mpf_get_d(roc);
+		printf("%d location= %g +i %g  min=%g\n", 
+			i, zero_re, zero_im, mini);
 	}
 
 	cpx_clear (sa);
@@ -335,9 +348,8 @@ void find_zero(int nsteps, int prec)
 	mpf_clear (fb);
 	mpf_clear (fc);
 
-	mpf_clear (db);
-	mpf_clear (dc);
-	mpf_clear (loc);
+	mpf_clear (ioc);
+	mpf_clear (roc);
 }
 
 int main (int argc, char * argv[])
