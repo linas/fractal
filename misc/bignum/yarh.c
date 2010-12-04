@@ -16,6 +16,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "mp-complex.h"
 #include "mp-trig.h"
@@ -222,15 +223,15 @@ void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
  * of accuracy per iteration.
  */
 
-void find_zero(cpx_t result, int nsteps, int prec)
+void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 {
 	mpf_t zero, epsi;
 	mpf_init (zero);
-	mpf_init (epsi);
 
-	/* compute tolerance */
+	/* compute the tolerance */
+	mpf_init (epsi);
 	mpf_set_ui(epsi, 1);
-	mpf_div_2exp(epsi, epsi, (int)(3.3*prec));
+	mpf_div_2exp(epsi, epsi, (int)(3.3*ndigits));
 
 	cpx_t s0, s1, s2, s3, sa, sb;
 	cpx_init (s0);
@@ -426,11 +427,12 @@ void find_zero(cpx_t result, int nsteps, int prec)
 		cpx_set(s0, sb);
 
 #if 1
-printf("\n%d\n", i);
+printf("\n# %d  ", i);
 cpx_prt("s0 = ", s0); printf("\n");
-cpx_prt("na = ", na); printf("\n");
-cpx_prt("nb = ", nb); printf("\n");
-fp_prt("min= ", f0); printf("\n");
+cpx_prt("# na = ", na); printf("\n");
+cpx_prt("# nb = ", nb); printf("\n");
+fp_prt("# min= ", f0); printf("\n");
+fflush (stdout);
 #endif
 
 		if (done1 && done2) break;
@@ -477,6 +479,8 @@ fp_prt("min= ", f0); printf("\n");
 	./yarh 25 15031
 	zero 0.51729527573167281533628392587e0 + i 0.182803464555318878444827833551e2
 	./yarh 25 151031 
+	appox = 0.512481182772887408821912690129e0 + i 0.1828629640598476397042724125e2
+
 
 
 */
@@ -495,16 +499,32 @@ int main (int argc, char * argv[])
 	prec = atoi(argv[1]);
 	nsteps = atoi(argv[2]);
 
-   /* Set the precision (number of binary bits) */
+   /* Set the precision (number of binary bits) for calculations */
    nbits = 3.3*(prec + 8);
    mpf_set_default_prec (nbits);
 
+	/* Set the precision to which we want the zero */
+	int ndigits = 10;
+
+	printf ("#\n# intermediate decimal precision = %d\n", prec);
+	printf ("#\n# zero decimal precision = %d\n#\n", ndigits);
+
 	cpx_t zero;
 	cpx_init(zero);
-	find_zero(zero, nsteps, prec);
 
-	printf ("# num steps = %d prec=%d\n", nsteps, prec);
-	cpx_prt("# zero ", zero); printf("\n");
+	double rr = sqrt(2.0);
+	while(1)
+	{
+		find_zero(zero, ndigits, nsteps, prec);
+
+		double re = cpx_get_re(zero);
+		double im = cpx_get_im(zero);
+		printf ("%d	%g	%g\n", nsteps, re, im);
+		fflush (stdout);
+
+		nsteps = (int) (((double) nsteps * rr) + 3);
+	}
+
 	cpx_clear(zero);
 
 #if WALK_THE_LINE
