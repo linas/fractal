@@ -230,19 +230,36 @@ void interp(mpf_t yoc, mpf_t xoc, mpf_t a, mpf_t b, mpf_t ya, mpf_t yb)
 	mpf_clear(yba);
 }
 
+/* Swap a pair of points */
 #define SWAP(s,y,f,t,w,g) { \
-	cpx_set(sd, s); \
-	cpx_set(yd, y); \
-	mpf_set(fd, f); \
+	cpx_set(se, s); \
+	cpx_set(ye, y); \
+	mpf_set(fe, f); \
 	 \
 	cpx_set(s, t); \
 	cpx_set(y, w); \
 	mpf_set(f, g); \
 	 \
-	cpx_set(t, sd); \
-	cpx_set(w, yd); \
-	mpf_set(g, fd); \
+	cpx_set(t, se); \
+	cpx_set(w, ye); \
+	mpf_set(g, fe); \
 }
+
+/* Sort, so that the fa < fb < fc */
+#define SORT \
+	if (0 < mpf_cmp(fa, fb)) \
+	{ \
+		SWAP(sa, ya, fa, sb, yb, fb); \
+	} \
+	if (0 < mpf_cmp(fb, fc)) \
+	{ \
+		SWAP(sc, yc, fc, sb, yb, fb); \
+	} \
+	if (0 < mpf_cmp(fa, fb)) \
+	{ \
+		SWAP(sa, ya, fa, sb, yb, fb); \
+	}
+
 /* Crude zero-finder */
 void find_zero(int nsteps, int prec)
 {
@@ -281,20 +298,7 @@ void find_zero(int nsteps, int prec)
 	cpx_abs(fc, yc);
 
 	/* Sort, so that the fa < fb < fc */
-	if (0 < mpf_cmp(fa, fb))
-	{
-		SWAP(sa, ya, fa, sb, yb, fb);
-	}
-
-	if (0 < mpf_cmp(fb, fc))
-	{
-		SWAP(sc, yc, fc, sb, yb, fb);
-	}
-
-	if (0 < mpf_cmp(fa, fb))
-	{
-		SWAP(sa, ya, fa, sb, yb, fb);
-	}
+	SORT;
 
 #if 0
 cpx_prt("ya = ", ya); printf("\n");
@@ -315,71 +319,86 @@ cpx_prt("yc = ", yc); printf("\n");
 		/* First, do the imaginary */
 		quad_min (ioc, sa[0].im, sb[0].im, sc[0].im,
               	fa, fb, fc);
-	
 		interp (roc, ioc, sa[0].im, sb[0].im, sa[0].re, sb[0].re);
-		double zero_im = mpf_get_d(ioc);
-
 		cpx_set_mpf(sd, roc, ioc);
+
+		/* standard eval from here on */
 		integral (yd, nsteps, sd, prec);
 		cpx_abs(fd, yd);
 
-		if (0 < mpf_cmp(fd, fa))
+		if (0 < mpf_cmp(fd, fc))
 		{
-			if (0 < mpf_cmp(fd, fb))
-			{
-				if (0 < mpf_cmp(fd, fc))
-				{
-					/* fd is a worse estimate than the previous three.
-					 * Discard, try again.
-					 */
-				}
-			}
-		}
+			/* fd is a worse estimate than the previous three.
+			 * Discard, try again.  */
+			printf("bad guess! Subdividing!\n");
+			cpx_add(sd, sa, sb);
+			cpx_div_ui(sd, sd, 2);
 
-		if (0 < mpf_cmp(fb, fc))
-		{
-			// printf("duude b biggest\n");
-			cpx_set(sb, sa);
-			cpx_set(yb, ya);
-			mpf_set(fb, fa);
+			integral (yd, nsteps, sd, prec);
+			cpx_abs(fd, yd);
+
+			if (0 < mpf_cmp(fd, fc))
+			{
+				printf("bad again! Exit\n");
+				exit(-1);
+			}
+			else
+			{
+				/* fd's closer than fc */
+				SWAP (sd, yd, fd, sc, yc, fc);
+				SORT;
+			}
 		}
 		else
 		{
-			// printf("duude c biggest\n");
-			cpx_set(sc, sa);
-			cpx_set(yc, ya);
-			mpf_set(fc, fa);
+			/* fd's closer than fc */
+			SWAP (sd, yd, fd, sc, yc, fc);
+			SORT;
 		}
 
 		/* Next the real */
 		quad_min (roc, sa[0].re, sb[0].re, sc[0].re,
               	fa, fb, fc);
-
 		interp (ioc, roc, sa[0].re, sb[0].re, sa[0].im, sb[0].im);
-		double zero_re = mpf_get_d(roc);
-
 		cpx_set_mpf(sd, roc, ioc);
+
+		/* standard eval from here on. */
 		integral (yd, nsteps, sd, prec);
 		cpx_abs(fd, yd);
 
-		/* Throw away the farther point */
-		if (0 < mpf_cmp(fb, fc))
+		if (0 < mpf_cmp(fd, fc))
 		{
-			// printf("duude b biggest\n");
-			cpx_set(sb, sa);
-			cpx_set(yb, ya);
-			mpf_set(fb, fa);
+			/* fd is a worse estimate than the previous three.
+			 * Discard, try again.  */
+			printf("bad guess! Subdividing!\n");
+			cpx_add(sd, sa, sb);
+			cpx_div_ui(sd, sd, 2);
+
+			integral (yd, nsteps, sd, prec);
+			cpx_abs(fd, yd);
+
+			if (0 < mpf_cmp(fd, fc))
+			{
+				printf("bad again! Exit\n");
+				exit(-1);
+			}
+			else
+			{
+				/* fd's closer than fc */
+				SWAP (sd, yd, fd, sc, yc, fc);
+				SORT;
+			}
 		}
 		else
 		{
-			// printf("duude c biggest\n");
-			cpx_set(sc, sa);
-			cpx_set(yc, ya);
-			mpf_set(fc, fa);
+			/* fd's closer than fc */
+			SWAP (sd, yd, fd, sc, yc, fc);
+			SORT;
 		}
 
-		cpx_abs(roc, ya);
-		double mini = mpf_get_d(roc);
+		double zero_re = cpx_get_re(sa);
+		double zero_im = cpx_get_im(sa);
+		double mini = mpf_get_d(fa);
 		printf("%d location= %15.12g +i %15.12g  min=%g\n", 
 			i, zero_re, zero_im, mini);
 	}
