@@ -279,7 +279,7 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 
 	/* Iterate */
 	int i;
-	for (i=0; i<8000; i++)
+	for (i=0; i<50; i++)
 	{
 		int done1 = 0;
 		int done2 = 0;
@@ -335,20 +335,26 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 			}
 			else
 			{
+				int better = 0;
 				/* The new point is not an improvement on f0! */
 				if (0 < mpf_cmp(f0, f1))
 				{
 					/* ... But f1 is better */
 					cpx_set (sa, s1);
 					mpf_set (f0, f1);
+					better = 1;
 				}
 				if (0 < mpf_cmp(f0, f2))
 				{
 					/* ... But f2 is better */
 					cpx_set (sa, s2);
 					mpf_set (f0, f2);
+					better = 1;
 				}
-				cpx_times_d (na, na, 1.618);
+				if (better)
+					cpx_times_d (na, na, 1.618);
+				else
+					cpx_times_d (na, na, 0.618);
 			}
 		}
 
@@ -403,20 +409,26 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 			}
 			else
 			{
+				int better = 0;
 				/* The new point is not an improvement on f0! */
 				if (0 < mpf_cmp(f0, f1))
 				{
 					/* ... But f1 is better */
 					cpx_set (sb, s1);
 					mpf_set (f0, f1);
+					better = 1;
 				}
 				if (0 < mpf_cmp(f0, f2))
 				{
 					/* ... But f2 is better */
 					cpx_set (sb, s2);
 					mpf_set (f0, f2);
+					better = 1;
 				}
-				cpx_times_d (nb, nb, 1.618);
+				if (better)
+					cpx_times_d (na, na, 1.618);
+				else
+					cpx_times_d (na, na, 0.618);
 			}
 		}
 
@@ -515,14 +527,16 @@ int main (int argc, char * argv[])
 	double rr = sqrt(2.0);
 	while(1)
 	{
+		printf ("#\n# num steps = %d\n", nsteps);
 		find_zero(zero, ndigits, nsteps, prec);
 
 		double re = cpx_get_re(zero);
 		double im = cpx_get_im(zero);
-		printf ("%d	%g	%g\n", nsteps, re, im);
+		printf ("%d	%21.18g	%21.18g\n", nsteps, re, im);
 		fflush (stdout);
 
 		nsteps = (int) (((double) nsteps * rr) + 3);
+		nsteps += nsteps%2 + 1;  /* make it odd, always */
 	}
 
 	cpx_clear(zero);
