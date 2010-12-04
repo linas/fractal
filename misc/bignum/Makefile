@@ -4,6 +4,7 @@
 # CC = cc -pg
 CC = cc
 
+ANANT = anant
 
 EXES= bernoulli bound bs bsubn cache-fill cont_frac \
 		count-prime db-merge db-prt \
@@ -12,17 +13,16 @@ EXES= bernoulli bound bs bsubn cache-fill cont_frac \
       poly-perf qint sawtooth sho stieltjes trunc \
 		walsh yarh zero-cross zeta-zeros
 
-MPLIB=libzmp.a
+MPLIB=anant/libanant.a
 
 all:  $(MPLIB) $(EXES)
-
-MPOBJS= db-cache.o mp-binomial.o mp-cache.o mp-consts.o \
-	mp-gamma.o mp-gkw.o mp-hyper.o mp-misc.o mp-polylog.o \
-	mp-quest.o mp-trig.o mp-zeta.o
+	cd anant
+	make
 
 bernoulli:	bernoulli.o $(MPLIB)
 bound:	bound.o
 cache-fill:	cache-fill.o $(MPLIB)
+count-prime:	count-prime.o $(MPLIB)
 db-merge:	db-merge.o $(MPLIB)
 db-prt:	db-prt.o $(MPLIB)
 cont_frac:	cont_frac.o
@@ -47,37 +47,24 @@ yarh:	yarh.o $(MPLIB)
 zero-cross:	zero-cross.o
 zeta-zeros:	zeta-zeros.o $(MPLIB)
 
-# library objects
-db-cache.o: db-cache.h
-mp-binomial.o: mp-binomial.h mp-cache.h mp-complex.h mp-misc.h mp-trig.h
-mp-cache.o: mp-cache.h mp-complex.h
-mp-consts.o: mp-consts.h mp-binomial.h mp-complex.h mp-trig.h mp-zeta.h
-mp-gamma.o: mp-gamma.h mp-binomial.h mp-complex.h mp-consts.h mp-misc.h mp-trig.h mp-zeta.h
-mp-gkw.o: mp-gkw.h
-mp-hyper.o: mp-hyper.h mp-complex.h mp-misc.h
-mp-misc.o: mp-misc.h mp-complex.h
-mp-polylog.o: mp-polylog.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-gamma.h mp-misc.h mp-trig.h mp-zeta.h
-mp-quest.o: mp-quest.h
-mp-trig.o: mp-trig.h mp-binomial.h mp-cache.h mp-complex.h mp-misc.h
-mp-zeta.o: mp-zeta.h db-cache.h mp-binomial.h mp-cache.h mp-complex.h mp-consts.h mp-trig.h
 
 # binaries
-bernoulli.o: mp-complex.h mp-polylog.h mp-misc.h
-bs.o: mp-zeta.h mp-misc.h
-bsubn.o: mp-zeta.h mp-binomial.h
-cache-fill.o: db-cache.h mp-zeta.h mp-misc.h
-count-prime.o: mp-quest.h
-db-merge.o: db-cache.h mp-misc.h
-dsubn.o: mp-zeta.h mp-binomial.h mp-misc.h
-exact.o: mp-complex.h mp-misc.h mp-polylog.h
-gkw-diag.o: mp-gkw.h
-hurwitz.o: mp-complex.h mp-misc.h
-hurwitz-euler.o: mp-complex.h mp-misc.h mp-trig.h
-mp_zeta_test.o: mp-zeta.h mp-binomial.h mp-complex.h mp-consts.h mp-gamma.h mp-misc.h mp-polylog.h mp-trig.h
-picturez.o: mp-zeta.h
-qint.o: mp-quest.h
-sho.o: mp-complex.h mp-hyper.h mp-trig.h
-stieltjes.o: mp-zeta.h mp-binomial.h mp-misc.h
+bernoulli.o: $(ANANT)/mp-complex.h $(ANANT)/mp-polylog.h $(ANANT)/mp-misc.h
+bs.o: $(ANANT)/mp-zeta.h $(ANANT)/mp-misc.h
+bsubn.o: $(ANANT)/mp-zeta.h $(ANANT)/mp-binomial.h
+cache-fill.o: $(ANANT)/db-cache.h $(ANANT)/mp-zeta.h $(ANANT)/mp-misc.h
+count-prime.o: $(ANANT)/mp-quest.h
+db-merge.o: $(ANANT)/db-cache.h $(ANANT)/mp-misc.h
+dsubn.o: $(ANANT)/mp-zeta.h $(ANANT)/mp-binomial.h $(ANANT)/mp-misc.h
+exact.o: $(ANANT)/mp-complex.h $(ANANT)/mp-misc.h $(ANANT)/mp-polylog.h
+gkw-diag.o: $(ANANT)/mp-gkw.h
+hurwitz.o: $(ANANT)/mp-complex.h $(ANANT)/mp-misc.h
+hurwitz-euler.o: $(ANANT)/mp-complex.h $(ANANT)/mp-misc.h $(ANANT)/mp-trig.h
+mp_zeta_test.o: $(ANANT)/mp-zeta.h $(ANANT)/mp-binomial.h $(ANANT)/mp-complex.h $(ANANT)/mp-consts.h $(ANANT)/mp-gamma.h $(ANANT)/mp-misc.h $(ANANT)/mp-polylog.h $(ANANT)/mp-trig.h
+picturez.o: $(ANANT)/mp-zeta.h
+qint.o: $(ANANT)/mp-quest.h
+sho.o: $(ANANT)/mp-complex.h $(ANANT)/mp-hyper.h $(ANANT)/mp-trig.h
+stieltjes.o: $(ANANT)/mp-zeta.h $(ANANT)/mp-binomial.h $(ANANT)/mp-misc.h
 
 bs:	bs.o $(MPLIB)
 	$(CC) -o bs $^ -lgmp -lgsl -lgslcblas -ldb -lm -lc
@@ -91,9 +78,6 @@ minima: minima.o
 mp_zeta_test:	mp_zeta_test.o $(MPLIB)
 	$(CC) -o mp_zeta_test $^ -lgmp -lgsl -lgslcblas -ldb -lm -lc
 
-$(MPLIB): $(MPOBJS)
-	ar cru $(MPLIB) $^
-
 clean:
 	rm -f core tmp junk glop a.out *.o
 
@@ -104,7 +88,7 @@ dist:
 	tar -zcvf mp.tgz *.c *.h *.gplot *.txt bzero.dat Makefile .cvsignore
 
 .c.o:
-	$(CC) -c -g -O2 -Wall $<
+	$(CC) -c -g -O2 -Wall $< -I $(ANANT)
 
 .o:
-	$(CC) -g -o $* $^ $(MPLIB) -lgmp -ldb -lm
+	$(CC) -g -o $* $^ -lgmp -ldb -lm

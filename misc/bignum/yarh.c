@@ -146,7 +146,7 @@ void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 
 /* ---------------------------------------------- */
 
-void descent (cpx_t loc, 
+// void descent (cpx_t loc, 
 
 int main (int argc, char * argv[])
 {
