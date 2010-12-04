@@ -103,7 +103,7 @@ void test_parabola(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 {
 	int i;
-#define TESTING
+// #define TESTING
 #ifdef TESTING
 test_parabola(y,nsteps,s,nprec);
 return;
@@ -212,9 +212,9 @@ void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
 }
 
 /* =============================================== */
-/* Powell's method, approximaely. */
+/* Powell's method, slightly adapted. */
 
-void find_zero(int nsteps, int prec)
+void find_zero(cpx_t result, int nsteps, int prec)
 {
 	mpf_t zero, epsi;
 	mpf_init (zero);
@@ -253,7 +253,7 @@ void find_zero(int nsteps, int prec)
 
 	mpf_set_ui (lam0, 0);
 	mpf_set_ui (lam1, 1);
-	mpf_set_ui (lam2, 2);
+	mpf_neg (lam2, lam1);
 
 	/* Initial guess */
 	cpx_set_d (s0, 0.5, 18.3);
@@ -263,14 +263,14 @@ void find_zero(int nsteps, int prec)
 	cpx_set_d (nb, 0.0, 0.1);
 
 	int i;
-	for (i=0; i<20; i++)
+	for (i=0; i<80; i++)
 	{
 		int done1 = 0;
 		int done2 = 0;
 
 		/* Three colinear points to start with */
 		cpx_add(s1, s0, na);
-		cpx_add(s2, s1, na);
+		cpx_sub(s2, s0, na);
 		
 		integral (y0, nsteps, s0, prec);
 		integral (y1, nsteps, s1, prec);
@@ -289,6 +289,7 @@ void find_zero(int nsteps, int prec)
 		{
 			cpx_times_mpf (na, na, loc);
 			cpx_add (sa, s0, na);
+			cpx_times_d (na, na, 0.5);
 		}
 		else
 		{
@@ -298,7 +299,7 @@ void find_zero(int nsteps, int prec)
 
 		/* Repeat for direction b */
 		cpx_add(s1, sa, nb);
-		cpx_add(s2, s1, nb);
+		cpx_sub(s2, sa, nb);
 		
 		integral (y0, nsteps, sa, prec);
 		integral (y1, nsteps, s1, prec);
@@ -318,6 +319,7 @@ void find_zero(int nsteps, int prec)
 		{
 			cpx_times_mpf (nb, nb, loc);
 			cpx_add (sb, sa, nb);
+			cpx_times_d (nb, nb, 0.5);
 		}
 		else
 		{
@@ -326,15 +328,18 @@ void find_zero(int nsteps, int prec)
 		}
 
 		/* Shuffle down */
+		/* Powells' algo says shuffle, but we won't do that. */
 		// cpx_set(na, nb);
 		// cpx_sub(nb, sb, s0);
 		cpx_set(s0, sb);
 
+#if 1
 printf("\n%d\n", i);
 cpx_prt("s0 = ", s0); printf("\n");
 cpx_prt("na = ", na); printf("\n");
 cpx_prt("nb = ", nb); printf("\n");
 fp_prt("min= ", f0); printf("\n");
+#endif
 
 		if (done1 && done2) break;
 	}
@@ -383,7 +388,11 @@ int main (int argc, char * argv[])
    nbits = 3.3*prec + 10;
    mpf_set_default_prec (nbits);
 
-	find_zero(nsteps, prec);
+	cpx_t zero;
+	cpx_init(zero);
+	find_zero(zero, nsteps, prec);
+cpx_prt("found zero ", zero); printf("\n");
+	cpx_clear(zero);
 
 #if WALK_THE_LINE
 	printf ("#\n# decimal precision = %d\n", prec);
