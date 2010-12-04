@@ -103,7 +103,8 @@ void test_parabola(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 {
 	int i;
-#if TESTING
+#define TESTING
+#ifdef TESTING
 test_parabola(y,nsteps,s,nprec);
 return;
 #endif
@@ -314,7 +315,7 @@ cpx_prt("yc = ", yc); printf("\n");
 
 	/* This loop finds zero, adding one bit of accuracy
 	 * per loop iteration. */
-	for (i=0; i<80; i++)
+	for (i=0; i<20; i++)
 	{
 		/* First, do the imaginary */
 		quad_min (ioc, sa[0].im, sb[0].im, sc[0].im,
@@ -330,9 +331,10 @@ cpx_prt("yc = ", yc); printf("\n");
 		{
 			/* fd is a worse estimate than the previous three.
 			 * Discard, try again.  */
-			printf("bad guess! Subdividing!\n");
-			cpx_add(sd, sa, sb);
+			printf("bad guess! Walking!\n");
+			cpx_sub(sd, sa, sb);
 			cpx_div_ui(sd, sd, 2);
+			cpx_add(sd, sd, sa);
 
 			integral (yd, nsteps, sd, prec);
 			cpx_abs(fd, yd);
@@ -370,9 +372,10 @@ cpx_prt("yc = ", yc); printf("\n");
 		{
 			/* fd is a worse estimate than the previous three.
 			 * Discard, try again.  */
-			printf("bad guess! Subdividing!\n");
-			cpx_add(sd, sa, sb);
+			printf("bad guess! Walking!\n");
+			cpx_sub(sd, sa, sb);
 			cpx_div_ui(sd, sd, 2);
+			cpx_add(sd, sd, sa);
 
 			integral (yd, nsteps, sd, prec);
 			cpx_abs(fd, yd);
