@@ -251,6 +251,10 @@ void find_zero(int nsteps, int prec)
 	mpf_init (lam1);
 	mpf_init (lam2);
 
+	mpf_set_ui (lam0, 0);
+	mpf_set_ui (lam1, 1);
+	mpf_set_ui (lam2, 2);
+
 	/* Initial guess */
 	cpx_set_d (s0, 0.5, 18.3);
 
@@ -261,21 +265,20 @@ void find_zero(int nsteps, int prec)
 	int i;
 	for (i=0; i<20; i++)
 	{
+		int done1 = 0;
+		int done2 = 0;
+
 		/* Three colinear points to start with */
 		cpx_add(s1, s0, na);
 		cpx_add(s2, s1, na);
 		
 		integral (y0, nsteps, s0, prec);
-		integral (y1, nsteps, sa, prec);
+		integral (y1, nsteps, s1, prec);
 		integral (y2, nsteps, s2, prec);
 
 		cpx_abs(f0, y0);
 		cpx_abs(f1, y1);
 		cpx_abs(f2, y2);
-
-		mpf_set_ui (lam0, 0);
-		mpf_set_ui (lam1, 1);
-		mpf_set_ui (lam2, 2);
 
 		/* loc provides new minimum, along direction a */
 		quad_min (loc, lam0, lam1, lam2, f0, f1, f2);
@@ -286,6 +289,11 @@ void find_zero(int nsteps, int prec)
 		{
 			cpx_times_mpf (na, na, loc);
 			cpx_add (sa, s0, na);
+		}
+		else
+		{
+			cpx_set(sa, s0);
+			done1 = 1;
 		}
 
 		/* Repeat for direction b */
@@ -300,10 +308,6 @@ void find_zero(int nsteps, int prec)
 		cpx_abs(f1, y1);
 		cpx_abs(f2, y2);
 
-		mpf_set_ui (lam0, 0);
-		mpf_set_ui (lam1, 1);
-		mpf_set_ui (lam2, 2);
-
 		/* loc provides new minimum, along direction a */
 		quad_min (loc, lam0, lam1, lam2, f0, f1, f2);
 
@@ -314,6 +318,11 @@ void find_zero(int nsteps, int prec)
 		{
 			cpx_times_mpf (nb, nb, loc);
 			cpx_add (sb, sa, nb);
+		}
+		else
+		{
+			cpx_set(sb, sa);
+			done2 = 1;
 		}
 
 		/* Shuffle down */
@@ -326,6 +335,8 @@ cpx_prt("s0 = ", s0); printf("\n");
 cpx_prt("na = ", na); printf("\n");
 cpx_prt("nb = ", nb); printf("\n");
 fp_prt("min= ", f0); printf("\n");
+
+		if (done1 && done2) break;
 	}
 
 	cpx_clear (s0);
