@@ -459,6 +459,18 @@ fp_prt("min= ", f0); printf("\n");
 	mpf_clear (epsi);
 }
 
+/* ========================================================= */
+/*
+	Some results: swap of 1 and 2:
+	./yarh 25 1531
+	zero 0.696479836439589431464906618951e0 + i 0.183240540083577098410532731315e2
+	./yarh 25 15031
+	zero 0.51729527573167281533628392587e0 + i 0.182803464555318878444827833551e2
+	./yarh 25 151031 
+
+
+*/
+
 int main (int argc, char * argv[])
 {
 	unsigned int nsteps;
@@ -474,13 +486,15 @@ int main (int argc, char * argv[])
 	nsteps = atoi(argv[2]);
 
    /* Set the precision (number of binary bits) */
-   nbits = 3.3*prec + 10;
+   nbits = 3.3*(prec + 8);
    mpf_set_default_prec (nbits);
 
 	cpx_t zero;
 	cpx_init(zero);
 	find_zero(zero, nsteps, prec);
-cpx_prt("found zero ", zero); printf("\n");
+
+	printf ("# num steps = %d prec=%d\n", nsteps, prec);
+	cpx_prt("# zero ", zero); printf("\n");
 	cpx_clear(zero);
 
 #if WALK_THE_LINE
