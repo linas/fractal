@@ -149,6 +149,8 @@ void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 /*
  * Find bottom of parabola.  Given three points,
  * fit a parabola to that, then find the minimum.
+ * 
+ * return the bottom in "loc"
  */
 void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
               mpf_t fa, mpf_t fb, mpf_t fc)
@@ -193,11 +195,61 @@ void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
 	mpf_clear (numer);
 }
 
+void find_zero(int nsteps, int prec)
+{
+	mpf_t fa, fb, fc;
+	cpx_t sa, sb, sc;
+	cpx_t ya, yb, yc;
+
+	mpf_init (fa);
+	mpf_init (fb);
+	mpf_init (fc);
+
+	cpx_init (sa);
+	cpx_init (sb);
+	cpx_init (sc);
+
+	cpx_init (ya);
+	cpx_init (yb);
+	cpx_init (yc);
+
+	cpx_set_d (sa, 0.5, 18.1);
+	cpx_set_d (sb, 0.5, 18.2);
+	cpx_set_d (sc, 0.5, 18.3);
+
+	integral (ya, nsteps, sa, prec);
+	integral (yb, nsteps, sb, prec);
+	integral (yc, nsteps, sc, prec);
+
+	cpx_abs(fa, ya);
+	cpx_abs(fb, yb);
+	cpx_abs(fc, yc);
+
+	mpf_t loc;
+	mpf_init (loc);
+	quad_min (loc, sa[0].im, sb[0].im, sc[0].im,
+              fa, fb, fc);
+
+	double re = mpf_get_d(loc);
+	printf ("duude found %g\n", re);
+
+	cpx_clear (sa);
+	cpx_clear (sb);
+	cpx_clear (sc);
+
+	cpx_clear (ya);
+	cpx_clear (yb);
+	cpx_clear (yc);
+
+	mpf_clear (fa);
+	mpf_clear (fb);
+	mpf_clear (fc);
+}
+
 int main (int argc, char * argv[])
 {
 	unsigned int nsteps;
 	int prec, nbits;
-	cpx_t y, s;
 
 	if (argc < 3)
 	{
@@ -208,13 +260,17 @@ int main (int argc, char * argv[])
 	prec = atoi(argv[1]);
 	nsteps = atoi(argv[2]);
 
+   /* Set the precision (number of binary bits) */
+   nbits = 3.3*prec + 10;
+   mpf_set_default_prec (nbits);
+
+	find_zero(nsteps, prec);
+
+#if WALK_THE_LINE
 	printf ("#\n# decimal precision = %d\n", prec);
 	printf ("#\n# num steps = %d\n#\n", nsteps);
 
-   /* Set the precision (number of binary bits) */
-   nbits = 3.3*prec + 30;
-   mpf_set_default_prec (nbits);
-
+	cpx_t y, s;
 	cpx_init(y);
 	cpx_init(s);
 
@@ -233,6 +289,7 @@ int main (int argc, char * argv[])
 		t += 0.1;
 		i++;
 	}
+#endif
 
 	return 0;
 }
