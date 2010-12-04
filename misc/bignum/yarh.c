@@ -198,13 +198,16 @@ void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
 void find_zero(int nsteps, int prec)
 {
 	mpf_t fa, fb, fc;
-	cpx_t sa, sb, sc;
-	cpx_t ya, yb, yc;
-
 	mpf_init (fa);
 	mpf_init (fb);
 	mpf_init (fc);
 
+	mpf_t db, dc;
+	mpf_init (db);
+	mpf_init (dc);
+
+	cpx_t sa, sb, sc;
+	cpx_t ya, yb, yc;
 	cpx_init (sa);
 	cpx_init (sb);
 	cpx_init (sc);
@@ -213,9 +216,10 @@ void find_zero(int nsteps, int prec)
 	cpx_init (yb);
 	cpx_init (yc);
 
-	cpx_set_d (sa, 0.5, 18.1);
-	cpx_set_d (sb, 0.5, 18.2);
-	cpx_set_d (sc, 0.5, 18.3);
+	/* Initial guess */
+	cpx_set_d (sa, 0.49, 18.4);
+	cpx_set_d (sb, 0.5, 18.3);
+	cpx_set_d (sc, 0.51, 18.2);
 
 	integral (ya, nsteps, sa, prec);
 	integral (yb, nsteps, sb, prec);
@@ -227,11 +231,68 @@ void find_zero(int nsteps, int prec)
 
 	mpf_t loc;
 	mpf_init (loc);
-	quad_min (loc, sa[0].im, sb[0].im, sc[0].im,
-              fa, fb, fc);
 
-	double re = mpf_get_d(loc);
-	printf ("duude found %g\n", re);
+	int i;
+	for (i=0; i<3; i++)
+	{
+		/* First, do the imaginary */
+		quad_min (loc, sa[0].im, sb[0].im, sc[0].im,
+              	fa, fb, fc);
+
+		double dloc = mpf_get_d(loc);
+		printf ("duude found im %g\n", dloc);
+	
+		mpf_sub(db, loc, sb[0].im);
+		mpf_sub(dc, loc, sc[0].im);
+		mpf_abs (db, db);
+		mpf_abs (dc, dc);
+
+		double ddb = mpf_get_d(db);
+		double ddc = mpf_get_d(dc);
+printf("duuude b=%g c=%g\n", ddb, ddc);
+
+		if (0 < mpf_cmp(db, dc))
+		{
+			printf("duude farther from b\n");
+			cpx_set(sb, sa);
+		}
+		else
+		{
+			printf("duude farther from c\n");
+			cpx_set(sc, sa);
+		}
+
+		mpf_set(sa[0].im, loc);
+
+		/* Next the real */
+		quad_min (loc, sa[0].re, sb[0].re, sc[0].re,
+              	fa, fb, fc);
+
+		dloc = mpf_get_d(loc);
+		printf ("duude found re %g\n", dloc);
+	
+		mpf_sub(db, loc, sb[0].re);
+		mpf_sub(dc, loc, sc[0].re);
+		mpf_abs (db, db);
+		mpf_abs (dc, dc);
+
+	ddb = mpf_get_d(db);
+	ddc = mpf_get_d(dc);
+printf("duuude re b=%g c=%g\n", ddb, ddc);
+
+		if (0 < mpf_cmp(db, dc))
+		{
+			printf("duude farther from b\n");
+			cpx_set(sb, sa);
+		}
+		else
+		{
+			printf("duude farther from c\n");
+			cpx_set(sc, sa);
+		}
+
+		mpf_set(sa[0].re, loc);
+	}
 
 	cpx_clear (sa);
 	cpx_clear (sb);
@@ -244,6 +305,10 @@ void find_zero(int nsteps, int prec)
 	mpf_clear (fa);
 	mpf_clear (fb);
 	mpf_clear (fc);
+
+	mpf_clear (db);
+	mpf_clear (dc);
+	mpf_clear (loc);
 }
 
 int main (int argc, char * argv[])
