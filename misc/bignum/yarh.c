@@ -262,7 +262,7 @@ void interp(mpf_t yoc, mpf_t xoc, mpf_t a, mpf_t b, mpf_t ya, mpf_t yb)
 	}
 
 /* Crude zero-finder */
-void find_zero(int nsteps, int prec)
+void find_zero_borken(int nsteps, int prec)
 {
 	mpf_t fa, fb, fc, fd, fe;
 	mpf_init (fa);
@@ -332,7 +332,7 @@ cpx_prt("yc = ", yc); printf("\n");
 			/* fd is a worse estimate than the previous three.
 			 * Discard, try again.  */
 			printf("bad guess! Walking!\n");
-			cpx_sub(sd, sa, sb);
+			cpx_sub(sd, sa, sc);
 			cpx_div_ui(sd, sd, 2);
 			cpx_add(sd, sd, sa);
 
@@ -373,7 +373,7 @@ cpx_prt("yc = ", yc); printf("\n");
 			/* fd is a worse estimate than the previous three.
 			 * Discard, try again.  */
 			printf("bad guess! Walking!\n");
-			cpx_sub(sd, sa, sb);
+			cpx_sub(sd, sa, sc);
 			cpx_div_ui(sd, sd, 2);
 			cpx_add(sd, sd, sa);
 
@@ -426,6 +426,120 @@ cpx_prt("yc = ", yc); printf("\n");
 
 	mpf_clear (ioc);
 	mpf_clear (roc);
+}
+
+void find_zero(int nsteps, int prec)
+{
+	cpx_t s0, s1, s2, sa, sb;
+	cpx_init (s0);
+	cpx_init (s1);
+	cpx_init (s2);
+	cpx_init (sa);
+	cpx_init (sb);
+
+	cpx_t na, nb;
+	cpx_init (na);
+	cpx_init (nb);
+
+	cpx_t y0, y1, y2;
+	cpx_init (y0);
+	cpx_init (y1);
+	cpx_init (y2);
+
+	mpf_t f0, fa, faa;
+	mpf_init (f0);
+	mpf_init (fa);
+	mpf_init (faa);
+
+	mpf_t loc, lam0, lam1, lam2;
+	mpf_init (loc);
+	mpf_init (lam0);
+	mpf_init (lam1);
+	mpf_init (lam2);
+
+	/* Initial guess */
+	cpx_set_d (s0, 0.5, 18.3);
+
+	/* Initial directions */
+	cpx_set_d (na, 0.05, 0.0);
+	cpx_set_d (nb, 0.0, 0.1);
+
+	int i;
+	for (i=0; i<20; i++)
+	{
+		/* Three colinear points to start with */
+		cpx_add(s1, s0, na);
+		cpx_add(s2, s1, na);
+		
+		integral (y0, nsteps, s0, prec);
+		integral (y1, nsteps, sa, prec);
+		integral (y2, nsteps, s2, prec);
+
+		cpx_abs(f0, y0);
+		cpx_abs(fa, ya);
+		cpx_abs(faa, yaa);
+
+		mpf_set_ui (lam0, 0);
+		mpf_set_ui (lam1, 1);
+		mpf_set_ui (lam2, 2);
+
+		/* loc provides new minimum, along direction a */
+		quad_min (loc, lam0, lam1, lam2, f0, fa, faa);
+
+		/* Move to that location */
+		cpx_mul_mpf (na, na, loc);
+		cpx_add (sa, s0, na);
+
+		/* Repeat for direction b */
+		cpx_add(sb, sa, nb);
+		cpx_add(sbb, sb, nb);
+		
+		integral (ya, nsteps, sa, prec);
+		integral (yb, nsteps, sb, prec);
+		integral (ybb, nsteps, sbb, prec);
+
+		cpx_abs(fa, ya);
+		cpx_abs(fb, yb);
+		cpx_abs(fbb, ybb);
+
+		mpf_set_ui (lam0, 0);
+		mpf_set_ui (lam1, 1);
+		mpf_set_ui (lam2, 2);
+
+		/* loc provides new minimum, along direction a */
+		quad_min (loc, lam0, lam1, lam2, fa, fb, fbb);
+
+		/* Move to that location */
+		cpx_mul_mpf (nb, nb, loc);
+		cpx_add (sb, sa, nb);
+
+		/* Shuffle down */
+		cpx_set(na, nb);
+		cpx_sub(nb, sb, s0);
+		cpx_set(s0, sb);
+	}
+
+	cpx_clear (s0);
+	cpx_clear (s1);
+	cpx_clear (s2);
+	cpx_init (sa);
+	cpx_clear (sb);
+
+	cpx_clear (na);
+	cpx_clear (nb);
+
+	cpx_clear (y0);
+	cpx_clear (y1);
+	cpx_clear (y2);
+
+	mpf_clear (f0);
+	mpf_clear (fa);
+	mpf_clear (faa);
+
+	mpf_init (loc);
+	mpf_init (lam0);
+	mpf_init (lam1);
+	mpf_init (lam2);
 }
 
 int main (int argc, char * argv[])
