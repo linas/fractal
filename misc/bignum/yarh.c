@@ -212,7 +212,15 @@ void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
 }
 
 /* =============================================== */
-/* Powell's method, slightly adapted. */
+/**
+ *  Powell's method, slightly adapted. 
+ *
+ * The core problem here is that the summation is so incredily
+ * noisy, that the function is never really a quadratic form
+ * even at the zero. Thus, we never really get quadratic convergence,
+ * and the more typical performance seems to be about 2 bits 
+ * of accuracy per iteration.
+ */
 
 void find_zero(cpx_t result, int nsteps, int prec)
 {
@@ -268,7 +276,7 @@ void find_zero(cpx_t result, int nsteps, int prec)
 
 	/* Iterate */
 	int i;
-	for (i=0; i<80; i++)
+	for (i=0; i<8000; i++)
 	{
 		int done1 = 0;
 		int done2 = 0;
@@ -333,7 +341,7 @@ void find_zero(cpx_t result, int nsteps, int prec)
 					/* ... But f2 is better */
 					cpx_set (sa, s2);
 				}
-				cpx_times_d (na, na, 0.5);
+				cpx_times_d (na, na, 1.618);
 			}
 		}
 
@@ -397,7 +405,7 @@ void find_zero(cpx_t result, int nsteps, int prec)
 					/* ... But f2 is better */
 					cpx_set (sb, s2);
 				}
-				cpx_times_d (nb, nb, 0.5);
+				cpx_times_d (nb, nb, 1.618);
 			}
 		}
 
@@ -417,6 +425,9 @@ fp_prt("min= ", f0); printf("\n");
 
 		if (done1 && done2) break;
 	}
+
+	/* The returned value */
+	cpx_set(result, s0);
 
 	cpx_clear (s0);
 	cpx_clear (s1);
