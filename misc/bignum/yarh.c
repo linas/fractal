@@ -428,8 +428,19 @@ cpx_prt("yc = ", yc); printf("\n");
 	mpf_clear (roc);
 }
 
+/* =============================================== */
+/* Powell's method, approximaely. */
+
 void find_zero(int nsteps, int prec)
 {
+	mpf_t zero, epsi;
+	mpf_init (zero);
+	mpf_init (epsi);
+
+	/* compute tolerance */
+	mpf_set_ui(epsi, 1);
+	mpf_div_2exp(epsi, epsi, (int)(3.3*prec));
+
 	cpx_t s0, s1, s2, sa, sb;
 	cpx_init (s0);
 	cpx_init (s1);
@@ -446,10 +457,10 @@ void find_zero(int nsteps, int prec)
 	cpx_init (y1);
 	cpx_init (y2);
 
-	mpf_t f0, fa, faa;
+	mpf_t f0, f1, f2;
 	mpf_init (f0);
-	mpf_init (fa);
-	mpf_init (faa);
+	mpf_init (f1);
+	mpf_init (f2);
 
 	mpf_t loc, lam0, lam1, lam2;
 	mpf_init (loc);
@@ -476,53 +487,67 @@ void find_zero(int nsteps, int prec)
 		integral (y2, nsteps, s2, prec);
 
 		cpx_abs(f0, y0);
-		cpx_abs(fa, ya);
-		cpx_abs(faa, yaa);
+		cpx_abs(f1, y1);
+		cpx_abs(f2, y2);
 
 		mpf_set_ui (lam0, 0);
 		mpf_set_ui (lam1, 1);
 		mpf_set_ui (lam2, 2);
 
 		/* loc provides new minimum, along direction a */
-		quad_min (loc, lam0, lam1, lam2, f0, fa, faa);
+		quad_min (loc, lam0, lam1, lam2, f0, f1, f2);
 
 		/* Move to that location */
-		cpx_mul_mpf (na, na, loc);
-		cpx_add (sa, s0, na);
+		mpf_abs (zero, loc);
+		if (0 < mpf_cmp(zero, epsi))
+		{
+			cpx_times_mpf (na, na, loc);
+			cpx_add (sa, s0, na);
+		}
 
 		/* Repeat for direction b */
-		cpx_add(sb, sa, nb);
-		cpx_add(sbb, sb, nb);
+		cpx_add(s1, sa, nb);
+		cpx_add(s2, s1, nb);
 		
-		integral (ya, nsteps, sa, prec);
-		integral (yb, nsteps, sb, prec);
-		integral (ybb, nsteps, sbb, prec);
+		integral (y0, nsteps, sa, prec);
+		integral (y1, nsteps, s1, prec);
+		integral (y2, nsteps, s2, prec);
 
-		cpx_abs(fa, ya);
-		cpx_abs(fb, yb);
-		cpx_abs(fbb, ybb);
+		cpx_abs(f0, y0);
+		cpx_abs(f1, y1);
+		cpx_abs(f2, y2);
 
 		mpf_set_ui (lam0, 0);
 		mpf_set_ui (lam1, 1);
 		mpf_set_ui (lam2, 2);
 
 		/* loc provides new minimum, along direction a */
-		quad_min (loc, lam0, lam1, lam2, fa, fb, fbb);
+		quad_min (loc, lam0, lam1, lam2, f0, f1, f2);
 
 		/* Move to that location */
-		cpx_mul_mpf (nb, nb, loc);
-		cpx_add (sb, sa, nb);
+		/* Move to that location */
+		mpf_abs (zero, loc);
+		if (0 < mpf_cmp(zero, epsi))
+		{
+			cpx_times_mpf (nb, nb, loc);
+			cpx_add (sb, sa, nb);
+		}
 
 		/* Shuffle down */
-		cpx_set(na, nb);
-		cpx_sub(nb, sb, s0);
+		// cpx_set(na, nb);
+		// cpx_sub(nb, sb, s0);
 		cpx_set(s0, sb);
+
+printf("\n%d\n", i);
+cpx_prt("s0 = ", s0); printf("\n");
+cpx_prt("na = ", na); printf("\n");
+cpx_prt("nb = ", nb); printf("\n");
 	}
 
 	cpx_clear (s0);
 	cpx_clear (s1);
 	cpx_clear (s2);
-	cpx_init (sa);
+	cpx_clear (sa);
 	cpx_clear (sb);
 
 	cpx_clear (na);
@@ -533,13 +558,16 @@ void find_zero(int nsteps, int prec)
 	cpx_clear (y2);
 
 	mpf_clear (f0);
-	mpf_clear (fa);
-	mpf_clear (faa);
+	mpf_clear (f1);
+	mpf_clear (f2);
 
-	mpf_init (loc);
-	mpf_init (lam0);
-	mpf_init (lam1);
-	mpf_init (lam2);
+	mpf_clear (loc);
+	mpf_clear (lam0);
+	mpf_clear (lam1);
+	mpf_clear (lam2);
+
+	mpf_clear (zero);
+	mpf_clear (epsi);
 }
 
 int main (int argc, char * argv[])
