@@ -15,37 +15,37 @@ EXES= bernoulli bound bs bsubn cache-fill cont_frac \
 
 MPLIB=anant/libanant.a
 
-all:  $(MPLIB) $(EXES)
-	cd anant
-	make
+all: $(EXES)
 
-bernoulli:	bernoulli.o $(MPLIB)
+$(EXES): $(MPLIB)
+
+bernoulli:	bernoulli.o
 bound:	bound.o
-cache-fill:	cache-fill.o $(MPLIB)
-count-prime:	count-prime.o $(MPLIB)
-db-merge:	db-merge.o $(MPLIB)
-db-prt:	db-prt.o $(MPLIB)
+cache-fill:	cache-fill.o
+count-prime:	count-prime.o
+db-merge:	db-merge.o
+db-prt:	db-prt.o
 cont_frac:	cont_frac.o
-dsubn:	dsubn.o $(MPLIB)
-entropy:	entropy.o $(MPLIB)
-exact:	exact.o $(MPLIB)
-gkw-diag:	gkw-diag.o $(MPLIB)
-hurwitz:	hurwitz.o $(MPLIB)
-hurwitz-euler:	hurwitz-euler.o $(MPLIB)
-misc-test:	misc-test.o $(MPLIB)
-mp_quest_test:	mp_quest_test.o $(MPLIB)
-mp_zeta_test:	mp_zeta_test.o $(MPLIB)
-picturez:	picturez.o $(MPLIB)
-poly-perf:	poly-perf.o $(MPLIB)
-qint:	qint.o $(MPLIB)
-sawtooth:	sawtooth.o $(MPLIB)
-sho:	sho.o $(MPLIB)
-stieltjes:	stieltjes.o $(MPLIB)
+dsubn:	dsubn.o
+entropy:	entropy.o
+exact:	exact.o
+gkw-diag:	gkw-diag.o
+hurwitz:	hurwitz.o
+hurwitz-euler:	hurwitz-euler.o
+misc-test:	misc-test.o
+mp_quest_test:	mp_quest_test.o
+mp_zeta_test:	mp_zeta_test.o
+picturez:	picturez.o
+poly-perf:	poly-perf.o
+qint:	qint.o
+sawtooth:	sawtooth.o
+sho:	sho.o
+stieltjes:	stieltjes.o
 trunc:	trunc.o
-walsh:	walsh.o $(MPLIB)
-yarh:	yarh.o $(MPLIB)
+walsh:	walsh.o
+yarh:	yarh.o
 zero-cross:	zero-cross.o
-zeta-zeros:	zeta-zeros.o $(MPLIB)
+zeta-zeros:	zeta-zeros.o
 
 
 # binaries
@@ -91,4 +91,4 @@ dist:
 	$(CC) -c -g -O2 -Wall $< -I $(ANANT)
 
 .o:
-	$(CC) -g -o $* $^ -lgmp -ldb -lm
+	$(CC) -g -o $* $^ -Lanant -lanant -lgmp -ldb -lm
