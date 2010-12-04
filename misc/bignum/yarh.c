@@ -103,8 +103,10 @@ void test_parabola(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 {
 	int i;
+#if TESTING
 test_parabola(y,nsteps,s,nprec);
 return;
+#endif
 
 	mpf_t step, x;
 	cpx_t term, ess, essm1;
@@ -257,9 +259,11 @@ void find_zero(int nsteps, int prec)
 	cpx_abs(fb, yb);
 	cpx_abs(fc, yc);
 
+#if 0
 cpx_prt("ya = ", ya); printf("\n");
 cpx_prt("yb = ", yb); printf("\n");
 cpx_prt("yc = ", yc); printf("\n");
+#endif
 
 	mpf_t ioc, roc;
 	mpf_init (ioc);
@@ -269,7 +273,7 @@ cpx_prt("yc = ", yc); printf("\n");
 
 	/* This loop finds zero, adding one bit of accuracy
 	 * per loop iteration. */
-	for (i=0; i<20; i++)
+	for (i=0; i<80; i++)
 	{
 		/* First, do the imaginary */
 		quad_min (ioc, sa[0].im, sb[0].im, sc[0].im,
@@ -281,14 +285,14 @@ cpx_prt("yc = ", yc); printf("\n");
 		/* Throw away the farther point */
 		if (0 < mpf_cmp(fb, fc))
 		{
-			printf("duude b biggest\n");
+			// printf("duude b biggest\n");
 			cpx_set(sb, sa);
 			cpx_set(yb, ya);
 			mpf_set(fb, fa);
 		}
 		else
 		{
-			printf("duude c biggest\n");
+			// printf("duude c biggest\n");
 			cpx_set(sc, sa);
 			cpx_set(yc, ya);
 			mpf_set(fc, fa);
@@ -297,11 +301,6 @@ cpx_prt("yc = ", yc); printf("\n");
 		cpx_set_mpf(sa, roc, ioc);
 		integral (ya, nsteps, sa, prec);
 		cpx_abs(fa, ya);
-#if 0
-cpx_prt("new ya = ", ya); printf("\n");
-cpx_prt("new yb = ", yb); printf("\n");
-cpx_prt("new yc = ", yc); printf("\n");
-#endif
 
 		/* Next the real */
 		quad_min (roc, sa[0].re, sb[0].re, sc[0].re,
@@ -332,7 +331,7 @@ cpx_prt("new yc = ", yc); printf("\n");
 
 		cpx_abs(roc, ya);
 		double mini = mpf_get_d(roc);
-		printf("%d location= %g +i %g  min=%g\n", 
+		printf("%d location= %15.12g +i %15.12g  min=%g\n", 
 			i, zero_re, zero_im, mini);
 	}
 
