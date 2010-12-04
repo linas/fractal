@@ -19,6 +19,7 @@
 
 #include "mp-complex.h"
 #include "mp-trig.h"
+#include "mp-misc.h"
 
 /**
  * Swap the first and second digits of the continued fraction
@@ -82,6 +83,16 @@ void integrand(cpx_t y, mpf_t x, cpx_t s, int nprec)
 	mpf_clear (perm);
 }
 
+void test_parabola(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
+{
+	cpx_t cent;
+	cpx_init (cent);
+	cpx_set_d(cent, 0.4980812345, 18.313412345);
+	cpx_sub(cent, cent, s);
+	cpx_mul(y, cent, cent);
+	cpx_clear (cent);
+}
+
 /**
  * Compute single integral of the integrand.
  * actually compute 
@@ -92,6 +103,8 @@ void integrand(cpx_t y, mpf_t x, cpx_t s, int nprec)
 void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 {
 	int i;
+test_parabola(y,nsteps,s,nprec);
+return;
 
 	mpf_t step, x;
 	cpx_t term, ess, essm1;
@@ -236,7 +249,7 @@ void find_zero(int nsteps, int prec)
 
 	/* This loop finds zero, adding one bit of accuracy
 	 * per loop iteration. */
-	for (i=0; i<40; i++)
+	for (i=0; i<20; i++)
 	{
 		/* First, do the imaginary */
 		quad_min (loc, sa[0].im, sb[0].im, sc[0].im,
@@ -257,16 +270,19 @@ void find_zero(int nsteps, int prec)
 			// printf("duude farther from b\n");
 			cpx_set(sb, sa);
 			cpx_set(yb, ya);
+			mpf_set(fb, fa);
 		}
 		else
 		{
 			// printf("duude farther from c\n");
 			cpx_set(sc, sa);
 			cpx_set(yc, ya);
+			mpf_set(fc, fa);
 		}
 
 		mpf_set(sa[0].im, loc);
 		integral (ya, nsteps, sa, prec);
+		cpx_abs(fa, ya);
 
 		/* Next the real */
 		quad_min (loc, sa[0].re, sb[0].re, sc[0].re,
@@ -287,16 +303,19 @@ void find_zero(int nsteps, int prec)
 			// printf("duude farther from b\n");
 			cpx_set(sb, sa);
 			cpx_set(yb, ya);
+			mpf_set(fb, fa);
 		}
 		else
 		{
 			// printf("duude farther from c\n");
 			cpx_set(sc, sa);
 			cpx_set(yc, ya);
+			mpf_set(fc, fa);
 		}
 
 		mpf_set(sa[0].re, loc);
 		integral (ya, nsteps, sa, prec);
+		cpx_abs(fa, ya);
 
 		cpx_abs(loc, ya);
 		double mini = mpf_get_d(loc);
