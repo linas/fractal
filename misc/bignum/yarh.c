@@ -279,7 +279,7 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 
 	/* Iterate */
 	int i;
-	for (i=0; i<50; i++)
+	for (i=0; i<100; i++)
 	{
 		int done1 = 0;
 		int done2 = 0;
@@ -354,7 +354,7 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 				if (better)
 					cpx_times_d (na, na, 1.618);
 				else
-					cpx_times_d (na, na, 0.618);
+					cpx_times_d (na, na, 0.5);
 			}
 		}
 
@@ -428,7 +428,7 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 				if (better)
 					cpx_times_d (na, na, 1.618);
 				else
-					cpx_times_d (na, na, 0.618);
+					cpx_times_d (na, na, 0.5);
 			}
 		}
 
