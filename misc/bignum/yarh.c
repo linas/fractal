@@ -144,6 +144,10 @@ void integral(cpx_t y, unsigned int nsteps, cpx_t s, int nprec)
 	cpx_clear (essm1);
 }
 
+/* ---------------------------------------------- */
+
+void descent (cpx_t loc, 
+
 int main (int argc, char * argv[])
 {
 	unsigned int nsteps;
