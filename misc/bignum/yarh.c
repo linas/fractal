@@ -210,6 +210,7 @@ void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
 	mpf_clear (numer);
 }
 
+/* Interpolate x between points a dn b, returning y */
 void interp(mpf_t yoc, mpf_t xoc, mpf_t a, mpf_t b, mpf_t ya, mpf_t yb)
 {
 	mpf_t ba, yba;
@@ -229,27 +230,47 @@ void interp(mpf_t yoc, mpf_t xoc, mpf_t a, mpf_t b, mpf_t ya, mpf_t yb)
 	mpf_clear(yba);
 }
 
+#define SWAP(s,y,f,t,w,g) { \
+	cpx_set(sd, s); \
+	cpx_set(yd, y); \
+	mpf_set(fd, f); \
+	 \
+	cpx_set(s, t); \
+	cpx_set(y, w); \
+	mpf_set(f, g); \
+	 \
+	cpx_set(t, sd); \
+	cpx_set(w, yd); \
+	mpf_set(g, fd); \
+}
+/* Crude zero-finder */
 void find_zero(int nsteps, int prec)
 {
-	mpf_t fa, fb, fc;
+	mpf_t fa, fb, fc, fd, fe;
 	mpf_init (fa);
 	mpf_init (fb);
 	mpf_init (fc);
+	mpf_init (fd);
+	mpf_init (fe);
 
-	cpx_t sa, sb, sc;
-	cpx_t ya, yb, yc;
+	cpx_t sa, sb, sc, sd, se;
+	cpx_t ya, yb, yc, yd, ye;
 	cpx_init (sa);
 	cpx_init (sb);
 	cpx_init (sc);
+	cpx_init (sd);
+	cpx_init (se);
 
 	cpx_init (ya);
 	cpx_init (yb);
 	cpx_init (yc);
+	cpx_init (yd);
+	cpx_init (ye);
 
 	/* Initial guess */
-	cpx_set_d (sa, 0.49, 18.4);
-	cpx_set_d (sb, 0.5, 18.3);
-	cpx_set_d (sc, 0.51, 18.2);
+	cpx_set_d (sa, 0.5, 18.3);
+	cpx_set_d (sb, 0.495, 18.4);
+	cpx_set_d (sc, 0.505, 18.2);
 
 	integral (ya, nsteps, sa, prec);
 	integral (yb, nsteps, sb, prec);
@@ -258,6 +279,22 @@ void find_zero(int nsteps, int prec)
 	cpx_abs(fa, ya);
 	cpx_abs(fb, yb);
 	cpx_abs(fc, yc);
+
+	/* Sort, so that the fa < fb < fc */
+	if (0 < mpf_cmp(fa, fb))
+	{
+		SWAP(sa, ya, fa, sb, yb, fb);
+	}
+
+	if (0 < mpf_cmp(fb, fc))
+	{
+		SWAP(sc, yc, fc, sb, yb, fb);
+	}
+
+	if (0 < mpf_cmp(fa, fb))
+	{
+		SWAP(sa, ya, fa, sb, yb, fb);
+	}
 
 #if 0
 cpx_prt("ya = ", ya); printf("\n");
@@ -282,7 +319,23 @@ cpx_prt("yc = ", yc); printf("\n");
 		interp (roc, ioc, sa[0].im, sb[0].im, sa[0].re, sb[0].re);
 		double zero_im = mpf_get_d(ioc);
 
-		/* Throw away the farther point */
+		cpx_set_mpf(sd, roc, ioc);
+		integral (yd, nsteps, sd, prec);
+		cpx_abs(fd, yd);
+
+		if (0 < mpf_cmp(fd, fa))
+		{
+			if (0 < mpf_cmp(fd, fb))
+			{
+				if (0 < mpf_cmp(fd, fc))
+				{
+					/* fd is a worse estimate than the previous three.
+					 * Discard, try again.
+					 */
+				}
+			}
+		}
+
 		if (0 < mpf_cmp(fb, fc))
 		{
 			// printf("duude b biggest\n");
@@ -297,10 +350,6 @@ cpx_prt("yc = ", yc); printf("\n");
 			cpx_set(yc, ya);
 			mpf_set(fc, fa);
 		}
-
-		cpx_set_mpf(sa, roc, ioc);
-		integral (ya, nsteps, sa, prec);
-		cpx_abs(fa, ya);
 
 		/* Next the real */
 		quad_min (roc, sa[0].re, sb[0].re, sc[0].re,
@@ -309,6 +358,10 @@ cpx_prt("yc = ", yc); printf("\n");
 		interp (ioc, roc, sa[0].re, sb[0].re, sa[0].im, sb[0].im);
 		double zero_re = mpf_get_d(roc);
 
+		cpx_set_mpf(sd, roc, ioc);
+		integral (yd, nsteps, sd, prec);
+		cpx_abs(fd, yd);
+
 		/* Throw away the farther point */
 		if (0 < mpf_cmp(fb, fc))
 		{
@@ -324,10 +377,6 @@ cpx_prt("yc = ", yc); printf("\n");
 			cpx_set(yc, ya);
 			mpf_set(fc, fa);
 		}
-
-		cpx_set_mpf(sa, roc, ioc);
-		integral (ya, nsteps, sa, prec);
-		cpx_abs(fa, ya);
 
 		cpx_abs(roc, ya);
 		double mini = mpf_get_d(roc);
@@ -338,14 +387,20 @@ cpx_prt("yc = ", yc); printf("\n");
 	cpx_clear (sa);
 	cpx_clear (sb);
 	cpx_clear (sc);
+	cpx_clear (sd);
+	cpx_clear (se);
 
 	cpx_clear (ya);
 	cpx_clear (yb);
 	cpx_clear (yc);
+	cpx_clear (yd);
+	cpx_clear (ye);
 
 	mpf_clear (fa);
 	mpf_clear (fb);
 	mpf_clear (fc);
+	mpf_clear (fd);
+	mpf_clear (fe);
 
 	mpf_clear (ioc);
 	mpf_clear (roc);
