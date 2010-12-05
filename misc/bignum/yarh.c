@@ -283,7 +283,7 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 	mpf_neg (lam2, lam1);
 
 	/* Initial guess */
-	cpx_set_d (s0, 0.5, 18.3);
+	cpx_set_d (s0, 0.5, 15.0);
 	integral (y0, nsteps, s0, prec);
 	cpx_abs(f0, y0);
 
@@ -453,7 +453,7 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 		cpx_set(s0, sb);
 
 #if 1
-printf("\n# %d  ", i);
+printf("#\n# %d  ", i);
 cpx_prt("s0 = ", s0); printf("\n");
 cpx_prt("# na = ", na); printf("\n");
 cpx_prt("# nb = ", nb); printf("\n");
@@ -529,6 +529,7 @@ int main (int argc, char * argv[])
    nbits = 3.3*(prec + 8);
    mpf_set_default_prec (nbits);
 
+#define ZERO_FINDER 
 #ifdef ZERO_FINDER
 	/* Set the precision to which we want the zero */
 	int ndigits = 10;
@@ -557,7 +558,7 @@ int main (int argc, char * argv[])
 	cpx_clear(zero);
 #endif
 
-#define WALK_THE_LINE
+// #define WALK_THE_LINE
 #ifdef WALK_THE_LINE
 	/* Walk up the imaginary axix at re=1/2, and prit the results */
 	printf ("#\n# decimal precision = %d\n", prec);
