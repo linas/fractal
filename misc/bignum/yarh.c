@@ -31,11 +31,14 @@ void swap_1_2 (mpf_t y, mpf_t x, int nprec)
 {
 	static int init = 0;
 	static mpf_t zero;
+	static mpf_t one;
 	if (!init)
 	{
 		init = 1;
 		mpf_init(zero);
+		mpf_init(one);
 		mpf_set_ui(zero, 0);
+		mpf_set_ui(zero, 1);
 	}
 
 	/* a1 and a2 are the first two digitis of the 
@@ -46,10 +49,24 @@ void swap_1_2 (mpf_t y, mpf_t x, int nprec)
 	mpf_init (a2);
 
 	mpf_ui_div (ox, 1, x);
+fp_prt("dddude ox= ", ox); printf("\n");
 	mpf_floor (a1, ox);
+fp_prt("dddude a1= ", a1); printf("\n");
 	mpf_sub(y, ox, a1);
-	if (mpf_eq (y, zero, 3.32*nprec))
+fp_prt("dddude y= ", y); printf("\n");
+
+	/* If 1/x-a_1 is zero, this means a2 is infinity.
+	 * So exchanging a1 and a2 gives y=1/infty = 0 */
+	if (mpf_eq (y, zero, ((int) 3.3*((double) nprec)) ))
 		goto done;
+
+	/* Sometimes, rounding errors above give 0.99999...
+	 * Deal with these properly, as if above was a zero. */
+	if (mpf_eq (y, one, ((int) 3.3*((double) nprec)) ))
+	{
+		mpf_sub (y, one, y);
+		goto done;
+	}
 
 	/* Now get the second digit */
 	mpf_ui_div (ox, 1, y);
