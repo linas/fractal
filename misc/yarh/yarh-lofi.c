@@ -148,6 +148,7 @@ void grand (long double x, long double sre, long double sim,
 	ire *= sw;
 	iim *= sw;
 
+printf("x= %22.18Lg sw=%22.18Lg\n", x, sw);
 	*pre = ire;
 	*pim = iim;
 }

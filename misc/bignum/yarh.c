@@ -77,6 +77,9 @@ void integrand(cpx_t y, mpf_t x, cpx_t s, int nprec)
 	mpf_init (perm);
 
 	swap_1_2 (perm, x, nprec);
+fp_prt("x= ", x);
+fp_prt(" sw= ", perm); 
+printf("\n");
 
 	cpx_mpf_pow (y, x, s, nprec);
 	cpx_times_mpf (y, y, perm);
@@ -129,6 +132,7 @@ return;
 
 	/* initial value */
 	mpf_div_ui (x, step, 2);
+	mpf_neg (x, x);
 	mpf_add_ui (x, x, 1);
 
 	/* integration loop */
