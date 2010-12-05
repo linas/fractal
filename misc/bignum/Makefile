@@ -11,7 +11,7 @@ EXES= bernoulli bound bs bsubn cache-fill cont_frac \
       dsubn entropy exact gkw-diag hurwitz hurwitz-euler \
 		minima misc-test mp_quest_test mp_zeta_test picturez \
       poly-perf qint sawtooth sho stieltjes trunc \
-		walsh yarh zero-cross zeta-zeros
+		walsh yarh yarh-lofi zero-cross zeta-zeros
 
 MPLIB=anant/libanant.a
 
@@ -44,6 +44,7 @@ stieltjes:	stieltjes.o
 trunc:	trunc.o
 walsh:	walsh.o
 yarh:	yarh.o
+yarh-lofi:	yarh-lofi.o
 zero-cross:	zero-cross.o
 zeta-zeros:	zeta-zeros.o
 
@@ -91,4 +92,4 @@ dist:
 	$(CC) -c -g -O2 -Wall $< -I $(ANANT)
 
 .o:
-	$(CC) -g -o $* $^ -Lanant -lanant -lgmp -ldb -lm
+	$(CC) -g -o $* $^ -Lanant -lanant -lgmp -ldb -lm 

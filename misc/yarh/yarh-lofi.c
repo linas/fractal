@@ -2,10 +2,12 @@
  * yarh-lofi.c
  *
  * FUNCTION:
- * Integral the permuation group of continued fractions
+ * Integral of the permuation group of continued fractions
  * Expect to get Riemann zeta in the Gauss map case
  * and that is what we seem to get ... need high integration 
  * order though to get anything on the r=1/2 axis ... 
+ *
+ * This is the non-GMP version for sanity checking
  *
  * Results written up in yarh.lyx
  *
@@ -15,8 +17,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "brat.h"
 
 inline long double swap12 (long double x)
 {
@@ -226,28 +226,28 @@ void gral(int nsteps, long double sre, long double sim,
 	*pim = sum_im;
 }
 
-double
-rswap (long double sre, long double sim, int itermax)
+int main (int argc, char *argv[])
 {
-	long double zre, zim;
-
-	gral (itermax, sre, sim, &zre, &zim);
-	long double mag = zre*zre+zim*zim;
-	mag = sqrt (mag);
-	return mag;
-
-	long double  phase = atan2l(zim, zre);
-	phase /= 2.0L * M_PI;
-	phase += 0.5L;
-	return phase;
-}
-
-
-int main ()
-{
-	int i;
 	double x;
 
-	for 
+	if (argc <2)
+	{
+		fprintf(stderr, "Usage: %s <npts>\n", argv[0]);
+		exit (1);
+	}
 
+	int npts = atoi(argv[1]);
+
+	for (x=0.1; x<100; x+=0.1)
+	{
+		long double sre = 0.5;
+		long double sim = x;
+		long double zre, zim;
+
+		gral (npts, sre, sim, &zre, &zim);
+
+		printf("%Lg	%Lg	%Lg\n", sim, zre, zim);
+	}
+
+	return 0;
 }
