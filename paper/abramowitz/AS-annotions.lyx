@@ -59,20 +59,19 @@ The following is a compendium of additions and margin notes to the Handbook
  culled from personal annotations I have made to that reference over the
  years.
  I have found these formulas useful and handy to have around.
- Some are trivial restatements of what can already be found in the book,
- and a few are deeper, non-trivial (possibly new) relationships.
+ Many are trivial restatements of what can already be found in the book,
+ and a few are deeper, non-trivial relationships.
  Most of these are not 'mathematically significant', but are useful if one
  is just searching for an integral or some such: indeed, this is what it
  means to be a reference.
- They are put down here to be of some utility to the Internet community
- and hopefully to be incorporated in some future edition/revision of the
- A&S reference.
+ They are put down here to be of some utility to the Internet community.
+ It would be nice if future editions/revisions of the A&S reference were
+ possible, and were to include such updates.
 \end_layout
 
 \begin_layout Standard
-Sources & attribution: Yes, I derived all of these.
- I did not copy any of these from some other book/reference.
- (Except as noted).
+Sources & attribution: I derived all of these.
+ I did not copy any of these from some other book/reference, except as noted.
  I've tripped over these while solving a large variety of other completely
  unrelated, but quite interesting problems.
 \end_layout
@@ -800,6 +799,109 @@ Follows from above, & etc.
 
 \begin_layout Standard
 \begin_inset Formula ${\displaystyle \sum_{k=1}^{n}k(k+1)^{2}=[n(n+1)(n+2)(3n+5)]/12}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+6.11 Divergent Sums
+\end_layout
+
+\begin_layout Standard
+Formally divergent sums that can be written as limits of convergent sums.
+\end_layout
+
+\begin_layout Subsubsection*
+6.11.1
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,\left(-1\right)^{k}e^{-tk}=\frac{1}{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+6.11.2
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,\left(-1\right)^{k}(k+2)e^{-tk}=\frac{3}{4}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+6.11.3
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,\left(-1\right)^{k}(k+2)(k+3)e^{-tk}=\frac{7}{4}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+6.11.4
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,\left(-1\right)^{k}(k+2)(k+3)(k+4)e^{-tk}=\frac{45}{8}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+6.11.5
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\lim_{t\rightarrow0}\sum_{k=0}^{\infty}\,\left(-1\right)^{k}(k+2)(k+3)(k+4)(k+5)e^{-tk}=\frac{93}{4}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+6.11.6
+\end_layout
+
+\begin_layout Standard
+These are readily obtained
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Crowley2010"
+
+\end_inset
+
+ by considering the binomial generating function.
+ That is, define 
+\begin_inset Formula \begin{align*}
+A_{m}\left(x\right)= & \sum_{k=0}^{\infty}\frac{\Gamma\left(k+m+2\right)}{\Gamma\left(k+2\right)}\left(-x\right)^{k}\\
+= & -\frac{\Gamma\left(m+1\right)}{x}\sum_{k=1}^{\infty}{k \choose m}\left(-x\right)^{k}\\
+= & \frac{\Gamma\left(m+1\right)}{x}\left(1-\frac{1}{\left(1+x\right)^{m+1}}\right)\end{align*}
+
+\end_inset
+
+and so the above sums are given by 
+\begin_inset Formula \[
+A_{m}\equiv\lim_{x\to1}A_{m}\left(x\right)=\Gamma\left(m+1\right)\left(\frac{2^{m+1}-1}{2^{m+1}}\right)\]
+
 \end_inset
 
 
@@ -1620,6 +1722,17 @@ Note this is a formal (divergent) sum that can be made meaningful through
  regularization.
  (XXX Need to do this).
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/home/linas/linas/fractal/paper/fractal"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
