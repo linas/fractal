@@ -27,7 +27,8 @@ dist:
 	$(CC) -c -O2 $<
 
 .o:
-	$(CC) -o $* $< -L$(LIB) -lfunc -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++ 
+	$(CC) -o $* $< -L$(LIB) -lfunc -lgsl -lgmpxx -lgmp -lm -lstdc++
+#	$(CC) -o $* $< -L$(LIB) -lfunc -lgsl -lcblas -lgmpxx -lgmp -lm -lstdc++
 
 
 c-takagi.o:	c-takagi.c
