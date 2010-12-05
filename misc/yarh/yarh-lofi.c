@@ -198,12 +198,10 @@ void gral(int nsteps, long double sre, long double sim,
 		nh ++;
 	}
 
-printf("duude nh= %d nsteps = %d\n", nh, nsteps);
 	/* Divide by the actual number of samples */
 	step = 1.0L / ((long double) nh);
 	sum_re *= step;
 	sum_im *= step;
-printf("sum= %20.17Lg  %20.17Lg\n", sum_re, sum_im);
 
 #if 0
 	// the trivial case

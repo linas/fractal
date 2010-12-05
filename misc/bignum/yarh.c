@@ -157,14 +157,13 @@ return;
 
 	/* Divide by the actual number of samples */
 	cpx_div_ui (y, y, nsteps);
-cpx_prt("sum=", y); printf("\n");
 
 	/* integral times s */
 	cpx_mul (y, y, ess);
 
 	/* compute 1/(s-1) */
 	cpx_recip (ess, essm1);
-	cpx_sub (y, y, ess);
+	cpx_sub (y, ess, y);
 
 	/* s/(s-1) = 1/(s-1) + 1 so add 1 now */
 	cpx_add_ui(y, y, 1, 0);
@@ -283,11 +282,6 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 	mpf_set_ui (lam1, 1);
 	mpf_neg (lam2, lam1);
 
-// xxxxxxxxxxx
-cpx_set_d (s0, 0.5, 0.1);
-integral (y0, nsteps, s0, prec);
-cpx_prt("yo=", y0); printf("\n");
-exit(1);
 	/* Initial guess */
 	cpx_set_d (s0, 0.5, 18.3);
 	integral (y0, nsteps, s0, prec);
