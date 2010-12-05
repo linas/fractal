@@ -23,7 +23,15 @@ inline long double swap12 (long double x)
 	long double ox = 1.0L/x;
 	long double a1 = floorl(ox);
 	long double r1 = ox - a1;
+
+	/* If 1/x-a_1 is zero, this means a2 is infinity.
+	 * So exchanging a1 and a2 gives y=1/infty = 0 */
 	if (1.0e-10 > r1) return r1;
+
+	/* Sometimes, rounding errors above give 0.99999...
+	 * Deal with these properly, as if above was a zero. */
+	if ((1.0 - r1) < 1.0e-10) return 1.0 - r1;
+
 	ox = 1.0L/r1;
 	long double a2 = floorl(ox);
 	long double r2 = ox - a2;
@@ -234,7 +242,8 @@ rswap (long double sre, long double sim, int itermax)
 	gral (itermax, sre, sim, &zre, &zim);
 	long double mag = zre*zre+zim*zim;
 	mag = sqrt (mag);
-	// return mag;
+	return mag;
+
 	long double  phase = atan2l(zim, zre);
 	phase /= 2.0L * M_PI;
 	phase += 0.5L;
