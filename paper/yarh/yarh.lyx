@@ -37,6 +37,7 @@
 \tracking_changes false
 \output_changes false
 \author "" 
+\author "" 
 \end_header
 
 \begin_body
@@ -76,21 +77,18 @@ key "Edw74"
 \end_inset
 
 :
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula \begin{equation}
-\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}h(x)x^{s-1}dx\label{eq:}\end{equation}
+\begin_inset Formula \[
+\zeta(s)=\frac{s}{s-1}-s\int_{0}^{1}h(x)x^{s-1}dx\]
 
 \end_inset
 
- where 
-\begin_inset Formula \begin{equation}
-h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{eq:}\end{equation}
+where 
+\begin_inset Formula \[
+h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \]
 
 \end_inset
 
- is sometimes called the Gauss map.
+is sometimes called the Gauss map.
  Here, 
 \begin_inset Formula $\left\lfloor y\right\rfloor $
 \end_inset
@@ -113,27 +111,28 @@ key "Khin35"
 \end_inset
 
  of 
-\begin_inset Formula $x$
+\begin_inset Formula $0<x\le1$
 \end_inset
 
- as 
-\begin_inset Formula \begin{equation}
-x=[a_{1},a_{2},a_{3},\cdots]=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\ldots}}}\label{eq:}\end{equation}
+ as
+\begin_inset Formula \[
+x=[a_{1},a_{2},a_{3},\cdots]=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\ldots}}}\]
 
 \end_inset
 
- then 
+then 
 \begin_inset Formula $h(x)=[a_{2},a_{3},\cdots]$
 \end_inset
 
 .
  It is a (reverse) shift operator on the continued fraction expansion.
- The study of continued fractions is interesting because of the close proximity
- of a number of problems of fractals and dynamical systems, including Farey
- fractions and modular group symmetries.
- More immediately, the transfer operator of the Gauss map is known as the
- Gauss-Kuzmin-Wirsing operator, which has a number of interesting properties
- of its own.
+ The study of continued fractions is interesting because of their proximity
+ to various problems of fractals and dynamical systems, including ties to
+ Farey fractions, the modular group via the Cantor set, and the Minkowski
+ question mark function.
+ More immediately, the transfer (Ruelle-Frobenius-Perron) operator of the
+ Gauss map is the Gauss-Kuzmin-Wirsing operator, which has a number of interesti
+ng properties of its own.
 \end_layout
 
 \begin_layout Standard
@@ -147,7 +146,7 @@ S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdot
 
 \end_inset
 
- which exchanges the 
+which exchanges the 
 \begin_inset Formula $p$
 \end_inset
 
@@ -172,15 +171,15 @@ S_{p,q}:[a_{1},\cdots,a_{p},\cdots,a_{q},\cdots]\mapsto[a_{1},\cdots,a_{q},\cdot
 
 .
  The generalized Riemann hypothesis that we choose to explore concerns the
- zeros of the integral 
-\begin_inset Formula \begin{equation}
-\zeta_{p,q}(s)=\frac{s}{s-1}-s\int_{0}^{1}S_{p,q}(x)x^{s-1}dx\label{eq:}\end{equation}
+ zeros of the integral
+\begin_inset Formula \[
+\zeta_{p,q}(s)=\frac{s}{s-1}-s\int_{0}^{1}S_{p,q}(x)x^{s-1}dx\]
 
 \end_inset
 
- Although this integral can in principle be evaluated analytically, the
- result is a messy set of nested sums that don't seem to be easily sumable,
- nor provide any particular insight.
+Although this integral can in principle be evaluated analytically, the result
+ is a messy set of nested sums that don't seem to be easily sumable, nor
+ provide any particular insight.
  Thus, we instead choose to explore this integral numerically.
  More precisely, we consider the sum which arises from treating the integral
  as a very simple Newtonian sum with equally spaced abscissas:
@@ -198,7 +197,7 @@ Continued Fractions; Permutation Groups
 
 \begin_layout Standard
 Note that continued fractions provide a representation of the real numbers
- in the infinite-dimensional space 
+ in the infinite Cartesian product space 
 \begin_inset Formula $\mathbb{N}^{\omega}=\mathbb{N\times N\times}...$
 \end_inset
 
@@ -433,6 +432,12 @@ ty; this self-similarity is key to obtaining workable analytic expressions.
  
 \end_layout
 
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
 \end_inset
 
 
@@ -440,15 +445,16 @@ ty; this self-similarity is key to obtaining workable analytic expressions.
 
 \begin_layout Standard
 Define the Riemann sum as 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula \begin{equation}
-\zeta_{N}(s)=\frac{s}{s-1}-\frac{s}{N}\;\sum_{n=0}^{N-1}h\left(\frac{2n+1}{2N}\right)\;\left(\frac{2n+1}{2N}\right)^{s-1}\label{eq:}\end{equation}
+\begin_inset Formula \[
+\zeta_{N}(s)=\frac{s}{s-1}-\frac{s}{N}\;\sum_{n=0}^{N-1}h\left(\frac{2n+1}{2N}\right)\;\left(\frac{2n+1}{2N}\right)^{s-1}\]
 
 \end_inset
 
- As a function of 
+
+\end_layout
+
+\begin_layout Standard
+As a function of 
 \begin_inset Formula $N$
 \end_inset
 
@@ -578,18 +584,24 @@ The above strip charts show
 
 \begin_layout Plain Layout
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 created with src/fractal/generate/swap.C and was called with args 
 \end_layout
 
 \begin_layout Plain Layout
-./swap j 200 600 1051 0.5 23.5 7 (I think) 
+./swap j 200 600 1051 0.5 23.5 7 
 \end_layout
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
 
 \end_layout
 
@@ -684,6 +696,12 @@ The above three figures are parametric phase plots of
  to resemble the true phase portrait of the Riemann zeta.
 \end_layout
 
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
 \end_inset
 
 
@@ -756,6 +774,12 @@ reference "eq:zeta-pq-sum"
 \end_inset
 
  do appear to be at shifted locations.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
 \end_layout
 
 \end_inset
@@ -850,6 +874,12 @@ reference "eq:zeta-pq-sum"
 \end_inset
 
  form of these figures.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
 \end_layout
 
 \end_inset
@@ -988,6 +1018,12 @@ cusps
  Riemann zeros.
 \end_layout
 
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
 \end_inset
 
 
@@ -1083,6 +1119,50 @@ trivial
 \end_inset
 
  sums.
+ 
+\end_layout
+
+\begin_layout Section
+Sums and Integrals
+\end_layout
+
+\begin_layout Standard
+The goal of this section is to give a general form for the integral 
+\begin_inset Formula \[
+\int\frac{ax+b}{cx+d}x^{s-1}dx\]
+
+\end_inset
+
+This integral does not have any simple, closed-form solution, but can be
+ given in terms of some infinite sums.
+ These may be obtained via the Newton series 
+\begin_inset Formula \[
+\left(1+x\right)^{s}=\sum_{k=0}^{\infty}\dbinom{s}{k}x^{k}\]
+
+\end_inset
+
+where 
+\begin_inset Formula \[
+\binom{s}{k}=\frac{\Gamma\left(s+1\right)}{\Gamma\left(k+1\right)\Gamma\left(s-k+1\right)}\]
+
+\end_inset
+
+is the binomial coefficient.
+ The indefinite integral may then be evaluated as a sum:
+\begin_inset Formula \begin{align*}
+F\left(s;a\right)= & \int\frac{x^{s}}{x+a}dx\\
+= & \int\frac{\left(y-a\right)^{s}}{y}dy\\
+= & \left(-a\right)^{s}\sum_{k=0}^{\infty}\binom{s}{k}\left(\frac{-1}{a}\right)^{k}\int y^{k-1}dy\\
+= & \left(-a\right)^{s}\left[\ln\left(x+a\right)+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{k}\binom{s}{k}\left(1+\frac{x}{a}\right)^{k}\right]\end{align*}
+
+\end_inset
+
+This allows the Mobius integral to be written as
+\begin_inset Formula \[
+\int\frac{ax+b}{cx+d}x^{s-1}dx=\frac{a}{c}F\left(s;\frac{d}{c}\right)+\frac{b}{c}F\left(s-1;\frac{d}{c}\right)\]
+
+\end_inset
+
  
 \end_layout
 
