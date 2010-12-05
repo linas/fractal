@@ -1,6 +1,6 @@
 /**
  * yarh.c
- * Port of swap.C to bignum
+ * Port of generate/swap.C to bignum
  *
  * FUNCTION:
  * Integral the permuation group of continued fractions
