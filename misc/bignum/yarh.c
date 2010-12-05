@@ -524,7 +524,7 @@ int main (int argc, char * argv[])
 	cpx_t zero;
 	cpx_init(zero);
 
-	double rr = sqrt(2.0);
+	double rr = sqrt(sqrt(2.0));
 	while(1)
 	{
 		printf ("#\n# num steps = %d\n", nsteps);
