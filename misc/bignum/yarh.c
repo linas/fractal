@@ -29,16 +29,14 @@
  */
 void swap_1_2 (mpf_t y, mpf_t x, int nprec)
 {
-	static int init = 0;
-	static mpf_t zero;
-	static mpf_t one;
-	if (!init)
+	static int cur_prec = 0;
+	static mpf_t epsi;
+	if (cur_prec != nprec)
 	{
-		init = 1;
-		mpf_init(zero);
-		mpf_init(one);
-		mpf_set_ui(zero, 0);
-		mpf_set_ui(zero, 1);
+		cur_prec = nprec;
+		mpf_init(epsi);
+		mpf_set_ui(epsi, 1);
+		mpf_div_2exp(epsi, epsi, (int) (3.3 * ((double) nprec)));
 	}
 
 	/* a1 and a2 are the first two digitis of the 
@@ -57,16 +55,20 @@ fp_prt("dddude y= ", y); printf("\n");
 
 	/* If 1/x-a_1 is zero, this means a2 is infinity.
 	 * So exchanging a1 and a2 gives y=1/infty = 0 */
-	if (mpf_eq (y, zero, ((int) 3.3*((double) nprec)) ))
+	if (0 < mpf_cmp (epsi, y))
 		goto done;
 
 	/* Sometimes, rounding errors above give 0.99999...
 	 * Deal with these properly, as if above was a zero. */
-	if (mpf_eq (y, one, ((int) 3.3*((double) nprec)) ))
+	mpf_ui_sub (ox, 1, y);
+	if (0 < mpf_cmp (epsi, ox))
 	{
-		mpf_sub (y, one, y);
+printf("dude -----------------------------\n");
+		mpf_set (y, ox);
 		goto done;
 	}
+fp_prt("dddude ox= ", ox); printf("\n");
+printf(" fail---nprec =%d\n", nprec);
 
 	/* Now get the second digit */
 	mpf_ui_div (ox, 1, y);
@@ -161,6 +163,7 @@ return;
 
 		mpf_sub (x, x, step);
 	}
+exit(1);
 
 	/* Divide by the actual number of samples */
 	cpx_div_ui (y, y, nsteps-1);
