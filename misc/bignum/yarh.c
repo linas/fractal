@@ -47,11 +47,8 @@ void swap_1_2 (mpf_t y, mpf_t x, int nprec)
 	mpf_init (a2);
 
 	mpf_ui_div (ox, 1, x);
-fp_prt("dddude ox= ", ox); printf("\n");
 	mpf_floor (a1, ox);
-fp_prt("dddude a1= ", a1); printf("\n");
 	mpf_sub(y, ox, a1);
-fp_prt("dddude y= ", y); printf("\n");
 
 	/* If 1/x-a_1 is zero, this means a2 is infinity.
 	 * So exchanging a1 and a2 gives y=1/infty = 0 */
@@ -63,12 +60,9 @@ fp_prt("dddude y= ", y); printf("\n");
 	mpf_ui_sub (ox, 1, y);
 	if (0 < mpf_cmp (epsi, ox))
 	{
-printf("dude -----------------------------\n");
 		mpf_set (y, ox);
 		goto done;
 	}
-fp_prt("dddude ox= ", ox); printf("\n");
-printf(" fail---nprec =%d\n", nprec);
 
 	/* Now get the second digit */
 	mpf_ui_div (ox, 1, y);
@@ -96,9 +90,6 @@ void integrand(cpx_t y, mpf_t x, cpx_t s, int nprec)
 	mpf_init (perm);
 
 	swap_1_2 (perm, x, nprec);
-fp_prt("x= ", x);
-fp_prt(" sw= ", perm); 
-printf("\n");
 
 	cpx_mpf_pow (y, x, s, nprec);
 	cpx_times_mpf (y, y, perm);
@@ -163,10 +154,10 @@ return;
 
 		mpf_sub (x, x, step);
 	}
-exit(1);
 
 	/* Divide by the actual number of samples */
-	cpx_div_ui (y, y, nsteps-1);
+	cpx_div_ui (y, y, nsteps);
+cpx_prt("sum=", y); printf("\n");
 
 	/* integral times s */
 	cpx_mul (y, y, ess);
@@ -292,6 +283,11 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 	mpf_set_ui (lam1, 1);
 	mpf_neg (lam2, lam1);
 
+// xxxxxxxxxxx
+cpx_set_d (s0, 0.5, 0.1);
+integral (y0, nsteps, s0, prec);
+cpx_prt("yo=", y0); printf("\n");
+exit(1);
 	/* Initial guess */
 	cpx_set_d (s0, 0.5, 18.3);
 	integral (y0, nsteps, s0, prec);
