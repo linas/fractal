@@ -529,6 +529,7 @@ int main (int argc, char * argv[])
    nbits = 3.3*(prec + 8);
    mpf_set_default_prec (nbits);
 
+#ifdef ZERO_FINDER
 	/* Set the precision to which we want the zero */
 	int ndigits = 10;
 
@@ -554,10 +555,14 @@ int main (int argc, char * argv[])
 	}
 
 	cpx_clear(zero);
+#endif
 
-#if WALK_THE_LINE
+#define WALK_THE_LINE
+#ifdef WALK_THE_LINE
+	/* Walk up the imaginary axix at re=1/2, and prit the results */
 	printf ("#\n# decimal precision = %d\n", prec);
 	printf ("#\n# num steps = %d\n#\n", nsteps);
+	fflush (stdout);
 
 	cpx_t y, s;
 	cpx_init(y);
