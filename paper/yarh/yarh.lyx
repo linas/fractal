@@ -1229,7 +1229,28 @@ name "sec:Sums-and-Integrals"
 \end_layout
 
 \begin_layout Standard
-The goal of this section is to give a general form for the integral 
+This section explores analytic approaches to evaluating the integral 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:zeta-permute"
+
+\end_inset
+
+.
+ Because 
+\begin_inset Formula $S_{p,q}\left(x\right)$
+\end_inset
+
+ is a peicewise combination of Mobius functions 
+\begin_inset Formula \[
+\frac{ax+b}{cx+d}\]
+
+\end_inset
+
+it is enough to evaluate the indefinite integral 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula \[
 \int\frac{ax+b}{cx+d}x^{s-1}dx\]
 
@@ -1252,7 +1273,7 @@ where
 is the binomial coefficient.
  The indefinite integral may then be evaluated as a sum:
 \begin_inset Formula \begin{align*}
-F\left(s;a\right)= & \int\frac{x^{s}}{x+a}dx\\
+F\left(s,a;x\right)= & \int\frac{x^{s}}{x+a}dx\\
 = & \int\frac{\left(y-a\right)^{s}}{y}dy\\
 = & \left(-a\right)^{s}\sum_{k=0}^{\infty}\binom{s}{k}\left(\frac{-1}{a}\right)^{k}\int y^{k-1}dy\\
 = & \left(-a\right)^{s}\left[\ln\left(x+a\right)+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{k}\binom{s}{k}\left(1+\frac{x}{a}\right)^{k}\right]\end{align*}
@@ -1261,11 +1282,142 @@ F\left(s;a\right)= & \int\frac{x^{s}}{x+a}dx\\
 
 This allows the Mobius integral to be written as
 \begin_inset Formula \[
-\int\frac{ax+b}{cx+d}x^{s-1}dx=\frac{a}{c}F\left(s;\frac{d}{c}\right)+\frac{b}{c}F\left(s-1;\frac{d}{c}\right)\]
+\int\frac{ax+b}{cx+d}x^{s-1}dx=\frac{a}{c}F\left(s,\frac{d}{c};x\right)+\frac{b}{c}F\left(s-1,\frac{d}{c};x\right)\]
 
 \end_inset
 
- 
+Using that fact that 
+\begin_inset Formula $ad-bc=\pm1$
+\end_inset
+
+ in general, one may write the above as
+\begin_inset Formula \begin{equation}
+\int\frac{ax+b}{cx+d}x^{s-1}dx=\frac{\left(-d\right)^{s-1}}{c^{s+1}}\left[\mp\ln\left(x+\frac{d}{c}\right)+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{k}\binom{s-1}{k}\left(1+\frac{cx}{d}\right)^{k}\left(\frac{\pm s+kbc}{k-s}\right)\right]\label{eq:mobius sums}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $S_{1,2}\left(x\right)$
+\end_inset
+
+, we can give an explicit form:
+\begin_inset Formula \[
+S_{1,2}\left(x\right)=\frac{1}{a_{2}+\frac{1}{a_{1}+r}}\]
+
+\end_inset
+
+when 
+\begin_inset Formula \[
+x=\frac{1}{a_{1}+\frac{1}{a_{2}+r}}\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{1}=\left\lfloor 1/x\right\rfloor $
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2}=\left\lfloor x/\left(1-a_{1}x\right)\right\rfloor $
+\end_inset
+
+ are integers.
+ Solving for 
+\begin_inset Formula $r$
+\end_inset
+
+ and replacing, one gets
+\begin_inset Formula \[
+S_{1,2}\left(x\right)=\frac{ax+b}{cx+d}\]
+
+\end_inset
+
+with 
+\begin_inset Formula \begin{align*}
+a= & 1+a_{1}\left(a_{2}-a_{1}\right)\\
+b= & a_{1}-a_{2}\\
+c= & \left(a_{2}-a_{1}\right)\left(1+a_{1}a_{2}\right)\\
+d= & 1+a_{2}\left(a_{1}-a_{2}\right)\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $ad-bc=1$
+\end_inset
+
+.
+ This form is valid over the interval 
+\begin_inset Formula \[
+\left(\underline{x},\overline{x}\right)=\left(\frac{a_{2}}{1+a_{1}a_{2}},\frac{1+a_{2}}{1+a_{1}+a_{1}a_{2}}\right)\]
+
+\end_inset
+
+and so one may combine these elements to write 
+\begin_inset Formula \[
+\int_{0}^{1}S_{1,2}\left(x\right)x^{s-1}dx=\sum_{a_{1}=1}^{\infty}\sum_{a_{2}=1}^{\infty}\int_{\underline{x}}^{\overline{x}}\frac{ax+b}{cx+d}x^{s-1}dx\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Unfortunately, the nature of Newton series is that they can have considerable
+ difficulty converging, as the binomial coefficient gaurentees that terms
+ get quite large, and only the alternating sign leads to cancellations.
+ By using the expression 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mobius sums"
+
+\end_inset
+
+ for the integral, one can exchange the order of the 
+\begin_inset Formula $a_{1},a_{2}$
+\end_inset
+
+ summations, and the 
+\begin_inset Formula $k$
+\end_inset
+
+ summation.
+ Define
+\begin_inset Formula \[
+\alpha\left(s\right)=\sum_{a_{1}=1}^{\infty}\sum_{a_{2}=1}^{\infty}\left.\frac{\left(-d\right)^{s-1}}{c^{s+1}}\ln\left(x+\frac{d}{c}\right)\right|_{\underline{x}}^{\overline{x}}\]
+
+\end_inset
+
+and
+\begin_inset Formula \[
+\beta\left(k,s\right)=\sum_{a_{1}=1}^{\infty}\sum_{a_{2}=1}^{\infty}\left.\frac{\left(-d\right)^{s-1}}{c^{s+1}}\left(1+\frac{cx}{d}\right)^{k}\right|_{\underline{x}}^{\overline{x}}\]
+
+\end_inset
+
+and
+\begin_inset Formula \[
+\gamma\left(k,s\right)=\sum_{a_{1}=1}^{\infty}\sum_{a_{2}=1}^{\infty}\left.\frac{\left(-d\right)^{s-1}}{c^{s}}b\left(1+\frac{cx}{d}\right)^{k}\right|_{\underline{x}}^{\overline{x}}\]
+
+\end_inset
+
+ so that
+\begin_inset Formula \[
+\int_{0}^{1}S_{1,2}\left(x\right)x^{s-1}dx=\alpha\left(s\right)+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{k}\binom{s-1}{k}\left(\frac{s\beta\left(k,s\right)+k\gamma\left(k,s\right)}{k-s}\right)\]
+
+\end_inset
+
+The goal of this re-ordering of the summations is to perform the 
+\begin_inset Formula $k$
+\end_inset
+
+ summation last, thus keeping the poor convergence of the Newton series
+ from disturbing the 
+\begin_inset Formula $a_{1},a_{2}$
+\end_inset
+
+ sums.
 \end_layout
 
 \begin_layout Section
