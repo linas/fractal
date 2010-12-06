@@ -165,30 +165,118 @@ which exchanges the
 
  maps the unit interval onto the unit interval, and is discontinuous at
  a countably infinite number of points.
- We present graphs below visualizing 
-\begin_inset Formula $S_{p,q}(x)$
+ The generalized Riemann hypothesis that we choose to explore concerns the
+ zeros of the integral
+\begin_inset Formula \begin{equation}
+\zeta_{p,q}(s)=\frac{s}{s-1}-s\int_{0}^{1}S_{p,q}(x)x^{s-1}dx\label{eq:zeta-permute}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This integral can be evaluated, but only with considerable difficulty.
+ The function 
+\begin_inset Formula $S_{p,q}\left(x\right)$
+\end_inset
+
+ is a piece-wise combination of unimodular Mobius functions, that is, a
+ piece-wise collection of 
+\begin_inset Formula \[
+\frac{ax+b}{cx+d}\]
+
+\end_inset
+
+with integer values of 
+\begin_inset Formula $a$
+\end_inset
+
+, 
+\begin_inset Formula $b$
+\end_inset
+
+, 
+\begin_inset Formula $c$
+\end_inset
+
+ and 
+\begin_inset Formula $d$
+\end_inset
+
+, such that 
+\begin_inset Formula $ad-bc=\pm1$
 \end_inset
 
 .
- The generalized Riemann hypothesis that we choose to explore concerns the
- zeros of the integral
-\begin_inset Formula \[
-\zeta_{p,q}(s)=\frac{s}{s-1}-s\int_{0}^{1}S_{p,q}(x)x^{s-1}dx\]
+ This structure follows from the general theory of continued fractions
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Khin35"
 
 \end_inset
 
-Although this integral can in principle be evaluated analytically, the result
- is a messy set of nested sums that don't seem to be easily sumable, nor
- provide any particular insight.
- Thus, we instead choose to explore this integral numerically.
- More precisely, we consider the sum which arises from treating the integral
- as a very simple Newtonian sum with equally spaced abscissas:
+.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Graphs"
+
+\end_inset
+
+ below provides a set of graphs visualizing 
+\begin_inset Formula $S_{p,q}(x)$
+\end_inset
+
+, showing their piece-wise nature.
+ The functions are clearly 
+\begin_inset Quotes eld
+\end_inset
+
+fractal
+\begin_inset Quotes erd
+\end_inset
+
+ or self-similar; a general discusion of the self-similarity is given in
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-M04"
+
+\end_inset
+
+.
+ Because of the piece-wise structure, the integral can be evaluated analytically.
+ The result is a messy set of nested sums that don't seem to provide any
+ particular insight; the evaluation is given in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Sums-and-Integrals"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It is easier, at first, to explore this integral numerically.
+ Treating the integral as a very simple Newtonian integration sum with equally
+ spaced abscissas, one gets:
 \begin_inset Formula \begin{equation}
 \zeta_{N;p,q}(s)=\frac{s}{s-1}-\frac{s}{N}\;\sum_{n=0}^{N-1}S_{p,q}\left(\frac{2n+1}{2N}\right)\;\left(\frac{2n+1}{2N}\right)^{s-1}\label{eq:zeta-pq-sum}\end{equation}
 
 \end_inset
 
+This summation converges very slowly and very noisly as 
+\begin_inset Formula $N\to\infty$
+\end_inset
 
+ but a numerical evaluation for large 
+\begin_inset Formula $N$
+\end_inset
+
+ can give some basic insight.
+ 
 \end_layout
 
 \begin_layout Section
@@ -345,6 +433,13 @@ set of measure zero
 
 \begin_layout Section
 Graphs
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Graphs"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1124,6 +1219,13 @@ trivial
 
 \begin_layout Section
 Sums and Integrals
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Sums-and-Integrals"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
