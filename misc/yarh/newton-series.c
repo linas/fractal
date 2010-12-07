@@ -4,6 +4,10 @@
  * Newton-series summation of the continued fraction
  * riemann integral. For S_12 only.
  *
+ * Idea looks good on paper, but numeric check shows that the k and a1, a2 
+ * cannot be interchanged.  Doing so makes the a1, a2 sums logarithmically 
+ * divergent.
+ *
  * Linas Vepstas December 2010
  */
 
