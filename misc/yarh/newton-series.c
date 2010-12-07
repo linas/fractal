@@ -14,17 +14,26 @@
 
 complex alpha(complex ess, int a1max, int a2max) 
 {
-	unsigned int a1, a2;
+	unsigned int na1, na2;
 	complex sum = 0.0;
 
-	for (a1=1; a1<a1max; a1++)
+	for (na1=1; na1<a1max; na1++)
 	{
-		for (a2=1; a2<a2max; a2++)
+		for (na2=1; na2<a2max; na2++)
 		{
-			int c = (a1 * a2 + 1) * (a2 - a1);
-			int d = 1 + a2 * (a1 - a2);
+			if (na1 == na2) continue;  // c==0, d==0
+
+			double a1 = na1;
+			double a2 = na2;
+			double c = (a1 * a2 + 1.0) * (a2 - a1);
+			double d = 1.0 + a2 * (a1 - a2);
+			double xlo = a2 / (1.0 + a1 * a2);
+			double xhi = (1.0 + a2) / (1.0 + a1 + a1 * a2);
 			complex beta = - ((double) d) / ((double) c);
-			complex term = cpow(beta, ess-1.0);
+
+			complex term = log((xhi+beta) /(xlo+beta));
+			term *= cpow(beta, ess-1.0);
+			term /= c*c ;
 			sum += term;
 		}
 	}
@@ -34,8 +43,8 @@ complex alpha(complex ess, int a1max, int a2max)
 int main (int argc, char * argv[])
 {
 
-	complex ess = 0.5 + 7.0;
-	complex yo = alpha(ess, 1123, 1123);
+	complex ess = 0.5 + I*7.0;
+	complex yo = alpha(ess, 121, 121);
 
 	double re = creal (yo);
 	double im = cimag(yo);
