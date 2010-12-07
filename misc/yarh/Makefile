@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -I $(INC) 
 
-EXES= swap yarh-lofi
+EXES= newton-series swap yarh-lofi
 
 all: 	$(EXES)
 
@@ -25,7 +25,8 @@ dist:
 .o:
 	$(CC) -o $* $< -L$(LIB) -lfunc -lstdc++ -lm
 
-swap:  swap.o $(LIB)/libfunc.a
+swap:  swap.o
 
+newton-series: newton-series.o
 swap.o:  swap.C $(INC)/Farey.h
 yarh-lofi: yarh-lofi.o
