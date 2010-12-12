@@ -46,13 +46,21 @@ long double complex eff (long double complex s, long double alpha, long double x
 	}
 
 	long double xa = x+alpha;
-	if (xa <= 0.0L)
+	if (xa == 0.0L)
 	{
-		fprintf(stderr, "Error: unexpected sign for x+a=%Lg\n", xa);
+		fprintf(stderr, "Error: unexpected sign for x+alpha=%Lg x=%Lg alpha=%Lg\n", xa, x, alpha);
 		exit(1);
 	}
-	term = logl(-xa);
-	sum += term;
+	else if (xa > 0.0L)
+	{
+		term = logl(xa);
+		sum += term;
+	}
+	else
+	{
+		term = logl(-xa);
+		sum -= term;
+	}
 
 	term = s * logl(-alpha);
 	term = cexpl(term);
@@ -128,6 +136,9 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 			long double d = 1.0L + a2 * b;
 			long double a = 1.0L - a1 * b;
 			long double greb = d / c;
+
+			printf("a1=%d a2=%d  \ta=%Lg b=%Lg c=%Lg d=%Lg   \txlo=%7.5Lg  xhi=%7.5Lg  \td/c=%Lg\n",
+				na1, na2, a,b,c,d, xlo, xhi, greb);
 
 			if ((1 == na1) && (2 == na2))
 			{
