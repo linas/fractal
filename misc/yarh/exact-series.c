@@ -119,15 +119,18 @@ long double complex special_eff (long double complex s, long double alpha, long 
 
 /* Integral of s_12 */
 
-long double complex gral_s12(long double complex s, unsigned int a1max, unsigned int a2max)
+long double complex 
+gral_s12(long double complex s, double epsi,
+         unsigned int a1max, long unsigned int *termcnt)
 {
 	unsigned int na1, na2;
 	long double complex term;
 	long double complex sum = 0.0L;
+	long unsigned int cnt = 0;
 	
 	for (na1=1; na1<a1max; na1++)
 	{
-		for (na2=1; na2<a2max; na2++)
+		for (na2=1; 1; na2++)
 		{
 			long double a1 = na1;
 			long double a2 = na2;
@@ -153,18 +156,15 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 				// one converges badly in all the other cases.
 				// printf("special case \n");
 				long double rat = a/c;
-				term = special_eff(s, greb, xhi);
-				sum += rat*term;
-
-				term = special_eff(s, greb, xlo);
-				sum -= rat*term;
+				long double complex thi, tlo;
+				thi = special_eff(s, greb, xhi);
+				tlo = special_eff(s, greb, xlo);
+				sum += rat*(thi-tlo);
 
 				rat = b/c;
-				term = special_eff(s-1.0L, greb, xhi);
-				sum += rat*term;
-
-				term = special_eff(s-1.0L, greb, xlo);
-				sum -= rat*term;
+				thi = special_eff(s-1.0L, greb, xhi);
+				tlo = special_eff(s-1.0L, greb, xlo);
+				sum += rat*(thi-tlo);
 			}
 
 			/* special case, where c=d=0, so general formula does not apply */
@@ -195,21 +195,29 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 				term += rat*(thi-tlo);
 				// printf("thi=%g +I%g        tlo=%g+I%g\n\n", creal(thi), cimag(thi), creal(tlo), cimag(tlo));
 				sum += term;
-				if (cabs(term) < 1.0e-10) break;
+				cnt ++;
+
+				if (cabs(term) < epsi) break;
 				// printf("a1=%d a2=%d term=%g\n", na1, na2, cabs(term));
 			}
 		}
-printf("a1=%d break at a2=%d\n", na1, na2);
+		// printf("a1=%d break at a2=%d\n", na1, na2);
 	}
+	*termcnt = cnt;
+
 	return sum;
 }
 
-long double complex zeta(long double complex s, unsigned int a1max, unsigned int a2max)
+long double complex zeta(long double complex s, double epsi, unsigned int a1max)
 {
 	long double complex gral;
 
+	long unsigned int cnt;
+
 	gral = s/(s-1.0L);
-	gral -= s* gral_s12(s, a1max, a2max);
+	gral -= s* gral_s12(s, epsi, a1max, &cnt);
+
+printf ("terms=%lu totep=%g\n", cnt, epsi*cnt);
 
 	return gral;
 }
@@ -217,20 +225,20 @@ long double complex zeta(long double complex s, unsigned int a1max, unsigned int
 int main (int argc, char * argv[])
 {
 	int i;
-	if (argc <2)
+	if (argc < 3)
 	{
-		fprintf(stderr, "Usage: %s <amax>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <amax> <epsi>\n", argv[0]);
 		exit(1);
 	}
 	int amax = atoi(argv[1]);
+	double epsi = atof(argv[2]);
 
 	long double complex ess = 0.5L;
 
-	printf("#\n# max terms in summation=%d\n#\n", amax);
+	printf("#\n# max terms in summation=%d epsi=%g\n#\n", amax, epsi);
 	for (i=0; i<500; i++)
 	{
-ess = 0.5L + I*12.0L;
-		long double complex ans = zeta(ess, amax, amax);
+		long double complex ans = zeta(ess, epsi, amax);
 		printf("%g	%g	%g\n", cimag(ess), creal(ans), cimag(ans));
 		fflush (stdout);
 		ess += I*0.1L;
