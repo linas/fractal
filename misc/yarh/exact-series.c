@@ -40,10 +40,11 @@ long double complex eff (long double complex s, long double alpha, long double x
 
 		// printf("k=%d term=%g +I %g\n", k, creal(term), cimag(term));
 		double tm = cabs(term);
-		if (tm < 1.0e-20) break;
+		if (tm < 1.0e-30) break;
 
 		opxak *= opxa;
 	}
+	// printf("\nsum =%g +I %g\n", creal(sum), cimag(sum));
 
 	long double xa = x+alpha;
 	if (xa == 0.0L)
@@ -61,12 +62,14 @@ long double complex eff (long double complex s, long double alpha, long double x
 		term = logl(-xa);
 		sum -= term;
 	}
+	// printf("sumpost log =%g +I %g\n", creal(sum), cimag(sum));
 
 	term = s * logl(-alpha);
 	term = cexpl(term);
 
 	sum *= term;
 
+	// printf("sumpost norm =%g +I %g\n\n", creal(sum), cimag(sum));
 	return sum;
 }
 
@@ -137,9 +140,11 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 			long double a = 1.0L - a1 * b;
 			long double greb = d / c;
 
-			// printf("a1=%3d a2=%3d  a=%4.0Lf b=%4.0Lf c=%4.0Lf d=%4.0Lf"
-			//	"  xlo=%7.5Lg  xhi=%7.5Lg  d/c=%Lg\n",
-			//	na1, na2, a,b,c,d, xlo, xhi, greb);
+#if 0
+			 printf("a1=%3d a2=%3d  a=%4.0Lf b=%4.0Lf c=%4.0Lf d=%4.0Lf"
+				"  xlo=%7.5Lg  xhi=%7.5Lg  d/c=%Lg\n",
+				na1, na2, a,b,c,d, xlo, xhi, greb);
+#endif
 
 			if ((1 == na1) && (2 == na2))
 			{
@@ -178,20 +183,23 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 			else
 			{
 				long double rat = a/c;
-				term = eff(s, greb, xhi);
-				sum += rat*term;
-
-				term = eff(s, greb, xlo);
-				sum -= rat*term;
+				long double complex thi, tlo;
+				thi = eff(s, greb, xhi);
+				tlo = eff(s, greb, xlo);
+				term = rat*(thi-tlo);
+				// printf("thi=%g +I%g        tlo=%g+I%g\n\n", creal(thi), cimag(thi), creal(tlo), cimag(tlo));
 
 				rat = b/c;
-				term = eff(s-1.0L, greb, xhi);
-				sum += rat*term;
-
-				term = eff(s-1.0L, greb, xlo);
-				sum -= rat*term;
+				thi = eff(s-1.0L, greb, xhi);
+				tlo = eff(s-1.0L, greb, xlo);
+				term += rat*(thi-tlo);
+				// printf("thi=%g +I%g        tlo=%g+I%g\n\n", creal(thi), cimag(thi), creal(tlo), cimag(tlo));
+				sum += term;
+				if (cabs(term) < 1.0e-10) break;
+				// printf("a1=%d a2=%d term=%g\n", na1, na2, cabs(term));
 			}
 		}
+printf("a1=%d break at a2=%d\n", na1, na2);
 	}
 	return sum;
 }
@@ -221,8 +229,10 @@ int main (int argc, char * argv[])
 	printf("#\n# max terms in summation=%d\n#\n", amax);
 	for (i=0; i<500; i++)
 	{
+ess = 0.5L + I*12.0L;
 		long double complex ans = zeta(ess, amax, amax);
 		printf("%g	%g	%g\n", cimag(ess), creal(ans), cimag(ans));
+		fflush (stdout);
 		ess += I*0.1L;
 	}
 
