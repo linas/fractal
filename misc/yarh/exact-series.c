@@ -137,12 +137,16 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 			long double a = 1.0L - a1 * b;
 			long double greb = d / c;
 
-			printf("a1=%d a2=%d  \ta=%Lg b=%Lg c=%Lg d=%Lg   \txlo=%7.5Lg  xhi=%7.5Lg  \td/c=%Lg\n",
-				na1, na2, a,b,c,d, xlo, xhi, greb);
+			// printf("a1=%3d a2=%3d  a=%4.0Lf b=%4.0Lf c=%4.0Lf d=%4.0Lf"
+			//	"  xlo=%7.5Lg  xhi=%7.5Lg  d/c=%Lg\n",
+			//	na1, na2, a,b,c,d, xlo, xhi, greb);
 
 			if ((1 == na1) && (2 == na2))
 			{
-				printf("special case \n");
+				// Use alternative for the integral, since the other one
+				// converges very poorly in this case. And v-v the other
+				// one converges badly in all the other cases.
+				// printf("special case \n");
 				long double rat = a/c;
 				term = special_eff(s, greb, xhi);
 				sum += rat*term;
@@ -194,6 +198,7 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 
 int main (int argc, char * argv[])
 {
+	int i;
 	if (argc <2)
 	{
 		fprintf(stderr, "Usage: %s <amax>\n", argv[0]);
@@ -201,10 +206,15 @@ int main (int argc, char * argv[])
 	}
 	int amax = atoi(argv[1]);
 
-	long double complex ess = 0.5 + I*12.0;
+	long double complex ess = 0.5L;
 
-	long double complex ans = gral_s12(ess, amax, amax);
-printf("ans= %g %g\n\n", creal(ans), cimag(ans));
+	printf("#\n# max terms in summation=%d\n#\n", amax);
+	for (i=0; i<500; i++)
+	{
+		long double complex ans = gral_s12(ess, amax, amax);
+		printf("%g	%g %g\n\n", cimag(ess), creal(ans), cimag(ans));
+		ess += I*0.1L;
+	}
 
 	return 0;
 }
