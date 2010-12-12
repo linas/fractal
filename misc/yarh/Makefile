@@ -4,9 +4,11 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-CC = /usr/bin/cc -O2 -I $(INC) 
+ANANT=../anant/src
 
-EXES= exact-series newton-series swap yarh-lofi
+CC = /usr/bin/cc -O2 -I$(INC) -I$(ANANT)
+
+EXES= exact-bignum exact-series newton-series swap yarh-lofi
 
 all: 	$(EXES)
 
@@ -19,12 +21,13 @@ realclean:	clean
 dist:
 	tar -zcvf yarh.tgz *.c *.C *.gplot Makefile .cvsignore
 
-.C.o:
-	$(CC) -c -O2 $<
+.c.o:
+	$(CC) -c $<
 
 .o:
-	$(CC) -o $* $< -L$(LIB) -lfunc -lstdc++ -lm
+	$(CC) -o $* $< -L$(LIB) -L$(ANANT) -lanant -lfunc -lgmp -ldb -lstdc++ -lm
 
+exact-bignum: exact-bignum.o
 exact-series: exact-series.o
 newton-series: newton-series.o
 swap:  swap.o
