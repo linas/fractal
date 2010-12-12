@@ -36,7 +36,7 @@ long double complex eff (long double complex s, long double alpha, long double x
 			sum += term;
 		}
 
-printf("duuude k=%d re=%llf im=%llf\n", k, creal(sum), cimag(sum));
+printf("duuude k=%d re=%f im=%f\n", k, creal(sum), cimag(sum));
 
 		opxak *= opxa;
 	}
@@ -47,22 +47,25 @@ printf("duuude k=%d re=%llf im=%llf\n", k, creal(sum), cimag(sum));
 main ()
 {
 
-	int a1 = 1;
-	int a2 = 2
+	int na1 = 2;
+	int na2 = 1;
 
-	double a = 1+a1*(a2-a1);
-	double b = a1-a2;
-	double c = (a1*a2+1)*(a2-a1);
-	double d = 1+a2*(a1-a2);
+			long double a1 = na1;
+			long double a2 = na2;
+			long double b = a1 - a2;
+			long double c = - (a1 * a2 + 1.0L) * b;
+			long double d = 1.0L + a2 * b;
+			long double xlo = a2 / (1.0L + a1 * a2);
+			long double xhi = (1.0L + a2) / (1.0L + a1 + a1 * a2);
+			long double greb = d / c;
 
-	double alp = d/c;
+	printf("duude a1=%d a2=%d b=%Lg c=%Lg d=%Lg\n", na1, na2, b,c,d);
 
 	long complex ess = 0.5 + I*12.0;
 
-	long double x = (1+a2)/(1+a1+a1*a2);
-
-pritf("duude x=%g alpha=%g\n", x, alp);
+printf("duude xlo=%Lg xhi=%Lg alpha=%Lg\n", xlo, xhi, greb);
 	
-	eff(ess, alp, x);
+	eff(ess, greb, xlo);
+	eff(ess, greb, xhi);
 
 }
