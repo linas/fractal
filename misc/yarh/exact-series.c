@@ -132,11 +132,19 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 			if ((1 == na1) && (2 == na2))
 			{
 				printf("special case \n");
+				long double rat = a/c;
 				term = special_eff(s, greb, xhi);
-				sum += term;
+				sum += rat*term;
 
 				term = special_eff(s, greb, xlo);
-				sum -= term;
+				sum -= rat*term;
+
+				rat = b/c;
+				term = special_eff(s-1.0L, greb, xhi);
+				sum += rat*term;
+
+				term = special_eff(s-1.0L, greb, xlo);
+				sum -= rat*term;
 			}
 
 			/* special case, where c=d=0, so general formula does not apply */
@@ -154,11 +162,19 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 			// General case
 			else
 			{
+				long double rat = a/c;
 				term = eff(s, greb, xhi);
-				sum += term;
+				sum += rat*term;
 
 				term = eff(s, greb, xlo);
-				sum -= term;
+				sum -= rat*term;
+
+				rat = b/c;
+				term = eff(s-1.0L, greb, xhi);
+				sum += rat*term;
+
+				term = eff(s-1.0L, greb, xlo);
+				sum -= rat*term;
 			}
 		}
 	}
@@ -167,6 +183,11 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 
 int main (int argc, char * argv[])
 {
+	if (argc <2)
+	{
+		fprintf(stderr, "Usage: %s <amax>\n", argv[0]);
+		exit(1);
+	}
 	int amax = atoi(argv[1]);
 
 	long double complex ess = 0.5 + I*12.0;
