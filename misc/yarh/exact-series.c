@@ -64,7 +64,7 @@ long double complex eff (long double complex s, long double alpha, long double x
 	}
 	// printf("sumpost log =%g +I %g\n", creal(sum), cimag(sum));
 
-	/* Multipley by (-alpha)^s */
+	/* Scale by (-alpha)^s */
 	if (0.0L < alpha)
 	{
 		fprintf(stderr, "Oh no Mr. Bill, unexpected alpah=%Lg\n", alpha);

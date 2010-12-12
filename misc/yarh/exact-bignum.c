@@ -90,6 +90,41 @@ void eff (cpx_t sum, cpx_t s, mpf_t alpha, mpf_t x, int nprec)
 	mpf_clear (tmp);
 }
 
+/* Integral of (x^s) dx = (x^(s+1))/(s+1) */
+void effo (cpx_t f, cpx_t s, mpf_t x, int prec)
+{
+	cpx_t essp1;
+	cpx_init(essp1);
+	cpx_add_ui(essp1, s, 1, 0);
+
+	cpx_mpf_pow(f, x, essp1, prec);
+	cpx_div (f, f, essp1);
+
+	cpx_clear(essp1);
+}
+
+/* Integral of (x^(s-1))/(x+alpha) dx
+ * however, converges differently
+ */
+void special_eff (cpx_t f, cpx_t s, mpf_t alpha, mpf_t x, int prec)
+{
+	exit(1);  // not yet implemented
+}
+
+
+void gral_s12 (cpx_t f, cpx_t s, int ndigits, int a1max, int prec)
+{
+	unsigned int na1, na2;
+
+	for (na1=1; na1<a1max; na1++)
+	{
+		for (na2=1; 1; na2++)
+		{
+		}
+	}
+
+}
+
 int main (int argc, char * argv[])
 {
 }
