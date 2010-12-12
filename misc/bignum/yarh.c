@@ -230,15 +230,18 @@ void quad_min(mpf_t loc, mpf_t a, mpf_t b, mpf_t c,
 /**
  *  Powell's method, slightly adapted. 
  *
- * The core problem here is that the summation is so incredily
+ * The core problem here is that the summation is so incredibly
  * noisy, that the function is never really a quadratic form
  * even at the zero. Thus, we never really get quadratic convergence,
  * and the more typical performance seems to be about 2 bits 
  * of accuracy per iteration.
+ *
+ * returns 0 if result is valid, else an error code.
  */
 
-void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
+int find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 {
+	int rc = 1;
 	mpf_t zero, epsi;
 	mpf_init (zero);
 
@@ -452,7 +455,7 @@ void find_zero(cpx_t result, int ndigits, int nsteps, int prec)
 		// cpx_sub(nb, sb, s0);
 		cpx_set(s0, sb);
 
-#if 1
+#if 0
 printf("#\n# %d  ", i);
 cpx_prt("s0 = ", s0); printf("\n");
 cpx_prt("# na = ", na); printf("\n");
@@ -461,7 +464,16 @@ fp_prt("# min= ", f0); printf("\n");
 fflush (stdout);
 #endif
 
-		if (done1 && done2) break;
+		if (done1 && done2)
+		{
+			rc = 0;
+			break;
+		}
+
+		/* bound results away from zero */
+		mpf_set_ui(f3, 1);
+		mpf_div_ui(f3, f3, 20);
+		if (0 > mpf_cmp(s0[0].im, f3)) break;	
 	}
 
 	/* The returned value */
@@ -495,20 +507,13 @@ fflush (stdout);
 
 	mpf_clear (zero);
 	mpf_clear (epsi);
+
+	return rc;
 }
 
 /* ========================================================= */
 /*
 	Some results: swap of 1 and 2:
-	./yarh 25 1531
-	zero 0.696479836439589431464906618951e0 + i 0.183240540083577098410532731315e2
-	./yarh 25 15031
-	zero 0.51729527573167281533628392587e0 + i 0.182803464555318878444827833551e2
-	./yarh 25 151031 
-	appox = 0.512481182772887408821912690129e0 + i 0.1828629640598476397042724125e2
-
-
-
 */
 
 int main (int argc, char * argv[])
@@ -543,16 +548,23 @@ int main (int argc, char * argv[])
 	double rr = sqrt(sqrt(2.0));
 	while(1)
 	{
-		printf ("#\n# num steps = %d\n", nsteps);
-		find_zero(zero, ndigits, nsteps, prec);
+		// printf ("#\n# num steps = %d\n", nsteps);
+		int invalid = find_zero(zero, ndigits, nsteps, prec);
 
-		double re = cpx_get_re(zero);
-		double im = cpx_get_im(zero);
-		printf ("%d	%21.18g	%21.18g\n", nsteps, re, im);
-		fflush (stdout);
+		/* Print only valid results. */
+		if (!invalid)
+		{
+			double re = cpx_get_re(zero);
+			double im = cpx_get_im(zero);
+			printf ("%d	%21.18g	%21.18g\n", nsteps, re, im);
+			fflush (stdout);
+		}
 
+		nsteps ++;
+#ifdef LOG_STEPS
 		nsteps = (int) (((double) nsteps * rr) + 3);
 		nsteps += nsteps%2 + 1;  /* make it odd, always */
+#endif
 	}
 
 	cpx_clear(zero);
