@@ -6,8 +6,9 @@
  * Linas Vepstas December 2010
  */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "binomial.h"
 
@@ -22,7 +23,7 @@ long double complex eff (long double complex s, long double alpha, long double x
 
 printf("oxpa = %Lg\n", opxa);
 
-	sum = 0.0;
+	sum = 0.0L;
 
 	for (k=1; k<155456123; k++)
 	{
@@ -61,17 +62,18 @@ printf("oxpa = %Lg\n", opxa);
 	return sum;
 }
 
-long double complex sum_sum(long complex s)
+/* Integral of s_12 */
+
+long double complex gral_s12(long double complex s, unsigned int a1max, unsigned int a2max)
 {
-
-}
-
-main ()
-{
-
-	int na1 = 2;
-	int na2 = 1;
-
+	unsigned int na1, na2;
+	long double complex term;
+	long double complex sum = 0.0L;
+	
+	for (na1=1; na1<a1max; na1++)
+	{
+		for (na2=1; na2<a2max; na2++)
+		{
 			long double a1 = na1;
 			long double a2 = na2;
 			long double b = a1 - a2;
@@ -82,15 +84,20 @@ main ()
 			long double xhi = (1.0L + a2) / (1.0L + a1 + a1 * a2);
 			long double greb = d / c;
 
-	printf("duude a1=%d a2=%d b=%Lg c=%Lg d=%Lg\n", na1, na2, b,c,d);
+			term = eff(s, greb, xlo);
+			sum += term;
+			term = eff(s, greb, xhi);
+			sum += term;
+		}
+	}
+	return sum;
+}
 
+main ()
+{
 	long double complex ess = 0.5 + I*12.0;
 
-printf("duude xlo=%Lg xhi=%Lg alpha=%Lg\n", xlo, xhi, greb);
-	
-	long double complex ans = eff(ess, greb, xlo);
+	long double complex ans = gral_s12(ess, 100, 100);
 printf("ans= %g %g\n\n", creal(ans), cimag(ans));
-	ans = eff(ess, greb, xhi);
-printf("ans= %g %g\n", creal(ans), cimag(ans));
 
 }
