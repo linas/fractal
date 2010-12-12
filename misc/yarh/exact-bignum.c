@@ -29,9 +29,10 @@ void eff (cpx_t sum, cpx_t s, mpf_t alpha, mpf_t x, int nprec)
 	cpx_init (term);
 	cpx_init (ess);
 
-	mpf_t opxa, opxak;
+	mpf_t opxa, opxak, tmp;
 	mpf_init (opxa);
 	mpf_init (opxak);
+	mpf_init (tmp);
 
 	cpx_set(ess, s);
 	cpx_set_ui(sum, 0, 0);
@@ -61,11 +62,34 @@ void eff (cpx_t sum, cpx_t s, mpf_t alpha, mpf_t x, int nprec)
 		mpf_mul (opxak, opxak, opxa);
 	}
 
+	/* Add in the logarithmic part */
+	mpf_add(tmp, x, alpha);
+	if (0< mpf_sgn(tmp))
+	{
+		fp_log(tmp, tmp, nprec);
+		mpf_add(sum[0].re, sum[0].re, tmp);
+	}
+	else
+	{
+		mpf_neg(tmp, tmp);
+		fp_log(tmp, tmp, nprec);
+		mpf_sub(sum[0].re, sum[0].re, tmp);
+	}
+
+	/* scale by (-alpha)^s */
+	mpf_neg(tmp, alpha);
+	cpx_mpf_pow(term, tmp, ess, nprec);
+	cpx_mul(sum, sum, term);
+
 	cpx_clear(term);
 	cpx_clear (ess);
 	mpf_clear (opxa);
 	mpf_clear (opxak);
 	mpf_clear (epsi);
 	mpf_clear (zero);
+	mpf_clear (tmp);
 }
 
+int main (int argc, char * argv[])
+{
+}
