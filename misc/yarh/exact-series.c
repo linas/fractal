@@ -196,6 +196,16 @@ long double complex gral_s12(long double complex s, unsigned int a1max, unsigned
 	return sum;
 }
 
+long double complex zeta(long double complex s, unsigned int a1max, unsigned int a2max)
+{
+	long double complex gral;
+
+	gral = s/(s-1.0L);
+	gral -= s* gral_s12(s, a1max, a2max);
+
+	return gral;
+}
+
 int main (int argc, char * argv[])
 {
 	int i;
@@ -211,8 +221,8 @@ int main (int argc, char * argv[])
 	printf("#\n# max terms in summation=%d\n#\n", amax);
 	for (i=0; i<500; i++)
 	{
-		long double complex ans = gral_s12(ess, amax, amax);
-		printf("%g	%g %g\n\n", cimag(ess), creal(ans), cimag(ans));
+		long double complex ans = zeta(ess, amax, amax);
+		printf("%g	%g	%g\n", cimag(ess), creal(ans), cimag(ans));
 		ess += I*0.1L;
 	}
 
