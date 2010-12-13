@@ -114,6 +114,13 @@ void special_eff (cpx_t f, cpx_t s, mpf_t alpha, mpf_t x, int prec)
 
 void gral_s12 (cpx_t sum, cpx_t s, int ndigits, int a1max, int prec)
 {
+	mpf_t zero, epsi;
+	mpf_init (zero);
+	mpf_init (epsi);
+
+	mpf_set_ui(epsi, 1);
+	mpf_div_2exp(epsi, epsi, (int)(3.321*ndigits));
+
 	unsigned int na1, na2;
 	mpf_t a1, a2, a,b,c,d, rat, xlo, xhi;
 	mpf_init(a1);
@@ -160,6 +167,19 @@ void gral_s12 (cpx_t sum, cpx_t s, int ndigits, int a1max, int prec)
 
 			if ((1 == na1) && (2 == na2))
 			{
+				special_eff(thi, ess, rat, xhi, prec);
+				special_eff(tlo, ess, rat, xlo, prec);
+				cpx_sub(thi, thi, tlo);
+				cpx_times_mpf(term, thi, a);
+
+				special_eff(thi, essm1, rat, xhi, prec);
+				special_eff(tlo, essm1, rat, xlo, prec);
+				cpx_sub(thi, thi, tlo);
+				cpx_times_mpf(tlo, thi, b);
+				cpx_add (term, term, tlo);
+
+				cpx_div_mpf (term, term, c);
+				cpx_add (sum, sum, term);
 			}
 			else if (na1 == na2)
 			{
@@ -175,7 +195,19 @@ void gral_s12 (cpx_t sum, cpx_t s, int ndigits, int a1max, int prec)
 				eff(thi, ess, rat, xhi, prec);
 				eff(tlo, ess, rat, xlo, prec);
 				cpx_sub(thi, thi, tlo);
-				cpx_mul(term, a, thi);
+				cpx_times_mpf(term, thi, a);
+
+				eff(thi, essm1, rat, xhi, prec);
+				eff(tlo, essm1, rat, xlo, prec);
+				cpx_sub(thi, thi, tlo);
+				cpx_times_mpf(tlo, thi, b);
+				cpx_add (term, term, tlo);
+
+				cpx_div_mpf (term, term, c);
+				cpx_add (sum, sum, term);
+
+				cpx_abs(zero, term);
+				if (0 > mpf_cmp(zero, epsi)) break;
 			}
 		}
 	}
@@ -195,6 +227,9 @@ void gral_s12 (cpx_t sum, cpx_t s, int ndigits, int a1max, int prec)
 	cpx_clear(thi);
 	cpx_clear(tlo);
 	cpx_clear(term);
+
+	mpf_clear (zero);
+	mpf_clear (epsi);
 }
 
 int main (int argc, char * argv[])
