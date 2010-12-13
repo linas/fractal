@@ -110,7 +110,7 @@ long double complex special_eff (long double complex s, long double alpha, long 
 		sum += term;
 
 		double tm = cabs(term);
-		if (tm < 1.0e-20) break;
+		if (tm < 1.0e-30) break;
 
 		nrat *= rat;
 	}

@@ -106,9 +106,52 @@ void effo (cpx_t f, cpx_t s, mpf_t x, int prec)
 /* Integral of (x^(s-1))/(x+alpha) dx
  * however, converges differently
  */
-void special_eff (cpx_t f, cpx_t s, mpf_t alpha, mpf_t x, int prec)
+void special_eff (cpx_t sum, cpx_t s, mpf_t alpha, mpf_t x, int prec)
 {
-	exit(1);  // not yet implemented
+	mpf_t zero, epsi;
+	mpf_init (zero);
+	mpf_init (epsi);
+
+	mpf_set_ui(epsi, 1);
+	mpf_div_2exp(epsi, epsi, (int)(3.321*prec));
+
+	mpf_t rat, nrat;
+	mpf_init (rat);
+	mpf_init (nrat);
+
+	cpx_t ess, term;
+	cpx_init(ess);
+	cpx_init (term);
+
+	mpf_div(rat, alpha, x);
+	mpf_set_ui (nrat, 1);
+
+	cpx_set_ui (sum, 0, 0);
+
+	long unsigned int n;
+	for (n=0; n<2123456789; n++)
+	{
+		cpx_sub_ui(term, ess, n+1, 0);
+		cpx_recip (term, term);
+		cpx_times_mpf (term, term, nrat);
+		cpx_add (sum, sum, term);
+
+		cpx_abs(zero, term);
+		if (0 > mpf_cmp(zero, epsi)) break;
+
+		mpf_mul(nrat, nrat, rat);
+	}
+
+	cpx_sub_ui(ess, ess, 1, 0);
+	cpx_mpf_pow(term, x, ess, prec);
+	cpx_mul(sum, sum, term);
+
+	mpf_clear (zero);
+	mpf_clear (epsi);
+	mpf_clear (rat);
+	mpf_clear (nrat);
+	cpx_clear (ess);
+	cpx_clear (term);
 }
 
 
