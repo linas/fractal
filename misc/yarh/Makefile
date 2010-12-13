@@ -6,7 +6,7 @@ LIB = $(TOP)/lib
 
 ANANT=../anant/src
 
-CC = /usr/bin/cc -O2 -I$(INC) -I$(ANANT)
+CC = /usr/bin/cc -g -O2 -I$(INC) -I$(ANANT)
 
 EXES= exact-bignum exact-series newton-series swap yarh-lofi
 

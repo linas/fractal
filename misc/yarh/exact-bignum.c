@@ -15,7 +15,7 @@
 
 /* Integral of (x^(s-1))/(x+alpha) dx
  */
-void eff (cpx_t sum, cpx_t s, mpf_t alpha, mpf_t x, int nprec)
+void eff (cpx_t sum, cpx_t s, mpf_t alpha, mpf_t x, int prec)
 {
 	int k;
 	mpf_t zero, epsi;
@@ -23,7 +23,7 @@ void eff (cpx_t sum, cpx_t s, mpf_t alpha, mpf_t x, int nprec)
 	mpf_init (epsi);
 
 	mpf_set_ui(epsi, 1);
-	mpf_div_2exp(epsi, epsi, (int)(3.321*nprec));
+	mpf_div_2exp(epsi, epsi, (int)(3.321*prec));
 
 	cpx_t term, ess;
 	cpx_init (term);
@@ -66,19 +66,19 @@ void eff (cpx_t sum, cpx_t s, mpf_t alpha, mpf_t x, int nprec)
 	mpf_add(tmp, x, alpha);
 	if (0< mpf_sgn(tmp))
 	{
-		fp_log(tmp, tmp, nprec);
+		fp_log(tmp, tmp, prec);
 		mpf_add(sum[0].re, sum[0].re, tmp);
 	}
 	else
 	{
 		mpf_neg(tmp, tmp);
-		fp_log(tmp, tmp, nprec);
+		fp_log(tmp, tmp, prec);
 		mpf_sub(sum[0].re, sum[0].re, tmp);
 	}
 
 	/* scale by (-alpha)^s */
 	mpf_neg(tmp, alpha);
-	cpx_mpf_pow(term, tmp, ess, nprec);
+	cpx_mpf_pow(term, tmp, ess, prec);
 	cpx_mul(sum, sum, term);
 
 	cpx_clear(term);
@@ -206,10 +206,11 @@ void gral_s12 (cpx_t sum, cpx_t s, int ndigits, int a1max, int prec)
 			mpf_add_ui(d, d, 1);   // d = 1+a2*b
 			mpf_mul(a, a1, b);
 			mpf_ui_sub(a, 1, a);   // a = 1-a1*b
-			mpf_div(rat, d, c);    // rat = d/c
 
 			if ((1 == na1) && (2 == na2))
 			{
+				mpf_div(rat, d, c);    // rat = d/c
+
 				special_eff(thi, ess, rat, xhi, prec);
 				special_eff(tlo, ess, rat, xlo, prec);
 				cpx_sub(thi, thi, tlo);
@@ -235,6 +236,9 @@ void gral_s12 (cpx_t sum, cpx_t s, int ndigits, int a1max, int prec)
 			}
 			else
 			{
+				/* General case */
+				mpf_div(rat, d, c);    // rat = d/c
+
 				eff(thi, ess, rat, xhi, prec);
 				eff(tlo, ess, rat, xlo, prec);
 				cpx_sub(thi, thi, tlo);
@@ -298,24 +302,28 @@ int main (int argc, char * argv[])
 	int i;
 	if (argc < 4)
 	{
-		fprintf(stderr, "Usage: %s <amax> <nprec> <ndigits>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <amax> <prec> <ndigits>\n", argv[0]);
 		exit(1);
 	}
 	int amax = atoi(argv[1]);
-	int nprec = atoi(argv[2]);
+	int prec = atoi(argv[2]);
 	int ndigits = atoi(argv[3]);
+
+	/* Set the precision (number of binary bits) for calculations */
+	int nbits = 3.3*(prec + 8);
+	mpf_set_default_prec (nbits);
 
 	cpx_t ess, zt;
 	cpx_init(ess);
 	cpx_init(zt);
 	
-	printf("#\n# max terms in summation=%d ndigits=%d nprec=%d\n#\n",
-		amax, ndigits, nprec);
+	printf("#\n# max terms in summation=%d ndigits=%d prec=%d\n#\n",
+		amax, ndigits, prec);
 	for (i=0; i<500; i++)
 	{
 		double is = .1f * i;
 		cpx_set_d (ess, 0.5, is);	
-		zeta_12(zt, ess, ndigits, amax, nprec);
+		zeta_12(zt, ess, ndigits, amax, prec);
 
 		double ztr = cpx_get_re(zt);
 		double zti = cpx_get_im(zt);
