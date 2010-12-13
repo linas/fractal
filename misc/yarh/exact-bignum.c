@@ -305,12 +305,22 @@ int main (int argc, char * argv[])
 	int nprec = atoi(argv[2]);
 	int ndigits = atoi(argv[3]);
 
-	cpx_t ess;
+	cpx_t ess, zt;
 	cpx_init(ess);
-	printf("#\n# max terms in summation=%d epsi=%g\n#\n", amax, epsi);
+	cpx_init(zt);
+	
+	printf("#\n# max terms in summation=%d ndigits=%d nprec=%d\n#\n",
+		amax, ndigits, nprec);
 	for (i=0; i<500; i++)
 	{
-		zeta_12(ess, ndigits
+		double is = .1f * i;
+		cpx_set_d (ess, 0.5, is);	
+		zeta_12(zt, ess, ndigits, amax, nprec);
+
+		double ztr = cpx_get_re(zt);
+		double zti = cpx_get_im(zt);
+		printf("%g  %12.10g  %12.10g\n", is, ztr, zti);
+		fflush (stdout);
 	}
 
 	return 0;
