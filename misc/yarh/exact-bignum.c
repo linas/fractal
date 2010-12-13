@@ -275,6 +275,43 @@ void gral_s12 (cpx_t sum, cpx_t s, int ndigits, int a1max, int prec)
 	mpf_clear (epsi);
 }
 
+void zeta_12(cpx_t f, cpx_t s, int ndigits, int a1max, int prec)
+{
+	cpx_t ess, gral;
+	cpx_init (ess);
+	cpx_init (gral);
+
+	cpx_set(ess, s);
+	cpx_sub_ui (f, s, 1, 0);
+	cpx_recip (f, f);
+	gral_s12 (gral, ess, ndigits, a1max, prec);
+
+	cpx_sub(f, f, gral);
+	cpx_mul (f, f, ess);
+
+	cpx_clear (ess);
+	cpx_clear (gral);
+}
+
 int main (int argc, char * argv[])
 {
+	int i;
+	if (argc < 4)
+	{
+		fprintf(stderr, "Usage: %s <amax> <nprec> <ndigits>\n", argv[0]);
+		exit(1);
+	}
+	int amax = atoi(argv[1]);
+	int nprec = atoi(argv[2]);
+	int ndigits = atoi(argv[3]);
+
+	cpx_t ess;
+	cpx_init(ess);
+	printf("#\n# max terms in summation=%d epsi=%g\n#\n", amax, epsi);
+	for (i=0; i<500; i++)
+	{
+		zeta_12(ess, ndigits
+	}
+
+	return 0;
 }

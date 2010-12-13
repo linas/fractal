@@ -217,7 +217,7 @@ gral_s12(long double complex s, double epsi,
 	return sum;
 }
 
-long double complex zeta(long double complex s, double epsi, unsigned int a1max, double *errest)
+long double complex zeta_12(long double complex s, double epsi, unsigned int a1max, double *errest)
 {
 	long double complex gral;
 
@@ -244,7 +244,7 @@ int main (int argc, char * argv[])
 	for (i=0; i<500; i++)
 	{
 		double error_estimate;
-		long double complex ans = zeta(ess, epsi, amax, &error_estimate);
+		long double complex ans = zeta_12(ess, epsi, amax, &error_estimate);
 		printf("%g	%12.10g	%12.10g	%g\n", cimag(ess), creal(ans), cimag(ans), error_estimate);
 		fflush (stdout);
 		ess += I*0.1L;
