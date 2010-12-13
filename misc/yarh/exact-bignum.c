@@ -302,12 +302,12 @@ int main (int argc, char * argv[])
 	int i;
 	if (argc < 4)
 	{
-		fprintf(stderr, "Usage: %s <amax> <prec> <ndigits>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <amax> <ndigits> <prec>\n", argv[0]);
 		exit(1);
 	}
 	int amax = atoi(argv[1]);
-	int prec = atoi(argv[2]);
-	int ndigits = atoi(argv[3]);
+	int ndigits = atoi(argv[2]);
+	int prec = atoi(argv[3]);
 
 	/* Set the precision (number of binary bits) for calculations */
 	int nbits = 3.3*(prec + 8);
