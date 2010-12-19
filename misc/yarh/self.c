@@ -52,33 +52,41 @@ int det(int M[4][4])
 main ()
 {
 	int a,b,c,d;
-	get_mob (1,1, &a, &b, &c, &d);
+	int a2 = 5;
+	get_mob (1,a2, &a, &b, &c, &d);
 
 	int aa,bb,cc,dd;
-	get_mob (2,1, &aa, &bb, &cc, &dd);
 
-	int m[4][4];
-	m[0][0] = a-aa;
-	m[0][1] = -cc;
-	m[0][2] = b;
-	m[0][3] = 0
+	int a1;
+	for (a1=a2+1; a1<20; a1++)
+	{
+		get_mob (a1, a2, &aa, &bb, &cc, &dd);
 
-	m[1][0] = -bb;
-	m[1][1] = a-dd;
-	m[1][2] = 0;
-	m[1][3] = b;
+		int m[4][4];
+		m[0][0] = a-aa;
+		m[0][1] = -cc;
+		m[0][2] = b;
+		m[0][3] = 0;
 
-	m[2][0] = c;
-	m[2][1] = 0;
-	m[2][2] = d-aa;
-	m[2][3] = -cc;
+		m[1][0] = -bb;
+		m[1][1] = a-dd;
+		m[1][2] = 0;
+		m[1][3] = b;
 
-	m[3][0] = 0;
-	m[3][1] = c;
-	m[3][2] = -bb;
-	m[3][3] = d-dd;
+		m[2][0] = c;
+		m[2][1] = 0;
+		m[2][2] = d-aa;
+		m[2][3] = -cc;
 
-	int dt = det(m);
+		m[3][0] = 0;
+		m[3][1] = c;
+		m[3][2] = -bb;
+		m[3][3] = d-dd;
 
-	printf("duude its %d\n", dt);
+		int dt = det(m);
+
+		int p4 = (a1-1)*(a1-1);
+		p4 *= p4;
+		printf("a1=%d det=%d p4=%d\n", a1, dt, p4);
+	}
 }
