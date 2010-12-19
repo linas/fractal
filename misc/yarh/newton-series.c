@@ -8,6 +8,8 @@
  * cannot be interchanged.  Doing so makes the a1, a2 sums logarithmically 
  * divergent.
  *
+ * The "obvious" work-around to this is to regulate the sums.
+ *
  * Linas Vepstas December 2010
  */
 
@@ -16,16 +18,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-complex alpha(complex ess, complex *betarr, complex *gamarr,  int kmax, int a1max, int a2max) 
+complex alpha(complex ess, double tee, complex *betarr, complex *gamarr,  int kmax) 
 {
 	unsigned int k, na1, na2;
 	complex alpha_sum = 0.0;
 
-	for (na1=1; na1<a1max; na1++)
+	double reg = exp(-tee);
+	double rega1 = 1.0;
+	double rega2 = 1.0;
+
+	for (na1=1; 1; na1++)
 	{
-		for (na2=1; na2<a2max; na2++)
+		rega1 *= reg;
+		rega2 = 1.0;
+		for (na2=1; 1; na2++)
 		{
+			rega2 *= reg;
 			if (na1 == na2) continue;  // c==0, d==0
+
+			// Terminate according to the regulator.
+			if (rega1*rega2 < 1.0e-16) goto done;
 
 			double a1 = na1;
 			double a2 = na2;
@@ -35,7 +47,7 @@ complex alpha(complex ess, complex *betarr, complex *gamarr,  int kmax, int a1ma
 			double xlo = a2 / (1.0 + a1 * a2);
 			double xhi = (1.0 + a2) / (1.0 + a1 + a1 * a2);
 			double greb = - d / c;
-			complex scale = cpow(greb, ess-1.0) / (c*c);
+			complex scale = rega1*rega2 * cpow(greb, ess-1.0) / (c*c);
 
 			complex term = log((xhi+greb) /(xlo+greb));
 			term *= scale;
@@ -60,38 +72,41 @@ complex alpha(complex ess, complex *betarr, complex *gamarr,  int kmax, int a1ma
 			}
 		}
 	}
+
+done:
 	return alpha_sum;
 }
 
 int main (int argc, char * argv[])
 {
-	int k;
-	int amax = atoi(argv[1]);
-	k = atoi(argv[2]);
+	if (argc < 3)
+	{
+		fprintf(stderr, "Usage: %s <kmax> <tee>\n", argv[0]);
+		exit(1);
+	}
+
+	int kmax;
+	kmax = atoi(argv[1]);
+	double tee = atoi(argv[2]);
 
 	complex ess = 0.5 + I*7.0;
 
-	int kmax = k+1;
 	complex *betarr = (complex *) malloc(kmax * sizeof(complex)); 
 	complex *gamarr = (complex *) malloc(kmax * sizeof(complex)); 
 
-	double last = 0;
-	while (1) {
-	complex yo = alpha(ess, betarr, gamarr, kmax, amax, amax);
+	complex yo = alpha(ess, tee, betarr, gamarr, kmax);
 
 	double re = creal (yo);
 	double im = cimag(yo);
+	printf("tee=%g %20.18g %20.18g\n", tee, re, im);
 
-	// printf("duude %d %20.18g %20.18g\n", amax, re, im);
-	//for (k=1; k<kmax; k++)
+	int k;
+	for (k=1; k<kmax; k++)
 	{
 		re = creal (betarr[k]);
 		im = cimag (betarr[k]);
 
-		printf("%d	k=%d %20.18g %20.18g delta=%g\n", amax, k, re, im, re-last);
-		last = re;
-	}
-	amax *= 2;
+		printf("k=%d %20.18g %20.18g\n", k, re, im);
 	}
 	return 0;
 }
