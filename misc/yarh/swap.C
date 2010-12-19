@@ -28,8 +28,9 @@ main (int argc, char *argv[])
 	int q = atoi (argv[2]);
 	printf ("# swapping terms %d and %d\n", p,q);
 
+	int doit = 1;
 	int nmax = 2521;
-	for (i=0; i<nmax; i++)
+	for (i=nmax; 0<=i; i--)
 	{
 		double x = ((double) i)/ ((double) (nmax));
 
@@ -39,7 +40,36 @@ main (int argc, char *argv[])
 		f.SwapTerms (p,q);
 		double y = f.ToReal();
 
+#ifndef DETAIL_ATTEMPT
+		if ((y<0.15) && (1==doit))
+		{
+			doit = 0;
+			int j;
+#define NDETAIL 4
+			int ndet = NDETAIL*nmax + 13;
+			int ioff = NDETAIL*i;
+			for (j=-NDETAIL+1; j<NDETAIL; j++)
+			{
+				x = ((double) ioff-j)/ ((double) (ndet));
+				f.SetRatio (ioff-j,ndet);
+				f.SwapTerms (p,q);
+				double y = f.ToReal();
+
+				/* Cheat to make graph prettier */
+				if ((x<0.1) && (y<0.1)) y=0.0;
+				if ((x<0.02) && (y<0.3)) y=0.0;
+
+				printf ("%5d	%8.6g	%8.6g\n", i, x, y);
+			}
+		}
+		else
+		{
+			printf ("%5d	%8.6g	%8.6g\n", i, x, y);
+			doit = 1;
+		}
+#else // DETAIL_ATTEMPT
 		printf ("%5d	%8.6g	%8.6g\n", i, x, y);
+#endif // DETAIL_ATTEMPT
 #endif
 
 // #define SHOW_SELF_SIM 1
