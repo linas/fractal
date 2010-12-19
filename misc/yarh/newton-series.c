@@ -8,7 +8,14 @@
  * cannot be interchanged.  Doing so makes the a1, a2 sums logarithmically 
  * divergent.
  *
- * The "obvious" work-around to this is to regulate the sums.
+ * The "obvious" work-around to this is to regulate the sums. That works, but ... 
+ * what happens next is that the resulting k sums alternate in sign, and grow
+ * ever larger.Thus, these cannot be easily/reliably resummed.
+ *
+ * Well, then can be by regulating them, but this raises a question: what's 
+ * the point? Possibly some cpu speed gains, but at what compexity cost?
+ *
+ * Thus, this approach is mothballed for now.
  *
  * Linas Vepstas December 2010
  */
@@ -109,7 +116,10 @@ int main (int argc, char * argv[])
 		re = creal (betarr[k]);
 		im = cimag (betarr[k]);
 
-		printf("k=%d %20.18g %20.18g\n", k, re, im);
+		double reg = creal (gamarr[k]);
+		double img = cimag (gamarr[k]);
+
+		printf("k=%d %20.18g %20.18g   %g %g \n", k, re, im, reg, img);
 	}
 	return 0;
 }
