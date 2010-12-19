@@ -24,6 +24,9 @@ dist:
 .c.o:
 	$(CC) -c $<
 
+.C.o:
+	$(CC) -c $<
+
 .o:
 	$(CC) -o $* $< -L$(LIB) -L$(ANANT) -lanant -lfunc -lgmp -ldb -lstdc++ -lm
 

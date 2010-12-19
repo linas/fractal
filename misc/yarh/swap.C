@@ -33,6 +33,7 @@ main (int argc, char *argv[])
 	{
 		double x = ((double) i)/ ((double) (nmax));
 
+#define BASIC_GRAPH
 #ifdef BASIC_GRAPH
 		f.SetRatio (i,nmax);
 		f.SwapTerms (p,q);
@@ -59,7 +60,7 @@ main (int argc, char *argv[])
 		printf ("%5d	%8.6g	%8.6g	%8.6g	%8.6g\n", i, x, y,z, d);
 #endif
 
-#define OTHER_SYM
+// #define OTHER_SYM
 #ifdef OTHER_SYM
 		f.SetRatio (i,nmax);
 		f.SwapTerms (p,q);

@@ -241,7 +241,7 @@ int main (int argc, char * argv[])
 	long double complex ess = 0.5L;
 
 	printf("#\n# max terms in summation=%d epsi=%g\n#\n", amax, epsi);
-	for (i=0; i<500; i++)
+	for (i=0; i<300; i++)
 	{
 		double error_estimate;
 		long double complex ans = zeta_12(ess, epsi, amax, &error_estimate);
