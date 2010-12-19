@@ -466,14 +466,14 @@ Continued Fraction Permutations
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename swap-s12.png
+	filename swap-s12.eps
 	width 50text%
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename swap-s13.png
+	filename swap-s13.eps
 	width 50text%
 
 \end_inset
@@ -525,6 +525,16 @@ ns
  Its also clear that these figures posses a considerable amount of self-similari
 ty; this self-similarity is key to obtaining workable analytic expressions.
  
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+See src/fractal/misc/yarh/swap.C
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -679,7 +689,7 @@ The above strip charts show
 
 \begin_layout Plain Layout
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 created with src/fractal/generate/swap.C and was called with args 
@@ -1273,10 +1283,10 @@ where
 is the binomial coefficient.
  The indefinite integral may then be evaluated as a sum:
 \begin_inset Formula \begin{align*}
-F\left(s,a;x\right)= & \int\frac{x^{s}}{x+a}dx\\
-= & \int\frac{\left(y-a\right)^{s}}{y}dy\\
-= & \left(-a\right)^{s}\sum_{k=0}^{\infty}\binom{s}{k}\left(\frac{-1}{a}\right)^{k}\int y^{k-1}dy\\
-= & \left(-a\right)^{s}\left[\ln\left(x+a\right)+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{k}\binom{s}{k}\left(1+\frac{x}{a}\right)^{k}\right]\end{align*}
+F\left(s,\alpha;x\right)= & \int\frac{x^{s}}{x+\alpha}dx\\
+= & \int\frac{\left(y-\alpha\right)^{s}}{y}dy\\
+= & \left(-\alpha\right)^{s}\sum_{k=0}^{\infty}\binom{s}{k}\left(\frac{-1}{\alpha}\right)^{k}\int y^{k-1}dy\\
+= & \left(-\alpha\right)^{s}\left[\ln\left(x+\alpha\right)+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{k}\binom{s}{k}\left(1+\frac{x}{\alpha}\right)^{k}\right]\end{align*}
 
 \end_inset
 
@@ -1362,6 +1372,31 @@ and so one may combine these elements to write
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The summations are only conditionally convergent; one cannot interchange
+ the sum over 
+\begin_inset Formula $k$
+\end_inset
+
+ with the sums over 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+; the sums over 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+ are logarithmically divergent.
 \end_layout
 
 \begin_layout Standard
