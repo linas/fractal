@@ -25,19 +25,22 @@ complex alpha(complex ess, double tee, complex *betarr, complex *gamarr,  int km
 
 	double reg = exp(-tee);
 	double rega1 = 1.0;
-	double rega2 = 1.0;
 
+#define EPSILON 1.0e-10
 	for (na1=1; 1; na1++)
 	{
 		rega1 *= reg;
-		rega2 = 1.0;
+		// Terminate according to the regulator.
+		if (rega1 < EPSILON) goto done;
+
+		double rega2 = 1.0;
 		for (na2=1; 1; na2++)
 		{
 			rega2 *= reg;
 			if (na1 == na2) continue;  // c==0, d==0
 
 			// Terminate according to the regulator.
-			if (rega1*rega2 < 1.0e-16) goto done;
+			if (rega1*rega2 < EPSILON) break;
 
 			double a1 = na1;
 			double a2 = na2;
@@ -87,7 +90,7 @@ int main (int argc, char * argv[])
 
 	int kmax;
 	kmax = atoi(argv[1]);
-	double tee = atoi(argv[2]);
+	double tee = atof(argv[2]);
 
 	complex ess = 0.5 + I*7.0;
 
