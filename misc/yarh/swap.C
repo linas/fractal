@@ -28,9 +28,10 @@ main (int argc, char *argv[])
 	int q = atoi (argv[2]);
 	printf ("# swapping terms %d and %d\n", p,q);
 
-	double detail = 0.15;
-	int nmax = 2521;
-	int nz = 1;
+	// int nmax = 2521;  //  works very well for s12
+	int nmax = 30031;
+	int a1 = 1;
+	int a2 = 1;
 	for (i=nmax; 0<=i; i--)
 	{
 		double x = ((double) i)/ ((double) (nmax));
@@ -41,16 +42,32 @@ main (int argc, char *argv[])
 		f.SwapTerms (p,q);
 		double y = f.ToReal();
 
-		double clamp = 1.0 / ((double) nz);
+// #define CLEANUP_S12
+#ifdef CLEANUP_S12
+		double clamp = 1.0 / ((double) a1);
 		if (x<clamp)
 		{
 			printf ("%5d	%8.6g	%8.6g\n", i, clamp, 0.0);
-			y = ((double) nz-1) / ((double) nz);
+			y = ((double) a1-1) / ((double) a1);
 			printf ("%5d	%8.6g	%8.6g\n", i, clamp, y);
-			nz = (int) floor(1.0/x) + 1;
+			a1 = (int) floor(1.0/x) + 1;
 		}
+#endif /* CLEANUP_S12 */
+
+#define CLEANUP_S13
+#ifdef CLEANUP_S13
+		double clamp = 1.0 / ((double) a1);
+		if (x<clamp)
+		{
+			printf ("%5d	%8.6g	%8.6g\n", i, clamp, 0.0);
+			printf ("%5d	%8.6g	%8.6g\n", i, clamp, 1.0);
+			a1 = (int) floor(1.0/x) + 1;
+			a2 = 1;
+		}
+#endif /* CLEANUP_S13 */
+
 		printf ("%5d	%8.6g	%8.6g\n", i, x, y);
-#endif
+#endif /* BASIC_GRAPH */
 
 // #define SHOW_SELF_SIM 1
 #ifdef SHOW_SELF_SIM
