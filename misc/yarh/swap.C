@@ -54,7 +54,7 @@ main (int argc, char *argv[])
 		}
 #endif /* CLEANUP_S12 */
 
-#define CLEANUP_S13
+// #define CLEANUP_S13
 #ifdef CLEANUP_S13
 		double clamp = 1.0 / ((double) a1);
 		if (x<clamp)
