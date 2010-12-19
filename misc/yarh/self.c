@@ -4,6 +4,7 @@
  * Self-similarity explorer
  * Linas Vepstas Dec 2010
  */
+#include <stdio.h>
 
 void get_mob(int a1, int a2, int *a, int *b, int *c, int *d)
 {
@@ -50,4 +51,34 @@ int det(int M[4][4])
 
 main ()
 {
+	int a,b,c,d;
+	get_mob (1,1, &a, &b, &c, &d);
+
+	int aa,bb,cc,dd;
+	get_mob (2,1, &aa, &bb, &cc, &dd);
+
+	int m[4][4];
+	m[0][0] = a-aa;
+	m[0][1] = -cc;
+	m[0][2] = b;
+	m[0][3] = 0
+
+	m[1][0] = -bb;
+	m[1][1] = a-dd;
+	m[1][2] = 0;
+	m[1][3] = b;
+
+	m[2][0] = c;
+	m[2][1] = 0;
+	m[2][2] = d-aa;
+	m[2][3] = -cc;
+
+	m[3][0] = 0;
+	m[3][1] = c;
+	m[3][2] = -bb;
+	m[3][3] = d-dd;
+
+	int dt = det(m);
+
+	printf("duude its %d\n", dt);
 }

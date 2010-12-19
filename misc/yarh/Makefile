@@ -8,7 +8,7 @@ ANANT=../anant/src
 
 CC = /usr/bin/cc -g -O2 -I$(INC) -I$(ANANT)
 
-EXES= exact-bignum exact-series newton-series swap yarh-lofi
+EXES= exact-bignum exact-series newton-series self swap yarh-lofi
 
 all: 	$(EXES)
 
@@ -33,6 +33,7 @@ dist:
 exact-bignum: exact-bignum.o
 exact-series: exact-series.o
 newton-series: newton-series.o
+self:  self.o
 swap:  swap.o
 yarh-lofi: yarh-lofi.o
 
