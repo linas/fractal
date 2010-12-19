@@ -7,9 +7,6 @@
 set term png small
 set out 'swap.png'
 
-set term postscript eps color
-set out 'swap.eps'
-
 # set data style linespoints
 set data style lines
 set key right
@@ -33,5 +30,21 @@ plot "swap.dat" using 2:3 title ""
 
 #      "swap.dat" using 2:(1/$2-floor(1/$2)) title ""
 
-# pause 100
+
+###################################################################
+# used to generate figure in paper
+set term postscript eps color
+set out 'swap-s12.eps'
+
+# set data style linespoints
+set data style lines
+set key right
+
+set title "Continued Fraction Permutation S_12"
+set xlabel "x"
+set ylabel "S_12(x)"
+
+set xrange [0:1]
+
+plot "swap-s12.dat" using 2:3 title ""
 
