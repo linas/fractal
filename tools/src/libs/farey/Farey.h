@@ -33,6 +33,7 @@ class ContinuedFraction
       void Print (void);
       int GetNumTerms (void);
 		void SwapTerms (int p, int q);
+		void MobTerms (int p, int q, int a, int b, int c, int d);
 		void LeftShift (int k);
 		void BinaryLeftShift (int k);
 

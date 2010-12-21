@@ -303,6 +303,30 @@ ContinuedFraction::SwapTerms (int p, int q)
 }
 
 /* ------------------------------------------------------------ */
+
+void 
+ContinuedFraction::MobTerms (int p, int q, int a, int b, int c, int d)
+{
+	if ((1>p) || (1>q) || (CONTINUED_FRAC_MAX_TERMS<=p) || (CONTINUED_FRAC_MAX_TERMS<=q))return;
+	p--;
+	q--;
+	if (p>= nterms) 
+	{
+		tinued_frac[q] = 1123123123;
+		return;
+	}
+	if (q>= nterms) 
+	{
+		tinued_frac[p] = 1123123123;
+		return;
+	}
+	int tmp1 = a*tinued_frac[p] + b*tinued_frac[q];
+	int tmp2 = c*tinued_frac[p] + d*tinued_frac[q];
+	tinued_frac[p] = tmp1;
+	tinued_frac[q] = tmp2;
+}
+
+/* ------------------------------------------------------------ */
 /* Get the nth convergent numerator */
 
 int
