@@ -327,6 +327,7 @@ MakeHisto (
 			double phi = rswap (re_position, im_position, itermax);
          glob [i*sizex +j] = phi;
 
+#if NORMAL_CRIT_LINES
 			// draw vertical lines showing crit strip 
 			if ((re_position <= 0.0) && (0.0<re_position+delta))
          	glob [i*sizex +j] = -1.0;
@@ -334,6 +335,16 @@ MakeHisto (
          	glob [i*sizex +j] = -1.0;
 			if ((re_position <= 1.0) && (1.0<re_position+delta))
          	glob [i*sizex +j] = -1.0;
+#else
+
+			// draw vertical lines showing crit strip, shifted over by one.
+			if ((re_position <= -1.0) && (-1.0<re_position+delta))
+         	glob [i*sizex +j] = -1.0;
+			if ((re_position <= -0.5) && (-0.5<re_position+delta))
+         	glob [i*sizex +j] = -1.0;
+			if ((re_position <= 0.0) && (0.0<re_position+delta))
+         	glob [i*sizex +j] = -1.0;
+#endif
 
          re_position += delta;
       }
