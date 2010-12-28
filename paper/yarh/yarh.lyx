@@ -1004,7 +1004,7 @@ accurate
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -1091,7 +1091,7 @@ reference "eq:zeta-pq-sum"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -1469,8 +1469,8 @@ it is enough to evaluate the indefinite integral
 \end_inset
 
 This integral does not have any simple, closed-form solution, but can be
- given in terms of some infinite sums.
- These may be obtained via the Newton series 
+ given in terms of an infinite sum.
+ This may be obtained via the Newton series 
 \begin_inset Formula \[
 \left(1+x\right)^{s}=\sum_{k=0}^{\infty}\dbinom{s}{k}x^{k}\]
 
@@ -1483,6 +1483,11 @@ where
 \end_inset
 
 is the binomial coefficient.
+ The series is absolutely convergent on the unit interval 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ that we wish to explore.
  The indefinite integral may then be evaluated as a sum:
 \begin_inset Formula \begin{align*}
 F\left(s,\alpha;x\right)= & \int\frac{x^{s}}{x+\alpha}dx\\
@@ -1498,11 +1503,19 @@ This allows the Mobius integral to be written as
 
 \end_inset
 
-Using that fact that 
+Using that fact that, in general, for coninued fractions, the 
+\begin_inset Formula $a,b,c$
+\end_inset
+
+ and 
+\begin_inset Formula $d$
+\end_inset
+
+ will be integers, with 
 \begin_inset Formula $ad-bc=\pm1$
 \end_inset
 
- in general, one may write the above as
+, one may re-write the above as
 \begin_inset Formula \begin{equation}
 \int\frac{ax+b}{cx+d}x^{s-1}dx=\frac{\left(-d\right)^{s-1}}{c^{s+1}}\left[\mp\ln\left(x+\frac{d}{c}\right)+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{k}\binom{s-1}{k}\left(1+\frac{cx}{d}\right)^{k}\left(\frac{\pm s+kbc}{k-s}\right)\right]\label{eq:mobius sums}\end{equation}
 
@@ -1516,19 +1529,24 @@ For
 \begin_inset Formula $S_{1,2}\left(x\right)$
 \end_inset
 
-, we can give an explicit form:
+, this can be made more explicit.
+ So, we have that 
 \begin_inset Formula \[
 S_{1,2}\left(x\right)=\frac{1}{a_{2}+\frac{1}{a_{1}+r}}\]
 
 \end_inset
 
 when 
+\begin_inset Formula $x$
+\end_inset
+
+ is written as 
 \begin_inset Formula \[
 x=\frac{1}{a_{1}+\frac{1}{a_{2}+r}}\]
 
 \end_inset
 
-where 
+with 
 \begin_inset Formula $a_{1}=\left\lfloor 1/x\right\rfloor $
 \end_inset
 
@@ -1536,7 +1554,7 @@ where
 \begin_inset Formula $a_{2}=\left\lfloor x/\left(1-a_{1}x\right)\right\rfloor $
 \end_inset
 
- are integers.
+ integers.
  Solving for 
 \begin_inset Formula $r$
 \end_inset
@@ -1556,8 +1574,16 @@ d= & 1+a_{2}\left(a_{1}-a_{2}\right)\end{align*}
 
 \end_inset
 
-Note that 
+Note that in this case, 
 \begin_inset Formula $ad-bc=1$
+\end_inset
+
+ for all possible values of 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2}$
 \end_inset
 
 .
@@ -1568,8 +1594,8 @@ Note that
 \end_inset
 
 and so one may combine these elements to write 
-\begin_inset Formula \[
-\int_{0}^{1}S_{1,2}\left(x\right)x^{s-1}dx=\sum_{a_{1}=1}^{\infty}\sum_{a_{2}=1}^{\infty}\int_{\underline{x}}^{\overline{x}}\frac{ax+b}{cx+d}x^{s-1}dx\]
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}S_{1,2}\left(x\right)x^{s-1}dx=\sum_{a_{1}=1}^{\infty}\sum_{a_{2}=1}^{\infty}\int_{\underline{x}}^{\overline{x}}\frac{ax+b}{cx+d}x^{s-1}dx\label{eq:analytic sum}\end{equation}
 
 \end_inset
 
@@ -1577,7 +1603,8 @@ and so one may combine these elements to write
 \end_layout
 
 \begin_layout Standard
-The summations are only conditionally convergent; one cannot interchange
+At this point, the ability to perform any further simple manipulations stops.
+ The summations are only conditionally convergent; one cannot interchange
  the sum over 
 \begin_inset Formula $k$
 \end_inset
@@ -1590,7 +1617,12 @@ The summations are only conditionally convergent; one cannot interchange
 \begin_inset Formula $a_{2}$
 \end_inset
 
-; the sums over 
+.
+ If one were to do so, one would quickly discover that, for fixed 
+\begin_inset Formula $k$
+\end_inset
+
+, the sums over 
 \begin_inset Formula $a_{1}$
 \end_inset
 
@@ -1599,6 +1631,79 @@ The summations are only conditionally convergent; one cannot interchange
 \end_inset
 
  are logarithmically divergent.
+ While this is not immediately obvious just be gazing at the sums, it is
+ easily confirmed by numerically evaluating them.
+ 
+\end_layout
+
+\begin_layout Standard
+One more avenue suggests itself, but then fails: one migh consider applying
+ the binomial expanstion to the powers 
+\begin_inset Formula $\left(1+\frac{x}{\alpha}\right)^{k}$
+\end_inset
+
+ that appear in the sum for 
+\begin_inset Formula $F\left(s,\alpha;x\right)$
+\end_inset
+
+, and then exchanging the order of summations there.
+ But this is not possible; the sums fail outright.
+ Thus, it appears that there are no further (obvious) analytic techniques
+ that one can apply to reduce the expression 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:analytic sum"
+
+\end_inset
+
+.
+ One is then left to contemplate the numeric evaluation of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:analytic sum"
+
+\end_inset
+
+.
+ Naively, one might expect that doing so would offer considerable advantages
+ over the numeric sum 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:zeta-pq-sum"
+
+\end_inset
+
+, but this is not at all the case; convregence is even slower, and fails
+ more profoundly.
+ 
+\end_layout
+
+\begin_layout Standard
+The use of both the sums 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:zeta-pq-sum"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:analytic sum"
+
+\end_inset
+
+ to locate the position of the first non-trivial zero is examined in the
+ next section.
+ 
+\end_layout
+
+\begin_layout Section
+Locating the first zero
+\end_layout
+
+\begin_layout Standard
+--------
 \end_layout
 
 \begin_layout Standard
