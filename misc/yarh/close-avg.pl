@@ -31,11 +31,21 @@ while (<>)
 		$idata[$width+$i] = $idata[$width+$i+1];
 	}
 	($n, $re, $im) = split;
-	$linecnt ++;
 
 	$rdata[$width+$width] = $re;
 	$idata[$width+$width] = $ie;
 
+	$linecnt ++;
+	if ($linecnt < 2*$width) next;
 
-	print "$n, $re, $im \n";
+	$ravg = 0;
+	$iavg = 0;
+	for ($i=-$width; $i<$width; $i++)
+	{
+		$ravg += $rdata[$width+$i] * $gauss[$width+$i];
+		$iavg += $idata[$width+$i] * $gauss[$width+$i];
+	}
+
+	$i = $n-$width;
+	print "$i	$ravg	$iavg\n";
 }
