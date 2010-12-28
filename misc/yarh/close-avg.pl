@@ -5,13 +5,16 @@
 # Linas Vepstas December 2010
 #
 
-$sigma = 2;
+# User-settable parameter
+$sigma = 6;
+
 $width = 6 * $sigma;
 
+$rp = 1.0/($sigma*sqrt(3.14159265358979));
 for ($i=-$width; $i<$width; $i++)
 {
 	$x = $i/$sigma;
-	$gauss[$width+$i] = exp(-$x*$x);
+	$gauss[$width+$i] = $rp*exp(-$x*$x);
 	# print "Gauss $i $gauss[$width+$i]\n";
 }
 
@@ -33,10 +36,10 @@ while (<>)
 	($n, $re, $im) = split;
 
 	$rdata[$width+$width] = $re;
-	$idata[$width+$width] = $ie;
+	$idata[$width+$width] = $im;
 
 	$linecnt ++;
-	if ($linecnt < 2*$width) next;
+	if ($linecnt < 2*$width) { next; }
 
 	$ravg = 0;
 	$iavg = 0;
