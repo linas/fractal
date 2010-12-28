@@ -36,7 +36,7 @@ main (int argc, char *argv[])
 	{
 		double x = ((double) i)/ ((double) (nmax));
 
-#define BASIC_GRAPH
+// #define BASIC_GRAPH
 #ifdef BASIC_GRAPH
 		f.SetRatio (i,nmax);
 		f.SwapTerms (p,q);
@@ -67,7 +67,16 @@ main (int argc, char *argv[])
 #endif /* CLEANUP_S13 */
 
 		printf ("%5d	%8.6g	%8.6g\n", i, x, y);
-#endif /* BASIC_GRAPH */
+#endif /* BASIC_SWAP */
+
+#define MOBIUS_GRAPH
+#ifdef MOBIUS_GRAPH
+		f.SetRatio (i,nmax);
+		f.MobTerms (p,q, 1, 0, 1, 1);
+		double y = f.ToReal();
+
+		printf ("%5d	%8.6g	%8.6g\n", i, x, y);
+#endif /* MOBIUS_SWAP */
 
 // #define SHOW_SELF_SIM 1
 #ifdef SHOW_SELF_SIM
