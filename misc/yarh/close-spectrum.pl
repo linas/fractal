@@ -21,7 +21,7 @@ while (<>)
 $freqmin = 0.005;
 $freqmax = 1.0;
 
-for ($freq = $freqmin; $freq < $freqmax; $freq++)
+for ($freq = $freqmin; $freq < $freqmax; $freq+= 0.005)
 {
 	$period = 2*3.141592653 / $freq;
 	$resumcos = 0;
@@ -38,6 +38,9 @@ for ($freq = $freqmin; $freq < $freqmax; $freq++)
 
 	$repow = sqrt($resumcos*$resumcos + $resumsin * $resumsin);
 	$impow = sqrt($imsumcos*$imsumcos + $imsumsin * $imsumsin);
+
+	$repow /= $linecnt;
+	$impow /= $linecnt;
 
 	print "$freq	$period	$repow	$impow\n";
 }
