@@ -1,54 +1,43 @@
 #! /usr/bin/perl
 #
-# Take a gaussian average of the zero locations as a function of N.
+# Compute power spectrum of the zero locations as a function of N.
 #
 # Linas Vepstas December 2010
 #
 
-# User-settable parameter
-$sigma = 36;
-
-$width = 6 * $sigma;
-
-$rp = 1.0/($sigma*sqrt(3.14159265358979));
-for ($i=-$width; $i<$width; $i++)
-{
-	$x = $i/$sigma;
-	$gauss[$width+$i] = $rp*exp(-$x*$x);
-	# print "Gauss $i $gauss[$width+$i]\n";
-}
-
-for ($i=-$width; $i<$width; $i++)
-{
-	$rdata[$width+$i] = 0;
-	$idata[$width+$i] = 0;
-}
-
+# read in data
 $linecnt = 0;
-
 while (<>)
 {
-	for ($i=-$width; $i<$width; $i++)
-	{
-		$rdata[$width+$i] = $rdata[$width+$i+1];
-		$idata[$width+$i] = $idata[$width+$i+1];
-	}
 	($n, $re, $im) = split;
 
-	$rdata[$width+$width] = $re;
-	$idata[$width+$width] = $im;
+	$rdata[$linecnt] = $re;
+	$idata[$linecnt] = $im;
 
 	$linecnt ++;
-	if ($linecnt < 2*$width) { next; }
+}
 
-	$ravg = 0;
-	$iavg = 0;
-	for ($i=-$width; $i<$width; $i++)
+# compute power 
+$freqmin = 0.005;
+$freqmax = 1.0;
+
+for ($freq = $freqmin; $freq < $freqmax; $freq++)
+{
+	$period = 2*3.141592653 / $freq;
+	$resumcos = 0;
+	$resumsin = 0;
+	$imsumcos = 0;
+	$imsumsin = 0;
+	for ($i=0; $i<$linecnt; $i++)
 	{
-		$ravg += $rdata[$width+$i] * $gauss[$width+$i];
-		$iavg += $idata[$width+$i] * $gauss[$width+$i];
+		$resumcos = $rdata[$i] * cos($i*$freq);
+		$resumsin = $rdata[$i] * sin($i*$freq);
+		$imsumcos = $idata[$i] * cos($i*$freq);
+		$imsumsin = $idata[$i] * sin($i*$freq);
 	}
 
-	$i = $n-$width;
-	print "$i	$ravg	$iavg\n";
+	$repow = sqrt($resumcos*$resumcos + $resumsin * $resumsin);
+	$impow = sqrt($imsumcos*$imsumcos + $imsumsin * $imsumsin);
+
+	print "$freq	$period	$repow	$impow\n";
 }
