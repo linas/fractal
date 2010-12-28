@@ -9,6 +9,7 @@
 $linecnt = 0;
 while (<>)
 {
+	if (/#/) {next; }
 	($n, $re, $im) = split;
 
 	$rdata[$linecnt] = $re;
@@ -30,17 +31,18 @@ for ($freq = $freqmin; $freq < $freqmax; $freq+= 0.005)
 	$imsumsin = 0;
 	for ($i=0; $i<$linecnt; $i++)
 	{
-		$resumcos = $rdata[$i] * cos($i*$freq);
-		$resumsin = $rdata[$i] * sin($i*$freq);
-		$imsumcos = $idata[$i] * cos($i*$freq);
-		$imsumsin = $idata[$i] * sin($i*$freq);
+		$resumcos += $rdata[$i] * cos($i*$freq);
+		$resumsin += $rdata[$i] * sin($i*$freq);
+		$imsumcos += $idata[$i] * cos($i*$freq);
+		$imsumsin += $idata[$i] * sin($i*$freq);
 	}
 
-	$repow = sqrt($resumcos*$resumcos + $resumsin * $resumsin);
+	$repow = $resumcos*$resumcos + $resumsin * $resumsin;
+	$repow = sqrt($repow);
 	$impow = sqrt($imsumcos*$imsumcos + $imsumsin * $imsumsin);
 
-	$repow /= $linecnt;
-	$impow /= $linecnt;
+	# $repow /= $linecnt;
+	# $impow /= $linecnt;
 
 	print "$freq	$period	$repow	$impow\n";
 }
