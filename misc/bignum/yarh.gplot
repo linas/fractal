@@ -83,15 +83,18 @@ plot "yarh-12-zero.dat" using 1:2 title "re" with lines linewidth 2
 # # Used to create graphic image for yarh paper.
 # 
 set term postscript eps color
-set out 'zero_re_z12_full.eps'
+# set out 'zero_re_z12_full.eps'
+set out 'zero_im_z12_full.eps'
  
 set data style lines
 set key right
 
 set title "Zero of zeta_N;1,2"
 set xlabel "N"
-set ylabel "Re s"
-set xlogscale
+# set ylabel "Re s"
+set ylabel "Im s"
+set logscale x
 
-plot "yarh--12-zero.dat" using 1:2 title "" with lines linewidth 2
+# plot "yarh-12-zero.dat" using 1:2 title "" with lines linewidth 2
+plot "yarh-12-zero.dat" using 1:3 title "" with lines linewidth 2
 ######################################################################
