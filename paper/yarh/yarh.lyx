@@ -310,21 +310,22 @@ Continued Fractions; Permutation Groups
 \end_layout
 
 \begin_layout Standard
-Note that continued fractions provide a representation of the real numbers
- in the infinite Cartesian product space 
-\begin_inset Formula $\mathbb{N}^{\omega}=\mathbb{N\times N\times}...$
+Continued fractions provide a representation of the real numbers in the
+ infinite Cartesian product space 
+\begin_inset Formula $\mathbb{M}^{\omega}=\mathbb{M\times M\times}...$
 \end_inset
 
  where 
+\begin_inset Formula $\mathbb{M}=\mathbb{N}\cup\{\infty\}$
+\end_inset
+
+ and 
 \begin_inset Formula $\mathbb{N}=\mathbb{Z}^{+}$
 \end_inset
 
  is the set of positive integers.
- Note that this implies that each point in this space can be given a unique
- real value using the continued fraction mapping, and that each (non-rational)
- real number appears only once in this space.
- In other words, the continued fraction brackets are an operator that maps
- this space to the real numbers, 
+ The continued fraction brackets are a function that maps this product space
+ to the real numbers, 
 \emph on
 i.e.
 
@@ -334,36 +335,61 @@ i.e.
 \end_inset
 
 .
- What makes the 
-\begin_inset Formula $[\,]$
-\end_inset
-
- operator so interesting is that it is 1-1 and onto, and is thus invertible,
- at least on the irrationals, if we brush aside a little problem with the
- rationals.
- Note that in this mapping, the number 0 is a kind-of 
+ The mapping is, strictly-speaking, surjective, yet, in a certain sense,
+ is 
 \begin_inset Quotes eld
 \end_inset
 
-essential singularity
+almost everywhere
 \begin_inset Quotes erd
 \end_inset
 
- at 
-\begin_inset Formula $\infty$
+ bijective.
+ That is, every non-rational real number corresponds to a unique continued
+ fraction; only the rationals have multiple expansions.
+ 
+\end_layout
+
+\begin_layout Standard
+The above definition of a continued fraction differs slightly from the conventio
+nal norm.
+ Usually, continued fractions are considered to be of finite length for
+ the rationals, and infinite-length for the non-rational reals.
+ This can create confusion when discussing 
+\begin_inset Formula $S_{p,q}(x)$
 \end_inset
 
-, since the continued fraction expansion for 0 is 
+ when either 
+\begin_inset Formula $p$
+\end_inset
+
+ or 
+\begin_inset Formula $q$
+\end_inset
+
+ are larger than the length of the continued fraction.
+ The trick of adjoining infinity to the naturals is the most straight-forward
+ way of avoiding this problem.
+ The cost of this trick is that a 
+\begin_inset Quotes eld
+\end_inset
+
+very large part
+\begin_inset Quotes erd
+\end_inset
+
+ of the Cartesian product maps to the rationals.
+ Thus, for example, the continued fraction expansion for 0 is 
 \begin_inset Formula $0=[\infty,a_{2},a_{3},...]$
 \end_inset
 
- for arbitrary integers 
+ for any arbitrary positive integers 
 \begin_inset Formula $a_{k}$
 \end_inset
 
 .
- Indeed, all rationals suffer in this way: a finite continued fraction is
- just one where 
+ All rationals suffer in the same way: a finite continued fraction is just
+ one where 
 \begin_inset Formula $\infty$
 \end_inset
 
@@ -373,19 +399,13 @@ essential singularity
 \end_inset
 
 .
- We can paper around this difficulty by considering instead 
-\begin_inset Formula $\mathbb{M}=\mathbb{N}\cup\{\infty\}$
-\end_inset
-
-, defining continued fractions as sequences in 
-\begin_inset Formula $\mathbb{M}^{\omega}$
-\end_inset
-
-, and finally taking the kernel of 
+ This can be papered over by considering the reals as the quotient space
+ of sequences modulo the kernel of 
 \begin_inset Formula $[\,]$
 \end_inset
 
- and defining a quotient space 
+.
+ That is, define a quotient space 
 \begin_inset Formula $\mathbb{S}=\mathbb{M}^{\omega}/\ker[\,]$
 \end_inset
 
@@ -394,37 +414,25 @@ essential singularity
 \end_inset
 
  is 1-1 and onto in this quotient space.
- In particular, this implies that the inverse map 
-\begin_inset Formula $[\,]^{-1}:\mathbb{R}\to\mathbb{S}$
+ Since this map is bijective, it is invertible, and thus, any function on
+ the reals 
+\begin_inset Formula $\mathbb{R}$
 \end_inset
 
- exists and is well-defined.
- 
-\emph on
-ToDo: describe some sensible topologies that could be applied to this space
-\emph default
-.
- Note that any map 
-\begin_inset Formula $\mu:\mathbb{S}\rightarrow\mathbb{S}$
-\end_inset
-
- induces a map 
-\begin_inset Formula $\tilde{\mu}:\mathbb{R}\rightarrow\mathbb{R}$
-\end_inset
-
-, through the similarity transform 
-\begin_inset Formula $\tilde{\mu}=[\,]\circ\mu\circ[\,]^{-1}$
-\end_inset
-
-; likewise, a function of the reals can be restated as a function on 
+ and be expressed as an equivalent function on 
 \begin_inset Formula $\mathbb{S}$
 \end_inset
 
-.
+, and vice-versa: functions on the sequence space 
+\begin_inset Formula $\mathbb{M}^{\omega}$
+\end_inset
+
+ correspond to functions on the reals.
+ 
 \end_layout
 
 \begin_layout Standard
-The permutation group elements acting on 
+Elements of the (infinite-dimensional) permutation group acting on 
 \begin_inset Formula $\mathbb{S}$
 \end_inset
 
@@ -436,24 +444,28 @@ reference "eq:Permutation Elts"
 \end_inset
 
 .
- Note that 
+ The 
 \begin_inset Formula $S_{p,q}(x)$
 \end_inset
 
- is discontinuous, but only on a countable set of points.
- That is, 
+ are discontinuous, but only on a countable set of points.
+ That is, for fixed 
+\begin_inset Formula $p,q,$
+\end_inset
+
+ the function 
 \begin_inset Formula $S_{p,q}(x)$
 \end_inset
 
  is discontinuous on the proverbial 
-\begin_inset Quotes eld
+\begin_inset Quotes erd
 \end_inset
 
 set of measure zero
 \begin_inset Quotes erd
 \end_inset
 
-, and so one can easily form well-defined integrals using classical techniques.
+, and so one can easily form well-defined integrals using ordinary techniques.
  
 \end_layout
 
