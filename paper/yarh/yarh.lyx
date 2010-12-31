@@ -1248,7 +1248,7 @@ reference "cap:A-Shadow-of"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -1673,9 +1673,13 @@ reference "eq:zeta-pq-sum"
 
 \end_inset
 
-, but this is not at all the case; convregence is even slower, and fails
+, but this is not at all the case; convergence is even slower, and fails
  more profoundly.
  
+\end_layout
+
+\begin_layout Standard
+XXX
 \end_layout
 
 \begin_layout Standard
@@ -1762,6 +1766,11 @@ reference "fig:Numerical-zero-finding"
 \end_inset
 
  shows.
+ The noise appears to be classic fractal 
+\begin_inset Formula $1/f$
+\end_inset
+
+ noise, as can be seen from the graph of the power spectrum.
 \end_layout
 
 \begin_layout Standard
@@ -1892,10 +1901,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
@@ -2000,63 +2005,91 @@ created with misc/yarh/power-spectrum.pl and power.gplot
 \end_layout
 
 \begin_layout Standard
---------
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
 \end_layout
 
-\begin_layout Standard
-Unfortunately, the nature of Newton series is that they can have considerable
- difficulty converging, as the binomial coefficient gaurentees that terms
- get quite large, and only the alternating sign leads to cancellations.
- By using the expression 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:mobius sums"
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Increased precision
+\end_layout
 
 \end_inset
 
- for the integral, one can exchange the order of the 
-\begin_inset Formula $a_{1},a_{2}$
-\end_inset
-
- summations, and the 
-\begin_inset Formula $k$
-\end_inset
-
- summation.
- Define
-\begin_inset Formula \[
-\alpha\left(s\right)=\sum_{a_{1}=1}^{\infty}\sum_{a_{2}=1}^{\infty}\left.\frac{\left(-d\right)^{s-1}}{c^{s+1}}\ln\left(x+\frac{d}{c}\right)\right|_{\underline{x}}^{\overline{x}}\]
+ 
+\begin_inset Graphics
+	filename zero_re_z12_full.eps
+	width 50text%
 
 \end_inset
 
-and
-\begin_inset Formula \[
-\beta\left(k,s\right)=\sum_{a_{1}=1}^{\infty}\sum_{a_{2}=1}^{\infty}\left.\frac{\left(-d\right)^{s-1}}{c^{s+1}}\left(1+\frac{cx}{d}\right)^{k}\right|_{\underline{x}}^{\overline{x}}\]
+
+\begin_inset Graphics
+	filename zero_im_z12_full.eps
+	width 50text%
 
 \end_inset
 
-and
-\begin_inset Formula \[
-\gamma\left(k,s\right)=\sum_{a_{1}=1}^{\infty}\sum_{a_{2}=1}^{\infty}\left.\frac{\left(-d\right)^{s-1}}{c^{s}}b\left(1+\frac{cx}{d}\right)^{k}\right|_{\underline{x}}^{\overline{x}}\]
+
+\end_layout
+
+\begin_layout Plain Layout
+The above graphs show the location of the first non-trivial zero of 
+\begin_inset Formula $\zeta_{N;1,2}\left(s\right)$
+\end_inset
+
+, as a function of 
+\begin_inset Formula $N$
+\end_inset
+
+, on a logarithmic scale.
+ Only a sparese set of values of 
+\begin_inset Formula $N$
+\end_inset
+
+ are sampled.
+ The figure on the left, which would confirm or disprove the conjuecture,
+ is ambiguous.
+ Although the data, as illustrated, shows a precipitous drop past the critical
+ line 
+\begin_inset Formula $\Re s=\frac{1}{2}$
+\end_inset
+
+, it is not yet obvious whther there will be a bounce/oscillation back up
+ towards 
+\begin_inset Formula $\Re s=\frac{1}{2}$
+\end_inset
+
+, or whether the asymptotic behaviour aims at 
+\begin_inset Formula $\Re s\simeq0.45$
+\end_inset
+
+.
+ Unfortunately, computational costs are large; each additional point in
+ these graphs requires in excess of a week of compute time on current-era
+ computers.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
- so that
-\begin_inset Formula \[
-\int_{0}^{1}S_{1,2}\left(x\right)x^{s-1}dx=\alpha\left(s\right)+\sum_{k=1}^{\infty}\frac{\left(-1\right)^{k}}{k}\binom{s-1}{k}\left(\frac{s\beta\left(k,s\right)+k\gamma\left(k,s\right)}{k-s}\right)\]
 
-\end_inset
-
-The goal of this re-ordering of the summations is to perform the 
-\begin_inset Formula $k$
-\end_inset
-
- summation last, thus keeping the poor convergence of the Newton series
- from disturbing the 
-\begin_inset Formula $a_{1},a_{2}$
-\end_inset
-
- sums.
 \end_layout
 
 \begin_layout Section
