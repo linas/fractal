@@ -1,4 +1,8 @@
-all:
+
+all: yarh.lyx
+	lyx yarh.lyx -e latex
+	/usr/bin/latex yarh.tex
+	/usr/bin/bibtex yarh.aux
 
 dist:
 	cp swap-s12.eps swap-s12.ps
@@ -13,7 +17,8 @@ dist:
 	cp zero_re_z12_mid.eps zero_re_z12_mid.ps
 	cp power-re.eps power-re.ps
 	cp power-im.eps power-im.ps
-	tar -zcvf yarh.tar.gz yarh.tex swap-s12.ps swap-s13.ps swap-s23.ps \
+	tar -zcvf yarh.tar.gz yarh.tex yarh.aux yarh.bbl \
+		swap-s12.ps swap-s13.ps swap-s23.ps \
 		swap-s14.ps rzero-15.png rzero-151.png rzero-1051.png \
 		rzero-11051.png rzero-151051.png r-sum-1051.png r-sum-11051.png \
 		r-sum-121051.png zero-s12-151051.png zero-s13-151051.png \
