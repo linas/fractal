@@ -3,12 +3,16 @@
 # Make the submission to arxiv math.NT/0609775
 
 all:
-	mv plouffe-ram.tex plouffe-ram.latex
-	/usr/bin/latex plouffe-ram.latex
+
+plouffe-ram.bbl: plouffe-ram.tex
+	/usr/bin/latex plouffe-ram.tex
 	/usr/bin/bibtex plouffe-ram.aux
 
-dist:
-	tar -zcvf plouffe-ram.tar.gz plouffe-ram.latex plouffe-ram.aux plouffe-ram.bbl *.eps
+plouffe-ram.tex: plouffe-ram.lyx
+	lyx plouffe-ram.lyx -e latex
+
+dist: plouffe-ram.tex plouffe-ram.bbl
+	tar -zcvf plouffe-ram.tar.gz plouffe-ram.tex plouffe-ram.bbl *.eps
 
 clean:
 	rm -f *.log *.blg *.dvi
