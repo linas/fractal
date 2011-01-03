@@ -242,6 +242,7 @@ int main (int argc, char * argv[])
 		}
 
 		nsteps ++;
+#define LOG_STEPS
 #ifdef LOG_STEPS
 		nsteps = (int) (((double) nsteps * rr) + 3);
 		nsteps += nsteps%2 + 1;  /* make it odd, always */
@@ -253,7 +254,7 @@ int main (int argc, char * argv[])
 
 // #define WALK_THE_LINE
 #ifdef WALK_THE_LINE
-	/* Walk up the imaginary axix at re=1/2, and prit the results */
+	/* Walk up the imaginary axix at re=1/2, and print the results */
 	printf ("#\n# decimal precision = %d\n", prec);
 	printf ("#\n# num steps = %d\n#\n", nsteps);
 	fflush (stdout);
