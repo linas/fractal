@@ -1152,18 +1152,17 @@ reference "eq: transfer-jacobi"
 \end_layout
 
 \begin_layout Standard
----------
-\end_layout
-
-\begin_layout Standard
-Some curious lemmas show up along the way.
+In simplistic terms, the push-forward can be thought of as a kind of change-of-v
+ariable.
+ Thus, one should not be surprised by the following lemma, which should
+ be recognizable as the Jacobian, from basic calculus.
  
 \end_layout
 
-\begin_layout Lemma
-One has 
-\begin_inset Formula \begin{equation}
-\sum_{j=1}^{k}\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}=1\label{eq:}\end{equation}
+\begin_layout Lemma*
+(Jacobian) One has 
+\begin_inset Formula \[
+\sum_{x_{j}\in g^{-1}(y)}\frac{1}{\left|g^{\prime}\left(x_{j}\right)\right|}=1\]
 
 \end_inset
 
@@ -1188,9 +1187,20 @@ This follows by taking the limit
 .
 \end_layout
 
-\begin_layout Corollary
-The constant function is an eigenvector of the transfer operator, associated
- with the eigenvalue one.
+\begin_layout Corollary*
+\begin_inset CommandInset label
+LatexCommand label
+name "cor:unit-eigenvec"
+
+\end_inset
+
+The uniform distribution (
+\emph on
+i.e.
+
+\emph default
+ the measure) is an eigenvector of the transfer operator, associated with
+ the eigenvalue one.
  
 \end_layout
 
@@ -1208,17 +1218,16 @@ reference "eq:Transfer-point"
 \end_inset
 
 , and applies the lemma above.
- From the viewpoint of the sigma-algebra, this is nothing more than the
- seemingly vacuous statement that 
+ From the viewpoint of the sigma-algebra, this is nothing more than a rephrasing
+ of the starting point, that 
 \begin_inset Formula $\nu=g_{*}\mu$
 \end_inset
 
-.
- This becomes slightly less vacuous if one takes the space 
+, and then taking the space 
 \begin_inset Formula $Y=X$
 \end_inset
 
-, so that 
+, so that the push-forward induced by 
 \begin_inset Formula $g:X\to X$
 \end_inset
 
@@ -1231,26 +1240,165 @@ reference "eq:Transfer-point"
 \end_layout
 
 \begin_layout Standard
-The last corollary suggests two interesting conjectures.
+The last corollary is more enlightening when it is turned on its side; it
+ implies two well-known theorems, which follow easily in this framework.
+\end_layout
+
+\begin_layout Corollary*
+(Ruelle-Perron-Frobenius theorem).
+ All transfer operators are continuous, compact, bounded operators; furthermore,
+ they are isometries of Banach spaces.
+\end_layout
+
+\begin_layout Proof
+This theorem is of course just the Frobenius-Perron theorem, recast in the
+ context of measure theory.
+ By definition, the measures have unit norm: that is, 
+\begin_inset Formula $\left\Vert \mu\right\Vert _{1}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\Vert \nu\right\Vert _{1}=1$
+\end_inset
+
+.
+ This is nothing more than the statement that the spaces 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ are measurable: the total volume of 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ is, by definition, one.
+ Since 
+\begin_inset Formula $\nu=g_{*}\mu$
+\end_inset
+
+, we have 
+\begin_inset Formula $\left\Vert g_{*}\mu\right\Vert _{1}=1$
+\end_inset
+
+, and this holds for all possible measures 
+\begin_inset Formula $\mu\in\mathcal{F}(X)$
+\end_inset
+
+.
  
 \end_layout
 
-\begin_layout Conjecture
-(Ruelle-Perron-Frobenius theorem).
- All transfer operators are compact, bounded operators.
+\begin_layout Proof
+Recall the definition of a bounded operator.
+ Given a linear map 
+\begin_inset Formula $T:U\to V$
+\end_inset
+
+ between Banach spaces 
+\begin_inset Formula $U$
+\end_inset
+
+and 
+\begin_inset Formula $V$
+\end_inset
+
+, then 
+\begin_inset Formula $T$
+\end_inset
+
+ is bounded if there exists a constant 
+\begin_inset Formula $C<\infty$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left\Vert Tu\right\Vert _{V}\le C\left\Vert u\right\Vert _{U}$
+\end_inset
+
+for all 
+\begin_inset Formula $u\in U$
+\end_inset
+
+.
+ But this is exactly the case above, with 
+\begin_inset Formula $T=g_{*}$
+\end_inset
+
+, and 
+\begin_inset Formula $U=\mathcal{F}(X)$
+\end_inset
+
+, 
+\begin_inset Formula $V=\mathcal{F}(Y)$
+\end_inset
+
+, and 
+\begin_inset Formula $C=1$
+\end_inset
+
+.
+ The norm of a bounded operator is conventionally defined as
+\begin_inset Formula \[
+\left\Vert T\right\Vert =\sup_{u\ne0}\frac{\left\Vert Tu\right\Vert _{V}}{\left\Vert u\right\Vert _{U}}=\sup_{\left\Vert u\right\Vert _{U}\le1}\left\Vert Tu\right\Vert _{V}\]
+
+\end_inset
+
+and so we have the norm of 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ being 
+\begin_inset Formula $\left\Vert g_{*}\right\Vert =1$
+\end_inset
+
+.
+ That 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ is an isometry follows trivially from 
+\begin_inset Formula $\left\Vert g_{*}\mu\right\Vert _{1}=\left\Vert \nu\right\Vert _{1}$
+\end_inset
+
+ and that 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+ is linear.
 \end_layout
 
 \begin_layout Standard
-This conjecture is of course just the Frobenius-Perron theorem, recast in
- the context of measure theory.
- I suppose it has a simple-enough proof that the author hasn't yet seen
- or re-discovered.
- XXX Don't let this sit there.
- XXX, Ref:Dunford and Schwartz.
- A corollary to the Perron-Frobenius theorem is then:
+The corollary 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cor:unit-eigenvec"
+
+\end_inset
+
+ can also be treated as a corollary to the Perron-Frobenius theorem: namely,
+ that there is at least one vector that corresponds to the maximum eigenvalue
+ of 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+.
+ This eigenvector is in fact the Haar measure, as the next theorem shows.
+ 
 \end_layout
 
-\begin_layout Corollary
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:Haar-measure"
+
+\end_inset
+
 (Haar measure) For any homomorphism 
 \begin_inset Formula $g:X\to X$
 \end_inset
@@ -1292,11 +1440,8 @@ This conjecture is of course just the Frobenius-Perron theorem, recast in
  
 \end_layout
 
-\begin_layout Standard
-By the Frobenius-Perron theorem, this measure is unique.
- It is, of course the Haar measure, although this seems to be an unusual
- way of finding the Haar measure.
- Sketch of semi-proof: 
+\begin_layout Proof
+By definition, 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -1311,19 +1456,58 @@ By the Frobenius-Perron theorem, this measure is unique.
 
 is a bounded operator, and the space of measures is compact, and so a bounded
  operator on a compact space will have a fixed point.
- Ref.
- some appropriate fixed-point thm (Ref Dunford and Schwartz).
- To prove uniqueness, we have to show that 
+ The existence of the fixed point is given by the Markov-Kakutani theorem
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p 456"
+key "Dunford1957"
+
+\end_inset
+
+.
+ The Markov-Kakutani theorem also provides the uniqueness condition: if
+ there are other push-forwards 
+\begin_inset Formula $h_{*}$
+\end_inset
+
+ that commute with 
+\begin_inset Formula $g_{*}$
+\end_inset
+
+, then each such push-forward will also have a fixed point.
+ The goal is then to show that when 
 \begin_inset Formula $g$
 \end_inset
 
- is ergodic, i.e.
- that there are no invariant subspaces, that orbit of 
+ is ergodic, there are no other functions 
+\begin_inset Formula $h$
+\end_inset
+
+ that commute with 
+\begin_inset Formula $g$
+\end_inset
+
+.
+ But this follows from the definition of ergodicity: when 
+\begin_inset Formula $g$
+\end_inset
+
+ is ergodic, there are no invariant subspaces, and the orbit of 
 \begin_inset Formula $g$
 \end_inset
 
  is the whole space.
- Else, if 
+ As there are no invariant subspaces, there are no operators that can map
+ between these subspaces, 
+\emph on
+i.e.
+
+\emph default
+ there are no other commuting operators.
+\end_layout
+
+\begin_layout Standard
+(XXX note: Else, if 
 \begin_inset Formula $g$
 \end_inset
 
@@ -1340,8 +1524,11 @@ is a bounded operator, and the space of measures is compact, and so a bounded
 \begin_inset Formula $\mu$
 \end_inset
 
- in one leaf to that in another.
- 
+ in one leaf to that in another.)
+\end_layout
+
+\begin_layout Standard
+--------
 \end_layout
 
 \begin_layout Standard
