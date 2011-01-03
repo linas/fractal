@@ -128,6 +128,21 @@ key "Gutzwiller1990,Glimm1981,Kittel1976"
 \end_layout
 
 \begin_layout Standard
+----------
+\end_layout
+
+\begin_layout Standard
+More generally: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ding1998,Koopman1931,Ruelle1986,Ruelle1986-PRL"
+
+\end_inset
+
+ but also shift operator (several refs e.g hardy classes book...)
+\end_layout
+
+\begin_layout Standard
 -------------
 \end_layout
 
@@ -424,6 +439,7 @@ In this section, it will be shown that the transfer operator is the push-forward
  The point of this theorem is to disentangle the role of topology, and specifica
 lly, the role of measure theory, from the use of the shift operator.
  We begin with a general setting.
+ XXX why shift oper here ??!!
 \end_layout
 
 \begin_layout Standard
@@ -462,15 +478,11 @@ Consider a topological space
 \end_inset
 
  to being a field over the reals is is required, so that it can be used
- in conjunction with a measure; measures are, by definition,  always real-valued.
+ in conjunction with a measure; measures are, by definition, always real-valued.
 \end_layout
 
 \begin_layout Standard
----------
-\end_layout
-
-\begin_layout Standard
-One may then define the algrbra of functions 
+One may then define the algebra of functions 
 \begin_inset Formula $\mathcal{F}(X)$
 \end_inset
 
@@ -479,7 +491,7 @@ One may then define the algrbra of functions
 \end_inset
 
  as the set of functions 
-\begin_inset Formula $f\in\mathcal{F}(X)$
+\begin_inset Formula $f\in\mathcal{F}\left(X\right)$
 \end_inset
 
  such that 
@@ -487,9 +499,13 @@ One may then define the algrbra of functions
 \end_inset
 
 .
- The algebra of functions is a vector space, in that given two functions
- 
-\begin_inset Formula $f_{1},f_{2}\in\mathcal{F}(X)$
+ An algebra is a vector space endowed with multiplication between vectors.
+ The space 
+\begin_inset Formula $\mathcal{F}\left(X\right)$
+\end_inset
+
+ is a vector space, in that given two functions 
+\begin_inset Formula $f_{1},f_{2}\in\mathcal{F}\left(X\right)$
 \end_inset
 
 , their linear combination 
@@ -497,7 +513,7 @@ One may then define the algrbra of functions
 \end_inset
 
  is also an element of 
-\begin_inset Formula $\mathcal{F}(X)$
+\begin_inset Formula $\mathcal{F}\left(X\right)$
 \end_inset
 
 ; thus 
@@ -509,13 +525,7 @@ One may then define the algrbra of functions
 \end_inset
 
  may be interpreted to be the vectors of a vector space.
- An algebra is a vector space for which the multiplication of vectors is
- defined.
- In the case of 
-\begin_inset Formula $\mathcal{F}(X)$
-\end_inset
-
-, the multiplication is the pair-wise multiplication of functions; that
+ Multiplication is the point-wise multiplication of function values; that
  is, the product 
 \begin_inset Formula $f_{1}f_{2}$
 \end_inset
@@ -529,16 +539,16 @@ One may then define the algrbra of functions
 \end_inset
 
  is again an element of 
-\begin_inset Formula $\mathcal{F}(X)$
+\begin_inset Formula $\mathcal{F}\left(X\right)$
 \end_inset
 
 .
- Sine one clearly has 
+ Since one clearly has 
 \begin_inset Formula $f_{1}f_{2}=f_{2}f_{1}$
 \end_inset
 
 , multiplication is commutative, and so 
-\begin_inset Formula $\mathcal{F}(X)$
+\begin_inset Formula $\mathcal{F}\left(X\right)$
 \end_inset
 
  is also a commutative ring.
@@ -546,12 +556,12 @@ One may then define the algrbra of functions
 
 \begin_layout Standard
 The space 
-\begin_inset Formula $\mathcal{F}(X)$
+\begin_inset Formula $\mathcal{F}\left(X\right)$
 \end_inset
 
  may be endowed with a topology.
  The coarsest topology on 
-\begin_inset Formula $\mathcal{F}(X)$
+\begin_inset Formula $\mathcal{F}\left(X\right)$
 \end_inset
 
  is the 
@@ -559,16 +569,16 @@ The space
 weak topology
 \emph default
 , which is obtained by taking 
-\begin_inset Formula $\mathcal{F}(X)$
+\begin_inset Formula $\mathcal{F}\left(X\right)$
 \end_inset
 
- to be the space that is dual to 
+ to be the space that is the topological dual to 
 \begin_inset Formula $X$
 \end_inset
 
 .
  As a vector space, 
-\begin_inset Formula $\mathcal{F}(X)$
+\begin_inset Formula $\mathcal{F}\left(X\right)$
 \end_inset
 
  may be endowed with a norm 
@@ -581,17 +591,18 @@ weak topology
 \end_inset
 
 -norm 
-\begin_inset Formula \begin{equation}
-\left\Vert f\right\Vert _{p}=\left(\int\left|f(x)\right|^{p}dx\right)^{1/p}\label{eq:}\end{equation}
+\begin_inset Formula \[
+\left\Vert f\right\Vert _{p}=\left(\int\left|f(x)\right|^{p}dx\right)^{1/p}\]
 
 \end_inset
 
- For 
+If the vector space is complete under this norm, then the space is one of
+ the (classical) Banach spaces; for 
 \begin_inset Formula $p=2$
 \end_inset
 
 , this norm converts the space 
-\begin_inset Formula $\mathcal{F}(X)$
+\begin_inset Formula $\mathcal{F}\left(X\right)$
 \end_inset
 
  into the Hilbert space of square-integrable functions on 
@@ -599,11 +610,16 @@ weak topology
 \end_inset
 
 .
- Other norms are possible, in which case 
-\begin_inset Formula $\mathcal{F}(X)$
+ In various cases, it may not be possible or advisable to provide a norm;
+ in in such cases, one may still treat 
+\begin_inset Formula $\mathcal{F}\left(X\right)$
 \end_inset
 
- has the structure of a Banach space rather than a Hilbert space.
+ as a Fréchet space.
+\end_layout
+
+\begin_layout Standard
+---------
 \end_layout
 
 \begin_layout Standard
