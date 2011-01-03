@@ -211,6 +211,7 @@ int main (int argc, char * argv[])
 
 	printf ("#\n# intermediate decimal precision = %d\n", prec);
 	printf ("#\n# zero decimal precision = %d\n#\n", ndigits);
+	fflush (stdout);
 
 	cpx_t zero, s0, e1, e2;
 	cpx_init(zero);
