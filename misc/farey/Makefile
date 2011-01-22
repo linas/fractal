@@ -4,12 +4,13 @@ INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
 
-EXES= binom trinary prt-farey st-xform
+EXES= binom divisor-rep trinary prt-farey st-xform
 
 all: $(EXES)
 
 binom:	binom.o 
 density:	density.o
+divisor-rep:	divisor-rep.o 
 prt-farey:	prt-farey.o 
 st-xform:	st-xform.o
 trinary:	trinary.o
