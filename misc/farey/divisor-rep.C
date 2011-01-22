@@ -18,8 +18,6 @@ main (int argc, char * argv[])
 	int deno = atoi (argv[1]);
 	
 	struct Prime * pr = CreatePrime ();
-	int wtf = GetPrime (pr, deno);
-printf("wtf = %d\n", wtf);
 
 	int i;
 	for (i=1; i<deno; i++)
@@ -29,12 +27,17 @@ printf("wtf = %d\n", wtf);
 		cf.SetRatio (num,deno);
 		double x = cf.ToFarey ();
 		int nt = cf.GetNumTerms();
+
+		double ber = 1.0;
 		int j;
 		for (j=1; j<=nt; j++)
 		{
 			int p = cf.GetTerm(j);
-			printf("ahh %d %d \n", j, p);
+			int f = GetPrime (pr, j-1);
+
+			while (p) { ber *= f; p--;  }
 		}
-		printf ("its %g\n", x);
+		ber = log(ber);
+		printf ("%d	%g	%g\n", i, x, ber);
 	}
 }
