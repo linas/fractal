@@ -6981,7 +6981,15 @@ The above figures show the Walsh functions
 \begin_inset Formula $\rho_{m}$
 \end_inset
 
-, in green, for 
+ (defined in eqn.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rho-fractal"
+
+\end_inset
+
+), in green, for 
 \begin_inset Formula $m=1,2,3,7$
 \end_inset
 
@@ -7168,9 +7176,14 @@ key "Carothers2005"
 .
  That is, the non-negative integers form an abelian group under bit-wise
  XOR, and the Walsh functions are isomorphic, as a group.
- This XOR operation is vaguely reminiscent of a grassmann (exterior) algebra.
  Treated as a product operation, it means that the Walsh functions can form
- not just a Banach space, but also a Banach algebra.
+ not just a Banach space, but also a Banach algebra; but this algebra is
+ just the usual ring of functions on the unit interval.
+ The scaling property commutes with the XOR operation as well: 
+\begin_inset Formula $2\left(m\oplus n\right)=2m\oplus2n$
+\end_inset
+
+.
  A sampling of these functions are shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7315,8 +7328,8 @@ m/walsh.gplot
 A set of fractal functions, corresponding 1-1 to the Walsh functions, and
  transforming under the dyadic monoid, are built as usual.
  Let 
-\begin_inset Formula \[
-\rho_{m}\left(x\right)=\sum_{j=0}^{\infty}w^{j}s_{m}\left(2^{j}x\right)\]
+\begin_inset Formula \begin{equation}
+\rho_{m}\left(x\right)=\sum_{j=0}^{\infty}w^{j}s_{m}\left(2^{j}x\right)\label{eq:rho-fractal}\end{equation}
 
 \end_inset
 
