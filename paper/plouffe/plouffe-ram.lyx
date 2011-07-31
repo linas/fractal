@@ -1,24 +1,34 @@
-#LyX 1.6.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 345
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass amsart
 \use_default_options false
 \begin_modules
 theorems-ams
+eqs-within-sections
+figs-within-sections
 \end_modules
+\maintain_unincluded_children false
 \language english
+\language_package default
 \inputencoding auto
+\fontencoding global
 \font_roman times
 \font_sans default
 \font_typewriter default
 \font_default_family default
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
 
 \graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
 \paperfontsize default
 \spacing single
 \use_hyperref false
@@ -26,21 +36,31 @@ theorems-ams
 \use_geometry false
 \use_amsmath 2
 \use_esint 0
+\use_mhchem 1
+\use_mathdots 1
 \cite_engine basic
 \use_bibtopic false
+\use_indices false
 \paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
-\defskip medskip
+\paragraph_indentation default
 \quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
-\author "" 
-\author "" 
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
 \end_header
 
 \begin_body
@@ -66,8 +86,10 @@ Recently, Simon Plouffe has discovered a number of identities for the Riemann
  zeta function at odd integer values.
  These identities are obtained numerically and are inspired by a prototypical
  series for Apéry's constant given by Ramanujan:
-\begin_inset Formula \[
-\zeta(3)=\frac{7\pi^{3}}{180}-2\sum_{n=1}^{\infty}\frac{1}{n^{3}\left(e^{2\pi n}-1\right)}\]
+\begin_inset Formula 
+\[
+\zeta(3)=\frac{7\pi^{3}}{180}-2\sum_{n=1}^{\infty}\frac{1}{n^{3}\left(e^{2\pi n}-1\right)}
+\]
 
 \end_inset
 
@@ -80,9 +102,9 @@ ed and proved here using complex analytic techniques.
 \end_layout
 
 \begin_layout Subjectclass
-11M06
+11M06 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Submmitted to the Ramanujan Journal, 2 January 2011 http://www.editorialmanager.co
@@ -112,8 +134,10 @@ key "Ber-II"
 \end_inset
 
 ,
-\begin_inset Formula \[
-\zeta(3)=\frac{7\pi^{3}}{180}-2\sum_{n=1}^{\infty}\frac{1}{n^{3}\left(e^{2\pi n}-1\right)}\]
+\begin_inset Formula 
+\[
+\zeta(3)=\frac{7\pi^{3}}{180}-2\sum_{n=1}^{\infty}\frac{1}{n^{3}\left(e^{2\pi n}-1\right)}
+\]
 
 \end_inset
 
@@ -137,8 +161,10 @@ key "Plo06"
 \end_inset
 
 : 
-\begin_inset Formula \[
-\zeta(7)=\frac{19\pi^{7}}{56700}-2\sum_{n=1}^{\infty}\frac{1}{n^{7}\left(e^{2\pi n}-1\right)}\]
+\begin_inset Formula 
+\[
+\zeta(7)=\frac{19\pi^{7}}{56700}-2\sum_{n=1}^{\infty}\frac{1}{n^{7}\left(e^{2\pi n}-1\right)}
+\]
 
 \end_inset
 
@@ -149,9 +175,11 @@ This text provides an analytically derived formula for expressions of this
 \end_inset
 
 , is 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 \zeta(4m-1) & = & -2\sum_{n=1}^{\infty}\frac{1}{n^{4m-1}\left(e^{2\pi n}-1\right)}\\
- & - & \frac{1}{2}\;(2\pi)^{4m-1}\;\sum_{j=0}^{2m}\left(-1\right)^{j}\frac{B_{2j}}{(2j)!}\frac{B_{4m-2j}}{(4m-2j)!}\end{eqnarray*}
+ & - & \frac{1}{2}\;(2\pi)^{4m-1}\;\sum_{j=0}^{2m}\left(-1\right)^{j}\frac{B_{2j}}{(2j)!}\frac{B_{4m-2j}}{(4m-2j)!}
+\end{eqnarray*}
 
 \end_inset
 
@@ -167,8 +195,10 @@ where
  The above is a special case of a yet more general formula, derived and
  presented in a later section, allowing pairs of such sums to be related.
  From this, one may obtain expressions such as
-\begin_inset Formula \[
-\zeta(3)=\frac{37\pi^{3}}{900}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{3}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]\]
+\begin_inset Formula 
+\[
+\zeta(3)=\frac{37\pi^{3}}{900}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{3}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]
+\]
 
 \end_inset
 
@@ -186,8 +216,10 @@ There are an (uncountable) infinity of similar sums, each giving a different
 .
  Thus, for example, combining the above with Ramanujan's series for Apéry's
  constant, one gets:
-\begin_inset Formula \[
-\frac{\pi^{3}}{180}=\sum_{n=1}^{\infty}\frac{1}{n^{3}}\left[\frac{4}{e^{\pi n}-1}-\frac{5}{e^{2\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]\]
+\begin_inset Formula 
+\[
+\frac{\pi^{3}}{180}=\sum_{n=1}^{\infty}\frac{1}{n^{3}}\left[\frac{4}{e^{\pi n}-1}-\frac{5}{e^{2\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]
+\]
 
 \end_inset
 
@@ -198,18 +230,22 @@ Again, there are an uncountable infinity of such relations.
 \begin_layout Standard
 Plouffe also notes similar relations for the other odd integers; for example,
  
-\begin_inset Formula \[
-\zeta(5)=\frac{\pi^{5}}{294}-\frac{72}{35}\sum_{n=1}^{\infty}\frac{1}{n^{5}\left(e^{2\pi n}-1\right)}-\frac{2}{35}\sum_{n=1}^{\infty}\frac{1}{n^{5}\left(e^{2\pi n}+1\right)}\]
+\begin_inset Formula 
+\[
+\zeta(5)=\frac{\pi^{5}}{294}-\frac{72}{35}\sum_{n=1}^{\infty}\frac{1}{n^{5}\left(e^{2\pi n}-1\right)}-\frac{2}{35}\sum_{n=1}^{\infty}\frac{1}{n^{5}\left(e^{2\pi n}+1\right)}
+\]
 
 \end_inset
 
 The general form for this type of expression may be shown to be 
-\begin_inset Formula \begin{gather*}
+\begin_inset Formula 
+\begin{gather*}
 \left[1+(-4)^{m}-2^{4m+1}\right]\zeta(4m+1)\qquad\qquad\qquad\qquad\qquad\\
 \quad=2\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}+1\right)}\qquad\qquad\qquad\qquad\qquad\\
 \qquad+2\left[2^{4m+1}-(-4)^{m}\right]\sum_{n=1}^{\infty}\frac{1}{n^{4m+1}\left(e^{2\pi n}-1\right)}\qquad\\
 \qquad\qquad+(2\pi)^{4m+1}\sum_{j=0}^{m}(-4)^{m+j}\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}\\
-\qquad\qquad\qquad+\frac{1}{2}(2\pi)^{4m+1}\;\sum_{j=0}^{2m+1}(-4)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\end{gather*}
+\qquad\qquad\qquad+\frac{1}{2}(2\pi)^{4m+1}\;\sum_{j=0}^{2m+1}(-4)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}
+\end{gather*}
 
 \end_inset
 
@@ -220,8 +256,10 @@ The general form for this type of expression may be shown to be
 The methods described in this text also allow for a large generalization
  of these types of sums.
  Defining 
-\begin_inset Formula \[
-P_{k}(\tau)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi in\tau}-1\right)}\]
+\begin_inset Formula 
+\[
+P_{k}(\tau)=\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi in\tau}-1\right)}
+\]
 
 \end_inset
 
@@ -248,10 +286,12 @@ key "Ber-II"
 \end_inset
 
  as 
-\begin_inset Formula \begin{multline*}
+\begin_inset Formula 
+\begin{multline*}
 \alpha^{-n}\left\{ \frac{1}{2}\zeta\left(2n+1\right)+\sum_{k=1}^{\infty}\frac{k^{2n-1}}{e^{2\alpha k}-1}\right\} \\
 \qquad=(-\beta)^{-n}\left\{ \frac{1}{2}\zeta\left(2n+1\right)+\sum_{k=1}^{\infty}\frac{k^{2n-1}}{e^{2\beta k}-1}\right\} \\
-\qquad\qquad-2^{2n}\sum_{k=0}^{n+1}(-1)^{k}\frac{B_{2k}}{(2k)!}\frac{B_{2n+2-2k}}{(2n+2-2k)!}\alpha^{n+1-k}\beta^{k}\end{multline*}
+\qquad\qquad-2^{2n}\sum_{k=0}^{n+1}(-1)^{k}\frac{B_{2k}}{(2k)!}\frac{B_{2n+2-2k}}{(2n+2-2k)!}\alpha^{n+1-k}\beta^{k}
+\end{multline*}
 
 \end_inset
 
@@ -353,14 +393,18 @@ key "Har21"
 \end_inset
 
 , stating that 
-\begin_inset Formula \[
-\frac{1^{13}}{e^{2\pi}-1}+\frac{2^{13}}{e^{4\pi}-1}+\frac{3^{13}}{e^{6\pi}-1}+\cdots=\frac{1}{24}\]
+\begin_inset Formula 
+\[
+\frac{1^{13}}{e^{2\pi}-1}+\frac{2^{13}}{e^{4\pi}-1}+\frac{3^{13}}{e^{6\pi}-1}+\cdots=\frac{1}{24}
+\]
 
 \end_inset
 
 A generalization of this sum, 
-\begin_inset Formula \[
-\sum_{n=1}^{\infty}\frac{n^{4k+1}}{e^{2\pi n}-1}=\frac{B_{4k+2}}{4(2k+1)}\]
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{n^{4k+1}}{e^{2\pi n}-1}=\frac{B_{4k+2}}{4(2k+1)}
+\]
 
 \end_inset
 
@@ -396,8 +440,10 @@ key "Apo90"
 \end_inset
 
 :
-\begin_inset Formula \[
-\sum_{n=1;n\mbox{ odd}}^{\infty}\frac{n^{4k+1}}{1+e^{n\pi}}=\frac{2^{4k+1}-1}{8k+4}B_{4k+2}\]
+\begin_inset Formula 
+\[
+\sum_{n=1;n\mbox{ odd}}^{\infty}\frac{n^{4k+1}}{1+e^{n\pi}}=\frac{2^{4k+1}-1}{8k+4}B_{4k+2}
+\]
 
 \end_inset
 
@@ -414,26 +460,34 @@ key "Zuc84"
 
 .
  Some of these are 
-\begin_inset Formula \[
-\sum_{n=1}^{\infty}\frac{1}{n\left(e^{2\pi nx}-1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}\frac{\coth(\pi mx)-1}{m}\]
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{1}{n\left(e^{2\pi nx}-1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}\frac{\coth(\pi mx)-1}{m}
+\]
 
 \end_inset
 
  
-\begin_inset Formula \[
-\sum_{n=1}^{\infty}\frac{(-1)^{n}}{n\left(e^{2\pi nx}-1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}(-1)^{m}\,\frac{\coth(\pi mx)-1}{m}\]
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{(-1)^{n}}{n\left(e^{2\pi nx}-1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}(-1)^{m}\,\frac{\coth(\pi mx)-1}{m}
+\]
 
 \end_inset
 
  
-\begin_inset Formula \[
-\sum_{n=1}^{\infty}\frac{1}{n\left(e^{2\pi nx}+1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}\frac{1-\tanh(\pi mx)}{m}\]
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{1}{n\left(e^{2\pi nx}+1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}\frac{1-\tanh(\pi mx)}{m}
+\]
 
 \end_inset
 
 
-\begin_inset Formula \[
-\sum_{n=1}^{\infty}\frac{(-1)^{n}}{n\left(e^{2\pi nx}+1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}(-1)^{m}\;\frac{1-\tanh(\pi mx)}{m}\]
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{(-1)^{n}}{n\left(e^{2\pi nx}+1\right)}=\frac{1}{2}\sum_{m=1}^{\infty}(-1)^{m}\;\frac{1-\tanh(\pi mx)}{m}
+\]
 
 \end_inset
 
@@ -446,8 +500,10 @@ key "Ber-II"
 \end_inset
 
  include entry 8:
-\begin_inset Formula \[
-\alpha\sum_{n=1}^{\infty}\frac{\sinh(2\alpha nk)}{e^{2\alpha^{2}n}-1}+\beta\sum_{n=1}^{\infty}\frac{\sin(2\beta nk)}{e^{2\beta^{2}n}-1}=\frac{\alpha}{4}\coth(\alpha k)-\frac{\beta}{4}\cot(\beta k)-\frac{k}{2}\]
+\begin_inset Formula 
+\[
+\alpha\sum_{n=1}^{\infty}\frac{\sinh(2\alpha nk)}{e^{2\alpha^{2}n}-1}+\beta\sum_{n=1}^{\infty}\frac{\sin(2\beta nk)}{e^{2\beta^{2}n}-1}=\frac{\alpha}{4}\coth(\alpha k)-\frac{\beta}{4}\cot(\beta k)-\frac{k}{2}
+\]
 
 \end_inset
 
@@ -470,8 +526,10 @@ and another similar one relating cos and cosh.
 
 \begin_layout Standard
 Entry 13 generalizes the sums mentioned previously, 
-\begin_inset Formula \[
-\alpha^{k}\sum_{n=1}^{\infty}\frac{n^{2k-1}}{e^{2\alpha n}-1}-(-\beta)^{k}\sum_{n=1}^{\infty}\frac{n^{2k-1}}{e^{2\beta n}-1}=\left[\alpha^{k}-(-\beta)^{k}\right]\frac{B_{2k}}{4k}\]
+\begin_inset Formula 
+\[
+\alpha^{k}\sum_{n=1}^{\infty}\frac{n^{2k-1}}{e^{2\alpha n}-1}-(-\beta)^{k}\sum_{n=1}^{\infty}\frac{n^{2k-1}}{e^{2\beta n}-1}=\left[\alpha^{k}-(-\beta)^{k}\right]\frac{B_{2k}}{4k}
+\]
 
 \end_inset
 
@@ -500,10 +558,13 @@ key "Apo90"
 \end_inset
 
 , is 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \Lambda(\alpha,\beta,z)=\Lambda\left(1-\beta,\alpha,\frac{1}{z}\right)-\pi z\sum_{n=0}^{2}\left(\begin{array}{c}
 2\\
-n\end{array}\right)\frac{B_{2-n}(\alpha)B_{n}(\beta)}{(iz)^{n}}\]
+n
+\end{array}\right)\frac{B_{2-n}(\alpha)B_{n}(\beta)}{(iz)^{n}}
+\]
 
 \end_inset
 
@@ -512,14 +573,18 @@ where
 \end_inset
 
  is given by 
-\begin_inset Formula \[
-\Lambda(\alpha,\beta,z)=\sum_{r=0}^{\infty}\left[\lambda(z(r+\alpha)-i\beta)+\lambda(z(r+1-\alpha)+i\beta)\right]\]
+\begin_inset Formula 
+\[
+\Lambda(\alpha,\beta,z)=\sum_{r=0}^{\infty}\left[\lambda(z(r+\alpha)-i\beta)+\lambda(z(r+1-\alpha)+i\beta)\right]
+\]
 
 \end_inset
 
 and 
-\begin_inset Formula \[
-\lambda(x)=\sum_{m=1}^{\infty}\frac{e^{-2\pi mx}}{m}\]
+\begin_inset Formula 
+\[
+\lambda(x)=\sum_{m=1}^{\infty}\frac{e^{-2\pi mx}}{m}
+\]
 
 \end_inset
 
@@ -531,9 +596,11 @@ key "Ber78"
 \end_inset
 
 : 
-\begin_inset Formula \begin{multline*}
+\begin_inset Formula 
+\begin{multline*}
 \sum_{n=1}^{\infty}(-1)^{n+1}\frac{\mbox{sech}\left[(2n-1)\pi\sqrt{3}/2\right]}{(2n-1)^{6k+1}}\\
-\qquad=\frac{1}{2}(-1)^{k+1}\pi^{6k+1}\sum_{m=0}^{3k}\frac{E_{2m+1}}{(2m+1)!}\,\frac{B_{6k-2m}}{(6k-2m)!}\cos\left[(2m+1)\frac{\pi}{3}\right]\end{multline*}
+\qquad=\frac{1}{2}(-1)^{k+1}\pi^{6k+1}\sum_{m=0}^{3k}\frac{E_{2m+1}}{(2m+1)!}\,\frac{B_{6k-2m}}{(6k-2m)!}\cos\left[(2m+1)\frac{\pi}{3}\right]
+\end{multline*}
 
 \end_inset
 
@@ -571,8 +638,10 @@ The Polylogarithm
 
 \begin_layout Standard
 The recurring theme in Plouffe's identities is the sum 
-\begin_inset Formula \[
-S_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}-1\right)}\]
+\begin_inset Formula 
+\[
+S_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}-1\right)}
+\]
 
 \end_inset
 
@@ -609,9 +678,11 @@ with
 
 \begin_layout Standard
 To find the polylogarithm, one expands
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 S_{s}(x) & = & \sum_{n=1}^{\infty}\sum_{m=0}^{\infty}\frac{e^{-xn(m+1)}}{n^{s}}\\
- & = & \sum_{m=1}^{\infty}{\rm Li}_{s}\left(e^{-xm}\right)\end{eqnarray*}
+ & = & \sum_{m=1}^{\infty}{\rm Li}_{s}\left(e^{-xm}\right)
+\end{eqnarray*}
 
 \end_inset
 
@@ -621,20 +692,26 @@ which is generally valid for
 
 .
  The above is easily obtained by applying the expansion 
-\begin_inset Formula \[
-\frac{1}{1-z}=\sum_{m=0}^{\infty}z^{m}\]
+\begin_inset Formula 
+\[
+\frac{1}{1-z}=\sum_{m=0}^{\infty}z^{m}
+\]
 
 \end_inset
 
 and the series definition of the polylogarithm:
-\begin_inset Formula \[
-{\rm Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}\]
+\begin_inset Formula 
+\[
+{\rm Li}_{s}(z)=\sum_{n=1}^{\infty}\frac{z^{n}}{n^{s}}
+\]
 
 \end_inset
 
 The polylogarithm may be expressed in terms of an integral as
-\begin_inset Formula \[
-{\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)u^{-z}\, dz\]
+\begin_inset Formula 
+\[
+{\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)u^{-z}\, dz
+\]
 
 \end_inset
 
@@ -651,9 +728,11 @@ A derivation of this is given in the appendix.
 
 .
  Using this in the summation, one obtains
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 S_{s}(x) & = & \frac{1}{2\pi i}\sum_{m=1}^{\infty}\int_{c-i\infty}^{c+i\infty}\Gamma(z)\zeta(z+s)\left(xm\right)^{-z}\, dz\\
- & = & \frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)\, dz\end{eqnarray*}
+ & = & \frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)\, dz
+\end{eqnarray*}
 
 \end_inset
 
@@ -700,8 +779,10 @@ The Contour Integral
 
 \begin_layout Standard
 Define the contour integral as 
-\begin_inset Formula \[
-I_{s}(x)=\frac{1}{2\pi i}\oint_{\gamma}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)dz\]
+\begin_inset Formula 
+\[
+I_{s}(x)=\frac{1}{2\pi i}\oint_{\gamma}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)dz
+\]
 
 \end_inset
 
@@ -723,14 +804,18 @@ where the contour
 
  in the usual, right-handed fashion.
  Then, one uses Cauchy's theorem, which states that 
-\begin_inset Formula \[
-f(a)=\frac{1}{2\pi i}\oint\,\frac{f(z)}{z-a}\, dz\]
+\begin_inset Formula 
+\[
+f(a)=\frac{1}{2\pi i}\oint\,\frac{f(z)}{z-a}\, dz
+\]
 
 \end_inset
 
 for simple poles, and that
-\begin_inset Formula \[
-f^{\,\prime}(a)=\frac{1}{2\pi i}\oint\,\frac{f(z)}{\left(z-a\right)^{2}}\, dz\]
+\begin_inset Formula 
+\[
+f^{\,\prime}(a)=\frac{1}{2\pi i}\oint\,\frac{f(z)}{\left(z-a\right)^{2}}\, dz
+\]
 
 \end_inset
 
@@ -740,8 +825,10 @@ for double poles.
 \end_inset
 
 , one obtains the residue
-\begin_inset Formula \[
-{\rm Res}(z=1)=\frac{\zeta(s+1)}{x}\]
+\begin_inset Formula 
+\[
+{\rm Res}(z=1)=\frac{\zeta(s+1)}{x}
+\]
 
 \end_inset
 
@@ -750,14 +837,18 @@ For the poles at
 \end_inset
 
 , one obtains the residue
-\begin_inset Formula \[
-{\rm Res}(z=-n)=\frac{(-x)^{n}}{n!}\zeta(s-n)\zeta(-n)\]
+\begin_inset Formula 
+\[
+{\rm Res}(z=-n)=\frac{(-x)^{n}}{n!}\zeta(s-n)\zeta(-n)
+\]
 
 \end_inset
 
 and so one has
-\begin_inset Formula \[
-I_{s}(x)={\rm Res}(z=1-s)+\frac{\zeta(s+1)}{x}+\sum_{n=0}^{\infty}\frac{(-x)^{n}}{n!}\zeta(s-n)\zeta(-n)\]
+\begin_inset Formula 
+\[
+I_{s}(x)={\rm Res}(z=1-s)+\frac{\zeta(s+1)}{x}+\sum_{n=0}^{\infty}\frac{(-x)^{n}}{n!}\zeta(s-n)\zeta(-n)
+\]
 
 \end_inset
 
@@ -766,8 +857,10 @@ For
 \end_inset
 
  not an integer, one has 
-\begin_inset Formula \[
-{\rm Res}(z=1-s)=\frac{\Gamma(1-s)}{x^{1-s}}\zeta(1-s)\]
+\begin_inset Formula 
+\[
+{\rm Res}(z=1-s)=\frac{\Gamma(1-s)}{x^{1-s}}\zeta(1-s)
+\]
 
 \end_inset
 
@@ -779,15 +872,19 @@ However, the interesting case is for
  In this case, the pole overlays another pole from the Gamma, and one has
  a double pole.
  This is just a little trickier to evaluate:
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 \frac{1}{2\pi i}\oint_{z=1-k}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)dz & = & \frac{1}{2\pi i}\oint_{z=1-k}\frac{f(z)}{(z+k-1)^{2}}dz\\
- & = & \left.\frac{d}{dz}\left[(z+k-1)^{2}\Gamma(z)\;\zeta(z+k)\frac{\zeta(z)}{x^{z}}\right]\right|_{z=1-k}\end{eqnarray*}
+ & = & \left.\frac{d}{dz}\left[(z+k-1)^{2}\Gamma(z)\;\zeta(z+k)\frac{\zeta(z)}{x^{z}}\right]\right|_{z=1-k}
+\end{eqnarray*}
 
 \end_inset
 
 To perform the derivative, one will need to use the identities
-\begin_inset Formula \[
-\left.\frac{d}{ds}(s-1)\zeta(s)\right|_{s=1}=\gamma\]
+\begin_inset Formula 
+\[
+\left.\frac{d}{ds}(s-1)\zeta(s)\right|_{s=1}=\gamma
+\]
 
 \end_inset
 
@@ -796,8 +893,10 @@ where
 \end_inset
 
  is the Euler-Mascheroni constant, and 
-\begin_inset Formula \[
-\left.\frac{d}{dz}(z+n)\Gamma(z)\right|_{z=-n}=(-1)^{n}\,\frac{\psi(n+1)}{\Gamma(n+1)}=(-1)^{n}\,\frac{H_{n}-\gamma}{n!}\]
+\begin_inset Formula 
+\[
+\left.\frac{d}{dz}(z+n)\Gamma(z)\right|_{z=-n}=(-1)^{n}\,\frac{\psi(n+1)}{\Gamma(n+1)}=(-1)^{n}\,\frac{H_{n}-\gamma}{n!}
+\]
 
 \end_inset
 
@@ -815,8 +914,10 @@ where
 
 'th harmonic number.
  Putting these together, one obtains 
-\begin_inset Formula \[
-\frac{1}{2\pi i}\oint_{z=1-k}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)dz=\frac{(-x)^{k-1}}{(k-1)!}\left[\zeta^{\prime}(1-k)+\left(H_{k-1}-\ln2\pi\right)\zeta(1-k)\right]\]
+\begin_inset Formula 
+\[
+\frac{1}{2\pi i}\oint_{z=1-k}\frac{\Gamma(z)}{x^{z}}\zeta(z+s)\zeta(z)dz=\frac{(-x)^{k-1}}{(k-1)!}\left[\zeta^{\prime}(1-k)+\left(H_{k-1}-\ln2\pi\right)\zeta(1-k)\right]
+\]
 
 \end_inset
 
@@ -824,11 +925,14 @@ Adding this to the other contributions, one gets
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 I_{k}(x) & = & \frac{\zeta(k+1)}{x}+\!\sum_{\begin{array}{c}
 n=0\\
-n\ne k-1\end{array}}^{\infty}\!\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)\\
- &  & +\,\frac{(-x)^{k-1}}{(k-1)!}\left[\zeta^{\prime}(1-k)+\left(H_{k-1}-\ln2\pi\right)\zeta(1-k)\right]\end{eqnarray*}
+n\ne k-1
+\end{array}}^{\infty}\!\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)\\
+ &  & +\,\frac{(-x)^{k-1}}{(k-1)!}\left[\zeta^{\prime}(1-k)+\left(H_{k-1}-\ln2\pi\right)\zeta(1-k)\right]
+\end{eqnarray*}
 
 \end_inset
 
@@ -864,10 +968,13 @@ When
 \end_inset
 
  an odd integer, one has 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 I_{k}(x)=\frac{\zeta(k+1)}{x}+\!\sum_{\begin{array}{c}
 n=0\\
-n\ne k-1\end{array}}^{k}\!\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)+\frac{(-x)^{k-1}}{(k-1)!}\zeta^{\prime}(1-k)\]
+n\ne k-1
+\end{array}}^{k}\!\frac{(-x)^{n}}{n!}\zeta(k-n)\zeta(-n)+\frac{(-x)^{k-1}}{(k-1)!}\zeta^{\prime}(1-k)
+\]
 
 \end_inset
 
@@ -887,8 +994,10 @@ For the remainder of the paper, it is assumed that, in this context,
 \end_inset
 
  to obtain 
-\begin_inset Formula \[
-I_{3}(2\pi)=-\zeta(3)+\frac{7\pi^{3}}{180}\]
+\begin_inset Formula 
+\[
+I_{3}(2\pi)=-\zeta(3)+\frac{7\pi^{3}}{180}
+\]
 
 \end_inset
 
@@ -898,8 +1007,10 @@ which should be recognizable as a portion of Ramanujan's identity.
 \end_inset
 
 , one has 
-\begin_inset Formula \[
-I_{7}(2\pi)=-\zeta(7)+\frac{19\pi^{7}}{56700}\]
+\begin_inset Formula 
+\[
+I_{7}(2\pi)=-\zeta(7)+\frac{19\pi^{7}}{56700}
+\]
 
 \end_inset
 
@@ -930,8 +1041,10 @@ First, however, to drive the point home, one must observe that most of the
 \end_inset
 
  at even integers:
-\begin_inset Formula \[
-\zeta(2n)=(-1)^{n+1}\frac{(2\pi)^{2n}B_{2n}}{2(2n)!}\]
+\begin_inset Formula 
+\[
+\zeta(2n)=(-1)^{n+1}\frac{(2\pi)^{2n}B_{2n}}{2(2n)!}
+\]
 
 \end_inset
 
@@ -941,14 +1054,18 @@ for integer
 
 .
  At the negative values, one has
-\begin_inset Formula \[
-\zeta(-n)=-\frac{B_{n+1}}{n+1}\]
+\begin_inset Formula 
+\[
+\zeta(-n)=-\frac{B_{n+1}}{n+1}
+\]
 
 \end_inset
 
 while the derivative is 
-\begin_inset Formula \[
-\zeta^{\prime}(-2n)=(-1)^{n}\frac{(2n)!}{2(2\pi)^{2n}}\zeta(2n+1)\]
+\begin_inset Formula 
+\[
+\zeta^{\prime}(-2n)=(-1)^{n}\frac{(2n)!}{2(2\pi)^{2n}}\zeta(2n+1)
+\]
 
 \end_inset
 
@@ -962,19 +1079,25 @@ for integer
 \end_inset
 
 , and rearranging terms a bit, one gets 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 -2I_{k}(x) & = & \zeta(k)\left[1-\left(\frac{x}{2\pi i}\right)^{k-1}\right]\\
  & + & \frac{1}{x\;(k+1)!}\;\sum_{j=0}^{(k+1)/2}\left(\!\begin{array}{c}
 k+1\\
-2j\end{array}\!\right)x^{2j}\left(2\pi i\right)^{k+1-2j}B_{2j}B_{k+1-2j}\end{eqnarray*}
+2j
+\end{array}\!\right)x^{2j}\left(2\pi i\right)^{k+1-2j}B_{2j}B_{k+1-2j}
+\end{eqnarray*}
 
 \end_inset
 
 The above introduces the binomial coefficient
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \left(\!\begin{array}{c}
 n\\
-k\end{array}\!\right)=\frac{n!}{k!(n-k)!}\]
+k
+\end{array}\!\right)=\frac{n!}{k!(n-k)!}
+\]
 
 \end_inset
 
@@ -1099,8 +1222,10 @@ For odd integers
 \end_inset
 
 , one has that 
-\begin_inset Formula \[
-S_{k}(x)=I_{k}(x)+(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)\]
+\begin_inset Formula 
+\[
+S_{k}(x)=I_{k}(x)+(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)
+\]
 
 \end_inset
 
@@ -1168,8 +1293,10 @@ To prove this result, consider evaluating the contour integral
 \end_inset
 
 , one has by definition 
-\begin_inset Formula \[
-A=S_{s}(x)\]
+\begin_inset Formula 
+\[
+A=S_{s}(x)
+\]
 
 \end_inset
 
@@ -1246,9 +1373,11 @@ The integrals
 
 .
  This can be easily seen after a simple change of variable: 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 B & = & \frac{1}{2\pi i}\int_{ih+c}^{ih-s-\epsilon}\frac{\Gamma(z)}{x^{z}}\zeta(s+z)\zeta(z)\, dz\\
- & = & \frac{1}{2\pi i}\int_{c}^{-s-\epsilon}\frac{\Gamma(u+ih)}{x^{u+ih}}\zeta(s+u+ih)\zeta(u+ih)\, du\end{eqnarray*}
+ & = & \frac{1}{2\pi i}\int_{c}^{-s-\epsilon}\frac{\Gamma(u+ih)}{x^{u+ih}}\zeta(s+u+ih)\zeta(u+ih)\, du
+\end{eqnarray*}
 
 \end_inset
 
@@ -1263,8 +1392,10 @@ Much of the integrand is
 , or polynomially thereabouts.
  The integrand is dominated by the Gamma function, which, from Stirling's
  approximation, may be seen to be 
-\begin_inset Formula \[
-\Gamma(u+ih)=\mathcal{O}\left(e^{-\pi h/2}\right)\]
+\begin_inset Formula 
+\[
+\Gamma(u+ih)=\mathcal{O}\left(e^{-\pi h/2}\right)
+\]
 
 \end_inset
 
@@ -1294,9 +1425,11 @@ To evaluate
 \end_inset
 
 , begin by writing
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 D & = & -\frac{1}{2\pi i}\int_{-ih-s-\epsilon}^{ih-s-\epsilon}\frac{\Gamma(z)}{x^{z}}\zeta(s+z)\zeta(z)\, dz\\
- & = & -\frac{1}{2\pi i}x^{s+\epsilon}\int_{-ih}^{ih}x^{u}\Gamma(-u-s-\epsilon)\zeta(-u-\epsilon)\zeta(-u-s-\epsilon)\, du\end{eqnarray*}
+ & = & -\frac{1}{2\pi i}x^{s+\epsilon}\int_{-ih}^{ih}x^{u}\Gamma(-u-s-\epsilon)\zeta(-u-\epsilon)\zeta(-u-s-\epsilon)\, du
+\end{eqnarray*}
 
 \end_inset
 
@@ -1306,21 +1439,27 @@ after a change of variable
 
 .
  One then applies the functional equations for Gamma:
-\begin_inset Formula \[
-\Gamma(1-z)\Gamma(z)=\frac{\pi}{\sin\pi z}\]
+\begin_inset Formula 
+\[
+\Gamma(1-z)\Gamma(z)=\frac{\pi}{\sin\pi z}
+\]
 
 \end_inset
 
 and for zeta:
-\begin_inset Formula \[
-\zeta(s)=2^{s}\pi^{s-1}\sin\frac{\pi s}{2}\Gamma(1-s)\zeta(1-s)\]
+\begin_inset Formula 
+\[
+\zeta(s)=2^{s}\pi^{s-1}\sin\frac{\pi s}{2}\Gamma(1-s)\zeta(1-s)
+\]
 
 \end_inset
 
 to obtain 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 D & =\frac{1}{2\pi^{2}i}\left(\frac{x}{2\pi}\right)^{s+\epsilon}\left(\frac{1}{2\pi}\right)^{\epsilon}\int_{-ih}^{ih}\left(\frac{x}{4\pi^{2}}\right)^{u} & \frac{\sin\frac{u+\epsilon}{2}\pi\;\sin\frac{u+s+\epsilon}{2}\pi}{\sin(u+s+\epsilon)\pi}\;\times\\
- &  & \Gamma(1+u+\epsilon)\zeta(1+u+\epsilon)\zeta(1+s+u+\epsilon)\, du\end{eqnarray*}
+ &  & \Gamma(1+u+\epsilon)\zeta(1+u+\epsilon)\zeta(1+s+u+\epsilon)\, du
+\end{eqnarray*}
 
 \end_inset
 
@@ -1329,8 +1468,10 @@ Another change of variable, this time as
 \end_inset
 
 , takes the integral to a slightly more recognizable form: 
-\begin_inset Formula \[
-D=-\frac{1}{\pi i}\left(\frac{x}{2\pi}\right)^{s-1}\int_{1+\epsilon-ih}^{1+\epsilon+ih}\left(\frac{x}{4\pi^{2}}\right)^{w}\frac{\cos\frac{w}{2}\pi\;\cos\frac{w+s}{2}\pi}{\sin(w+s)\pi}\Gamma(w)\zeta(w)\zeta(w+s)\, dw\]
+\begin_inset Formula 
+\[
+D=-\frac{1}{\pi i}\left(\frac{x}{2\pi}\right)^{s-1}\int_{1+\epsilon-ih}^{1+\epsilon+ih}\left(\frac{x}{4\pi^{2}}\right)^{w}\frac{\cos\frac{w}{2}\pi\;\cos\frac{w+s}{2}\pi}{\sin(w+s)\pi}\Gamma(w)\zeta(w)\zeta(w+s)\, dw
+\]
 
 \end_inset
 
@@ -1344,8 +1485,10 @@ Next, by taking
 \end_inset
 
  dependence: 
-\begin_inset Formula \[
-\frac{\cos\frac{w}{2}\pi\;\cos\frac{w+k}{2}\pi}{\sin(w+k)\pi}=\frac{1}{2}(-1)^{(k+1)/2}\]
+\begin_inset Formula 
+\[
+\frac{\cos\frac{w}{2}\pi\;\cos\frac{w+k}{2}\pi}{\sin(w+k)\pi}=\frac{1}{2}(-1)^{(k+1)/2}
+\]
 
 \end_inset
 
@@ -1355,14 +1498,18 @@ Pulling out this piece, one regains a recognizable integral, so that, in
 \end_inset
 
 , one finally reaches the claimed result:
-\begin_inset Formula \[
-D=(-1)^{(k+1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)\]
+\begin_inset Formula 
+\[
+D=(-1)^{(k+1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)
+\]
 
 \end_inset
 
 that is, 
-\begin_inset Formula \[
-I_{k}(x)=A+D=S_{k}(x)-(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)\]
+\begin_inset Formula 
+\[
+I_{k}(x)=A+D=S_{k}(x)-(-1)^{(k-1)/2}\left(\frac{x}{2\pi}\right)^{k-1}S_{k}\left(\frac{4\pi^{2}}{x}\right)
+\]
 
 \end_inset
 
@@ -1400,8 +1547,10 @@ For
 \end_inset
 
  integer, one has 
-\begin_inset Formula \[
-I_{4m-1}(2\pi)=2S_{4m-1}(2\pi).\]
+\begin_inset Formula 
+\[
+I_{4m-1}(2\pi)=2S_{4m-1}(2\pi).
+\]
 
 \end_inset
 
@@ -1419,10 +1568,13 @@ Substitute
 \begin_layout Standard
 This corollary provides the first concrete result of this exposition, namely
  that 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 2\sum_{n=1}^{\infty}\frac{1}{n^{4m-1}\left(e^{2\pi n}-1\right)}=-\zeta(4m-1)+\frac{(2\pi)^{4m-1}}{(4m)!}\;\sum_{j=0}^{2m}\left(\begin{array}{c}
 4m\\
-2j\end{array}\right)\left(-1\right)^{j}B_{2j}B_{4m-2j}\]
+2j
+\end{array}\right)\left(-1\right)^{j}B_{2j}B_{4m-2j}
+\]
 
 \end_inset
 
@@ -1437,8 +1589,10 @@ which completely resolves one set of relationships given by Plouffe.
 \end_inset
 
 , that 
-\begin_inset Formula \[
-q^{k-1}\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi pn/q}-1\right)}+p^{k-1}\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi qn/p}-1\right)}=q^{k-1}I_{k}\left(\frac{2\pi p}{q}\right)\]
+\begin_inset Formula 
+\[
+q^{k-1}\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi pn/q}-1\right)}+p^{k-1}\sum_{n=1}^{\infty}\frac{1}{n^{k}\left(e^{2\pi qn/p}-1\right)}=q^{k-1}I_{k}\left(\frac{2\pi p}{q}\right)
+\]
 
 \end_inset
 
@@ -1455,8 +1609,10 @@ Thus, for example, by choosing
 \end_inset
 
 , on obtains 
-\begin_inset Formula \[
-\zeta(3)=\frac{37\pi^{3}}{900}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{3}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]\]
+\begin_inset Formula 
+\[
+\zeta(3)=\frac{37\pi^{3}}{900}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{3}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]
+\]
 
 \end_inset
 
@@ -1465,8 +1621,10 @@ and similarly, for
 \end_inset
 
 ,
-\begin_inset Formula \[
-\zeta(7)=\frac{409\pi^{7}}{94500}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{7}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]\]
+\begin_inset Formula 
+\[
+\zeta(7)=\frac{409\pi^{7}}{94500}-\frac{2}{5}\sum_{n=1}^{\infty}\frac{1}{n^{7}}\left[\frac{4}{e^{\pi n}-1}+\frac{1}{e^{4\pi n}-1}\right]
+\]
 
 \end_inset
 
@@ -1486,7 +1644,8 @@ and one may proceed in a similar manner.
 \end_layout
 
 \begin_layout Standard
-The next corollary shows that something more is needed for 
+The next corollary shows that something more is needed to obtain identies
+ for 
 \begin_inset Formula $\zeta(5)$
 \end_inset
 
@@ -1504,8 +1663,10 @@ For
 \end_inset
 
  an odd integer, one has 
-\begin_inset Formula \[
-I_{k}(x)=(-1)^{(k+1)/2}\left(\frac{4\pi^{2}}{x}\right)^{k-1}I_{k}\left(\frac{4\pi^{2}}{x}\right)\]
+\begin_inset Formula 
+\[
+I_{k}(x)=(-1)^{(k+1)/2}\left(\frac{4\pi^{2}}{x}\right)^{k-1}I_{k}\left(\frac{4\pi^{2}}{x}\right)
+\]
 
 \end_inset
 
@@ -1522,56 +1683,33 @@ This may be proved by applying the functional equation twice in a row.
  
 \end_layout
 
-\begin_layout Corollary
-For 
-\begin_inset Formula $m$
+\begin_layout Standard
+Rather than encoding identities for 
+\begin_inset Formula $\zeta(4m+1)$
 \end_inset
 
- a positive integer, one has
-\begin_inset Formula \[
-I_{4m+1}(2\pi)=0.\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-Substitute 
+, the above leads to a well-known identity on the Bernoulli numbers.
+ Taking 
 \begin_inset Formula $x=2\pi$
 \end_inset
 
- in the preceding corollary.
+, one obtains 
+\begin_inset Formula $I_{k}(2\pi)=0$
+\end_inset
+
+, from which one may find: 
+\begin_inset Formula 
+\[
+0=\sum_{j=0}^{2m+1}(-1)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Following directly from the above is another corollary:
-\end_layout
-
-\begin_layout Corollary
-For 
-\begin_inset Formula $m$
-\end_inset
-
- a positive integer, one has 
-\begin_inset Formula \[
-0=\sum_{j=0}^{2m+1}(-1)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-Write out the value of 
-\begin_inset Formula $I_{4m+1}(2\pi)$
-\end_inset
-
- in detail.
-\end_layout
-
-\begin_layout Standard
-From the above, it should be clear that the functional equation for 
+The functional equation for 
 \begin_inset Formula $S_{k}$
 \end_inset
 
@@ -1589,8 +1727,10 @@ From the above, it should be clear that the functional equation for
 \end_inset
 
 , one must introduce
-\begin_inset Formula \[
-T_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}+1\right)}\]
+\begin_inset Formula 
+\[
+T_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}+1\right)}
+\]
 
 \end_inset
 
@@ -1599,8 +1739,10 @@ T_{s}(x)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(e^{xn}+1\right)}\]
 
 \begin_layout Theorem
 One has
-\begin_inset Formula \[
-T_{s}(x)=S_{s}(x)-2S_{s}(2x)\]
+\begin_inset Formula 
+\[
+T_{s}(x)=S_{s}(x)-2S_{s}(2x)
+\]
 
 \end_inset
 
@@ -1610,14 +1752,18 @@ T_{s}(x)=S_{s}(x)-2S_{s}(2x)\]
 \begin_layout Proof
 This may be proved by re-writing in terms of the polylogarithm, along the
  lines of the earlier development: 
-\begin_inset Formula \[
-T_{s}(x)=-\sum_{m=1}^{\infty}(-1)^{m}{\rm Li}_{s}\left(e^{-xm}\right)\]
+\begin_inset Formula 
+\[
+T_{s}(x)=-\sum_{m=1}^{\infty}(-1)^{m}{\rm Li}_{s}\left(e^{-xm}\right)
+\]
 
 \end_inset
 
 The even and odd terms are regrouped, as 
-\begin_inset Formula \[
-T_{s}(x)=\sum_{m=1}^{\infty}{\rm Li}_{s}\left(e^{-xm}\right)-2{\rm Li}_{s}\left(e^{-2xm}\right)\]
+\begin_inset Formula 
+\[
+T_{s}(x)=\sum_{m=1}^{\infty}{\rm Li}_{s}\left(e^{-xm}\right)-2{\rm Li}_{s}\left(e^{-2xm}\right)
+\]
 
 \end_inset
 
@@ -1635,8 +1781,10 @@ The results for
 
 , etc.
  follow from a critical observation: that 
-\begin_inset Formula \[
-S_{s}(x+2\pi i)=S_{s}(x)\]
+\begin_inset Formula 
+\[
+S_{s}(x+2\pi i)=S_{s}(x)
+\]
 
 \end_inset
 
@@ -1650,9 +1798,11 @@ For positive integer
 \end_inset
 
 , one has 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 S_{4m+1}(2\pi) & = & I_{4m+1}(2\pi(1+i))\\
- &  & +(-1)^{m}\left[\frac{T_{4m+1}(2\pi)}{4^{m}}+2\cdot4^{m}S_{4m+1}(2\pi)-4^{m}I_{4m+1}(\pi)\right]\end{eqnarray*}
+ &  & +(-1)^{m}\left[\frac{T_{4m+1}(2\pi)}{4^{m}}+2\cdot4^{m}S_{4m+1}(2\pi)-4^{m}I_{4m+1}(\pi)\right]
+\end{eqnarray*}
 
 \end_inset
 
@@ -1665,8 +1815,10 @@ Using periodicity, one writes, for
 \end_inset
 
 , 
-\begin_inset Formula \[
-S_{k}(2\pi+2\pi i)=S_{k}(2\pi)=I_{k}(2\pi(1+i))+2^{(k-1)/2}e^{3i\pi(k-1)/4}S_{k}(\pi(1-i))\]
+\begin_inset Formula 
+\[
+S_{k}(2\pi+2\pi i)=S_{k}(2\pi)=I_{k}(2\pi(1+i))+2^{(k-1)/2}e^{3i\pi(k-1)/4}S_{k}(\pi(1-i))
+\]
 
 \end_inset
 
@@ -1676,8 +1828,10 @@ The series
 
  doesn't have an imaginary part; rather, it is an alternating series, which
  may be expanded and written as 
-\begin_inset Formula \[
-S_{k}(\pi(1-i))=-T_{k}(\pi)+\frac{T_{k}(2\pi)+S_{k}(2\pi)}{2^{k}}\]
+\begin_inset Formula 
+\[
+S_{k}(\pi(1-i))=-T_{k}(\pi)+\frac{T_{k}(2\pi)+S_{k}(2\pi)}{2^{k}}
+\]
 
 \end_inset
 
@@ -1686,8 +1840,10 @@ The
 \end_inset
 
  term may be eliminated by writing 
-\begin_inset Formula \[
-T_{k}(\pi)=S_{k}(\pi)-2S_{k}(2\pi)\]
+\begin_inset Formula 
+\[
+T_{k}(\pi)=S_{k}(\pi)-2S_{k}(2\pi)
+\]
 
 \end_inset
 
@@ -1696,9 +1852,11 @@ and the
 \end_inset
 
  term may be eliminated by 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 S_{k}(\pi) & = & I_{k}(\pi)+2^{1-k}S_{k}(4\pi)\\
- & = & I_{k}(\pi)+2^{-k}\left[S_{k}(2\pi)-T_{k}(2\pi)\right]\end{eqnarray*}
+ & = & I_{k}(\pi)+2^{-k}\left[S_{k}(2\pi)-T_{k}(2\pi)\right]
+\end{eqnarray*}
 
 \end_inset
 
@@ -1717,20 +1875,26 @@ As an example of the application of the above theorem, take
 
 .
  One easily finds that 
-\begin_inset Formula \[
-I_{5}(\pi)=-\frac{15}{32}\zeta(5)+\frac{\pi^{5}}{9\cdot64}\]
+\begin_inset Formula 
+\[
+I_{5}(\pi)=-\frac{15}{32}\zeta(5)+\frac{\pi^{5}}{9\cdot64}
+\]
 
 \end_inset
 
 and that 
-\begin_inset Formula \[
-I_{5}(2\pi(1+i))=-\frac{5}{2}\zeta(5)+\frac{\pi^{5}}{9\cdot15}\]
+\begin_inset Formula 
+\[
+I_{5}(2\pi(1+i))=-\frac{5}{2}\zeta(5)+\frac{\pi^{5}}{9\cdot15}
+\]
 
 \end_inset
 
 Combining these, one gets
-\begin_inset Formula \[
-\zeta(5)=\frac{\pi^{5}}{294}-\frac{2}{35}\left[T_{5}(2\pi)+36S_{5}(2\pi)\right]\]
+\begin_inset Formula 
+\[
+\zeta(5)=\frac{\pi^{5}}{294}-\frac{2}{35}\left[T_{5}(2\pi)+36S_{5}(2\pi)\right]
+\]
 
 \end_inset
 
@@ -1749,8 +1913,10 @@ Curiously, the theorem yields results for
 
  as well.
  In this case, one finds 
-\begin_inset Formula \[
-S_{1}(2\pi)+T_{1}(2\pi)=\frac{\pi}{6}-\frac{3}{4}\log2\]
+\begin_inset Formula 
+\[
+S_{1}(2\pi)+T_{1}(2\pi)=\frac{\pi}{6}-\frac{3}{4}\log2
+\]
 
 \end_inset
 
@@ -1778,8 +1944,10 @@ A series expression for
 \end_inset
 
  is given by 
-\begin_inset Formula \[
-\pi^{3}=720\cdot S_{3}(\pi)-900\cdot S_{3}(2\pi)+180\cdot S_{3}(4\pi)\]
+\begin_inset Formula 
+\[
+\pi^{3}=720\cdot S_{3}(\pi)-900\cdot S_{3}(2\pi)+180\cdot S_{3}(4\pi)
+\]
 
 \end_inset
 
@@ -1792,10 +1960,12 @@ This follows by taking the general expression for
 \end_inset
 
 :
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 16^{m}S_{4m-1}(\pi)+4S_{4m-1}(4\pi) & = & 16^{m}I_{4m-1}(\pi)\\
  & = & -\frac{1}{2}\zeta(4m-1)\left[16^{m}+4\right]\\
- &  & -(2\pi)^{4m-1}\sum_{j=0}^{2m}(-4)^{j}\frac{B_{4m-2j}}{(4m-2j)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
+ &  & -(2\pi)^{4m-1}\sum_{j=0}^{2m}(-4)^{j}\frac{B_{4m-2j}}{(4m-2j)!}\frac{B_{2j}}{(2j)!}
+\end{eqnarray*}
 
 \end_inset
 
@@ -1804,8 +1974,10 @@ solving for
 \end_inset
 
  and then using 
-\begin_inset Formula \[
-2S_{4m-1}(2\pi)=I_{4m-1}(2\pi)=-\zeta(4m-1)+(2\pi)^{4m-1}\;\sum_{j=0}^{2m}\left(-1\right)^{j}\frac{B_{4m-2j}}{(4m-2j)!}\frac{B_{2j}}{(2j)!}\]
+\begin_inset Formula 
+\[
+2S_{4m-1}(2\pi)=I_{4m-1}(2\pi)=-\zeta(4m-1)+(2\pi)^{4m-1}\;\sum_{j=0}^{2m}\left(-1\right)^{j}\frac{B_{4m-2j}}{(4m-2j)!}\frac{B_{2j}}{(2j)!}
+\]
 
 \end_inset
 
@@ -1824,8 +1996,10 @@ Relationships involving square roots also arise naturally.
 
 \begin_layout Theorem
 One has 
-\begin_inset Formula \[
-\zeta(3)=\frac{5\pi^{3}}{72}-\frac{1}{2}\, S_{3}\left(2\pi\sqrt{3}\right)-\frac{3}{2}\, S_{3}\left(\frac{2\pi\sqrt{3}}{3}\right)\]
+\begin_inset Formula 
+\[
+\zeta(3)=\frac{5\pi^{3}}{72}-\frac{1}{2}\, S_{3}\left(2\pi\sqrt{3}\right)-\frac{3}{2}\, S_{3}\left(\frac{2\pi\sqrt{3}}{3}\right)
+\]
 
 \end_inset
 
@@ -1834,8 +2008,10 @@ One has
 
 \begin_layout Proof
 This follows from the general expression given earlier, that 
-\begin_inset Formula \[
-S_{k}\left(\frac{2\pi p}{q}\right)+\left(\frac{p}{q}\right)^{k-1}S_{k}\left(\frac{2\pi q}{p}\right)=I_{k}\left(\frac{2\pi p}{q}\right)\]
+\begin_inset Formula 
+\[
+S_{k}\left(\frac{2\pi p}{q}\right)+\left(\frac{p}{q}\right)^{k-1}S_{k}\left(\frac{2\pi q}{p}\right)=I_{k}\left(\frac{2\pi p}{q}\right)
+\]
 
 \end_inset
 
@@ -1844,10 +2020,12 @@ Here, making the substitution
 \end_inset
 
  one obtains 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 S_{k}\left(2\pi\sqrt{p}\right)+p^{(k-1)/2}S_{k}\left(\frac{2\pi\sqrt{p}}{p}\right) & = & -\frac{1}{2}\zeta(k)\left[1-(-p)^{(k-1)/2}\right]\\
  &  & +\frac{(-1)^{(k-1)/2}}{2\sqrt{p}}(2\pi)^{k}\;\\
- &  & \;\;\sum_{j=0}^{(k+1)/2}\left(-p\right)^{j}\frac{B_{k+1-2j}}{(k+1-2j)!}\frac{B_{2j}}{(2j)!}\end{eqnarray*}
+ &  & \;\;\sum_{j=0}^{(k+1)/2}\left(-p\right)^{j}\frac{B_{k+1-2j}}{(k+1-2j)!}\frac{B_{2j}}{(2j)!}
+\end{eqnarray*}
 
 \end_inset
 
@@ -1868,8 +2046,10 @@ Some Bernoulli number identities
 
 \begin_layout Standard
 In addition to the previously noted identity 
-\begin_inset Formula \[
-0=\sum_{j=0}^{2m+1}(-1)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}\]
+\begin_inset Formula 
+\[
+0=\sum_{j=0}^{2m+1}(-1)^{j}\frac{B_{4m-2j+2}}{(4m-2j+2)!}\frac{B_{2j}}{(2j)!}
+\]
 
 \end_inset
 
@@ -1885,8 +2065,10 @@ For integer
 \end_inset
 
 , one has
-\begin_inset Formula \[
-0=\sum_{j=0}^{m}(-4)^{j}\left[\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}+2\frac{B_{4m-4j}}{(4m-4j)!}\frac{B_{4j+2}}{(4j+2)!}\right]\]
+\begin_inset Formula 
+\[
+0=\sum_{j=0}^{m}(-4)^{j}\left[\frac{B_{4m-4j+2}}{(4m-4j+2)!}\frac{B_{4j}}{(4j)!}+2\frac{B_{4m-4j}}{(4m-4j)!}\frac{B_{4j+2}}{(4j+2)!}\right]
+\]
 
 \end_inset
 
@@ -1907,9 +2089,11 @@ For integer
 \end_inset
 
 , one has 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 \sum_{k=0}^{2m}(-1)^{k}\frac{B_{4m-2k}}{(4m-2k)!}\frac{B_{2k}}{(2k)!} & = & \sum_{j=0}^{m}(-4)^{j}\frac{B_{4m-4j}}{(4m-4j)!}\frac{B_{4j}}{(4j)!}\\
- &  & -2\sum_{j=0}^{m-1}(-4)^{j}\frac{B_{4m-4j-2}}{(4m-4j-2)!}\frac{B_{4j+2}}{(4j+2)!}\end{eqnarray*}
+ &  & -2\sum_{j=0}^{m-1}(-4)^{j}\frac{B_{4m-4j-2}}{(4m-4j-2)!}\frac{B_{4j+2}}{(4j+2)!}
+\end{eqnarray*}
 
 \end_inset
 
@@ -1918,8 +2102,10 @@ For integer
 
 \begin_layout Proof
 Consider the sums resulting from the identity 
-\begin_inset Formula \[
-I_{4m-1}(2\pi)=I_{4m-1}(2\pi(1+i))+I_{4m-1}(2\pi(1-i))\]
+\begin_inset Formula 
+\[
+I_{4m-1}(2\pi)=I_{4m-1}(2\pi(1+i))+I_{4m-1}(2\pi(1-i))
+\]
 
 \end_inset
 
@@ -1990,8 +2176,10 @@ Fourier series
 \end_inset
 
  in the context of hyperbolic geometry: 
-\begin_inset Formula \[
-K_{k}(\tau)=\frac{\tau^{k-1}-1}{2}\zeta(k)-\frac{(2\pi i)^{k}}{2\tau}\;\sum_{j=0}^{(k+1)/2}\tau^{2j}\frac{B_{2j}}{(2j)!}\frac{B_{k+1-2j}}{(k+1-2j)!}\]
+\begin_inset Formula 
+\[
+K_{k}(\tau)=\frac{\tau^{k-1}-1}{2}\zeta(k)-\frac{(2\pi i)^{k}}{2\tau}\;\sum_{j=0}^{(k+1)/2}\tau^{2j}\frac{B_{2j}}{(2j)!}\frac{B_{k+1-2j}}{(k+1-2j)!}
+\]
 
 \end_inset
 
@@ -2000,8 +2188,10 @@ This quantity is almost a modular form of weight
 \end_inset
 
 , in that 
-\begin_inset Formula \[
-K_{k}\left(\frac{-1}{\tau}\right)=-\tau^{1-k}K_{k}(\tau)\]
+\begin_inset Formula 
+\[
+K_{k}\left(\frac{-1}{\tau}\right)=-\tau^{1-k}K_{k}(\tau)
+\]
 
 \end_inset
 
@@ -2018,8 +2208,10 @@ almost
 \end_inset
 
 , that is 
-\begin_inset Formula \[
-K_{k}(\tau+1)\ne K_{k}(\tau)\]
+\begin_inset Formula 
+\[
+K_{k}(\tau+1)\ne K_{k}(\tau)
+\]
 
 \end_inset
 
@@ -2028,27 +2220,35 @@ By contrast,
 \end_inset
 
  is periodic: 
-\begin_inset Formula \[
-P_{k}(\tau+1)=P_{k}(\tau)\]
+\begin_inset Formula 
+\[
+P_{k}(\tau+1)=P_{k}(\tau)
+\]
 
 \end_inset
 
 but is not quite modular under inversion: 
-\begin_inset Formula \[
-P_{k}\left(\frac{-1}{\tau}\right)=\tau^{1-k}P_{k}(\tau)+K_{k}\left(\frac{-1}{\tau}\right)\]
+\begin_inset Formula 
+\[
+P_{k}\left(\frac{-1}{\tau}\right)=\tau^{1-k}P_{k}(\tau)+K_{k}\left(\frac{-1}{\tau}\right)
+\]
 
 \end_inset
 
 One may define a simple variant of the sums that does have a simple transformati
 on under inversion, namely 
-\begin_inset Formula \[
-M_{k}(\tau)=P_{k}(\tau)-\frac{1}{2}K_{k}(\tau)\]
+\begin_inset Formula 
+\[
+M_{k}(\tau)=P_{k}(\tau)-\frac{1}{2}K_{k}(\tau)
+\]
 
 \end_inset
 
 which transforms as 
-\begin_inset Formula \[
-M_{k}\left(\frac{-1}{\tau}\right)=-\tau^{1-k}M_{k}(\tau)\]
+\begin_inset Formula 
+\[
+M_{k}\left(\frac{-1}{\tau}\right)=-\tau^{1-k}M_{k}(\tau)
+\]
 
 \end_inset
 
@@ -2096,8 +2296,10 @@ Phase of
 
 \begin_layout Plain Layout
 This graphic shows the phase
-\begin_inset Formula \[
-\arg P_{-1}(q)=\arg\sum_{n=1}^{\infty}\frac{n}{q^{n}-1}\]
+\begin_inset Formula 
+\[
+\arg P_{-1}(q)=\arg\sum_{n=1}^{\infty}\frac{n}{q^{n}-1}
+\]
 
 \end_inset
 
@@ -2171,8 +2373,15 @@ graphic created with src/fractal/generate/plouffe.C 600 600 2000 0 0 2 -1
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -2219,8 +2428,10 @@ Phase of
 
 \begin_layout Plain Layout
 This graphic shows the phase
-\begin_inset Formula \[
-\arg P_{-5}(q)=\arg\sum_{n=1}^{\infty}\frac{n^{5}}{q^{n}-1}\]
+\begin_inset Formula 
+\[
+\arg P_{-5}(q)=\arg\sum_{n=1}^{\infty}\frac{n^{5}}{q^{n}-1}
+\]
 
 \end_inset
 
@@ -2255,8 +2466,15 @@ graphic created with src/fractal/generate/plouffe.C 600 600 6000 0 0 2 -5
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -2305,8 +2523,10 @@ This figure shows the imaginary part of the modular invariant
 
 , one of the invariants of an elliptic curve.
  Specifically, it shows the imaginary part of 
-\begin_inset Formula \[
-g_{3}(q)=\frac{8\pi^{6}}{27}\left[1-504\sum_{n=1}^{\infty}\frac{n^{5}q^{n}}{1-q^{n}}\right]\]
+\begin_inset Formula 
+\[
+g_{3}(q)=\frac{8\pi^{6}}{27}\left[1-504\sum_{n=1}^{\infty}\frac{n^{5}q^{n}}{1-q^{n}}\right]
+\]
 
 \end_inset
 
@@ -2317,8 +2537,15 @@ g_{3}(q)=\frac{8\pi^{6}}{27}\left[1-504\sum_{n=1}^{\infty}\frac{n^{5}q^{n}}{1-q^
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -2363,8 +2590,10 @@ punctured disk
 \end_inset
 
 :
-\begin_inset Formula \[
-P_{s}(q)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(q^{n}-1\right)}\]
+\begin_inset Formula 
+\[
+P_{s}(q)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(q^{n}-1\right)}
+\]
 
 \end_inset
 
@@ -2374,8 +2603,10 @@ P_{s}(q)=\sum_{n=1}^{\infty}\frac{1}{n^{s}\left(q^{n}-1\right)}\]
 \begin_layout Standard
 In this form, the relation to modular forms becomes the most immediate.
  Consider the Lambert series:
-\begin_inset Formula \[
-\sum_{n=1}^{\infty}\frac{1}{n^{s}}\frac{q^{n}}{1-q^{n}}=-\zeta(s)-P_{s}(q)=\sum_{m=1}^{\infty}\sigma_{-s}(m)q^{m}\]
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{1}{n^{s}}\frac{q^{n}}{1-q^{n}}=-\zeta(s)-P_{s}(q)=\sum_{m=1}^{\infty}\sigma_{-s}(m)q^{m}
+\]
 
 \end_inset
 
@@ -2384,8 +2615,10 @@ Here,
 \end_inset
 
  is the divisor function: 
-\begin_inset Formula \[
-\sigma_{s}(m)=\sum_{n|m}\; n^{s}\]
+\begin_inset Formula 
+\[
+\sigma_{s}(m)=\sum_{n|m}\; n^{s}
+\]
 
 \end_inset
 
@@ -2411,8 +2644,10 @@ key "Apo90"
 \end_inset
 
  
-\begin_inset Formula \[
-G_{2k}(q)=2\zeta(2k)+\frac{2(2\pi i)^{2k}}{(2k-1)!}\sum_{m=1}^{\infty}\sigma_{2k-1}(m)q^{m}\]
+\begin_inset Formula 
+\[
+G_{2k}(q)=2\zeta(2k)+\frac{2(2\pi i)^{2k}}{(2k-1)!}\sum_{m=1}^{\infty}\sigma_{2k-1}(m)q^{m}
+\]
 
 \end_inset
 
@@ -2512,8 +2747,10 @@ This appendix proves the following theorem:
 
 \begin_layout Theorem
 The polylogarithm may be written as the integral 
-\begin_inset Formula \[
-{\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(r)\zeta(r+s)u^{-r}dr\]
+\begin_inset Formula 
+\[
+{\rm Li}_{s}\left(e^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\Gamma(r)\zeta(r+s)u^{-r}dr
+\]
 
 \end_inset
 
@@ -2530,20 +2767,26 @@ key "WP-PL"
 
 .
  One begins by writing the the Mellin transform of the polylog, as 
-\begin_inset Formula \[
-M_{s}(r)=\int_{0}^{\infty}{\rm Li}_{s}\left(ye^{-u}\right)u^{r}\frac{du}{u}\]
+\begin_inset Formula 
+\[
+M_{s}(r)=\int_{0}^{\infty}{\rm Li}_{s}\left(ye^{-u}\right)u^{r}\frac{du}{u}
+\]
 
 \end_inset
 
 Using an integral representation of the polylogarithm, 
-\begin_inset Formula \[
-{\rm Li}_{s}\left(w\right)=\frac{1}{\Gamma(s)}\int_{0}^{\infty}\frac{t^{s-1}}{w^{-1}e^{t}-1}dt\]
+\begin_inset Formula 
+\[
+{\rm Li}_{s}\left(w\right)=\frac{1}{\Gamma(s)}\int_{0}^{\infty}\frac{t^{s-1}}{w^{-1}e^{t}-1}dt
+\]
 
 \end_inset
 
  and substituting, one obtains 
-\begin_inset Formula \[
-M_{s}(r)=\frac{1}{\Gamma(s)}\int_{0}^{\infty}\int_{0}^{\infty}\frac{u^{r-1}t^{s-1}}{y^{-1}e^{t+u}-1}dt\, du\]
+\begin_inset Formula 
+\[
+M_{s}(r)=\frac{1}{\Gamma(s)}\int_{0}^{\infty}\int_{0}^{\infty}\frac{u^{r-1}t^{s-1}}{y^{-1}e^{t+u}-1}dt\, du
+\]
 
 \end_inset
 
@@ -2560,15 +2803,19 @@ A change of variable
 \end_inset
 
  gives 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 M_{s}(r) & = & \frac{1}{\Gamma(s)}\int_{0}^{1}b^{s-1}(1-b)^{r-1}db\int_{0}^{\infty}\frac{a^{r+s-1}}{y^{-1}e^{a}-1}\, da\\
- & = & \Gamma(r)\,{\rm Li}_{r+s}(y)\end{eqnarray*}
+ & = & \Gamma(r)\,{\rm Li}_{r+s}(y)
+\end{eqnarray*}
 
 \end_inset
 
 The inverse Mellin transform may now be employed to write 
-\begin_inset Formula \[
-{\rm Li}_{s}\left(ye^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}u^{-r}\Gamma(r)\,{\rm Li}_{r+s}(y)\, dr\]
+\begin_inset Formula 
+\[
+{\rm Li}_{s}\left(ye^{-u}\right)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}u^{-r}\Gamma(r)\,{\rm Li}_{r+s}(y)\, dr
+\]
 
 \end_inset
 
