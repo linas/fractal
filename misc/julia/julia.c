@@ -3,13 +3,13 @@
  * julia.c
  * Julia set explorer for the mandelbrot bulb
  *
- * Two ideas are at work here. 
- * 1) We want to asign a string of L,R values to each point in 
- *    the Julia set, so that we can re-interpret the LR string as a 
+ * Two ideas are at work here.
+ * 1) We want to asign a string of L,R values to each point in
+ *    the Julia set, so that we can re-interpret the LR string as a
  *    binary string, and then play the usual games on it.
- * 2) The above assignment is not unique, because the location of 
+ * 2) The above assignment is not unique, because the location of
  *    the cut of sqrt is not unique, but can be swiveled around by
- *    2pi.  Thus, the effect of the cut location is explored as well. 
+ *    2pi.  Thus, the effect of the cut location is explored as well.
  *    This is encoded as the "rot" parameter ast the last argument.
  *
  * Hmmm. The above is written assuming the cut is a straight line
@@ -19,9 +19,9 @@
  *
  * Here's an interesting one: -0.8 0.2 3.0777  This results in an
  * almost-clean squential connect-the-dots sequence for the points
- * in the julia set, when laid out in order.  Almost, not quite, 
+ * in the julia set, when laid out in order.  Almost, not quite,
  * I think that tuning  therot angle might clean it up...
- * I wonder how rot is related to the ray angle ... 
+ * I wonder how rot is related to the ray angle ...
  *
  * Other than this, the output is really pretty normal for the standard
  * Julia set for the Mandelbrot bulb.
@@ -110,7 +110,7 @@ int main (int argc, char * argv[])
 		 * it was easier to write the algorithm this way. Otherise,
 		 * the bit addressing could have been done during the
 		 * construction of the array, but doing so was just confusing
-		 * and error prone, so I did it this way. 
+		 * and error prone, so I did it this way.
 		 */
 		unsigned int rev = bit_reverse(depth, i);
 		complex double v = tree[rev];
