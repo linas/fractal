@@ -8,5 +8,5 @@ julia: julia.o
 
 
 .o:
-	cc -o $* $^
+	cc -o $* $^ -lm
 
