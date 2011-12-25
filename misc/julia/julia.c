@@ -44,6 +44,21 @@ complex double * make_tree (int depth, complex double c)
 	return tree;
 }
 
+unsigned int bit_reverse (int depth, unsigned int str)
+{
+   int i;
+	unsigned int rev = 0;
+
+	for (i=0; i<depth; i++)
+	{
+		rev <<= 1;
+		if (str & 0x1) rev |= 0x1;
+		str >>= 1;
+	}
+
+	return rev;
+}
+
 int main (int argc, char * argv[])
 {
 	if (argc != 2)
@@ -57,11 +72,14 @@ int main (int argc, char * argv[])
 	complex double * tree;
 	tree = make_tree(depth, -0.8+0.6*I);
 
-	int sz = 1<< depth;
-	int i;
+	unsigned int sz = 1<< depth;
+	unsigned int i;
 	for (i=0; i<sz; i++)
 	{
-		complex double v = tree[i];
-		printf("%d\t%g\t%g\n", i, creal(v), cimag(v));
+		unsigned int rev = bit_reverse(depth, i);
+		complex double v = tree[rev];
+		printf("%d\t%d\t%g\t%g\n", i, rev, creal(v), cimag(v));
 	}
+
+	return 0;
 }

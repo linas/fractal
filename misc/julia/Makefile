@@ -4,7 +4,7 @@ julia: julia.o
 
 
 .c.o:
-	cc -O2 -c $^
+	cc -O2 -c $^  -Wall
 
 
 .o:
