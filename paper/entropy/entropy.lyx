@@ -70,12 +70,17 @@ Linas Vepstas <linasvepstas@gmail.com>
 
 \begin_layout Date
 June 2008
+\begin_inset Newline newline
+\end_inset
+
+(trivial updates April 2012)
 \end_layout
 
 \begin_layout Abstract
-This short paper provides a numerical exploration of the entropy of the
- Gauss-Kuzmin distribution.
- 
+This short note provides a numerical exploration of the entropy of the Gauss-Kuz
+min distribution.
+ Some information-theoretic questions regarding the distribution of rationals
+ are explored.
 \end_layout
 
 \begin_layout Section
@@ -118,8 +123,8 @@ min distribution gives the probability
 \end_inset
 
  of the expansion.
- This probability has been famously studied by Kuz'min, Levy, Khinchin and
- Wirsing; it is given by
+ This probability distribution has been famously studied by Kuz'min, Levy,
+ Khinchin and Wirsing; it is given by
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Khin35"
@@ -229,22 +234,34 @@ key "Blach84"
  may be obtained by computation; it is 
 \begin_inset Formula 
 \[
-H=3.432527514776\cdots
+H=3.432527514776\cdots\mbox{ bits}
 \]
 
 \end_inset
 
- or alternately, in terms of the natural logarithm,
+or alternately, in terms of the natural logarithm,
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-H\log2=2.379246769061\cdots
+H\log_{e}2=2.379246769061\cdots\mbox{ nats}
 \]
 
 \end_inset
 
+These numbers are not obviously related to any previously known constants,
+ according to Plouffe's Inverter
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PloInv"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 The above values were computed with the GNU MP multiple precision library
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -330,16 +347,16 @@ Analytic results
 \end_layout
 
 \begin_layout Standard
-The cumulative distribution function, that is, the partial sum 
+It is strightforward to sum the cumulative distribution function.
+ The cumulative distribution is the partial sum 
 \begin_inset Formula 
 \[
-C(N)=-\sum_{k=1}^{N}p_{k}
+C(N)=\sum_{k=1}^{N}p_{k}
 \]
 
 \end_inset
 
- is straightforward to sum explicitly.
- Note that 
+Note that 
 \begin_inset Formula 
 \[
 1-\frac{1}{\left(k+1\right)^{2}}=\frac{k\left(k+2\right)}{\left(k+1\right)^{2}}
@@ -347,13 +364,37 @@ C(N)=-\sum_{k=1}^{N}p_{k}
 
 \end_inset
 
- and so 
+and so 
 \begin_inset Formula 
 \begin{align*}
 C(N)= & -\sum_{k=1}^{N}\log_{2}\left[\frac{k\left(k+2\right)}{\left(k+1\right)^{2}}\right]\\
 = & -\log_{2}\left[\prod_{k=1}^{N}\frac{k\left(k+2\right)}{\left(k+1\right)^{2}}\right]\\
 = & 1-\log_{2}\left[\frac{N+2}{N+1}\right]
 \end{align*}
+
+\end_inset
+
+The extrapolation parameter 
+\begin_inset Formula $t$
+\end_inset
+
+ is then
+\begin_inset Formula 
+\[
+t=1-C(N)=\log_{2}\left[\frac{N+2}{N+1}\right]=\log_{2}\left[1+\frac{1}{N+1}\right]
+\]
+
+\end_inset
+
+and so, to first order in 
+\begin_inset Formula $N$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+t=\frac{1}{(N+1)\log_{e}2}+\mathcal{O}\left(\frac{1}{N^{2}}\right)
+\]
 
 \end_inset
 
@@ -398,7 +439,7 @@ typical
 \begin_inset Quotes erd
 \end_inset
 
- continued factions, or not.
+ continued fractions, or not.
  The question is important, as many numerical explorations of continued
  fractions must, by necessity, work with either finite-length, or periodic
  continued fraction expansions.
@@ -534,13 +575,16 @@ reference "eq:relative-ent"
 \end_inset
 
 .
- 
+ Notice an obvious self-similarity.
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-This graph was made with data from src/fractal/misc/entropy.C and plotted
- with entropy.gplot
+This graph was made with data from src/fractal/misc/entropy/entropy.C and
+ plotted with entropy.gplot
 \end_layout
 
 \end_inset
@@ -555,6 +599,20 @@ This graph was made with data from src/fractal/misc/entropy.C and plotted
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The relative entropy has an obvious self-similarity, with two generators.
+ By examining the graph, one may guess that one of the generators might
+ be:
+\begin_inset Formula 
+\[
+\Delta H\left(\frac{p}{q}\right)\approx\Delta H\left(\frac{p}{p+q}\right)
+\]
+
+\end_inset
+
+The form of the other generator is not clear.
 \end_layout
 
 \begin_layout Standard
@@ -621,7 +679,9 @@ reference "fig:defacto"
 \end_inset
 
 .
- 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -672,13 +732,11 @@ reference "eq:defacto"
 
 .
  As can be seen, the convergence is very slow.
- The limiting value might seem to be H=3.43..., but this is not clear (
-\emph on
-i.e.
+ The limiting value might possibly be H=3.43..., but this is hardly clear simply
+ by gazing at the graph.
+\end_layout
 
-\emph default
- is without proof).
- 
+\begin_layout Plain Layout
 \begin_inset Note Note
 status open
 
