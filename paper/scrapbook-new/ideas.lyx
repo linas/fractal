@@ -1,0 +1,262 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass amsart
+\use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman times
+\font_sans helvet
+\font_typewriter courier
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 0
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Scrapbook
+\end_layout
+
+\begin_layout Author
+Linas Vepstas
+\end_layout
+
+\begin_layout Abstract
+Collection of random observations pertaining to number theory topics.
+\end_layout
+
+\begin_layout Section*
+Sigma algebras
+\end_layout
+
+\begin_layout Standard
+7 August 2012
+\end_layout
+
+\begin_layout Subsection*
+Sigma algebra on 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The sigma algebra for functions on the integers is given by 
+\begin_inset Formula $2^{\mathbb{N}}$
+\end_inset
+
+, and, specifically, by individual 
+\emph on
+points
+\emph default
+ in 
+\begin_inset Formula $2^{\mathbb{N}}$
+\end_inset
+
+.
+ Each point should be interpreted as a Dirac-delta/membership function.
+ This is in contrast to the standard sigma algebra for the Cantor set, which
+ is the set of all finite-length strings.
+\end_layout
+
+\begin_layout Subsection*
+Non-standard sigma algebras on 
+\begin_inset Formula $2^{\mathbb{N}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The standard sigma algebra for the Cantor set 
+\begin_inset Formula $2^{\mathbb{N}}$
+\end_inset
+
+ is given by the set of all finite-length strings.
+ Why? Because this fits well with the standard topology on the reals.
+ However, we can also consider cylinder sets which are not finite-length.
+ To do this, define a cylinder set as a point (an infinitely long string)
+ in 
+\begin_inset Formula $\{0,1,*\}^{\mathbb{N}}=3^{\mathbb{N}}$
+\end_inset
+
+ So, for example, the string 
+\begin_inset Formula $101*1***\cdots$
+\end_inset
+
+ is the collection of all infiintely long strings whose 1st, 2nd and 3rd
+ bits are 101, whose 5th bit is 1 and all other bits are 'don't care'.
+ Clearly, we can consider strings in 
+\begin_inset Formula $3^{\mathbb{N}}$
+\end_inset
+
+with non-* bits stretching off to infinity: these form a valid sigma algebra.
+\end_layout
+
+\begin_layout Standard
+Using the standard Bernoulli measure, these sets have measure zero.
+ Why? The standard measure gives a binary string of length 
+\begin_inset Formula $n$
+\end_inset
+
+ the measure of 
+\begin_inset Formula $2^{-n}$
+\end_inset
+
+ (or, more generally 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $1-p$
+\end_inset
+
+ multiplied 
+\begin_inset Formula $n$
+\end_inset
+
+ times).
+ Thus, for the standard Bernoulli measure, we conider only thos strings
+ in 
+\begin_inset Formula $3^{\mathbb{N}}$
+\end_inset
+
+ which have a 
+\emph on
+finite
+\emph default
+ number of 0's an 1's in them, and thus end with an infinite number of trailing
+ *'s.
+ 
+\end_layout
+
+\begin_layout Standard
+Are there measures on the sigma algebra 
+\begin_inset Formula $(\Omega,\mathcal{B})=(2^{\mathbb{N}},3^{\mathbb{N}})$
+\end_inset
+
+ which are not Bernoulli measures? i.e.
+ assign non-zero measures to infiintely long strings in 
+\begin_inset Formula $3^{\mathbb{N}}$
+\end_inset
+
+? Well, there are some, which are 
+\begin_inset Quotes eld
+\end_inset
+
+trivial
+\begin_inset Quotes erd
+\end_inset
+
+ extensions of the Bernoulli measure: so: fix any one, given string in 
+\begin_inset Formula $3^{\mathbb{N}}$
+\end_inset
+
+and then assign a Bernoulli measure to all strings that differ by a finite
+ number of positions.
+ We can extend this to any finite number of strings in 
+\begin_inset Formula $3^{\mathbb{N}}$
+\end_inset
+
+, partition up the total measure between these, and then sub-partition these
+ up using the standard Bernoulli measure.
+ We can 'trivially' go one step further: pick a countable number of infinite
+ strings in 
+\begin_inset Formula $3^{\mathbb{N}}$
+\end_inset
+
+, partition up the total measure between those, and then sub-partition each
+ of these with Bernoulli measures.
+ So, with this trivial extension, the best we can do is to pick out a countable
+ subset from 
+\begin_inset Formula $3^{\mathbb{N}}$
+\end_inset
+
+ and distribute the measure across this countable subset.
+\end_layout
+
+\begin_layout Theorem*
+For standard measure theory, this is the best that one can do.
+ That is, one cannot use standard measure theory, and contemplate a function
+ 
+\begin_inset Formula $\mu:3^{\mathbb{N}}\to\mathbb{R}^{+}$
+\end_inset
+
+ that assigns a non-zero value to uncountably many points in 
+\begin_inset Formula $3^{\mathbb{N}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+The reason for this is that, for standard measure theory, we always always
+ ask that 
+\begin_inset Formula $\mu$
+\end_inset
+
+ be sigma-additive.
+ The sigma-additivity condition is for countable disjoint unions.
+ To do what we want above, we would need to extend the notion of sigma-additivit
+y to an uncountable class of sets.
+\end_layout
+
+\begin_layout Standard
+I hope above wasn't too confusing.
+\end_layout
+
+\end_body
+\end_document
