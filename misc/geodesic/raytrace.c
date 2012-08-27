@@ -230,6 +230,30 @@ void two_letter(geodesic_t *geo)
 }
 
 /*
+ * two_eliminate -- identity elimination in geodesic strings
+ * For the modular group, we have S^2 = I
+ */
+int two_eliminate(geodesic_t *geo)
+{
+	int j=0;
+	int k=0;
+	int cnt = 0;
+	while(1)
+	{
+		while (0 == strncmp(&geo->seq[k], "SS", 2)) { k+=2; cnt++; }
+		if (0x0 == geo->seq[k]) break;
+		geo->seq[j] = geo->seq[k];
+		j++;
+		k++;
+		if (0x0 == geo->seq[k]) break;
+	}
+	geo->seq[j] = 0x0;
+
+	DBG("Eliminated %d doubles\n", cnt);
+	return cnt;
+}
+
+/*
  * eliminate -- identity elimination in geodesic strings
  * For the modular group, we have (ST)^3 = I
  */
@@ -298,6 +322,7 @@ void spray()
 		DBG("==========\nstart %g %g\n", in.vx, in.vy);
 		sequence (in, &geo);
 		two_letter(&geo);
+		two_eliminate(&geo);
 		// eliminate(&geo);
 		double res = decode(&geo);
 printf("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
