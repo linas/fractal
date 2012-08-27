@@ -21,6 +21,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define DBG(X,...)
 // #define DBG(X,ARGS...) printf(X, ARGS)
@@ -229,7 +230,30 @@ void two_letter(geodesic_t *geo)
 }
 
 /*
+ * eliminate -- identity elimination in geodesic strings
+ * For the modular group, we have (ST)^3 = I
+ */
+void eliminate(geodesic_t *geo)
+{
+	int j=0;
+	int k=0;
+	while(1)
+	{
+		while (0 == strncmp(&geo->seq[k], "STSTST", 6)) k+=6;
+		while (0 == strncmp(&geo->seq[k], "TSTSTS", 6)) k+=6;
+printf("wtf k=%d str=%s\n", k, &geo->seq[k]);
+		if (0x0 == geo->seq[k]) break;
+		geo->seq[j] = geo->seq[k];
+		j++;
+		k++;
+		if (0x0 == geo->seq[k]) break;
+	}
+	geo->seq[j] = 0x0;
+}
+
+/*
  * decode -- convert geodesic into real number.
+ * This is a binary decoding, not a continued fraction decoding.
  */
 double decode(geodesic_t *geo)
 {
@@ -274,8 +298,9 @@ void spray()
 		DBG("==========\nstart %g %g\n", in.vx, in.vy);
 		sequence (in, &geo);
 		two_letter(&geo);
+		// eliminate(&geo);
 		double res = decode(&geo);
-// printf("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
+printf("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
 printf("theta=%g res=%g\n", theta, res);
 	}
 }
