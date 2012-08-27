@@ -22,8 +22,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// #define DBG(X,...)
-#define DBG(X,...) printf(X, ...)
+#define DBG(X,...)
+// #define DBG(X,ARGS...) printf(X, ARGS)
 
 typedef int bool;
 
@@ -70,6 +70,14 @@ char bounce (const ray_t in, ray_t* out)
 	// If geodesic and unit circle intersect, then it can still be
 	// a side exit if the intersection point is out of bounds.
 	bool side_exit = (x_exit < -0.5) || (0.5 < x_exit);
+
+	// First time through is a special case...
+	if (('F' == in.code) && intersect && !side_exit && (0.0 < in.vy))
+	{
+#define TRUE 1
+		bottom_entry = TRUE;
+	}
+
 	if (!intersect || (intersect && (bottom_entry||side_exit)))
 	{
 		if (in.vx > 0.0)
@@ -155,14 +163,15 @@ void sequence()
 #define SEQLEN 20
 	char raw_seq[SEQLEN+1];
 	ray_t in, out;
-	in.x = 0.0;
-	in.y = 2.0;
 	double theta;
 	double delta = 0.1;
 	for (theta = 0.5*delta; theta<2.0*M_PI; theta += delta)
 	{
+		in.x = 0.0;
+		in.y = 2.0;
 		in.vx = cos(theta);
 		in.vy = sin(theta);	
+		in.code = 'F';
 
 		DBG("==========\nstart %g %g\n", in.vx, in.vy);
 		int i;
