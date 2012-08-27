@@ -48,13 +48,16 @@ printf("--------\ncenter at %g\n", center);
 	// If intersect, then can take sqrt to get valid intersection point.
 	bool intersect = (x_exit-center)*(x_exit-center) < radius_sq;
 
-	// bottom_entry is true, if the trajectory came in through the
-	// bottom.
+	// bottom_entry is true, if the trajectory came in through the bottom.
 	// bool bottom_entry = (-0.5 < in.x) && (in.x < 0.5);
 	// double rinsq = in.x*in.x + in.y*in.y - 1.0;
 	// bool bottom_entry = (rinsq < 1.0e-14);
 	bool bottom_entry = (in.code == 'S');
-	if (!intersect || (intersect && bottom_entry))
+
+	// If geodesic and unit circle intersect, then it can still be
+	// a side exit if the intersection point is out of bounds.
+	bool side_exit = (x_exit < -0.5) || (0.5 < x_exit);
+	if (!intersect || (intersect && (bottom_entry||side_exit)))
 	{
 		if (in.vx > 0.0)
 		{
