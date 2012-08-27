@@ -15,6 +15,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define DBG(X,...)
+// #define DBG(X,...) printf(X,...)
+
 typedef int bool;
 
 typedef struct 
@@ -37,10 +40,13 @@ char bounce (const ray_t in, ray_t* out)
 
 	// Calculate center of circle.  Its at y=0, x=center.
 	double center = in.x + in.y * in.vy / in.vx;
-printf("--------\ncenter at %g\n", center);
+	DBG("--------\ncenter at %g\n", center);
 	// Square of the radius of the circle
 	double radius_sq = (in.x - center)*(in.x-center) + in.y*in.y;
 
+	// exit_code == 'S' means bottom exit
+	// exit_code == 'T' means right exit
+	// exit_code == 'N' means left exit
 	char exit_code = 'S';
 	double x_exit = (1.0 - radius_sq + center*center) / (2.0 * center);
 
@@ -74,7 +80,7 @@ printf("--------\ncenter at %g\n", center);
 	}
 
 	double y_exit = sqrt(radius_sq - (x_exit-center)*(x_exit-center));
-printf(" %c exit x=%g y=%g\n", exit_code, x_exit, y_exit);
+	DBG(" %c exit x=%g y=%g\n", exit_code, x_exit, y_exit);
 	if (('S' != exit_code) && (y_exit < rho))
 	{
 		fprintf(stderr, "Error: bad y value = %g for side exit\n", y_exit);
@@ -100,9 +106,10 @@ printf(" %c exit x=%g y=%g\n", exit_code, x_exit, y_exit);
 		}
 	}
 
-printf("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
+	DBG("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
 
-	// now reflect
+	// Now bounce the velocity vector, based on which wall it is going
+	// through.
 	switch (exit_code)
 	{
 		case 'T':
@@ -132,29 +139,33 @@ printf("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
 	}
 	out->code = exit_code;
 
-vx_exit = out->vx;
-vy_exit = out->vy;
-printf("final velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
-
+	DBG("final velc=%g %g %g\n", out->vx, out->vy, out->vx*out->vx+out->vy*out->vy);
 	return exit_code;
 }
 
 void sequence()
 {
+#define SEQLEN 20
+	char raw_seq[SEQLEN+1];
 	ray_t in, out;
 	in.x = 0.0;
 	in.y = 2.0;
-	double theta = 0.1;
+	double theta;
+	double delta_theta = 0.1;
+	for (theta= 
 	in.vx = cos(theta);
 	in.vy = sin(theta);	
 
 printf("start %g %g\n", in.vx, in.vy);
 	int i;
-	for (i=0; i<10; i++)
+	for (i=0; i<SEQLEN; i++)
 	{
 		bounce(in, &out);
 		in = out;
+		raw_seq[i] = out.code;
 	}
+	raw_seq[SEQLEN] = 0;
+printf("theta=%g seq=%s\n", theta, raw_seq);
 }
 
 int main(int argc, char * argv[]) 
