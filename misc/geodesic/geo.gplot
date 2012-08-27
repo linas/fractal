@@ -1,0 +1,15 @@
+
+set term png size 768,640
+set out 'geo.png'
+
+# set data style linespoints
+set style data lines
+set key right
+
+set title "geodesics"
+set xlabel "x"
+set ylabel "D)"
+set xrange [0:1]
+
+plot "geo.dat" using ($1/(2*3.141592653)):2 title ""
+

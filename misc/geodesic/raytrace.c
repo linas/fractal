@@ -353,9 +353,11 @@ void spray(double delta)
 		sequence (in, &geo);
 		two_letter(&geo);
 		eliminate_two(&geo);
+#if 0
 		eliminate_triple(&geo);
 		eliminate_five(&geo);
 		eliminate_triple(&geo);
+#endif
 		double res = decode(&geo);
 		DBG("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
 		DBG("theta=%g res=%g\n", theta, res);
@@ -366,7 +368,7 @@ void spray(double delta)
 
 int main(int argc, char * argv[]) 
 {
-	spray(0.02);
+	spray(0.003);
 }
 
 
