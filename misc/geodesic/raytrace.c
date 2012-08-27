@@ -35,10 +35,19 @@ printf("center at %g\n", center);
 	// Square of the radius of the circle
 	double radius_sq = (in.x - center)*(in.x-center) + in.y*in.y;
 
-	double x_exit = 0.5;
+   char exit_code = 'S';
+   double x_exit = (1.0 - radius_sq + center*center) / (2.0 * center);
+   if ((0.5 < x_exit) ||
+	   ((x_exit-center)*(x_exit-center) > radius_sq))
+   {
+		// Side exit, not bottom exit
+		x_exit = 0.5;
+		exit_code = 'T';
+	}
+
 	double y_exit = sqrt(radius_sq - (x_exit-center)*(x_exit-center));
 
-printf("exit x=%g y=%g\n", x_exit, y_exit);
+printf(" %c exit x=%g y=%g\n", exit_code, x_exit, y_exit);
 
 	double tan_exit = -(x_exit-center)/y_exit;
 	double vx_exit = sqrt(1.0 / (1.0 + tan_exit*tan_exit));
@@ -48,13 +57,29 @@ printf("exit x=%g y=%g\n", x_exit, y_exit);
 printf("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
 
 	// now reflect
-	out->x = -0.5;
-	out->y = y_exit;
+	switch (exit_code)
+	{
+		case 'T':
+			out->x = -0.5;
+			out->y = y_exit;
 
-	out->vx = vx_exit;
-	out->vy = vy_exit;
+			out->vx = vx_exit;
+			out->vy = vy_exit;
+		case 'S':
+		{
+			out->x = -x_exit;
+			out->y = y_exit;
 
-	return 'S';
+			double deno = 2.0 * x_exit * center * vx_exit;
+			out->vx = -vx_exit + deno;
+			out->vy = vy_exit - deno;
+		}
+	}
+vx_exit = out->vx;
+vy_exit = out->vy;
+printf("final velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
+
+	return exit_code;
 }
 
 void sequence()
