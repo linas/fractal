@@ -13,6 +13,9 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+typedef int bool;
 
 typedef struct 
 {
@@ -29,23 +32,48 @@ typedef struct
  */
 char bounce (const ray_t in, ray_t* out)
 {
+	static double rho = 0.5 * sqrt(3.0);
+
 	// Calculate center of circle.  Its at y=0, x=center.
 	double center = in.x + in.y * in.vy / in.vx;
-printf("center at %g\n", center);
+printf("--------\ncenter at %g\n", center);
 	// Square of the radius of the circle
 	double radius_sq = (in.x - center)*(in.x-center) + in.y*in.y;
 
 	char exit_code = 'S';
 	double x_exit = (1.0 - radius_sq + center*center) / (2.0 * center);
-	if ((0.5 < x_exit) ||
-	   ((x_exit-center)*(x_exit-center) > radius_sq))
+
+	// intersect is true if the geodesic and the unit circle interest.
+	// If intersect, then can take sqrt to get valid intersection point.
+	bool intersect = (x_exit-center)*(x_exit-center) < radius_sq;
+
+	// If intersect is true, then the dot product tells us whether the
+	// trajectory is incoming, or outgoing.  If its outgoing, then its
+	// a bottom exit, else its a side exit.  dot is true for bottem
+	// entry.
+	bool dot = 0.0 < (in.x* in.vx + in.y *in.vy);
+	if (!intersect || (intersect && dot))
 	{
-		// Side exit, not bottom exit
-		x_exit = 0.5;
-		exit_code = 'T';
+		if (in.vx > 0.0)
+		{
+			// Right side exit, not bottom exit
+			x_exit = 0.5;
+			exit_code = 'T';
+		}
+		else 
+		{
+			// Left side exit, not bottom exit
+			x_exit = -0.5;
+			exit_code = 'N';
+		}
 	}
 
 	double y_exit = sqrt(radius_sq - (x_exit-center)*(x_exit-center));
+	if (('S' != exit_code) && (y_exit < rho))
+	{
+		fprintf(stderr, "Error: bad y value for side exit\n");
+		exit(1);
+	}
 
 printf(" %c exit x=%g y=%g\n", exit_code, x_exit, y_exit);
 
