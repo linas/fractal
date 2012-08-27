@@ -341,10 +341,11 @@ void spray(double delta)
 	ray_t in;
 	geodesic_t geo;
 	double theta;
-	for (theta = 0.5*delta; theta<2.0*M_PI; theta += delta)
+   double offset = 0.5*M_PI;
+	for (theta = 0.5*delta + offset; theta<2.0*M_PI+offset; theta += delta)
 	{
 		in.x = 0.0;
-		in.y = 2.0;
+		in.y = 1.001;
 		in.vx = cos(theta);
 		in.vy = sin(theta);	
 		in.code = 'F';
@@ -362,7 +363,7 @@ void spray(double delta)
 		DBG("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
 		DBG("theta=%g res=%g\n", theta, res);
 
-		printf("%g	%g\n", theta, res);
+		printf("%g	%g\n", theta-offset, res);
 	}
 }
 
