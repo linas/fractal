@@ -167,7 +167,7 @@ char bounce (const ray_t in, ray_t* out)
 	return exit_code;
 }
 
-#define SEQLEN 18
+#define SEQLEN 80
 typedef struct 
 {
 	ray_t	tangent; // tangent vector at start point
@@ -345,8 +345,9 @@ double decode_frac_helper(char * seq)
 		if ('S' == seq[k])
 		{
 			double rv = decode_frac_helper(&seq[k+1]);
-			DBG("val=%g seq=%s\n", 1.0 / (1.0 + rv), seq);
-			return 1.0 / (1.0 + rv);
+			if (0 == cnt) cnt = 1;
+			DBG("val=%g seq=%s\n", 1.0 / (cnt + rv), seq);
+			return 1.0 / (cnt + rv);
 		}
 		else
 		{
@@ -377,7 +378,7 @@ void spray(double delta)
 	for (theta = 0.5*delta + offset; theta<2.0*M_PI+offset; theta += delta)
 	{
 		in.x = 0.0;
-		in.y = 1.001;
+		in.y = 1.0;
 		in.vx = cos(theta);
 		in.vy = sin(theta);	
 		in.code = 'F';
@@ -395,7 +396,7 @@ void spray(double delta)
 		double contin = decode_frac(&geo);
 		DBG("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
 		DBG("theta=%g res=%g\n", theta, dyadic);
-		printf("theta=%g res=%g seq=%s\n", theta, dyadic, geo.seq);
+		// printf("theta=%g res=%g seq=%s\n", theta, dyadic, geo.seq);
 
 		// OK, now compute the geodesic going in the opposite direction.
 		in.x = 0.0;
