@@ -23,6 +23,7 @@ typedef struct
 	double y;
 	double vx;  // velocity
 	double vy;
+	char code;
 } ray_t;
 
 /* Return S or T or N depending on whther the ray exited on the bottom,
@@ -47,12 +48,13 @@ printf("--------\ncenter at %g\n", center);
 	// If intersect, then can take sqrt to get valid intersection point.
 	bool intersect = (x_exit-center)*(x_exit-center) < radius_sq;
 
-	// If intersect is true, then the dot product tells us whether the
-	// trajectory is incoming, or outgoing.  If its outgoing, then its
-	// a bottom exit, else its a side exit.  dot is true for bottem
-	// entry.
-	bool dot = 0.0 < (in.x* in.vx + in.y *in.vy);
-	if (!intersect || (intersect && dot))
+	// bottom_entry is true, if the trajectory came in through the
+	// bottom.
+	// bool bottom_entry = (-0.5 < in.x) && (in.x < 0.5);
+	// double rinsq = in.x*in.x + in.y*in.y - 1.0;
+	// bool bottom_entry = (rinsq < 1.0e-14);
+	bool bottom_entry = (in.code == 'S');
+	if (!intersect || (intersect && bottom_entry))
 	{
 		if (in.vx > 0.0)
 		{
@@ -69,18 +71,31 @@ printf("--------\ncenter at %g\n", center);
 	}
 
 	double y_exit = sqrt(radius_sq - (x_exit-center)*(x_exit-center));
+printf(" %c exit x=%g y=%g\n", exit_code, x_exit, y_exit);
 	if (('S' != exit_code) && (y_exit < rho))
 	{
-		fprintf(stderr, "Error: bad y value for side exit\n");
+		fprintf(stderr, "Error: bad y value = %g for side exit\n", y_exit);
 		exit(1);
 	}
-
-printf(" %c exit x=%g y=%g\n", exit_code, x_exit, y_exit);
 
 	double tan_exit = -(x_exit-center)/y_exit;
 	double vx_exit = sqrt(1.0 / (1.0 + tan_exit*tan_exit));
 	double vy_exit = sqrt (1.0 - vx_exit*vx_exit);
+	// Copy the sign bit to the velocity.
 	if (tan_exit < 0.0) vy_exit = -vy_exit;
+
+	// If incoming velocity was left-pointing, then so is the outgoing
+	// velocity.  exit code should be N or S.
+	if (in.vx < 0.0)
+	{
+		vx_exit = -vx_exit;
+		vy_exit = -vy_exit;
+		if ('T' == exit_code)
+		{
+			fprintf(stderr, "Bad exit code for velocity\n");
+			exit(1);
+		}
+	}
 
 printf("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
 
@@ -112,6 +127,8 @@ printf("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
 			break;
 		}
 	}
+	out->code = exit_code;
+
 vx_exit = out->vx;
 vy_exit = out->vy;
 printf("final velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
