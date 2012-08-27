@@ -167,7 +167,7 @@ char bounce (const ray_t in, ray_t* out)
 	return exit_code;
 }
 
-#define SEQLEN 20
+#define SEQLEN 18
 typedef struct 
 {
 	ray_t	tangent; // tangent vector at start point
@@ -315,10 +315,11 @@ double decode(geodesic_t *geo)
 	double result = 0.0;
 	double shift = 0.5;
 	bool doit = TRUE;
+	char * seq = geo->seq;
 	int k;
-	for (k=0; 0x0 != geo->seq[k]; k++)
+	for (k=0; 0x0 != seq[k]; k++)
 	{
-		if ('S' == geo->seq[k])
+		if ('S' == seq[k])
 		{
 			doit = !doit;
 		}
@@ -332,6 +333,37 @@ double decode(geodesic_t *geo)
 }
 
 /*
+ * decode_frac -- convert geodesic into real number.
+ * This is a continued-fraction decoding.
+ */
+double decode_frac_helper(char * seq)
+{
+	int cnt = 0;
+	int k;
+	for (k=0; 0x0 != seq[k]; k++)
+	{
+		if ('S' == seq[k])
+		{
+			double rv = decode_frac_helper(&seq[k+1]);
+			DBG("val=%g seq=%s\n", 1.0 / (1.0 + rv), seq);
+			return 1.0 / (1.0 + rv);
+		}
+		else
+		{
+			cnt ++;
+		}
+	}
+	if (cnt < 0.5) cnt = 1.0;
+	DBG("val=%g seq=%s\n", 1.0 / ((double) cnt), seq);
+	return 1.0 / ((double) cnt);
+}
+
+double decode_frac(geodesic_t *geo)
+{
+	return decode_frac_helper(geo->seq);
+}
+
+/*
  * spray -- generate symbolic dynamics for various geodesics
  *
  * Right now, its a geodesic spray starting at (0,2)
@@ -341,7 +373,7 @@ void spray(double delta)
 	ray_t in;
 	geodesic_t geo;
 	double theta;
-   double offset = 0.5*M_PI;
+	double offset = 0.5*M_PI;
 	for (theta = 0.5*delta + offset; theta<2.0*M_PI+offset; theta += delta)
 	{
 		in.x = 0.0;
@@ -359,11 +391,24 @@ void spray(double delta)
 		eliminate_five(&geo);
 		eliminate_triple(&geo);
 #endif
-		double res = decode(&geo);
+		double dyadic = decode(&geo);
+		double contin = decode_frac(&geo);
 		DBG("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
-		DBG("theta=%g res=%g\n", theta, res);
+		DBG("theta=%g res=%g\n", theta, dyadic);
+		printf("theta=%g res=%g seq=%s\n", theta, dyadic, geo.seq);
 
-		printf("%g	%g\n", theta-offset, res);
+		// OK, now compute the geodesic going in the opposite direction.
+		in.x = 0.0;
+		in.y = 1.001;
+		in.vx = cos(theta+M_PI);
+		in.vy = sin(theta+M_PI);	
+		in.code = 'F';
+
+		sequence (in, &geo);
+		two_letter(&geo);
+		eliminate_two(&geo);
+		double back = decode(&geo);
+		printf("%g	%g	%g	%g\n", (theta-offset)/(2.0*M_PI), dyadic, contin, back);
 	}
 }
 
