@@ -11,12 +11,15 @@
  * Linas Vepstas August 2012
  */
 
+#include <math.h>
+#include <stdio.h>
+
 typedef struct 
 {
   double x;   // position
   double y;
-  double xv;  // velocity
-  double yv;
+  double vx;  // velocity
+  double vy;
 } ray_t;
 
 /* Return S or T or N depending on whther the ray exited on the bottom,
@@ -26,11 +29,47 @@ typedef struct
  */
 char bounce (const ray_t in, ray_t* out)
 {
-    return 'S';
+	// Calculate center of circle.  Its at y=0, x=center.
+	double center = in.x + in.y * in.vy / in.vx;
+printf("center at %g\n", center);
+	// Square of the radius of the circle
+	double radius_sq = (in.x - center)*(in.x-center) + in.y*in.y;
+
+	double x_exit = 0.5;
+	double y_exit = sqrt(radius_sq - (x_exit-center)*(x_exit-center));
+
+printf("exit x=%g y=%g\n", x_exit, y_exit);
+
+	double tan_exit = -(x_exit-center)/y_exit;
+   double vx_exit = sqrt(1.0 / (1.0 + tan_exit*tan_exit));
+   double vy_exit = sqrt (1.0 - vx_exit*vx_exit);
+
+printf("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
+
+	// now reflect
+	out->x = -0.5;
+	out->y = y_exit;
+
+	out->vx = vx_exit;
+	out->vy = vy_exit;
+
+	return 'S';
+}
+
+void sequence()
+{
+	ray_t in, out;
+	in.x = 0.0;
+	in.y = 2.0;
+	double theta = 0.1;
+	in.vx = cos(theta);
+	in.vy = sin(theta);	
+	bounce(in, &out);
 }
 
 int main(int argc, char * argv[]) 
 {
+	sequence();
 }
 
 

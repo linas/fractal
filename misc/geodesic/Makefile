@@ -6,4 +6,4 @@ raytrace: raytrace.o
 	cc -c $^
 
 .o:
-	cc -o $* $^
+	cc -o $* $^ -lm
