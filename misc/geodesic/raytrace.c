@@ -170,8 +170,9 @@ char bounce (const ray_t in, ray_t* out)
 typedef struct 
 {
 	ray_t	tangent; // tangent vector at start point
+	int seqlen;
 	char raw_seq[SEQLEN+1];  // three-letter symbolic dynamics
-	char pos_seq[5*SEQLEN+1];  // two-letter symbolic dynamics
+	char seq[5*SEQLEN+1];  // two-letter symbolic dynamics
 } geodesic_t;
 
 /*
@@ -183,6 +184,7 @@ void sequence(ray_t in, geodesic_t* geo)
 {
 	in.code = 'F'; // Sanity check
 	geo->tangent = in;
+	geo->seqlen = SEQLEN;
 
 	DBG("==========\nstart %g %g\n", in.vx, in.vy);
 	int i;
@@ -194,6 +196,38 @@ void sequence(ray_t in, geodesic_t* geo)
 		geo->raw_seq[i] = out.code;
 	}
 	geo->raw_seq[SEQLEN] = 0;
+}
+
+/*
+ * two_letter --  compute the two-letter sequence, given the raw seq.
+ */
+void two_letter(geodesic_t *geo)
+{
+	int i;
+	int k=0;
+	for (i=0; i<geo->seqlen; i++)
+	{
+		switch(geo->raw_seq[i])
+		{
+			case 'S':
+			case 'T':
+				geo->seq[k] = geo->raw_seq[i];
+				k++;
+				break;
+			case 'N':
+				if ((0==k) || ((0<k) && ('T' == geo->seq[k-1])))
+				{
+					geo->seq[k] = 'S';
+					k++;
+				}
+				geo->seq[k] = 'T'; k++;
+				geo->seq[k] = 'S'; k++;
+				geo->seq[k] = 'T'; k++;
+				geo->seq[k] = 'S'; k++;
+				break;
+		}
+	}
+	geo->seq[k] = 0;
 }
 
 /*
@@ -217,7 +251,8 @@ void spray()
 
 		DBG("==========\nstart %g %g\n", in.vx, in.vy);
 		sequence (in, &geo);
-printf("theta=%g seq=%s\n", theta, geo.raw_seq);
+		two_letter(&geo);
+printf("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
 	}
 }
 
