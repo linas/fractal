@@ -170,7 +170,6 @@ char bounce (const ray_t in, ray_t* out)
 typedef struct 
 {
 	ray_t	tangent; // tangent vector at start point
-	int seqlen;
 	char raw_seq[SEQLEN+1];  // three-letter symbolic dynamics
 	char seq[5*SEQLEN+1];  // two-letter symbolic dynamics
 } geodesic_t;
@@ -184,7 +183,6 @@ void sequence(ray_t in, geodesic_t* geo)
 {
 	in.code = 'F'; // Sanity check
 	geo->tangent = in;
-	geo->seqlen = SEQLEN;
 
 	DBG("==========\nstart %g %g\n", in.vx, in.vy);
 	int i;
@@ -205,7 +203,7 @@ void two_letter(geodesic_t *geo)
 {
 	int i;
 	int k=0;
-	for (i=0; i<geo->seqlen; i++)
+	for (i=0; 0x0 != geo->raw_seq[i]; i++)
 	{
 		switch(geo->raw_seq[i])
 		{
@@ -231,6 +229,30 @@ void two_letter(geodesic_t *geo)
 }
 
 /*
+ * decode -- convert geodesic into real number.
+ */
+double decode(geodesic_t *geo)
+{
+	double result = 0.0;
+	double shift = 0.5;
+	bool doit = TRUE;
+	int k;
+	for (k=0; 0x0 != geo->seq[k]; k++)
+	{
+		if ('S' == geo->seq[k])
+		{
+			doit = !doit;
+		}
+		else
+		{
+			if (doit) result += shift;
+			shift *= 0.5;
+		}
+	}
+	return result;
+}
+
+/*
  * spray -- generate symbolic dynamics for various geodesics
  *
  * Right now, its a geodesic spray starting at (0,2)
@@ -252,7 +274,9 @@ void spray()
 		DBG("==========\nstart %g %g\n", in.vx, in.vy);
 		sequence (in, &geo);
 		two_letter(&geo);
-printf("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
+		double res = decode(&geo);
+// printf("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
+printf("theta=%g res=%g\n", theta, res);
 	}
 }
 
