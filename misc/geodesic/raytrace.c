@@ -35,11 +35,11 @@ printf("center at %g\n", center);
 	// Square of the radius of the circle
 	double radius_sq = (in.x - center)*(in.x-center) + in.y*in.y;
 
-   char exit_code = 'S';
-   double x_exit = (1.0 - radius_sq + center*center) / (2.0 * center);
-   if ((0.5 < x_exit) ||
+	char exit_code = 'S';
+	double x_exit = (1.0 - radius_sq + center*center) / (2.0 * center);
+	if ((0.5 < x_exit) ||
 	   ((x_exit-center)*(x_exit-center) > radius_sq))
-   {
+	{
 		// Side exit, not bottom exit
 		x_exit = 0.5;
 		exit_code = 'T';
@@ -65,14 +65,23 @@ printf("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
 
 			out->vx = vx_exit;
 			out->vy = vy_exit;
+			break;
+		case 'N':
+			out->x = 0.5;
+			out->y = y_exit;
+
+			out->vx = vx_exit;
+			out->vy = vy_exit;
+			break;
 		case 'S':
 		{
 			out->x = -x_exit;
 			out->y = y_exit;
 
-			double deno = 2.0 * x_exit * center * vx_exit;
-			out->vx = -vx_exit + deno;
-			out->vy = vy_exit - deno;
+			double deno = 2.0 * center * vx_exit;
+			out->vx = -vx_exit + x_exit * deno;
+			out->vy = vy_exit - y_exit * deno;
+			break;
 		}
 	}
 vx_exit = out->vx;
