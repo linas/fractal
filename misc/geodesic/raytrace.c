@@ -233,7 +233,7 @@ void two_letter(geodesic_t *geo)
  * two_eliminate -- identity elimination in geodesic strings
  * For the modular group, we have S^2 = I
  */
-int two_eliminate(geodesic_t *geo)
+int eliminate_two(geodesic_t *geo)
 {
 	int j=0;
 	int k=0;
@@ -257,15 +257,15 @@ int two_eliminate(geodesic_t *geo)
  * eliminate -- identity elimination in geodesic strings
  * For the modular group, we have (ST)^3 = I
  */
-void eliminate(geodesic_t *geo)
+int eliminate_triple(geodesic_t *geo)
 {
 	int j=0;
 	int k=0;
+	int cnt = 0;
 	while(1)
 	{
-		while (0 == strncmp(&geo->seq[k], "STSTST", 6)) k+=6;
-		while (0 == strncmp(&geo->seq[k], "TSTSTS", 6)) k+=6;
-printf("wtf k=%d str=%s\n", k, &geo->seq[k]);
+		while (0 == strncmp(&geo->seq[k], "STSTST", 6)) { k+=6; cnt ++; }
+		while (0 == strncmp(&geo->seq[k], "TSTSTS", 6)) { k+=6; cnt++; }
 		if (0x0 == geo->seq[k]) break;
 		geo->seq[j] = geo->seq[k];
 		j++;
@@ -273,6 +273,37 @@ printf("wtf k=%d str=%s\n", k, &geo->seq[k]);
 		if (0x0 == geo->seq[k]) break;
 	}
 	geo->seq[j] = 0x0;
+	return cnt;
+}
+
+/*
+ * eliminate -- identity elimination in geodesic strings
+ * For the modular group, we have (ST)^3 = I
+ */
+int eliminate_five(geodesic_t *geo)
+{
+	int j=0;
+	int k=0;
+	int cnt = 0;
+	while(1)
+	{
+		while (0 == strncmp(&geo->seq[k], "TSTST", 5))
+		{ 
+			k += 5;
+			geo->seq[j] = 'S';
+			j++;
+			cnt++;
+		}
+		if (0x0 == geo->seq[k]) break;
+		geo->seq[j] = geo->seq[k];
+		j++;
+		k++;
+		if (0x0 == geo->seq[k]) break;
+	}
+	geo->seq[j] = 0x0;
+
+	eliminate_two(geo);
+	return cnt;
 }
 
 /*
@@ -305,12 +336,11 @@ double decode(geodesic_t *geo)
  *
  * Right now, its a geodesic spray starting at (0,2)
  */
-void spray()
+void spray(double delta)
 {
 	ray_t in;
 	geodesic_t geo;
 	double theta;
-	double delta = 0.1;
 	for (theta = 0.5*delta; theta<2.0*M_PI; theta += delta)
 	{
 		in.x = 0.0;
@@ -322,17 +352,21 @@ void spray()
 		DBG("==========\nstart %g %g\n", in.vx, in.vy);
 		sequence (in, &geo);
 		two_letter(&geo);
-		two_eliminate(&geo);
-		// eliminate(&geo);
+		eliminate_two(&geo);
+		eliminate_triple(&geo);
+		eliminate_five(&geo);
+		eliminate_triple(&geo);
 		double res = decode(&geo);
-printf("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
-printf("theta=%g res=%g\n", theta, res);
+		DBG("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
+		DBG("theta=%g res=%g\n", theta, res);
+
+		printf("%g	%g\n", theta, res);
 	}
 }
 
 int main(int argc, char * argv[]) 
 {
-	spray();
+	spray(0.02);
 }
 
 
