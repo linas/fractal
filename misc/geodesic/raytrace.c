@@ -36,10 +36,18 @@ typedef struct
 	char code;
 } ray_t;
 
-/* Return S or T or N depending on whther the ray exited on the bottom,
+/* 
+ * bounce -- ray-trace a geodesic through the fundamental domain.
+ *
+ * Return S or T or N depending on whether the ray exited on the bottom,
  * or on the right, or on the left of the fundamental domain bounded by
- * two vertical lines from +/- 1/2 +i rho where rho=
- * and a circular arc stretching between them, of radius r=
+ * two vertical lines from +/- 1/2 +i rho where rho= srt(2)/2
+ * and a circular arc stretching between them, of radius r=1.
+ *
+ * The 'in' ray is the incoming ray.  The 'out' ray is the outgoing ray,
+ * except that its already been 'reflected' at the boundary, such that
+ * the unit geodesic velocity poits into the domain, i.e. so that it can
+ * be used as 'in' without any further changes.
  */
 char bounce (const ray_t in, ray_t* out)
 {
@@ -158,11 +166,45 @@ char bounce (const ray_t in, ray_t* out)
 	return exit_code;
 }
 
-void sequence()
-{
 #define SEQLEN 20
-	char raw_seq[SEQLEN+1];
-	ray_t in, out;
+typedef struct 
+{
+	ray_t	tangent; // tangent vector at start point
+	char raw_seq[SEQLEN+1];  // three-letter symbolic dynamics
+	char pos_seq[5*SEQLEN+1];  // two-letter symbolic dynamics
+} geodesic_t;
+
+/*
+ * sequence -- generate symbolic dynamics for various geodesics
+ *
+ * Right now, its a geodesic spray starting at (0,2)
+ */
+void sequence(ray_t in, geodesic_t* geo)
+{
+	in.code = 'F'; // Sanity check
+	geo->tangent = in;
+
+	DBG("==========\nstart %g %g\n", in.vx, in.vy);
+	int i;
+	for (i=0; i<SEQLEN; i++)
+	{
+		ray_t out;
+		bounce(in, &out);
+		in = out;
+		geo->raw_seq[i] = out.code;
+	}
+	geo->raw_seq[SEQLEN] = 0;
+}
+
+/*
+ * spray -- generate symbolic dynamics for various geodesics
+ *
+ * Right now, its a geodesic spray starting at (0,2)
+ */
+void spray()
+{
+	ray_t in;
+	geodesic_t geo;
 	double theta;
 	double delta = 0.1;
 	for (theta = 0.5*delta; theta<2.0*M_PI; theta += delta)
@@ -174,21 +216,14 @@ void sequence()
 		in.code = 'F';
 
 		DBG("==========\nstart %g %g\n", in.vx, in.vy);
-		int i;
-		for (i=0; i<SEQLEN; i++)
-		{
-			bounce(in, &out);
-			in = out;
-			raw_seq[i] = out.code;
-		}
-		raw_seq[SEQLEN] = 0;
-printf("theta=%g seq=%s\n", theta, raw_seq);
+		sequence (in, &geo);
+printf("theta=%g seq=%s\n", theta, geo.raw_seq);
 	}
 }
 
 int main(int argc, char * argv[]) 
 {
-	sequence();
+	spray();
 }
 
 
