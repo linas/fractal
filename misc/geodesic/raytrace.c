@@ -5,8 +5,15 @@
  * by ray-tracing.  Arbitrary-precision version need to make sure we 
  * get the right number of digits.  Geodesics are circles with origin
  * on the imaginary axis.  The path that a geodesic takes is a double-
- * sides string of S and T values, which can be converted to a binary
- * string via Minkowski ? function.
+ * sides string of S, T, N values. These form a symbolic dynamics
+ * encoding of the trajectory.  Ostensible interest is to gather insight
+ * into connectin between Ornstein isomorphism theorem and the Cantor
+ * set.
+ *
+ * The symbolic trajectory can be converted purely into S,T values, via
+ * the SL(2,Z) identity (ST)^3=I.  Then strings of S,T can be converted
+ * to binary either via dyadic encoding or via Minkowski ? encoding
+ * (i.e. via continued fraction).
  *
  * Linas Vepstas August 2012
  */
@@ -15,8 +22,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DBG(X,...)
-// #define DBG(X,...) printf(X,...)
+// #define DBG(X,...)
+#define DBG(X,...) printf(X, ...)
 
 typedef int bool;
 
@@ -151,21 +158,23 @@ void sequence()
 	in.x = 0.0;
 	in.y = 2.0;
 	double theta;
-	double delta_theta = 0.1;
-	for (theta= 
-	in.vx = cos(theta);
-	in.vy = sin(theta);	
-
-printf("start %g %g\n", in.vx, in.vy);
-	int i;
-	for (i=0; i<SEQLEN; i++)
+	double delta = 0.1;
+	for (theta = 0.5*delta; theta<2.0*M_PI; theta += delta)
 	{
-		bounce(in, &out);
-		in = out;
-		raw_seq[i] = out.code;
-	}
-	raw_seq[SEQLEN] = 0;
+		in.vx = cos(theta);
+		in.vy = sin(theta);	
+
+		DBG("==========\nstart %g %g\n", in.vx, in.vy);
+		int i;
+		for (i=0; i<SEQLEN; i++)
+		{
+			bounce(in, &out);
+			in = out;
+			raw_seq[i] = out.code;
+		}
+		raw_seq[SEQLEN] = 0;
 printf("theta=%g seq=%s\n", theta, raw_seq);
+	}
 }
 
 int main(int argc, char * argv[]) 
