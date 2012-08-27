@@ -16,10 +16,10 @@
 
 typedef struct 
 {
-  double x;   // position
-  double y;
-  double vx;  // velocity
-  double vy;
+	double x;   // position
+	double y;
+	double vx;  // velocity
+	double vy;
 } ray_t;
 
 /* Return S or T or N depending on whther the ray exited on the bottom,
@@ -41,8 +41,9 @@ printf("center at %g\n", center);
 printf("exit x=%g y=%g\n", x_exit, y_exit);
 
 	double tan_exit = -(x_exit-center)/y_exit;
-   double vx_exit = sqrt(1.0 / (1.0 + tan_exit*tan_exit));
-   double vy_exit = sqrt (1.0 - vx_exit*vx_exit);
+	double vx_exit = sqrt(1.0 / (1.0 + tan_exit*tan_exit));
+	double vy_exit = sqrt (1.0 - vx_exit*vx_exit);
+	if (tan_exit < 0.0) vy_exit = -vy_exit;
 
 printf("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
 
@@ -64,7 +65,14 @@ void sequence()
 	double theta = 0.1;
 	in.vx = cos(theta);
 	in.vy = sin(theta);	
-	bounce(in, &out);
+
+printf("start %g %g\n", in.vx, in.vy);
+	int i;
+	for (i=0; i<10; i++)
+	{
+		bounce(in, &out);
+		in = out;
+	}
 }
 
 int main(int argc, char * argv[]) 
