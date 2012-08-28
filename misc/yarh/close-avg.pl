@@ -28,6 +28,8 @@ $linecnt = 0;
 
 while (<>)
 {
+	if (/#/) { next; }
+
 	for ($i=-$width; $i<$width; $i++)
 	{
 		$rdata[$width+$i] = $rdata[$width+$i+1];

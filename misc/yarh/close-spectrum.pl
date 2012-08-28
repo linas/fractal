@@ -22,9 +22,11 @@ while (<>)
 $freqmin = 0.005;
 $freqmax = 1.0;
 
-for ($freq = $freqmin; $freq < $freqmax; $freq+= 0.005)
+# for ($freq = $freqmin; $freq < $freqmax; $freq+= 0.005) {
+#	$period = 2*3.141592653 / $freq;
+for ($period=6; $period<620; $period++)
 {
-	$period = 2*3.141592653 / $freq;
+	$freq = 2*3.141592653 / $period;
 	$resumcos = 0;
 	$resumsin = 0;
 	$imsumcos = 0;

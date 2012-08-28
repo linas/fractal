@@ -54,8 +54,12 @@ main()
 	{
 		x = k * delta;
 		long double ox = 1.0L / x;
+		// long double ox = 1.0L / (1.0L+x);
 		long double qi = question_inverse(ox);
-		qacc += lg2 * delta*qi;
+		long double q2 = question_inverse(2.0L*ox);
+
+		// qacc += lg2 * delta*qi;
+		qacc += lg2 * delta*q2;
 
 		// term  = lg2 / ((1.0L / qi) - 1.0L);
 		term  = lg2 * qi / (1.0L - qi);

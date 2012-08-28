@@ -18,7 +18,7 @@ double gkw (double x)
 	double acc, term;
 
 	acc = 0.0;
-	for (n=1; n<500; n++)
+	for (n=1; n<2500; n++)
 	{
 		term = 1.0 / (x + n);
 		acc += term*term *question_inverse(1.0-term);

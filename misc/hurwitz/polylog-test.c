@@ -182,11 +182,11 @@ main (int argc, char * argv[])
 	s.re = 2.0;
 	s.im = en;
 	double q=0.5;
-	for (q = 1.0; q < 2.0; q += 0.003)
+	for (q = 0.0; q < 1.0; q += 0.003)
 	{
-		cplex hz= hurwitz_zeta (s, q);
+		cplex hz= hurwitz_zeta (s, q+1.0);
 		
-		double zeta = gsl_sf_hzeta (s.re, q);
+		double zeta = gsl_sf_hzeta (s.re, q+1.0);
 		
 		printf ("%g	%g	%g\n", q, hz.re, zeta);
 	}

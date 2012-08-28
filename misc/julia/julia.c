@@ -41,8 +41,21 @@ void julia_tree (complex double * tree, int depth,
 	complex double z = w - c;
 	double r = sqrt(cabs (z));
 	double theta = 0.5 * carg(z);
-	if (theta > rot) theta -= M_PI;
-	if (theta < rot-M_PI) theta += M_PI;
+
+   // cargz runs over a 2pi range.
+   // theta runs over a pi range.
+   // Make sure theta runs from rot-pi/2 to rot+pi/2
+	if (theta < rot-0.5*M_PI) theta += M_PI;
+	if (theta < rot-0.5*M_PI) theta += M_PI;
+	if (theta > rot+0.5*M_PI) theta -= M_PI;
+	if (theta > rot+0.5*M_PI) theta -= M_PI;
+
+   // Now, finally, flip the sign, so that + is always theta>rot
+   // and - is thea < rot.  We want this sign flip, since, below, both
+   // signs are always taken anyway, we just want to have a consistent
+   // ordering to the sign. i.e. alway have upper vs lower half-plane,
+   // where uppwer/lower is with respect to rot.
+   if (theta < rot) theta += M_PI;
 
 	complex double v = r * cexp (I*theta);
 

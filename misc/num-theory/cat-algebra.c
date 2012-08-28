@@ -25,9 +25,9 @@ int en(unsigned int i, unsigned int j)
 	return -zee(i,j);
 }
 
-int en_pow_k(unsinged int k, unsigned int i, unsigned int j)
+int en_pow_k(unsigned int k, unsigned int i, unsigned int j)
 {
-	unsgined int r;
+	unsigned int r;
 	int dot = 0;
 
 	if (k==0) return (i==j)?1:0;
@@ -62,14 +62,21 @@ int mu(unsigned int i, unsigned int j)
 
 int main (int argc, char * argv[])
 {
-	if (argc < 3)
+	int i,j;
+	if (argc < 2)
 	{
-		fprintf (stdout, "Usage: %s <nbins> <kmax>\n", argv[0]);
+		fprintf (stdout, "Usage: %s <k>\n", argv[0]);
 		exit(1);
 	}
-	int nbins = atoi (argv[1]);
-	int kmax = atoi(argv[2]);
 
-	double fk = moebius_mu(k);
-	rebin (nbins, kmax);
+	i = atoi(argv[1]);
+	for (j=i; j ; j += i)
+	{
+		int m = mu(i,j);
+		int mm = moebius_mu(j/i);
+
+		printf("duude %d \t%d %d\n", j, m, mm);
+	}
+
+	return 0;
 }

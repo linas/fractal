@@ -8,7 +8,8 @@ LIB = $(TOP)/lib
 
 EXES = alpha asubn bern bern_h binom-graph character \
 	diagon diverge eicheck frobenius gsl-diag \
-	harmonic normal rational-sum riemann stirling sum swap tryall valuate \
+	harmonic normal quest rational-sum riemann \
+	stirling sum swap tryall valuate \
 	zeta-sum zeta-takagi zeta-zero zero zyx
 
 all: $(EXES)
@@ -28,7 +29,7 @@ eicheck.o: ache.h zetafn.h
 frobenius.o: zetafn.h
 gsl-diag.o:	zetafn.h
 riemann.o:	zetafn.h
-striling.o:	$(INC)/binomial.h
+stirling.o:	$(INC)/binomial.h
 sum.o:	ache.h zetafn.h
 tryall.o:	zetafn.h
 zeta-sum.o: zetafn.h
@@ -49,6 +50,7 @@ frobenius: frobenius.o
 gsl-diag: gsl-diag.o
 harmonic: harmonic.o
 normal: normal.o ache.o
+quest: quest.o
 rational-sum: rational-sum.o
 riemann: riemann.o
 stirling: stirling.o ache.o

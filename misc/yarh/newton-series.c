@@ -10,10 +10,10 @@
  *
  * The "obvious" work-around to this is to regulate the sums. That works, but ... 
  * what happens next is that the resulting k sums alternate in sign, and grow
- * ever larger.Thus, these cannot be easily/reliably resummed.
+ * ever larger. Thus, these cannot be easily/reliably resummed.
  *
  * Well, then can be by regulating them, but this raises a question: what's 
- * the point? Possibly some cpu speed gains, but at what compexity cost?
+ * the point? Possibly some cpu speed gains, but at what complexity cost?
  *
  * Thus, this approach is mothballed for now.
  *
@@ -113,13 +113,17 @@ int main (int argc, char * argv[])
 	int k;
 	for (k=1; k<kmax; k++)
 	{
+		complex beta = betarr[k];
+		complex gamma = gamarr[k];
+
+		complex sum = ess*beta + k*gamma;
 		re = creal (betarr[k]);
 		im = cimag (betarr[k]);
 
-		double reg = creal (gamarr[k]);
-		double img = cimag (gamarr[k]);
+		re = creal (sum);
+		im = cimag (sum);
 
-		printf("k=%d %20.18g %20.18g   %g %g \n", k, re, im, reg, img);
+		printf("k=%d %20.18g %20.18g\n", k, re, im);
 	}
 	return 0;
 }
