@@ -466,19 +466,18 @@ double decode_frac_raw(geodesic_t *geo)
  * Right now, its a geodesic spray starting at (0,2)
  * Delta is the step size.
  */
-void spray(double delta)
+void spray(long double inx, long double iny, long double delta)
 {
 	ray_t in;
 	geodesic_t geo;
-	double theta;
-	double offset = 0.5*M_PI;
-	for (theta = 0.5*delta + offset; theta<2.0*M_PI+offset; theta += delta)
+	long double theta;
+	long double offset = 0.5*M_PI;
+	for (theta = 0.5L*delta + offset; theta<2.0L*M_PI+offset; theta += delta)
 	{
-		in.x = 0.0;
-		in.x = 0.2;
-		in.y = 1.0;
-		in.vx = cos(theta);
-		in.vy = sin(theta);	
+		in.x = inx;
+		in.y = iny;
+		in.vx = cosl(theta);
+		in.vy = sinl(theta);	
 		in.code = 'F';
 
 		DBG("==========\nstart %Lg %Lg\n", in.vx, in.vy);
@@ -501,25 +500,29 @@ void spray(double delta)
 		// printf("theta=%g res=%g seq=%s\n", theta, dyadic, geo.seq);
 
 		// OK, now compute the geodesic going in the opposite direction.
-		in.x = 0.0;
-		in.y = 1.001;
-		in.vx = cos(theta+M_PI);
-		in.vy = sin(theta+M_PI);	
+		in.x = inx;
+		in.y = iny;
+		in.vx = cosl(theta+M_PI);
+		in.vy = sinl(theta+M_PI);	
 		in.code = 'F';
 
 		sequence (in, &geo);
 		two_letter(&geo);
 		// eliminate_two(&geo);
 		double back = decode(&geo);
-		printf("%g	%g	%g	%g	%g	%g	%g\n", (theta-offset)/(2.0*M_PI), dyadic, dyadic_raw, contin, contin_raw, bin, back);
+		printf("%Lg	%g	%g	%g	%g	%g	%g\n", (theta-offset)/(2.0*M_PI), dyadic, dyadic_raw, contin, contin_raw, bin, back);
 	}
 }
 
 int main(int argc, char * argv[]) 
 {
-	spray(0.003);
+	if (argc < 3)
+	{
+		fprintf(stderr, "Usage: %s <x> <y>\n", argv[0]);
+		exit(1);
+	}
+	long double inx = atoll(argv[1]);
+	long double iny = atoll(argv[2]);
+	spray(inx, iny, 0.003);
 }
-
-
-
 
