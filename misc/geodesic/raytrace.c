@@ -10,10 +10,12 @@
  * into connectin between Ornstein isomorphism theorem and the Cantor
  * set.
  *
- * The symbolic trajectory can be converted purely into S,T values, via
- * the SL(2,Z) identity (ST)^3=I.  Then strings of S,T can be converted
- * to binary either via dyadic encoding or via Minkowski ? encoding
- * (i.e. via continued fraction).
+ * The symbolic trajectory can be converted purely into S,T values, with
+ * several hacky techniques.  It is tempting to apply  SL(2,Z) identities
+ * such as (ST)^3=-I but this is wrong, since this identity does not preserve 
+ * geodesics, but maps them in some crazy way...  Then strings of S,T can
+ * be converted to binary either via several different encodings, including
+ * dyadic encoding or via continued fractions.
  *
  * Linas Vepstas August 2012
  */
