@@ -468,6 +468,8 @@ double decode_frac_raw(geodesic_t *geo)
  */
 void spray(long double inx, long double iny, long double delta)
 {
+	printf("#\n# Symbolic dynamics on Fundamental Domain of SL(2,Z)\n");
+	printf("#\n# ==========origin is %Lg %Lg\n#\n", inx, iny);
 	ray_t in;
 	geodesic_t geo;
 	long double theta;
@@ -521,8 +523,8 @@ int main(int argc, char * argv[])
 		fprintf(stderr, "Usage: %s <x> <y>\n", argv[0]);
 		exit(1);
 	}
-	long double inx = atoll(argv[1]);
-	long double iny = atoll(argv[2]);
+	long double inx = strtold(argv[1], NULL);
+	long double iny = strtold(argv[2], NULL);
 	spray(inx, iny, 0.003);
 }
 
