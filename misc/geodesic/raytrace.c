@@ -176,10 +176,11 @@ typedef struct
 	char lr[5*SEQLEN];     // two-letter left-right sequence
 } geodesic_t;
 
-/*
- * sequence -- generate symbolic dynamics for various geodesics
- *
- * Right now, its a geodesic spray starting at (0,2)
+/**
+ * sequence -- generate symbolic dynamics for a geodesic
+ * The geodesic is specified by the tangent vector 'ray'.
+ * The resulting exit codes for the fundamental domain, the
+ * three letters S T and N are stored as strings in raw_seq.
  */
 void sequence(ray_t in, geodesic_t* geo)
 {
@@ -198,8 +199,13 @@ void sequence(ray_t in, geodesic_t* geo)
 	geo->raw_seq[SEQLEN] = 0;
 }
 
-/*
+/**
  * two_letter --  compute the two-letter sequence, given the raw seq.
+ *
+ * The idea of doing group-element equivalence is basically a bad
+ * idea for geodesics; although its a diffeomorphism on the domain,
+ * it is NOT an equivalence for the geodesics; it completely
+ * scrambles them.
  */
 void two_letter(geodesic_t *geo)
 {
@@ -230,9 +236,13 @@ void two_letter(geodesic_t *geo)
 	geo->seq[k] = 0;
 }
 
-/*
+/**
  * left_right --  compute the LR sequence, given the ST seq
- * Basically, L=TST and R = T
+ * Basically, L=TST and R = T  The algo here is probably buggy.
+ * The idea of doing group-element equivalence is basically a bad
+ * idea for geodesics; although its a diffeomorphism on the domain,
+ * it is NOT an equivalence for the geodesics; it completely
+ * scrambles them.
  */
 void left_right(geodesic_t *geo)
 {
@@ -258,9 +268,14 @@ void left_right(geodesic_t *geo)
 	geo->lr[k] = 0;
 }
 
-/*
+/**
  * two_eliminate -- identity elimination in geodesic strings
- * For the modular group, we have S^2 = I
+ * For the modular group, we have S^2 = -I
+ *
+ * The idea of doing group-element equivalence is basically a bad
+ * idea for geodesics; although its a diffeomorphism on the domain,
+ * it is NOT an equivalence for the geodesics; it completely
+ * scrambles them.
  */
 int eliminate_two(geodesic_t *geo)
 {
@@ -282,9 +297,13 @@ int eliminate_two(geodesic_t *geo)
 	return cnt;
 }
 
-/*
+/**
  * eliminate -- identity elimination in geodesic strings
- * For the modular group, we have (ST)^3 = I
+ * For the modular group, we have (ST)^3 = -I
+ * The idea of doing group-element equivalence is basically a bad
+ * idea for geodesics; although its a diffeomorphism on the domain,
+ * it is NOT an equivalence for the geodesics; it completely
+ * scrambles them.
  */
 int eliminate_triple(geodesic_t *geo)
 {
@@ -305,9 +324,13 @@ int eliminate_triple(geodesic_t *geo)
 	return cnt;
 }
 
-/*
+/**
  * eliminate -- identity elimination in geodesic strings
- * For the modular group, we have (ST)^3 = I
+ * For the modular group, we have (ST)^3 = -I
+ * The idea of doing group-element equivalence is basically a bad
+ * idea for geodesics; although its a diffeomorphism on the domain,
+ * it is NOT an equivalence for the geodesics; it completely
+ * scrambles them.
  */
 int eliminate_five(geodesic_t *geo)
 {
@@ -335,16 +358,15 @@ int eliminate_five(geodesic_t *geo)
 	return cnt;
 }
 
-/*
- * decode -- convert geodesic into real number.
+/**
+ * decode_helper -- convert geodesic into real number.
  * This is a binary decoding, not a continued fraction decoding.
  */
-double decode(geodesic_t *geo)
+double decode_helper(char * seq)
 {
 	double result = 0.0;
 	double shift = 0.5;
 	bool doit = TRUE;
-	char * seq = geo->seq;
 	int k;
 	for (k=0; 0x0 != seq[k]; k++)
 	{
@@ -361,6 +383,21 @@ double decode(geodesic_t *geo)
 	return result;
 }
 
+/**
+ * decode_helper -- convert geodesic into real number.
+ * This is a binary decoding, not a continued fraction decoding.
+ */
+double decode(geodesic_t *geo)
+{
+	return decode_helper(geo->seq);
+}
+
+double decode_raw(geodesic_t *geo)
+{
+	return decode_helper(geo->raw_seq);
+}
+
+/* Simple LR to binary decoder */
 double decode_bin(geodesic_t *geo)
 {
 	double result = 0.0;
@@ -410,10 +447,16 @@ double decode_frac(geodesic_t *geo)
 	return decode_frac_helper(geo->seq);
 }
 
+double decode_frac_raw(geodesic_t *geo)
+{
+	return decode_frac_helper(geo->raw_seq);
+}
+
 /*
  * spray -- generate symbolic dynamics for various geodesics
  *
  * Right now, its a geodesic spray starting at (0,2)
+ * Delta is the step size.
  */
 void spray(double delta)
 {
@@ -424,6 +467,7 @@ void spray(double delta)
 	for (theta = 0.5*delta + offset; theta<2.0*M_PI+offset; theta += delta)
 	{
 		in.x = 0.0;
+		in.x = 0.2;
 		in.y = 1.0;
 		in.vx = cos(theta);
 		in.vy = sin(theta);	
@@ -440,7 +484,9 @@ void spray(double delta)
 		eliminate_triple(&geo);
 #endif
 		double dyadic = decode(&geo);
+		double dyadic_raw = decode_raw(&geo);
 		double contin = decode_frac(&geo);
+		double contin_raw = decode_frac_raw(&geo);
 		double bin = decode_bin(&geo);
 		DBG("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
 		DBG("theta=%g res=%g\n", theta, dyadic);
@@ -457,7 +503,7 @@ void spray(double delta)
 		two_letter(&geo);
 		eliminate_two(&geo);
 		double back = decode(&geo);
-		printf("%g	%g	%g	%g	%g\n", (theta-offset)/(2.0*M_PI), dyadic, contin, bin, back);
+		printf("%g	%g	%g	%g	%g	%g	%g\n", (theta-offset)/(2.0*M_PI), dyadic, dyadic_raw, contin, contin_raw, bin, back);
 	}
 }
 
