@@ -56,7 +56,7 @@ char bounce (const ray_t in, ray_t* out)
 
 	// Calculate center of circle.  Its at y=0, x=center.
 	long double center = in.x + in.y * in.vy / in.vx;
-	DBG("--------\ncenter at %g\n", center);
+	DBG("--------\ncenter at %Lg\n", center);
 	// Square of the radius of the circle
 	long double radius_sq = (in.x - center)*(in.x-center) + in.y*in.y;
 
@@ -80,11 +80,19 @@ char bounce (const ray_t in, ray_t* out)
 	// a side exit if the intersection point is out of bounds.
 	bool side_exit = (x_exit < -0.5L) || (0.5L < x_exit);
 
+	DBG(" code=%c sect=%d boten=%d sidex=%d velo=%d\n", in.code, intersect, bottom_entry, side_exit, (0.0L < in.vy));
+
 	// First time through is a special case...
-	if (('F' == in.code) && intersect && !side_exit && (0.0L < in.vy))
+	// if (('F' == in.code) && intersect && !side_exit && (0.0L < in.vy))
+	if (('F' == in.code) && intersect && !side_exit)
 	{
+		// Repeat some of the exit calculations below, and see if it would
+		// have gone out through the side. 
+		long double tmp = -0.5L;
+		if (in.vx > 0.0L) tmp = 0.5L;
+	   long double yex = sqrtl(radius_sq - (tmp-center)*(tmp-center));
 #define TRUE 1
-		bottom_entry = TRUE;
+		if (yex >= rho) side_exit = TRUE;
 	}
 
 	if (!intersect || (intersect && (bottom_entry||side_exit)))
@@ -104,7 +112,7 @@ char bounce (const ray_t in, ray_t* out)
 	}
 
 	long double y_exit = sqrtl(radius_sq - (x_exit-center)*(x_exit-center));
-	DBG(" %c exit x=%g y=%g\n", exit_code, x_exit, y_exit);
+	DBG(" %c exit x=%Lg y=%Lg\n", exit_code, x_exit, y_exit);
 	if (('S' != exit_code) && (y_exit < rho))
 	{
 		fprintf(stderr, "Error: bad y value = %Lg for side exit\n", y_exit);
@@ -130,7 +138,7 @@ char bounce (const ray_t in, ray_t* out)
 		}
 	}
 
-	DBG("velc=%g %g %g\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
+	DBG("velc=%Lg %Lg %Lg\n", vx_exit, vy_exit, vx_exit*vx_exit+vy_exit*vy_exit);
 
 	// Now bounce the velocity vector, based on which wall it is going
 	// through.
@@ -163,7 +171,7 @@ char bounce (const ray_t in, ray_t* out)
 	}
 	out->code = exit_code;
 
-	DBG("final velc=%g %g %g\n", out->vx, out->vy, out->vx*out->vx+out->vy*out->vy);
+	DBG("final velc=%Lg %Lg %Lg\n", out->vx, out->vy, out->vx*out->vx+out->vy*out->vy);
 	return exit_code;
 }
 
@@ -473,7 +481,7 @@ void spray(double delta)
 		in.vy = sin(theta);	
 		in.code = 'F';
 
-		DBG("==========\nstart %g %g\n", in.vx, in.vy);
+		DBG("==========\nstart %Lg %Lg\n", in.vx, in.vy);
 		sequence (in, &geo);
 		two_letter(&geo);
 		left_right(&geo);
@@ -501,7 +509,7 @@ void spray(double delta)
 
 		sequence (in, &geo);
 		two_letter(&geo);
-		eliminate_two(&geo);
+		// eliminate_two(&geo);
 		double back = decode(&geo);
 		printf("%g	%g	%g	%g	%g	%g	%g\n", (theta-offset)/(2.0*M_PI), dyadic, dyadic_raw, contin, contin_raw, bin, back);
 	}
