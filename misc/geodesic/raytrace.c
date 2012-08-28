@@ -173,6 +173,7 @@ typedef struct
 	ray_t	tangent; // tangent vector at start point
 	char raw_seq[SEQLEN+1];  // three-letter symbolic dynamics
 	char seq[5*SEQLEN+1];  // two-letter symbolic dynamics
+	char lr[5*SEQLEN];     // two-letter left-right sequence
 } geodesic_t;
 
 /*
@@ -227,6 +228,34 @@ void two_letter(geodesic_t *geo)
 		}
 	}
 	geo->seq[k] = 0;
+}
+
+/*
+ * left_right --  compute the LR sequence, given the ST seq
+ * Basically, L=TST and R = T
+ */
+void left_right(geodesic_t *geo)
+{
+	int i=0;
+	int k=0;
+	while(1)
+	{
+		if ((0 == strncmp(&geo->seq[i], "STS", 3)) ||
+		    (0 == strncmp(&geo->seq[i], "TST", 3)))
+		{
+			geo->lr[k] = 'L';
+			k++;
+			i+=3;
+		}
+		else
+		{
+			geo->lr[k] = 'R';
+			k++;
+			i++;
+		}
+		if (geo->seq[i] == 0) break;
+	}
+	geo->lr[k] = 0;
 }
 
 /*
@@ -332,6 +361,23 @@ double decode(geodesic_t *geo)
 	return result;
 }
 
+double decode_bin(geodesic_t *geo)
+{
+	double result = 0.0;
+	double shift = 0.5;
+	char * seq = geo->lr;
+	int k;
+	for (k=0; 0x0 != seq[k]; k++)
+	{
+		if ('R' == seq[k])
+		{
+			result += shift;
+		}
+		shift *= 0.5;
+	}
+	return result;
+}
+
 /*
  * decode_frac -- convert geodesic into real number.
  * This is a continued-fraction decoding.
@@ -386,14 +432,16 @@ void spray(double delta)
 		DBG("==========\nstart %g %g\n", in.vx, in.vy);
 		sequence (in, &geo);
 		two_letter(&geo);
-		eliminate_two(&geo);
+		left_right(&geo);
 #if 0
+		eliminate_two(&geo);
 		eliminate_triple(&geo);
 		eliminate_five(&geo);
 		eliminate_triple(&geo);
 #endif
 		double dyadic = decode(&geo);
 		double contin = decode_frac(&geo);
+		double bin = decode_bin(&geo);
 		DBG("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
 		DBG("theta=%g res=%g\n", theta, dyadic);
 		// printf("theta=%g res=%g seq=%s\n", theta, dyadic, geo.seq);
@@ -409,7 +457,7 @@ void spray(double delta)
 		two_letter(&geo);
 		eliminate_two(&geo);
 		double back = decode(&geo);
-		printf("%g	%g	%g	%g\n", (theta-offset)/(2.0*M_PI), dyadic, contin, back);
+		printf("%g	%g	%g	%g	%g\n", (theta-offset)/(2.0*M_PI), dyadic, contin, bin, back);
 	}
 }
 
