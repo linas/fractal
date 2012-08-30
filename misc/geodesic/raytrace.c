@@ -525,8 +525,12 @@ int main(int argc, char * argv[])
 		fprintf(stderr, "Usage: %s <x> <y>\n", argv[0]);
 		exit(1);
 	}
-	long double inx = strtold(argv[1], NULL);
-	long double iny = strtold(argv[2], NULL);
+	long double ia = strtold(argv[1], NULL);
+	long double ib = strtold(argv[2], NULL);
+
+	long double inx = sinl(ia*M_PI);
+	long double iny = cosl(ia*M_PI) + ib;
+
 	spray(inx, iny, 0.003);
 }
 
