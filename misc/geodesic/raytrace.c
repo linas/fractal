@@ -25,8 +25,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-// #define DBG(X,...)
-#define DBG(X,ARGS...) printf(X, ARGS)
+#define DBG(X,...)
+// #define DBG(X,ARGS...) printf(X, ARGS)
 
 typedef int bool;
 
@@ -66,6 +66,11 @@ char bounce (const ray_t in, ray_t* out)
 	// exit_code == 'T' means right exit
 	// exit_code == 'N' means left exit
 	char exit_code = 'S';
+
+	// x_exit is x coordinate of intersection of geodesic with unit
+	// circle. It is valid only if there actually is an intersection,
+	// though. Its valid only if abs(x_exit) <= 1 aka if 
+	// abs (radius-abs(center)) <= 1
 	long double x_exit = (1.0L - radius_sq + center*center) / (2.0L * center);
 
 	// intersect is true if the geodesic and the unit circle interest.
@@ -82,7 +87,7 @@ char bounce (const ray_t in, ray_t* out)
 	// a side exit if the intersection point is out of bounds.
 	bool side_exit = (x_exit < -0.5L) || (0.5L < x_exit);
 
-	DBG(" code=%c sect=%d boten=%d sidex=%d xex=%Lg\n", in.code, intersect, bottom_entry, side_exit, x_exit);
+	DBG(" code=%c sect=%d boten=%d sidex=%d xex=%Lg r2=%Lg\n", in.code, intersect, bottom_entry, side_exit, x_exit, radius_sq);
 
 	// First time through is a special case...
 	if (('F' == in.code) && intersect && !side_exit)
@@ -528,6 +533,12 @@ int main(int argc, char * argv[])
 
 	long double inx = sinl(ia*M_PI);
 	long double iny = cosl(ia*M_PI) + ib;
+
+	if ((inx > 0.5) || (inx < -0.5))
+	{
+		fprintf(stderr, "Input angle must be less than pi/6 i.e. less tha 0.166666\n");
+		exit(1);
+	}
 
 	spray(inx, iny, 0.003);
 }
