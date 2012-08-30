@@ -85,17 +85,15 @@ char bounce (const ray_t in, ray_t* out)
 	DBG(" code=%c sect=%d boten=%d sidex=%d xex=%Lg\n", in.code, intersect, bottom_entry, side_exit, x_exit);
 
 	// First time through is a special case...
-	if (('F' == in.code) && intersect)
+	if (('F' == in.code) && intersect && !side_exit)
 	{
 		// Repeat some of the exit calculations below, and see if it would
 		// have gone out through the side. 
 		long double tmp = -0.5L;
 		if (in.vx > 0.0L) tmp = 0.5L;
 		long double yex = sqrtl(radius_sq - (tmp-center)*(tmp-center));
-#define FALSE 0
 #define TRUE 1
 		if (yex >= rho) side_exit = TRUE;
-		else side_exit = FALSE;
 	}
 
 	if (!intersect || (intersect && (bottom_entry||side_exit)))
