@@ -25,8 +25,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DBG(X,...)
-// #define DBG(X,ARGS...) printf(X, ARGS)
+// #define DBG(X,...)
+#define DBG(X,ARGS...) printf(X, ARGS)
 
 typedef int bool;
 
@@ -82,19 +82,20 @@ char bounce (const ray_t in, ray_t* out)
 	// a side exit if the intersection point is out of bounds.
 	bool side_exit = (x_exit < -0.5L) || (0.5L < x_exit);
 
-	DBG(" code=%c sect=%d boten=%d sidex=%d velo=%d\n", in.code, intersect, bottom_entry, side_exit, (0.0L < in.vy));
+	DBG(" code=%c sect=%d boten=%d sidex=%d xex=%Lg\n", in.code, intersect, bottom_entry, side_exit, x_exit);
 
 	// First time through is a special case...
-	// if (('F' == in.code) && intersect && !side_exit && (0.0L < in.vy))
-	if (('F' == in.code) && intersect && !side_exit)
+	if (('F' == in.code) && intersect)
 	{
 		// Repeat some of the exit calculations below, and see if it would
 		// have gone out through the side. 
 		long double tmp = -0.5L;
 		if (in.vx > 0.0L) tmp = 0.5L;
-	   long double yex = sqrtl(radius_sq - (tmp-center)*(tmp-center));
+		long double yex = sqrtl(radius_sq - (tmp-center)*(tmp-center));
+#define FALSE 0
 #define TRUE 1
 		if (yex >= rho) side_exit = TRUE;
+		else side_exit = FALSE;
 	}
 
 	if (!intersect || (intersect && (bottom_entry||side_exit)))
@@ -197,7 +198,7 @@ void sequence(ray_t in, geodesic_t* geo)
 	in.code = 'F'; // Sanity check
 	geo->tangent = in;
 
-	DBG("==========\nstart %Lg %Lg\n", in.vx, in.vy);
+	DBG("==========\nvelostart %Lg %Lg\n", in.vx, in.vy);
 	int i;
 	for (i=0; i<SEQLEN; i++)
 	{
@@ -484,7 +485,6 @@ void spray(long double inx, long double iny, long double delta)
 		in.vy = sinl(theta);	
 		in.code = 'F';
 
-		DBG("==========\nstart %Lg %Lg\n", in.vx, in.vy);
 		sequence (in, &geo);
 		two_letter(&geo);
 		left_right(&geo);
@@ -499,8 +499,8 @@ void spray(long double inx, long double iny, long double delta)
 		double contin = decode_frac(&geo);
 		double contin_raw = decode_frac_raw(&geo);
 		double bin = decode_bin(&geo);
-		DBG("theta=%g seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
-		DBG("theta=%g res=%g\n", theta, dyadic);
+		DBG("theta=%Lg seq=%s two=%s\n", theta, geo.raw_seq, geo.seq);
+		DBG("theta=%Lg res=%g\n", theta, dyadic);
 		// printf("theta=%g res=%g seq=%s\n", theta, dyadic, geo.seq);
 
 		// OK, now compute the geodesic going in the opposite direction.
@@ -522,7 +522,7 @@ int main(int argc, char * argv[])
 {
 	if (argc < 3)
 	{
-		fprintf(stderr, "Usage: %s <x> <y>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <phi> <Dy>\n", argv[0]);
 		exit(1);
 	}
 	long double ia = strtold(argv[1], NULL);
