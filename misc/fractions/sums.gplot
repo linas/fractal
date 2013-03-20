@@ -1,0 +1,21 @@
+set term png size 1024,768
+# set term png size 640,480
+set out 'sums.png'
+
+# set style data points
+# set style data lines
+set style data linespoints
+set key right
+set style line 1 linewidth 2
+
+#set xrange [1:30100]
+# set yrange [0.005:10000]
+# set logscale x
+set logscale y
+
+set xlabel "t"
+set ylabel "s"
+set title "dts"
+
+plot "sums.dat" using 1:2 title "binsz=1"
+

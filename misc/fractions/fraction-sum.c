@@ -4,8 +4,9 @@
  * Linas March 2013
  */
 
-#include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 double * count(int nbins, double binsz, int maxcnt)
 {
@@ -19,6 +20,7 @@ double * count(int nbins, double binsz, int maxcnt)
 			double x = j * deno;
 
 			int ib = (int) floor(x / binsz);
+			if (nbins <= ib) break;
 			bins[ib] += 1.0;
 		}
 	}
@@ -26,6 +28,14 @@ double * count(int nbins, double binsz, int maxcnt)
 	return bins;
 }
 
-main ()
+int 
+main (int argc, char * argv[])
 {
+	double binsz = 0.1;
+	double * bins = count(10000, binsz, 1000);
+
+	for (int i=0; i< 1000; i++)
+	{
+		printf("%d	%g	%g\n", i, i*binsz, bins[i]);
+	}
 }
