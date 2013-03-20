@@ -21,7 +21,7 @@ double * count(int nbins, double binsz, int maxcnt)
 
 			int ib = (int) floor(x / binsz);
 			if (nbins <= ib) break;
-			bins[ib] += 1.0;
+			bins[ib] += deno;
 		}
 	}
 
@@ -31,7 +31,7 @@ double * count(int nbins, double binsz, int maxcnt)
 int 
 main (int argc, char * argv[])
 {
-	double binsz = 0.1;
+	double binsz = 0.01;
 	double * bins = count(10000, binsz, 1000);
 
 	for (int i=0; i< 1000; i++)
