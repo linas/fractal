@@ -31,11 +31,25 @@ double * count(int nbins, double binsz, int maxcnt)
 int 
 main (int argc, char * argv[])
 {
-	double binsz = 0.01;
-	double * bins = count(10000, binsz, 1000);
-
-	for (int i=0; i< 1000; i++)
+	if (argc < 2)
 	{
-		printf("%d	%g	%g\n", i, i*binsz, bins[i]);
+		fprintf(stderr, "Usage: %s <binsz> <maxcnt>\n", argv[0]);
+		exit(1);
+	}
+
+	double binsz = 0.01;
+	binsz = atof(argv[1]);
+	int maxcnt = atoi(argv[2]);
+	double * bins = count(10000, binsz, maxcnt);
+
+	printf("#\n# Data generated with binsz = %g maxcnt=%d\n#\n", binsz, maxcnt);
+
+	double accum = 0.0;
+	for (int i=0; i< 10000; i++)
+	{
+		// accum += bins[i] - 0.4;
+		// accum += bins[i] - 0.43;
+		accum += bins[i];
+		printf("%d	%g	%g	%g\n", i, i*binsz, bins[i], accum);
 	}
 }

@@ -8,8 +8,8 @@ set style data linespoints
 set key right
 set style line 1 linewidth 2
 
-#set xrange [5:10]
-# set yrange [0.005:10000]
+set xrange [9:10]
+set yrange [0.1:10]
 # set logscale x
 set logscale y
 
@@ -17,5 +17,9 @@ set xlabel "t"
 set ylabel "s"
 set title "dts"
 
-plot "sums.dat" using 2:3 title "binsz=1"
+plot "sums.dat" using 2:3 title ""
 
+# ---------------------------------------------------------
+set out 'accum.png'
+unset logscale y
+plot "sums.dat" using 2:4 title ""
