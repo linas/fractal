@@ -8,4 +8,4 @@ series: series.o
 	cc -o $* $^
 
 .c.o:
-	cc -c $^
+	cc -std=c99 -c $^
