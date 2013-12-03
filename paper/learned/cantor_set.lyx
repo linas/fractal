@@ -78,11 +78,130 @@ Linas Vepstas
 \begin_layout Abstract
 This paper is an outline review of assorted factoids I've learned about
  the Cantor Set, and a large variety of related topics.
+ Mostly, this is about the infinite binary tree, the structures that can
+ be built on it, the measure theory of it, the operators on it, and their
+ spectrum.
  The goal here is to help me organize my thoughts.
 \end_layout
 
-\begin_layout Abstract
+\begin_layout Section*
+Overview
+\end_layout
 
+\begin_layout Standard
+So, a bulleted list:
+\end_layout
+
+\begin_layout Itemize
+The bernoulli transform destroys classical information.
+ Averaging the two sides together destroys the ability to find out what
+ was on either side; this is why its a model of dissipation: it increases
+ entropy in this sense.
+\end_layout
+
+\begin_layout Itemize
+Open problem: write down an expression that shows how it increases entropy.
+\end_layout
+
+\begin_layout Itemize
+This information-erasure aspect is one reason why the transfer operator
+ and the koopman operator don't obey canonical commutation relations.
+ 
+\end_layout
+
+\begin_layout Itemize
+There are no operators tht could ever obey the the canonical commutation
+ relations (need formal proof) Informally, its because the ladder operators
+ describe a 1-D model: creation and anhilation operators increment and decrement
+ an integer.
+ In a misleadingly similar way, the transfer operator can be understood
+ as a left-shift on a one-sided one-dimensional lattice.
+ However, the right-shift requires 'making up' a value of the lattice position
+ introduced on the right: it can be a zero, a one, or indeterminate.
+ This is a forced branching.
+ The 1D lattice model describes a binary tree, not a 1-D ladder.
+ Although the transfer and Koopman opers act on the 1-D lattice, and thus
+ seem to be creation/annihilation-like, its just not the same: the lattice
+ positions have values on them, the CCR does not.
+ Hmm.
+\end_layout
+
+\begin_layout Itemize
+The suggestive relations to the Riemann zeta are all tied to the CCR algebra,
+ which is 'reversible'.
+ So, for example.
+ we have an eigenvalue relation: 
+\begin_inset Formula $z\frac{\partial}{\partial z}z^{\alpha}=\alpha z^{\alpha}$
+\end_inset
+
+ and we have the CCR 
+\begin_inset Formula $[\frac{\partial}{\partial z},z]=1$
+\end_inset
+
+ and if we interpret z and partial as create, and annihil, then only the
+ usual follows, we have position and momentum opers, and the number oper
+ is exactly the spring hamiltonian mins 1/2.
+ No suprises.
+ Only new thing is that the eigenstates of position and moment opers are
+ gaussians offset from the origin (i.e.
+ are entire), and these two operators have continuous complex-valued spectrum.
+ This is very ordinary.
+ This should be appendix with details.
+\end_layout
+
+\begin_layout Itemize
+The other curious side-effect of above is that 
+\begin_inset Formula $z\frac{\partial}{\partial z}=\frac{\partial}{\partial\ln z}$
+\end_inset
+
+ and so eigenstates of the LHS are eigenstates of RHS...
+ which gives the very traditional fourier thingy...
+ viz 
+\begin_inset Formula $\frac{\partial}{\partial\ln z}e^{\alpha\ln z}=\alpha e^{\alpha\ln z}$
+\end_inset
+
+ How odd...
+ so we have the usual duality between 
+\begin_inset Formula $[p,x]$
+\end_inset
+
+ and 
+\begin_inset Formula $[a,a^{*}]$
+\end_inset
+
+ but using the log seems to rotate this duality sideways again.
+ The part I don't get is that log/exp are dual, and exp is the generic map
+ from tangent space to manifold, so this is a kind-of Poincare duality.
+ But I don't get all of this, esp.
+ the bouncing between these two differnt reference frames.
+ This is a big TODO to flesh this out.
+\end_layout
+
+\begin_layout Itemize
+Hmm.
+ ..
+ Reversible (in the above paragraphs) == non-information-destroying, e.g.
+ non-qubit-destroying ...
+ what does this really mean?
+\end_layout
+
+\begin_layout Itemize
+So pursuant to the previoius, we have a shift state 
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial s}\zeta(s)=\frac{\partial}{\partial s}\sum_{n=1}^{\infty}n^{-s}=-s\sum_{n=1}^{\infty}n^{-s-1}=-s\zeta(s+1)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+What is the tangent space for the eigenfuncs for the bernoulli xform? In
+ particular, what form does it take on the unit circle (i.e.
+ the generators?) This is interesting because the unit x-form describes
+ unitary evolution, non-decaying.
 \end_layout
 
 \end_body
