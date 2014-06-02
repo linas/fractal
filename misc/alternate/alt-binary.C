@@ -10,11 +10,10 @@
 #include <stdio.h>
 
 #define BITLEN 56
-typedef char[BITLEN] bitstring;
+typedef char bitstring[BITLEN];
 
-bitstring to_bits(double x)
+void to_bits(bitstring bits, double x)
 {
-	bitstring bits;
 	x -= floor(x);
 
 	for (int i=0; i<BITLEN; i++)
@@ -23,8 +22,6 @@ bitstring to_bits(double x)
 		else bits[i] = 0;
 		x *= 2.0;
 	}
-
-	return bits;
 }
 
 double from_bits(bitstring bits)
@@ -43,7 +40,8 @@ main(int argc, char* argv[])
 {
 
 	double x = 0.1233456789;
-	bitstring bs = to_bits(x);
+	bitstring bs;
+	to_bits(bs, x);
 	double y = from_bits(bs);
 
 	printf("duue its %g\n", y);

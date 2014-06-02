@@ -1,6 +1,6 @@
 
 alt-binary: alt-binary.o
-	cc -o $^ $*
+	cc -o $@ $^ -lm
 
-.c.o:
+.C.o:
 	cc -c $^
