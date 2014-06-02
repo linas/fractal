@@ -1,14 +1,15 @@
 
-set term png small
+set term png size 1024,768
 set out 'alt.png'
 
 # set data style linespoints
-set data style lines
+set style data lines
 set key right
 
 set xrange [0:1]
 
 set xlabel "x"
 set ylabel "alt binary"
-plot "altbin.dat" using 1:2 title "" with lines linewidth 2
+plot "altbin.dat" using 1:2 title "orig" with lines linewidth 2, \
+	 "altbin.dat" using 1:(4*$3) title "sc" with lines linewidth 2
 

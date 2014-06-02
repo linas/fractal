@@ -67,10 +67,11 @@ double alternate(double x)
 main(int argc, char* argv[])
 {
 
-	for (double x=0.0; x<1.0; x+=0.00312345678)
+	for (double x=0.0; x<1.0; x+=0.00212345678)
 	{
 		double y = alternate(x);
-		printf("%16.14g	%16.14g\n", x, y);
+		double z = alternate(0.25*x);
+		printf("%16.14g	%16.14g	%16.14g\n", x, y, z);
 	}
 }
 
