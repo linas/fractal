@@ -2,6 +2,7 @@
 #include <complex.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int
 main(int argc, char*argv[])
@@ -12,6 +13,7 @@ main(int argc, char*argv[])
 	double im = atof(argv[2]);
 
 	lambda = re + I* im;
+	lambda *= I * sqrt(2.0);
 
 	complex a0 = 1.0;
 	complex a1 = -lambda;
@@ -19,7 +21,7 @@ main(int argc, char*argv[])
 	complex anm1 = a1;
 	complex anm2 = a0;
 
-	for (int n=2; n<28; n++)
+	for (int n=2; n<48; n++)
 	{
 		complex an = (1.0 / ((complex) n)) * (anm2 - lambda*anm1);
 
