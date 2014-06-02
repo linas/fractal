@@ -1,6 +1,10 @@
 
 /**
- * Alternating sums inspired by differential oparators
+ * Alternating sums inspired by differential operators
+ * viz just like in homology: the boundary operator drops the n'th
+ * index, and sums, alternating the sign as (-1)^n so we do the same
+ * here, where the index is the bit position in a binary string.
+ * The result is a fractal .. which I've seen before, but where? why?
  *
  * Linas Vepstas
  * June 2014
@@ -75,10 +79,12 @@ main(int argc, char* argv[])
 		// double z = 4.0*alternate(0.25*x);
 
 		// W equals y exactly.
-		double w = (x>0.5)? -0.5 : 0.5;
-		w += alternate(x+0.5);
+		// double w = (x>0.5)? -0.5 : 0.5;
+		// w += alternate(x+0.5);
 
-		printf("%16.14g	%16.14g	%16.14g\n", x, y, w);
+		double u = alternate(y);
+
+		printf("%16.14g	%16.14g	%16.14g\n", x, y, u);
 	}
 }
 

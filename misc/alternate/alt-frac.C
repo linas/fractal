@@ -1,0 +1,47 @@
+
+/*
+ * alt-frac.C
+ *
+ * Same idea as described in alt-binary, but applied to continued
+ * fractions
+ *
+ * Linas Vepstas June 2014
+ */
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Farey.h"
+
+
+double falternate(int n, int d)
+{
+	ContinuedFraction f;
+	f.SetRation(n, d);
+
+	double acc = 0.0;
+	double sgn = 1.0;
+
+	for (int i=1; i<f.GetNumTerms(); i++)
+	{
+		ContinuedFraction g = f;
+		g.DropTerm(i);
+		acc += sgn * g.toReal();
+		sgn = - sgn;
+	}
+
+	return acc;
+}
+
+main (int argc, char * argv[])
+{
+	int deno = 2133;
+	for (int i=1; i<deno; i++)
+	{
+		double x = ((double) i) / ((double) deno);
+		double y = falternate(i, deno);
+
+		printf("%16.14g	%16.14g\n", x, y);
+	}
+}
