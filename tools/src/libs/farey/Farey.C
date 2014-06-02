@@ -8,6 +8,7 @@
  * Linas Vepstas January 16 1994
  * Linas Added stuff April 1996
  * Added xplus/minus in Oct 2004 -- linas
+ * Still hacking June 2014 -- Happy 20th anniv!
  */
 
 #ifdef LINUX
@@ -300,6 +301,17 @@ ContinuedFraction::SwapTerms (int p, int q)
 	int tmp = tinued_frac[p];
 	tinued_frac[p] = tinued_frac[q];
 	tinued_frac[q] = tmp;
+}
+
+void 
+ContinuedFraction::DropTerm (int p)
+{
+	if ((1>p) or (CONTINUED_FRAC_MAX_TERMS<=p) )return;
+	p--;
+	for (; p<nterms-1; p++)
+	{
+		tinued_frac[p] = tinued_frac[p+1];
+	}
 }
 
 /* ------------------------------------------------------------ */
