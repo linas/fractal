@@ -70,8 +70,15 @@ main(int argc, char* argv[])
 	for (double x=0.0; x<1.0; x+=0.00212345678)
 	{
 		double y = alternate(x);
-		double z = alternate(0.25*x);
-		printf("%16.14g	%16.14g	%16.14g\n", x, y, z);
+
+		// z equals y exactly ...
+		// double z = 4.0*alternate(0.25*x);
+
+		// W equals y exactly.
+		double w = (x>0.5)? -0.5 : 0.5;
+		w += alternate(x+0.5);
+
+		printf("%16.14g	%16.14g	%16.14g\n", x, y, w);
 	}
 }
 
