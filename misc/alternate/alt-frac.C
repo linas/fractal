@@ -18,7 +18,7 @@
 double falternate(int n, int d)
 {
 	ContinuedFraction f;
-	f.SetRation(n, d);
+	f.SetRatio(n, d);
 
 	double acc = 0.0;
 	double sgn = 1.0;
@@ -27,7 +27,7 @@ double falternate(int n, int d)
 	{
 		ContinuedFraction g = f;
 		g.DropTerm(i);
-		acc += sgn * g.toReal();
+		acc += sgn * g.ToReal();
 		sgn = - sgn;
 	}
 
@@ -36,7 +36,7 @@ double falternate(int n, int d)
 
 main (int argc, char * argv[])
 {
-	int deno = 2133;
+	int deno = 1513;
 	for (int i=1; i<deno; i++)
 	{
 		double x = ((double) i) / ((double) deno);
