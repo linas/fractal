@@ -1,0 +1,386 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman times
+\font_sans helvet
+\font_typewriter courier
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 0
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Diary on Category Theory and Logic
+\end_layout
+
+\begin_layout Author
+Linas Vepstas
+\end_layout
+
+\begin_layout Abstract
+A set of notes for myself regarding topics in Proof Theory, Model Theory,
+ Category Theory and Logic, and how these all fit together and inter-relate.
+\end_layout
+
+\begin_layout Section*
+20 Nov 2014
+\end_layout
+
+\begin_layout Standard
+I should have started this long ago.
+\end_layout
+
+\begin_layout Subsection*
+Godel Incompleteness
+\end_layout
+
+\begin_layout Standard
+OK, so I finally got a glimmer of what the Godel incompleteness theorem
+ is all about.
+ The essential ingredients, taken from [x ref]:
+\end_layout
+
+\begin_layout Standard
+First: Godel numbering is a red herring, and is due to a lack/misunderstanding
+ of modern data structures.
+ Basically, Godel tried to convert data structures into unary integers,
+ resulting in complexity we can now ignore.
+\end_layout
+
+\begin_layout Standard
+Next: The simplest example is from 
+\begin_inset Quotes eld
+\end_inset
+
+Robinson Theory
+\begin_inset Quotes erd
+\end_inset
+
+ (?) which I think is 
+\begin_inset Quotes eld
+\end_inset
+
+Robinson Arithmetic
+\begin_inset Quotes erd
+\end_inset
+
+ without the numbers, i.e.
+ without the confusion of Godel numbers.
+ Its expressed via the data structure of pairs.
+ So -- consider the data structure of pairs, whose only elements are pairs
+ or nil.
+ The intended model here is of finite binary trees.
+ To keep it simple, leaves are always nil (there is no constant symbol other
+ than nil); branches are always pairs.
+ This can be axiomatized very simply:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $(x,y)\ne\mathbf{nil}$
+\end_inset
+
+, that is, a pair is never nil.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $p=(x,y)\vee p=\mathbf{nil}$
+\end_inset
+
+, that is, an element is either a pair or is nil.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathbf{nil}\nprec p$
+\end_inset
+
+, that is, nothing comes before nil, nill is the least (first) element.
+ 
+\end_layout
+
+\begin_layout Enumerate
+xxx
+\begin_inset Formula $u\prec v\vee v\prec u$
+\end_inset
+
+, that is, ordering on pairs.
+\end_layout
+
+\begin_layout Enumerate
+one more axiom.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+intended model
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+standard model
+\begin_inset Quotes erd
+\end_inset
+
+ is that of finite trees.
+ Claim: there is a true statement that is not provable.
+ The true statement is 
+\begin_inset Formula $x\ne(x,x)$
+\end_inset
+
+ , that is, there is no tree that is a subtree of itself.
+ The reason that it is not provable is because there there is a 
+\begin_inset Quotes eld
+\end_inset
+
+non-standard model
+\begin_inset Quotes erd
+\end_inset
+
+ in which this statement is false: namely, the infinite binary tree or Cantor
+ 
+\begin_inset Quotes eld
+\end_inset
+
+set
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $c$
+\end_inset
+
+ for which 
+\begin_inset Formula $c=(c,c)$
+\end_inset
+
+.
+ Every subtree of the infinite binary tree is isomorphic to itself.
+ It is easy to check that the infinite satisfies every axiom.
+\end_layout
+
+\begin_layout Standard
+Several mental tricks happen here.
+\end_layout
+
+\begin_layout Itemize
+The way we assert that 
+\begin_inset Formula $x\ne(x,x)$
+\end_inset
+
+ is true but not provable is by explicitly demonstrating an alternative,
+ non-standard model in which it is false.
+ For, if it were provable, then a contradiction would result.
+ (i.e.
+ the Cantor tree satisfies the axioms, but violates the original statement.
+\end_layout
+
+\begin_layout Itemize
+It would seem that an additional axiom of well-foundedness is needed, so
+ that infinite trees are excluded, much in the same way that axioms of well-foun
+dedness are used to excclude infnitely-recursive sets.
+ (except in New Foundations...)
+\end_layout
+
+\begin_layout Itemize
+The 'proof' that 
+\begin_inset Formula $x\ne(x,x)$
+\end_inset
+
+ is true but not provable is a kind of meta-proof.
+ So what do we really mean here, by proof?
+\end_layout
+
+\begin_layout Itemize
+The interplay here between model theory and proof theory here is very confusing
+ to me.
+ I would like to see this all crisped up.
+\end_layout
+
+\begin_layout Itemize
+The issue of Godel incompleteness seems tied entirely to the question of
+ infinite cardinals/ordinals.
+ Without infinity, there is no issue.
+\end_layout
+
+\begin_layout Itemize
+The role of the inifinite binary tree 
+\begin_inset Formula $c$
+\end_inset
+
+ is analogous to the first infinite ordinal 
+\begin_inset Formula $\omega=\{0,1,2,\cdots\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The algebra of ordinals, and the interplay between them and data structures,
+ is entirely confusing.
+ So, for example, we have J.H.
+ Conway's Hyperreal numbers, which follow from simple axioms for construction,
+ ordering, addition, inequality.
+ But this algebra seems different than other ordinal algebras, which in
+ turn seem to difffer from one-another, based on the 
+\begin_inset Quotes eld
+\end_inset
+
+ordinal notation
+\begin_inset Quotes erd
+\end_inset
+
+ used.
+ Sadly, I think that 
+\begin_inset Quotes eld
+\end_inset
+
+ordinal notation
+\begin_inset Quotes erd
+\end_inset
+
+, like Godel numbering, clouds the issue.
+ Really, what we have here is that different ordinal notations are just
+ different data structures.
+ Imagine how hard it would be if we could only talk about binary trees by
+ using Godel numbers, instead of using pairs...
+\end_layout
+
+\begin_layout Itemize
+This begs a question: which ordinal notations, if any, are isomorphic? We
+ know e.g.
+ Kleene's 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ ordinal notation is not computable...
+\end_layout
+
+\begin_layout Standard
+In summary: it seems that (Godel) incompleteness has something to do with
+ infinities, because it is only at the infinite limits where we find counter-exa
+mples to the intended standard models.
+\end_layout
+
+\begin_layout Standard
+However, I remain confused by the fine interplay between 
+\begin_inset Quotes eld
+\end_inset
+
+model
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+proof
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+logic
+\begin_inset Quotes erd
+\end_inset
+
+ in the above discussion.
+ What to do about that?
+\end_layout
+
+\begin_layout Subsection*
+Duplex Category
+\end_layout
+
+\begin_layout Standard
+I started a while ago some work on the duplex category, as the extension
+ of the axioms defining the simplex category to binary trees.
+ Time to move farther on that.
+\end_layout
+
+\begin_layout Subsection*
+Modal Logic
+\end_layout
+
+\begin_layout Standard
+Heres a good reference:
+\end_layout
+
+\begin_layout Standard
+And another:
+\end_layout
+
+\begin_layout Standard
+http://www.doc.ic.ac.uk/~dirk/Publications/tcs2011.pdf http://www.doc.ic.ac.uk/~dirk/Publ
+ications/visions2008.pdf 
+\end_layout
+
+\end_body
+\end_document
