@@ -1,24 +1,34 @@
-#LyX 1.6.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 345
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass amsart
 \use_default_options false
 \begin_modules
 theorems-ams
+eqs-within-sections
+figs-within-sections
 \end_modules
+\maintain_unincluded_children false
 \language english
+\language_package default
 \inputencoding auto
+\fontencoding global
 \font_roman times
 \font_sans helvet
 \font_typewriter courier
 \font_default_family default
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
 
 \graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
 \paperfontsize default
 \spacing single
 \use_hyperref false
@@ -26,21 +36,31 @@ theorems-ams
 \use_geometry false
 \use_amsmath 2
 \use_esint 0
+\use_mhchem 1
+\use_mathdots 1
 \cite_engine basic
 \use_bibtopic false
+\use_indices false
 \paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
-\defskip medskip
+\paragraph_indentation default
 \quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
-\author "" 
-\author "" 
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
 \end_header
 
 \begin_body
@@ -70,22 +90,25 @@ Linas Vepstas
 \end_layout
 
 \begin_layout Date
-12 October 2004 (updated 15 August 2010)
+12 October 2004 (updated 22 August 2014)
 \end_layout
 
 \begin_layout Abstract
 Fractals and continued fractions seem to be deeply related in many ways.
  Farey fractions appear naturally in both.
- Much of this relationship can be explained by the fact that both are described
- by certain subsets of the modular group 
+ Much of this relationship can be explained by the fact that both can be
+ represented with the infinite binary tree, which in turn describes the
+ structure of the Cantor set.
+ The infinite binary tree can be viewed as a certain subset of the modular
+ group 
 \begin_inset Formula $GL\left(2,\mathbb{Z}\right)$
 \end_inset
 
 .
- These subsets, the dyadic groupoid and the dyadic monoid, provide the natural
- setting for the symmetry and self-similarity of many fractals, including
- those associated with period-doubling maps, with phase-locking maps, and
- with various dynamical systems in general.
+ The subset is essentially the dyadic groupoid or dyadic monoid.
+ It provides the natural setting for the symmetry and self-similarity of
+ many fractals, including those associated with period-doubling maps, with
+ phase-locking maps, and with various dynamical systems in general.
  The aim of this text is to provide a simple exposition of the symmetry
  and its articulation.
 \end_layout
@@ -132,9 +155,9 @@ ry.
 \begin_layout Abstract
 This paper is written at an expository level, and should be readily accessible
  to advanced undergraduates and all graduate students.
- XXX This paper is unfinished.
+ XXX This paper is in a perpetual state of being unfinished.
  Although this version corrects a number of serious errors in the previous
- drafts, it is still misleading and confusing in many ways.
+ drafts, it is surely still misleading and confusing in many ways.
  The second half, in particular must surely contain errors and mis-statements!
  Caveat emptor! XXX
 \end_layout
@@ -370,10 +393,13 @@ The binary tree is readily navigated when descending down it, by making
 .
  The superscript, as usual, simply means that a given letter is repeated
  some number of times, so that 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 L^{m}R^{n}L^{p}\cdots=\begin{array}{ccc}
 \underbrace{LLL\cdots L} & \underbrace{RR\cdots R} & \underbrace{LL\cdots L}\\
-m & n & p\end{array}\cdots\]
+m & n & p
+\end{array}\cdots
+\]
 
 \end_inset
 
@@ -404,13 +430,16 @@ For the dyadic tree, the path label can be directly converted to the dyadic
 \end_inset
 
 , a series of left and right moves takes one to the following nodes:
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \begin{array}{ccccc}
 L & = & 0.01 & = & 1/4\\
 R & = & 0.11 & = & 3/4\\
 RL & = & 0.101 & = & 5/8\\
 L^{2} & = & 0.001 & = & 1/8\\
-L^{2}RL & = & 0.00101 & = & 5/32\end{array}\]
+L^{2}RL & = & 0.00101 & = & 5/32
+\end{array}
+\]
 
 \end_inset
 
@@ -511,9 +540,11 @@ reference "cap:The-Farey-Tree"
 
 .
  At the next iteration, one may construct two more mediants,
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 \frac{(0+1)}{(1+2)} & = & \frac{1}{3}\\
-\frac{(1+1)}{(2+1)} & = & \frac{2}{3}\end{eqnarray*}
+\frac{(1+1)}{(2+1)} & = & \frac{2}{3}
+\end{eqnarray*}
 
 \end_inset
 
@@ -632,10 +663,13 @@ unimodular
 
 , while seemingly opaque here, is no accident.
  The pair of fractions, written as a 2x2 matrix 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 A=\left[\begin{array}{cc}
 r & p\\
-s & q\end{array}\right]\]
+s & q
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -651,8 +685,10 @@ s & q\end{array}\right]\]
  Although its appearance here seems arbitrary, this group of matrices will
  recur more deeply throughout the theory of binary trees.
  The unimodular property then allows one to prove that
-\begin_inset Formula \[
-\frac{p}{q}<\frac{p+r}{q+s}<\frac{r}{s}\]
+\begin_inset Formula 
+\[
+\frac{p}{q}<\frac{p+r}{q+s}<\frac{r}{s}
+\]
 
 \end_inset
 
@@ -744,10 +780,13 @@ ive real number line
 \end_inset
 
  with 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula 
+\begin{equation}
 h(x)=\begin{cases}
 2x & \mbox{ for }0\le x\le\frac{1}{2}\\
-\frac{1}{2(1-x)} & \mbox{ for }\frac{1}{2}\le x\le1\end{cases}\label{eq:Farey to Stern-Brocot}\end{equation}
+\frac{1}{2(1-x)} & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}\label{eq:Farey to Stern-Brocot}
+\end{equation}
 
 \end_inset
 
@@ -804,8 +843,10 @@ key "Con76"
 \end_inset
 
 , one equates the Farey mediant to the arithmetic average:
-\begin_inset Formula \begin{equation}
-?\left(\frac{p+r}{q+s}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{r}{s}\right)\right]\label{eq:recursive ? fun defn}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+?\left(\frac{p+r}{q+s}\right)=\frac{1}{2}\left[?\left(\frac{p}{q}\right)+?\left(\frac{r}{s}\right)\right]\label{eq:recursive ? fun defn}
+\end{equation}
 
 \end_inset
 
@@ -822,8 +863,10 @@ The recursive construction provides a map from the rationals to the dyadic
 \end_inset
 
  define
-\begin_inset Formula \[
-\mathbb{Q}_{p}=\left.\left\{ \frac{m}{p^{n}}\right|n\in\mathbb{N},\,0\le m<p^{n}\right\} \]
+\begin_inset Formula 
+\[
+\mathbb{Q}_{p}=\left.\left\{ \frac{m}{p^{n}}\right|n\in\mathbb{N},\,0\le m<p^{n}\right\} 
+\]
 
 \end_inset
 
@@ -860,8 +903,10 @@ square-free
 
  contains no squares.
  With this notation, the question mark function is then a map 
-\begin_inset Formula \[
-?:\mathbb{Q}\to\mathbb{Q}_{2}\]
+\begin_inset Formula 
+\[
+?:\mathbb{Q}\to\mathbb{Q}_{2}
+\]
 
 \end_inset
 
@@ -979,8 +1024,10 @@ key "Khin35"
 
 .
  In this representation, one has 
-\begin_inset Formula \[
-x=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\cdots}}}\]
+\begin_inset Formula 
+\[
+x=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\cdots}}}
+\]
 
 \end_inset
 
@@ -1003,8 +1050,10 @@ representation
  Other representations are possible: of course, everyone is taught the decimal
  expansion (the base-10 or 10-adic representation).
  Formally, one writes 
-\begin_inset Formula \[
-[\;]:\mathbb{R}\to\mathbb{N}^{\omega}\]
+\begin_inset Formula 
+\[
+[\;]:\mathbb{R}\to\mathbb{N}^{\omega}
+\]
 
 \end_inset
 
@@ -1032,8 +1081,10 @@ representation
 \end_inset
 
  representation of a real number is given by 
-\begin_inset Formula \[
-(\,)_{p}:\mathbb{R}\to\mathbb{Z}_{p}^{\omega}\]
+\begin_inset Formula 
+\[
+(\,)_{p}:\mathbb{R}\to\mathbb{Z}_{p}^{\omega}
+\]
 
 \end_inset
 
@@ -1189,8 +1240,10 @@ Given a continued-fraction expansion
 \end_inset
 
 , one then has that 
-\begin_inset Formula \begin{equation}
-?\left(x\right)=2\sum_{k=1}^{N}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:direct ? fun defn}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+?\left(x\right)=2\sum_{k=1}^{N}\left(-1\right)^{k}\;2^{-(a_{1}+a_{2}+...+a_{k})}\label{eq:direct ? fun defn}
+\end{equation}
 
 \end_inset
 
@@ -1208,10 +1261,13 @@ Given a continued-fraction expansion
 \end_inset
 
 : 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 ?(x)=\begin{array}{ccccc}
 0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
-a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}\end{array}\]
+a_{1}-1 & a_{2} & a_{3} & a_{4} & a_{5}
+\end{array}
+\]
 
 \end_inset
 
@@ -1277,8 +1333,10 @@ The proof requires the use of partial convergents of continued fractions.
 \end_inset
 
 'th convergent as 
-\begin_inset Formula \[
-\frac{p_{k}}{q_{k}}=[a_{1},a_{2},\cdots,a_{k}]\]
+\begin_inset Formula 
+\[
+\frac{p_{k}}{q_{k}}=[a_{1},a_{2},\cdots,a_{k}]
+\]
 
 \end_inset
 
@@ -1289,8 +1347,10 @@ The proof requires the use of partial convergents of continued fractions.
 'th term.
  These are called convergents or approximants because these converge to
  the final value of the continued fraction: 
-\begin_inset Formula \[
-[a_{1},a_{2},\cdots]=\lim_{k\to\infty}\frac{p_{k}}{q_{k}}\]
+\begin_inset Formula 
+\[
+[a_{1},a_{2},\cdots]=\lim_{k\to\infty}\frac{p_{k}}{q_{k}}
+\]
 
 \end_inset
 
@@ -1303,9 +1363,11 @@ key "Khin35"
 \end_inset
 
 : 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 p_{k} & = & a_{k}p_{k-1}+p_{k-2}\\
-q_{k} & = & a_{k}q_{k-1}+q_{k-2}\end{eqnarray*}
+q_{k} & = & a_{k}q_{k-1}+q_{k-2}
+\end{eqnarray*}
 
 \end_inset
 
@@ -1318,10 +1380,13 @@ A walk to the left or to the right on the dyadic tree is equivalent to appending
  Using the direct definition, the operation of left and right moves on continued
  fractions may be discerned.
  A left move is given by 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 L\left([a_{1},a_{2},\cdots,a_{N}]\right)=\begin{cases}
 [a_{1},a_{2},\cdots,a_{N}+1] & \mbox{ for }N\mbox{ odd}\\
-{}[a_{1},a_{2},\cdots,a_{N}-1,2] & \mbox{ for }N\mbox{ even }\end{cases}\]
+{}[a_{1},a_{2},\cdots,a_{N}-1,2] & \mbox{ for }N\mbox{ even }
+\end{cases}
+\]
 
 \end_inset
 
@@ -1356,8 +1421,10 @@ L\left([a_{1},a_{2},\cdots,a_{N}]\right)=\begin{cases}
 
 \begin_layout Proof
 Let 
-\begin_inset Formula \[
-\frac{r_{N}}{s_{N}}=[a_{1},a_{2},\cdots,a_{N}+1]\]
+\begin_inset Formula 
+\[
+\frac{r_{N}}{s_{N}}=[a_{1},a_{2},\cdots,a_{N}+1]
+\]
 
 \end_inset
 
@@ -1529,8 +1596,10 @@ name "fig:The-Birthday-Tree"
 \begin_layout Standard
 Aligning the birthday tree with the Stern-Brocot tree results in the extension
  
-\begin_inset Formula \[
-?\left(x\right)=\left\lfloor x\right\rfloor +?\left(x-\left\lfloor x\right\rfloor \right)\]
+\begin_inset Formula 
+\[
+?\left(x\right)=\left\lfloor x\right\rfloor +?\left(x-\left\lfloor x\right\rfloor \right)
+\]
 
 \end_inset
 
@@ -1551,23 +1620,29 @@ where
  on the unit interval.
  For comparison, the map between the dyadic tree and the birthday tree is
  given by 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 b\left(x\right)=\begin{cases}
 2x & \mbox{ for }0\leq x\le\frac{1}{2}\\
 4x-1 & \mbox{ for }\frac{1}{2}\le x\le\frac{3}{4}\\
 \cdots & \cdots\\
-2^{n+1}x+n+2-2^{n+1} & \mbox{ for }\frac{2^{n}-1}{2^{n}}\le x\le\frac{2^{n+1}-1}{2^{n+1}}\end{cases}\]
+2^{n+1}x+n+2-2^{n+1} & \mbox{ for }\frac{2^{n}-1}{2^{n}}\le x\le\frac{2^{n+1}-1}{2^{n+1}}
+\end{cases}
+\]
 
 \end_inset
 
 and likewise, the map from the Farey tree to the Stern-Brocot tree is given
  by 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 c\left(x\right)=\begin{cases}
 \frac{x}{1-x} & \mbox{ for }0\le x\le\frac{1}{2}\\
  & \mbox{ for }\frac{1}{2}\le x\le\frac{1}{3}\\
 \cdots & \cdots\\
- & \mbox{ for }\frac{1}{n}\le x\le\frac{1}{n+1}\end{cases}\]
+ & \mbox{ for }\frac{1}{n}\le x\le\frac{1}{n+1}
+\end{cases}
+\]
 
 \end_inset
 
@@ -1658,8 +1733,10 @@ The solution took the form
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-p^{2}-nq^{2}=1\]
+\begin_inset Formula 
+\[
+p^{2}-nq^{2}=1
+\]
 
 \end_inset
 
@@ -1783,8 +1860,10 @@ reference "eq:direct ? fun defn"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \begin{equation}
-(?\circ g)(x)=?(g(x))=?\left(\frac{x}{1+x}\right)=\frac{?(x)}{2}\label{eq:dyadic g}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+(?\circ g)(x)=?(g(x))=?\left(\frac{x}{1+x}\right)=\frac{?(x)}{2}\label{eq:dyadic g}
+\end{equation}
 
 \end_inset
 
@@ -1820,14 +1899,18 @@ reference "eq:direct ? fun defn"
 
 .
  Equivalently, for a continued fraction, 
-\begin_inset Formula \[
-g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]\]
+\begin_inset Formula 
+\[
+g^{n}([a_{1},a_{2},..])=[a_{1}+n,a_{2},...]
+\]
 
 \end_inset
 
 Iterating under the question mark gives 
-\begin_inset Formula \[
-\left(?\circ g^{n}\right)(x)=?\left(\frac{x}{nx+1}\right)=\frac{?(x)}{2^{n}}\]
+\begin_inset Formula 
+\[
+\left(?\circ g^{n}\right)(x)=?\left(\frac{x}{nx+1}\right)=\frac{?(x)}{2^{n}}
+\]
 
 \end_inset
 
@@ -1864,8 +1947,10 @@ The generator
 \begin_layout Standard
 The other symmetry of the question mark is more trivial: the question mark
  is symmetric under a left-right reflection:
-\begin_inset Formula \[
-?(1-x)=1-?(x)\]
+\begin_inset Formula 
+\[
+?(1-x)=1-?(x)
+\]
 
 \end_inset
 
@@ -1918,8 +2003,10 @@ reflection
 
 , generates more self-symmetries.
  Thus, for example, 
-\begin_inset Formula \[
-\left(?rg^{n}\right)(x)=\left(r?g^{n}\right)(x)=r\left(\frac{?(x)}{2^{n}}\right)=1-\frac{?(x)}{2^{n}}=?\left(r\left(\frac{x}{nx+1}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)\]
+\begin_inset Formula 
+\[
+\left(?rg^{n}\right)(x)=\left(r?g^{n}\right)(x)=r\left(\frac{?(x)}{2^{n}}\right)=1-\frac{?(x)}{2^{n}}=?\left(r\left(\frac{x}{nx+1}\right)\right)=?\left(\frac{1+(n-1)x}{1+nx}\right)
+\]
 
 \end_inset
 
@@ -1937,8 +2024,10 @@ shows that
 
 .
  A general self-similarity transform may be written as 
-\begin_inset Formula \begin{equation}
-\gamma\equiv g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\label{eq:general gr monoid elt}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\gamma\equiv g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\label{eq:general gr monoid elt}
+\end{equation}
 
 \end_inset
 
@@ -1948,9 +2037,11 @@ Applying the above process, it is relatively straightforward to see that,
 \end_inset
 
 , 
-\begin_inset Formula \begin{eqnarray}
+\begin_inset Formula 
+\begin{eqnarray}
 (?\circ\gamma)(x) & = & \left(?\circ g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\right)(x)\label{eq:q-mark isomorph}\\
- & = & \frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\end{eqnarray}
+ & = & \frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{?(x)}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}
+\end{eqnarray}
 
 \end_inset
 
@@ -1960,8 +2051,10 @@ To see the other leg of the commutative diagram of the homomorphism, observe
 \end_inset
 
  may be itself written as a continued fraction: 
-\begin_inset Formula \[
-g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,\frac{1}{x}]\]
+\begin_inset Formula 
+\[
+g^{n}(x)=\frac{1}{n+\frac{1}{x}}=[n,\frac{1}{x}]
+\]
 
 \end_inset
 
@@ -1971,14 +2064,18 @@ In the same vein, one has
 
  and, with the slight abuse of allowing continued fractions with negative
  integers:
-\begin_inset Formula \[
-r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]\]
+\begin_inset Formula 
+\[
+r(x)=\frac{1}{1+\frac{1}{-1+\frac{1}{x}}}=[1,-1,x]
+\]
 
 \end_inset
 
 Continuing this exercise, one finds that
-\begin_inset Formula \begin{equation}
-\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:gamma acting on cont frac}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\gamma(x)=(g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}})(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:gamma acting on cont frac}
+\end{equation}
 
 \end_inset
 
@@ -2013,10 +2110,13 @@ Möbius transform
 
 .
  That is, given a general 2x2 matrix, one defines the action 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula 
+\begin{equation}
 \left[\begin{array}{cc}
 a & b\\
-c & d\end{array}\right]:x\to\frac{ax+b}{cx+d}\label{eq:Mobius xform}\end{equation}
+c & d
+\end{array}\right]:x\to\frac{ax+b}{cx+d}\label{eq:Mobius xform}
+\end{equation}
 
 \end_inset
 
@@ -2024,12 +2124,16 @@ The utility of the fractional linear transform is that it commutes with
  matrix multiplication; one may multiply matrices on the left-hand side
  to get the correct expression on the right-hand side.
  In terms of Möbius transformations, one then has that 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula 
+\begin{equation}
 g=\left[\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right]\quad\mbox{ and }\quad r=\left[\begin{array}{cc}
+1 & 1
+\end{array}\right]\quad\mbox{ and }\quad r=\left[\begin{array}{cc}
 -1 & 1\\
-0 & 1\end{array}\right]\label{eq:gr elts}\end{equation}
+0 & 1
+\end{array}\right]\label{eq:gr elts}
+\end{equation}
 
 \end_inset
 
@@ -2063,10 +2167,13 @@ Some curious combinations of these operators are tabulated here.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 r([a_{1},a_{2},..])=\left\{ \begin{array}{ccc}
-\;[1,a_{1}-1,a_{2},..] & \;\textrm{\; for \;} & a_{1}\neq1\\
-\;[a_{2}+1,a_{3},...] & \textrm{\;\; for \;} & a_{1}=1\end{array}\right.\]
+\;[1,a_{1}-1,a_{2},..] & \;\textrm{\;\ for \;} & a_{1}\neq1\\
+\;[a_{2}+1,a_{3},...] & \textrm{\;\;\ for \;} & a_{1}=1
+\end{array}\right.
+\]
 
 \end_inset
 
@@ -2075,28 +2182,38 @@ Using the above, the operator to insert a digit
 \end_inset
 
  at the front of the continued fraction expansion is 
-\begin_inset Formula \[
-(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]\]
+\begin_inset Formula 
+\[
+(g^{n-1}rg)([a_{1},a_{2},...])=[n,a_{1},a_{2},...]
+\]
 
 \end_inset
 
 which can be verified by using the Möbius transformation 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 (g^{n-1}rg)(x)=\left(\left[\begin{array}{cc}
 1 & 0\\
-n-1\, & 1\end{array}\right]\left[\begin{array}{cc}
+n-1\, & 1
+\end{array}\right]\left[\begin{array}{cc}
 -1\, & 1\\
-0 & 1\end{array}\right]\left[\begin{array}{cc}
+0 & 1
+\end{array}\right]\left[\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right]\right):(x)=\left(\begin{array}{cc}
+1 & 1
+\end{array}\right]\right):(x)=\left(\begin{array}{cc}
 0 & 1\\
-1 & n\end{array}\right):(x)=\frac{1}{n+x}\]
+1 & n
+\end{array}\right):(x)=\frac{1}{n+x}
+\]
 
 \end_inset
 
 The repeated application of the insertion operator leads to 
-\begin_inset Formula \[
-(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
+\begin_inset Formula 
+\[
+(g^{j-1}rg)(g^{k-1}rg)(g^{m-1}rg)...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]
+\]
 
 \end_inset
 
@@ -2112,20 +2229,26 @@ reference "eq:gamma acting on cont frac"
 
 \begin_layout Standard
 The append operator follows by combining 
-\begin_inset Formula \[
-[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]\]
+\begin_inset Formula 
+\[
+[a_{1},a_{2},...,a_{N},g^{k}(x)]=[a_{1},a_{2},...,a_{N}+k,x]
+\]
 
 \end_inset
 
 and 
-\begin_inset Formula \[
-[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]\]
+\begin_inset Formula 
+\[
+[a_{1},a_{2},...,a_{N},r(x)]=[a_{1},a_{2},...,a_{N}+1,-1,x]
+\]
 
 \end_inset
 
 The appending operator is 
-\begin_inset Formula \[
-\left(g^{-1}rg^{k+1}\right)(x)=\frac{kx+1}{x}\]
+\begin_inset Formula 
+\[
+\left(g^{-1}rg^{k+1}\right)(x)=\frac{kx+1}{x}
+\]
 
 \end_inset
 
@@ -2134,8 +2257,10 @@ which, for
 \end_inset
 
 , acts as 
-\begin_inset Formula \[
-[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]\]
+\begin_inset Formula 
+\[
+[a_{1},a_{2},...,a_{N},(g^{-1}rg^{k+1})(x)]=[a_{1},a_{2},...,a_{N},k,x]
+\]
 
 \end_inset
 
@@ -2145,8 +2270,10 @@ which, for
 \end_inset
 
  as 
-\begin_inset Formula \[
-(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]\]
+\begin_inset Formula 
+\[
+(g^{-1}rg)(g^{-1}rg^{j+1})(g^{-1}rg^{k+1})(g^{-1}rg^{m+1})...(x)=(g^{j-1}rg^{k}rg^{m}rg...)(x)=[j,k,m,...,x]
+\]
 
 \end_inset
 
@@ -2223,8 +2350,10 @@ Denote by
 \end_inset
 
  with 
-\begin_inset Formula \[
-x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\]
+\begin_inset Formula 
+\[
+x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}
+\]
 
 \end_inset
 
@@ -2243,8 +2372,10 @@ x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\]
 \end_inset
 
  such that 
-\begin_inset Formula \[
-x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]\]
+\begin_inset Formula 
+\[
+x_{C}=a_{0}+\frac{1}{a_{1}+\frac{1}{a_{2+...}}}=[a_{0};a_{1},a_{2},...]
+\]
 
 \end_inset
 
@@ -2275,17 +2406,21 @@ reference "eq:general gr monoid elt"
 \end_inset
 
  has the representation 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 g_{D} & :\mathbb{R}_{D} & \,\longrightarrow\mathbb{R}_{D}\\
- & x & \longmapsto x/2\end{eqnarray*}
+ & x & \longmapsto x/2
+\end{eqnarray*}
 
 \end_inset
 
  when acting on the set of dyadic numbers, whereas as this same element
  has the representation 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 g_{C} & :\mathbb{R}_{C} & \,\longrightarrow\mathbb{R}_{C}\\
- & x & \longmapsto x/(x+1)\end{eqnarray*}
+ & x & \longmapsto x/(x+1)
+\end{eqnarray*}
 
 \end_inset
 
@@ -2304,8 +2439,10 @@ g_{C} & :\mathbb{R}_{C} & \,\longrightarrow\mathbb{R}_{C}\\
 
 \begin_layout Standard
 Define the set 
-\begin_inset Formula \begin{equation}
-M=\left\{ \gamma\,\vert\,\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\;\mbox{ and }a_{1},a_{N}\ge0\right\} \label{eq:dyadic monoid}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+M=\left\{ \gamma\,\vert\,\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\;\mbox{ for }\; a_{k}\in\mathbb{N}\;\mbox{ and }a_{1},a_{N}\ge0\right\} \label{eq:dyadic monoid}
+\end{equation}
 
 \end_inset
 
@@ -2432,17 +2569,23 @@ The Minkowski question mark provides an homomorphism between
 
 .
  That is, there is a commuting diagram
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \begin{array}{ccc}
 \mathbb{R}_{C} & \begin{array}{c}
 \gamma_{C}\\
-\longrightarrow\end{array} & \mathbb{R}_{C}\\
+\longrightarrow
+\end{array} & \mathbb{R}_{C}\\
 \begin{array}{ccc}
 ? & \downarrow\end{array} & \bigcirc & \begin{array}{ccc}
  & \downarrow & ?\end{array}\\
 \mathbb{R}_{D} & \begin{array}{c}
-\\\longrightarrow\\
-\gamma_{D}\end{array} & \mathbb{R}_{D}\end{array}\]
+\\
+\longrightarrow\\
+\gamma_{D}
+\end{array} & \mathbb{R}_{D}
+\end{array}
+\]
 
 \end_inset
 
@@ -2503,8 +2646,10 @@ The two representations of
 \end_inset
 
 : 
-\begin_inset Formula \[
-\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}\]
+\begin_inset Formula 
+\[
+\gamma=g^{a_{1}}rg^{a_{2}}r...rg^{a_{N}}
+\]
 
 \end_inset
 
@@ -2517,8 +2662,10 @@ The two representations of
 \end_inset
 
  (the dyadic representation), which is 
-\begin_inset Formula \begin{equation}
-\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:dyadic gamma}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\gamma_{D}(x)=\frac{1}{2^{a_{1}}}-\frac{1}{2^{a_{1}+a_{2}}}+\frac{1}{2^{a_{1}+a_{2}+a_{3}}}-...+(-)^{N+1}\frac{x}{2^{a_{1}+a_{2}+a_{3}+...+a_{N}}}\label{eq:dyadic gamma}
+\end{equation}
 
 \end_inset
 
@@ -2527,8 +2674,10 @@ The two representations of
 \end_inset
 
  (the continued-fraction representation), which is 
-\begin_inset Formula \begin{equation}
-\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:modular gamma}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\gamma_{C}(x)=[a_{1}+1,a_{2},a_{3},...,a_{N-1},a_{N}-1,x]\label{eq:modular gamma}
+\end{equation}
 
 \end_inset
 
@@ -2675,17 +2824,22 @@ s are mapped to the whole interval.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-?(x)+\frac{1}{2}=?\left(\frac{1-x}{2-3x}\right)\quad\mbox{ for }0\le x\le\frac{1}{2},\mbox{ having range }\frac{1}{2}\mbox{ to }1\]
+\begin_inset Formula 
+\[
+?(x)+\frac{1}{2}=?\left(\frac{1-x}{2-3x}\right)\quad\mbox{ for }0\le x\le\frac{1}{2},\mbox{ having range }\frac{1}{2}\mbox{ to }1
+\]
 
 \end_inset
 
  and 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 ?(x)+\frac{1}{4}=\begin{cases}
 ?\left(\frac{1-2x}{3-7x}\right) & \quad\mbox{ for }0\le x\le\frac{1}{3},\mbox{ having range }\frac{1}{4}\mbox{ to }\frac{1}{2}\\
 ?\left(\frac{4x-1}{5x-1}\right) & \quad\mbox{ for }\frac{1}{3}\le x\le\frac{1}{2},\mbox{ having range }\frac{1}{2}\mbox{ to }\frac{3}{4}\\
-?\left(\frac{3-4x}{5-7x}\right) & \quad\mbox{ for }\frac{1}{2}\le x\le\frac{2}{3},\mbox{ having range }\frac{3}{4}\mbox{ to }1\end{cases}\]
+?\left(\frac{3-4x}{5-7x}\right) & \quad\mbox{ for }\frac{1}{2}\le x\le\frac{2}{3},\mbox{ having range }\frac{3}{4}\mbox{ to }1
+\end{cases}
+\]
 
 \end_inset
 
@@ -2759,10 +2913,13 @@ general linear group
 
 .
  This is the set of 2x2 matrices 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula 
+\begin{equation}
 A=\left[\begin{array}{cc}
 a & b\\
-c & d\end{array}\right]\label{eq:matrix}\end{equation}
+c & d
+\end{array}\right]\label{eq:matrix}
+\end{equation}
 
 \end_inset
 
@@ -2824,8 +2981,10 @@ projective linear group
 \end_inset
 
 : 
-\begin_inset Formula \[
-PGL(2,\mathbb{C})=GL(2,\mathbb{C})/\left\{ +I,-I\right\} \]
+\begin_inset Formula 
+\[
+PGL(2,\mathbb{C})=GL(2,\mathbb{C})/\left\{ +I,-I\right\} 
+\]
 
 \end_inset
 
@@ -3018,12 +3177,16 @@ key "Ran77,Apo90"
 \end_inset
 
  
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 e_{1}=\left[\begin{array}{c}
 1\\
-0\end{array}\right]\quad\mbox{ and }\quad e_{2}=\left[\begin{array}{c}
+0
+\end{array}\right]\quad\mbox{ and }\quad e_{2}=\left[\begin{array}{c}
 0\\
-1\end{array}\right]\]
+1
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -3119,12 +3282,16 @@ The connection to the Minkowski question mark becomes visible when one tries
 \end_inset
 
  as 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 V=\left[\begin{array}{cc}
 0 & -1\\
-1 & 0\end{array}\right]\quad\mbox{ and }\quad P=\left[\begin{array}{cc}
+1 & 0
+\end{array}\right]\quad\mbox{ and }\quad P=\left[\begin{array}{cc}
 0 & -1\\
-1 & 1\end{array}\right]\]
+1 & 1
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -3138,8 +3305,10 @@ V=\left[\begin{array}{cc}
 \end_inset
 
  may be written as 
-\begin_inset Formula \begin{equation}
-A=\left(-I\right)^{r}P^{p_{0}}VP^{p_{1}}VP^{p_{3}}V\cdots VP^{p_{n}}\label{eq:VP elt}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+A=\left(-I\right)^{r}P^{p_{0}}VP^{p_{1}}VP^{p_{3}}V\cdots VP^{p_{n}}\label{eq:VP elt}
+\end{equation}
 
 \end_inset
 
@@ -3214,12 +3383,16 @@ right
 \end_inset
 
 ) may be obtained by defining 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 L=V^{-1}P^{2}=-VP^{2}=\left[\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right]\quad\mbox{ and }\quad R=V^{-1}P=-VP=\left[\begin{array}{cc}
+1 & 1
+\end{array}\right]\quad\mbox{ and }\quad R=V^{-1}P=-VP=\left[\begin{array}{cc}
 1 & 1\\
-0 & 1\end{array}\right]\]
+0 & 1
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -3238,8 +3411,10 @@ L=V^{-1}P^{2}=-VP^{2}=\left[\begin{array}{cc}
 \end_inset
 
  can be written uniquely as 
-\begin_inset Formula \begin{equation}
-A=\left(-I\right)^{s}\left(R^{-1}L\right)^{p_{0}}L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}\left(R^{-1}LR^{-1}\right)^{v_{0}}\label{eq:RL elt}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+A=\left(-I\right)^{s}\left(R^{-1}L\right)^{p_{0}}L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}\left(R^{-1}LR^{-1}\right)^{v_{0}}\label{eq:RL elt}
+\end{equation}
 
 \end_inset
 
@@ -3293,10 +3468,13 @@ which may be zero, so as to describe the general case.
 \end_inset
 
  is one or two: 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \begin{array}{cccccc}
 A=\left(-I\right)^{r+a_{1}+\cdots+a_{n}}P^{p_{0}} & \underbrace{VP^{2}VP^{2}\cdots VP^{2}} & \underbrace{VPVP\cdots VP} & \underbrace{VP^{2}VP^{2}\cdots VP^{2}} & \cdots & \underbrace{VPVP\cdots VP}\left(V\right)^{v_{0}}\\
- & a_{1}-1 & a_{2} & a_{3} &  & a_{n}\end{array}\]
+ & a_{1}-1 & a_{2} & a_{3} &  & a_{n}
+\end{array}
+\]
 
 \end_inset
 
@@ -3570,8 +3748,10 @@ key "Apo90"
 \end_inset
 
  may be written as 
-\begin_inset Formula \begin{equation}
-B=T^{m_{1}}ST^{m_{2}}ST^{m_{3}}S\cdots ST^{m_{n}}\label{eq:ST elts}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+B=T^{m_{1}}ST^{m_{2}}ST^{m_{3}}S\cdots ST^{m_{n}}\label{eq:ST elts}
+\end{equation}
 
 \end_inset
 
@@ -3590,8 +3770,10 @@ B=T^{m_{1}}ST^{m_{2}}ST^{m_{3}}S\cdots ST^{m_{n}}\label{eq:ST elts}\end{equation
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}=\left(-I\right)^{a_{1}+a_{3}+\cdots-1}T\left(ST^{2}\right)^{a_{1}-1}T^{a_{2}}\left(ST^{2}\right)^{a_{3}}\cdots T^{a_{n}-1}\]
+\begin_inset Formula 
+\[
+L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}=\left(-I\right)^{a_{1}+a_{3}+\cdots-1}T\left(ST^{2}\right)^{a_{1}-1}T^{a_{2}}\left(ST^{2}\right)^{a_{3}}\cdots T^{a_{n}-1}
+\]
 
 \end_inset
 
@@ -3703,8 +3885,15 @@ Figure above shows a tree with p branches, made from a binary tree by equating
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -3795,8 +3984,15 @@ semi-commutative monoids
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -3982,12 +4178,16 @@ reference "eq:gr elts"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 g_{C}=\left[\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right]\quad\mbox{ and }\quad r_{C}=\left[\begin{array}{cc}
+1 & 1
+\end{array}\right]\quad\mbox{ and }\quad r_{C}=\left[\begin{array}{cc}
 -1 & 1\\
-0 & 1\end{array}\right]\]
+0 & 1
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -4031,10 +4231,13 @@ not
 \end_inset
 
  simply by adjoining a matrix 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 N=\left[\begin{array}{cc}
 1 & 0\\
-0 & -1\end{array}\right]\]
+0 & -1
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -4081,10 +4284,13 @@ reference "eq:general gr monoid elt"
 \end_inset
 
  may be written as 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \gamma_{C}=g_{C}^{a_{1}}r_{C}g_{C}^{a_{2}}r_{C}\cdots r_{C}g_{C}^{a_{n}}=\begin{cases}
 L^{a_{1}+1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n-1}}L^{a_{n}-1} & \;\mbox{ for }n\mbox{ odd}\\
-F\, R^{a_{1}+1}L^{a_{2}}\cdots R^{a_{n-1}}L^{a_{n}-1} & \;\mbox{ for }n\mbox{ even}\end{cases}\]
+F\, R^{a_{1}+1}L^{a_{2}}\cdots R^{a_{n-1}}L^{a_{n}-1} & \;\mbox{ for }n\mbox{ even}
+\end{cases}
+\]
 
 \end_inset
 
@@ -4106,10 +4312,13 @@ flip
 \end_inset
 
 , 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 F=VN=g_{C}^{-1}r_{C}g_{C}=\left[\begin{array}{cc}
 0 & 1\\
-1 & 0\end{array}\right]\]
+1 & 0
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -4171,8 +4380,10 @@ reference "eq:dyadic g"
 .
  The action is that of a linear affine transformation.
  A general affine transformation is a map 
-\begin_inset Formula \[
-x\mapsto ax+b\]
+\begin_inset Formula 
+\[
+x\mapsto ax+b
+\]
 
 \end_inset
 
@@ -4186,38 +4397,53 @@ x\mapsto ax+b\]
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \left[\begin{array}{c}
 1\\
-x\end{array}\right]\mapsto\left[\begin{array}{cc}
+x
+\end{array}\right]\mapsto\left[\begin{array}{cc}
 1 & 0\\
-b & a\end{array}\right]\left[\begin{array}{c}
+b & a
+\end{array}\right]\left[\begin{array}{c}
 1\\
-x\end{array}\right]=\left[\begin{array}{c}
+x
+\end{array}\right]=\left[\begin{array}{c}
 1\\
-ax+b\end{array}\right]\]
+ax+b
+\end{array}\right]
+\]
 
 \end_inset
 
  The affine representation is then 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \left[\begin{array}{c}
 1\\
-\gamma_{D}(x)\end{array}\right]=\gamma_{D}\cdot\left[\begin{array}{c}
+\gamma_{D}(x)
+\end{array}\right]=\gamma_{D}\cdot\left[\begin{array}{c}
 1\\
-x\end{array}\right]=g_{D}^{a_{1}}r_{D}g_{D}^{a_{2}}r_{D}\cdots r_{D}g_{D}^{a_{N}}\cdot\left[\begin{array}{c}
+x
+\end{array}\right]=g_{D}^{a_{1}}r_{D}g_{D}^{a_{2}}r_{D}\cdots r_{D}g_{D}^{a_{N}}\cdot\left[\begin{array}{c}
 1\\
-x\end{array}\right]\]
+x
+\end{array}\right]
+\]
 
 \end_inset
 
  where 
-\begin_inset Formula \begin{equation}
+\begin_inset Formula 
+\begin{equation}
 g_{D}=\left[\begin{array}{cc}
 1 & 0\\
-0 & \frac{1}{2}\end{array}\right]\quad\mbox{ and }\quad r_{D}=\left[\begin{array}{cc}
+0 & \frac{1}{2}
+\end{array}\right]\quad\mbox{ and }\quad r_{D}=\left[\begin{array}{cc}
 1 & 0\\
-1 & -1\end{array}\right]\label{eq:g_D matrix}\end{equation}
+1 & -1
+\end{array}\right]\label{eq:g_D matrix}
+\end{equation}
 
 \end_inset
 
@@ -4340,8 +4566,15 @@ The Takagi-Landsberg or Blancmange Curve.
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -4369,8 +4602,10 @@ key "Tak1903,Man88"
 
 .
  The curve may be constructed as a superposition of triangle waves
-\begin_inset Formula \begin{equation}
-t_{w}(x)=\sum_{n=0}^{\infty}w^{n}\tau^{n+1}(x)=\sum_{n=0}^{\infty}w^{n}\tau\left(2^{n}x\right)\label{eq:Takagi curve}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+t_{w}(x)=\sum_{n=0}^{\infty}w^{n}\tau^{n+1}(x)=\sum_{n=0}^{\infty}w^{n}\tau\left(2^{n}x\right)\label{eq:Takagi curve}
+\end{equation}
 
 \end_inset
 
@@ -4379,10 +4614,13 @@ t_{w}(x)=\sum_{n=0}^{\infty}w^{n}\tau^{n+1}(x)=\sum_{n=0}^{\infty}w^{n}\tau\left
 \end_inset
 
  is the triangle wave 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \tau(x)=\begin{cases}
 2x & \quad\mbox{ for }0\le x\le\frac{1}{2}\\
-2(1-x) & \quad\mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
+2(1-x) & \quad\mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
 
 \end_inset
 
@@ -4436,8 +4674,10 @@ Visually, the Takagi curve has a clear self-similarity.
 
 , understood to cut the interval in half, is to produce a scaled, sheared
  copy of itself:
-\begin_inset Formula \[
-\left[gt_{w}\right](x)=t_{w}\left(\frac{x}{2}\right)=x+wt_{w}(x)\]
+\begin_inset Formula 
+\[
+\left[gt_{w}\right](x)=t_{w}\left(\frac{x}{2}\right)=x+wt_{w}(x)
+\]
 
 \end_inset
 
@@ -4495,19 +4735,24 @@ Visually, the Takagi curve has a clear self-similarity.
 \end_inset
 
  as the basis vectors of the three dimensional space:
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 1\;\longmapsto\; e_{1} & = & \left[\begin{array}{c}
 1\\
 0\\
-0\end{array}\right]\\
+0
+\end{array}\right]\\
 x\;\longmapsto\; e_{2} & = & \left[\begin{array}{c}
 0\\
 1\\
-0\end{array}\right]\\
+0
+\end{array}\right]\\
 t_{w}(x)\;\longmapsto\; e_{3} & = & \left[\begin{array}{c}
 0\\
 0\\
-1\end{array}\right]\end{eqnarray*}
+1
+\end{array}\right]
+\end{eqnarray*}
 
 \end_inset
 
@@ -4520,14 +4765,18 @@ t_{w}(x)\;\longmapsto\; e_{3} & = & \left[\begin{array}{c}
 \end_inset
 
  are given by
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 g_{3}=\left[\begin{array}{ccc}
 1 & 0 & 0\\
 0 & \frac{1}{2} & 0\\
-0 & 1 & w\end{array}\right]\quad\mbox{ and }\quad r_{3}=\left[\begin{array}{ccc}
+0 & 1 & w
+\end{array}\right]\quad\mbox{ and }\quad r_{3}=\left[\begin{array}{ccc}
 1 & 0 & 0\\
 1 & -1 & 0\\
-0 & 0 & 1\end{array}\right]\]
+0 & 0 & 1
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -4717,8 +4966,10 @@ reference "eq:q-mark isomorph"
 \end_inset
 
  can be written in the shorter form
-\begin_inset Formula \[
-?(\gamma_{C}(x))=?(\gamma_{C}(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)\]
+\begin_inset Formula 
+\[
+?(\gamma_{C}(x))=?(\gamma_{C}(0))+\frac{\left(-1\right)^{N+1}}{\left(2^{a_{1}+a_{2}+...+a_{N}}\right)}?(x)
+\]
 
 \end_inset
 
@@ -4923,9 +5174,11 @@ Another possibility is to relax the second condition (and so also the third
 \end_inset
 
  be the maps 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 L(x) & = & x/3\\
-R(x) & = & (2+x)/3\end{eqnarray*}
+R(x) & = & (2+x)/3
+\end{eqnarray*}
 
 \end_inset
 
@@ -6893,11 +7146,14 @@ Given a finite partially ordered set, a Mobius function can be defined [xxx
  In particular, the Mobius function is well-defined on the infinite binary
  tree.
  It is given by:
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \mu\left(a,b\right)=\begin{cases}
 -1 & \;\mbox{ if }a\mbox{ is an immediate child of }b\\
 +1 & \;\mbox{ if }a=b\\
-0 & \;\mbox{ otherwise}\end{cases}\]
+0 & \;\mbox{ otherwise}
+\end{cases}
+\]
 
 \end_inset
 
@@ -7160,7 +7416,8 @@ Note that the modular group is isomorphic to the symplectic group, that
  of interval maps seems to exclude the symplectic case: the matrix 
 \begin_inset Formula $J=\left(\begin{array}{cc}
 0 & 1\\
--1 & 0\end{array}\right)$
+-1 & 0
+\end{array}\right)$
 \end_inset
 
  does not belong to 
@@ -7184,7 +7441,8 @@ Note that the modular group is isomorphic to the symplectic group, that
  The closest that one comes to to find 
 \begin_inset Formula $K=\left(\begin{array}{cc}
 1 & 0\\
-0 & 0\end{array}\right)$
+0 & 0
+\end{array}\right)$
 \end_inset
 
  which satisfies 
@@ -7304,14 +7562,18 @@ key "Far80,Jost02,Kat92"
 \begin_layout Standard
 The upper half-plane is given by the subset of the complex plane having
  positive imaginary values:
-\begin_inset Formula \[
-\mathbb{H}=\left\{ x+iy=z\in\mathbb{C}\,\vert\;\Im z=y>0\right\} \]
+\begin_inset Formula 
+\[
+\mathbb{H}=\left\{ x+iy=z\in\mathbb{C}\,\vert\;\Im z=y>0\right\} 
+\]
 
 \end_inset
 
  The hyperbolic metric on the upper-half-plane is given by 
-\begin_inset Formula \[
-ds^{2}=\frac{dx^{2}+dy^{2}}{y^{2}}\]
+\begin_inset Formula 
+\[
+ds^{2}=\frac{dx^{2}+dy^{2}}{y^{2}}
+\]
 
 \end_inset
 
@@ -7339,8 +7601,10 @@ reference "eq:Mobius xform"
 \end_inset
 
 ,
-\begin_inset Formula \[
-z\mapsto\frac{az+b}{cz+d}\quad\mbox{ and }\quad z^{\prime}\mapsto\frac{az^{\prime}+b}{cz^{\prime}+d}\]
+\begin_inset Formula 
+\[
+z\mapsto\frac{az+b}{cz+d}\quad\mbox{ and }\quad z^{\prime}\mapsto\frac{az^{\prime}+b}{cz^{\prime}+d}
+\]
 
 \end_inset
 
@@ -7371,8 +7635,10 @@ z\mapsto\frac{az+b}{cz+d}\quad\mbox{ and }\quad z^{\prime}\mapsto\frac{az^{\prim
 \begin_layout Standard
 The upper half-plane may be mapped to the unit disk by means of the transformati
 on 
-\begin_inset Formula \[
-w=e^{i\phi}\frac{z-z_{0}}{z-\overline{z}_{0}}\]
+\begin_inset Formula 
+\[
+w=e^{i\phi}\frac{z-z_{0}}{z-\overline{z}_{0}}
+\]
 
 \end_inset
 
@@ -7390,8 +7656,10 @@ w=e^{i\phi}\frac{z-z_{0}}{z-\overline{z}_{0}}\]
 \end_inset
 
  is mapped to the disk 
-\begin_inset Formula \[
-\mathbb{D}=\left\{ x+iy=z\in\mathbb{C}\,\vert\;|z|^{2}=x^{2}+y^{2}<1\right\} \]
+\begin_inset Formula 
+\[
+\mathbb{D}=\left\{ x+iy=z\in\mathbb{C}\,\vert\;|z|^{2}=x^{2}+y^{2}<1\right\} 
+\]
 
 \end_inset
 
@@ -7524,8 +7792,15 @@ created with misc/hyperbolic/tree.c and mod-tree.c
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -7595,12 +7870,16 @@ An algebraic construction of the embedding of the binary tree into the upper
 \end_inset
 
  given previously: 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 L=\left[\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right]\quad\mbox{ and }\quad R=\left[\begin{array}{cc}
+1 & 1
+\end{array}\right]\quad\mbox{ and }\quad R=\left[\begin{array}{cc}
 1 & 1\\
-0 & 1\end{array}\right]\]
+0 & 1
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -7770,10 +8049,13 @@ reference "eq:Mobius xform"
 
 .
  The infinite trailing string of zeros corresponds to the matrix 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 L^{\omega}=\left[\begin{array}{cc}
 1 & 0\\
-\omega & 1\end{array}\right]\]
+\omega & 1
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -7783,14 +8065,19 @@ L^{\omega}=\left[\begin{array}{cc}
 
 .
  Its not hard to see that the resulting product
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \left[\begin{array}{cc}
 a & b\\
-c & d\end{array}\right]\left[\begin{array}{cc}
+c & d
+\end{array}\right]\left[\begin{array}{cc}
 1 & 0\\
-\omega & 1\end{array}\right]=\left[\begin{array}{cc}
+\omega & 1
+\end{array}\right]=\left[\begin{array}{cc}
 a+b\omega & b\\
-c+d\omega & d\end{array}\right]\]
+c+d\omega & d
+\end{array}\right]
+\]
 
 \end_inset
 
@@ -7799,10 +8086,13 @@ c+d\omega & d\end{array}\right]\]
 \end_inset
 
  of the complex plane to 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 z\mapsto\left[\begin{array}{cc}
 a+b\omega & b\\
-c+d\omega & d\end{array}\right]:z=\frac{(a+b\omega)z+b}{(c+d\omega)z+d}=\frac{b}{d}\]
+c+d\omega & d
+\end{array}\right]:z=\frac{(a+b\omega)z+b}{(c+d\omega)z+d}=\frac{b}{d}
+\]
 
 \end_inset
 
@@ -7830,10 +8120,13 @@ c+d\omega & d\end{array}\right]:z=\frac{(a+b\omega)z+b}{(c+d\omega)z+d}=\frac{b}
  denote this mapping of the dyadic tree to the Stern-Brocot tree.
  Then, applying the analysis developed in previous sections, it is straightforwa
 rd to determine that 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \beta(x)=\begin{cases}
 ?^{-1}\left(2x\right) & \quad\mbox{ for }0\le x\le\frac{1}{2}\\
-\frac{1}{?^{-1}\left(2\left(1-x\right)\right)} & \quad\mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
+\frac{1}{?^{-1}\left(2\left(1-x\right)\right)} & \quad\mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
 
 \end_inset
 
@@ -7876,19 +8169,24 @@ reference "cap:The-Embedded-Tree"
 \end_inset
 
 given by 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \delta(x)=\begin{cases}
 \frac{-1}{?^{-1}\left(4x\right)} & \quad\mbox{ for }0\le x\le\frac{1}{4}\\
 -?^{-1}(2-4x) & \quad\mbox{ for }\frac{1}{4}\le x\le\frac{1}{2}\\
 ?^{-1}\left(4x-2\right) & \quad\mbox{ for }\frac{1}{2}\le x\le\frac{3}{4}\\
-\frac{1}{?^{-1}\left(4-4x\right)} & \quad\mbox{ for }\frac{3}{4}\le x\le1\end{cases}\]
+\frac{1}{?^{-1}\left(4-4x\right)} & \quad\mbox{ for }\frac{3}{4}\le x\le1
+\end{cases}
+\]
 
 \end_inset
 
  This unrooted dyadic tree may be embedded into the Poincaré disk using
  the mapping 
-\begin_inset Formula \[
-w=\frac{z-i}{z+i}\]
+\begin_inset Formula 
+\[
+w=\frac{z-i}{z+i}
+\]
 
 \end_inset
 
@@ -7922,16 +8220,20 @@ reference "cap:The-Embedded-Tree"
 .
  The mapping is not linear.
  A little bit of work shows that it is given by
-\begin_inset Formula \[
-\theta(x)=\arctan\frac{-2\delta(x)}{\left[\delta\left(x\right)\right]^{2}-1}\]
+\begin_inset Formula 
+\[
+\theta(x)=\arctan\frac{-2\delta(x)}{\left[\delta\left(x\right)\right]^{2}-1}
+\]
 
 \end_inset
 
 A remarkable feature of this mapping is that it roughly impersonates the
  inverse of the question mark function.
  An even closer cognate is given by 
-\begin_inset Formula \[
-\phi(x)=\arctan\frac{-4\delta(x)}{\left[\delta\left(x\right)\right]^{2}-4}\]
+\begin_inset Formula 
+\[
+\phi(x)=\arctan\frac{-4\delta(x)}{\left[\delta\left(x\right)\right]^{2}-4}
+\]
 
 \end_inset
 
@@ -8010,8 +8312,15 @@ created with misc/hyperbolic/perimeter.c and perimeter.gplot
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -8105,11 +8414,14 @@ reference "cap:Rotation-of-tree"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \rho_{D}(x)=\begin{cases}
 2x & \quad\mbox{ for }0\le x\le\frac{1}{4}\\
 x+\frac{1}{4} & \quad\mbox{ for }\frac{1}{4}\le x\le\frac{1}{2}\\
-\frac{x+1}{2} & \quad\mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
+\frac{x+1}{2} & \quad\mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
 
 \end_inset
 
@@ -8122,11 +8434,14 @@ x+\frac{1}{4} & \quad\mbox{ for }\frac{1}{4}\le x\le\frac{1}{2}\\
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \rho_{C}(x)=\begin{cases}
 \frac{x}{1-x} & \quad\mbox{ for }0\le x\le\frac{1}{3}\\
 \frac{4x-1}{5x-1} & \quad\mbox{ for }\frac{1}{3}\le x\le\frac{1}{2}\\
-\frac{1}{2-x} & \quad\mbox{ for }\frac{1}{2}\le x\le1\end{cases}\]
+\frac{1}{2-x} & \quad\mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
 
 \end_inset
 
@@ -8359,8 +8674,15 @@ Drawn with misc/hyperbolic/mod-tree.c as mod-tree 7 > m.eps; ggv m.eps &
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -8411,8 +8733,15 @@ A homotpically equivalent representation of fundamental domains, mapped
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -8588,8 +8917,15 @@ a
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
 
-\lyxline
+\end_inset
+
 
 \end_layout
 
@@ -8805,21 +9141,27 @@ What about the other elements of the modular group? Where do they fit in?
 \end_inset
 
  iff 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \left(\begin{array}{c}
 \vec{w}_{1}\\
-\vec{w}_{2}\end{array}\right)=\left(\begin{array}{cc}
+\vec{w}_{2}
+\end{array}\right)=\left(\begin{array}{cc}
 a & b\\
-c & d\end{array}\right)\left(\begin{array}{c}
+c & d
+\end{array}\right)\left(\begin{array}{c}
 \vec{v}_{1}\\
-\vec{v}_{2}\end{array}\right)\]
+\vec{v}_{2}
+\end{array}\right)
+\]
 
 \end_inset
 
  where 
 \begin_inset Formula $\left(\begin{array}{cc}
 a & b\\
-c & d\end{array}\right)\in SL(2,\mathbb{Z})$
+c & d
+\end{array}\right)\in SL(2,\mathbb{Z})$
 \end_inset
 
 .
@@ -8935,8 +9277,10 @@ natural
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]\]
+\begin_inset Formula 
+\[
+t_{w}\left(\frac{p}{2^{n}}\right)=w^{n-1}+\frac{1}{2}\left[t_{w}\left(\frac{p-1}{2^{n}}\right)+t_{w}\left(\frac{p+1}{2^{n}}\right)\right]
+\]
 
 \end_inset
 
@@ -9078,13 +9422,15 @@ There is also a well-known representation of the Stern-Brocot Tree on the
  have the values 
 \begin_inset Formula $L=\left(\begin{array}{cc}
 1 & 0\\
-1 & 1\end{array}\right)$
+1 & 1
+\end{array}\right)$
 \end_inset
 
  and 
 \begin_inset Formula $R=\left(\begin{array}{cc}
 1 & 1\\
-0 & 1\end{array}\right)$
+0 & 1
+\end{array}\right)$
 \end_inset
 
  and thus positions are given as elements of 
@@ -9117,8 +9463,10 @@ If there is a 3-adic or p-adic generalization of the Minkowski Question
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\sum_{k=1}\left(-1\right)^{k}\;3^{-(a_{1}+a_{2}+...+a_{k})}\]
+\begin_inset Formula 
+\[
+\sum_{k=1}\left(-1\right)^{k}\;3^{-(a_{1}+a_{2}+...+a_{k})}
+\]
 
 \end_inset
 
