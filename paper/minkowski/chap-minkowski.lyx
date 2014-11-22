@@ -2894,6 +2894,233 @@ Linear Groups and the Modular Group
 \end_layout
 
 \begin_layout Standard
+Up to this point, we've been considering the infinite rooted binary tree,
+ as shown in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:The-Dyadic-Tree"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:The-Farey-Tree"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cap:The-Stern-Brocot-Tree"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-Birthday-Tree"
+
+\end_inset
+
+.
+ and the moves 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ on this tree, that walk one step down the tree, to the left and right,
+ respectively.
+ These moves can be concatenated: condatenation is a natural product structure
+ on strings.
+ Can we move upwards? Of course we can: it sort-of makes sense to talk about
+ 
+\begin_inset Formula $L^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $R^{-1}$
+\end_inset
+
+ as upwards moves on the tree.
+ The inverse notation (the superscript -1) is suggestive and natural: 
+\begin_inset Formula $L^{-1}L=LL^{-1}=RR^{-1}=R^{-1}R=e$
+\end_inset
+
+ is the identity, as long as we are careful not to walk off the root of
+ the tree.
+ The is, we can almost understand 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ as generating a group, as long as we imagine ourselves starting somewhere
+ in the middle of the tree, and don't walk so far so as to hit the root.
+ Is it possible to do better? Is there a way of extending this structure
+ to a full group? The answer is yes, and its easy and straightforward, once
+ you see the way.
+\end_layout
+
+\begin_layout Standard
+First, recall the definition of a group.
+ It is a set of elements, with the following three properties:
+\end_layout
+
+\begin_layout Itemize
+A product is defined on the set, such that the product 
+\begin_inset Formula $ab$
+\end_inset
+
+ of any two elements 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ always exists.
+ This is called the 'closure' property.
+\end_layout
+
+\begin_layout Itemize
+There is a special, unique element, the identity element called 
+\begin_inset Formula $e$
+\end_inset
+
+, and having the property that 
+\begin_inset Formula $ae=ea=a$
+\end_inset
+
+ for any element 
+\begin_inset Formula $a.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Every element 
+\begin_inset Formula $a$
+\end_inset
+
+ has an inverse 
+\begin_inset Formula $a^{-1}$
+\end_inset
+
+.
+ The inverse is double-sided: 
+\begin_inset Formula $aa^{-1}=a^{-1}a=e$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The issue preventing the moves 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ from forming a group is that, as one moves upwards in the tree, one eventually
+ bumps into the root node.
+ To make this clear, lets recall the definition of an action.
+ An action is a pair 
+\begin_inset Formula $(G,X)$
+\end_inset
+
+ with 
+\begin_inset Formula $X$
+\end_inset
+
+ a set and 
+\begin_inset Formula $G$
+\end_inset
+
+ another set, possesing a product, and an identity element.
+ The definition does not require that 
+\begin_inset Formula $G$
+\end_inset
+
+ have inverses, but that's OK if it does.
+ If 
+\begin_inset Formula $G$
+\end_inset
+
+ is a group, then the action is called a 
+\emph on
+group action
+\emph default
+.
+ The action is defined with the following two statements:
+\end_layout
+
+\begin_layout Itemize
+Elements 
+\begin_inset Formula $g\in G$
+\end_inset
+
+ act on 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ such that 
+\begin_inset Formula $g\cdot x$
+\end_inset
+
+ is another element in 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $g\cdot x\in X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The action is associative, so that 
+\begin_inset Formula $g\cdot(h\cdot x)=(gh)\cdot x$
+\end_inset
+
+ for any two members 
+\begin_inset Formula $g,h\in X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+So, here 
+\begin_inset Formula $G$
+\end_inset
+
+ is the set of moves on the tree, and 
+\begin_inset Formula $X$
+\end_inset
+
+ is the tree itself.
+ The extension of moves on the tree to a full group can be acheived by simply
+ eliminating the root of the tree! This can be done by glusing a second
+ tree to the first, as showin in figure x.
+\end_layout
+
+\begin_layout Subsection
+Linear Groups 
+\end_layout
+
+\begin_layout Standard
 Throughout the development above, various two by two matrices appeared and
  were employed in curious ways.
  At this point, it is appropriate to review some of the properties of such
