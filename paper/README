@@ -2,6 +2,10 @@
 
 Contents:
 
+category:
+    Diary about category theory, model theory, proof theory, modal
+    logic.
+
 duplex:
     Duplex category (like the simplex, but for pairs)
 
@@ -11,3 +15,53 @@ entropy:
 
 
 conversion:
+
+cvs2git --dry-run   /home/linas/cvsroot
+cvs2git --blobfile blobby --dumpfile dumpy --username=linas /home/linas/cvsroot
+
+
+git init  --bare
+git fast-import --export-marks=../marky < ../blobby
+git fast-import --import-marks=../marky < ../dumpy
+
+
+git filter-branch --tree-filter 'rm -rf xacc' HEAD
+
+ever2 is -fractal
+
+viewvc
+
+--- /usr/lib/python2.7/dist-packages/cvs2svn_rcsparse/default.py.orig
+2014-11-21 12:18:02.880417060 -0600
++++ /usr/lib/python2.7/dist-packages/cvs2svn_rcsparse/default.py
+2014-11-21 12:26:59.226222392 -0600
+@@ -88,6 +88,10 @@ class _TokenStream:
+ 
+         # we stopped at the end of the buffer, so we may have a partial
+         # token
+         buf = self.rcsfile.read(self.CHUNK_SIZE)
++        if buf == '':
++          # signal EOF by returning None as the token
++          del self.buf   # so we fail if get() is called again
++          return None
+         lbuf = len(buf)
+         idx = end = 0
+ 
+/trunk/lib/vclib/ccvs/rcsparse/default.py
+
+--- a/trunk/lib/vclib/ccvs/rcsparse/default.py.orig
+2014-11-21 12:18:02.880417060 -0600
++++ b/trunk/lib/vclib/ccvs/rcsparse/default.py
+2014-11-21 12:26:59.226222392 -0600
+@@ -88,6 +88,10 @@ class _TokenStream:
+ 
+         # we stopped at the end of the buffer, so we may have a partial
+         # token
+         buf = self.rcsfile.read(self.CHUNK_SIZE)
++        if buf == '':
++          # signal EOF by returning None as the token
++          del self.buf   # so we fail if get() is called again
++          return None
+         lbuf = len(buf)
+         idx = end = 0
+ 

@@ -177,8 +177,20 @@ inline long double swap12_lin_mix (long double x)
 	long double r2 = ox - a2;
 
 	long double frac = 1.0L / 3.0L;
+
+#if 0
 	long double tmp = frac*a1 + (1.0L-frac)*a2;
 	a2 = frac*a2 + (1.0L-frac)*a1;
+	a1 = tmp;
+#endif
+#if 0
+	long double tmp = frac*frac*a1*a1 + (1.0L-frac)*(1.0L-frac)*a2*a2;
+	a2 = frac*frac*a2*a2 + (1.0L-frac)*(1.0L-frac)*a1*a1;
+	a2 = sqrtl(a2);
+	a1 = sqrtl(tmp);
+#endif
+	long double tmp = sqrtl(a1*a2);
+	a2 = tmp;
 	a1 = tmp;
 
 	r2 += a2;
