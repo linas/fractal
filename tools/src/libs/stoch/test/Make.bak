@@ -1,0 +1,44 @@
+############### Symbol Definitions ###################### 
+
+TOP = /src/tools
+INC = $(TOP)/inc
+LIB = $(TOP)/lib
+
+CC = /bin/fcc -f2 -O -I $(INC)
+
+all: testrand teststoch testgauss
+
+################## Dependencies and compile/link #########
+#
+# testrand
+#         (Dec 1988) excercises the random number generator
+testrand: testrand.c 
+	$(CC) -o testrand testrand.c 
+
+# teststoch
+# 	(Dec 1992) excercise gaussian noise generator
+#
+teststoch: teststoch.c $(LIB)/stoch.o $(INC)/stoch.h
+	$(CC) -o teststoch teststoch.c $(LIB)/stoch.o
+	rm teststoch.o
+
+
+# testgauss
+# 	(Dec 1992) excercise gaussian gaussal noise generator
+#
+testgauss: testgauss.c $(LIB)/stoch.o $(INC)/stoch.h
+	$(CC) -o testgauss testgauss.c $(LIB)/stoch.o
+	rm testgauss.o
+
+############################################################
+# The following generate the various spectral analysis of the noise data
+# Dec 1993
+
+var:
+	dvar gauss.g i g > lvar.g
+	dvar brown.b i g > lvar.b
+
+var.ps:
+	cat lvar.g | xgraph -t "Pure Gaussian Noise Scaling" -x "log10 sigma" -y "log10 RMS Derivative"
+	cat lvar.b | xgraph -t "Scaling of Brownian Motion" -x "log10 sigma" -y "log10 RMS Derivative"
+
