@@ -14,7 +14,9 @@ entropy:
 
 
 
-conversion:
+========================================================
+
+conversion from cvs to git 21 November 2014:
 
 cvs2git --dry-run   /home/linas/cvsroot
 cvs2git --blobfile blobby --dumpfile dumpy --username=linas /home/linas/cvsroot
@@ -25,11 +27,17 @@ git fast-import --export-marks=../marky < ../blobby
 git fast-import --import-marks=../marky < ../dumpy
 
 
-git filter-branch --tree-filter 'rm -rf xacc' HEAD
+NO DON"T DO THIS its slow:
+git filter-branch --tree-filter 'rm -rf xacc' HEAD  
 
-ever2 is -fractal
+YES DO THIS: its fast:
+git filter-branch --prune-empty --subdirectory-filter fractal master
 
-viewvc
+mv /home/linas/cvsroot ~/archive/backlot/cvs-2014-11-21/cvsroot
+mv converted git to ~/archive/backlot/git-2014-11-21
+
+=================================================================
+viewvc -- bugs
 
 --- /usr/lib/python2.7/dist-packages/cvs2svn_rcsparse/default.py.orig
 2014-11-21 12:18:02.880417060 -0600
