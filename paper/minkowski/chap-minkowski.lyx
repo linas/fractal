@@ -71,7 +71,7 @@ The Minkowski Question Mark,
 \end_inset
 
 
-\begin_inset Formula $GL(2,\mathbb{Z})$
+\begin_inset Formula $PSL(2,\mathbb{Z})$
 \end_inset
 
  and the Modular Group
@@ -101,7 +101,7 @@ Fractals and continued fractions seem to be deeply related in many ways.
  structure of the Cantor set.
  The infinite binary tree can be viewed as a certain subset of the modular
  group 
-\begin_inset Formula $GL\left(2,\mathbb{Z}\right)$
+\begin_inset Formula $PSL\left(2,\mathbb{Z}\right)$
 \end_inset
 
 .
@@ -118,7 +118,7 @@ In the process, this paper attempts to clarify the relationships between
  a cluster of inter-related ideas from number theory: those surrounding
  the modular group, elliptic curves and the Cantor Set.
  It has long been widely known that the modular group 
-\begin_inset Formula $GL\left(2,\mathbb{Z}\right)$
+\begin_inset Formula $PSL\left(2,\mathbb{Z}\right)$
 \end_inset
 
  (the general linear group of 2 by 2 matrices over the integers) is the
@@ -135,7 +135,7 @@ Likewise, the Cantor set plays an important role in many areas of mathematics;
  universal cover for compact metric spaces.
  Its symmetry properties are rarely discussed, but are in fact described
  by the very same dyadic subsets of 
-\begin_inset Formula $GL\left(2,\mathbb{Z}\right)$
+\begin_inset Formula $PSL\left(2,\mathbb{Z}\right)$
 \end_inset
 
 .
@@ -1340,7 +1340,7 @@ The proof requires the use of partial convergents of continued fractions.
 
 \end_inset
 
- that is, as the result of terminating the continued fraction at the 
+that is, as the result of terminating the continued fraction at the 
 \begin_inset Formula $k$
 \end_inset
 
@@ -1354,7 +1354,7 @@ The proof requires the use of partial convergents of continued fractions.
 
 \end_inset
 
- The numerator and denominator of the convergent obey well-known recursion
+The numerator and denominator of the convergent obey well-known recursion
  relations
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1383,15 +1383,15 @@ A walk to the left or to the right on the dyadic tree is equivalent to appending
 \begin_inset Formula 
 \[
 L\left([a_{1},a_{2},\cdots,a_{N}]\right)=\begin{cases}
-[a_{1},a_{2},\cdots,a_{N}+1] & \mbox{ for }N\mbox{ odd}\\
-{}[a_{1},a_{2},\cdots,a_{N}-1,2] & \mbox{ for }N\mbox{ even }
+[a_{1},a_{2},\cdots,a_{N}+1] & \mbox{ for }N\mbox{ odd}\\{}
+[a_{1},a_{2},\cdots,a_{N}-1,2] & \mbox{ for }N\mbox{ even }
 \end{cases}
 \]
 
 \end_inset
 
- whereas the right move is defined similarly, with the role of even and
- odd reversed.
+whereas the right move is defined similarly, with the role of even and odd
+ reversed.
  That is, a left move either increases the trailing entry in the continued
  fraction by one, or it inserts a comma, to start a new entry for the continued
  fraction.
@@ -1428,7 +1428,7 @@ Let
 
 \end_inset
 
- be the convergent of the (left or right) subnode.
+be the convergent of the (left or right) subnode.
  One easily finds that 
 \begin_inset Formula $r_{N}=p_{N}+p_{N-1}$
 \end_inset
@@ -2414,8 +2414,8 @@ g_{D} & :\mathbb{R}_{D} & \,\longrightarrow\mathbb{R}_{D}\\
 
 \end_inset
 
- when acting on the set of dyadic numbers, whereas as this same element
- has the representation 
+when acting on the set of dyadic numbers, whereas as this same element has
+ the representation 
 \begin_inset Formula 
 \begin{eqnarray*}
 g_{C} & :\mathbb{R}_{C} & \,\longrightarrow\mathbb{R}_{C}\\
@@ -2424,7 +2424,7 @@ g_{C} & :\mathbb{R}_{C} & \,\longrightarrow\mathbb{R}_{C}\\
 
 \end_inset
 
- when acting on the set of continued fractions.
+when acting on the set of continued fractions.
  The other generator, 
 \begin_inset Formula $r$
 \end_inset
@@ -2923,8 +2923,7 @@ reference "fig:The-Birthday-Tree"
 
 \end_inset
 
-.
- and the moves 
+, and the moves 
 \begin_inset Formula $L$
 \end_inset
 
@@ -2934,7 +2933,7 @@ reference "fig:The-Birthday-Tree"
 
  on this tree, that walk one step down the tree, to the left and right,
  respectively.
- These moves can be concatenated: condatenation is a natural product structure
+ These moves can be concatenated: concatenation is a natural product structure
  on strings.
  Can we move upwards? Of course we can: it sort-of makes sense to talk about
  
@@ -2946,13 +2945,14 @@ reference "fig:The-Birthday-Tree"
 \end_inset
 
  as upwards moves on the tree.
- The inverse notation (the superscript -1) is suggestive and natural: 
+ The inverse notation (the superscript -1) is suggestive and natural, as
+ these are inverse moves: 
 \begin_inset Formula $L^{-1}L=LL^{-1}=RR^{-1}=R^{-1}R=e$
 \end_inset
 
  is the identity, as long as we are careful not to walk off the root of
  the tree.
- The is, we can almost understand 
+ That is, we can almost understand 
 \begin_inset Formula $L$
 \end_inset
 
@@ -2963,8 +2963,8 @@ reference "fig:The-Birthday-Tree"
  as generating a group, as long as we imagine ourselves starting somewhere
  in the middle of the tree, and don't walk so far so as to hit the root.
  Is it possible to do better? Is there a way of extending this structure
- to a full group? The answer is yes, and its easy and straightforward, once
- you see the way.
+ so that its a real, full-fledged group? The answer is yes, and its easy
+ and straightforward, once you see the way.
 \end_layout
 
 \begin_layout Standard
@@ -2973,7 +2973,7 @@ First, recall the definition of a group.
 \end_layout
 
 \begin_layout Itemize
-A product is defined on the set, such that the product 
+An associative product is defined on the set, such that the product 
 \begin_inset Formula $ab$
 \end_inset
 
@@ -2987,6 +2987,11 @@ A product is defined on the set, such that the product
 
  always exists.
  This is called the 'closure' property.
+ Associativity requies that 
+\begin_inset Formula $(ab)c=a(bc)=abc$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -2994,7 +2999,7 @@ There is a special, unique element, the identity element called
 \begin_inset Formula $e$
 \end_inset
 
-, and having the property that 
+, having the property that 
 \begin_inset Formula $ae=ea=a$
 \end_inset
 
@@ -3033,7 +3038,7 @@ The issue preventing the moves
 
  from forming a group is that, as one moves upwards in the tree, one eventually
  bumps into the root node.
- To make this clear, lets recall the definition of an action.
+ To make this clear, let's recall the definition of an action.
  An action is a pair 
 \begin_inset Formula $(G,X)$
 \end_inset
@@ -3046,7 +3051,7 @@ The issue preventing the moves
 \begin_inset Formula $G$
 \end_inset
 
- another set, possesing a product, and an identity element.
+ another set, possesing an associative product, and an identity element.
  The definition does not require that 
 \begin_inset Formula $G$
 \end_inset
@@ -3102,7 +3107,7 @@ The action is associative, so that
 \end_layout
 
 \begin_layout Standard
-So, here 
+So, here, 
 \begin_inset Formula $G$
 \end_inset
 
@@ -3113,7 +3118,7 @@ So, here
  is the tree itself.
  The extension of moves on the tree to a full group can be acheived by simply
  eliminating the root of the tree! This can be done by glueing a second
- tree to the first, as showin in figure 
+ tree to the first, as shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Unrooted-Tree"
@@ -3146,7 +3151,10 @@ name "fig:Unrooted-Tree"
 \end_inset
 
 
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace defskip
 \end_inset
 
 
@@ -3168,8 +3176,10 @@ name "fig:Unrooted-Tree"
 
 \begin_layout Standard
 In the right-hand tree, the central edge is marked with an arrowhead.
- This singles out a special edge: it is a device to keep track of one's
- position in the tree, as well as one's orientation.
+ This singles it out as a special edge: the arrow is a device to keep track
+ of one's position in the tree, as well as one's orientation, as one moves
+ about.
+ Without it, things can get confusing.
  The left hand tree shows the effect of the moves 
 \begin_inset Formula $e$
 \end_inset
@@ -3237,29 +3247,44 @@ Examinging this figure, the moves
 
  from being applied.
  Thus, naively, it would seem that this simple trick allows the action of
- the free group in two letters to be defined on the unroot infinite tree.
- However, something funny happens when one starts considering a concatenation
- of moves.
+ the free group 
+\begin_inset Formula $F_{\{L,R\}}$
+\end_inset
+
+ in two letters 
+\begin_inset Formula $\{L,R\}$
+\end_inset
+
+ to be defined on the unrooted infinite tree.
+ However, something funny happens when one starts considering some non-trivial
+ concatenations of moves.
  Consider, for example, the sequence of moves 
 \begin_inset Formula $LR^{-1}L$
 \end_inset
 
-, illustrated in figure x.
+, illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:A-three-point-turn"
+
+\end_inset
+
+.
  This is essentially the same as the three-point turn performed in an automobile
-: you pull forward 
+: one pulls forward 
 \begin_inset Formula $L$
 \end_inset
 
-, turning, you back up 
+, turning, then back up 
 \begin_inset Formula $R^{-1}$
 \end_inset
 
-, turning, you pull forward 
+, turning, and again pull forward 
 \begin_inset Formula $L$
 \end_inset
 
-, turning.
- The net result is that the care has been turned by 180 degrees!
+, straightening.
+ The net result is that the car has been turned by 180 degrees!
 \end_layout
 
 \begin_layout Standard
@@ -3267,10 +3292,6 @@ Examinging this figure, the moves
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -3289,10 +3310,16 @@ name "fig:A-three-point-turn"
 \end_inset
 
 
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace defskip
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename uturn.svg
 
@@ -3307,7 +3334,47 @@ name "fig:A-three-point-turn"
 
 \end_inset
 
+Of course, two such turns, back to back, rotate the car back into it's original
+ position and direction.
+ Thus, we conclude that, for the unrooted tree 
+\begin_inset Formula $t$
+\end_inset
 
+, that there is a group action that is the identity 
+\begin_inset Formula $LR^{-1}L^{2}R^{-1}Lt=t$
+\end_inset
+
+.
+ We may interpret this formula in two ways: either we have the free group
+ in two letters acting in an unfaithful, non-unique way on the tree, or
+ we can think of the tree as imposing a condition on the group: that instead,
+ we should look for a group that acts effectively.
+ That is, we should impose the group identity 
+\begin_inset Formula 
+\begin{equation}
+LR^{-1}L^{2}R^{-1}L=e\label{eq:grp identity}
+\end{equation}
+
+\end_inset
+
+as a condition.
+ In the next section, we shall see that this defines the modular group 
+\begin_inset Formula $PSL(2,\mathbf{Z})$
+\end_inset
+
+.
+ That is, we have that 
+\begin_inset Formula 
+\[
+F_{\{L,R\}}/\{LR^{-1}L^{2}R^{-1}L=e\}=PSL(2,\mathbf{Z})
+\]
+
+\end_inset
+
+This underlying identity provides the connection between the modular group,
+ which is well-known in number theory and the theory of elliptical equations,
+ and the period-doubling fractals.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -3317,9 +3384,9 @@ Linear Groups
 \begin_layout Standard
 Throughout the development above, various two by two matrices appeared and
  were employed in curious ways.
- At this point, it is appropriate to review some of the properties of such
- matrices; they play many important roles in physics and mathematics, and
- so serve to tie the Minkowski question mark into the broader outlines.
+ It is now appropriate to review some of the properties of such matrices;
+ they play many important roles in physics and mathematics, and so serve
+ to tie the Minkowski question mark into these broader outlines.
  
 \end_layout
 
