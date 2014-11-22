@@ -3377,6 +3377,56 @@ This underlying identity provides the connection between the modular group,
  
 \end_layout
 
+\begin_layout Standard
+Before exploring the group structure more fully, its worth doing a quick
+ calculation.
+ Choosing the matrix representation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+L=\left[\begin{array}{cc}
+1 & 0\\
+1 & 1
+\end{array}\right]\quad\mbox{ and }\quad R=\left[\begin{array}{cc}
+1 & 1\\
+0 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+one can quickly verify that 
+\begin_inset Formula $LR^{-1}L^{2}R^{-1}L=-I$
+\end_inset
+
+ where 
+\begin_inset Formula $I$
+\end_inset
+
+ is the identity matrix.
+ It is the appearence of this minus sign that makes the resulting group
+ 
+\begin_inset Formula $PSL(2,\mathbf{Z})$
+\end_inset
+
+ and not something else: we have to identify the matrices 
+\begin_inset Formula $-I$
+\end_inset
+
+ and 
+\begin_inset Formula $+I$
+\end_inset
+
+ both with the group element 
+\begin_inset Formula $e$
+\end_inset
+
+, if we are to get the symmetries of the unrooted infinite binary tree.
+ 
+\end_layout
+
 \begin_layout Subsection
 Linear Groups 
 \end_layout
@@ -3692,7 +3742,7 @@ e_{1}=\left[\begin{array}{c}
 
 \end_inset
 
- in that the linear combinations 
+in that the linear combinations 
 \begin_inset Formula $v=me_{1}+ne_{2}$
 \end_inset
 
@@ -3706,11 +3756,19 @@ e_{1}=\left[\begin{array}{c}
 \end_inset
 
  will also generate the lattice.
- The general case is given is described by any matrix 
+ The general case is invariant under transformation by any matrix 
 \begin_inset Formula $A\in SL(2,\mathbb{Z})$
 \end_inset
 
-, and so the two vectors 
+; that is, if the two vectors 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{2}$
+\end_inset
+
+ generate the grid, then so do 
 \begin_inset Formula $Ae_{1}$
 \end_inset
 
@@ -3718,9 +3776,9 @@ e_{1}=\left[\begin{array}{c}
 \begin_inset Formula $Ae_{2}$
 \end_inset
 
- are also generators of the grid.
- Conversely, any pair of generators of the grid can be expressed as a matrix
- in 
+.
+ Conversely, any pair of generators of the grid can be expressed as a pair
+ of columns in a matrix in 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset
 
@@ -3763,14 +3821,14 @@ reference "eq:matrix"
 \end_layout
 
 \begin_layout Standard
-The connection to the Minkowski question mark becomes visible when one tries
+The connection to the Minkowski Question Mark becomes visible when one tries
  to enumerate all of the possible elements of 
 \begin_inset Formula $PSL(2,\mathbb{Z})$
 \end_inset
 
 .
  There are several ways in which this is commonly done.
- One is to find that 
+ One way is to discover that 
 \begin_inset Formula $PSL(2,\mathbb{Z})$
 \end_inset
 
@@ -3797,7 +3855,7 @@ V=\left[\begin{array}{cc}
 
 \end_inset
 
- which have the property that 
+which have the property that 
 \begin_inset Formula $V^{2}=P^{3}=-I$
 \end_inset
 
@@ -3814,7 +3872,7 @@ A=\left(-I\right)^{r}P^{p_{0}}VP^{p_{1}}VP^{p_{3}}V\cdots VP^{p_{n}}\label{eq:VP
 
 \end_inset
 
- for some finite integer 
+for some finite integer 
 \begin_inset Formula $n$
 \end_inset
 
@@ -3898,7 +3956,7 @@ L=V^{-1}P^{2}=-VP^{2}=\left[\begin{array}{cc}
 
 \end_inset
 
- The next section will show that these correspond to left and right moves
+The next section will show that these correspond to left and right moves
  on the binary tree, from which they earn their name.
  Using the definitions of 
 \begin_inset Formula $L$
@@ -3909,7 +3967,7 @@ L=V^{-1}P^{2}=-VP^{2}=\left[\begin{array}{cc}
 \end_inset
 
  in the previous expression, it is clear that every element 
-\begin_inset Formula $A$
+\begin_inset Formula $A\in SL(2,\mathbb{Z})$
 \end_inset
 
  can be written uniquely as 
@@ -3920,7 +3978,7 @@ A=\left(-I\right)^{s}\left(R^{-1}L\right)^{p_{0}}L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\c
 
 \end_inset
 
- for finite 
+for finite 
 \begin_inset Formula $n$
 \end_inset
 
@@ -3980,7 +4038,7 @@ A=\left(-I\right)^{r+a_{1}+\cdots+a_{n}}P^{p_{0}} & \underbrace{VP^{2}VP^{2}\cdo
 
 \end_inset
 
- Clearly, the elements of 
+The above discussion shows that the elements of 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset
 
@@ -4064,9 +4122,10 @@ The identity
  This is reminiscent of the identities defining the braid group.
  The braid group describes what happens when one inter-twines a set of strands,
  that is, when one braids them.
- The braid group in a certain sense generalizes the permutation group, in
- that, instead of just permuting objects, one tracks their histories as
- well, by attaching strings to show where they came from.
+ The braid group, in a certain sense, generalizes the permutation group,
+ in that, instead of just permuting objects, one tracks their histories
+ as well, by attaching world-line paths or strings to show where they came
+ from.
  The general braid group 
 \begin_inset Formula $B_{n}$
 \end_inset
@@ -4257,7 +4316,7 @@ B=T^{m_{1}}ST^{m_{2}}ST^{m_{3}}S\cdots ST^{m_{n}}\label{eq:ST elts}
 
 \end_inset
 
- for some integers 
+for some integers 
 \begin_inset Formula $m_{k}$
 \end_inset
 
