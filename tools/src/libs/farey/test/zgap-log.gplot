@@ -1,0 +1,17 @@
+
+# plot the convergence properties
+# set term x11
+# set term pbm
+set term gif size 400,300
+set out 'zgap-log.gif'
+set data style linespoints 
+set title "Continued Z Fraction Gaps"
+set key left
+# set xrange [0:12] 
+# set xrange [] reverse
+set xlabel "log (x)"
+set ylabel "log (gap size)"
+# set format y2 "%d"
+plot "zgap-half.dat" using (log($1)):(log($2)) 			\
+     title "gaps"				\
+
