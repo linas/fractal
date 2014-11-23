@@ -28,7 +28,10 @@ void init(size_t len)
 	// for (i=0; i<len; i++) pot[i] = divisor(i);
 	// for (i=0; i<len; i++) pot[i] = sigma(i, 1);
 	// for (i=0; i<len; i++) pot[i] = sigma(i, 2);
-	for (i=0; i<len; i++) pot[i] = sigma(i, 3);
+	// for (i=0; i<len; i++) pot[i] = sigma(i, 3);
+	// for (i=0; i<len; i++) pot[i] = sigmalog(i, 2.0);
+	for (i=0; i<len; i++) pot[i] = sigmalog(i, 1.0);
+	// for (i=0; i<len; i++) pot[i] = sigmaf(i, 1.2);
 	// for (i=0; i<len; i++) printf("potential is %zd %Lf\n", i, pot[i]);
 
    wavefn[len-2] = 0.001;
