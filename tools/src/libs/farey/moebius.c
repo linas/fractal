@@ -2,11 +2,12 @@
  * moebius.c
  * 
  * Return the moebius function of an integer.
- * not intended for large integers, works only for small integers
- * due to poor-mans factorization algo.
+ * Not intended for large integers, works only for small integers
+ * due to poor-man's factorization algo.
  *
- * Linas Vepstas Jaunuary 2005
+ * Linas Vepstas January 2005
  * Updates July 2006
+ * Updates November 2014
  */
 
 #include <math.h>
@@ -147,6 +148,36 @@ int sigma (int n, int a)
 		int ia;
 		for (ia=0; ia<a; ia++) dp *= d;
 		acc += dp;
+	}
+
+	return acc;
+}
+
+/* same as above, but for float-point power */
+long double sigmaf (int n, long double a)
+{
+	long double acc = 0;
+	int d;
+
+	for (d=1; d<=n; d++)
+	{
+		if (n%d) continue;
+		acc += powl(d, a);
+	}
+
+	return acc;
+}
+
+/* same as above, but includes a log */
+long double sigmalog (int n, long double a)
+{
+	long double acc = 0;
+	int d;
+
+	for (d=1; d<=n; d++)
+	{
+		if (n%d) continue;
+		acc += powl(d, a) * logl(d);
 	}
 
 	return acc;

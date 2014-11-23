@@ -1,5 +1,5 @@
 /*
- * modular.C
+ * modular.c
  *
  * FUNCTION:
  * assorted modular functions.

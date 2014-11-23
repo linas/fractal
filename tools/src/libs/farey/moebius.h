@@ -21,8 +21,17 @@ int divisor (long long int n);
 /** Sigma arithmetic series, equals divisor arith series for a=0 
  *  Computes the divisors of n, raises each to the a'th power, and
  *  returns thier sum.
+ *  sigmaf is similar, but allows any floating-point exponent.
  */
 int sigma (int n, int a);
+long double sigmaf (int n, long double a);
+
+/** Much like the sigma arithmetic series, except that an extra
+ *  log factor is included.   That is, this:
+ *  Computes the divisors of n, raises each to the a'th power, 
+ *  multiplies the last by logn, and then returns thier sum.
+ */
+long double sigmalog (int n, long double a);
 
 /** classic Moebius mu function */
 int moebius_mu (int n);

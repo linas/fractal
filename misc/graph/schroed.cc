@@ -24,7 +24,11 @@ void init(size_t len)
 	wavefn = (long double complex *) malloc(len * sizeof(long double complex));
 	pot = (long double *) malloc(len * sizeof(long double));
 	for (i=0; i<len; i++) wavefn[i] = 0.0;
-	for (i=0; i<len; i++) pot[i] = totient_phi(i);
+	// for (i=0; i<len; i++) pot[i] = totient_phi(i);
+	// for (i=0; i<len; i++) pot[i] = divisor(i);
+	// for (i=0; i<len; i++) pot[i] = sigma(i, 1);
+	// for (i=0; i<len; i++) pot[i] = sigma(i, 2);
+	for (i=0; i<len; i++) pot[i] = sigma(i, 3);
 	// for (i=0; i<len; i++) printf("potential is %zd %Lf\n", i, pot[i]);
 
    wavefn[len-2] = 0.001;
@@ -57,7 +61,8 @@ void solve(size_t len, long double energy)
 // Well, if it sbessel-like, then lets go with that idea...
 void bessy(size_t len, double maxen)
 {
-	printf("#\n#Bessel-like totient solution\n#\n");
+	// printf("#\n#Bessel-like totient solution\n#\n");
+	printf("#\n#Bessel-like divisor solution\n#\n");
 	printf("# Energy  b0	b1	b2	b3	b4	b5\n");
 	double en=0.0;
 	double delta = maxen / 1000.0;

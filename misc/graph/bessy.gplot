@@ -3,21 +3,45 @@
 # set term png small color
 # set term png small
 set term png medium size 1024,768
-set out 'bessy.png'
 # set term epslatex 
 # set out 'series.eps'
 
-# set data style linespoints
-set style data lines
 # set data style points
+# set data style linespoints
 
-# set title "Totient Series angular plot"
-set title "Toitient Bessel plot"
-set xlabel "energy"
+#######################################################
+# set out 'bessy.png'
+# set style data lines
+# 
+# set title "Toitient Bessel-like plot"
+# set xlabel "Energy"
+# set ylabel "value"
+# plot "totient.dat" using 1:2 lw 2 title "b0", \
+#      "totient.dat" using 1:3 lw 2 title "b1", \
+#      "totient.dat" using 1:4 lw 2 title "b2", \
+#      "totient.dat" using 1:5 lw 2 title "b3"
+
+#######################################################
+# set out 'totient-phase.png'
+# set style data lines
+# 
+# set title "Toitient Bessel-like phase plot"
+# set xlabel "b0"
+# set ylabel "b1"
+# plot "totient.dat" using 2:3 lw 2 title "phase"
+
+#######################################################
+set out 'divisor.png'
+set style data lines
+
+set title "Divisor func Bessel-like phase plot"
+set xlabel "Energy"
 set ylabel "value"
-plot "bessy.dat" using 1:2 lw 2 title "b0", \
-     "bessy.dat" using 1:3 lw 2 title "b1", \
-     "bessy.dat" using 1:4 lw 2 title "b2"
+plot "divisor.dat" using 1:2 lw 2 title "b0", \
+     "divisor.dat" using 1:3 lw 2 title "b1", \
+     "divisor.dat" using 1:4 lw 2 title "b2", \
+     "divisor.dat" using 1:5 lw 2 title "b3"
+
 
 # set yrange [0:]
 
