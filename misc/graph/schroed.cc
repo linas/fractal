@@ -16,6 +16,8 @@
 long double *wavefn;
 long double *pot;
 
+int enscale = 1;
+
 /// The continuum limit is obtained for very small omega.
 /// Note that, for the simple harmonic oscillator, the length scale
 /// is given by sqrt(mass*omega). Here we take mass=1.0
@@ -35,9 +37,13 @@ void init(size_t len, long double omega)
 	size_t i;
 
 	// Simple harmonic oscillator!
-	for (i=0; i<len; i++) pot[i] = 0.5L * i*i * omega*omega;
+	// enscale = 1;  // for the sho
+	// for (i=0; i<len; i++) pot[i] = 0.5L * i*i * omega*omega;
 
-	// for (i=0; i<len; i++) pot[i] = totient_phi(i);
+	enscale = 0;  // disable -- the number-theortic functions are scale-free
+
+	// Euler totient function
+	for (i=0; i<len; i++) pot[i] = totient_phi(i);
 	// for (i=0; i<len; i++) pot[i] = divisor(i);
 	// for (i=0; i<len; i++) pot[i] = sigma(i, 1);
 	// for (i=0; i<len; i++) pot[i] = sigma(i, 2);
@@ -78,10 +84,10 @@ long double solve(size_t len, long double omega, long double energy)
 {
 	// Rescale to work in grid units.  This is transparent to the user,
 	// who specifies only the 'physical' energy.
-	energy *= omega;
+	for (int j = 0; j<enscale; j++) energy *= omega;
 
 	// Laplacian is -psi(i-1) + 2*psi(i) - psi(i+1)
-	// Schreodinger eqn is 1/2 Lap(psi) + V(i) psi = E psi
+	// Schroedinger eqn is 1/2 Lap(psi) + V(i) psi = E psi
    wavefn[len-1] = 0.0L;
    wavefn[len-2] = 1.0e-100L;
 	size_t i;
