@@ -3,13 +3,13 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-all: schroed
+all: bessy
 
-schroed: schroed.o
+bessy: schroed.o bessy.o
 
 
 .o:
-	cc -o $* $< -L$(LIB) -lfunc -lm -lstdc++
+	cc -o $* $^ -L$(LIB) -lfunc -lm -lstdc++
 
 .cc.o:
 	cc -c -O2 -I $(INC) $<

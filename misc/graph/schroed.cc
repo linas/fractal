@@ -1,17 +1,19 @@
 //
 // schroed.cc
 //
-// Solve schroedinger eqn ion a 1D lattice.
+// Solve schroedinger eqn in a 1D lattice.  Focus on number-theoretic
+// potentials.
 //
 // Linas Vepstas 23 Nov 2014
 //
-#include <complex.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "moebius.h"
 #include "totient.h"
+
+#include "schroed.h"
 
 long double *wavefn;
 long double *pot;
@@ -55,7 +57,7 @@ void init(size_t len, long double omega)
 	// for (i=0; i<len; i++) printf("potential is %zd %Lf\n", i, pot[i]);
 }
 
-/// Solve teh schroedinger eqn.
+/// Solve the schroedinger eqn.
 ///
 /// 'len' is the number of grid points. It should be large enough so
 /// that the wave-function starts out deep in the classically-forbidden
@@ -116,38 +118,3 @@ long double solve(size_t len, long double omega, long double energy)
 	return discon;
 }
 
-// Well, if its bessel-like, then lets go with that idea...
-void bessy(size_t len, double omega, double maxen)
-{
-	// printf("#\n#Bessel-like totient solution\n#\n");
-	printf("#\n# Divisor solution\n#\n");
-	printf("# Energy  discontinuity b0	b1	b2	b3	b4	b5\n");
-	double en=0.0;
-	double delta = maxen / 1000.0;
-	for (en=0.0; en<maxen; en+=delta)
-	{
-		long double discon = solve(len, omega, en);
-
-		printf("%g	%Lg	%Lg	%Lg	%Lg	%Lg	%Lg	%Lg\n",
-			en, discon, wavefn[0], wavefn[1], wavefn[2], wavefn[3],
-			wavefn[4], wavefn[5]);
-	}
-}
-
-main(int argc, char* argv[])
-{
-	if (argc < 3)
-	{
-		fprintf(stderr, "Usage: %s <num-grid-pts> <max-energy> <omega>\n", argv[0]);
-		exit (1);
-	}
-	int len = atoi(argv[1]);
-
-	double maxen = atof(argv[2]);
-	double omega = atof(argv[3]);
-
-	init(len, omega);
-
-   // solve(len, maxen);
-	bessy(len, omega, maxen);
-}
