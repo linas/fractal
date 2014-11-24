@@ -38,7 +38,7 @@ void init(size_t len, long double omega)
 	// grid points to extend deep into the classically forbidden region,
 	// else the solver goes crazy.
 	len /= sqrt(omega);
-	// printf("# Length=%zd omega=%Lg\n", len, omega);
+	printf("# Length=%zd omega=%Lg\n", len, omega);
 
 	wavefn = (long double *) malloc(len * sizeof(long double));
 	pot = (long double *) malloc(len * sizeof(long double));
@@ -52,7 +52,7 @@ void init(size_t len, long double omega)
 	enscale = 0;  // disable -- the number-theortic functions are scale-free
 
 	// Euler totient function
-	// for (i=0; i<len; i++) pot[i] = totient_phi(i);
+	for (i=0; i<len; i++) pot[i] = totient_phi(i);
 
 	// Divisor function
 	// for (i=0; i<len; i++) pot[i] = divisor(i);
@@ -126,8 +126,14 @@ long double solve(size_t len, long double omega, long double energy)
 
 	for (i=0; i<len; i++) wavefn[i] *= acc;
 
+#if REFLECT_AT_ZERO
 	long double discon = fabsl ((1.0L + pot[0] - energy) * wavefn[0] - 0.5 * wavefn[1]);
 	discon -= fabsl (0.5 * wavefn[1]);
+#else
+
+	long double discon = fabsl ((1.0L + pot[1] - energy) * wavefn[1] - 0.5 * wavefn[2]);
+	discon -= fabsl (0.5 * wavefn[2]);
+#endif
 	// discon = fabsl(discon);
 #if 0
 	for (i=0; i<len; i++) 

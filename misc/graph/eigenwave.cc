@@ -17,9 +17,9 @@
 long double find_eig(size_t len, long double omega, long double lo, long double hi)
 {
 	long double dilo = solve(len, omega, lo);
-	// dilo = wavefn[0];
+	dilo = wavefn[0];
 	long double dihi = solve(len, omega, hi);
-	// dihi = wavefn[0];
+	dihi = wavefn[0];
 
 	if (fabsl(dilo) < 1.0e-17) return lo;
 	if (fabsl(dihi) < 1.0e-17) return hi;
@@ -29,9 +29,9 @@ long double find_eig(size_t len, long double omega, long double lo, long double 
 
 	long double xmid = lo - (dilo / slope);
 	long double ymid = solve(len, omega, xmid);
-	// ymid = wavefn[0];
+	ymid = wavefn[0];
 
-#if 0
+#if 1
 	printf("# duuude lo %Lg %Lg\n", lo, dilo);
 	printf("# duuude mid %Lg %Lg\n", xmid, ymid);
 	printf("# duuude hi %Lg %Lg\n#\n", hi, dihi);
