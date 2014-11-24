@@ -10,3 +10,6 @@ extern long double *wavefn;
 
 void init(size_t len, long double omega);
 long double solve(size_t len, long double omega, long double energy);
+
+void set_pot(size_t len, long double *p);
+

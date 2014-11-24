@@ -15,8 +15,8 @@
 
 #include "schroed.h"
 
-long double *wavefn;
-long double *pot;
+long double *wavefn = NULL;
+long double *pot = NULL;
 
 int enscale = 1;
 
@@ -38,7 +38,7 @@ void init(size_t len, long double omega)
 	// grid points to extend deep into the classically forbidden region,
 	// else the solver goes crazy.
 	len /= sqrt(omega);
-	printf("# Length=%zd omega=%Lg\n", len, omega);
+	// printf("# Length=%zd omega=%Lg\n", len, omega);
 
 	wavefn = (long double *) malloc(len * sizeof(long double));
 	pot = (long double *) malloc(len * sizeof(long double));
@@ -61,12 +61,19 @@ void init(size_t len, long double omega)
 	// Sigma function (== divisor for power=0)
 	// for (i=0; i<len; i++) pot[i] = sigma(i, 1);
 	// for (i=0; i<len; i++) pot[i] = sigma(i, 2);
-	for (i=0; i<len; i++) pot[i] = sigma(i, 3);
+	// for (i=0; i<len; i++) pot[i] = sigma(i, 3);
 	// for (i=0; i<len; i++) pot[i] = sigmalog(i, 2.0);
 	// for (i=0; i<len; i++) pot[i] = sigmalog(i, 1.0);
 	// for (i=0; i<len; i++) pot[i] = sigmaf(i, 1.2);
+	// for (i=0; i<len; i++) pot[i] = sigmaf(i, 2.3456);
 
 	// for (i=0; i<len; i++) printf("potential is %zd %Lf\n", i, pot[i]);
+}
+
+void set_pot(size_t len, long double *p)
+{
+	if (pot) free(pot);
+	pot = p;
 }
 
 /// Solve the schroedinger eqn.

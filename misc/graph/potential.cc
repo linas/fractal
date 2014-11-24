@@ -19,9 +19,17 @@ int divisor_sum(int n)
 	return sum;
 }
 
-main ()
+main (int argc, char * argv[])
 {
-	int len = 100;
+	if (argc < 2)
+   {
+      fprintf(stderr, "Usage: %s <num-grid-pts> <p>\n", argv[0]);
+      exit (1);
+   }
+   int len = atoi(argv[1]);
+
+   double p = atof(argv[2]);
+
 	// For the simple harmonic oscillator, sqrt(omega) gives the length
 	// scale.  len is the number of grid points.  We want the number of
 	// grid points to extend deep into the classically forbidden region,
@@ -31,7 +39,7 @@ main ()
 	for (int i=0; i<len; i++)
 	{
 		// Euler totient function
-		printf("%d	%g\n", i, (double) totient_phi(i));
+		// printf("%d	%g\n", i, (double) totient_phi(i));
 
 		// Divisor function
 		// printf("%d	%g\n", i, (double) divisor(i));
@@ -39,6 +47,7 @@ main ()
 
 		// Sigma function (== divisor for power=0)
 		// printf("%d	%g\n", i, (double) sigma(i, 1));
+		printf("%d	%g\n", i, (double) sigmaf(i, p));
 	}
 }
 

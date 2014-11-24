@@ -46,11 +46,11 @@
 static int phiphi(int,int);
 int totient_phi(int n)
 {
-	if(n<0)n=-n;
+	if (n < 0) n=-n;
 	/* handle a few trivial boundary cases */
-	if(n<=1)return 0;
-	if(n==2)return 1;
-	if(n==3)return 2;
+	if (n <= 1) return 0;
+	if (n == 2) return 1;
+	if (n == 3) return 2;
 	return phiphi(n,2);
 }
 
@@ -61,10 +61,10 @@ static int phiphi(int y, int x)
 	int z;
 
 	if (x+1 == y) return x; /* phi(prime p) = p-1 */
-	if((y%x)==0)
+	if ((y%x) == 0)
 	{
 		z = y/x;
-		if(gcf32(x,z)==1)
+		if (gcf32(x,z) == 1)
 			return totient_phi(x)*totient_phi(z); /* multiplicative property */
 		else
 			return x*totient_phi(z); /* This is a tricky case. It may

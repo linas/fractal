@@ -1,6 +1,21 @@
 
+  Shroedinger wave function for Number-Theoretic functions
+-----------------------------------------------------------
+November 2014
 
-The totient function zeros are at:
+See schreod.c for details.
+
+The code in this directory solves the 1D lattice schrodinger eqn
+
+     (1/2) L psi + V psi = E psi
+
+for L the laplacian:
+   (L psi)(i) = -psi(i-1) + 2psi(i) - psi(i+1)
+
+and V(i) sume number theoretic function. e.g V(i) = phi(i) the toient
+function.
+
+The totient function has eigenvalues E at:
 
 0.215167824119994002
 0.774226900722062792 (odd)
@@ -9,7 +24,12 @@ The totient function zeros are at:
 1.948106988497122263  (odd)
 2.052010128157375458
 2.595139525819930620  (odd)
-2.852  (odd)
-3.544  (odd)
+2.850556700275637810  (odd)
+3.542497175007039716  (odd)
 
 
+Curious: totient function has an eigenvalue at exactly 1.0
+so does sigma_n for all values of  n (including float pt)
+including negative values too ...
+
+ wow. I wonder why, its not obvious.
