@@ -3,10 +3,11 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-all: bessy eigenwave
+all: bessy eigenwave potential
 
 bessy: schroed.o bessy.o
 eigenwave: schroed.o eigenwave.o
+potential: potential.o
 
 .o:
 	cc -o $* $^ -L$(LIB) -lfunc -lm -lstdc++

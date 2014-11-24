@@ -20,6 +20,13 @@ long double *pot;
 
 int enscale = 1;
 
+int divisor_sum(int n)
+{
+	int sum = 0;
+	for (int i=0; i<=n; i++) sum += divisor(i);
+	return sum;
+}
+
 /// The continuum limit is obtained for very small omega.
 /// Note that, for the simple harmonic oscillator, the length scale
 /// is given by sqrt(mass*omega). Here we take mass=1.0
@@ -45,11 +52,16 @@ void init(size_t len, long double omega)
 	enscale = 0;  // disable -- the number-theortic functions are scale-free
 
 	// Euler totient function
-	for (i=0; i<len; i++) pot[i] = totient_phi(i);
+	// for (i=0; i<len; i++) pot[i] = totient_phi(i);
+
+	// Divisor function
 	// for (i=0; i<len; i++) pot[i] = divisor(i);
+	// for (i=0; i<len; i++) pot[i] = divisor_sum(i);
+
+	// Sigma function (== divisor for power=0)
 	// for (i=0; i<len; i++) pot[i] = sigma(i, 1);
 	// for (i=0; i<len; i++) pot[i] = sigma(i, 2);
-	// for (i=0; i<len; i++) pot[i] = sigma(i, 3);
+	for (i=0; i<len; i++) pot[i] = sigma(i, 3);
 	// for (i=0; i<len; i++) pot[i] = sigmalog(i, 2.0);
 	// for (i=0; i<len; i++) pot[i] = sigmalog(i, 1.0);
 	// for (i=0; i<len; i++) pot[i] = sigmaf(i, 1.2);

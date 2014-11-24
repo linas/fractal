@@ -37,17 +37,29 @@ set out 'divisor.png'
 set style data lines
 
 
+set key right
 set title "Divisor func Bessel-like phase plot"
 set xlabel "Energy"
 set ylabel "value"
-plot "divisor.dat" using 1:2 lw 2 title "b0", \
-     "divisor.dat" using 1:3 lw 2 title "b1", \
-     "divisor.dat" using 1:4 lw 2 title "b2", \
-     "divisor.dat" using 1:5 lw 2 title "b3"
+set yrange [-2:2]
+plot "divisor.dat" using 1:2 lw 2 title "discontinuity", \
+     "divisor.dat" using 1:3 lw 2 title "b0", \
+     "divisor.dat" using 1:4 lw 2 title "b1", \
+     "divisor.dat" using 1:5 lw 2 title "b2"
 
 
-# set yrange [0:]
+#######################################################
+set out 'pot.png'
+set style data lines
 
+unset xzeroaxis
+set autoscale y
+
+set key right
+set title "sum divisor"
+set xlabel "n"
+set ylabel "value"
+plot "pot.dat" using 1:2 lw 2 title ""
 
 # pause 100
 
