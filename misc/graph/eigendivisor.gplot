@@ -12,18 +12,26 @@ set term png medium size 1024,768
 #######################################################
 set out 'eigendivisor.png'
 set style data lines
-set xzeroaxis lw 2
+# set xzeroaxis lw 2
+set xrange [0:4]
 
 set title "Eigenvalues of Divisor (Sigma) function"
 set xlabel "sigma"
 set ylabel "Eigenvalue"
 set key left
-plot "eigendivisor.dat" using 1:2 lw 2 title "e1", \
+plot \
+     "eigendivisor.dat" using 1:2 lw 2 title "e1", \
      "eigendivisor.dat" using 1:3 lw 2 title "e2", \
      "eigendivisor.dat" using 1:4 lw 2 title "e3", \
      "eigendivisor.dat" using 1:5 lw 2 title "e4", \
      "eigendivisor.dat" using 1:6 lw 2 title "e5", \
      "eigendivisor.dat" using 1:7 lw 2 title "e6", \
      "eigendivisor.dat" using 1:8 lw 2 title "e7", \
-     "eigendivisor.dat" using 1:9 lw 2 title "e8"
+     "eigendivisor.dat" using 1:9 lw 2 title "e8", \
+     "eigendivisor.dat" using 1:10 lw 2 title "e9", \
+     "eigendivisor.dat" using 1:11 lw 2 title "e10", \
+     "eigendivisor.dat" using 1:12 lw 2 title "e11", \
+     "eigendivisor.dat" using 1:13 lw 2 title "e12", \
+     "eigendivisor.dat" using 1:14 lw 2 title "e13", \
+     "eigendivisor.dat" using 1:15 lw 2 title "e14"
 

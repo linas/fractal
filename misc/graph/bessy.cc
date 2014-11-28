@@ -10,11 +10,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "moebius.h"
+
 #include "schroed.h"
 
 // Well, if its bessel-like, then lets go with that idea...
 void bessy(size_t len, double omega, double maxen)
 {
+	long double *p = (long double*) malloc (len * sizeof(long double));
+	for (size_t i=0; i<len; i++) p[i] = sigmaf(i, omega);
+	set_pot (len, p);
+
 	// printf("#\n#Bessel-like totient solution\n#\n");
 	printf("#\n# Divisor solution\n#\n");
 	printf("# Energy  discontinuity b0	b1	b2	b3	b4	b5\n");
@@ -22,7 +28,7 @@ void bessy(size_t len, double omega, double maxen)
 	double delta = maxen / 1000.0;
 	for (en=0.0; en<maxen; en+=delta)
 	{
-		long double discon = solve(len, omega, en);
+		long double discon = solve(len, 1.0, en);
 
 		printf("%g	%Lg	%Lg	%Lg	%Lg	%Lg	%Lg	%Lg\n",
 			en, discon, wavefn[0], wavefn[1], wavefn[2], wavefn[3],

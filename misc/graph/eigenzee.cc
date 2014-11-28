@@ -14,6 +14,7 @@
 
 #include "schroed.h"
 
+
 // Search for zero-crossings.  The eigenvalue solving the schroed eqn
 // is the one where the 'solve' function returns zero.
 void zero_cross(size_t len, double omega, double pow)
@@ -26,6 +27,8 @@ void zero_cross(size_t len, double omega, double pow)
 	bool odd = false;
 	int nfound = 0;
 	long double step = 0.001L;
+
+	printf("%f", pow);
 
 	long double lo = 0.0;
 	long double ylo = solve(len, omega, lo);
@@ -42,21 +45,22 @@ void zero_cross(size_t len, double omega, double pow)
 			long double eig = find_eig(len, omega, odd, lo, hi);
 			nfound ++;
 			// printf("n=%d pow=%g found %22.18Lf\n", nfound, pow, eig);
-			printf("n=%d %22.18Lf\n", nfound, eig);
+			// printf("n=%d %22.18Lf\n", nfound, eig);
+			printf("	%22.18Lf", eig);
 
 			// No more even wfs after this, and the odd b.c. works much better.
-			if (6 == nfound) 
+			if (4 == nfound) 
 			{
 				odd = true;
 				yhi = wavefn[0];
 			}
-
-			// if (10 == nfound) step = 0.01L;
 		}
 		lo = hi;
 		ylo = yhi;
-	}
 
+		if (15 == nfound) break;
+	}
+	printf("\n");
 }
 
 main(int argc, char* argv[])
@@ -73,5 +77,10 @@ main(int argc, char* argv[])
 
 	init(len, omega);
 
-	zero_cross(len, omega, pow);
+	printf("#\n# Eigenvalues of sigma function\n#\n");
+	printf("sigma	eigen_1	e_eigen_2	eigen_3 ...\n#\n");
+	for (pow=0; pow<4.0; pow +=0.02)
+	{
+		zero_cross(len, omega, pow);
+	}
 }
