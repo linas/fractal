@@ -1,10 +1,9 @@
 //
-// eigenwave.cc
+// eigenzee.cc
 //
-// Solve schroedinger eqn in a 1D lattice.
-// Plot the wave function itself.
+// Graf of eigenvalues of disvisor function, as function of power.
 //
-// Linas Vepstas 23 Nov 2014
+// Linas Vepstas 27 Nov 2014
 //
 #include <math.h>
 #include <stdio.h>
@@ -43,6 +42,7 @@ long double find_eig(size_t len, long double omega, long double lo, long double 
 	return find_eig(len, omega, lo, xmid);
 }
 
+#if 0
 // Graph of wave function at energy
 void graf(size_t len, double omega, long double en)
 {
@@ -58,16 +58,31 @@ void graf(size_t len, double omega, long double en)
 	}
 }
 
-// Verify unit eigenvalue of sigma functions
-void verify(size_t len, double omega, double pow)
+#endif
+
+// Search for zero-crossings
+void zero_cross(size_t len, double omega, double pow)
 {
 	long double *p = (long double*) malloc (len * sizeof(long double));
 	for (size_t i=0; i<len; i++) p[i] = sigmaf(i, pow);
 	set_pot (len, p);
-	long double eig = find_eig(len, omega, 0.999, 1.001);
-	eig -= 1.0L;
 
-	printf("pow=%g found %Lg vals=%Lg %Lg %Lg %Lg\n", pow, eig, p[0], p[1], p[2], p[3]);
+	long double lo = 0.0;
+	long double ylo = solve(len, omega, lo);
+	for (long double hi=0.1; hi <30; hi+= 0.05)
+	{
+		long double yhi = solve(len, omega, hi);
+
+		// If the two values are of opposite signes, then there's a sign crossing.
+		if (ylo*yhi < 0.0)
+		{
+			long double eig = find_eig(len, omega, lo, hi);
+			printf("pow=%g found %Lg\n", pow, eig);
+		}
+		lo = hi;
+		ylo = yhi;
+	}
+
 }
 
 main(int argc, char* argv[])
@@ -79,17 +94,10 @@ main(int argc, char* argv[])
 	}
 	int len = atoi(argv[1]);
 
-	double en = atof(argv[2]);
+	double pow = atof(argv[2]);
 	double omega = 1.0;
 
 	init(len, omega);
 
-	graf(len, omega, en);
-
-#if 0
-	for (double pow= 3.9; pow >-3.0; pow -= 0.11)
-	{
-		verify(len, omega, pow);
-	}
-#endif
+	zero_cross(len, omega, pow);
 }
