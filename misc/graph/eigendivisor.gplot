@@ -13,17 +13,20 @@ set term png medium size 1024,768
 set out 'eigendivisor.png'
 set style data lines
 # set xzeroaxis lw 2
-set xrange [0:4]
+set xrange [0:2]
+set yrange [:100]
+set logscale y
 
 set title "Eigenvalues of Divisor (Sigma) function"
 set xlabel "sigma"
 set ylabel "Eigenvalue"
 set key left
+#     "eigendivisor.dat" using 1:2 lw 2 title "e1", \
+#     "eigendivisor.dat" using 1:3 lw 2 title "e2", \
+#     "eigendivisor.dat" using 1:4 lw 2 title "e3", \
+#     "eigendivisor.dat" using 1:5 lw 2 title "e4", \
+
 plot \
-     "eigendivisor.dat" using 1:2 lw 2 title "e1", \
-     "eigendivisor.dat" using 1:3 lw 2 title "e2", \
-     "eigendivisor.dat" using 1:4 lw 2 title "e3", \
-     "eigendivisor.dat" using 1:5 lw 2 title "e4", \
      "eigendivisor.dat" using 1:6 lw 2 title "e5", \
      "eigendivisor.dat" using 1:7 lw 2 title "e6", \
      "eigendivisor.dat" using 1:8 lw 2 title "e7", \
@@ -33,5 +36,23 @@ plot \
      "eigendivisor.dat" using 1:12 lw 2 title "e11", \
      "eigendivisor.dat" using 1:13 lw 2 title "e12", \
      "eigendivisor.dat" using 1:14 lw 2 title "e13", \
-     "eigendivisor.dat" using 1:15 lw 2 title "e14"
+     "eigendivisor.dat" using 1:15 lw 2 title "e14", \
+     "eigendivisor.dat" using 1:16 lw 2 title "e15", \
+     "eigendivisor.dat" using 1:17 lw 2 title "e16", \
+     "eigendivisor.dat" using 1:18 lw 2 title "e17", \
+     "eigendivisor.dat" using 1:19 lw 2 title "e18"
+
+# set title "Eigenvalues of Divisor (Sigma) function, flattened"
+# set out 'eigenflat.png'
+# plot \
+#      "eigendivisor.dat" using 1:($6 * exp(-0.5 * $1)) lw 2 title "e5", \
+#      "eigendivisor.dat" using 1:($7 * exp(-0.7 * $1)) lw 2 title "e6", \
+#      "eigendivisor.dat" using 1:($8 * exp(-0.8 * $1)) lw 2 title "e7", \
+#      "eigendivisor.dat" using 1:($9 * exp(-1.0 * $1)) lw 2 title "e8", \
+#      "eigendivisor.dat" using 1:($10 * exp(-1.2 * $1)) lw 2 title "e9", \
+#      "eigendivisor.dat" using 1:($11 * exp(-1.3 * $1)) lw 2 title "e10", \
+#      "eigendivisor.dat" using 1:($12 * exp(-1.4 * $1)) lw 2 title "e11", \
+#      "eigendivisor.dat" using 1:($13 * exp(-1.5 * $1)) lw 2 title "e12", \
+#      "eigendivisor.dat" using 1:($14 * exp(-1.6 * $1)) lw 2 title "e13", \
+#      "eigendivisor.dat" using 1:($15 * exp(-1.7 * $1)) lw 2 title "e14"
 

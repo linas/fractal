@@ -33,7 +33,7 @@ void zero_cross(size_t len, double omega, double pow)
 	long double lo = 0.0;
 	long double ylo = solve(len, omega, lo);
 	if (odd) ylo = wavefn[0];
-	for (long double hi=0.1; hi <30; hi+= step)
+	for (long double hi=0.1; hi <130; hi+= step)
 	{
 		long double yhi = solve(len, omega, hi);
 		if (odd) yhi = wavefn[0];
@@ -58,7 +58,7 @@ void zero_cross(size_t len, double omega, double pow)
 		lo = hi;
 		ylo = yhi;
 
-		if (15 == nfound) break;
+		if (25 == nfound) break;
 	}
 	printf("\n");
 }
