@@ -176,7 +176,7 @@ long double find_eig(size_t len, long double omega, bool odd, long double lo, lo
 		ymid = solve(len, omega, xmid);
 		if (odd) ymid = wavefn[0];
 
-#if 1
+#if 0
 		printf("# duuude lo %Lg %Lg\n", lo, dilo);
 		printf("# duuude mid %Lg %Lg\n", xmid, ymid);
 		printf("# duuude hi %Lg %Lg\n#\n", hi, dihi);

@@ -19,28 +19,30 @@
 void zero_cross(size_t len, double omega, double pow)
 {
 	long double *p = (long double*) malloc (len * sizeof(long double));
-	// for (size_t i=0; i<len; i++) p[i] = sigmaf(i, pow);
-	for (size_t i=0; i<len; i++) p[i] = totient_phi(i);
+	// for (size_t i=0; i<len; i++) p[i] = totient_phi(i);
+	for (size_t i=0; i<len; i++) p[i] = sigmaf(i, pow);
 	set_pot (len, p);
 
 	bool odd = false;
 	int nfound = 0;
+	long double step = 0.001L;
 
 	long double lo = 0.0;
 	long double ylo = solve(len, omega, lo);
 	if (odd) ylo = wavefn[0];
-	for (long double hi=0.1; hi <30; hi+= 0.05)
+	for (long double hi=0.1; hi <30; hi+= step)
 	{
 		long double yhi = solve(len, omega, hi);
 		if (odd) yhi = wavefn[0];
-		printf("pow=%g hi=%Lg yhi=%Lg\n", pow, hi, yhi);
+		// printf("pow=%g hi=%Lg yhi=%Lg\n", pow, hi, yhi);
 
 		// If the two values are of opposite signes, then there's a sign crossing.
 		if (ylo*yhi < 0.0)
 		{
 			long double eig = find_eig(len, omega, odd, lo, hi);
 			nfound ++;
-			printf("n=%d pow=%g found %22.18Lg\n", nfound, pow, eig);
+			// printf("n=%d pow=%g found %22.18Lf\n", nfound, pow, eig);
+			printf("n=%d %22.18Lf\n", nfound, eig);
 
 			// No more even wfs after this, and the odd b.c. works much better.
 			if (6 == nfound) 
@@ -48,6 +50,8 @@ void zero_cross(size_t len, double omega, double pow)
 				odd = true;
 				yhi = wavefn[0];
 			}
+
+			// if (10 == nfound) step = 0.01L;
 		}
 		lo = hi;
 		ylo = yhi;
