@@ -167,8 +167,7 @@ long double find_eig(size_t len, long double omega, bool odd, long double lo, lo
 	long double xmid, ymid;
 	for (iter=0; iter<60; iter++)
 	{
-		long double delta = hi - lo;
-		if (fabsl(delta) < 1.0e-17) return 0.5L*(hi+lo);
+		if (fabsl(hi-lo) < 1.0e-17) return 0.5L*(hi+lo);
 
 		// compute the midpoint
 		long double slope = (dihi - dilo) / (hi - lo);
@@ -182,12 +181,20 @@ long double find_eig(size_t len, long double omega, bool odd, long double lo, lo
 		printf("# duuude mid %Lg %Lg\n", xmid, ymid);
 		printf("# duuude hi %Lg %Lg\n#\n", hi, dihi);
 #endif
+		if (fabsl(xmid-lo) < 1.0e-17) return 0.5L*(xmid+lo);
+		if (fabsl(xmid-hi) < 1.0e-17) return 0.5L*(xmid+hi);
 
-		// secant method -- shuffle down by one
-		lo = hi;
-		dilo = dihi;
-		hi = xmid;
-		dihi = ymid;
+		if ((ymid < 0.0L and dilo < 0.0L) or
+		    (ymid > 0.0L and dilo > 0.0L))
+		{
+			lo = xmid;
+			dilo = ymid;
+		}
+		else
+		{
+			hi = xmid;
+			dihi = ymid;
+		}
 	}
 
 	printf("Error: failed to converge, ymid=%Lg at %21.18Lg\n", ymid, xmid);
