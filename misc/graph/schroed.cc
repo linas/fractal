@@ -163,24 +163,34 @@ long double find_eig(size_t len, long double omega, bool odd, long double lo, lo
 	long double dihi = solve(len, omega, hi);
 	if (odd) dihi = wavefn[0];
 
-	if (fabsl(dilo) < 1.0e-17) return lo;
-	if (fabsl(dihi) < 1.0e-17) return hi;
+	int iter = 0;
+	long double xmid, ymid;
+	for (iter=0; iter<60; iter++)
+	{
+		long double delta = hi - lo;
+		if (fabsl(delta) < 1.0e-17) return 0.5L*(hi+lo);
 
-	// compute the midpoint
-	long double slope = (dihi - dilo) / (hi - lo);
+		// compute the midpoint
+		long double slope = (dihi - dilo) / (hi - lo);
 
-	long double xmid = lo - (dilo / slope);
-	long double ymid = solve(len, omega, xmid);
-	if (odd) ymid = wavefn[0];
+		xmid = lo - (dilo / slope);
+		ymid = solve(len, omega, xmid);
+		if (odd) ymid = wavefn[0];
 
 #if 1
-	printf("# duuude lo %Lg %Lg\n", lo, dilo);
-	printf("# duuude mid %Lg %Lg\n", xmid, ymid);
-	printf("# duuude hi %Lg %Lg\n#\n", hi, dihi);
+		printf("# duuude lo %Lg %Lg\n", lo, dilo);
+		printf("# duuude mid %Lg %Lg\n", xmid, ymid);
+		printf("# duuude hi %Lg %Lg\n#\n", hi, dihi);
 #endif
-	if (ymid < 0.0L and dilo < 0.0L) return find_eig(len, omega, odd, xmid, hi);
-	if (ymid > 0.0L and dilo > 0.0L) return find_eig(len, omega, odd, xmid, hi);
 
-	return find_eig(len, omega, odd, lo, xmid);
+		// secant method -- shuffle down by one
+		lo = hi;
+		dilo = dihi;
+		hi = xmid;
+		dihi = ymid;
+	}
+
+	printf("Error: failed to converge, ymid=%Lg at %21.18Lg\n", ymid, xmid);
+	exit(1);
 }
 

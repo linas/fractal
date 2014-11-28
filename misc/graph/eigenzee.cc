@@ -28,9 +28,11 @@ void zero_cross(size_t len, double omega, double pow)
 
 	long double lo = 0.0;
 	long double ylo = solve(len, omega, lo);
+	if (odd) ylo = wavefn[0];
 	for (long double hi=0.1; hi <30; hi+= 0.05)
 	{
 		long double yhi = solve(len, omega, hi);
+		if (odd) yhi = wavefn[0];
 		printf("pow=%g hi=%Lg yhi=%Lg\n", pow, hi, yhi);
 
 		// If the two values are of opposite signes, then there's a sign crossing.
@@ -38,7 +40,14 @@ void zero_cross(size_t len, double omega, double pow)
 		{
 			long double eig = find_eig(len, omega, odd, lo, hi);
 			nfound ++;
-			printf("n=%d pow=%g found %20.17Lg\n", nfound, pow, eig);
+			printf("n=%d pow=%g found %22.18Lg\n", nfound, pow, eig);
+
+			// No more even wfs after this, and the odd b.c. works much better.
+			if (6 == nfound) 
+			{
+				odd = true;
+				yhi = wavefn[0];
+			}
 		}
 		lo = hi;
 		ylo = yhi;
