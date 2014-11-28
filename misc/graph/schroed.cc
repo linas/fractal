@@ -126,6 +126,7 @@ long double solve(size_t len, long double omega, long double energy)
 
 	for (i=0; i<len; i++) wavefn[i] *= acc;
 
+#define REFLECT_AT_ZERO 1
 #if REFLECT_AT_ZERO
 	long double discon = fabsl ((1.0L + pot[0] - energy) * wavefn[0] - 0.5 * wavefn[1]);
 	discon -= fabsl (0.5 * wavefn[1]);
@@ -141,5 +142,45 @@ long double solve(size_t len, long double omega, long double energy)
 #endif
 
 	return discon;
+}
+
+// ===============================================================
+
+// Find zero. (aka find the eigenvalue). The best-guess eigenvalue
+// should be brakceted by hi, lo.
+//
+// If 'odd' is set, then we look for eigenfunctions that are odd
+// at the origin (i.e. the eigenfunction is zero at the origin)
+// If it is not set, then we are looking for eignefunctions that
+// are even (i.e. that the slope of the wave-function is zero at
+// the origin)  Currently, solve returns that slope .. err, actually,
+// it returns twice the slope; the 'discontinuity' of the second
+// derivative.
+long double find_eig(size_t len, long double omega, bool odd, long double lo, long double hi)
+{
+	long double dilo = solve(len, omega, lo);
+	if (odd) dilo = wavefn[0];
+	long double dihi = solve(len, omega, hi);
+	if (odd) dihi = wavefn[0];
+
+	if (fabsl(dilo) < 1.0e-17) return lo;
+	if (fabsl(dihi) < 1.0e-17) return hi;
+
+	// compute the midpoint
+	long double slope = (dihi - dilo) / (hi - lo);
+
+	long double xmid = lo - (dilo / slope);
+	long double ymid = solve(len, omega, xmid);
+	if (odd) ymid = wavefn[0];
+
+#if 1
+	printf("# duuude lo %Lg %Lg\n", lo, dilo);
+	printf("# duuude mid %Lg %Lg\n", xmid, ymid);
+	printf("# duuude hi %Lg %Lg\n#\n", hi, dihi);
+#endif
+	if (ymid < 0.0L and dilo < 0.0L) return find_eig(len, omega, odd, xmid, hi);
+	if (ymid > 0.0L and dilo > 0.0L) return find_eig(len, omega, odd, xmid, hi);
+
+	return find_eig(len, omega, odd, lo, xmid);
 }
 

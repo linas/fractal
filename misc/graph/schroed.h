@@ -13,3 +13,5 @@ long double solve(size_t len, long double omega, long double energy);
 
 void set_pot(size_t len, long double *p);
 
+
+long double find_eig(size_t len, long double omega, bool odd, long double lo, long double hi);
