@@ -4889,9 +4889,9 @@ reference "eq:trig-matrix"
 .
  In coordinate space, one may write these eigenfunctions as 
 \begin_inset Formula 
-\[
-\beta(x;s)=2\Gamma(s+1)\sum_{n=1}^{\infty}\frac{\exp(2\pi inx)}{\left(2\pi n\right)^{s}}
-\]
+\begin{equation}
+\beta(x;s)=2\Gamma(s+1)\sum_{n=1}^{\infty}\frac{\exp(2\pi inx)}{\left(2\pi n\right)^{s}}\label{eq:beta function}
+\end{equation}
 
 \end_inset
 
@@ -5422,46 +5422,54 @@ The product is taken only over prime numbers
 .
  One may likewise consider any of the other typical Euler products encountered
  in number theory.
- Defining the operator 
+ Defining the divisor operator 
 \begin_inset Formula 
 \[
-\mathcal{Z}=\prod_{p\mbox{ prime}}\frac{1}{1-\mathcal{L}_{p}}
+\mathcal{L}_{D}=\prod_{p\mbox{ prime}}\frac{1}{1-\mathcal{L}_{p}}
 \]
 
 \end_inset
 
 one then has the curious situation that the vectors in the kernel of 
-\begin_inset Formula $\mathcal{Z}$
+\begin_inset Formula $\mathcal{L}_{D}$
 \end_inset
 
  are in correspondence with the zeroes of the Riemann zeta function.
- 
+ The reason for the name 
+\begin_inset Quotes eld
+\end_inset
+
+divisor operator
+\begin_inset Quotes erd
+\end_inset
+
+ is made clear in the next section.
 \end_layout
 
 \begin_layout Standard
 The Koopman operator corresponding to 
-\begin_inset Formula $\mathcal{Z}$
+\begin_inset Formula $\mathcal{L}_{D}$
 \end_inset
 
  is 
 \begin_inset Formula 
 \[
-\mathcal{K}_{\zeta}=\prod_{p\mbox{ prime}}\frac{\mathcal{K}_{p}-1}{\mathcal{K}_{p}}
+\mathcal{K}_{D}=\prod_{p\mbox{ prime}}\frac{\mathcal{K}_{p}-1}{\mathcal{K}_{p}}
 \]
 
 \end_inset
 
 and again, 
-\begin_inset Formula $\mathcal{\mathcal{Z}K}_{\zeta}=1$
+\begin_inset Formula $\mathcal{L}_{D}\mathcal{K}_{D}=1$
 \end_inset
 
  but 
-\begin_inset Formula $\mathcal{K}_{\zeta}\mathcal{Z}\ne1$
+\begin_inset Formula $\mathcal{K}_{D}\mathcal{L}_{D}\ne1$
 \end_inset
 
 .
  The projection onto the kernel is 
-\begin_inset Formula $P_{\zeta}=1-\mathcal{K}_{\zeta}\mathcal{Z}$
+\begin_inset Formula $P_{D}=1-\mathcal{K}_{D}\mathcal{L}_{D}$
 \end_inset
 
 .
@@ -5522,6 +5530,232 @@ The operator
 
 -adic transfer operators.
  
+\end_layout
+
+\begin_layout Subsection
+The Divisor Operator
+\end_layout
+
+\begin_layout Standard
+The synthetic operator given by equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:polylog-oper"
+
+\end_inset
+
+ is curious enough that it deserves explicit exploration.
+ It is generalized by something that can best be called the 
+\begin_inset Quotes eld
+\end_inset
+
+Divisor operator
+\begin_inset Quotes erd
+\end_inset
+
+.
+ To see this, consider the operators 
+\begin_inset Formula $\mathcal{L}_{p}$
+\end_inset
+
+ In the fourier basis.
+ In this basis, 
+\begin_inset Formula $\mathcal{L}_{1}=\mathbb{I}$
+\end_inset
+
+ is the identity operator, while 
+\begin_inset Formula $\mathcal{L}_{2}=\mathcal{L}_{B}$
+\end_inset
+
+ was previously shown in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:trig-matrix"
+
+\end_inset
+
+.
+ To continue in this vein, 
+\begin_inset Formula $\mathcal{L}_{3}$
+\end_inset
+
+ is explicitly given by
+\begin_inset Formula 
+\[
+\mathcal{L}_{3}=\left[\begin{array}{cccccccccccc}
+1 & 0 & 0 & 0 & \cdots\\
+0 & 0 & 0 & 1 & 0 & 0 & \cdots\\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & \cdots\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & \cdots\\
+\cdots
+\end{array}\right]
+\]
+
+\end_inset
+
+so that it has non-zero entries only along the elongated diagonal.
+ If we number the rows and columns starting at zero, rather than one, it
+ is easy to see that the only non-zero entries of 
+\begin_inset Formula $\mathcal{L}_{p}$
+\end_inset
+
+ are 
+\begin_inset Formula $\left[\mathcal{L}_{p}\right]_{m,pm}$
+\end_inset
+
+.
+ That is, the general for for the matrix elements is given by
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{p}\right]_{mk}=\delta_{pm,k}
+\]
+
+\end_inset
+
+Consider now the operator 
+\begin_inset Formula $\mathcal{L}_{D}=\sum_{p=1}^{\infty}\mathcal{L}_{p}$
+\end_inset
+
+ written in this basis.
+ It has the following form:
+\begin_inset Formula 
+\[
+\mathcal{L}_{D}=\left[\begin{array}{cccccccccccc}
+\infty & 0 & 0 & 0 & 0 & \cdots\\
+0 & 1 & 1 & 1 & 1 & 1 & 1 & \cdots\\
+0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & \cdots\\
+0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & \cdots\\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & \cdots\\
+\cdots &  & \cdots & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & \cdots\\
+\cdots &  &  &  &  &  & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+Ignoring the zeorth row and column, we see a clear pattern: the first row
+ has all-ones in every position right of the diagonal.
+ The second row has ones in every other column right of the diagonal.
+ The third row has ones in every third column.
+ That is, the rows indicate the divisibility of the column number: the matrix
+ elements (ignoring row/column zero, again) are given by:
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{D}\right]_{mk}=\begin{cases}
+1 & \mbox{ if }m|k\\
+0 & \mbox{ otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+where the notation 
+\begin_inset Formula $m|k$
+\end_inset
+
+ means 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $m$
+\end_inset
+
+ divides 
+\begin_inset Formula $k$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The reason for the name 
+\begin_inset Quotes eld
+\end_inset
+
+divisor operator
+\begin_inset Quotes erd
+\end_inset
+
+ is now clear: it comes from the divisor function of number theory, which
+ is defined as
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Apo76"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+d(k)=\sum_{m|k}1
+\]
+
+\end_inset
+
+Indeed, we have that 
+\begin_inset Formula 
+\[
+d(n)=\sum_{k=1}^{n}\left[\mathcal{L}\right]_{nk}
+\]
+
+\end_inset
+
+The spectrum and eigenvectors of the divisor operator become clear when
+ written in the matrix form: Clearly, one has
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{D}\right]\left[\begin{array}{c}
+1^{-s}\\
+2^{-s}\\
+3^{-s}\\
+4^{-s}\\
+\vdots
+\end{array}\right]=\left[\begin{array}{ccccccccccc}
+1 & 1 & 1 & 1 & 1 & 1 & \cdots\\
+0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & \cdots\\
+0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & \cdots\\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & \cdots\\
+ & \cdots & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & \cdots\\
+\vdots &  &  &  &  &  &  &  &  &  & \vdots
+\end{array}\right]\left[\begin{array}{c}
+1^{-s}\\
+2^{-s}\\
+3^{-s}\\
+4^{-s}\\
+\vdots
+\end{array}\right]=\zeta(s)\left[\begin{array}{c}
+1^{-s}\\
+2^{-s}\\
+3^{-s}\\
+4^{-s}\\
+\vdots
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By analogy, the generalized divisor operator is then
+\begin_inset Formula 
+\[
+\mathcal{L}_{\Sigma}(z)=\left[\begin{array}{ccccccccccc}
+1 & 1 & 1 & 1 & 1 & 1 & \cdots\\
+0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & \cdots\\
+0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & \cdots\\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & \cdots\\
+ & \cdots & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & \cdots\\
+ &  &  &  &  & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
