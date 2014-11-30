@@ -5640,12 +5640,12 @@ Ignoring the zeorth row and column, we see a clear pattern: the first row
  That is, the rows indicate the divisibility of the column number: the matrix
  elements (ignoring row/column zero, again) are given by:
 \begin_inset Formula 
-\[
+\begin{equation}
 \left[\mathcal{L}_{D}\right]_{mk}=\begin{cases}
 1 & \mbox{ if }m|k\\
 0 & \mbox{ otherwise}
-\end{cases}
-\]
+\end{cases}\label{eq:divisor-matrix-elts}
+\end{equation}
 
 \end_inset
 
@@ -5787,6 +5787,95 @@ one obviously has, in this basis, that
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Subsection
+Moebius Inversion
+\end_layout
+
+\begin_layout Standard
+One may continue in this number-theoretic vein.
+ Thus, the definition of the matrix elements given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:divisor-matrix-elts"
+
+\end_inset
+
+ allows the following identity to be written.
+ For any arithmetic series 
+\begin_inset Formula $f(n)$
+\end_inset
+
+, one has that 
+\begin_inset Formula 
+\[
+\sum_{m|k}f(m)=\sum_{m=1}^{\infty}f(m)\left[\mathcal{L}_{D}\right]_{mk}
+\]
+
+\end_inset
+
+Inspired by the Dirichlet inverse of the Moebius function
+\begin_inset Formula 
+\[
+\sum_{m|k}\mu(m)=\begin{cases}
+1 & \mbox{ if }k=1\\
+0 & \mbox{ if }k>1
+\end{cases}
+\]
+
+\end_inset
+
+we may generalize by noting that, since 
+\begin_inset Formula $\mathcal{L}_{D}$
+\end_inset
+
+ is upper-triangular (that is, 
+\begin_inset Formula $\left[\mathcal{L}_{D}\right]_{mk}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $m>k$
+\end_inset
+
+), the left-inverse is easily obtained, row by row, recursively:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\mathcal{M_{D}}\right]_{nk}=\begin{cases}
+0 & \mbox{ if }n>k\\
+1 & \mbox{ if }n=k\\
+-\sum_{m=n}^{k-1}\left[\mathcal{M}_{D}\right]_{nm}\left[\mathcal{L}_{D}\right]_{mk} & \mbox{ if }n<k
+\end{cases}
+\]
+
+\end_inset
+
+so that 
+\begin_inset Formula $\mu(m)=\left[\mathcal{M}_{D}\right]_{1m}$
+\end_inset
+
+ is the traditional Moebius function, while further rows are offset by one,
+ so that
+\begin_inset Formula 
+\[
+\mathcal{M}=\left[\begin{array}{cccccccc}
+1 & -1 & -1 & 0 & -1 & 0 & 0 & 1\\
+0 & 1 & 0 & -1 & 0 & -1 & 0 & 0\\
+0 & 0 & 1\\
+0 & 0 & 0 & 1\\
+0 & 0 & 0 & 0 & 1\\
+0 & \cdots &  & 0 & 0 & 1\\
+0 &  &  &  & \cdots & 0 & 1\\
+\vdots &  &  &  &  & \cdots & 0 & \ddots
+\end{array}\right]
+\]
+
+\end_inset
+
  
 \end_layout
 
