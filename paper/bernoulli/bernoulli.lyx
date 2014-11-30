@@ -5697,7 +5697,7 @@ d(k)=\sum_{m|k}1
 Indeed, we have that 
 \begin_inset Formula 
 \[
-d(n)=\sum_{k=1}^{n}\left[\mathcal{L}\right]_{nk}
+d(n)=\sum_{k=1}^{n}\left[\mathcal{L}_{D}\right]_{nk}
 \]
 
 \end_inset
@@ -5705,7 +5705,7 @@ d(n)=\sum_{k=1}^{n}\left[\mathcal{L}\right]_{nk}
 The spectrum and eigenvectors of the divisor operator become clear when
  written in the matrix form: Clearly, one has
 \begin_inset Formula 
-\[
+\begin{equation}
 \left[\mathcal{L}_{D}\right]\left[\begin{array}{c}
 1^{-s}\\
 2^{-s}\\
@@ -5718,7 +5718,7 @@ The spectrum and eigenvectors of the divisor operator become clear when
 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & \cdots\\
 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & \cdots\\
  & \cdots & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & \cdots\\
-\vdots &  &  &  &  &  &  &  &  &  & \vdots
+\vdots &  &  &  &  &  &  &  &  &  & \ddots
 \end{array}\right]\left[\begin{array}{c}
 1^{-s}\\
 2^{-s}\\
@@ -5731,8 +5731,8 @@ The spectrum and eigenvectors of the divisor operator become clear when
 3^{-s}\\
 4^{-s}\\
 \vdots
-\end{array}\right]
-\]
+\end{array}\right]\label{eq:divisor-eigen}
+\end{equation}
 
 \end_inset
 
@@ -5740,22 +5740,54 @@ The spectrum and eigenvectors of the divisor operator become clear when
 \end_layout
 
 \begin_layout Standard
-By analogy, the generalized divisor operator is then
+By analogy, the generalized divisor operator corresponding to the sigma
+ function is then
 \begin_inset Formula 
 \[
 \mathcal{L}_{\Sigma}(z)=\left[\begin{array}{ccccccccccc}
 1 & 1 & 1 & 1 & 1 & 1 & \cdots\\
-0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & \cdots\\
-0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & \cdots\\
-0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & \cdots\\
- & \cdots & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & \cdots\\
- &  &  &  &  & 1
+0 & 2^{z} & 0 & 2^{z} & 0 & 2^{z} & 0 & 2^{z} & 0 & \cdots\\
+0 & 0 & 3^{z} & 0 & 0 & 3^{z} & 0 & 0 & 3^{z} & 0 & \cdots\\
+0 & 0 & 0 & 4^{z} & 0 & 0 & 0 & 4^{z} & 0 & 0 & \cdots\\
+ & \cdots & 0 & 0 & 5^{z} & 0 & 0 & 0 & 5^{z} & 0 & \cdots\\
+ &  &  &  &  & 6^{z} &  &  &  &  & \ddots
 \end{array}\right]
 \]
 
 \end_inset
 
+where one has, as before, the sum-of-divisors function: 
+\begin_inset Formula 
+\[
+\sigma_{z}(n)=\sum_{m|n}m^{z}=\sum_{k=1}^{n}\left[\mathcal{L}_{\Sigma}(z)\right]_{nk}
+\]
 
+\end_inset
+
+Writing the diagonal operator 
+\begin_inset Formula $\left[\mathcal{Z}(z)\right]_{mk}=m^{z}\delta_{mk}$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+\mathcal{Z}(z)=\left[\begin{array}{cccccc}
+1 & 0 & 0 & 0 & 0\\
+0 & 2^{z} & 0 & 0 & 0\\
+0 & 0 & 3^{z} & 0 & 0 & \cdots\\
+0 & 0 & 0 & 4^{z} & 0 & \cdots\\
+\vdots &  &  &  &  & \ddots
+\end{array}\right]
+\]
+
+\end_inset
+
+one obviously has, in this basis, that 
+\begin_inset Formula $\mathcal{L}_{\Sigma}(z)=\mathcal{Z}(s)\mathcal{L}_{D}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsection
