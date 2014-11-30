@@ -2,5 +2,5 @@
 
 moebius: moebius.o
 
-.c.o:
+.cc.o:
 	cc -c $^
