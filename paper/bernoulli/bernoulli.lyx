@@ -5697,7 +5697,7 @@ d(k)=\sum_{m|k}1
 Indeed, summing over rows for a fixed column, we have that 
 \begin_inset Formula 
 \[
-d(n)=\sum_{k=1}^{n}\left[\mathcal{L}_{D}\right]_{kn}
+d(n)=\sum_{k=1}^{\infty}\left[\mathcal{L}_{D}\right]_{kn}
 \]
 
 \end_inset
@@ -5736,7 +5736,7 @@ The spectrum and eigenvectors of the divisor operator become clear when
 
 \end_inset
 
-or, in infex-free notation:
+or, in index-free notation:
 \end_layout
 
 \begin_layout Standard
@@ -5760,7 +5760,23 @@ where
 \end_inset
 
 .
- 
+ Summing over the indexes of this vector simply generates a well-known Dirichlet
+ series identity for the divisor function:
+\begin_inset Formula 
+\[
+\sum_{k=1}^{\infty}\left[\mathcal{L}_{D}v(s)\right]_{k}=\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\left[\mathcal{L}_{D}\right]_{kn}\left[v(s)\right]_{n}=\sum_{n=1}^{\infty}d(n)\left[v(s)\right]_{n}=\sum_{n=1}^{\infty}\frac{d(n)}{n^{s}}=\zeta(s)\sum_{k=1}^{\infty}\left[v(s)\right]_{k}=\zeta^{2}(s)
+\]
+
+\end_inset
+
+Thus, equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:divisor-eigen"
+
+\end_inset
+
+ can be thought of as a minor generalization of the above Dirichlet series.
 \end_layout
 
 \begin_layout Standard
@@ -5970,8 +5986,50 @@ The first row of the above operator equation is none other than the well-known
 
 and in fact, every row of the operator equation simply repeats this form.
  Further well-known identities from Dirichlet convolution follow in a similar
- fashion.
- 
+ fashion: one may define operators that correspond to all the well-known
+ number-theoretic functions.
+ Each is effectively constructed as a 
+\begin_inset Quotes eld
+\end_inset
+
+synthetic operator
+\begin_inset Quotes erd
+\end_inset
+
+, a linear combination of the 
+\begin_inset Formula $p$
+\end_inset
+
+-adic Bernoulli operators.
+\end_layout
+
+\begin_layout Standard
+The next section defines a lattice model topology for the Cantor set, and
+ then provides the fractal eigenfunctions for the Bernoulli operator.
+ These fractal eigenfunctions carry over to the current situation: they
+ will also be eigenfunctions of the number-theoretic operators.
+\end_layout
+
+\begin_layout Standard
+XXX ToDo: For good measure, repeat the above for the Euler's totient function,
+ and for Jordan totient function.
+ To really drive the point home, consider the Lambert series, show the operator
+ equivalent formulation of teh Eisenstein series, the Jacobi theta functions,
+ etc.
+ All this should no longer be surprising: the Cantor set and the infinite
+ binary tree is 
+\begin_inset Quotes eld
+\end_inset
+
+half
+\begin_inset Quotes erd
+\end_inset
+
+ of the modular group 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset
+
+, so of course these are all wrapped up together.
 \end_layout
 
 \begin_layout Subsection
