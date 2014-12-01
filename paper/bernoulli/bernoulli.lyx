@@ -4878,6 +4878,10 @@ reference "eq:trig-matrix"
 \begin_inset Formula $a_{n}=1/n^{s}$
 \end_inset
 
+ or 
+\begin_inset Formula $b_{n}=1/n^{s}$
+\end_inset
+
  will be an eigenvector of 
 \begin_inset Formula $\mathcal{L}_{B}$
 \end_inset
@@ -4900,8 +4904,51 @@ which transform as
 \end_inset
 
 .
- Up to the overall normalization, this function is sometimes called the
+ This is not the only function associated with this eigenvalue: the eigenspace
+ is infinite-dimensional.
+ The Euler identity 
+\begin_inset Formula $1=e^{2\pi im}$
+\end_inset
+
+ implies that 
+\begin_inset Formula $2^{-s}=2^{-(s+2\pi im/\ln2)}$
+\end_inset
+
+ and so
+\begin_inset Formula 
+\[
+\beta_{m}(x;s)=\beta\left(x;s+\frac{2\pi i}{\ln2}\right)
+\]
+
+\end_inset
+
+is also an eigenvector: 
+\begin_inset Formula $\mathcal{L}_{B}\beta_{m}(x;s)=2^{-s}\beta_{m}(x;s)$
+\end_inset
+
+.
+ Next, there is no reason to stick to only positive values of 
+\begin_inset Formula $n$
+\end_inset
+
+ in the summation.
+ The space-reflected beta function is also an eigenvalue: that is, 
+\begin_inset Formula $\mathcal{L}_{B}\beta_{m}(1-x;s)=2^{-s}\beta_{m}(1-x;s)$
+\end_inset
+
+.
  
+\end_layout
+
+\begin_layout Standard
+Up to the overall normalization, the function 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:beta function"
+
+\end_inset
+
+ is sometimes called the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -5044,10 +5091,28 @@ reference "eq:p-adic operator"
 \end_inset
 
 which may be demonstrated easily enough.
+ As before, 
+\begin_inset Formula $\beta(1-x;s)$
+\end_inset
+
+ is also an eignefunction; however, this time, the spanned space is different:
+ additional eigenvectors are given by 
+\begin_inset Formula $\beta\left(x;s+2\pi im/\ln p\right)$
+\end_inset
+
+: notice the 
+\begin_inset Formula $\ln p$
+\end_inset
+
+ appearing in this expression, instead of the previous 
+\begin_inset Formula $\ln2$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-These eigenfunctions are essentially a form of the Hurwitz zeta function
+These eigenfunctions are just linear combinations of the Hurwitz zeta function
  
 \begin_inset Formula 
 \begin{equation}
@@ -5056,7 +5121,7 @@ These eigenfunctions are essentially a form of the Hurwitz zeta function
 
 \end_inset
 
-and that, in fact, the Hurwitz zeta itself is an eigenfunction of 
+and, in fact, the Hurwitz zeta itself is an eigenfunction of 
 \begin_inset Formula $\mathcal{L}_{p}$
 \end_inset
 
@@ -6031,7 +6096,24 @@ reference "eq:beta function"
 
 \end_inset
 
+Because the zeta function has only one pole, at 
+\begin_inset Formula $s=1$
+\end_inset
 
+, this implies that the Moebius operator has aone-dimensional kernel.
+ The generator of the kernel is 
+\begin_inset Formula 
+\[
+\beta(x;1)=\sum_{n=1}^{\infty}\frac{e^{2\pi inx}}{\pi n}
+\]
+
+\end_inset
+
+which, although unbounded, is finite for any 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
