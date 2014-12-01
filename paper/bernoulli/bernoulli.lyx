@@ -5705,7 +5705,7 @@ d(n)=\sum_{k=1}^{n}\left[\mathcal{L}_{D}\right]_{kn}
 The spectrum and eigenvectors of the divisor operator become clear when
  written in the matrix form: Clearly, one has
 \begin_inset Formula 
-\begin{equation}
+\[
 \left[\mathcal{L}_{D}\right]\left[\begin{array}{c}
 1^{-s}\\
 2^{-s}\\
@@ -5731,12 +5731,36 @@ The spectrum and eigenvectors of the divisor operator become clear when
 3^{-s}\\
 4^{-s}\\
 \vdots
-\end{array}\right]\label{eq:divisor-eigen}
+\end{array}\right]
+\]
+
+\end_inset
+
+or, in infex-free notation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathcal{L}_{D}v(s)=\zeta(s)v(s)\label{eq:divisor-eigen}
 \end{equation}
 
 \end_inset
 
+where 
+\begin_inset Formula $v(s)$
+\end_inset
 
+ is the vector whose 
+\begin_inset Formula $n$
+\end_inset
+
+'th component is 
+\begin_inset Formula $\left[v(s)\right]_{n}=n^{-s}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5862,20 +5886,91 @@ so that
  so that
 \begin_inset Formula 
 \[
-\mathcal{M}=\left[\begin{array}{cccccccc}
+\mathcal{M}_{D}=\left[\begin{array}{cccccccc}
 1 & -1 & -1 & 0 & -1 & 1 & -1 & 0\\
 0 & 1 & 0 & -1 & 0 & -1 & 0 & 0\\
-0 & 0 & 1\\
-0 & 0 & 0 & 1\\
-0 & 0 & 0 & 0 & 1\\
-0 & \cdots &  & 0 & 0 & 1\\
-0 &  &  &  & \cdots & 0 & 1\\
+0 & 0 & 1 & 0 & 0 & -1 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & -1\\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+0 & \cdots &  & 0 & 0 & 1 & 0 & 0\\
+0 &  &  &  & \cdots & 0 & 1 & 0\\
 \vdots &  &  &  &  & \cdots & 0 & \ddots
 \end{array}\right]
 \]
 
 \end_inset
 
+It's perhaps not obvious fromcasual examination of the above, but each row
+ is just an elongated copy of the moebius function itself.
+ That is,
+\begin_inset Formula 
+\[
+\left[\mathcal{M_{D}}\right]_{nk}=\begin{cases}
+0 & \mbox{ if }n>k\\
+1 & \mbox{ if }n=k\\
+\mu(k/n) & \mbox{ if }n<k\mbox{ and }n|k\\
+0 & \mbox{ otherwise}
+\end{cases}
+\]
+
+\end_inset
+
+and, by construction, this is the left inverse to the divisor function:
+ 
+\begin_inset Formula $\mathcal{M}_{D}\mathcal{L}_{D}=\mathbb{I}$
+\end_inset
+
+ or in index notation:
+\begin_inset Formula 
+\[
+\sum_{k=1}^{\infty}\left[\mathcal{M_{D}}\right]_{nk}\left[\mathcal{L}_{D}\right]_{km}=\delta_{nm}
+\]
+
+\end_inset
+
+It follows then, from equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:divisor-eigen"
+
+\end_inset
+
+ that the eigenvalues of 
+\begin_inset Formula $\mathcal{M}_{D}$
+\end_inset
+
+ are 
+\begin_inset Formula $1/\zeta(s)$
+\end_inset
+
+ and the eiegenvectors are 
+\begin_inset Formula $v(s)$
+\end_inset
+
+ with 
+\begin_inset Formula $\left[v(s)\right]_{n}=n^{-s}$
+\end_inset
+
+ are before:
+\begin_inset Formula 
+\[
+\mathcal{M}_{D}v(s)=\frac{1}{\zeta(s)}v(s)
+\]
+
+\end_inset
+
+The first row of the above operator equation is none other than the well-known
+ Dirichlet series identity
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\frac{\mu(n)}{n^{s}}=\frac{1}{\zeta(s)}
+\]
+
+\end_inset
+
+and in fact, every row of the operator equation simply repeats this form.
+ Further well-known identities from Dirichlet convolution follow in a similar
+ fashion.
  
 \end_layout
 
