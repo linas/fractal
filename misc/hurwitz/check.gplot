@@ -1,0 +1,21 @@
+
+set term png medium
+set out 'check.png'
+
+
+# set data style linespoints
+set style data lines
+set key right
+
+
+set ylabel "b" 
+set xlabel "x" 
+
+set title "Bern"
+
+set yrange [-2:2]
+
+plot "check.dat" using 1:2 title "co" with lines linewidth 3, \
+     "check.dat" using 1:3 title "si" with lines linewidth 3, \
+     "check.dat" using 1:4 title "B" with lines linewidth 3
+
