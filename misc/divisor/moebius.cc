@@ -38,7 +38,7 @@ int moebius_oper_slow(int n, int k)
 /* Faster version of above. */
 int moebius_oper(int n, int k)
 {
-#define SZ 500
+#define SZ 1900
 	static char cache[SZ][SZ];
 	static bool done[SZ][SZ];
 	static bool is_init = false;
@@ -76,10 +76,25 @@ main(int argc, char *argv[])
 	}
 	int n = atoi(argv[1]);
 
-	int k;
-	for (k=1; k<SZ; k++)
-	for (int k=1; k<40; k++)
+
+	for (n=1; n<SZ; n++)
+	{
+		int k;
+		for (k=1; n*k<SZ; k++)
+		{
+			for (int j=1; j<n; j++)
+			{
+				if (0 != moebius_oper(n, n*(k-1)+j)) printf("Error: bad zero n=%d k=%d j=%d\n", n, k, j);
+			}
+			if (moebius_oper(1,k) != moebius_oper(n, n*k)) printf("Error: bad scale n=%d k=%d\n", n, k);
+		}
+	}
+#if 0
+	for (int k=1; k<20; k++)
 	{
 		printf("mu(%d) = %d vs %d\n", k, moebius_oper(2,k), moebius_oper(1, k/2));
 	}
+#endif
+
+	printf("done\n");
 }
