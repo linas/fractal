@@ -139,7 +139,9 @@ Some of what is presented here is review material.
  these span the same space as the the Hurwitz-zeta function eigenfunctions.
  That is, both provide a basis for the operator, and the fractal basis is
  a linear combination of the smooth basis, and v.v.
- The connection to analytic number theory is also underscored.
+ The connection to both classic and analytic number theory is also underscored,
+ and another simple, new condition equivalent to the Riemann Hypothesis
+ is presented.
 \end_layout
 
 \begin_layout Abstract
@@ -6010,10 +6012,8 @@ In fact,
 \begin_inset Formula $\mathcal{L}_{D}=\mathcal{M}_{D}^{-1}$
 \end_inset
 
-although this is rather bizarre: both operators have a non-trivial kernel!
- This is quite unlike the case of finite-dimensional matrices, where any
- finite matrix with a non-trivial kernel is not invertible.
- How can this be? What is the correct way of understanding this?
+ although this is a paradoxial result: both operators have a non-trivial
+ kernel! We return to this below.
 \end_layout
 
 \begin_layout Standard
@@ -6129,6 +6129,147 @@ and by
 \end_inset
 
  and 1.
+\end_layout
+
+\begin_layout Subsubsection
+Invertability and the Riemann Hypothesis
+\end_layout
+
+\begin_layout Standard
+What is the correct way of understanding the operator equations 
+\begin_inset Formula $\mathcal{M}_{D}=\mathcal{L}_{D}^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}_{D}=\mathcal{M}_{D}^{-1}$
+\end_inset
+
+ given that both of these operators appear to have a non-trivial kernel?
+ The resolution of the paradox requires paying careful attention to the
+ spaces on which they act.
+ From the point of view of classical number theory, the operators are restricted
+ to act only on the Banach space 
+\begin_inset Formula $l_{1}=\left\{ \left(a_{1},a_{2},a_{3,}\cdots\right):\sum_{n=1}^{\infty}\left|a_{n}\right|<\infty\right\} $
+\end_inset
+
+ of absolutely summable series.
+ None of the singular solutions belong to this space.
+ Thus, the vector 
+\begin_inset Formula $a_{n}=1/n$
+\end_inset
+
+ lies in the kernel of 
+\begin_inset Formula $\mathcal{M}_{D}$
+\end_inset
+
+ but it is clearly not 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+-summable.
+ That's OK, because Fourier analysis asks for 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+-summability, and this vector is clearly summable with the 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+ norm.
+\end_layout
+
+\begin_layout Standard
+The situation for the divisor operator 
+\begin_inset Formula $\mathcal{L}_{D}$
+\end_inset
+
+ is a bit more confusing.
+ Its kernel corresponds to the zeros of the Riemann zeta function.
+ The vector 
+\begin_inset Formula $a_{n}=n^{-s}$
+\end_inset
+
+ is again not summable in the 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+-norm when 
+\begin_inset Formula $\Re s\le\frac{1}{2}$
+\end_inset
+
+, which is the region where all of the Riemann zeros are conjectured to
+ lie.
+\end_layout
+
+\begin_layout Standard
+In that sense, we have a simple statement that is equivalent to the Riemann
+ hypothesis.
+ Assume that the Riemann zeta had a zero in the critical strip that did
+ not lie on the critical line.
+ By symmetry, this zero is doubled.
+ That is, write 
+\begin_inset Formula $s=\frac{1}{2}+\eta+i\tau$
+\end_inset
+
+ for 
+\begin_inset Formula $\eta,\tau$
+\end_inset
+
+ real.
+ If there is a zero with 
+\begin_inset Formula $\eta>0$
+\end_inset
+
+, then there is a second zero at 
+\begin_inset Formula $\frac{1}{2}-\eta+i\tau$
+\end_inset
+
+.
+ The zero with the positive 
+\begin_inset Formula $\eta$
+\end_inset
+
+ corresponds to a series that is 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+-summable.
+ That is, we have that 
+\begin_inset Formula $\sum_{n=1}^{\infty}\left|n^{\frac{1}{2}+\eta+i\tau}\right|^{2}<\infty$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\eta>0$
+\end_inset
+
+.
+ If the Riemann hypothesis holds, then we may conclude that the divisor
+ operator 
+\begin_inset Formula $\mathcal{L}_{D}$
+\end_inset
+
+ is not singular, and thus is invertible, on the space of Fourier series
+ (i.e.
+ series that are 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+-summable).
+ We have already proven that 
+\begin_inset Formula $\mathcal{L}_{D}$
+\end_inset
+
+ is invertible on the Banach space 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+.
+ If we could prove that it was invertible on the Banach space 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+, then we would have a proof of the Riemann hypothesis.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -6348,20 +6489,6 @@ synthetic
 
 \begin_layout Standard
 There are multiple tasks which lie ahead:
-\end_layout
-
-\begin_layout Itemize
-Clarify the meaning whereby both 
-\begin_inset Formula $\mathcal{L}_{D}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathcal{M}_{D}$
-\end_inset
-
- are singular, yet are invertible.
- This requires a clarification of the spaces in which they act, not only
- as Banach spaces but also as function spaces.
 \end_layout
 
 \begin_layout Itemize
