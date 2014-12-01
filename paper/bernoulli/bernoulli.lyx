@@ -6212,7 +6212,7 @@ By analogy, the generalized divisor operator corresponding to the sigma
 where one has, as before, the sum-of-divisors function: 
 \begin_inset Formula 
 \[
-\sigma_{z}(n)=\sum_{m|n}m^{z}=\sum_{k=1}^{n}\left[\mathcal{L}_{\Sigma}(z)\right]_{kn}
+\sigma_{z}(n)=\sum_{m|n}m^{z}=\sum_{k=1}^{\infty}\left[\mathcal{L}_{\Sigma}(z)\right]_{kn}
 \]
 
 \end_inset
@@ -6253,42 +6253,148 @@ one obviously has, in this basis, that
 \begin_inset Formula $\mathrm{Id}_{z}=\sigma_{z}*\mu$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
-One may define operators that correspond to all the well-known number-theoretic
- functions.
- Each is effectively constructed as a 
+The Euler totient function 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is given by the convolution 
+\begin_inset Formula $\varphi=\mbox{Id}*\mu$
+\end_inset
+
+ which suggests that the correct operator analog is 
+\begin_inset Formula $\mathcal{P}=\mathcal{Z}(1)\mathcal{M}_{D}$
+\end_inset
+
+ which has the following form: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathcal{P}=\left[\begin{array}{cccccccc}
+1 & -1 & -1 & 0 & -1 & 1 & -1 & 0\\
+0 & 2 & 0 & -2 & 0 & -2 & 0 & 0\\
+0 & 0 & 3 & 0 & 0 & -3 & 0 & 0\\
+0 & 0 & 0 & 4 & 0 & 0 & 0 & -4\\
+0 & 0 & 0 & 0 & 5 & 0 & 0 & 0\\
+0 & \cdots &  & 0 & 0 & 6 & 0 & 0\\
+0 &  &  &  & \cdots & 0 & 7 & 0\\
+\vdots &  &  &  &  & \cdots & 0 & \ddots
+\end{array}\right]
+\]
+
+\end_inset
+
+it is straignt-forward to verify that the column sums give the Euler totient
+ function: viz: 
+\begin_inset Formula 
+\[
+\varphi(n)=\sum_{k=1}^{\infty}\left[\mathcal{P}\right]_{kn}
+\]
+
+\end_inset
+
+Likewise, Jordan's totient function, given by the convolution 
+\begin_inset Formula $J_{z}=\mbox{Id}_{z}*\mu$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\mathcal{J}(z)=\mathcal{Z}(z)\mathcal{M}_{D}$
+\end_inset
+
+ just as above, the function itself arising as the column sums, as above:
+\begin_inset Formula 
+\[
+J_{z}(n)=\sum_{k=1}^{\infty}\left[\mathcal{P}(z)\right]_{kn}
+\]
+
+\end_inset
+
+One may continue in a similar vein, and define the operator analogs for
+ the Liouville function, the von Mangoldt function, and so on.
+ By means of the Fourier basis 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Fourier series"
+
+\end_inset
+
+ and the Bernoulli operator in this basis 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:trig-matrix"
+
+\end_inset
+
+, each of these operator analogs are 
 \begin_inset Quotes eld
 \end_inset
 
-synthetic operator
+synthetic
 \begin_inset Quotes erd
 \end_inset
 
-, a linear combination of the 
+ operators that can be constructed from the (
 \begin_inset Formula $p$
 \end_inset
 
--adic Bernoulli operators.
+-adic) Bernoulli operators.
 \end_layout
 
 \begin_layout Standard
-The next section defines a lattice model topology for the Cantor set, and
- then provides the fractal eigenfunctions for the Bernoulli operator.
- These fractal eigenfunctions carry over to the current situation: they
- will also be eigenfunctions of the number-theoretic operators.
+There are multiple tasks which lie ahead:
 \end_layout
 
-\begin_layout Standard
-XXX ToDo: For good measure, repeat the above for the Euler's totient function,
- and for Jordan totient function.
- To really drive the point home, consider the Lambert series, show the operator
- equivalent formulation of the Eisenstein series, the Jacobi theta functions,
- etc.
- All this should no longer be surprising: the Cantor set and the infinite
- binary tree is 
+\begin_layout Itemize
+Clarify the meaning whereby both 
+\begin_inset Formula $\mathcal{L}_{D}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{M}_{D}$
+\end_inset
+
+ are singular, yet are invertible.
+ This requires a clarification of the spaces in which they act, not only
+ as Banach spaces but also as function spaces.
+\end_layout
+
+\begin_layout Itemize
+Explore the spectrum of the various operators defined above.
+ As should be clear from the matrix form of 
+\begin_inset Formula $\mathcal{L}_{\Sigma}(z)$
+\end_inset
+
+ above, the diagonal values, and thus the spectrum, is well-behaved only
+ when 
+\begin_inset Formula $z<0$
+\end_inset
+
+.
+ Some form of analytic continuation is needed to move to the region 
+\begin_inset Formula $z>0$
+\end_inset
+
+.
+ Similar remarks apply for the totient function.
+\end_layout
+
+\begin_layout Itemize
+Explore the analog to the Lambert series.
+ This should be concistent with the other developments: its well-known that
+ the Lambert series plays a role in the Eisenstein series and in the Jacobi
+ theta functions.
+ It is also well-known that the modular group 
+\begin_inset Formula $PSL(2,\mathbb{Z})$
+\end_inset
+
+ describes the symmetries seen in these series.
+ What is not well-known is the explicit relationship to the dyadic monoid
+ and the Cantor set (each of these are effectively 
 \begin_inset Quotes eld
 \end_inset
 
@@ -6296,11 +6402,7 @@ half
 \begin_inset Quotes erd
 \end_inset
 
- of the modular group 
-\begin_inset Formula $PSL(2,\mathbb{Z})$
-\end_inset
-
-, so of course these are all wrapped up together.
+ of the modular group, so the traces of that relationship should survive.)
 \end_layout
 
 \begin_layout Subsection
