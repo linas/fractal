@@ -1,11 +1,16 @@
 /*
- * Compute the divisor operator and the mobius operator
+ * Compute the divisor operator and the mobius operator.
+ * Verify that each is the left-right inverse of the other.
+ *
+ * Verify the totient function.
  *
  * Linas Vepstas November 2014
  */
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "totient.h"
 
 /* return 1 if d divides n, else return zero */
 /* This is the divisor operator */
@@ -66,19 +71,10 @@ int moebius_oper(int n, int k)
 	return -sum;
 }
 
-
-main(int argc, char *argv[])
+void check_moebius_scale()
 {
-	if (argc < 2)
-	{
-		fprintf(stderr, "Usage: %s k\n", argv[0]);
-		exit(1);
-	}
-	int n = atoi(argv[1]);
-
-
 	// Check that Moebius is just a blow up by row.
-	for (n=1; n<SZ; n++)
+	for (int n=1; n<SZ; n++)
 	{
 		int k;
 		for (k=1; n*k<SZ; k++)
@@ -91,7 +87,12 @@ main(int argc, char *argv[])
 		}
 	}
 
-	printf("Done scale\n");
+	printf("Done checking moebius scale\n");
+}
+
+void check_left_right_inverse()
+{
+	int n;
 	// check the left and right inverses.
 	for (n=1; n<SZ; n++)
 	{
@@ -107,7 +108,7 @@ main(int argc, char *argv[])
 			else if (n != k and sum != 0)  printf("left inversion failure at %d %d %d\n", n, k, sum);
 		}
 	}
-	printf("Done left\n");
+	printf("Done left inverse\n");
 
 	for (n=1; n<SZ; n++)
 	{
@@ -123,7 +124,22 @@ main(int argc, char *argv[])
 			else if (n != k and sum != 0)  printf("right inversion failure at %d %d %d\n", n, k, sum);
 		}
 	}
-	printf("Done right\n");
+	printf("Done right inverse\n");
+
+}
+
+
+main(int argc, char *argv[])
+{
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s k\n", argv[0]);
+		exit(1);
+	}
+	int n = atoi(argv[1]);
+
+	check_moebius_scale();
+	check_left_right_inverse();
 
 #if 0
 	for (int k=1; k<20; k++)
