@@ -5431,19 +5431,7 @@ Any Dirichlet series is straightforward: so, an operator with polylogarithm
 
 \end_inset
 
-An operator built from the Mobius function 
-\begin_inset Formula $\mu$
-\end_inset
-
-: 
-\begin_inset Formula 
-\[
-\left[\sum_{p=1}^{\infty}\mu(p)\mathcal{L}_{p}\right]\beta(x;s)=\sum_{p=1}^{\infty}\frac{\mu(p)}{p^{s}}\beta(x;s)=\frac{1}{\zeta(s)}\,\beta(x;s)
-\]
-
-\end_inset
-
-A curious squaring:
+There is a curious squaring:
 \begin_inset Formula 
 \[
 \left[\sum_{p=1}^{\infty}e^{2\pi iyp}\mathcal{L}_{p}\right]\beta(x;s)=\sum_{p=1}^{\infty}\frac{e^{2\pi iyp}}{p^{s}}\beta(x;s)=\frac{\left(2\pi\right)^{s}}{2\Gamma(s+1)}\,\beta(y;s)\beta(x;s)
@@ -5451,6 +5439,42 @@ A curious squaring:
 
 \end_inset
 
+An operator built from the Mobius function 
+\begin_inset Formula $\mu$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+\mathcal{M}_{D}=\sum_{p=1}^{\infty}\mu(p)\mathcal{L}_{p}\label{eq:mobius oper}
+\end{equation}
+
+\end_inset
+
+with an eigenvalue equation 
+\begin_inset Formula 
+\[
+\mathcal{M}_{D}\beta(x;s)=\sum_{p=1}^{\infty}\frac{\mu(p)}{p^{s}}\beta(x;s)=\frac{1}{\zeta(s)}\,\beta(x;s)
+\]
+
+\end_inset
+
+This 
+\begin_inset Quotes eld
+\end_inset
+
+Mobius operator
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\mathcal{M}_{D}$
+\end_inset
+
+ is explored further, below.
+\end_layout
+
+\begin_layout Standard
 Because the operators are multiplicative, Euler products
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -5474,11 +5498,11 @@ reference "eq:polylog-oper"
 \begin_inset Formula $\mbox{Li}_{s}(1)=\zeta\left(s\right)$
 \end_inset
 
-, while factoring the summation into primes yields 
+, while factoring the summation into primes yields
 \begin_inset Formula 
-\[
-\prod_{p\mbox{ prime}}\frac{1}{1-\mathcal{L}_{p}}\beta(x;s)=\zeta(s)\beta(x;s)
-\]
+\begin{equation}
+\mathcal{L}_{D}=\sum_{p=1}^{\infty}\mathcal{L}_{p}=\prod_{p\mbox{ prime}}\frac{1}{1-\mathcal{L}_{p}}\label{eq:divisor oper}
+\end{equation}
 
 \end_inset
 
@@ -5487,22 +5511,24 @@ The product is taken only over prime numbers
 \end_inset
 
 .
- One may likewise consider any of the other typical Euler products encountered
- in number theory.
- Defining the divisor operator 
+ The eigen-equation is 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-\mathcal{L}_{D}=\prod_{p\mbox{ prime}}\frac{1}{1-\mathcal{L}_{p}}
+\mathcal{L}_{D}\beta(x;s)=\zeta(s)\beta(x;s)
 \]
 
 \end_inset
 
-one then has the curious situation that the vectors in the kernel of 
+which illustrates the curious situation that the vectors in the kernel of
+ 
 \begin_inset Formula $\mathcal{L}_{D}$
 \end_inset
 
  are in correspondence with the zeroes of the Riemann zeta function.
- The reason for the name 
+ In what follows, we give this operator the name 
 \begin_inset Quotes eld
 \end_inset
 
@@ -5510,7 +5536,7 @@ divisor operator
 \begin_inset Quotes erd
 \end_inset
 
- is made clear in the next section.
+, as will be made clear in the next section.
 \end_layout
 
 \begin_layout Standard
@@ -5543,7 +5569,9 @@ and again,
 \end_layout
 
 \begin_layout Standard
-With considerably more difficulty, one might envision operators constructed
+One may likewise consider any of the other typical Euler products encountered
+ in number theory.
+ With considerably more difficulty, one might envision operators constructed
  after a sequence of differential and integral moves; for example, something
  involving the Mellin transform.
  In principle, any such operator may be constructed.
@@ -5607,25 +5635,24 @@ The Divisor Operator
 The synthetic operator given by equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:polylog-oper"
+reference "eq:divisor oper"
 
 \end_inset
 
  is curious enough that it deserves explicit exploration.
- It is generalized by something that can best be called the 
+ We give it the name 
 \begin_inset Quotes eld
 \end_inset
 
-Divisor operator
+divisor operator
 \begin_inset Quotes erd
 \end_inset
 
-.
- To see this, consider the operators 
+, which can be understood by considering the operators 
 \begin_inset Formula $\mathcal{L}_{p}$
 \end_inset
 
- In the fourier basis.
+ in the Fourier basis.
  In this basis, 
 \begin_inset Formula $\mathcal{L}_{1}=\mathbb{I}$
 \end_inset
@@ -6017,14 +6044,32 @@ In fact,
 \end_layout
 
 \begin_layout Standard
-It follows then, from equation 
+It is not hard to see that the Mobius operator 
+\begin_inset Formula $\mathcal{M}_{D}$
+\end_inset
+
+ constructed here is identical to the syntehtic operator constructed in
+ equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mobius oper"
+
+\end_inset
+
+: 
+\begin_inset Formula $\mathcal{M}_{D}=\sum_{p=1}^{\infty}\mu(p)\mathcal{L}_{p}$
+\end_inset
+
+.
+ It follows, through a variety of different arguments, whether from equation
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:divisor-eigen"
 
 \end_inset
 
- that the eigenvalues of 
+ or by general appeal to operator theory, that the eigenvalues of 
 \begin_inset Formula $\mathcal{M}_{D}$
 \end_inset
 
