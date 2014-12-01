@@ -43,7 +43,7 @@ int moebius_oper_slow(int n, int k)
 /* Faster version of above. */
 int moebius_oper(int n, int k)
 {
-#define SZ 100
+#define SZ 900
 	static char cache[SZ][SZ];
 	static bool done[SZ][SZ];
 	static bool is_init = false;
