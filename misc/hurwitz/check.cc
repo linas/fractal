@@ -1,5 +1,5 @@
 //
-// Quikc double-check
+// Quick double-check
 //
 // Linas Nov 2014
 
@@ -21,6 +21,9 @@ main()
 
 		co /= M_PI;
 		si /= M_PI;
+
+		// si should be Bernoulli polunomial B_1(x) = x-0.5
+		// co should be Clausen function of order 1
 		printf("%f	%f	%f	%f\n", x, co, si, x-0.5);
 	}
 }

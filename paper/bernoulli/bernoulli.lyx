@@ -5864,6 +5864,22 @@ reference "eq:divisor-eigen"
 \end_layout
 
 \begin_layout Standard
+How should the the kernel of the divisor operator be understood? Because
+ we have that 
+\begin_inset Formula $\mathcal{L}_{D}\beta(x;s)=\zeta(s)\beta(x;s)$
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $\beta(1-x;s)$
+\end_inset
+
+, we have that the kernel corresponds to the zeros of the Riemann zeta.
+ For the regular zeros...
+ finish me.
+ The zeros on the critical strip are quite another matter.
+\end_layout
+
+\begin_layout Standard
 By analogy, the generalized divisor operator corresponding to the sigma
  function is then
 \begin_inset Formula 
@@ -6028,6 +6044,30 @@ and, by construction, this is the left inverse to the divisor function:
 
 \end_inset
 
+In fact, 
+\begin_inset Formula $\mathcal{M}_{D}$
+\end_inset
+
+ is also the right-sided inverse: 
+\begin_inset Formula $\mathcal{L}_{D}\mathcal{M}_{D}=\mathbb{I}$
+\end_inset
+
+, which is easy to verify.
+ Thus, in the Fourier representation, we may correctly write 
+\begin_inset Formula $\mathcal{M}_{D}=\mathcal{L}_{D}^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{L}_{D}=\mathcal{M}_{D}^{-1}$
+\end_inset
+
+although this is rather bizarre: both operators have a non-trivial kernel!
+ This is quite unlike the case of finite-dimensional matrices, where any
+ finite matrix with a non-trivial kernel is not invertible.
+ How can this be? What is the correct way of understanding this?
+\end_layout
+
+\begin_layout Standard
 It follows then, from equation 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6091,12 +6131,17 @@ reference "eq:beta function"
 ), and so one has that 
 \begin_inset Formula 
 \[
-\left[\mathcal{M}_{D}\beta\right](x;s)=\frac{\beta(x;s)}{\zeta(s)}
+\left[\mathcal{M}_{D}\beta(s)\right](x)=\frac{\beta(x;s)}{\zeta(s)}
 \]
 
 \end_inset
 
-Because the zeta function has only one pole, at 
+with the same identity holding for 
+\begin_inset Formula $\beta(1-x;s)$
+\end_inset
+
+.
+ Because the zeta function has only one pole, at 
 \begin_inset Formula $s=1$
 \end_inset
 
@@ -6143,8 +6188,30 @@ More Number Theory
 
 \begin_layout Standard
 Further well-known identities from Dirichlet convolution follow in a similar
- fashion: one may define operators that correspond to all the well-known
- number-theoretic functions.
+ fashion.
+ Let 
+\begin_inset Formula $1=(1,1,1,\cdots)$
+\end_inset
+
+ be the row vector of all-ones; let 
+\begin_inset Formula $\epsilon=(1,0,0,\cdots)$
+\end_inset
+
+ be the row vector with one in the first position, and then all zeros.
+ Then clearly, 
+\begin_inset Formula $1\mathcal{M}_{D}=\epsilon$
+\end_inset
+
+ is the operator equation analog of the Dirichlet convolution 
+\begin_inset Formula $1*\mu=\epsilon$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+One may define operators that correspond to all the well-known number-theoretic
+ functions.
  Each is effectively constructed as a 
 \begin_inset Quotes eld
 \end_inset

@@ -77,6 +77,7 @@ main(int argc, char *argv[])
 	int n = atoi(argv[1]);
 
 
+	// Check that Moebius is just a blow up by row.
 	for (n=1; n<SZ; n++)
 	{
 		int k;
@@ -89,6 +90,41 @@ main(int argc, char *argv[])
 			if (moebius_oper(1,k) != moebius_oper(n, n*k)) printf("Error: bad scale n=%d k=%d\n", n, k);
 		}
 	}
+
+	printf("Done scale\n");
+	// check the left and right inverses.
+	for (n=1; n<SZ; n++)
+	{
+		int k;
+		for (k=1; k<SZ; k++)
+		{
+			int sum = 0;
+			for (int j=1; j<SZ; j++)
+			{
+				sum += moebius_oper(n, j) * divides(j,k);
+			}
+			if (n==k and sum != 1) printf("left inversion failure at %d %d %d\n", n, k, sum);
+			else if (n != k and sum != 0)  printf("left inversion failure at %d %d %d\n", n, k, sum);
+		}
+	}
+	printf("Done left\n");
+
+	for (n=1; n<SZ; n++)
+	{
+		int k;
+		for (k=1; k<SZ; k++)
+		{
+			int sum = 0;
+			for (int j=1; j<SZ; j++)
+			{
+				sum += divides(n, j) * moebius_oper(j,k);
+			}
+			if (n==k and sum != 1) printf("right inversion failure at %d %d %d\n", n, k, sum);
+			else if (n != k and sum != 0)  printf("right inversion failure at %d %d %d\n", n, k, sum);
+		}
+	}
+	printf("Done right\n");
+
 #if 0
 	for (int k=1; k<20; k++)
 	{
