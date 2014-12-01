@@ -9,7 +9,7 @@
 main()
 {
 	double x;
-	for (x=0.0; x<1.0; x+=0.02)
+	for (x=0.0; x<1.0; x+=0.005)
 	{
 		double co=0.0;
 		double si=0.0;
