@@ -24,10 +24,7 @@ realclean:	clean
 dist:
 	tar -zcvf *.cc *.gplot Makefile .gitignore
 
-.c.o:
-	$(CC) -c -O2 -I$(INC) $<
-
-.C.o:
+.c.o .cc.o .C.o:
 	$(CC) -c -O2 -I$(INC) $<
 
 .o:

@@ -43,7 +43,7 @@ int moebius_oper_slow(int n, int k)
 /* Faster version of above. */
 int moebius_oper(int n, int k)
 {
-#define SZ 1900
+#define SZ 100
 	static char cache[SZ][SZ];
 	static bool done[SZ][SZ];
 	static bool is_init = false;
@@ -125,21 +125,39 @@ void check_left_right_inverse()
 		}
 	}
 	printf("Done right inverse\n");
-
 }
 
 
-main(int argc, char *argv[])
+void check_totient()
+{
+	int n;
+	// check the toient function
+	for (n=1; n<SZ; n++)
+	{
+		int sum = 0;
+		for (int k=1; k<SZ; k++)
+		{
+			sum += k * moebius_oper(k, n);
+		}
+		int tot = totient_phi(n);
+		if (sum != tot) printf("totient failure at %d %d %d\n", n, sum, tot);
+	}
+	printf("Done checking totient\n");
+}
+
+
+int main(int argc, char *argv[])
 {
 	if (argc < 2)
 	{
 		fprintf(stderr, "Usage: %s k\n", argv[0]);
 		exit(1);
 	}
-	int n = atoi(argv[1]);
+	// int n = atoi(argv[1]);
 
-	check_moebius_scale();
-	check_left_right_inverse();
+	// check_moebius_scale();
+	// check_left_right_inverse();
+	check_totient();
 
 #if 0
 	for (int k=1; k<20; k++)

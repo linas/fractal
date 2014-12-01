@@ -48,7 +48,7 @@ int totient_phi(int n)
 {
 	if (n < 0) n=-n;
 	/* handle a few trivial boundary cases */
-	if (n <= 1) return 0;
+	if (n <= 1) return 1;   /* Used to be zero!? WTF ? -- linas */
 	if (n == 2) return 1;
 	if (n == 3) return 2;
 	return phiphi(n,2);
