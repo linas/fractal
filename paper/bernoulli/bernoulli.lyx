@@ -6625,6 +6625,235 @@ half
 \end_layout
 
 \begin_layout Subsection
+Multiplication theorem
+\end_layout
+
+\begin_layout Standard
+Given some series 
+\begin_inset Formula $\{f_{n}\}$
+\end_inset
+
+, consider the synthetic operator
+\begin_inset Formula 
+\[
+\mathcal{F}=\sum_{n=1}^{\infty}f_{n}\mathcal{L}_{n}
+\]
+
+\end_inset
+
+Working in the Fourier representation, the operators 
+\begin_inset Formula $\mathcal{L}_{n}$
+\end_inset
+
+ have the matrix elements 
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{n}\right]_{mk}=\delta_{mn,k}
+\]
+
+\end_inset
+
+Acting on vector 
+\begin_inset Formula $a=\{a_{n}\}$
+\end_inset
+
+, the operator 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ gives 
+\begin_inset Formula 
+\[
+\left[\mathcal{F}a\right]_{m}=\sum_{k=1}^{\infty}\sum_{n=1}^{\infty}f_{n}\delta_{mn,k}a_{k}=\sum_{n=1}^{\infty}f_{n}a_{mn}
+\]
+
+\end_inset
+
+If the series 
+\begin_inset Formula $a=\{a_{n}\}$
+\end_inset
+
+ is totally multiplicative, then, by definition of multiplicativity, one
+ has that 
+\begin_inset Formula $a_{mn}=a_{m}a_{n}$
+\end_inset
+
+ and so 
+\begin_inset Formula 
+\[
+\left[\mathcal{F}a\right]_{m}=a_{m}\sum_{n=1}^{\infty}f_{n}a_{n}
+\]
+
+\end_inset
+
+Writing this as an operator equation, we have 
+\begin_inset Formula 
+\[
+\mathcal{F}a=(f\cdot a)a
+\]
+
+\end_inset
+
+where the eigenvalue is the dot product 
+\begin_inset Formula $f\cdot a$
+\end_inset
+
+ and 
+\begin_inset Formula $a$
+\end_inset
+
+ is the eigenvector.
+ What have we done here? For any series 
+\begin_inset Formula $\{f_{n}\}$
+\end_inset
+
+, we have constructed an operator 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ that has, as eigenvectors, any multiplicative series!
+\end_layout
+
+\begin_layout Standard
+As one special case, we immeditately have that 
+\begin_inset Formula 
+\[
+\mathcal{F}\beta(x;s)=\lambda\beta(x;s)
+\]
+
+\end_inset
+
+with the eigenvalue being the Dirichlet series 
+\begin_inset Formula $\lambda=\sum_{n=1}^{\infty}f_{n}n^{-s}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+As another a special case, any totally multiplicative series is an eigenvector
+ of the Bernoulli operator.
+ That is:
+\begin_inset Formula 
+\[
+\mathcal{L}_{p}a=a_{p}a
+\]
+
+\end_inset
+
+The intersting question, from the point of view of having a functional analysis,
+ is to answer the question 
+\begin_inset Quotes eld
+\end_inset
+
+which totaly multiplicative series belong to 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+? Of course, the series 
+\begin_inset Formula $n^{-s}$
+\end_inset
+
+ for 
+\begin_inset Formula $\Re s>1$
+\end_inset
+
+ (or 
+\begin_inset Formula $\Re s>\frac{1}{2}$
+\end_inset
+
+ for 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+) satisfy this requirement.
+ Are there other series? The usual suspects: Euler's totient, the Liouville
+ function, the von Mangoldt function are not.
+ The Jordan totient function, and the divisor function, for a suitable restricti
+on of the paramter 
+\begin_inset Formula $z$
+\end_inset
+
+ to a portion of the complex plane, are summable.
+ So are the Dirichlet L-functions, of course.
+ 
+\end_layout
+
+\begin_layout Standard
+By analogy to the beta functions defined in
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:beta function"
+
+\end_inset
+
+, we may give the explicit functional form to these: 
+\begin_inset Formula 
+\[
+\alpha(x)=\sum_{n=1}^{\infty}a_{n}\exp(2\pi inx)
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\alpha(x)$
+\end_inset
+
+ together with 
+\begin_inset Formula $\alpha(1-x)$
+\end_inset
+
+ satisfy the Ruelle-Frobenius-Perron operator or transfer operator of the
+ Bernoulli map, as given in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:p-adic operator"
+
+\end_inset
+
+.
+ That is, we have, by construction, that 
+\begin_inset Formula 
+\begin{equation}
+\left[\mathcal{L}_{p}\alpha\right](x)=\frac{1}{p}\sum_{k=0}^{p-1}\alpha\left(\frac{x+k}{p}\right)=a_{p}\alpha(x)\label{eq:multiplication thm}
+\end{equation}
+
+\end_inset
+
+This last is recognizable as the 
+\begin_inset Quotes eld
+\end_inset
+
+multiplication theorem
+\begin_inset Quotes erd
+\end_inset
+
+ of the special functions
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WP-Mult"
+
+\end_inset
+
+, thus giving a general way of constructing functions that obey this theorem.
+\end_layout
+
+\begin_layout Standard
+For those multiplicative series that are not summable, some form of analytic
+ continuation must be found, in order to give meaningful results.
+ 
+\end_layout
+
+\begin_layout Subsection
 Hardy Classes
 \end_layout
 
