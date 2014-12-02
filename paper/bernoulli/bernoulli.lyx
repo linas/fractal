@@ -6659,9 +6659,9 @@ Given some series
 
 , consider the synthetic operator
 \begin_inset Formula 
-\[
-\mathcal{F}=\sum_{n=1}^{\infty}f_{n}\mathcal{L}_{n}
-\]
+\begin{equation}
+\mathcal{F}=\sum_{n=1}^{\infty}f_{n}\mathcal{L}_{n}\label{eq:synth linear}
+\end{equation}
 
 \end_inset
 
@@ -6756,7 +6756,18 @@ with the eigenvalue being the Dirichlet series
 \end_inset
 
 .
- 
+ But of course: the synthetic operators 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:synth linear"
+
+\end_inset
+
+ are just linear combinations, and so the eigenvectors are unchanged.
+\end_layout
+
+\begin_layout Subsubsection
+The Multiplication theorem
 \end_layout
 
 \begin_layout Standard
@@ -6770,122 +6781,6 @@ As another a special case, any totally multiplicative series is an eigenvector
 
 \end_inset
 
-The intersting question, from the point of view of having a functional analysis,
- is to answer the question 
-\begin_inset Quotes eld
-\end_inset
-
-which totaly multiplicative series belong to 
-\begin_inset Formula $l_{1}$
-\end_inset
-
- or 
-\begin_inset Formula $l_{2}$
-\end_inset
-
-
-\begin_inset Quotes erd
-\end_inset
-
-? Of course, the series 
-\begin_inset Formula $n^{-s}$
-\end_inset
-
- for 
-\begin_inset Formula $\Re s>1$
-\end_inset
-
- (or 
-\begin_inset Formula $\Re s>\frac{1}{2}$
-\end_inset
-
- for 
-\begin_inset Formula $l_{2}$
-\end_inset
-
-) satisfy this requirement.
- Are there other series? The usual suspects: the totient function, the divisor
- function, the Liouville function, the von Mangoldt function are not actually
- totally multiplicative; they are multiplicative only when thier arguments
- are coprime.
- The only well-known multiplicative functions are the Liouville function,
- and the Dirichlet characters.
- The Liouville function 
-\begin_inset Formula $\lambda(n)$
-\end_inset
-
- is not 
-\begin_inset Formula $l_{1}$
-\end_inset
-
--summable, but the function 
-\begin_inset Formula $\lambda(n)n^{-s}$
-\end_inset
-
-, for suitable 
-\begin_inset Formula $s$
-\end_inset
-
-, is (the product of any two multiplicative functions is multiplicative).
- Likewise, the Dirichlet charaters 
-\begin_inset Formula $\chi(n)$
-\end_inset
-
- are not summable, but the functions 
-\begin_inset Formula $\chi(n)n^{-s}$
-\end_inset
-
- are.
- 
-\end_layout
-
-\begin_layout Standard
-There is another noteworthy possibility.
- If 
-\begin_inset Formula $a(n)$
-\end_inset
-
- is a totally additive function, so that 
-\begin_inset Formula $a(mn)=a(m)+a(n)$
-\end_inset
-
-, then 
-\begin_inset Formula $c_{n}=z^{a(n)}$
-\end_inset
-
- is totally mutiplicative, and is obviously summable for 
-\begin_inset Formula $\left|z\right|<1$
-\end_inset
-
-.
- There are two well-known totally additive functions: 
-\begin_inset Formula $\Omega(n)$
-\end_inset
-
-, the total number of prime factors of 
-\begin_inset Formula $n$
-\end_inset
-
- counted with multiplicity, and 
-\begin_inset Formula $\nu_{p}(n)$
-\end_inset
-
-, the number of times that the prime factor 
-\begin_inset Formula $p$
-\end_inset
-
- occurs in the factorization of 
-\begin_inset Formula $n$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection
-The Multiplication theorem
-\end_layout
-
-\begin_layout Standard
 By analogy to the beta functions defined in
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6958,6 +6853,152 @@ key "WP-Mult"
 For those multiplicative series that are not summable, some form of analytic
  continuation must be found, in order to give meaningful results.
  
+\end_layout
+
+\begin_layout Subsubsection
+Summability
+\end_layout
+
+\begin_layout Standard
+The intersting question, from the point of view of having a functional analysis,
+ is to answer the question 
+\begin_inset Quotes eld
+\end_inset
+
+which totally multiplicative series belong to 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+? Of course, the series 
+\begin_inset Formula $n^{-s}$
+\end_inset
+
+ for 
+\begin_inset Formula $\Re s>1$
+\end_inset
+
+ (or 
+\begin_inset Formula $\Re s>\frac{1}{2}$
+\end_inset
+
+ for 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+) satisfy this requirement.
+ Are there other series? The usual suspects: the totient function, the divisor
+ function, the Liouville function, the von Mangoldt function are not actually
+ totally multiplicative; they are multiplicative only when thier arguments
+ are coprime.
+ The only well-known completely multiplicative functions are the Liouville
+ function, and the Dirichlet characters.
+ The Liouville function 
+\begin_inset Formula $\lambda(n)$
+\end_inset
+
+ is not 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+-summable, but the function 
+\begin_inset Formula $\lambda(n)n^{-s}$
+\end_inset
+
+, for suitable 
+\begin_inset Formula $s$
+\end_inset
+
+, is (the product of any two multiplicative functions is multiplicative).
+ Likewise, the Dirichlet charaters 
+\begin_inset Formula $\chi(n)$
+\end_inset
+
+ themselves are not summable, but the functions 
+\begin_inset Formula $\chi(n)n^{-s}$
+\end_inset
+
+ are.
+ 
+\end_layout
+
+\begin_layout Standard
+There is another noteworthy possibility.
+ If 
+\begin_inset Formula $a(n)$
+\end_inset
+
+ is a totally additive function, so that 
+\begin_inset Formula $a(mn)=a(m)+a(n)$
+\end_inset
+
+, then 
+\begin_inset Formula $c_{n}=z^{a(n)}$
+\end_inset
+
+ is totally mutiplicative, and is obviously summable for 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset
+
+.
+ There are two well-known totally additive functions: 
+\begin_inset Formula $\Omega(n)$
+\end_inset
+
+, the total number of prime factors of 
+\begin_inset Formula $n$
+\end_inset
+
+ counted with multiplicity, and 
+\begin_inset Formula $\nu_{p}(n)$
+\end_inset
+
+, the number of times that the prime factor 
+\begin_inset Formula $p$
+\end_inset
+
+ occurs in the factorization of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Since the product of any two multiplicative functions is multiplicative,
+ we can create arbitrary chimeras, such as 
+\begin_inset Formula $c_{n}=z^{a(n)}n^{-s}$
+\end_inset
+
+.
+ Each of these gives a distinct set of eigenvector equations.
+ What is not clear is if, or how, any of these might be linear combinations
+ of each other.
+ That is, fix a constant 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, so that 
+\begin_inset Formula $\mathcal{L}_{p}c=\lambda c$
+\end_inset
+
+.
+ What is the space spanned by all such 
+\begin_inset Formula $c$
+\end_inset
+
+'s? Can an orthogonal basis be given? What are the smallest sets of totally
+ mutiplicative functions that span this space? None of these answers seem
+ obvious.
+ There is a very rich collection of eigenfunctions of the Bernoulli operator,
+ with no straightforward way of characterizing them.
 \end_layout
 
 \begin_layout Subsection
