@@ -6678,7 +6678,7 @@ Working in the Fourier representation, the operators
 \end_inset
 
 Acting on vector 
-\begin_inset Formula $a=\{a_{n}\}$
+\begin_inset Formula $c=\{c_{n}\}$
 \end_inset
 
 , the operator 
@@ -6688,24 +6688,28 @@ Acting on vector
  gives 
 \begin_inset Formula 
 \[
-\left[\mathcal{F}a\right]_{m}=\sum_{k=1}^{\infty}\sum_{n=1}^{\infty}f_{n}\delta_{mn,k}a_{k}=\sum_{n=1}^{\infty}f_{n}a_{mn}
+\left[\mathcal{F}c\right]_{m}=\sum_{k=1}^{\infty}\sum_{n=1}^{\infty}f_{n}\delta_{mn,k}c_{k}=\sum_{n=1}^{\infty}f_{n}c_{mn}
 \]
 
 \end_inset
 
 If the series 
-\begin_inset Formula $a=\{a_{n}\}$
+\begin_inset Formula $c=\{c_{n}\}$
 \end_inset
 
  is totally multiplicative, then, by definition of multiplicativity, one
  has that 
-\begin_inset Formula $a_{mn}=a_{m}a_{n}$
+\begin_inset Formula $c_{mn}=c_{m}c_{n}$
 \end_inset
 
- and so 
+ for all 
+\begin_inset Formula $m,n$
+\end_inset
+
+, and so 
 \begin_inset Formula 
 \[
-\left[\mathcal{F}a\right]_{m}=a_{m}\sum_{n=1}^{\infty}f_{n}a_{n}
+\left[\mathcal{F}c\right]_{m}=c_{m}\sum_{n=1}^{\infty}f_{n}c_{n}
 \]
 
 \end_inset
@@ -6713,17 +6717,17 @@ If the series
 Writing this as an operator equation, we have 
 \begin_inset Formula 
 \[
-\mathcal{F}a=(f\cdot a)a
+\mathcal{F}c=(f\cdot c)c
 \]
 
 \end_inset
 
 where the eigenvalue is the dot product 
-\begin_inset Formula $f\cdot a$
+\begin_inset Formula $f\cdot c$
 \end_inset
 
  and 
-\begin_inset Formula $a$
+\begin_inset Formula $c$
 \end_inset
 
  is the eigenvector.
@@ -6735,7 +6739,7 @@ where the eigenvalue is the dot product
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- that has, as eigenvectors, any multiplicative series!
+ that has, as eigenvectors, any totally multiplicative series!
 \end_layout
 
 \begin_layout Standard
@@ -6761,7 +6765,7 @@ As another a special case, any totally multiplicative series is an eigenvector
  That is:
 \begin_inset Formula 
 \[
-\mathcal{L}_{p}a=a_{p}a
+\mathcal{L}_{p}c=c_{p}c
 \]
 
 \end_inset
@@ -6800,16 +6804,85 @@ which totaly multiplicative series belong to
 \end_inset
 
 ) satisfy this requirement.
- Are there other series? The usual suspects: Euler's totient, the Liouville
- function, the von Mangoldt function are not.
- The Jordan totient function, and the divisor function, for a suitable restricti
-on of the paramter 
-\begin_inset Formula $z$
+ Are there other series? The usual suspects: the totient function, the divisor
+ function, the Liouville function, the von Mangoldt function are not actually
+ totally multiplicative; they are multiplicative only when thier arguments
+ are coprime.
+ The only well-known multiplicative functions are the Liouville function,
+ and the Dirichlet characters.
+ The Liouville function 
+\begin_inset Formula $\lambda(n)$
 \end_inset
 
- to a portion of the complex plane, are summable.
- So are the Dirichlet L-functions, of course.
+ is not 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+-summable, but the function 
+\begin_inset Formula $\lambda(n)n^{-s}$
+\end_inset
+
+, for suitable 
+\begin_inset Formula $s$
+\end_inset
+
+, is (the product of any two multiplicative functions is multiplicative).
+ Likewise, the Dirichlet charaters 
+\begin_inset Formula $\chi(n)$
+\end_inset
+
+ are not summable, but the functions 
+\begin_inset Formula $\chi(n)n^{-s}$
+\end_inset
+
+ are.
  
+\end_layout
+
+\begin_layout Standard
+There is another noteworthy possibility.
+ If 
+\begin_inset Formula $a(n)$
+\end_inset
+
+ is a totally additive function, so that 
+\begin_inset Formula $a(mn)=a(m)+a(n)$
+\end_inset
+
+, then 
+\begin_inset Formula $c_{n}=z^{a(n)}$
+\end_inset
+
+ is totally mutiplicative, and is obviously summable for 
+\begin_inset Formula $\left|z\right|<1$
+\end_inset
+
+.
+ There are two well-known totally additive functions: 
+\begin_inset Formula $\Omega(n)$
+\end_inset
+
+, the total number of prime factors of 
+\begin_inset Formula $n$
+\end_inset
+
+ counted with multiplicity, and 
+\begin_inset Formula $\nu_{p}(n)$
+\end_inset
+
+, the number of times that the prime factor 
+\begin_inset Formula $p$
+\end_inset
+
+ occurs in the factorization of 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+The Multiplication theorem
 \end_layout
 
 \begin_layout Standard
@@ -6820,20 +6893,20 @@ reference "eq:beta function"
 
 \end_inset
 
-, we may give the explicit functional form to these: 
+, the explicit functional form may be given: 
 \begin_inset Formula 
 \[
-\alpha(x)=\sum_{n=1}^{\infty}a_{n}\exp(2\pi inx)
+\gamma(x)=\sum_{n=1}^{\infty}c_{n}\exp(2\pi inx)
 \]
 
 \end_inset
 
 Then 
-\begin_inset Formula $\alpha(x)$
+\begin_inset Formula $\gamma(x)$
 \end_inset
 
  together with 
-\begin_inset Formula $\alpha(1-x)$
+\begin_inset Formula $\gamma(1-x)$
 \end_inset
 
  satisfy the Ruelle-Frobenius-Perron operator or transfer operator of the
@@ -6848,7 +6921,7 @@ reference "eq:p-adic operator"
  That is, we have, by construction, that 
 \begin_inset Formula 
 \begin{equation}
-\left[\mathcal{L}_{p}\alpha\right](x)=\frac{1}{p}\sum_{k=0}^{p-1}\alpha\left(\frac{x+k}{p}\right)=a_{p}\alpha(x)\label{eq:multiplication thm}
+\left[\mathcal{L}_{p}\gamma\right](x)=\frac{1}{p}\sum_{k=0}^{p-1}\gamma\left(\frac{x+k}{p}\right)=c_{p}\gamma(x)\label{eq:multiplication thm}
 \end{equation}
 
 \end_inset
@@ -6870,15 +6943,15 @@ key "WP-Mult"
 
 , thus giving a general way of constructing functions that obey this theorem.
  By letting 
-\begin_inset Formula $a_{n}=n^{-s}$
+\begin_inset Formula $c_{n}=n^{-s}$
 \end_inset
 
-, and applygint various limits, one obtains each of the well-known multiplicatio
-n theorems for the special functions.
+, and applying various limits, one obtains each of the well-known multiplication
+ theorems for the special functions.
  The periodic zeta function, the Hurwitz zeta function, and the Bernoulli
  polynomials were previously covered above.
  The polylogarithm follows easily, with little effort.
- The polygamma function is a different matter...
+ The polygamma function presents a different and more interesting case.
 \end_layout
 
 \begin_layout Standard
