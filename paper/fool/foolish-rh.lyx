@@ -199,8 +199,8 @@ For the next step, we are interested in conditionally convergent sums that
 \begin_inset Formula $l_{2}=\left\{ \{a_{n}\}:\sum_{n=1}^{\infty}\left|a_{n}\right|^{2}<\infty\right\} $
 \end_inset
 
- because this is wher Fourier series are.
- Eveyone know that of course 
+ because this is where Fourier series are.
+ Everyone knows that of course 
 \begin_inset Formula $l_{1}\subset l_{2}\subset l_{\infty}$
 \end_inset
 
@@ -237,11 +237,76 @@ Now add the Fourier bits back in.
 \end_layout
 
 \begin_layout Itemize
+But let's review it anyway.
+ In order for Fourier series to work, we have to have that 
+\begin_inset Formula $\alpha\in L^{(2)}$
+\end_inset
+
+ where 
+\begin_inset Formula $L^{(2)}=\left\{ f:\int_{0}^{1}\left|f(x)\right|^{2}dx<\infty\right\} $
+\end_inset
+
+.
+ Claim that 
+\begin_inset Formula $a\in l_{2}$
+\end_inset
+
+ is sufficient to guarantee that 
+\begin_inset Formula $\alpha\in L^{(2)}$
+\end_inset
+
+.
+ Need to find citation for this.
+ This is really a special case of a well-known result from Banach spaces
+ that relates 
+\begin_inset Formula $l_{p}$
+\end_inset
+
+ to 
+\begin_inset Formula $L^{(q)}$
+\end_inset
+
+ for blah blah.
+ Need citation for this.
+\end_layout
+
+\begin_layout Itemize
+The above does NOT mean that the summation holds for all 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ It is very much NOT the case that 
+\begin_inset Formula $\left|\alpha(x)\right|<\infty$
+\end_inset
+
+ for all 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula $L^{(\infty)}\subset L^{(2)}\subset L^{(1)}$
+\end_inset
+
+.
+ But that's OK, because we don't need 
+\begin_inset Formula $L^{(\infty)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
 We already know, by purely formal means, that 
 \begin_inset Formula $L\beta(x;s)=\zeta(s)\beta(x;s)$
 \end_inset
 
- Whre is this well defined? Well, since 
+ For what values of 
+\begin_inset Formula $s$
+\end_inset
+
+ is this well defined? Well, since 
 \begin_inset Formula $\beta(x;s)=\sum_{n=1}^{\infty}n^{-s}\exp\left(2\pi inx\right)$
 \end_inset
 
@@ -253,7 +318,7 @@ We already know, by purely formal means, that
 \begin_inset Formula $\Re s>1$
 \end_inset
 
-and that its conditionally summable iff 
+and that it is conditionally summable iff 
 \begin_inset Formula $\Re s>\frac{1}{2}$
 \end_inset
 
@@ -263,8 +328,52 @@ and that its conditionally summable iff
 \end_inset
 
  is well-behaved in this area, in the classic textbook sense of well-behaved.
- (err uniform convergence? No, got the gibbs ringing, etc.
- clarify.)
+ That is, for fixed 
+\begin_inset Formula $x$
+\end_inset
+
+, we have that 
+\begin_inset Formula 
+\[
+\left|\beta(x;s)\right|=\left|\sum_{n=1}^{\infty}n^{-s}\exp\left(2\pi inx\right)\right|<\sum_{n=1}^{\infty}\left|n^{-s}\exp\left(2\pi inx\right)\right|=\sum_{n=1}^{\infty}n^{-\Re s}
+\]
+
+\end_inset
+
+and so that we have 
+\begin_inset Formula $\beta\in L^{(\infty)}$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\Re s>1$
+\end_inset
+
+.
+ But this just follows from a well-known correllary of the theory of Banach
+ spaces.
+ Which we already cited up above.
+ And, again, we observe that the series 
+\begin_inset Formula $\{n^{-s}\}\in l_{2}$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\Re s>\frac{1}{2}$
+\end_inset
+
+.
+ We can also write this in dullardly detail:
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\left|n^{-s}\exp\left(2\pi inx\right)\right|^{2}=\sum_{n=1}^{\infty}n^{-2\Re s}<\infty
+\]
+
+\end_inset
+
+when 
+\begin_inset Formula $\Re s>\frac{1}{2}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -294,6 +403,33 @@ Suppose that there exists a zero
 \end_inset
 
  to still hold in this new setting?
+\end_layout
+
+\begin_layout Itemize
+todo: prove claim: if 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ is ..
+ what ..
+ 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+?? then show that 
+\begin_inset Formula $Lf(x)$
+\end_inset
+
+ is 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ also.
+ Similarly, for 
+\begin_inset Formula $M$
+\end_inset
+
+.
 \end_layout
 
 \end_body
