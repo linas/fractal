@@ -73,6 +73,10 @@
 A Foolish Proof of RH
 \end_layout
 
+\begin_layout Date
+December 2, 2014
+\end_layout
+
 \begin_layout Abstract
 What's wrong with this picture? Is there some glib handwaving masking the
  failing part of the proof?
@@ -961,13 +965,97 @@ So, to recap, we have that
  integrability, the endpoints doing matter.
 \end_layout
 
+\begin_layout Standard
+Persuing an identical argument, we get that 
+\begin_inset Formula $\left[M\beta\right](x;s)=\zeta(s)^{-1}\beta(x;s)$
+\end_inset
+
+ is valid, as a Fourier equation, over the entire complex 
+\begin_inset Formula $s$
+\end_inset
+
+-plance.
+ Note the choice of language: We are 
+\emph on
+not
+\emph default
+ saying that this is an operator equation, because we have 
+\emph on
+not
+\emph default
+ discussed what happens under a change of basis.
+ Likewise, we have avoided the connotations associated with the words 
+\begin_inset Quotes eld
+\end_inset
+
+Hilbert space
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Its not that we expect anything bad to happen under a change of basis;
+ its rather a side topic that does not seem to have any bearing on the argument.
+ In all cses, the operator 
+\begin_inset Formula $L$
+\end_inset
+
+ is always taken in the basis where its matrix elements are as initially
+ defined.
+\end_layout
+
+\begin_layout Standard
+We have taken the liberty of calling this an eigen-equation, despite the
+ fact that the spectrum appears to be continuous, rather than discrete.
+ Explorations of the spectrum are interesting in thier own right, but, again,
+ seem to have no particular bearing on the argument at hand.
+\end_layout
+
+\begin_layout Subsubsection
+Integrability Redux
+\end_layout
+
+\begin_layout Standard
+We would like to make the claim that, if 
+\begin_inset Formula $f\in L^{(2)}$
+\end_inset
+
+ then 
+\begin_inset Formula $Lf\in L^{(2)}$
+\end_inset
+
+also, where 
+\begin_inset Formula $Lf$
+\end_inset
+
+ is short-hand for 
+\begin_inset Formula $\left[Lf\right](x)$
+\end_inset
+
+, and, as explained above, 
+\begin_inset Formula $\left[Lf\right](x)$
+\end_inset
+
+ is, in turn, a short-hand for a Fourier sum perfomed on the product formed
+ from 
+\begin_inset Formula $L$
+\end_inset
+
+ and the Fourier decomposition of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ However, for the moment, it does not seem that this claim is needed anywhere,
+ so we leave it unjustified.
+\end_layout
+
 \begin_layout Subsection
 The critical strip
 \end_layout
 
-\begin_layout Itemize
-Suppose that there exists a zero 
-\begin_inset Formula $s=\sigma+i\tau$
+\begin_layout Standard
+Suppose that the Riemann zeta function has a zero at 
+\begin_inset Formula $s=s_{0}=\sigma+i\tau$
 \end_inset
 
  with 
@@ -976,49 +1064,146 @@ Suppose that there exists a zero
 
 .
  This implies that 
-\begin_inset Formula $L\beta(x;s)=0$
+\begin_inset Formula $\left[L\beta\right](x;s_{0})=0$
 \end_inset
 
 .
- So, lets multiply this by 
+ Likewise, we conclude that 
+\begin_inset Formula $\left[M\beta\right](x;s)$
+\end_inset
+
+ has a pole at 
+\begin_inset Formula $s=s_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+So, lets multiply this by 
 \begin_inset Formula $M$
 \end_inset
 
 .
- What happens? Well, first of all, this is not the same L and M as before.
- What are these new beasts, and how are they related to the old beasts?
- In particular, in what sense can we expect 
+ What happens? In particular, in what sense can we expect 
 \begin_inset Formula $M=L^{-1}$
 \end_inset
 
  to still hold in this new setting?
 \end_layout
 
-\begin_layout Itemize
-todo: prove claim: if 
-\begin_inset Formula $f(x)$
+\begin_layout Standard
+Well, therein lies the rub, dudn't it? We do have that 
+\begin_inset Formula $M=L^{-1}$
 \end_inset
 
- is ..
- what ..
- 
-\begin_inset Formula $L_{2}$
+ as ever before.
+ Through the round-about manipulations, though, nothing really happens here.
+ That is, we are just droping a pole onto a zero, and the two shall cancel;
+ this should be no surprise.
+ Right?
+\end_layout
+
+\begin_layout Standard
+To get a proof of the RH, we need to make a stronger claim.
+ We need to prove that 
+\begin_inset Formula $L$
 \end_inset
 
-?? then show that 
-\begin_inset Formula $Lf(x)$
+ is not singular on 
+\begin_inset Formula $L^{(2)}$
 \end_inset
 
- is 
-\begin_inset Formula $L_{2}$
+, that it is invertible on 
+\begin_inset Formula $L^{(2)}$
 \end_inset
 
- also.
- Similarly, for 
+ and that 
 \begin_inset Formula $M$
 \end_inset
 
+ is it's inverse on 
+\begin_inset Formula $L^{(2)}$
+\end_inset
+
 .
+ All that we have for certain, right now is that 
+\begin_inset Formula $M=L^{-1}$
+\end_inset
+
+ holds on 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+, and that we can gingerly extend certain related equations to 
+\begin_inset Formula $L^{(2)}$
+\end_inset
+
+ by carefully navigating around a pole located at 
+\begin_inset Formula $s=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+By doing these same ginger manipulations, we can in fact obtain 
+\begin_inset Formula $M=L^{-1}$
+\end_inset
+
+ as an analytic identity, but that is all.
+ That is, the pole of one is co-located with the zero of the other, and
+ they cancel each-other out precisely.
+ This is NOT the same as saying that 
+\begin_inset Formula $L$
+\end_inset
+
+ does not have any zeros in 
+\begin_inset Formula $L^{(2)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The problem lies, of course, with the fact that we haven't really said anything
+ intelligent about 
+\begin_inset Formula $L$
+\end_inset
+
+ on 
+\begin_inset Formula $l_{2}$
+\end_inset
+
+.
+ That's because the first row of 
+\begin_inset Formula $L$
+\end_inset
+
+ is all-ones, this first row only allows 
+\begin_inset Formula $L$
+\end_inset
+
+ to be understood in a straight-forward manner on 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+.
+ This row corresponds exactly to the pole at 
+\begin_inset Formula $s=1$
+\end_inset
+
+.
+ How can we navigate around it? It seems to be 
+\begin_inset Quotes eld
+\end_inset
+
+essential
+\begin_inset Quotes erd
+\end_inset
+
+, not something that can be removed: after all, all the rest of the rows
+ are just like it, only having some zeros interspersed throughout it.
 \end_layout
 
 \begin_layout Section
