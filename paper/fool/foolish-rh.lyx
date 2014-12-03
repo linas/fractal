@@ -81,9 +81,144 @@ What's wrong with this picture?
 Musings
 \end_layout
 
-\begin_layout Standard
-The divisor operator and the mobius operator, written in matrix form, are
- clearly inverses 
+\begin_layout Itemize
+The divisor operator 
+\begin_inset Formula $L_{D}$
+\end_inset
+
+ and the mobius operator 
+\begin_inset Formula $M_{D}$
+\end_inset
+
+, written in matrix form, are clearly inverses of one another.
+ All summations are finite, the operators are upper-triangular by construction,
+ all summations are textbook material.
+\end_layout
+
+\begin_layout Itemize
+Because they are invertible, we conclude that they are not singular.
+ But in what space? Answer: in 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+.
+ Certainly in the space of finite-length (bounded-length) vectors.
+ How about infinite-length vectors?
+\end_layout
+
+\begin_layout Itemize
+Proof: suppose there exists arithmetic function aka vector 
+\begin_inset Formula $a=\{a_{n}\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $L_{D}a=0$
+\end_inset
+
+ But we really do have 
+\begin_inset Formula $M=L^{-1}$
+\end_inset
+
+ and so the diagonal elements of 
+\begin_inset Formula $ML$
+\end_inset
+
+ really are all ones.
+ which we can prove by finite means.
+ So there are no such 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ The space in question is simply the set of all bounded sequences 
+\begin_inset Formula $l_{\infty}=\left\{ \{a_{n}\}:\left|a_{n}\right|<\infty\right\} $
+\end_inset
+
+ i.e.
+ elements can be any finite number.
+ 
+\end_layout
+
+\begin_layout Itemize
+Careful: for the proof above, it was sufficient to assume that 
+\begin_inset Formula $a\in l_{\infty}$
+\end_inset
+
+ because by assumption, we started with 
+\begin_inset Formula $La=0$
+\end_inset
+
+ and so there were from the get-go no issues about summability.
+ However, 
+\begin_inset Formula $L$
+\end_inset
+
+ itself is not defined on 
+\begin_inset Formula $l_{\infty}$
+\end_inset
+
+ , since, just looking at the very first row, which are all-ones, its clear
+ that this will be absolutely summable if and only if we pick 
+\begin_inset Formula $a\in l_{1}$
+\end_inset
+
+ where as always, 
+\begin_inset Formula $l_{1}=\left\{ \{a_{n}\}:\sum_{n=1}^{\infty}\left|a_{n}\right|<\infty\right\} $
+\end_inset
+
+.
+ So both 
+\begin_inset Formula $L$
+\end_inset
+
+ amd 
+\begin_inset Formula $M$
+\end_inset
+
+ are absolutely defined on 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+.
+ They're also defined for conditionally convergent sums.
+ But we have a proof about the kernel that holds for 
+\begin_inset Formula $l_{\infty}$
+\end_inset
+
+ and certainly its the case that conditionally convergent series are a subset
+ of 
+\begin_inset Formula $l_{\infty}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+For the next step, we are interested in conditionally convergent sums that
+ are in 
+\begin_inset Formula $l_{2}=\left\{ \{a_{n}\}:\sum_{n=1}^{\infty}\left|a_{n}\right|^{2}<\infty\right\} $
+\end_inset
+
+ because this is wher Fourier series are.
+ Eveyone know that of course 
+\begin_inset Formula $l_{1}\subset l_{2}\subset l_{\infty}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Now add the Fourier bits back in.
+ We write 
+\begin_inset Formula $\alpha(x)=\sum_{n=1}^{\infty}a_{n}\exp\left(2\pi ixn\right)$
+\end_inset
+
+.
+ If we demand absolute convergence, then 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+.
 \end_layout
 
 \end_body
