@@ -282,6 +282,13 @@ Next, observe that neither
 
 \begin_layout Subsection
 Analytic sums and analytic continuation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Analytic-sums"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -830,15 +837,128 @@ We already know, by purely formal means, that
 \begin_inset Formula $s$
 \end_inset
 
- is this well defined? 
-\end_layout
-
-\begin_layout Itemize
-We claim that 
-\begin_inset Formula $L\beta(x;s)=\sum_{m=1}^{\infty}\exp\left(2\pi imx\right)\sum_{n=1}^{\infty}L_{mn}n^{-s}$
+ is this well defined? Well, how did we even obtain this equation? We started
+ withthe equation 
+\begin_inset Formula $m^{-s}\zeta(s)=\sum_{n=1}^{\infty}L_{mn}n^{-s}$
 \end_inset
 
+, which we already showed is analytic on the complex 
+\begin_inset Formula $s$
+\end_inset
 
+-plane, in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Analytic-sums"
+
+\end_inset
+
+.
+ Now, sum over 
+\begin_inset Formula $m$
+\end_inset
+
+ to obtain 
+\begin_inset Formula $\sum_{m=1}^{\infty}\exp\left(2\pi imx\right)\sum_{n=1}^{\infty}L_{mn}n^{-s}=\sum_{m=1}^{\infty}\exp\left(2\pi imx\right)m^{-s}\zeta(s)$
+\end_inset
+
+.
+ The left-hand side converges if the right-hand side does.
+ The right hand side is clearly just 
+\begin_inset Formula $\zeta(s)\beta(x;s)$
+\end_inset
+
+.
+ What is the left-hand side? Why, its just the definition of 
+\begin_inset Formula $\left[L\beta\right](x;s)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The notation here is perhaps confusing, and so is worth exploring.
+ Suppose we have a vector (aka an arithmetic function) 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+.
+ We define 
+\begin_inset Formula $v(x)\equiv\sum_{k=1}^{\infty}v_{k}\exp\left(2\pi ikx\right)$
+\end_inset
+
+, and, as previously explored 
+\begin_inset Formula $v(x)$
+\end_inset
+
+ is square-integrable if 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+ is square-summable.
+ That is, this definition of 
+\begin_inset Formula $v(x)$
+\end_inset
+
+ is well-defined.
+ Now we consider the product 
+\begin_inset Formula $w_{n}=\sum_{k=1}^{\infty}L_{nk}v_{k}$
+\end_inset
+
+.
+ Let us assume that the summations are appropriately convergent.
+ Then we have that 
+\begin_inset Formula $w(x)=\left[Lv\right](x)$
+\end_inset
+
+.
+ That is the only meaning of the square brackets, here.
+ The are simply saying that the product of 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+ should be taken first, and then the fourier transform to position-space
+ happens second.
+ This is the notation being used, when writing 
+\begin_inset Formula $\left[L\beta\right](x;s)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+So, to recap, we have that 
+\begin_inset Formula $\left[L\beta\right](x;s)=\zeta(s)\beta(x;s)$
+\end_inset
+
+ holds on the entire complex 
+\begin_inset Formula $s$
+\end_inset
+
+-plane (excepting a pole at 
+\begin_inset Formula $s=1$
+\end_inset
+
+), and for 
+\begin_inset Formula $0<x<1$
+\end_inset
+
+.
+ In fact, we can even be a little bit stronger and claim that it holds for
+ 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ but this does not seem to have any material effect on the argument.
+ For the 
+\begin_inset Formula $L^{(2)}$
+\end_inset
+
+ integrability, the endpoints doing matter.
 \end_layout
 
 \begin_layout Subsection
