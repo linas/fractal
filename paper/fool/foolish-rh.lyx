@@ -74,14 +74,31 @@ A Foolish Proof of RH
 \end_layout
 
 \begin_layout Abstract
-What's wrong with this picture?
+What's wrong with this picture? Is there some glib handwaving masking the
+ failing part of the proof?
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Wherein we provide the overall review of what is to come.
 \end_layout
 
 \begin_layout Section
 Musings
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
+Outline form.
+\end_layout
+
+\begin_layout Subsection
+Finite summations
+\end_layout
+
+\begin_layout Standard
 The divisor operator 
 \begin_inset Formula $L_{D}$
 \end_inset
@@ -95,7 +112,11 @@ The divisor operator
  all summations are textbook material.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Subsubsection
+Non-Singularity of the operators
+\end_layout
+
+\begin_layout Standard
 Because they are invertible, we conclude that they are not singular.
  But in what space? Answer: in 
 \begin_inset Formula $l_{1}$
@@ -107,7 +128,7 @@ Because they are invertible, we conclude that they are not singular.
 \end_layout
 
 \begin_layout Itemize
-Proof: suppose there exists arithmetic function aka vector 
+Proof: suppose there exists an arithmetic function aka vector 
 \begin_inset Formula $a=\{a_{n}\}$
 \end_inset
 
@@ -139,12 +160,12 @@ Proof: suppose there exists arithmetic function aka vector
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 Careful: for the proof above, it was sufficient to assume that 
 \begin_inset Formula $a\in l_{\infty}$
 \end_inset
 
- because by assumption, we started with 
+ because, by assumption, we started with 
 \begin_inset Formula $La=0$
 \end_inset
 
@@ -193,7 +214,7 @@ Careful: for the proof above, it was sufficient to assume that
 .
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 For the next step, we are interested in conditionally convergent sums that
  are in 
 \begin_inset Formula $l_{2}=\left\{ \{a_{n}\}:\sum_{n=1}^{\infty}\left|a_{n}\right|^{2}<\infty\right\} $
@@ -207,7 +228,11 @@ For the next step, we are interested in conditionally convergent sums that
 .
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Subsubsection
+Summability class
+\end_layout
+
+\begin_layout Standard
 Next, observe that neither 
 \begin_inset Formula $L$
 \end_inset
@@ -255,7 +280,34 @@ Next, observe that neither
 , although these do not seem to be needed just yet.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Subsection
+Analytic sums and analytic continuation
+\end_layout
+
+\begin_layout Standard
+Wherein we establish that the formal algebraic identity 
+\begin_inset Formula $m^{-s}\zeta(s)=\sum_{n=1}^{\infty}L_{mn}n^{-s}$
+\end_inset
+
+ and its mate, 
+\begin_inset Formula $m^{-s}/\zeta(s)=\sum_{n=1}^{\infty}M_{mn}n^{-s}$
+\end_inset
+
+, obtained by purely algebraic means, also hold as analytic summations on
+ the entire complex 
+\begin_inset Formula $s$
+\end_inset
+
+-plane.
+ These require analytic continuation, in a purely classical sense, to work
+ around the obvious poles.
+\end_layout
+
+\begin_layout Subsubsection
+Absolute convergence
+\end_layout
+
+\begin_layout Standard
 OK, take a step back.
  We start by observing that 
 \begin_inset Formula $m^{-s}\zeta(s)=\sum_{n=1}^{\infty}L_{mn}n^{-s}$
@@ -297,7 +349,11 @@ OK, take a step back.
  This pole will dog the rest of the arguments.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Subsubsection
+Analytic continuation
+\end_layout
+
+\begin_layout Standard
 However, treated as a conditionally-convergent sum, we claim that numerical
  identity holds for 
 \begin_inset Formula $m^{-s}\zeta(s)=\sum_{n=1}^{\infty}L_{mn}n^{-s}$
@@ -405,12 +461,17 @@ However, treated as a conditionally-convergent sum, we claim that numerical
  seems both immaterial, and not challenging to prove.
 \end_layout
 
-\begin_layout Itemize
-By similar arguments to the above, we claim that 
+\begin_layout Subsubsection
+Mobius
+\end_layout
+
+\begin_layout Standard
+By similar arguments to the above, we claim that likewise, the equation
+ 
 \begin_inset Formula $m^{-s}/\zeta(s)=\sum_{n=1}^{\infty}M_{mn}n^{-s}$
 \end_inset
 
- likewise holds for all 
+ holds for all 
 \begin_inset Formula $m$
 \end_inset
 
@@ -427,10 +488,33 @@ By similar arguments to the above, we claim that
 \begin_inset Formula $m>1$
 \end_inset
 
-we have, as before, just a Hilbert hotel with interspersed empty rooms.
+ we have, as before, just a Hilbert hotel with interspersed empty rooms.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
+In this case, there are far more poles to maneuver around, thus making practical
+ calculation far more difficult.
+ However, there's no question that the classic number theory sums involving
+ the Mobius function are somehow suspect.
+\end_layout
+
+\begin_layout Subsection
+Fourier series
+\end_layout
+
+\begin_layout Standard
+Wherein we define 
+\begin_inset Formula $\beta(x;s)$
+\end_inset
+
+ and show that it is well-behaved, in all of the usual textbook senses.
+\end_layout
+
+\begin_layout Subsubsection
+Fourier series, defnition
+\end_layout
+
+\begin_layout Standard
 Now add the Fourier bits back in.
  We write 
 \begin_inset Formula $\alpha(x)=\sum_{n=1}^{\infty}a_{n}\exp\left(2\pi ixn\right)$
@@ -459,7 +543,11 @@ Now add the Fourier bits back in.
  Again, this is all standard textbook material.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Subsubsection
+Integrability
+\end_layout
+
+\begin_layout Standard
 But let's review it anyway.
  In order for Fourier series to work, we have to have that 
 \begin_inset Formula $\alpha\in L^{(2)}$
@@ -493,7 +581,7 @@ But let's review it anyway.
  Need citation for this.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 The above does NOT mean that the summation holds for all 
 \begin_inset Formula $x$
 \end_inset
