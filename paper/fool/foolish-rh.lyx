@@ -1315,46 +1315,40 @@ where
 \begin_inset Formula $b=-t+\log x$
 \end_inset
 
- and rotating the contour of integration 
-\begin_inset Formula $z=i\omega$
-\end_inset
-
-, we have 
+ and moving the contour of integration, we have 
 \begin_inset Formula 
 \[
-\sum_{k<x}a_{k}=\frac{-e^{bc}}{2\pi}\int_{-\infty}^{\infty}\frac{e^{i\omega b}}{\left(\omega-ic\right)\left(\omega-i\left(c+1\right)\right)}d\omega
+\sum_{k<x}a_{k}=\frac{e^{bc}}{2\pi i}\int_{-i\infty}^{i\infty}\frac{e^{bz}}{\left(z+c\right)\left(z+c-1\right)}dz
 \]
 
 \end_inset
 
-This is recognizable from mechanical engineering as a Fourier transform
- describing a device with two imaginary resonances.
- If 
-\begin_inset Formula $b>0$
+If 
+\begin_inset Formula $b<0$
 \end_inset
 
- then the contour of integration closes upwards, no poles are enclosed,
+ then the contour of integration closes to the right, no poles are enclosed,
  and so the integral is zero.
  But 
-\begin_inset Formula $b>0$
+\begin_inset Formula $b<0$
 \end_inset
 
  corresponds to 
-\begin_inset Formula $x>m$
+\begin_inset Formula $x<m$
 \end_inset
 
 .
  Thus, when 
-\begin_inset Formula $x<m$
+\begin_inset Formula $x>m$
 \end_inset
 
-, the contour of integration closes downwards, and encircles two poles.
+, the contour of integration closes leftwards, and encircles two poles.
  By the residue theorem, this yields the remarkably simple result 
 \begin_inset Formula 
 \[
 \sum_{k<x}a_{k}=\begin{cases}
-\frac{x}{m}-1 & \mbox{ for }x<m\\
-0 & \mbox{ for }x>m
+\frac{x}{m}-1 & \mbox{ for }x>m\\
+0 & \mbox{ for }x<m
 \end{cases}
 \]
 
@@ -1368,8 +1362,8 @@ as the solution to
 
 \end_inset
 
-well, this fails some how, there's an error.
- 
+Well, this fails somehow, there's an error.
+ I think we are supposed to take the Cauchy priniple value NOT the residue.
 \end_layout
 
 \begin_layout Section
