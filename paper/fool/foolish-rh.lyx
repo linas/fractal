@@ -1294,6 +1294,81 @@ In fact, we only need solutions for
 \end_inset
 
 , but the above seems like a good place to start.
+ This can be inverted by means of Perron's formula, which gives 
+\begin_inset Formula 
+\[
+\sum_{k<x}a_{k}=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\frac{x^{z}e^{-zt}}{z(z-1)}dz
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $x$
+\end_inset
+
+ must be real, positive and not an integer, and with 
+\begin_inset Formula $c>1$
+\end_inset
+
+ real.
+ Writing 
+\begin_inset Formula $b=-t+\log x$
+\end_inset
+
+ and rotating the contour of integration 
+\begin_inset Formula $z=i\omega$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+\sum_{k<x}a_{k}=\frac{-e^{bc}}{2\pi}\int_{-\infty}^{\infty}\frac{e^{i\omega b}}{\left(\omega-ic\right)\left(\omega-i\left(c+1\right)\right)}d\omega
+\]
+
+\end_inset
+
+This is recognizable from mechanical engineering as a Fourier transform
+ describing a device with two imaginary resonances.
+ If 
+\begin_inset Formula $b>0$
+\end_inset
+
+ then the contour of integration closes upwards, no poles are enclosed,
+ and so the integral is zero.
+ But 
+\begin_inset Formula $b>0$
+\end_inset
+
+ corresponds to 
+\begin_inset Formula $x>m$
+\end_inset
+
+.
+ Thus, when 
+\begin_inset Formula $x<m$
+\end_inset
+
+, the contour of integration closes downwards, and encircles two poles.
+ By the residue theorem, this yields the remarkably simple result 
+\begin_inset Formula 
+\[
+\sum_{k<x}a_{k}=\begin{cases}
+\frac{x}{m}-1 & \mbox{ for }x<m\\
+0 & \mbox{ for }x>m
+\end{cases}
+\]
+
+\end_inset
+
+as the solution to 
+\begin_inset Formula 
+\[
+\sum_{k=1}^{\infty}a_{k}k^{-s}=\frac{m^{-s}}{s-1}
+\]
+
+\end_inset
+
+well, this fails some how, there's an error.
  
 \end_layout
 
