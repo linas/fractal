@@ -1211,7 +1211,7 @@ The Pole
 \end_layout
 
 \begin_layout Standard
-So the answer is: remove the pole.
+One way forward is to isolate and remove the pole.
  Viz.
  find an operator 
 \begin_inset Formula $P$
@@ -1261,27 +1261,37 @@ for
 \begin_inset Formula $P$
 \end_inset
 
-, we need to show that the operator 
-\begin_inset Formula $G=L-P$
+, we would need to show that each row in the operator 
+\begin_inset Formula $L-P$
 \end_inset
 
- has no zeroes on 
+ is 
 \begin_inset Formula $l_{2}$
 \end_inset
 
-; that is, that 
-\begin_inset Formula $G=L-P$
+-summable or, even better, 
+\begin_inset Formula $l_{1}$
 \end_inset
 
- is invertible.
+-sumable.
+ That is, that 
+\begin_inset Formula $L=(L-P)+P$
+\end_inset
+
+ is invertible, with all the nasty parts in 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
 The most direct approach is to solve a variant of the above: to solve 
 \begin_inset Formula 
-\[
-\sum_{k=1}^{\infty}a_{k}k^{-s}=\frac{e^{-st}}{s-1}
-\]
+\begin{equation}
+\sum_{k=1}^{\infty}a_{k}k^{-s}=\frac{e^{-st}}{s-1}\label{eq:pole sum}
+\end{equation}
 
 \end_inset
 
@@ -1294,59 +1304,145 @@ In fact, we only need solutions for
 \end_inset
 
 , but the above seems like a good place to start.
- This can be inverted by means of Perron's formula, which gives 
+ While this seems like a hopeful approach, we'll find that eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:pole sum"
+
+\end_inset
+
+ is not solvable.
+ The pole at 
+\begin_inset Formula $s=1$
+\end_inset
+
+ does not have a series expansion in the Fourier basis.
+ What follows is the proof, and a discussion.
+\end_layout
+
+\begin_layout Standard
+This can be inverted by means of Perron's formula
+\begin_inset CommandInset citation
+LatexCommand citet
+key "WP-Perron"
+
+\end_inset
+
+, which can be obtained as follows.
+ Write
 \begin_inset Formula 
 \[
-\sum_{k<x}a_{k}=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\frac{x^{z}e^{-zt}}{z(z-1)}dz
+A(x)=\frac{1}{2\pi i}\sum_{k=1}^{\infty}a_{k}\int_{c-i\infty}^{c+i\infty}\frac{e^{s\log x}}{s}k^{-s}ds
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $x$
+with 
+\begin_inset Formula $c>0$
 \end_inset
 
- must be real, positive and not an integer, and with 
-\begin_inset Formula $c>1$
+ real and 
+\begin_inset Formula $x>0$
 \end_inset
 
  real.
- Writing 
-\begin_inset Formula $b=-t+\log x$
+ Then, for 
+\begin_inset Formula $(\log x-\log k)<0$
 \end_inset
 
- and moving the contour of integration, we have 
+, the integration contour can be closed to the right; it encloses no pole,
+ and so the integral vanishes when 
+\begin_inset Formula $\log x<\log k$
+\end_inset
+
+ i.e.
+ when 
+\begin_inset Formula $x<k$
+\end_inset
+
+.
+ But when 
+\begin_inset Formula $x>k,$
+\end_inset
+
+the contour closes to the left, enclosing the pole at 
+\begin_inset Formula $s=0$
+\end_inset
+
+, leaving a residue of exactly 1.
+ When 
+\begin_inset Formula $x=k$
+\end_inset
+
+, and the contour smack-dabs right into the pole, we split the difference,
+ per usual, and write 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+ for the residue.
+ This gives the conventional left-hand side of Perron's formula:
 \begin_inset Formula 
 \[
-\sum_{k<x}a_{k}=\frac{e^{bc}}{2\pi i}\int_{-i\infty}^{i\infty}\frac{e^{bz}}{\left(z+c\right)\left(z+c-1\right)}dz
+A(x)=\sum_{k\le x}^{\prime}a_{k}
 \]
 
 \end_inset
 
-If 
-\begin_inset Formula $b<0$
+where, per convention, the prime deontes that the last term of the sum is
+ 
+\begin_inset Formula $a_{k}/2$
 \end_inset
 
- then the contour of integration closes to the right, no poles are enclosed,
+ when 
+\begin_inset Formula $x=k$
+\end_inset
+
+.
+ We now try to apply the same trick to the right-hand side of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:pole sum"
+
+\end_inset
+
+.
+ The integral is 
+\begin_inset Formula 
+\[
+A(x)=\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}\frac{x^{s}e^{-st}}{s(s-1)}ds
+\]
+
+\end_inset
+
+where this time we insist that 
+\begin_inset Formula $c>1$
+\end_inset
+
+.
+ As before, if 
+\begin_inset Formula $-t+\log x<0$
+\end_inset
+
+, then the contour of integration closes to the right, no poles are enclosed,
  and so the integral is zero.
  But 
-\begin_inset Formula $b<0$
+\begin_inset Formula $-t+\log x<0$
 \end_inset
 
- corresponds to 
+, corresponds to 
 \begin_inset Formula $x<m$
 \end_inset
 
 .
- Thus, when 
+ The other case is 
 \begin_inset Formula $x>m$
 \end_inset
 
-, the contour of integration closes leftwards, and encircles two poles.
+, where the contour of integration closes leftwards, and encircles two poles.
  By the residue theorem, this yields the remarkably simple result 
 \begin_inset Formula 
 \[
-\sum_{k<x}a_{k}=\begin{cases}
+A(x)=\begin{cases}
 \frac{x}{m}-1 & \mbox{ for }x>m\\
 0 & \mbox{ for }x<m
 \end{cases}
@@ -1354,16 +1450,142 @@ If
 
 \end_inset
 
-as the solution to 
-\begin_inset Formula 
-\[
-\sum_{k=1}^{\infty}a_{k}k^{-s}=\frac{m^{-s}}{s-1}
-\]
+It should now be rivial to solve for the 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:pole sum"
 
 \end_inset
 
-Well, this fails somehow, there's an error.
- I think we are supposed to take the Cauchy priniple value NOT the residue.
+, right? Well, no.
+ Casual plinking about, at 
+\begin_inset Formula $m=1$
+\end_inset
+
+ gives 
+\begin_inset Formula $a_{1}=0$
+\end_inset
+
+, 
+\begin_inset Formula $a_{2}=2$
+\end_inset
+
+, 
+\begin_inset Formula $a_{3}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2n}=2$
+\end_inset
+
+, 
+\begin_inset Formula $a_{2n+1}=0$
+\end_inset
+
+ thereafter, giving 
+\begin_inset Formula $\sum_{k=1}^{\infty}a_{k}k^{-s}=2^{1-s}\zeta(s)$
+\end_inset
+
+ which...
+ does have a pole at 
+\begin_inset Formula $s=1$
+\end_inset
+
+, ...
+ so its not a complete disaster...
+ but it completely fails to be in the form of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:pole sum"
+
+\end_inset
+
+.
+ For general integer 
+\begin_inset Formula $m$
+\end_inset
+
+, we get 
+\begin_inset Formula $a_{k}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k\le m$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2n+m}=0$
+\end_inset
+
+, 
+\begin_inset Formula $a_{2n+m+1}=\frac{2}{m}$
+\end_inset
+
+ thereafter.
+ The sum is not edifying: it is in the form 
+\begin_inset Formula $f(s)+\frac{2}{m}\left(1-2^{-s}\right)\zeta(s)$
+\end_inset
+
+ with 
+\begin_inset Formula $f(s)$
+\end_inset
+
+ a simple finite sum.
+ In this form, the location of the pole is always correct (its at 
+\begin_inset Formula $s=1$
+\end_inset
+
+), and also it's residue (since 
+\begin_inset Formula $\frac{2}{m}\left(1-2^{-s}\right)$
+\end_inset
+
+ equals 
+\begin_inset Formula $1/m$
+\end_inset
+
+ at 
+\begin_inset Formula $s=1$
+\end_inset
+
+, which is just what 
+\begin_inset Formula $m^{-s}$
+\end_inset
+
+ is, at 
+\begin_inset Formula $s=1$
+\end_inset
+
+).
+ Our attempt at solving the equation doesn't work, but its also not a gross
+ miscarriage, as the pole and its residue is correct.
+\end_layout
+
+\begin_layout Standard
+We can try to be more clever: to consider 
+\begin_inset Formula $x$
+\end_inset
+
+ to be fractional, and 
+\begin_inset Formula $m$
+\end_inset
+
+ to not be an integer.
+ The sums are not substaintially different; one always finds some finite
+ parts along with a term 
+\begin_inset Formula $\zeta(s)/m$
+\end_inset
+
+: the pole and residue work out, but nothing else does.
+ We conclude: the pole 
+\begin_inset Formula $1/\left(s-1\right)$
+\end_inset
+
+ simply does not have a representation in the Fourier basis in which we
+ are working.
 \end_layout
 
 \begin_layout Section
