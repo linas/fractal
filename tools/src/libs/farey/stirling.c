@@ -37,7 +37,7 @@ long long int stirling_second (int n, int k)
 }
 
 
-#define TEST 1
+// #define TEST 1
 #if TEST
 
 #include <stdio.h>
