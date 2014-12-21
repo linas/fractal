@@ -39,7 +39,7 @@ main (int argc, char * argv[])
 		}
 		printf("--- k=%d\n", k);
 	} 
-	printf("a-K\n");
+	printf("A-OK\n");
 	return 0;
 }
 
