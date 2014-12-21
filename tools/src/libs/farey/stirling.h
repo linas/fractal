@@ -10,10 +10,10 @@ extern "C" {
 #endif
 
 // Stirling function of the first kind (signed)
-long int stirling_first (int n, int k);
+long long int stirling_first (int n, int k);
 
 // Stirling function of the second kind
-long int stirling_second (int n, int k);
+long long int stirling_second (int n, int k);
 
 #ifdef __cplusplus
 };

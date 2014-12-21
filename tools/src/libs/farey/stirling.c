@@ -6,18 +6,24 @@
  * Linas Vepstas <linasvepstas@gmail.com> Dec 2014
  */
 
+#include <assert.h>
+
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "stirling.h"
 
-long int stirling_first (int n, int k)
+long long int stirling_first (int n, int k)
 {
-	return 0;
+	if (0 == n && 0 == k) return 1LL;
+	if (0 == n && 0 < k) return 0LL;
+	if (0 == k && 0 < n) return 0LL;
+
+	assert(0 < k && 0 < n);
+	return ((long int) (1-n)) * stirling_first(n-1, k) + stirling_first(n-1, k-1);
 }
 
-long int stirling_second (int n, int k)
+long long int stirling_second (int n, int k)
 {
 	if (1 == k) return 1;
 	if (1 == n) return 1;
@@ -28,8 +34,20 @@ long int stirling_second (int n, int k)
 #define TEST 1
 #if TEST
 
-main()
+#include <stdio.h>
+
+int main()
 {
+	int n,k;
+	for (n=0; n<10; n++) {
+		for (k=0; k<=n; k++) {
+			printf("First: %d %d %lld\n", n, k, stirling_first(n,k));
+		}
+		printf("---\n");
+	}
+
+
+	return 0;
 }
 
 #endif
