@@ -36,9 +36,8 @@ long double complex cbinomial (long double complex z, int m);
 // return n! / m!  where m<=n
 long double frat (int n, int m);
 
-#endif /* BINOMIAL_H__ */
-
 #ifdef __cplusplus
 };
 #endif
 
+#endif /* BINOMIAL_H__ */
