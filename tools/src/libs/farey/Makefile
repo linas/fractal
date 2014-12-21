@@ -16,11 +16,12 @@ CC = cc -Wall -g -O2 -I $(INC) -DANSI_C -DLINUX
 RM= rm -f
 
 OBJS=bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o harmonic.o \
-	  modular.o moebius.o Prime.o question.o question-new.o totient.o
+	  modular.o moebius.o Prime.o question.o question-new.o stirling.o \
+     totient.o
 
 INCS=bernoulli.h binomial.h cplex.h Farey.h FareyTree.h flt.h gcf.h \
      harmonic.h \
-     modular.h moebius.h Prime.h question.h totient.h
+     modular.h moebius.h Prime.h question.h stirling.h totient.h
 
 all: inc $(OBJS)
 
@@ -41,14 +42,15 @@ moebius.o:	moebius.c moebius.h cache.h
 Prime.o:	Prime.c Prime.h
 question.o:	question.C question.h Farey.h
 question-new.o:	question-new.c flt.h question.h
+stirling.o: stirling.c stirling.h
 totient.o:	totient.c totient.h
 
 .c.o:
-	$(CC) -c $<
+	$(CC) -c -O3 $<
 	ar cru $(LIB)/libfunc.a $@
 
 .C.o:
-	$(CC) -c $<
+	$(CC) -c -O3 $<
 	ar cru $(LIB)/libfunc.a $@
 
 clean:
@@ -66,4 +68,4 @@ realclean: clean
 	$(RM) Prime inc
 
 dist:
-	tar -zcvf x *.C *.h *.c Makefile .cvsignore README
+	tar -zcvf x *.C *.h *.c Makefile .gitgnore README

@@ -9,13 +9,11 @@
 extern "C" {
 #endif
 
-#include <complex.h>
-
 // Stirling function of the first kind (signed)
-long double complex cstirling_first (long double complex z, int m);
+long int stirling_first (int n, int k);
 
 // Stirling function of the second kind
-long double complex cstirling_second (long double complex z, int m);
+long int stirling_second (int n, int k);
 
 #ifdef __cplusplus
 };
