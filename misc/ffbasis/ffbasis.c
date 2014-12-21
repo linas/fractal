@@ -6,44 +6,62 @@
  * Linas Vepstas Decmber 2014
  */
 
+#include <complex.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "stirling.h"
+#include "binomial.h"
 
-long long int ortho(int p, int k)
+double E_mk(int m, int k)
 {
-	int n;
-	long long int sum = 0LL;
-	// for (n=k; n<=p; n++)
-	// for (n=0; n<=p; n++)
-	for (n=0; n<k; n++)
-	{
-		sum += stirling_first(p, n) * stirling_second(n, k);
-		// sum += stirling_second(p, n) * stirling_first(n, k);
-	}
-	return sum;
+	double em = m;
+	em = (1.0 - em) / em;
+	em = pow(em, ((double) k));
+	return em;
 } 
+
+void chk_E(long double complex s, int m)
+{
+	int k;
+	long double complex sum = 0.0;
+	for (k=0; k<800; k++)
+	{
+		double emk = E_mk(m, k);
+		long double complex bin = cbinomial(s, k);
+		sum += emk * bin;
+	}
+
+	long double complex psi = cpowl(m, -s);
+
+	long double complex diff = sum - psi;
+
+	// printf("its m=%d sum=%lf vs psi=%lf \n", m, creal(sum), creal(psi));
+	// printf("its m=%d diff= %Lg + i %Lg  \n", m, creall(diff), cimagl(diff));
+	long double adiff = cabsl(diff);
+
+	if (1.0e-6 < adiff)
+		printf("Fail at s=%f +i %f m=%d diff= %Lg \n", creal(s), cimag(s), m, adiff);
+}
 
 int
 main (int argc, char * argv[])
 {
-	int p, k;
+	int m;
+	double x,y;
 
-#define MAX 24
-	for (k=1; k<MAX ; k++)
+#define MAX 12
+	for (m=1; m<MAX ; m++)
 	{
-		// for (p=k; p<MAX; p++)
-		for (p=1; p<MAX; p++)
-		{
-			long long int sum = ortho(p, k);
-			if (p != k && 0 != sum) printf("duude k=%d p=%d sum=%lld\n", k, p, sum);
-			if (p == k && 1 != sum) printf("duude k=%d p=%d sum=%lld\n", k, p, sum);
+		for (x= - 5.0; x < 5.0; x +=0.30345) {
+			for (y= - 5.0; y < 5.0; y += 0.4089345) {
+				long double complex s = x + y *I;
+				chk_E(s, m);
+			}
+				printf("."); fflush (stdout);
 		}
-		printf("--- k=%d\n", k);
+		printf("\ndone with m=%d\n", m);
 	} 
-	printf("A-OK\n");
 	return 0;
 }
 
