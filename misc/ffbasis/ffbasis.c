@@ -18,7 +18,7 @@ long long int ortho(int p, int k)
 	long long int sum = 0LL;
 	for (n=k; n<=p; n++)
 	{
-		sum += sitrling_first(p, n) * stirling_second(n, k);
+		sum += stirling_first(p, n) * stirling_second(n, k);
 	}
 	return sum;
 } 
@@ -28,13 +28,18 @@ main (int argc, char * argv[])
 {
 	int p, k;
 
-	for (k=1; k<10 ; k++)
+#define MAX 30
+	for (k=1; k<MAX ; k++)
 	{
-		for (p=k; p<10; p++)
+		for (p=k; p<MAX; p++)
 		{
-			printf("duude k=%d p=%d sum=%lld\n", k, p, ortho(p, k));
+			long long int sum = ortho(p, k);
+			if (p != k && 0 != sum) printf("duude k=%d p=%d sum=%lld\n", k, p, sum);
+			if (p == k && 1 != sum) printf("duude k=%d p=%d sum=%lld\n", k, p, sum);
 		}
+		printf("--- k=%d\n", k);
 	} 
-
+	printf("a-K\n");
+	return 0;
 }
 
