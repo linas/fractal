@@ -25,13 +25,40 @@ double E_mk(int m, int k)
 	em = (1.0 - em) / em;
 	em = pow(em, ((double) k));
 	return em;
-} 
+}
+
+/**
+ * A vecotor in the kernel of E
+ */
+double kern(int k)
+{
+	int n;
+	double sum = 0.0;
+
+	double fourpi = - 4.0 * M_PI * M_PI;
+	double numer = - 2.0 * M_PI;
+	double fact = 1.0;
+	for(n=0; n<30; n++)
+	{
+		double term = numer;
+		term /= fact;
+		term *= binomial (2*n+k, 2*n);
+
+		sum += term;
+		numer *= fourpi;
+		fact *= (2.0 * n + 3.0)  * (2.0*n + 2.0);
+	}
+
+	if (k%2 == 1) sum = - sum;
+	return sum;
+}
 
 /**
  * The inverse of E
  */
-dboule Einv_km(int k, int m)
+double Einv_km(int k, int m)
 {
+	return 0.0;
 }
 
 /**
@@ -107,13 +134,25 @@ void chk_log(double x)
 	printf("x=%f log(x)=%f  diff=%g\n", x, log(x), log(x)-sum);
 }
 
-int
-main (int argc, char * argv[])
+void chk_log_everywhere()
 {
 	double x;
 
 	for (x= 0.1; x < 15.2; x +=0.1123) {
 		chk_log(x);
+	}
+}
+
+
+int
+main (int argc, char * argv[])
+{
+	int k;
+
+	for (k=0; k<24; k++)
+	{
+		double a_k = kern(k);
+		printf("its %d %f\n", k, a_k);
 	}
 	return 0;
 }
