@@ -20,7 +20,9 @@ set ylabel "a_k"
 # plot "a_k.dat" using 1:2 title "data", \
 #      "a_k.dat" using 1:(exp(3.14*sqrt($1))) title "exp"
 
-set yrange [-0.005: 0.005]
-plot "a_k.dat" using 1:($2/($1*log($1)*exp(3.141592653*sqrt($1)))) title "data", \
-     "a_k.dat" using 1:(0.001*sin(0.2 *$1)) title "sin"
+# set yrange [-0.005: 0.005]
+# plot "a_k.dat" using 1:($2/($1*log($1)*exp(3.141592653*sqrt($1)))) title "data", \
+#     "a_k.dat" using 1:(0.001*sin(0.2 *$1)) title "sin"
+
+plot "a_k.dat" using 1:($2/(exp(3.141592653*sqrt($1)))) title "data"
 
