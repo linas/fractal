@@ -13,6 +13,12 @@
 
 #include "binomial.h"
 
+/**
+ * The operator that transforms binomial (falling factorial) into a
+ * Dirichlet series.
+ *
+ * We assume m>1 and that k >=0
+ */
 double E_mk(int m, int k)
 {
 	double em = m;
@@ -21,6 +27,21 @@ double E_mk(int m, int k)
 	return em;
 } 
 
+/**
+ * The inverse of E
+ */
+dboule Einv_km(int k, int m)
+{
+}
+
+/**
+ * Consider the binomial b(s,k) = s! / (s-k)! k! for s complex
+ * and k integer.  Verify that the relation 
+ *   1/m^s = sum_k=0^\infty E_mk b(s,k)
+ * holds.  (and indeed it soes seem to for all m and s.)
+ * arguments are s and m.
+ * Print a failure message if the relation fails to hold.
+ */
 void chk_E(long double complex s, int m)
 {
 	int k;
@@ -44,8 +65,10 @@ void chk_E(long double complex s, int m)
 		printf("Fail at s=%f +i %f m=%d diff= %Lg \n", creal(s), cimag(s), m, adiff);
 }
 
-int
-main (int argc, char * argv[])
+/**
+ * call chk_E for a variety of points on the complex plane.
+ */
+void chk_E_everywhere(void)
 {
 	int m;
 	double x,y;
@@ -62,6 +85,36 @@ main (int argc, char * argv[])
 		}
 		printf("\ndone with m=%d\n", m);
 	} 
+}
+
+/**
+ * Check the well-known formula
+ *   log(x) = sum_k=1^\infty x^k / k
+ * (It shows up in E-related calculations.)
+ */
+void chk_log(double x)
+{
+	int k;
+	double y = (x-1.0) / x;
+	double yp = y;
+	double sum = 0.0;
+	for (k=1; k<153; k++)
+	{
+		sum += yp / k;
+		yp *= y;
+	}
+
+	printf("x=%f log(x)=%f  diff=%g\n", x, log(x), log(x)-sum);
+}
+
+int
+main (int argc, char * argv[])
+{
+	double x;
+
+	for (x= 0.1; x < 15.2; x +=0.1123) {
+		chk_log(x);
+	}
 	return 0;
 }
 
