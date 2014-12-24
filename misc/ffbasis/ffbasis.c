@@ -92,11 +92,13 @@ double right_inv(int m, int n)
 {
 	int k;
 	double sum = 0;
-	for (k=0; k<330; k++)
+	for (k=0; k<530; k++)
 	{
-		double term = E_mk(m,k) * Einv_km(k,n);
+		double emk = E_mk(m,k);
+		double ei = Einv_km(k,n);
+		double term = emk * ei;
 		sum += term;
-		// printf("duude k=%d sum=%g term=%g\n", k, sum, term);
+		printf("duude k=%d sum=%g term=%g emk=%g einvkn=%g\n", k, sum, term, emk, ei);
 		if (k>10 && fabs(term) < 1.0e-10) break;
 	}
 
@@ -106,6 +108,11 @@ double right_inv(int m, int n)
 void chk_Einv(void)
 {
 	int m,n;
+
+// right_inv(3,2);
+// return;
+right_inv(6,1);
+return;
 
 	for (m=1; m<8; m++)
 	{
