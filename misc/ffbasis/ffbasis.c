@@ -67,6 +67,7 @@ double Einv_km(int k, int m)
 	int j;
 	if (1 == m)
 	{
+		if (0 == k) return 1.0;
 		return kern(k+1) / (2.0 * M_PI);
 	}
 
@@ -82,25 +83,45 @@ double Einv_km(int k, int m)
 	}
 
 	sum /= 2.0 * M_PI * pj * m * (m-1);
-	if (m%2 == 0) sum = - sum;
+	// if (m%2 == 0) sum = - sum;
+
+	return sum;
+}
+
+double right_inv(int m, int n)
+{
+	int k;
+	double sum = 0;
+	for (k=0; k<330; k++)
+	{
+		double term = E_mk(m,k) * Einv_km(k,n);
+		sum += term;
+		// printf("duude k=%d sum=%g term=%g\n", k, sum, term);
+		if (k>10 && fabs(term) < 1.0e-10) break;
+	}
 
 	return sum;
 }
 
 void chk_Einv(void)
 {
-	int m,n, k;
+	int m,n;
 
-	m=1;
-	n=1;
-
-	double sum = 0;
-	for (k=0; k<130; k++)
+	for (m=1; m<8; m++)
 	{
-		double term = E_mk(m,k) * Einv_km(k,n);
-		sum += term;
-		printf("duude k=%d sum=%g term=%g\n", k, sum, term);
-		if (k>10 && fabs(term) < 1.0e-10) break;
+		for (n=1; n<8; n++)
+		{
+			double sum = right_inv (m, n);
+
+			if (m == n && fabs (sum-1.0) > 1.0e-4)
+			{
+				printf("Bad diag at m=%d sum=%g\n", m, sum);
+			}
+			if (m != n && fabs(sum) > 1.0e-5)
+			{
+				printf("Bad off-diag at m=%d n=%d sum=%g\n", m, n, sum);
+			}
+		}
 	}
 }
 
