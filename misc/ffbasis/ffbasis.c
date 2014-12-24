@@ -83,7 +83,7 @@ double Einv_km(int k, int m)
 	}
 
 	sum /= 2.0 * M_PI * pj * m * (m-1);
-	// if (m%2 == 0) sum = - sum;
+	// if (m%2 == 0) sum = -sum;
 
 	return sum;
 }
@@ -98,14 +98,32 @@ double right_inv(int m, int n)
 		double ei = Einv_km(k,n);
 		double term = emk * ei;
 		sum += term;
-		printf("duude k=%d sum=%g term=%g emk=%g einvkn=%g\n", k, sum, term, emk, ei);
+		printf("right k=%d sum=%g term=%g emk=%g einvkn=%g\n", k, sum, term, emk, ei);
 		if (k>10 && fabs(term) < 1.0e-10) break;
 	}
 
 	return sum;
 }
 
-void chk_Einv(void)
+double left_inv(int k, int j)
+{
+	int m;
+	double sum = 0;
+	for (m=1; m<1630; m++)
+	{
+		double ei = Einv_km(k,m);
+		double emj = E_mk(m,j);
+		double term = ei * emj;
+		sum += term;
+		printf("left m=%d sum=%g term=%g eikm=%g emj=%g\n", m, sum, term, ei, emj);
+		if (m>10 && fabs(term) < 1.0e-10) break;
+	}
+
+
+	return sum;
+}
+
+void chk_Eright(void)
 {
 	int m,n;
 
@@ -127,6 +145,31 @@ return;
 			if (m != n && fabs(sum) > 1.0e-5)
 			{
 				printf("Bad off-diag at m=%d n=%d sum=%g\n", m, n, sum);
+			}
+		}
+	}
+}
+
+void chk_Eleft(void)
+{
+	int k,j;
+
+left_inv(0,1);
+return;
+
+	for (k=0; k<8; k++)
+	{
+		for (j=1; j<8; j++)
+		{
+			double sum = left_inv (k, j);
+
+			if (k == j && fabs (sum-1.0) > 1.0e-4)
+			{
+				printf("Bad diag at k=%d sum=%g\n", k, sum);
+			}
+			if (k != j && fabs(sum) > 1.0e-5)
+			{
+				printf("Bad off-diag at k=%d j=%d sum=%g\n", k, j, sum);
 			}
 		}
 	}
@@ -157,7 +200,7 @@ void check_kern(int m)
  * and k integer.  Verify that the relation
  *   1/m^s = sum_k=0^\infty E_mk b(s,k)
  * holds.  (and indeed it soes seem to for all m and s.)
- * arguments are s and m.
+ * Arguments are s and m.
  * Print a failure message if the relation fails to hold.
  */
 void chk_E(long double complex s, int m)
@@ -183,6 +226,39 @@ void chk_E(long double complex s, int m)
 		printf("Fail at s=%f +i %f m=%d diff= %Lg \n", creal(s), cimag(s), m, adiff);
 }
 
+/**
+ * Consider the binomial b(s,k) = s! / (s-k)! k! for s complex
+ * and k integer.  Verify that the relation
+ *   b(s,k) = sum_m=1^\infty Einv_km (1/m^s)
+ * holds.
+ * Arguments are s and k.
+ * Print a failure message if the relation fails to hold.
+ */
+void chk_Einv(long double complex s, int k)
+{
+	int m;
+	long double complex bin = cbinomial(s, k);
+
+	long double complex sum = 0.0;
+	for (m=1; m<100; m++)
+	{
+		double ei = Einv_km(k, m);
+		long double complex psi = cpowl(m, -s);
+		sum += ei * psi;
+		printf("chk m=%d psir=%7.5g ei=%7.5g termr=%7.5g sumr=%g want=%g\n",
+			m, creal(psi), ei, creal(ei*psi), creal(sum), creal(bin));
+	}
+
+
+	long double complex diff = sum - bin;
+
+	// printf("its m=%d sum=%lf vs psi=%lf \n", m, creal(sum), creal(psi));
+	// printf("its m=%d diff= %Lg + i %Lg  \n", m, creall(diff), cimagl(diff));
+	long double adiff = cabsl(diff);
+
+	if (1.0e-6 < adiff)
+		printf("Fail at s=%f +i %f k=%d diff= %Lg \n", creal(s), cimag(s), k, adiff);
+}
 /**
  * call chk_E for a variety of points on the complex plane.
  */
@@ -261,7 +337,19 @@ main (int argc, char * argv[])
 {
 	//print_kern();
 
-	chk_Einv();
+	// chk_Eleft();
+
+#if 0
+	int k = atoi(argv[1]);
+	int j = atoi(argv[2]);
+	left_inv(k,j);
+#endif
+	double sr = atof(argv[1]);
+	double si = atof(argv[2]);
+	int k = atoi(argv[3]);
+
+	long double complex s =  sr + I* si;
+	chk_Einv(s, k);
 
 	return 0;
 }
