@@ -65,22 +65,24 @@ double kern(int k)
 double Einv_km(int k, int m)
 {
 	int j;
-	if (1 == m && 0 == k) return 1.0;
-	if (0 == k) return 0.0;
+	if (1 == m)
+	{
+		return kern(k+1) / (2.0 * M_PI);
+	}
 
 	double sum = 0.0;
 
-	double pj = m*m;
-	for (j=1; j<k; j++)
+	double r = (1.0 - m) / ((double) m);
+	double pj = 1.0;
+	for (j=1; j<=k; j++)
 	{
 		double term = kern(j);
+		pj *= r;
 		sum += pj * term;
-		pj *= m;
 	}
 
-	sum *= (1.0+m) / pj;
-	sum += kern(k);
-	sum *= (1.0+m) / ((double) m);
+	sum /= 2.0 * M_PI * pj * m * (m-1);
+	if (m%2 == 0) sum = - sum;
 
 	return sum;
 }
@@ -89,8 +91,8 @@ void chk_Einv(void)
 {
 	int m,n, k;
 
-	m=2;
-	n=2;
+	m=1;
+	n=1;
 
 	double sum = 0;
 	for (k=0; k<130; k++)
