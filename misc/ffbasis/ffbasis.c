@@ -60,6 +60,48 @@ double kern(int k)
 }
 
 /**
+ * The inverse of E
+ */
+double Einv_km(int k, int m)
+{
+	int j;
+	if (1 == m && 0 == k) return 1.0;
+	if (0 == k) return 0.0;
+
+	double sum = 0.0;
+
+	double pj = m*m;
+	for (j=1; j<k; j++)
+	{
+		double term = kern(j);
+		sum += pj * term;
+		pj *= m;
+	}
+
+	sum *= (1.0+m) / pj;
+	sum += kern(k);
+	sum *= (1.0+m) / ((double) m);
+
+	return sum;
+}
+
+void chk_Einv(void)
+{
+	int m,n, k;
+
+	m=2;
+	n=3;
+
+	double sum = 0;
+	for (k=0; k<30; k++)
+	{
+		double term = E_mk(m,k) * Einv_km(k,n);
+		sum += term;
+		printf("duude sum=%g term=%g\n", sum, term);
+	}
+}
+
+/**
  * Check that kern is actually in the kernel of E
  * .. and it is, although rounding errors get really nasty around m=8
  */
@@ -80,16 +122,8 @@ void check_kern(int m)
 }
 
 /**
- * The inverse of E
- */
-double Einv_km(int k, int m)
-{
-	return 0.0;
-}
-
-/**
  * Consider the binomial b(s,k) = s! / (s-k)! k! for s complex
- * and k integer.  Verify that the relation 
+ * and k integer.  Verify that the relation
  *   1/m^s = sum_k=0^\infty E_mk b(s,k)
  * holds.  (and indeed it soes seem to for all m and s.)
  * arguments are s and m.
@@ -137,7 +171,7 @@ void chk_E_everywhere(void)
 				printf("."); fflush (stdout);
 		}
 		printf("\ndone with m=%d\n", m);
-	} 
+	}
 }
 
 /**
@@ -194,7 +228,9 @@ void check_kern_everywhere(void)
 int
 main (int argc, char * argv[])
 {
-	print_kern();
+	//print_kern();
+
+	chk_Einv();
 
 	return 0;
 }
