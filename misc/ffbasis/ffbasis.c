@@ -60,6 +60,26 @@ double kern(int k)
 }
 
 /**
+ * Check that kern is actually in the kernel of E
+ * .. and it is, although rounding errors get really nasty around m=8
+ */
+void check_kern(int m)
+{
+	int k;
+
+	printf("============ m= %d ==============\n", m);
+	double sum = 0.0;
+	for (k=0; k<1550; k++)
+	{
+		double term = E_mk(m, k) * kern(k);
+		sum += term;
+		printf("k=%d term=%g sum=%g\n", k, term, sum);
+
+		if (fabs(term) < 1.0e-10 && k>10) break;
+	}
+}
+
+/**
  * The inverse of E
  */
 double Einv_km(int k, int m)
@@ -150,16 +170,32 @@ void chk_log_everywhere()
 }
 
 
-int
-main (int argc, char * argv[])
+void print_kern(void)
 {
 	int k;
 
-	for (k=0; k<48; k++)
+	printf("#\n# The kernel series a_k\n#\n");
+	for (k=0; k<248; k++)
 	{
 		double a_k = kern(k);
-		printf("its %d %g\n", k, a_k);
+		printf("%d	%g\n", k, a_k);
 	}
+}
+
+void check_kern_everywhere(void)
+{
+	int m;
+	for (m=1; m<10; m++)
+	{
+		check_kern(m);
+	}
+}
+
+int
+main (int argc, char * argv[])
+{
+	print_kern();
+
 	return 0;
 }
 
