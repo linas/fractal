@@ -90,14 +90,15 @@ void chk_Einv(void)
 	int m,n, k;
 
 	m=2;
-	n=3;
+	n=2;
 
 	double sum = 0;
-	for (k=0; k<30; k++)
+	for (k=0; k<130; k++)
 	{
 		double term = E_mk(m,k) * Einv_km(k,n);
 		sum += term;
-		printf("duude sum=%g term=%g\n", sum, term);
+		printf("duude k=%d sum=%g term=%g\n", k, sum, term);
+		if (k>10 && fabs(term) < 1.0e-10) break;
 	}
 }
 
