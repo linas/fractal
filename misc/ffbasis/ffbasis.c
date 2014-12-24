@@ -28,7 +28,7 @@ double E_mk(int m, int k)
 }
 
 /**
- * A vecotor in the kernel of E
+ * A vector in the kernel of E aka a_k
  */
 double kern(int k)
 {
@@ -38,16 +38,22 @@ double kern(int k)
 	double fourpi = - 4.0 * M_PI * M_PI;
 	double numer = - 2.0 * M_PI;
 	double fact = 1.0;
-	for(n=0; n<30; n++)
+	for(n=0; n<130; n++)
 	{
 		double term = numer;
-		term /= fact;
-		term *= binomial (2*n+k, 2*n);
+		double bino = binomial (2*n+k, 2*n);
+		bino /= fact;
 
+		term *= bino;
 		sum += term;
+		// printf("n=%d numer=%g  bino=%g term=%g sum=%g\n", n, numer, bino, term, sum);
+
+		if (fabs(term) < 1.0e-30) break;
+
 		numer *= fourpi;
 		fact *= (2.0 * n + 3.0)  * (2.0*n + 2.0);
 	}
+	// printf(" ---------------------- above was k=%d\n", k);
 
 	if (k%2 == 1) sum = - sum;
 	return sum;
@@ -149,10 +155,10 @@ main (int argc, char * argv[])
 {
 	int k;
 
-	for (k=0; k<24; k++)
+	for (k=0; k<48; k++)
 	{
 		double a_k = kern(k);
-		printf("its %d %f\n", k, a_k);
+		printf("its %d %g\n", k, a_k);
 	}
 	return 0;
 }
