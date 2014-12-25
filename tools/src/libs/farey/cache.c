@@ -1,6 +1,6 @@
-
-/* cache.c
- * Generic cache management for commonly computed numbers
+/**
+ * cache.c
+ * Generic cache management for frequently requested numbers.
  *
  * Linas Vepstas 2005,2006
  */
@@ -15,14 +15,14 @@
  *  This assumes a 1-dimensional cache layout (simple aray)
  */
 #define CACHE_CHECK(TYPE_NAME,TYPE) \
-int TYPE_NAME##_one_d_cache_check (TYPE_NAME##_cache *c, unsigned int n)	\
+bool TYPE_NAME##_one_d_cache_check (TYPE_NAME##_cache *c, unsigned int n)	\
 {	\
 	if (c->disabled) return 0;	\
 	if ((n > c->nmax) || 0==n )	\
 	{	\
 		unsigned int newsize = 1.5*n+1;	\
 		c->cache = (TYPE *) realloc (c->cache, newsize * sizeof (TYPE));	\
-		c->ticky = (char *) realloc (c->ticky, newsize * sizeof (char));	\
+		c->ticky = (bool *) realloc (c->ticky, newsize * sizeof (bool));	\
 	\
 		unsigned int en;	\
 		unsigned int nstart = c->nmax+1;	\
@@ -30,7 +30,7 @@ int TYPE_NAME##_one_d_cache_check (TYPE_NAME##_cache *c, unsigned int n)	\
 		for (en=nstart; en <newsize; en++)	\
 		{	\
 			c->cache[en] = 0.0L;	\
-			c->ticky[en] = 0;	\
+			c->ticky[en] = false;	\
 		}	\
 		c->nmax = newsize-1;	\
 		return 0;	\
@@ -57,7 +57,7 @@ void TYPE_NAME##_one_d_cache_store (TYPE_NAME##_cache *c, TYPE val, unsigned int
 {	\
 	if (c->disabled) return;	\
 	c->cache[n] = val;	\
-	c->ticky[n] = 1;	\
+	c->ticky[n] = true;	\
 }
 
 /* =============================================================== */

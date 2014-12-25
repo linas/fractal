@@ -11,7 +11,8 @@ INC = $(TOP)/inc
 
 # CC = /bin/cc -O2 -O -I $(INC) -DAIXV3
 # CC = /bin/fcc -f2 -O -I $(INC)
-CC = cc -Wall -g -O2 -I $(INC) -DANSI_C -DLINUX
+# CC = cc -Wall -g -O2 -I $(INC) -DANSI_C -DLINUX
+CC = cc -Wall -g -O3 -std=gnu11 -I $(INC)
 
 RM= rm -f
 
@@ -46,11 +47,11 @@ stirling.o: stirling.c stirling.h
 totient.o:	totient.c totient.h
 
 .c.o:
-	$(CC) -c -O3 $<
+	$(CC) -c $<
 	ar cru $(LIB)/libfunc.a $@
 
 .C.o:
-	$(CC) -c -O3 $<
+	$(CC) -c $<
 	ar cru $(LIB)/libfunc.a $@
 
 clean:
