@@ -16,7 +16,7 @@ double four(double omega, double phi)
 	int k;
 
 	double sum = 0.0;
-	for (k=1; k< 300; k++)
+	for (k=200; k< 300; k++)
 	{
 		double ak = a_k(k);
 		double r = exp(-3.3*sqrt(k));
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 
 	// for (om=2.88; om < 2.91; om += 0.0002)
 	// for (om=2.85; om < 2.95; om += 0.0002)
-	for (om=3.0; om < 3.05; om += 0.0002)
+	for (om=3.0; om < 3.13; om += 0.0002)
 	{
 		printf("%g", om);
 		for (phi=0; phi<6.283; phi += 1.0) {

@@ -412,13 +412,17 @@ void print_kern(void)
 	int k;
 
 	printf("#\n# The kernel series a_k\n#\n");
-	for (k=0; k<648; k++)
+	for (k=0; k<3648; k++)
 	{
-		double ak = a_k(k);
-		double ak1 = a_k_regulated(k, 1);
-		double ak2 = a_k_regulated(k, 2);
-		double ak3 = a_k_regulated(k, 3);
-		printf("%d	%g	%g	%g	%g\n", k, ak, ak1, ak2, ak3);
+		long double ak = a_k(k);
+		long double ak1 = a_k_regulated(k, 1);
+		long double reg = expl(-3.3L * sqrtl (k));
+		ak *= reg;
+		ak1 *= reg;
+		// double ak2 = a_k_regulated(k, 2);
+		// double ak3 = a_k_regulated(k, 3);
+		// printf("%d	%g	%g	%g	%g\n", k, ak, ak1, ak2, ak3);
+		printf("%d	%Lg	%Lg\n", k, ak, ak1);
 	}
 }
 
