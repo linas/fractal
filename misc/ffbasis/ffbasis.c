@@ -32,6 +32,7 @@ double E_mk(int m, int k)
  * If we did this correctly, a_k is given by solving
  *    sum_k=0^infty a_k x^k = sin (2pi/(1+x))
  * This returns a_k.
+ * XXX right now, seems to need a minus sign
  */
 double kern(int k)
 {
@@ -59,13 +60,19 @@ double kern(int k)
 	// printf(" ---------------------- above was k=%d\n", k);
 
 	if (k%2 == 1) sum = - sum;
+
+	// XXX hack alert -- extra minus sign!
+	sum = -sum;
 	return sum;
 }
 
 /**
  * It should be the case that 
- * sum_k=0^infty a_k x^k = sin (2pi/(1+x))
- * is that really the case?
+ *   sum_k=0^infty a_k x^k = sin (2pi/(1+x))
+ * Is that really the case?  Yes, it is, to the
+ * precision that double precision can do.
+ * The below computes the sum, and returns it.
+ * Seems to be accurate for -0.85 < x < 0.85 or so.
  */
 double topsin(double x)
 {
@@ -353,7 +360,7 @@ void print_topsin(void)
 	for (x=1.0; x > -1.0; x-= 0.003)
 	{ 
 		double e = sin(2.0*M_PI/(1.0+x));
-		double t = -topsin(x);
+		double t = topsin(x);
 		double d = t-e;
 		printf("%g	%g	%g	%g\n", x, e, t, d);
 	}
