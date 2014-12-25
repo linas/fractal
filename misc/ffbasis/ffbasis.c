@@ -103,16 +103,16 @@ double kern(int k)
  * The below computes the sum, and returns it.
  * Seems to be accurate for -0.85 < x < 0.85 or so.
  */
-double topsin(double x)
+long double topsin(long double x, unsigned int p)
 {
-	int k;
-	double sum = 0.0;
-	double xn = 1.0;
+	unsigned int k;
+	long double sum = 0.0L;
+	long double xn = 1.0L;
 	for(k=0; k<1200; k++)
 	{
-		double term = xn * a_k_regulated(k, 0);
+		long double term = xn * a_k_regulated(k, p);
 		sum += term;
-		if (k>10 && fabs(term) < 1.0e-10) break;
+		if (k>10 && fabs(term) < 1.0e-30) break;
 		xn *= x;
 	}
 	return sum;
@@ -398,8 +398,10 @@ void print_topsin(void)
 	double x;
 	for (x=1.0; x > -1.0; x-= 0.003)
 	{
+		// double e = (1+x) *(1+x) *(1+x)* sin(2.0*M_PI/(1.0+x));
+		// double t = topsin(x, 3);
 		double e = sin(2.0*M_PI/(1.0+x));
-		double t = topsin(x);
+		double t = topsin(x, 0);
 		double d = t-e;
 		printf("%g	%g	%g	%g\n", x, e, t, d);
 	}
