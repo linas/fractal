@@ -32,7 +32,6 @@ double E_mk(int m, int k)
  * If we did this correctly, a_k is given by solving
  *    sum_k=0^infty a_k x^k = sin (2pi/(1+x))
  * This returns a_k.
- * XXX right now, seems to need a minus sign
  */
 double kern(int k)
 {
@@ -59,10 +58,7 @@ double kern(int k)
 	}
 	// printf(" ---------------------- above was k=%d\n", k);
 
-	if (k%2 == 1) sum = - sum;
-
-	// XXX hack alert -- extra minus sign!
-	sum = -sum;
+	if (k%2 == 0) sum = - sum;
 	return sum;
 }
 
@@ -129,7 +125,10 @@ double right_inv(int m, int n)
 		double ei = Einv_km(k,n);
 		double term = emk * ei;
 		sum += term;
-		printf("right k=%d sum=%g term=%g emk=%g einvkn=%g\n", k, sum, term, emk, ei);
+
+		// printf("right k=%d sum=%g term=%g emk=%g einvkn=%g\n", k, sum, term, emk, ei);
+		double a_k = kern(k);
+		printf("right k=%d emk=%8.6g  einvkn=%6.6g   ak=%8.6g\n", k, emk, ei, a_k);
 		if (k>10 && fabs(term) < 1.0e-10) break;
 	}
 
@@ -207,8 +206,11 @@ return;
 }
 
 /**
- * Check that kern is actually in the kernel of E
+ * Check that kern is actually in the kernel of E.
+ * That is, we expect that
+ *     sum_k=0^\infty E_mk a_k = 0 for all m.
  * .. and it is, although rounding errors get really nasty around m=8
+ * i.e. relation holds up to m=8
  */
 void check_kern(int m)
 {
@@ -264,6 +266,7 @@ void chk_E(long double complex s, int m)
  * holds.
  * Arguments are s and k.
  * Print a failure message if the relation fails to hold.
+ * Currently fails badly.
  */
 void chk_Einv(long double complex s, int k)
 {
@@ -382,7 +385,10 @@ main (int argc, char * argv[])
 
 	// chk_Eleft();
 
-#if 0
+	int m = atoi(argv[1]);
+	int n = atoi(argv[2]);
+	right_inv(m,n);
+#if LEFT_INV
 	int k = atoi(argv[1]);
 	int j = atoi(argv[2]);
 	left_inv(k,j);
@@ -395,7 +401,7 @@ main (int argc, char * argv[])
 	long double complex s =  sr + I* si;
 	chk_Einv(s, k);
 #endif
-	print_topsin();
+	// print_topsin();
 
 #if 0
 	int m = atoi(argv[1]);
