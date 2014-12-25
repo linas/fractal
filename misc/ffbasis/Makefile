@@ -8,7 +8,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -std=gnu11 -Wall -I $(INC)
 
-EXES= ffbasis
+EXES= ffbasis fourier
 
 all:  $(EXES)
 
@@ -32,6 +32,10 @@ dist:
 
 falling.o: falling.h $(INC)/binomial.h $(INC)/cache.h
 ffbasis.o: falling.h $(INC)/binomial.h $(INC)/cache.h
+
+fourier.o: falling.h
+
 ffbasis: falling.o ffbasis.o
 
+fourier: fourier.o falling.o
 
