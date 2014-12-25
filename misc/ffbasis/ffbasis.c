@@ -29,6 +29,9 @@ double E_mk(int m, int k)
 
 /**
  * A vector in the kernel of E aka a_k
+ * If we did this correctly, a_k is given by solving
+ *    sum_k=0^infty a_k x^k = sin (2pi/(1+x))
+ * This returns a_k.
  */
 double kern(int k)
 {
@@ -38,7 +41,7 @@ double kern(int k)
 	double fourpi = - 4.0 * M_PI * M_PI;
 	double numer = - 2.0 * M_PI;
 	double fact = 1.0;
-	for(n=0; n<130; n++)
+	for(n=0; n<1530; n++)
 	{
 		double term = numer;
 		double bino = binomial (2*n+k, 2*n);
@@ -58,6 +61,27 @@ double kern(int k)
 	if (k%2 == 1) sum = - sum;
 	return sum;
 }
+
+/**
+ * It should be the case that 
+ * sum_k=0^infty a_k x^k = sin (2pi/(1+x))
+ * is that really the case?
+ */
+double topsin(double x)
+{
+	int k;
+	double sum = 0.0;
+	double xn = 1.0;
+	for(k=0; k<1200; k++)
+	{
+		double term = xn * kern(k);
+		sum += term;
+		if (k>10 && fabs(term < 1.0e-10)) break;
+		xn *= x;
+	}
+	return sum;
+}
+
 
 /**
  * The inverse of E
@@ -323,6 +347,18 @@ void print_kern(void)
 	}
 }
 
+void print_topsin(void)
+{
+	double x;
+	for (x=1.0; x > -1.0; x-= 0.003)
+	{ 
+		double e = sin(2.0*M_PI/(1.0+x));
+		double t = -topsin(x);
+		double d = t-e;
+		printf("%g	%g	%g	%g\n", x, e, t, d);
+	}
+}
+
 void check_kern_everywhere(void)
 {
 	int m;
@@ -344,12 +380,15 @@ main (int argc, char * argv[])
 	int j = atoi(argv[2]);
 	left_inv(k,j);
 #endif
+#if LEFT
 	double sr = atof(argv[1]);
 	double si = atof(argv[2]);
 	int k = atoi(argv[3]);
 
 	long double complex s =  sr + I* si;
 	chk_Einv(s, k);
+#endif
+	print_topsin();
 
 	return 0;
 }
