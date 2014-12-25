@@ -74,6 +74,18 @@ long double a_k(unsigned int k)
 	return sum;
 }
 
+long double a_k_regulated(unsigned int k, unsigned int p)
+{
+	if (0 == k) return a_k(0);
+	long double sum = 0.0L;
+	for (unsigned int n=0; n<=p; n++)
+	{
+		if (k<n) break;
+		sum += a_k(k-n) * binomial(p, n);
+	}
+	return sum;
+}
+
 double kern(int k)
 {
 	if (0 == k) return a_k(0);
@@ -370,8 +382,11 @@ void print_kern(void)
 	printf("#\n# The kernel series a_k\n#\n");
 	for (k=0; k<248; k++)
 	{
-		double a_k = kern(k);
-		printf("%d	%g\n", k, a_k);
+		double ak = a_k(k);
+		double ak1 = a_k_regulated(k, 1);
+		double ak2 = a_k_regulated(k, 2);
+		double ak3 = a_k_regulated(k, 3);
+		printf("%d	%g	%g	%g	%g\n", k, ak, ak1, ak2, ak3);
 	}
 }
 
@@ -399,13 +414,15 @@ void check_kern_everywhere(void)
 int
 main (int argc, char * argv[])
 {
-	//print_kern();
+	print_kern();
 
 	// chk_Eleft();
 
+#if RIGHT_INV
 	int m = atoi(argv[1]);
 	int n = atoi(argv[2]);
 	right_inv(m,n);
+#endif
 #if LEFT_INV
 	int k = atoi(argv[1]);
 	int j = atoi(argv[2]);

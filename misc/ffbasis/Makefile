@@ -6,7 +6,7 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-CC = /usr/bin/cc -O2 -Wall -I $(INC)
+CC = /usr/bin/cc -O2 -std=gnu11 -Wall -I $(INC)
 
 EXES= ffbasis
 

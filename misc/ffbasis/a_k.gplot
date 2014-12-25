@@ -4,7 +4,8 @@ set out 'a_k.png'
 
 set style data linespoints
 # set style data lines
-set key right
+# set key right
+set key left
 
 set title "the a_k"
 set xlabel "k"
@@ -24,5 +25,10 @@ set ylabel "a_k"
 # plot "a_k.dat" using 1:($2/($1*log($1)*exp(3.141592653*sqrt($1)))) title "data", \
 #     "a_k.dat" using 1:(0.001*sin(0.2 *$1)) title "sin"
 
-plot "a_k.dat" using 1:($2/(exp(3.3*sqrt($1)))) title "data"
+# plot "a_k.dat" using 1:($2/(exp(3.3*sqrt($1)))) title "raw"
+
+plot "a_k.dat" using 1:($2/(exp(3.3*sqrt($1)))) title "n=0", \
+     "a_k.dat" using 1:($3/(exp(3.3*sqrt($1)))) title "n=1", \
+     "a_k.dat" using 1:($4/(exp(3.3*sqrt($1)))) title "n=2", \
+     "a_k.dat" using 1:($5/(exp(3.3*sqrt($1)))) title "n=3"
 
