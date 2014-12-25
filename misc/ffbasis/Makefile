@@ -30,6 +30,8 @@ dist:
 	$(CC) -o $* $^ -L$(LIB) -lfunc -lm -lstdc++
 
 
-ffbasis: ffbasis.o $(INC)/stirling.h
+falling.o: falling.h $(INC)/binomial.h $(INC)/cache.h
+ffbasis.o: falling.h $(INC)/binomial.h $(INC)/cache.h
+ffbasis: falling.o ffbasis.o
 
 

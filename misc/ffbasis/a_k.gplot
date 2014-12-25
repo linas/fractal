@@ -4,8 +4,7 @@ set out 'a_k.png'
 
 set style data linespoints
 # set style data lines
-# set key right
-set key left
+set key right
 
 set title "the a_k"
 set xlabel "k"
@@ -33,6 +32,11 @@ set ylabel "a_k"
 #      "a_k.dat" using 1:($5/(exp(3.3*sqrt($1)))) title "n=3"
 
 
-set yrange [-0.05: 0.05]
-plot "a_k.dat" using 1:($5/(exp(3.3*sqrt($1)))) title "n=3", \
-     "r_k.dat" using 1:($3/(exp(3.3*sqrt($1)))) title "super"
+# set key left
+# set yrange [-0.05: 0.05]
+# plot "a_k.dat" using 1:($5/(exp(3.3*sqrt($1)))) title "n=3", \
+#     "r_k.dat" using 1:($3/(exp(3.3*sqrt($1)))) title "super"
+
+set xrange [20:80]
+plot "a_k.dat" using 1:($2/(exp(3.3*sqrt($1)))) title "n=0", \
+     "a_k.dat" using 1:(0.1* sin(2.8923*$1)) title "fit"
