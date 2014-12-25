@@ -412,7 +412,7 @@ void print_kern(void)
 	int k;
 
 	printf("#\n# The kernel series a_k\n#\n");
-	for (k=0; k<248; k++)
+	for (k=0; k<648; k++)
 	{
 		double ak = a_k(k);
 		double ak1 = a_k_regulated(k, 1);
@@ -519,9 +519,9 @@ int
 main (int argc, char * argv[])
 {
 	// unit_test();
-	// print_kern();
+	print_kern();
 	// print_topsin();
-	print_reg();
+	// print_reg();
 
 	// chk_Eleft();
 
