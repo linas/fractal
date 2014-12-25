@@ -86,6 +86,41 @@ long double a_k_regulated(unsigned int k, unsigned int p)
 	return sum;
 }
 
+/**
+ * Expansion of super-regulator
+ * e_k is given by solving
+ *    sum_k=0^infty e_k x^k = exp (-1/(1+x))
+ * This returns e_k.
+ */
+long double e_k(unsigned int k)
+{
+	unsigned int n;
+
+	DECLARE_LD_CACHE(e_kc);
+	if (ld_one_d_cache_check(&e_kc, k))
+		return ld_one_d_cache_fetch(&e_kc, k);
+
+	long double sum = 0.0L;
+	long double fact = 1.0L;
+	for (n=0; n<3530; n++)
+	{
+		long double term = binomial (n+k-1, n-1);
+		term /= fact;
+		sum += term;
+		// printf("n=%d term=%Lg sum=%Lg\n", n, term, sum);
+
+		if (10 < n && fabs(term/sum) < 1.0e-35) break;
+
+		fact *= - (n + 1.0L);
+	}
+	// printf(" ---------------------- above was k=%d\n", k);
+
+	if (k%2 == 0) sum = - sum;
+
+	ld_one_d_cache_store(&e_kc, sum, k);
+	return sum;
+}
+
 double kern(int k)
 {
 	if (0 == k) return a_k(0);
@@ -111,6 +146,29 @@ long double topsin(long double x, unsigned int p)
 	for(k=0; k<1200; k++)
 	{
 		long double term = xn * a_k_regulated(k, p);
+		sum += term;
+		if (k>10 && fabs(term) < 1.0e-30) break;
+		xn *= x;
+	}
+	return sum;
+}
+
+/**
+ * It should be the case that
+ *   sum_k=0^infty e_k x^k = exp (-1/(1+x))
+ *
+ * Is that really the case?  Yes, it is, to the
+ * precision that double precision can do.
+ * The below computes the sum, and returns it.
+ */
+long double regul(long double x)
+{
+	unsigned int k;
+	long double sum = 0.0L;
+	long double xn = 1.0L;
+	for(k=0; k<1200; k++)
+	{
+		long double term = xn * e_k(k);
 		sum += term;
 		if (k>10 && fabs(term) < 1.0e-30) break;
 		xn *= x;
@@ -420,9 +478,21 @@ int
 main (int argc, char * argv[])
 {
 	// print_kern();
-	print_topsin();
+	// print_topsin();
 
 	// chk_Eleft();
+
+#if 0
+	double x;
+	for (x=1.0; x>-1.0; x-= 0.1)
+	{
+		double e = exp(-1.0/(1.0+x));
+		double r = regul(x);
+		double diff= e-r;
+		printf("x=%g  r=%g  d=%g\n", x,r,diff);
+	}
+#endif
+printf("wtf %Lg %Lg\n", e_k(0), regul(0.0));
 
 #if RIGHT_INV
 	int m = atoi(argv[1]);
