@@ -497,9 +497,34 @@ bool chk_regul_everywhere(void)
 	return fail;
 }
 
+bool chk_topsin_everywhere(void)
+{
+	bool fail = false;
+	double x;
+	for (x=0.85; x>-0.85; x-= 0.0013634563)
+	{
+		double e = sin(2.0*M_PI/(1.0+x));
+		double r = topsin(x, 0);
+		double diff= e-r;
+		// printf("x=%g  r=%g  d=%g\n", x, r, diff);
+		if ((fabs(diff) > 0.01) ||
+		   (fabs(diff) > 2.1e-10 && fabs(x) < 0.75) ||
+		   (fabs(diff) > 2.0e-15 && fabs(x) < 0.5))
+		{
+			printf("Error: topsin expansion fail: x=%g  r=%g  d=%g\n", x, r, diff);
+			fail = true;
+		}
+	}
+	if (!fail) printf("Topologist sin test success\n");
+
+	return fail;
+}
+
+
 void unit_test(void)
 {
-	chk_regul_everywhere();
+	// chk_regul_everywhere();
+	chk_topsin_everywhere();
 }
 
 int
