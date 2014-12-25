@@ -20,8 +20,8 @@ OBJS=bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o harmonic.o \
 	  modular.o moebius.o Prime.o question.o question-new.o stirling.o \
      totient.o
 
-INCS=bernoulli.h binomial.h cplex.h Farey.h FareyTree.h flt.h gcf.h \
-     harmonic.h \
+INCS=bernoulli.h binomial.h cache.h cplex.h Farey.h FareyTree.h \
+     flt.h gcf.h harmonic.h \
      modular.h moebius.h Prime.h question.h stirling.h totient.h
 
 all: inc $(OBJS)
