@@ -46,7 +46,7 @@ long double a_k(unsigned int k)
 		return ld_one_d_cache_fetch(&a_kc, k);
 
 // WTF ?? -std=gnu should be enough??
-#define M_PIl    3.141592653589793238462643383279502884L 
+#define M_PIl    3.141592653589793238462643383279502884L
 
 	long double fourpi = - 4.0L * M_PIl * M_PIl;
 	long double numer = - 2.0L * M_PIl;
@@ -93,8 +93,11 @@ double kern(int k)
 }
 
 /**
- * It should be the case that 
+ * It should be the case that
  *   sum_k=0^infty a_k x^k = sin (2pi/(1+x))
+ * and
+ *   sum_k=0^infty a_k(p) x^k = (1+x)^p sin (2pi/(1+x))
+ *
  * Is that really the case?  Yes, it is, to the
  * precision that double precision can do.
  * The below computes the sum, and returns it.
@@ -107,7 +110,7 @@ double topsin(double x)
 	double xn = 1.0;
 	for(k=0; k<1200; k++)
 	{
-		double term = xn * kern(k);
+		double term = xn * a_k_regulated(k, 0);
 		sum += term;
 		if (k>10 && fabs(term) < 1.0e-10) break;
 		xn *= x;
@@ -394,7 +397,7 @@ void print_topsin(void)
 {
 	double x;
 	for (x=1.0; x > -1.0; x-= 0.003)
-	{ 
+	{
 		double e = sin(2.0*M_PI/(1.0+x));
 		double t = topsin(x);
 		double d = t-e;
@@ -414,7 +417,8 @@ void check_kern_everywhere(void)
 int
 main (int argc, char * argv[])
 {
-	print_kern();
+	// print_kern();
+	print_topsin();
 
 	// chk_Eleft();
 
@@ -436,7 +440,6 @@ main (int argc, char * argv[])
 	long double complex s =  sr + I* si;
 	chk_Einv(s, k);
 #endif
-	// print_topsin();
 
 #if 0
 	int m = atoi(argv[1]);
