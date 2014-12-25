@@ -37,6 +37,11 @@ long double ld_one_d_cache_fetch (ld_cache *c, unsigned int n);
  */
 void ld_one_d_cache_store (ld_cache *c, long double val, unsigned int n);
 
+/**
+ * Clear the cache.
+ */
+void ld_one_d_cache_clear (ld_cache *c);
+
 /* ======================================================================= */
 /* Cache management */
 
@@ -65,4 +70,9 @@ unsigned int ui_one_d_cache_fetch (ui_cache *c, unsigned int n);
  * ui_one_d_cache_store - store value in cache
  */
 void ui_one_d_cache_store (ui_cache *c, unsigned int val, unsigned int n);
+
+/**
+ * Clear the cache.
+ */
+void ui_one_d_cache_clear (ui_cache *c);
 

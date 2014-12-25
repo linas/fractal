@@ -60,12 +60,27 @@ void TYPE_NAME##_one_d_cache_store (TYPE_NAME##_cache *c, TYPE val, unsigned int
 	c->ticky[n] = true;	\
 }
 
+/**
+ * TYPE_NAME##_d_cache_clear - clear the cache
+ */
+#define CACHE_CLEAR(TYPE_NAME,TYPE) \
+void TYPE_NAME##_one_d_cache_clear (TYPE_NAME##_cache *c)	\
+{	\
+	unsigned int en; \
+	for (en=0; en < c->nmax; en++)	\
+	{	\
+		c->cache[en] = 0.0L;	\
+		c->ticky[en] = false;	\
+	}	\
+}
+
 /* =============================================================== */
 
 #define DEFINE_CACHE(TYPE_NAME,TYPE) \
 		  CACHE_CHECK(TYPE_NAME,TYPE) \
 		  CACHE_FETCH(TYPE_NAME,TYPE) \
-		  CACHE_STORE(TYPE_NAME,TYPE)
+		  CACHE_STORE(TYPE_NAME,TYPE) \
+		  CACHE_CLEAR(TYPE_NAME,TYPE)
 
 DEFINE_CACHE(ld, long double)
 DEFINE_CACHE(ui, unsigned int)
