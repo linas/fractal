@@ -33,6 +33,7 @@ inline long double factorial (int n)
 // must have m<=n, m>=0
 inline long double binomial (int n, int m)
 {
+	if (m==n) return 1.0L;
 	if (0>m) return 0.0L;
 	if (2*m < n) m = n-m;
 	int l = n-m;
