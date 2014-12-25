@@ -76,7 +76,7 @@ double topsin(double x)
 	{
 		double term = xn * kern(k);
 		sum += term;
-		if (k>10 && fabs(term < 1.0e-10)) break;
+		if (k>10 && fabs(term) < 1.0e-10) break;
 		xn *= x;
 	}
 	return sum;
@@ -390,6 +390,11 @@ main (int argc, char * argv[])
 #endif
 	print_topsin();
 
+#if 0
+	int m = atoi(argv[1]);
+	check_kern(m);
+
+#endif
 	return 0;
 }
 
