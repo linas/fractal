@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 #include "binomial.h"
+#include "cache.h"
 
 /**
  * The operator that transforms binomial (falling factorial) into a
@@ -33,33 +34,50 @@ double E_mk(int m, int k)
  *    sum_k=0^infty a_k x^k = sin (2pi/(1+x))
  * This returns a_k.
  */
-double kern(int k)
+long double a_k(unsigned int k)
 {
-	int n;
-	double sum = 0.0;
+	unsigned int n;
+	long double sum = 0.0L;
 
-	double fourpi = - 4.0 * M_PI * M_PI;
-	double numer = - 2.0 * M_PI;
-	double fact = 1.0;
-	for(n=0; n<1530; n++)
+	if (0 == k) return 0.0L;
+
+	DECLARE_LD_CACHE(a_kc);
+	if (ld_one_d_cache_check(&a_kc, k))
+		return ld_one_d_cache_fetch(&a_kc, k);
+
+// WTF ?? -std=gnu should be enough??
+#define M_PIl    3.141592653589793238462643383279502884L 
+
+	long double fourpi = - 4.0L * M_PIl * M_PIl;
+	long double numer = - 2.0L * M_PIl;
+	long double fact = 1.0L;
+	for (n=0; n<3530; n++)
 	{
-		double term = numer;
-		double bino = binomial (2*n+k, 2*n);
+		long double term = numer;
+		long double bino = binomial (2*n+k, 2*n);
 		bino /= fact;
 
 		term *= bino;
 		sum += term;
 		// printf("n=%d numer=%g  bino=%g term=%g sum=%g\n", n, numer, bino, term, sum);
 
-		if (fabs(term) < 1.0e-30) break;
+		if (10 < n && fabs(term/sum) < 1.0e-35) break;
 
 		numer *= fourpi;
-		fact *= (2.0 * n + 3.0)  * (2.0*n + 2.0);
+		fact *= (2.0L * n + 3.0L)  * (2.0L*n + 2.0L);
 	}
 	// printf(" ---------------------- above was k=%d\n", k);
 
 	if (k%2 == 0) sum = - sum;
+
+	ld_one_d_cache_store(&a_kc, sum, k);
 	return sum;
+}
+
+double kern(int k)
+{
+	if (0 == k) return a_k(0);
+	return a_k(k) + a_k(k-1);
 }
 
 /**
