@@ -27,8 +27,12 @@ set ylabel "a_k"
 
 # plot "a_k.dat" using 1:($2/(exp(3.3*sqrt($1)))) title "raw"
 
-plot "a_k.dat" using 1:($2/(exp(3.3*sqrt($1)))) title "n=0", \
-     "a_k.dat" using 1:($3/(exp(3.3*sqrt($1)))) title "n=1", \
-     "a_k.dat" using 1:($4/(exp(3.3*sqrt($1)))) title "n=2", \
-     "a_k.dat" using 1:($5/(exp(3.3*sqrt($1)))) title "n=3"
+# plot "a_k.dat" using 1:($2/(exp(3.3*sqrt($1)))) title "n=0", \
+#      "a_k.dat" using 1:($3/(exp(3.3*sqrt($1)))) title "n=1", \
+#      "a_k.dat" using 1:($4/(exp(3.3*sqrt($1)))) title "n=2", \
+#      "a_k.dat" using 1:($5/(exp(3.3*sqrt($1)))) title "n=3"
 
+
+set yrange [-0.05: 0.05]
+plot "a_k.dat" using 1:($5/(exp(3.3*sqrt($1)))) title "n=3", \
+     "r_k.dat" using 1:($3/(exp(3.3*sqrt($1)))) title "super"

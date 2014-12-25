@@ -89,14 +89,17 @@ long double a_k_regulated(unsigned int k, unsigned int p)
 /**
  * Expansion of super-regulator
  * e_k is given by solving
- *    sum_k=0^infty e_k x^k = exp (-1/(1+x))
+ *    sum_k=0^infty e_k x^k = exp (-1/(1+x)^s)
  * This returns e_k.
  */
-long double e_k(unsigned int k)
+long double e_k(unsigned int k, long double s)
 {
-	unsigned int n;
-
 	DECLARE_LD_CACHE(e_kc);
+
+	unsigned int n;
+	static long double _sprev=-1.0e38;
+	if (s != _sprev) ld_one_d_cache_clear(&e_kc);
+
 	if (ld_one_d_cache_check(&e_kc, k))
 		return ld_one_d_cache_fetch(&e_kc, k);
 
@@ -104,7 +107,7 @@ long double e_k(unsigned int k)
 	long double fact = 1.0L;
 	for (n=0; n<3530; n++)
 	{
-		long double term = binomial (n+k-1, n-1);
+		long double term = fbinomial (s*n + k - 1, k);
 		term /= fact;
 		sum += term;
 		// printf("n=%d term=%Lg sum=%Lg\n", n, term, sum);
@@ -118,6 +121,33 @@ long double e_k(unsigned int k)
 	if (k%2 == 1) sum = - sum;
 
 	ld_one_d_cache_store(&e_kc, sum, k);
+	return sum;
+}
+
+/**
+ * Expansion of super-regulated topologists sine
+ * r_k is given by solving
+ *    sum_k=0^infty r_k x^k = exp (-1/(1+x)^s) sin(2pi/(1+x))
+ * This returns r_k.
+ */
+long double r_k(unsigned int k, long double s)
+{
+	unsigned int j;
+
+	DECLARE_LD_CACHE(r_kc);
+	static long double _sprev=-1.0e38;
+	if (s != _sprev) ld_one_d_cache_clear(&r_kc);
+	if (ld_one_d_cache_check(&r_kc, k))
+		return ld_one_d_cache_fetch(&r_kc, k);
+
+	long double sum = 0.0L;
+	for (j=1; j<=k; j++)
+	{
+		long double term = a_k(j) * e_k(k-j, s);
+		sum += term;
+	}
+
+	ld_one_d_cache_store(&r_kc, sum, k);
 	return sum;
 }
 
@@ -155,20 +185,20 @@ long double topsin(long double x, unsigned int p)
 
 /**
  * It should be the case that
- *   sum_k=0^infty e_k x^k = exp (-1/(1+x))
+ *   sum_k=0^infty e_k x^k = exp (-1/(1+x)^s)
  *
  * Is that really the case?  Yes, it is, to the
  * precision that double precision can do.
  * The below computes the sum, and returns it.
  */
-long double regul(long double x)
+long double regul(long double x, long double s)
 {
 	unsigned int k;
 	long double sum = 0.0L;
 	long double xn = 1.0L;
 	for(k=0; k<1200; k++)
 	{
-		long double term = xn * e_k(k);
+		long double term = xn * e_k(k, s);
 		sum += term;
 		if (k>10 && fabs(term) < 1.0e-30) break;
 		xn *= x;
@@ -451,6 +481,19 @@ void print_kern(void)
 	}
 }
 
+void print_reg(void)
+{
+	int k;
+
+	printf("#\n# The super-regulated kernel series r_k\n#\n");
+	for (k=0; k<248; k++)
+	{
+		double ak = a_k(k);
+		double rk = r_k(k, 0.5);
+		printf("%d	%g	%g\n", k, ak, rk);
+	}
+}
+
 void print_topsin(void)
 {
 	double x;
@@ -479,12 +522,16 @@ bool chk_regul_everywhere(void)
 {
 	bool fail = false;
 	double x;
+	double s = 0.5;
 	for (x=0.96; x>-0.96; x-= 0.0013634563)
+	// for (x=0.96; x>-0.96; x-= 0.013634563)
 	{
-		double e = exp(-1.0/(1.0+x));
-		double r = regul(x);
+		double p = pow(1.0+x, s);
+		double e = exp(-1.0/p);
+		double r = regul(x, s);
 		double diff= e-r;
-		// printf("x=%g  r=%g  d=%g\n", x, r, diff);
+		// double c=(1+x)*(1+x)*(1+x);
+		// printf("x=%g  reg=%g  c=%g d=%g\n", x, r, c, diff);
 		if ((fabs(diff) > 1.0e-10) ||
 		   (fabs(diff) > 1.0e-15 && fabs(x) < 0.93))
 		{
@@ -523,19 +570,20 @@ bool chk_topsin_everywhere(void)
 
 void unit_test(void)
 {
-	// chk_regul_everywhere();
-	chk_topsin_everywhere();
+	chk_regul_everywhere();
+	// chk_topsin_everywhere();
 }
 
 int
 main (int argc, char * argv[])
 {
+	// unit_test();
 	// print_kern();
 	// print_topsin();
+	print_reg();
 
 	// chk_Eleft();
 
-	unit_test();
 
 
 #if RIGHT_INV
