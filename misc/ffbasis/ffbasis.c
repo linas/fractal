@@ -115,7 +115,7 @@ long double e_k(unsigned int k)
 	}
 	// printf(" ---------------------- above was k=%d\n", k);
 
-	if (k%2 == 0) sum = - sum;
+	if (k%2 == 1) sum = - sum;
 
 	ld_one_d_cache_store(&e_kc, sum, k);
 	return sum;
@@ -474,6 +474,34 @@ void check_kern_everywhere(void)
 	}
 }
 
+
+bool chk_regul_everywhere(void)
+{
+	bool fail = false;
+	double x;
+	for (x=0.96; x>-0.96; x-= 0.0013634563)
+	{
+		double e = exp(-1.0/(1.0+x));
+		double r = regul(x);
+		double diff= e-r;
+		// printf("x=%g  r=%g  d=%g\n", x, r, diff);
+		if ((fabs(diff) > 1.0e-10) ||
+		   (fabs(diff) > 1.0e-15 && fabs(x) < 0.93))
+		{
+			printf("Error: regulator expansion fail: x=%g  r=%g  d=%g\n", x, r, diff);
+			fail = true;
+		}
+	}
+	if (!fail) printf("Regulator test success\n");
+
+	return fail;
+}
+
+void unit_test(void)
+{
+	chk_regul_everywhere();
+}
+
 int
 main (int argc, char * argv[])
 {
@@ -482,17 +510,8 @@ main (int argc, char * argv[])
 
 	// chk_Eleft();
 
-#if 0
-	double x;
-	for (x=1.0; x>-1.0; x-= 0.1)
-	{
-		double e = exp(-1.0/(1.0+x));
-		double r = regul(x);
-		double diff= e-r;
-		printf("x=%g  r=%g  d=%g\n", x,r,diff);
-	}
-#endif
-printf("wtf %Lg %Lg\n", e_k(0), regul(0.0));
+	unit_test();
+
 
 #if RIGHT_INV
 	int m = atoi(argv[1]);
