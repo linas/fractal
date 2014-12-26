@@ -416,7 +416,8 @@ void print_kern(void)
 	{
 		long double ak = a_k(k);
 		long double ak1 = a_k_regulated(k, 1);
-		long double reg = expl(-3.3L * sqrtl (k));
+		// long double reg = expl(-3.3L * sqrtl (k));
+		long double reg = 1.0L;
 		ak *= reg;
 		ak1 *= reg;
 		// double ak2 = a_k_regulated(k, 2);
