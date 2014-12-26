@@ -33,6 +33,7 @@ long double E_mk(unsigned int m, unsigned int k)
  * If we did this correctly, a_k is given by solving
  *    sum_k=0^infty a_k x^k = sin (2pi/(1+x))
  * This returns a_k.
+ * This breaks down around k=800 or so, not enough precision.
  */
 long double a_k(unsigned int k)
 {
@@ -40,6 +41,8 @@ long double a_k(unsigned int k)
 	long double sum = 0.0L;
 
 	if (0 == k) return 0.0L;
+
+	if (800 < k) fprintf(stderr, "Error: k=%d too large\n", k);
 
 	DECLARE_LD_CACHE(a_kc);
 	if (ld_one_d_cache_check(&a_kc, k))

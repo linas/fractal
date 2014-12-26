@@ -412,7 +412,7 @@ void print_kern(void)
 	int k;
 
 	printf("#\n# The kernel series a_k\n#\n");
-	for (k=0; k<3648; k++)
+	for (k=0; k<800; k++)
 	{
 		long double ak = a_k(k);
 		long double ak1 = a_k_regulated(k, 1);
