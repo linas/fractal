@@ -34,15 +34,35 @@ double bitstring_to_float(int bits[LEN])
 	return x;
 }
 
+void add_bitstrings(int sum[LEN], int a[LEN], int b[LEN])
+{
+	int carry = 0;
+	for (int i=0; i<LEN; i++)
+	{
+		int s = a[i] + b[i] + carry;
+		if (s < 2) { sum[i] = s; carry = 0; }
+		else { sum[i] = s-2; carry = 1; }
+	}
+}
+
 int main (int argc, char * argv[])
 {
-	for (double x=0.0; x<1.0; x+= 0.0123)
+	for (double x=0.0; x<1.0; x+= 0.123)
 	{
-		int bits[LEN];
-		float_to_bitstring(x, bits);
-		double y = bitstring_to_float(bits);
+		int xbits[LEN];
+		float_to_bitstring(x, xbits);
 
-		printf("duude %g %g \n", x, x-y);
+		for (double y=0.0; y<1.0; y+= 0.08123)
+		{
+			int ybits[LEN];
+			float_to_bitstring(y, ybits);
+
+			int bsum[LEN];
+			add_bitstrings(bsum, xbits, ybits);
+			double sum = bitstring_to_float(bsum);
+
+			printf("duude %g %g %g \n", x, y, sum-x-y);
+		}
 	}
 
 }
