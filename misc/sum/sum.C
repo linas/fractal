@@ -1,4 +1,3 @@
-
 /*
  * Explore sums of binary digits
  *
@@ -9,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define LEN 60
+#include "sum.h"
 
 void float_to_bitstring(double x, int bits[LEN])
 {
@@ -57,55 +56,17 @@ void reverse_add(int sum[LEN], int a[LEN], int b[LEN])
 	}
 }
 
-int main (int argc, char * argv[])
+double rev_add(double x, double y)
 {
-#if 0
-	for (double x=0.0; x<1.0; x+= 0.1)
-	{
-		int xbits[LEN];
-		float_to_bitstring(x, xbits);
-
-		for (double y=0.0; y<1.0; y+= 0.08)
-		{
-			int ybits[LEN];
-			float_to_bitstring(y, ybits);
-
-			int bsum[LEN];
-			// add_bitstrings(bsum, xbits, ybits);
-			reverse_add(bsum, xbits, ybits);
-			double sum = bitstring_to_float(bsum);
-
-			double mod = x+y;
-			if (1.0 < mod) mod -= 1.0;
-			printf("duude %g + %g  = %g \n", x, y, sum);
-		}
-	}
-#endif
-
-	if (argc < 2)
-	{
-		fprintf(stderr, "Usage: %s <x>\n", argv[0]);
-		exit (-1);
-	}
-	double x = atof(argv[1]);
-
 	int xbits[LEN];
 	float_to_bitstring(x, xbits);
+	int ybits[LEN];
+	float_to_bitstring(y, ybits);
 
-	double ystep = 1.0 / 3197.0;
-	for (double y=0.0; y<1.0; y+= ystep)
-	{
-		int ybits[LEN];
-		float_to_bitstring(y, ybits);
+	int bsum[LEN];
+	reverse_add(bsum, xbits, ybits)
 
-		int bsum[LEN];
-		// add_bitstrings(bsum, xbits, ybits);
-		reverse_add(bsum, xbits, ybits);
-		double sum = bitstring_to_float(bsum);
+	double sum = bitstring_to_float(bsum);
 
-		double mod = x+y;
-		if (1.0 < mod) mod -= 1.0;
-		printf("%g\t%g\t%g\n", x, y, sum);
-	}
-
+	return sum;
 }
