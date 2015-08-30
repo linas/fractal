@@ -64,7 +64,7 @@ double rev_add(double x, double y)
 	float_to_bitstring(y, ybits);
 
 	int bsum[LEN];
-	reverse_add(bsum, xbits, ybits)
+	reverse_add(bsum, xbits, ybits);
 
 	double sum = bitstring_to_float(bsum);
 

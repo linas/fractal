@@ -9,8 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define LEN 60
-
+#include "sum.h"
 
 int main (int argc, char * argv[])
 {
