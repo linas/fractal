@@ -1,7 +1,7 @@
 /*
  * kac.c
  *
- * One-dimensional Kac model. General resmblance to
+ * One-dimensional Kac model. General resemblance to
  * the code in ising.c except that more careful attention 
  * is given to the cylinder-set topology.
  * 

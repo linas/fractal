@@ -30,7 +30,10 @@ set yrange [-0.005:0.005]
 set xrange [1000:5000]
 # Hard to eyeball, but the asymptotic behavior seems to be 
 # exp(-3.5215*sqrt($1))  for k to 5000
-plot "a_k.dat" using 1:($2*exp(-3.5215*sqrt($1))) title "raw"
+# Blechhh seems to need exp(-3.53*sqrt($1)) to get to 15K
+# Seems to need exp(-3.537*sqrt($1)) to get to 40K
+# But there's a subtle int it keeps growing ..??
+plot "a_k.dat" using 1:($2*exp(-3.537*sqrt($1))) title "raw"
 
 # plot "a_k.dat" using 1:($2/(exp(3.3*sqrt($1)))) title "n=0", \
 #      "a_k.dat" using 1:($3/(exp(3.3*sqrt($1)))) title "n=1", \
