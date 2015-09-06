@@ -3,7 +3,7 @@ INCLUDES =  -I../../tools/inc -I../../misc/bignum \
 	-I ../../generate
 
 FUNC=../../tools/lib/libfunc.a
-HIST=../../generate/util.o
+HIST=../../generate/brat.o ../../generate/util.o
 
 
 all: sum-1d sum-2d
@@ -16,5 +16,5 @@ sum-2d: sum-2d.o sum.o $(HIST)
 
 
 .C.o:
-	cc -c $^  -Wall -g -O2 $(INCLUDES)
+	cc -c $^  -Wall -O2 $(INCLUDES)
 
