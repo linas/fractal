@@ -9,6 +9,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <complex.h>
+// #include <complex>
+
+// using std::complex;
+
 #include "../sum/sum.h"
 
 /*
@@ -49,15 +54,50 @@ int xbitcount(int k, double x)
 	return bitcount(k, bits);
 }
 
+double complex count_extend(int k, int c_k, int c_1, double complex u)
+{
+	if (2 < k and k%2 == 0)
+		return c_k * u / (1.0 - u);
+	if (2 < k and k%2 == 1)
+		return c_k * (1.0 - 2.0 * u) / (1.0 - u);
+
+	if (2 == k and 0 < c_1)
+		return c_k * u / (1.0 - u);
+	if (2 == k and 0 == c_1)
+		return (u * (1.0 - 2.0 * u) / (1.0 - u)) + (c_k - 1) * u / (1.0 - u);
+
+	if (1 == k and 0 < c_1)
+		return (u * (1.0 - 2.0 * u + 2.0 *u *u) / (1.0 - u))
+			+ (c_k - 1) * (1.0 - 2.0 * u) / (1.0 - u);
+	return 0.0;
+}
+
+double complex count_extend(int k, int bits[LEN], double complex u)
+{
+	int c_1 = bitcount(1, bits);
+	int c_k = bitcount(k, bits);
+	return count_extend(k, c_k, c_1, u);
+}
+
+double complex count_extend(int k, double x, double complex u)
+{
+	int bits[LEN];
+	float_to_bitstring(x, bits);
+	return count_extend(k, bits, u);
+}
+
 int main(int argc, char *argv[])
 {
 	double x = 0.49999999999;
 
-	x = atof(argv[1]);
+	int k = atoi(argv[1]);
+	x = atof(argv[2]);
 
-	for (int k=1; k<10; k++)
+	for (double u=0.0; u< 1.0; u+= 0.0112345)
 	{
-		int c_k = xbitcount(k, x);
-		printf("duuude its %d %d\n", k, c_k);
+		double complex cu_k = count_extend(k, x, u);
+		printf("duuude its %d %10.6f %g\n", k, u, creal(cu_k));
 	}
+
+	return 0;
 }
