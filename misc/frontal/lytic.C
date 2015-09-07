@@ -90,13 +90,20 @@ int main(int argc, char *argv[])
 {
 	double x = 0.49999999999;
 
-	int k = atoi(argv[1]);
-	x = atof(argv[2]);
+	// int k = atoi(argv[1]);
+	x = atof(argv[1]);
 
-	for (double u=0.0; u< 1.0; u+= 0.0112345)
+	printf("#\n# expanding x=%g\n#\n", x);
+
+	for (double u=0.0; u< 1.0; u+= 1.0/1121.0)
 	{
-		double complex cu_k = count_extend(k, x, u);
-		printf("duuude its %d %10.6f %g\n", k, u, creal(cu_k));
+		printf("%g", u);
+		for (int k=1; k<6; k++)
+		{
+			double complex cu_k = count_extend(k, x, u);
+			printf("\t%g", creal(cu_k));
+		}
+		printf("\n");
 	}
 
 	return 0;
