@@ -568,12 +568,12 @@ for each value of
 \end_inset
 
 .
- This should be solvable, as its upper-triangular.
+ This is solvable, as its upper-triangular.
  Write
 \begin_inset Formula 
 \[
 C_{mk}^{(x)}=\begin{cases}
-{k \choose m}\left(-x\right)^{k-m} & \quad\mbox{for }k\ge m\\
+{k \choose m}\, x^{k-m} & \quad\mbox{for }k\ge m\\
 0 & \quad\mbox{for }k<m
 \end{cases}
 \]
@@ -582,20 +582,20 @@ C_{mk}^{(x)}=\begin{cases}
 
 so that we are solving
 \begin_inset Formula 
-\[
-\sum_{k=0}^{\infty}C_{mk}^{(x)}A_{k}=\sum_{k=0}^{\infty}C_{mk}^{(y)}B_{k}
-\]
+\begin{equation}
+\sum_{k=0}^{\infty}C_{mk}^{(-x)}A_{k}=\sum_{k=0}^{\infty}C_{mk}^{(-y)}B_{k}\label{eq:sym-balance}
+\end{equation}
 
 \end_inset
 
 So 
-\begin_inset Formula $C_{mk}^{(x)}$
+\begin_inset Formula $C_{mk}^{(-x)}$
 \end_inset
 
  is upper-triangular, non-degenerate, and thus invertible.
  It is quasisingular, as it has all 1's on the diagonal.
  Setting 
-\begin_inset Formula $y=0$
+\begin_inset Formula $x=0$
 \end_inset
 
  we get 
@@ -615,7 +615,7 @@ So
  by writing it out:
 \begin_inset Formula 
 \[
-C=\left[\begin{array}{cccccc}
+C^{(-x)}=\left[\begin{array}{cccccc}
 1 & -x & x^{2} & -x^{3} & x^{4} & \cdots\\
 0 & 1 & -2x & 3x^{2} & -4x^{3} & \cdots\\
 \vdots & 0 & 1 & -3x & 6x^{2}\\
@@ -635,16 +635,37 @@ D_{mk}^{(x)}=C_{mk}^{(-x)}
 
 \end_inset
 
+In fact, it forms a nice Abelian group, viz: 
+\begin_inset Formula 
+\begin{equation}
+\sum_{k=0}^{\infty}C_{mk}^{(a)}C_{kn}^{(b)}=C_{mn}^{(a+b)}\label{eq:abelian grp}
+\end{equation}
+
+\end_inset
+
+ for any real or complex 
+\begin_inset Formula $a,b$
+\end_inset
+
+, which follows from the binomial theorem in general.
+ 
+\end_layout
+
+\begin_layout Standard
 Thus, the desired solution is then
 \begin_inset Formula 
 \[
-A_{m}=\sum_{k=0}^{\infty}C_{mk}^{(-x)}B_{k}
+A_{m}=\sum_{k=0}^{\infty}C_{mk}^{(x-y)}B_{k}
 \]
 
 \end_inset
 
 Things seem to get funky here.
  Some care needs to be taken, here; we have the prior constraint that 
+\begin_inset Formula $X(0)=x$
+\end_inset
+
+, that is, 
 \begin_inset Formula 
 \[
 A_{0}=\sum_{n=1}^{\infty}a_{no}2^{-n}=x
@@ -657,10 +678,14 @@ A_{0}=\sum_{n=1}^{\infty}a_{no}2^{-n}=x
 \end_inset
 
 .
- Thus, the first row gives:
+ Thus, the first row (
+\begin_inset Formula $m=0$
+\end_inset
+
+) gives:
 \begin_inset Formula 
 \[
-x=y+B_{1}x+B_{2}x^{2}+B_{3}x^{3}+\cdots
+x=y+B_{1}(x-y)+B_{2}(x-y)^{2}+B_{3}(x-y)^{3}+\cdots
 \]
 
 \end_inset
@@ -674,14 +699,25 @@ Recall, both
 \end_inset
 
  are fixed, here, and the goal is to provide some reasonable values for
- B such that this sum converges, as well as the sums for all the other rows.
+ 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ such that this sum converges, as well as the sums for all the other rows.
  Due to the presence of the binomial coefficient, these rows grow large,
- and it would be best to provide an a set of B's that shrink as fast as
- the factorial.
- Thus, a reasonable solution seems to be
+ and it would be best to provide an a set of 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+'s that shrink as fast as the factorial.
+ Thus, a reasonable ansatz is 
+\begin_inset Formula $B_{k}\sim1/k!$
+\end_inset
+
+ from which we obtain a solution
 \begin_inset Formula 
 \[
-B_{k}=\frac{x-y}{k!(e^{x}-1)}
+B_{k}=\frac{x-y}{k!(e^{x-y}-1)}
 \]
 
 \end_inset
@@ -693,7 +729,7 @@ which is flawed ...
 \begin_inset Formula $B_{k}$
 \end_inset
 
- depend on 
+ then depend on 
 \begin_inset Formula $x$
 \end_inset
 
@@ -727,6 +763,157 @@ Can we fix this with a sheaf of some kind? We've got a sheaf of analytic
 .
  Can we do anything useful with this sheaf? What did we intend to do with
  it, in the first place?
+\end_layout
+
+\begin_layout Standard
+------
+\end_layout
+
+\begin_layout Standard
+Go back to the symmetric version, in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sym-balance"
+
+\end_inset
+
+.
+ Make the same Ansatz, that 
+\begin_inset Formula $B_{k}\sim\frac{1}{k!}$
+\end_inset
+
+.
+ Then, for 
+\begin_inset Formula $m=0$
+\end_inset
+
+ one has
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y-B_{1}y+B_{2}y^{2}-B_{3}y^{3}+\cdots=\alpha
+\]
+
+\end_inset
+
+when 
+\begin_inset Formula 
+\[
+B_{k}=\frac{\alpha-y}{k!(e^{-y}-1)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a freely chosen constant.
+ Making the same choice for the 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ results in a balance at 
+\begin_inset Formula $m=0$
+\end_inset
+
+.
+ However, for 
+\begin_inset Formula $m\ne0$
+\end_inset
+
+ we get:
+\begin_inset Formula 
+\[
+\sum_{k=0}^{\infty}C_{mk}^{(y)}B_{k}=\frac{(\alpha-y)e^{-y}}{(e^{-y}-1)m!}
+\]
+
+\end_inset
+
+which cannot balance the corresponding A-side in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sym-balance"
+
+\end_inset
+
+ unless we pick 
+\begin_inset Formula $\alpha=$
+\end_inset
+
+y.
+ ...
+ which sets all 
+\begin_inset Formula $B_{k}=0$
+\end_inset
+
+ (and breaks the 
+\begin_inset Formula $m=0$
+\end_inset
+
+ equations).
+ WTF.
+ So, clearly, the Ansatz cannot work.
+ 
+\end_layout
+
+\begin_layout Standard
+The way out of this is to solve a variant of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sym-balance"
+
+\end_inset
+
+, namely
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula 
+\[
+\sum_{k=0}^{\infty}C_{mk}^{(-y)}B_{k}=\alpha_{m}
+\]
+
+\end_inset
+
+for some set (any set!?) of constants 
+\begin_inset Formula $\alpha_{m}$
+\end_inset
+
+.
+ The solution is trivial, on account of eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:abelian grp"
+
+\end_inset
+
+, namely:
+\begin_inset Formula 
+\[
+B_{k}=\sum_{p=0}^{\infty}C_{kp}^{(y)}\alpha_{p}
+\]
+
+\end_inset
+
+for compltely free constants 
+\begin_inset Formula $\alpha_{p}$
+\end_inset
+
+.
+ Hmmm.
+ 
 \end_layout
 
 \end_body
