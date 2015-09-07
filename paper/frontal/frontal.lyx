@@ -476,9 +476,9 @@ be the binary expansions for two real numbers
 
  in the (upper-half) complex plane, we have that 
 \begin_inset Formula 
-\[
-X(z-x)=Y(z-y)
-\]
+\begin{equation}
+X(z-x)=Y(z-y)\label{eq:balance}
+\end{equation}
 
 \end_inset
 
@@ -508,7 +508,19 @@ for some finte radius of convergence around
 
 .
  Can this be done? Lets try.
- Write 
+ Write the analytic extension of 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\begin{equation}
+a_{n}(u)=\sum_{k=0}^{\infty}a_{nk}u^{k}\label{eq:extension of a_n}
+\end{equation}
+
+\end_inset
+
+so that 
 \begin_inset Formula 
 \[
 X(u)=\sum_{n=1}^{\infty}2^{-n}\sum_{k=0}^{\infty}a_{nk}u^{k}
@@ -516,7 +528,7 @@ X(u)=\sum_{n=1}^{\infty}2^{-n}\sum_{k=0}^{\infty}a_{nk}u^{k}
 
 \end_inset
 
- and likewise for 
+and likewise for 
 \begin_inset Formula $Y(w)$
 \end_inset
 
@@ -549,13 +561,29 @@ and consistency requires that this match,
  is fixed.
  For convenience, let 
 \begin_inset Formula 
+\begin{equation}
+A_{k}=\sum_{n=1}^{\infty}a_{nk}2^{-n}\label{eq:defn of A_k}
+\end{equation}
+
+\end_inset
+
+so that
+\begin_inset Formula 
 \[
-A_{k}=\sum_{n=1}^{\infty}a_{nk}2^{-n}
+X(u)=\sum_{k=0}^{\infty}A_{k}u^{k}
 \]
 
 \end_inset
 
-for now; we need to solve the equations
+For balance, i.e.
+ eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:balance"
+
+\end_inset
+
+, we need to solve the equations
 \begin_inset Formula 
 \[
 \sum_{k=m}^{\infty}{k \choose m}\left(-x\right)^{k-m}A_{k}=\sum_{k=m}^{\infty}{k \choose m}\left(-y\right)^{k-m}B_{k}
@@ -643,12 +671,16 @@ In fact, it forms a nice Abelian group, viz:
 
 \end_inset
 
- for any real or complex 
+for any real or complex 
 \begin_inset Formula $a,b$
 \end_inset
 
 , which follows from the binomial theorem in general.
  
+\end_layout
+
+\begin_layout Subsection*
+First attempt; it fails
 \end_layout
 
 \begin_layout Standard
@@ -673,7 +705,7 @@ A_{0}=\sum_{n=1}^{\infty}a_{no}2^{-n}=x
 
 \end_inset
 
- and likewise 
+and likewise 
 \begin_inset Formula $B_{0}=y$
 \end_inset
 
@@ -765,8 +797,8 @@ Can we fix this with a sheaf of some kind? We've got a sheaf of analytic
  it, in the first place?
 \end_layout
 
-\begin_layout Standard
-------
+\begin_layout Subsection*
+Second attempt; it fails
 \end_layout
 
 \begin_layout Standard
@@ -859,6 +891,10 @@ y.
  
 \end_layout
 
+\begin_layout Subsection*
+Third attempt; success!
+\end_layout
+
 \begin_layout Standard
 The way out of this is to solve a variant of 
 \begin_inset CommandInset ref
@@ -914,6 +950,377 @@ for compltely free constants
 .
  Hmmm.
  
+\end_layout
+
+\begin_layout Standard
+There seem to be several directions to go here.
+ First, lets try 
+\begin_inset Formula $\alpha_{p}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $p.$
+\end_inset
+
+ This gives 
+\begin_inset Formula $A_{k}=B_{k}=0$
+\end_inset
+
+.
+ Going back to the defintion of these, in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:defn of A_k"
+
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+0=\sum_{n=1}^{\infty}a_{nk}2^{-n}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ We can certainly find many non-zero values for the 
+\begin_inset Formula $a_{nk}$
+\end_inset
+
+; however, in the end this fails, because 
+\begin_inset Formula $X(u)$
+\end_inset
+
+ is no longer dependent on 
+\begin_inset Formula $u$
+\end_inset
+
+ at this point, which defeats the purpose.
+\end_layout
+
+\begin_layout Standard
+As before, we try the Ansatz 
+\begin_inset Formula $\alpha_{p}=1/p!$
+\end_inset
+
+ subject to the constraint 
+\begin_inset Formula $B_{0}=y$
+\end_inset
+
+.
+ Proceeding as before, we get 
+\begin_inset Formula $B_{0}=y=e^{y}$
+\end_inset
+
+ which is clearly wrong.
+ We start to get an inkling: the constants 
+\begin_inset Formula $\alpha_{p}$
+\end_inset
+
+, whatever they are, cannot be freely chosen.
+ They must be constants, i.e.
+ they must be independenty of 
+\begin_inset Formula $y$
+\end_inset
+
+ (and of 
+\begin_inset Formula $x$
+\end_inset
+
+).
+ So, from the first row, we have
+\begin_inset Formula 
+\[
+B_{0}=y=\alpha_{0}+\alpha_{1}y+\alpha_{2}y^{2}+\cdots
+\]
+
+\end_inset
+
+so if these really are constants, we must have 
+\begin_inset Formula $\alpha_{0}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{1}=1$
+\end_inset
+
+ and all other 
+\begin_inset Formula $\alpha_{p}=0$
+\end_inset
+
+.
+ This gives 
+\begin_inset Formula $B_{0}=y$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{1}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{k}=0$
+\end_inset
+
+ for all other 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+From this, we conclude that the only possible extension is 
+\begin_inset Formula $Y(w)=y+w$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $X(u)=x+u$
+\end_inset
+
+ so that 
+\begin_inset Formula 
+\[
+X(z-x)=z=Y(z-y)
+\]
+
+\end_inset
+
+so balance holds, the way we want it to.
+ Moving to 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:defn of A_k"
+
+\end_inset
+
+, we already know 
+\begin_inset Formula $a_{n0}=a_{n}$
+\end_inset
+
+ are constrained as binary digits.
+ After this, we have 
+\begin_inset Formula 
+\[
+1=\sum_{n=1}^{\infty}a_{n1}2^{-n}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $k=1$
+\end_inset
+
+ and 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+0=\sum_{n=1}^{\infty}a_{nk}2^{-n}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $k>1$
+\end_inset
+
+.
+ Recall that the point of this is to obtain extensions of the 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ as given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:extension of a_n"
+
+\end_inset
+
+.
+ It would appear that we have a huge freedom of choice in these extensions,
+ given the above constraints.
+ So, for example, 
+\begin_inset Formula $a_{n1}=1$
+\end_inset
+
+ solves the first constraint, and 
+\begin_inset Formula $a_{1k}=-1$
+\end_inset
+
+ with 
+\begin_inset Formula $a_{nk}=1$
+\end_inset
+
+ solves the second, for 
+\begin_inset Formula $n>1$
+\end_inset
+
+, 
+\begin_inset Formula $k>1$
+\end_inset
+
+.
+ Plugging in, this gives 
+\begin_inset Formula 
+\[
+a_{1}(u)=a_{1}+u\left(\frac{1-2u}{1-u}\right)
+\]
+
+\end_inset
+
+and for 
+\begin_inset Formula $n>1$
+\end_inset
+
+the corresponding 
+\begin_inset Formula 
+\[
+a_{n}(u)=a_{n}+\frac{u}{1-u}
+\]
+
+\end_inset
+
+Note these are just one possible choice, out of an infinite number of choices.
+ It would be intersting to know if there is a choice that gives the same
+ form for all 
+\begin_inset Formula $a_{n}(u)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Recall that here, 
+\begin_inset Formula $u$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+local
+\begin_inset Quotes erd
+\end_inset
+
+ coordinate system, centered at 
+\begin_inset Formula $x$
+\end_inset
+
+; the global coordinate system is 
+\begin_inset Formula $z$
+\end_inset
+
+ with 
+\begin_inset Formula $u=z-x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Recap
+\end_layout
+
+\begin_layout Standard
+What have we done here? Suppose we have a real number 
+\begin_inset Formula $0\le x\le1$
+\end_inset
+
+ with a binary-digit expansion 
+\begin_inset Formula 
+\[
+x=\sum_{n=1}^{\infty}a_{n}2^{-n}
+\]
+
+\end_inset
+
+so that each 
+\begin_inset Formula $a_{n}\in\{0,1\}$
+\end_inset
+
+.
+ (Note that for rational 
+\begin_inset Formula $x$
+\end_inset
+
+, this expansion is not unique; there are two equivalent expansions).
+ Then we have found an infinite set of analytic continuations 
+\begin_inset Formula $a_{n}^{c}(z)$
+\end_inset
+
+ of the 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ to the complex plane 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ This gives the sum the extension
+\begin_inset Formula 
+\[
+x(z)=\sum_{n=1}^{\infty}a_{n}^{c}(z)2^{-n}
+\]
+
+\end_inset
+
+In order to make this extension self-consistent for different 
+\begin_inset Formula $x$
+\end_inset
+
+, it turns out that the condition 
+\begin_inset Formula $x(z)=z$
+\end_inset
+
+ is forced.
+ Although one might have imagined that there were other possibilities, in
+ retrospect, this condition is 
+\begin_inset Quotes eld
+\end_inset
+
+obvious
+\begin_inset Quotes erd
+\end_inset
+
+: it even sounds absurdly trivial: it just says that the real number line
+ has a unique extension to the complex plane, which 
+\emph on
+is
+\emph default
+ the complex plane.
+\end_layout
+
+\begin_layout Standard
+One possible example of this extension (out of an infinity of possibilities)
+ is given by
+\begin_inset Formula 
+\[
+a_{1}^{c}(z)=a_{1}+(z-x)\left(\frac{1-2(z-x)}{1-(z-x)}\right)
+\]
+
+\end_inset
+
+and for 
+\begin_inset Formula $n>1$
+\end_inset
+
+the corresponding 
+\begin_inset Formula 
+\[
+a_{n}^{c}(z)=a_{n}+\frac{z-x}{1-(z-x)}
+\]
+
+\end_inset
+
+Strange but true.
+ Hmm.
+ Now, what do we do with this?
 \end_layout
 
 \end_body
