@@ -1192,6 +1192,17 @@ Note these are just one possible choice, out of an infinite number of choices.
 \end_inset
 
 .
+ The correctness of the above is easily checked: one has 
+\begin_inset Formula 
+\begin{align*}
+x(u)= & \sum_{n=1}^{\infty}a_{n}(u)2^{-n}\\
+= & x+\frac{1}{2}\left[u\left(\frac{1-2u}{1-u}\right)+\frac{u}{1-u}\right]\\
+= & x+u
+\end{align*}
+
+\end_inset
+
+so this form gives exctly what ws expected.
 \end_layout
 
 \begin_layout Standard
@@ -1319,8 +1330,138 @@ a_{n}^{c}(z)=a_{n}+\frac{z-x}{1-(z-x)}
 \end_inset
 
 Strange but true.
- (XXX TODO: double-check this result numerically) Hmm.
+ Its convenient to call a given choice of a's a 
+\begin_inset Quotes eld
+\end_inset
+
+gauge choice
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Hmm.
  Now, what do we do with this?
+\end_layout
+
+\begin_layout Section
+Now what?
+\end_layout
+
+\begin_layout Standard
+So we extended the binary bit-sum to the complex plan.
+ Now what? Conversion to continued fractions requires bit-counting.
+ So, consider the binary expansion
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+x=\begin{array}{ccccc}
+0.\underbrace{000...0} & \underbrace{11..1} & \underbrace{00..0} & \underbrace{11..1} & \underbrace{00..0}1..\\
+c_{1} & c_{2} & c_{3} & c_{4} & c_{5}
+\end{array}
+\]
+
+\end_inset
+
+Consider first 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+ for even 
+\begin_inset Formula $k>2$
+\end_inset
+
+.
+ Its the count of the number of 1-bits, and so has a plausible analytic
+ extension equal to
+\begin_inset Formula 
+\[
+c_{k}\to c_{k}(u)=c_{k}\cdot\left(\frac{u}{1-u}\right)
+\]
+
+\end_inset
+
+if we follow the 
+\begin_inset Quotes eld
+\end_inset
+
+gauge choice
+\begin_inset Quotes erd
+\end_inset
+
+ given previously.
+ For odd 
+\begin_inset Formula $k$
+\end_inset
+
+, which counts zeros, there are two plausible extensions: one that leaves
+ 
+\begin_inset Formula $c_{k}$
+\end_inset
+
+ a constant; another which counts 1=1-0; that is, 
+\begin_inset Formula 
+\[
+c_{k}\to c_{k}(u)=c_{k}\cdot\left(1-\frac{u}{1-u}\right)=c_{k}\left(\frac{1-2u}{1-u}\right)
+\]
+
+\end_inset
+
+Applying similar reasoning, we can get 
+\begin_inset Formula $c_{1}(u)$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{2}(u)$
+\end_inset
+
+, special-casing for a zero count:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+c_{1}\to c_{1}(u)=\begin{cases}
+u\left(\frac{1-2u+2u^{2}}{1-u}\right)+\left(c_{1}-1\right)\left(\frac{1-2u}{1-u}\right) & \quad\mbox{for }c_{1}>0\\
+0 & \quad\mbox{for }c_{1}=0
+\end{cases}
+\]
+
+\end_inset
+
+ and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+c_{2}\to c_{2}(u)=\begin{cases}
+c_{2}\left(\frac{u}{1-u}\right) & \quad\mbox{for }c_{1}\ne0\\
+u\left(\frac{1-2u}{1-u}\right)+\left(c_{2}-1\right)\left(\frac{u}{1-u}\right) & \quad\mbox{for }c_{1}=0
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These formulas are pretty whacked.
+ Its even crazier to ponder the summation
+\begin_inset Formula 
+\[
+x(u)=\sum_{k=1}^{\infty}\left(-1\right)^{k+1}2^{-(c_{1}+c_{2}+\cdots+c_{k})}
+\]
+
+\end_inset
+
+ which obeys 
+\begin_inset Formula $x(0)=x$
+\end_inset
+
+ but otherwise has a crazy analytic structure.
 \end_layout
 
 \end_body
