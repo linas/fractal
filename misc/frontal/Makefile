@@ -1,9 +1,9 @@
 
 INCLUDES =  -I .
 
-all: lytic
+all: lytic-1d
 
-lytic: lytic.o ../sum/sum.o
+lytic-1d: lytic-1d.o lytic.o ../sum/sum.o
 
 .o:
 	cc -o $@ $^ -lm -lstdc++
