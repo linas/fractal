@@ -342,8 +342,71 @@ for the same K as above.
 
 \begin_layout Standard
 Some of the above identities are most easily obtained by considering continued
- fractions, as in ref chap-minkowski.pdf, and the others by considering the
- shift operaor on a 1D lattice.
+ fractions, as in [ref chap-minkowski.pdf], and the others by considering
+ the shift operaor on a 1D lattice.
+\end_layout
+
+\begin_layout Standard
+Then there's this:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+?^{\prime}\left(y\right)=\prod_{k=0}^{\infty}\frac{A^{\prime}\circ A_{k}\left(y\right)}{2}
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+A\left(y\right)=\begin{cases}
+\frac{y}{1-y} & \mbox{ for }0\le y\le\frac{1}{2}\\
+\frac{2y-1}{y} & \mbox{ for }\frac{1}{2}\le y\le1
+\end{cases}
+\]
+
+\end_inset
+
+and the iterated function 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ is defined so that 
+\begin_inset Formula 
+\[
+A_{k+1}\left(y\right)=A_{k}\circ A\left(y\right)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $A_{0}\left(y\right)=y$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{1}\left(y\right)=A\left(y\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $A_{k}(y)$
+\end_inset
+
+ are piece-wise smooth, and have a differentiable extension 
+\begin_inset Formula $\widetilde{A}_{k}$
+\end_inset
+
+ such that 
+\begin_inset Formula $A_{k}(y)=\left\lfloor \widetilde{A}_{k}(y)\right\rfloor $
+\end_inset
+
+ i.e.
+ such that they are the fractional part.
 \end_layout
 
 \begin_layout Section
@@ -352,6 +415,247 @@ Analytic extension
 
 \begin_layout Standard
 Some atttempts at an analytic extension of the ? to the upper-half plane.
+\end_layout
+
+\begin_layout Standard
+Lets try this.
+ Let
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+x=\sum_{n}a_{n}2^{-n}\quad\mbox{and}\quad y=\sum_{n}b_{n}2^{-n}
+\]
+
+\end_inset
+
+be the binary expansions for two real numbers 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Consider then an extension to the complex plane 
+\begin_inset Formula $a_{n}\to a_{n}(u)$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $b_{n}\to b_{n}(w)$
+\end_inset
+
+ for 
+\begin_inset Formula $u,w$
+\end_inset
+
+ complex, and 
+\begin_inset Formula $a_{n}(0)=a_{n}$
+\end_inset
+
+ and likewise 
+\begin_inset Formula $b_{n}(0)=b_{n}$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $x\to X(u)$
+\end_inset
+
+ and 
+\begin_inset Formula $y\to Y(w)$
+\end_inset
+
+ become complex-analytic functions with some non-zero radius of convergence.
+ The upper-cse is used to distinguish the function from its value at zero.
+ We are fishing for a consistent expansion, in that, for some point 
+\begin_inset Formula $z$
+\end_inset
+
+ in the (upper-half) complex plane, we have that 
+\begin_inset Formula 
+\[
+X(z-x)=Y(z-y)
+\]
+
+\end_inset
+
+for some finte radius of convergence around 
+\begin_inset Formula $z$
+\end_inset
+
+.At a minimum, we hope for convergence for 
+\begin_inset Formula $\left|z\right|<\Im z$
+\end_inset
+
+ i.e.
+ the region of convergence extens to the real line, and better yet, for
+ 
+\begin_inset Formula $\left|z\right|\le\left|x-y\right|$
+\end_inset
+
+ i.e.
+ the region of convergence extends to encompase both 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Can this be done? Lets try.
+ Write 
+\begin_inset Formula 
+\[
+X(u)=\sum_{n=1}^{\infty}2^{-n}\sum_{k=0}^{\infty}a_{nk}u^{k}
+\]
+
+\end_inset
+
+ and likewise for 
+\begin_inset Formula $Y(w)$
+\end_inset
+
+.
+ Then, expanding, 
+\begin_inset Formula 
+\[
+X(z-x)=\sum_{m=0}^{\infty}z^{m}\sum_{k=m}^{\infty}\left({k\atop m}\right)\left(-x\right)^{k-m}\sum_{n=1}^{\infty}a_{nk}2^{-n}
+\]
+
+\end_inset
+
+and consistency requires that this match, 
+\begin_inset Formula $z$
+\end_inset
+
+-term by 
+\begin_inset Formula $z$
+\end_inset
+
+-term, with the analogous expansion for 
+\begin_inset Formula $Y(z-y)$
+\end_inset
+
+.
+ We being by noting that 
+\begin_inset Formula $a_{n0}=a_{n}$
+\end_inset
+
+ is fixed.
+ For convenience, let 
+\begin_inset Formula 
+\[
+A_{k}=\sum_{n=1}^{\infty}a_{nk}2^{-n}
+\]
+
+\end_inset
+
+for now; we need to solve the equations
+\begin_inset Formula 
+\[
+\sum_{k=m}^{\infty}{k \choose m}\left(-x\right)^{k-m}A_{k}=\sum_{k=m}^{\infty}{k \choose m}\left(-y\right)^{k-m}B_{k}
+\]
+
+\end_inset
+
+for each value of 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ This should be solvable, as its upper-triangular.
+ Write
+\begin_inset Formula 
+\[
+C_{mk}^{(x)}=\begin{cases}
+{k \choose m}\left(-x\right)^{k-m} & \quad\mbox{for }k\ge m\\
+0 & \quad\mbox{for }k<m
+\end{cases}
+\]
+
+\end_inset
+
+so that we are solving
+\begin_inset Formula 
+\[
+\sum_{k=0}^{\infty}C_{mk}^{(x)}A_{k}=\sum_{k=0}^{\infty}C_{mk}^{(y)}B_{k}
+\]
+
+\end_inset
+
+So 
+\begin_inset Formula $C_{mk}^{(x)}$
+\end_inset
+
+ is upper-triangular, non-degenerate, and thus invertible.
+ It is quasisingular, as it has all 1's on the diagonal.
+ Setting 
+\begin_inset Formula $y=0$
+\end_inset
+
+ we get 
+\begin_inset Formula $C_{km}^{(0)}=\delta_{km}$
+\end_inset
+
+ the identity operator.
+ It would appear that we have almost complete freedom to choose 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ at this point; see below.
+ We can get an easy, intuitive feel for 
+\begin_inset Formula $C$
+\end_inset
+
+ by writing it out:
+\begin_inset Formula 
+\[
+C=\left[\begin{array}{cccccc}
+1 & -x & x^{2} & -x^{3} & x^{4} & \cdots\\
+0 & 1 & -2x & 3x^{2} & -4x^{3} & \cdots\\
+\vdots & 0 & 1 & -3x & 6x^{2}\\
+ & \vdots & 0 & 1 & -4x\\
+ &  &  & 0 & 1\\
+ &  &  &  &  & \ddots
+\end{array}\right]
+\]
+
+\end_inset
+
+which has both a left and right inverse given by 
+\begin_inset Formula 
+\[
+D_{mk}^{(x)}=C_{mk}^{(-x)}
+\]
+
+\end_inset
+
+Thus, the desired solution is then
+\begin_inset Formula 
+\[
+A_{m}=\sum_{k=0}^{\infty}C_{mk}^{(-x)}B_{k}
+\]
+
+\end_inset
+
+Things seem to get funky here.
+ Some care needs to be taken, here; we have the prior constraint that 
+\begin_inset Formula 
+\[
+A_{0}=\sum_{n=1}^{\infty}a_{no}2^{-n}=x
+\]
+
+\end_inset
+
+ and likewise 
+\begin_inset Formula $B_{0}=y$
+\end_inset
+
+.
 \end_layout
 
 \end_body
