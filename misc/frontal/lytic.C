@@ -6,6 +6,7 @@
  * September 2015
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -84,5 +85,26 @@ double complex count_extend(int k, double x, double complex u)
 	int bits[LEN];
 	float_to_bitstring(x, bits);
 	return count_extend(k, bits, u);
+}
+
+double complex sum_extend(double x, double complex u)
+{
+	int bits[LEN];
+	float_to_bitstring(x, bits);
+	int c_1 = bitcount(1, bits);
+
+	double complex sum = 0.0;
+	double complex csum = 0.0;
+	double alt = 1.0;
+	for (int k=1; k<10; k++)
+	{
+		int c_k = bitcount(k, bits);
+		double complex cu_k = count_extend(k, c_k, c_1, u);
+		csum += cu_k;
+		sum += alt * cexp (- LN_2 * csum);
+		alt *= -1.0;
+	}
+
+	return sum;
 }
 

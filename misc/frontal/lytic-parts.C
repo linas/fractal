@@ -22,10 +22,15 @@ int main(int argc, char *argv[])
 
 	printf("#\n# expanding x=%g\n#\n", x);
 
-	for (double z=0.0; z< 1.0; z+= 1.0/1621.0)
+	for (double u=-1.0; u< 1.0; u+= 1.0/621.0)
 	{
-		double complex sum = sum_extend(x, z-x);
-		printf("%g\t%g\n", z, creal(sum));
+		printf("%g", u);
+		for (int k=1; k<6; k++)
+		{
+			double complex cu_k = count_extend(k, x, u);
+			printf("\t%g", creal(cu_k));
+		}
+		printf("\n");
 	}
 
 	return 0;
