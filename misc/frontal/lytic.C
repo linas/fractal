@@ -87,6 +87,7 @@ double complex count_extend(int k, double x, double complex u)
 	return count_extend(k, bits, u);
 }
 
+/* Extended Denjoy sum */
 double complex sum_extend(double x, double complex u)
 {
 	int bits[LEN];
@@ -106,5 +107,25 @@ double complex sum_extend(double x, double complex u)
 	}
 
 	return sum;
+}
+
+/* Extended continued fraction */
+double complex frac_extend(double x, double complex u)
+{
+	int bits[LEN];
+	float_to_bitstring(x, bits);
+	int c_1 = bitcount(1, bits);
+
+	double complex frac = 0.0;
+	for (int k=10; 1 < k; k--)
+	{
+		int c_k = bitcount(k, bits);
+		double complex cu_k = count_extend(k, c_k, c_1, u);
+		frac = 1.0 / (cu_k + frac);
+	}
+
+	frac = 1.0 / (1.0 + c_1 + frac);
+
+	return frac;
 }
 
