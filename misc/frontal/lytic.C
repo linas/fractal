@@ -101,7 +101,7 @@ double complex sum_extend(double x, double complex u)
 		int c_k = bitcount(k, bits);
 		double complex cu_k = count_extend(k, c_k, c_1, u);
 		csum += cu_k;
-		sum += alt * cexp (- LN_2 * csum);
+		sum += alt * cexp (- M_LN2 * csum);
 		alt *= -1.0;
 	}
 
