@@ -21,11 +21,12 @@ double mob_tak(double x, double alpha)
 	double sum = 0.0;
 	double ap = 1.0;
 	double tp = 1.0;
-	for (int k=0; k<60; k++)
+	for (int k=0; k<860; k++)
 	{
 		sum += ap * mob_tent(tp * x);
 		ap *= alpha;
 		tp *= 2.0;
+		if (ap < 1.0e-16) break;
 	}
 	return sum;
 }
@@ -34,7 +35,9 @@ int main(int argc, char * argv[])
 {
 	double alpha = atof(argv[1]);
 
-	for (double x=0.0; x< 1.0; x += 0.02)
+	printf ("#\n# alpha=%g\n#\n", alpha);
+	for (double x=0.0; x< 1.0; x += 0.002)
+	// for (double x=0.49; x< 0.51; x += 0.00002)
 	{
 		double y = mob_tak(x, alpha);
 		printf("%g\t%g\n", x, y);
