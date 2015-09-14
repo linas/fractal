@@ -107,9 +107,9 @@ Introduction
 \begin_layout Standard
 Consider the operator 
 \begin_inset Formula 
-\[
-H=\frac{1}{2}-ix\frac{d}{dx}
-\]
+\begin{equation}
+H=\frac{1}{2}-ix\frac{d}{dx}\label{eq:BK operator}
+\end{equation}
 
 \end_inset
 
@@ -1602,13 +1602,21 @@ Well, we already know that ? can be constructed as a measure [ref].
  
 \end_layout
 
-\begin_layout Section*
-Clarification
+\begin_layout Section
+Realization & Spaces
 \end_layout
 
 \begin_layout Standard
-Some words/formulas clarifying how to think of the conjecture.
- Consider the simple harmnic oscillator (SHO); it has the standard, well-know
+Some words/formulas clarifying how to think of the Berry-Keating operator
+ in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:BK operator"
+
+\end_inset
+
+ and the conjecture.
+ Consider the simple harmonic oscillator (SHO); it has the standard, well-know
  raising and lowering operators 
 \begin_inset Formula $a$
 \end_inset
@@ -1634,41 +1642,21 @@ Some words/formulas clarifying how to think of the conjecture.
 \end_inset
 
 .
- Taking these states as bosonic, so that any occupancy number is legal,
- we can then define superpositions of these, called 'coherenet states',
- labelled as 
-\begin_inset Formula $\left|\alpha\right\rangle $
+ The egenstates can be taken to be the basis vectors of a Hilbert space;
+ it comes with a norm; it's 
+\begin_inset Formula $l_{2}$
 \end_inset
 
-, using standard superposition techniques from quantum optics, such that
+; its complete; it has a complex coonjugate.
+ The Berry-Keating operator 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:BK operator"
+
+\end_inset
+
+ is worded in terms of the (Weyl?) realization of the shift operators as
  
-\begin_inset Formula $a\left|\alpha\right\rangle =\alpha\left|\alpha\right\rangle $
-\end_inset
-
- for any complex number 
-\begin_inset Formula $\alpha$
-\end_inset
-
-.
- Of particular interest is the construction of an operator 
-\begin_inset Formula $N_{s}$
-\end_inset
-
- and a set of coherent states such that 
-\begin_inset Formula $N_{s}\left|n;s\right\rangle =n^{-s}\left|n;s\right\rangle $
-\end_inset
-
- for complex-valued 
-\begin_inset Formula $s$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-The above argument is simply formulated with the (Weyl?) realization of
- the shift operators as 
 \begin_inset Formula $x$
 \end_inset
 
@@ -1680,9 +1668,120 @@ The above argument is simply formulated with the (Weyl?) realization of
 \begin_inset Formula $N=xd/dx$
 \end_inset
 
+ and 
+\begin_inset Formula $\left|n\right\rangle =x^{n}$
+\end_inset
+
 .
  However, there is no particular reason (yet) to stick to this realization;
- and its somewhat convientient to work in more abstract terms.
+ and its somewhat convientient to explore an SHO realization, or other more
+ abstract formulations.
+ 
+\end_layout
+
+\begin_layout Standard
+A standard construction is to build 'coherent states', labelled as 
+\begin_inset Formula $\left|\alpha\right\rangle $
+\end_inset
+
+, as a superposition, such that 
+\begin_inset Formula $a\left|\alpha\right\rangle =\alpha\left|\alpha\right\rangle $
+\end_inset
+
+ for any complex number 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ The construction is 
+\begin_inset Formula 
+\[
+\left|\alpha\right\rangle =\sum_{n=0}^{\infty}\alpha^{n}\left|n\right\rangle 
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $a\left|n\right\rangle =\left|n-1\right\rangle $
+\end_inset
+
+ the relation 
+\begin_inset Formula $a\left|\alpha\right\rangle =\alpha\left|\alpha\right\rangle $
+\end_inset
+
+ follows.
+ In the Weyl realization, 
+\begin_inset Formula $\left|\alpha\right\rangle =\left(1-\alpha x\right)^{-1}$
+\end_inset
+
+.
+ Note that the Weyl rep and the SHO rep have competing and conflicting notions
+ of completeness and convergence.
+ We gloss over these for now, but these should really really be clarified.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Polylogarithm
+\end_layout
+
+\begin_layout Standard
+There are several related constructions that can be made at this point.
+ One is a state
+\begin_inset Formula 
+\[
+\left|s\right\rangle =\sum_{n=1}^{\infty}n^{-s}\left|n\right\rangle 
+\]
+
+\end_inset
+
+which has the properties that 
+\begin_inset Formula $N\left|s\right\rangle =\left|s+1\right\rangle $
+\end_inset
+
+.
+ That is, what was previously the 'number operator' has become a 'shift
+ operator'.
+ How strange! In the Weyl rep, we have 
+\begin_inset Formula 
+\[
+\left|s\right\rangle =\mbox{Li}_{s}\left(x\right)=\sum_{n=1}^{\infty}\frac{x^{n}}{n^{s}}
+\]
+
+\end_inset
+
+This begs a question: if 
+\begin_inset Formula $N$
+\end_inset
+
+ behaves like a raising operator, then what is the corresponding lowering
+ operator? Can we build coherent states for the lowering operator? What
+ happens if we repeat this construction a second time, a third time, etc?
+\end_layout
+
+\begin_layout Subsection*
+Another construction
+\end_layout
+
+\begin_layout Standard
+Another construction of particular interest is the construction of an operator
+ 
+\begin_inset Formula $N_{s}$
+\end_inset
+
+ and a set of coherent states 
+\begin_inset Formula $\left|n;s\right\rangle $
+\end_inset
+
+ such that 
+\begin_inset Formula $N_{s}\left|n;s\right\rangle =n^{-s}\left|n;s\right\rangle $
+\end_inset
+
+ for complex-valued 
+\begin_inset Formula $s$
+\end_inset
+
+.
  Thus, what we wish to do is to write an equation such as this:
 \begin_inset Formula 
 \[
@@ -1741,24 +1840,7 @@ We are making several misleading leaps here: an implicit assumption that
 \end_layout
 
 \begin_layout Standard
-Anyway, a coherent state is normally defined as 
-\begin_inset Formula 
-\[
-\left|\alpha\right\rangle =\sum_{n=0}^{\infty}\alpha^{n}\left|n\right\rangle 
-\]
-
-\end_inset
-
-and since 
-\begin_inset Formula $a\left|n\right\rangle =\left|n-1\right\rangle $
-\end_inset
-
- the relation 
-\begin_inset Formula $a\left|\alpha\right\rangle =\alpha\left|\alpha\right\rangle $
-\end_inset
-
- follows.
- The dual space is spanned by 
+The dual space is spanned by 
 \begin_inset Formula 
 \[
 \left\langle \alpha;\omega\right|=\frac{1}{1-\alpha\omega}\sum_{n=0}^{\infty}\omega^{n}\left\langle n\right|
