@@ -40,6 +40,18 @@ long double dyadic_to_stern_brocot (long double x);
  */
 long double question_inverse (long double x);
 
+/**
+ * Computes the Stern-Brocot tree.
+ * It takes as input a dyadic fraction N / 2^level
+ * assuming 0 <= N <= 2^level.
+ * It returns the corresponding p/q value in p and q.
+ *
+ * In practical terms, given an input x = N / 2^level
+ * this returns the inverse question-mark, given by
+ * (as per usual) ?(p/q) = N / 2^level.
+ */
+void stern_brocot_tree(unsigned long N, int level,
+                       unsigned long *p, unsigned long *q);
 #ifdef   __cplusplus
 };
 #endif
