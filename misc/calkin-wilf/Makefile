@@ -1,7 +1,8 @@
 
-all: fusc
+all: fusc stern
 
 fusc: fusc.o
+stern: stern.o
 
 .o:
 	cc -o $@ $^ -lm -lstdc++
