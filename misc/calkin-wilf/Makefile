@@ -1,12 +1,16 @@
 
+TOP = ../../tools
+INC = $(TOP)/inc
+LIB = $(TOP)/lib
+
+
 all: fusc stern
 
 fusc: fusc.o
 stern: stern.o
 
 .o:
-	cc -o $@ $^ -lm -lstdc++
+	cc -o $@ $^ -L $(LIB) -lfunc -lm -lstdc++
 
-
-.C.o:
-	cc -c $^  -Wall -O2 $(INCLUDES)
+.cc.o:
+	cc -c $^  -Wall -O2 -I $(INC)

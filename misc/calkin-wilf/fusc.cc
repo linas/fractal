@@ -8,6 +8,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "question.h"
+
+/**
+ * The "fusc" fuction from the Calkin-Wilf tree.
+ */
 unsigned long fusc(unsigned long n)
 {
 	if (0 == n) return 0;
@@ -49,6 +54,34 @@ void print_sum(int section)
 	}
 }
 
+void print_weighted_sum(int section)
+{
+	unsigned long bot = 1<<section;
+	unsigned long top = 2*bot;
+
+	unsigned long sum = 0;
+	double wsum = 0;
+	double norm = 1.0;
+
+	unsigned long p, q;
+	double prev = 0.0;
+
+	for (unsigned long i=bot; i<= top; i++)
+	{
+		unsigned long fu = fusc(i);
+		double x = (i - bot) / ((double) bot);
+		sum += fu;
+		double rsum = sum * norm;
+
+		stern_brocot_tree(i-bot, section, &p, &q);
+		double qinv = ((double) p)/ ((double) q);
+		double delta = qinv - prev;
+		prev = qinv;
+		wsum += delta * fu;
+		printf("%lu	%g	%lu	%lu	%g	%g\n", i, x, fu, sum, rsum, wsum);
+	}
+}
+
 int main(int argc, char * argv[])
 {
 	int section = atof(argv[1]);
@@ -63,5 +96,6 @@ int main(int argc, char * argv[])
 	}
 #endif
 
-	print_sum(section);
+	// print_sum(section);
+	print_weighted_sum(section);
 }

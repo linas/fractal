@@ -2,6 +2,11 @@
 /*
  * Stern-Brocot tree, new algo
  * This is the same old question mark, just a different API.
+ *
+ * XXX This has been copied to stern-brocot.c  This version
+ * is dead.
+ *
+ * Linas Vepstas September 2015
  */
 
 #include <stdio.h>
