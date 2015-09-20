@@ -61,12 +61,12 @@ void print_weighted_sum(int section)
 
 	unsigned long sum = 0;
 	double wsum = 0;
-	double norm = 1.0;
+	double norm = 1.0 / (double) section_sum(section);
 
 	unsigned long p, q;
 	double prev = 0.0;
 
-	for (unsigned long i=bot; i<= top; i++)
+	for (unsigned long i=bot+1; i<= top; i++)
 	{
 		unsigned long fu = fusc(i);
 		double x = (i - bot) / ((double) bot);
@@ -77,8 +77,8 @@ void print_weighted_sum(int section)
 		double qinv = ((double) p)/ ((double) q);
 		double delta = qinv - prev;
 		prev = qinv;
-		wsum += delta * fu;
-		printf("%lu	%g	%lu	%lu	%g	%g\n", i, x, fu, sum, rsum, wsum);
+		wsum += fu / delta;
+		printf("%lu	%g	%g	%lu	%lu	%g	%g\n", i, x, qinv, fu, sum, rsum, wsum);
 	}
 }
 
