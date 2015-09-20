@@ -78,7 +78,7 @@ void print_weighted_sum(int section)
 		double delta = qinv - prev;
 		prev = qinv;
 		wsum += fu / delta;
-		printf("%lu	%g	%g	%lu	%lu	%g	%g\n", i, x, qinv, fu, sum, rsum, wsum);
+		printf("%lu	%g	%g	%g	%lu	%lu	%g	%g\n", i-bot, x, qinv, delta, fu, sum, rsum, wsum);
 	}
 }
 
