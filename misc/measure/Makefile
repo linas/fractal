@@ -4,9 +4,9 @@ INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
 
-all: stern
+all: measure
 
-stern: stern.o
+measure: measure.o stern.o
 
 .o:
 	cc -o $@ $^ -lm -lstdc++
