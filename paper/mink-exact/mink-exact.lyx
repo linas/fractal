@@ -1023,6 +1023,134 @@ The product topology is also the setting for the so-called 'lattice models'
 \end_layout
 
 \begin_layout Section
+Stern-Brocot convergent
+\end_layout
+
+\begin_layout Standard
+The measure can be given a simple exact expression on dyadic intervals,
+ through its relation to the Stern-Brocot tree.
+ In this case, write 
+\begin_inset Formula 
+\[
+\Delta\left(\frac{b+a}{2}\right)=\frac{?(b)-?(a)}{b-a}
+\]
+
+\end_inset
+
+and consider the values 
+\begin_inset Formula $a=?^{-1}(m/2^{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $b=?^{-1}((m+1)/2^{n})$
+\end_inset
+
+.
+ Thes can be written recursively in terms of the Farey fractions in the
+ Stern-Brocot tree; namely
+\begin_inset Formula 
+\[
+?^{-1}\left(\frac{m}{2^{n}}\right)=\frac{p(m,n)}{q(m,n)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p(m,n)/q(m,n)$
+\end_inset
+
+ is the 
+\begin_inset Formula $m$
+\end_inset
+
+'th fraction in the 
+\begin_inset Formula $n$
+\end_inset
+
+'th row of the tree.
+ These are given by the explicit recursion relation
+\begin_inset Formula 
+\[
+p(m,n)=\begin{cases}
+p\left(\frac{m}{2},n-1\right) & \mbox{ if }m\mbox{\mbox{ even}}\\
+p\left(\frac{m-1}{2},n-1\right)+p\left(\frac{m+1}{2},n-1\right) & \mbox{ if }m\mbox{ odd}
+\end{cases}
+\]
+
+\end_inset
+
+and likewise for 
+\begin_inset Formula $q(m,n)$
+\end_inset
+
+, the two differing only in the initial conditions:
+\begin_inset Formula 
+\[
+\begin{array}{c}
+p(0,0)=0\\
+p(1,0)=1\\
+q(0,0)=1\\
+q(1,0)=1
+\end{array}
+\]
+
+\end_inset
+
+The partial convergents have the unit determinant; that is 
+\begin_inset Formula 
+\[
+p(m+1,n)q(m,n)-p(m,n)q(m+1,n)=1
+\]
+
+\end_inset
+
+Combining all these together, one obtains the explicit expression
+\begin_inset Formula 
+\[
+\Delta\left(\frac{b+a}{2}\right)=\frac{q(m+1,n)q(m,n)}{2^{n}}
+\]
+
+\end_inset
+
+Rather than using 
+\begin_inset Formula $(b+a)/2$
+\end_inset
+
+as the midpoint, it is convenient to shift this slightly; this can be done
+ because 
+\begin_inset Formula $?^{-1}$
+\end_inset
+
+ is strictly increasing, and thus, midpoinnts are bounded by thier edges.
+ Thus, since 
+\begin_inset Formula 
+\[
+?^{-1}\left(\frac{m}{2^{n}}\right)<?^{-1}\left(\frac{2m+1}{2^{n+1}}\right)<?^{-1}\left(\frac{m+1}{2^{n}}\right)
+\]
+
+\end_inset
+
+we may alter the definition of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ and write 
+\begin_inset Formula 
+\[
+\Delta\left(?^{-1}\left(\frac{2m+1}{2^{n+1}}\right)\right)=\Delta\left(\frac{p(2m+1,n+1)}{q(2m+1,n+1)}\right)\equiv\Delta(m,n)=\frac{q(m+1,n)q(m,n)}{2^{n}}
+\]
+
+\end_inset
+
+which gives a fully recursive defintion for 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ valued on the rationals (since every rational occurs somewhere, uniquely,
+ in the Stern-Brocot tree.
+\end_layout
+
+\begin_layout Section
 Lattice models
 \end_layout
 

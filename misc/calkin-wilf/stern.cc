@@ -52,14 +52,16 @@ int main(int argc, char *argv[])
 
 	int level = atoi(argv[1]);
 
-	unsigned long p;
-	unsigned long q;
+	unsigned long p, q, pm, qm;
 	double norm = 1.0 / (double)(1<<level);
-	for (int i=0; i<= (1<<level); i++)
+	for (int i=0; i< (1<<level); i++)
 	{
 		stern_brocot_tree(i, level, p, q);
+		stern_brocot_tree(i+1, level, pm, qm);
 		double x = i * norm;
 		double y = ((double) p) / (double) q;
-		printf("%d	%lu	%lu	%g	%g\n", i, p, q, x, y);
+		// printf("%d	%lu	%lu	%g	%g\n", i, p, q, x, y);
+		unsigned long det = pm * q - p * qm;
+		printf("%d	%lu	%lu	%lu	%lu\n", i, p, q, det, q*qm);
 	}
 }
