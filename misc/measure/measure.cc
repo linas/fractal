@@ -1,10 +1,9 @@
 
 /*
- * Stern-Brocot tree, new algo
+ * A recursive expression for the Minkowski measure
  * This is the same old question mark, just a different API.
- *
- * XXX This has been copied to stern-brocot.c  This version
- * is dead.
+ * Specifically, since the thing is nicely, recursively defined, its more
+ * tractable.
  *
  * Linas Vepstas September 2015
  */
