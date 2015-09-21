@@ -1,0 +1,25 @@
+
+set term png size 1024, 768
+set out 'measure.png'
+
+# set style data linespoints
+set style data lines
+set key left
+
+set title "the measure"
+set xlabel "x"
+set ylabel "t"
+
+set xrange [0:1]
+set yrange [0:1]
+
+# straight line
+# plot "measure.dat" using 2:7 title ""
+
+# summation of differences i.e. question mark
+# plot "measure.dat" using 5:7 title ""
+
+# normalized convergent sum.
+plot "measure.dat" using 5:6 title ""
+
+

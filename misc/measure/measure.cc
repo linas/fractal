@@ -8,6 +8,7 @@
  * Linas Vepstas September 2015
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "stern.h"
@@ -26,6 +27,12 @@ int main(int argc, char *argv[])
 	unsigned __int128 p, q, pm, qm, pmid, qmid;
 	double sum = 0.0;
 
+	// Golden ratio
+	double phi = 0.5 * (1.0 + sqrt(5.0));
+
+	// Growth rate
+	double grow = pow(0.5 * phi *phi, level) + 0.2 * phi * phi * phi;
+
 	double norm = 1.0 / (double)(1<<level);
 	for (int i=0; i< (1<<level); i++)
 	{
@@ -38,6 +45,7 @@ int main(int argc, char *argv[])
 		double y = ((double) pmid) / (double) qmid;
 		// unsigned long det = pm * q - p * qm;
 		double delta = norm * q * qm;
+		delta /= grow;
 
 		unsigned long pp = p;
 		unsigned long qq = q;

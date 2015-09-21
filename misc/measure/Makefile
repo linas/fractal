@@ -4,10 +4,11 @@ INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
 
-all: measure growth
+all: measure growth bound
 
 measure: measure.o stern.o
 growth: growth.o stern.o
+bound: bound.o stern.o
 
 
 .o:
