@@ -1,0 +1,24 @@
+
+set term png size 1024, 768
+set out 'box.png'
+
+# set term postscript eps color
+# set out 'box.eps'
+
+# set style data linespoints
+set style data lines
+set key right
+
+set title "Box-Count Dimension"
+set xlabel "n"
+set ylabel "Size"
+
+set xrange [5:]
+set yrange [:0.3]
+set logscale y
+
+# normalized convergent sum.
+plot "box.dat" using 1:2 title "data", \
+     "box.dat" using 1:(1.25*(exp(-0.269*$1))) title "fit"
+
+
