@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	double phi = 0.5 * (1.0 + sqrt(5.0));
 
 	// Growth rate
-	double grow = pow(0.5 * phi *phi, level) + 0.2 * phi * phi * phi;
+	double grow = pow(0.5 * phi * phi, level) * 0.2 * phi * phi * phi;
 
 	double norm = 1.0 / (double)(1<<level);
 	for (int i=0; i< (1<<level); i++)

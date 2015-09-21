@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 		for (int ill = 0; ill <= 5; ill++)
 		{
 			int level = lev - 5 + ill;
-			double grow = pow(0.5 * phi *phi, level) + 0.2 * phi * phi * phi;
+			double grow = pow(0.5 * phi *phi, level) * 0.2 * phi * phi * phi;
 			double norm = 1.0 / (double)(1<<level);
 
 			int j = i >> (5-ill);
