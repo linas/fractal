@@ -1,26 +1,24 @@
 
-set term png size 1024, 768
-set out 'bound.png'
+# set term png size 1024, 768
+# set out 'bound.png'
+
+set term postscript eps color
+set out 'bound.eps'
 
 # set style data linespoints
 set style data lines
 set key left
 
-set title "the bound"
+set title "Delta"
 set xlabel "x"
-set ylabel "t"
+set ylabel "Delta"
 
 set xrange [0:1]
 set yrange [0:1]
 
-# straight line
-# plot "bound.dat" using 2:7 title ""
-
-# summation of differences i.e. question mark
-# plot "bound.dat" using 5:7 title ""
-
 # normalized convergent sum.
-plot "bound.dat" using 2:3 title "b1", \
-     "bound.dat" using 2:13 title "b2"
+plot "bound.dat" using 2:3 title "N=5", \
+     "bound.dat" using 2:4 title "N=6", \
+     "bound.dat" using 2:13 title "N=15"
 
 

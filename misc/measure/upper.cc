@@ -13,42 +13,34 @@
 #include <stdlib.h>
 #include "stern.h"
 
-void print_levs(int lev, int i)
+double upper_bound(int lev, int i)
 {
 	unsigned __int128 p, q, pm, qm;
 
 	// Golden ratio
 	double phi = 0.5 * (1.0 + sqrt(5.0));
 
-#define NUML 10
-	for (int ill = 0; ill <= NUML; ill++)
+	double bound = 0.0;
+
+	for (int ill = 0; ill <= lev; ill++)
 	{
-		int level = lev - NUML + ill;
+		int level = ill;
 
 		// Growth rate
 		double grow = pow(0.5 * phi *phi, level) * 0.2 * phi * phi * phi;
 		double norm = 1.0 / (double)(1<<level);
 
-		int j = i >> (NUML-ill);
+		int j = i >> (lev-ill);
 		int k = j;
-
-#if 0
-		stern_brocot_tree(j, level, pmid, qmid);
-		double low_end = ((double) pmid) / (double) qmid;
-		if (y < low_end) { k = j-1; printf ("duuude down\n"); exit(1); }
-
-		stern_brocot_tree(j+1, level, pmid, qmid);
-		double hi_end = ((double) pmid) / (double) qmid;
-		if (hi_end < y) { k = j+1; printf ("duuude up\n"); exit(1); }
-#endif
 
 		stern_brocot_tree(k, level, p, q);
 		stern_brocot_tree(k+1, level, pm, qm);
 		double delta = norm * q * qm;
 		delta /= grow;
 
-		printf("%g\t", delta);
+		if (bound < delta) bound = delta;
 	}
+	return bound;
 }
 
 int main(int argc, char *argv[])
@@ -61,20 +53,26 @@ int main(int argc, char *argv[])
 
 	int lev = atoi(argv[1]);
 
-	unsigned __int128 pmid, qmid;
+	unsigned __int128 p, q, pm, qm;
+
+	// Golden ratio
+	double phi = 0.5 * (1.0 + sqrt(5.0));
+
+	// Growth rate
+	double grow = pow(0.5 * phi *phi, lev) * 0.2 * phi * phi * phi;
+	double norm = 1.0 / (double)(1<<lev);
 
 	for (int i=0; i< (1<<lev); i++)
 	{
-		stern_brocot_tree(i, lev, pmid, qmid);
-		double y = ((double) pmid) / (double) qmid;
-		printf("%d\t%g\t", i, y);
-		print_levs(lev, i);
-		printf("\n");
+		stern_brocot_tree(i, lev, p, q);
+		stern_brocot_tree(i+1, lev, pm, qm);
+		double delta = norm * q * qm / grow;
 
-		stern_brocot_tree(i+1, lev, pmid, qmid);
-		y = ((double) pmid) / (double) qmid;
-		printf("%d\t%g\t", i+1, y);
-		print_levs(lev, i);
-		printf("\n");
+		double y = ((double) p) / (double) q;
+		double bound = upper_bound(lev, i);
+		printf("%d\t%g\t%g\t%g\n", i, y, bound, delta);
+
+		y = ((double) pm) / (double) qm;
+		printf("%d\t%g\t%g\t%g\n", i, y, bound, delta);
 	}
 }
