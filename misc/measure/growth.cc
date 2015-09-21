@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 		double lim = log(delta) / (double) level;
 		lim /= log(2.0);
 
-		printf("%d	%g	%lu	%lu	%g	%18.16g\n", level, third, p, q, delta, lim);
+		printf("%d	%9.6g	%lu	%lu	%18.16g	%18.16g\n", level, third, p, q, delta, lim);
 		fflush(stdout);
 	}
 }
