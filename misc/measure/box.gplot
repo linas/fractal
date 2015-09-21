@@ -13,12 +13,23 @@ set title "Box-Count Dimension"
 set xlabel "n"
 set ylabel "Size"
 
-set xrange [5:]
-set yrange [:0.3]
-set logscale y
+set xrange [8:]
+# set yrange [:0.3]
+# set logscale y
 
 # normalized convergent sum.
-plot "box.dat" using 1:2 title "data", \
-     "box.dat" using 1:(1.25*(exp(-0.269*$1))) title "fit"
+# plot "box.dat" using 1:2 title "data", \
+#     "box.dat" using 1:(1.25*(exp(-0.269*$1))) title "fit"
+
+# plot "box.dat" using 1:($2 - 1.2717*(exp(-0.26915*$1))) title "diff"
+# plot "box.dat" using 1:($2 - 1.27230*(exp(-0.26922*$1))) title "diff"
+# plot "box.dat" using 1:($2 - 1.27282*(exp(-0.26926*$1))) title "diff"
+# plot "box.dat" using 1:($2 - 1.27284*(exp(-0.269264*$1))) title "diff"
+# plot "box.dat" using 1:($2 - 1.27287*(exp(-0.269264*$1))) title "diff"
+# plot "box.dat" using 1:($2 - 1.27289*(exp(-0.2692649*$1))) title "diff"
+# plot "box.dat" using 1:($2 - 1.27293*(exp(-0.269268*$1))) title "diff"
+# plot "box.dat" using 1:($2 - 1.27295*(exp(-0.269270*$1))) title "diff"
+# plot "box.dat" using 1:($2 - 1.27299*(exp(-0.269273*$1))) title "diff"
+plot "box.dat" using 1:($2 - 1.27299*(exp(-0.269273*$1))) title "diff"
 
 
