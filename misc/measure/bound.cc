@@ -36,16 +36,29 @@ int main(int argc, char *argv[])
 		stern_brocot_tree(2*i+1, lev+1, pmid, qmid);
 		double y = ((double) pmid) / (double) qmid;
 
+#define NUML 10
 		printf("%d\t%g\t", i, y);
-		for (int ill = 0; ill <= 5; ill++)
+		for (int ill = 0; ill <= NUML; ill++)
 		{
-			int level = lev - 5 + ill;
+			int level = lev - NUML + ill;
 			double grow = pow(0.5 * phi *phi, level) * 0.2 * phi * phi * phi;
 			double norm = 1.0 / (double)(1<<level);
 
-			int j = i >> (5-ill);
-			stern_brocot_tree(j, level, p, q);
-			stern_brocot_tree(j+1, level, pm, qm);
+			int j = i >> (NUML-ill);
+			int k = j;
+
+#if 0
+			stern_brocot_tree(j, level, pmid, qmid);
+			double low_end = ((double) pmid) / (double) qmid;
+			if (y < low_end) { k = j-1; printf ("duuude down\n"); exit(1); }
+
+			stern_brocot_tree(j+1, level, pmid, qmid);
+			double hi_end = ((double) pmid) / (double) qmid;
+			if (hi_end < y) { k = j+1; printf ("duuude up\n"); exit(1); }
+#endif
+
+			stern_brocot_tree(k, level, p, q);
+			stern_brocot_tree(k+1, level, pm, qm);
 			double delta = norm * q * qm;
 			delta /= grow;
 
