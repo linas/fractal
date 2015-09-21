@@ -10,10 +10,12 @@ set title "the growth"
 set xlabel "n"
 set ylabel "t"
 
-set xrange [30:]
+# set xrange [30:]
 
-plot "growth.dat" using 1:(log($5) / ($1 * 0.6931471805599453)) title "data", \
-     "growth.dat" using 1:(0.3564 + log(log($1)) / 50 ) title "fit"
+# log (phi*phi/2) = 0.26927646955926
+# log (phi*phi*phi/5) = -0.16580243725528995
+plot "growth.dat" using 1:(log($4) / $1) title "data", \
+     "growth.dat" using 1:(0.26927647 - 0.16580243725529 / $1) title "fit"
 
 
 

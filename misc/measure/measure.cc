@@ -15,6 +15,12 @@
 
 int main(int argc, char *argv[])
 {
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s level\n", argv[0]);
+		exit(1);
+	}
+
 	int level = atoi(argv[1]);
 
 	unsigned __int128 p, q, pm, qm, pmid, qmid;
@@ -33,7 +39,10 @@ int main(int argc, char *argv[])
 		// unsigned long det = pm * q - p * qm;
 		double delta = norm * q * qm;
 
+		unsigned long pp = p;
+		unsigned long qq = q;
+
 		sum += (b-a)* delta;
-		printf("%d	%g	%lu	%lu	%g	%g	%g\n", i, x, p, q, y, delta, sum);
+		printf("%d	%g	%lu	%lu	%g	%g	%g\n", i, x, pp, qq, y, delta, sum);
 	}
 }

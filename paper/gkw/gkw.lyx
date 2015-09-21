@@ -10494,29 +10494,67 @@ The divergence at the golden mean can be seen here, at the convergent, from
 \end_inset
 
  even, let 
-\begin_inset Formula $m=1+4+16+\cdots+2^{n-2}$
+\begin_inset Formula $t_{n}=0+1+4+16+\cdots+2^{n-2}$
 \end_inset
 
  so that 
-\begin_inset Formula $m/2^{n}\to1/3$
+\begin_inset Formula $t_{n}/2^{n}\to1/3$
 \end_inset
 
  from below.
- Numerical exploration shows that, to a reasonable approximation, one has
+ One then has that (for 
+\begin_inset Formula $n$
+\end_inset
+
+ even) 
+\begin_inset Formula 
+\begin{align*}
+q(t_{n},\, n) & =F_{n+2}\\
+q(t_{n}+1,\, n) & =F_{n+1}
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $F_{n}$
+\end_inset
+
+ being the Fibonacci numbers.
+ Using Binet's formula for the Fibonacci numbers, 
 \begin_inset Formula 
 \[
-\Delta(m,n)\approx\Delta(1/3)\approx2^{0.385n}
+F_{n}=\frac{\varphi^{n}-\psi^{n}}{\varphi-\psi}
 \]
 
 \end_inset
 
-although this is not entirely obviously bounded like this; there may be
- an additional logarithmic growth; viz another plausible fit is approximately
+where 
+\begin_inset Formula $\varphi=(1+\sqrt{5})/2\approx1.618\cdots$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi=-1/\varphi\approx-0.618\cdots$
+\end_inset
+
+, then one readily obtains an exact expression for the growth rate at 1/3
+ :
 \begin_inset Formula 
 \[
-\Delta(m,n)\approx2^{n(0.3564+0.02*\log(\log(n)))}
+\Delta(t_{n},n)=\frac{\varphi^{2n+3}+\varphi-\psi+\psi^{2n+3}}{5\cdot2^{n}}
 \]
 
+\end_inset
+
+To leading order, this gives
+\begin_inset Formula 
+\[
+\Delta(t_{n},n)=\left(\frac{\varphi^{2}}{2}\right)^{n}\frac{\varphi^{3}}{5}+\mathcal{O}\left(2^{-n}\right)\approx\frac{\varphi^{3}}{5}e^{cn}
+\]
+
+\end_inset
+
+with the constant 
+\begin_inset Formula $c=\log\left(\varphi^{2}/2\right)\approx0.26927646955926\cdots$
 \end_inset
 
 
