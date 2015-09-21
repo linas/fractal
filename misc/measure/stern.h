@@ -19,5 +19,8 @@
  * this returns the inverse question-mark, given by
  * (as per usual) ?(p/q) = pos / 2^level.
  */
-void stern_brocot_tree(unsigned long pos, int level,
-                       unsigned long &p, unsigned long &q);
+void stern_brocot_tree(unsigned __int128 pos, int level,
+                       unsigned __int128 &p, unsigned __int128 &q);
+
+/** print a 128-bit val; since glibc does not support it. */
+int pr128(unsigned __int128);

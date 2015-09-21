@@ -9,8 +9,9 @@ all: measure growth
 measure: measure.o stern.o
 growth: growth.o stern.o
 
+
 .o:
 	cc -o $@ $^ -lm -lstdc++
 
-.cc.o:
+.cc.o: stern.h
 	cc -c $^  -Wall -O2 

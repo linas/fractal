@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 {
 	int level = atoi(argv[1]);
 
-	unsigned long p, q, pm, qm, pmid, qmid;
+	unsigned __int128 p, q, pm, qm, pmid, qmid;
 	double sum = 0.0;
 
 	double norm = 1.0 / (double)(1<<level);
