@@ -1,15 +1,15 @@
 
-set term png size 1024, 768
-set out 'upper.png'
+# set term png size 1024, 768
+# set out 'upper.png'
 
-# set term postscript eps color
-# set out 'upper.eps'
+set term postscript eps color
+set out 'upper.eps'
 
 # set style data linespoints
 set style data lines
 set key left
 
-set title "Delta"
+set title "Upper Bound"
 set xlabel "x"
 set ylabel "Delta"
 
@@ -17,7 +17,7 @@ set xrange [0:1]
 set yrange [0:1]
 
 # normalized convergent sum.
-plot "upper.dat" using 2:3 title "bound", \
+plot "upper.dat" using 2:3 title "Bound" with lines linewidth 2, \
      "upper.dat" using 2:4 title ""
 
 
