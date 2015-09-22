@@ -404,6 +404,7 @@ void get_coeffs(Shifts *sh, double w)
 	}
 #ifdef PRINT_WALSH_COEFFS_A1
 // The below was used to graph the coefficient A1 for the gkw paper.
+// i.e. to generate the file walsh-A1.dat
 // printf ("duuude m=%lu bitlen=%d aks=%g %g %g %g\n",
 printf ("%lu	%d	%g	%g	%g	%g\n",
 	sh->m-1,
@@ -413,6 +414,27 @@ printf ("%lu	%d	%g	%g	%g	%g\n",
 	sh->m,
 	sh->bitlen,
 	sh->a_k[1], sh->a_k[2], sh->a_k[3], sh->a_k[4]);
+#endif
+
+#define PRINT_DYADIC_LAYOUT
+#ifdef PRINT_DYADIC_LAYOUT
+// Similar to above, except that additional solumns are printed to
+// make it easier to graph the thing on the dyadic rationals. Viz,
+// the corresponding dyadic ratonal is printed in column 4, made from
+// columns 2 and 3.
+	unsigned long ord = 1 << sh->bitlen;
+	unsigned long off = ord / 2;
+	unsigned long em = 2 * (sh->m - off) + 1;
+	double x = ((double) em) / (double) ord;
+	double scale = log(fabs(sh->a_k[1]));
+
+printf ("%lu	%lu	%d	%g	%g	%g\n",
+	sh->m,
+	em,
+	sh->bitlen,
+	x,
+	sh->a_k[1],
+	scale);
 #endif
 }
 
@@ -591,7 +613,7 @@ int main (int argc, char * argv[])
 	/* Other misc args */
 	w_f = atof(argv[2]);
 
-	for (n=1; n<=200; n++)
+	for (n=1; n<=2047; n++)
 	{
 		get_shifts(&shifts, n);
 		get_coeffs(&shifts, w_f);
