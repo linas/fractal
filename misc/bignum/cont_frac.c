@@ -108,7 +108,7 @@ void continued_frac_print (continued_frac_t *cf)
 
 void fp_prt (char * str, mpf_t val)
 {
-	printf (str);
+	printf ("%s", str);
 	mpf_out_str (stdout, 10, 60, val);
 	printf ("\n");
 }
@@ -153,7 +153,7 @@ int main ()
 	continued_frac_print (cf);
 	
 #if 0
-	continued_frac_from_str (cf, "
+	continued_frac_from_str (cf, "");
 	continued_frac_print (cf);
 #endif
 	
