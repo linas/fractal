@@ -1,5 +1,5 @@
 /*
- * Eigenfunctions of the dyadic sawtooth, based on the 
+ * Eigenfunctions of the dyadic sawtooth, based on the
  * Walsh functions. And integrals thereof.
  *
  * Linas Vepstas May 2010
@@ -20,7 +20,7 @@ typedef struct
 	unsigned long m;
 	int bitlen;
 	unsigned long m_k[BITLEN];
-	int sigma_k[BITLEN]; 
+	int sigma_k[BITLEN];
 	double w;
 	double a_k[BITLEN];
 } Shifts;
@@ -89,8 +89,8 @@ void step_1(mpf_t result, mpf_t x)
 }
 
 /**
- * Triangle wave function function, returns integral of the 
- * square wave function (i.e. tent rising to 1/2 for x< 1/2 
+ * Triangle wave function function, returns integral of the
+ * square wave function (i.e. tent rising to 1/2 for x< 1/2
  * and dropping to zero for x> 1/2
  * Repeats with period 1.
  */
@@ -155,7 +155,7 @@ void igral_step_n(mpf_t result, mpf_t x, int n)
 		return;
 	}
 
-	mpf_mul_2exp(result, x, n-1); 
+	mpf_mul_2exp(result, x, n-1);
 	tent_1(result, result);
 	mpf_div_2exp(result, result, n-1);
 }
@@ -359,7 +359,7 @@ void get_shifts(Shifts *sh, unsigned long n)
 
 #if 0
 // A debugging printf
-printf ("duuude n=%lu bitlen=%d shifts=%lu %lu %lu %lu sigmas=%d %d %d %d\n", 
+printf ("duuude n=%lu bitlen=%d shifts=%lu %lu %lu %lu sigmas=%d %d %d %d\n",
 	n, sh->bitlen,
 	sh->m_k[1], sh->m_k[2], sh->m_k[3], sh->m_k[4],
 	sh->sigma_k[1], sh->sigma_k[2], sh->sigma_k[3], sh->sigma_k[4]);
@@ -367,7 +367,7 @@ printf ("duuude n=%lu bitlen=%d shifts=%lu %lu %lu %lu sigmas=%d %d %d %d\n",
 }
 
 /**
- * Compute the explicit coeffs needed for the dyadic sawtooth 
+ * Compute the explicit coeffs needed for the dyadic sawtooth
  * eigenfuncs
  */
 void get_coeffs(Shifts *sh, double w)
@@ -404,12 +404,12 @@ void get_coeffs(Shifts *sh, double w)
 	}
 #ifdef PRINT_WALSH_COEFFS_A1
 // The below was used to graph the coefficient A1 for the gkw paper.
-// printf ("duuude m=%lu bitlen=%d aks=%g %g %g %g\n", 
-printf ("%lu	%d	%g	%g	%g	%g\n", 
+// printf ("duuude m=%lu bitlen=%d aks=%g %g %g %g\n",
+printf ("%lu	%d	%g	%g	%g	%g\n",
 	sh->m-1,
 	sh->bitlen,
 	sh->a_k[1], sh->a_k[2], sh->a_k[3], sh->a_k[4]);
-printf ("%lu	%d	%g	%g	%g	%g\n", 
+printf ("%lu	%d	%g	%g	%g	%g\n",
 	sh->m,
 	sh->bitlen,
 	sh->a_k[1], sh->a_k[2], sh->a_k[3], sh->a_k[4]);
@@ -417,9 +417,9 @@ printf ("%lu	%d	%g	%g	%g	%g\n",
 }
 
 /*
- * Return a shift strcutre appropriate for this n, w. 
+ * Return a shift strcutre appropriate for this n, w.
  *
- * The shifts are precomputed and cached, and can be re-used; 
+ * The shifts are precomputed and cached, and can be re-used;
  * WARNING, however, w MUST NOT CHAGE, else old, incorrect cached
  * values will be returned.
  */
@@ -521,7 +521,7 @@ igral_eigenfunc(mpf_t result, mpf_t w, mpf_t x,
 }
 
 /*
- * Compute an experimental linear combo of eigenfuncs, just to 
+ * Compute an experimental linear combo of eigenfuncs, just to
  * see what happens.  Under construction.
  */
 void
@@ -560,6 +560,7 @@ sum_of_igral_eigenfunc(mpf_t result, mpf_t w, mpf_t x, int prec)
 	mpf_clear(a_n);
 }
 
+#define PRINT_WALSH_COEFFS_A1
 #ifdef PRINT_WALSH_COEFFS_A1
 /**
  * This was used to generate the graph of a_1 for the the GKW paper.
@@ -599,6 +600,7 @@ int main (int argc, char * argv[])
 }
 #endif
 
+#ifdef INTEGRALS_OF_STUFF
 int main (int argc, char * argv[])
 {
 	mpf_t r, x, y, step, w;
@@ -632,7 +634,7 @@ int main (int argc, char * argv[])
 	mpf_init(w);
 	mpf_set_d(w, w_f);
 
-#if 1
+#if INTEGRRAL_GRAPHS
 	// Create graphs of integral for a single n at a time.
 	npts = 1233;
 	mpf_set_ui(step, 1);
@@ -649,7 +651,7 @@ int main (int argc, char * argv[])
 
 		mpf_set(x, r);
 		// Want integrals convoluted with question mark.
-		question_mark(x, r, prec);  
+		question_mark(x, r, prec);
 
 mpf_set(x, r);
 		x_f = mpf_get_d(x);
@@ -682,7 +684,7 @@ mpf_set(x, r);
 
 #ifdef SHOW_DIVERGENCE_OF_DERIVATIVE
 	/* The loop below explores a progressively narrower integration
-	 * interval centered about x=2/3. i.e. an interaval from x to 
+	 * interval centered about x=2/3. i.e. an interaval from x to
 	 * x+ 2^(-n) which is exptect to .. whatever... the idea is graph and
 	 * find out.
 	 */
@@ -690,7 +692,7 @@ mpf_set(x, r);
 	mpf_div_ui(x, x, 3);
 	npts=500;
 
-	// graph of integral, 
+	// graph of integral,
 	for (i=1; i<npts; i++)
 	{
 		int j;
@@ -727,3 +729,4 @@ mpf_set(x, r);
 	mpf_clear(w);
 	return 0;
 }
+#endif // INTEGRALS_OF_STUFF
