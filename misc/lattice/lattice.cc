@@ -31,9 +31,14 @@ struct Uni
 	void make_T(void);
 	void make_L(void);
 	void make_R(void);
+	void make_P(void);
+	void make_V(void);
 
 	// multiply into this matrix
 	void mult(const Uni&);
+
+	// Compute the inverse
+	void invert(void);
 
 	// Given a tree coordinate, create the corresponding unimodular matrix
 	void make_uni(unsigned long, short);
@@ -49,7 +54,7 @@ void Uni::make_I(void)
 
 void Uni::make_S(void)
 {
-	a = 0; b = 1; c = -1; d = 0;
+	a = 0; b = -1; c = 1; d = 0;
 }
 
 void Uni::make_T(void)
@@ -68,12 +73,32 @@ void Uni::make_R(void)
 	a = 1; b = 1; c = 0; d = 1;
 }
 
+void Uni::make_P(void)
+{
+	a = 0; b = -1; c = 1; d = 1;
+}
+
+// V is the same as S
+void Uni::make_V(void)
+{
+	a = 0; b = -1; c = 1; d = 0;
+}
+
 void Uni::mult(const Uni& o)
 {
 	long na = a * o.a + b * o.c;
 	long nb = a * o.b + b * o.d;
 	long nc = c * o.a + d * o.c;
 	long nd = c * o.b + d * o.d;
+	a = na; b = nb; c = nc; d = nd;
+}
+
+void Uni::invert(void)
+{
+	long na = d;
+	long nb = -b;
+	long nc = -c;
+	long nd = a;
 	a = na; b = nb; c = nc; d = nd;
 }
 
@@ -112,18 +137,28 @@ void MakeHisto (
    int      itermax,
    double   renorm)
 {
-	Uni u;
+	Uni I, V, P;
+	I.make_I();
+	V.make_V();
+	P.make_P();
 
-	double step = width / (double) sizex;
-	// double yoff = height / (double) sizey;
+	double xstep = width / (double) sizex;
+	double ystep = height / (double) sizey;
 	for (int k=0; k<itermax; k++)
 	{
 		unsigned long tk = 1<<k;
 		for (unsigned long m=0; m<tk; m++)
 		{
-			u.make_uni(m, k);
+			Uni a;
+			a.make_uni(m, k);
+			Uni u;
+			u = P;
+			u = I;
+			u.mult(a);
+			u.mult(V);
 
-			double x = re_center - 0.5*width + 0.5*step;
+			// Run along x ...
+			double x = re_center - 0.5*width + 0.5*xstep;
 			// printf("sizex=%d sizey=%d center=(%g, %g) width=%g\n",
 			//        sizex, sizey, re_center, im_center, width);
 			for (int i = 0; i<sizex; i++)
@@ -131,7 +166,7 @@ void MakeHisto (
 				double y = u.xform(x);
 				y -= floor(y);
 
-				x += step;
+				x += xstep;
 				if (0.0 > y) continue;
 				if (1.0 <= y) continue;
 
@@ -140,17 +175,47 @@ void MakeHisto (
 				j = (sizey-1) - j;
 				if (j < 0)
 				{
-					printf("too small %g %g = %d %d\n", x-step, y, i, j);
+					printf("too small %g %g = %d %d\n", x-xstep, y, i, j);
 					printf("uni= %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
 					continue;
 				}
 				if (sizey <= j)
 				{
-					printf("too big %g %g = %d %d\n", x-step, y, i, j);
+					printf("too big %g %g = %d %d\n", x-xstep, y, i, j);
 					continue;
 				}
 				glob[sizex*j+i] ++;
+			}
 
+			// Now fill in the other direction (anti-aliasing)
+			u.invert();
+			double y = re_center - 0.5*height + 0.5*ystep;
+			// printf("sizey=%d sizex=%d center=(%g, %g) yidth=%g\n",
+			//        sizey, sizex, re_center, im_center, yidth);
+			for (int i = 0; i<sizey; i++)
+			{
+				double x = u.xform(y);
+				x -= floor(x);
+
+				y += ystep;
+				if (0.0 > x) continue;
+				if (1.0 <= x) continue;
+
+				double nx = 0.5 + (x - im_center) / height;
+				int j = floor(sizex * nx);
+				j = (sizex-1) - j;
+				if (j < 0)
+				{
+					printf("x too small %g %g = %d %d\n", y-ystep, x, i, j);
+					printf("x uni= %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
+					continue;
+				}
+				if (sizex <= j)
+				{
+					printf("x too big %g %g = %d %d\n", y-ystep, x, i, j);
+					continue;
+				}
+				glob[sizey*i+j] ++;
 			}
 		}
 	}
@@ -169,7 +234,7 @@ int main(int argc, char* argv[])
 		{
 			u.make_uni(m, k);
 
-			// for (double x=0; 
+			// for (double x=0;
 			printf("its %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
 		}
 	}
