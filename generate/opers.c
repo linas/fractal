@@ -112,6 +112,7 @@ void recip (float glob[],
    /* reciprocal */
    for (i=0; i<sizex*sizey; i++) {
       glob [i] = 1.0 / glob[i];
+		if (!isnormal(glob[i])) glob[i] = 0.0;
    }
 }
 
@@ -125,6 +126,7 @@ void takelog (float glob[],
    /* renormalize */
    for (i=0; i<sizex*sizey; i++) {
       glob [i] = (float) log ((double) glob[i]);
+		if (!isnormal(glob[i])) glob[i] = 0.0;
    }
 }
 
