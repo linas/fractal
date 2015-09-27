@@ -114,6 +114,8 @@ void MakeHisto (
 {
 	Uni u;
 
+	double step = width / (double) sizex;
+	// double yoff = height / (double) sizey;
 	for (int k=0; k<itermax; k++)
 	{
 		unsigned long tk = 1<<k;
@@ -121,28 +123,30 @@ void MakeHisto (
 		{
 			u.make_uni(m, k);
 
-			double step = width / (double) sizex;
-			double x = re_center - 0.5*width;
+			double x = re_center - 0.5*width + 0.5*step;
 			// printf("sizex=%d sizey=%d center=(%g, %g) width=%g\n",
 			//        sizex, sizey, re_center, im_center, width);
 			for (int i = 0; i<sizex; i++)
 			{
 				double y = u.xform(x);
+				y -= floor(y);
+
 				x += step;
 				if (0.0 > y) continue;
 				if (1.0 <= y) continue;
 
 				double ny = 0.5 + (y - im_center) / height;
-				int j = round(sizey * ny);
+				int j = floor(sizey * ny);
 				j = (sizey-1) - j;
 				if (j < 0)
 				{
-					printf ("too small %g %g = %d %d\n", x, y, i, j);
+					printf("too small %g %g = %d %d\n", x-step, y, i, j);
+					printf("uni= %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
 					continue;
 				}
 				if (sizey <= j)
 				{
-					printf ("too big %g %g = %d %d\n", x, y, i, j);
+					printf("too big %g %g = %d %d\n", x-step, y, i, j);
 					continue;
 				}
 				glob[sizex*j+i] ++;
