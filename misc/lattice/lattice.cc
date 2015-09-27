@@ -128,13 +128,25 @@ void MakeHisto (
 			for (int i = 0; i<sizex; i++)
 			{
 				double y = u.xform(x);
-				double ny = 0.5 + (y - im_center) / height;
-				int j = sizey * ny;
-				if (j < 0) { printf ("ooooooooo no %d\n", j); exit(1); }
-				if (sizey <= j) { printf ("tyooobigo %d\n", j); exit(1); }
-				glob[sizey*i+j] ++;
-
 				x += step;
+				if (0.0 > y) continue;
+				if (1.0 <= y) continue;
+
+				double ny = 0.5 + (y - im_center) / height;
+				int j = round(sizey * ny);
+				j = (sizey-1) - j;
+				if (j < 0)
+				{
+					printf ("too small %g %g = %d %d\n", x, y, i, j);
+					continue;
+				}
+				if (sizey <= j)
+				{
+					printf ("too big %g %g = %d %d\n", x, y, i, j);
+					continue;
+				}
+				glob[sizex*j+i] ++;
+
 			}
 		}
 	}
