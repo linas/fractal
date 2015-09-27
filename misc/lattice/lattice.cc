@@ -9,6 +9,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "brat.h"
 
@@ -113,7 +114,7 @@ void MakeHisto (
 {
 	Uni u;
 
-	for (int k=0; k<6; k++)
+	for (int k=0; k<itermax; k++)
 	{
 		unsigned long tk = 1<<k;
 		for (unsigned long m=0; m<tk; m++)
@@ -122,12 +123,16 @@ void MakeHisto (
 
 			double step = width / (double) sizex;
 			double x = re_center - 0.5*width;
+			// printf("sizex=%d sizey=%d center=(%g, %g) width=%g\n",
+			//        sizex, sizey, re_center, im_center, width);
 			for (int i = 0; i<sizex; i++)
 			{
 				double y = u.xform(x);
-				double ny = 0.5 * (y - im_center) / height;
+				double ny = 0.5 + (y - im_center) / height;
 				int j = sizey * ny;
-				glob[sizex*i+j] ++;
+				if (j < 0) { printf ("ooooooooo no %d\n", j); exit(1); }
+				if (sizey <= j) { printf ("tyooobigo %d\n", j); exit(1); }
+				glob[sizey*i+j] ++;
 
 				x += step;
 			}
