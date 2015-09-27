@@ -1,4 +1,3 @@
-
 /*
  * lattice.cc
  *
@@ -8,7 +7,10 @@
  * Linas Sept 2015
  */
 
+#include <math.h>
 #include <stdio.h>
+
+#include "brat.h"
 
 struct Uni
 {
@@ -97,6 +99,44 @@ double Uni::xform(double x)
 	return (a*x+b) / (c*x+d);
 }
 
+
+void MakeHisto (
+   float    *glob,
+   int      sizex,
+   int      sizey,
+   double   re_center,
+   double   im_center,
+   double   width,
+   double   height,
+   int      itermax,
+   double   renorm)
+{
+	Uni u;
+
+	for (int k=0; k<6; k++)
+	{
+		unsigned long tk = 1<<k;
+		for (unsigned long m=0; m<tk; m++)
+		{
+			u.make_uni(m, k);
+
+			double step = width / (double) sizex;
+			double x = re_center - 0.5*width;
+			for (int i = 0; i<sizex; i++)
+			{
+				double y = u.xform(x);
+				double ny = 0.5 * (y - im_center) / height;
+				int j = sizey * ny;
+				glob[sizex*i+j] ++;
+
+				x += step;
+			}
+		}
+	}
+}
+
+
+#if 0
 int main(int argc, char* argv[])
 {
 	Uni u;
@@ -113,3 +153,4 @@ int main(int argc, char* argv[])
 		}
 	}
 }
+#endif
