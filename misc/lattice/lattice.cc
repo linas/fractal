@@ -12,7 +12,10 @@
 
 struct Uni
 {
-	// m and k define a dyadic rational m/2^k
+	// m and k define a tree coordinate. m is a sequence of
+	// left-right moves, encoded as bits; where 0==left move
+	// 1==right move. k is the total number of moves, i.e. the
+	// tree depth.
 	unsigned long m;
 	short k;
 
@@ -28,7 +31,12 @@ struct Uni
 
 	// multiply into this matrix
 	void mult(const Uni&);
+
+	// Given a tree coordinate, create the corresponding unimodular matrix
 	void make_uni(unsigned long, short);
+
+	// Mobius transform
+	double xform(double);
 };
 
 void Uni::make_I(void)
@@ -84,16 +92,24 @@ void Uni::make_uni(unsigned long em, short kay)
 	}
 }
 
+double Uni::xform(double x)
+{
+	return (a*x+b) / (c*x+d);
+}
+
 int main(int argc, char* argv[])
 {
 	Uni u;
 
-	u.make_uni(0, 2);
-	printf("its %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
-	u.make_uni(1, 2);
-	printf("its %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
-	u.make_uni(2, 2);
-	printf("its %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
-	u.make_uni(3, 2);
-	printf("its %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
+	for (int k=0; k<6; k++)
+	{
+		unsigned long tk = 1<<k;
+		for (unsigned long m=0; m<tk; m++)
+		{
+			u.make_uni(m, k);
+
+			// for (double x=0; 
+			printf("its %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
+		}
+	}
 }
