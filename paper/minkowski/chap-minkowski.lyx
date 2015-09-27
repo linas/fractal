@@ -864,9 +864,9 @@ The recursive construction provides a map from the rationals to the dyadic
 
  define
 \begin_inset Formula 
-\[
-\mathbb{Q}_{p}=\left.\left\{ \frac{m}{p^{n}}\right|n\in\mathbb{N},\,0\le m<p^{n}\right\} 
-\]
+\begin{equation}
+\mathbb{Q}_{p}=\left.\left\{ \frac{m}{p^{n}}\right|n\in\mathbb{N},\,0\le m<p^{n}\right\} \label{eq:p-adic rationals}
+\end{equation}
 
 \end_inset
 
@@ -910,7 +910,7 @@ square-free
 
 \end_inset
 
- where, by abuse of notation, 
+where, by abuse of notation, 
 \begin_inset Formula $\mathbb{Q}$
 \end_inset
 
@@ -1031,7 +1031,7 @@ x=\frac{1}{a_{1}+\frac{1}{a_{2}+\frac{1}{a_{3}+\cdots}}}
 
 \end_inset
 
- for positive integers 
+for positive integers 
 \begin_inset Formula $a_{1},a_{2},a_{3},\cdots$
 \end_inset
 
@@ -1057,7 +1057,7 @@ representation
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $[\;]$
 \end_inset
 
@@ -1072,7 +1072,18 @@ representation
 \end_inset
 
 .
- By contrast, the 
+ The space 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+ is sometimes called Baire space; however, the standard definition of Baire
+ space comes with a natural topology on it, and we hae not yet broached
+ the subjject of topologies.
+ 
+\end_layout
+
+\begin_layout Standard
+By contrast, the 
 \begin_inset Formula $p$
 \end_inset
 
@@ -1088,7 +1099,7 @@ representation
 
 \end_inset
 
- Here, 
+Here, 
 \begin_inset Formula $\mathbb{Z}_{p}=\left\{ n\vert n\in\mathbb{Z},\,0\le n<p\right\} $
 \end_inset
 
@@ -2400,13 +2411,13 @@ Denote by
 
  with 
 \begin_inset Formula 
-\[
-x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}
-\]
+\begin{equation}
+x_{D}=\sum_{n=-\infty}^{\infty}b_{n}2^{n}\label{eq:dyadic expansion}
+\end{equation}
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $b_{k}\in\left\{ 0,1\right\} \;\forall k\in\mathbb{Z}$
 \end_inset
 
@@ -4010,7 +4021,83 @@ ignoring
 \end_layout
 
 \begin_layout Standard
-Another pair of generators 
+The enumeration can be accomplished by using elements of the dyadic rationals
+ 
+\begin_inset Formula $\mathbb{Q}_{2}$
+\end_inset
+
+ (eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:p-adic rationals"
+
+\end_inset
+
+) to encode the values 
+\begin_inset Formula $p_{k}$
+\end_inset
+
+.
+ Explicitly, write an element of 
+\begin_inset Formula $\mathbb{Q}_{2}$
+\end_inset
+
+ on the unit interval as
+\begin_inset Formula 
+\[
+x=\sum_{k=1}^{n+1}b_{k}2^{-k}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $b_{k}\in\left\{ 0,1\right\} $
+\end_inset
+
+.
+ For each such 
+\begin_inset Formula $x$
+\end_inset
+
+, set 
+\begin_inset Formula $p_{k}=b_{k+1}+1$
+\end_inset
+
+; this gives an element 
+\begin_inset Formula $x\mapsto A(x)$
+\end_inset
+
+.
+ Seven additional elements can be obtained by multiplying 
+\begin_inset Formula $A(x)$
+\end_inset
+
+ by 
+\begin_inset Formula $P$
+\end_inset
+
+ on the left, the right, or multiplying by -1, thus allowing 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset
+
+ to be enumerated by elements of 
+\begin_inset Formula $\mathbb{Z}_{2}\times\mathbb{Z}_{2}\times\mathbb{Z}_{2}\times\mathbb{Q}_{2}$
+\end_inset
+
+.
+ We shall call this the 
+\begin_inset Quotes eld
+\end_inset
+
+dyadic enumeration
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A different pair of generators 
 \begin_inset Formula $L,R$
 \end_inset
 
@@ -4046,7 +4133,7 @@ L=V^{-1}P^{2}=-VP^{2}=\left[\begin{array}{cc}
 
 The next section will show that these correspond to left and right moves
  on the binary tree, from which they earn their name.
- Using the definitions of 
+ Using these definitions of 
 \begin_inset Formula $L$
 \end_inset
 
@@ -4054,11 +4141,14 @@ The next section will show that these correspond to left and right moves
 \begin_inset Formula $R$
 \end_inset
 
- in the previous expression, it is clear that every element 
-\begin_inset Formula $A\in SL(2,\mathbb{Z})$
+, the enumeration 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:VP elt"
+
 \end_inset
 
- can be written uniquely as 
+ can be brought into the unique form 
 \begin_inset Formula 
 \begin{equation}
 A=\left(-I\right)^{s}\left(R^{-1}L\right)^{p_{0}}L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}\left(R^{-1}LR^{-1}\right)^{v_{0}}\label{eq:RL elt}
@@ -4071,7 +4161,12 @@ for finite
 \end_inset
 
 .
- Again, 
+ As before, this is a unique enumeration of the elements of 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset
+
+.
+ Here, 
 \begin_inset Formula $s$
 \end_inset
 
@@ -4097,7 +4192,7 @@ for finite
 \begin_inset Formula $p_{n}$
 \end_inset
 
-was zero or not.
+ was zero or not.
  The remaining coefficients 
 \begin_inset Formula $a_{k}$
 \end_inset
@@ -4106,7 +4201,7 @@ was zero or not.
 \begin_inset Formula $a_{n}$
 \end_inset
 
-which may be zero, so as to describe the general case.
+ which may be zero, so as to describe the general case.
  Clearly, the integers 
 \begin_inset Formula $a_{k}$
 \end_inset
@@ -4126,13 +4221,41 @@ A=\left(-I\right)^{r+a_{1}+\cdots+a_{n}}P^{p_{0}} & \underbrace{VP^{2}VP^{2}\cdo
 
 \end_inset
 
-The above discussion shows that the elements of 
+This form makes it clear that the elements of 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset
 
- can be enumerated either with a finite-length continued fraction, or by
- a dyadic rational.
- Since 
+ can be enumerated by writing a rational number 
+\begin_inset Formula $q$
+\end_inset
+
+ as finite-length continued fraction.
+ That is, let 
+\begin_inset Formula $q\in\mathbb{Q}$
+\end_inset
+
+ on the unit interval be written as
+\begin_inset Formula 
+\[
+q=[0;a_{1},a_{2},a_{3},\cdots]
+\]
+
+\end_inset
+
+then the corrsponding 
+\begin_inset Formula $q\mapsto A(q)$
+\end_inset
+
+ belongs to 
+\begin_inset Formula $SL(2,\mathbb{Z})$
+\end_inset
+
+.
+ There are 11 additional elements that correspnd to this 
+\begin_inset Formula $q$
+\end_inset
+
+, since 
 \begin_inset Formula $s$
 \end_inset
 
@@ -4144,7 +4267,8 @@ The above discussion shows that the elements of
 \begin_inset Formula $p_{0}$
 \end_inset
 
- one of three, this effectively demonstrates how the elements of 
+ one of three.
+ Thus, the elements of 
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset
 
@@ -4153,7 +4277,7 @@ The above discussion shows that the elements of
 \end_inset
 
 .
- This is not the only possible enumeration; others will be given below.
+ There are more enumerations possible; others will be given below.
 \end_layout
 
 \begin_layout Standard
@@ -4288,7 +4412,7 @@ The identity
 \begin_inset Formula $SL(2,\mathbb{Z})$
 \end_inset
 
-[xxx need ref].
+[xxx provide ref].
  
 \end_layout
 
@@ -4426,7 +4550,7 @@ L^{a_{1}-1}R^{a_{2}}L^{a_{3}}\cdots R^{a_{n}}=\left(-I\right)^{a_{1}+a_{3}+\cdot
 
 \end_inset
 
- The requirement for the enumeration 
+The requirement for the enumeration 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:RL elt"
