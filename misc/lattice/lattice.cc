@@ -134,13 +134,14 @@ void mobius_splat (
    double   im_center,
    double   width,
    double   height,
+	double   jitter,
 	Uni      u)
 {
 	double xstep = width / (double) sizex;
 	double ystep = height / (double) sizey;
 
 	// Run along x ...
-	double x = re_center - 0.5*width + 0.5*xstep;
+	double x = re_center - 0.5*width + jitter*xstep;
 	// printf("sizex=%d sizey=%d center=(%g, %g) width=%g\n",
 	//        sizex, sizey, re_center, im_center, width);
 	for (int i = 0; i<sizex; i++)
@@ -171,7 +172,7 @@ void mobius_splat (
 
 	// Now fill in the other direction (anti-aliasing)
 	u.invert();
-	double y = re_center - 0.5*height + 0.5*ystep;
+	double y = re_center - 0.5*height + jitter*ystep;
 	// printf("sizey=%d sizex=%d center=(%g, %g) yidth=%g\n",
 	//        sizey, sizex, re_center, im_center, yidth);
 	for (int i = 0; i<sizey; i++)
@@ -225,6 +226,8 @@ void MakeHisto (
 			Uni a;
 			a.make_uni(m, k);
 
+			double jitter = 0.5;
+#if ALL_OF_THEM
 			Uni u;
 			u = I;
 			u.mult(a);
@@ -237,6 +240,16 @@ void MakeHisto (
 			mobius_splat(glob, sizex, sizey, re_center, im_center, width, height, u);
 			u.mult(V);
 			mobius_splat(glob, sizex, sizey, re_center, im_center, width, height, u);
+#endif
+			Uni u;
+			u = I;
+			u = P;
+			u.mult(a);
+			// u.mult(V);
+
+			for (jitter = 0.0123347; jitter < 1.0; jitter += 0.0413) { 
+				mobius_splat(glob, sizex, sizey, re_center, im_center, width, height, jitter, u);
+			}
 		}
 	}
 }
