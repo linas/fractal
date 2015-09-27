@@ -126,6 +126,81 @@ double Uni::xform(double x)
 }
 
 
+void mobius_splat (
+   float    *glob,
+   int      sizex,
+   int      sizey,
+   double   re_center,
+   double   im_center,
+   double   width,
+   double   height,
+	Uni      u)
+{
+	double xstep = width / (double) sizex;
+	double ystep = height / (double) sizey;
+
+	// Run along x ...
+	double x = re_center - 0.5*width + 0.5*xstep;
+	// printf("sizex=%d sizey=%d center=(%g, %g) width=%g\n",
+	//        sizex, sizey, re_center, im_center, width);
+	for (int i = 0; i<sizex; i++)
+	{
+		double y = u.xform(x);
+		y -= floor(y);
+
+		x += xstep;
+		if (0.0 > y) continue;
+		if (1.0 <= y) continue;
+
+		double ny = 0.5 + (y - im_center) / height;
+		int j = floor(sizey * ny);
+		j = (sizey-1) - j;
+		if (j < 0)
+		{
+			printf("too small %g %g = %d %d\n", x-xstep, y, i, j);
+			printf("uni= %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
+			continue;
+		}
+		if (sizey <= j)
+		{
+			printf("too big %g %g = %d %d\n", x-xstep, y, i, j);
+			continue;
+		}
+		glob[sizex*j+i] ++;
+	}
+
+	// Now fill in the other direction (anti-aliasing)
+	u.invert();
+	double y = re_center - 0.5*height + 0.5*ystep;
+	// printf("sizey=%d sizex=%d center=(%g, %g) yidth=%g\n",
+	//        sizey, sizex, re_center, im_center, yidth);
+	for (int i = 0; i<sizey; i++)
+	{
+		double x = u.xform(y);
+		x -= floor(x);
+
+		y += ystep;
+		if (0.0 > x) continue;
+		if (1.0 <= x) continue;
+
+		double nx = 0.5 + (x - im_center) / height;
+		int j = floor(sizex * nx);
+		j = (sizex-1) - j;
+		if (j < 0)
+		{
+			printf("x too small %g %g = %d %d\n", y-ystep, x, i, j);
+			printf("x uni= %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
+			continue;
+		}
+		if (sizex <= j)
+		{
+			printf("x too big %g %g = %d %d\n", y-ystep, x, i, j);
+			continue;
+		}
+		glob[sizey*i+j] ++;
+	}
+}
+
 void MakeHisto (
    float    *glob,
    int      sizex,
@@ -142,8 +217,6 @@ void MakeHisto (
 	V.make_V();
 	P.make_P();
 
-	double xstep = width / (double) sizex;
-	double ystep = height / (double) sizey;
 	for (int k=0; k<itermax; k++)
 	{
 		unsigned long tk = 1<<k;
@@ -151,72 +224,19 @@ void MakeHisto (
 		{
 			Uni a;
 			a.make_uni(m, k);
+
 			Uni u;
-			u = P;
 			u = I;
 			u.mult(a);
+			mobius_splat(glob, sizex, sizey, re_center, im_center, width, height, u);
 			u.mult(V);
+			mobius_splat(glob, sizex, sizey, re_center, im_center, width, height, u);
 
-			// Run along x ...
-			double x = re_center - 0.5*width + 0.5*xstep;
-			// printf("sizex=%d sizey=%d center=(%g, %g) width=%g\n",
-			//        sizex, sizey, re_center, im_center, width);
-			for (int i = 0; i<sizex; i++)
-			{
-				double y = u.xform(x);
-				y -= floor(y);
-
-				x += xstep;
-				if (0.0 > y) continue;
-				if (1.0 <= y) continue;
-
-				double ny = 0.5 + (y - im_center) / height;
-				int j = floor(sizey * ny);
-				j = (sizey-1) - j;
-				if (j < 0)
-				{
-					printf("too small %g %g = %d %d\n", x-xstep, y, i, j);
-					printf("uni= %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
-					continue;
-				}
-				if (sizey <= j)
-				{
-					printf("too big %g %g = %d %d\n", x-xstep, y, i, j);
-					continue;
-				}
-				glob[sizex*j+i] ++;
-			}
-
-			// Now fill in the other direction (anti-aliasing)
-			u.invert();
-			double y = re_center - 0.5*height + 0.5*ystep;
-			// printf("sizey=%d sizex=%d center=(%g, %g) yidth=%g\n",
-			//        sizey, sizex, re_center, im_center, yidth);
-			for (int i = 0; i<sizey; i++)
-			{
-				double x = u.xform(y);
-				x -= floor(x);
-
-				y += ystep;
-				if (0.0 > x) continue;
-				if (1.0 <= x) continue;
-
-				double nx = 0.5 + (x - im_center) / height;
-				int j = floor(sizex * nx);
-				j = (sizex-1) - j;
-				if (j < 0)
-				{
-					printf("x too small %g %g = %d %d\n", y-ystep, x, i, j);
-					printf("x uni= %ld %ld %ld %ld\n", u.a, u.b, u.c, u.d);
-					continue;
-				}
-				if (sizex <= j)
-				{
-					printf("x too big %g %g = %d %d\n", y-ystep, x, i, j);
-					continue;
-				}
-				glob[sizey*i+j] ++;
-			}
+			u = P;
+			u.mult(a);
+			mobius_splat(glob, sizex, sizey, re_center, im_center, width, height, u);
+			u.mult(V);
+			mobius_splat(glob, sizex, sizey, re_center, im_center, width, height, u);
 		}
 	}
 }
