@@ -170,11 +170,12 @@ sum diff paste angle curl div: sum.o  util.o opers.o
 dx:	dx.c  util.o opers.o
 	$(CC)  -o dx dx.c util.o opers.o -lm
 
-abs clamp takelog reclamp dump renorm:	renorm.o  util.o opers.o
+abs clamp takelog recip reclamp dump renorm:	renorm.o  util.o opers.o
 	$(CC)  -o renorm renorm.o opers.o util.o -lm
 	ln -f renorm abs
 	ln -f renorm clamp
 	ln -f renorm takelog
+	ln -f renorm recip
 	ln -f renorm reclamp
 	ln -f renorm dump
 

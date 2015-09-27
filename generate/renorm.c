@@ -99,6 +99,7 @@ int main (int argc, char *argv[])
 	else name++;
 
    if (!strcmp ("takelog", name)) takelog (data_in, data_width, data_height);
+   else if (!strcmp ("recip", name)) recip (data_in, data_width, data_height);
    else if (!strcmp ("abs", name)) absolval (data_in, data_width, data_height);
    else  if (!strcmp ("renorm", name)) expand (data_in, data_width, data_height, scale_fact, offset);
    else  if (!strcmp ("reclamp", name)) rescale (data_in, data_width, data_height, scale_fact);

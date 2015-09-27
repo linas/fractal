@@ -1,6 +1,6 @@
 /*
  * opers.c
- * 
+ *
  * HISTORY:
  * quick and dirty hack Linas Vepstas October 1989
  * more hacks ever since -- Linas
@@ -10,7 +10,7 @@
 
 /*-------------------------------------------------------------------*/
 
-void fix (float glob[], 
+void fix (float glob[],
           unsigned int sizex, unsigned int sizey)
 {
    long		i;
@@ -21,7 +21,7 @@ void fix (float glob[],
 
 /*-------------------------------------------------------------------*/
 
-void absolval (float glob[], 
+void absolval (float glob[],
           unsigned int sizex, unsigned int sizey)
 {
    long		i;
@@ -32,7 +32,7 @@ void absolval (float glob[],
 
 /*-------------------------------------------------------------------*/
 
-double avg (float glob [], 
+double avg (float glob [],
             unsigned int sizex, unsigned int sizey)
 {
    long		i;
@@ -49,7 +49,7 @@ double avg (float glob [],
 
 /*-------------------------------------------------------------------*/
 
-double sqdev (float glob [], 
+double sqdev (float glob [],
               unsigned int sizex, unsigned int sizey)
 {
    long		i;
@@ -62,7 +62,7 @@ double sqdev (float glob [],
       avg += glob [i];
       msq += (glob[i]*glob [i]);
    }
-   
+
    avg /= (double) sizex*sizey;
    msq /= (double) sizex*sizey;
    msq -= avg*avg;
@@ -71,8 +71,8 @@ double sqdev (float glob [],
 
 /*-------------------------------------------------------------------*/
 
-void rescale (float glob[], 
-              unsigned int sizex, unsigned int sizey, 
+void rescale (float glob[],
+              unsigned int sizex, unsigned int sizey,
               float scale_factor)
 {
    long		i;
@@ -89,12 +89,12 @@ void rescale (float glob[],
 
 /*-------------------------------------------------------------------*/
 
-void expand (float glob[], 
-             unsigned int sizex, unsigned int sizey, 
+void expand (float glob[],
+             unsigned int sizex, unsigned int sizey,
              float scale_factor, float offset)
 {
    long		i;
-   
+
    /* renormalize */
    for (i=0; i<sizex*sizey; i++) {
       glob [i] += offset;
@@ -104,11 +104,24 @@ void expand (float glob[],
 
 /*-------------------------------------------------------------------*/
 
-void takelog (float glob[], 
+void recip (float glob[],
+             unsigned int sizex, unsigned int sizey)
+{
+   long		i;
+
+   /* reciprocal */
+   for (i=0; i<sizex*sizey; i++) {
+      glob [i] = 1.0 / glob[i];
+   }
+}
+
+/*-------------------------------------------------------------------*/
+
+void takelog (float glob[],
               unsigned int sizex, unsigned int sizey)
 {
    long		i;
-   
+
    /* renormalize */
    for (i=0; i<sizex*sizey; i++) {
       glob [i] = (float) log ((double) glob[i]);
@@ -117,13 +130,13 @@ void takelog (float glob[],
 
 /*-------------------------------------------------------------------*/
 
-void fakelog (float glob[], 
-              unsigned int sizex, unsigned int sizey, 
+void fakelog (float glob[],
+              unsigned int sizex, unsigned int sizey,
               float scale_factor)
 {
    long		i;
    float		ska;
-   
+
    ska = exp (scale_factor) - 1.0;
    /* renormalize */
    for (i=0; i<sizex*sizey; i++) {
@@ -133,8 +146,8 @@ void fakelog (float glob[],
 
 /*-------------------------------------------------------------------*/
 
-void clamp (float glob[], 
-              unsigned int sizex, unsigned int sizey, 
+void clamp (float glob[],
+              unsigned int sizex, unsigned int sizey,
               float clmin, float clmax)
 {
    long		i;
@@ -148,12 +161,12 @@ void clamp (float glob[],
 
 /*-------------------------------------------------------------------*/
 
-void dump (float glob[], 
+void dump (float glob[],
               unsigned int sizex, unsigned int sizey)
 {
    long		i;
    double	gmin=1.0e30, gmax=-1.0e30;
-   
+
    for (i=0; i<sizex*sizey; i++) {
       if (glob[i] < gmin) gmin = glob[i];
       if (glob[i] > gmax) gmax = glob[i];
