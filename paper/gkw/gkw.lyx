@@ -4125,7 +4125,7 @@ reference "eq:GKW-matrix-elts"
 \end_layout
 
 \begin_layout Section
-A Generalized Version
+A Generalized Operator
 \end_layout
 
 \begin_layout Standard
@@ -4286,13 +4286,31 @@ reference "eq:seg-num2"
 The corresponding transfer operator is then
 \begin_inset Formula 
 \[
-\left[\mathcal{L}_{m}f\right]\left(x\right)=\sum
+\left[\mathcal{L}_{m}f\right]\left(x\right)=\sum_{y=m^{-1}(x)}\frac{f(y)}{\left|m^{\prime}(y)\right|}
 \]
 
 \end_inset
 
-...
+Expanding this out, ...
  a bit of a mess...
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{m}f\right]\left(x\right)=\sum_{n}\frac{1}{\left(c(n+x)-a\right)^{2}}f\left(\frac{d(n+x)-b}{-c(x+n)+a}\right)
+\]
+
+\end_inset
+
+where the is implicitly understood to be over both sequences, starting at
+ 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $k_{0}$
+\end_inset
+
+ and including the additional segments, as appropriate.
+ 
 \end_layout
 
 \begin_layout Section
