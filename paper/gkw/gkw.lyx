@@ -199,9 +199,9 @@ The Gauss-Kuzmin-Wirsing Operator
 The map that that acts as the shift operator for continued fractions is
  
 \begin_inset Formula 
-\[
-h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor 
-\]
+\begin{equation}
+h(x)=\frac{1}{x}-\left\lfloor \frac{1}{x}\right\rfloor \label{shift-map}
+\end{equation}
 
 \end_inset
 
@@ -4122,6 +4122,177 @@ reference "eq:GKW-matrix-elts"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Section
+A Generalized Version
+\end_layout
+
+\begin_layout Standard
+Observing that the Gauss shift map 
+\begin_inset Formula $h(x)$
+\end_inset
+
+ (eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "shift-map"
+
+\end_inset
+
+) is in the form of a Mbius transformation; it seems plausible to explore
+ what happens for the general case 
+\begin_inset Formula 
+\[
+m(x)=\frac{ax+b}{cx+d}-\left\lfloor \frac{ax+b}{cx+d}\right\rfloor 
+\]
+
+\end_inset
+
+for a general unimodular transform, with denominator such that a pole appears
+ in the unit interval: 
+\begin_inset Formula $0\le-d/c\le1.$
+\end_inset
+
+ This function is piece-wise continuous.
+ Writing down the pieces is a bit fiddly.
+ Defining 
+\begin_inset Formula $n=\left\lfloor (ax+b)/(cx+d)\right\rfloor $
+\end_inset
+
+ allows 
+\begin_inset Formula $m(x)$
+\end_inset
+
+ to be written as
+\begin_inset Formula 
+\[
+m(x)=\frac{x(a-nc)+b-nd}{cx+d}
+\]
+
+\end_inset
+
+Choose a sign convention such that 
+\begin_inset Formula $c>0$
+\end_inset
+
+; this choice can always be made by multiplying numerator and denominator
+ by -1; the modular group si projective.
+ The pieces are obtained by imposing 
+\begin_inset Formula $0\le m(x)<1$
+\end_inset
+
+, from which one obtains an enumeration
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{d(n+1)-b}{-c(n+1)+a}\le x<\frac{dn-b}{-cn+a} & \quad\mbox{case 1}\label{eq:seg-enum}\\
+\frac{dn-b}{-cn+a}\le x<\frac{d(n+1)-b}{-c(n+1)+a} & \quad\mbox{case 2}\label{eq:seg-num2}
+\end{align}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\mbox{case 1:}\begin{cases}
+ad-bc=1 & \mbox{when }x<\frac{-d}{c}\mbox{ and }n\to+\infty\\
+ad-bc=-1 & \mbox{when }\frac{-d}{c}<x\mbox{ and }n\to+\infty
+\end{cases}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\mbox{case 2:}\begin{cases}
+ad-bc=1 & \mbox{when }\frac{-d}{c}<x\mbox{ and }n\to-\infty\\
+ad-bc=-1 & \mbox{when }x<\frac{-d}{c}\mbox{ and }n\to-\infty
+\end{cases}
+\]
+
+\end_inset
+
+This manifests two convergent sequences: one converging to 
+\begin_inset Formula $-d/c$
+\end_inset
+
+ from below; the other converging to 
+\begin_inset Formula $-d/c$
+\end_inset
+
+ from above; which is which depending on the determinant.
+\end_layout
+
+\begin_layout Standard
+Specifying the start of each sequence is a bit fiddly.
+ Taking case of the positive determinant, the start of the first sequence
+ is given by 
+\begin_inset Formula $n_{0}=\left\lceil b/d\right\rceil $
+\end_inset
+
+; notice this uses the ceiling, not the floor.
+ When 
+\begin_inset Formula $n_{0}\ne b/d$
+\end_inset
+
+, the first sequence includes a segment 
+\begin_inset Formula 
+\[
+m(x)=\frac{x(a-(n_{0}-1)c)+b-(n_{0}-1)d}{cx+d}\quad\mbox{when}\quad0\le x<\frac{dn_{0}-b}{-cn_{0}+a}
+\]
+
+\end_inset
+
+which isn't enumerated by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:seg-enum"
+
+\end_inset
+
+.
+ Similarly, the second sequence starts at 
+\begin_inset Formula $k_{0}=\left\lfloor (a+b)/(c+d)\right\rfloor $
+\end_inset
+
+ and continues in the negative direction.
+ When 
+\begin_inset Formula $k_{0}\ne(a+b)/(c+d),$
+\end_inset
+
+ the sequence includes a segment 
+\begin_inset Formula 
+\[
+m(x)=\frac{x(a-k_{0}c)+b-k_{0}d}{cx+d}\quad\mbox{when}\quad\frac{dk{}_{0}-b}{-ck_{0}+a}\le x\le1
+\]
+
+\end_inset
+
+ which isn't enumerated by 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:seg-num2"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The corresponding transfer operator is then
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{m}f\right]\left(x\right)=\sum
+\]
+
+\end_inset
+
+...
+ a bit of a mess...
 \end_layout
 
 \begin_layout Section
@@ -11812,7 +11983,7 @@ In fact, the conjugacy transformation leaves the spectrum of the operators
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "/home/linas/linas/fractal/paper/fractal"
+bibfiles "/home/linas/src/fractal/paper/fractal"
 options "plain"
 
 \end_inset
