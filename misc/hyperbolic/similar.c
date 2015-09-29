@@ -37,12 +37,12 @@ void draw_splat (mobius_t m)
 
 	// draw a splat
 	printf ("0.0600000 slw\n");
-	printf ("0.0100000 slw\n");
-	za = cplex_set (-0.23, 0.0);
-	za = cplex_set (-0.1, 0.0);
+	// printf ("0.0100000 slw\n");
+	// za = cplex_set (-0.23, 0.0);
+	za = cplex_set (-0.02, 0.0);
 	za = mobius_xform (m,za);
-	zb = cplex_set (-0.27, 0.0);
-	zb = cplex_set (0.1, 0.0);
+	// zb = cplex_set (-0.27, 0.0);
+	zb = cplex_set (0.02, 0.0);
 	zb = mobius_xform (m,zb);
 	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
 	// printf ("0.0100000 slw\n");
@@ -137,46 +137,72 @@ void sim_splat(mobius_t off, int n)
 	mobius_t ill = mobius_set (1, 0, -1, 1);
 	mobius_t are = mobius_set (1, 1, 0, 1);
 	mobius_t ari = mobius_set (1, -1, 0, 1);
+	mobius_t vee = mobius_set (0, -1, 1, 0);
+	mobius_t vin = mobius_set (0, 1, -1, 0);
 	ell = to_disk (ell);
 	ill = to_disk (ill);
 	are = to_disk (are);
 	ari = to_disk (ari);
 
 	// Move in the L direction.
-	mobius_t sim = ell;
-	sim = mobius_mul (sim, off);
-	// sim = mobius_mul (sim, ill);
+	mobius_t sim;
+	sim = mobius_mul (ell, off);
+	sim = mobius_mul (sim, ill);
 
 eps_set_color_red();
 	draw_splat(sim);
 	sim_splat(sim, n);
 
 	// Move in the Linv direction
-	sim = ill;
-	sim = mobius_mul (sim, off);
-	// sim = mobius_mul (sim, ell);
+	sim = mobius_mul (ill, off);
+	sim = mobius_mul (sim, ell);
 
 eps_set_color_green();
 	draw_splat(sim);
 	sim_splat(sim, n);
 
 	// Move in the R direction.
-	sim = are;
-	sim = mobius_mul (sim, off);
-	// sim = mobius_mul (sim, ari);
+	sim = mobius_mul (are, off);
+	sim = mobius_mul (sim, ari);
 
 eps_set_color_blue();
 	draw_splat(sim);
 	sim_splat(sim, n);
 
 	// Move in the Rinv direction.
-	sim = ari;
-	sim = mobius_mul (sim, off);
-	// sim = mobius_mul (sim, are);
+	sim = mobius_mul (ari, off);
+	sim = mobius_mul (sim, are);
 
 eps_set_color(0x0, 0xff, 0xff);
 	draw_splat(sim);
 	sim_splat(sim, n);
+
+	// Do the V versions
+eps_set_color(0xcc, 0x0, 0xff);
+	sim = mobius_mul (vee, ell);
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, ill);
+	sim = mobius_mul (sim, vin);
+	draw_splat(sim);
+
+	sim = mobius_mul (vee, ill);
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, ell);
+	sim = mobius_mul (sim, vin);
+	draw_splat(sim);
+
+	sim = mobius_mul (vee, are);
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, ari);
+	sim = mobius_mul (sim, vin);
+	draw_splat(sim);
+
+	sim = mobius_mul (vee, ari);
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, are);
+	sim = mobius_mul (sim, vin);
+	draw_splat(sim);
+
 }
 
 /* Draw the entire tree */
