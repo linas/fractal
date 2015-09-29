@@ -89,22 +89,27 @@ void draw_fork(mobius_t m, int level)
 	if (level == 0) return;
 	level--;
 
-	cplex za, zb;
+	cplex zz, zl, zr, zc;
 
-	za = cplex_set (0.0, 0.0);
+	zz = cplex_set (0.0, 0.0);
 
-	zb = cplex_set (0.25, 0.25*sqrt(3.0));
-	draw_arc (m, za, zb);
+	zl = cplex_set (0.25, 0.25*sqrt(3.0));
+	draw_arc (m, zz, zl);
 
-	zb = cplex_set (0.25, -0.25*sqrt(3.0));
-	draw_arc (m, za, zb);
+	zr = cplex_set (0.25, -0.25*sqrt(3.0));
+	draw_arc (m, zz, zr);
 
 	// Draw cusps
 	eps_set_color(240,130,0);
 	printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
 
-	zb = cplex_set (1.0, 0.0);
-	draw_arc (m, za, zb);
+	// This one isn't needed except for the tri-star...
+	zc = cplex_set (1.0, 0.0);
+	draw_arc (m, zz, zc);
+
+	zz = cplex_set (-0.5, 0.0);
+	zc = cplex_set (-1.0, 0.0);
+	draw_arc (m, zz, zc);
 	eps_set_color_black();
 	printf ("[] 0 setdash\n");
 
