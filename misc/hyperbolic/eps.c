@@ -1,5 +1,5 @@
 /*
- * eps.c 
+ * eps.c
  * Encapsulated PostScript utilities
  *
  * Linas Vepstas April 2007
@@ -7,6 +7,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <time.h>
 #include "eps.h"
 
 void eps_print_prolog (int width, int height)
@@ -15,7 +16,11 @@ void eps_print_prolog (int width, int height)
 	// printf ("%!PS-Adobe-2.0 EPSF-2.0\n");
 	printf ("%%%%Title: blah blah\n");
 	printf ("%%%%Creator: fractal/misc/hyperbolic/tree.c\n");
-	printf ("%%%%CreationDate: Fri Apr 27 22:11:59 2007\n");
+
+	// printf ("%%%%CreationDate: Fri Apr 27 22:11:59 2007\n");
+	time_t now = time(0);
+	char * date = ctime(&now);
+	printf ("%%%%CreationDate: %s", date);
 	printf ("%%%%For: linas\n");
 	printf ("%%%%Orientation: Portrait\n");
 	printf ("%%%%Magnification: 1.0000\n");

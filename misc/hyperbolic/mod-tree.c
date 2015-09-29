@@ -194,7 +194,7 @@ void draw (int n)
 // #define DISK_COORDS
 #ifdef DISK_COORDS
 	/* The following sets up a transform to disk coords */
-	xfm = to_disk_xform (xfm);
+	xfm = to_disk_xform ();
 #endif
 
 #if 0

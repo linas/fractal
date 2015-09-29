@@ -166,7 +166,7 @@ int
 main (int argc, char * argv[]) 
 {
 
-	if (argc < 1)
+	if (argc < 2)
 	{
 		fprintf (stderr, "Usage: %s <shift>\n", argv[0]);
 		exit(1);
