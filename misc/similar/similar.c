@@ -1,4 +1,10 @@
 
+/*
+ * Brute force similarity search.
+ * When is a Mobius xform  (ax+b)/(cx+d) similar to 1/x ?
+ *
+ * Sept 2015
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
