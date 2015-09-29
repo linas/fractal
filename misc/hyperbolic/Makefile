@@ -3,7 +3,7 @@ TOP = ../../tools
 INC = $(TOP)/inc
 LIB = $(TOP)/lib
 
-EXES= mod-tree perimeter rotations tree
+EXES= mod-tree perimeter rotations tree similar
 
 all: $(EXES)
 
@@ -11,6 +11,7 @@ mod-tree: mod-tree.o eps.o flt-eps.o
 perimeter: perimeter.o 
 rotations: rotations.o 
 tree: tree.o eps.o flt-eps.o
+similar: similar.o eps.o flt-eps.o
 
 .c.o:
 	cc -c -g -O2 -I $(INC) $<
