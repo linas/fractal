@@ -1,6 +1,7 @@
 /*
  * mod-tree.c 
- * draw a binary tree on the hyperbolic upper half-plane
+ *
+ * Draw a binary tree on the hyperbolic upper half-plane
  * (or on poincare disk)
  * Built algebraically from modular xforms
  * as opposed to the geometric construction in tree.c
@@ -20,6 +21,7 @@ void eps_setup_disk (void)
 {
 	eps_setup_basic_linstyles();
 }
+
 void eps_setup_plane (void)
 {
 	eps_setup_basic_linstyles();
