@@ -21,12 +21,8 @@
 void eps_setup_disk (void)
 {
 	eps_setup_basic_linstyles();
-}
-void eps_setup_plane (void)
-{
-	eps_setup_basic_linstyles();
-	printf ("0.0 -0.8 translate\n");
-	printf ("0.4 1.6 scale\n");
+	// printf ("0.0 -0.8 translate\n");
+	printf ("0.5 0.5 scale\n");
 }
 
 /* ==================================================== */
@@ -64,7 +60,7 @@ void draw_tristar (mobius_t m)
 	za = mobius_xform (m,za);
 	zb = cplex_set (-0.27, 0.0);
 	zb = mobius_xform (m,zb);
-	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
+	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im,zb.re, zb.im);
 	// printf ("0.0100000 slw\n");
 	printf ("0.010000 slw\n");
 }
@@ -136,12 +132,6 @@ void draw(int n)
 	off = mobius_mul (xfm, off);
 #endif
 
-#define HALF_PLANE
-#ifdef HALF_PLANE
-	xfm = to_half_plane_xform();
-	off = mobius_mul (xfm, off);
-#endif
-
 	draw_tristar(off);
 
 eps_set_color_green();
@@ -149,6 +139,7 @@ eps_set_color_green();
 	m = mobius_mul(off,m);
 	draw_fork (m, level);
 
+/*
 eps_set_color_red();
 	m = go_to_fork_tip(-1.0);
 	m = mobius_mul(off,m);
@@ -158,6 +149,7 @@ eps_set_color_blue();
 	m = go_to_fork_tip(-3.0);
 	m = mobius_mul(off,m);
 	draw_fork (m, level);
+*/
 }
 
 /* ==================================================== */
@@ -166,7 +158,7 @@ int
 main (int argc, char * argv[]) 
 {
 
-	if (argc < 1)
+	if (argc < 2)
 	{
 		fprintf (stderr, "Usage: %s <shift>\n", argv[0]);
 		exit(1);
@@ -174,10 +166,8 @@ main (int argc, char * argv[])
 
 	int n = atoi (argv[1]);
 
-	eps_print_prolog(220,220);
-	// eps_print_prolog(400,100);
+	eps_print_prolog(800,800);
 	eps_setup_disk();
-	// eps_setup_plane();
 	eps_draw_circle();
 
 	draw(n);

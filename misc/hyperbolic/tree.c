@@ -64,7 +64,7 @@ void draw_tristar (mobius_t m)
 	za = mobius_xform (m,za);
 	zb = cplex_set (-0.27, 0.0);
 	zb = mobius_xform (m,zb);
-	printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
+	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im,zb.re, zb.im);
 	// printf ("0.0100000 slw\n");
 	printf ("0.010000 slw\n");
 }
