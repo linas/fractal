@@ -1,12 +1,11 @@
 /*
- * mod-tree.c 
+ * similar.c
  *
- * Draw a binary tree on the hyperbolic upper half-plane
- * (or on poincare disk)
- * Built algebraically from modular xforms
- * as opposed to the geometric construction in tree.c
+ * Draw a binary tree on the poincare disk
+ * Dervied from mod-tree.c
  *
  * Linas Vepstas April 2007
+ * Updates Sept 2015
  */
 
 #include "cplex.h"
@@ -20,13 +19,6 @@
 void eps_setup_disk (void)
 {
 	eps_setup_basic_linstyles();
-}
-
-void eps_setup_plane (void)
-{
-	eps_setup_basic_linstyles();
-	printf ("0.0 -0.8 translate\n");
-	printf ("0.4 1.6 scale\n");
 }
 
 static int drawdash=0;
@@ -104,7 +96,6 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 		eps_draw_lineseg (xa+xcenter, ya, xb+xcenter,yb);
 		xa = xb;
 		ya = yb;
-
 	}
 #endif
 }
@@ -155,14 +146,14 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 		printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
 		drawdash=1;
 
-		// the ones on the right side ... 
+		// the ones on the right side ...
 		cplex tap;
 		if (lr) tap = cplex_set(0.5,0.5*sqrt(3.0));
 		else tap = cplex_set(-0.5,0.5*sqrt(3.0));
 		top = cplex_set(0,0);
 		draw_geo (m, top, tap);
 
-		// the cusps on the left side ... 
+		// the cusps on the left side ...
 		top = cplex_set(0,1e8);
 		cplex tep;
 		if (lr) tep = cplex_set(-0.5,0.5*sqrt(3.0));
@@ -191,11 +182,8 @@ void draw (int n)
 
 	mobius_t xfm = ident;
 
-// #define DISK_COORDS
-#ifdef DISK_COORDS
 	/* The following sets up a transform to disk coords */
-	xfm = to_disk_xform (xfm);
-#endif
+	xfm = to_disk_xform ();
 
 #if 0
 	/* Assorted translations and rotations */
@@ -212,7 +200,7 @@ void draw (int n)
 	xfm = mobius_mul (tee,xfm);
 	xfm = mobius_mul (tee,xfm);
 	xfm = mobius_mul (ess,xfm);
-#endif 
+#endif
 
 eps_set_color_blue();
 eps_set_color(0,70,220);
@@ -226,7 +214,7 @@ eps_set_color(0,70,220);
 	draw_geo (xfm, ltip, rtip);
 
 
-	// draw a splat 
+	// draw a splat
 	printf ("0.0600000 slw\n");
 eps_set_color_red();
 	printf ("n %f %f m %f %f l s\n", -0.04, 1.0, 0.04, 1.0);
@@ -235,12 +223,13 @@ eps_set_color_green();
 	printf ("n %f %f m %f %f l s\n", 0.96, 0.0, 1.04, 0.0);
 	printf ("0.010000 slw\n");
 #endif
+
 }
 
 /* ==================================================== */
 
 int
-main (int argc, char * argv[]) 
+main (int argc, char * argv[])
 {
 	if (argc < 2)
 	{
@@ -250,11 +239,9 @@ main (int argc, char * argv[])
 
 	int n = atoi (argv[1]);
 
-	// eps_print_prolog(220,220);
-	eps_print_prolog(800,200);
-	// eps_setup_disk();
-	eps_setup_plane();
-	// eps_draw_circle();
+	eps_print_prolog(800,800);
+	eps_setup_disk();
+	eps_draw_circle();
 
 	draw(n);
 

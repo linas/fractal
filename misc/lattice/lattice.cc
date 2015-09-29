@@ -13,6 +13,8 @@
 
 #include "brat.h"
 
+// XXX to-do -- this could have used the tools in flt.h instead.
+// flt == fractional linear transform
 struct Uni
 {
 	// m and k define a tree coordinate. m is a sequence of
