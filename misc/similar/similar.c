@@ -36,7 +36,7 @@ void check(int a, int b, int c, int d)
 					int smsc = -p*a*r+p*p*c-r*r*b+r*p*d;
 					int smsd = -a*q*r+c*p*q-r*b*s+p*d*s;
 
-					if (1 != smsc) continue;
+					if (-1 != smsc) continue;
 					if (0 != smsd) continue;
 					// if (0 != smsa) continue;
 					if (1 == smsb)
@@ -48,8 +48,9 @@ void check(int a, int b, int c, int d)
 						printf("win (%d %d %d %d) (%d %d %d %d) (%d %d %d %d) %g = %g %g\n",
 						a,b,c,d,p,q,r,s,smsa, smsb, smsc, smsd, x, lo, hi);
 						int det = smsa*smsd - smsb*smsc;
-						if (det != -1) {printf("aiiii %d\n", det); exit(1); }
-						if (lo <= hi) { printf("wtf!!\n"); exit(1); }
+						if (det != 1) {printf("aiiii %d\n", det); exit(1); }
+						// if (lo <= hi) { printf("wtf!!\n"); exit(1); }
+						if (hi <= lo) { printf("wtf!!\n"); exit(1); }
 						wincnt++;
 						return;
 					}
@@ -64,7 +65,8 @@ void check(int a, int b, int c, int d)
 		double hi =  ((double) b)/((double) d);
 		printf("fail (%d %d %d %d) %g = %g %g \n",a,b,c,d, x, lo, hi);
 		failcnt++;
-		if (lo <= hi) { printf("wtf!!\n"); exit(1); }
+		// if (lo <= hi) { printf("wtf!!\n"); exit(1); }
+		if (hi <= lo) { printf("wtf!!\n"); exit(1); }
 		/* exit(1); */
 	}
 }
@@ -85,7 +87,7 @@ main(int argc, char * argv[])
 			{
 				for (int d = -LIM; d<LIM; d++)
 				{
-					if (-1 != a*d-b*c) continue;
+					if (1 != a*d-b*c) continue;
 					double x = - ((double) d)/((double) c);
 					if (x <= 0.0 || 1.0 < x) continue;
 					check(a,b,c,d);
