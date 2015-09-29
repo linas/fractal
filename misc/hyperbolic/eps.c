@@ -86,6 +86,11 @@ void eps_set_color_blue (void)
 	printf ("0.000000 0.000000 1.000000 srgb\n");
 }
 
+void eps_set_color_black (void)
+{
+	printf ("0.000000 0.000000 0.000000 srgb\n");
+}
+
 void eps_set_color (int r, int g, int b)
 {
 	printf ("%f %f %f srgb\n", r/255.0, g/255.0, b/255.0);

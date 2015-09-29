@@ -21,6 +21,7 @@ void eps_print_prolog (int width, int height);
  */
 void eps_setup_basic_linstyles (void);
 
+void eps_set_color_black (void);
 void eps_set_color_red (void);
 void eps_set_color_green (void);
 void eps_set_color_blue (void);

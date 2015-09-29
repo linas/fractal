@@ -1,12 +1,15 @@
 /*
- * tree.c 
+ * similar.c
  *
  * draw a binary tree on the hyperbolic disk, using postscript
  * This is an explictly geometric construction. For an algebraic
  * construction of the same thing (which is a tad simpler), see
  * mod-tree.c
  *
+ * Modified for visualizng similarity transforms.
+ *
  * Linas Vepstas April 2007
+ * Modified September 2015
  */
 
 #include "cplex.h"
@@ -22,10 +25,26 @@ void eps_setup_disk (void)
 {
 	eps_setup_basic_linstyles();
 	// printf ("0.0 -0.8 translate\n");
-	printf ("0.5 0.5 scale\n");
+	// printf ("0.9 0.9 scale\n");
 }
 
 /* ==================================================== */
+
+/* draw a small rectangle */
+void draw_splat (mobius_t m)
+{
+	cplex za,zb;
+
+	// draw a splat
+	printf ("0.0600000 slw\n");
+	za = cplex_set (-0.23, 0.0);
+	za = mobius_xform (m,za);
+	zb = cplex_set (-0.27, 0.0);
+	zb = mobius_xform (m,zb);
+	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
+	// printf ("0.0100000 slw\n");
+	printf ("0.010000 slw\n");
+}
 
 /* draw three-pointed stick figure */
 void draw_tristar (mobius_t m)
@@ -53,16 +72,6 @@ void draw_tristar (mobius_t m)
 	// zb = mobius_xform (m,zb);
 	// eps_draw_lineseg (za.re, za.im,zb.re, zb.im);
 	draw_arc (m, za, zb);
-
-	// draw a splat 
-	printf ("0.0600000 slw\n");
-	za = cplex_set (-0.23, 0.0);
-	za = mobius_xform (m,za);
-	zb = cplex_set (-0.27, 0.0);
-	zb = mobius_xform (m,zb);
-	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im,zb.re, zb.im);
-	// printf ("0.0100000 slw\n");
-	printf ("0.010000 slw\n");
 }
 
 mobius_t go_to_fork_tip(double sign)
@@ -110,7 +119,7 @@ void draw_fork(mobius_t m, int level)
 void draw(int n)
 {
 	mobius_t m;
-	int level=3;
+	int level = 5;
 
 	cplex z = cplex_set (-0.268, 0.0);
 	// cplex z = cplex_set (0.0, 0.0);
@@ -120,7 +129,7 @@ void draw(int n)
 	// mobius_t rot = mobius_rotate ((-0.5-0.166666)*M_PI);
 	off = mobius_mul (rot, off);
 
-#define XLATE
+// #define XLATE
 #ifdef XLATE
 	int a,b,c,d;
 	a=1;
@@ -133,31 +142,29 @@ void draw(int n)
 #endif
 
 	draw_tristar(off);
+	draw_splat(off);
 
-eps_set_color_green();
+// eps_set_color_green();
 	m = go_to_fork_tip(+1.0);
 	m = mobius_mul(off,m);
 	draw_fork (m, level);
 
-/*
-eps_set_color_red();
+// eps_set_color_red();
 	m = go_to_fork_tip(-1.0);
 	m = mobius_mul(off,m);
 	draw_fork (m, level);
 
-eps_set_color_blue();
+// eps_set_color_blue();
 	m = go_to_fork_tip(-3.0);
 	m = mobius_mul(off,m);
 	draw_fork (m, level);
-*/
 }
 
 /* ==================================================== */
 
 int
-main (int argc, char * argv[]) 
+main (int argc, char * argv[])
 {
-
 	if (argc < 2)
 	{
 		fprintf (stderr, "Usage: %s <shift>\n", argv[0]);
