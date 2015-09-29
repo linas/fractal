@@ -94,18 +94,21 @@ void draw_fork(mobius_t m, int level)
 	za = cplex_set (0.0, 0.0);
 
 	zb = cplex_set (0.25, 0.25*sqrt(3.0));
-	// za = mobius_xform (m,za);
-	// zb = mobius_xform (m,zb);
-	// printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
-	// eps_draw_lineseg (za.re, za.im,zb.re, zb.im);
 	draw_arc (m, za, zb);
 
 	zb = cplex_set (0.25, -0.25*sqrt(3.0));
-	// zb = mobius_xform (m,zb);
-	// printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
-	// eps_draw_lineseg (za.re, za.im,zb.re, zb.im);
 	draw_arc (m, za, zb);
 
+	// Draw cusps
+	eps_set_color(240,130,0);
+	printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
+
+	zb = cplex_set (1.0, 0.0);
+	draw_arc (m, za, zb);
+	eps_set_color_black();
+	printf ("[] 0 setdash\n");
+
+	// Now recurse.
 	mobius_t tip = go_to_fork_tip(+1.0);
 	tip = mobius_mul (m, tip);
 	draw_fork (tip, level);
