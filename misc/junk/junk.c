@@ -5,9 +5,11 @@
 int wincnt=0;
 int failcnt=0;
 
+int lam;
+
 void check(int a, int b, int c, int d)
 {
-#define LAM 40
+#define LAM lam
 #define false 0
 #define true 1
 	int found = false;
@@ -30,14 +32,18 @@ void check(int a, int b, int c, int d)
 
 					if (1 != smsc) continue;
 					if (0 != smsd) continue;
-					// if (1 == smsb) 
+					// if (0 != smsa) continue;
+					if (1 == smsb)
 					{ found = true;
 
 						double x = - ((double) d)/((double) c);
-						printf("win (%d %d %d %d) (%d %d %d %d) (%d %d %d %d) %g\n",
-						a,b,c,d,p,q,r,s,smsa, smsb, smsc, smsd, x);
+						double lo =  ((double) a)/((double) c);
+						double hi =  ((double) b)/((double) d);
+						printf("win (%d %d %d %d) (%d %d %d %d) (%d %d %d %d) %g = %g %g\n",
+						a,b,c,d,p,q,r,s,smsa, smsb, smsc, smsd, x, lo, hi);
 						int det = smsa*smsd - smsb*smsc;
-						if (det != 1) {printf("aiiii %d\n", det); exit(1); }
+						if (det != -1) {printf("aiiii %d\n", det); exit(1); }
+						if (lo <= hi) { printf("wtf!!\n"); exit(1); }
 						wincnt++;
 						return;
 					}
@@ -45,16 +51,26 @@ void check(int a, int b, int c, int d)
 			}
 		}
 	}
-	if (!found) { 
+	if (!found)
+	{
 		double x = - ((double) d)/((double) c);
-		printf("fail (%d %d %d %d) %g \n",a,b,c,d, x); failcnt++; /* exit(1); */}
+		double lo =  ((double) a)/((double) c);
+		double hi =  ((double) b)/((double) d);
+		printf("fail (%d %d %d %d) %g = %g %g \n",a,b,c,d, x, lo, hi);
+		failcnt++;
+		if (lo <= hi) { printf("wtf!!\n"); exit(1); }
+		/* exit(1); */
+	}
 }
 
 
 int
-main()
+main(int argc, char * argv[])
 {
-#define LIM 6
+	int lim = atoi(argv[1]);
+	lam = atoi(argv[2]);
+// #define LIM 6
+#define LIM lim
 	for(int a=-LIM; a<LIM; a++)
 	{
 		for (int b=-LIM; b<LIM; b++)
@@ -63,7 +79,7 @@ main()
 			{
 				for (int d = -LIM; d<LIM; d++)
 				{
-					if (1 != a*d-b*c) continue;
+					if (-1 != a*d-b*c) continue;
 					double x = - ((double) d)/((double) c);
 					if (x <= 0.0 || 1.0 < x) continue;
 					check(a,b,c,d);
@@ -71,5 +87,6 @@ main()
 			}
 		}
 	}
-	printf("wincnct=%d %d\n", wincnt, failcnt);
+	double rat = ((double) wincnt)/ ((double) failcnt);
+	printf("wincnct=%d %d %g\n", wincnt, failcnt, rat);
 }
