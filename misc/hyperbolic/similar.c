@@ -128,8 +128,9 @@ void draw_fork(mobius_t m, int level)
 }
 
 /* Draw splats at each similarity point */
-void sim_splat(mobius_t off)
+void sim_splat(mobius_t off, mobius_t sim)
 {
+	// draw_splat(sim);
 	draw_splat(off);
 }
 
@@ -156,7 +157,7 @@ void similar(mobius_t off, int n)
 	sim = mobius_mul (sim, ill);
 
 eps_set_color_red();
-	sim_splat(sim);
+	sim_splat(off, sim);
 	similar(sim, n);
 
 	// Move in the Linv direction
@@ -164,7 +165,7 @@ eps_set_color_red();
 	sim = mobius_mul (sim, ell);
 
 eps_set_color_green();
-	sim_splat(sim);
+	sim_splat(off, sim);
 	similar(sim, n);
 
 	// Move in the R direction.
@@ -172,7 +173,7 @@ eps_set_color_green();
 	sim = mobius_mul (sim, ari);
 
 eps_set_color_blue();
-	sim_splat(sim);
+	sim_splat(off, sim);
 	similar(sim, n);
 
 	// Move in the Rinv direction.
@@ -180,7 +181,7 @@ eps_set_color_blue();
 	sim = mobius_mul (sim, are);
 
 eps_set_color(0x0, 0xff, 0xff);
-	sim_splat(sim);
+	sim_splat(off, sim);
 	similar(sim, n);
 
 	// Do the V versions
@@ -189,26 +190,25 @@ eps_set_color(0xcc, 0x0, 0xff);
 	sim = mobius_mul (sim, off);
 	sim = mobius_mul (sim, ill);
 	sim = mobius_mul (sim, vin);
-	sim_splat(sim);
+	sim_splat(off, sim);
 
 	sim = mobius_mul (vee, ill);
 	sim = mobius_mul (sim, off);
 	sim = mobius_mul (sim, ell);
 	sim = mobius_mul (sim, vin);
-	sim_splat(sim);
+	sim_splat(off, sim);
 
 	sim = mobius_mul (vee, are);
 	sim = mobius_mul (sim, off);
 	sim = mobius_mul (sim, ari);
 	sim = mobius_mul (sim, vin);
-	sim_splat(sim);
+	sim_splat(off, sim);
 
 	sim = mobius_mul (vee, ari);
 	sim = mobius_mul (sim, off);
 	sim = mobius_mul (sim, are);
 	sim = mobius_mul (sim, vin);
-	sim_splat(sim);
-
+	sim_splat(off, sim);
 }
 
 /* Draw the entire tree */
