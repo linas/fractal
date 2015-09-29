@@ -131,10 +131,22 @@ void draw_fork(mobius_t m, int level)
 void sim_splat(mobius_t off, mobius_t sim)
 {
 	draw_splat(sim);
+eps_set_color(0xcc, 0xff, 0x0);
 	// draw_splat(off);
+#if 0
+	// mobius_t cent = mobius_invert(off);
+	// mobius_t delta = mobius_mul(sim, cent);
+	// mobius_t delta = mobius_mul(cent, sim);
 	cplex zz = cplex_set (0.0, 0.0);
-	cplex za = mobius_xform (sim, zz);
+	// cplex za = mobius_xform (delta, zz);
+	mobius_t ins = mobius_invert(sim);
+	cplex za = mobius_xform (ins, zz);
+	// zz = mobius_xform(cent, zz);
+	// cplex za = mobius_xform (off, zz);
+	// cplex za = mobius_xform (sim, zz);
+	// mobius_t ident = mobius_ident();
 	draw_arc (off, zz, za);
+#endif
 }
 
 /* Draw similarity point */
