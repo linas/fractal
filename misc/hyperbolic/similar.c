@@ -128,7 +128,13 @@ void draw_fork(mobius_t m, int level)
 }
 
 /* Draw splats at each similarity point */
-void sim_splat(mobius_t off, int n)
+void sim_splat(mobius_t off)
+{
+	draw_splat(off);
+}
+
+/* Draw similarity point */
+void similar(mobius_t off, int n)
 {
 	n--;
 	if (0 == n) return;
@@ -150,32 +156,32 @@ void sim_splat(mobius_t off, int n)
 	sim = mobius_mul (sim, ill);
 
 eps_set_color_red();
-	draw_splat(sim);
-	sim_splat(sim, n);
+	sim_splat(sim);
+	similar(sim, n);
 
 	// Move in the Linv direction
 	sim = mobius_mul (ill, off);
 	sim = mobius_mul (sim, ell);
 
 eps_set_color_green();
-	draw_splat(sim);
-	sim_splat(sim, n);
+	sim_splat(sim);
+	similar(sim, n);
 
 	// Move in the R direction.
 	sim = mobius_mul (are, off);
 	sim = mobius_mul (sim, ari);
 
 eps_set_color_blue();
-	draw_splat(sim);
-	sim_splat(sim, n);
+	sim_splat(sim);
+	similar(sim, n);
 
 	// Move in the Rinv direction.
 	sim = mobius_mul (ari, off);
 	sim = mobius_mul (sim, are);
 
 eps_set_color(0x0, 0xff, 0xff);
-	draw_splat(sim);
-	sim_splat(sim, n);
+	sim_splat(sim);
+	similar(sim, n);
 
 	// Do the V versions
 eps_set_color(0xcc, 0x0, 0xff);
@@ -183,25 +189,25 @@ eps_set_color(0xcc, 0x0, 0xff);
 	sim = mobius_mul (sim, off);
 	sim = mobius_mul (sim, ill);
 	sim = mobius_mul (sim, vin);
-	draw_splat(sim);
+	sim_splat(sim);
 
 	sim = mobius_mul (vee, ill);
 	sim = mobius_mul (sim, off);
 	sim = mobius_mul (sim, ell);
 	sim = mobius_mul (sim, vin);
-	draw_splat(sim);
+	sim_splat(sim);
 
 	sim = mobius_mul (vee, are);
 	sim = mobius_mul (sim, off);
 	sim = mobius_mul (sim, ari);
 	sim = mobius_mul (sim, vin);
-	draw_splat(sim);
+	sim_splat(sim);
 
 	sim = mobius_mul (vee, ari);
 	sim = mobius_mul (sim, off);
 	sim = mobius_mul (sim, are);
 	sim = mobius_mul (sim, vin);
-	draw_splat(sim);
+	sim_splat(sim);
 
 }
 
@@ -216,11 +222,11 @@ void draw(int n)
 	double cent = sqrt(3.0) - 2.0;
 	cplex z = cplex_set (cent, 0.0);
 	// z = cplex_set (-0.25, 0.0);
-	// cplex z = cplex_set (0.0, 0.0);
+	// z = cplex_set (0.0, 0.0);
 	mobius_t off = disk_center (z);
 
 	mobius_t rot = mobius_rotate (-0.5*M_PI);
-	// mobius_t rot = mobius_rotate ((-0.5-0.166666)*M_PI);
+	// rot = mobius_rotate ((-0.5-0.166666)*M_PI);
 	off = mobius_mul (rot, off);
 
 // #define XLATE
@@ -253,19 +259,21 @@ void draw(int n)
 	m = mobius_mul(off,m);
 	draw_fork (m, level);
 
-	off = disk_center (z);
 
-	rot = mobius_rotate (-0.5*M_PI);
 #if 0
+	off = disk_center (z);
+	rot = mobius_rotate (-0.5*M_PI);
 	rot = mobius_rotate ((-0.5-0.166666)*M_PI);
 	rot = mobius_rotate ((-0.5-0.3333333)*M_PI);
 	// WTF? why is this one degenerate?
 	// why is the next one doubled up?
 	rot = mobius_rotate ((-0.5-0.5)*M_PI);
 	rot = mobius_rotate ((-0.5-0.0833333)*M_PI);
+// show_mobius(off);
+	off = mobius_mul (rot, off);
+// show_mobius(off);
 #endif
-	// off = mobius_mul (rot, off);
-	sim_splat(off, n);
+	similar(off, n);
 }
 
 /* ==================================================== */
