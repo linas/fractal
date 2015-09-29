@@ -79,6 +79,7 @@ mobius_t go_to_fork_tip(double sign)
 	return m;
 }
 
+// See similar.c for how to draw the cusps
 void draw_fork(mobius_t m, int level)
 {
 	if (level == 0) return;
@@ -116,7 +117,11 @@ void draw(int n)
 	mobius_t m;
 	int level=3;
 
-	cplex z = cplex_set (-0.268, 0.0);
+	// Originally drawn with -0.268 -- this gets the vertex centers
+	// correctly located.
+	double cent = sqrt(3.0) - 2.0;
+	cplex z = cplex_set (cent, 0.0);
+	// z = cplex_set (-0.25, 0.0);
 	// cplex z = cplex_set (0.0, 0.0);
 	mobius_t off = disk_center (z);
 

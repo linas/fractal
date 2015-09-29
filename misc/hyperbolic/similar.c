@@ -37,9 +37,12 @@ void draw_splat (mobius_t m)
 
 	// draw a splat
 	printf ("0.0600000 slw\n");
+	printf ("0.0100000 slw\n");
 	za = cplex_set (-0.23, 0.0);
+	za = cplex_set (-0.1, 0.0);
 	za = mobius_xform (m,za);
 	zb = cplex_set (-0.27, 0.0);
+	zb = cplex_set (0.1, 0.0);
 	zb = mobius_xform (m,zb);
 	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
 	// printf ("0.0100000 slw\n");
@@ -99,7 +102,7 @@ void draw_fork(mobius_t m, int level)
 	zr = cplex_set (0.25, -0.25*sqrt(3.0));
 	draw_arc (m, zz, zr);
 
-	// Draw cusps
+	// Draw cusps in orange, dashed linestyle.
 	eps_set_color(240,130,0);
 	printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
 
@@ -107,6 +110,7 @@ void draw_fork(mobius_t m, int level)
 	zc = cplex_set (1.0, 0.0);
 	draw_arc (m, zz, zc);
 
+	// Back up by one iteration...
 	zz = cplex_set (-0.5, 0.0);
 	zc = cplex_set (-1.0, 0.0);
 	draw_arc (m, zz, zc);
@@ -141,7 +145,7 @@ void sim_splat(mobius_t off, int n)
 	// Move in the L direction.
 	mobius_t sim = ell;
 	sim = mobius_mul (sim, off);
-	sim = mobius_mul (sim, ill);
+	// sim = mobius_mul (sim, ill);
 
 eps_set_color_red();
 	draw_splat(sim);
@@ -150,7 +154,7 @@ eps_set_color_red();
 	// Move in the Linv direction
 	sim = ill;
 	sim = mobius_mul (sim, off);
-	sim = mobius_mul (sim, ell);
+	// sim = mobius_mul (sim, ell);
 
 eps_set_color_green();
 	draw_splat(sim);
@@ -159,7 +163,7 @@ eps_set_color_green();
 	// Move in the R direction.
 	sim = are;
 	sim = mobius_mul (sim, off);
-	sim = mobius_mul (sim, ari);
+	// sim = mobius_mul (sim, ari);
 
 eps_set_color_blue();
 	draw_splat(sim);
@@ -168,7 +172,7 @@ eps_set_color_blue();
 	// Move in the Rinv direction.
 	sim = ari;
 	sim = mobius_mul (sim, off);
-	sim = mobius_mul (sim, are);
+	// sim = mobius_mul (sim, are);
 
 eps_set_color(0x0, 0xff, 0xff);
 	draw_splat(sim);
@@ -181,7 +185,11 @@ void draw(int n)
 	mobius_t m;
 	int level = n;
 
-	cplex z = cplex_set (-0.268, 0.0);
+	// Originally drawn with -0.268 -- this gets the vertex centers
+	// correctly located.
+	double cent = sqrt(3.0) - 2.0;
+	cplex z = cplex_set (cent, 0.0);
+	// z = cplex_set (-0.25, 0.0);
 	// cplex z = cplex_set (0.0, 0.0);
 	mobius_t off = disk_center (z);
 
