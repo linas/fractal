@@ -253,6 +253,18 @@ void draw(int n)
 	m = mobius_mul(off,m);
 	draw_fork (m, level);
 
+	off = disk_center (z);
+
+	rot = mobius_rotate (-0.5*M_PI);
+#if 0
+	rot = mobius_rotate ((-0.5-0.166666)*M_PI);
+	rot = mobius_rotate ((-0.5-0.3333333)*M_PI);
+	// WTF? why is this one degenerate?
+	// why is the next one doubled up?
+	rot = mobius_rotate ((-0.5-0.5)*M_PI);
+	rot = mobius_rotate ((-0.5-0.0833333)*M_PI);
+#endif
+	// off = mobius_mul (rot, off);
 	sim_splat(off, n);
 }
 
