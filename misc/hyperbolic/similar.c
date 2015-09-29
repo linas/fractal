@@ -130,8 +130,11 @@ void draw_fork(mobius_t m, int level)
 /* Draw splats at each similarity point */
 void sim_splat(mobius_t off, mobius_t sim)
 {
-	// draw_splat(sim);
-	draw_splat(off);
+	draw_splat(sim);
+	// draw_splat(off);
+	cplex zz = cplex_set (0.0, 0.0);
+	cplex za = mobius_xform (sim, zz);
+	draw_arc (off, zz, za);
 }
 
 /* Draw similarity point */

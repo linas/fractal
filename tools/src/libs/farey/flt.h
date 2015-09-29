@@ -37,6 +37,26 @@ static inline mobius_t mobius_ident(void)
 	return mobius_set (1.0L,0.0L,0.0L,1.0L);
 }
 
+/* Compute teh determinant */
+static inline cplex mobius_determinant(mobius_t m)
+{
+	return cplex_sub (cplex_mul (m.a, m.d), cplex_mul(m.b, m.c));
+}
+
+/* Return the inverse */
+static inline mobius_t mobius_invert(mobius_t m)
+{
+	cplex det = mobius_determinant(m);
+	det = cplex_recip(det);
+
+	mobius_t n;
+	n.a = cplex_mul(m.d, det);
+	n.d = cplex_mul(m.a, det);
+	n.b = cplex_mul(cplex_neg(m.b), det);
+	n.c = cplex_mul(cplex_neg(m.c), det);
+	return n;
+}
+
 /* Return a transformation that simply rotates by theta radians */
 static inline mobius_t mobius_rotate (long double theta)
 {
