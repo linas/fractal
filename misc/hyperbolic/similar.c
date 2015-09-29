@@ -115,11 +115,63 @@ void draw_fork(mobius_t m, int level)
 	draw_fork (tip, level);
 }
 
+/* Draw splats at each similarity point */
+void sim_splat(mobius_t off, int n)
+{
+	n--;
+	if (0 == n) return;
 
+	mobius_t ell = mobius_set (1, 0, 1, 1);
+	mobius_t ill = mobius_set (1, 0, -1, 1);
+	mobius_t are = mobius_set (1, 1, 0, 1);
+	mobius_t ari = mobius_set (1, -1, 0, 1);
+	ell = to_disk (ell);
+	ill = to_disk (ill);
+	are = to_disk (are);
+	ari = to_disk (ari);
+
+	// Move in the L direction.
+	mobius_t sim = ell;
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, ill);
+
+eps_set_color_red();
+	draw_splat(sim);
+	sim_splat(sim, n);
+
+	// Move in the Linv direction
+	sim = ill;
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, ell);
+
+eps_set_color_green();
+	draw_splat(sim);
+	sim_splat(sim, n);
+
+	// Move in the R direction.
+	sim = are;
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, ari);
+
+eps_set_color_blue();
+	draw_splat(sim);
+	sim_splat(sim, n);
+
+	// Move in the Rinv direction.
+	sim = ari;
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, are);
+
+eps_set_color(0x0, 0xff, 0xff);
+	draw_splat(sim);
+	sim_splat(sim, n);
+}
+
+/* Draw the entire tree */
 void draw(int n)
 {
 	mobius_t m;
-	int level = 5;
+	int level = n;
 
 	cplex z = cplex_set (-0.268, 0.0);
 	// cplex z = cplex_set (0.0, 0.0);
@@ -141,8 +193,8 @@ void draw(int n)
 	off = mobius_mul (xfm, off);
 #endif
 
-	draw_tristar(off);
 	draw_splat(off);
+	draw_tristar(off);
 
 // eps_set_color_green();
 	m = go_to_fork_tip(+1.0);
@@ -158,6 +210,8 @@ void draw(int n)
 	m = go_to_fork_tip(-3.0);
 	m = mobius_mul(off,m);
 	draw_fork (m, level);
+
+	sim_splat(off, n);
 }
 
 /* ==================================================== */
