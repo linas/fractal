@@ -64,6 +64,8 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 #ifdef POINCARE_DISK
 	// Solve for small circle that passes through z0 and z1 whose
 	// center lies on the unit circle.
+// XXX except that this is not even the right geodesic
+// need to have the center be reflected away!!! Argh.
 	double norm = z0.re*z0.re - z1.re*z1.re + z0.im*z0.im - z1.im*z1.im;
 	double x = 2.0 * (z0.re - z1.re) / norm;
 	double y = 2.0 * (z0.im - z1.im) / norm;
