@@ -83,6 +83,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 #define HOMEMADE_ARC
 #ifdef HOMEMADE_ARC
 	int npts = 20*fabs(t1-t0);
+	if (0 == npts) npts = 1;
 	double delta = (t1-t0)/npts;
 
 	double dc = cos(delta);

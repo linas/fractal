@@ -76,7 +76,8 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 
 #define HOMEMADE_ARC
 #ifdef HOMEMADE_ARC
-	int npts = 20*fabs(xcenter * (t1-t0));
+	int npts = 20*fabs(t1-t0);
+	if (0 == npts) npts = 1;
 	double delta = (t1-t0)/npts;
 
 	double dc = cos(delta);
@@ -126,9 +127,7 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 	mobius_t mr = mobius_mul (m,are);
 
 	cplex zb = mobius_xform (are, tip);
-eps_set_color_red();
 	draw_geo (m, tip, zb);
-eps_set_color_black();
 
 	recursive_draw_binary_tree (depth, lr, draw_fund, mr);
 
@@ -138,9 +137,7 @@ eps_set_color_black();
 	else ell = mobius_set (1,0,-1,1);
 
 	zb = mobius_xform (ell, tip);
-eps_set_color_green();
 	draw_geo (m, tip, zb);
-eps_set_color_black();
 
 	mobius_t ml = mobius_mul (m,ell);
 	recursive_draw_binary_tree (depth, lr, draw_fund, ml);
@@ -213,7 +210,7 @@ eps_set_color(0,70,220);
 // eps_set_color_green();
 	recursive_draw_binary_tree (n, 1, 0, xfm);
 // eps_set_color_red();
-//	recursive_draw_binary_tree (n, 0, 0, xfm);
+	recursive_draw_binary_tree (n, 0, 0, xfm);
 
 	// Draw the center-line
 	cplex ltip = cplex_set(-0.5,0.5*sqrt(3.0));
