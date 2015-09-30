@@ -29,6 +29,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	cplex z0 = mobius_xform (m,a);
 	cplex z1 = mobius_xform (m,b);
 
+#if 0
 	/* vertical clip */
 	if (100.0 < z0.im) {
 		z0.im = 100;
@@ -38,6 +39,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 		z1.im = 100;
 		z1.re = z0.re;
 	}
+#endif
 
 	/* if the points are above one-another... */
 	double dx = z1.re - z0.re;
@@ -50,8 +52,8 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	/* else draw geodesic */
 	cplex zm = cplex_add (z0,z1);
 	zm = cplex_scale (0.5, zm);
-	double slope = (z1.im-z0.im)/(z1.re-z0.re);
-	double xcenter = slope*zm.im+zm.re;
+	double slope = (z1.im - z0.im) / (z1.re - z0.re);
+	double xcenter = slope * zm.im + zm.re;
 	
 	double t0 = atan2 (z0.im, z0.re - xcenter);
 	double t1 = atan2 (z1.im, z1.re - xcenter);
@@ -74,7 +76,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 
 #define HOMEMADE_ARC
 #ifdef HOMEMADE_ARC
-	int npts = 20*fabs(t1-t0);
+	int npts = 20*fabs(xcenter * (t1-t0));
 	double delta = (t1-t0)/npts;
 
 	double dc = cos(delta);
@@ -104,7 +106,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 
 /**
  * @depth: recursion depth
- * @lr: 0 or 1, indicating that the left or rightt tree is being drawn
+ * @lr: 0 or 1, indicating that the left or right tree is being drawn
  * @draw_fund: 0 or 1, do draw the fundamental domain lines, or not
  */
 void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
@@ -124,7 +126,9 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 	mobius_t mr = mobius_mul (m,are);
 
 	cplex zb = mobius_xform (are, tip);
+eps_set_color_red();
 	draw_geo (m, tip, zb);
+eps_set_color_black();
 
 	recursive_draw_binary_tree (depth, lr, draw_fund, mr);
 
@@ -134,7 +138,9 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 	else ell = mobius_set (1,0,-1,1);
 
 	zb = mobius_xform (ell, tip);
+eps_set_color_green();
 	draw_geo (m, tip, zb);
+eps_set_color_black();
 
 	mobius_t ml = mobius_mul (m,ell);
 	recursive_draw_binary_tree (depth, lr, draw_fund, ml);
@@ -205,25 +211,14 @@ void draw (int n)
 eps_set_color_blue();
 eps_set_color(0,70,220);
 // eps_set_color_green();
-	recursive_draw_binary_tree (n,1, 1, xfm);
+	recursive_draw_binary_tree (n, 1, 0, xfm);
 // eps_set_color_red();
-	recursive_draw_binary_tree (n,0, 1, xfm);
+//	recursive_draw_binary_tree (n, 0, 0, xfm);
 
+	// Draw the center-line
 	cplex ltip = cplex_set(-0.5,0.5*sqrt(3.0));
 	cplex rtip = cplex_set(0.5,0.5*sqrt(3.0));
 	draw_geo (xfm, ltip, rtip);
-
-
-	// draw a splat
-	printf ("0.0600000 slw\n");
-eps_set_color_red();
-	printf ("n %f %f m %f %f l s\n", -0.04, 1.0, 0.04, 1.0);
-#if 0
-eps_set_color_green();
-	printf ("n %f %f m %f %f l s\n", 0.96, 0.0, 1.04, 0.0);
-	printf ("0.010000 slw\n");
-#endif
-
 }
 
 /* ==================================================== */

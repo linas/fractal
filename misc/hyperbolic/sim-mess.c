@@ -256,9 +256,9 @@ void draw(int n)
 	// cplex z = cplex_set (0.0, 0.0);
 	mobius_t off = disk_center (z);
 
-	mobius_t rot = mobius_rotate (-0.5*M_PI);
+	// mobius_t rot = mobius_rotate (-0.5*M_PI);
 	// rot = mobius_rotate ((-0.5-0.166666)*M_PI);
-	off = mobius_mul (rot, off);
+	// off = mobius_mul (rot, off);
 
 	draw_splat(off);
 	draw_tristar(off);
