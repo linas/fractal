@@ -61,21 +61,30 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 #endif
 
 z0.re = 0.31;
-z0.im = 0.9;
+z0.im = 0.91;
 z1.re = -0.1;
 z1.im = 0.9;
+
+z0.re = -0.91;
+z0.im = 0.31;
+z1.re = -0.9;
+z1.im = -0.1;
 #define POINCARE_DISK
 #ifdef POINCARE_DISK
 	double norm = z0.re*z0.re - z1.re*z1.re + z0.im*z0.im - z1.im*z1.im;
 	double x = 2.0 * (z0.re - z1.re) / norm;
 	double y = 2.0 * (z0.im - z1.im) / norm;
-	double th = atan2(y, x);
-	double ph = asin (1.0 / sqrt(x*x+y*y));
-	th = (0.5*M_PI - th) - ph;
-	double xcenter = cos(th);
-	double ycenter = sin(th);
+	double ph = atan2(x, y);
+	double thaph = asin (1.0 / sqrt(x*x+y*y));
+	// double wtf = acos (1.0 / sqrt(x*x+y*y));
+	// if (wtf < 0.0) thaph = M_PI-thaph;
+	double sum = thaph-ph;
+	double xcenter = cos(sum);
+	double ycenter = sin(sum);
 #endif
 printf("duu----\nduuude z0= %Lf %Lf z1=%Lf %Lf\n", z0.re, z0.im, z1.re, z1.im);
+printf("duude x y %f %f\n", x, y); 
+printf("duude th+ph ph %f %f %f\n", thaph, ph, sum);
 printf("duuude center %f %f %f\n", xcenter, ycenter, xcenter*xcenter+ycenter*ycenter);
 
 double r0 = ((z0.re-xcenter)*(z0.re-xcenter)) + ((z0.im-ycenter)*(z0.im-ycenter));
