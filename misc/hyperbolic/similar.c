@@ -31,7 +31,7 @@ void eps_setup_disk (void)
 /* ==================================================== */
 
 /* draw a small rectangle */
-void draw_splat (mobius_t m)
+void draw_splat (mobius_t m, cplex spot)
 {
 	cplex za,zb;
 
@@ -40,18 +40,41 @@ void draw_splat (mobius_t m)
 	// printf ("0.0100000 slw\n");
 	// za = cplex_set (-0.23, 0.0);
 	za = cplex_set (-0.02, 0.0);
+	za = cplex_add(spot, za);
 	za = mobius_xform (m,za);
 	// zb = cplex_set (-0.27, 0.0);
 	zb = cplex_set (0.02, 0.0);
+	zb = cplex_add(spot, zb);
 	zb = mobius_xform (m,zb);
 	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
 	// printf ("0.0100000 slw\n");
 	printf ("0.010000 slw\n");
 }
 
+// Draw cusps in orange, dashed linestyle.
+void draw_cusp(mobius_t m)
+{
+	cplex za,zb;
+	eps_set_color(240,130,0);
+	printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
+
+	za = cplex_set (0.0, 0.0);
+	zb = cplex_set (1.0, 0.0);
+	draw_arc (m, za, zb);
+
+	zb = cplex_set (-0.5, 0.5*sqrt(3.0));
+	draw_arc (m, za, zb);
+
+	zb = cplex_set (-0.5, -0.5*sqrt(3.0));
+	draw_arc (m, za, zb);
+
+	printf ("[] 0 setdash\n");
+}
+
 /* draw three-pointed stick figure */
 void draw_tristar (mobius_t m)
 {
+	draw_cusp(m);
 	cplex za,zb;
 
 	za = cplex_set (0.0, 0.0);
@@ -92,6 +115,10 @@ void draw_fork(mobius_t m, int level)
 	if (level == 0) return;
 	level--;
 
+	// Draw cusps in orange, dashed linestyle.
+	draw_cusp(m);
+	eps_set_color_black();
+
 	cplex zz, zb;
 
 	zz = cplex_set (0.0, 0.0);
@@ -101,26 +128,6 @@ void draw_fork(mobius_t m, int level)
 
 	zb = cplex_set (0.25, -0.25*sqrt(3.0));
 	draw_arc (m, zz, zb);
-
-	// Draw cusps in orange, dashed linestyle.
-	eps_set_color(240,130,0);
-	printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
-
-	// Draw cusps in orange, dashed linestyle.
-	eps_set_color(240,130,0);
-	printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
-
-	zb = cplex_set (1.0, 0.0);
-	draw_arc (m, zz, zb);
-
-	zb = cplex_set (-0.5, 0.5*sqrt(3.0));
-	draw_arc (m, zz, zb);
-
-	zb = cplex_set (-0.5, -0.5*sqrt(3.0));
-	draw_arc (m, zz, zb);
-
-	eps_set_color_black();
-	printf ("[] 0 setdash\n");
 
 	// Now recurse.
 	mobius_t tip = go_to_fork_tip(+1.0);
@@ -135,7 +142,8 @@ void draw_fork(mobius_t m, int level)
 /* Draw splats at each similarity point */
 void sim_splat(mobius_t off, mobius_t sim)
 {
-	draw_splat(sim);
+	cplex center = cplex_set (0.0, 0.0);
+	draw_splat(sim, center);
 eps_set_color(0xcc, 0xff, 0x0);
 	// draw_splat(off);
 #if 0
@@ -174,7 +182,7 @@ void similar(mobius_t off, int n)
 	// Move in the L direction.
 	mobius_t sim;
 	sim = mobius_mul (ell, off);
-	sim = mobius_mul (sim, ill);
+//	sim = mobius_mul (sim, ill);
 
 eps_set_color_red();
 	sim_splat(off, sim);
@@ -182,7 +190,7 @@ eps_set_color_red();
 
 	// Move in the Linv direction
 	sim = mobius_mul (ill, off);
-	sim = mobius_mul (sim, ell);
+//	sim = mobius_mul (sim, ell);
 
 eps_set_color_green();
 	sim_splat(off, sim);
@@ -190,7 +198,7 @@ eps_set_color_green();
 
 	// Move in the R direction.
 	sim = mobius_mul (are, off);
-	sim = mobius_mul (sim, ari);
+//	sim = mobius_mul (sim, ari);
 
 eps_set_color_blue();
 	sim_splat(off, sim);
@@ -198,12 +206,13 @@ eps_set_color_blue();
 
 	// Move in the Rinv direction.
 	sim = mobius_mul (ari, off);
-	sim = mobius_mul (sim, are);
+//	sim = mobius_mul (sim, are);
 
 eps_set_color(0x0, 0xff, 0xff);
 	sim_splat(off, sim);
 	similar(sim, n);
 
+#if 0
 	// Do the V versions
 eps_set_color(0xcc, 0x0, 0xff);
 	sim = mobius_mul (vee, ell);
@@ -229,6 +238,7 @@ eps_set_color(0xcc, 0x0, 0xff);
 	sim = mobius_mul (sim, are);
 	sim = mobius_mul (sim, vin);
 	sim_splat(off, sim);
+#endif
 }
 
 /* Draw the entire tree */
@@ -261,7 +271,8 @@ void draw(int n)
 	off = mobius_mul (xfm, off);
 #endif
 
-	draw_splat(off);
+	cplex center = cplex_set (0.0, 0.0);
+	draw_splat(off, center);
 	draw_tristar(off);
 
 // eps_set_color_green();
