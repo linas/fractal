@@ -31,7 +31,7 @@ void eps_setup_disk (void)
 /* ==================================================== */
 
 /* draw a small rectangle */
-void draw_splat (mobius_t m, cplex spot)
+void draw_splat (mobius_t m)
 {
 	cplex za,zb;
 
@@ -40,11 +40,9 @@ void draw_splat (mobius_t m, cplex spot)
 	// printf ("0.0100000 slw\n");
 	// za = cplex_set (-0.23, 0.0);
 	za = cplex_set (-0.02, 0.0);
-	za = cplex_add(spot, za);
 	za = mobius_xform (m,za);
 	// zb = cplex_set (-0.27, 0.0);
 	zb = cplex_set (0.02, 0.0);
-	zb = cplex_add(spot, zb);
 	zb = mobius_xform (m,zb);
 	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
 	// printf ("0.0100000 slw\n");
@@ -75,6 +73,8 @@ void draw_cusp(mobius_t m)
 void draw_tristar (mobius_t m)
 {
 	draw_cusp(m);
+	eps_set_color_black();
+
 	cplex za,zb;
 
 	za = cplex_set (0.0, 0.0);
@@ -142,8 +142,9 @@ void draw_fork(mobius_t m, int level)
 /* Draw splats at each similarity point */
 void sim_splat(mobius_t off, mobius_t sim)
 {
-	cplex center = cplex_set (0.0, 0.0);
-	draw_splat(sim, center);
+	double th = 2.0 * M_PI / 12.0;
+	cplex center = cplex_set (0.25*cos(th), 0.25*sin(th));
+	draw_splat(sim);
 eps_set_color(0xcc, 0xff, 0x0);
 	// draw_splat(off);
 #if 0
@@ -252,27 +253,14 @@ void draw(int n)
 	double cent = sqrt(3.0) - 2.0;
 	cplex z = cplex_set (cent, 0.0);
 	// z = cplex_set (-0.25, 0.0);
-	// z = cplex_set (0.0, 0.0);
+	// cplex z = cplex_set (0.0, 0.0);
 	mobius_t off = disk_center (z);
 
 	mobius_t rot = mobius_rotate (-0.5*M_PI);
 	// rot = mobius_rotate ((-0.5-0.166666)*M_PI);
 	off = mobius_mul (rot, off);
 
-// #define XLATE
-#ifdef XLATE
-	int a,b,c,d;
-	a=1;
-	b=n;
-	c=0;
-	d=1;
-	mobius_t xfm = mobius_set (a,b,c,d);
-	xfm = to_disk (xfm);
-	off = mobius_mul (xfm, off);
-#endif
-
-	cplex center = cplex_set (0.0, 0.0);
-	draw_splat(off, center);
+	draw_splat(off);
 	draw_tristar(off);
 
 // eps_set_color_green();
