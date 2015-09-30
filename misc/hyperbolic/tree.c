@@ -79,13 +79,34 @@ mobius_t go_to_fork_tip(double sign)
 	return m;
 }
 
-// See similar.c for how to draw the cusps
-void draw_fork(mobius_t m, int level)
+void draw_fork(mobius_t m, int level, int r, int g, int b)
 {
 	if (level == 0) return;
 	level--;
 
 	cplex za, zb;
+
+	int drawcusp = 1;
+	if (drawcusp)
+	{
+		// Draw cusps in orange, dashed linestyle.
+		eps_set_color(240,130,0);
+		printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
+
+		// This one isn't needed except for the tri-star...
+		za = cplex_set (0.0, 0.0);
+		zb = cplex_set (1.0, 0.0);
+		draw_arc (m, za, zb);
+
+		// Back up by one iteration...
+		za = cplex_set (-0.5, 0.0);
+		zb = cplex_set (-1.0, 0.0);
+		draw_arc (m, za, zb);
+		eps_set_color_black();
+		printf ("[] 0 setdash\n");
+
+		eps_set_color(r,g,b);
+	}
 
 	za = cplex_set (0.0, 0.0);
 
@@ -104,11 +125,11 @@ void draw_fork(mobius_t m, int level)
 
 	mobius_t tip = go_to_fork_tip(+1.0);
 	tip = mobius_mul (m, tip);
-	draw_fork (tip, level);
+	draw_fork (tip, level, r, g, b);
 
 	tip = go_to_fork_tip(-1.0);
 	tip = mobius_mul (m, tip);
-	draw_fork (tip, level);
+	draw_fork (tip, level, r, g, b);
 }
 
 
@@ -116,13 +137,14 @@ void draw(int n)
 {
 	mobius_t m;
 	int level=3;
+// level=10;
 
 	// Originally drawn with -0.268 -- this gets the vertex centers
 	// correctly located.
 	double cent = sqrt(3.0) - 2.0;
 	cplex z = cplex_set (cent, 0.0);
-	// z = cplex_set (-0.25, 0.0);
-	// cplex z = cplex_set (0.0, 0.0);
+	// z = cplex_set (-0.25, 0.0); xxxxxx
+	z = cplex_set (0.0, 0.0);
 	mobius_t off = disk_center (z);
 
 	mobius_t rot = mobius_rotate (-0.5*M_PI);
@@ -141,7 +163,7 @@ void draw(int n)
 	off = mobius_mul (xfm, off);
 #endif
 
-#define HALF_PLANE
+// #define HALF_PLANE
 #ifdef HALF_PLANE
 	xfm = to_half_plane_xform();
 	off = mobius_mul (xfm, off);
@@ -152,17 +174,17 @@ void draw(int n)
 eps_set_color_green();
 	m = go_to_fork_tip(+1.0);
 	m = mobius_mul(off,m);
-	draw_fork (m, level);
+	draw_fork (m, level, 0,255,0);
 
 eps_set_color_red();
 	m = go_to_fork_tip(-1.0);
 	m = mobius_mul(off,m);
-	draw_fork (m, level);
+	draw_fork (m, level, 255,0,0);
 
 eps_set_color_blue();
 	m = go_to_fork_tip(-3.0);
 	m = mobius_mul(off,m);
-	draw_fork (m, level);
+	draw_fork (m, level, 0,0,255);
 }
 
 /* ==================================================== */
