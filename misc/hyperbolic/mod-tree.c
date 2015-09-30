@@ -56,13 +56,21 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	}
 	
 	/* else draw geodesic */
+#define HALF_PLANE
+#ifdef HALF_PLANE
+	/* This geodesic calculation is valid ONLY for the UPPER HALF
+	 * PLANE! It is computing an arc-center located on the real axis!
+	 * Its completely borked for pioncare dixk!!
+	 */
 	cplex zm = cplex_add (z0,z1);
 	zm = cplex_scale (0.5, zm);
 	double slope = (z1.im-z0.im)/(z1.re-z0.re);
 	double xcenter = slope*zm.im+zm.re;
+	double ycenter = 0.0;
+#endif
 	
-	double t0 = atan2 (z0.im, z0.re - xcenter);
-	double t1 = atan2 (z1.im, z1.re - xcenter);
+	double t0 = atan2 (z0.im - ycenter, z0.re - xcenter);
+	double t1 = atan2 (z1.im - ycenter, z1.re - xcenter);
 
 #ifdef POSTSCRIPT_ARC
 	double radius = sqrt((z0.re - xcenter)*(z0.re - xcenter)+z0.im*z0.im);
@@ -90,7 +98,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	double ds = sin(delta);
 
 	double xa = z0.re-xcenter;
-	double ya = z0.im;
+	double ya = z0.im-ycenter;
 
 	int i;
 	double len = 0;
@@ -102,7 +110,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 			printf ("[0.02 0.01 0.005 0.01] %f setdash\n", len);
 			len += sqrt ((yb-ya)*(yb-ya) + (xb-xa)*(xb-xa));
 		}
-		eps_draw_lineseg (xa+xcenter, ya, xb+xcenter,yb);
+		eps_draw_lineseg (xa+xcenter, ya+ycenter, xb+xcenter,yb+ycenter);
 		xa = xb;
 		ya = yb;
 

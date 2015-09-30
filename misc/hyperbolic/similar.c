@@ -50,13 +50,20 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	}
 	
 	/* else draw geodesic */
+#ifdef HALF_PLANE
 	cplex zm = cplex_add (z0,z1);
 	zm = cplex_scale (0.5, zm);
 	double slope = (z1.im - z0.im) / (z1.re - z0.re);
 	double xcenter = slope * zm.im + zm.re;
+	double ycenter = 0.0;
+#endif
+
+#define POINCARE_DISK
+#ifdef POINCARE_DISK
+#endif
 	
-	double t0 = atan2 (z0.im, z0.re - xcenter);
-	double t1 = atan2 (z1.im, z1.re - xcenter);
+	double t0 = atan2 (z0.im - ycenter, z0.re - xcenter);
+	double t1 = atan2 (z1.im - ycenter, z1.re - xcenter);
 
 #ifdef POSTSCRIPT_ARC
 	double radius = sqrt((z0.re - xcenter)*(z0.re - xcenter)+z0.im*z0.im);
@@ -84,7 +91,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	double ds = sin(delta);
 
 	double xa = z0.re-xcenter;
-	double ya = z0.im;
+	double ya = z0.im-ycenter;
 
 	int i;
 	double len = 0;
@@ -96,7 +103,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 			printf ("[0.02 0.01 0.005 0.01] %f setdash\n", len);
 			len += sqrt ((yb-ya)*(yb-ya) + (xb-xa)*(xb-xa));
 		}
-		eps_draw_lineseg (xa+xcenter, ya, xb+xcenter,yb);
+		eps_draw_lineseg (xa+xcenter, ya+ycenter, xb+xcenter,yb+ycenter);
 		xa = xb;
 		ya = yb;
 	}
@@ -156,12 +163,14 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 		top = cplex_set(0,0);
 		draw_geo (m, top, tap);
 
+/*
 		// the cusps on the left side ...
 		top = cplex_set(0,1e8);
 		cplex tep;
 		if (lr) tep = cplex_set(-0.5,0.5*sqrt(3.0));
 		else tep = cplex_set(0.5,0.5*sqrt(3.0));
 		draw_geo (m, top, tep);
+*/
 
 		eps_set_color(0,70,220);
 		printf ("[] 0 setdash\n");
@@ -208,9 +217,9 @@ void draw (int n)
 eps_set_color_blue();
 eps_set_color(0,70,220);
 // eps_set_color_green();
-	recursive_draw_binary_tree (n, 1, 0, xfm);
+	recursive_draw_binary_tree (n, 1, 1, xfm);
 // eps_set_color_red();
-	recursive_draw_binary_tree (n, 0, 0, xfm);
+	recursive_draw_binary_tree (n, 0, 1, xfm);
 
 	// Draw the center-line
 	cplex ltip = cplex_set(-0.5,0.5*sqrt(3.0));
