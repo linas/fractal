@@ -60,59 +60,38 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	double ycenter = 0.0;
 #endif
 
-z0.re = 0.31;
-z0.im = -0.91;
-z1.re = -0.1;
-z1.im = -0.9;
-
-/*
-z0.re = -0.91;
-z0.im = 0.31;
-z1.re = -0.9;
-z1.im = -0.1;
-*/
-
-double fu=0;
-/*
-for (fu=0.0; fu<6.4; fu+=0.1) {
-printf("duuude fu=%f\n", fu);
-
-z0.re = 0.91*cos(fu);
-z0.im = 0.9*sin(fu);
-z1.re = 0.8*cos(fu+0.05);
-z1.im = 0.7*sin(fu+0.08);
-*/
-
 #define POINCARE_DISK
 #ifdef POINCARE_DISK
+	// Solve for small circle that passes through z0 and z1 whose
+	// center lies on the unit circle.
 	double norm = z0.re*z0.re - z1.re*z1.re + z0.im*z0.im - z1.im*z1.im;
 	double x = 2.0 * (z0.re - z1.re) / norm;
 	double y = 2.0 * (z0.im - z1.im) / norm;
+	// solution is in the form
+	// x * centerx + y * centery = 1.0
+	// general form is centerx=cos(theta) centery = sin(theta)
+	// x * sinc(theta) + y * cos(theta) = c sin(theta+phi)
+	// phi = atan2(x,y)   and c = sqrt(x*x + y*y)
 	double ph = atan2(x, y);
 	double thaph = asin (1.0 / sqrt(x*x+y*y));
-	double sum = thaph-ph;
-	double xcenter = cos(sum);
-	double ycenter = sin(sum);
-#endif
-double rx = (z0.re-xcenter)*(z0.re-xcenter);
-double ry = (z0.im-ycenter)*(z0.im-ycenter);
+	double th = thaph-ph;
+	double xcenter = cos(th);
+	double ycenter = sin(th);
+
+	// There are two such solutions, take the smaller one!
+	double rx = (z0.re-xcenter)*(z0.re-xcenter);
+	double ry = (z0.im-ycenter)*(z0.im-ycenter);
 	if (1.0 < rx) { xcenter=-xcenter; }
 	if (1.0 < ry) { ycenter=-ycenter; }
-double r0 = ((z0.re-xcenter)*(z0.re-xcenter)) + ((z0.im-ycenter)*(z0.im-ycenter));
-double r1 = ((z1.re-xcenter)*(z1.re-xcenter)) + ((z1.im-ycenter)*(z1.im-ycenter));
-// if (0.001 < fabs(r0-r1)) {
-printf("duu----fu=%f\nduuude z0= %Lf %Lf z1=%Lf %Lf\n", fu, z0.re, z0.im, z1.re, z1.im);
-printf("duude x y %f %f\n", x, y); 
-printf("duude th+ph ph %f %f %f\n", thaph, ph, sum);
-printf("duuude center %f %f %f\n", xcenter, ycenter, xcenter*xcenter+ycenter*ycenter);
-
-printf("duuude dist %f %f\n", r0, r1);
+#endif
 	double t0 = atan2 (z0.im - ycenter, z0.re - xcenter);
 	double t1 = atan2 (z1.im - ycenter, z1.re - xcenter);
-printf("duude angles %f %f\n", t0, t1);
-// }
-// }
-exit(0);
+
+	if (M_PI < fabs(t1-t0))
+	{
+		if (t0 < 0.0) t0 += 2.0*M_PI;
+		if (t1 < 0.0) t1 += 2.0*M_PI;
+	}
 
 #ifdef POSTSCRIPT_ARC
 	double radius = sqrt((z0.re - xcenter)*(z0.re - xcenter)+z0.im*z0.im);
@@ -134,7 +113,6 @@ exit(0);
 #ifdef HOMEMADE_ARC
 	int npts = 20*fabs(t1-t0);
 	if (0 == npts) npts = 1;
-npts = 1;
 	double delta = (t1-t0)/ ((double) npts);
 
 	double dc = cos(delta);
@@ -143,7 +121,6 @@ npts = 1;
 	double xa = z0.re-xcenter;
 	double ya = z0.im-ycenter;
 
-printf("duude deltea=%f %d\n", delta, npts);
 	int i;
 	double len = 0.0;
 	for (i=0; i<npts; i++)
@@ -155,10 +132,6 @@ printf("duude deltea=%f %d\n", delta, npts);
 			len += sqrt ((yb-ya)*(yb-ya) + (xb-xa)*(xb-xa));
 		}
 		eps_draw_lineseg (xa+xcenter, ya+ycenter, xb+xcenter,yb+ycenter);
-if (npts-1==i) {
-printf("duude f z1=%Lf %Lf\n", z1.re, z1.im);
-printf("duude f xb=%f %f\n", xb+xcenter, yb+ycenter);
-}
 		xa = xb;
 		ya = yb;
 	}
