@@ -30,10 +30,37 @@ void eps_setup_plane (void)
 }
 
 /* ==================================================== */
+int drawcusp = 1;
+
+/* draw fundamental domains */
+void draw_cusp (mobius_t m)
+{
+	cplex za,zb;
+
+	if (!drawcusp) return;
+	// Draw cusps in orange, dashed linestyle.
+	eps_set_color(240,130,0);
+	printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
+
+	za = cplex_set (0.0, 0.0);
+	zb = cplex_set (1.0, 0.0);
+	draw_arc (m, za, zb);
+
+	zb = cplex_set (-0.5, 0.5*sqrt(3.0));
+	draw_arc (m, za, zb);
+
+	zb = cplex_set (-0.5, -0.5*sqrt(3.0));
+	draw_arc (m, za, zb);
+
+	printf ("[] 0 setdash\n");
+}
 
 /* draw three-pointed stick figure */
 void draw_tristar (mobius_t m)
 {
+	draw_cusp(m);
+	eps_set_color_black();
+
 	cplex za,zb;
 
 	za = cplex_set (0.0, 0.0);
@@ -86,25 +113,9 @@ void draw_fork(mobius_t m, int level, int r, int g, int b)
 
 	cplex za, zb;
 
-	int drawcusp = 1;
 	if (drawcusp)
 	{
-		// Draw cusps in orange, dashed linestyle.
-		eps_set_color(240,130,0);
-		printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
-
-		// This one isn't needed except for the tri-star...
-		za = cplex_set (0.0, 0.0);
-		zb = cplex_set (1.0, 0.0);
-		draw_arc (m, za, zb);
-
-		// Back up by one iteration...
-		za = cplex_set (-0.5, 0.0);
-		zb = cplex_set (-1.0, 0.0);
-		draw_arc (m, za, zb);
-		eps_set_color_black();
-		printf ("[] 0 setdash\n");
-
+		draw_cusp(m);
 		eps_set_color(r,g,b);
 	}
 
@@ -137,7 +148,7 @@ void draw(int n)
 {
 	mobius_t m;
 	int level=3;
-// level=10;
+level=10;
 
 	// Originally drawn with -0.268 -- this gets the vertex centers
 	// correctly located.
