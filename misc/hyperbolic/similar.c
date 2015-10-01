@@ -209,14 +209,14 @@ void draw_splat (mobius_t m)
 
 	// draw a cross
 	printf ("0.00500000 slw\n");
-	za = cplex_set (xsplat-0.08, ysplat);
+	za = cplex_set (xsplat-0.04, ysplat);
 	za = mobius_xform (m,za);
-	zb = cplex_set (xsplat+0.08, ysplat);
+	zb = cplex_set (xsplat+0.10, ysplat);
 	zb = mobius_xform (m,zb);
 	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
-	za = cplex_set (xsplat, ysplat-0.08);
+	za = cplex_set (xsplat, ysplat);
 	za = mobius_xform (m,za);
-	zb = cplex_set (xsplat, ysplat+0.08);
+	zb = cplex_set (xsplat, ysplat+0.18);
 	zb = mobius_xform (m,zb);
 	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
 
@@ -230,16 +230,20 @@ void sim_splat(mobius_t local, mobius_t global)
 {
 	mobius_t vee = mobius_set (0,-1,1,0);   // v^2 == 1  V=-S
 	mobius_t pee = mobius_set (0,-1,1,1);   // P^3 == 1
+	mobius_t vin = mobius_set (0, 1, -1, 0); // v^-1 == V^2
 
 // eps_set_color(0xaa, 0xcc, 0x0);
 	mobius_t sim = mobius_mul(global, local);
 	draw_splat(sim);
 
-/*
-	sim = mobius_mul(sim, vee);
+	// Now do the Vee similarities
+	sim = mobius_mul(local, vee);
+	sim = mobius_mul(vin, sim);
+	draw_splat(sim);
+
+	sim = mobius_mul(local, vin);
 	sim = mobius_mul(vee, sim);
 	draw_splat(sim);
-*/
 }
 
 /* ========================================================= */
@@ -267,7 +271,7 @@ void recursive_draw_similar (int n, mobius_t local, mobius_t global)
 
 	// Move in the L direction.
 	sim = mobius_mul (ell, local);
-//	sim = mobius_mul (sim, ill);
+	sim = mobius_mul (sim, ill);
 
 eps_set_color_red();
 	sim_splat(sim, global);
@@ -276,7 +280,7 @@ eps_set_color_red();
 
 	// Move in the Linv direction
 	sim = mobius_mul (ill, local);
-//	sim = mobius_mul (sim, ell);
+	sim = mobius_mul (sim, ell);
 
 eps_set_color_green();
 	sim_splat(sim, global);
@@ -284,7 +288,7 @@ eps_set_color_green();
 
 	// Move in the R direction.
 	sim = mobius_mul (are, local);
-//	sim = mobius_mul (sim, ari);
+	sim = mobius_mul (sim, ari);
 
 eps_set_color_blue();
 	sim_splat(sim, global);
@@ -292,40 +296,14 @@ eps_set_color_blue();
 
 	// Move in the Rinv direction.
 	sim = mobius_mul (ari, local);
-//	sim = mobius_mul (sim, are);
+	sim = mobius_mul (sim, are);
 
 eps_set_color(0x0, 0xff, 0xff);
 	sim_splat(sim, global);
 	recursive_draw_similar(n, sim, global);
 
-#if 0
-	// Do the V versions
-eps_set_color(0xcc, 0x0, 0xff);
-	sim = mobius_mul (vee, ell);
-	sim = mobius_mul (sim, off);
-	sim = mobius_mul (sim, ill);
-	sim = mobius_mul (sim, vin);
-	sim_splat(off, sim);
-
-	sim = mobius_mul (vee, ill);
-	sim = mobius_mul (sim, off);
-	sim = mobius_mul (sim, ell);
-	sim = mobius_mul (sim, vin);
-	sim_splat(off, sim);
-
-	sim = mobius_mul (vee, are);
-	sim = mobius_mul (sim, off);
-	sim = mobius_mul (sim, ari);
-	sim = mobius_mul (sim, vin);
-	sim_splat(off, sim);
-
-	sim = mobius_mul (vee, ari);
-	sim = mobius_mul (sim, off);
-	sim = mobius_mul (sim, are);
-	sim = mobius_mul (sim, vin);
-	sim_splat(off, sim);
-#endif
 }
+
 /* ========================================================= */
 
 void draw (int n)
@@ -398,7 +376,7 @@ eps_set_color(0,70,220);
 	cplex rtip = cplex_set(0.5,0.5*sqrt(3.0));
 	draw_geo (xfm, ltip, rtip);
 
-	recursive_draw_similar(n, ident, xfm);
+	recursive_draw_similar(n, ell, xfm);
 }
 
 /* ==================================================== */
