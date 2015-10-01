@@ -205,7 +205,7 @@ void draw_splat (mobius_t m)
 	cplex za,zb;
 
 	double xsplat = 0.0;
-	double ysplat = 1.1;
+	double ysplat = 1.2;
 
 	// draw a splat
 	printf ("0.0600000 slw\n");
@@ -218,27 +218,107 @@ void draw_splat (mobius_t m)
 	printf ("0.010000 slw\n");
 }
 
+/* ========================================================= */
+
 /* Draw splats at each similarity point */
 void sim_splat(mobius_t sim)
 {
-eps_set_color(0xcc, 0xff, 0x0);
+	mobius_t vee = mobius_set (0,-1,1,0);   // v^2 == 1  V=-S
+	mobius_t pee = mobius_set (0,-1,1,1);   // P^3 == 1
+
+eps_set_color(0xaa, 0xcc, 0x0);
 	draw_splat(sim);
+
+/*
+	sim = mobius_mul(sim, vee);
+	sim = mobius_mul(vee, sim);
+	draw_splat(sim);
+*/
 }
+
+/* ========================================================= */
 
 /**
  * @depth: recursion depth
  * @lr: 0 or 1, indicating that the left or right tree is being drawn
  * @draw_fund: 0 or 1, do draw the fundamental domain lines, or not
  */
-void recursive_draw_similar (int depth, mobius_t m)
+void recursive_draw_similar (int n, mobius_t off)
 {
-	if (0 >= depth)
+	if (0 >= n)
 		return;
-	depth --;
+	n--;
 
-	sim_splat(m);
+	sim_splat(off);
+
+	mobius_t ell = mobius_set (1, 0, 1, 1);
+	mobius_t ill = mobius_set (1, 0, -1, 1);
+	mobius_t are = mobius_set (1, 1, 0, 1);
+	mobius_t ari = mobius_set (1, -1, 0, 1);
+	mobius_t vee = mobius_set (0, -1, 1, 0); // v^3 == I
+	mobius_t vin = mobius_set (0, 1, -1, 0); // v^-1 == V^2
+
+	// Move in the L direction.
+	mobius_t sim;
+	sim = mobius_mul (ell, off);
+//	sim = mobius_mul (sim, ill);
+
+eps_set_color_red();
+	sim_splat(sim);
+	recursive_draw_similar(n, sim);
+
+	// Move in the Linv direction
+	sim = mobius_mul (ill, off);
+//	sim = mobius_mul (sim, ell);
+
+eps_set_color_green();
+	sim_splat(sim);
+	recursive_draw_similar(n, sim);
+
+	// Move in the R direction.
+	sim = mobius_mul (are, off);
+//	sim = mobius_mul (sim, ari);
+
+eps_set_color_blue();
+	sim_splat(sim);
+	recursive_draw_similar(n, sim);
+
+	// Move in the Rinv direction.
+	sim = mobius_mul (ari, off);
+//	sim = mobius_mul (sim, are);
+
+eps_set_color(0x0, 0xff, 0xff);
+	sim_splat(sim);
+	recursive_draw_similar(n, sim);
+
+#if 0
+	// Do the V versions
+eps_set_color(0xcc, 0x0, 0xff);
+	sim = mobius_mul (vee, ell);
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, ill);
+	sim = mobius_mul (sim, vin);
+	sim_splat(off, sim);
+
+	sim = mobius_mul (vee, ill);
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, ell);
+	sim = mobius_mul (sim, vin);
+	sim_splat(off, sim);
+
+	sim = mobius_mul (vee, are);
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, ari);
+	sim = mobius_mul (sim, vin);
+	sim_splat(off, sim);
+
+	sim = mobius_mul (vee, ari);
+	sim = mobius_mul (sim, off);
+	sim = mobius_mul (sim, are);
+	sim = mobius_mul (sim, vin);
+	sim_splat(off, sim);
+#endif
 }
-
 /* ========================================================= */
 
 void draw (int n)
