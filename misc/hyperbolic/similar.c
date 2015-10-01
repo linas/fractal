@@ -205,28 +205,34 @@ void draw_splat (mobius_t m)
 	cplex za,zb;
 
 	double xsplat = 0.0;
-	double ysplat = 1.2;
+	double ysplat = 1.3;
 
-	// draw a splat
-	printf ("0.0600000 slw\n");
-	// printf ("0.0100000 slw\n");
-	za = cplex_set (xsplat-0.02, ysplat);
+	// draw a cross
+	printf ("0.00500000 slw\n");
+	za = cplex_set (xsplat-0.08, ysplat);
 	za = mobius_xform (m,za);
-	zb = cplex_set (xsplat+0.02, ysplat);
+	zb = cplex_set (xsplat+0.08, ysplat);
 	zb = mobius_xform (m,zb);
 	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
+	za = cplex_set (xsplat, ysplat-0.08);
+	za = mobius_xform (m,za);
+	zb = cplex_set (xsplat, ysplat+0.08);
+	zb = mobius_xform (m,zb);
+	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
+
 	printf ("0.010000 slw\n");
 }
 
 /* ========================================================= */
 
 /* Draw splats at each similarity point */
-void sim_splat(mobius_t sim)
+void sim_splat(mobius_t local, mobius_t global)
 {
 	mobius_t vee = mobius_set (0,-1,1,0);   // v^2 == 1  V=-S
 	mobius_t pee = mobius_set (0,-1,1,1);   // P^3 == 1
 
 // eps_set_color(0xaa, 0xcc, 0x0);
+	mobius_t sim = mobius_mul(global, local);
 	draw_splat(sim);
 
 /*
@@ -250,8 +256,7 @@ void recursive_draw_similar (int n, mobius_t local, mobius_t global)
 	n--;
 
 	mobius_t sim = local;
-	sim = mobius_mul (global, sim);
-	sim_splat(sim);
+	sim_splat(sim, global);
 
 	mobius_t ell = mobius_set (1, 0, 1, 1);
 	mobius_t ill = mobius_set (1, 0, -1, 1);
@@ -265,8 +270,7 @@ void recursive_draw_similar (int n, mobius_t local, mobius_t global)
 //	sim = mobius_mul (sim, ill);
 
 eps_set_color_red();
-	sim = mobius_mul (global, sim);
-	sim_splat(sim);
+	sim_splat(sim, global);
 
 	recursive_draw_similar(n, sim, global);
 
@@ -275,8 +279,7 @@ eps_set_color_red();
 //	sim = mobius_mul (sim, ell);
 
 eps_set_color_green();
-	sim = mobius_mul (global, sim);
-	sim_splat(sim);
+	sim_splat(sim, global);
 	recursive_draw_similar(n, sim, global);
 
 	// Move in the R direction.
@@ -284,8 +287,7 @@ eps_set_color_green();
 //	sim = mobius_mul (sim, ari);
 
 eps_set_color_blue();
-	sim = mobius_mul (global, sim);
-	sim_splat(sim);
+	sim_splat(sim, global);
 	recursive_draw_similar(n, sim, global);
 
 	// Move in the Rinv direction.
@@ -293,8 +295,7 @@ eps_set_color_blue();
 //	sim = mobius_mul (sim, are);
 
 eps_set_color(0x0, 0xff, 0xff);
-	sim = mobius_mul (global, sim);
-	sim_splat(sim);
+	sim_splat(sim, global);
 	recursive_draw_similar(n, sim, global);
 
 #if 0
