@@ -226,7 +226,7 @@ void sim_splat(mobius_t sim)
 	mobius_t vee = mobius_set (0,-1,1,0);   // v^2 == 1  V=-S
 	mobius_t pee = mobius_set (0,-1,1,1);   // P^3 == 1
 
-eps_set_color(0xaa, 0xcc, 0x0);
+// eps_set_color(0xaa, 0xcc, 0x0);
 	draw_splat(sim);
 
 /*
@@ -243,13 +243,15 @@ eps_set_color(0xaa, 0xcc, 0x0);
  * @lr: 0 or 1, indicating that the left or right tree is being drawn
  * @draw_fund: 0 or 1, do draw the fundamental domain lines, or not
  */
-void recursive_draw_similar (int n, mobius_t off)
+void recursive_draw_similar (int n, mobius_t local, mobius_t global)
 {
 	if (0 >= n)
 		return;
 	n--;
 
-	sim_splat(off);
+	mobius_t sim = local;
+	sim = mobius_mul (global, sim);
+	sim_splat(sim);
 
 	mobius_t ell = mobius_set (1, 0, 1, 1);
 	mobius_t ill = mobius_set (1, 0, -1, 1);
@@ -259,37 +261,41 @@ void recursive_draw_similar (int n, mobius_t off)
 	mobius_t vin = mobius_set (0, 1, -1, 0); // v^-1 == V^2
 
 	// Move in the L direction.
-	mobius_t sim;
-	sim = mobius_mul (ell, off);
+	sim = mobius_mul (ell, local);
 //	sim = mobius_mul (sim, ill);
 
 eps_set_color_red();
+	sim = mobius_mul (global, sim);
 	sim_splat(sim);
-	recursive_draw_similar(n, sim);
+
+	recursive_draw_similar(n, sim, global);
 
 	// Move in the Linv direction
-	sim = mobius_mul (ill, off);
+	sim = mobius_mul (ill, local);
 //	sim = mobius_mul (sim, ell);
 
 eps_set_color_green();
+	sim = mobius_mul (global, sim);
 	sim_splat(sim);
-	recursive_draw_similar(n, sim);
+	recursive_draw_similar(n, sim, global);
 
 	// Move in the R direction.
-	sim = mobius_mul (are, off);
+	sim = mobius_mul (are, local);
 //	sim = mobius_mul (sim, ari);
 
 eps_set_color_blue();
+	sim = mobius_mul (global, sim);
 	sim_splat(sim);
-	recursive_draw_similar(n, sim);
+	recursive_draw_similar(n, sim, global);
 
 	// Move in the Rinv direction.
-	sim = mobius_mul (ari, off);
+	sim = mobius_mul (ari, local);
 //	sim = mobius_mul (sim, are);
 
 eps_set_color(0x0, 0xff, 0xff);
+	sim = mobius_mul (global, sim);
 	sim_splat(sim);
-	recursive_draw_similar(n, sim);
+	recursive_draw_similar(n, sim, global);
 
 #if 0
 	// Do the V versions
@@ -391,7 +397,7 @@ eps_set_color(0,70,220);
 	cplex rtip = cplex_set(0.5,0.5*sqrt(3.0));
 	draw_geo (xfm, ltip, rtip);
 
-	recursive_draw_similar(n, xfm);
+	recursive_draw_similar(n, ident, xfm);
 }
 
 /* ==================================================== */
