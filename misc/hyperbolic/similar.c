@@ -208,7 +208,7 @@ void draw_splat (mobius_t m)
 	double ysplat = 1.3;
 
 	// draw a cross
-	printf ("0.00500000 slw\n");
+	printf ("0.00800000 slw\n");
 	za = cplex_set (xsplat-0.04, ysplat);
 	za = mobius_xform (m,za);
 	zb = cplex_set (xsplat+0.10, ysplat);
@@ -239,10 +239,12 @@ void sim_splat(mobius_t local, mobius_t global)
 	// Now do the Vee similarities
 	sim = mobius_mul(local, vee);
 	sim = mobius_mul(vin, sim);
+	sim = mobius_mul(global, local);
 	draw_splat(sim);
 
 	sim = mobius_mul(local, vin);
 	sim = mobius_mul(vee, sim);
+	sim = mobius_mul(global, local);
 	draw_splat(sim);
 }
 
