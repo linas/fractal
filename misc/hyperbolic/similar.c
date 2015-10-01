@@ -15,6 +15,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void eps_setup_disk (void)
 {
@@ -308,7 +309,46 @@ eps_set_color(0x0, 0xff, 0xff);
 
 /* ========================================================= */
 
-void draw (int n)
+void similar (int n, const char *xform, mobius_t global)
+{
+	mobius_t ident = mobius_ident();
+	mobius_t tee = mobius_set (1,1,0,1);    // T = R
+	mobius_t ess = mobius_set (0,1,-1,0);
+
+	mobius_t vee = mobius_set (0,-1,1,0);   // v^2 == 1  V=-S
+	mobius_t pee = mobius_set (0,-1,1,1);   // P^3 == 1
+
+	mobius_t ell = mobius_set (1,0,1,1);
+	mobius_t are = mobius_set (1,1,0,1);
+	mobius_t ill = mobius_set (1, 0, -1, 1);
+	mobius_t ari = mobius_set (1, -1, 0, 1);
+
+	mobius_t xfm = ident;
+
+	int i;
+	for (i=0; i<strlen(xform); i++)
+	{
+		char x = xform[i];
+		if ('L' == x) xfm = mobius_mul(xfm, ell);
+		if ('l' == x) xfm = mobius_mul(xfm, ill);
+
+		if ('R' == x) xfm = mobius_mul(xfm, are);
+		if ('r' == x) xfm = mobius_mul(xfm, ari);
+
+		if ('S' == x) xfm = mobius_mul(xfm, ess);
+		if ('T' == x) xfm = mobius_mul(xfm, tee);
+		if ('t' == x) xfm = mobius_mul(xfm, ari);
+
+		if ('P' == x) xfm = mobius_mul(xfm, pee);
+		if ('V' == x) xfm = mobius_mul(xfm, vee);
+	}
+
+	recursive_draw_similar(n, xfm, global);
+}
+
+/* ========================================================= */
+
+mobius_t draw (int n)
 {
 	mobius_t ident = mobius_ident();
 	mobius_t tee = mobius_set (1,1,0,1);    // T = R
@@ -378,7 +418,7 @@ eps_set_color(0,70,220);
 	cplex rtip = cplex_set(0.5,0.5*sqrt(3.0));
 	draw_geo (xfm, ltip, rtip);
 
-	recursive_draw_similar(n, ell, xfm);
+	return xfm;
 }
 
 /* ==================================================== */
@@ -386,9 +426,9 @@ eps_set_color(0,70,220);
 int
 main (int argc, char * argv[])
 {
-	if (argc < 2)
+	if (argc < 3)
 	{
-		fprintf (stderr, "Usage: %s <shift>\n", argv[0]);
+		fprintf (stderr, "Usage: %s <recurs> <xform>\n", argv[0]);
 		exit(1);
 	}
 
@@ -398,7 +438,8 @@ main (int argc, char * argv[])
 	eps_setup_disk();
 	eps_draw_circle();
 
-	draw(n);
+	mobius_t global = draw(n);
+	similar(n, argv[2], global);
 
 	printf ("showpage\n");
 }
