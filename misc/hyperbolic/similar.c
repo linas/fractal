@@ -171,21 +171,19 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 		printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
 		drawdash=1;
 
-		// the ones on the right side ...
+		// the ones on the left side ...
 		cplex tap;
 		if (lr) tap = cplex_set(0.5,0.5*sqrt(3.0));
 		else tap = cplex_set(-0.5,0.5*sqrt(3.0));
 		top = cplex_set(0,0);
 		draw_geo (m, top, tap);
 
-/*
-		// the cusps on the left side ...
+		// the cusps on the right side ...
 		top = cplex_set(0,1e8);
 		cplex tep;
 		if (lr) tep = cplex_set(-0.5,0.5*sqrt(3.0));
 		else tep = cplex_set(0.5,0.5*sqrt(3.0));
 		draw_geo (m, top, tep);
-*/
 
 		eps_set_color(0,70,220);
 		printf ("[] 0 setdash\n");
