@@ -27,10 +27,16 @@ static int drawdash=0;
 /* Similar to the draw_arc routine used elsewhwere ... but different ... */
 void draw_geo (mobius_t m, cplex a, cplex b)
 {
+	// So .. why this, and why not draw_arc() ?? The coordinate
+	// systems seemto be slightly off, one from the other, I don't
+	// know why. Seems strange to me, this should all have worked...
+	// draw_arc(m,a,b); return;
+
 	cplex z0 = mobius_xform (m,a);
 	cplex z1 = mobius_xform (m,b);
 
-#if 0
+// #define HALF_PLANE
+#ifdef HALF_PLANE
 	/* vertical clip */
 	if (100.0 < z0.im) {
 		z0.im = 100;
@@ -40,9 +46,8 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 		z1.im = 100;
 		z1.re = z0.re;
 	}
-#endif
 
-	/* if the points are above one-another... */
+	/* If the points are above one-another... */
 	double dx = z1.re - z0.re;
 	if ((1e-4>dx) && (-1e-4 < dx))
 	{
@@ -51,8 +56,6 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	}
 	
 	/* else draw geodesic */
-// #define HALF_PLANE
-#ifdef HALF_PLANE
 	cplex zm = cplex_add (z0,z1);
 	zm = cplex_scale (0.5, zm);
 	double slope = (z1.im - z0.im) / (z1.re - z0.re);
@@ -65,6 +68,7 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 	// Solve for small circle that passes through z0 and z1 and
 	// is orthogonal to the unit circle.
 	double cross = 2.0 * (z0.re*z1.im - z1.re*z0.im);
+	if (fabs(cross) < 1.0e-10) cross = 1.0e-10; // avoid divide-by-zero.
 	double a2 = z0.re*z0.re + z0.im*z0.im + 1.0;
 	double b2 = z1.re*z1.re + z1.im*z1.im + 1.0;
 	double xcenter = ( z1.im * a2 - z0.im * b2 ) / cross;
@@ -209,6 +213,25 @@ void draw (int n)
 
 	/* The following sets up a transform to disk coords */
 	xfm = to_disk_xform ();
+
+#if 0
+	// Relocate the center of the thing.
+	// This is not as intuitive as you might think:
+	// Although changing the real component does a hyperbolic rotation,
+	// Changing the imaginary component scales the thing!!
+	double cent = sqrt(3.0) - 2.0;
+	cplex z = cplex_set (cent, 0.0);
+	// z = cplex_set (-0.25, 0.0);
+	// cplex z = cplex_set (0.0, 0.0);
+	mobius_t off = disk_center (z);
+
+	xfm = mobius_mul(xfm, off);
+
+	// z = cplex_set (0.0, 1.0);
+	// off = mobius_scale(off, z);
+	// xfm = mobius_mul(off, xfm);
+#endif
+
 
 #if 0
 	/* Assorted translations and rotations */
