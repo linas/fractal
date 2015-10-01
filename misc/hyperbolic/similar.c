@@ -197,14 +197,58 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 
 /* ========================================================= */
 
+/* draw a small rectangle */
+/* Observe that the center of the disk is located at i */
+/* This is consistent with upper half-plane coordinates! */
+void draw_splat (mobius_t m)
+{
+	cplex za,zb;
+
+	double xsplat = 0.0;
+	double ysplat = 1.1;
+
+	// draw a splat
+	printf ("0.0600000 slw\n");
+	// printf ("0.0100000 slw\n");
+	za = cplex_set (xsplat-0.02, ysplat);
+	za = mobius_xform (m,za);
+	zb = cplex_set (xsplat+0.02, ysplat);
+	zb = mobius_xform (m,zb);
+	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
+	printf ("0.010000 slw\n");
+}
+
+/* Draw splats at each similarity point */
+void sim_splat(mobius_t sim)
+{
+eps_set_color(0xcc, 0xff, 0x0);
+	draw_splat(sim);
+}
+
+/**
+ * @depth: recursion depth
+ * @lr: 0 or 1, indicating that the left or right tree is being drawn
+ * @draw_fund: 0 or 1, do draw the fundamental domain lines, or not
+ */
+void recursive_draw_similar (int depth, mobius_t m)
+{
+	if (0 >= depth)
+		return;
+	depth --;
+
+	sim_splat(m);
+}
+
+/* ========================================================= */
+
 void draw (int n)
 {
 	mobius_t ident = mobius_ident();
-	mobius_t tee = mobius_set (1,1,0,1);
+	mobius_t tee = mobius_set (1,1,0,1);    // T = R
 	mobius_t ess = mobius_set (0,1,-1,0);
 
-	mobius_t vee = mobius_set (0,-1,1,0);
-	mobius_t pee = mobius_set (0,-1,1,1);
+	mobius_t vee = mobius_set (0,-1,1,0);   // v^2 == 1  V=-S
+	mobius_t pee = mobius_set (0,-1,1,1);   // P^3 == 1
 
 	mobius_t ell = mobius_set (1,0,1,1);
 	mobius_t are = mobius_set (1,1,0,1);
@@ -212,6 +256,11 @@ void draw (int n)
 	mobius_t xfm = ident;
 
 	/* The following sets up a transform to disk coords */
+	/* Notice that the coordinates used throughout are upper-half-plane
+	 * coordinates, and that this xform merely converts them to a disk
+	 * when they are drawn. However, the "raw" z values used throughout
+	 * are upper-half-plane z's.  This is a key point!
+	 */
 	xfm = to_disk_xform ();
 
 #if 0
@@ -232,13 +281,11 @@ void draw (int n)
 	// xfm = mobius_mul(off, xfm);
 #endif
 
-
 #if 0
 	/* Assorted translations and rotations */
 	xfm = mobius_mul (xfm, ell);
 	xfm = mobius_mul (xfm, are);
-	xfm = mobius_mul (xfm, are);
-	xfm = mobius_mul (xfm, pee);
+	xfm = mobius_mul (xfm, vee);
 	xfm = mobius_mul (xfm, pee);
 	xfm = mobius_mul (xfm, ess);
 	xfm = mobius_mul (xfm, tee);
@@ -258,9 +305,13 @@ eps_set_color(0,70,220);
 	recursive_draw_binary_tree (n, 0, 1, xfm);
 
 	// Draw the center-line
+	// Note that the center-line spans the bottom of the fun domain
+	// and that the coordinates given are in upper-half-plane coordinates!
 	cplex ltip = cplex_set(-0.5,0.5*sqrt(3.0));
 	cplex rtip = cplex_set(0.5,0.5*sqrt(3.0));
 	draw_geo (xfm, ltip, rtip);
+
+	recursive_draw_similar(n, xfm);
 }
 
 /* ==================================================== */
