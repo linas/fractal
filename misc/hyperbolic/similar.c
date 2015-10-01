@@ -203,6 +203,7 @@ void recursive_draw_binary_tree (int depth, int lr, int draw_fund, mobius_t m)
 /* This is consistent with upper half-plane coordinates! */
 void draw_splat (mobius_t m)
 {
+#ifdef DRAW_CROSS
 	cplex za,zb;
 
 	double xsplat = 0.0;
@@ -220,8 +221,25 @@ void draw_splat (mobius_t m)
 	zb = cplex_set (xsplat, ysplat+0.18);
 	zb = mobius_xform (m,zb);
 	printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
-
 	printf ("0.010000 slw\n");
+#endif
+
+	int i;
+eps_set_color(0xbb, 0xdd, 0x0);
+	printf ("0.00800000 slw\n");
+	for (i=0; i<15; i++)
+	{
+		cplex za,zb;
+		double y = 0.96 + (i+1)*(i+1)*0.03;
+
+		za = cplex_set (-0.5, y);
+		za = mobius_xform (m,za);
+		zb = cplex_set (0.5, y);
+		zb = mobius_xform (m,zb);
+		printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
+	}
+	printf ("0.010000 slw\n");
+
 }
 
 /* ========================================================= */
