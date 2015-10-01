@@ -62,30 +62,15 @@ void draw_geo (mobius_t m, cplex a, cplex b)
 
 #define POINCARE_DISK
 #ifdef POINCARE_DISK
-	// Solve for small circle that passes through z0 and z1 whose
-	// center lies on the unit circle.
-// XXX except that this is not even the right geodesic
-// need to have the center be reflected away!!! Argh.
-	double norm = z0.re*z0.re - z1.re*z1.re + z0.im*z0.im - z1.im*z1.im;
-	double x = 2.0 * (z0.re - z1.re) / norm;
-	double y = 2.0 * (z0.im - z1.im) / norm;
-	// solution is in the form
-	// x * centerx + y * centery = 1.0
-	// general form is centerx=cos(theta) centery = sin(theta)
-	// x * sinc(theta) + y * cos(theta) = c sin(theta+phi)
-	// phi = atan2(x,y)   and c = sqrt(x*x + y*y)
-	double ph = atan2(x, y);
-	double thaph = asin (1.0 / sqrt(x*x+y*y));
-	double th = thaph-ph;
-	double xcenter = cos(th);
-	double ycenter = sin(th);
-
-	// There are two such solutions, take the smaller one!
-	double rx = (z0.re-xcenter)*(z0.re-xcenter);
-	double ry = (z0.im-ycenter)*(z0.im-ycenter);
-	if (1.0 < rx) { xcenter=-xcenter; }
-	if (1.0 < ry) { ycenter=-ycenter; }
+	// Solve for small circle that passes through z0 and z1 and
+	// is orthogonal to the unit circle.
+	double cross = 2.0 * (z0.re*z1.im - z1.re*z0.im);
+	double a2 = z0.re*z0.re + z0.im*z0.im + 1.0;
+	double b2 = z1.re*z1.re + z1.im*z1.im + 1.0;
+	double xcenter = ( z1.im * a2 - z0.im * b2 ) / cross;
+	double ycenter = -( z1.re * a2 - z0.re * b2 ) / cross;
 #endif
+
 	double t0 = atan2 (z0.im - ycenter, z0.re - xcenter);
 	double t1 = atan2 (z1.im - ycenter, z1.re - xcenter);
 
