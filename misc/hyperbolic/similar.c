@@ -225,18 +225,24 @@ void draw_splat (mobius_t m)
 #endif
 
 	int i;
-eps_set_color(0xbb, 0xdd, 0x0);
+// eps_set_color(0xbb, 0xdd, 0x0);
 	printf ("0.00800000 slw\n");
 	for (i=0; i<15; i++)
 	{
-		cplex za,zb;
+		cplex za,zb,zc,zd;
 		double y = 0.96 + (i+1)*(i+1)*0.03;
 
 		za = cplex_set (-0.5, y);
 		za = mobius_xform (m,za);
-		zb = cplex_set (0.5, y);
+		zb = cplex_set (-0.1666, y);
 		zb = mobius_xform (m,zb);
+		zc = cplex_set (0.1666, y);
+		zc = mobius_xform (m,zc);
+		zd = cplex_set (0.5, y);
+		zd = mobius_xform (m,zd);
 		printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
+		printf ("n %Lf %Lf m %Lf %Lf l s\n", zb.re, zb.im, zc.re, zc.im);
+		printf ("n %Lf %Lf m %Lf %Lf l s\n", zc.re, zc.im, zd.re, zd.im);
 	}
 	printf ("0.010000 slw\n");
 
@@ -294,7 +300,7 @@ void recursive_draw_similar (int n, mobius_t local, mobius_t global)
 	sim = mobius_mul (ell, local);
 	sim = mobius_mul (sim, ill);
 
-eps_set_color_red();
+// eps_set_color_red();
 	sim_splat(sim, global);
 
 	recursive_draw_similar(n, sim, global);
@@ -303,7 +309,7 @@ eps_set_color_red();
 	sim = mobius_mul (ill, local);
 	sim = mobius_mul (sim, ell);
 
-eps_set_color_green();
+// eps_set_color_green();
 	sim_splat(sim, global);
 	recursive_draw_similar(n, sim, global);
 
@@ -311,7 +317,7 @@ eps_set_color_green();
 	sim = mobius_mul (are, local);
 	sim = mobius_mul (sim, ari);
 
-eps_set_color_blue();
+// eps_set_color_blue();
 	sim_splat(sim, global);
 	recursive_draw_similar(n, sim, global);
 
@@ -319,10 +325,9 @@ eps_set_color_blue();
 	sim = mobius_mul (ari, local);
 	sim = mobius_mul (sim, are);
 
-eps_set_color(0x0, 0xff, 0xff);
+// eps_set_color(0x0, 0xff, 0xff);
 	sim_splat(sim, global);
 	recursive_draw_similar(n, sim, global);
-
 }
 
 /* ========================================================= */
@@ -361,6 +366,49 @@ void similar (int n, const char *xform, mobius_t global)
 		if ('V' == x) xfm = mobius_mul(xfm, vee);
 	}
 
+	// recursive_draw_similar(n, xfm, global);
+
+eps_set_color(0x0, 0x0, 0x0);
+	recursive_draw_similar(n, ident, global);
+
+eps_set_color(0x99, 0x0, 0xdd);
+	recursive_draw_similar(n, vee, global);
+
+eps_set_color(0xdd, 0x0, 0xbb);
+	recursive_draw_similar(n, pee, global);
+eps_set_color(0xbb, 0x44, 0x77);
+	xfm = ident;
+	xfm = mobius_mul(xfm, pee);
+	xfm = mobius_mul(xfm, pee);
+	recursive_draw_similar(n, xfm, global);
+
+eps_set_color(0xbb, 0xdd, 0x0);
+	recursive_draw_similar(n, ell, global);
+eps_set_color(0xdd, 0xaa, 0x0);
+	recursive_draw_similar(n, are, global);
+
+eps_set_color(0x0, 0x77, 0xdd);
+	xfm = ident;
+	xfm = mobius_mul(xfm, ell);
+	xfm = mobius_mul(xfm, ell);
+	recursive_draw_similar(n, xfm, global);
+eps_set_color(0x0, 0xdd, 0x77);
+	xfm = ident;
+	xfm = mobius_mul(xfm, are);
+	xfm = mobius_mul(xfm, are);
+	recursive_draw_similar(n, xfm, global);
+
+eps_set_color(0x0, 0xdd, 0xbb);
+	xfm = ident;
+	xfm = mobius_mul(xfm, ell);
+	xfm = mobius_mul(xfm, ell);
+	xfm = mobius_mul(xfm, ell);
+	recursive_draw_similar(n, xfm, global);
+eps_set_color(0x0, 0xaa, 0xdd);
+	xfm = ident;
+	xfm = mobius_mul(xfm, are);
+	xfm = mobius_mul(xfm, are);
+	xfm = mobius_mul(xfm, are);
 	recursive_draw_similar(n, xfm, global);
 }
 
