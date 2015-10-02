@@ -229,9 +229,11 @@ void draw_splat (mobius_t m)
 	printf ("0.00800000 slw\n");
 	for (i=0; i<15; i++)
 	{
-		cplex za,zb,zc,zd;
 		double y = 0.96 + (i+1)*(i+1)*0.03;
 
+#define FLAT
+#ifdef FLAT
+		cplex za,zb,zc,zd;
 		za = cplex_set (-0.5, y);
 		za = mobius_xform (m,za);
 		zb = cplex_set (-0.1666, y);
@@ -243,6 +245,19 @@ void draw_splat (mobius_t m)
 		printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
 		printf ("n %Lf %Lf m %Lf %Lf l s\n", zb.re, zb.im, zc.re, zc.im);
 		printf ("n %Lf %Lf m %Lf %Lf l s\n", zc.re, zc.im, zd.re, zd.im);
+#endif
+#ifdef GEODESIC
+		cplex za,zb,zc;
+		double v = sqrt(0.25 + y*y);
+		za = cplex_set (-0.5, y);
+		za = mobius_xform (m,za);
+		zb = cplex_set (0.0, v);
+		zb = mobius_xform (m,zb);
+		zc = cplex_set (0.5, y);
+		zc = mobius_xform (m,zc);
+		printf ("n %Lf %Lf m %Lf %Lf l s\n", za.re, za.im, zb.re, zb.im);
+		printf ("n %Lf %Lf m %Lf %Lf l s\n", zb.re, zb.im, zc.re, zc.im);
+#endif
 	}
 	printf ("0.010000 slw\n");
 
