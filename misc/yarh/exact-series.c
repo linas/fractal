@@ -12,7 +12,11 @@
 
 #include "binomial.h"
 
-/* Integral of (x^(s-1))/(x+alpha) dx
+/* 
+ * Integral of (x^(s-1))/(x+alpha) dx
+ *
+ * Obtained by performing a binomial expansion of 1/(x+alpha)
+ * and summing that.
  */
 long double complex eff (long double complex s, long double alpha, long double x)
 {
