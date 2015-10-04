@@ -2,7 +2,8 @@
  * swap.C
  *
  * FUNCTION:
- * Integral the permuation group of continued fractions
+ * Integral of the permuation group of continued fractions
+ * Integral of mobius transform having pole on x-axis
  * Expect to get Riemann zeta in the Gauss map case
  * and that is what we seem to get ... need high integration 
  * order though to get anything on the r=1/2 axis ... 
@@ -178,7 +179,7 @@ inline long double swap12_lin_mix (long double x)
 	long double a2 = floorl(ox);
 	long double r2 = ox - a2;
 
-	long double frac = 1.0L / 3.0L;
+	// long double frac = 1.0L / 3.0L;
 
 #if 0
 	long double tmp = frac*a1 + (1.0L-frac)*a2;
@@ -203,6 +204,20 @@ inline long double swap12_lin_mix (long double x)
 	return x;
 }
 
+inline long double mobiux (long double x)
+{
+	// xform is (ax+b)/(cx+d) having pole at 0 <= x=-d/c <= 1
+	int a = 1;
+	int b = 0;
+	int c = -5;
+	int d = 2;
+	long double ox = (a*x +b) / (c*x+d);
+	long double a1 = floorl(ox);
+	long double r1 = ox - a1;
+
+	return r1;
+}
+
 /* The integrand, which is swap(x) * x^s */
 void grand (long double x, long double sre, long double sim, 
 					 long double *pre, long double *pim)
@@ -221,7 +236,9 @@ void grand (long double x, long double sre, long double sim,
 
 	// The generalized mobius hypothesis
 	// long double sw = swap_mob (x);
-	long double sw = swap12_lin_mix (x);
+	// long double sw = swap12_lin_mix (x);
+
+	long double sw = mobiux (x);
 #endif
 
 	long double lnx = logl (x);
