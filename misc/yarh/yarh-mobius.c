@@ -19,12 +19,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int a = 1;
+int b = 0;
+int c = -2;
+int d = 1;
+
 inline long double mobiux (long double x)
 {
 	// xform is (ax+b)/(cx+d) having pole at 0 <= x=-d/c <= 1
 	int a = 1;
 	int b = 0;
-	int c = -3;
+	int c = -2;
 	int d = 1;
 	long double ox = (a*x +b) / (c*x+d);
 	long double a1 = floorl(ox);
@@ -151,6 +156,7 @@ int main (int argc, char *argv[])
 	int npts = atoi(argv[1]);
 
 	printf("#\n# Simple integral summation of N=%d slices\n#\n", npts);
+	printf("# a=%d b=%d c=%d d=%d pole at -d/c\n#\n", a,b,c,d);
 
 	for (t=0.1; t<50; t+=0.1)
 	{

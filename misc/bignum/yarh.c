@@ -1,6 +1,7 @@
 /**
  * yarh.c
  * Port of generate/swap.C to bignum
+ * actually, of yarh/yarh.c -- see also yarh/README
  *
  * FUNCTION:
  * Integral the permuation group of continued fractions
@@ -8,10 +9,13 @@
  * and that is what we seem to get ... need high integration 
  * order though to get anything on the r=1/2 axis ... 
  *
+ * Also includes integral of mobius ...
+ *
  * Results written up in yarh.lyx
  *
  * Linas Feb 2005
  * Linas Vepstas December 2010
+ * Linas Vepstas October 2015
  */
 
 #include <stdio.h>
