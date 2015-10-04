@@ -10,6 +10,8 @@
  * Results written up in yarh.lyx
  *
  * Linas Feb 2005
+ * Linas Dec 2010
+ * Linas Oct 2015
  */ 
 
 #include <math.h>
