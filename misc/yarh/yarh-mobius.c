@@ -150,7 +150,9 @@ int main (int argc, char *argv[])
 
 	int npts = atoi(argv[1]);
 
-	for (t=0.1; t<100; t+=0.1)
+	printf("#\n# Simple integral summation of N=%d slices\n#\n", npts);
+
+	for (t=0.1; t<50; t+=0.1)
 	{
 		long double sre = 0.5;
 		long double sim = t;
@@ -159,6 +161,7 @@ int main (int argc, char *argv[])
 		gral (npts, sre, sim, &zre, &zim);
 
 		printf("%Lg	%Lg	%Lg\n", sim, zre, zim);
+		fflush(stdout);
 	}
 
 	return 0;
