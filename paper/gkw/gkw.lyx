@@ -74,7 +74,7 @@ Linas Vepštas <linasvepstas@gmail.com>
 \end_layout
 
 \begin_layout Date
-2 January 2004 (revised 2008, 31 Nov 2010) 
+2 January 2004 (revised 2008, 31 Nov 2010, 28 Jan 2016) 
 \end_layout
 
 \begin_layout Abstract
@@ -138,14 +138,102 @@ The Gauss-Kuzmin-Wirsing Operator
 
 \begin_layout Standard
 This text is a diary of ongoing research results.
- As such, it not always coherent, and is somewhat disorganized.
- It is only sporadically updated.
- It starts with a review of basic ideas, and moves on to a series of original
- results.
+ As such, it may not always be coherent, and can at times be somewhat disorganiz
+ed.
+ However, a fair amount of effort has been expended to make the overal presentat
+ion as readable as possible, with care taken to define all symbols and notation,
+ and results presented in a clear, if sometimes verbose fashion.
+ There is little or no content that assumes familiarity with mathematics
+ beyond a standard undergraduate curriculum; this should make this text
+ quite readable by anyone with a basic schooling in math, and an interest
+ in these topics.
+ The text contains many, many graphs illustrating the various results: this
+ alone should provide considerable entertainment and render an otherwise
+ dry topic a good bit more fun to read.
 \end_layout
 
 \begin_layout Standard
-The overall layout is as follows:
+The overall layout is to review basic ideas, and then move on to a series
+ of original results.
+ This text does assume some familiarity with the ideas developed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-B04,Ve-M04,Ve-T04"
+
+\end_inset
+
+, which perform a similar analysis for the Bernoulli operator.
+ The Bernoulli operator can be taken as a simpler model for the GKW operator:
+ it is more easily and directly analyzed, and yet exhibits many of the same
+ pheonomena.
+ 
+\end_layout
+
+\begin_layout Standard
+The similarity of results and defnitions for the GKW and the Bernoulli map
+ both follow from the fact that these are shift operators on the Baire space
+ and Cantor space, respectively.
+ Both spaces have a natural topology, the product topology.
+ Both spaces can be used to represent the real numbers, via the continued
+ fraction expansion, or via the binary digit expansion.
+ The product topology as a countable basis, consisting of the so-called
+ 
+\begin_inset Quotes eld
+\end_inset
+
+cylinders
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This basis can be then used to define maps from the product topology to
+ the complex plane; these maps can be organized into Banach spaces according
+ to thier convergence properties.
+ The Bernouli operator/GKW operator are just the shift operator on the product
+ topology; the continuous-spectrum eigenfunctions can then be easily specified.
+ Mapped to the real-number line, they are self-similar fractals.
+ This paper then consists of the defnition of the above terms, and an exploratio
+n of some of the resulting structures.
+ 
+\end_layout
+
+\begin_layout Standard
+Another companion piece is the text 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vep-mink2008"
+
+\end_inset
+
+, which takes a more abbreviated look at the connection between lattice
+ models and the GKW operator.
+ In particular, it shows that the Minkowski Question Mark function provides
+ the Haar measure on Baire space; that is, it is invariant under the shoft
+ operator.
+ There is also an intereating relationship to the Reimann zeta function,
+ presented in detail in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fla06,Vep-zeta2004,Vep-norlund-2006"
+
+\end_inset
+
+.
+ More generally, there are many numerous ties to classical analytic number
+ theory, and, specifically, connections to the modular group SL(2,Z), and
+ to the modular functions and elliptic curves defined thereon.
+ This is developed in considerable detail in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ve-M04"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The overall layout of this text is as follows:
 \end_layout
 
 \begin_layout Itemize
@@ -174,8 +262,12 @@ Solve the two sawtooth transfer operators (these are exactly solvable).
 \end_layout
 
 \begin_layout Itemize
-Show how to get GKW eigenfunctions from the dyadic sawtooth eigenfunctions;
- present a complete(?) set of fractal eigenfunctions for the GKW operator.
+Show how to get GKW eigenfunctions from the dyadic sawtooth eigenfunctions.
+\end_layout
+
+\begin_layout Itemize
+Demonstrate that GKW is the shift operator on Baire space; construct the
+ continuous-spectrum fractal eigenfunctions for the GKW operator.
 \end_layout
 
 \begin_layout Itemize
@@ -9209,7 +9301,11 @@ cylinder sets
 
 \begin_layout Standard
 Consider now the space 
-\begin_inset Formula $\left\{ f\;:\;\mathbb{N}^{\omega}\to\mathbb{C}\right\} $
+\begin_inset Formula 
+\begin{equation}
+\left\{ f\;:\;\mathbb{N}^{\omega}\to\mathbb{C}\right\} \label{eq:Baire maps}
+\end{equation}
+
 \end_inset
 
  of (continuous) maps fr
@@ -9303,7 +9399,7 @@ reference "fig:Baire-Rademacher-functions"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -9376,7 +9472,7 @@ height "1pt"
 
 \begin_layout Plain Layout
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 created by src/fractal/misc/walsh/baire.c and graphed by baire.gplot
@@ -9397,7 +9493,67 @@ created by src/fractal/misc/walsh/baire.c and graphed by baire.gplot
 \end_layout
 
 \begin_layout Standard
-LP spaces (bannach psaces)
+The cylinders defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:baire cylinder"
+
+\end_inset
+
+ can be used to define the Banach space subsets of the set of continuous
+ maps 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Baire maps"
+
+\end_inset
+
+.
+ Thus, one may consider the series
+\begin_inset Formula 
+\[
+f(x)=\sum_{n=1}^{\infty}\sum_{b=1}^{\infty}c_{n,b}r_{n,b}(x)
+\]
+
+\end_inset
+
+for complex-valued constants 
+\begin_inset Formula $c_{n,b}\in\mathbb{C}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}\sum_{b=1}^{\infty}\left|c_{n,b}\right|^{p}<\infty
+\]
+
+\end_inset
+
+Such series belong to the 
+\begin_inset Formula $l_{p}$
+\end_inset
+
+ Banach space.
+ By abuse of notation, we can take these as functions on either the Baire
+ space, or on the unit interval of the reals.
+ The Banach space 
+\begin_inset Formula $l_{1}$
+\end_inset
+
+ gives the functions that are continuous on Baire space (point-wise continuity
+ follows from convergence); of course, these functions are discontinuous
+ on the unit interval, as is obvious from figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Baire-Rademacher-functions"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The
 \end_layout
 
 \begin_layout Section
