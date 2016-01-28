@@ -7,7 +7,7 @@ LIB = $(TOP)/lib
 
 CC = /usr/bin/cc -O2 -Wall -I$(INC)
 
-EXES= mob-count walsh walsh-mink
+EXES= baire mob-count walsh walsh-mink
 
 all: 	$(EXES)
 
@@ -21,7 +21,7 @@ dist:
 	tar -zcvf walsh.tgz *.c *.gplot Makefile .cvsignore
 
 .c.o:
-	$(CC) -c $<
+	$(CC) -c -std=c99 $<
 
 .C.o:
 	$(CC) -c $<
@@ -30,8 +30,7 @@ dist:
 	$(CC) -o $* $^ -L$(LIB) -lfunc -lm -lstdc++
 
 
+baire: baire.o
 mob-count:	mob-count.o
 walsh:	walsh.o
 walsh-mink:	walsh-mink.o
-
-
