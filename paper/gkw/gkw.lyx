@@ -9829,15 +9829,152 @@ reference "eq:GKW-saw relation"
 \end_inset
 
 .
- Unlike the previously constructed fractal eigenfunctions, these are very
- explicitly NOT invarient under reflection 
+ 
+\end_layout
+
+\begin_layout Subsection
+Symmetries
+\end_layout
+
+\begin_layout Standard
+It is worth pondering the action of the dyadic monoid on Baire space.
+ The equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:monoid generator g"
+
+\end_inset
+
+ defines a generator 
+\begin_inset Formula $g_{C}$
+\end_inset
+
+ which acts on continued fractions as
+\begin_inset Formula 
+\[
+g_{C}\left[a_{1},a_{2},\cdots\right]=\left[a_{1}+1,a_{2},\cdots\right]
+\]
+
+\end_inset
+
+Its action on the total Baire space is to remove the cylinder 
+\begin_inset Formula $C_{1}(1)$
+\end_inset
+
+, as no continued fraction begining with 1 can ever occur:
+\begin_inset Formula 
+\[
+g\mathbb{N}^{\omega}=\mathbb{N}^{\omega}\backslash C_{1}(1)
+\]
+
+\end_inset
+
+Thus, it follows that it's action on a cylinder set is
+\begin_inset Formula 
+\[
+gC_{n}(b)=C_{n}(b)\cap\left(\mathbb{N}^{\omega}\backslash C_{1}(1)\right)
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $n>1,$
+\end_inset
+
+ while for 
+\begin_inset Formula $n=1$
+\end_inset
+
+, one has that
+\begin_inset Formula 
+\[
+gC_{1}(b)=C_{1}(b+1)
+\]
+
+\end_inset
+
+Likewise, it acts on the basis functions as
+\begin_inset Formula 
+\[
+gr_{n,b}=r_{n,b}\cdot\left(1-r_{1,1}\right)
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $n>1$
+\end_inset
+
+.
+ Here, the dot reminds us that this is just ordinary multiplication.
+ For 
+\begin_inset Formula $n=1$
+\end_inset
+
+, one has
+\begin_inset Formula 
+\[
+gr_{1,b}=r_{1,b+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The reflection operator 
 \begin_inset Formula $r(x)=1-x$
 \end_inset
 
-; that is, they are eigenfunctions of the shift only, but not of reflection,
- and thus do not transform under the dyadic monoid subset of the modular
- group.
- 
+ acts on continued fractions as well; unfortunately, the notion used here
+ conflicts a bit with the above defintiins.
+ Thus, 
+\begin_inset Formula $r$
+\end_inset
+
+ without subscripts denotes reflection, while 
+\begin_inset Formula $r_{n,b}$
+\end_inset
+
+ with subscripts denotes the basis functions.
+ It is easiest to give the general form of its action as
+\begin_inset Formula 
+\[
+rg^{n}\left[a_{1},a_{2},\cdots\right]=\left[1,a_{1}+n-1,a_{2},\cdots\right]
+\]
+
+\end_inset
+
+that is, 
+\begin_inset Formula $rg$
+\end_inset
+
+ acts as a right-shift operator:
+\begin_inset Formula 
+\[
+rg\mathbb{N}^{\omega}=C_{1}(1)
+\]
+
+\end_inset
+
+Acting on a single cylinder, it gives
+\begin_inset Formula 
+\[
+rgC_{n}(b)=C_{n+1}(b)\cap C_{1}(1)
+\]
+
+\end_inset
+
+and its action on the basis functions is
+\begin_inset Formula 
+\[
+rgr_{n,b}=r_{n+1,b}\cdot r_{1,1}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
