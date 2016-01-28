@@ -209,8 +209,8 @@ inline long double mobiux (long double x)
 	// xform is (ax+b)/(cx+d) having pole at 0 <= x=-d/c <= 1
 	int a = 1;
 	int b = 0;
-	int c = -5;
-	int d = 2;
+	int c = -2;
+	int d = 1;
 	long double ox = (a*x +b) / (c*x+d);
 	long double a1 = floorl(ox);
 	long double r1 = ox - a1;
