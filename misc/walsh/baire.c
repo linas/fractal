@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 	{
 		double r1 = rade(1,3,x);
 		double r2 = rade(2,1,x);
-		double r3 = rade(3,3,x);
+		double r3 = rade(3,1,x);
 		printf("%f	%f	%f	%f\n", x, r1, r2, r3);
 	}
 
