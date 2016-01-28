@@ -58,11 +58,13 @@ int main(int argc, char* argv[])
 
 	double lambda = 0.5;
 	double bee = 1;
-	for (x=0.0; x<1.0; x+=0.0001)
+	for (x=0.0; x<1.0; x+=0.00001)
 	{
 		double r1 = rade(1,bee,x);
 		double fra = fractal(lambda, bee, x);
-		printf("%f	%f	%f\n", x, r1, fra);
+		double r2 = rade(1,2,x);
+		double fra2 = fractal(lambda, 2, x);
+		printf("%f	%f	%f	%f	%f\n", x, r1, fra, r2, fra2);
 	}
 
 	return 0;

@@ -4988,9 +4988,9 @@ reference "cap:Dyadic Sawtooth"
 
 , and can be written as 
 \begin_inset Formula 
-\[
-c(x)=2-2^{n}x\;\textrm{ for \;\ }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}
-\]
+\begin{equation}
+c(x)=2-2^{n}x\;\textrm{ for \;\ }\frac{1}{2^{n}}<x\leq\frac{1}{2^{n-1}}\label{eq:dyadic-sawtooth}
+\end{equation}
 
 \end_inset
 
@@ -5060,7 +5060,7 @@ Dyadic Sawtooth
 This figure illustrates the second kind of sawtooth, given by equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:dyadic-sawtooth-c(x)"
+reference "eq:dyadic-sawtooth"
 
 \end_inset
 
@@ -6212,13 +6212,13 @@ Keeping in mind that the proper setting for both the transfer operator and
  to supply a proof that a similarity transform connects solutions of the
  dyadic sawtooth and the GKW operator:
 \begin_inset Formula 
-\begin{align*}
-\left[\mathcal{L}_{h}?^{\prime}\cdot f\circ?\right]\left(x\right)= & \sum_{n=1}^{\infty}\frac{1}{\left(x+n\right)^{2}}?^{\prime}\left(\frac{1}{x+n}\right)\left(f\circ?\right)\left(\frac{1}{x+n}\right)\\
-= & ?^{\prime}\left(x\right)\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-?\left(x\right)}{2^{n}}\right)\\
-= & ?^{\prime}\left(x\right)\cdot\left[\mathcal{L}_{c}f\right]\left(?\left(x\right)\right)\\
-= & \lambda?^{\prime}\left(x\right)f\left(?\left(x\right)\right)\\
-= & \lambda\left(?^{\prime}f\circ?\right)\left(x\right)
-\end{align*}
+\begin{align}
+\left[\mathcal{L}_{h}?^{\prime}\cdot f\circ?\right]\left(x\right)= & \sum_{n=1}^{\infty}\frac{1}{\left(x+n\right)^{2}}?^{\prime}\left(\frac{1}{x+n}\right)\left(f\circ?\right)\left(\frac{1}{x+n}\right)\label{eq:GKW-saw relation}\\
+= & ?^{\prime}\left(x\right)\sum_{n=1}^{\infty}\frac{1}{2^{n}}f\left(\frac{2-?\left(x\right)}{2^{n}}\right)\nonumber \\
+= & ?^{\prime}\left(x\right)\cdot\left[\mathcal{L}_{c}f\right]\left(?\left(x\right)\right)\nonumber \\
+= & \lambda?^{\prime}\left(x\right)f\left(?\left(x\right)\right)\nonumber \\
+= & \lambda\left(?^{\prime}f\circ?\right)\left(x\right)\nonumber 
+\end{align}
 
 \end_inset
 
@@ -8951,6 +8951,13 @@ By contrast, the
 
 \begin_layout Subsection
 Fractal Eigenfunctions of the GKW Operator
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Fractal-Eigenfunctions-of"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -9399,7 +9406,7 @@ reference "fig:Baire-Rademacher-functions"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -9628,15 +9635,15 @@ for
 \end_inset
 
  such that it lays within the unit disk: 
-\begin_inset Formula $\left|\lambda\right|\le1$
+\begin_inset Formula $\left|\lambda\right|<1$
 \end_inset
 
 .
  Then write 
 \begin_inset Formula 
-\[
-\phi_{\lambda,b}=\sum_{n=1}^{\infty}\lambda^{n}r_{n,b}
-\]
+\begin{equation}
+\phi_{\lambda,b}=\sum_{n=1}^{\infty}\lambda^{n-1}r_{n,b}\label{eq:fractal eigenfunction}
+\end{equation}
 
 \end_inset
 
@@ -9649,7 +9656,7 @@ Clearly, these are eigenfunctions of the GKW operator:
 \end_inset
 
 The requirement that 
-\begin_inset Formula $\left|\lambda\right|\le1$
+\begin_inset Formula $\left|\lambda\right|<1$
 \end_inset
 
  mearly ensures that 
@@ -9659,6 +9666,174 @@ The requirement that
  is an element of Banach space, i.e.
  so that it has well-behaved convergence properties; otherwise, the formal
  relation holds just fine without this restriction.
+ Two such eigenfunctions are illustrated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Fractal-Eigenfunctions"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Fractal Eigenfunctions
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Fractal-Eigenfunctions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename baire-fract-0.5-1.eps
+	width 45text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename baire-fract-0.5-2.eps
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+An illustration of two fractal eigenfunctions of the GKW operator.
+ The figure on the left shows 
+\begin_inset Formula $\phi_{0.5,1}(x)$
+\end_inset
+
+ and the one on the right shows 
+\begin_inset Formula $\phi_{0.5,2}(x)$
+\end_inset
+
+ where 
+\begin_inset Formula $\phi_{\lambda,b}$
+\end_inset
+
+ is as defined in eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fractal eigenfunction"
+
+\end_inset
+
+.
+ Both figures take 
+\begin_inset Formula $\lambda=0.5$
+\end_inset
+
+.
+ The highest point on the graph follows from the fact that 
+\begin_inset Formula $\sum_{n=0}^{\infty}\lambda^{n}=1/(1-\lambda)$
+\end_inset
+
+.
+ The red lines in each figure illustrate the Rademacher basis functions
+ 
+\begin_inset Formula $r_{1,1}(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{1,2}(x)$
+\end_inset
+
+, respectively.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100line%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+created by src/fractal/misc/walsh/baire.c and graphed by baire-fract.gplot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The eigenfunctions constructed here appear to form a complete set (XXX need
+ a proof of this!?), in that they span the entire space of eigenfunctions
+ for a fixed 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ Thus, we expect these to be a linear combination of the fractal eigenfunctions
+ defined in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Fractal-Eigenfunctions-of"
+
+\end_inset
+
+, although the price form is unclear.
+ By analogy to that section, one expects that the functions 
+\begin_inset Formula $\phi_{\lambda,b}\circ?^{-1}$
+\end_inset
+
+ can be used to construct eigenfunctions of the dyadic sawtooth, as a reversal
+ of the relation given in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:GKW-saw relation"
+
+\end_inset
+
+.
+ Again, the question arrises: for which linear combinations of thesebasis
+ functions are the eigenfunctions continuous or differentiable? 
 \end_layout
 
 \begin_layout Section
