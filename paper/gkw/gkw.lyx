@@ -9312,7 +9312,7 @@ Consider now the space
 
 \end_inset
 
- of (continuous) maps fr
+of (continuous) maps fr
 \family roman
 \series medium
 \shape up
@@ -10079,12 +10079,284 @@ The above developments present an insight that leads to a question.
 \begin_layout Standard
 The discussion that follows aims to review the product topology a bit more
  generally, to define a suitable measure on the product topology, and to
- use this generalize the notion of differentiability
+ use this generalize the notion of differentiability so that it can be used
+ in the product topology setting.
+ A fair amount of effort will be devoted to bridge this back to the topology
+ of the unit interval of the real number line, and to the established concepts
+ of integrability and differentiability in that setting.
 \end_layout
 
 \begin_layout Standard
-a more general setting, and consider different approaches to findings answers
- to these questions.
+That is, we want to be able to say that the unit interval 
+\begin_inset Formula $[0,1]\subset\mathbb{R}$
+\end_inset
+
+ can be obtained as a quotient space of the Cantor set 
+\begin_inset Formula $[0,1]=2^{\omega}/\sim$
+\end_inset
+
+, where the equivalence 
+\begin_inset Formula $\sim$
+\end_inset
+
+ glues together the gaps in the Cantor set (the gaps occuring at the dyadic
+ rationals, which have two inequivalent representations in the Cantor set;
+ for example, 
+\begin_inset Formula $0.01111\cdots=0.1000\cdots$
+\end_inset
+
+), or, similarly, 
+\begin_inset Formula $[0,1]=\mathbb{N}^{\omega}/\sim$
+\end_inset
+
+, where the equivalence 
+\begin_inset Formula $\sim$
+\end_inset
+
+ glues together the gaps in Baire space (the gaps occuring at the rationals,
+ which have two inequivalent representations as continued fractions, viz.
+ 
+\begin_inset Formula $[a_{1},a_{2},\cdots,a_{n}]=[a_{1},a_{2},\cdots,a_{n}-1,1]$
+\end_inset
+
+).
+ But it is not enough to simply define these quotient spaces and remark
+ that they are isomorphic to the reals; we also want to establish some sort
+ of equivalence between functions on the Cantor/Baire spaces, and functions
+ on the unit interval, and furthermore, promote the concepts of integrability
+ and differentiability on the reals to equivalent operations on the product
+ spaces.
+ That is, given a differentiable function on the reals, what might its equivalen
+t look like on the Cantor set or Bair space? If we impose the condition
+ of smoothness (infinite differentiability) on the unit interval, what is
+ the equivalent condition on the Cantor/Baire set?
+\end_layout
+
+\begin_layout Subsection
+The Measure as a Pullback
+\end_layout
+
+\begin_layout Standard
+Let us begin by reviewing, one again, the defintion of the product topology
+ on a countable product 
+\begin_inset Formula $X^{\omega}$
+\end_inset
+
+ of identical sets 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Of specific interest is 
+\begin_inset Formula $X=2=\{0,1\}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\Delta=2^{\omega}$
+\end_inset
+
+ is the Cantor set, or 
+\begin_inset Formula $X=\mathbb{N}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\mathbb{N}^{\omega}$
+\end_inset
+
+ is Baire space.
+ The generators of the topology are the cylinders 
+\begin_inset Formula 
+\[
+C_{n}(b)=\left\{ \left(a_{1},a_{2},\cdots\right)\in X^{\omega}\;:\; a_{n}=b\right\} 
+\]
+
+\end_inset
+
+and the cylinder sets are the intersections of a finite number of these
+ cylinders.
+ The cylinder sets form the basis of the topology; the open sets of the
+ topology are obtained as countable unions of cylinder sets.
+ The points topology are the infinite strings of symbols chosen from 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Clearly, the number of points is uncountable.
+ For the most part, the notion of a point is irrelevant for what follows.
+ 
+\end_layout
+
+\begin_layout Standard
+Denote by 
+\begin_inset Formula $\mathcal{T}$
+\end_inset
+
+ the topology, that is, 
+\begin_inset Formula $\mathcal{T}$
+\end_inset
+
+ is the collection of the open sets in the topology.
+ The primary topic of discussion in what follows will involve the set of
+ functions 
+\begin_inset Formula $\mathcal{F}\left(\mathcal{T}\to\mathbb{R}\right)$
+\end_inset
+
+ that assign a single real number to some open set in 
+\begin_inset Formula $\mathcal{T}$
+\end_inset
+
+.
+ There are several things we wish to accomplish: first and foremost, we
+ wish to limit the discussion to functions 
+\begin_inset Formula $f\in\mathcal{F}$
+\end_inset
+
+ that have equivalent functions (or possibly 'generalized functions') 
+\begin_inset Formula $[f]$
+\end_inset
+
+ on the unit interval, with equivalence arrived at by applying the map 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:continued-frac"
+
+\end_inset
+
+ (for the Baire space) or 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:binary expansion"
+
+\end_inset
+
+ (for the Cantor set).
+ It should be clear that not every 
+\begin_inset Formula $f\in\mathcal{F}$
+\end_inset
+
+ has such an equivalence, so establishing such a criterion is important.
+\end_layout
+
+\begin_layout Standard
+One necessary ingredient is that the functions 
+\begin_inset Formula $\mathcal{F}\left(\mathcal{T}\to\mathbb{R}\right)$
+\end_inset
+
+ must be 
+\begin_inset Quotes eld
+\end_inset
+
+integrable
+\begin_inset Quotes erd
+\end_inset
+
+, that is, one should only consider those functions 
+\begin_inset Formula $f:\mathcal{T}\to\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f(A\cup B)=f(A)+f(B)$
+\end_inset
+
+ whenever 
+\begin_inset Formula $A\cap B=\emptyset$
+\end_inset
+
+.
+ We also want to define the class of measures that assign to each open set
+ in 
+\begin_inset Formula $\mathcal{T}$
+\end_inset
+
+ a positive real number, its size.
+ The goal is to have this class of measures be consistent and equivalent
+ with the normal defintion of a measure on the reals; this is needed so
+ that discussions about integrability make sense, and are well-defined.
+\end_layout
+
+\begin_layout Standard
+The definition of differentiability seems to require the replacement of
+ classical definitions that employ Cauchy sequences by definitions that
+ employ the notion of filters.
+ This means defining operators 
+\begin_inset Formula $\sup:\mathcal{F}\to\mathcal{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\inf:\mathcal{F}\to\mathcal{F}$
+\end_inset
+
+ that find the suprenum and infenum of values on sets.
+ These may be defined as follows: given any 
+\begin_inset Formula $f\in\mathcal{F}$
+\end_inset
+
+ and any 
+\begin_inset Formula $A\in\mathcal{T}$
+\end_inset
+
+, let 
+\begin_inset Formula 
+\[
+\left(\sup f\right)\left(A\right)=\sup\left\{ f\left(B\right)|B\subset A\right\} 
+\]
+
+\end_inset
+
+Intuitively, we expect this suprenum to be finite whenever a function is
+ Borel-measureable on the unit interval.
+ 
+\end_layout
+
+\begin_layout Standard
+For the Cantor set, we have a mapping 
+\begin_inset Formula $m:\Delta\to\mathbb{R}$
+\end_inset
+
+ given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:binary expansion"
+
+\end_inset
+
+, and for Baire space, the continued fraction mapping 
+\begin_inset Formula $m:\mathbb{N^{\omega}\to\mathbb{R}}$
+\end_inset
+
+ given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:continued-frac"
+
+\end_inset
+
+.
+ These are maps of points to points; we wish to now construct a push-forward,
+ that maps sets to sets.
+ 
+\end_layout
+
+\begin_layout Standard
+Outline: to-do:
+\end_layout
+
+\begin_layout Itemize
+define the set mapping
+\end_layout
+
+\begin_layout Itemize
+take the natural measure on the reals and pull it back to a measure on product
+ spaces
+\end_layout
+
+\begin_layout Itemize
+Given a function f on the product topology, define the concept of sup f
+ and inf f on the product spaces, where sup is the 
+\end_layout
+
+\begin_layout Subsection
+Cantor stuff
 \end_layout
 
 \begin_layout Standard
