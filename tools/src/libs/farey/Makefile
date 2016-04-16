@@ -18,12 +18,12 @@ RM= rm -f
 
 OBJS=bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o gpf.o \
      harmonic.o \
-	  modular.o moebius.o Prime.o question.o question-new.o stern-brocot.o \
+	  modular.o moebius.o prime.o question.o question-new.o stern-brocot.o \
      stirling.o totient.o
 
 INCS=bernoulli.h binomial.h cache.h cplex.h Farey.h FareyTree.h \
      flt.h gcf.h gpf.h harmonic.h \
-     modular.h moebius.h Prime.h question.h stirling.h totient.h
+     modular.h moebius.h prime.h question.h stirling.h totient.h
 
 all: inc $(OBJS)
 
@@ -42,7 +42,7 @@ gpf.o:	gpf.c gpf.h
 harmonic.o:	harmonic.c harmonic.h
 modular.o:	modular.c modular.h
 moebius.o:	moebius.c moebius.h cache.h
-Prime.o:	Prime.c Prime.h
+prime.o:	prime.c prime.h
 question.o:	question.C question.h Farey.h
 question-new.o:	question-new.c flt.h question.h
 stirling.o: stirling.c stirling.h
@@ -68,7 +68,7 @@ realclean: clean
 	cd maps; make realclean
 	cd prods; make realclean
 	cd loops; make realclean
-	$(RM) Prime inc
+	$(RM) inc
 
 dist:
 	tar -zcvf x *.C *.h *.c Makefile .gitgnore README

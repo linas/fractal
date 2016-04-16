@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #include "Farey.h"
-#include "Prime.h"
+#include "prime.h"
 
 
 
@@ -17,8 +17,6 @@ main (int argc, char * argv[])
 {
 	int deno = atoi (argv[1]);
 	
-	struct Prime * pr = CreatePrime ();
-
 	int i;
 	for (i=1; i<deno; i++)
 	{
@@ -34,7 +32,7 @@ main (int argc, char * argv[])
 		for (j=1; j<=nt; j++)
 		{
 			int p = cf.GetTerm(j);
-			int f = GetPrime (pr, j-1);
+			int f = get_nth_prime(j-1);
 
 			while (p) { ber *= f; p--;  }
 		}

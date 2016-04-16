@@ -1,10 +1,10 @@
-
 /*
  * moebius.h
  * 
- * Return the moebius function of an integer.
- * not intended for large integers, works only for small integers
- * due to poor-mans factorization algo.
+ * Return the Moebius function of an integer.
+ *
+ * Not intended for large integers, works only for small integers,
+ * due to poor-man's factorization algo.
  *
  * Linas Vepstas Jaunuary 2005
  */
@@ -13,8 +13,9 @@
 extern "C" {
 #endif
 
-/** Compute the divisor arithmetic function
- *  Returns the number of divisors of n.
+/** 
+ * Compute the divisor arithmetic function.
+ * Returns the number of divisors of n.
  */
 int divisor (long long int n);
 
