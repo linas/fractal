@@ -14,14 +14,17 @@
  */
 unsigned long gpf (unsigned long n)
 {
+	unsigned long fact = 1;
 	for (unsigned int nth = 1; ; nth++)
 	{
 		unsigned long p = get_nth_prime(nth);
+		if (n < p) return fact;
+
 		while (n % p == 0)
 		{
 			n /= p;
+			fact = p;
 		}
-		if (n < p*p) return n;
 	}
 
 	return 0;
