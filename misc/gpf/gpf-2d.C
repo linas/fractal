@@ -47,7 +47,6 @@ double complex gpf_exponential(double complex x)
 	double fact = 1.0;
 
 	if (cabs(x) < MAX_PREC) return x;
-	if (1.0 <= cabs(x)) return 0.0;
 
 	for (int n=1; ; n++)
 	{
@@ -66,7 +65,8 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 	max_iter = itermax;
    double complex z = re_q + I * im_q;
 
-	double complex g = gpf_ordinary(z);
+	// double complex g = gpf_ordinary(z);
+	double complex g = gpf_exponential(z);
 
 	return cabs(g);
 	// return creal(g);
