@@ -1,8 +1,8 @@
 /*
  * moebius.c
  * 
- * Return the moebius function of an integer.
- * Not intended for large integers, works only for small integers
+ * Return the Moebius function of an integer.
+ * Not intended for large integers, works only for small integers,
  * due to poor-man's factorization algo.
  *
  * Linas Vepstas January 2005
@@ -28,6 +28,9 @@ static unsigned int sieve_max = 0;
 /* Initialize and fill in a prime-number sieve.
  * Handles primes up to 4 billion (2^32)
  * long long int should be a 64-bit number 
+ *
+ * XXX Ths should be converted to use the code in prime.h and prime.c,
+ * but for now, its here, soe as to maximize copiler optimization.
  */
 static void
 init_prime_sieve (long long int prod)

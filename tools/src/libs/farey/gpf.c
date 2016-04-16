@@ -7,13 +7,22 @@
  */
 
 #include "gpf.h"
+#include "prime.h"
 
 /* ------------------------------------------------------------ */
 /** Return the greatest prime factor.
  */
 unsigned long gpf (unsigned long n)
 {
-	unsigned long t = 1;
+	for (unsigned int nth = 1; ; nth++)
+	{
+		unsigned long p = get_nth_prime(nth);
+		while (n % p == 0)
+		{
+			n /= p;
+		}
+		if (n < p*p) return n;
+	}
 
-	return t;
+	return 0;
 }

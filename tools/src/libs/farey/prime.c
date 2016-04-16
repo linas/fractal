@@ -85,9 +85,14 @@ init_prime_sieve (size_t max)
 #endif
 }
 
+/**
+ * Return the n'th prime number.
+ * 2 is the 1'th prime number,
+ * 3 si the 2'th prime number, etc.
+ */
 unsigned int get_nth_prime(unsigned long n)
 {
-	init_prime_sieve(n);
+	if (sieve_max <= n) init_prime_sieve(n);
 	return sieve[n-1];
 }
 
