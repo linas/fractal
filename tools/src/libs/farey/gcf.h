@@ -1,7 +1,6 @@
-
-/* 
+/*
  * FUNCTION:
- * return greatest common factor (greatest common divisor)
+ * Return greatest common factor (greatest common divisor)
  *
  * HISTORY:
  * Oct 2004 -- linas
@@ -12,11 +11,12 @@ extern "C" {
 #endif
 
 /* ------------------------------------------------------------ */
-/* Return the greatest common factor, 32-bit in accurate.
- * Assumes that inputs are positive integers; results undefined 
- * for neg integers or zero.
+/* Return the greatest common factor, 32/64-bit accurate,
+ * (depending on size of "unsigned long").
+ *
+ * Results undefined if input is zero.
  */
-int gcf32 (int nume, int denom);
+unsigned long gcf32 (unsigned long nume, unsigned long denom);
 
 #ifdef   __cplusplus
 };

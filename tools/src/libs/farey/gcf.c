@@ -1,5 +1,4 @@
-
-/* 
+/*
  * FUNCTION:
  * return greatest common factor (greatest common divisor)
  *
@@ -11,10 +10,10 @@
 
 /* ------------------------------------------------------------ */
 /* Return the greatest common factor, 32-bit in accurate */
-int
-gcf32 (int nume, int denom)
+unsigned long
+gcf32 (unsigned long nume, unsigned long denom)
 {
-	int t;
+	unsigned long t;
 	t = nume % denom;
 	nume = denom;
 	denom = t;
@@ -30,4 +29,3 @@ gcf32 (int nume, int denom)
 	/* nume now holds the GCD (Greatest Common Divisor) */
 	return nume;
 }
-
