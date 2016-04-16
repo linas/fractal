@@ -9,11 +9,29 @@
 
 #include <gpf.h>
 
+/*
+ * Ordinary generating function for the greatest common factor.
+ */
+double gpf_ordinary(double x)
+{
+	double sum = 0;
+	double xn = x;
+
+	for (int n=1; ; n++)
+	{
+		sum += gpf(n) * xn;
+		xn *= x;
+		if (n*xn < 1.0e-16) break;
+	}
+
+	return sum;
+}
+
 int main()
 {
-	for (int n=1; n<100; n++)
+	for (double x=0.0; x< 1.0; x+= 0.002)
 	{
-		int g = gpf(n);
-		printf("duuude n=%d gpf=%d\n", n, g);
+		double y = gpf_ordinary(x);
+		printf("duuude x= %g y = %g\n", x, y);
 	}
 }
