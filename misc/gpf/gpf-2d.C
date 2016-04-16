@@ -68,7 +68,9 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 
 	double complex g = gpf_ordinary(z);
 
-	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+	return cabs(g);
+	// return creal(g);
+	// return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
 DECL_MAKE_HEIGHT(ploto);
