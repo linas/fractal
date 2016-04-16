@@ -61,10 +61,11 @@ int main()
 		printf("%g\t%g\t%g\n", x, y, z);
 	}
 #endif
-	for (double x=0.0; x< 100.0; x+= 0.2)
+	for (double x=0.0; x< 75.0; x+= 0.1)
 	{
-		double z = gpf_exponential(x);
-		printf("%g\t%g\n", x, z);
+		double y = gpf_exponential(x);
+		double z = log(y);
+		printf("%g\t%g\t%g\n", x, y, z);
 		fflush(stdout);
 	}
 }
