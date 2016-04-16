@@ -16,12 +16,13 @@ CC = cc -Wall -g -O3 -std=gnu11 -I $(INC)
 
 RM= rm -f
 
-OBJS=bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o harmonic.o \
+OBJS=bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o gpf.o \
+     harmonic.o \
 	  modular.o moebius.o Prime.o question.o question-new.o stern-brocot.o \
      stirling.o totient.o
 
 INCS=bernoulli.h binomial.h cache.h cplex.h Farey.h FareyTree.h \
-     flt.h gcf.h harmonic.h \
+     flt.h gcf.h gpf.h harmonic.h \
      modular.h moebius.h Prime.h question.h stirling.h totient.h
 
 all: inc $(OBJS)
@@ -37,6 +38,7 @@ cache.o:	cache.c cache.h
 Farey.o:	Farey.C Farey.h
 FareyTree.o:	FareyTree.C FareyTree.h
 gcf.o:	gcf.c gcf.h
+gpf.o:	gpf.c gpf.h
 harmonic.o:	harmonic.c harmonic.h
 modular.o:	modular.c modular.h
 moebius.o:	moebius.c moebius.h cache.h

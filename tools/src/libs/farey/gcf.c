@@ -9,7 +9,10 @@
 #include "gcf.h"
 
 /* ------------------------------------------------------------ */
-/* Return the greatest common factor, 32-bit in accurate */
+/**
+ * Return the greatest common factor, 32/64-bit accurate.
+ * Implements Euclid's algorithm.
+ */
 unsigned long
 gcf32 (unsigned long nume, unsigned long denom)
 {
@@ -18,7 +21,7 @@ gcf32 (unsigned long nume, unsigned long denom)
 	nume = denom;
 	denom = t;
 
-	/* Euclids algorithm for obtaining the gcf */
+	/* Euclid's algorithm for obtaining the gcf */
 	while (0 != denom)
 	{
 		t = nume % denom;
