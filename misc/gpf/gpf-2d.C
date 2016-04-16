@@ -12,6 +12,9 @@
 #include <gpf.h>
 #include "brat.h"
 
+#define MAX_PREC 1.0e-8
+int max_iter = 100000000;
+
 /*
  * Ordinary generating function for the greatest common factor.
  */
@@ -21,12 +24,14 @@ double complex gpf_ordinary(double complex x)
 	double complex xn = x;
 
 	if (cabs(x) < 1.0e-16) return x;
+	if (0.9999999 <= cabs(x)) return 0.0;
 
 	for (int n=1; ; n++)
 	{
 		sum += gpf(n) * xn;
 		xn *= x;
-		if (n*cabs(xn) < 1.0e-16*cabs(sum)) break;
+		if (n*cabs(xn) < MAX_PREC*cabs(sum)) break;
+		if (max_iter < n) break;
 	}
 
 	return sum;
@@ -41,14 +46,16 @@ double complex gpf_exponential(double complex x)
 	double complex xn = x;
 	double fact = 1.0;
 
-	if (cabs(x) < 1.0e-16) return x;
+	if (cabs(x) < MAX_PREC) return x;
+	if (1.0 <= cabs(x)) return 0.0;
 
 	for (int n=1; ; n++)
 	{
 		sum += gpf(n) * xn * fact;
 		xn *= x;
 		fact /= n;
-		if (n*cabs(xn)*fact < 1.0e-16*cabs(sum)) break;
+		if (n*cabs(xn)*fact < MAX_PREC*cabs(sum)) break;
+		if (max_iter < n) break;
 	}
 
 	return sum;
@@ -56,8 +63,7 @@ double complex gpf_exponential(double complex x)
 
 static double ploto(double re_q, double im_q, int itermax, double param)
 {
-   double x = param;
-
+	max_iter = itermax;
    double complex z = re_q + I * im_q;
 
 	double complex g = gpf_ordinary(z);
