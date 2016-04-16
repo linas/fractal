@@ -1,0 +1,17 @@
+
+set term png size 1024, 768
+set out 'gpf.png'
+
+# set style data linespoints
+set style data lines
+set key left
+
+set title "Greatest prime factor"
+set xlabel "x"
+set ylabel "g"
+
+# set xrange [0:1]
+# set xrange [0.499:0.501]
+
+# plot "gpf.dat" using 1:($2 - 1/(1-$1)) title ""
+plot "gpf.dat" using 1:(log($2)) title ""

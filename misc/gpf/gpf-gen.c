@@ -32,6 +32,6 @@ int main()
 	for (double x=0.0; x< 1.0; x+= 0.002)
 	{
 		double y = gpf_ordinary(x);
-		printf("duuude x= %g y = %g\n", x, y);
+		printf("%g\t%g\n", x, y);
 	}
 }
