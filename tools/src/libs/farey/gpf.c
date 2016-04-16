@@ -20,17 +20,18 @@ unsigned long gpf (unsigned long n)
 		unsigned long p = get_nth_prime(nth);
 		if (n < p) return fact;
 
-		while (n % p == 0)
+		if (n % p == 0)
 		{
-			n /= p;
 			fact = p;
+			n /= p;
+			while (n % p == 0) n /= p;
 		}
 	}
 
 	return 0;
 }
 
-#define TEST 1
+// #define TEST 1
 #ifdef TEST
 #include <stdio.h>
 
