@@ -5,6 +5,7 @@
  * April 2016
  */
 
+#include <complex.h>
 #include <math.h>
 #include <stdio.h>
 
@@ -34,11 +35,11 @@ double complex gpf_ordinary(double complex x)
 /*
  * Exponential generating function for the greatest common factor.
  */
-double complex gpf_exponential(double x)
+double complex gpf_exponential(double complex x)
 {
 	double complex sum = 0;
 	double complex xn = x;
-	double complex fact = 1.0;
+	double fact = 1.0;
 
 	if (cabs(x) < 1.0e-16) return x;
 
@@ -59,9 +60,9 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 
    double complex z = re_q + I * im_q;
 
-	double g = gpf_ordinary(z);
+	double complex g = gpf_ordinary(z);
 
-	return 0.5 + 0.5 * atan2(cimag(sm), creal(sm))/M_PI;
+	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
 DECL_MAKE_HEIGHT(ploto);

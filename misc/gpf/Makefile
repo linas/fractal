@@ -9,7 +9,7 @@ HIST=../../generate/brat.o ../../generate/util.o
 all: gpf-gen gpf-2d
 
 gpf-gen: gpf-gen.o $(FUNC)
-gpf-2d: gpf-2d.o $(HIST)
+gpf-2d: gpf-2d.o $(HIST) $(FUNC)
 
 .o:
 	cc -o $@ $^ -lm -lstdc++
