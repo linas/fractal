@@ -26,3 +26,16 @@ unsigned long gpf (unsigned long n)
 
 	return 0;
 }
+
+#define TEST 1
+#ifdef TEST
+#include <stdio.h>
+
+int main()
+{
+	for (unsigned long n=1; n<100; n++)
+	{
+		printf("n=%lu gpf=%lu\n", n, gpf(n));
+	}
+}
+#endif

@@ -57,7 +57,7 @@ init_prime_sieve (size_t max)
 
 	/* Really dumb algo, brute-force test all odd numbers against
 	 * known primes */
-	for (n=nstart; n<=max; n+=2)
+	for (n=nstart; pos <= max; n+=2)
 	{
 		for (j=1; ; j++)
 		{
