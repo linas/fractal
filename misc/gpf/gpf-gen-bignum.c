@@ -107,12 +107,13 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 		mpf_div(gabs, gabs, zabs);
 
 		// if (n * zn * fact < epsi * sum) return;
-		if (0 > mpf_cmp(gabs, epsi)) return;
+		if (0 > mpf_cmp(gabs, epsi)) break;
 	}
 
 	// Remove the leading exponential order.
 	cpx_abs(gabs, z);
 	mpf_neg(gabs, gabs);
 	fp_exp(gabs, gabs, prec);
+
 	cpx_times_mpf(sum, sum, gabs);
 }

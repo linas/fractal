@@ -16,7 +16,7 @@ gpf-2d: gpf-2d.o gpf-gen-bignum.o $(HIST) $(FUNC)
 gpf-gen-bignum.o: gpf-gen-bignum.h
 
 .o:
-	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -lm -lstdc++
+	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lm -lstdc++
 
 .c.o:
 	cc -c $^  -std=c99 -Wall -O2 $(INCLUDES)
