@@ -11,6 +11,8 @@
 
 # cat gpf-exp-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-phase.png
 
-../../generate/takelog gpf-exp-abs log-exp-abs
-../../generate/renorm log-exp-abs rg 0.0124
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs.png
+# ../../generate/takelog gpf-exp-abs log-exp-abs
+# ../../generate/renorm log-exp-abs rg 0.0124
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs.png
+
+cat gpf-norm-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-norm-phase.png

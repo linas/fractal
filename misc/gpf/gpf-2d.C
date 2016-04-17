@@ -37,6 +37,25 @@ double complex gpf_ordinary(double complex x)
 	return sum;
 }
 
+double complex gpf_normed(double complex x)
+{
+	double complex sum = 0;
+	double complex xn = x;
+
+	if (cabs(x) < 1.0e-16) return x;
+	if (0.9999999 <= cabs(x)) return 0.0;
+
+	for (int n=1; ; n++)
+	{
+		sum += gpf(n) * xn / ((double) n);
+		xn *= x;
+		if (cabs(xn) < MAX_PREC*cabs(sum)) break;
+		if (max_iter < n) break;
+	}
+
+	return sum;
+}
+
 /*
  * Exponential generating function for the greatest common factor.
  */
@@ -66,11 +85,12 @@ static double ploto(double re_q, double im_q, int itermax, double param)
    double complex z = re_q + I * im_q;
 
 	// double complex g = gpf_ordinary(z);
-	double complex g = gpf_exponential(z);
+	// double complex g = gpf_exponential(z);
+	double complex g = gpf_normed(z);
 
-	return cabs(g);
+	// return cabs(g);
 	// return creal(g);
-	// return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
 DECL_MAKE_HEIGHT(ploto);
