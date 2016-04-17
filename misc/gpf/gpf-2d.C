@@ -12,7 +12,7 @@
 #include <gpf.h>
 #include "brat.h"
 
-#define MAX_PREC 1.0e-8
+#define MAX_PREC 1.0e-18
 int max_iter = 100000000;
 
 /*
@@ -67,14 +67,22 @@ double complex gpf_exponential(double complex x)
 
 	if (cabs(x) < MAX_PREC) return x;
 
+double scale = exp(-2.0 * cabs(x)) / cabs(x);
+// printf("duuude scale= %g\n", scale);
+xn *= scale;
+// fact /= scale;
+
 	for (int n=1; ; n++)
 	{
-		sum += gpf(n) * xn * fact;
+		sum += gpf(n) * (xn * fact);
 		xn *= x;
 		fact /= n;
-		if (n*cabs(xn)*fact < MAX_PREC*cabs(sum)) break;
+		if (n*cabs(xn*fact) < MAX_PREC*cabs(sum)) break;
 		if (max_iter < n) break;
 	}
+scale = exp(cabs(x));
+sum *= scale;
+// printf("duuude %g sum=%g\n", cabs(x), cabs(sum));
 
 	return sum;
 }
@@ -104,15 +112,16 @@ static double ploto(double re_q, double im_q, int itermax, double param)
    double complex z = re_q + I * im_q;
 
 	// double complex g = gpf_ordinary(z);
-	// double complex g = gpf_exponential(z);
+	double complex g = gpf_exponential(z);
 	// g *= cexp(-z);
+	// g *= exp(-cabs(z)) / cabs(z);
 	// double complex g = gpf_normed(z);
-	double complex g = gpf_lambert(z);
+	// double complex g = gpf_lambert(z);
 
 
-	// return cabs(g);
+	return cabs(g);
 	// return creal(g);
-	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+	// return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
 DECL_MAKE_HEIGHT(ploto);

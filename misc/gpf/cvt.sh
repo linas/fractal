@@ -15,6 +15,13 @@
 # ../../generate/renorm log-exp-abs rg 0.0124
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs.png
 
+# ../../generate/renorm gpf-exp-abs rg 0.024
+# ../../generate/renorm gpf-exp-abs rg 0.24
+#../../generate/renorm gpf-exp-abs rg 0.4
+# ../../generate/renorm gpf-exp-abs rg 0.9999999
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs.png
+cat gpf-exp-abs-big.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-big.png
+
 # cat gpf-norm-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-norm-phase.png
 # cat gpf-pois-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-pois-phase.png
-cat gpf-lamb-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-lamb-phase.png
+# cat gpf-lamb-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-lamb-phase.png
