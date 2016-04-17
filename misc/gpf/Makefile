@@ -1,5 +1,7 @@
 
-INCLUDES =  -I../../tools/inc -I../../misc/bignum \
+ANANT=../anant-git/src
+
+INCLUDES =  -I../../tools/inc -I$(ANANT) \
    -I ../../generate
 
 FUNC=../../tools/lib/libfunc.a
@@ -12,7 +14,7 @@ gpf-gen: gpf-gen.o $(FUNC)
 gpf-2d: gpf-2d.o gpf-gen-bignum.o $(HIST) $(FUNC)
 
 .o:
-	cc -o $@ $^ -lm -lstdc++
+	cc -o $@ $^ -L$(ANANT) $(FUNC) -lanant -lgmp -lm -lstdc++
 
 .c.o:
 	cc -c $^  -std=c99 -Wall -O2 $(INCLUDES)
