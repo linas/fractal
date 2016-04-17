@@ -13,8 +13,10 @@ all: gpf-gen gpf-2d
 gpf-gen: gpf-gen.o $(FUNC)
 gpf-2d: gpf-2d.o gpf-gen-bignum.o $(HIST) $(FUNC)
 
+gpf-gen-bignum.o: gpf-gen-bignum.h
+
 .o:
-	cc -o $@ $^ -L$(ANANT) $(FUNC) -lanant -lgmp -lm -lstdc++
+	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -lm -lstdc++
 
 .c.o:
 	cc -c $^  -std=c99 -Wall -O2 $(INCLUDES)

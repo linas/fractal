@@ -126,4 +126,27 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 	// return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
-DECL_MAKE_HEIGHT(ploto);
+static double plot_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z;
+	cpx_init(sum);
+	cpx_init(z);
+
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_gpf_exponential(sum, z, 10);
+
+	// extract
+	mpf_t val;
+	mpf_init(val);
+	cpx_abs(val, sum);
+
+	double rv = mpf_get_d(val);
+
+	// Divide by z for plotting.
+	rv /= sqrt(re_q*re_q + im_q*im_q);
+
+	return rv;
+}
+
+DECL_MAKE_HEIGHT(plot_big);
