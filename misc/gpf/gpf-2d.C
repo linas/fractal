@@ -79,6 +79,25 @@ double complex gpf_exponential(double complex x)
 	return sum;
 }
 
+double complex gpf_lambert(double complex x)
+{
+	double complex sum = 0;
+	double complex xn = x;
+
+	if (cabs(x) < 1.0e-16) return x;
+	if (0.9999999 <= cabs(x)) return 0.0;
+
+	for (int n=1; ; n++)
+	{
+		sum += gpf(n) * xn / (1.0 - xn);
+		xn *= x;
+		if (n*cabs(xn) < MAX_PREC*cabs(sum)) break;
+		if (max_iter < n) break;
+	}
+
+	return sum;
+}
+
 static double ploto(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -86,7 +105,10 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 
 	// double complex g = gpf_ordinary(z);
 	// double complex g = gpf_exponential(z);
-	double complex g = gpf_normed(z);
+	// g *= cexp(-z);
+	// double complex g = gpf_normed(z);
+	double complex g = gpf_lambert(z);
+
 
 	// return cabs(g);
 	// return creal(g);
