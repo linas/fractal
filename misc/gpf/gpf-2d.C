@@ -67,10 +67,10 @@ double complex gpf_exponential(double complex x)
 
 	if (cabs(x) < MAX_PREC) return x;
 
-double scale = exp(-2.0 * cabs(x)) / cabs(x);
+double scale = exp(-3.5 * cabs(x));
 // printf("duuude scale= %g\n", scale);
 xn *= scale;
-// fact /= scale;
+fact *= exp(0.5 * cabs(x));
 
 	for (int n=1; ; n++)
 	{
@@ -80,7 +80,8 @@ xn *= scale;
 		if (n*cabs(xn*fact) < MAX_PREC*cabs(sum)) break;
 		if (max_iter < n) break;
 	}
-scale = exp(cabs(x));
+scale = exp(2.0 * cabs(x));
+scale /= cabs(x);
 sum *= scale;
 // printf("duuude %g sum=%g\n", cabs(x), cabs(sum));
 
