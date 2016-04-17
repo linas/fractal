@@ -11,6 +11,7 @@
 
 #include <gpf.h>
 #include "brat.h"
+#include "gpf-gen-bignum.h"
 
 #define MAX_PREC 1.0e-18
 int max_iter = 100000000;
@@ -59,29 +60,29 @@ double complex gpf_normed(double complex x)
 /*
  * Exponential generating function for the greatest common factor.
  */
-double complex gpf_exponential(double complex x)
+double complex gpf_exponential(long double complex x)
 {
-	double complex sum = 0;
-	double complex xn = x;
-	double fact = 1.0;
+	long double complex sum = 0;
+	long double complex xn = x;
+	long double fact = 1.0;
 
-	if (cabs(x) < MAX_PREC) return x;
+	if (cabsl(x) < MAX_PREC) return x;
 
-double scale = exp(-3.5 * cabs(x));
+double scale = expl(-3.0L * cabsl(x));
 // printf("duuude scale= %g\n", scale);
 xn *= scale;
-fact *= exp(0.5 * cabs(x));
+// fact *= expl(0.5 * cabsl(x));
 
 	for (int n=1; ; n++)
 	{
 		sum += gpf(n) * (xn * fact);
 		xn *= x;
 		fact /= n;
-		if (n*cabs(xn*fact) < MAX_PREC*cabs(sum)) break;
+		if (n*cabsl(xn*fact) < MAX_PREC*cabsl(sum)) break;
 		if (max_iter < n) break;
 	}
-scale = exp(2.0 * cabs(x));
-scale /= cabs(x);
+scale = expl(2.0L * cabsl(x));
+scale /= cabsl(x);
 sum *= scale;
 // printf("duuude %g sum=%g\n", cabs(x), cabs(sum));
 
