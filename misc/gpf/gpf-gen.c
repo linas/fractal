@@ -36,16 +36,15 @@ double gpf_exponential(double x)
 {
 	double sum = 0;
 	double xn = x;
-	double fact = 1.0;
 
 	if (x < 1.0e-16) return x;
 
 	for (int n=1; ; n++)
 	{
-		sum += gpf(n) * xn * fact;
-		xn *= x;
-		fact /= n;
-		if (n*xn*fact < 1.0e-16*sum) break;
+		sum += gpf(n) * xn;
+		xn *= x / ((double) n);
+
+		if (n*xn < 1.0e-16*sum) break;
 	}
 
 	return sum;
@@ -61,10 +60,10 @@ int main()
 		printf("%g\t%g\t%g\n", x, y, z);
 	}
 #endif
-	for (double x=0.0; x< 75.0; x+= 0.1)
+	for (double x=0.0; x< 675.0; x+= 0.5)
 	{
 		double y = gpf_exponential(x);
-		double z = log(y);
+		double z = y * exp(-x);
 		printf("%g\t%g\t%g\n", x, y, z);
 		fflush(stdout);
 	}

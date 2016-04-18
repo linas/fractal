@@ -64,24 +64,17 @@ double complex gpf_exponential(long double complex x)
 {
 	long double complex sum = 0;
 	long double complex xn = x;
-	long double fact = 1.0;
 
 	if (cabsl(x) < MAX_PREC) return x;
 
-double scale = expl(-3.0L * cabsl(x));
-// printf("duuude scale= %g\n", scale);
-xn *= scale;
-// fact *= expl(0.5 * cabsl(x));
-
 	for (int n=1; ; n++)
 	{
-		sum += gpf(n) * (xn * fact);
-		xn *= x;
-		fact /= n;
-		if (n*cabsl(xn*fact) < MAX_PREC*cabsl(sum)) break;
+		sum += gpf(n) * xn;
+		xn *= x / ((long double) n);
+		if (n*cabsl(xn) < MAX_PREC*cabsl(sum)) break;
 		if (max_iter < n) break;
 	}
-scale = expl(2.0L * cabsl(x));
+long double scale = expl(-cabsl(x));
 scale /= cabsl(x);
 sum *= scale;
 // printf("duuude %g sum=%g\n", cabs(x), cabs(sum));
