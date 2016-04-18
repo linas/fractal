@@ -137,7 +137,8 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	double rv = mpf_get_d(val);
 
 	// Divide by z for plotting.
-	rv /= sqrt(re_q*re_q + im_q*im_q);
+	double r = sqrt(re_q*re_q + im_q*im_q);
+	rv /= r*r*log(r);
 
 	return rv;
 }

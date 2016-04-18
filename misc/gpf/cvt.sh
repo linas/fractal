@@ -27,9 +27,11 @@
 # cat gpf-exp-abs-big.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-big.png
 
 # huge == width of 4320
-../../generate/renorm gpf-exp-abs-huge rg 0.03124
-# ../../generate/renorm gpf-exp-abs-huge rg 0.01124
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-huge.png
+# ../../generate/renorm gpf-exp-abs-huge rg 0.03124
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-huge.png
+
+../../generate/renorm gpf-exp-abs-40K rg 0.0041124
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-40K.png
 
 # cat gpf-norm-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-norm-phase.png
 # cat gpf-pois-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-pois-phase.png
