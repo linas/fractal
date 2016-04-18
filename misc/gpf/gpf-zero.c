@@ -47,12 +47,27 @@ void find_zero(double rguess, double tguess, double cell_size)
 	cpx_set_d(e1, cell_size, 0);
 	cpx_set_d(e2, 0, cell_size);
 
-	cpx_find_zero(zero, cpx_gpf_exponential, guess, e1, e2, 20, 50);
+	int rc = cpx_find_zero(zero, cpx_gpf_exponential, guess, e1, e2, 20, 50);
+
+	// if rc is not zero, then nothing was found
+	if (rc) return;
 
 	double re = cpx_get_re(zero);
 	double im = cpx_get_im(zero);
 
-	printf("found one at %18.16g %18.16g\n", re, im);
+	double r = sqrt(re*re + im*im);
+	double t = atan2(im, re);
+
+	printf("z = %18.16g * exp(2pi i %18.16g)\n", r, t);
+	printf("z = %18.16g + I %18.16g\n", re, im);
+
+	cpx_t check;
+	cpx_init(check);
+	cpx_gpf_exponential(check, zero, 20);
+	double eps_r = cpx_get_re(check);
+	double eps_i = cpx_get_im(check);
+	double eps = sqrt(eps_r*eps_r + eps_i*eps_i);
+	printf("fun at zero = %g\n", eps);
 }
 
 void survey(double rmax, double cell_size)
@@ -66,6 +81,7 @@ void survey(double rmax, double cell_size)
 
 			if (sample < 0.5)
 			{
+				printf("---------\n");
 				printf("Candidate zero near r=%g t=%g\n", r, t);
 				fflush(stdout);
 				find_zero(r, t, cell_size);
