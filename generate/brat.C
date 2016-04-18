@@ -12,6 +12,8 @@
  * more stuff -- October 2004
  */
 
+#include <thread>
+
 #include <malloc.h>
 #include <math.h>
 #include <stdio.h>
@@ -2365,29 +2367,36 @@ MakeHeightWrap (
    double 	renorm,
 	MakeHeightCB cb)
 {
-   int		i,j, globlen;
-   double	re_start, im_start, delta;
-   double	re_position, im_position;
-
-   delta = width / (double) sizex;
-   re_start = re_center - width / 2.0;
-   im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
+   double delta = width / (double) sizex;
+   double re_start = re_center - width / 2.0;
+   double im_start = im_center + width * ((double) sizey) / (2.0 * (double) sizex);
 	double im_end = im_center - width * ((double) sizey) / (2.0 * (double) sizex);
 
 	printf ("re=(%g,%g)\n", re_start, re_start+width);
 	printf ("im=(%g,%g)\n", im_end, im_start);
 
-   globlen = sizex*sizey;
-   for (i=0; i<globlen; i++) glob [i] = 0.0;
+   int globlen = sizex*sizey;
+   for (int i=0; i<globlen; i++) glob [i] = 0.0;
 
-   im_position = im_start;
-   for (i=0; i<sizey; i++)
+#ifdef USE_THREADS
+   double im_position = im_start;
+	int nthreads = 10;
+   for (int i=0; i<sizey; i += nthreads)
 	{
-      if (i%10==0) printf(" start row %d\n", i);
+      if (i%nthreads == 0) printf(" start row %d\n", i);
+		for(int
+      MakeHeightLine(glob, i, sizex, re_start, im_position, delta, itermax, renorm, cb);
+      im_position -= delta;  /*top to bottom, not bottom to top */
+	}
+#else
+   double im_position = im_start;
+   for (int i=0; i<sizey; i++)
+	{
+      if (i%11==0) printf(" start row %d\n", i);
       MakeHeightLine(glob, i, sizex, re_start, im_position, delta, itermax, renorm, cb);
 #ifdef UNROLL
-      re_position = re_start;
-      for (j=0; j<sizex; j++)
+      double re_position = re_start;
+      for (int j=0; j<sizex; j++)
 		{
 
 			double phi = cb (re_position, im_position, itermax, renorm);
@@ -2398,6 +2407,7 @@ MakeHeightWrap (
 #endif
       im_position -= delta;  /*top to bottom, not bottom to top */
    }
+#endif
 }
 
 /*-------------------------------------------------------------------*/
