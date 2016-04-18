@@ -6,6 +6,7 @@
  */
 
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -56,8 +57,8 @@ void find_zero(double rguess, double tguess, double cell_size)
 	cpx_t e1, e2;
 	cpx_init(e1);
 	cpx_init(e2);
-	cpx_set_d(e1, cell_size, 0);
-	cpx_set_d(e2, 0, cell_size);
+	cpx_set_d(e1, 0.25, 0);
+	cpx_set_d(e2, 0, 0.25);
 
 	int rc = cpx_find_zero(zero, expo, guess, e1, e2, 20, 50);
 
@@ -68,7 +69,7 @@ void find_zero(double rguess, double tguess, double cell_size)
 	double im = cpx_get_im(zero);
 
 	double r = sqrt(re*re + im*im);
-	double t = atan2(im, re);
+	double t = atan2(im, re) / (2.0*M_PI);
 
 	printf("z = %18.16g * exp(2pi i %18.16g)\n", r, t);
 	printf("z = %18.16g + I %18.16g\n", re, im);
@@ -86,17 +87,33 @@ void survey(double rmax, double cell_size)
 {
 	for (double r=cell_size; r<rmax; r += cell_size)
 	{
+		double prev = 1.0;
+		double tprev = 0.0;
+		bool reported = false;
 		for (double t=0.0; t < 0.5; t += cell_size/r)
 		{
 			double sample = gpf_bignum_exponential(r, t);
-			// sample /= r;
 
-			if (sample < 0.5)
+			if (sample < 0.15)
 			{
-				printf("---------\n");
-				printf("Candidate zero near r=%g t=%g\n", r, t);
-				fflush(stdout);
-				find_zero(r, t, cell_size);
+				if (sample < prev)
+				{
+					prev = sample;
+					tprev = t;
+					reported = false;
+				}
+				else if (false == reported)
+				{
+					printf("---------\n");
+					printf("Candidate zero near r=%g t=%g\n", r, tprev);
+					fflush(stdout);
+					find_zero(r, tprev, cell_size);
+					reported = true;
+				}
+			}
+			else
+			{
+				prev = 1.0;
 			}
 		}
 	}
