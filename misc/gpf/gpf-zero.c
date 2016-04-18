@@ -13,6 +13,17 @@
 #include <gpf.h>
 #include "gpf-gen-bignum.h"
 
+void expo(cpx_t sum, cpx_t z, int nprec)
+{
+	cpx_gpf_exponential(sum, z, nprec);
+
+	// Divide the returned value by r...
+	mpf_t r;
+	mpf_init(r);
+	cpx_abs(r, z);
+	cpx_div_mpf(sum, sum, r);
+}
+
 double gpf_bignum_exponential(double r, double theta)
 {
 	cpx_t sum, z;
@@ -22,7 +33,8 @@ double gpf_bignum_exponential(double r, double theta)
 	theta *= 2.0 * M_PI;
 	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
-	cpx_gpf_exponential(sum, z, 20);
+	// cpx_gpf_exponential(sum, z, 20);
+	expo(sum, z, 20);
 
 	mpf_t val;
 	mpf_init(val);
@@ -47,7 +59,7 @@ void find_zero(double rguess, double tguess, double cell_size)
 	cpx_set_d(e1, cell_size, 0);
 	cpx_set_d(e2, 0, cell_size);
 
-	int rc = cpx_find_zero(zero, cpx_gpf_exponential, guess, e1, e2, 20, 50);
+	int rc = cpx_find_zero(zero, expo, guess, e1, e2, 20, 50);
 
 	// if rc is not zero, then nothing was found
 	if (rc) return;
@@ -77,7 +89,7 @@ void survey(double rmax, double cell_size)
 		for (double t=0.0; t < 0.5; t += cell_size/r)
 		{
 			double sample = gpf_bignum_exponential(r, t);
-			sample /= r;
+			// sample /= r;
 
 			if (sample < 0.5)
 			{
