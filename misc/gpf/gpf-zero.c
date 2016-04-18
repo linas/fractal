@@ -71,11 +71,11 @@ void find_zero(double rguess, double tguess, double cell_size)
 	double r = sqrt(re*re + im*im);
 	double t = atan2(im, re) / M_PI;
 
-	printf("z = %16.14g * exp(i pi %16.14g)", r, t);
-	printf(" = %16.14g + I %16.14g\n", re, im);
+	printf("z = %-16.14g * exp(i pi %-16.14g)", r, t);
+	printf(" = %-16.14g + I %-16.14g\n", re, im);
 	fflush(stdout);
 
-#ifdef CHEC_RESULT
+#ifdef CHECK_RESULT
 	cpx_t check;
 	cpx_init(check);
 	cpx_gpf_exponential(check, zero, 20);
