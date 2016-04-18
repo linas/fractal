@@ -2330,6 +2330,27 @@ random_out (
  *  an x,y coordinate pair, and is expected to return a single value,
  *  which will be plotted as such.
  */
+void
+MakeHeightLine (
+	float  	*glob,
+	int 		i,
+	int 		sizex,
+	double	re_start,
+	double   im_position,
+	double   delta,
+	int		itermax,
+	double 	renorm,
+	MakeHeightCB cb)
+{
+	double re_position = re_start;
+	for (int j=0; j<sizex; j++)
+	{
+		double phi = cb (re_position, im_position, itermax, renorm);
+		glob [i*sizex +j] = phi;
+
+		re_position += delta;
+	}
+}
 
 void
 MakeHeightWrap (
@@ -2363,6 +2384,8 @@ MakeHeightWrap (
    for (i=0; i<sizey; i++)
 	{
       if (i%10==0) printf(" start row %d\n", i);
+      MakeHeightLine(glob, i, sizex, re_start, im_position, delta, itermax, renorm, cb);
+#ifdef UNROLL
       re_position = re_start;
       for (j=0; j<sizex; j++)
 		{
@@ -2372,6 +2395,7 @@ MakeHeightWrap (
 
          re_position += delta;
       }
+#endif
       im_position -= delta;  /*top to bottom, not bottom to top */
    }
 }

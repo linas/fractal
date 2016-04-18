@@ -1,6 +1,6 @@
 ############### Symbol Definitions ###################### 
 
-INCLUDES =	-I../tools/inc -I../misc/bignum
+INCLUDES =	-I../tools/inc -I../misc/anant-git/src
 LIBS =		/usr/lib
 
 CC = cc -Wall -g -O2 $(INCLUDES)
@@ -83,7 +83,7 @@ totient.o: totient.C brat.h
 zeta.o: zeta.C brat.h
 
 FUNC=../tools/lib/libfunc.a
-MP=../misc/bignum/libzmp.a -ldb
+MP=../misc/anant-git/src/libanant.a -ldb
 GMP=-lgmp 
 GSL=-lgsl -lgslcblas
 
