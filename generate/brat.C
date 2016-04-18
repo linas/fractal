@@ -2354,6 +2354,31 @@ MakeHeightLine (
 }
 
 void
+MakeHeightLineDispatch(
+	float  	*glob,
+	int 		i,
+	int 		sizex,
+	int 		sizey,
+	int      nthreads,
+	double	re_start,
+	double   im_position,
+	double   delta,
+	int		itermax,
+	double 	renorm,
+	MakeHeightCB cb)
+{
+   for (; i<sizey; i += nthreads)
+	{
+      if (i%nthreads == 0) printf(" start row %d\n", i);
+		std::thread thr(
+				MakeHeightLine, glob, i, sizex, re_start, im_position,
+				delta, itermax, renorm, cb);
+		thr.join();
+		im_position -= delta * nthreads;  /* top to bottom, not bottom to top */
+	}
+}
+
+void
 MakeHeightWrap (
    float  	*glob,
    int 		sizex,
@@ -2379,17 +2404,15 @@ MakeHeightWrap (
 
 #ifdef USE_THREADS
    double im_position = im_start;
-	int nthreads = 10;
+	int nthreads = std::thread::hardware_concurrency();
+	if (0 == nthreads) nthreads = 10;
    for (int i=0; i<sizey; i += nthreads)
 	{
-      if (i%nthreads == 0) printf(" start row %d\n", i);
-		std::vector<std::thread> tds;
 		for (int it=0; i<nthreads; it++)
 		{
-			tds.emplace_back(std::thread(
-				MakeHeightLine, glob, i, sizex, re_start, im_position,
-				delta, itermax, renorm, cb));
-			im_position -= delta;  /*top to bottom, not bottom to top */
+			MakeHeightLineDispatch(glob, i, sizex, re_start, im_position,
+				delta, itermax, renorm, cb);
+			im_position -= delta;  /* top to bottom, not bottom to top */
 		}
 	}
 #else
