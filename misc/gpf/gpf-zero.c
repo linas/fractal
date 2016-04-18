@@ -60,7 +60,7 @@ void find_zero(double rguess, double tguess, double cell_size)
 	cpx_set_d(e1, 0.15, 0);
 	cpx_set_d(e2, 0, 0.15);
 
-	int rc = cpx_find_zero(zero, expo, guess, e1, e2, 18, 50);
+	int rc = cpx_find_zero(zero, expo, guess, e1, e2, 25, 90);
 
 	// if rc is not zero, then nothing was found
 	if (rc) return;

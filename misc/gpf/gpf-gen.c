@@ -185,13 +185,16 @@ int main(int argc, char* argv[])
 	// for (double r=0.87; r< 0.89; r+= 0.001*0.02)
 	// for (double r=3.23; r< 3.25; r+= 0.001*0.02)
 	// for (double r=3.74; r< 3.75; r+= 0.001*0.02)
-	for (double r=19.95; r< 19.96; r+= 0.001*0.02)
+	// for (double r=19.95; r< 19.96; r+= 0.001*0.02)
+	for (double t=0.83; t< 0.84; t+= 0.001*0.02)
 	{
 		// double w = gpf_bignum_exponential(r, 0.5 * 0.83295289206477);
 		// double w = gpf_bignum_exponential(r, 0.5 * 0.42458721923649);
 		// double w = gpf_bignum_exponential(r, 0.5 * 0.59817818048564);
-		double w = gpf_bignum_exponential(r, 0.5 * 0.768238424116);
-		printf("%g\t%g\n", r, w);
+		// double w = gpf_bignum_exponential(r, 0.5 * 0.768238424116);
+		// printf("%g\t%g\n", r, w);
+		double w = gpf_bignum_exponential(0.88022349562601, 0.5*t);
+		printf("%g\t%g\n", t, w);
 		fflush(stdout);
 	}
 }
