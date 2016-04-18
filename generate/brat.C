@@ -13,6 +13,7 @@
  */
 
 #include <thread>
+#include <vector>
 
 #include <malloc.h>
 #include <math.h>
@@ -22,8 +23,6 @@
 #include <time.h>
 
 #include "brat.h"
-#include "Farey.h"
-#include "FareyTree.h"
 
 /*-------------------------------------------------------------------*/
 /* this routine fills in the exterior of the mandelbrot set using */
@@ -2384,9 +2383,14 @@ MakeHeightWrap (
    for (int i=0; i<sizey; i += nthreads)
 	{
       if (i%nthreads == 0) printf(" start row %d\n", i);
-		for(int
-      MakeHeightLine(glob, i, sizex, re_start, im_position, delta, itermax, renorm, cb);
-      im_position -= delta;  /*top to bottom, not bottom to top */
+		std::vector<std::thread> tds;
+		for (int it=0; i<nthreads; it++)
+		{
+			tds.emplace_back(std::thread(
+				MakeHeightLine, glob, i, sizex, re_start, im_position,
+				delta, itermax, renorm, cb));
+			im_position -= delta;  /*top to bottom, not bottom to top */
+		}
 	}
 #else
    double im_position = im_start;

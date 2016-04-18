@@ -3,7 +3,7 @@
 INCLUDES =	-I../tools/inc -I../misc/anant-git/src
 LIBS =		/usr/lib
 
-CC = cc -Wall -g -O2 $(INCLUDES)
+CC = cc -std=gnu++11 -Wall -g -O2 $(INCLUDES)
 
 OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \

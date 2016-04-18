@@ -22,4 +22,4 @@ gpf-gen-bignum.o: gpf-gen-bignum.h
 	cc -c $^  -std=gnu11 -Wall -O2 $(INCLUDES)
 
 .C.o:
-	cc -c $^  -Wall -O2 $(INCLUDES)
+	cc -c $^  -std=gnu++11  -Wall -O2 $(INCLUDES)
