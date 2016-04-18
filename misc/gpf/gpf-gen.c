@@ -89,6 +89,7 @@ int main(int argc, char* argv[])
 		fflush(stdout);
 	}
 #endif
+#ifdef RATIONALS
 	if (argc < 2)
 	{
 		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
@@ -104,6 +105,25 @@ int main(int argc, char* argv[])
 		double w1_4 = gpf_bignum_exponential(x, 1.0/4.0);
 		double w1_5 = gpf_bignum_exponential(x, 1.0/5.0);
 		double w1_6 = gpf_bignum_exponential(x, 1.0/6.0);
+		printf("%g\t%g\t%g\t%g\t%g\t%g\t%g\n", x, w0, w1_2, w1_3, w1_4, w1_5, w1_6);
+		fflush(stdout);
+	}
+#endif
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
+		exit(1);
+	}
+	double dom = atof(argv[1]);
+	printf("#\n# Max = %g\n#\n", dom);
+	for (double x=0.0; x< dom; x+= 0.0002*dom)
+	{
+		double w0   = gpf_bignum_exponential(x, sqrt(2.0)/2.0);
+		double w1_2 = gpf_bignum_exponential(x, sqrt(2.0)/3.0);
+		double w1_3 = gpf_bignum_exponential(x, sqrt(3.0)/2.0);
+		double w1_4 = gpf_bignum_exponential(x, sqrt(3.0)/3.0);
+		double w1_5 = gpf_bignum_exponential(x, sqrt(5.0)/2.0);
+		double w1_6 = gpf_bignum_exponential(x, sqrt(5.0)/3.0);
 		printf("%g\t%g\t%g\t%g\t%g\t%g\t%g\n", x, w0, w1_2, w1_3, w1_4, w1_5, w1_6);
 		fflush(stdout);
 	}
