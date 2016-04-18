@@ -13,6 +13,9 @@
 #include "brat.h"
 #include "gpf-gen-bignum.h"
 
+//  C and C++ is fugnuts insane in complex support.
+#define complex _Complex
+
 #define MAX_PREC 1.0e-18
 int max_iter = 100000000;
 
@@ -145,8 +148,8 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
 	double lr = log(r);
-	rv /= r*r / (lr*lr);
-	// rv /= r;
+	// rv /= r*r / (lr*lr);
+	rv /= r;
 
 	return rv;
 }
