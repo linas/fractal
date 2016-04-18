@@ -52,13 +52,14 @@ double gpf_exponential(double x)
 	return sum;
 }
 
-double gpf_bignum_exponential(double x)
+double gpf_bignum_exponential(double x, double theta)
 {
 	cpx_t sum, z;
 	cpx_init(sum);
 	cpx_init(z);
 
-	cpx_set_d(z, x, 0.0);
+	theta *= 2.0 * M_PI;
+	cpx_set_d(z, x*cos(theta), x*sin(theta));
 
 	cpx_gpf_exponential(sum, z, 20);
 
@@ -97,8 +98,13 @@ int main(int argc, char* argv[])
 	printf("#\n# Max = %g\n#\n", dom);
 	for (double x=0.0; x< dom; x+= 0.001*dom)
 	{
-		double w = gpf_bignum_exponential(x);
-		printf("%g\t%g\n", x, w);
+		double w0 = gpf_bignum_exponential(x, 0.0);
+		double w1_2 = gpf_bignum_exponential(x, 1.0/2.0);
+		double w1_3 = gpf_bignum_exponential(x, 1.0/3.0);
+		double w1_4 = gpf_bignum_exponential(x, 1.0/4.0);
+		double w1_5 = gpf_bignum_exponential(x, 1.0/5.0);
+		double w1_6 = gpf_bignum_exponential(x, 1.0/6.0);
+		printf("%g\t%g\t%g\t%g\t%g\t%g\t%g\n", x, w0, w1_2, w1_3, w1_4, w1_5, w1_6);
 		fflush(stdout);
 	}
 }
