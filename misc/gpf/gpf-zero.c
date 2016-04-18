@@ -57,8 +57,8 @@ void find_zero(double rguess, double tguess, double cell_size)
 	cpx_t e1, e2;
 	cpx_init(e1);
 	cpx_init(e2);
-	cpx_set_d(e1, cell_size, 0);
-	cpx_set_d(e2, 0, cell_size);
+	cpx_set_d(e1, 0.15, 0);
+	cpx_set_d(e2, 0, 0.15);
 
 	int rc = cpx_find_zero(zero, expo, guess, e1, e2, 18, 50);
 
@@ -94,7 +94,7 @@ void survey(double rmax, double cell_size)
 		{
 			double sample = gpf_bignum_exponential(r, t);
 
-			if (sample < 0.15)
+			if (sample < 0.25)
 			{
 				// printf("---------\n");
 				// printf("Candidate zero near r=%g t=%g\n", r, t);
