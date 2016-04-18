@@ -74,9 +74,9 @@ double complex gpf_exponential(long double complex x)
 		if (n*cabsl(xn) < MAX_PREC*cabsl(sum)) break;
 		if (max_iter < n) break;
 	}
-long double scale = expl(-cabsl(x));
-scale /= cabsl(x);
-sum *= scale;
+
+	long double scale = expl(-cabsl(x));
+	sum *= scale;
 // printf("duuude %g sum=%g\n", cabs(x), cabs(sum));
 
 	return sum;
@@ -113,8 +113,14 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 	// double complex g = gpf_normed(z);
 	// double complex g = gpf_lambert(z);
 
+	double rv = cabs(g);
+	double r = sqrt(re_q*re_q + im_q*im_q);
+	// rv /= r;
+	rv /= r*r/log(r);
 
-	return cabs(g);
+	return rv;
+
+	// return cabs(g);
 	// return creal(g);
 	// return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
@@ -138,9 +144,11 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
-	rv /= r*r*log(r);
+	rv /= r*r/log(r);
+	// rv /= r;
 
 	return rv;
 }
 
+// DECL_MAKE_HEIGHT(ploto);
 DECL_MAKE_HEIGHT(plot_big);
