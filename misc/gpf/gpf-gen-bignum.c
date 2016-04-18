@@ -34,7 +34,7 @@ void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
 
 	// Not defined for |z| > 1
 	mpf_sub_ui(gabs, gabs, 1);
-	if (0 > mpf_cmp(gabs, epsi)) return;
+	if (0 < mpf_cmp(gabs, epsi)) return;
 
 	cpx_t zn, term;
 	cpx_init(zn);
@@ -78,10 +78,6 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 
 	// falls apart if z is zero.
 	cpx_abs(gabs, z);
-	if (0 > mpf_cmp(gabs, epsi)) return;
-
-	// Not defined for |z| > 1
-	mpf_sub_ui(gabs, gabs, 1);
 	if (0 > mpf_cmp(gabs, epsi)) return;
 
 	cpx_t zn, term;

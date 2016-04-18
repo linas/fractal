@@ -127,7 +127,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-	cpx_gpf_exponential(sum, z, 10);
+	cpx_gpf_exponential(sum, z, 20);
 
 	// extract
 	mpf_t val;

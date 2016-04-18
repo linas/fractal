@@ -6,8 +6,10 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include <gpf.h>
+#include "gpf-gen-bignum.h"
 
 /*
  * Ordinary generating function for the greatest common factor.
@@ -50,7 +52,24 @@ double gpf_exponential(double x)
 	return sum;
 }
 
-int main()
+double gpf_bignum_exponential(double x)
+{
+	cpx_t sum, z;
+	cpx_init(sum);
+	cpx_init(z);
+
+	cpx_set_d(z, x, 0.0);
+
+	cpx_gpf_exponential(sum, z, 20);
+
+	mpf_t val;
+	mpf_init(val);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+	return rv;
+}
+
+int main(int argc, char* argv[])
 {
 #ifdef ORD
 	for (double x=0.0; x< 1.0; x+= 0.002)
@@ -60,11 +79,26 @@ int main()
 		printf("%g\t%g\t%g\n", x, y, z);
 	}
 #endif
+#ifdef EXPO
 	for (double x=0.0; x< 675.0; x+= 0.5)
 	{
 		double y = gpf_exponential(x);
 		double z = y * exp(-x);
 		printf("%g\t%g\t%g\n", x, y, z);
+		fflush(stdout);
+	}
+#endif
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
+		exit(1);
+	}
+	double dom = atof(argv[1]);
+	printf("#\n# Max = %g\n#\n", dom);
+	for (double x=0.0; x< dom; x+= 0.001*dom)
+	{
+		double w = gpf_bignum_exponential(x);
+		printf("%g\t%g\n", x, w);
 		fflush(stdout);
 	}
 }
