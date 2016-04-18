@@ -2405,21 +2405,19 @@ MakeHeightWrap (
    double im_position = im_start;
 	int nthreads = std::thread::hardware_concurrency();
 	if (0 == nthreads) nthreads = 10;
-   for (int i=0; i<sizey; i += nthreads)
-	{
-		std::vector<std::thread> tds;
-		for (int it=0; i<nthreads; it++)
-		{
-			tds.emplace_back(std::thread(
-				MakeHeightLineThread, glob, it, sizex, sizey, nthreads,
-				re_start, im_position, delta, itermax, renorm, cb));
-			im_position -= delta;  /* top to bottom, not bottom to top */
-		}
 
-		for (auto& th : tds)
-		{
-			th.join();
-		}
+	std::vector<std::thread> tds;
+	for (int it=0; it<nthreads; it++)
+	{
+		tds.emplace_back(std::thread(
+			MakeHeightLineThread, glob, it, sizex, sizey, nthreads,
+			re_start, im_position, delta, itermax, renorm, cb));
+		im_position -= delta;  /* top to bottom, not bottom to top */
+	}
+
+	for (auto& th : tds)
+	{
+		th.join();
 	}
 #else
    double im_position = im_start;
