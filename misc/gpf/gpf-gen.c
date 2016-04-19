@@ -96,12 +96,22 @@ int main(int argc, char* argv[])
 		printf("%g\t%g\t%g\n", x, y, z);
 	}
 #endif
+#define EXPO
 #ifdef EXPO
-	for (double x=0.0; x< 675.0; x+= 0.5)
+	if (argc < 2)
 	{
-		double y = gpf_exponential(x);
-		double z = y * exp(-x);
-		printf("%g\t%g\t%g\n", x, y, z);
+		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
+		exit(1);
+	}
+	double dom = atof(argv[1]);
+	printf("#\n# Max = %g\n#\n", dom);
+	for (double x=0.0; x< dom; x+= 0.001*dom)
+	{
+		// double y = gpf_exponential(x);
+		// double z = y * exp(-x);
+		// printf("%g\t%g\t%g\n", x, y, z);
+		double y = gpf_bignum_exponential(x, 0.0);
+		printf("%g\t%g\n", x, y);
 		fflush(stdout);
 	}
 #endif
@@ -182,6 +192,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
+#ifdef ZERO_RAYS
 	// for (double r=0.87; r< 0.89; r+= 0.001*0.02)
 	// for (double r=3.23; r< 3.25; r+= 0.001*0.02)
 	// for (double r=3.74; r< 3.75; r+= 0.001*0.02)
@@ -197,4 +208,5 @@ int main(int argc, char* argv[])
 		printf("%g\t%g\n", t, w);
 		fflush(stdout);
 	}
+#endif
 }

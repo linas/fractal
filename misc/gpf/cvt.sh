@@ -33,8 +33,11 @@
 # ../../generate/renorm gpf-exp-abs-40K rg 0.0041124
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-40K.png
 
-../../generate/renorm gpf-exp-abs-x rg 1
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-x.png
+../../generate/renorm gpf-exp-abs-250K-uni rg 0.4
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-250K-uni.png
+
+# ../../generate/renorm gpf-exp-abs-x rg 1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-x.png
 
 # cat gpf-norm-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-norm-phase.png
 # cat gpf-pois-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-pois-phase.png
