@@ -71,19 +71,32 @@ double gpf_bignum_exponential(double x, double theta)
 	return rv;
 }
 
-double complex gpf_cpx_bignum_exponential(double x, double theta)
+double complex gpf_cpx_bignum_exponential(double r, double theta)
 {
 	cpx_t sum, z;
 	cpx_init(sum);
 	cpx_init(z);
 
 	theta *= 2.0 * M_PI;
-	cpx_set_d(z, x*cos(theta), x*sin(theta));
+	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
 	cpx_gpf_exponential(sum, z, 50);
 
 	double complex rv = cpx_get_re(sum) + I * cpx_get_im(sum);
 	return rv;
+}
+
+int zero_count(double radius)
+{
+	int count = 0;
+	double delta = 0.5 / radius;
+	double prev = 0.0;
+	for (double theta = 0.0; theta < M_PI; theta += delta)
+	{
+		double complex egz = gpf_cpx_bignum_exponential(radius, theta);
+		double phase = atan2(cimag(egz), creal(egz));
+printf("duude ph=%g %g\n", theta, phase);
+	}
 }
 
 int main(int argc, char* argv[])
@@ -113,6 +126,24 @@ int main(int argc, char* argv[])
 		double y = gpf_bignum_exponential(r, 0.0);
 		double z = y * log(r) / (r*r);
 		printf("%g\t%20.18g\t%20.18g\t%20.18g\n", x, r, y, z);
+		fflush(stdout);
+	}
+#endif
+#define PHASE
+#ifdef PHASE
+	if (argc < 3)
+	{
+		fprintf(stderr, "Usage: %s <r> <theta>\n", argv[0]);
+		exit(1);
+	}
+	double rad = atof(argv[1]);
+	double theta = atof(argv[2]);
+	printf("#\n# Max = %g\n#\n", rad);
+	for (double r=0.0; r< rad; r+= 0.001*rad)
+	{
+		double complex egf = gpf_cpx_bignum_exponential(r, theta);
+		double phase = atan2(cimag(egf), creal(egf));
+		printf("%g\t%20.18g\n", r, phase);
 		fflush(stdout);
 	}
 #endif
@@ -210,6 +241,7 @@ int main(int argc, char* argv[])
 		fflush(stdout);
 	}
 #endif
+#ifdef FOURIER_ANALYSIS
 	if (argc < 2)
 	{
 		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
@@ -255,4 +287,14 @@ int main(int argc, char* argv[])
 		printf("%20.18g\t%20.18g\t%20.18g\n", f, samp, camp);
 		fflush(stdout);
 	}
+#endif
+#ifdef ZERO_COUNT
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
+		exit(1);
+	}
+	double rad = atof(argv[1]);
+	zero_count(rad);
+#endif
 }
