@@ -216,7 +216,7 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	double dom = atof(argv[1]);
-#define NPTS 10000
+#define NPTS 2000
 	double doms[NPTS+1];
 	double vals[NPTS+1];
 	int i=0;
@@ -230,7 +230,11 @@ int main(int argc, char* argv[])
 
 		// printf("# %g\t%g\n", x, z);
 		i++;
-		if (i%100==0) printf("# Done with %d points\n", i);
+		if (i%100==0)
+		{
+			printf("# Done with %d points to sqrt(r)=%g\n", i, x);
+			fflush(stdout);
+		}
 	}
 
 	// Quick n dirty fourier analysis.

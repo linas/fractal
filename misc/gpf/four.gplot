@@ -1,19 +1,23 @@
 
 set term png size 1024, 768
+# set term png size 512, 384
 set out 'four.png'
 
 # set style data linespoints
 set style data lines
 set key left
 
-set title "Greatest prime factor"
-set xlabel "x"
-set ylabel "g"
+set title "Fourier amplitude of the asymptotic EG(gpf)"
+set xlabel "ω"
+set ylabel "Amplitude"
 
 # set xrange [0:1]
-set xrange [0:4.5]
+# set xrange [0:1.1]
+# set yrange [0:0.006]
 
 #plot "four.dat" using 1:2 title "sin" lw 2, \
 #     "four.dat" using 1:3 title "cos" lw 2
 
-plot "four-300.dat" using 1:(sqrt($2*$2+$3*$3)) title "amp" lw 2
+# plot "four.dat" using ($1/6.2832):(sqrt($2*$2+$3*$3)) title "" lw 2
+# plot "four-300.dat" using ($1/6.2832):(sqrt($2*$2+$3*$3)) title "" lw 2
+plot "four-600.dat" using ($1/6.2832):($1*$1*$1*sqrt($2*$2+$3*$3)) title "" lw 2
