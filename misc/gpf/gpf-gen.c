@@ -216,11 +216,11 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	double dom = atof(argv[1]);
-#define NPTS 1000
-	double doms[NPTS+10];
-	double vals[NPTS+10];
+#define NPTS 10000
+	double doms[NPTS+1];
+	double vals[NPTS+1];
 	int i=0;
-	for (double x=10.0; x< dom; x+= dom/NPTS)
+	for (double x=10.0; i < NPTS; x+= dom/NPTS)
 	{
 		doms[i] = x;
 		double r = x*x;
@@ -228,19 +228,21 @@ int main(int argc, char* argv[])
 		double z = (y * log(r) / (r*r)) - 1.75;
 		vals[i] = z;
 
+		// printf("# %g\t%g\n", x, z);
+		i++;
 		if (i%100==0) printf("# Done with %d points\n", i);
 	}
 
 	// Quick n dirty fourier analysis.
 	printf("#\n# fourier %d points to %g\n#\n", NPTS, dom);
-	for (double f=0.0; f < 8.0; f+= 0.01)
+	for (double f=0.0; f < 8.0; f+= 0.003)
 	{
 		double samp = 0.0;
 		double camp = 0.0;
 		for (i=0; i<NPTS; i++)
 		{
-			double si = sin(doms[i]);
-			double co = cos(doms[i]);
+			double si = sin(f*doms[i]);
+			double co = cos(f*doms[i]);
 			samp += si * vals[i];
 			camp += co * vals[i];
 		}
