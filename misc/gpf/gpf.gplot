@@ -22,4 +22,12 @@ set ylabel "g"
 # plot "gpf.dat" using 1:(($2 - 1.75 / (log($1) / ($1*$1)))/($1*$1)) title "" lw 2
 # plot "gpf.dat" using 1:($2/($1*$1) - 1.75 / log($1) ) title "" lw 2
 # plot "gpf.dat" using (sqrt($1)):($2/($1*$1) - 1.75 / log($1) ) title "" lw 2
-plot "gpf.dat" using (sqrt($1)):($2*log($1)/($1*$1) - 1.75 ) title "" lw 2
+# plot "gpf.dat" using (sqrt($1)):($2*log($1)/($1*$1) - 1.75 ) title "" lw 2
+
+set term png size 512, 384
+set title "GPF Exponential Generating Function Oscillations"
+set xlabel "√r"
+set ylabel "-7/4 + EG(gpf; r) exp(-r) log(r) / r²"
+
+set xrange [5:]
+plot "gpf.dat" using 1:($4 - 1.75) title "" lw 2

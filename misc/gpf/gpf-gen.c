@@ -110,8 +110,10 @@ int main(int argc, char* argv[])
 		// double y = gpf_exponential(x);
 		// double z = y * exp(-x);
 		// printf("%g\t%g\t%g\n", x, y, z);
-		double y = gpf_bignum_exponential(x, 0.0);
-		printf("%g\t%g\n", x, y);
+		double r = x*x;
+		double y = gpf_bignum_exponential(r, 0.0);
+		double z = y * log(r) / (r*r);
+		printf("%g\t%g\t%g\t%g\n", x, r, y, z);
 		fflush(stdout);
 	}
 #endif
