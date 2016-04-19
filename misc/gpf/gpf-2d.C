@@ -116,16 +116,16 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 	// double complex g = gpf_normed(z);
 	// double complex g = gpf_lambert(z);
 
-	double rv = cabs(g);
-	double r = sqrt(re_q*re_q + im_q*im_q);
+	// double rv = cabs(g);
+	// double r = sqrt(re_q*re_q + im_q*im_q);
 	// rv /= r;
-	rv /= r*r/log(r);
-
-	return rv;
+	// rv /= r*r/log(r);
+	// return rv;
 
 	// return cabs(g);
 	// return creal(g);
-	// return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+
+	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
 static double plot_big(double re_q, double im_q, int itermax, double param)
@@ -147,12 +147,12 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
-	double lr = log(r);
+	// double lr = log(r);
 	// rv /= r*r / (lr*lr);
 	rv /= r;
 
 	return rv;
 }
 
-// DECL_MAKE_HEIGHT(ploto);
-DECL_MAKE_HEIGHT(plot_big);
+DECL_MAKE_HEIGHT(ploto);
+// DECL_MAKE_HEIGHT(plot_big);
