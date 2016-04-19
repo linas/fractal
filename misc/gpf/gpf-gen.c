@@ -62,7 +62,7 @@ double gpf_bignum_exponential(double x, double theta)
 	theta *= 2.0 * M_PI;
 	cpx_set_d(z, x*cos(theta), x*sin(theta));
 
-	cpx_gpf_exponential(sum, z, 20);
+	cpx_gpf_exponential(sum, z, 200);
 
 	mpf_t val;
 	mpf_init(val);
@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
 	}
 	double dom = atof(argv[1]);
 	printf("#\n# Max = %g\n#\n", dom);
-	for (double x=0.0; x< dom; x+= 0.001*dom)
+	for (double x=0.0; x< dom; x+= 0.0001*dom)
 	{
 		// double y = gpf_exponential(x);
 		// double z = y * exp(-x);
@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
 		double r = x*x;
 		double y = gpf_bignum_exponential(r, 0.0);
 		double z = y * log(r) / (r*r);
-		printf("%g\t%g\t%g\t%g\n", x, r, y, z);
+		printf("%g\t%20.18g\t%20.18g\t%20.18g\n", x, r, y, z);
 		fflush(stdout);
 	}
 #endif
