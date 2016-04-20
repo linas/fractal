@@ -1,11 +1,13 @@
 /*
  * FUNCTION:
  * (Very) basic prime-number sieve.
+ * Thread-safe.
  *
  * HISTORY:
  * Linas Vepstas January 2005
  * Updates July 2006
  * Updates November 2014
+ * Updates April 2016
  */
 
 
@@ -28,16 +30,12 @@ static size_t sieve_max = 0;   /* largest correct entry. */
  * Handles primes up to 4 billion (2^32), which should be enough
  * to factor 64-bit numbers.
  *
- * Initializes size so that it contains at least np primes in it.
+ * Initializes size so that it contains at least `max` primes in it.
  */
 static void
 init_prime_sieve (size_t max)
 {
 	static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
-
-	unsigned int n, j;
-	unsigned int nstart;
-	unsigned int pos;
 
 	if (max < sieve_max) return;
 
@@ -64,16 +62,16 @@ init_prime_sieve (size_t max)
 		sieve = (unsigned int *) realloc(sieve, sieve_size * sizeof(unsigned int));
 	}
 
-	pos = sieve_max+1;
-	nstart = sieve[sieve_max] + 2;
+	unsigned int pos = sieve_max+1;
+	unsigned int nstart = sieve[sieve_max] + 2;
 
 	/* Really dumb algo, brute-force test all odd numbers against
 	 * known primes */
-	for (n=nstart; pos <= max; n+=2)
+	for (unsigned int n=nstart; pos <= max; n+=2)
 	{
-		for (j=1; ; j++)
+		for (unsigned int j=1; ; j++)
 		{
-			int p = sieve[j];
+			unsigned int p = sieve[j];
 			if (0 == n%p)
 			{
 				break;
