@@ -118,7 +118,8 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 /*
  * Pochhammer generating function for the greatest common factor.
  * This is like the exponential generating function, but uses pochhammer
- * instead of x^n.
+ * instead of x^n.  Actually, uses binomial coefficient ... two
+ * factorials are needed for convergence.
  */
 void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 {
@@ -142,11 +143,7 @@ void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 
 	// falls apart if z is zero.
 	cpx_abs(gabs, z);
-	// if (0 > mpf_cmp(gabs, epsi)) return;
-
-	// Not defined for |z| > 1
-	mpf_sub_ui(gabs, gabs, 1);
-	if (0 < mpf_cmp(gabs, epsi)) return;
+	if (0 > mpf_cmp(gabs, epsi)) return;
 
 	cpx_t zn, term;
 	cpx_init(zn);
@@ -157,6 +154,7 @@ void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 	{
 		cpx_times_ui(term, zn, gpf(n));
 		cpx_times_mpf(term, term, fact);
+		cpx_times_mpf(term, term, fact); // A second factorial!
 		cpx_add(sum, sum, term);
 
 		// The following check the loop termination condition,

@@ -24,7 +24,8 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec);
 /*
  * Pochhammer-rising generating function for the greatest common factor.
  * This is like the exponential generating function, but uses pochhammer
- * instead of x^n.
+ * instead of x^n. Actually, uses binomial coefficient ... two
+ * factorials are needed for convergence.
  */
 void cpx_gpf_poch_rising(cpx_t sum, cpx_t z, int prec);
 void cpx_gpf_poch_falling(cpx_t sum, cpx_t z, int prec);

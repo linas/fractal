@@ -137,8 +137,13 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	cpx_set_d(z, re_q, im_q);
 
 	// cpx_gpf_exponential(sum, z, 20);
-	cpx_gpf_poch_rising(sum, z, 30);
+	// cpx_gpf_poch_rising(sum, z, 15);
+	cpx_gpf_poch_falling(sum, z, 15);
 
+	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
+	return rv;
+
+#if 0
 	// extract
 	mpf_t val;
 	mpf_init(val);
@@ -153,6 +158,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	// rv /= r;
 
 	return rv;
+#endif
 }
 
 // DECL_MAKE_HEIGHT(ploto);
