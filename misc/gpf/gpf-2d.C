@@ -136,7 +136,8 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-	cpx_gpf_exponential(sum, z, 20);
+	// cpx_gpf_exponential(sum, z, 20);
+	cpx_gpf_poch_rising(sum, z, 30);
 
 	// extract
 	mpf_t val;
@@ -146,13 +147,13 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	double rv = mpf_get_d(val);
 
 	// Divide by z for plotting.
-	double r = sqrt(re_q*re_q + im_q*im_q);
+	// double r = sqrt(re_q*re_q + im_q*im_q);
 	// double lr = log(r);
 	// rv /= r*r / (lr*lr);
-	rv /= r;
+	// rv /= r;
 
 	return rv;
 }
 
-DECL_MAKE_HEIGHT(ploto);
-// DECL_MAKE_HEIGHT(plot_big);
+// DECL_MAKE_HEIGHT(ploto);
+DECL_MAKE_HEIGHT(plot_big);

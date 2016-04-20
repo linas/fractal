@@ -91,20 +91,20 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 		cpx_times_ui(term, zn, gpf(n));
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
-		cpx_mul(zn, zn, z);
-		mpf_div_ui(fact, fact, n);
 
 		// The following check the loop termination condition,
 		// which is that the size of the term is less than epsilon.
-		cpx_abs(gabs, zn);
+		cpx_abs(gabs, term);
 		mpf_mul_ui(gabs, gabs, n);
-		mpf_mul(gabs, gabs, fact);
 
 		cpx_abs(zabs, sum);
 		mpf_div(gabs, gabs, zabs);
 
 		// if (n * zn * fact < epsi * sum) return;
 		if (0 > mpf_cmp(gabs, epsi)) break;
+
+		cpx_mul(zn, zn, z);
+		mpf_div_ui(fact, fact, n);
 	}
 
 	// Remove the leading exponential order.
@@ -117,15 +117,19 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 
 /*
  * Pochhammer generating function for the greatest common factor.
- * This is like the ordinary generating function but uses pochmamer.
+ * This is like the exponential generating function, but uses pochhammer
+ * instead of x^n.
  */
 void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 {
-	mpf_t zabs, gabs, epsi, one;
+	mpf_t zabs, gabs, fact, epsi, one;
 	mpf_init (gabs);
 	mpf_init (zabs);
-	mpf_init (one);
 
+	mpf_init (fact);
+	mpf_set_ui(fact, 1);
+
+	mpf_init (one);
 	mpf_set_ui(one, 1);
 	if (!rise)
 		mpf_neg(one, one);
@@ -152,21 +156,23 @@ void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 	for (int n=1; ; n++)
 	{
 		cpx_times_ui(term, zn, gpf(n));
+		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
-		cpx_mul(zn, zn, z);
 
 		// The following check the loop termination condition,
 		// which is that the size of the term is less than epsilon.
-		cpx_abs(gabs, zn);
+		cpx_abs(gabs, term);
 		mpf_mul_ui(gabs, gabs, n);
 
 		cpx_abs(zabs, sum);
 		mpf_div(gabs, gabs, zabs);
 
-		// if (n * zn < epsi * sum) return;
+		// if (n * zn/n! < epsi * sum) return;
 		if (0 > mpf_cmp(gabs, epsi)) return;
 
 		cpx_add_mpf(z, z, one);
+		cpx_mul(zn, zn, z);
+		mpf_div_ui(fact, fact, n);
 	}
 }
 
