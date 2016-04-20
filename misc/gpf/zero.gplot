@@ -6,11 +6,11 @@ set out 'zero.png'
 set style data lines
 set key left
 
-set title "Greatest prime factor"
-set xlabel "x"
-set ylabel "g"
+set title "Excess/deficit of zeros of EG(gpf; z)"
+set xlabel "radius"
+set ylabel "num zeros minus radius"
 
 # set xrange [0:1]
-# set xrange [0.499:0.501]
+set xzeroaxis lw 2
 
-plot "zero.dat" using 1:($2) title ""
+plot "zero-count.dat" using 1:($2-$1) title "" lw 2

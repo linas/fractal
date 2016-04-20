@@ -113,9 +113,9 @@ double complex gpf_cpx_bignum_exponential(double r, double theta)
 int zero_count(double radius)
 {
 	int count = 0;
-	double delta = 0.1 / radius;
+	double delta = 0.25 / radius;
 	double prev = 0.0;
-	for (double theta = 0.0; theta < M_PI; theta += delta)
+	for (double theta = 0.0; theta < 2.0*M_PI; theta += delta)
 	{
 		double complex egz = gpf_cpx_bignum_exponential(radius, theta);
 		double phase = atan2(cimag(egz), creal(egz));
@@ -125,8 +125,10 @@ int zero_count(double radius)
 			count ++;
 			if ((prev < 2.0) || (-2.0 < phase))
 			{
+				printf("# step not fine enough at theta=%g\n", theta);
 				fprintf(stderr, "Big fail, step not fine enough at theta=%g\n", theta);
-				exit(1);
+				fprintf(stderr, "delta=%g r=%g prev=%g ph=%g\n", delta, radius, prev, phase);
+				// exit(1);
 			}
 		}
 		prev = phase;
@@ -315,7 +317,7 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	double rad = atof(argv[1]);
-	for (double r=1.0; r< rad; r+= 0.02*rad)
+	for (double r=1.0; r< rad; r+= 0.001*rad)
 	{
 		int count = zero_count(r);
 		printf("%g\t%d\n", r, count);
