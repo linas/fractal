@@ -317,7 +317,7 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	double rad = atof(argv[1]);
-	for (double r=1.0; r< rad; r+= 0.001*rad)
+	for (double r=3000.0; r< rad; r+= 1)
 	{
 		int count = zero_count(r);
 		printf("%g\t%d\n", r, count);
