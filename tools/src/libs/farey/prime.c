@@ -120,8 +120,14 @@ unsigned int get_nth_prime(unsigned long n)
 {
 	if (sieve_max <= n) init_prime_sieve(n);
 
-	// We really should lock here, but we try to get lucky, instead.
-	return sieve[n-1];
+	// Argh.  The init routine can clobber the sieve array, and
+	// there is a tiny race window if we don't lock here.  I tried
+	// to get lucky and not hit the race, but luck kept running out.
+	// So we lock.  Oh well.
+	pthread_mutex_lock(&mtx);
+	unsigned int p = sieve[n-1];
+	pthread_mutex_unlock(&mtx);
+	return p;
 }
 
 /* --------------------------- END OF FILE ------------------------- */
