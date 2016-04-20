@@ -47,21 +47,25 @@ init_prime_sieve (size_t max)
 		pthread_mutex_unlock(&mtx);
 		return;
 	}
-
-	unsigned int *tsieve;
-	sieve_size = 8192 * ((max / 8192) + 1);
-	tsieve = (unsigned int *) malloc(sieve_size * sizeof(unsigned int));
 	unsigned int pos = sieve_max+1;
-	if (!sieve)
+
+	unsigned int *tsieve = sieve;
+	unsigned int old_size  = sieve_size;
+	sieve_size = 8192 * ((max / 8192) + 1);
+	if (old_size < sieve_size)
 	{
-		pos = 3;
-		tsieve[0] = 2;
-		tsieve[1] = 3;
-		tsieve[2] = 5;
-	}
-	else
-	{
-		memcpy(tsieve, sieve, sieve_max*sizeof(unsigned int));
+		tsieve = (unsigned int *) malloc(sieve_size * sizeof(unsigned int));
+		if (!sieve)
+		{
+			pos = 3;
+			tsieve[0] = 2;
+			tsieve[1] = 3;
+			tsieve[2] = 5;
+		}
+		else
+		{
+			memcpy(tsieve, sieve, old_size*sizeof(unsigned int));
+		}
 	}
 
 	unsigned int nstart = tsieve[pos-1] + 2;
@@ -90,10 +94,13 @@ init_prime_sieve (size_t max)
 	// There is still a race in the code below, w.r.t. the reader
 	// but we try to minimize the race window by swapping the arrays
 	// here, with as small a race window as we can manage.
-	unsigned int* old_sieve = sieve;
-	sieve = tsieve;
+	if (sieve != tsieve)
+	{
+		unsigned int* old_sieve = sieve;
+		sieve = tsieve;
+		if (old_sieve) free(old_sieve);
+	}
 	sieve_max = pos-1;
-	if (old_sieve) free(old_sieve);
 	pthread_mutex_unlock(&mtx);
 
 #if 0
