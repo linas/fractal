@@ -14,12 +14,14 @@
 #include <math.h>
 #include <malloc.h>
 #include <pthread.h>
+#include <string.h>
 #include "prime.h"
 
 /* An unsigned int32 is sufficient for factoring 64-bit ints. */
 static unsigned int *sieve = NULL;
 static size_t sieve_size = 0;  /* size, in bytes. */
 static size_t sieve_max = 0;   /* largest correct entry. */
+static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
 
 #define INIT_PRIME_SIEVE(N) \
 	if (!sieve || sieve[sieve_max]*sieve[sieve_max] <(N)) {\
@@ -35,8 +37,6 @@ static size_t sieve_max = 0;   /* largest correct entry. */
 static void
 init_prime_sieve (size_t max)
 {
-	static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
-
 	if (max < sieve_max) return;
 
 	pthread_mutex_lock(&mtx);
@@ -48,22 +48,23 @@ init_prime_sieve (size_t max)
 		return;
 	}
 
+	unsigned int *tsieve;
 	sieve_size = 8192 * ((max / 8192) + 1);
+	tsieve = (unsigned int *) malloc(sieve_size * sizeof(unsigned int));
+	unsigned int pos = sieve_max+1;
 	if (!sieve)
 	{
-		sieve = (unsigned int *) malloc(sieve_size * sizeof(unsigned int));
-		sieve_max = 2;
-		sieve[0] = 2;
-		sieve[1] = 3;
-		sieve[2] = 5;
+		pos = 3;
+		tsieve[0] = 2;
+		tsieve[1] = 3;
+		tsieve[2] = 5;
 	}
 	else
 	{
-		sieve = (unsigned int *) realloc(sieve, sieve_size * sizeof(unsigned int));
+		memcpy(tsieve, sieve, sieve_max*sizeof(unsigned int));
 	}
 
-	unsigned int pos = sieve_max+1;
-	unsigned int nstart = sieve[sieve_max] + 2;
+	unsigned int nstart = tsieve[pos-1] + 2;
 
 	/* Really dumb algo, brute-force test all odd numbers against
 	 * known primes */
@@ -71,7 +72,7 @@ init_prime_sieve (size_t max)
 	{
 		for (unsigned int j=1; ; j++)
 		{
-			unsigned int p = sieve[j];
+			unsigned int p = tsieve[j];
 			if (0 == n%p)
 			{
 				break;
@@ -79,13 +80,20 @@ init_prime_sieve (size_t max)
 			if (p*p > n)
 			{
 				/* If we got to here, n must be prime; save it, move on. */
-				sieve[pos] = n;
+				tsieve[pos] = n;
 				pos ++;
 				break;
 			}
 		}
 	}
+
+	// There is still a race in the code below, w.r.t. the reader
+	// but we try to minimize the race window by swapping the arrays
+	// here, with as small a race window as we can manage.
+	unsigned int* old_sieve = sieve;
+	sieve = tsieve;
 	sieve_max = pos-1;
+	if (old_sieve) free(old_sieve);
 	pthread_mutex_unlock(&mtx);
 
 #if 0
@@ -104,6 +112,8 @@ init_prime_sieve (size_t max)
 unsigned int get_nth_prime(unsigned long n)
 {
 	if (sieve_max <= n) init_prime_sieve(n);
+
+	// We really should lock here, but we try to get lucky, instead.
 	return sieve[n-1];
 }
 
