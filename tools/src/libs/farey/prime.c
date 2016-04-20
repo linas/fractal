@@ -14,6 +14,7 @@
 #include <math.h>
 #include <malloc.h>
 #include <pthread.h>
+#include <stdbool.h>
 #include <string.h>
 #include "prime.h"
 
@@ -22,6 +23,7 @@ static unsigned int *sieve = NULL;
 static size_t sieve_size = 0;  /* size, in bytes. */
 static size_t sieve_max = 0;   /* largest correct entry. */
 static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
+static bool need_lock = false;
 
 #define INIT_PRIME_SIEVE(N) \
 	if (!sieve || sieve[sieve_max]*sieve[sieve_max] <(N)) {\
@@ -40,10 +42,12 @@ init_prime_sieve (size_t max)
 	if (max < sieve_max) return;
 
 	pthread_mutex_lock(&mtx);
+	need_lock = true;
 
 	// Test again, this time under the lock.
 	if (max < sieve_max)
 	{
+		need_lock = false;
 		pthread_mutex_unlock(&mtx);
 		return;
 	}
@@ -101,6 +105,7 @@ init_prime_sieve (size_t max)
 		if (old_sieve) free(old_sieve);
 	}
 	sieve_max = pos-1;
+	need_lock = false;
 	pthread_mutex_unlock(&mtx);
 
 #if 0
@@ -124,9 +129,14 @@ unsigned int get_nth_prime(unsigned long n)
 	// there is a tiny race window if we don't lock here.  I tried
 	// to get lucky and not hit the race, but luck kept running out.
 	// So we lock.  Oh well.
-	pthread_mutex_lock(&mtx);
+	//
+	// Hmm Add back some raceyness with this need_lock mechanism.
+	// The problem is that the pthread locks are heavyweight, and
+	// I want to avoid them.  Isn't there a better way?
+	bool locked = false;
+	if (need_lock) { pthread_mutex_lock(&mtx); locked = true; }
 	unsigned int p = sieve[n-1];
-	pthread_mutex_unlock(&mtx);
+	if (locked) { pthread_mutex_unlock(&mtx); }
 	return p;
 }
 
