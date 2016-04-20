@@ -11,6 +11,7 @@
 
 #include <math.h>
 #include <malloc.h>
+#include <pthread.h>
 #include "prime.h"
 
 /* An unsigned int32 is sufficient for factoring 64-bit ints. */
@@ -32,11 +33,22 @@ static size_t sieve_max = 0;   /* largest correct entry. */
 static void
 init_prime_sieve (size_t max)
 {
+	static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
+
 	unsigned int n, j;
 	unsigned int nstart;
 	unsigned int pos;
 
 	if (max < sieve_max) return;
+
+	pthread_mutex_lock(&mtx);
+
+	// Test again, this time under the lock.
+	if (max < sieve_max)
+	{
+		pthread_mutex_unlock(&mtx);
+		return;
+	}
 
 	sieve_size = 8192 * ((max / 8192) + 1);
 	if (!sieve)
@@ -76,6 +88,7 @@ init_prime_sieve (size_t max)
 		}
 	}
 	sieve_max = pos-1;
+	pthread_mutex_unlock(&mtx);
 
 #if 0
 	for (j=0; j<pos; j++)
