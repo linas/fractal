@@ -23,7 +23,7 @@ static unsigned int *sieve = NULL;
 static size_t sieve_size = 0;  /* size, in bytes. */
 static size_t sieve_max = 0;   /* largest correct entry. */
 static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
-static pthread_spin_t spin = 0;
+static pthread_spinlock_t spin = 0;
 
 
 /* Initialize and fill in a prime-number sieve.
