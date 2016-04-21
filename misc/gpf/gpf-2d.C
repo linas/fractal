@@ -9,6 +9,8 @@
 #include <math.h>
 #include <stdio.h>
 
+#include <mp-zeta.h>
+
 #include <gpf.h>
 #include "brat.h"
 #include "gpf-gen-bignum.h"
@@ -162,5 +164,41 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 #endif
 }
 
+static double plot_diri(double re_q, double im_q, int itermax, double param)
+{
+	// discard outside of the unit circle.
+	if (1.0 <= re_q*re_q + im_q*im_q) return 0.0;
+
+	// Map the inside of a unit circle to the right-hand complex
+	// half-plane.
+
+	// if q in circle, and z in upper half plane, then
+	// q = (z-1)/(z+1)  or z = (1+q) / (1-q)
+	double complex q = re_q + I * im_q;
+	double complex z = (1.0 + q) / (1.0 - q);
+
+	// Next, we want to rotate by 90 and offset.
+	// Thus, z becomes s so that |s| > offset
+	z *= -I;
+	z += 2.0;
+
+	// Finally, avoid travelling too far up the imaginary axis,
+	// as this hinders convergence.
+	if (5.0 < fabs(cimag(z))) return 0.0;
+
+	cpx_t sum, ess;
+	cpx_init(sum);
+	cpx_init(ess);
+
+	cpx_set_d(ess, creal(z), cimag(z));
+
+	// cpx_gpf_dirichlet(sum, ess, 15);
+	cpx_borwein_zeta(sum, ess, 15);
+
+	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
+	return rv;
+}
+
 // DECL_MAKE_HEIGHT(ploto);
-DECL_MAKE_HEIGHT(plot_big);
+// DECL_MAKE_HEIGHT(plot_big);
+DECL_MAKE_HEIGHT(plot_diri);
