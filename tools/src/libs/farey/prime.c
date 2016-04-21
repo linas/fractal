@@ -23,7 +23,13 @@ static unsigned int *sieve = NULL;
 static size_t sieve_size = 0;  /* size, in bytes. */
 static size_t sieve_max = 0;   /* largest correct entry. */
 static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
-static pthread_spinlock_t spin = 0;
+static pthread_spinlock_t spin;
+
+__attribute__((constructor))
+void prime_sieve_spink_ctor()
+{
+	pthread_spin_init(&spin, 0);
+}
 
 
 /* Initialize and fill in a prime-number sieve.
@@ -96,6 +102,10 @@ init_prime_sieve (size_t max)
 		sieve = tsieve;
 		if (old_sieve) free(old_sieve);
 	}
+	pthread_spin_unlock(&spin);
+
+	// Do it again, preserve memory order.
+	pthread_spin_lock(&spin);
 	sieve_max = pos-1;
 	pthread_spin_unlock(&spin);
 	pthread_mutex_unlock(&mtx);
