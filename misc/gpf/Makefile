@@ -17,7 +17,7 @@ gpf-zero: gpf-zero.o gpf-gen-bignum.o $(FUNC)
 gpf-gen-bignum.o: gpf-gen-bignum.h
 
 .o:
-	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lm -lstdc++
+	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++
 
 .c.o:
 	cc -c $^  -std=gnu11 -Wall -O2 $(INCLUDES)

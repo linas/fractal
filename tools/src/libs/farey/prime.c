@@ -23,12 +23,8 @@ static unsigned int *sieve = NULL;
 static size_t sieve_size = 0;  /* size, in bytes. */
 static size_t sieve_max = 0;   /* largest correct entry. */
 static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
-static bool need_lock = false;
+static pthread_spin_t spin = 0;
 
-#define INIT_PRIME_SIEVE(N) \
-	if (!sieve || sieve[sieve_max]*sieve[sieve_max] <(N)) {\
-		init_prime_sieve(N); \
-	}
 
 /* Initialize and fill in a prime-number sieve.
  * Handles primes up to 4 billion (2^32), which should be enough
@@ -42,12 +38,10 @@ init_prime_sieve (size_t max)
 	if (max < sieve_max) return;
 
 	pthread_mutex_lock(&mtx);
-	need_lock = true;
 
 	// Test again, this time under the lock.
 	if (max < sieve_max)
 	{
-		need_lock = false;
 		pthread_mutex_unlock(&mtx);
 		return;
 	}
@@ -95,9 +89,7 @@ init_prime_sieve (size_t max)
 		}
 	}
 
-	// There is still a race in the code below, w.r.t. the reader
-	// but we try to minimize the race window by swapping the arrays
-	// here, with as small a race window as we can manage.
+	pthread_spin_lock(&spin);
 	if (sieve != tsieve)
 	{
 		unsigned int* old_sieve = sieve;
@@ -105,7 +97,7 @@ init_prime_sieve (size_t max)
 		if (old_sieve) free(old_sieve);
 	}
 	sieve_max = pos-1;
-	need_lock = false;
+	pthread_spin_unlock(&spin);
 	pthread_mutex_unlock(&mtx);
 
 #if 0
@@ -125,18 +117,9 @@ unsigned int get_nth_prime(unsigned long n)
 {
 	if (sieve_max <= n) init_prime_sieve(n);
 
-	// Argh.  The init routine can clobber the sieve array, and
-	// there is a tiny race window if we don't lock here.  I tried
-	// to get lucky and not hit the race, but luck kept running out.
-	// So we lock.  Oh well.
-	//
-	// Hmm Add back some raceyness with this need_lock mechanism.
-	// The problem is that the pthread locks are heavyweight, and
-	// I want to avoid them.  Isn't there a better way?
-	bool locked = false;
-	if (need_lock) { pthread_mutex_lock(&mtx); locked = true; }
+	pthread_spin_lock(&spin);
 	unsigned int p = sieve[n-1];
-	if (locked) { pthread_mutex_unlock(&mtx); }
+	pthread_spin_unlock(&spin);
 	return p;
 }
 
