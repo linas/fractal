@@ -180,7 +180,7 @@ static double plot_diri(double re_q, double im_q, int itermax, double param)
 	// Next, we want to rotate by 90 and offset.
 	// Thus, z becomes s so that |s| > offset
 	z *= -I;
-	z += 2.0;
+	z += 4.0;
 
 	// Finally, avoid travelling too far up the imaginary axis,
 	// as this hinders convergence.
@@ -190,10 +190,11 @@ static double plot_diri(double re_q, double im_q, int itermax, double param)
 	cpx_init(sum);
 	cpx_init(ess);
 
+	printf("dsart work on %g %g\n", creal(z), cimag(z));
 	cpx_set_d(ess, creal(z), cimag(z));
 
-	// cpx_gpf_dirichlet(sum, ess, 15);
-	cpx_borwein_zeta(sum, ess, 15);
+	cpx_gpf_dirichlet(sum, ess, 15);
+	// cpx_borwein_zeta(sum, ess, 15);
 
 	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
 	return rv;

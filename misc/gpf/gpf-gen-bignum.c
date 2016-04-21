@@ -132,9 +132,12 @@ void cpx_gpf_dirichlet(cpx_t sum, cpx_t ess, int prec)
 	cpx_t term;
 	cpx_init(term);
 
+	cpx_neg(ess, ess);
+
 	for (int n=1; ; n++)
 	{
 		cpx_ui_pow(term, n, ess, prec);
+// printf("duuude %d %d %g %g term = %g %g\n", n, gpf(n), cpx_get_re(ess), cpx_get_im(ess), cpx_get_re(term), cpx_get_im(term));
 		cpx_times_ui(term, term, gpf(n));
 		cpx_add(sum, sum, term);
 
