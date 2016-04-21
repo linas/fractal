@@ -10,7 +10,9 @@ set title "Excess/deficit of zeros of EG(gpf; z)"
 set xlabel "radius"
 set ylabel "num zeros minus radius"
 
-# set xrange [0:1]
+# set xrange [0:20]
 set xzeroaxis lw 2
 
-plot "zero-count.dat" using 1:($2-$1) title "" lw 2
+plot "zero-count.dat" using 1:($2-$1) title "" lw 2, \
+     "zero-count.dat" using 1:($1**0.33333333333) title "cube root of radius" lw 2, \
+     "zero-count.dat" using 1:(-$1**0.33333333333) title "" lw 2 lc 2
