@@ -311,13 +311,14 @@ int main(int argc, char* argv[])
 
 #define ZERO_COUNT
 #ifdef ZERO_COUNT
-	if (argc < 2)
+	if (argc < 3)
 	{
-		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <rlo> <rhi>\n", argv[0]);
 		exit(1);
 	}
-	double rad = atof(argv[1]);
-	for (double r=3000.0; r< rad; r+= 1)
+	double rlo = atof(argv[1]);
+	double rhi = atof(argv[2]);
+	for (double r=rlo; r<= rhi; r+= 1)
 	{
 		int count = zero_count(r);
 		printf("%g\t%d\n", r, count);
