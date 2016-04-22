@@ -97,7 +97,7 @@ void cpx_gpf_ordinary_recip(cpx_t sum, cpx_t z, int prec)
 		// The following check the loop termination condition,
 		// which is that the size of the term is less than epsilon.
 		cpx_abs(gabs, zn);
-		mpf_mul_ui(gabs, gabs, n);
+		mpf_div_ui(gabs, gabs, n);
 
 		cpx_abs(zabs, sum);
 		mpf_div(gabs, gabs, zabs);
