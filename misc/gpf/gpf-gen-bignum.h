@@ -15,6 +15,9 @@ extern "C" {
  * Ordinary generating function for the greatest common factor.
  */
 void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec);
+void cpx_gpf_ordinary_recip(cpx_t sum, cpx_t z, int prec);
+// void cpx_gpf_ordinary_s(cpx_t sum, cpx_t z, cpx_t s, int prec);
+// void cpx_gpf_ordinary_s(cpx_t sum, cpx_t z, int s, int prec);
 
 /*
  * Exponential generating function for the greatest common factor.
