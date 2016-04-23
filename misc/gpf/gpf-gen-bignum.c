@@ -35,19 +35,25 @@ void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
 
 	// Not defined for |z| > 1
 	mpf_sub_ui(gabs, gabs, 1);
-	if (0 < mpf_cmp(gabs, epsi)) return;
+	mpf_neg(gabs, gabs);
+	if (0 > mpf_cmp(gabs, epsi)) return;
+
+	double dist_to_circle = mpf_get_d(gabs);
+	int niter = ceil (2.302585*prec / dist_to_circle);
+	niter += ceil (log(niter) / dist_to_circle); // gpf bounded by n
 
 	cpx_t zn, term;
 	cpx_init(zn);
 	cpx_init(term);
 	cpx_set(zn, z);
 
-	for (int n=1; ; n++)
+	for (int n=1; n < niter ; n++)
 	{
 		cpx_times_ui(term, zn, gpf(n));
 		cpx_add(sum, sum, term);
 		cpx_mul(zn, zn, z);
 
+#if SLOW_VERSION_NOT_USING_NITER
 		// The following check the loop termination condition,
 		// which is that the size of the term is less than epsilon.
 		cpx_abs(gabs, zn);
@@ -58,6 +64,7 @@ void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
 
 		// if (n * zn < epsi * sum) return;
 		if (0 > mpf_cmp(gabs, epsi)) return;
+#endif
 	}
 }
 
@@ -81,29 +88,22 @@ void cpx_gpf_ordinary_recip(cpx_t sum, cpx_t z, int prec)
 
 	// Not defined for |z| > 1
 	mpf_sub_ui(gabs, gabs, 1);
-	if (0 < mpf_cmp(gabs, epsi)) return;
+	mpf_neg(gabs, gabs);
+	if (0 > mpf_cmp(gabs, epsi)) return;
+
+	double dist_to_circle = mpf_get_d(gabs);
+	int niter = ceil (2.302585*prec / dist_to_circle);
 
 	cpx_t zn, term;
 	cpx_init(zn);
 	cpx_init(term);
 	cpx_set(zn, z);
 
-	for (int n=1; ; n++)
+	for (int n=1; n < niter; n++)
 	{
 		cpx_div_ui(term, zn, gpf(n));
 		cpx_add(sum, sum, term);
 		cpx_mul(zn, zn, z);
-
-		// The following check the loop termination condition,
-		// which is that the size of the term is less than epsilon.
-		cpx_abs(gabs, zn);
-		mpf_div_ui(gabs, gabs, n);
-
-		cpx_abs(zabs, sum);
-		mpf_div(gabs, gabs, zabs);
-
-		// if (n * zn < epsi * sum) return;
-		if (0 > mpf_cmp(gabs, epsi)) return;
 	}
 }
 

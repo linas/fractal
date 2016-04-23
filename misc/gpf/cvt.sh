@@ -35,7 +35,8 @@
 
 # ../../generate/renorm gpf-exp-abs-250K-uni rg 0.4
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-250K-uni.png
-cat gpf-exp-x.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
+# cat gpf-exp-x.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
+cat recip.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip.png
 
 # ../../generate/renorm gpf-exp-abs-x rg 1
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-x.png
