@@ -162,6 +162,61 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 }
 
 /*
+ * Exponential generating function for the reciprocal of the
+ * greatest common factor.
+ */
+void cpx_gpf_exponential_recip(cpx_t sum, cpx_t z, int prec)
+{
+	mpf_t zabs, gabs, epsi, fact;
+	mpf_init (gabs);
+	mpf_init (zabs);
+	mpf_init (epsi);
+	mpf_init (fact);
+	mpf_set_ui(fact, 1);
+	mpf_set_ui(epsi, 1);
+	mpf_div_2exp(epsi, epsi, (int)(3.321*prec));
+
+	cpx_set_ui(sum, 0, 0);
+
+	// falls apart if z is zero.
+	cpx_abs(gabs, z);
+	if (0 > mpf_cmp(gabs, epsi)) return;
+
+	cpx_t zn, term;
+	cpx_init(zn);
+	cpx_init(term);
+	cpx_set(zn, z);
+
+	for (int n=1; ; n++)
+	{
+		cpx_div_ui(term, zn, gpf(n));
+		cpx_times_mpf(term, term, fact);
+		cpx_add(sum, sum, term);
+
+		// The following check the loop termination condition,
+		// which is that the size of the term is less than epsilon.
+		cpx_abs(gabs, term);
+		mpf_div_ui(gabs, gabs, n);
+
+		cpx_abs(zabs, sum);
+		mpf_div(gabs, gabs, zabs);
+
+		// if (n * zn * fact < epsi * sum) return;
+		if (0 > mpf_cmp(gabs, epsi)) break;
+
+		cpx_mul(zn, zn, z);
+		mpf_div_ui(fact, fact, n);
+	}
+
+	// Remove the leading exponential order.
+	cpx_abs(gabs, z);
+	mpf_neg(gabs, gabs);
+	fp_exp(gabs, gabs, prec);
+
+	cpx_times_mpf(sum, sum, gabs);
+}
+
+/*
  * Dirichlet generating function for the greatest common factor.
  */
 void cpx_gpf_dirichlet(cpx_t sum, cpx_t ess, int prec)
