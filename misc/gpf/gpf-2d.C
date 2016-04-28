@@ -139,15 +139,18 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	cpx_set_d(z, re_q, im_q);
 
 	// cpx_gpf_ordinary_recip(sum, z, 15);
-	cpx_gpf_exponential_recip(sum, z, 15);
 	// cpx_gpf_exponential(sum, z, 20);
 	// cpx_gpf_poch_rising(sum, z, 15);
 	// cpx_gpf_poch_falling(sum, z, 15);
 
+#if PHASE
 	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
 	return rv;
+#endif
 
-#if 0
+#if 1
+	// cpx_gpf_exponential(sum, z, 20);
+	cpx_gpf_exponential(sum, z, 8);
 	// extract
 	mpf_t val;
 	mpf_init(val);
@@ -156,10 +159,26 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	double rv = mpf_get_d(val);
 
 	// Divide by z for plotting.
-	// double r = sqrt(re_q*re_q + im_q*im_q);
-	// double lr = log(r);
-	// rv /= r*r / (lr*lr);
-	// rv /= r;
+	double r = sqrt(re_q*re_q + im_q*im_q);
+	double lr = log(r);
+	rv /= r*r / (lr*lr);
+
+	return rv;
+#endif
+
+#if RECIP
+	cpx_gpf_exponential_recip(sum, z, 10);
+	// extract
+	mpf_t val;
+	mpf_init(val);
+	cpx_abs(val, sum);
+
+	double rv = mpf_get_d(val);
+
+	// Divide by z for plotting.
+	double r = sqrt(re_q*re_q + im_q*im_q);
+	double lr = log(r);
+	rv /= lr;
 
 	return rv;
 #endif

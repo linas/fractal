@@ -13,6 +13,15 @@ set ylabel "num zeros minus radius"
 # set xrange [0:20]
 set xzeroaxis lw 2
 
+# plot "zero-count.dat" using 1:($2-$1) title "" lw 2, \
+#     "zero-count.dat" using 1:($1**0.33333333333) title "cube root of radius" lw 2, \
+#     "zero-count.dat" using 1:(-$1**0.33333333333) title "" lw 2 lc 2
+
+# plot "zero-count.dat" using 1:($2-$1) title "" lw 2, \
+#     "zero-count.dat" using 1:(2 +2*$1**0.25) title "fourth root of radius" lw 2, \
+#      "zero-count.dat" using 1:(2 -2*$1**0.25) title "" lw 2 lc 2
+
+
 plot "zero-count.dat" using 1:($2-$1) title "" lw 2, \
-     "zero-count.dat" using 1:($1**0.33333333333) title "cube root of radius" lw 2, \
-     "zero-count.dat" using 1:(-$1**0.33333333333) title "" lw 2 lc 2
+     "zero-count.dat" using 1:(2+log($1*$1)) title "2 ± 2log(radius)" lw 2, \
+     "zero-count.dat" using 1:(2-log($1*$1)) title "" lw 2 lc 2
