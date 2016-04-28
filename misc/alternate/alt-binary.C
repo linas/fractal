@@ -1,8 +1,8 @@
 
 /**
- * Alternating sums inspired by differential operators
- * viz just like in homology: the boundary operator drops the n'th
- * index, and sums, alternating the sign as (-1)^n so we do the same
+ * Alternating sums inspired by differential operators.
+ * Viz. just like in homology: the boundary operator drops the n'th
+ * index, and sums, alternating the sign as (-1)^n.  We do the same
  * here, where the index is the bit position in a binary string.
  * The result is a fractal .. which I've seen before, but where? why?
  *
@@ -87,5 +87,3 @@ main(int argc, char* argv[])
 		printf("%16.14g	%16.14g	%16.14g\n", x, y, u);
 	}
 }
-
-

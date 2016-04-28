@@ -1,6 +1,6 @@
 
 /*
- * One very spcific Pompieu function, just for grins.
+ * One very specific Pompieu function, just for grins.
  *
  * Linas Vepstas September 2015
  */
