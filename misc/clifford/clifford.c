@@ -20,6 +20,14 @@
  * if the non-zero bits are b_i b_j b_k ... then the corresponding
  * clifford alg element is e_i e_j e_k ...
  *
+ * Unfinished....
+ * Clifford algebras are quantizations of exterior algebras and are
+ * therefore kind-of-ish homological in thier behavior.  The homological
+ * variant is explored in the directory `../alternate`.
+ *
+ * Unfinished because it requires a tedious implementation of a product,
+ * which is hard to do in C... because of the lack of lambdas in C.
+ *
  * Linas Vepstas April 2016
  */
 
@@ -54,8 +62,22 @@ double from_bits(bitstring bits)
 	return val;
 }
 
+/* An element of the clifford algebra is a vector i.e. a function
+ * f that takes on a real value for any given basis vector in the
+ * cliff alg, and since any given basis vector is represented by
+ * a bit-string, that's what we do here.
+ */
+typedef double (*cliff)(bitstring);
 
-main(int argc, char* argv[])
+/* product of two vectors */
+double product(cliff f, cliff g, bitstring b)
+{
+
+
+}
+
+
+int main(int argc, char* argv[])
 {
 
 }
