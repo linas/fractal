@@ -6,6 +6,9 @@
  * here, where the index is the bit position in a binary string.
  * The result is a fractal .. which I've seen before, but where? why?
  *
+ * Well, the resulting fractal resembles the "coherent states" built
+ * from walsh functions (rademacher functions).  Which makes sense...
+ *
  * Linas Vepstas
  * June 2014
  */
