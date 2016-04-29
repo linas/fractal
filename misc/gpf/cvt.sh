@@ -45,8 +45,11 @@
 # ../../generate/renorm recip-exp-4320 rg 0.5
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-exp-4320.png
 
-../../generate/renorm exp-close rg 0.5
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-close.png
+../../generate/renorm recip-exp-40K rg 0.5
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-exp-40K.png
+
+# ../../generate/renorm exp-close rg 0.5
+#cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-close.png
 
 # ../../generate/renorm x rg 1
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > x.png

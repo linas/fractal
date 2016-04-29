@@ -148,7 +148,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-#if 1
+#if EXPO
 	// cpx_gpf_exponential(sum, z, 20);
 	cpx_gpf_exponential(sum, z, 8);
 	// extract
@@ -166,8 +166,9 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-#if RECIP
-	cpx_gpf_exponential_recip(sum, z, 10);
+#define RECIP 1
+#ifdef RECIP
+	cpx_gpf_exponential_recip(sum, z, 15);
 	// extract
 	mpf_t val;
 	mpf_init(val);

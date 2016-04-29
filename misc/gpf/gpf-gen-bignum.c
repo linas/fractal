@@ -188,8 +188,7 @@ void cpx_gpf_exponential_recip(cpx_t sum, cpx_t z, int prec)
 	cpx_init(term);
 	cpx_set(zn, z);
 
-// xxx tmp hack
-	for (int n=1; n < 10000; n++)
+	for (int n=1; ; n++)
 	{
 		cpx_div_ui(term, zn, gpf(n));
 		cpx_times_mpf(term, term, fact);
