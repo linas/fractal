@@ -36,7 +36,8 @@ static unsigned long gpf_direct(unsigned long n)
 }
 
 static pthread_mutex_t lck;
-void gpf_init(void)
+static void gpf_init(void)  __attribute__((constructor));
+static void gpf_init(void) 
 {
 	pthread_mutexattr_t attr;
 	pthread_mutexattr_init(&attr);

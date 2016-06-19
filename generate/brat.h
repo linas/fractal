@@ -29,8 +29,8 @@ void MakeHisto (
    int		itermax,
 	double 	renorm);
 
-/** 
- * MakeHeightCB - callback for making a plain height-map. 
+/**
+ * MakeHeightCB - callback for making a plain height-map.
  *
  * To graph a simple height map, implement this callback, and then use
  * DECL_MAKE_HEIGHT() to run it.
@@ -38,10 +38,10 @@ void MakeHisto (
  * The callback should return a single real number, given, as input,
  * a fixed point (x,y) on the 2D plane.
  */
-typedef double MakeHeightCB 
+typedef double MakeHeightCB
 	(double x, double y, int itermax, double param);
 
-void 
+void
 MakeHeightWrap (
    float  	*glob,
    int 		sizex,
@@ -74,7 +74,7 @@ void MakeHisto (        \
 /**
  * MakeBifurCB- Bifurcation diagram callback, does one row at a time.
  *
- * To draw a bifurcation diagram, implement this callback, 
+ * To draw a bifurcation diagram, implement this callback,
  * and then declare DECL_MAKE_BIFUR. The callback will be called
  * with a steadily-incremented y_parameter each time. For each
  * y_parameter, the callback should compute a 1D distribution, and
@@ -83,11 +83,11 @@ void MakeHisto (        \
 
 typedef void
 MakeBifurCB (
-	float *array, 
-	int array_size, 
+	float *array,
+	int array_size,
 	double x_center,
 	double x_width,
-	double y_parameter, 
+	double y_parameter,
 	int itermax,
 	double renorm);
 
@@ -119,4 +119,3 @@ void MakeHisto (        \
    MakeBifurWrap (glob, sizex, sizey, re_center, im_center,  \
        width, height, itermax, renorm, cb);                  \
 }
-
