@@ -11,6 +11,11 @@ extern "C" {
 #endif
 
 /* ------------------------------------------------------------ */
+/*
+ * initialize thread-safe locks for the cached version.
+ */
+void gpf_init(void);
+
 /* Return the greatest prime factor, 32/64-bit accurate,
  * (depending on size of "unsigned long").
  *
