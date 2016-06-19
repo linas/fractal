@@ -5,7 +5,8 @@
  * Linas Vepstas 2005,2006
  */
 
-#include <stdbool.h>
+#include <stdbool.h> // for boolean
+#include <stddef.h>  // for NULL
 
 /* ======================================================================= */
 /* Cache management - long double. */
