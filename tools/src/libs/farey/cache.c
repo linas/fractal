@@ -17,26 +17,26 @@
 #define CACHE_CHECK(TYPE_NAME,TYPE,IDX_TYPE) \
 bool TYPE_NAME##_one_d_cache_check(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 {	\
-	if (c->disabled) return 0;	\
+	if (c->disabled) return false;	\
 	if ((n > c->nmax) || 0==n )	\
 	{	\
-		IDX_TYPE newsize = 1.5*n+1;	\
+		IDX_TYPE newsize = 1.5*n+100;	\
 		c->cache = (TYPE *) realloc (c->cache, newsize * sizeof (TYPE));	\
 		c->ticky = (bool *) realloc (c->ticky, newsize * sizeof (bool));	\
-	\
+		\
 		IDX_TYPE en;	\
 		IDX_TYPE nstart = c->nmax+1;	\
 		if (0 == c->nmax) nstart = 0;	\
 		for (en=nstart; en <newsize; en++)	\
 		{	\
-			c->cache[en] = 0.0L;	\
+			c->cache[en] = (TYPE) 0;	\
 			c->ticky[en] = false;	\
 		}	\
 		c->nmax = newsize-1;	\
-		return 0;	\
+		return false;	\
 	}	\
 	\
-	return (c->ticky[n]);	\
+	return c->ticky[n];	\
 }
 
 /**
@@ -45,7 +45,7 @@ bool TYPE_NAME##_one_d_cache_check(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 #define CACHE_FETCH(TYPE_NAME,TYPE,IDX_TYPE) \
 TYPE TYPE_NAME##_one_d_cache_fetch(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 {	\
-	if (c->disabled) return 0.0L;	\
+	if (c->disabled) return (TYPE) 0;	\
 	return c->cache[n];	\
 }
 
@@ -69,7 +69,7 @@ void TYPE_NAME##_one_d_cache_clear(TYPE_NAME##_cache *c)	\
 	IDX_TYPE en; \
 	for (en=0; en < c->nmax; en++)	\
 	{	\
-		c->cache[en] = 0.0L;	\
+		c->cache[en] = (TYPE) 0;	\
 		c->ticky[en] = false;	\
 	}	\
 }
