@@ -246,6 +246,7 @@ void cpx_gpf_exponential_s(cpx_t sum, cpx_t z, cpx_t ess, int prec)
 	for (int n=1; ; n++)
 	{
 		cpx_ui_pow_cache(term, gpf(n), ess, prec);
+		cpx_times_mpf(term, term, zn);
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
 
