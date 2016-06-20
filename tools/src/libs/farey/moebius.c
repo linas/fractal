@@ -275,7 +275,7 @@ static int man_last_idx =0;
 	
 long double mangoldt_lambda_indexed (int n)
 {
-	if(ld_one_d_cache_check (&mangoldt_idx_cache, n))
+	if (ld_one_d_cache_check (&mangoldt_idx_cache, n))
 	{
 		return ld_one_d_cache_fetch(&mangoldt_idx_cache, n);
 	}

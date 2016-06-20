@@ -34,13 +34,14 @@ static unsigned long gpf_direct(unsigned long n)
 	return 0;
 }
 
+DECLARE_UL_CACHE(gpf_cache);
+
 /**
  * Return the greatest prime factor.
  * Cached version -- avoids recomputation.
  */
 unsigned long gpf(unsigned long n)
 {
-	DECLARE_UL_CACHE(gpf_cache);
 	if (ul_one_d_cache_check(&gpf_cache, n))
 	{
 		return ul_one_d_cache_fetch(&gpf_cache, n);

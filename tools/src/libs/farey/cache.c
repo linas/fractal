@@ -6,6 +6,7 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "cache.h"
 
@@ -18,11 +19,9 @@
 bool TYPE_NAME##_one_d_cache_check(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 {	\
 	if (c->disabled) return false;	\
-	pthread_rwlock_rdlock(&c->lck);	\
+	pthread_spin_lock(&c->spin);	\
 	if ((n > c->nmax) || 0==n )	\
 	{	\
-		pthread_rwlock_unlock(&c->lck);	\
-		pthread_rwlock_wrlock(&c->lck);	\
 		IDX_TYPE newsize = 1.5*n+100;	\
 		c->cache = (TYPE *) realloc (c->cache, newsize * sizeof (TYPE));	\
 		c->ticky = (bool *) realloc (c->ticky, newsize * sizeof (bool));	\
@@ -36,12 +35,13 @@ bool TYPE_NAME##_one_d_cache_check(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 			c->ticky[en] = false;	\
 		}	\
 		c->nmax = newsize-1;	\
-		pthread_rwlock_unlock(&c->lck);	\
+		pthread_spin_unlock(&c->spin);	\
+printf("duuude newsize=%lu\n", newsize); \
 		return false;	\
 	}	\
 	\
 	bool haveit = c->ticky[n];	\
-	pthread_rwlock_unlock(&c->lck);	\
+	pthread_spin_unlock(&c->spin);	\
 	return haveit;	\
 }
 
@@ -52,9 +52,9 @@ bool TYPE_NAME##_one_d_cache_check(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 TYPE TYPE_NAME##_one_d_cache_fetch(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 {	\
 	if (c->disabled) return (TYPE) 0;	\
-	pthread_rwlock_rdlock(&c->lck);	\
+	pthread_spin_lock(&c->spin);	\
 	TYPE val = c->cache[n];	\
-	pthread_rwlock_unlock(&c->lck);	\
+	pthread_spin_unlock(&c->spin);	\
 	return val;	\
 }
 
@@ -65,10 +65,11 @@ TYPE TYPE_NAME##_one_d_cache_fetch(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 void TYPE_NAME##_one_d_cache_store(TYPE_NAME##_cache *c, TYPE val, IDX_TYPE n)	\
 {	\
 	if (c->disabled) return;	\
-	pthread_rwlock_wrlock(&c->lck);	\
+	pthread_spin_lock(&c->spin);	\
 	c->cache[n] = val;	\
 	c->ticky[n] = true;	\
-	pthread_rwlock_unlock(&c->lck);	\
+printf("duuude store n=%lu %lu\n", n, val); \
+	pthread_spin_unlock(&c->spin);	\
 }
 
 /**
@@ -78,13 +79,13 @@ void TYPE_NAME##_one_d_cache_store(TYPE_NAME##_cache *c, TYPE val, IDX_TYPE n)	\
 void TYPE_NAME##_one_d_cache_clear(TYPE_NAME##_cache *c)	\
 {	\
 	IDX_TYPE en; \
-	pthread_rwlock_wrlock(&c->lck);	\
+	pthread_spin_lock(&c->spin);	\
 	for (en=0; en < c->nmax; en++)	\
 	{	\
 		c->cache[en] = (TYPE) 0;	\
 		c->ticky[en] = false;	\
 	}	\
-	pthread_rwlock_unlock(&c->lck);	\
+	pthread_spin_unlock(&c->spin);	\
 }
 
 /* =============================================================== */

@@ -121,7 +121,7 @@ init_prime_sieve (size_t max)
 /**
  * Return the n'th prime number.
  * 2 is the 1'th prime number,
- * 3 si the 2'th prime number, etc.
+ * 3 is the 2'th prime number, etc.
  */
 unsigned int get_nth_prime(unsigned long n)
 {
