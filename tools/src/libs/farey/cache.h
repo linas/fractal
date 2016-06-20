@@ -101,7 +101,6 @@ typedef struct {
 	static ul_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, \
 		.disabled = false, }; \
 	__attribute__((constructor)) void name##_init(void) { \
-printf("duuuude init the spinlok\n"); \
 	pthread_spin_init(&name.spin, 0); }
 
 /** ul_one_d_cache_check() -- check if the ulong value is in the cache.

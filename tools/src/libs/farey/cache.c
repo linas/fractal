@@ -1,12 +1,14 @@
 /**
  * cache.c
  * Generic cache management for frequently requested numbers.
+ * Includes thread-safe locks. Locks are implemented as spinlocks,
+ * these seem to be the best deal for the current CPU --
+ * pthread_mutex_t is slow, and pthread_rwlock_t is even slower(!)
  *
- * Linas Vepstas 2005,2006
+ * Linas Vepstas 2005, 2006, 2016
  */
 
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "cache.h"
 
@@ -36,7 +38,6 @@ bool TYPE_NAME##_one_d_cache_check(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 		}	\
 		c->nmax = newsize-1;	\
 		pthread_spin_unlock(&c->spin);	\
-printf("duuude newsize=%lu\n", newsize); \
 		return false;	\
 	}	\
 	\
@@ -68,7 +69,6 @@ void TYPE_NAME##_one_d_cache_store(TYPE_NAME##_cache *c, TYPE val, IDX_TYPE n)	\
 	pthread_spin_lock(&c->spin);	\
 	c->cache[n] = val;	\
 	c->ticky[n] = true;	\
-printf("duuude store n=%lu %lu\n", n, val); \
 	pthread_spin_unlock(&c->spin);	\
 }
 
