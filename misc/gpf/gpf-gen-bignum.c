@@ -221,7 +221,7 @@ void cpx_gpf_exponential_recip(cpx_t sum, cpx_t z, int prec)
  * greatest prime factor.  This generalizes the above two functions,
  * in that the first has s=1, and the second has s=-1.
  */
-void cpx_gpf_exponential_s(cpx_t sum, cpx_t z, cpx_t s, int prec)
+void cpx_gpf_exponential_s(cpx_t sum, cpx_t z, cpx_t ess, int prec)
 {
 	mpf_t zabs, gabs, epsi, fact;
 	mpf_init (gabs);
@@ -245,8 +245,7 @@ void cpx_gpf_exponential_s(cpx_t sum, cpx_t z, cpx_t s, int prec)
 
 	for (int n=1; ; n++)
 	{
-// xxxxxx
-		cpx_div_ui(term, zn, gpf(n));
+		cpx_ui_pow_cache(term, gpf(n), ess, prec);
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
 
