@@ -138,7 +138,7 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
 
-		// The following check the loop termination condition,
+		// The following checks the loop termination condition,
 		// which is that the size of the term is less than epsilon.
 		cpx_abs(gabs, term);
 		mpf_mul_ui(gabs, gabs, n);
@@ -193,7 +193,7 @@ void cpx_gpf_exponential_recip(cpx_t sum, cpx_t z, int prec)
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
 
-		// The following check the loop termination condition,
+		// The following checks the loop termination condition,
 		// which is that the size of the term is less than epsilon.
 		cpx_abs(gabs, term);
 		mpf_div_ui(gabs, gabs, n);
@@ -236,6 +236,7 @@ void cpx_gpf_exponential_s(cpx_t sum, cpx_t z, cpx_t ess, int prec)
 
 	// falls apart if z is zero.
 	cpx_abs(gabs, z);
+	mpf_mul_ui(gabs, gabs, 100);
 	if (0 > mpf_cmp(gabs, epsi)) return;
 
 	cpx_t zn, term;
@@ -246,14 +247,15 @@ void cpx_gpf_exponential_s(cpx_t sum, cpx_t z, cpx_t ess, int prec)
 	for (int n=1; ; n++)
 	{
 		cpx_ui_pow_cache(term, gpf(n), ess, prec);
-		cpx_times_mpf(term, term, zn);
+		cpx_mul(term, term, zn);
+
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
 
-		// The following check the loop termination condition,
+		// The following checks the loop termination condition,
 		// which is that the size of the term is less than epsilon.
 		cpx_abs(gabs, term);
-		mpf_div_ui(gabs, gabs, n);
+		mpf_mul_ui(gabs, gabs, n);
 
 		cpx_abs(zabs, sum);
 		mpf_div(gabs, gabs, zabs);

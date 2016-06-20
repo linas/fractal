@@ -54,8 +54,11 @@
 # ../../generate/renorm exp-close rg 0.5
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-close.png
 
-../../generate/renorm exp+0.5 rg 1.5
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp+0.5.png
+# ../../generate/renorm exp+0.5 rg 0.000025
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp+0.5.png
+
+../../generate/renorm exp+1.0 rg 0.4
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp+1.0.png
 
 # ../../generate/renorm x rg 1
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > x.png

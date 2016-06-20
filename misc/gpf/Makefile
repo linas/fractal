@@ -20,7 +20,7 @@ gpf-gen-bignum.o: gpf-gen-bignum.h
 	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++
 
 .c.o:
-	cc -c $^  -std=gnu11 -Wall -O2 $(INCLUDES)
+	cc -c -g $^  -std=gnu11 -Wall -O2 $(INCLUDES)
 
 .C.o:
 	cc -c $^  -std=gnu++11 -Wall -O2 $(INCLUDES)

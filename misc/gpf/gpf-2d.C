@@ -201,9 +201,12 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	double rv = mpf_get_d(val);
 
 	// Divide by z for plotting.
-	// double r = sqrt(re_q*re_q + im_q*im_q);
-	// double lr = log(r);
+	double r = sqrt(re_q*re_q + im_q*im_q);
+	double lr = log(r);
 	// rv /= (lr * lr);
+
+	// Standard S=1 normalization.
+	rv /= r*r / (lr*lr);
 
 	return rv;
 #endif
