@@ -18,8 +18,11 @@
 bool TYPE_NAME##_one_d_cache_check(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 {	\
 	if (c->disabled) return false;	\
+	pthread_rwlock_rdlock(&c->lck);	\
 	if ((n > c->nmax) || 0==n )	\
 	{	\
+		pthread_rwlock_unlock(&c->lck);	\
+		pthread_rwlock_wrlock(&c->lck);	\
 		IDX_TYPE newsize = 1.5*n+100;	\
 		c->cache = (TYPE *) realloc (c->cache, newsize * sizeof (TYPE));	\
 		c->ticky = (bool *) realloc (c->ticky, newsize * sizeof (bool));	\
@@ -33,10 +36,13 @@ bool TYPE_NAME##_one_d_cache_check(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 			c->ticky[en] = false;	\
 		}	\
 		c->nmax = newsize-1;	\
+		pthread_rwlock_unlock(&c->lck);	\
 		return false;	\
 	}	\
 	\
-	return c->ticky[n];	\
+	bool haveit = c->ticky[n];	\
+	pthread_rwlock_unlock(&c->lck);	\
+	return haveit;	\
 }
 
 /**
@@ -46,7 +52,10 @@ bool TYPE_NAME##_one_d_cache_check(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 TYPE TYPE_NAME##_one_d_cache_fetch(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 {	\
 	if (c->disabled) return (TYPE) 0;	\
-	return c->cache[n];	\
+	pthread_rwlock_rdlock(&c->lck);	\
+	TYPE val = c->cache[n];	\
+	pthread_rwlock_unlock(&c->lck);	\
+	return val;	\
 }
 
 /**
@@ -56,8 +65,10 @@ TYPE TYPE_NAME##_one_d_cache_fetch(TYPE_NAME##_cache *c, IDX_TYPE n)	\
 void TYPE_NAME##_one_d_cache_store(TYPE_NAME##_cache *c, TYPE val, IDX_TYPE n)	\
 {	\
 	if (c->disabled) return;	\
+	pthread_rwlock_wrlock(&c->lck);	\
 	c->cache[n] = val;	\
 	c->ticky[n] = true;	\
+	pthread_rwlock_unlock(&c->lck);	\
 }
 
 /**
@@ -67,11 +78,13 @@ void TYPE_NAME##_one_d_cache_store(TYPE_NAME##_cache *c, TYPE val, IDX_TYPE n)	\
 void TYPE_NAME##_one_d_cache_clear(TYPE_NAME##_cache *c)	\
 {	\
 	IDX_TYPE en; \
+	pthread_rwlock_wrlock(&c->lck);	\
 	for (en=0; en < c->nmax; en++)	\
 	{	\
 		c->cache[en] = (TYPE) 0;	\
 		c->ticky[en] = false;	\
 	}	\
+	pthread_rwlock_unlock(&c->lck);	\
 }
 
 /* =============================================================== */

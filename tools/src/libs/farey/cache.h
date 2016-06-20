@@ -5,6 +5,7 @@
  * Linas Vepstas 2005,2006
  */
 
+#include <pthread.h>
 #include <stdbool.h> // for boolean
 #include <stddef.h>  // for NULL
 
@@ -16,11 +17,13 @@ typedef struct {
 	long double *cache;
 	bool *ticky;
 	bool disabled;
+	pthread_rwlock_t lck;
 } ld_cache;
 
 
 #define DECLARE_LD_CACHE(name)         \
-	static ld_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, .disabled = false}
+	static ld_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, \
+		.disabled = false, .lck = PTHREAD_RWLOCK_INITIALIZER}
 
 /** ld_one_d_cache_check() -- check if long double value is in the cache
  *  Returns true if the value is in the cache, else returns false.
@@ -51,10 +54,12 @@ typedef struct {
 	unsigned int *cache;
 	bool *ticky;
 	bool disabled;
+	pthread_rwlock_t lck;
 } ui_cache;
 
 #define DECLARE_UI_CACHE(name)         \
-	static ui_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, .disabled = false}
+	static ui_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, \
+		.disabled = false, .lck = PTHREAD_RWLOCK_INITIALIZER}
 
 /** ui_one_d_cache_check() -- check if the uint value is in the cache.
  *  Returns true if the value is in the cache, else returns false.
@@ -85,10 +90,12 @@ typedef struct {
 	unsigned long *cache;
 	bool *ticky;
 	bool disabled;
+	pthread_rwlock_t lck;
 } ul_cache;
 
 #define DECLARE_UL_CACHE(name)         \
-	static ul_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, .disabled = false}
+	static ul_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, \
+		.disabled = false, .lck = PTHREAD_RWLOCK_INITIALIZER}
 
 /** ul_one_d_cache_check() -- check if the ulong value is in the cache.
  *  Returns true if the value is in the cache, else returns false.

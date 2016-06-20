@@ -6,7 +6,6 @@
  * April 2016 -- linas
  */
 
-#include <pthread.h>
 #include "cache.h"
 #include "gpf.h"
 #include "prime.h"
@@ -35,17 +34,6 @@ static unsigned long gpf_direct(unsigned long n)
 	return 0;
 }
 
-static pthread_mutex_t lck;
-static void gpf_init(void)  __attribute__((constructor));
-static void gpf_init(void) 
-{
-	pthread_mutexattr_t attr;
-	pthread_mutexattr_init(&attr);
-	pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_NORMAL);
-	pthread_mutex_init(&lck, &attr);
-	pthread_mutexattr_destroy(&attr);
-}
-
 /**
  * Return the greatest prime factor.
  * Cached version -- avoids recomputation.
@@ -53,16 +41,12 @@ static void gpf_init(void)
 unsigned long gpf(unsigned long n)
 {
 	DECLARE_UL_CACHE(gpf_cache);
-	pthread_mutex_lock(&lck);
 	if (ul_one_d_cache_check(&gpf_cache, n))
 	{
-		unsigned long fact = ul_one_d_cache_fetch(&gpf_cache, n);
-		pthread_mutex_unlock(&lck);
-		return fact;
+		return ul_one_d_cache_fetch(&gpf_cache, n);
 	}
 	unsigned long fact = gpf_direct(n);
 	ul_one_d_cache_store(&gpf_cache, fact, n);
-	pthread_mutex_unlock(&lck);
 	return fact;
 }
 
