@@ -51,14 +51,35 @@
 # ../../generate/renorm recip-exp-41K rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-exp-41K.png
 
+../../generate/renorm recip-exp-240K rg 3.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-exp-240K.png
+
 # ../../generate/renorm exp-close rg 0.5
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-close.png
 
 # ../../generate/renorm exp+0.5 rg 0.000025
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp+0.5.png
 
-../../generate/renorm exp+1.0 rg 0.4
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp+1.0.png
+# ../../generate/renorm exp+1.0 rg 0.44
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp+1.0.png
+
+# ../../generate/renorm exp-re rg 0.4
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-re.png
+
+# ../../generate/renorm exp-re-2K rg 0.4
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-re-2K.png
+
+# ../../generate/renorm exp-re-2160 rg 0.4
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-re-2160.png
+
+# ../../generate/renorm exp-re-4K rg 0.4
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-re-4K.png
+
+# ../../generate/renorm exp-re-8K rg 0.4
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-re-8K.png
+
+# ../../generate/renorm exp-2.0 rg 0.3
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-2.0.png
 
 # ../../generate/renorm x rg 1
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > x.png
