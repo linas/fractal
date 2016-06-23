@@ -135,6 +135,7 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 	for (int n=1; ; n++)
 	{
 		cpx_times_ui(term, zn, gpf(n));
+cpx_div_ui(term, term, n);
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
 
