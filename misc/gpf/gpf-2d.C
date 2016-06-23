@@ -217,6 +217,8 @@ rv = cpx_get_re(sum);
 
 static double plot_diri(double re_q, double im_q, int itermax, double param)
 {
+static int cnt=0;
+int id = ++cnt;
 	// discard outside of the unit circle.
 	if (1.0 <= re_q*re_q + im_q*im_q) return 0.0;
 
@@ -235,26 +237,24 @@ static double plot_diri(double re_q, double im_q, int itermax, double param)
 
 	// Finally, avoid travelling too far up the imaginary axis,
 	// as this hinders convergence.
-	if (5.0 < fabs(cimag(z))) return 0.0;
+	if (4.0 < fabs(cimag(z))) return 0.0;
 
-	if (3.0 >= fabs(creal(z))) return 0.0;
+	if (3.6 >= fabs(creal(z))) return 0.0;
 
 	cpx_t sum, ess;
 	cpx_init(sum);
 	cpx_init(ess);
 
-static int cnt=0;
 time_t start = time(NULL);
-int id = ++cnt;
 printf("Start pix=%d start work on %g %g\n", id, creal(z), cimag(z));
 	cpx_set_d(ess, creal(z), cimag(z));
 
 	cpx_gpf_dirichlet(sum, ess, 15);
 	// cpx_borwein_zeta(sum, ess, 15);
 time_t stop = time(NULL);
-printf("Done pix=%d done took %lu on %g %g\n", id, stop-start, creal(z), cimag(z));
 
 	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
+printf("Done pix=%d done took %lu on %g %g val=%g\n", id, stop-start, creal(z), cimag(z), rv);
 	return rv;
 }
 
