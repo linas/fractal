@@ -8,6 +8,7 @@
 #include <complex.h>
 #include <math.h>
 #include <stdio.h>
+#include <time.h>
 
 #include <mp-zeta.h>
 
@@ -236,15 +237,22 @@ static double plot_diri(double re_q, double im_q, int itermax, double param)
 	// as this hinders convergence.
 	if (5.0 < fabs(cimag(z))) return 0.0;
 
+	if (3.0 >= fabs(creal(z))) return 0.0;
+
 	cpx_t sum, ess;
 	cpx_init(sum);
 	cpx_init(ess);
 
-	printf("dsart work on %g %g\n", creal(z), cimag(z));
+static int cnt=0;
+time_t start = time(NULL);
+int id = ++cnt;
+printf("Start pix=%d start work on %g %g\n", id, creal(z), cimag(z));
 	cpx_set_d(ess, creal(z), cimag(z));
 
 	cpx_gpf_dirichlet(sum, ess, 15);
 	// cpx_borwein_zeta(sum, ess, 15);
+time_t stop = time(NULL);
+printf("Done pix=%d done took %lu on %g %g\n", id, stop-start, creal(z), cimag(z));
 
 	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
 	return rv;
