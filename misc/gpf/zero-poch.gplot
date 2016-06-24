@@ -1,0 +1,18 @@
+
+set term png size 1024, 768
+set out 'zero-poch-rise.png'
+
+# set style data linespoints
+set style data lines
+set key left
+
+set title "Excess/deficit of zeros of RPG(gpf; z)"
+set xlabel "radius"
+set ylabel "num zeros minus sqrt radius"
+
+# set xrange [0:20]
+set xzeroaxis lw 2
+
+plot "zero-count-poch-rise.dat" using 1:($2-sqrt($1)) title "" lw 2, \
+     "zero-count-poch-rise.dat" using 1:(1+0.4*log($1)) title "2 ± log(radius)" lw 2, \
+     "zero-count-poch-rise.dat" using 1:(1-0.4*log($1)) title "" lw 2 lc 2
