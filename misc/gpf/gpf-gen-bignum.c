@@ -371,46 +371,32 @@ void cpx_gpf_poch(cpx_t sum, cpx_t zorig, int prec, bool rise)
 		mpf_mul(zabs, zabs, epsi);
 
 		// if (n * zn/n! < epsi * sum) return;
-		if (0 > mpf_cmp(gabs, zabs)) return;
+		if (0 > mpf_cmp(gabs, zabs)) break;
 
 		cpx_add_mpf(z, z, one);
 		cpx_mul(zn, zn, z);
 		mpf_div_ui(fact, fact, n);
 	}
+
+	// Remove the leading exponential order.
+	// Its actually exp(-2*sqrt|z|)
+	// It seems to be identical for both the rising
+	// and the falling factorial versions
+	cpx_abs(gabs, zorig);
+	mpf_sqrt(gabs, gabs);
+	mpf_mul_ui(gabs, gabs, 2);
+	mpf_neg(gabs, gabs);
+	fp_exp(gabs, gabs, prec);
+
+	cpx_times_mpf(sum, sum, gabs);
 }
 
 void cpx_gpf_poch_rising(cpx_t sum, cpx_t z, int prec)
 {
 	cpx_gpf_poch(sum, z, prec, true);
-
-	// Remove the leading exponential order.
-	// Its actually exp(-2*sqrt|z|)
-	mpf_t gabs;
-	mpf_init (gabs);
-
-	cpx_abs(gabs, z);
-	mpf_sqrt(gabs, gabs);
-	mpf_mul_ui(gabs, gabs, 2);
-	mpf_neg(gabs, gabs);
-	fp_exp(gabs, gabs, prec);
-
-	cpx_times_mpf(sum, sum, gabs);
 }
 
 void cpx_gpf_poch_falling(cpx_t sum, cpx_t z, int prec)
 {
 	cpx_gpf_poch(sum, z, prec, false);
-
-	// Remove the leading exponential order.
-	// Its actually exp(-2*sqrt|z|)
-	mpf_t gabs;
-	mpf_init (gabs);
-
-	cpx_abs(gabs, z);
-	mpf_sqrt(gabs, gabs);
-	mpf_mul_ui(gabs, gabs, 2);
-	mpf_neg(gabs, gabs);
-	fp_exp(gabs, gabs, prec);
-
-	cpx_times_mpf(sum, sum, gabs);
 }
