@@ -19,11 +19,13 @@ void expo(cpx_t sum, cpx_t z, int nprec)
 	// cpx_gpf_exponential(sum, z, nprec);
 	cpx_gpf_poch_rising(sum, z, nprec);
 
+#if 0
 	// Divide the returned value by r...
 	mpf_t r;
 	mpf_init(r);
 	cpx_abs(r, z);
 	cpx_div_mpf(sum, sum, r);
+#endif
 }
 
 double gpf_bignum(double r, double theta)
@@ -36,7 +38,7 @@ double gpf_bignum(double r, double theta)
 	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
 	// cpx_gpf_exponential(sum, z, 20);
-	expo(sum, z, 30);
+	expo(sum, z, 40);
 
 	mpf_t val;
 	mpf_init(val);
@@ -58,10 +60,10 @@ void find_zero(double rguess, double tguess, double cell_size)
 	cpx_t e1, e2;
 	cpx_init(e1);
 	cpx_init(e2);
-	cpx_set_d(e1, 0.15, 0);
-	cpx_set_d(e2, 0, 0.15);
+	cpx_set_d(e1, 0.05, 0);
+	cpx_set_d(e2, 0, 0.05);
 
-	int rc = cpx_find_zero(zero, expo, guess, e1, e2, 35, 150);
+	int rc = cpx_find_zero(zero, expo, guess, e1, e2, 20, 40);
 
 	// if rc is not zero, then nothing was found
 	if (rc) return;
@@ -99,9 +101,11 @@ void survey(double rmax, double cell_size)
 
 			if (sample < 0.25)
 			{
-				// printf("---------\n");
-				// printf("Candidate zero near r=%g t=%g\n", r, t);
-				// fflush(stdout);
+#if 0
+				printf("---------\n");
+				printf("Candidate zero near r=%g t=%g\n", r, t);
+				fflush(stdout);
+#endif
 				find_zero(r, t, cell_size);
 			}
 		}
