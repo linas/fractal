@@ -375,6 +375,18 @@ void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 		cpx_mul(zn, zn, z);
 		mpf_div_ui(fact, fact, n);
 	}
+
+	// Remove the leading exponential order.
+	// Its actually exp(-2*sqrt|z|)
+	// and it seems to be that for both the rising and the falling
+	// versions.
+	cpx_abs(gabs, z);
+	mpf_sqrt(gabs, gabs);
+	mpf_mul_ui(gabs, gabs, 2);
+	mpf_neg(gabs, gabs);
+	fp_exp(gabs, gabs, prec);
+
+	cpx_times_mpf(sum, sum, gabs);
 }
 
 void cpx_gpf_poch_rising(cpx_t sum, cpx_t z, int prec)

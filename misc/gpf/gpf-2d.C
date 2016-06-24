@@ -217,7 +217,8 @@ rv = cpx_get_re(sum);
 
 #define POCH 1
 #ifdef POCH
-	cpx_gpf_poch_rising(sum, z, 15);
+	// cpx_gpf_poch_rising(sum, z, 25);
+	cpx_gpf_poch_falling(sum, z, 25);
 
 	// extract
 	mpf_t val;
@@ -228,9 +229,9 @@ rv = cpx_get_re(sum);
 	double r = sqrt(re_q*re_q + im_q*im_q);
 	double lr = log(r);
 
-	rv *= exp(-2.0*sqrt(r));
+	// rv *= exp(-2.0*sqrt(r));
 	rv /= r;
-	rv *= 5.0;
+	rv *= 10.0;
 #if 0
 double lv = log(rv);
 if (lv < 0.0) lv = 0.0;
