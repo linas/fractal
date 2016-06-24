@@ -400,4 +400,17 @@ void cpx_gpf_poch_rising(cpx_t sum, cpx_t z, int prec)
 void cpx_gpf_poch_falling(cpx_t sum, cpx_t z, int prec)
 {
 	cpx_gpf_poch(sum, z, prec, false);
+
+	// Remove the leading exponential order.
+	// Its actually exp(-2*sqrt|z|)
+	mpf_t gabs;
+	mpf_init (gabs);
+
+	cpx_abs(gabs, z);
+	mpf_sqrt(gabs, gabs);
+	mpf_mul_ui(gabs, gabs, 2);
+	mpf_neg(gabs, gabs);
+	fp_exp(gabs, gabs, prec);
+
+	cpx_times_mpf(sum, sum, gabs);
 }
