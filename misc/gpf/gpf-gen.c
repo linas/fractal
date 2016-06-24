@@ -323,11 +323,14 @@ int main(int argc, char* argv[])
 	}
 	double rlo = atof(argv[1]);
 	double rhi = atof(argv[2]);
-	for (double r=rlo; r<= rhi; r+= 1)
+	double rstep = 1;
+	for (double r=rlo; r<= rhi; r+= rstep)
 	{
 		int count = zero_count(r);
 		printf("%g\t%d\n", r, count);
 		fflush(stdout);
+
+		rstep = floor(0.5 * sqrt(r));
 	}
 #endif
 }
