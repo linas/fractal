@@ -324,6 +324,7 @@ int main(int argc, char* argv[])
 	double rlo = atof(argv[1]);
 	double rhi = atof(argv[2]);
 	double rstep = 1;
+	rstep = floor(0.5 * sqrt(rlo));
 	for (double r=rlo; r<= rhi; r+= rstep)
 	{
 		int count = zero_count(r);
