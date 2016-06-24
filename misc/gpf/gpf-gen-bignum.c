@@ -366,10 +366,10 @@ void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 		mpf_mul_ui(gabs, gabs, n);
 
 		cpx_abs(zabs, sum);
-		mpf_div(gabs, gabs, zabs);
+		mpf_mul(zabs, zabs, epsi);
 
 		// if (n * zn/n! < epsi * sum) return;
-		if (0 > mpf_cmp(gabs, epsi)) return;
+		if (0 > mpf_cmp(gabs, zabs)) return;
 
 		cpx_add_mpf(z, z, one);
 		cpx_mul(zn, zn, z);

@@ -139,17 +139,18 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
+#define PHASE 1
+#if PHASE
 	// cpx_gpf_ordinary_recip(sum, z, 15);
 	// cpx_gpf_exponential(sum, z, 20);
-	// cpx_gpf_poch_rising(sum, z, 15);
+	cpx_gpf_poch_rising(sum, z, 15);
 	// cpx_gpf_poch_falling(sum, z, 15);
 
-#if PHASE
 	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
 	return rv;
 #endif
 
-#define EXPO 1
+// #define EXPO 1
 #if EXPO
 	cpx_gpf_exponential(sum, z, 20);
 
@@ -239,7 +240,7 @@ int id = ++cnt;
 	// as this hinders convergence.
 	if (4.0 < fabs(cimag(z))) return 0.0;
 
-	if (3.6 >= fabs(creal(z))) return 0.0;
+	if (3.6 >= creal(z)) return 0.0;
 
 	cpx_t sum, ess;
 	cpx_init(sum);
@@ -259,5 +260,5 @@ printf("Done pix=%d done took %lu on %g %g val=%g\n", id, stop-start, creal(z), 
 }
 
 // DECL_MAKE_HEIGHT(ploto);
-// DECL_MAKE_HEIGHT(plot_big);
-DECL_MAKE_HEIGHT(plot_diri);
+DECL_MAKE_HEIGHT(plot_big);
+// DECL_MAKE_HEIGHT(plot_diri);
