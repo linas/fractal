@@ -139,7 +139,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-#define PHASE 1
+// #define PHASE 1
 #if PHASE
 	// cpx_gpf_ordinary_recip(sum, z, 15);
 	// cpx_gpf_exponential(sum, z, 20);
@@ -211,6 +211,32 @@ rv = cpx_get_re(sum);
 
 	// Standard S=1 normalization.
 	rv /= r*r / (lr*lr);
+
+	return rv;
+#endif
+
+#define POCH 1
+#ifdef POCH
+	cpx_gpf_poch_rising(sum, z, 15);
+
+	// extract
+	mpf_t val;
+	mpf_init(val);
+	cpx_abs(val, sum);
+
+	double rv = mpf_get_d(val);
+	double r = sqrt(re_q*re_q + im_q*im_q);
+	double lr = log(r);
+
+	rv *= exp(-2.0*sqrt(r));
+	rv /= r;
+	rv *= 5.0;
+#if 0
+double lv = log(rv);
+if (lv < 0.0) lv = 0.0;
+printf("duude rv=%g scale=%g\n", rv, lv/lr);
+#endif
+printf("duude r=%g rv=%g \n", r, rv);
 
 	return rv;
 #endif
