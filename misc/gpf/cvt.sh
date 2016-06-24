@@ -60,14 +60,17 @@
 # ../../generate/renorm diri rg 100.0 -0.5
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > diri-x.png
 
-# ../../generate/renorm poch-rise rg 1.0
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise.png
+../../generate/renorm poch-rise rg 0.2
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise.png
 
-../../generate/renorm poch-rise-x rg 1.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise-x.png
+# ../../generate/renorm poch-rise-321M rg 0.2
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise-321M.png
 
-# ../../generate/renorm poch-fall rg 0.2
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-fall.png
+# ../../generate/renorm poch-rise-x rg 0.2
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise-x.png
+
+../../generate/renorm poch-fall rg 0.2
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-fall.png
 
 # ../../generate/renorm exp+0.5 rg 0.000025
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp+0.5.png

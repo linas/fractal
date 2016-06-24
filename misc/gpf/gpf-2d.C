@@ -232,9 +232,9 @@ rv = cpx_get_re(sum);
 	double rv = mpf_get_d(val);
 	double r = sqrt(re_q*re_q + im_q*im_q);
 	// double lr = log(r);
-double gre = cpx_get_re(sum);
-double gim = cpx_get_im(sum);
-printf("duude re=%g im=%g gre=%g gim=%g\n", re_q, im_q, gre, gim);
+// double gre = cpx_get_re(sum);
+// double gim = cpx_get_im(sum);
+// printf("duude re=%g im=%g gre=%g gim=%g\n", re_q, im_q, gre, gim);
 
 	// rv *= exp(-2.0*sqrt(r));
 	rv /= r;
