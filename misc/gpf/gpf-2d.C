@@ -219,8 +219,8 @@ rv = cpx_get_re(sum);
 #ifdef POCH
 	cpx_t fal;
 	cpx_init(fal);
-	cpx_gpf_poch_rising(sum, z, 25);
-	// cpx_gpf_poch_falling(sum, z, 25);
+	// cpx_gpf_poch_rising(sum, z, 25);
+	cpx_gpf_poch_falling(sum, z, 35);
 	// cpx_gpf_poch_falling(fal, z, 25);
 	// cpx_sub(sum, sum, fal);
 
