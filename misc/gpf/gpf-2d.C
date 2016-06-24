@@ -229,7 +229,7 @@ rv = cpx_get_re(sum);
 	double r = sqrt(re_q*re_q + im_q*im_q);
 	double lr = log(r);
 
-	// rv *= exp(-2.0*sqrt(r));
+	rv *= exp(-2.0*sqrt(r));
 	rv /= r;
 	rv *= 10.0;
 #if 0

@@ -324,7 +324,7 @@ void cpx_gpf_dirichlet(cpx_t sum, cpx_t ess, int prec)
  * instead of x^n.  Actually, uses binomial coefficient ... two
  * factorials are needed for convergence.
  */
-void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
+void cpx_gpf_poch(cpx_t sum, cpx_t zorig, int prec, bool rise)
 {
 	mpf_t zabs, gabs, fact, epsi, one;
 	mpf_init (gabs);
@@ -345,12 +345,14 @@ void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 	cpx_set_ui(sum, 0, 0);
 
 	// falls apart if z is zero.
-	cpx_abs(gabs, z);
+	cpx_abs(gabs, zorig);
 	if (0 > mpf_cmp(gabs, epsi)) return;
 
-	cpx_t zn, term;
+	cpx_t z, zn, term;
+	cpx_init(z);
 	cpx_init(zn);
 	cpx_init(term);
+	cpx_set(z, zorig);
 	cpx_set(zn, z);
 
 	for (int n=1; ; n++)
@@ -375,11 +377,17 @@ void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 		cpx_mul(zn, zn, z);
 		mpf_div_ui(fact, fact, n);
 	}
+}
+
+void cpx_gpf_poch_rising(cpx_t sum, cpx_t z, int prec)
+{
+	cpx_gpf_poch(sum, z, prec, true);
 
 	// Remove the leading exponential order.
 	// Its actually exp(-2*sqrt|z|)
-	// and it seems to be that for both the rising and the falling
-	// versions.
+	mpf_t gabs;
+	mpf_init (gabs);
+
 	cpx_abs(gabs, z);
 	mpf_sqrt(gabs, gabs);
 	mpf_mul_ui(gabs, gabs, 2);
@@ -387,11 +395,6 @@ void cpx_gpf_poch(cpx_t sum, cpx_t z, int prec, bool rise)
 	fp_exp(gabs, gabs, prec);
 
 	cpx_times_mpf(sum, sum, gabs);
-}
-
-void cpx_gpf_poch_rising(cpx_t sum, cpx_t z, int prec)
-{
-	cpx_gpf_poch(sum, z, prec, true);
 }
 
 void cpx_gpf_poch_falling(cpx_t sum, cpx_t z, int prec)
