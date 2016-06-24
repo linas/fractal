@@ -16,7 +16,8 @@
 
 void expo(cpx_t sum, cpx_t z, int nprec)
 {
-	cpx_gpf_exponential(sum, z, nprec);
+	// cpx_gpf_exponential(sum, z, nprec);
+	cpx_gpf_poch_rising(sum, z, nprec);
 
 	// Divide the returned value by r...
 	mpf_t r;
@@ -25,7 +26,7 @@ void expo(cpx_t sum, cpx_t z, int nprec)
 	cpx_div_mpf(sum, sum, r);
 }
 
-double gpf_bignum_exponential(double r, double theta)
+double gpf_bignum(double r, double theta)
 {
 	cpx_t sum, z;
 	cpx_init(sum);
@@ -35,7 +36,7 @@ double gpf_bignum_exponential(double r, double theta)
 	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
 	// cpx_gpf_exponential(sum, z, 20);
-	expo(sum, z, 20);
+	expo(sum, z, 30);
 
 	mpf_t val;
 	mpf_init(val);
@@ -60,7 +61,7 @@ void find_zero(double rguess, double tguess, double cell_size)
 	cpx_set_d(e1, 0.15, 0);
 	cpx_set_d(e2, 0, 0.15);
 
-	int rc = cpx_find_zero(zero, expo, guess, e1, e2, 25, 90);
+	int rc = cpx_find_zero(zero, expo, guess, e1, e2, 35, 150);
 
 	// if rc is not zero, then nothing was found
 	if (rc) return;
@@ -75,10 +76,12 @@ void find_zero(double rguess, double tguess, double cell_size)
 	printf(" = %-16.14g + I %-16.14g\n", re, im);
 	fflush(stdout);
 
+#define CHECK_RESULT 1
 #ifdef CHECK_RESULT
 	cpx_t check;
 	cpx_init(check);
-	cpx_gpf_exponential(check, zero, 20);
+	// cpx_gpf_exponential(check, zero, 20);
+	cpx_gpf_poch_rising(check, zero, 30);
 	double eps_r = cpx_get_re(check);
 	double eps_i = cpx_get_im(check);
 	double eps = sqrt(eps_r*eps_r + eps_i*eps_i);
@@ -92,7 +95,7 @@ void survey(double rmax, double cell_size)
 	{
 		for (double t=0.0; t < 0.5; t += cell_size/r)
 		{
-			double sample = gpf_bignum_exponential(r, t);
+			double sample = gpf_bignum(r, t);
 
 			if (sample < 0.25)
 			{

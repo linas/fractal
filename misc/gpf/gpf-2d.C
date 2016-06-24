@@ -220,6 +220,7 @@ rv = cpx_get_re(sum);
 	cpx_t fal;
 	cpx_init(fal);
 	cpx_gpf_poch_rising(sum, z, 25);
+	// cpx_gpf_poch_falling(sum, z, 25);
 	// cpx_gpf_poch_falling(fal, z, 25);
 	// cpx_sub(sum, sum, fal);
 
@@ -231,6 +232,9 @@ rv = cpx_get_re(sum);
 	double rv = mpf_get_d(val);
 	double r = sqrt(re_q*re_q + im_q*im_q);
 	// double lr = log(r);
+double gre = cpx_get_re(sum);
+double gim = cpx_get_im(sum);
+printf("duude re=%g im=%g gre=%g gim=%g\n", re_q, im_q, gre, gim);
 
 	// rv *= exp(-2.0*sqrt(r));
 	rv /= r;
@@ -240,7 +244,7 @@ double lv = log(rv);
 if (lv < 0.0) lv = 0.0;
 printf("duude rv=%g scale=%g\n", rv, lv/lr);
 #endif
-printf("duude r=%g rv=%g \n", r, rv);
+// printf("duude r=%g rv=%g \n", r, rv);
 
 	return rv;
 #endif

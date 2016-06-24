@@ -77,7 +77,7 @@ double complex gpf_cpx_exponential_rt(double r, double theta)
 	return gpf_cpx_exponential(z);
 }
 
-double gpf_bignum_exponential(double r, double theta)
+double gpf_bignum(double r, double theta)
 {
 	cpx_t sum, z;
 	cpx_init(sum);
@@ -86,7 +86,8 @@ double gpf_bignum_exponential(double r, double theta)
 	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
 	// theta *= 2.0 * M_PI;
-	cpx_gpf_exponential(sum, z, 200);
+	// cpx_gpf_exponential(sum, z, 200);
+	cpx_gpf_poch_rising(sum, z, 40);
 
 	mpf_t val;
 	mpf_init(val);
@@ -147,6 +148,8 @@ int main(int argc, char* argv[])
 		printf("%g\t%g\t%g\n", x, y, z);
 	}
 #endif
+
+#define EXPO
 #ifdef EXPO
 	if (argc < 2)
 	{
@@ -155,15 +158,16 @@ int main(int argc, char* argv[])
 	}
 	double dom = atof(argv[1]);
 	printf("#\n# Max = %g\n#\n", dom);
-	for (double x=0.0; x< dom; x+= 0.0001*dom)
+	for (double x=0.0; x< dom; x+= 0.01*dom)
 	{
 		// double y = gpf_exponential(x);
 		// double z = y * exp(-x);
 		// printf("%g\t%g\t%g\n", x, y, z);
-		double r = x*x;
-		double y = gpf_bignum_exponential(r, 0.0);
-		double z = y * log(r) / (r*r);
-		printf("%g\t%20.18g\t%20.18g\t%20.18g\n", x, r, y, z);
+		double r = x;
+		double y = gpf_bignum(r, M_PI);
+		// double z = y * log(r) / (r*r);
+		// printf("%g\t%20.18g\t%20.18g\t%20.18g\n", x, r, y, z);
+		printf("r=%g g=%g\n", r, y);
 		fflush(stdout);
 	}
 #endif
@@ -309,7 +313,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define ZERO_COUNT
+// #define ZERO_COUNT
 #ifdef ZERO_COUNT
 	if (argc < 3)
 	{

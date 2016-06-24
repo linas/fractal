@@ -63,8 +63,11 @@
 # ../../generate/renorm poch-rise rg 1.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise.png
 
-../../generate/renorm poch-fall rg 1.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-fall.png
+../../generate/renorm poch-rise-x rg 1.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise-x.png
+
+# ../../generate/renorm poch-fall rg 0.2
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-fall.png
 
 # ../../generate/renorm exp+0.5 rg 0.000025
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp+0.5.png
