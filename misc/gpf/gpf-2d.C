@@ -139,11 +139,11 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-// #define PHASE 1
+#define PHASE 1
 #if PHASE
 	// cpx_gpf_ordinary_recip(sum, z, 15);
 	// cpx_gpf_exponential(sum, z, 20);
-	cpx_gpf_poch_rising(sum, z, 15);
+	cpx_gpf_poch_rising(sum, z, 45);
 	// cpx_gpf_poch_falling(sum, z, 15);
 
 	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
@@ -215,12 +215,12 @@ rv = cpx_get_re(sum);
 	return rv;
 #endif
 
-#define POCH 1
+// #define POCH 1
 #ifdef POCH
 	cpx_t fal;
 	cpx_init(fal);
-	// cpx_gpf_poch_rising(sum, z, 25);
-	cpx_gpf_poch_falling(sum, z, 35);
+	cpx_gpf_poch_rising(sum, z, 45);
+	// cpx_gpf_poch_falling(sum, z, 35);
 	// cpx_gpf_poch_falling(fal, z, 25);
 	// cpx_sub(sum, sum, fal);
 
@@ -238,7 +238,7 @@ rv = cpx_get_re(sum);
 
 	// rv *= exp(-2.0*sqrt(r));
 	rv /= r;
-	rv *= 5.0;
+	// rv *= 5.0;
 #if 0
 double lv = log(rv);
 if (lv < 0.0) lv = 0.0;

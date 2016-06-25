@@ -39,7 +39,7 @@ double gpf_bignum(double r, double theta)
 	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
 	// cpx_gpf_exponential(sum, z, 20);
-	expo(sum, z, 40);
+	expo(sum, z, 60);
 
 	mpf_t val;
 	mpf_init(val);
