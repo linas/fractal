@@ -115,7 +115,8 @@ double complex gpf_cpx_bignum(double r, double theta)
 int zero_count(double radius)
 {
 	int count = 0;
-	double delta = 0.25 / radius;
+	// double delta = 0.25 / radius;  // for exponential
+	double delta = 0.2 / sqrt(radius);   // for the pochhammer
 	double prev = 0.0;
 	for (double theta = 0.0; theta < 2.0*M_PI; theta += delta)
 	{
