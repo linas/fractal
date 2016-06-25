@@ -14,5 +14,5 @@ set ylabel "num zeros minus sqrt radius"
 set xzeroaxis lw 2
 
 plot "zero-count-poch-rise.dat" using (sqrt($1)):($2-sqrt($1)) title "" lw 2, \
-     "zero-count-poch-rise.dat" using (sqrt($1)):(1+0.75*log($1)) title "1 ± 0.75 log(radius)" lw 2, \
-     "zero-count-poch-rise.dat" using (sqrt($1)):(1-0.75*log($1)) title "" lw 2 lc 2
+     "zero-count-poch-rise.dat" using (sqrt($1)):(1+(2+0.5*log($1))) title "1 ± [2 + log(radius)/2]" lw 2, \
+     "zero-count-poch-rise.dat" using (sqrt($1)):(1-(2+0.5*log($1))) title "" lw 2 lc 2
