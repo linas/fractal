@@ -166,7 +166,8 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
 	double lr = log(r);
-	rv /= r*r / (lr*lr);
+	// rv /= r*r / (lr*lr);
+	rv *= (1.0 - exp(-1.0/(r*r))) * lr*lr / (r*r);
 
 	return rv;
 #endif
