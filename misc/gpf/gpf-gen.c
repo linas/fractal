@@ -329,7 +329,7 @@ int main(int argc, char* argv[])
 	for (double r=rlo; r<= rhi; r+= rstep)
 	{
 		int count = zero_count(r);
-		printf("%g\t%d\n", r, count);
+		printf("%d\t%d\n", (int) floor(r+0.5), count);
 		fflush(stdout);
 
 		rstep = floor(0.5 * sqrt(r));
