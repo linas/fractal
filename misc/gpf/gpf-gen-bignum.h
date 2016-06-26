@@ -23,6 +23,7 @@ void cpx_gpf_ordinary_recip(cpx_t sum, cpx_t z, int prec);
  * Exponential generating function for the greatest common factor.
  */
 void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec);
+void cpx_gpf_exponential_d(cpx_t sum, cpx_t z, int offset, int prec);
 void cpx_gpf_exponential_recip(cpx_t sum, cpx_t z, int prec);
 void cpx_gpf_exponential_s(cpx_t sum, cpx_t z, cpx_t s, int prec);
 

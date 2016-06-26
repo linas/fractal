@@ -110,7 +110,7 @@ void cpx_gpf_ordinary_recip(cpx_t sum, cpx_t z, int prec)
 /**
  * Exponential generating function for the greatest prime factor.
  */
-void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
+void cpx_gpf_exponential_d(cpx_t sum, cpx_t z, int offset, int prec)
 {
 	mpf_t zabs, gabs, epsi, fact;
 	mpf_init (gabs);
@@ -134,7 +134,7 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 
 	for (int n=1; ; n++)
 	{
-		cpx_times_ui(term, zn, gpf(n));
+		cpx_times_ui(term, zn, gpf(n+offset));
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
 
@@ -153,12 +153,25 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 		mpf_div_ui(fact, fact, n);
 	}
 
+	// The offset is the n'th derivative.  That means that
+	// there is a constant term; the above loop did not handle it.
+	// add that constant now.
+	if (offset != 0)
+	{
+		cpx_add_ui(sum, sum, gpf(offset), 0);
+	}
+
 	// Remove the leading exponential order.
 	cpx_abs(gabs, z);
 	mpf_neg(gabs, gabs);
 	fp_exp(gabs, gabs, prec);
 
 	cpx_times_mpf(sum, sum, gabs);
+}
+
+void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
+{
+	cpx_gpf_exponential_d(sum, z, 0, prec);
 }
 
 /**
