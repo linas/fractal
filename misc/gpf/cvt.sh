@@ -35,7 +35,9 @@
 
 # ../../generate/renorm gpf-exp-abs-250K-uni rg 0.4
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-250K-uni.png
-# cat gpf-exp-x.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
+
+cat gpf-exp-x.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
+
 # cat recip.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip.png
 
 #../../generate/renorm recip-exp rg 0.24
@@ -66,8 +68,8 @@
 # ../../generate/renorm poch-rise-321M rg 0.2
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise-321M.png
 
-../../generate/renorm poch-rise-x rg 1
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise-x.png
+# ../../generate/renorm poch-rise-x rg 1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-rise-x.png
 
 # ../../generate/renorm poch-fall rg 0.2
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > poch-fall.png

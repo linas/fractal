@@ -144,10 +144,10 @@ void cpx_gpf_exponential_d(cpx_t sum, cpx_t z, int offset, int prec)
 		mpf_mul_ui(gabs, gabs, n);
 
 		cpx_abs(zabs, sum);
-		mpf_div(gabs, gabs, zabs);
+		mpf_mul(zabs, zabs, epsi);
 
-		// if (n * zn * fact < epsi * sum) return;
-		if (0 > mpf_cmp(gabs, epsi)) break;
+		// if (n * zn/n! < epsi * sum) return;
+		if (0 > mpf_cmp(gabs, zabs)) break;
 
 		cpx_mul(zn, zn, z);
 		mpf_div_ui(fact, fact, n);
