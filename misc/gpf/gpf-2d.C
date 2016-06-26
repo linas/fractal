@@ -153,7 +153,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 #define EXPO 1
 #if EXPO
 	// cpx_gpf_exponential(sum, z, 20);
-	cpx_gpf_exponential_d(sum, z, 1, 25);
+	cpx_gpf_exponential_d(sum, z, itermax, 25);
 
 	// extract
 	mpf_t val;
