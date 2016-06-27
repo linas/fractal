@@ -7,6 +7,7 @@
  */
 
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "cache.h"
@@ -79,13 +80,14 @@ static unsigned long pseudo_gpf_direct(unsigned long n)
 	double punt = get_nth_prime(num_primes) / 2.0;
 	double scale = 1.0;
 	int cnt = 1;
-	for (nth = num_primes-1; n>0; n--)
+	for (nth = num_primes-1; nth>0; nth--)
 	{
 		if (get_nth_prime(nth) > punt) continue;
 		cnt ++;
 		punt *= cnt;
 		punt /= (cnt+1);
 		double x = 1.0 / cnt;
+		// scale += x;
 		scale += x - 0.1*x*log(x);
 	}
 
@@ -98,13 +100,14 @@ static unsigned long pseudo_gpf_direct(unsigned long n)
 	double cut = 0.0;
 	punt = get_nth_prime(num_primes) / 2.0;
 	cnt = 1;
-	for (nth = num_primes-1; n>0; n--)
+	for (nth = num_primes-1; nth>0; nth--)
 	{
 		if (get_nth_prime(nth) > punt) continue;
 		cnt ++;
 		punt *= cnt;
 		punt /= (cnt+1);
 		double x = 1.0 / cnt;
+		// cut += x;
 		cut += x - 0.1*x*log(x);
 		if (ran < cut) break;
 	}
