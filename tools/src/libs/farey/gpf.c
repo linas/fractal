@@ -76,6 +76,12 @@ static unsigned long pseudo_gpf_direct(unsigned long n)
 
 	/* Compute the approximate distribution. It is given by the
 	 * tweaked harmonic number of ... plausible divisors of n...
+	 * This started out trying to be a scientific, rational estimate
+	 * of the probability distribution, butthis proved to be too
+	 * complicated to get right, and devolved into a total hack.
+	 * It gives a distribution that goes too low for small n,
+	 * and goes too high for large n.  Its vaguely-close-ish.
+	 * Kind-of-ish.
 	 */
 	double punt = get_nth_prime(num_primes) / 2.0;
 	double scale = 1.0;
@@ -89,6 +95,7 @@ static unsigned long pseudo_gpf_direct(unsigned long n)
 		double x = 1.0 / cnt;
 		// scale += x;
 		scale += x - 0.1*x*log(x);
+		punt /= scale;   // total bad hackery
 	}
 
 	/* Generate a random prime number... */
@@ -110,6 +117,7 @@ static unsigned long pseudo_gpf_direct(unsigned long n)
 		// cut += x;
 		cut += x - 0.1*x*log(x);
 		if (ran < cut) break;
+		punt /= cut; // Total bad hackery ...
 	}
 	if (0 == nth) nth=1;
 
@@ -134,14 +142,14 @@ unsigned long pseudo_gpf(unsigned long n)
 }
 
 /* ------------------------------------------------------------ */
-#define TEST 1
+// #define TEST 1
 #ifdef TEST
 #include <stdio.h>
 
 int main()
 {
 	int hilo = 0;
-	for (unsigned long n=1; n<500; n++)
+	for (unsigned long n=1; n<3500; n++)
 	{
 		if (gpf(n) < pseudo_gpf(n)) hilo++; else hilo--;
 		printf("n=%lu gpf=%lu  pseudo=%lu hilo=%d\n", n, gpf(n), pseudo_gpf(n), hilo);
