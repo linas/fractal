@@ -133,4 +133,16 @@ unsigned int get_nth_prime(unsigned long n)
 	return p;
 }
 
+/**
+ * brute-force count: how many primes are there, less than n?
+ */
+unsigned int prime_count(unsigned long n)
+{
+	unsigned int cnt;
+	for (cnt = 1; ; cnt++)
+	{
+		if (get_nth_prime(cnt) > n) return cnt-1;
+	}
+}
+
 /* --------------------------- END OF FILE ------------------------- */

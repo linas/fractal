@@ -14,6 +14,7 @@ extern "C" {
 #endif
 
 unsigned int get_nth_prime(unsigned long);
+unsigned int prime_count(unsigned long);
 
 #ifdef   __cplusplus
 };

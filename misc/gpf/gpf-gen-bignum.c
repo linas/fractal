@@ -222,7 +222,9 @@ void cpx_random_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
 
 	for (int n=1; ; n++)
 	{
-		cpx_times_ui(term, zn, randy(n+offset));
+		// unsigned int rando = randy(n+offset);
+		unsigned int rando = pseudo_gpf(n);
+		cpx_times_ui(term, zn, rando);
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
 

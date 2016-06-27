@@ -150,7 +150,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-#define EXPO 1
+// #define EXPO 1
 #if EXPO
 	// cpx_gpf_exponential(sum, z, 20);
 	// cpx_gpf_exponential_shift(sum, z, itermax, 25);
@@ -174,7 +174,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-// #define RANDY 1
+#define RANDY 1
 #if RANDY
 	cpx_random_exponential_shift(sum, z, itermax, 25);
 

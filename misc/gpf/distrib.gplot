@@ -13,4 +13,4 @@ set ylabel "probability"
 set yrange [0:1]
 
 plot "distrib-gpf.dat" using 2:3 title "" lw 2, \
-	x lw 2 title "x=y"
+	x - 0.1*x*log(x)  lw 2 title "x=y"
