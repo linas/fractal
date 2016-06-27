@@ -140,9 +140,11 @@ unsigned long pseudo_gpf(unsigned long n)
 
 int main()
 {
-	for (unsigned long n=1; n<100; n++)
+	int hilo = 0;
+	for (unsigned long n=1; n<500; n++)
 	{
-		printf("n=%lu gpf=%lu  pseudo=%lu\n", n, gpf(n), pseudo_gpf(n));
+		if (gpf(n) < pseudo_gpf(n)) hilo++; else hilo--;
+		printf("n=%lu gpf=%lu  pseudo=%lu hilo=%d\n", n, gpf(n), pseudo_gpf(n), hilo);
 	}
 }
 #endif
