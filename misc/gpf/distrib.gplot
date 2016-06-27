@@ -1,0 +1,16 @@
+
+set term png size 1024, 768
+set out 'distrib-gpf.png'
+
+# set style data linespoints
+set style data lines
+set key left
+
+set title "Probability distribution of GPF"
+set xlabel "scale"
+set ylabel "probability"
+
+set yrange [0:1]
+
+plot "distrib-gpf.dat" using 2:3 title "" lw 2, \
+	x lw 2 title "x=y"

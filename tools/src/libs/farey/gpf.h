@@ -14,7 +14,16 @@ extern "C" {
 /* Return the greatest prime factor, 32/64-bit accurate,
  * (depending on size of "unsigned long").
  *
- * Results undefined if input is zero.
+ * Results undefined if input is zero or negative.
+ */
+unsigned long gpf(unsigned long n);
+
+/* ------------------------------------------------------------ */
+/* Return a random number having a distribution similar to the
+ * greatest prime factor.  The returned random number is guaranteed
+ * to be prime, 
+
+ *
  */
 unsigned long gpf(unsigned long n);
 
