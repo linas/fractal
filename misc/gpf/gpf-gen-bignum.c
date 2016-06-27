@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include <mp-trig.h>
 #include <mp-complex.h>
@@ -109,8 +110,9 @@ void cpx_gpf_ordinary_recip(cpx_t sum, cpx_t z, int prec)
 
 /**
  * Exponential generating function for the greatest prime factor.
+ * shifted .. aka the 'offset'th derivative.
  */
-void cpx_gpf_exponential_d(cpx_t sum, cpx_t z, int offset, int prec)
+void cpx_gpf_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
 {
 	mpf_t zabs, gabs, epsi, fact;
 	mpf_init (gabs);
@@ -171,7 +173,89 @@ void cpx_gpf_exponential_d(cpx_t sum, cpx_t z, int offset, int prec)
 
 void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 {
-	cpx_gpf_exponential_d(sum, z, 0, prec);
+	cpx_gpf_exponential_shift(sum, z, 0, prec);
+}
+
+#define NARR 250123
+static int rnums[NARR];
+__attribute__((constructor)) static void mkran()
+{
+	srandom(42);
+	srandom(69);
+	for (int i=0; i< NARR; i++)
+	{
+		rnums[i] = 2 + (i * random()) / RAND_MAX;
+	}
+}
+
+static int randy(int n)
+{
+	if (NARR <= n) exit(1);
+	return rnums[n];
+}
+
+/* Like above, but for some random numbers */
+void cpx_random_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
+{
+	mpf_t zabs, gabs, epsi, fact;
+	mpf_init (gabs);
+	mpf_init (zabs);
+	mpf_init (epsi);
+	mpf_init (fact);
+	mpf_set_ui(fact, 1);
+	mpf_set_ui(epsi, 1);
+	mpf_div_2exp(epsi, epsi, (int)(3.321*prec));
+
+	cpx_set_ui(sum, 0, 0);
+
+	// falls apart if z is zero.
+	cpx_abs(gabs, z);
+	if (0 > mpf_cmp(gabs, epsi)) return;
+
+	cpx_t zn, term;
+	cpx_init(zn);
+	cpx_init(term);
+	cpx_set(zn, z);
+
+	for (int n=1; ; n++)
+	{
+		cpx_times_ui(term, zn, randy(n+offset));
+		cpx_times_mpf(term, term, fact);
+		cpx_add(sum, sum, term);
+
+		// The following checks the loop termination condition,
+		// which is that the size of the term is less than epsilon.
+		cpx_abs(gabs, term);
+		mpf_mul_ui(gabs, gabs, n);
+
+		cpx_abs(zabs, sum);
+		mpf_mul(zabs, zabs, epsi);
+
+		// if (n * zn/n! < epsi * sum) return;
+		if (0 > mpf_cmp(gabs, zabs)) break;
+
+		cpx_mul(zn, zn, z);
+		mpf_div_ui(fact, fact, n);
+	}
+
+	// The offset is the n'th derivative.  That means that
+	// there is a constant term; the above loop did not handle it.
+	// add that constant now.
+	if (offset != 0)
+	{
+		cpx_add_ui(sum, sum, randy(offset), 0);
+	}
+
+	// Remove the leading exponential order.
+	cpx_abs(gabs, z);
+	mpf_neg(gabs, gabs);
+	fp_exp(gabs, gabs, prec);
+
+	cpx_times_mpf(sum, sum, gabs);
+}
+
+void cpx_gpf_exponential_newton(cpx_t sum, cpx_t z, int diff, int prec)
+{
 }
 
 /**

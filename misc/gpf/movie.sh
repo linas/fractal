@@ -1,6 +1,7 @@
 #! /bin/bash
 
 i=0
+i=27
 while [ $i -lt 100 ];
 do
 	let j=$i
