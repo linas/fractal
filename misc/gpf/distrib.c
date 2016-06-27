@@ -10,7 +10,7 @@
 
 #include <gpf.h>
 
-#define NBINS 20000
+#define NBINS 20001
 int cnt[NBINS];
 
 void accum(int max)
@@ -40,9 +40,10 @@ main(int argc, char* argv[])
 		// printf("%d\t%d\n", i, cnt[i]);
 		if (0 != cnt[i]) {
 			double v = cnt[i] / norm;
-			printf("%d\t%g\t0\tinf\n", i-1, (i-1)*scale);
-			printf("%d\t%g\t%g\t%g\n", i, i*scale, v, 1.0/v);
-			printf("%d\t%g\t0\tinf\n", i+1, (i+1)*scale);
+			double x = i*scale;
+			printf("%d\t%g\t0\tinf\t0\t0\n", i-1, (i-1)*scale);
+			printf("%d\t%g\t%g\t%g\t%g\t%g\n", i, x, v, 1.0/v, v/x-1.0, (v/x-1.0)/(x*log(x)));
+			printf("%d\t%g\t0\tinf\t0\t0\n", i+1, (i+1)*scale);
 		}
 	}
 }
