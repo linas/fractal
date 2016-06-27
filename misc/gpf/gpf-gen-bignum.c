@@ -13,6 +13,7 @@
 #include <mp-trig.h>
 #include <mp-complex.h>
 
+#include <binomial.h>
 #include <gpf.h>
 #include "gpf-gen-bignum.h"
 
@@ -176,6 +177,8 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 	cpx_gpf_exponential_shift(sum, z, 0, prec);
 }
 
+// =========================================================
+
 #define NARR 250123
 static int rnums[NARR];
 __attribute__((constructor)) static void mkran()
@@ -254,10 +257,93 @@ void cpx_random_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
 	cpx_times_mpf(sum, sum, gabs);
 }
 
-void cpx_gpf_exponential_newton(cpx_t sum, cpx_t z, int diff, int prec)
+// =========================================================
+
+static int gpf_newton(int n, int order)
 {
+	if (0 == order) return gpf(n);
+	if (1 == order) return gpf(n+1) - gpf(n);
+
+	int tot = 0;
+	int sgn = 1;
+	for (int j=0; j<=order; j++)
+	{
+		tot += sgn * gpf(n+j) * binomial(order, j);
+		sgn = -sgn;
+	}
+	return tot;
 }
 
+/*
+ * Takes newten differences of the shifted functions
+ */
+void cpx_gpf_exponential_newton(cpx_t sum, cpx_t z, int order, int prec)
+{
+	mpf_t zabs, gabs, epsi, fact;
+	mpf_init (gabs);
+	mpf_init (zabs);
+	mpf_init (epsi);
+	mpf_init (fact);
+	mpf_set_ui(fact, 1);
+	mpf_set_ui(epsi, 1);
+	mpf_div_2exp(epsi, epsi, (int)(3.321*prec));
+
+	cpx_set_ui(sum, 0, 0);
+
+	// falls apart if z is zero.
+	cpx_abs(gabs, z);
+	if (0 > mpf_cmp(gabs, epsi)) return;
+
+	cpx_t zn, term;
+	cpx_init(zn);
+	cpx_init(term);
+	cpx_set(zn, z);
+
+	for (int n=1; ; n++)
+	{
+		cpx_times_ui(term, zn, gpf_newton(n, order));
+		cpx_times_mpf(term, term, fact);
+		cpx_add(sum, sum, term);
+
+		// The following checks the loop termination condition,
+		// which is that the size of the term is less than epsilon.
+		cpx_abs(gabs, term);
+		mpf_mul_ui(gabs, gabs, n);
+
+		cpx_abs(zabs, sum);
+		mpf_mul(zabs, zabs, epsi);
+
+		// if (n * zn/n! < epsi * sum) return;
+		if (0 > mpf_cmp(gabs, zabs)) break;
+
+		cpx_mul(zn, zn, z);
+		mpf_div_ui(fact, fact, n);
+	}
+
+	// The offset is the n'th derivative.  That means that
+	// there is a constant term; the above loop did not handle it.
+	// add that constant now.
+	if (order != 0)
+	{
+		int sgn = -1;
+		int tot = 0;
+		for (int j=1; j<=order; j++)
+		{
+			tot += sgn * gpf(j) * binomial(order, j);
+			sgn = -sgn;
+		}
+		cpx_add_ui(sum, sum, tot, 0);
+	}
+
+	// Remove the leading exponential order.
+	cpx_abs(gabs, z);
+	mpf_neg(gabs, gabs);
+	fp_exp(gabs, gabs, prec);
+
+	cpx_times_mpf(sum, sum, gabs);
+}
+
+// =========================================================
 /**
  * Exponential generating function for the reciprocal of the
  * greatest prime factor.
