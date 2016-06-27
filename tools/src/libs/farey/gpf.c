@@ -6,6 +6,7 @@
  * April 2016 -- linas
  */
 
+#include <math.h>
 #include <stdlib.h>
 
 #include "cache.h"
@@ -61,32 +62,55 @@ unsigned long gpf(unsigned long n)
  */
 static unsigned long pseudo_gpf_direct(unsigned long n)
 {
-	/* Compute the approximate distribution. It is given by the
-	 * harmonic nomber of the number of primes less than n.
-	 */
-	double scale = 0.0;
+	if (n <= 1) return 1;
+
+	/* How many primes are there less than or equal to n? */
 	unsigned int nth;
 	for (nth = 1; ; nth++)
 	{
 		unsigned long p = get_nth_prime(nth);
 		if (n < p) break;
-		scale += 1.0 / nth;
 	}
 	unsigned int num_primes = nth-1;
+
+	/* Compute the approximate distribution. It is given by the
+	 * tweaked harmonic number of ... plausible divisors of n...
+	 */
+	double punt = get_nth_prime(num_primes) / 2.0;
+	double scale = 1.0;
+	int cnt = 1;
+	for (nth = num_primes-1; n>0; n--)
+	{
+		if (get_nth_prime(nth) > punt) continue;
+		cnt ++;
+		punt *= cnt;
+		punt /= (cnt+1);
+		double x = 1.0 / cnt;
+		scale += x - 0.1*x*log(x);
+	}
 
 	/* Generate a random prime number... */
 	/* Use the sliding scale from above to do so. */
 	double ran = random();
 	ran /= RAND_MAX;
 	ran *= scale;
-	double cut = 0.0;
-	for (nth = 1; nth < num_primes; nth++)
-	{
-		cut += 1.0/nth;
-		if (ran < cut) return get_nth_prime(1+num_primes-nth);
-	}
 
-	return 2; /* unlikely but can happen */
+	double cut = 0.0;
+	punt = get_nth_prime(num_primes) / 2.0;
+	cnt = 1;
+	for (nth = num_primes-1; n>0; n--)
+	{
+		if (get_nth_prime(nth) > punt) continue;
+		cnt ++;
+		punt *= cnt;
+		punt /= (cnt+1);
+		double x = 1.0 / cnt;
+		cut += x - 0.1*x*log(x);
+		if (ran < cut) break;
+	}
+	if (0 == nth) nth=1;
+
+	return get_nth_prime(nth);
 }
 
 DECLARE_UL_CACHE(pseudo_gpf_cache);
@@ -107,7 +131,7 @@ unsigned long pseudo_gpf(unsigned long n)
 }
 
 /* ------------------------------------------------------------ */
-// #define TEST 1
+#define TEST 1
 #ifdef TEST
 #include <stdio.h>
 
@@ -115,7 +139,7 @@ int main()
 {
 	for (unsigned long n=1; n<100; n++)
 	{
-		printf("n=%lu gpf=%lu\n", n, gpf(n));
+		printf("n=%lu gpf=%lu  pseudo=%lu\n", n, gpf(n), pseudo_gpf(n));
 	}
 }
 #endif
