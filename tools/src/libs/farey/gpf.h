@@ -4,6 +4,7 @@
  *
  * HISTORY:
  * April 2016 -- linas
+ * June 2016 -- linas
  */
 
 #ifdef   __cplusplus
@@ -21,11 +22,11 @@ unsigned long gpf(unsigned long n);
 /* ------------------------------------------------------------ */
 /* Return a random number having a distribution similar to the
  * greatest prime factor.  The returned random number is guaranteed
- * to be prime, 
-
- *
+ * to be prime, to be between 2 and n (inclusive) and to occur with
+ * roughly the frequency that primes occur in GPF (falling off as
+ * 1/k for the k'th prime).  Use srandom() to change the randome seed.
  */
-unsigned long gpf(unsigned long n);
+unsigned long pseudo_gpf(unsigned long n);
 
 #ifdef   __cplusplus
 };
