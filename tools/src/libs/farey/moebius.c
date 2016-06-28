@@ -254,7 +254,7 @@ long double mangoldt_lambda (int n)
 long double mangoldt_lambda_cached (int n)
 {
 	DECLARE_LD_CACHE (mangoldt_cache);
-	if(ld_one_d_cache_check (&mangoldt_cache, n))
+	if (ld_one_d_cache_check (&mangoldt_cache, n))
 	{
 		return ld_one_d_cache_fetch(&mangoldt_cache, n);
 	}

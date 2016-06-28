@@ -16,6 +16,8 @@
 #include <pthread.h>
 #include <stdbool.h>
 #include <string.h>
+
+#include "cache.h"
 #include "prime.h"
 
 /* An unsigned int32 is sufficient for factoring 64-bit ints. */
@@ -136,13 +138,26 @@ unsigned int get_nth_prime(unsigned long n)
 /**
  * brute-force count: how many primes are there, less than n?
  */
-unsigned int prime_count(unsigned long n)
+unsigned int prime_count_direct(unsigned long n)
 {
 	unsigned int cnt;
 	for (cnt = 1; ; cnt++)
 	{
 		if (get_nth_prime(cnt) > n) return cnt-1;
 	}
+}
+
+unsigned int prime_count(unsigned long n)
+{
+	DECLARE_UI_CACHE(count_cache);
+	if (ui_one_d_cache_check(&count_cache, n))
+	{
+		return ui_one_d_cache_fetch(&count_cache, n);
+	}
+
+	unsigned int cnt = prime_count_direct(n);
+	ui_one_d_cache_store(&count_cache, cnt, n);
+	return cnt;
 }
 
 /* --------------------------- END OF FILE ------------------------- */
