@@ -66,13 +66,7 @@ static unsigned long pseudo_gpf_direct(unsigned long n)
 	if (n <= 1) return 1;
 
 	/* How many primes are there less than or equal to n? */
-	unsigned int nth;
-	for (nth = 1; ; nth++)
-	{
-		unsigned long p = get_nth_prime(nth);
-		if (n < p) break;
-	}
-	unsigned int num_primes = nth-1;
+	unsigned int num_primes = prime_count(n);
 
 	/* Compute the approximate distribution. It is given by the
 	 * tweaked harmonic number of ... plausible divisors of n...
@@ -86,6 +80,7 @@ static unsigned long pseudo_gpf_direct(unsigned long n)
 	double punt = get_nth_prime(num_primes) / 2.0;
 	double scale = 1.0;
 	int cnt = 1;
+	unsigned int nth;
 	for (nth = num_primes-1; nth>0; nth--)
 	{
 		if (get_nth_prime(nth) > punt) continue;

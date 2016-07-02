@@ -185,7 +185,7 @@ static int rnums[NARR];
 __attribute__((constructor)) static void mkran()
 {
 	srandom(42);
-	// srandom(69);
+	srandom(69);
 	for (int i=0; i< NARR; i++)
 	{
 		rnums[i] = 2 + (i * random()) / RAND_MAX;
