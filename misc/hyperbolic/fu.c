@@ -18,34 +18,9 @@
 
 
 /* arc */
-void print_arc(mobius_t m, cplex zf, cplex zt)
+void print_arc(mobius_t m, cplex zstart, cplex zend)
 {
-	int i;
-
-	// clip anything taller than yclip
-	double yclip = 5;
-	if (yclip <zf.im)
-	{
-		double m = (zt.im-zf.im)/(zt.re-zf.re);
-		double xclip = zt.re +(yclip-zt.im)/m;
-		zf.re = xclip;
-		zf.im = yclip;
-printf("==========duude clip f\n");
-	}
-	if (yclip <zt.im)
-	{
-		double m = (zt.im-zf.im)/(zt.re-zf.re);
-		double xclip = zf.re +(yclip-zf.im)/m;
-		zt.re = xclip;
-		zt.im = yclip;
-printf("================duude clip t\n");
-	}
-
-	cplex zstart = zf;
-	cplex zdelta = cplex_sub (zt, zf);
 	cplex za = mobius_xform (m, zstart);
-
-	cplex zend = cplex_add (zstart, zdelta);
 	cplex zb = mobius_xform (m, zend);
 	double dist = cplex_dist (za, zb);
 	printf("duuude %Lg %Lg\n", za.re, za.im);
