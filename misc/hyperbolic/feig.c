@@ -1,12 +1,14 @@
 /*
- * fu.c 
+ * feig.c
  *
- * Draw a binary tree on the hyperbolic disk, using postscript
- * This is an explictly geometric construction. For an algebraic
- * construction of the same thing (which is a tad simpler), see
- * mod-tree.c
+ * Explore possible feignbaum ratios in the forking of the tree.
+ * Derived as a heavily-edited version of tree.c
+ * Conclusion -- the feigenbaum ratio here seems to converge
+ * to the limit of 1.0 ... (!?)  The feigenbaum const does NOT
+ * appear naturally.  Not too surprising ... things would be too
+ * easy if it did.
  *
- * Linas Vepstas April 2007
+ * Linas Vepstas August 2016
  */
 
 #include "cplex.h"
@@ -16,6 +18,13 @@
 #include <stdlib.h>
 
 
+double pnm2 = 1.0;
+double pnm1 = 0.5;
+double pn = 0.25;
+
+double qnm2 = 1.0;
+double qnm1 = 0.5;
+double qn = 0.25;
 
 /* arc */
 void print_arc(mobius_t m, cplex zstart, cplex zend)
@@ -26,6 +35,21 @@ void print_arc(mobius_t m, cplex zstart, cplex zend)
 	printf("duuude %Lg %Lg\n", za.re, za.im);
 	printf("other end= %Lg %Lg\n", zb.re, zb.im);
 	printf("dist= %g\n", dist);
+
+	pnm2 = pnm1;
+	pnm1 = pn;
+	pn = za.im;
+	pn = dist;
+	pn = za.im * za.im;
+	double feig = (pnm1-pnm2)/(pn-pnm1);
+	printf("feig= %g %g\n", feig, 4.0*feig);
+
+	qnm2 = qnm1;
+	qnm1 = qn;
+	qn = feig;
+	double rat = (qnm1-qnm2)/(qn-qnm1);
+
+	printf("frat= %g %g\n", rat, 4.0*rat);
 }
 
 /* ==================================================== */
@@ -80,10 +104,8 @@ void draw()
 {
 	mobius_t m;
 	int level=3;
-level=20;
+level=50;
 
-	// Originally drawn with -0.268 -- this gets the vertex centers
-	// correctly located.
 	double cent = sqrt(3.0) - 2.0;
 	cplex z = cplex_set (cent, 0.0);
 	// z = cplex_set (-0.25, 0.0); xxxxxx
