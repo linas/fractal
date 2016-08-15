@@ -88,17 +88,17 @@ void draw_arc(mobius_t m, cplex zf, cplex zt)
 
 	// clip anything taller than yclip
 	double yclip = 5;
-	if (yclip <zf.im)
+	if (yclip < zf.im)
 	{
-		double m = (zt.im-zf.im)/(zt.re-zf.re);
-		double xclip = zt.re +(yclip-zt.im)/m;
+		double mm = (zt.im-zf.im)/(zt.re-zf.re);
+		double xclip = zt.re +(yclip-zt.im) / mm;
 		zf.re = xclip;
 		zf.im = yclip;
 	}
-	if (yclip <zt.im)
+	if (yclip < zt.im)
 	{
-		double m = (zt.im-zf.im)/(zt.re-zf.re);
-		double xclip = zf.re +(yclip-zf.im)/m;
+		double mm = (zt.im-zf.im)/(zt.re-zf.re);
+		double xclip = zf.re +(yclip-zf.im) / mm;
 		zt.re = xclip;
 		zt.im = yclip;
 	}

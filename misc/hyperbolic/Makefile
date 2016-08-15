@@ -12,7 +12,6 @@ perimeter: perimeter.o
 rotations: rotations.o 
 tree: tree.o eps.o flt-eps.o
 similar: similar.o eps.o flt-eps.o
-fu: fu.o eps.o flt-eps.o
 
 .c.o:
 	cc -c -g -O2 -I $(INC) $<

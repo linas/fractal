@@ -10,13 +10,57 @@
  */
 
 #include "cplex.h"
-#include "eps.h"
 #include "flt.h"
-#include "flt-eps.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
+/* arc */
+void print_arc(mobius_t m, cplex zf, cplex zt)
+{
+	int i;
+	int nseg=1;
+
+	// clip anything taller than yclip
+	double yclip = 5;
+	if (yclip <zf.im)
+	{
+		double m = (zt.im-zf.im)/(zt.re-zf.re);
+		double xclip = zt.re +(yclip-zt.im)/m;
+		zf.re = xclip;
+		zf.im = yclip;
+	}
+	if (yclip <zt.im)
+	{
+		double m = (zt.im-zf.im)/(zt.re-zf.re);
+		double xclip = zf.re +(yclip-zf.im)/m;
+		zt.re = xclip;
+		zt.im = yclip;
+	}
+
+	cplex zstart = zf;
+	cplex zdelta = cplex_scale((1.0/(double)nseg), cplex_sub (zt,zf));
+	cplex za = mobius_xform (m, zstart);
+	cplex zb;
+
+	cplex zs = za;
+
+	for (i=0; i<nseg; i++)
+	{
+		cplex zend = cplex_add (zstart, zdelta);
+		zb = mobius_xform (m, zend);
+		double dist = cplex_dist (zs, zb);
+		if (dist > 0.03) {
+			printf("duuude %Lg %Lg\n", zs.re, zs.im);
+			printf("other end= %Lg %Lg\n", zb.re, zb.im);
+			zs = zb;
+		}
+		zstart = zend;
+		za = zb;
+	}
+}
 
 /* ==================================================== */
 int drawcusp = 1;
@@ -28,18 +72,16 @@ void draw_cusp (mobius_t m)
 
 	if (!drawcusp) return;
 	// Draw cusps in orange, dashed linestyle.
-	eps_set_color(240,130,0);
-	printf ("[0.02 0.01 0.005 0.01] 0 setdash\n");
 
 	za = cplex_set (0.0, 0.0);
 	zb = cplex_set (1.0, 0.0);
-	draw_arc (m, za, zb);
+	print_arc (m, za, zb);
 
 	zb = cplex_set (-0.5, 0.5*sqrt(3.0));
-	draw_arc (m, za, zb);
+	print_arc (m, za, zb);
 
 	zb = cplex_set (-0.5, -0.5*sqrt(3.0));
-	draw_arc (m, za, zb);
+	print_arc (m, za, zb);
 
 	printf ("[] 0 setdash\n");
 }
@@ -61,11 +103,7 @@ void draw_fork(mobius_t m, int level, int r, int g, int b)
 
 	cplex za, zb;
 
-	if (drawcusp)
-	{
-		draw_cusp(m);
-		eps_set_color(r,g,b);
-	}
+	// draw_cusp(m);
 
 	za = cplex_set (0.0, 0.0);
 
@@ -74,13 +112,13 @@ void draw_fork(mobius_t m, int level, int r, int g, int b)
 	// zb = mobius_xform (m,zb);
 	// printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
 	// eps_draw_lineseg (za.re, za.im,zb.re, zb.im);
-	draw_arc (m, za, zb);
+	print_arc (m, za, zb);
 
 	zb = cplex_set (0.25, -0.25*sqrt(3.0));
 	// zb = mobius_xform (m,zb);
 	// printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
 	// eps_draw_lineseg (za.re, za.im,zb.re, zb.im);
-	draw_arc (m, za, zb);
+	print_arc (m, za, zb);
 
 	mobius_t tip = go_to_fork_tip(+1.0);
 	tip = mobius_mul (m, tip);
@@ -117,7 +155,6 @@ level=10;
 	off = mobius_mul (xfm, off);
 #endif
 
-eps_set_color_red();
 	m = go_to_fork_tip(-1.0);
 	m = mobius_mul(off,m);
 	draw_fork (m, level, 255,0,0);
