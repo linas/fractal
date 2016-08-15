@@ -21,7 +21,6 @@
 void print_arc(mobius_t m, cplex zf, cplex zt)
 {
 	int i;
-	int nseg=1;
 
 	// clip anything taller than yclip
 	double yclip = 5;
@@ -31,6 +30,7 @@ void print_arc(mobius_t m, cplex zf, cplex zt)
 		double xclip = zt.re +(yclip-zt.im)/m;
 		zf.re = xclip;
 		zf.im = yclip;
+printf("==========duude clip f\n");
 	}
 	if (yclip <zt.im)
 	{
@@ -38,28 +38,19 @@ void print_arc(mobius_t m, cplex zf, cplex zt)
 		double xclip = zf.re +(yclip-zf.im)/m;
 		zt.re = xclip;
 		zt.im = yclip;
+printf("================duude clip t\n");
 	}
 
 	cplex zstart = zf;
-	cplex zdelta = cplex_scale((1.0/(double)nseg), cplex_sub (zt,zf));
+	cplex zdelta = cplex_sub (zt, zf);
 	cplex za = mobius_xform (m, zstart);
-	cplex zb;
 
-	cplex zs = za;
-
-	for (i=0; i<nseg; i++)
-	{
-		cplex zend = cplex_add (zstart, zdelta);
-		zb = mobius_xform (m, zend);
-		double dist = cplex_dist (zs, zb);
-		if (dist > 0.03) {
-			printf("duuude %Lg %Lg\n", zs.re, zs.im);
-			printf("other end= %Lg %Lg\n", zb.re, zb.im);
-			zs = zb;
-		}
-		zstart = zend;
-		za = zb;
-	}
+	cplex zend = cplex_add (zstart, zdelta);
+	cplex zb = mobius_xform (m, zend);
+	double dist = cplex_dist (za, zb);
+	printf("duuude %Lg %Lg\n", za.re, za.im);
+	printf("other end= %Lg %Lg\n", zb.re, zb.im);
+	printf("dist= %g\n", dist);
 }
 
 /* ==================================================== */
@@ -137,7 +128,7 @@ level=20;
 
 	m = go_to_fork_tip(-1.0);
 	m = mobius_mul(off,m);
-	draw_fork (m, level, 255,0,0);
+	draw_fork (m, level);
 }
 
 /* ==================================================== */
