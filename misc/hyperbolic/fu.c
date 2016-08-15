@@ -63,28 +63,6 @@ void print_arc(mobius_t m, cplex zf, cplex zt)
 }
 
 /* ==================================================== */
-int drawcusp = 1;
-
-/* draw fundamental domains */
-void draw_cusp (mobius_t m)
-{
-	cplex za,zb;
-
-	if (!drawcusp) return;
-	// Draw cusps in orange, dashed linestyle.
-
-	za = cplex_set (0.0, 0.0);
-	zb = cplex_set (1.0, 0.0);
-	print_arc (m, za, zb);
-
-	zb = cplex_set (-0.5, 0.5*sqrt(3.0));
-	print_arc (m, za, zb);
-
-	zb = cplex_set (-0.5, -0.5*sqrt(3.0));
-	print_arc (m, za, zb);
-
-	printf ("[] 0 setdash\n");
-}
 
 mobius_t go_to_fork_tip(double sign)
 {
@@ -96,14 +74,12 @@ mobius_t go_to_fork_tip(double sign)
 	return m;
 }
 
-void draw_fork(mobius_t m, int level, int r, int g, int b)
+void draw_fork(mobius_t m, int level)
 {
 	if (level == 0) return;
 	level--;
 
 	cplex za, zb;
-
-	// draw_cusp(m);
 
 	za = cplex_set (0.0, 0.0);
 
@@ -114,19 +90,23 @@ void draw_fork(mobius_t m, int level, int r, int g, int b)
 	// eps_draw_lineseg (za.re, za.im,zb.re, zb.im);
 	print_arc (m, za, zb);
 
+/****
 	zb = cplex_set (0.25, -0.25*sqrt(3.0));
 	// zb = mobius_xform (m,zb);
 	// printf ("n %f %f m %f %f l s\n", za.re, za.im,zb.re, zb.im);
 	// eps_draw_lineseg (za.re, za.im,zb.re, zb.im);
 	print_arc (m, za, zb);
+****/
 
 	mobius_t tip = go_to_fork_tip(+1.0);
 	tip = mobius_mul (m, tip);
-	draw_fork (tip, level, r, g, b);
+	draw_fork (tip, level);
 
+/***
 	tip = go_to_fork_tip(-1.0);
 	tip = mobius_mul (m, tip);
-	draw_fork (tip, level, r, g, b);
+	draw_fork (tip, level);
+***/
 }
 
 
@@ -134,7 +114,7 @@ void draw()
 {
 	mobius_t m;
 	int level=3;
-level=10;
+level=20;
 
 	// Originally drawn with -0.268 -- this gets the vertex centers
 	// correctly located.
