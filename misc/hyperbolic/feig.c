@@ -16,6 +16,7 @@
 
 #include "cplex.h"
 #include "flt.h"
+#include "question.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -49,8 +50,10 @@ void print_arc(mobius_t m, cplex zstart, cplex zend)
 	pn = sqrt(za.im);
 	pn = sqrt(dist);
 	pn = log(za.im);
-	pn = exp(za.im);
+	// pn = question_mark (i,deno);
+	pn = question_inverse (za.im);
 */
+
 	double feig = (pnm1-pnm2)/(pn-pnm1);
 	printf("feig= %g %g\n", feig, 4.0*feig);
 
