@@ -6,7 +6,10 @@
  * Conclusion -- the feigenbaum ratio here seems to converge
  * to the limit of 1.0 ... (!?)  The feigenbaum const does NOT
  * appear naturally.  Not too surprising ... things would be too
- * easy if it did.
+ * easy if it did.  It does beg the question, though: there is, after
+ * all, something fundamentall different between the ordinary
+ * period-doubling maps, and the hyperbolic plane. What, then, is the
+ * difference?  What's really going on with the maps?
  *
  * Linas Vepstas August 2016
  */
