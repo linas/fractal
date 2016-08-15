@@ -32,15 +32,22 @@ void print_arc(mobius_t m, cplex zstart, cplex zend)
 	cplex za = mobius_xform (m, zstart);
 	cplex zb = mobius_xform (m, zend);
 	double dist = cplex_dist (za, zb);
-	printf("duuude %Lg %Lg\n", za.re, za.im);
-	printf("other end= %Lg %Lg\n", zb.re, zb.im);
-	printf("dist= %g\n", dist);
+	printf("duuude re=%Lg im=%Lg dist=%g\n", za.re, za.im, dist);
+	// printf("other end= %Lg %Lg\n", zb.re, zb.im);
+	printf("basic ratio= %Lg %Lg\n", za.re/zb.re, za.im/zb.im);
 
 	pnm2 = pnm1;
 	pnm1 = pn;
 	pn = za.im;
+/*
 	pn = dist;
 	pn = za.im * za.im;
+	pn = dist * dist;
+	pn = sqrt(za.im);
+	pn = sqrt(dist);
+	pn = log(za.im);
+	pn = exp(za.im);
+*/
 	double feig = (pnm1-pnm2)/(pn-pnm1);
 	printf("feig= %g %g\n", feig, 4.0*feig);
 
@@ -49,7 +56,7 @@ void print_arc(mobius_t m, cplex zstart, cplex zend)
 	qn = feig;
 	double rat = (qnm1-qnm2)/(qn-qnm1);
 
-	printf("frat= %g %g\n", rat, 4.0*rat);
+	// printf("frat= %g %g\n", rat, 4.0*rat);
 }
 
 /* ==================================================== */
@@ -68,6 +75,7 @@ void draw_fork(mobius_t m, int level)
 {
 	if (level == 0) return;
 	level--;
+printf("----- level=%d\n", level);
 
 	cplex za, zb;
 
@@ -104,7 +112,7 @@ void draw()
 {
 	mobius_t m;
 	int level=3;
-level=50;
+level=150;
 
 	double cent = sqrt(3.0) - 2.0;
 	cplex z = cplex_set (cent, 0.0);
