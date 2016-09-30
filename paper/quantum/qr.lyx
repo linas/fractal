@@ -1284,10 +1284,77 @@ Complex numbers in QM
 
 \begin_layout Standard
 Why is the probability the square of a complex-valued wave function? Why
- is it complex? Where does the complex phase come from? Wild guess: perhaps
- the complex phase is actually a hidden side-effect of electromagnetism?
- There are two chains of though that lead to this: First, that the Aharonov-Bohn
- effect is most easily, most geometrically understood in a 
+ is it complex? Where does the complex phase come from? Various arguments
+ below.
+\end_layout
+
+\begin_layout Paragraph*
+A1: Spin algebra?
+\end_layout
+
+\begin_layout Standard
+A conservative argument says that it comes from fermions, and specifically,
+ the spin algebra.
+ The spin algebra is built from a real Clifford algebra 
+\begin_inset Formula $V$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+V\otimes\mathbb{C}=W\oplus\overline{W}
+\]
+
+\end_inset
+
+ (see e.g.
+ Jurgen Jost, 
+\begin_inset Quotes eld
+\end_inset
+
+Riemannian Geometry and Geometry Analysis, page 69) where 
+\begin_inset Formula $V$
+\end_inset
+
+ is a real Clifford algebra (itself build from a tensor algebra!) and is
+ generated from 
+\begin_inset Formula $2n$
+\end_inset
+
+ components in order to describe 
+\begin_inset Formula $n$
+\end_inset
+
+ Weyl spinors and 
+\begin_inset Formula $n$
+\end_inset
+
+ conjugate spinors.
+ One cannot get the required spin structure without using 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ in this construction.
+ This argument makes sense because most 
+\begin_inset Quotes eld
+\end_inset
+
+physical
+\begin_inset Quotes erd
+\end_inset
+
+ things in nature are fermions.
+\end_layout
+
+\begin_layout Paragraph*
+A2: Electromagnetism? 
+\end_layout
+
+\begin_layout Standard
+Wild guess: Perhaps the complex phase is actually a hidden side-effect of
+ electromagnetism? There are two chains of though that lead to this: First,
+ that the Aharonov-Bohn effect is most easily, most geometrically understood
+ in a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1309,19 +1376,34 @@ pre-quantization
 \end_layout
 
 \begin_layout Standard
-The second observiation is that the classify space for U(1) bundles is 
+The second observiation is that the classifying space for U(1) bundles is
+ 
 \begin_inset Formula $\mathbb{CP}^{\infty}$
 \end_inset
 
- and it is a short leap from 
+ and the thing about 
 \begin_inset Formula $\mathbb{CP}^{\infty}$
 \end_inset
 
- to the concept of a Hilbert space on which QM is naturally formulated.
+ is that it is exactly the same things as a Hilbert space on which QM is
+ naturally formulated.
+ Its complex, because wave-functions are complex-valued, its projective,
+ because only normalized wave functions matter.
+ We can identify the Hilbert space with the occupation states of the simple
+ harmonic oscilator.
+\end_layout
+
+\begin_layout Paragraph*
+Cell structure
 \end_layout
 
 \begin_layout Standard
-There is even a third oddity: the cellular structure (cell complex) of 
+Some minor insight might be gleaned by reviewing the structue of 
+\begin_inset Formula $\mathbb{CP}^{\infty}$
+\end_inset
+
+.
+ The cellular structure (cell complex) of 
 \begin_inset Formula $\mathbb{CP}^{\infty}$
 \end_inset
 
@@ -1333,9 +1415,37 @@ Algebraic Topology
 \begin_inset Quotes erd
 \end_inset
 
-, Allen Hatcher, chapter 0 page 7) .
- Does this perhaps correspond to the particle number (i.e.
- states of the harmonic oscillator)? Or is this entirely accidental? 
+, Allen Hatcher, chapter 0 page 7) (See S.P.
+ Novikov, 
+\begin_inset Quotes eld
+\end_inset
+
+Topology I: General Survey
+\begin_inset Quotes erd
+\end_inset
+
+ eqn 3.15 page 62).
+ That is, one writes 
+\begin_inset Formula 
+\[
+\mathbb{CP}^{\infty}=\kappa^{0}\cup\kappa^{2}\cup\kappa^{4}\cup\cdots
+\]
+
+\end_inset
+
+with
+\begin_inset Formula 
+\[
+\kappa^{2n}=\mathbb{CP}^{n}\backslash\mathbb{CP}^{n-1}=\left\{ \left.\left(z_{0}:\cdots:z_{n}\right)\right|:z_{j}\ne0\;\forall\, j\right\} \simeq D^{2n}
+\]
+
+\end_inset
+
+where by abuse of notation, the above makes the mistake of writing a cell,
+ which is actually a map of a disk, with the disk itself.
+ Oh well.
+ This is just a mnemonic reminder, that's all.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1343,7 +1453,11 @@ The point is that a single qubit is
 \begin_inset Formula $\mathbb{CP}^{1}$
 \end_inset
 
-, 
+, i.e.
+ is the Bloch sphere, i.e.
+ is the 2-sphere i.e.
+ is the 2-disk with the edge of the disk identified to a point.
+ Then 
 \begin_inset Formula $n$
 \end_inset
 
@@ -1352,27 +1466,147 @@ The point is that a single qubit is
 \end_inset
 
 , etc.
- because only the relativ phases matter, the amplitude of a wave function
- is always normalized to 1.
- The glueing together of these requies only the even-dimensional cells...
+ The reason that qubits are projective is because only the relative phases
+ of wave-functions matter, and the amplitude of a wave function is always
+ normalized to one.
+ Specifically, a single qubit is 
+\begin_inset Formula 
+\[
+\mathbb{CP}^{1}=\left\{ z_{0}\left|\uparrow\right\rangle +z_{1}\left|\downarrow\right\rangle \left|\left|z_{0}\right|^{2}+\left|z_{1}\right|^{2}=1,\; z_{0}/z_{1}\mbox{ real}\right.\right\} \simeq S^{2}
+\]
+
+\end_inset
+
+ and the glueing together of these things requires only the even-dimensional
+ cells...
 \end_layout
 
 \begin_layout Standard
 To summarize -- is it possible that the complex-valued wave function of
- undergrad textbook QM secretly a side-effect of electromagnetism and U(1)
- bundles? Or is this a red herring?
+ textbook QM secretly a side-effect of electromagnetism and U(1) bundles?
+ Or is this a red herring?
+\end_layout
+
+\begin_layout Paragraph*
+A3: Spherical harmonics counter-argument
 \end_layout
 
 \begin_layout Standard
-The re-herring argument would point out that the 
+We can view 3D space as a homogenous space of the rotation group.
+ In this case, the 
 \begin_inset Formula $Y_{lm}$
 \end_inset
 
- spherical wave functions needed to represent the sphereical harmonics are
+ spherical wave functions needed to represent the spherical harmonics are
  naturally complex-valued, and this natural-complex-valued-ness has nothing
  at all to do with electromagnetism.
  (Unless, of course, the 3-dimensionality of space was a side-effect of
  electromagnetism...)
+\end_layout
+
+\begin_layout Paragraph*
+A4: Counter-counter-argument
+\end_layout
+
+\begin_layout Standard
+Now that we've invoked the rotation group, the inevitable is in store.
+ Namely, vectors belong to the adjoint rep of the rotation group.
+ Maxwell equations are exactly the same thing as a statement about the transform
+ation properties of these vectors under the action of the Poincare group.
+ That is, the electric and magnetic fields are vectors in the Lorentz algebra,
+ i.e.
+ live in the 
+\begin_inset Quotes eld
+\end_inset
+
+vertical
+\begin_inset Quotes erd
+\end_inset
+
+ fibers, the fibers being in the associated bundle of the Lorentz group.
+ The actual transformation properties of these vectors, under 
+\begin_inset Quotes eld
+\end_inset
+
+horizontal
+\begin_inset Quotes erd
+\end_inset
+
+ translations in Minkowski space, are given by the Poincare algebra.
+ These are exactly equal to the Maxwell equations.
+\end_layout
+
+\begin_layout Standard
+The fact that the electric and magnetic fields satisfy the wave equation
+ is due to the fact that the wave equation is just the quadratic Casimir
+ operator of the Poincare algebra.
+ (A worthy exercise is to write down the details to support these claims).
+\end_layout
+
+\begin_layout Standard
+Opaque in the above construction is how U(1) arises.
+ The Poincare algebra gave us a differential structure.
+ To get the A field from the E,B fields requires the notion of differential
+ topology, i.e.
+ the notion of closed forms for the E-field, and exact forms for the B-field.
+ These last two statements folllows from the fact that electric charges
+ exist, magnetic ones don't (except in the form of a holonomy).
+ So why should electric charges exist, but magnetic ones not? This is partly
+ answered by looking at the representation theory of the Poincare group:
+ it has massive particles in it.
+ These can have an electric charge, because 
+\begin_inset Quotes eld
+\end_inset
+
+mass
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+electric charge
+\begin_inset Quotes erd
+\end_inset
+
+ both point in the same direction: i.e.
+ in the time-like direction.
+ By contrast, magnetic monopoles could only be consistent with imaginary
+ mass, i.e.
+ tachyonic degrees of freedom.
+ So the Poincare algebra is really a kind of no-go for magnetic monopoles.
+ This last sentence is highly textbook non-standard, and so needs to be
+ fully fleshed out in detail, as it is non-obvious.
+ 
+\end_layout
+
+\begin_layout Standard
+Once one deduces that the Poincare algebra effectively prohibits magnetic
+ monopoles (except in the form of a holonomy) then the standard machinery
+ of differential topology allows one to deduce U(1) from the A field.
+ 
+\end_layout
+
+\begin_layout Standard
+Side note: as soon as one invokes the rotation group, it necessarily follows
+ that one must discuss the fundamental rep, not just the adjoint rep.
+ The fundamental rep leads invariably to the spin algebra, mentioned up
+ top.
+\end_layout
+
+\begin_layout Standard
+In sum, this is a rather long argument.
+ It raises the question: why is space 3+1 dimensional? Because, as soon
+ as we know its 3+1 dimensional, the above purports to show that (a) electromagn
+tism is inevitable, as a rep of the Poincare algebra (b) The U(1) structure
+ is inevitable, (c) spin structures are inevitable (d) complex-valued wave-funct
+ions are inevitable.
+\end_layout
+
+\begin_layout Standard
+What it does not yet show is why the square of the wave-function can be
+ interpreted as a probability, and why wave-functions must collapse.
 \end_layout
 
 \end_body
