@@ -1632,7 +1632,108 @@ Probability and wave functions
 \end_layout
 
 \begin_layout Standard
-Why
+Why does the square of the wave function yeild a probability? Where do the
+ complex numbers come in, and why?
+\end_layout
+
+\begin_layout Paragraph*
+A1: Entropy
+\end_layout
+
+\begin_layout Standard
+One suggestive argument comes from Mikhail Gromov, in 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "In a Search for a Structure, Part 1: On Entropy."
+target "http://www.ihes.fr/~gromov/PDF/structre-serch-entropy-july5-2012.pdf"
+
+\end_inset
+
+
+\begin_inset Quotes eld
+\end_inset
+
+ Relevant aspects are summarixed in the wikipedia article 
+\begin_inset CommandInset href
+LatexCommand href
+name "Fisher information metric"
+target "https://en.wikipedia.org/wiki/Fisher_information_metric"
+
+\end_inset
+
+.
+ To repeat them here: consider the finite-dimensional simplex 
+\begin_inset Formula $\sum_{i}p_{i}=1$
+\end_inset
+
+: That is, the sum of probabilites must sum to one.
+ Consider the change of variable 
+\begin_inset Formula $p_{i}=y_{i}^{2}$
+\end_inset
+
+ so that the simplex is mapped to a quadrant of a sphere: 
+\begin_inset Formula $\sum_{i}y_{i}^{2}=1$
+\end_inset
+
+.
+ Consider the the flat metric in the Euclidean space 
+\begin_inset Formula $y=(y_{1},\cdots,y_{n})$
+\end_inset
+
+ This flat metric induces a metric on the sphere.
+ Converting coordinates back to the 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ one finds that the flat Euclidean metric has become the Fisher information
+ metric! That is, if we want to consider how close two different probability
+ distributions are, we use the Fisher information metric; alternately, we
+ can take the square root of the probability, and use the Euclidean metric.
+ 
+\end_layout
+
+\begin_layout Standard
+The above 
+\begin_inset Quotes eld
+\end_inset
+
+just works
+\begin_inset Quotes erd
+\end_inset
+
+, Gromov adds a category-theoretic argument, that the manipulations pass
+ through for the limit 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+, provided the various measures are square integralble; basically, it's
+ just fine if the point 
+\begin_inset Formula $y$
+\end_inset
+
+ is taken to belong to a Hilbert space.
+ 
+\end_layout
+
+\begin_layout Standard
+This conception of the metric passes over to the Fubini-Study metric, as
+ mentioned in that article, when one takes the 
+\begin_inset Formula $y$
+\end_inset
+
+ to be complex-valued: What this says is that basically, the Fubini-Study
+ metric on 
+\begin_inset Formula $\mathbb{CP}^{n}$
+\end_inset
+
+ is essentially the same thing as the flat Euclidean metric.
+ That is, to compute the distance between two complex-valued wave functions,
+ one simply takes thier difference.
+  
 \end_layout
 
 \begin_layout Subsection
