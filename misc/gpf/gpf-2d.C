@@ -174,7 +174,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-#define RANDY 1
+// #define RANDY 1
 #if RANDY
 	cpx_random_exponential_shift(sum, z, itermax, 25);
 
@@ -193,8 +193,27 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-// #define RECIP 1
+#define RECIP 1
 #ifdef RECIP
+
+#ifdef PROJECT_TO_SPHERE
+	// Perform a rojection to the Riemann spehre.
+	// Sucks, mostly. Sucks completely, actually.
+	// printf("duuude in= %f %f ", re_q, im_q);
+	double rr = sqrt(re_q*re_q + im_q*im_q);
+	if (1.0 <= rr) return 0.0;
+	re_q /= rr;
+	im_q /= rr;
+	rr = (1.0 + rr)/(1.0 - rr);
+	rr = pow(rr, param);
+
+	re_q *= rr;
+	im_q *= rr;
+	// printf("  out=%f %f\n", re_q, im_q);
+
+	if (itermax < rr) return 0.0;
+	cpx_set_d(z, re_q, im_q);
+#endif // PROJECT_TO_SPHERE
 	cpx_gpf_exponential_recip(sum, z, 15);
 	// extract
 	mpf_t val;
