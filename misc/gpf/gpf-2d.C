@@ -107,7 +107,7 @@ double complex gpf_lambert(double complex x)
 	return sum;
 }
 
-static double ploto(double re_q, double im_q, int itermax, double param)
+/* static */ double ploto(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
    double complex z = re_q + I * im_q;
@@ -215,12 +215,14 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	cpx_set_d(z, re_q, im_q);
 #endif // PROJECT_TO_SPHERE
 
+// printf("duuude in= %f %f \n", re_q, im_q);
+
 double x = re_q - 1.0;
-double y = im_q;
+double theta = M_PI * im_q;
+double y = sin(0.5*theta);
 if (0.9*param < x*x*y and x*x*y < 1.1*param) return 0.0;
 
-// printf("duuude in= %f %f \n", re_q, im_q);
-double theta = M_PI * im_q;
+
 double rr = itermax * (re_q - 1.0);
 // rr *= rr;
 rr = exp(rr * M_LN2);
@@ -307,7 +309,7 @@ printf("duude rv=%g scale=%g\n", rv, lv/lr);
 #endif
 }
 
-static double plot_diri(double re_q, double im_q, int itermax, double param)
+/* static */ double plot_diri(double re_q, double im_q, int itermax, double param)
 {
 static int cnt=0;
 int id = ++cnt;
