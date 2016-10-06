@@ -216,11 +216,15 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 #endif // PROJECT_TO_SPHERE
 
 // printf("duuude in= %f %f \n", re_q, im_q);
-
-double x = re_q - 1.0;
 double theta = M_PI * im_q;
+
+#ifdef INSCRIBE
+double x = re_q - 1.0;
 double y = sin(0.5*theta);
-if (0.9*param < x*x*y and x*x*y < 1.1*param) return 0.0;
+// if (0.9*param < x*x*y and x*x*y < 1.1*param) return 0.0;
+x = pow(x, 1.5);
+if (0.9*param < x*y and x*y < 1.1*param) return 0.0;
+#endif
 
 
 double rr = itermax * (re_q - 1.0);
@@ -230,6 +234,7 @@ im_q = rr*sin (theta);
 re_q = rr*cos (theta);
 cpx_set_d(z, re_q, im_q);
 
+// printf("duuude              out= %f %f \n", re_q, im_q);
 
 	cpx_gpf_exponential_recip(sum, z, 15);
 	// extract
