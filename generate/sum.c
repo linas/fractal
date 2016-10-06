@@ -33,10 +33,19 @@ void diff (float a[], float b[], int len) {
 
 /*-------------------------------------------------------------------*/
 
+void mask (float a[], float b[], int len) {
+   int i;
+   for (i=0; i<len; i++) {
+      if (b[i] > 0.5) a[i] = 0.0;
+   }
+}
+
+/*-------------------------------------------------------------------*/
+
 void paste (float a[], float b[], int len) {
    int i;
    for (i=0; i<len; i++) {
-      if (b [i] > 0.01) a[i] = b[i];
+      if (b[i] > 0.01) a[i] = b[i];
    }
 }
 
@@ -141,7 +150,7 @@ main (int argc, char *argv[])
    fclose (fp_b);
 
    /*----------------------------------------------------*/
-   /* srip ou leading pathame */
+   /* strip out leading pathame */
    cmd = rindex (argv[0], '/');
    if (!cmd) { 
       cmd = argv[0];

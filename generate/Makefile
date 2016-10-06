@@ -159,10 +159,11 @@ draw: draw.c  util.o
 #	$(CC) -o draw -I /src/tools/inc draw.c util.o -lm
 #	$(CC) -o draw -I /src/tools/inc draw.c util.o /src/tools/lib/Farey.o -lm
 
-sum diff paste angle curl div: sum.o  util.o opers.o
+sum diff paste mask angle curl div: sum.o  util.o opers.o
 	$(CC) -o sum sum.o util.o opers.o -lm
 	ln -f sum diff
 	ln -f sum paste
+	ln -f sum mask
 	ln -f sum angle
 	ln -f sum curl
 	ln -f sum div
