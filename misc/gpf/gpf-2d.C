@@ -229,8 +229,10 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	#endif
 
 
-	double rr = 10.0 + itermax * re_q;
+	// double rr = itermax + param * re_q;
+	double rr = itermax;
 	rr = exp(rr * M_LN2);  // pow (2, itermax * re_q)
+rr+= param * re_q;
 	im_q = rr*sin (theta);
 	re_q = rr*cos (theta);
 	cpx_set_d(z, re_q, im_q);

@@ -45,7 +45,10 @@
 # ../../generate/renorm recip-flat-16-803 rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16-803.png
 
-../../generate/renorm recip-flat-10-16 rg 24.0
+# ../../generate/renorm recip-flat-10-16 rg 24.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-10-16.png
+
+../../generate/renorm recip-flat-wide-15 rg 24.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-rr-x.png
 
 # enscribe some lines ---------
