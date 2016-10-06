@@ -22,7 +22,7 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 	double y = sin(0.5*theta);
 
 	double loc = 0.1;
-	// if (0.9*loc < x*y and x*y < 1.1*loc) return 1.0;
+	if (0.9*loc < x*y and x*y < 1.1*loc) return 1.0;
 
 	if (loc/y - locwidth < x and x < loc/y + locwidth) return 1.0;
 	if (loc/x - locheigh < y and y < loc/x + locheigh) return 1.0;

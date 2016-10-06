@@ -160,6 +160,7 @@ main (int argc, char *argv[])
 
    if (!strcmp (cmd, "sum")) sum (data_a, data_b, globlen);
    if (!strcmp (cmd, "diff")) diff (data_a, data_b, globlen);
+   if (!strcmp (cmd, "mask")) mask (data_a, data_b, globlen);
    if (!strcmp (cmd, "paste")) paste (data_a, data_b, globlen);
    if (!strcmp (cmd, "angle")) angle (data_a, data_b, globlen);
    if (!strcmp (cmd, "curl")) curl (data_a, data_b, data_width, data_height);
