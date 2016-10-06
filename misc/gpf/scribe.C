@@ -35,34 +35,36 @@ static double ploto(double re_q, double im_q, int itermax, double param)
 #endif
 
 	// Writing z = r exp(i theta) then ...
-	// this curve corresponds to sqrt(r) = sine(theta/2)
+	// this curve corresponds to sqrt(r) = 1/sine(theta/2)
 	// double crv = exp(- 5.8*x);
 	double crv = exp(- 5.545*x);
 	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
 
-	// this curve corresponds to r/768 = sine(theta/2)
+	// this curve corresponds to 768/r = sine(theta/2)
 	// 768
 	crv = exp(- 11.0903*(x-0.59906));
 	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
 
-	// this curve corresponds to r/1200 = sine(theta/2)
+	// this curve corresponds to 1200/r = sine(theta/2)
 	// 1200
 	crv = exp(- 11.0903*(x-0.639301));
 	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
 
-	// this curve corresponds to r/1500 = sine(theta/2)
+	// this curve corresponds to 1500/r = sine(theta/2)
 	// 1500
 	crv = exp(- 11.0903*(x-0.659421));
 	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
 
-	// this curve corresponds to r/1948 = sine(theta/2)
+	// this curve corresponds to 1948/r = sine(theta/2)
 	// 1948  (or 2000??)
 	crv = exp(- 11.0903*(x-0.682986));
 	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
 
+/*
 	crv = exp(- 11.09*(x-param));
 // printf ("duuude x=%f xp=%f crv =%f\n", x, x-param, crv);
 	if (crv - locheigh < y and y < crv + locheigh) return 1.0;
+*/
 
 
 	return 0.0;
