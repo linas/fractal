@@ -87,7 +87,7 @@ Initial draft: 6 October 2016
 \begin_layout Abstract
 Lie algebras can be mapped to Lie groups by means of the exp map.
  But what happens if the exp map is replaced by some arbitrary series? That
- is the questin being asked here.
+ is the question being asked here.
  That is, given an element 
 \begin_inset Formula $x\in\mathfrak{a}$
 \end_inset
@@ -146,7 +146,15 @@ When is
 
 \begin_layout Abstract
 Which algebras are the most interesting to consider first? Would the Clifford
- algebras be a good place to start? 
+ algebras be a good place to start? Since 
+\begin_inset Formula $\mbox{Cl}\left(\mathbb{R}\right)=\mathbb{C}$
+\end_inset
+
+ so perhaps 
+\begin_inset Formula $\mbox{Cl}\left(\mathbb{R}^{2}\right)=\mathbb{H}$
+\end_inset
+
+ is a good next step...? Or maybe quaternions? Why?
 \end_layout
 
 \begin_layout Section
@@ -161,6 +169,253 @@ Whatever that may be.
  Am I actually talking about Banach algebras??? Yes, I guess they're topological
  vector spaces of some kind ...
  but I am interested in the analytic properties...
+\end_layout
+
+\begin_layout Section
+The Answer
+\end_layout
+
+\begin_layout Standard
+Here's why this is not ever studied or talked about, as far as I can tell:
+ its actually boring.
+ So for a Lie algebra, the exp map is actually movement along a geodesic,
+ and is of constant speed.
+ What we are doing above is changing the rate of motion along the geodesic,
+ without actually changing it's direction.
+ In other words, in the above notation, 
+\begin_inset Formula 
+\[
+s(x)=\sum_{n=0}^{\infty}a_{n}\frac{x^{n}}{n!}=\exp\left(f(\left|x\right|)\widehat{x}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\widehat{x}$
+\end_inset
+
+ is the unit direction in the direction of 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|x\right|$
+\end_inset
+
+ is the length of the vector 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $f:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ is some function.
+ That is, the effect of the sequence 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ is isotropic.
+ The proof of the above requires a review of the construction of exp as
+ the integral path of a geodesic.
+ 
+\end_layout
+
+\begin_layout Standard
+Well, the above is not quite right.
+ Its gets the general idea, but the details are wrong.
+\end_layout
+
+\begin_layout Standard
+So the real question is: can anything interesting be gained by tangling
+ up the sequence 
+\begin_inset Formula $\left\{ a_{n}\right\} $
+\end_inset
+
+ with the structure coefficients of some Lie algebra? That is, for every
+ such sequence, there is some corresponding 
+\begin_inset Formula $f$
+\end_inset
+
+ that is the result of tangling.
+ What is that, and is it ever useful in any way? 
+\end_layout
+
+\begin_layout Standard
+Lets try to work this out a bit more.
+ In general, 
+\begin_inset Formula 
+\[
+x=\sum_{k}x_{k}e_{k}
+\]
+
+\end_inset
+
+where we assume the algebra has basis vectors 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+.
+ So: 
+\begin_inset Formula 
+\[
+x^{2}=?
+\]
+
+\end_inset
+
+Oh wait, this is not even well-defined, until we pick a representation for
+ the (Lie) algebra...
+ so 
+\begin_inset Formula $f$
+\end_inset
+
+ depends on the rep.
+ So the initial question was not well-defined.
+\end_layout
+
+\begin_layout Standard
+Well, lets pick a familiar one: 
+\begin_inset Formula $\mathfrak{su}(2)$
+\end_inset
+
+ in the fundamental rep, so that 
+\begin_inset Formula $e_{k}=-i\sigma_{k}$
+\end_inset
+
+ where 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+ are the Pauli matrices, so that 
+\begin_inset Formula $\sigma_{i}\sigma_{j}=\delta_{ij}+i\epsilon_{ijk}\sigma_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{i}e_{j}=-\delta_{ij}+\epsilon_{ijk}e_{k}$
+\end_inset
+
+ is pure-real.
+ One then gets that
+\begin_inset Formula 
+\begin{align*}
+x^{2}= & \left(\sum_{i}x_{i}e_{i}\right)\left(\sum_{j}x_{j}e_{j}\right)\\
+= & -\sum_{ij}x_{i}x_{j}\delta_{ij}\\
+= & -\left|x\right|^{2}\mathbb{I}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbb{I}$
+\end_inset
+
+ is the unit matrix.
+ Continuing to expand,
+\begin_inset Formula 
+\begin{align*}
+s(x)= & \sum_{n=0}^{\infty}a_{n}\frac{x^{n}}{n!}\\
+= & a_{0}+a_{1}\frac{x}{1!}+a_{2}\frac{x^{2}}{2!}+a_{3}\frac{x^{3}}{3!}+\cdots\\
+= & \mathbb{I}\sum_{m=0}^{\infty}\left(-\right)^{m}a_{2m}\frac{\left|x\right|^{2m}}{\left(2m\right)!}+\widehat{x}\sum_{m=0}^{\infty}\left(-\right)^{m}a_{2m+1}\frac{\left|x\right|^{2m+1}}{\left(2m+1\right)!}
+\end{align*}
+
+\end_inset
+
+This is a general formula.
+ For the special case of 
+\begin_inset Formula $a_{n}=1$
+\end_inset
+
+ we just get exp, so that 
+\begin_inset Formula 
+\[
+\exp\left(x\right)=\mathbb{I}\cos\left|x\right|+\widehat{x}\sin\left|x\right|
+\]
+
+\end_inset
+
+and so the equation we are trying to solve is for find some 
+\begin_inset Formula $f(t)$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\cos f(t)=\sum_{m=0}^{\infty}\left(-\right)^{m}a_{2m}\frac{t^{2m}}{\left(2m\right)!}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+\sin f(t)=\sum_{m=0}^{\infty}\left(-\right)^{m}a_{2m+1}\frac{t^{2m+1}}{\left(2m+1\right)!}
+\]
+
+\end_inset
+
+which is over-constrained, so I did something wrong ...
+ So really, the correct eqn is 
+\begin_inset Formula 
+\[
+s(x)=g\left(\left|x\right|\right)\exp\left(f\left(\left|x\right|\right)\widehat{x}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $f:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ just rescales the speed of the trajectory, and 
+\begin_inset Formula $g:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ is needed to not overconstrain the problem, as above -- and it is valid,
+ because exp is no longer a pure group element, but some matrix representation,
+ and so can be validly multiplied by a scalar.
+ Which is fine, because we could not take the series expansion, anyway,
+ as noted above.
+ So the eqns to solve are now: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+g(t)\cos f(t)=\sum_{m=0}^{\infty}\left(-\right)^{m}a_{2m}\frac{t^{2m}}{\left(2m\right)!}
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+g(t)\sin f(t)=\sum_{m=0}^{\infty}\left(-\right)^{m}a_{2m+1}\frac{t^{2m+1}}{\left(2m+1\right)!}
+\]
+
+\end_inset
+
+And these can now be trivially solved, and are ...
+ boring? Depdends on the series 
+\begin_inset Formula $\left\{ a_{n}\right\} $
+\end_inset
+
+ I suppose...
+\end_layout
+
+\begin_layout Standard
+So, all we got for the fundamental rep of 
+\begin_inset Formula $\mathfrak{su}(2)$
+\end_inset
+
+ is that it took a series, split it into even and odd parts, made it alternate,
+ and re-assembled it with trig functions.
+ which seems trite ...
+ but is it?
+\end_layout
+
+\begin_layout Standard
+The adjoint rep is a hot stinking mess, though.
 \end_layout
 
 \end_body
