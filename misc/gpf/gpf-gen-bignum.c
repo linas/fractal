@@ -154,7 +154,7 @@ void cpx_gpf_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
 		if (0 > mpf_cmp(gabs, zabs)) break;
 
 		cpx_mul(zn, zn, z);
-		mpf_div_ui(fact, fact, n);
+		mpf_div_ui(fact, fact, n+1);
 	}
 
 	// The offset is the n'th derivative.  That means that
@@ -178,6 +178,126 @@ void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
 	cpx_gpf_exponential_shift(sum, z, 0, prec);
 }
 
+// =========================================================
+/**
+ * Sine generating function for the greatest prime factor.
+ * Same as exponential GPF, but takes only the odd terms.
+ * (and inserts an alternating sign!)
+ */
+void cpx_gpf_sine(cpx_t sum, cpx_t z, int prec)
+{
+	mpf_t zabs, gabs, epsi, fact;
+	mpf_init (gabs);
+	mpf_init (zabs);
+	mpf_init (epsi);
+	mpf_init (fact);
+	mpf_set_ui(fact, 1);
+	mpf_set_ui(epsi, 1);
+	mpf_div_2exp(epsi, epsi, (int)(3.321*prec));
+
+	cpx_set_ui(sum, 0, 0);
+
+	// falls apart if z is zero.
+	cpx_abs(gabs, z);
+	if (0 > mpf_cmp(gabs, epsi)) return;
+
+	cpx_t zn, zsq, term;
+	cpx_init(zn);
+	cpx_init(zsq);
+	cpx_init(term);
+	cpx_set(zn, z);
+	cpx_set(zsq, z);
+	cpx_mul(zsq, zsq, z);
+	cpx_neg(zsq, zsq); // zqs = -z^2
+
+	for (int n=1; ; n+=2)
+	{
+		cpx_times_ui(term, zn, gpf(n));
+		cpx_times_mpf(term, term, fact);
+		cpx_add(sum, sum, term);
+
+		// The following checks the loop termination condition,
+		// which is that the size of the term is less than epsilon.
+		cpx_abs(gabs, term);
+		mpf_mul_ui(gabs, gabs, n);
+
+		cpx_abs(zabs, sum);
+		mpf_mul(zabs, zabs, epsi);
+
+		// if (n * zn/n! < epsi * sum) return;
+		if (0 > mpf_cmp(gabs, zabs)) break;
+
+		cpx_mul(zn, zn, zsq);
+		mpf_div_ui(fact, fact, (n+1)*(n+2));
+	}
+
+	// Remove the leading exponential order.
+	cpx_abs(gabs, z);
+	mpf_neg(gabs, gabs);
+	fp_exp(gabs, gabs, prec);
+
+	cpx_times_mpf(sum, sum, gabs);
+}
+
+/**
+ * Cosine generating function for the greatest prime factor.
+ * Same as exponential GPF, but takes only the even terms.
+ * (and inserts an alternating sign!)
+ */
+void cpx_gpf_cosine(cpx_t sum, cpx_t z, int prec)
+{
+	mpf_t zabs, gabs, epsi, fact;
+	mpf_init (gabs);
+	mpf_init (zabs);
+	mpf_init (epsi);
+	mpf_init (fact);
+	mpf_set_ui(fact, 2);  // start with 2!
+	mpf_set_ui(epsi, 1);
+	mpf_div_2exp(epsi, epsi, (int)(3.321*prec));
+
+	cpx_set_ui(sum, 0, 0);
+
+	// falls apart if z is zero.
+	cpx_abs(gabs, z);
+	if (0 > mpf_cmp(gabs, epsi)) return;
+
+	cpx_t zn, zsq, term;
+	cpx_init(zn);
+	cpx_init(zsq);
+	cpx_init(term);
+	cpx_set(zn, z);
+	cpx_mul(zn, zn, z); // start with z^2
+	cpx_set(zsq, zn);
+	cpx_neg(zsq, zsq); // zsq = -z^2
+
+	for (int n=2; ; n+=2)
+	{
+		cpx_times_ui(term, zn, gpf(n));
+		cpx_times_mpf(term, term, fact);
+		cpx_add(sum, sum, term);
+
+		// The following checks the loop termination condition,
+		// which is that the size of the term is less than epsilon.
+		cpx_abs(gabs, term);
+		mpf_mul_ui(gabs, gabs, n);
+
+		cpx_abs(zabs, sum);
+		mpf_mul(zabs, zabs, epsi);
+
+		// if (n * zn/n! < epsi * sum) return;
+		if (0 > mpf_cmp(gabs, zabs)) break;
+
+		cpx_mul(zn, zn, zsq);
+		mpf_div_ui(fact, fact, (n+1)*(n+2));
+	}
+
+	// Remove the leading exponential order.
+	cpx_abs(gabs, z);
+	mpf_neg(gabs, gabs);
+	fp_exp(gabs, gabs, prec);
+
+	cpx_times_mpf(sum, sum, gabs);
+}
 // =========================================================
 
 #define NARR 250123
@@ -244,7 +364,7 @@ void cpx_random_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
 		if (0 > mpf_cmp(gabs, zabs)) break;
 
 		cpx_mul(zn, zn, z);
-		mpf_div_ui(fact, fact, n);
+		mpf_div_ui(fact, fact, n+1);
 	}
 
 	// The offset is the n'th derivative.  That means that
@@ -281,7 +401,7 @@ static int gpf_newton(int n, int order)
 }
 
 /*
- * Takes newten differences of the shifted functions
+ * Takes newton differences of the shifted functions
  */
 void cpx_gpf_exponential_newton(cpx_t sum, cpx_t z, int order, int prec)
 {
@@ -323,7 +443,7 @@ void cpx_gpf_exponential_newton(cpx_t sum, cpx_t z, int order, int prec)
 		if (0 > mpf_cmp(gabs, zabs)) break;
 
 		cpx_mul(zn, zn, z);
-		mpf_div_ui(fact, fact, n);
+		mpf_div_ui(fact, fact, n+1);
 	}
 
 	// The offset is the n'th derivative.  That means that
@@ -394,7 +514,7 @@ void cpx_gpf_exponential_recip(cpx_t sum, cpx_t z, int prec)
 		if (0 > mpf_cmp(gabs, epsi)) break;
 
 		cpx_mul(zn, zn, z);
-		mpf_div_ui(fact, fact, n);
+		mpf_div_ui(fact, fact, n+1);
 	}
 
 	// Remove the leading exponential order.
@@ -455,7 +575,7 @@ void cpx_gpf_exponential_s(cpx_t sum, cpx_t z, cpx_t ess, int prec)
 		if (0 > mpf_cmp(gabs, epsi)) break;
 
 		cpx_mul(zn, zn, z);
-		mpf_div_ui(fact, fact, n);
+		mpf_div_ui(fact, fact, n+1);
 	}
 
 	// Remove the leading exponential order.
@@ -564,7 +684,7 @@ void cpx_gpf_poch(cpx_t sum, cpx_t zorig, int prec, bool rise)
 
 		cpx_add_mpf(z, z, one);
 		cpx_mul(zn, zn, z);
-		mpf_div_ui(fact, fact, n);
+		mpf_div_ui(fact, fact, n+1);
 	}
 
 	// Remove the leading exponential order.

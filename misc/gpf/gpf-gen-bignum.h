@@ -29,6 +29,11 @@ void cpx_gpf_exponential_recip(cpx_t sum, cpx_t z, int prec);
 void cpx_gpf_exponential_s(cpx_t sum, cpx_t z, cpx_t s, int prec);
 
 /*
+ * Like the above, but only the odd/even terms, and an alternating sign.
+ */
+void cpx_gpf_sine(cpx_t sum, cpx_t z, int prec);
+void cpx_gpf_cosine(cpx_t sum, cpx_t z, int prec);
+/*
  * Dirichlet generating function for the greatest common factor.
  */
 void cpx_gpf_dirichlet(cpx_t sum, cpx_t s, int prec);
