@@ -73,7 +73,7 @@
 \begin_body
 
 \begin_layout Title
-Algebraic Series
+Lie Series
 \end_layout
 
 \begin_layout Author
@@ -224,6 +224,23 @@ where
 \begin_layout Standard
 Well, the above is not quite right.
  Its gets the general idea, but the details are wrong.
+ The problem is that we don't know how to compute 
+\begin_inset Formula $x^{n}$
+\end_inset
+
+ unless 
+\begin_inset Formula $x$
+\end_inset
+
+ is acutally 
+\begin_inset Formula $\rho(x)$
+\end_inset
+
+ for some matrix representation 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -270,7 +287,7 @@ Oh wait, this is not even well-defined, until we pick a representation for
 \begin_inset Formula $f$
 \end_inset
 
- depends on the rep.
+ depends on the representation.
  So the initial question was not well-defined.
 \end_layout
 
@@ -375,7 +392,7 @@ where
  because exp is no longer a pure group element, but some matrix representation,
  and so can be validly multiplied by a scalar.
  Which is fine, because we could not take the series expansion, anyway,
- as noted above.
+ unless we were working with a represetnation, as noted above.
  So the eqns to solve are now: 
 \end_layout
 
@@ -410,12 +427,132 @@ So, all we got for the fundamental rep of
 
  is that it took a series, split it into even and odd parts, made it alternate,
  and re-assembled it with trig functions.
- which seems trite ...
+ Which seems trite ...
  but is it?
 \end_layout
 
 \begin_layout Standard
-The adjoint rep is a hot stinking mess, though.
+The adjoint rep is a hot stinking mess.
+ Lets work it out.
+ In this case, 
+\begin_inset Formula $e_{i}=L_{i}$
+\end_inset
+
+ the 3D rotation generators, and so 
+\begin_inset Formula 
+\[
+x=\sum_{k}x_{k}L_{k}=\vec{x}\cdot\vec{L}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+x^{2}=\vec{x}\otimes\vec{x}-\mathbb{I}\left|x\right|^{2}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\vec{x}$
+\end_inset
+
+ is just the 3D component vector and the tensor product is the outer product.
+ Then 
+\begin_inset Formula 
+\[
+x^{2n}=\left(-\right)^{n}\left|x\right|^{2n-2}\left(\mathbb{I}\left|x\right|^{2}-\vec{x}\otimes\vec{x}\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\vec{x}\otimes\vec{x}\;\vec{x}\cdot\vec{L}=0
+\]
+
+\end_inset
+
+so that
+\begin_inset Formula 
+\[
+x^{2n+1}=\left(-\right)^{n}\left|x\right|^{2n}\,\vec{x}\cdot\vec{L}
+\]
+
+\end_inset
+
+and the series is then
+\begin_inset Formula 
+\[
+s(x)=\mathbb{I}a_{0}+\left(\mathbb{I}\left|x\right|^{2}-\vec{x}\otimes\vec{x}\right)\sum_{n=1}^{\infty}\left(-\right)^{n}a_{2n}\frac{\left|x\right|^{2n-2}}{\left(2n\right)!}+\vec{x}\cdot\vec{L}\sum_{n=0}^{\infty}\left(-\right)^{n}a_{2n+1}\frac{\left|x\right|^{2n}}{\left(2n+1\right)!}
+\]
+
+\end_inset
+
+ so that
+\begin_inset Formula 
+\begin{align*}
+\exp(x)= & \mathbb{I}+\left(\mathbb{I}\left|x\right|^{2}-\vec{x}\otimes\vec{x}\right)\frac{\left(\cos\left|x\right|-1\right)}{\left|x\right|^{2}}+\vec{x}\cdot\vec{L}\frac{\sin\left|x\right|}{\left|x\right|}\\
+= & \mathbb{I}\cos\left|x\right|+\widehat{x}\sin\left|x\right|+\widehat{x}\otimes\widehat{x}\left(1-\cos\left|x\right|\right)
+\end{align*}
+
+\end_inset
+
+Then, term-by-term equaltiy requires that
+\begin_inset Formula 
+\begin{align*}
+g(t)\cos f(t)= & \sum_{n=0}^{\infty}\left(-\right)^{n}a_{2n}\frac{t^{2n}}{\left(2n\right)!}\\
+g(t)\sin f(t)= & \sum_{n=0}^{\infty}\left(-\right)^{n}a_{2n+1}\frac{t^{2n+1}}{\left(2n+1\right)!}
+\end{align*}
+
+\end_inset
+
+which was a lot of work to obtain the same expression as before.
+ Its not obvious that this will always be the case, for all reps? Hmm.
+ I guess it had better be.
+ The tensor product is presumably coming from the universal enveloping algebra,
+ which makes sense, case that is where the reps come from, and the identity
+ matrix is the quadratic Casimir invariant.
+ So all other reps will be like this, just with more tensor products.
+\end_layout
+
+\begin_layout Subsection*
+General Lie groups
+\end_layout
+
+\begin_layout Standard
+How about other Lie groups? The sign and cosine come from the alternating
+ sign...
+ So I'm confused...
+ All Lie groups have a quadratic Casimir invariant, so doesn't this imply
+ that the 
+\begin_inset Formula $x^{2}$
+\end_inset
+
+ term will always be in the above form, excepting that the identity matrix
+ might get some factor in front of it? Same for the odd terms? All that
+ I can imagine happening is the 
+\begin_inset Formula $\left(-\right)^{n}$
+\end_inset
+
+ being replaced by some scale factor ...
+ but the sign would still have to alternate, right?
+\end_layout
+
+\begin_layout Standard
+If so, then, indeed, this all gets boring...
+\end_layout
+
+\begin_layout Standard
+The only lesson here is that maybe the even and odd alternating series are
+ interesting, maybe.
+\end_layout
+
+\begin_layout Standard
+I think I'm done for now, except for maybe a direct confirmation of the
+ hypothesis, e.g for su(3) or something like that.
 \end_layout
 
 \end_body
