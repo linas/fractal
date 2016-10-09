@@ -116,8 +116,8 @@ double complex gpf_cpx_bignum_exponential(double r, double theta)
 int zero_count(double radius)
 {
 	int count = 0;
-	// double delta = 0.25 / radius;  // for exponential
-	double delta = 0.2 / sqrt(radius);   // for the pochhammer
+	double delta = 0.25 / radius;  // for exponential
+	// double delta = 0.2 / sqrt(radius);   // for the pochhammer
 	double prev = 0.0;
 	for (double theta = 0.0; theta < 2.0*M_PI; theta += delta)
 	{
@@ -275,7 +275,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define FOURIER_ANALYSIS
+// #define FOURIER_ANALYSIS
 #ifdef FOURIER_ANALYSIS
 	if (argc < 2)
 	{
@@ -324,7 +324,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define ZERO_COUNT
+#define ZERO_COUNT
 #ifdef ZERO_COUNT
 	if (argc < 3)
 	{
