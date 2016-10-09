@@ -29,10 +29,10 @@ set xzeroaxis lw 2
 #     "zero-count.dat" using 1:(2+log($1*$1)) title "2 ± 2log(radius)" lw 2, \
 #     "zero-count.dat" using 1:(2-log($1*$1)) title "" lw 2 lc 2
 
-#set xrange [:50]
+# set xrange [:50]
 plot "zero-count-fixed.dat" using 1:($2-$1) title "" lw 2, \
-     "zero-count-fixed.dat" using 1:(2+log($1)+2*log(log($1))) title "1 ± (1 + log(radius) + 2 log(log(radius)))" lw 2, \
-     "zero-count-fixed.dat" using 1:(-log($1)-2*log(log($1))) title "" lw 2 lc 2
+     "zero-count-fixed.dat" using 1:(1+log($1+1)+2*log(log($1+1)+1)) title "1 ± (log(r+1) + 2 log(log(r+1)+1))" lw 2, \
+     "zero-count-fixed.dat" using 1:(1-log($1+1)-2*log(log($1+1)+1)) title "" lw 2 lc 2
 
 #      "zero-count-fixed.dat" using 1:(4+log($1)) title "1 ± (1 + log(radius))" lw 2, \
 #     "zero-count-fixed.dat" using 1:(-2-log($1)) title "" lw 2 lc 2
