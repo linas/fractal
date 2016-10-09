@@ -116,10 +116,10 @@ double complex gpf_cpx_bignum_exponential(double r, double theta)
 int zero_count(double radius)
 {
 	int count = 0;
-	double delta = 0.25 / radius;  // for exponential
+	double delta = 0.02 / radius;  // for exponential
 	// double delta = 0.2 / sqrt(radius);   // for the pochhammer
 	double prev = 0.0;
-	for (double theta = 0.0; theta < 2.0*M_PI; theta += delta)
+	for (double theta = 0.0; theta < 1.0; theta += delta)
 	{
 		double complex egz = gpf_cpx_bignum_exponential(radius, theta);
 		// double complex egz = gpf_cpx_bignum(radius, theta);
@@ -333,15 +333,17 @@ int main(int argc, char* argv[])
 	}
 	double rlo = atof(argv[1]);
 	double rhi = atof(argv[2]);
-	double rstep = 1;
+	double rstep = 1.0;
 	rstep = floor(0.5 * sqrt(rlo));
+	if (rstep < 1.0) rstep = 1.0;
 	for (double r=rlo; r<= rhi; r+= rstep)
 	{
 		int count = zero_count(r);
 		printf("%d\t%d\n", (int) floor(r+0.5), count);
 		fflush(stdout);
 
-		rstep = floor(0.5 * sqrt(r));
+		// rstep = floor(0.5 * sqrt(r));
+		// if (rstep < 1.0) rstep = 1.0;
 	}
 #endif
 }

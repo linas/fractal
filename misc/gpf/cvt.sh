@@ -51,7 +51,8 @@
 
 # ../../generate/renorm rand-exp-prime-fixed rg 1.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > rand-exp-prime-fixed.png
-../../generate/renorm gpf-exp-x rg 0.4
+../../generate/renorm gpf-exp-x rg 4.0
+../../generate/renorm gpf-exp-x rg 1.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
 
 # ../../generate/renorm gpf-exp-x rg 0.000000004
