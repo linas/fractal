@@ -1,6 +1,6 @@
 
 set term png size 1024, 768
-set out 'expo.png'
+set out 'expo-fixed.png'
 
 # set style data linespoints
 set style data lines
@@ -8,7 +8,7 @@ set key left
 
 set title "Exponential generating function for greatest prime factor"
 set xlabel "|z|"
-set ylabel "|EG(gpf;z)| exp-|z| / |z|"
+set ylabel "|EG(gpf;z)| exp-|z|"
 
 # set xrange [0:1]
 
@@ -20,7 +20,7 @@ plot "expo.dat" using 1:($2/($1)) title "θ = 0" lw 2, \
      "expo.dat" using 1:($7/($1)) title "2π/6" lw 2
 # plot "expo.dat" using 1:($2 * log($1)/($1*$1)) title "" lw 2
 
-set out 'expo-qirr.png'
+set out 'expo-qirr-fixed.png'
 # plot "expo-qirr.dat" using 1:($2/($1)) title "θ = √2/2 · 2π" lw 2
 
 set xlabel "Re EG(gpf;z) exp-|z| / |z|√|z|"
@@ -36,7 +36,7 @@ plot "expo-qirr.dat" using ($6/($1*sqrt($1))):($7/($1*sqrt($1))) title "θ = √
 # plot "expo-qirr.dat" using ($12/($1*sqrt($1))):($13/($1*sqrt($1))) title "θ = √5/3 · 2π" lw 2
 
 # ====================================================================
-set out 'expo-rad.png'
+set out 'expo-rad-fixed.png'
 
 #set xrange [-0.125:0.125]
 #set yrange [-0.125:0.125]

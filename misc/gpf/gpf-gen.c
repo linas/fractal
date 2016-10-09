@@ -77,7 +77,7 @@ double complex gpf_cpx_exponential_rt(double r, double theta)
 	return gpf_cpx_exponential(z);
 }
 
-double gpf_bignum(double r, double theta)
+double gpf_bignum_exponential(double r, double theta)
 {
 	cpx_t sum, z;
 	cpx_init(sum);
@@ -85,9 +85,9 @@ double gpf_bignum(double r, double theta)
 
 	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
-	// theta *= 2.0 * M_PI;
-	// cpx_gpf_exponential(sum, z, 200);
-	cpx_gpf_poch_rising(sum, z, 40);
+	theta *= 2.0 * M_PI;
+	cpx_gpf_exponential(sum, z, 200);
+	// cpx_gpf_poch_rising(sum, z, 40);
 
 	mpf_t val;
 	mpf_init(val);
@@ -173,10 +173,12 @@ int main(int argc, char* argv[])
 		fflush(stdout);
 	}
 #endif
+
+#define RATIONALS 1
 #ifdef RATIONALS
 	if (argc < 2)
 	{
-		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <r-max>\n", argv[0]);
 		exit(1);
 	}
 	double dom = atof(argv[1]);
@@ -315,7 +317,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define ZERO_COUNT
+// #define ZERO_COUNT
 #ifdef ZERO_COUNT
 	if (argc < 3)
 	{
