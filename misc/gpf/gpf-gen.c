@@ -153,7 +153,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define EXPO
+// #define EXPO
 #ifdef EXPO
 	if (argc < 2)
 	{
@@ -274,10 +274,12 @@ int main(int argc, char* argv[])
 		fflush(stdout);
 	}
 #endif
+
+#define FOURIER_ANALYSIS
 #ifdef FOURIER_ANALYSIS
 	if (argc < 2)
 	{
-		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <r-max>\n", argv[0]);
 		exit(1);
 	}
 	double dom = atof(argv[1]);
@@ -290,7 +292,7 @@ int main(int argc, char* argv[])
 		doms[i] = x;
 		double r = x*x;
 		double y = gpf_bignum_exponential(r, 0.0);
-		double z = (y * log(r) / (r*r)) - 1.75;
+		double z = (y * log(r) / r) - 1.75;
 		vals[i] = z;
 
 		// printf("# %g\t%g\n", x, z);
