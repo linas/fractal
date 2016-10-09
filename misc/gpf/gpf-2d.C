@@ -150,7 +150,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-// #define EXPO 1
+#define EXPO 1
 #if EXPO
 	cpx_gpf_exponential(sum, z, 20);
 	// cpx_gpf_sine(sum, z, 20);
@@ -167,18 +167,15 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
-	return rv;
-#if 0
 	double lr = log(r);
-	// rv /= r*r / (lr*lr);
-	double regul = exp(-1.0/(r*r));
-	rv *= (1.0-regul) + regul * lr*lr / (r*r);
-#endif
+	rv *= lr / r;
+	// double regul = exp(-1.0/(r*r));
+	// rv *= (1.0-regul) + regul * lr*lr / (r*r);
 
 	return rv;
 #endif
 
-#define RANDY 1
+// #define RANDY 1
 #if RANDY
 	cpx_random_exponential_shift(sum, z, itermax, 25);
 

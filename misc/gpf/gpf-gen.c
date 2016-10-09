@@ -45,11 +45,12 @@ double gpf_exponential(double x)
 	for (int n=1; ; n++)
 	{
 		sum += gpf(n) * xn;
-		xn *= x / ((double) n);
+		xn *= x / ((double) n+1);
 
 		if (n*xn < 1.0e-16*sum) break;
 	}
 
+	sum *= exp(-x);
 	return sum;
 }
 
@@ -63,7 +64,7 @@ double complex gpf_cpx_exponential(double complex z)
 	for (int n=1; ; n++)
 	{
 		sum += gpf(n) * zn;
-		zn *= z / ((double) n);
+		zn *= z / ((double) n+1);
 
 		if (n*cabs(zn) < 1.0e-16*cabs(sum)) break;
 	}
@@ -152,25 +153,26 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-// #define EXPO
+#define EXPO
 #ifdef EXPO
 	if (argc < 2)
 	{
-		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <r-max>\n", argv[0]);
 		exit(1);
 	}
 	double dom = atof(argv[1]);
 	printf("#\n# Max = %g\n#\n", dom);
-	for (double x=0.0; x< dom; x+= 0.01*dom)
+	for (double x=0.0; x< dom; x+= 0.002*dom)
 	{
 		// double y = gpf_exponential(x);
 		// double z = y * exp(-x);
 		// printf("%g\t%g\t%g\n", x, y, z);
-		double r = x;
-		double y = gpf_bignum(r, M_PI);
-		// double z = y * log(r) / (r*r);
-		// printf("%g\t%20.18g\t%20.18g\t%20.18g\n", x, r, y, z);
-		printf("r=%g g=%g\n", r, y);
+		double r = x * x;
+		double y = gpf_bignum_exponential(r, 0);
+		// double y = gpf_bignum(r, M_PI);
+		double z = y * log(r) / r - 1.75;
+		printf("%g\t%20.18g\t%20.18g\t%20.18g\n", x, r, y, z);
+		// printf("r=%g g=%g a=%g\n", r, y, z);
 		fflush(stdout);
 	}
 #endif
@@ -197,7 +199,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define QUADRATIC_IRRATIONALS 1
+// #define QUADRATIC_IRRATIONALS 1
 #ifdef QUADRATIC_IRRATIONALS
 	if (argc < 2)
 	{
