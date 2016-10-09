@@ -96,17 +96,17 @@ double gpf_bignum_exponential(double r, double theta)
 	return rv;
 }
 
-double complex gpf_cpx_bignum(double r, double theta)
+double complex gpf_cpx_bignum_exponential(double r, double theta)
 {
 	cpx_t sum, z;
 	cpx_init(sum);
 	cpx_init(z);
 
-	// theta *= 2.0 * M_PI;
+	theta *= 2.0 * M_PI;
 	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
-	// cpx_gpf_exponential(sum, z, 60);
-	cpx_gpf_poch_rising(sum, z, 60);
+	cpx_gpf_exponential(sum, z, 60);
+	// cpx_gpf_poch_rising(sum, z, 60);
 
 	double complex rv = cpx_get_re(sum) + I * cpx_get_im(sum);
 	return rv;
@@ -120,7 +120,8 @@ int zero_count(double radius)
 	double prev = 0.0;
 	for (double theta = 0.0; theta < 2.0*M_PI; theta += delta)
 	{
-		double complex egz = gpf_cpx_bignum(radius, theta);
+		double complex egz = gpf_cpx_bignum_exponential(radius, theta);
+		// double complex egz = gpf_cpx_bignum(radius, theta);
 		double phase = atan2(cimag(egz), creal(egz));
 
 		if ((0.0 < prev) && (phase < 0.0))
@@ -174,7 +175,7 @@ int main(int argc, char* argv[])
 	}
 #endif
 
-#define RATIONALS 1
+// #define RATIONALS 1
 #ifdef RATIONALS
 	if (argc < 2)
 	{
@@ -195,10 +196,12 @@ int main(int argc, char* argv[])
 		fflush(stdout);
 	}
 #endif
+
+#define QUADRATIC_IRRATIONALS 1
 #ifdef QUADRATIC_IRRATIONALS
 	if (argc < 2)
 	{
-		fprintf(stderr, "Usage: %s <r>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <r-max>\n", argv[0]);
 		exit(1);
 	}
 	double dom = atof(argv[1]);
