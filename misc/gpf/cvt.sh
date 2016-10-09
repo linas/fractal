@@ -21,14 +21,21 @@
 # ../../generate/renorm gpf-exp-abs rg 0.4
 # ../../generate/renorm gpf-exp-abs rg 0.9999999
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs.png
-cat gpf-exp-abs-fixed.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-fixed.png
+# ../../generate/renorm gpf-exp-abs-fixed rg 0.24
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-0.24-fixed.png
 
 # ../../generate/renorm gpf-exp-x rg 480
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
 
+# ../../generate/renorm gpf-exp-abs-big-fixed rg 0.4
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-ex-abs-big-fixed.png
+
 # huge == width of 4320
 # ../../generate/renorm gpf-exp-abs-huge rg 0.03124
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-huge.png
+
+../../generate/renorm gpf-exp-abs-4320-fixed rg 0.03124
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-4320-fixed.png
 
 # ../../generate/renorm gpf-exp-abs-40K rg 0.0041124
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-40K.png
