@@ -343,10 +343,10 @@ void cpx_random_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
 
 	for (int n=1; ; n++)
 	{
-		// unsigned int rando = randy(n+offset);
+		unsigned int rando = randy(n+offset);
 		// unsigned int rando = pseudo_gpf(n+offset);
-		unsigned int nprimes = prime_count(n);
-		unsigned int rando = randy(nprimes);
+		// unsigned int nprimes = prime_count(n);
+		// unsigned int rando = randy(nprimes);
 		rando = get_nth_prime(rando);
 		cpx_times_ui(term, zn, rando);
 		cpx_times_mpf(term, term, fact);

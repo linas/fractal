@@ -34,42 +34,20 @@
 # ../../generate/renorm gpf-exp-abs-huge rg 0.03124
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-huge.png
 
-../../generate/renorm gpf-exp-abs-4320-fixed rg 0.03124
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-4320-fixed.png
+# ../../generate/renorm gpf-exp-abs-4320-fixed rg 0.03124
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-4320-fixed.png
 
 # ../../generate/renorm gpf-exp-abs-40K rg 0.0041124
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-40K.png
 
-# ../../generate/renorm gpf-exp-abs-250K-uni rg 0.4
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-250K-uni.png
-
-# ../../generate/renorm gpf-exp-x rg 0.000000004
-# ../../generate/renorm recip-flat-13 rg 24.0
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-13.png
-# ../../generate/renorm recip-flat-16 rg 24.0
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16.png
-
-# ../../generate/renorm recip-flat-16-803 rg 24.0
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16-803.png
-
-# ../../generate/renorm recip-flat-10-16 rg 24.0
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-10-16.png
-
-# ../../generate/renorm recip-flat-wide-15 rg 24.0
-# big == width of 720
-# ../../generate/renorm gpf-exp-abs-big rg 0.4
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-big.png
-# cat gpf-exp-abs-big.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-big.png
-
-# huge == width of 4320
-# ../../generate/renorm gpf-exp-abs-huge rg 0.03124
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-huge.png
-
-# ../../generate/renorm gpf-exp-abs-40K rg 0.0041124
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-40K.png
+# ../../generate/renorm gpf-exp-abs-40K-fixed rg 0.0041124
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-40K-fixed.png
 
 # ../../generate/renorm gpf-exp-abs-250K-uni rg 0.4
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-250K-uni.png
+
+../../generate/renorm rand-exp-fixed rg 0.10
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > rand-exp-fixed.png
 
 # ../../generate/renorm gpf-exp-x rg 0.000000004
 # ../../generate/renorm recip-flat-13 rg 24.0
@@ -85,9 +63,6 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-4320-fixed.p
 
 # ../../generate/renorm recip-flat-wide-15 rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-wide-15.png
-
-# ../../generate/renorm recip-flat-wide-15 rg 24.0
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-rr-x.png
 
 # enscribe some lines ---------
 # ../../generate/renorm recip-flat-16 rg 24.0
