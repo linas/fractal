@@ -71,7 +71,7 @@ static unsigned long pseudo_gpf_direct(unsigned long n)
 	/* Compute the approximate distribution. It is given by the
 	 * tweaked harmonic number of ... plausible divisors of n...
 	 * This started out trying to be a scientific, rational estimate
-	 * of the probability distribution, butthis proved to be too
+	 * of the probability distribution, but this proved to be too
 	 * complicated to get right, and devolved into a total hack.
 	 * It gives a distribution that goes too low for small n,
 	 * and goes too high for large n.  Its vaguely-close-ish.

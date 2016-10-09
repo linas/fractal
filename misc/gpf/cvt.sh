@@ -49,6 +49,9 @@
 ../../generate/renorm rand-exp-fixed rg 1.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > rand-exp-fixed.png
 
+../../generate/renorm rand-exp-prime-fixed rg 1.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > rand-exp-prime-fixed.png
+
 # ../../generate/renorm gpf-exp-x rg 0.000000004
 # ../../generate/renorm recip-flat-13 rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-13.png
