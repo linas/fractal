@@ -16,8 +16,8 @@
 
 void expo(cpx_t sum, cpx_t z, int nprec)
 {
-	// cpx_gpf_exponential(sum, z, nprec);
-	cpx_gpf_poch_rising(sum, z, nprec);
+	cpx_gpf_exponential(sum, z, nprec);
+	// cpx_gpf_poch_rising(sum, z, nprec);
 	// cpx_gpf_poch_falling(sum, z, nprec);
 
 #if 0
@@ -83,8 +83,8 @@ void find_zero(double rguess, double tguess, double cell_size)
 #ifdef CHECK_RESULT
 	cpx_t check;
 	cpx_init(check);
-	// cpx_gpf_exponential(check, zero, 20);
-	cpx_gpf_poch_rising(check, zero, 30);
+	cpx_gpf_exponential(check, zero, 20);
+	// cpx_gpf_poch_rising(check, zero, 30);
 	// cpx_gpf_poch_falling(check, zero, 30);
 	double eps_r = cpx_get_re(check);
 	double eps_i = cpx_get_im(check);
