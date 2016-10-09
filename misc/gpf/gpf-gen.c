@@ -116,6 +116,7 @@ double complex gpf_cpx_bignum_exponential(double r, double theta)
 int zero_count(double radius)
 {
 	int count = 0;
+	// double delta = 0.04 / radius;  // for exponential
 	double delta = 0.02 / radius;  // for exponential
 	// double delta = 0.2 / sqrt(radius);   // for the pochhammer
 	double prev = 0.0;
@@ -336,6 +337,7 @@ int main(int argc, char* argv[])
 	double rstep = 1.0;
 	rstep = floor(0.5 * sqrt(rlo));
 	if (rstep < 1.0) rstep = 1.0;
+rstep = 1;
 	for (double r=rlo; r<= rhi; r+= rstep)
 	{
 		int count = zero_count(r);
