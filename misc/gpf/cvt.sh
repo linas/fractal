@@ -10,7 +10,7 @@
 # cat log-abs.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-abs.png
 
 # cat gpf-exp-phase.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-phase.png
-cat gpf-exp-phase-fixed.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-phase-fixed.png
+# cat gpf-exp-phase-fixed.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-phase-fixed.png
 
 # ../../generate/takelog gpf-exp-abs log-exp-abs
 # ../../generate/renorm log-exp-abs rg 0.0124
@@ -21,6 +21,7 @@ cat gpf-exp-phase-fixed.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp
 # ../../generate/renorm gpf-exp-abs rg 0.4
 # ../../generate/renorm gpf-exp-abs rg 0.9999999
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs.png
+cat gpf-exp-abs-fixed.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-abs-fixed.png
 
 # ../../generate/renorm gpf-exp-x rg 480
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png

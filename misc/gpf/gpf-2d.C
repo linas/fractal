@@ -139,7 +139,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-#define PHASE 1
+// #define PHASE 1
 #if PHASE
 	// cpx_gpf_ordinary_recip(sum, z, 15);
 	cpx_gpf_exponential(sum, z, 20);
@@ -150,7 +150,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-// #define EXPO 1
+#define EXPO 1
 #if EXPO
 	cpx_gpf_exponential(sum, z, 20);
 	// cpx_gpf_sine(sum, z, 20);
@@ -167,10 +167,13 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
+	return rv;
+#if 0
 	double lr = log(r);
 	// rv /= r*r / (lr*lr);
 	double regul = exp(-1.0/(r*r));
 	rv *= (1.0-regul) + regul * lr*lr / (r*r);
+#endif
 
 	return rv;
 #endif
