@@ -53,6 +53,7 @@ plot "zero-count-fixed.dat" using 1:($2-$1) title "" lw 2, \
 #     "zero-count-fixed.dat" using 1:(2+log($1)-0.25*log(log($1))) title "1 ± (1 + log(radius))" lw 2, \
 #     "zero-count-fixed.dat" using 1:(-log($1)+0.25*log(log($1))) title "" lw 2 lc 2
 
-#set out 'zero-count-diff.png'
-#set title "Difference of zeros of EG(N·gpf; z)"
-#plot "zero-count.dat",  using 1:($2-$1) title "" lw 2, \
+set out 'zero-count-diff.png'
+set title "Difference of zeros of EG(N·gpf; z)"
+# Column 4 is the "fixed" data. Column 2 is the N.gpf data
+plot "zero-count-both.dat"  using 1:($2-$4) title "foo" lw 2
