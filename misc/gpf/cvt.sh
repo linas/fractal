@@ -51,9 +51,9 @@
 
 # ../../generate/renorm rand-exp-prime-fixed rg 1.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > rand-exp-prime-fixed.png
-../../generate/renorm gpf-exp-x rg 4.0
-../../generate/renorm gpf-exp-x rg 1.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
+# ../../generate/renorm gpf-exp-x rg 4.0
+# ../../generate/renorm gpf-exp-x rg 1.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
 
 # ../../generate/renorm gpf-exp-x rg 0.000000004
 # ../../generate/renorm recip-flat-13 rg 24.0
@@ -84,9 +84,14 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
 
 # ../../generate/renorm recip-exp-4320 rg 0.5
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-exp-4320.png
+../../generate/renorm recip-exp-4320-fixed rg 0.3333
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-exp-4320-fixed.png
 
 # ../../generate/renorm recip-exp-40K rg 3.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-exp-40K.png
+
+# ../../generate/renorm recip-exp-40K-fixed rg 0.5
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-exp-40K-fixed.png
 
 # ../../generate/renorm recip-exp-41K rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-exp-41K.png

@@ -139,7 +139,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-#define PHASE 1
+// #define PHASE 1
 #if PHASE
 	// cpx_gpf_ordinary_recip(sum, z, 15);
 	cpx_gpf_exponential(sum, z, 20);
@@ -194,54 +194,54 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-// #define RECIP 1
+#define RECIP 1
 #ifdef RECIP
 
 	#ifdef PROJECT_TO_SPHERE
-	// Perform a rojection to the Riemann spehre.
-	// Sucks, mostly. Sucks completely, actually.
-	// printf("duuude in= %f %f ", re_q, im_q);
-	double rr = sqrt(re_q*re_q + im_q*im_q);
-	if (1.0 <= rr) return 0.0;
-	re_q /= rr;
-	im_q /= rr;
-	rr = (1.0 + rr)/(1.0 - rr);
-	rr = pow(rr, param);
+		// Perform a rojection to the Riemann spehre.
+		// Sucks, mostly. Sucks completely, actually.
+		// printf("duuude in= %f %f ", re_q, im_q);
+		double rr = sqrt(re_q*re_q + im_q*im_q);
+		if (1.0 <= rr) return 0.0;
+		re_q /= rr;
+		im_q /= rr;
+		rr = (1.0 + rr)/(1.0 - rr);
+		rr = pow(rr, param);
 
-	re_q *= rr;
-	im_q *= rr;
-	// printf("  out=%f %f\n", re_q, im_q);
+		re_q *= rr;
+		im_q *= rr;
+		// printf("  out=%f %f\n", re_q, im_q);
 
-	if (itermax < rr) return 0.0;
-	cpx_set_d(z, re_q, im_q);
+		if (itermax < rr) return 0.0;
+		cpx_set_d(z, re_q, im_q);
 	#endif // PROJECT_TO_SPHERE
 
-	#define UN_CIRCLE 1
+// #define UN_CIRCLE 1
 	#ifdef UN_CIRCLE
-	// printf("duuude in= %f %f \n", re_q, im_q);
-	double theta = M_PI * im_q;
+		// printf("duuude in= %f %f \n", re_q, im_q);
+		double theta = M_PI * im_q;
 
-	#ifdef INSCRIBE
-	double x = re_q;
-	double y = sin(0.5*theta);
-	// if (0.9*param < x*x*y and x*x*y < 1.1*param) return 0.0;
-	x = pow(x, 1.5);
-	if (0.9*param < x*y and x*y < 1.1*param) return 0.0;
-	#endif
+		#ifdef INSCRIBE
+			double x = re_q;
+			double y = sin(0.5*theta);
+			// if (0.9*param < x*x*y and x*x*y < 1.1*param) return 0.0;
+			x = pow(x, 1.5);
+			if (0.9*param < x*y and x*y < 1.1*param) return 0.0;
+		#endif
 
 
-	// double rr = itermax + param * re_q;
-	double rr = itermax;
-	rr = exp(rr * M_LN2);  // pow (2, itermax * re_q)
-rr+= param * re_q;
-	im_q = rr*sin (theta);
-	re_q = rr*cos (theta);
-	cpx_set_d(z, re_q, im_q);
+		// double rr = itermax + param * re_q;
+		double rr = itermax;
+		rr = exp(rr * M_LN2);  // pow (2, itermax * re_q)
+	rr+= param * re_q;
+		im_q = rr*sin (theta);
+		re_q = rr*cos (theta);
+		cpx_set_d(z, re_q, im_q);
 
-	// printf("duuude              out= %f %f \n", re_q, im_q);
+		// printf("duuude              out= %f %f \n", re_q, im_q);
 	#endif // UN_CIRCLE
 
-	cpx_gpf_exponential_recip(sum, z, 15);
+	cpx_gpf_exponential_recip(sum, z, 25);
 	// extract
 	mpf_t val;
 	mpf_init(val);
@@ -252,7 +252,8 @@ rr+= param * re_q;
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
 	double lr = log(r);
-	rv /= (lr * lr * lr);
+	rv *= lr * lr * lr;
+	// rv /= (lr * lr * lr);
 
 	return rv;
 #endif

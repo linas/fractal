@@ -118,7 +118,7 @@ int zero_count(double radius)
 	int count = 0;
 	// double delta = 0.04 / radius;  // for exponential
 	// double delta = 0.02 / radius;  // for exponential
-	double delta = 0.005 / radius;  // for exponential
+	double delta = 0.001 / radius;  // for exponential
 	// double delta = 0.2 / sqrt(radius);   // for the pochhammer
 	double prev = 0.0;
 	for (double theta = 0.0; theta < 1.0; theta += delta)
@@ -338,11 +338,12 @@ int main(int argc, char* argv[])
 	double rstep = 1.0;
 	rstep = floor(0.5 * sqrt(rlo));
 	if (rstep < 1.0) rstep = 1.0;
-rstep = 0.1;
+rstep = 0.05;
 	for (double r=rlo; r<= rhi; r+= rstep)
 	{
 		int count = zero_count(r);
-		printf("%d\t%d\n", (int) floor(r+0.5), count);
+		// printf("%d\t%d\n", (int) floor(r+0.5), count);
+		printf("%f\t%d\n", r, count);
 		fflush(stdout);
 
 		// rstep = floor(0.5 * sqrt(r));
