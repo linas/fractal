@@ -216,7 +216,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 		cpx_set_d(z, re_q, im_q);
 	#endif // PROJECT_TO_SPHERE
 
-// #define UN_CIRCLE 1
+#define UN_CIRCLE 1
 	#ifdef UN_CIRCLE
 		// printf("duuude in= %f %f \n", re_q, im_q);
 		double theta = M_PI * im_q;
@@ -230,10 +230,14 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 		#endif
 
 
-		// double rr = itermax + param * re_q;
+#if LINEAR_CENTER_LINE
 		double rr = itermax;
 		rr = exp(rr * M_LN2);  // pow (2, itermax * re_q)
-	rr+= param * re_q;
+	   rr += param * re_q; // left-right offsets.
+#endif
+		double rr = itermax + param * re_q;
+		rr = exp(rr * M_LN2);  // pow (2, param * re_q)
+
 		im_q = rr*sin (theta);
 		re_q = rr*cos (theta);
 		cpx_set_d(z, re_q, im_q);
@@ -251,9 +255,14 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	// Divide by z for plotting.
 	double r = sqrt(re_q*re_q + im_q*im_q);
-	double lr = log(r);
-	rv *= lr * lr * lr;
-	// rv /= (lr * lr * lr);
+	double lr = log(r+1);
+	double llr = log(lr+1);
+	// rv *= lr * lr * lr;
+	// rv /= (lr * lr * lr);  // used for the off-by-one pictures
+	// rv *= llr * llr * llr;
+	// rv *= lr * lr * lr *lr;
+	// rv *= lr * lr * lr *lr *lr;  // used for the main pictures
+	rv *= llr * llr * llr *llr *lr;
 
 	return rv;
 #endif
