@@ -94,6 +94,9 @@ double complex lambert_genfunc(double complex x, int (*func)(int))
 	return sum;
 }
 
+// ======================================================================
+// Totient stuff...
+
 static double totient_ord_phase(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -102,6 +105,24 @@ static double totient_ord_phase(double re_q, double im_q, int itermax, double pa
 	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
+static double totient_exp_phase(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, totient_phi);
+	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+}
+
+static double totient_exp_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, totient_phi);
+	return cabs(g);
+}
+
+// ========================================================
+// other stuff.
 /* static */ double ploto(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -161,6 +182,8 @@ return 0.0;
 
 __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("totient_ord_phase", totient_ord_phase);
+	DECL_HEIGHT("totient_exp_phase", totient_exp_phase);
+	DECL_HEIGHT("totient_exp_mag", totient_exp_mag);
 }
 
 // DECL_MAKE_HEIGHT(plot_big);

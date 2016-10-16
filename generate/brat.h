@@ -58,7 +58,7 @@ MakeHeightWrap (
    double 	renorm,
 	MakeHeightCB cb);
 
-#define MAX_NUM_NAMES 100
+#define MAX_NUM_NAMES 8000
 extern int num_names;
 extern MakeHeightCB* callbacks[MAX_NUM_NAMES];
 extern const char* main_names[MAX_NUM_NAMES];
