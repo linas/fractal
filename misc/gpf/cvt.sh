@@ -52,14 +52,17 @@
 # ../../generate/renorm rand-exp-prime-fixed rg 1.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > rand-exp-prime-fixed.png
 # ../../generate/renorm gpf-exp-x rg 4.0
-../../generate/renorm gpf-exp-x rg 1
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
+# ../../generate/renorm gpf-exp-x rg 1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
 
 # ../../generate/renorm gpf-exp-x rg 0.000000004
 # ../../generate/renorm recip-flat-13 rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-13.png
 # ../../generate/renorm recip-flat-16 rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16.png
+
+# ../../generate/renorm recip-flat-16-fixed rg 1.6
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16-fixed.png
 
 # ../../generate/renorm recip-flat-16-803 rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16-803.png
@@ -75,6 +78,11 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > gpf-exp-x.png
 # cat hyper.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > hyper.png
 # ../../generate/mask rg hyper rma
 # cat rma.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16-scribed.png
+
+../../generate/renorm recip-flat-16-fixed rg 1.6
+cat hyper.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > hyper.png
+../../generate/mask rg hyper rma
+cat rma.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip-flat-16-fixed-scribed.png
 
 # cat recip.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recip.png
 
