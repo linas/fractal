@@ -129,6 +129,15 @@ static double mobius_exp_mag(double re_q, double im_q, int itermax, double param
 	return cabs(g);
 }
 
+static int divisori(int i) { return divisor(i); }
+static double divisor_exp_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, divisori);
+	return cabs(g);
+}
+
 // ========================================================
 // other stuff.
 /* static */ double ploto(double re_q, double im_q, int itermax, double param)
@@ -136,7 +145,6 @@ static double mobius_exp_mag(double re_q, double im_q, int itermax, double param
 	max_iter = itermax;
    double complex z = re_q + I * im_q;
 
-      // double t = moebius_mu (i+1);
       // double t = mertens_m (i+1);
       // double t = liouville_omega (i+1);
       // double t = liouville_lambda (i+1);
@@ -180,6 +188,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("totient_exp_phase", totient_exp_phase);
 	DECL_HEIGHT("totient_exp_mag", totient_exp_mag);
 	DECL_HEIGHT("mobius_exp_mag", mobius_exp_mag);
+	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
 }
 
 // DECL_MAKE_HEIGHT(plot_big);
