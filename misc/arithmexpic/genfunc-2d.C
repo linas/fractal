@@ -138,6 +138,14 @@ static double divisor_exp_mag(double re_q, double im_q, int itermax, double para
 	return cabs(g);
 }
 
+static double liouv_omega_exp_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, liouville_omega);
+	return cabs(g);
+}
+
 // ========================================================
 // other stuff.
 /* static */ double ploto(double re_q, double im_q, int itermax, double param)
@@ -189,6 +197,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("totient_exp_mag", totient_exp_mag);
 	DECL_HEIGHT("mobius_exp_mag", mobius_exp_mag);
 	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
+	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
 }
 
 // DECL_MAKE_HEIGHT(plot_big);
