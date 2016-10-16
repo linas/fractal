@@ -63,8 +63,12 @@ void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
 
 	for (int n=1; n < niter ; n++)
 	{
-		cpx_times_ui(term, zn, func(n));
-		cpx_add(sum, sum, term);
+		int funv = func(n);
+		if (0 != funv)
+		{
+			cpx_times_ui(term, zn, funv);
+			cpx_add(sum, sum, term);
+		}
 		cpx_mul(zn, zn, z);
 
 #if SLOW_VERSION_NOT_USING_NITER

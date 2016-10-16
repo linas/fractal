@@ -186,6 +186,7 @@ static int thue_morse(int n)
    if (0 == n%2) return thue_morse (n/2);
    return (1-thue_morse ((n-1)/2));
 }
+
 static double thue_morse_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;

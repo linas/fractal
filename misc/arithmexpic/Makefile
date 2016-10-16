@@ -25,6 +25,7 @@ totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d xperiment
 
 genfunc.o: genfunc.h
+genfunc-2d.o: genfunc.h
 
 .o:
 	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++

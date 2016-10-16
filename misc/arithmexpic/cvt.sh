@@ -59,6 +59,13 @@
 # ../../generate/renorm thue-morse-1K rg 12.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-1K.png
 
+# ./thue_morse_big thue-morse-1K 400 400 5000 0 0 12000
+# ../../generate/renorm thue-morse-12K rg 12.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-12K.png
+
+../../generate/renorm thue-morse-120K rg 12.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120K.png
+
 # ------------------
 ../../generate/renorm exp-x rg 12.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-x.png
