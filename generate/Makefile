@@ -1,4 +1,4 @@
-############### Symbol Definitions ###################### 
+############### Symbol Definitions ######################
 
 INCLUDES =	-I../tools/inc -I../misc/anant-git/src
 LIBS =		/usr/lib
@@ -28,7 +28,7 @@ dist:
 	tar -zcvf gen.tgz *.c *.C *.h Makefile .cvsignore cvt
 
 clean:
-	rm -f x j.c a.out  *.o glop* junk* *.flo  *.txt 
+	rm -f x j.c a.out  *.o glop* junk* *.flo  *.txt
 
 realclean:
 	rm -f *.gif *.jpeg *.png $(OLD_EXES) $(NEW_EXES)
@@ -50,9 +50,9 @@ opers.o: opers.h
 renorm.o: opers.h
 util.o:	util.h
 
-affine.o: affine.C
-alpha.o: alpha.C
-baker.o: baker.C
+affine.o: affine.C brat.h
+alpha.o: alpha.C brat.h
+baker.o: baker.C brat.h
 brat-beigen.o: brat-beigen.C
 brat-gap-hair.o: brat-gap-hair.C
 brat-gapper.o: brat-gapper.C
@@ -61,30 +61,34 @@ circle.o: circle.C brat.h
 circle-mom.o: circle-mom.C brat.h
 cutoff.o: cutoff.C
 divisor.o: divisor.C brat.h
-euler-q.o: euler-q.C
-fdist.o: fdist.C
-gamma.o: gamma.C
-gauss-red.o: gauss-red.C
-gkd.o: gkd.C
-haar.o: haar.C
-hardy.o: hardy.C
-hermite.o: hermite.C
+elliptic.o: elliptic.C brat.h
+erdos.o: erdos.C brat.h
+euler-q.o: euler-q.C brat.h
+fdist.o: fdist.C brat.h
+gamma.o: gamma.C brat.h
+gauss-red.o: gauss-red.C brat.h
+gkd.o: gkd.C brat.h
+gkw.o: gkw.C brat.h
+gkw-integrand.o: gkw-integrand.C brat.h
+haar.o: haar.C brat.h
+hardy.o: hardy.C brat.h
+hermite.o: hermite.C brat.h
 hurwitz.o: hurwitz.C brat.h
-ising.o: ising.C
-mobius.o: mobius.C
+ising.o: ising.C brat.h
+mobius.o: mobius.C brat.h
 mp_zeta.o: mp_zeta.C
-plouffe.o: plouffe.C
+plouffe.o: plouffe.C brat.h
 polylog.o: polylog.C brat.h
 q-exp.o: q-exp.C brat.h
-swap.o: swap.C
+swap.o: swap.C brat.h
 sho.o: sho.C brat.h coord-xforms.h
 takagi.o: takagi.C brat.h
 totient.o: totient.C brat.h
 zeta.o: zeta.C brat.h
 
-FUNC=../tools/lib/libfunc.a
-MP=../misc/anant-git/src/libanant.a -ldb
-GMP=-lgmp 
+FUNC=../tools/lib/libfunc.a -lpthread
+MP=../misc/anant-git/src/libanant.a -ldb -lpthread
+GMP=-lgmp
 GSL=-lgsl -lgslcblas
 
 ################## Dependencies and compile/link #########
@@ -98,31 +102,31 @@ brat-gapper: brat.o brat-gapper.o util.o $(FUNC)
 chirikov: brat.o chirikov.o util.o
 circle: brat.o circle.o util.o
 circle-mom: brat.o circle-mom.o util.o
-cutoff: brat.o cutoff.o coord-xforms.o util.o 
+cutoff: brat.o cutoff.o coord-xforms.o util.o
 divisor: brat.o divisor.o util.o $(FUNC)
 elliptic: brat.o elliptic.o util.o
 erdos: brat.o erdos.o coord-xforms.o util.o $(FUNC)
 euler-q: brat.o euler-q.o coord-xforms.o util.o $(FUNC)
 fdist: brat.o fdist.o util.o $(FUNC)
 gamma: brat.o gamma.o util.o coord-xforms.o $(MP) $(GMP)
-gauss-red: brat.o gauss-red.o util.o 
-gkd: brat.o gkd.o util.o 
+gauss-red: brat.o gauss-red.o util.o
+gkd: brat.o gkd.o util.o
 gkw: brat.o gkw.o util.o $(FUNC) $(MP) $(GMP)
 gkw-integrand: brat.o gkw-integrand.o util.o $(FUNC) $(MP) $(GMP)
-haar: brat.o haar.o util.o 
+haar: brat.o haar.o util.o
 hardy: brat.o hardy.o util.o $(FUNC)
-hermite: brat.o hermite.o util.o 
-hurwitz: brat.o hurwitz.o util.o $(MP) $(GMP) 
+hermite: brat.o hermite.o util.o
+hurwitz: brat.o hurwitz.o util.o $(MP) $(GMP)
 ising: brat.o ising.o util.o $(FUNC)
 ising-moment: brat.o ising-moment.o util.o $(FUNC)
 mand-flow: brat.o mand-flow.o util.o
 mobius: brat.o mobius.o util.o $(FUNC)
-mp_zeta: brat.o mp_zeta.o util.o $(MP) $(GMP) 
+mp_zeta: brat.o mp_zeta.o util.o $(MP) $(GMP)
 plouffe: brat.o plouffe.o util.o
-polylog: brat.o polylog.o util.o $(MP) $(GMP) 
+polylog: brat.o polylog.o util.o $(MP) $(GMP)
 q-exp: brat.o q-exp.o util.o
 swap: brat.o swap.o util.o
-sho: brat.o sho.o util.o coord-xforms.o $(MP) $(GMP) 
+sho: brat.o sho.o util.o coord-xforms.o $(MP) $(GMP)
 takagi: brat.o takagi.o util.o
 totient: brat.o totient.o util.o $(FUNC)
 zeta: brat.o zeta.o util.o $(GSL)
@@ -191,7 +195,7 @@ image: image.o  gap-tongue.o man.o util.o ../tools/lib/Farey.o
 movie: movie.o  man.o util.o
 	$(CC) -o movie movie.o man.o util.o -lm
 
-radius: radius.o 
+radius: radius.o
 
 automatic: radius
 	ln -f radius automatic

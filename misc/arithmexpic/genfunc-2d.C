@@ -1,5 +1,5 @@
 /*
- * Generating functions for mis arithmetic series
+ * Generating functions for miscellaneous arithmetic series
  * 2D phase plot.
  *
  * April 2016
@@ -13,8 +13,14 @@
 #include <mp-zeta.h>
 
 #include <gpf.h>
+#include <modular.h>
+#include <moebius.h>
+#include <totient.h>
+
 #include "brat.h"
 #include "genfunc.h"
+
+
 
 //  C and C++ is fugnuts insane in complex support.
 #define complex _Complex
@@ -23,9 +29,9 @@
 int max_iter = 100000000;
 
 /*
- * Ordinary generating function for the greatest common factor.
+ * Ordinary generating function for arithmetic series
  */
-double complex gpf_ordinary(double complex x)
+double complex ordinary_genfunc(double complex x, int (*func)(int))
 {
 	double complex sum = 0;
 	double complex xn = x;
@@ -35,7 +41,7 @@ double complex gpf_ordinary(double complex x)
 
 	for (int n=1; ; n++)
 	{
-		sum += gpf(n) * xn;
+		sum += func(n) * xn;
 		xn *= x;
 		if (n*cabs(xn) < MAX_PREC*cabs(sum)) break;
 		if (max_iter < n) break;
@@ -45,9 +51,9 @@ double complex gpf_ordinary(double complex x)
 }
 
 /*
- * Exponential generating function for the greatest common factor.
+ * Exponential generating function for arithmetic series
  */
-double complex gpf_exponential(long double complex x)
+double complex exponential_genfunc(long double complex x, int (*func)(int))
 {
 	long double complex sum = 0;
 	long double complex xn = x;
@@ -56,8 +62,8 @@ double complex gpf_exponential(long double complex x)
 
 	for (int n=1; ; n++)
 	{
-		sum += gpf(n) * xn;
-		xn *= x / ((long double) n);
+		sum += func(n) * xn;
+		xn *= x / ((long double) n+1);
 		if (n*cabsl(xn) < MAX_PREC*cabsl(sum)) break;
 		if (max_iter < n) break;
 	}
@@ -69,7 +75,7 @@ double complex gpf_exponential(long double complex x)
 	return sum;
 }
 
-double complex gpf_lambert(double complex x)
+double complex lambert_genfunc(double complex x, int (*func)(int))
 {
 	double complex sum = 0;
 	double complex xn = x;
@@ -79,7 +85,7 @@ double complex gpf_lambert(double complex x)
 
 	for (int n=1; ; n++)
 	{
-		sum += gpf(n) * xn / (1.0 - xn);
+		sum += func(n) * xn / (1.0 - xn);
 		xn *= x;
 		if (n*cabs(xn) < MAX_PREC*cabs(sum)) break;
 		if (max_iter < n) break;
@@ -93,8 +99,19 @@ double complex gpf_lambert(double complex x)
 	max_iter = itermax;
    double complex z = re_q + I * im_q;
 
-	// double complex g = gpf_ordinary(z);
-	double complex g = gpf_exponential(z);
+      // double t = moebius_mu (i+1);
+      // double t = mertens_m (i+1);
+      // double t = liouville_omega (i+1);
+      // double t = liouville_lambda (i+1);
+      // double t = mangoldt_lambda (i+1);
+      // double t = thue_morse (i+1);
+      // int tm = thue_morse (i+1);
+
+		// euler q-series aka dedekind eta,
+
+
+	double complex g = ordinary_genfunc(z, totient_phi);
+	// double complex g = gpf_exponential(z);
 	// g *= cexp(-z);
 	// g *= exp(-cabs(z)) / cabs(z);
 	// double complex g = gpf_normed(z);
@@ -112,7 +129,7 @@ double complex gpf_lambert(double complex x)
 	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
-static double plot_big(double re_q, double im_q, int itermax, double param)
+/* static */ double plot_big(double re_q, double im_q, int itermax, double param)
 {
 	cpx_t sum, z;
 	cpx_init(sum);
@@ -131,50 +148,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 #endif
 
-// #define EXPO 1
-#if EXPO
-	cpx_gpf_exponential(sum, z, 20);
-	// cpx_gpf_sine(sum, z, 20);
-	// cpx_gpf_exponential_shift(sum, z, itermax, 25);
-	// cpx_gpf_exponential_newton(sum, z, itermax, 25);
-
-	// extract
-	mpf_t val;
-	mpf_init(val);
-	cpx_abs(val, sum);
-
-	double rv = mpf_get_d(val);
-// rv = cpx_get_re(sum);
-
-	// Divide by z for plotting.
-	double r = sqrt(re_q*re_q + im_q*im_q);
-	double lr = log(r);
-	rv *= lr / r;
-	// double regul = exp(-1.0/(r*r));
-	// rv *= (1.0-regul) + regul * lr*lr / (r*r);
-
-	return rv;
-#endif
-
-// #define RANDY 1
-#if RANDY
-	cpx_random_exponential_shift(sum, z, itermax, 25);
-
-	// extract
-	mpf_t val;
-	mpf_init(val);
-	cpx_abs(val, sum);
-
-	double rv = mpf_get_d(val);
-
-	// Divide by z for plotting.
-	double r = sqrt(re_q*re_q + im_q*im_q);
-	double lr = log(r);
-	rv *= (lr*lr) / r;
-
-	return rv;
-#endif
 }
 
-// DECL_MAKE_HEIGHT(ploto);
-DECL_MAKE_HEIGHT(plot_big);
+DECL_MAKE_HEIGHT(ploto);
+// DECL_MAKE_HEIGHT(plot_big);

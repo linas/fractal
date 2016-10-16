@@ -149,6 +149,7 @@ static double a_s (double re_q, double im_q)
 
 void 
 MakeHisto (
+   char     *name,
    float  	*glob,
    int 		sizex,
    int 		sizey,

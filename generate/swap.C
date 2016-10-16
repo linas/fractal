@@ -354,6 +354,7 @@ rswap (long double sre, long double sim, int itermax)
 
 void 
 MakeHisto (
+   char     *name,
    float  	*glob,
    int 		sizex,
    int 		sizey,

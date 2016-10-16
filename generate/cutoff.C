@@ -74,6 +74,7 @@ immob (double a, double b, double c, double d, double x, double y)
 
 void 
 MakeHisto (
+   char     *name,
    float  	*glob,
    int 		sizex,
    int 		sizey,

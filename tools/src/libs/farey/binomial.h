@@ -6,11 +6,14 @@
 #ifndef BINOMIAL_H__
 #define BINOMIAL_H__
 
+#include <complex.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <complex.h>
+//  C and C++ is fugnuts insane in complex support.
+#define complex _Complex
 
 // brute-force factorial function
 long double factorial (int n);

@@ -26,6 +26,7 @@
 
 void 
 MakeHisto (
+   char     *name,
    float  	*glob,
    int 		sizex,
    int 		sizey,

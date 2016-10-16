@@ -13,6 +13,9 @@
 
 #include "brat.h"
 
+//  C and C++ is fugnuts insane in complex support.
+#define complex _Complex
+
 /* ======================================================================= */
 
 	

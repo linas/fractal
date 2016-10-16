@@ -2485,6 +2485,10 @@ extern "C" {
    extern FILE *Fopen(char *name, char *ext);
 };
 
+int num_names = 0;
+MakeHeightCB* callbacks[MAX_NUM_NAMES];
+char* main_names[MAX_NUM_NAMES];
+
 int
 main (int argc, char *argv[])
 {
@@ -2550,8 +2554,8 @@ main (int argc, char *argv[])
 	if (!progname) progname = argv[0];
 	else progname ++;
 
-	MakeHisto (data, data_width, data_height,
-                  re_center, im_center, width, height, itermax, renorm);
+	MakeHisto (progname, data, data_width, data_height,
+              re_center, im_center, width, height, itermax, renorm);
 
    if (!strcmp(progname, "brat"))
    mandelbrot_out (data, data_width, data_height,

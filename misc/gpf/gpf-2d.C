@@ -76,7 +76,7 @@ double complex gpf_exponential(long double complex x)
 	for (int n=1; ; n++)
 	{
 		sum += gpf(n) * xn;
-		xn *= x / ((long double) n);
+		xn *= x / ((long double) n+1);
 		if (n*cabsl(xn) < MAX_PREC*cabsl(sum)) break;
 		if (max_iter < n) break;
 	}

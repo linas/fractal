@@ -10,7 +10,10 @@
  * modernize -- Linas Vepstas March 1996
  * more stuff -- January 2000
  * more stuff -- October 2004
+ * godawful hackery - October 2016
  */
+
+#include <string.h>
 
 /**
  * MakeHisto -- callback for making a generic scatterplot.
@@ -19,6 +22,7 @@
  * the callback should fill in the 2D array with values.
  */
 void MakeHisto (
+   char     *name,     /* value of argv[0] */
    float  	*glob,
    int 		sizex,
    int 		sizey,
@@ -54,9 +58,47 @@ MakeHeightWrap (
    double 	renorm,
 	MakeHeightCB cb);
 
+#define MAX_NUM_NAMES 100
+extern int num_names;
+extern MakeHeightCB* callbacks[MAX_NUM_NAMES];
+extern char* main_names[MAX_NUM_NAMES];
+
+// Declare a named callback.
+#define DECL_HEIGHT(name,cb) \
+main_names[num_names] = name; \
+callbacks[num_names] = &cb; \
+num_names ++;
+
+#define MAKE_HEIGHT     \
+void MakeHisto (        \
+   char     *name,      \
+   float  	*glob,      \
+   int 		sizex,      \
+   int 		sizey,      \
+   double	re_center,  \
+   double	im_center,  \
+   double	width,      \
+   double	height,     \
+   int		itermax,    \
+	double 	renorm)     \
+{                       \
+	int i;                                                        \
+	for (i=0; i<num_names; i++) {                                 \
+      if (0 == strcmp(name, main_names[i])) break;               \
+	}                                                             \
+	if (num_names <= i) {                                         \
+		fprintf(stderr, "Unable to find callback for %s\n", name); \
+		exit(1);                                                   \
+	}                                                             \
+   MakeHeightWrap (glob, sizex, sizey, re_center, im_center,     \
+       width, height, itermax, renorm, *callbacks[i]);           \
+}
+
+
 
 #define DECL_MAKE_HEIGHT(cb)  \
 void MakeHisto (        \
+   char     *name,      \
    float  	*glob,      \
    int 		sizex,      \
    int 		sizey,      \
@@ -106,6 +148,7 @@ MakeBifurWrap (
 
 #define DECL_MAKE_BIFUR(cb)  \
 void MakeHisto (        \
+   char     *name,      \
    float  	*glob,      \
    int 		sizex,      \
    int 		sizey,      \
