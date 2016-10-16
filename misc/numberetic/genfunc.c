@@ -30,7 +30,7 @@
  *    func(n) is bounded by n.  i.e. this is to gaurantee good
  *    data when the system is not overflowing.
  */
-void cpx_ordinary_gf(cpx_t sum, cpx_t z, int prec, int (*func)(int))
+void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
 {
 	mpf_t zabs, gabs, epsi;
 	mpf_init (gabs);
@@ -91,7 +91,7 @@ void cpx_ordinary_gf(cpx_t sum, cpx_t z, int prec, int (*func)(int))
  * Note the assumption about the leading asymptotic behavior of
  * the series.
  */
-void cpx_exponential_gf(cpx_t sum, cpx_t z, int prec, int (*func)(int))
+void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
 {
 	mpf_t zabs, gabs, epsi, fact;
 	mpf_init (gabs);

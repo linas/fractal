@@ -1,5 +1,5 @@
 /*
- * Generating functions for greatest prime factors.
+ * Generating functions for mis arithmetic series
  * 2D phase plot.
  *
  * April 2016
@@ -14,7 +14,7 @@
 
 #include <gpf.h>
 #include "brat.h"
-#include "gpf-gen-bignum.h"
+#include "genfunc.h"
 
 //  C and C++ is fugnuts insane in complex support.
 #define complex _Complex
@@ -38,25 +38,6 @@ double complex gpf_ordinary(double complex x)
 		sum += gpf(n) * xn;
 		xn *= x;
 		if (n*cabs(xn) < MAX_PREC*cabs(sum)) break;
-		if (max_iter < n) break;
-	}
-
-	return sum;
-}
-
-double complex gpf_normed(double complex x)
-{
-	double complex sum = 0;
-	double complex xn = x;
-
-	if (cabs(x) < 1.0e-16) return x;
-	if (0.9999999 <= cabs(x)) return 0.0;
-
-	for (int n=1; ; n++)
-	{
-		sum += gpf(n) * xn / ((double) n);
-		xn *= x;
-		if (cabs(xn) < MAX_PREC*cabs(sum)) break;
 		if (max_iter < n) break;
 	}
 
@@ -193,185 +174,7 @@ static double plot_big(double re_q, double im_q, int itermax, double param)
 
 	return rv;
 #endif
-
-#define RECIP 1
-#ifdef RECIP
-
-	#ifdef PROJECT_TO_SPHERE
-		// Perform a rojection to the Riemann spehre.
-		// Sucks, mostly. Sucks completely, actually.
-		// printf("duuude in= %f %f ", re_q, im_q);
-		double rr = sqrt(re_q*re_q + im_q*im_q);
-		if (1.0 <= rr) return 0.0;
-		re_q /= rr;
-		im_q /= rr;
-		rr = (1.0 + rr)/(1.0 - rr);
-		rr = pow(rr, param);
-
-		re_q *= rr;
-		im_q *= rr;
-		// printf("  out=%f %f\n", re_q, im_q);
-
-		if (itermax < rr) return 0.0;
-		cpx_set_d(z, re_q, im_q);
-	#endif // PROJECT_TO_SPHERE
-
-#define UN_CIRCLE 1
-	#ifdef UN_CIRCLE
-		// printf("duuude in= %f %f \n", re_q, im_q);
-		double theta = M_PI * im_q;
-
-		#ifdef INSCRIBE
-			double x = re_q;
-			double y = sin(0.5*theta);
-			// if (0.9*param < x*x*y and x*x*y < 1.1*param) return 0.0;
-			x = pow(x, 1.5);
-			if (0.9*param < x*y and x*y < 1.1*param) return 0.0;
-		#endif
-
-
-#if LINEAR_CENTER_LINE
-		double rr = itermax;
-		rr = exp(rr * M_LN2);  // pow (2, itermax * re_q)
-	   rr += param * re_q; // left-right offsets.
-#endif
-		double rr = itermax + param * re_q;
-		rr = exp(rr * M_LN2);  // pow (2, param * re_q)
-
-		im_q = rr*sin (theta);
-		re_q = rr*cos (theta);
-		cpx_set_d(z, re_q, im_q);
-
-		// printf("duuude              out= %f %f \n", re_q, im_q);
-	#endif // UN_CIRCLE
-
-	cpx_gpf_exponential_recip(sum, z, 25);
-	// extract
-	mpf_t val;
-	mpf_init(val);
-	cpx_abs(val, sum);
-
-	double rv = mpf_get_d(val);
-
-	// Divide by z for plotting.
-	double r = sqrt(re_q*re_q + im_q*im_q);
-	double lr = log(r+1);
-	double llr = log(lr+1);
-	// rv *= lr * lr * lr;
-	// rv /= (lr * lr * lr);  // used for the off-by-one pictures
-	// rv *= llr * llr * llr;
-	// rv *= lr * lr * lr *lr;
-	// rv *= lr * lr * lr *lr *lr;  // used for the main pictures
-	rv *= llr * llr * llr *llr *lr;
-
-	return rv;
-#endif
-
-// #define ESS 1
-#ifdef ESS
-	cpx_t s;
-	cpx_init(s);
-
-	cpx_set_d(s, param, 0.0);
-
-	cpx_gpf_exponential_s(sum, z, s, 15);
-	// extract
-	mpf_t val;
-	mpf_init(val);
-	cpx_abs(val, sum);
-
-	double rv = mpf_get_d(val);
-
-rv = cpx_get_re(sum);
-	// Divide by z for plotting.
-	double r = sqrt(re_q*re_q + im_q*im_q);
-	double lr = log(r);
-	// rv /= (lr * lr);
-
-	// Standard S=1 normalization.
-	rv /= r*r / (lr*lr);
-
-	return rv;
-#endif
-
-// #define POCH 1
-#ifdef POCH
-	cpx_t fal;
-	cpx_init(fal);
-	cpx_gpf_poch_rising(sum, z, 45);
-	// cpx_gpf_poch_falling(sum, z, 35);
-	// cpx_gpf_poch_falling(fal, z, 25);
-	// cpx_sub(sum, sum, fal);
-
-	// extract
-	mpf_t val;
-	mpf_init(val);
-	cpx_abs(val, sum);
-
-	double rv = mpf_get_d(val);
-	double r = sqrt(re_q*re_q + im_q*im_q);
-	// double lr = log(r);
-// double gre = cpx_get_re(sum);
-// double gim = cpx_get_im(sum);
-// printf("duude re=%g im=%g gre=%g gim=%g\n", re_q, im_q, gre, gim);
-
-	// rv *= exp(-2.0*sqrt(r));
-	rv /= r;
-	// rv *= 5.0;
-#if 0
-double lv = log(rv);
-if (lv < 0.0) lv = 0.0;
-printf("duude rv=%g scale=%g\n", rv, lv/lr);
-#endif
-// printf("duude r=%g rv=%g \n", r, rv);
-
-	return rv;
-#endif
-}
-
-/* static */ double plot_diri(double re_q, double im_q, int itermax, double param)
-{
-static int cnt=0;
-int id = ++cnt;
-	// discard outside of the unit circle.
-	if (1.0 <= re_q*re_q + im_q*im_q) return 0.0;
-
-	// Map the inside of a unit circle to the right-hand complex
-	// half-plane.
-
-	// if q in circle, and z in upper half plane, then
-	// q = (z-1)/(z+1)  or z = (1+q) / (1-q)
-	double complex q = re_q + I * im_q;
-	double complex z = (1.0 + q) / (1.0 - q);
-
-	// Next, we want to rotate by 90 and offset.
-	// Thus, z becomes s so that |s| > offset
-	z *= -I;
-	z += 4.0;
-
-	// Finally, avoid travelling too far up the imaginary axis,
-	// as this hinders convergence.
-	if (4.0 < fabs(cimag(z))) return 0.0;
-
-	if (3.6 >= creal(z)) return 0.0;
-
-	cpx_t sum, ess;
-	cpx_init(sum);
-	cpx_init(ess);
-
-time_t start = time(NULL);
-printf("Start pix=%d start work on %g %g\n", id, creal(z), cimag(z));
-	cpx_set_d(ess, creal(z), cimag(z));
-
-	cpx_gpf_dirichlet(sum, ess, 15);
-	// cpx_borwein_zeta(sum, ess, 15);
-time_t stop = time(NULL);
-
-	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
-printf("Done pix=%d done took %lu on %g %g val=%g\n", id, stop-start, creal(z), cimag(z), rv);
-	return rv;
 }
 
 // DECL_MAKE_HEIGHT(ploto);
 DECL_MAKE_HEIGHT(plot_big);
-// DECL_MAKE_HEIGHT(plot_diri);
