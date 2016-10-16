@@ -19,9 +19,18 @@
 #include "gpf-gen-bignum.h"
 
 /*
- * Ordinary generating function for the greatest prime factor.
+ * Ordinary generating function for function func.
+ * Computes ogf(z) = sum_{n=1}^\infty func(n) z^n
+ *
+ * Assumes that func(n) is some arithmetic series.
+ * Assumes that ogf(z) does not converge for |z|>=1
+ * Assumes that ogf9z) converges poorly near |z|=1, so that
+ *    some termination measures are taken, so that the sum does
+ *    not run forever. The termination measures assume that
+ *    func(n) is bounded by n.  i.e. this is to gaurantee good
+ *    data when the system is not overflowing.
  */
-void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
+void cpx_ordinary_gf(cpx_t sum, cpx_t z, int prec, int (*func)(int))
 {
 	mpf_t zabs, gabs, epsi;
 	mpf_init (gabs);
@@ -41,9 +50,11 @@ void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
 	mpf_neg(gabs, gabs);
 	if (0 > mpf_cmp(gabs, epsi)) return;
 
+	// Limit the number of iterations as we approach the edge.
+	// This assumes that func(n) is bounded by n
 	double dist_to_circle = mpf_get_d(gabs);
 	int niter = ceil (2.302585*prec / dist_to_circle);
-	niter += ceil (log(niter) / dist_to_circle); // gpf bounded by n
+	niter += ceil (log(niter) / dist_to_circle); // assume func bounded by n
 
 	cpx_t zn, term;
 	cpx_init(zn);
@@ -52,7 +63,7 @@ void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
 
 	for (int n=1; n < niter ; n++)
 	{
-		cpx_times_ui(term, zn, gpf(n));
+		cpx_times_ui(term, zn, func(n));
 		cpx_add(sum, sum, term);
 		cpx_mul(zn, zn, z);
 
@@ -73,10 +84,14 @@ void cpx_gpf_ordinary(cpx_t sum, cpx_t z, int prec)
 
 
 /**
- * Exponential generating function for the greatest prime factor.
- * shifted .. aka the 'offset'th derivative.
+ * Exponential generating function for the arithmetic series
+ *
+ * Computes egf(z) = exp(-|z|) sum_{n=1}^infty func(n) z^n / n!
+ *
+ * Note the assumption about the leading asymptotic behavior of
+ * the series.
  */
-void cpx_gpf_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
+void cpx_exponential_gf(cpx_t sum, cpx_t z, int prec, int (*func)(int))
 {
 	mpf_t zabs, gabs, epsi, fact;
 	mpf_init (gabs);
@@ -100,7 +115,7 @@ void cpx_gpf_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
 
 	for (int n=1; ; n++)
 	{
-		cpx_times_ui(term, zn, gpf(n+offset));
+		cpx_times_ui(term, zn, func(n));
 		cpx_times_mpf(term, term, fact);
 		cpx_add(sum, sum, term);
 
@@ -119,23 +134,10 @@ void cpx_gpf_exponential_shift(cpx_t sum, cpx_t z, int offset, int prec)
 		mpf_div_ui(fact, fact, n+1);
 	}
 
-	// The offset is the n'th derivative.  That means that
-	// there is a constant term; the above loop did not handle it.
-	// add that constant now.
-	if (offset != 0)
-	{
-		cpx_add_ui(sum, sum, gpf(offset), 0);
-	}
-
 	// Remove the leading exponential order.
 	cpx_abs(gabs, z);
 	mpf_neg(gabs, gabs);
 	fp_exp(gabs, gabs, prec);
 
 	cpx_times_mpf(sum, sum, gabs);
-}
-
-void cpx_gpf_exponential(cpx_t sum, cpx_t z, int prec)
-{
-	cpx_gpf_exponential_shift(sum, z, 0, prec);
 }
