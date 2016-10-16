@@ -154,6 +154,21 @@ static double mertens_m_exp_mag(double re_q, double im_q, int itermax, double pa
 	return cabs(g);
 }
 
+static int thue_morse(int n)
+{
+   if (0 == n) return 0;
+   if (1 == n) return 1;
+   if (0 == n%2) return thue_morse (n/2);
+   return (1-thue_morse ((n-1)/2));
+}
+static double thue_morse_exp_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, thue_morse);
+	return cabs(g);
+}
+
 // ========================================================
 // other stuff.
 /* static */ double ploto(double re_q, double im_q, int itermax, double param)
@@ -202,6 +217,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
 	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
+	DECL_HEIGHT("thue_morse", thue_morse_exp_mag);
 }
 
 // DECL_MAKE_HEIGHT(plot_big);
