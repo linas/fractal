@@ -8,9 +8,12 @@ FUNC=../../tools/lib/libfunc.a
 HIST=../../generate/brat.o ../../generate/util.o
 
 
-all: genfunc-2d
+all: genfunc-2d totient_ord_phase
 
 genfunc-2d: genfunc-2d.o genfunc.o $(HIST) $(FUNC)
+
+totient_ord_phase: genfunc-2d.o genfunc.o
+	ln genfunc-2d totient_ord_phase
 
 genfunc.o: genfunc.h
 

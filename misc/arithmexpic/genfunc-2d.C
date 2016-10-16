@@ -94,6 +94,14 @@ double complex lambert_genfunc(double complex x, int (*func)(int))
 	return sum;
 }
 
+static double totient_ord_phase(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = ordinary_genfunc(z, totient_phi);
+	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+}
+
 /* static */ double ploto(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -137,6 +145,7 @@ double complex lambert_genfunc(double complex x, int (*func)(int))
 
 	cpx_set_d(z, re_q, im_q);
 
+return 0.0;
 // #define PHASE 1
 #if PHASE
 	// cpx_gpf_ordinary_recip(sum, z, 15);
@@ -150,5 +159,9 @@ double complex lambert_genfunc(double complex x, int (*func)(int))
 
 }
 
-DECL_MAKE_HEIGHT(ploto);
+__attribute__((constructor)) void decl_things() {
+	DECL_HEIGHT("totient_ord_phase", totient_ord_phase);
+}
+
 // DECL_MAKE_HEIGHT(plot_big);
+MAKE_HEIGHT;

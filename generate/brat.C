@@ -2487,7 +2487,16 @@ extern "C" {
 
 int num_names = 0;
 MakeHeightCB* callbacks[MAX_NUM_NAMES];
-char* main_names[MAX_NUM_NAMES];
+const char* main_names[MAX_NUM_NAMES];
+
+
+void decl_height(const char* name, MakeHeightCB* cb)
+{
+	main_names[num_names] = name;
+	callbacks[num_names] = cb;
+	num_names ++;
+}
+
 
 int
 main (int argc, char *argv[])

@@ -16,7 +16,7 @@
 #include <binomial.h>
 #include <gpf.h>
 #include <prime.h>
-#include "gpf-gen-bignum.h"
+#include "genfunc.h"
 
 /*
  * Ordinary generating function for function func.

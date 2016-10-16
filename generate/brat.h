@@ -61,13 +61,15 @@ MakeHeightWrap (
 #define MAX_NUM_NAMES 100
 extern int num_names;
 extern MakeHeightCB* callbacks[MAX_NUM_NAMES];
-extern char* main_names[MAX_NUM_NAMES];
+extern const char* main_names[MAX_NUM_NAMES];
 
 // Declare a named callback.
+extern void decl_height(const char* name, MakeHeightCB* cb);
+
 #define DECL_HEIGHT(name,cb) \
-main_names[num_names] = name; \
-callbacks[num_names] = &cb; \
-num_names ++;
+	main_names[num_names] = name; \
+	callbacks[num_names] = &cb; \
+	num_names ++;
 
 #define MAKE_HEIGHT     \
 void MakeHisto (        \
