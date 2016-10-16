@@ -146,6 +146,14 @@ static double liouv_omega_exp_mag(double re_q, double im_q, int itermax, double 
 	return cabs(g);
 }
 
+static double mertens_m_exp_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, mertens_m);
+	return cabs(g);
+}
+
 // ========================================================
 // other stuff.
 /* static */ double ploto(double re_q, double im_q, int itermax, double param)
@@ -153,14 +161,9 @@ static double liouv_omega_exp_mag(double re_q, double im_q, int itermax, double 
 	max_iter = itermax;
    double complex z = re_q + I * im_q;
 
-      // double t = mertens_m (i+1);
-      // double t = liouville_omega (i+1);
       // double t = liouville_lambda (i+1);
       // double t = mangoldt_lambda (i+1);
       // double t = thue_morse (i+1);
-
-		// euler q-series aka dedekind eta,
-
 
 	double complex g = ordinary_genfunc(z, totient_phi);
 	// double complex g = gpf_normed(z);
@@ -198,6 +201,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("mobius_exp_mag", mobius_exp_mag);
 	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
 	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
+	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
 }
 
 // DECL_MAKE_HEIGHT(plot_big);

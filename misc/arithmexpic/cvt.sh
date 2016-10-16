@@ -34,12 +34,21 @@
 
 # ------------------
 # ./liouv_omega_exp_mag liouv-omega-120 400 400 5000 0 0 120
-../../generate/renorm liouv-omega-120 rg 4.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-120.png
+# ../../generate/renorm liouv-omega-120 rg 4.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-120.png
 
 # ./liouv_omega_exp_mag liouv-omega-120 400 400 5000 0 0 1000
-../../generate/renorm liouv-omega-1K rg 4.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-1K.png
+# ../../generate/renorm liouv-omega-1K rg 4.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-1K.png
+
+# ------------------
+# ./mertens_m mertens-m-120 400 400 5000 0 0 120
+../../generate/renorm mertens-m-120 rg 4.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mertens-m-120.png
+
+# ./mertens_m mertens-m-1K 400 400 5000 0 0 1000
+../../generate/renorm mertens-m-1K rg 4.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mertens-m-1K.png
 
 # ------------------
 ../../generate/renorm exp-x rg 4.0
