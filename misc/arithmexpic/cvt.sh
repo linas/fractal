@@ -19,16 +19,16 @@
 # ../../generate/renorm mob-exp-mag-120 rg 6.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-120.png
 
-# ./mobius_exp_mag mob-exp-mag-120 400 400 5000 0 0 1000
+# ./mobius_exp_mag mob-exp-mag-1K 400 400 5000 0 0 1000
 # ../../generate/renorm mob-exp-mag-1K rg 6.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-1K.png
 
 # ------------------
-# ./divisor_exp_mag div-exp-mag-120 400 400 5000 0 0 120
+# ./divisor_exp_mag divisor-exp-mag-120 400 400 5000 0 0 120
 # ../../generate/renorm divisor-exp-mag-120 rg 6.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-exp-mag-120.png
 
-# ./divisor_exp_mag div-exp-mag-120 400 400 5000 0 0 1000
+# ./divisor_exp_mag divisor-exp-mag-1K 400 400 5000 0 0 1000
 # ../../generate/renorm divisor-exp-mag-1K rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-exp-mag-1K.png
 
@@ -37,7 +37,7 @@
 # ../../generate/renorm liouv-omega-120 rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-120.png
 
-# ./liouv_omega_exp_mag liouv-omega-120 400 400 5000 0 0 1000
+# ./liouv_omega_exp_mag liouv-omega-1K 400 400 5000 0 0 1000
 # ../../generate/renorm liouv-omega-1K rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-1K.png
 
