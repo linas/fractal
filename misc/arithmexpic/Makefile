@@ -16,6 +16,7 @@ totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d totient_ord_phase
 	ln -f genfunc-2d totient_exp_phase
 	ln -f genfunc-2d totient_exp_mag
+	ln -f genfunc-2d mobius_exp_mag
 
 genfunc.o: genfunc.h
 
