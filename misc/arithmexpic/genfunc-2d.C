@@ -75,6 +75,31 @@ double complex exponential_genfunc(long double complex x, int (*func)(int))
 	return sum;
 }
 
+/*
+ * Exponential generating function for arithmetic series
+ */
+double complex exp_genfunc_d(long double complex x, double (*func)(int))
+{
+	long double complex sum = 0;
+	long double complex xn = x;
+
+	if (cabsl(x) < MAX_PREC) return x;
+
+	for (int n=1; ; n++)
+	{
+		sum += func(n) * xn;
+		xn *= x / ((long double) n+1);
+		if (n*cabsl(xn) < MAX_PREC*cabsl(sum)) break;
+		if (max_iter < n) break;
+	}
+
+	long double scale = expl(-cabsl(x));
+	sum *= scale;
+// printf("duuude %g sum=%g\n", cabs(x), cabs(sum));
+
+	return sum;
+}
+
 double complex lambert_genfunc(double complex x, int (*func)(int))
 {
 	double complex sum = 0;
@@ -169,6 +194,30 @@ static double thue_morse_exp_mag(double re_q, double im_q, int itermax, double p
 	return cabs(g);
 }
 
+static double thue_morse_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z; cpx_init(sum); cpx_init(z);
+	mpf_t val; mpf_init(val);
+
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_exponential_genfunc(sum, z, 25, thue_morse);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+
+	return rv;
+}
+
+// static double thue_morse_recip(int n) { return 1.0 / (1.0 + thue_morse(n)); }
+static double thue_morse_rev(int n) { return 1.0 - thue_morse(n); }
+static double xperiment(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exp_genfunc_d(z, thue_morse_rev);
+	return cabs(g);
+}
+
 // ========================================================
 // other stuff.
 /* static */ double ploto(double re_q, double im_q, int itermax, double param)
@@ -176,9 +225,8 @@ static double thue_morse_exp_mag(double re_q, double im_q, int itermax, double p
 	max_iter = itermax;
    double complex z = re_q + I * im_q;
 
-      // double t = liouville_lambda (i+1);
-      // double t = mangoldt_lambda (i+1);
-      // double t = thue_morse (i+1);
+   // double t = liouville_lambda (i+1);
+   // double t = mangoldt_lambda (i+1);
 
 	double complex g = ordinary_genfunc(z, totient_phi);
 	// double complex g = gpf_normed(z);
@@ -187,27 +235,6 @@ static double thue_morse_exp_mag(double re_q, double im_q, int itermax, double p
 	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
 
-/* static */ double plot_big(double re_q, double im_q, int itermax, double param)
-{
-	cpx_t sum, z;
-	cpx_init(sum);
-	cpx_init(z);
-
-	cpx_set_d(z, re_q, im_q);
-
-return 0.0;
-// #define PHASE 1
-#if PHASE
-	// cpx_gpf_ordinary_recip(sum, z, 15);
-	cpx_gpf_exponential(sum, z, 20);
-	// cpx_gpf_poch_rising(sum, z, 45);
-	// cpx_gpf_poch_falling(sum, z, 15);
-
-	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
-	return rv;
-#endif
-
-}
 
 __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("totient_ord_phase", totient_ord_phase);
@@ -218,6 +245,8 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
 	DECL_HEIGHT("thue_morse", thue_morse_exp_mag);
+	DECL_HEIGHT("thue_morse_big", thue_morse_big);
+	DECL_HEIGHT("xperiment", xperiment);
 }
 
 // DECL_MAKE_HEIGHT(plot_big);
