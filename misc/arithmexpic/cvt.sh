@@ -32,6 +32,10 @@
 # ../../generate/renorm divisor-exp-mag-1K rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-exp-mag-1K.png
 
+# ./divisor_big divisor-12K 400 400 5000 0 0 12000
+../../generate/renorm divisor-12K rg 2.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-exp-mag-12K.png
+
 # ------------------
 # ./liouv_omega_exp_mag liouv-omega-120 400 400 5000 0 0 120
 # ../../generate/renorm liouv-omega-120 rg 4.0
@@ -63,8 +67,8 @@
 # ../../generate/renorm thue-morse-12K rg 12.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-12K.png
 
-../../generate/renorm thue-morse-120K rg 12.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120K.png
+# ../../generate/renorm thue-morse-120K rg 12.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120K.png
 
 # ------------------
 ../../generate/renorm exp-x rg 12.0
