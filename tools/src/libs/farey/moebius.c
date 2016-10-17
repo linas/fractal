@@ -1,6 +1,6 @@
 /*
  * moebius.c
- * 
+ *
  * Return the Moebius function of an integer.
  * Not intended for large integers, works only for small integers,
  * due to poor-man's factorization algo.
@@ -14,6 +14,7 @@
 #include <math.h>
 #include <malloc.h>
 
+#include "gcf.h"
 #include "moebius.h"
 #include "cache.h"
 
@@ -28,7 +29,7 @@ static unsigned int sieve_max = 0;
 
 /* Initialize and fill in a prime-number sieve.
  * Handles primes up to 4 billion (2^32)
- * long long int should be a 64-bit number 
+ * long long int should be a 64-bit number
  *
  * XXX Ths should be converted to use the code in prime.h and prime.c,
  * but for now, its here, soe as to maximize copiler optimization.
@@ -39,13 +40,13 @@ init_prime_sieve (long long int prod)
 	unsigned int n, j;
 	unsigned int nstart;
 	unsigned int pos;
-	
+
 	if (sieve)
 	{
 		long long int ss = sieve[sieve_max];
 		if (ss*ss > prod) return;
 	}
-		
+
 	unsigned int max = 1000.0+sqrt (prod);
 
 	if (!sieve)
@@ -112,7 +113,7 @@ static int divisor_helper (long long int n, int last_prime_checked)
 	for (ip=last_prime_checked+1; ; ip++)
 	{
 		long long int d = sieve[ip];
-		
+
 		if (d*d >n) break;
 		if (n%d) continue;
 
@@ -135,7 +136,7 @@ int divisor (long long int n)
 	return divisor_helper (n, -1);
 }
 
-/** Sigma arithmetic series, equals divisor airth series for a=0 
+/** Sigma arithmetic series, equals divisor airth series for a=0
  *  Computes the divisors of n, raises each to the a'th power, and
  *  returns thier sum.
  */
@@ -193,7 +194,7 @@ int moebius_mu (int n)
 {
 	if (1 >= n) return 1;
 	if (3 >= n) return -1;
-	
+
 	INIT_PRIME_SIEVE(n);
 
 	/* Implement the dumb/simple moebius algo */
@@ -212,7 +213,7 @@ int moebius_mu (int n)
 		}
 
 		if (1 == n) break;
-		if (k*k > n) 
+		if (k*k > n)
 		{
 			cnt ++;
 			break;
@@ -238,10 +239,55 @@ int mertens_m (int n)
 
 /* ====================================================== */
 
+int carmichael_lambda (int n)
+{
+	if (9 >= n)
+	{
+		if (2 >= n) return 1;
+		if (4 >= n) return 2;
+		if (5 == n) return 4;
+		if (6 == n) return 2;
+		if (7 == n) return 6;
+		if (8 == n) return 2;
+		if (9 == n) return 6;
+	}
+
+	INIT_PRIME_SIEVE(n);
+
+	/* Implement the dumb/simple factorization algo */
+	int i;
+	for (i=0; ; i++)
+	{
+		int p = sieve[i];
+		if (0 == n%p)
+		{
+			int m = n;
+			m /= p;
+			while (0 == m%p) m /= p;
+
+			// Case of Euler's function for prime powers.
+			if (1 == m) return (p-1)*n/p;
+
+			n = n / m;
+			int t = (p-1)*n/p;
+
+			int r = carmichael_lambda(n);
+			return lcm32(t,r);
+		}
+		// If we are here, and p*p > n,  then no prime less than
+		// the sqrt of n divides it. Ergo, n must be prime.
+		if (p*p > n) return n-1;
+	}
+
+	return 0;
+}
+
+/* ====================================================== */
+
 int exp_mangoldt_lambda (int n)
 {
 	if (1 >= n) return 1;
-	
+
 	INIT_PRIME_SIEVE(n);
 
 	/* Implement the dumb/simple factorization algo */
@@ -257,6 +303,8 @@ int exp_mangoldt_lambda (int n)
 			if (1 == n) return p;
 			return 1;
 		}
+		// If we are here, and p*p > n,  then no prime less than
+		// the sqrt of n divides it. Ergo, n must be prime.
 		if (p*p > n) return n;
 	}
 
@@ -297,7 +345,7 @@ DECLARE_LD_CACHE (mangoldt_idx_cache);
 DECLARE_UI_CACHE (mangoldt_pow_cache);
 static int man_last_val =1;
 static int man_last_idx =0;
-	
+
 long double mangoldt_lambda_indexed (int n)
 {
 	if (ld_one_d_cache_check (&mangoldt_idx_cache, n))
@@ -316,7 +364,7 @@ long double mangoldt_lambda_indexed (int n)
 				man_last_idx++;
 				ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
 				ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
-				if (n == man_last_idx) 
+				if (n == man_last_idx)
 					return val;
 			}
 		}
@@ -341,7 +389,7 @@ unsigned int mangoldt_lambda_index_point (int n)
 				man_last_idx++;
 				ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
 				ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
-				if (n == man_last_idx) 
+				if (n == man_last_idx)
 					return man_last_val;
 			}
 		}
@@ -423,7 +471,7 @@ int test_divisor (void)
 	{
 		if (divisor(i) != divisor_simple_algo(i))
 		{
-			printf ("ERROR: in divisor function at n=%d\n", i); 
+			printf ("ERROR: in divisor function at n=%d\n", i);
 			have_error ++;
 		}
 	}
@@ -485,7 +533,7 @@ int test_omega(void)
 			// printf ("%d divides %d and sum=%d\n", d, n, sum);
 		}
 		if (1 != n) sum += liouville_lambda (n);
-		
+
 		if (0 == sum) continue;
 
 		int ns = sqrt (n);
