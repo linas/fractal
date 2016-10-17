@@ -25,6 +25,7 @@ totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d mertens_m
 	ln -f genfunc-2d mangoldt_lambda
 	ln -f genfunc-2d exp_mangoldt_lambda
+	ln -f genfunc-2d exp_mango_big
 	ln -f genfunc-2d thue_morse
 	ln -f genfunc-2d thue_morse_big
 	ln -f genfunc-2d xperiment
