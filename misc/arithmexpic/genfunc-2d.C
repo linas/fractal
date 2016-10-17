@@ -215,6 +215,15 @@ static double mertens_m_exp_mag(double re_q, double im_q, int itermax, double pa
 	return cabs(g);
 }
 
+double mango(int n) { return mangoldt_lambda_cached(n); }
+static double mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exp_genfunc_d(z, mango);
+	return cabs(g);
+}
+
 static int thue_morse(int n)
 {
    if (0 == n) return 0;
@@ -262,8 +271,6 @@ static double xperiment(double re_q, double im_q, int itermax, double param)
 	max_iter = itermax;
    double complex z = re_q + I * im_q;
 
-   // double t = mangoldt_lambda (i+1);
-
 	double complex g = ordinary_genfunc(z, totient_phi);
 	// double complex g = gpf_normed(z);
 	// double complex g = gpf_lambert(z);
@@ -283,6 +290,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
 	DECL_HEIGHT("liouv_lambda", liouv_lambda);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
+	DECL_HEIGHT("mangoldt_lambda", mangoldt_lambda_exp_mag);
 	DECL_HEIGHT("thue_morse", thue_morse_exp_mag);
 	DECL_HEIGHT("thue_morse_big", thue_morse_big);
 	DECL_HEIGHT("xperiment", xperiment);

@@ -70,6 +70,15 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-12K.png
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mertens-m-1K.png
 
 # ------------------
+# ./mangoldt_lambda mangoldt-lambda-120 400 400 5000 0 0 120
+../../generate/renorm mangoldt-lambda-120 rg 3.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-120.png
+
+# ./mangoldt_lambda mangoldt-lambda-1K 400 400 5000 0 0 1000
+../../generate/renorm mangoldt-lambda-1K rg 3.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-1K.png
+
+# ------------------
 # ./thue_morse mertens-m-120 400 400 5000 0 0 120
 # ../../generate/renorm thue-morse-120 rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120.png
@@ -86,6 +95,6 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-12K.png
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120K.png
 
 # ------------------
-../../generate/renorm exp-x rg 6.0
+../../generate/renorm exp-x rg 3.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-x.png
 
