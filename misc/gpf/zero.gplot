@@ -38,6 +38,8 @@ set out 'zero-count-fixed.png'
 set title "Excess/deficit of zeros of EG(gpf; z)"
 
 set xrange [0:3500]
+set xrange [1827:1837]
+set yrange [-2:18]
 plot "zero-count-fixed.dat" using 1:($2-$1) title "" lw 2, \
      "zero-count-fixed.dat" using 1:(1+log($1+1)+2*log(log($1+1)+1)) title "1 ± (log(r+1) + 2 log(log(r+1)+1))" lw 2, \
      "zero-count-fixed.dat" using 1:(1-log($1+1)-2*log(log($1+1)+1)) title "" lw 2 lc 2, \
