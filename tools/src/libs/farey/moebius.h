@@ -46,12 +46,18 @@ int liouville_omega (int n);
 /** The Liouville lambda function */
 int liouville_lambda (int n);
 
-/** The von Mangoldt Lambda function 
+/** The von Mangoldt Lambda function.
  *  Returns von Mangoldt Lambda for n, which is
  *  log(p) if n is a power of prime p, otherwise 
  *  returns zero. */
 long double mangoldt_lambda (int n);
 long double mangoldt_lambda_cached (int n);
+
+/** Exp of the von Mangoldt Lambda function.
+ *  Returns p if n=p^k for prime p and integer k.
+ *  Else returns 1.
+ */
+int  exp_mangoldt_lambda (int n);
 
 /** The indexed von Mangoldt Lambda function 
  *  Returns the n'th non-zero von Mangoldt value

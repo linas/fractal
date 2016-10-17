@@ -224,9 +224,9 @@ int moebius_mu (int n)
 
 /* ====================================================== */
 
-long double mangoldt_lambda (int n)
+int exp_mangoldt_lambda (int n)
 {
-	if (1 >= n) return 0.0L;
+	if (1 >= n) return 1;
 	
 	INIT_PRIME_SIEVE(n);
 
@@ -234,19 +234,30 @@ long double mangoldt_lambda (int n)
 	int i;
 	for (i=0; ; i++)
 	{
-		int k = sieve[i];
-		if (0 == n%k)
+		int p = sieve[i];
+		if (0 == n%p)
 		{
-			n /= k;
-			while (0 == n%k) n /= k;
+			n /= p;
+			while (0 == n%p) n /= p;
 
-			if (1 == n) return logl ((long double)k);
-			return 0.0L;
+			if (1 == n) return p;
+			return 1;
 		}
-		if (k*k > n) return logl ((long double) n);
+		if (p*p > n) return n;
 	}
 
-	return 0.0L;
+	return 1;
+}
+
+/* ====================================================== */
+
+long double mangoldt_lambda (int n)
+{
+	if (1 >= n) return 0.0L;
+
+	int eml = exp_mangoldt_lambda(n);
+	if (1 == eml) return 0.0L;
+	return logl ((long double) eml);
 }
 
 /* ====================================================== */
