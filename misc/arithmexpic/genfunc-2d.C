@@ -199,6 +199,14 @@ static double liouv_omega_exp_mag(double re_q, double im_q, int itermax, double 
 	return cabs(g);
 }
 
+static double liouv_lambda(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, liouville_lambda);
+	return cabs(g);
+}
+
 static double mertens_m_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -254,7 +262,6 @@ static double xperiment(double re_q, double im_q, int itermax, double param)
 	max_iter = itermax;
    double complex z = re_q + I * im_q;
 
-   // double t = liouville_lambda (i+1);
    // double t = mangoldt_lambda (i+1);
 
 	double complex g = ordinary_genfunc(z, totient_phi);
@@ -274,6 +281,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
 	DECL_HEIGHT("divisor_big", divisor_big);
 	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
+	DECL_HEIGHT("liouv_lambda", liouv_lambda);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
 	DECL_HEIGHT("thue_morse", thue_morse_exp_mag);
 	DECL_HEIGHT("thue_morse_big", thue_morse_big);

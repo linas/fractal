@@ -21,6 +21,7 @@ totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d divisor_exp_mag
 	ln -f genfunc-2d divisor_big
 	ln -f genfunc-2d liouv_omega_exp_mag
+	ln -f genfunc-2d liouv_lambda
 	ln -f genfunc-2d mertens_m
 	ln -f genfunc-2d thue_morse
 	ln -f genfunc-2d thue_morse_big
