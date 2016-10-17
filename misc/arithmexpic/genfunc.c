@@ -66,8 +66,11 @@ void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
 		int funv = func(n);
 		if (0 != funv)
 		{
-			cpx_times_ui(term, zn, funv);
-			cpx_add(sum, sum, term);
+			cpx_times_ui(term, zn, abs(funv));
+			if (funv < 0)
+				cpx_sub(sum, sum, term);
+			else
+				cpx_add(sum, sum, term);
 		}
 		cpx_mul(zn, zn, z);
 
@@ -122,9 +125,12 @@ void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
 		int funv = func(n);
 		if (0 != funv)
 		{
-			cpx_times_ui(term, zn, funv);
+			cpx_times_ui(term, zn, abs(funv));
 			cpx_times_mpf(term, term, fact);
-			cpx_add(sum, sum, term);
+			if (funv < 0)
+				cpx_sub(sum, sum, term);
+			else
+				cpx_add(sum, sum, term);
 
 			// The following checks the loop termination condition,
 			// which is that the size of the term is less than epsilon.

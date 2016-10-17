@@ -154,6 +154,20 @@ static double mobius_exp_mag(double re_q, double im_q, int itermax, double param
 	return cabs(g);
 }
 
+static double mobius_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z; cpx_init(sum); cpx_init(z);
+	mpf_t val; mpf_init(val);
+
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_exponential_genfunc(sum, z, 25, moebius_mu);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+
+	return rv;
+}
+
 static int divisori(int i) { return divisor(i); }
 static double divisor_exp_mag(double re_q, double im_q, int itermax, double param)
 {
@@ -256,6 +270,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("totient_exp_phase", totient_exp_phase);
 	DECL_HEIGHT("totient_exp_mag", totient_exp_mag);
 	DECL_HEIGHT("mobius_exp_mag", mobius_exp_mag);
+	DECL_HEIGHT("mobius_big", mobius_big);
 	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
 	DECL_HEIGHT("divisor_big", divisor_big);
 	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
