@@ -80,12 +80,15 @@
 
 # ------------------
 # ./exp_mangoldt_lambda emango-lambda-120 400 400 5000 0 0 120
-../../generate/renorm emango-lambda-120 rg 2
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-120.png
+# ../../generate/renorm emango-lambda-120 rg 2
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-120.png
 
 # ./exp_emango_lambda emango-lambda-1K 400 400 5000 0 0 1000
-../../generate/renorm emango-lambda-1K rg 1.2
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-1K.png
+# ../../generate/renorm emango-lambda-1K rg 1.2
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-1K.png
+
+# ../../generate/renorm emango-lambda-12K rg 0.4
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-12K.png
 
 # ------------------
 # ./thue_morse mertens-m-120 400 400 5000 0 0 120

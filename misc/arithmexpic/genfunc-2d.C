@@ -146,6 +146,20 @@ static double totient_exp_mag(double re_q, double im_q, int itermax, double para
 	return cabs(g);
 }
 
+static double totient_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z; cpx_init(sum); cpx_init(z);
+	mpf_t val; mpf_init(val);
+
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_exponential_genfunc(sum, z, 25, totient_phi);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+
+	return rv;
+}
+
 static double mobius_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -314,6 +328,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("totient_ord_phase", totient_ord_phase);
 	DECL_HEIGHT("totient_exp_phase", totient_exp_phase);
 	DECL_HEIGHT("totient_exp_mag", totient_exp_mag);
+	DECL_HEIGHT("totient_big", totient_big);
 	DECL_HEIGHT("mobius_exp_mag", mobius_exp_mag);
 	DECL_HEIGHT("mobius_big", mobius_big);
 	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
