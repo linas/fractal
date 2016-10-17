@@ -18,6 +18,13 @@ extern "C" {
  */
 unsigned long gcf32 (unsigned long nume, unsigned long denom);
 
+/* Return the least common multiple, 32/64-bit accurate,
+ * (depending on size of "unsigned long").
+ *
+ * Note that lcm(a,b) = ab / gcf(a,b)
+ */
+unsigned long lcm32 (unsigned long a, unsigned long b);
+
 #ifdef   __cplusplus
 };
 #endif

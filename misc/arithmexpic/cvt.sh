@@ -14,6 +14,9 @@
 # ../../generate/renorm tot-exp-mag-1K rg 0.5
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > tot-exp-mag-1K.png
 
+../../generate/renorm totient-12K rg 0.0667
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > tot-exp-mag-12K.png
+
 # ------------------
 # ./mobius_exp_mag mob-exp-mag-120 400 400 5000 0 0 120
 # ../../generate/renorm mob-exp-mag-120 rg 6.0
@@ -25,6 +28,9 @@
 
 # ../../generate/renorm mobius-12K rg 9.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-12K.png
+
+# ../../generate/renorm mobius-120K rg 9.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-120K.png
 
 # ------------------
 # ./divisor_exp_mag divisor-exp-mag-120 400 400 5000 0 0 120

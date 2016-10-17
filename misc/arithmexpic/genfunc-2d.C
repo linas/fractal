@@ -310,18 +310,8 @@ static double xperiment(double re_q, double im_q, int itermax, double param)
 }
 
 // ========================================================
-// other stuff.
-/* static */ double ploto(double re_q, double im_q, int itermax, double param)
-{
-	max_iter = itermax;
-   double complex z = re_q + I * im_q;
-
-	double complex g = ordinary_genfunc(z, totient_phi);
-	// double complex g = gpf_normed(z);
-	// double complex g = gpf_lambert(z);
-
-	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
-}
+// TODO:
+// Carmichael function
 
 
 __attribute__((constructor)) void decl_things() {
