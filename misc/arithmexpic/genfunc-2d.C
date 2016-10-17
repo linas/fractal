@@ -229,7 +229,13 @@ static double exp_mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax,
 	max_iter = itermax;
    double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, exp_mangoldt_lambda);
-	return cabs(g);
+
+	double rv = cabs(g);
+	double r = cabs(z);
+	double lr = log(r+1.0);
+	rv /= lr*lr;
+
+	return rv;
 }
 
 static int thue_morse(int n)

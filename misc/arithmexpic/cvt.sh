@@ -23,8 +23,8 @@
 # ../../generate/renorm mob-exp-mag-1K rg 6.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-1K.png
 
-../../generate/renorm mobius-12K rg 9.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-12K.png
+# ../../generate/renorm mobius-12K rg 9.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-12K.png
 
 # ------------------
 # ./divisor_exp_mag divisor-exp-mag-120 400 400 5000 0 0 120
@@ -71,12 +71,21 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-12K.png
 
 # ------------------
 # ./mangoldt_lambda mangoldt-lambda-120 400 400 5000 0 0 120
-../../generate/renorm mangoldt-lambda-120 rg 3.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-120.png
+# ../../generate/renorm mangoldt-lambda-120 rg 3.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-120.png
 
 # ./mangoldt_lambda mangoldt-lambda-1K 400 400 5000 0 0 1000
-../../generate/renorm mangoldt-lambda-1K rg 3.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-1K.png
+# ../../generate/renorm mangoldt-lambda-1K rg 3.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-1K.png
+
+# ------------------
+# ./exp_mangoldt_lambda emango-lambda-120 400 400 5000 0 0 120
+../../generate/renorm emango-lambda-120 rg 2
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-120.png
+
+# ./exp_emango_lambda emango-lambda-1K 400 400 5000 0 0 1000
+../../generate/renorm emango-lambda-1K rg 1.2
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-1K.png
 
 # ------------------
 # ./thue_morse mertens-m-120 400 400 5000 0 0 120
@@ -95,6 +104,6 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-1K.png
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120K.png
 
 # ------------------
-../../generate/renorm exp-x rg 3.0
+../../generate/renorm exp-x rg 0.24
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-x.png
 
