@@ -29,8 +29,8 @@
 # ../../generate/renorm carmichael-1K rg 0.12
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-1K.png
 
-../../generate/renorm carmichael-12K rg 0.5
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-12K.png
+# ../../generate/renorm carmichael-12K rg 0.5
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-12K.png
 
 # ------------------
 # ./mobius_exp_mag mob-exp-mag-120 400 400 5000 0 0 120
@@ -63,16 +63,16 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-12K.png
 # ../../generate/renorm divisor-120K rg 1.6
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-exp-mag-120K.png
 
-../../generate/renorm sigma-one-120 rg 1.0
+../../generate/renorm sigma-one-120 rg 2.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-one-120.png
 
-../../generate/renorm sigma-one-1K rg 0.2
+../../generate/renorm sigma-one-1K rg 0.8
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-one-1K.png
 
-../../generate/renorm sigma-two-120 rg 0.1
+../../generate/renorm sigma-two-120 rg 1.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-120.png
 
-../../generate/renorm sigma-two-1K rg 0.005
+../../generate/renorm sigma-two-1K rg 0.2
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-1K.png
 
 # ------------------

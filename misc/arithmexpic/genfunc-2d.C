@@ -244,7 +244,8 @@ static double sigma_one(double re_q, double im_q, int itermax, double param)
 
 	double rv = cabs(g);
 	double r = sqrt(re_q*re_q + im_q*im_q);
-	rv /= r+1.0;
+	double lr = log(r+1.0);
+	rv /= lr;
 	return rv;
 }
 
@@ -256,8 +257,9 @@ static double sigma_two(double re_q, double im_q, int itermax, double param)
 	double complex g = exponential_genfunc(z, sigma2);
 	double rv = cabs(g);
 	double r = sqrt(re_q*re_q + im_q*im_q);
-	rv /= r+1.0;
-	rv /= r+1.0;
+	double lr = log(r+1.0);
+	rv /= lr;
+	rv /= lr;
 	return rv;
 }
 
