@@ -17,13 +17,20 @@
 # ../../generate/renorm totient-12K rg 0.0667
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > tot-exp-mag-12K.png
 
+# ./totient_big totient-log-12K 200 200 5000 0 0 12000
+# ../../generate/renorm totient-log-12K rg 0.5
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > totient-log-12K.png
+
 # ------------------
 # ./carmichael carmichael-120 400 400 50005 0 0 120
-../../generate/renorm carmichael-120 rg 0.25
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-120.png
+# ../../generate/renorm carmichael-120 rg 0.25
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-120.png
 
-../../generate/renorm carmichael-1K rg 0.12
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-1K.png
+# ../../generate/renorm carmichael-1K rg 0.12
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-1K.png
+
+../../generate/renorm carmichael-12K rg 0.5
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-12K.png
 
 # ------------------
 # ./mobius_exp_mag mob-exp-mag-120 400 400 5000 0 0 120
