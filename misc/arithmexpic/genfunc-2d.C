@@ -125,7 +125,7 @@ double complex lambert_genfunc(double complex x, int (*func)(int))
 static double totient_ord_phase(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = ordinary_genfunc(z, totient_phi);
 	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
@@ -133,7 +133,7 @@ static double totient_ord_phase(double re_q, double im_q, int itermax, double pa
 static double totient_exp_phase(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, totient_phi);
 	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
@@ -141,7 +141,7 @@ static double totient_exp_phase(double re_q, double im_q, int itermax, double pa
 static double totient_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, totient_phi);
 	return cabs(g);
 }
@@ -167,7 +167,7 @@ static double totient_big(double re_q, double im_q, int itermax, double param)
 static double carmichael(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, carmichael_lambda);
 	return cabs(g);
 }
@@ -193,7 +193,7 @@ static double carmichael_big(double re_q, double im_q, int itermax, double param
 static double mobius_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, moebius_mu);
 	return cabs(g);
 }
@@ -216,7 +216,7 @@ static int divisori(int i) { return divisor(i); }
 static double divisor_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, divisori);
 	return cabs(g);
 }
@@ -235,10 +235,36 @@ static double divisor_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
+static int sigma1(int i) { return sigma(i,1); }
+static double sigma_one(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+	double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, sigma1);
+
+	double rv = cabs(g);
+	double r = sqrt(re_q*re_q + im_q*im_q);
+	rv /= r+1.0;
+	return rv;
+}
+
+static int sigma2(int i) { return sigma(i,2); }
+static double sigma_two(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+	double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, sigma2);
+	double rv = cabs(g);
+	double r = sqrt(re_q*re_q + im_q*im_q);
+	rv /= r+1.0;
+	rv /= r+1.0;
+	return rv;
+}
+
 static double liouv_omega_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, liouville_omega);
 	return cabs(g);
 }
@@ -246,7 +272,7 @@ static double liouv_omega_exp_mag(double re_q, double im_q, int itermax, double 
 static double liouv_lambda(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, liouville_lambda);
 	return cabs(g);
 }
@@ -254,7 +280,7 @@ static double liouv_lambda(double re_q, double im_q, int itermax, double param)
 static double mertens_m_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, mertens_m);
 	return cabs(g);
 }
@@ -263,7 +289,7 @@ double mango(int n) { return mangoldt_lambda_cached(n); }
 static double mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exp_genfunc_d(z, mango);
 	return cabs(g);
 }
@@ -271,7 +297,7 @@ static double mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, dou
 static double exp_mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, exp_mangoldt_lambda);
 
 	double rv = cabs(g);
@@ -301,16 +327,16 @@ static double exp_mango_big(double re_q, double im_q, int itermax, double param)
 
 static int thue_morse(int n)
 {
-   if (0 == n) return 0;
-   if (1 == n) return 1;
-   if (0 == n%2) return thue_morse (n/2);
-   return (1-thue_morse ((n-1)/2));
+	if (0 == n) return 0;
+	if (1 == n) return 1;
+	if (0 == n%2) return thue_morse (n/2);
+	return (1-thue_morse ((n-1)/2));
 }
 
 static double thue_morse_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, thue_morse);
 	return cabs(g);
 }
@@ -334,7 +360,7 @@ static double thue_morse_rev(int n) { return 1.0 - thue_morse(n); }
 static double xperiment(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-   double complex z = re_q + I * im_q;
+	double complex z = re_q + I * im_q;
 	double complex g = exp_genfunc_d(z, thue_morse_rev);
 	return cabs(g);
 }
@@ -355,6 +381,8 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("mobius_big", mobius_big);
 	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
 	DECL_HEIGHT("divisor_big", divisor_big);
+	DECL_HEIGHT("sigma_one", sigma_one);
+	DECL_HEIGHT("sigma_two", sigma_two);
 	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
 	DECL_HEIGHT("liouv_lambda", liouv_lambda);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);

@@ -63,6 +63,18 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-12K.png
 # ../../generate/renorm divisor-120K rg 1.6
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-exp-mag-120K.png
 
+../../generate/renorm sigma-one-120 rg 1.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-one-120.png
+
+../../generate/renorm sigma-one-1K rg 0.2
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-one-1K.png
+
+../../generate/renorm sigma-two-120 rg 0.1
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-120.png
+
+../../generate/renorm sigma-two-1K rg 0.005
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-1K.png
+
 # ------------------
 # ./liouv_omega_exp_mag liouv-omega-120 400 400 5000 0 0 120
 # ../../generate/renorm liouv-omega-120 rg 4.0
