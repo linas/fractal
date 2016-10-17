@@ -266,10 +266,16 @@ int carmichael_lambda (int n)
 			while (0 == m%p) m /= p;
 
 			// Case of Euler's function for prime powers.
-			if (1 == m) return (p-1)*n/p;
+			if (1 == m)
+			{
+				if (2 == p) return n/4; // weirdo special case.
+				return (p-1)*n/p;
+			}
 
 			n = n / m;
 			int t = (p-1)*n/p;
+			if (2 == p) t = n/4;  // the special case, again.
+			if (8 >= n) t = carmichael_lambda(n); // weird special case
 
 			int r = carmichael_lambda(m);
 			return lcm32(t,r);
