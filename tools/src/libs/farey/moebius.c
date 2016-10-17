@@ -271,7 +271,7 @@ int carmichael_lambda (int n)
 			n = n / m;
 			int t = (p-1)*n/p;
 
-			int r = carmichael_lambda(n);
+			int r = carmichael_lambda(m);
 			return lcm32(t,r);
 		}
 		// If we are here, and p*p > n,  then no prime less than
