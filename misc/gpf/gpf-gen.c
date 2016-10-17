@@ -338,7 +338,7 @@ int main(int argc, char* argv[])
 	double rstep = 1.0;
 	rstep = floor(0.5 * sqrt(rlo));
 	if (rstep < 1.0) rstep = 1.0;
-rstep = 0.16;
+rstep = 0.05;
 	for (double r=rlo; r<= rhi; r+= rstep)
 	{
 		int count = zero_count(r);

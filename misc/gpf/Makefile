@@ -16,6 +16,8 @@ gpf-gen: gpf-gen.o gpf-gen-bignum.o $(FUNC)
 gpf-zero: gpf-zero.o gpf-gen-bignum.o $(FUNC)
 
 gpf-gen-bignum.o: gpf-gen-bignum.h
+gpf-2d.o: ../../generate/brat.h
+scribe.o: ../../generate/brat.h
 
 scribe: scribe.o $(HIST)
 
