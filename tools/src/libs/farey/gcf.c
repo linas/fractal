@@ -32,3 +32,9 @@ gcf32 (unsigned long nume, unsigned long denom)
 	/* nume now holds the GCD (Greatest Common Divisor) */
 	return nume;
 }
+
+unsigned long
+lcm32 (unsigned long a, unsigned long b)
+{
+	return a * (b / gcf32(a,b));
+}
