@@ -8,6 +8,7 @@
  * Linas Vepstas January 2005
  * Updates July 2006
  * Updates November 2014
+ * Updates October 2016
  */
 
 #include <math.h>
@@ -224,6 +225,19 @@ int moebius_mu (int n)
 
 /* ====================================================== */
 
+int mertens_m (int n)
+{
+	int i;
+	int acc = 0;
+	for (i=1; i<=n; i++)
+	{
+		acc += moebius_mu (i);
+	}
+	return acc;
+}
+
+/* ====================================================== */
+
 int exp_mangoldt_lambda (int n)
 {
 	if (1 >= n) return 1;
@@ -332,19 +346,6 @@ unsigned int mangoldt_lambda_index_point (int n)
 			}
 		}
 	}
-}
-
-/* ====================================================== */
-
-int mertens_m (int n)
-{
-	int i;
-	int acc = 0;
-	for (i=1; i<=n; i++)
-	{
-		acc += moebius_mu (i);
-	}
-	return acc;
 }
 
 /* ====================================================== */

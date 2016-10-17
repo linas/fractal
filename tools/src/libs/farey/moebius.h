@@ -40,6 +40,9 @@ int moebius_mu (int n);
 /** Mertens function, summatory function of mu */
 int mertens_m (int n);
 
+/** Carmichael's lambda function (the funny variant on totient) */
+int carmichael_lambda (int n);
+
 /** The number of prime factors of a number */
 int liouville_omega (int n);
 
