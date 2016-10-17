@@ -224,6 +224,14 @@ static double mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, dou
 	return cabs(g);
 }
 
+static double exp_mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+   double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, exp_mangoldt_lambda);
+	return cabs(g);
+}
+
 static int thue_morse(int n)
 {
    if (0 == n) return 0;
@@ -291,6 +299,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("liouv_lambda", liouv_lambda);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
 	DECL_HEIGHT("mangoldt_lambda", mangoldt_lambda_exp_mag);
+	DECL_HEIGHT("exp_mangoldt_lambda", exp_mangoldt_lambda_exp_mag);
 	DECL_HEIGHT("thue_morse", thue_morse_exp_mag);
 	DECL_HEIGHT("thue_morse_big", thue_morse_big);
 	DECL_HEIGHT("xperiment", xperiment);
