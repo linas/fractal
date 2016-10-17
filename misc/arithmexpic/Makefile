@@ -17,6 +17,7 @@ totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d totient_exp_phase
 	ln -f genfunc-2d totient_exp_mag
 	ln -f genfunc-2d totient_big
+	ln -f genfunc-2d carmichael
 	ln -f genfunc-2d mobius_exp_mag
 	ln -f genfunc-2d mobius_big
 	ln -f genfunc-2d divisor_exp_mag
