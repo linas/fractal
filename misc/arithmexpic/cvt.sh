@@ -84,6 +84,9 @@
 # ../../generate/renorm liouv-omega-1K rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-1K.png
 
+../../generate/renorm liouv-omega-12K rg 8.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-12K.png
+
 # ------------------
 # ./liouv_lambda liouv-lambda-120 400 400 5000 0 0 120
 # ../../generate/renorm liouv-lambda-120 rg 4.0
