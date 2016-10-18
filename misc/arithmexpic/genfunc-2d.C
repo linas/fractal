@@ -271,6 +271,18 @@ static double liouv_omega_exp_mag(double re_q, double im_q, int itermax, double 
 	return cabs(g);
 }
 
+static double liouv_omega_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z; cpx_init(sum); cpx_init(z);
+	mpf_t val; mpf_init(val);
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_exponential_genfunc(sum, z, 25, liouville_omega);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+	return rv;
+}
+
 static double liouv_lambda(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -386,6 +398,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("sigma_one", sigma_one);
 	DECL_HEIGHT("sigma_two", sigma_two);
 	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
+	DECL_HEIGHT("liouv_omega_big", liouv_omega_big);
 	DECL_HEIGHT("liouv_lambda", liouv_lambda);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
 	DECL_HEIGHT("mangoldt_lambda", mangoldt_lambda_exp_mag);

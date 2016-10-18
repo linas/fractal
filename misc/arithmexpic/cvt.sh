@@ -63,17 +63,17 @@
 # ../../generate/renorm divisor-120K rg 1.6
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-exp-mag-120K.png
 
-../../generate/renorm sigma-one-120 rg 2.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-one-120.png
+# ../../generate/renorm sigma-one-120 rg 2.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-one-120.png
 
-../../generate/renorm sigma-one-1K rg 0.8
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-one-1K.png
+# ../../generate/renorm sigma-one-1K rg 0.8
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-one-1K.png
 
-../../generate/renorm sigma-two-120 rg 1.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-120.png
+# ../../generate/renorm sigma-two-120 rg 1.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-120.png
 
-../../generate/renorm sigma-two-1K rg 0.2
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-1K.png
+# ../../generate/renorm sigma-two-1K rg 0.16
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-1K.png
 
 # ------------------
 # ./liouv_omega_exp_mag liouv-omega-120 400 400 5000 0 0 120
