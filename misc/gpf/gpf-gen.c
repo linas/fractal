@@ -116,9 +116,9 @@ double complex gpf_cpx_bignum_exponential(double r, double theta)
 int zero_count(double radius)
 {
 	int count = 0;
-	// double delta = 0.04 / radius;  // for exponential
+	double delta = 0.04 / radius;  // for exponential
 	// double delta = 0.02 / radius;  // for exponential
-	double delta = 0.001 / radius;  // for exponential
+	// double delta = 0.001 / radius;  // for exponential
 	// double delta = 0.2 / sqrt(radius);   // for the pochhammer
 	double prev = 0.0;
 	for (double theta = 0.0; theta < 1.0; theta += delta)
@@ -335,19 +335,47 @@ int main(int argc, char* argv[])
 	}
 	double rlo = atof(argv[1]);
 	double rhi = atof(argv[2]);
+
+#ifdef LOOP
 	double rstep = 1.0;
 	rstep = floor(0.5 * sqrt(rlo));
 	if (rstep < 1.0) rstep = 1.0;
-rstep = 0.02;
+	// rstep = 0.02;
 	for (double r=rlo; r<= rhi; r+= rstep)
 	{
 		int count = zero_count(r);
 		// printf("%d\t%d\n", (int) floor(r+0.5), count);
 		printf("%f\t%d\n", r, count);
 		fflush(stdout);
-
 		// rstep = floor(0.5 * sqrt(r));
 		// if (rstep < 1.0) rstep = 1.0;
 	}
+#endif
+
+#define BISECT 1
+#ifdef BISECT
+	int locount = zero_count(rlo);
+	printf("%f\t%d\n", rlo, locount);
+	fflush(stdout);
+
+	int hicount = zero_count(rhi);
+	printf("%f\t%d\n", rhi, hicount);
+	fflush(stdout);
+
+	double rstep = 0.5 * (rhi - rlo);
+	double rmid = rlo + rstep;
+
+	// bisect
+	for (int i=0; i<15; i++)
+	{
+		int count = zero_count(rmid);
+		printf("%f\t%d\n", rmid, count);
+		fflush(stdout);
+
+		rstep *= 0.5;
+		if (count == locount) rmid += rstep;
+		else rmid -= rstep;
+	}
+#endif
 #endif
 }
