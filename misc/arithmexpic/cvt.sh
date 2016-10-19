@@ -35,6 +35,9 @@
 # ../../generate/renorm carmichael-12K rg 0.5
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-12K.png
 
+# ../../generate/renorm carmichael-120K rg 0.18
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > carmichael-120K.png
+
 # ------------------
 # ./mobius_exp_mag mob-exp-mag-120 400 400 5000 0 0 120
 # ../../generate/renorm mob-exp-mag-120 rg 6.0
@@ -117,8 +120,8 @@
 # ../../generate/renorm mangoldt-lambda-1K rg 3.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-1K.png
 
-../../generate/renorm mangoldt-lambda-12K rg 3.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-12K.png
+# ../../generate/renorm mangoldt-lambda-12K rg 3.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-12K.png
 
 # ------------------
 # ./exp_mangoldt_lambda emango-lambda-120 400 400 5000 0 0 120
@@ -131,6 +134,9 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-12K.png
 
 # ../../generate/renorm emango-lambda-12K rg 0.4
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-12K.png
+
+../../generate/renorm emango-lambda-120K rg 0.1
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-120K.png
 
 # ------------------
 # ./thue_morse mertens-m-120 400 400 5000 0 0 120
