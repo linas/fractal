@@ -358,15 +358,11 @@ int main(int argc, char* argv[])
 	printf("%f\t%d\n", rlo, locount);
 	fflush(stdout);
 
-	int hicount = zero_count(rhi);
-	printf("%f\t%d\n", rhi, hicount);
-	fflush(stdout);
-
 	double rstep = 0.5 * (rhi - rlo);
 	double rmid = rlo + rstep;
 
 	// bisect
-	for (int i=0; i<15; i++)
+	for (int i=0; i<10; i++)
 	{
 		int count = zero_count(rmid);
 		printf("%f\t%d\n", rmid, count);
