@@ -87,7 +87,8 @@ double gpf_bignum_exponential(double r, double theta)
 	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
 	theta *= 2.0 * M_PI;
-	cpx_gpf_exponential(sum, z, 200);
+	// cpx_gpf_exponential(sum, z, 200);
+	cpx_gpf_exponential(sum, z, 900);
 	// cpx_gpf_poch_rising(sum, z, 40);
 
 	mpf_t val;
@@ -116,8 +117,8 @@ double complex gpf_cpx_bignum_exponential(double r, double theta)
 int zero_count(double radius)
 {
 	int count = 0;
-	double delta = 0.04 / radius;  // for exponential
-	// double delta = 0.02 / radius;  // for exponential
+	// double delta = 0.04 / radius;  // for exponential
+	double delta = 0.02 / radius;  // for exponential
 	// double delta = 0.001 / radius;  // for exponential
 	// double delta = 0.2 / sqrt(radius);   // for the pochhammer
 	double prev = 0.0;
