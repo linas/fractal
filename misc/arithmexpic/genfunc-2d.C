@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#include <mp-zeta.h>
+#include <mp-trig.h>
 
 #include <gpf.h>
 #include <modular.h>
@@ -308,6 +308,23 @@ static double mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, dou
 	return cabs(g);
 }
 
+// Well we need the logarithm; let mpf do the work.
+void mango_big(mpf_t* ln, int n)
+{
+	fp_log_ui(*ln, exp_mangoldt_lambda(n), 25);
+}
+static double mangoldt_lambda_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z; cpx_init(sum); cpx_init(z);
+	mpf_t val; mpf_init(val);
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_exponential_genfunc_mpf(sum, z, 25, mango_big);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+	return rv;
+}
+
 static double exp_mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -402,6 +419,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("liouv_lambda", liouv_lambda);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
 	DECL_HEIGHT("mangoldt_lambda", mangoldt_lambda_exp_mag);
+	DECL_HEIGHT("mangoldt_lambda_big", mangoldt_lambda_big);
 	DECL_HEIGHT("exp_mangoldt_lambda", exp_mangoldt_lambda_exp_mag);
 	DECL_HEIGHT("exp_mango_big", exp_mango_big);
 	DECL_HEIGHT("thue_morse", thue_morse_exp_mag);
