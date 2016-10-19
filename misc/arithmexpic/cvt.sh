@@ -21,8 +21,8 @@
 # ../../generate/renorm totient-log-12K rg 0.5
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > totient-log-12K.png
 
-../../generate/renorm totient-120K rg 0.125
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > totient-120K.png
+# ../../generate/renorm totient-120K rg 0.125
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > totient-120K.png
 
 # ------------------
 # ./carmichael carmichael-120 400 400 50005 0 0 120
@@ -116,6 +116,9 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > totient-120K.png
 # ./mangoldt_lambda mangoldt-lambda-1K 400 400 5000 0 0 1000
 # ../../generate/renorm mangoldt-lambda-1K rg 3.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-1K.png
+
+../../generate/renorm mangoldt-lambda-12K rg 3.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mangoldt-lambda-12K.png
 
 # ------------------
 # ./exp_mangoldt_lambda emango-lambda-120 400 400 5000 0 0 120
