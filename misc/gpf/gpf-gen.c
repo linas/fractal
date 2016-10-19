@@ -87,8 +87,8 @@ double gpf_bignum_exponential(double r, double theta)
 	cpx_set_d(z, r*cos(theta), r*sin(theta));
 
 	theta *= 2.0 * M_PI;
-	// cpx_gpf_exponential(sum, z, 200);
-	cpx_gpf_exponential(sum, z, 900);
+	cpx_gpf_exponential(sum, z, 200);
+	// cpx_gpf_exponential(sum, z, 900);
 	// cpx_gpf_poch_rising(sum, z, 40);
 
 	mpf_t val;
@@ -114,6 +114,14 @@ double complex gpf_cpx_bignum_exponential(double r, double theta)
 	return rv;
 }
 
+// Caution: this is unsuitable for finding zeros with high precision.
+// The issue is that the double-precision sine and cosine are not
+// perfect circles, but are a bit jagged at the scales of about
+// six-decimal-points in the radius and six-decimal-points in the angle
+// so roughly 6+6=12 decimal places in the combined x,y coordinates
+// so this fails a bit sooner than naively expected.  Its quite fine,
+// though, as long as one does not try to pin down the radius too
+// closely (e.g. in the bisect routine, at bottom.
 int zero_count(double radius)
 {
 	int count = 0;
