@@ -18,8 +18,12 @@ void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int));
 
 /*
  * Exponential generating function for arithmetic series.
+ * The second form expects func to return a value in the reference
+ * mpf_t*
  */
 void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int));
+void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
+                                 void (*func)(mpf_t*, int));
 
 #ifdef  __cplusplus
 };
