@@ -21,6 +21,9 @@
 # ../../generate/renorm totient-log-12K rg 0.5
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > totient-log-12K.png
 
+../../generate/renorm totient-120K rg 0.125
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > totient-120K.png
+
 # ------------------
 # ./carmichael carmichael-120 400 400 50005 0 0 120
 # ../../generate/renorm carmichael-120 rg 0.25
@@ -84,8 +87,8 @@
 # ../../generate/renorm liouv-omega-1K rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-1K.png
 
-../../generate/renorm liouv-omega-12K rg 8.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-12K.png
+# ../../generate/renorm liouv-omega-12K rg 8.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-12K.png
 
 # ------------------
 # ./liouv_lambda liouv-lambda-120 400 400 5000 0 0 120
@@ -143,6 +146,6 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-12K.png
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120K.png
 
 # ------------------
-../../generate/renorm exp-x rg 0.24
+../../generate/renorm exp-x rg 3.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-x.png
 
