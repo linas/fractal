@@ -186,6 +186,24 @@ int divisor (long long int n)
 	return divisor_helper (n, -1);
 }
 
+int unitary_divisor (int n)
+{
+	int acc = 0;
+	int d;
+
+	int ns = n/2;
+	for (d=1; d<=ns; d++)
+	{
+		if (n%d) continue;
+
+		if (1 != gcf32(d, n/d)) continue;
+		acc ++;
+	}
+
+	acc ++;
+	return acc;
+}
+
 /** 
  * Sigma arithmetic series, equals divisor arith series for a=0
  * Computes the divisors of n, raises each to the a'th power, and
@@ -597,6 +615,22 @@ int test_sigma_zero (void)
 	return have_error;
 }
 
+int test_unitary_divisor (void)
+{
+	int have_error=0;
+	int i;
+	int nmax=40;
+	for (i=1; i<=nmax; i++)
+	{
+		printf ("unitayr d %d %d\n", i, unitary_divisor(i));
+	}
+	if (0 == have_error)
+	{
+		printf ("PASS: tested divisor function up to %d\n", nmax);
+	}
+	return have_error;
+}
+
 int test_moebius(void)
 {
 	int n;
@@ -670,6 +704,7 @@ int main()
 	test_isqrt();
 	test_divisor ();
 	test_sigma_zero ();
+	test_unitary_divisor();
 	test_omega ();
 	test_moebius ();
 

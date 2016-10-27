@@ -11,14 +11,16 @@ extern "C" {
 #endif
 
 /* ------------------------------------------------------------ */
-/* Return the greatest common factor, 32/64-bit accurate,
- * (depending on size of "unsigned long").
+/**
+ * Return the greatest common factor, 32/64-bit accurate,
+ * (depending on size of "unsigned long").  AKA gcd.
  *
  * Results undefined if input is zero.
  */
 unsigned long gcf32 (unsigned long nume, unsigned long denom);
 
-/* Return the least common multiple, 32/64-bit accurate,
+/**
+ * Return the least common multiple, 32/64-bit accurate,
  * (depending on size of "unsigned long").
  *
  * Note that lcm(a,b) = ab / gcf(a,b)
