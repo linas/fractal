@@ -31,7 +31,7 @@ int max_iter = 100000000;
 /*
  * Ordinary generating function for arithmetic series
  */
-double complex ordinary_genfunc(double complex x, int (*func)(int))
+double complex ordinary_genfunc(double complex x, long (*func)(long))
 {
 	double complex sum = 0;
 	double complex xn = x;
@@ -53,7 +53,7 @@ double complex ordinary_genfunc(double complex x, int (*func)(int))
 /*
  * Exponential generating function for arithmetic series
  */
-double complex exponential_genfunc(long double complex x, int (*func)(int))
+double complex exponential_genfunc(long double complex x, long (*func)(long))
 {
 	long double complex sum = 0;
 	long double complex xn = x;
@@ -78,7 +78,7 @@ double complex exponential_genfunc(long double complex x, int (*func)(int))
 /*
  * Exponential generating function for arithmetic series
  */
-double complex exp_genfunc_d(long double complex x, double (*func)(int))
+double complex exp_genfunc_d(long double complex x, double (*func)(long))
 {
 	long double complex sum = 0;
 	long double complex xn = x;
@@ -100,7 +100,7 @@ double complex exp_genfunc_d(long double complex x, double (*func)(int))
 	return sum;
 }
 
-double complex lambert_genfunc(double complex x, int (*func)(int))
+double complex lambert_genfunc(double complex x, long (*func)(long))
 {
 	double complex sum = 0;
 	double complex xn = x;
@@ -212,7 +212,7 @@ static double mobius_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
-static int divisori(int i) { return divisor(i); }
+static long divisori(long i) { return divisor(i); }
 static double divisor_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -235,7 +235,7 @@ static double divisor_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
-static int sigma1(int i) { return sigma(i,1); }
+static long sigma1(long i) { return sigma(i,1); }
 static double sigma_one(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -249,7 +249,7 @@ static double sigma_one(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
-static int sigma2(int i) { return sigma(i,2); }
+static long sigma2(long i) { return sigma(i,2); }
 static double sigma_two(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -275,7 +275,7 @@ static double little_omega_big(double re_q, double im_q, int itermax, double par
 	return rv;
 }
 
-static int unitary_divisor(int n) { return 1<<little_omega(n); }
+static long unitary_divisor(long n) { return 1<<little_omega(n); }
 static double unitary_big(double re_q, double im_q, int itermax, double param)
 {
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
@@ -324,7 +324,7 @@ static double mertens_m_exp_mag(double re_q, double im_q, int itermax, double pa
 	return cabs(g);
 }
 
-double mango(int n) { return mangoldt_lambda_cached(n); }
+double mango(long n) { return mangoldt_lambda_cached(n); }
 static double mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
@@ -334,7 +334,7 @@ static double mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, dou
 }
 
 // Well we need the logarithm; let mpf do the work.
-void mango_big(mpf_t* ln, int n)
+void mango_big(mpf_t* ln, long n)
 {
 	fp_log_ui(*ln, exp_mangoldt_lambda(n), 25);
 }
@@ -381,7 +381,7 @@ static double exp_mango_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
-static int thue_morse(int n)
+static long thue_morse(long n)
 {
 	if (0 == n) return 0;
 	if (1 == n) return 1;
@@ -441,14 +441,25 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 	cpx_set_d(z, re_q, im_q);
 
 	cpx_exponential_genfunc(sum, z, 25, partition);
+#if 0
+	mpf_t gabs; mpf_init(gabs);
+	cpx_abs(gabs, z);
+	mpf_neg(gabs, gabs);
+	fp_exp(gabs, gabs, 25);
+	cpx_times_mpf(sum, sum, gabs);
+#endif
+#if 0
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
+#endif
+
+	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
 
 	return rv;
 }
 
-// static double thue_morse_recip(int n) { return 1.0 / (1.0 + thue_morse(n)); }
-static double thue_morse_rev(int n) { return 1.0 - thue_morse(n); }
+// static double thue_morse_recip(long n) { return 1.0 / (1.0 + thue_morse(n)); }
+static double thue_morse_rev(long n) { return 1.0 - thue_morse(n); }
 static double xperiment(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;

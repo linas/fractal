@@ -30,7 +30,7 @@
  *    func(n) is bounded by n.  i.e. this is to gaurantee good
  *    data when the system is not overflowing.
  */
-void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
+void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 {
 	mpf_t zabs, gabs, epsi;
 	mpf_init (gabs);
@@ -63,10 +63,10 @@ void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
 
 	for (int n=1; n < niter ; n++)
 	{
-		int funv = func(n);
+		long funv = func(n);
 		if (0 != funv)
 		{
-			cpx_times_ui(term, zn, abs(funv));
+			cpx_times_ui(term, zn, labs(funv));
 			if (funv < 0)
 				cpx_sub(sum, sum, term);
 			else
@@ -98,7 +98,7 @@ void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
  * Note the assumption about the leading asymptotic behavior of
  * the series.
  */
-void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
+void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(lon))
 {
 	mpf_t zabs, gabs, epsi, fact;
 	mpf_init (gabs);
@@ -122,10 +122,10 @@ void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
 
 	for (int n=1; ; n++)
 	{
-		int funv = func(n);
+		long funv = func(n);
 		if (0 != funv)
 		{
-			cpx_times_ui(term, zn, abs(funv));
+			cpx_times_ui(term, zn, labs(funv));
 			cpx_times_mpf(term, term, fact);
 			if (funv < 0)
 				cpx_sub(sum, sum, term);
@@ -162,7 +162,7 @@ void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, int (*func)(int))
  * in the reference mpf_t&
  */
 void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
-                                 void (*func)(mpf_t*, int))
+                                 void (*func)(mpf_t*, long))
 {
 	mpf_t zabs, gabs, epsi, fact, func_val, fabs;
 	mpf_init (gabs);

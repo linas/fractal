@@ -178,11 +178,22 @@
 
 # ------------------
 # ./isqrt_bit isqrt-120 400 400 5000 0 0 120
-../../generate/renorm isqrt-120 rg 8.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > isqrt-120.png
+# ../../generate/renorm isqrt-120 rg 8.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > isqrt-120.png
+# 
+# ../../generate/renorm isqrt-1K rg 16.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > isqrt-1K.png
+#
+# ------------------
+# ./partition_bit partition-120 400 400 5000 0 0 120
+../../generate/renorm partition-12 rg 1
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-12.png
 
-../../generate/renorm isqrt-1K rg 16.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > isqrt-1K.png
+../../generate/renorm partition-120 rg 1
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-120.png
+
+../../generate/renorm partition-1K rg 1.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-1K.png
 #
 # ------------------
 ../../generate/renorm exp-x rg 3.0
