@@ -17,7 +17,7 @@ extern "C" {
  * Compute the divisor arithmetic function.
  * Returns the number of divisors of n.
  */
-int divisor (long long int n);
+long divisor (long int n);
 
 /**
  * Sigma arithmetic series, equals divisor arith series for a=0
@@ -25,8 +25,8 @@ int divisor (long long int n);
  * returns thier sum.
  * sigmaf is similar, but allows any floating-point exponent.
  */
-int sigma (int n, int a);
-long double sigmaf (int n, long double a);
+long sigma (long n, long a);
+long double sigmaf (long n, long double a);
 
 /**
  * Much like the sigma arithmetic series, except that an extra
@@ -34,7 +34,7 @@ long double sigmaf (int n, long double a);
  * Computes the divisors of n, raises each to the a'th power,
  * multiplies the last by logn, and then returns thier sum.
  */
-long double sigmalog (int n, long double a);
+long double sigmalog (long n, long double a);
 
 /**
  * Compute the unitary divisor arithmetic function.
@@ -42,54 +42,54 @@ long double sigmalog (int n, long double a);
  * Thus, sigma(n,k) = sum_{d|n, gcd(n,n/d)=1} d^k
  * Note: sigma(n,0) = 2^little_omega(n)
  */
-int sigma_unitary (int n, int k);
+long sigma_unitary (long n, long k);
 
 /**
  * Sigma function for k=1; valuesa are cacched for performance.
  */
-int sigma_one (int n);
+long sigma_one (long n);
 
 /**
  * Parition function
  */
-int partition (int n);
+long partition (long n);
 
 /** classic Moebius mu function */
-int moebius_mu (int n);
+long moebius_mu (long n);
 
 /** Mertens function, summatory function of mu */
-int mertens_m (int n);
+long mertens_m (long n);
 
 /** Carmichael's lambda function (the funny variant on totient) */
-int carmichael_lambda (int n);
+long carmichael_lambda (long n);
 
 /** The number of distinct prime factors of a number. OEIS  A001221 */
-int little_omega (int n);
+long little_omega (long n);
 
 /** The number of prime factors of a number. OEIS  A001222 */
-int big_omega (int n);
+long big_omega (long n);
 
 /** The Liouville lambda function */
-int liouville_lambda (int n);
+long liouville_lambda (long n);
 
 /** The von Mangoldt Lambda function.
  *  Returns von Mangoldt Lambda for n, which is
  *  log(p) if n is a power of prime p, otherwise
  *  returns zero. */
-long double mangoldt_lambda (int n);
-long double mangoldt_lambda_cached (int n);
+long double mangoldt_lambda (long n);
+long double mangoldt_lambda_cached (long n);
 
 /** Exp of the von Mangoldt Lambda function.
  *  Returns p if n=p^k for prime p and integer k.
  *  Else returns 1.
  */
-int  exp_mangoldt_lambda (int n);
+long  exp_mangoldt_lambda (long n);
 
 /** The indexed von Mangoldt Lambda function
  *  Returns the n'th non-zero von Mangoldt value
  *  */
-long double mangoldt_lambda_indexed (int n);
-unsigned int mangoldt_lambda_index_point (int n);
+long double mangoldt_lambda_indexed (long n);
+unsigned long mangoldt_lambda_index_point (long n);
 
 #ifdef   __cplusplus
 };

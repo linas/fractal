@@ -20,9 +20,9 @@
 
 /* ====================================================== */
 
-static unsigned int *sieve = NULL;
-static unsigned int sieve_size = 0;
-static unsigned int sieve_max = 0;
+static unsigned long *sieve = NULL;
+static unsigned long sieve_size = 0;
+static unsigned long sieve_max = 0;
 
 #define INIT_PRIME_SIEVE(N) \
 	if (!sieve || sieve[sieve_max]*sieve[sieve_max] <(N)) {\
@@ -31,29 +31,29 @@ static unsigned int sieve_max = 0;
 
 /* Initialize and fill in a prime-number sieve.
  * Handles primes up to 4 billion (2^32)
- * long long int should be a 64-bit number
+ * long long should be a 64-bit number
  *
  * XXX Ths should be converted to use the code in prime.h and prime.c,
- * but for now, its here, soe as to maximize copiler optimization.
+ * but for now, its here, so as to maximize compiler optimization.
  */
 static void
-init_prime_sieve (long long int prod)
+init_prime_sieve (long long prod)
 {
-	unsigned int n, j;
-	unsigned int nstart;
-	unsigned int pos;
+	unsigned long n, j;
+	unsigned long nstart;
+	unsigned long pos;
 
 	if (sieve)
 	{
-		long long int ss = sieve[sieve_max];
+		long long ss = sieve[sieve_max];
 		if (ss*ss > prod) return;
 	}
 
-	unsigned int max = 1000.0+sqrt (prod);
+	unsigned long max = 1000.0+sqrt (prod);
 
 	if (!sieve)
 	{
-		sieve = (unsigned int *) malloc (8192*sizeof (unsigned int));
+		sieve = (unsigned long *) malloc (8192*sizeof (unsigned int));
 		sieve_size = 8192;
 		sieve_max = 2;
 		sieve[0] = 2;
@@ -68,7 +68,7 @@ init_prime_sieve (long long int prod)
 	{
 		for (j=1; ; j++)
 		{
-			int p = sieve[j];
+			long p = sieve[j];
 			if (0 == n%p)
 			{
 				break;
@@ -81,7 +81,7 @@ init_prime_sieve (long long int prod)
 				if (pos >= sieve_size)
 				{
 					sieve_size += 8192;
-					sieve = (unsigned int *)realloc (sieve, sieve_size * sizeof (unsigned int));
+					sieve = (unsigned long *)realloc (sieve, sieve_size * sizeof (unsigned int));
 				}
 				break;
 			}
@@ -92,7 +92,7 @@ init_prime_sieve (long long int prod)
 #if 0
 	for (j=0; j<pos; j++)
 	{
-		printf ("its %d %d\n", j, sieve[j]);
+		printf ("its %ld %ld\n", j, sieve[j]);
 	}
 #endif
 }
@@ -103,9 +103,9 @@ init_prime_sieve (long long int prod)
  *  Almost a tail-recursive algorithm.
  */
 
-static int divisor_helper (long long int n, int last_prime_checked)
+static long divisor_helper (long n, long last_prime_checked)
 {
-	int ip;
+	long ip;
 
 	if (1==n) return 1;
 	if (2==n) return 2;
@@ -114,12 +114,12 @@ static int divisor_helper (long long int n, int last_prime_checked)
 
 	for (ip=last_prime_checked+1; ; ip++)
 	{
-		long long int d = sieve[ip];
+		long long d = sieve[ip];
 
 		if (d*d >n) break;
 		if (n%d) continue;
 
-		int acc = 2;
+		long acc = 2;
 		n /=d;
 		while (0 == n%d)
 		{
@@ -133,7 +133,7 @@ static int divisor_helper (long long int n, int last_prime_checked)
 	return 2;
 }
 
-int divisor (long long int n)
+long divisor (long n)
 {
 	return divisor_helper (n, -1);
 }
@@ -145,35 +145,35 @@ int divisor (long long int n)
  *
  * A slow, simple-minded algo.
  */
-int sigma (int n, int a)
+long sigma (long n, long a)
 {
-	int acc = 0;
-	int d;
+	long acc = 0;
+	long d;
 
-	int ns = n/2;
+	long ns = n/2;
 	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
 
-		int dp = 1;
-		for (int ia=0; ia<a; ia++) dp *= d;
+		long dp = 1;
+		for (long ia=0; ia<a; ia++) dp *= d;
 		acc += dp;
 	}
 
-	int dp = 1;
-	for (int ia=0; ia<a; ia++) dp *= n;
+	long dp = 1;
+	for (long ia=0; ia<a; ia++) dp *= n;
 	acc += dp;
 
 	return acc;
 }
 
-/* same as above, but for float-point power */
-long double sigmaf (int n, long double a)
+/* same as above, but for float-polong power */
+long double sigmaf (long n, long double a)
 {
 	long double acc = 0;
-	int d;
+	long d;
 
-	int ns = n / 2;
+	long ns = n / 2;
 	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
@@ -185,12 +185,12 @@ long double sigmaf (int n, long double a)
 }
 
 /* same as above, but includes a log */
-long double sigmalog (int n, long double a)
+long double sigmalog (long n, long double a)
 {
 	long double acc = 0;
-	int d;
+	long d;
 
-	int ns = n / 2;
+	long ns = n / 2;
 	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
@@ -201,24 +201,24 @@ long double sigmalog (int n, long double a)
 	return acc;
 }
 
-int sigma_unitary (int n, int k)
+long sigma_unitary (long n, long k)
 {
-	int acc = 0;
-	int d;
+	long acc = 0;
+	long d;
 
-	int ns = n/2;
+	long ns = n/2;
 	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
 
 		if (1 != gcf32(d, n/d)) continue;
-		int dp = 1;
-		for (int ia=0; ia<k; ia++) dp *= d;
+		long dp = 1;
+		for (long ia=0; ia<k; ia++) dp *= d;
 		acc += dp;
 	}
 
-	int dp = 1;
-	for (int ia=0; ia<k; ia++) dp *= d;
+	long dp = 1;
+	for (long ia=0; ia<k; ia++) dp *= d;
 	acc += dp;
 	return acc;
 }
@@ -226,39 +226,40 @@ int sigma_unitary (int n, int k)
 /* ====================================================== */
 DECLARE_UI_CACHE (sigma_one_cache);
 
-int sigma_one (int n)
+long sigma_one (long n)
 {
 	if (ui_one_d_cache_check (&sigma_one_cache, n))
 		return ui_one_d_cache_fetch(&sigma_one_cache, n);
 
-	int val = sigma(n, 1);
+	long val = sigma(n, 1);
 	ui_one_d_cache_store (&sigma_one_cache, val, n);
 	return val;
 }
 
 DECLARE_UI_CACHE (partition_cache);
 
-int partition (int n)
+long partition (long n)
 {
 	if (0 == n) return 1;
 
 	if (ui_one_d_cache_check (&partition_cache, n))
 		return ui_one_d_cache_fetch(&partition_cache, n);
 
-	int acc = 0;
-	for (int k=0; k < n; k++)
+	long acc = 0;
+	for (long k=0; k < n; k++)
 	{
 		acc += sigma_one(n-k) * partition(k);
 	}
 	acc /= n;
 
+printf("duuude %ld %ld %ld\n", sizeof(long), n, acc);
 	ui_one_d_cache_store (&partition_cache, acc, n);
 	return acc;
 }
 
 /* ====================================================== */
 
-int moebius_mu (int n)
+long moebius_mu (long n)
 {
 	if (1 >= n) return 1;
 	if (3 >= n) return -1;
@@ -266,11 +267,11 @@ int moebius_mu (int n)
 	INIT_PRIME_SIEVE(n);
 
 	/* Implement the dumb/simple moebius algo */
-	int cnt = 0;
-	int i;
+	long cnt = 0;
+	long i;
 	for (i=0; ; i++)
 	{
-		int k = sieve[i];
+		long k = sieve[i];
 		if (0 == n%k)
 		{
 			cnt ++;
@@ -294,10 +295,10 @@ int moebius_mu (int n)
 
 /* ====================================================== */
 
-int mertens_m (int n)
+long mertens_m (long n)
 {
-	int i;
-	int acc = 0;
+	long i;
+	long acc = 0;
 	for (i=1; i<=n; i++)
 	{
 		acc += moebius_mu (i);
@@ -307,7 +308,7 @@ int mertens_m (int n)
 
 /* ====================================================== */
 
-int carmichael_lambda (int n)
+long carmichael_lambda (long n)
 {
 	if (9 >= n)
 	{
@@ -323,13 +324,13 @@ int carmichael_lambda (int n)
 	INIT_PRIME_SIEVE(n);
 
 	/* Implement the dumb/simple factorization algo */
-	int i;
+	long i;
 	for (i=0; ; i++)
 	{
-		int p = sieve[i];
+		long p = sieve[i];
 		if (0 == n%p)
 		{
-			int m = n;
+			long m = n;
 			m /= p;
 			while (0 == m%p) m /= p;
 
@@ -341,11 +342,11 @@ int carmichael_lambda (int n)
 			}
 
 			n = n / m;
-			int t = (p-1)*n/p;
+			long t = (p-1)*n/p;
 			if (2 == p) t = n/4;  // the special case, again.
 			if (8 >= n) t = carmichael_lambda(n); // weird special case
 
-			int r = carmichael_lambda(m);
+			long r = carmichael_lambda(m);
 			return lcm32(t,r);
 		}
 		// If we are here, and p*p > n,  then no prime less than
@@ -358,17 +359,17 @@ int carmichael_lambda (int n)
 
 /* ====================================================== */
 
-int exp_mangoldt_lambda (int n)
+long exp_mangoldt_lambda (long n)
 {
 	if (1 >= n) return 1;
 
 	INIT_PRIME_SIEVE(n);
 
 	/* Implement the dumb/simple factorization algo */
-	int i;
+	long i;
 	for (i=0; ; i++)
 	{
-		int p = sieve[i];
+		long p = sieve[i];
 		if (0 == n%p)
 		{
 			n /= p;
@@ -387,18 +388,18 @@ int exp_mangoldt_lambda (int n)
 
 /* ====================================================== */
 
-long double mangoldt_lambda (int n)
+long double mangoldt_lambda (long n)
 {
 	if (1 >= n) return 0.0L;
 
-	int eml = exp_mangoldt_lambda(n);
+	long eml = exp_mangoldt_lambda(n);
 	if (1 == eml) return 0.0L;
 	return logl ((long double) eml);
 }
 
 /* ====================================================== */
 
-long double mangoldt_lambda_cached (int n)
+long double mangoldt_lambda_cached (long n)
 {
 	DECLARE_LD_CACHE (mangoldt_cache);
 	if (ld_one_d_cache_check (&mangoldt_cache, n))
@@ -417,10 +418,10 @@ long double mangoldt_lambda_cached (int n)
 
 DECLARE_LD_CACHE (mangoldt_idx_cache);
 DECLARE_UI_CACHE (mangoldt_pow_cache);
-static int man_last_val =1;
-static int man_last_idx =0;
+static long man_last_val =1;
+static long man_last_idx =0;
 
-long double mangoldt_lambda_indexed (int n)
+long double mangoldt_lambda_indexed (long n)
 {
 	if (ld_one_d_cache_check (&mangoldt_idx_cache, n))
 	{
@@ -443,7 +444,7 @@ long double mangoldt_lambda_indexed (int n)
 	}
 }
 
-unsigned int mangoldt_lambda_index_point (int n)
+unsigned long mangoldt_lambda_index_polong (long n)
 {
 	if (ui_one_d_cache_check (&mangoldt_pow_cache, n))
 	{
@@ -469,18 +470,18 @@ unsigned int mangoldt_lambda_index_point (int n)
 /* ====================================================== */
 /* count the number of distinct prime factors of n */
 
-int little_omega (int n)
+long little_omega (long n)
 {
 	if (1 >= n) return 0;
 	if (2 >= n) return 1;
 
 	INIT_PRIME_SIEVE(n);
 
-	int i=0;
-	int acc = 0;
+	long i=0;
+	long acc = 0;
 	while (1)
 	{
-		int d = sieve[i];
+		long d = sieve[i];
 		if (0 == n%d) acc ++;
 		while (0 == n%d) n /= d;
 		i++;
@@ -494,18 +495,18 @@ int little_omega (int n)
 /* ====================================================== */
 /* count the number of prime factors of n */
 
-int big_omega (int n)
+long big_omega (long n)
 {
 	if (1 >= n) return 0;
 	if (2 >= n) return 1;
 
 	INIT_PRIME_SIEVE(n);
 
-	int acc = 0;
-	int i=0;
+	long acc = 0;
+	long i=0;
 	while (1)
 	{
-		int d = sieve[i];
+		long d = sieve[i];
 		while (0 == n%d)
 		{
 			acc ++;
@@ -519,9 +520,9 @@ int big_omega (int n)
 	return acc;
 }
 
-int liouville_lambda (int n)
+long liouville_lambda (long n)
 {
-	int omega = big_omega (n);
+	long omega = big_omega (n);
 
 	if (0 == omega%2) return 1;
 	return -1;
@@ -529,7 +530,7 @@ int liouville_lambda (int n)
 
 /* ====================================================== */
 
-// #define TEST 1
+#define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
@@ -539,12 +540,10 @@ int liouville_lambda (int n)
  *  Raw brute force algorithm.
  */
 
-int divisor_simple_algo (int n)
+long divisor_simple_algo (long n)
 {
-	int acc = 0;
-	int d;
-
-	for (d=1; d<= n; d++)
+	long acc = 0;
+	for (long d=1; d<= n; d++)
 	{
 		if (n%d) continue;
 		acc ++;
@@ -553,71 +552,69 @@ int divisor_simple_algo (int n)
 	return acc;
 }
 
-int test_divisor (void)
+long test_divisor (void)
 {
-	int have_error=0;
-	int i;
-	int nmax=10000;
-	for (i=1; i<=nmax; i++)
+	long have_error=0;
+	long nmax=10000;
+	for (long i=1; i<=nmax; i++)
 	{
 		if (divisor(i) != divisor_simple_algo(i))
 		{
-			printf ("ERROR: in divisor function at n=%d\n", i);
+			printf ("ERROR: in divisor function at n=%ld\n", i);
 			have_error ++;
 		}
 	}
 	if (0 == have_error)
 	{
-		printf ("PASS: tested divisor function up to %d\n", nmax);
+		printf ("PASS: tested divisor function up to %ld\n", nmax);
 	}
 	return have_error;
 }
 
-int test_sigma_zero (void)
+long test_sigma_zero (void)
 {
-	int have_error=0;
-	int i;
-	int nmax=10000;
-	for (i=1; i<=nmax; i++)
+	long have_error=0;
+	long nmax=10000;
+	for (long i=1; i<=nmax; i++)
 	{
 		if (sigma(i, 0) != divisor_simple_algo(i))
 		{
-			printf ("ERROR: in sigma-zero function at n=%d\n", i);
-			printf ("wanted %d got %d\n", divisor_simple_algo(i), sigma(i, 0));
+			printf ("ERROR: in sigma-zero function at n=%ld\n", i);
+			printf ("wanted %ld got %ld\n", divisor_simple_algo(i), sigma(i, 0));
 			have_error ++;
 		}
 	}
 	if (0 == have_error)
 	{
-		printf ("PASS: tested sigma-zero function up to %d\n", nmax);
+		printf ("PASS: tested sigma-zero function up to %ld\n", nmax);
 	}
 	return have_error;
 }
 
-int test_unitary_divisor (void)
+long test_unitary_divisor (void)
 {
-	int have_error=0;
-	int nmax=10000;
-	for (int i=1; i<=nmax; i++)
+	long have_error=0;
+	long nmax=10000;
+	for (long i=1; i<=nmax; i++)
 	{
-		int ud = 1 << little_omega(i);
+		long ud = 1 << little_omega(i);
 		if (sigma_unitary(i, 0) != ud)
 		{
-			printf ("ERROR: in unitary divisor function at n=%d\n", i);
-			printf ("wanted %d got %d\n", ud, sigma_unitary(i, 0));
+			printf ("ERROR: in unitary divisor function at n=%ld\n", i);
+			printf ("wanted %ld got %ld\n", ud, sigma_unitary(i, 0));
 			have_error ++;
 		}
 	}
 	if (0 == have_error)
 	{
-		printf ("PASS: tested unitary divisor function up to %d\n", nmax);
+		printf ("PASS: tested unitary divisor function up to %ld\n", nmax);
 	}
 	return have_error;
 }
 
-int test_partition (void)
+long test_partition (void)
 {
-	int have_error=0;
+	long have_error=0;
 
 	if (101 != partition(13)) have_error++;
 	if (77 != partition(12)) have_error++;
@@ -645,68 +642,65 @@ int test_partition (void)
 	return have_error;
 }
 
-int test_moebius(void)
+long test_moebius(void)
 {
-	int n;
-
-	int have_error = 0;
-	int nmax = 40000;
-	for (n=1; n<nmax; n++)
+	long have_error = 0;
+	long nmax = 40000;
+	for (long n=1; n<nmax; n++)
 	{
 		/* Perform a Dirichlet sum */
-		int sum = 0;
-		int d;
+		long sum = 0;
+		long d;
 		for (d=1; ; d++)
 		{
 			if (2*d > n) break;
 			if (n%d) continue;
 			sum += moebius_mu (d);
-			// printf ("%d divides %d and sum=%d\n", d, n, sum);
+			// printf ("%d divides %ld and sum=%ld\n", d, n, sum);
 		}
 		if (1 != n) sum += moebius_mu (n);
 		if (0 != sum)
 		{
-			printf ("ERROR for moebius mu at n=%d sum=%d \n", n, sum);
+			printf ("ERROR for moebius mu at n=%ld sum=%ld \n", n, sum);
 			have_error ++;
 		}
 	}
 	if (0 == have_error)
 	{
-		printf ("PASS: tested moebius function w/ dirichlet up to %d\n", nmax);
+		printf ("PASS: tested moebius function w/ dirichlet up to %ld\n", nmax);
 	}
 	return have_error;
 }
 
-int test_lambda(void)
+long test_lambda(void)
 {
-	int have_error = 0;
-	int nmax = 40000;
-	for (int n=1; n<nmax; n++)
+	long have_error = 0;
+	long nmax = 40000;
+	for (long n=1; n<nmax; n++)
 	{
 		/* Perform a Dirichlet sum */
-		int sum = 0;
-		int d;
-		for (d=1; ; d++)
+		long sum = 0;
+		for (long d=1; ; d++)
 		{
 			if (2*d > n) break;
 			if (n%d) continue;
 			sum += liouville_lambda (d);
-			// printf ("%d divides %d and sum=%d\n", d, n, sum);
+			// printf ("%d divides %ld and sum=%ld\n", d, n, sum);
 		}
 		if (1 != n) sum += liouville_lambda (n);
 
 		if (0 == sum) continue;
 
-		int ns = sqrt (n);
+		long ns = sqrt (n);
 		if (ns*ns != n)
 		{
-			printf ("ERROR at liouville lambda at n=%d sum=%d \n", n, sum);
+			printf ("ERROR at liouville lambda at n=%ld sum=%ld \n", n, sum);
 			have_error ++;
 		}
 	}
 	if (0 == have_error)
 	{
-		printf ("PASS: tested liouville lambda function w/ dirichlet up to %d\n", nmax);
+		printf ("PASS: tested liouville lambda function w/ dirichlet up to %ld\n", nmax);
 	}
 	return have_error;
 }
