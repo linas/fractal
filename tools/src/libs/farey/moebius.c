@@ -30,8 +30,7 @@ static unsigned long sieve_max = 0;
 	}
 
 /* Initialize and fill in a prime-number sieve.
- * Handles primes up to 4 billion (2^32)
- * long long should be a 64-bit number
+ * Handles primes up to 2^64
  *
  * XXX Ths should be converted to use the code in prime.h and prime.c,
  * but for now, its here, so as to maximize compiler optimization.
@@ -211,7 +210,7 @@ long sigma_unitary (long n, long k)
 	{
 		if (n%d) continue;
 
-		if (1 != gcf32(d, n/d)) continue;
+		if (1 != gcf64(d, n/d)) continue;
 		long dp = 1;
 		for (long ia=0; ia<k; ia++) dp *= d;
 		acc += dp;
@@ -347,7 +346,7 @@ long carmichael_lambda (long n)
 			if (8 >= n) t = carmichael_lambda(n); // weird special case
 
 			long r = carmichael_lambda(m);
-			return lcm32(t,r);
+			return lcm64(t,r);
 		}
 		// If we are here, and p*p > n,  then no prime less than
 		// the sqrt of n divides it. Ergo, n must be prime.
@@ -530,7 +529,7 @@ long liouville_lambda (long n)
 
 /* ====================================================== */
 
-#define TEST 1
+// #define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
