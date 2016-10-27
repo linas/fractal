@@ -263,21 +263,46 @@ static double sigma_two(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
-static double liouv_omega_exp_mag(double re_q, double im_q, int itermax, double param)
-{
-	max_iter = itermax;
-	double complex z = re_q + I * im_q;
-	double complex g = exponential_genfunc(z, liouville_omega);
-	return cabs(g);
-}
-
-static double liouv_omega_big(double re_q, double im_q, int itermax, double param)
+static double little_omega_big(double re_q, double im_q, int itermax, double param)
 {
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
 	mpf_t val; mpf_init(val);
 	cpx_set_d(z, re_q, im_q);
 
-	cpx_exponential_genfunc(sum, z, 25, liouville_omega);
+	cpx_exponential_genfunc(sum, z, 25, little_omega);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+	return rv;
+}
+
+static int unitary_divisor(int n) { return 1<<little_omega(n); }
+static double unitary_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z; cpx_init(sum); cpx_init(z);
+	mpf_t val; mpf_init(val);
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_exponential_genfunc(sum, z, 25, unitary_divisor);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+	return rv;
+}
+
+static double big_omega_exp_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+	double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, big_omega);
+	return cabs(g);
+}
+
+static double big_omega_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z; cpx_init(sum); cpx_init(z);
+	mpf_t val; mpf_init(val);
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_exponential_genfunc(sum, z, 25, big_omega);
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 	return rv;
@@ -414,8 +439,10 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("divisor_big", divisor_big);
 	DECL_HEIGHT("sigma_one", sigma_one);
 	DECL_HEIGHT("sigma_two", sigma_two);
-	DECL_HEIGHT("liouv_omega_exp_mag", liouv_omega_exp_mag);
-	DECL_HEIGHT("liouv_omega_big", liouv_omega_big);
+	DECL_HEIGHT("little_omega", little_omega_big);
+	DECL_HEIGHT("unitary", unitary_big);
+	DECL_HEIGHT("big_omega_exp_mag", big_omega_exp_mag);
+	DECL_HEIGHT("big_omega_big", big_omega_big);
 	DECL_HEIGHT("liouv_lambda", liouv_lambda);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
 	DECL_HEIGHT("mangoldt_lambda", mangoldt_lambda_exp_mag);

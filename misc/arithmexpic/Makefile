@@ -25,8 +25,10 @@ totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d divisor_big
 	ln -f genfunc-2d sigma_one
 	ln -f genfunc-2d sigma_two
-	ln -f genfunc-2d liouv_omega_exp_mag
-	ln -f genfunc-2d liouv_omega_big
+	ln -f genfunc-2d little_omega
+	ln -f genfunc-2d big_omega_exp_mag
+	ln -f genfunc-2d big_omega_big
+	ln -f genfunc-2d unitary
 	ln -f genfunc-2d liouv_lambda
 	ln -f genfunc-2d mertens_m
 	ln -f genfunc-2d mangoldt_lambda
@@ -41,7 +43,7 @@ genfunc.o: genfunc.h
 genfunc-2d.o: genfunc.h
 
 .o:
-	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++
+	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -lpthread -lm -lstdc++
 
 .c.o:
 	cc -c -g $^  -std=gnu11 -Wall -O2 $(INCLUDES)
