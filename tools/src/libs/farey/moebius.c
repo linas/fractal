@@ -225,60 +225,35 @@ int sigma_unitary (int n, int k)
 
 /* ====================================================== */
 DECLARE_UI_CACHE (sigma_one_cache);
-static int sigma_one_last=0;
 
 int sigma_one (int n)
 {
 	if (ui_one_d_cache_check (&sigma_one_cache, n))
-	{
 		return ui_one_d_cache_fetch(&sigma_one_cache, n);
-	}
 
-	while (1)
-	{
-		sigma_one_last++;
-		int val = sigma(sigma_one_last, 1);
-
-		ui_one_d_cache_store (&sigma_one_cache, val, sigma_one_last);
-		if (n == sigma_one_last)
-			return val;
-	}
+	int val = sigma(n, 1);
+	ui_one_d_cache_store (&sigma_one_cache, val, n);
+	return val;
 }
 
 DECLARE_UI_CACHE (partition_cache);
-static int partition_last=0;
 
 int partition (int n)
 {
-	if (ui_one_d_cache_check (&partition_cache, n))
-	{
-		return ui_one_d_cache_fetch(&partition_cache, n);
-	}
-
-	if (0 == partition_last)
-	{
-		ui_one_d_cache_store (&partition_cache, 1, 0);
-	}
-
 	if (0 == n) return 1;
 
-	while (1)
+	if (ui_one_d_cache_check (&partition_cache, n))
+		return ui_one_d_cache_fetch(&partition_cache, n);
+
+	int acc = 0;
+	for (int k=0; k < n; k++)
 	{
-		partition_last++;
-		int nn = partition_last;
-
-		int acc = 0;
-		for (int k=1; k<= nn; k++)
-		{
-			int p = ui_one_d_cache_fetch(&partition_cache, nn-k);
-			acc += sigma_one(k) * p;
-		}
-		acc /= nn;
-
-		ui_one_d_cache_store (&partition_cache, acc, nn);
-		if (n == partition_last)
-			return acc;
+		acc += sigma_one(n-k) * partition(k);
 	}
+	acc /= n;
+
+	ui_one_d_cache_store (&partition_cache, acc, n);
+	return acc;
 }
 
 /* ====================================================== */

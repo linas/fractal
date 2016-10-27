@@ -419,6 +419,14 @@ static double isqrt_big(double re_q, double im_q, int itermax, double param)
 	cpx_set_d(z, re_q, im_q);
 
 	cpx_exponential_genfunc(sum, z, 25, isqrt);
+
+#if 0
+	mpf_t gabs; mpf_init(gabs);
+	cpx_abs(gabs, z);
+	mpf_sqrt(gabs, gabs);
+	cpx_div_mpf(sum, sum, gabs);
+#endif
+
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 

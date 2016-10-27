@@ -88,9 +88,9 @@
 # 
 # ../../generate/renorm little-omega-1K rg 8.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-1K.png
-
-../../generate/renorm little-omega-12K rg 16.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-12K.png
+#
+# ../../generate/renorm little-omega-12K rg 16.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-12K.png
 
 # ------------------
 # ./unitary unitary-120 400 400 5000 0 0 120
@@ -176,6 +176,14 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-12K.png
 # ../../generate/renorm thue-morse-120K rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120K.png
 
+# ------------------
+# ./isqrt_bit isqrt-120 400 400 5000 0 0 120
+../../generate/renorm isqrt-120 rg 8.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > isqrt-120.png
+
+../../generate/renorm isqrt-1K rg 16.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > isqrt-1K.png
+#
 # ------------------
 ../../generate/renorm exp-x rg 3.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-x.png
