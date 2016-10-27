@@ -40,7 +40,7 @@ realclean:
 	$(CC) -c $<
 
 .o:
-	$(CC) -o $@ $^ -lm -lstdc++
+	$(CC) -o $@ $^ -lpthread -lm -lstdc++
 
 coord-xforms.o:	coord-xforms.h
 image.o: image.h util.h

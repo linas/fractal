@@ -13,6 +13,7 @@ INC = $(TOP)/inc
 # CC = /bin/fcc -f2 -O -I $(INC)
 # CC = cc -Wall -g -O2 -I $(INC) -DANSI_C -DLINUX
 CC = cc -Wall -g -O3 -std=gnu11 -I $(INC)
+CCP = c++ -Wall -g -O3 -std=c++14 -I $(INC)
 
 RM= rm -f
 
@@ -53,8 +54,8 @@ totient.o:	totient.c totient.h
 	ar crU $(LIB)/libfunc.a $@
 
 .C.o:
-	$(CC) -c $<
-	ar cru $(LIB)/libfunc.a $@
+	$(CCP) -c $<
+	ar crU $(LIB)/libfunc.a $@
 
 clean:
 	cd test; make clean
