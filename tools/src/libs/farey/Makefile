@@ -18,12 +18,12 @@ CCP = c++ -Wall -g -O3 -std=c++14 -I $(INC)
 RM= rm -f
 
 OBJS=bernoulli.o binomial.o cache.o Farey.o FareyTree.o gcf.o gpf.o \
-     harmonic.o \
+     harmonic.o isqrt.o \
 	  modular.o moebius.o prime.o question.o question-new.o stern-brocot.o \
      stirling.o totient.o
 
 INCS=bernoulli.h binomial.h cache.h cplex.h Farey.h FareyTree.h \
-     flt.h gcf.h gpf.h harmonic.h \
+     flt.h gcf.h gpf.h harmonic.h isqrt.h \
      modular.h moebius.h prime.h question.h stirling.h totient.h
 
 all: inc $(OBJS)
@@ -41,6 +41,7 @@ FareyTree.o:	FareyTree.C FareyTree.h
 gcf.o:	gcf.c gcf.h
 gpf.o:	gpf.c gpf.h
 harmonic.o:	harmonic.c harmonic.h
+isqrt.o: isqrt.c isqrt.h
 modular.o:	modular.c modular.h
 moebius.o:	moebius.c moebius.h cache.h
 prime.o:	prime.c prime.h

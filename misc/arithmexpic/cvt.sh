@@ -89,6 +89,9 @@
 # ../../generate/renorm little-omega-1K rg 8.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-1K.png
 
+../../generate/renorm little-omega-12K rg 16.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-12K.png
+
 # ------------------
 # ./unitary unitary-120 400 400 5000 0 0 120
 # ../../generate/renorm unitary-120 rg 2.0
@@ -96,9 +99,9 @@
 # 
 # ../../generate/renorm unitary-1K rg 2.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-1K.png
-
-../../generate/renorm unitary-12K rg 2.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-12K.png
+#
+# ../../generate/renorm unitary-12K rg 3.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-12K.png
 
 # ------------------
 # ./big_omega_exp_mag liouv-omega-120 400 400 5000 0 0 120

@@ -14,19 +14,6 @@ extern "C" {
 #endif
 
 /**
- * Compute the integer square-root of x.
- * This is an OK algorithm, not as fast as debruijn
- */
-int isqrt(int x);
-int integer_sqrt(int x);
-
-/**
- * Compute the integer nth-root of x.
- * This is an OK algorithm.
- */
-int integer_nth_root(int x, int n);
-
-/**
  * Compute the divisor arithmetic function.
  * Returns the number of divisors of n.
  */
