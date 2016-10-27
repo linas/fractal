@@ -482,40 +482,61 @@ unsigned int mangoldt_lambda_index_point (int n)
 }
 
 /* ====================================================== */
-/* count the number of prime factors of n */
+/* count the number of distinct prime factors of n */
 
-int liouville_omega (int n)
+int little_omega (int n)
 {
-	int i;
-	int acc = 2;
-
 	if (1 >= n) return 0;
 	if (2 >= n) return 1;
 
 	INIT_PRIME_SIEVE(n);
 
-	i=0;
+	int i=0;
+	int acc = 0;
 	while (1)
 	{
 		int d = sieve[i];
-		if (0 == n%d)
+		if (0 == n%d) acc ++;
+		while (0 == n%d) n /= d;
+		i++;
+		if (d*d > n) break;
+	}
+	if (1 != n) acc++;
+
+	return acc;
+}
+
+/* ====================================================== */
+/* count the number of prime factors of n */
+
+int big_omega (int n)
+{
+	if (1 >= n) return 0;
+	if (2 >= n) return 1;
+
+	INIT_PRIME_SIEVE(n);
+
+	int acc = 0;
+	int i=0;
+	while (1)
+	{
+		int d = sieve[i];
+		while (0 == n%d)
 		{
 			acc ++;
 			n /= d;
 		}
-		else
-		{
-			i++;
-		}
+		i++;
 		if (d*d > n) break;
 	}
+	if (1 != n) acc++;
 
-	return acc-1;
+	return acc;
 }
 
 int liouville_lambda (int n)
 {
-	int omega = liouville_omega (n);
+	int omega = big_omega (n);
 
 	if (0 == omega%2) return 1;
 	return -1;
@@ -619,14 +640,20 @@ int test_unitary_divisor (void)
 {
 	int have_error=0;
 	int i;
-	int nmax=40;
+	int nmax=10000;
 	for (i=1; i<=nmax; i++)
 	{
-		printf ("unitayr d %d %d\n", i, unitary_divisor(i));
+		int ud = 1 << little_omega(i);
+		if (unitary_divisor(i) != ud)
+		{
+			printf ("ERROR: in unitary divisor function at n=%d\n", i);
+			printf ("wanted %d got %d\n", ud, unitary_divisor(i));
+			have_error ++;
+		}
 	}
 	if (0 == have_error)
 	{
-		printf ("PASS: tested divisor function up to %d\n", nmax);
+		printf ("PASS: tested unitary divisor function up to %d\n", nmax);
 	}
 	return have_error;
 }
@@ -663,13 +690,11 @@ int test_moebius(void)
 	return have_error;
 }
 
-int test_omega(void)
+int test_lambda(void)
 {
-	int n;
-
 	int have_error = 0;
 	int nmax = 40000;
-	for (n=1; n<nmax; n++)
+	for (int n=1; n<nmax; n++)
 	{
 		/* Perform a Dirichlet sum */
 		int sum = 0;
@@ -694,7 +719,7 @@ int test_omega(void)
 	}
 	if (0 == have_error)
 	{
-		printf ("PASS: tested liouville omega function w/ dirichlet up to %d\n", nmax);
+		printf ("PASS: tested liouville lambda function w/ dirichlet up to %d\n", nmax);
 	}
 	return have_error;
 }
@@ -705,7 +730,7 @@ int main()
 	test_divisor ();
 	test_sigma_zero ();
 	test_unitary_divisor();
-	test_omega ();
+	test_lambda ();
 	test_moebius ();
 
 	return 1;

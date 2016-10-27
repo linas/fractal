@@ -63,8 +63,11 @@ int mertens_m (int n);
 /** Carmichael's lambda function (the funny variant on totient) */
 int carmichael_lambda (int n);
 
-/** The number of prime factors of a number */
-int liouville_omega (int n);
+/** The number of distinct prime factors of a number. OEIS  A001221 */
+int little_omega (int n);
+
+/** The number of prime factors of a number. OEIS  A001222 */
+int big_omega (int n);
 
 /** The Liouville lambda function */
 int liouville_lambda (int n);
