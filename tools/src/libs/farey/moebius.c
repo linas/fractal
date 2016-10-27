@@ -239,7 +239,7 @@ int sigma_one (int n)
 		sigma_one_last++;
 		int val = sigma(sigma_one_last, 1);
 
-		ui_one_d_cache_store (&sigma_one_cache, sigma_one_last, val);
+		ui_one_d_cache_store (&sigma_one_cache, val, sigma_one_last);
 		if (n == sigma_one_last)
 			return val;
 	}
@@ -250,12 +250,17 @@ static int partition_last=0;
 
 int partition (int n)
 {
-	if (0 == n) return 1;
-
 	if (ui_one_d_cache_check (&partition_cache, n))
 	{
 		return ui_one_d_cache_fetch(&partition_cache, n);
 	}
+
+	if (0 == partition_last)
+	{
+		ui_one_d_cache_store (&partition_cache, 1, 0);
+	}
+
+	if (0 == n) return 1;
 
 	while (1)
 	{
@@ -270,7 +275,7 @@ int partition (int n)
 		}
 		acc /= nn;
 
-		ui_one_d_cache_store (&partition_cache, partition_last, acc);
+		ui_one_d_cache_store (&partition_cache, acc, nn);
 		if (n == partition_last)
 			return acc;
 	}
@@ -549,7 +554,7 @@ int liouville_lambda (int n)
 
 /* ====================================================== */
 
-#define TEST 1
+// #define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
@@ -638,15 +643,29 @@ int test_unitary_divisor (void)
 int test_partition (void)
 {
 	int have_error=0;
-	int nmax=40;
-	for (int i=1; i<=nmax; i++)
-	{
-		int p = partition(i);
-		printf ("Partition of %d is %d\n", i, p);
-	}
+
+	if (101 != partition(13)) have_error++;
+	if (77 != partition(12)) have_error++;
+	if (56 != partition(11)) have_error++;
+	if (42 != partition(10)) have_error++;
+	if (30 != partition(9)) have_error++;
+	if (22 != partition(8)) have_error++;
+	if (15 != partition(7)) have_error++;
+	if (11 != partition(6)) have_error++;
+	if (7 != partition(5)) have_error++;
+	if (5 != partition(4)) have_error++;
+	if (3 != partition(3)) have_error++;
+	if (2 != partition(2)) have_error++;
+	if (1 != partition(1)) have_error++;
+	if (1 != partition(0)) have_error++;
+
 	if (0 == have_error)
 	{
-		printf ("PASS: tested unitary divisor function up to %d\n", nmax);
+		printf ("PASS: tested parition function up to 13\n");
+	}
+	else
+	{
+		printf ("FAIL: parition function is bad\n");
 	}
 	return have_error;
 }
