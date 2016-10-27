@@ -251,7 +251,6 @@ long partition (long n)
 	}
 	acc /= n;
 
-printf("duuude %ld %ld %ld\n", sizeof(long), n, acc);
 	ui_one_d_cache_store (&partition_cache, acc, n);
 	return acc;
 }
