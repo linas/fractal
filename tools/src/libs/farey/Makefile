@@ -50,7 +50,7 @@ totient.o:	totient.c totient.h
 
 .c.o:
 	$(CC) -c $<
-	ar cru $(LIB)/libfunc.a $@
+	ar crU $(LIB)/libfunc.a $@
 
 .C.o:
 	$(CC) -c $<
