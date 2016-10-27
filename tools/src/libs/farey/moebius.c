@@ -198,15 +198,19 @@ int sigma (int n, int a)
 	int acc = 0;
 	int d;
 
-	for (d=1; d<=n; d++)
+	int ns = isqrt(n);
+	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
 
 		int dp = 1;
-		int ia;
-		for (ia=0; ia<a; ia++) dp *= d;
+		for (int ia=0; ia<a; ia++) dp *= d;
 		acc += dp;
 	}
+
+	int dp = 1;
+	for (int ia=0; ia<a; ia++) dp *= n;
+	acc += dp;
 
 	return acc;
 }
@@ -217,11 +221,13 @@ long double sigmaf (int n, long double a)
 	long double acc = 0;
 	int d;
 
-	for (d=1; d<=n; d++)
+	int ns = isqrt(n);
+	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
 		acc += powl(d, a);
 	}
+	acc += powl(n, a);
 
 	return acc;
 }
@@ -232,11 +238,13 @@ long double sigmalog (int n, long double a)
 	long double acc = 0;
 	int d;
 
-	for (d=1; d<=n; d++)
+	int ns = isqrt(n);
+	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
 		acc += powl(d, a) * logl(d);
 	}
+	acc += powl(n, a) * logl(n);
 
 	return acc;
 }
