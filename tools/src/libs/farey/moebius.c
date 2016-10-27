@@ -198,7 +198,7 @@ int sigma (int n, int a)
 	int acc = 0;
 	int d;
 
-	int ns = isqrt(n);
+	int ns = n/2;
 	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
@@ -221,7 +221,7 @@ long double sigmaf (int n, long double a)
 	long double acc = 0;
 	int d;
 
-	int ns = isqrt(n);
+	int ns = n / 2;
 	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
@@ -238,7 +238,7 @@ long double sigmalog (int n, long double a)
 	long double acc = 0;
 	int d;
 
-	int ns = isqrt(n);
+	int ns = n / 2;
 	for (d=1; d<=ns; d++)
 	{
 		if (n%d) continue;
@@ -576,6 +576,27 @@ int test_divisor (void)
 	return have_error;
 }
 
+int test_sigma_zero (void)
+{
+	int have_error=0;
+	int i;
+	int nmax=10000;
+	for (i=1; i<=nmax; i++)
+	{
+		if (sigma(i, 0) != divisor_simple_algo(i))
+		{
+			printf ("ERROR: in sigma-zero function at n=%d\n", i);
+			printf ("wanted %d got %d\n", divisor_simple_algo(i), sigma(i, 0));
+			have_error ++;
+		}
+	}
+	if (0 == have_error)
+	{
+		printf ("PASS: tested sigma-zero function up to %d\n", nmax);
+	}
+	return have_error;
+}
+
 int test_moebius(void)
 {
 	int n;
@@ -648,6 +669,7 @@ int main()
 {
 	test_isqrt();
 	test_divisor ();
+	test_sigma_zero ();
 	test_omega ();
 	test_moebius ();
 
