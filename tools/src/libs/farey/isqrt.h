@@ -14,14 +14,14 @@ extern "C" {
  * Compute the integer square-root of x.
  * This is an OK algorithm, not as fast as debruijn
  */
-int isqrt(int x);
-int integer_sqrt(int x);
+long isqrt(long x);
+long longeger_sqrt(long x);
 
 /**
- * Compute the integer nth-root of x.
+ * Compute the longeger nth-root of x.
  * This is an OK algorithm.
  */
-int integer_nth_root(int x, int n);
+long longeger_nth_root(long x, long n);
 
 #ifdef   __cplusplus
 };

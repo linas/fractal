@@ -43,8 +43,8 @@
  * 	if((x,y/x)=1 then phi(x)phi(y/x) else x phi(y/x)) else phi(y,x+1))))
  */
 
-static int phiphi(int,int);
-int totient_phi(int n)
+static long phiphi(long,long);
+long totient_phi(long n)
 {
 	if (n < 0) n=-n;
 	/* handle a few trivial boundary cases */
@@ -56,15 +56,15 @@ int totient_phi(int n)
 
 /* This only gets called with y >= 3 and y > x >= 2 */
 
-static int phiphi(int y, int x)
+static long phiphi(long y, long x)
 {
-	int z;
+	long z;
 
 	if (x+1 == y) return x; /* phi(prime p) = p-1 */
 	if ((y%x) == 0)
 	{
 		z = y/x;
-		if (gcf32(x,z) == 1)
+		if (gcf64(x,z) == 1)
 			return totient_phi(x)*totient_phi(z); /* multiplicative property */
 		else
 			return x*totient_phi(z); /* This is a tricky case. It may

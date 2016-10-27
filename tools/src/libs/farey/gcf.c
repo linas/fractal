@@ -10,11 +10,11 @@
 
 /* ------------------------------------------------------------ */
 /**
- * Return the greatest common factor, 32/64-bit accurate.
+ * Return the greatest common factor, 64-bit accurate.
  * Implements Euclid's algorithm.
  */
 unsigned long
-gcf32 (unsigned long nume, unsigned long denom)
+gcf64 (unsigned long nume, unsigned long denom)
 {
 	unsigned long t;
 	t = nume % denom;
@@ -34,7 +34,7 @@ gcf32 (unsigned long nume, unsigned long denom)
 }
 
 unsigned long
-lcm32 (unsigned long a, unsigned long b)
+lcm64 (unsigned long a, unsigned long b)
 {
-	return a * (b / gcf32(a,b));
+	return a * (b / gcf64(a,b));
 }

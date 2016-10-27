@@ -39,7 +39,7 @@
 extern "C" {
 #endif
 
-int totient_phi(int n);
+long totient_phi(long n);
 
 #ifdef   __cplusplus
 };
