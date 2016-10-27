@@ -440,12 +440,13 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-	cpx_exponential_genfunc(sum, z, 25, partition);
+	int nprec = 45;
+	cpx_exponential_genfunc(sum, z, nprec, partition);
 #if 0
 	mpf_t gabs; mpf_init(gabs);
 	cpx_abs(gabs, z);
 	mpf_neg(gabs, gabs);
-	fp_exp(gabs, gabs, 25);
+	fp_exp(gabs, gabs, nprec);
 	cpx_times_mpf(sum, sum, gabs);
 #endif
 #if 0
