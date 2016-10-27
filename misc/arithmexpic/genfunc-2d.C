@@ -13,7 +13,7 @@
 #include <mp-trig.h>
 
 #include <gpf.h>
-#include <modular.h>
+#include <isqrt.h>
 #include <moebius.h>
 #include <totient.h>
 
@@ -411,6 +411,34 @@ static double thue_morse_big(double re_q, double im_q, int itermax, double param
 	return rv;
 }
 
+static double isqrt_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z; cpx_init(sum); cpx_init(z);
+	mpf_t val; mpf_init(val);
+
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_exponential_genfunc(sum, z, 25, isqrt);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+
+	return rv;
+}
+
+static double partition_big(double re_q, double im_q, int itermax, double param)
+{
+	cpx_t sum, z; cpx_init(sum); cpx_init(z);
+	mpf_t val; mpf_init(val);
+
+	cpx_set_d(z, re_q, im_q);
+
+	cpx_exponential_genfunc(sum, z, 25, partition);
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
+
+	return rv;
+}
+
 // static double thue_morse_recip(int n) { return 1.0 / (1.0 + thue_morse(n)); }
 static double thue_morse_rev(int n) { return 1.0 - thue_morse(n); }
 static double xperiment(double re_q, double im_q, int itermax, double param)
@@ -451,6 +479,8 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("exp_mango_big", exp_mango_big);
 	DECL_HEIGHT("thue_morse", thue_morse_exp_mag);
 	DECL_HEIGHT("thue_morse_big", thue_morse_big);
+	DECL_HEIGHT("isqrt_big", isqrt_big);
+	DECL_HEIGHT("partition_big", partition_big);
 	DECL_HEIGHT("xperiment", xperiment);
 }
 
