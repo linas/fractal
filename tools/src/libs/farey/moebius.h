@@ -44,6 +44,16 @@ long double sigmalog (int n, long double a);
  */
 int sigma_unitary (int n, int k);
 
+/**
+ * Sigma function for k=1; valuesa are cacched for performance.
+ */
+int sigma_one (int n);
+
+/**
+ * Parition function
+ */
+int partition (int n);
+
 /** classic Moebius mu function */
 int moebius_mu (int n);
 

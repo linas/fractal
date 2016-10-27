@@ -224,6 +224,59 @@ int sigma_unitary (int n, int k)
 }
 
 /* ====================================================== */
+DECLARE_UI_CACHE (sigma_one_cache);
+static int sigma_one_last=0;
+
+int sigma_one (int n)
+{
+	if (ui_one_d_cache_check (&sigma_one_cache, n))
+	{
+		return ui_one_d_cache_fetch(&sigma_one_cache, n);
+	}
+
+	while (1)
+	{
+		sigma_one_last++;
+		int val = sigma(sigma_one_last, 1);
+
+		ui_one_d_cache_store (&sigma_one_cache, sigma_one_last, val);
+		if (n == sigma_one_last)
+			return val;
+	}
+}
+
+DECLARE_UI_CACHE (partition_cache);
+static int partition_last=0;
+
+int partition (int n)
+{
+	if (0 == n) return 1;
+
+	if (ui_one_d_cache_check (&partition_cache, n))
+	{
+		return ui_one_d_cache_fetch(&partition_cache, n);
+	}
+
+	while (1)
+	{
+		partition_last++;
+		int nn = partition_last;
+
+		int acc = 0;
+		for (int k=1; k<= nn; k++)
+		{
+			int p = ui_one_d_cache_fetch(&partition_cache, nn-k);
+			acc += sigma_one(k) * p;
+		}
+		acc /= nn;
+
+		ui_one_d_cache_store (&partition_cache, partition_last, acc);
+		if (n == partition_last)
+			return acc;
+	}
+}
+
+/* ====================================================== */
 
 int moebius_mu (int n)
 {
@@ -393,46 +446,42 @@ long double mangoldt_lambda_indexed (int n)
 	{
 		return ld_one_d_cache_fetch(&mangoldt_idx_cache, n);
 	}
-	else
+
+	ui_one_d_cache_check (&mangoldt_pow_cache, n);
+	while (1)
 	{
-		ui_one_d_cache_check (&mangoldt_pow_cache, n);
-		while (1)
+		man_last_val++;
+		long double val = mangoldt_lambda(man_last_val);
+		if (val != 0.0L)
 		{
-			man_last_val++;
-			long double val = mangoldt_lambda(man_last_val);
-			if (val != 0.0L)
-			{
-				man_last_idx++;
-				ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
-				ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
-				if (n == man_last_idx)
-					return val;
-			}
+			man_last_idx++;
+			ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
+			ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
+			if (n == man_last_idx)
+				return val;
 		}
 	}
 }
 
 unsigned int mangoldt_lambda_index_point (int n)
 {
-	if(ui_one_d_cache_check (&mangoldt_pow_cache, n))
+	if (ui_one_d_cache_check (&mangoldt_pow_cache, n))
 	{
 		return ui_one_d_cache_fetch(&mangoldt_pow_cache, n);
 	}
-	else
+
+	ld_one_d_cache_check (&mangoldt_idx_cache, n);
+	while (1)
 	{
-		ld_one_d_cache_check (&mangoldt_idx_cache, n);
-		while (1)
+		man_last_val++;
+		long double val = mangoldt_lambda(man_last_val);
+		if (val != 0.0L)
 		{
-			man_last_val++;
-			long double val = mangoldt_lambda(man_last_val);
-			if (val != 0.0L)
-			{
-				man_last_idx++;
-				ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
-				ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
-				if (n == man_last_idx)
-					return man_last_val;
-			}
+			man_last_idx++;
+			ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
+			ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
+			if (n == man_last_idx)
+				return man_last_val;
 		}
 	}
 }
@@ -500,7 +549,7 @@ int liouville_lambda (int n)
 
 /* ====================================================== */
 
-// #define TEST 1
+#define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
@@ -568,9 +617,8 @@ int test_sigma_zero (void)
 int test_unitary_divisor (void)
 {
 	int have_error=0;
-	int i;
 	int nmax=10000;
-	for (i=1; i<=nmax; i++)
+	for (int i=1; i<=nmax; i++)
 	{
 		int ud = 1 << little_omega(i);
 		if (sigma_unitary(i, 0) != ud)
@@ -579,6 +627,22 @@ int test_unitary_divisor (void)
 			printf ("wanted %d got %d\n", ud, sigma_unitary(i, 0));
 			have_error ++;
 		}
+	}
+	if (0 == have_error)
+	{
+		printf ("PASS: tested unitary divisor function up to %d\n", nmax);
+	}
+	return have_error;
+}
+
+int test_partition (void)
+{
+	int have_error=0;
+	int nmax=40;
+	for (int i=1; i<=nmax; i++)
+	{
+		int p = partition(i);
+		printf ("Partition of %d is %d\n", i, p);
 	}
 	if (0 == have_error)
 	{
@@ -658,6 +722,7 @@ int main()
 	test_divisor ();
 	test_sigma_zero ();
 	test_unitary_divisor();
+	test_partition ();
 	test_lambda ();
 	test_moebius ();
 
