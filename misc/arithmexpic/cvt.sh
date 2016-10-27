@@ -82,11 +82,30 @@
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-1K.png
 
 # ------------------
-# ./liouv_omega_exp_mag liouv-omega-120 400 400 5000 0 0 120
+# ./little_omega little-omega-120 400 400 5000 0 0 120
+# ../../generate/renorm little-omega-120 rg 4.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-120.png
+# 
+# ../../generate/renorm little-omega-1K rg 8.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-1K.png
+
+# ------------------
+# ./unitary unitary-120 400 400 5000 0 0 120
+# ../../generate/renorm unitary-120 rg 2.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-120.png
+# 
+# ../../generate/renorm unitary-1K rg 2.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-1K.png
+
+../../generate/renorm unitary-12K rg 2.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-12K.png
+
+# ------------------
+# ./big_omega_exp_mag liouv-omega-120 400 400 5000 0 0 120
 # ../../generate/renorm liouv-omega-120 rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-120.png
 
-# ./liouv_omega_exp_mag liouv-omega-1K 400 400 5000 0 0 1000
+# ./big_omega_exp_mag liouv-omega-1K 400 400 5000 0 0 1000
 # ../../generate/renorm liouv-omega-1K rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-1K.png
 
@@ -135,8 +154,8 @@
 # ../../generate/renorm emango-lambda-12K rg 0.4
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-12K.png
 
-../../generate/renorm emango-lambda-120K rg 0.1
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-120K.png
+# ../../generate/renorm emango-lambda-120K rg 0.1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > emango-lambda-120K.png
 
 # ------------------
 # ./thue_morse mertens-m-120 400 400 5000 0 0 120
