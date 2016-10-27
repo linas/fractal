@@ -43,10 +43,10 @@ genfunc.o: genfunc.h
 genfunc-2d.o: genfunc.h
 
 .o:
-	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -lpthread -lm -lstdc++
+	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++
 
 .c.o:
 	cc -c -g $^  -std=gnu11 -Wall -O2 $(INCLUDES)
 
 .C.o:
-	cc -c $^  -std=gnu++11 -Wall -O2 $(INCLUDES)
+	cc -c $^  -std=gnu11 -Wall -O2 $(INCLUDES)
