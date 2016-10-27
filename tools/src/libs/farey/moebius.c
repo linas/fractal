@@ -186,24 +186,6 @@ int divisor (long long int n)
 	return divisor_helper (n, -1);
 }
 
-int unitary_divisor (int n)
-{
-	int acc = 0;
-	int d;
-
-	int ns = n/2;
-	for (d=1; d<=ns; d++)
-	{
-		if (n%d) continue;
-
-		if (1 != gcf32(d, n/d)) continue;
-		acc ++;
-	}
-
-	acc ++;
-	return acc;
-}
-
 /** 
  * Sigma arithmetic series, equals divisor arith series for a=0
  * Computes the divisors of n, raises each to the a'th power, and
@@ -264,6 +246,28 @@ long double sigmalog (int n, long double a)
 	}
 	acc += powl(n, a) * logl(n);
 
+	return acc;
+}
+
+int sigma_unitary (int n, int k)
+{
+	int acc = 0;
+	int d;
+
+	int ns = n/2;
+	for (d=1; d<=ns; d++)
+	{
+		if (n%d) continue;
+
+		if (1 != gcf32(d, n/d)) continue;
+		int dp = 1;
+		for (int ia=0; ia<k; ia++) dp *= d;
+		acc += dp;
+	}
+
+	int dp = 1;
+	for (int ia=0; ia<k; ia++) dp *= d;
+	acc += dp;
 	return acc;
 }
 
@@ -544,7 +548,7 @@ int liouville_lambda (int n)
 
 /* ====================================================== */
 
-#define TEST 1
+// #define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
@@ -644,10 +648,10 @@ int test_unitary_divisor (void)
 	for (i=1; i<=nmax; i++)
 	{
 		int ud = 1 << little_omega(i);
-		if (unitary_divisor(i) != ud)
+		if (sigma_unitary(i, 0) != ud)
 		{
 			printf ("ERROR: in unitary divisor function at n=%d\n", i);
-			printf ("wanted %d got %d\n", ud, unitary_divisor(i));
+			printf ("wanted %d got %d\n", ud, sigma_unitary(i, 0));
 			have_error ++;
 		}
 	}
