@@ -241,6 +241,9 @@ long partition (long n)
 {
 	if (0 == n) return 1;
 
+	// This over-flows a 64-bit int at n=316
+	if (316 < n) return 0;
+
 	if (ul_one_d_cache_check (&partition_cache, n))
 		return ul_one_d_cache_fetch(&partition_cache, n);
 
@@ -629,9 +632,26 @@ long test_partition (void)
 	if (1 != partition(1)) have_error++;
 	if (1 != partition(0)) have_error++;
 
+	long nmax=316;
+	for (long i=101; i<=nmax; i++)
+	{
+		double asymp = exp(M_PI * sqrt(2.0*i/3.0)) / (4.0*i*sqrt(3));
+		long ub = (long) asymp;
+		long lb = (long) (0.95 * asymp);
+		long part = partition(i);
+
+		if (part < lb || ub < part)
+		{
+			int b = 0; long ss = part;
+			while (0 < ss) { b++; ss>>=1; }
+			printf ("ERROR: in paritition function at n=%ld\n", i);
+			printf ("wanted %ld < %ld < %ld at bits=%d\n", lb, part, ub, b);
+			have_error ++;
+		}
+	}
 	if (0 == have_error)
 	{
-		printf ("PASS: tested parition function up to 13\n");
+		printf ("PASS: tested parition function up to %ld\n", nmax);
 	}
 	else
 	{
