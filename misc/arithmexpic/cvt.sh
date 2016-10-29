@@ -92,8 +92,8 @@
 # ../../generate/renorm little-omega-12K rg 16.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-12K.png
 #
-../../generate/renorm little-omega-120K rg 16.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-120K.png
+# ../../generate/renorm little-omega-120K rg 16.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-120K.png
 
 # ------------------
 # ./unitary unitary-120 400 400 5000 0 0 120
@@ -195,8 +195,8 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-120K.png
 # ../../generate/renorm partition-12 rg 1
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-12.png
 
-# ../../generate/renorm partition-120 rg 1
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-120.png
+../../generate/renorm partition-120 rg 1
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-120.png
 
 # ../../generate/renorm partition-1K rg 1.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-1K.png

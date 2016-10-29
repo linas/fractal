@@ -52,11 +52,11 @@ totient.o:	totient.c totient.h
 
 .c.o:
 	$(CC) -c $<
-	ar crU $(LIB)/libfunc.a $@
+	ar cruU $(LIB)/libfunc.a $@
 
 .C.o:
 	$(CCP) -c $<
-	ar crU $(LIB)/libfunc.a $@
+	ar cruU $(LIB)/libfunc.a $@
 
 clean:
 	cd test; make clean

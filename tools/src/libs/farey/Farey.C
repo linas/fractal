@@ -642,7 +642,7 @@ ContinuedFraction::GapSum (int sn, int tn, int un, int vn)
 	ub = (-ua+ta*ta/sa)/(sa*sa);
 	vb = (-va + ta*(2.0*ua - ta*ta/sa)/sa)/(sa*sa);
 
-	rdenom = denom / gcf32 (num, denom);
+	rdenom = denom / gcf64 (num, denom);
 	
 	vb *= 2.0*((double)rdenom)*((double)rdenom);
    return (vb);
