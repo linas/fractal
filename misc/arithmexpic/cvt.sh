@@ -85,23 +85,29 @@
 # ./little_omega little-omega-120 400 400 5000 0 0 120
 # ../../generate/renorm little-omega-120 rg 4.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-120.png
-# 
+#
 # ../../generate/renorm little-omega-1K rg 8.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-1K.png
 #
 # ../../generate/renorm little-omega-12K rg 16.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-12K.png
+#
+../../generate/renorm little-omega-120K rg 16.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > little-omega-120K.png
 
 # ------------------
 # ./unitary unitary-120 400 400 5000 0 0 120
 # ../../generate/renorm unitary-120 rg 2.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-120.png
-# 
+#
 # ../../generate/renorm unitary-1K rg 2.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-1K.png
 #
 # ../../generate/renorm unitary-12K rg 3.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-12K.png
+#
+# ../../generate/renorm unitary-120K rg 3.0
+#  cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > unitary-120K.png
 
 # ------------------
 # ./big_omega_exp_mag liouv-omega-120 400 400 5000 0 0 120
@@ -180,20 +186,20 @@
 # ./isqrt_bit isqrt-120 400 400 5000 0 0 120
 # ../../generate/renorm isqrt-120 rg 8.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > isqrt-120.png
-# 
+#
 # ../../generate/renorm isqrt-1K rg 16.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > isqrt-1K.png
 #
 # ------------------
 # ./partition_bit partition-120 400 400 5000 0 0 120
-../../generate/renorm partition-12 rg 1
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-12.png
+# ../../generate/renorm partition-12 rg 1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-12.png
 
-../../generate/renorm partition-120 rg 1
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-120.png
+# ../../generate/renorm partition-120 rg 1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-120.png
 
-../../generate/renorm partition-1K rg 1.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-1K.png
+# ../../generate/renorm partition-1K rg 1.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-1K.png
 #
 # ------------------
 ../../generate/renorm exp-x rg 3.0
