@@ -264,8 +264,8 @@ unsigned __int128 partitionll (long n)
 {
 	if (0 == n) return 1;
 
-	// This over-flows a 128-bit int at n=404
-	// if (404 < n) return 0;
+	// This over-flows a 128-bit int at n=1249
+	if (1249 < n) return 0;
 
 	if (ull_one_d_cache_check (&partition_ll_cache, n))
 		return ull_one_d_cache_fetch(&partition_ll_cache, n);
@@ -277,12 +277,16 @@ unsigned __int128 partitionll (long n)
 		unsigned __int128 part = partitionll(k);
 		acc += sig * part;
 #if 0
-if (400 < n) {
+if (403 < n) {
 int sb = 0; unsigned __int128 sss = sig;
 int pb = 0; unsigned __int128 ssp = part;
+int ab = 0; unsigned __int128 ssa = acc;
 while (0 < sss) { sb++; sss>>=1; }
 while (0 < ssp) { pb++; ssp>>=1; }
-printf("duuude n=%d k=%d sigb=%d pbit=%d\n", n,k,sb, pb);
+while (0 < ssa) { ab++; ssa>>=1; }
+unsigned long lo = acc & 0xffffffffffffffff;
+unsigned long hi = acc >> 64;
+printf("duuude n=%ld k=%d sigb=%d pbit=%d abit=%d acc=%lx %lx\n", n,k,sb, pb, ab, hi, lo);
 }
 #endif
 	}
@@ -565,7 +569,7 @@ long liouville_lambda (long n)
 
 /* ====================================================== */
 
-#define TEST 1
+// #define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
@@ -713,12 +717,14 @@ long test_partitionll (void)
 	if (1 != partitionll(1)) have_error++;
 	if (1 != partitionll(0)) have_error++;
 
-	long nmax=616;
+	long nmax=1249;
 	for (long i=101; i<=nmax; i++)
 	{
 		double asymp = exp(M_PI * sqrt(2.0*i/3.0)) / (4.0*i*sqrt(3));
-		unsigned __int128 ub = (long) asymp;
-		unsigned __int128 lb = (long) (0.95 * asymp);
+		unsigned __int128 ub = (unsigned __int128) asymp;
+		unsigned __int128 lb = (unsigned __int128) (0.95 * asymp);
+		if (400< i) lb = (unsigned __int128) (0.97 * asymp);
+		if (800< i) lb = (unsigned __int128) (0.98 * asymp);
 		unsigned __int128 part = partitionll(i);
 
 		if (part < lb || ub < part)
