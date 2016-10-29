@@ -36,6 +36,10 @@ extern void recip (float glob[],
 extern void takelog (float glob[],
               unsigned int sizex, unsigned int sizey);
 
+extern void takeroot (float glob[],
+              unsigned int sizex, unsigned int sizey,
+              float scale_factor);
+
 extern void fakelog (float glob[],
               unsigned int sizex, unsigned int sizey,
               float scale_factor);

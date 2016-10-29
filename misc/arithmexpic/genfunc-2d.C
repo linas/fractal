@@ -500,7 +500,6 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 	double rv = mpf_get_d(val);
 
 	rv = log(1.0 + rv);
-	rv = log(1.0 + rv);
 #endif
 
 #if PHASE

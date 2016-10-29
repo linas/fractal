@@ -8,7 +8,6 @@ CC = cc -std=gnu++11 -Wall -g -O2 $(INCLUDES)
 OLD_EXES =  brat-gapper stalk stalkmov mstop migrate measure offset \
         lyapunov next squige age phase orig whack \
         circout circin circmov brat \
-        abs clamp takelog reclamp dump renorm \
         draw dx image movie paste stats sum \
         angle curl diff div card mandel morph \
         moire automatic wind winds ray \
@@ -22,7 +21,9 @@ NEW_EXES = affine alpha baker chirikov \
         mp_zeta mobius plouffe polylog q-exp sho swap takagi totient zeta \
         ray automatic radius
 
-all:    $(NEW_EXES)
+TOOLS = renorm
+
+all:    $(NEW_EXES) $(TOOLS)
 
 dist:
 	tar -zcvf gen.tgz *.c *.C *.h Makefile .cvsignore cvt
