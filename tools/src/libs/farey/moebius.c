@@ -265,17 +265,28 @@ unsigned __int128 partitionll (long n)
 	if (0 == n) return 1;
 
 	// This over-flows a 128-bit int at n=404
-	if (404 < n) return 0;
+	// if (404 < n) return 0;
 
 	if (ull_one_d_cache_check (&partition_ll_cache, n))
 		return ull_one_d_cache_fetch(&partition_ll_cache, n);
 
 	unsigned __int128 acc = 0;
-	for (long k=0; k < n; k++)
+	for (int k=0; k < n; k++)
 	{
-		acc += sigma_one(n-k) * partitionll(k);
+		unsigned __int128 sig = sigma_one(n-k);
+		unsigned __int128 part = partitionll(k);
+		acc += sig * part;
+#if 0
+if (400 < n) {
+int sb = 0; unsigned __int128 sss = sig;
+int pb = 0; unsigned __int128 ssp = part;
+while (0 < sss) { sb++; sss>>=1; }
+while (0 < ssp) { pb++; ssp>>=1; }
+printf("duuude n=%d k=%d sigb=%d pbit=%d\n", n,k,sb, pb);
+}
+#endif
 	}
-	acc /= n;
+	acc /= (unsigned __int128) n;
 
 	ull_one_d_cache_store (&partition_ll_cache, acc, n);
 	return acc;
@@ -706,16 +717,19 @@ long test_partitionll (void)
 	for (long i=101; i<=nmax; i++)
 	{
 		double asymp = exp(M_PI * sqrt(2.0*i/3.0)) / (4.0*i*sqrt(3));
-		long ub = (long) asymp;
-		long lb = (long) (0.95 * asymp);
-		long part = partitionll(i);
+		unsigned __int128 ub = (long) asymp;
+		unsigned __int128 lb = (long) (0.95 * asymp);
+		unsigned __int128 part = partitionll(i);
 
 		if (part < lb || ub < part)
 		{
-			int b = 0; long ss = part;
+			int b = 0; unsigned __int128 ss = part;
 			while (0 < ss) { b++; ss>>=1; }
 			printf ("ERROR: in parititionll functionll at n=%ld\n", i);
-			printf ("wanted %ld < %ld < %ld at bits=%d\n", lb, part, ub, b);
+			double flb = lb;
+			double fub = ub;
+			double fp = part;
+			printf ("wanted %g < %g < %g at bits=%d\n", flb, fp, fub, b);
 			have_error ++;
 		}
 	}
