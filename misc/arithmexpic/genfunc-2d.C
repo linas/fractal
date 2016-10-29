@@ -452,7 +452,15 @@ if (rv == 0) return 1;
 void parti_mpf(mpf_t* res, long n)
 {
 	unsigned __int128 rv = partitionll(n);
-	if (rv == 0) mpf_set_ui(*res, 1);
+
+	static bool overflow = false;
+	if (0 == rv and not overflow)
+	{
+		overflow = true;
+		printf("Partition Overflow!!!!!!\n");
+	}
+	if (rv == 0) { mpf_set_ui(*res, 1); return; }
+
 
 	unsigned __int128 mask = 1UL<<30;
 	mask <<= 34;
@@ -476,19 +484,25 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 	// cpx_exponential_genfunc(sum, z, nprec, partition);
 	// cpx_exponential_genfunc(sum, z, nprec, foop);
 	cpx_exponential_genfunc_mpf(sum, z, nprec, parti_mpf);
-#if 0
+#define MAG 1
+#if MAG
+
+#if 1
 	mpf_t gabs; mpf_init(gabs);
 	cpx_abs(gabs, z);
+	mpf_sqrt(gabs, gabs);
 	mpf_neg(gabs, gabs);
 	fp_exp(gabs, gabs, nprec);
 	cpx_times_mpf(sum, sum, gabs);
 #endif
-#if 0
+
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 #endif
 
+#if PHASE
 	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
+#endif
 
 	return rv;
 }
