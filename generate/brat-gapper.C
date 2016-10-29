@@ -86,7 +86,7 @@ if (i>=sizex) printf ("xxxxxxxxxxxxxxxxx\n");
 			if (i>=sizex) continue;
 			
 
-			int gcf = gcf32 (nn,dd);
+			int gcf = gcf64 (nn,dd);
 #ifndef DO_RAND
 			if (1 != gcf) continue;
 #endif

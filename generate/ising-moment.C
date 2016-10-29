@@ -50,7 +50,7 @@ MakeHisto (
 		for (p=1; p<q; p+=2)
 		{
 			/* Find fraction p/q reduced to lowest terms */
-			int m = gcf32 (p,q);
+			int m = gcf64 (p,q);
 			if (1<m) continue;
 
 			// double frac = ((double) p)/((double) q);

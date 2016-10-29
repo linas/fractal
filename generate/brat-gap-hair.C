@@ -59,7 +59,7 @@ MakeHisto (
 		if (0 == nn) continue;
 		if (0 == dd) continue;
 
-		int gcf = gcf32 (nn,dd);
+		int gcf = gcf64 (nn,dd);
 
 		nn /= gcf;
 		dd /= gcf;
