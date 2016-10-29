@@ -162,7 +162,7 @@ void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(long))
  * in the reference mpf_t&
  */
 void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
-                                 void (*func)(mpf_t*, long))
+                                 void (*func)(mpf_t, long))
 {
 	mpf_t zabs, gabs, epsi, fact, func_val, fabs;
 	mpf_init (gabs);
@@ -188,7 +188,7 @@ void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
 
 	for (int n=1; ; n++)
 	{
-		func(&func_val, n);
+		func(func_val, n);
 
 		// The below is a weird hack to check for a value of zero
 		// returned by func.  It fails, if func is trygint to return
@@ -224,4 +224,11 @@ void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
 	fp_exp(gabs, gabs, prec);
 
 	cpx_times_mpf(sum, sum, gabs);
+
+	mpf_clear (gabs);
+	mpf_clear (zabs);
+	mpf_clear (epsi);
+	mpf_clear (fact);
+	mpf_clear (func_val);
+	mpf_clear (fabs);
 }

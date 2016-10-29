@@ -25,7 +25,7 @@ void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec,
 void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec,
                              long (*func)(long));
 void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
-                                 void (*func)(mpf_t*, long));
+                                 void (*func)(mpf_t, long));
 
 #ifdef  __cplusplus
 };

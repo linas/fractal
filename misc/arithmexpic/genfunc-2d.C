@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <time.h>
 
+#include <mp-arith.h>
 #include <mp-trig.h>
 
 #include <gpf.h>
@@ -161,6 +162,9 @@ static double totient_big(double re_q, double im_q, int itermax, double param)
 	double lr = log(r+1.0);
 	rv /= lr;
 
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -187,6 +191,9 @@ static double carmichael_big(double re_q, double im_q, int itermax, double param
 	double lr = log(r+1.0);
 	rv /= lr *lr;
 
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -209,6 +216,9 @@ static double mobius_big(double re_q, double im_q, int itermax, double param)
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -232,6 +242,9 @@ static double divisor_big(double re_q, double im_q, int itermax, double param)
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -272,6 +285,10 @@ static double little_omega_big(double re_q, double im_q, int itermax, double par
 	cpx_exponential_genfunc(sum, z, 25, little_omega);
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
+
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -285,6 +302,10 @@ static double unitary_big(double re_q, double im_q, int itermax, double param)
 	cpx_exponential_genfunc(sum, z, 25, unitary_divisor);
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
+
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -305,6 +326,10 @@ static double big_omega_big(double re_q, double im_q, int itermax, double param)
 	cpx_exponential_genfunc(sum, z, 25, big_omega);
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
+
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -334,9 +359,9 @@ static double mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, dou
 }
 
 // Well we need the logarithm; let mpf do the work.
-void mango_big(mpf_t* ln, long n)
+void mango_big(mpf_t ln, long n)
 {
-	fp_log_ui(*ln, exp_mangoldt_lambda(n), 25);
+	fp_log_ui(ln, exp_mangoldt_lambda(n), 25);
 }
 static double mangoldt_lambda_big(double re_q, double im_q, int itermax, double param)
 {
@@ -347,6 +372,10 @@ static double mangoldt_lambda_big(double re_q, double im_q, int itermax, double 
 	cpx_exponential_genfunc_mpf(sum, z, 25, mango_big);
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
+
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -378,6 +407,10 @@ static double exp_mango_big(double re_q, double im_q, int itermax, double param)
 	double r = sqrt(re_q*re_q + im_q*im_q);
 	double lr = log(r+1.0);
 	rv /= lr*lr;
+
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -408,6 +441,9 @@ static double thue_morse_big(double re_q, double im_q, int itermax, double param
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -430,6 +466,9 @@ static double isqrt_big(double re_q, double im_q, int itermax, double param)
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -449,7 +488,7 @@ if (rv == 0) return 1;
 	return rv;
 }
 
-void parti_mpf(mpf_t* res, long n)
+void parti_mpf(mpf_t res, long n)
 {
 	unsigned __int128 rv = partitionll(n);
 
@@ -459,18 +498,25 @@ void parti_mpf(mpf_t* res, long n)
 		overflow = true;
 		printf("Partition Overflow!!!!!!\n");
 	}
-	if (rv == 0) { mpf_set_ui(*res, 1); return; }
-
+	if (rv == 0) { mpf_set_ui(res, 1); return; }
 
 	unsigned __int128 mask = 1UL<<30;
 	mask <<= 34;
 	mask -= 1;
 	unsigned long lo = rv & mask;
 	unsigned long hi = rv >> 64;
-	mpf_set_ui(*res, hi);
-	mpf_mul_ui(*res, *res, 1UL<<30);
-	mpf_mul_ui(*res, *res, 1UL<<34);
-	mpf_add_ui(*res, *res, lo);
+	mpf_set_ui(res, hi);
+	mpf_mul_ui(res, res, 1UL<<30);
+	mpf_mul_ui(res, res, 1UL<<34);
+	mpf_add_ui(res, res, lo);
+}
+
+void parti_z_mpf(mpf_t res, long n)
+{
+	mpz_t part; mpz_init(part);
+	partition_z(part, n);
+	mpf_set_z(res, part);
+	mpz_clear(part);
 }
 
 static double partition_big(double re_q, double im_q, int itermax, double param)
@@ -483,7 +529,8 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 	int nprec = 45;
 	// cpx_exponential_genfunc(sum, z, nprec, partition);
 	// cpx_exponential_genfunc(sum, z, nprec, foop);
-	cpx_exponential_genfunc_mpf(sum, z, nprec, parti_mpf);
+	// cpx_exponential_genfunc_mpf(sum, z, nprec, parti_mpf);
+	cpx_exponential_genfunc_mpf(sum, z, nprec, parti_z_mpf);
 #define MAG 1
 #if MAG
 
@@ -494,6 +541,7 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 	mpf_neg(gabs, gabs);
 	fp_exp(gabs, gabs, nprec);
 	cpx_times_mpf(sum, sum, gabs);
+	mpf_clear(gabs);
 #endif
 
 	cpx_abs(val, sum);
@@ -506,6 +554,9 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 	double rv = 0.5 + 0.5 * atan2(cpx_get_im(sum), cpx_get_re(sum))/M_PI;
 #endif
 
+	cpx_clear(sum);
+	cpx_clear(z);
+	mpf_clear(val);
 	return rv;
 }
 
