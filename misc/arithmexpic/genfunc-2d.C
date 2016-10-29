@@ -449,6 +449,22 @@ if (rv == 0) return 1;
 	return rv;
 }
 
+void parti_mpf(mpf_t* res, long n)
+{
+	unsigned __int128 rv = partitionll(n);
+	if (rv == 0) mpf_set_ui(*res, 1);
+
+	unsigned __int128 mask = 1UL<<30;
+	mask <<= 34;
+	mask -= 1;
+	unsigned long lo = rv & mask;
+	unsigned long hi = rv >> 64;
+	mpf_set_ui(*res, hi);
+	mpf_mul_ui(*res, *res, 1UL<<30);
+	mpf_mul_ui(*res, *res, 1UL<<34);
+	mpf_add_ui(*res, *res, lo);
+}
+
 static double partition_big(double re_q, double im_q, int itermax, double param)
 {
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
@@ -458,7 +474,8 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 
 	int nprec = 45;
 	// cpx_exponential_genfunc(sum, z, nprec, partition);
-	cpx_exponential_genfunc(sum, z, nprec, foop);
+	// cpx_exponential_genfunc(sum, z, nprec, foop);
+	cpx_exponential_genfunc_mpf(sum, z, nprec, parti_mpf);
 #if 0
 	mpf_t gabs; mpf_init(gabs);
 	cpx_abs(gabs, z);
