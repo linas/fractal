@@ -166,7 +166,7 @@ long sigma (long n, long a)
 	return acc;
 }
 
-/* same as above, but for float-polong power */
+/* same as above, but for float-point power */
 long double sigmaf (long n, long double a)
 {
 	long double acc = 0;
@@ -223,26 +223,26 @@ long sigma_unitary (long n, long k)
 }
 
 /* ====================================================== */
-DECLARE_UI_CACHE (sigma_one_cache);
+DECLARE_UL_CACHE (sigma_one_cache);
 
 long sigma_one (long n)
 {
-	if (ui_one_d_cache_check (&sigma_one_cache, n))
-		return ui_one_d_cache_fetch(&sigma_one_cache, n);
+	if (ul_one_d_cache_check (&sigma_one_cache, n))
+		return ul_one_d_cache_fetch(&sigma_one_cache, n);
 
 	long val = sigma(n, 1);
-	ui_one_d_cache_store (&sigma_one_cache, val, n);
+	ul_one_d_cache_store (&sigma_one_cache, val, n);
 	return val;
 }
 
-DECLARE_UI_CACHE (partition_cache);
+DECLARE_UL_CACHE (partition_cache);
 
 long partition (long n)
 {
 	if (0 == n) return 1;
 
-	if (ui_one_d_cache_check (&partition_cache, n))
-		return ui_one_d_cache_fetch(&partition_cache, n);
+	if (ul_one_d_cache_check (&partition_cache, n))
+		return ul_one_d_cache_fetch(&partition_cache, n);
 
 	long acc = 0;
 	for (long k=0; k < n; k++)
@@ -251,7 +251,7 @@ long partition (long n)
 	}
 	acc /= n;
 
-	ui_one_d_cache_store (&partition_cache, acc, n);
+	ul_one_d_cache_store (&partition_cache, acc, n);
 	return acc;
 }
 
@@ -415,7 +415,7 @@ long double mangoldt_lambda_cached (long n)
 /* ====================================================== */
 
 DECLARE_LD_CACHE (mangoldt_idx_cache);
-DECLARE_UI_CACHE (mangoldt_pow_cache);
+DECLARE_UL_CACHE (mangoldt_pow_cache);
 static long man_last_val =1;
 static long man_last_idx =0;
 
@@ -426,7 +426,7 @@ long double mangoldt_lambda_indexed (long n)
 		return ld_one_d_cache_fetch(&mangoldt_idx_cache, n);
 	}
 
-	ui_one_d_cache_check (&mangoldt_pow_cache, n);
+	ul_one_d_cache_check (&mangoldt_pow_cache, n);
 	while (1)
 	{
 		man_last_val++;
@@ -435,18 +435,18 @@ long double mangoldt_lambda_indexed (long n)
 		{
 			man_last_idx++;
 			ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
-			ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
+			ul_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
 			if (n == man_last_idx)
 				return val;
 		}
 	}
 }
 
-unsigned long mangoldt_lambda_index_polong (long n)
+unsigned long mangoldt_lambda_index_point (long n)
 {
-	if (ui_one_d_cache_check (&mangoldt_pow_cache, n))
+	if (ul_one_d_cache_check (&mangoldt_pow_cache, n))
 	{
-		return ui_one_d_cache_fetch(&mangoldt_pow_cache, n);
+		return ul_one_d_cache_fetch(&mangoldt_pow_cache, n);
 	}
 
 	ld_one_d_cache_check (&mangoldt_idx_cache, n);
@@ -458,7 +458,7 @@ unsigned long mangoldt_lambda_index_polong (long n)
 		{
 			man_last_idx++;
 			ld_one_d_cache_store (&mangoldt_idx_cache, val, man_last_idx);
-			ui_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
+			ul_one_d_cache_store (&mangoldt_pow_cache, man_last_val, man_last_idx);
 			if (n == man_last_idx)
 				return man_last_val;
 		}
