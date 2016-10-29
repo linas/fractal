@@ -433,6 +433,21 @@ static double isqrt_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
+long foop(long n)
+{
+	static long maxn=0, maxv;
+	long rv = partition(n);
+	if (maxn < n) {
+		maxn = n;
+		maxv = rv;
+		int b = 0;
+		long ss = rv;
+		while (0 < ss) { b++; ss>>=1; }
+		printf("partition n=%ld v=%ld bits=%d\n", n, maxv, b);
+	}
+	return rv;
+}
+
 static double partition_big(double re_q, double im_q, int itermax, double param)
 {
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
@@ -441,7 +456,8 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 	cpx_set_d(z, re_q, im_q);
 
 	int nprec = 45;
-	cpx_exponential_genfunc(sum, z, nprec, partition);
+	// cpx_exponential_genfunc(sum, z, nprec, partition);
+	cpx_exponential_genfunc(sum, z, nprec, foop);
 #if 0
 	mpf_t gabs; mpf_init(gabs);
 	cpx_abs(gabs, z);
