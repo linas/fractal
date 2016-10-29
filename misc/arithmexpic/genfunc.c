@@ -98,7 +98,7 @@ void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(long))
  * Note the assumption about the leading asymptotic behavior of
  * the series.
  */
-void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(lon))
+void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 {
 	mpf_t zabs, gabs, epsi, fact;
 	mpf_init (gabs);
