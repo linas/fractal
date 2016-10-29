@@ -53,6 +53,7 @@ long sigma_one (long n);
  * Parition function
  */
 long partition (long n);
+unsigned __int128 partitionll (long n);
 
 /** classic Moebius mu function */
 long moebius_mu (long n);

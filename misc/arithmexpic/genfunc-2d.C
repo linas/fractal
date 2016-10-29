@@ -437,6 +437,7 @@ long foop(long n)
 {
 	static long maxn=0, maxv;
 	long rv = partition(n);
+if (rv == 0) return 1;
 	if (maxn < n) {
 		maxn = n;
 		maxv = rv;

@@ -258,6 +258,29 @@ long partition (long n)
 	return acc;
 }
 
+DECLARE_ULL_CACHE (partition_ll_cache);
+
+unsigned __int128 partitionll (long n)
+{
+	if (0 == n) return 1;
+
+	// This over-flows a 128-bit int at n=404
+	if (404 < n) return 0;
+
+	if (ull_one_d_cache_check (&partition_ll_cache, n))
+		return ull_one_d_cache_fetch(&partition_ll_cache, n);
+
+	unsigned __int128 acc = 0;
+	for (long k=0; k < n; k++)
+	{
+		acc += sigma_one(n-k) * partitionll(k);
+	}
+	acc /= n;
+
+	ull_one_d_cache_store (&partition_ll_cache, acc, n);
+	return acc;
+}
+
 /* ====================================================== */
 
 long moebius_mu (long n)
@@ -531,7 +554,7 @@ long liouville_lambda (long n)
 
 /* ====================================================== */
 
-// #define TEST 1
+#define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
@@ -660,6 +683,53 @@ long test_partition (void)
 	return have_error;
 }
 
+long test_partitionll (void)
+{
+	long have_error=0;
+
+	if (101 != partitionll(13)) have_error++;
+	if (77 != partitionll(12)) have_error++;
+	if (56 != partitionll(11)) have_error++;
+	if (42 != partitionll(10)) have_error++;
+	if (30 != partitionll(9)) have_error++;
+	if (22 != partitionll(8)) have_error++;
+	if (15 != partitionll(7)) have_error++;
+	if (11 != partitionll(6)) have_error++;
+	if (7 != partitionll(5)) have_error++;
+	if (5 != partitionll(4)) have_error++;
+	if (3 != partitionll(3)) have_error++;
+	if (2 != partitionll(2)) have_error++;
+	if (1 != partitionll(1)) have_error++;
+	if (1 != partitionll(0)) have_error++;
+
+	long nmax=616;
+	for (long i=101; i<=nmax; i++)
+	{
+		double asymp = exp(M_PI * sqrt(2.0*i/3.0)) / (4.0*i*sqrt(3));
+		long ub = (long) asymp;
+		long lb = (long) (0.95 * asymp);
+		long part = partitionll(i);
+
+		if (part < lb || ub < part)
+		{
+			int b = 0; long ss = part;
+			while (0 < ss) { b++; ss>>=1; }
+			printf ("ERROR: in parititionll functionll at n=%ld\n", i);
+			printf ("wanted %ld < %ld < %ld at bits=%d\n", lb, part, ub, b);
+			have_error ++;
+		}
+	}
+	if (0 == have_error)
+	{
+		printf ("PASS: tested paritionll function up to %ld\n", nmax);
+	}
+	else
+	{
+		printf ("FAIL: paritionll function is bad\n");
+	}
+	return have_error;
+}
+
 long test_moebius(void)
 {
 	long have_error = 0;
@@ -729,6 +799,7 @@ int main()
 	test_sigma_zero ();
 	test_unitary_divisor();
 	test_partition ();
+	test_partitionll ();
 	test_lambda ();
 	test_moebius ();
 

@@ -13,7 +13,7 @@
 #include "cache.h"
 
 /* =============================================================== */
-/** TYPE_NAME##_d_cache_check() -- check if long double value is in the cache
+/** TYPE_NAME##_d_cache_check() -- check if value is in the cache
  *  Returns true if the value is in the cache, else returns false.
  *  This assumes a 1-dimensional cache layout (simple aray)
  */
@@ -99,3 +99,4 @@ void TYPE_NAME##_one_d_cache_clear(TYPE_NAME##_cache *c)	\
 DEFINE_CACHE(ld, long double, unsigned int)
 DEFINE_CACHE(ui, unsigned int, unsigned int)
 DEFINE_CACHE(ul, unsigned long, unsigned long)
+DEFINE_CACHE(ull, unsigned __int128, unsigned int)

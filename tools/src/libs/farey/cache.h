@@ -33,7 +33,7 @@ typedef struct {
  */
 bool ld_one_d_cache_check(ld_cache *c, unsigned int n);
 
-/** 
+/**
  * ld_one_d_cache_fetch - fetch value from cache
  */
 long double ld_one_d_cache_fetch(ld_cache *c, unsigned int n);
@@ -71,7 +71,7 @@ typedef struct {
  */
 bool ui_one_d_cache_check(ui_cache *c, unsigned int n);
 
-/** 
+/**
  * ui_one_d_cache_fetch - fetch value from cache
  */
 unsigned int ui_one_d_cache_fetch(ui_cache *c, unsigned int n);
@@ -109,7 +109,7 @@ typedef struct {
  */
 bool ul_one_d_cache_check(ul_cache *c, unsigned long n);
 
-/** 
+/**
  * ul_one_d_cache_fetch - fetch value from cache
  */
 unsigned long ul_one_d_cache_fetch(ul_cache *c, unsigned long n);
@@ -123,5 +123,43 @@ void ul_one_d_cache_store(ul_cache *c, unsigned long val, unsigned long n);
  * Clear the cache.
  */
 void ul_one_d_cache_clear(ul_cache *c);
+
+/* ======================================================================= */
+/* Cache management -- unsigned long long */
+
+typedef struct {
+	unsigned __int128 nmax;
+	unsigned __int128 *cache;
+	bool *ticky;
+	bool disabled;
+	pthread_spinlock_t spin;
+} ull_cache;
+
+#define DECLARE_ULL_CACHE(name)         \
+	static ull_cache name = {.nmax=0, .cache=NULL, .ticky=NULL, \
+		.disabled = false, }; \
+	__attribute__((constructor)) void name##_init(void) { \
+	pthread_spin_init(&name.spin, 0); }
+
+/** ull_one_d_cache_check() -- check if the u__int128 value is in the cache.
+ *  Returns true if the value is in the cache, else returns false.
+ *  This assumes a 1-dimensional cache layout (simple array).
+ */
+bool ull_one_d_cache_check(ull_cache *c, unsigned int n);
+
+/**
+ * ull_one_d_cache_fetch - fetch value from cache
+ */
+unsigned __int128 ull_one_d_cache_fetch(ull_cache *c, unsigned int n);
+
+/**
+ * ull_one_d_cache_store - store value in cache
+ */
+void ull_one_d_cache_store(ull_cache *c, unsigned __int128 val, unsigned int n);
+
+/**
+ * Clear the cache.
+ */
+void ull_one_d_cache_clear(ull_cache *c);
 
 /* ======================================================================= */
