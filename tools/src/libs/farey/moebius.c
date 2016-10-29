@@ -52,7 +52,7 @@ init_prime_sieve (long long prod)
 
 	if (!sieve)
 	{
-		sieve = (unsigned long *) malloc (8192*sizeof (unsigned int));
+		sieve = (unsigned long *) malloc (8192*sizeof (unsigned long));
 		sieve_size = 8192;
 		sieve_max = 2;
 		sieve[0] = 2;
@@ -80,7 +80,7 @@ init_prime_sieve (long long prod)
 				if (pos >= sieve_size)
 				{
 					sieve_size += 8192;
-					sieve = (unsigned long *)realloc (sieve, sieve_size * sizeof (unsigned int));
+					sieve = (unsigned long *)realloc (sieve, sieve_size * sizeof (unsigned long));
 				}
 				break;
 			}
