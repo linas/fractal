@@ -118,6 +118,20 @@ void recip (float glob[],
 
 /*-------------------------------------------------------------------*/
 
+void takeroot (float glob[],
+              unsigned int sizex, unsigned int sizey, float scale)
+{
+   long		i;
+
+   /* flatten out, compress the scale. */
+   for (i=0; i<sizex*sizey; i++) {
+      glob [i] = (float) pow((double) glob[i], 1.0/scale);
+		if (!isnormal(glob[i])) glob[i] = 0.0;
+   }
+}
+
+/*-------------------------------------------------------------------*/
+
 void takelog (float glob[],
               unsigned int sizex, unsigned int sizey)
 {

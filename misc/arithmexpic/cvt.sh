@@ -204,7 +204,7 @@
 # ../../generate/renorm partition-1200 rg 1
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-1200.png
 
-../../generate/renorm partition-1K rg 1.0
+../../generate/renorm partition-1K rg 1
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-1K.png
 #
 # ------------------

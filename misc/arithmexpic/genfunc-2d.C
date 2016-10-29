@@ -487,7 +487,7 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 #define MAG 1
 #if MAG
 
-#if 1
+#if 0
 	mpf_t gabs; mpf_init(gabs);
 	cpx_abs(gabs, z);
 	mpf_sqrt(gabs, gabs);
@@ -498,6 +498,9 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
+
+	rv = log(1.0 + rv);
+	rv = log(1.0 + rv);
 #endif
 
 #if PHASE
