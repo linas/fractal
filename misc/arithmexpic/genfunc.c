@@ -157,9 +157,9 @@ void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 }
 
 /**
- * Exponential generating function for the arithmetic series
- * Same as above, except that func returns an rela value, stored
- * in the reference mpf_t&
+ * Exponential generating function for the arithmetic series.
+ * Same as above, except that func returns an real value, stored
+ * in mpf_t
  */
 void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
                                  void (*func)(mpf_t, long))
@@ -186,12 +186,13 @@ void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
 	cpx_init(term);
 	cpx_set(zn, z);
 
-	for (int n=1; ; n++)
+	int n;
+	for (n=1; ; n++)
 	{
 		func(func_val, n);
 
 		// The below is a weird hack to check for a value of zero
-		// returned by func.  It fails, if func is trygint to return
+		// returned by func.  It fails, if func is trying to return
 		// a very small but non-zero value; that is why it a hack.
 		// Currently, none of our functions return small values,
 		// so this is OK, for now.
@@ -205,7 +206,8 @@ void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
 			// The following checks the loop termination condition,
 			// which is that the size of the term is less than epsilon.
 			cpx_abs(gabs, term);
-			mpf_mul_ui(gabs, gabs, n);
+			// mpf_mul_ui(gabs, gabs, n);
+			mpf_mul(gabs, gabs, fabs);
 
 			cpx_abs(zabs, sum);
 			mpf_mul(zabs, zabs, epsi);
@@ -225,6 +227,13 @@ void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
 
 	cpx_times_mpf(sum, sum, gabs);
 
+double s = mpf_get_d(gabs);
+cpx_abs(gabs, z);
+double r = mpf_get_d(gabs);
+cpx_abs(gabs, sum);
+double g = mpf_get_d(gabs);
+double ph = 0.5 + 0.5 * atan2(cpx_get_im(z), cpx_get_re(z))/M_PI;
+printf("duuude r=%9.3f ph=%f n=%d g=%9.5e scale=%g\n", r, ph, n, g,s);
 	mpf_clear (gabs);
 	mpf_clear (zabs);
 	mpf_clear (epsi);

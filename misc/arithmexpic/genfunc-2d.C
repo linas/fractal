@@ -516,6 +516,14 @@ void parti_z_mpf(mpf_t res, long n)
 	mpz_t part; mpz_init(part);
 	partition_z(part, n);
 	mpf_set_z(res, part);
+#if 0
+static int last=0;
+if (last < n) {
+printf("duuude parti n=%d bits=%lu\n", n, mpz_sizeinbase(part, 2));
+last = n;
+}
+#endif
+
 	mpz_clear(part);
 }
 
@@ -526,7 +534,7 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-	int nprec = 45;
+	int nprec = 285;
 	// cpx_exponential_genfunc(sum, z, nprec, partition);
 	// cpx_exponential_genfunc(sum, z, nprec, foop);
 	// cpx_exponential_genfunc_mpf(sum, z, nprec, parti_mpf);
@@ -545,6 +553,7 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 #endif
 
 	cpx_abs(val, sum);
+
 	double rv = mpf_get_d(val);
 
 	rv = log(1.0 + rv);

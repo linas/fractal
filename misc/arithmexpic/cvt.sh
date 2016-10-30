@@ -195,9 +195,9 @@
 # ../../generate/renorm partition-12 rg 1
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-12.png
 
-# ../../generate/takeroot partition-120 rg 6
-# ../../generate/renorm rg rg 0.8
-# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-120.png
+../../generate/takeroot partition-120 rg 6
+../../generate/renorm rg rg 0.8
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-120.png
 
 # ../../generate/renorm partition-160 rg 1
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-160.png
