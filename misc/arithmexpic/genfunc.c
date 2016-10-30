@@ -227,6 +227,7 @@ void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
 
 	cpx_times_mpf(sum, sum, gabs);
 
+#if 0
 double s = mpf_get_d(gabs);
 cpx_abs(gabs, z);
 double r = mpf_get_d(gabs);
@@ -234,6 +235,7 @@ cpx_abs(gabs, sum);
 double g = mpf_get_d(gabs);
 double ph = 0.5 + 0.5 * atan2(cpx_get_im(z), cpx_get_re(z))/M_PI;
 printf("duuude r=%9.3f ph=%f n=%d g=%9.5e scale=%g\n", r, ph, n, g,s);
+#endif
 	mpf_clear (gabs);
 	mpf_clear (zabs);
 	mpf_clear (epsi);

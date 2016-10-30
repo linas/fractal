@@ -517,7 +517,7 @@ void parti_z_mpf(mpf_t res, long n)
 	partition_z(part, n);
 	mpf_set_z(res, part);
 #if 0
-static int last=0;
+static int last=100;
 if (last < n) {
 printf("duuude parti n=%d bits=%lu\n", n, mpz_sizeinbase(part, 2));
 last = n;
@@ -529,12 +529,16 @@ last = n;
 
 static double partition_big(double re_q, double im_q, int itermax, double param)
 {
+	// For radius to 600, we need maybe 50 decimals (340 bits)
+	// For radius 6000, partition fun needs 120 decimals (400 bits)
+	int nprec = 185;
+	mpf_set_default_prec(nprec * 3.321);
+
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
 	mpf_t val; mpf_init(val);
 
 	cpx_set_d(z, re_q, im_q);
 
-	int nprec = 285;
 	// cpx_exponential_genfunc(sum, z, nprec, partition);
 	// cpx_exponential_genfunc(sum, z, nprec, foop);
 	// cpx_exponential_genfunc_mpf(sum, z, nprec, parti_mpf);
@@ -556,7 +560,7 @@ static double partition_big(double re_q, double im_q, int itermax, double param)
 
 	double rv = mpf_get_d(val);
 
-	rv = log(1.0 + rv);
+	// rv = log(1.0 + rv);
 #endif
 
 #if PHASE
