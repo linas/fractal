@@ -142,6 +142,7 @@ if (rc) {printf("duuude found noothing\n");}
 		return false;
 	}
 
+	printf("---------------\n");
 	cpx_prt("zero = ", zero); printf("\n");
 
 	mpf_t r, t, pi;
@@ -157,7 +158,6 @@ if (rc) {printf("duuude found noothing\n");}
 	mpf_div(t, t, pi);
 
 	fp_prt("theta/pi = ", t); printf("\n");
-	fflush(stdout);
 
 #define CHECK_RESULT 1
 #ifdef CHECK_RESULT
@@ -169,6 +169,9 @@ if (rc) {printf("duuude found noothing\n");}
 	double eps = sqrt(eps_r*eps_r + eps_i*eps_i);
 	printf("fun at zero = %g\n", eps);
 #endif
+
+	printf("\n");
+	fflush(stdout);
 
 	cpx_clear(a);
 	cpx_clear(b);
