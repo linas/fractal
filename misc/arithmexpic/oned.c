@@ -21,7 +21,10 @@ void parti_z_mpf(mpf_t res, long n)
 #if 0
 static int last=0;
 if (last < n) {
-printf("duuude parti n=%d bits=%lu\n", n, mpz_sizeinbase(part, 2));
+int bits = mpz_sizeinbase(part, 2);
+double ln2t = log(2.0) / log(10.0);
+int decs = bits * ln2t;
+printf("partiion n=%ld bits=%d prec=%d\n", n, bits, decs);
 last = n;
 }
 #endif
@@ -31,15 +34,19 @@ last = n;
 
 int main()
 {
+	int nprec = 85;
+
+	mpf_set_default_prec(nprec * 3.321);
+
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
 	mpf_t val; mpf_init(val);
 
-	int nprec = 285;
 
 	double re_q = 0.0;
 	double im_q = 0.0;
 	for (re_q = 50; re_q < 700; re_q += 30)
 	{
+		im_q = re_q;
 		cpx_set_d(z, re_q, im_q);
 
 		cpx_exponential_genfunc_mpf(sum, z, nprec, parti_z_mpf);
