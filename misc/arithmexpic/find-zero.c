@@ -85,13 +85,15 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
 
+printf("duuude delta=%g phase=%g\n", hi-lo, phase);
 	// We expect the phase to wind around, so that hi and low
 	// differ by almost 2pi.
 	if (hi-lo < 3.0) return false;
 
 	// We expect the integral to be large, approaching 2pi.
-	if (phase < 3.0) return false;
+	if (fabs(phase) < 3.0) return false;
 
+printf("duuude we are goood to go!\n");
 	cpx_t e1, e2, zero;
 	cpx_init2(e1, bits);
 	cpx_init2(e2, bits);
@@ -131,9 +133,10 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 void survey(void (*func)(cpx_t f, cpx_t z, int nprec),
             double rmax, double cell_size, int nprec)
 {
-	for (double r=cell_size; r<rmax; r += cell_size)
+	for (double r=1.0; r<rmax; r += cell_size)
 	{
-		for (double t=0.0; t < 0.5; t += cell_size/r)
+		double step = cell_size / (2.0 * M_PI * r);
+		for (double t=0.0; t < 0.5; t += step)
 		{
 			survey_cell(func, r, t, cell_size, nprec);
 		}
