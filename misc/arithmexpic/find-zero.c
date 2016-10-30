@@ -11,6 +11,9 @@
 
 #include <mp-arith.h>
 #include <mp-complex.h>
+#include <mp-consts.h>
+#include <mp-misc.h>
+#include <mp-trig.h>
 #include <mp-zerofind.h>
 #include "genfunc.h"
 
@@ -29,7 +32,8 @@ void parti(cpx_t f, cpx_t z, int nprec)
 }
 
 bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
-                 double rguess, double tguess, double cell_size, int nprec)
+                 double rguess, double tguess, double cell_size,
+                 int ndigits, int nprec)
 {
 	mp_bitcnt_t bits = ((double) nprec) * 3.3219281 + 50;
 
@@ -116,7 +120,7 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	cpx_sub(e1, b, a);
 	cpx_sub(e2, d, a);
 
-	int rc = cpx_find_zero(zero, func, a, e1, e2, 20, nprec);
+	int rc = cpx_find_zero(zero, func, a, e1, e2, ndigits, nprec);
 
 if (rc) {printf("duuude found noothing\n");}
 
@@ -138,21 +142,28 @@ if (rc) {printf("duuude found noothing\n");}
 		return false;
 	}
 
-	double re = cpx_get_re(zero);
-	double im = cpx_get_im(zero);
+	cpx_prt("zero = ", zero); printf("\n");
 
-	double r = sqrt(re*re + im*im);
-	double t = atan2(im, re) / M_PI;
+	mpf_t r, t, pi;
+	mpf_init2(r, bits);
+	mpf_init2(t, bits);
+	mpf_init2(pi, bits);
 
-	printf("z = %-16.14g * exp(i pi %-16.14g)", r, t);
-	printf(" = %-16.14g + I %-16.14g\n", re, im);
+	cpx_abs(r, zero);
+	fp_prt("r = ", r); printf("\n");
+
+	fp_arctan2(t, zero->im, zero->re, nprec);
+	fp_pi(pi, nprec);
+	mpf_div(t, t, pi);
+
+	fp_prt("theta/pi = ", t); printf("\n");
 	fflush(stdout);
 
 #define CHECK_RESULT 1
 #ifdef CHECK_RESULT
 	cpx_t check;
 	cpx_init(check);
-	func(check, zero, 20);
+	func(check, zero, nprec);
 	double eps_r = cpx_get_re(check);
 	double eps_i = cpx_get_im(check);
 	double eps = sqrt(eps_r*eps_r + eps_i*eps_i);
@@ -175,14 +186,15 @@ if (rc) {printf("duuude found noothing\n");}
 }
 
 void survey(void (*func)(cpx_t f, cpx_t z, int nprec),
-            double rmax, double cell_size, int nprec)
+            double rmax, double cell_size,
+            int ndigits, int nprec)
 {
 	for (double r=1.0; r<rmax; r += cell_size)
 	{
 		double step = cell_size / r;
 		for (double t=0.0; t < M_PI; t += step)
 		{
-			survey_cell(func, r, t, cell_size, nprec);
+			survey_cell(func, r, t, cell_size, ndigits, nprec);
 		}
 	}
 }
@@ -195,13 +207,13 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 
-	int nprec = 60;
+	int nprec = 80;
 	mp_bitcnt_t bits = ((double) nprec) * 3.3219281 + 50;
 	mpf_set_default_prec(bits);
 
 	double rmax = atof(argv[1]);
 	double cell_size = atof(argv[2]);
-	survey(parti, rmax, cell_size, nprec);
+	survey(parti, rmax, cell_size, 40, nprec);
 
 	printf("Done!\n");
 }
