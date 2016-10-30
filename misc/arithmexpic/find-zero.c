@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 #include <mp-arith.h>
+#include <mp-complex.h>
 #include <mp-zerofind.h>
 #include "genfunc.h"
 
@@ -30,7 +31,7 @@ void parti(cpx_t f, cpx_t z, int nprec)
 bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
                  double rguess, double tguess, double cell_size, int nprec)
 {
-	mp_bitcnt_t bits = 10 + ((double) prec) * 3.3219281;
+	mp_bitcnt_t bits = 10 + ((double) nprec) * 3.3219281;
 
 	cpx_t a,b,c,d;
 	cpx_init2(a, bits);
@@ -50,11 +51,11 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	double ct = cos(tguess);
 	cpx_set_d(a, rguess*ct, rguess*st);
 	double rgd = rguess + cell_size;
-	cpx_set_d(b, rgt*ct, rgt*st);
-	tguess += 2.0 * M_PI * cell_size / rguess
+	cpx_set_d(b, rgd*ct, rgd*st);
+	tguess += 2.0 * M_PI * cell_size / rguess;
 	st = sin(tguess);
 	ct = cos(tguess);
-	cpx_set_d(c, rgt*ct, rgt*st);
+	cpx_set_d(c, rgd*ct, rgd*st);
 	cpx_set_d(d, rguess*ct, rguess*st);
 
 	// Evaluate at the four corners
@@ -64,21 +65,22 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	func(fd, d, nprec);
 
 	// Compute contour integral i.e. sum the phases.
-	double phase = atan2(cimag(fa), creal(fa));
+	double phase = atan2(cpx_get_im(fa), cpx_get_re(fa));
 	double sum = phase;
 	double hi = phase;
 	double lo = phase;
-	phase = atan2(cimag(fb), creal(fb));
+
+	phase = atan2(cpx_get_im(fb), cpx_get_re(fb));
 	sum += phase;
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
 
-	phase = atan2(cimag(fc), creal(fc));
+	phase = atan2(cpx_get_im(fc), cpx_get_re(fc));
 	sum += phase;
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
 
-	phase = atan2(cimag(fd), creal(fd));
+	phase = atan2(cpx_get_im(fd), cpx_get_re(fd));
 	sum += phase;
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
@@ -94,13 +96,13 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	cpx_init2(e1, bits);
 	cpx_init2(e2, bits);
 	cpx_init2(zero, bits);
-	cpx_minus(e1, b, a);
-	cpx_minus(e2, c, a);
+	cpx_sub(e1, b, a);
+	cpx_sub(e2, c, a);
 
 	int rc = cpx_find_zero(zero, func, a, e1, e2, 20, nprec);
 
 	// if rc is not zero, then nothing was found
-	if (rc) return;
+	if (rc) return false;
 
 	double re = cpx_get_re(zero);
 	double im = cpx_get_im(zero);
@@ -122,6 +124,8 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	double eps = sqrt(eps_r*eps_r + eps_i*eps_i);
 	printf("fun at zero = %g\n", eps);
 #endif
+
+	return true;
 }
 
 void survey(void (*func)(cpx_t f, cpx_t z, int nprec),
@@ -132,7 +136,6 @@ void survey(void (*func)(cpx_t f, cpx_t z, int nprec),
 		for (double t=0.0; t < 0.5; t += cell_size/r)
 		{
 			survey_cell(func, r, t, cell_size, nprec);
-			restart = false;
 		}
 	}
 }
