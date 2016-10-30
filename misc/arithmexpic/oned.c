@@ -1,5 +1,5 @@
 /*
- * Generating functions
+ * Step in one direction and print the result.
  *
  * Oct 2016
  */
@@ -36,7 +36,7 @@ int main()
 {
 	int nprec = 85;
 
-	mpf_set_default_prec(nprec * 3.321);
+	mpf_set_default_prec(nprec * 3.321+ 50);
 
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
 	mpf_t val; mpf_init(val);

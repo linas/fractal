@@ -31,7 +31,7 @@ void parti(cpx_t f, cpx_t z, int nprec)
 bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
                  double rguess, double tguess, double cell_size, int nprec)
 {
-	mp_bitcnt_t bits = 10 + ((double) nprec) * 3.3219281;
+	mp_bitcnt_t bits = ((double) nprec) * 3.3219281 + 50;
 
 	cpx_t a,b,c,d;
 	cpx_init2(a, bits);
@@ -46,13 +46,12 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	cpx_init2(fd, bits);
 
 	// Set up four corners
-	tguess *= 2.0 * M_PI;
 	double st = sin(tguess);
 	double ct = cos(tguess);
 	cpx_set_d(a, rguess*ct, rguess*st);
 	double rgd = rguess + cell_size;
 	cpx_set_d(b, rgd*ct, rgd*st);
-	tguess += 2.0 * M_PI * cell_size / rguess;
+	tguess += cell_size / rguess;
 	st = sin(tguess);
 	ct = cos(tguess);
 	cpx_set_d(c, rgd*ct, rgd*st);
@@ -85,26 +84,59 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
 
-printf("duuude delta=%g phase=%g\n", hi-lo, phase);
 	// We expect the phase to wind around, so that hi and low
 	// differ by almost 2pi.
-	if (hi-lo < 3.0) return false;
-
 	// We expect the integral to be large, approaching 2pi.
-	if (fabs(phase) < 3.0) return false;
+	// if (hi-lo < 4.0 or fabs(phase) < 3.0)
+	if (hi-lo < 4.0)
+	{
+		cpx_clear(a);
+		cpx_clear(b);
+		cpx_clear(c);
+		cpx_clear(d);
 
-printf("duuude we are goood to go!\n");
+		cpx_clear(fa);
+		cpx_clear(fb);
+		cpx_clear(fc);
+		cpx_clear(fd);
+
+		return false;
+	}
+
+	// Now, a will be the center of the rectangle.
+	cpx_add(a, a, b);
+	cpx_add(a, a, c);
+	cpx_add(a, a, d);
+	cpx_div_ui(a, a, 4);
+
 	cpx_t e1, e2, zero;
 	cpx_init2(e1, bits);
 	cpx_init2(e2, bits);
 	cpx_init2(zero, bits);
 	cpx_sub(e1, b, a);
-	cpx_sub(e2, c, a);
+	cpx_sub(e2, d, a);
 
 	int rc = cpx_find_zero(zero, func, a, e1, e2, 20, nprec);
 
+if (rc) {printf("duuude found noothing\n");}
+
 	// if rc is not zero, then nothing was found
-	if (rc) return false;
+	if (rc)
+	{
+		cpx_clear(a);
+		cpx_clear(b);
+		cpx_clear(c);
+		cpx_clear(d);
+
+		cpx_clear(fa);
+		cpx_clear(fb);
+		cpx_clear(fc);
+		cpx_clear(fd);
+
+		cpx_clear(e1);
+		cpx_clear(e2);
+		return false;
+	}
 
 	double re = cpx_get_re(zero);
 	double im = cpx_get_im(zero);
@@ -127,6 +159,18 @@ printf("duuude we are goood to go!\n");
 	printf("fun at zero = %g\n", eps);
 #endif
 
+	cpx_clear(a);
+	cpx_clear(b);
+	cpx_clear(c);
+	cpx_clear(d);
+
+	cpx_clear(fa);
+	cpx_clear(fb);
+	cpx_clear(fc);
+	cpx_clear(fd);
+
+	cpx_clear(e1);
+	cpx_clear(e2);
 	return true;
 }
 
@@ -135,8 +179,8 @@ void survey(void (*func)(cpx_t f, cpx_t z, int nprec),
 {
 	for (double r=1.0; r<rmax; r += cell_size)
 	{
-		double step = cell_size / (2.0 * M_PI * r);
-		for (double t=0.0; t < 0.5; t += step)
+		double step = cell_size / r;
+		for (double t=0.0; t < M_PI; t += step)
 		{
 			survey_cell(func, r, t, cell_size, nprec);
 		}
@@ -151,7 +195,13 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 
+	int nprec = 60;
+	mp_bitcnt_t bits = ((double) nprec) * 3.3219281 + 50;
+	mpf_set_default_prec(bits);
+
 	double rmax = atof(argv[1]);
 	double cell_size = atof(argv[2]);
-	survey(parti, rmax, cell_size, 60);
+	survey(parti, rmax, cell_size, nprec);
+
+	printf("Done!\n");
 }
