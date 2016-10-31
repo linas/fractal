@@ -13,9 +13,6 @@
 #include <mp-trig.h>
 #include <mp-complex.h>
 
-#include <binomial.h>
-#include <gpf.h>
-#include <prime.h>
 #include "genfunc.h"
 
 /*
@@ -100,14 +97,16 @@ void cpx_ordinary_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(long))
  */
 void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 {
+	mp_bitcnt_t bits = ((double) prec) * 3.322 + 50;
+
 	mpf_t zabs, gabs, epsi, fact;
-	mpf_init (gabs);
-	mpf_init (zabs);
-	mpf_init (epsi);
-	mpf_init (fact);
+	mpf_init2 (gabs, bits);
+	mpf_init2 (zabs, bits);
+	mpf_init2 (epsi, bits);
+	mpf_init2 (fact, bits);
 	mpf_set_ui(fact, 1);
 	mpf_set_ui(epsi, 1);
-	mpf_div_2exp(epsi, epsi, (int)(3.321*prec));
+	mpf_div_2exp(epsi, epsi, (int)(3.322*prec));
 
 	cpx_set_ui(sum, 0, 0);
 
@@ -116,8 +115,8 @@ void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 	if (0 > mpf_cmp(gabs, epsi)) return;
 
 	cpx_t zn, term;
-	cpx_init(zn);
-	cpx_init(term);
+	cpx_init2(zn, bits);
+	cpx_init2(term, bits);
 	cpx_set(zn, z);
 
 	for (int n=1; ; n++)

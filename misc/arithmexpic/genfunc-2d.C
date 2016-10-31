@@ -278,6 +278,9 @@ static double sigma_two(double re_q, double im_q, int itermax, double param)
 
 static double little_omega_big(double re_q, double im_q, int itermax, double param)
 {
+	int nprec = 85;
+	mpf_set_default_prec(nprec * 3.322 + 50);
+
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
 	mpf_t val; mpf_init(val);
 	cpx_set_d(z, re_q, im_q);
@@ -319,6 +322,9 @@ static double big_omega_exp_mag(double re_q, double im_q, int itermax, double pa
 
 static double big_omega_big(double re_q, double im_q, int itermax, double param)
 {
+	int nprec = 45;
+	mpf_set_default_prec(nprec * 3.322 + 50);
+
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
 	mpf_t val; mpf_init(val);
 	cpx_set_d(z, re_q, im_q);

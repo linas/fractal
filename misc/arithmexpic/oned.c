@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 #include <mp-arith.h>
+#include <moebius.h>
 
 #include "genfunc.h"
 
@@ -32,6 +33,7 @@ last = n;
    mpz_clear(part);
 }
 
+
 int main()
 {
 	int nprec = 85;
@@ -44,12 +46,13 @@ int main()
 
 	double re_q = 0.0;
 	double im_q = 0.0;
-	for (re_q = 50; re_q < 700; re_q += 30)
+	for (re_q = 4500; re_q < 16700; re_q += 100)
 	{
-		im_q = re_q;
+		im_q = re_q; // / 3.0;
 		cpx_set_d(z, re_q, im_q);
 
-		cpx_exponential_genfunc_mpf(sum, z, nprec, parti_z_mpf);
+		// cpx_exponential_genfunc_mpf(sum, z, nprec, parti_z_mpf);
+		cpx_exponential_genfunc(sum, z, nprec, big_omega);
 		cpx_abs(val, sum);
 		double rv = mpf_get_d(val);
 

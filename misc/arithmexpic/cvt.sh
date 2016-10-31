@@ -121,6 +121,15 @@
 # ../../generate/renorm liouv-omega-12K rg 8.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-12K.png
 
+# ../../generate/takeroot liouv-omega-12K rg 4
+# ../../generate/renorm rg rg 1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-12K-soft.png
+
+# ./big_omega_big liouv-omega-120K 800 800 5000 0 0 120000
+../../generate/takeroot liouv-omega-120K rg 4
+../../generate/renorm rg rg 1
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-120K-soft.png
+
 # ------------------
 # ./liouv_lambda liouv-lambda-120 400 400 5000 0 0 120
 # ../../generate/renorm liouv-lambda-120 rg 4.0
@@ -209,9 +218,9 @@
 # ../../generate/renorm rg rg 0.8
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-1K.png
 
-../../generate/takeroot partition-nl-1K rg 6
-../../generate/renorm rg rg 0.8
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-nl-1K.png
+# ../../generate/takeroot partition-nl-1K rg 6
+# ../../generate/renorm rg rg 0.8
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-nl-1K.png
 #
 # ../../generate/takeroot partition-12K rg 6
 # ../../generate/renorm rg rg 0.4
