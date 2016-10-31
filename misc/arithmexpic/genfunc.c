@@ -273,20 +273,16 @@ void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 		mpf_neg(t, t);
 	}
 
-	// Compute gamma = g(t) = t/(1+t)
-	mpf_add_ui (g, t, 1);
-	mpf_div (g, t, g);
+	// Compute gamma = grg(t) = 1/(2+t)
+	mpf_add_ui (g, t, 2);
+	mpf_ui_div (g, 1, g);
 
-	// g runs between 0 and 1/2.
+	// g runs between 1/2 and 2/3
 	mpf_set(t, g);
-	if (sgn < 0)
-	{
-		mpf_neg(t, t);
-	}
 
 	// Multiply by pi, so that t runs over a sub-range of
 	// -pi to pi.  For a single power of g, that means that
-	// t runs over -pi/2 to pi/2.
+	// t runs over pi/2 to 2pi/3.
 	mpf_mul(t, t, pi);
 
 	// zt = r exp (it)

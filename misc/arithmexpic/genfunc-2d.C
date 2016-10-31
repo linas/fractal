@@ -249,12 +249,15 @@ static double divisor_big(double re_q, double im_q, int itermax, double param)
 
 static double divisor_twist(double re_q, double im_q, int itermax, double param)
 {
-	cpx_t sum, z; cpx_init(sum); cpx_init(z);
-	mpf_t val; mpf_init(val);
+	int prec = 35;
+	mp_bitcnt_t bits = ((double) prec) * 3.322 + 50;
+
+	cpx_t sum, z; cpx_init2(sum, bits); cpx_init(z, bits);
+	mpf_t val; mpf_init2(val, bits);
 
 	cpx_set_d(z, re_q, im_q);
 
-	cpx_exponential_twist(sum, z, 25, divisor);
+	cpx_exponential_twist(sum, z, prec, divisor);
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 
