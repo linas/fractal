@@ -254,10 +254,9 @@ void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 	cpx_t zt;
 	cpx_init2(zt, bits);
 
-	mpf_t r, t, h, g, pi;
+	mpf_t r, t, g, pi;
 	mpf_init2(r, bits);
 	mpf_init2(t, bits);
-	mpf_init2(h, bits);
 	mpf_init2(g, bits);
 	mpf_init2(pi, bits);
 	fp_pi(pi, prec);
@@ -268,20 +267,22 @@ void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 	mpf_div(t, t, pi);
 
 	// t runs between -1 and 1.
-	// Rescale so that t runs between 0 and 1.
-	mpf_add_ui(t, t, 1);
-	mpf_div_ui(t, t, 2);
+	int sgn = mpf_sgn (t);
+	if (sgn < 0)
+	{
+		mpf_neg(t, t);
+	}
 
 	// Compute gamma = g(t) = t/(1+t)
 	mpf_add_ui (g, t, 1);
 	mpf_div (g, t, g);
 
 	// g runs between 0 and 1/2.
-	// Rescale so that it runs -1/2 to 1/2
-	mpf_set_ui(h, 1);
-	mpf_div_ui(h, h, 2);
-	mpf_mul_ui(t, g, 2);
-	mpf_sub(t, t, h);
+	mpf_set(t, g);
+	if (sgn < 0)
+	{
+		mpf_neg(t, t);
+	}
 
 	// Multiply by pi, so that t runs over a sub-range of
 	// -pi to pi.  For a single power of g, that means that
@@ -299,7 +300,6 @@ void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 	cpx_clear(zt);
 	mpf_clear(r);
 	mpf_clear(t);
-	mpf_clear(h);
 	mpf_clear(g);
 	mpf_clear(pi);
 }
