@@ -53,8 +53,9 @@ int main()
 
 		// cpx_exponential_genfunc_mpf(sum, z, nprec, parti_z_mpf);
 		cpx_exponential_genfunc(sum, z, nprec, big_omega);
-		cpx_abs(val, sum);
-		double rv = mpf_get_d(val);
+
+		// cpx_abs(val, sum);
+		// double rv = mpf_get_d(val);
 
 		// printf("r=%g rv =%g\n", re_q, rv);
 	}

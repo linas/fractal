@@ -12,6 +12,7 @@
 
 #include <mp-trig.h>
 #include <mp-complex.h>
+#include <mp-consts.h>
 
 #include "genfunc.h"
 
@@ -241,4 +242,64 @@ printf("duuude r=%9.3f ph=%f n=%d g=%9.5e scale=%g\n", r, ph, n, g,s);
 	mpf_clear (fact);
 	mpf_clear (func_val);
 	mpf_clear (fabs);
+}
+
+/**
+ * Twist the z value by gamma.
+ */
+void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
+{
+	mp_bitcnt_t bits = ((double) prec) * 3.322 + 50;
+
+	cpx_t zt;
+	cpx_init2(zt, bits);
+
+	mpf_t r, t, h, g, pi;
+	mpf_init2(r, bits);
+	mpf_init2(t, bits);
+	mpf_init2(h, bits);
+	mpf_init2(g, bits);
+	mpf_init2(pi, bits);
+	fp_pi(pi, prec);
+
+	// Decompose z = r exp itheta
+	cpx_abs(r, z);
+	fp_arctan2(t, z->im, z->re, prec);
+	mpf_div(t, t, pi);
+
+	// t runs between -1 and 1.
+	// Rescale so that t runs between 0 and 1.
+	mpf_add_ui(t, t, 1);
+	mpf_div_ui(t, t, 2);
+
+	// Compute gamma = g(t) = t/(1+t)
+	mpf_add_ui (g, t, 1);
+	mpf_div (g, t, g);
+
+	// g runs between 0 and 1/2.
+	// Rescale so that it runs -1/2 to 1/2
+	mpf_set_ui(h, 1);
+	mpf_div_ui(h, h, 2);
+	mpf_mul_ui(t, g, 2);
+	mpf_sub(t, t, h);
+
+	// Multiply by pi, so that t runs over a sub-range of
+	// -pi to pi.  For a single power of g, that means that
+	// t runs over -pi/2 to pi/2.
+	mpf_mul(t, t, pi);
+
+	// zt = r exp (it)
+	cpx_set_ui(zt, 0, 1);           // zt = i
+	cpx_times_mpf(zt, zt, t);       // zt = itheta
+	cpx_exp(zt, zt, prec);          // zt = exp(itheta)
+	cpx_times_mpf(zt, zt, r);       // zt = r exp(itheta)
+
+	cpx_exponential_genfunc(sum, z, prec, func);
+
+	cpx_clear(zt);
+	mpf_clear(r);
+	mpf_clear(t);
+	mpf_clear(h);
+	mpf_clear(g);
+	mpf_clear(pi);
 }

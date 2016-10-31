@@ -27,6 +27,11 @@ void cpx_exponential_genfunc(cpx_t sum, cpx_t z, int prec,
 void cpx_exponential_genfunc_mpf(cpx_t sum, cpx_t z, int prec,
                                  void (*func)(mpf_t, long));
 
+/*
+ * Dyadic Farey rescaling.
+ */
+void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec,
+                           long (*func)(long));
 #ifdef  __cplusplus
 };
 #endif
