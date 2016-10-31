@@ -45,7 +45,7 @@ long double sigmalog (long n, long double a);
 long sigma_unitary (long n, long k);
 
 /**
- * Sigma function for k=1; valuesa are cacched for performance.
+ * Sigma function for k=1; valuesa are cached for performance.
  */
 long sigma_one (long n);
 

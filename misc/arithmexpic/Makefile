@@ -8,11 +8,12 @@ FUNC=../../tools/lib/libfunc.a
 HIST=../../generate/brat.o ../../generate/util.o
 
 
-all: genfunc-2d totient_ord_phase oned find-zero
+all: genfunc-2d totient_ord_phase oned find-zero slice
 
 genfunc-2d: genfunc-2d.o genfunc.o $(HIST) $(FUNC)
 oned: genfunc.o $(FUNC)
 find-zero: genfunc.o $(FUNC)
+slice: genfunc.o $(FUNC)
 
 totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d totient_ord_phase
@@ -48,6 +49,7 @@ genfunc-2d.o: genfunc.h
 
 oned.o: genfunc.h
 find-zero.o: genfunc.h
+slice.o: genfunc.h
 
 .o:
 	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++
