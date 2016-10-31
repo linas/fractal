@@ -8,26 +8,50 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <mp-arith.h>
 #include <mp-trig.h>
 #include <moebius.h>
+#include <totient.h>
 
 #include "genfunc.h"
 
 int main(int argc, char * argv[])
 {
-	if (3 != argc)
+	if (4 != argc)
 	{
-		fprintf(stderr, "Usage: %s <nsteps> <radius>\n", argv[0]);
-		exit (1); 
+		fprintf(stderr, "Usage: %s <name> <nsteps> <radius>\n", argv[0]);
+		exit (1);
 	}
 
-	int nsteps = atoi(argv[1]);
-	double rad = atof(argv[2]);
+	char * name = argv[1];
+	int nsteps = atoi(argv[2]);
+	double rad = atof(argv[3]);
 
 	printf("#\n# radius=%g\n", rad);
 	printf("# nsteps=%d\n#\n", nsteps);
+
+	printf("#\n# name = %s\n#\n", name);
+
+	long (*func)(long) = NULL;
+	if (0 == strcmp(name, "totient")) func = totient_phi;
+	if (0 == strcmp(name, "divisor")) func = divisor;
+	if (0 == strcmp(name, "sigma-one")) func = sigma_one;
+	if (0 == strcmp(name, "carmichael")) func = carmichael_lambda;
+	if (0 == strcmp(name, "mobius")) func = moebius_mu;
+	if (0 == strcmp(name, "little-omega")) func = little_omega;
+	if (0 == strcmp(name, "big-omega")) func = big_omega;
+	if (0 == strcmp(name, "liouville")) func = liouville_lambda;
+	if (0 == strcmp(name, "mertens")) func = mertens_m;
+	if (0 == strcmp(name, "thue-morse")) func = thue_morse;
+	// if (0 == strcmp(name, "")) func =
+
+	if (NULL == func)
+	{
+		fprintf(stderr, "Oh No, Mr. Bill!  Name %s unknown!\n", name);
+		exit(1);
+	}
 
 	int nprec = 85;
 
@@ -59,8 +83,7 @@ int main(int argc, char * argv[])
 		cpx_times_mpf(z, z, radius);
 
 		// cpx_exponential_genfunc_mpf(val, z, nprec, parti_z_mpf);
-		// cpx_exponential_genfunc(val, z, nprec, big_omega);
-		cpx_exponential_genfunc(val, z, nprec, divisor);
+		cpx_exponential_genfunc(val, z, nprec, func);
 
 		// Sum the magnitudes
 		cpx_abs(mag, val);

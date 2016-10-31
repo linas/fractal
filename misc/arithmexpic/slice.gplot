@@ -1,19 +1,50 @@
 
-set term png size 1024, 768
+# set term png size 1024, 768
 # set term png size 512, 384
-set out 'slice.png'
+# set out 'slice.png'
 
 # set style data linespoints
 set style data lines
 set key left
 
-set title "Ingtegral of magnitude"
-set xlabel "theta"
+set xlabel "Theta / 2pi"
 set ylabel "Amplitude"
 
-# set xrange [0:1]
+# #####################################################################
+set term png size 800, 400
+set out 'slice-divisor.png'
+set title "Divisor function concentric slice"
 set yrange [0:6]
+plot "slice-60K.dat" using ($2 / (2*3.141592653)) :3 title "" lw 2
 
-plot "slice-60K.dat" using ($2 / (2*3.141592653)) :3 title "steps" lw 2, \
-     "slice-60K.dat" using ($2 / (2*3.141592653)) :(1.5*$2) title "line" lw 2
-	
+# #####################################################################
+
+set yrange [0:200]
+set term png size 1024, 768
+set out 'slice-totient.png'
+set title "Euler Totient concentric slice"
+plot "slice-totient-60K.dat" using ($2 / (2*3.141592653)) :3 title "" lw 2
+
+# #####################################################################
+
+set yrange [0:8000]
+set term png size 1024, 768
+set out 'slice-carmichael.png'
+set title "Carmichael Lambda concentric slice"
+plot "slice-carmichael-60K.dat" using ($2 / (2*3.141592653)) :3 title "" lw 2
+
+# #####################################################################
+
+set yrange [0:0.5]
+set term png size 1024, 768
+set out 'slice-little-omega.png'
+set title "Little omega concentric slice"
+plot "slice-little-omega-60K.dat" using ($2 / (2*3.141592653)) :3 title "" lw 2
+
+# #####################################################################
+
+set yrange [0:1]
+set term png size 1024, 768
+set out 'slice-big-omega.png'
+set title "Big Omega concentric slice"
+plot "slice-big-omega-60K.dat" using ($2 / (2*3.141592653)) :3 title "" lw 2

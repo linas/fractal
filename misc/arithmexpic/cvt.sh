@@ -126,9 +126,9 @@
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-12K-soft.png
 
 # ./big_omega_big liouv-omega-120K 800 800 5000 0 0 120000
-../../generate/takeroot liouv-omega-120K rg 4
-../../generate/renorm rg rg 1
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-120K-soft.png
+# ../../generate/takeroot liouv-omega-120K rg 4
+# ../../generate/renorm rg rg 1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-120K-soft.png
 
 # ------------------
 # ./liouv_lambda liouv-lambda-120 400 400 5000 0 0 120
@@ -190,6 +190,14 @@ cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > liouv-omega-120K-soft.pn
 
 # ../../generate/renorm thue-morse-120K rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120K.png
+
+../../generate/takeroot thue-morse-1K rg 6
+../../generate/renorm rg rg 1
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-1K-soft.png
+
+../../generate/takeroot thue-morse-12K rg 6
+../../generate/renorm rg rg 1
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-12K-soft.png
 
 # ------------------
 # ./isqrt_bit isqrt-120 400 400 5000 0 0 120

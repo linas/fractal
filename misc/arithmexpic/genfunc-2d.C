@@ -222,12 +222,11 @@ static double mobius_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
-static long divisori(long i) { return divisor(i); }
 static double divisor_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
 	double complex z = re_q + I * im_q;
-	double complex g = exponential_genfunc(z, divisori);
+	double complex g = exponential_genfunc(z, divisor);
 	return cabs(g);
 }
 
@@ -238,7 +237,7 @@ static double divisor_big(double re_q, double im_q, int itermax, double param)
 
 	cpx_set_d(z, re_q, im_q);
 
-	cpx_exponential_genfunc(sum, z, 25, divisori);
+	cpx_exponential_genfunc(sum, z, 25, divisor);
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 
@@ -418,14 +417,6 @@ static double exp_mango_big(double re_q, double im_q, int itermax, double param)
 	cpx_clear(z);
 	mpf_clear(val);
 	return rv;
-}
-
-static long thue_morse(long n)
-{
-	if (0 == n) return 0;
-	if (1 == n) return 1;
-	if (0 == n%2) return thue_morse (n/2);
-	return (1-thue_morse ((n-1)/2));
 }
 
 static double thue_morse_exp_mag(double re_q, double im_q, int itermax, double param)

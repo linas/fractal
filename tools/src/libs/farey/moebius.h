@@ -73,24 +73,33 @@ long big_omega (long n);
 /** The Liouville lambda function */
 long liouville_lambda (long n);
 
-/** The von Mangoldt Lambda function.
- *  Returns von Mangoldt Lambda for n, which is
- *  log(p) if n is a power of prime p, otherwise
- *  returns zero. */
+/**
+ * The von Mangoldt Lambda function.
+ * Returns von Mangoldt Lambda for n, which is
+ * log(p) if n is a power of prime p, otherwise
+ * returns zero.
+ */
 long double mangoldt_lambda (long n);
 long double mangoldt_lambda_cached (long n);
 
-/** Exp of the von Mangoldt Lambda function.
- *  Returns p if n=p^k for prime p and integer k.
- *  Else returns 1.
+/** 
+ * Exp of the von Mangoldt Lambda function.
+ * Returns p if n=p^k for prime p and integer k.
+ * Else returns 1.
  */
 long  exp_mangoldt_lambda (long n);
 
-/** The indexed von Mangoldt Lambda function
- *  Returns the n'th non-zero von Mangoldt value
- *  */
+/**
+ * The indexed von Mangoldt Lambda function
+ * Returns the n'th non-zero von Mangoldt value
+ */
 long double mangoldt_lambda_indexed (long n);
 unsigned long mangoldt_lambda_index_point (long n);
+
+/**
+ * Thue-Morse
+ */
+long thue_morse(long n);
 
 #ifdef   __cplusplus
 };

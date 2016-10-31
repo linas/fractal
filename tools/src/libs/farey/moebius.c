@@ -20,6 +20,16 @@
 
 /* ====================================================== */
 
+long thue_morse(long n)
+{
+   if (0 == n) return 0;
+   if (1 == n) return 1;
+   if (0 == n%2) return thue_morse (n/2);
+   return (1-thue_morse ((n-1)/2));
+}
+
+/* ====================================================== */
+
 static unsigned long *sieve = NULL;
 static unsigned long sieve_size = 0;
 static unsigned long sieve_max = 0;
