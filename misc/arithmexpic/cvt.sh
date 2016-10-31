@@ -81,6 +81,9 @@
 # ../../generate/renorm sigma-two-1K rg 0.16
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-1K.png
 
+../../generate/renorm divisor-g-120 rg 6.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > divisor-g-120.png
+
 # ------------------
 # ./little_omega little-omega-120 400 400 5000 0 0 120
 # ../../generate/renorm little-omega-120 rg 4.0
@@ -191,13 +194,13 @@
 # ../../generate/renorm thue-morse-120K rg 24.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-120K.png
 
-../../generate/takeroot thue-morse-1K rg 6
-../../generate/renorm rg rg 1
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-1K-soft.png
+# ../../generate/takeroot thue-morse-1K rg 6
+# ../../generate/renorm rg rg 1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-1K-soft.png
 
-../../generate/takeroot thue-morse-12K rg 6
-../../generate/renorm rg rg 1
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-12K-soft.png
+# ../../generate/takeroot thue-morse-12K rg 6
+# ../../generate/renorm rg rg 1
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > thue-morse-12K-soft.png
 
 # ------------------
 # ./isqrt_bit isqrt-120 400 400 5000 0 0 120
