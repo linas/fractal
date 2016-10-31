@@ -15,14 +15,19 @@
 
 #include "genfunc.h"
 
-int main()
+int main(int argc, char * argv[])
 {
+	if (3 != argc)
+	{
+		fprintf(stderr, "Usage: %s <nsteps> <radius>\n", argv[0]);
+		exit (1); 
+	}
 
+	int nsteps = atoi(argv[1]);
+	double rad = atof(argv[2]);
 
-	double rad = 6000.0;
-	int nsteps = 2000;
-
-	printf("#\n# radius=%g\n#\n", rad);
+	printf("#\n# radius=%g\n", rad);
+	printf("# nsteps=%d\n#\n", nsteps);
 
 	int nprec = 85;
 
