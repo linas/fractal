@@ -264,35 +264,6 @@ static double divisor_twist(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
-static double divisor_check(double re_q, double im_q, int itermax, double param)
-{
-	int prec = 45;
-   mp_bitcnt_t bits = ((double) prec) * 3.322 + 50;
-
-	cpx_t sum, twi, z;
-	cpx_init2(sum, bits);
-	cpx_init2(twi, bits);
-	cpx_init2(z, bits);
-	mpf_t val; mpf_init2(val, bits);
-
-	cpx_set_d(z, re_q, im_q);
-
-	cpx_exponential_genfunc(sum, z, prec, divisor);
-	cpx_exponential_twist(twi, z, prec, divisor);
-
-	// Take the difference
-	cpx_sub(sum, sum, twi);
-
-	cpx_abs(val, sum);
-	double rv = mpf_get_d(val);
-
-	cpx_clear(sum);
-	cpx_clear(twi);
-	cpx_clear(z);
-	mpf_clear(val);
-	return rv;
-}
-
 static long sigma1(long i) { return sigma(i,1); }
 static double sigma_one(double re_q, double im_q, int itermax, double param)
 {
@@ -643,7 +614,6 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
 	DECL_HEIGHT("divisor_big", divisor_big);
 	DECL_HEIGHT("divisor_twist", divisor_twist);
-	DECL_HEIGHT("divisor_check", divisor_check);
 	DECL_HEIGHT("sigma_one", sigma_one);
 	DECL_HEIGHT("sigma_two", sigma_two);
 	DECL_HEIGHT("little_omega", little_omega_big);
