@@ -81,8 +81,11 @@
 # ../../generate/renorm sigma-two-1K rg 0.16
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-two-1K.png
 
-../../generate/renorm divisor-g-120 rg 6.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > divisor-g-120.png
+# ../../generate/renorm divisor-g-120 rg 6.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > divisor-g-120.png
+
+../../generate/renorm divisor-g-diff rg 60000000.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > divisor-g-diff-120.png
 
 # ------------------
 # ./little_omega little-omega-120 400 400 5000 0 0 120

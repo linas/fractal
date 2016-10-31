@@ -294,7 +294,7 @@ void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 	cpx_exp(zt, zt, prec);          // zt = exp(itheta)
 	cpx_times_mpf(zt, zt, r);       // zt = r exp(itheta)
 
-	cpx_exponential_genfunc(sum, z, prec, func);
+	cpx_exponential_genfunc(sum, zt, prec, func);
 
 	cpx_clear(zt);
 	mpf_clear(r);
