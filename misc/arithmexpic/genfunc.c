@@ -254,10 +254,11 @@ void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 	cpx_t zt;
 	cpx_init2(zt, bits);
 
-	mpf_t r, t, g, pi;
+	mpf_t r, t, g, gd, pi;
 	mpf_init2(r, bits);
 	mpf_init2(t, bits);
 	mpf_init2(g, bits);
+	mpf_init2(gd, bits);
 	mpf_init2(pi, bits);
 	fp_pi(pi, prec);
 
@@ -281,6 +282,18 @@ void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 	mpf_add_ui (g, t, n);
 	mpf_div (g, t, g);
 
+	// ---------------------------------------
+	// rescale r as well. Need g-dot(t) = n/(n+t)^2
+	mpf_add_ui (gd, t, n);
+	mpf_ui_div (gd, 1, gd);
+	mpf_mul (gd, gd, gd);
+	mpf_mul_ui (gd, gd, n);
+
+	// get exp(g-dot)
+	fp_exp(gd, gd, prec);
+	mpf_mul (r, r, gd);
+
+	// --------------------------------------
 	// g runs between 0 and 1/3 = 1/(n+2)
 	mpf_set(t, g);
 
@@ -292,17 +305,8 @@ void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 	// t runs over 0 to 2pi/3 = 2pi/(n+2)
 	mpf_mul(t, t, pi);
 
-	// ---------------------------------------
-	// rescale r as well. Need g-dot(t) = n/(n+t)^2
-	mpf_add_ui (g, t, n);
-	mpf_ui_div (g, 1, g);
-	mpf_mul (g, g, g);
-	mpf_mul_ui (g, g, n);
-
-	// get exp(g-dot)
-	fp_exp(g, g, prec);
-	mpf_mul (r, r, g);
-
+	// --------------------------------------
+	// reconstruct z.
 	// zt = r exp (it)
 	cpx_set_ui(zt, 0, 1);           // zt = i
 	cpx_times_mpf(zt, zt, t);       // zt = itheta
@@ -315,5 +319,6 @@ void cpx_exponential_twist(cpx_t sum, cpx_t z, int prec, long (*func)(long))
 	mpf_clear(r);
 	mpf_clear(t);
 	mpf_clear(g);
+	mpf_clear(gd);
 	mpf_clear(pi);
 }
