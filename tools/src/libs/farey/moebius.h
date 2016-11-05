@@ -29,7 +29,11 @@ long divisor (long int n);
  * Sigma arithmetic series, equals divisor arith series for a=0
  * Computes the divisors of n, raises each to the a'th power, and
  * returns thier sum.
+ *
+ * Implemented with fast recursive factorization algo.
+ *
  * sigmaf is similar, but allows any floating-point exponent.
+ * sigmaf is implemented with slow brute force algo.
  */
 long sigma (long n, long a);
 long double sigmaf (long n, long double a);
@@ -39,6 +43,8 @@ long double sigmaf (long n, long double a);
  * log factor is included.   That is, this:
  * Computes the divisors of n, raises each to the a'th power,
  * multiplies the last by logn, and then returns thier sum.
+ *
+ * sigmalog is implemented with slow brute force algo.
  */
 long double sigmalog (long n, long double a);
 
@@ -51,7 +57,7 @@ long double sigmalog (long n, long double a);
 long sigma_unitary (long n, long k);
 
 /**
- * Sigma function for k=1; valuesa are cached for performance.
+ * Sigma function for k=1; values are cached for performance.
  */
 long sigma_one (long n);
 

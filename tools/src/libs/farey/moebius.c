@@ -175,11 +175,7 @@ long divisor (long n)
  * Computes the divisors of n, raises each to the a'th power, and
  * returns thier sum.
  *
- * A slow, simple-minded algo.
- * A much faster recursive algoithm is possible, but the below is
- * adequate for the current needs.  The faster algo is a variant of the
- * divisor-helper, above; the general case follows once the factorization
- * of n is known.
+ * Should be fast, works directly off the factorization.
  */
 static long sigma_helper (long n, long a, long last_prime_checked)
 {
@@ -190,7 +186,6 @@ static long sigma_helper (long n, long a, long last_prime_checked)
 
 	INIT_PRIME_SIEVE(n);
 
-// printf("duuude upn entry will chaeck=%ld %ld n=%ld a=%ld\n", last_prime_checked+1, sieve[last_prime_checked+1], n, a);
 	for (ip=last_prime_checked+1; ; ip++)
 	{
 		long d = sieve[ip];
@@ -205,10 +200,8 @@ static long sigma_helper (long n, long a, long last_prime_checked)
 			n /=d;
 			acc ++;
 		}
-// printf("duude d=%ld acc=%ld num=%ld deno=%ld\n", d, acc, ipow(d, a*acc), ipow(d, a));
 		long fac = (ipow(d, a*acc) -1) / (ipow(d, a) - 1);
 		if (1==n) return fac;
-// printf("duude recurse\n");
 		return fac * sigma_helper (n, a, ip);
 	}
 
@@ -221,7 +214,7 @@ long sigma (long n, long a)
 	return sigma_helper (n, a, -1);
 }
 
-/* same as above, but for float-point power */
+/* sigma, but for float-point power, and a slow algo. */
 long double sigmaf (long n, long double a)
 {
 	long double acc = 0;
@@ -255,6 +248,7 @@ long double sigmalog (long n, long double a)
 	return acc;
 }
 
+/* Sloww brute force algo */
 long sigma_unitary (long n, long k)
 {
 	long acc = 0;
@@ -624,7 +618,7 @@ long liouville_lambda (long n)
 
 /* ====================================================== */
 
-#define TEST 1
+// #define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
@@ -731,21 +725,26 @@ long sigma_simple_algo (long n, long a)
 long test_sigma (void)
 {
 	long have_error=0;
-	long nmax=10000;
+
+	// 1681 = 41^4 and so sigma(1681,4) = (41^20 -1) / (41^4 -1) = 6e25
+	// which overflows 64-bits .. almost overflows 128 bits.
+	long nmax=1680;
+	long smax = 5;
 	for (long i=1; i<=nmax; i++)
 	{
-		long s = 1;
-// printf("duuuude ================= start %ld\n", i);
-		if (sigma(i, s) != sigma_simple_algo(i, s))
+		for (long s=1; s<smax; s++)
 		{
-			printf ("ERROR: in sigma %ld function at n=%ld\n", s, i);
-			printf ("wanted %ld got %ld\n", sigma_simple_algo(i, s), sigma(i, s));
-			have_error ++;
+			if (sigma(i, s) != sigma_simple_algo(i, s))
+			{
+				printf ("ERROR: in sigma %ld function at n=%ld\n", s, i);
+				printf ("wanted %ld got %ld\n", sigma_simple_algo(i, s), sigma(i, s));
+				have_error ++;
+			}
 		}
 	}
 	if (0 == have_error)
 	{
-		printf ("PASS: tested sigma function up to %ld\n", nmax);
+		printf ("PASS: tested sigma function up a=%ld and n to %ld\n", smax, nmax);
 	}
 	return have_error;
 }
