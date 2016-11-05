@@ -134,7 +134,7 @@ static double totient_ord_phase(double re_q, double im_q, int itermax, double pa
 static double totient_exp_phase(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, totient_phi);
 	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 }
@@ -142,7 +142,7 @@ static double totient_exp_phase(double re_q, double im_q, int itermax, double pa
 static double totient_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, totient_phi);
 	return cabs(g);
 }
@@ -171,7 +171,7 @@ static double totient_big(double re_q, double im_q, int itermax, double param)
 static double carmichael(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, carmichael_lambda);
 	return cabs(g);
 }
@@ -200,7 +200,7 @@ static double carmichael_big(double re_q, double im_q, int itermax, double param
 static double mobius_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, moebius_mu);
 	return cabs(g);
 }
@@ -225,7 +225,7 @@ static double mobius_big(double re_q, double im_q, int itermax, double param)
 static double divisor_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, divisor);
 	return cabs(g);
 }
@@ -253,16 +253,19 @@ static double divisor_uncircle(double re_q, double im_q, int itermax, double par
 	max_iter = itermax;
 	double theta = M_PI * im_q;
 	double rr = itermax + param * re_q;
-	rr = exp(rr * M_LN2);  // pow (2, param * re_q)
+	rr = exp(rr * M_LN2);  // pow (2, itermax + param * re_q)
+// printf("duuude re=%g im=%g r = %g\n", re_q, im_q, rr);
 	im_q = rr*sin (theta);
 	re_q = rr*cos (theta);
 
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, divisor);
-	return cabs(g);
+
+	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+	// return cabs(g);
 }
 
-/* The beow attempts to remap a pie slice of the circle into
+/* The below attempts to remap a pie slice of the circle into
  * the whole circle, as suggested by the dyadic self-similarity
  * However, it is a total failure as such. The mapping is not
  * holomorphic, its not even close. It sucks.
@@ -291,7 +294,7 @@ static long sigma1(long i) { return sigma(i,1); }
 static double sigma_one(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, sigma1);
 
 	double rv = cabs(g);
@@ -305,7 +308,7 @@ static long sigma2(long i) { return sigma(i,2); }
 static double sigma_two(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, sigma2);
 	double rv = cabs(g);
 	double r = sqrt(re_q*re_q + im_q*im_q);
@@ -354,7 +357,7 @@ static double unitary_big(double re_q, double im_q, int itermax, double param)
 static double big_omega_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, big_omega);
 	return cabs(g);
 }
@@ -381,7 +384,7 @@ static double big_omega_big(double re_q, double im_q, int itermax, double param)
 static double liouv_lambda(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, liouville_lambda);
 	return cabs(g);
 }
@@ -389,7 +392,7 @@ static double liouv_lambda(double re_q, double im_q, int itermax, double param)
 static double mertens_m_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, mertens_m);
 	return cabs(g);
 }
@@ -427,7 +430,7 @@ static double mangoldt_lambda_big(double re_q, double im_q, int itermax, double 
 static double exp_mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, exp_mangoldt_lambda);
 
 	double rv = cabs(g);
@@ -462,7 +465,7 @@ static double exp_mango_big(double re_q, double im_q, int itermax, double param)
 static double thue_morse_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-	double complex z = re_q + I * im_q;
+	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, thue_morse);
 	return cabs(g);
 }
