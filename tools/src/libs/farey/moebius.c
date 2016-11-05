@@ -107,6 +107,28 @@ init_prime_sieve (long long prod)
 }
 
 /* ====================================================== */
+/**
+ * Raise p to the n'th power.  Fast bit-shift algo.
+ */
+
+long ipow(long p, long n)
+{
+	long acc = 1;
+	long psq = p;
+
+	for (int i=0; i<sizeof(long); i++)
+	{
+		if (n & 0x1) acc *= psq;
+		psq *= psq;
+		n >>= 1;
+		if (0 == n) return acc;
+	}
+
+	return acc;
+}
+
+
+/* ====================================================== */
 /** Compute the divisor arithmetic function
  *  Returns the number of divisors of n.
  *  Almost a tail-recursive algorithm.
@@ -583,10 +605,26 @@ long liouville_lambda (long n)
 
 /* ====================================================== */
 
-// #define TEST 1
+#define TEST 1
 #ifdef TEST
 
 #include <stdio.h>
+
+long test_pow (void)
+{
+	long have_error=0;
+	if (8 != ipow(2,3)) have_error++;
+	if (9 != ipow(3,2)) have_error++;
+	if (1024 != ipow(2,10)) have_error++;
+	if (27 != ipow(3,3)) have_error++;
+	if (81*16 != ipow(6,4)) have_error++;
+
+	if (0 == have_error)
+	{
+		printf ("PASS: tested power function\n");
+	}
+	return have_error;
+}
 
 /** Compute the divisor arithmetic function
  *  Returns the number of divisors of n.
@@ -829,6 +867,7 @@ long test_lambda(void)
 
 int main()
 {
+	test_pow ();
 	test_divisor ();
 	test_sigma_zero ();
 	test_unitary_divisor();

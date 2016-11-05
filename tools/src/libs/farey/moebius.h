@@ -14,6 +14,12 @@ extern "C" {
 #endif
 
 /**
+ * Compute p raised to the n'th power. Fast bit-shift algo.
+ */
+
+long ipow (long p, long n);
+
+/**
  * Compute the divisor arithmetic function.
  * Returns the number of divisors of n.
  */
