@@ -29,6 +29,28 @@ long thue_morse(long n)
 }
 
 /* ====================================================== */
+/**
+ * Raise p to the n'th power.  Fast bit-shift algo.
+ */
+
+long ipow(long p, long n)
+{
+	long acc = 1;
+	long psq = p;
+
+	for (int i=0; i<sizeof(long); i++)
+	{
+		if (n & 0x1) acc *= psq;
+		psq *= psq;
+		n >>= 1;
+		if (0 == n) return acc;
+	}
+
+	return acc;
+}
+
+
+/* ====================================================== */
 
 static unsigned long *sieve = NULL;
 static unsigned long sieve_size = 0;
@@ -107,28 +129,6 @@ init_prime_sieve (long long prod)
 }
 
 /* ====================================================== */
-/**
- * Raise p to the n'th power.  Fast bit-shift algo.
- */
-
-long ipow(long p, long n)
-{
-	long acc = 1;
-	long psq = p;
-
-	for (int i=0; i<sizeof(long); i++)
-	{
-		if (n & 0x1) acc *= psq;
-		psq *= psq;
-		n >>= 1;
-		if (0 == n) return acc;
-	}
-
-	return acc;
-}
-
-
-/* ====================================================== */
 /** Compute the divisor arithmetic function
  *  Returns the number of divisors of n.
  *  Almost a tail-recursive algorithm.
@@ -145,7 +145,7 @@ static long divisor_helper (long n, long last_prime_checked)
 
 	for (ip=last_prime_checked+1; ; ip++)
 	{
-		long long d = sieve[ip];
+		long d = sieve[ip];
 
 		if (d*d >n) break;
 		if (n%d) continue;
@@ -169,6 +169,7 @@ long divisor (long n)
 	return divisor_helper (n, -1);
 }
 
+/* ====================================================== */
 /** 
  * Sigma arithmetic series, equals divisor arith series for a=0
  * Computes the divisors of n, raises each to the a'th power, and
@@ -180,26 +181,44 @@ long divisor (long n)
  * divisor-helper, above; the general case follows once the factorization
  * of n is known.
  */
-long sigma (long n, long a)
+static long sigma_helper (long n, long a, long last_prime_checked)
 {
-	long acc = 0;
-	long d;
+	long ip;
 
-	long ns = n/2;
-	for (d=1; d<=ns; d++)
+	if (1==n) return 1;
+	if (2==n) return 1 + ipow(2, a);
+
+	INIT_PRIME_SIEVE(n);
+
+// printf("duuude upn entry will chaeck=%ld %ld n=%ld a=%ld\n", last_prime_checked+1, sieve[last_prime_checked+1], n, a);
+	for (ip=last_prime_checked+1; ; ip++)
 	{
+		long d = sieve[ip];
+
+		if (d*d>n) break;
 		if (n%d) continue;
 
-		long dp = 1;
-		for (long ia=0; ia<a; ia++) dp *= d;
-		acc += dp;
+		long acc = 2;
+		n /=d;
+		while (0 == n%d)
+		{
+			n /=d;
+			acc ++;
+		}
+// printf("duude d=%ld acc=%ld num=%ld deno=%ld\n", d, acc, ipow(d, a*acc), ipow(d, a));
+		long fac = (ipow(d, a*acc) -1) / (ipow(d, a) - 1);
+		if (1==n) return fac;
+// printf("duude recurse\n");
+		return fac * sigma_helper (n, a, ip);
 	}
 
-	long dp = 1;
-	for (long ia=0; ia<a; ia++) dp *= n;
-	acc += dp;
+	return 1 + ipow(n, a);
+}
 
-	return acc;
+long sigma (long n, long a)
+{
+	if (0 == a) return divisor_helper(n, -1);
+	return sigma_helper (n, a, -1);
 }
 
 /* same as above, but for float-point power */
@@ -626,11 +645,11 @@ long test_pow (void)
 	return have_error;
 }
 
-/** Compute the divisor arithmetic function
- *  Returns the number of divisors of n.
- *  Raw brute force algorithm.
+/**
+ * Compute the divisor arithmetic function
+ * Returns the number of divisors of n.
+ * Raw brute force algorithm.
  */
-
 long divisor_simple_algo (long n)
 {
 	long acc = 0;
@@ -678,6 +697,55 @@ long test_sigma_zero (void)
 	if (0 == have_error)
 	{
 		printf ("PASS: tested sigma-zero function up to %ld\n", nmax);
+	}
+	return have_error;
+}
+
+/**
+ * Compute the sigma arithmetic function
+ * Returns the sum of powers of divisors of n.
+ * Raw brute force algorithm. Slow.
+ */
+long sigma_simple_algo (long n, long a)
+{
+	long acc = 0;
+	long d;
+
+	long ns = n/2;
+	for (d=1; d<=ns; d++)
+	{
+		if (n%d) continue;
+
+		long dp = 1;
+		for (long ia=0; ia<a; ia++) dp *= d;
+		acc += dp;
+	}
+
+	long dp = 1;
+	for (long ia=0; ia<a; ia++) dp *= n;
+	acc += dp;
+
+	return acc;
+}
+
+long test_sigma (void)
+{
+	long have_error=0;
+	long nmax=10000;
+	for (long i=1; i<=nmax; i++)
+	{
+		long s = 1;
+// printf("duuuude ================= start %ld\n", i);
+		if (sigma(i, s) != sigma_simple_algo(i, s))
+		{
+			printf ("ERROR: in sigma %ld function at n=%ld\n", s, i);
+			printf ("wanted %ld got %ld\n", sigma_simple_algo(i, s), sigma(i, s));
+			have_error ++;
+		}
+	}
+	if (0 == have_error)
+	{
+		printf ("PASS: tested sigma function up to %ld\n", nmax);
 	}
 	return have_error;
 }
@@ -870,6 +938,7 @@ int main()
 	test_pow ();
 	test_divisor ();
 	test_sigma_zero ();
+	test_sigma ();
 	test_unitary_divisor();
 	test_partition ();
 	test_partitionll ();
