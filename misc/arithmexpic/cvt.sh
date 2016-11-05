@@ -71,8 +71,12 @@
 # ------------------
 
 # ./divisor_uncircle divisor-tree 400 400 0 0.5 0.5 1 6
-../../generate/renorm divisor-tree rg 1.0
-cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-tree-64.png
+# ../../generate/renorm divisor-tree rg 1.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-tree-64.png
+# ../../generate/renorm div-tree-mag rg 6.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-tree-mag-64.png
+# ../../generate/renorm div-tree-style rg 1.0
+# cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-tree-style-64.png
 
 # ------------------
 # ../../generate/renorm sigma-one-120 rg 2.0

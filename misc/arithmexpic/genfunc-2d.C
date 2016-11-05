@@ -268,6 +268,22 @@ static double divisor_uncircle(double re_q, double im_q, int itermax, double par
 
 	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 	// return cabs(g);
+// #define STYLIZE
+#ifdef STYLIZE
+	// phi the phase runs from zero to 1.
+	double phi = 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+
+	double yellow = 0.75;
+	double ywidth = 0.03;
+	double gwidth = 0.03;
+	double side = 0.0;
+	if (1.0-ywidth < phi) side = yellow;
+	if (0.5-gwidth < phi and phi < 0.5+gwidth) side=yellow;
+	if (phi< ywidth) side = yellow;
+
+	return side;
+#endif
+
 }
 
 /* The below attempts to remap a pie slice of the circle into
