@@ -27,6 +27,7 @@ totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d divisor_exp_mag
 	ln -f genfunc-2d divisor_big
 	ln -f genfunc-2d divisor_twist
+	ln -f genfunc-2d divisor_uncircle
 	ln -f genfunc-2d sigma_one
 	ln -f genfunc-2d sigma_two
 	ln -f genfunc-2d little_omega

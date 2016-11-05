@@ -247,6 +247,26 @@ static double divisor_big(double re_q, double im_q, int itermax, double param)
 	return rv;
 }
 
+/* Unwind the circle into a rectangle */
+static double divisor_uncircle(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+	double theta = M_PI * im_q;
+	double rr = itermax + param * re_q;
+	rr = exp(rr * M_LN2);  // pow (2, param * re_q)
+	im_q = rr*sin (theta);
+	re_q = rr*cos (theta);
+
+	double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, divisor);
+	return cabs(g);
+}
+
+/* The beow attempts to remap a pie slice of the circle into
+ * the whole circle, as suggested by the dyadic self-similarity
+ * However, it is a total failure as such. The mapping is not
+ * holomorphic, its not even close. It sucks.
+ */
 static double divisor_twist(double re_q, double im_q, int itermax, double param)
 {
 	int prec = 35;
@@ -617,6 +637,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("divisor_exp_mag", divisor_exp_mag);
 	DECL_HEIGHT("divisor_big", divisor_big);
 	DECL_HEIGHT("divisor_twist", divisor_twist);
+	DECL_HEIGHT("divisor_uncircle", divisor_uncircle);
 	DECL_HEIGHT("sigma_one", sigma_one);
 	DECL_HEIGHT("sigma_two", sigma_two);
 	DECL_HEIGHT("little_omega", little_omega_big);
