@@ -68,7 +68,13 @@
 
 # ../../generate/renorm divisor-120K rg 1.6
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-exp-mag-120K.png
+# ------------------
 
+# ./divisor_uncircle divisor-tree 400 400 0 0.5 0.5 1 6
+../../generate/renorm divisor-tree rg 1.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > div-tree-64.png
+
+# ------------------
 # ../../generate/renorm sigma-one-120 rg 2.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > sigma-one-120.png
 
@@ -244,6 +250,6 @@
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > partition-12K.png
 #
 # ------------------
-../../generate/renorm exp-x rg 6.0
+../../generate/renorm exp-x rg 1.0
 cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > exp-x.png
 
