@@ -153,6 +153,10 @@ long divisor (long n)
  * returns thier sum.
  *
  * A slow, simple-minded algo.
+ * A much faster recursive algoithm is possible, but the below is
+ * adequate for the current needs.  The faster algo is a variant of the
+ * divisor-helper, above; the general case follows once the factorization
+ * of n is known.
  */
 long sigma (long n, long a)
 {

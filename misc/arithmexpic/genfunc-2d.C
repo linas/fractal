@@ -200,9 +200,26 @@ static double carmichael_big(double re_q, double im_q, int itermax, double param
 static double mobius_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
+#define UNCIRCLE
+#ifdef UNCIRCLE
+	double tmp = re_q;
+	re_q = 1.0 - im_q;
+	im_q = tmp;
+
+	// max_iter = itermax;
+	max_iter = 100000;
+	double theta = M_PI * im_q;
+	double rr = itermax + param * re_q;
+	rr = exp(rr * M_LN2);  // pow (2, itermax + param * re_q)
+// printf("duuude re=%g im=%g r = %g\n", re_q, im_q, rr);
+	im_q = rr*sin (theta);
+	re_q = rr*cos (theta);
+#endif
+
 	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, moebius_mu);
-	return cabs(g);
+	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
+	// return cabs(g);
 }
 
 static double mobius_big(double re_q, double im_q, int itermax, double param)

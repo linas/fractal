@@ -53,6 +53,9 @@
 # ../../generate/renorm mobius-120K rg 9.0
 # cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-exp-mag-120K.png
 
+../../generate/renorm mobius-tree-256 rg 1.0
+cat rg.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > mob-tree-256.png
+
 # ------------------
 # ./divisor_exp_mag divisor-exp-mag-120 400 400 5000 0 0 120
 # ../../generate/renorm divisor-exp-mag-120 rg 6.0
