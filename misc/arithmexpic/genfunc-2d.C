@@ -200,7 +200,7 @@ static double carmichael_big(double re_q, double im_q, int itermax, double param
 static double mobius_exp_mag(double re_q, double im_q, int itermax, double param)
 {
 	max_iter = itermax;
-#define UNCIRCLE
+// #define UNCIRCLE
 #ifdef UNCIRCLE
 	double tmp = re_q;
 	re_q = 1.0 - im_q;
