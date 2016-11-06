@@ -215,6 +215,7 @@ void survey(void (*func)(cpx_t f, cpx_t z, int nprec),
 	}
 }
 
+// =================================================================
 // Ordinary fraction numer/denom
 typedef struct fraction
 {
@@ -223,6 +224,7 @@ typedef struct fraction
 } Fraction;
 
 // Tree location, expressed several ways: as dyadic, Farey, and bounds.
+// This is only a symbolic labelling of the tree node.
 typedef struct tree_node
 {
 	// Index runs from 0 to infinity
@@ -293,6 +295,42 @@ void make_node(int idx, TreeNode* node)
 	node->farey.denom = node->left.denom + node->right.denom;
 }
 
+// ==================================================================
+
+// Numeric description of the zero, and the expeted bounds for the zero.
+typedef struct zero_node
+{
+	TreeNode tree_node;
+	double phi_min;
+	double phi_max;
+	mpf_t  phi_farey;
+} ZeroNode;
+
+void make_zero(int idx, ZeroNode* zn)
+{
+	make_node(idx, &zn->tree_node);
+
+	// Set up the left and right bounds.
+	long n = zn->tree_node.left.numer;
+	long d = zn->tree_node.left.denom;
+	zn->phi_min = 2.0 * ((double) n) / ((double) d);
+	n = zn->tree_node.right.numer;
+	d = zn->tree_node.right.denom;
+	zn->phi_max = 2.0 * ((double) n) / ((double) d);
+
+	// Set up the expected location of the zero.
+	mpf_init(zn->phi_farey);
+	mpf_set_ui(zn->phi_farey, 2 * zn->tree_node.farey.numer);
+	mpf_div_ui(zn->phi_farey, zn->phi_farey, zn->tree_node.farey.denom);
+}
+
+void clear_zero(ZeroNode* zn)
+{
+	mpf_clear(zn->phi_farey);
+}
+
+// ==================================================================
+
 int main(int argc, char* argv[])
 {
 	if (argc < 2)
@@ -310,15 +348,29 @@ int main(int argc, char* argv[])
 
 	for (int idx=0; idx < midx; idx++)
 	{
-		TreeNode node;
-		make_node(idx, &node);
+		// Skip the right side of the tree.
+		int tb = idx;
+		while (3 <= tb) { tb >>= 1; }
+		if (2 > tb) continue;
 
-		printf("node idx=%d, lv=(%d, %d) ", idx, node.level, node.vindex);
+		ZeroNode zero;
+		make_zero(idx, &zero);
+
+		TreeNode node;
+		// make_node(idx, &node);
+		node = zero.tree_node;
+
+		printf("node ");
+		// printf("idx=%d, lv=(%d, %d) ", idx, node.level, node.vindex);
 		printf("dy=%ld/%ld ", node.dyadic.numer, node.dyadic.denom);
 		printf("min=%ld/%ld ", node.left.numer, node.left.denom);
 		printf("max=%ld/%ld ", node.right.numer, node.right.denom);
 		printf("far=%ld/%ld ", node.farey.numer, node.farey.denom);
+		printf("phi = (%g %g) ", zero.phi_min, zero.phi_max);
+		printf("phx= %g ", mpf_get_d(zero.phi_farey));
 		printf("\n");
+
+		clear_zero(&zero);
 	}
 
 	printf("Done!\n");
