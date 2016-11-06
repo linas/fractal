@@ -1,8 +1,9 @@
 /*
  * Find zeros of function.
  *
- * Perform a survey of a circular domain, serching for zeros
- * in cells of a given angular, radial size.
+ * Assumes that the zeros can be organized into a binary tree,
+ * and that the tree is the Stern-Brocot tree, so that the zeros
+ * are located according to the tree.
  *
  * April 2016, October 2016
  */
@@ -218,7 +219,7 @@ int main(int argc, char* argv[])
 {
 	if (argc < 3)
 	{
-		fprintf(stderr, "Usage: %s <rmax> <cell-size>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <tree-depth>\n", argv[0]);
 		exit(1);
 	}
 
