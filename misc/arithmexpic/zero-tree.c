@@ -215,9 +215,60 @@ void survey(void (*func)(cpx_t f, cpx_t z, int nprec),
 	}
 }
 
+// Ordinary fraction numer/denom
+typedef struct fraction
+{
+	long numer;
+	long denom;
+} Fraction;
+
+// Tree location, expressed several ways: as dyadic, Farey, and bounds.
+typedef struct tree_node
+{
+	// Index runs from 0 to infinity
+	int index;
+
+	// index = 2^level + vindex
+	// level runs from 0 to infty, level = number of bits in index.
+	int level;
+	// vindex runs from 0 to 2^(level-1)
+	int vindex;
+
+	// denominator of dyadic fraction is 2^level
+	// numerator of dyadic fraction is 2*vindex +1
+	Fraction dyadic;
+
+	// Farey fraction corresponding to above.
+	Fraction farey;
+
+	// Left and right parents of the Farey fraction
+	Fraction left;
+	Fraction right;
+} TreeNode;
+
+// Initialize the node to the indicated location.
+void make_node(int idx, TreeNode* node)
+{
+	node->index = idx;
+
+	// get the level and offset in the level
+	int lvl = 0;
+	while (idx) { lvl++; idx >>= 1;}
+	node->level = lvl;
+
+	int dyden = 1 << lvl;
+	node->vindex = node->index - dyden/2;
+
+	// Set up the dyadic fraction; this is straight-forward
+	node->dyadic.numer = 2 * node->vindex +1;
+	node->dyadic.denom = dyden;
+
+	// Get the Farey fractions recursively.
+}
+
 int main(int argc, char* argv[])
 {
-	if (argc < 3)
+	if (argc < 2)
 	{
 		fprintf(stderr, "Usage: %s <tree-depth>\n", argv[0]);
 		exit(1);
@@ -227,9 +278,18 @@ int main(int argc, char* argv[])
 	mp_bitcnt_t bits = ((double) nprec) * 3.3219281 + 50;
 	mpf_set_default_prec(bits);
 
-	double rmax = atof(argv[1]);
-	double cell_size = atof(argv[2]);
-	survey(parti, rmax, cell_size, 40, nprec);
+	int lvl = atoi(argv[1]);
+	int midx = 1<<lvl;
+
+	for (int idx=0; idx < midx; idx++)
+	{
+		TreeNode node;
+		make_node(idx, &node);
+
+		printf("duuude idx=%d, lv=(%d, %d) ", idx, node.level, node.vindex);
+		printf("dy=%ld/%ld ", node.dyadic.numer, node.dyadic.denom);
+		printf("\n");
+	}
 
 	printf("Done!\n");
 }
