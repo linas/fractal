@@ -256,14 +256,41 @@ void make_node(int idx, TreeNode* node)
 	while (idx) { lvl++; idx >>= 1;}
 	node->level = lvl;
 
+	idx = node->index;
 	int dyden = 1 << lvl;
-	node->vindex = node->index - dyden/2;
+	node->vindex = idx - dyden/2;
 
 	// Set up the dyadic fraction; this is straight-forward
 	node->dyadic.numer = 2 * node->vindex +1;
 	node->dyadic.denom = dyden;
 
 	// Get the Farey fractions recursively.
+	if (0 == idx)
+	{
+		node->left.numer = 0;
+		node->left.denom = 1;
+		node->right.numer = 1;
+		node->right.denom = 1;
+		node->farey.numer = 0;
+		node->farey.denom = 1;
+		return;
+	}
+
+	TreeNode rec;
+	make_node(idx/2, &rec);
+	if (0 == idx%2)
+	{
+		node->left = rec.left;
+		node->right = rec.farey;
+	}
+	else
+	{
+		node->left = rec.farey;
+		node->right = rec.right;
+	}
+
+	node->farey.numer = node->left.numer + node->right.numer;
+	node->farey.denom = node->left.denom + node->right.denom;
 }
 
 int main(int argc, char* argv[])
@@ -286,8 +313,11 @@ int main(int argc, char* argv[])
 		TreeNode node;
 		make_node(idx, &node);
 
-		printf("duuude idx=%d, lv=(%d, %d) ", idx, node.level, node.vindex);
+		printf("node idx=%d, lv=(%d, %d) ", idx, node.level, node.vindex);
 		printf("dy=%ld/%ld ", node.dyadic.numer, node.dyadic.denom);
+		printf("min=%ld/%ld ", node.left.numer, node.left.denom);
+		printf("max=%ld/%ld ", node.right.numer, node.right.denom);
+		printf("far=%ld/%ld ", node.farey.numer, node.farey.denom);
 		printf("\n");
 	}
 
