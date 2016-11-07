@@ -332,6 +332,7 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 	if (9 == idx) r = 9.5;  // 17.4 ???
 	if (16 == idx) r = 10.36;
 	if (32 == idx) r = 13.81;
+	if (64 == idx) r = 17.759;
 	for ( ; r< 25; r+= rdelta)
 	{
 		bool fnd = survey_cell(parti, zn->z_zero, r, phig, rdelta, phid, ndigits, nprec);
