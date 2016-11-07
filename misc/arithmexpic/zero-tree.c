@@ -45,6 +45,7 @@ void parti(cpx_t f, cpx_t z, int nprec)
 }
 
 bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
+                 cpx_t zero,
                  double rguess, double tguess,
                  double rdelta, double tdelta,
                  int ndigits, int nprec)
@@ -119,7 +120,7 @@ printf("duuude explore at r=%g t=%g delta=%g sum=%g\n", rguess, tguess/M_PI, hi-
 	// differ by almost 2pi.
 	// We expect the integral to be large, approaching pi,
 	// but if we are unlucky, as low as 3pi/8, I guess.
-	if (hi-lo < 4.0 && 0.25*phase < 1.5)
+	if (hi-lo < 4.0 && 0.25*sum < 1.5)
 	{
 		cpx_clear(a);
 		cpx_clear(b);
@@ -136,16 +137,15 @@ printf("duuude reject at r=%g t=%g hi=%g lo=%g sum=%g\n", rguess, tguess/M_PI, h
 	}
 
 printf("---------------\n");
-printf("duude candidate at %g %g\n", rguess, tguess);
+printf("duude candidate at %g %g\n", rguess, tguess/M_PI);
 	// Now, set a to be the best-guess; its in the center of the rectangle.
 	st = sin(tguess);
 	ct = cos(tguess);
 	cpx_set_d(a, rguess*ct, rguess*st);
 
-	cpx_t e1, e2, zero;
+	cpx_t e1, e2;
 	cpx_init2(e1, bits);
 	cpx_init2(e2, bits);
-	cpx_init2(zero, bits);
 	cpx_sub(e1, b, a);
 	cpx_sub(e2, d, a);
 
@@ -170,7 +170,7 @@ printf("duuude found nothing\n");
 		return false;
 	}
 
-	cpx_prt("zero = ", zero); printf("\n");
+	// cpx_prt("zero = ", zero); printf("\n");
 
 	mpf_t r, t, pi;
 	mpf_init2(r, bits);
@@ -301,9 +301,21 @@ void make_node(int idx, TreeNode* node)
 typedef struct zero_node
 {
 	TreeNode tree_node;
+
+	// We expect the zero to be found between these two bounds.
 	double phi_min;
 	double phi_max;
+
+	// phi_farey is the farey number for this tree node; it is our
+	// best guess for the angle at which the zero will occur.
 	mpf_t  phi_farey;
+
+	// The actual location of the zero.
+	cpx_t z_zero;
+
+	// The actual angle at which the zero is found.
+	mpf_t  phi_zero;
+	mpf_t  r_zero;
 } ZeroNode;
 
 void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
@@ -323,14 +335,20 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 	mpf_set_ui(zn->phi_farey, 2 * zn->tree_node.farey.numer);
 	mpf_div_ui(zn->phi_farey, zn->phi_farey, zn->tree_node.farey.denom);
 
+	// Iniitialize other values;
+	cpx_init(zn->z_zero);
+	mpf_init(zn->phi_zero);
+	mpf_init(zn->r_zero);
+
+	// set up guesses for the zero-finder
 	double phig = mpf_get_d(zn->phi_farey);
-	double phid = 0.7 * (zn->phi_max - zn->phi_min);
+	double phid = 0.5 * (zn->phi_max - zn->phi_min);
 
 	double rdelta = 0.5;
 	double r = 1.0;
 	for (r = 3.1; r< 15; r+= rdelta)
 	{
-		bool fnd = survey_cell(parti, r, phig, rdelta, phid, ndigits, nprec);
+		bool fnd = survey_cell(parti, zn->z_zero, r, phig, rdelta, phid, ndigits, nprec);
 		if (fnd) break;
 	}
 }
@@ -338,6 +356,9 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 void clear_zero(ZeroNode* zn)
 {
 	mpf_clear(zn->phi_farey);
+	cpx_clear(zn->z_zero);
+	mpf_clear(zn->phi_zero);
+	mpf_clear(zn->r_zero);
 }
 
 // ==================================================================

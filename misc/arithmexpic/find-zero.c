@@ -44,6 +44,7 @@ void parti(cpx_t f, cpx_t z, int nprec)
 }
 
 bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
+                 cpx_t zero,
                  double rguess, double tguess, double cell_size,
                  int ndigits, int nprec)
 {
@@ -108,7 +109,7 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	// differ by almost 2pi.
 	// We expect the integral to be large, approaching pi,
 	// but if we are unlucky, as low as 3pi/8, I guess.
-	// if (hi-lo < 4.0 and 0.25*phase < 1.5)
+	// if (hi-lo < 4.0 and 0.25*sum < 1.5)
 	if (hi-lo < 4.0)
 	{
 		cpx_clear(a);
@@ -130,10 +131,9 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	cpx_add(a, a, d);
 	cpx_div_ui(a, a, 4);
 
-	cpx_t e1, e2, zero;
+	cpx_t e1, e2;
 	cpx_init2(e1, bits);
 	cpx_init2(e2, bits);
-	cpx_init2(zero, bits);
 	cpx_sub(e1, b, a);
 	cpx_sub(e2, d, a);
 
@@ -209,14 +209,18 @@ void survey(void (*func)(cpx_t f, cpx_t z, int nprec),
             double rmax, double cell_size,
             int ndigits, int nprec)
 {
+	mp_bitcnt_t bits = ((double) nprec) * 3.3219281 + 50;
+	cpx_t zero;
+	cpx_init2(zero, bits);
 	for (double r=1.0; r<rmax; r += cell_size)
 	{
 		double step = cell_size / r;
 		for (double t=0.0; t < M_PI; t += step)
 		{
-			survey_cell(func, r, t, cell_size, ndigits, nprec);
+			survey_cell(func, zero, r, t, cell_size, ndigits, nprec);
 		}
 	}
+	cpx_clear(zero);
 }
 
 int main(int argc, char* argv[])
