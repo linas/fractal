@@ -283,6 +283,13 @@ static double divisor_uncircle(double re_q, double im_q, int itermax, double par
 	long double complex z = re_q + I * im_q;
 	double complex g = exponential_genfunc(z, divisor);
 
+#ifdef RULER
+double dr = 0.1*(log(rr) - 2);
+int ir = rr;
+ir = ir - 10*(ir%10);
+if (rr-dr < ir and ir < rr+dr) return 0.0;
+#endif
+
 	return 0.5 + 0.5 * atan2(cimag(g), creal(g))/M_PI;
 	// return cabs(g);
 // #define STYLIZE
