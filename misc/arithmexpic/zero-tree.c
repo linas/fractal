@@ -325,17 +325,18 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 	double phid = 0.5 * (zn->phi_max - zn->phi_min);
 
 	// try to find the zero.
-	double rdelta = 0.5;
+	double rdelta = 0.15;
 	int lvl = zn->tree_node.level;
 	double r = 1<<(lvl-1);
 	if (5 == idx) r = 8.55;
 	if (9 == idx) r = 17.4;
 	if (10 == idx) r = 22.4;
 	if (16 == idx) r = 10.36;
+	if (17 == idx) r = 29.19;
 	if (23 == idx) r = 24.65;
 	if (32 == idx) r = 13.81;
 	if (64 == idx) r = 17.759;
-	if (128 == idx) r = 22.2;
+	if (128 == idx) r = 22.207;
 	for ( ; r< 30; r+= rdelta)
 	{
 		bool fnd = survey_cell(parti, zn->z_zero, r, phig, rdelta, phid, ndigits, nprec);
@@ -348,7 +349,7 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 			mpf_div(phi, phi, pi);
 			double zphi = mpf_get_d(phi);
 			if (zn->phi_min < zphi && zphi < zn->phi_max) brk = true;
-// break;
+break;
 			mpf_clear(phi);
 			if (brk) break;
 		}
@@ -368,7 +369,8 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 
 	mpf_sub(zn->phi_offset, zn->phi_farey, zn->phi_zero);
 	mpf_div_ui(zn->phi_offset, zn->phi_offset, 2); // half-angle
-printf("duude diff=%g\n", mpf_get_d(zn->phi_offset));
+printf("---------------\n");
+printf("duude angluler diff/2 =%g\n", mpf_get_d(zn->phi_offset));
 	int denden = 1;
 	if (0.0 < mpf_get_d(zn->phi_offset))
 	{
@@ -380,10 +382,10 @@ printf("duude diff=%g\n", mpf_get_d(zn->phi_offset));
 	}
 
 	mpf_mul_ui(zn->phi_offset, zn->phi_offset, denden);
+printf("denden=%d  ", denden);
+	fp_prt("offset = ", zn->phi_offset); printf("\n");
 
 	// fp_prt("theta/pi = ", zn->phi_zero); printf("\n");
-printf("---------------\n");
-	fp_prt("offset = ", zn->phi_offset); printf("\n");
 
 // #define CHECK_RESULT 1
 #ifdef CHECK_RESULT
