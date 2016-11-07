@@ -185,7 +185,12 @@ if (rc) {printf("duuude found noothing\n");}
 	double eps_i = cpx_get_im(check);
 	double eps = sqrt(eps_r*eps_r + eps_i*eps_i);
 	printf("fun at zero = %g\n", eps);
+	cpx_clear(check);
 #endif
+
+	mpf_clear(r);
+	mpf_clear(t);
+	mpf_clear(pi);
 
 	printf("\n");
 	fflush(stdout);

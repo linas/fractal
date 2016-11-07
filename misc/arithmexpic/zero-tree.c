@@ -115,7 +115,7 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	if (phase < lo) lo = phase;
 	sum += phase;
 
-printf("duuude explore at r=%g t=%g delta=%g sum=%g\n", rguess, tguess/M_PI, hi-lo, 0.25*sum);
+// printf("duuude explore at r=%g t=%g delta=%g sum=%g\n", rguess, tguess/M_PI, hi-lo, 0.25*sum);
 	// We expect the phase to wind around, so that hi and low
 	// differ by almost 2pi.
 	// We expect the integral to be large, approaching pi,
@@ -136,7 +136,6 @@ printf("duuude reject at r=%g t=%g hi=%g lo=%g sum=%g\n", rguess, tguess/M_PI, h
 		return false;
 	}
 
-printf("---------------\n");
 printf("duude candidate at %g %g\n", rguess, tguess/M_PI);
 	// Now, set a to be the best-guess; its in the center of the rectangle.
 	st = sin(tguess);
@@ -171,34 +170,6 @@ printf("duuude found nothing\n");
 	}
 
 	// cpx_prt("zero = ", zero); printf("\n");
-
-	mpf_t r, t, pi;
-	mpf_init2(r, bits);
-	mpf_init2(t, bits);
-	mpf_init2(pi, bits);
-
-	cpx_abs(r, zero);
-	fp_prt("r = ", r); printf("\n");
-
-	fp_arctan2(t, zero->im, zero->re, nprec);
-	fp_pi(pi, nprec);
-	mpf_div(t, t, pi);
-
-	fp_prt("theta/pi = ", t); printf("\n");
-
-#define CHECK_RESULT 1
-#ifdef CHECK_RESULT
-	cpx_t check;
-	cpx_init(check);
-	func(check, zero, nprec);
-	double eps_r = cpx_get_re(check);
-	double eps_i = cpx_get_im(check);
-	double eps = sqrt(eps_r*eps_r + eps_i*eps_i);
-	printf("fun at zero = %g\n", eps);
-#endif
-
-	printf("\n");
-	fflush(stdout);
 
 	cpx_clear(a);
 	cpx_clear(b);
@@ -316,6 +287,10 @@ typedef struct zero_node
 	// The actual angle at which the zero is found.
 	mpf_t  phi_zero;
 	mpf_t  r_zero;
+
+	// The scale difference between phi_farey and phi_zero
+	mpf_t delta_zero;
+
 } ZeroNode;
 
 void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
@@ -339,18 +314,59 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 	cpx_init(zn->z_zero);
 	mpf_init(zn->phi_zero);
 	mpf_init(zn->r_zero);
+	mpf_init(zn->delta_zero);
 
 	// set up guesses for the zero-finder
 	double phig = mpf_get_d(zn->phi_farey);
 	double phid = 0.5 * (zn->phi_max - zn->phi_min);
 
+	// try to find the zero.
 	double rdelta = 0.5;
-	double r = 1.0;
-	for (r = 3.1; r< 15; r+= rdelta)
+	int lvl = zn->tree_node.level;
+	double r = 1<<(lvl-1);
+	if (5 == idx) r = 8.5;
+	for ( ; r< 25; r+= rdelta)
 	{
 		bool fnd = survey_cell(parti, zn->z_zero, r, phig, rdelta, phid, ndigits, nprec);
 		if (fnd) break;
 	}
+
+	// bogus
+	mpf_t pi;
+	mpf_init(pi);
+	fp_pi(pi, nprec);
+
+	// record the radius and the angle.
+	cpx_abs(zn->r_zero, zn->z_zero);
+	// fp_prt("r = ", zn->r_zero); printf("\n");
+
+	fp_arctan2(zn->phi_zero, zn->z_zero->im, zn->z_zero->re, nprec);
+	mpf_div(zn->phi_zero, zn->phi_zero, pi);
+
+	mpf_sub(zn->delta_zero, zn->phi_farey, zn->phi_zero);
+	mpf_mul_ui(zn->delta_zero, zn->delta_zero, zn->tree_node.farey.denom);
+	mpf_div_ui(zn->delta_zero, zn->delta_zero, 2);
+
+	// fp_prt("theta/pi = ", zn->phi_zero); printf("\n");
+
+	mpf_clear(pi);
+
+#define CHECK_RESULT 1
+#ifdef CHECK_RESULT
+	cpx_t check;
+	cpx_init(check);
+	parti(check, zn->z_zero, nprec);
+	double eps_r = cpx_get_re(check);
+	double eps_i = cpx_get_im(check);
+	double eps = sqrt(eps_r*eps_r + eps_i*eps_i);
+	printf("fun at zero = %g\n", eps);
+	cpx_clear(check);
+#endif
+
+printf("---------------\n");
+	printf("\n");
+	fflush(stdout);
+
 }
 
 void clear_zero(ZeroNode* zn)
@@ -359,6 +375,7 @@ void clear_zero(ZeroNode* zn)
 	cpx_clear(zn->z_zero);
 	mpf_clear(zn->phi_zero);
 	mpf_clear(zn->r_zero);
+	mpf_clear(zn->delta_zero);
 }
 
 // ==================================================================
@@ -394,13 +411,17 @@ int main(int argc, char* argv[])
 		node = zero.tree_node;
 
 		printf("node ");
-		// printf("idx=%d, lv=(%d, %d) ", idx, node.level, node.vindex);
+		printf("idx=%d ", idx);
+		// printf("lv=(%d, %d) ", node.level, node.vindex);
 		printf("dy=%ld/%ld ", node.dyadic.numer, node.dyadic.denom);
-		printf("min=%ld/%ld ", node.left.numer, node.left.denom);
-		printf("max=%ld/%ld ", node.right.numer, node.right.denom);
+		// printf("min=%ld/%ld ", node.left.numer, node.left.denom);
+		// printf("max=%ld/%ld ", node.right.numer, node.right.denom);
 		printf("far=%ld/%ld ", node.farey.numer, node.farey.denom);
-		printf("phi = (%g %g) ", zero.phi_min, zero.phi_max);
+		// printf("phi = (%g %g) ", zero.phi_min, zero.phi_max);
 		printf("phx= %g ", mpf_get_d(zero.phi_farey));
+		printf("phi= %g ", mpf_get_d(zero.phi_zero));
+		printf("r= %g ", mpf_get_d(zero.r_zero));
+		printf("delt= %g ", mpf_get_d(zero.delta_zero));
 		printf("\n");
 
 		clear_zero(&zero);
