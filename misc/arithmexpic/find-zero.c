@@ -81,29 +81,34 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 
 	// Compute contour integral i.e. sum the phases.
 	double phase = atan2(cpx_get_im(fa), cpx_get_re(fa));
+	if (phase < 0.0) phase += 2.0 * M_PI;
 	double sum = phase;
 	double hi = phase;
 	double lo = phase;
 
 	phase = atan2(cpx_get_im(fb), cpx_get_re(fb));
-	sum += phase;
+	if (phase < 0.0) phase += 2.0 * M_PI;
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
+	sum += phase;
 
 	phase = atan2(cpx_get_im(fc), cpx_get_re(fc));
-	sum += phase;
+	if (phase < 0.0) phase += 2.0 * M_PI;
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
+	sum += phase;
 
 	phase = atan2(cpx_get_im(fd), cpx_get_re(fd));
-	sum += phase;
+	if (phase < 0.0) phase += 2.0 * M_PI;
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
+	sum += phase;
 
 	// We expect the phase to wind around, so that hi and low
 	// differ by almost 2pi.
-	// We expect the integral to be large, approaching 2pi.
-	// if (hi-lo < 4.0 or fabs(phase) < 3.0)
+	// We expect the integral to be large, approaching pi,
+	// but if we are unlucky, as low as 3pi/8, I guess.
+	// if (hi-lo < 4.0 and 0.25*phase < 1.5)
 	if (hi-lo < 4.0)
 	{
 		cpx_clear(a);

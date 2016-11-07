@@ -45,7 +45,8 @@ void parti(cpx_t f, cpx_t z, int nprec)
 }
 
 bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
-                 double rguess, double tguess, double cell_size,
+                 double rguess, double tguess,
+                 double rdelta, double tdelta,
                  int ndigits, int nprec)
 {
 	mp_bitcnt_t bits = ((double) nprec) * 3.3219281 + 50;
@@ -62,17 +63,25 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	cpx_init2(fc, bits);
 	cpx_init2(fd, bits);
 
-	// Set up four corners
-	double st = sin(tguess);
-	double ct = cos(tguess);
-	cpx_set_d(a, rguess*ct, rguess*st);
-	double rgd = rguess + cell_size;
+	tguess *= M_PI;
+	tdelta *= M_PI;
+
+	// Set up four corners, on each side of the guess center.
+	// a,b,c,d come in right-handed order.
+	double st = sin(tguess-tdelta);
+	double ct = cos(tguess-tdelta);
+	double rgd = rguess - rdelta;
+	cpx_set_d(a, rgd*ct, rgd*st);
+
+	rgd = rguess + rdelta;
 	cpx_set_d(b, rgd*ct, rgd*st);
-	tguess += cell_size / rguess;
-	st = sin(tguess);
-	ct = cos(tguess);
+
+	st = sin(tguess+tdelta);
+	ct = cos(tguess+tdelta);
 	cpx_set_d(c, rgd*ct, rgd*st);
-	cpx_set_d(d, rguess*ct, rguess*st);
+
+	rgd = rguess - rdelta;
+	cpx_set_d(d, rgd*ct, rgd*st);
 
 	// Evaluate at the four corners
 	func(fa, a, nprec);
@@ -82,30 +91,35 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 
 	// Compute contour integral i.e. sum the phases.
 	double phase = atan2(cpx_get_im(fa), cpx_get_re(fa));
+	if (phase < 0.0) phase += 2.0 * M_PI;
 	double sum = phase;
 	double hi = phase;
 	double lo = phase;
 
 	phase = atan2(cpx_get_im(fb), cpx_get_re(fb));
-	sum += phase;
+	if (phase < 0.0) phase += 2.0 * M_PI;
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
+	sum += phase;
 
 	phase = atan2(cpx_get_im(fc), cpx_get_re(fc));
-	sum += phase;
+	if (phase < 0.0) phase += 2.0 * M_PI;
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
+	sum += phase;
 
 	phase = atan2(cpx_get_im(fd), cpx_get_re(fd));
-	sum += phase;
+	if (phase < 0.0) phase += 2.0 * M_PI;
 	if (hi < phase) hi = phase;
 	if (phase < lo) lo = phase;
+	sum += phase;
 
+printf("duuude explore at r=%g t=%g delta=%g sum=%g\n", rguess, tguess/M_PI, hi-lo, 0.25*sum);
 	// We expect the phase to wind around, so that hi and low
 	// differ by almost 2pi.
-	// We expect the integral to be large, approaching 2pi.
-	// if (hi-lo < 4.0 or fabs(phase) < 3.0)
-	if (hi-lo < 4.0)
+	// We expect the integral to be large, approaching pi,
+	// but if we are unlucky, as low as 3pi/8, I guess.
+	if (hi-lo < 4.0 && 0.25*phase < 1.5)
 	{
 		cpx_clear(a);
 		cpx_clear(b);
@@ -117,14 +131,16 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 		cpx_clear(fc);
 		cpx_clear(fd);
 
+printf("duuude reject at r=%g t=%g hi=%g lo=%g sum=%g\n", rguess, tguess/M_PI, hi, lo, 0.25*sum);
 		return false;
 	}
 
-	// Now, a will be the center of the rectangle.
-	cpx_add(a, a, b);
-	cpx_add(a, a, c);
-	cpx_add(a, a, d);
-	cpx_div_ui(a, a, 4);
+printf("---------------\n");
+printf("duude candidate at %g %g\n", rguess, tguess);
+	// Now, set a to be the best-guess; its in the center of the rectangle.
+	st = sin(tguess);
+	ct = cos(tguess);
+	cpx_set_d(a, rguess*ct, rguess*st);
 
 	cpx_t e1, e2, zero;
 	cpx_init2(e1, bits);
@@ -134,8 +150,6 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 	cpx_sub(e2, d, a);
 
 	int rc = cpx_find_zero(zero, func, a, e1, e2, ndigits, nprec);
-
-if (rc) {printf("duuude found noothing\n");}
 
 	// if rc is not zero, then nothing was found
 	if (rc)
@@ -152,10 +166,10 @@ if (rc) {printf("duuude found noothing\n");}
 
 		cpx_clear(e1);
 		cpx_clear(e2);
+printf("duuude found nothing\n");
 		return false;
 	}
 
-	printf("---------------\n");
 	cpx_prt("zero = ", zero); printf("\n");
 
 	mpf_t r, t, pi;
@@ -199,20 +213,6 @@ if (rc) {printf("duuude found noothing\n");}
 	cpx_clear(e1);
 	cpx_clear(e2);
 	return true;
-}
-
-void survey(void (*func)(cpx_t f, cpx_t z, int nprec),
-            double rmax, double cell_size,
-            int ndigits, int nprec)
-{
-	for (double r=1.0; r<rmax; r += cell_size)
-	{
-		double step = cell_size / r;
-		for (double t=0.0; t < M_PI; t += step)
-		{
-			survey_cell(func, r, t, cell_size, ndigits, nprec);
-		}
-	}
 }
 
 // =================================================================
@@ -306,7 +306,7 @@ typedef struct zero_node
 	mpf_t  phi_farey;
 } ZeroNode;
 
-void make_zero(int idx, ZeroNode* zn)
+void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 {
 	make_node(idx, &zn->tree_node);
 
@@ -322,6 +322,17 @@ void make_zero(int idx, ZeroNode* zn)
 	mpf_init(zn->phi_farey);
 	mpf_set_ui(zn->phi_farey, 2 * zn->tree_node.farey.numer);
 	mpf_div_ui(zn->phi_farey, zn->phi_farey, zn->tree_node.farey.denom);
+
+	double phig = mpf_get_d(zn->phi_farey);
+	double phid = 0.7 * (zn->phi_max - zn->phi_min);
+
+	double rdelta = 0.5;
+	double r = 1.0;
+	for (r = 3.1; r< 15; r+= rdelta)
+	{
+		bool fnd = survey_cell(parti, r, phig, rdelta, phid, ndigits, nprec);
+		if (fnd) break;
+	}
 }
 
 void clear_zero(ZeroNode* zn)
@@ -340,6 +351,7 @@ int main(int argc, char* argv[])
 	}
 
 	int nprec = 80;
+	int ndigits = 40;
 	mp_bitcnt_t bits = ((double) nprec) * 3.3219281 + 50;
 	mpf_set_default_prec(bits);
 
@@ -354,7 +366,7 @@ int main(int argc, char* argv[])
 		if (2 > tb) continue;
 
 		ZeroNode zero;
-		make_zero(idx, &zero);
+		make_zero(idx, &zero, ndigits, nprec);
 
 		TreeNode node;
 		// make_node(idx, &node);
