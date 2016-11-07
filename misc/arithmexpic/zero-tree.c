@@ -132,11 +132,11 @@ bool survey_cell(void (*func)(cpx_t f, cpx_t z, int nprec),
 		cpx_clear(fc);
 		cpx_clear(fd);
 
-printf("duuude reject at r=%g t=%g hi=%g lo=%g sum=%g\n", rguess, tguess/M_PI, hi, lo, 0.25*sum);
+// printf("duuude reject at r=%g t=%g hi=%g lo=%g sum=%g\n", rguess, tguess/M_PI, hi, lo, 0.25*sum);
 		return false;
 	}
 
-printf("duude candidate at %g %g\n", rguess, tguess/M_PI);
+// printf("duude candidate at %g %g\n", rguess, tguess/M_PI);
 	// Now, set a to be the best-guess; its in the center of the rectangle.
 	st = sin(tguess);
 	ct = cos(tguess);
@@ -165,7 +165,7 @@ printf("duude candidate at %g %g\n", rguess, tguess/M_PI);
 
 		cpx_clear(e1);
 		cpx_clear(e2);
-printf("duuude found nothing\n");
+// printf("duuude found nothing\n");
 		return false;
 	}
 
@@ -293,8 +293,12 @@ typedef struct zero_node
 
 } ZeroNode;
 
+// Global pi;
+static mpf_t pi;
+
 void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 {
+	printf("\n");
 	make_node(idx, &zn->tree_node);
 
 	// Set up the left and right bounds.
@@ -324,17 +328,26 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 	double rdelta = 0.5;
 	int lvl = zn->tree_node.level;
 	double r = 1<<(lvl-1);
-	if (5 == idx) r = 8.5;
+	if (5 == idx) r = 8.55;
+	if (9 == idx) r = 9.5;  // 17.4 ???
+	if (16 == idx) r = 10.36;
+	if (32 == idx) r = 13.81;
 	for ( ; r< 25; r+= rdelta)
 	{
 		bool fnd = survey_cell(parti, zn->z_zero, r, phig, rdelta, phid, ndigits, nprec);
-		if (fnd) break;
+		if (fnd)
+		{
+			bool brk = false;
+			mpf_t phi;
+			mpf_init(phi);
+			fp_arctan2(phi, zn->z_zero->im, zn->z_zero->re, nprec);
+			mpf_div(phi, phi, pi);
+			double zphi = mpf_get_d(phi);
+			if (zn->phi_min < zphi && zphi < zn->phi_max) brk = true;
+			mpf_clear(phi);
+			if (brk) break;
+		}
 	}
-
-	// bogus
-	mpf_t pi;
-	mpf_init(pi);
-	fp_pi(pi, nprec);
 
 	// record the radius and the angle.
 	cpx_abs(zn->r_zero, zn->z_zero);
@@ -348,10 +361,9 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 	mpf_div_ui(zn->delta_zero, zn->delta_zero, 2);
 
 	// fp_prt("theta/pi = ", zn->phi_zero); printf("\n");
+	fp_prt("delta = ", zn->delta_zero); printf("\n");
 
-	mpf_clear(pi);
-
-#define CHECK_RESULT 1
+// #define CHECK_RESULT 1
 #ifdef CHECK_RESULT
 	cpx_t check;
 	cpx_init(check);
@@ -364,7 +376,6 @@ void make_zero(int idx, ZeroNode* zn, int ndigits, int nprec)
 #endif
 
 printf("---------------\n");
-	printf("\n");
 	fflush(stdout);
 
 }
@@ -393,6 +404,10 @@ int main(int argc, char* argv[])
 	mp_bitcnt_t bits = ((double) nprec) * 3.3219281 + 50;
 	mpf_set_default_prec(bits);
 
+	// Global initialization
+	mpf_init(pi);
+	fp_pi(pi, nprec);
+
 	int lvl = atoi(argv[1]);
 	int midx = 1<<lvl;
 
@@ -418,10 +433,10 @@ int main(int argc, char* argv[])
 		// printf("max=%ld/%ld ", node.right.numer, node.right.denom);
 		printf("far=%ld/%ld ", node.farey.numer, node.farey.denom);
 		// printf("phi = (%g %g) ", zero.phi_min, zero.phi_max);
-		printf("phx= %g ", mpf_get_d(zero.phi_farey));
-		printf("phi= %g ", mpf_get_d(zero.phi_zero));
-		printf("r= %g ", mpf_get_d(zero.r_zero));
-		printf("delt= %g ", mpf_get_d(zero.delta_zero));
+		printf("phx=%g ", mpf_get_d(zero.phi_farey));
+		printf("phi=%g ", mpf_get_d(zero.phi_zero));
+		printf("r=%g ", mpf_get_d(zero.r_zero));
+		printf("delt=%g ", mpf_get_d(zero.delta_zero));
 		printf("\n");
 
 		clear_zero(&zero);
