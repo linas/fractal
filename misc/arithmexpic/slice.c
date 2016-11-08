@@ -1,5 +1,7 @@
 /*
  * Circular cut/integral.
+ * Consider a circle centered on the origin. Graph values
+ * of the function on that circle.
  *
  * Oct 2016
  */
@@ -33,6 +35,10 @@ int main(int argc, char * argv[])
 	printf("# nsteps=%d\n#\n", nsteps);
 
 	printf("#\n# name = %s\n#\n", name);
+
+	printf("# Legend:\n");
+	printf("# i, theta, magnitude, sum-of-magnitude, sum-of-phase-wrap, phase\n");
+	printf("#\n");
 
 	long (*func)(long) = NULL;
 	if (0 == strcmp(name, "totient")) func = totient_phi;
@@ -68,6 +74,8 @@ int main(int argc, char * argv[])
 
 	double delt = 2.0*M_PI / ((double)nsteps);
 	double thet = 0.0;
+	int wrap = 0;  // number of times the phase has wrapped.
+	double prev_phase = -1e10;
 
 	mpf_set_ui(zero, 0);
 	mpf_set_ui(theta, 0);
@@ -94,7 +102,13 @@ int main(int argc, char * argv[])
 		double sm = mpf_get_d(sum);
 		sm *= delt;
 
-		printf("%d	%g	%g	%g\n", i, th, mg, sm);
+		// Get the phases, too. atan2 returns a value from -M_PI to +M_PI
+		double phase = atan2(cpx_get_im(val), cpx_get_re(val));
+		// if (phase < 0.0) phase += 2.0*M_PI;
+		if (phase < prev_phase) wrap ++;
+		prev_phase = phase;
+
+		printf("%d	%g	%g	%g	%d	%g\n", i, th, mg, sm, wrap, phase);
 
 		mpf_add(theta, theta, delta);
 		thet += delt;
