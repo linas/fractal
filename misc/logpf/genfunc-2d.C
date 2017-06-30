@@ -28,7 +28,7 @@ int max_iter = 100000000;
 /*
  * Exponential generating function for arithmetic series
  */
-double complex exponential_genfunc(long double complex x, long (*func)(long))
+double complex exponential_genfunc(long double complex x, unsigned long (*func)(unsigned long))
 {
 	long double complex sum = 0;
 	long double complex xn = x;
@@ -43,8 +43,9 @@ double complex exponential_genfunc(long double complex x, long (*func)(long))
 		if (max_iter < n) break;
 	}
 
-//	long double scale = expl(-cabsl(x));
-// sum *= scale;
+	long double scale = expl(-cabsl(x));
+	sum *= scale;
+	sum *= scale;
 // printf("duuude %g sum=%g\n", cabs(x), cabs(sum));
 
 	return sum;
@@ -163,7 +164,7 @@ static double loggpf_big_mag(double re_q, double im_q, int itermax, double param
 	mpf_t val; mpf_init(val);
 	cpx_set_d(z, re_q, im_q);
 
-	cpx_exponential_genfunc_mpf(sum, z, nprec, log_gpf_big);
+	cpx_exponential_genfunc_mpf(sum, z, nprec, loggpf_big);
 	cpx_abs(val, sum);
 	double rv = mpf_get_d(val);
 
@@ -171,6 +172,25 @@ static double loggpf_big_mag(double re_q, double im_q, int itermax, double param
 	cpx_clear(z);
 	mpf_clear(val);
 	return rv;
+}
+
+// ------------------------------------------------------------
+
+static double fact_phase(double re_q, double im_q, int itermax, double param)
+{
+	double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, factor_product);
+	double re = creal(g);
+	double im = cimag(g);
+	double rv = 0.5 + 0.5 * atan2(im, re)/M_PI;
+	return rv;
+}
+
+static double fact_mag(double re_q, double im_q, int itermax, double param)
+{
+	double complex z = re_q + I * im_q;
+	double complex g = exponential_genfunc(z, factor_product);
+	return cabs(g);
 }
 
 // ------------------------------------------------------------
@@ -194,6 +214,9 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("loggpf_phase", loggpf_phase);
 	DECL_HEIGHT("loggpf_mag", loggpf_mag);
 	DECL_HEIGHT("loggpf_big_mag", loggpf_big_mag);
+
+	DECL_HEIGHT("fact_phase", fact_phase);
+	DECL_HEIGHT("fact_mag", fact_mag);
 
 	DECL_HEIGHT("xperiment", xperiment);
 }
