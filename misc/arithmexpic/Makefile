@@ -37,8 +37,6 @@ totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d unitary
 	ln -f genfunc-2d liouv_lambda
 	ln -f genfunc-2d mertens_m
-	ln -f genfunc-2d disclog
-	ln -f genfunc-2d disclog_big
 	ln -f genfunc-2d mangoldt_lambda
 	ln -f genfunc-2d mangoldt_lambda_big
 	ln -f genfunc-2d exp_mangoldt_lambda
