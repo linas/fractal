@@ -10,15 +10,11 @@ HIST=../../generate/brat.o ../../generate/util.o
 
 all: genfunc-2d
 
-genfunc-2d: genfunc-2d.o genfunc.o $(HIST) $(FUNC)
+genfunc-2d: genfunc-2d.o $(HIST) $(FUNC)
 
-totient_ord_phase: genfunc-2d.o genfunc.o
+xperiment: genfunc-2d.o
 	ln -f genfunc-2d disclog
 	ln -f genfunc-2d disclog_big
-	ln -f genfunc-2d xperiment
-
-genfunc.o: genfunc.h
-genfunc-2d.o: genfunc.h
 
 .o:
 	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++

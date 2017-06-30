@@ -10,13 +10,13 @@ HIST=../../generate/brat.o ../../generate/util.o
 
 all: genfunc-2d totient_ord_phase oned find-zero slice zero-tree
 
-genfunc-2d: genfunc-2d.o genfunc.o $(HIST) $(FUNC)
-oned: genfunc.o $(FUNC)
-find-zero: genfunc.o $(FUNC)
-slice: genfunc.o $(FUNC)
-zero-tree: genfunc.o $(FUNC)
+genfunc-2d: genfunc-2d.o $(HIST) $(FUNC)
+oned: $(FUNC)
+find-zero: $(FUNC)
+slice: $(FUNC)
+zero-tree: $(FUNC)
 
-totient_ord_phase: genfunc-2d.o genfunc.o
+totient_ord_phase: genfunc-2d.o
 	ln -f genfunc-2d totient_ord_phase
 	ln -f genfunc-2d totient_exp_phase
 	ln -f genfunc-2d totient_exp_mag
