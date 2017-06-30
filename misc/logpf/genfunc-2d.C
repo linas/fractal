@@ -150,30 +150,26 @@ static double loggpf_mag(double re_q, double im_q, int itermax, double param)
 }
 
 // Let mpf do the work.
-void log_gpf_big(mpf_t ln, long n)
+void loggpf_big(mpf_t ln, long n)
 {
 	fp_log_ui(ln, gpf(n), 65);
 }
-static double log_gpf_big_phase(double re_q, double im_q, int itermax, double param)
+static double loggpf_big_mag(double re_q, double im_q, int itermax, double param)
 {
 	int nprec = 65;
 	mpf_set_default_prec(nprec * 3.322 + 50);
 
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
-	// mpf_t val; mpf_init(val);
+	mpf_t val; mpf_init(val);
 	cpx_set_d(z, re_q, im_q);
 
 	cpx_exponential_genfunc_mpf(sum, z, nprec, log_gpf_big);
-	// cpx_abs(val, sum);
-	// double rv = mpf_get_d(val);
-
-	double re = cpx_get_re(sum);
-	double im = cpx_get_im(sum);
-	double rv = 0.5 + 0.5 * atan2(im, re)/M_PI;
+	cpx_abs(val, sum);
+	double rv = mpf_get_d(val);
 
 	cpx_clear(sum);
 	cpx_clear(z);
-	// mpf_clear(val);
+	mpf_clear(val);
 	return rv;
 }
 
@@ -197,6 +193,7 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("disclog_big", disclog_big_phase);
 	DECL_HEIGHT("loggpf_phase", loggpf_phase);
 	DECL_HEIGHT("loggpf_mag", loggpf_mag);
+	DECL_HEIGHT("loggpf_big_mag", loggpf_big_mag);
 
 	DECL_HEIGHT("xperiment", xperiment);
 }

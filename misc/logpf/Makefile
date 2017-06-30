@@ -25,4 +25,4 @@ xperiment: genfunc-2d.o
 	cc -c -g $^  -std=gnu11 -Wall -O2 $(INCLUDES)
 
 .C.o:
-	cc -c $^  -std=g++11 -Wall -O2 $(INCLUDES)
+	cc -c $^  -std=gnu11 -Wall -O2 $(INCLUDES)
