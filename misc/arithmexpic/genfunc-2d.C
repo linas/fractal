@@ -460,28 +460,24 @@ static double disclog_exp_phase(double re_q, double im_q, int itermax, double pa
 // Let mpf do the work.
 void disc_big(mpf_t ln, long n)
 {
-	fp_log_ui(ln, n, 25);
+	fp_log_ui(ln, n, 45);
 }
 static double disclog_big_phase(double re_q, double im_q, int itermax, double param)
 {
+	int nprec = 45;
+	mpf_set_default_prec(nprec * 3.322 + 50);
+
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
 	// mpf_t val; mpf_init(val);
 	cpx_set_d(z, re_q, im_q);
 
-	cpx_exponential_genfunc_mpf(sum, z, 25, disc_big);
+	cpx_exponential_genfunc_mpf(sum, z, 45, disc_big);
 	// cpx_abs(val, sum);
 	// double rv = mpf_get_d(val);
 
 	double re = cpx_get_re(sum);
 	double im = cpx_get_im(sum);
 	double rv = 0.5 + 0.5 * atan2(im, re)/M_PI;
-
-double complex dz = re_q + I * im_q;
-double complex dg = exp_genfunc_d(dz, disclog);
-double dre = creal(dg);
-double dim = cimag(dg);
-
-printf("duude wtf %g %g gives %g %g\t%g\n", re_q, im_q, im, dim, im-dim);
 
 	cpx_clear(sum);
 	cpx_clear(z);
