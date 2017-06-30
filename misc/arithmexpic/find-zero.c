@@ -15,13 +15,13 @@
 #include <mp-arith.h>
 #include <mp-complex.h>
 #include <mp-consts.h>
+#include <mp-genfunc.h>
 #include <mp-misc.h>
 #include <mp-trig.h>
 #include <mp-zerofind.h>
 
 #include "moebius.h"
 
-#include "genfunc.h"
 
 // Partition function
 void parti_z_mpf(mpf_t res, long n)

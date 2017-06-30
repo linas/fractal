@@ -10,9 +10,9 @@
 #include <stdlib.h>
 
 #include <mp-arith.h>
+#include <mp-genfunc.h>
 #include <moebius.h>
 
-#include "genfunc.h"
 
 void parti_z_mpf(mpf_t res, long n)
 {

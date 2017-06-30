@@ -47,14 +47,6 @@ totient_ord_phase: genfunc-2d.o genfunc.o
 	ln -f genfunc-2d partition_big
 	ln -f genfunc-2d xperiment
 
-genfunc.o: genfunc.h
-genfunc-2d.o: genfunc.h
-
-oned.o: genfunc.h
-find-zero.o: genfunc.h
-slice.o: genfunc.h
-zero-tree.o: genfunc.h
-
 .o:
 	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++
 

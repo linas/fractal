@@ -11,6 +11,7 @@
 #include <time.h>
 
 #include <mp-arith.h>
+#include <mp-genfunc.h>
 #include <mp-trig.h>
 
 #include <gpf.h>
@@ -19,7 +20,6 @@
 #include <totient.h>
 
 #include "brat.h"
-#include "genfunc.h"
 
 
 

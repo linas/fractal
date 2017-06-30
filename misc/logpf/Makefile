@@ -8,7 +8,7 @@ FUNC=../../tools/lib/libfunc.a
 HIST=../../generate/brat.o ../../generate/util.o
 
 
-all: genfunc-2d totient_ord_phase oned find-zero slice zero-tree
+all: genfunc-2d
 
 genfunc-2d: genfunc-2d.o genfunc.o $(HIST) $(FUNC)
 

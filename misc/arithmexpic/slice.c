@@ -13,11 +13,11 @@
 #include <string.h>
 
 #include <mp-arith.h>
+#include <mp-genfunc.h>
 #include <mp-trig.h>
 #include <moebius.h>
 #include <totient.h>
 
-#include "genfunc.h"
 
 int main(int argc, char * argv[])
 {
