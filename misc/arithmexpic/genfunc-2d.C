@@ -442,6 +442,21 @@ static double mertens_m_exp_mag(double re_q, double im_q, int itermax, double pa
 	return cabs(g);
 }
 
+// ------------------------------------------------------------
+//
+// Discrete log
+double disclog(long n) { return log((double)n); }
+static double disclog_exp_mag(double re_q, double im_q, int itermax, double param)
+{
+	max_iter = itermax;
+	double complex z = re_q + I * im_q;
+	double complex g = exp_genfunc_d(z, disclog);
+	return cabs(g);
+}
+
+// ------------------------------------------------------------
+
+// von Mangoldt fuction
 double mango(long n) { return mangoldt_lambda_cached(n); }
 static double mangoldt_lambda_exp_mag(double re_q, double im_q, int itermax, double param)
 {
@@ -694,6 +709,9 @@ __attribute__((constructor)) void decl_things() {
 	DECL_HEIGHT("big_omega_big", big_omega_big);
 	DECL_HEIGHT("liouv_lambda", liouv_lambda);
 	DECL_HEIGHT("mertens_m", mertens_m_exp_mag);
+
+	DECL_HEIGHT("disclog", disclog_exp_mag);
+
 	DECL_HEIGHT("mangoldt_lambda", mangoldt_lambda_exp_mag);
 	DECL_HEIGHT("mangoldt_lambda_big", mangoldt_lambda_big);
 	DECL_HEIGHT("exp_mangoldt_lambda", exp_mangoldt_lambda_exp_mag);
