@@ -24,9 +24,15 @@ unsigned long gpf(unsigned long n);
  * greatest prime factor.  The returned random number is guaranteed
  * to be prime, to be between 2 and n (inclusive) and to occur with
  * roughly the frequency that primes occur in GPF (falling off as
- * 1/k for the k'th prime).  Use srandom() to change the randome seed.
+ * 1/k for the k'th prime).  Use srandom() to change the random seed.
  */
 unsigned long pseudo_gpf(unsigned long n);
+
+/* ------------------------------------------------------------ */
+/* Return the product of all the factors of n.  Each factor appears
+ * precisely once; squares and higher powers are collapsed.
+ */
+unsigned long factor_product(unsigned long n);
 
 #ifdef   __cplusplus
 };

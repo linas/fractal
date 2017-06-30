@@ -1,6 +1,6 @@
 /*
  * FUNCTION:
- * return greatest prime factor (largest prime divisor)
+ * Return greatest prime factor (largest prime divisor)
  *
  * HISTORY:
  * April 2016 -- linas
@@ -133,6 +133,48 @@ unsigned long pseudo_gpf(unsigned long n)
 	}
 	unsigned long fact = pseudo_gpf_direct(n);
 	ul_one_d_cache_store(&pseudo_gpf_cache, fact, n);
+	return fact;
+}
+
+/* ------------------------------------------------------------ */
+/**
+ * Return the product of all of the prime factors.
+ * Each factor occurs only once: squares and higher are collapsed.
+ * Direct computation (from scratch) each time -- no caching.
+ */
+static unsigned long factor_product_direct(unsigned long n)
+{
+	unsigned long prod = 1;
+	for (unsigned int nth = 1; ; nth++)
+	{
+		unsigned long p = get_nth_prime(nth);
+		if (n < p) return prod;
+
+		if (n % p == 0)
+		{
+			prod *= p;
+			n /= p;
+			while (n % p == 0) n /= p;
+		}
+	}
+
+	return 0;
+}
+
+DECLARE_UL_CACHE(factor_prod_cache);
+
+/**
+ * Return the product of all of the prime factors.
+ * Cached version -- avoids recomputation.
+ */
+unsigned long factor_product(unsigned long n)
+{
+	if (ul_one_d_cache_check(&factor_prod_cache, n))
+	{
+		return ul_one_d_cache_fetch(&factor_prod_cache, n);
+	}
+	unsigned long fact = factor_product_direct(n);
+	ul_one_d_cache_store(&factor_prod_cache, fact, n);
 	return fact;
 }
 
