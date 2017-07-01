@@ -16,7 +16,7 @@ find-zero: $(FUNC)
 slice: $(FUNC)
 zero-tree: $(FUNC)
 
-totient_ord_phase: genfunc-2d.o
+totient_ord_phase: genfunc-2d
 	ln -f genfunc-2d totient_ord_phase
 	ln -f genfunc-2d totient_exp_phase
 	ln -f genfunc-2d totient_exp_mag

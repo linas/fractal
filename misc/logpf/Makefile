@@ -12,13 +12,15 @@ all: xperiment genfunc-2d
 
 genfunc-2d: genfunc-2d.o $(HIST) $(FUNC)
 
-xperiment: genfunc-2d.o
-	ln -f genfunc-2d disclog
+xperiment: genfunc-2d
+	ln -f genfunc-2d disclog_mag
+	ln -f genfunc-2d disclog_phase
 	ln -f genfunc-2d disclog_big
 	ln -f genfunc-2d loggpf_mag
 	ln -f genfunc-2d loggpf_phase
 	ln -f genfunc-2d fact_mag
 	ln -f genfunc-2d fact_phase
+	ln -f genfunc-2d xperiment
 
 .o:
 	cc -o $@ $^ -L$(ANANT) -lanant -lgmp -ldb -lpthread -lm -lstdc++

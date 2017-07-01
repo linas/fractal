@@ -58,19 +58,32 @@ double complex exp_genfunc_d(long double complex x, double (*func)(long))
 {
 	long double complex sum = 0;
 	long double complex xn = x;
+	long double complex maxum = x;
+	long double mabs = cabsl(x);
 
 	if (cabsl(x) < MAX_PREC) return x;
 
-	for (int n=1; ; n++)
+	int n;
+	for (n=1; ; n++)
 	{
 		sum += func(n) * xn;
 		xn *= x / ((long double) n+1);
-		if (n*cabsl(xn) < MAX_PREC*cabsl(sum)) break;
+
+		long double sumabs = cabsl(sum);
+		if (mabs < sumabs) { mabs = sumabs; maxum = sum; } 
+		if (n*cabsl(xn) < MAX_PREC*sumabs) break;
 		if (max_iter < n) break;
+		// printf("loop at n=%d term=%Lg  sum=%Lg rat=%Lg\n", n, n*cabsl(xn), cabsl(sum), n*cabsl(xn)/cabsl(sum));
 	}
 
+// printf("halt at n=%d term=%Lg  sum=%Lg rat=%Lg\n", n, n*cabsl(xn), cabsl(sum), n*cabsl(xn)/cabsl(sum));
+// printf(" =======================================\n");
+
+	// long double scale = expl(-cabsl(0.8666666666*x));
 	long double scale = expl(-cabsl(x));
+	scale *= 1.0e16;
 	sum *= scale;
+// printf("halt at n=%d sum=%Lg scale=%Lg x=%Lg\n", n, cabsl(sum), scale, cabsl(x));
 // printf("duuude %g sum=%g\n", cabs(x), cabs(sum));
 
 	return sum;
@@ -85,17 +98,20 @@ double complex exp_genfunc_d(long double complex x, double (*func)(long))
 double disclog(long n) { return log((double)n); }
 static double disclog_phase(double re_q, double im_q, int itermax, double param)
 {
+// max_iter = itermax;
 	double complex z = re_q + I * im_q;
 	double complex g = exp_genfunc_d(z, disclog);
 	double re = creal(g);
 	double im = cimag(g);
 
+#if 0
 // Draw rulers for the web-page illustration.
-double width = 0.013;
+double width = 0.03;
 double id = im_q/M_PI;
 int i = round(id);
 if (fabs(id-i) < width) return 1.0;
 if (fabs(re_q/M_PI) < width) return 1.0;
+#endif
 	double rv = 0.5 + 0.5 * atan2(im, re)/M_PI;
 	// rv += 0.5;
 	// if (1.0 < rv) rv -= 1.0;
@@ -105,11 +121,12 @@ if (fabs(re_q/M_PI) < width) return 1.0;
 // Let mpf do the work.
 void disc_big(mpf_t ln, long n)
 {
-	fp_log_ui(ln, n+1, 65);
+	fp_log_ui(ln, n, 165);
 }
 static double disclog_big_phase(double re_q, double im_q, int itermax, double param)
 {
 	int nprec = 65;
+nprec = itermax;
 	mpf_set_default_prec(nprec * 3.322 + 50);
 
 	cpx_t sum, z; cpx_init(sum); cpx_init(z);
@@ -128,6 +145,13 @@ static double disclog_big_phase(double re_q, double im_q, int itermax, double pa
 	cpx_clear(z);
 	// mpf_clear(val);
 	return rv;
+}
+
+static double disclog_mag(double re_q, double im_q, int itermax, double param)
+{
+	double complex z = re_q + I * im_q;
+	double complex g = exp_genfunc_d(z, disclog);
+	return cabs(g);
 }
 
 // ------------------------------------------------------------
@@ -209,8 +233,9 @@ static double xperiment(double re_q, double im_q, int itermax, double param)
 
 __attribute__((constructor)) void decl_things() {
 
-	DECL_HEIGHT("disclog", disclog_phase);
+	DECL_HEIGHT("disclog_phase", disclog_phase);
 	DECL_HEIGHT("disclog_big", disclog_big_phase);
+	DECL_HEIGHT("disclog_mag", disclog_mag);
 	DECL_HEIGHT("loggpf_phase", loggpf_phase);
 	DECL_HEIGHT("loggpf_mag", loggpf_mag);
 	DECL_HEIGHT("loggpf_big_mag", loggpf_big_mag);
