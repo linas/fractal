@@ -1,7 +1,9 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage{url} 
@@ -12,16 +14,16 @@
 \language_package default
 \inputencoding utf8
 \fontencoding global
-\font_roman times
-\font_sans helvet
-\font_typewriter courier
+\font_roman "times" "default"
+\font_sans "helvet" "default"
+\font_typewriter "courier" "default"
+\font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
-
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -41,15 +43,24 @@
 \pdf_pdfusetitle true
 \papersize default
 \use_geometry false
-\use_amsmath 2
-\use_esint 0
-\use_mhchem 0
-\use_mathdots 1
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
 \cite_engine basic
+\cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 0
 \index Index
 \shortcut idx
@@ -81,7 +92,7 @@ Linas Vepstas
 \end_layout
 
 \begin_layout Date
-4 May 2016 updated 29 Sept 2016
+4 May 2016 updated 29 Sept 2016 updated 12 July 2017
 \end_layout
 
 \begin_layout Abstract
@@ -103,6 +114,12 @@ This is an attempt to do physics, i.e.
  Fairly random and disorganized thoughts.
 \end_layout
 
+\begin_layout Abstract
+Many of these here are bad ideas, wrong somehow.
+ The ideas near the end are probably much better than the ideas at the begining,
+ since they are sharper, more pointed.
+\end_layout
+
 \begin_layout Section
 Intro
 \end_layout
@@ -113,13 +130,14 @@ So, this is an attempt to unify quantum mechanics with gravitation.
  such a unification.
  This means few or no equations.
  Some of these principles may be controversial, and surely some readers
- will think they're wrong.
- They might be, but its the groundwork.
+ will think they're (not even) wrong.
+ They might be, but its the groundwork for my thinking.
 \end_layout
 
 \begin_layout Standard
 This also begins by (almost) completely ignoring the work of others on quantum
- gravity and strings and Penrose and ER=EPR and AdS/CFT and so-on.
+ gravity and strings and Penrose and ER=EPR and AdS/CFT and Schrieber's
+ SuperPoint and so-on.
  I want to state what seem to be 
 \begin_inset Quotes eld
 \end_inset
@@ -128,12 +146,48 @@ first principles
 \begin_inset Quotes erd
 \end_inset
 
-, whereas these existing theories have already made explicit or implicit
- assumptions about first principles that are (possibly) in contradiction
+, whereas these existing theories have already made many explicit or implicit
+ assumptions about first principles that are (possibly?) in contradiction
  with what I'm pondering.
- This does not mean that these alternative theories are wrong; but rather,
- if we start with them, the conflicting principles results in trouble.
- Thus, I'm trying to start with a clean slate.
+ This does not mean that I reject these theories; I partially understand
+ many of them, and kind-of like them.
+ But rather, if we start with them, then we are forced into arcana almost
+ immediately.
+ I want to start with a clean slate.
+\end_layout
+
+\begin_layout Standard
+If it helps the reader: I have a PhD in theoretical particle physics, and
+ have studied gravitation (Riemannian geometry), affine Lie algebras (string
+ theory), and also the various places where these things take you: algebraic
+ topology, category theory and many other topics in math.
+ This is a kind of 
+\begin_inset Quotes eld
+\end_inset
+
+appeal to authority
+\begin_inset Quotes erd
+\end_inset
+
+ (argumentum ad verecundiam) - more accurately, a request to the reader
+ to not immediately dismiss this text as quackery.
+\end_layout
+
+\begin_layout Standard
+To conclude: this is trying to be an informed discussion about mathematics
+ that does not use formulas.
+ At times, this might make it sound simplistic.
+ I am trying to write in the most simplistic way that I can do so.
+ This is intentional.
+\end_layout
+
+\begin_layout Section
+Statement of Principles
+\end_layout
+
+\begin_layout Standard
+We take these to be self-evident facts.
+ Or something thereabouts.
 \end_layout
 
 \begin_layout Paragraph*
@@ -203,6 +257,11 @@ The argument is that gravitation is too weak to have any significant effect
 \end_layout
 
 \begin_layout Standard
+This is an idea brazenly stolen from Roger Penrose, who surely states it
+ in some more eloquent fashion than I can muster.
+\end_layout
+
+\begin_layout Standard
 Supporting argument: See 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -240,6 +299,31 @@ true collapse
 \end_inset
 
  involves only fermions...
+ See comments about spinc group, below.
+\end_layout
+
+\begin_layout Paragraph*
+Speculation: Entanglement has something to do with the spin group.
+\end_layout
+
+\begin_layout Standard
+The spin group (see below) is constructed from the unit-length of a Clifford
+ algebra, and naturally factorizes into Weyl spinors and anti-spinors (which,
+ by the way, anti-commute correctly).
+ A single point on the spin group seems to describe 
+\begin_inset Formula $N$
+\end_inset
+
+ fermions, and a change of basis implies that these fermions are entangled.
+ Note that these spinors are described without any reference whatsoever
+ to any ambient space-time.
+\end_layout
+
+\begin_layout Standard
+This is perhaps an absurd and premature speculation, since one can get wave-func
+tion entanglement simply by considering any complex projective space; the
+ spin group is not at all required for this.
+ Later on, some support for this speculation is provided.
 \end_layout
 
 \begin_layout Paragraph*
@@ -255,7 +339,7 @@ The standard formulation of relativistic quantum field theory formulated
  Next, a frame bundle is build, not just any frame bundle, but a spin structure.
  This is used to build a spin manifold.
  These are fancy words, given that the background is flat Minkowski space
- -- but it gets the point across.
+ – but it gets the point across.
  Next, the observation is made that the whole construction is invariant
  under the Poincare algebra.
  This allows an identification of spin representations as the same thing
@@ -284,7 +368,7 @@ The observation is that, at the Planck-mass scale, and larger, the assumption
  screwed up in some way.
  That is, the tangent vector (spinor) fields are no longer integrable, or
  that the integral curves converge into one.
- Perhaps some topological obstruction -- some Stiefel-Whitney type cohomology
+ Perhaps some topological obstruction – some Stiefel-Whitney type cohomology
  cycle pops up.
  Perhaps its both...
 \end_layout
@@ -510,8 +594,8 @@ This is kind of a reversal of Verlinde's ideas.
  The core issue here is that all of our clocks and rulers are microscopic
  and quantum mechanical: we measure time by vibrations of some quantum device.
  We measure space by counting wavelengths.
- The proposed redefinition of mass in the SI system will also be quantum
- based.
+ The redefinition of mass (via Planck's constant) in the SI system makes
+ it quantum based.
  
 \end_layout
 
@@ -595,8 +679,8 @@ Well, there are: W+/-, but that's beside the point, the point being that
  (e.g.
  paths in the sense of functional integral, or in the sense of Hamilton-Jacobi
  variational principle) so that we should envision these paths as a kind-of-like
- Hopf fibration -- the paths are the fibers, the resulting fibration is
- an object that belongs to the 2 representation of SU(2).
+ Hopf fibration – the paths are the fibers, the resulting fibration is an
+ object that belongs to the 2 representation of SU(2).
  
 \end_layout
 
@@ -660,8 +744,8 @@ location
 \end_layout
 
 \begin_layout Standard
-Nonetheless, Minkowski space seems valid enough between the merely microscopic,
- and the Planck length, which is truly minuscule.
+Nonetheless, Minkowski space seems to provide a valid description between
+ the merely microscopic, and the Planck length, which is truly minuscule.
  Why?
 \end_layout
 
@@ -1030,7 +1114,7 @@ target "http://www.physicsoverflow.org/37203/baker-campbell-haudorff-fermions"
 
 \end_inset
 
- -- this should be completed.
+ – this should be completed.
 \end_layout
 
 \begin_layout Standard
@@ -1141,7 +1225,7 @@ wild spheres
 \begin_inset Quotes erd
 \end_inset
 
- -- fractal, hyperbolic spheres which have boundary-handles that are tangled
+ – fractal, hyperbolic spheres which have boundary-handles that are tangled
  into knots about each-other.
  (See the Edwards notes for a construction, see notes by Steve Ferry, chapter
  24 for another construction)
@@ -1208,7 +1292,7 @@ target "http://www.nature.com/articles/ncomms4300"
  phenomenon of a wave.
  This begs for a re-analysis of the Stern-Gerlach experiment in this light:
  Stern-Gerlach is a textbook example of why quantization is needed, suggesting
- there is no other explanation -- whereas the Ohanian paper suggests that,
+ there is no other explanation – whereas the Ohanian paper suggests that,
  with the appropriate treatment, a classical wave packet of the Dirac field
  will feel a classical force acting on it, consistent with experimental
  results from Stern-Gerlach.
@@ -1290,7 +1374,7 @@ vertical
  valued in the Lorentz algebra.
  For a fixed spin representation, this is exactly the same thing as having
  the space-time derivatives be labelled by the Lorentz-algebra spin labels
- -- this is why fields are always algebra-valued.
+ – this is why fields are always algebra-valued.
  At this point, one notes that the momentum and angular momentum operators
  of the Poincare algebra act on that tangent space.
  Turing the crank, one discovers that spin can be interpreted as angular
@@ -1347,7 +1431,7 @@ fermions, which are grassman variables, are not observable alone, but do
 \begin_inset Quotes erd
 \end_inset
 
- -- that is we need to take squares of amplitudes because we are working
+ – that is we need to take squares of amplitudes because we are working
  with fermions, and not for other reasons.
  (Actually, fermions are not grassmann numbers, the belong to the spin space,
  which is constructed from real Clifford algebra times the complex numbers,
@@ -1423,7 +1507,7 @@ V\otimes\mathbb{C}=W\oplus\overline{W}
 
 \end_inset
 
- (see e.g.
+(see e.g.
  Jurgen Jost, 
 \begin_inset Quotes eld
 \end_inset
@@ -1432,7 +1516,7 @@ Riemannian Geometry and Geometry Analysis, page 69) where
 \begin_inset Formula $V$
 \end_inset
 
- is a real Clifford algebra (itself build from a tensor algebra!) and is
+ is a real Clifford algebra (itself built from a tensor algebra!) and is
  generated from 
 \begin_inset Formula $2n$
 \end_inset
@@ -1481,7 +1565,7 @@ i.e.
  the U(1) carries the electromagnetism.
  This paragraph is non-controversial, its the orthodox interpretation.
  The next question asks: is there another way? Or is it just a very basic
- confusion about the proliferation of complext numbrs all shot-through QM
+ confusion about the proliferation of complex numbers all shot-through QM
  and clifford/spin algebra?
 \end_layout
 
@@ -1536,7 +1620,7 @@ Cell structure
 \end_layout
 
 \begin_layout Standard
-Some minor insight might be gleaned by reviewing the structue of 
+Some minor insight might be gleaned by reviewing the structure of 
 \begin_inset Formula $\mathbb{CP}^{\infty}$
 \end_inset
 
@@ -1574,7 +1658,7 @@ Topology I: General Survey
 with
 \begin_inset Formula 
 \[
-\kappa^{2n}=\mathbb{CP}^{n}\backslash\mathbb{CP}^{n-1}=\left\{ \left.\left(z_{0}:\cdots:z_{n}\right)\right|:z_{j}\ne0\;\forall\, j\right\} \simeq D^{2n}
+\kappa^{2n}=\mathbb{CP}^{n}\backslash\mathbb{CP}^{n-1}=\left\{ \left.\left(z_{0}:\cdots:z_{n}\right)\right|:z_{j}\ne0\;\forall\,j\right\} \simeq D^{2n}
 \]
 
 \end_inset
@@ -1610,7 +1694,7 @@ The point is that a single qubit is
  Specifically, a single qubit is 
 \begin_inset Formula 
 \[
-\mathbb{CP}^{1}=\left\{ z_{0}\left|\uparrow\right\rangle +z_{1}\left|\downarrow\right\rangle \left|\left|z_{0}\right|^{2}+\left|z_{1}\right|^{2}=1,\; z_{0}/z_{1}\mbox{ real}\right.\right\} \simeq S^{2}
+\mathbb{CP}^{1}=\left\{ z_{0}\left|\uparrow\right\rangle +z_{1}\left|\downarrow\right\rangle \left|\left|z_{0}\right|^{2}+\left|z_{1}\right|^{2}=1,\;z_{0}/z_{1}\mbox{ real}\right.\right\} \simeq S^{2}
 \]
 
 \end_inset
@@ -1620,9 +1704,9 @@ The point is that a single qubit is
 \end_layout
 
 \begin_layout Standard
-To summarize -- is it possible that the complex-valued wave function of
- textbook QM secretly a side-effect of electromagnetism and U(1) bundles?
- Or is this a red herring?
+To summarize – is it possible that the complex-valued wave function of textbook
+ QM secretly a side-effect of electromagnetism and U(1) bundles? Or is this
+ a red herring?
 \end_layout
 
 \begin_layout Paragraph*
@@ -1951,6 +2035,162 @@ Hmm.
 
 \begin_layout Standard
 Follows from the Hopf algebra structure on tensor algebras.
+\end_layout
+
+\begin_layout Subsection
+Laplacians and Energy
+\end_layout
+
+\begin_layout Standard
+Where do Laplacians come from? Why is there a quadritic differential operator
+ everywhere? There are two clues I want to assemble here: the Berezin integral,
+ and Kirchoff's theorem for a graph.
+ The story goes as follows: Start with a Clifford algebra, and build the
+ spin group for even N for it.
+ Factor the spin group into Weyl spinors.
+ These naturally anti-commute, by construction.
+ Throw away the spin aspects of this construction, but keep the anti-commuting
+ aspects.
+ This leads to the Berezin integral:
+\begin_inset Formula 
+\[
+\det\,A=\int\exp\left[-\theta A\eta\right]d\eta d\theta
+\]
+
+\end_inset
+
+for Grassmann variables 
+\begin_inset Formula $\eta$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and an ordinary matrix A.
+ This is abridged standard textbook stuff.
+\end_layout
+
+\begin_layout Standard
+Next, Kirchoff's theorem for a graph states, more or less, that, when one
+ has a graph, and one constructs the Laplacian matrix of the graph, then
+ the determinant of that matrix is given by a sum over all spanning trees
+ of the graph.
+\end_layout
+
+\begin_layout Standard
+This seems to do two things: It tells you that, to first order, the interaction
+ of N particles really is a tree, has to be a tree, or rather, a sum of
+ trees.
+ Next, it tells you that, from the graph-theoretic point of view, it has
+ to be the Laplacian that accomplishes this.
+ But, from physics, we know that Laplacians are associated with kinetic
+ energy.
+\end_layout
+
+\begin_layout Standard
+Thus, it seems that, by merely assuming the Clifford algebra, (or assuming
+ the spin group), we are forced to conclude the that Laplacians, i.e.
+ kinetic energy, describes the situation.
+ This, to me is really remarkable.
+ I've never heard of this before.
+ To deduce the necessity of Laplacians from the existance of Clifford algebras?
+ Wow.
+\end_layout
+
+\begin_layout Standard
+There is another way to get to Laplacians.
+ The standard textbook approach is to assume the existance of Riemannian
+ manifold, build the tangent space, then point out that the exp function
+ generates geodesics on the manifold, and then observe that geodesics can
+ be obtained by solving for the extremum of either the length or the energy
+ of smooth, differentiable paths on the manifold.
+ The one and the other construction give a Largrangian or a Hamiltonian
+ point of view, and both end up requiring a second-order differential operator
+ applied to the path.
+ Thus, geodesics on Riemannian manifold necessarily involve a second-order
+ differential operator.
+\end_layout
+
+\begin_layout Standard
+We can try to apply this argument in reverse: Assume a Clifford algebra,
+ deduce the existance of a Laplacian, and then deduce that a Riemannian
+ manifold is the necessary home for the resulting dynamics.
+ In other words, by assuming 
+\begin_inset Formula $N$
+\end_inset
+
+ indistinguishable fermions, we are forced to deduce Riemannian geometry.
+\end_layout
+
+\begin_layout Standard
+If we start with the spinc group instead of the spin group, is there some
+ way that this forces you to deduce pseudo-Riemannian geometry? The reason
+ I think this is a plausible question is because the extra 
+\begin_inset Formula $U(1)$
+\end_inset
+
+ degree of freedom in the spinc group might force one into using a (massless)
+ gauge boson when one attempts to write the Berezin integral.
+ (I mean, that degree of freedom has to go somewhere ..
+ where else can it possibly go?) If that is the case, then it seems that
+ the Maxwell equations are forced on us, whether we like it or not, and
+ that the Maxwell equations necessarily imply special relativity, which
+ necessarily imply a pseudo-Reimanninan manifold.
+\end_layout
+
+\begin_layout Standard
+The other things that this construction is doing is to force the use of
+ the partition function.
+ That is, the Berezin integral is forcing us to take a functional-integral
+ description of the situation.
+ And more strongly: not just any functional integral, but necessarily one
+ over the action.
+ And we already know that we can view quantum mechanics as the necessary
+ outcome employing functional integrals over the action.
+\end_layout
+
+\begin_layout Standard
+A third interesting thing gets entangled here: why is spacetime 3+1 dimensional?
+ The hand-waving here is that spinors are necessarily objects that inhait
+ 
+\begin_inset Formula $SL(2,\mathbb{C})$
+\end_inset
+
+ viz, the Lorentz group, and this leads to the adjoint rep being 3+1.
+ 
+\end_layout
+
+\begin_layout Standard
+If this can be made rigorous, then this is a direct path between what are
+ normally viewed as very distant topics.
+ We start with a rather weak assumption, and get a rainbow of physics paraphenal
+ia falling out, including *
+\emph on
+both
+\emph default
+* a pseudo-Remanian geometry *
+\emph on
+and also
+\emph default
+* quantum mechanics! This is just too much, its ludicrous beyond belief!
+\end_layout
+
+\begin_layout Subsection
+Indeterminate particle number
+\end_layout
+
+\begin_layout Standard
+In QFT, the number of particles is indeterminate – i.e.
+ there are virtual particle pairs.
+ Why? What does this have to do with the above discussions? The above constructi
+on started with a Clifford algebra over a fixed, finite-dimensional vector
+ space.
+ Does the limit 
+\begin_inset Formula $N\to\infty$
+\end_inset
+
+ somehow make the particle count inteterminate? How?
 \end_layout
 
 \end_body
