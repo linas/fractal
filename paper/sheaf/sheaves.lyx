@@ -1381,14 +1381,27 @@ Types
 \end_layout
 
 \begin_layout Standard
-Link-grammar was mentioned earlier, and it is appropriate to mention it
- again: the link-grammar disjuncts 
+It is notationaly awkward to have to write stalks in terms of the sets of
+ vertexes that they are composed of; it is convenient to instead replace
+ each set by a symbol.
+ The symbol will be called a 
+\noun on
+type
+\noun default
+.
+ As it happens, these types can be seen to be the same things occuring in
+ the study of type theory; the name is justified.
+\end_layout
+
+\begin_layout Standard
+The core idea can be illustrated with link-grammar as an example.
+ The link-grammar disjuncts 
 \emph on
 are
 \emph default
  one and the same thing as stalks.
  It is worth making this very explicit.
- A subset of the Link-grammar English dictionary looks like this:
+ A subset of the link-grammar English dictionary looks like this:
 \end_layout
 
 \begin_layout Standard
@@ -1477,24 +1490,43 @@ D+
 \family sans
 D-
 \family default
- act as abbreviations for the vertex sets that unconnected end can connect
+ act as abbreviations for the vertex sets that the unconnected end can connect
  to.
+ The + and - symbols indicate a directionality: to the right or to the left.
+ The capture the notion that, in English, the word-order matters.
+ To properly explain the + and -, we should have to go back to the definition
+ of a graph on the very first page, and introduce the notion of left-right
+ order among the vertices.
+ Doing so from the very begining would do nothing but clutter up the presentatio
+n, so that is not done.
+ The reader is now invited to treat the initial definition of the graph
+ as a monad: there are addtional details 
+\begin_inset Quotes eld
+\end_inset
 
+under the covers
+\begin_inset Quotes erd
+\end_inset
+
+, but they are wrapped up and ignored, and only the relevent bits are exosed.
+ Perhaps the vertices had a color.
+ Perhaps they had a name, or a numerical weight; this is ignored.
+ Here, we unwrap the idea that the vertices must be organized in a left-right
+ order.
+ Its sufficient, for now, to leave it at that.
+\end_layout
+
+\begin_layout Standard
+The three stalks here encode a set of grammatically valid English language
+ sentences.
+ Hooking together the S- and S+ connectors to form an S link, one obtains
+ the sequence 
 \family sans
- 
-\end_layout
-
-\begin_layout Standard
-It clearly captures grammatically correct, syntactically valid sentences
- can be 
-\end_layout
-
-\begin_layout Section*
-Types
-\end_layout
-
-\begin_layout Standard
-type theory
+[{the, a} {cat, dog} {ran}]
+\family default
+.
+ This can be used to generate grammatically valid sentences: pick one word
+ from each set, and one gets a valid sentence.
 \end_layout
 
 \begin_layout Section*
