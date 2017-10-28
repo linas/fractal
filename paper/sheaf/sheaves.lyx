@@ -1229,7 +1229,7 @@ A stalk and it's projection
 
 \begin_inset Graphics
 	filename stalk.eps
-	width 40col%
+	width 60col%
 
 \end_inset
 
@@ -1801,7 +1801,192 @@ These examples suggest that the use of types is little more than a convenient
 \end_layout
 
 \begin_layout Section*
+Parsing
+\end_layout
+
+\begin_layout Standard
+The introduction remarked that not every collection of seeds can be assembled
+ in such a way as to create a valid graph.
+ This idea can be firmed up, and defined more carefully.
+ Generically, a valid assembly of seeds is called a parse, and the act of
+ assembling them is called parsing, which is done by parse algorithms.
+ To illustrate the process, consider the following two seeds:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $v_{2}:\left\{ \left(v_{2},v_{1}\right),\left(v_{2},v_{3}\right)\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $v_{3}:\left\{ \left(v_{3},v_{2}\right)\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Represented graphically, these seeds are
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Two unconnected seeds
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename bad-graph.eps
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+The connector (half-edge) 
+\begin_inset Formula $\left(v_{2},v_{3}\right)$
+\end_inset
+
+ appears with both polarities, and can be linked together to form a link.
+ The connector 
+\begin_inset Formula $\left(v_{2},v_{1}\right)$
+\end_inset
+
+ has nothing to connect to.
+ Even after maximally linking these two seeds, one does not obtain a valid
+ graph: the vertex 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ is missing from the vertex-set of the graph, even though there is an edge
+ ready to attach to it.
+ This provides an example of a failed parse.
+ It is enough to add the seed 
+\begin_inset Formula $v_{1}:\left\{ \left(v_{1},v_{2}\right)\right\} $
+\end_inset
+
+ to convert this into a successful parse.
+ Adding this seed, and then attempting to maximally link it results in a
+ valid graph; the parse is successful.
+\end_layout
+
+\begin_layout Standard
+Note the minor change in notation: the colon is used as a separator, with
+ the germ appearing on the left, and set of connectors on the right.
+ The relevance of this notational change becomes more apparent, if we label
+ the vertexes in a funny way: let 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ carry the lable 
+\begin_inset Quotes eld
+\end_inset
+
+the
+\begin_inset Quotes erd
+\end_inset
+
+, and 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ carry the label 
+\begin_inset Quotes eld
+\end_inset
+
+dog
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Formula $v_{3}$
+\end_inset
+
+ carry the label 
+\begin_inset Quotes eld
+\end_inset
+
+ran
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The failed parse is meant to illustrate that 
+\begin_inset Quotes eld
+\end_inset
+
+dog ran
+\begin_inset Quotes erd
+\end_inset
+
+ is not a grammatically valid sentence, whereas 
+\begin_inset Quotes eld
+\end_inset
+
+the dog ran
+\begin_inset Quotes erd
+\end_inset
+
+ is.
+ 
+\end_layout
+
+\begin_layout Section*
 Polymorphism
+\end_layout
+
+\begin_layout Standard
+Any given vertex may participate in two or more seeds, independently from
+ one-another.
+ 
 \end_layout
 
 \begin_layout Section*
