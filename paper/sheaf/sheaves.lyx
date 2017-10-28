@@ -580,9 +580,10 @@ Note that there are two types of edges in a section: those edges that connect
 \end_layout
 
 \begin_layout Standard
-Seeds and sections can (and should!) be visualized as hedgehogs – the connectors
- can be thought of as spiny bits sticking out, waiting to make a connection,
- while the hedgehog body consists of the vertices and the links connecting
+Seeds and sections can (and should!) be visualized as hedgehogs - a body
+ with spines sticking out of it - the connectors can be thought of as the
+ spiny bits sticking out, waiting to make a connection, while the hedgehog
+ body is that collection of vertices and the fully-connected links between
  them.
 \end_layout
 
@@ -679,6 +680,24 @@ The subset of a section is always a section.
 
  do not generally form a graph; one has to apply consistency conditions
  to get a subgraph.
+\end_layout
+
+\begin_layout Itemize
+A connected section behaves very much like a seed: just as two seeds can
+ be linked together to form a connected section, so also two connected sections
+ can be linked together to form a larger connected section.
+ Both have a body, with spines sticking out.
+ The building blocks, and the things built from them have the same properties,
+ lie in the same class.
+ Thus, one has a system that is 
+\begin_inset Quotes eld
+\end_inset
+
+scalable
+\begin_inset Quotes erd
+\end_inset
+
+, and allows notions of similarity and scale invariance to be explored.
 \end_layout
 
 \begin_layout Itemize
@@ -1207,6 +1226,275 @@ The above definition renders the stalk as being essentially the same thing
  links between them.
  One can think of this structure as a kind of hypergraph, but that view
  does not seem to be particularly productive.
+\end_layout
+
+\begin_layout Subsection*
+Why clustering?
+\end_layout
+
+\begin_layout Standard
+The above establishes a vocabulary, a means for talking about the clustering
+ of similar things on graphs.
+ It does not sugggest how to cluster.
+ Without this vocabulary, it can be very confusing to visualize and talk
+ about what is meant by clustering on a graph.
+ Its worth reviewing some examples.
+\end_layout
+
+\begin_layout Itemize
+In a social graph, a cluster might be a clique of freinds.
+ By placing these freinds into one group, the stalk allows you to examine
+ how different groups interact with one-another.
+\end_layout
+
+\begin_layout Itemize
+In proteomic or genomic data, if one can group together similar proteins
+ or genes into clusters, one can accomplish a form of dimensional reduction,
+ decreasing the overall size of the dataset.
+ It provides a methodical way of creating a simplified model of biology,
+ without the bad smell of ad-hoc simplifications.
+\end_layout
+
+\begin_layout Itemize
+In linguistic data, the natural clustering is that of words that behave
+ in a similar syntactic fashion; such clusters are commonly called 
+\begin_inset Quotes eld
+\end_inset
+
+grammatical classes
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+parts of speech
+\begin_inset Quotes erd
+\end_inset
+
+.
+ In particular, it allows one to visualize language as a graph.
+ So: consider, for example, the set of all dependency parses of all sentences
+ in some corpus, say Wikipedia.
+ Each dependency parse is a tree; the vertexes are words, and the edges
+ are the dependencies.
+ Taken as a graph, this is a huge graph, with words connecting to other
+ words, all over the place.
+ Its not terribly interesting in this raw state, because its overwhelmingly
+ large.
+ However, we might notice that all sentences containing the word 
+\begin_inset Quotes eld
+\end_inset
+
+dish
+\begin_inset Quotes erd
+\end_inset
+
+ resemble all sentences containing the word 
+\begin_inset Quotes eld
+\end_inset
+
+plate
+\begin_inset Quotes erd
+\end_inset
+
+; that these two words always get used in a similar or the same way.
+ Grouping these two words together into one reduces the size of the graph
+ by one vertex.
+ Agressively merging similar words together can sharply shrink the size
+ of the graph to a managable size.
+ One gets something more: the resulting graph can be understood as encapsulating
+ the structure of the English language.
+ 
+\end_layout
+
+\begin_layout Standard
+This last example is worth expanding on.
+ Two things happen when the compressed graph is created.
+ First, that graph encodes the syntactic structure of the language: the
+ links between grammatical classes indicate how words can be arranged into
+ grammatically correct sentences.
+ Second, the amount of compression applied can reveal different kinds of
+ structures.
+ With extremely heavy compression, one might discover only the crudest parts
+ of speech: determiners, adjectives, nouns, transitive and intransitive
+ verbs.
+ Each of these classes are distinct, because they link differently.
+ However, if instead, a lot less compression is applied, then one can discover
+ synonymous words: so, 
+\begin_inset Quotes eld
+\end_inset
+
+plate
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+dish
+\begin_inset Quotes erd
+\end_inset
+
+ might be grouped together, possibly with 
+\begin_inset Quotes eld
+\end_inset
+
+saucer
+\begin_inset Quotes erd
+\end_inset
+
+, but not with 
+\begin_inset Quotes eld
+\end_inset
+
+cup
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Here, one is extracting a semantic grouping, rather than a syntactic grouping.
+ 
+\end_layout
+
+\begin_layout Standard
+So, the answer to 
+\begin_inset Quotes eld
+\end_inset
+
+why clustering?
+\begin_inset Quotes erd
+\end_inset
+
+ is that it allows information to be extracted from a graph, and encoded
+ in a useful, usable fashion.
+ No attempt is made here to suggest how to cluster; merely, that if an equivalen
+ce relation is available, and if it is employed wisely, then one can construct
+ quotient graphs that encode important relationships of the original, raw
+ graph.
+\end_layout
+
+\begin_layout Section*
+Types
+\end_layout
+
+\begin_layout Standard
+Link-grammar was mentioned earlier, and it is appropriate to mention it
+ again: the link-grammar disjuncts 
+\emph on
+are
+\emph default
+ one and the same thing as stalks.
+ It is worth making this very explicit.
+ A subset of the Link-grammar English dictionary looks like this:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family sans
+cat dog: D- & S+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+the a: D+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+ran: S-;
+\end_layout
+
+\end_inset
+
+This states that 
+\begin_inset Quotes eld
+\end_inset
+
+cat
+\begin_inset Quotes erd
+\end_inset
+
+ cand 
+\begin_inset Quotes eld
+\end_inset
+
+dog
+\begin_inset Quotes erd
+\end_inset
+
+ are both vertexes, and they are in the same stalk.
+ That stalk has two connectors: 
+\family sans
+D-
+\family default
+ and 
+\family sans
+S+
+\family default
+, which encode the other stalks that can be connected to.
+ So, the 
+\family sans
+D+
+\family default
+ can be connected to the 
+\family sans
+D-
+\family default
+ to form a link.
+ The link has the form 
+\family sans
+({the, a}, {cat, dog})
+\family default
+ and the connector symbols 
+\family sans
+D+
+\family default
+ and 
+\family sans
+D-
+\family default
+ act as abbreviations for the vertex sets that unconnected end can connect
+ to.
+
+\family sans
+ 
+\end_layout
+
+\begin_layout Standard
+It clearly captures grammatically correct, syntactically valid sentences
+ can be 
+\end_layout
+
+\begin_layout Section*
+Types
+\end_layout
+
+\begin_layout Standard
+type theory
 \end_layout
 
 \begin_layout Section*
