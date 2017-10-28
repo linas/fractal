@@ -181,6 +181,17 @@ For directed graphs, the vertex ordering in the edge matters.
  For undirected graphs, it does not.
  The subsequent will assume both directed and undirected edges, as the occasion
  and the need fits.
+ In most of what follows, it will usually be assumed that there are no edges
+ with 
+\begin_inset Formula $v_{1}=v_{2}$
+\end_inset
+
+ and that there is at most one edge connecting any given pair of vertexes.
+ This is primarily for the convenience of the definitions, and not a fundamental
+ limitation; the primary application does not require either construct,
+ although the extension to allow this is straight-forward.
+ Similar remarks apply to graphs with labelled vertexes or edges.
+ A notion of types will be introduced later on.
 \end_layout
 
 \begin_layout Standard
@@ -214,6 +225,15 @@ seed
 \end_inset
 
  as one or the other endpoint.
+ The vertex 
+\begin_inset Formula $v$
+\end_inset
+
+ may be called the 
+\noun on
+germ
+\noun default
+ of the seed.
  
 \begin_inset Formula $\diamond$
 \end_inset
@@ -325,7 +345,11 @@ connector
 \end_layout
 
 \begin_layout Definition*
-A section is a set of seeds.
+A 
+\noun on
+section
+\noun default
+ is a set of seeds.
  
 \begin_inset Formula $\diamond$
 \end_inset
@@ -334,7 +358,170 @@ A section is a set of seeds.
 \end_layout
 
 \begin_layout Standard
-Th
+It should be clear that a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ can be expressed as section; that section has the nice property that all
+ of the germs appear once (and only once) in the set 
+\begin_inset Formula $V$
+\end_inset
+
+ of 
+\begin_inset Formula $G$
+\end_inset
+
+, and that all of the edges in 
+\begin_inset Formula $E$
+\end_inset
+
+ appear twice, once each in two distinct seeds.
+ This connectivity property motivates the following definition: 
+\end_layout
+
+\begin_layout Definition*
+Given a section 
+\begin_inset Formula $S$
+\end_inset
+
+, a 
+\noun on
+link
+\noun default
+ is any edge 
+\begin_inset Formula $\left(v_{1},v_{2}\right)$
+\end_inset
+
+ where both 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ appear as germs of seeds in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Two seeds are 
+\noun on
+connected
+\noun default
+ when there is a link between them.
+\end_layout
+
+\begin_layout Standard
+The use of links allows the concepts of paths and connectivity, taken from
+ graph theory, to be imported into the current context.
+ Thus, one can obviously define:
+\end_layout
+
+\begin_layout Definition*
+A 
+\noun on
+connected section
+\noun default
+, or a 
+\noun on
+contiguous section
+\noun default
+ is a section where every germ is connected to every other germ via a path
+ through the edges.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In graph theory, this would normally be called a 
+\begin_inset Quotes eld
+\end_inset
+
+connected graph
+\begin_inset Quotes erd
+\end_inset
+
+, but we cannot fairly call it that because the seeds and sections were
+ defined in such a way that they are not graphs in and of themselves; they
+ only become graphs when they are fully connected.
+ Never-the-less, it is fairly safe and straight-foreward to apply common
+ concepts from graph-theory.
+ Sections are almost like graphs, but not quite.
+\end_layout
+
+\begin_layout Standard
+Note that there are two types of edges in a section: those edges that connect
+ to nothing, and those edges that connect to other seeds in that section.
+ Henceforth, the unconnected edges will be called connectors (as defined
+ above), while the fully-connected edges will be called links (also defined
+ above).
+ Connectors can be thought of as a kind-of half-edge: incomplete, missing
+ the far end, while links are fully connected, whole.
+\end_layout
+
+\begin_layout Standard
+Seeds and sections can (and should!) be visualized as hedgehogs – the connectors
+ can be thought of as spiny bits sticking out, waiting to make a connection,
+ while the hedgehog body consists of the vertices and the links connecting
+ them.
+\end_layout
+
+\begin_layout Standard
+Implicit in the above definitions was that, during link formation, an edge
+ is only allowed to connect to another seed if and only if the connector
+ matches the germ.
+ That is, if 
+\begin_inset Formula $\left(v_{1},v_{2}\right)$
+\end_inset
+
+ is an edge rooted in the seed for 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ and if 
+\begin_inset Formula $\left(v_{3},v_{4}\right)$
+\end_inset
+
+ is an edge rooted in the seed for 
+\begin_inset Formula $v_{3}$
+\end_inset
+
+, then these two can form a link if and only if 
+\begin_inset Formula $v_{2}=v_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{4}=v_{1}$
+\end_inset
+
+.
+ That is, the connectors are typed: they can only connect to seeds that
+ are of the same type as the unconnected end of the edge.
+\end_layout
+
+\begin_layout Standard
+This motivates a different way of looking at seeds: they can be visualized
+ as jigsaw puzzle pieces, where any given tab on one jigsaw piece can fit
+ into one and only one slot on another jigsaw piece.
+ This union of a tab+slot is the link.
+ The types of the connectors will later be seen to be the same thing as
+ the types of type theory; that is, they are bona-fide types.
+\end_layout
+
+\begin_layout Subsection*
+Why sections?
+\end_layout
+
+\begin_layout Standard
+the
+\end_layout
+
+\begin_layout Standard
+The
 \end_layout
 
 \begin_layout Standard
@@ -343,16 +530,6 @@ at least not if we take
 
 \begin_layout Standard
 However, a set of seeds is not 
-\end_layout
-
-\begin_layout Standard
-he endpoint that is not 
-\begin_inset Formula $v$
-\end_inset
-
- will sometimes be called the connector.
- Equivalently, the edge itself will sometimes be called the connector.
- 
 \end_layout
 
 \begin_layout Definition*
