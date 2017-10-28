@@ -633,7 +633,7 @@ disjuncts
 \end_inset
 
  in link-grammar.
- In fact, link-grammar disjuncts are a bit more complicated than seeds;
+ However, link-grammar disjuncts are a bit more complicated than seeds;
  this is the topic of the next section.
 \end_layout
 
@@ -650,7 +650,7 @@ In certain ways, the connectors on a seed look like the uncontracted indexes
 
 .
  A link looks like a pair of indexes that have been contracted.
- Tensors have additional properties that seeds do not have, however, the
+ Tensors have additional properties that seeds do not have; however, the
  notion of connecting together connectors to form links means that many
  of the notions from a tensor algebra can be carried over into the current
  context.
@@ -672,15 +672,132 @@ Sheaves
 \end_layout
 
 \begin_layout Standard
-at least not if we take 
+To arrive at a sheaf, begin by definiting a kind of quotienting operation
+ on a graph.
+ To motivate this, consider the following scenario.
+ One has a large graph, some dense mesh, and one decides, for some external
+ reason, that two vertexes are similar.
+ One particularly good reason to think that they are similar is that they
+ share a lot of nearest neighbors.
+ In a social graph, one might say they have a lot of freinds in common.
+ In genomic or proteomic data, they may interact with the same kinds of
+ genes/proteins.
+ In natural language, they might be words that are synonyms, and thus get
+ used the same way across many different sentences; specifically, the syntactic
+ dependency parse links these words to the same set of heads an dependents.
+ At any rate, one has a large graph, and some sort of equivalence operation
+ that can decide if two vertexes are the 
+\begin_inset Quotes eld
+\end_inset
+
+same
+\begin_inset Quotes erd
+\end_inset
+
+, or are 
+\begin_inset Quotes eld
+\end_inset
+
+similar enough
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Whenever one has an equivalence operation, one can apply it to obtain a
+ quotient, of grouping together into an identity all things that are the
+ same.
 \end_layout
 
 \begin_layout Standard
-However, a set of seeds is not 
+In graph theory, there is a notion of quotienting, but it is not quite the
+ same as what will be described below.
+ In graph theory, one will typically have a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ relative to some subgraph 
+\begin_inset Formula $A\subset G$
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Definition*
-sectin
+\begin_layout Standard
+Given two vertexes 
+\begin_inset Formula $v_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{b}$
+\end_inset
+
+, let 
+\begin_inset Formula $s_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{b}$
+\end_inset
+
+ be the corresponding seeds, as defined previously.
+ That is, 
+\begin_inset Formula $s=\left(v,E_{v}\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $E_{v}$
+\end_inset
+
+ being the set of edges connecting 
+\begin_inset Formula $v$
+\end_inset
+
+ to all of its nearest neighbors.
+ Consider now creating the object 
+\begin_inset Formula $\left(\left\{ v_{a},v_{b}\right\} ,E_{ab}\right)$
+\end_inset
+
+.
+ This is no longer a seed, as the first item is no longer a single vertex,
+ but a set of vertexes.
+ The set 
+\begin_inset Formula $E_{ab}$
+\end_inset
+
+ is still a set of edges, depending on the two initial sets of edges 
+\begin_inset Formula $E_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{b}$
+\end_inset
+
+.
+ The precise defition of 
+\begin_inset Formula $E_{ab}$
+\end_inset
+
+ is not given: it might be the union of 
+\begin_inset Formula $E_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{b}$
+\end_inset
+
+, or the intersection, or some other function.
+ In general, one writes 
+\begin_inset Formula $E_{ab}=f\left(E_{a},E_{b}\right)$
+\end_inset
+
+ for som function 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ The result of creating is no longer a graph, at least, not in the natural
+ sense.
+ We've mashed together two vertexes, taking a kind of a quotient 
 \end_layout
 
 \end_body
