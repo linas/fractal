@@ -118,7 +118,11 @@ Begin with the standard definition of a graph.
 \end_layout
 
 \begin_layout Definition*
-A graph 
+A 
+\noun on
+graph
+\noun default
+ 
 \begin_inset Formula $G=\left(V,E\right)$
 \end_inset
 
@@ -143,18 +147,216 @@ A graph
 \begin_inset Formula $\left(v_{1},v_{2}\right)$
 \end_inset
 
- of vertices.
+ of vertices, where every 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+ 
+\emph on
+must
+\emph default
+ be a member of 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ That is, edges in 
+\begin_inset Formula $E$
+\end_inset
+
+ can only connect vertexes in 
+\begin_inset Formula $V$
+\end_inset
+
+, and not to something else.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
 \end_layout
 
-\begin_layout Definition*
+\begin_layout Standard
 For directed graphs, the vertex ordering in the edge matters.
  For undirected graphs, it does not.
  The subsequent will assume both directed and undirected edges, as the occasion
  and the need fits.
 \end_layout
 
-\begin_layout Definition*
+\begin_layout Standard
+There are other ways of defining and specifying graphs.
+ The one that will be of primary interest here will be one that defines
+ graphs as a collection of sections.
+ These, in turn, are composed of seeds.
+\end_layout
 
+\begin_layout Definition*
+A 
+\noun on
+seed
+\noun default
+ is a vertex and the set of edges that connect to it.
+ That is, it is the pair 
+\begin_inset Formula $\left(v,E_{v}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $v$
+\end_inset
+
+ is a single vertex, and 
+\begin_inset Formula $E_{v}$
+\end_inset
+
+ is a set of edges containing that vertex, i.e.
+ that set of edges having 
+\begin_inset Formula $v$
+\end_inset
+
+ as one or the other endpoint.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It should be clear that, given a graph 
+\begin_inset Formula $G$
+\end_inset
+
+, one can equivalently describe it as a set of seeds.
+ The converse is not 
+\begin_inset Quotes eld
+\end_inset
+
+naturally
+\begin_inset Quotes erd
+\end_inset
+
+ true.
+ Consider a single seed, consisting of one vertex 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+, and a single edge 
+\begin_inset Formula $e=\left(v_{1},v_{2}\right)$
+\end_inset
+
+.
+ Then the pair 
+\begin_inset Formula $\left(V,E\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $V=\left\{ v_{1}\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $E=\left\{ \left(v_{1},v_{2}\right)\right\} $
+\end_inset
+
+ is 
+\emph on
+not
+\emph default
+ a graph, because 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ is missing from the set 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Of course, we could implicitly include 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ in the collection of vertexes, but for reasons that will hopefully become
+ clear, this is not 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+, and not desired at this stage.
+\end_layout
+
+\begin_layout Standard
+Thus, given a seed, each edge in that seed has one 
+\begin_inset Quotes eld
+\end_inset
+
+connected
+\begin_inset Quotes erd
+\end_inset
+
+ endpoint, and one 
+\begin_inset Quotes eld
+\end_inset
+
+unconnected
+\begin_inset Quotes erd
+\end_inset
+
+ endpoint.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+connected
+\begin_inset Quotes erd
+\end_inset
+
+ endpoint is that endpoint that is 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ The other endpoint will commonly be called the 
+\noun on
+connector
+\noun default
+; equivalently, the whole edge can be taken to be the connector.
+\end_layout
+
+\begin_layout Definition*
+A section is a set of seeds.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Th
+\end_layout
+
+\begin_layout Standard
+at least not if we take 
+\end_layout
+
+\begin_layout Standard
+However, a set of seeds is not 
+\end_layout
+
+\begin_layout Standard
+he endpoint that is not 
+\begin_inset Formula $v$
+\end_inset
+
+ will sometimes be called the connector.
+ Equivalently, the edge itself will sometimes be called the connector.
+ 
+\end_layout
+
+\begin_layout Definition*
+sectin
 \end_layout
 
 \end_body
