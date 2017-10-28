@@ -733,15 +733,22 @@ If we stop here, not much is accomplished, other than to define a somewhat
 \end_layout
 
 \begin_layout Section*
-Sheaves
+Clustering
 \end_layout
 
 \begin_layout Standard
-To arrive at a sheaf, begin by definiting a kind of quotienting operation
- on a graph.
- To motivate this, consider the following scenario.
- One has a large graph, some dense mesh, and one decides, for some external
- reason, that two vertexes are similar.
+The intended interpretation of the graph is that it represents a large amount
+ of collected raw data.
+ From this data, one wants to extract commonalities and recurring patterns.
+ Doing so, one arrives at the need to perform a kind of quotienting operation
+ on the graph.
+ 
+\end_layout
+
+\begin_layout Standard
+To motivate this, consider the following scenario.
+ One has a large graph, some dense mesh, and one decides, via some external
+ decision process, that two vertexes are similar.
  One particularly good reason to think that they are similar is that they
  share a lot of nearest neighbors.
  In a social graph, one might say they have a lot of freinds in common.
@@ -749,7 +756,7 @@ To arrive at a sheaf, begin by definiting a kind of quotienting operation
  genes/proteins.
  In natural language, they might be words that are synonyms, and thus get
  used the same way across many different sentences; specifically, the syntactic
- dependency parse links these words to the same set of heads an dependents.
+ dependency parse links these words to the same set of heads and dependents.
  At any rate, one has a large graph, and some sort of equivalence operation
  that can decide if two vertexes are the 
 \begin_inset Quotes eld
@@ -768,7 +775,7 @@ similar enough
 \end_inset
 
 .
- Whenever one has an equivalence operation, one can apply it to obtain a
+ Whenever one has an equivalence relation, one can apply it to obtain a
  quotient, of grouping together into an identity all things that are the
  same.
 \end_layout
@@ -867,7 +874,7 @@ By contrast, the goal here is not just to talk about a graph
 \begin_inset Formula $A$
 \end_inset
 
-'s will continue to be interesting, and so is carried on.
+'s will continue to be interesting, and so is carried onwards.
  Finally, the act of merging together multiple vertexes into one 
 \begin_inset Formula $A$
 \end_inset
@@ -875,9 +882,8 @@ By contrast, the goal here is not just to talk about a graph
  may result in some of the existing edges being cut, or new edges being
  created.
  The clustering operation applied to the graph alters the graph structure.
- These considerations are wha makes it convenient to abondon traditional
- graph theory, and to replace it by the notion of sheaves and sections,
- as defined below.
+ These considerations are what makes it convenient to abandon traditional
+ graph theory, and to replace it by the notion of sheaves and sections.
 \end_layout
 
 \begin_layout Standard
@@ -1015,12 +1021,12 @@ A
 \noun on
 link
 \noun default
- is between two different stalks 
-\begin_inset Formula $S_{1}=\left(V_{1},E_{1}\right)$
+ between two different stalks 
+\begin_inset Formula $S_{a}=\left(V_{a},E_{a}\right)$
 \end_inset
 
  and 
-\begin_inset Formula $S_{2}=\left(V_{2},E_{2}\right)$
+\begin_inset Formula $S_{b}=\left(V_{b},E_{b}\right)$
 \end_inset
 
  is any edge 
@@ -1033,19 +1039,19 @@ viz.
 
 \emph default
  where 
-\begin_inset Formula $v_{1}\in V_{1}$
+\begin_inset Formula $v_{1}\in V_{a}$
 \end_inset
 
  and 
-\begin_inset Formula $v_{2}\in V_{2}$
+\begin_inset Formula $v_{2}\in V_{b}$
 \end_inset
 
  and 
-\begin_inset Formula $e\in E_{1}$
+\begin_inset Formula $e\in E_{a}$
 \end_inset
 
  and 
-\begin_inset Formula $e\in E_{2}$
+\begin_inset Formula $e\in E_{b}$
 \end_inset
 
 .
@@ -1086,11 +1092,137 @@ base space
 \end_layout
 
 \begin_layout Standard
-XXX
+The projection down to a base space suggests that the equivalence relation
+ on vertexes can be extended to an equivalence relation on edges: two edges
+ are equivalent if they form the same link.
+ That is, one has an equivalence class of edges:
+\end_layout
+
+\begin_layout Definition*
+A 
+\noun on
+link
+\noun default
+ between two different stalks 
+\begin_inset Formula $S_{a}=\left(V_{a},E_{a}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{b}=\left(V_{b},E_{b}\right)$
+\end_inset
+
+ is the set 
+\begin_inset Formula $l=\left\{ e_{k}\right\} $
+\end_inset
+
+ of all edges 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+ that connect some pair of vertexes in 
+\begin_inset Formula $V_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{b}$
+\end_inset
+
+.
+ That is, every 
+\begin_inset Formula $e_{k}=\left(v_{k1},v_{k2}\right)$
+\end_inset
+
+ in 
+\begin_inset Formula $L$
+\end_inset
+
+ has the property that 
+\begin_inset Formula $v_{k1}\in V_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{k2}\in V_{b}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{k}\in E_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{k}\in E_{b}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Wait – there's more to be written.
+This redefines the notion of a link.
+ Perhaps it should be given a different name, but it should be OK, because
+ the intended sense should be clear from the context.
+ This allows us to redefine the notion of a stalk as well:
+\end_layout
+
+\begin_layout Definition*
+A 
+\noun on
+stalk
+\noun default
+ is an ordered pair 
+\begin_inset Formula $S=\left(V,L\right)$
+\end_inset
+
+ of vertexes and links such that every link in 
+\begin_inset Formula $L$
+\end_inset
+
+ has one endpoint that is 
+\begin_inset Formula $V$
+\end_inset
+
+ and the other endpoint not being 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ That is, each link in 
+\begin_inset Formula $L$
+\end_inset
+
+ is a connector or half-edge.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above definition renders the stalk as being essentially the same thing
+ as a seed, except that now, one is working with sets of vertices, and the
+ links between them.
+ One can think of this structure as a kind of hypergraph, but that view
+ does not seem to be particularly productive.
+\end_layout
+
+\begin_layout Section*
+Sheaves
+\end_layout
+
+\begin_layout Standard
+The sheaf axioms
+\end_layout
+
+\begin_layout Section*
+Conclusion
+\end_layout
+
+\begin_layout Standard
+XXX Wait – there's more to be written.
  This is just a save of an early draft.
  So, not the end, not yet.
 \end_layout
