@@ -710,8 +710,9 @@ similar enough
 
 \begin_layout Standard
 In graph theory, there is a notion of quotienting, but it is not quite the
- same as what will be described below.
- In graph theory, one will typically have a graph 
+ same as what will be defined shortly.
+ In graph theory, when working with quotients, one will typically consider
+ a graph 
 \begin_inset Formula $G$
 \end_inset
 
@@ -720,6 +721,98 @@ In graph theory, there is a notion of quotienting, but it is not quite the
 \end_inset
 
 .
+ One effectively 
+\begin_inset Quotes eld
+\end_inset
+
+draws a dotted line
+\begin_inset Quotes erd
+\end_inset
+
+ or places a balloon around the vertexes in 
+\begin_inset Formula $A$
+\end_inset
+
+, but preserves all of the edges coming out of 
+\begin_inset Formula $A$
+\end_inset
+
+ and going into 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ The internal structure of 
+\begin_inset Formula $A$
+\end_inset
+
+ is then typically ignored, discarded; not out of spite, but because that
+ is the nature of an equivalence relation: it states that all elements of
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+equal
+\begin_inset Quotes erd
+\end_inset
+
+, are 
+\begin_inset Quotes eld
+\end_inset
+
+equivalent
+\begin_inset Quotes erd
+\end_inset
+
+, are one and the same, and thus 
+\begin_inset Formula $A$
+\end_inset
+
+ behaves as if it were a single vertex, with assorted edges attached to
+ it, running from 
+\begin_inset Formula $A$
+\end_inset
+
+ to the rest of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+By contrast, the goal here is not just to talk about a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ relative to a single 
+\begin_inset Formula $A$
+\end_inset
+
+, but relative to a huge number of different 
+\begin_inset Formula $A$
+\end_inset
+
+'s.
+ What's more, the internal structure of these 
+\begin_inset Formula $A$
+\end_inset
+
+'s will continue to be interesting, and so is carried on.
+ Finally, the act of merging together multiple vertexes into one 
+\begin_inset Formula $A$
+\end_inset
+
+ may result in some of the existing edges being cut, or new edges being
+ created.
+ The clustering operation applied to the graph alters the graph structure.
+ These considerations are wha makes it convenient to abondon traditional
+ graph theory, and to replace it by the notion of sheaves and sections,
+ as defined below.
 \end_layout
 
 \begin_layout Standard
@@ -790,14 +883,141 @@ Given two vertexes
 \begin_inset Formula $E_{ab}=f\left(E_{a},E_{b}\right)$
 \end_inset
 
- for som function 
+ for some function 
 \begin_inset Formula $f$
 \end_inset
 
 .
- The result of creating is no longer a graph, at least, not in the natural
- sense.
- We've mashed together two vertexes, taking a kind of a quotient 
+ The result of creating this object is no longer strictly a graph, at least,
+ not in the natural sense (one can force a graph structure onto the result,
+ but doing so gets awkward).
+ The mashing together of two vertexes creates a kind of a quotient, as described
+ above.
+ This quotient will be called a stalk in what follows.
+\end_layout
+
+\begin_layout Definition*
+A 
+\noun on
+stalk
+\noun default
+ is an ordered pair 
+\begin_inset Formula $S=\left(V,E\right)$
+\end_inset
+
+ of vertexes and edges such that every edge in 
+\begin_inset Formula $E$
+\end_inset
+
+ has one endpoint being a vertex in 
+\begin_inset Formula $V$
+\end_inset
+
+ and the other endpoint being a vertex not in 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ That is, each edge in 
+\begin_inset Formula $E$
+\end_inset
+
+ is a connector, and no edge in 
+\begin_inset Formula $E$
+\end_inset
+
+ is a link (back into 
+\begin_inset Formula $V)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This definition of a stalk is meant to be a straight-forward generalization
+ of the previously defined seed, replacing the germ vertex by a germ that
+ is a set of vertexes.
+ Stalks can be linked together, much as seeds are:
+\end_layout
+
+\begin_layout Definition*
+A 
+\noun on
+link
+\noun default
+ is between two different stalks 
+\begin_inset Formula $S_{1}=\left(V_{1},E_{1}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{2}=\left(V_{2},E_{2}\right)$
+\end_inset
+
+ is any edge 
+\begin_inset Formula $e=\left(v_{1},v_{2}\right)$
+\end_inset
+
+ running between them, 
+\emph on
+viz.
+
+\emph default
+ where 
+\begin_inset Formula $v_{1}\in V_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{2}\in V_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $e\in E_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $e\in E_{2}$
+\end_inset
+
+.
+ Two stalks are 
+\noun on
+connected
+\noun default
+ when there are one or more links between them.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is convenient (it is suggested) that the vertexes in the stalk be visualized
+ as being stacked one on top another, forming a tower or a fiber, with the
+ edges sticking out as spines.
+ Perhaps one can visualize a kind-of melted stack of jigsaw-puzzle pieces.
+ This visualization is suggested only to enforce the idea that two different
+ stalks project down to two different base-points.
+ In particular, one now can have the notion of a meta-graph where each stalk
+ is a vertex, and each link is an edge.
+ That is, if one flattens the meta-graph down to two dimensions, then one
+ can imagine a stalk growing up as a pole above each meta-vertex, and each
+ meta-edge as being the projection of a link between two stalks.
+ To maintain consistency with standard mathematical terminology, this meta-graph
+ should really be called a 
+\begin_inset Quotes eld
+\end_inset
+
+base space
+\begin_inset Quotes erd
+\end_inset
+
+, and the stalks and links project down onto it in the usual sense.
 \end_layout
 
 \end_body
