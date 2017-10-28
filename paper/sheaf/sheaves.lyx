@@ -517,7 +517,88 @@ Why sections?
 \end_layout
 
 \begin_layout Standard
-the
+Whats the point of introducing this seemingly non-standard approach to something
+ that looks a lot like graph theory? There are several reasons.
+\end_layout
+
+\begin_layout Itemize
+From a computational viewpoint, sections have nice properties that a list
+ of vertexes and edges do not.
+ Given a single seed, one 
+\begin_inset Quotes eld
+\end_inset
+
+instantly
+\begin_inset Quotes erd
+\end_inset
+
+ know 
+\emph on
+all
+\emph default
+ of the edges attached to its germ: they are listed right there.
+ By contrast, given only a graph description, one has to search the entire
+ list 
+\begin_inset Formula $E$
+\end_inset
+
+ for any edges that might contain the given vertex.
+ Computationally, searching large lists is inefficeint, espcially so for
+ very large graphs.
+\end_layout
+
+\begin_layout Itemize
+The subset of a section is always a section.
+ This is not the case for a graph: given 
+\begin_inset Formula $G=\left(V,E\right)$
+\end_inset
+
+, some arbitrary subset of 
+\begin_inset Formula $V$
+\end_inset
+
+ and some arbitrary subset of 
+\begin_inset Formula $E$
+\end_inset
+
+ do not generally form a graph; one has to apply consistency conditions
+ to get a subgraph.
+\end_layout
+
+\begin_layout Itemize
+Readers familiar with link-grammar should have by now instantly recognized
+ seeds as being more or less the same thing as 
+\begin_inset Quotes eld
+\end_inset
+
+disjuncts
+\begin_inset Quotes erd
+\end_inset
+
+ in link-grammar.
+ In fact, link-grammar disjuncts are a bit more complicated than seeds;
+ this is the topic of the next section.
+\end_layout
+
+\begin_layout Itemize
+In certain ways, the connectors on a seed look like the uncontracted indexes
+ on a tensor.
+ That is, a seed with 
+\begin_inset Formula $n$
+\end_inset
+
+ connectors on it looks like a tensor of order 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ A link looks like a pair of indexes that have been contracted.
+ Tensors have additional properties that seeds do not have, however, the
+ notion of connecting together connectors to form links means that many
+ of the notions from a tensor algebra can be carried over into the current
+ context.
+ This includes, at least partly, the notion that a tensor category describes
+ the algebra of sections.
 \end_layout
 
 \begin_layout Standard
