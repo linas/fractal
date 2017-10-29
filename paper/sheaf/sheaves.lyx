@@ -2213,6 +2213,115 @@ generic
  specific application.
 \end_layout
 
+\begin_layout Subsection*
+Why parsing?
+\end_layout
+
+\begin_layout Standard
+The benefit of parsing for the analysis of the structure of natural language
+ is well established.
+ Thus, an example of parsing in a non-linguistic domain is useful.
+ Consider having used the above graph compression/vertex-edge clustering
+ techniques to obtain a collection of stalks that describe genomic interactions.
+ This collection provides the initial dictionary 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ Now imagine a process where a certain specific set of genes are associated
+ with some particular trait or reaction.
+ Is this a complete set? Can it be said that thier interactions are fully
+ understood?
+\end_layout
+
+\begin_layout Standard
+One way to answer these last two questions would be to apply the parse algorithm
+, using the known dictionary, to see if a complete interaction network can
+ be obtained.
+ If so, then this new specific gene-set fits the general pattern.
+ If not, if a complete parse cannot be found, then one strongly suspects
+ that there remain one or more genes, yet undetermined, that also play a
+ role in the trait.
+ To find these, one might examine the stalks that might have been required
+ to complete the parse: these will give a specific type of gene, or style
+ of interaction to search for.
+\end_layout
+
+\begin_layout Standard
+Thus, parsing new gene expressions and pathways offers a way of discovering
+ whether they resemble existing, known systems, or whther they are truly
+ novel.
+ If they seem novel, parsig also gives strong hints as to where to look
+ for any missing pieces or interactions.
+\end_layout
+
+\begin_layout Subsection*
+Is this really parsing?
+\end_layout
+
+\begin_layout Standard
+The above description of parsing is sufficiently different from standard
+ textbook expositions of natural language parsing that some form of an apology
+ neds to be written.
+ 
+\end_layout
+
+\begin_layout Standard
+The first step is to observe that the presented algorithm is essentially
+ a simplified, generalized variation of the link-grammar parsing algorithm.
+ The generalization consists in the removal of word-order and link-crossing
+ constraints.
+\end_layout
+
+\begin_layout Standard
+The second step is to observe that the theory of link-grammar is more-or-less
+ isomorphic to the theory of pregroup grammars (see 
+\begin_inset CommandInset href
+LatexCommand href
+name "Wikipedia"
+target "https://en.wikipedia.org/wiki/Pregroup_grammar"
+
+\end_inset
+
+); the primary differences being notational.
+ The left-right directional link-grammar connectors correspond to the left
+ and right adjoints in a pregroup.
+ A link-grammar disjunct (that is, a seed) coresponds to a sequence of types
+ in a pregroup grammar.
+ The correspondance is more-or-less direct, except that link grammar is
+ notational simpler to work with.
+\end_layout
+
+\begin_layout Standard
+The third step is to observe that the link-grammar is a form of dependency
+ grammar.
+ Although the original link-grammar formulation uses undirected links, it
+ is straight-forward and unambiguous to mark up the links with head-dependent
+ directional arrows.
+\end_layout
+
+\begin_layout Standard
+The fourth step is to realize that dependency grammars (DG) and head-phrase-stru
+cture grammars (HPSG) are essentially isomorphic.
+ Given one, one can obtain the other in a purely mechanistic way.
+ 
+\end_layout
+
+\begin_layout Standard
+The final step is to realize that most introductory textbooks describe parsers
+ for a context-free grammar, and that, for general instructional purposes,
+ such parsers are sufficient to work with HPSG.
+ The priamry issue with HPSG and context-free language parsers is that they
+ obscure the notion of linking together pieces; this is one reason why dependenc
+y grammars are oftan favored: they make clear that it is the linkage between
+ various words that has a primary psychological role in the human understanding
+ of language.
+ It should be noted that many researchers in the psychology of linguistics
+ are particularly drawn to the categorial grammars; these are quite similar
+ to the pregroup grammars, and are more closely related to link-grammar
+ than to the phrase-structure grammars.
+\end_layout
+
 \begin_layout Section*
 Polymorphism
 \end_layout
