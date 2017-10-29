@@ -1874,7 +1874,7 @@ Two unconnected seeds
 
 \begin_inset Graphics
 	filename bad-graph.eps
-	width 70col%
+	width 55col%
 
 \end_inset
 
@@ -1885,10 +1885,6 @@ Two unconnected seeds
 
 \end_layout
 
-\end_inset
-
-
-\begin_inset Newline linebreak
 \end_inset
 
 The connector (half-edge) 
@@ -1977,6 +1973,244 @@ the dog ran
 
  is.
  
+\end_layout
+
+\begin_layout Standard
+Converting these seeds to also enforce left-right word-order requires the
+ notation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family sans
+the: {(the, dog+)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+dog: {(dog, the-), (dog,ran+)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+ran: {(ran, dog-)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This notation is verbose, and slightly confusing.
+ Repeating the germ as the first vertex in every connector is entirely un-necces
+sary.
+ Write instead:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
+
+\begin_layout Plain Layout
+
+\family sans
+the: { dog+ }
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+dog: { the-, ran+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+ran: { dog- }
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The set-builder notation is un-needed, and perhaps slightly confusing.
+ In particular, the word 
+\begin_inset Quotes eld
+\end_inset
+
+dog
+\begin_inset Quotes erd
+\end_inset
+
+ has two connectors on it; both must be connected to obtain a valid parse.
+ The ampersand can be used to indicate the requirement that both connectors
+ are required.
+ This notation will also be useful in the next section.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
+
+\begin_layout Plain Layout
+
+\family sans
+the: dog+ ;
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+dog: the- & ran+ ;
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+ran: dog- ;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This brings us almost back to the previous section, but not quite.
+ Here, we are working with seeds; previously we worked with stalks.
+ Here, the connector type labels were not employed.
+ In real-world use-cases, using stalks and type labels is much more convenient.
+\end_layout
+
+\begin_layout Standard
+This now brings us to a first draft of a parse algorithm.
+ Given an input set of vertices, it attempts to find a graph that is able
+ to connect all of them.
+\end_layout
+
+\begin_layout Enumerate
+Provide a dictionary 
+\begin_inset Formula $D$
+\end_inset
+
+ consisting of a set of un-connected stalks.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Input a set of vertices 
+\begin_inset Formula $V=\left\{ v_{1},v_{2},\cdots,v_{k}\right\} $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+For each vertex in 
+\begin_inset Formula $V$
+\end_inset
+
+, locate a stalk which contains that vertex in it's germ.
+\end_layout
+
+\begin_layout Enumerate
+Attempt to connect all connectors in the selected stalks.
+\end_layout
+
+\begin_layout Enumerate
+If all connectors can be connected, the parse is successful; else the parse
+ fails.
+\end_layout
+
+\begin_layout Enumerate
+Print the resulting graph.
+ This graph can be described as a pair 
+\begin_inset Formula $\left(V,E\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $V$
+\end_inset
+
+ the input set of vertexes, and 
+\begin_inset Formula $E$
+\end_inset
+
+ the set of links obtained from fully connecting the selected stalks.
+\end_layout
+
+\begin_layout Standard
+The above algorithm is 
+\begin_inset Quotes eld
+\end_inset
+
+generic
+\begin_inset Quotes erd
+\end_inset
+
+, and does not suggest any optimal strategy for the crucial steps 3 or 4.
+ It also omits discussion of any further constraints that might need to
+ be applied: perhaps the edges need to be directed; perhaps the resulting
+ graph must be a planar graph (no intersecting edges); perhaps the graph
+ must be a minimum spanning tree; perhaps the input vertexes must be arranged
+ in linear order.
+ These are additional constraints that will typically be required in some
+ specific application.
 \end_layout
 
 \begin_layout Section*
