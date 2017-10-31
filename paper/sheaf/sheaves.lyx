@@ -233,7 +233,7 @@ target "https://github.com/opencog/atomspace/tree/master/opencog/sheaf"
  and it spills over into other files, such as 
 \begin_inset CommandInset href
 LatexCommand href
-name "https://github.com/opencog/opencog/blob/master/opencog/nlp/learn/scm/gram-class.scm"
+name "https://github.com/opencog/opencog/blob/master/ opencog/nlp/learn/scm/gram-class.scm"
 target "https://github.com/opencog/opencog/blob/master/opencog/nlp/learn/scm/gram-class.scm"
 
 \end_inset
@@ -1210,11 +1210,46 @@ equal
 \end_layout
 
 \begin_layout Standard
+To motivate this, consider the following scenario.
+ One has a large graph, some dense mesh, and one decides, via some external
+ decision process, that two vertexes are similar.
+ One particularly good reason to think that they are similar is that they
+ share a lot of nearest neighbors.
+ In a social graph, one might say they have a lot of friends in common.
+ In genomic or proteomic data, they may interact with the same kinds of
+ genes/proteins.
+ In natural language, they might be words that are synonyms, and thus get
+ used the same way across many different sentences; specifically, the syntactic
+ dependency parse links these words to the same set of heads and dependents.
+ At any rate, one has a large graph, and some sort of equivalence operation
+ that can decide if two vertexes are the 
+\begin_inset Quotes eld
+\end_inset
+
+same
+\begin_inset Quotes erd
+\end_inset
+
+, or are 
+\begin_inset Quotes eld
+\end_inset
+
+similar enough
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Whenever one has an equivalence relation, one can apply it to obtain a
+ quotient, of grouping together into an identity all things that are the
+ same.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1228,7 +1263,7 @@ Creating a quotient graph
 
 \begin_inset Graphics
 	filename similar.eps
-	width 40col%
+	width 60col%
 
 \end_inset
 
@@ -1306,41 +1341,6 @@ height "1pt"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-To motivate this, consider the following scenario.
- One has a large graph, some dense mesh, and one decides, via some external
- decision process, that two vertexes are similar.
- One particularly good reason to think that they are similar is that they
- share a lot of nearest neighbors.
- In a social graph, one might say they have a lot of friends in common.
- In genomic or proteomic data, they may interact with the same kinds of
- genes/proteins.
- In natural language, they might be words that are synonyms, and thus get
- used the same way across many different sentences; specifically, the syntactic
- dependency parse links these words to the same set of heads and dependents.
- At any rate, one has a large graph, and some sort of equivalence operation
- that can decide if two vertexes are the 
-\begin_inset Quotes eld
-\end_inset
-
-same
-\begin_inset Quotes erd
-\end_inset
-
-, or are 
-\begin_inset Quotes eld
-\end_inset
-
-similar enough
-\begin_inset Quotes erd
-\end_inset
-
-.
- Whenever one has an equivalence relation, one can apply it to obtain a
- quotient, of grouping together into an identity all things that are the
- same.
 \end_layout
 
 \begin_layout Standard
@@ -2128,7 +2128,7 @@ Three stalks and two typed links
 
 \begin_inset Graphics
 	filename grammar.eps
-	width 45col%
+	width 40col%
 
 \end_inset
 
