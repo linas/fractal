@@ -948,7 +948,123 @@ If we stop here, not much is accomplished, other than to define a somewhat
  But that is not the case; the concept of seeds and sections are needed
  to construct a concept of sheaves, which is being pursued so as to provide
  a tool to study natural language and other systems.
+\end_layout
+
+\begin_layout Subsection*
+Similar concepts
+\end_layout
+
+\begin_layout Standard
+Linguistics literature sometimes describes similar concepts using a lambda-calcu
+lus notation.
+ For example, one can sort-of envision the expression 
+\begin_inset Formula $\lambda M.xyz$
+\end_inset
+
+ as a seed with the germ 
+\begin_inset Formula $M$
+\end_inset
+
+ and with connectors 
+\begin_inset Formula $x$
+\end_inset
+
+, 
+\begin_inset Formula $y$
+\end_inset
+
+ and 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ This notation has been used to express the concept of a seed, as described
+ above (see Poon & Domingos, for example).
+ The problem with this notation is that, properly speaking, lambda calculus
+ is a system for generating and working with strings, not with graphs.
+ The germs are always strings of symbols, and beta-reduction involves the
+ substitution of strings into lambda expressions.
+ To illustrate the issue, suppose that 
+\begin_inset Formula $M$
+\end_inset
+
+ above is 
+\begin_inset Formula $axbyczd$
+\end_inset
+
+ and suppose that 
+\begin_inset Formula $\lambda N.w=ewf$
+\end_inset
+
+.
+ Can these be 
+\begin_inset Quotes eld
+\end_inset
+
+connected
+\begin_inset Quotes erd
+\end_inset
+
+ together, linked together like seeds? No: if one tried to 
+\begin_inset Quotes eld
+\end_inset
+
+connect
+\begin_inset Quotes erd
+\end_inset
+
  
+\begin_inset Formula $N$
+\end_inset
+
+ to 
+\begin_inset Formula $z,$
+\end_inset
+
+ one has the beta-reduction 
+\begin_inset Formula $(\lambda M.xyz)\lambda N.w\rightarrow\lambda axbycewfd.xyw$
+\end_inset
+
+.
+ There is no way to express some symmetric verision of this, because 
+\begin_inset Formula $(\lambda N.w)\lambda M.xyz\rightarrow\lambda eaxbyczdf.xyz$
+\end_inset
+
+ which is hardly the same.
+ Now, of course, lambda calculus has great expressive power, and one could
+ invent a way encoding graph theory, and/or seeds, in lambda calculus; however,
+ doing so would result in verbose and complex system.
+ Its easier to work with graphs directly, and just sleep peacefully with
+ the knowledge that one could encode them with lambdas, if that is what
+ your life depended on.
+\end_layout
+
+\begin_layout Standard
+Note also that there have been extensions of the ideas of lambda calculus
+ to graphs; however, those extensions cling to the fundamental concept of
+ beta reduction.
+ This one works with graphs that have variables in them.
+ Given a variable, one plugs in a graph in the place of that variable.
+ The OpenCog 
+\begin_inset CommandInset href
+LatexCommand href
+name "PutLink"
+target "http://wiki.opencog.org/w/PutLink"
+
+\end_inset
+
+ works in exactly this way.
+ The beta-reduction is fundamentall not symmetrical: putting A into B is
+ not the same as putting B into A.
+ The concept of 
+\begin_inset Quotes eld
+\end_inset
+
+connecting
+\begin_inset Quotes erd
+\end_inset
+
+ in a symmetric way doesn't arise.
 \end_layout
 
 \begin_layout Section*
