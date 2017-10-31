@@ -2282,6 +2282,63 @@ These examples suggest that the use of types is little more than a convenient
  
 \end_layout
 
+\begin_layout Subsection*
+What kind of information do types carry?
+\end_layout
+
+\begin_layout Standard
+The above example oversimplifies the notion of types, presenting them as
+ a purely syntactic device.
+ In practice, types also carry semantic information.
+ The amount of semantic information varies inversely to the broadness of
+ the type.
+ In language, coarse-grained types (noun, verb) carry almost no semantic
+ information.
+ Fine-grained types carry much more: a 
+\begin_inset Quotes eld
+\end_inset
+
+transtive verb taking a particle and an indirect object
+\begin_inset Quotes erd
+\end_inset
+
+ is quite specific: it must be some action that can be performed on some
+ object using some tool in some fashion.
+ An example would be 
+\begin_inset Quotes eld
+\end_inset
+
+John sang a song to Mary on his guitar
+\begin_inset Quotes erd
+\end_inset
+
+: there is a what, who and and how yoked together in the verb 
+\begin_inset Quotes eld
+\end_inset
+
+sang
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The more fine-grained the classification, the more semantic content is
+ contained in it.
+\end_layout
+
+\begin_layout Standard
+This suggets that the proper approach is hierarchical: a fine-grained clustering
+, that captures semantic content, followed by a coarser clustering that
+ erases much of this, leaving behind only 
+\begin_inset Quotes eld
+\end_inset
+
+syntactic
+\begin_inset Quotes erd
+\end_inset
+
+ content.
+\end_layout
+
 \begin_layout Section*
 Parsing
 \end_layout
@@ -3245,8 +3302,26 @@ Sheaves
 
 \begin_layout Standard
 The classification and quotienting proceedures cause the structure of the
- entire network to behave much like the mathematical concept of a sheaf.
- The presentation here is informal, and not rigorous.
+ entire network to behave much like the mathematical concept of a 
+\begin_inset Quotes eld
+\end_inset
+
+sheaf
+\begin_inset Quotes erd
+\end_inset
+
+ studied in 
+\begin_inset Quotes eld
+\end_inset
+
+sheaf theory
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This is a rather abstract branch of mathematics, most of which offers relativel
+y little insight into the problems being tackled here.
+ Thus, the presentation here is informal, and lacks in rigor.
  The primary example is again drawn from linguistics, although examples
  in biochemistry and other fields can be found as well.
 \end_layout
@@ -3500,7 +3575,7 @@ n-grams
 \begin_inset Quotes erd
 \end_inset
 
- tha are commonly studied.
+ that are commonly studied.
  Alternately, the phrases can be parsed with a dependency parser of one
  style or another, in which case the words are joined with (directed) edges
  that denote dependencies.
@@ -3592,7 +3667,7 @@ fly
 placement h
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3622,16 +3697,149 @@ Dependency parse corpus text alignment
 \end_layout
 
 \begin_layout Standard
-.
- The word 
+Both of these figures represent a graph that results from a corpus alignment,
+ where all uses of a word have been collapsed (projected down) to a single
+ node.
+ The resulting graph is the graph of the language.
+ One way of visualizing this graph is as a stack of sheets of paper, with
+ one sentence written on each sheet.
+ The papers are stacked in such a way that words that are the same are always
+ vertically above one-another.
+ This 
 \begin_inset Quotes eld
 \end_inset
 
+stacking
+\begin_inset Quotes erd
+\end_inset
+
+ is where the term 
+\begin_inset Quotes eld
+\end_inset
+
+sheaf
+\begin_inset Quotes erd
+\end_inset
+
+ comes from.
+ Each single sheet of paper is a 
+\begin_inset Quotes eld
+\end_inset
+
+section
+\begin_inset Quotes erd
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-x
+Sections can be cut down, or they can be enlarged, yet each section must
+ consist of a grammatically-correct sentence, phrase (or paragraph, or larger!).
+ The base space consists simply of the individual words in the language,
+ each word being a vertex, connections between words being projections of
+ the connections discovered from the N-grams, or dependency graphs, as the
+ case may be.
+ One can examine how the structure of language changes as words are removed
+ from the base space: such changes correspond to the 
+\begin_inset Quotes eld
+\end_inset
+
+restriction morphisms
+\begin_inset Quotes erd
+\end_inset
+
+ of a sheaf.
+ These restriction morphisms obey all of the axioms of a sheaf; this observation
+ is what drives the peculiar naming convention given here.
+ The reason this 
+\begin_inset Quotes eld
+\end_inset
+
+works
+\begin_inset Quotes erd
+\end_inset
+
+, that the axioms apply, is in fact rather shallow: it is because the seeds,
+ as initially defined, behave very much like open sets, and when they are
+ projected to the base space, they serve to cover the base space, much as
+ a topological covering does.
+ 
+\end_layout
+
+\begin_layout Standard
+The restriction morphisms appear to continue to satisfy the sheaf axioms
+ even after projection (at least, at the informal level given here).
+\end_layout
+
+\begin_layout Subsection*
+Why sheaves?
+\end_layout
+
+\begin_layout Standard
+The primary reason for introducing this notion is to consildate the otherwise
+ vague idea of the 
+\begin_inset Quotes eld
+\end_inset
+
+language graph
+\begin_inset Quotes erd
+\end_inset
+
+.
+ One has duelling notions: the graph of all sentences; the generative power
+ of grammars.
+ Surface realizations of language are studied in coprus linguistics, where
+ differences in regional dialects, differences according to socio-economic
+ status and politically motivated differences are found.
+ However, these surface realizations are almost never refined into a grammar,
+ and thus, one does not obtain a generative model of how different speakers
+ in differnt socio-economic classes speak: corpus linguistics examples are
+ just that: examples that are not further refined.
+ By applying a pattern mining approach, the underlying grammar can be discovered
+ computationally.
+ But what is it, really, that is being discovered, other than some collection
+ of grammatical classes and relations? By looking at the collection of all
+ words, sentences and paragraphs in a corpus as if it were a sheaf, one
+ gets a more 
+\begin_inset Quotes eld
+\end_inset
+
+holistic
+\begin_inset Quotes erd
+\end_inset
+
+ view of what language is: one can start seeing the 
+\begin_inset Quotes eld
+\end_inset
+
+big picture
+\begin_inset Quotes erd
+\end_inset
+
+, instead of just the trees.
+ This holistic view is the primary point of this exercise.
+\end_layout
+
+\begin_layout Subsection*
+Related ideas
+\end_layout
+
+\begin_layout Standard
+As before, the 
+\begin_inset Quotes eld
+\end_inset
+
+sections
+\begin_inset Quotes erd
+\end_inset
+
+ presented above (sentence fragments) are presented minimally.
+ In practice, sections will be adorned with additional information, such
+ as frequency counts and mutual information values.
+ Once clustering and quotienting has been performed, non trivial type tags
+ become available.
 \end_layout
 
 \begin_layout Standard
@@ -3644,10 +3852,6 @@ x
 
 \begin_layout Standard
 x
-\end_layout
-
-\begin_layout Standard
-present the sheaf axioms
 \end_layout
 
 \begin_layout Section*
