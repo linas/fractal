@@ -338,25 +338,39 @@ must
 \begin_layout Standard
 For directed graphs, the vertex ordering in the edge matters.
  For undirected graphs, it does not.
- The subsequent will assume both directed and undirected edges, as the occasion
- and the need fits.
+ The subsequent will mostly leave this distinction unspecified, and allow
+ either (or both) directed and undirected edges, as the occasion and the
+ need fits.
+ Distinguishing between directed and undirected graphs is not important,
+ at this point.
  In most of what follows, it will usually be assumed that there are no edges
  with 
 \begin_inset Formula $v_{1}=v_{2}$
 \end_inset
 
- and that there is at most one edge connecting any given pair of vertexes.
- This is primarily for general convenience and simplicity of discussion,
- rather than a fundamental limitation.
+ (loops that copnnect back to themselves) and that there is at most one
+ edge connecting any given pair of vertexes.
+ These assumptions are being made to simplify the discussion; they are not
+ meant to be a fundamental limitation.
  It just makes things easier to talk about and less cluttered at the start.
- The primary application does not require either construct, although the
- extension to allow all this is straight-forward.
- Similar remarks apply to graphs with labeled vertexes or edges.
- A notion of types will be introduced later on.
- The intended application of this machinery will be graphs whose edges and
- vertexes carry numerical weights on them, but these do not need to be talked
- about at this stage.
- Just keep in mind that these will appear out of thin air, later on.
+ The primary application does not require either construct, and it is straight-f
+orward to add extensions to provide these features.
+ Similar remarks apply to graphs with labeled vertexes or edges (such as
+ 
+\begin_inset Quotes eld
+\end_inset
+
+colored
+\begin_inset Quotes erd
+\end_inset
+
+ edges, vertexes or edges with numerical weights on them, 
+\emph on
+etc
+\emph default
+).
+ Just keep in mind that such additional markup may appear out of thin air,
+ later on.
 \end_layout
 
 \begin_layout Standard
@@ -412,7 +426,8 @@ It should be clear that, given a graph
 \begin_inset Formula $G$
 \end_inset
 
-, one can equivalently describe it as a set of seeds.
+, one can equivalently describe it as a set of seeds (one simply lists all
+ of the vertexes, and all of the edges attached to each vertex).
  The converse is not 
 \begin_inset Quotes eld
 \end_inset
@@ -730,8 +745,8 @@ connected graph
 \end_inset
 
 , but we cannot fairly call it that because the seeds and sections were
- defined in such a way that they are not graphs in and of themselves; they
- only become graphs when they are fully connected.
+ defined in such a way that they are not graphs; they only become graphs
+ when they are fully connected.
  Never-the-less, it is fairly safe and straight-forward to apply common
  concepts from graph-theory.
  Sections are almost like graphs, but not quite.
@@ -827,6 +842,44 @@ This motivates a different way of looking at seeds: they can be visualized
  This union of a tab+slot is the link.
  The types of the connectors will later be seen to be the same thing as
  the types of type theory; that is, they are bona-fide types.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Joining two connectors to form a link
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename puzzle.eps
+	width 40col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
@@ -981,9 +1034,15 @@ lus notation.
  This notation has been used to express the concept of a seed, as described
  above (see Poon & Domingos, for example).
  The problem with this notation is that, properly speaking, lambda calculus
- is a system for generating and working with strings, not with graphs.
- The germs are always strings of symbols, and beta-reduction involves the
- substitution of strings into lambda expressions.
+ is a system for generating and working with strings, not with graphs, and
+ lambdas are designed to perform substitution (beta-reduction), and not
+ for connecting things.
+ 
+\end_layout
+
+\begin_layout Standard
+That is, lambda terms are alwyas strings of symbols, and the variables bound
+ by the lambda are used to perform substitutions.
  To illustrate the issue, suppose that 
 \begin_inset Formula $M$
 \end_inset
@@ -1043,7 +1102,7 @@ connect
 Note also that there have been extensions of the ideas of lambda calculus
  to graphs; however, those extensions cling to the fundamental concept of
  beta reduction.
- This one works with graphs that have variables in them.
+ Thus, one works with graphs that have variables in them.
  Given a variable, one plugs in a graph in the place of that variable.
  The OpenCog 
 \begin_inset CommandInset href
@@ -2784,7 +2843,7 @@ cat
 
  and the myriad of connectors on them.
  The flattened seeds cannot lead to grammatical linkages, as they mash together
- into one the connectors for different parst of speech.
+ into one the connectors for different parts of speech.
 \end_layout
 
 \begin_layout Plain Layout
