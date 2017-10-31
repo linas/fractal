@@ -89,7 +89,7 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-A Topological Approach to Graphs
+Graph Quotients: A Topological Approach to Graphs
 \end_layout
 
 \begin_layout Author
@@ -157,37 +157,111 @@ anyone
 \end_layout
 
 \begin_layout Standard
-topolgical
+Some examples will be provided, primarily drawn from linguistics.
+ However, the concepts are generally applicable, and should prove useful
+ for analyzing any kind of dataset with complex and hidden cause-and-effect
+ relationships.
+ This includes genomic and proteomic data, social-graph data, and even such
+ gneric domains as determining the effectiveness of educational curricula
+ or analyzing the narratives of books and movies.
 \end_layout
 
 \begin_layout Standard
-The thing being spelled out is a kind of 
+These pebnultimate serves as a general example.
+ When teaching students, one never teaches advanced topics until foundations
+ are laid.
+ Yet many students struggle.
+ Given raw data on a large sample of students, and the curricula they were
+ subjected to, can one discern sequences and dependencies of cause-and-effect
+ in this data? Cam one find the most effective curriculum to teach, that
+ advances the greatest number of students? Can one discover different classes
+ of students, some who respond better to one style than another? My beleif
+ is that these questions can not only be answered, but that the framework
+ described here can be used to uncover this structure.
+\end_layout
+
+\begin_layout Standard
+The approach is 
 \begin_inset Quotes eld
 \end_inset
 
-sheaf theory for graphs
+highly mathematical
 \begin_inset Quotes erd
 \end_inset
 
-, except that the structures being explored are not exactly graphs in the
- canonical sense of graph theory, nor are they quite sheaves in the customary
- sense, even though they obey the axioms of sheaf theory.
- At any rate, customary sheaf theory carries with it a huge amount of abstruse
- and abstract baggage almost all of which is simply not required for the
- envisioned application.
+, in that most of this document is devoted to defining certain mathematical
+ structures that can be applied to these problems.
+ The mathematics is inspired by and draws upon concepts from algebraic topology,
+ but, for the most part, tries to avoid the difficult abstractions.
+ The devices that are sketched are frameworks (for the most part) and not
+ algorithms.
+ The hope is that you can 
+\begin_inset Quotes eld
+\end_inset
+
+pick your own algorithm
+\begin_inset Quotes erd
+\end_inset
+
+ – apply your favorite technique and style, neural nets, whatever, as you
+ wish, to obtain results.
+ The goal is to provide a way of talking about, thinking about and presenting
+ data so that the important knowledge contained in it is captured and described,
+ boiled down to a managable, workable state from a large raw dump of data.
 \end_layout
 
 \begin_layout Standard
-The envisioned application is the use of machine learning to study natural
- language.
- Due to the nature of natural language, the topic inherently touches on
- other interesting areas of mathematics, including parsing, type theory
- and category theory.
- But this all comes later on, after the basics are set up.
+Currently, the ideas described here are employed in a machine-learning project
+ that attempts to extract the structure of natural language in an unsupervised
+ way.
+ Thus, the primary, detailed examples will come from the natural language
+ domain.
+ The theory should be far more general than that.
 \end_layout
 
 \begin_layout Standard
-We begin first by giving a provisional definition for a section, and some
+This document resides in, accompanies source code that implements the ideas
+ here.
+ Specifically, it is in 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://github.com/opencog/atomspace/tree/master/opencog/sheaf"
+target "https://github.com/opencog/atomspace/tree/master/opencog/sheaf"
+
+\end_inset
+
+ and it spills over into other files, such as 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://github.com/opencog/opencog/blob/master/opencog/nlp/learn/scm/gram-class.scm"
+target "https://github.com/opencog/opencog/blob/master/opencog/nlp/learn/scm/gram-class.scm"
+
+\end_inset
+
+ This code is in active development, and is likely to have changed by a
+ lot since this was written.
+ This document is 
+\emph on
+not
+\emph default
+ intended to describe the code; rather, it is meant to describe the general
+ underlying concepts.
+\end_layout
+
+\begin_layout Standard
+For the mathematically inclined, please be aware that the concepts described
+ here touch on the tiniest tips of some very deep mathematical icebergs,
+ specifically in parsing, type theory and category theory.
+ I have no hope of providing the needed background, as these fields are
+ sophisticated and immense.
+ The reader is encouraged to study these on thier own, especially as they
+ are applied in computer science and linguistics.
+ Ther are many good texts on these topics.
+\end_layout
+
+\begin_layout Standard
+The first section describes ...
+ We begin first by giving a provisional definition for a section, and some
  motivation for that definition.
  Next, a definition of sheaves, not in generality, but limited to the current
  context.
