@@ -97,7 +97,7 @@ Linas Vepstas
 \end_layout
 
 \begin_layout Date
-30 October 2017
+31 October 2017
 \end_layout
 
 \begin_layout Abstract
@@ -260,12 +260,45 @@ For the mathematically inclined, please be aware that the concepts described
 \end_layout
 
 \begin_layout Standard
-The first section describes ...
- We begin first by giving a provisional definition for a section, and some
- motivation for that definition.
- Next, a definition of sheaves, not in generality, but limited to the current
- context.
- 
+The first part provides a definition of a 
+\begin_inset Quotes eld
+\end_inset
+
+section
+\begin_inset Quotes erd
+\end_inset
+
+ of a graph.
+ A section is a lot like a subgraph, except that it explicitly indicates
+ which edges were cut to form the subgraph.
+ The next part makes use of this concept of 
+\begin_inset Quotes eld
+\end_inset
+
+sections
+\begin_inset Quotes erd
+\end_inset
+
+ to show how they can be used to talk about and understand pattern-mining,
+ clustering and quotienting.
+ The next part indicates how such clusters can be understood to be 
+\begin_inset Quotes eld
+\end_inset
+
+types
+\begin_inset Quotes erd
+\end_inset
+
+, in the formal sense of mathematical type theory.
+ Next follows a breif review of the concept of parsing, as it applies to
+ this context.
+ The ability to parse is what motivates the data discovery to begin with:
+ after extracting patterns from a dataset, parsing is how those patterns
+ can be re-assembled.
+ An important part of pattern mining is the ability to distinguish polymorphic
+ behavior.
+ The final part shows how the sysem as a whole can be understood to be a
+ kind of a sheaf, borrowing a concept from a different branch of mathematics.
 \end_layout
 
 \begin_layout Section*
@@ -2873,9 +2906,9 @@ Polymorphism
 \begin_layout Standard
 Any given vertex may participate in two or more seeds, independently from
  one-another.
- It is this statement that really starts setting apart the system described
- here from ordinary graph theory.
- It is best illustrated by a practical example.
+ It is this statement that further sharpens the departure from naive graph
+ theory.
+ This is best illustrated by a practical example.
 \end_layout
 
 \begin_layout Standard
@@ -2909,7 +2942,7 @@ fly
  occurs as a noun in one sentence, and a verb in the other.
  Suppose that the equivalence relation, described in the clustering section,
  also has the power to discern that this one word should really be split
- into two namely 
+ into two, namely 
 \begin_inset Formula $fly_{\mbox{noun}}$
 \end_inset
 
@@ -2953,10 +2986,6 @@ reference "fig:Polymorphism"
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3044,13 +3073,185 @@ height "1pt"
 
 \end_layout
 
+\begin_layout Standard
+The point of the figure is to illustrate that, although the 
+\begin_inset Quotes eld
+\end_inset
+
+base graph
+\begin_inset Quotes erd
+\end_inset
+
+ may not didstinguish one varient of a vertex from another, it is important
+ to discover, extract and represent this difference.
+ The concept of 
+\begin_inset Quotes eld
+\end_inset
+
+polymorphism
+\begin_inset Quotes erd
+\end_inset
+
+ applies, because the base vertex behaves as one of several distinct types
+ in practice.
+ There are several ways the above diagram can be represented textually.
+ As before, the link-grammar-style notation is used, as it is fairly clear
+ and direct.
+ One representation would be to expose the polymorphism only in the connectors,
+ and not in the base vertex label:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
+
+\begin_layout Plain Layout
+
+\family typewriter
+fly: (DET- & ADJ- & SUBJ+) or (SUBJ- & OBJ+);
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A different possibility is to promptly split the vertex label into two,
+ and ignore the subscript during the parsing stage:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
+
+\begin_layout Plain Layout
+
+\family typewriter
+fly.noun cat: (DET- & ADJ- & SUBJ+)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+fly.verb walk: (SUBJ- & OBJ+);
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Either way, the non-subscripted version of 
+\begin_inset Formula $fly$
+\end_inset
+
+ behaves in a polymorphic fashion.
+\end_layout
+
+\begin_layout Standard
+Note that the use of the notation 
+\begin_inset Quotes eld
+\end_inset
+
+
+\family typewriter
+or
+\family default
+
+\begin_inset Quotes erd
+\end_inset
+
+ to disjoin the possibilities denotes a choice function, and not a boolean-or.
+ That is, one can choose either one form, or the other; one cannot choose
+ both.
+ During the parse, both possibilities need to be considered, but only one
+ selected in the end.
+ This implies that at least some fragment of linear logic is at play, and
+ not boolean logic.
+ (this should be expanded upon in future drafts).
+\end_layout
+
 \begin_layout Section*
 Sheaves
 \end_layout
 
 \begin_layout Standard
-The polymorphism issue above is what really drives the system to resemble
- a sheaf, as opposed to a simpler graphical theory.
+The classification and quotienting proceedures cause the structure of the
+ entire network to behave much like the mathematical concept of a sheaf.
+ 
+\end_layout
+
+\begin_layout Standard
+polymorphism issue above is what really drives the system to resemble a
+ sheaf, as opposed to a simpler graphical theory.
 \end_layout
 
 \begin_layout Standard
