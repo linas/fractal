@@ -940,9 +940,9 @@ A connected section behaves very much like a seed: just as two seeds can
  be linked together to form a connected section, so also two connected sections
  can be linked together to form a larger connected section.
  Both have a body, with spines sticking out.
- The building blocks, and the things built from them have the same properties,
- lie in the same class.
- Thus, one has a system that is 
+ The building blocks (seeds), and the things built from them (sections)
+ have the same properties, lie in the same class.
+ Thus, one has a system that is naturally 
 \begin_inset Quotes eld
 \end_inset
 
@@ -951,6 +951,17 @@ scalable
 \end_inset
 
 , and allows notions of similarity and scale invariance to be explored.
+ There is no need to introduce additional concepts and constructions.
+\end_layout
+
+\begin_layout Itemize
+Given two seeds, one can always either join them (because they connect)
+ or it is impossible to connect them.
+ Either way, one knows immediately.
+ Graphs, in general, cannot be joined, unless one specifies a subgraph in
+ each that matches up.
+ Locating subgraphs in a graph is computationally expensive; verifying subgraph
+ isopmorphism is computationally expensive.
 \end_layout
 
 \begin_layout Itemize
@@ -999,8 +1010,8 @@ The analogy between graphs and topology, specifically, between open sets
 If we stop here, not much is accomplished, other than to define a somewhat
  idiosyncratic view of graph theory.
  But that is not the case; the concept of seeds and sections are needed
- to construct a concept of sheaves, which is being pursued so as to provide
- a tool to study natural language and other systems.
+ to pursue more complex constructions.
+ They provide a tool to study natural language and other systems.
 \end_layout
 
 \begin_layout Subsection*
@@ -1127,16 +1138,75 @@ connecting
 \end_layout
 
 \begin_layout Section*
-Clustering
+Clustering and Quotienting
 \end_layout
 
 \begin_layout Standard
-The intended interpretation of the graph is that it represents a large amount
- of collected raw data.
+The intended interpretation for the graphs discussed in this document is
+ that they represent or are the result of capturing a large amount of collected
+ raw data.
  From this data, one wants to extract commonalities and recurring patterns.
- Doing so, one arrives at the need to perform a kind of quotienting operation
- on the graph.
  
+\end_layout
+
+\begin_layout Standard
+The core assumption being made in this section is that, when two local neighborh
+oods of a graph are similar or identical, then this reflects some important
+ similarity in the raw data.
+ That is, similarity of subgraphs is the be-all and end-all of extracting
+ knowledge from the larger graph, and that the primary goal is to search
+ for, mine, such similar subgraphs.
+\end_layout
+
+\begin_layout Standard
+Exactly what it means to be 
+\begin_inset Quotes eld
+\end_inset
+
+similar
+\begin_inset Quotes erd
+\end_inset
+
+ is not defined here; this is up to the user.
+ Similarity could mean subgraph isomorphism, or subgraph homomorphism, or
+ something else: some sort of 
+\begin_inset Quotes eld
+\end_inset
+
+close-enough
+\begin_inset Quotes erd
+\end_inset
+
+ similarity property involving the shape of the graph, the connections made,
+ the colors, directions, labels and weights on the vertexes or edges.
+ The precise details do not matter.
+ However, it is assumed that the user can provide some algorithm for finding
+ such similarities, and that the similarities can be understood as a kind-of
+ 
+\begin_inset Quotes eld
+\end_inset
+
+equivalence relation
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If one has an equivalence relation, then the obvious desire, he obvious
+ urge is to attempt to perform quotienting on the graph.
+ That is, to create a new graph, where the 
+\begin_inset Quotes eld
+\end_inset
+
+equal
+\begin_inset Quotes erd
+\end_inset
+
+ parts are merged into one.
+ The rest of this document describes how this can be done, and what sort
+ of notation to use to do this.
 \end_layout
 
 \begin_layout Standard
