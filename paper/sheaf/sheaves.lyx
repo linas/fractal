@@ -102,20 +102,17 @@ Linas Vepstas
 
 \begin_layout Abstract
 This document develops some general concepts useful for extracting knowledge
- embedded in large graphs and similar cause-effect-type datasets.
- It attempts to make almost no underlying assumptions, other than that the
- data can be presented in terms of pair-wise relationships between objects/event
-s.
- The resulting extracted structures or 
-\begin_inset Quotes eld
-\end_inset
-
-patterns
-\begin_inset Quotes erd
-\end_inset
-
- are manifestly symbolic in nature, as they capture and encode the graph
- structure of the dataset in terms of a (generative) grammar.
+ embedded in large graphs or datasets with pair-wise relationships, such
+ as cause-effect-type relations.
+ Almost no underlying assumptions are made, other than that the data can
+ be presented in terms of pair-wise relationships between objects/events,
+ and that there is some way for judging when objects/events are similar.
+ These two assumptions are used to mine for patterns in the dataset, defining
+ a reduced graph or dataset that boils-down or concentrates the data into
+ a more compact form.
+ The resulting extracted structure or set of patterns are manifestly symbolic
+ in nature, as they capture and encode the graph structure of the dataset
+ in terms of a (generative) grammar.
 \end_layout
 
 \begin_layout Section*
@@ -137,6 +134,8 @@ concentrate
 \end_inset
 
  embedded knowledge into a more manageable size.
+ The output of the process is a grammar that summarizes or captures the
+ significant or important relationships.
 \end_layout
 
 \begin_layout Standard
@@ -151,9 +150,9 @@ folk knowledge
 
  generally known to a number of practitioners.
  However, I am not currently aware of any kind of presentation of this informati
-on, either in review/summary form, or as a fully articulated text.
- There are some texts that discuss these ideas, but they tend to occur primarily
- in highly abstract mathematical books an aritcles, outside of the mainstream
+on, either in review/summary form, or as a fully articulated book or text.
+ The background knowledge appears to be scattered across wide domains, and
+ occur primarily in highly abstract settings, outside of the mainstream
  computer-science and data-analysis domain.
  Thus, this document tries to provide an introduction to these concepts
  in a plain-spoken language.
@@ -170,17 +169,16 @@ anyone
 \end_layout
 
 \begin_layout Standard
-Some examples will be provided, primarily drawn from linguistics.
+Some examples are provided, primarily drawn from linguistics.
  However, the concepts are generally applicable, and should prove useful
- for analyzing any kind of dataset with complex and hidden cause-and-effect
- relationships.
- This includes genomic and proteomic data, social-graph data, and even such
- generic domains as determining the effectiveness of educational curricula
- or analyzing the narratives of books and movies.
+ for analyzing any kind of dataset expressed with pair-wise relationships,
+ but containing hidden (non-obvious) complex cause-and-effect relationships.
+ Such datasets include genomic and proteomic data, social-graph data, and
+ even such social policy information.
 \end_layout
 
 \begin_layout Standard
-The penultimate can serve as a general example.
+Consider the example of determining the effectiveness of educational curricula.
  When teaching students, one never teaches advanced topics until foundations
  are laid.
  Yet many students struggle.
@@ -194,30 +192,33 @@ The penultimate can serve as a general example.
 \end_layout
 
 \begin_layout Standard
-The approach is 
-\begin_inset Quotes eld
-\end_inset
+Another example might be the analysis of motives and actions in humans.
+ This includes analysis from real life, as well as the narratives of books
+ and movies.
+ In a book setting, the author cannot easily put characters into action
+ until some basic sketch of personality and motives is developed.
+ Motives can't be understood until a setting is established.
+ If one can break down a large number of books/movies into pairs of related
+ facts/scenes/remarks/actions, one can then extract a grammar of relationships,
+ to see exactly what is involved in the movement of a narrative from here
+ to there.
+\end_layout
 
-highly mathematical
-\begin_inset Quotes erd
-\end_inset
+\begin_layout Standard
+Much of this document is devoted to stating definitions for a few key structures
+ used to talk about the general problem of discerning relationships and
+ structure.
+ The definitions are inspired by and draw upon concepts from algebraic topology,
+ but mostly avoid both the rigor and the difficulty of that topic.
+ 
+\end_layout
 
-, in that most of this document is devoted to defining certain mathematical
- structures that can be applied to these problems.
- The mathematics is inspired by and draws upon concepts from algebraic topology,
- but, for the most part, tries to avoid the difficult abstractions.
- The devices that are sketched are frameworks (for the most part) and not
- algorithms.
- The hope is that you can 
-\begin_inset Quotes eld
-\end_inset
-
-pick your own algorithm
-\begin_inset Quotes erd
-\end_inset
-
- – apply your favorite technique and style, neural nets, Bayesian nets,
- Markov nets, whatever, as you wish, to obtain results.
+\begin_layout Standard
+The definitions provide a framework, rather than an algorithm.
+ It is up to the user to provide some mechanism for judging similarity -
+ and this can be anything: some neural net, Bayesian net, Markov chain,
+ or some vector space or SVM-style technique; the overall framework is agnostic
+ as to these details.
  The goal is to provide a way of talking about, thinking about and presenting
  data so that the important knowledge contained in it is captured and described,
  boiled down to a manageable, workable state from a large raw dump of pair-relat
