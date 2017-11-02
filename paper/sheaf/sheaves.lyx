@@ -3718,8 +3718,50 @@ Both of these figures represent a graph that results from a corpus alignment,
  where all uses of a word have been collapsed (projected down) to a single
  node.
  The resulting graph is the graph of the language.
- One way of visualizing this graph is as a stack of sheets of paper, with
- one sentence written on each sheet.
+ 
+\end_layout
+
+\begin_layout Standard
+A collapsed graph like that might appear strange; why would one want to
+ do that, if one has individual sentence data? The answer is that by collapsing
+ in this way, one can accumulate statistics for large collections of sentences:
+ one can find out which links are frequenctly seen, and which are rare.
+ One can capture the affinity for pairs of words, by computing the mutual
+ information between them.
+ Through this kind of averaging, a global overvioew emerges.
+ The local structure can be recaptured by extracting seeds from individual
+ sentences, and then re-assembling these seeds into stalks, in a polymorphic
+ fashion.
+\end_layout
+
+\begin_layout Standard
+In some domains, one might not have specific sentences as sequences of words,
+ but one might be able to observe specific activation networks.
+ For example, in biology, if one specific gene is up-regulated, one can
+ then try to view everything else that changed as a 
+\begin_inset Quotes eld
+\end_inset
+
+sentence
+\begin_inset Quotes erd
+\end_inset
+
+, a certain 
+\begin_inset Quotes eld
+\end_inset
+
+mode
+\begin_inset Quotes erd
+\end_inset
+
+ within the global graph.
+\end_layout
+
+\begin_layout Standard
+One way of visualizing this global graph is as a stack of sheets of paper,
+ with one sentence written on each sheet.
+ In biology, one might write down specific pathways or interaction networks
+ on the individual sheets.
  The papers are stacked in such a way that words that are the same are always
  vertically above one-another.
  This 
@@ -3753,7 +3795,9 @@ section
 
 \begin_layout Standard
 Sections can be cut down, or they can be enlarged, yet each section must
- consist of a grammatically-correct sentence, phrase (or paragraph, or larger!).
+ consist of a grammatically-correct sentence, phrase (or paragraph, or larger!
+ ...
+ or smaller, just a sentence fragment).
  The base space consists simply of the individual words in the language,
  each word being a vertex, connections between words being projections of
  the connections discovered from the N-grams, or dependency graphs, as the
