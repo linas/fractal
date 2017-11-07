@@ -2991,7 +2991,7 @@ Consider a large graph, constructed from a large corpus of English language
 \begin_inset Quotes eld
 \end_inset
 
-there's a fly on your nose
+A big fly landed on his nose
 \begin_inset Quotes erd
 \end_inset
 
@@ -2999,7 +2999,7 @@ there's a fly on your nose
 \begin_inset Quotes eld
 \end_inset
 
-did you see it fly?
+It will fly home
 \begin_inset Quotes erd
 \end_inset
 
@@ -3012,7 +3012,8 @@ fly
 \begin_inset Quotes erd
 \end_inset
 
- occurs as a noun in one sentence, and a verb in the other.
+ occurs as a noun (the subject, with dterminer and adjective) in one sentence,
+ and a verb (with subject and object) in the other.
  Suppose that the equivalence relation, described in the clustering section,
  also has the power to discern that this one word should really be split
  into two, namely 
@@ -3317,7 +3318,125 @@ Similar concept: skip-grams
 \end_layout
 
 \begin_layout Standard
-The skip-gram
+The N-gram and the more efficient skip-gram
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Guthrie2006"
+
+\end_inset
+
+ models of semantic analysis provide somewhat similar tools for understanding
+ connectivity, and differentiating different forms of connectivity.
+ In a skip-gram model, one might extract two skip-grams from the above example
+ sentences: 
+\begin_inset Quotes eld
+\end_inset
+
+a fly landed
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+it fly home
+\begin_inset Quotes erd
+\end_inset
+
+.
+ A clustering process, such as adagram or word2vec might be used to classify
+ these two strings into distinct clusters, categorizing one with other noun-like
+ words, and the other with verb-like words.
+ 
+\end_layout
+
+\begin_layout Standard
+The N-gram or skip-gram technique works only for linear, sequenced data,
+ which is sufficient for natural language, but cannot be employed in a generic
+ non-ordered graphical setting.
+ To make this clear: a seed representation for the above would be: 
+\begin_inset Quotes eld
+\end_inset
+
+fly: a- landed+
+\begin_inset Quotes erd
+\end_inset
+
+ indicating that the word 
+\begin_inset Quotes eld
+\end_inset
+
+a
+\begin_inset Quotes erd
+\end_inset
+
+ (written as the connector 
+\begin_inset Quotes eld
+\end_inset
+
+a-
+\begin_inset Quotes erd
+\end_inset
+
+) comes sequentially before 
+\begin_inset Quotes eld
+\end_inset
+
+fly
+\begin_inset Quotes erd
+\end_inset
+
+, while the word 
+\begin_inset Quotes eld
+\end_inset
+
+landed
+\begin_inset Quotes erd
+\end_inset
+
+ (written as the connector 
+\begin_inset Quotes eld
+\end_inset
+
+landed+
+\begin_inset Quotes erd
+\end_inset
+
+) comes after.
+ The other phrase has the representation 
+\begin_inset Quotes eld
+\end_inset
+
+fly: it- home+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ These two can now be employed in a clustering algorithm, to determine whether
+ they fall into the same, or into different categories.
+ If one treats the skip-grams, and the seeds as merely two different representat
+ions of the same data, then applying the same algorithm to either should
+ give essentially the same results.
+\end_layout
+
+\begin_layout Standard
+The seed representation, however, is superior in two different ways.
+ First, it can be used for non-sequential data.
+ Second, by making clear the relationship between the vertex and its connectors,
+ the connectors can be treated as 
+\begin_inset Quotes eld
+\end_inset
+
+additional data
+\begin_inset Quotes erd
+\end_inset
+
+, tagging the vertex, carrying additional bits of information.
+ That additional information is manifested from the overall graph structure,
+ and is explicit.
+ By contrast, untagged N-grams or untagged skip-grams leave all such structure
+ implicit and hidden.
 \end_layout
 
 \begin_layout Section*
@@ -3956,6 +4075,17 @@ well known
  aimed at the data-mining and machine-learning crowd that this document
  tries to address.
  Additions, corrections and revisions are welcomed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "lang"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
