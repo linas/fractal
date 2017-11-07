@@ -3439,6 +3439,140 @@ additional data
  implicit and hidden.
 \end_layout
 
+\begin_layout Subsection*
+Similar concept: history
+\end_layout
+
+\begin_layout Standard
+A first-principles application of Bayesian models to natural language also
+ explicitly make use of a sequential order, called the 
+\begin_inset Quotes eld
+\end_inset
+
+history
+\begin_inset Quotes erd
+\end_inset
+
+ of a document.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rosen1996"
+
+\end_inset
+
+ That is, the probability of observing the the 
+\begin_inset Formula $n$
+\end_inset
+
+-th word of a sequence is taken to be 
+\begin_inset Formula $P(w_{n}|h)$
+\end_inset
+
+ where 
+\begin_inset Formula $h=w_{n-1},w_{n-2},\cdots,w_{1}$
+\end_inset
+
+ is termed the history.
+ This conception of probability is sharply influenced by the theory of Markov
+ processes and finite-state machines, dating back to the dawn of information
+ theory.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ash1965"
+
+\end_inset
+
+ In a finite-state process model, the future state is predicated only on
+ the current state, and thus the Markov assumption holds.
+ In deciphering such a process, one might not know how the current state
+ is corellated to the output symbol, thus leading to the concept of a Hidden
+ Markov Model (HMM).
+ The concept of 
+\begin_inset Quotes eld
+\end_inset
+
+history
+\begin_inset Quotes erd
+\end_inset
+
+ is well-suited for such analysis.
+ Several issues, however, make this approach impractical for many common
+ problems.
+\end_layout
+
+\begin_layout Standard
+One issue, already noted, is the linearity.
+ One can try to hand-wave away this issue: given a graph of vertices, its
+ sufficient to write the vertexes in some order, any order will do.
+ This obsucres the fact that 
+\begin_inset Formula $n$
+\end_inset
+
+ vertexes have 
+\begin_inset Formula $n!$
+\end_inset
+
+ (
+\begin_inset Formula $n$
+\end_inset
+
+-factorial) possible interactions: a combinatorial explosion, when the actual
+ data graph may have a much much smaller number of interactions between
+ vertexes (aka 
+\begin_inset Quotes eld
+\end_inset
+
+edges
+\begin_inset Quotes erd
+\end_inset
+
+).
+ By encoding the known interactions as edges, a graphical approach avoids
+ such a combinatorial explosion from the outset.
+\end_layout
+
+\begin_layout Standard
+A different stumbling block of the 
+\begin_inset Quotes eld
+\end_inset
+
+history
+\begin_inset Quotes erd
+\end_inset
+
+ approach is that it ignores 
+\begin_inset Quotes eld
+\end_inset
+
+the future
+\begin_inset Quotes erd
+\end_inset
+
+: the fact that the words I might say next have already influenced the choice
+ of the words I've already said.
+ This can be hand-waved away by stating that the history is creating a model
+ of (hidden) mental states, and that this model is anticipating future speech
+ actions.
+ Although this might be philosophically acceptable to some degree, it again
+ forces complexity onto the problem, when the complexity is not needed.
+ If you've already got the document, look at all of it; don't arbitrarily
+ divide it into past and future, and discard the future.
+\end_layout
+
+\begin_layout Standard
+To summarize: graphical structures appear naturally; flattening them into
+ sequences places one at a computational disadvantage, even if the flattening
+ is conceptually 
+\begin_inset Quotes eld
+\end_inset
+
+isomorphic
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section*
 Sheaves
 \end_layout
@@ -4081,7 +4215,7 @@ well known
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "lang"
-options "plain"
+options "naturemagdoi"
 
 \end_inset
 
