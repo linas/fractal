@@ -1624,7 +1624,7 @@ A tensor with three input wires and two output wires
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename tensor.eps
-	width 35col%
+	width 30col%
 
 \end_inset
 
@@ -1842,7 +1842,7 @@ this
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Standard
 \begin_inset space \qquad{}
 \end_inset
 
@@ -1881,10 +1881,6 @@ this: is+;
 \begin_inset Newline newline
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 It may seem strange to conflate the concept of tensors and monoidal categories
  with linguistic analysis, yet this has an rich and old history, breifly
  touched on in the next section.
@@ -2082,7 +2078,7 @@ key "Pentus98"
 \end_layout
 
 \begin_layout Subsection*
-Similar concept: history
+Similar concept: history and Bayesian inference
 \end_layout
 
 \begin_layout Standard
@@ -2139,7 +2135,7 @@ history
 
  is well-suited for such analysis.
  Several issues, however, make this approach impractical for many common
- problems.
+ problems, including natural language.
 \end_layout
 
 \begin_layout Standard
@@ -2178,9 +2174,9 @@ The history of a text as a sequence of words
 \end_layout
 
 \begin_layout Standard
-One issue, already noted, is the linearity.
- One can try to hand-wave away this issue: given a graph of vertices, its
- sufficient to write the vertexes in some order, any order will do.
+One issue, already noted, is the sequential nature of the process.
+ One can try to hand-wave away this issue: given a graph of vertices, it
+ is sufficient to write the vertexes in some order, any order will do.
  This obsucres the fact that 
 \begin_inset Formula $n$
 \end_inset
@@ -2209,6 +2205,354 @@ edges
 \end_layout
 
 \begin_layout Standard
+To put it more bluntly: a sequential history model of genomic and proteomic
+ data is inappropriate.
+ Although base pairs and amino acids come in sequences, the interactions
+ between different genes and proteins are not in any way shap or form sequential.
+ The interactions are happening in parallel, in distinct, different physical
+ locations in a cell.
+ These interactions can be depicted as a graph.
+ Curiously, that graph can resemble the one depicted below, although the
+ depiction is meant to show something different: it is meant to show a history.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A Viterbi parse lattice of Markov chain
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename viterbi.eps
+	width 30page%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above depicts the lattice of a Viterbi parse of a Markov chain.
+ The dashed red line depicts a maximum-liklihood path through the lattice,
+ that is, the most likely history.
+ Viterbi decoding, using an 
+\begin_inset Quotes eld
+\end_inset
+
+error correcting code
+\begin_inset Quotes erd
+\end_inset
+
+, is a process by which the validity of the dashed red path is checked,
+ and failing paths discarded.
+ For natural language, the dashed red path must be a grammatically correct
+ sequence of words.
+ For a radio receiver, the dashed red path must be a sequence of bits that
+ obey some error-correction polynomial; if it doesn't, the next-most-likely
+ path is selected.
+\end_layout
+
+\begin_layout Standard
+Each black line represents a probability 
+\begin_inset Formula $p_{ij}$
+\end_inset
+
+ of moving from state 
+\begin_inset Formula $i$
+\end_inset
+
+ to state 
+\begin_inset Formula $j$
+\end_inset
+
+ at the next time-step.
+ That is, 
+\begin_inset Formula $p_{ij}=P(w_{n}=j|w_{n-1}=i)$
+\end_inset
+
+ is the likelihood of word 
+\begin_inset Formula $j$
+\end_inset
+
+ given word 
+\begin_inset Formula $i$
+\end_inset
+
+ in the immediate past.
+ The probabilities are arranged such that 
+\begin_inset Formula $\sum_{i}p_{ij}=1$
+\end_inset
+
+.
+ This is called a Markov model, because only the most recent state transitions
+ are depicted: there are no edges connecting the nodes more than one time-step
+ apart; there are no edges connecting 
+\begin_inset Formula $w_{n}$
+\end_inset
+
+ to 
+\begin_inset Formula $w_{n-2},$
+\end_inset
+
+ etc.
+ Put differrently, 
+\begin_inset Formula $P(w_{n}|h)=P(w_{n}|w_{n-1})$
+\end_inset
+
+.
+ That is, this depicts the use of 2-grams to predict the current state.
+\end_layout
+
+\begin_layout Standard
+Non-Markov models would have edges connecting nodes furthre in the past.
+ A 
+\begin_inset Formula $n$
+\end_inset
+
+-gram approach to language digs 
+\begin_inset Formula $n$
+\end_inset
+
+ steps into the past.
+ If there are 
+\begin_inset Formula $k$
+\end_inset
+
+ states, and 
+\begin_inset Formula $n$
+\end_inset
+
+ steps into the past, then 
+\begin_inset Formula $k^{n}$
+\end_inset
+
+ edges are required: that is, a rank-
+\begin_inset Formula $n$
+\end_inset
+
+ tensor.
+ Here, 
+\begin_inset Formula $k=4$
+\end_inset
+
+ and 
+\begin_inset Formula $n=2$
+\end_inset
+
+ is depicted; in natural language 
+\begin_inset Formula $k$
+\end_inset
+
+ is the number of words (say, 
+\begin_inset Formula $k=10^{4}$
+\end_inset
+
+ for a common subset of the English language), while 
+\begin_inset Formula $n$
+\end_inset
+
+ is the length of a longer sentence, say 
+\begin_inset Formula $k=12$
+\end_inset
+
+.
+ In this case, the history tensor 
+\begin_inset Formula $P(w_{n}|h)$
+\end_inset
+
+ has 
+\begin_inset Formula $k^{n}=10^{48}=2^{160}$
+\end_inset
+
+ edges.
+ But of course, this is computationally absurd.
+ It is also theoretically absurd: almost all of those edges have zero probabilit
+y.
+ Almost none of the edges are needed; the actual tensor is very very sparse.
+\end_layout
+
+\begin_layout Standard
+The reason for this sparsity becomes apparant from the viewpoint of dependency
+ parsing.
+ So, for example, if 
+\begin_inset Formula $w_{n-3}=this$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{n-2}=is$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{n-1}=an$
+\end_inset
+
+, a dependency parse will tell you that 
+\begin_inset Formula $w_{n}$
+\end_inset
+
+ must be a noun starting with a vowel.
+ It also tells you that, for this particular history, this noun can depend
+ only on 
+\begin_inset Formula $w_{n-2}$
+\end_inset
+
+ and on 
+\begin_inset Formula $w_{n-1}$
+\end_inset
+
+ but not on 
+\begin_inset Formula $w_{n-3}$
+\end_inset
+
+.
+ A collection of depedency parses obtained from a corpus allows you to figure
+ out which edges matter, and which edges do not.
+ 
+\end_layout
+
+\begin_layout Standard
+Dependency parses also give a more holisitic perception of what might be
+ going on in natural language.
+ That is, the notation 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\overline{is}=\left(\overrightarrow{banana}\otimes\overrightarrow{fruit}\right)+\left(\overrightarrow{apple}\otimes\overrightarrow{green}\right)
+\]
+
+\end_inset
+
+and
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family sans
+is: (banana- & fruit+) or (apple- & green+);
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+P\left(w_{n}=fruit|w_{n-1}=is,w_{n-2}=banana\right)+P\left(w_{n}=green|w_{n-1}=is,w_{n-2}=apple\right)
+\]
+
+\end_inset
+
+all represent the same knowledge, the dependency notation appears to be
+ less awkward than the viewing history as some Bayesian probability.
+ The dependency notion focuses attention on a different part of the problem.
+ 
+\end_layout
+
+\begin_layout Standard
+Another popular way to at least partly deal with the sparsity of the history
+ tensor 
+\begin_inset Formula $P(w_{n}|h)$
+\end_inset
+
+ is to use skip-grams.
+ The idea recognizes that many of the edges of an 
+\begin_inset Formula $n$
+\end_inset
+
+-gram will be zero, and so these edges can be skipped.
+ This is not a bad approach, except that it is 
+\begin_inset Quotes eld
+\end_inset
+
+simply typed
+\begin_inset Quotes erd
+\end_inset
+
+: it does not leverage the possibility that different words might have different
+ types (verb, noun, ...) and that this typing information delivers further
+ constraints on the structure of the skip-gram.
+ That is, the notion of subj-verb-obj not only tells you that your skip-gram
+ is effectively a 3-gram, but also that the first and third words belong
+ to a class called 
+\begin_inset Quotes eld
+\end_inset
+
+noun
+\begin_inset Quotes erd
+\end_inset
+
+, and the middle is a transitive verb.
+ This sharply prunes the number of possibilities *before* the learning algorithm
+ is launched, instead of during or after.
+ The fact that such pruning is even possible is obscured by the notation
+ and language of 
+\begin_inset Formula $n$
+\end_inset
+
+-grams and the history 
+\begin_inset Formula $P(w_{n}|h)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
 A different stumbling block of the 
 \begin_inset Quotes eld
 \end_inset
@@ -2225,21 +2569,28 @@ the future
 \begin_inset Quotes erd
 \end_inset
 
-: the fact that the words I might say next have already influenced the choice
- of the words I've already said.
+: the fact that the words might be said next have already influenced the
+ choice of the words already spoken.
  This can be hand-waved away by stating that the history is creating a model
  of (hidden) mental states, and that this model already incorporates those,
  and thus is anticipating future speech actions.
  Although this might be philosophically acceptable to some degree, it again
  forces complexity onto the problem, when the complexity is not needed.
- If you've already got the document, look at all of it; don't arbitrarily
- divide it into past and future, and discard the future.
+ If you've already got the document, look at all of it; go all the way to
+ the end of the sentence.
+ Don't arbitrarily divide it into past and future, and discard the future.
 \end_layout
 
 \begin_layout Standard
-To summarize: graphical structures appear naturally; flattening them into
- sequences places one at a computational disadvantage, even if the flattening
- is conceptually isomorphic to the original problem.
+To summarize: dependency structures appear naturally; flattening them into
+ sequences places one at a notional, computational and conceptual disadvantage,
+ even if the flattening is conceptually isomorphic to the original problem.
+ The tensor 
+\begin_inset Formula $P(w_{n}|h)$
+\end_inset
+
+ may indeed encode all possible knowledge about the text in a rigorously
+ Bayesian fashion; but its unweildy.
 \end_layout
 
 \begin_layout Section*
