@@ -1027,27 +1027,6 @@ Given two seeds, one can always either join them (because they connect)
 \end_layout
 
 \begin_layout Itemize
-Readers familiar with Link Grammar
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Sleator1991"
-
-\end_inset
-
- should have recognized seeds as being more or less the same thing as 
-\begin_inset Quotes eld
-\end_inset
-
-disjuncts
-\begin_inset Quotes erd
-\end_inset
-
- in Link Grammar.
- However, Link Grammar disjuncts are a bit more complicated than seeds;
- this is the topic of the next section.
-\end_layout
-
-\begin_layout Itemize
 In certain ways, the connectors on a seed look like the uncontracted indexes
  on a tensor.
  That is, a seed with 
@@ -1080,6 +1059,295 @@ If we stop here, not much is accomplished, other than to define a somewhat
  But that is not the case; the concept of seeds and sections are needed
  to pursue more complex constructions.
  They provide a tool to study natural language and other systems.
+\end_layout
+
+\begin_layout Subsection*
+Similar concept: Link Grammar
+\end_layout
+
+\begin_layout Standard
+Readers familiar with Link Grammar
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sleator1991,Sleator1993"
+
+\end_inset
+
+ should have recognized seeds as being more or less the same thing as 
+\begin_inset Quotes eld
+\end_inset
+
+disjuncts
+\begin_inset Quotes erd
+\end_inset
+
+ in Link Grammar.
+ The formal defintion for Link Grammar disjuncts are a bit more complicated
+ than seeds, and is expanded on in later sections.
+ To lay that groundwork, however, consider an unlabelled dependency parse
+ for the sentence 
+\begin_inset Quotes eld
+\end_inset
+
+this is an example
+\begin_inset Quotes erd
+\end_inset
+
+, shown in the figure below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A dependency parse decomposed into four seeds
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename example.eps
+	width 85col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The depdency parse is shown as a graph, with four vertexes.
+ Below, the parse is decomposed into the component seeds; as always, the
+ open dots are connectors, the closed dots are the germs.
+ Using the notation 
+\begin_inset Formula $\left(v,E_{v}\right)$
+\end_inset
+
+ for a seed, where 
+\begin_inset Formula $E_{v}=\left\{ \left(v,v_{a}\right),\left(v,v_{b}\right),\cdots\right\} $
+\end_inset
+
+, these seeds can be textually written as
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family sans
+this: {(this, is+)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+is: {(is, this-), (is, ex
+\family typewriter
+ample+)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+an: {(an, example+)}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+example: {(example, is-), (exam
+\family sans
+ple, an-)}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ which is a bit awkward and hard to read.
+ A simple notation conveying the same idea is
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family sans
+this: is+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+is: this- & example+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+an: example+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+example: an- & is-;
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+In both textual representations, the pluses and minuses are used to indicate
+ word-order: minuses to the left, pluses to the right.
+ This is an additional decoration added to the connectors, needed to indicate
+ and preserve word-order, but not a part of the core definition of a seed.
+\end_layout
+
+\begin_layout Standard
+In Link Grammar, the objects to the right of the colon are called 
+\begin_inset Quotes eld
+\end_inset
+
+disjuncts
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The name comes from the idea that they disjoin colocational extractions.
+ After observing a large corpus, one might find that
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family sans
+is: (this- & example+) or (banana- & fruit+) or (apple- & green+) or ...;
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+which indicates that sentences such as 
+\begin_inset Quotes eld
+\end_inset
+
+a banana is a kind of fruit
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+this apple is green
+\begin_inset Quotes erd
+\end_inset
+
+ were observed and parsed into (unlabelled) dependencies.
 \end_layout
 
 \begin_layout Subsection*
@@ -2841,7 +3109,7 @@ separation "3pt"
 shadowsize "4pt"
 framecolor "black"
 backgroundcolor "none"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
