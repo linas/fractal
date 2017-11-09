@@ -99,7 +99,7 @@ Linas Vepštas
 \end_layout
 
 \begin_layout Date
-7 November 2017
+9 November 2017
 \end_layout
 
 \begin_layout Abstract
@@ -1182,23 +1182,19 @@ this: {(this, is+)}
 \begin_layout Plain Layout
 
 \family sans
-is: {(is, this-), (is, ex
-\family typewriter
-ample+)}
+is: {(is, this-), (is, example+)}
 \end_layout
 
 \begin_layout Plain Layout
 
-\family typewriter
+\family sans
 an: {(an, example+)}
 \end_layout
 
 \begin_layout Plain Layout
 
-\family typewriter
-example: {(example, is-), (exam
 \family sans
-ple, an-)}
+example: {(example, is-), (example, an-)}
 \end_layout
 
 \end_inset
@@ -1207,8 +1203,12 @@ ple, an-)}
 \begin_inset Newline newline
 \end_inset
 
- which is a bit awkward and hard to read.
- A simple notation conveying the same idea is
+
+\begin_inset Newline newline
+\end_inset
+
+The above vertex: edge-list notation is a bit awkward and hard to read.
+ A simpler notation conveying the same idea is
 \begin_inset Newline newline
 \end_inset
 
@@ -1276,6 +1276,8 @@ In both textual representations, the pluses and minuses are used to indicate
  word-order: minuses to the left, pluses to the right.
  This is an additional decoration added to the connectors, needed to indicate
  and preserve word-order, but not a part of the core definition of a seed.
+ The ampersand is not symmetric, but enforces order; this is not apparent
+ here, but is required for the proper definition.
 \end_layout
 
 \begin_layout Standard
@@ -1290,6 +1292,10 @@ disjuncts
 .
  The name comes from the idea that they disjoin colocational extractions.
  After observing a large corpus, one might find that
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1318,7 +1324,7 @@ status open
 \begin_layout Plain Layout
 
 \family sans
-is: (this- & example+) or (banana- & fruit+) or (apple- & green+) or ...;
+is: (this- & example+) or (banana- & fruit+) or (apple- & green+);
 \end_layout
 
 \end_inset
@@ -1465,6 +1471,43 @@ to
 \end_inset
 
  into a phrase.
+ That is, 
+\begin_inset Formula $\lambda y\lambda x.\mbox{is\_next\_to}(x,y)$
+\end_inset
+
+ is an example of a connected section, having 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ as the externally exposed connectors and the internal links between 
+\begin_inset Quotes eld
+\end_inset
+
+next
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+is
+\begin_inset Quotes erd
+\end_inset
+
+, and 
+\begin_inset Quotes eld
+\end_inset
+
+to
+\begin_inset Quotes erd
+\end_inset
+
+ hidden.
 \end_layout
 
 \begin_layout Standard
@@ -1562,6 +1605,14 @@ connecting
 \end_layout
 
 \begin_layout Subsection*
+Similar concept: tensor algebra
+\end_layout
+
+\begin_layout Standard
+the
+\end_layout
+
+\begin_layout Subsection*
 Similar concept: history
 \end_layout
 
@@ -1620,6 +1671,41 @@ history
  is well-suited for such analysis.
  Several issues, however, make this approach impractical for many common
  problems.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The history of a text as a sequence of words
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename history.eps
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
