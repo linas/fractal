@@ -1112,13 +1112,95 @@ lus notation.
 .
  This notation has been used to express the concept of a seed, as described
  above.
+ For example, Poon and Domingos
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Poon2009"
 
 \end_inset
 
- The problem with this notation is that, properly speaking, lambda calculus
+ write 
+\begin_inset Formula $\lambda y\lambda x.\mbox{borders}(x,y)$
+\end_inset
+
+ to represent the attachments of the word 
+\begin_inset Quotes eld
+\end_inset
+
+borders
+\begin_inset Quotes erd
+\end_inset
+
+ as a synonym for 
+\begin_inset Quotes eld
+\end_inset
+
+is next to
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This is illustrated with the verb-phrase 
+\begin_inset Formula $\lambda y\lambda x.\mbox{borders}(x,y)(\mbox{Idaho})$
+\end_inset
+
+ which beta-reduces to the verb-phrase 
+\begin_inset Formula $\lambda x.\mbox{borders}(x,\mbox{Idaho})$
+\end_inset
+
+ to indicate that 
+\begin_inset Formula $x$
+\end_inset
+
+ is next to Idaho.
+ The utility of this device becomes apparant because one can use this same
+ notation to write 
+\begin_inset Formula $\lambda y\lambda x.\mbox{is\_next\_to}(x,y)$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda y\lambda x.\mbox{shares\_a\_border\_with}(x,y)$
+\end_inset
+
+ as synonymous phrases.
+ The lambda notation allows 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ to be exposed as connectors, while at the same time hiding the links that
+ were required to assemble seeds for 
+\begin_inset Quotes eld
+\end_inset
+
+next
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+is
+\begin_inset Quotes erd
+\end_inset
+
+, and 
+\begin_inset Quotes eld
+\end_inset
+
+to
+\begin_inset Quotes erd
+\end_inset
+
+ into a phrase.
+\end_layout
+
+\begin_layout Standard
+The problem with this notation is that, properly speaking, lambda calculus
  is a system for generating and working with strings, not with graphs, and
  lambdas are designed to perform substitution (beta-reduction), and not
  for connecting things.
