@@ -4320,7 +4320,7 @@ y or the mutual information for a pair of words.
 \end_layout
 
 \begin_layout Standard
-By contrast, storing the individual parses for 10 million sentences is mor
+By contrast, storing the individual parses for 10 million sentences is more
  challenging.
  Assuming 15 words per sentence, this requires storing 150M vertexes, and
  approximately 20 links per sentence for 200M edges.
@@ -4329,6 +4329,43 @@ By contrast, storing the individual parses for 10 million sentences is mor
  as possible.
  They can be envisioned to still be there, virtually, in principle, but
  the actual storage can be avoided.
+\end_layout
+
+\begin_layout Standard
+Every graph can be represented as an adjacency matrix.
+ In this example, it would be a sparse matrix, with 5 million non-zero entries
+ out of 130K
+\begin_inset Formula $\times$
+\end_inset
+
+130K total.
+ The marginals stored with the graph can be accessed as marginals in the
+ normal sense of values written in the margin of the matrix.
+ Standard linear-algebra tools, such as the R programming language, can
+ access the matrix and the marginals.
+\end_layout
+
+\begin_layout Subsection*
+Visualizing Sheaves
+\end_layout
+
+\begin_layout Standard
+One way of visualizing the sheaf is as a stack of sheets of paper, with
+ one sentence written on each sheet.
+ The papers are stacked in such a way that words that are the same are always
+ vertically above one-another.
+ This stacking is where the term 
+\begin_inset Quotes eld
+\end_inset
+
+sheaf
+\begin_inset Quotes erd
+\end_inset
+
+ comes from.
+ Each single sheet of paper is a section.
+ Each colocation is a stalk.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4372,39 +4409,6 @@ A Sheaf of Stalks; a Sheaf of Paper
 \end_layout
 
 \begin_layout Standard
-Every graph can be represented as an adjacency matrix.
- In this example, it would be a sparse matrix, with 5 million non-zero entries
- out of 130K
-\begin_inset Formula $\times$
-\end_inset
-
-130K total.
- The marginals stored with the graph can be accessed as marginals in the
- normal sense of values written in the margin of the matrix.
- Standard linear-algebra tools, such as the R programming language, can
- access the matrix and the marginals.
-\end_layout
-
-\begin_layout Standard
-One way of visualizing the sheaf is as a stack of sheets of paper, with
- one sentence written on each sheet.
- The papers are stacked in such a way that words that are the same are always
- vertically above one-another.
- This stacking is where the term 
-\begin_inset Quotes eld
-\end_inset
-
-sheaf
-\begin_inset Quotes erd
-\end_inset
-
- comes from.
- Each single sheet of paper is a section.
- Each colocation is a stalk.
- 
-\end_layout
-
-\begin_layout Standard
 A different example can be taken from biochemistry.
  There, one might want to write down specific pathways or interaction networks
  on the individual sheets of paper, treating them as sections.
@@ -4432,7 +4436,57 @@ The sheaf, it's decomposition into sections, and it's projection down to
 \end_layout
 
 \begin_layout Subsection*
+Projections with Stalks
+\end_layout
+
+\begin_layout Standard
+The
+\end_layout
+
+\begin_layout Subsection*
 Gluing Axioms
+\end_layout
+
+\begin_layout Standard
+The gluing axioms are used to ensure that sections and stalks can be assembled
+ in a fashion that is consistent with the description and examples given
+ above.
+ They are technical requirements imposed on the structure, to make sure
+ its assembled in a coherent fashion.
+ In practical applications, using 
+\begin_inset Quotes eld
+\end_inset
+
+common sense
+\begin_inset Quotes erd
+\end_inset
+
+, they are unlikely to be violated, but formally, it is important to state
+ them.
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+a way that 
+\begin_inset Quotes eld
+\end_inset
+
+makes sen
 \end_layout
 
 \begin_layout Standard
