@@ -3697,12 +3697,13 @@ The above defintions, along with the projection function, indicate that
  defined in covering spaces and fiber bundles.
 \begin_inset Wrap figure
 lines 0
-placement R
+placement r
 overhang 0in
-width "20col%"
+width "52text%"
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3715,6 +3716,7 @@ Corn
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename cornstalk.jpg
 	width 35text%
@@ -4090,22 +4092,10 @@ fly
 
 , one above another.
  Each phrase or section can be visualized as a botanical branch or botanical
- leaf branching off the central stalk.
-\end_layout
-
-\begin_layout Standard
-Alternately, the phrases can be parsed with a dependency parser of one style
- or another, in which case the words are joined with (directed) edges that
- denote dependencies.
- Parsing with a head-phrase parser introduces additional vertexes, typically
- called NP, VP, S and so on.
- 
-\end_layout
-
-\begin_layout Standard
-The resulting graphical structure is shown in the two figures below.
- The first figure shows alignment based on N-grams, where the phrases are
- taken as linear sequences of words, without any structure.
+ leaf branching off the central stalk.The projection of the stalk is shown
+ below.
+ The words in each phrase ar connected as a linear sequence.
+ Idential words are projected down to a common base point.
 \end_layout
 
 \begin_layout Standard
@@ -4143,8 +4133,13 @@ N-gram corpus text alignment
 \end_layout
 
 \begin_layout Standard
-The next figure shows alignment that results from an (unlabeled, undirected)
- dependency parse of the text.
+The sections do not have to be linear sequences; the phrases can be parsed
+ with a dependency parser of one style or another, in which case the words
+ are joined with (directed) edges that denote dependencies.
+ Parsing with a head-phrase parser introduces additional vertexes, typically
+ called NP, VP, S and so on.
+ The next figure shows the projection that results from alignment on an
+ (unlabeled, undirected) dependency parse of the text.
  Most noticeable is that the determiner 
 \begin_inset Quotes eld
 \end_inset
@@ -4219,54 +4214,114 @@ Dependency parse corpus text alignment
 \end_layout
 
 \begin_layout Standard
-Both of these figures represent a graph that results from a corpus alignment,
- where all uses of a word have been collapsed (projected down) to a single
- node.
+Both of these figures represent a quotient graph that results from a corpus
+ alignment, where all uses of a word have been collapsed (projected down)
+ to a single node.
  The resulting graph is the graph of the language.
  
 \end_layout
 
-\begin_layout Standard
-A collapsed graph like that might appear strange; why would one want to
- do that, if one has individual sentence data? The answer is that by collapsing
- in this way, one can accumulate statistics for large collections of sentences:
- one can find out which links are frequenctly seen, and which are rare.
- One can capture the affinity for pairs of words, by computing the mutual
- information between them.
- Through this kind of averaging, a global overvioew emerges.
- The local structure can be recaptured by extracting seeds from individual
- sentences, and then re-assembling these seeds into stalks, in a polymorphic
- fashion.
+\begin_layout Subsection*
+Are projections useful?
 \end_layout
 
 \begin_layout Standard
-In some domains, one might not have specific sentences as sequences of words,
- but one might be able to observe specific activation networks.
- For example, in biology, if one specific gene is up-regulated, one can
- then try to view everything else that changed as a 
-\begin_inset Quotes eld
-\end_inset
-
-sentence
-\begin_inset Quotes erd
-\end_inset
-
-, a certain 
-\begin_inset Quotes eld
-\end_inset
-
-mode
-\begin_inset Quotes erd
-\end_inset
-
- within the global graph.
+Yes.
+ A collapsed graph like that might appear strange; why would one want to
+ do that, if one has individual sentence data? 
 \end_layout
 
 \begin_layout Standard
-One way of visualizing this global graph is as a stack of sheets of paper,
- with one sentence written on each sheet.
- In biology, one might write down specific pathways or interaction networks
- on the individual sheets.
+By collapsing in this way, one obtains a natural place to store 
+\begin_inset CommandInset href
+LatexCommand href
+name "marginal distributions"
+target "https://en.wikipedia.org/wiki/Marginal_distribution"
+
+\end_inset
+
+.
+ For example, when accumulating statistics for large collections of sentences,
+ the projected vertex becomes an ideal place to store the frequency count
+ of that word; the edge becomes an excellent place to store the joint probabilit
+y or the mutual information for a pair of words.
+ The projected graph - the quotient graph, is manageable in size.
+ For example, in a corpus consisting of ten million sentences, one might
+ see 130K distinct, unique words (130K vertexes) and perhaps 5 million distinct
+ word-pairs (5M edges).
+ Such a graph is managable, and can fit into the RAM of a contemporary computer.
+ 
+\end_layout
+
+\begin_layout Standard
+By contrast, storing the individual parses for 10 million sentences is mor
+ challenging.
+ Assuming 15 words per sentence, this requires storing 150M vertexes, and
+ approximately 20 links per sentence for 200M edges.
+ This graph is two orders of magnitude larger than the quotient graph.
+ It makes sense to collapse the stalks down to their projections as soon
+ as possible.
+ They can be envisioned to still be there, virtually, in principle, but
+ the actual storage can be avoided.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A Sheaf of Stalks; a Sheaf of Paper
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename sheaf-of-stalks.jpg
+	width 35col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename sheaf-of-papers.jpg
+	width 51col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Every graph can be represented as an adjacency matrix.
+ In this example, it would be a sparse matrix, with 5 million non-zero entries
+ out of 130K
+\begin_inset Formula $\times$
+\end_inset
+
+130K total.
+ The marginals stored with the graph can be accessed as marginals in the
+ normal sense of values written in the margin of the matrix.
+ Standard linear-algebra tools, such as the R programming language, can
+ access the matrix and the marginals.
+\end_layout
+
+\begin_layout Standard
+One way of visualizing the sheaf is as a stack of sheets of paper, with
+ one sentence written on each sheet.
  The papers are stacked in such a way that words that are the same are always
  vertically above one-another.
  This 
@@ -4296,6 +4351,38 @@ section
 
 .
  
+\end_layout
+
+\begin_layout Standard
+The
+\end_layout
+
+\begin_layout Standard
+GraphsIn biology, one might write down specific pathways or interaction
+ networks on the individual sheets.
+\end_layout
+
+\begin_layout Standard
+In some domains, one might not have specific sentences as sequences of words,
+ but one might be able to observe specific activation networks.
+ For example, in biology, if one specific gene is up-regulated, one can
+ then try to view everything else that changed as a 
+\begin_inset Quotes eld
+\end_inset
+
+sentence
+\begin_inset Quotes erd
+\end_inset
+
+, a certain 
+\begin_inset Quotes eld
+\end_inset
+
+mode
+\begin_inset Quotes erd
+\end_inset
+
+ within the global graph.
 \end_layout
 
 \begin_layout Standard
@@ -4421,7 +4508,7 @@ Why clustering?
 \end_layout
 
 \begin_layout Standard
-foox
+foo
 \end_layout
 
 \begin_layout Standard
@@ -4429,7 +4516,11 @@ x
 \end_layout
 
 \begin_layout Standard
-xBy contrast, the goal here is not just to talk about a graph 
+x
+\end_layout
+
+\begin_layout Standard
+By contrast, the goal here is not just to talk about a graph 
 \begin_inset Formula $G$
 \end_inset
 
@@ -6243,10 +6334,6 @@ semantic information
 
 , identifying different types or kinds, rather than as purely syntactic
  information about arrangments and relationships.
-\end_layout
-
-\begin_layout Section*
-Sheaves
 \end_layout
 
 \begin_layout Section*
