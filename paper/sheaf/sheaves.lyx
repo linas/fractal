@@ -607,7 +607,7 @@ A seed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename seed.eps
-	width 30col%
+	width 25col%
 
 \end_inset
 
@@ -749,7 +749,7 @@ Two linked (connected) seeds
 
 \begin_inset Graphics
 	filename seeds-two.eps
-	width 45col%
+	width 35col%
 
 \end_inset
 
@@ -836,7 +836,7 @@ A connected section
 
 \begin_inset Graphics
 	filename hedgehog.eps
-	width 30col%
+	width 25col%
 
 \end_inset
 
@@ -890,8 +890,11 @@ This motivates a different way of looking at seeds: they can be visualized
  as jigsaw puzzle pieces, where any given tab on one jigsaw piece can fit
  into one and only one slot on another jigsaw piece.
  This union of a tab+slot is the link.
+ Connectors must be of the same type in order to be connectable.
  The types of the connectors will later be seen to be the same thing as
- the types of type theory; that is, they are bona-fide types.
+ the types of type theory; that is, they are bona-fide types, in the proper
+ sense of the word.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1186,6 +1189,10 @@ example: {(example, is-), (example, an-)}
 \begin_inset Newline newline
 \end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
 The above vertex: edge-list notation is a bit awkward and hard to read.
  A simpler notation conveying the same idea is
 \begin_inset Newline newline
@@ -1241,6 +1248,10 @@ an: example+;
 example: an- & is-;
 \end_layout
 
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -2157,7 +2168,7 @@ The history of a text as a sequence of words
 
 \begin_inset Graphics
 	filename history.eps
-	width 50col%
+	width 40col%
 
 \end_inset
 
@@ -2238,7 +2249,7 @@ A Viterbi parse lattice of Markov chain
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename viterbi.eps
-	width 30page%
+	width 20page%
 
 \end_inset
 
@@ -2649,20 +2660,8 @@ equivalence relation
 .
 \end_layout
 
-\begin_layout Standard
-If one has an equivalence relation, then the obvious desire, the obvious
- urge is to attempt to perform quotienting on the graph.
- That is, to create a new graph, where the 
-\begin_inset Quotes eld
-\end_inset
-
-equal
-\begin_inset Quotes erd
-\end_inset
-
- parts are merged into one.
- The rest of this document describes how this can be done, and what sort
- of notation to use to do this.
+\begin_layout Subsection*
+Example of similarity
 \end_layout
 
 \begin_layout Standard
@@ -2701,6 +2700,164 @@ similar enough
 \end_layout
 
 \begin_layout Standard
+To make this even more concrete, consider this example from linguistics.
+ Suppose, given a corpus, one has observed three sentences: 
+\begin_inset Quotes eld
+\end_inset
+
+Mary walked home
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+Mary ran home
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+Mary drove home
+\begin_inset Quotes erd
+\end_inset
+
+.
+ A dependency parse provides three seeds: 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family sans
+walked: Mary- & home+; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+ran: Mary- & home+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+drove: Mary- & home+;
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+which seem to be begging for an equivalence relation that will reduce these
+ to 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family sans
+walked ran drove: Mary- & home+; 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Using a tensorial notation, once starts with
+\begin_inset Formula 
+\[
+\overrightarrow{Mary}\otimes\overline{walked}\otimes\overrightarrow{home}+\overrightarrow{Mary}\otimes\overline{ran}\otimes\overrightarrow{home}+\overrightarrow{Mary}\otimes\overline{drove}\otimes\overrightarrow{home}
+\]
+
+\end_inset
+
+and applies the equivalence relation to obtain
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\overrightarrow{Mary}\otimes\left(\overline{walked}+\overline{ran}+\overline{drove}\right)\otimes\overrightarrow{home}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is illustrated pictorially, below.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement h
 wide false
@@ -2719,15 +2876,22 @@ Creating a quotient graph
 
 \begin_inset Graphics
 	filename similar.eps
-	width 60col%
+	width 55col%
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
-The vertexes 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It need not be the case that an equivalence relation is staring us in the
+ face, yet here, it is.
+ The vertexes 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2751,9 +2915,9 @@ drove
 \begin_inset Quotes erd
 \end_inset
 
- can be considered similar, because they have the same neighbors.
+ can be considered similar, precisely because they have the same neighbors.
  The upper graph can be simplified by computing a quotient, shown in the
- lower diagram: the quotient merges these three similar vertexes into one.
+ lower part: the quotient merges these three similar vertexes into one.
  The result is not only a simpler graph, but also some vague sense that
  
 \begin_inset Quotes eld
@@ -2782,21 +2946,24 @@ drove
  are synonymous in some way.
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
+\begin_layout Subsection*
+Quotienting
 \end_layout
 
+\begin_layout Standard
+If one has an equivalence relation, then the obvious desire, the obvious
+ urge is to attempt to perform quotienting on the graph.
+ That is, to create a new graph, where the 
+\begin_inset Quotes eld
 \end_inset
 
+equal
+\begin_inset Quotes erd
+\end_inset
 
+ parts are merged into one.
+ The rest of this document describes how this can be done, and what sort
+ of notation to use to do this.
 \end_layout
 
 \begin_layout Standard
