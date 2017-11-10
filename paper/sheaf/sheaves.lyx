@@ -1044,6 +1044,68 @@ If we stop here, not much is accomplished, other than to define a somewhat
 \end_layout
 
 \begin_layout Subsection*
+Example: Biochemical reaction type
+\end_layout
+
+\begin_layout Standard
+An example of a seed applied to the biochemical domain would be the phosphorylat
+ion of ADP to ATP, shown in the figure below.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename phosphorylation.svg
+	lyxscale 50
+	width 35col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The germ of the seed is the point where the semi-circle kisses the line:
+ not labelled here, the germ would be succinate-CoA ligase.
+ The connectors are labelled with thier types, and the arrows provide directiona
+lity.
+ The connector types clearly indicate what can be linked to what: this particula
+r seed, when linked, 
+\emph on
+must
+\emph default
+ link to a source of ADP, or a source of phosphate, or a sink if ATP or
+ a sink of hydroxyls, if it is to be validly linked into any part of a connected
+ section.
+\end_layout
+
+\begin_layout Standard
+An example of a connected section would be the Krebs cycle, taken as a whole:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename krebs.svg
+	lyxscale 30
+	width 55col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each distinct reaction constitutes a seed; the heavy lines forming the cycle
+ are the links internal to the section, and each tangent arrow is a pair
+ of connectors, with one end of the arrow being an unconnected reaction
+ input, and the other end of the arrow an unconnected reaction product.
+ Thus, for example, connector types include NAD, NADH, water and ATP, among
+ others.
+ These connectors are free to be attached to other seeds or sections.
+\end_layout
+
+\begin_layout Subsection*
 Similar concept: Link Grammar
 \end_layout
 
@@ -4222,7 +4284,7 @@ Both of these figures represent a quotient graph that results from a corpus
 \end_layout
 
 \begin_layout Subsection*
-Are projections useful?
+Why sheaves? Are projections useful?
 \end_layout
 
 \begin_layout Standard
@@ -4324,15 +4386,7 @@ One way of visualizing the sheaf is as a stack of sheets of paper, with
  one sentence written on each sheet.
  The papers are stacked in such a way that words that are the same are always
  vertically above one-another.
- This 
-\begin_inset Quotes eld
-\end_inset
-
-stacking
-\begin_inset Quotes erd
-\end_inset
-
- is where the term 
+ This stacking is where the term 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4341,48 +4395,40 @@ sheaf
 \end_inset
 
  comes from.
- Each single sheet of paper is a 
-\begin_inset Quotes eld
-\end_inset
-
-section
-\begin_inset Quotes erd
-\end_inset
-
-.
+ Each single sheet of paper is a section.
+ Each colocation is a stalk.
  
 \end_layout
 
 \begin_layout Standard
-The
+A different example can be taken from biochemistry.
+ There, one might want to write down specific pathways or interaction networks
+ on the individual sheets of paper, treating them as sections.
+ If one specific gene is up-regulated, one can then try to view everything
+ else that changed as belonging to the same section, as if it were an activation
+ mode within the global network graph of all possible interactions.
+ Thus, for example, the Krebs cycle can be taken to be a single section
+ through the network: it shows exactly which coenzymes are active in aerobic
+ metabolism.
+ The same subtstrates, products and enzymes may also participate in other
+ pathways; those other pathways should be considered as other sections through
+ the sheaf.
+ Each substrate, enzyme or product is itself a stalk.
+ Each reaction type is a seed.
 \end_layout
 
 \begin_layout Standard
-GraphsIn biology, one might write down specific pathways or interaction
- networks on the individual sheets.
+The sheaf, it's decomposition into sections, and it's projection down to
+ a single base unified network, provides a holistic view of a network of
+ interactions.
+ Activations or modes of the network correspond to grammatically valid sentences
+, when the network is a language network.
+ Sections correspond to activated biological pathways, when the network
+ is a map of biochemical interactions.
 \end_layout
 
-\begin_layout Standard
-In some domains, one might not have specific sentences as sequences of words,
- but one might be able to observe specific activation networks.
- For example, in biology, if one specific gene is up-regulated, one can
- then try to view everything else that changed as a 
-\begin_inset Quotes eld
-\end_inset
-
-sentence
-\begin_inset Quotes erd
-\end_inset
-
-, a certain 
-\begin_inset Quotes eld
-\end_inset
-
-mode
-\begin_inset Quotes erd
-\end_inset
-
- within the global graph.
+\begin_layout Subsection*
+Gluing Axioms
 \end_layout
 
 \begin_layout Standard
