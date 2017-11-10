@@ -3042,6 +3042,15 @@ target "https://en.wikipedia.org/wiki/Quotient"
 \end_inset
 
 .
+ Modulo arithmetic resembles division, ergo the term 
+\begin_inset Quotes eld
+\end_inset
+
+quotient
+\begin_inset Quotes erd
+\end_inset
+
+.
  
 \end_layout
 
@@ -3076,32 +3085,87 @@ Given a set
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-A common goal of quotieenting is to preserve the algebraic relations...
-\end_layout
-
-\begin_layout Standard
-The rest of this document describes how this can be done, and what sort
- of notation to use to do this.
-\end_layout
-
-\begin_layout Standard
-In graph theory, there is a notion of quotienting, but it is not quite the
- same as what will be defined shortly.
- In graph theory, when working with quotients, one will typically consider
- a graph 
-\begin_inset Formula $G$
+ In general, one looks for, and works with equivalence relations that preserve
+ desirable algebraic properties of the set, while removing undesirable or
+ pointless distinctions.
+ In the modulo arithmetic example, addition is preserved: it is well defined,
+ and works as expected.
+ In the linguistic example, the subj-verb-obj structure of the sentence
+ is preserved; the quotienting removes the 
+\begin_inset Quotes eld
 \end_inset
 
- relative to some subgraph 
-\begin_inset Formula $A\subset G$
+pointless
+\begin_inset Quotes erd
+\end_inset
+
+ distinction between different verbs.
+\end_layout
+
+\begin_layout Standard
+Quotienting is often described in terms of homomorphisms, functions 
+\begin_inset Formula $f:S\to Q$
+\end_inset
+
+ that preserve the algebraic operations on 
+\begin_inset Formula $S$
 \end_inset
 
 .
- One effectively 
+ For example, if 
+\begin_inset Formula $m:S\times S\times S\to S$
+\end_inset
+
+ is a three-argument endomorphism on 
+\begin_inset Formula $S$
+\end_inset
+
+, one expects that 
+\begin_inset Formula $f$
+\end_inset
+
+ preserves it: that 
+\begin_inset Formula $f\left(m\left(a,b,c\right)\right)=m\left(f\left(a\right),f\left(b\right),f\left(c\right)\right)$
+\end_inset
+
+.
+ For the previous example, if 
+\begin_inset Formula $m$
+\end_inset
+
+ was used to provide or identify a subj-verb-obj relationship, then, after
+ quotienting, one expects that 
+\begin_inset Formula $m$
+\end_inset
+
+ can still identify the verb-slot correctly.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Graph quotients
+\end_layout
+
+\begin_layout Standard
+In graph theory, the notion of quotienting is often referred to as working
+ 
+\begin_inset Quotes eld
+\end_inset
+
+relative to a subgraph
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Given a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ and a subgraph 
+\begin_inset Formula $A\subset G$
+\end_inset
+
+, one 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3109,7 +3173,7 @@ draws a dotted line
 \begin_inset Quotes erd
 \end_inset
 
- or places a balloon around the vertexes in 
+ or places a balloon around the vertexes and edges in 
 \begin_inset Formula $A$
 \end_inset
 
@@ -3126,29 +3190,12 @@ draws a dotted line
 \begin_inset Formula $A$
 \end_inset
 
- is then typically ignored, discarded; not out of spite, but because that
- is the nature of an equivalence relation: it states that all elements of
- 
+ is then ignored.
+ The equivalence relation makes all elements of 
 \begin_inset Formula $A$
 \end_inset
 
- are 
-\begin_inset Quotes eld
-\end_inset
-
-equal
-\begin_inset Quotes erd
-\end_inset
-
-, are 
-\begin_inset Quotes eld
-\end_inset
-
-equivalent
-\begin_inset Quotes erd
-\end_inset
-
-, are one and the same, and thus 
+ equivalent, so that 
 \begin_inset Formula $A$
 \end_inset
 
@@ -3164,34 +3211,13 @@ equivalent
 .
 \end_layout
 
+\begin_layout Subsection*
+Stalks
+\end_layout
+
 \begin_layout Standard
-By contrast, the goal here is not just to talk about a graph 
-\begin_inset Formula $G$
-\end_inset
-
- relative to a single 
-\begin_inset Formula $A$
-\end_inset
-
-, but relative to a huge number of different 
-\begin_inset Formula $A$
-\end_inset
-
-'s.
- What's more, the internal structure of these 
-\begin_inset Formula $A$
-\end_inset
-
-'s will continue to be interesting, and so is carried onwards.
- Finally, the act of merging together multiple vertexes into one 
-\begin_inset Formula $A$
-\end_inset
-
- may result in some of the existing edges being cut, or new edges being
- created.
- The clustering operation applied to the graph alters the graph structure.
- These considerations are what makes it convenient to abandon traditional
- graph theory, and to replace it by the notion of sheaves and sections.
+Given the above notion of a graph quotient, it can be brought over to the
+ language of seeds and sections, established earlier.
 \end_layout
 
 \begin_layout Standard
@@ -3267,12 +3293,26 @@ Given two vertexes
 \end_inset
 
 .
- The result of creating this object is no longer strictly a graph, at least,
- not in the natural sense (one can force a graph structure onto the result,
- but doing so gets awkward).
- The mashing together of two vertexes creates a kind of a quotient, as described
- above.
+ It is typically desirable for 
+\begin_inset Formula $f$
+\end_inset
+
+ to be both commutative and associative, so that 
+\begin_inset Formula $f\left(E_{a},E_{b}\right)=f\left(E_{b},E_{a}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $f\left(f\left(E_{a},E_{b}\right),E_{c}\right)=f\left(E_{a},f\left(E_{b},E_{c}\right)\right)=f\left(E_{a},E_{b},E_{c}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The mashing together of several vertexes creates a kind of a graph quotient,
+ as described above.
  This quotient will be called a stalk in what follows.
+ Unlike
 \end_layout
 
 \begin_layout Definition*
@@ -3550,6 +3590,48 @@ The above definition renders the stalk as being essentially the same thing
 
 \begin_layout Subsection*
 Why clustering?
+\end_layout
+
+\begin_layout Standard
+foox
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+xBy contrast, the goal here is not just to talk about a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ relative to a single 
+\begin_inset Formula $A$
+\end_inset
+
+, but relative to a huge number of different 
+\begin_inset Formula $A$
+\end_inset
+
+'s.
+ What's more, the internal structure of these 
+\begin_inset Formula $A$
+\end_inset
+
+'s will continue to be interesting, and so is carried onwards.
+ Finally, the act of merging together multiple vertexes into one 
+\begin_inset Formula $A$
+\end_inset
+
+ may result in some of the existing edges being cut, or new edges being
+ created.
+ The clustering operation applied to the graph alters the graph structure.
+ These considerations are what makes it convenient to abandon traditional
+ graph theory, and to replace it by the notion of sheaves and sections.
+\end_layout
+
+\begin_layout Standard
+x
 \end_layout
 
 \begin_layout Standard
