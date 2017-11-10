@@ -3309,10 +3309,15 @@ Given two vertexes
 \end_layout
 
 \begin_layout Standard
-The mashing together of several vertexes creates a kind of a graph quotient,
- as described above.
- This quotient will be called a stalk in what follows.
- Unlike
+The mashing together of several vertexes creates a structure resembling
+ a graph quotient, as described above.
+ This will be called a stalk in what follows.
+ The stalk is defined in such a way that it is not actually a graph quotient;
+ it merely resembles one.
+ It is a partial step on the way to a graph quotient.
+ The definition asks that the internal structure of the stalk be preserved.
+ One obtains a true graph quotient only after projecting the stalk down
+ to a base space.
 \end_layout
 
 \begin_layout Definition*
@@ -3472,6 +3477,83 @@ A stalk and it's projection
 \end_layout
 
 \begin_layout Standard
+The notion of projection can be formalized.
+\end_layout
+
+\begin_layout Definition*
+A projection 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is a function that accepts a stalk 
+\begin_inset Formula $S=\left(V,E\right)$
+\end_inset
+
+ and produces a seed 
+\begin_inset Formula $s=\left(b,E^{\prime}\right)$
+\end_inset
+
+ such that for each 
+\begin_inset Formula $v\in V$
+\end_inset
+
+, it produces 
+\begin_inset Formula $b$
+\end_inset
+
+, and for each edge 
+\begin_inset Formula $\left(v,w\right)\in E$
+\end_inset
+
+, it produces the edge 
+\begin_inset Formula $\left(b,w\right)\in E^{\prime}$
+\end_inset
+
+.That is 
+\begin_inset Formula $\pi\left(v,\left(v,w)\right)\right)=\left(b,\left(b,w\right)\right)$
+\end_inset
+
+.
+ By abose of notation, one may write 
+\begin_inset Formula $\pi\left(v\right)=b$
+\end_inset
+
+ so that 
+\begin_inset Formula $\pi\left(v,\left(v,w)\right)\right)=\left(\pi\left(v\right),\left(\pi\left(v\right),w\right)\right)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition*
+The desirable properties of the projection can be summarized in a lemma:
+\end_layout
+
+\begin_layout Lemma*
+The projection function 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is a morphism of graphs, taking a graph and mapping it to a quotient graph.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The proof of the lemma is left to the reader, in the hopes that it is self-evide
+nt.
+ An actual proof requires a few additional definitions, as follows.
+\end_layout
+
+\begin_layout Standard
 The projection down to a base space suggests that the equivalence relation
  on vertexes can be extended to an equivalence relation on edges: two edges
  are equivalent if they form the same link.
@@ -3586,6 +3668,10 @@ The above definition renders the stalk as being essentially the same thing
  as a seed, except that now, one is working with sets of vertices, and the
  links between them.
  
+\end_layout
+
+\begin_layout Standard
+A typical 
 \end_layout
 
 \begin_layout Subsection*
