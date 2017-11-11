@@ -4907,20 +4907,12 @@ The sheaf, it's decomposition into sections, and it's projection down to
 \end_layout
 
 \begin_layout Subsection*
-Projections with Stalks
+Feature Vectors
 \end_layout
 
 \begin_layout Standard
-The above makes the case that the projection of a sheaf down to its base
- space use useful from the data management point of view.
- The projection shrinks the size of the dataset.
- However, it erases a lot of local connectivity data that is useful and
- important.
- Local data can be maintained by keeping the projection, and then keeping
- individual stalks.
- Visually, this can be envisioned as a corn-field.
- The ground is the base space, the corn-stalks are the individual stalks.
- The stalks correspond to 
+It is important to understand that, in many ways, stalks can be treated
+ as vectors, and, specifically as the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4928,12 +4920,12 @@ feature vectors
 \begin_inset Quotes erd
 \end_inset
 
- in traditional data mining approaches.
+ of data-mining.
+ This is best illustrated with an example.
 \end_layout
 
 \begin_layout Standard
-This is best illustrated with an example.
- Consider the corpus 
+Consider the corpus 
 \begin_inset Quotes eld
 \end_inset
 
@@ -5110,11 +5102,7 @@ dog killed the chicken
 \begin_inset VSpace defskip
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-The stalk for the cat is:
+and the stalk for the cat:
 \end_layout
 
 \begin_layout Standard
@@ -5271,7 +5259,7 @@ cat chased the cockroach
 \begin_layout Standard
 One old approach to data mining is to trim these down to 3-grams, and then
  compare them as feature vectors.
- These 3-gram feature vectors are:
+ These 3-gram feature vector for the dog is:
 \end_layout
 
 \begin_layout Standard
@@ -5393,11 +5381,7 @@ dog killed
 \begin_inset VSpace defskip
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-The stalk for the cat is:
+and the 3-gram stalk for the cat is:
 \end_layout
 
 \begin_layout Standard
@@ -5464,7 +5448,7 @@ cat
 \begin_inset Text
 
 \begin_layout Plain Layout
-1 observation
+; 1 observation
 \end_layout
 
 \end_inset
@@ -5497,7 +5481,7 @@ cat chased
 \begin_inset Text
 
 \begin_layout Plain Layout
-2 observations
+; 2 observations
 \end_layout
 
 \end_inset
@@ -5530,7 +5514,7 @@ cat killed
 \begin_inset Text
 
 \begin_layout Plain Layout
-1 observation
+; 1 observation
 \end_layout
 
 \end_inset
@@ -5573,7 +5557,7 @@ Recall how a vector is defined.
 \begin_inset Formula $\hat{e}_{i}$
 \end_inset
 
-with (usually real-number) coefficients 
+ with (usually real-number) coefficients 
 \begin_inset Formula $a_{i}$
 \end_inset
 
@@ -5642,8 +5626,12 @@ cat
 
  should go, but it also indicates how the basis vectors should be treated:
  the wild-card helps establish that dogs and cats are similar.
- The basis vectors indicate how dot products can be taken.
- Recall the defintion of a dot-product (the inner product).
+ It allows the basis vectors to be explicitly compared to one-another.
+ The ability to compare these allows the dot product to be taken.
+\end_layout
+
+\begin_layout Standard
+Recall the defintion of a dot-product (the inner product).
  For 
 \begin_inset Formula $\vec{v}$
 \end_inset
@@ -5663,7 +5651,7 @@ cat
 where the Kronecker delta was used in the middle term:
 \begin_inset Formula 
 \[
-\delta_{ij}=\begin{cases}
+\hat{e}_{i}\cdot\hat{e_{j}}=\delta_{ij}=\begin{cases}
 1 & \mbox{if }i=j\\
 0 & \mbox{if }i\ne j
 \end{cases}
@@ -5709,7 +5697,7 @@ One common way to express the similarity of
 \end_inset
 
 where 
-\begin_inset Formula $\left|\vec{v}\right|$
+\begin_inset Formula $\left|\vec{v}\right|=\sqrt{\sum_{i}a_{i}^{2}}$
 \end_inset
 
  is the length of 
@@ -5764,11 +5752,12 @@ and
 
 \end_inset
 
-Ignoring the differnces in notation (ignoring that the quantities in parenthesis
- are tensors), one clearly can see that these are still feature vectors.
+Ignoring the differences in notation (ignoring that the quantities in parenthesi
+s are tensors), one clearly can see that these are still feature vectors.
  Focusing on the vector aspect only, these represent the same information
  as the 3-gram feature vectors.
  They're the same thing.
+ The dot products are the same, the vectors are the same.
  The difference between them is that the bra-ket notation was used for the
  3-grams, while the tensor notation was used for the dependency parse.
  The feature vectors can also be written using the link-grammar-inspired
@@ -5828,18 +5817,43 @@ cat: [chased- & the-]1 or [the- & chased+]2 or [the- & killed+]1;
 \begin_inset Newline newline
 \end_inset
 
-The notation is different, the meaning is the same.
+The notation is different, but the meaning is the same.
  The above gives two feature vectors, one for dog, and one for cat.
- The fact that they just happen to look identical to the 3-gram feature
- vectors is only because a link-grammar parse of such short phrases look
- a lot like ordinary 3-grams.
- For more complex sentences, the 3-gram approach, and the dependency-parse
- approach give different feature vectors.
- The concept of feature vectors remain the same.
+ They happen to look identical to the 3-gram feature vectors because this
+ eample was carefully arranged to allow this.
+ In general, dependency parses and 3-grams are going to be quite different;
+ for these short phrases, they happen to superficially look the same.
+ In any of these cases, and in any of these notations, the concept of feature
+ vectors remain the same.
 \end_layout
 
 \begin_layout Subsection*
-Stalk fields
+Vector fields and Stalk fields
+\end_layout
+
+\begin_layout Standard
+The figures 
+\end_layout
+
+\begin_layout Standard
+The above makes the case that the projection of a sheaf down to its base
+ space use useful from the data management point of view.
+ The projection shrinks the size of the dataset.
+ However, it erases a lot of local connectivity data that is useful and
+ important.
+ Local data can be maintained by keeping the projection, and then keeping
+ individual stalks.
+ Visually, this can be envisioned as a corn-field.
+ The ground is the base space, the corn-stalks are the individual stalks.
+ The stalks correspond to 
+\begin_inset Quotes eld
+\end_inset
+
+feature vectors
+\begin_inset Quotes erd
+\end_inset
+
+ in traditional data mining approaches.
 \end_layout
 
 \begin_layout Standard
