@@ -1364,6 +1364,12 @@ Each distinct reaction constitutes a seed; the heavy lines forming the cycle
  These connectors are free to be attached to other seeds or sections.
 \end_layout
 
+\begin_layout Standard
+This example may seem dubious, at this point of the presentation.
+ That it is a valid example should become clear with further development
+ of the general principles in what follows.
+\end_layout
+
 \begin_layout Subsection*
 Similar concept: Link Grammar
 \end_layout
@@ -6006,23 +6012,11 @@ reference "fig:General-Sheaf"
 \end_layout
 
 \begin_layout Standard
-x
-\end_layout
-
-\begin_layout Standard
-x
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 placement h
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -6064,61 +6058,31 @@ name "fig:General-Sheaf"
 \end_layout
 
 \begin_layout Standard
-x
+The general sheaf, as depicted here, holds much more data than just the
+ base space.
+ It holds the data showing where the base space came from: how the base
+ space was a projection of sections.
+ Holding such a large amount of data might be impractical: in the previous
+ example, holding the parse data for 10 million individual, distinct sentences
+ might be a challenge.
+ The stalk field is meant to be a half-way point: it can hold more information
+ than the base alone, but still be computationally manageable.
 \end_layout
 
 \begin_layout Standard
-x
+A particular appeal of the stalk field is that each stalk can be re-interpreted
+ as a vector.
+ For each point of the base space, one just attaches a single vector.
+ There is no additional structure, and all this talk of stalks can be brushed
+ away as just a layer of theoretical complexity: in the end, its just per-base-p
+oint feature vectors.
 \end_layout
 
 \begin_layout Standard
-The above makes the case that the projection of a sheaf down to its base
- space use useful from the data management point of view.
- The projection shrinks the size of the dataset.
- However, it erases a lot of local connectivity data that is useful and
- important.
- Local data can be maintained by keeping the projection, and then keeping
- individual stalks.
- Visually, this can be envisioned as a corn-field.
- The ground is the base space, the corn-stalks are the individual stalks.
- The stalks correspond to 
-\begin_inset Quotes eld
-\end_inset
-
-feature vectors
-\begin_inset Quotes erd
-\end_inset
-
- in traditional data mining approaches.
-\end_layout
-
-\begin_layout Standard
-Treated as vectors, the cosine distance can be taken between the two to
- arrive at the conclusion that they are grammatically similar.
- At any rate, one has that both 
-\begin_inset Quotes eld
-\end_inset
-
-cat
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-dog
-\begin_inset Quotes erd
-\end_inset
-
- are points in the base space; each point in the base-space has a feature-vector
- associated with it.
- That feature vector, however, has connectivity properties: it is a collection
- of seeds, forming a stalk.
- This can be pictured as a corn-field, but the corn is funny: each corn-leaf
- is a jigsaw-puzzle piece (a collection of connectors).
- The connectors are, for the moment, unconnected to neighboring corn-stalks.
- 
+The power of the stalk representation is to keep in mind that the basis
+ elements are not just vacuous items, but are in fact jigsaw-puzzle pieces
+ that can be connected to one-another.
+ Again, each stalk can be viewed as a stack of jigsaw-puzzle pieces.
 \end_layout
 
 \begin_layout Subsection*
