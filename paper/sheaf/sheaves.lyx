@@ -1011,9 +1011,9 @@ A
 \noun on
 seed
 \noun default
- is a vertex and the set of edge types that connect to it.
+ is a vertex and the set of connector types that connect to it.
  That is, it is the pair 
-\begin_inset Formula $\left(v,E_{v}\right)$
+\begin_inset Formula $\left(v,C_{v}\right)$
 \end_inset
 
  where 
@@ -1021,17 +1021,17 @@ seed
 \end_inset
 
  is a vertex, and 
-\begin_inset Formula $E_{v}$
+\begin_inset Formula $C_{v}$
 \end_inset
 
- is a set of edge types containing that vertex, i.e.
+ is a set of connector types containing that vertex, i.e.
  that set of edges having 
 \begin_inset Formula $v$
 \end_inset
 
  as one endpoint and a type as the other endpoint.
  That is, 
-\begin_inset Formula $E_{v}=\left\{ \left(v,t_{a}\right),\left(v,t_{b}\right),\cdots\right\} $
+\begin_inset Formula $C_{v}=\left\{ \left(v,t_{a}\right),\left(v,t_{b}\right),\cdots\right\} $
 \end_inset
 
 .
@@ -1039,9 +1039,9 @@ seed
 \begin_inset Formula $\left(v,t\right)$
 \end_inset
 
- can be called an 
+ can be called a 
 \noun on
-edge type
+connector type
 \noun default
 .
  
@@ -1052,8 +1052,13 @@ edge type
 \end_layout
 
 \begin_layout Standard
-The intent of specifying edge types is exactly what the jigsaw-puzzle paradigm
- suggests: links can be created, as long as the types match up.
+The capital letter 
+\begin_inset Formula $C$
+\end_inset
+
+ is used to remind one that members of the set are connectors.
+ The intent of specifying connector types is exactly what the jigsaw-puzzle
+ paradigm suggests: links can be created, as long as the types match up.
  This is formalized by expanding the definition of a link.
  
 \end_layout
@@ -1068,11 +1073,11 @@ Given a section
 link
 \noun default
  between seeds 
-\begin_inset Formula $s_{1}=\left(v_{1},E_{1}\right)$
+\begin_inset Formula $s_{1}=\left(v_{1},C_{1}\right)$
 \end_inset
 
  and 
-\begin_inset Formula $s_{2}=\left(v_{2},E_{2}\right)$
+\begin_inset Formula $s_{2}=\left(v_{2},C_{2}\right)$
 \end_inset
 
  is any edge 
@@ -1083,21 +1088,21 @@ link
 \begin_inset Formula $v_{1}$
 \end_inset
 
- appears in a type in 
-\begin_inset Formula $E_{2}$
+ is in one of the types in 
+\begin_inset Formula $C_{2}$
 \end_inset
 
  and 
 \begin_inset Formula $v_{2}$
 \end_inset
 
- appears as a type in 
-\begin_inset Formula $E_{1}$
+ is in one of the types in 
+\begin_inset Formula $C_{1}$
 \end_inset
 
 .
  That is, there exists a pair 
-\begin_inset Formula $\left(v_{1},t_{a}\right)\in E_{1}$
+\begin_inset Formula $\left(v_{1},t_{a}\right)\in C_{1}$
 \end_inset
 
  such that 
@@ -1105,7 +1110,7 @@ link
 \end_inset
 
  and, symmetrically, there exists a pair 
-\begin_inset Formula $\left(v_{2},t_{b}\right)\in E_{2}$
+\begin_inset Formula $\left(v_{2},t_{b}\right)\in C_{2}$
 \end_inset
 
  such that 
@@ -1434,11 +1439,11 @@ The depdency parse is shown as a graph, with four vertexes.
  Below, the parse is decomposed into the component seeds; as always, the
  open dots are connectors, the closed dots are the germs.
  Using the notation 
-\begin_inset Formula $\left(v,E_{v}\right)$
+\begin_inset Formula $\left(v,C_{v}\right)$
 \end_inset
 
  for a seed, where 
-\begin_inset Formula $E_{v}=\left\{ \left(v,v_{a}\right),\left(v,v_{b}\right),\cdots\right\} $
+\begin_inset Formula $C_{v}=\left\{ \left(v,v_{a}\right),\left(v,v_{b}\right),\cdots\right\} $
 \end_inset
 
 , these seeds can be textually written as
@@ -2756,13 +2761,10 @@ an example is this
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3617,11 +3619,7 @@ Stalks
 \begin_layout Standard
 Given the above notion of a graph quotient, it can be brought over to the
  language of seeds and sections, established earlier.
- 
-\end_layout
-
-\begin_layout Standard
-Let 
+ Let 
 \begin_inset Formula $G$
 \end_inset
 
@@ -3643,11 +3641,11 @@ Let
 
  extracted from the graph.
  That is, 
-\begin_inset Formula $s=\left(v,E_{v}\right)$
+\begin_inset Formula $s=\left(v,C_{v}\right)$
 \end_inset
 
  with 
-\begin_inset Formula $E_{v}$
+\begin_inset Formula $C_{v}$
 \end_inset
 
  being the set of edges connecting 
@@ -3681,10 +3679,29 @@ Let
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Standard
+It is not hard to see that 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is a morphism of graphs; it not only maps vertexes, but it can be extended
+ to map edges as well.
+ The target of 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is a graph quotient.
 \end_layout
 
 \begin_layout Definition*
-The 
+Given a map 
+\begin_inset Formula $\pi:V\to B$
+\end_inset
+
+, the 
 \noun on
 stalk
 \noun default
@@ -3697,7 +3714,7 @@ stalk
 \end_inset
 
  of seeds such that for each 
-\begin_inset Formula $s=\left(v,E_{v}\right)\in S$
+\begin_inset Formula $s=\left(v,C_{v}\right)\in S$
 \end_inset
 
 , one has that 
@@ -3710,14 +3727,6 @@ stalk
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-It is convenient (it is suggested) that the vertexes in the stalk be visualized
- as being stacked one on top another, forming a tower or a fiber, with the
- edges sticking out as spines.
- A tower of jigsaw-puzzle pieces.
- 
 \end_layout
 
 \begin_layout Standard
@@ -3746,6 +3755,74 @@ A stalk and it's projection
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general, this defintion does not require that the map 
+\begin_inset Formula $\pi:V\to B$
+\end_inset
+
+ be a total map; that is, it does not need to be defined on all of 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Also, 
+\begin_inset Formula $V$
+\end_inset
+
+ does not need to be the vertexes of some specific graph; it is enough that
+ 
+\begin_inset Formula $V$
+\end_inset
+
+ is a set of germs of seeds.
+ That is, the seeds in the stalk can be generalized seeds, having typed
+ connectors, rather than connectors derviced from edges.
+ The vertexes in the stalk can be visualized as being stacked one on top
+ another, forming a tower or a fiber, with the edges sticking out as spines.
+ When the seeds carry typed connectors, the stalk can be visualized as a
+ tower of jigsaw-puzzle pieces.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A corn stalk, a stack of puzzle pieces
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename cornstalk.jpg
+	lyxscale 50
+	width 25text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename stack-jigsaw-puzzle-pieces.jpg
+	width 25col%
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Plain Layout
 
 \end_layout
@@ -3756,131 +3833,71 @@ A stalk and it's projection
 \end_layout
 
 \begin_layout Standard
-The desirable properties of the projection can be summarized in a lemma:
-\end_layout
+Note that the projection of a stalk is a seed.
+ It's germ is 
+\begin_inset Formula $b$
+\end_inset
 
-\begin_layout Lemma*
-The projection function 
+, and if any connector appears in the stalk, then it also appears as a connector
+ on 
+\begin_inset Formula $b$
+\end_inset
+
+ in the base.
+ At least, this is the unassailable conclusion if one starts with a graph,
+ and assumes that 
 \begin_inset Formula $\pi$
 \end_inset
 
- is a morphism of graphs, taking a graph and mapping it to a quotient graph.
- 
-\begin_inset Formula $\diamond$
+ is a graph morphism.
+ It will prove to be very useful to loosen this restriction, that is, to
+ allow 
+\begin_inset Formula $\pi$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-The proof of the lemma is left to the reader, in the hopes that it is self-evide
-nt.
- An actual proof requires a few additional definitions, as follows.
-\end_layout
-
-\begin_layout Standard
-The projection down to a base space suggests that the equivalence relation
- on vertexes can be extended to an equivalence relation on edges: two edges
- are equivalent if they form the same link.
- That is, one has an equivalence class of edges:
+ to add or remove connectors.
+ Thus, it is useful to immediately broaden the defnition of the stalk.
+ 
 \end_layout
 
 \begin_layout Definition*
-A 
-\noun on
-link
-\noun default
- between two different stalks 
-\begin_inset Formula $S_{a}=\left(V_{a},E_{a}\right)$
+Given a map 
+\begin_inset Formula $\pi:E\to B$
+\end_inset
+
+, where both 
+\begin_inset Formula $E$
 \end_inset
 
  and 
-\begin_inset Formula $S_{b}=\left(V_{b},E_{b}\right)$
+\begin_inset Formula $B$
 \end_inset
 
- is the set 
-\begin_inset Formula $l=\left\{ e_{k}\right\} $
-\end_inset
-
- of all edges 
-\begin_inset Formula $e_{k}$
-\end_inset
-
- that connect some pair of vertexes in 
-\begin_inset Formula $V_{a}$
-\end_inset
-
- and 
-\begin_inset Formula $V_{b}$
-\end_inset
-
-.
- That is, every 
-\begin_inset Formula $e_{k}=\left(v_{k1},v_{k2}\right)$
-\end_inset
-
- in 
-\begin_inset Formula $L$
-\end_inset
-
- has the property that 
-\begin_inset Formula $v_{k1}\in V_{a}$
-\end_inset
-
- and 
-\begin_inset Formula $v_{k2}\in V_{b}$
-\end_inset
-
- and 
-\begin_inset Formula $e_{k}\in E_{a}$
-\end_inset
-
- and 
-\begin_inset Formula $e_{k}\in E_{b}$
-\end_inset
-
-.
- 
-\begin_inset Formula $\diamond$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This redefines the notion of a link.
- Perhaps it should be given a different name, but it should be OK, because
- the intended sense should be clear from the context.
- This allows us to redefine the notion of a stalk as well:
-\end_layout
-
-\begin_layout Definition*
-A 
+ are collections seeds, the 
 \noun on
 stalk
 \noun default
- is an ordered pair 
-\begin_inset Formula $S=\left(V,L\right)$
+ above 
+\begin_inset Formula $b\in B$
 \end_inset
 
- of vertexes and links such that every link in 
-\begin_inset Formula $L$
+ is the set 
+\begin_inset Formula $S$
 \end_inset
 
- has one endpoint that is 
-\begin_inset Formula $V$
+ of seeds in 
+\begin_inset Formula $E$
 \end_inset
 
- and the other endpoint not being 
-\begin_inset Formula $V$
+ such that for each 
+\begin_inset Formula $s=\left(v,C_{v}\right)\in S$
+\end_inset
+
+, one has that 
+\begin_inset Formula $\pi(s)=b$
 \end_inset
 
 .
- That is, each link in 
-\begin_inset Formula $L$
-\end_inset
-
- is a connector or half-edge.
  
 \begin_inset Formula $\diamond$
 \end_inset
@@ -3889,15 +3906,140 @@ stalk
 \end_layout
 
 \begin_layout Standard
-One then has an obvious lemma about the projection.
-\end_layout
-
-\begin_layout Lemma*
-The projection function 
+In this revised definition, there is no hint of what 
 \begin_inset Formula $\pi$
 \end_inset
 
- can be extended consistently to the revised defintion of a stalk.
+ did with the connectors.
+ In particular, there is no way to ask about some specific connector on
+ some seed 
+\begin_inset Formula $s$
+\end_inset
+
+, and what happened to it after 
+\begin_inset Formula $\pi$
+\end_inset
+
+ mapped 
+\begin_inset Formula $s$
+\end_inset
+
+ to 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ This definition is perhaps too general; in the most common case, it is
+ useful to project the connectors as well as the germs.
+ It is also very useful to be able to say that a particular connector on
+ 
+\begin_inset Formula $s$
+\end_inset
+
+ can be mapped to a particular connector on 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Yet it is also useful to sometimes discard some connectors because they
+ are infrequently used, to perform pruning, as it were.
+ These use-cases will be returned to later.
+ There is no particular reason to allow pruning during projection; it can
+ always be done before, or after.
+\end_layout
+
+\begin_layout Standard
+Thus, perhaps the most agreeable defintion for a stalk is this.
+\end_layout
+
+\begin_layout Definition*
+Given a map 
+\begin_inset Formula $\pi:E\to B$
+\end_inset
+
+, where both 
+\begin_inset Formula $E$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are collections seeds, the 
+\noun on
+stalk
+\noun default
+ above 
+\begin_inset Formula $b\in B$
+\end_inset
+
+ is the set 
+\begin_inset Formula $S$
+\end_inset
+
+ of seeds in 
+\begin_inset Formula $E$
+\end_inset
+
+ such that for each 
+\begin_inset Formula $s=\left(v,C_{v}\right)\in S$
+\end_inset
+
+, one has that 
+\begin_inset Formula $\pi(s)=b$
+\end_inset
+
+.
+ The map 
+\begin_inset Formula $\pi$
+\end_inset
+
+ can be decomposed into a pair 
+\begin_inset Formula $\pi=\left(\pi_{g},\pi_{c}\right)$
+\end_inset
+
+ such that, for every 
+\begin_inset Formula $\gamma\in C_{v}$
+\end_inset
+
+ one has that 
+\begin_inset Formula $\pi\left(v,\gamma\right)=\left(\pi_{g}\left(v\right),\pi_{c}\left(\gamma\right)\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $\pi_{c}\left(\gamma\right)\in C_{b}$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $\pi_{g}$
+\end_inset
+
+ maps the germs of 
+\begin_inset Formula $E$
+\end_inset
+
+ to the germs of 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi_{c}$
+\end_inset
+
+ maps the connectors in 
+\begin_inset Formula $E$
+\end_inset
+
+ to specific connectors in 
+\series bold
+
+\begin_inset Formula $B$
+\end_inset
+
+.
+
+\series default
  
 \begin_inset Formula $\diamond$
 \end_inset
@@ -3906,7 +4048,53 @@ The projection function
 \end_layout
 
 \begin_layout Standard
-As before, the proof is left as being obvious.
+The next figure illustrates both the projection of germs, and of connectors.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Germs and connectors project consistently
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename project.eps
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+x
 \end_layout
 
 \begin_layout Section*
@@ -3920,43 +4108,6 @@ The above defintions, along with the projection function, indicate that
  The above finally allows the definition of a section to be understood in
  a way that is in keeping with the usual notion of a section as commonly
  defined in covering spaces and fiber bundles.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement r
-overhang 0in
-width "52text%"
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Corn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename cornstalk.jpg
-	width 35text%
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Definition*
