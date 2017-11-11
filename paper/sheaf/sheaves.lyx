@@ -1327,6 +1327,10 @@ must
  link to a source of ADP, or a source of phosphate, or a sink if ATP or
  a sink of hydroxyls, if it is to be validly linked into any part of a connected
  section.
+ In this example, ADP and ATP can both be treated as simple connectors,
+ while R-OH does name a type: R can be any moiety.
+ Implicit here, but not explicit in the seed, is that the R group on both
+ connectors must be the same.
 \end_layout
 
 \begin_layout Standard
@@ -2575,7 +2579,7 @@ A Viterbi parse lattice of Markov chain
 
 \begin_layout Standard
 The above depicts the lattice of a Viterbi parse of a Markov chain.
- The dashed red line depicts a maximum-liklihood path through the lattice,
+ The dashed green line depicts a maximum-liklihood path through the lattice,
  that is, the most likely history.
  Viterbi decoding, using an 
 \begin_inset Quotes eld
@@ -2711,11 +2715,88 @@ Non-Markov models would have edges connecting nodes furthre in the past.
  It is also theoretically absurd: almost all of those edges have zero probabilit
 y.
  Almost none of the edges are needed; the actual tensor is very very sparse.
+ 
 \end_layout
 
 \begin_layout Standard
-The reason for this sparsity becomes apparant from the viewpoint of dependency
- parsing.
+The red path in the figure below indicates a very unlikely word-sequence:
+ 
+\begin_inset Quotes eld
+\end_inset
+
+example this an this
+\begin_inset Quotes erd
+\end_inset
+
+.
+ There are 
+\begin_inset Formula $4\times16=64$
+\end_inset
+
+ paths through it.
+ Of these, only 3 are plausible: the green edges, and the sequences 
+\begin_inset Quotes eld
+\end_inset
+
+this example is an
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+an example is this
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The others can't be observed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Likely and unlikely word sequences
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename chain.eps
+	width 35col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The sparsity is easily exposed with dependency parsing.
  So, for example, if 
 \begin_inset Formula $w_{n-3}=this$
 \end_inset
@@ -2748,14 +2829,16 @@ The reason for this sparsity becomes apparant from the viewpoint of dependency
 \end_inset
 
 .
- A collection of depedency parses obtained from a corpus allows you to figure
- out which edges matter, and which edges do not.
+ A collection of depedency parses obtained from a corpus identifies which
+ edges matter, and which edges do not.
  
 \end_layout
 
 \begin_layout Standard
-Dependency parses also give a more holisitic perception of what might be
- going on in natural language.
+Dependency parses do even more: they unveil possible paths, and not just
+ pair-wise edges.
+ They provide a more holisitic view of what might be going on in natural
+ language.
  That is, the notation 
 \end_layout
 
@@ -2861,8 +2944,11 @@ noun
 \end_inset
 
 , and the middle is a transitive verb.
- This sharply prunes the number of possibilities *before* the learning algorithm
- is launched, instead of during or after.
+ This sharply prunes the number of possibilities 
+\emph on
+before
+\emph default
+ the learning algorithm is launched, instead of during or after.
  The fact that such pruning is even possible is obscured by the notation
  and language of 
 \begin_inset Formula $n$
