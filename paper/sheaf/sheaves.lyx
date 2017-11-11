@@ -6090,12 +6090,18 @@ Gluing Axioms
 \end_layout
 
 \begin_layout Standard
-The gluing axioms are used to ensure that sections and stalks can be assembled
- in a fashion that is consistent with the description and examples given
- above.
- They are technical requirements imposed on the structure, to make sure
- its assembled in a coherent fashion.
- In practical applications, using 
+The formal defintion of a sheaf entails a presentation of the so-called
+ 
+\begin_inset Quotes eld
+\end_inset
+
+gluing axioms
+\begin_inset Quotes erd
+\end_inset
+
+.
+ These are technical requirements that ensure that the stalks can be linked,
+ and sections projected in a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -6103,45 +6109,167 @@ common sense
 \begin_inset Quotes erd
 \end_inset
 
-, they are unlikely to be violated, but formally, it is important to state
- them.
+ kind of fashion.
+ For example, if a section contains a sentence, one expects that the sentence
+ is grammatical.
+ One also expects to be able to extract phrases out of it.
+ Gluing sentences together, one expects to arrive at coherent paragraphs.
+ In a biochemical setting, one expects that all of the individual reactions
+ in a pathway fit together.
+ One expects to be able to talk about subsets of the full pathway without
+ obtaining nonsense.
+ This is just common sense.
 \end_layout
 
 \begin_layout Standard
-x
-\end_layout
-
-\begin_layout Standard
-x
-\end_layout
-
-\begin_layout Standard
-x
-\end_layout
-
-\begin_layout Standard
-x
-\end_layout
-
-\begin_layout Standard
-a way that 
+Unfortunately, 
 \begin_inset Quotes eld
 \end_inset
 
-makes sen
+common sense
+\begin_inset Quotes erd
+\end_inset
+
+ being a commodity in short supply, the gluing axioms must be written in
+ detail.
+ There are three of them.
+ First, a functor is defined.
+\end_layout
+
+\begin_layout Claim*
+There exists a functor 
+\begin_inset Formula $F$
+\end_inset
+
+ such that, for each subgraph 
+\begin_inset Formula $U$
+\end_inset
+
+ of the base graph 
+\begin_inset Formula $B$
+\end_inset
+
+, there exists some collection 
+\begin_inset Formula $F(U)$
+\end_inset
+
+ of stalks and sections above 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Sections can be cut down, or they can be enlarged, yet each section must
- consist of a grammatically-correct sentence, phrase (or paragraph, or larger!
- ...
- or smaller, just a sentence fragment).
- The base space consists simply of the individual words in the language,
- each word being a vertex, connections between words being projections of
- the connections discovered from the N-grams, or dependency graphs, as the
- case may be.
- One can examine how the structure of language changes as words are removed
- from the base space: such changes correspond to the 
+Next, the restriction morphism, which cuts down or restricts this collection.
+\end_layout
+
+\begin_layout Claim*
+For each subgraph 
+\begin_inset Formula $V\subseteq U$
+\end_inset
+
+ there is a morphism 
+\begin_inset Formula $\mbox{res}_{V,U}:F\left(U\right)\to F\left(V\right)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $V$
+\end_inset
+
+ is smaller, we expect 
+\begin_inset Formula $F\left(V\right)$
+\end_inset
+
+to be smaller, also.
+ The restriction morphism trims away the wnated parts.
+ The trimming needs to stay faithful, to preserve the structure.
+ Thus
+\end_layout
+
+\begin_layout Claim*
+For every subgraph 
+\begin_inset Formula $U$
+\end_inset
+
+ of the base graph 
+\begin_inset Formula $B$
+\end_inset
+
+, the restriction morphism 
+\begin_inset Formula $\mbox{res}_{U,U}:F\left(U\right)\to F\left(U\right)$
+\end_inset
+
+ is the identity on 
+\begin_inset Formula $F\left(U\right)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The restrictions must compose in a natural way, as well, so that if one
+ trims a bit, then trims a bit more, its the same as doing it all at once.
+\end_layout
+
+\begin_layout Claim*
+For a sequence of subgraphs 
+\begin_inset Formula $W\subseteq V\subseteq U$
+\end_inset
+
+, the restrictions compose so that 
+\begin_inset Formula $\mbox{res}_{W,V}\circ\mbox{res}_{V,U}=\mbox{res}_{W,U}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If a system obeys the above, it is techically called a 
+\noun on
+presheaf
+\noun default
+.
+ It is much like the general cconcept that this document has been illustrating,
+ but one can create some unusual structures that obey the axioms above,
+ but aren't quite what was intended for a sheaf.
+ 
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
 \begin_inset Quotes eld
 \end_inset
 
@@ -6150,26 +6278,7 @@ restriction morphisms
 \end_inset
 
  of a sheaf.
- These restriction morphisms obey all of the axioms of a sheaf; this observation
- is what drives the peculiar naming convention given here.
- The reason this 
-\begin_inset Quotes eld
-\end_inset
-
-works
-\begin_inset Quotes erd
-\end_inset
-
-, that the axioms apply, is in fact rather shallow: it is because the seeds,
- as initially defined, behave very much like open sets, and when they are
- projected to the base space, they serve to cover the base space, much as
- a topological covering does.
  
-\end_layout
-
-\begin_layout Standard
-The restriction morphisms appear to continue to satisfy the sheaf axioms
- even after projection (at least, at the informal level given here).
 \end_layout
 
 \begin_layout Subsection*
