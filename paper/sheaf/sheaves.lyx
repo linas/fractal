@@ -4630,10 +4630,28 @@ fly
 
 , one above another.
  Each phrase or section can be visualized as a botanical branch or botanical
- leaf branching off the central stalk.The projection of the stalk is shown
- below.
- The words in each phrase ar connected as a linear sequence.
+ leaf branching off the central stalk.The projection of all of the stalks
+ obtained from collocation is shown below, in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:N-gram-base"
+
+\end_inset
+
+.
  Identical words are projected down to a common base point.
+ Links between words are projected down to links in the base space.
+ For ordinary 
+\begin_inset Formula $n$
+\end_inset
+
+-grams, the links are merely the direct sequential linking of neighboring
+ words.
+ The figure depicts the base-space of the sheaf obtained from 
+\begin_inset Formula $n$
+\end_inset
+
+-grams.
 \end_layout
 
 \begin_layout Standard
@@ -4648,6 +4666,13 @@ status open
 
 \begin_layout Plain Layout
 N-gram corpus text alignment
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:N-gram-base"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4673,12 +4698,23 @@ N-gram corpus text alignment
 \begin_layout Standard
 The sections do not have to be linear sequences; the phrases can be parsed
  with a dependency parser of one style or another, in which case the words
- are joined with (directed) edges that denote dependencies.
+ are joined with edges that denote dependencies.
+ The edges might be directed, and they might be labelled.
  Parsing with a head-phrase parser introduces additional vertexes, typically
  called NP, VP, S and so on.
- The next figure shows the projection that results from alignment on an
- (unlabeled, undirected) dependency parse of the text.
- Most noticeable is that the determiner 
+ The next figure (figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Dependency-base"
+
+\end_inset
+
+) shows the projection that results from alignment on an (unlabeled, undirected)
+ dependency parse of the text.
+ As before, each stalk is projected down to a single word, and the links
+ are projected down as well.
+ The most noticeable difference between this base space and the N-gram base
+ space is that the determiner 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4713,8 +4749,9 @@ fly
 \end_inset
 
 , which, as a dependency, is not exactly correct but does serve to illustrate
- the difference between the N-gram and the dependency alignment.
- 
+ how the N-gram and the dependency alignments differ.
+ If the depedency parse produced directed edges with labels, it would be
+ prudent to project those labels as well.
 \end_layout
 
 \begin_layout Standard
@@ -4729,6 +4766,13 @@ status open
 
 \begin_layout Plain Layout
 Dependency parse corpus text alignment
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Dependency-base"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4752,21 +4796,46 @@ Dependency parse corpus text alignment
 \end_layout
 
 \begin_layout Standard
-Both of these figures represent a quotient graph that results from a corpus
- alignment, where all uses of a word have been collapsed (projected down)
- to a single node.
- The resulting graph is the graph of the language.
+Both of the figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:N-gram-base"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Dependency-base"
+
+\end_inset
+
+ depict a quotient graph that results from a corpus alignment, where all
+ uses of a word have been collapsed (projected down) to a single node, and
+ all links connecting the words are likewise projected.
+ The resulting graph can be understood to depict all possible connections
+ in a natural language.
+ In some sense, it captures important structural information in natural
+ language.
+\end_layout
+
+\begin_layout Standard
+Be careful, though: these base spaces are just the projections of the sheaf;
+ they are not the sheaf itself.
+ Its as if a flashlight were held above the stalks: the base space is the
+ shadow that is cast.
+ The sheaf is the full structure, the base space is just the shadow.
  
 \end_layout
 
 \begin_layout Subsection*
-Why sheaves? Are projections useful?
+Are projections useful?
 \end_layout
 
 \begin_layout Standard
 Yes.
- A collapsed graph like that might appear strange; why would one want to
- do that, if one has individual sentence data? 
+ A collapsed graph like those above might appear strange; why would one
+ want to do that, if one has individual sentence data? 
 \end_layout
 
 \begin_layout Standard
@@ -4781,8 +4850,8 @@ target "https://en.wikipedia.org/wiki/Marginal_distribution"
 .
  For example, when accumulating statistics for large collections of sentences,
  the projected vertex becomes an ideal place to store the frequency count
- of that word; the edge becomes an excellent place to store the joint probabilit
-y or the mutual information for a pair of words.
+ of that word; the projected edge becomes an excellent place to store the
+ joint probability or the mutual information for a pair of words.
  The projected graph - the quotient graph, is manageable in size.
  For example, in a corpus consisting of ten million sentences, one might
  see 130K distinct, unique words (130K vertexes) and perhaps 5 million distinct
@@ -4797,9 +4866,11 @@ By contrast, storing the individual parses for 10 million sentences is more
  Assuming 15 words per sentence, this requires storing 150M vertexes, and
  approximately 20 links per sentence for 200M edges.
  This graph is two orders of magnitude larger than the quotient graph.
- It makes sense to project sections down to the base space as soon as possible.
- They can be envisioned to still be there, virtually, in principle, but
- the actual storage can be avoided.
+ One could, of course, apply various programming and coding tricks to squeeze
+ and compress the data, but this misses the point: It makes sense to project
+ sections down to the base space as soon as possible.
+ The original sections can be envisioned to still be there, virtually, in
+ principle, but the actual storage can be avoided.
 \end_layout
 
 \begin_layout Standard
@@ -4810,10 +4881,21 @@ Every graph can be represented as an adjacency matrix.
 \end_inset
 
 130K total.
- The marginals stored with the graph can be accessed as marginals in the
- normal sense of values written in the margin of the matrix.
- Standard linear-algebra tools, such as the R programming language, can
- access the matrix and the marginals.
+ The sparsity is considerable: 
+\begin_inset Formula $\log_{2}\left(130\times130/5\right)=11.7$
+\end_inset
+
+.
+ Less than one in a thousand of all possible edges are actually observed.
+\end_layout
+
+\begin_layout Standard
+The marginals stored with the graph can be accessed as marginals on the
+ adjacency matrix.
+ That is, they are marginals in the ordinary sense of values written in
+ the margin of the matrix.
+ Standard linear-algebra and data-analysis tools, such as the R programming
+ language, can access the matrix and the marginals.
 \end_layout
 
 \begin_layout Subsection*
@@ -4898,12 +4980,14 @@ A different example can be taken from biochemistry.
 
 \begin_layout Standard
 The sheaf, it's decomposition into sections, and it's projection down to
- a single base unified network, provides a holistic view of a network of
+ a single unified base network, provides a holistic view of a network of
  interactions.
- Activations or modes of the network correspond to grammatically valid sentences
-, when the network is a language network.
- Sections correspond to activated biological pathways, when the network
- is a map of biochemical interactions.
+ For linguistic data, activations or modes of the network correspond to
+ grammatically valid sentences.
+ For biological data, an activated biological pathway is a section.
+ The base space provides a general map of biochemical interactions; it does
+ not capture individual activations.
+ The individual sections in the sheaf do capture that activation.
 \end_layout
 
 \begin_layout Subsection*
@@ -5828,11 +5912,101 @@ The notation is different, but the meaning is the same.
 \end_layout
 
 \begin_layout Subsection*
-Vector fields and Stalk fields
+Stalk fields and vector fields
 \end_layout
 
 \begin_layout Standard
 The figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:N-gram-base"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Dependency-base"
+
+\end_inset
+
+ illustrate the base space.
+ Above each point in the base space, one can, if one wishes, plant a stalk.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Corn field; stalk field
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename corn-field.jpg
+	lyxscale 50
+	width 40col%
+
+\end_inset
+
+ 
+\begin_inset space \qquad{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename stalk-field.eps
+	lyxscale 50
+	width 25col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
+\end_layout
+
+\begin_layout Standard
+x
 \end_layout
 
 \begin_layout Standard
