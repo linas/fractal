@@ -3503,7 +3503,7 @@ pointless
 
 \begin_layout Standard
 Quotienting is often described in terms of homomorphisms, functions 
-\begin_inset Formula $f:S\to Q$
+\begin_inset Formula $\pi:S\to Q$
 \end_inset
 
  that preserve the algebraic operations on 
@@ -3520,11 +3520,11 @@ Quotienting is often described in terms of homomorphisms, functions
 \end_inset
 
 , one expects that 
-\begin_inset Formula $f$
+\begin_inset Formula $\pi$
 \end_inset
 
  preserves it: that 
-\begin_inset Formula $f\left(m\left(a,b,c\right)\right)=m\left(f\left(a\right),f\left(b\right),f\left(c\right)\right)$
+\begin_inset Formula $\pi\left(m\left(a,b,c\right)\right)=m\left(\pi\left(a\right),\pi\left(b\right),\pi\left(c\right)\right)$
 \end_inset
 
 .
@@ -3617,10 +3617,15 @@ Stalks
 \begin_layout Standard
 Given the above notion of a graph quotient, it can be brought over to the
  language of seeds and sections, established earlier.
+ 
 \end_layout
 
 \begin_layout Standard
-Given two vertexes 
+Let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a graph, and let 
 \begin_inset Formula $v_{a}$
 \end_inset
 
@@ -3628,7 +3633,7 @@ Given two vertexes
 \begin_inset Formula $v_{b}$
 \end_inset
 
-, let 
+ be two vertexes in the graph, with corresponding seeds 
 \begin_inset Formula $s_{a}$
 \end_inset
 
@@ -3636,7 +3641,7 @@ Given two vertexes
 \begin_inset Formula $s_{b}$
 \end_inset
 
- be the corresponding seeds, as defined previously.
+ extracted from the graph.
  That is, 
 \begin_inset Formula $s=\left(v,E_{v}\right)$
 \end_inset
@@ -3650,168 +3655,56 @@ Given two vertexes
 \end_inset
 
  to all of its nearest neighbors.
- Consider now creating the object 
-\begin_inset Formula $\left(\left\{ v_{a},v_{b}\right\} ,E_{ab}\right)$
+ Let 
+\begin_inset Formula $\pi$
+\end_inset
+
+ be a projection function, such that 
+\begin_inset Formula $\pi\left(v_{a}\right)=\pi\left(v_{b}\right)$
 \end_inset
 
 .
- This is no longer a seed, as the first item is no longer a single vertex,
- but a set of vertexes.
- The set 
-\begin_inset Formula $E_{ab}$
+ That is, 
+\begin_inset Formula $\pi:V\to B$
 \end_inset
 
- is still a set of edges, depending on the two initial sets of edges 
-\begin_inset Formula $E_{a}$
+ is a map from the vertices 
+\begin_inset Formula $V$
 \end_inset
 
- and 
-\begin_inset Formula $E_{b}$
+ of 
+\begin_inset Formula $G$
 \end_inset
 
-.
- The precise definition of 
-\begin_inset Formula $E_{ab}$
-\end_inset
-
- is not given: it might be the union of 
-\begin_inset Formula $E_{a}$
-\end_inset
-
- and 
-\begin_inset Formula $E_{b}$
-\end_inset
-
-, or the intersection, or some other function.
- In general, one writes 
-\begin_inset Formula $E_{ab}=f\left(E_{a},E_{b}\right)$
-\end_inset
-
- for some function 
-\begin_inset Formula $f$
+ to some other set 
+\begin_inset Formula $B$
 \end_inset
 
 .
- It is typically desirable for 
-\begin_inset Formula $f$
-\end_inset
-
- to be both commutative and associative, so that 
-\begin_inset Formula $f\left(E_{a},E_{b}\right)=f\left(E_{b},E_{a}\right)$
-\end_inset
-
- and 
-\begin_inset Formula $f\left(f\left(E_{a},E_{b}\right),E_{c}\right)=f\left(E_{a},f\left(E_{b},E_{c}\right)\right)=f\left(E_{a},E_{b},E_{c}\right)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The mashing together of several vertexes creates a structure resembling
- a graph quotient, as described above.
- This will be called a stalk in what follows.
- The stalk is defined in such a way that it is not actually a graph quotient;
- it merely resembles one.
- It is a partial step on the way to a graph quotient.
- The definition asks that the internal structure of the stalk be preserved.
- One obtains a true graph quotient only after projecting the stalk down
- to a base space.
 \end_layout
 
 \begin_layout Definition*
-A 
+The 
 \noun on
 stalk
 \noun default
- is an ordered pair 
-\begin_inset Formula $S=\left(V,E\right)$
+ above 
+\begin_inset Formula $b\in B$
 \end_inset
 
- of vertexes and edges such that every edge in 
-\begin_inset Formula $E$
+ is the set 
+\begin_inset Formula $S$
 \end_inset
 
- has one endpoint being a vertex in 
-\begin_inset Formula $V$
+ of seeds such that for each 
+\begin_inset Formula $s=\left(v,E_{v}\right)\in S$
 \end_inset
 
- and the other endpoint being a vertex not in 
-\begin_inset Formula $V$
-\end_inset
-
-.
- That is, each edge in 
-\begin_inset Formula $E$
-\end_inset
-
- is a connector, and no edge in 
-\begin_inset Formula $E$
-\end_inset
-
- is a link (back into 
-\begin_inset Formula $V)$
+, one has that 
+\begin_inset Formula $\pi(v)=b$
 \end_inset
 
 .
- 
-\begin_inset Formula $\diamond$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This definition of a stalk is meant to be a straight-forward generalization
- of the previously defined seed, replacing the germ vertex by a germ that
- is a set of vertexes.
- Stalks can be linked together, much as seeds are:
-\end_layout
-
-\begin_layout Definition*
-A 
-\noun on
-link
-\noun default
- between two different stalks 
-\begin_inset Formula $S_{a}=\left(V_{a},E_{a}\right)$
-\end_inset
-
- and 
-\begin_inset Formula $S_{b}=\left(V_{b},E_{b}\right)$
-\end_inset
-
- is any edge 
-\begin_inset Formula $e=\left(v_{1},v_{2}\right)$
-\end_inset
-
- running between them, 
-\emph on
-viz.
-
-\emph default
- where 
-\begin_inset Formula $v_{1}\in V_{a}$
-\end_inset
-
- and 
-\begin_inset Formula $v_{2}\in V_{b}$
-\end_inset
-
- and 
-\begin_inset Formula $e\in E_{a}$
-\end_inset
-
- and 
-\begin_inset Formula $e\in E_{b}$
-\end_inset
-
-.
- Two stalks are 
-\noun on
-connected
-\noun default
- when there are one or more links between them.
  
 \begin_inset Formula $\diamond$
 \end_inset
@@ -3823,24 +3716,11 @@ connected
 It is convenient (it is suggested) that the vertexes in the stalk be visualized
  as being stacked one on top another, forming a tower or a fiber, with the
  edges sticking out as spines.
- Perhaps one can visualize a kind-of melted stack of jigsaw-puzzle pieces.
- This visualization is suggested only to enforce the idea that two different
- stalks project down to two different base-points.
- In particular, one now can have the notion of a meta-graph where each stalk
- is a vertex, and each link is an edge.
- That is, if one flattens the meta-graph down to two dimensions, then one
- can imagine a stalk growing up as a pole above each meta-vertex, and each
- meta-edge as being the projection of a link between two stalks.
- To maintain consistency with standard mathematical terminology, this meta-graph
- should really be called a 
-\begin_inset Quotes eld
-\end_inset
+ A tower of jigsaw-puzzle pieces.
+ 
+\end_layout
 
-base space
-\begin_inset Quotes erd
-\end_inset
-
-, and the stalks and links project down onto it in the usual sense.
+\begin_layout Standard
 \begin_inset Float figure
 placement h
 wide false
@@ -3876,60 +3756,6 @@ A stalk and it's projection
 \end_layout
 
 \begin_layout Standard
-The notion of projection can be formalized.
-\end_layout
-
-\begin_layout Definition*
-A projection 
-\begin_inset Formula $\pi$
-\end_inset
-
- is a function that accepts a stalk 
-\begin_inset Formula $S=\left(V,E\right)$
-\end_inset
-
- and produces a seed 
-\begin_inset Formula $s=\left(b,E^{\prime}\right)$
-\end_inset
-
- such that for each 
-\begin_inset Formula $v\in V$
-\end_inset
-
-, it produces 
-\begin_inset Formula $b$
-\end_inset
-
-, and for each edge 
-\begin_inset Formula $\left(v,w\right)\in E$
-\end_inset
-
-, it produces the edge 
-\begin_inset Formula $\left(b,w\right)\in E^{\prime}$
-\end_inset
-
-.That is 
-\begin_inset Formula $\pi\left(v,\left(v,w)\right)\right)=\left(b,\left(b,w\right)\right)$
-\end_inset
-
-.
- By abose of notation, one may write 
-\begin_inset Formula $\pi\left(v\right)=b$
-\end_inset
-
- so that 
-\begin_inset Formula $\pi\left(v,\left(v,w)\right)\right)=\left(\pi\left(v\right),\left(\pi\left(v\right),w\right)\right)$
-\end_inset
-
-.
- 
-\begin_inset Formula $\diamond$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Definition*
 The desirable properties of the projection can be summarized in a lemma:
 \end_layout
 
