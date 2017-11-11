@@ -464,7 +464,11 @@ seed
 germ
 \noun default
  of the seed.
- 
+ For each edge in the edge set, the other vertex is calld the 
+\noun on
+connector
+\noun default
+.
 \begin_inset Formula $\diamond$
 \end_inset
 
@@ -728,6 +732,34 @@ connected
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+This definition of a link is imprecise.
+ A more proper, technical definition is that a link can be formed only when
+ the germ 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ has 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ as a connector, and also, at the same time, the germ 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ has 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ as a connector; only then can the two be joined together.
+ The joining is meant to be optional, not mandatory: just because a section
+ contains connectors that can be joined, it does not imply that they must
+ be.
+ The joining is also meant to consume the connectors as a resource: once
+ two connectors have been connected, neither one is free to make connections
+ elsewhere.
 \end_layout
 
 \begin_layout Standard
@@ -1035,23 +1067,52 @@ Given a section
 \noun on
 link
 \noun default
+ between seeds 
+\begin_inset Formula $s_{1}=\left(v_{1},E_{1}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{2}=\left(v_{2},E_{2}\right)$
+\end_inset
+
  is any edge 
 \begin_inset Formula $\left(v_{1},v_{2}\right)$
 \end_inset
 
- where both 
+ where 
 \begin_inset Formula $v_{1}$
+\end_inset
+
+ appears in a type in 
+\begin_inset Formula $E_{2}$
 \end_inset
 
  and 
 \begin_inset Formula $v_{2}$
 \end_inset
 
- appear as germs of seeds in 
-\begin_inset Formula $S$
+ appears as a type in 
+\begin_inset Formula $E_{1}$
 \end_inset
 
 .
+ That is, there exists a pair 
+\begin_inset Formula $\left(v_{1},t_{a}\right)\in E_{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $v_{2}\in t_{a}$
+\end_inset
+
+ and, symmetrically, there exists a pair 
+\begin_inset Formula $\left(v_{2},t_{b}\right)\in E_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $v_{1}\in t_{b}$
+\end_inset
+
+ .
  Two seeds are 
 \noun on
 connected
@@ -1065,7 +1126,10 @@ connected
 \end_layout
 
 \begin_layout Standard
-The figure below illustrates the idea.
+As before, the creation of links is meant to be optional, not forced.
+ As before, the connectors are meant to be consumable: once connected, they
+ cannot be used again.
+ The figure below illustrates the idea.
 \end_layout
 
 \begin_layout Standard
@@ -1097,13 +1161,40 @@ Seed connectors might be types, not vertexes
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Its important to realize that the standard approach to graph theory has
+ been left behind.
+ Although it is possible to hook up seeds to form a graph, it is also possible
+ to have a collection of seeds that is not a graph: the category of sections
+ contain the category of graphs as a subset.
+ Extending the notion of a connector to be the notion of a connector-type
+ in particular plays considerable violence to the notion of graph theory.
+ As long as the narrower defintion of seed was used, one could imagine that
+ a collection of seeds could be assembled into a graph, and that assembly
+ is unique.
+ Once connector types are introduced, the possibility that there are multiple,
+ non-unique assemblages of seeds becomes possible.
+ A graph can be disassembled into seeds, and, if one is careful to label
+ veretexes and edges in a unique way, that collection can be viewed as isomorphi
+c to the original graph.
+ If one is not careful, slopply assigning labels or avoiding them entirely,
+ the collection can have multiple non-isomorphic re-assemblies.
+ The ability to be sloppy in this way is one of the appeals, one of the
+ benefits of working with seeds and sections.
+ They provide 
+\begin_inset Quotes eld
+\end_inset
+
+elbow room
+\begin_inset Quotes erd
+\end_inset
+
+ not available in (naive) graph theory.
 \end_layout
 
 \begin_layout Subsection*
