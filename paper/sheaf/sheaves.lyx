@@ -6180,8 +6180,92 @@ common sense
 
  being a commodity in short supply, the gluing axioms must be written in
  detail.
- There are three of them.
- First, a functor is defined.
+ Before this can be done, the axioms for a presheaf must be reviewed.
+ There are several.
+ Rather than presenting these as axioms, they are presented below as 
+\begin_inset Quotes eld
+\end_inset
+
+claims
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is up to the reader to verify that the structures defined earlier satisfy
+ these claims.
+ This is done for several reasons.
+ First, such proofs are a bit tedious, and would be out of place in this
+ otherwise rather informal treatment of the topic.
+ Second, the overall informality of this document gives little support for
+ weighty proofs.
+ Third, most of these claims should be fairly self-evident, upon a bit of
+ exploration.
+ Finally, many choices were left to the reader: should edges be directed?
+ Are they labelled? Do vertexes carry additional markings or values? Each
+ choice of labelling and marking potentially affects the verification of
+ these claims.
+ Thus, the below are presented as 
+\begin_inset Quotes eld
+\end_inset
+
+claims
+\begin_inset Quotes erd
+\end_inset
+
+, living in limbo between axioms and theorems.
+\end_layout
+
+\begin_layout Standard
+First, a definition.
+\end_layout
+
+\begin_layout Definition*
+An 
+\noun on
+open subgrarph
+\noun default
+ 
+\begin_inset Formula $U$
+\end_inset
+
+ of a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is defined to be a section of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This defintion helps avoid what would otherwise be confusing terminology.
+ The open subgraphs below will always be subgraphs of the base space 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ The open subgraphs are created by taking scissors and cutting edges in
+ the graph, but leaving the cut half-edges attached, as they were originally.
+ That is, the cut edges are converted into connectors.
+ By leaving these connectors in place, much of the information needed to
+ glue them back together remains intact.
+ It is up to the reader to convince themselves that these open subgraphs
+ behave essentially the same way as open sets in a topological space do:
+ one can take intersections and unions, and doing so still results in an
+ open subgraph.
+ One can even build a Borel algebra out of them, but his will not be needed.
+\end_layout
+
+\begin_layout Standard
+The presheaf is defined in terms of a functor and it's properties.
+ 
 \end_layout
 
 \begin_layout Claim*
@@ -6189,7 +6273,7 @@ There exists a functor
 \begin_inset Formula $F$
 \end_inset
 
- such that, for each subgraph 
+ such that, for each open subgraph 
 \begin_inset Formula $U$
 \end_inset
 
@@ -6218,7 +6302,7 @@ Next, the restriction morphism, which cuts down or restricts this collection.
 \end_layout
 
 \begin_layout Claim*
-For each subgraph 
+For each open subgraph 
 \begin_inset Formula $V\subseteq U$
 \end_inset
 
@@ -6244,13 +6328,13 @@ Since
 \end_inset
 
 to be smaller, also.
- The restriction morphism trims away the wnated parts.
+ The restriction morphism trims away the unwanted parts.
  The trimming needs to stay faithful, to preserve the structure.
  Thus
 \end_layout
 
 \begin_layout Claim*
-For every subgraph 
+For every open subgraph 
 \begin_inset Formula $U$
 \end_inset
 
@@ -6280,7 +6364,7 @@ The restrictions must compose in a natural way, as well, so that if one
 \end_layout
 
 \begin_layout Claim*
-For a sequence of subgraphs 
+For a sequence of open subgraphs 
 \begin_inset Formula $W\subseteq V\subseteq U$
 \end_inset
 
@@ -6297,15 +6381,15 @@ For a sequence of subgraphs
 \end_layout
 
 \begin_layout Standard
-If a system obeys the above, it is techically called a 
+If a system obeys the above, it is technically called a 
 \noun on
 presheaf
 \noun default
 .
- It is much like the general cconcept that this document has been illustrating,
- but one can create some unusual structures that obey the axioms above,
- but aren't quite what was intended for a sheaf.
- 
+ A presheaf is much like the (informal) defintion given for a sheaf, above.
+ However, it is possible to create structures that satisfy the above claims
+ (axioms), but don't quite math the intended definition of a sheaf.
+ More is needed.
 \end_layout
 
 \begin_layout Subsection*
@@ -6336,6 +6420,10 @@ restriction morphisms
 \begin_layout Standard
 these are listed as claims since not totally self-evident left as exercise
  for reader.
+\end_layout
+
+\begin_layout Standard
+cohomology only if 2-cels, homtotpy of graphs is trivial
 \end_layout
 
 \begin_layout Subsection*
