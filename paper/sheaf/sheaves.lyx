@@ -6285,7 +6285,7 @@ There exists a functor
 \begin_inset Formula $F(U)$
 \end_inset
 
- of stalks and sections above 
+ of sections above 
 \begin_inset Formula $U$
 \end_inset
 
@@ -6388,8 +6388,11 @@ presheaf
 .
  A presheaf is much like the (informal) defintion given for a sheaf, above.
  However, it is possible to create structures that satisfy the above claims
- (axioms), but don't quite math the intended definition of a sheaf.
- More is needed.
+ (axioms), but don't quite match the intended definition of a sheaf.
+ In particular, the above are not enough to gaurantee that the sections
+ in the presheaf can be organized properly into stalks.
+ To get well-behaved stalks, more is needed.
+ These are the gluing axioms.
 \end_layout
 
 \begin_layout Subsection*
@@ -6397,29 +6400,285 @@ Gluing axioms
 \end_layout
 
 \begin_layout Standard
-x
-\end_layout
+The open subgraphsbehave much like open sets.
+ Thus, the concept of an open covering can be imported in a straight-forward
+ way.
+ A collection 
+\begin_inset Formula $\left\{ U_{i}\right\} $
+\end_inset
 
-\begin_layout Standard
-x
-\end_layout
+ of open subgraphs is an open cover for an open subgraph 
+\begin_inset Formula $U$
+\end_inset
 
-\begin_layout Standard
-x
+ if the union of all the 
+\begin_inset Formula $U_{i}$
+\end_inset
+
+ contain 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ That is, they are an open cover if 
+\begin_inset Formula $U\subseteq\bigcup_{i}U_{i}$
+\end_inset
+
+.
+ The union of open subgraphs is meant to be 
 \begin_inset Quotes eld
 \end_inset
 
-restriction morphisms
+obvious
 \begin_inset Quotes erd
 \end_inset
 
- of a sheaf.
- 
+: join together the connectors, where possible.
 \end_layout
 
 \begin_layout Standard
-these are listed as claims since not totally self-evident left as exercise
- for reader.
+A presheaf is a sheaf if it obeys the following two claims/axioms.
+\end_layout
+
+\begin_layout Claim*
+(Locality) If 
+\begin_inset Formula $\left\{ U_{i}\right\} $
+\end_inset
+
+ is an open cover for 
+\begin_inset Formula $U$
+\end_inset
+
+, and if 
+\begin_inset Formula $s,t\in F\left(U\right)$
+\end_inset
+
+ are sections such that 
+\begin_inset Formula $s\vert_{U_{i}}=t\vert_{U_{i}}$
+\end_inset
+
+ for each 
+\begin_inset Formula $U_{i}$
+\end_inset
+
+, then 
+\begin_inset Formula $s=t$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the above, the notation 
+\begin_inset Formula $s\vert_{V}$
+\end_inset
+
+ denotes the restriction of the section 
+\begin_inset Formula $s$
+\end_inset
+
+ to the open subgraph 
+\begin_inset Formula $V$
+\end_inset
+
+ of the base space
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Pictorially, 
+\begin_inset Formula $s\vert_{V}$
+\end_inset
+
+ is that part of the section that sits on the stalks above 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ It is a trimming-down of 
+\begin_inset Formula $s$
+\end_inset
+
+ so that it projects cleanly down to 
+\begin_inset Formula $V$
+\end_inset
+
+ and to nothing larger.
+ If each 
+\begin_inset Formula $U_{i}$
+\end_inset
+
+ is a seed in the base space, then 
+\begin_inset Formula $s\vert_{U_{i}}$
+\end_inset
+
+ is a seed in the stalk above 
+\begin_inset Formula $U_{i}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $s\vert_{U_{i}}$
+\end_inset
+
+ might be the empty set.
+ The locality axiom is basically saying 
+\begin_inset Quotes eld
+\end_inset
+
+stalks exist
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Alternately, the locality axiom says that if you cut up a layer-cake, you
+ can still tell, after the cutting, which layer was which.
+\end_layout
+
+\begin_layout Standard
+The gluing axiom is neede to reassmeble the pieces.
+\end_layout
+
+\begin_layout Claim*
+(Gluing) If 
+\begin_inset Formula $\left\{ U_{i}\right\} $
+\end_inset
+
+ is an open cover for 
+\begin_inset Formula $U$
+\end_inset
+
+, and if 
+\begin_inset Formula $s_{i}\in F\left(U_{i}\right)$
+\end_inset
+
+ are sections restricted to each 
+\begin_inset Formula $U_{i}$
+\end_inset
+
+, and if, for all pairs 
+\begin_inset Formula $i,j$
+\end_inset
+
+ the 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ agree on overlaps, then there exists a section 
+\begin_inset Formula $s\in F\left(U\right)$
+\end_inset
+
+ such that 
+\begin_inset Formula $s_{i}=s\vert_{U_{i}}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\diamond$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the above, the phrase 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ agree on overlaps
+\begin_inset Quotes erd
+\end_inset
+
+ means that 
+\begin_inset Formula $s_{i}\vert_{U_{i}\cap U_{j}}=s_{j}\vert_{U_{i}\cap U_{j}}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $U_{i}\cap U_{j}$
+\end_inset
+
+ might be the empty set, in which case no agreement is needed.
+ The gluing axioms states, more or less, that if the layer cake is cut into
+ pieces, and the pieces can be reassmbled with the edges lining up correctly,
+ then the original layers can be re-discovered.
+\end_layout
+
+\begin_layout Standard
+Gluing is perhaps not as trivial as it sounds.
+ It will be seen later on that gluing is essentially the same thing as parsing.
+ Obtaining a successful parse is the same thing as obtained a valid section.
+ In the case of natural language, a parse succeeds if and only if a sentence
+ is grammatically valid.
+ But of course! the sections of a natural language sheaf are exactly the
+ grammatical sentences.
+\end_layout
+
+\begin_layout Standard
+Until this more detailed presentation of parsing is described, one can imagine
+ the following scenario.
+ If seeds correspond to jigsaw-puxxle pieces, then the sections 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ correspond to partially-assembled parts of the jigsaw.
+ Two such parts 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ agree on overlaps if 
+\begin_inset Formula $U_{i}\cap U_{j}$
+\end_inset
+
+ is non-empty, and these two parts can be joined together.
+ If the connectors are typed, then there may be multiple distinct connectors
+ that can be joined to one-another.
+ They just might fit.
+ That is, there might be more than one way to make 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ connect, possibly by shifting, turning, the pieces, etc.
+ If one then tried to connect 
+\begin_inset Formula $s_{k}$
+\end_inset
+
+, there might be multiple ways of doing this, leading to a combinatorial
+ explosion.
+ At some point in this process, one might discover that there is simply
+ no way at all to connect the next piece: it just won't fit.
+ One then has to back-track, and try a different arrangement.
+ Obtaining an efficient algorithm to perform this back-tracking is non-trivial:
+ such algorithms are called parsers, and gluing is parsing.
+\end_layout
+
+\begin_layout Subsection*
+Homology
 \end_layout
 
 \begin_layout Standard
