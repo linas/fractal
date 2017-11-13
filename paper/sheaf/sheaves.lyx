@@ -7094,9 +7094,9 @@ This resembles a grammar-school error: an inappropriate application of the
  look like the symbols for multiplication and addition, and we are deeply
  ingrained, from childhood - from grammar school, that multiplication distribute
 s over addition, but not the other way around.
- By using these symbols, introduces a prejudice into one's thinking; the
- prejudice suggests that one operation is manifestly legal, while the other
- is dubious and requires lots of justification.
+ By using these symbols, one introduces a prejudice into one's thinking;
+ the prejudice suggests that one operation is manifestly legal, while the
+ other is dubious and requires lots of justification.
 \end_layout
 
 \begin_layout Standard
@@ -7125,10 +7125,333 @@ The goal of machine learning in data science is the induction of the factorizati
 on and diagonalization from a given dataset.
  Both examples given above are misleading, because they ignore the fact
  that they are embeded in a much larger corpus of language.
+ How might these two cases be induced from first principles, 
+\emph on
+ab initio
+\emph default
+, from nothing at all, except for a bunch of examples? 
 \end_layout
 
 \begin_layout Standard
-allowed,
+On possibility is to start by looking for pair-wise correlations.
+ This works: that is how 
+\begin_inset Formula $\left|Mary\right\rangle \otimes\left|walked\right\rangle $
+\end_inset
+
+ is discovered in the first place: these two words were collocated.
+ Likewise, for 
+\begin_inset Formula $\left|Adam\right\rangle \otimes\left|ran\right\rangle $
+\end_inset
+
+.
+ But what about inducing diagonalization? Here, one observes that Mary does
+ lots of things, and so does Adam.
+ Writing down the collocation stalk for Mary, and the one for Adam should
+ indicate that these two stalks are quite similar.
+ How can similarity be judged? The cosine distance, previously reviewed,
+ is a plausible way to start.
+ One can legitimately conclude that Adam and Mary belong in the same grammatical
+ category.
+ What about 
+\begin_inset Quotes eld
+\end_inset
+
+walked
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+ran
+\begin_inset Quotes erd
+\end_inset
+
+? One can create a stalk for these two as well, and it should not be hard
+ to conclude, using either cosine distance, or something else, that the
+ two are quite similar.
+\end_layout
+
+\begin_layout Standard
+Great.
+ Now what? Just because Adam and Mary are similar, and 
+\begin_inset Quotes eld
+\end_inset
+
+ran
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+walked
+\begin_inset Quotes erd
+\end_inset
+
+ are similar, this is still not quite enough to justify the diagonalization.
+ After all, 
+\begin_inset Quotes eld
+\end_inset
+
+Mary ran
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+Adam walked
+\begin_inset Quotes erd
+\end_inset
+
+ have not been observed; how can one justify that these will likely be observed,
+ which is the central claim that diagonalization is making?
+\end_layout
+
+\begin_layout Standard
+The answer would need to be that certain cross-correlations are only weakly
+ seen.
+ Define the set of named-things, and action-things, already discovered:
+ 
+\begin_inset Formula $names=\{Adam,Mary\}$
+\end_inset
+
+ while 
+\begin_inset Formula $actions=\{ran,walked\}$
+\end_inset
+
+.
+ Let the 
+\begin_inset Formula $\lnot$
+\end_inset
+
+ symbol denote 
+\begin_inset Quotes eld
+\end_inset
+
+not
+\begin_inset Quotes erd
+\end_inset
+
+, so that 
+\begin_inset Formula $\lnot names$
+\end_inset
+
+ is the set of all thigs are not 
+\begin_inset Formula $names$
+\end_inset
+
+, and 
+\begin_inset Formula $\lnot actions$
+\end_inset
+
+ denote all things that are not actions.
+ Consider then the correlation matrix
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $actions$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\lnot actions$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $names$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ 
+\begin_inset Formula $\lnot names$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+n/a
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+The entry 
+\begin_inset Quotes eld
+\end_inset
+
+High
+\begin_inset Quotes erd
+\end_inset
+
+ means that a large amount of correlation is observed, while 
+\begin_inset Quotes eld
+\end_inset
+
+Low
+\begin_inset Quotes erd
+\end_inset
+
+ means that little is observed.
+ Correlation can be measured in many ways; mutual information and Kullbeck-Liebl
+er divergence are popular.
+ 
+\end_layout
+
+\begin_layout Standard
+Why might this work? Well, this correlation matrix embodies the very meaning
+ of 
+\begin_inset Quotes eld
+\end_inset
+
+diagonalization
+\begin_inset Quotes erd
+\end_inset
+
+: a matrix is diagonal, when the entries along the diagonal are large, and
+ the entries not on the diagonal are zero.
+ Observing this structure then justifies writing 
+\begin_inset Formula $names\otimes actions$
+\end_inset
+
+, which is exactly what one wanted to induce.
+ Can one also validly claim that 
+\begin_inset Formula $\left(\lnot names\right)\otimes\left(\lnot actions\right)$
+\end_inset
+
+? Well, probably not.
+ The correlation there might be low or non-existant.
+ It might be hard to compute, and, in the current context, its not clear
+ that its even wanted.
+\end_layout
+
+\begin_layout Standard
+Can one induce factorization in the same way? Factorization, as given above,
+ seemed 
+\begin_inset Quotes eld
+\end_inset
+
+obvious
+\begin_inset Quotes erd
+\end_inset
+
+, but that was only due to the use of symbols that prejudiced one's thinking.
+ Factorization is, in fact, every bit as non-obvious as dialgoalization.
+\end_layout
+
+\begin_layout Standard
+To illustrate this
+\end_layout
+
+\begin_layout Standard
+Its not even clear
+\end_layout
+
+\begin_layout Standard
+is table allowed,blah
 \end_layout
 
 \begin_layout Subsection*
