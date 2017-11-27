@@ -7,6 +7,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int tridig(double x)
 {
@@ -21,7 +22,7 @@ double cantern(double x, double w)
 	double y = 0.0;
 	double wn = w;
 
-	for (int i=1; i<30; i++)
+	for (int i=1; i<32; i++)
 	{
 		int dig = tridig(x); // ternary digit of x.
 		x = 3.0*x - dig;     // right-shift
@@ -29,12 +30,14 @@ double cantern(double x, double w)
 		y += dig * wn;
 		wn *= w;
 	}
+
+	return y;
 }
 
 int main (int argc, char *argv[])
 {
 	int npts = 400;
-	double w = 1.0/3.0;
+	double w = atof(argv[1]);
 	for (int i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
