@@ -16,6 +16,7 @@ int tridig(double x)
 	return 2;
 }
 
+// Ternary (base-3) decomposition and reassembly
 double cantern(double x, double w)
 {
 
@@ -34,6 +35,32 @@ double cantern(double x, double w)
 	return y;
 }
 
+// Ternary (base-3) decomposition and zg-zag reassembly
+double zigzag(double x, double w)
+{
+
+	double y = 0.0;
+	double wn = w;
+
+	for (int i=1; i<32; i++)
+	{
+		int dig = tridig(x); // ternary digit of x.
+
+		if (1 == dig)
+		{
+			x = 2.0 - 3.0*x;     // right-shift
+		}
+		else
+		{
+			x = 3.0*x - dig;     // right-shift
+		}
+		y += dig * wn;
+		wn *= w;
+	}
+
+	return y;
+}
+
 int main (int argc, char *argv[])
 {
 	int npts = 400;
@@ -41,7 +68,8 @@ int main (int argc, char *argv[])
 	for (int i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
-		double y = cantern(x, w);
+		// double y = cantern(x, w);
+		double y = zigzag(x, w);
 		printf("%d	%g	%g\n", i,x,y);
 	}
 }
