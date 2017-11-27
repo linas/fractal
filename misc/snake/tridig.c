@@ -15,22 +15,30 @@ int tridig(double x)
 	return 2;
 }
 
-int main ()
+double cantern(double x, double w)
 {
 
-	double x = 4.0/7.0;
 	double y = 0.0;
-	double tn = 1.0/3.0;
+	double wn = w;
 
-	printf("its %g\n", x);
-	for (int i=1; i<20; i++)
+	for (int i=1; i<30; i++)
 	{
-		int dig = tridig(x);
-		x = 3.0*x - dig;
+		int dig = tridig(x); // ternary digit of x.
+		x = 3.0*x - dig;     // right-shift
 
-		y += dig * tn;
-		tn *= 1.0/3.0;
+		y += dig * wn;
+		wn *= w;
+	}
+}
 
-		printf("its %d %g %g %g\n", i,x,y,tn);
+int main (int argc, char *argv[])
+{
+	int npts = 400;
+	double w = 1.0/3.0;
+	for (int i=0; i<npts; i++)
+	{
+		double x = ((double) i) / ((double) npts);
+		double y = cantern(x, w);
+		printf("%d	%g	%g\n", i,x,y);
 	}
 }
