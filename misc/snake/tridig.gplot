@@ -1,16 +1,19 @@
 
 set term png size 1024, 768
-set out 'tridig.png'
+set term png size 800, 600
+set term png size 640, 480
+set out 'cpoly.png'
 
 # set style data linespoints
 set style data lines
 set key right
 
-set title "the foo"
-set xlabel "y"
-set ylabel "sum"
+set title "Cantor Polynomial"
+set xlabel "x = Σ_n b_n / 2^n"
+set ylabel "y = (1-w) Σ_n b_n w^n for w=0.9"
 
 # set yrange [0:1]
+# set yrange [10:]
 
-plot "tridig.dat" using 2:3 title "sum"
+plot "tridig.dat" using 2:3 title ""
 

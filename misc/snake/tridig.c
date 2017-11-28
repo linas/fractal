@@ -9,11 +9,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int bnrydig(double x)
+{
+	if (2.0*x < 1.0) return 0;
+	return 1;
+}
+
 int tridig(double x)
 {
 	if (3.0*x < 1.0) return 0;
 	if (3.0*x < 2.0) return 1;
 	return 2;
+}
+
+// Binary (base-2) decomposition and reassembly
+double cantor(double x, double w)
+{
+
+	double y = 0.0;
+	double wn = w;
+
+	for (int i=1; i<48; i++)
+	{
+		int dig = bnrydig(x); // ternary digit of x.
+		x = 2.0*x - dig;     // right-shift
+
+		y += dig * wn;
+		wn *= w;
+	}
+
+	return (1.0-w)*y;
 }
 
 // Ternary (base-3) decomposition and reassembly
@@ -93,13 +118,14 @@ double zigzag(double x, double w)
 
 int main (int argc, char *argv[])
 {
-	int npts = 1800;
+	int npts = 2801;
 	double w = atof(argv[1]);
 	for (int i=0; i<npts; i++)
 	{
 		double x = ((double) i) / ((double) npts);
+		double y = cantor(x, w);
 		// double y = cantern(x, w);
-		double y = zigzag(x, w);
+		// double y = zigzag(x, w);
 		printf("%d	%g	%g\n", i,x,y);
 	}
 }
