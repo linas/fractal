@@ -16,8 +16,6 @@
 double circle_map(double xn, double omega, double Kbar)
 {
 	double xnp1 = xn + omega - Kbar * sin(2.0 * M_PI * xn);
-	while (xnp1 < 0.0) xnp1 += 1.0;
-	while (xnp1 > 1.0) xnp1 -= 1.0;
 	return xnp1;
 }
 
@@ -25,12 +23,13 @@ double circle_map(double xn, double omega, double Kbar)
 double sawtooth_map(double xn, double omega, double Kbar)
 {
 	double tri = xn;
+	while (tri < 0.0) tri += 1.0;
+	while (tri > 1.0) tri -= 1.0;
+
 	if (0.75 < xn) tri = xn - 1.0;
 	else if (0.25 < xn) tri = 0.5 - xn;
 
 	double xnp1 = xn + omega + Kbar * tri;
-	while (xnp1 < 0.0) xnp1 += 1.0;
-	while (xnp1 > 1.0) xnp1 -= 1.0;
 	return xnp1;
 }
 
@@ -56,19 +55,21 @@ double winding_number(double omega, double Kbar, int itermax,
 
 		/* OK, now start iterating the circle map */
 		for (iter=0; iter < SAMP; iter++) {
-			x += func(omega, Kbar, x);
+			x = func(omega, Kbar, x);
 			cnt ++;
 		}
 		end += x;
 	}
 
 	x = (end-start) / ((double) cnt);
+printf("duude windw= %g for  %g %g \n", x, omega, Kbar);
 	return x;
 }
 
 
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
+printf("duuude %g %g \n", omega, Kbar);
 	return winding_number(omega, Kbar, itermax, circle_map);
 }
 
