@@ -35,7 +35,6 @@ static double winding_number (double omega, double K, int itermax)
 	{
 		double t = rand();
 		t /= RAND_MAX;
-		t -= 0.5;
 		x = t;
 		start += x;
 
@@ -70,7 +69,7 @@ static double noisy_winding_number (double omega, double K, int itermax, double 
 		/* white noise, equi-distributed, sharp cutoff */
 		double t = rand();
 		t /= RAND_MAX;
-		t -= 0.5;
+		// t -= 0.5;
 		x += noise*t;
   	}
 	
@@ -94,9 +93,8 @@ static double rms_winding_number (double omega, double K, int itermax)
 	{
 		double t = rand();
 		t /= RAND_MAX;
-		t -= 0.5;
 		x = t;
-		start = x;
+		start += x;
 
 		/* OK, now start iterating the circle map */
 		for (iter=0; iter < SAMP; iter++) {
@@ -137,7 +135,6 @@ circle_poincare_recurrance_time (double omega, double K, int itermax)
 	{
 		double t = rand();
 		t /= RAND_MAX;
-		t -= 0.5;
 		x = t;
 
 		/* First, we give a spin for 500 cycles, giving the non-chaotic

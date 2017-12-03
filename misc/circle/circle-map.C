@@ -51,7 +51,7 @@ double winding_number(double omega, double Kbar, int itermax,
 		double t = rand();
 		t /= RAND_MAX;
 		x = t;
-		start += x - 0.5; // subtract 1/2 so that avg is zero.
+		start += x;
 
 		/* OK, now start iterating the circle map */
 		for (iter=0; iter < SAMP; iter++) {
