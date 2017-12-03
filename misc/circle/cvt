@@ -1,5 +1,7 @@
 #! /bin/sh
 
 # cat wind-circ.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-circ.png
-cat wind-saw.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-saw.png
+# cat wind-saw.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-saw.png
 
+../../generate/renorm recur-circ j 0.01 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-circ.png

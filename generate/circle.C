@@ -233,5 +233,3 @@ static double circle_map (double omega, double K, int itermax, double param)
 DECL_MAKE_BIFUR(bifurcation_diagram)
 
 /* --------------------------- END OF LIFE ------------------------- */
-
-

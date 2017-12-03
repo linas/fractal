@@ -65,11 +65,69 @@ double winding_number(double omega, double Kbar, int itermax,
 	return x;
 }
 
+/*-------------------------------------------------------------------*/
+/*
+ * Compute the poincare recurrance time for the circle map
+ */
+
+#define EPSILON 0.003
+#define SETTLE_TIME 90
+#define RSAMP 200
+
+double
+recurrance_time (double omega, double Kbar, int itermax,
+                 double (func)(double, double, double) )
+
+{
+	double	x, y;
+	double	xpoint;
+	int		j, iter;
+	long		num_recurs, time_recur=0;
+
+	num_recurs = 0;
+	for (j=0; j<itermax; j++)
+	{
+		double t = rand();
+		t /= RAND_MAX;
+		x = t;
+
+		// First, we give a spin for a few cycles, giving the
+		// non-chaotic parts a chance to phase-lock.
+		for (iter=0; iter<SETTLE_TIME; iter++)
+		{
+			x = func(x, omega, Kbar);
+		}
+
+		// OK, now, we begin to measure the average amount of time
+		// to recur.
+		xpoint = x;
+		long ptime = 0;
+		for (iter=0; iter < RSAMP; iter++)
+		{
+			x = func(x, omega, Kbar);
+			y = fabs (x-xpoint);
+			y -= floor (y);
+			if (y < EPSILON)
+			{
+				num_recurs ++;
+				ptime = iter;
+			}
+		}
+		time_recur += ptime;
+	}
+
+	/* x is the (normalized) number of cycles to reach recurrance */
+	x = (double) time_recur / ((double)num_recurs);
+
+	return x;
+}
+
 
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
 	// return winding_number(omega, Kbar, itermax, circle_map);
-	return winding_number(omega, Kbar, itermax, sawtooth_map);
+	// return winding_number(omega, Kbar, itermax, sawtooth_map);
+	return recurrance_time(omega, Kbar, itermax, circle_map);
 }
 
 DECL_MAKE_HEIGHT (circle_gram);
