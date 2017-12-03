@@ -25,8 +25,8 @@ double sawtooth_map(double xn, double omega, double Kbar)
 	double tri = xn;
 	tri -= floor(tri);
 
-	if (0.75 < tri) tri = xn - 1.0;
-	else if (0.25 < tri) tri = 0.5 - xn;
+	if (0.75 < tri) tri = tri - 1.0;
+	else if (0.25 < tri) tri = 0.5 - tri;
 
 	double K = Kbar * 4.0;
 	double xnp1 = xn + omega - K * tri;
