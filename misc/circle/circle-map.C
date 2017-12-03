@@ -29,7 +29,7 @@ double sawtooth_map(double xn, double omega, double Kbar)
 	if (0.75 < xn) tri = xn - 1.0;
 	else if (0.25 < xn) tri = 0.5 - xn;
 
-	double xnp1 = xn + omega + Kbar * tri;
+	double xnp1 = xn + omega - Kbar * tri;
 	return xnp1;
 }
 
@@ -46,7 +46,7 @@ double winding_number(double omega, double Kbar, int itermax,
 	double start=0.0, end=0.0;
 
 #define SAMP 150
-	for (j=0; j<itermax/SAMP; j++)
+ 	for (j=0; j<itermax/SAMP; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
@@ -55,7 +55,8 @@ double winding_number(double omega, double Kbar, int itermax,
 
 		/* OK, now start iterating the circle map */
 		for (iter=0; iter < SAMP; iter++) {
-			x = func(omega, Kbar, x);
+printf("%d %g\n", cnt, x);
+			x = func(x, omega, Kbar);
 			cnt ++;
 		}
 		end += x;
@@ -73,4 +74,11 @@ printf("duuude %g %g \n", omega, Kbar);
 	return winding_number(omega, Kbar, itermax, circle_map);
 }
 
-DECL_MAKE_HEIGHT (circle_gram);
+// DECL_MAKE_HEIGHT (circle_gram);
+
+int main ( int argc, char * argv[])
+{
+	double om = atof(argv[1]);
+	double kb = atof(argv[2]);
+	winding_number(om, kb, 150, circle_map);
+}
