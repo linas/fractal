@@ -25,10 +25,11 @@ double sawtooth_map(double xn, double omega, double Kbar)
 	double tri = xn;
 	tri -= floor(tri);
 
-	if (0.75 < xn) tri = xn - 1.0;
-	else if (0.25 < xn) tri = 0.5 - xn;
+	if (0.75 < tri) tri = xn - 1.0;
+	else if (0.25 < tri) tri = 0.5 - xn;
 
-	double xnp1 = xn + omega - Kbar * tri;
+	double K = Kbar * 4.0;
+	double xnp1 = xn + omega - K * tri;
 	return xnp1;
 }
 
@@ -67,7 +68,8 @@ double winding_number(double omega, double Kbar, int itermax,
 
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
-	return winding_number(omega, Kbar, itermax, circle_map);
+	// return winding_number(omega, Kbar, itermax, circle_map);
+	return winding_number(omega, Kbar, itermax, sawtooth_map);
 }
 
 DECL_MAKE_HEIGHT (circle_gram);
