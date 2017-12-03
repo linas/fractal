@@ -23,8 +23,7 @@ double circle_map(double xn, double omega, double Kbar)
 double sawtooth_map(double xn, double omega, double Kbar)
 {
 	double tri = xn;
-	while (tri < 0.0) tri += 1.0;
-	while (tri > 1.0) tri -= 1.0;
+	tri -= floor(tri);
 
 	if (0.75 < xn) tri = xn - 1.0;
 	else if (0.25 < xn) tri = 0.5 - xn;
@@ -45,8 +44,8 @@ double winding_number(double omega, double Kbar, int itermax,
 	int cnt=0;
 	double start=0.0, end=0.0;
 
-#define SAMP 150
- 	for (j=0; j<itermax/SAMP; j++)
+#define SAMP 750
+	for (j=0; j<itermax; j++)
 	{
 		double t = rand();
 		t /= RAND_MAX;
@@ -55,7 +54,6 @@ double winding_number(double omega, double Kbar, int itermax,
 
 		/* OK, now start iterating the circle map */
 		for (iter=0; iter < SAMP; iter++) {
-printf("%d %g\n", cnt, x);
 			x = func(x, omega, Kbar);
 			cnt ++;
 		}
@@ -63,22 +61,22 @@ printf("%d %g\n", cnt, x);
 	}
 
 	x = (end-start) / ((double) cnt);
-printf("duude windw= %g for  %g %g \n", x, omega, Kbar);
 	return x;
 }
 
 
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
-printf("duuude %g %g \n", omega, Kbar);
 	return winding_number(omega, Kbar, itermax, circle_map);
 }
 
-// DECL_MAKE_HEIGHT (circle_gram);
+DECL_MAKE_HEIGHT (circle_gram);
 
+#if 0
 int main ( int argc, char * argv[])
 {
 	double om = atof(argv[1]);
 	double kb = atof(argv[2]);
 	winding_number(om, kb, 150, circle_map);
 }
+#endif
