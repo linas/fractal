@@ -70,9 +70,9 @@ double winding_number(double omega, double Kbar, int itermax,
  * Compute the poincare recurrance time for the circle map
  */
 
-#define EPSILON 0.003
+#define EPSILON 0.001
 #define SETTLE_TIME 190
-#define RSAMP 500
+#define RSAMP 4400
 
 double
 recurrance_time (double omega, double Kbar, int itermax,
@@ -125,9 +125,9 @@ recurrance_time (double omega, double Kbar, int itermax,
 
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
-	return winding_number(omega, Kbar, itermax, circle_map);
+	// return winding_number(omega, Kbar, itermax, circle_map);
 	// return winding_number(omega, Kbar, itermax, sawtooth_map);
-	// return recurrance_time(omega, Kbar, itermax, circle_map);
+	return recurrance_time(omega, Kbar, itermax, circle_map);
 	// return recurrance_time(omega, Kbar, itermax, sawtooth_map);
 }
 
