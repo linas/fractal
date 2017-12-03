@@ -71,8 +71,8 @@ double winding_number(double omega, double Kbar, int itermax,
  */
 
 #define EPSILON 0.003
-#define SETTLE_TIME 90
-#define RSAMP 200
+#define SETTLE_TIME 190
+#define RSAMP 500
 
 double
 recurrance_time (double omega, double Kbar, int itermax,
@@ -127,7 +127,8 @@ static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
 	// return winding_number(omega, Kbar, itermax, circle_map);
 	// return winding_number(omega, Kbar, itermax, sawtooth_map);
-	return recurrance_time(omega, Kbar, itermax, circle_map);
+	// return recurrance_time(omega, Kbar, itermax, circle_map);
+	return recurrance_time(omega, Kbar, itermax, sawtooth_map);
 }
 
 DECL_MAKE_HEIGHT (circle_gram);
