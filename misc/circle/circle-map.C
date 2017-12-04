@@ -20,7 +20,7 @@ double circle_map(double xn, double omega, double Kbar)
 }
 
 // Triangle-map approximation to circle map. Kbar = K/2pi
-double sawtooth_map(double xn, double omega, double Kbar)
+double triangle_map(double xn, double omega, double Kbar)
 {
 	double tri = xn;
 	tri -= floor(tri);
@@ -70,9 +70,10 @@ double winding_number(double omega, double Kbar, int itermax,
  * Compute the poincare recurrance time for the circle map
  */
 
-#define EPSILON 0.001
+// #define EPSILON 0.001
+#define EPSILON 0.003
 #define SETTLE_TIME 190
-#define RSAMP 4400
+#define RSAMP 2400
 
 double
 recurrance_time (double omega, double Kbar, int itermax,
@@ -126,9 +127,9 @@ recurrance_time (double omega, double Kbar, int itermax,
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
 	// return winding_number(omega, Kbar, itermax, circle_map);
-	// return winding_number(omega, Kbar, itermax, sawtooth_map);
-	return recurrance_time(omega, Kbar, itermax, circle_map);
-	// return recurrance_time(omega, Kbar, itermax, sawtooth_map);
+	// return winding_number(omega, Kbar, itermax, triangle_map);
+	// return recurrance_time(omega, Kbar, itermax, circle_map);
+	return recurrance_time(omega, Kbar, itermax, triangle_map);
 }
 
 DECL_MAKE_HEIGHT (circle_gram);
