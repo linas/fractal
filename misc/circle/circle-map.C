@@ -127,9 +127,9 @@ recurrance_time (double omega, double Kbar, int itermax,
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
 	// return winding_number(omega, Kbar, itermax, circle_map);
-	// return winding_number(omega, Kbar, itermax, triangle_map);
+	return winding_number(omega, Kbar, itermax, triangle_map);
 	// return recurrance_time(omega, Kbar, itermax, circle_map);
-	return recurrance_time(omega, Kbar, itermax, triangle_map);
+	// return recurrance_time(omega, Kbar, itermax, triangle_map);
 }
 
 DECL_MAKE_HEIGHT (circle_gram);
