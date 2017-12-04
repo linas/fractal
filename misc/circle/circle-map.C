@@ -19,7 +19,7 @@ double circle_map(double xn, double omega, double Kbar)
 	return xnp1;
 }
 
-// Triangle-map approximation to circle map. Kbar = K/2pi
+// Triangle-map approximation to circle map. Kbar = K/4
 double triangle_map(double xn, double omega, double Kbar)
 {
 	double tri = xn;
@@ -29,6 +29,19 @@ double triangle_map(double xn, double omega, double Kbar)
 	else if (0.25 < tri) tri = 0.5 - tri;
 
 	double K = Kbar * 4.0;
+	double xnp1 = xn + omega - K * tri;
+	return xnp1;
+}
+
+// Sawtooth. Bernoulli-like. Completely missing a repellor.
+double sawtooth_map(double xn, double omega, double Kbar)
+{
+	double tri = xn;
+	tri -= floor(tri);
+
+	if (0.5 < tri) tri = tri - 1.0;
+
+	double K = Kbar * 2.0;
 	double xnp1 = xn + omega - K * tri;
 	return xnp1;
 }
@@ -72,11 +85,11 @@ double winding_number(double omega, double Kbar, int itermax,
 
 // #define EPSILON 0.001
 #define EPSILON 0.003
-#define SETTLE_TIME 190
-#define RSAMP 2400
+#define SETTLE_TIME 1291
+#define RSAMP 5400
 
 double
-recurrance_time (double omega, double Kbar, int itermax,
+recurrance_time (double omeg, double Kba, int itermax,
                  double (func)(double, double, double) )
 
 {
@@ -92,6 +105,9 @@ recurrance_time (double omega, double Kbar, int itermax,
 		t /= RAND_MAX;
 		x = t;
 
+// 800 x 800 pixels -- add some jitter.
+double omega = omeg + (t-0.5)/801.0;
+double Kbar = Kba + (t-0.5)/801.0;
 		// First, we give a spin for a few cycles, giving the
 		// non-chaotic parts a chance to phase-lock.
 		for (iter=0; iter<SETTLE_TIME; iter++)
@@ -127,9 +143,11 @@ recurrance_time (double omega, double Kbar, int itermax,
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
 	// return winding_number(omega, Kbar, itermax, circle_map);
-	return winding_number(omega, Kbar, itermax, triangle_map);
+	// return winding_number(omega, Kbar, itermax, triangle_map);
+	return winding_number(omega, Kbar, itermax, sawtooth_map);
 	// return recurrance_time(omega, Kbar, itermax, circle_map);
 	// return recurrance_time(omega, Kbar, itermax, triangle_map);
+	// return recurrance_time(omega, Kbar, itermax, sawtooth_map);
 }
 
 DECL_MAKE_HEIGHT (circle_gram);

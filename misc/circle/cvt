@@ -1,7 +1,8 @@
 #! /bin/sh
 
 # cat wind-circ.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-circ.png
-cat wind-tri.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-tri.png
+# cat wind-tri.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-tri.png
+# cat wind-saw.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-saw.png
 
 # ../../generate/renorm recur-circ j 0.01 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-circ.png
@@ -10,14 +11,15 @@ cat wind-tri.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-tri.png
 # ../../generate/renorm jlog j 0.1 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > j.png
 
-# ../../generate/renorm recur-saw j 0.005 0
-# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-saw.png
-
 # ../../generate/renorm recur-tri j 0.0032 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-tri.png
 
-# ../../generate/renorm recur-saw-q j 0.005 0
-# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-saw-q.png
+# ../../generate/renorm recur-tri-q j 0.005 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-tri-q.png
 
-# ../../generate/renorm recur-saw-3e j 0.005 0
-# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-saw-3e.png
+# ../../generate/renorm recur-tri-3e j 0.005 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-tri-3e.png
+
+../../generate/renorm recur-saw j 0.05 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-saw.png
+
