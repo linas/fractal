@@ -3,8 +3,9 @@
 # cat wind-circ.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-circ.png
 # cat wind-tri.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-tri.png
 # cat wind-saw.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-saw.png
+# cat wind-down-saw.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > wind-down-saw.png
 
-# ../../generate/renorm recur-circ j 0.01 0
+# ../../generate/renorm recur-circ j 0.004 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-circ.png
 
 # ../../generate/takelog recur-circ jlog
@@ -20,6 +21,15 @@
 # ../../generate/renorm recur-tri-3e j 0.005 0
 # cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-tri-3e.png
 
-../../generate/renorm recur-saw j 0.05 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-saw.png
+# ../../generate/renorm recur-saw j 0.05 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-saw.png
+
+# ../../generate/renorm conf-saw j 0.05 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > conf-saw.png
+
+# ../../generate/renorm big-saw j 0.003 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > j.png
+
+../../generate/renorm recur-down-saw j 0.003 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > recur-down-saw.png
 

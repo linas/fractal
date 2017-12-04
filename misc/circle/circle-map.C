@@ -103,11 +103,16 @@ recurrance_time (double omeg, double Kba, int itermax,
 	{
 		double t = rand();
 		t /= RAND_MAX;
-		x = t;
 
 // 800 x 800 pixels -- add some jitter.
 double omega = omeg + (t-0.5)/801.0;
+		t = rand();
+		t /= RAND_MAX;
 double Kbar = Kba + (t-0.5)/801.0;
+		t = rand();
+		t /= RAND_MAX;
+		x = t;
+
 		// First, we give a spin for a few cycles, giving the
 		// non-chaotic parts a chance to phase-lock.
 		for (iter=0; iter<SETTLE_TIME; iter++)
@@ -139,15 +144,32 @@ double Kbar = Kba + (t-0.5)/801.0;
 	return x;
 }
 
+double
+recurrance_conform (double omeg, double Kba, int itermax,
+                 double (func)(double, double, double) )
+
+{
+	double omega = omeg;
+	double Kbar = 2.0 * Kba * omeg;
+	// omega = 0.5 + (omeg-0.5) * (1.0 - 0.25* Kba);
+	// omega = 0.5 + (omeg-0.5) * (omeg-0.5);
+	// omega = 0.5 - 2.0 * (omeg-0.5) * (omeg-0.5);
+	// omega = omeg * (1.0 - 2.0*Kba) + 2.0*Kba; 
+	// omega = omeg * (1.0 - 2.0*Kba) + 2.0*Kba * (4.0* omeg * omeg * omeg);
+	// omega = omeg * (1.0 - 2.0*Kba) + 2.0*Kba * (2.0* omeg * omeg);
+	Kbar = 2.0 * Kba * omega;
+	return recurrance_time (omega, Kbar, itermax, func);
+}
 
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
 	// return winding_number(omega, Kbar, itermax, circle_map);
 	// return winding_number(omega, Kbar, itermax, triangle_map);
-	return winding_number(omega, Kbar, itermax, sawtooth_map);
+	// return winding_number(omega, Kbar, itermax, sawtooth_map);
 	// return recurrance_time(omega, Kbar, itermax, circle_map);
 	// return recurrance_time(omega, Kbar, itermax, triangle_map);
-	// return recurrance_time(omega, Kbar, itermax, sawtooth_map);
+	return recurrance_time(omega, Kbar, itermax, sawtooth_map);
+	// return recurrance_conform(omega, Kbar, itermax, sawtooth_map);
 }
 
 DECL_MAKE_HEIGHT (circle_gram);
