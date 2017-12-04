@@ -50,7 +50,7 @@ double sawtooth_map(double xn, double omega, double Kbar)
 /*
  * This routine computes average winding number taken by the map.
  */
-double winding_number(double omega, double Kbar, int itermax,
+double winding_number(double omeg, double Kba, int itermax,
                       double (func)(double, double, double) )
 {
    double	x=0.0;
@@ -62,6 +62,15 @@ double winding_number(double omega, double Kbar, int itermax,
 	for (j=0; j<itermax; j++)
 	{
 		double t = rand();
+		t /= RAND_MAX;
+
+// 800 x 800 pixels -- add some jitter.
+double omega = omeg + (t-0.5)/801.0;
+		t = rand();
+		t /= RAND_MAX;
+double Kbar = Kba + (t-0.5)/801.0;
+
+		t = rand();
 		t /= RAND_MAX;
 		x = t;
 		start += x;
@@ -85,8 +94,8 @@ double winding_number(double omega, double Kbar, int itermax,
 
 // #define EPSILON 0.001
 #define EPSILON 0.003
-#define SETTLE_TIME 1291
-#define RSAMP 5400
+#define SETTLE_TIME 291
+#define RSAMP 3400
 
 double
 recurrance_time (double omeg, double Kba, int itermax,
@@ -105,10 +114,13 @@ recurrance_time (double omeg, double Kba, int itermax,
 		t /= RAND_MAX;
 
 // 800 x 800 pixels -- add some jitter.
-double omega = omeg + (t-0.5)/801.0;
+// Except it needs to be correctly normalized, basd on magnification..!
+// which we don't have available here.
+#define JITTER ((double) (800*2*2))
+double omega = omeg + (t-0.5)/JITTER;
 		t = rand();
 		t /= RAND_MAX;
-double Kbar = Kba + (t-0.5)/801.0;
+double Kbar = Kba + (t-0.5)/JITTER;
 		t = rand();
 		t /= RAND_MAX;
 		x = t;
@@ -164,11 +176,11 @@ recurrance_conform (double omeg, double Kba, int itermax,
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
 	// return winding_number(omega, Kbar, itermax, circle_map);
-	// return winding_number(omega, Kbar, itermax, triangle_map);
+	return winding_number(omega, Kbar, itermax, triangle_map);
 	// return winding_number(omega, Kbar, itermax, sawtooth_map);
 	// return recurrance_time(omega, Kbar, itermax, circle_map);
 	// return recurrance_time(omega, Kbar, itermax, triangle_map);
-	return recurrance_time(omega, Kbar, itermax, sawtooth_map);
+	// return recurrance_time(omega, Kbar, itermax, sawtooth_map);
 	// return recurrance_conform(omega, Kbar, itermax, sawtooth_map);
 }
 
