@@ -116,7 +116,8 @@ recurrance_time (double omeg, double Kba, int itermax,
 // 800 x 800 pixels -- add some jitter.
 // Except it needs to be correctly normalized, basd on magnification..!
 // which we don't have available here.
-#define JITTER ((double) (800*2*2))
+// #define JITTER ((double) (800*2*2))
+#define JITTER ((double) (800))
 double omega = omeg + (t-0.5)/JITTER;
 		t = rand();
 		t /= RAND_MAX;
@@ -176,11 +177,11 @@ recurrance_conform (double omeg, double Kba, int itermax,
 static double circle_gram(double omega, double Kbar, int itermax, double param)
 {
 	// return winding_number(omega, Kbar, itermax, circle_map);
-	return winding_number(omega, Kbar, itermax, triangle_map);
+	// return winding_number(omega, Kbar, itermax, triangle_map);
 	// return winding_number(omega, Kbar, itermax, sawtooth_map);
 	// return recurrance_time(omega, Kbar, itermax, circle_map);
 	// return recurrance_time(omega, Kbar, itermax, triangle_map);
-	// return recurrance_time(omega, Kbar, itermax, sawtooth_map);
+	return recurrance_time(omega, Kbar, itermax, sawtooth_map);
 	// return recurrance_conform(omega, Kbar, itermax, sawtooth_map);
 }
 
