@@ -36,6 +36,31 @@ double bern(double x, double K)
 	return K*x;
 }
 
+double noadd(double x, double K)
+{
+	if (0.5 <= x)
+	{
+		return mult_xor (K, (x - 0.5));
+	}
+	return mult_xor(K, x);
+}
+
+double tent(double x, double K)
+{
+	K *= 2.0;
+	if (0.5 <= x)
+	{
+		return K * (1.0 - x);
+	}
+	return K*x;
+}
+
+double feig(double x, double K)
+{
+	K *= 4.0;
+	return K * x * (1.0 - x);
+}
+
 static void bifurcation_diagram (float *array,
                                  int array_size,
                                  double x_center,
@@ -56,8 +81,12 @@ static void bifurcation_diagram (float *array,
 		double x = t;
 
 		/* OK, now start iterating the benoulli map */
-		for (int iter=0; iter < 50; iter++) {
-			x = bern(x, K);
+		for (int iter=0; iter < 550; iter++)
+		{
+			// x = bern(x, K);
+			// x = noadd(x, K);
+			x = tent(x, K);
+			// x = feig(x, K);
 
 			double en = array_size * (x-floor(x));
 			int n = en;

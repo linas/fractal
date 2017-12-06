@@ -3,10 +3,19 @@
 # cat junk.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > j.png
 # cat mult.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > m.png
 
-# ../../generate/renorm bern j 1.0 0
-# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > j.png
+# ../../generate/renorm bern j 0.5 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > bern.png
 
-../../generate/takelog bern lo 
-../../generate/renorm lo j 0.5 0
-cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > j.png
+# ../../generate/takelog bern lo 
+# ../../generate/renorm lo j 1.0 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > bernlo.png
+
+# ../../generate/renorm noadd j 1.0 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > noadd.png
+
+../../generate/renorm tent j 0.7 0
+cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > tent.png
+
+# ../../generate/renorm feig j 0.7 0
+# cat j.flo | ../../image/flo2mtv |mtvtoppm | pnmtopng > feig.png
 
