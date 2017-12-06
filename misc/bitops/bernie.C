@@ -67,9 +67,9 @@ static void bifurcation_diagram (float *array,
 			cnt ++;
 		}
 	}
-	
+
 	for (int j=0; j<array_size; j++)
-		array[j] /= cnt;
+		array[j] *= ((double) array_size) / ((double) cnt);
 }
 
 DECL_MAKE_BIFUR(bifurcation_diagram)
