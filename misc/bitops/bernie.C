@@ -18,7 +18,8 @@
 
 static double xprod(double x, double y, int itermax, double param)
 {
-	return mult_xor(x, y);
+	// return mult_xor(x, y);
+	return x*y;
 }
 
 DECL_MAKE_HEIGHT (xprod);

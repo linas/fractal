@@ -15,6 +15,6 @@ all: bernie
 .o:
 	$(CC) -o $@ $^ $(FUNC) -lpthread -lm -lstdc++
 
-bernie.o: bernie.C
+bernie.o: bernie.C $(FUNCDIR)/bitops.h
 
-bernie: bernie.o $(BRAT)
+bernie: bernie.o $(BRAT) $(FUNC)
