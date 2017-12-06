@@ -68,4 +68,13 @@ double mult_xor(double a, double b)
 	return p;
 }
 
+#include <stdio.h>
+#include <stdlib.h>
 
+int main (int argc, char* argv[])
+{
+	double x = atof(argv[1]);
+	double y = atof(argv[2]);
+
+	printf ("its %g %g = %g\n", x,y, mult_xor(x,y));
+}
