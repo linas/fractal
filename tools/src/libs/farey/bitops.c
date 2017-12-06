@@ -60,7 +60,7 @@ double mult_xor(double a, double b)
 
 	// Now convert back to double.
 	double p = 0.0;
-	double h = 0.25;
+	double h = 0.5;
 	for (int i=0; i< MANTISZ; i++)
 	{
 		if (0 != prod[i]) p += h;
