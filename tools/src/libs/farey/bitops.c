@@ -27,13 +27,45 @@ double mult_xor(double a, double b)
 		if (0.5 <= a) abits[i] = 1;
 		else abits[i] = 0;
 
+		// shift left one bit
 		a *= 2.0;
 		if (1.0 <= a) a -= 1.0;
 	}
 
-	// Now, multiply b into a.
+	// The carry-free product
 	char prod[MANTISZ];
 	for (int i=0; i< MANTISZ; i++)
 	{
+		prod[i] = 0;
 	}
+
+	// Now, multiply b into a.
+	for (int i=0; i< MANTISZ; i++)
+	{
+		if (0.5 <= b)
+		{
+			// accumulate (add) a/2^i into the product
+			for (int j=i; j<MANTISZ; j++)
+			{
+				prod[j] = prod[j] ^ abits[j-i];
+			}
+		}
+
+		// shift left one bit
+		b *= 2.0;
+		if (1.0 <= b) b -= 1.0;
+	}
+
+	// Now convert back to double.
+	double p = 0.0;
+	double h = 0.5;
+	for (int i=0; i< MANTISZ; i++)
+	{
+		if (0 != prod[i]) p += h;
+		h *= 0.5;
+	}
+
+	return p;
 }
+
+
