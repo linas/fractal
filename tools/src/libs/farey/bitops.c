@@ -8,6 +8,8 @@
 
 #include <math.h>
 
+#include "bitops.h"
+
 /**
  * Carry-free multiplication.
  * This "multiplies" two floating point numbers, but then fails
@@ -58,7 +60,7 @@ double mult_xor(double a, double b)
 
 	// Now convert back to double.
 	double p = 0.0;
-	double h = 0.5;
+	double h = 0.25;
 	for (int i=0; i< MANTISZ; i++)
 	{
 		if (0 != prod[i]) p += h;
@@ -68,13 +70,21 @@ double mult_xor(double a, double b)
 	return p;
 }
 
+#ifdef UNIT_TEST
+
 #include <stdio.h>
 #include <stdlib.h>
 
 int main (int argc, char* argv[])
 {
+	if (argc < 3)
+	{
+		fprintf(stderr, "%s: expecting two float arguments\n", argv[0]);
+		exit(1);
+	}
 	double x = atof(argv[1]);
 	double y = atof(argv[2]);
 
-	printf ("its %g %g = %g\n", x,y, mult_xor(x,y));
+	printf ("its %g x %g = %g\n", x,y, mult_xor(x,y));
 }
+#endif

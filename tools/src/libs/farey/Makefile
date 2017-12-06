@@ -23,7 +23,7 @@ OBJS=bernoulli.o binomial.o bitops.o \
 	  modular.o moebius.o prime.o question.o question-new.o stern-brocot.o \
      stirling.o totient.o
 
-INCS=bernoulli.h binomial.h cache.h cplex.h Farey.h FareyTree.h \
+INCS=bernoulli.h binomial.h bitops.h cache.h cplex.h Farey.h FareyTree.h \
      flt.h gcf.h gpf.h harmonic.h isqrt.h \
      modular.h moebius.h prime.h question.h stirling.h totient.h
 
@@ -36,7 +36,7 @@ inc:	$(INCS)
 
 bernoulli.o:	bernoulli.c bernoulli.h
 binomial.o:	binomial.c binomial.h
-bitops.o: bitops.c
+bitops.o: bitops.c bitops.h
 cache.o:	cache.c cache.h
 Farey.o:	Farey.C Farey.h
 FareyTree.o:	FareyTree.C FareyTree.h
