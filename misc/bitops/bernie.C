@@ -97,14 +97,14 @@ static void bifurcation_diagram (float *array,
 		double x = t;
 
 		/* OK, now start iterating the benoulli map */
-		for (int iter=0; iter < 550; iter++)
+		for (int iter=0; iter < 50; iter++)
 		{
-			// x = bern(x, K);
+			x = bern(x, K);
 			// x = noadd(x, K);
 			// x = tent(x, K);
 			// x = notent(x, K);
 			// x = feig(x, K);
-			x = nofeig(x, K);
+			// x = nofeig(x, K);
 
 			double en = array_size * (x-floor(x));
 			int n = en;
