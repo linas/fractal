@@ -251,15 +251,159 @@ k_{n}=\begin{cases}
 
 \end_inset
 
-Given the symbolic dynamics, one can reconstruct the original value as
+Given the symbolic dynamics, one can reconstruct the original value whenever
+ 
+\begin_inset Formula $1/2<K$
+\end_inset
+
+ as
 \begin_inset Formula 
 \[
-x=
+x=\frac{k_{0}}{2}+\frac{1}{2K}\left(\frac{k_{1}}{2}+\frac{1}{2K}\left(\frac{k_{2}}{2}+\frac{1}{2K}\left(\frac{k_{3}}{2}+\frac{1}{2K}\left(\cdots\right)\right)\right)\right)
 \]
 
 \end_inset
 
+That is, one clearly sees that 
+\begin_inset Formula $b_{K}(x)$
+\end_inset
 
+ acts as a shift on this sequence:
+\begin_inset Formula 
+\[
+b_{K}(x)=\frac{k_{1}}{2}+\frac{1}{2K}\left(\frac{k_{2}}{2}+\frac{1}{2K}\left(\frac{k_{3}}{2}+\frac{1}{2K}\left(\frac{k_{4}}{2}+\frac{1}{2K}\left(\cdots\right)\right)\right)\right)
+\]
+
+\end_inset
+
+In this sense, this shift is 
+\begin_inset Quotes eld
+\end_inset
+
+exactly solvable
+\begin_inset Quotes erd
+\end_inset
+
+: the above provides a close-form solution for iterating and un-iterating
+ the sequence.
+\end_layout
+
+\begin_layout Subsection
+Visualizations
+\end_layout
+
+\begin_layout Standard
+Why is this interesting to explore? This is best illustrated with some graphs.
+ Shown in figure x is the 
+\begin_inset Quotes eld
+\end_inset
+
+bifurcation diagram
+\begin_inset Quotes erd
+\end_inset
+
+ for the undershift.
+ It visualizes the long-term dynamics of the undershift.
+ This is done as follows.
+ One divides the unit interval into a fixed sequence of equal-sized bins;
+ say a total of 
+\begin_inset Formula $N$
+\end_inset
+
+ bins, so that each is 
+\begin_inset Formula $1/N$
+\end_inset
+
+ in width.
+ Pick a starting 
+\begin_inset Formula $x$
+\end_inset
+
+, and then iterate: if, at the 
+\begin_inset Formula $n$
+\end_inset
+
+'th iteration, one has that 
+\begin_inset Formula $j/N\le b_{K}^{n}(x)<(j+1)/N$
+\end_inset
+
+, then increment the count for the 
+\begin_inset Formula $j$
+\end_inset
+
+'th bin.
+ After a total of 
+\begin_inset Formula $M$
+\end_inset
+
+ iterations, let 
+\begin_inset Formula $c(j;M)$
+\end_inset
+
+ be the count in the 
+\begin_inset Formula $j$
+\end_inset
+
+'th bin.
+ In the limit of a large number of iterations, as well as small bin sizes,
+ one obtains a distribution: 
+\begin_inset Formula 
+\[
+\rho(y;x)=\lim_{N\to\infty}\lim_{M\to\infty}\frac{c(j;M)}{M}\mbox{ for }\frac{j}{N}\le y<\frac{j+1}{N}
+\]
+
+\end_inset
+
+This distribution depends on the initial value 
+\begin_inset Formula $x$
+\end_inset
+
+ chosen for the point to be iterated; a 
+\begin_inset Quotes eld
+\end_inset
+
+nice
+\begin_inset Quotes erd
+\end_inset
+
+ distribution results when one averages over all starting points:
+\begin_inset Formula 
+\[
+\rho(y)=\int_{0}^{1}\rho(y;x)\,dx
+\]
+
+\end_inset
+
+Numerically, this integration can be acheived by randomly sampling a large
+ number of starting points.
+ Observe that 
+\begin_inset Formula $\rho(y)$
+\end_inset
+
+ is a probability distribution:
+\begin_inset Formula 
+\[
+1=\int_{0}^{1}\rho(x)\,dx
+\]
+
+\end_inset
+
+This probability distribution is an eigenstate of the transfer operator
+ for the undershift; the defintion of the transfer operator of the undershift
+ is given later.
+\end_layout
+
+\begin_layout Standard
+For each fixed 
+\begin_inset Formula $K$
+\end_inset
+
+, one obtains a distinct distribution 
+\begin_inset Formula $\rho_{K}(y)$
+\end_inset
+
+.
+ The figure x illustrates
 \end_layout
 
 \end_body
