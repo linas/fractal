@@ -26,7 +26,7 @@ void do_init(int nbits)
 
 	mpf_init(half);
 	mpf_set_ui(half, 1);
-	mpf_div_ui(half, 2);
+	mpf_div_ui(half, half, 2);
 }
 
 void make_mpf(mpf_t& val, double x, int nbits)
@@ -51,14 +51,13 @@ void bern(mpf_t& ex, mpf_t Kay)
 	mpf_mul(ex, ex, Kay);
 }
 
-double tent(double x, double K)
+void tent(mpf_t& ex, mpf_t Kay)
 {
-	K *= 2.0;
-	if (0.5 <= x)
+	if (0 <= mpf_cmp(ex, half))
 	{
-		return K * (1.0 - x);
+		mpf_ui_sub(ex, 1, ex);
 	}
-	return K*x;
+	mpf_mul(ex, ex, Kay);
 }
 
 double feig(double x, double K)
@@ -105,8 +104,8 @@ static void bifurcation_diagram (float *array,
 		/* OK, now start iterating the benoulli map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
-			bern(ex, Kay);
-			// x = tent(x, K);
+			// bern(ex, Kay);
+			tent(ex, Kay);
 			// x = feig(x, K);
 
 			x = mpf_get_d(ex);
