@@ -64,6 +64,8 @@ static void mapping_diagram (float *array,
 
 		x = unbmap(x, 2.0*K);
 
+		x *= 2.0;
+
 		double en = array_size * (x-floor(x));
 		int n = en;
 		if (0 > n) n = 0;
