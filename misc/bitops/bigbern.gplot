@@ -1,6 +1,9 @@
 
-set term png size 640, 480
-set out 'bigbern.png'
+# set term png size 640, 480
+# set out 'bigbern.png'
+
+set term postscript eps color
+set out 'bigbern.eps'
 
 set style data lines
 set key right
@@ -9,5 +12,7 @@ set title "Undershift density"
 set xlabel "y"
 set ylabel "ρ"
 
-plot "bigbern.dat" using 2:3 title ""
+plot "bigbern-0.6.dat" using 2:3 title "K=0.6" linewidth 2, \
+     "bigbern-0.8.dat" using 2:3 title "K=0.8" linewidth 2, \
+     "bigbern-0.9.dat" using 2:3 title "K=0.9" linewidth 2
 

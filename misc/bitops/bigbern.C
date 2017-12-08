@@ -140,10 +140,13 @@ int main (int argc, char * argv[])
 
 	bifurcation_diagram (arr, ARRSZ, 0.0, 0.0, Kay, itermax, 0.0);
 
+	double sum = 0;
 	for (int i=0; i<ARRSZ; i++)
 	{
 		double x = (((double) i) + 0.5) / ((double) ARRSZ);
-		printf("%d	%g	%g\n", i, x, (double) arr[i]);
+		double rho = arr[i];
+		sum += rho / ((double) ARRSZ);
+		printf("%d	%g	%g	%g\n", i, x, rho, sum);
 	}
 }
 #endif
