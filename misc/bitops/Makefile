@@ -7,14 +7,16 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: bernie
+all: bernie bigbern
 
 .C.o:
 	$(CC) -c $< -I $(GENDIR) -I $(FUNCDIR)
 
 .o:
-	$(CC) -o $@ $^ $(FUNC) -lpthread -lm -lstdc++
+	$(CC) -o $@ $^ $(FUNC) -lgmp -lpthread -lm -lstdc++
 
 bernie.o: bernie.C $(FUNCDIR)/bitops.h
+bigbern.o: bigbern.C
 
 bernie: bernie.o $(BRAT) $(FUNC)
+bigbern: bigbern.o $(BRAT)
