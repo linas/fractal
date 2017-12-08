@@ -1,30 +1,37 @@
 /*
- * bernie.C
+ * bigbern.C
  *
- * Altered simplified algorithmic Bernoulli map
+ * Bignum altered Bernoulli map
  * Dec 2017
  */
 
+#iclude <gmp.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "bitops.h"
 #include "brat.h"
 
 /*-------------------------------------------------------------------*/
 /*
  */
 
-#if 0
-static double xprod(double x, double y, int itermax, double param)
+gmp_randstate_t rstate;
+
+void init()
 {
-	// return mult_xor(x, y);
-	return x*y;
+	gmp_randinit_default(rstate);
 }
 
-DECL_MAKE_HEIGHT (xprod);
-#endif
+void make_mpf(mpf_t& val, double x, int nbits)
+{
+	mpz_t digs, tn;
+	mpz_init2(tn, nbits);
+	mpz_init2(digs, nbits);
+	mpz_urandomb(digs, rstate, nbits);
+	mpz_ui_pow_ui(tn, 2, nbits);
+	
+}
 
 double bern(double x, double K)
 {
@@ -34,15 +41,6 @@ double bern(double x, double K)
 		return K * (x - 0.5);
 	}
 	return K*x;
-}
-
-double noadd(double x, double K)
-{
-	if (0.5 <= x)
-	{
-		return mult_xor (K, (x - 0.5));
-	}
-	return mult_xor(K, x);
 }
 
 double tent(double x, double K)
@@ -55,26 +53,10 @@ double tent(double x, double K)
 	return K*x;
 }
 
-double notent(double x, double K)
-{
-	if (0.5 <= x)
-	{
-		return mult_xor (K, (1.0 - x));
-	}
-	return mult_xor(K, x);
-}
-
 double feig(double x, double K)
 {
 	K *= 4.0;
 	return K * x * (1.0 - x);
-}
-
-double nofeig(double x, double K)
-{
-	K *= 2.0;
-	// return mult_xor(K, x * (1.0 - x));
-	return mult_xor(K, mult_xor(x, (1.0 - x)));
 }
 
 static void bifurcation_diagram (float *array,
