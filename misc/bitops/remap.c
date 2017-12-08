@@ -77,7 +77,7 @@ int main (int argc, char* argv[])
 	{
 		double x = ((double) i)/ ((double) npts);
 		double y = unbmap (x, lam);
-		double z = bmap (y, lam);
-		printf("%d	%g	%g	%g	%g\n", i, x, y, z, z-x);
+		double z = bmap (x, lam);
+		printf("%d	%g	%g	%g\n", i, x, y, z);
 	}
 }
