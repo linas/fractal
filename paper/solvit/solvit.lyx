@@ -106,6 +106,62 @@ Introduction
 \begin_layout Standard
 Consider the classic Bernoulli shift.
  This is the iterated map on the unit interval, given by iteration the function
+\begin_inset Formula 
+\[
+b(x)=\begin{cases}
+2x & \mbox{ for }0\le x<\frac{1}{2}\\
+2x-1 & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+The symbolc dynamics of this map gives the binary digit expansion of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ That is, write 
+\begin_inset Formula 
+\[
+b^{n}(x)=(b\circ b\circ\cdots\circ b)(x)=b(b(\cdots b(x)\cdots))
+\]
+
+\end_inset
+
+to denote the 
+\begin_inset Formula $n$
+\end_inset
+
+-fold iteration of 
+\begin_inset Formula $b$
+\end_inset
+
+ and let 
+\begin_inset Formula $b^{0}(x)=x$
+\end_inset
+
+.
+ The symbolic dynamics is given by the bit-sequence
+\begin_inset Formula 
+\[
+b_{k}=\begin{cases}
+0 & \mbox{ if }0\le b^{k}(x)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le b^{k}(x)\le1
+\end{cases}
+\]
+
+\end_inset
+
+Of course, the symbolic dynamics recreates the initial real number:
+\begin_inset Formula 
+\[
+x=\sum_{k=0}^{\infty}b_{k}2^{-k-1}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
