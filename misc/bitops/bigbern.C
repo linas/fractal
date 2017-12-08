@@ -104,8 +104,8 @@ static void bifurcation_diagram (float *array,
 		/* OK, now start iterating the benoulli map */
 		for (int iter=0; iter < NBITS; iter++)
 		{
-			// bern(ex, Kay);
-			tent(ex, Kay);
+			bern(ex, Kay);
+			// tent(ex, Kay);
 			// x = feig(x, K);
 
 			x = mpf_get_d(ex);
@@ -122,12 +122,28 @@ static void bifurcation_diagram (float *array,
 		array[j] *= ((double) array_size) / ((double) cnt);
 }
 
-DECL_MAKE_BIFUR(bifurcation_diagram)
+// DECL_MAKE_BIFUR(bifurcation_diagram)
 
-#if 0
-int main ( int argc, char * argv[])
+#if 1
+int main (int argc, char * argv[])
 {
-	double om = atof(argv[1]);
-	double kb = atof(argv[2]);
+	if (argc < 3)
+	{
+		fprintf(stderr, "Usage: %s K itermax\n", argv[0]);
+		exit(-1);
+	}
+	double Kay = atof(argv[1]);
+	double itermax = atof(argv[2]);
+
+#define ARRSZ 803
+	float arr[ARRSZ];
+
+	bifurcation_diagram (arr, ARRSZ, 0.0, 0.0, Kay, itermax, 0.0);
+
+	for (int i=0; i<ARRSZ; i++)
+	{
+		double x = (((double) i) + 0.5) / ((double) ARRSZ);
+		printf("%d	%g	%g\n", i, x, (double) arr[i]);
+	}
 }
 #endif
