@@ -288,13 +288,40 @@ exactly solvable
  the sequence.
 \end_layout
 
+\begin_layout Standard
+Multiplying out the above sequence, one obtains the series
+\begin_inset Formula 
+\[
+x=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{k_{n}}{\left(2K\right)^{n}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that the Bernoulli shift is re-obtained for 
+\begin_inset Formula $K=1$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
-Visualizations
+Density Visualizations
 \end_layout
 
 \begin_layout Standard
 Why is this interesting to explore? This is best illustrated with some graphs.
- Shown in figure x is the 
+ Shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+ is the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -304,7 +331,11 @@ bifurcation diagram
 
  for the undershift.
  It visualizes the long-term dynamics of the undershift.
- This is done as follows.
+ 
+\end_layout
+
+\begin_layout Standard
+This is done by generating a histogram, and then taking the limit, as follows.
  One divides the unit interval into a fixed sequence of equal-sized bins;
  say a total of 
 \begin_inset Formula $N$
@@ -345,6 +376,7 @@ bifurcation diagram
 \end_inset
 
 'th bin.
+ This count is the histogram.
  In the limit of a large number of iterations, as well as small bin sizes,
  one obtains a distribution: 
 \begin_inset Formula 
@@ -403,24 +435,43 @@ For each fixed
 \end_inset
 
 .
- The figure x illustrates
+ The figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+ illustrates some of these distributions.
+ Note that, for 
+\begin_inset Formula $k<1/2$
+\end_inset
+
+, the distribution is given by a Dirac delta function, located at 
+\begin_inset Formula $y=0$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Undershift Density Distribution
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -466,7 +517,7 @@ The above figure shows three different density distributions, for
  bins, and sampled 24000 times (or 30 times per bin) to perform the averaging
  integral.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Generated with `fractal/misc/bitops/bigbern.C` edited to print only slices.
@@ -477,9 +528,219 @@ Generated with `fractal/misc/bitops/bigbern.C` edited to print only slices.
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The general trend of the distributions, as a function of 
+\begin_inset Formula $K$
+\end_inset
+
+, can be visualized with a 
+\begin_inset Quotes eld
+\end_inset
+
+bifurcation diagram
+\begin_inset Quotes erd
+\end_inset
+
+, shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+.
+ This color-codes each distribution 
+\begin_inset Formula $\rho_{K}(y)$
+\end_inset
+
+ and arranges them in a stack; a horizontal slice through the diagram correspond
+s to 
+\begin_inset Formula $\rho_{K}(y)$
+\end_inset
+
+ for a fixed value of 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ The term 
+\begin_inset Quotes eld
+\end_inset
+
+bifurcation diagram
+\begin_inset Quotes erd
+\end_inset
+
+ comes from its use to visualize the Feigenbaum iterator.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Undershift Bifurcation Diagram
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Undershift-Bifurcation-Diagram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename bern-4K.png
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the density 
+\begin_inset Formula $\rho_{K}(y)$
+\end_inset
+
+, rendered in color.
+ The constant 
+\begin_inset Formula $K$
+\end_inset
+
+ is varied from 0 at the bottom to 1 at the top; whereas 
+\begin_inset Formula $y$
+\end_inset
+
+ runs from 0 on the left to 1 on the right.
+ Thus, a fixed value of 
+\begin_inset Formula $K$
+\end_inset
+
+ corresponds to a horizontal slice through the diagram.
+ The color green represents valus of 
+\begin_inset Formula $\rho_{K}(y)\approx0.5$
+\end_inset
+
+, while red represents 
+\begin_inset Formula $\rho_{K}(y)\gtrsim1$
+\end_inset
+
+ and blue-to-black represents 
+\begin_inset Formula $\rho_{K}(y)\apprle0.25$
+\end_inset
+
+.
+ The diagram is 
+\begin_inset Quotes eld
+\end_inset
+
+interesting
+\begin_inset Quotes erd
+\end_inset
+
+ only for 
+\begin_inset Formula $1/2<K$
+\end_inset
+
+; for smaller 
+\begin_inset Formula $K$
+\end_inset
+
+'s, one has that 
+\begin_inset Formula $\rho_{K}(y)=\delta(y)$
+\end_inset
+
+, indicated by the column of red pixels on the left side of the image.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Symbolic Dynamics
+\end_layout
+
+\begin_layout Standard
+Given that iteration can generate strings of binary digits, and that these
+ can be reassmbled back into rel numbers, it is interesting to ask what
+ those mappings look like.
+ To firm up the notation, let
+\begin_inset Formula $\left(b_{n}\right)=\left(b_{0},b_{1,},\cdots\right)$
+\end_inset
+
+ denote a sequence of bits (or symbols) and write
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+x_{K}\left(\left(b_{n}\right)\right)=\frac{1}{2}\,\sum_{n=0}^{\infty}\frac{b_{n}}{\left(2K\right)^{n}}
+\]
+
+\end_inset
+
+ as the real number generated from that sequence.
+ Conversely, given a real number 
+\begin_inset Formula $x$
+\end_inset
+
+, let 
+\begin_inset Formula $\left(k_{n;K}\left(x\right)\right)$
+\end_inset
+
+ denote the sequence of bits obtained by iterating the undershift on 
+\begin_inset Formula $x$
+\end_inset
+
+ with constant 
+\begin_inset Formula $K$
+\end_inset
+
+.
 \end_layout
 
 \end_body
