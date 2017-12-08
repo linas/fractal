@@ -96,6 +96,11 @@ static void bifurcation_diagram (float *array,
 
 	for (int j=0; j<itermax; j++)
 	{
+		double jit = rand();
+		jit /= RAND_MAX;
+		jit /= 800.0;
+		make_mpf(Kay, 2.0*(K+jit), NBITS);
+
 		double t = rand();
 		t /= RAND_MAX;
 		double x = t;
@@ -122,9 +127,9 @@ static void bifurcation_diagram (float *array,
 		array[j] *= ((double) array_size) / ((double) cnt);
 }
 
-// DECL_MAKE_BIFUR(bifurcation_diagram)
+DECL_MAKE_BIFUR(bifurcation_diagram)
 
-#if 1
+#if 0
 int main (int argc, char * argv[])
 {
 	if (argc < 3)

@@ -24,6 +24,6 @@ remap.o: remap.c
 unbernie.o: unbernie.C
 
 bernie: bernie.o $(BRAT) $(FUNC)
-bigbern: bigbern.o # $(BRAT)
+bigbern: bigbern.o $(BRAT)
 remap: remap.o
 unbernie: unbernie.o $(BRAT)
