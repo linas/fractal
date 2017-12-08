@@ -96,11 +96,46 @@ December 2017
 \end_layout
 
 \begin_layout Abstract
-Exatly solvable models of iteration
+Exatly solvable models of iteration.
+ This is a sequence of explorations that attempt to develop ideas and tools
+ for analyzing and understanding diverse systems such as the Feigenbaum
+ map and the iteracted cirlce map (aka Arnold tongues).
+ We don't quite get there, but do explore systems that can be understood
+ through formal manipulations.
 \end_layout
 
 \begin_layout Section
 Introduction
+\end_layout
+
+\begin_layout Standard
+This is an exploration of iterated maps on the unit interval of the real
+ number line.
+ That is, maps 
+\begin_inset Formula 
+\[
+f:[0,1]\to[0,1]
+\]
+
+\end_inset
+
+together with the consequence of iterating them by composing: 
+\begin_inset Formula 
+\[
+f^{n}(x)=(f\circ f\circ\cdots\circ f)(x)=f(f(\cdots f(x)\cdots))
+\]
+
+\end_inset
+
+Such iterated maps are often ergodic and sometimes chaotic.
+ The below is concerned with some very simple, exactly solvable iterated
+ maps.
+ The goal is to approach more complex and chaotic maps, armed with this
+ toolset.
+\end_layout
+
+\begin_layout Subsection
+Bernoulli shift
 \end_layout
 
 \begin_layout Standard
@@ -145,9 +180,9 @@ to denote the
  The symbolic dynamics is given by the bit-sequence
 \begin_inset Formula 
 \[
-b_{k}=\begin{cases}
-0 & \mbox{ if }0\le b^{k}(x)<\frac{1}{2}\\
-1 & \mbox{ if }\frac{1}{2}\le b^{k}(x)\le1
+b_{n}=\begin{cases}
+0 & \mbox{ if }0\le b^{n}(x)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le b^{n}(x)\le1
 \end{cases}
 \]
 
@@ -156,7 +191,70 @@ b_{k}=\begin{cases}
 Of course, the symbolic dynamics recreates the initial real number:
 \begin_inset Formula 
 \[
-x=\sum_{k=0}^{\infty}b_{k}2^{-k-1}
+x=\sum_{n=0}^{\infty}b_{n}2^{-n-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is well known that the Bernoulli shift is ergodic.
+ The corresponding transfer operator is exactly solvable, and has both discrete
+ and continuous spectra, depending on functional space on which it acts.
+\end_layout
+
+\begin_layout Subsection
+Downshift
+\end_layout
+
+\begin_layout Standard
+Consider a similar shift process; I don't know if it has a commonly used
+ name, so I will call if a 
+\begin_inset Quotes eld
+\end_inset
+
+downshift
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Give a constant 
+\begin_inset Formula $K$
+\end_inset
+
+ fixed so tht 
+\begin_inset Formula $0\le K\le1$
+\end_inset
+
+ the downshift is given by iterating on
+\begin_inset Formula 
+\[
+b_{K}(x)=\begin{cases}
+2Kx & \mbox{ for }0\le x<\frac{1}{2}\\
+2K\left(x-\frac{1}{2}\right) & \mbox{ for }\frac{1}{2}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+ It also genreates a symbolic dynamics, defined inthe same way as above:
+ write
+\begin_inset Formula 
+\[
+k_{n}=\begin{cases}
+0 & \mbox{ if }0\le b_{K}^{n}(x)<\frac{1}{2}\\
+1 & \mbox{ if }\frac{1}{2}\le b_{K}^{n}(x)\le1
+\end{cases}
+\]
+
+\end_inset
+
+Given the symbolic dynamics, one can reconstruct the original value as
+\begin_inset Formula 
+\[
+x=
 \]
 
 \end_inset
