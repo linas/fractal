@@ -627,7 +627,7 @@ name "fig:Undershift-Bifurcation-Diagram"
 \align center
 \begin_inset Graphics
 	filename bern-4K.png
-	width 70col%
+	width 100col%
 
 \end_inset
 
@@ -1066,10 +1066,6 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1096,9 +1092,10 @@ name "fig:Range-compress"
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename unmap.png
-	width 80col%
+	width 100col%
 
 \end_inset
 
@@ -1144,6 +1141,155 @@ height "1pt"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Transfer operators
+\end_layout
+
+\begin_layout Standard
+Given an iterated map 
+\begin_inset Formula $g:[0,1]\to[0,1]$
+\end_inset
+
+ on the unit interval, the transfer operator defines how distributions are
+ acted on by this map.
+ It is defined as
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{g}f\right]\left(y\right)=\sum_{x=g^{-1}(y)}\frac{f(x)}{\left|g^{\prime}(x)\right|}
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ the map 
+\begin_inset Formula $b_{K}(x)$
+\end_inset
+
+ one gets
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{K}f\right]\left(y\right)=\begin{cases}
+\frac{1}{2K}\left[f\left(\frac{y}{2K}\right)+f\left(\frac{y+K}{2K}\right)\right] & \mbox{ for }0\le y\le K\\
+0 & \mbox{ for }K<y\le1
+\end{cases}
+\]
+
+\end_inset
+
+The density distributions graphed in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+ are those functions satisfying 
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{K}\rho\right]\left(y\right)=\rho\left(y\right)
+\]
+
+\end_inset
+
+That is, the 
+\begin_inset Formula $\rho(y)$
+\end_inset
+
+ satisfies 
+\begin_inset Formula 
+\[
+\rho\left(y\right)=\frac{1}{2K}\left[\rho\left(\frac{y}{2K}\right)+\rho\left(\frac{y+K}{2K}\right)\right]
+\]
+
+\end_inset
+
+whenever 
+\begin_inset Formula $0\le y\le K$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho(y)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $K<y\le1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+More generally, one is interested in characterizing the eigenspectrum
+\begin_inset Formula 
+\[
+\left[\mathcal{L}_{K}\rho\right]\left(y\right)=\lambda\rho\left(y\right)
+\]
+
+\end_inset
+
+for eigenvalues 
+\begin_inset Formula $\lambda\le1$
+\end_inset
+
+ and eigenfunctions 
+\begin_inset Formula $\rho(y)$
+\end_inset
+
+.
+ Typically, on is interested in imposing conditions on the eigenfunctions,
+ such that the be (almost-)smooth, or integrable, or square-integrable.
+ Clearly one has, in any case, that 
+\begin_inset Formula $\rho(y)=0$
+\end_inset
+
+ whenever 
+\begin_inset Formula $K<y\le1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A very minor simplification can be acheived with a change of variable.
+ Let 
+\begin_inset Formula $y=K-\epsilon$
+\end_inset
+
+.
+ Then the eigenequation becomes
+\begin_inset Formula 
+\[
+2\lambda K\rho\left(K-\epsilon\right)=\rho\left(\frac{1}{2}-\frac{\epsilon}{2K}\right)+\rho\left(1-\frac{\epsilon}{2K}\right)
+\]
+
+\end_inset
+
+The second term vanishes whenever 
+\begin_inset Formula $K<1-\epsilon/2K$
+\end_inset
+
+ or 
+\begin_inset Formula $\epsilon<2K(1-K)$
+\end_inset
+
+ and so one has the simpler recurrence relation
+\begin_inset Formula 
+\[
+\lambda\rho\left(y\right)=\frac{1}{2K}\rho\left(\frac{y}{2K}\right)
+\]
+
+\end_inset
+
+whenever 
+\begin_inset Formula $K(2K-1)<y\le K$
+\end_inset
+
+.
 \end_layout
 
 \end_body
