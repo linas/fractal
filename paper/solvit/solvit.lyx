@@ -1292,5 +1292,101 @@ whenever
 .
 \end_layout
 
+\begin_layout Subsection
+Square-integrable attempt
+\end_layout
+
+\begin_layout Standard
+One can attempt to solve the eigenequation with a square-integrable basis.
+ Write 
+\begin_inset Formula $w=y/K$
+\end_inset
+
+ so that the eigenequation becomes 
+\begin_inset Formula 
+\[
+2K\lambda\rho\left(Kw\right)=\rho\left(\frac{w}{2}\right)+\rho\left(\frac{1}{2}+\frac{w}{2}\right)
+\]
+
+\end_inset
+
+A discrete Fourier basis for this is
+\begin_inset Formula 
+\[
+\rho\left(w\right)=\sum_{n}c_{n}\exp\left(i2\pi nw\right)
+\]
+
+\end_inset
+
+Substituting, one immediatly finds that all terms with odd 
+\begin_inset Formula $n$
+\end_inset
+
+ are zero; that is, 
+\begin_inset Formula $c_{2k+1}=0$
+\end_inset
+
+.
+ Ignoring these terms, and writing 
+\begin_inset Formula $n=2m$
+\end_inset
+
+, the eigen-equation then becomes
+\begin_inset Formula 
+\[
+K\lambda\sum_{m}c_{2m}\exp\left(i4\pi Kmw\right)=\sum_{m}c_{2m}\exp\left(i2\pi mw\right)
+\]
+
+\end_inset
+
+Making use of the fact that the odd terms are absent, one can combine terms
+ woth positive and negative 
+\begin_inset Formula $m$
+\end_inset
+
+ to write 
+\begin_inset Formula 
+\[
+K\lambda\sum_{m=0}^{\infty}c_{2m}\left(2-\delta_{m0}\right)\cos\left(4\pi Kmw\right)=\sum_{m=0}^{\infty}c_{2m}\left(2-\delta_{m0}\right)\cos\left(2\pi mw\right)
+\]
+
+\end_inset
+
+Plugging and chugging allows this to be written as 
+\begin_inset Formula 
+\[
+c_{2l}\left(2-\delta_{l0}\right)=K\lambda\sum_{m=0}^{\infty}c_{2m}\left(2-\delta_{m0}\right)\left[j_{0}\left(2\pi\left(2Km+l\right)\right)+j_{0}\left(2\pi\left(2Km-l\right)\right)\right]
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $j_{0}\left(x\right)=\sin\left(x\right)/x$
+\end_inset
+
+ is the spherical Bessel function.
+ The annoying factors of two can be dropped by defining 
+\begin_inset Formula $a_{m}=c_{2m}\left(2-\delta_{m0}\right)$
+\end_inset
+
+ so that the eigenvalue equation is a matrix equation
+\begin_inset Formula 
+\[
+\sum_{m=0}^{\infty}M_{lm}a_{m}=\frac{1}{\lambda}a_{l}
+\]
+
+\end_inset
+
+with matrix elements
+\begin_inset Formula 
+\[
+M_{lm}=K\left[j_{0}\left(2\pi\left(2Km+l\right)\right)+j_{0}\left(2\pi\left(2Km-l\right)\right)\right]
+\]
+
+\end_inset
+
+ 
+\end_layout
+
 \end_body
 \end_document
