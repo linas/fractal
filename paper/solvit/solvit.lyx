@@ -96,7 +96,7 @@ December 2017
 \end_layout
 
 \begin_layout Abstract
-Exatly solvable models of iteration.
+This is a breif note on some exactly solvable models of iteration.
  This is a sequence of explorations that attempt to develop ideas and tools
  for analyzing and understanding diverse systems such as the Feigenbaum
  map and the iteracted cirlce map (aka Arnold tongues).
@@ -1355,7 +1355,7 @@ K\lambda\sum_{m=0}^{\infty}c_{2m}\left(2-\delta_{m0}\right)\cos\left(4\pi Kmw\ri
 Plugging and chugging allows this to be written as 
 \begin_inset Formula 
 \[
-c_{2l}\left(2-\delta_{l0}\right)=K\lambda\sum_{m=0}^{\infty}c_{2m}\left(2-\delta_{m0}\right)\left[j_{0}\left(2\pi\left(2Km+l\right)\right)+j_{0}\left(2\pi\left(2Km-l\right)\right)\right]
+c_{2l}\left(2-\delta_{l0}\right)=K\lambda\sum_{m=0}^{\infty}c_{2m}\left(2-\delta_{m0}\right)\left[j_{0}\left(2\pi\left(2Km-l\right)\right)+j_{0}\left(2\pi\left(2Km+l\right)\right)\right]
 \]
 
 \end_inset
@@ -1380,12 +1380,68 @@ where
 with matrix elements
 \begin_inset Formula 
 \[
-M_{lm}=K\left[j_{0}\left(2\pi\left(2Km+l\right)\right)+j_{0}\left(2\pi\left(2Km-l\right)\right)\right]
+M_{lm}=K\left[j_{0}\left(2\pi\left(2Km-l\right)\right)+j_{0}\left(2\pi\left(2Km+l\right)\right)\right]
 \]
 
 \end_inset
 
- 
+For 
+\begin_inset Formula $K=1$
+\end_inset
+
+, this reduces to the simple period-double matrix 
+\begin_inset Formula $M_{lm}=\delta_{l,2m}$
+\end_inset
+
+ since 
+\begin_inset Formula $j_{0}(0)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $j_{0}(2\pi n)=0$
+\end_inset
+
+ for any postive or negative (non-zero) integer 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ A full development of the spectrum and properties of this operator has
+ been presented by this author long ago, in other publications.
+\end_layout
+
+\begin_layout Standard
+This simplification does not occur for 
+\begin_inset Formula $K<1$
+\end_inset
+
+; however, the fall-off behavior of the spherical Bessel function implies
+ that there is a strong band running along the half-diagonal where 
+\begin_inset Formula $2Km-l\approx0$
+\end_inset
+
+.
+ Note that as 
+\begin_inset Formula $K\to1/2$
+\end_inset
+
+ that 
+\begin_inset Formula $M$
+\end_inset
+
+ approaches the identity matrix, implying the eigenvalue 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ and the eigenvectors are completely unconstrained: anything goes!
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+Not much to say here just yet.
 \end_layout
 
 \end_body
