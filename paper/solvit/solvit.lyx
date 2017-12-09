@@ -773,10 +773,16 @@ reference "eq:down-bits"
 \end_inset
 
 .
+ Both transformations between sequence and real number mostly make sense
+ only when 
+\begin_inset Formula $K>1/2$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The interesting functions can be considered.
+Two interesting functions can be considered.
  One is the compressor 
 \begin_inset Formula 
 \[
@@ -809,7 +815,7 @@ expander
 \begin_inset Quotes erd
 \end_inset
 
- are being invented here to indicate negataive and positive Lyapunov exponents
+ are being invented here to indicate negative and positive Lyapunov exponents
  associated with the two functions: That is, for almost all 
 \begin_inset Formula $y$
 \end_inset
@@ -846,7 +852,14 @@ reference "fig:Compressor-Function"
 
 \end_inset
 
- and x.
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Expander-Function"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -931,7 +944,7 @@ height "1pt"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -982,6 +995,138 @@ generated with fractal/misc/bitops/remap.c and remap.gplot
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The two functions are adjoint, in that 
+\begin_inset Formula $\mbox{cpr}_{K}\left(\mbox{pdr}_{K}(y)\right)=y$
+\end_inset
+
+ almost everywhere, but 
+\begin_inset Formula $\mbox{pdr}_{K}\left(\mbox{cpr}_{K}(y)\right)\ne y$
+\end_inset
+
+ almost everywhere.
+ Both results can be understood as following from the fact that 
+\begin_inset Formula $b_{K}(x)$
+\end_inset
+
+ acts as a shift.
+\end_layout
+
+\begin_layout Standard
+The figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Range-compress"
+
+\end_inset
+
+ visualizes the rande of the compressor as a function of 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ The most curious feature here is the appearance of 
+\begin_inset Quotes eld
+\end_inset
+
+gaps
+\begin_inset Quotes erd
+\end_inset
+
+, reminiscento of Arnold tongues, as 
+\begin_inset Formula $K$
+\end_inset
+
+ approaches 1 from below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Range of the compressor
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Range-compress"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename unmap.png
+	width 80col%
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure illustrates a color coded visualization of the range of the
+ compressor function.
+ As before 
+\begin_inset Formula $K$
+\end_inset
+
+ varies from 0 at the bottom to 1 at the top, and 
+\begin_inset Formula $y$
+\end_inset
+
+ varies from 0 on the left to 1 on the right.
+ In general, the compressor function maps intervals of the real number line
+ to single points; the color corresponds to the size (the measure) of the
+ intervals that were mapped to that particular point.
+ Blue corresponds to a compression of the measure by about 1, green to a
+ compression of about 2-3, and yellow-read to a compression greater than
+ that.
 \end_layout
 
 \begin_layout Plain Layout
