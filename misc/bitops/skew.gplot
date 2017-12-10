@@ -2,18 +2,30 @@
 set term png size 640, 480
 set out 'skew.png'
 
+########################################################################
+#
+# set term postscript eps color
+# set out 'skew.eps'
+# 
+# set style data lines
+# set key left
+# 
+# set title "Skew Takagi Curve"
+# # set xlabel ""
+# # set ylabel ""
+# 
+# plot "skew-0.8.dat" using 2:3 title "" linewidth 2, \
+#      "skew-0.8.dat" using 2:4 title "" linewidth 2, \
+#      "skew-0.8.dat" using 2:5 title "" linewidth 2, \
+#      "skew-0.8.dat" using 2:6 title "" linewidth 2, \
+#      "skew-0.8.dat" using 2:7 title "" linewidth 2
+#
+########################################################################
+
 set style data lines
 set key left
 
-set title "Skwdr"
-set xlabel "y"
-set ylabel "pdr"
+set title "Skew Takagi Curve"
 
-set xrange [0:1]
 plot "skew.dat" using 2:3 title "" linewidth 2, \
-     "skew.dat" using 2:4 title "" linewidth 2, \
-     "skew.dat" using 2:5 title "" linewidth 2, \
-     "skew.dat" using 2:6 title "" linewidth 2, \
-     "skew.dat" using 2:7 title "" linewidth 2
-#     "cpr-0.8.dat" using (2*$2):(1.2+3*$3) title "cpr" linewidth 2
-
+     "skew.dat" using ($2/1.6):3 title "" linewidth 2

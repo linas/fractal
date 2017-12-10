@@ -43,11 +43,16 @@ int main (int argc, char* argv[])
 	for (int i=0; i<NPTS; i++)
 	{
 		double x = ((double) i) / ((double) NPTS);
+#ifdef BASIC
 		double y = skew_takagi(x, K, w, 14);
 		double z = skew_takagi(x, K, w, -1);
 		double t = skew_takagi(x, K, w, 0);
 		double s = skew_takagi(x, K, w, 1);
 		double r = skew_takagi(x, K, w, 2);
 		printf("%d	%g %g	%g	%g	%g	%g\n", i, x, y, z, t, s, r);
+#endif
+		double y = skew_takagi(x, K, w, 14);
+		double z = skew_takagi(0.5*x, K, w, 14);
+		printf("%d	%g %g	%g\n", i, x, y, z);
 	}
 }
