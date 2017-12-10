@@ -1381,20 +1381,25 @@ whenever
 \end_layout
 
 \begin_layout Subsection
-Some exact solutions
+Almost solutions
 \end_layout
 
 \begin_layout Standard
 The cpr function behaves in an interesting fashion under the transfer operator.
- Specifically, for the domain 
+ Specifically, let 
+\begin_inset Formula $\mbox{ei}_{K}\left(x\right)=\mbox{cpr}_{K}\left(x\right)-1/2$
+\end_inset
+
+.
+ The one finds that, for the domain 
 \begin_inset Formula $0\le y\le K$
 \end_inset
 
 
 \begin_inset Formula 
 \begin{align*}
-\left[\mathcal{L}_{K}\mbox{cpr}_{K}\right]\left(y\right)= & \frac{1}{2K}\left[\mbox{cpr}_{K}\left(\frac{y}{2K}\right)+\mbox{cpr}_{K}\left(\frac{y+K}{2K}\right)\right]\\
-= & \frac{1}{2K}\left[\mbox{cpr}_{K}\left(y\right)+\frac{1}{2}\right]
+\left[\mathcal{L}_{K}\mbox{ei}_{K}\right]\left(y\right)= & \frac{1}{2K}\left[\mbox{ei}_{K}\left(\frac{y}{2K}\right)+\mbox{ei}_{K}\left(\frac{y+K}{2K}\right)\right]\\
+= & \frac{\mbox{ei}_{K}\left(y\right)}{2K}
 \end{align*}
 
 \end_inset
@@ -1408,24 +1413,21 @@ almost
 \end_inset
 
  an eigenfunction, differing by a constant.
- This can be easily fixed: let 
-\begin_inset Formula $\mbox{ei}_{K}\left(x\right)=\mbox{cpr}_{K}\left(x\right)-1/2$
+ It doesn't quite work; in this definition, 
+\begin_inset Formula $\mbox{ei}_{K}\left(x\right)\ne0$
 \end_inset
 
- for 
-\begin_inset Formula $0\le x\le K$
+ when 
+\begin_inset Formula $K<x$
 \end_inset
 
-, and zero otherwise.
- Then XXX wrong.
-\begin_inset Formula 
-\[
-\left[\mathcal{L}_{K}\mbox{ei}_{K}\right]\left(y\right)=\frac{\mbox{ei}_{K}\left(y\right)}{2K}
-\]
-
+.
+ Manually forcing it to zero breaks the relationship.
+ There is no obvious, simple modification of 
+\begin_inset Formula $\mbox{ei}_{K}\left(x\right)$
 \end_inset
 
-
+ that would cause it to be a valid eigenvalue.
 \end_layout
 
 \begin_layout Subsection

@@ -70,6 +70,13 @@ double cpr(double y, double K)
 	return acc;
 }
 
+double eig(double y, double K)
+{
+	// if (1.0 < y) return eig(y-1.0, K);
+	// if (0.99*K < y && y < 1.01*K) return -0.5;
+	return cpr(y,K) - 0.5;
+}
+
 int main (int argc, char* argv[])
 {
 	if (argc < 2)
@@ -104,9 +111,9 @@ int main (int argc, char* argv[])
 		double z = cpr (lam*x, lam);
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, lo, hi, z);
 #endif
-		double y = cpr (x, lam);
-		double lo = cpr (x/(2.0*lam), lam);
-		double hi = cpr ((lam+x)/(2.0*lam), lam);
+		double y = eig (x, lam);
+		double lo = eig (x/(2.0*lam), lam);
+		double hi = eig ((lam+x)/(2.0*lam), lam);
 		printf("%d	%g	%g	%g	%g\n", i, x, y, lo, hi);
 	}
 }
