@@ -28,5 +28,8 @@ set key left
 set title "Skew Takagi Curve"
 
 set xrange [0:1]
-plot "skew.dat" using 2:3 title "" linewidth 2, \
-     "skew.dat" using (1.6*$2):3 title "" linewidth 2
+plot "skew.dat" using 2:3 title "skew" linewidth 2, \
+     "skew.dat" using 2:4 title "lo" linewidth 2,\
+     "skew.dat" using 2:5 title "hi" linewidth 2,\
+     "skew.dat" using 2:(0.7*$3+ $2) title "0.7*skw + x" linewidth 2,\
+     "skew.dat" using 2:(0.7*$3+ 1-$2) title "skw + (1-x)" linewidth 2,\

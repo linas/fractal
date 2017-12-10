@@ -52,7 +52,8 @@ int main (int argc, char* argv[])
 		printf("%d	%g %g	%g	%g	%g	%g\n", i, x, y, z, t, s, r);
 #endif
 		double y = skew_takagi(x, K, w, 14);
-		double z = skew_takagi(0.5*x, K, w, 14);
-		printf("%d	%g %g	%g\n", i, x, y, z);
+		double lo = skew_takagi(0.5*x/K, K, w, 14);
+		double hi = skew_takagi(0.5/K + x*(1.0 - 0.5/K), K, w, 14);
+		printf("%d	%g %g	%g	%g\n", i, x, y, lo, hi);
 	}
 }
