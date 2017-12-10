@@ -108,17 +108,22 @@ int main (int argc, char* argv[])
 		double z = pdr (1-x, lam);
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, lo, hi, z);
 #endif
-// #define CPR_SIM 1
+#define CPR_SIM 1
 #if CPR_SIM
 		double y = cpr (x, lam);
+		double ska = x / (2.0*lam);
+		double skalo = cpr (ska, lam);
+		double skahi = cpr (0.5+ska, lam);
 		double lo = cpr (0.5*x, lam);
 		double hi = cpr (0.5+0.5*x, lam);
-		double z = cpr (lam*x, lam);
-		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, lo, hi, z);
+		double skam = cpr (lam*x, lam);
+		printf("%d	%g	%g	%g	%g	%g	%g	%g\n", i, x, y, skalo, skahi, lo, hi, skam);
 #endif
+#ifdef EIG
 		double y = eig (x, lam);
 		double lo = eig (x/(2.0*lam), lam);
 		double hi = eig ((lam+x)/(2.0*lam), lam);
 		printf("%d	%g	%g	%g	%g\n", i, x, y, lo, hi);
+#endif
 	}
 }
