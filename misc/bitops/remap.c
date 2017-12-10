@@ -10,7 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double bmap(double x, double Kay)
+// The expander
+double pdr(double x, double Kay)
 {
 	// Decompose x into a bit sequence.
 	char nbits[50];
@@ -39,7 +40,8 @@ double bmap(double x, double Kay)
 	return acc;
 }
 
-double unbmap(double y, double K)
+// the compressor
+double cpr(double y, double K)
 {
 	// Iterate on y using mashed Bernoulli, and extract symbol dynamics
 	char nbits[50];
@@ -70,14 +72,25 @@ double unbmap(double y, double K)
 
 int main (int argc, char* argv[])
 {
+	if (argc < 2)
+	{
+		fprintf(stderr, "Usage: %s K\n", argv[0]);
+		exit (1);
+	}
 	double lam = atof(argv[1]);
 
 	int npts = 803;
 	for (int i=0; i<=npts; i++)
 	{
 		double x = ((double) i)/ ((double) npts);
-		double y = unbmap (x, lam);
-		double z = bmap (x, lam);
+#ifdef BASICS
+		double y = pdr (x, lam);
+		double z = cpr (x, lam);
 		printf("%d	%g	%g	%g\n", i, x, y, z);
+#endif
+		double y = pdr (x, lam);
+		double lo = pdr (0.5*x, lam);
+		double hi = pdr (0.5+0.5*x, lam);
+		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, lo, hi, lo+hi);
 	}
 }
