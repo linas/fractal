@@ -70,17 +70,20 @@ double cpr(double y, double K)
 	return acc;
 }
 
-double eig(double y, double K)
+double xeig(double y, double K)
 {
-	// if (1.0 < y) return eig(y-1.0, K);
-	// if (0.99*K < y && y < 1.01*K) return -0.5;
-
 	if (1.0 < y) return 0.0;
 	if (K < y) return 0.0;
 	if (K-0.5 < y && y < 0.5) {
-		return eig(y*2.0*K, K);
+		return xeig(y*2.0*K, K);
 	}
 	return cpr(y,K) - 0.5;
+}
+
+double eig(double y, double K)
+{
+	// if (1.0 < y) return 0.0;
+	return cpr(y,K) - y;
 }
 
 int main (int argc, char* argv[])

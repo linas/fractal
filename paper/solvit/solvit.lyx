@@ -1264,7 +1264,7 @@ This last form is interesting, as it makes an appearence in relation to
 \end_layout
 
 \begin_layout Subsection
-Other things with that symmetry
+Other things with similar symmetry
 \end_layout
 
 \begin_layout Standard
@@ -1320,14 +1320,35 @@ Both of these properties follow directly from the construction of the curve;
 \end_layout
 
 \begin_layout Standard
+The derivative of the skew Takagi curve is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Skew-Haar-Wavelet"
+
+\end_inset
+
+, and, for lack of a better name, could be called the skew Haar fractal
+ wavelet.
+ It can be defined as the formal derivative
+\begin_inset Formula 
+\[
+\mbox{har}_{K;w}\left(x\right)=\frac{d}{dx}\,\mbox{tak}_{K;w}\left(x\right)
+\]
+
+\end_inset
+
+This formal derivative is well-defined, as the skew Takagi is smooth and
+ piecewise-linear almost everywhere; the places where it has corners is
+ a dense set of measure zero.
+ That is, the derivative is defined everywhere, except on a set of measure
+ zero, which happens to be dense in the unit interval.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
 status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1369,6 +1390,132 @@ ion.
 , for K=0.8 in this figure.
  Subsequent triangles obtain a height of w=0.7 above the apex point, and
  are similarly skew.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+generated with `fractal/misc/bitops/skew.c` and `skew.gplot`
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that the Haar fractal wavelet is piece-wise constant everywhere.
+ It is constructed from a 
+\begin_inset Quotes eld
+\end_inset
+
+mother wavelet
+\begin_inset Quotes erd
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+h_{K}(x)=\begin{cases}
+2K & \mbox{for }0\le x<\frac{1}{2K}\\
+\frac{-2K}{2K-1} & \mbox{for }\frac{1}{2K}\le x\le1
+\end{cases}
+\]
+
+\end_inset
+
+which is then iterated on to form the fractal curve 
+\begin_inset Formula $\mbox{har}_{K;w}\left(x\right)$
+\end_inset
+
+.
+ The self symmetries are
+\begin_inset Formula 
+\[
+\mbox{har}_{K;w}\left(\frac{x}{2K}\right)=2K+w\;\mbox{har}_{K;w}\left(x\right)
+\]
+
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\mbox{har}_{K;w}\left(\frac{1}{2K}+x\left(1-\frac{1}{2K}\right)\right)=-\frac{2K}{2K-1}+w\;\mbox{har}_{K;w}\left(x\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Skew Haar Wavelet
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Skew-Haar-Wavelet"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename haar.eps
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This figure shows the derivative of the skew Takagi curve.
+ Note that it is piece-wise constant everywhere.
+ The mother wavelet is shown, as well as the fourth iteration.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+generated with `fractal/misc/bitops/skew.c` and `skew.gplot`
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
