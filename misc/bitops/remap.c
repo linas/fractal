@@ -75,9 +75,10 @@ double eig(double y, double K)
 	// if (1.0 < y) return eig(y-1.0, K);
 	// if (0.99*K < y && y < 1.01*K) return -0.5;
 
-	if (1.0 < y) {
-		// Attempted unsuccessful patch.
-		return eig((y-1.0)/K+K, K) ; // - eig(y/(2.0*K), K);
+	if (1.0 < y) return 0.0;
+	if (K < y) return 0.0;
+	if (K-0.5 < y && y < 0.5) {
+		return eig(y*2.0*K, K);
 	}
 	return cpr(y,K) - 0.5;
 }
@@ -108,7 +109,7 @@ int main (int argc, char* argv[])
 		double z = pdr (1-x, lam);
 		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, lo, hi, z);
 #endif
-#define CPR_SIM 1
+// #define CPR_SIM 1
 #if CPR_SIM
 		double y = cpr (x, lam);
 		double ska = x / (2.0*lam);
@@ -119,6 +120,7 @@ int main (int argc, char* argv[])
 		double skam = cpr (lam*x, lam);
 		printf("%d	%g	%g	%g	%g	%g	%g	%g\n", i, x, y, skalo, skahi, lo, hi, skam);
 #endif
+#define EIG
 #ifdef EIG
 		double y = eig (x, lam);
 		double lo = eig (x/(2.0*lam), lam);

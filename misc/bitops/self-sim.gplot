@@ -21,7 +21,7 @@ set title "Compressor Function cpr"
 set xlabel "y"
 set ylabel "cpr"
 
-set out 'cpr-sim-0.6.png'
+#set out 'cpr-sim-0.6.png'
 
 # This works and shows that  cpr(1/2 + x/2K) = (1+cpr(x))/2
 #
@@ -43,19 +43,16 @@ set out 'cpr-sim-0.6.png'
 #     "cpr-sim-0.6.dat" using 2:7 title "hi=cpr(1/2+x/2)" linewidth 2, \
 #     "cpr-sim-0.6.dat" using 2:($7-0.5) title "hi-1/2" linewidth 2, \
 
-plot "cpr-sim-0.6.dat" using 2:3 title "cpr" linewidth 2, \
-     "cpr-sim-0.6.dat" using 2:4 title "cpr(x/2K)" linewidth 2, \
-     "cpr-sim-0.6.dat" using 2:(0.5*$3) title "cpr/2" linewidth 2, \
+# This works too and shows that, for x<K that cpr(x/2K) = cpr(x)/2
+#plot "cpr-sim-0.6.dat" using 2:3 title "cpr" linewidth 2, \
+#     "cpr-sim-0.6.dat" using 2:4 title "cpr(x/2K)" linewidth 2, \
+#     "cpr-sim-0.6.dat" using 2:(0.5*$3) title "cpr/2" linewidth 2, \
 
-#     "cpr-sim-0.6.dat" using 2:($6) title "lamx" linewidth 2,\
-#     "cpr-sim-0.6.dat" using 2:($4+$5-0.497) title "lo+hi-0.5" linewidth 2,\
-#     "cpr-sim-0.6.dat" using 2:($5-0.49) title "hi-0.5" linewidth 2
 
-#     "cpr-sim-0.6.dat" using 2:(0.5*($6)) title "lamx/2" linewidth 2,\
 
-#set out 'tran-0.8.png'
-#
-#plot "tran-0.8.dat" using 2:3 title "eig" linewidth 2, \
-#     "tran-0.8.dat" using 2:4 title "lo" linewidth 2, \
-#     "tran-0.8.dat" using 2:5 title "hi" linewidth 2, \
-#     "tran-0.8.dat" using 2:($4+$5) title "lo+hi" linewidth 2
+set out 'tran-0.8.png'
+
+plot "tran-0.8.dat" using 2:3 title "eig" linewidth 2, \
+     "tran-0.8.dat" using 2:4 title "lo" linewidth 2, \
+     "tran-0.8.dat" using 2:5 title "hi" linewidth 2, \
+     "tran-0.8.dat" using 2:($4+$5) title "lo+hi" linewidth 2
