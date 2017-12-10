@@ -88,9 +88,21 @@ int main (int argc, char* argv[])
 		double z = cpr (x, lam);
 		printf("%d	%g	%g	%g\n", i, x, y, z);
 #endif
+// #define SELF_SIM
+#ifdef SELF_SIM
 		double y = pdr (x, lam);
 		double lo = pdr (0.5*x, lam);
 		double hi = pdr (0.5+0.5*x, lam);
-		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, lo, hi, lo+hi);
+		double z = pdr (1-x, lam);
+		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, lo, hi, z);
+#endif
+#define CPR_SIM 1
+#if CPR_SIM
+		double y = cpr (x, lam);
+		double lo = cpr (0.5*x, lam);
+		double hi = cpr (0.5+0.5*x, lam);
+		double z = cpr (lam*x, lam);
+		printf("%d	%g	%g	%g	%g	%g\n", i, x, y, lo, hi, z);
+#endif
 	}
 }

@@ -1,0 +1,29 @@
+
+set term png size 640, 480
+set out 'pdr-sim.png'
+
+set style data lines
+set key left
+
+set title "Expander Function pdr"
+set xlabel "y"
+set ylabel "pdr"
+
+plot "pdr-sim-0.8.dat" using 2:3 title "pdr" linewidth 2, \
+     "pdr-sim-0.8.dat" using 2:4 title "lo" linewidth 2, \
+     "pdr-sim-0.8.dat" using 2:($3/ 1.6) title "pdr/2K" linewidth 2, \
+     "pdr-sim-0.8.dat" using 2:6 title "pdr(1-x)" linewidth 2, \
+     "pdr-sim-0.8.dat" using 2:(1.3333 - $3) title "4/3-pdr(x)" linewidth 2
+
+set title "Compressor Function cpr"
+set xlabel "y"
+set ylabel "cpr"
+
+set out 'cpr-sim-0.6.png'
+
+plot "cpr-sim-0.6.dat" using 2:3 title "cpr" linewidth 2, \
+     "cpr-sim-0.6.dat" using 2:4 title "lo" linewidth 2, \
+     "cpr-sim-0.6.dat" using 2:($6) title "lamx" linewidth 2,\
+     "cpr-sim-0.6.dat" using 2:(0.5*($6)+ 0.01) title "lamx/2" linewidth 2,\
+
+ #    "cpr-sim-0.6.dat" using 2:5 title "hi" linewidth 2, \
