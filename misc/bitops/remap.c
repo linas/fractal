@@ -74,6 +74,11 @@ double eig(double y, double K)
 {
 	// if (1.0 < y) return eig(y-1.0, K);
 	// if (0.99*K < y && y < 1.01*K) return -0.5;
+
+	if (1.0 < y) {
+		// Attempted unsuccessful patch.
+		return eig((y-1.0)/K+K, K) ; // - eig(y/(2.0*K), K);
+	}
 	return cpr(y,K) - 0.5;
 }
 
