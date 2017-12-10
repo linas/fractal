@@ -1,9 +1,9 @@
-
 /*
  * skew.c
  *
- * Skew takago map
- * Dec 2017
+ * Skew Takagi map and skew Haar wavelet
+ *
+ * Dec 2017 Linas Vepstas
  */
 #include <math.h>
 #include <stdio.h>
@@ -61,6 +61,11 @@ double skew_haar(double x, double K, double w, int cnt)
 
 int main (int argc, char* argv[])
 {
+	if (argc < 3)
+	{
+		fprintf(stderr, "Usage: %s K w\n", argv[0]);
+		exit (1);
+	}
 	double K = atof(argv[1]);
 	double w = atof(argv[2]);
 

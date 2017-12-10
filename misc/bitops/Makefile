@@ -7,7 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: bernie bigbern remap unbernie skew
+all: bernie bigbern remap unbernie reigen skew
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -21,11 +21,13 @@ all: bernie bigbern remap unbernie skew
 bernie.o: bernie.C $(FUNCDIR)/bitops.h
 bigbern.o: bigbern.C
 remap.o: remap.c
+reigen.o: reigen.c
 skew.o: skew.c
 unbernie.o: unbernie.C
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
 remap: remap.o
+reigen: reigen.o
 skew: skew.o
 unbernie: unbernie.o $(BRAT)
