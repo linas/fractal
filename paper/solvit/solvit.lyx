@@ -458,7 +458,7 @@ reference "fig:Undershift-Density-Distribution"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -504,6 +504,8 @@ The above figure shows three different density distributions, for
 \end_inset
 
 , calculated numerically.
+ This is obtained by histograming a large number of point trajectories,
+ as described in the text.
  The small quantities of jitter are due to a finite number of samples.
  To generate this figure, a total of 
 \begin_inset Formula $M=4000$
@@ -1432,12 +1434,12 @@ mother wavelet
 
  given by
 \begin_inset Formula 
-\[
+\begin{equation}
 h_{K}(x)=\begin{cases}
 2K & \mbox{for }0\le x<\frac{1}{2K}\\
 \frac{-2K}{2K-1} & \mbox{for }\frac{1}{2K}\le x\le1
-\end{cases}
-\]
+\end{cases}\label{eq:Haar mother}
+\end{equation}
 
 \end_inset
 
@@ -1469,7 +1471,7 @@ which is then iterated on to form the fractal curve
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1607,9 +1609,9 @@ That is, the
 
  satisfies 
 \begin_inset Formula 
-\[
-\rho\left(y\right)=\frac{1}{2K}\left[\rho\left(\frac{y}{2K}\right)+\rho\left(\frac{y+K}{2K}\right)\right]
-\]
+\begin{equation}
+\rho\left(y\right)=\frac{1}{2K}\left[\rho\left(\frac{y}{2K}\right)+\rho\left(\frac{y+K}{2K}\right)\right]\label{eq:eigen-eqn}
+\end{equation}
 
 \end_inset
 
@@ -1684,9 +1686,9 @@ The second term vanishes whenever
 
  and so one has the simpler recurrence relation
 \begin_inset Formula 
-\[
-\lambda\rho\left(y\right)=\frac{1}{2K}\rho\left(\frac{y}{2K}\right)
-\]
+\begin{equation}
+\lambda\rho\left(y\right)=\frac{1}{2K}\rho\left(\frac{y}{2K}\right)\label{eq:eigen-branch}
+\end{equation}
 
 \end_inset
 
@@ -1695,6 +1697,36 @@ whenever
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+The equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:eigen-eqn"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:eigen-branch"
+
+\end_inset
+
+ can be treated as recurrence relations, defining the 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ eigenstate.
+ Recursing on these gives exactly the densities shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+; computationally, these are much, much cheaper to compute.
 \end_layout
 
 \begin_layout Subsection
@@ -1748,7 +1780,7 @@ almost
 \end_layout
 
 \begin_layout Subsection
-Square-integrable attempt
+Fourier Basis Matrix Elements
 \end_layout
 
 \begin_layout Standard
@@ -1765,6 +1797,20 @@ One can attempt to solve the eigenequation with a square-integrable basis.
 
 \end_inset
 
+and it is sufficeint to consider the equation for 
+\begin_inset Formula $0\le w\le1$
+\end_inset
+
+, as we know, a priori, that the density must vanish for larger 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ XXX Only the non-decaying density.
+ Obviously, decaying densities can be none-zero here, and they can decay...
+\end_layout
+
+\begin_layout Standard
 A discrete Fourier basis for this is
 \begin_inset Formula 
 \[
@@ -1928,6 +1974,86 @@ in this case.
 \end_inset
 
  case.
+\end_layout
+
+\begin_layout Subsection
+Haar Basis Matrix Elements
+\end_layout
+
+\begin_layout Standard
+The figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Undershift-Density-Distribution"
+
+\end_inset
+
+ shows that the eigenfunctions seem to be composed of piece-wise flat sections.
+ This suggests that the Haar wavelets might make a superior basis.
+ The standard Haar basis is an (anti-)symetric sequare wave with a discontinuity
+ at 1/2.
+ The skewness of this problem suggests that a skew basis might be more appropria
+te.
+ One natural choice seems to be to use the wavelet defined in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Haar mother"
+
+\end_inset
+
+.
+ A sequence of orthogonal wavelets might start as
+\begin_inset Formula 
+\[
+\psi_{0,0}\left(x\right)=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\psi_{1,0}\left(x\right)=h_{K}\left(x\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\psi_{2,0}\left(x\right)=\psi_{1,0}\left(2Kx\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\psi_{2,1}\left(x\right)=\psi_{1,0}\left(\frac{2Kx-1}{2K-1}\right)
+\]
+
+\end_inset
+
+ and then, in general
+\begin_inset Formula 
+\[
+\psi_{n+1,k}\left(x\right)=\begin{cases}
+\psi_{n,k/2}\left(2Kx\right) & \mbox{for }k\mbox{ even}\\
+\psi_{n,\left(k-1\right)/2}\left(\frac{2Kx-1}{2K-1}\right) & \mbox{for }k\mbox{ odd}
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $k$
+\end_inset
+
+ is an integer ranging from 0 to 
+\begin_inset Formula $2^{n-1}-1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
