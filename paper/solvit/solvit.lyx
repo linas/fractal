@@ -1868,7 +1868,81 @@ where
 \begin_layout Standard
 Except wait – actually, the plain-old standard Haar wevlet seeems fine,
  or better for this.
- I'm confused...
+ I'm confused...XXX
+\end_layout
+
+\begin_layout Standard
+This suggests that the Haar wavelets might make a superior basis.
+ The standard Haar basis is an (anti-)symetric sequare wave with a discontinuity
+ at 1/2.
+ The skewness of this problem suggests that a skew basis might be more appropria
+te.
+ One natural choice seems to be to use the wavelet defined in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Haar mother"
+
+\end_inset
+
+.
+ A sequence of orthogonal wavelets might start as
+\begin_inset Formula 
+\[
+\psi_{0,0}\left(x\right)=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\psi_{1,0}\left(x\right)=h_{K}\left(x\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\psi_{2,0}\left(x\right)=\psi_{1,0}\left(2Kx\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\psi_{2,1}\left(x\right)=\psi_{1,0}\left(\frac{2Kx-1}{2K-1}\right)
+\]
+
+\end_inset
+
+ and then, in general
+\begin_inset Formula 
+\[
+\psi_{n+1,k}\left(x\right)=\begin{cases}
+\psi_{n,k/2}\left(2Kx\right) & \mbox{for }k\mbox{ even}\\
+\psi_{n,\left(k-1\right)/2}\left(\frac{2Kx-1}{2K-1}\right) & \mbox{for }k\mbox{ odd}
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $k$
+\end_inset
+
+ is an integer ranging from 0 to 
+\begin_inset Formula $2^{n-1}-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Hang on ..
+ this, or the plain-old haar??? Still confused...
+ XXX
 \end_layout
 
 \begin_layout Standard
