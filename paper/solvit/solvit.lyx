@@ -1793,22 +1793,28 @@ reference "fig:Undershift-Density-Distribution"
 
  shows that the eigenfunctions seem to be composed of piece-wise flat sections.
  This suggests that the Haar wavelets might make a superior basis.
- The standard Haar basis is an (anti-)symetric sequare wave with a discontinuity
+ The standard Haar basis is an (anti-)symetric square wave with a discontinuity
  at 1/2.
- The skewness of this problem suggests that a skew basis might be more appropria
-te.
- One natural choice seems to be to use the wavelet defined in equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Haar mother"
+ Here, a skew basis is more appropriate.
+ It can be built from the (un-normalized) mother wavelet 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\phi\left(x\right)=\begin{cases}
+\frac{1}{K} & \mbox{for }0\le x<K\\
+\frac{-1}{1-K} & \mbox{for }K\le x<1\\
+0 & \mbox{otherwise}
+\end{cases}
+\]
 
 \end_inset
 
-.
- A sequence of orthogonal wavelets might start as
+A sequence of orthonormal wavelets might start as
 \begin_inset Formula 
 \[
-\psi_{0,0}\left(x\right)=1
+\psi_{-1,0}\left(x\right)=1
 \]
 
 \end_inset
@@ -1816,7 +1822,7 @@ reference "eq:Haar mother"
 
 \begin_inset Formula 
 \[
-\psi_{1,0}\left(x\right)=h_{K}\left(x\right)
+\psi_{0,0}\left(x\right)=\sqrt{K\left(1-K\right)}\phi\left(x\right)
 \]
 
 \end_inset
@@ -1824,7 +1830,7 @@ reference "eq:Haar mother"
 
 \begin_inset Formula 
 \[
-\psi_{2,0}\left(x\right)=\psi_{1,0}\left(2Kx\right)
+\psi_{1,0}\left(x\right)=\frac{1}{\sqrt{K}}\psi_{0,0}\left(\frac{x}{K}\right)
 \]
 
 \end_inset
@@ -1832,7 +1838,7 @@ reference "eq:Haar mother"
 
 \begin_inset Formula 
 \[
-\psi_{2,1}\left(x\right)=\psi_{1,0}\left(\frac{2Kx-1}{2K-1}\right)
+\psi_{1,1}\left(x\right)=\frac{1}{\sqrt{1-K}}\psi_{0,0}\left(\frac{x-K}{1-K}\right)
 \]
 
 \end_inset
@@ -1841,8 +1847,8 @@ reference "eq:Haar mother"
 \begin_inset Formula 
 \[
 \psi_{n+1,k}\left(x\right)=\begin{cases}
-\psi_{n,k/2}\left(2Kx\right) & \mbox{for }k\mbox{ even}\\
-\psi_{n,\left(k-1\right)/2}\left(\frac{2Kx-1}{2K-1}\right) & \mbox{for }k\mbox{ odd}
+\frac{1}{\sqrt{K}}\psi_{n,k/2}\left(\frac{x}{K}\right) & \mbox{for }k\mbox{ even}\\
+\frac{1}{\sqrt{1-K}}\psi_{n,\left(k-1\right)/2}\left(\frac{x-K}{1-K}\right) & \mbox{for }k\mbox{ odd}
 \end{cases}
 \]
 
@@ -1853,16 +1859,14 @@ where
 \end_inset
 
  is an integer ranging from 0 to 
-\begin_inset Formula $2^{n-1}-1$
+\begin_inset Formula $2^{n}-1$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-XXXX This is totally wrong, its the WRONG WAVELET, want to use the one that
- steps at K.
- Later.
+Later.
 \end_layout
 
 \begin_layout Section
