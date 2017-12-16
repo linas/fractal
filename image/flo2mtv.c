@@ -49,7 +49,9 @@ void make_cmap (void) {
     /* ramp from yellow to red (pink) */
     for (i=180; i<240; i++) {
             vlt[i].r = (char) (210 + (3*(i-180))/4);
-            vlt[i].g = (char) (510 - 2*i);
+            // buggy, but used for everything before 2018
+            // vlt[i].g = (char) (510 - 2*i);
+            vlt[i].g = (char) (525 - 2*i);
             vlt[i].b = (char) (i-180)/3;
         }
 }
