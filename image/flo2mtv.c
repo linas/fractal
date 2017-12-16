@@ -5,10 +5,12 @@
  *
  * HISTORY:
  * Linas Vepstas January 16 1994
+ * Fix colormap 16 Dec 2017
  */
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct rgb {
    char r;
@@ -20,7 +22,8 @@ static struct rgb vlt[256];
 
 /* ------------------------------------------------------------ */
 
-void make_cmap (void) {
+void make_cmap (void)
+{
     int i, j;
     struct rgb black;
     black.r = black.g = black.b = 0x0;
@@ -58,9 +61,7 @@ void make_cmap (void) {
 
 /* ------------------------------------------------------------ */
 
-main (argc, argv)
-int argc;
-char *argv[];
+int main (int argc, char* argv[])
 {
    FILE *fil;
    int i, j, width, height;
