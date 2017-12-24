@@ -75,6 +75,12 @@ static void bifurcation_diagram (float *array,
 	}
 #endif
 
+if (K < 0.8) itermax *= 1.7;
+if (K < 0.7) itermax *= 1.8;
+if (K < 0.65) itermax *= 2.5;
+if (K < 0.55) itermax *= 2;
+printf("start %g itermax=%d\n", K, itermax);
+
 	for (int j=0; j<array_size; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) array_size);
