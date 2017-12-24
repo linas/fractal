@@ -1579,12 +1579,12 @@ For
 
  one gets
 \begin_inset Formula 
-\[
+\begin{equation}
 \left[\mathcal{L}_{K}f\right]\left(y\right)=\begin{cases}
 \frac{1}{2K}\left[f\left(\frac{y}{2K}\right)+f\left(\frac{y+K}{2K}\right)\right] & \mbox{ for }0\le y\le K\\
 0 & \mbox{ for }K<y\le1
-\end{cases}
-\]
+\end{cases}\label{eq:xfer oper}
+\end{equation}
 
 \end_inset
 
@@ -1939,7 +1939,103 @@ Haar Basis Matrix Elements
 \end_layout
 
 \begin_layout Standard
-The symmetric 
+The symmetric Haar wavelets are built from the mother wavelet
+\begin_inset Formula 
+\[
+h\left(x\right)=\begin{cases}
+1 & \mbox{for }0\le x<1/2\\
+-1 & \mbox{for }1/2\le x<1
+\end{cases}
+\]
+
+\end_inset
+
+ and has individual wavelets given by 
+\begin_inset Formula 
+\[
+h_{nj}\left(x\right)=2^{n/2}h\left(2^{n}x-j\right)\;\mbox{ for }0\le j\le2^{n}-1
+\]
+
+\end_inset
+
+The matrix elements of the transfer operator are
+\begin_inset Formula 
+\[
+\left\langle mi\left|{\cal L}_{K}\right|nj\right\rangle =\int_{0}^{1}h_{mi}\left(x\right)\left[\mathcal{L}_{K}h_{nj}\right]\left(x\right)dx
+\]
+
+\end_inset
+
+where the operator 
+\begin_inset Formula $\mathcal{L}_{K}$
+\end_inset
+
+ is given by eqn 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:xfer oper"
+
+\end_inset
+
+.
+ Computing these by hand promptly pushes into a big mess.
+ One can obtain explicit expressions, just that they are tedious to obtain.
+ Some preliminary observations include that 
+\begin_inset Formula 
+\[
+\left\langle mi\left|{\cal L}_{K}\right|nj\right\rangle =0\;\mbox{ if }K\le i/2^{m}
+\]
+
+\end_inset
+
+because the transfer operator vanishes above 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ In the same vein, matrix elements vanish unless 
+\begin_inset Formula 
+\[
+\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{2Kj}{2^{n}},\frac{2K\left(j+1\right)}{2^{n}}\right]\ne\emptyset
+\]
+
+\end_inset
+
+ or if 
+\begin_inset Formula 
+\[
+\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\cap\left[\frac{2Kj}{2^{n}}-K,\frac{2K\left(j+1\right)}{2^{n}}-K\right]\ne\emptyset
+\]
+
+\end_inset
+
+In all other cases, the Haar wavelets completely fail to overlap, and thus
+ the matrix elements are zero.
+ In addition, only three pairs of wavlets overlap in a non-zero fashion.
+ That is, for a fixed 
+\begin_inset Formula $m,n$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+, there are at most six different values of 
+\begin_inset Formula $i$
+\end_inset
+
+ for which the matrix elements are non-vanishing: the first three of these
+ are the values for which
+\begin_inset Formula 
+\[
+\frac{2Kj}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\;\mbox{ or }\;\frac{2K\left(j+\frac{1}{2}\right)}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]\;\mbox{ or }\;\frac{2K\left(j+1\right)}{2^{n}}\in\left[\frac{i}{2^{m}},\frac{i+1}{2^{m}}\right]
+\]
+
+\end_inset
+
+and likewise for three more.
+ The observation is that the integral vanishes unless the first wavelet
+ interects an edge transition of the second wavelet.
 \end_layout
 
 \begin_layout Section
@@ -1947,7 +2043,29 @@ The Multiplication Operator
 \end_layout
 
 \begin_layout Standard
-A
+The difficulties presented in the previous section suggests that studying
+ the multiplication operator might be simpler.
+ Multiplication by 
+\begin_inset Formula $K$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+M_{K}\left(x\right)=Kx
+\]
+
+\end_inset
+
+The corresponding transfer operator is 
+\begin_inset Formula 
+\[
+\left[\mathcal{M}f\right]\left(y\right)=\frac{1}{K}f\left(\frac{y}{K}\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
