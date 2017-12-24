@@ -90,7 +90,6 @@ if (K < 0.55) itermax *= 2;
 int perow = itermax;
 
 itermax = niter;
-printf("start %g itermax=%d niter=%f\n", K, itermax, niter);
 
 time_t start = time(0);
 	for (int j=0; j<array_size; j++)
@@ -100,6 +99,8 @@ time_t start = time(0);
 		array[j] = eig;
 	}
 time_t end = time(0);
+printf("end %g itermax=%d niter=%f time=%lu\n", K, itermax, niter, end-start);
+if (end-start < perow/2) niter *= 1.05;
 if (end-start < perow) niter *= 1.05;
 if (2*perow < end-start) niter /= 1.02;
 
