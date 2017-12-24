@@ -7,7 +7,7 @@ BRAT = $(GENDIR)/brat.o $(GENDIR)/util.o
 FUNCDIR = ../../tools/inc
 FUNC=../../tools/lib/libfunc.a
 
-all: bernie bigbern remap unbernie reigen skew
+all: bernie bigbern remap unbernie reigen skew fp-diagram
 
 .C.o:
 	$(CC) -c $< -std=gnu++11 -I $(GENDIR) -I $(FUNCDIR)
@@ -24,6 +24,7 @@ remap.o: remap.c
 reigen.o: reigen.c
 skew.o: skew.c
 unbernie.o: unbernie.C
+fp-diagram.o: fp-diagram.C
 
 bernie: bernie.o $(BRAT) $(FUNC)
 bigbern: bigbern.o $(BRAT)
@@ -31,3 +32,4 @@ remap: remap.o
 reigen: reigen.o
 skew: skew.o
 unbernie: unbernie.o $(BRAT)
+fp-diagram: fp-diagram.o $(BRAT)

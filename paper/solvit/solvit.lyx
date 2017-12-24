@@ -552,7 +552,7 @@ The general trend of the distributions, as a function of
 \begin_inset Formula $K$
 \end_inset
 
-, can be visualized with a 
+, can be visualized with a Feigenbaum-style 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1662,6 +1662,14 @@ for eigenvalues
 \end_layout
 
 \begin_layout Standard
+In general, the largest egenvalue will be 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+; this is the Frobenius-Perron eignevalue.
+\end_layout
+
+\begin_layout Standard
 A very minor simplification can be achieved with a change of variable.
  Let 
 \begin_inset Formula $y=K-\epsilon$
@@ -1727,6 +1735,9 @@ reference "fig:Undershift-Density-Distribution"
 \end_inset
 
 ; computationally, these are much, much cheaper to compute.
+ Its fun to call this the Frobenius-Perron eigenstate.
+ Because it can be quickly computed, it provides an alternative view of
+ figure xx, this time, free of stochastic sampling noise.
 \end_layout
 
 \begin_layout Subsection
@@ -2094,8 +2105,55 @@ Instead of confining oneself to the unit interval, here it is convenient
 
 \end_inset
 
- and of these, only three cases matter: where one of the intervals contains
+and of these, only three cases matter: where one of the intervals contains
  an edge transition of the other interval.
+\end_layout
+
+\begin_layout Standard
+Some insight can be gained by treating all quantities as trings of bits,
+ so that, for example,
+\begin_inset Formula 
+\[
+K=0.b_{1}b_{2}\cdots=\sum_{n=1}^{\infty}b_{n}2^{-n}
+\]
+
+\end_inset
+
+where each 
+\begin_inset Formula $b_{n}$
+\end_inset
+
+ is either zero or one.
+ Thus, the first interval can be thought of as fixing the first 
+\begin_inset Formula $m$
+\end_inset
+
+ bits of a bit-sequence.
+ Unfortunately, there is no way of writing the product 
+\begin_inset Formula $Kj$
+\end_inset
+
+ in closed form in terms of the bits 
+\begin_inset Formula $b_{n}$
+\end_inset
+
+.
+ Computing 
+\begin_inset Formula $Kj$
+\end_inset
+
+ requires the use of a carry-bit, and the carry-bt can propagate arbitrarily
+ far, in complex ways.
+ That is, multiplication is a recursive algorithm when performed on bit-strings,
+ and the dynamics of the carry bit is chaotic.
+\end_layout
+
+\begin_layout Subsection
+Carry-bit dynamics
+\end_layout
+
+\begin_layout Standard
+Sooo
 \end_layout
 
 \begin_layout Section
