@@ -12,6 +12,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "bitops.h"
 #include "brat.h"
@@ -25,8 +26,8 @@ double reig(double x, double K, int niter)
 {
 	double tkay = 2.0*K;
 
-	if (niter < 0) return 1.0;
 	if (K < x) return 0.0;
+	if (niter < 0) return 1.0;
 	if (K*(tkay-1.0) < x)
 	{
 		return reig(x/tkay, K, niter-1) / tkay;
@@ -56,6 +57,8 @@ double fpeig(double K, int niter)
 	return acc;
 }
 
+double niter = 15;
+
 static void bifurcation_diagram (float *array,
                                  int array_size,
                                  double x_center,
@@ -75,18 +78,31 @@ static void bifurcation_diagram (float *array,
 	}
 #endif
 
-if (K < 0.8) itermax *= 1.7;
-if (K < 0.7) itermax *= 1.8;
-if (K < 0.65) itermax *= 2.5;
+#if 0
+if (K < 0.9) itermax *= 1.2;
+if (K < 0.8) itermax *= 1.6;
+if (K < 0.7) itermax *= 1.5;
+if (K < 0.65) itermax *= 1.4;
+if (K < 0.6) itermax *= 1.8;
 if (K < 0.55) itermax *= 2;
-printf("start %g itermax=%d\n", K, itermax);
+#endif
 
+int perow = itermax;
+
+itermax = niter;
+printf("start %g itermax=%d niter=%f\n", K, itermax, niter);
+
+time_t start = time(0);
 	for (int j=0; j<array_size; j++)
 	{
 		double x = (((double) j) + 0.5) / ((double) array_size);
 		double eig = reig(x, K, itermax);
 		array[j] = eig;
 	}
+time_t end = time(0);
+if (end-start < perow) niter *= 1.05;
+if (2*perow < end-start) niter /= 1.02;
+
 
 	double norm = 0.0;
 	for (int j=0; j<array_size; j++)
